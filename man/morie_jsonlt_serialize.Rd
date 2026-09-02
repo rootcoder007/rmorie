@@ -5,11 +5,13 @@
 \alias{morie_jsonlt_serialize}
 \title{Serialise an R object losslessly}
 \usage{
-morie_jsonlt_serialize(x, pretty = FALSE)
+morie_jsonlt_serialize(x, digits = 8, pretty = FALSE) 
 }
 \arguments{
 \item{x}{object to serialise.}
 \item{pretty}{indent the output.}
+
+\item{digits}{Argument \code{digits}; see Usage.}
 }
 \description{
 Type and attributes travel with the value, so the round trip returns the same object rather than something that merely prints the same.

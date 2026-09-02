@@ -5,7 +5,7 @@
 \alias{urn_weights}
 \title{Polya urn weights}
 \usage{
-urn_weights(counts, alpha)
+urn_weights(counts, alpha) 
 }
 \arguments{
 \item{counts}{Numeric vector of positive cluster occupancies.}

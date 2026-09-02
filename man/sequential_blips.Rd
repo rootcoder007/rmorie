@@ -5,7 +5,8 @@
 \alias{sequential_blips}
 \title{Theorem 22.1: the two blip functions and the V-optimal rule}
 \usage{
-sequential_blips(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL, ridge = 1e-08, idx = NULL, eval_idx = NULL)
+sequential_blips(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL, ridge = 1e-08, idx = NULL, 
+    eval_idx = NULL) 
 }
 \arguments{
 \item{y}{Outcome vector (rescaled).}

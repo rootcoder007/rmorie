@@ -5,7 +5,7 @@
 \alias{clrgrf_cluster_index}
 \title{clrgrf_cluster_index}
 \usage{
-clrgrf_cluster_index(clusters)
+clrgrf_cluster_index(clusters) 
 }
 \arguments{
 \item{clusters}{Coerced to character by the body, with \code{as.character}.}

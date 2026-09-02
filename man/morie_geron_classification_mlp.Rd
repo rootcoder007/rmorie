@@ -23,6 +23,7 @@ morie_geron_classification_mlp(
 \item{lr}{Learning rate.}
 
 \item{seed}{LCG seed.}
+
 }
 \value{
 List with \code{weights}, \code{biases}, \code{loss_history}, \code{final_loss},

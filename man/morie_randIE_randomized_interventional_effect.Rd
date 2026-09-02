@@ -5,7 +5,8 @@
 \alias{morie_randIE_randomized_interventional_effect}
 \title{morie_randIE_randomized_interventional_effect}
 \usage{
-morie_randIE_randomized_interventional_effect(Y, A, M, C = NULL, treated = "1", control = "0", route = "gformula", laplace = 0)
+morie_randIE_randomized_interventional_effect(Y, A, M, C = NULL, treated = "1", control = "0", route = "gformula", 
+    laplace = 0) 
 }
 \arguments{
 \item{Y}{Passed to \code{morie_randIE_interventional_mean}.}

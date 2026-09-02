@@ -5,7 +5,7 @@
 \alias{morie_secrtt_rotate_dek}
 \title{Rotate a DEK: this one DOES re-encrypt the record}
 \usage{
-morie_secrtt_rotate_dek(sealed, old_dek, new_dek, new_nonce)
+morie_secrtt_rotate_dek(sealed, old_dek, new_dek, new_nonce) 
 }
 \arguments{
 \item{sealed}{List with \code{ciphertext}, \code{nonce}, \code{tag},   optional \code{aad}.}

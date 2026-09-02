@@ -5,7 +5,7 @@
 \alias{logmeanexp}
 \title{logmeanexp}
 \usage{
-logmeanexp(values)
+logmeanexp(values) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

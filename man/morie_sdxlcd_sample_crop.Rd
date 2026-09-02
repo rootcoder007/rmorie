@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_sample_crop}
 \title{morie_sdxlcd_sample_crop}
 \usage{
-morie_sdxlcd_sample_crop(height, width, target_h, target_w, rng)
+morie_sdxlcd_sample_crop(height, width, target_h, target_w, rng) 
 }
 \arguments{
 \item{height}{Coerced to integer by the body, with \code{as.integer}.}

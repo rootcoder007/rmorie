@@ -5,7 +5,7 @@
 \alias{decay_diagnostics}
 \title{decay_diagnostics}
 \usage{
-decay_diagnostics(weights, alpha)
+decay_diagnostics(weights, alpha) 
 }
 \arguments{
 \item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}

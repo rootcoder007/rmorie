@@ -5,7 +5,7 @@
 \alias{surepi_c1_mild}
 \title{surepi_c1_mild}
 \usage{
-surepi_c1_mild(counts, threshold = 3, sigma_floor = 1)
+surepi_c1_mild(counts, threshold = 3, sigma_floor = 1) 
 }
 \arguments{
 \item{counts}{Passed to \code{surepi_ears_detect}.}

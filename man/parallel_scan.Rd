@@ -5,7 +5,7 @@
 \alias{parallel_scan}
 \title{Blelloch scan over the affine composition}
 \usage{
-parallel_scan(pairs, x0 = 0)
+parallel_scan(pairs, x0 = 0) 
 }
 \arguments{
 \item{pairs}{Iterated over elementwise, with \code{lapply}.}

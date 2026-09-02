@@ -5,7 +5,8 @@
 \alias{morie_word_hits}
 \title{morie_word_hits}
 \usage{
-morie_word_hits(query, subject, w, mode = "exact", threshold = NULL, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT")
+morie_word_hits(query, subject, w, mode = "exact", threshold = NULL, match = 5, 
+    mismatch = -4, matrix = NULL, alphabet = "ACGT") 
 }
 \arguments{
 \item{query}{Coerced to character by the body, with \code{as.character}.}

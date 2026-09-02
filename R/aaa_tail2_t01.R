@@ -253,7 +253,7 @@ PnaAgg <- function(A, X,
 }
 
 #' Cori et al. (2013) instantaneous reproduction number
-#' @param incidence daily incidence I_0 ... I_{T-1}
+#' @param incidence daily incidence I_0 ... I_\{T-1\}
 #' @param serial_interval discrete serial-interval distribution w_0, w_1, ...
 #' @param window sliding window length tau, in days
 #' @param a_prior,b_prior gamma prior shape and SCALE (EpiEstim default

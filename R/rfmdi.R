@@ -24,7 +24,7 @@
 #' Sutera, A. and Geurts, P. (2013), Understanding variable importances in
 #' forests of randomized trees, Advances in Neural Information Processing
 #' Systems 26, which writes it for a forest of M trees as
-#' Imp(X_j) = (1/M) sum_T sum_{t in T : v(s_t) = X_j} p(t) Delta i(s_t, t),
+#' Imp(X_j) = (1/M) sum_T sum_\{t in T : v(s_t) = X_j\} p(t) Delta i(s_t, t),
 #' with p(t) = N_t/N the fraction of samples reaching node t and
 #' Delta i(s_t, t) = i(t) - (N_tL/N_t) i(t_L) - (N_tR/N_t) i(t_R).  The
 #' impurity function i itself, and the practice of accumulating its decrease,

@@ -59,7 +59,7 @@ edge_message <- function(h_i, h_j, x_i, x_j, phi_e, a_ij = NULL) {
   phi_e(as.numeric(h_i), as.numeric(h_j), .sqdist(x_i, x_j), a_ij)
 }
 
-#' Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij})
+#' Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_\{ij\})
 #'
 #' A step of the egnnL_native implementation. Called by \code{egcl}.
 #' See the file header for the source the module follows.

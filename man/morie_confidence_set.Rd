@@ -5,7 +5,8 @@
 \alias{morie_confidence_set}
 \title{morie_confidence_set}
 \usage{
-morie_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level = 0.95, n_levels = 2L, reps = 100L, seed = 0)
+morie_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level = 0.95, 
+    n_levels = 2L, reps = 100L, seed = 0) 
 }
 \arguments{
 \item{moment_fn}{Accepted by the signature and not used anywhere in the body.}

@@ -16,7 +16,7 @@ list: pacf (index 1 is lag 1), lags, acf, n, max_lag,
 ci_bound, method.
 }
 \description{
-phi_kk is the correlation between y_t and y_{t-k} once the
+phi_kk is the correlation between y_t and y_\{t-k\} once the
 intervening lags are projected out, obtained from the sample
 autocorrelations by the Durbin-Levinson recursion, which solves the
 Yule-Walker system in O(k^2) rather than inverting a Toeplitz matrix

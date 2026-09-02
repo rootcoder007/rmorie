@@ -5,10 +5,15 @@
 \alias{Kctrlasymp}
 \title{Control-vector covariance -- Theorem 10.7.1, p. 375}
 \usage{
-Kctrlasymp(lam, dens, pval)
+Kctrlasymp(lam, dens, pval) 
 }
 \description{
 Control-vector covariance -- Theorem 10.7.1, p. 375
+}
+\arguments{
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{dens}{Argument \code{dens}; see Usage.}
+\item{pval}{Argument \code{pval}; see Usage.}
 }
 \value{
 A list with \code{sigma}, \code{q}, \code{p}, \code{k}.

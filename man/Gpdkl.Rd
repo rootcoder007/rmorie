@@ -25,6 +25,8 @@ Gpdkl(
 identity map.}
 
 \item{lengthscale, variance, noise}{GP hyperparameters.}
+
+
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{variance},

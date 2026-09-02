@@ -30,6 +30,8 @@ morie_conditional_indirect_effect(
 \item{sa1, sa3, sb}{standard errors of a1, a3 and b.}
 
 \item{sa1a3}{covariance of a1 and a3.}
+
+
 }
 \value{
 list: estimate, simple_slope, se, se_slope, z, p_value, w, n, method.

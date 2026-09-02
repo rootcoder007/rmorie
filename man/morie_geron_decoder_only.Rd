@@ -25,6 +25,9 @@ morie_geron_decoder_only(
 \item{d_ff}{FFN width (default 4*d_model).}
 
 \item{tie_embeddings}{Reuse token embedding as output head.}
+
+
+
 }
 \value{
 List with \code{total_params}, \code{block_params}, \code{per_block},

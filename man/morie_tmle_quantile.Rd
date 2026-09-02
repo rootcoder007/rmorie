@@ -14,6 +14,8 @@ morie_tmle_quantile(y, d, x, quantile = 0.5, n_grid = 60L, trunc = 0.01)
 \item{n_grid}{Grid points spanning the outcome range.}
 
 \item{trunc}{Propensity truncation.}
+
+
 }
 \value{
 List with \code{qte}, \code{q1}, \code{q0}, \code{quantile}, \code{grid}, \code{f1}, \code{f0},

@@ -5,10 +5,15 @@
 \alias{Ksband}
 \title{KS confidence band -- Sec. 4.4.2, p. 121}
 \usage{
-Ksband(x, dcrit, at = NULL)
+Ksband(x, dcrit, at = NULL) 
 }
 \description{
 KS confidence band -- Sec. 4.4.2, p. 121
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{dcrit}{Argument \code{dcrit}; see Usage.}
+\item{at}{Argument \code{at}; see Usage.}
 }
 \value{
 A list with \code{at}, \code{edf}, \code{lower}, \code{upper}, \code{width}, \code{dcrit}, \code{n}.

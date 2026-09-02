@@ -5,7 +5,7 @@
 \alias{PdfMean}
 \title{Eq (3.1): mu = E[eta] = integral eta p(eta) d eta}
 \usage{
-PdfMean(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+PdfMean(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

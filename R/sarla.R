@@ -35,7 +35,7 @@
   0.5 * n * log(2 * pi * sigma2) - logdetA + 0.5 * n
 }
 
-#' Spatial autoregressive lag model (SAR lag, ML).
+#' Spatial autoregressive lag model (SAR lag, ML)
 #'
 #' Y = rho W Y + X beta + eps,  eps ~ N(0, sigma2 I).
 #' Concentrated log-likelihood in rho.

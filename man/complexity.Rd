@@ -5,7 +5,7 @@
 \alias{complexity}
 \title{complexity}
 \usage{
-complexity(n, d)
+complexity(n, d) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

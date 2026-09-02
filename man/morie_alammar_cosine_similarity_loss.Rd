@@ -5,7 +5,7 @@
 \alias{morie_alammar_cosine_similarity_loss}
 \title{Contrastive and ranking losses of the SBERT/CLIP family}
 \usage{
-morie_alammar_cosine_similarity_loss(a, b, y_true)
+morie_alammar_cosine_similarity_loss(a, b, y_true) 
 }
 \arguments{
 \item{a,b}{Row-matched embedding matrices.}

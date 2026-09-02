@@ -16,6 +16,8 @@ morie_geron_minibatch_gradient_descent(X, y, theta, eta, b, n_iter, seed = 0)
 \item{n_iter}{Number of steps.}
 
 \item{seed}{Base LCG seed.}
+
+
 }
 \value{
 List with \code{theta}, \code{cost_history}, \code{theta_history},

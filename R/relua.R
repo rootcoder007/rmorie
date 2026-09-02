@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Rectifier linear unit activation and its gradient.
+#' Rectifier linear unit activation and its gradient
 #'
 #' Formula: g(z) = max(0, z);  g'(z) = 1 if z > 0, else 0
 #'

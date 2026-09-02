@@ -5,7 +5,7 @@
 \alias{morie_sxrhrt_sex_specific_h2}
 \title{morie_sxrhrt_sex_specific_h2}
 \usage{
-morie_sxrhrt_sex_specific_h2(y, sex, K, X = NULL, max_cycles = 60L, tol = 1e-09, male_label = 1)
+morie_sxrhrt_sex_specific_h2(y, sex, K, X = NULL, max_cycles = 60L, tol = 1e-09, male_label = 1) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

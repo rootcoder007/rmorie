@@ -38,7 +38,7 @@
 # distribution-function estimator smooths with the kernel's integral,
 # not the kernel, which is what makes it continuous where the
 # empirical df jumps and why its bias carries f' rather than f''.
-#' W(u) = int_{-inf}^u K(v) dv, the INTEGRATED kernel of (2.2). A
+#' W(u) = int_\{-inf\}^u K(v) dv, the INTEGRATED kernel of (2.2). A
 #'
 #' distribution-function estimator smooths with the kernel\'s integral,
 #' not the kernel, which is what makes it continuous where the empirical

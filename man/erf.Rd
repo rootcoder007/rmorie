@@ -5,7 +5,7 @@
 \alias{erf}
 \title{erf}
 \usage{
-erf(x)
+erf(x) 
 }
 \arguments{
 \item{x}{Passed to \code{pnorm}.}

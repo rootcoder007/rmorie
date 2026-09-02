@@ -5,7 +5,7 @@
 \alias{info_score}
 \title{info_score}
 \usage{
-info_score(dosages)
+info_score(dosages) 
 }
 \arguments{
 \item{dosages}{Passed to \code{.impfun_as_double_vec}.}

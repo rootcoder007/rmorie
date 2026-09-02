@@ -5,7 +5,7 @@
 \alias{FpeOrder}
 \title{Akaike (1970): FPE(p) = sigma_p^2 (N+p+1)/(N-p-1).  The residual}
 \usage{
-FpeOrder(errors, n_samples)
+FpeOrder(errors, n_samples) 
 }
 \arguments{
 \item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}

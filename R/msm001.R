@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Statistical learning model, systematic plus random part.
+#' Statistical learning model, systematic plus random part
 #'
 #' Formula: y_i = f(x_i) + eps_i, i = 1..n (eq. 1.1). The systematic part f is
 #' determined by the predictors; eps has mean zero.

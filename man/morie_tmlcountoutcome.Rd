@@ -20,3 +20,16 @@ morie_tmlcountoutcome(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{offset}{Argument \code{offset}; see Usage.}
+\item{g}{Argument \code{g}; see Usage.}
+\item{Q1}{Argument \code{Q1}; see Usage.}
+\item{Q0}{Argument \code{Q0}; see Usage.}
+\item{lower}{Argument \code{lower}; see Usage.}
+\item{upper}{Argument \code{upper}; see Usage.}
+\item{iters}{Argument \code{iters}; see Usage.}
+}
+

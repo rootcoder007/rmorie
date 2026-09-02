@@ -5,10 +5,11 @@
 \alias{morie_geron_center_gram}
 \title{Centre a Gram matrix in feature space (Geron Ch 7, morie.fn hmkprbf helper)}
 \usage{
-morie_geron_center_gram(K)
+morie_geron_center_gram(K) 
 }
 \arguments{
-\item{K}{Gram matrix. @return Centred Gram matrix.}
+
+\item{K}{Argument \code{K}; see Usage.}
 }
 \description{
 Centre a Gram matrix in feature space (Geron Ch 7, morie.fn hmkprbf helper)

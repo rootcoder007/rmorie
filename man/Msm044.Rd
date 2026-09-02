@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm044.R
 \name{Msm044}
 \alias{Msm044}
-\title{eq. (6.1)-(6.2) pp.172 (re-export).}
+\title{eq. (6.1)-(6.2) pp.172 (re-export)}
 \usage{
 Msm044(...)
 }

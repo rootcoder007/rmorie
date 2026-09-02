@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' eq. (5.2) p.142 (re-export).
+#' eq. (5.2) p.142 (re-export)
 #'
 #' The stub generator stamped several extracted page fragments with the same
 #' function name, so the implementation lives once in \code{Msm011()} and this

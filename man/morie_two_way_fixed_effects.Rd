@@ -5,7 +5,7 @@
 \alias{morie_two_way_fixed_effects}
 \title{Pooled OLS with a full set of unit and period dummies}
 \usage{
-morie_two_way_fixed_effects(Y, unit, period, X)
+morie_two_way_fixed_effects(Y, unit, period, X) 
 }
 \arguments{
 \item{Y}{N-vector of outcomes.}

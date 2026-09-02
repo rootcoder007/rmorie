@@ -23,7 +23,7 @@ reimplemented.  The weighted mean is reported alongside so the
 skewness of the weighted distribution is visible.
 }
 \details{
-Formula: M = inf{t : F_w(t) >= 1/2}.
+Formula: M = inf\{t : F_w(t) >= 1/2\}.
 }
 \examples{
 Svymed(c(1, 2, 3, 4, 5))

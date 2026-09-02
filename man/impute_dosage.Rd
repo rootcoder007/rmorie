@@ -5,7 +5,7 @@
 \alias{impute_dosage}
 \title{impute_dosage}
 \usage{
-impute_dosage(posterior, reference_haps, site)
+impute_dosage(posterior, reference_haps, site) 
 }
 \arguments{
 \item{posterior}{Passed to \code{.impfun_as_double_matrix}.}

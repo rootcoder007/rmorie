@@ -22,6 +22,8 @@ morie_bnd_lp(
 
 \item{bounds}{list of \code{c(lo, hi)} per coordinate; \verb{\[0, 1\]} each
 when \code{NULL} -- the natural range for response probabilities.}
+
+
 }
 \value{
 list: lower, upper, width, argmin, argmax, feasible,

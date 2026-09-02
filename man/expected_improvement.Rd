@@ -5,7 +5,7 @@
 \alias{expected_improvement}
 \title{expected_improvement}
 \usage{
-expected_improvement(mu, sd, best, xi = 0)
+expected_improvement(mu, sd, best, xi = 0) 
 }
 \arguments{
 \item{mu}{Numeric; combined arithmetically in the body.}

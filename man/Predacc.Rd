@@ -2,7 +2,7 @@
 % Please edit documentation in R/selct.R
 \name{Predacc}
 \alias{Predacc}
-\title{Genomic selection accuracy: Pearson correlation of observed and predicted.}
+\title{Genomic selection accuracy: Pearson correlation of observed and predicted}
 \usage{
 Predacc(y, yhat)
 }

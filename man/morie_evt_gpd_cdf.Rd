@@ -5,7 +5,7 @@
 \alias{morie_evt_gpd_cdf}
 \title{GPD distribution function (Coles 2001 eq. 4.2-4.4)}
 \usage{
-morie_evt_gpd_cdf(y, sigma, xi)
+morie_evt_gpd_cdf(y, sigma, xi) 
 }
 \arguments{
 \item{y}{excess(es) over the threshold, y >= 0}

@@ -28,6 +28,11 @@ morie_kriging_pred_error(
 least squares when any is NULL.}
 
 \item{jitter, n_jitter, seed}{Controls for approximating \eqn{B}.}
+
+
+
+
+
 }
 \value{
 A list with \code{prediction}, \code{mse}, \code{mse_plugin}, \code{correction},

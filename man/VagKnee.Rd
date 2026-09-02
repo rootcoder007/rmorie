@@ -5,7 +5,7 @@
 \alias{VagKnee}
 \title{VagKnee: linear-discriminant screening of a VAG signal for knee}
 \usage{
-VagKnee(vag, fs, weights = NULL, bias = NULL, n_segments = 8)
+VagKnee(vag, fs, weights = NULL, bias = NULL, n_segments = 8) 
 }
 \arguments{
 \item{vag}{Passed to \code{VagFeat}.}

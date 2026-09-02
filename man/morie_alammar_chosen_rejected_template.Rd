@@ -5,7 +5,7 @@
 \alias{morie_alammar_chosen_rejected_template}
 \title{morie_alammar_chosen_rejected_template}
 \usage{
-morie_alammar_chosen_rejected_template(prompts, chosen, rejected)
+morie_alammar_chosen_rejected_template(prompts, chosen, rejected) 
 }
 \arguments{
 \item{prompts,chosen,rejected}{Aligned character vectors.}

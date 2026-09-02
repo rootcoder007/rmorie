@@ -15,7 +15,7 @@ A list with \code{n_clusters}, \code{n_compounds}, \code{sizes}, \code{n_singlet
 \description{
 \subsection{Cluster summary: sizes, singleton count, and the assignment.}{
 
-Mirrors Python cluster_summary(). \code{assignment[m]} = k means compound
+Mirrors Python cluster_summary(). \verb{assignment\[m\]} = k means compound
 m is in cluster k (0-indexed).
 }
 }

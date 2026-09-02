@@ -5,7 +5,7 @@
 \alias{LogReg}
 \title{Section 10.7, fitted by Newton-Raphson on the log-likelihood.  Unlike}
 \usage{
-LogReg(X, y, maxiter = 100, tol = 1e-08, ridge = 1e-08)
+LogReg(X, y, maxiter = 100, tol = 1e-08, ridge = 1e-08) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

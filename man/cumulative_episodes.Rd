@@ -5,7 +5,7 @@
 \alias{cumulative_episodes}
 \title{cumulative_episodes}
 \usage{
-cumulative_episodes(histories, states = .STATES)
+cumulative_episodes(histories, states = .STATES) 
 }
 \arguments{
 \item{histories}{A vector; its length is taken and its elements indexed.}

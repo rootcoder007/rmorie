@@ -5,7 +5,7 @@
 \alias{test_variant}
 \title{test_variant}
 \usage{
-test_variant(g, y, offset = NULL, covariates = list())
+test_variant(g, y, offset = NULL, covariates = list()) 
 }
 \arguments{
 \item{g}{A vector; its length is taken.}

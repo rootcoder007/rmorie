@@ -2,7 +2,7 @@
 % Please edit documentation in R/sppois.R
 \name{sppois}
 \alias{sppois}
-\title{Homogeneous Poisson process (HPP), the CSR reference model.}
+\title{Homogeneous Poisson process (HPP), the CSR reference model}
 \usage{
 sppois(lam = 1, region = NULL, seed = NULL)
 }

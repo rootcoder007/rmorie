@@ -2,7 +2,7 @@
 % Please edit documentation in R/kapco.R
 \name{Kappacoef}
 \alias{Kappacoef}
-\title{Cohen's Kappa coefficient of agreement for a two-class confusion table.}
+\title{Cohen's Kappa coefficient of agreement for a two-class confusion table}
 \usage{
 Kappacoef(tp, fp, fn, tn)
 }

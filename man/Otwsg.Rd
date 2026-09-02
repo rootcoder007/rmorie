@@ -11,6 +11,8 @@ Otwsg(mu1, Sigma1, mu2, Sigma2)
 
 \item{Sigma1, Sigma2}{Covariance matrices, symmetric positive
 semi-definite.}
+
+
 }
 \value{
 List with \code{W2}, \code{W2_sq}, \code{mean_part},

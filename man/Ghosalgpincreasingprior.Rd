@@ -25,9 +25,9 @@ the posterior tractable.  Trapezoid integration of the exponentiated
 draw here.
 }
 \details{
-Formula: F(x_i) = F(x_{i-1})
+Formula: F(x_i) = F(x_\{i-1\})
 \itemize{
-\item (exp(W_i) + exp(W_{i-1})) (x_i - x_{i-1}) / 2.
+\item (exp(W_i) + exp(W_\{i-1\})) (x_i - x_\{i-1\}) / 2.
 }
 }
 \examples{

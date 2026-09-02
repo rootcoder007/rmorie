@@ -17,6 +17,7 @@ morie_bracken_abundance(
 \item{kmer_distribution}{P(node | species); columns sum to 1.}
 
 \item{max_iter, tol}{Expectation-maximisation controls.}
+
 }
 \value{
 A list with \code{estimate}, \code{fractions}, \code{reads_reassigned},

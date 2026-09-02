@@ -5,7 +5,7 @@
 \alias{prediction_accuracy}
 \title{prediction_accuracy}
 \usage{
-prediction_accuracy(predicted, observed, fold = 2)
+prediction_accuracy(predicted, observed, fold = 2) 
 }
 \arguments{
 \item{predicted}{Coerced to numeric by the body, with \code{as.numeric}.}

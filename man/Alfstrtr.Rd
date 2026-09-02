@@ -14,6 +14,8 @@ Alfstrtr(s, w1, w2, w3, layernorm = TRUE, drop = NULL)
 \item{layernorm}{Apply the layer normalisation of line 9.}
 
 \item{drop}{Optional multiplicative dropout mask, \code{n x cs}.}
+
+
 }
 \value{
 A list with \code{s}, \code{estimate}, \code{n} and \code{method}.

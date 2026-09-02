@@ -6,8 +6,8 @@
 #' thresholds must strictly increase or a probability goes negative.
 #' The constraint is checked rather than assumed.
 #'
-#' Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*_0 = 1, P*_{m+1} = 0,
-#'   P_k = P*_k - P*_{k+1}.
+#' Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*_0 = 1, P*_\{m+1\} = 0,
+#'   P_k = P*_k - P*_\{k+1\}.
 #'
 #' @param y Observed categories, 0-based (0 .. m).
 #' @param theta Person abilities, same length as y.

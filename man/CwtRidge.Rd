@@ -5,7 +5,7 @@
 \alias{CwtRidge}
 \title{CWT ridge detection of transient structures, Sec 8.8}
 \usage{
-CwtRidge(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5, min_prominence = 0.1)
+CwtRidge(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5, min_prominence = 0.1) 
 }
 \arguments{
 \item{x}{Passed to \code{Scalogram}.}

@@ -5,7 +5,7 @@
 \alias{S_function}
 \title{S_function}
 \usage{
-S_function(std_moments, form = "sum", n_equality = 0L)
+S_function(std_moments, form = "sum", n_equality = 0L) 
 }
 \arguments{
 \item{std_moments}{Coerced to numeric by the body, with \code{as.numeric}.}

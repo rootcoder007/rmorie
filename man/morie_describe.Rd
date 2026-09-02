@@ -2,7 +2,7 @@
 % Please edit documentation in R/describe.R
 \name{morie_describe}
 \alias{morie_describe}
-\title{Print the pedagogical narrative for a morie callable.}
+\title{Print the pedagogical narrative for a morie callable}
 \usage{
 morie_describe(callable)
 }

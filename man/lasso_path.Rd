@@ -5,13 +5,15 @@
 \alias{lasso_path}
 \title{Coordinate descent for the L1-penalised least squares fit}
 \usage{
-lasso_path(X, y, lam, iters = 500, tol = 1e-09)
+lasso_path(X, y, lam, iters = 500, tol = 1e-09) 
 }
 \arguments{
 \item{X}{Design matrix.}
 \item{y}{Outcome vector.}
 \item{lam}{Regularisation strength.}
 \item{iters}{Maximum coordinate-descent passes.}
+
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \description{
 Coordinate descent for the L1-penalised least squares fit

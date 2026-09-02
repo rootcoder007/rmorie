@@ -5,7 +5,9 @@
 \alias{hindsr}
 \title{hindsr}
 \usage{
-hindsr(episodes, actions = NULL, goals = NULL, strategy = "future", k = 4L, tol = 1e-06, reward_fn = NULL, state_to_goal = NULL, seed = 0L, history = NULL)
+hindsr(episodes, actions = NULL, goals = NULL, strategy = "future", 
+    k = 4L, tol = 1e-06, reward_fn = NULL, state_to_goal = NULL, seed = 0L, 
+    history = NULL) 
 }
 \arguments{
 \item{episodes}{Passed to \code{._as_states}.}

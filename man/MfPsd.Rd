@@ -5,7 +5,7 @@
 \alias{MfPsd}
 \title{Eq (4.57): Y(f) = X X* = S_x(f).  Because Y is a PSD it is real and}
 \usage{
-MfPsd(x, dt = 1)
+MfPsd(x, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

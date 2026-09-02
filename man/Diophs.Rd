@@ -8,6 +8,8 @@ Diophs(a, b, c)
 }
 \arguments{
 \item{a, b, c}{Integer coefficients; a and b not both zero.}
+
+
 }
 \value{
 Named list with \code{estimate}, \code{solvable}, \code{x}, \code{y}, \code{gcd},

@@ -15,6 +15,7 @@ Radj(n, p, r2 = NULL, rss = NULL, ssy = NULL)
 
 \item{rss, ssy}{Residual and total sum of squares, used when r2 is not
 given; ssy must be positive.}
+
 }
 \value{
 list: radj, r2, n, p, df_resid.

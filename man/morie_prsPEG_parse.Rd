@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_parse}
 \title{morie_prsPEG_parse}
 \usage{
-morie_prsPEG_parse(expr, text, full = TRUE)
+morie_prsPEG_parse(expr, text, full = TRUE) 
 }
 \arguments{
 \item{expr}{Accepted by the signature and not used anywhere in the body.}

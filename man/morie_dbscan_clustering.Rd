@@ -5,7 +5,7 @@
 \alias{morie_dbscan_clustering}
 \title{DBSCAN density-based clustering (R parity)}
 \usage{
-morie_dbscan_clustering(x, eps = 0.5, min_samples = 5L, metric = "euclidean")
+morie_dbscan_clustering(x, eps = 0.5, min_samples = 5L, metric = "euclidean") 
 }
 \arguments{
 \item{x}{Numeric matrix, one row per point (a vector is treated as   one column).}

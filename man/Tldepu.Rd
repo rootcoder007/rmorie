@@ -17,7 +17,7 @@ Tldepu(y, copula, theta = 0.95)
 List with \code{estimate}, \code{u}, \code{n}, \code{method}.
 }
 \description{
-lambda_U = lim_{u->1-} (1 - 2u + C(u,u)) / (1 - u), estimated by Coles'
+lambda_U = lim_\{u->1-\} (1 - 2u + C(u,u)) / (1 - u), estimated by Coles'
 chi(u) diagnostic, which converges to exactly this limit.  A thin alias
 for \code{ChiDep}: the estimator already exists and is not duplicated
 here.

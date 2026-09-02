@@ -4,7 +4,7 @@
 \alias{Bootemp}
 \alias{morie_ksr07_kosorok_bootstrap_empirical}
 \alias{morie_kosorok_bootstrap_empirical}
-\title{Nonparametric (multinomial) bootstrap of the empirical mean process.}
+\title{Nonparametric (multinomial) bootstrap of the empirical mean process}
 \usage{
 Bootemp(x, B = 200, seed = 1)
 

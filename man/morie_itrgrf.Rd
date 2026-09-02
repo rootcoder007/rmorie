@@ -5,7 +5,8 @@
 \alias{morie_itrgrf}
 \title{morie_itrgrf}
 \usage{
-morie_itrgrf(y, W, X, cost = 0, n_trees = 150, min_leaf = 5, seed = 0, evaluate = "split", propensity = NULL, level = 0.95)
+morie_itrgrf(y, W, X, cost = 0, n_trees = 150, min_leaf = 5, seed = 0, evaluate = "split", 
+    propensity = NULL, level = 0.95) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

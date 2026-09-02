@@ -5,7 +5,7 @@
 \alias{WtVar}
 \title{Unbiased wavelet variance by scale, Percival (1995)}
 \usage{
-WtVar(x, wavelet = "db1", levels = 3)
+WtVar(x, wavelet = "db1", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

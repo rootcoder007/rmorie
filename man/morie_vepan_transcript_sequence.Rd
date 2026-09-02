@@ -5,7 +5,7 @@
 \alias{morie_vepan_transcript_sequence}
 \title{The spliced transcript, 5\' to 3\', and the genomic position of each}
 \usage{
-morie_vepan_transcript_sequence(tr, genome)
+morie_vepan_transcript_sequence(tr, genome) 
 }
 \arguments{
 \item{tr}{Passed to \code{.vepan_transcript}.}

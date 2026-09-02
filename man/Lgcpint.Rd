@@ -5,10 +5,15 @@
 \alias{Lgcpint}
 \title{Log-Gaussian Cox process intensity (Lawson eq. 6.18)}
 \usage{
-Lgcpint(lam0, beta, S)
+Lgcpint(lam0, beta, S) 
 }
 \description{
 Log-Gaussian Cox process intensity (Lawson eq. 6.18)
+}
+\arguments{
+\item{lam0}{Argument \code{lam0}; see Usage.}
+\item{beta}{Argument \code{beta}; see Usage.}
+\item{S}{Argument \code{S}; see Usage.}
 }
 \value{
 A list with \code{intensity}, \code{total}, \code{beta}, \code{n}.

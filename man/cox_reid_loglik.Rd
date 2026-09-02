@@ -5,7 +5,7 @@
 \alias{cox_reid_loglik}
 \title{Cox-Reid adjusted log-likelihood (eq. 7)}
 \usage{
-cox_reid_loglik(alpha, K, mu, X)
+cox_reid_loglik(alpha, K, mu, X) 
 }
 \arguments{
 \item{alpha}{Positive numeric.}

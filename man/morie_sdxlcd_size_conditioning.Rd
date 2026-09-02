@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_size_conditioning}
 \title{morie_sdxlcd_size_conditioning}
 \usage{
-morie_sdxlcd_size_conditioning(h_original, w_original, dim = 8)
+morie_sdxlcd_size_conditioning(h_original, w_original, dim = 8) 
 }
 \arguments{
 \item{h_original}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,27 +2,27 @@
 % Please edit documentation in R/epimet.R
 \name{Rtrenew}
 \alias{Rtrenew}
-\title{Renewal-equation reproduction number with reporting delay.}
+\title{Renewal-equation reproduction number with reporting delay}
 \usage{
 Rtrenew(incidence, gen_int, delays = NULL)
 }
 \arguments{
-\item{incidence}{Reported cases per time step.}
+\item{incidence}{See Usage.}
 
-\item{gen_int}{Discretised generation-time pmf over lags 1..gmax.}
+\item{gen_int}{See Usage.}
 
-\item{delays}{Reporting-delay pmf over lags 0..xi_max.}
+\item{delays}{See Usage.}
 }
 \value{
 List with \code{rt}, \code{time}, \code{infections}, \code{shift}, \code{mean_rt}, \code{n}.
 }
 \description{
-Formula: I_t = R_t sum_{tau=1}^{gmax} g(tau) I_{t-tau}, so R_t = I_t / sum_tau g(tau) I_{t-tau}
+Formula: I_t = R_t sum_\{tau=1\}^\{gmax\} g(tau) I_\{t-tau\}, so R_t = I_t / sum_tau g(tau) I_\{t-tau\}
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Rtrenew(V, V)
 }
 \references{
-Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_{t-tau} and the delay convolution D_t = xi sum_tau xi(tau) I_{t-tau}.
+Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_\{t-tau\} and the delay convolution D_t = xi sum_tau xi(tau) I_\{t-tau\}.
 }

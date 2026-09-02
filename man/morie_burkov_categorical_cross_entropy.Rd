@@ -5,7 +5,7 @@
 \alias{morie_burkov_categorical_cross_entropy}
 \title{Categorical cross-entropy with a one-hot target (Burkov Eq 2.1)}
 \usage{
-morie_burkov_categorical_cross_entropy(y_hat, c)
+morie_burkov_categorical_cross_entropy(y_hat, c) 
 }
 \arguments{
 \item{y_hat}{Probability distribution.}

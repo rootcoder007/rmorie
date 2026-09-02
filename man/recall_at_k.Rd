@@ -5,7 +5,7 @@
 \alias{recall_at_k}
 \title{Recall at k}
 \usage{
-recall_at_k(ranked, target, kk = 20L)
+recall_at_k(ranked, target, kk = 20L) 
 }
 \arguments{
 \item{ranked}{Integer vector of ranked items.}

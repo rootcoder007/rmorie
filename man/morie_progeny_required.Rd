@@ -5,7 +5,7 @@
 \alias{morie_progeny_required}
 \title{Number of progeny for even odds of detection}
 \usage{
-morie_progeny_required(var_qtl, var_residual, alpha = 0.05)
+morie_progeny_required(var_qtl, var_residual, alpha = 0.05) 
 }
 \arguments{
 \item{var_qtl}{QTL variance, strictly positive for detection.}

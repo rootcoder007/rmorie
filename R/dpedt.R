@@ -2,13 +2,13 @@
 
 #' Blackwell-MacQueen predictive rule
 #'
-#' Formula: P(z_n = k | z_{1:n-1}) = n_k / (n - 1 + alpha)
+#' Formula: P(z_n = k | z_\{1:n-1\}) = n_k / (n - 1 + alpha)
 #'
 #' with the remaining alpha/(n - 1 + alpha) going to a new block.  The
 #' rule is exchangeable: the probability of a partition depends only on
 #' the block sizes, through the EPPF
 #' alpha^K prod (n_k - 1)! / (alpha)_n, and the expected number of
-#' blocks is sum_{i=1..n} alpha/(alpha + i - 1).
+#' blocks is sum_\{i=1..n\} alpha/(alpha + i - 1).
 #'
 #' @param partition Block label of each of the n observations seated.
 #' @param alpha Concentration, strictly positive.

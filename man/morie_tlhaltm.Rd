@@ -5,7 +5,9 @@
 \alias{morie_tlhaltm}
 \title{morie_tlhaltm}
 \usage{
-morie_tlhaltm(rate_Q = NULL, rate_g = NULL, n = NULL, err_Q = NULL, err_g = NULL, delta = NULL, donsker = TRUE, mode = c("rate", "remainder", "efficiency", "split"))
+morie_tlhaltm(rate_Q = NULL, rate_g = NULL, n = NULL, err_Q = NULL, err_g = NULL, 
+    delta = NULL, donsker = TRUE, mode = c("rate", "remainder", "efficiency", 
+        "split")) 
 }
 \arguments{
 \item{rate_Q}{Passed to \code{rate_condition}.}

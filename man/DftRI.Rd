@@ -5,7 +5,7 @@
 \alias{DftRI}
 \title{Eq (3.85): the real part is the projection onto the k-th cosine, the}
 \usage{
-DftRI(x)
+DftRI(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

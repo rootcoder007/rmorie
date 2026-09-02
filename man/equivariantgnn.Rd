@@ -5,7 +5,7 @@
 \alias{equivariantgnn}
 \title{Compact alias per ledger/NAMING.md}
 \usage{
-equivariantgnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
+equivariantgnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL) 
 }
 \arguments{
 \item{H}{Passed to \code{run_egnn}.}

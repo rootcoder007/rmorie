@@ -5,7 +5,7 @@
 \alias{node2v_check_pq}
 \title{node2v_check_pq}
 \usage{
-node2v_check_pq(p, q)
+node2v_check_pq(p, q) 
 }
 \arguments{
 \item{p}{Coerced to numeric by the body, with \code{as.numeric}.}

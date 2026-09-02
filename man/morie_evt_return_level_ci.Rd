@@ -5,7 +5,7 @@
 \alias{morie_evt_return_level_ci}
 \title{Delta-method CI for a GEV return level (Coles 2001 eq. 3.10-3.11)}
 \usage{
-morie_evt_return_level_ci(x, T, alpha = 0.05)
+morie_evt_return_level_ci(x, T, alpha = 0.05) 
 }
 \arguments{
 \item{x}{block maxima to fit}

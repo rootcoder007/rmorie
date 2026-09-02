@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmpsn.R
 \name{Pearsonr}
 \alias{Pearsonr}
-\title{Sample correlation, its t test, and a Fisher-z interval.}
+\title{Sample correlation, its t test, and a Fisher-z interval}
 \usage{
 Pearsonr(x, y, level = 0.95)
 }
@@ -10,6 +10,7 @@ Pearsonr(x, y, level = 0.95)
 \item{x, y}{Paired samples of the same length, n >= 3.}
 
 \item{level}{Confidence level.}
+
 }
 \value{
 List with \code{estimate}, \code{statistic}, \code{p_value},

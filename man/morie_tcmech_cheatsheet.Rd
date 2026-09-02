@@ -5,7 +5,7 @@
 \alias{morie_tcmech_cheatsheet}
 \title{One-line summary of the tcmech module}
 \usage{
-morie_tcmech_cheatsheet()
+morie_tcmech_cheatsheet() 
 }
 \description{
 One-line summary of the tcmech module

@@ -5,7 +5,7 @@
 \alias{EchoSig}
 \title{Wavelet plus echo in the time domain, eq (4.75)}
 \usage{
-EchoSig(h, a, n_0, n = NULL)
+EchoSig(h, a, n_0, n = NULL) 
 }
 \arguments{
 \item{h}{Coerced to numeric by the body, with \code{as.numeric}.}

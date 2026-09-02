@@ -9,12 +9,17 @@
 \alias{morie_ridge}
 \title{Model evaluation metrics}
 \usage{
-morie_binary_metrics(y_true, y_pred, positive = 1)
-morie_class_metrics(conf, i)
-morie_mcc(y_true, y_pred, positive = 1)
-morie_brier(probs, y_true, halved = FALSE)
-morie_pca(X, k = NULL)
-morie_ridge(X, y, lambda, add_intercept = TRUE)
+morie_binary_metrics(y_true, y_pred, positive = 1) 
+
+morie_class_metrics(conf, i) 
+
+morie_mcc(y_true, y_pred, positive = 1) 
+
+morie_brier(probs, y_true, halved = FALSE) 
+
+morie_pca(X, k = NULL) 
+
+morie_ridge(X, y, lambda, add_intercept = TRUE) 
 }
 \arguments{
 \item{X}{predictor matrix}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Categorical cross-entropy loss.
+#' Categorical cross-entropy loss
 #'
 #' Formula: L(w) = -sum_i sum_c y_ic log(yhat_ic)
 #'

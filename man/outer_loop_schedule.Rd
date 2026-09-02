@@ -5,7 +5,7 @@
 \alias{outer_loop_schedule}
 \title{outer_loop_schedule}
 \usage{
-outer_loop_schedule(alpha, C, examine_all)
+outer_loop_schedule(alpha, C, examine_all) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

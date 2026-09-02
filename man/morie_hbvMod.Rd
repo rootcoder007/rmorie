@@ -5,7 +5,7 @@
 \alias{morie_hbvMod}
 \title{morie_hbvMod}
 \usage{
-morie_hbvMod(precip, temp, epot, params, init = NULL)
+morie_hbvMod(precip, temp, epot, params, init = NULL) 
 }
 \arguments{
 \item{precip}{Coerced to numeric by the body, with \code{as.numeric}.}

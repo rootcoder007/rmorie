@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Certify that a test sequence has exponentially small error probabilities.
+#' Certify that a test sequence has exponentially small error probabilities
 #'
 #' The rate is read off a single n, so it is a certificate at that n and
 #' not a proof of a rate.

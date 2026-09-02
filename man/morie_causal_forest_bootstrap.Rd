@@ -23,6 +23,10 @@ morie_causal_forest_bootstrap(
 \item{n_trees, min_leaf, seed}{Per-forest hyperparameters.}
 
 \item{alpha}{Two-sided interval level.}
+
+
+
+
 }
 \value{
 List with \code{cate}, \code{ci_low}, \code{ci_high}, \code{se}, \code{ate},

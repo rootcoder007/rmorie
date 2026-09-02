@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtdeg.R
 \name{Degmat}
 \alias{Degmat}
-\title{Degree matrix and volume of a graph.}
+\title{Degree matrix and volume of a graph}
 \usage{
 Degmat(Adj)
 }

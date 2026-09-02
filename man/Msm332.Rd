@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm332.R
 \name{Msm332}
 \alias{Msm332}
-\title{Linear multiple regression fitted by OLS.}
+\title{Linear multiple regression fitted by OLS}
 \usage{
 Msm332(X, y, add_intercept = TRUE)
 }

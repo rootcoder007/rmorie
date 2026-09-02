@@ -10,6 +10,7 @@ Wsdt2d(X_samples, Y_samples, p = 2)
 \item{X_samples, Y_samples}{Equal-size point clouds.}
 
 \item{p}{Order.}
+
 }
 \value{
 List with \code{estimate}, \code{wpp}, \code{assignment}, \code{n}.

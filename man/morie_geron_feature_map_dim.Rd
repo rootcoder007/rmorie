@@ -18,6 +18,8 @@ morie_geron_feature_map_dim(
 \item{bytes_per_value}{Bytes per stored activation.}
 
 \item{batch_size}{Positive batch size.}
+
+
 }
 \value{
 List with \code{dim}, \code{bytes}, \code{megabytes}, \code{batch_bytes},

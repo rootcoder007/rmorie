@@ -4,7 +4,7 @@
 \alias{Empproc}
 \alias{morie_ksr01_kosorok_empirical_process}
 \alias{morie_kosorok_empirical_process}
-\title{Empirical process G_n(t) = sqrt(n)(F_n(t) - F(t)) at given points.}
+\title{Empirical process G_n(t) = sqrt(n)(F_n(t) - F(t)) at given points}
 \usage{
 Empproc(x, t, F)
 

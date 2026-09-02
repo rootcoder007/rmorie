@@ -19,6 +19,9 @@ Alfmsaat(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL, mode = "row")
 mode is "row" (line 3 of Algorithm 7).}
 
 \item{mode}{Either "row" (Algorithm 7) or "column" (Algorithm 8).}
+
+
+
 }
 \value{
 A list with the MSA update \code{m}, the attention \code{attn},

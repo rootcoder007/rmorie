@@ -5,7 +5,7 @@
 \alias{acquire}
 \title{acquire}
 \usage{
-acquire(mu, sd, best, acq = "ei", kappa = 2, xi = 0)
+acquire(mu, sd, best, acq = "ei", kappa = 2, xi = 0) 
 }
 \arguments{
 \item{mu}{Passed to \code{expected_improvement}.}

@@ -5,7 +5,7 @@
 \alias{elmo_representation}
 \title{elmo_representation}
 \usage{
-elmo_representation(X, layers, raw_weights = NULL, gamma = 1)
+elmo_representation(X, layers, raw_weights = NULL, gamma = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{bilm_forward}.}

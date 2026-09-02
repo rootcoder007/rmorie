@@ -5,7 +5,7 @@
 \alias{morie_vqgdec_sliding_windows}
 \title{Sliding_windows: generate windows for images larger than the}
 \usage{
-morie_vqgdec_sliding_windows(height, width, window, stride = NULL)
+morie_vqgdec_sliding_windows(height, width, window, stride = NULL) 
 }
 \arguments{
 \item{height}{Coerced to integer by the body, with \code{as.integer}.}

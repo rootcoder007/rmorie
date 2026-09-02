@@ -5,7 +5,8 @@
 \alias{gibbs_bigram_topic}
 \title{gibbs_bigram_topic}
 \usage{
-gibbs_bigram_topic(docs, T, V, alpha = 0.5, beta = 0.5, m = NULL, n = NULL, prior = 1, iters = 200L, seed = 0L, burn = 50L)
+gibbs_bigram_topic(docs, T, V, alpha = 0.5, beta = 0.5, m = NULL, n = NULL, prior = 1, 
+    iters = 200L, seed = 0L, burn = 50L) 
 }
 \arguments{
 \item{docs}{Iterated over elementwise, with \code{lapply}.}

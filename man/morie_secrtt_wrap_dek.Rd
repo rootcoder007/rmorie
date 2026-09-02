@@ -5,7 +5,7 @@
 \alias{morie_secrtt_wrap_dek}
 \title{Wrap a DEK under a KEK}
 \usage{
-morie_secrtt_wrap_dek(dek, kek, nonce, kek_id = "kek-1", aad = raw())
+morie_secrtt_wrap_dek(dek, kek, nonce, kek_id = "kek-1", aad = raw()) 
 }
 \arguments{
 \item{dek}{Raw 32-byte DEK.}

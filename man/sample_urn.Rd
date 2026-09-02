@@ -9,3 +9,9 @@ sample_urn(n, alpha, seed = 0)
 \description{
 Python name for \code{morie_posspr}
 }
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
+}
+

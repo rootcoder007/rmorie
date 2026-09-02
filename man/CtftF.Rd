@@ -5,7 +5,7 @@
 \alias{CtftF}
 \title{Eq (3.76), the Hz spelling of eq (3.75); one implementation so the}
 \usage{
-CtftF(x, f, t = NULL, dt = NULL)
+CtftF(x, f, t = NULL, dt = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{Ctft}.}

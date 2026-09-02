@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_csi.R
 \name{morie_tps_csi_weight}
 \alias{morie_tps_csi_weight}
-\title{Return the CSI weight for a TPS open-data category.}
+\title{Return the CSI weight for a TPS open-data category}
 \usage{
 morie_tps_csi_weight(category, variant = c("total", "violent"), weights = NULL)
 }
@@ -18,7 +18,7 @@ tables.  When supplied, takes precedence over \code{variant}.}
 Numeric scalar (0 if unknown).
 }
 \description{
-Return the CSI weight for a TPS open-data category.
+Return the CSI weight for a TPS open-data category
 }
 \examples{
 morie_tps_csi_weight("Assault")

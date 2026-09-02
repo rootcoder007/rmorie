@@ -5,10 +5,15 @@
 \alias{Medtest2}
 \title{Two-sided median test with exact region -- Sec. 6.4, p. 247}
 \usage{
-Medtest2(x, y, alpha = 0.05)
+Medtest2(x, y, alpha = 0.05) 
 }
 \description{
 Two-sided median test with exact region -- Sec. 6.4, p. 247
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{lower}, \code{upper}, \code{alpha_exact}, \code{t}, \code{m}, \code{n}.

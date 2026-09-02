@@ -12,6 +12,7 @@ morie_geron_f1_score_alt(y_true, y_pred, pos_label = 1, average = "binary")
 \item{pos_label}{Positive class for average="binary".}
 
 \item{average}{"binary"/"macro"/"micro"/NULL.}
+
 }
 \value{
 List with \code{f1}, \code{precision}, \code{recall}, \code{tp}, \code{fp}, \code{fn}, \code{per_class_f1}.

@@ -5,7 +5,7 @@
 \alias{synthesize_marginals}
 \title{synthesize_marginals}
 \usage{
-synthesize_marginals(X, n, seed = 0)
+synthesize_marginals(X, n, seed = 0) 
 }
 \arguments{
 \item{X}{A vector; its length is taken and its elements indexed.}

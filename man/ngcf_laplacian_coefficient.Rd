@@ -5,7 +5,7 @@
 \alias{ngcf_laplacian_coefficient}
 \title{ngcf_laplacian_coefficient}
 \usage{
-ngcf_laplacian_coefficient(n_u, n_i)
+ngcf_laplacian_coefficient(n_u, n_i) 
 }
 \arguments{
 \item{n_u}{Coerced to integer by the body, with \code{as.integer}.}

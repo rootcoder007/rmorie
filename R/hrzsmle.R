@@ -5,7 +5,7 @@
 #' Horowitz (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Section 2.5.3, equation (2.33) and the semiparametric
 #' analog on page 28; the estimator is Klein and Spady's (1993).  With
-#' Y in {0,1}, G(x'beta) = P(Y = 1 | X = x); the known-G MLE maximises
+#' Y in \{0,1\}, G(x'beta) = P(Y = 1 | X = x); the known-G MLE maximises
 #' (2.33), and in the semiparametric case G is replaced by a
 #' leave-one-out kernel estimator.  Because Var(Y|X=x) depends on x
 #' only through the index, the weight cancels and the UNWEIGHTED

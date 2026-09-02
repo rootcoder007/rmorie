@@ -8,6 +8,7 @@
 }
 \arguments{
 \item{e1, e2}{Operands.}
+
 }
 \value{
 A \code{morie_gr_dual}.

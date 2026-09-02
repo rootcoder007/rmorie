@@ -5,7 +5,7 @@
 \alias{morie_gbtcom}
 \title{Goodman-Bacon decomposition, vector interface}
 \usage{
-morie_gbtcom(y, D, unit, time)
+morie_gbtcom(y, D, unit, time) 
 }
 \arguments{
 \item{y}{Outcome, one entry per unit-period.}

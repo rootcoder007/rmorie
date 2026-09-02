@@ -10,6 +10,10 @@ mrm_graeco_latin(data, response_col, row_col, col_col, latin_col, greek_col)
 \item{data}{data.frame.}
 
 \item{response_col, row_col, col_col, latin_col, greek_col}{Column names.}
+
+
+
+
 }
 \value{
 Named list with anova, n, interpretation.

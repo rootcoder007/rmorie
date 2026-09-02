@@ -5,7 +5,7 @@
 \alias{morie_alammar_llm_as_judge}
 \title{morie_alammar_llm_as_judge}
 \usage{
-morie_alammar_llm_as_judge(responses, rubric, judge_model, n_samples = 1)
+morie_alammar_llm_as_judge(responses, rubric, judge_model, n_samples = 1) 
 }
 \arguments{
 \item{responses}{Character vector.}

@@ -5,7 +5,7 @@
 \alias{morie_miprgr_round_relaxation}
 \title{Round the relaxation and report what it gives}
 \usage{
-morie_miprgr_round_relaxation(x, A, b, integer_vars)
+morie_miprgr_round_relaxation(x, A, b, integer_vars) 
 }
 \arguments{
 \item{x}{Relaxed solution.}

@@ -18,6 +18,7 @@ Gblupr(y, X, Z, G, var_u = 1, var_e = 1, ridge = 1e-08)
 \item{var_u, var_e}{Variance components, positive.}
 
 \item{ridge}{Ridge added to G before inversion.}
+
 }
 \value{
 List with \code{estimate}, \code{beta}, \code{u},
@@ -34,7 +35,7 @@ inversion because VanRaden's G is singular whenever markers
 outnumber individuals.
 }
 \details{
-Formula: [X'X, X'Z; Z'X, Z'Z + G^{-1} k] [beta; u] = [X'y; Z'y],
+Formula: [X'X, X'Z; Z'X, Z'Z + G^\{-1\} k] [beta; u] = [X'y; Z'y],
 k = sigma_e^2 / sigma_u^2.
 }
 \examples{

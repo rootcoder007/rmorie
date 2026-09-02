@@ -5,7 +5,7 @@
 \alias{residue_vectors}
 \title{residue_vectors}
 \usage{
-residue_vectors(group, weights = NULL, seq_type = "aa")
+residue_vectors(group, weights = NULL, seq_type = "aa") 
 }
 \arguments{
 \item{group}{Iterated over elementwise, with \code{vapply}.}

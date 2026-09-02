@@ -5,7 +5,7 @@
 \alias{morie_sccsno_build_intervals}
 \title{morie_sccsno_build_intervals}
 \usage{
-morie_sccsno_build_intervals(start, end, exposure, event_times, risk_periods, age_breaks)
+morie_sccsno_build_intervals(start, end, exposure, event_times, risk_periods, age_breaks) 
 }
 \arguments{
 \item{start}{Coerced to numeric by the body, with \code{as.numeric}.}

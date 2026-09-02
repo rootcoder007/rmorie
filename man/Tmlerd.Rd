@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlmrd.R
 \name{Tmlerd}
 \alias{Tmlerd}
-\title{Targeted estimate of the marginal risk difference E\link{Y_1} - E\link{Y_0}.}
+\title{Targeted estimate of the marginal risk difference E[Y_1] - E[Y_0]}
 \usage{
 Tmlerd(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 }
@@ -18,6 +18,8 @@ Tmlerd(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 \item{gbound}{Propensity truncation level.}
 
 \item{level}{Confidence level.}
+
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{ci_lower},

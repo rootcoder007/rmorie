@@ -5,7 +5,7 @@
 \alias{morie_hyper2_kernel}
 \title{Covariance between two sets of inputs}
 \usage{
-morie_hyper2_kernel(X, Z, log_ls, log_sf, kind = "squared_exponential")
+morie_hyper2_kernel(X, Z, log_ls, log_sf, kind = "squared_exponential") 
 }
 \arguments{
 \item{X}{First input matrix.}

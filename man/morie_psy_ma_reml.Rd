@@ -10,6 +10,8 @@ morie_psy_ma_reml(yi, vi, max_iter = 200L, tol = 1e-12)
 \item{yi, vi}{effects and within-study variances.}
 
 \item{max_iter, tol}{iteration controls.}
+
+
 }
 \value{
 list: tau2, tau, mu, se, ci, tau2_ml, tau2_dl,

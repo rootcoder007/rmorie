@@ -5,7 +5,7 @@
 \alias{perplexity}
 \title{perplexity}
 \usage{
-perplexity(n_dw, Pz, Pd_z, Pw_z)
+perplexity(n_dw, Pz, Pd_z, Pw_z) 
 }
 \arguments{
 \item{n_dw}{Passed to \code{.plsa_perplexity}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R, R/rcpp_docs.R
 \name{.morie_http_get}
 \alias{.morie_http_get}
-\title{Synchronous HTTP(S) GET via the shared libcurl backend (C++).}
+\title{Synchronous HTTP(S) GET via the shared libcurl backend (C++)}
 \usage{
 .morie_http_get(
   url,

@@ -14,6 +14,7 @@ morie_entropy_balancing(X, treat, moments = 1, max_iter = 200L, tol = 1e-08)
 \item{moments}{1 for means, 2 for means and variances.}
 
 \item{max_iter, tol}{Newton controls.}
+
 }
 \value{
 list with \code{weights} (on the controls, summing to 1),

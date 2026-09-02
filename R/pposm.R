@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Posterior predictive mean, sd and interval from replicated datasets.
+#' Posterior predictive mean, sd and interval from replicated datasets
 #'
 #' \code{sd} is across replicate means, \code{sd_pooled} across all
 #' replicated observations; the second is the predictive spread and is

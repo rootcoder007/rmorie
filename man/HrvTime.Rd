@@ -5,7 +5,7 @@
 \alias{HrvTime}
 \title{SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not}
 \usage{
-HrvTime(rr)
+HrvTime(rr) 
 }
 \arguments{
 \item{rr}{Numeric; combined arithmetically in the body.}

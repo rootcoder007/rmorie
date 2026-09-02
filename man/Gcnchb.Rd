@@ -27,8 +27,8 @@ coefficients passed the deterministic choice theta_k = 1/(k+1) is
 used.
 }
 \details{
-Formula: sum_{k=0}^{K-1} theta_k T_k(Lt) X, Lt = 2 L / lambda_max - I,
-T_k = 2 Lt T_{k-1} - T_{k-2}, T_0 = I, T_1 = Lt.
+Formula: sum_\{k=0\}^\{K-1\} theta_k T_k(Lt) X, Lt = 2 L / lambda_max - I,
+T_k = 2 Lt T_\{k-1\} - T_\{k-2\}, T_0 = I, T_1 = Lt.
 }
 \examples{
 Gcnchb(L = 5L, X = 5L)

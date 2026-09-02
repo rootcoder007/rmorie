@@ -8,6 +8,8 @@ morie_geron_encoder_params(d_model, d_ff, n_layers)
 }
 \arguments{
 \item{d_model, d_ff, n_layers}{Integers.}
+
+
 }
 \value{
 Integer parameter count.

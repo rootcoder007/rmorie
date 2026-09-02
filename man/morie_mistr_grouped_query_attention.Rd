@@ -5,7 +5,8 @@
 \alias{morie_mistr_grouped_query_attention}
 \title{Grouped-query attention}
 \usage{
-morie_mistr_grouped_query_attention(Q, K, V, n_heads, n_kv_heads, mask = NULL, positions = NULL, base = 10000)
+morie_mistr_grouped_query_attention(Q, K, V, n_heads, n_kv_heads, mask = NULL, positions = NULL, 
+    base = 10000) 
 }
 \arguments{
 \item{Q,K,V}{Sequence matrices.}

@@ -8,6 +8,7 @@ LsqRev(x, y)
 }
 \arguments{
 \item{x, y}{equal-length data vectors, n >= 2.}
+
 }
 \value{
 list(C, D, S).

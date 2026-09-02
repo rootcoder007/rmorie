@@ -3,7 +3,7 @@
 \name{Hrzboxc}
 \alias{Hrzboxc}
 \alias{morie_horowitz_box_cox}
-\title{Box-Cox regression by the minimum-distance estimator of Foster et al.}
+\title{Box-Cox regression by the minimum-distance estimator of Foster et al}
 \usage{
 Hrzboxc(x, y, a_lo = -2, a_hi = 2, ngrid = 81L, refine = 60L, nu = 201L)
 
@@ -25,6 +25,9 @@ morie_horowitz_box_cox(
 \item{a_lo, a_hi, ngrid, refine}{The deterministic search over alpha.}
 
 \item{nu}{Points in the trapezoid rule for the integral over u.}
+
+
+
 }
 \value{
 list: estimate, lambda_hat, beta_hat, criterion, resid, n, method.
@@ -41,7 +44,7 @@ U_hat_i = T(Y_i, a) - X_i b_n(a) give the empirical CDF
 F_n[u; a, b_n(a)] = n^-1 sum_i I(U_hat_i < u); and since
 P(Y < y) = E F_U[T(y, a) - X beta], alpha is estimated by minimising
 R_n[a, b_n(a)] = n^-1 sum_i integral over u of
-{I(Y_i < u) - F_n[T(u, a) - X_i b_n(a)]}^2 w(u) du.
+\{I(Y_i < u) - F_n[T(u, a) - X_i b_n(a)]\}^2 w(u) du.
 }
 \details{
 BOOK NOTE.  The displayed criterion on p. 195 prints the inner argument as

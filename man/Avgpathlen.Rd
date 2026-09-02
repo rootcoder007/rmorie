@@ -2,7 +2,7 @@
 % Please edit documentation in R/avglen.R
 \name{Avgpathlen}
 \alias{Avgpathlen}
-\title{Mean geodesic distance, and its harmonic counterpart.}
+\title{Mean geodesic distance, and its harmonic counterpart}
 \usage{
 Avgpathlen(G, directed = FALSE)
 }

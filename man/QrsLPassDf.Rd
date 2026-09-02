@@ -5,7 +5,7 @@
 \alias{QrsLPassDf}
 \title{Eq (4.8): y(n) = 2 y(n-1) - y(n-2) + (1/32)[x(n) - 2 x(n-6) +}
 \usage{
-QrsLPassDf(x)
+QrsLPassDf(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{SpecRes}
 \title{Rayleigh: delta_f = fs/N, set by the RECORD LENGTH.  Zero-padding}
 \usage{
-SpecRes(n, fs = 1, window = "rectangular")
+SpecRes(n, fs = 1, window = "rectangular") 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

@@ -5,7 +5,7 @@
 \alias{morie_longrd_rle}
 \title{Run-length encoding: the bases and how many of each in a row}
 \usage{
-morie_longrd_rle(seq)
+morie_longrd_rle(seq) 
 }
 \arguments{
 \item{seq}{A sequence.}

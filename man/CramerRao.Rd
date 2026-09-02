@@ -5,7 +5,7 @@
 \alias{CramerRao}
 \title{\\' Cramer-Rao lower bound implied by a Fisher information matrix}
 \usage{
-CramerRao(fisher_info, var_estimate = NULL)
+CramerRao(fisher_info, var_estimate = NULL) 
 }
 \arguments{
 \item{fisher_info}{A matrix; passed to \code{nrow}.}

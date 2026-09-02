@@ -2,7 +2,7 @@
 % Please edit documentation in R/spicar.R
 \name{spicar}
 \alias{spicar}
-\title{Intrinsic CAR (ICAR) prior: precision structure, not a fit.}
+\title{Intrinsic CAR (ICAR) prior: precision structure, not a fit}
 \usage{
 spicar(w, tau2 = 1)
 }

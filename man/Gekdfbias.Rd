@@ -17,6 +17,7 @@ morie_fauzi_thm2_2_bias_brdkdfe(h, a, b2, b4, fx)
 \item{b2, b4}{The coefficients (2.7) and (2.8) at \code{x}.}
 
 \item{fx}{\code{F_X(x)}, strictly between 0 and 1.}
+
 }
 \value{
 Named list with \code{bias}, \code{leading}, \code{h}, \code{a}, \code{method}.

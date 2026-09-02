@@ -5,10 +5,14 @@
 \alias{Mcnemarci}
 \title{McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523}
 \usage{
-Mcnemarci(table, alpha = 0.05)
+Mcnemarci(table, alpha = 0.05) 
 }
 \description{
 McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
+}
+\arguments{
+\item{table}{Argument \code{table}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{lower}, \code{upper}, \code{se}, \code{se_null}, \code{n}.

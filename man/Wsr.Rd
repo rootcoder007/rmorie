@@ -5,10 +5,14 @@
 \alias{Wsr}
 \title{Wilcoxon signed-rank T+ -- Sec. 5.7, eqs. (5.7.1)/(5.7.9), p. 195}
 \usage{
-Wsr(x, m0 = 0)
+Wsr(x, m0 = 0) 
 }
 \description{
 Wilcoxon signed-rank T+ -- Sec. 5.7, eqs. (5.7.1)/(5.7.9), p. 195
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{m0}{Argument \code{m0}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{tminus}, \code{n}, \code{nzero}, \code{mean}, \code{var}, \code{z}, \code{p_value}.

@@ -5,7 +5,7 @@
 \alias{dequantize}
 \title{dequantize}
 \usage{
-dequantize(tokens, bins)
+dequantize(tokens, bins) 
 }
 \arguments{
 \item{tokens}{See Usage.}

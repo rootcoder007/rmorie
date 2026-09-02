@@ -5,7 +5,7 @@
 \alias{strec_cheatsheet}
 \title{strec_cheatsheet}
 \usage{
-strec_cheatsheet()
+strec_cheatsheet() 
 }
 \description{
 A step of the strec_native implementation. No other function in the package calls it. See the file header for the source the module follows.

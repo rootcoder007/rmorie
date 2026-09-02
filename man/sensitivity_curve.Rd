@@ -5,7 +5,7 @@
 \alias{sensitivity_curve}
 \title{sensitivity_curve}
 \usage{
-sensitivity_curve(beta, n_pre, n_post, Ms, family = "SD", l_vec = NULL)
+sensitivity_curve(beta, n_pre, n_post, Ms, family = "SD", l_vec = NULL) 
 }
 \arguments{
 \item{beta}{Passed to \code{identified_set}.}

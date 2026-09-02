@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_siu_director_reports}
 \alias{morie_datasets_siu_director_reports}
-\title{SIU director's-reports index (legacy PDF anchors).}
+\title{SIU director's-reports index (legacy PDF anchors)}
 \usage{
 morie_datasets_siu_director_reports()
 }

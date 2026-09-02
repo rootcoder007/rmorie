@@ -5,7 +5,8 @@
 \alias{fit_aol}
 \title{Single-stage AOL (or plain OWL, for comparison)}
 \usage{
-fit_aol(R, A, H, propensity = NULL, method = "aol", prognostic = NULL, shift = NULL, ridge = 1e-06)
+fit_aol(R, A, H, propensity = NULL, method = "aol", prognostic = NULL, 
+    shift = NULL, ridge = 1e-06) 
 }
 \arguments{
 \item{R}{Numeric vector of outcomes.}

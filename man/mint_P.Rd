@@ -5,7 +5,7 @@
 \alias{mint_P}
 \title{mint_P}
 \usage{
-mint_P(S, W = NULL, method = "shrink", residuals = NULL, ridge = 1e-10)
+mint_P(S, W = NULL, method = "shrink", residuals = NULL, ridge = 1e-10) 
 }
 \arguments{
 \item{S}{A matrix; indexed by row and column.}

@@ -5,7 +5,7 @@
 \alias{Kalman}
 \title{The recursive counterpart of the Wiener filter: it tracks a state}
 \usage{
-Kalman(z, F, H, Q, R, x0 = NULL, P0 = NULL)
+Kalman(z, F, H, Q, R, x0 = NULL, P0 = NULL) 
 }
 \arguments{
 \item{z}{A matrix; passed to \code{as.matrix}.}

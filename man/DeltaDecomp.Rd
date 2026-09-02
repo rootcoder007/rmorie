@@ -5,7 +5,7 @@
 \alias{DeltaDecomp}
 \title{Eq (3.29): x(t) = integral x(alpha) delta(t - alpha) d alpha.  The}
 \usage{
-DeltaDecomp(x, t = NULL)
+DeltaDecomp(x, t = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

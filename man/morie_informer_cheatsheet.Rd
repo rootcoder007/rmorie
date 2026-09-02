@@ -5,7 +5,7 @@
 \alias{morie_informer_cheatsheet}
 \title{morie_informer_cheatsheet}
 \usage{
-morie_informer_cheatsheet()
+morie_informer_cheatsheet() 
 }
 \description{
 A step of the informer_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -5,7 +5,7 @@
 \alias{morie_qsfrgr_cheatsheet}
 \title{One-line summary of the qsfrgr module}
 \usage{
-morie_qsfrgr_cheatsheet()
+morie_qsfrgr_cheatsheet() 
 }
 \description{
 One-line summary of the qsfrgr module

@@ -5,7 +5,7 @@
 \alias{rescale}
 \title{Map the outcome to [0,1] by an affine transform}
 \usage{
-rescale(y, lower = NULL, upper = NULL)
+rescale(y, lower = NULL, upper = NULL) 
 }
 \arguments{
 \item{y}{Outcome vector.}

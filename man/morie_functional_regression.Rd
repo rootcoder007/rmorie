@@ -8,11 +8,15 @@
 \alias{morie_fda_loocv}
 \title{Functional data analysis}
 \usage{
-morie_fda_design(t, X_curves, L1 = 3, L2 = 5, kind = "fourier")
-morie_fda_fit(t, X_curves, y, L1 = 3, L2 = 5, kind = "fourier")
-morie_fda_beta_function(t, beta_coefs, L1, kind = "fourier")
-morie_fda_bic(loglik, n_params, n_obs)
-morie_fda_loocv(t, x_t, L2, kind = "fourier")
+morie_fda_design(t, X_curves, L1 = 3, L2 = 5, kind = "fourier") 
+
+morie_fda_fit(t, X_curves, y, L1 = 3, L2 = 5, kind = "fourier") 
+
+morie_fda_beta_function(t, beta_coefs, L1, kind = "fourier") 
+
+morie_fda_bic(loglik, n_params, n_obs) 
+
+morie_fda_loocv(t, x_t, L2, kind = "fourier") 
 }
 \arguments{
 \item{t}{numeric grid of observation points}

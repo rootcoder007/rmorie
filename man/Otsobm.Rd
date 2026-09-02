@@ -2,7 +2,7 @@
 % Please edit documentation in R/otsobm.R
 \name{Otsobm}
 \alias{Otsobm}
-\title{(-Delta)^{-1} (mu-nu))} -- Peyre (2018), Section 2.}
+\title{Replace W_1 by a Hilbert norm on the difference of the measures}
 \usage{
 Otsobm(mu, nu, Laplace_inv)
 }
@@ -11,13 +11,14 @@ Otsobm(mu, nu, Laplace_inv)
 
 \item{Laplace_inv}{Inverse (or pseudo-inverse) of the Laplacian,
 symmetric positive semi-definite.}
+
 }
 \value{
 List with \code{W1_sob}, \code{quad_form}, \code{mass_gap},
 \code{n}.
 }
 \description{
-(-Delta)^{-1} (mu-nu))} -- Peyre (2018), Section 2.
+
 }
 \references{
 Peyre, G. (2018). ESAIM: Control, Optimisation and Calculus

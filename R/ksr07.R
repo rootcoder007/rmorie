@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nonparametric (multinomial) bootstrap of the empirical mean process.
+#' Nonparametric (multinomial) bootstrap of the empirical mean process
 #'
 #' The bootstrap process is sqrt(n)(Phat_n - P_n), centred at the
 #' EMPIRICAL measure. Resampling uses a pinned Lehmer generator with a

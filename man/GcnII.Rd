@@ -30,7 +30,7 @@ weight is passed -- the second bracket collapses to I for every beta.
 }
 \details{
 Formula: H <- relu((1 - alpha) Ah H + alpha H0), repeated K times,
-with Ah = Dt^{-1/2}(A + I)Dt^{-1/2}.
+with Ah = Dt^\{-1/2\}(A + I)Dt^\{-1/2\}.
 }
 \examples{
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)

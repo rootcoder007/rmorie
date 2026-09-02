@@ -5,7 +5,7 @@
 \alias{morie_timesfm_causal_mask}
 \title{morie_timesfm_causal_mask}
 \usage{
-morie_timesfm_causal_mask(n_patches)
+morie_timesfm_causal_mask(n_patches) 
 }
 \arguments{
 \item{n_patches}{Coerced to integer by the body, with \code{as.integer}.}

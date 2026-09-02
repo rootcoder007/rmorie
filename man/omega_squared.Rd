@@ -2,7 +2,7 @@
 % Please edit documentation in R/effect_sizes.R
 \name{omega_squared}
 \alias{omega_squared}
-\title{Omega-squared — less biased than eta-squared}
+\title{Omega-squared -- less biased than eta-squared}
 \usage{
 omega_squared(ss_effect, ss_total, df_effect, ms_error)
 }
@@ -12,12 +12,13 @@ omega_squared(ss_effect, ss_total, df_effect, ms_error)
 \item{df_effect}{Numerator d.f. of the effect.}
 
 \item{ms_error}{Error mean square.}
+
 }
 \value{
 A \code{morie_effect_size}.
 }
 \description{
-Omega-squared — less biased than eta-squared
+Omega-squared -- less biased than eta-squared
 }
 \examples{
 omega_squared(40, 160, 2, 1.5)

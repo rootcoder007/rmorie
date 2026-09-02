@@ -5,7 +5,7 @@
 \alias{morie_pratt_attention_entropy}
 \title{morie_pratt_attention_entropy}
 \usage{
-morie_pratt_attention_entropy(alpha)
+morie_pratt_attention_entropy(alpha) 
 }
 \arguments{
 \item{alpha}{Passed to \code{.pratt_vec}.}

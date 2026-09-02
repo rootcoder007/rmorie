@@ -780,7 +780,7 @@ morie_fetch_parquet <- function(path) {
   .mpq_plain(buf, n, ptype, optional)
 }
 
-#' Decode a Parquet RLE/bit-packed hybrid run of 1-bit definition levels.
+#' Decode a Parquet RLE/bit-packed hybrid run of 1-bit definition levels
 #' @noRd
 .mpq_def_levels <- function(payload, n) {
   out <- integer(0); i <- 1L
@@ -944,7 +944,7 @@ morie_fetch_parquet <- function(path) {
 }
 
 # --- thrift compact protocol (subset: structs, lists, i32/i64 zigzag,
-# binary) — enough for the Parquet footer + page headers ---
+# binary) -- enough for the Parquet footer + page headers ---
 
 #' @noRd
 .mpq_varint <- function(buf, pos) {

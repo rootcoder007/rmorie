@@ -2,7 +2,7 @@
 % Please edit documentation in R/audit_variables.R
 \name{morie_audit_otis_variables}
 \alias{morie_audit_otis_variables}
-\title{Audit every OTIS variable.}
+\title{Audit every OTIS variable}
 \usage{
 morie_audit_otis_variables(dataset_specs = NULL)
 }

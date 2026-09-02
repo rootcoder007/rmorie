@@ -5,7 +5,7 @@
 \alias{Dtft}
 \title{Eq (3.78): discrete signal, CONTINUOUS frequency -- that is the whole}
 \usage{
-Dtft(x, omega, n0 = 0)
+Dtft(x, omega, n0 = 0) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

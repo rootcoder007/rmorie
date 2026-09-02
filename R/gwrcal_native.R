@@ -330,6 +330,9 @@
   c(x, fn(x))
 }
 
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param coords See Usage.
 #' @export
 morie_gwrcal_prepare <- function(y, X, coords) {
   yv <- as.numeric(y)
@@ -347,6 +350,8 @@ morie_gwrcal_prepare <- function(y, X, coords) {
   list(y = yv, X = Xr, coords = C, n = n, p = p)
 }
 
+#' @param y See Usage.
+#' @param X See Usage.
 #' @export
 morie_gwrcal_global_aicc <- function(y, X) {
   pr <- morie_gwrcal_prepare(y, X, matrix(0, length(y), 1))
@@ -372,6 +377,7 @@ morie_gwrcal_global_aicc <- function(y, X) {
 #' @param search One of \code{"golden"}, \code{"grid"}.
 #' @param n_points Number of points for the grid.
 #' @tol Convergence tolerance for golden section.
+#' @param tol See Usage.
 #' @return A list with \code{bandwidth}, \code{score},
 #'   \code{criterion}, \code{kernel}, \code{adaptive}, \code{search},
 #'   \code{grid}, \code{profile}, \code{at_boundary},

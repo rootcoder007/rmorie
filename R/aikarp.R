@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' AIC order selection for an autoregression.
+#' AIC order selection for an autoregression
 #'
 #' Formula: AIC(p) = log(sigmahat_p^2) + 2(p+1)/T, sigmahat_p^2 from the Levinson-Durbin recursion
 #'
@@ -7,6 +7,9 @@
 #' @param max_p Largest order considered.
 #' @param demean Subtract the sample mean first.
 
+#' @param x See Usage.
+#' @param max_p See Usage.
+#' @param demean See Usage.
 #' @return List with ``p``, ``aic``, ``aic_unnormalised``, ``sigma2``, ``pacf``, ``n``.
 #' @references Akaike (1973), Information theory and an extension of the maximum likelihood principle, in Petrov and Csaki (eds), 2nd International Symposium on Information Theory. Not held locally; AIC = -2 log L + 2k and its AR(p) specialisation via the Levinson-Durbin innovation variance are the standard published forms.
 #' @export

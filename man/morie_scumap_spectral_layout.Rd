@@ -5,7 +5,7 @@
 \alias{morie_scumap_spectral_layout}
 \title{morie_scumap_spectral_layout}
 \usage{
-morie_scumap_spectral_layout(B, n_components = 2, laplacian = "normalised")
+morie_scumap_spectral_layout(B, n_components = 2, laplacian = "normalised") 
 }
 \arguments{
 \item{B}{A matrix; indexed by row and column.}

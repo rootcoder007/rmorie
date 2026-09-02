@@ -5,7 +5,7 @@
 \alias{morie_alammar_contextualized_embedding}
 \title{morie_alammar_contextualized_embedding}
 \usage{
-morie_alammar_contextualized_embedding(layer_outputs, layer_idx, position)
+morie_alammar_contextualized_embedding(layer_outputs, layer_idx, position) 
 }
 \arguments{
 \item{layer_outputs}{A (layers x seq x dim) array.}

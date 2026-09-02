@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_maximal_clique}
 \title{Grow a clique from the lowest-weight edge (Section 2.1): the seed}
 \usage{
-morie_sv_dl_maximal_clique(members, edges)
+morie_sv_dl_maximal_clique(members, edges) 
 }
 \arguments{
 \item{members}{See Usage.}

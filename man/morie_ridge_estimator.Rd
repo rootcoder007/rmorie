@@ -10,6 +10,7 @@ morie_ridge_estimator(X_train, y_train, alpha = 0)
 \item{X_train, y_train}{Data.}
 
 \item{alpha}{Ridge penalty (>=0).}
+
 }
 \value{
 function(X_new) -> predictions.

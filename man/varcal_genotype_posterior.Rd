@@ -5,7 +5,7 @@
 \alias{varcal_genotype_posterior}
 \title{varcal_genotype_posterior}
 \usage{
-varcal_genotype_posterior(image, scorer = NULL, prior = NULL)
+varcal_genotype_posterior(image, scorer = NULL, prior = NULL) 
 }
 \arguments{
 \item{image}{A list; the body reads \code{$read_rows}, \code{$width} from it.}

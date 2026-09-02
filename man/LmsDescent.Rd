@@ -5,7 +5,7 @@
 \alias{LmsDescent}
 \title{Eqs. (3.201)-(3.202): the instantaneous gradient is -2 e r, so}
 \usage{
-LmsDescent(w, e, rvec, mu)
+LmsDescent(w, e, rvec, mu) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

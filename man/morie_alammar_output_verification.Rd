@@ -5,7 +5,7 @@
 \alias{morie_alammar_output_verification}
 \title{morie_alammar_output_verification}
 \usage{
-morie_alammar_output_verification(response, criteria, verifier_model)
+morie_alammar_output_verification(response, criteria, verifier_model) 
 }
 \arguments{
 \item{response}{Text under test.}

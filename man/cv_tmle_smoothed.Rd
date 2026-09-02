@@ -5,7 +5,7 @@
 \alias{cv_tmle_smoothed}
 \title{cv_tmle_smoothed}
 \usage{
-cv_tmle_smoothed(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
+cv_tmle_smoothed(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L) 
 }
 \arguments{
 \item{X}{Coerced to numeric by the body, with \code{as.numeric}.}

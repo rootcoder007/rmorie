@@ -5,7 +5,7 @@
 \alias{morie_metsem_graph}
 \title{Nodes are the k-1-mers, edges the k-mers, weights the counts}
 \usage{
-morie_metsem_graph(reads, k)
+morie_metsem_graph(reads, k) 
 }
 \arguments{
 \item{reads}{The reads.}

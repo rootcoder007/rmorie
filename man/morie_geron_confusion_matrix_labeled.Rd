@@ -17,6 +17,7 @@ morie_geron_confusion_matrix_labeled(
 \item{n_classes}{Optional class count for integer labels.}
 
 \item{labels}{Optional explicit level order.}
+
 }
 \value{
 List with \code{matrix}, \code{labels}, \code{accuracy}, \code{precision},

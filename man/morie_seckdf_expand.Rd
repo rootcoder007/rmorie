@@ -5,7 +5,7 @@
 \alias{morie_seckdf_expand}
 \title{HKDF Expand}
 \usage{
-morie_seckdf_expand(prk, info = raw(), length = 32L)
+morie_seckdf_expand(prk, info = raw(), length = 32L) 
 }
 \arguments{
 \item{prk}{Raw pseudorandom key (at least HashLen bytes).}

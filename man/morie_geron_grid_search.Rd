@@ -23,6 +23,7 @@ morie_geron_grid_search(
 \item{K}{Folds.}
 
 \item{score}{Optional function(y_true, y_pred) -> score.}
+
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{results}, \code{n_candidates}, \code{n_fits}.

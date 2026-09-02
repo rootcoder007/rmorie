@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmscr.R
 \name{Scoretest}
 \alias{Scoretest}
-\title{Score (Rao) test of H0: p = p0 for a binomial proportion.}
+\title{Score (Rao) test of H0: p = p0 for a binomial proportion}
 \usage{
 Scoretest(successes, n, p0 = 0.5)
 }

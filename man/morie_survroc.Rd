@@ -5,7 +5,7 @@
 \alias{morie_survroc}
 \title{morie_survroc}
 \usage{
-morie_survroc(times, events, marker, t, route = "km")
+morie_survroc(times, events, marker, t, route = "km") 
 }
 \arguments{
 \item{times}{Passed to \code{.survroc_clean}.}

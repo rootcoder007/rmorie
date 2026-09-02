@@ -10,6 +10,7 @@ morie_kamath_rouge_n(hypothesis, reference, n = 1)
 \item{hypothesis, reference}{Token vectors or whitespace strings.}
 
 \item{n}{Order.}
+
 }
 \value{
 List with \code{estimate} (recall), \code{precision}, \code{f1}, \code{n_matched}.

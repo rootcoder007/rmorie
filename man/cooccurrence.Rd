@@ -5,7 +5,7 @@
 \alias{cooccurrence}
 \title{Word-word co-occurrence counts over a symmetric context window}
 \usage{
-cooccurrence(corpus, window = 10, harmonic = TRUE, min_count = 1)
+cooccurrence(corpus, window = 10, harmonic = TRUE, min_count = 1) 
 }
 \arguments{
 \item{corpus}{Passed to \code{.glove_as_docs}.}

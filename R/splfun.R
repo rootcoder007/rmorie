@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' L-function, the variance-stabilised K-function.
+#' L-function, the variance-stabilised K-function
 #'
 #' L(h) = sqrt(K(h) / pi). Under CSR K(h) = pi h^2, so L(h) = h exactly
 #' and L(h) - h is a horizontal reference line at zero. The book

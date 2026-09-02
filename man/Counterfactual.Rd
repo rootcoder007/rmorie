@@ -5,7 +5,7 @@
 \alias{Counterfactual}
 \title{Counterfactual}
 \usage{
-Counterfactual(evidence, equations, exogenous, do, query, u_support = NULL)
+Counterfactual(evidence, equations, exogenous, do, query, u_support = NULL) 
 }
 \arguments{
 \item{evidence}{A vector; indexed elementwise.}

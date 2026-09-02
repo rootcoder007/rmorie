@@ -12,6 +12,8 @@ Retention(y, Q = NULL, K = NULL, V = NULL, gamma = 0.9)
 \item{Q, K, V}{query, key and value sequences, one row per step.}
 
 \item{gamma}{the decay.}
+
+
 }
 \value{
 list: estimate, out, out_par, max_gap, state, gamma, method.

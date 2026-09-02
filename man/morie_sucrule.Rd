@@ -8,6 +8,7 @@ morie_sucrule(fa, fb)
 }
 \arguments{
 \item{fa, fb}{counts of outcomes a and b}
+
 }
 \value{
 list(p, pnot, mle)

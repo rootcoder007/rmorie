@@ -2,7 +2,7 @@
 % Please edit documentation in R/sbcrk.R
 \name{Sbcrank}
 \alias{Sbcrank}
-\title{Rank statistics for simulation-based calibration, and a uniformity test.}
+\title{Rank statistics for simulation-based calibration, and a uniformity test}
 \usage{
 Sbcrank(prior_draw, post_draws, bins = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{morie_identified_set_interval}
 \title{morie_identified_set_interval}
 \usage{
-morie_identified_set_interval(phi_hat, half_width)
+morie_identified_set_interval(phi_hat, half_width) 
 }
 \arguments{
 \item{phi_hat}{Coerced to numeric by the body, with \code{as.numeric}.}

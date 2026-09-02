@@ -5,7 +5,7 @@
 \alias{LooCv}
 \title{K-fold with K = N.  It uses the most training data of any split, so}
 \usage{
-LooCv(X, y, classifier = NULL)
+LooCv(X, y, classifier = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -5,7 +5,7 @@
 \alias{morie_chemsc_rot}
 \title{The frozen-rotatable-bond entropy term}
 \usage{
-morie_chemsc_rot(fractions)
+morie_chemsc_rot(fractions) 
 }
 \arguments{
 \item{fractions}{A list of length-two vectors, the non-lipophilic   fractions on the two sides of each FROZEN rotatable bond.}

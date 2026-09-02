@@ -5,7 +5,7 @@
 \alias{morie_karpV_adjusted}
 \title{Adjusted fitness}
 \usage{
-morie_karpV_adjusted(raw)
+morie_karpV_adjusted(raw) 
 }
 \arguments{
 \item{raw}{raw fitness, smaller being better.}

@@ -5,7 +5,7 @@
 \alias{morie_kamath_moe_output}
 \title{morie_kamath_moe_output}
 \usage{
-morie_kamath_moe_output(x, G, E_i)
+morie_kamath_moe_output(x, G, E_i) 
 }
 \arguments{
 \item{x}{Input.}

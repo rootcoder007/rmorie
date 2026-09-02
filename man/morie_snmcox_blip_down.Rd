@@ -3,12 +3,17 @@
 % the formals.
 \name{morie_snmcox_blip_down}
 \alias{morie_snmcox_blip_down}
-\title{The blipped-down (untreated) time U(psi) = int_0^T exp(psi A(u)) du.}
+\title{The blipped-down (untreated) time U(psi) = int_0^T exp(psi A(u)) du}
 \usage{
-morie_snmcox_blip_down(time, treat_times, psi)
+morie_snmcox_blip_down(time, treat_times, psi) 
 }
 \description{
 The blipped-down (untreated) time U(psi) = int_0^T exp(psi A(u)) du.
+}
+\arguments{
+\item{time}{Argument \code{time}; see Usage.}
+\item{treat_times}{Argument \code{treat_times}; see Usage.}
+\item{psi}{Argument \code{psi}; see Usage.}
 }
 \value{
 A numeric value.

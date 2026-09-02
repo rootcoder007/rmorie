@@ -12,6 +12,7 @@ partial_correlation(x, y, covariates, confidence = 0.95)
 \item{covariates}{Matrix or data frame of covariates.}
 
 \item{confidence}{Confidence level.}
+
 }
 \value{
 An object of class \code{"morie_test_result"}.

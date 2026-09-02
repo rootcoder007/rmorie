@@ -5,7 +5,7 @@
 \alias{intervention_mechanism}
 \title{The intervention mechanism}
 \usage{
-intervention_mechanism(L0, A0, L1, A1, trim = 0.01, known = NULL, penalty = 0)
+intervention_mechanism(L0, A0, L1, A1, trim = 0.01, known = NULL, penalty = 0) 
 }
 \arguments{
 \item{L0}{Covariate matrix at time 0.}

@@ -4,7 +4,8 @@
 \alias{morie_brr_gibbs}
 \title{Bayesian regression samplers}
 \usage{
-morie_brr_gibbs(y, X, n_iter = 2000L, burn_in = 500L, nu = 5, nu_beta = 5, R2 = 0.5, seed = 42L)
+morie_brr_gibbs(y, X, n_iter = 2000L, burn_in = 500L, nu = 5, nu_beta = 5, R2 = 0.5, 
+    seed = 42L) 
 }
 \arguments{
 \item{y}{numeric response vector}

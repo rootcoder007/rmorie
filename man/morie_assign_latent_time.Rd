@@ -5,7 +5,7 @@
 \alias{morie_assign_latent_time}
 \title{E step: each observation is assigned the time on the trajectory}
 \usage{
-morie_assign_latent_time(u, s, alpha, beta, gamma, t_switch, grid = 200, t_max = NULL)
+morie_assign_latent_time(u, s, alpha, beta, gamma, t_switch, grid = 200, t_max = NULL) 
 }
 \arguments{
 \item{u}{A vector; its length is taken and its elements indexed.}

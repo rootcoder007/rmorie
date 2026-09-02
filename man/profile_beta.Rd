@@ -5,7 +5,7 @@
 \alias{profile_beta}
 \title{profile_beta}
 \usage{
-profile_beta(wy, wX, ar = numeric(0), ma = numeric(0), filter = "exact")
+profile_beta(wy, wX, ar = numeric(0), ma = numeric(0), filter = "exact") 
 }
 \arguments{
 \item{wy}{A vector; its length is taken.}

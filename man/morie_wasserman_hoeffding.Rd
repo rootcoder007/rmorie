@@ -12,6 +12,7 @@ morie_wasserman_hoeffding(n, t, a, b)
 \item{t}{Positive deviation.}
 
 \item{a, b}{Support bounds with a < b.}
+
 }
 \value{
 List with \code{estimate} (two-sided, capped), \code{two_sided_raw},

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' RAS matrix scaling to prescribed margins.
+#' RAS matrix scaling to prescribed margins
 #'
 #' Formula: M = diag(u) K diag(v) with u <- r / (K v) and v <- c / (K' u), alternated
 #'
@@ -8,6 +8,10 @@
 #' @param col_target Required column sums.
 #' @param max_iter Fixed number of alternations.
 
+#' @param K See Usage.
+#' @param row_target See Usage.
+#' @param col_target See Usage.
+#' @param max_iter See Usage.
 #' @return List with ``M``, ``u``, ``v``, ``row_error``, ``col_error``, ``iterations``.
 #' @references Bregman (1967), The relaxation method of finding the common point of convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is the standard published form of the method.
 #' @export

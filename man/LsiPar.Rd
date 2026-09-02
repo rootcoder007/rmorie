@@ -5,7 +5,7 @@
 \alias{LsiPar}
 \title{Eqs (3.46)-(3.49): s1 = x*h1, s2 = x*h2, y = s1 + s2 = x*(h1+h2)}
 \usage{
-LsiPar(x, h1, h2)
+LsiPar(x, h1, h2) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -16,6 +16,9 @@ morie_otis_churn_analyze_all(
 \item{b01, b02, b09, a01}{Input data.frames (any may be \code{NULL}).}
 
 \item{out_dir}{Optional output directory.}
+
+
+
 }
 \value{
 Named list of \code{morie_otis_result}.

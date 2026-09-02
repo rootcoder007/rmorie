@@ -5,7 +5,7 @@
 \alias{morie_alammar_negative_sampling_skipgram}
 \title{Skip-gram negative sampling and the Bradley-Terry reward loss}
 \usage{
-morie_alammar_negative_sampling_skipgram(center_vec, context_vec, negative_vecs)
+morie_alammar_negative_sampling_skipgram(center_vec, context_vec, negative_vecs) 
 }
 \arguments{
 \item{center_vec,context_vec,negative_vecs}{Word vectors.}

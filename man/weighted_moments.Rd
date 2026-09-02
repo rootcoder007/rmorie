@@ -5,7 +5,7 @@
 \alias{weighted_moments}
 \title{weighted_moments}
 \usage{
-weighted_moments(m, g)
+weighted_moments(m, g) 
 }
 \arguments{
 \item{m}{A matrix; the body checks with \code{is.matrix}.}

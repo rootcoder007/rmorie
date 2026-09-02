@@ -5,7 +5,7 @@
 \alias{morie_secaead_poly1305_key_gen}
 \title{Block 0 gives the one-time key; the message starts at 1}
 \usage{
-morie_secaead_poly1305_key_gen(key, nonce)
+morie_secaead_poly1305_key_gen(key, nonce) 
 }
 \arguments{
 \item{key}{Passed to \code{morie_secaead_chacha20_block}.}

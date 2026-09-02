@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm119.R
 \name{Msm119}
 \alias{Msm119}
-\title{eq. (7.10) p.227 (re-export).}
+\title{eq. (7.10) p.227 (re-export)}
 \usage{
 Msm119(...)
 }

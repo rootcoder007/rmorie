@@ -10,6 +10,8 @@ Adgev(x, mu = 0, sigma = 1, xi = 0)
 \item{x}{Numeric block maxima.}
 
 \item{mu, sigma, xi}{Location, scale and shape.  Supplied, not fitted.}
+
+
 }
 \value{
 list: statistic, u, mu, sigma, xi, n, method.

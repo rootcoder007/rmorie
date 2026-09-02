@@ -30,6 +30,8 @@ morie_geron_adam(
 \item{t}{1-based timestep.}
 
 \item{theta}{Current parameters; default zeros.}
+
+
 }
 \value{
 List with \code{theta}, \code{step}, \code{m}, \code{v}, \code{m_hat}, \code{v_hat}.

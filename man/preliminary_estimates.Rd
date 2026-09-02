@@ -5,7 +5,7 @@
 \alias{preliminary_estimates}
 \title{preliminary_estimates}
 \usage{
-preliminary_estimates(w, s = 12)
+preliminary_estimates(w, s = 12) 
 }
 \arguments{
 \item{w}{Passed to \code{sample_acf}.}

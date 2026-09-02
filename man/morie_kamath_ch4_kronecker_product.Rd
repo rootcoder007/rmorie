@@ -8,6 +8,7 @@ morie_kamath_ch4_kronecker_product(A, B)
 }
 \arguments{
 \item{A, B}{Matrices.}
+
 }
 \value{
 List with \code{W}, \code{shape}, \code{rank}, \code{n_params}.

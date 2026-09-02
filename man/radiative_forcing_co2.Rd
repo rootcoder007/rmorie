@@ -5,7 +5,7 @@
 \alias{radiative_forcing_co2}
 \title{radiative_forcing_co2}
 \usage{
-radiative_forcing_co2(C, C0 = .C0_FIT, N = 273.87, method = "ar6", erf_adjustment = FALSE)
+radiative_forcing_co2(C, C0 = .C0_FIT, N = 273.87, method = "ar6", erf_adjustment = FALSE) 
 }
 \arguments{
 \item{C}{Numeric; combined arithmetically in the body.}

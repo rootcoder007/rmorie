@@ -5,7 +5,9 @@
 \alias{morie_funcal}
 \title{morie_funcal}
 \usage{
-morie_funcal(hits, groups, annotations, taxa = NULL, target_taxa = NULL, target_types = NULL, sources = NULL, evalue = 0.001, score = 60, query_cov = 0.2, target_cov = 0.2, min_support = 1, searcher = "diamond")
+morie_funcal(hits, groups, annotations, taxa = NULL, target_taxa = NULL, target_types = NULL, 
+    sources = NULL, evalue = 0.001, score = 60, query_cov = 0.2, target_cov = 0.2, 
+    min_support = 1, searcher = "diamond") 
 }
 \arguments{
 \item{hits}{Passed to \code{morie_funcal_seed_orthologs}.}

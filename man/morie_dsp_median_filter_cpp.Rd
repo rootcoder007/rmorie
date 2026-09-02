@@ -5,7 +5,7 @@
 \alias{morie_dsp_median_filter_cpp}
 \title{morie_dsp_median_filter_cpp}
 \usage{
-morie_dsp_median_filter_cpp(x, kernel_size)
+morie_dsp_median_filter_cpp(x, kernel_size) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

@@ -5,7 +5,7 @@
 \alias{morie_yolovx_decode_box}
 \title{Back to corners. Inverts encode_box exactly}
 \usage{
-morie_yolovx_decode_box(ltrb, cx, cy, stride = 1)
+morie_yolovx_decode_box(ltrb, cx, cy, stride = 1) 
 }
 \arguments{
 \item{ltrb}{Passed to \code{.s03vec}.}

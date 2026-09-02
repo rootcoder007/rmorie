@@ -5,10 +5,15 @@
 \alias{morie_scaled_inv_chisq}
 \title{morie_scaled_inv_chisq}
 \usage{
-morie_scaled_inv_chisq(nu, S, n = 1L)
+morie_scaled_inv_chisq(nu, S, n = 1L) 
 }
 \description{
 morie_scaled_inv_chisq
+}
+\arguments{
+\item{nu}{Argument \code{nu}; see Usage.}
+\item{S}{Argument \code{S}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A numeric value.

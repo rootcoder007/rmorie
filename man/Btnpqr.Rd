@@ -34,7 +34,7 @@ remaining valid under a stochastic design and heteroskedasticity.
 }
 \details{
 The fit minimises Koenker and Bassett's check function
-sum_i rho_tau(y_i - x_i' beta) with rho_tau(u) = u (tau - 1{u < 0}), by
+sum_i rho_tau(y_i - x_i' beta) with rho_tau(u) = u (tau - 1\{u < 0\}), by
 iteratively reweighted least squares with the Schlossmacher weights
 w_i = tau / max(r_i, eps) for r_i > 0 and (1 - tau) / max(-r_i, eps)
 otherwise, the standard smooth surrogate for the linear program.  The eps

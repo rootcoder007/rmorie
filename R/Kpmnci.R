@@ -8,7 +8,7 @@
 #' risk table so the same fit object can be reused by the simultaneous
 #' band.
 #'
-#' Formula: Var\[S(t)\] = S(t)^2 sum_{t_j <= t} d_j / (n_j (n_j - d_j)).
+#' Formula: Var\[S(t)\] = S(t)^2 sum_\{t_j <= t\} d_j / (n_j (n_j - d_j)).
 #'
 #' @param fit Risk table: a list with \code{time}, \code{n_risk} and
 #'   \code{n_event}, one entry per distinct event time in increasing

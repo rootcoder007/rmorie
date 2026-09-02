@@ -5,7 +5,7 @@
 \alias{summary.morie_rlm}
 \title{Summarise method for \code{morie_rlm} objects}
 \usage{
-summary.morie_rlm(object, ...)
+\method{summary}{morie_rlm}(object, ...) 
 }
 \arguments{
 \item{object}{A \code{morie_rlm} object.}

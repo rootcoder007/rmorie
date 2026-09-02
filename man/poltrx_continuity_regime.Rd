@@ -5,7 +5,7 @@
 \alias{poltrx_continuity_regime}
 \title{Continuity regime implied by a parameter rule}
 \usage{
-poltrx_continuity_regime(rule)
+poltrx_continuity_regime(rule) 
 }
 \arguments{
 \item{rule}{One of \code{"m_squared"}, \code{"constant"},   \code{"linear"}.}

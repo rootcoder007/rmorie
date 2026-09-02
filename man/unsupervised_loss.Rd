@@ -5,7 +5,7 @@
 \alias{unsupervised_loss}
 \title{Sec. 3.2 unsupervised graph-based loss}
 \usage{
-unsupervised_loss(z_u, z_v, z_negatives)
+unsupervised_loss(z_u, z_v, z_negatives) 
 }
 \arguments{
 \item{z_u}{Source embedding.}

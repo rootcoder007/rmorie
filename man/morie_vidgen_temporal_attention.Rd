@@ -5,7 +5,7 @@
 \alias{morie_vidgen_temporal_attention}
 \title{morie_vidgen_temporal_attention}
 \usage{
-morie_vidgen_temporal_attention(video, identity = FALSE)
+morie_vidgen_temporal_attention(video, identity = FALSE) 
 }
 \arguments{
 \item{video}{Iterated over elementwise, with \code{lapply}.}

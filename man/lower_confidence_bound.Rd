@@ -5,7 +5,7 @@
 \alias{lower_confidence_bound}
 \title{lower_confidence_bound}
 \usage{
-lower_confidence_bound(mu, sd, kappa = 2)
+lower_confidence_bound(mu, sd, kappa = 2) 
 }
 \arguments{
 \item{mu}{Numeric; combined arithmetically in the body.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Prevalence ratio.
+#' Prevalence ratio
 #'
 #' Formula: PR = p_e / p_u; se(log PR) = sqrt((1-p_e)/(p_e n_e) + (1-p_u)/(p_u n_u))
 #'
@@ -9,6 +9,11 @@
 #' @param n_unexposed Size of the unexposed group.
 #' @param alpha Two-sided significance level.
 
+#' @param prev_exposed See Usage.
+#' @param prev_unexposed See Usage.
+#' @param n_exposed See Usage.
+#' @param n_unexposed See Usage.
+#' @param alpha See Usage.
 #' @return List with ``pr``, ``log_pr``, ``se_log``, ``ci_lower``, ``ci_upper``.
 #' @references Barros and Hirakata (2003), Alternatives for logistic regression in cross-sectional studies: an empirical comparison of models that directly estimate the prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method standard error for log PR used here is the standard binomial one.
 #' @export

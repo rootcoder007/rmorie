@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Prediction interval for a new study from tau^2
 #'
-#' mu +/- t_{k-2} sqrt(tau^2 + SE(mu)^2).  The k - 2 degrees of freedom are the
+#' mu +/- t_\{k-2\} sqrt(tau^2 + SE(mu)^2).  The k - 2 degrees of freedom are the
 #' paper's own recommendation; metafor::predict uses k - 1 with the
 #' Knapp-Hartung standard error, returned here as pi_lower_km1/pi_upper_km1.
 #' Source consulted: Higgins, Thompson and Spiegelhalter (2009), JRSS A 172(1),

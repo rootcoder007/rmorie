@@ -5,7 +5,7 @@
 \alias{surepi_compound_smoothing}
 \title{surepi_compound_smoothing}
 \usage{
-surepi_compound_smoothing(values, current, passes = c(4, 2, 5, 3), multiplier = 2)
+surepi_compound_smoothing(values, current, passes = c(4, 2, 5, 3), multiplier = 2) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

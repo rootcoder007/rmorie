@@ -5,7 +5,7 @@
 \alias{morie_pmpfit_cheatsheet}
 \title{Pitman-Yor cheatsheet}
 \usage{
-morie_pmpfit_cheatsheet()
+morie_pmpfit_cheatsheet() 
 }
 \description{
 One-paragraph summary of the construction and why the extra parameter fattens the tail.

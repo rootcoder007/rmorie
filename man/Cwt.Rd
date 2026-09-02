@@ -5,7 +5,7 @@
 \alias{Cwt}
 \title{Continuous wavelet transform, eq (8.107)}
 \usage{
-Cwt(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5)
+Cwt(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

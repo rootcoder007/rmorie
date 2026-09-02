@@ -5,7 +5,7 @@
 \alias{cv_select_lambda}
 \title{cv_select_lambda}
 \usage{
-cv_select_lambda(X, y, lambdas, V = 5L, seed = 0L, ...)
+cv_select_lambda(X, y, lambdas, V = 5L, seed = 0L, ...) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

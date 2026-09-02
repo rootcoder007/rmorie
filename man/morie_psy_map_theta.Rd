@@ -21,6 +21,8 @@ morie_psy_map_theta(
 \item{prior}{\code{c(mean, sd)}.}
 
 \item{bounds}{search interval.}
+
+
 }
 \value{
 list: theta, se, prior_mean, prior_sd, information,

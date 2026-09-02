@@ -5,7 +5,7 @@
 \alias{morie_dreamr_value_update}
 \title{morie_dreamr_value_update}
 \usage{
-morie_dreamr_value_update(values, targets)
+morie_dreamr_value_update(values, targets) 
 }
 \arguments{
 \item{values}{Passed to \code{.dreamr_vec}.}

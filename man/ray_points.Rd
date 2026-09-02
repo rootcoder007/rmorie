@@ -5,7 +5,7 @@
 \alias{ray_points}
 \title{ray_points}
 \usage{
-ray_points(origin, direction, t_near, t_far, n_samples, seed = 0, stratified = TRUE)
+ray_points(origin, direction, t_near, t_far, n_samples, seed = 0, stratified = TRUE) 
 }
 \arguments{
 \item{origin}{Passed to \code{.nrfrad_vec}.}

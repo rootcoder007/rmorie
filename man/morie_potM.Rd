@@ -5,7 +5,7 @@
 \alias{morie_potM}
 \title{morie_potM}
 \usage{
-morie_potM(y, u, return_periods = c(10, 100))
+morie_potM(y, u, return_periods = c(10, 100)) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

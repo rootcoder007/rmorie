@@ -24,6 +24,7 @@ morie_otis_otdml(
 \item{n_folds}{Integer fold count (default \code{3L}).}
 
 \item{seed}{Integer RNG seed.}
+
 }
 \value{
 \code{morie_otis_result}.

@@ -5,7 +5,7 @@
 \alias{morie_rlhfRS_precision}
 \title{The share of the top k that were relevant}
 \usage{
-morie_rlhfRS_precision(relevance, k)
+morie_rlhfRS_precision(relevance, k) 
 }
 \arguments{
 \item{relevance}{The graded relevance of the ranked list.}

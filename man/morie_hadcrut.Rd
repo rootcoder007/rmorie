@@ -5,7 +5,9 @@
 \alias{morie_hadcrut}
 \title{Blend land and ocean anomaly grids and average them up}
 \usage{
-morie_hadcrut(T, sst, land_fraction = NULL, sea_ice = NULL, rule = "hadcrut5", route = "hemispheric", interval = "normal", level = 0.95, T_var = NULL, sst_var = NULL, ensemble = NULL, reference = NULL)
+morie_hadcrut(T, sst, land_fraction = NULL, sea_ice = NULL, rule = "hadcrut5", 
+    route = "hemispheric", interval = "normal", level = 0.95, T_var = NULL, 
+    sst_var = NULL, ensemble = NULL, reference = NULL) 
 }
 \arguments{
 \item{T}{Land air temperature anomaly matrix on a regular grid   running south to north, NA where unobserved.}

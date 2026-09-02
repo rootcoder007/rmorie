@@ -5,7 +5,7 @@
 \alias{LogMinPh}
 \title{Eq (4.70): log(1 - alpha z^-1) = -sum alpha^n/n z^-n, |z| > |alpha|}
 \usage{
-LogMinPh(alpha, terms = 20, z = NULL)
+LogMinPh(alpha, terms = 20, z = NULL) 
 }
 \arguments{
 \item{alpha}{Coerced to complex by the body, with \code{as.complex}.}

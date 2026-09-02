@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_temporal_embedding}
 \title{morie_sam2vd_temporal_embedding}
 \usage{
-morie_sam2vd_temporal_embedding(entry, current_frame, dim = NULL, scale = 0.1)
+morie_sam2vd_temporal_embedding(entry, current_frame, dim = NULL, scale = 0.1) 
 }
 \arguments{
 \item{entry}{A list; the body reads \code{$features}, \code{$frame}, \code{$prompted} from it.}

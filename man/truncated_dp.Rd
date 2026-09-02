@@ -5,7 +5,7 @@
 \alias{truncated_dp}
 \title{truncated_dp}
 \usage{
-truncated_dp(alpha, K, base_sampler = NULL, rng = NULL, seed = 0, renormalise = TRUE)
+truncated_dp(alpha, K, base_sampler = NULL, rng = NULL, seed = 0, renormalise = TRUE) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

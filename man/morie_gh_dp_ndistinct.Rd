@@ -17,8 +17,8 @@ number of distinct values and its variance
 }
 \description{
 For \code{n} draws from a Dirichlet process with precision
-\code{alpha}, returns \eqn{E[K_n] = \sum_{i=1}^{n} \alpha /
-(\alpha + i - 1)} and \eqn{Var[K_n] = \sum_{i=1}^{n} \alpha (i - 1) /
+\code{alpha}, returns \eqn{E\[K_n\] = \sum_{i=1}^{n} \alpha /
+(\alpha + i - 1)} and \eqn{Var\[K_n\] = \sum_{i=1}^{n} \alpha (i - 1) /
 (\alpha + i - 1)^2}.
 }
 \examples{

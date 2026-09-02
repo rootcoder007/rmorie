@@ -18,6 +18,7 @@ directly (vector).}
 
 \item{beta_fast, beta_slow}{Rotation-count bounds (paper Eq 18 with
 alpha = beta_slow, beta = beta_fast; defaults 32 and 1).}
+
 }
 \value{
 List with \code{theta}, \code{theta_new}, \code{rotations},

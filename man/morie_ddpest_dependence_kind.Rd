@@ -5,13 +5,13 @@
 \alias{morie_ddpest_dependence_kind}
 \title{What varies with x, and what that buys}
 \usage{
-morie_ddpest_dependence_kind(kind)
+morie_ddpest_dependence_kind(kind) 
 }
 \arguments{
 \item{kind}{One of "single_weights", "single_atoms", "both",   "independent".}
 }
 \description{
-Returns a description of which part of the stick-breaking form G_x(.) = sum_h w_h(x) delta_{theta_h(x)}(.) is allowed to vary with the covariate, and the qualitative effect that has on clustering.
+Returns a description of which part of the stick-breaking form G_x(.) = sum_h w_h(x) delta_\{theta_h(x)\}(.) is allowed to vary with the covariate, and the qualitative effect that has on clustering.
 }
 \value{
 Named list with kind, varies_with_x, effect.

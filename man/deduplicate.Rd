@@ -5,7 +5,7 @@
 \alias{deduplicate}
 \title{Deduplicate by cosine similarity}
 \usage{
-deduplicate(embeddings, threshold = 0.999)
+deduplicate(embeddings, threshold = 0.999) 
 }
 \arguments{
 \item{embeddings}{Numeric matrix (n x d), or list of row vectors.}

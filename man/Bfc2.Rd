@@ -15,6 +15,9 @@ morie_fauzi_c2_coefficient(dg, d2g, d3g, density, fp, fpp)
 \item{density}{\code{f_X(x)}.}
 
 \item{fp, fpp}{\verb{f'(x)} and \verb{f''(x)}.}
+
+
+
 }
 \value{
 Named list with \code{estimate}, \code{scaled}, \code{method}.

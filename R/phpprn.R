@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Phillips-Perron unit-root test with an explicit trend switch.
+#' Phillips-Perron unit-root test with an explicit trend switch
 #'
 #' The implementation lives in \code{Pptest}, whose auxiliary regression
 #' always includes the linear trend -- that is the tseries::pp.test

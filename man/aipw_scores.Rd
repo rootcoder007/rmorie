@@ -5,7 +5,7 @@
 \alias{aipw_scores}
 \title{aipw_scores}
 \usage{
-aipw_scores(Y, W, mu1, mu0, e)
+aipw_scores(Y, W, mu1, mu0, e) 
 }
 \arguments{
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}

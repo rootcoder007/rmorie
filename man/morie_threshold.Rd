@@ -5,7 +5,7 @@
 \alias{morie_threshold}
 \title{Single-marker LOD significance threshold}
 \usage{
-morie_threshold(alpha = 0.05)
+morie_threshold(alpha = 0.05) 
 }
 \arguments{
 \item{alpha}{Significance level in \code{(0, 1)}, default 0.05.}

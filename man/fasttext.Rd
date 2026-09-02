@@ -5,7 +5,9 @@
 \alias{fasttext}
 \title{fasttext}
 \usage{
-fasttext(corpus, dim = 50, n_min = 3, n_max = 6, window = 5, epochs = 5, lr = 0.05, negative = 5, min_count = 1, boundary = TRUE, whole_word = TRUE, hash_buckets = NULL, seed = 0)
+fasttext(corpus, dim = 50, n_min = 3, n_max = 6, window = 5, epochs = 5, 
+    lr = 0.05, negative = 5, min_count = 1, boundary = TRUE, whole_word = TRUE, 
+    hash_buckets = NULL, seed = 0) 
 }
 \arguments{
 \item{corpus}{Passed to \code{.as_docs}.}

@@ -8,6 +8,8 @@ morie_bibd_parameters(v, k, lam)
 }
 \arguments{
 \item{v, k, lam}{Design parameters.}
+
+
 }
 \value{
 A list with \code{r}, \code{b}, \code{divisibility_ok}, \code{fisher_ok},

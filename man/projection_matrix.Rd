@@ -5,7 +5,7 @@
 \alias{projection_matrix}
 \title{Random projection matrix with binary coins}
 \usage{
-projection_matrix(d, k, distribution = "rademacher", seed = 0L)
+projection_matrix(d, k, distribution = "rademacher", seed = 0L) 
 }
 \arguments{
 \item{d}{Source dimension, positive integer.}

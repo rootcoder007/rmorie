@@ -5,7 +5,7 @@
 #' attributable to each orthogonalised shock. With P the lower Cholesky
 #' factor of Sigma_u and Theta_s = A^s the MA coefficients of a VAR(1),
 #' the h-step MSE contribution of shock j to variable i is
-#' sum_{s=0}^{h} (Theta_s P)\[i, j\]^2, and the decomposition divides that
+#' sum_\{s=0\}^\{h\} (Theta_s P)\[i, j\]^2, and the decomposition divides that
 #' by the row total.
 #'
 #' R mirror of \code{morie.fn.fevdc}; the Python arm carries the primary

@@ -5,7 +5,7 @@
 \alias{morie_tcmech_rho}
 \title{The largest rho whose guarantee still meets a target (eps, delta)}
 \usage{
-morie_tcmech_rho(epsilon, delta, omega = NULL, iters = 200L)
+morie_tcmech_rho(epsilon, delta, omega = NULL, iters = 200L) 
 }
 \arguments{
 \item{epsilon}{The target epsilon.}

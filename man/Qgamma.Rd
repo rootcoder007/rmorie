@@ -5,7 +5,7 @@
 \alias{Qgamma}
 \title{Qgamma}
 \usage{
-Qgamma(p, shape, rate = 1)
+Qgamma(p, shape, rate = 1) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

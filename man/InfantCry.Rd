@@ -5,7 +5,8 @@
 \alias{InfantCry}
 \title{InfantCry: cry F0 track, melody coding and formants}
 \usage{
-InfantCry(cry, fs, window_ms = 40, f0_range = c(200, 1000), order = NULL, flat_tolerance = 0.06)
+InfantCry(cry, fs, window_ms = 40, f0_range = c(200, 1000), order = NULL, 
+    flat_tolerance = 0.06) 
 }
 \arguments{
 \item{cry}{Coerced to numeric by the body, with \code{as.numeric}.}

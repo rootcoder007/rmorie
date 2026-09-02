@@ -13,6 +13,7 @@ morie_rappor_epsilon(h, f, p = NULL, q = NULL)
 
 \item{p, q}{Instantaneous randomized response parameters; when both
 are supplied, \code{eps_1} is returned as well.}
+
 }
 \value{
 List with \code{eps_infinity} and optionally \code{eps_1},

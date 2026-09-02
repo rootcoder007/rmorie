@@ -5,7 +5,7 @@
 \alias{sequential_g_formula}
 \title{sequential_g_formula}
 \usage{
-sequential_g_formula(Q_functions, L_supports, L_probs, rule)
+sequential_g_formula(Q_functions, L_supports, L_probs, rule) 
 }
 \arguments{
 \item{Q_functions}{A vector; indexed elementwise.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rkhsb.R
 \name{Rkhsbayes}
 \alias{Rkhsbayes}
-\title{Bayesian kernel BLUP: the closed-form conditional mean of the kernel effects.}
+\title{Bayesian kernel BLUP: the closed-form conditional mean of the kernel effects}
 \usage{
 Rkhsbayes(y, K, sigma2_u = 1, sigma2_e = 1, mu = NULL)
 }

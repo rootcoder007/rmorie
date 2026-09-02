@@ -5,7 +5,7 @@
 \alias{Qf}
 \title{Qf}
 \usage{
-Qf(p, df1, df2)
+Qf(p, df1, df2) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

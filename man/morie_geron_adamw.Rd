@@ -33,6 +33,8 @@ morie_geron_adamw(
 \item{t}{1-based timestep.}
 
 \item{theta}{Parameters.}
+
+
 }
 \value{
 List with \code{theta}, \code{step}, \code{adam_step}, \code{decay_step}, \code{m}, \code{v}.

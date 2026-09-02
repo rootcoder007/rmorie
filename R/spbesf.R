@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Modified Bessel function of the second kind, K_nu.
+#' Modified Bessel function of the second kind, K_nu
 #'
 #' The book defines K_nu(t) = (pi/2) (I_-nu(t) - I_nu(t)) / sin(pi nu),
 #' eq (4.73). That identity is a DEFINITION, not an algorithm: both

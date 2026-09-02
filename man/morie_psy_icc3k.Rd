@@ -10,6 +10,7 @@ morie_psy_icc3k(y, subject, rater)
 \item{y}{ratings.}
 
 \item{subject, rater}{identifiers; a complete crossed design.}
+
 }
 \value{
 list: value (ICC(3,k)), icc_single, icc2k,

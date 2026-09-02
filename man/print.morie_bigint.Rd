@@ -5,7 +5,7 @@
 \alias{print.morie_bigint}
 \title{Print method for \code{morie_bigint} objects}
 \usage{
-print.morie_bigint(x, ...)
+\method{print}{morie_bigint}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_bigint} object.}

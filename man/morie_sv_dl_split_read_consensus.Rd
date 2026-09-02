@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_split_read_consensus}
 \title{Gapless majority-vote consensus over the aligned reads. starts}
 \usage{
-morie_sv_dl_split_read_consensus(reads, starts = NULL)
+morie_sv_dl_split_read_consensus(reads, starts = NULL) 
 }
 \arguments{
 \item{reads}{Coerced to character by the body, with \code{as.character}.}

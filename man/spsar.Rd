@@ -2,7 +2,7 @@
 % Please edit documentation in R/spsar.R
 \name{spsar}
 \alias{spsar}
-\title{Spatial autoregressive (lag) model.}
+\title{Spatial autoregressive (lag) model}
 \usage{
 spsar(x, y, w)
 }

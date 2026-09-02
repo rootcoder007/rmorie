@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinary block kriging.
+#' Ordinary block kriging
 #'
 #' Solve the OK system with point-to-block averaged covariances:
 #'   \deqn{C_{\text{bar}}(s_i, B) = (1/|B|) \int_B C(s_i, u) du.}{C_bar(s_i, B) = (1/|B|) int_B C(s_i, u) du.}

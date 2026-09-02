@@ -5,7 +5,7 @@
 \alias{entropy}
 \title{entropy}
 \usage{
-entropy(q)
+entropy(q) 
 }
 \arguments{
 \item{q}{Numeric; passed to \code{sum}.}

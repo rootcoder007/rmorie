@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Multi-trait genomic linear mixed model.
+#' Multi-trait genomic linear mixed model
 #'
 #' Formula: stacking the n_T traits of each line,
 #' Y = (1 (x) I_nT) mu + Z b + eps with b ~ N(0, G (x) Sigma_T) and

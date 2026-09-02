@@ -12,7 +12,7 @@ uses LeSage & Pace (2009) + Elhorst (2010) + the Yang/Noah/Shoff
 }
 \details{
 The Laniyonu (2018) result -- gentrification's effect on
-stops-per-capita is ~0 direct but +51 to +90\\% indirect (spillover
+stops-per-capita is ~0 direct but +51 to +90\% indirect (spillover
 into neighbouring tracts) -- only surfaces once you decompose. An
 OLS or non-spatial FE model would report "no effect" and miss the
 entire story.

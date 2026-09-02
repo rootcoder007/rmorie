@@ -5,7 +5,7 @@
 \alias{morie_mistr_apply_rope}
 \title{Apply RoPE to a vector}
 \usage{
-morie_mistr_apply_rope(x, pos, theta = NULL, base = 10000)
+morie_mistr_apply_rope(x, pos, theta = NULL, base = 10000) 
 }
 \arguments{
 \item{x}{Vector of length d.}

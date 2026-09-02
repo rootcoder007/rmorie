@@ -5,7 +5,7 @@
 \alias{PcgEeg}
 \title{PcgEeg: PCG-EEG magnitude coherence; Rangayyan (2024) eq. (4.32)}
 \usage{
-PcgEeg(pcg, eeg, fs, n_segments = 8, band = c(1, 100))
+PcgEeg(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) 
 }
 \arguments{
 \item{pcg}{Coerced to numeric by the body, with \code{as.numeric}.}

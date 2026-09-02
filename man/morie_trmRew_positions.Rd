@@ -5,7 +5,7 @@
 \alias{morie_trmRew_positions}
 \title{Every position in a term, as a 0-based integer vector of argument}
 \usage{
-morie_trmRew_positions(t)
+morie_trmRew_positions(t) 
 }
 \arguments{
 \item{t}{A vector; indexed elementwise.}

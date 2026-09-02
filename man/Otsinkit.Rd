@@ -16,6 +16,7 @@ Otsinkit(a, b, C, epsilon, tol, max_iter = 200L)
 \item{tol}{Sup-norm marginal-violation threshold.}
 
 \item{max_iter}{Fixed trace length (default 200).}
+
 }
 \value{
 Named list with \code{estimate}, \code{reached}, \code{final_error},

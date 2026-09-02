@@ -2,7 +2,7 @@
 % Please edit documentation in R/brrpf.R
 \name{Brrhyper}
 \alias{Brrhyper}
-\title{Default hyperparameters of the Bayesian ridge regression prior.}
+\title{Default hyperparameters of the Bayesian ridge regression prior}
 \usage{
 Brrhyper(y, R2 = 0.5, nu = 5, nu_beta = 5)
 }

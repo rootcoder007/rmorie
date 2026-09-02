@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Targeted marginal odds ratio, with inference on the log scale.
+#' Targeted marginal odds ratio, with inference on the log scale
 #'
 #' The MARGINAL odds ratio is not the conditional one: odds ratios are
 #' non-collapsible. Inference is on the log scale because the sampling

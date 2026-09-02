@@ -5,7 +5,8 @@
 \alias{morie_clpopt}
 \title{Main entry point: solve an inequality-form linear program}
 \usage{
-morie_clpopt(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL, rule = "bland", maximise = FALSE, max_iter = 10000)
+morie_clpopt(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL, 
+    rule = "bland", maximise = FALSE, max_iter = 10000) 
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}

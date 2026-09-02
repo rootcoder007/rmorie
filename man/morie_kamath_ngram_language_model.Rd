@@ -8,6 +8,7 @@ morie_kamath_ngram_language_model(counts_ngram, counts_prefix)
 }
 \arguments{
 \item{counts_ngram, counts_prefix}{Counts.}
+
 }
 \value{
 List with \code{estimate}, \code{count_ngram}, \code{count_prefix}.

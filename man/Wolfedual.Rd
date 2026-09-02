@@ -5,10 +5,21 @@
 \alias{Wolfedual}
 \title{Wolfe dual of a constrained program (MVSML eqs. 9.9-9.14)}
 \usage{
-Wolfedual(f, grad_f, h = NULL, grad_h = NULL, g = NULL, grad_g = NULL, lam = NULL, alpha = NULL)
+Wolfedual(f, grad_f, h = NULL, grad_h = NULL, g = NULL, grad_g = NULL, 
+    lam = NULL, alpha = NULL) 
 }
 \description{
 (9.12) maximizes L = f - sum_i lambda_i h_i - sum_i alpha_i g_i subject to the stationarity condition (9.13), grad f - sum lambda_i grad h_i - sum alpha_i grad g_i = 0, and to alpha_i >= 0 (9.14).  The book warns under (9.14) that the sign of the inequality term is crucial; its own worked examples supply the constraint in the >= form and subtract it, the convention used here.
+}
+\arguments{
+\item{f}{Argument \code{f}; see Usage.}
+\item{grad_f}{Argument \code{grad_f}; see Usage.}
+\item{h}{Argument \code{h}; see Usage.}
+\item{grad_h}{Argument \code{grad_h}; see Usage.}
+\item{g}{Argument \code{g}; see Usage.}
+\item{grad_g}{Argument \code{grad_g}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{L}, \code{stationarity}, \code{max_stationarity}, \code{alpha_nonnegative}, \code{n_equality}, \code{n_inequality}.

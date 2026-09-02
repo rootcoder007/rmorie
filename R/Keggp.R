@@ -11,7 +11,7 @@
 #' indicator vectors over a fixed gene universe so that both language
 #' arms index genes identically.
 #'
-#' Formula: P(X >= q) = sum_{j>=q} C(m,j) C(N-m, n-j) / C(N, n).
+#' Formula: P(X >= q) = sum_\{j>=q\} C(m,j) C(N-m, n-j) / C(N, n).
 #'
 #' @param genes Indicator over the gene universe: 1 if selected.
 #' @param kegg_pathways Membership matrix, one row per gene of the

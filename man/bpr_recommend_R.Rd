@@ -5,11 +5,19 @@
 \alias{bpr_recommend_R}
 \title{Recommend top items for one user by x_hat_ui}
 \usage{
-bpr_recommend_R(W, H, u, n_items, top_k = 5L, exclude = integer(0))
+bpr_recommend_R(W, H, u, n_items, top_k = 5L, exclude = integer(0)) 
 }
 \arguments{
 \item{top_k}{Number of items to return.}
 \item{exclude}{Integer vector of 0-based item indices to drop.}
+
+\item{W}{Argument \code{W}; see Usage.}
+
+\item{H}{Argument \code{H}; see Usage.}
+
+\item{u}{Argument \code{u}; see Usage.}
+
+\item{n_items}{Argument \code{n_items}; see Usage.}
 }
 \description{
 Mirrors morie.fn.bprMF.recommend.

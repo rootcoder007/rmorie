@@ -22,6 +22,9 @@ morie_f_change(
 \item{k_full, k_restricted}{Predictor counts.}
 
 \item{n}{Sample size.}
+
+
+
 }
 \value{
 List with f_ss (df n - k_full) and f_r2 (df n - k_full - 1);

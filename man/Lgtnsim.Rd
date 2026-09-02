@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitlns.R
 \name{Lgtnsim}
 \alias{Lgtnsim}
-\title{Draw compositions from a logistic-normal via the alr inverse.}
+\title{Draw compositions from a logistic-normal via the alr inverse}
 \usage{
 Lgtnsim(mu, Sigma, n, seed = 1, total = 1)
 }

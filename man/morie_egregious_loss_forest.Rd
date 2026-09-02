@@ -28,6 +28,9 @@ morie_egregious_loss_forest(
 \item{imbalance_penalty}{gamma above.}
 
 \item{seed}{integer seed.}
+
+
+
 }
 \value{
 list with \code{cate} (out-of-bag), \code{ate}, \code{se},

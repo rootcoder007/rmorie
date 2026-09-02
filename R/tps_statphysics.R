@@ -50,22 +50,22 @@ NULL
 #' ---------
 #'
 #' \itemize{
-#'   \item \code{\link{morie_tps_sdb_reaction_diffusion}} — Short,
+#'   \item \code{\link{morie_tps_sdb_reaction_diffusion}} -- Short,
 #'     D'Orsogna and Brantingham (2008) hot-spot PDE, data-seeded.
-#'   \item \code{\link{morie_tps_levy_flight_alpha}} — Hill-MLE
+#'   \item \code{\link{morie_tps_levy_flight_alpha}} -- Hill-MLE
 #'     Levy-flight tail exponent following Brockmann, Hufnagel and
 #'     Geisel (2006).
-#'   \item \code{\link{morie_tps_urban_scaling_beta}} — Bettencourt
+#'   \item \code{\link{morie_tps_urban_scaling_beta}} -- Bettencourt
 #'     \emph{et al.} (2007) urban-scaling beta across the 158 Toronto
 #'     wards.
-#'   \item \code{\link{morie_tps_lotka_volterra_police_crime}} — Lotka-
+#'   \item \code{\link{morie_tps_lotka_volterra_police_crime}} -- Lotka-
 #'     Volterra predator-prey on yearly counts.
-#'   \item \code{\link{morie_tps_sdb_turing_demo}} — canonical Turing-
+#'   \item \code{\link{morie_tps_sdb_turing_demo}} -- canonical Turing-
 #'     instability demo on a periodic lattice.
-#'   \item \code{\link{morie_tps_inspection_game_phase}} — three-
+#'   \item \code{\link{morie_tps_inspection_game_phase}} -- three-
 #'     strategy replicator phase diagram (Helbing, Szolnoki & Perc
 #'     2010).
-#'   \item \code{\link{morie_tps_criminal_network_graph}} — premise x
+#'   \item \code{\link{morie_tps_criminal_network_graph}} -- premise x
 #'     neighbourhood co-occurrence network (Diviak \emph{et al.}
 #'     2019-style projection from public TPS data).
 #' }
@@ -553,7 +553,7 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 #'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with \eqn{\hat\alpha}{hatalpha},
-#'   bootstrap SE, sample-size diagnostics, and a Lévy-regime
+#'   bootstrap SE, sample-size diagnostics, and a Levy-regime
 #'   interpretation.
 #'
 #' @references Brockmann D, Hufnagel L, Geisel T (2006). The scaling

@@ -5,7 +5,7 @@
 \alias{morie_avalon_cheatsheet}
 \title{One-line summary of the avalon module}
 \usage{
-morie_avalon_cheatsheet()
+morie_avalon_cheatsheet() 
 }
 \description{
 One-line summary of the avalon module

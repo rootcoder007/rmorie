@@ -5,7 +5,7 @@
 \alias{box_cox}
 \title{box_cox}
 \usage{
-box_cox(y, omega)
+box_cox(y, omega) 
 }
 \arguments{
 \item{y}{Numeric; passed to \code{log}.}

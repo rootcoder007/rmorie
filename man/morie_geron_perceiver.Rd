@@ -5,7 +5,7 @@
 \alias{morie_geron_perceiver}
 \title{Perceiver: iterated latent-to-input scaled dot-product cross-attention (Geron Ch 16, hmprcv)}
 \usage{
-morie_geron_perceiver(x, latents, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL)
+morie_geron_perceiver(x, latents, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) 
 }
 \arguments{
 \item{x}{Input (N, D).}

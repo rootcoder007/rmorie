@@ -2,7 +2,7 @@
 % Please edit documentation in R/comspr.R
 \name{Specclus}
 \alias{Specclus}
-\title{Spectral clustering: embed by the bottom eigenvectors, then k-means.}
+\title{Spectral clustering: embed by the bottom eigenvectors, then k-means}
 \usage{
 Specclus(W, k = 2, normalized = TRUE, max_iter = 50)
 }

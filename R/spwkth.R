@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Spectral density of a stationary field from its covariance function.
+#' Spectral density of a stationary field from its covariance function
 #'
 #' Building the field as a sum of sinusoids with random amplitudes and
 #' uniform random phases gives C(h) = sum_j sigma_j^2 cos(w_j h)

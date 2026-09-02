@@ -10,6 +10,7 @@ CovIndep(x, y, tol = 1e-09)
 \item{x, y}{equal-length data vectors, n >= 2.}
 
 \item{tol}{absolute tolerance on the covariance.}
+
 }
 \value{
 list(cov, near_zero).

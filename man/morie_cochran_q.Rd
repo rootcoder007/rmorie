@@ -5,7 +5,7 @@
 \alias{morie_cochran_q}
 \title{Cochran\'s Q: the R arm already lives in aaa_macn.R as}
 \usage{
-morie_cochran_q(yi, vi)
+morie_cochran_q(yi, vi) 
 }
 \arguments{
 \item{yi}{Passed to \code{morie_ma_cochran_q}.}

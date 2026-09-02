@@ -26,6 +26,11 @@ Alfloss(
 \item{ncrop}{Optional residue count after cropping; the total is then
 multiplied by its square root, the reweighting described just below
 equation (7).}
+
+
+
+
+
 }
 \value{
 A list with the weighted \code{terms}, the total

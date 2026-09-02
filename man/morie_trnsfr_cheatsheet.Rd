@@ -5,7 +5,7 @@
 \alias{morie_trnsfr_cheatsheet}
 \title{morie_trnsfr_cheatsheet}
 \usage{
-morie_trnsfr_cheatsheet()
+morie_trnsfr_cheatsheet() 
 }
 \description{
 A step of the trnsfr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

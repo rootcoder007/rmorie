@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Leave-one-out cross-validation of a kriging model.
+#' Leave-one-out cross-validation of a kriging model
 #'
 #' Kriging honours the data, so in-sample residuals are identically zero
 #' and carry no information about model fit. Cross-validation removes

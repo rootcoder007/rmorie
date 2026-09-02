@@ -5,7 +5,9 @@
 \alias{morie_causrddc}
 \title{morie_causrddc}
 \usage{
-morie_causrddc(y, x, treatment = NULL, cutoff = 0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3)
+morie_causrddc(y, x, treatment = NULL, cutoff = 0, nu = 0, p = 1, q = NULL, 
+    h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", 
+    J = 3) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

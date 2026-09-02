@@ -5,7 +5,8 @@
 \alias{morie_svyrcq_survey_quantile_regression}
 \title{morie_svyrcq_survey_quantile_regression}
 \usage{
-morie_svyrcq_survey_quantile_regression(X, y, tau = 0.5, weights = NULL, add_intercept = TRUE, max_iter = 200, tol = 1e-10, eps = 1e-06)
+morie_svyrcq_survey_quantile_regression(X, y, tau = 0.5, weights = NULL, add_intercept = TRUE, max_iter = 200, 
+    tol = 1e-10, eps = 1e-06) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

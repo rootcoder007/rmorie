@@ -3,12 +3,17 @@
 % the formals.
 \name{friend_summary}
 \alias{friend_summary}
-\title{Summarise a quantity over :math:`F_i`.}
+\title{Summarise a quantity over \eqn{F_i}}
 \usage{
-friend_summary(values, friends, kind = "fraction")
+friend_summary(values, friends, kind = "fraction") 
 }
 \description{
-Summarise a quantity over :math:`F_i`.
+Summarise a quantity over \eqn{F_i}.
+}
+\arguments{
+\item{values}{Argument \code{values}; see Usage.}
+\item{friends}{Argument \code{friends}; see Usage.}
+\item{kind}{Argument \code{kind}; see Usage.}
 }
 \value{
 The value of \code{out}, as built in the body.

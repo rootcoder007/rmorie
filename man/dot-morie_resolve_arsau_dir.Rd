@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{.morie_resolve_arsau_dir}
 \alias{.morie_resolve_arsau_dir}
-\title{Resolve the ARSAU data directory.}
+\title{Resolve the ARSAU data directory}
 \usage{
 .morie_resolve_arsau_dir(data_dir = NULL, require_exists = TRUE)
 }

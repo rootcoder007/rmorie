@@ -5,7 +5,7 @@
 \alias{derivatives}
 \title{derivatives}
 \usage{
-derivatives(S, I, beta, nu, mu, sigma)
+derivatives(S, I, beta, nu, mu, sigma) 
 }
 \arguments{
 \item{S}{Coerced to numeric by the body, with \code{as.numeric}.}

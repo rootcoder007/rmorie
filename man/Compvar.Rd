@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitvar.R
 \name{Compvar}
 \alias{Compvar}
-\title{Variation matrix: the pairwise log-ratio variances.}
+\title{Variation matrix: the pairwise log-ratio variances}
 \usage{
 Compvar(X)
 }
@@ -18,7 +18,7 @@ Sample variances (denominator n-1) throughout, matching the sibling
 modules aitcen and aittvr.
 }
 \details{
-Formula: tau_ij = var( log(x_i / x_j) ), totvar = (1/D) sum_{i<j} tau_ij
+Formula: tau_ij = var( log(x_i / x_j) ), totvar = (1/D) sum_\{i<j\} tau_ij
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -26,6 +26,6 @@ Compvar(V)
 }
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
-Data, Chapter 4. The relation totvar = (1/D) sum_{i<j} tau_ij is the
+Data, Chapter 4. The relation totvar = (1/D) sum_\{i<j\} tau_ij is the
 one already used by the sibling module aittvr in this package.
 }

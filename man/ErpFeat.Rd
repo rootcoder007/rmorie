@@ -5,7 +5,8 @@
 \alias{ErpFeat}
 \title{ErpFeat: event-related potential latency and amplitude features}
 \usage{
-ErpFeat(erp, fs, t0 = 0, components = NULL, baseline_ms = list(NULL, 0))
+ErpFeat(erp, fs, t0 = 0, components = NULL, baseline_ms = list(NULL, 
+    0)) 
 }
 \arguments{
 \item{erp}{Coerced to numeric by the body, with \code{as.numeric}.}

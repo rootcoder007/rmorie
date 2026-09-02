@@ -5,7 +5,7 @@
 \alias{morie_ragRet_normalise}
 \title{morie_ragRet_normalise}
 \usage{
-morie_ragRet_normalise(v)
+morie_ragRet_normalise(v) 
 }
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}

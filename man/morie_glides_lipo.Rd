@@ -5,7 +5,7 @@
 \alias{morie_glides_lipo}
 \title{A ramped contact count over lipophilic atom pairs}
 \usage{
-morie_glides_lipo(distances, r1 = 4.1, r2 = 7.1)
+morie_glides_lipo(distances, r1 = 4.1, r2 = 7.1) 
 }
 \arguments{
 \item{distances}{The lipophilic pair separations.}

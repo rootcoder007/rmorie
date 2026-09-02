@@ -5,10 +5,14 @@
 \alias{Wwties}
 \title{Runs-test tie bounds -- Sec. 6.2.1, p. 233}
 \usage{
-Wwties(x, y)
+Wwties(x, y) 
 }
 \description{
 Runs-test tie bounds -- Sec. 6.2.1, p. 233
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{rmin}, \code{rmax}, \code{nties}, \code{ambiguous}, \code{m}, \code{n}.

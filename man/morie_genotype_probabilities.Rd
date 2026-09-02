@@ -5,7 +5,7 @@
 \alias{morie_genotype_probabilities}
 \title{QTL genotype probabilities from flanking markers}
 \usage{
-morie_genotype_probabilities(left, right, r_left, r_right)
+morie_genotype_probabilities(left, right, r_left, r_right) 
 }
 \arguments{
 \item{left}{Numeric vector of left-marker genotypes (0 or 1).}

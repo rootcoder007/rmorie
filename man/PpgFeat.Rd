@@ -5,7 +5,7 @@
 \alias{PpgFeat}
 \title{Section 1.2.11.  The notch is located with the SAME machinery the}
 \usage{
-PpgFeat(ppg, fs, mwin = 16)
+PpgFeat(ppg, fs, mwin = 16) 
 }
 \arguments{
 \item{ppg}{A vector; its length is taken and its elements indexed.}

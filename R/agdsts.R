@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Temperature-scaled knowledge-distillation loss.
+#' Temperature-scaled knowledge-distillation loss
 #'
 #' p_i = exp(z_i/T)/sum_j exp(z_j/T) (eq. 1); the soft cross entropy
 #' CE(p, q) is multiplied by T^2 and blended with the hard-label cross

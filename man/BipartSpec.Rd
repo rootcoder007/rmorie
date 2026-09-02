@@ -5,7 +5,7 @@
 \alias{BipartSpec}
 \title{\\' Decide bipartiteness, with the odd power-traces as evidence}
 \usage{
-BipartSpec(A)
+BipartSpec(A) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{nrow}.}

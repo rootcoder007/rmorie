@@ -5,7 +5,7 @@
 \alias{morie_deepar_sample}
 \title{Ancestral sampling: feed each draw back in}
 \usage{
-morie_deepar_sample(fit, z_history, horizon, n_samples = 200L, seed = 0L)
+morie_deepar_sample(fit, z_history, horizon, n_samples = 200L, seed = 0L) 
 }
 \arguments{
 \item{fit}{A fit object from \code{morie_deepar_fit}.}

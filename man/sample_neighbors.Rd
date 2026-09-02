@@ -5,7 +5,7 @@
 \alias{sample_neighbors}
 \title{Sample a fixed number of neighbours with replacement}
 \usage{
-sample_neighbors(adj, v, size, rng = NULL)
+sample_neighbors(adj, v, size, rng = NULL) 
 }
 \arguments{
 \item{adj}{Adjacency list keyed by 0-based node id (character keys).}

@@ -5,7 +5,8 @@
 \alias{ks_confidence_set}
 \title{ks_confidence_set}
 \usage{
-ks_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level = 0.95, n_levels = 2L, reps = 100L, seed = 0L)
+ks_confidence_set(moment_fn, theta_grid, X, form = "sum", n_equality = 0L, level = 0.95, 
+    n_levels = 2L, reps = 100L, seed = 0L) 
 }
 \arguments{
 \item{moment_fn}{Accepted by the signature and not used anywhere in the body.}

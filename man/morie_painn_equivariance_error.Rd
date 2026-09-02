@@ -5,7 +5,7 @@
 \alias{morie_painn_equivariance_error}
 \title{morie_painn_equivariance_error}
 \usage{
-morie_painn_equivariance_error(model, s, v, R, Q, tol = 1e-09)
+morie_painn_equivariance_error(model, s, v, R, Q, tol = 1e-09) 
 }
 \arguments{
 \item{model}{Accepted by the signature and not used anywhere in the body.}

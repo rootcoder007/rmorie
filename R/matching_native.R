@@ -3,7 +3,7 @@
 # Native matching engine (feat/native-specializations, module 1).
 # Greedy nearest-neighbour matching on the logit propensity score
 # (Rosenbaum & Rubin 1985; caliper per Cochran & Rubin 1973), with the
-# propensity model fit by base stats::glm — no MatchIt at runtime.
+# propensity model fit by base stats::glm -- no MatchIt at runtime.
 #
 # Greedy PS matching is a ONE-DIMENSIONAL nearest-neighbour problem, so
 # the engine is a sorted logit vector + findInterval() binary search +

@@ -5,7 +5,7 @@
 \alias{owl_weights}
 \title{OWL weights R_i/pi_i, with the additive constant}
 \usage{
-owl_weights(R, A, H, propensity = NULL, shift = NULL)
+owl_weights(R, A, H, propensity = NULL, shift = NULL) 
 }
 \arguments{
 \item{R}{Numeric vector of outcomes.}

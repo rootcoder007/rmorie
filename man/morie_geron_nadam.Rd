@@ -30,6 +30,8 @@ morie_geron_nadam(
 \item{eps}{Non-negative floor.}
 
 \item{theta}{Parameters; default zeros.}
+
+
 }
 \value{
 List with \code{theta}, \code{theta_next}, \code{step}, \code{m}, \code{v}, \code{m_hat},

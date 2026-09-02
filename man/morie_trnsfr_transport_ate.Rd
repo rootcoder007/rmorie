@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_trnsfr_transport_ate}
 \alias{morie_trnsfr_transport_ate}
+\alias{morie_trnsfr}
 \title{morie_trnsfr_transport_ate}
 \usage{
-morie_trnsfr_transport_ate(Y, W, X, S, method = "dr", e = NULL, trim = 0.001, ridge = 1e-06)
+morie_trnsfr_transport_ate(Y, W, X, S, method = "dr", e = NULL, trim = 0.001, ridge = 1e-06) 
+
+morie_trnsfr(Y, W, X, S, method = "dr", e = NULL, trim = 0.001, ridge = 1e-06) 
 }
 \arguments{
 \item{Y}{Passed to \code{.s03vec}.}

@@ -5,7 +5,7 @@
 \alias{morie_hypercube_instruments}
 \title{morie_hypercube_instruments}
 \usage{
-morie_hypercube_instruments(X, n_levels = 3L)
+morie_hypercube_instruments(X, n_levels = 3L) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

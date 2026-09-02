@@ -5,10 +5,14 @@
 \alias{Wstnbrg}
 \title{Westenberg interquartile scale test -- eq. (9.9.1), p. 329}
 \usage{
-Wstnbrg(x, y)
+Wstnbrg(x, y) 
 }
 \description{
 Westenberg interquartile scale test -- eq. (9.9.1), p. 329
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{q1}, \code{q3}, \code{mean}, \code{var}, \code{m}, \code{n}.

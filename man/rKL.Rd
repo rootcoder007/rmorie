@@ -5,7 +5,7 @@
 \alias{rKL}
 \title{Normalised discounted KL divergence}
 \usage{
-rKL(protected, step = 10, normalize = TRUE)
+rKL(protected, step = 10, normalize = TRUE) 
 }
 \arguments{
 \item{protected}{Passed to \code{.measure}.}

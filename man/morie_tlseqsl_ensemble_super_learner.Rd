@@ -5,7 +5,7 @@
 \alias{morie_tlseqsl_ensemble_super_learner}
 \title{morie_tlseqsl_ensemble_super_learner}
 \usage{
-morie_tlseqsl_ensemble_super_learner(X, y, library, V = 10, loss = "squared", seed = 0, grid = 21)
+morie_tlseqsl_ensemble_super_learner(X, y, library, V = 10, loss = "squared", seed = 0, grid = 21) 
 }
 \arguments{
 \item{X}{Passed to \code{morie_tlseqsl_discrete_super_learner}.}

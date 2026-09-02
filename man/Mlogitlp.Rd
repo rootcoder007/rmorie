@@ -5,10 +5,15 @@
 \alias{Mlogitlp}
 \title{Contextual multilevel logit predictor (Lawson eq. 6.8)}
 \usage{
-Mlogitlp(f, g, R)
+Mlogitlp(f, g, R) 
 }
 \description{
 Contextual multilevel logit predictor (Lawson eq. 6.8)
+}
+\arguments{
+\item{f}{Argument \code{f}; see Usage.}
+\item{g}{Argument \code{g}; see Usage.}
+\item{R}{Argument \code{R}; see Usage.}
 }
 \value{
 A list with \code{eta}, \code{p}, \code{n}.

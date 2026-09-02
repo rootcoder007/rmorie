@@ -15,6 +15,7 @@ vector of one value per bin.}
 \item{bins}{Number of equal-width bins.}
 
 \item{lo, hi}{Optional binning range; the chain range by default.}
+
 }
 \value{
 List with \code{estimate}, \code{kl}, \code{p}, \code{q},

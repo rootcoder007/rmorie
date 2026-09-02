@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c05_ruhela_aggregate}
 \alias{morie_otis_analyze_c05_ruhela_aggregate}
 \alias{morie_otis_analyze_c05_mrm_aggregate}
-\title{c05 aggregate Ruhela: non-majority religion -> RC.}
+\title{c05 aggregate Ruhela: non-majority religion -> RC}
 \usage{
 morie_otis_analyze_c05_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c05_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c05 aggregate Ruhela: non-majority religion -> RC.
+c05 aggregate Ruhela: non-majority religion -> RC
 }
 \examples{
 \donttest{

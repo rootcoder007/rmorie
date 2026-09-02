@@ -8,11 +8,15 @@
 \alias{morie_bayes_gblup}
 \title{Genomic prediction models}
 \usage{
-morie_grm(M)
-morie_gblup(X, y, G, sigma2_g, sigma2_e = 1)
-morie_gblup_model(y, Z_L, G, sigma2_g, sigma2_e = 1)
-morie_snp_blup(X, y, M, sigma2_m, sigma2_e = 1)
-morie_bayes_gblup(y, G, n_iter = 2000L, burn_in = 500L, seed = 42L, ...)
+morie_grm(M) 
+
+morie_gblup(X, y, G, sigma2_g, sigma2_e = 1) 
+
+morie_gblup_model(y, Z_L, G, sigma2_g, sigma2_e = 1) 
+
+morie_snp_blup(X, y, M, sigma2_m, sigma2_e = 1) 
+
+morie_bayes_gblup(y, G, n_iter = 2000L, burn_in = 500L, seed = 42L, ...) 
 }
 \arguments{
 \item{y}{numeric response vector}

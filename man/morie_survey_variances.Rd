@@ -32,13 +32,44 @@ morie_survey_variances(
 \arguments{
 \item{sigma2, n, rho_bar, s2, n_population}{Chapter 26 pieces.}
 
-\item{xbar_d, beta_hat, v_d}{Small-area pieces. @param times Trend.}
 
-\item{x, c_mat, zhat}{GLS pieces. @param beta0,beta1,x_val Model 16.1.}
+\item{times}{See Usage.}
 
-\item{x_design, z_obs}{OLS pieces. @param sigma2_eps,x0 Prediction var.}
+
+\item{beta0}{See Usage.}
+
+\item{beta1}{See Usage.}
+
+\item{x_val}{See Usage.}
+
+
+\item{sigma2_eps}{See Usage.}
+
+\item{x0}{See Usage.}
 
 \item{c_hat, c_true, u}{Classification pieces.}
+
+
+
+
+
+\item{xbar_d}{Argument \code{xbar_d}; see Usage.}
+
+\item{beta_hat}{Argument \code{beta_hat}; see Usage.}
+
+\item{v_d}{Argument \code{v_d}; see Usage.}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+\item{c_mat}{Argument \code{c_mat}; see Usage.}
+
+\item{zhat}{Argument \code{zhat}; see Usage.}
+
+\item{x_design}{Argument \code{x_design}; see Usage.}
+
+\item{z_obs}{Argument \code{z_obs}; see Usage.}
+
+
 }
 \value{
 List of the requested quantities.

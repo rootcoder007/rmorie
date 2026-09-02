@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean absolute error of a set of predictions.
+#' Mean absolute error of a set of predictions
 #'
 #' Formula: MAE = (1/T) sum_i |y_i - yhat_i|
 #'

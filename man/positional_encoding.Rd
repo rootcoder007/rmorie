@@ -5,7 +5,7 @@
 \alias{positional_encoding}
 \title{positional_encoding}
 \usage{
-positional_encoding(p, L = 10, include_input = TRUE)
+positional_encoding(p, L = 10, include_input = TRUE) 
 }
 \arguments{
 \item{p}{Passed to \code{.nrfrad_vec}.}

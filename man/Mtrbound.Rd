@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdmnto.R
 \name{Mtrbound}
 \alias{Mtrbound}
-\title{Monotone treatment response bounds.}
+\title{Monotone treatment response bounds}
 \usage{
 Mtrbound(y, z, d, ymin, ymax)
 }
@@ -14,6 +14,7 @@ Mtrbound(y, z, d, ymin, ymax)
 \item{d}{Treatment level whose mean counterfactual is bounded.}
 
 \item{ymin, ymax}{A priori support of the outcome.}
+
 }
 \value{
 List with lower, upper, width, nfixed, n, d.

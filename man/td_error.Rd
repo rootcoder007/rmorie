@@ -5,7 +5,7 @@
 \alias{td_error}
 \title{Temporal-difference residual}
 \usage{
-td_error(q_sa, target)
+td_error(q_sa, target) 
 }
 \arguments{
 \item{q_sa}{Scalar current Q(s, a).}

@@ -5,7 +5,7 @@
 \alias{cascade}
 \title{cascade}
 \usage{
-cascade(primary, secondary, tol = 1e-09)
+cascade(primary, secondary, tol = 1e-09) 
 }
 \arguments{
 \item{primary}{Coerced to list by the body, with \code{as.list}.}

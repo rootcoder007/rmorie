@@ -5,7 +5,7 @@
 \alias{morie_ncfRS_log_loss}
 \title{morie_ncfRS_log_loss}
 \usage{
-morie_ncfRS_log_loss(y, y_hat)
+morie_ncfRS_log_loss(y, y_hat) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

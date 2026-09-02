@@ -5,7 +5,7 @@
 \alias{morie_matching_cem_strata_cpp}
 \title{morie_matching_cem_strata_cpp}
 \usage{
-morie_matching_cem_strata_cpp(X_binned)
+morie_matching_cem_strata_cpp(X_binned) 
 }
 \arguments{
 \item{X_binned}{Passed to \code{.Call}.}

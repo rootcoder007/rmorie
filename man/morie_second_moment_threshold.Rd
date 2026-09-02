@@ -8,6 +8,7 @@ morie_second_moment_threshold(expectation, variance)
 }
 \arguments{
 \item{expectation, variance}{Moments of the count.}
+
 }
 \value{
 A list with \code{p_zero_bound}, \code{variance_ratio}, \code{positive_whp}.

@@ -5,7 +5,7 @@
 \alias{morie_tlnetlg_community_estimand}
 \title{morie_tlnetlg_community_estimand}
 \usage{
-morie_tlnetlg_community_estimand(Q_fn, friends, W, policy)
+morie_tlnetlg_community_estimand(Q_fn, friends, W, policy) 
 }
 \arguments{
 \item{Q_fn}{Accepted by the signature and not used anywhere in the body.}

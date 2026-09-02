@@ -5,7 +5,7 @@
 \alias{Ppois}
 \title{P(X <= k) = Q(k+1, lambda), the UPPER regularized incomplete gamma}
 \usage{
-Ppois(q, lambda, lower_tail = TRUE)
+Ppois(q, lambda, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

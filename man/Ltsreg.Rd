@@ -28,9 +28,9 @@ approaches", p. 876, equation (4.1), read from a rendered page image because
 the PDF is a scan with no text layer:
 }
 \details{
-minimize_theta sum_{i=1}^{h} (r^2)_{i:n},
+minimize_theta sum_\{i=1\}^\{h\} (r^2)_\{i:n\},
 
-"where (r^2)\emph{{1:n} <= ... <= (r^2)}{n:n} are the ordered squared residuals.
+"where (r^2)\emph{\{1:n\} <= ... <= (r^2)}\{n:n\} are the ordered squared residuals.
 If h = [n/2] + 1 is chosen, the breakdown point of Theorem 1 is obtained,
 and for h = [n/2] + [(p+1)/2], the result of Remark 1 holds.  In general, h
 may depend on some trimming proportion alpha, for instance by means of

@@ -5,7 +5,7 @@
 \alias{HannPh}
 \title{Eq (3.107): exactly -omega, slope -1, a constant group delay of one}
 \usage{
-HannPh(omega)
+HannPh(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

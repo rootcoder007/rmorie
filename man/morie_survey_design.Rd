@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_design}
 \alias{morie_survey_design}
-\title{Construct a survey design object.}
+\title{Construct a survey design object}
 \usage{
 morie_survey_design(
   data,

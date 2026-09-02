@@ -69,7 +69,7 @@
   M[, n + 1L]
 }
 
-#' Unknowns x_0..x_{k-1}, v
+#' Unknowns x_0..x_\{k-1\}, v
 #'
 #' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}.
 #' See the file header for the source the module follows.

@@ -5,7 +5,7 @@
 \alias{EnsMean}
 \title{Eq (3.15): mu_x(t1) = (1/M) sum_k x_k(t1)}
 \usage{
-EnsMean(observations, index = NULL)
+EnsMean(observations, index = NULL) 
 }
 \arguments{
 \item{observations}{Passed to \code{.morie_rg_aslist}.}

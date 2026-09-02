@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sample (empirical) semivariogram.
+#' Sample (empirical) semivariogram
 #'
 #' gammahat(h_j) = (1/(2 N_h)) sum_i (Z(s_i) - Z(s_i + h))^2 over the
 #' pairs whose separation falls in distance class j.

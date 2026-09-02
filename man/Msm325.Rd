@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm325.R
 \name{Msm325}
 \alias{Msm325}
-\title{Zero-truncated Poisson splitting criterion.}
+\title{Zero-truncated Poisson splitting criterion}
 \usage{
 Msm325(y_positive, mu = NULL, x = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{morie_tlnetlg_exposure_summary}
 \title{morie_tlnetlg_exposure_summary}
 \usage{
-morie_tlnetlg_exposure_summary(A, friends, kind = "fraction")
+morie_tlnetlg_exposure_summary(A, friends, kind = "fraction") 
 }
 \arguments{
 \item{A}{Passed to \code{.tlnetlg_vec}.}

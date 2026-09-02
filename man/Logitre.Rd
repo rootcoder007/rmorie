@@ -5,10 +5,18 @@
 \alias{Logitre}
 \title{Binary spatial regression with random effect (Lawson eq. 17.1)}
 \usage{
-Logitre(gamma0, gamma1, d, gamma2, x, R)
+Logitre(gamma0, gamma1, d, gamma2, x, R) 
 }
 \description{
 Binary spatial regression with random effect (Lawson eq. 17.1)
+}
+\arguments{
+\item{gamma0}{Argument \code{gamma0}; see Usage.}
+\item{gamma1}{Argument \code{gamma1}; see Usage.}
+\item{d}{Argument \code{d}; see Usage.}
+\item{gamma2}{Argument \code{gamma2}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
+\item{R}{Argument \code{R}; see Usage.}
 }
 \value{
 A list with \code{eta}, \code{p}, \code{n}.

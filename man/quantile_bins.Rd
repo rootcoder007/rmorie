@@ -5,7 +5,7 @@
 \alias{quantile_bins}
 \title{quantile_bins}
 \usage{
-quantile_bins(samples, n_bins = 4096L)
+quantile_bins(samples, n_bins = 4096L) 
 }
 \arguments{
 \item{samples}{Passed to \code{.chronos_vec}.}

@@ -5,7 +5,7 @@
 \alias{MfInput}
 \title{Eq (4.33): X(omega) = integral x(t) exp(-j omega t) dt.  An integral,}
 \usage{
-MfInput(x, omega, dt = 1)
+MfInput(x, omega, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

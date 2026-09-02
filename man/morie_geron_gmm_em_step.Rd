@@ -12,6 +12,8 @@ morie_geron_gmm_em_step(X, pi, means, covars, reg = 1e-06)
 \item{pi, means, covars}{Current mixture parameters.}
 
 \item{reg}{Non-negative ridge added to each new covariance diagonal.}
+
+
 }
 \value{
 List with \code{responsibilities}, \code{pi_new}, \code{means_new},

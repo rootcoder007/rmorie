@@ -5,7 +5,7 @@
 \alias{auto_order}
 \title{auto_order}
 \usage{
-auto_order(y, X = NULL, d = 0, D = 0, s = 1, method = "css", max_steps = 20)
+auto_order(y, X = NULL, d = 0, D = 0, s = 1, method = "css", max_steps = 20) 
 }
 \arguments{
 \item{y}{Passed to \code{.try_fit}.}

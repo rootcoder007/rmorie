@@ -19,7 +19,7 @@ Htpfn(
 \arguments{
 \item{y}{length-n vector of scalar responses, one per line.}
 
-\item{markers}{n-by-p genotype matrix coded {0, 1, 2}; G is VanRaden method 1
+\item{markers}{n-by-p genotype matrix coded \{0, 1, 2\}; G is VanRaden method 1
 of it.}
 
 \item{W_functional}{n-by-m matrix of high-throughput phenotyping curves; row
@@ -37,6 +37,7 @@ observed t, which is the default, b - a.}
 
 \item{ridge}{added to the diagonal of G before inversion; G from a finite
 marker panel is singular whenever two lines share a haplotype.}
+
 }
 \value{
 list: estimate, mu, beta_func, beta, g_hat, coefs, X, Q, fitted,
@@ -59,11 +60,11 @@ FUNCTIONAL PART -- Chapter 14, Section 14.1, volume [Pages 579-631],
 pp.579-583, all equations read from rendered page images:
 
 (14.1) Y = mu + int_0^T x(t) beta(t) dt + E
-(14.2) beta(t) = sum_{l=1}^{L1} beta_l phi_l(t)
+(14.2) beta(t) = sum_\{l=1\}^\{L1\} beta_l phi_l(t)
 (14.3) Y = mu + sum_l beta_l int x(t) phi_l(t) dt = Xstar beta + E
 (14.4) betahat = (Xstar' Xstar)^-1 Xstar' y
 (14.5) sigma2hat = (1/n) (y - Xstar betahat)' (y - Xstar betahat)
-(14.6) x_i(t) = sum_{o=1}^{L2} c_io psi_o(t)
+(14.6) x_i(t) = sum_\{o=1\}^\{L2\} c_io psi_o(t)
 (14.7) chat_i = (Psi' Psi)^-1 Psi' x_i(t)            <- p.581 and p.583
 (14.8) Psi is m-by-L2 with Psi[j, o] = psi_o(t_j)
 (14.9) Xstar = [1n X], X = Xtilde Psi (Psi'Psi)^-1 Q',
@@ -104,8 +105,8 @@ by construction.  Figure 14.1 on p.585 plots the first five elements for
 P = 4 on (0, 8) and shows FIVE DISTINCT curves, with phi_1 flat at
 0.5 = 1/sqrt(4), phi_2 zero at t = 0 (a sine) and phi_3 at 0.7071 = sqrt(2/4)
 at t = 0 (a cosine).  The alternating reading is the correct one and is what
-is implemented: phi_1 = 1/sqrt(P), phi_{2k} = sqrt(2/P) sin(k w t),
-phi_{2k+1} = sqrt(2/P) cos(k w t), w = 2 pi / P.
+is implemented: phi_1 = 1/sqrt(P), phi_\{2k\} = sqrt(2/P) sin(k w t),
+phi_\{2k+1\} = sqrt(2/P) cos(k w t), w = 2 pi / P.
 
 Determinism: nothing here is stochastic.  There is no sampling, no fold
 assignment and no initialisation; the LOOCV of p.583 is exhaustive over the m

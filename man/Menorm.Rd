@@ -5,10 +5,16 @@
 \alias{Menorm}
 \title{Measurement-error normal outcome model (Lawson eq. 16.1)}
 \usage{
-Menorm(beta0, beta1, x_true, tau)
+Menorm(beta0, beta1, x_true, tau) 
 }
 \description{
 Measurement-error normal outcome model (Lawson eq. 16.1)
+}
+\arguments{
+\item{beta0}{Argument \code{beta0}; see Usage.}
+\item{beta1}{Argument \code{beta1}; see Usage.}
+\item{x_true}{Argument \code{x_true}; see Usage.}
+\item{tau}{Argument \code{tau}; see Usage.}
 }
 \value{
 A list with \code{mu}, \code{var}, \code{sd}, \code{n}.

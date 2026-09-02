@@ -5,7 +5,7 @@
 \alias{IcaFix}
 \title{Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only}
 \usage{
-IcaFix(X, ncomp = NULL, maxiter = 200, tol = 1e-08, seed = 1)
+IcaFix(X, ncomp = NULL, maxiter = 200, tol = 1e-08, seed = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

@@ -17,7 +17,7 @@
 Nothing; this branch always raises.
 }
 \description{
-basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79)
+basis \{1, sqrt(2) cos(pi k v)\}, for which the coefficients in (5.79)
 are literally the inner products beta_j = <g, psi_j> as the text
 notes.  "poly" is the monomial basis, which spans the same spaces but
 is not orthonormal.

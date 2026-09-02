@@ -5,10 +5,15 @@
 \alias{Signp}
 \title{Exact sign-test p-value -- eq. (5.4.3), p. 169}
 \usage{
-Signp(k, n, alternative = "two-sided")
+Signp(k, n, alternative = "two-sided") 
 }
 \description{
 Exact sign-test p-value -- eq. (5.4.3), p. 169
+}
+\arguments{
+\item{k}{Argument \code{k}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 A list with \code{p_value}, \code{p_lower}, \code{p_upper}, \code{statistic}, \code{n}, \code{alternative}.

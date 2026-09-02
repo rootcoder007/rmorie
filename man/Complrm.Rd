@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitlrm.R
 \name{Complrm}
 \alias{Complrm}
-\title{Mean of a compositional sample taken in log-ratio coordinates.}
+\title{Mean of a compositional sample taken in log-ratio coordinates}
 \usage{
 Complrm(X, total = 1)
 }

@@ -5,7 +5,7 @@
 \alias{morie_vqgdec_decode_indices}
 \title{Decode_indices: lookup. Exactly inverts quantisation for in-codebook}
 \usage{
-morie_vqgdec_decode_indices(indices, codebook)
+morie_vqgdec_decode_indices(indices, codebook) 
 }
 \arguments{
 \item{indices}{Coerced to integer by the body, with \code{as.integer}.}

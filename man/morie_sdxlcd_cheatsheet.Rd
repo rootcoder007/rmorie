@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_cheatsheet}
 \title{morie_sdxlcd_cheatsheet}
 \usage{
-morie_sdxlcd_cheatsheet()
+morie_sdxlcd_cheatsheet() 
 }
 \description{
 A step of the sdxlcd_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/olsnm.R
 \name{Olsnormeq}
 \alias{Olsnormeq}
-\title{Ordinary least squares through the normal equations.}
+\title{Ordinary least squares through the normal equations}
 \usage{
 Olsnormeq(X, y, add_intercept = TRUE)
 }

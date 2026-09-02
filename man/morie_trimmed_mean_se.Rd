@@ -14,9 +14,9 @@ morie_trimmed_mean_ci(x, tr = 0.2, alpha = 0.05, null_value = 0)
 
 \item{tr}{amount of trimming}
 
-\item{alpha}{significance level}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 
-\item{null_value}{value tested against}
+\item{null_value}{Argument \code{null_value}; see Usage.}
 }
 \value{
 \code{morie_trimmed_mean_se} a number; \code{morie_trimmed_mean_ci} a

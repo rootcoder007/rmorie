@@ -5,7 +5,7 @@
 \alias{morie_rmrl_cheatsheet}
 \title{morie_rmrl_cheatsheet}
 \usage{
-morie_rmrl_cheatsheet()
+morie_rmrl_cheatsheet() 
 }
 \description{
 A step of the rmrl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

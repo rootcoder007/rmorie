@@ -39,6 +39,10 @@ ratio.}
 
 \item{r}{Point-biserial r.
 @param se_r Its standard error.}
+
+
+
+\item{se_r}{Argument \code{se_r}; see Usage.}
 }
 \value{
 List of every conversion whose inputs were supplied.

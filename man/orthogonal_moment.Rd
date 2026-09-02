@@ -5,7 +5,7 @@
 \alias{orthogonal_moment}
 \title{Solve sum_i alpha_i T~(Y~ - theta T~) = 0. Refuses when the}
 \usage{
-orthogonal_moment(y_res, t_res, weights)
+orthogonal_moment(y_res, t_res, weights) 
 }
 \arguments{
 \item{y_res}{A vector; its length is taken.}

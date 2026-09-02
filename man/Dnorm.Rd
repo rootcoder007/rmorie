@@ -5,7 +5,7 @@
 \alias{Dnorm}
 \title{Dnorm}
 \usage{
-Dnorm(x, mean = 0, sd = 1, log = FALSE)
+Dnorm(x, mean = 0, sd = 1, log = FALSE) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

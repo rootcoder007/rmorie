@@ -5,7 +5,8 @@
 \alias{morie_sv_dl_build_sv_graph}
 \title{morie_sv_dl_build_sv_graph}
 \usage{
-morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), n_sd = 3, window = NULL)
+morie_sv_dl_build_sv_graph(pairs, median, sd, label, orientation = c("+", "-"), n_sd = 3, 
+    window = NULL) 
 }
 \arguments{
 \item{pairs}{Iterated over elementwise, with \code{lapply}.}

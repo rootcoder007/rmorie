@@ -14,7 +14,8 @@ morie_winsorized_correlation(x, y, tr = 0.2)
 
 \item{beta}{bending constant}
 
-\item{tr}{amount of Winsorizing}
+
+\item{tr}{Argument \code{tr}; see Usage.}
 }
 \value{
 list with \code{cor}, \code{statistic}, \code{p_value} and, for the

@@ -5,7 +5,7 @@
 \alias{Rnorm}
 \title{Inversion of the Philox uniform stream: draw k depends only on}
 \usage{
-Rnorm(n, mean = 0, sd = 1, seed = 0, stream = 0)
+Rnorm(n, mean = 0, sd = 1, seed = 0, stream = 0) 
 }
 \arguments{
 \item{n}{Passed to \code{.morie_random_uniform}.}

@@ -5,7 +5,7 @@
 \alias{morie_dsp_cross_correlation_cpp}
 \title{morie_dsp_cross_correlation_cpp}
 \usage{
-morie_dsp_cross_correlation_cpp(x, y, max_lag)
+morie_dsp_cross_correlation_cpp(x, y, max_lag) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

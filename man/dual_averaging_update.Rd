@@ -5,7 +5,7 @@
 \alias{dual_averaging_update}
 \title{Equation 6, one iteration of the Nesterov dual-averaging scheme}
 \usage{
-dual_averaging_update(t, h_bar, log_eps_bar, h_new, mu, gamma = 0.05, t0 = 10, kappa = 0.75)
+dual_averaging_update(t, h_bar, log_eps_bar, h_new, mu, gamma = 0.05, t0 = 10, kappa = 0.75) 
 }
 \arguments{
 \item{t}{Numeric; passed to \code{sqrt}.}

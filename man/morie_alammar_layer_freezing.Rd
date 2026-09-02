@@ -5,7 +5,7 @@
 \alias{morie_alammar_layer_freezing}
 \title{morie_alammar_layer_freezing}
 \usage{
-morie_alammar_layer_freezing(n_layers, n_stages = NULL)
+morie_alammar_layer_freezing(n_layers, n_stages = NULL) 
 }
 \arguments{
 \item{n_layers,n_stages}{Schedule sizes.}

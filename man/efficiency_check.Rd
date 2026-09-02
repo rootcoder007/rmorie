@@ -5,7 +5,7 @@
 \alias{efficiency_check}
 \title{efficiency_check}
 \usage{
-efficiency_check(err_Q, err_g, delta, n, donsker = TRUE)
+efficiency_check(err_Q, err_g, delta, n, donsker = TRUE) 
 }
 \arguments{
 \item{err_Q}{Passed to \code{remainder_bound}.}

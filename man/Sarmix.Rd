@@ -3,7 +3,7 @@
 \name{Sarmix}
 \alias{Sarmix}
 \alias{morie_spatial_ar_combined}
-\title{Combined spatial autoregressive lag + autoregressive error (SARAR).}
+\title{Combined spatial autoregressive lag + autoregressive error (SARAR)}
 \usage{
 Sarmix(y, X, W1, W2)
 

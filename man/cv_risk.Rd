@@ -5,7 +5,7 @@
 \alias{cv_risk}
 \title{Cross-validated risk per column of Z ---------------------------}
 \usage{
-cv_risk(y, Z, loss = "l2")
+cv_risk(y, Z, loss = "l2") 
 }
 \arguments{
 \item{y}{Numeric; combined arithmetically in the body.}

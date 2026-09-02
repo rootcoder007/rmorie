@@ -5,7 +5,7 @@
 \alias{morie_saigeg}
 \title{morie_saigeg}
 \usage{
-morie_saigeg(y, G, X = NULL, mu = NULL, ratio = 1, two_sided = TRUE)
+morie_saigeg(y, G, X = NULL, mu = NULL, ratio = 1, two_sided = TRUE) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

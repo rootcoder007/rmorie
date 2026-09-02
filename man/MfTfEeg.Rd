@@ -5,7 +5,7 @@
 \alias{MfTfEeg}
 \title{Eq (4.55), the same expression as eq (4.48) restated in Section}
 \usage{
-MfTfEeg(X, freqs, t0, gain = 1)
+MfTfEeg(X, freqs, t0, gain = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{MfTf}.}

@@ -5,7 +5,7 @@
 \alias{CDemod}
 \title{Complex demodulation, Sec 5.5.1 eqs (5.16)-(5.19)}
 \usage{
-CDemod(x, fs = 1, f0 = NULL, bandwidth = NULL)
+CDemod(x, fs = 1, f0 = NULL, bandwidth = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

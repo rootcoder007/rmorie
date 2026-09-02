@@ -16,6 +16,7 @@ morie_geron_actor_critic_advantage(V, s, s_next, r, gamma, done = NULL)
 \item{gamma}{Discount in [0, 1].}
 
 \item{done}{Optional terminal flags.}
+
 }
 \value{
 List with \code{advantage}, \code{td_target}, \code{value_s}, \code{value_s_next},

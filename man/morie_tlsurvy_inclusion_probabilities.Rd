@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_inclusion_probabilities}
 \title{Inclusion_probabilities: Choose pi_i, summing to n}
 \usage{
-morie_tlsurvy_inclusion_probabilities(V, n, design = "adaptive", influence = NULL, floor = 0.01)
+morie_tlsurvy_inclusion_probabilities(V, n, design = "adaptive", influence = NULL, floor = 0.01) 
 }
 \arguments{
 \item{V}{Coerced to numeric by the body, with \code{as.numeric}.}

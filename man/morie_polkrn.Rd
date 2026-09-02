@@ -5,7 +5,9 @@
 \alias{morie_polkrn}
 \title{morie_polkrn}
 \usage{
-morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cumulative", n_centres = 5, width = NULL, kind = "binary", stabilize = TRUE, trim = NULL, grid = NULL)
+morie_polkrn(y, A_history, H_history, degree = 2, basis = "both", summary = "cumulative", 
+    n_centres = 5, width = NULL, kind = "binary", stabilize = TRUE, trim = NULL, 
+    grid = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.polkrn_vec}.}

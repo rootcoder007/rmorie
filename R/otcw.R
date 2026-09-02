@@ -11,7 +11,7 @@
 #'
 #' @param X,Y Point sets, kept for interface symmetry.
 #' @param Cost Cost matrix with \code{Cost\[i, j\] = c(x_i, y_j)}.
-#' @param perm Zero-based assignment: \code{y_i} matched to \code{x_perm[i]}.
+#' @param perm Zero-based assignment: \code{y_i} matched to \code{x_perm\[i\]}.
 #' @return List with \code{is_cm}, \code{slack}, \code{estimate}, \code{n}.
 #' @references Villani, C. (2003). AMS GSM 58, theorem 2.12.
 #' @export

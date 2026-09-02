@@ -5,7 +5,7 @@
 \alias{morie_ukfF}
 \title{morie_ukfF}
 \usage{
-morie_ukfF(f, h, Q, R, x0, P0, measurements, kappa = NULL)
+morie_ukfF(f, h, Q, R, x0, P0, measurements, kappa = NULL) 
 }
 \arguments{
 \item{f}{Passed to \code{.ukfF_ut}.}

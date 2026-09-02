@@ -3,7 +3,7 @@
 \name{RipG}
 \alias{RipG}
 \alias{morie_ripley_g_function}
-\title{G function -- nearest-neighbour event-to-event distance distribution.}
+\title{G function -- nearest-neighbour event-to-event distance distribution}
 \usage{
 RipG(points, window, r)
 

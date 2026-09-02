@@ -5,7 +5,7 @@
 \alias{morie_tcmech_sigma}
 \title{The noise scale a rho budget buys, from Proposition 1.6}
 \usage{
-morie_tcmech_sigma(sensitivity, rho)
+morie_tcmech_sigma(sensitivity, rho) 
 }
 \arguments{
 \item{sensitivity}{The query sensitivity.}

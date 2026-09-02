@@ -5,7 +5,7 @@
 \alias{gcd_span}
 \title{gcd_span}
 \usage{
-gcd_span(scores)
+gcd_span(scores) 
 }
 \arguments{
 \item{scores}{See Usage.}

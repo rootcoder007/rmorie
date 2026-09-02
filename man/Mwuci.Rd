@@ -5,10 +5,15 @@
 \alias{Mwuci}
 \title{Mann-Whitney shift CI -- Sec. 6.6.2, p. 267}
 \usage{
-Mwuci(x, y, k)
+Mwuci(x, y, k) 
 }
 \description{
 Mann-Whitney shift CI -- Sec. 6.6.2, p. 267
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{estimate}, \code{k}, \code{ndiff}, \code{m}, \code{n}.

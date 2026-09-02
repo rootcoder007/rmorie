@@ -5,7 +5,7 @@
 \alias{morie_rnacov_cheatsheet}
 \title{One-line summary of the rnacov module}
 \usage{
-morie_rnacov_cheatsheet()
+morie_rnacov_cheatsheet() 
 }
 \description{
 One-line summary of the rnacov module

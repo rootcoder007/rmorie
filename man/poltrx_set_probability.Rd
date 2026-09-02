@@ -5,7 +5,7 @@
 \alias{poltrx_set_probability}
 \title{Set probability in a finite Polya tree}
 \usage{
-poltrx_set_probability(epsilon, tree)
+poltrx_set_probability(epsilon, tree) 
 }
 \arguments{
 \item{epsilon}{Binary string, an integer vector of 0s and 1s.}

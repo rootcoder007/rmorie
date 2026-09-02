@@ -5,7 +5,7 @@
 \alias{morie_timesfm_horizon_plan}
 \title{morie_timesfm_horizon_plan}
 \usage{
-morie_timesfm_horizon_plan(horizon, input_patch_len, output_patch_len)
+morie_timesfm_horizon_plan(horizon, input_patch_len, output_patch_len) 
 }
 \arguments{
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}

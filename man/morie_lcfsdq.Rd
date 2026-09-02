@@ -5,7 +5,8 @@
 \alias{morie_lcfsdq}
 \title{Nearest-neighbour summary of a pattern and a local query on x}
 \usage{
-morie_lcfsdq(x, coords, k = 1L, metric = "euclidean", edge = "none", sd_multiplier = 1, area = NULL, perimeter = NULL, grid = NULL)
+morie_lcfsdq(x, coords, k = 1L, metric = "euclidean", edge = "none", sd_multiplier = 1, 
+    area = NULL, perimeter = NULL, grid = NULL) 
 }
 \arguments{
 \item{x}{A value attached to each point. Pass a constant if only the   pattern is of interest.}

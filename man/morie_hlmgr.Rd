@@ -20,7 +20,7 @@ A list with elements \code{tau}, \code{gamma},
 T_hat = S - V_bar (sample covariance of per-group OLS coefficients
 minus average sampling covariance), clipped to positive
 semidefinite; per-group multivariate reliability
-Lambda_j = T (T + V_j)^{-1} and empirical Bayes composites
+Lambda_j = T (T + V_j)^\{-1\} and empirical Bayes composites
 beta*_j = Lambda_j beta_hat_j + (I - Lambda_j) gamma_hat.
 }
 \examples{

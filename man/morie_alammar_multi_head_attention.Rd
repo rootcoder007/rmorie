@@ -5,7 +5,7 @@
 \alias{morie_alammar_multi_head_attention}
 \title{Multi-head attention (Vaswani et al. 2017)}
 \usage{
-morie_alammar_multi_head_attention(Q, K, V, Wq, Wk, Wv, Wo, heads)
+morie_alammar_multi_head_attention(Q, K, V, Wq, Wk, Wv, Wo, heads) 
 }
 \arguments{
 \item{Q,K,V}{Matrices.}

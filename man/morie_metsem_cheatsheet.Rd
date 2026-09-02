@@ -5,7 +5,7 @@
 \alias{morie_metsem_cheatsheet}
 \title{One-line summary of the metsem module}
 \usage{
-morie_metsem_cheatsheet()
+morie_metsem_cheatsheet() 
 }
 \description{
 One-line summary of the metsem module

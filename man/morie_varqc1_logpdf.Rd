@@ -5,7 +5,7 @@
 \alias{morie_varqc1_logpdf}
 \title{log sum_k w_k N(x; mu_k, L_k L_k'), from the Cholesky factors}
 \usage{
-morie_varqc1_logpdf(x, weights, means, chols)
+morie_varqc1_logpdf(x, weights, means, chols) 
 }
 \arguments{
 \item{x}{The point.}

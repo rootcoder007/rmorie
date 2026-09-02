@@ -5,7 +5,8 @@
 \alias{memb}
 \title{memb}
 \usage{
-memb(target_predict, shadow_data, eval_in, eval_out, train_fn = NULL, attack_train_fn = NULL, n_shadow = NULL, sort_features = FALSE, threshold = 0.5)
+memb(target_predict, shadow_data, eval_in, eval_out, train_fn = NULL, 
+    attack_train_fn = NULL, n_shadow = NULL, sort_features = FALSE, threshold = 0.5) 
 }
 \arguments{
 \item{target_predict}{Accepted by the signature and not used anywhere in the body.}

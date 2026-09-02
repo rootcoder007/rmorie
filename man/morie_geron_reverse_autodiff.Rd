@@ -5,7 +5,7 @@
 \alias{morie_geron_reverse_autodiff}
 \title{Reverse-mode automatic differentiation, delegated to morie_geron_autograd (Geron App A, hmrad)}
 \usage{
-morie_geron_reverse_autodiff(f, x)
+morie_geron_reverse_autodiff(f, x) 
 }
 \arguments{
 \item{f}{Function `f(vars) -> tape node` (built from the supplied leaves).}

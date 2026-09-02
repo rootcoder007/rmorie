@@ -5,7 +5,7 @@
 \alias{morie_lcwphr_latent_class_weighted}
 \title{morie_lcwphr_latent_class_weighted}
 \usage{
-morie_lcwphr_latent_class_weighted(y, A, H, K, trim = 0, stabilize = TRUE, max_iter = 500L, tol = 1e-11)
+morie_lcwphr_latent_class_weighted(y, A, H, K, trim = 0, stabilize = TRUE, max_iter = 500L, tol = 1e-11) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

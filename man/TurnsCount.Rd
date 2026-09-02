@@ -5,7 +5,7 @@
 \alias{TurnsCount}
 \title{Section 5.6.3, Willison: a turn is a change of slope, counted only}
 \usage{
-TurnsCount(x, threshold = 100, window = NULL)
+TurnsCount(x, threshold = 100, window = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

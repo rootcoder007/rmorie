@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_b05_ruhela_aggregate}
 \alias{morie_otis_analyze_b05_ruhela_aggregate}
-\title{b05 aggregate Ruhela: schema-no-demographic guard.}
+\title{b05 aggregate Ruhela: schema-no-demographic guard}
 \usage{
 morie_otis_analyze_b05_ruhela_aggregate(data, out_dir = NULL)
 }

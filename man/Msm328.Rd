@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm328.R
 \name{Msm328}
 \alias{Msm328}
-\title{eq. (15.3) p.652 (re-export).}
+\title{eq. (15.3) p.652 (re-export)}
 \usage{
 Msm328(...)
 }

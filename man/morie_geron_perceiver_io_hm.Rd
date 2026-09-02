@@ -5,7 +5,7 @@
 \alias{morie_geron_perceiver_io_hm}
 \title{Perceiver IO: adds a cross-attention output decoder (Geron Ch 16, hmprio)}
 \usage{
-morie_geron_perceiver_io_hm(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL)
+morie_geron_perceiver_io_hm(x, latents, queries, n_iter = 2, W_q = NULL, W_k = NULL, W_v = NULL) 
 }
 \arguments{
 \item{x,latents,queries}{Input, latents and output queries.}

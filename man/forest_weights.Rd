@@ -5,7 +5,7 @@
 \alias{forest_weights}
 \title{forest_weights}
 \usage{
-forest_weights(trees, X, x)
+forest_weights(trees, X, x) 
 }
 \arguments{
 \item{trees}{A vector; its length is taken.}

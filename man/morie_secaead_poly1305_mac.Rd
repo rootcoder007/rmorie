@@ -5,7 +5,7 @@
 \alias{morie_secaead_poly1305_mac}
 \title{The one-time authenticator over 2^130 - 5. key is 32 bytes: the}
 \usage{
-morie_secaead_poly1305_mac(message, key)
+morie_secaead_poly1305_mac(message, key) 
 }
 \arguments{
 \item{message}{Passed to \code{.secaead_as_bytes}.}

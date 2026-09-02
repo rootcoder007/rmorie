@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Draw compositions from a logistic-normal via the alr inverse.
+#' Draw compositions from a logistic-normal via the alr inverse
 #'
 #' Sampling is done in the unconstrained coordinates and mapped back;
 #' sampling the parts directly and renormalising gives a different

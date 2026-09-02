@@ -5,7 +5,7 @@
 \alias{alfQ2rot}
 \title{Non-unit quaternion (1, b, c, d) to a rotation matrix -- Algorithm 23}
 \usage{
-alfQ2rot(b, c, d)
+alfQ2rot(b, c, d) 
 }
 \arguments{
 \item{b}{Numeric; combined arithmetically in the body.}

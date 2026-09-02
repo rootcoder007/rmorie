@@ -3,9 +3,12 @@
 % the formals.
 \name{graphormer_attention}
 \alias{graphormer_attention}
+\alias{graphormer}
 \title{Full attention with the structural biases added to the logits}
 \usage{
-graphormer_attention(H, WQ, WK, WV, bias, edge_bias = NULL)
+graphormer_attention(H, WQ, WK, WV, bias, edge_bias = NULL) 
+
+graphormer(H, WQ, WK, WV, bias, edge_bias = NULL) 
 }
 \arguments{
 \item{H}{Node feature matrix (n x d).}

@@ -5,7 +5,7 @@
 \alias{morie_warpL_warp_loss}
 \title{morie_warpL_warp_loss}
 \usage{
-morie_warpL_warp_loss(score_positive, score_negative, estimated_rank, alphas, margin = 1)
+morie_warpL_warp_loss(score_positive, score_negative, estimated_rank, alphas, margin = 1) 
 }
 \arguments{
 \item{score_positive}{Passed to \code{.warpL_warp_loss}.}

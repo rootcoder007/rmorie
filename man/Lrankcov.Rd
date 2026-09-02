@@ -5,10 +5,16 @@
 \alias{Lrankcov}
 \title{Covariance of two linear rank statistics -- Theorem 7.3.3, p. 279}
 \usage{
-Lrankcov(a, b, m, n)
+Lrankcov(a, b, m, n) 
 }
 \description{
 Covariance of two linear rank statistics -- Theorem 7.3.3, p. 279
+}
+\arguments{
+\item{a}{Argument \code{a}; see Usage.}
+\item{b}{Argument \code{b}; see Usage.}
+\item{m}{Argument \code{m}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{cov}, \code{corr}, \code{var_a}, \code{var_b}, \code{N}, \code{m}, \code{n}.

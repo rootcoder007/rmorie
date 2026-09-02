@@ -5,7 +5,7 @@
 \alias{LisaI}
 \title{Eq (1.17), Sec. 1.3.3.  sum_i I(s_i) = w.. I is checked, not assumed:}
 \usage{
-LisaI(x, w)
+LisaI(x, w) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}

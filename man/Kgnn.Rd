@@ -26,7 +26,7 @@ A relation with no neighbours for a node contributes nothing rather
 than dividing by zero.
 }
 \details{
-Formula: h_i' = relu(sum_r sum_{j in N_i^r} W_r h_j / |N_i^r| + W_0 h_i).
+Formula: h_i' = relu(sum_r sum_\{j in N_i^r\} W_r h_j / |N_i^r| + W_0 h_i).
 }
 \examples{
 Kgnn(A_r = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, W_r = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -5,7 +5,8 @@
 \alias{phmmsr_search_pipeline}
 \title{phmmsr_search_pipeline}
 \usage{
-phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 0.7, full_score = NULL)
+phmmsr_search_pipeline(sequences, profile, msv_threshold = 0.02, mu = 10, lam = 0.7, 
+    full_score = NULL) 
 }
 \arguments{
 \item{sequences}{A vector; its length is taken and its elements indexed.}

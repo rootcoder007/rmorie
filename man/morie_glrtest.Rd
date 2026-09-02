@@ -20,6 +20,7 @@ are success probabilities), \code{"normal"} (means, known
 \code{sd}) or \code{"poisson"} (rates).}
 
 \item{sd}{Known standard deviation, \code{family = "normal"} only.}
+
 }
 \value{
 A list with the running \code{estimate}, terminal

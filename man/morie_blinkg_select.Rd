@@ -5,7 +5,7 @@
 \alias{morie_blinkg_select}
 \title{Choose how many of the ranked candidates to keep}
 \usage{
-morie_blinkg_select(y, geno, candidates, covars = NULL, criterion = "bic")
+morie_blinkg_select(y, geno, candidates, covars = NULL, criterion = "bic") 
 }
 \arguments{
 \item{y}{The phenotype.}

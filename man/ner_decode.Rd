@@ -5,7 +5,8 @@
 \alias{ner_decode}
 \title{ner_decode}
 \usage{
-ner_decode(emissions, types, decoder = "viterbi", transition_scores = NULL, gold = NULL)
+ner_decode(emissions, types, decoder = "viterbi", transition_scores = NULL, 
+    gold = NULL) 
 }
 \arguments{
 \item{emissions}{A matrix; passed to \code{as.matrix}.}

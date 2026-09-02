@@ -2,7 +2,7 @@
 % Please edit documentation in R/hittime.R
 \name{Hittime}
 \alias{Hittime}
-\title{Expected steps for a simple random walk to reach a target vertex.}
+\title{Expected steps for a simple random walk to reach a target vertex}
 \usage{
 Hittime(G, start = NULL, target = 0L)
 }

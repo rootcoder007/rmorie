@@ -5,7 +5,7 @@
 \alias{MeanSum}
 \title{Eq (3.13): mu_y = mu_x + mu_eta.  Linearity of expectation needs no}
 \usage{
-MeanSum(...)
+MeanSum(...) 
 }
 \arguments{
 \item{...}{Passed through.}

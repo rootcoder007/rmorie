@@ -5,7 +5,7 @@
 \alias{morie_bayreg2_student_t_regression}
 \title{morie_bayreg2_student_t_regression}
 \usage{
-morie_bayreg2_student_t_regression(X, y, nu = 4, max_iter = 200, tol = 1e-10, add_intercept = TRUE)
+morie_bayreg2_student_t_regression(X, y, nu = 4, max_iter = 200, tol = 1e-10, add_intercept = TRUE) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

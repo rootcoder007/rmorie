@@ -5,10 +5,14 @@
 \alias{Fftperiod}
 \title{Dominant periods from the amplitude spectrum (Wu et al. 2023, TimesNet)}
 \usage{
-Fftperiod(x, k = 1)
+Fftperiod(x, k = 1) 
 }
 \description{
 Dominant periods from the amplitude spectrum (Wu et al. 2023, TimesNet)
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
 }
 \value{
 A list with \code{frequency}, \code{period}, \code{amplitude}, \code{spectrum}, \code{n}.

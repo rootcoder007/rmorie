@@ -5,7 +5,7 @@
 \alias{ArFit}
 \title{Section 7.5: S(f) = G^2 / |A(exp(-j 2 pi f / fs))|^2, a smooth}
 \usage{
-ArFit(x, order, fs = 1, nfreq = 256)
+ArFit(x, order, fs = 1, nfreq = 256) 
 }
 \arguments{
 \item{x}{Passed to \code{Lpc}.}

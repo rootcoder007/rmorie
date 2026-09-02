@@ -5,7 +5,8 @@
 \alias{morie_svycox}
 \title{morie_svycox}
 \usage{
-morie_svycox(time, event, X, weights = NULL, strata = NULL, cluster = NULL, ...)
+morie_svycox(time, event, X, weights = NULL, strata = NULL, cluster = NULL, 
+    ...) 
 }
 \arguments{
 \item{time}{Passed to \code{.svycox_svycoxph}.}
@@ -27,7 +28,7 @@ The value of \code{.svycox_svycoxph}.
 Binder, D. A. (1992) "Fitting Cox\'s proportional hazards models from
 survey data", *Biometrika* 79(1), 139-147,
 doi:10.1093/biomet/79.1.139. The weighted estimating equation above,
-the interpretation of :math:`\hat\beta` as a finite-population census
+the interpretation of \eqn{\hat\beta} as a finite-population census
 parameter, and the sandwich variance with the design-based variance
 of the weighted score residuals in the middle.
 

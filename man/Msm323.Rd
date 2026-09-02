@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm323.R
 \name{Msm323}
 \alias{Msm323}
-\title{Nonparametric links of the zero-altered Poisson forest.}
+\title{Nonparametric links of the zero-altered Poisson forest}
 \usage{
 Msm323(mu_pred, theta_pred)
 }

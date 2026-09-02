@@ -75,13 +75,13 @@
 #'
 #' * "identification via multiple spells".  The section identifies from
 #'   a SINGLE spell: "Elbers and Ridder (1982) showed that model (6.68)
-#'   is identified if Ee^{-V} < infinity" (p. 223).  The word "spell"
+#'   is identified if Ee^\{-V\} < infinity" (p. 223).  The word "spell"
 #'   does not occur in the section.  Multiple-spell identification is a
 #'   different literature and is not used here.
-#' * "V arbitrary with E[V] = 1".  The normalisation the section
+#' * "V arbitrary with E\[V\] = 1".  The normalisation the section
 #'   actually imposes is Lambda_0(y0) = 1 for some finite y0 > 0
-#'   (p. 223), together with |alpha_1| = 1 on the index.  E[V] = 1 is
-#'   never assumed; what is assumed is Ee^{-3V} < infinity (PHU3(ii)).
+#'   (p. 223), together with |alpha_1| = 1 on the index.  E\[V\] = 1 is
+#'   never assumed; what is assumed is Ee^\{-3V\} < infinity (PHU3(ii)).
 #' * h(t|X,V) = h_0(t) exp(X'beta) V.  Equation (6.72) writes the
 #'   hazard as lambda(y|z,v) = lambda_0(y) exp\[-(sigma z + v)\], i.e.
 #'   with a NEGATIVE index and an exp(-v) frailty.  The published

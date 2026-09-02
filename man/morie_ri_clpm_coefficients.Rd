@@ -5,7 +5,7 @@
 \alias{morie_ri_clpm_coefficients}
 \title{morie_ri_clpm_coefficients}
 \usage{
-morie_ri_clpm_coefficients(X, Y)
+morie_ri_clpm_coefficients(X, Y) 
 }
 \arguments{
 \item{X}{Passed to \code{morie_within_between_decomposition}.}

@@ -5,10 +5,14 @@
 \alias{Ndeff}
 \title{Natural direct effect (Zheng & van der Laan 2012)}
 \usage{
-Ndeff(y10, y00)
+Ndeff(y10, y00) 
 }
 \description{
 Natural direct effect (Zheng & van der Laan 2012)
+}
+\arguments{
+\item{y10}{Argument \code{y10}; see Usage.}
+\item{y00}{Argument \code{y00}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{mean_y10}, \code{mean_y00}, \code{n}.

@@ -5,7 +5,8 @@
 \alias{super_learner}
 \title{The Super Learner ---------------------------------------------}
 \usage{
-super_learner(y, X, library = NULL, n_folds = 10, meta = "nnls", binary = NULL, loss = "l2", ridge = 1e-08, honest_level_one = TRUE)
+super_learner(y, X, library = NULL, n_folds = 10, meta = "nnls", binary = NULL, 
+    loss = "l2", ridge = 1e-08, honest_level_one = TRUE) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -202,7 +202,7 @@ mrm_tps_polygon_moran_per_year <- function(
     )
     if (is.null(res)) next
     # Global p-value via permutation of the z-surface (mirrors
-    # mrm_lisa.py:204-219 — was missing in the R port; added 2026-05-22).
+    # mrm_lisa.py:204-219 -- was missing in the R port; added 2026-05-22).
     set.seed(seed)
     x <- as.numeric(data[[c]])
     x <- x[!is.na(x)]

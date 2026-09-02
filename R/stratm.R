@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Stratified estimate of the population mean, with its variance.
+#' Stratified estimate of the population mean, with its variance
 #'
 #' Because the strata are sampled independently the variance is a
 #' weighted sum of WITHIN-stratum variances only. ybar_st equals the

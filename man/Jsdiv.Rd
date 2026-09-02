@@ -2,7 +2,7 @@
 % Please edit documentation in R/jsdivg.R
 \name{Jsdiv}
 \alias{Jsdiv}
-\title{Jensen-Shannon divergence between two discrete distributions.}
+\title{Jensen-Shannon divergence between two discrete distributions}
 \usage{
 Jsdiv(p, q, base = 2, normalize = TRUE)
 }
@@ -12,6 +12,7 @@ Jsdiv(p, q, base = 2, normalize = TRUE)
 \item{base}{Logarithm base; 2 gives bits, exp(1) nats.}
 
 \item{normalize}{Rescale p and q to sum to one first.}
+
 }
 \value{
 List with \code{estimate}, \code{distance}, \code{bound},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgcar.R
 \name{sgcar}
 \alias{sgcar}
-\title{Conditional autoregressive (CAR) model, fitted by maximum likelihood.}
+\title{Conditional autoregressive (CAR) model, fitted by maximum likelihood}
 \usage{
 sgcar(Z, W, X = NULL, parameterization = "weighted")
 }

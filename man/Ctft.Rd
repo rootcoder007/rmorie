@@ -5,7 +5,7 @@
 \alias{Ctft}
 \title{Eqs (3.75)-(3.76): one transform in two frequency variables,}
 \usage{
-Ctft(x, t = NULL, omega = NULL, f = NULL, dt = NULL)
+Ctft(x, t = NULL, omega = NULL, f = NULL, dt = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

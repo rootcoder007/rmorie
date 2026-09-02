@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Baujat plot coordinates for a meta-analysis.
+#' Baujat plot coordinates for a meta-analysis
 #'
 #' Formula: x_i = w_i (y_i - theta_FE)^2; y_i = (theta_FE - theta_FE(-i))^2 / var(theta_FE(-i))
 #'
 #' @param yi Effect estimates.
 #' @param vi Their sampling variances.
 
+#' @param yi See Usage.
+#' @param vi See Usage.
 #' @return List with ``x`` (contribution to Q), ``y`` (influence on the pooled estimate), ``theta_fe``, ``theta_loo``, ``k``.
 #' @references Baujat, Mahe, Pignon and Hill (2002), A graphical method for exploring heterogeneity in meta-analyses, Statistics in Medicine 21:2641-2652. Paywalled; the two axes are as documented by metafor::baujat, the reference implementation -- the x-axis is each study's contribution to the Q statistic and the y-axis the standardised squared difference between the overall estimate with and without that study.
 #' @export

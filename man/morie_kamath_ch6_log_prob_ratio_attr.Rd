@@ -12,6 +12,7 @@ morie_kamath_ch6_log_prob_ratio_attr(a_i, a_j, K = NULL, lam = 1)
 \item{K}{Optional count.}
 
 \item{lam}{Finite weight.}
+
 }
 \value{
 List with \code{estimate}, \code{unweighted}, \code{per_pair}.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Le Cam's bound on the posterior mass of an alternative set.
+#' Le Cam's bound on the posterior mass of an alternative set
 #'
 #' The last term divides by Pi(U), so a prior that starves the
 #' neighbourhood of the truth destroys the bound however good the test is.

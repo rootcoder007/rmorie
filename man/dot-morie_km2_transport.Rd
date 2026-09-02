@@ -12,6 +12,8 @@
 \item{b}{A vector; its length is taken.}
 
 \item{C}{A matrix; indexed by row and column.}
+
+\item{max_iter}{See Usage.}
 }
 \value{
 A list with \code{flow}, \code{u}, \code{v}.

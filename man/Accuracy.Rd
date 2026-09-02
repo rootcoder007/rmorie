@@ -5,7 +5,8 @@
 \alias{Accuracy}
 \title{Accuracy}
 \usage{
-Accuracy(table = NULL, tp = NULL, tn = NULL, fp = NULL, fn = NULL, prevalence = NULL, kind = NULL, exact = FALSE)
+Accuracy(table = NULL, tp = NULL, tn = NULL, fp = NULL, fn = NULL, prevalence = NULL, 
+    kind = NULL, exact = FALSE) 
 }
 \arguments{
 \item{table}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}

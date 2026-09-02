@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' lppd, effective parameters and WAIC from a matrix of log densities.
+#' lppd, effective parameters and WAIC from a matrix of log densities
 #'
 #' The average over draws happens INSIDE the log, once per observation,
 #' and only then are observations summed. Computed through a log-sum-exp.

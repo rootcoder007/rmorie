@@ -5,7 +5,7 @@
 \alias{SeizDet}
 \title{SeizDet: epileptic seizure detection in EEG}
 \usage{
-SeizDet(eeg, fs, epoch_s = 1, ratio_threshold = 2, baseline_epochs = NULL)
+SeizDet(eeg, fs, epoch_s = 1, ratio_threshold = 2, baseline_epochs = NULL) 
 }
 \arguments{
 \item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}

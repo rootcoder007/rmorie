@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtrwl.R
 \name{Rwlap}
 \alias{Rwlap}
-\title{Random-walk Laplacian L_rw = I - P, with P the transition matrix.}
+\title{Random-walk Laplacian L_rw = I - P, with P the transition matrix}
 \usage{
 Rwlap(W)
 }

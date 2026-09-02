@@ -5,7 +5,7 @@
 \alias{gaussian_expansion}
 \title{gaussian_expansion}
 \usage{
-gaussian_expansion(r, mu_min = 0, mu_max = 6, n_gaussians = 25, gamma = NULL)
+gaussian_expansion(r, mu_min = 0, mu_max = 6, n_gaussians = 25, gamma = NULL) 
 }
 \arguments{
 \item{r}{Coerced to numeric by the body, with \code{as.numeric}.}

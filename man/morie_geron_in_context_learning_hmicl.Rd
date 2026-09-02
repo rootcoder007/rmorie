@@ -23,6 +23,7 @@ morie_geron_in_context_learning_hmicl(
 \item{candidates}{Optional label set.}
 
 \item{template, separator}{Prompt assembly.}
+
 }
 \value{
 List with prediction, prompt, log_probs, posterior, n_shot, candidates, estimate, n, method.

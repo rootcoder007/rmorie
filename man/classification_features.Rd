@@ -5,7 +5,7 @@
 \alias{classification_features}
 \title{classification_features}
 \usage{
-classification_features(u, v)
+classification_features(u, v) 
 }
 \arguments{
 \item{u}{Passed to \code{.sbert_vec}.}

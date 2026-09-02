@@ -8,6 +8,7 @@ HockStick(n, k)
 }
 \arguments{
 \item{n, k}{requires 1 <= k <= n.}
+
 }
 \value{
 list(n, k, stick_sum, closed_form, n_terms, forms_agree).

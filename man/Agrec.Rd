@@ -14,6 +14,8 @@ Agrec(start, stop, event, X, max_iter = 50L, tol = 1e-09)
 \item{X}{Covariate matrix, one row per interval.}
 
 \item{max_iter, tol}{Newton-Raphson controls.}
+
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{cov},

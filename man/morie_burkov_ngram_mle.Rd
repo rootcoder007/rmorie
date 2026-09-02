@@ -5,7 +5,7 @@
 \alias{morie_burkov_ngram_mle}
 \title{N-gram MLE probability (Burkov Ch 2)}
 \usage{
-morie_burkov_ngram_mle(counts_ngram, counts_prefix)
+morie_burkov_ngram_mle(counts_ngram, counts_prefix) 
 }
 \arguments{
 \item{counts_ngram,counts_prefix}{Counts.}

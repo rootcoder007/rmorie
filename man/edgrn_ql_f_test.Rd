@@ -5,7 +5,7 @@
 \alias{edgrn_ql_f_test}
 \title{edgrn_ql_f_test}
 \usage{
-edgrn_ql_f_test(lrt, q, quasi_dispersion, df_residual, df_prior = NULL)
+edgrn_ql_f_test(lrt, q, quasi_dispersion, df_residual, df_prior = NULL) 
 }
 \arguments{
 \item{lrt}{Coerced to numeric by the body, with \code{as.numeric}.}

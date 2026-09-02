@@ -5,7 +5,7 @@
 \alias{effect_curve}
 \title{Stage 2: regress the pseudo-outcome on the treatment}
 \usage{
-effect_curve(xi, A, grid, fit = "kernel", bandwidth = NULL, n_folds = 5)
+effect_curve(xi, A, grid, fit = "kernel", bandwidth = NULL, n_folds = 5) 
 }
 \arguments{
 \item{xi}{Pseudo-outcome vector.}

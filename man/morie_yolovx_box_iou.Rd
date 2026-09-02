@@ -5,7 +5,7 @@
 \alias{morie_yolovx_box_iou}
 \title{Intersection over union of two corner boxes}
 \usage{
-morie_yolovx_box_iou(a, b)
+morie_yolovx_box_iou(a, b) 
 }
 \arguments{
 \item{a}{A vector; indexed elementwise.}

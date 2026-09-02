@@ -5,7 +5,7 @@
 \alias{morie_tipsne_ancova}
 \title{Least squares of y on a design matrix, via the normal equations}
 \usage{
-morie_tipsne_ancova(y, design)
+morie_tipsne_ancova(y, design) 
 }
 \arguments{
 \item{y}{Numeric outcome vector.}

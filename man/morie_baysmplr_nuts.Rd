@@ -5,7 +5,8 @@
 \alias{morie_baysmplr_nuts}
 \title{The No-U-Turn Sampler, with optional dual-averaging warm-up}
 \usage{
-morie_baysmplr_nuts(log_p, grad, x0, n_iter, e, eps = 0.25, max_depth = 8L, dual_average = FALSE, target_accept = 0.8, warmup = NULL)
+morie_baysmplr_nuts(log_p, grad, x0, n_iter, e, eps = 0.25, max_depth = 8L, dual_average = FALSE, 
+    target_accept = 0.8, warmup = NULL) 
 }
 \arguments{
 \item{log_p}{The log density.}

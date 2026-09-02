@@ -10,6 +10,7 @@ morie_kamath_ch6_gedi_combined_loss(L_g, L_d, lam)
 \item{L_g, L_d}{Component losses.}
 
 \item{lam}{Mixing weight in [0, 1].}
+
 }
 \value{
 List with \code{estimate}, \code{contributions}.

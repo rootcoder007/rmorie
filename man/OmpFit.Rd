@@ -5,7 +5,7 @@
 \alias{OmpFit}
 \title{NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the}
 \usage{
-OmpFit(x, D, sparsity = NULL, tol = 1e-10)
+OmpFit(x, D, sparsity = NULL, tol = 1e-10) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

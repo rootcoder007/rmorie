@@ -5,7 +5,7 @@
 \alias{self_attention}
 \title{self_attention}
 \usage{
-self_attention(E, WQ, WK, WV, mask = NULL)
+self_attention(E, WQ, WK, WV, mask = NULL) 
 }
 \arguments{
 \item{E}{See Usage.}

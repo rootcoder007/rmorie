@@ -5,7 +5,7 @@
 \alias{predict_next}
 \title{predict_next}
 \usage{
-predict_next(state, item_embeddings, top_k = 5, exclude = numeric(0))
+predict_next(state, item_embeddings, top_k = 5, exclude = numeric(0)) 
 }
 \arguments{
 \item{state}{Coerced to numeric by the body, with \code{as.numeric}.}

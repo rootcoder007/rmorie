@@ -5,7 +5,8 @@
 \alias{xdeep_xdeepfm_score}
 \title{xdeep_xdeepfm_score}
 \usage{
-xdeep_xdeepfm_score(x_linear, w_linear, X0, Ws, w_cin, dnn_output = 0, w_dnn = 1, bias = 0)
+xdeep_xdeepfm_score(x_linear, w_linear, X0, Ws, w_cin, dnn_output = 0, w_dnn = 1, 
+    bias = 0) 
 }
 \arguments{
 \item{x_linear}{Passed to \code{.xdeep_to_vec}.}

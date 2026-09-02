@@ -12,6 +12,7 @@ morie_check_buffer(buffer, n_states, n_actions, name)
 \item{n_states, n_actions}{Bounds.}
 
 \item{name}{Caller name for error messages.}
+
 }
 \value{
 List with \code{s},\code{a},\code{r},\code{s2},\code{done} (0-based indices as given).

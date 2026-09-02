@@ -5,7 +5,7 @@
 \alias{morie_alfmpv}
 \title{AlphaFold-Multimer chain pairing}
 \usage{
-morie_alfmpv(chains = NULL, msas = NULL, mode = "multimer", ...)
+morie_alfmpv(chains = NULL, msas = NULL, mode = "multimer", ...) 
 }
 \arguments{
 \item{chains}{alias for msas, for the older call shape.}

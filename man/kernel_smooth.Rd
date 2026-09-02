@@ -5,7 +5,7 @@
 \alias{kernel_smooth}
 \title{kernel_smooth}
 \usage{
-kernel_smooth(u, kernel = "epanechnikov")
+kernel_smooth(u, kernel = "epanechnikov") 
 }
 \arguments{
 \item{u}{Coerced to numeric by the body, with \code{as.numeric}.}

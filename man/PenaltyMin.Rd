@@ -5,7 +5,8 @@
 \alias{PenaltyMin}
 \title{\\' Minimise f subject to g_i(x) <= 0 by Courant\\'s quadratic}
 \usage{
-PenaltyMin(f, constraints, x0, mu, n_outer = 8L, growth = 10, n_inner = 200L, step0 = 1, h = 1e-06, armijo = 1e-04, max_halving = 40L)
+PenaltyMin(f, constraints, x0, mu, n_outer = 8L, growth = 10, n_inner = 200L, 
+    step0 = 1, h = 1e-06, armijo = 1e-04, max_halving = 40L) 
 }
 \arguments{
 \item{f}{Passed to \code{.morie_t2_qpen}.}

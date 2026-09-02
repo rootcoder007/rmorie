@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Conditional autoregressive model: the conditional specification.
+#' Conditional autoregressive model: the conditional specification
 #'
 #' Rather than one multivariate model, the CAR approach models each
 #' conditional distribution f(Z(s_i) | Z(s_j), s_j in N_i). By

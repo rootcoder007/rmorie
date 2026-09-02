@@ -5,7 +5,7 @@
 \alias{n_free}
 \title{n_free}
 \usage{
-n_free(spec)
+n_free(spec) 
 }
 \arguments{
 \item{spec}{A list; the body reads \code{$damped}, \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_box_cox}, \code{$use_trend} from it.}

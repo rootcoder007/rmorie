@@ -313,7 +313,7 @@ self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
                      "move toward"))
 }
 
-#' One-paragraph summary of the DINOv2 recipe.
+#' One-paragraph summary of the DINOv2 recipe
 #'
 #' @return Character string.
 #' @export

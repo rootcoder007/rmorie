@@ -5,7 +5,7 @@
 \alias{qini_curve}
 \title{qini_curve}
 \usage{
-qini_curve(scores, priority, cost = NULL)
+qini_curve(scores, priority, cost = NULL) 
 }
 \arguments{
 \item{scores}{Passed to \code{.slvgrf_check}.}

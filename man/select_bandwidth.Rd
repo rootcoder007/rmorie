@@ -5,7 +5,8 @@
 \alias{select_bandwidth}
 \title{select_bandwidth}
 \usage{
-select_bandwidth(X, x0, bandwidths, kernel = "epanechnikov", criterion = "lepski", C = 1)
+select_bandwidth(X, x0, bandwidths, kernel = "epanechnikov", criterion = "lepski", 
+    C = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{smoothed_parameter}.}

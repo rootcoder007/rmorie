@@ -18,6 +18,7 @@ only to check shapes.}
 \item{numerator_model}{Fitted \eqn{f(A_t|A_{t-1})}, subjects by time.}
 
 \item{denominator_model}{Fitted \eqn{f(A_t|H_t)}, subjects by time.}
+
 }
 \value{
 Named list with \code{estimate}, \code{weights}, \code{unstabilized},

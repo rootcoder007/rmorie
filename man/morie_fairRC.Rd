@@ -5,7 +5,7 @@
 \alias{morie_fairRC}
 \title{Morie entry point}
 \usage{
-morie_fairRC(protected, measure = "rND", step = 10, normalize = TRUE)
+morie_fairRC(protected, measure = "rND", step = 10, normalize = TRUE) 
 }
 \arguments{
 \item{protected}{Passed to \code{rND}.}

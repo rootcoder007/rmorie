@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Efficient influence function for F(t)
 #'
-#' psi-tilde(x) = 1{x <= t} - F0(t) has mean zero under P0 and variance
+#' psi-tilde(x) = 1\{x <= t\} - F0(t) has mean zero under P0 and variance
 #' F0(t)(1 - F0(t)), which IS the semiparametric efficiency bound for
 #' estimating F(t).  The influence function is the whole content of the
 #' efficiency calculation: once it is identified, the bound is just its
 #' second moment.
 #'
-#' Formula: var = (1/n) sum_i (1{x_i <= t} - F_n(t))^2, which equals
+#' Formula: var = (1/n) sum_i (1\{x_i <= t\} - F_n(t))^2, which equals
 #'   F_n(t)(1 - F_n(t)) identically.
 #'
 #' @param data Numeric vector of observations, non-empty.

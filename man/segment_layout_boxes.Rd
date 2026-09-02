@@ -5,7 +5,7 @@
 \alias{segment_layout_boxes}
 \title{segment_layout_boxes}
 \usage{
-segment_layout_boxes(boxes, segment_ids, width, height, scale = 1000)
+segment_layout_boxes(boxes, segment_ids, width, height, scale = 1000) 
 }
 \arguments{
 \item{boxes}{A matrix; indexed by row and column.}

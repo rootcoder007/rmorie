@@ -5,7 +5,7 @@
 \alias{morie_rapaf_population_attributable_risk}
 \title{Population attributable risk}
 \usage{
-morie_rapaf_population_attributable_risk(case_counts, rate_ratios)
+morie_rapaf_population_attributable_risk(case_counts, rate_ratios) 
 }
 \arguments{
 \item{case_counts}{Non-negative numeric vector of case counts per   stratum.}

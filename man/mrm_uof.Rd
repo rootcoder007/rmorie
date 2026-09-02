@@ -27,7 +27,7 @@ side does not require \pkg{ruptures}).
 \item \code{\link{mrm_uof_region_locality}}: region-at-time vs.
 region-now contingency: diagonal share, chi-square, Cramer's V.
 \item \code{\link{mrm_uof_demographic_disparity}}: per-category
-outcome rates with Wilson 95\\% intervals, risk-ratio versus a
+outcome rates with Wilson 95\% intervals, risk-ratio versus a
 baseline group, optional non-parametric bootstrap percentile
 interval on the risk ratio.
 \item \code{\link{mrm_uof_data_quality_audit}}: per-column null

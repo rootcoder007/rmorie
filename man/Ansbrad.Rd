@@ -5,10 +5,14 @@
 \alias{Ansbrad}
 \title{Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316}
 \usage{
-Ansbrad(x, y)
+Ansbrad(x, y) 
 }
 \description{
 Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{scores}, \code{m}, \code{n}.

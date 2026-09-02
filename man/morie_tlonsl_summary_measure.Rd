@@ -5,7 +5,7 @@
 \alias{morie_tlonsl_summary_measure}
 \title{A fixed-dimensional summary Z of the past. lags=0 gives the empty}
 \usage{
-morie_tlonsl_summary_measure(history, lags = 1)
+morie_tlonsl_summary_measure(history, lags = 1) 
 }
 \arguments{
 \item{history}{Coerced to numeric by the body, with \code{as.numeric}.}

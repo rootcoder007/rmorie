@@ -5,7 +5,9 @@
 \alias{morie_tipsne}
 \title{Delta-adjusted tipping-point sensitivity analysis}
 \usage{
-morie_tipsne(y, D, missing_indicator = NULL, X = NULL, delta_treat = NULL, delta_control = NULL, n_imputations = 20L, seed = 1, alpha = 0.05, mi = "proper", pooling = "rubin1987", standardise = TRUE)
+morie_tipsne(y, D, missing_indicator = NULL, X = NULL, delta_treat = NULL, 
+    delta_control = NULL, n_imputations = 20L, seed = 1, alpha = 0.05, 
+    mi = "proper", pooling = "rubin1987", standardise = TRUE) 
 }
 \arguments{
 \item{y}{Outcome; NA where missing.}

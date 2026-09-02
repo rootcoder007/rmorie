@@ -5,7 +5,7 @@
 \alias{morie_mqtmpl_lod_support_interval}
 \title{LOD-drop support interval}
 \usage{
-morie_mqtmpl_lod_support_interval(scan_result, drop = 1.5)
+morie_mqtmpl_lod_support_interval(scan_result, drop = 1.5) 
 }
 \arguments{
 \item{scan_result}{Result of \code{scanone}.}

@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_plus}
 \title{morie_prsPEG_plus}
 \usage{
-morie_prsPEG_plus(e)
+morie_prsPEG_plus(e) 
 }
 \arguments{
 \item{e}{Passed to \code{morie_prsPEG_seq}.}

@@ -5,7 +5,7 @@
 \alias{morie_prtcl_systematic_resample}
 \title{morie_prtcl_systematic_resample}
 \usage{
-morie_prtcl_systematic_resample(weights, u = NULL, e = NULL)
+morie_prtcl_systematic_resample(weights, u = NULL, e = NULL) 
 }
 \arguments{
 \item{weights}{A vector; its length is taken.}

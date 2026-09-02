@@ -5,7 +5,7 @@
 \alias{morie_alfqud_run}
 \title{Run a program on one input vector}
 \usage{
-morie_alfqud_run(program, x, n_reg)
+morie_alfqud_run(program, x, n_reg) 
 }
 \arguments{
 \item{program}{A list of instructions.}

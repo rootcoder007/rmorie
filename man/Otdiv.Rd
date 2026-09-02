@@ -18,6 +18,7 @@ Otdiv(a, b, Cab, Caa, Cbb, epsilon, max_iter = 200)
 \item{epsilon}{Regularisation strength, positive.}
 
 \item{max_iter}{Sinkhorn sweeps.}
+
 }
 \value{
 List with \code{S_eps}, \code{OT_ab}, \code{OT_aa},

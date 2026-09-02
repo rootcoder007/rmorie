@@ -5,7 +5,8 @@
 \alias{flexible_iptw}
 \title{IPTW: propensity by Super Learner, weights A/g + (1-A)/(1-g)}
 \usage{
-flexible_iptw(A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridge = 1e-08, stabilize = FALSE)
+flexible_iptw(A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, 
+    ridge = 1e-08, stabilize = FALSE) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

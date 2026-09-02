@@ -5,7 +5,8 @@
 \alias{morie_cmlmer_compressed_lmm}
 \title{morie_cmlmer_compressed_lmm}
 \usage{
-morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels = NULL, log_delta_lo = -10, log_delta_hi = 10, max_iter = 200L)
+morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels = NULL, log_delta_lo = -10, 
+    log_delta_hi = 10, max_iter = 200L) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_funkM_rmse}
 \title{Root mean squared error on a held-out set}
 \usage{
-morie_funkM_rmse(ratings, mu, bu, bi, P, Q)
+morie_funkM_rmse(ratings, mu, bu, bi, P, Q) 
 }
 \arguments{
 \item{ratings}{Passed to \code{.funkM_as_ratings}.}

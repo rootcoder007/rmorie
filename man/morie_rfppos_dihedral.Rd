@@ -5,7 +5,7 @@
 \alias{morie_rfppos_dihedral}
 \title{The torsion about the b-c axis, in degrees, signed}
 \usage{
-morie_rfppos_dihedral(a, b, c, d)
+morie_rfppos_dihedral(a, b, c, d) 
 }
 \arguments{
 \item{a,b,c,d}{Four coordinate triples.}

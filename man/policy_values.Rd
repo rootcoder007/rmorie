@@ -5,7 +5,7 @@
 \alias{policy_values}
 \title{policy_values}
 \usage{
-policy_values(T, R, gamma, policy)
+policy_values(T, R, gamma, policy) 
 }
 \arguments{
 \item{T}{A vector; indexed elementwise.}

@@ -5,7 +5,7 @@
 \alias{morie_scfhop_murcko}
 \title{The Bemis-Murcko framework: ring systems and the linkers between}
 \usage{
-morie_scfhop_murcko(smiles)
+morie_scfhop_murcko(smiles) 
 }
 \arguments{
 \item{smiles}{The molecule.}

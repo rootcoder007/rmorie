@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_bigquery}
 \alias{morie_datasets_bigquery}
-\title{Pull a BigQuery table (or filtered slice) as a \code{data.frame}.}
+\title{Pull a BigQuery table (or filtered slice) as a \code{data.frame}}
 \usage{
 morie_datasets_bigquery(
   project,

@@ -5,7 +5,7 @@
 \alias{morie_trmRew_rule}
 \title{A rewrite rule, checked for the two conditions rules need}
 \usage{
-morie_trmRew_rule(lhs, rhs)
+morie_trmRew_rule(lhs, rhs) 
 }
 \arguments{
 \item{lhs}{Passed to \code{.trmRew_is_var}.}

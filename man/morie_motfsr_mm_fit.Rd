@@ -5,7 +5,9 @@
 \alias{morie_motfsr_mm_fit}
 \title{One pass of MM: fit the two-component mixture by EM}
 \usage{
-morie_motfsr_mm_fit(sequences, w, alphabet = NULL, theta0 = NULL, lambda0 = NULL, beta = 0.01, erasing = NULL, max_iter = 1000, tol = 1e-06, normalize_overlaps = TRUE, erase_by = "letter")
+morie_motfsr_mm_fit(sequences, w, alphabet = NULL, theta0 = NULL, lambda0 = NULL, 
+    beta = 0.01, erasing = NULL, max_iter = 1000, tol = 1e-06, normalize_overlaps = TRUE, 
+    erase_by = "letter") 
 }
 \arguments{
 \item{sequences}{Dataset.}

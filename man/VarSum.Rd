@@ -14,7 +14,7 @@ list(var_sum, partial_sums).
 }
 \description{
 The running partial sums make the recursion of eq (3.31) explicit:
-Var(X1+...+Xn) = Var(X1+...+X_{n-1}) + Var(Xn).
+Var(X1+...+Xn) = Var(X1+...+X_\{n-1\}) + Var(Xn).
 }
 \examples{
 VarSum(c(1, 4, 9))$var_sum

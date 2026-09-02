@@ -851,7 +851,7 @@ Ssmk <- function(A, B, C, L) {
   list(K = K, L = as.integer(L), state_dim = n)
 }
 
-#' Causal convolution y_t = sum_l K_l x_{t-l} (standard)
+#' Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)
 #' @noRd
 Ssmconv <- function(K, x) {
   Kv <- as.numeric(K); xv <- as.numeric(x)

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Controlled direct effect: the treatment effect with the mediator fixed.
+#' Controlled direct effect: the treatment effect with the mediator fixed
 #'
 #' The clever covariate carries BOTH nuisance densities in its
 #' denominator, so positivity is far more demanding than for a total

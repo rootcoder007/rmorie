@@ -5,7 +5,7 @@
 \alias{smoothed_parameter}
 \title{smoothed_parameter}
 \usage{
-smoothed_parameter(X, x0, h, kernel = "epanechnikov")
+smoothed_parameter(X, x0, h, kernel = "epanechnikov") 
 }
 \arguments{
 \item{X}{Coerced to numeric by the body, with \code{as.numeric}.}

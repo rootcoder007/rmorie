@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_secaead_aead_encrypt}
 \alias{morie_secaead_aead_encrypt}
+\alias{morie_secaead}
 \title{Encrypt from counter 1, then authenticate AAD and ciphertext}
 \usage{
-morie_secaead_aead_encrypt(key, nonce, plaintext, aad = NULL)
+morie_secaead_aead_encrypt(key, nonce, plaintext, aad = NULL) 
+
+morie_secaead(key, nonce, plaintext, aad = NULL) 
 }
 \arguments{
 \item{key}{Passed to \code{morie_secaead_poly1305_key_gen}.}

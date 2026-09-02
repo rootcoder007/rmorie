@@ -5,7 +5,7 @@
 \alias{Swt}
 \title{Stationary (undecimated, a-trous) wavelet transform}
 \usage{
-Swt(x, wavelet = "db4", levels = 3)
+Swt(x, wavelet = "db4", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

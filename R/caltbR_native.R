@@ -87,7 +87,7 @@
 # Public API
 # ---------------------------------------------------------------------------
 
-#' Weighted average of \eqn{p(g \mid i)} over a set of items.
+#' Weighted average of \eqn{p(g \mid i)} over a set of items
 #'
 #' Implements eqs. (2)-(3): a per-genre average of the genre
 #' memberships, weighted either by user-supplied weights (recency of
@@ -136,7 +136,7 @@ genre_distribution <- function(items, p_g_given_i, weights = NULL) {
 }
 
 
-#' \eqn{KL(p \,\|\, (1-\alpha)q + \alpha p)}.
+#' \eqn{KL(p \,\|\, (1-\alpha)q + \alpha p)}
 #'
 #' Implements eqs. (4)-(5): the KL divergence from the target
 #' distribution \eqn{p} to the alpha-smoothed recommended
@@ -169,7 +169,7 @@ calibration_kl <- function(p, q, alpha = 0.01) {
 }
 
 
-#' Hellinger distance \eqn{\|\sqrt p - \sqrt q\|_2 / \sqrt 2}.
+#' Hellinger distance \eqn{\|\sqrt p - \sqrt q\|_2 / \sqrt 2}
 #'
 #' Well defined at zeros and less brutal than KL where \eqn{p} is
 #' small -- the paper's named alternative.
@@ -191,7 +191,7 @@ calibration_hellinger <- function(p, q) {
 }
 
 
-#' Diversity prior \eqn{\bar p = \beta p_0 + (1-\beta) p(g \mid u)}.
+#' Diversity prior \eqn{\bar p = \beta p_0 + (1-\beta) p(g \mid u)}
 #'
 #' Calibration alone never introduces an unplayed genre; mixing in a
 #' diversity prior with weight \code{beta} is the explicit escape
@@ -216,7 +216,7 @@ diversity_prior <- function(p_u, p0, beta) {
 }
 
 
-#' Greedy maximum-marginal-relevance re-ranking for calibration.
+#' Greedy maximum-marginal-relevance re-ranking for calibration
 #'
 #' Solves eq. (6) by greedy maximisation of
 #' \eqn{(1-\lambda)\,s(I) - \lambda\, C(p, q(I))}. The surrogate is
@@ -327,17 +327,17 @@ calibrated_rerank <- function(scores, p_g_given_i, p_target, N = 10,
 
 
 #' Convenience alias matching the Python \code{calibratedrecommendations}
-#' export.
+#' export
 #' @export
 calibratedrecommendations <- calibrated_rerank
 
 
-#' Convenience alias matching the Python \code{calibrated_rec} export.
+#' Convenience alias matching the Python \code{calibrated_rec} export
 #' @export
 calibrated_rec <- calibrated_rerank
 
 
-#' Convenience alias matching the Python \code{calibratedrec} export.
+#' Convenience alias matching the Python \code{calibratedrec} export
 #' @export
 calibratedrec <- calibrated_rerank
 

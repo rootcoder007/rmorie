@@ -5,7 +5,8 @@
 \alias{morie_bnsadt}
 \title{Publication-bias correction with its adversarial bound}
 \usage{
-morie_bnsadt(y, D, family = "symmetric_step", grid = NULL, target = NULL, target_se = NULL, fit = TRUE, iters = 600L)
+morie_bnsadt(y, D, family = "symmetric_step", grid = NULL, target = NULL, 
+    target_se = NULL, fit = TRUE, iters = 600L) 
 }
 \arguments{
 \item{y}{Published point estimates, one per study.}

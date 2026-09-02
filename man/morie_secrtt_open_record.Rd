@@ -5,7 +5,7 @@
 \alias{morie_secrtt_open_record}
 \title{Decrypt a record; fails closed}
 \usage{
-morie_secrtt_open_record(sealed, dek)
+morie_secrtt_open_record(sealed, dek) 
 }
 \arguments{
 \item{sealed}{List with \code{ciphertext}, \code{nonce}, \code{tag},   optional \code{aad}.}

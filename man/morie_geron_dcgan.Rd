@@ -24,6 +24,8 @@ morie_geron_dcgan(
 \item{seed_shape}{c(h0, w0).}
 
 \item{stride}{Upsample stride (>=2).}
+
+
 }
 \value{
 List with \code{generator_layers}, \code{discriminator_layers},

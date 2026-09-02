@@ -5,7 +5,7 @@
 \alias{morie_fwxF}
 \title{morie_fwxF}
 \usage{
-morie_fwxF(temp, rh, wind, rain, month, ffmc_init = 85, dmc_init = 6, dc_init = 15)
+morie_fwxF(temp, rh, wind, rain, month, ffmc_init = 85, dmc_init = 6, dc_init = 15) 
 }
 \arguments{
 \item{temp}{Coerced to numeric by the body, with \code{as.numeric}.}

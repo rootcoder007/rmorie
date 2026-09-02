@@ -5,7 +5,7 @@
 \alias{morie_alfomg_cheatsheet}
 \title{One-line summary of the alfomg module}
 \usage{
-morie_alfomg_cheatsheet()
+morie_alfomg_cheatsheet() 
 }
 \description{
 One-line summary of the alfomg module

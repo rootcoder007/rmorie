@@ -21,6 +21,8 @@ morie_geron_auxiliary_task_pretraining(
 \item{aux_epochs, epochs}{Gradient steps.}
 
 \item{lr}{Step size.}
+
+
 }
 \value{
 List with \code{theta}, \code{theta_pretrained}, \code{theta_scratch},

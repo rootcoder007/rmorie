@@ -23,15 +23,35 @@ morie_poisson_loglinear(
 )
 }
 \arguments{
-\item{mu_hat, n, z}{Score interval pieces. @param b0,bs,xs Log link.}
+
+\item{b0}{See Usage.}
+
+\item{bs}{See Usage.}
+
+\item{xs}{See Usage.}
 
 \item{exposure}{Rate-model exposure t. @param beta_x_i,beta_z_j,
 beta_xz_ij Loglinear cell parameters.}
+
+\item{beta_x_i}{See Usage.}
+
+\item{beta_z_j}{See Usage.}
+
+\item{beta_xz_ij}{See Usage.}
 
 \item{bxz}{Four interaction parameters c(ij, i'j', i'j, ij') for the
 odds ratio of eq 4.7.}
 
 \item{beta_z_jp, beta_xz_i, s_j, s_jp}{Ordinal-score ratio pieces.}
+
+\item{mu_hat}{Argument \code{mu_hat}; see Usage.}
+
+\item{n}{Argument \code{n}; see Usage.}
+
+\item{z}{Argument \code{z}; see Usage.}
+
+
+
 }
 \value{
 List with score_ci, mu, mu_rate, mu_cell, or_loglinear,

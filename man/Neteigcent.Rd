@@ -2,12 +2,12 @@
 % Please edit documentation in R/neteig.R
 \name{Neteigcent}
 \alias{Neteigcent}
-\title{Eigenvector centrality of a network (re-export).}
+\title{Eigenvector centrality of a network (re-export)}
 \usage{
 Neteigcent(A)
 }
 \arguments{
-\item{A}{Symmetric non-negative adjacency matrix.}
+\item{A}{See Usage.}
 }
 \value{
 List with the payload of :func:\code{morie.fn.eigcen.eigcent}.

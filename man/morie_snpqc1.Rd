@@ -5,7 +5,11 @@
 \alias{morie_snpqc1}
 \title{morie_snpqc1}
 \usage{
-morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, mind_relaxed = 0.2, geno = 0.02, mind = 0.02, maf_threshold = 0.01, hwe_case = 1e-10, hwe_control = 1e-06, hwe_quantitative = 1e-06, het_sd = 3, pihat = 0.2, hwe_test = "exact", x_genotypes = NULL, reported_sex = NULL, relatedness = "pihat", ibd_correction = TRUE)
+morie_snpqc1(genotypes, phenotype = NULL, trait = "binary", geno_relaxed = 0.2, 
+    mind_relaxed = 0.2, geno = 0.02, mind = 0.02, maf_threshold = 0.01, 
+    hwe_case = 1e-10, hwe_control = 1e-06, hwe_quantitative = 1e-06, het_sd = 3, 
+    pihat = 0.2, hwe_test = "exact", x_genotypes = NULL, reported_sex = NULL, 
+    relatedness = "pihat", ibd_correction = TRUE) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

@@ -22,6 +22,9 @@ morie_geron_early_stopping(
 \item{eta}{Positive learning rate.}
 
 \item{theta0}{Optional starting parameters; default zeros.}
+
+
+
 }
 \value{
 List with \code{theta}, \code{best_iteration}, \code{best_val_rmse},

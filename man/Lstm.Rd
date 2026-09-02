@@ -5,7 +5,8 @@
 \alias{Lstm}
 \title{Lstm}
 \usage{
-Lstm(sequences, labels = NULL, hidden = 8, ridge = 1e-06, seed = 1, weights = NULL)
+Lstm(sequences, labels = NULL, hidden = 8, ridge = 1e-06, seed = 1, 
+    weights = NULL) 
 }
 \arguments{
 \item{sequences}{A vector; its length is taken.}

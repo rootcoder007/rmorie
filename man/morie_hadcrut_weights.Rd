@@ -5,7 +5,8 @@
 \alias{morie_hadcrut_weights}
 \title{Land and ocean blending weights for one grid cell}
 \usage{
-morie_hadcrut_weights(land_fraction, sea_ice = 0, has_land = TRUE, has_sst = TRUE, rule = "hadcrut5")
+morie_hadcrut_weights(land_fraction, sea_ice = 0, has_land = TRUE, has_sst = TRUE, 
+    rule = "hadcrut5") 
 }
 \arguments{
 \item{land_fraction}{Areal land fraction of the cell.}

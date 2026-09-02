@@ -2,7 +2,7 @@
 % Please edit documentation in R/audit_variables.R
 \name{morie_specs_from_df}
 \alias{morie_specs_from_df}
-\title{Build a list of column specs from a parsed CSV header.}
+\title{Build a list of column specs from a parsed CSV header}
 \usage{
 morie_specs_from_df(df)
 }

@@ -5,7 +5,7 @@
 \alias{nbeats_trend_basis}
 \title{nbeats_trend_basis}
 \usage{
-nbeats_trend_basis(length, degree, offset = 0, scale = NULL)
+nbeats_trend_basis(length, degree, offset = 0, scale = NULL) 
 }
 \arguments{
 \item{length}{A count; the body uses it as \code{seq_len(...)}.}

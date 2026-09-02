@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinal predictor with environment and genetic effects.
+#' Ordinal predictor with environment and genetic effects
 #'
 #' Formula: L = X_E beta_E + Z_L g + eps (eq. 7.5), environment effects and
 #' genetic effects without the line-by-environment interaction. With \code{L_g}

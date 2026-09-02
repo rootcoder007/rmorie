@@ -57,9 +57,9 @@
 # velocity as the derivative of spliced abundance.
 #
 # La Manno, G., Soldatov, R., Zeisel, A., Braun, E., Hochgerner, H.,
-# Petukhov, V., Lidschreiber, K., Kastriti, M. E., Lönnerberg, P.,
+# Petukhov, V., Lidschreiber, K., Kastriti, M. E., L?nnerberg, P.,
 # Furlan, A., Fan, J., Borm, L. E., Liu, Z., van Bruggen, D., Guo, J.,
-# He, X., Barker, R., Sundström, E., Castelo-Branco, G., Cramer, P.,
+# He, X., Barker, R., Sundstr?m, E., Castelo-Branco, G., Cramer, P.,
 # Adameyko, I., Linnarsson, S. & Kharchenko, P. V. (2018) "RNA
 # velocity of single cells", Nature 560(7719), 494-498,
 # doi:10.1038/s41586-018-0414-6, for the steady-state model this

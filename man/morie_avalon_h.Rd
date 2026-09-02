@@ -5,7 +5,7 @@
 \alias{morie_avalon_h}
 \title{Hydrogens filled in to the standard valence of the organic subset}
 \usage{
-morie_avalon_h(el, arom, chg, hexp, bonds)
+morie_avalon_h(el, arom, chg, hexp, bonds) 
 }
 \arguments{
 \item{el}{Element symbols.}

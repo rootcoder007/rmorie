@@ -16,6 +16,7 @@ to n.}
 
 \item{gamma}{when supplied INSTEAD of n, the smallest n with
 (1, n) endpoints achieving this tolerance coefficient is found.}
+
 }
 \value{
 list: gamma or n_required, coverage_dist, r, s, p.

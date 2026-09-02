@@ -5,7 +5,7 @@
 \alias{morie_genmol_cheatsheet}
 \title{One-line summary of the genmol module}
 \usage{
-morie_genmol_cheatsheet()
+morie_genmol_cheatsheet() 
 }
 \description{
 One-line summary of the genmol module

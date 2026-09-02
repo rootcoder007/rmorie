@@ -5,7 +5,7 @@
 \alias{morie_sdcfst_cheatsheet}
 \title{One-line summary of the sdcfst module}
 \usage{
-morie_sdcfst_cheatsheet()
+morie_sdcfst_cheatsheet() 
 }
 \description{
 One-line summary of the sdcfst module

@@ -5,7 +5,7 @@
 \alias{morie_replwt}
 \title{morie_replwt}
 \usage{
-morie_replwt(d, method = "jkn", R = 200, fay = 0, seed = 1)
+morie_replwt(d, method = "jkn", R = 200, fay = 0, seed = 1) 
 }
 \arguments{
 \item{d}{Passed to \code{.replwt_jackknife_weights}.}

@@ -5,7 +5,7 @@
 \alias{DotProd}
 \title{Eqs (4.24)-(4.25): the inner product and the correlation coefficient}
 \usage{
-DotProd(x, y, subtract_mean = FALSE)
+DotProd(x, y, subtract_mean = FALSE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,8 +2,8 @@
 #' Multi-city temporal disparity audit
 #'
 #' R parity for the Python `morie.fairness.temporal` module. The four
-#' disparity metrics — Disparate Impact Ratio, Demographic Parity Gap,
-#' Gini coefficient, and Bias Amplification Score — are computed for
+#' disparity metrics -- Disparate Impact Ratio, Demographic Parity Gap,
+#' Gini coefficient, and Bias Amplification Score -- are computed for
 #' each `(city, period)` cell and aggregated per city, so temporal
 #' instability and cross-city divergence become visible.
 #'
@@ -30,7 +30,7 @@ NULL
 #' For every `(city, period)` cell the four disparity metrics are
 #' computed; per city the audit then reports the mean of each metric,
 #' the count of periods with DIR above 1, and the DIR temporal range
-#' (max minus min) — the headline measure of instability.
+#' (max minus min) -- the headline measure of instability.
 #'
 #' @param period Time-period label for each record (e.g. `"2019-03"`).
 #' @param city City label for each record.
@@ -49,7 +49,7 @@ NULL
 #' pred <- rep(c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0), 2)
 #' grp <- rep(c(rep("X", 5), rep("Y", 5)), 2)
 #' res <- morie_predpol_temporal_audit(period, city, pred, grp, privileged = "X")
-#' res$per_city$A$dir_range # 0 — disparity is stable across periods
+#' res$per_city$A$dir_range # 0 -- disparity is stable across periods
 morie_predpol_temporal_audit <- function(period, city, y_pred, group,
                                          privileged = NULL, favorable = 1) {
   n <- length(period)

@@ -5,7 +5,7 @@
 \alias{exposure_summary}
 \title{exposure_summary}
 \usage{
-exposure_summary(A_history, how = "cumulative")
+exposure_summary(A_history, how = "cumulative") 
 }
 \arguments{
 \item{A_history}{Iterated over elementwise, with \code{lapply}.}

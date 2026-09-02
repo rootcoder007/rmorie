@@ -13,6 +13,8 @@ morie_ratio_estimator(y, x, weights = NULL, X_total = NULL, X_mean = NULL)
 
 \item{X_total, X_mean}{the known population total or mean of x; one
 is required, since that is what the estimator borrows.}
+
+
 }
 \value{
 list: ratio, mean, total, improves_on_simple_mean,

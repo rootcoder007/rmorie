@@ -20,6 +20,8 @@ is treated as one row.}
 
 \item{center}{Optional length-K centring vector subtracted from the
 teacher logits.}
+
+
 }
 \value{
 List with \code{loss}, \code{teacher_probs}, \code{student_probs},

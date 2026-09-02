@@ -5,7 +5,7 @@
 \alias{print.morie_iv}
 \title{Print method for \code{morie_iv} objects}
 \usage{
-print.morie_iv(x, ...)
+\method{print}{morie_iv}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_iv} object.}

@@ -5,7 +5,7 @@
 \alias{morie_geron_encoder_decoder_nmt}
 \title{Encoder-decoder seq2seq: teacher-forced loss and greedy decode (Geron Ch 14, hmnmt)}
 \usage{
-morie_geron_encoder_decoder_nmt(src, tgt, model, max_len = NULL, eos = NULL)
+morie_geron_encoder_decoder_nmt(src, tgt, model, max_len = NULL, eos = NULL) 
 }
 \arguments{
 \item{src}{Source token sequence.}

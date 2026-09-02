@@ -25,6 +25,8 @@ morie_panel_deconvolution(
 when NULL.}
 
 \item{grid_u, grid_z}{evaluation points.}
+
+
 }
 \value{
 list: grid_u, f_U, grid_z, f_eps, psi_eps_from_root,

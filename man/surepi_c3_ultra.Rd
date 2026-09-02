@@ -5,7 +5,7 @@
 \alias{surepi_c3_ultra}
 \title{surepi_c3_ultra}
 \usage{
-surepi_c3_ultra(counts, threshold = 2, sigma_floor = 1)
+surepi_c3_ultra(counts, threshold = 2, sigma_floor = 1) 
 }
 \arguments{
 \item{counts}{Passed to \code{surepi_ears_detect}.}

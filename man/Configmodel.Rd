@@ -2,14 +2,14 @@
 % Please edit documentation in R/confgg.R
 \name{Configmodel}
 \alias{Configmodel}
-\title{Configuration model with a prescribed degree sequence.}
+\title{Configuration model with a prescribed degree sequence}
 \usage{
 Configmodel(degrees, seed = 1)
 }
 \arguments{
-\item{degrees}{Requested degree for each vertex.}
+\item{degrees}{See Usage.}
 
-\item{seed}{Seed of the shared minstd stream.}
+\item{seed}{See Usage.}
 }
 \value{
 List with \code{edges}, \code{degree} (realised), \code{self_loops}, \code{multi_edges}, \code{n}.

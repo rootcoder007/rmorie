@@ -5,7 +5,7 @@
 \alias{LtiProd}
 \title{Eqs (3.50), (3.53): convolution in time is multiplication in the s}
 \usage{
-LtiProd(x, h, s = NULL, omega = NULL, dt = 1)
+LtiProd(x, h, s = NULL, omega = NULL, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

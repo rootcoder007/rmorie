@@ -5,7 +5,7 @@
 \alias{MultModel}
 \title{Eq (4.58): y(t) = x(t) p(t), the model a multiplicative homomorphic}
 \usage{
-MultModel(x, p)
+MultModel(x, p) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

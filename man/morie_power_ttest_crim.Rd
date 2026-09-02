@@ -32,6 +32,7 @@ morie_power_ttest_crim(
 \item{r}{Correlation.}
 
 \item{n}{Sample size for the r delta.}
+
 }
 \value{
 List with delta_d, t_beta, beta, power, lambda, delta_r, r2_f2.

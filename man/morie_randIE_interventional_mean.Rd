@@ -5,7 +5,8 @@
 \alias{morie_randIE_interventional_mean}
 \title{morie_randIE_interventional_mean}
 \usage{
-morie_randIE_interventional_mean(Y, A, M, C = NULL, a = "1", a.star = "0", route = "gformula", laplace = 0)
+morie_randIE_interventional_mean(Y, A, M, C = NULL, a = "1", a.star = "0", route = "gformula", 
+    laplace = 0) 
 }
 \arguments{
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}

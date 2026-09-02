@@ -12,6 +12,9 @@ Pnie(X, M, Y, C = NULL, a = 1, astar = 0)
 \item{C}{Optional covariates.}
 
 \item{a, astar}{Exposure contrast.}
+
+
+
 }
 \value{
 list: estimate (PNIE), pnde, tnde, tnie, te, mediated_interaction,

@@ -5,7 +5,7 @@
 \alias{morie_twoT_tower_embedding}
 \title{morie_twoT_tower_embedding}
 \usage{
-morie_twoT_tower_embedding(features, W, b = NULL, normalise = TRUE)
+morie_twoT_tower_embedding(features, W, b = NULL, normalise = TRUE) 
 }
 \arguments{
 \item{features}{Passed to \code{.twoT_as_vec}.}

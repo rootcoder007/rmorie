@@ -5,7 +5,7 @@
 \alias{morie_manfd_scaling}
 \title{Torgerson scaling: double-centre the squared distances, embed}
 \usage{
-morie_manfd_scaling(D, dim = 2L, sweeps = 60L)
+morie_manfd_scaling(D, dim = 2L, sweeps = 60L) 
 }
 \arguments{
 \item{D}{A distance matrix.}

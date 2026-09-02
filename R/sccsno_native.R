@@ -216,7 +216,7 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 
 #' The conditional log-likelihood of Sec. 3. params is
 #'
-#' (beta_1..beta_s, alpha_1..alpha_{m-1}) with beta_0 = alpha_0 = 0. The
+#' (beta_1..beta_s, alpha_1..alpha_\{m-1\}) with beta_0 = alpha_0 = 0. The
 #' individual effects phi_i do not appear -- that is the point.
 #'
 #' @param params A vector; indexed elementwise.

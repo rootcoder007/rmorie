@@ -5,7 +5,7 @@
 \alias{purity_completeness}
 \title{purity_completeness}
 \usage{
-purity_completeness(bins, truth)
+purity_completeness(bins, truth) 
 }
 \arguments{
 \item{bins}{See Usage.}

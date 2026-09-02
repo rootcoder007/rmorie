@@ -17,8 +17,8 @@ A list with \code{start}, \code{width}, \code{sorted}.
 }
 \description{
 Theorem 2, p. 873: in one dimension the LMS location is the midpoint
-of the shortest half, found as the smallest of y_{h:n} - y_{1:n},
-..., y_{n:n} - y_{n-h+1:n}.  The same contiguity argument gives the
+of the shortest half, found as the smallest of y_\{h:n\} - y_\{1:n\},
+..., y_\{n:n\} - y_\{n-h+1:n\}.  The same contiguity argument gives the
 univariate MCD and MVE subsets.  Returns list(start, width, sorted)
 with a 1-based start.
 }

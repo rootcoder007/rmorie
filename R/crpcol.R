@@ -82,9 +82,9 @@
 
 #' Collapsed Gibbs sampler for a CRP mixture
 #'
-#' Formula: P(z_i | z_{-i}, y) with theta marginalized
+#' Formula: P(z_i | z_\{-i\}, y) with theta marginalized
 #'
-#' P(z_i = k | .) proportional to n_k^{-i} f(y_i | y_{-i,k}) and to
+#' P(z_i = k | .) proportional to n_k^\{-i\} f(y_i | y_\{-i,k\}) and to
 #' alpha f(y_i) for a new table, with the normal-normal predictive
 #' density in closed form.  Marginalising theta is what collapses the
 #' sampler: no cluster parameters are ever stored.

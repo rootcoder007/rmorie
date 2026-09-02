@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_tmlcic_tmle_cluster_ic}
 \alias{morie_tmlcic_tmle_cluster_ic}
+\alias{morie_tmlcic}
 \title{morie_tmlcic_tmle_cluster_ic}
 \usage{
-morie_tmlcic_tmle_cluster_ic(y, D, X, cluster = NULL, target = "SATE", design = NULL, library = NULL, g_library = NULL, n_folds = NULL, adapt = TRUE, ridge = 1e-08, level = 0.95)
+morie_tmlcic_tmle_cluster_ic(y, D, X, cluster = NULL, target = "SATE", design = NULL, library = NULL, 
+    g_library = NULL, n_folds = NULL, adapt = TRUE, ridge = 1e-08, level = 0.95) 
+
+morie_tmlcic(y, D, X, cluster = NULL, target = "SATE", design = NULL, library = NULL, 
+    g_library = NULL, n_folds = NULL, adapt = TRUE, ridge = 1e-08, level = 0.95) 
 }
 \arguments{
 \item{y}{Passed to \code{.s03vec}.}

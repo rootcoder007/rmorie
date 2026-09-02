@@ -5,7 +5,8 @@
 \alias{morie_alfqud}
 \title{Search for a machine program that sorts the given inputs}
 \usage{
-morie_alfqud(target, action_space = NULL, reward_fn = NULL, n_reg = 2L, max_len = 3L, latency_weight = 0, search = "mcts", n_sim = 400L, c_puct = 1.25, seed = 0)
+morie_alfqud(target, action_space = NULL, reward_fn = NULL, n_reg = 2L, max_len = 3L, 
+    latency_weight = 0, search = "mcts", n_sim = 400L, c_puct = 1.25, seed = 0) 
 }
 \arguments{
 \item{target}{The test inputs. What each one should become is its own   values in ascending order -- that is the specification of a sort,   and making it derived rather than supplied means the two cannot   drift apart.}

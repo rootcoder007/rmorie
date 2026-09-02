@@ -5,7 +5,7 @@
 \alias{CauchySch}
 \title{Eq (4.44): |a.b| <= |a||b|.  The ratio of the two sides is the cosine}
 \usage{
-CauchySch(a, b)
+CauchySch(a, b) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{BWander}
 \title{Baseline-wander removal as a transfer function}
 \usage{
-BWander(z, T = 1, pole = 0.995)
+BWander(z, T = 1, pole = 0.995) 
 }
 \arguments{
 \item{z}{A point or vector of points in the z plane; zero is a pole of   any causal transfer function and is refused.}

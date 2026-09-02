@@ -5,7 +5,7 @@
 \alias{Pt}
 \title{Pt}
 \usage{
-Pt(q, df, lower_tail = TRUE)
+Pt(q, df, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

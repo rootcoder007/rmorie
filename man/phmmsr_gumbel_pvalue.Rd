@@ -5,7 +5,7 @@
 \alias{phmmsr_gumbel_pvalue}
 \title{phmmsr_gumbel_pvalue}
 \usage{
-phmmsr_gumbel_pvalue(score, mu, lam)
+phmmsr_gumbel_pvalue(score, mu, lam) 
 }
 \arguments{
 \item{score}{Coerced to numeric by the body, with \code{as.numeric}.}

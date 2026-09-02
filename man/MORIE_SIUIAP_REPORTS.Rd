@@ -2,10 +2,8 @@
 % Please edit documentation in R/siuiap.R
 \name{MORIE_SIUIAP_REPORTS}
 \alias{MORIE_SIUIAP_REPORTS}
-\title{SIU IAP panel reports (Public Safety Canada, 2022-2024).}
-\usage{
-MORIE_SIUIAP_REPORTS
-}
+\title{SIU IAP panel reports (Public Safety Canada, 2022-2024)}
+
 \description{
-SIU IAP panel reports (Public Safety Canada, 2022-2024).
+SIU IAP panel reports (Public Safety Canada, 2022-2024)
 }

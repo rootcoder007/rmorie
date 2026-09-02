@@ -5,7 +5,7 @@
 \alias{morie_alfqud_actions}
 \title{Every legal instruction over the given memory and registers}
 \usage{
-morie_alfqud_actions(n_mem, n_reg)
+morie_alfqud_actions(n_mem, n_reg) 
 }
 \arguments{
 \item{n_mem}{How many memory slots.}

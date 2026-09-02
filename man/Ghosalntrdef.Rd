@@ -23,7 +23,7 @@ class closed under right censoring -- the property the Dirichlet
 process itself has and shares with the beta process.
 }
 \details{
-Formula: F(t_k) = 1 - exp(-sum_{j <= k} inc_j).
+Formula: F(t_k) = 1 - exp(-sum_\{j <= k\} inc_j).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

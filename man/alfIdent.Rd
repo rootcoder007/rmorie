@@ -5,7 +5,7 @@
 \alias{alfIdent}
 \title{alfIdent}
 \usage{
-alfIdent()
+alfIdent() 
 }
 \description{
 A step of the alf_core implementation. No other function in the package calls it. See the file header for the source the module follows.

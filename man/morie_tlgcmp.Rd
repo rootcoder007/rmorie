@@ -5,7 +5,10 @@
 \alias{morie_tlgcmp}
 \title{morie_tlgcmp}
 \usage{
-morie_tlgcmp(strata = NULL, outcome_means = NULL, covariate_probs = NULL, Q_functions = NULL, L_supports = NULL, L_probs = NULL, rule = NULL, Y = NULL, A = NULL, L = NULL, a_star = NULL, g = NULL, delta = 0.01, mode = c("point", "sequential", "counterfactual", "positivity"))
+morie_tlgcmp(strata = NULL, outcome_means = NULL, covariate_probs = NULL, 
+    Q_functions = NULL, L_supports = NULL, L_probs = NULL, rule = NULL, 
+    Y = NULL, A = NULL, L = NULL, a_star = NULL, g = NULL, delta = 0.01, 
+    mode = c("point", "sequential", "counterfactual", "positivity")) 
 }
 \arguments{
 \item{strata}{Passed to \code{g_computation}.}

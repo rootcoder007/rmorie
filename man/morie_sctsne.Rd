@@ -26,7 +26,7 @@ A list with elements \code{embedding}, \code{kl},
 }
 \description{
 Conditional affinities with perplexity-matched per-point
-variances (Eq. 1), symmetrized p_ij = (p_{j|i}+p_{i|j})/(2n),
+variances (Eq. 1), symmetrized p_ij = (p_\{j|i\}+p_\{i|j\})/(2n),
 Student-t map affinities (Eq. 4), gradient descent with the
 paper's Eq. 5 gradient and momentum schedule (0.5 then 0.8).
 }

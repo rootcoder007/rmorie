@@ -5,7 +5,7 @@
 \alias{morie_groebn}
 \title{morie_groebn}
 \usage{
-morie_groebn(polys, order = "lex", prune = TRUE, reduced = TRUE)
+morie_groebn(polys, order = "lex", prune = TRUE, reduced = TRUE) 
 }
 \arguments{
 \item{polys}{Iterated over elementwise, with \code{lapply}.}

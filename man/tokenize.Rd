@@ -5,7 +5,7 @@
 \alias{tokenize}
 \title{tokenize}
 \usage{
-tokenize(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL)
+tokenize(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{mean_scale}.}

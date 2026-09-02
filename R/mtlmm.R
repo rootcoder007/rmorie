@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Multi-trait linear mixed model.
+#' Multi-trait linear mixed model
 #'
 #' Formula: Y = (1 (x) I_T) mu + X beta + Z b + eps,  b ~ N(0, G (x) Sigma_T),  eps ~ N(0, I_J (x) R_T)
 #'

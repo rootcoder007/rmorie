@@ -5,10 +5,14 @@
 \alias{morie_ann_sse}
 \title{morie_ann_sse}
 \usage{
-morie_ann_sse(y_hat, y)
+morie_ann_sse(y_hat, y) 
 }
 \description{
 morie_ann_sse
+}
+\arguments{
+\item{y_hat}{Argument \code{y_hat}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A numeric value.

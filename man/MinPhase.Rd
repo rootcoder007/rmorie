@@ -5,7 +5,7 @@
 \alias{MinPhase}
 \title{Section 4.7.2, after eq (4.73): a minimum-phase signal has a CAUSAL}
 \usage{
-MinPhase(x)
+MinPhase(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

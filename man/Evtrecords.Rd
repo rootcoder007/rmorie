@@ -2,18 +2,18 @@
 % Please edit documentation in R/evrec.R
 \name{Evtrecords}
 \alias{Evtrecords}
-\title{Upper record times and counts in a sequence.}
+\title{Upper record times and counts in a sequence}
 \usage{
 Evtrecords(x)
 }
 \arguments{
-\item{x}{The sequence, in observation order.}
+\item{x}{See Usage.}
 }
 \value{
 List with \code{count}, \code{times} (indices of records), \code{values}, \code{expected}, \code{variance}, \code{z}, \code{n}.
 }
 \description{
-Formula: R_n = sum_i 1{X_i > max(X_1..X_{i-1})}; E\link{R_n} = sum_i 1/i; Var\link{R_n} = sum_i (1/i - 1/i^2)
+Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E[R_n] = sum_i 1/i; Var[R_n] = sum_i (1/i - 1/i^2)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

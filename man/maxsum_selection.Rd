@@ -5,7 +5,7 @@
 \alias{maxsum_selection}
 \title{maxsum_selection}
 \usage{
-maxsum_selection(fps, k, seed = NULL)
+maxsum_selection(fps, k, seed = NULL) 
 }
 \arguments{
 \item{fps}{Passed to \code{.tncomp_select}.}

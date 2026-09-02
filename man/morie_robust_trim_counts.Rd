@@ -5,10 +5,14 @@
 \alias{morie_robust_trim_counts}
 \title{morie_robust_trim_counts}
 \usage{
-morie_robust_trim_counts(n, tr)
+morie_robust_trim_counts(n, tr) 
 }
 \description{
 morie_robust_trim_counts
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{tr}{Argument \code{tr}; see Usage.}
 }
 \value{
 The value of \code{floor}.

@@ -5,7 +5,7 @@
 \alias{morie_tlctmle}
 \title{morie_tlctmle}
 \usage{
-morie_tlctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE)
+morie_tlctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE) 
 }
 \arguments{
 \item{A}{Passed to \code{ctmle}.}

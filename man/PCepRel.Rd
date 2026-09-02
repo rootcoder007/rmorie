@@ -5,7 +5,7 @@
 \alias{PCepRel}
 \title{Eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even}
 \usage{
-PCepRel(x)
+PCepRel(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

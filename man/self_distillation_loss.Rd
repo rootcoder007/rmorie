@@ -5,7 +5,8 @@
 \alias{self_distillation_loss}
 \title{DINO self-distillation loss (image- or patch-level)}
 \usage{
-self_distillation_loss(student, teacher, temperature_s = 0.1, temperature_t = 0.04, patch_level = FALSE)
+self_distillation_loss(student, teacher, temperature_s = 0.1, temperature_t = 0.04, 
+    patch_level = FALSE) 
 }
 \arguments{
 \item{student}{Numeric vector.}

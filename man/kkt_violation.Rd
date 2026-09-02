@@ -5,7 +5,7 @@
 \alias{kkt_violation}
 \title{kkt_violation}
 \usage{
-kkt_violation(alpha, y, grad, C)
+kkt_violation(alpha, y, grad, C) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

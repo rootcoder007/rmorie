@@ -63,7 +63,7 @@ the FeatureServer via the 3SS+ generic
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
-head(df\[, c("Neighbourhood", "Total_Population", "Seniors65andover")\])
+head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
 \dontshow{\}) # examplesIf}
 }
 \references{

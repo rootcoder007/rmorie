@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 .t4_EM_ITERS <- 500L
 
-#' Lewontin's D' for two biallelic loci from unphased genotypes.
+#' Lewontin's D' for two biallelic loci from unphased genotypes
 #'
 #' Formula: with \eqn{p_A, p_B} the major-allele frequencies,
 #' \eqn{p_a = 1-p_A}, \eqn{p_b = 1-p_B} and \eqn{p_{AB}} the haplotype

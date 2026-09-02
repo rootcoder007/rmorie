@@ -5,7 +5,7 @@
 \alias{morie_yolovx_center_sampling}
 \title{morie_yolovx_center_sampling}
 \usage{
-morie_yolovx_center_sampling(box, grid_w, grid_h, stride = 1, radius = 1.5)
+morie_yolovx_center_sampling(box, grid_w, grid_h, stride = 1, radius = 1.5) 
 }
 \arguments{
 \item{box}{Coerced to numeric by the body, with \code{as.numeric}.}

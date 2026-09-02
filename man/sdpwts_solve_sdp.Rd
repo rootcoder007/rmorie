@@ -5,7 +5,7 @@
 \alias{sdpwts_solve_sdp}
 \title{The barrier method: centre, increase t, repeat}
 \usage{
-sdpwts_solve_sdp(c, F0, Fs, x0, t0 = 1, mu = 10, tol = 1e-08, max_outer = 60)
+sdpwts_solve_sdp(c, F0, Fs, x0, t0 = 1, mu = 10, tol = 1e-08, max_outer = 60) 
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}

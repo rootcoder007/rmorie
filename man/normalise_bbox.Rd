@@ -5,7 +5,7 @@
 \alias{normalise_bbox}
 \title{normalise_bbox}
 \usage{
-normalise_bbox(box, width, height, scale = 1000)
+normalise_bbox(box, width, height, scale = 1000) 
 }
 \arguments{
 \item{box}{A vector; its length is taken and its elements indexed.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/psymet.R
 \name{morie_psymet_kmo}
 \alias{morie_psymet_kmo}
-\title{Kaiser-Meyer-Olkin sampling adequacy.}
+\title{Kaiser-Meyer-Olkin sampling adequacy}
 \usage{
 morie_psymet_kmo(data)
 }

@@ -5,7 +5,7 @@
 \alias{morie_survvae_log_pdf}
 \title{Log density of one expert}
 \usage{
-morie_survvae_log_pdf(t, shape, scale, primitive = "weibull")
+morie_survvae_log_pdf(t, shape, scale, primitive = "weibull") 
 }
 \arguments{
 \item{t}{Time, must be positive.}

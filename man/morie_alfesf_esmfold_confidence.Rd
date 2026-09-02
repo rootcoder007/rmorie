@@ -5,7 +5,9 @@
 \alias{morie_alfesf_esmfold_confidence}
 \title{morie_alfesf_esmfold_confidence}
 \usage{
-morie_alfesf_esmfold_confidence(lddt_logits = NULL, pae_logits = NULL, features = NULL, weights = NULL, lddt = NULL, chain_id = NULL, temperature = 1, l2 = 0.001, iters = 300L, lr = 0.5, pae_bin_width = 0.5)
+morie_alfesf_esmfold_confidence(lddt_logits = NULL, pae_logits = NULL, features = NULL, weights = NULL, 
+    lddt = NULL, chain_id = NULL, temperature = 1, l2 = 0.001, iters = 300L, 
+    lr = 0.5, pae_bin_width = 0.5) 
 }
 \arguments{
 \item{lddt_logits}{Optional; may be \code{NULL}. A matrix; indexed by row and column.}

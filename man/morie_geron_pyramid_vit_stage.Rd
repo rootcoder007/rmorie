@@ -12,6 +12,8 @@ morie_geron_pyramid_vit_stage(X, WQ, WK, WV, reduction_ratio = 2)
 \item{WQ, WK, WV}{Projections with d_model rows.}
 
 \item{reduction_ratio}{R dividing both H and W.}
+
+
 }
 \value{
 List with \code{output}, \code{weights}, \code{reduced_tokens},

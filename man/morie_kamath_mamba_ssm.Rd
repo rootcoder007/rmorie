@@ -15,6 +15,7 @@ morie_kamath_mamba_ssm(x, A, B, C, delta)
 projections.}
 
 \item{delta}{Step sizes.}
+
 }
 \value{
 List with \code{y}, \code{states}, \code{A_bar}, \code{estimate}.

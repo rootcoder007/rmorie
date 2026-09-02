@@ -5,7 +5,7 @@
 \alias{tree_paths}
 \title{tree_paths}
 \usage{
-tree_paths(tree)
+tree_paths(tree) 
 }
 \arguments{
 \item{tree}{The body requires: attrInf: the tree has no paths.}

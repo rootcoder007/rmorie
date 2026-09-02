@@ -2,14 +2,14 @@
 % Please edit documentation in R/ordtm.R
 \name{Ordprobs}
 \alias{Ordprobs}
-\title{Category probabilities of the ordinal threshold model.}
+\title{Category probabilities of the ordinal threshold model}
 \usage{
 Ordprobs(eta, thresholds, link = "probit")
 }
 \arguments{
 \item{eta}{Linear predictor x_i'beta for each record.}
 
-\item{thresholds}{The C - 1 finite thresholds gamma_1 < ... < gamma_{C-1}.}
+\item{thresholds}{The C - 1 finite thresholds gamma_1 < ... < gamma_\{C-1\}.}
 
 \item{link}{'probit' for the standard normal CDF or 'logistic' for the standard logistic CDF.}
 }
@@ -17,7 +17,7 @@ Ordprobs(eta, thresholds, link = "probit")
 List with \code{probabilities}, \code{n}, \code{C}.
 }
 \description{
-Formula: p_ic = F(gamma_c + eta_i) - F(gamma_{c-1} + eta_i),  gamma_0 = -inf, gamma_C = +inf
+Formula: p_ic = F(gamma_c + eta_i) - F(gamma_\{c-1\} + eta_i),  gamma_0 = -inf, gamma_C = +inf
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

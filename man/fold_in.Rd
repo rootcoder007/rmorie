@@ -5,7 +5,7 @@
 \alias{fold_in}
 \title{fold_in}
 \usage{
-fold_in(query, model)
+fold_in(query, model) 
 }
 \arguments{
 \item{query}{Coerced to numeric by the body, with \code{as.numeric}.}

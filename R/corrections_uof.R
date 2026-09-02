@@ -32,7 +32,7 @@
   religion                = "a065f65f-8994-4242-9aa3-5a457445331f"
 )
 
-#' Canonical CKAN resource id table for the Corrections UoF dataset.
+#' Canonical CKAN resource id table for the Corrections UoF dataset
 #'
 #' Returns the 12 morie short-name -> CKAN resource-id map for the
 #' Ontario "Use of Force in Correctional Institutions" dataset on
@@ -48,7 +48,7 @@ morie_corrections_uof_resource_ids <- function() {
   .MORIE_CORRECTIONS_UOF_RESOURCE_IDS
 }
 
-#' Generic Corrections-UoF loader.
+#' Generic Corrections-UoF loader
 #'
 #' Internal helper that every per-resource loader delegates to via
 #' the shared \code{.morie_load_chain()} (live -> included ->
@@ -255,7 +255,7 @@ morie_datasets_corrections_uof_religion <- function(offline = TRUE,
 # Synthetic generator
 # ---------------------------------------------------------------------------
 
-#' Build a synthetic Corrections-UoF data.frame for testing.
+#' Build a synthetic Corrections-UoF data.frame for testing
 #'
 #' Returns a small data.frame mirroring the column shape of the
 #' published corrections-UoF resource for the given short \code{key}.

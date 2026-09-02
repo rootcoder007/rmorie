@@ -5,7 +5,7 @@
 \alias{NccfTpl}
 \title{Normalized per shift, so a LOUD stretch cannot outscore a matching}
 \usage{
-NccfTpl(x, template)
+NccfTpl(x, template) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

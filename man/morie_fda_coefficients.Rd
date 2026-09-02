@@ -5,7 +5,7 @@
 \alias{morie_fda_coefficients}
 \title{Basis coefficients of an observed curve (MVSML eq. 14.6)}
 \usage{
-morie_fda_coefficients(Psi, x_t)
+morie_fda_coefficients(Psi, x_t) 
 }
 \arguments{
 \item{Psi}{basis matrix from [morie_fda_basis()]}

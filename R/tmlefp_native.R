@@ -84,7 +84,7 @@ optimal_alpha <- function(pscore, sigma2_treated = NULL,
 
 #' Theorem 5.3: the one-sided threshold for the effect on the treated
 #'
-#' A*_t = {x : e(x) <= alpha_t}, with alpha_t = 1 (no trimming) when
+#' A*_t = \{x : e(x) <= alpha_t\}, with alpha_t = 1 (no trimming) when
 #' sup_x 1 / (1 - e(x)) <= 2 E\[1 / (1 - e(X)) | W = 1\], and otherwise
 #' solving 1 / (1 - alpha_t) = 2 E\[1 / (1 - e(X)) | W = 1, e(X) <= alpha_t\].
 #' Homoskedasticity only, as in the paper.
@@ -126,7 +126,7 @@ optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
 
 #' Theorem 5.4 / Corollary 5.2: optimal weights
 #'
-#' omega*(x) = (sigma1^2 / e + sigma0^2 / (1 - e))^{-1}, which is
+#' omega*(x) = (sigma1^2 / e + sigma0^2 / (1 - e))^\{-1\}, which is
 #' e(x)(1 - e(x)) under homoskedasticity.
 #'
 #' @param pscore Propensity scores.

@@ -5,7 +5,7 @@
 \alias{morie_genemt_gene_set_regression}
 \title{morie_genemt_gene_set_regression}
 \usage{
-morie_genemt_gene_set_regression(z_scores, membership, covariates = NULL)
+morie_genemt_gene_set_regression(z_scores, membership, covariates = NULL) 
 }
 \arguments{
 \item{z_scores}{Coerced to numeric by the body, with \code{as.numeric}.}

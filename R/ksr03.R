@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Uniform distance sup_t |F_n(t) - F(t)|, with the DKW tail bound.
+#' Uniform distance sup_t |F_n(t) - F(t)|, with the DKW tail bound
 #'
 #' The supremum is attained only at the sample points, and at each one it
 #' must be evaluated on BOTH sides.

@@ -5,7 +5,7 @@
 \alias{morie_karpV_raw_fitness}
 \title{Raw fitness: sum of absolute errors over the fitness cases}
 \usage{
-morie_karpV_raw_fitness(node, cases, terminals)
+morie_karpV_raw_fitness(node, cases, terminals) 
 }
 \arguments{
 \item{node}{the tree.}

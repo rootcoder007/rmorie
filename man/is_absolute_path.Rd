@@ -5,7 +5,7 @@
 \alias{is_absolute_path}
 \title{is_absolute_path}
 \usage{
-is_absolute_path(path)
+is_absolute_path(path) 
 }
 \arguments{
 \item{path}{Character; passed to \code{grepl}.}

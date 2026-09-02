@@ -10,6 +10,8 @@ morie_evt_gev_cdf(x, mu, sigma, xi)
 \item{x}{quantile(s)}
 
 \item{mu, sigma, xi}{GEV location, scale (> 0), shape}
+
+
 }
 \value{
 numeric vector of probabilities

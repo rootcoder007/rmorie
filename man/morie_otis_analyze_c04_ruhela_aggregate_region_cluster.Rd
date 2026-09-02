@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c04_ruhela_aggregate_region_cluster}
 \alias{morie_otis_analyze_c04_ruhela_aggregate_region_cluster}
 \alias{morie_otis_analyze_c04_mrm_aggregate_region_cluster}
-\title{c04 region-cluster variant.}
+\title{c04 region-cluster variant}
 \usage{
 morie_otis_analyze_c04_ruhela_aggregate_region_cluster(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c04_mrm_aggregate_region_cluster(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c04 region-cluster variant.
+c04 region-cluster variant
 }
 \examples{
 \donttest{

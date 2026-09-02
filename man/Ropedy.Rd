@@ -16,6 +16,7 @@ Ropedy(y, q, m, theta = 10000, L_new = NULL, L_train = NULL)
 \item{theta}{Base.}
 
 \item{L_new, L_train}{Target and trained context lengths.}
+
 }
 \value{
 List with \code{estimate}, \code{theta_base}, \code{freqs},

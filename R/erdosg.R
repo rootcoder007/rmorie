@@ -15,7 +15,7 @@
 #' construction, and the usual name for G(n,p) is a misattribution.
 #'
 #' Alongside the realised graph the exact analytic quantities are
-#' returned: E[edges] = C(n,2) p, E[degree] = (n-1) p, the connectivity
+#' returned: E\[edges\] = C(n,2) p, E\[degree\] = (n-1) p, the connectivity
 #' threshold log(n)/n and the giant-component threshold 1/n.
 #'
 #' @param n Number of vertices (>= 1).

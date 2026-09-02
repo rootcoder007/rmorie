@@ -12,6 +12,7 @@ morie_heteroskedastic_scales(votes, ideal_points, alpha, beta)
 \item{ideal_points}{Fixed ideal points, one per row of \code{votes}.}
 
 \item{alpha, beta}{Fixed item parameters (one per column).}
+
 }
 \value{
 List with \code{psi}, \code{loglik}, \code{n}, \code{q}.

@@ -18,6 +18,11 @@ morie_geron_vq_vae(
 \item{X}{Training data (n, d).}
 
 \item{codebook_size, latent_dim, epochs, lr, beta, seed}{As in Python original.}
+
+
+
+
+
 }
 \value{
 list with codes, indices, z_e, z_q, codebook, counts, reconstruction,

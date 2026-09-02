@@ -19,7 +19,7 @@
 # same per-layer width check that fails loudly if the mixture is over
 # differently shaped vectors.
 
-#' Softmax-normalised s^{task}. A simplex, not free weights: these
+#' Softmax-normalised s^\{task\}. A simplex, not free weights: these
 #'
 #' choose WHICH layers to read and cannot alter the magnitude, which is
 #' gamma\'s job alone.
@@ -142,7 +142,7 @@ bilm_forward <- function(X, layers) {
   reps
 }
 
-#' Eq. (1): gamma * sum_j s_j h_{k,j}
+#' Eq. (1): gamma * sum_j s_j h_\{k,j\}
 #'
 #' A step of the elmo_native implementation. Called by \code{elmo_representation}.
 #' See the file header for the source the module follows.

@@ -755,7 +755,7 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
   list(f=fw$best, f_at=fw$best_at, r=r, r_at=r_at)
 }
 
-#' Argmax_{i<j} f_i + r_j -- the split with a microinsertion gap
+#' Argmax_\{i<j\} f_i + r_j -- the split with a microinsertion gap
 #'
 #' Indices are 1-based over the consensus, as in the paper.
 #'

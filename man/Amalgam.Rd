@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitamg.R
 \name{Amalgam}
 \alias{Amalgam}
-\title{Amalgamate a subset of parts into one, keeping the rest.}
+\title{Amalgamate a subset of parts into one, keeping the rest}
 \usage{
 Amalgam(x, parts, total = 1)
 }
@@ -22,7 +22,7 @@ The amalgamated part is appended last; the retained parts keep their
 original order. \code{parts} is one-based.
 }
 \details{
-Formula: amalg(x; S) = C( (x_i : i not in S), sum_{j in S} x_j )
+Formula: amalg(x; S) = C( (x_i : i not in S), sum_\{j in S\} x_j )
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

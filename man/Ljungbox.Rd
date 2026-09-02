@@ -2,7 +2,7 @@
 % Please edit documentation in R/ljbox2.R
 \name{Ljungbox}
 \alias{Ljungbox}
-\title{Ljung-Box Q test for autocorrelation.}
+\title{Ljung-Box Q test for autocorrelation}
 \usage{
 Ljungbox(y, lags = 1, fitdf = 0)
 }

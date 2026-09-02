@@ -8,7 +8,7 @@
 #' short sentence, which is the only way to be sure the back-pointers
 #' are right.
 #'
-#' Formula: argmax_y prod_t P(y_t | y_{t-1}) P(x_t | y_t).
+#' Formula: argmax_y prod_t P(y_t | y_\{t-1\}) P(x_t | y_t).
 #'
 #' @param X Word indices, 0-based.
 #' @param tagset Tag labels; only the count is used.

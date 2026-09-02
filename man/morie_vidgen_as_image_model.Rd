@@ -5,7 +5,7 @@
 \alias{morie_vidgen_as_image_model}
 \title{morie_vidgen_as_image_model}
 \usage{
-morie_vidgen_as_image_model(video, block)
+morie_vidgen_as_image_model(video, block) 
 }
 \arguments{
 \item{video}{Iterated over elementwise, with \code{lapply}.}

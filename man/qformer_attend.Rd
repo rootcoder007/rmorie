@@ -5,7 +5,7 @@
 \alias{qformer_attend}
 \title{qformer_attend}
 \usage{
-qformer_attend(queries, image_features, WQ, WK, WV)
+qformer_attend(queries, image_features, WQ, WK, WV) 
 }
 \arguments{
 \item{queries}{A matrix; passed to \code{as.matrix}.}

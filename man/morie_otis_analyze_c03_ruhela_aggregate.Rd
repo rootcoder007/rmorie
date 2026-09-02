@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c03_ruhela_aggregate}
 \alias{morie_otis_analyze_c03_ruhela_aggregate}
 \alias{morie_otis_analyze_c03_mrm_aggregate}
-\title{c03 aggregate Ruhela: Indigenous -> RC.}
+\title{c03 aggregate Ruhela: Indigenous -> RC}
 \usage{
 morie_otis_analyze_c03_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c03_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c03 aggregate Ruhela: Indigenous -> RC.
+c03 aggregate Ruhela: Indigenous -> RC
 }
 \examples{
 \donttest{

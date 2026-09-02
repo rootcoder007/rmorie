@@ -5,7 +5,7 @@
 \alias{morie_tlonsl_sequential_risk}
 \title{morie_tlonsl_sequential_risk}
 \usage{
-morie_tlonsl_sequential_risk(y, algorithm, loss = "squared", burn_in = 5, lags = 1)
+morie_tlonsl_sequential_risk(y, algorithm, loss = "squared", burn_in = 5, lags = 1) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

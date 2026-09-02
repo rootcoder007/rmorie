@@ -13,6 +13,7 @@ morie_kamath_ch5_pref_sigmoid_form(r_star)
 \item{r_star}{Named reward vector or function.}
 
 \item{y_w, y_l}{Responses.}
+
 }
 \value{
 List with \code{estimate}, \code{margin}, \code{r_w}, \code{r_l}.

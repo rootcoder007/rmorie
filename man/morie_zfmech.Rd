@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_zfmech}
 \alias{morie_zfmech}
+\alias{gaussian_mechanism}
 \title{Release q(x) under rho-zCDP}
 \usage{
-morie_zfmech(value, sensitivity, rho, seed = 0, n = 1L)
+morie_zfmech(value, sensitivity, rho, seed = 0, n = 1L) 
+
+gaussian_mechanism(value, sensitivity, rho, seed = 0, n = 1L) 
 }
 \arguments{
 \item{value}{The true query value q(x).}

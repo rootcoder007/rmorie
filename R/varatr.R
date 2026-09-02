@@ -6,14 +6,14 @@
 #' 978-0-07-146495-6. The parametric ("delta-normal") one-period VaR at
 #' confidence 1-alpha is the alpha-quantile of the return distribution
 #' with the sign flipped, so a loss is a positive number:
-#' VaR_alpha = -(mu + sigma z_alpha) = -mu + sigma z_{1-alpha}, with
+#' VaR_alpha = -(mu + sigma z_alpha) = -mu + sigma z_\{1-alpha\}, with
 #' z_alpha = qnorm(alpha). The matching Gaussian expected shortfall is
 #' ES_alpha = -mu + sigma dnorm(z_alpha)/alpha.
 #'
 #' The conditional sigma is the one-step-ahead GARCH(1,1) standard
 #' deviation of Bollerslev, T. (1986), Journal of Econometrics
 #' 31(3):307-327, doi:10.1016/0304-4076(86)90063-1, Eqs. (1)-(2):
-#' sigma^2_t = omega + a e^2_{t-1} + b sigma^2_{t-1}, e_t = y_t - mu.
+#' sigma^2_t = omega + a e^2_\{t-1\} + b sigma^2_\{t-1\}, e_t = y_t - mu.
 #'
 #' VARIANCE TARGETING. omega is pinned to the sample unconditional
 #' variance s^2 by omega = s^2 (1 - a - b), the stationary-variance

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sum-of-sinusoids (spectral) representation, eqs (2.26)-(2.27).
+#' Sum-of-sinusoids (spectral) representation, eqs (2.26)-(2.27)
 #'
 #' Z(s) = mu + sum_j A_j cos(w_j s + phi_j) with random amplitudes A_j
 #' and phases phi_j uniform on (0, 2pi), all mutually independent. The

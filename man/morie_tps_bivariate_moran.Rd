@@ -26,6 +26,8 @@ columns.}
 
 \item{centroid_lat_col, centroid_lon_col}{Names of centroid columns
 when \code{polygons} is a plain data.frame.}
+
+
 }
 \value{
 A named list with \code{I_xy}, \code{n}, \code{x_col},

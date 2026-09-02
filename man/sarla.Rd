@@ -3,7 +3,7 @@
 \name{sarla}
 \alias{sarla}
 \alias{morie_spatial_ar_lag}
-\title{Spatial autoregressive lag model (SAR lag, ML).}
+\title{Spatial autoregressive lag model (SAR lag, ML)}
 \usage{
 sarla(x, y, w)
 

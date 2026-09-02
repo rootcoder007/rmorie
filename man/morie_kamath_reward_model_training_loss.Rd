@@ -8,6 +8,7 @@ morie_kamath_reward_model_training_loss(scores_w, scores_l)
 }
 \arguments{
 \item{scores_w, scores_l}{Chosen and rejected scores.}
+
 }
 \value{
 List with \code{estimate}, \code{per_pair}, \code{margins}, \code{accuracy}.

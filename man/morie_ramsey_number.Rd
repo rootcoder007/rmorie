@@ -8,6 +8,7 @@ morie_ramsey_number(k, l = NULL)
 }
 \arguments{
 \item{k, l}{Clique sizes; \code{l} defaults to \code{k} for the diagonal case.}
+
 }
 \value{
 A list with \code{value} (NULL when unknown), \code{lower}, \code{upper},

@@ -10,6 +10,10 @@ morie_ols_two_iv(r_y1, r_y2, r_12, s_y, s_1, s_2)
 \item{r_y1, r_y2, r_12}{Pairwise correlations.}
 
 \item{s_y, s_1, s_2}{Standard deviations of y, x1, x2.}
+
+
+
+
 }
 \value{
 List with b1 and b2.

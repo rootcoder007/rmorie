@@ -1192,7 +1192,7 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 # Cross-validation (rsample::vfold_cv / caret::trainControl cross-ref)
 # ---------------------------------------------------------------------------
 
-#' Bootstrap-flavoured K-fold cross-validation (internal).
+#' Bootstrap-flavoured K-fold cross-validation (internal)
 #'
 #' Lower-level CV used by \[repeated_cv()\] / \[leave_one_out_cv()\].
 #' Public CV with `(fit_fn, predict_fn, X, y, ...)` signature lives

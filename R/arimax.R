@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' ARIMAX: exogenous regression with ARMA errors.
+#' ARIMAX: exogenous regression with ARMA errors
 #'
 #' (1-B)^d y = X beta + n with phi(B) n = theta(B) e.  Stage one is OLS
 #' of the differenced response on the differenced covariates; stage two

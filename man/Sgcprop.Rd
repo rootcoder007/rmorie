@@ -5,10 +5,15 @@
 \alias{Sgcprop}
 \title{Simplified graph convolution propagation (Wu et al. 2019, SGC)}
 \usage{
-Sgcprop(A, X, K)
+Sgcprop(A, X, K) 
 }
 \description{
 Simplified graph convolution propagation (Wu et al. 2019, SGC)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{K}{Argument \code{K}; see Usage.}
 }
 \value{
 A list with \code{X}, \code{K}, \code{n_nodes}, \code{dim}.

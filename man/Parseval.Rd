@@ -5,7 +5,7 @@
 \alias{Parseval}
 \title{Eq (3.91), discrete form: sum |x(n)|^2 = (1/N) sum |X(k)|^2.  With}
 \usage{
-Parseval(x)
+Parseval(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

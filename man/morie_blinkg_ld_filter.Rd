@@ -5,7 +5,7 @@
 \alias{morie_blinkg_ld_filter}
 \title{Keep the most significant marker, drop what correlates with it}
 \usage{
-morie_blinkg_ld_filter(geno, order, threshold = .BLINKG_LD_THRESHOLD)
+morie_blinkg_ld_filter(geno, order, threshold = .BLINKG_LD_THRESHOLD) 
 }
 \arguments{
 \item{geno}{A list of marker vectors.}

@@ -5,7 +5,7 @@
 \alias{particle_filter_simple}
 \title{particle_filter_simple}
 \usage{
-particle_filter_simple(y, n_particles, init, step, loglik, seed = 0L)
+particle_filter_simple(y, n_particles, init, step, loglik, seed = 0L) 
 }
 \arguments{
 \item{y}{See Usage.}

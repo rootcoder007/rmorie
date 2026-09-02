@@ -5,7 +5,7 @@
 \alias{PCepstrum}
 \title{Eq (4.81).  The book notes the final squaring is omitted in some}
 \usage{
-PCepstrum(x, square = TRUE)
+PCepstrum(x, square = TRUE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

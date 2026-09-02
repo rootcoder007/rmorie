@@ -5,7 +5,7 @@
 \alias{morie_mistr_sliding_window_mask}
 \title{Sliding-window attention mask}
 \usage{
-morie_mistr_sliding_window_mask(L, window, causal = TRUE)
+morie_mistr_sliding_window_mask(L, window, causal = TRUE) 
 }
 \arguments{
 \item{L}{Sequence length.}

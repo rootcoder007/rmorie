@@ -5,7 +5,7 @@
 \alias{morie_jsonlt}
 \title{The jsonlite JSON mapping, natively}
 \usage{
-morie_jsonlt(x = NULL, route = "to_json", ...)
+morie_jsonlt(x = NULL, route = "to_json", ...) 
 }
 \arguments{
 \item{x}{the value or JSON text the route acts on.}

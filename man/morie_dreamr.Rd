@@ -5,7 +5,8 @@
 \alias{morie_dreamr}
 \title{morie_dreamr}
 \usage{
-morie_dreamr(state, action_model, transition, reward_model, value_model, horizon = 15, gamma = 0.99, lam = 0.95, estimator = "lambda", k = 1)
+morie_dreamr(state, action_model, transition, reward_model, value_model, horizon = 15, 
+    gamma = 0.99, lam = 0.95, estimator = "lambda", k = 1) 
 }
 \arguments{
 \item{state}{Passed to \code{morie_dreamr_imagine}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spconv.R
 \name{spconv}
 \alias{spconv}
-\title{Convolution representation of a stationary random field.}
+\title{Convolution representation of a stationary random field}
 \usage{
 spconv(kernel = NULL, h = NULL, sigma2_x = 1, half_width = 5, n = 40001)
 }
@@ -14,6 +14,7 @@ spconv(kernel = NULL, h = NULL, sigma2_x = 1, half_width = 5, n = 40001)
 \item{sigma2_x}{White-noise variance, positive.}
 
 \item{half_width, n}{Quadrature half-width and node count.}
+
 }
 \value{
 Named list: h, covariance, correlation, variance.

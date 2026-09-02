@@ -34,6 +34,9 @@ morie_esl_svm_kernel(
 \item{newdata}{Points to classify; defaults to \code{X}.}
 
 \item{tol, max_passes, seed}{SMO controls.}
+
+
+
 }
 \value{
 List with \code{alpha}, \code{b}, \code{support} (1-based indices), \code{decision},

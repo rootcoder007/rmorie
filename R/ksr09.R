@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Z-estimator: the theta solving the estimating equation Psi_n(theta) = 0.
+#' Z-estimator: the theta solving the estimating equation Psi_n(theta) = 0
 #'
 #' The root is found by bisection with a FIXED iteration count rather than
 #' a tolerance, so the two language arms land on bit-identical iterates.

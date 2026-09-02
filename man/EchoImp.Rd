@@ -5,7 +5,7 @@
 \alias{EchoImp}
 \title{Two-impulse echo excitation, eq (4.74)}
 \usage{
-EchoImp(a, n_0, n)
+EchoImp(a, n_0, n) 
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}

@@ -5,7 +5,7 @@
 \alias{morie_sentpc_viterbi_segment}
 \title{Unigram LM segmentation via Viterbi}
 \usage{
-morie_sentpc_viterbi_segment(text, piece_logp, add_prefix = TRUE)
+morie_sentpc_viterbi_segment(text, piece_logp, add_prefix = TRUE) 
 }
 \arguments{
 \item{text}{Character.}

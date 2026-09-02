@@ -5,7 +5,7 @@
 \alias{sasimi_tversky}
 \title{sasimi_tversky}
 \usage{
-sasimi_tversky(fp_a, fp_b, alpha = 1, beta = 1)
+sasimi_tversky(fp_a, fp_b, alpha = 1, beta = 1) 
 }
 \arguments{
 \item{fp_a}{Passed to \code{sasimi_counts}.}
@@ -24,7 +24,7 @@ A numeric value.
 Jaccard, P. (1912) "The distribution of the flora in the alpine
 zone", *New Phytologist* 11(2), 37-50,
 doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-:math:`c/(a+b-c)` itself.
+\eqn{c/(a+b-c)} itself.
 
 Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
 similarity searching", *Journal of Chemical Information and Computer

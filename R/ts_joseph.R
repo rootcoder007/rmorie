@@ -685,8 +685,8 @@ morie_pacfts <- function(x, maxlag = 20L) {
 
 #' Augmented Dickey-Fuller unit-root test (ch. 6 p. 149)
 #'
-#' Regresses diff(x)_t on a constant, x_{t-1} and lags lagged
-#' differences; the statistic is the t-ratio on x_{t-1}. The null is a
+#' Regresses diff(x)_t on a constant, x_\{t-1\} and lags lagged
+#' differences; the statistic is the t-ratio on x_\{t-1\}. The null is a
 #' unit root, so a statistic BELOW the critical value rejects
 #' non-stationarity. Critical values are MacKinnon's (1991) response
 #' surface for the constant-only regression, tau = b0 + b1/n + b2/n^2;
@@ -1134,7 +1134,7 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
 #' Conformalized quantile regression (ch. 17 pp. 514-515)
 #'
 #' The book's own non-conformity score, quoted from p. 514:
-#' s(x, y) = max{yhat_t^{alpha/2} - y, y - yhat_t^{1-(alpha/2)}}.
+#' s(x, y) = max\{yhat_t^\{alpha/2\} - y, y - yhat_t^\{1-(alpha/2)\}\}.
 #' The conformal quantile of the calibration scores is added to both
 #' ends of the test interval, using the finite-sample rank
 #' ceil((n+1)(1-alpha)) that delivers the coverage guarantee.
@@ -1177,7 +1177,7 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 #' Adaptive conformal inference (ch. 17 p. 519)
 #'
 #' The book's own online update, quoted from p. 519: err_t = 1 if Y_t
-#' is outside Chat(alpha_t) else 0; alpha_{t+1} = alpha_t + gamma
+#' is outside Chat(alpha_t) else 0; alpha_\{t+1\} = alpha_t + gamma
 #' (alpha - err_t), with alpha_1 = alpha. inside is the sequence of
 #' coverage outcomes, so this is a pure recursion over caller data.
 #' The method is Gibbs, I. and Candes, E. (2021), Adaptive Conformal
@@ -1369,7 +1369,7 @@ morie_seriesdecomp <- function(x, kernel) {
 #' Autoformer decomposition plus Auto-Correlation, eqs. (1), (5), (6)
 #'
 #' Quoted from the paper: (5) "R_XX(tau) = lim (1/L) sum_t X_t
-#' X_{t-tau}"; (6) "tau_1..tau_k = arg Topk(R_{Q,K}(tau))" with
+#' X_\{t-tau\}"; (6) "tau_1..tau_k = arg Topk(R_\{Q,K\}(tau))" with
 #' "k = floor(c x log L)", "Rhat = SoftMax(R(tau_1)..R(tau_k))",
 #' "Auto-Correlation(Q,K,V) = sum_i Roll(V, tau_i) Rhat(tau_i)"
 #' -- Wu, Xu, Wang and Long, NeurIPS 2021 (arXiv:2106.13008). Ties in
@@ -1470,13 +1470,13 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
 #'
 #' Quoted from the paper: (1) "y^(p)_l = MaxPool(y_l, k_l)"; (2)
 #' "h_l = MLP_l(y^(p)_l); theta^f_l = LINEAR^f(h_l); theta^b_l =
-#' LINEAR^b(h_l)"; (3) "yhat_{tau,l} = g(tau, theta^f_l)" with
-#' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
-#' ((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
-#' "yhat = sum_l yhat_l; y_{l+1} = y_l - ytilde_l" -- Challu, C.,
+#' LINEAR^b(h_l)"; (3) "yhat_\{tau,l\} = g(tau, theta^f_l)" with
+#' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta\[t1\] +
+#' ((theta\[t2\]-theta\[t1\])/(t2-t1))(tau-t1)"; doubly residual stacking
+#' "yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 #' Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 #' M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
-#' wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
+#' wf[\[l\]] and wb[\[l\]] stand in for MLP_l followed by LINEAR: a single
 #' caller-supplied linear map. That collapse is stated rather than
 #' hidden; the expressivity ratio r_l still governs the coefficient
 #' count, which is the hierarchical part the paper is about.
@@ -1624,10 +1624,10 @@ morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
 
 #' TiDE dense encoder-decoder
 #'
-#' Quoted from the paper: (3) "xtilde_{i,t} = ResidualBlock(x_{i,t})";
+#' Quoted from the paper: (3) "xtilde_\{i,t\} = ResidualBlock(x_\{i,t\})";
 #' (4) "e^(i) = Encoder(y^i; xtilde^i; a^(i))"; (5) "g^(i) =
-#' Decoder(e^(i))"; (6) "D^(i) = Reshape(g^(i))"; "yhat^i_{L+t} =
-#' TemporalDecoder(d_{i,t}; xtilde^i_{L+t})" -- Das, A., Kong, W.,
+#' Decoder(e^(i))"; (6) "D^(i) = Reshape(g^(i))"; "yhat^i_\{L+t\} =
+#' TemporalDecoder(d_\{i,t\}; xtilde^i_\{L+t\})" -- Das, A., Kong, W.,
 #' Leach, A., Mathur, S., Sen, R. and Yu, R., Long-term Forecasting
 #' with TiDE, TMLR 2023 (arXiv:2304.08424). The paper states the
 #' residual block and the global linear residual in prose rather than
@@ -1690,8 +1690,8 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
 
 #' TSMixer time-mixing and feature-mixing, all-MLP
 #'
-#' Quoted from the paper: (4) "TP_{L->T}(X)_{*,i} = W_1 X_{*,i} + b_1";
-#' (5) "TM(X)_{*,i} = Norm(X_{*,i} + Drop(sigma(TP_{L->L}(X)_{*,i})))"
+#' Quoted from the paper: (4) "TP_\{L->T\}(X)_\{*,i\} = W_1 X_\{*,i\} + b_1";
+#' (5) "TM(X)_\{*,i\} = Norm(X_\{*,i\} + Drop(sigma(TP_\{L->L\}(X)_\{*,i\})))"
 #' -- Chen, S.-A., Li, C.-L., Yoder, N. C., Arik, S. O. and Pfister,
 #' T., TSMixer: An All-MLP Architecture for Time Series Forecasting,
 #' TMLR 2023 (arXiv:2303.06053), Appendix B.3.1. Feature mixing and
@@ -1747,10 +1747,10 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
 
 #' iTransformer: variates as tokens, attention across variates
 #'
-#' Quoted from the paper: (1) "h^0_n = Embedding(X_{:,n}); H^{l+1} =
-#' TrmBlock(H^l); Yhat_{:,n} = Projection(h^L_n)"; (2) "LayerNorm(H) =
-#' {\[h_n - Mean(h_n)\]/sqrt(Var(h_n)) | n = 1..N}"; attention scores
-#' "A_{i,j} = (Q K^T / sqrt(d_k))_{i,j}" -- Liu, Y., Hu, T., Zhang, H.,
+#' Quoted from the paper: (1) "h^0_n = Embedding(X_\{:,n\}); H^\{l+1\} =
+#' TrmBlock(H^l); Yhat_\{:,n\} = Projection(h^L_n)"; (2) "LayerNorm(H) =
+#' \{\[h_n - Mean(h_n)\]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
+#' "A_\{i,j\} = (Q K^T / sqrt(d_k))_\{i,j\}" -- Liu, Y., Hu, T., Zhang, H.,
 #' Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 #' (arXiv:2310.06625). The inversion is the point: each VARIATE series
 #' becomes one token, so attention is N x N over variates rather than

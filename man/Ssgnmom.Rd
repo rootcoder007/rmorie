@@ -35,6 +35,8 @@ morie_fauzi_sign_moments(
 \item{f0, fpp0}{\code{f(0)} and \verb{f''(0)}.}
 
 \item{a11, a13}{\verb{A_\{1,1\}} and \verb{A_\{1,3\}}.}
+
+
 }
 \value{
 Named list with \code{mean}, \code{variance}, \code{se}, \code{refined}, \code{n}, \code{method}.

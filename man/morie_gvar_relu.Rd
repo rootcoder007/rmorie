@@ -5,10 +5,11 @@
 \alias{morie_gvar_relu}
 \title{ReLU on a reverse-mode tape node}
 \usage{
-morie_gvar_relu(x)
+morie_gvar_relu(x) 
 }
 \arguments{
-\item{x}{A tape node. @return A tape node.}
+
+\item{x}{Argument \code{x}; see Usage.}
 }
 \description{
 ReLU on a reverse-mode tape node

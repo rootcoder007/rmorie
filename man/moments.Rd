@@ -5,7 +5,7 @@
 \alias{moments}
 \title{Entry-distribution moments}
 \usage{
-moments(distribution = "rademacher")
+moments(distribution = "rademacher") 
 }
 \arguments{
 \item{distribution}{One of \code{"rademacher"}, \code{"sparse"}.}

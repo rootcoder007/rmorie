@@ -2,7 +2,7 @@
 % Please edit documentation in R/multipsr.R
 \name{Twostage}
 \alias{Twostage}
-\title{Two-stage sample: PSUs drawn, then elements within each PSU.}
+\title{Two-stage sample: PSUs drawn, then elements within each PSU}
 \usage{
 Twostage(Y, Nl, M, N, level = 0.95)
 }

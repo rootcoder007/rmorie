@@ -5,7 +5,7 @@
 \alias{morie_mqtmpl_sample_genotypes}
 \title{Draw pseudomarker genotypes from p(g | m)}
 \usage{
-morie_mqtmpl_sample_genotypes(genotypes, positions, grid, n_imp = 16, error_rate = 0, seed = 0)
+morie_mqtmpl_sample_genotypes(genotypes, positions, grid, n_imp = 16, error_rate = 0, seed = 0) 
 }
 \arguments{
 \item{genotypes,positions,error_rate}{As above.}

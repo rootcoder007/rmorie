@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Internal: isotropic correlogram R(h) for the Schabenberger models.
+#' Internal: isotropic correlogram R(h) for the Schabenberger models
 #'
 #' The book parameterises the exponential and gaussian models by the
 #' PRACTICAL range alpha: the lag at which correlation has fallen to
@@ -35,7 +35,7 @@
   )
 }
 
-#' Internal: semivariogram gamma(h) = c0 + sigma0^2 (1 - R(h)), gamma(0) = 0.
+#' Internal: semivariogram gamma(h) = c0 + sigma0^2 (1 - R(h)), gamma(0) = 0
 #'
 #' The nugget is a discontinuity AT the origin (Sec 4.3.6, p. 150).
 #'
@@ -56,7 +56,7 @@
   g
 }
 
-#' Internal: empirical semivariogram by the method of moments.
+#' Internal: empirical semivariogram by the method of moments
 #'
 #' gamma_hat(h) = 1 / (2 |N(h)|) * sum (Z(s_i) - Z(s_j))^2
 #'

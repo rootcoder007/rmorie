@@ -5,10 +5,14 @@
 \alias{Lrankprop}
 \title{Linear rank statistic properties -- Theorem 7.3.7, p. 283}
 \usage{
-Lrankprop(a, z)
+Lrankprop(a, z) 
 }
 \description{
 Linear rank statistic properties -- Theorem 7.3.7, p. 283
+}
+\arguments{
+\item{a}{Argument \code{a}; see Usage.}
+\item{z}{Argument \code{z}; see Usage.}
 }
 \value{
 A list with \code{t}, \code{t_reversed}, \code{t_conjugate}, \code{sum_a}, \code{palindromic}, \code{resid1}, \code{resid2}, \code{N}.

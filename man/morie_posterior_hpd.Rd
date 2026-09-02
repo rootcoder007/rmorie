@@ -5,7 +5,7 @@
 \alias{morie_posterior_hpd}
 \title{morie_posterior_hpd}
 \usage{
-morie_posterior_hpd(theta_set, level = 0.95, conditional_prior = NULL, n_grid = 401L)
+morie_posterior_hpd(theta_set, level = 0.95, conditional_prior = NULL, n_grid = 401L) 
 }
 \arguments{
 \item{theta_set}{Passed to \code{morie_conditional_prior_uniform}.}

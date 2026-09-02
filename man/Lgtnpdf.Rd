@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitlnp.R
 \name{Lgtnpdf}
 \alias{Lgtnpdf}
-\title{Additive logistic-normal density at a composition.}
+\title{Additive logistic-normal density at a composition}
 \usage{
 Lgtnpdf(x, mu, Sigma)
 }

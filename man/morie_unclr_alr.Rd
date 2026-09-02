@@ -5,7 +5,7 @@
 \alias{morie_unclr_alr}
 \title{morie_unclr_alr}
 \usage{
-morie_unclr_alr(x)
+morie_unclr_alr(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

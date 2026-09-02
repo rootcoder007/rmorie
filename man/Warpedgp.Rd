@@ -14,6 +14,8 @@ Warpedgp(X, y, X_test = NULL, warp = "identity", lam = 0.01, gamma = 1)
 \item{warp}{"identity", "log" or "sqrt".}
 
 \item{lam, gamma}{GP hyperparameters.}
+
+
 }
 \value{
 list: estimate, median, warped_mean, var, log_jacobian, warp,

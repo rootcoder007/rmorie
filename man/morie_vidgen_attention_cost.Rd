@@ -5,7 +5,7 @@
 \alias{morie_vidgen_attention_cost}
 \title{morie_vidgen_attention_cost}
 \usage{
-morie_vidgen_attention_cost(frames, spatial_positions)
+morie_vidgen_attention_cost(frames, spatial_positions) 
 }
 \arguments{
 \item{frames}{Coerced to integer by the body, with \code{as.integer}.}

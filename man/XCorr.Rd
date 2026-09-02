@@ -5,7 +5,7 @@
 \alias{XCorr}
 \title{Bsacorr}
 \usage{
-XCorr(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE)
+XCorr(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

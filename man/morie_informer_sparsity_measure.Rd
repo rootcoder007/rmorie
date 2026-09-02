@@ -5,7 +5,7 @@
 \alias{morie_informer_sparsity_measure}
 \title{morie_informer_sparsity_measure}
 \usage{
-morie_informer_sparsity_measure(q, K, measure = "exact", scale = NULL)
+morie_informer_sparsity_measure(q, K, measure = "exact", scale = NULL) 
 }
 \arguments{
 \item{q}{Passed to \code{k.vec}.}

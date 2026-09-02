@@ -23,6 +23,7 @@ morie_geron_feature_map(
 \item{activation}{"relu"/"identity"/"tanh"/"sigmoid".}
 
 \item{stride, padding}{Conv controls.}
+
 }
 \value{
 List with \code{feature_map}, \code{pre_activation}, \code{out_shape}, \code{n_filters}, \code{sparsity}.

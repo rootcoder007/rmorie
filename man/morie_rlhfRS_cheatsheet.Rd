@@ -5,7 +5,7 @@
 \alias{morie_rlhfRS_cheatsheet}
 \title{One-line summary of the rlhfRS module}
 \usage{
-morie_rlhfRS_cheatsheet()
+morie_rlhfRS_cheatsheet() 
 }
 \description{
 One-line summary of the rlhfRS module

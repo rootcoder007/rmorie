@@ -26,6 +26,10 @@ morie_geron_adam_update(
 \item{b1, b2}{Decay rates in [0, 1).}
 
 \item{eps}{Positive floor.}
+
+
+
+
 }
 \value{
 List with \code{theta_new}, \code{m_new}, \code{s_new}, \code{m_hat}, \code{s_hat}, \code{step}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/synth_otis.R
 \name{morie_synth_otis_all}
 \alias{morie_synth_otis_all}
-\title{Build the full 29-dataset OTIS synthetic list.}
+\title{Build the full 29-dataset OTIS synthetic list}
 \usage{
 morie_synth_otis_all(n = 80L, seed = 2L)
 }

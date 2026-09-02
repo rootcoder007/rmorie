@@ -5,7 +5,7 @@
 \alias{morie_avalon_tanimoto}
 \title{The Tanimoto coefficient of two bit vectors of the same width}
 \usage{
-morie_avalon_tanimoto(a, b)
+morie_avalon_tanimoto(a, b) 
 }
 \arguments{
 \item{a,b}{Bit vectors.}

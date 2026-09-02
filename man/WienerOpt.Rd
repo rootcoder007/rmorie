@@ -5,7 +5,7 @@
 \alias{WienerOpt}
 \title{Eq. (3.169): w_o = Phi^-1 Theta.  Written as an inverse in the book,}
 \usage{
-WienerOpt(phi, theta)
+WienerOpt(phi, theta) 
 }
 \arguments{
 \item{phi}{Passed to \code{WienerHopf}.}

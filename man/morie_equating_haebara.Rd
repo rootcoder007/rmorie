@@ -21,6 +21,8 @@ morie_equating_haebara(
 \item{n_quad}{quadrature points.}
 
 \item{theta_range}{half-width of the quadrature grid.}
+
+
 }
 \value{
 list with \code{A}, \code{B}, \code{criterion},

@@ -5,7 +5,7 @@
 \alias{sixtuple_distance}
 \title{sixtuple_distance}
 \usage{
-sixtuple_distance(seqs)
+sixtuple_distance(seqs) 
 }
 \arguments{
 \item{seqs}{A vector; its length is taken.}

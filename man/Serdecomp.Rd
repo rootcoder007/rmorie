@@ -5,10 +5,14 @@
 \alias{Serdecomp}
 \title{Series decomposition and autocorrelation (Wu et al. 2021, Autoformer)}
 \usage{
-Serdecomp(x, kernel)
+Serdecomp(x, kernel) 
 }
 \description{
 Series decomposition and autocorrelation (Wu et al. 2021, Autoformer)
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{kernel}{Argument \code{kernel}; see Usage.}
 }
 \value{
 A list with \code{trend}, \code{seasonal}, \code{acf}, \code{kernel}, \code{n}.

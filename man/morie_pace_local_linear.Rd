@@ -5,7 +5,7 @@
 \alias{morie_pace_local_linear}
 \title{Local linear smoother on a one-dimensional grid}
 \usage{
-morie_pace_local_linear(t, y, at, bw, kernel = "epan")
+morie_pace_local_linear(t, y, at, bw, kernel = "epan") 
 }
 \arguments{
 \item{t,y}{The observation times and values, pooled over subjects.}

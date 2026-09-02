@@ -5,7 +5,7 @@
 #' node with no incident walks scores zero instead of one.  The
 #' additive constant beta shifts every score equally.
 #'
-#' Formula: x = (I - alpha A)^{-1} (alpha A) y + beta.
+#' Formula: x = (I - alpha A)^\{-1\} (alpha A) y + beta.
 #'
 #' @param y Node weights applied to the seed vector; ones give Katz's
 #'   own definition.

@@ -24,6 +24,11 @@ morie_geron_double_dqn(
 \item{buffer}{Transitions.}
 
 \item{epochs, lr, gamma, target_sync, batch_size}{Config.}
+
+
+
+
+
 }
 \value{
 List with \code{Q}, \code{Q_target}, \code{loss_history}, \code{overestimation_gap}.

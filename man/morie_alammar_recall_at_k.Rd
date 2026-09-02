@@ -5,7 +5,7 @@
 \alias{morie_alammar_recall_at_k}
 \title{morie_alammar_recall_at_k}
 \usage{
-morie_alammar_recall_at_k(retrieved, relevant, k)
+morie_alammar_recall_at_k(retrieved, relevant, k) 
 }
 \arguments{
 \item{retrieved}{Ranked ids.}

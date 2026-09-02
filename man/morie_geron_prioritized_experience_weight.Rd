@@ -23,6 +23,7 @@ morie_geron_prioritized_experience_weight(
 \item{eps}{Non-negative floor added to |delta|.}
 
 \item{are_td_errors}{Treat \code{priorities} as TD errors.}
+
 }
 \value{
 List with \code{weights}, \code{probabilities}, \code{priorities},

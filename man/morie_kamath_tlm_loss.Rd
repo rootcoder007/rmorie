@@ -5,11 +5,15 @@
 \alias{morie_kamath_tlm_loss}
 \title{morie_kamath_tlm_loss}
 \usage{
-morie_kamath_tlm_loss(x, y, M_x, M_y)
+morie_kamath_tlm_loss(x, y, M_x, M_y) 
 }
 \arguments{
 \item{y}{Target-side probabilities.}
 \item{M_y}{Target mask.}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+\item{M_x}{Argument \code{M_x}; see Usage.}
 }
 \description{
 morie_kamath_tlm_loss

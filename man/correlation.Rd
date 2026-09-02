@@ -5,7 +5,8 @@
 \alias{correlation}
 \title{correlation}
 \usage{
-correlation(group1, group2, weights1 = NULL, weights2 = NULL, seq_type = "aa", method = "fft")
+correlation(group1, group2, weights1 = NULL, weights2 = NULL, seq_type = "aa", 
+    method = "fft") 
 }
 \arguments{
 \item{group1}{Passed to \code{residue_vectors}.}

@@ -5,7 +5,7 @@
 \alias{morie_burkov_repetition_penalty}
 \title{Repetition penalty on decoder logits (Burkov Ch 5)}
 \usage{
-morie_burkov_repetition_penalty(logits, prev_tokens, penalty = 1.2)
+morie_burkov_repetition_penalty(logits, prev_tokens, penalty = 1.2) 
 }
 \arguments{
 \item{logits}{Logit vector.}

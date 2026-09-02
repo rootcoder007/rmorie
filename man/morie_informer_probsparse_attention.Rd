@@ -5,7 +5,8 @@
 \alias{morie_informer_probsparse_attention}
 \title{morie_informer_probsparse_attention}
 \usage{
-morie_informer_probsparse_attention(Q, K, V, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0, scale = NULL)
+morie_informer_probsparse_attention(Q, K, V, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0, 
+    scale = NULL) 
 }
 \arguments{
 \item{Q}{Passed to \code{.informer_to_rows}.}

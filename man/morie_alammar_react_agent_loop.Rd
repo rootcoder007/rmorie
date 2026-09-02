@@ -5,11 +5,15 @@
 \alias{morie_alammar_react_agent_loop}
 \title{morie_alammar_react_agent_loop}
 \usage{
-morie_alammar_react_agent_loop(query, tools, model, max_steps = 5)
+morie_alammar_react_agent_loop(query, tools, model, max_steps = 5) 
 }
 \arguments{
 \item{tools}{Named list of functions.}
 \item{max_steps}{Budget.}
+
+\item{query}{Argument \code{query}; see Usage.}
+
+\item{model}{Argument \code{model}; see Usage.}
 }
 \description{
 morie_alammar_react_agent_loop

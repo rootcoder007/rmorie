@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bayesian kernel BLUP: the closed-form conditional mean of the kernel effects.
+#' Bayesian kernel BLUP: the closed-form conditional mean of the kernel effects
 #'
 #' Formula: Ktilde = (K^-1/sigma2_u + I/sigma2_e)^-1;  utilde = Ktilde (y - 1 mu)/sigma2_e
 #'

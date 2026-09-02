@@ -12,6 +12,7 @@ morie_transfer_function(x, y, fs = 1, nperseg = NULL)
 \item{fs}{sampling frequency.}
 
 \item{nperseg}{segment length.}
+
 }
 \value{
 list: freqs, H, magnitude, coherence, n_segments.

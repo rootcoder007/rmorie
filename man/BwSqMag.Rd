@@ -5,7 +5,7 @@
 \alias{BwSqMag}
 \title{Eq (3.135): monotonic in both bands, no ripple anywhere -- the}
 \usage{
-BwSqMag(Omega, Omega_c, N)
+BwSqMag(Omega, Omega_c, N) 
 }
 \arguments{
 \item{Omega}{Coerced to numeric by the body, with \code{as.numeric}.}

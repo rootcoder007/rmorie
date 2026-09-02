@@ -8,6 +8,8 @@ morie_rappor_star(f, p, q)
 }
 \arguments{
 \item{f, p, q}{RAPPOR parameters.}
+
+
 }
 \value{
 List with \code{q_star} and \code{p_star}.

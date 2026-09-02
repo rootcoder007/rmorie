@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm109.R
 \name{Msm109}
 \alias{Msm109}
-\title{Penalized multinomial log-likelihood (ridge).}
+\title{Penalized multinomial log-likelihood (ridge)}
 \usage{
 Msm109(X, y, beta0, beta, lam = 1, baseline_last = TRUE)
 }

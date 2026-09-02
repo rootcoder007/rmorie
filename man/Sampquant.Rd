@@ -5,10 +5,14 @@
 \alias{Sampquant}
 \title{Sample quantile as an order statistic -- Sec. 2.6, p. 42}
 \usage{
-Sampquant(x, p)
+Sampquant(x, p) 
 }
 \description{
 Sample quantile as an order statistic -- Sec. 2.6, p. 42
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{p}{Argument \code{p}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{r}, \code{n}, \code{p}, \code{u_mean}, \code{u_var}.

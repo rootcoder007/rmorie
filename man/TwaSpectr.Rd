@@ -5,7 +5,7 @@
 \alias{TwaSpectr}
 \title{Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988}
 \usage{
-TwaSpectr(twaves, noiselo = 0.33, noisehi = 0.45)
+TwaSpectr(twaves, noiselo = 0.33, noisehi = 0.45) 
 }
 \arguments{
 \item{twaves}{A vector; its length is taken.}

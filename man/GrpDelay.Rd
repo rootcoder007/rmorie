@@ -5,7 +5,7 @@
 \alias{GrpDelay}
 \title{Computed from the COEFFICIENTS, not by differentiating a numerical}
 \usage{
-GrpDelay(b, a = NULL, fs = 1000, n_freqs = 512)
+GrpDelay(b, a = NULL, fs = 1000, n_freqs = 512) 
 }
 \arguments{
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' EAP ability estimate with its posterior sd and Fisher information.
+#' EAP ability estimate with its posterior sd and Fisher information
 #'
 #' The posterior sd shrinks towards the prior and stays finite for an
 #' all-correct pattern; 1/sqrt(I(theta)) is the frequentist error of the

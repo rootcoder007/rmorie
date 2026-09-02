@@ -5,10 +5,15 @@
 \alias{Medtestci}
 \title{Median-test confidence interval -- Sec. 6.4.2, p. 251}
 \usage{
-Medtestci(x, y, c)
+Medtestci(x, y, c) 
 }
 \description{
 Median-test confidence interval -- Sec. 6.4.2, p. 251
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{c}{Argument \code{c}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{estimate}, \code{c}, \code{m}, \code{n}.

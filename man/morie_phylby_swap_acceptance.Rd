@@ -5,7 +5,7 @@
 \alias{morie_phylby_swap_acceptance}
 \title{morie_phylby_swap_acceptance}
 \usage{
-morie_phylby_swap_acceptance(beta_j, beta_k, logp_j, logp_k)
+morie_phylby_swap_acceptance(beta_j, beta_k, logp_j, logp_k) 
 }
 \arguments{
 \item{beta_j}{Numeric; combined arithmetically in the body.}

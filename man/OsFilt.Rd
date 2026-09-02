@@ -5,7 +5,7 @@
 \alias{OsFilt}
 \title{OsFilt}
 \usage{
-OsFilt(x, window, kind = "median", alpha = 0, weights = NULL, order = NULL)
+OsFilt(x, window, kind = "median", alpha = 0, weights = NULL, order = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

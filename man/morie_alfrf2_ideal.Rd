@@ -5,7 +5,7 @@
 \alias{morie_alfrf2_ideal}
 \title{Relax consecutive alpha carbons toward the backbone spacing}
 \usage{
-morie_alfrf2_ideal(x, fixed, spacing = .alfrf2_ca_spacing, passes = 8L)
+morie_alfrf2_ideal(x, fixed, spacing = .alfrf2_ca_spacing, passes = 8L) 
 }
 \arguments{
 \item{x}{The structure, one row per residue.}

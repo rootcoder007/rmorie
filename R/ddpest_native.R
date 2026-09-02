@@ -34,7 +34,7 @@
 # GHC stream one-for-one.
 #' Sethuraman stick-breaking for the GEM(alpha) distribution:
 #'
-#' w_1 = V_1, w_h = V_h * prod_{j<h}(1 - V_j), V_h ~ Beta(1, alpha).
+#' w_1 = V_1, w_h = V_h * prod_\{j<h\}(1 - V_j), V_h ~ Beta(1, alpha).
 #' Drawn through the inverse CDF V = 1 - U^(1/alpha), consuming ONE
 #' uniform per stick from the shared generator `e`. This is the
 #' canonical construction used by the Python arm\'s sb.stick_breaking
@@ -64,7 +64,7 @@
 #' What varies with x, and what that buys
 #'
 #' Returns a description of which part of the stick-breaking form
-#' G_x(.) = sum_h w_h(x) delta_{theta_h(x)}(.) is allowed to vary with
+#' G_x(.) = sum_h w_h(x) delta_\{theta_h(x)\}(.) is allowed to vary with
 #' the covariate, and the qualitative effect that has on clustering.
 #'
 #' @param kind One of "single_weights", "single_atoms", "both",

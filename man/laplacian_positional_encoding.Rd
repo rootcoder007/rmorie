@@ -5,7 +5,7 @@
 \alias{laplacian_positional_encoding}
 \title{Laplacian eigenvector positional encoding}
 \usage{
-laplacian_positional_encoding(adj, n, dim = 2L, normalized = TRUE)
+laplacian_positional_encoding(adj, n, dim = 2L, normalized = TRUE) 
 }
 \arguments{
 \item{adj}{Adjacency list.}

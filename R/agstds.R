@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Directly age-standardised rate.
+#' Directly age-standardised rate
 #'
 #' Formula: ASR = sum_i w_i r_i / sum_i w_i; var(ASR) = sum_i w_i^2 r_i / n_i / (sum_i w_i)^2
 #'
@@ -7,6 +7,9 @@
 #' @param standard_pop Standard population weights by age band.
 #' @param person_time Person-time in each band of the study population.
 
+#' @param rates See Usage.
+#' @param standard_pop See Usage.
+#' @param person_time See Usage.
 #' @return List with ``asr``, ``variance``, ``se``, ``ci_lower``, ``ci_upper``, ``weights``, ``k``.
 #' @references Boyle and Parkin (1991), Statistical methods for registries, in Jensen et al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications 95. Not held locally; the direct standardisation estimator and its Poisson variance are the standard published forms.
 #' @export

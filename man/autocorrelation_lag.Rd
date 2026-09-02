@@ -5,7 +5,7 @@
 \alias{autocorrelation_lag}
 \title{autocorrelation_lag}
 \usage{
-autocorrelation_lag(y, threshold = NULL)
+autocorrelation_lag(y, threshold = NULL) 
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}

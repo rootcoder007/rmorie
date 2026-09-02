@@ -2,16 +2,16 @@
 % Please edit documentation in R/hkonly.R
 \name{Ldphr}
 \alias{Ldphr}
-\title{Hadamard response estimator for local differential privacy.}
+\title{Hadamard response estimator for local differential privacy}
 \usage{
 Ldphr(counts, epsilon, n = NULL)
 }
 \arguments{
-\item{counts}{Per-symbol counts of reports falling in C_x.}
+\item{counts}{See Usage.}
 
-\item{epsilon}{Local privacy parameter.}
+\item{epsilon}{See Usage.}
 
-\item{n}{Number of users; the sum of \code{counts} if omitted.}
+\item{n}{See Usage.}
 }
 \value{
 List with \code{p}, \code{p_set} (the empirical p(C_x)), \code{scale}, \code{epsilon}, \code{n}, \code{k}.

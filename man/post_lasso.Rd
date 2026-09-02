@@ -5,7 +5,7 @@
 \alias{post_lasso}
 \title{Refit by least squares on the selected support}
 \usage{
-post_lasso(X, y, lam)
+post_lasso(X, y, lam) 
 }
 \arguments{
 \item{X}{Design matrix.}

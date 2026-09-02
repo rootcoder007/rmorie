@@ -5,10 +5,14 @@
 \alias{Lillieexp}
 \title{Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T}
 \usage{
-Lillieexp(x, alpha = 0.05)
+Lillieexp(x, alpha = 0.05) 
 }
 \description{
 Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{dcrit}, \code{reject}, \code{mean}, \code{n}, \code{n_table}, \code{alpha}.

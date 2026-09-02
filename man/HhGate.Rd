@@ -5,7 +5,7 @@
 \alias{HhGate}
 \title{HhGate: Hodgkin-Huxley gating variables m, h, n at a clamped}
 \usage{
-HhGate(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L)
+HhGate(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) 
 }
 \arguments{
 \item{V}{Passed to \code{.bsahhrates}.}

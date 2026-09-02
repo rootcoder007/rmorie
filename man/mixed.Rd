@@ -5,7 +5,7 @@
 \alias{mixed}
 \title{mixed}
 \usage{
-mixed(recommendations, top_k = NULL)
+mixed(recommendations, top_k = NULL) 
 }
 \arguments{
 \item{recommendations}{Iterated over elementwise, with \code{lapply}.}

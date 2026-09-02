@@ -5,7 +5,7 @@
 \alias{EvenPart}
 \title{Eq (3.92): x_e(n) = 0.5 [x(n) + x(-n)].  x(-n) must exist, so the}
 \usage{
-EvenPart(x, n = NULL)
+EvenPart(x, n = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_evenodd}.}

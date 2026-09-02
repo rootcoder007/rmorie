@@ -11,6 +11,9 @@ morie_geron_dpo_loss(logp_w, logp_l, logp_ref_w, logp_ref_l, beta = 0.1)
 vectors of equal length.}
 
 \item{beta}{Positive inverse temperature.}
+
+
+
 }
 \value{
 List with \code{loss}, \code{margin}, \code{implicit_reward_chosen},

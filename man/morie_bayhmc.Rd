@@ -5,7 +5,9 @@
 \alias{morie_bayhmc}
 \title{No-U-Turn Sampler with dual-averaging step-size adaptation}
 \usage{
-morie_bayhmc(logp, theta0, n_iter = 1000L, warmup = NULL, grad = NULL, sampler = "nuts", delta = 0.65, eps = NULL, n_steps = 10L, max_depth = 10L, gamma = 0.05, t0 = 10, kappa = 0.75, seed = 0L)
+morie_bayhmc(logp, theta0, n_iter = 1000L, warmup = NULL, grad = NULL, sampler = "nuts", 
+    delta = 0.65, eps = NULL, n_steps = 10L, max_depth = 10L, gamma = 0.05, 
+    t0 = 10, kappa = 0.75, seed = 0L) 
 }
 \arguments{
 \item{logp}{Function \code{(theta)} returning the log density   up to an additive constant.}

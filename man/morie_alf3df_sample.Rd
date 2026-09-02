@@ -5,7 +5,9 @@
 \alias{morie_alf3df_sample}
 \title{Run the whole schedule from noise to a structure}
 \usage{
-morie_alf3df_sample(shape_n, score_fn, n_steps = 8L, sigma_min = 0.002, sigma_max = 80, rho = 7, gamma = 0, noise_scale = 1, step_scale = 1, order = "heun", seed = 0, augment = FALSE)
+morie_alf3df_sample(shape_n, score_fn, n_steps = 8L, sigma_min = 0.002, sigma_max = 80, 
+    rho = 7, gamma = 0, noise_scale = 1, step_scale = 1, order = "heun", 
+    seed = 0, augment = FALSE) 
 }
 \arguments{
 \item{shape_n}{The number of atoms.}

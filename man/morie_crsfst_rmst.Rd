@@ -5,7 +5,7 @@
 \alias{morie_crsfst_rmst}
 \title{Restricted mean survival time: the area under a step curve}
 \usage{
-morie_crsfst_rmst(curve, tau)
+morie_crsfst_rmst(curve, tau) 
 }
 \arguments{
 \item{curve}{A curve from the Kaplan-Meier function.}

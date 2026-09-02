@@ -2,16 +2,16 @@
 % Please edit documentation in R/dffits.R
 \name{Dffitsols}
 \alias{Dffitsols}
-\title{DFFITS, the scaled deletion influence on the fitted value.}
+\title{DFFITS, the scaled deletion influence on the fitted value}
 \usage{
 Dffitsols(X, y, intercept = TRUE)
 }
 \arguments{
-\item{X}{Design matrix.}
+\item{X}{See Usage.}
 
-\item{y}{Response.}
+\item{y}{See Usage.}
 
-\item{intercept}{Prepend a column of ones.}
+\item{intercept}{See Usage.}
 }
 \value{
 List with \code{dffits}, \code{cutoff}, \code{leverage}, \code{student}, \code{n}, \code{p}.

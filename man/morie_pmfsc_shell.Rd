@@ -5,7 +5,7 @@
 \alias{morie_pmfsc_shell}
 \title{The volume of the spherical shell between two radii}
 \usage{
-morie_pmfsc_shell(r1, r2)
+morie_pmfsc_shell(r1, r2) 
 }
 \arguments{
 \item{r1}{The inner radius.}

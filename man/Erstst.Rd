@@ -28,7 +28,7 @@ both the series and the deterministic terms,
 }
 regress ytil on ztil to get psi, form y^d = y - z psi, and run the ADF
 regression without deterministic terms,
-dy^d_t = rho y^d_{t-1} + sum_j c_j dy^d_{t-j} + e_t.  The DF-GLS
+dy^d_t = rho y^d_\{t-1\} + sum_j c_j dy^d_\{t-j\} + e_t.  The DF-GLS
 statistic is the t-ratio on rho.
 }
 \examples{

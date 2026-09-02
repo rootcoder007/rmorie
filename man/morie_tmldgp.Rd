@@ -3,9 +3,15 @@
 % the formals.
 \name{morie_tmldgp}
 \alias{morie_tmldgp}
+\alias{morie_penalisedtmle}
+\alias{morie_tmle_doubly_robust_pen}
 \title{Penalised nuisance fits, unpenalised targeting}
 \usage{
-morie_tmldgp(y, D, X, penalty = 0.05, iters = 100)
+morie_tmldgp(y, D, X, penalty = 0.05, iters = 100) 
+
+morie_penalisedtmle(y, D, X, penalty = 0.05, iters = 100) 
+
+morie_tmle_doubly_robust_pen(y, D, X, penalty = 0.05, iters = 100) 
 }
 \arguments{
 \item{y}{Outcome vector in [0,1].}

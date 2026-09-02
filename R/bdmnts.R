@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Monotone instrumental variable bounds.
+#' Monotone instrumental variable bounds
 #'
-#' LB(t|v) = max_{u <= v} LB(t|u), UB(t|v) = min_{u >= v} UB(t|u), then
+#' LB(t|v) = max_\{u <= v\} LB(t|u), UB(t|v) = min_\{u >= v\} UB(t|u), then
 #' average over P(V = v).
 #'
 #' @param lower,upper Per-value bounds in increasing order of v.

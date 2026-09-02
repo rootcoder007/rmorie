@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Gaussian (radial basis) kernel matrix.
+#' Gaussian (radial basis) kernel matrix
 #'
 #' Formula: K(x_i, x_j) = exp(-gamma * ||x_i - x_j||^2)
 #'

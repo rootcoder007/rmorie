@@ -5,7 +5,8 @@
 \alias{central_point}
 \title{Central point}
 \usage{
-central_point(f0, cons, x, t, aeq = NULL, centering = "newton", tol = 1e-10, max_iter = 200L, alpha = 0.01, beta = 0.5, step0 = 1)
+central_point(f0, cons, x, t, aeq = NULL, centering = "newton", tol = 1e-10, 
+    max_iter = 200L, alpha = 0.01, beta = 0.5, step0 = 1) 
 }
 \arguments{
 \item{f0}{Objective as a \code{Fun}, a function, or a list.}

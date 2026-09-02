@@ -5,7 +5,7 @@
 \alias{morie_sse4r}
 \title{morie_sse4r}
 \usage{
-morie_sse4r(sequence, user_embedding, item_table, attend = NULL, top_k = 3)
+morie_sse4r(sequence, user_embedding, item_table, attend = NULL, top_k = 3) 
 }
 \arguments{
 \item{sequence}{Passed to \code{.sse4r_personalise}.}

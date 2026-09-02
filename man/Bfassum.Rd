@@ -43,6 +43,8 @@ morie_fauzi_conditions_d1_d5(
 \item{tol}{Tolerance for the D1/D2 checks.}
 
 \item{lo, hi, ngrid}{Fixed quadrature window and node count.}
+
+
 }
 \value{
 Named list with \code{d1}, \code{d2}, \code{d3}, \code{d4}, \code{d5}, \code{mass}, \code{mu2}, \code{monotone}, \code{method}.

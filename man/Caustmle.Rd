@@ -16,6 +16,7 @@ Caustmle(y, T, ps, Q1, Q0, n_iter = 100L)
 \item{Q1, Q0}{Initial outcome fits under treatment and control.}
 
 \item{n_iter}{Fixed Newton steps for the fluctuation.}
+
 }
 \value{
 Named list with \code{estimate}, \code{ATE_TMLE}, \code{IF}, \code{se},

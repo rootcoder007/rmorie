@@ -5,7 +5,8 @@
 \alias{morie_deepar_forecast}
 \title{Fit, sample, and read the quantiles off the trajectories}
 \usage{
-morie_deepar_forecast(z, horizon, n_lags = 2L, likelihood = "negative-binomial", n_samples = 300L, quantiles = c(0.1, 0.5, 0.9), seed = 0L)
+morie_deepar_forecast(z, horizon, n_lags = 2L, likelihood = "negative-binomial", n_samples = 300L, 
+    quantiles = c(0.1, 0.5, 0.9), seed = 0L) 
 }
 \arguments{
 \item{z}{Numeric vector of history observations.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Chinese restaurant process seating.
+#' Chinese restaurant process seating
 #'
 #' Formula: P(z_i = k) = n_k / (i - 1 + alpha) for an occupied table k, and alpha / (i - 1 + alpha) for a new one
 #'
@@ -8,8 +8,12 @@
 #' @param u Caller-supplied uniforms, one per customer.
 #' @param seed Seed of the shared minstd stream when ``u`` is omitted.
 
+#' @param n See Usage.
+#' @param alpha See Usage.
+#' @param u See Usage.
+#' @param seed See Usage.
 #' @return List with ``table`` (assignment per customer), ``counts``, ``n_tables``, ``expected_tables``, ``alpha``, ``n``.
-#' @references Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
+#' @references Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E\[K\] = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
 #' @export
 #' @examples
 #' Crp(n = 5L)

@@ -5,7 +5,7 @@
 \alias{OtAdapt}
 \title{\\' Adapt source samples to a target domain through an OT plan}
 \usage{
-OtAdapt(Xs, Xt, epsilon, n_iter = 1000L)
+OtAdapt(Xs, Xt, epsilon, n_iter = 1000L) 
 }
 \arguments{
 \item{Xs}{A matrix; indexed by row and column.}

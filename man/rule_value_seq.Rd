@@ -5,7 +5,7 @@
 \alias{rule_value_seq}
 \title{Plug-in value of a given rule by sequential regression}
 \usage{
-rule_value_seq(y, L0, A0, L1, A1, d0, d1, g0, g1, ridge = 1e-08)
+rule_value_seq(y, L0, A0, L1, A1, d0, d1, g0, g1, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Outcome vector (rescaled).}

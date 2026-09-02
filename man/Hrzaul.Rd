@@ -67,7 +67,7 @@ different pairs (G, m_1).  d < 2 therefore raises.
 
 The estimator solves
 
-min (1/n) sum_i {Y_i - G[m_1(X_i^1) + ... + m_d(X_i^d)]}^2
+min (1/n) sum_i \{Y_i - G[m_1(X_i^1) + ... + m_d(X_i^d)]\}^2
 + lambda_n^2 J(G, m_1, ..., m_d)                       (3.28)
 
 computed, as the text describes, "by a backfitting algorithm that

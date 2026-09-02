@@ -5,7 +5,8 @@
 \alias{morie_estimate_gumbel}
 \title{morie_estimate_gumbel}
 \usage{
-morie_estimate_gumbel(m, n, letter_freqs, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT", n_sim = 200, seed = 0, quantiles = c(0.2, 0.9))
+morie_estimate_gumbel(m, n, letter_freqs, match = 5, mismatch = -4, matrix = NULL, 
+    alphabet = "ACGT", n_sim = 200, seed = 0, quantiles = c(0.2, 0.9)) 
 }
 \arguments{
 \item{m}{Coerced to numeric by the body, with \code{as.numeric}.}

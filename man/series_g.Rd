@@ -5,7 +5,7 @@
 \alias{series_g}
 \title{series_g}
 \usage{
-series_g(log = FALSE)
+series_g(log = FALSE) 
 }
 \arguments{
 \item{log}{A flag; the body branches on it. Defaults to \code{FALSE}.}

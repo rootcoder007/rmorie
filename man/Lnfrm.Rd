@@ -16,6 +16,7 @@ Lnfrm(time, event, X, cluster, max_outer = 50L, tol = 1e-07)
 \item{cluster}{Cluster labels.}
 
 \item{max_outer, tol}{Outer-loop controls.}
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{frailty},

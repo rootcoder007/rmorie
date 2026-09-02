@@ -22,7 +22,7 @@ Derived key material as raw vector of length \code{length}.
 Phase 3JJJ1. Mirrors the Python
 \verb{morie.crypto.hkdf_sha256(ikm, length=32, salt=b"", info=b"")}
 byte-for-byte. Empty \code{salt} defaults to a 32-byte zero-filled
-salt per RFC 5869 §2.2 (matches Python).
+salt per RFC 5869 Section 2.2 (matches Python).
 }
 \examples{
 if (morie_crypto_sodium_available()) {

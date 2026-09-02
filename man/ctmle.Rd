@@ -5,7 +5,7 @@
 \alias{ctmle}
 \title{ctmle}
 \usage{
-ctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE)
+ctmle(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L, penalty = TRUE) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{ApneaDet}
 \title{ApneaDet: sleep apnea detection from ECG, SpO2 and snore}
 \usage{
-ApneaDet(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4)
+ApneaDet(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) 
 }
 \arguments{
 \item{ecg}{Coerced to numeric by the body, with \code{as.numeric}.}

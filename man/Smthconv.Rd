@@ -24,6 +24,7 @@ morie_fauzi_thm5_8_smoothed_convergence(
 
 \item{zstd, zsmooth}{The two standardised statistics, for the finite-\code{n}
 squared difference.}
+
 }
 \value{
 Named list with \code{ok}, \code{d}, \code{h}, \code{sqdiff}, \code{lower}, \code{upper}, \code{method}.

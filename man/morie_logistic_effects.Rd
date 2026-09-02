@@ -28,6 +28,9 @@ morie_logistic_effects(
 \item{neg2ll_null, neg2ll_full, neg2ll_reduced}{Reported -2LL values.}
 
 \item{n}{Sample size for Cox and Snell.}
+
+
+
 }
 \value{
 List of the named statistics.

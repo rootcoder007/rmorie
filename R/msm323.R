@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nonparametric links of the zero-altered Poisson forest.
+#' Nonparametric links of the zero-altered Poisson forest
 #'
 #' Formula: log(mu) = f_mu(x) and log(theta/(1-theta)) = f_theta(x)
 #' (eq. 15.1): under ZAP_RF and ZAPC_RF the links between covariates and

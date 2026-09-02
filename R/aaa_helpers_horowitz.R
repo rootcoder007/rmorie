@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 #' Internal helpers shared across the Horowitz semiparametric suite.
-#' Not exported; consumed by hrz* callables only.
+#' Not exported; consumed by hrz* callables only
 #' @keywords internal
 #' @name horowitz_helpers
 NULL

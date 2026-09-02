@@ -5,7 +5,8 @@
 \alias{morie_mtdrl}
 \title{Run the meta-RL evaluation loop}
 \usage{
-morie_mtdrl(tasks, agent, episode_length = 100, n_arms = NULL, seed = 0, reset_between_episodes = TRUE)
+morie_mtdrl(tasks, agent, episode_length = 100, n_arms = NULL, seed = 0, 
+    reset_between_episodes = TRUE) 
 }
 \arguments{
 \item{tasks}{List of per-task probability vectors.}

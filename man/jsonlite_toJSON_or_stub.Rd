@@ -5,7 +5,7 @@
 \alias{jsonlite_toJSON_or_stub}
 \title{Ponytail: no jsonlite dependency declared for this package; write()}
 \usage{
-jsonlite_toJSON_or_stub(x)
+jsonlite_toJSON_or_stub(x) 
 }
 \arguments{
 \item{x}{Passed to \code{.s03json_toJSON}.}

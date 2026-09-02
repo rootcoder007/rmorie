@@ -5,7 +5,7 @@
 \alias{sinkhorn_knopp}
 \title{Sinkhorn-Knopp centering (SwAV style)}
 \usage{
-sinkhorn_knopp(scores, iterations = 3L, epsilon = 0.05)
+sinkhorn_knopp(scores, iterations = 3L, epsilon = 0.05) 
 }
 \arguments{
 \item{scores}{Numeric matrix (n x K).}

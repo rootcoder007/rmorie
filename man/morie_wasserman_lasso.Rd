@@ -14,6 +14,7 @@ morie_wasserman_lasso(X, y, lambda_, max_iter = 10000L, tol = 1e-12)
 \item{lambda_}{Non-negative penalty.}
 
 \item{max_iter, tol}{Coordinate-descent controls.}
+
 }
 \value{
 List with \code{estimate}, \code{beta}, \code{n_nonzero}, \code{objective},

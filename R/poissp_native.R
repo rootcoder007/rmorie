@@ -53,7 +53,10 @@
   A
 }
 
-#' The proper-CAR precision Q = tau (D_w - rho W).
+#' The proper-CAR precision Q = tau (D_w - rho W)
+#' @param W See Usage.
+#' @param tau See Usage.
+#' @param rho See Usage.
 #' @export
 morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
   A <- .poissp_adjacency(W)
@@ -65,7 +68,8 @@ morie_poissp_car_precision <- function(W, tau = 1.0, rho = 1.0) {
   t * (diag(d, n, n) - r * A)
 }
 
-#' The propriety interval for rho.
+#' The propriety interval for rho
+#' @param W See Usage.
 #' @export
 morie_poissp_rho_bounds <- function(W) {
   A <- .poissp_adjacency(W)
@@ -257,8 +261,20 @@ morie_poissp_rho_bounds <- function(W) {
   .poissp_loglik(y, m) - 0.5 * quad + 0.5 * ldQ - 0.5 * ldH
 }
 
-#' Fit the Poisson-CAR areal model.
+#' Fit the Poisson-CAR areal model
 #'
+#' @param counts See Usage.
+#' @param X See Usage.
+#' @param offset See Usage.
+#' @param W See Usage.
+#' @param rho See Usage.
+#' @param tau See Usage.
+#' @param constrain See Usage.
+#' @param iters See Usage.
+#' @param tol See Usage.
+#' @param ridge See Usage.
+#' @param tau_grid See Usage.
+#' @param level See Usage.
 #' @references
 #' Banerjee, S., Carlin, B. P. and Gelfand, A. E. (2014) Hierarchical
 #' Modeling and Analysis for Spatial Data, 2nd edn, Chapman and Hall/CRC.

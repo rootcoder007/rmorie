@@ -5,7 +5,7 @@
 \alias{span_f1}
 \title{span_f1}
 \usage{
-span_f1(pred, gold)
+span_f1(pred, gold) 
 }
 \arguments{
 \item{pred}{Passed to \code{extract_spans}.}

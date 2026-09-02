@@ -2,7 +2,7 @@
 % Please edit documentation in R/psymet.R
 \name{morie_psymet_bartlett}
 \alias{morie_psymet_bartlett}
-\title{Bartlett's test of sphericity.}
+\title{Bartlett's test of sphericity}
 \usage{
 morie_psymet_bartlett(data)
 }
@@ -13,7 +13,7 @@ morie_psymet_bartlett(data)
 list with \code{chisq}, \code{df}, \code{pval}.
 }
 \description{
-Bartlett's test of sphericity.
+Bartlett's test of sphericity
 }
 \examples{
 set.seed(1)

@@ -5,7 +5,7 @@
 \alias{map_invert}
 \title{map_invert}
 \usage{
-map_invert(model, y, known, candidates, err, priors, sensitive = 0L)
+map_invert(model, y, known, candidates, err, priors, sensitive = 0L) 
 }
 \arguments{
 \item{model}{Accepted by the signature and not used anywhere in the body.}

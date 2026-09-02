@@ -5,7 +5,7 @@
 \alias{morie_funCA_functional_cca}
 \title{morie_funCA_functional_cca}
 \usage{
-morie_funCA_functional_cca(X, Y, p = NULL, q = NULL)
+morie_funCA_functional_cca(X, Y, p = NULL, q = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

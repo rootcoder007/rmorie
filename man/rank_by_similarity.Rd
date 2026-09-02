@@ -5,7 +5,7 @@
 \alias{rank_by_similarity}
 \title{rank_by_similarity}
 \usage{
-rank_by_similarity(query, corpus_embeddings, top_k = 5)
+rank_by_similarity(query, corpus_embeddings, top_k = 5) 
 }
 \arguments{
 \item{query}{Passed to \code{cosine_similarity}.}

@@ -5,7 +5,7 @@
 \alias{Notch60}
 \title{A conjugate pair of zeros AT the interference frequency, so the gain}
 \usage{
-Notch60(fs, f0 = 60, z = NULL)
+Notch60(fs, f0 = 60, z = NULL) 
 }
 \arguments{
 \item{fs}{Coerced to numeric by the body, with \code{as.numeric}.}

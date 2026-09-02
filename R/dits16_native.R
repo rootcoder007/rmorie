@@ -6,7 +6,7 @@
 # patches, scalability measured in Gflops (NOT parameters, deliberately
 # so the token axis is visible), adaLN-zero conditioning.
 
-#' Patchify a latent and count tokens.
+#' Patchify a latent and count tokens
 #'
 #' Tokens: T = (I/p)^2. Halving p quadruples T at essentially
 #' constant parameter count -- the axis a parameter count cannot see.
@@ -28,7 +28,7 @@ patch_grid <- function(latent_size, patch) {
                     "parameters"))
 }
 
-#' Forward-pass Gflops for a DiT stack.
+#' Forward-pass Gflops for a DiT stack
 #'
 #' attention: 4*T*d^2 + 2*T^2*d. mlp: 2*mlp_ratio*T*d^2. Per block
 #' doubled (multiply-adds), scaled by depth L, in Gflops.
@@ -66,7 +66,7 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
   as.numeric(x)
 }
 
-#' Adaptive LayerNorm with a ZERO-initialised residual gate.
+#' Adaptive LayerNorm with a ZERO-initialised residual gate
 #'
 #' Regresses gamma, beta and alpha from the conditioning vector.
 #' With W_alpha = 0 every block is the identity at initialisation.
@@ -107,7 +107,7 @@ adaln_zero <- function(cond, hidden, W_scale, W_shift, W_alpha,
                     "identity, leaving a clean residual path"))
 }
 
-#' One DiT block: adaLN-zero, attention, adaLN-zero, MLP.
+#' One DiT block: adaLN-zero, attention, adaLN-zero, MLP
 #'
 #' Each sub-layer is gated by a learned alpha (initialised to zero)
 #' so the whole block starts as the identity.
@@ -139,7 +139,7 @@ dit_block <- function(hidden, cond, attn_fn, mlp_fn,
                           isTRUE(a2$identity_at_init))
 }
 
-#' Rank configurations by Gflops.
+#' Rank configurations by Gflops
 #'
 #' Each entry is c(name, latent, patch, depth, width). Three axes
 #' (depth, width, token count) all move Gflops; only the first two

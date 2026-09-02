@@ -5,7 +5,7 @@
 \alias{FiringRate}
 \title{MFR = 1/mean(IDI), CV = SD(IDI)/mean(IDI).  MFR is the RECIPROCAL OF}
 \usage{
-FiringRate(times, fs = NULL)
+FiringRate(times, fs = NULL) 
 }
 \arguments{
 \item{times}{Coerced to numeric by the body, with \code{as.numeric}.}

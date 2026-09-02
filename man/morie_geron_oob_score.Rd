@@ -5,7 +5,7 @@
 \alias{morie_geron_oob_score}
 \title{Out-of-bag evaluation over per-estimator bag masks (Geron Ch 6, hmoob)}
 \usage{
-morie_geron_oob_score(X, y, models, task = "auto")
+morie_geron_oob_score(X, y, models, task = "auto") 
 }
 \arguments{
 \item{X,y}{Data and targets.}

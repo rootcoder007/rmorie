@@ -5,7 +5,7 @@
 \alias{morie_geron_recall_hm}
 \title{Recall (true positive rate) = TP / (TP + FN) (Geron Ch 3, hmrec)}
 \usage{
-morie_geron_recall_hm(y_true, y_pred, pos_label = 1)
+morie_geron_recall_hm(y_true, y_pred, pos_label = 1) 
 }
 \arguments{
 \item{y_true,y_pred}{Labels, same length.}

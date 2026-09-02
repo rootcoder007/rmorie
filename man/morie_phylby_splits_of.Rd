@@ -5,7 +5,7 @@
 \alias{morie_phylby_splits_of}
 \title{morie_phylby_splits_of}
 \usage{
-morie_phylby_splits_of(tree)
+morie_phylby_splits_of(tree) 
 }
 \arguments{
 \item{tree}{Passed to \code{.phylby_splits_of}.}

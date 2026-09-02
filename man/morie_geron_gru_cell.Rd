@@ -12,6 +12,8 @@ morie_geron_gru_cell(x_t, h_prev, Wz, Wr, W)
 \item{h_prev}{Previous hidden state.}
 
 \item{Wz, Wr, W}{(H, H + n) weight matrices.}
+
+
 }
 \value{
 List with \code{h}, \code{z}, \code{r}, \code{h_tilde}, \code{update_fraction}.

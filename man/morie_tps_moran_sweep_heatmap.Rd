@@ -29,6 +29,7 @@ Defaults to the 9 published TPS rate categories.}
 
 \item{centroid_lat_col, centroid_lon_col}{Centroid column names
 forwarded to \code{morie_tps_polygon_morans_i}.}
+
 }
 \value{
 A named list with the (category x year) Moran's I matrix.

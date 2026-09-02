@@ -5,7 +5,7 @@
 \alias{scan_depth}
 \title{Sequential against parallel depth}
 \usage{
-scan_depth(length)
+scan_depth(length) 
 }
 \arguments{
 \item{length}{Coerced to integer by the body, with \code{as.integer}.}

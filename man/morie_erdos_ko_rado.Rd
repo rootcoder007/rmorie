@@ -8,6 +8,7 @@ morie_erdos_ko_rado(n, k)
 }
 \arguments{
 \item{n, k}{Ground set and subset sizes.}
+
 }
 \value{
 A list with \code{count}, \code{star_size}, \code{ekr_regime}, \code{warnings}.

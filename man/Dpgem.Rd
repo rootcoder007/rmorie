@@ -22,7 +22,7 @@ List with \code{estimate} (largest weight), \code{weights},
 Formula: GEM(alpha) = stick-breaking with V_k ~ Beta(1, alpha)
 }
 \details{
-w_1 = V_1 and w_k = V_k prod_{j<k} (1 - V_j), so the weights and the
+w_1 = V_1 and w_k = V_k prod_\{j<k\} (1 - V_j), so the weights and the
 unbroken remainder sum to exactly one at every truncation.  The
 marginal mean of the first weight is 1/(1 + alpha), and the expected
 remaining mass after K breaks is (alpha/(1 + alpha))^K.

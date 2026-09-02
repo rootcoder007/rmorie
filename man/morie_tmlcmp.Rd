@@ -5,7 +5,8 @@
 \alias{morie_tmlcmp}
 \title{morie_tmlcmp}
 \usage{
-morie_tmlcmp(time, event_type, D, X, times = NULL, cause = 1, horizon = NULL, g = NULL, iters = 50)
+morie_tmlcmp(time, event_type, D, X, times = NULL, cause = 1, horizon = NULL, 
+    g = NULL, iters = 50) 
 }
 \arguments{
 \item{time}{Passed to \code{.tmlcmp_vec}.}

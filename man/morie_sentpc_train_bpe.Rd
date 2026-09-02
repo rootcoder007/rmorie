@@ -5,7 +5,7 @@
 \alias{morie_sentpc_train_bpe}
 \title{Train a greedy BPE model}
 \usage{
-morie_sentpc_train_bpe(corpus, vocab_size, add_prefix = TRUE)
+morie_sentpc_train_bpe(corpus, vocab_size, add_prefix = TRUE) 
 }
 \arguments{
 \item{corpus}{Character vector of training sentences.}

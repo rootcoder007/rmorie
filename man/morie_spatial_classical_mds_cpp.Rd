@@ -5,7 +5,7 @@
 \alias{morie_spatial_classical_mds_cpp}
 \title{morie_spatial_classical_mds_cpp}
 \usage{
-morie_spatial_classical_mds_cpp(D, n_dims)
+morie_spatial_classical_mds_cpp(D, n_dims) 
 }
 \arguments{
 \item{D}{Passed to \code{.Call}.}

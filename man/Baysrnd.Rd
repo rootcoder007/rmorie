@@ -15,6 +15,7 @@ when group is omitted, matching the original argument order.}
 \item{group}{group label per observation.}
 
 \item{sigma2, tau2}{optional variance components; estimated when omitted.}
+
 }
 \value{
 list: u_g, estimate, theta, lambda_g, theta_nopool, mu, sigma2,

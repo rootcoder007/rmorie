@@ -5,7 +5,7 @@
 \alias{ShrinkPred}
 \title{Thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),}
 \usage{
-ShrinkPred(y, cluster, sigma2_u, sigma2_e)
+ShrinkPred(y, cluster, sigma2_u, sigma2_e) 
 }
 \arguments{
 \item{y}{Passed to \code{.morie_spx_chkv}.}

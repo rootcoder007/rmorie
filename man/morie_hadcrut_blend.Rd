@@ -5,7 +5,8 @@
 \alias{morie_hadcrut_blend}
 \title{Blend a land grid and an SST grid cell by cell}
 \usage{
-morie_hadcrut_blend(T, sst, land_fraction, sea_ice = NULL, rule = "hadcrut5", T_var = NULL, sst_var = NULL)
+morie_hadcrut_blend(T, sst, land_fraction, sea_ice = NULL, rule = "hadcrut5", T_var = NULL, 
+    sst_var = NULL) 
 }
 \arguments{
 \item{T}{Land air temperature anomaly matrix, NA where unobserved.}

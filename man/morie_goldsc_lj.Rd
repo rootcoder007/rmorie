@@ -5,7 +5,7 @@
 \alias{morie_goldsc_lj}
 \title{A general (m, n) Lennard-Jones energy}
 \usage{
-morie_goldsc_lj(r, r0, eps, m = 6, n = 12)
+morie_goldsc_lj(r, r0, eps, m = 6, n = 12) 
 }
 \arguments{
 \item{r}{The separation.}

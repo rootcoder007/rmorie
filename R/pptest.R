@@ -36,7 +36,7 @@
          numeric(1))
 }
 
-#' Phillips-Perron test for a unit root, trend included.
+#' Phillips-Perron test for a unit root, trend included
 #'
 #' The auxiliary regression is \eqn{y_t = \mu + \beta(t - n/2) +
 #' \rho y_{t-1} + u_t}.  With \eqn{s^2 = \sum u^2/n} and the Bartlett

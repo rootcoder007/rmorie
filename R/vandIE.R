@@ -7,7 +7,7 @@
 #' -- so sign agreement is checked and reported.
 #'
 #' Formula: \code{TE = CDE + INTref + INTmed + PIE}, reported as each
-#' component over \code{E[TE]}.
+#' component over \code{E\[TE\]}.
 #'
 #' @param Y Outcome.
 #' @param X Exposure.

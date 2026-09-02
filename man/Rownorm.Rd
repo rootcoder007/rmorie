@@ -2,12 +2,12 @@
 % Please edit documentation in R/wmtrwn.R
 \name{Rownorm}
 \alias{Rownorm}
-\title{Row-normalised spatial weights.}
+\title{Row-normalised spatial weights}
 \usage{
 Rownorm(W)
 }
 \arguments{
-\item{W}{Spatial weights matrix.}
+\item{W}{See Usage.}
 }
 \value{
 List with \code{W} (normalised), \code{row_sums}, \code{islands}, \code{n}.

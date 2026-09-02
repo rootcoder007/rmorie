@@ -4,7 +4,7 @@
 \alias{Zestim}
 \alias{morie_ksr09_kosorok_z_estimator}
 \alias{morie_kosorok_z_estimator}
-\title{Z-estimator: the theta solving the estimating equation Psi_n(theta) = 0.}
+\title{Z-estimator: the theta solving the estimating equation Psi_n(theta) = 0}
 \usage{
 Zestim(x, kind = "huber", k = 1.345, iters = 200)
 

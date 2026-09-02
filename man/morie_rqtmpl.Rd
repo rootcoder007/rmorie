@@ -5,7 +5,7 @@
 \alias{morie_rqtmpl}
 \title{morie_rqtmpl}
 \usage{
-morie_rqtmpl()
+morie_rqtmpl() 
 }
 \description{
 morie_rqtmpl

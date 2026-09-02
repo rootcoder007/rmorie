@@ -2,7 +2,7 @@
 % Please edit documentation in R/fauzi_native.R
 \name{.fz_W}
 \alias{.fz_W}
-\title{W(u) = int_{-inf}^u K(v) dv, the INTEGRATED kernel of (2.2). A}
+\title{W(u) = int_\{-inf\}^u K(v) dv, the INTEGRATED kernel of (2.2). A}
 \usage{
 .fz_W(u)
 }

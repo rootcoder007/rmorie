@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Distortion of an inner-product score under TurboQuant_prod.
+#' Distortion of an inner-product score under TurboQuant_prod
 #'
 #' The 1/d in the bound means the inner-product distortion falls with
 #' DIMENSION as well as with bits. \code{expected_max} is a Gaussian-tail

@@ -5,7 +5,7 @@
 \alias{rate}
 \title{rate}
 \usage{
-rate(scores, priority, weight = "autoc")
+rate(scores, priority, weight = "autoc") 
 }
 \arguments{
 \item{scores}{Passed to \code{toc_curve}.}

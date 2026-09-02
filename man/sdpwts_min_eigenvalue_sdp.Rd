@@ -5,7 +5,7 @@
 \alias{sdpwts_min_eigenvalue_sdp}
 \title{Maximise t s.t. A - tI >= 0 (exact answer = lambda_min(A))}
 \usage{
-sdpwts_min_eigenvalue_sdp(A, t0 = 1, mu = 10, tol = 1e-09)
+sdpwts_min_eigenvalue_sdp(A, t0 = 1, mu = 10, tol = 1e-09) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

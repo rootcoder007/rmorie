@@ -5,7 +5,7 @@
 \alias{morie_geron_reward_function}
 \title{Reward function R(s, a, s\'): per-transition rewards and the backward discounted return (Geron Ch 19, hmrwd)}
 \usage{
-morie_geron_reward_function(s, a, s_next, R = NULL, gamma = 1)
+morie_geron_reward_function(s, a, s_next, R = NULL, gamma = 1) 
 }
 \arguments{
 \item{s,a,s_next}{Transition or trajectory arrays.}

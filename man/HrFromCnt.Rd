@@ -5,7 +5,7 @@
 \alias{HrFromCnt}
 \title{Eq (4.19): HR = 60 NB / T.  The counting estimate averages over the}
 \usage{
-HrFromCnt(nbeats, duration)
+HrFromCnt(nbeats, duration) 
 }
 \arguments{
 \item{nbeats}{Numeric; combined arithmetically in the body.}

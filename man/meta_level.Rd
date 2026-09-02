@@ -5,7 +5,7 @@
 \alias{meta_level}
 \title{meta_level}
 \usage{
-meta_level(model_builder, consumer, data)
+meta_level(model_builder, consumer, data) 
 }
 \arguments{
 \item{model_builder}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,7 @@
 \alias{morie_diffRC_denoise}
 \title{Run the reverse chain from t back to 0}
 \usage{
-morie_diffRC_denoise(x_t, model, schedule, t_start = NULL)
+morie_diffRC_denoise(x_t, model, schedule, t_start = NULL) 
 }
 \arguments{
 \item{x_t}{Numeric vector.}

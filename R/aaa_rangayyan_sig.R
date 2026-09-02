@@ -113,7 +113,7 @@ BartlettPSD <- function(x, fs = 1, n_segments = NULL,
 
 #' Rangayyan eq. (7.65):
 #'
-#' h(1) = -a1; h(n) = -a_n - sum_{k=1}^{n-1} (1 - k/n) a_k h(n-k) Going
+#' h(1) = -a1; h(n) = -a_n - sum_\{k=1\}^\{n-1\} (1 - k/n) a_k h(n-k) Going
 #' through the AR coefficients avoids the phase unwrapping the FFT
 #' cepstrum needs (Section 4.7.3).
 #'

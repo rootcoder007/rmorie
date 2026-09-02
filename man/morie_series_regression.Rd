@@ -12,6 +12,7 @@ morie_series_regression(x, y, K = 5L, kind = "poly")
 \item{K}{sieve dimension.}
 
 \item{kind}{"poly" or "fourier".}
+
 }
 \value{
 list: fitted, coefficients, K, r_squared, df_ratio.

@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_cheatsheet}
 \title{morie_snpqc1_cheatsheet}
 \usage{
-morie_snpqc1_cheatsheet()
+morie_snpqc1_cheatsheet() 
 }
 \description{
 A step of the snpqc1_native implementation. No other function in the package calls it. See the file header for the source the module follows.

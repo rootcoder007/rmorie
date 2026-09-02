@@ -5,7 +5,8 @@
 \alias{morie_mtr2sx}
 \title{morie_mtr2sx}
 \usage{
-morie_mtr2sx(beta_x, se_x, beta_y, se_y, model = "multiplicative", weights = "first_order", theta = 0)
+morie_mtr2sx(beta_x, se_x, beta_y, se_y, model = "multiplicative", weights = "first_order", 
+    theta = 0) 
 }
 \arguments{
 \item{beta_x}{Coerced to numeric by the body, with \code{as.numeric}.}

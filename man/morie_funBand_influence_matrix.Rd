@@ -3,12 +3,16 @@
 % the formals.
 \name{morie_funBand_influence_matrix}
 \alias{morie_funBand_influence_matrix}
-\title{The influence matrix A(lambda) = (I + lambda K)^-1, computed spectrally.}
+\title{The influence matrix A(lambda) = (I + lambda K)^-1, computed spectrally}
 \usage{
-morie_funBand_influence_matrix(x, lam)
+morie_funBand_influence_matrix(x, lam) 
 }
 \description{
 K = U diag(d) U\', so A = U diag(1/(1 + lambda d)) U\'. Factorising I + lambda K directly loses positive definiteness once lambda * ||K|| reaches about 1e12, which is exactly the limit the anchors probe.
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
 }
 \value{
 A numeric value.

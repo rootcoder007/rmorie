@@ -5,7 +5,7 @@
 \alias{regimen_value}
 \title{Inverse-probability value of a single-stage rule}
 \usage{
-regimen_value(R, A, H, rule, propensity = NULL)
+regimen_value(R, A, H, rule, propensity = NULL) 
 }
 \arguments{
 \item{R}{Numeric vector of outcomes.}

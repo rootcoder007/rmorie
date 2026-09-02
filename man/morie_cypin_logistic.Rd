@@ -5,7 +5,7 @@
 \alias{morie_cypin_logistic}
 \title{The logistic function, written so it cannot overflow either way}
 \usage{
-morie_cypin_logistic(z)
+morie_cypin_logistic(z) 
 }
 \arguments{
 \item{z}{A numeric scalar.}

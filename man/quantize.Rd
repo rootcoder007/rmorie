@@ -5,7 +5,7 @@
 \alias{quantize}
 \title{quantize}
 \usage{
-quantize(x, bins)
+quantize(x, bins) 
 }
 \arguments{
 \item{x}{Passed to \code{.chronos_vec}.}

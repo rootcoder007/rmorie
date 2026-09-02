@@ -2,7 +2,7 @@
 % Please edit documentation in R/spmsd.R
 \name{spmsd}
 \alias{spmsd}
-\title{Mean-square differentiability, from the even derivatives of C at 0.}
+\title{Mean-square differentiability, from the even derivatives of C at 0}
 \usage{
 spmsd(cov_func, m = 1, h = NULL, tol = 1e+06)
 }

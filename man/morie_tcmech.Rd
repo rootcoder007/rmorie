@@ -5,7 +5,7 @@
 \alias{morie_tcmech}
 \title{Release a clipped query under a target (epsilon, delta) budget}
 \usage{
-morie_tcmech(y, f_value, C, epsilon, delta, omega = NULL, seed = 0, n_release = 1L)
+morie_tcmech(y, f_value, C, epsilon, delta, omega = NULL, seed = 0, n_release = 1L) 
 }
 \arguments{
 \item{y}{The per-record contributions. Clipping them is what gives   the query a sensitivity at all.}

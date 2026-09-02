@@ -17,6 +17,6 @@
 The value of \code{counts}, as built in the body.
 }
 \description{
-morie.fn.crfsel._depth_counts; element [\link{depth}] holds the counts at
+morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
 that depth, so the caller indexes by depth directly.
 }

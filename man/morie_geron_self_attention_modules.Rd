@@ -14,6 +14,7 @@ morie_geron_self_attention_modules(X, W_Q, W_K, W_V, mask = NULL)
 \item{W_V}{Projection (d_model, d_v).}
 
 \item{mask}{Optional mask passed through to the kernel.}
+
 }
 \value{
 list with Y, attention, Q, K, V, estimate, n, method.

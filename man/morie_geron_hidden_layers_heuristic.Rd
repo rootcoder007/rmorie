@@ -30,6 +30,8 @@ morie_geron_hidden_layers_heuristic(
 \item{val_fraction}{Held-out fraction.}
 
 \item{seed}{Split seed.}
+
+
 }
 \value{
 List with best_n_layers, best_error, errors, depths_tried, stopped_early, estimate, n, method.

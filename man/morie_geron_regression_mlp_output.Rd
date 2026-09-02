@@ -17,6 +17,7 @@ morie_geron_regression_mlp_output(
 \item{W_out, b_out}{Output weights and bias.}
 
 \item{activation}{"identity", "softplus", "relu" or "sigmoid".}
+
 }
 \value{
 List with \code{prediction}, \code{preactivation}, \code{out_features}.

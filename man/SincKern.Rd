@@ -5,7 +5,7 @@
 \alias{SincKern}
 \title{The inverse transform of a rectangular passband, truncated to M+1}
 \usage{
-SincKern(fc, fs = 1000, M = 64, window = NULL)
+SincKern(fc, fs = 1000, M = 64, window = NULL) 
 }
 \arguments{
 \item{fc}{Coerced to numeric by the body, with \code{as.numeric}.}

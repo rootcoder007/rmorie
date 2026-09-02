@@ -8,6 +8,7 @@ morie_hsic(a, b)
 }
 \arguments{
 \item{a, b}{Numeric vectors of equal length.}
+
 }
 \value{
 A single non-negative numeric.

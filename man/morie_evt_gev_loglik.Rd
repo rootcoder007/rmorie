@@ -10,6 +10,8 @@ morie_evt_gev_loglik(x, mu, sigma, xi)
 \item{x}{sample of block maxima}
 
 \item{mu, sigma, xi}{GEV location, scale (> 0), shape}
+
+
 }
 \value{
 scalar log-likelihood

@@ -5,7 +5,7 @@
 \alias{morie_survroc_kaplan_meier}
 \title{morie_survroc_kaplan_meier}
 \usage{
-morie_survroc_kaplan_meier(times, events, at = NULL)
+morie_survroc_kaplan_meier(times, events, at = NULL) 
 }
 \arguments{
 \item{times}{Passed to \code{.survroc_clean}.}

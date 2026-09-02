@@ -5,7 +5,7 @@
 \alias{morie_vidgen_reconstruction_guidance}
 \title{morie_vidgen_reconstruction_guidance}
 \usage{
-morie_vidgen_reconstruction_guidance(x_hat, observed, index, weight = 2, downsample = NULL)
+morie_vidgen_reconstruction_guidance(x_hat, observed, index, weight = 2, downsample = NULL) 
 }
 \arguments{
 \item{x_hat}{Iterated over elementwise, with \code{lapply}.}

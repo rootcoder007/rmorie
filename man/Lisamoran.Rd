@@ -2,16 +2,16 @@
 % Please edit documentation in R/morloc.R
 \name{Lisamoran}
 \alias{Lisamoran}
-\title{Local Moran's I per location (re-export).}
+\title{Local Moran's I per location (re-export)}
 \usage{
 Lisamoran(x, W, mlvar = TRUE)
 }
 \arguments{
-\item{x}{Values at the n locations.}
+\item{x}{See Usage.}
 
-\item{W}{Spatial weights.}
+\item{W}{See Usage.}
 
-\item{mlvar}{Divide m2 by n rather than n-1.}
+\item{mlvar}{See Usage.}
 }
 \value{
 List with the payload of :func:\code{morie.fn.lismor.localmoran}.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Polynomial kernel matrix.
+#' Polynomial kernel matrix
 #'
 #' Formula: K(x_i, x_j) = (gamma * x_i'x_j + a)^d
 #'

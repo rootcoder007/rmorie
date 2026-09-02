@@ -30,6 +30,10 @@ morie_tps_sdb_turing_demo(
 
 \item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
 default) skips writing and says so in the result.}
+
+
+
+
 }
 \value{
 A \code{morie_rich_result} with the steady-state spike

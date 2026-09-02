@@ -5,7 +5,7 @@
 \alias{NoiseModel}
 \title{Eqs (3.12)-(3.14).  Eq (3.14) holds only if x and eta are}
 \usage{
-NoiseModel(x, eta)
+NoiseModel(x, eta) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Squared RKHS norm of a kernel expansion.
+#' Squared RKHS norm of a kernel expansion
 #'
 #' Formula: ||f||_H^2 = sum_i sum_j beta_i beta_j K(x_i, x_j) = beta' K beta
 #'

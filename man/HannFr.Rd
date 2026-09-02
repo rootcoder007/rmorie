@@ -5,7 +5,7 @@
 \alias{HannFr}
 \title{Eq (3.104): the transfer function on the unit circle, raw form}
 \usage{
-HannFr(omega)
+HannFr(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

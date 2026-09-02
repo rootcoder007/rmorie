@@ -5,10 +5,13 @@
 \alias{Absrank}
 \title{Midranks of |d| with signs -- Sec. 5.5, p. 189}
 \usage{
-Absrank(d)
+Absrank(d) 
 }
 \description{
 Midranks of |d| with signs -- Sec. 5.5, p. 189
+}
+\arguments{
+\item{d}{Argument \code{d}; see Usage.}
 }
 \value{
 A list with \code{ranks}, \code{signs}, \code{signed}, \code{ties}, \code{n}.

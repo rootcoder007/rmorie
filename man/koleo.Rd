@@ -5,7 +5,7 @@
 \alias{koleo}
 \title{Kozachenko-Leonenko spread regulariser}
 \usage{
-koleo(features)
+koleo(features) 
 }
 \arguments{
 \item{features}{Numeric matrix (n x d), or list of row vectors.}

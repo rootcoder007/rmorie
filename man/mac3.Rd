@@ -15,6 +15,7 @@ morie_mac3(yi, vi, mods, weighted = TRUE)
 \item{mods}{moderator matrix or vector.}
 
 \item{weighted}{centre at the inverse-variance weighted mean.}
+
 }
 \value{
 list: estimate, coefficients, se, centers, tau2_resid, tau2_total,

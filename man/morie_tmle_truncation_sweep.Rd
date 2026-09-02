@@ -15,6 +15,8 @@ morie_tmle_truncation_sweep(
 \item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
 
 \item{eps_grid}{Truncation levels, all strictly inside (0, 0.5).}
+
+
 }
 \value{
 List with \code{eps}, \code{ate}, \code{se}, \code{n_truncated}, \code{range},

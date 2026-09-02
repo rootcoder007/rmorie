@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm249.R
 \name{Msm249}
 \alias{Msm249}
-\title{Sum-of-squares loss.}
+\title{Sum-of-squares loss}
 \usage{
 Msm249(y_hat, y)
 }

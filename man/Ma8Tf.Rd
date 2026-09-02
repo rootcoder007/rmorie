@@ -5,7 +5,7 @@
 \alias{Ma8Tf}
 \title{Eq (3.110): seven zeros spaced evenly round the unit circle, at every}
 \usage{
-Ma8Tf(z)
+Ma8Tf(z) 
 }
 \arguments{
 \item{z}{Passed to \code{.morie_rg_polyz}.}

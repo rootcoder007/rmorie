@@ -5,10 +5,14 @@
 \alias{morie_hadamard}
 \title{morie_hadamard}
 \usage{
-morie_hadamard(A, B)
+morie_hadamard(A, B) 
 }
 \description{
 morie_hadamard
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{B}{Argument \code{B}; see Usage.}
 }
 \value{
 A numeric value.

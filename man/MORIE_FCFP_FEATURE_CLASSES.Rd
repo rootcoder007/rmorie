@@ -3,9 +3,7 @@
 \name{MORIE_FCFP_FEATURE_CLASSES}
 \alias{MORIE_FCFP_FEATURE_CLASSES}
 \title{Pharmacophoric feature classes used by FCFP, in RDKit bit order}
-\usage{
-MORIE_FCFP_FEATURE_CLASSES
-}
+
 \description{
 The order in which \code{\link{morie_fcfp4}} packs the six
 functional-class flags of each atom into its round-0 identifier:

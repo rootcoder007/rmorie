@@ -5,7 +5,7 @@
 \alias{wl_colours}
 \title{wl_colours}
 \usage{
-wl_colours(adj, n, rounds = 2, initial = NULL)
+wl_colours(adj, n, rounds = 2, initial = NULL) 
 }
 \arguments{
 \item{adj}{A vector; indexed elementwise.}

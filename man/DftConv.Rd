@@ -5,7 +5,7 @@
 \alias{DftConv}
 \title{Eq (3.87).  The book is explicit that the convolution here is}
 \usage{
-DftConv(x, h)
+DftConv(x, h) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

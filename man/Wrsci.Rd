@@ -5,10 +5,15 @@
 \alias{Wrsci}
 \title{Rank-sum shift CI -- Sec. 8.2, p. 292}
 \usage{
-Wrsci(x, y, wcrit)
+Wrsci(x, y, wcrit) 
 }
 \description{
 Rank-sum shift CI -- Sec. 8.2, p. 292
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{wcrit}{Argument \code{wcrit}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{k}, \code{estimate}, \code{ndiff}, \code{m}, \code{n}.

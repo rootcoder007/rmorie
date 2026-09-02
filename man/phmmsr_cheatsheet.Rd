@@ -5,7 +5,7 @@
 \alias{phmmsr_cheatsheet}
 \title{phmmsr_cheatsheet}
 \usage{
-phmmsr_cheatsheet()
+phmmsr_cheatsheet() 
 }
 \description{
 A step of the phmmsr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

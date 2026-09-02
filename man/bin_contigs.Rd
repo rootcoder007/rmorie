@@ -5,7 +5,7 @@
 \alias{bin_contigs}
 \title{bin_contigs}
 \usage{
-bin_contigs(tnfs, coverages = NULL, lengths = NULL, threshold = 0.15, min_bin_size = 2e+05)
+bin_contigs(tnfs, coverages = NULL, lengths = NULL, threshold = 0.15, min_bin_size = 2e+05) 
 }
 \arguments{
 \item{tnfs}{Passed to \code{.metabd_mat}.}

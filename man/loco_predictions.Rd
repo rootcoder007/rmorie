@@ -5,7 +5,7 @@
 \alias{loco_predictions}
 \title{loco_predictions}
 \usage{
-loco_predictions(preds, meta, weights, chromosomes = NULL)
+loco_predictions(preds, meta, weights, chromosomes = NULL) 
 }
 \arguments{
 \item{preds}{A vector; indexed elementwise.}

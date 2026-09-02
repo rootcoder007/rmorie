@@ -5,7 +5,7 @@
 \alias{k02gold}
 \title{k02gold}
 \usage{
-k02gold(f, lo, hi, iters = 80L)
+k02gold(f, lo, hi, iters = 80L) 
 }
 \arguments{
 \item{f}{Accepted by the signature and not used anywhere in the body.}

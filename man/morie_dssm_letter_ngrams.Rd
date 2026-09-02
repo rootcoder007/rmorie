@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_dssm_letter_ngrams}
 \alias{morie_dssm_letter_ngrams}
+\alias{morie_dssm}
 \title{Letter n-grams of a bracketed word}
 \usage{
-morie_dssm_letter_ngrams(word, n = 3L, boundary = "#")
+morie_dssm_letter_ngrams(word, n = 3L, boundary = "#") 
+
+morie_dssm(word, n = 3L, boundary = "#") 
 }
 \arguments{
 \item{word}{character(1). The input word; coerced via \code{as.character}   and lower-cased.}

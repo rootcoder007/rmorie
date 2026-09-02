@@ -9,7 +9,7 @@
 #'   b_t = b_{t-1}           + beta  e_t
 #'   s_t = s_{t-m}           + gamma e_t
 #' }
-#' i.e. y_t = w' x_{t-1} + e_t, x_t = F x_{t-1} + g e_t.  Smoothing
+#' i.e. y_t = w' x_\{t-1\} + e_t, x_t = F x_\{t-1\} + g e_t.  Smoothing
 #' parameters are chosen on a deterministic 0.1-step grid minimising the
 #' one-step sum of squared errors, or may be fixed directly.
 #'

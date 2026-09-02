@@ -9,7 +9,7 @@
 #' unknown baseline leaves available.
 #'
 #' Formula: log pi(b | data) = -b^2/(2 prior_sd^2)
-#'   + sum_i \[b z_i - log sum_{j in R_i} exp(b z_j)\], on a grid.
+#'   + sum_i \[b z_i - log sum_\{j in R_i\} exp(b z_j)\], on a grid.
 #'
 #' @param beta0 True log hazard ratio.
 #' @param n Sample size.

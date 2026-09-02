@@ -20,7 +20,7 @@
 # format whose required package is missing raises `NotYetPorted` so
 # the caller gets a clear "install sf" / "install readxl" path.
 
-#' Format names that `morie_tps_load()` knows how to dispatch.
+#' Format names that `morie_tps_load()` knows how to dispatch
 #' @export
 MORIE_TPS_SUPPORTED_FORMATS <- c(
   "csv", "excel",
@@ -72,7 +72,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── CSV / Excel ───────────────────────────────────────────────────
+# ?? CSV / Excel ???????????????????????????????????????????????????
 
 
 #' Internal helper: Morie Tps Read Csv
@@ -111,7 +111,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── GeoJSON / FeatureCollection ───────────────────────────────────
+# ?? GeoJSON / FeatureCollection ???????????????????????????????????
 
 
 #' Internal helper: Morie Tps Read Geojson
@@ -164,7 +164,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── KML / KMZ ─────────────────────────────────────────────────────
+# ?? KML / KMZ ?????????????????????????????????????????????????????
 
 
 #' Internal helper: Morie Tps Read Kml
@@ -211,7 +211,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── GeoPackage / SQLiteGeodatabase ────────────────────────────────
+# ?? GeoPackage / SQLiteGeodatabase ????????????????????????????????
 
 
 #' Internal helper: Morie Tps Read Sf Path
@@ -251,7 +251,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── Shapefile / FileGeoDatabase ───────────────────────────────────
+# ?? Shapefile / FileGeoDatabase ???????????????????????????????????
 
 
 #' Internal helper: Morie Tps Read Shapefile
@@ -326,7 +326,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 }
 
 
-# ── Master dispatcher ─────────────────────────────────────────────
+# ?? Master dispatcher ?????????????????????????????????????????????
 
 
 .MORIE_TPS_DISPATCH <- list(
@@ -342,7 +342,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 )
 
 
-#' Load TPS dataset `name` in the given `format`.
+#' Load TPS dataset `name` in the given `format`
 #'
 #' Mirror of Python's `morie.tps_io.load_tps`. `csv` and `excel`
 #' work with base R / `readxl`; all spatial formats (`geojson`,
@@ -387,7 +387,7 @@ morie_tps_load <- function(name, format = "csv", nrows = NULL) {
 }
 
 
-#' Map TPS format name -> path of the file that would be loaded.
+#' Map TPS format name -> path of the file that would be loaded
 #'
 #' Formats whose sibling directory or file is not present on disk
 #' are omitted from the returned named character vector. Use this
@@ -439,7 +439,7 @@ morie_tps_list_formats <- function(name) {
 }
 
 
-#' List of formats this build can actually load.
+#' List of formats this build can actually load
 #'
 #' Always returns `csv`. `excel` requires `readxl`; spatial formats
 #' require `sf`. If a needed namespace isn't installed, that format

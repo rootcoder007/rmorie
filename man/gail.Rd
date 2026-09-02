@@ -5,7 +5,9 @@
 \alias{gail}
 \title{Fit the GAIL discriminator and emit the per-step cost for the}
 \usage{
-gail(expert_states, expert_actions, policy_states, policy_actions, features = NULL, lr = 0.1, epochs = 200, l2 = 0, lam = 0, policy_entropy = 0, clip = 1e-09)
+gail(expert_states, expert_actions, policy_states, policy_actions, 
+    features = NULL, lr = 0.1, epochs = 200, l2 = 0, lam = 0, policy_entropy = 0, 
+    clip = 1e-09) 
 }
 \arguments{
 \item{expert_states,expert_actions}{Lists of equal length: the   expert demonstrations tau_E.}

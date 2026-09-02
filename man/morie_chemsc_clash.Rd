@@ -5,7 +5,7 @@
 \alias{morie_chemsc_clash}
 \title{The clash penalty for one too-close contact}
 \usage{
-morie_chemsc_clash(r, kind = "general", slope = 1, par = NULL)
+morie_chemsc_clash(r, kind = "general", slope = 1, par = NULL) 
 }
 \arguments{
 \item{r}{The contact distance.}

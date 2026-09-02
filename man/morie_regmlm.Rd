@@ -5,7 +5,8 @@
 \alias{morie_regmlm}
 \title{morie_regmlm}
 \usage{
-morie_regmlm(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5, cv = "kfold", k = 5)
+morie_regmlm(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5, cv = "kfold", 
+    k = 5) 
 }
 \arguments{
 \item{G}{A matrix; passed to \code{nrow}.}

@@ -18,6 +18,8 @@ morie_kamath_summarize_from_feedback(
 \item{rewards, pi_logprobs, ref_logprobs}{PPO batch.}
 
 \item{beta}{KL weight.}
+
+
 }
 \value{
 List with \code{loss_rm}, \code{rm_accuracy}, \code{objective}, \code{kl_estimate}.

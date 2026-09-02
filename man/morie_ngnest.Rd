@@ -5,7 +5,8 @@
 \alias{morie_ngnest}
 \title{morie_ngnest}
 \usage{
-morie_ngnest(y, horizon, lookback_multiples = c(2, 3, 4, 5, 6, 7), block_sets = NULL, how = "median", ridge = 1e-08)
+morie_ngnest(y, horizon, lookback_multiples = c(2, 3, 4, 5, 6, 7), block_sets = NULL, 
+    how = "median", ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Passed to \code{.ngnest_ensemble_members}.}

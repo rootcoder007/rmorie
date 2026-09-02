@@ -14,6 +14,7 @@ morie_wasserman_svm(X, y, C = 1e+06, max_iter = 1000L, tol = 1e-12)
 \item{C}{Box constraint.}
 
 \item{max_iter, tol}{Solver controls.}
+
 }
 \value{
 List with \code{estimate} (margin 2/|w|), \code{w}, \code{b},

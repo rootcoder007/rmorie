@@ -5,7 +5,7 @@
 \alias{morie_elod}
 \title{Expected LOD per progeny}
 \usage{
-morie_elod(var_qtl, var_residual)
+morie_elod(var_qtl, var_residual) 
 }
 \arguments{
 \item{var_qtl}{QTL variance, non-negative.}

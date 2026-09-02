@@ -5,7 +5,7 @@
 \alias{tlltmle_fluctuate}
 \title{tlltmle_fluctuate}
 \usage{
-tlltmle_fluctuate(Q, H, Y, iters = 100, tol = 1e-10)
+tlltmle_fluctuate(Q, H, Y, iters = 100, tol = 1e-10) 
 }
 \arguments{
 \item{Q}{Coerced to numeric by the body, with \code{as.numeric}.}

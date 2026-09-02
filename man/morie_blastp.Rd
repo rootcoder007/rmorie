@@ -22,6 +22,9 @@ morie_blastp(
 \item{K, lam}{Karlin-Altschul parameters.}
 
 \item{score_matrix}{Optional named list keyed "a|b".}
+
+
+
 }
 \value{
 A list with elements \code{score}, \code{e_value},

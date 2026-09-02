@@ -5,7 +5,7 @@
 \alias{BPursuit}
 \title{NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD}
 \usage{
-BPursuit(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10)
+BPursuit(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

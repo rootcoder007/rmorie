@@ -5,7 +5,7 @@
 \alias{log_barrier_hessian}
 \title{Log barrier Hessian}
 \usage{
-log_barrier_hessian(fvals, jac, hess = NULL)
+log_barrier_hessian(fvals, jac, hess = NULL) 
 }
 \arguments{
 \item{fvals}{Numeric vector of \eqn{f_i(x)} values.}

@@ -43,7 +43,7 @@
   0.5 * n * log(2 * pi * sigma2) - logdetA + 0.5 * n
 }
 
-#' Spatial autoregressive error model (SAR error, ML).
+#' Spatial autoregressive error model (SAR error, ML)
 #'
 #' Y = X beta + u,  u = lambda W u + eps,  eps ~ N(0, sigma2 I).
 #' Concentrated log-likelihood in lambda; beta via GLS on the

@@ -2,7 +2,7 @@
 % Please edit documentation in R/posrr.R
 \name{Ppcrep}
 \alias{Ppcrep}
-\title{Posterior predictive p-value comparing T(y, theta) to T(y_rep, theta).}
+\title{Posterior predictive p-value comparing T(y, theta) to T(y_rep, theta)}
 \usage{
 Ppcrep(t_obs, t_rep)
 }

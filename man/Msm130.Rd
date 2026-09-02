@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm130.R
 \name{Msm130}
 \alias{Msm130}
-\title{eq. (8.3) p.254 (re-export).}
+\title{eq. (8.3) p.254 (re-export)}
 \usage{
 Msm130(...)
 }

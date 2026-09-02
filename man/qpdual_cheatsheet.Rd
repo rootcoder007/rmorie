@@ -5,7 +5,7 @@
 \alias{qpdual_cheatsheet}
 \title{qpdual_cheatsheet}
 \usage{
-qpdual_cheatsheet()
+qpdual_cheatsheet() 
 }
 \description{
 qpdual_cheatsheet

@@ -5,7 +5,7 @@
 \alias{morie_genmol_elbo}
 \title{The evidence lower bound: reconstruction minus the divergence}
 \usage{
-morie_genmol_elbo(reconstruction, mu, logvar, beta = 1)
+morie_genmol_elbo(reconstruction, mu, logvar, beta = 1) 
 }
 \arguments{
 \item{reconstruction}{The reconstruction term.}

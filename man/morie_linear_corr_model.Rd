@@ -12,6 +12,8 @@ morie_linear_corr_model(m, sigma_x, sigma_z, mu_x = 0, mu_z = 0)
 \item{sigma_x, sigma_z}{spreads of signal and noise.}
 
 \item{mu_x, mu_z}{means of signal and noise.}
+
+
 }
 \value{
 list: mu_y, sigma_y, r, reverse_slope, r_squared,

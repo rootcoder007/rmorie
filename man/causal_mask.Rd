@@ -5,7 +5,7 @@
 \alias{causal_mask}
 \title{causal_mask}
 \usage{
-causal_mask(n)
+causal_mask(n) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

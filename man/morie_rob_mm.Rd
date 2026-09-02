@@ -12,6 +12,7 @@ morie_rob_mm(X, y, n_subsets = 200L, seed = 0)
 \item{n_subsets}{random p-subsets for the initial stage.}
 
 \item{seed}{subset seed.}
+
 }
 \value{
 list: beta, scale, beta_initial, residuals, se, weights,

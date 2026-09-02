@@ -14,6 +14,7 @@ morie_exponential_dist(lam, t = 0, dt = 0, rate_slow = NULL, ratio = NULL)
 \item{dt}{interval width (default 0: skip).}
 
 \item{rate_slow, ratio}{optional crossing-time inputs.}
+
 }
 \value{
 list: density, interval_probability, mean, second_moment,

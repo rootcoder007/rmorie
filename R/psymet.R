@@ -189,7 +189,7 @@ morie_psymet_cr <- function(loads) {
   sl^2 / (sl^2 + se)
 }
 
-#' Average variance extracted (AVE) from factor loadings. Mean(lambda^2).
+#' Average variance extracted (AVE) from factor loadings. Mean(lambda^2)
 #' @param loads Numeric vector of standardised factor loadings (lambda).
 #' @return A numeric value (scalar).
 #' @examples
@@ -200,7 +200,7 @@ morie_psymet_ave <- function(loads) {
   mean(as.numeric(loads)^2)
 }
 
-#' Kaiser-Meyer-Olkin sampling adequacy.
+#' Kaiser-Meyer-Olkin sampling adequacy
 #'
 #' Native Kaiser-Meyer-Olkin sampling adequacy from the
 #' partial-correlation anti-image matrix.
@@ -237,7 +237,7 @@ morie_psymet_kmo <- function(data) {
   list(msa = as.numeric(overall), items = items)
 }
 
-#' Bartlett's test of sphericity.
+#' Bartlett's test of sphericity
 #' @return list with `chisq`, `df`, `pval`.
 #' @param data Numeric matrix or data.frame of items.
 #' @examples
@@ -260,7 +260,7 @@ morie_psymet_bartlett <- function(data) {
        pval = as.numeric(pchisq(chisq, df, lower.tail = FALSE)))
 }
 
-#' Horn's parallel analysis -- suggested number of factors.
+#' Horn's parallel analysis -- suggested number of factors
 #'
 #' Native Horn's parallel analysis: observed eigenvalues vs the 95th
 #' percentile of random-data eigenvalues.
@@ -294,7 +294,7 @@ morie_psymet_parallel <- function(data, nsim = 100, seed = 42) {
   max(sum(obs > thresh), 1L)
 }
 
-#' Spearman-Brown split-half reliability.
+#' Spearman-Brown split-half reliability
 #' @param method "first_last" or "odd_even".
 #' @param data Numeric matrix or data.frame of items.
 #' @return A numeric scalar: the Spearman-Brown split-half reliability.
@@ -324,7 +324,7 @@ morie_psymet_splithalf <- function(data, method = c("first_last", "odd_even")) {
   2 * r / (1 + r)
 }
 
-#' Item discrimination (D-statistic).
+#' Item discrimination (D-statistic)
 #'
 #' Upper/lower groups by total score (default 27% per Kelley).
 #' @return data.frame with `item`, `d`.

@@ -5,7 +5,7 @@
 \alias{narm_decoder_parameters}
 \title{narm_decoder_parameters}
 \usage{
-narm_decoder_parameters(n_items, hidden, emb_dim)
+narm_decoder_parameters(n_items, hidden, emb_dim) 
 }
 \arguments{
 \item{n_items}{Coerced to integer by the body, with \code{as.integer}.}

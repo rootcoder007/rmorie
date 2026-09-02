@@ -1,22 +1,22 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Lasso by cyclic coordinate descent
-#
-# The L1 penalty is not differentiable at zero, and that is the point:
-# the subgradient condition lets a coefficient sit exactly at zero over a
-# whole range of correlations, so the fit selects as it shrinks. Cyclic
-# coordinate descent exploits the fact that each one-dimensional
-# subproblem has the closed-form soft-threshold solution, so no
-# quadratic program is needed.
-#
-# Columns with no variation are left unpenalised: shrinking an intercept
-# towards zero is a statement about the origin of the response scale, not
-# about model complexity.
-#
-# Formula: \code{min_beta 0.5 ||y - X beta||^2 + lambda ||beta||_1},
-# cycled as \eqn{beta_j <- S(x_j primer + ||x_j||^2 beta_j, lambda) /
+#' Lasso by cyclic coordinate descent
+#'
+#' The L1 penalty is not differentiable at zero, and that is the point:
+#' the subgradient condition lets a coefficient sit exactly at zero over a
+#' whole range of correlations, so the fit selects as it shrinks. Cyclic
+#' coordinate descent exploits the fact that each one-dimensional
+#' subproblem has the closed-form soft-threshold solution, so no
+#' quadratic program is needed.
+#'
+#' Columns with no variation are left unpenalised: shrinking an intercept
+#' towards zero is a statement about the origin of the response scale, not
+#' about model complexity.
+#'
+#' Formula: \code{min_beta 0.5 ||y - X beta||^2 + lambda ||beta||_1},
+#' cycled as \eqn{beta_j <- S(x_j primer + ||x_j||^2 beta_j, lambda) /
 # prime ||x_j||^2} with \code{S} the soft-threshold -- Tibshirani (1996);
 #' Hastie, Tibshirani and Friedman, The Elements of Statistical Learning,
-#' section 3.4.2. The penalty is on the same scale as n times glmnet's.
+#' section 3.4.2. The penalty is on the same scale as n times glmnet's
 #'
 #' @param X Design matrix, n by p.
 #' @param y Response of length n.

@@ -164,6 +164,12 @@ morie_rdd_kernel_gaussian <- function(u) stats::dnorm(u)
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' @param x See Usage.
+#' @param y See Usage.
+#' @param x0 See Usage.
+#' @param h See Usage.
+#' @param p See Usage.
+#' @param kernel See Usage.
 #' @keywords internal
 .morie_rdd_local_poly_fit <- function(x, y, x0, h, p = 1,
                                       kernel = "triangular") {

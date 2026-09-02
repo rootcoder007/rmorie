@@ -5,7 +5,7 @@
 \alias{log_barrier_gradient}
 \title{Log barrier gradient}
 \usage{
-log_barrier_gradient(fvals, jac)
+log_barrier_gradient(fvals, jac) 
 }
 \arguments{
 \item{fvals}{Numeric vector of \eqn{f_i(x)} values.}

@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_wenge_weight_based_mediation}
 \alias{morie_wenge_weight_based_mediation}
+\alias{morie_wenge}
 \title{morie_wenge_weight_based_mediation}
 \usage{
-morie_wenge_weight_based_mediation(X, M, C, Y, strategy = "em", saturated = TRUE)
+morie_wenge_weight_based_mediation(X, M, C, Y, strategy = "em", saturated = TRUE) 
+
+morie_wenge(X, M, C, Y, strategy = "em", saturated = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{.s03vec}.}

@@ -5,7 +5,8 @@
 \alias{RespSound}
 \title{RespSound: respiratory sound generation model (bronchial turbulence);}
 \usage{
-RespSound(length_m = 0.1, radius_m = 0.009, freqs = NULL, rho = 1.2, c = 343, mu = 1.8e-05, P0 = 101325, eta = 1.4, lam = 0.026, cp = 1005)
+RespSound(length_m = 0.1, radius_m = 0.009, freqs = NULL, rho = 1.2, c = 343, 
+    mu = 1.8e-05, P0 = 101325, eta = 1.4, lam = 0.026, cp = 1005) 
 }
 \arguments{
 \item{length_m}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.}

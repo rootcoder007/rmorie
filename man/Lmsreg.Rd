@@ -28,12 +28,12 @@ with no text layer, so every page cited was read as a rendered image.
 Equation (1.8), p. 872, defines the estimator: minimize_theta med_i r_i^2.
 
 Theorem 1, p. 872: if p > 1 and the observations are in general position,
-the breakdown point of the LMS method is ([n/2] - p + 2)/n, where \link{r} is the
+the breakdown point of the LMS method is ([n/2] - p + 2)/n, where [r] is the
 largest integer <= r.  That formula is reported in the payload.
 
 Theorem 2, p. 873: for p = 1 with all x_i = 1, so the sample reduces to
 (y_i), the LMS location is the midpoint of the shortest half, the smallest
-of y_{h:n} - y_{1:n}, ..., y_{n:n} - y_{n-h+1:n} with h = [n/2] + 1.
+of y_\{h:n\} - y_\{1:n\}, ..., y_\{n:n\} - y_\{n-h+1:n\} with h = [n/2] + 1.
 Corollary 1, p. 873: if at least n - [n/2] + p - 1 observations satisfy
 y_i = x_i theta exactly and are in general position, the LMS solution equals
 theta WHATEVER the other observations are.  Both are used as anchors.

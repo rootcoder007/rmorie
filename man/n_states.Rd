@@ -5,7 +5,7 @@
 \alias{n_states}
 \title{n_states}
 \usage{
-n_states(spec)
+n_states(spec) 
 }
 \arguments{
 \item{spec}{A list; the body reads \code{$harmonics}, \code{$p}, \code{$periods}, \code{$q}, \code{$use_trend} from it.}

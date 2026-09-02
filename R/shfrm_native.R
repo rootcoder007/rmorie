@@ -21,6 +21,7 @@
 #' @param event Event indicator (1 = event, 0 = censored).
 #' @param X Covariate matrix.
 #' @param cluster Cluster labels.
+#' @param theta See Usage.
 #' @return List with \code{estimate}, \code{se}, \code{theta},
 #'   \code{kendall_tau}, \code{frailty}, \code{baseline_times},
 #'   \code{baseline_cumhaz}, \code{marginal_survivor}, \code{loglik},

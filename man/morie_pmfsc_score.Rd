@@ -5,7 +5,8 @@
 \alias{morie_pmfsc_score}
 \title{Score a pose against a derived potential}
 \usage{
-morie_pmfsc_score(pairs, potential, r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24, missing = 0)
+morie_pmfsc_score(pairs, potential, r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24, 
+    missing = 0) 
 }
 \arguments{
 \item{pairs}{A list of list(type_i, type_j, separation).}

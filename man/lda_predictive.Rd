@@ -5,7 +5,7 @@
 \alias{lda_predictive}
 \title{lda_predictive}
 \usage{
-lda_predictive(N_ik, N_k, beta, m)
+lda_predictive(N_ik, N_k, beta, m) 
 }
 \arguments{
 \item{N_ik}{Coerced to numeric by the body, with \code{as.numeric}.}

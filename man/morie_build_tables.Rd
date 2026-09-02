@@ -5,7 +5,7 @@
 \alias{morie_build_tables}
 \title{morie_build_tables}
 \usage{
-morie_build_tables(g, method = "lr1")
+morie_build_tables(g, method = "lr1") 
 }
 \arguments{
 \item{g}{Passed to \code{.prsLR_build_tables}.}

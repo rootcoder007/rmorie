@@ -5,7 +5,7 @@
 \alias{CDiff3}
 \title{Eq (3.128): the mean of two successive first differences, which}
 \usage{
-CDiff3(x, T = 1, n = NULL)
+CDiff3(x, T = 1, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

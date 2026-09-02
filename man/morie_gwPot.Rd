@@ -5,7 +5,7 @@
 \alias{morie_gwPot}
 \title{morie_gwPot}
 \usage{
-morie_gwPot(gas, horizon = 100)
+morie_gwPot(gas, horizon = 100) 
 }
 \arguments{
 \item{gas}{Coerced to character by the body, with \code{as.character}.}

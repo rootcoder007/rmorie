@@ -5,7 +5,7 @@
 \alias{RefPattern}
 \title{Eqs (4.53)-(4.54): g(n) = 3 d(n) + 2 d(n-1) + d(n-2) and its filter}
 \usage{
-RefPattern(amplitudes = NULL)
+RefPattern(amplitudes = NULL) 
 }
 \arguments{
 \item{amplitudes}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

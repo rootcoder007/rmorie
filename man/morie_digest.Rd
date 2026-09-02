@@ -26,6 +26,14 @@ morie_digest(
 murmur32, crc32c, sha224, sha384.}
 
 \item{serialize, file, length, skip, ascii, raw, seed, errormode, serializeVersion}{as in digest.}
+
+
+
+
+
+
+
+
 }
 \value{
 the hex digest (character), or a raw vector when \code{raw = TRUE}.

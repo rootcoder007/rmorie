@@ -5,7 +5,7 @@
 \alias{cnvlfc_convergent_cross_mapping}
 \title{cnvlfc_convergent_cross_mapping}
 \usage{
-cnvlfc_convergent_cross_mapping(x, y, E = 2L, tau = 1L, ...)
+cnvlfc_convergent_cross_mapping(x, y, E = 2L, tau = 1L, ...) 
 }
 \arguments{
 \item{x}{Carried through into a list the body builds.}

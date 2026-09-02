@@ -2,14 +2,14 @@
 % Please edit documentation in R/aitpca.R
 \name{Clrpca}
 \alias{Clrpca}
-\title{Principal component analysis in centred log-ratio coordinates.}
+\title{Principal component analysis in centred log-ratio coordinates}
 \usage{
 Clrpca(X, k = 2)
 }
 \arguments{
-\item{X}{One composition per row; strictly positive.}
+\item{X}{See Usage.}
 
-\item{k}{Number of components retained.}
+\item{k}{See Usage.}
 }
 \value{
 List with \code{values}, \code{loadings}, \code{scores}, \code{prop_var}, \code{cum_prop}, \code{k}, \code{n}, \code{D}.
@@ -22,5 +22,5 @@ M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Clrpca(M)
 }
 \references{
-Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_{i<j} var{log(x_i/x_j)}.
+Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_\{i<j\} var\{log(x_i/x_j)\}.
 }

@@ -5,7 +5,7 @@
 \alias{morie_warpL_alpha_weights}
 \title{morie_warpL_alpha_weights}
 \usage{
-morie_warpL_alpha_weights(n, scheme = "reciprocal")
+morie_warpL_alpha_weights(n, scheme = "reciprocal") 
 }
 \arguments{
 \item{n}{Passed to \code{.warpL_alpha_weights}.}

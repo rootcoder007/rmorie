@@ -5,7 +5,7 @@
 \alias{morie_secrtt_rotation_cost}
 \title{Compare the bytes re-encrypted under each strategy}
 \usage{
-morie_secrtt_rotation_cost(n_records, mean_record_bytes, dek_bytes = 32)
+morie_secrtt_rotation_cost(n_records, mean_record_bytes, dek_bytes = 32) 
 }
 \arguments{
 \item{n_records}{Integer number of records.}

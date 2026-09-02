@@ -2,7 +2,7 @@
 % Please edit documentation in R/spexp.R
 \name{spexp}
 \alias{spexp}
-\title{Exponential semivariogram model.}
+\title{Exponential semivariogram model}
 \usage{
 spexp(h, nugget = 0, sill = 1, range = 1)
 }

@@ -27,6 +27,14 @@ morie_geron_deit(
 \item{teacher}{Logits or function(image).}
 
 \item{logits_cls, logits_dist, y, alpha}{Loss inputs.}
+
+
+
+
+
+
+
+
 }
 \value{
 List with \code{n_patches}, \code{n_tokens}, \code{total_params},

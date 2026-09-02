@@ -63,7 +63,7 @@ NULL
   morie_ensure_extras("survey")
 }
 
-#' Construct a survey design object.
+#' Construct a survey design object
 #'
 #' Returns a `survey::svydesign` object when `survey` is available; otherwise
 #' returns a lightweight list with the same fields the morie helpers consume.
@@ -105,7 +105,7 @@ morie_survey_design <- function(data, weights_col, strata_col = NULL,
             class = "morie_survey_design_fallback")
 }
 
-#' Horvitz-Thompson estimator of a population total.
+#' Horvitz-Thompson estimator of a population total
 #' @return list with `total`, `se`, `ci_lower`, `ci_upper`.
 #' @inheritParams morie_survey_params
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
@@ -128,7 +128,7 @@ morie_survey_ht_total <- function(y, inclusion_probs) {
        ci_lower = total - zc * se, ci_upper = total + zc * se)
 }
 
-#' Hajek (ratio) estimator of a population mean.
+#' Hajek (ratio) estimator of a population mean
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
@@ -152,7 +152,7 @@ morie_survey_hajek_mean <- function(y, weights) {
        ci_lower = m - zc * se, ci_upper = m + zc * se)
 }
 
-#' Survey-weighted mean (delegates to `survey::svymean` when available).
+#' Survey-weighted mean (delegates to `survey::svymean` when available)
 #' @inheritParams morie_survey_params
 #' @return A named \code{list} (see Details).
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
@@ -174,7 +174,7 @@ morie_survey_mean <- function(design, variable) {
   morie_survey_hajek_mean(design$data[[variable]], design$weights)
 }
 
-#' Ratio estimator of a population total using known X_pop.
+#' Ratio estimator of a population total using known X_pop
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
@@ -205,7 +205,7 @@ morie_survey_ratio <- function(y, x, weights, X_population_total) {
        ci_lower = total - zc * se, ci_upper = total + zc * se)
 }
 
-#' Post-stratification weights (sample-to-population alignment).
+#' Post-stratification weights (sample-to-population alignment)
 #'
 #' Delegates to `survey::postStratify()` when given a design; otherwise
 #' computes raw post-stratification factors in base R.
@@ -240,7 +240,7 @@ morie_survey_poststratify <- function(df, strata_col, population_counts) {
   w
 }
 
-#' Raking calibration to known marginal totals (iterative proportional fitting).
+#' Raking calibration to known marginal totals (iterative proportional fitting)
 #'
 #' For multi-variable marginals use `morie_weights_rake()`; this helper is the
 #' single-variable convenience.
@@ -290,7 +290,7 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
   w
 }
 
-#' Subpopulation (domain) mean with Woodruff linearised SE.
+#' Subpopulation (domain) mean with Woodruff linearised SE
 #' @inheritParams morie_survey_params
 #' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_domain}.
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
@@ -322,7 +322,7 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
        n_domain = n_dom)
 }
 
-#' Survey-weighted GLM with design-based SEs.
+#' Survey-weighted GLM with design-based SEs
 #'
 #' Wraps `survey::svyglm()`. Family argument accepts the same strings as the
 #' Python module ("gaussian", "binomial", "poisson", "gamma", "negativebinomial")
@@ -356,7 +356,7 @@ morie_survey_glm <- function(design, formula,
 }
 
 #' Complex-survey GLM constructor (single-shot wrapper that builds a design
-#' and fits a `svyglm` in one call). Cluster-robust SEs via the design.
+#' and fits a `svyglm` in one call). Cluster-robust SEs via the design
 #' @inheritParams morie_survey_params
 #' @return A \code{svyglm} object (survey-weighted GLM fit).
 #' @examplesIf requireNamespace("survey", quietly = TRUE)

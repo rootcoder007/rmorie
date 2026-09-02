@@ -5,7 +5,7 @@
 \alias{xdeep_interaction_degree}
 \title{xdeep_interaction_degree}
 \usage{
-xdeep_interaction_degree(layer_index)
+xdeep_interaction_degree(layer_index) 
 }
 \arguments{
 \item{layer_index}{Coerced to integer by the body, with \code{as.integer}.}

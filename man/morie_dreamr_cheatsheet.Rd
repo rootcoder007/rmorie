@@ -5,7 +5,7 @@
 \alias{morie_dreamr_cheatsheet}
 \title{morie_dreamr_cheatsheet}
 \usage{
-morie_dreamr_cheatsheet()
+morie_dreamr_cheatsheet() 
 }
 \description{
 A step of the dreamr_native implementation. No other function in the package calls it. See the file header for the source the module follows.

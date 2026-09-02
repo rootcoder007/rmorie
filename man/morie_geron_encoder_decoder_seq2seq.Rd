@@ -24,6 +24,7 @@ morie_geron_encoder_decoder_seq2seq(
 \item{start_token}{Optional initial \code{y_prev}; default zeros like \code{c}.}
 
 \item{eos_token}{Optional scalar that stops decoding.}
+
 }
 \value{
 List with \code{outputs}, \code{context}, \code{context_dim}, \code{n_steps},

@@ -5,7 +5,7 @@
 \alias{Shannon}
 \title{Eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values}
 \usage{
-Shannon(p, levels = NULL)
+Shannon(p, levels = NULL) 
 }
 \arguments{
 \item{p}{Passed to \code{.morie_rg_aslist}.}

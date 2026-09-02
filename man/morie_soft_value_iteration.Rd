@@ -5,7 +5,7 @@
 \alias{morie_soft_value_iteration}
 \title{MaxEnt (soft) value iteration on a deterministic tabular MDP}
 \usage{
-morie_soft_value_iteration(states, actions, step, reward, gamma = 0.9, iters = 2000L, tol = 1e-14)
+morie_soft_value_iteration(states, actions, step, reward, gamma = 0.9, iters = 2000L, tol = 1e-14) 
 }
 \arguments{
 \item{states}{Iterable of states.}

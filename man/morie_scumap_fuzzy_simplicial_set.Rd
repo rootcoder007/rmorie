@@ -5,7 +5,7 @@
 \alias{morie_scumap_fuzzy_simplicial_set}
 \title{morie_scumap_fuzzy_simplicial_set}
 \usage{
-morie_scumap_fuzzy_simplicial_set(X, n_neighbors = 15, symmetrize = TRUE)
+morie_scumap_fuzzy_simplicial_set(X, n_neighbors = 15, symmetrize = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{.scumap_matrix}.}

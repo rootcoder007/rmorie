@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_irm_dml}
 \alias{morie_otis_irm_dml}
-\title{Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC).}
+\title{Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC)}
 \usage{
 morie_otis_irm_dml(
   df,

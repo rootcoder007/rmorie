@@ -5,7 +5,7 @@
 \alias{CircConv}
 \title{Eq (3.90): y_p(n) = sum_k x_p(k) h_p[(n-k) mod N], defined only for}
 \usage{
-CircConv(x, h, npoints = NULL)
+CircConv(x, h, npoints = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

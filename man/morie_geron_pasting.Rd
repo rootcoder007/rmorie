@@ -5,7 +5,8 @@
 \alias{morie_geron_pasting}
 \title{Pasting: base models on samples drawn without replacement (Geron Ch 6, hmpas)}
 \usage{
-morie_geron_pasting(X, y, base_estimator = NULL, n_estimators = 10, sample_size = NULL, seed = 0, task = "auto")
+morie_geron_pasting(X, y, base_estimator = NULL, n_estimators = 10, sample_size = NULL, 
+    seed = 0, task = "auto") 
 }
 \arguments{
 \item{X,y}{Data and targets.}

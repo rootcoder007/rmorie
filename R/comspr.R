@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Spectral clustering: embed by the bottom eigenvectors, then k-means.
+#' Spectral clustering: embed by the bottom eigenvectors, then k-means
 #'
 #' The eigenvectors are the SMALLEST ones. Signs are fixed on the
 #' largest-magnitude entry and the k-means is initialised at the FIRST k

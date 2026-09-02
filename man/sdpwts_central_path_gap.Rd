@@ -5,7 +5,7 @@
 \alias{sdpwts_central_path_gap}
 \title{The duality gap at a central point is exactly m/t}
 \usage{
-sdpwts_central_path_gap(t, m)
+sdpwts_central_path_gap(t, m) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

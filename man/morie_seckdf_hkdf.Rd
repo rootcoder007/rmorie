@@ -5,7 +5,7 @@
 \alias{morie_seckdf_hkdf}
 \title{HKDF: extract then expand, or expand alone on uniform input}
 \usage{
-morie_seckdf_hkdf(ikm, salt = NULL, info = raw(), length = 32L, skip_extract = FALSE)
+morie_seckdf_hkdf(ikm, salt = NULL, info = raw(), length = 32L, skip_extract = FALSE) 
 }
 \arguments{
 \item{ikm}{Raw input keying material.}

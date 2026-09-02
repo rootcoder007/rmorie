@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghosal_native.R
 \name{.morie_gh_stick}
 \alias{.morie_gh_stick}
-\title{Stick-breaking: w_k = V_k prod_{j<k}(1 - V_j), V_k ~ Beta(1, alpha),}
+\title{Stick-breaking: w_k = V_k prod_\{j<k\}(1 - V_j), V_k ~ Beta(1, alpha),}
 \usage{
 .morie_gh_stick(alpha, K)
 }

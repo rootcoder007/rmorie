@@ -2,7 +2,7 @@
 % Please edit documentation in R/causrddm.R
 \name{Rddmanip}
 \alias{Rddmanip}
-\title{McCrary's test for a discontinuity in the density at the cutoff.}
+\title{McCrary's test for a discontinuity in the density at the cutoff}
 \usage{
 Rddmanip(x, cutoff = 0, bw = NULL, binsize = NULL)
 }

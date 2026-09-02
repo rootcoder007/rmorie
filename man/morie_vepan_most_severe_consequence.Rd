@@ -5,7 +5,7 @@
 \alias{morie_vepan_most_severe_consequence}
 \title{The lowest-ranked (worst) term}
 \usage{
-morie_vepan_most_severe_consequence(terms)
+morie_vepan_most_severe_consequence(terms) 
 }
 \arguments{
 \item{terms}{Coerced to character by the body, with \code{as.character}.}

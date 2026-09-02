@@ -5,7 +5,7 @@
 \alias{morie_cypin_cheatsheet}
 \title{One-line summary of the cypin module}
 \usage{
-morie_cypin_cheatsheet()
+morie_cypin_cheatsheet() 
 }
 \description{
 One-line summary of the cypin module

@@ -5,7 +5,7 @@
 \alias{theorem3_moment}
 \title{theorem3_moment}
 \usage{
-theorem3_moment(q, gamma, l)
+theorem3_moment(q, gamma, l) 
 }
 \arguments{
 \item{q}{Numeric; combined arithmetically in the body.}

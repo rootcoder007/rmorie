@@ -21,6 +21,8 @@ morie_psy_eap_theta(
 \item{prior}{\code{c(mean, sd)}.}
 
 \item{n_nodes}{quadrature nodes.}
+
+
 }
 \value{
 list: theta, se, posterior_sd, prior_mean, prior_sd,

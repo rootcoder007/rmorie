@@ -5,7 +5,7 @@
 \alias{word_patch_alignment}
 \title{word_patch_alignment}
 \usage{
-word_patch_alignment(text_boxes, masked_patches, width, height, patch_grid = 14, masked_text = list())
+word_patch_alignment(text_boxes, masked_patches, width, height, patch_grid = 14, masked_text = list()) 
 }
 \arguments{
 \item{text_boxes}{A vector; its length is taken and its elements indexed.}

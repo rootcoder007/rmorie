@@ -5,7 +5,7 @@
 \alias{lattice_check}
 \title{lattice_check}
 \usage{
-lattice_check(x)
+lattice_check(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

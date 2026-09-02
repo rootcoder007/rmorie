@@ -5,7 +5,8 @@
 \alias{group_align}
 \title{group_align}
 \usage{
-group_align(group1, group2, scoring, weights1 = NULL, weights2 = NULL, s_op = 2.4, anchors = NULL)
+group_align(group1, group2, scoring, weights1 = NULL, weights2 = NULL, s_op = 2.4, 
+    anchors = NULL) 
 }
 \arguments{
 \item{group1}{Iterated over elementwise, with \code{vapply}.}

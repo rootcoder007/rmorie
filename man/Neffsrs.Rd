@@ -2,7 +2,7 @@
 % Please edit documentation in R/adjsrs.R
 \name{Neffsrs}
 \alias{Neffsrs}
-\title{Effective simple-random-sample size of a weighted design.}
+\title{Effective simple-random-sample size of a weighted design}
 \usage{
 Neffsrs(w)
 }

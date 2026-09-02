@@ -5,7 +5,7 @@
 \alias{morie_se3T_se3_attention}
 \title{SE(3) attention: invariant weights over equivariant values}
 \usage{
-morie_se3T_se3_attention(positions, type0, type1, weights = NULL, sigma = 1, temperature = 1)
+morie_se3T_se3_attention(positions, type0, type1, weights = NULL, sigma = 1, temperature = 1) 
 }
 \arguments{
 \item{positions}{Passed to \code{.se3T_mat}.}

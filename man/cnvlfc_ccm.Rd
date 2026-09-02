@@ -5,7 +5,7 @@
 \alias{cnvlfc_ccm}
 \title{cnvlfc_ccm}
 \usage{
-cnvlfc_ccm(x, y, E = 2L, tau = 1L, lib_sizes = NULL, seed = 1L, exclude = 0L)
+cnvlfc_ccm(x, y, E = 2L, tau = 1L, lib_sizes = NULL, seed = 1L, exclude = 0L) 
 }
 \arguments{
 \item{x}{Passed to \code{.cnvlfc_ccm}.}

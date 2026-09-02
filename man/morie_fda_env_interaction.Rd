@@ -5,7 +5,7 @@
 \alias{morie_fda_env_interaction}
 \title{Written out for all I environments the blocks sum column by column to}
 \usage{
-morie_fda_env_interaction(X, env, reference = TRUE)
+morie_fda_env_interaction(X, env, reference = TRUE) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

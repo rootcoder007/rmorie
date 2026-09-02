@@ -14,6 +14,8 @@ morie_rob_tau(X, y, n_subsets = 200L, seed = 0, c1 = 1.5476, c2 = 6.08)
 \item{seed}{subset seed.}
 
 \item{c1, c2}{the two biweight constants.}
+
+
 }
 \value{
 list: beta, tau_scale, m_scale, residuals, breakdown,

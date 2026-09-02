@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_dsw_embed}
 \title{Dimension-Segment-Wise embedding}
 \usage{
-morie_crsfmr_dsw_embed(X, seg_len, E = NULL, pos = NULL)
+morie_crsfmr_dsw_embed(X, seg_len, E = NULL, pos = NULL) 
 }
 \arguments{
 \item{X}{Numeric matrix, T rows by D columns.}

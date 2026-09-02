@@ -5,7 +5,7 @@
 \alias{ExpKerTfd}
 \title{Exponential-kernel (Choi-Williams) TFD}
 \usage{
-ExpKerTfd(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL)
+ExpKerTfd(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

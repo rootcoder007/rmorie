@@ -5,7 +5,7 @@
 \alias{morie_trmRew_term_rewriting}
 \title{morie_trmRew_term_rewriting}
 \usage{
-morie_trmRew_term_rewriting(term, rules, strategy = "innermost", max_steps = 10000)
+morie_trmRew_term_rewriting(term, rules, strategy = "innermost", max_steps = 10000) 
 }
 \arguments{
 \item{term}{Passed to \code{morie_trmRew_normal_form}.}

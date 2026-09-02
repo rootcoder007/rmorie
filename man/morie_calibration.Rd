@@ -25,6 +25,15 @@ morie_calibration(
 \item{zbar_pi, a_hat, pi_sample, m_all_mean, m_ht_mean, b_hat, n_population}{Calibration pieces.}
 
 \item{z_sample, b_si, m_sample_mean}{SI shortcut pieces.}
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with poststratified, calibrated, intercept, si_shortcut.

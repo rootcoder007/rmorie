@@ -5,7 +5,7 @@
 \alias{morie_qrntcq_efficacy_test_and_release}
 \title{morie_qrntcq_efficacy_test_and_release}
 \usage{
-morie_qrntcq_efficacy_test_and_release(t.Q, t.T, t.R, false.negative, generation.time = NULL, t.R.positive = NULL)
+morie_qrntcq_efficacy_test_and_release(t.Q, t.T, t.R, false.negative, generation.time = NULL, t.R.positive = NULL) 
 }
 \arguments{
 \item{t.Q}{Passed to \code{morie_qrntcq_quarantine_efficacy}.}

@@ -5,7 +5,8 @@
 \alias{morie_tsbF_tsb_forecast}
 \title{morie_tsbF_tsb_forecast}
 \usage{
-morie_tsbF_tsb_forecast(y, alpha = 0.1, beta = 0.05, horizon = 1, init = "global", z0 = NULL, p0 = NULL, burn_in = 0)
+morie_tsbF_tsb_forecast(y, alpha = 0.1, beta = 0.05, horizon = 1, init = "global", z0 = NULL, 
+    p0 = NULL, burn_in = 0) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,10 +5,16 @@
 \alias{Cfinvpmf}
 \title{Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)}
 \usage{
-Cfinvpmf(t, phi_re, phi_im, x)
+Cfinvpmf(t, phi_re, phi_im, x) 
 }
 \description{
 Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)
+}
+\arguments{
+\item{t}{Argument \code{t}; see Usage.}
+\item{phi_re}{Argument \code{phi_re}; see Usage.}
+\item{phi_im}{Argument \code{phi_im}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
 }
 \value{
 A list with \code{pmf}, \code{x}, \code{n_nodes}.

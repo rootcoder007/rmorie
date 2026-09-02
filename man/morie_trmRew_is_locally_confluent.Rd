@@ -5,7 +5,7 @@
 \alias{morie_trmRew_is_locally_confluent}
 \title{The Critical Pair Lemma, applied}
 \usage{
-morie_trmRew_is_locally_confluent(rules, max_steps = 10000)
+morie_trmRew_is_locally_confluent(rules, max_steps = 10000) 
 }
 \arguments{
 \item{rules}{Passed to \code{morie_trmRew_critical_pairs}.}

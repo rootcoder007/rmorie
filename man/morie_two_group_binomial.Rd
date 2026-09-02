@@ -10,6 +10,9 @@ morie_two_group_binomial(w1, n1, w2, n2, z = 1.96)
 \item{w1, n1, w2, n2}{Successes and trials per group.}
 
 \item{z}{Normal critical value.}
+
+
+
 }
 \value{
 List with x2 (Pearson), lrt, or_hat, or_lower, or_upper.

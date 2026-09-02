@@ -11,6 +11,7 @@ Ghosalseriesgp(x = 0.3, y = 0.7, n_terms = 60)
 
 \item{n_terms}{Number of terms summed; at least 3 so the convergence
 check has three partial sums to compare.}
+
 }
 \value{
 List with \code{estimate} (the kernel value),

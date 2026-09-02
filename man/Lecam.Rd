@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_ap_d2.R
 \name{Lecam}
 \alias{Lecam}
-\title{Le Cam's bound on the posterior mass of an alternative set.}
+\title{Le Cam's bound on the posterior mass of an alternative set}
 \usage{
 Lecam(dtv, p0_phi, prior_mass, integral)
 }

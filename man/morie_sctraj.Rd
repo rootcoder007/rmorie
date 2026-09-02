@@ -5,7 +5,8 @@
 \alias{morie_sctraj}
 \title{morie_sctraj}
 \usage{
-morie_sctraj(X, labels, root, ends = NULL, cov = "full", max_iter = 15, shrink = TRUE, weight_arg = "shifted", span = 0.4, n_points = 100)
+morie_sctraj(X, labels, root, ends = NULL, cov = "full", max_iter = 15, shrink = TRUE, 
+    weight_arg = "shifted", span = 0.4, n_points = 100) 
 }
 \arguments{
 \item{X}{Passed to \code{.sctraj_matrix}.}

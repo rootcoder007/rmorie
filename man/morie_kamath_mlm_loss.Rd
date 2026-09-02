@@ -5,10 +5,12 @@
 \alias{morie_kamath_mlm_loss}
 \title{morie_kamath_mlm_loss}
 \usage{
-morie_kamath_mlm_loss(x, M_x)
+morie_kamath_mlm_loss(x, M_x) 
 }
 \arguments{
 \item{M_x}{0-based scored positions, no duplicates.}
+
+\item{x}{Argument \code{x}; see Usage.}
 }
 \description{
 morie_kamath_mlm_loss

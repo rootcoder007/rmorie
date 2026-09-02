@@ -2,7 +2,7 @@
 % Please edit documentation in R/agvirt.R
 \name{Virtloss}
 \alias{Virtloss}
-\title{Virtual loss for parallel Monte-Carlo tree search.}
+\title{Virtual loss for parallel Monte-Carlo tree search}
 \usage{
 Virtloss(W, N, pending, nvl = 1)
 }

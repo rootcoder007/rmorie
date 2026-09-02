@@ -5,7 +5,7 @@
 \alias{morie_pmfsc_cheatsheet}
 \title{One-line summary of the pmfsc module}
 \usage{
-morie_pmfsc_cheatsheet()
+morie_pmfsc_cheatsheet() 
 }
 \description{
 One-line summary of the pmfsc module

@@ -5,10 +5,14 @@
 \alias{Jtstat}
 \title{Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365}
 \usage{
-Jtstat(samples, alternative = "greater")
+Jtstat(samples, alternative = "greater") 
 }
 \description{
 Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{k}, \code{n}.

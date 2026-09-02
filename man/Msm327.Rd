@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm327.R
 \name{Msm327}
 \alias{Msm327}
-\title{ZAP random-forest prediction.}
+\title{ZAP random-forest prediction}
 \usage{
 Msm327(theta_hat, mu_hat)
 }

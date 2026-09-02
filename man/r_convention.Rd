@@ -5,7 +5,7 @@
 \alias{r_convention}
 \title{r_convention}
 \usage{
-r_convention(fitted)
+r_convention(fitted) 
 }
 \arguments{
 \item{fitted}{A list; the body reads \code{$aic}, \code{$loglik}, \code{$phi}, \code{$Phi}, \code{$sigma2}, \code{$theta}, \code{$Theta} from it.}

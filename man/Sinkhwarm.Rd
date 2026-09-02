@@ -25,6 +25,9 @@ Sinkhwarm(
 \item{f0, g0}{the warm-start potentials.}
 
 \item{max_iter, tol}{iteration controls.}
+
+
+
 }
 \value{
 list: T, f, g, estimate, cost, u, v, n_iter, n_iter_cold,

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' BERTScore precision, recall and F1.
+#' BERTScore precision, recall and F1
 #'
 #' With pre-normalised embeddings, R = mean_i max_j x_i' xhat_j,
 #' P = mean_j max_i x_i' xhat_j and F = 2PR/(P+R); idf weights re-weight

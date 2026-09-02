@@ -5,7 +5,8 @@
 \alias{cnvlfc_coupled_logistic}
 \title{cnvlfc_coupled_logistic}
 \usage{
-cnvlfc_coupled_logistic(n, rx = 3.8, ry = 3.5, bxy = 0, byx = 0.1, x0 = 0.4, y0 = 0.2, burn = 300L)
+cnvlfc_coupled_logistic(n, rx = 3.8, ry = 3.5, bxy = 0, byx = 0.1, x0 = 0.4, y0 = 0.2, 
+    burn = 300L) 
 }
 \arguments{
 \item{n}{Passed to \code{.cnvlfc_coupled_logistic}.}

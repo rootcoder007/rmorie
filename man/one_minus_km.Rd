@@ -5,7 +5,7 @@
 \alias{one_minus_km}
 \title{one_minus_km}
 \usage{
-one_minus_km(hazards, times, cause)
+one_minus_km(hazards, times, cause) 
 }
 \arguments{
 \item{hazards}{A vector; indexed elementwise.}

@@ -14,6 +14,7 @@ morie_kde2d(x, y, h, n = 25, lims = c(range(x), range(y)))
 \item{n}{Grid size (scalar or length-2).}
 
 \item{lims}{Grid limits \code{c(xlo, xhi, ylo, yhi)}.}
+
 }
 \value{
 A list \code{list(x, y, z)} (grid axes and the n1 x n2

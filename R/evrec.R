@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Upper record times and counts in a sequence.
+#' Upper record times and counts in a sequence
 #'
-#' Formula: R_n = sum_i 1{X_i > max(X_1..X_{i-1})}; E[R_n] = sum_i 1/i; Var[R_n] = sum_i (1/i - 1/i^2)
+#' Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E\[R_n\] = sum_i 1/i; Var\[R_n\] = sum_i (1/i - 1/i^2)
 #'
 #' @param x The sequence, in observation order.
 
+#' @param x See Usage.
 #' @return List with ``count``, ``times`` (indices of records), ``values``, ``expected``, ``variance``, ``z``, ``n``.
 #' @references Arnold, Balakrishnan and Nagaraja (1998), Records, Wiley. Not held locally; the indicator representation and the resulting harmonic mean and variance are standard published results for iid continuous data.
 #' @export

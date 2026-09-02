@@ -17,7 +17,7 @@ List with \code{H}, \code{atoms}, \code{weights},
 \code{method}.
 }
 \description{
-Formula: H_n(B) = (1/k) sum 1{||X_i|| >= r_n, X_i/||X_i|| in B}
+Formula: H_n(B) = (1/k) sum 1\{||X_i|| >= r_n, X_i/||X_i|| in B\}
 }
 \details{
 The data are first rank-transformed to standard Frechet margins, so

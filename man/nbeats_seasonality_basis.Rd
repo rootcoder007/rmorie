@@ -5,7 +5,7 @@
 \alias{nbeats_seasonality_basis}
 \title{nbeats_seasonality_basis}
 \usage{
-nbeats_seasonality_basis(length, harmonics, offset = 0, period = NULL)
+nbeats_seasonality_basis(length, harmonics, offset = 0, period = NULL) 
 }
 \arguments{
 \item{length}{A count; the body uses it as \code{seq_len(...)}.}

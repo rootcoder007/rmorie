@@ -5,7 +5,7 @@
 \alias{glove_weight}
 \title{Eq. (9): the GloVe weighting function. f(0) = 0, non-decreasing,}
 \usage{
-glove_weight(x, x_max = 100, alpha = 0.75)
+glove_weight(x, x_max = 100, alpha = 0.75) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

@@ -18,6 +18,8 @@ morie_hapblk(
 \item{strong_hi, strong_lo, recomb_hi}{Paper thresholds.}
 
 \item{frac}{Required strong-LD fraction (0.95).}
+
+
 }
 \value{
 A list with elements \code{blocks} (list of inclusive

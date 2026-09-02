@@ -5,10 +5,14 @@
 \alias{Rosenbm}
 \title{Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329}
 \usage{
-Rosenbm(x, y)
+Rosenbm(x, y) 
 }
 \description{
 Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{ymin}, \code{ymax}, \code{mean}, \code{m}, \code{n}.

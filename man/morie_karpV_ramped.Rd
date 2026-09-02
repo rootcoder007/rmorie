@@ -5,7 +5,7 @@
 \alias{morie_karpV_ramped}
 \title{Ramped half-and-half initialisation}
 \usage{
-morie_karpV_ramped(e, n, functions, terminals, erc, max_depth)
+morie_karpV_ramped(e, n, functions, terminals, erc, max_depth) 
 }
 \arguments{
 \item{e}{the generator, from the module's own xorshift.}

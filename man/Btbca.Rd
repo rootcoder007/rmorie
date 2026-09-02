@@ -27,7 +27,7 @@ Methods and their Application, Cambridge University Press.  Page 204,
 equations (5.20)-(5.21), theta_alpha = t*_((R+1) alpha~) with
 alpha~ = Phi(w + (w + z_alpha)/(1 - a(w + z_alpha))); page 205, equation
 (5.22), the bias correction in simulation terms,
-w = Phi^-1(#{t*_r <= t}/(R + 1)); and page 209, equation (5.27), the
+w = Phi^-1(#\{t*_r <= t\}/(R + 1)); and page 209, equation (5.27), the
 nonparametric acceleration from the empirical influence values,
 a = (1/6) sum l_j^3 / (sum l_j^2)^(3/2).
 }

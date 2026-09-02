@@ -5,7 +5,7 @@
 \alias{Qpois}
 \title{Smallest k with cdf(k) >= p, as R defines it}
 \usage{
-Qpois(p, lambda)
+Qpois(p, lambda) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

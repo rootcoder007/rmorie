@@ -5,7 +5,8 @@
 \alias{word_vector}
 \title{word_vector}
 \usage{
-word_vector(word, Z, gram_index, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE, hash_buckets = NULL)
+word_vector(word, Z, gram_index, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE, 
+    hash_buckets = NULL) 
 }
 \arguments{
 \item{word}{Passed to \code{subwords}.}

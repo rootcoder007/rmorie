@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_alert_to_volatility_all}
 \alias{morie_otis_make_pair_alert_to_volatility_all}
-\title{Run both Ruhela and Naive alert -> volatility builders.}
+\title{Run both Ruhela and Naive alert -> volatility builders}
 \usage{
 morie_otis_make_pair_alert_to_volatility_all(df)
 }

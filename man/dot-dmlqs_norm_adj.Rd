@@ -14,5 +14,5 @@ Nothing; this branch always raises.
 }
 \description{
 each value a sorted unique integer vector of neighbours (with v
-itself excluded -- mirrors Python \code{set(adj[v]) - {v}}).
+itself excluded -- mirrors Python \verb{set(adj\[v\]) - \{v\}}).
 }

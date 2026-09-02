@@ -5,10 +5,13 @@
 \alias{morie_chol_lower}
 \title{morie_chol_lower}
 \usage{
-morie_chol_lower(G)
+morie_chol_lower(G) 
 }
 \description{
 morie_chol_lower
+}
+\arguments{
+\item{G}{Argument \code{G}; see Usage.}
 }
 \value{
 A matrix, from \code{t}.

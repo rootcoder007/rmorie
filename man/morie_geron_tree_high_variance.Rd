@@ -21,6 +21,8 @@ morie_geron_tree_high_variance(
 \item{seed}{LCG seed.}
 
 \item{criterion, max_depth}{CART controls.}
+
+
 }
 \value{
 List with \code{variance}, \code{bias2}, \code{root_splits}, \code{structural_instability}, \code{ensemble_prediction}.

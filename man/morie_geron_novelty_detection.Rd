@@ -5,7 +5,7 @@
 \alias{morie_geron_novelty_detection}
 \title{Novelty detection by density ratio against a clean training set (Geron Ch 8, hmnov)}
 \usage{
-morie_geron_novelty_detection(model, X_new, reference = NULL)
+morie_geron_novelty_detection(model, X_new, reference = NULL) 
 }
 \arguments{
 \item{model}{Callable log-density, list with `log_density`/`reference`, or clean training matrix.}

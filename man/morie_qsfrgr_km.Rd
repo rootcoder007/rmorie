@@ -5,7 +5,7 @@
 \alias{morie_qsfrgr_km}
 \title{Weighted Kaplan-Meier survival curve}
 \usage{
-morie_qsfrgr_km(time, event, weights, grid = NULL)
+morie_qsfrgr_km(time, event, weights, grid = NULL) 
 }
 \arguments{
 \item{time}{Observed times.}

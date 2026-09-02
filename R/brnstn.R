@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bernstein's concentration inequality.
+#' Bernstein's concentration inequality
 #'
 #' Formula: P(S_n >= n t) <= exp(-n t^2 / (2 sigma^2 + 2 M t / 3))
 #'
@@ -8,6 +8,10 @@
 #' @param n Number of summands.
 #' @param t Deviation per summand.
 
+#' @param sigma2 See Usage.
+#' @param M See Usage.
+#' @param n See Usage.
+#' @param t See Usage.
 #' @return List with ``bound``, ``bound_two_sided``, ``hoeffding``, ``ratio``, ``exponent``.
 #' @references Bernstein (1924). The original is not held locally and is in Russian; the inequality is stated in this exact form in every standard concentration-inequality reference consulted.
 #' @export

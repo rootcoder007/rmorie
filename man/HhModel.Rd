@@ -5,7 +5,9 @@
 \alias{HhModel}
 \title{HhModel: four-variable Hodgkin-Huxley membrane model, RK4}
 \usage{
-HhModel(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5, stim_stop = 6, C_m = 1, g_Na = 120, g_K = 36, g_L = 0.3, E_Na = 50, E_K = -77, E_L = -54.387, V0 = -65)
+HhModel(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5, stim_stop = 6, 
+    C_m = 1, g_Na = 120, g_K = 36, g_L = 0.3, E_Na = 50, E_K = -77, E_L = -54.387, 
+    V0 = -65) 
 }
 \arguments{
 \item{duration}{Numeric; combined arithmetically in the body. Defaults to \code{30}.}

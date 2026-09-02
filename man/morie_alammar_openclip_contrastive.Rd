@@ -5,10 +5,12 @@
 \alias{morie_alammar_openclip_contrastive}
 \title{morie_alammar_openclip_contrastive}
 \usage{
-morie_alammar_openclip_contrastive(I_emb, T_emb, tau = 0.07)
+morie_alammar_openclip_contrastive(I_emb, T_emb, tau = 0.07) 
 }
 \arguments{
 \item{I_emb,T_emb}{Image and text towers, row-matched.}
+
+\item{tau}{Argument \code{tau}; see Usage.}
 }
 \description{
 morie_alammar_openclip_contrastive

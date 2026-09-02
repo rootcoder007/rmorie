@@ -5,7 +5,7 @@
 \alias{morie_alf3df_schedule}
 \title{The EDM noise schedule, Karras et al. equation 5}
 \usage{
-morie_alf3df_schedule(n_steps, sigma_min = 0.002, sigma_max = 80, rho = 7)
+morie_alf3df_schedule(n_steps, sigma_min = 0.002, sigma_max = 80, rho = 7) 
 }
 \arguments{
 \item{n_steps}{The number of noise levels before the final zero.}

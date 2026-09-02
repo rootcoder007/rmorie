@@ -5,7 +5,7 @@
 \alias{MdlOrder}
 \title{Rissanen (1978): MDL(p) = N log(sigma_p^2) + p log(N).  The penalty}
 \usage{
-MdlOrder(errors, n_samples)
+MdlOrder(errors, n_samples) 
 }
 \arguments{
 \item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}

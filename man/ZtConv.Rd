@@ -5,7 +5,7 @@
 \alias{ZtConv}
 \title{Eq (3.56): y = x * h => Y(z) = X(z) H(z).  Both sides computed}
 \usage{
-ZtConv(x, h, z)
+ZtConv(x, h, z) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

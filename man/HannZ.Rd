@@ -5,7 +5,7 @@
 \alias{HannZ}
 \title{Eq (3.102): convolution in time is multiplication in z, so the whole}
 \usage{
-HannZ(X, z)
+HannZ(X, z) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

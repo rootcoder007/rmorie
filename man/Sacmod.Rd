@@ -3,7 +3,7 @@
 \name{Sacmod}
 \alias{Sacmod}
 \alias{morie_spatial_combined}
-\title{SAC model -- spatial lag and spatial error sharing one weights matrix.}
+\title{SAC model -- spatial lag and spatial error sharing one weights matrix}
 \usage{
 Sacmod(y, X, W)
 

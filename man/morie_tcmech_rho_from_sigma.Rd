@@ -5,7 +5,7 @@
 \alias{morie_tcmech_rho_from_sigma}
 \title{Proposition 1.6 the other way round}
 \usage{
-morie_tcmech_rho_from_sigma(sensitivity, sigma)
+morie_tcmech_rho_from_sigma(sensitivity, sigma) 
 }
 \arguments{
 \item{sensitivity}{The query sensitivity.}

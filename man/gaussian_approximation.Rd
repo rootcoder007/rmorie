@@ -5,7 +5,8 @@
 \alias{gaussian_approximation}
 \title{gaussian_approximation}
 \usage{
-gaussian_approximation(log_lik, log_lik_d1, log_lik_d2, prior_mean, prior_precision, x0 = 0, iters = 60, tol = 1e-12)
+gaussian_approximation(log_lik, log_lik_d1, log_lik_d2, prior_mean, prior_precision, 
+    x0 = 0, iters = 60, tol = 1e-12) 
 }
 \arguments{
 \item{log_lik}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,7 @@
 \alias{morie_sechsh_verify_inclusion}
 \title{Verify a Merkle audit path}
 \usage{
-morie_sechsh_verify_inclusion(leaf, index, size, path, root)
+morie_sechsh_verify_inclusion(leaf, index, size, path, root) 
 }
 \arguments{
 \item{leaf}{Raw leaf.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Barabasi-Albert preferential attachment graph.
+#' Barabasi-Albert preferential attachment graph
 #'
 #' Formula: Pi(k_i) = k_i / sum_j k_j; each new vertex brings m edges
 #'
@@ -8,6 +8,10 @@
 #' @param m0 Size of the complete seed graph; ``m + 1`` if omitted.
 #' @param seed Seed of the shared minstd stream.
 
+#' @param n See Usage.
+#' @param m See Usage.
+#' @param m0 See Usage.
+#' @param seed See Usage.
 #' @return List with ``degree``, ``mean_degree``, ``max_degree``, ``edges``, ``n``, ``m``.
 #' @references Barabasi and Albert (1999), Emergence of scaling in random networks, Science 286:509-512, arXiv:cond-mat/9910332. Verified against the paper for Pi(k_i) = k_i / sum_j k_j and the growth rule.
 #' @export

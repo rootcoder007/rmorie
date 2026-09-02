@@ -5,7 +5,7 @@
 \alias{PcgSeg}
 \title{PcgSeg}
 \usage{
-PcgSeg(x, fs, window = NULL, step = NULL, order = 6, threshold = NULL)
+PcgSeg(x, fs, window = NULL, step = NULL, order = 6, threshold = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

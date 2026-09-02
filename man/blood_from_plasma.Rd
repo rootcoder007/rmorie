@@ -5,7 +5,7 @@
 \alias{blood_from_plasma}
 \title{blood_from_plasma}
 \usage{
-blood_from_plasma(cl_plasma, fu_plasma, blood_plasma_ratio = NULL, charge = "neutral")
+blood_from_plasma(cl_plasma, fu_plasma, blood_plasma_ratio = NULL, charge = "neutral") 
 }
 \arguments{
 \item{cl_plasma}{Coerced to numeric by the body, with \code{as.numeric}.}

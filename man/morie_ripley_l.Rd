@@ -5,10 +5,15 @@
 \alias{morie_ripley_l}
 \title{morie_ripley_l}
 \usage{
-morie_ripley_l(coords, r_grid = NULL, correction = "border")
+morie_ripley_l(coords, r_grid = NULL, correction = "border") 
 }
 \description{
 morie_ripley_l
+}
+\arguments{
+\item{coords}{Argument \code{coords}; see Usage.}
+\item{r_grid}{Argument \code{r_grid}; see Usage.}
+\item{correction}{Argument \code{correction}; see Usage.}
 }
 \value{
 A list with \code{r}, \code{l}, \code{l_uncentred}, \code{k}, \code{lambda_est}, \code{method}.

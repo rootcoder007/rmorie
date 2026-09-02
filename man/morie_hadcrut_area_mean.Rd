@@ -5,7 +5,7 @@
 \alias{morie_hadcrut_area_mean}
 \title{Average a grid up to a global figure}
 \usage{
-morie_hadcrut_area_mean(grid, route = "hemispheric", var = NULL)
+morie_hadcrut_area_mean(grid, route = "hemispheric", var = NULL) 
 }
 \arguments{
 \item{grid}{Anomaly matrix, NA where unobserved.}

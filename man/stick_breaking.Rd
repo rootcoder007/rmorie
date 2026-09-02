@@ -5,7 +5,7 @@
 \alias{stick_breaking}
 \title{stick_breaking}
 \usage{
-stick_breaking(alpha, K, rng = NULL, seed = 0)
+stick_breaking(alpha, K, rng = NULL, seed = 0) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

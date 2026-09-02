@@ -5,7 +5,8 @@
 \alias{optimise_branch}
 \title{optimise_branch}
 \usage{
-optimise_branch(make_tree, seqs, pi = NULL, u = 1, lo = 1e-06, hi = 10, tol = 1e-10, max_iter = 200)
+optimise_branch(make_tree, seqs, pi = NULL, u = 1, lo = 1e-06, hi = 10, tol = 1e-10, 
+    max_iter = 200) 
 }
 \arguments{
 \item{make_tree}{A function; the body checks with \code{is.function}.}

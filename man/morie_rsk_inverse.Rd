@@ -8,6 +8,7 @@ morie_rsk_inverse(p_tableau, q_tableau)
 }
 \arguments{
 \item{p_tableau, q_tableau}{Tableaux of the same shape.}
+
 }
 \value{
 The permutation, as an integer vector.

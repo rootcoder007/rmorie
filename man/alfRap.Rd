@@ -5,7 +5,7 @@
 \alias{alfRap}
 \title{A frame is list(R = 3x3 matrix, t = length-3 vector); T o x = R x + t}
 \usage{
-alfRap(Tf, x)
+alfRap(Tf, x) 
 }
 \arguments{
 \item{Tf}{A list; the body reads \code{$R}, \code{$t} from it.}

@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Worst-case bias bound under local misspecification.
+#' Worst-case bias bound under local misspecification
 #'
 #' |bias| <= c ||s||_2 by Cauchy-Schwarz, attained at
 #' gamma = c s / ||s||, and the conservative interval is
-#' estimate +/- (c ||s|| + z_{1-alpha/2} se).
+#' estimate +/- (c ||s|| + z_\{1-alpha/2\} se).
 #'
 #' @param estimate Point estimate under the baseline model.
 #' @param sensitivity Derivative of the estimate w.r.t. the perturbation.

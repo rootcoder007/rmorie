@@ -5,7 +5,7 @@
 \alias{morie_phacf3_tanimoto}
 \title{Tanimoto coefficient of two equal-length fingerprints}
 \usage{
-morie_phacf3_tanimoto(a, b)
+morie_phacf3_tanimoto(a, b) 
 }
 \arguments{
 \item{a}{The first fingerprint.}

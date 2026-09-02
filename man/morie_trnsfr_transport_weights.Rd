@@ -5,7 +5,7 @@
 \alias{morie_trnsfr_transport_weights}
 \title{Odds-of-membership weights for the source cohort. Fits pi(x) by}
 \usage{
-morie_trnsfr_transport_weights(X, S, trim = 0.001, ridge = 1e-06)
+morie_trnsfr_transport_weights(X, S, trim = 0.001, ridge = 1e-06) 
 }
 \arguments{
 \item{X}{Passed to \code{.s03mat}.}

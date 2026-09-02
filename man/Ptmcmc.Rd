@@ -37,7 +37,7 @@ List with \code{chain} (cold trace), \code{chains_last},
 \description{
 K random-walk Metropolis replicas at ascending temperatures with
 neighbour swaps accepted with probability
-min(1, exp((1/T_k - 1/T_{k+1})(lp_{k+1} - lp_k))) (Earl-Deem 2005
+min(1, exp((1/T_k - 1/T_\{k+1\})(lp_\{k+1\} - lp_k))) (Earl-Deem 2005
 eq. 4; Hukushima-Nemoto 1996). Proposal sd scales with sqrt(T_k).
 Bit-identical stream consumption with the Python arm: one normal
 and one uniform per replica per sweep, one uniform per swap

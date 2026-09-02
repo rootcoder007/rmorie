@@ -5,7 +5,8 @@
 \alias{morie_tqipb}
 \title{Inner-product distortion and tail bound for TurboQuant blocks}
 \usage{
-morie_tqipb(bits, norm_sq = 1, d = NULL, eps = 0.1, delta = NULL, x_norm_sq = 1, n_blocks = 1, route = "table", tail = "chebyshev")
+morie_tqipb(bits, norm_sq = 1, d = NULL, eps = 0.1, delta = NULL, x_norm_sq = 1, 
+    n_blocks = 1, route = "table", tail = "chebyshev") 
 }
 \arguments{
 \item{bits}{Bit-width per coordinate, at least 1.}

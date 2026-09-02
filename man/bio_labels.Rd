@@ -5,7 +5,7 @@
 \alias{bio_labels}
 \title{bio_labels}
 \usage{
-bio_labels(types)
+bio_labels(types) 
 }
 \arguments{
 \item{types}{Coerced to character by the body, with \code{as.character}.}

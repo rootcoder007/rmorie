@@ -5,7 +5,8 @@
 \alias{morie_funcal_seed_orthologs}
 \title{morie_funcal_seed_orthologs}
 \usage{
-morie_funcal_seed_orthologs(hits, evalue = 0.001, score = 60, query_cov = 0.2, target_cov = 0.2, searcher = "diamond")
+morie_funcal_seed_orthologs(hits, evalue = 0.001, score = 60, query_cov = 0.2, target_cov = 0.2, 
+    searcher = "diamond") 
 }
 \arguments{
 \item{hits}{See Usage.}

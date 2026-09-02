@@ -11,17 +11,7 @@
 \format{
 Integer scalars (0L, 1L, 2L, 3L, 4L).
 }
-\usage{
-KERNEL_GAUSSIAN
 
-KERNEL_EPANECHNIKOV
-
-KERNEL_UNIFORM
-
-KERNEL_TRIANGULAR
-
-KERNEL_BIWEIGHT
-}
 \description{
 Integer codes used by morie's C++ semiparametric bridge to select
 the kernel function for local-polynomial smoothing. Mirror the

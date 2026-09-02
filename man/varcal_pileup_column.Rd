@@ -5,7 +5,7 @@
 \alias{varcal_pileup_column}
 \title{varcal_pileup_column}
 \usage{
-varcal_pileup_column(reads, position, reference)
+varcal_pileup_column(reads, position, reference) 
 }
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}

@@ -5,7 +5,7 @@
 \alias{FDiffTf}
 \title{Eq (3.124): one zero, at z = 1, the DC point -- that single zero is}
 \usage{
-FDiffTf(z, T = 1)
+FDiffTf(z, T = 1) 
 }
 \arguments{
 \item{z}{Passed to \code{.morie_rg_polyz}.}

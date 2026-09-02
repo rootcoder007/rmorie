@@ -5,7 +5,7 @@
 \alias{annealing_ladder}
 \title{annealing_ladder}
 \usage{
-annealing_ladder(n_steps, phi_max = 50, phi_min = 0.1, kind = "geometric")
+annealing_ladder(n_steps, phi_max = 50, phi_min = 0.1, kind = "geometric") 
 }
 \arguments{
 \item{n_steps}{A count; the body uses it as \code{seq_len(...)}.}

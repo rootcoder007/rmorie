@@ -5,7 +5,7 @@
 \alias{morie_burkov_dot_product}
 \title{Dot product, L2 norm and unit vector (Burkov Ch 1)}
 \usage{
-morie_burkov_dot_product(a, b)
+morie_burkov_dot_product(a, b) 
 }
 \arguments{
 \item{a,b}{Vectors.}

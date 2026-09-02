@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Choose the cluster size that buys the most precision per unit cost.
+#' Choose the cluster size that buys the most precision per unit cost
 #'
 #' The optimum is reported both exactly and rounded to the better of its
 #' two neighbouring integers, compared on the achieved variance rather

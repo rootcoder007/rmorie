@@ -10,6 +10,7 @@ Bndfre(lower, upper, alpha = 0.05)
 \item{lower, upper}{Replicated estimates of the two bounds, same length.}
 
 \item{alpha}{Miss probability, default 0.05.}
+
 }
 \value{
 List with \code{lower}, \code{upper}, \code{width}, \code{c},

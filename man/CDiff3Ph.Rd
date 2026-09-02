@@ -5,7 +5,7 @@
 \alias{CDiff3Ph}
 \title{Eq (3.131): slope -1, so a WHOLE sample of group delay against the}
 \usage{
-CDiff3Ph(omega)
+CDiff3Ph(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_glm_predict}
 \title{morie_glm_predict}
 \usage{
-morie_glm_predict(fit, X, add_intercept = TRUE, type = c("response", "link"), offset = NULL)
+morie_glm_predict(fit, X, add_intercept = TRUE, type = c("response", "link"), offset = NULL) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$coef}, \code{$family} from it.}

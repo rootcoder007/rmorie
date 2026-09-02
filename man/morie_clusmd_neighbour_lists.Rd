@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_clusmd_neighbour_lists}
 \alias{morie_clusmd_neighbour_lists}
+\alias{morie_clusmd}
 \title{Neighbour lists within a Tanimoto threshold}
 \usage{
-morie_clusmd_neighbour_lists(fps, threshold = 0.8)
+morie_clusmd_neighbour_lists(fps, threshold = 0.8) 
+
+morie_clusmd(fps, threshold = 0.8) 
 }
 \arguments{
 \item{fps}{A list of fingerprints. Each fingerprint is either an   integer vector of on-bit indices or a 0/1 sequence.}

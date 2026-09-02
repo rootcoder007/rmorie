@@ -5,7 +5,7 @@
 \alias{morie_setT_setT}
 \title{Set Transformer PMA_k attention pooling}
 \usage{
-morie_setT_setT(Z, S, params)
+morie_setT_setT(Z, S, params) 
 }
 \arguments{
 \item{Z}{Numeric matrix \code{n x d}.}

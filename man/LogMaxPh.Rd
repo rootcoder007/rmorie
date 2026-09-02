@@ -5,7 +5,7 @@
 \alias{LogMaxPh}
 \title{Eq (4.71): log(1 - beta z) = -sum beta^n/n z^n, |z| < 1/|beta|.  The}
 \usage{
-LogMaxPh(beta, terms = 20, z = NULL)
+LogMaxPh(beta, terms = 20, z = NULL) 
 }
 \arguments{
 \item{beta}{Coerced to complex by the body, with \code{as.complex}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/bivand20138e4.R
 \name{Svariog}
 \alias{Svariog}
-\title{Sample (empirical) semivariogram.}
+\title{Sample (empirical) semivariogram}
 \usage{
 Svariog(coords, z, breaks = NULL, nbins = 10, cutoff = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{WienerFreq}
 \title{Eq. (3.176): W(w) = S_xd(w) / S_xx(w).  Where the denominator}
 \usage{
-WienerFreq(sxx, sxd)
+WienerFreq(sxx, sxd) 
 }
 \arguments{
 \item{sxx}{Coerced to complex by the body, with \code{as.complex}.}

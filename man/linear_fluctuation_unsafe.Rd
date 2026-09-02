@@ -5,7 +5,7 @@
 \alias{linear_fluctuation_unsafe}
 \title{The linear update, kept so its failure is demonstrable}
 \usage{
-linear_fluctuation_unsafe(Q, H, Y)
+linear_fluctuation_unsafe(Q, H, Y) 
 }
 \arguments{
 \item{Q}{Initial outcome regression.}

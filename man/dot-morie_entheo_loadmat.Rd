@@ -2,14 +2,17 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{.morie_entheo_loadmat}
 \alias{.morie_entheo_loadmat}
-\title{Lightweight .mat loader (delegates to R.matlab).}
+\title{Lightweight .mat loader (delegates to R.matlab)}
 \usage{
 .morie_entheo_loadmat(path)
+}
+\arguments{
+\item{path}{See Usage.}
 }
 \value{
 A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
 }
 \description{
-Lightweight .mat loader (delegates to R.matlab).
+Lightweight .mat loader (delegates to R.matlab)
 }
 \keyword{internal}

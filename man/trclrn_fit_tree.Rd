@@ -5,7 +5,8 @@
 \alias{trclrn_fit_tree}
 \title{trclrn_fit_tree}
 \usage{
-trclrn_fit_tree(Y, A, X, propensity = NULL, method = "ipw", outcome_model = NULL, max_depth = 3, min_leaf = 10, n_thresholds = 20, min_propensity = 0.01)
+trclrn_fit_tree(Y, A, X, propensity = NULL, method = "ipw", outcome_model = NULL, 
+    max_depth = 3, min_leaf = 10, n_thresholds = 20, min_propensity = 0.01) 
 }
 \arguments{
 \item{Y}{Passed to \code{.trclrn_check}.}

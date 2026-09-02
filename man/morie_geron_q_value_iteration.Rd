@@ -23,6 +23,7 @@ morie_geron_q_value_iteration(
 \item{gamma}{Discount.}
 
 \item{max_iter, tol}{Stopping rule.}
+
 }
 \value{
 List with \code{Q}, \code{V}, \code{policy}, \code{residual}, \code{iterations}, \code{converged}.

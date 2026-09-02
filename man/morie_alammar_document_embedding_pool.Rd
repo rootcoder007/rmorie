@@ -5,7 +5,7 @@
 \alias{morie_alammar_document_embedding_pool}
 \title{morie_alammar_document_embedding_pool}
 \usage{
-morie_alammar_document_embedding_pool(token_embeddings, attention_mask = NULL)
+morie_alammar_document_embedding_pool(token_embeddings, attention_mask = NULL) 
 }
 \arguments{
 \item{token_embeddings}{Token vectors, one row each.}

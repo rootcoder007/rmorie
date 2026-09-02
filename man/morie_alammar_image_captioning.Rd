@@ -5,7 +5,7 @@
 \alias{morie_alammar_image_captioning}
 \title{Captioning projection, unfreezing, continued pretraining,}
 \usage{
-morie_alammar_image_captioning(image, visual_encoder, projector, llm, prompt = "Describe the image.")
+morie_alammar_image_captioning(image, visual_encoder, projector, llm, prompt = "Describe the image.") 
 }
 \arguments{
 \item{image}{Opaque image object passed to the encoder.}

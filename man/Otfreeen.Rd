@@ -16,6 +16,8 @@ Otfreeen(T, C, a, b, f, g, epsilon)
 \item{f, g}{Dual potentials, in the units of \code{C}.}
 
 \item{epsilon}{Positive regularisation strength.}
+
+
 }
 \value{
 Named list with \code{estimate}, \code{primal}, \code{dual_pairing},

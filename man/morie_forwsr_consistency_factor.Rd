@@ -5,7 +5,7 @@
 \alias{morie_forwsr_consistency_factor}
 \title{Consistency factor for a scale estimated from a truncated sample}
 \usage{
-morie_forwsr_consistency_factor(m, n)
+morie_forwsr_consistency_factor(m, n) 
 }
 \arguments{
 \item{m}{Subset size.}

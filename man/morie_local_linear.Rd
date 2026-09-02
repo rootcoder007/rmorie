@@ -12,6 +12,7 @@ morie_local_linear(x, y, grid = NULL, h = NULL)
 \item{grid}{evaluation points.}
 
 \item{h}{bandwidth.}
+
 }
 \value{
 list: grid, fitted, slope, bandwidth, n.

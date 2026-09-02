@@ -5,7 +5,8 @@
 \alias{morie_geron_prioritized_replay}
 \title{Prioritized experience replay: TD-error priority sampling, IS weights (Geron Ch 19, hmper)}
 \usage{
-morie_geron_prioritized_replay(buffer, alpha = 0.6, beta = 0.4, eps = 1e-06, batch_size = NULL, seed = 0)
+morie_geron_prioritized_replay(buffer, alpha = 0.6, beta = 0.4, eps = 1e-06, batch_size = NULL, 
+    seed = 0) 
 }
 \arguments{
 \item{buffer}{TD errors, or a list of transitions with a `td_error` field.}

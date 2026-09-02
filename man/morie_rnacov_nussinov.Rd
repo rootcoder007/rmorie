@@ -5,7 +5,7 @@
 \alias{morie_rnacov_nussinov}
 \title{Maximum base pairing by the Nussinov dynamic program}
 \usage{
-morie_rnacov_nussinov(seq, min_loop = 3L)
+morie_rnacov_nussinov(seq, min_loop = 3L) 
 }
 \arguments{
 \item{seq}{A sequence string.}

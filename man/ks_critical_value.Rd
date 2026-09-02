@@ -5,7 +5,8 @@
 \alias{ks_critical_value}
 \title{ks_critical_value}
 \usage{
-ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, reps = 200L, seed = 0L, kappa = NULL)
+ks_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, 
+    reps = 200L, seed = 0L, kappa = NULL) 
 }
 \arguments{
 \item{m}{A matrix; the body checks with \code{is.matrix}.}

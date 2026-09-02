@@ -10,6 +10,7 @@ Otlogpot(u, v, epsilon)
 \item{u, v}{Positive Sinkhorn scaling vectors.}
 
 \item{epsilon}{Positive regularisation strength.}
+
 }
 \value{
 Named list with \code{estimate} (\code{f}), \code{g}, \code{epsilon}, \code{shift},

@@ -5,7 +5,7 @@
 \alias{morie_vepan_consequence_impact}
 \title{HIGH/MODERATE/LOW/MODIFIER for an SO term}
 \usage{
-morie_vepan_consequence_impact(term)
+morie_vepan_consequence_impact(term) 
 }
 \arguments{
 \item{term}{See Usage.}

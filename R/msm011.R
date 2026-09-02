@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Marginal likelihood of the linear mixed model.
+#' Marginal likelihood of the linear mixed model
 #'
 #' Formula: L(beta, D, R; y) = |V|^(-1/2)(2 pi)^(-n/2)
 #' exp(-1/2 (y - X beta)' V^-1 (y - X beta)) with V = Z D Z' + R (eq. 5.2);

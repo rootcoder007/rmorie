@@ -5,7 +5,7 @@
 \alias{morie_hyper2_cheatsheet}
 \title{One-line summary of the hyper2 module}
 \usage{
-morie_hyper2_cheatsheet()
+morie_hyper2_cheatsheet() 
 }
 \description{
 One-line summary of the hyper2 module

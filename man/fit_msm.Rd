@@ -5,7 +5,7 @@
 \alias{fit_msm}
 \title{fit_msm}
 \usage{
-fit_msm(outcome, cumulative, weights = NULL, states = .STATES)
+fit_msm(outcome, cumulative, weights = NULL, states = .STATES) 
 }
 \arguments{
 \item{outcome}{Coerced to numeric by the body, with \code{as.numeric}.}

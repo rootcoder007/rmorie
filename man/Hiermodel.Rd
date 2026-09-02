@@ -2,7 +2,7 @@
 % Please edit documentation in R/hmcrg.R
 \name{Hiermodel}
 \alias{Hiermodel}
-\title{Hierarchical normal model: shrinkage of group means towards mu.}
+\title{Hierarchical normal model: shrinkage of group means towards mu}
 \usage{
 Hiermodel(y, sigma, tau)
 }

@@ -5,7 +5,7 @@
 \alias{morie_slbpdg_weights}
 \title{Stick-breaking weights from the beta variates}
 \usage{
-morie_slbpdg_weights(v)
+morie_slbpdg_weights(v) 
 }
 \arguments{
 \item{v}{The beta variates.}

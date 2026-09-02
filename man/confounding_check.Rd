@@ -5,7 +5,7 @@
 \alias{confounding_check}
 \title{confounding_check}
 \usage{
-confounding_check(covariate_history, treatment_history, outcome = NULL)
+confounding_check(covariate_history, treatment_history, outcome = NULL) 
 }
 \arguments{
 \item{covariate_history}{A matrix; passed to \code{as.matrix}.}

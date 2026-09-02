@@ -5,11 +5,13 @@
 \alias{morie_kamath_scaled_dot_score}
 \title{morie_kamath_scaled_dot_score}
 \usage{
-morie_kamath_scaled_dot_score(q, k, d_k = NULL)
+morie_kamath_scaled_dot_score(q, k, d_k = NULL) 
 }
 \arguments{
 \item{k}{Key.}
 \item{d_k}{Optional dimension pin.}
+
+\item{q}{Argument \code{q}; see Usage.}
 }
 \description{
 morie_kamath_scaled_dot_score

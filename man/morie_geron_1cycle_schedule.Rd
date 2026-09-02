@@ -21,6 +21,8 @@ morie_geron_1cycle_schedule(
 \item{T}{Total steps, at least 2.}
 
 \item{mom_max, mom_min}{Momentum bounds, 0 <= mom_min < mom_max < 1.}
+
+
 }
 \value{
 List with \code{lr_schedule}, \code{momentum_schedule}, \code{peak_step},

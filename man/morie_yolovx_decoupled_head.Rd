@@ -5,7 +5,7 @@
 \alias{morie_yolovx_decoupled_head}
 \title{morie_yolovx_decoupled_head}
 \usage{
-morie_yolovx_decoupled_head(channels, reduced = 256, n_classes = 80)
+morie_yolovx_decoupled_head(channels, reduced = 256, n_classes = 80) 
 }
 \arguments{
 \item{channels}{Coerced to integer by the body, with \code{as.integer}.}

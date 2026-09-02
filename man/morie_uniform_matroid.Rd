@@ -8,6 +8,7 @@ morie_uniform_matroid(n, k)
 }
 \arguments{
 \item{n, k}{Ground size and rank.}
+
 }
 \value{
 A list with \code{ground}, \code{independent}, \code{rank}.

@@ -3,9 +3,15 @@
 % the formals.
 \name{graph_transformer_layer}
 \alias{graph_transformer_layer}
+\alias{graph_transformer}
+\alias{graphtransformer}
 \title{One graph transformer layer}
 \usage{
-graph_transformer_layer(H, adj, WQ, WK, WV, W1, W2, edge_bias = NULL, norm = "batch")
+graph_transformer_layer(H, adj, WQ, WK, WV, W1, W2, edge_bias = NULL, norm = "batch") 
+
+graph_transformer(H, adj, WQ, WK, WV, W1, W2, edge_bias = NULL, norm = "batch") 
+
+graphtransformer(H, adj, WQ, WK, WV, W1, W2, edge_bias = NULL, norm = "batch") 
 }
 \arguments{
 \item{H}{Node feature matrix.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_d_chi2}
 \alias{morie_otis_analyze_d_chi2}
-\title{MRM chi-square family on d-series.}
+\title{MRM chi-square family on d-series}
 \usage{
 morie_otis_analyze_d_chi2(datasets, out_dir = NULL)
 }

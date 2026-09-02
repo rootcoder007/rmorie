@@ -5,7 +5,7 @@
 \alias{morie_mehtad}
 \title{morie_mehtad}
 \usage{
-morie_mehtad(op, ...)
+morie_mehtad(op, ...) 
 }
 \arguments{
 \item{op}{A vector; its length is taken.}

@@ -5,7 +5,7 @@
 \alias{morie_cthrgr_cheatsheet}
 \title{One-line summary of the cthrgr module}
 \usage{
-morie_cthrgr_cheatsheet()
+morie_cthrgr_cheatsheet() 
 }
 \description{
 One-line summary of the cthrgr module

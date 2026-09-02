@@ -5,7 +5,7 @@
 \alias{CorrDot}
 \title{Eq (4.25).  Delegates to DotProd -- one copy of the arithmetic}
 \usage{
-CorrDot(x, y)
+CorrDot(x, y) 
 }
 \arguments{
 \item{x}{Passed to \code{DotProd}.}

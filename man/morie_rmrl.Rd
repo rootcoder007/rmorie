@@ -5,7 +5,9 @@
 \alias{morie_rmrl}
 \title{morie_rmrl}
 \usage{
-morie_rmrl(machines, states, actions, step, label, gamma = 0.9, alpha = 0.5, epsilon = 0.1, episodes = 500, horizon = 100, start = NULL, dead_end = NULL, seed = 0, task_order = NULL)
+morie_rmrl(machines, states, actions, step, label, gamma = 0.9, alpha = 0.5, 
+    epsilon = 0.1, episodes = 500, horizon = 100, start = NULL, dead_end = NULL, 
+    seed = 0, task_order = NULL) 
 }
 \arguments{
 \item{machines}{A vector; its length is taken and its elements indexed.}

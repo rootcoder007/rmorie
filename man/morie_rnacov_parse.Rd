@@ -5,7 +5,7 @@
 \alias{morie_rnacov_parse}
 \title{Dot-bracket to a list of base pairs}
 \usage{
-morie_rnacov_parse(s)
+morie_rnacov_parse(s) 
 }
 \arguments{
 \item{s}{A dot-bracket string.}

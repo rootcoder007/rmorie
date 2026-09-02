@@ -5,7 +5,7 @@
 \alias{alpha_from_gamma}
 \title{Invert 1 / (alpha (1 - alpha)) = gamma}
 \usage{
-alpha_from_gamma(gamma)
+alpha_from_gamma(gamma) 
 }
 \arguments{
 \item{gamma}{Threshold.}

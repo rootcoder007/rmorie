@@ -5,7 +5,7 @@
 \alias{morie_hawkes_pair_excitation_sum_cpp}
 \title{morie_hawkes_pair_excitation_sum_cpp}
 \usage{
-morie_hawkes_pair_excitation_sum_cpp(t, eta, kind, psi)
+morie_hawkes_pair_excitation_sum_cpp(t, eta, kind, psi) 
 }
 \arguments{
 \item{t}{Passed to \code{.Call}.}

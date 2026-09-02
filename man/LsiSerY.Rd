@@ -5,7 +5,7 @@
 \alias{LsiSerY}
 \title{Eq (3.44): the cascade output, read off LsiSer rather than convolved}
 \usage{
-LsiSerY(x, h1, h2)
+LsiSerY(x, h1, h2) 
 }
 \arguments{
 \item{x}{Passed to \code{LsiSer}.}

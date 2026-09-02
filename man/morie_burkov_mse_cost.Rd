@@ -12,6 +12,8 @@ morie_burkov_mse_cost(w, b, x, y, N = NULL)
 \item{x, y}{Data.}
 
 \item{N}{Optional size check.}
+
+
 }
 \value{
 List with \code{cost}, \code{residuals}.

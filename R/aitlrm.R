@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean of a compositional sample taken in log-ratio coordinates.
+#' Mean of a compositional sample taken in log-ratio coordinates
 #'
 #' Formula: mean clr = (1/n) sum_k clr(x_k); centre = clr^-1(mean clr)
 #'

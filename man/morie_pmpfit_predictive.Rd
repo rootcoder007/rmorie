@@ -5,7 +5,7 @@
 \alias{morie_pmpfit_predictive}
 \title{Pitman-Yor predictive weights}
 \usage{
-morie_pmpfit_predictive(counts, alpha, theta)
+morie_pmpfit_predictive(counts, alpha, theta) 
 }
 \arguments{
 \item{counts}{Numeric vector of positive cluster counts.}

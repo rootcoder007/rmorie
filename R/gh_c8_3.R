@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Check the three conditions that deliver a posterior contraction rate.
+#' Check the three conditions that deliver a posterior contraction rate
 #'
 #' Note the asymmetry: the prior-mass and sieve-mass conditions use
 #' epsilon-bar, the entropy condition uses epsilon, and the theorem also

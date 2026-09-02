@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_ess}
 \title{Geyer's initial positive sequence estimator, per coordinate}
 \usage{
-morie_baysmplr_ess(chain, max_lag = 200L)
+morie_baysmplr_ess(chain, max_lag = 200L) 
 }
 \arguments{
 \item{chain}{A list of draws.}

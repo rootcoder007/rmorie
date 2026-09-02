@@ -17,7 +17,7 @@ numeric scalar log-probability of the partition
 }
 \description{
 Computes \eqn{\log\{n! / (\alpha)_n \prod_i \alpha^{m_i} /
-(i^{m_i} m_i!)\}}, where \code{multiplicities[i]} is the number of
+(i^{m_i} m_i!)\}}, where \code{multiplicities\[i\]} is the number of
 blocks of size \code{i} and the sample size \eqn{n = \sum_i i m_i} is
 recovered from the multiplicities.
 }

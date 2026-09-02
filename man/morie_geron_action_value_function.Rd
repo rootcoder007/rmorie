@@ -17,6 +17,10 @@ morie_geron_action_value_function(
 \item{state, action}{0-based indices.}
 
 \item{policy, transitions, rewards, gamma}{MDP specification.}
+
+
+
+
 }
 \value{
 List with \code{q_value}, \code{q_values}, \code{values}, \code{advantage},

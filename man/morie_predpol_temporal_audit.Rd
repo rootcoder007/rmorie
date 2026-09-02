@@ -36,7 +36,7 @@ A named list: \code{value} (worst per-city DIR range),
 For every \verb{(city, period)} cell the four disparity metrics are
 computed; per city the audit then reports the mean of each metric,
 the count of periods with DIR above 1, and the DIR temporal range
-(max minus min) — the headline measure of instability.
+(max minus min) -- the headline measure of instability.
 }
 \examples{
 period <- c(rep("p1", 10), rep("p2", 10))
@@ -44,5 +44,5 @@ city <- rep("A", 20)
 pred <- rep(c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0), 2)
 grp <- rep(c(rep("X", 5), rep("Y", 5)), 2)
 res <- morie_predpol_temporal_audit(period, city, pred, grp, privileged = "X")
-res$per_city$A$dir_range # 0 — disparity is stable across periods
+res$per_city$A$dir_range # 0 -- disparity is stable across periods
 }

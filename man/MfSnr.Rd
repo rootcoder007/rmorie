@@ -5,7 +5,7 @@
 \alias{MfSnr}
 \title{Eq (4.39): a PEAK-to-MEAN ratio, not the mean-to-mean of an ordinary}
 \usage{
-MfSnr(my, noise_power)
+MfSnr(my, noise_power) 
 }
 \arguments{
 \item{my}{Coerced to numeric by the body, with \code{as.numeric}.}

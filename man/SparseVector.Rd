@@ -5,7 +5,8 @@
 \alias{SparseVector}
 \title{SparseVector}
 \usage{
-SparseVector(queries, threshold, c = 1L, epsilon = 1, threshold_noise = 0, query_noise = NULL)
+SparseVector(queries, threshold, c = 1L, epsilon = 1, threshold_noise = 0, 
+    query_noise = NULL) 
 }
 \arguments{
 \item{queries}{Passed to \code{.morie_spx_chkv}.}

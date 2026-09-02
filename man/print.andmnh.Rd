@@ -5,7 +5,7 @@
 \alias{print.andmnh}
 \title{print.andmnh}
 \usage{
-print.andmnh(x, ...)
+\method{print}{andmnh}(x, ...) 
 }
 \arguments{
 \item{x}{A list; the body reads \code{$alpha}, \code{$bandwidth}, \code{$bandwidth_automatic}, \code{$J}, \code{$kernel}, \code{$n}, \code{$n_params}, \code{$p}, \code{$prewhitened}, \code{$var_order} from it.}

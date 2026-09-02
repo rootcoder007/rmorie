@@ -3,9 +3,22 @@
 % the formals.
 \name{deseq2}
 \alias{deseq2}
+\alias{deseq2_de}
+\alias{deseq2_differential}
+\alias{differential_expression}
 \title{DESeq2-style differential expression}
 \usage{
-deseq2(counts, design, contrast = NULL, size = NULL, beta_prior = TRUE, quantile_p = 0.05, alpha_init = 0.1, min_disp = 1e-08, log2 = TRUE)
+deseq2(counts, design, contrast = NULL, size = NULL, beta_prior = TRUE, 
+    quantile_p = 0.05, alpha_init = 0.1, min_disp = 1e-08, log2 = TRUE) 
+
+deseq2_de(counts, design, contrast = NULL, size = NULL, beta_prior = TRUE, 
+    quantile_p = 0.05, alpha_init = 0.1, min_disp = 1e-08, log2 = TRUE) 
+
+deseq2_differential(counts, design, contrast = NULL, size = NULL, beta_prior = TRUE, 
+    quantile_p = 0.05, alpha_init = 0.1, min_disp = 1e-08, log2 = TRUE) 
+
+differential_expression(counts, design, contrast = NULL, size = NULL, beta_prior = TRUE, 
+    quantile_p = 0.05, alpha_init = 0.1, min_disp = 1e-08, log2 = TRUE) 
 }
 \arguments{
 \item{counts}{Gene-by-sample count matrix.}

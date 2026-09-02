@@ -5,10 +5,13 @@
 \alias{Indrv2}
 \title{Independence of two random variables (Deshmukh eq. 5.3)}
 \usage{
-Indrv2(joint)
+Indrv2(joint) 
 }
 \description{
 Independence of two random variables (Deshmukh eq. 5.3)
+}
+\arguments{
+\item{joint}{Argument \code{joint}; see Usage.}
 }
 \value{
 A list with \code{max_deviation}, \code{independent}, \code{margin_row}, \code{margin_col}.

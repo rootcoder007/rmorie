@@ -5,7 +5,7 @@
 \alias{SigFeatures}
 \title{The descriptors Rangayyan uses across Chapters 3, 5 and 6, each}
 \usage{
-SigFeatures(x, fs = 1, threshold = 0)
+SigFeatures(x, fs = 1, threshold = 0) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

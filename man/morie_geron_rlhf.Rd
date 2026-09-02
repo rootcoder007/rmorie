@@ -5,7 +5,7 @@
 \alias{morie_geron_rlhf}
 \title{Reinforcement learning from human feedback: reward maximised under a KL penalty (Geron Ch 15, hmrlhf)}
 \usage{
-morie_geron_rlhf(policy, reward_model, prompts = NULL, beta = 0.1, lr = 0.5, epochs = 500)
+morie_geron_rlhf(policy, reward_model, prompts = NULL, beta = 0.1, lr = 0.5, epochs = 500) 
 }
 \arguments{
 \item{policy}{Initial (n_prompts, n_responses) logits.}

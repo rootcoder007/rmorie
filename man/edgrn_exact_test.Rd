@@ -5,7 +5,7 @@
 \alias{edgrn_exact_test}
 \title{edgrn_exact_test}
 \usage{
-edgrn_exact_test(count_a, count_b, lib_a, lib_b, dispersion)
+edgrn_exact_test(count_a, count_b, lib_a, lib_b, dispersion) 
 }
 \arguments{
 \item{count_a}{Coerced to numeric by the body, with \code{as.numeric}.}

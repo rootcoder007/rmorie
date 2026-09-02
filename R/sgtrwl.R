@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Random-walk Laplacian L_rw = I - P, with P the transition matrix.
+#' Random-walk Laplacian L_rw = I - P, with P the transition matrix
 #'
 #' Formula: P = T^-1 W; L_rw = I - T^-1 W
 #'

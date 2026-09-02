@@ -5,7 +5,7 @@
 \alias{Spectrogram}
 \title{STFT spectrogram, eq (8.8); |STFT|^2 per the text after eq (8.9)}
 \usage{
-Spectrogram(x, fs = 1, nperseg = 64, noverlap = NULL, window = "hann")
+Spectrogram(x, fs = 1, nperseg = 64, noverlap = NULL, window = "hann") 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

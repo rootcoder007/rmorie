@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_memory_attention}
 \title{morie_sam2vd_memory_attention}
 \usage{
-morie_sam2vd_memory_attention(frame_features, bank, current_frame, n_blocks = 1, include_pointers = TRUE)
+morie_sam2vd_memory_attention(frame_features, bank, current_frame, n_blocks = 1, include_pointers = TRUE) 
 }
 \arguments{
 \item{frame_features}{Passed to \code{.sam2vd_to_num}.}

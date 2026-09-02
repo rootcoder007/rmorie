@@ -5,7 +5,7 @@
 \alias{morie_jsonlt_minify}
 \title{Strip whitespace from JSON text}
 \usage{
-morie_jsonlt_minify(txt)
+morie_jsonlt_minify(txt) 
 }
 \arguments{
 \item{txt}{JSON text.}

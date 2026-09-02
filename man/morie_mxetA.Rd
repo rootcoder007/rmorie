@@ -5,7 +5,7 @@
 \alias{morie_mxetA}
 \title{morie_mxetA}
 \usage{
-morie_mxetA(F, n_sim = 1, seed = 0, max_points = 100000L)
+morie_mxetA(F, n_sim = 1, seed = 0, max_points = 100000L) 
 }
 \arguments{
 \item{F}{A matrix; passed to \code{as.matrix}.}

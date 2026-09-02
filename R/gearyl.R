@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Local Geary's c per location.
+#' Local Geary's c per location
 #'
 #' Formula: c_i = sum_j w_ij (z_i - z_j)^2 with z the standardised x
 #'
@@ -7,6 +7,9 @@
 #' @param W Spatial weights.
 #' @param scale Standardise x before computing c_i.
 
+#' @param x See Usage.
+#' @param W See Usage.
+#' @param scale See Usage.
 #' @return List with ``local``, ``global_c``, ``z``, ``n``.
 #' @references Anselin (2019), A Local Indicator of Multivariate Spatial Association: Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented by spdep::localC, the reference implementation.
 #' @export

@@ -5,7 +5,7 @@
 \alias{WienerOut}
 \title{Eq. (3.154): the estimate is the convolution of the tap weights with}
 \usage{
-WienerOut(w, x)
+WienerOut(w, x) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

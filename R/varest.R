@@ -3,11 +3,11 @@
 #'
 #' SOURCE. Lutkepohl, H. (2005), New Introduction to Multiple Time Series
 #' Analysis, Springer; doi:10.1007/978-3-540-27752-1. The model is
-#' Eq. (2.1.1)/(3.2.1), y_t = nu + A_1 y_{t-1} + ... + A_p y_{t-p} + u_t,
+#' Eq. (2.1.1)/(3.2.1), y_t = nu + A_1 y_\{t-1\} + ... + A_p y_\{t-p\} + u_t,
 #' and the estimator is the multivariate least squares estimator of
 #' Section 3.2. Because every equation carries the same regressor set
-#' Z_t = (1, y_{t-1}', ..., y_{t-p}')', the LS estimator separates
-#' equation by equation into B = (Z'Z)^{-1} Z'Y and no SUR/GLS step is
+#' Z_t = (1, y_\{t-1\}', ..., y_\{t-p\}')', the LS estimator separates
+#' equation by equation into B = (Z'Z)^\{-1\} Z'Y and no SUR/GLS step is
 #' needed.
 #'
 #' Two residual covariances are reported: the ML plug-in U'U/T and

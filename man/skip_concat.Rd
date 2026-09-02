@@ -5,7 +5,7 @@
 \alias{skip_concat}
 \title{skip_concat}
 \usage{
-skip_concat(upsampled, contracting)
+skip_concat(upsampled, contracting) 
 }
 \arguments{
 \item{upsampled}{Passed to \code{.unetbk_as_matrix}.}

@@ -4,7 +4,7 @@
 #' A single cluster-level frailty w drives both processes:
 #' \code{lambda_R(t|w) = w lambda_0R(t)} and
 #' \code{lambda_T(t|w) = w^alpha lambda_0T(t)}, with
-#' \code{w ~ Gamma(1/theta, 1/theta)} so that E[w] = 1 and Var[w] =
+#' \code{w ~ Gamma(1/theta, 1/theta)} so that E\[w\] = 1 and Var\[w\] =
 #' theta.  alpha is the association parameter: 0 makes the terminal
 #' event independent of the recurrent process, 1 is the ordinary shared
 #' frailty, and a negative alpha means clusters with many recurrences
@@ -12,7 +12,7 @@
 #' appears in the terminal hazard the frailty cannot be integrated out
 #' in closed form, so the expectation is taken on a 16-point generalised
 #' Gauss-Laguerre rule matched to the frailty density (Golub-Welsch), for
-#' which E[w] = 1 and E\[w^2\] = 1 + theta hold to ten digits;
+#' which E\[w\] = 1 and E\[w^2\] = 1 + theta hold to ten digits;
 #' maximisation is a fixed-length coordinate golden-section search with a
 #' guarded comparison, so a flat optimum cannot send the two language arms
 #' into different sub-intervals.

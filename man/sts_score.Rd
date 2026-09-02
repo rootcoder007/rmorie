@@ -5,7 +5,7 @@
 \alias{sts_score}
 \title{sts_score}
 \usage{
-sts_score(pairs, embed)
+sts_score(pairs, embed) 
 }
 \arguments{
 \item{pairs}{A vector; its length is taken and its elements indexed.}

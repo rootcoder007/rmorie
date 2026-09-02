@@ -5,7 +5,7 @@
 \alias{morie_tqipb_variance}
 \title{Variance of the inner-product estimate over packed blocks}
 \usage{
-morie_tqipb_variance(bits, d, norm_sq = 1, x_norm_sq = 1, n_blocks = 1, route = "table")
+morie_tqipb_variance(bits, d, norm_sq = 1, x_norm_sq = 1, n_blocks = 1, route = "table") 
 }
 \arguments{
 \item{bits}{Bit-width per coordinate.}

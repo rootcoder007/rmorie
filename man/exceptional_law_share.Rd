@@ -5,7 +5,7 @@
 \alias{exceptional_law_share}
 \title{Share of subjects whose blip sits within tol of zero}
 \usage{
-exceptional_law_share(blips, tol = 0.01)
+exceptional_law_share(blips, tol = 0.01) 
 }
 \arguments{
 \item{blips}{Blip vector.}

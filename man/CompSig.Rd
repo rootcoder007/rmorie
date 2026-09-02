@@ -5,7 +5,7 @@
 \alias{CompSig}
 \title{A composite of shifted, scaled copies of one pattern.  Copies closer}
 \usage{
-CompSig(g, shifts, scales = NULL, n = NULL)
+CompSig(g, shifts, scales = NULL, n = NULL) 
 }
 \arguments{
 \item{g}{Coerced to numeric by the body, with \code{as.numeric}.}

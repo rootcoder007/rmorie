@@ -5,7 +5,7 @@
 \alias{k02p2t}
 \title{k02p2t}
 \usage{
-k02p2t(tv, df)
+k02p2t(tv, df) 
 }
 \arguments{
 \item{tv}{Numeric; passed to \code{abs}.}

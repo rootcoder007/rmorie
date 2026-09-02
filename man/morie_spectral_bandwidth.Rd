@@ -10,6 +10,7 @@ morie_spectral_bandwidth(psd, freqs, criterion = "3dB")
 \item{psd, freqs}{spectrum and matching frequencies.}
 
 \item{criterion}{"3dB" or "99".}
+
 }
 \value{
 list: bandwidth, f_low, f_high, f_peak.

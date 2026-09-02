@@ -2,7 +2,7 @@
 % Please edit documentation in R/poipr.R
 \name{Poispen}
 \alias{Poispen}
-\title{Penalized Poisson log-linear regression.}
+\title{Penalized Poisson log-linear regression}
 \usage{
 Poispen(X, y, lam = 1, penalty = "ridge", n_iter = 100L, add_intercept = TRUE)
 }

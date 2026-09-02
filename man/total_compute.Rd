@@ -5,7 +5,7 @@
 \alias{total_compute}
 \title{total_compute}
 \usage{
-total_compute(samples_seen, model_params)
+total_compute(samples_seen, model_params) 
 }
 \arguments{
 \item{samples_seen}{Coerced to numeric by the body, with \code{as.numeric}.}

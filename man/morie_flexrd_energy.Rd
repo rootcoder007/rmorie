@@ -5,7 +5,7 @@
 \alias{morie_flexrd_energy}
 \title{Lennard-Jones 12-6 between the ligand and the receptor}
 \usage{
-morie_flexrd_energy(rec, lig, rec_r, lig_r, scale = 1, epsilon = 1, cutoff = 8)
+morie_flexrd_energy(rec, lig, rec_r, lig_r, scale = 1, epsilon = 1, cutoff = 8) 
 }
 \arguments{
 \item{rec,lig}{Coordinate lists.}

@@ -5,7 +5,7 @@
 \alias{morie_geron_online_learning}
 \title{Online (streaming) learning: sequential SGD, prequential loss (Geron Ch 1, hmonl)}
 \usage{
-morie_geron_online_learning(X_stream, y_stream, eta = 0.1, theta = NULL, decay = 0)
+morie_geron_online_learning(X_stream, y_stream, eta = 0.1, theta = NULL, decay = 0) 
 }
 \arguments{
 \item{X_stream,y_stream}{Stream of rows/targets.}

@@ -12,6 +12,8 @@ SumDens(grid_x, density_x, grid_y, density_y, z)
 \item{grid_y, density_y}{the density of Y.}
 
 \item{z}{evaluation point.}
+
+
 }
 \value{
 list(z, density).

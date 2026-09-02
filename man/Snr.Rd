@@ -5,7 +5,7 @@
 \alias{Snr}
 \title{Section 3.2.1 gives two definitions in one sentence, and they are not}
 \usage{
-Snr(signal, noise, definition = "power")
+Snr(signal, noise, definition = "power") 
 }
 \arguments{
 \item{signal}{Coerced to numeric by the body, with \code{as.numeric}.}

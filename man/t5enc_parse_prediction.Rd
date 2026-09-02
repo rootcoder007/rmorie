@@ -5,7 +5,7 @@
 \alias{t5enc_parse_prediction}
 \title{t5enc_parse_prediction}
 \usage{
-t5enc_parse_prediction(text, labels = NULL)
+t5enc_parse_prediction(text, labels = NULL) 
 }
 \arguments{
 \item{text}{Coerced to character by the body, with \code{as.character}.}

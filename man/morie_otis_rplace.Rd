@@ -24,6 +24,10 @@ morie_otis_rplace(
 \code{NULL} = all.}
 
 \item{id_col, age_col, region_col, year_col, gender_col}{Column names.}
+
+
+
+
 }
 \value{
 \code{morie_otis_result} list.

@@ -5,10 +5,14 @@
 \alias{morie_rkhs_norm}
 \title{morie_rkhs_norm}
 \usage{
-morie_rkhs_norm(beta, K)
+morie_rkhs_norm(beta, K) 
 }
 \description{
 morie_rkhs_norm
+}
+\arguments{
+\item{beta}{Argument \code{beta}; see Usage.}
+\item{K}{Argument \code{K}; see Usage.}
 }
 \value{
 A vector.

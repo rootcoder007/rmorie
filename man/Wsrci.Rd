@@ -5,10 +5,14 @@
 \alias{Wsrci}
 \title{Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209}
 \usage{
-Wsrci(x, tcrit)
+Wsrci(x, tcrit) 
 }
 \description{
 Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{tcrit}{Argument \code{tcrit}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{coverage}, \code{tail}, \code{nwalsh}, \code{n}, \code{tcrit}, \code{estimate}.

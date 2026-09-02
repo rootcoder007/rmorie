@@ -5,7 +5,7 @@
 \alias{local_polynomial_slope}
 \title{local_polynomial_slope}
 \usage{
-local_polynomial_slope(v, y, kink, bandwidth, order = 2L, side = "right", kernel = "triangular")
+local_polynomial_slope(v, y, kink, bandwidth, order = 2L, side = "right", kernel = "triangular") 
 }
 \arguments{
 \item{v}{Passed to \code{.side_fit}.}

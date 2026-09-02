@@ -2,7 +2,7 @@
 % Please edit documentation in R/spssoc.R
 \name{spssoc}
 \alias{spssoc}
-\title{Covariance and semivariogram under second-order stationarity.}
+\title{Covariance and semivariogram under second-order stationarity}
 \usage{
 spssoc(cov_func, h)
 }

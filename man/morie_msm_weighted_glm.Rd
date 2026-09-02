@@ -5,10 +5,20 @@
 \alias{morie_msm_weighted_glm}
 \title{morie_msm_weighted_glm}
 \usage{
-morie_msm_weighted_glm(y, X, weights = NULL, family = "gaussian", offset = NULL, n_iter = 60, tol = 1e-10)
+morie_msm_weighted_glm(y, X, weights = NULL, family = "gaussian", offset = NULL, n_iter = 60, 
+    tol = 1e-10) 
 }
 \description{
 morie_msm_weighted_glm
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{weights}{Argument \code{weights}; see Usage.}
+\item{family}{Argument \code{family}; see Usage.}
+\item{offset}{Argument \code{offset}; see Usage.}
+\item{n_iter}{Argument \code{n_iter}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 A list with \code{beta}, \code{fitted}, \code{eta}, \code{weights}, \code{family}.

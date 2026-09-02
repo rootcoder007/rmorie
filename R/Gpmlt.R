@@ -8,7 +8,7 @@
 #' tests check that collapse exactly, because it is the only way to be
 #' sure the Kronecker indexing is the right way round.
 #'
-#' Formula: cov(f_l(x), f_m(x')) = K^f_{lm} k^x(x, x').
+#' Formula: cov(f_l(x), f_m(x')) = K^f_\{lm\} k^x(x, x').
 #'
 #' @param X Inputs shared by every task, one row per point.
 #' @param y_tasks Matrix of observations, one row per task.

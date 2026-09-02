@@ -5,7 +5,7 @@
 \alias{nash_equilibria_bimatrix}
 \title{nash_equilibria_bimatrix}
 \usage{
-nash_equilibria_bimatrix(A, B, tol = 1e-09)
+nash_equilibria_bimatrix(A, B, tol = 1e-09) 
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}

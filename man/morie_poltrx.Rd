@@ -5,7 +5,7 @@
 \alias{morie_poltrx}
 \title{Polya tree (morie.fn.poltrx) -- main entry point}
 \usage{
-morie_poltrx(levels, c = 1, rule = "m_squared", seed = 0)
+morie_poltrx(levels, c = 1, rule = "m_squared", seed = 0) 
 }
 \arguments{
 \item{levels}{Truncation level \code{M}, integer \code{>= 1}.}

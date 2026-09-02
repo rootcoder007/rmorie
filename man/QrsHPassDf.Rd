@@ -5,7 +5,7 @@
 \alias{QrsHPassDf}
 \title{Eq (4.12): p(n) = x(n-16) - (1/32)[y(n-1) + x(n) - x(n-32)], where}
 \usage{
-QrsHPassDf(x)
+QrsHPassDf(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

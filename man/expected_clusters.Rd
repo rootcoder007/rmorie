@@ -5,7 +5,7 @@
 \alias{expected_clusters}
 \title{Expected number of clusters}
 \usage{
-expected_clusters(n, alpha)
+expected_clusters(n, alpha) 
 }
 \arguments{
 \item{n}{Number of draws, at least 1.}

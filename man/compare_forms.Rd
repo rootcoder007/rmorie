@@ -5,7 +5,7 @@
 \alias{compare_forms}
 \title{compare_forms}
 \usage{
-compare_forms(m, instruments, form = "sum", n_equality = 0L)
+compare_forms(m, instruments, form = "sum", n_equality = 0L) 
 }
 \arguments{
 \item{m}{Passed to \code{cvm_statistic}.}

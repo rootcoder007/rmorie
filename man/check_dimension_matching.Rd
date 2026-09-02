@@ -5,7 +5,7 @@
 \alias{check_dimension_matching}
 \title{check_dimension_matching}
 \usage{
-check_dimension_matching(models, moves)
+check_dimension_matching(models, moves) 
 }
 \arguments{
 \item{models}{A vector; its length is taken and its elements indexed.}

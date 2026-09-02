@@ -5,7 +5,7 @@
 \alias{m_step}
 \title{m_step}
 \usage{
-m_step(n_dw, post, K)
+m_step(n_dw, post, K) 
 }
 \arguments{
 \item{n_dw}{Passed to \code{.plsa_m_step}.}

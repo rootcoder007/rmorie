@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Valid interval for the CAR dependence parameter rho.
+#' Valid interval for the CAR dependence parameter rho
 #'
 #' The joint distribution exists only where the precision matrix is
 #' positive definite. The book states the bound through the eigenvalues
@@ -29,7 +29,7 @@ car_rho_bounds <- function(W, parameterization = "weighted") {
     if (max(ev) > 0) 1 / max(ev) else Inf)
 }
 
-#' Haining's least-squares estimator of the CAR dependence parameter.
+#' Haining's least-squares estimator of the CAR dependence parameter
 #'
 #' rho_OLS = (e' W e) / (e' W^2 e), with e the OLS residual vector.
 #' Unlike the SAR case, this estimator is CONSISTENT for a one-parameter
@@ -54,7 +54,7 @@ car_rho_ols <- function(Z, W, X = NULL) {
   as.numeric(crossprod(e, W %*% e) / denom)
 }
 
-#' Conditional autoregressive (CAR) model, fitted by maximum likelihood.
+#' Conditional autoregressive (CAR) model, fitted by maximum likelihood
 #'
 #' The conditional specification (eqs 6.43-6.44) generates, by
 #' Hammersley-Clifford, a valid joint Gaussian with mean X beta and

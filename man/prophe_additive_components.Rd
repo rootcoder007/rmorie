@@ -5,7 +5,8 @@
 \alias{prophe_additive_components}
 \title{prophe_additive_components}
 \usage{
-prophe_additive_components(t, y, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0), ...)
+prophe_additive_components(t, y, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 
+    0), ...) 
 }
 \arguments{
 \item{t}{Passed to \code{morie_prphet_fit}.}

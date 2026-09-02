@@ -5,7 +5,7 @@
 \alias{morie_phacf3_bin}
 \title{Which distance bin, or -1 for a distance outside the range}
 \usage{
-morie_phacf3_bin(d, edges)
+morie_phacf3_bin(d, edges) 
 }
 \arguments{
 \item{d}{The distance.}

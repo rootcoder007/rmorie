@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Pick the next item: maximum Fisher information at the current theta.
+#' Pick the next item: maximum Fisher information at the current theta
 #'
 #' Maximum-information selection is optimal for measurement and terrible
 #' for item security. \code{exposure} applies a multiplicative control and

@@ -160,6 +160,8 @@ NULL
 #' @noRd
 .morie_did_have_didmultiplegt <- function() requireNamespace("DIDmultiplegt", quietly = TRUE)
 
+#' @param pkg See Usage.
+#' @param fn See Usage.
 #' @keywords internal
 .morie_did_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
@@ -174,12 +176,18 @@ NULL
   invisible(TRUE)
 }
 
+#' @param estimate See Usage.
+#' @param se See Usage.
+#' @param alpha See Usage.
 #' @keywords internal
 .morie_did_make_ci <- function(estimate, se, alpha = 0.05) {
   z <- stats::qnorm(1 - alpha / 2)
   c(estimate - z * se, estimate + z * se)
 }
 
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param cluster_ids See Usage.
 #' @keywords internal
 .morie_did_ols_robust_se <- function(X, y, cluster_ids = NULL) {
   # OLS with heteroskedasticity- or cluster-robust (CR1) variance.
@@ -213,16 +221,20 @@ NULL
   list(beta = beta, se = se, vcov = V, residuals = resid)
 }
 
+#' @param X See Usage.
 #' @keywords internal
 .morie_did_add_intercept <- function(X) {
   cbind(`(Intercept)` = 1, X)
 }
 
+#' @param t_val See Usage.
 #' @keywords internal
 .morie_did_pvalue <- function(t_val) {
   2 * stats::pnorm(-abs(t_val))
 }
 
+#' @param data See Usage.
+#' @param cols See Usage.
 #' @keywords internal
 .morie_did_drop_na <- function(data, cols) {
   # Every did estimator routes through here, so validate once at the
@@ -235,6 +247,13 @@ NULL
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 
+#' @param estimate See Usage.
+#' @param std_error See Usage.
+#' @param n_treated See Usage.
+#' @param n_control See Usage.
+#' @param method See Usage.
+#' @param alpha See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_did_result <- function(estimate, std_error, n_treated, n_control,
                               method, alpha = 0.05, details = list()) {
@@ -259,6 +278,10 @@ NULL
   )
 }
 
+#' @param df See Usage.
+#' @param varname See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
 #' @keywords internal
 .morie_did_within_transform <- function(df, varname, unit, time) {
   # Two-way demeaning: x - unit_mean - time_mean + grand_mean.
@@ -269,6 +292,9 @@ NULL
   v - um - tm + gm
 }
 
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param treat See Usage.
 #' @keywords internal
 .morie_did_outcome_regression_att <- function(y, X, treat) {
   X <- as.matrix(X)
@@ -283,6 +309,9 @@ NULL
   mean(y[treat == 1] - y0_hat)
 }
 
+#' @param y See Usage.
+#' @param treat See Usage.
+#' @param ps See Usage.
 #' @keywords internal
 .morie_did_ipw_att <- function(y, treat, ps) {
   ps <- pmin(pmax(ps, 0.01), 0.99)

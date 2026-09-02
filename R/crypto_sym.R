@@ -123,7 +123,7 @@ morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
 #' Phase 3JJJ1. Mirrors the Python
 #' `morie.crypto.hkdf_sha256(ikm, length=32, salt=b"", info=b"")`
 #' byte-for-byte. Empty `salt` defaults to a 32-byte zero-filled
-#' salt per RFC 5869 §2.2 (matches Python).
+#' salt per RFC 5869 Section 2.2 (matches Python).
 #'
 #' @param ikm Input keying material (raw vector).
 #' @param length Output length in bytes (1..8160).

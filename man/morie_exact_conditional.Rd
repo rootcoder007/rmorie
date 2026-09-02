@@ -18,6 +18,11 @@ morie_exact_conditional(
 \item{b, x, y}{Joint-probability pieces (log-likelihood returned).}
 
 \item{t_values, counts, beta, t_obs}{Exact-PMF pieces.}
+
+
+
+
+
 }
 \value{
 List with loglik and/or probs, p_at_t.

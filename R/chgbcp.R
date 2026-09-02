@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bayesian online changepoint detection (re-export).
+#' Bayesian online changepoint detection (re-export)
 #'
 #' Formula: see bocpd
 #'
@@ -10,6 +10,12 @@
 #' @param alpha0 Prior shape.
 #' @param beta0 Prior scale.
 
+#' @param y See Usage.
+#' @param hazard See Usage.
+#' @param mu0 See Usage.
+#' @param kappa0 See Usage.
+#' @param alpha0 See Usage.
+#' @param beta0 See Usage.
 #' @return List with the payload of :func:`morie.fn.bocpd.bocpd`.
 #' @references Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
 #' @export

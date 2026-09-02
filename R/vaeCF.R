@@ -18,8 +18,8 @@
 #' Section 2.2, not the raw counts.
 #'
 #' RANKING. Recall@K and truncated NDCG@K are the Section 4.1
-#' definitions: Recall@K = sum_{r<=K} I\[w(r) in I_u\] / min(K, |I_u|) and
-#' DCG@K = sum_{r<=K} (2^{I\[w(r) in I_u\]} - 1)/log2(r+1). Ties are broken
+#' definitions: Recall@K = sum_\{r<=K\} I\[w(r) in I_u\] / min(K, |I_u|) and
+#' DCG@K = sum_\{r<=K\} (2^\{I\[w(r) in I_u\]\} - 1)/log2(r+1). Ties are broken
 #' by ascending item index in both language arms -- R scans a matrix
 #' column-major and Python row-major, so an unpinned tie rule is a real
 #' parity hazard.

@@ -5,7 +5,8 @@
 \alias{morie_bnsadt_median_unbiased}
 \title{Median-unbiased correction of a single published estimate}
 \usage{
-morie_bnsadt_median_unbiased(x, sigma, family = "symmetric_step", params = numeric(0), lo = NULL, hi = NULL)
+morie_bnsadt_median_unbiased(x, sigma, family = "symmetric_step", params = numeric(0), lo = NULL, 
+    hi = NULL) 
 }
 \arguments{
 \item{x}{The published estimate.}

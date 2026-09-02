@@ -5,7 +5,7 @@
 \alias{morie_phylml}
 \title{morie_phylml}
 \usage{
-morie_phylml(tree, seqs, pi = NULL, u = 1)
+morie_phylml(tree, seqs, pi = NULL, u = 1) 
 }
 \arguments{
 \item{tree}{Passed to \code{site_likelihood}.}

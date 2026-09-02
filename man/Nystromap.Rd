@@ -2,7 +2,7 @@
 % Please edit documentation in R/nystm.R
 \name{Nystromap}
 \alias{Nystromap}
-\title{Nystrom low-rank approximation of a kernel matrix.}
+\title{Nystrom low-rank approximation of a kernel matrix}
 \usage{
 Nystromap(X, m_index, kernel = "linear", gamma = NULL)
 }

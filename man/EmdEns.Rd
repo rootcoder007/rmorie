@@ -5,7 +5,7 @@
 \alias{EmdEns}
 \title{Ensemble EMD, Sec 9.4.1 eq (9.13)}
 \usage{
-EmdEns(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
+EmdEns(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

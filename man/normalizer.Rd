@@ -5,7 +5,7 @@
 \alias{normalizer}
 \title{Z: the value of the worst arrangement. The protected group placed}
 \usage{
-normalizer(protected, measure = "rND", step = 10)
+normalizer(protected, measure = "rND", step = 10) 
 }
 \arguments{
 \item{protected}{A vector; its length is taken.}

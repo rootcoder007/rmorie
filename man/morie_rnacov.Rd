@@ -5,7 +5,8 @@
 \alias{morie_rnacov}
 \title{Score the covariation supporting a structure in an alignment}
 \usage{
-morie_rnacov(alignment, structure = NULL, correction = "none", mode = "given", min_loop = 3L, min_sequences = 4L)
+morie_rnacov(alignment, structure = NULL, correction = "none", mode = "given", 
+    min_loop = 3L, min_sequences = 4L) 
 }
 \arguments{
 \item{alignment}{A character vector of aligned sequences.}

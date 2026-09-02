@@ -5,10 +5,16 @@
 \alias{Pageasymp}
 \title{Page\'s L normal approximation -- eq. (12.3.2), p. 449}
 \usage{
-Pageasymp(ell, k, n, correct = TRUE)
+Pageasymp(ell, k, n, correct = TRUE) 
 }
 \description{
 Page\'s L normal approximation -- eq. (12.3.2), p. 449
+}
+\arguments{
+\item{ell}{Argument \code{ell}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{correct}{Argument \code{correct}; see Usage.}
 }
 \value{
 A list with \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{statistic}, \code{k}, \code{n}.

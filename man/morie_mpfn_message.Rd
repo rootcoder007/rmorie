@@ -5,7 +5,7 @@
 \alias{morie_mpfn_message}
 \title{Eq. (1)\'s M_t}
 \usage{
-morie_mpfn_message(h_v, h_w, e_vw, A = NULL)
+morie_mpfn_message(h_v, h_w, e_vw, A = NULL) 
 }
 \arguments{
 \item{h_v}{Source node state (unused; kept for API symmetry).}

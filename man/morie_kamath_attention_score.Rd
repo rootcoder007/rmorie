@@ -5,7 +5,7 @@
 \alias{morie_kamath_attention_score}
 \title{Kamath Ch 2 attention chain (Eq 2.7-2.12, 2.15-2.16, 2.19)}
 \usage{
-morie_kamath_attention_score(q, k_i, alpha = "scaled_dot")
+morie_kamath_attention_score(q, k_i, alpha = "scaled_dot") 
 }
 \arguments{
 \item{q,k_i}{Query and key.}

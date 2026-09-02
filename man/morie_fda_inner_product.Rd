@@ -5,7 +5,7 @@
 \alias{morie_fda_inner_product}
 \title{Basis inner-product matrix (MVSML eq. 14.7)}
 \usage{
-morie_fda_inner_product(t, L1, L2, kind = "fourier")
+morie_fda_inner_product(t, L1, L2, kind = "fourier") 
 }
 \arguments{
 \item{t}{numeric grid of observation points}
@@ -14,7 +14,7 @@ morie_fda_inner_product(t, L1, L2, kind = "fourier")
 \item{kind}{basis kind, "fourier" or "poly"}
 }
 \description{
-Q_{jl} = integral phi_j(t) psi_l(t) dt evaluated by the trapezoid rule over the observation grid.
+Q_\{jl\} = integral phi_j(t) psi_l(t) dt evaluated by the trapezoid rule over the observation grid.
 }
 \value{
 an L1 x L2 numeric matrix

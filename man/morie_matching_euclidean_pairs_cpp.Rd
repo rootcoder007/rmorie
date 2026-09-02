@@ -5,7 +5,7 @@
 \alias{morie_matching_euclidean_pairs_cpp}
 \title{morie_matching_euclidean_pairs_cpp}
 \usage{
-morie_matching_euclidean_pairs_cpp(X_t, X_c)
+morie_matching_euclidean_pairs_cpp(X_t, X_c) 
 }
 \arguments{
 \item{X_t}{Passed to \code{.Call}.}

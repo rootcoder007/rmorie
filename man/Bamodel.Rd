@@ -2,18 +2,18 @@
 % Please edit documentation in R/barabsi.R
 \name{Bamodel}
 \alias{Bamodel}
-\title{Barabasi-Albert preferential attachment graph.}
+\title{Barabasi-Albert preferential attachment graph}
 \usage{
 Bamodel(n, m = 2, m0 = NULL, seed = 1)
 }
 \arguments{
-\item{n}{Final number of vertices.}
+\item{n}{See Usage.}
 
-\item{m}{Edges brought by each new vertex.}
+\item{m}{See Usage.}
 
-\item{m0}{Size of the complete seed graph; \code{m + 1} if omitted.}
+\item{m0}{See Usage.}
 
-\item{seed}{Seed of the shared minstd stream.}
+\item{seed}{See Usage.}
 }
 \value{
 List with \code{degree}, \code{mean_degree}, \code{max_degree}, \code{edges}, \code{n}, \code{m}.

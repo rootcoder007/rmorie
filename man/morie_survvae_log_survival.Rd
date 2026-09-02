@@ -3,9 +3,9 @@
 % the formals.
 \name{morie_survvae_log_survival}
 \alias{morie_survvae_log_survival}
-\title{Log survival of one expert -- what a censored case needs.}
+\title{Log survival of one expert -- what a censored case needs}
 \usage{
-morie_survvae_log_survival(t, shape, scale, primitive = "weibull")
+morie_survvae_log_survival(t, shape, scale, primitive = "weibull") 
 }
 \arguments{
 \item{t}{Time, must be non-negative.}

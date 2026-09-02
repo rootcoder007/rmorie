@@ -5,7 +5,7 @@
 \alias{morie_alammar_chain_prompting}
 \title{Prompt chains, multi-query retrieval, the ReAct loop}
 \usage{
-morie_alammar_chain_prompting(x, prompts, model)
+morie_alammar_chain_prompting(x, prompts, model) 
 }
 \arguments{
 \item{x}{Original input.}

@@ -5,7 +5,9 @@
 \alias{morie_cgnonl}
 \title{morie_cgnonl}
 \usage{
-morie_cgnonl(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, keep_path = FALSE)
+morie_cgnonl(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, 
+    tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, 
+    keep_path = FALSE) 
 }
 \arguments{
 \item{f}{Passed to \code{nonlinear_cg}.}

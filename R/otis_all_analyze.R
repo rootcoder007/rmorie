@@ -1012,7 +1012,7 @@ print.morie_otis_analysis_result <- function(x, ...) {
 # High-level wrapper: analyze_a01 (causal pipeline)
 # ---------------------------------------------------------------------------
 
-#' OTIS a01 high-level causal analysis (MatchIt + IRM-DML).
+#' OTIS a01 high-level causal analysis (MatchIt + IRM-DML)
 #'
 #' Wraps the full causal pipeline for the canonical
 #' Restrictive Confinement Detailed Dataset: 8-state alert-combo
@@ -1082,7 +1082,7 @@ morie_otis_analyze_a01 <- function(data = NULL, out_dir = NULL) {
 # These delegate to the morie causal helpers. When those helpers are
 # absent (R-only build), each entry point returns a stub RichResult.
 
-#' OTIS a01 Ruhela formulations (full DLRM).
+#' OTIS a01 Ruhela formulations (full DLRM)
 #'
 #' Runs the complete OTIS-RC methodology arc (IPW + AIPW + g-comp +
 #' PSM-NN + PSM-subclass + IRM-DML + match_first + ATC + PLR +
@@ -1104,7 +1104,7 @@ morie_otis_analyze_a01_ruhela_formulations <- function(data = NULL,
     "DLRM stack (IPW/AIPW/g-comp/PSM/IRM-DML/PLR/SuperLearner)")
 }
 
-#' OTIS b01 Ruhela formulations (full DLRM).
+#' OTIS b01 Ruhela formulations (full DLRM)
 #'
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
@@ -1121,7 +1121,7 @@ morie_otis_analyze_b01_ruhela_formulations <- function(data = NULL,
     "DLRM stack (IPW/AIPW/g-comp/PSM/IRM-DML/PLR/SuperLearner)")
 }
 
-#' OTIS b02 Ruhela formulations: T=Female -> seg-day count.
+#' OTIS b02 Ruhela formulations: T=Female -> seg-day count
 #'
 #' @param data Optional b02 data.frame.
 #' @param out_dir Optional output directory.
@@ -1159,7 +1159,7 @@ morie_otis_analyze_b02_dlrm <- morie_otis_analyze_b02_ruhela_formulations
 # Per-year Ruhela formulations
 # ---------------------------------------------------------------------------
 
-#' Per-fiscal-year full-DLRM Ruhela formulation driver.
+#' Per-fiscal-year full-DLRM Ruhela formulation driver
 #'
 #' Runs the complete 10-estimator DLRM separately on each fiscal year.
 #' This is a heavy operation (~7x the single-year runtime).
@@ -1190,7 +1190,7 @@ morie_otis_analyze_ruhela_per_year <- function(data, ds_id,
     "per-year DLRM \u00d7 estimator triangulation")
 }
 
-#' Per-year full-DLRM on a01 canonical formulation.
+#' Per-year full-DLRM on a01 canonical formulation
 #'
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
@@ -1204,7 +1204,7 @@ morie_otis_analyze_a01_ruhela_per_year <- function(data = NULL,
     "per-year DLRM on a01 cell frame")
 }
 
-#' Per-year full-DLRM on b01 canonical formulation.
+#' Per-year full-DLRM on b01 canonical formulation
 #'
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
@@ -1457,7 +1457,7 @@ IRR > 1 ==> treatment increases the count rate; IRR < 1 ",
 # on the relevant columns, constructs the treatment indicator, and
 # delegates to .otis_aggregate_glm.
 
-#' b03 aggregate Ruhela: Alert presence -> seg placements.
+#' b03 aggregate Ruhela: Alert presence -> seg placements
 #' @param data b03 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1493,7 +1493,7 @@ morie_otis_analyze_b03_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' b04 aggregate Ruhela: Female -> median seg duration.
+#' b04 aggregate Ruhela: Female -> median seg duration
 #' @param data b04 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1531,7 +1531,7 @@ morie_otis_analyze_b04_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' b05 aggregate Ruhela: schema-no-demographic guard.
+#' b05 aggregate Ruhela: schema-no-demographic guard
 #'
 #' OTIS b05 (segregation placements by consecutive duration) does
 #' not carry a demographic treatment variable -- the published
@@ -1578,7 +1578,7 @@ morie_otis_analyze_b05_ruhela_aggregate <- function(data, out_dir = NULL) {
     out_dir, "b05_ruhela_aggregate")
 }
 
-#' b06 aggregate Ruhela: Disciplinary reason -> seg placements.
+#' b06 aggregate Ruhela: Disciplinary reason -> seg placements
 #' @param data b06 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1615,7 +1615,7 @@ morie_otis_analyze_b06_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' b07 aggregate Ruhela (pivot to long): With-alert -> seg placements.
+#' b07 aggregate Ruhela (pivot to long): With-alert -> seg placements
 #' @param data b07 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1666,7 +1666,7 @@ morie_otis_analyze_b07_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' b08 aggregate Ruhela: Female -> median seg duration (institution-clustered).
+#' b08 aggregate Ruhela: Female -> median seg duration (institution-clustered)
 #' @param data b08 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1706,7 +1706,7 @@ morie_otis_analyze_b08_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' b09 aggregate Ruhela: Female -> individuals in segregation.
+#' b09 aggregate Ruhela: Female -> individuals in segregation
 #' @param data b09 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1739,7 +1739,7 @@ morie_otis_analyze_b09_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c01 aggregate Ruhela: Female -> RC count.
+#' c01 aggregate Ruhela: Female -> RC count
 #' @param data c01 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1768,7 +1768,7 @@ morie_otis_analyze_c01_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c01: gender disparity in RC totals.")
 }
 
-#' c01 region-cluster variant (year-clustered GEE).
+#' c01 region-cluster variant (year-clustered GEE)
 #' @param data c01 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1802,7 +1802,7 @@ morie_otis_analyze_c01_ruhela_aggregate_region_cluster <- function(data,
     ))
 }
 
-#' c02 aggregate Ruhela: Female -> RC (institution GEE).
+#' c02 aggregate Ruhela: Female -> RC (institution GEE)
 #' @param data c02 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1837,7 +1837,7 @@ morie_otis_analyze_c02_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c03 aggregate Ruhela: Indigenous -> RC.
+#' c03 aggregate Ruhela: Indigenous -> RC
 #' @param data c03 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1870,7 +1870,7 @@ morie_otis_analyze_c03_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c04 aggregate Ruhela: Indigenous -> RC (by region).
+#' c04 aggregate Ruhela: Indigenous -> RC (by region)
 #' @param data c04 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1903,7 +1903,7 @@ morie_otis_analyze_c04_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c04 region-cluster variant.
+#' c04 region-cluster variant
 #' @param data c04 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1933,7 +1933,7 @@ morie_otis_analyze_c04_ruhela_aggregate_region_cluster <- function(data,
     interpretation = "Region-clustered GEE variant of c04.")
 }
 
-#' c05 aggregate Ruhela: non-majority religion -> RC.
+#' c05 aggregate Ruhela: non-majority religion -> RC
 #' @param data c05 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1967,7 +1967,7 @@ morie_otis_analyze_c05_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c06 aggregate Ruhela: Age 50+ -> RC.
+#' c06 aggregate Ruhela: Age 50+ -> RC
 #' @param data c06 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -1997,7 +1997,7 @@ morie_otis_analyze_c06_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c06: age-50+ overrepresentation by region.")
 }
 
-#' c07 aggregate Ruhela: Alert presence x Gender -> RC.
+#' c07 aggregate Ruhela: Alert presence x Gender -> RC
 #' @param data c07 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2039,7 +2039,7 @@ morie_otis_analyze_c07_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c08 aggregate Ruhela: non-majority religion x gender -> RC.
+#' c08 aggregate Ruhela: non-majority religion x gender -> RC
 #' @param data c08 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2070,7 +2070,7 @@ morie_otis_analyze_c08_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c08, parallel to c05 with gender control.")
 }
 
-#' c09 aggregate Ruhela: Age 50+ x gender -> RC.
+#' c09 aggregate Ruhela: Age 50+ x gender -> RC
 #' @param data c09 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2100,7 +2100,7 @@ morie_otis_analyze_c09_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c09: age-50+ overrepresentation by gender.")
 }
 
-#' c10 aggregate Ruhela: Female -> median RC days (institution GEE).
+#' c10 aggregate Ruhela: Female -> median RC days (institution GEE)
 #' @param data c10 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2137,7 +2137,7 @@ morie_otis_analyze_c10_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c10: gender disparity in median RC days.")
 }
 
-#' c11 aggregate Ruhela: long-duration bin (>=16 days) -> RC.
+#' c11 aggregate Ruhela: long-duration bin (>=16 days) -> RC
 #' @param data c11 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2172,7 +2172,7 @@ morie_otis_analyze_c11_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' c12 aggregate Ruhela: Female -> median RC days (by region).
+#' c12 aggregate Ruhela: Female -> median RC days (by region)
 #' @param data c12 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2207,7 +2207,7 @@ morie_otis_analyze_c12_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on c12: region-level companion to c10.")
 }
 
-#' d02 aggregate Ruhela: Female -> custodial deaths.
+#' d02 aggregate Ruhela: Female -> custodial deaths
 #' @param data d02 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2237,7 +2237,7 @@ morie_otis_analyze_d02_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' d03 aggregate Ruhela: Indigenous -> custodial deaths.
+#' d03 aggregate Ruhela: Indigenous -> custodial deaths
 #' @param data d03 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2267,7 +2267,7 @@ morie_otis_analyze_d03_ruhela_aggregate <- function(data, out_dir = NULL) {
     ))
 }
 
-#' d04 aggregate Ruhela: non-majority religion -> custodial deaths.
+#' d04 aggregate Ruhela: non-majority religion -> custodial deaths
 #' @param data d04 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2295,7 +2295,7 @@ morie_otis_analyze_d04_ruhela_aggregate <- function(data, out_dir = NULL) {
     interpretation = "Aggregate RF on d04: religious-minority death counts.")
 }
 
-#' d05 aggregate Ruhela: Age 50+ -> custodial deaths.
+#' d05 aggregate Ruhela: Age 50+ -> custodial deaths
 #' @param data d05 data.frame.
 #' @param out_dir Optional.
 #' @return \code{morie_otis_analysis_result}.
@@ -2331,7 +2331,7 @@ morie_otis_analyze_d05_ruhela_aggregate <- function(data, out_dir = NULL) {
 # ---------------------------------------------------------------------------
 # These require the morie causal cell frame; stubbed when unavailable.
 
-#' a01 alt-T Ruhela: Female -> vm count.
+#' a01 alt-T Ruhela: Female -> vm count
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2344,7 +2344,7 @@ morie_otis_analyze_a01_ruhela_alt_gender <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' a01 alt-T Ruhela: Age 50+ -> vm count.
+#' a01 alt-T Ruhela: Age 50+ -> vm count
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2357,7 +2357,7 @@ morie_otis_analyze_a01_ruhela_alt_age <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' a01 alt-T Ruhela: Toronto region -> vm count.
+#' a01 alt-T Ruhela: Toronto region -> vm count
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2370,7 +2370,7 @@ morie_otis_analyze_a01_ruhela_alt_toronto <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' b01 alt-T Ruhela: Female -> vm count.
+#' b01 alt-T Ruhela: Female -> vm count
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2383,7 +2383,7 @@ morie_otis_analyze_b01_ruhela_alt_gender <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' b01 alt-T Ruhela: Age 50+ -> vm count.
+#' b01 alt-T Ruhela: Age 50+ -> vm count
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2396,7 +2396,7 @@ morie_otis_analyze_b01_ruhela_alt_age <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' b01 alt-T Ruhela: Toronto region -> vm count.
+#' b01 alt-T Ruhela: Toronto region -> vm count
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2409,7 +2409,7 @@ morie_otis_analyze_b01_ruhela_alt_toronto <- function(data = NULL,
                        "DLRM on alt-T cell frame")
 }
 
-#' b02 alt-T Ruhela: Toronto region -> total seg days.
+#' b02 alt-T Ruhela: Toronto region -> total seg days
 #' @param data Optional b02 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2422,7 +2422,7 @@ morie_otis_analyze_b02_ruhela_alt_region <- function(data = NULL,
                        "DLRM on b02 alt-T")
 }
 
-#' b02 alt-T Ruhela: Age 50+ -> total seg days.
+#' b02 alt-T Ruhela: Age 50+ -> total seg days
 #' @param data Optional b02 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2440,7 +2440,7 @@ morie_otis_analyze_b02_ruhela_alt_age <- function(data = NULL,
 # Subgroup Ruhela formulations (effect heterogeneity by gender)
 # ---------------------------------------------------------------------------
 
-#' a01 subgroup Ruhela: Female-only cell frame.
+#' a01 subgroup Ruhela: Female-only cell frame
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2454,7 +2454,7 @@ morie_otis_analyze_a01_ruhela_subgroup_female <- function(data = NULL,
     "DLRM on female subset of a01 cell frame")
 }
 
-#' a01 subgroup Ruhela: Male-only cell frame.
+#' a01 subgroup Ruhela: Male-only cell frame
 #' @param data Optional a01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2468,7 +2468,7 @@ morie_otis_analyze_a01_ruhela_subgroup_male <- function(data = NULL,
     "DLRM on male subset of a01 cell frame")
 }
 
-#' b01 subgroup Ruhela: Female-only cell frame.
+#' b01 subgroup Ruhela: Female-only cell frame
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2482,7 +2482,7 @@ morie_otis_analyze_b01_ruhela_subgroup_female <- function(data = NULL,
     "DLRM on female subset of b01 cell frame")
 }
 
-#' b01 subgroup Ruhela: Male-only cell frame.
+#' b01 subgroup Ruhela: Male-only cell frame
 #' @param data Optional b01 data.frame.
 #' @param out_dir Optional output directory.
 #' @return \code{morie_otis_analysis_result}.
@@ -2522,7 +2522,7 @@ morie_otis_analyze_b01_ruhela_subgroup_male <- function(data = NULL,
   out
 }
 
-#' Mandela-RF on b05 -- per-placement Mandela classification by year.
+#' Mandela-RF on b05 -- per-placement Mandela classification by year
 #'
 #' Applies the Sprott-Doob 15-day Mandela threshold to OTIS b05
 #' (Ontario provincial segregation placement counts by binned
@@ -2623,7 +2623,7 @@ morie_otis_analyze_b05_mandela_classification <- function(data,
     out_dir, "b05_mandela_classification")
 }
 
-#' Mandela-RF on c11 -- per-individual Mandela classification by year.
+#' Mandela-RF on c11 -- per-individual Mandela classification by year
 #'
 #' Applies the 15-day threshold to OTIS c11 (Ontario provincial counts
 #' of INDIVIDUALS by binned aggregate duration). Reports both
@@ -2717,7 +2717,7 @@ morie_otis_analyze_c11_mandela_classification <- function(data,
     out_dir, "c11_mandela_classification")
 }
 
-#' Mandela-RF cross-comparison: Ontario provincial vs federal SIU.
+#' Mandela-RF cross-comparison: Ontario provincial vs federal SIU
 #'
 #' Cross-references the c11 Mandela classification against the
 #' Sprott-Doob Feb 2021 federal SIU figures (Table 19, N=1960).
@@ -2876,7 +2876,7 @@ morie_otis_analyze_otis_mandela_provincial_vs_federal <- function(
   list(table = tbl, stats = .otis_chi2_cramer(tbl))
 }
 
-#' MRM chi-square family on c-series.
+#' MRM chi-square family on c-series
 #'
 #' Pearson chi-square + Cramer's V on every meaningful 2-way slice of
 #' the c-series datasets. Honour to Prof. Doob's chi-square tradition
@@ -2965,7 +2965,7 @@ morie_otis_analyze_c_chi2 <- function(datasets,
     out_dir, "c_chi2")
 }
 
-#' MRM chi-square family on d-series.
+#' MRM chi-square family on d-series
 #'
 #' Yearly trend (d01 Poisson CIs) + Alert x Cause / Housing
 #' contingency chi^2 + Cramer's V on d06 / d07.
@@ -3109,7 +3109,7 @@ morie_otis_analyze_d_chi2 <- function(datasets, out_dir = NULL) {
 # Ruhela grid + master orchestrator
 # ---------------------------------------------------------------------------
 
-#' Aggregate Ruhela grid: one-page IRR comparison across analyzers.
+#' Aggregate Ruhela grid: one-page IRR comparison across analyzers
 #'
 #' Runs every aggregate Ruhela formulation analyzer against the
 #' supplied named datasets list and presents a single primary-IRR
@@ -3257,7 +3257,7 @@ morie_otis_analyze_ruhela_grid <- function(datasets,
     out_dir, "ruhela_grid")
 }
 
-#' Paper-ready master report -- every Ruhela formulation in one result.
+#' Paper-ready master report -- every Ruhela formulation in one result
 #'
 #' Sections:
 #' \enumerate{
@@ -3405,7 +3405,7 @@ morie_otis_analyze_ruhela_master <- function(datasets,
 # CSI context (analyze_a01_with_csi_context)
 # ---------------------------------------------------------------------------
 
-#' OTIS a01 causal pipeline + Toronto Crime Severity Index context.
+#' OTIS a01 causal pipeline + Toronto Crime Severity Index context
 #'
 #' Wires together \code{morie_otis_analyze_a01} (causal IRM-DML) with
 #' the Toronto Police Service / StatsCan CSI context. The R port

@@ -5,7 +5,7 @@
 \alias{draw_projections}
 \title{draw_projections}
 \usage{
-draw_projections(m, d, seed = 0L, orthogonal = TRUE)
+draw_projections(m, d, seed = 0L, orthogonal = TRUE) 
 }
 \arguments{
 \item{m}{A count; the body uses it as \code{seq_len(...)}.}

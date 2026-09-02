@@ -28,7 +28,7 @@ risk table so the same fit object can be reused by the simultaneous
 band.
 }
 \details{
-Formula: Var[S(t)] = S(t)^2 sum_{t_j <= t} d_j / (n_j (n_j - d_j)).
+Formula: Var[S(t)] = S(t)^2 sum_\{t_j <= t\} d_j / (n_j (n_j - d_j)).
 }
 \references{
 Greenwood (1926), The natural duration of cancer, Reports

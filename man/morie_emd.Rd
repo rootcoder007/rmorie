@@ -16,6 +16,7 @@ morie_emd(p, q, ground = "ordered", hierarchy = NULL, domain = NULL)
 for \code{ground = "hierarchical"}.}
 
 \item{domain}{The sensitive domain in order.}
+
 }
 \value{
 The EMD, a single number.

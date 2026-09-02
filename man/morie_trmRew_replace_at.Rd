@@ -5,7 +5,7 @@
 \alias{morie_trmRew_replace_at}
 \title{The term with the subterm at pos replaced}
 \usage{
-morie_trmRew_replace_at(t, pos, new)
+morie_trmRew_replace_at(t, pos, new) 
 }
 \arguments{
 \item{t}{A vector; indexed elementwise.}

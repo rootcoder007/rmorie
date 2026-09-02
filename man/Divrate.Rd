@@ -2,12 +2,12 @@
 % Please edit documentation in R/divcd.R
 \name{Divrate}
 \alias{Divrate}
-\title{Divergent transition count and rate.}
+\title{Divergent transition count and rate}
 \usage{
 Divrate(divergent)
 }
 \arguments{
-\item{divergent}{Per-iteration 0/1 divergence indicators; a list of lists is one chain per row.}
+\item{divergent}{See Usage.}
 }
 \value{
 List with \code{count}, \code{rate}, \code{per_chain}, \code{per_chain_rate}, \code{any}, \code{n}.

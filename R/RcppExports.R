@@ -189,7 +189,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
 }
 
-#' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) GET via the shared libcurl backend (C++)
 #'
 #' Phase-3VV promoted helper. Returns the response body as a length-1
 #' character vector. On any libcurl-level failure returns the empty
@@ -206,7 +206,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Binary-safe HTTP(S) GET via libcurl.
+#' Binary-safe HTTP(S) GET via libcurl
 #'
 #' Phase-3XX get_bytes wrapper. Returns the response body as an R
 #' raw vector (no NUL truncation), suitable for shapefiles, FGDB
@@ -222,7 +222,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_bytes_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) POST via the shared libcurl backend (C++)
 #'
 #' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
 #' `jsonlite::toJSON(...)` before passing in. Default content_type
@@ -240,7 +240,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_post_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Status-aware HTTP(S) GET via the libcurl backend (C++).
+#' Status-aware HTTP(S) GET via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper for callers that need HTTP status-code
 #' inspection (401/403/4xx error handling). Returns a length-2
@@ -257,7 +257,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_with_status_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Status-aware HTTP(S) POST via the libcurl backend (C++).
+#' Status-aware HTTP(S) POST via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper. Same status-code-return contract as
 #' .morie_http_get_with_status, but for POST bodies.
@@ -269,7 +269,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_post_with_status_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' libcurl version string the morie C++ backend was built against.
+#' libcurl version string the morie C++ backend was built against
 #' @return Length-1 character vector.
 #' @keywords internal
 .morie_http_curl_version <- function() {

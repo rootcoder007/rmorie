@@ -5,7 +5,7 @@
 \alias{morie_varcal}
 \title{morie_varcal}
 \usage{
-morie_varcal(reads, reference, scorer = NULL, min_quality = 10, ...)
+morie_varcal(reads, reference, scorer = NULL, min_quality = 10, ...) 
 }
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}

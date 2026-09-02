@@ -5,7 +5,7 @@
 \alias{CprWt}
 \title{Wavelet scale distribution width of a fibrillation waveform, Sec 8.15}
 \usage{
-CprWt(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21))
+CprWt(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) 
 }
 \arguments{
 \item{ecg}{Passed to \code{.tf_need}.}

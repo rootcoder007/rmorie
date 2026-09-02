@@ -5,7 +5,7 @@
 \alias{morie_sarimax}
 \title{morie_sarimax}
 \usage{
-morie_sarimax(...)
+morie_sarimax(...) 
 }
 \arguments{
 \item{...}{Passed through.}

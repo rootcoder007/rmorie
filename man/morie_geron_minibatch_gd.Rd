@@ -16,6 +16,8 @@ morie_geron_minibatch_gd(X, y, theta, eta, b, order = NULL, n_steps = 1)
 \item{order}{Optional 0-based permutation; NULL means identity.}
 
 \item{n_steps}{Number of updates.}
+
+
 }
 \value{
 List with \code{theta}, \code{gradient}, \code{full_gradient},

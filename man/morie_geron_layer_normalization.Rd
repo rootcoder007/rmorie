@@ -12,6 +12,7 @@ morie_geron_layer_normalization(X, gamma = 1, beta = 0, eps = 1e-05)
 \item{gamma, beta}{Scalars or length-d vectors.}
 
 \item{eps}{Non-negative variance floor.}
+
 }
 \value{
 List with \code{output}, \code{normalized}, \code{mean}, \code{variance}.

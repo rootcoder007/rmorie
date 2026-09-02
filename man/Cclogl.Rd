@@ -5,10 +5,14 @@
 \alias{Cclogl}
 \title{Case-control logistic likelihood (Lawson eq. 6.6)}
 \usage{
-Cclogl(eta, y)
+Cclogl(eta, y) 
 }
 \description{
 Case-control logistic likelihood (Lawson eq. 6.6)
+}
+\arguments{
+\item{eta}{Argument \code{eta}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{loglik}, \code{p}, \code{n_cases}, \code{n}.

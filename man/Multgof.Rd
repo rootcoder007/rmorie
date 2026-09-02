@@ -5,10 +5,15 @@
 \alias{Multgof}
 \title{Multinomial goodness of fit -- Sec. 14.6, p. 528}
 \usage{
-Multgof(observed, probs, ddof = 0)
+Multgof(observed, probs, ddof = 0) 
 }
 \description{
 Multinomial goodness of fit -- Sec. 14.6, p. 528
+}
+\arguments{
+\item{observed}{Argument \code{observed}; see Usage.}
+\item{probs}{Argument \code{probs}; see Usage.}
+\item{ddof}{Argument \code{ddof}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{prob}, \code{n}, \code{k}.

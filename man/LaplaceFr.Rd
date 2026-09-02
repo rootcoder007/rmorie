@@ -5,7 +5,7 @@
 \alias{LaplaceFr}
 \title{Eq (3.52): H(omega) = H(s) at s = j omega.  Legitimate only when the}
 \usage{
-LaplaceFr(h, omega, t = NULL, T = NULL)
+LaplaceFr(h, omega, t = NULL, T = NULL) 
 }
 \arguments{
 \item{h}{Coerced to numeric by the body, with \code{as.numeric}.}

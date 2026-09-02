@@ -5,10 +5,13 @@
 \alias{as.character.morie_bigint}
 \title{as.character.morie_bigint}
 \usage{
-as.character.morie_bigint(x, ...)
+\method{as.character}{morie_bigint}(x, ...) 
 }
 \description{
 as.character.morie_bigint
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
 }
 \value{
 A character value.

@@ -2,16 +2,16 @@
 % Please edit documentation in R/lismor.R
 \name{Localmoran}
 \alias{Localmoran}
-\title{Local Moran's I (LISA).}
+\title{Local Moran's I (LISA)}
 \usage{
 Localmoran(x, W, mlvar = TRUE)
 }
 \arguments{
-\item{x}{Values at the n locations.}
+\item{x}{See Usage.}
 
-\item{W}{Spatial weights.}
+\item{W}{See Usage.}
 
-\item{mlvar}{Divide m2 by n (the default) rather than n-1.}
+\item{mlvar}{See Usage.}
 }
 \value{
 List with \code{local}, \code{global_i}, \code{m2}, \code{z}, \code{lag}, \code{n}.

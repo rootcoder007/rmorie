@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_scumap_umap_singlecell}
 \alias{morie_scumap_umap_singlecell}
+\alias{morie_scumap}
 \title{morie_scumap_umap_singlecell}
 \usage{
-morie_scumap_umap_singlecell(X, n_neighbors = 15, min_dist = 0.1, n_components = 2, n_epochs = 200, learning_rate = 1, spread = 1, negative_sample_rate = 5, init = "spectral", seed = 0, laplacian = "normalised", a = NULL, b = NULL)
+morie_scumap_umap_singlecell(X, n_neighbors = 15, min_dist = 0.1, n_components = 2, n_epochs = 200, 
+    learning_rate = 1, spread = 1, negative_sample_rate = 5, init = "spectral", 
+    seed = 0, laplacian = "normalised", a = NULL, b = NULL) 
+
+morie_scumap(X, n_neighbors = 15, min_dist = 0.1, n_components = 2, n_epochs = 200, 
+    learning_rate = 1, spread = 1, negative_sample_rate = 5, init = "spectral", 
+    seed = 0, laplacian = "normalised", a = NULL, b = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.scumap_matrix}.}

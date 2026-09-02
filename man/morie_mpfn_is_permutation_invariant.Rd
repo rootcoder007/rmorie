@@ -5,14 +5,14 @@
 \alias{morie_mpfn_is_permutation_invariant}
 \title{Check permutation invariance of a graph-level prediction}
 \usage{
-morie_mpfn_is_permutation_invariant(H, adj, edge_features, perm, T = 3L, how = "sum", tol = 1e-09)
+morie_mpfn_is_permutation_invariant(H, adj, edge_features, perm, T = 3L, how = "sum", tol = 1e-09) 
 }
 \arguments{
 \item{H}{Initial states.}
 \item{adj}{Adjacency list.}
 \item{edge_features}{Edge feature map keyed by "i_j" (integer pair).}
 \item{perm}{0-based permutation of node indices.}
-\item{T,how,readout}{arguments.}
+\item{T,how}{arguments.}
 \item{tol}{Tolerance.}
 }
 \description{

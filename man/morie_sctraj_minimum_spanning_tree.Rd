@@ -5,7 +5,7 @@
 \alias{morie_sctraj_minimum_spanning_tree}
 \title{Prim\'s MST, with the paper\'s optional terminal-state constraint}
 \usage{
-morie_sctraj_minimum_spanning_tree(D, clusters, ends = NULL)
+morie_sctraj_minimum_spanning_tree(D, clusters, ends = NULL) 
 }
 \arguments{
 \item{D}{A matrix; indexed by row and column.}

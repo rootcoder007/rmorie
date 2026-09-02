@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Root mean squared error of a set of predictions.
+#' Root mean squared error of a set of predictions
 #'
 #' Formula: RMSE = sqrt((1/T) sum_i (y_i - yhat_i)^2)
 #'

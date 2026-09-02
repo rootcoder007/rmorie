@@ -25,6 +25,9 @@ morie_geron_stochastic_gradient_descent(
 \item{seed}{LCG seed.}
 
 \item{t0, t1}{Optional schedule constants, supplied together.}
+
+
+
 }
 \value{
 List with \code{theta}, \code{path}, \code{cost_path}, \code{learning_rates},

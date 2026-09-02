@@ -5,7 +5,7 @@
 \alias{metapath_neighbours}
 \title{metapath_neighbours}
 \usage{
-metapath_neighbours(edges, types, metapath)
+metapath_neighbours(edges, types, metapath) 
 }
 \arguments{
 \item{edges}{A vector; indexed elementwise.}

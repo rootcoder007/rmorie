@@ -5,7 +5,7 @@
 \alias{morie_tlonsl_update_weights}
 \title{Exponentially weighted update from cumulative losses. The}
 \usage{
-morie_tlonsl_update_weights(cum_losses, eta = 1)
+morie_tlonsl_update_weights(cum_losses, eta = 1) 
 }
 \arguments{
 \item{cum_losses}{Coerced to numeric by the body, with \code{as.numeric}.}

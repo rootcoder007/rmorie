@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitclr.R
 \name{Clr}
 \alias{Clr}
-\title{Centred log-ratio transform of a composition.}
+\title{Centred log-ratio transform of a composition}
 \usage{
 Clr(x)
 }

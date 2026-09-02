@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghcon.R
 \name{morie_ghosal_posterior_consistency}
 \alias{morie_ghosal_posterior_consistency}
-\title{Schwartz posterior-consistency diagnostic (Bayesian bootstrap).}
+\title{Schwartz posterior-consistency diagnostic (Bayesian bootstrap)}
 \usage{
 morie_ghosal_posterior_consistency(
   x,
@@ -30,7 +30,7 @@ morie_ghosal_posterior_consistency(
 Named list with estimate, ks_mean, ks_se, schwartz_bound, n, eps, method.
 }
 \description{
-Schwartz posterior-consistency diagnostic (Bayesian bootstrap).
+Schwartz posterior-consistency diagnostic (Bayesian bootstrap)
 }
 \examples{
 morie_ghosal_posterior_consistency(x = rnorm(50))

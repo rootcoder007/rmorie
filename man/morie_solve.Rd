@@ -5,10 +5,14 @@
 \alias{morie_solve}
 \title{morie_solve}
 \usage{
-morie_solve(A, b = NULL)
+morie_solve(A, b = NULL) 
 }
 \description{
 morie_solve
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{b}{Argument \code{b}; see Usage.}
 }
 \value{
 The value of \code{out}, as built in the body.

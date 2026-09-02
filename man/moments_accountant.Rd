@@ -5,7 +5,7 @@
 \alias{moments_accountant}
 \title{moments_accountant}
 \usage{
-moments_accountant(vote_counts, gamma, delta, lambdas = NULL, data_dependent = TRUE)
+moments_accountant(vote_counts, gamma, delta, lambdas = NULL, data_dependent = TRUE) 
 }
 \arguments{
 \item{vote_counts}{A vector; its length is taken.}

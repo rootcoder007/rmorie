@@ -5,7 +5,9 @@
 \alias{morie_trupek_trust_region}
 \title{Trust-region minimisation}
 \usage{
-morie_trupek_trust_region(f, grad_f, hess_f, x0, delta = 1, delta_max = NULL, subproblem = "steihaug", eta1 = 0.01, eta2 = 0.9, gamma1 = 0.5, gamma3 = 2, max_iter = 200L, gtol = 1e-10, dtol = 1e-14, sub_tol = 1e-12, sub_maxit = 0L)
+morie_trupek_trust_region(f, grad_f, hess_f, x0, delta = 1, delta_max = NULL, subproblem = "steihaug", 
+    eta1 = 0.01, eta2 = 0.9, gamma1 = 0.5, gamma3 = 2, max_iter = 200L, 
+    gtol = 1e-10, dtol = 1e-14, sub_tol = 1e-12, sub_maxit = 0L) 
 }
 \arguments{
 \item{f}{objective, taking a numeric vector.}

@@ -5,7 +5,7 @@
 \alias{state_matrices}
 \title{state_matrices}
 \usage{
-state_matrices(spec, theta)
+state_matrices(spec, theta) 
 }
 \arguments{
 \item{spec}{Passed to \code{.flatten_carry}.}

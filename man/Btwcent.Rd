@@ -2,20 +2,20 @@
 % Please edit documentation in R/sgtbtw.R
 \name{Btwcent}
 \alias{Btwcent}
-\title{Betweenness centrality by Brandes' algorithm.}
+\title{Betweenness centrality by Brandes' algorithm}
 \usage{
 Btwcent(A, normalise = FALSE)
 }
 \arguments{
-\item{A}{Undirected unweighted adjacency; non-zero means an edge.}
+\item{A}{See Usage.}
 
-\item{normalise}{Divide by (n-1)(n-2)/2, the maximum possible value.}
+\item{normalise}{See Usage.}
 }
 \value{
 List with \code{betweenness}, \code{normalised}, \code{n}.
 }
 \description{
-Formula: c_B(v) = sum_{s != v != t} sigma_st(v) / sigma_st, accumulated by dependency delta_s(v) = sum_w (sigma_sv/sigma_sw)(1 + delta_s(w))
+Formula: c_B(v) = sum_\{s != v != t\} sigma_st(v) / sigma_st, accumulated by dependency delta_s(v) = sum_w (sigma_sv/sigma_sw)(1 + delta_s(w))
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

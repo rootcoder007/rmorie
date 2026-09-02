@@ -5,10 +5,15 @@
 \alias{morie_rating_scale_model}
 \title{morie_rating_scale_model}
 \usage{
-morie_rating_scale_model(theta, b, tau)
+morie_rating_scale_model(theta, b, tau) 
 }
 \description{
 morie_rating_scale_model
+}
+\arguments{
+\item{theta}{Argument \code{theta}; see Usage.}
+\item{b}{Argument \code{b}; see Usage.}
+\item{tau}{Argument \code{tau}; see Usage.}
 }
 \value{
 A list with \code{p}, \code{expected}, \code{info}, \code{test_expected}, \code{test_info}, \code{theta}, \code{b}, \code{tau}, \code{ncat}, \code{n}, \code{k}, \code{method}.

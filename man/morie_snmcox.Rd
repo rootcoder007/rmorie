@@ -3,12 +3,32 @@
 % the formals.
 \name{morie_snmcox}
 \alias{morie_snmcox}
-\title{G-estimate psi in the structural nested failure time model.}
+\alias{morie_snm_cox}
+\title{G-estimate psi in the structural nested failure time model}
 \usage{
-morie_snmcox(time, event, treatment_history, covariate_history = NULL, treat_times = NULL, censor_time = NULL, level = 0.95, psi_range = c(-3, 3), n_grid = 241L, tol = 1e-10, ridge = 1e-08)
+morie_snmcox(time, event, treatment_history, covariate_history = NULL, treat_times = NULL, 
+    censor_time = NULL, level = 0.95, psi_range = c(-3, 3), n_grid = 241L, 
+    tol = 1e-10, ridge = 1e-08) 
+
+morie_snm_cox(time, event, treatment_history, covariate_history = NULL, treat_times = NULL, 
+    censor_time = NULL, level = 0.95, psi_range = c(-3, 3), n_grid = 241L, 
+    tol = 1e-10, ridge = 1e-08) 
 }
 \description{
 G-estimate psi in the structural nested failure time model.
+}
+\arguments{
+\item{time}{Argument \code{time}; see Usage.}
+\item{event}{Argument \code{event}; see Usage.}
+\item{treatment_history}{Argument \code{treatment_history}; see Usage.}
+\item{covariate_history}{Argument \code{covariate_history}; see Usage.}
+\item{treat_times}{Argument \code{treat_times}; see Usage.}
+\item{censor_time}{Argument \code{censor_time}; see Usage.}
+\item{level}{Argument \code{level}; see Usage.}
+\item{psi_range}{Argument \code{psi_range}; see Usage.}
+\item{n_grid}{Argument \code{n_grid}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
+\item{ridge}{Argument \code{ridge}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{psi}, \code{time_ratio}, \code{lower}, \code{upper}, \code{score_at_estimate}, \code{z_at_estimate}, \code{n_used}, \code{artificial_censored}, \code{blipped}, \code{propensity}, \code{converged}, \code{grid_psi}, \code{grid_score}, \code{n}, \code{level}, \code{method}, \code{note}.

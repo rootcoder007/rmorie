@@ -5,7 +5,8 @@
 \alias{morie_prsclm_prs_cs_clump}
 \title{morie_prsclm_prs_cs_clump}
 \usage{
-morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold = NULL, r2 = 0.1, window = 250000, genotypes = NULL, standardize = FALSE)
+morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold = NULL, r2 = 0.1, window = 250000, 
+    genotypes = NULL, standardize = FALSE) 
 }
 \arguments{
 \item{sumstats}{A list; the body reads \code{$beta}, \code{$p}, \code{$position}, \code{$snp} from it.}

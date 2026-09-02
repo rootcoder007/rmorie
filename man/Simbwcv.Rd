@@ -50,6 +50,7 @@ morie_horowitz_bw_cv_sim(
 form h_opt = h_0 n^(-2/(2P+d+2)).}
 
 \item{d}{Optional integer dimension for that same formula.}
+
 }
 \value{
 Named list with bandwidth, cv, grid, cvcurve, hreference,
@@ -71,7 +72,7 @@ higher-order theory (Haerdle and Tsybakov 1993; Powell and Stoker
 \details{
 The criterion evaluated here is the leave-one-out cross-validation
 function of Appendix A.2.1 (page 242) carried to the index,
-TR(h) = n^-1 sum_i w(X_i) [Y_i - Ghat_{-i,h}(X_i'beta)]^2,
+TR(h) = n^-1 sum_i w(X_i) [Y_i - Ghat_\{-i,h\}(X_i'beta)]^2,
 minimised over an EXPLICIT FIXED grid.  Leave-one-out is
 deterministic: there is no random fold split.
 }

@@ -5,7 +5,7 @@
 \alias{LsiPar2}
 \title{Eq (3.47): identical in form to eq (3.46) -- both branches of a}
 \usage{
-LsiPar2(x, h2)
+LsiPar2(x, h2) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

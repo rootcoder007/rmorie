@@ -18,6 +18,7 @@ Svgp(X, y, Z = NULL, gamma = 1, sigma2 = 0.01, jitter = 1e-08, X_test = NULL)
 \item{jitter}{added to K_mm.}
 
 \item{X_test}{test inputs.}
+
 }
 \value{
 list: estimate, elbo, fit_term, trace_penalty, trace, pred,

@@ -5,7 +5,7 @@
 \alias{MedPolish}
 \title{Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &}
 \usage{
-MedPolish(values, grid = NULL, iters = 10L)
+MedPolish(values, grid = NULL, iters = 10L) 
 }
 \arguments{
 \item{values}{A matrix; passed to \code{as.matrix}.}

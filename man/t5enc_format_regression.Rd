@@ -5,7 +5,7 @@
 \alias{t5enc_format_regression}
 \title{t5enc_format_regression}
 \usage{
-t5enc_format_regression(value, increment = 0.2, lo = 1, hi = 5)
+t5enc_format_regression(value, increment = 0.2, lo = 1, hi = 5) 
 }
 \arguments{
 \item{value}{Coerced to numeric by the body, with \code{as.numeric}.}

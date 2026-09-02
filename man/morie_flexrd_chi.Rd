@@ -5,7 +5,7 @@
 \alias{morie_flexrd_chi}
 \title{Turn one chi angle: rotate the atoms it moves, and only those}
 \usage{
-morie_flexrd_chi(coords, chi, degrees)
+morie_flexrd_chi(coords, chi, degrees) 
 }
 \arguments{
 \item{coords}{The receptor coordinates, a list of triples.}

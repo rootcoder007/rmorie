@@ -5,10 +5,14 @@
 \alias{Linbylin}
 \title{Linear rank test for ordered categories -- Sec. 14.6.1, p. 531}
 \usage{
-Linbylin(table, scores = NULL)
+Linbylin(table, scores = NULL) 
 }
 \description{
 Linear rank test for ordered categories -- Sec. 14.6.1, p. 531
+}
+\arguments{
+\item{table}{Argument \code{table}; see Usage.}
+\item{scores}{Argument \code{scores}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{sd}, \code{z}, \code{p_value}, \code{p_twosided}, \code{scores}, \code{n}.

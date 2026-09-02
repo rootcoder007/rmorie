@@ -5,7 +5,7 @@
 \alias{morie_geron_principal_components}
 \title{Principal components via SVD, sign-fixed, reconstruction error reported (Geron Ch 7, hmpcac)}
 \usage{
-morie_geron_principal_components(X, n_components = NULL, center = TRUE, scale = FALSE)
+morie_geron_principal_components(X, n_components = NULL, center = TRUE, scale = FALSE) 
 }
 \arguments{
 \item{X}{Data (m, p).}

@@ -5,7 +5,7 @@
 \alias{BWanderEq}
 \title{Baseline-wander removal as a difference equation}
 \usage{
-BWanderEq(x, T = 1, pole = 0.995, n = NULL)
+BWanderEq(x, T = 1, pole = 0.995, n = NULL) 
 }
 \arguments{
 \item{x}{The input record, at least one sample.}

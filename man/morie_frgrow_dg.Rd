@@ -5,7 +5,7 @@
 \alias{morie_frgrow_dg}
 \title{Binding free energy in kcal per mole, negative for binding}
 \usage{
-morie_frgrow_dg(kd, temperature = .FRGROW_T_STANDARD)
+morie_frgrow_dg(kd, temperature = .FRGROW_T_STANDARD) 
 }
 \arguments{
 \item{kd}{The dissociation constant, in molar.}

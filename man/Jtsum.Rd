@@ -5,10 +5,13 @@
 \alias{Jtsum}
 \title{JT as the pairwise U matrix -- Sec. 10.6, eq. (10.6.1), p. 365}
 \usage{
-Jtsum(samples)
+Jtsum(samples) 
 }
 \description{
 JT as the pairwise U matrix -- Sec. 10.6, eq. (10.6.1), p. 365
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
 }
 \value{
 A list with \code{u}, \code{statistic}, \code{npairs}, \code{k}, \code{n}.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Normal linear regression under the Bayesian paradigm.
+#' Normal linear regression under the Bayesian paradigm
 #'
 #' Formula: Y = beta_0 + sum_j X_j beta_j + eps (eq. 6.1) with the improper
 #' reference prior f(beta, sigma2) proportional to sigma^-2 (eq. 6.2). When X

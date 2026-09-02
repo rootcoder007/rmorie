@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_wrd2v_wrd2v}
 \alias{morie_wrd2v_wrd2v}
+\alias{morie_wrd2v}
 \title{morie_wrd2v_wrd2v}
 \usage{
-morie_wrd2v_wrd2v(corpus, size = 16, window = 5, architecture = "skip-gram", lr = 0.05, epochs = 20, min_count = 1, dynamic_window = TRUE, loss = "softmax", negative = 5, noise_power = 0.75, subsample = NULL, seed = 0)
+morie_wrd2v_wrd2v(corpus, size = 16, window = 5, architecture = "skip-gram", lr = 0.05, 
+    epochs = 20, min_count = 1, dynamic_window = TRUE, loss = "softmax", 
+    negative = 5, noise_power = 0.75, subsample = NULL, seed = 0) 
+
+morie_wrd2v(corpus, size = 16, window = 5, architecture = "skip-gram", lr = 0.05, 
+    epochs = 20, min_count = 1, dynamic_window = TRUE, loss = "softmax", 
+    negative = 5, noise_power = 0.75, subsample = NULL, seed = 0) 
 }
 \arguments{
 \item{corpus}{Iterated over elementwise, with \code{lapply}.}

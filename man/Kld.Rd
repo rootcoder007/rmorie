@@ -5,7 +5,7 @@
 \alias{Kld}
 \title{Eq (5.33): KLD(p1, p2) = sum_l p2(x_l) ln[p2(x_l) / p1(x_l)]}
 \usage{
-Kld(p1, p2)
+Kld(p1, p2) 
 }
 \arguments{
 \item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}

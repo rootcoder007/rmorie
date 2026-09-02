@@ -5,7 +5,8 @@
 \alias{morie_grclus}
 \title{Multilevel k-way graph partitioning (METIS)}
 \usage{
-morie_grclus(A, k = 2L, weights = NULL, matching = "hem", initial = "gggp", refinement = "bkl", tolerance = 0.03, coarsest = 20L, seed = 17)
+morie_grclus(A, k = 2L, weights = NULL, matching = "hem", initial = "gggp", 
+    refinement = "bkl", tolerance = 0.03, coarsest = 20L, seed = 17) 
 }
 \arguments{
 \item{A}{Square adjacency matrix (matrix or list of numeric vectors),   symmetric, non-negative weights, no self-loops, no non-finite   values.}

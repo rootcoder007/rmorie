@@ -5,7 +5,7 @@
 \alias{CCepDecay}
 \title{CCepDecay}
 \usage{
-CCepDecay(zeros_in, zeros_out, poles_in, poles_out, nmax = 32, constant = NULL)
+CCepDecay(zeros_in, zeros_out, poles_in, poles_out, nmax = 32, constant = NULL) 
 }
 \arguments{
 \item{zeros_in}{Coerced to complex by the body, with \code{as.complex}.}

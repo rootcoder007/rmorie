@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_replicate_variance}
 \alias{morie_weights_replicate_variance}
-\title{Variance estimation from replicate estimates.}
+\title{Variance estimation from replicate estimates}
 \usage{
 morie_weights_replicate_variance(
   full_estimate,

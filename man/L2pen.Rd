@@ -2,7 +2,7 @@
 % Please edit documentation in R/l2reg.R
 \name{L2pen}
 \alias{L2pen}
-\title{Ridge (weight-decay) regularized loss.}
+\title{Ridge (weight-decay) regularized loss}
 \usage{
 L2pen(loss, w, lam)
 }

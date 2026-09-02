@@ -5,7 +5,7 @@
 \alias{print.morie_mrm_effect}
 \title{Print method for \code{morie_mrm_effect} objects}
 \usage{
-print.morie_mrm_effect(x, ...)
+\method{print}{morie_mrm_effect}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_mrm_effect} object.}

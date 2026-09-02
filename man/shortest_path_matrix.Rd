@@ -5,7 +5,7 @@
 \alias{shortest_path_matrix}
 \title{All-pairs shortest path lengths by BFS}
 \usage{
-shortest_path_matrix(adj, n)
+shortest_path_matrix(adj, n) 
 }
 \arguments{
 \item{adj}{Adjacency list.}

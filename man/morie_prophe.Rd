@@ -5,7 +5,8 @@
 \alias{morie_prophe}
 \title{morie_prophe}
 \usage{
-morie_prophe(t, y, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0), ...)
+morie_prophe(t, y, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 
+    0), ...) 
 }
 \arguments{
 \item{t}{Passed to \code{prophe_additive_components}.}

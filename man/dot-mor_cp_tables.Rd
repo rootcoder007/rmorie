@@ -2,7 +2,7 @@
 % Please edit documentation in R/pelt_native.R
 \name{.mor_cp_tables}
 \alias{.mor_cp_tables}
-\title{Cumulative sums; .mor_cp_cs(x)$cs\link{k} is Python cs[k - 1]}
+\title{Cumulative sums; .mor_cp_cs(x)$cs[k] is Python cs[k - 1]}
 \usage{
 .mor_cp_tables(x)
 }

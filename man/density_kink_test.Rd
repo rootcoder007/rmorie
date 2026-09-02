@@ -5,7 +5,7 @@
 \alias{density_kink_test}
 \title{density_kink_test}
 \usage{
-density_kink_test(V, kink, bandwidth, n_bins = 20L, order = 1L)
+density_kink_test(V, kink, bandwidth, n_bins = 20L, order = 1L) 
 }
 \arguments{
 \item{V}{Coerced to numeric by the body, with \code{as.numeric}.}

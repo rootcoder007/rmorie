@@ -5,7 +5,7 @@
 \alias{morie_grace}
 \title{morie_grace}
 \usage{
-morie_grace(U, V, tau = 0.5, intra = TRUE)
+morie_grace(U, V, tau = 0.5, intra = TRUE) 
 }
 \arguments{
 \item{U}{Passed to \code{.grace_objective}.}

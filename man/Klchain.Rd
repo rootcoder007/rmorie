@@ -10,6 +10,7 @@ Klchain(pxy, qxy, base = 2)
 \item{pxy, qxy}{Joint pmfs of the same shape; each normalised here.}
 
 \item{base}{Log base; 2 gives bits.}
+
 }
 \value{
 Named list with \code{estimate}, \code{marginal}, \code{conditional},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rbfkn.R
 \name{Rbfkern}
 \alias{Rbfkern}
-\title{Gaussian (radial basis) kernel matrix.}
+\title{Gaussian (radial basis) kernel matrix}
 \usage{
 Rbfkern(X, gamma = NULL, Z = NULL)
 }

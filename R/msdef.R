@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean squared error of a set of predictions.
+#' Mean squared error of a set of predictions
 #'
 #' Formula: MSE = (1/T) sum_i (y_i - yhat_i)^2
 #'

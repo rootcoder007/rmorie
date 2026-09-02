@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Hadamard response estimator for local differential privacy.
+#' Hadamard response estimator for local differential privacy
 #'
 #' Formula: phat(x) = 2(e^eps + 1)/(e^eps - 1) * (phat(C_x) - 1/2)
 #'
@@ -7,6 +7,9 @@
 #' @param epsilon Local privacy parameter.
 #' @param n Number of users; the sum of ``counts`` if omitted.
 
+#' @param counts See Usage.
+#' @param epsilon See Usage.
+#' @param n See Usage.
 #' @return List with ``p``, ``p_set`` (the empirical p(C_x)), ``scale``, ``epsilon``, ``n``, ``k``.
 #' @references Acharya, Sun and Zhang (2019), Hadamard Response: Estimating Distributions Privately, Efficiently, and with Little Communication, AISTATS, PMLR 89. Equations (8), (9) and (10). Verified against the paper.
 #' @export

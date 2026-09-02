@@ -5,7 +5,7 @@
 \alias{surepi_ears_detect}
 \title{surepi_ears_detect}
 \usage{
-surepi_ears_detect(counts, method = "C2", threshold = 3, sigma_floor = 1)
+surepi_ears_detect(counts, method = "C2", threshold = 3, sigma_floor = 1) 
 }
 \arguments{
 \item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}

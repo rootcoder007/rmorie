@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_datasets.R
 \name{morie_tps_data_dir}
 \alias{morie_tps_data_dir}
-\title{Default project data directory for TPS open data.}
+\title{Default project data directory for TPS open data}
 \usage{
 morie_tps_data_dir()
 }

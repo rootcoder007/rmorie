@@ -12,6 +12,8 @@ Magsd(m1, m2, s_ctrl, n1, n2)
 \item{s_ctrl}{Control-group standard deviation, strictly positive.}
 
 \item{n1, n2}{Treatment and control sample sizes; \code{n2 >= 2}.}
+
+
 }
 \value{
 List with \code{delta}, \code{var}, \code{se}, \code{ci_lo},

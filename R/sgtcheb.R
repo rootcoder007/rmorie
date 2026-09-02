@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Exact Sgtcheegerbound constant, with the eigenvalue bounds it satisfies.
+#' Exact Sgtcheegerbound constant, with the eigenvalue bounds it satisfies
 #'
 #' Computed by exhaustive enumeration of the vertex bipartitions, so it is
 #' exact rather than a relaxation. Enumeration is exponential, hence the

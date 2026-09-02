@@ -5,7 +5,7 @@
 \alias{LfHfRatio}
 \title{Section 8.12 and Figure 8.38.  The ratio alone, with the band powers}
 \usage{
-LfHfRatio(rr, fsr = 4, bands = "taskforce")
+LfHfRatio(rr, fsr = 4, bands = "taskforce") 
 }
 \arguments{
 \item{rr}{Passed to \code{.morie_qrs_check}.}

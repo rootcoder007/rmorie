@@ -5,7 +5,7 @@
 \alias{gnnEx_computation_graph}
 \title{The L-hop neighbourhood -- everything the prediction could depend on}
 \usage{
-gnnEx_computation_graph(adj, v, L)
+gnnEx_computation_graph(adj, v, L) 
 }
 \arguments{
 \item{adj}{Passed to \code{.gnnEx_get_neighbors}.}

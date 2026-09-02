@@ -5,7 +5,7 @@
 \alias{morie_survrsf_nelson_aalen}
 \title{The terminal-node estimator of equation (3.1)}
 \usage{
-morie_survrsf_nelson_aalen(times, events)
+morie_survrsf_nelson_aalen(times, events) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

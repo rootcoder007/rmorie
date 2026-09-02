@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_ruhela_grid}
 \alias{morie_otis_analyze_ruhela_grid}
-\title{Aggregate Ruhela grid: one-page IRR comparison across analyzers.}
+\title{Aggregate Ruhela grid: one-page IRR comparison across analyzers}
 \usage{
 morie_otis_analyze_ruhela_grid(datasets, out_dir = NULL)
 }

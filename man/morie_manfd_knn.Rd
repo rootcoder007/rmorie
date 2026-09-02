@@ -5,7 +5,7 @@
 \alias{morie_manfd_knn}
 \title{The k-nearest-neighbour graph, as a weighted adjacency matrix}
 \usage{
-morie_manfd_knn(D, k, symmetric = TRUE)
+morie_manfd_knn(D, k, symmetric = TRUE) 
 }
 \arguments{
 \item{D}{A distance matrix.}

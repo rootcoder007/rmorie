@@ -12,6 +12,7 @@ morie_geron_mlp(X, weights, biases, activations)
 \item{weights, biases}{Per-layer parameters.}
 
 \item{activations}{Per-layer activation names or functions.}
+
 }
 \value{
 List with output, activations, pre_activations, n_parameters, estimate, n, method.

@@ -3,12 +3,16 @@
 % the formals.
 \name{network_influence_variance}
 \alias{network_influence_variance}
-\title{Variance with covariance along edges only.}
+\title{Variance with covariance along edges only}
 \usage{
-network_influence_variance(ic, friends)
+network_influence_variance(ic, friends) 
 }
 \description{
 Variance with covariance along edges only.
+}
+\arguments{
+\item{ic}{Argument \code{ic}; see Usage.}
+\item{friends}{Argument \code{friends}; see Usage.}
 }
 \value{
 A list with \code{se}, \code{se_independent}, \code{edges_counted}, \code{note}.

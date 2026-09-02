@@ -5,7 +5,7 @@
 \alias{LinDSep}
 \title{Section 10.4.2 with a fitted cut.  The midpoint of the projected}
 \usage{
-LinDSep(X, y)
+LinDSep(X, y) 
 }
 \arguments{
 \item{X}{Passed to \code{FishLda}.}

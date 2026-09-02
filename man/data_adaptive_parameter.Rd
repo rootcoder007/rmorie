@@ -5,7 +5,7 @@
 \alias{data_adaptive_parameter}
 \title{data_adaptive_parameter}
 \usage{
-data_adaptive_parameter(define_on_training, estimate_on_holdout, n, V = 10L, seed = 0L)
+data_adaptive_parameter(define_on_training, estimate_on_holdout, n, V = 10L, seed = 0L) 
 }
 \arguments{
 \item{define_on_training}{Accepted by the signature and not used anywhere in the body.}

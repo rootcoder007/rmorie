@@ -5,7 +5,7 @@
 \alias{phi}
 \title{phi}
 \usage{
-phi(x, fields, W)
+phi(x, fields, W) 
 }
 \arguments{
 \item{x}{See Usage.}

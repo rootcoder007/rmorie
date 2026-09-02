@@ -5,7 +5,8 @@
 \alias{morie_ipwgrf}
 \title{morie_ipwgrf}
 \usage{
-morie_ipwgrf(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5, trim = 0.02, seed = 0, level = 0.95, break_outcome = FALSE, break_propensity = FALSE)
+morie_ipwgrf(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5, trim = 0.02, 
+    seed = 0, level = 0.95, break_outcome = FALSE, break_propensity = FALSE) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of Laniyonu & Goff (2021) — Police force vs SMI disparity
+#' Replication of Laniyonu & Goff (2021) -- Police force vs SMI disparity
 #'
 #' R port of \code{morie.laniyonu.smi_force_disparity}.  Estimates a
 #' hierarchical negative-binomial model with a synthetic area-exposure
@@ -115,7 +115,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Synthetic Area Exposure (SAE) — base-R logistic + tract scoring
+# Synthetic Area Exposure (SAE) -- base-R logistic + tract scoring
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Smi Sae

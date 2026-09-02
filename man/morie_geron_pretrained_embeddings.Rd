@@ -5,7 +5,7 @@
 \alias{morie_geron_pretrained_embeddings}
 \title{Pretrained word embeddings as initialisation, LCG-filled OOV rows (Geron Ch 14, hmpemb)}
 \usage{
-morie_geron_pretrained_embeddings(vocab, pretrained, freeze = TRUE, seed = 0, oov_scale = 0.05)
+morie_geron_pretrained_embeddings(vocab, pretrained, freeze = TRUE, seed = 0, oov_scale = 0.05) 
 }
 \arguments{
 \item{vocab}{Tokens in index order.}

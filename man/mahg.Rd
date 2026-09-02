@@ -15,6 +15,9 @@ morie_ma_hedges_g(m1, m2, s1, s2, n1, n2)
 \item{s1, s2}{group standard deviations (divisor n - 1).}
 
 \item{n1, n2}{group sizes.}
+
+
+
 }
 \value{
 list: estimate, d, J, J_approx, se, variance, df, s_pooled, n, method.

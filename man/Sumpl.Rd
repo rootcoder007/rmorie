@@ -5,10 +5,13 @@
 \alias{Sumpl}
 \title{Graph readout by sum pooling (standard; Xu et al. 2019 for its power)}
 \usage{
-Sumpl(H)
+Sumpl(H) 
 }
 \description{
 Graph readout by sum pooling (standard; Xu et al. 2019 for its power)
+}
+\arguments{
+\item{H}{Argument \code{H}; see Usage.}
 }
 \value{
 A list with \code{sum}, \code{mean}, \code{max}, \code{n_nodes}, \code{dim}.

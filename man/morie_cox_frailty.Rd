@@ -29,6 +29,7 @@ morie_cox_frailty(
 \item{max_iter, tol}{inner-loop controls.}
 
 \item{ties}{\code{"efron"} or \code{"breslow"}.}
+
 }
 \value{
 list with \code{beta}, \code{se}, \code{hazard_ratio},

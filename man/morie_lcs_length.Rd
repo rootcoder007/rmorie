@@ -5,7 +5,7 @@
 \alias{morie_lcs_length}
 \title{morie_lcs_length}
 \usage{
-morie_lcs_length(a, b)
+morie_lcs_length(a, b) 
 }
 \arguments{
 \item{a}{Passed to \code{.rouge_lcs_length}.}

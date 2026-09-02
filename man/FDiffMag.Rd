@@ -5,7 +5,7 @@
 \alias{FDiffMag}
 \title{Eq (3.126).  The book prints (2/T) sin(w/2) without bars, right on}
 \usage{
-FDiffMag(omega, T = 1)
+FDiffMag(omega, T = 1) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

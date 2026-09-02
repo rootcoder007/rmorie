@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nonparametric bootstrap interval for the targeted risk difference.
+#' Nonparametric bootstrap interval for the targeted risk difference
 #'
 #' The INITIAL FITS are carried along as fixed columns, so this
 #' bootstraps the targeting step and the empirical means, not the machine

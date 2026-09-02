@@ -8,6 +8,7 @@ morie_ld(locus_a, locus_b)
 }
 \arguments{
 \item{locus_a, locus_b}{Equal-length vectors containing only 0 and 1.}
+
 }
 \value{
 A list with \code{name}, \code{statistic} (\eqn{r^2}),

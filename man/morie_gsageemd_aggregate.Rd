@@ -5,7 +5,7 @@
 \alias{morie_gsageemd_aggregate}
 \title{morie_gsageemd_aggregate}
 \usage{
-morie_gsageemd_aggregate(vectors, how = "mean", W = NULL)
+morie_gsageemd_aggregate(vectors, how = "mean", W = NULL) 
 }
 \arguments{
 \item{vectors}{Passed to \code{.gsageemd_mat}.}

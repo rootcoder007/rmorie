@@ -2,7 +2,7 @@
 % Please edit documentation in R/flxipt_native.R
 \name{.flxipt_project_simplex}
 \alias{.flxipt_project_simplex}
-\title{Projection onto {a >= 0, sum a = 1}, exact sort-based ---------}
+\title{Projection onto \{a >= 0, sum a = 1\}, exact sort-based ---------}
 \usage{
 .flxipt_project_simplex(v)
 }

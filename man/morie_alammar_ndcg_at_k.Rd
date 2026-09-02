@@ -5,10 +5,12 @@
 \alias{morie_alammar_ndcg_at_k}
 \title{morie_alammar_ndcg_at_k}
 \usage{
-morie_alammar_ndcg_at_k(relevances, k)
+morie_alammar_ndcg_at_k(relevances, k) 
 }
 \arguments{
 \item{relevances}{Graded relevances in ranked order.}
+
+\item{k}{Argument \code{k}; see Usage.}
 }
 \description{
 morie_alammar_ndcg_at_k

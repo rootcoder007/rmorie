@@ -2,7 +2,7 @@
 % Please edit documentation in R/mnlog.R
 \name{Mnpenlik}
 \alias{Mnpenlik}
-\title{Penalized log-likelihood of the multinomial logistic model.}
+\title{Penalized log-likelihood of the multinomial logistic model}
 \usage{
 Mnpenlik(X, y, beta0, beta, lam, penalty = "ridge")
 }

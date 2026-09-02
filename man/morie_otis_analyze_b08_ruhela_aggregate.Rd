@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_b08_ruhela_aggregate}
 \alias{morie_otis_analyze_b08_ruhela_aggregate}
 \alias{morie_otis_analyze_b08_mrm_aggregate}
-\title{b08 aggregate Ruhela: Female -> median seg duration (institution-clustered).}
+\title{b08 aggregate Ruhela: Female -> median seg duration (institution-clustered)}
 \usage{
 morie_otis_analyze_b08_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_b08_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-b08 aggregate Ruhela: Female -> median seg duration (institution-clustered).
+b08 aggregate Ruhela: Female -> median seg duration (institution-clustered)
 }
 \examples{
 \donttest{

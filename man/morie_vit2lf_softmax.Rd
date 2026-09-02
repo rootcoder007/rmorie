@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_softmax}
 \title{Row-wise softmax, max-shifted, with a compensated denominator}
 \usage{
-morie_vit2lf_softmax(logits, mask = NULL)
+morie_vit2lf_softmax(logits, mask = NULL) 
 }
 \arguments{
 \item{logits}{The logit matrix.}

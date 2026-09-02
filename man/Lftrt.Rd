@@ -29,8 +29,8 @@ same truncated risk sets.
 \details{
 R arm of the existing Python \code{lftrt} module.
 
-Formula: S(t) = prod_{t_j <= t} (1 - d_j / n_j) with
-n_j = #{i : entry_i < t_j <= time_i}.
+Formula: S(t) = prod_\{t_j <= t\} (1 - d_j / n_j) with
+n_j = #\{i : entry_i < t_j <= time_i\}.
 }
 \examples{
 Lftrt(c(0, 0, 1, 2), c(5, 6, 7, 8), c(1, 1, 0, 1))

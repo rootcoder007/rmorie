@@ -5,7 +5,7 @@
 \alias{t5enc_span_corruption}
 \title{t5enc_span_corruption}
 \usage{
-t5enc_span_corruption(tokens, rate = 0.15, mean_span = 3, seed = 0, sentinel = "<extra_id_\%d>")
+t5enc_span_corruption(tokens, rate = 0.15, mean_span = 3, seed = 0, sentinel = "<extra_id_\%d>") 
 }
 \arguments{
 \item{tokens}{Coerced to character by the body, with \code{as.character}.}

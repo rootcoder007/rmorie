@@ -5,7 +5,7 @@
 \alias{QrsMwInt}
 \title{Eq (4.15).  N matters: too wide merges QRS and T, too narrow leaves}
 \usage{
-QrsMwInt(x, nwin = 30, fs = NULL)
+QrsMwInt(x, nwin = 30, fs = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

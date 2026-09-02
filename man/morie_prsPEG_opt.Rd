@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_opt}
 \title{morie_prsPEG_opt}
 \usage{
-morie_prsPEG_opt(e)
+morie_prsPEG_opt(e) 
 }
 \arguments{
 \item{e}{Passed to \code{morie_prsPEG_choice}.}

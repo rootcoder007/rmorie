@@ -5,7 +5,8 @@
 \alias{morie_geron_ppo}
 \title{PPO clipped-surrogate policy optimisation over a tabular softmax policy (Geron Ch 19, hmppo)}
 \usage{
-morie_geron_ppo(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, gamma = 0.99, n_episodes = 8, max_steps = 50, n_updates = 4, seed = 0)
+morie_geron_ppo(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, gamma = 0.99, 
+    n_episodes = 8, max_steps = 50, n_updates = 4, seed = 0) 
 }
 \arguments{
 \item{env}{List with `reset()` / `step(a)`.}

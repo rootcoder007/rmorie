@@ -5,7 +5,7 @@
 \alias{encode_mask_prompt}
 \title{encode_mask_prompt}
 \usage{
-encode_mask_prompt(mask, image_embedding, weight = 1)
+encode_mask_prompt(mask, image_embedding, weight = 1) 
 }
 \arguments{
 \item{mask}{See Usage.}

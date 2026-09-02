@@ -12,6 +12,14 @@ morie_geron_lstm_cell(x_t, h_prev, c_prev, Wf, Wi, Wg, Wo, bf, bi, bg, bo)
 \item{Wf, Wi, Wg, Wo}{(H, H + n) gate weights.}
 
 \item{bf, bi, bg, bo}{Scalars or length-H biases.}
+
+
+
+
+
+
+
+
 }
 \value{
 List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}, \code{forget_open}.

@@ -5,7 +5,7 @@
 \alias{serial_interval_draw}
 \title{serial_interval_draw}
 \usage{
-serial_interval_draw(mean, sd, e, allow_presymptomatic = TRUE)
+serial_interval_draw(mean, sd, e, allow_presymptomatic = TRUE) 
 }
 \arguments{
 \item{mean}{Coerced to numeric by the body, with \code{as.numeric}.}

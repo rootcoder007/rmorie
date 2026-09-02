@@ -5,7 +5,8 @@
 \alias{FecgNmf}
 \title{FecgNmf}
 \usage{
-FecgNmf(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0, maxiter = 150, taum = 0.6, tauf = 0.45, seed = 1)
+FecgNmf(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0, maxiter = 150, 
+    taum = 0.6, tauf = 0.45, seed = 1) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

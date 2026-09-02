@@ -3,12 +3,28 @@
 % the formals.
 \name{tmle_cdrs}
 \alias{tmle_cdrs}
-\title{Collaborative TMLE for the ATE.}
+\alias{morie_tmlcds}
+\title{Collaborative TMLE for the ATE}
 \usage{
-tmle_cdrs(y, D, X, tuning = "discrete", penalties = NULL, n_folds = 5L, trim = 0.005, scale = NULL, q_covariates = NULL)
+tmle_cdrs(y, D, X, tuning = "discrete", penalties = NULL, n_folds = 5L, 
+    trim = 0.005, scale = NULL, q_covariates = NULL) 
+
+morie_tmlcds(y, D, X, tuning = "discrete", penalties = NULL, n_folds = 5L, 
+    trim = 0.005, scale = NULL, q_covariates = NULL) 
 }
 \description{
 Builds a nested sequence of treatment mechanisms and selects by the cross-validated loss of the targeted outcome fit, so an instrument stays out of the propensity model. van der Laan & Rose (2018) Ch. 10 Example 10.3.
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{tuning}{Argument \code{tuning}; see Usage.}
+\item{penalties}{Argument \code{penalties}; see Usage.}
+\item{n_folds}{Argument \code{n_folds}; see Usage.}
+\item{trim}{Argument \code{trim}; see Usage.}
+\item{scale}{Argument \code{scale}; see Usage.}
+\item{q_covariates}{Argument \code{q_covariates}; see Usage.}
 }
 \value{
 The value of \code{.RichResult}.

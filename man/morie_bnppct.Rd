@@ -5,7 +5,10 @@
 \alias{morie_bnppct}
 \title{Posterior of the quantile function of a nonparametric F}
 \usage{
-morie_bnppct(y, quantile = 0.5, route = "mixture", alpha = 1, n_iter = 500L, burn = NULL, thin = 1L, seed = 1, cred = 0.9, sampler_route = "walker", kappa = 0.5, m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL, n_bootstrap = 500L, alpha_update = NULL)
+morie_bnppct(y, quantile = 0.5, route = "mixture", alpha = 1, n_iter = 500L, 
+    burn = NULL, thin = 1L, seed = 1, cred = 0.9, sampler_route = "walker", 
+    kappa = 0.5, m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL, n_bootstrap = 500L, 
+    alpha_update = NULL) 
 }
 \arguments{
 \item{y}{The data.}

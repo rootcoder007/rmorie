@@ -5,7 +5,7 @@
 \alias{WtEntropy}
 \title{Wavelet (relative-energy Shannon) entropy, Rosso et al. (2001)}
 \usage{
-WtEntropy(x, wavelet = "db4", levels = 3, base = "e")
+WtEntropy(x, wavelet = "db4", levels = 3, base = "e") 
 }
 \arguments{
 \item{x}{Passed to \code{WtEnergy}.}

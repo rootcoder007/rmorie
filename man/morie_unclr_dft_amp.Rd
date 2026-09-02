@@ -5,7 +5,7 @@
 \alias{morie_unclr_dft_amp}
 \title{morie_unclr_dft_amp}
 \usage{
-morie_unclr_dft_amp(x)
+morie_unclr_dft_amp(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

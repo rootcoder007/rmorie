@@ -5,7 +5,7 @@
 \alias{morie_kamath_context_vector}
 \title{morie_kamath_context_vector}
 \usage{
-morie_kamath_context_vector(h_1_h_T, mapping = "mean")
+morie_kamath_context_vector(h_1_h_T, mapping = "mean") 
 }
 \arguments{
 \item{h_1_h_T}{State matrix, one row per step.}

@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_cheatsheet}
 \title{Cheatsheet: Brief description of the module}
 \usage{
-morie_tlsurvy_cheatsheet()
+morie_tlsurvy_cheatsheet() 
 }
 \description{
 A step of the tlsurvy_native implementation. No other function in the package calls it. See the file header for the source the module follows.

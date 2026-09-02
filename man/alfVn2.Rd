@@ -5,7 +5,7 @@
 \alias{alfVn2}
 \title{alfVn2}
 \usage{
-alfVn2(a)
+alfVn2(a) 
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}

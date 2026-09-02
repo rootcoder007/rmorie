@@ -6,7 +6,7 @@
 #' Hat values, residuals and (X\'X)^-1 for the OLS fit of y on X.
 #' Returns
 #'
-#' a list with n, p, e, h, sse and inv (inv[[k]] is COLUMN k of the
+#' a list with n, p, e, h, sse and inv (inv[\[k\]] is COLUMN k of the
 #' inverse), shared by the DFFITS, DFBETAS and COVRATIO diagnostics.
 #'
 #' @param y A vector; its length is taken.

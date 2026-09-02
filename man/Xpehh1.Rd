@@ -16,6 +16,7 @@ Xpehh1(hapA, hapB, core, positions = NULL, min_ehh = 0.05, standardize = NULL)
 \item{min_ehh}{Integration threshold.}
 
 \item{standardize}{Optional c(mean, sd).}
+
 }
 \value{
 List with \code{estimate}, \code{xpehh_unstandardized},

@@ -5,7 +5,7 @@
 \alias{lstm_step}
 \title{One LSTM cell step, gates in the order i, f, g, o}
 \usage{
-lstm_step(x, h, c, Wx, Wh, b)
+lstm_step(x, h, c, Wx, Wh, b) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

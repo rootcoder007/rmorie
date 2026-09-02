@@ -5,7 +5,9 @@
 \alias{morie_sdcfst}
 \title{Cross-fitted treatment effect with honest-forest nuisances}
 \usage{
-morie_sdcfst(y, D, X, K_fold = 5L, score = "aipw", learner = "forest", n_trees = 20L, mtry = NULL, min_leaf = 5L, max_depth = 6L, trim = 0.02, seed = 1, ridge = 1e-06)
+morie_sdcfst(y, D, X, K_fold = 5L, score = "aipw", learner = "forest", n_trees = 20L, 
+    mtry = NULL, min_leaf = 5L, max_depth = 6L, trim = 0.02, seed = 1, 
+    ridge = 1e-06) 
 }
 \arguments{
 \item{y}{Outcome.}

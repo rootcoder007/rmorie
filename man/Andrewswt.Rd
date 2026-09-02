@@ -2,14 +2,14 @@
 % Please edit documentation in R/andrew.R
 \name{Andrewswt}
 \alias{Andrewswt}
-\title{Andrews sine IRLS weight function.}
+\title{Andrews sine IRLS weight function}
 \usage{
 Andrewswt(r, A = 1.339)
 }
 \arguments{
-\item{r}{Scaled residuals.}
+\item{r}{See Usage.}
 
-\item{A}{Tuning constant; 1.339 gives 95\% Gaussian efficiency.}
+\item{A}{See Usage.}
 }
 \value{
 List with \code{weight}, \code{rejected}, \code{A}, \code{n}.

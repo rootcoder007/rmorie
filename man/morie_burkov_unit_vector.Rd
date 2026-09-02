@@ -5,10 +5,13 @@
 \alias{morie_burkov_unit_vector}
 \title{morie_burkov_unit_vector}
 \usage{
-morie_burkov_unit_vector(a)
+morie_burkov_unit_vector(a) 
 }
 \description{
 morie_burkov_unit_vector
+}
+\arguments{
+\item{a}{Argument \code{a}; see Usage.}
 }
 \value{
 A list with \code{unit}, \code{estimate}, \code{norm}, \code{n}, \code{method}.

@@ -5,10 +5,14 @@
 \alias{morie_alammar_multi_query_attention}
 \title{morie_alammar_multi_query_attention}
 \usage{
-morie_alammar_multi_query_attention(Q_heads, K_shared, V_shared, n_query_heads)
+morie_alammar_multi_query_attention(Q_heads, K_shared, V_shared, n_query_heads) 
 }
 \arguments{
 \item{K_shared,V_shared}{Single shared K and V matrices.}
+
+\item{Q_heads}{Argument \code{Q_heads}; see Usage.}
+
+\item{n_query_heads}{Argument \code{n_query_heads}; see Usage.}
 }
 \description{
 morie_alammar_multi_query_attention

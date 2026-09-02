@@ -5,7 +5,7 @@
 \alias{morie_timeRS_time_bin}
 \title{morie_timeRS_time_bin}
 \usage{
-morie_timeRS_time_bin(t, bin_days = 70, n_bins = 30)
+morie_timeRS_time_bin(t, bin_days = 70, n_bins = 30) 
 }
 \arguments{
 \item{t}{Passed to \code{.timeRS_time_bin}.}

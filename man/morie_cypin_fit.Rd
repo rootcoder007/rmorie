@@ -5,7 +5,7 @@
 \alias{morie_cypin_fit}
 \title{Logistic regression by iteratively reweighted least squares}
 \usage{
-morie_cypin_fit(X, y, ridge = 1e-06, iters = 50L, tol = 1e-12)
+morie_cypin_fit(X, y, ridge = 1e-06, iters = 50L, tol = 1e-12) 
 }
 \arguments{
 \item{X}{One descriptor row per compound.}

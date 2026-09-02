@@ -16,7 +16,7 @@ list: acf (index 1 is lag 0, acf[1] == 1), acvf, lags, n,
 max_lag, ci_bound, method.
 }
 \description{
-r_k = sum (y_t - ybar)(y_{t-k} - ybar) / sum (y_t - ybar)^2. Both
+r_k = sum (y_t - ybar)(y_\{t-k\} - ybar) / sum (y_t - ybar)^2. Both
 numerator and denominator divide by n, not n-k: that is the
 biased-but-positive-semidefinite convention, the one R's
 \code{acf} uses and the one \code{morie_acf} already uses. Chosen

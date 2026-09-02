@@ -5,7 +5,8 @@
 \alias{morie_gibbs_slice}
 \title{Gibbs sweep with a slice update per coordinate}
 \usage{
-morie_gibbs_slice(log_conditionals, x0, n = 2000L, w = NULL, burn = 0L, seed = 1L, bounds = NULL)
+morie_gibbs_slice(log_conditionals, x0, n = 2000L, w = NULL, burn = 0L, seed = 1L, 
+    bounds = NULL) 
 }
 \arguments{
 \item{log_conditionals}{List of functions; element \code{k} takes a   candidate value and the current state vector and returns the log of   the unnormalised full conditional of coordinate \code{k}.}

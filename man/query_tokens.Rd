@@ -5,7 +5,7 @@
 \alias{query_tokens}
 \title{query_tokens}
 \usage{
-query_tokens(n_queries, dim, seed = 0, scale = 0.02)
+query_tokens(n_queries, dim, seed = 0, scale = 0.02) 
 }
 \arguments{
 \item{n_queries}{Coerced to integer by the body, with \code{as.integer}.}

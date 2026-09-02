@@ -5,7 +5,8 @@
 \alias{snpeff}
 \title{snpeff}
 \usage{
-snpeff(cds, variants, cds_start = 0, upstream = 5000, downstream = 5000, transcript_len = NULL)
+snpeff(cds, variants, cds_start = 0, upstream = 5000, downstream = 5000, 
+    transcript_len = NULL) 
 }
 \arguments{
 \item{cds}{Coerced to character by the body, with \code{as.character}.}

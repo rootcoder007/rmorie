@@ -15,6 +15,7 @@ morie_copula_cdf(family, u, v, theta = NULL, nu = NULL)
 \item{theta}{copula parameter (rho for gaussian/t).}
 
 \item{nu}{degrees of freedom, t copula only.}
+
 }
 \value{
 numeric vector of CDF values.

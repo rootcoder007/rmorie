@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Combinatorial (unnormalised) Laplacian of a weighted graph.
+#' Combinatorial (unnormalised) Laplacian of a weighted graph
 #'
 #' \code{rowsum} must be zero to machine precision: the all-ones vector is
 #' always in the kernel.

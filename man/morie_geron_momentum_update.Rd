@@ -12,6 +12,8 @@ morie_geron_momentum_update(theta, grad, v, eta, beta = 0.9)
 \item{eta}{Positive learning rate.}
 
 \item{beta}{Momentum in [0, 1).}
+
+
 }
 \value{
 List with \code{theta_new}, \code{v_new}, \code{step}, \code{terminal_speedup}.

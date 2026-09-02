@@ -2,7 +2,7 @@
 % Please edit documentation in R/spffun.R
 \name{spffun}
 \alias{spffun}
-\title{F-function: the empty space (point-to-nearest-event) distribution.}
+\title{F-function: the empty space (point-to-nearest-event) distribution}
 \usage{
 spffun(points, region = NULL, r = NULL, n_grid = 40)
 }

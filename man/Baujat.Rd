@@ -2,14 +2,14 @@
 % Please edit documentation in R/mabaujat.R
 \name{Baujat}
 \alias{Baujat}
-\title{Baujat plot coordinates for a meta-analysis.}
+\title{Baujat plot coordinates for a meta-analysis}
 \usage{
 Baujat(yi, vi)
 }
 \arguments{
-\item{yi}{Effect estimates.}
+\item{yi}{See Usage.}
 
-\item{vi}{Their sampling variances.}
+\item{vi}{See Usage.}
 }
 \value{
 List with \code{x} (contribution to Q), \code{y} (influence on the pooled estimate), \code{theta_fe}, \code{theta_loo}, \code{k}.

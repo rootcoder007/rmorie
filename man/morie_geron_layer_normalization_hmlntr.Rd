@@ -12,6 +12,7 @@ morie_geron_layer_normalization_hmlntr(x, gamma = 1, beta = 0, eps = 1e-05)
 \item{gamma, beta}{Per-feature scale/shift.}
 
 \item{eps}{Variance floor.}
+
 }
 \value{
 List with y, x_hat, mu, var, estimate, n, method.

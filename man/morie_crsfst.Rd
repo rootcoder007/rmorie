@@ -5,7 +5,8 @@
 \alias{morie_crsfst}
 \title{Cross-fitted treatment effect on restricted mean survival time}
 \usage{
-morie_crsfst(time, event, D, X, K = 3L, tau = NULL, n_trees = 8L, min_leaf = 3L, max_depth = 3L, honest = TRUE, seed = 0, rule = "logrank")
+morie_crsfst(time, event, D, X, K = 3L, tau = NULL, n_trees = 8L, min_leaf = 3L, 
+    max_depth = 3L, honest = TRUE, seed = 0, rule = "logrank") 
 }
 \arguments{
 \item{time}{Observed time.}

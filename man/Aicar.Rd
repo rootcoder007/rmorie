@@ -2,16 +2,16 @@
 % Please edit documentation in R/aikarp.R
 \name{Aicar}
 \alias{Aicar}
-\title{AIC order selection for an autoregression.}
+\title{AIC order selection for an autoregression}
 \usage{
 Aicar(x, max_p = 10, demean = TRUE)
 }
 \arguments{
-\item{x}{The series.}
+\item{x}{See Usage.}
 
-\item{max_p}{Largest order considered.}
+\item{max_p}{See Usage.}
 
-\item{demean}{Subtract the sample mean first.}
+\item{demean}{See Usage.}
 }
 \value{
 List with \code{p}, \code{aic}, \code{aic_unnormalised}, \code{sigma2}, \code{pacf}, \code{n}.

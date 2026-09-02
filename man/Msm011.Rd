@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm011.R
 \name{Msm011}
 \alias{Msm011}
-\title{Marginal likelihood of the linear mixed model.}
+\title{Marginal likelihood of the linear mixed model}
 \usage{
 Msm011(X, Z, y, D, R = NULL, beta = NULL, restricted = FALSE)
 }

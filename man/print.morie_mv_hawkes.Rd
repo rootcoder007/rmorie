@@ -5,7 +5,7 @@
 \alias{print.morie_mv_hawkes}
 \title{Print method for \code{morie_mv_hawkes} objects}
 \usage{
-print.morie_mv_hawkes(x, ...)
+\method{print}{morie_mv_hawkes}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_mv_hawkes} object.}

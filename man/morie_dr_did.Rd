@@ -16,6 +16,7 @@ morie_dr_did(y_pre, y_post, d, x, trim = 0.995, alpha = 0.05)
 \item{trim}{Upper bound on the fitted propensity score.}
 
 \item{alpha}{Significance level.}
+
 }
 \value{
 Named list with \code{att}, \code{se}, \code{ci_low},

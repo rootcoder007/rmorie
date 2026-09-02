@@ -5,7 +5,7 @@
 \alias{morie_bnppct_quantile}
 \title{Invert the mixture CDF at q, normalising by the carried mass}
 \usage{
-morie_bnppct_quantile(q, w, mu, s2, lo = NULL, hi = NULL)
+morie_bnppct_quantile(q, w, mu, s2, lo = NULL, hi = NULL) 
 }
 \arguments{
 \item{q}{The probability.}

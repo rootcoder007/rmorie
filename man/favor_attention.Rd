@@ -5,7 +5,8 @@
 \alias{favor_attention}
 \title{favor_attention}
 \usage{
-favor_attention(Q, K, V, n_features = 128L, seed = 0L, kind = "positive", orthogonal = TRUE, causal = FALSE)
+favor_attention(Q, K, V, n_features = 128L, seed = 0L, kind = "positive", orthogonal = TRUE, 
+    causal = FALSE) 
 }
 \arguments{
 \item{Q}{A matrix; passed to \code{as.matrix}.}

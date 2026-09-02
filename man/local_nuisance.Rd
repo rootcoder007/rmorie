@@ -5,7 +5,7 @@
 \alias{local_nuisance}
 \title{Weighted linear fit of `target` on W near a point. weights are the}
 \usage{
-local_nuisance(target, W, weights, exclude = NULL, ridge = 1e-08)
+local_nuisance(target, W, weights, exclude = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{target}{A matrix; passed to \code{crossprod}.}

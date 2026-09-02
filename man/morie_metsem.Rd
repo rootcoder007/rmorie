@@ -5,7 +5,8 @@
 \alias{morie_metsem}
 \title{Assemble a community from its reads}
 \usage{
-morie_metsem(reads, k, tip_length = NULL, tip_ratio = 0.2, bubble_ratio = 0.5, rounds = 2L, min_length = NULL)
+morie_metsem(reads, k, tip_length = NULL, tip_ratio = 0.2, bubble_ratio = 0.5, 
+    rounds = 2L, min_length = NULL) 
 }
 \arguments{
 \item{reads}{The reads.}

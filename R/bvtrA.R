@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bias-variance decomposition of the expected prediction error.
+#' Bias-variance decomposition of the expected prediction error
 #'
-#' Formula: E(y - fhat)^2 = Var(e) + Bias[fhat]^2 + Var(fhat)
+#' Formula: E(y - fhat)^2 = Var(e) + Bias\[fhat\]^2 + Var(fhat)
 #'
 #' @param F One row per replicate fit, one column per evaluation point: the predictions fhat(x_j) from replicate r.
 #' @param f The true f(x_j) at the same n evaluation points.

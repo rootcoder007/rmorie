@@ -5,7 +5,7 @@
 \alias{nbeats_stack}
 \title{nbeats_stack}
 \usage{
-nbeats_stack(window, horizon, blocks, ridge = 1e-08)
+nbeats_stack(window, horizon, blocks, ridge = 1e-08) 
 }
 \arguments{
 \item{window}{Coerced to numeric by the body, with \code{as.numeric}.}

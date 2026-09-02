@@ -5,7 +5,7 @@
 \alias{morie_burkov_computational_graph}
 \title{Computational-graph forward and reverse pass (Burkov Ch 1)}
 \usage{
-morie_burkov_computational_graph(graph, inputs)
+morie_burkov_computational_graph(graph, inputs) 
 }
 \arguments{
 \item{graph}{Node list.}

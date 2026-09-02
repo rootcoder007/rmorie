@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_tps_shootings}
 \alias{morie_datasets_tps_shootings}
-\title{TPS Shootings and Firearm Discharges feed.}
+\title{TPS Shootings and Firearm Discharges feed}
 \usage{
 morie_datasets_tps_shootings(year = NULL, max_features = NULL)
 }
@@ -16,7 +16,7 @@ server-side.}
 A \code{data.frame}.
 }
 \description{
-TPS Shootings and Firearm Discharges feed.
+TPS Shootings and Firearm Discharges feed
 }
 \examples{
 \donttest{

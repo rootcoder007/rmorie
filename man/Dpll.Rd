@@ -5,7 +5,7 @@
 \alias{Dpll}
 \title{\\' Decide satisfiability of a CNF formula by DPLL}
 \usage{
-Dpll(cnf)
+Dpll(cnf) 
 }
 \arguments{
 \item{cnf}{Iterated over elementwise, with \code{lapply}.}

@@ -5,7 +5,10 @@
 \alias{morie_reinfc}
 \title{morie_reinfc}
 \usage{
-morie_reinfc(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0, sigma = 1, unit = "bernoulli-logistic", baseline = "comparison", mode = "immediate", alpha = 0.1, gamma = 0.9, rho = 0.1, episode_length = 1, trials = 100, eligibility = "p", rate_scaling = "sigma2", seed = 0)
+morie_reinfc(reward_fn, x = NULL, w = NULL, p = NULL, mu = 0, sigma = 1, unit = "bernoulli-logistic", 
+    baseline = "comparison", mode = "immediate", alpha = 0.1, gamma = 0.9, 
+    rho = 0.1, episode_length = 1, trials = 100, eligibility = "p", rate_scaling = "sigma2", 
+    seed = 0) 
 }
 \arguments{
 \item{reward_fn}{Passed to \code{.reinfc_run_gaussian}.}

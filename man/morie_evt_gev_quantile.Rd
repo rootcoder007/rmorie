@@ -5,10 +5,16 @@
 \alias{morie_evt_gev_quantile}
 \title{GEV quantile (Coles 2001 eq. 3.4, non-exceedance p)}
 \usage{
-morie_evt_gev_quantile(p, mu, sigma, xi)
+morie_evt_gev_quantile(p, mu, sigma, xi) 
 }
 \arguments{
 \item{p}{probability in (0, 1)}
+
+\item{mu}{Argument \code{mu}; see Usage.}
+
+\item{sigma}{Argument \code{sigma}; see Usage.}
+
+\item{xi}{Argument \code{xi}; see Usage.}
 }
 \description{
 GEV quantile (Coles 2001 eq. 3.4, non-exceedance p)

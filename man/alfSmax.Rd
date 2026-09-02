@@ -5,7 +5,7 @@
 \alias{alfSmax}
 \title{Softmax with max subtraction.  The stabilisation is part of the}
 \usage{
-alfSmax(v)
+alfSmax(v) 
 }
 \arguments{
 \item{v}{Numeric; passed to \code{max}.}

@@ -5,7 +5,7 @@
 \alias{morie_prphet_trend_matrix}
 \title{morie_prphet_trend_matrix}
 \usage{
-morie_prphet_trend_matrix(t, cps)
+morie_prphet_trend_matrix(t, cps) 
 }
 \arguments{
 \item{t}{A vector; its length is taken.}

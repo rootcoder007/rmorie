@@ -5,7 +5,7 @@
 \alias{morie_survrsf_conservation_residuals}
 \title{The partial sums M_k of Ishwaran & Kogalur (2007) over the ordered}
 \usage{
-morie_survrsf_conservation_residuals(times, events)
+morie_survrsf_conservation_residuals(times, events) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

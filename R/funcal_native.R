@@ -1,53 +1,53 @@
 # morie.fn -- function file (rootcoder007/morie)
-# eggNOG-mapper v2: functional annotation through orthology.
-#
-# Cantalapiedra, C. P., Hernandez-Plaza, A., Letunic, I., Bork, P., &
-# Huerta-Cepas, J. (2021) "eggNOG-mapper v2: Functional Annotation,
-# Orthology Assignments, and Domain Prediction at the Metagenomic Scale",
-# *Molecular Biology and Evolution* 38(12), 5825-5829.
-# doi:10.1093/molbev/msab293
-#
-# The premise is the first sentence of the paper: infer function "via
-# orthology, rather than by homology" -- a best BLAST hit is a homologue,
-# which may be a paralogue that has drifted in function, whereas an
-# orthologue is the gene that speciation separated and is far more likely
-# to have kept it. So the pipeline never transfers a term from a hit
-# directly. It runs in four stages (Figure 1):
-#
-# 1. **Seed orthologs.** Search each query against the reference and keep
-#    the best hit that clears the e-value, bit-score and coverage cut-offs.
-#    The search tool (DIAMOND, MMseqs2, HMMER) changes speed and
-#    sensitivity, not the logic downstream, so it is a label here.
-# 2. **Orthology assignment.** The seed hit places the query in a
-#    precomputed orthologous group, and the members of that group are the
-#    query's orthologues. Each relationship is typed by how many genes sit
-#    on each side: ``one2one``, ``one2many``, ``many2one``, ``many2many``.
-# 3. **Taxonomic scope.** Terms may only be transferred from orthologues
-#    inside the requested lineage, "preventing transferring functional
-#    terms from orthologs of unwanted lineages".
-# 4. **Transfer.** Terms held by the surviving orthologues become the
-#    query's annotation, per source: protein name, KEGG pathways and
-#    modules, GO labels, EC numbers, BiGG reactions, CAZy, COG category,
-#    the OG itself, and free-text description.
-#
-# **What is and is not here.** The eggNOG v5 database (5,090 organisms,
-# 4.4 M OGs) is not vendored, and no sequence search is run: the alignment
-# tools are external programs. Everything that decides *what gets
-# annotated and with what* is here and is exact -- the hit filters, the
-# orthology typing, the scope restriction, and the support rule for
-# accepting a term. Feed it hits and an orthologous-group table (from a
-# real eggNOG download, or from anything else with the same shape).
-#
-# ``min_support`` has no counterpart in the paper's defaults, where a term
-# held by any in-scope orthologue is transferred; it is exposed because a
-# single divergent orthologue is exactly how a wrong term propagates, and
-# ``min_support=1`` reproduces the paper's behaviour.
+#' eggNOG-mapper v2: functional annotation through orthology
+#'
+#' Cantalapiedra, C. P., Hernandez-Plaza, A., Letunic, I., Bork, P., &
+#' Huerta-Cepas, J. (2021) "eggNOG-mapper v2: Functional Annotation,
+#' Orthology Assignments, and Domain Prediction at the Metagenomic Scale",
+#' *Molecular Biology and Evolution* 38(12), 5825-5829.
+#' doi:10.1093/molbev/msab293
+#'
+#' The premise is the first sentence of the paper: infer function "via
+#' orthology, rather than by homology" -- a best BLAST hit is a homologue,
+#' which may be a paralogue that has drifted in function, whereas an
+#' orthologue is the gene that speciation separated and is far more likely
+#' to have kept it. So the pipeline never transfers a term from a hit
+#' directly. It runs in four stages (Figure 1):
+#'
+#' 1. **Seed orthologs.** Search each query against the reference and keep
+#'    the best hit that clears the e-value, bit-score and coverage cut-offs.
+#'    The search tool (DIAMOND, MMseqs2, HMMER) changes speed and
+#'    sensitivity, not the logic downstream, so it is a label here.
+#' 2. **Orthology assignment.** The seed hit places the query in a
+#'    precomputed orthologous group, and the members of that group are the
+#'    query's orthologues. Each relationship is typed by how many genes sit
+#'    on each side: ``one2one``, ``one2many``, ``many2one``, ``many2many``.
+#' 3. **Taxonomic scope.** Terms may only be transferred from orthologues
+#'    inside the requested lineage, "preventing transferring functional
+#'    terms from orthologs of unwanted lineages".
+#' 4. **Transfer.** Terms held by the surviving orthologues become the
+#'    query's annotation, per source: protein name, KEGG pathways and
+#'    modules, GO labels, EC numbers, BiGG reactions, CAZy, COG category,
+#'    the OG itself, and free-text description.
+#'
+#' **What is and is not here.** The eggNOG v5 database (5,090 organisms,
+#' 4.4 M OGs) is not vendored, and no sequence search is run: the alignment
+#' tools are external programs. Everything that decides *what gets
+#' annotated and with what* is here and is exact -- the hit filters, the
+#' orthology typing, the scope restriction, and the support rule for
+#' accepting a term. Feed it hits and an orthologous-group table (from a
+#' real eggNOG download, or from anything else with the same shape).
+#'
+#' ``min_support`` has no counterpart in the paper's defaults, where a term
+#' held by any in-scope orthologue is transferred; it is exposed because a
+#' single divergent orthologue is exactly how a wrong term propagates, and
+#' ``min_support=1`` reproduces the paper's behaviour.
 
-#' The four ways an orthology relationship can be shaped.
+#' The four ways an orthology relationship can be shaped
 #' @noRd
 ORTHOLOGY_TYPES <- c("one2one", "one2many", "many2one", "many2many")
 
-#' The annotation sources the paper lists.
+#' The annotation sources the paper lists
 #' @noRd
 ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
                         "bigg", "cazy", "cog_category", "og", "description")

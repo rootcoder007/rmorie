@@ -5,7 +5,7 @@
 \alias{morie_fgam_functional_gam}
 \title{morie_fgam_functional_gam}
 \usage{
-morie_fgam_functional_gam(X, Y, basis = NULL, n_x = 6, n_t = 6, lam_x = 1, lam_t = 1)
+morie_fgam_functional_gam(X, Y, basis = NULL, n_x = 6, n_t = 6, lam_x = 1, lam_t = 1) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

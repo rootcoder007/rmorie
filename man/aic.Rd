@@ -5,7 +5,7 @@
 \alias{aic}
 \title{aic}
 \usage{
-aic(loglik, n_par)
+aic(loglik, n_par) 
 }
 \arguments{
 \item{loglik}{Coerced to numeric by the body, with \code{as.numeric}.}

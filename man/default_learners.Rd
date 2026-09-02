@@ -5,7 +5,7 @@
 \alias{default_learners}
 \title{Default library, in the shape Pirracchio et al. use ------------}
 \usage{
-default_learners(p, ridge_penalties = c(0, 1, 10))
+default_learners(p, ridge_penalties = c(0, 1, 10)) 
 }
 \arguments{
 \item{p}{Passed to \code{>=}.}

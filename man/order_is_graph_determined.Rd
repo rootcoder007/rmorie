@@ -5,7 +5,7 @@
 \alias{order_is_graph_determined}
 \title{order_is_graph_determined}
 \usage{
-order_is_graph_determined(features, adj, perm, k_keep, tol = 1e-09)
+order_is_graph_determined(features, adj, perm, k_keep, tol = 1e-09) 
 }
 \arguments{
 \item{features}{A matrix; the body checks with \code{is.matrix}.}

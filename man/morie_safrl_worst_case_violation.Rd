@@ -5,7 +5,7 @@
 \alias{morie_safrl_worst_case_violation}
 \title{morie_safrl_worst_case_violation}
 \usage{
-morie_safrl_worst_case_violation(delta, gamma, epsilon)
+morie_safrl_worst_case_violation(delta, gamma, epsilon) 
 }
 \arguments{
 \item{delta}{Numeric; combined arithmetically in the body.}

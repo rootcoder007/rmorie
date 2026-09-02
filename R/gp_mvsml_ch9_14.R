@@ -36,7 +36,7 @@ morie_khatri_rao_rows <- function(A, B) {
 #' Extended approximate (compressed) kernel model (MVSML eq. 8.13)
 #'
 #' y = mu 1 + Z_E beta_E + P_u1 f + P_u2 l + eps.  Steps 1-7 of the
-#' summary on p.296: P = K_{L,m} U S^(-1/2) is the compressed design of
+#' summary on p.296: P = K_\{L,m\} U S^(-1/2) is the compressed design of
 #' (8.12) built from m of the L lines, P_u1 = Z_u1 P expands it to the n
 #' records, and P_u2 = P_u1 : Z_E is the row-wise Kronecker interaction
 #' with the environment design.
@@ -343,7 +343,7 @@ Flmint <- function(t, x_values, beta_values, mu = 0) {
 
 #' Basis expansion of the coefficient function (MVSML eq. 14.2)
 #'
-#' beta(t) = sum_{l=1}^{L1} beta_l phi_l(t), the device that makes (14.1)
+#' beta(t) = sum_\{l=1\}^\{L1\} beta_l phi_l(t), the device that makes (14.1)
 #' estimable: an infinite-dimensional unknown function is replaced by L1
 #' scalars, after which (14.1) collapses to the linear model (14.3).
 #' @noRd
@@ -382,7 +382,7 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 # u = (t - lo) / span, which differs from morie_fda_basis above.
 #' P-th derivative of the basis functions of (14.2).  For the Fourier
 #'
-#' basis phi_0 = 1, phi_{2k-1} = sin(2 pi k t / P) and phi_{2k} = cos(2
+#' basis phi_0 = 1, phi_\{2k-1\} = sin(2 pi k t / P) and phi_\{2k\} = cos(2
 #' pi k t / P), so the p-th derivative is (2 pi k / P)^p times a
 #' quarter-period phase shift.  Mirrors the Python
 #' _gp_core.fda_basis_derivative, including its polynomial convention u

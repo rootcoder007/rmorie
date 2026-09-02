@@ -5,7 +5,7 @@
 \alias{find_reasonable_epsilon}
 \title{Algorithm 4: double or halve the step size until the Metropolis}
 \usage{
-find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100)
+find_reasonable_epsilon(theta, logp, grad, rnd, eps = 1, max_doublings = 100) 
 }
 \arguments{
 \item{theta}{A vector; its length is taken.}

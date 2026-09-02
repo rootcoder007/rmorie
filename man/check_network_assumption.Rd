@@ -3,12 +3,16 @@
 % the formals.
 \name{check_network_assumption}
 \alias{check_network_assumption}
-\title{The conditions the identification rests on.}
+\title{The conditions the identification rests on}
 \usage{
-check_network_assumption(friends, N = NULL)
+check_network_assumption(friends, N = NULL) 
 }
 \description{
-Degrees must vanish relative to :math:`N`, and the network must be symmetric -- an asymmetric "friend" relation means influence flows somewhere the model does not represent.
+Degrees must vanish relative to \eqn{N}, and the network must be symmetric -- an asymmetric "friend" relation means influence flows somewhere the model does not represent.
+}
+\arguments{
+\item{friends}{Argument \code{friends}; see Usage.}
+\item{N}{Argument \code{N}; see Usage.}
 }
 \value{
 A list with \code{max_degree}, \code{max_share}, \code{sparse}, \code{asymmetric_edges}, \code{symmetric}, \code{note}.

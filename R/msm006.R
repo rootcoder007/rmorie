@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' One-way random-effects (mixed) model.
+#' One-way random-effects (mixed) model
 #'
 #' Formula: GY_ij = beta + b_i + e_ij with b_i ~ N(0, sigma2_b) (eq. 1.5).
 #' Balanced ANOVA estimators: sigma2_e = MSE, sigma2_b = (MSB - MSE)/r.

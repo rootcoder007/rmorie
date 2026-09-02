@@ -8,6 +8,7 @@ morie_pmf_moments(values, probs)
 }
 \arguments{
 \item{values, probs}{the pmf; probs must sum to 1.}
+
 }
 \value{
 list(mean, variance, sd).

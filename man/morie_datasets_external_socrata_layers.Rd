@@ -45,6 +45,6 @@ wrappers default to the UUID for stability; pass \code{resource_id = "<alias>"} 
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 reg <- morie_datasets_external_socrata_layers()
-reg\[, c("dataset_key", "resource_url")\]
+reg[, c("dataset_key", "resource_url")]
 \dontshow{\}) # examplesIf}
 }

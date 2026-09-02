@@ -3,7 +3,7 @@
 \name{smixd}
 \alias{smixd}
 \alias{morie_spatial_mixed_model}
-\title{Spatial linear mixed model via REML.}
+\title{Spatial linear mixed model via REML}
 \usage{
 smixd(x, y, coords)
 

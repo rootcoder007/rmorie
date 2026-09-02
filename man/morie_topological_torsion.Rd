@@ -17,3 +17,13 @@ morie_topological_torsion(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{elements}{Argument \code{elements}; see Usage.}
+\item{bonds}{Argument \code{bonds}; see Usage.}
+\item{reference}{Argument \code{reference}; see Usage.}
+\item{common_types}{Argument \code{common_types}; see Usage.}
+\item{activities}{Argument \code{activities}; see Usage.}
+\item{permutations}{Argument \code{permutations}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
+}
+

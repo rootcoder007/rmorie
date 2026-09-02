@@ -5,7 +5,7 @@
 \alias{MixCmp}
 \title{Section 9.7.4.  The three decompositions answer different questions}
 \usage{
-MixCmp(X, ncomp = NULL, maxiter = 200, seed = 1)
+MixCmp(X, ncomp = NULL, maxiter = 200, seed = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

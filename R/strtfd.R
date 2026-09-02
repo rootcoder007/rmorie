@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Allocate a stratified sample and report the variance it achieves.
+#' Allocate a stratified sample and report the variance it achieves
 #'
 #' Formula: proportional n_h prop. N_h; Neyman n_h prop. N_h S_h;
 #'   cost-optimal n_h prop. N_h S_h / sqrt(C_h);

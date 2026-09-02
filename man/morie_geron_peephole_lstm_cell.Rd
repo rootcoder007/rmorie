@@ -29,6 +29,16 @@ morie_geron_peephole_lstm_cell(
 \item{Uf, Ui, Uo}{Length-H diagonal peepholes.}
 
 \item{bf, bi, bg, bo}{Length-H biases.}
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with \code{h}, \code{c}, \code{f}, \code{i}, \code{g}, \code{o}.

@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Divergent transition count and rate.
+#' Divergent transition count and rate
 #'
 #' Formula: rate = n_divergent / n_total
 #'
 #' @param divergent Per-iteration 0/1 divergence indicators; a list of lists is one chain per row.
 
+#' @param divergent See Usage.
 #' @return List with ``count``, ``rate``, ``per_chain``, ``per_chain_rate``, ``any``, ``n``.
 #' @references Betancourt (2017), A Conceptual Introduction to Hamiltonian Monte Carlo, arXiv:1701.02434, Section 6.2: divergent transitions are 'extremely sensitive identifiers' of the pathological neighbourhoods a trajectory failed to explore. Verified against the paper.
 #' @export

@@ -13,6 +13,7 @@ morie_kamath_g_eval(x, y, rubric, model)
 carrying \code{scores}.}
 
 \item{model}{Judge returning one logit per point.}
+
 }
 \value{
 List with \code{estimate}, \code{probabilities}, \code{score_points}.

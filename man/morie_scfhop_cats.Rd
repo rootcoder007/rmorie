@@ -5,7 +5,7 @@
 \alias{morie_scfhop_cats}
 \title{The CATS correlation vector: type pairs by topological distance}
 \usage{
-morie_scfhop_cats(smiles, maxdist = 9L, scaling = "type")
+morie_scfhop_cats(smiles, maxdist = 9L, scaling = "type") 
 }
 \arguments{
 \item{smiles}{The molecule.}

@@ -5,7 +5,8 @@
 \alias{morie_samdec}
 \title{morie_samdec}
 \usage{
-morie_samdec(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_factor = 2, output_index = 0)
+morie_samdec(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_factor = 2, 
+    output_index = 0) 
 }
 \arguments{
 \item{prompt_tokens}{Passed to \code{decode_mask}.}

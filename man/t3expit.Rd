@@ -5,7 +5,7 @@
 \alias{t3expit}
 \title{t3expit}
 \usage{
-t3expit(x)
+t3expit(x) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

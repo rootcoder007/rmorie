@@ -5,7 +5,7 @@
 \alias{morie_alf3df_cheatsheet}
 \title{One-line summary of the alf3df module}
 \usage{
-morie_alf3df_cheatsheet()
+morie_alf3df_cheatsheet() 
 }
 \description{
 One-line summary of the alf3df module

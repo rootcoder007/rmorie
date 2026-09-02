@@ -5,7 +5,8 @@
 \alias{morie_crfsel}
 \title{Rank covariates by how the CATE forest uses them}
 \usage{
-morie_crfsel(y, W, X, n_trees = 200L, min_leaf = 5L, max_depth = 4L, decay = 2, seed = 0L, names = NULL, permutation = FALSE)
+morie_crfsel(y, W, X, n_trees = 200L, min_leaf = 5L, max_depth = 4L, decay = 2, 
+    seed = 0L, names = NULL, permutation = FALSE) 
 }
 \arguments{
 \item{y}{Numeric outcome vector.}

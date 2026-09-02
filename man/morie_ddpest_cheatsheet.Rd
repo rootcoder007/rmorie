@@ -5,7 +5,7 @@
 \alias{morie_ddpest_cheatsheet}
 \title{One-paragraph summary of the model}
 \usage{
-morie_ddpest_cheatsheet()
+morie_ddpest_cheatsheet() 
 }
 \description{
 One-paragraph summary of the model

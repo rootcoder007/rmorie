@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinary kriging prediction (exponential / gaussian / spherical).
+#' Ordinary kriging prediction (exponential / gaussian / spherical)
 #'
 #' \deqn{\hat Z(s_0) = \lambda^\top Z,
 #'   \begin{bmatrix}C & 1 \\ 1^\top & 0\end{bmatrix}

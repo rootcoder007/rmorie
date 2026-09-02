@@ -5,7 +5,7 @@
 \alias{LmsFilt}
 \title{LmsFilt}
 \usage{
-LmsFilt(primary, reference, order = 8, mu = 0.01, variable = FALSE, alpha = 0.02)
+LmsFilt(primary, reference, order = 8, mu = 0.01, variable = FALSE, alpha = 0.02) 
 }
 \arguments{
 \item{primary}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{PWaveDet}
 \title{Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never}
 \usage{
-PWaveDet(x, qrs, fs, template = NULL)
+PWaveDet(x, qrs, fs, template = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

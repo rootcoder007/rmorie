@@ -65,7 +65,7 @@
 
 # CBS statistic Z_C = max_{i<j} |Z_{ij}| on v; returns list(z, i, j)
 # where indices are 0-based half-open into v (i < j), matching Python.
-#' CBS statistic Z_C = max_{i<j} |Z_{ij}| on v; returns list(z, i, j)
+#' CBS statistic Z_C = max_\{i<j\} |Z_\{ij\}| on v; returns list(z, i, j)
 #'
 #' where indices are 0-based half-open into v (i < j), matching Python.
 #'

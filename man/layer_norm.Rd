@@ -5,7 +5,7 @@
 \alias{layer_norm}
 \title{layer_norm}
 \usage{
-layer_norm(x, gain = NULL, bias = NULL, eps = 1e-12)
+layer_norm(x, gain = NULL, bias = NULL, eps = 1e-12) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

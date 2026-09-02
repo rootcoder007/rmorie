@@ -5,7 +5,7 @@
 \alias{morie_mtdrl_history_features}
 \title{History feature vector}
 \usage{
-morie_mtdrl_history_features(history, n_arms)
+morie_mtdrl_history_features(history, n_arms) 
 }
 \arguments{
 \item{history}{List of (action, reward) pairs so far.}

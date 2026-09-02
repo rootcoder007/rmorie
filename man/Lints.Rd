@@ -2,7 +2,7 @@
 % Please edit documentation in R/linTS.R
 \name{Lints}
 \alias{Lints}
-\title{Linear Thompson sampling for contextual bandits.}
+\title{Linear Thompson sampling for contextual bandits}
 \usage{
 Lints(
   contexts,
@@ -15,19 +15,19 @@ Lints(
 )
 }
 \arguments{
-\item{contexts}{Context vector per arm at the current round.}
+\item{contexts}{See Usage.}
 
-\item{played}{Context vectors of the arms played so far.}
+\item{played}{See Usage.}
 
-\item{rewards}{Rewards observed for those plays.}
+\item{rewards}{See Usage.}
 
-\item{R}{Sub-Gaussian parameter of the reward noise.}
+\item{R}{See Usage.}
 
-\item{delta}{Confidence parameter.}
+\item{delta}{See Usage.}
 
-\item{horizon}{Time horizon T; the number of plays so far if omitted.}
+\item{horizon}{See Usage.}
 
-\item{z}{Standard normal draw used for the posterior sample.}
+\item{z}{See Usage.}
 }
 \value{
 List with \code{arm}, \code{scores}, \code{mu_hat}, \code{mu_tilde}, \code{v}, \code{d}.

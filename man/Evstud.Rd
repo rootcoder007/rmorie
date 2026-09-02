@@ -20,6 +20,8 @@ never-treated unit.}
 \item{max_lead, max_lag}{Truncate the window to [-max_lead, max_lag].}
 
 \item{ref}{Omitted event time.}
+
+
 }
 \value{
 List with \code{estimate}, \code{event_times}, \code{coef},

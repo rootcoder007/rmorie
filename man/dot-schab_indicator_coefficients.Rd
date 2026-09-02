@@ -18,5 +18,5 @@ The value of \code{b}, as built in the body.
 used: it is exact for polynomials and the indicator is a step
 function, so it converges slowly and silently -- and the indicator is
 the canonical target of the method. b_0 = F(z_k), b_p = (-1)^p
-H_{p-1}(z_k) f(z_k) / sqrt(p!)
+H_\{p-1\}(z_k) f(z_k) / sqrt(p!)
 }

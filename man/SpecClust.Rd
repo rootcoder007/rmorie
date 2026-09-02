@@ -5,7 +5,7 @@
 \alias{SpecClust}
 \title{L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST}
 \usage{
-SpecClust(a, k = 2L)
+SpecClust(a, k = 2L) 
 }
 \arguments{
 \item{a}{Passed to \code{.morie_spx_chkw}.}

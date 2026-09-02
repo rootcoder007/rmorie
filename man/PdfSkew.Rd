@@ -5,7 +5,7 @@
 \alias{PdfSkew}
 \title{Eq (3.4): S = (1/sigma^3) integral (eta - mu)^3 p(eta) d eta}
 \usage{
-PdfSkew(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+PdfSkew(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

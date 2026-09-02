@@ -80,7 +80,7 @@
   out
 }
 
-#' I_JSD = E_P\[-sp(-T)\] - E_{PxP~}\[sp(T)\]
+#' I_JSD = E_P\[-sp(-T)\] - E_\{PxP~\}\[sp(T)\]
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
@@ -106,7 +106,7 @@
        note     = "each term is bounded by construction")
 }
 
-#' I_DV = E_P[T] - log E_{PxP~}\[exp(T)\]
+#' I_DV = E_P\[T\] - log E_\{PxP~\}\[exp(T)\]
 #'
 #' A step of the infmax_native implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Quantize one vector: rotate, scalar-quantize, dequantize, rotate back.
+#' Quantize one vector: rotate, scalar-quantize, dequantize, rotate back
 #'
 #' ONLINE: the rotation and codebook are fixed in advance, so a vector is
 #' quantized on arrival with no knowledge of those that follow. The

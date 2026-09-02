@@ -2,7 +2,7 @@
 % Please edit documentation in R/trdpd.R
 \name{Treedepth}
 \alias{Treedepth}
-\title{How often the NUTS trajectory hit the tree-depth cap.}
+\title{How often the NUTS trajectory hit the tree-depth cap}
 \usage{
 Treedepth(depths, max_depth = 10)
 }

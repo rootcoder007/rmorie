@@ -5,7 +5,7 @@
 \alias{morie_spatial_emirt_theta_update_cpp}
 \title{morie_spatial_emirt_theta_update_cpp}
 \usage{
-morie_spatial_emirt_theta_update_cpp(theta, a, d, votes)
+morie_spatial_emirt_theta_update_cpp(theta, a, d, votes) 
 }
 \arguments{
 \item{theta}{Passed to \code{.Call}.}

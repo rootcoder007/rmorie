@@ -5,7 +5,7 @@
 \alias{changepoint_move_probabilities}
 \title{changepoint_move_probabilities}
 \usage{
-changepoint_move_probabilities(lam, k_max, cap = 0.9)
+changepoint_move_probabilities(lam, k_max, cap = 0.9) 
 }
 \arguments{
 \item{lam}{Numeric; combined arithmetically in the body.}

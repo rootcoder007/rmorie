@@ -10,6 +10,8 @@ morie_kamath_word2vec_skipgram(center_indices, context_indices, V, U)
 \item{center_indices, context_indices}{0-based vocabulary indices.}
 
 \item{V, U}{Input and output embedding matrices.}
+
+
 }
 \value{
 List with \code{log_likelihood}, \code{per_pair}, \code{probabilities}.

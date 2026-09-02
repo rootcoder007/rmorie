@@ -5,7 +5,7 @@
 \alias{LisaClust}
 \title{Local Moran eq (1.17) with EXACT conditional-randomization moments}
 \usage{
-LisaClust(x, w, alpha = 0.05)
+LisaClust(x, w, alpha = 0.05) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}

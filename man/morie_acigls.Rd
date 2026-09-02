@@ -5,7 +5,7 @@
 \alias{morie_acigls}
 \title{morie_acigls}
 \usage{
-morie_acigls(y, A, H, cluster, small_sample = TRUE)
+morie_acigls(y, A, H, cluster, small_sample = TRUE) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

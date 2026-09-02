@@ -5,10 +5,14 @@
 \alias{morie_kron}
 \title{morie_kron}
 \usage{
-morie_kron(A, B)
+morie_kron(A, B) 
 }
 \description{
 morie_kron
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{B}{Argument \code{B}; see Usage.}
 }
 \value{
 The value of \code{kronecker}.

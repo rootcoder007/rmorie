@@ -5,7 +5,7 @@
 \alias{morie_dimNet_bessel_basis}
 \title{Spherical Bessel radial basis}
 \usage{
-morie_dimNet_bessel_basis(d, cutoff = 5, n_basis = 8L)
+morie_dimNet_bessel_basis(d, cutoff = 5, n_basis = 8L) 
 }
 \arguments{
 \item{d}{Numeric distance.}

@@ -5,7 +5,7 @@
 \alias{morie_unifAlg_apply_subst}
 \title{morie_unifAlg_apply_subst}
 \usage{
-morie_unifAlg_apply_subst(t, subst)
+morie_unifAlg_apply_subst(t, subst) 
 }
 \arguments{
 \item{t}{Passed to \code{.unifAlg_check}.}
@@ -24,7 +24,7 @@ Resolution Principle", *Journal of the ACM* 12(1), 23-41,
 doi:10.1145/321250.321253. Sec. 5 (the Unification Theorem: any
 unifiable set has a most general unifier), the disagreement-set
 algorithm, the occurs check, and the factorisation
-:math:`\theta = \delta \circ \sigma` reproduced above.
+\eqn{\theta = \delta \circ \sigma} reproduced above.
 }
 \keyword{internal}
 \examples{

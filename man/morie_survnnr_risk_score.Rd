@@ -5,7 +5,7 @@
 \alias{morie_survnnr_risk_score}
 \title{morie_survnnr_risk_score}
 \usage{
-morie_survnnr_risk_score(fit_result, X)
+morie_survnnr_risk_score(fit_result, X) 
 }
 \arguments{
 \item{fit_result}{A list; the body reads \code{$activation}, \code{$b}, \code{$W} from it.}

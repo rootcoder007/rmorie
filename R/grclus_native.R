@@ -330,7 +330,7 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   mate
 }
 
-#' Mate: 0-based, mate[u] = v means u matched with v
+#' Mate: 0-based, mate\[u\] = v means u matched with v
 #'
 #' A step of the grclus_native implementation. Called by \code{.grclus_bisect}.
 #' See the file header for the source the module follows.

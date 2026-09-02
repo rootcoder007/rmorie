@@ -2,7 +2,7 @@
 % Please edit documentation in R/attsp.R
 \name{Sparseattn}
 \alias{Sparseattn}
-\title{Sparse (masked) scaled dot-product attention.}
+\title{Sparse (masked) scaled dot-product attention}
 \usage{
 Sparseattn(Q, K, V, S = NULL)
 }

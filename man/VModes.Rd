@@ -5,7 +5,8 @@
 \alias{VModes}
 \title{Variational mode decomposition, Dragomiretskiy & Zosso (2014)}
 \usage{
-VModes(x, K = 3, alpha = 2000, tau = 0, init = "uniform", tol = 1e-07, max_iter = 300)
+VModes(x, K = 3, alpha = 2000, tau = 0, init = "uniform", tol = 1e-07, 
+    max_iter = 300) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

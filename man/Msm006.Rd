@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm006.R
 \name{Msm006}
 \alias{Msm006}
-\title{One-way random-effects (mixed) model.}
+\title{One-way random-effects (mixed) model}
 \usage{
 Msm006(groups)
 }

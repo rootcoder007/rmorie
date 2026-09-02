@@ -5,7 +5,7 @@
 \alias{morie_secaead_aead_decrypt}
 \title{morie_secaead_aead_decrypt}
 \usage{
-morie_secaead_aead_decrypt(key, nonce, ciphertext, tag, aad = NULL)
+morie_secaead_aead_decrypt(key, nonce, ciphertext, tag, aad = NULL) 
 }
 \arguments{
 \item{key}{Passed to \code{morie_secaead_poly1305_key_gen}.}

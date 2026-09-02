@@ -2,16 +2,16 @@
 % Please edit documentation in R/vitlrn.R
 \name{Vitlnorm}
 \alias{Vitlnorm}
-\title{Layer normalisation.}
+\title{Layer normalisation}
 \usage{
 Vitlnorm(x, gamma = NULL, beta = NULL)
 }
 \arguments{
-\item{x}{One sample per row; a flat sequence is treated as one sample.}
+\item{x}{See Usage.}
 
-\item{gamma}{Per-unit gain; ones if omitted.}
+\item{gamma}{See Usage.}
 
-\item{beta}{Per-unit bias; zeros if omitted.}
+\item{beta}{See Usage.}
 }
 \value{
 List with \code{y}, \code{mu}, \code{sigma}, \code{n}, \code{H}.

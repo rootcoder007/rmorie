@@ -5,7 +5,7 @@
 \alias{morie_deviance_residuals}
 \title{morie_deviance_residuals}
 \usage{
-morie_deviance_residuals(fit, y)
+morie_deviance_residuals(fit, y) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$family}, \code{$fitted} from it.}

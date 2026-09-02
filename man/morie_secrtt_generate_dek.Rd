@@ -5,7 +5,7 @@
 \alias{morie_secrtt_generate_dek}
 \title{Derive a per-record DEK}
 \usage{
-morie_secrtt_generate_dek(master_seed, record_id, salt = NULL)
+morie_secrtt_generate_dek(master_seed, record_id, salt = NULL) 
 }
 \arguments{
 \item{master_seed}{Raw bytes.}

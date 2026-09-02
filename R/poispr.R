@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Conjugate Poisson analysis with its negative-binomial predictive.
+#' Conjugate Poisson analysis with its negative-binomial predictive
 #'
 #' The predictive is NEGATIVE BINOMIAL, not Poisson, so its variance
 #' strictly exceeds its mean by the factor \code{overdispersion}.

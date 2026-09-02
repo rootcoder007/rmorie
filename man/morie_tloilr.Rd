@@ -5,7 +5,7 @@
 \alias{morie_tloilr}
 \title{Main entry point -- compact alias per ledger/NAMING.md}
 \usage{
-morie_tloilr(Q1, Q0, kappa)
+morie_tloilr(Q1, Q0, kappa) 
 }
 \arguments{
 \item{Q1}{Passed to \code{.tloilr_constrained_value}.}

@@ -5,11 +5,13 @@
 \alias{morie_kamath_moe_topk_gating}
 \title{morie_kamath_moe_topk_gating}
 \usage{
-morie_kamath_moe_topk_gating(x, W_g, k = 2)
+morie_kamath_moe_topk_gating(x, W_g, k = 2) 
 }
 \arguments{
 \item{W_g}{Gate projection, d x n.}
 \item{k}{Experts kept.}
+
+\item{x}{Argument \code{x}; see Usage.}
 }
 \description{
 morie_kamath_moe_topk_gating

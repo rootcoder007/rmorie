@@ -5,7 +5,7 @@
 \alias{morie_geron_peephole_lstm}
 \title{Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)}
 \usage{
-morie_geron_peephole_lstm(x_t, h_prev, c_prev, weights)
+morie_geron_peephole_lstm(x_t, h_prev, c_prev, weights) 
 }
 \arguments{
 \item{x_t,h_prev,c_prev}{Input and previous state.}

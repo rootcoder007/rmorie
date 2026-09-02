@@ -5,7 +5,7 @@
 \alias{martingale_variance}
 \title{martingale_variance}
 \usage{
-martingale_variance(D)
+martingale_variance(D) 
 }
 \arguments{
 \item{D}{Coerced to numeric by the body, with \code{as.numeric}.}

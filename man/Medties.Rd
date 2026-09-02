@@ -5,10 +5,14 @@
 \alias{Medties}
 \title{Ties at the combined median -- Sec. 6.4, p. 247}
 \usage{
-Medties(x, y)
+Medties(x, y) 
 }
 \description{
 Ties at the combined median -- Sec. 6.4, p. 247
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{u_strict}, \code{u_inclusive}, \code{u_split}, \code{t_strict}, \code{t_inclusive}, \code{nties}, \code{median}, \code{m}, \code{n}.

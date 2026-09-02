@@ -5,7 +5,7 @@
 \alias{morie_bnppvl_loglik}
 \title{The log likelihood of the cell configuration}
 \usage{
-morie_bnppvl_loglik(u, q, kind = "exact")
+morie_bnppvl_loglik(u, q, kind = "exact") 
 }
 \arguments{
 \item{u}{Observations mapped onto the unit interval.}

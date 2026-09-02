@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' How far the initial fit was from solving the efficient score equation.
+#' How far the initial fit was from solving the efficient score equation
 #'
 #' The initial fit generally leaves a non-zero empirical score; the
 #' targeted fit must drive it to numerical zero.

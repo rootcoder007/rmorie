@@ -5,7 +5,8 @@
 \alias{morie_awltrn}
 \title{Augmented outcome-weighted learning (native R arm)}
 \usage{
-morie_awltrn(R = NULL, A = NULL, H = NULL, propensity = NULL, method = "aol", prognostic = NULL, shift = NULL, ridge = 1e-06, stages = NULL)
+morie_awltrn(R = NULL, A = NULL, H = NULL, propensity = NULL, method = "aol", 
+    prognostic = NULL, shift = NULL, ridge = 1e-06, stages = NULL) 
 }
 \arguments{
 \item{R}{Numeric vector of outcomes (single-stage only).}

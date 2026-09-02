@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_brr}
 \alias{morie_weights_brr}
-\title{Balanced Repeated Replication (BRR) weights.}
+\title{Balanced Repeated Replication (BRR) weights}
 \usage{
 morie_weights_brr(weights, strata, n_replicates = NULL, seed = 42)
 }

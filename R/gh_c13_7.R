@@ -3,7 +3,7 @@
 #'
 #' H ~ int BP(c, H0_lambda) dPi(lambda) mixes over the base hazard.  The
 #' prior mean is then the weighted mixture of the component means,
-#' E H(t) = sum_j w_j H0_{lambda_j}(t) -- mixing enlarges the support
+#' E H(t) = sum_j w_j H0_\{lambda_j\}(t) -- mixing enlarges the support
 #' without disturbing the mean structure, which is why it is the standard
 #' way to make a beta process prior less committal.
 #'

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitgmu.R
 \name{Compgeo}
 \alias{Compgeo}
-\title{Geometric mean of the parts of a single composition.}
+\title{Geometric mean of the parts of a single composition}
 \usage{
 Compgeo(x)
 }

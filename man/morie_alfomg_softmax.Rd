@@ -5,7 +5,7 @@
 \alias{morie_alfomg_softmax}
 \title{Softmax, shifted by the maximum before exponentiating}
 \usage{
-morie_alfomg_softmax(logits)
+morie_alfomg_softmax(logits) 
 }
 \arguments{
 \item{logits}{A numeric vector.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/adGAN.R
 \name{Ganomscore}
 \alias{Ganomscore}
-\title{GANomaly anomaly score from encoder-decoder-encoder latents.}
+\title{GANomaly anomaly score from encoder-decoder-encoder latents}
 \usage{
 Ganomscore(z, zhat, threshold = 0.5)
 }

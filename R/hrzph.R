@@ -7,11 +7,11 @@
 #' the book writes the model as log Lambda_0(Y) = X beta + U with U
 #' extreme-value (6.31), so the conditional hazard carries exp(-x beta), not
 #' exp(+x beta), and every formula below follows that.  The partial likelihood
-#' (6.32) is L_np(b) = prod_i exp(-X_i b) / sum_{j in R(Y_i)} exp(-X_j b),
-#' with R(y) = {i : Y_i >= y} the risk set at y, maximised here by
+#' (6.32) is L_np(b) = prod_i exp(-X_i b) / sum_\{j in R(Y_i)\} exp(-X_j b),
+#' with R(y) = \{i : Y_i >= y\} the risk set at y, maximised here by
 #' Newton-Raphson on its logarithm.  The integrated baseline hazard is the
 #' Tsiatis (1981) sample analogue of (6.35), printed as (6.36),
-#' Lambda_n0(y) = sum_{i : Y_i <= y} 1 / sum_{j in R(Y_i)} exp(-X_j b_n).
+#' Lambda_n0(y) = sum_\{i : Y_i <= y\} 1 / sum_\{j in R(Y_i)\} exp(-X_j b_n).
 #' The covariance of b_n is the inverse observed information, V_nb of (6.34).
 #' A coefficient here is therefore the NEGATIVE of the usual Cox coefficient
 #' for the same data; that is the book convention, not an error.

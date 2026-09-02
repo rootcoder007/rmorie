@@ -5,7 +5,7 @@
 \alias{morie_propinf_sorted_representation}
 \title{Sorted feature vector: canonicalise then flatten (Algorithm 1)}
 \usage{
-morie_propinf_sorted_representation(net, metric = NULL)
+morie_propinf_sorted_representation(net, metric = NULL) 
 }
 \arguments{
 \item{net}{Network as returned by \code{morie_propinf_train_fcnn}.}

@@ -5,10 +5,12 @@
 \alias{morie_alammar_simcse_dropout_aug}
 \title{morie_alammar_simcse_dropout_aug}
 \usage{
-morie_alammar_simcse_dropout_aug(embeddings_dropout1, embeddings_dropout2, tau = 0.05)
+morie_alammar_simcse_dropout_aug(embeddings_dropout1, embeddings_dropout2, tau = 0.05) 
 }
 \arguments{
 \item{embeddings_dropout1,embeddings_dropout2}{Two dropout passes of   the same sentences.}
+
+\item{tau}{Argument \code{tau}; see Usage.}
 }
 \description{
 morie_alammar_simcse_dropout_aug

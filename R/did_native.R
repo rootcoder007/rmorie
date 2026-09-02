@@ -161,7 +161,7 @@
 #' `DRDID::drdid_panel`).
 #'
 #' @srrstats {G1.0} Sant'Anna & Zhao (2020), Journal of Econometrics
-#'   219(1) — improved doubly robust DiD, panel estimand.
+#'   219(1) -- improved doubly robust DiD, panel estimand.
 #' @noRd
 .morie_drdid_panel_native <- function(dy, D, X) {
   n <- length(dy)

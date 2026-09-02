@@ -5,7 +5,7 @@
 \alias{MaFir}
 \title{Eqs (3.97)-(3.99).  With no coefficients the equal-weight boxcar is}
 \usage{
-MaFir(x, b_k = NULL, N = NULL, n = NULL)
+MaFir(x, b_k = NULL, N = NULL, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

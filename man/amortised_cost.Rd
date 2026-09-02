@@ -5,7 +5,7 @@
 \alias{amortised_cost}
 \title{amortised_cost}
 \usage{
-amortised_cost(encoder_ms, decoder_ms, n_prompts)
+amortised_cost(encoder_ms, decoder_ms, n_prompts) 
 }
 \arguments{
 \item{encoder_ms}{Coerced to numeric by the body, with \code{as.numeric}.}

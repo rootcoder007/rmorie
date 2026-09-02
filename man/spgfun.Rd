@@ -2,7 +2,7 @@
 % Please edit documentation in R/spgfun.R
 \name{spgfun}
 \alias{spgfun}
-\title{G-function: the nearest-neighbour distance distribution.}
+\title{G-function: the nearest-neighbour distance distribution}
 \usage{
 spgfun(points, r = NULL, region = NULL)
 }

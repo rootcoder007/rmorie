@@ -5,7 +5,7 @@
 \alias{morie_vepan_cheatsheet}
 \title{morie_vepan_cheatsheet}
 \usage{
-morie_vepan_cheatsheet()
+morie_vepan_cheatsheet() 
 }
 \description{
 A step of the vepan_native implementation. No other function in the package calls it. See the file header for the source the module follows.

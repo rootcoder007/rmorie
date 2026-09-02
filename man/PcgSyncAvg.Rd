@@ -5,7 +5,7 @@
 \alias{PcgSyncAvg}
 \title{S_avg(f) = (1/M) sum |PCG_k(f)|^2.  The averaging is of POWER}
 \usage{
-PcgSyncAvg(cycles, fs = 1)
+PcgSyncAvg(cycles, fs = 1) 
 }
 \arguments{
 \item{cycles}{Iterated over elementwise, with \code{lapply}.}

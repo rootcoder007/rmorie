@@ -5,7 +5,8 @@
 \alias{morie_surxgb_aft_gradient_hessian}
 \title{morie_surxgb_aft_gradient_hessian}
 \usage{
-morie_surxgb_aft_gradient_hessian(y_lower, y_upper, u, sigma = 1, dist = "normal", method = "analytic", eps = 1e-05)
+morie_surxgb_aft_gradient_hessian(y_lower, y_upper, u, sigma = 1, dist = "normal", method = "analytic", 
+    eps = 1e-05) 
 }
 \arguments{
 \item{y_lower}{Passed to \code{morie_surxgb_aft_loss}.}

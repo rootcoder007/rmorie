@@ -2,12 +2,12 @@
 % Please edit documentation in R/sgteig.R
 \name{Sgteigcent}
 \alias{Sgteigcent}
-\title{Eigenvector centrality from the leading eigenvector (re-export).}
+\title{Eigenvector centrality from the leading eigenvector (re-export)}
 \usage{
 Sgteigcent(A)
 }
 \arguments{
-\item{A}{Symmetric non-negative adjacency matrix.}
+\item{A}{See Usage.}
 }
 \value{
 List with the payload of :func:\code{morie.fn.eigcen.eigcent}.

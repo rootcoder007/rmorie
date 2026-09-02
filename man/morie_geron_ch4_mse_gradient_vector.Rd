@@ -8,6 +8,8 @@ morie_geron_ch4_mse_gradient_vector(X, y, theta)
 }
 \arguments{
 \item{X, y, theta}{Design, targets and parameters.}
+
+
 }
 \value{
 List with \code{gradient}, \code{cost}, \code{grad_norm}.

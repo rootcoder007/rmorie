@@ -5,7 +5,7 @@
 \alias{poltrx_gamma}
 \title{Marsaglia-Tsang Gamma sampler, shape >= 1, matching the Python arm}
 \usage{
-poltrx_gamma(e, shape)
+poltrx_gamma(e, shape) 
 }
 \arguments{
 \item{e}{Passed to \code{.ghc_unif}.}

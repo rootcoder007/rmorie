@@ -5,7 +5,7 @@
 \alias{BilinWarp}
 \title{Prewarp a digital cutoff before handing it to an analog design}
 \usage{
-BilinWarp(omega, T = 1)
+BilinWarp(omega, T = 1) 
 }
 \arguments{
 \item{omega}{A digital frequency or vector of them, strictly inside   minus pi to pi.}

@@ -5,7 +5,7 @@
 \alias{FetalEcg}
 \title{FetalEcg}
 \usage{
-FetalEcg(abdominal, chest, order = 32, mu = 0.005, method = "lms")
+FetalEcg(abdominal, chest, order = 32, mu = 0.005, method = "lms") 
 }
 \arguments{
 \item{abdominal}{Coerced to numeric by the body, with \code{as.numeric}.}

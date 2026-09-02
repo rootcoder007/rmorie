@@ -9,6 +9,9 @@ morie_kamath_multimodal_mae(x_visible, x_masked_true, masks, decoders = NULL)
 \arguments{
 \item{x_visible, x_masked_true, masks, decoders}{Named lists keyed by modality
 (a bare object is treated as the single modality "default").}
+
+
+
 }
 \value{
 List with \code{estimate}, \code{per_modality}, \code{n_masked}.

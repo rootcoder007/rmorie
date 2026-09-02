@@ -16,6 +16,7 @@ morie_geron_elastic_net(X, y, theta, alpha, r, fit_intercept = TRUE)
 \item{r}{L1 ratio in [0, 1].}
 
 \item{fit_intercept}{Logical.}
+
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty}, \code{gradient}.

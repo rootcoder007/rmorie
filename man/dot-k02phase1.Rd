@@ -7,7 +7,11 @@
 .k02phase1(a, n, m2)
 }
 \arguments{
-\item{A}{symmetric adjacency (or weight) matrix.}
+\item{a}{See Usage.}
+
+\item{n}{See Usage.}
+
+\item{m2}{See Usage.}
 }
 \value{
 list: estimate, communities, n_communities, modularity_before,

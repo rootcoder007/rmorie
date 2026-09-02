@@ -5,7 +5,7 @@
 \alias{Divergence}
 \title{Eq (10.117), the closed form of the symmetric divergence of}
 \usage{
-Divergence(m1, m2, C1, C2)
+Divergence(m1, m2, C1, C2) 
 }
 \arguments{
 \item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}

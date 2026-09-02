@@ -3,12 +3,24 @@
 % the formals.
 \name{morie_survvae_exact_loglik}
 \alias{morie_survvae_exact_loglik}
-\title{The true mixture log-likelihood the bound sits underneath.}
+\title{The true mixture log-likelihood the bound sits underneath}
 \usage{
-morie_survvae_exact_loglik(X, y_lower, events, W, bias, shapes, scales, primitive = "weibull", alpha = 1)
+morie_survvae_exact_loglik(X, y_lower, events, W, bias, shapes, scales, primitive = "weibull", 
+    alpha = 1) 
 }
 \description{
 Computes \eqn{\ln \sum_k g_k \exp(\cdot)} rather than the Jensen-relaxed sum. The anchor verifies this is at least as large as the ELBO from \code{morie_survvae_elbo} on every fit.
+}
+\arguments{
+\item{X}{Argument \code{X}; see Usage.}
+\item{y_lower}{Argument \code{y_lower}; see Usage.}
+\item{events}{Argument \code{events}; see Usage.}
+\item{W}{Argument \code{W}; see Usage.}
+\item{bias}{Argument \code{bias}; see Usage.}
+\item{shapes}{Argument \code{shapes}; see Usage.}
+\item{scales}{Argument \code{scales}; see Usage.}
+\item{primitive}{Argument \code{primitive}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 Named list with \code{loglik}, \code{uncensored},   \code{censored}.

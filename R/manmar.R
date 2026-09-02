@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bucher adjusted indirect comparison.
+#' Bucher adjusted indirect comparison
 #'
 #' Formula: d_AC = d_AB - d_CB; var(d_AC) = v_AB + v_CB
 #'
@@ -9,6 +9,11 @@
 #' @param v_CB Its variance.
 #' @param alpha Two-sided significance level.
 
+#' @param d_AB See Usage.
+#' @param v_AB See Usage.
+#' @param d_CB See Usage.
+#' @param v_CB See Usage.
+#' @param alpha See Usage.
 #' @return List with ``estimate``, ``variance``, ``se``, ``z``, ``p_value``, ``ci_lower``, ``ci_upper``.
 #' @references Bucher, Guyatt, Griffith and Walter (1997), The results of direct and indirect treatment comparisons in meta-analysis of randomized controlled trials, Journal of Clinical Epidemiology 50:683-691. Paywalled; d_AC = d_AB - d_CB with variances added is the standard published form, restated identically in every network meta-analysis source consulted.
 #' @export

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 # Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}'.
-#' Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}\'
+#' Internal: Gamma_l = n^-1 sum_\{t=l+1\}^\{n\} e_t e_\{t-l\}\'
 #'
 #' A step of the whtnse implementation. Called by \code{morie_portmanteau_hosking}.
 #' See the file header for the source the module follows.

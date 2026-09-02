@@ -127,7 +127,7 @@ morie_propinf_fcnn_predict <- function(net, X) {
 #'
 #' @param net Network as returned by \code{morie_propinf_train_fcnn}.
 #' @param t Index of a hidden layer.
-#' @param sigma Permutation of \code{seq_len(nrow(W[[t]]))}.
+#' @param sigma Permutation of \code{seq_len(nrow(W[\[t\]]))}.
 #' @return A permuted copy of the network.
 #' @export
 morie_propinf_permute_hidden_layer <- function(net, t, sigma) {

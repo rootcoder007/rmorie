@@ -5,7 +5,7 @@
 \alias{morie_ncfRS_mlp_layers}
 \title{morie_ncfRS_mlp_layers}
 \usage{
-morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs)
+morie_ncfRS_mlp_layers(p_u, q_i, Ws, bs) 
 }
 \arguments{
 \item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -4,7 +4,7 @@
 \alias{Glivenko}
 \alias{morie_ksr03_kosorok_glivenko_cantelli}
 \alias{morie_kosorok_glivenko_cantelli}
-\title{Uniform distance sup_t |F_n(t) - F(t)|, with the DKW tail bound.}
+\title{Uniform distance sup_t |F_n(t) - F(t)|, with the DKW tail bound}
 \usage{
 Glivenko(x, F)
 

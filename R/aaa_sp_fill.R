@@ -510,7 +510,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 
 #' Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
 #'
-#' the approach but does not print Eg[M2] or Varg[M2]; both are derived
+#' the approach but does not print Eg\[M2\] or Varg\[M2\]; both are derived
 #' from the quadratic-form moments and are stated in the Python
 #' docstring.  Only the SYMMETRIC part of W contributes.
 #'
@@ -576,7 +576,7 @@ MantelZ <- function(coords, x, w, u = NULL) {
   )
 }
 
-#' Eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book\'s own
+#' Eq (1.16).  Eg\[Ires\] = n tr\[MW\] / \{(n-k) w..\} is the book\'s own
 #'
 #' formula, Sec. 1.3.2, and is reproduced term for term.  The variance
 #' is derived from the exact moments of a ratio of quadratic forms in
@@ -757,7 +757,7 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
 
 # --- Ch 4: semivariogram and periodogram -----------------------------------
 
-#' Gamma(h) = c0 + c{3h/(2a) - (1/2)(h/a)^3} on 0 < h <= a, eq (4.15)
+#' Gamma(h) = c0 + c\{3h/(2a) - (1/2)(h/a)^3\} on 0 < h <= a, eq (4.15)
 #'
 #' plus the nugget of Sec. 4.3.6; covariance eq (4.14).  gamma(0) = 0
 #' ALWAYS -- the discontinuity at the origin IS the nugget, and dropping
@@ -1111,7 +1111,7 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
 #' Cohen\'s kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
 #'
 #' same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij =
-#' I{x_i = y_j}.  The kappa coefficient itself is NOT in the book.
+#' I\{x_i = y_j\}.  The kappa coefficient itself is NOT in the book.
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param y Passed to \code{.morie_spx_chkv}.
@@ -1465,7 +1465,7 @@ SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
   )
 }
 
-#' Alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
+#' Alpha = sum_x min(p,q) = 1 - TV(p,q); E\[tokens\] =
 #'
 #' (1 - alpha^(gamma+1))/(1 - alpha), capped at gamma+1 (a rejected
 #' token is resampled from the residual and still counts).  Leviathan,
@@ -1982,12 +1982,12 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
   )
 }
 
-#' Psi = E\[ {g(A - delta | H) / g(A | H)} Y \] -- the density ratio at
+#' Psi = E\[ \{g(A - delta | H) / g(A | H)\} Y \] -- the density ratio at
 #' the
 #'
 #' BACK-shifted exposure.  Forward-shifting is the sign error this
 #' estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2),
-#' so w = exp{(delta/tau^2)(A - H\'gamma - delta/2)}.  Diaz & van der
+#' so w = exp\{(delta/tau^2)(A - H\'gamma - delta/2)\}.  Diaz & van der
 #' Laan (2012, 2018).  NOT in Schabenberger & Gotway.
 #'
 #' @param y Passed to \code{.morie_spx_chkv}.

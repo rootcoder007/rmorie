@@ -2,7 +2,7 @@
 % Please edit documentation in R/spcont.R
 \name{spcont}
 \alias{spcont}
-\title{Mean-square continuity, decided by the covariance at the origin.}
+\title{Mean-square continuity, decided by the covariance at the origin}
 \usage{
 spcont(cov_func, tol = 1e-08)
 }

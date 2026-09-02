@@ -5,7 +5,7 @@
 \alias{translate}
 \title{translate}
 \usage{
-translate(seq, to_stop = FALSE)
+translate(seq, to_stop = FALSE) 
 }
 \arguments{
 \item{seq}{Coerced to character by the body, with \code{as.character}.}

@@ -5,7 +5,7 @@
 \alias{random_sign_flip}
 \title{Random sign flip on the positional encoding}
 \usage{
-random_sign_flip(pe, rng)
+random_sign_flip(pe, rng) 
 }
 \arguments{
 \item{pe}{Positional encoding matrix (n x d).}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Virtual loss for parallel Monte-Carlo tree search.
+#' Virtual loss for parallel Monte-Carlo tree search
 #'
 #' N' = N + nvl * pending; W' = W - nvl * pending; Q' = W'/N'.
 #'

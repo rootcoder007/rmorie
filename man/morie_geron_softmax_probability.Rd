@@ -8,6 +8,7 @@ morie_geron_softmax_probability(X, theta)
 }
 \arguments{
 \item{X, theta}{Design and (n, K) parameters.}
+
 }
 \value{
 List with \code{probabilities}, 0-based \code{predictions}, \code{scores}.

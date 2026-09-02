@@ -5,7 +5,7 @@
 \alias{morie_timeRS_user_bias}
 \title{morie_timeRS_user_bias}
 \usage{
-morie_timeRS_user_bias(b_u, alpha_u, t, t_user, per_day = NULL, beta = .timeRS_BETA)
+morie_timeRS_user_bias(b_u, alpha_u, t, t_user, per_day = NULL, beta = .timeRS_BETA) 
 }
 \arguments{
 \item{b_u}{Passed to \code{.timeRS_user_bias}.}

@@ -5,7 +5,7 @@
 \alias{surepi_cheatsheet}
 \title{surepi_cheatsheet}
 \usage{
-surepi_cheatsheet()
+surepi_cheatsheet() 
 }
 \description{
 A step of the surepi_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -9,6 +9,7 @@ morie_taphonomy_likelihood_ratio(loglik_h1, loglik_h2)
 \arguments{
 \item{loglik_h1, loglik_h2}{Log-likelihoods of the evidence under \eqn{H_1}
 and \eqn{H_2} (e.g. from \code{\link{morie_taphonomy_evidence_loglik}}).}
+
 }
 \value{
 A named \code{list} (\code{double} where numeric): \code{lr},

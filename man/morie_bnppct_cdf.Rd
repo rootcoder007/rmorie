@@ -5,7 +5,7 @@
 \alias{morie_bnppct_cdf}
 \title{Unnormalised mixture CDF}
 \usage{
-morie_bnppct_cdf(x, w, mu, s2)
+morie_bnppct_cdf(x, w, mu, s2) 
 }
 \arguments{
 \item{x}{The point.}

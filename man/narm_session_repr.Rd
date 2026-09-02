@@ -5,7 +5,7 @@
 \alias{narm_session_repr}
 \title{narm_session_repr}
 \usage{
-narm_session_repr(h_t_global, c_local)
+narm_session_repr(h_t_global, c_local) 
 }
 \arguments{
 \item{h_t_global}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{NmfMu}
 \title{Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and}
 \usage{
-NmfMu(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1)
+NmfMu(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) 
 }
 \arguments{
 \item{V}{Passed to \code{.morie_bx_mat}.}

@@ -15,6 +15,7 @@ Dpvar(x, a, b, epsilon, seed = 42L)
 queries.}
 
 \item{seed}{Index into the deterministic low-discrepancy stream.}
+
 }
 \value{
 List with \code{estimate}, \code{var_dp}, \code{mean_dp},

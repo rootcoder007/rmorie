@@ -5,7 +5,7 @@
 \alias{targeted_bootstrap}
 \title{targeted_bootstrap}
 \usage{
-targeted_bootstrap(P_star_sampler, estimator, B = 200L, seed = 0L)
+targeted_bootstrap(P_star_sampler, estimator, B = 200L, seed = 0L) 
 }
 \arguments{
 \item{P_star_sampler}{Accepted by the signature and not used anywhere in the body.}

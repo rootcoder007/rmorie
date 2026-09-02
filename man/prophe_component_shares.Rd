@@ -5,7 +5,7 @@
 \alias{prophe_component_shares}
 \title{prophe_component_shares}
 \usage{
-prophe_component_shares(components)
+prophe_component_shares(components) 
 }
 \arguments{
 \item{components}{A vector; indexed elementwise.}

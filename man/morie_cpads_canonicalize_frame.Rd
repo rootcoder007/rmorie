@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_canonicalize_frame}
 \alias{morie_cpads_canonicalize_frame}
-\title{Canonicalize raw CPADS PUMF columns into morie's analysis schema.}
+\title{Canonicalize raw CPADS PUMF columns into morie's analysis schema}
 \usage{
 morie_cpads_canonicalize_frame(frame)
 }

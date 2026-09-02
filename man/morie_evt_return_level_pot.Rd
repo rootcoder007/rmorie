@@ -5,10 +5,18 @@
 \alias{morie_evt_return_level_pot}
 \title{POT m-observation return level (Coles 2001 eq. 4.12-4.14)}
 \usage{
-morie_evt_return_level_pot(u, sigma, xi, zeta_u, m)
+morie_evt_return_level_pot(u, sigma, xi, zeta_u, m) 
 }
 \arguments{
 \item{u}{threshold; sigma,xi GPD parameters; zeta_u = P(X > u);   m observations}
+
+\item{sigma}{Argument \code{sigma}; see Usage.}
+
+\item{xi}{Argument \code{xi}; see Usage.}
+
+\item{zeta_u}{Argument \code{zeta_u}; see Usage.}
+
+\item{m}{Argument \code{m}; see Usage.}
 }
 \description{
 POT m-observation return level (Coles 2001 eq. 4.12-4.14)

@@ -5,7 +5,7 @@
 \alias{Pbinom}
 \title{P(X <= k) = I_{1-p}(n - k, k + 1)}
 \usage{
-Pbinom(q, size, prob, lower_tail = TRUE)
+Pbinom(q, size, prob, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

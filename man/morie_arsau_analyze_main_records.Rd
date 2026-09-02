@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_main_records}
 \alias{morie_arsau_analyze_main_records}
-\title{End-to-end analysis of the ARSAU main_records CSV for one year.}
+\title{End-to-end analysis of the ARSAU main_records CSV for one year}
 \usage{
 morie_arsau_analyze_main_records(year, language = "en", data_dir = NULL)
 }

@@ -28,7 +28,7 @@ log-ratio: the small model keeps one coordinate, the large model six.
 }
 \details{
 Formula: w_0 = 1 / (1 + exp(l_1 - l_0)),
-l_j = log m_{K_j}(y) + log prior weight of model j.
+l_j = log m_\{K_j\}(y) + log prior weight of model j.
 }
 \examples{
 Ghosaltwomodeladp()

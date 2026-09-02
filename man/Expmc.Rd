@@ -5,10 +5,17 @@
 \alias{Expmc}
 \title{Exponential mechanism (alias)}
 \usage{
-Expmc(candidates, utility, epsilon = 1, sensitivity = 1, seed = NULL)
+Expmc(candidates, utility, epsilon = 1, sensitivity = 1, seed = NULL) 
 }
 \description{
 Alias of \code{morie_dp_exponential_mechanism}: selects candidate r with probability proportional to \eqn{\exp(\epsilon u(D, r) / (2 \Delta u))}. The generated stub for module expmc described exactly the mechanism already shipped, so this is an alias.
+}
+\arguments{
+\item{candidates}{Argument \code{candidates}; see Usage.}
+\item{utility}{Argument \code{utility}; see Usage.}
+\item{epsilon}{Argument \code{epsilon}; see Usage.}
+\item{sensitivity}{Argument \code{sensitivity}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
 }
 \value{
 The value of \code{morie_dp_exponential_mechanism}.

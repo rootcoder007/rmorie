@@ -5,7 +5,7 @@
 \alias{Bilinear}
 \title{The bilinear transformation from the z plane to the s plane}
 \usage{
-Bilinear(z, T = 1)
+Bilinear(z, T = 1) 
 }
 \arguments{
 \item{z}{A point or vector of points in the z plane; zero is outside   the domain.}

@@ -5,7 +5,7 @@
 \alias{morie_alammar_classification_head}
 \title{Classification and NER heads (Alammar Ch 4)}
 \usage{
-morie_alammar_classification_head(h_cls, W_cls, b)
+morie_alammar_classification_head(h_cls, W_cls, b) 
 }
 \arguments{
 \item{h_cls}{Hidden vector.}

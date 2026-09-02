@@ -5,7 +5,7 @@
 \alias{ngcf_score}
 \title{ngcf_score}
 \usage{
-ngcf_score(final, u, i)
+ngcf_score(final, u, i) 
 }
 \arguments{
 \item{final}{A matrix; indexed by row and column.}

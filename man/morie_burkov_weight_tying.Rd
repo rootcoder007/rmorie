@@ -5,7 +5,7 @@
 \alias{morie_burkov_weight_tying}
 \title{Weight tying: logits through the shared embedding (Burkov Ch 4)}
 \usage{
-morie_burkov_weight_tying(h_last, E)
+morie_burkov_weight_tying(h_last, E) 
 }
 \arguments{
 \item{h_last}{Hidden state.}

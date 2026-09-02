@@ -5,7 +5,7 @@
 \alias{Riccati}
 \title{The fixed point of the Kalman covariance recursion.  Once P settles}
 \usage{
-Riccati(F, H, Q, R, maxiter = 1000L, tol = 1e-12)
+Riccati(F, H, Q, R, maxiter = 1000L, tol = 1e-12) 
 }
 \arguments{
 \item{F}{A matrix; passed to \code{as.matrix}.}

@@ -2,12 +2,12 @@
 % Please edit documentation in R/agmurc.R
 \name{Mzrecur}
 \alias{Mzrecur}
-\title{MuZero recurrent inference step.}
+\title{MuZero recurrent inference step}
 \usage{
 Mzrecur(state, action, dynamics, prediction = NULL)
 }
 \arguments{
-\item{state}{Hidden state s^{k-1}.}
+\item{state}{Hidden state s^\{k-1\}.}
 
 \item{action}{Action a^k.}
 
@@ -19,7 +19,7 @@ Mzrecur(state, action, dynamics, prediction = NULL)
 List with state, reward, policy, value.
 }
 \description{
-r^k, s^k = g(s^{k-1}, a^k) followed by p^k, v^k = f(s^k).
+r^k, s^k = g(s^\{k-1\}, a^k) followed by p^k, v^k = f(s^k).
 }
 \examples{
 dynamics <- function(s, a) list(0.5, s + a)

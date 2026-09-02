@@ -5,7 +5,8 @@
 \alias{morie_alammar_tokenization_pipeline}
 \title{WordPiece tokenisation pipeline (Alammar Ch 2)}
 \usage{
-morie_alammar_tokenization_pipeline(text, vocab, unk_token = "[UNK]", lowercase = TRUE, specials = c("[CLS]", "[SEP]"))
+morie_alammar_tokenization_pipeline(text, vocab, unk_token = "[UNK]", lowercase = TRUE, specials = c("[CLS]", 
+    "[SEP]")) 
 }
 \arguments{
 \item{text}{Input.}

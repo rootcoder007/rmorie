@@ -3,9 +3,14 @@
 % tracks the formals.
 \name{morie_jsonlt_from_json}
 \alias{morie_jsonlt_from_json}
+\alias{morie_jsonlt_parse_json}
 \title{Parse JSON into R objects}
 \usage{
-morie_jsonlt_from_json(txt, simplifyVector = TRUE, simplifyDataFrame = TRUE, simplifyMatrix = TRUE, flatten = FALSE, simplify = NULL, ...)
+morie_jsonlt_from_json(txt, simplifyVector = TRUE, simplifyDataFrame = simplifyVector, 
+    simplifyMatrix = simplifyVector, flatten = FALSE, bigint_as_char = FALSE, 
+    simplify = NULL, ...) 
+
+morie_jsonlt_parse_json(json, simplifyVector = FALSE, ...) 
 }
 \arguments{
 \item{txt}{JSON text, or a path to a file holding it.}
@@ -15,6 +20,10 @@ morie_jsonlt_from_json(txt, simplifyVector = TRUE, simplifyDataFrame = TRUE, sim
 \item{flatten}{expand nested data.frame columns to outer.inner columns.}
 \item{simplify}{FALSE turns all three simplifications off.}
 \item{...}{ignored, for call compatibility.}
+
+\item{bigint_as_char}{Argument \code{bigint_as_char}; see Usage.}
+
+\item{json}{Argument \code{json}; see Usage.}
 }
 \description{
 The jsonlite fromJSON mapping, with the three simplification rules as separate switches.

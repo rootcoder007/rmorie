@@ -5,7 +5,7 @@
 \alias{QrsDetect}
 \title{Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The}
 \usage{
-QrsDetect(x, fs = 200)
+QrsDetect(x, fs = 200) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

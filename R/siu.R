@@ -449,7 +449,7 @@ morie_fetch_siu <- function(cache_dir = file.path(tempdir(), "morie", "siu"),
   out_path
 }
 
-#' SIU drid → case_number → language index
+#' SIU drid ? case_number ? language index
 #'
 #' Returns the shipped drid manifest as a data frame -- one row per
 #' director's-report id morie has verified, with the parsed case
@@ -794,7 +794,7 @@ morie_siu_refresh_manifest <- function(
 ) {
   # Manifest refresh sweeps a generous range so the resulting snapshot
   # stays useful for several months without re-probing. Default is
-  # max(live-discovery + margin, 6000) — the live max currently sits
+  # max(live-discovery + margin, 6000) -- the live max currently sits
   # around drid ~5100, and 6000 gives headroom for ~one year of new
   # reports at the SIU's historical publish cadence.
   if (is.null(max_drid)) max_drid <- max(.siu_discover_max_drid(), 6000L)
@@ -1620,7 +1620,7 @@ morie_siu_compare <- function(case_number, external,
 # Session-scoped mutable state for SIU helpers (server-list cache).
 .morie_siu_state <- new.env(parent = emptyenv())
 
-#' Resolve an SIU case number to its report drid.
+#' Resolve an SIU case number to its report drid
 #'
 #' Manifest first (fast, offline); when the case is newer than the
 #' bundled manifest (or fell into an over-probed placeholder drid), a
@@ -2494,7 +2494,7 @@ morie_siu_translate_fr_to_en <- function(
 #' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' df <- utils::read.csv(csv, colClasses = "character")
 #' # 4 cases keeps the audit example fast; scale up for a real audit.
-#' sample <- utils::head(df$case_number\[nzchar(df$case_number)\], 4L)
+#' sample <- utils::head(df$case_number[nzchar(df$case_number)], 4L)
 #' audit <- morie_siu_audit_columns(sample, model = "ollama")
 #' # Worst 8 fields, ripe for parser fixes:
 #' head(audit, 8)

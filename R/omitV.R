@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Omitted variable bias, classical and partial-R2 form.
+#' Omitted variable bias, classical and partial-R2 form
 #'
 #' Formula: bias = delta gamma; equivalently |bias| = se(tau_res) sqrt(R2_YZ.DX R2_DZ.X / (1 - R2_DZ.X)) sqrt(df)
 #'
@@ -11,6 +11,13 @@
 #' @param r2_yz Partial R2 of the confounder with the outcome given treatment and covariates.
 #' @param r2_dz Partial R2 of the confounder with the treatment given covariates.
 
+#' @param delta See Usage.
+#' @param gamma See Usage.
+#' @param estimate See Usage.
+#' @param se See Usage.
+#' @param df See Usage.
+#' @param r2_yz See Usage.
+#' @param r2_dz See Usage.
 #' @return List with ``bias``, ``adjusted_estimate``, ``adjusted_se``, ``adjusted_t``, ``relative_bias``, ``bias_factor``.
 #' @references Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
 #' @export

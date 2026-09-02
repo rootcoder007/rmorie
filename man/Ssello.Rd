@@ -2,7 +2,7 @@
 % Please edit documentation in R/msebl.R
 \name{Ssello}
 \alias{Ssello}
-\title{Sum-of-squared-error loss for continuous outcomes.}
+\title{Sum-of-squared-error loss for continuous outcomes}
 \usage{
 Ssello(Y, Yhat)
 }

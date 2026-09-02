@@ -5,7 +5,8 @@
 \alias{find_homologous_segments}
 \title{find_homologous_segments}
 \usage{
-find_homologous_segments(group1, group2, scoring, weights1 = NULL, weights2 = NULL, seq_type = "aa", window = 30L, n_peaks = 20L, threshold = 0.7, max_len = 150L, corr_method = "fft")
+find_homologous_segments(group1, group2, scoring, weights1 = NULL, weights2 = NULL, seq_type = "aa", 
+    window = 30L, n_peaks = 20L, threshold = 0.7, max_len = 150L, corr_method = "fft") 
 }
 \arguments{
 \item{group1}{Iterated over elementwise, with \code{vapply}.}

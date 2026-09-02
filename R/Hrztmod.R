@@ -12,17 +12,17 @@
 #' implies G(y | z) = F\[T(y) - z\], hence G_y = T' F' and G_z = -F', so
 #' T'(y) = -G_y(y | z) / G_z(y | z) and
 #'
-#'   T(y) = - int_{y0}^{y} G_y(v|z) / G_z(v|z) dv               (6.57)
+#'   T(y) = - int_\{y0\}^\{y\} G_y(v|z) / G_z(v|z) dv               (6.57)
 #'
 #' Averaging over z against a weight w supported on a compact S_w with
-#' int_{S_w} w = 1 (6.58) gives
+#' int_\{S_w\} w = 1 (6.58) gives
 #'
-#'   T(y) = - int_{y0}^{y} int_{S_w} w(z) G_y(v|z)/G_z(v|z) dz dv (6.59)
+#'   T(y) = - int_\{y0\}^\{y\} int_\{S_w\} w(z) G_y(v|z)/G_z(v|z) dz dv (6.59)
 #'
 #' and the estimator replaces G_y, G_z by the kernel estimators
 #' (6.61)-(6.62):
 #'
-#'   Tn(y) = - int_{y0}^{y} int_{S_w} w(z)
+#'   Tn(y) = - int_\{y0\}^\{y\} int_\{S_w\} w(z)
 #'             Gny(v|z)/Gnz(v|z) dz dv                          (6.60)
 #'
 #' The leading minus signs in (6.57), (6.59) and (6.60) were read off a

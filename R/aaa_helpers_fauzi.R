@@ -17,7 +17,7 @@
   1.06 * sigma * n^(-1 / 5)
 }
 
-#' Bandwidth for a DISTRIBUTION-function-type kernel estimator.
+#' Bandwidth for a DISTRIBUTION-function-type kernel estimator
 #'
 #' `4^(1/3) sigma n^(-1/3)` -- a cube root, not the fifth root of
 #' `.morie_silverman_h`, and the difference is not cosmetic.
@@ -61,7 +61,7 @@
   4^(1 / 3) * sigma * n^(-1 / 3)
 }
 
-#' The book's `R(z) = sqrt(2 pi) z^(z+1/2) / (e^z Gamma(z+1))`, Eq. (1.12).
+#' The book's `R(z) = sqrt(2 pi) z^(z+1/2) / (e^z Gamma(z+1))`, Eq. (1.12)
 #'
 #' The Stirling defect of the gamma function: `R(z)` increases monotonically
 #' to 1 from below (Remark 1.2), which is exactly the fact the book uses to
@@ -76,7 +76,7 @@
 }
 
 #' `A_h(v)` of Eq. (1.9): the sample mean of the
-#' Gamma(shape = `h^(-1/2)`, scale = `v sqrt(h) + h`) density.
+#' Gamma(shape = `h^(-1/2)`, scale = `v sqrt(h) + h`) density
 #'
 #' NOT Chen's gamma kernel, which takes shape `v/h + 1` and scale `h`. The
 #' book fixes the SHAPE at `h^(-1/2)` and moves the scale; that single change
@@ -94,7 +94,7 @@
                                             scale = pt * sqrt(h) + h)), numeric(1))
 }
 
-#' Exact one-sided Kolmogorov distribution function, Birnbaum-Tingey.
+#' Exact one-sided Kolmogorov distribution function, Birnbaum-Tingey
 #'
 #' `P(D_n^+ >= d) = d sum_{j=0}^{floor(n(1-d))} choose(n,j) (d+j/n)^(j-1)
 #' (1-d-j/n)^(n-j)`, and this returns `1 -` that. Summed through logarithms so

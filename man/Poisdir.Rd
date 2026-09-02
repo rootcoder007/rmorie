@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_pd_2param.R
 \name{Poisdir}
 \alias{Poisdir}
-\title{Pitman-Yor stick-breaking weights and the Gibbs factor V_\{n,k\}.}
+\title{Pitman-Yor stick-breaking weights and the Gibbs factor V_\{n,k\}}
 \usage{
 Poisdir(sigma, M, k, n = NULL)
 }
@@ -28,7 +28,7 @@ so the result is deterministic in both language arms.
 \details{
 Formula: V_j ~ Beta(1 - sigma, M + j sigma);
 W_j = V_j prod_\{l<j\}(1 - V_l);
-E\link{V_j} = (1 - sigma)/(M + 1 + (j - 1) sigma);
+E[V_j] = (1 - sigma)/(M + 1 + (j - 1) sigma);
 V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{[n-1]\}
 }
 \examples{

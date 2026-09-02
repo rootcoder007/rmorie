@@ -20,6 +20,7 @@ morie_geron_backprop_through_time(
 \item{W_h}{Optional recurrent weights (H, H).}
 
 \item{h_init}{Optional state before step 1.}
+
 }
 \value{
 List with \code{grad_Wx}, \code{grad_Wh}, \code{grad_b}, \code{deltas},

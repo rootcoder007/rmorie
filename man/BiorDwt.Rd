@@ -5,7 +5,7 @@
 \alias{BiorDwt}
 \title{Biorthogonal 5/3 (CDF) transform via lifting}
 \usage{
-BiorDwt(x, wavelet = "bior2.2", levels = 3)
+BiorDwt(x, wavelet = "bior2.2", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

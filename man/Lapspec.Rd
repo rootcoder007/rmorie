@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtspc.R
 \name{Lapspec}
 \alias{Lapspec}
-\title{Eigenvalues of the normalised Laplacian, in increasing order.}
+\title{Eigenvalues of the normalised Laplacian, in increasing order}
 \usage{
 Lapspec(W, tol = 1e-10)
 }

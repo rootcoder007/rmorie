@@ -29,6 +29,7 @@ morie_lamb(
 \item{eps}{Denominator floor.}
 
 \item{state}{List from the previous call, or \code{NULL}.}
+
 }
 \value{
 List with \code{update}, \code{state}, \code{trust_ratio}, \code{m}, \code{v}, \code{direction}.

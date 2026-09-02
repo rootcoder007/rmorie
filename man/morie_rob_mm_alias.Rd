@@ -10,6 +10,8 @@ morie_rob_mm_alias(X, y, n_subsets = 200L, seed = 0)
 \item{X, y}{design and response.}
 
 \item{n_subsets, seed}{as in \code{\link[=morie_rob_mm]{morie_rob_mm()}}.}
+
+
 }
 \value{
 the \code{\link[=morie_rob_mm]{morie_rob_mm()}} list plus \code{alias_of}.

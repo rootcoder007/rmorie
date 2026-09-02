@@ -5,7 +5,7 @@
 \alias{morie_mqtmpl_method_status}
 \title{Available scan methods}
 \usage{
-morie_mqtmpl_method_status(method = NULL)
+morie_mqtmpl_method_status(method = NULL) 
 }
 \arguments{
 \item{method}{Optional single method name; if NULL, returns the   full status dictionary.}

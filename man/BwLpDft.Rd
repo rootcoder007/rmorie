@@ -5,7 +5,7 @@
 \alias{BwLpDft}
 \title{Eq (3.146), valid for k = 0..K/2 with the upper half a reflection,}
 \usage{
-BwLpDft(K, kc = NULL, N = 2, fc = NULL, fs = NULL)
+BwLpDft(K, kc = NULL, N = 2, fc = NULL, fs = NULL) 
 }
 \arguments{
 \item{K}{Coerced to integer by the body, with \code{as.integer}.}

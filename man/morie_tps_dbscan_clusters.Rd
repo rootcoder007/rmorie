@@ -26,6 +26,7 @@ morie_tps_dbscan_clusters(
 \item{max_n}{Subsample cap to keep DBSCAN tractable.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
+
 }
 \value{
 A named list with the per-cluster table, the count of

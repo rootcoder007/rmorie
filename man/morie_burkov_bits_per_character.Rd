@@ -5,7 +5,7 @@
 \alias{morie_burkov_bits_per_character}
 \title{Bits per character from cross-entropy (Burkov Ch 2)}
 \usage{
-morie_burkov_bits_per_character(ce_loss, n_tokens, n_characters)
+morie_burkov_bits_per_character(ce_loss, n_tokens, n_characters) 
 }
 \arguments{
 \item{ce_loss}{Cross-entropy in nats per token.}

@@ -18,6 +18,10 @@ morie_hdbsc(
 \item{min_pts}{mpts core-distance neighbour count.}
 
 \item{min_cluster_size}{Minimum cluster size (mclSize).}
+
+\item{selection}{See Usage.}
+
+\item{verbose}{See Usage.}
 }
 \value{
 A list with elements \code{labels} (-1 = noise),

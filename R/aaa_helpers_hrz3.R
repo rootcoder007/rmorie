@@ -6,7 +6,7 @@
 # Horowitz, J. L. (2009). Semiparametric and Nonparametric Methods in
 # Econometrics. Springer. ISBN 978-0-387-92869-2.
 
-#' Internal helpers for the Horowitz inverse-problem shelf.
+#' Internal helpers for the Horowitz inverse-problem shelf
 #' @keywords internal
 #' @name horowitz_hrz3_helpers
 NULL
@@ -294,7 +294,7 @@ NULL
 # is not orthonormal.
 #' Series basis on \[0, 1\], eq. (5.79).  "cos" is the orthonormal cosine
 #'
-#' basis {1, sqrt(2) cos(pi k v)}, for which the coefficients in (5.79)
+#' basis \{1, sqrt(2) cos(pi k v)\}, for which the coefficients in (5.79)
 #' are literally the inner products beta_j = <g, psi_j> as the text
 #' notes.  "poly" is the monomial basis, which spans the same spaces but
 #' is not orthonormal.

@@ -5,7 +5,7 @@
 \alias{MfImpulse}
 \title{Eqs (4.49), (4.56): h(t) = K x(t0 - t), reversed and delayed.  The}
 \usage{
-MfImpulse(x, t0 = NULL, gain = 1, dt = 1)
+MfImpulse(x, t0 = NULL, gain = 1, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

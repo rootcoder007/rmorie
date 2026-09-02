@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_insert_size_stats}
 \title{morie_sv_dl_insert_size_stats}
 \usage{
-morie_sv_dl_insert_size_stats(pairs, orientation = NULL, spread = "mad")
+morie_sv_dl_insert_size_stats(pairs, orientation = NULL, spread = "mad") 
 }
 \arguments{
 \item{pairs}{Iterated over elementwise, with \code{lapply}.}

@@ -5,7 +5,8 @@
 \alias{morie_gwrcal}
 \title{GWR bandwidth selection}
 \usage{
-morie_gwrcal(y, X, coords, kernel = "gaussian", criterion = "aicc", adaptive = FALSE, bounds = NULL, search = NULL, n_points = 30L, tol = 1e-04)
+morie_gwrcal(y, X, coords, kernel = "gaussian", criterion = "aicc", adaptive = FALSE, 
+    bounds = NULL, search = NULL, n_points = 30L, tol = 1e-04) 
 }
 \arguments{
 \item{y,X,coords}{Response, design, locations.}
@@ -15,6 +16,8 @@ morie_gwrcal(y, X, coords, kernel = "gaussian", criterion = "aicc", adaptive = F
 \item{bounds}{Optional \code{c(lo, hi)} override.}
 \item{search}{One of \code{"golden"}, \code{"grid"}.}
 \item{n_points}{Number of points for the grid.}
+
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \description{
 Minimises CV, AIC or AICc over a bandwidth grid. AICc is the default: the small-sample correction, and GWR\'s whole point is that local samples are small.

@@ -5,10 +5,14 @@
 \alias{Wsrsym}
 \title{Signed-rank test of symmetry -- Sec. 5.7.7, p. 211}
 \usage{
-Wsrsym(x, centre = 0)
+Wsrsym(x, centre = 0) 
 }
 \description{
 Signed-rank test of symmetry -- Sec. 5.7.7, p. 211
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{centre}{Argument \code{centre}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{skewdir}, \code{n}.

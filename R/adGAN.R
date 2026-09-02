@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' GANomaly anomaly score from encoder-decoder-encoder latents.
+#' GANomaly anomaly score from encoder-decoder-encoder latents
 #'
 #' A(x) = || G_E(x) - E(G(x)) ||_1 (eq. 5), rescaled over the test set as
 #' s' = (s - min(S)) / (max(S) - min(S)) (eq. 6).

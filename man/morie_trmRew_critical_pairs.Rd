@@ -5,7 +5,7 @@
 \alias{morie_trmRew_critical_pairs}
 \title{Every overlap between two left-hand sides}
 \usage{
-morie_trmRew_critical_pairs(rules)
+morie_trmRew_critical_pairs(rules) 
 }
 \arguments{
 \item{rules}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{univariate_mcd}
 \title{univariate_mcd}
 \usage{
-univariate_mcd(values, h = NULL, consistent = TRUE)
+univariate_mcd(values, h = NULL, consistent = TRUE) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

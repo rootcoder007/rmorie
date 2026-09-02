@@ -5,7 +5,7 @@
 \alias{FreqResp}
 \title{Evaluated on a uniform grid from DC to NYQUIST inclusive -- the}
 \usage{
-FreqResp(b, a = NULL, fs = 1000, n_freqs = 512)
+FreqResp(b, a = NULL, fs = 1000, n_freqs = 512) 
 }
 \arguments{
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}

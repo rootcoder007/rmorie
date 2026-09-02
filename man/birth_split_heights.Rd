@@ -5,7 +5,7 @@
 \alias{birth_split_heights}
 \title{birth_split_heights}
 \usage{
-birth_split_heights(h_j, u, s_left, s_star, s_right)
+birth_split_heights(h_j, u, s_left, s_star, s_right) 
 }
 \arguments{
 \item{h_j}{Coerced to numeric by the body, with \code{as.numeric}.}

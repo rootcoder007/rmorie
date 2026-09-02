@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' ZAPC random-forest prediction.
+#' ZAPC random-forest prediction
 #'
 #' Formula: Y-hat = 0 when theta-hat > 0.5 and mu-hat otherwise (eq. 15.4):
 #' ZAPC_RF converts the probability to a zero rather than to a binary label,

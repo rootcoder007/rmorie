@@ -5,7 +5,7 @@
 \alias{page_cusum}
 \title{page_cusum}
 \usage{
-page_cusum(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1)
+page_cusum(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{morie_glr_test}.}

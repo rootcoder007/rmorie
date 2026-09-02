@@ -5,7 +5,7 @@
 \alias{morie_kamath_clm_loss}
 \title{morie_kamath_clm_loss}
 \usage{
-morie_kamath_clm_loss(x)
+morie_kamath_clm_loss(x) 
 }
 \arguments{
 \item{x}{Per-position probabilities of the true token.}

@@ -5,7 +5,7 @@
 \alias{morie_dimNet_angle_between}
 \title{Angle at j between the bonds j-k and j-i}
 \usage{
-morie_dimNet_angle_between(r_k, r_j, r_i)
+morie_dimNet_angle_between(r_k, r_j, r_i) 
 }
 \arguments{
 \item{r_k}{Numeric position of atom k.}

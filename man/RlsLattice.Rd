@@ -5,7 +5,7 @@
 \alias{RlsLattice}
 \title{Section 8.6.2.  Every stage is itself a predictor, so one run gives}
 \usage{
-RlsLattice(x, order = 4, lam = 0.98, delta = 0.01)
+RlsLattice(x, order = 4, lam = 0.98, delta = 0.01) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

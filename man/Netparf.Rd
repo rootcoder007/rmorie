@@ -28,7 +28,7 @@ direct/indirect decomposition of Halloran & Hudgens, the
 neighbourhood exposure of unit i is the fraction of its neighbours
 exposed, \code{nu_i = sum_j A_ij e_j / sum_j A_ij} (zero if
 isolated), and the outcome is regressed additively on both channels,
-\code{E[Y_i] = b0 + b1 e_i + b2 nu_i}.
+\code{E\[Y_i\] = b0 + b1 e_i + b2 nu_i}.
 }
 \details{
 Formula: \code{PAF = (mean(Y) - b0) / mean(Y)}, which splits exactly

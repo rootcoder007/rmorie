@@ -7,12 +7,7 @@
 .gsageemd_mat(x)
 }
 \arguments{
-\item{vectors}{Numeric matrix (one row per neighbour) or list of
-rows.}
-
-\item{how}{One of "mean", "max_pool", "lstm_order".}
-
-\item{W}{Optional weight matrix for max_pool.}
+\item{x}{See Usage.}
 }
 \value{
 Permutation-invariant summary vector.

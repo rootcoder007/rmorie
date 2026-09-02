@@ -5,7 +5,7 @@
 \alias{bilm_forward}
 \title{Run the biLM and return every layer\'s representation}
 \usage{
-bilm_forward(X, layers)
+bilm_forward(X, layers) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

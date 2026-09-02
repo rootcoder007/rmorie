@@ -8,6 +8,7 @@ morie_wasserman_mutual_info(x, y)
 }
 \arguments{
 \item{x, y}{Paired discrete observations of equal length.}
+
 }
 \value{
 List with \code{estimate} (nats), \code{bits}, \code{levels_x}, \code{levels_y},

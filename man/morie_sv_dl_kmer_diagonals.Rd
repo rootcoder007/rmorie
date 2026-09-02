@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_kmer_diagonals}
 \title{morie_sv_dl_kmer_diagonals}
 \usage{
-morie_sv_dl_kmer_diagonals(read, ref, k = 7, k_min = 3, require_half = TRUE)
+morie_sv_dl_kmer_diagonals(read, ref, k = 7, k_min = 3, require_half = TRUE) 
 }
 \arguments{
 \item{read}{Coerced to character by the body, with \code{as.character}.}

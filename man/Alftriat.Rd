@@ -18,6 +18,8 @@ Alftriat(z, wq, wk, wv, wb, wg, wo, mode = "starting")
 \item{wo}{Output projection, \code{cz x (nhead * c)} (line 7).}
 
 \item{mode}{Either "starting" (Algorithm 13) or "ending" (Algorithm 14).}
+
+
 }
 \value{
 A list with \code{z}, the attention array \code{attn},

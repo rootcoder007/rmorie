@@ -5,7 +5,7 @@
 \alias{morie_geron_policy}
 \title{Policy pi(a|s): probabilities, entropy and a reproducible sampled action (Geron Ch 19, hmpol)}
 \usage{
-morie_geron_policy(state, pi, seed = 0)
+morie_geron_policy(state, pi, seed = 0) 
 }
 \arguments{
 \item{state}{Current state (0-based).}

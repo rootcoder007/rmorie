@@ -5,7 +5,7 @@
 \alias{WienerDot}
 \title{Eq. (3.155): the same estimate written as an inner product.  x(n)}
 \usage{
-WienerDot(w, xvec)
+WienerDot(w, xvec) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

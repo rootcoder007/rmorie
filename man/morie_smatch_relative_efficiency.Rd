@@ -5,7 +5,7 @@
 \alias{morie_smatch_relative_efficiency}
 \title{morie_smatch_relative_efficiency}
 \usage{
-morie_smatch_relative_efficiency(r, log_ri)
+morie_smatch_relative_efficiency(r, log_ri) 
 }
 \arguments{
 \item{r}{Coerced to numeric by the body, with \code{as.numeric}.}

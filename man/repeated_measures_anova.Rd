@@ -10,6 +10,8 @@ repeated_measures_anova(data, outcome, subject, within)
 \item{data}{Long-format data frame.}
 
 \item{outcome, subject, within}{Column names.}
+
+
 }
 \value{
 An object of class \code{"morie_test_result"}.

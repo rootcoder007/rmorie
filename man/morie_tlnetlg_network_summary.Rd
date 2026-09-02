@@ -5,7 +5,7 @@
 \alias{morie_tlnetlg_network_summary}
 \title{morie_tlnetlg_network_summary}
 \usage{
-morie_tlnetlg_network_summary(friends)
+morie_tlnetlg_network_summary(friends) 
 }
 \arguments{
 \item{friends}{A vector; its length is taken and its elements indexed.}

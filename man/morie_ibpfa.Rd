@@ -5,7 +5,7 @@
 \alias{morie_ibpfa}
 \title{morie_ibpfa}
 \usage{
-morie_ibpfa(n, alpha, seed = 0L)
+morie_ibpfa(n, alpha, seed = 0L) 
 }
 \arguments{
 \item{n}{Passed to \code{sample_ibp}.}

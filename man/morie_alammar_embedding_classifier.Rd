@@ -5,7 +5,7 @@
 \alias{morie_alammar_embedding_classifier}
 \title{Softmax head on frozen embeddings; SetFit pair generation}
 \usage{
-morie_alammar_embedding_classifier(embeddings, labels, n_steps = 500, learning_rate = 0.5, l2 = 1e-04)
+morie_alammar_embedding_classifier(embeddings, labels, n_steps = 500, learning_rate = 0.5, l2 = 1e-04) 
 }
 \arguments{
 \item{embeddings,labels}{Data (labels 0-based, every class present).}

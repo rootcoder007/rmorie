@@ -147,7 +147,7 @@
 }
 
 #' Draw an n-by-d matrix of uniform samples from bounds, one draw per
-#' cell in column-major order, using the shared generator.
+#' cell in column-major order, using the shared generator
 #'
 #' @keywords internal
 #' @noRd

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Phillips-Perron unit-root test.
+#' Phillips-Perron unit-root test
 #'
 #' Thin re-export of \code{Pptest}, which carries the implementation,
 #' the Bartlett long-run variance and the Dickey-Fuller tables.  Three

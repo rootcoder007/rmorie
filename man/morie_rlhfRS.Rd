@@ -5,7 +5,9 @@
 \alias{morie_rlhfRS}
 \title{Evaluate a recommendation policy, on-policy or from a log}
 \usage{
-morie_rlhfRS(env, policy, n_episodes = 20L, horizon = 10L, gamma = 0.9, seed = 0, estimator = "ips", reward_model = NULL, clip = NULL, relevance = NULL, k = 5L)
+morie_rlhfRS(env, policy, n_episodes = 20L, horizon = 10L, gamma = 0.9, seed = 0, 
+    estimator = "ips", reward_model = NULL, clip = NULL, relevance = NULL, 
+    k = 5L) 
 }
 \arguments{
 \item{env}{The environment.}

@@ -5,7 +5,7 @@
 \alias{deepSVDD_cheatsheet}
 \title{deepSVDD_cheatsheet}
 \usage{
-deepSVDD_cheatsheet()
+deepSVDD_cheatsheet() 
 }
 \description{
 A step of the deepSVDD_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -5,7 +5,7 @@
 \alias{morie_alammar_t5_classify}
 \title{morie_alammar_t5_classify}
 \usage{
-morie_alammar_t5_classify(input_text, label_tokens, model, prefix = "")
+morie_alammar_t5_classify(input_text, label_tokens, model, prefix = "") 
 }
 \arguments{
 \item{input_text}{Input.}

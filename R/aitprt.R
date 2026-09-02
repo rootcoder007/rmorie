@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Perturbation of one composition by another.
+#' Perturbation of one composition by another
 #'
 #' Formula: x (+) y = C( x_1 y_1, ..., x_D y_D )
 #'

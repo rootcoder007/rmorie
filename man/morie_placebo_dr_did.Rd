@@ -14,6 +14,7 @@ morie_placebo_dr_did(y_pre1, y_pre2, D, X, ...)
 \item{X}{covariates.}
 
 \item{...}{passed to \code{\link{morie_dr_overlap_weighted}}.}
+
 }
 \value{
 list with \code{placebo_effect}, \code{se}, \code{z},

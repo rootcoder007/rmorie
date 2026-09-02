@@ -5,7 +5,7 @@
 \alias{corrupt}
 \title{corrupt}
 \usage{
-corrupt(y, q, rng)
+corrupt(y, q, rng) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

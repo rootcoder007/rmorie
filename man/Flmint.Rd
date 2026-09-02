@@ -5,10 +5,16 @@
 \alias{Flmint}
 \title{Functional linear model with scalar response (MVSML eq. 14.1)}
 \usage{
-Flmint(t, x_values, beta_values, mu = 0)
+Flmint(t, x_values, beta_values, mu = 0) 
 }
 \description{
 Y = mu + int_0^T x(t) beta(t) dt + E.  The integral of the product of the centered covariate curve and the coefficient function is taken by the trapezoid rule on the observation grid, the same quadrature the chapter uses for its inner products on p.581.
+}
+\arguments{
+\item{t}{Argument \code{t}; see Usage.}
+\item{x_values}{Argument \code{x_values}; see Usage.}
+\item{beta_values}{Argument \code{beta_values}; see Usage.}
+\item{mu}{Argument \code{mu}; see Usage.}
 }
 \value{
 A list with \code{integral}, \code{fitted}, \code{mu}, \code{n_points}.

@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_tqlld}
 \alias{morie_tqlld}
+\alias{morie_lloyd_max_codebook}
 \title{Optimal levels-point scalar codebook}
 \usage{
-morie_tqlld(levels = 4, source = "gaussian", data = NULL, lo = NULL, hi = NULL, max_iter = 200, tol = 1e-12, n_grid = 20000)
+morie_tqlld(levels = 4, source = "gaussian", data = NULL, lo = NULL, hi = NULL, 
+    max_iter = 200, tol = 1e-12, n_grid = 20000) 
+
+morie_lloyd_max_codebook(levels = 4, source = "gaussian", data = NULL, lo = NULL, hi = NULL, 
+    max_iter = 200, tol = 1e-12, n_grid = 20000) 
 }
 \arguments{
 \item{levels}{Number of codewords.}

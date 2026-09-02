@@ -5,7 +5,7 @@
 \alias{morie_sechsh_merkle_root}
 \title{RFC 6962 Merkle tree root}
 \usage{
-morie_sechsh_merkle_root(leaves)
+morie_sechsh_merkle_root(leaves) 
 }
 \arguments{
 \item{leaves}{List of raw-byte leaves.}

@@ -5,7 +5,7 @@
 \alias{morie_surxgb_pdf}
 \title{Table 2: the density of Z}
 \usage{
-morie_surxgb_pdf(z, dist = "normal")
+morie_surxgb_pdf(z, dist = "normal") 
 }
 \arguments{
 \item{z}{Numeric; passed to \code{abs}.}

@@ -5,7 +5,7 @@
 \alias{round_trip}
 \title{What the two conversions cost when chained}
 \usage{
-round_trip(epsilon, delta)
+round_trip(epsilon, delta) 
 }
 \arguments{
 \item{epsilon}{Pure DP epsilon, non-negative.}

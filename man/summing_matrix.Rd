@@ -5,7 +5,7 @@
 \alias{summing_matrix}
 \title{summing_matrix}
 \usage{
-summing_matrix(groups, n_bottom)
+summing_matrix(groups, n_bottom) 
 }
 \arguments{
 \item{groups}{A vector; its length is taken and its elements indexed.}

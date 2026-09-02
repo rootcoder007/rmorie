@@ -5,7 +5,7 @@
 \alias{cvm_statistic}
 \title{cvm_statistic}
 \usage{
-cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL)
+cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL) 
 }
 \arguments{
 \item{m}{Passed to \code{weighted_moments}.}

@@ -5,11 +5,17 @@
 \alias{morie_etwfe}
 \title{The saturated cohort-by-period regression of Sec. 5}
 \usage{
-morie_etwfe(Y, unit, period, first_treated, X = NULL)
+morie_etwfe(Y, unit, period, first_treated, X = NULL) 
 }
 \arguments{
 \item{first_treated}{N-vector of adoption periods (the period in   which each unit is first treated; \code{NULL} or \code{NA} for   never-treated).}
 \item{X}{Optional N-by-p matrix of covariates.}
+
+\item{Y}{Argument \code{Y}; see Usage.}
+
+\item{unit}{Argument \code{unit}; see Usage.}
+
+\item{period}{Argument \code{period}; see Usage.}
 }
 \description{
 Every \eqn{(g, t)}{(g, t)} cell with \eqn{t \ge g}{t >= g} gets its own coefficient, so the fitted coefficients **are** the \eqn{ATT(g, t)}{ATT(g, t)}.  Nothing is averaged, so nothing can be averaged with a negative weight.

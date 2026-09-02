@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Closure operator C(x) onto the simplex of constant sum \code{total}.
+#' Closure operator C(x) onto the simplex of constant sum \code{total}
 #'
 #' Formula: C(x) = kappa * (x_1, ..., x_D) / sum_j x_j
 #'

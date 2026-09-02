@@ -5,7 +5,7 @@
 \alias{morie_mistr_attention_span}
 \title{Theoretical attention span}
 \usage{
-morie_mistr_attention_span(window, n_layers)
+morie_mistr_attention_span(window, n_layers) 
 }
 \arguments{
 \item{window}{Window size.}

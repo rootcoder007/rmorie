@@ -5,11 +5,13 @@
 \alias{morie_kamath_seq2seq_cross_entropy}
 \title{morie_kamath_seq2seq_cross_entropy}
 \usage{
-morie_kamath_seq2seq_cross_entropy(y, c, U = NULL)
+morie_kamath_seq2seq_cross_entropy(y, c, U = NULL) 
 }
 \arguments{
 \item{y}{Target token indices, 0-based.}
 \item{U}{Optional length pin.}
+
+\item{c}{Argument \code{c}; see Usage.}
 }
 \description{
 morie_kamath_seq2seq_cross_entropy

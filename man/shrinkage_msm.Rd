@@ -5,10 +5,20 @@
 \alias{shrinkage_msm}
 \title{IP-weighted MSM with a ridge-penalized propensity model}
 \usage{
-shrinkage_msm(y, treatment_history, covariate_history, lam = 0, contrast = "cumulative", path = NULL, trim = NULL)
+shrinkage_msm(y, treatment_history, covariate_history, lam = 0, contrast = "cumulative", 
+    path = NULL, trim = NULL) 
 }
 \description{
 IP-weighted MSM with a ridge-penalized propensity model
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{treatment_history}{Argument \code{treatment_history}; see Usage.}
+\item{covariate_history}{Argument \code{covariate_history}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{contrast}{Argument \code{contrast}; see Usage.}
+\item{path}{Argument \code{path}; see Usage.}
+\item{trim}{Argument \code{trim}; see Usage.}
 }
 \value{
 The value of \code{out}, as built in the body.

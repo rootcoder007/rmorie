@@ -24,15 +24,32 @@ morie_ospats(
 )
 }
 \arguments{
-\item{gamma_bar_h}{Mean semivariances. @param weights,n_h Strata.}
 
-\item{n}{Total sample size. @param s_h,c_h Allocation pieces.}
+\item{weights}{See Usage.}
+
+\item{n_h}{See Usage.}
+
+
+\item{s_h}{See Usage.}
+
+\item{c_h}{See Usage.}
 
 \item{zhat_i, zhat_j, r2, s2_i, s2_j, s2_ij}{Pairwise pieces.}
 
 \item{d2_upper_sum, n_h_units}{Stratum-variance pieces.}
 
 \item{per_stratum_sums, n_population}{Objective pieces.}
+
+\item{gamma_bar_h}{Argument \code{gamma_bar_h}; see Usage.}
+
+\item{n}{Argument \code{n}; see Usage.}
+
+
+
+
+
+
+
 }
 \value{
 List with stsi_variance, equal_area_variance, alloc_variance,

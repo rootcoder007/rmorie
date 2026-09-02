@@ -5,7 +5,7 @@
 \alias{morie_geron_recurrent_neuron}
 \title{Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_{t-1}` + b) (Geron Ch 13, hmrnn)}
 \usage{
-morie_geron_recurrent_neuron(x_t, h_prev, Wx, Wh, b, activation = "tanh")
+morie_geron_recurrent_neuron(x_t, h_prev, Wx, Wh, b, activation = "tanh") 
 }
 \arguments{
 \item{x_t,h_prev}{Input and previous state.}

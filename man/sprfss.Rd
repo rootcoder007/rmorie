@@ -2,7 +2,7 @@
 % Please edit documentation in R/sprfss.R
 \name{sprfss}
 \alias{sprfss}
-\title{Which stationarity assumption the data can support.}
+\title{Which stationarity assumption the data can support}
 \usage{
 sprfss(coords, z, n_blocks = 4, n_bins = 10, max_dist = NULL, tol = 0.25)
 }

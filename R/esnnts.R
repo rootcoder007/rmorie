@@ -8,7 +8,7 @@
 #'   x_t = (1 - a) x_{t-1} + a tanh(W x_{t-1} + W_in u_t)
 #'   yhat_t = v' \[1; x_t\]
 #' }
-#' driven in one-step prediction mode (u_t = y_{t-1}, target y_t).  Only
+#' driven in one-step prediction mode (u_t = y_\{t-1\}, target y_t).  Only
 #' v is fitted, by ridge regression; W and W_in are fixed and never
 #' trained.
 #'

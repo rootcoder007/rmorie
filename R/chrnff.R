@@ -1,12 +1,15 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Chernoff bound on an upper tail.
+#' Chernoff bound on an upper tail
 #'
-#' Formula: P(X >= a) <= min_{s>0} exp(-s a) E\[exp(s X)\]
+#' Formula: P(X >= a) <= min_\{s>0\} exp(-s a) E\[exp(s X)\]
 #'
 #' @param mgf The moment generating function s -> E\[exp(s X)\].
 #' @param a Tail threshold.
 #' @param s_grid Positive values of s searched; a fixed geometric grid over (0.01, 8.7] if omitted.
 
+#' @param mgf See Usage.
+#' @param a See Usage.
+#' @param s_grid See Usage.
 #' @return List with ``bound``, ``s``, ``log_bound``, ``at_boundary``.
 #' @references Chernoff (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations, Annals of Mathematical Statistics 23:493-507. Not held locally; the exponential Markov bound is stated in this exact form in every standard reference.
 #' @export

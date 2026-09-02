@@ -12,6 +12,8 @@ morie_geron_ridge_cost_grridg(X, y, theta, alpha, intercept = TRUE)
 \item{alpha}{Non-negative penalty.}
 
 \item{intercept}{Treat theta[1] as an unpenalised bias.}
+
+
 }
 \value{
 List with \code{cost}, \code{mse}, \code{penalty}, \code{gradient}.

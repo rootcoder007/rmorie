@@ -5,10 +5,15 @@
 \alias{flow_logprob}
 \title{log q_phi(x | theta), change of variables}
 \usage{
-flow_logprob(flow, x, t)
+flow_logprob(flow, x, t) 
 }
 \description{
 log q_phi(x | theta), change of variables
+}
+\arguments{
+\item{flow}{Argument \code{flow}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
+\item{t}{Argument \code{t}; see Usage.}
 }
 \value{
 A numeric value.

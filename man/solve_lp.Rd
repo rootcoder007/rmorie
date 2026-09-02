@@ -5,7 +5,8 @@
 \alias{solve_lp}
 \title{solve_lp}
 \usage{
-solve_lp(A, b, c, tol = 1e-09, max_iter = 100L, nu = 3, eta = 0.9995, corrector = TRUE)
+solve_lp(A, b, c, tol = 1e-09, max_iter = 100L, nu = 3, eta = 0.9995, 
+    corrector = TRUE) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

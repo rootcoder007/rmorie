@@ -12,6 +12,8 @@ morie_indirect_effect_sobel(a, b, se_a = NULL, se_b = NULL, alpha = 0.05)
 \item{se_a, se_b}{Their standard errors; both needed for a test.}
 
 \item{alpha}{Significance level.}
+
+
 }
 \value{
 Named list with \code{estimate}, \code{se},

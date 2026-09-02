@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqpack_native.R
 \name{.tqpack_pack_indices}
 \alias{.tqpack_pack_indices}
-\title{.tqpack_pack_indices}
+\title{Bit-packing of quantiser indices}
 \usage{
 .tqpack_pack_indices(indices, bits)
 }
@@ -15,6 +15,24 @@
 The value of \code{result}, as built in the body.
 }
 \description{
+Packs an array of \code{b}-bit codebook indices into a dense byte string,
+and unpacks it again. This is the storage half of a quantiser: choosing
+4-bit codewords saves nothing if each is then stored in a 64-bit float.
+}
+\details{
+The layout is \strong{big-endian bit order within a big-endian byte stream}:
+index 0 occupies the most significant \code{b} bits of byte 0, the next
+index continues immediately after it, crossing byte boundaries without
+padding. Only the final byte is zero-padded on the right. Fixing the
+convention explicitly matters -- a reader that assumes the opposite bit
+order recovers plausible-looking indices that are silently wrong, and
+no checksum in the format would catch it.
+
+Round-tripping is exact by construction, for every width and every
+length, and that is the property the anchors check exhaustively rather
+than on a sample.
+.tqpack_pack_indices
+
 A step of the tqpack_native implementation. No other function in the package calls it.
 See the file header for the source the module follows.
 source it follows.

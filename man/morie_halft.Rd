@@ -5,7 +5,8 @@
 \alias{morie_halft}
 \title{Plasma half-life from volume of distribution and clearance}
 \usage{
-morie_halft(smiles = NULL, Vd = NULL, Cl = NULL, route = "one_compartment", V1 = NULL, V2 = NULL, Q = NULL, dose = NULL)
+morie_halft(smiles = NULL, Vd = NULL, Cl = NULL, route = "one_compartment", 
+    V1 = NULL, V2 = NULL, Q = NULL, dose = NULL) 
 }
 \arguments{
 \item{smiles}{Structure, carried through for provenance. Not used in   the arithmetic; see the file header.}

@@ -5,7 +5,7 @@
 \alias{morie_survrsf_logrank_scores}
 \title{Lausen\'s log-rank scores, Hothorn & Lausen (2003) eq. (13)}
 \usage{
-morie_survrsf_logrank_scores(times, events)
+morie_survrsf_logrank_scores(times, events) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

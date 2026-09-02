@@ -5,7 +5,7 @@
 \alias{log_barrier}
 \title{Log barrier}
 \usage{
-log_barrier(fvals)
+log_barrier(fvals) 
 }
 \arguments{
 \item{fvals}{Numeric vector of \eqn{f_i(x)} values.}

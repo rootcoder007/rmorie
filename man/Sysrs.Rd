@@ -2,7 +2,7 @@
 % Please edit documentation in R/swsmp.R
 \name{Sysrs}
 \alias{Sysrs}
-\title{Draw one systematic sample with a random start, and estimate from it.}
+\title{Draw one systematic sample with a random start, and estimate from it}
 \usage{
 Sysrs(y, k, seed = 1)
 }

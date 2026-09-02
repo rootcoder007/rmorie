@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_entropy}
 \title{Shannon entropy of each attention row, in nats}
 \usage{
-morie_vit2lf_entropy(w)
+morie_vit2lf_entropy(w) 
 }
 \arguments{
 \item{w}{The attention weight matrix.}

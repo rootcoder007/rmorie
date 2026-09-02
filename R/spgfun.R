@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' G-function: the nearest-neighbour distance distribution.
+#' G-function: the nearest-neighbour distance distribution
 #'
 #' G_hat(y0) = #(y_i <= y0) / n, the empirical probability that an
 #' event's nearest-neighbour distance is at most y0. Under CSR with

@@ -8,6 +8,7 @@ morie_optimal_overlap_weight(var_a, var_b)
 }
 \arguments{
 \item{var_a, var_b}{Domain variances from each frame.}
+
 }
 \value{
 The optimal weight.

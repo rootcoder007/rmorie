@@ -5,10 +5,15 @@
 \alias{Ginagg}
 \title{Graph isomorphism network aggregation (Xu et al. 2019)}
 \usage{
-Ginagg(A, H, eps = 0)
+Ginagg(A, H, eps = 0) 
 }
 \description{
 Graph isomorphism network aggregation (Xu et al. 2019)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{H}{Argument \code{H}; see Usage.}
+\item{eps}{Argument \code{eps}; see Usage.}
 }
 \value{
 A list with \code{H}, \code{eps}, \code{n_nodes}, \code{dim}.

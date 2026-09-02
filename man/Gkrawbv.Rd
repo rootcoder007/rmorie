@@ -21,6 +21,8 @@ morie_fauzi_thm1_1_bias_mgkde(x, h, n, fp, fpp, f, boundary = FALSE, c = NULL)
 \item{boundary}{Logical; use the boundary branch of (1.11).}
 
 \item{c}{The constant in \code{x/h -> c}; required when \code{boundary} is TRUE.}
+
+
 }
 \value{
 Named list: bias, variance, mse, rnum, rden, region, h, n, method.

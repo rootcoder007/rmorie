@@ -5,7 +5,7 @@
 \alias{MfiltH}
 \title{H(n) = g(N-1-n): the template reversed in time, which makes the}
 \usage{
-MfiltH(g, normalize = FALSE)
+MfiltH(g, normalize = FALSE) 
 }
 \arguments{
 \item{g}{Coerced to numeric by the body, with \code{as.numeric}.}

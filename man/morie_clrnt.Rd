@@ -5,7 +5,10 @@
 \alias{morie_clrnt}
 \title{morie_clrnt}
 \usage{
-morie_clrnt(clint_in_vitro, cl_h = NULL, fu_blood = NULL, log_pd = NULL, fu_incubation = NULL, system = "hepatocytes", species = "human", liver_model = "well_stirred", protein = 1, volume_ratio = 0.005, cl_plasma = NULL, fu_plasma = NULL, blood_plasma_ratio = NULL, charge = "neutral", fold = 2)
+morie_clrnt(clint_in_vitro, cl_h = NULL, fu_blood = NULL, log_pd = NULL, 
+    fu_incubation = NULL, system = "hepatocytes", species = "human", liver_model = "well_stirred", 
+    protein = 1, volume_ratio = 0.005, cl_plasma = NULL, fu_plasma = NULL, 
+    blood_plasma_ratio = NULL, charge = "neutral", fold = 2) 
 }
 \arguments{
 \item{clint_in_vitro}{Passed to \code{clrnt}.}

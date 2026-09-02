@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_qrs.R
 \name{.morie_qrs_peaks}
 \alias{.morie_qrs_peaks}
-\title{Peak set {p} of eq (4.6): above th and strictly greater than the m}
+\title{Peak set \{p\} of eq (4.6): above th and strictly greater than the m}
 \usage{
 .morie_qrs_peaks(g, th, m)
 }

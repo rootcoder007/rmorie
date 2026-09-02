@@ -4,7 +4,7 @@
 \alias{Onestep}
 \alias{morie_ksr15_kosorok_one_step_estimator}
 \alias{morie_kosorok_one_step_estimator}
-\title{A single Newton step on the estimating equation from theta0.}
+\title{A single Newton step on the estimating equation from theta0}
 \usage{
 Onestep(x, theta0, kind = "huber", k = 1.345)
 

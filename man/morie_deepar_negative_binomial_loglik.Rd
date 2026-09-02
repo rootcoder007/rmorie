@@ -5,7 +5,7 @@
 \alias{morie_deepar_negative_binomial_loglik}
 \title{Negative binomial log-likelihood}
 \usage{
-morie_deepar_negative_binomial_loglik(z, mu, alpha)
+morie_deepar_negative_binomial_loglik(z, mu, alpha) 
 }
 \arguments{
 \item{z}{Numeric observation.}

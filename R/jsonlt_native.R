@@ -631,6 +631,7 @@ morie_jsonlt_unbox <- function(x) {
   obj
 }
 
+#' @param x See Usage.
 #' @export
 print.json <- function(x, ...) {
   cat(x, "\n")
@@ -1075,7 +1076,7 @@ morie_jsonlt_validate <- function(txt) {
 # ================================================================ text tools
 
 # Tokenizer + yajl-style generator: strings are decoded and re-encoded (so
-# "é" comes out as the character, "\/" as "/"), numbers are copied
+# "e" comes out as the character, "\/" as "/"), numbers are copied
 # verbatim, and the beautifier follows yajl_gen exactly (newline after
 # every opener, ",\n" between items, ": " after keys, final newline).
 #' @noRd

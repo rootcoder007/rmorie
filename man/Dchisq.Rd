@@ -5,7 +5,7 @@
 \alias{Dchisq}
 \title{Dchisq}
 \usage{
-Dchisq(x, df, log = FALSE)
+Dchisq(x, df, log = FALSE) 
 }
 \arguments{
 \item{x}{Passed to \code{Dgamma}.}

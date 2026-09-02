@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_ipw_ate}
 \alias{morie_otis_ipw_ate}
-\title{Hajek-stabilised IPW estimator of the ATE on OTIS data.}
+\title{Hajek-stabilised IPW estimator of the ATE on OTIS data}
 \usage{
 morie_otis_ipw_ate(df, treatment, outcome, covariates, eps = 0.02)
 }

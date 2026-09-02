@@ -29,6 +29,7 @@ morie_geron_adamax(
 \item{t}{Timestep.}
 
 \item{theta}{Parameters.}
+
 }
 \value{
 List with \code{theta}, \code{step}, \code{m}, \code{u}, \code{m_hat}.

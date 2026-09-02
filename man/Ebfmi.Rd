@@ -2,18 +2,18 @@
 % Please edit documentation in R/ebfmi.R
 \name{Ebfmi}
 \alias{Ebfmi}
-\title{Energy Bayesian fraction of missing information.}
+\title{Energy Bayesian fraction of missing information}
 \usage{
 Ebfmi(energy)
 }
 \arguments{
-\item{energy}{Energies per iteration; a list of lists is treated as one chain per row.}
+\item{energy}{See Usage.}
 }
 \value{
 List with \code{ebfmi} (per chain), \code{min_ebfmi}, \code{n_chains}, \code{n}.
 }
 \description{
-Formula: EBFMI = sum_{n=1}^{N} (E_n - E_{n-1})^2 / sum_{n=0}^{N} (E_n - Ebar)^2
+Formula: EBFMI = sum_\{n=1\}^\{N\} (E_n - E_\{n-1\})^2 / sum_\{n=0\}^\{N\} (E_n - Ebar)^2
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

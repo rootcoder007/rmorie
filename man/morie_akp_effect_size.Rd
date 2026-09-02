@@ -19,11 +19,12 @@ morie_winsorized_regression(X, y, tr = 0.2, n_iter = 20, tol = 1e-04)
 
 \item{equal_variance}{pool the Winsorized variances}
 
-\item{X}{predictor matrix or vector}
 
-\item{n_iter}{maximum refinement iterations}
+\item{X}{Argument \code{X}; see Usage.}
 
-\item{tol}{convergence tolerance}
+\item{n_iter}{Argument \code{n_iter}; see Usage.}
+
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 a list; see each method's description

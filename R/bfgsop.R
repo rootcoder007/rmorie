@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' BFGS secant update of the Hessian and its inverse.
+#' BFGS secant update of the Hessian and its inverse
 #'
 #' B <- B - B s s'B/(s'B s) + y y'/(y's), or in inverse form
 #' H <- (I - rho s y') H (I - rho y s') + rho s s' with rho = 1/(y's).
 #'
 #' @param H Current approximation; the inverse Hessian when inverse is
 #'   TRUE, the Hessian otherwise.
-#' @param s Step x_{k+1} - x_k.
-#' @param y Gradient change g_{k+1} - g_k.
+#' @param s Step x_\{k+1\} - x_k.
+#' @param y Gradient change g_\{k+1\} - g_k.
 #' @param inverse Update the inverse Hessian.
 #'
 #' @return List with M, rho, curvature, secant, p, inverse.  secant is

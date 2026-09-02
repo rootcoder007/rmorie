@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Moments of Moran's I under Gaussianity and under randomization
 #'
-#' Both assumptions give the same mean, \eqn{E[I] = -1/(n-1)} (p. 22), but
+#' Both assumptions give the same mean, \eqn{E\[I\] = -1/(n-1)} (p. 22), but
 #' the variances differ and both are returned. `variance_normal` is
-#' \eqn{(n^2 S_1 - n S_2 + 3 S_0^2)/\{S_0^2(n^2-1)\} - E[I]^2}, which does
+#' \eqn{(n^2 S_1 - n S_2 + 3 S_0^2)/\{S_0^2(n^2-1)\} - E\[I\]^2}, which does
 #' not involve the data at all. `variance_randomization` is Problem 1.8's
-#' \eqn{E_r\[I^2\]} less \eqn{E[I]^2}, which enters the data only through the
+#' \eqn{E_r\[I^2\]} less \eqn{E\[I\]^2}, which enters the data only through the
 #' sample kurtosis \eqn{b}.
 #'
 #' Two corrections against the placeholder this replaces. It printed the
 #' *normality* variance and labelled it randomization, and it was missing the
-#' \eqn{-E[I]^2} term. Separately, the \eqn{E_r\[I^2\]} printed in Problem 1.8
+#' \eqn{-E\[I\]^2} term. Separately, the \eqn{E_r\[I^2\]} printed in Problem 1.8
 #' is missing a bracket: \eqn{n} multiplies the whole first group,
 #' \eqn{n\[(n^2-3n+3)S_1 - nS_2 + 3w_{..}^2\]}, which is the grouping the
 #' book's own Example 1.7 confirms (sd 0.0732 against the literal reading's

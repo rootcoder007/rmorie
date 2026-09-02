@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sparse (masked) scaled dot-product attention.
+#' Sparse (masked) scaled dot-product attention
 #'
 #' softmax(mask_S(Q K' / sqrt(d))) V, with the score set to -Inf wherever
 #' the connectivity matrix S is zero.

@@ -7,7 +7,9 @@
 .tqang_fmod(x, y)
 }
 \arguments{
-\item{theta}{Angle in radians.}
+\item{x}{See Usage.}
+
+\item{y}{See Usage.}
 }
 \value{
 Angle in [-pi, pi).

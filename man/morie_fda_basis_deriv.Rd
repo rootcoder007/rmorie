@@ -5,7 +5,7 @@
 \alias{morie_fda_basis_deriv}
 \title{P-th derivative of the basis functions of (14.2).  For the Fourier}
 \usage{
-morie_fda_basis_deriv(t, n_basis, p = 1L, kind = "fourier", period = NULL)
+morie_fda_basis_deriv(t, n_basis, p = 1L, kind = "fourier", period = NULL) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}
@@ -15,7 +15,7 @@ morie_fda_basis_deriv(t, n_basis, p = 1L, kind = "fourier", period = NULL)
 \item{period}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
-basis phi_0 = 1, phi_{2k-1} = sin(2 pi k t / P) and phi_{2k} = cos(2 pi k t / P), so the p-th derivative is (2 pi k / P)^p times a quarter-period phase shift.  Mirrors the Python _gp_core.fda_basis_derivative, including its polynomial convention u = (t - lo) / span, which differs from morie_fda_basis above.
+basis phi_0 = 1, phi_\{2k-1\} = sin(2 pi k t / P) and phi_\{2k\} = cos(2 pi k t / P), so the p-th derivative is (2 pi k / P)^p times a quarter-period phase shift.  Mirrors the Python _gp_core.fda_basis_derivative, including its polynomial convention u = (t - lo) / span, which differs from morie_fda_basis above.
 }
 \value{
 The value of \code{out}, as built in the body.

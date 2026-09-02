@@ -5,7 +5,7 @@
 \alias{alfSigm}
 \title{alfSigm}
 \usage{
-alfSigm(x)
+alfSigm(x) 
 }
 \arguments{
 \item{x}{Numeric; passed to \code{exp}.}

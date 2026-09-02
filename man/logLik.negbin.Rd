@@ -5,7 +5,7 @@
 \alias{logLik.negbin}
 \title{Log-likelihood of method for \code{negbin} objects}
 \usage{
-logLik.negbin(object, ...)
+\method{logLik}{negbin}(object, ...) 
 }
 \arguments{
 \item{object}{A \code{negbin} object.}

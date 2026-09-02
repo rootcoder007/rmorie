@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' BvM diagnostic for the mean functional under a DP prior.
+#' BvM diagnostic for the mean functional under a DP prior
 #'
 #' @param x Numeric data vector.
 #' @param theta0 Optional null value for the mean functional.

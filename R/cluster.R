@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' One-stage cluster sample: every element of each sampled cluster.
+#' One-stage cluster sample: every element of each sampled cluster
 #'
 #' The variance depends on the spread of the cluster means and not at all
 #' on the spread within a cluster. The design effect against simple random

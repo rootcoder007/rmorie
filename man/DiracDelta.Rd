@@ -5,7 +5,7 @@
 \alias{DiracDelta}
 \title{Eq (3.24): delta(t) is undefined at t = 0 and 0 elsewhere.  A}
 \usage{
-DiracDelta(t, width = NULL)
+DiracDelta(t, width = NULL) 
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}

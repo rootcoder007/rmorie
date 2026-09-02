@@ -5,7 +5,7 @@
 \alias{lagged_design}
 \title{Covariates at time `k_time` together with `lag` earlier values}
 \usage{
-lagged_design(L_hist, Y_hist = NULL, k_time = 0, lag = 1)
+lagged_design(L_hist, Y_hist = NULL, k_time = 0, lag = 1) 
 }
 \arguments{
 \item{L_hist}{Passed to \code{.lggvls_lagged_design}.}

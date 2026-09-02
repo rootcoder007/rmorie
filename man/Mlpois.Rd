@@ -5,10 +5,18 @@
 \alias{Mlpois}
 \title{Multilevel Poisson log-rate (Lawson eq. 15.2)}
 \usage{
-Mlpois(beta0, beta1, age, race_effect, v, W)
+Mlpois(beta0, beta1, age, race_effect, v, W) 
 }
 \description{
 Multilevel Poisson log-rate (Lawson eq. 15.2)
+}
+\arguments{
+\item{beta0}{Argument \code{beta0}; see Usage.}
+\item{beta1}{Argument \code{beta1}; see Usage.}
+\item{age}{Argument \code{age}; see Usage.}
+\item{race_effect}{Argument \code{race_effect}; see Usage.}
+\item{v}{Argument \code{v}; see Usage.}
+\item{W}{Argument \code{W}; see Usage.}
 }
 \value{
 A list with \code{lograte}, \code{rate}, \code{n}.

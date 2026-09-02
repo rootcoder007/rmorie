@@ -5,7 +5,7 @@
 \alias{Dwt}
 \title{Dyadic DWT via the decimated filter bank, eqs (8.111)-(8.113)}
 \usage{
-Dwt(x, wavelet = "db4", levels = 3)
+Dwt(x, wavelet = "db4", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

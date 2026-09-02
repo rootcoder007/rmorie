@@ -353,7 +353,7 @@ NULL
 #' Propensity Score Weighting", PLoS ONE 6(3), e18174, actually perform:
 #' "we trimmed high weights downwards, with cutpoints ranging from the
 #' 99th to the 50th percentiles ... all weights with value above the
-#' [cutpoint] were set equal to the [cutpoint]".  Note that they cap the
+#' \[cutpoint\] were set equal to the \[cutpoint\]".  Note that they cap the
 #' HIGH side only, which is why side = "upper" is the default here.
 #' Contrast .mor_trim_ps, which caps the SCORES. See also Cole, S. R.
 #' and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),
@@ -497,6 +497,12 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 #' @param covariates Character vector of covariate names.
 #' @param propensity_col Optional: name of a pre-computed propensity
 #'   score column.
+#' @param trim See Usage.
+#' @param trim_type See Usage.
+#' @param ps_model See Usage.
+#' @param ridge_lambda See Usage.
+#' @param weight_trim See Usage.
+#' @param weight_trim_side See Usage.
 #' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`, `n`, `ess`.
 #' @export
 #' @examples
@@ -606,7 +612,7 @@ morie_estimate_att <- function(data, treatment, outcome, covariates,
 
   n1 <- sum(t == 1)
   n <- length(y)
-  # Influence-function SE for IPW-ATT (Imbens & Wooldridge 2009 §5.5).
+  # Influence-function SE for IPW-ATT (Imbens & Wooldridge 2009 Section 5.5).
   # psi_i = [t*Y - (1-t)*Y*ps/(1-ps)] / E[t] - t*ATT / E[t].
   # Divides by sqrt(total n), not sqrt(n_treated).
   # NB: "known propensity score" form; conservative when ps is estimated
@@ -835,7 +841,7 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
 #' Native rmorie causal forest: the R-learner decomposition (Nie &
 #' Wager 2021) with cross-fit nuisances and a weighted subsampled
 #' regression forest for tau(x), combined through the AIPW orthogonal
-#' score — the same estimand grf's
+#' score -- the same estimand grf's
 #' \code{average_treatment_effect(method = "AIPW")} targets
 #' (cross-validated against grf in the package's cross tests). A
 #' machine-learning alternative to the GLM-based
@@ -947,9 +953,9 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 #'
 #' @inheritParams morie_estimate_aipw
 #' @param meta_learner One of `"t_learner"` (default), `"s_learner"`,
-#'   `"x_learner"` (Kuenzel et al. 2019 — two-stage with
+#'   `"x_learner"` (Kuenzel et al. 2019 -- two-stage with
 #'   propensity-weighted combination; strong under arm imbalance), or
-#'   `"dr_learner"` (Kennedy 2023 — cross-fit AIPW pseudo-outcome
+#'   `"dr_learner"` (Kennedy 2023 -- cross-fit AIPW pseudo-outcome
 #'   regressed with the native forest; doubly robust). All four are
 #'   native; `outcome_model` applies to the T/S-learners only.
 #' @return Numeric vector of per-unit CATE estimates.

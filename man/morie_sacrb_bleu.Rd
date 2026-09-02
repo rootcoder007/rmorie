@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_sacrb_bleu}
 \alias{morie_sacrb_bleu}
+\alias{morie_sacrb}
 \title{morie_sacrb_bleu}
 \usage{
-morie_sacrb_bleu(candidates, references, max_n = 4L, weights = NULL, tokenizer = "13a", lowercase = FALSE)
+morie_sacrb_bleu(candidates, references, max_n = 4L, weights = NULL, tokenizer = "13a", 
+    lowercase = FALSE) 
+
+morie_sacrb(candidates, references, max_n = 4L, weights = NULL, tokenizer = "13a", 
+    lowercase = FALSE) 
 }
 \arguments{
 \item{candidates}{Coerced to character by the body, with \code{as.character}.}

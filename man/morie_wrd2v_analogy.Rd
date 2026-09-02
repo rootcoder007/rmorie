@@ -5,7 +5,7 @@
 \alias{morie_wrd2v_analogy}
 \title{Section 4\'s offset query: b - a + c. The three question words are}
 \usage{
-morie_wrd2v_analogy(vectors, a, b, c, topn = 1)
+morie_wrd2v_analogy(vectors, a, b, c, topn = 1) 
 }
 \arguments{
 \item{vectors}{A vector; indexed elementwise.}

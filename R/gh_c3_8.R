@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Check that a moment sequence is realisable by a measure on \[0, 1\].
+#' Check that a moment sequence is realisable by a measure on \[0, 1\]
 #'
 #' Hausdorff's condition -- alternating finite differences all
 #' non-negative -- is necessary AND sufficient. \code{min_difference} is

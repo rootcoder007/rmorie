@@ -5,7 +5,7 @@
 \alias{morie_slice_sample_1d}
 \title{One univariate slice transition}
 \usage{
-morie_slice_sample_1d(logf, x0, e, w = 1, max_steps = 50L, lower = -Inf, upper = Inf)
+morie_slice_sample_1d(logf, x0, e, w = 1, max_steps = 50L, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{logf}{Function returning the log of an unnormalised density.}

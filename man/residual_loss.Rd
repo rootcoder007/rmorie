@@ -5,7 +5,7 @@
 \alias{residual_loss}
 \title{residual_loss}
 \usage{
-residual_loss(x, g_z)
+residual_loss(x, g_z) 
 }
 \arguments{
 \item{x}{Passed to \code{.gan_an_residual_loss_impl}.}

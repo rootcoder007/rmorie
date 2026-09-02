@@ -13,6 +13,8 @@ the from scale.}
 \item{a_to, b_to}{The same items' parameters on the to scale.}
 
 \item{method}{"mean/mean" (default) or "mean/sigma".}
+
+
 }
 \value{
 A list with elements \code{A}, \code{B},

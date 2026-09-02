@@ -5,7 +5,7 @@
 \alias{morie_trmRew_normal_form}
 \title{morie_trmRew_normal_form}
 \usage{
-morie_trmRew_normal_form(t, rules, strategy = "innermost", max_steps = 10000)
+morie_trmRew_normal_form(t, rules, strategy = "innermost", max_steps = 10000) 
 }
 \arguments{
 \item{t}{See Usage.}

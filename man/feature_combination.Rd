@@ -5,7 +5,7 @@
 \alias{feature_combination}
 \title{feature_combination}
 \usage{
-feature_combination(content_features, collaborative_features)
+feature_combination(content_features, collaborative_features) 
 }
 \arguments{
 \item{content_features}{Passed to \code{.hybRC_mat}.}

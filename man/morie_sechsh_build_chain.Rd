@@ -5,7 +5,7 @@
 \alias{morie_sechsh_build_chain}
 \title{Build a hash-chained audit log}
 \usage{
-morie_sechsh_build_chain(entries, key = NULL, genesis = .SECH_GEN)
+morie_sechsh_build_chain(entries, key = NULL, genesis = .SECH_GEN) 
 }
 \arguments{
 \item{entries}{List of raw-byte entries.}

@@ -5,7 +5,7 @@
 \alias{StepSeq}
 \title{Eq (3.35): u(n) = 1 for n >= 0, 0 otherwise.  Non-strict, so}
 \usage{
-StepSeq(n, shift = 0)
+StepSeq(n, shift = 0) 
 }
 \arguments{
 \item{n}{A vector; its length is taken.}

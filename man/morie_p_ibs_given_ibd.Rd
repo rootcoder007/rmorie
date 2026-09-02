@@ -10,6 +10,7 @@ morie_p_ibs_given_ibd(X, Y, T)
 \item{X, Y}{Allele counts, \code{X + Y == T}.}
 
 \item{T}{Total nonmissing alleles, at least 4.}
+
 }
 \value{
 A 3 x 3 matrix, rows indexed by IBD state 0, 1, 2.

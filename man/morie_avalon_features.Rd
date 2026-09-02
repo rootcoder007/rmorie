@@ -5,7 +5,7 @@
 \alias{morie_avalon_features}
 \title{The feature keys of a molecule, as sorted strings}
 \usage{
-morie_avalon_features(smiles, maxpath = 5L, classes = NULL)
+morie_avalon_features(smiles, maxpath = 5L, classes = NULL) 
 }
 \arguments{
 \item{smiles}{The molecule.}

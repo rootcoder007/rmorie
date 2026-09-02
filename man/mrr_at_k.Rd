@@ -5,10 +5,15 @@
 \alias{mrr_at_k}
 \title{MRR at k}
 \usage{
-mrr_at_k(ranked, target, kk = 20L)
+mrr_at_k(ranked, target, kk = 20L) 
 }
 \description{
 MRR at k
+}
+\arguments{
+\item{ranked}{Argument \code{ranked}; see Usage.}
+\item{target}{Argument \code{target}; see Usage.}
+\item{kk}{Argument \code{kk}; see Usage.}
 }
 \value{
 Reciprocal rank, 0 if not in top k.

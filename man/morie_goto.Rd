@@ -5,7 +5,7 @@
 \alias{morie_goto}
 \title{morie_goto}
 \usage{
-morie_goto(state, sym, ag, first, nts, k = 1)
+morie_goto(state, sym, ag, first, nts, k = 1) 
 }
 \arguments{
 \item{state}{Passed to \code{.prsLR_goto}.}

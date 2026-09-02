@@ -5,7 +5,7 @@
 \alias{morie_drop_edges}
 \title{morie_drop_edges}
 \usage{
-morie_drop_edges(edges, p, rng)
+morie_drop_edges(edges, p, rng) 
 }
 \arguments{
 \item{edges}{Passed to \code{.grace_drop_edges}.}

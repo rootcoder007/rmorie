@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_b03_ruhela_aggregate}
 \alias{morie_otis_analyze_b03_ruhela_aggregate}
 \alias{morie_otis_analyze_b03_mrm_aggregate}
-\title{b03 aggregate Ruhela: Alert presence -> seg placements.}
+\title{b03 aggregate Ruhela: Alert presence -> seg placements}
 \usage{
 morie_otis_analyze_b03_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_b03_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-b03 aggregate Ruhela: Alert presence -> seg placements.
+b03 aggregate Ruhela: Alert presence -> seg placements
 }
 \examples{
 \donttest{

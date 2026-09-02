@@ -5,7 +5,7 @@
 \alias{site_likelihood}
 \title{site_likelihood}
 \usage{
-site_likelihood(tree, seqs, site, pi = NULL, u = 1)
+site_likelihood(tree, seqs, site, pi = NULL, u = 1) 
 }
 \arguments{
 \item{tree}{Passed to \code{.phylml_prune}.}

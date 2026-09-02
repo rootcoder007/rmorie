@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_clpm_coefficients}
 \alias{morie_clpm_coefficients}
+\alias{morie_tmlcll}
 \title{morie_clpm_coefficients}
 \usage{
-morie_clpm_coefficients(X, Y)
+morie_clpm_coefficients(X, Y) 
+
+morie_tmlcll(X, Y) 
 }
 \arguments{
 \item{X}{Passed to \code{.tmlcll_mat}.}

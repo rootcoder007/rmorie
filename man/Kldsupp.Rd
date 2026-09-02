@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c6_5.R
 \name{Kldsupp}
 \alias{Kldsupp}
-\title{Check the extended Schwartz conditions and return the resulting bound.}
+\title{Check the extended Schwartz conditions and return the resulting bound}
 \usage{
 Kldsupp(prior_mass, kl_radius, test_rate, n)
 }

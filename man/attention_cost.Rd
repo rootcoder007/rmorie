@@ -5,7 +5,7 @@
 \alias{attention_cost}
 \title{attention_cost}
 \usage{
-attention_cost(L, patch_len, stride = NULL, D = 1, channel_independent = TRUE)
+attention_cost(L, patch_len, stride = NULL, D = 1, channel_independent = TRUE) 
 }
 \arguments{
 \item{L}{Coerced to integer by the body, with \code{as.integer}.}

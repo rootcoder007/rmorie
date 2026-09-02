@@ -5,7 +5,7 @@
 \alias{cfconv}
 \title{cfconv}
 \usage{
-cfconv(X, R, filter_net, cutoff = 5, ...)
+cfconv(X, R, filter_net, cutoff = 5, ...) 
 }
 \arguments{
 \item{X}{Passed to \code{.schn_mat}.}

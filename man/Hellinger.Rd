@@ -5,7 +5,7 @@
 \alias{Hellinger}
 \title{H = sqrt(1 - BC), so H^2 = 1 - BC.  The Python arm delegates to}
 \usage{
-Hellinger(p1, p2)
+Hellinger(p1, p2) 
 }
 \arguments{
 \item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}

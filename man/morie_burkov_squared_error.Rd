@@ -8,6 +8,7 @@ morie_burkov_squared_error(y_hat, y)
 }
 \arguments{
 \item{y_hat, y}{Predictions and targets.}
+
 }
 \value{
 List with \code{errors}.

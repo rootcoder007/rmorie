@@ -7,6 +7,11 @@
 #' module expmc described exactly the mechanism already shipped, so this
 #' is an alias.
 #'
+#' @param candidates See Usage.
+#' @param utility See Usage.
+#' @param epsilon See Usage.
+#' @param sensitivity See Usage.
+#' @param seed See Usage.
 #' @references McSherry, F., and Talwar, K. (2007). Mechanism design via
 #'   differential privacy. FOCS 2007, 94-103.
 #' @references Dwork, C., and Roth, A. (2014). FnT-TCS 9(3-4), 211-487.

@@ -5,7 +5,7 @@
 \alias{morie_tlcvnp}
 \title{morie_tlcvnp}
 \usage{
-morie_tlcvnp(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L)
+morie_tlcvnp(X, x0, bandwidths, kernel = "epanechnikov", V = 5L, seed = 0L) 
 }
 \arguments{
 \item{X}{Passed to \code{cv_tmle_smoothed}.}

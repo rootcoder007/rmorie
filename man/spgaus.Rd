@@ -2,7 +2,7 @@
 % Please edit documentation in R/spgaus.R
 \name{spgaus}
 \alias{spgaus}
-\title{Gaussian semivariogram model.}
+\title{Gaussian semivariogram model}
 \usage{
 spgaus(h, nugget = 0, sill = 1, range = 1)
 }

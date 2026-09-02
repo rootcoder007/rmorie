@@ -33,8 +33,8 @@ denominator as (k * JMS - EMS) / n, not k * (JMS - EMS) / n, and the value
 it prints for its own example -- pituitary height by MRI, k = 3 examiners
 on n = 10 patients with intracranial hypotension, p. 427 -- is 0.9759,
 which is what that expression gives.  The two-way random model
-y_ij = mu + r_i + c_j + e_ij has E\link{MSR} = sigma_e^2 + k sigma_r^2,
-E\link{MSC} = sigma_e^2 + n sigma_c^2 and E\link[DescTools:MSE]{MSE} = sigma_e^2, so the moment
+y_ij = mu + r_i + c_j + e_ij has E[MSR] = sigma_e^2 + k sigma_r^2,
+E[MSC] = sigma_e^2 + n sigma_c^2 and E[MSE] = sigma_e^2, so the moment
 estimates are sigma_r^2 = (MSR - MSE)/k, sigma_c^2 = (MSC - MSE)/n and
 sigma_e^2 = MSE, and
 

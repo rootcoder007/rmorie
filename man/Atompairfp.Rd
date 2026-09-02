@@ -2,7 +2,7 @@
 % Please edit documentation in R/atmpair.R
 \name{Atompairfp}
 \alias{Atompairfp}
-\title{Atom-pair fingerprint.}
+\title{Atom-pair fingerprint}
 \usage{
 Atompairfp(adjacency, atomtype, nbits = 2048, maxdist = 30)
 }

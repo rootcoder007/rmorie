@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Spatial autoregressive lag model -- alias of \code{sarla}.
+#' Spatial autoregressive lag model -- alias of \code{sarla}
 #'
 #' \code{y = rho W y + X beta + eps}, \code{eps ~ N(0, sigma2 I)}.
 #'

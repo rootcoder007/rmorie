@@ -17,7 +17,7 @@ List with \code{estimate} (eps_n), \code{rate_exponent},
 }
 \description{
 The contraction rate of a Gaussian process prior is the smallest eps
-solving phi_{w0}(eps) <= n eps^2.  When the concentration function
+solving phi_\{w0\}(eps) <= n eps^2.  When the concentration function
 behaves like eps^(-a) -- a = 2 for Brownian motion, Lemma 11.27 --
 the solution is eps_n = n^(-1/(2+a)), i.e. n^(-1/4) for BM.  Nothing
 about the process enters beyond that single exponent, which is why

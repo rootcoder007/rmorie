@@ -5,7 +5,7 @@
 \alias{dirichlet_predictive}
 \title{dirichlet_predictive}
 \usage{
-dirichlet_predictive(N_ij, N_j, beta, m)
+dirichlet_predictive(N_ij, N_j, beta, m) 
 }
 \arguments{
 \item{N_ij}{Coerced to numeric by the body, with \code{as.numeric}.}

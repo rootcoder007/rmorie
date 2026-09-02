@@ -22,7 +22,7 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
 #' nrow(d)
-#' head(d\[, c("soda_id", "type")\])
+#' head(d[, c("soda_id", "type")])
 #' @export
 morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("nyc_opendata_bulk_catalog.csv", offline)

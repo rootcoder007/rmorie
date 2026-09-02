@@ -7,7 +7,7 @@
 #' class closed under right censoring -- the property the Dirichlet
 #' process itself has and shares with the beta process.
 #'
-#' Formula: F(t_k) = 1 - exp(-sum_{j <= k} inc_j).
+#' Formula: F(t_k) = 1 - exp(-sum_\{j <= k\} inc_j).
 #'
 #' @param increments Non-negative increments of M.
 #' @param seed Unused; kept for call compatibility.

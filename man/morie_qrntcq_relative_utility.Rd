@@ -5,7 +5,7 @@
 \alias{morie_qrntcq_relative_utility}
 \title{morie_qrntcq_relative_utility}
 \usage{
-morie_qrntcq_relative_utility(t.R.a, t.R.b, t.Q = 3, generation.time = NULL, infected.fraction = NULL)
+morie_qrntcq_relative_utility(t.R.a, t.R.b, t.Q = 3, generation.time = NULL, infected.fraction = NULL) 
 }
 \arguments{
 \item{t.R.a}{Numeric; combined arithmetically in the body.}

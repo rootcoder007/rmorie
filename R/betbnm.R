@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Beta-binomial conjugate updating.
+#' Beta-binomial conjugate updating
 #'
 #' p | y ~ Beta(alpha + y, beta + n - y); the marginal likelihood is
 #' C(n,y) B(alpha+y, beta+n-y)/B(alpha, beta); the posterior predictive

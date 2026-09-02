@@ -11,6 +11,7 @@ Flowmm(G, source, sink)
 of the directed arc i -> j.}
 
 \item{source, sink}{Zero-based vertex indices; must differ.}
+
 }
 \value{
 List with \code{estimate}, \code{max_flow}, \code{min_cut},

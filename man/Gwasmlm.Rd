@@ -5,10 +5,16 @@
 \alias{Gwasmlm}
 \title{Unified mixed-model per-SNP association test (Yu et al. 2006)}
 \usage{
-Gwasmlm(y, X, snp, Vinv)
+Gwasmlm(y, X, snp, Vinv) 
 }
 \description{
 Unified mixed-model per-SNP association test (Yu et al. 2006)
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{snp}{Argument \code{snp}; see Usage.}
+\item{Vinv}{Argument \code{Vinv}; see Usage.}
 }
 \value{
 A list with \code{beta}, \code{se}, \code{statistic}, \code{df}, \code{coefficients}, \code{sigma2}, \code{n}.

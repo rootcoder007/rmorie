@@ -5,7 +5,9 @@
 \alias{morie_pmfsc_derive}
 \title{Turn observed contacts into a potential, one curve per type pair}
 \usage{
-morie_pmfsc_derive(observations, n_complexes = 1, r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24, reference = "bulk", correction = "none", occupied = NULL, kT = 1, cap = 6)
+morie_pmfsc_derive(observations, n_complexes = 1, r_max = .PMFSC_DEFAULT_CUTOFF, 
+    n_bins = 24, reference = "bulk", correction = "none", occupied = NULL, 
+    kT = 1, cap = 6) 
 }
 \arguments{
 \item{observations}{A list of list(type_i, type_j, separation) for   every contact seen in the training complexes. Order within a pair   matters only in that the two type labels are kept as given.}

@@ -5,7 +5,7 @@
 \alias{morie_alfomg}
 \title{One Evoformer MSA-pair head, both directions}
 \usage{
-morie_alfomg(msa, pair, w_bias = NULL, w_opm = NULL, scale = NULL, gate = NULL)
+morie_alfomg(msa, pair, w_bias = NULL, w_opm = NULL, scale = NULL, gate = NULL) 
 }
 \arguments{
 \item{msa}{The alignment, indexed sequence, position, channel.}

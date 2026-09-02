@@ -126,7 +126,7 @@ morie_crsfmr_dsw_embed <- function(X, seg_len, E = NULL, pos = NULL) {
 #' Multi-head self-attention within each dimension, weights shared.
 #'
 #' @param Z A length-L list of length-D lists of d_model vectors.
-#' @return A 3D array indexed as \code{out[[i]][[d]]}.
+#' @return A 3D array indexed as \code{out[\[i\]][\[d\]]}.
 #' @export
 morie_crsfmr_cross_time_stage <- function(Z) {
   L <- length(Z)
@@ -154,7 +154,7 @@ morie_crsfmr_cross_time_stage <- function(Z) {
 #' @param router Optional list of router vectors; defaults to the
 #'   first \code{c} dimensions' vectors at each time step.
 #' @param n_router Integer, number of router vectors.
-#' @return A 3D array indexed as \code{out[[i]][[d]]}.
+#' @return A 3D array indexed as \code{out[\[i\]][\[d\]]}.
 #' @export
 morie_crsfmr_cross_dimension_stage <- function(Z, router = NULL,
                                               n_router = NULL) {

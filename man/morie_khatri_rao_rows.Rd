@@ -5,7 +5,7 @@
 \alias{morie_khatri_rao_rows}
 \title{morie_khatri_rao_rows}
 \usage{
-morie_khatri_rao_rows(A, B)
+morie_khatri_rao_rows(A, B) 
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}

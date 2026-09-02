@@ -5,7 +5,7 @@
 \alias{morie_dsp_rls_cpp}
 \title{morie_dsp_rls_cpp}
 \usage{
-morie_dsp_rls_cpp(x, d, order, lam, delta)
+morie_dsp_rls_cpp(x, d, order, lam, delta) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

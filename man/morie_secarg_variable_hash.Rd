@@ -5,7 +5,7 @@
 \alias{morie_secarg_variable_hash}
 \title{Argon2\'s variable-length hash H\'}
 \usage{
-morie_secarg_variable_hash(data, length)
+morie_secarg_variable_hash(data, length) 
 }
 \arguments{
 \item{data}{Raw vector of bytes.}

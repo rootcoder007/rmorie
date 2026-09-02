@@ -12,6 +12,8 @@ morie_geron_lasso_cost(X, y, theta, alpha, penalize_intercept = FALSE)
 \item{alpha}{Non-negative L1 weight.}
 
 \item{penalize_intercept}{Include theta[1] in the penalty.}
+
+
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l1_norm}, \code{n_zero}.

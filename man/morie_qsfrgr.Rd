@@ -5,7 +5,9 @@
 \alias{morie_qsfrgr}
 \title{Conditional survival quantiles from a forest}
 \usage{
-morie_qsfrgr(time, event, X, quantile = 0.5, n_trees = 20L, mtry = NULL, min_leaf = 3L, max_depth = 6L, honest = TRUE, seed = 0, rule = "logrank", newX = NULL, grid = NULL)
+morie_qsfrgr(time, event, X, quantile = 0.5, n_trees = 20L, mtry = NULL, min_leaf = 3L, 
+    max_depth = 6L, honest = TRUE, seed = 0, rule = "logrank", newX = NULL, 
+    grid = NULL) 
 }
 \arguments{
 \item{time}{Observed time.}

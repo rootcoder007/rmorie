@@ -5,7 +5,7 @@
 \alias{wbwc_invert}
 \title{wbwc_invert}
 \usage{
-wbwc_invert(tree, known, candidates, priors, sensitive = 0L, unknown = NULL)
+wbwc_invert(tree, known, candidates, priors, sensitive = 0L, unknown = NULL) 
 }
 \arguments{
 \item{tree}{Passed to \code{tree_paths}.}

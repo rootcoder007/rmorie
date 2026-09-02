@@ -5,7 +5,7 @@
 \alias{project_nonneg}
 \title{project_nonneg}
 \usage{
-project_nonneg(x)
+project_nonneg(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

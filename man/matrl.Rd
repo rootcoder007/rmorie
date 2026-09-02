@@ -17,6 +17,7 @@ morie_matrl(yi, vi, cluster, level = 0.95, upper = NULL)
 \item{level}{confidence level.}
 
 \item{upper}{optional upper bound of the variance-component search.}
+
 }
 \value{
 list: estimate, se, ci_lower, ci_upper, tau2_level2, tau2_level3,

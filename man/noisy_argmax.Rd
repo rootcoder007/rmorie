@@ -5,7 +5,7 @@
 \alias{noisy_argmax}
 \title{noisy_argmax}
 \usage{
-noisy_argmax(counts, gamma, seed = 0)
+noisy_argmax(counts, gamma, seed = 0) 
 }
 \arguments{
 \item{counts}{A vector; its length is taken and its elements indexed.}

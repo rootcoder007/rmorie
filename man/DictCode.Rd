@@ -5,7 +5,7 @@
 \alias{DictCode}
 \title{Section 9.5 for the greedy stage and 9.8 for the use of the resulting}
 \usage{
-DictCode(Y, D, sparsity, tol = 1e-12)
+DictCode(Y, D, sparsity, tol = 1e-12) 
 }
 \arguments{
 \item{Y}{Passed to \code{.morie_bx_mat}.}

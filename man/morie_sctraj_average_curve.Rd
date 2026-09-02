@@ -5,7 +5,7 @@
 \alias{morie_sctraj_average_curve}
 \title{morie_sctraj_average_curve}
 \usage{
-morie_sctraj_average_curve(curves, n_points = 100, return_grid = FALSE)
+morie_sctraj_average_curve(curves, n_points = 100, return_grid = FALSE) 
 }
 \arguments{
 \item{curves}{A vector; its length is taken and its elements indexed.}

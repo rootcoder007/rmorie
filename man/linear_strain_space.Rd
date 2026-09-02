@@ -5,7 +5,7 @@
 \alias{linear_strain_space}
 \title{linear_strain_space}
 \usage{
-linear_strain_space(n, width = 2, floor = 0)
+linear_strain_space(n, width = 2, floor = 0) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

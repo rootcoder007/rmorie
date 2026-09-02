@@ -10,6 +10,9 @@ morie_km_hadamard(S_0, L, G, h, t)
 \item{S_0, L, G, h}{functions.}
 
 \item{t}{evaluation time.}
+
+
+
 }
 \value{
 list: derivative, integral_term, boundary_term.

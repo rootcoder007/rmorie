@@ -2,7 +2,7 @@
 % Please edit documentation in R/svmdu.R
 \name{Svmwolfe}
 \alias{Svmwolfe}
-\title{Wolfe dual objective of the support vector machine.}
+\title{Wolfe dual objective of the support vector machine}
 \usage{
 Svmwolfe(alpha, X, y, K = NULL)
 }

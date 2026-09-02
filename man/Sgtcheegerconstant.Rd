@@ -2,12 +2,12 @@
 % Please edit documentation in R/sgtcheeg.R
 \name{Sgtcheegerconstant}
 \alias{Sgtcheegerconstant}
-\title{Sgtcheegerconstant constant by a sweep over the Fiedler vector.}
+\title{Sgtcheegerconstant constant by a sweep over the Fiedler vector}
 \usage{
 Sgtcheegerconstant(A)
 }
 \arguments{
-\item{A}{Symmetric non-negative adjacency matrix.}
+\item{A}{See Usage.}
 }
 \value{
 List with \code{sweep_min}, \code{lower_bound} (lambda_2/2), \code{upper_bound} (sqrt(2 lambda_2)), \code{lambda2}, \code{cut_set}, \code{fiedler}, \code{n}.

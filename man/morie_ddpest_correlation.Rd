@@ -5,7 +5,7 @@
 \alias{morie_ddpest_correlation}
 \title{corr(G_x1(A), G_x2(A)) for a set A}
 \usage{
-morie_ddpest_correlation(G, x1, x2, region)
+morie_ddpest_correlation(G, x1, x2, region) 
 }
 \arguments{
 \item{G}{A collection.}

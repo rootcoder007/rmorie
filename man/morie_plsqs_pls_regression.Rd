@@ -5,7 +5,7 @@
 \alias{morie_plsqs_pls_regression}
 \title{morie_plsqs_pls_regression}
 \usage{
-morie_plsqs_pls_regression(X, Y, n_components = 2)
+morie_plsqs_pls_regression(X, Y, n_components = 2) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

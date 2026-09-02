@@ -10,6 +10,8 @@ morie_experiment_anova(groups = NULL, y = NULL, treatment = NULL, block = NULL)
 \item{groups}{List of numeric vectors (one-way form).}
 
 \item{y, treatment, block}{Long-format vectors (block form).}
+
+
 }
 \value{
 List with the one-way and, when supplied, block results.

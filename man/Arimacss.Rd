@@ -2,7 +2,7 @@
 % Please edit documentation in R/arimaF.R
 \name{Arimacss}
 \alias{Arimacss}
-\title{Conditional sum of squares for an ARIMA(p, d, q) model.}
+\title{Conditional sum of squares for an ARIMA(p, d, q) model}
 \usage{
 Arimacss(y, phi = numeric(0), theta = numeric(0), d = 0, mu = 0)
 }
@@ -21,7 +21,7 @@ Arimacss(y, phi = numeric(0), theta = numeric(0), d = 0, mu = 0)
 List with css, sigma2, loglik, aic, resid, diff, m, p, q, d, n.
 }
 \description{
-e_t = (w_t - mu) - sum_i phi_i (w_{t-i} - mu) - sum_j theta_j e_{t-j}
+e_t = (w_t - mu) - sum_i phi_i (w_\{t-i\} - mu) - sum_j theta_j e_\{t-j\}
 on w = (1-B)^d y with zero presample innovations; CSS = sum e_t^2 and
 logLik = -(m/2)(1 + log(2 pi) + log(CSS/m)).
 }

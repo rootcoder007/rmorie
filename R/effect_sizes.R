@@ -107,7 +107,7 @@ effect_size_result <- function(measure, estimate,
 # STANDARDISED MEAN DIFFERENCES
 # =====================================================================
 
-#' Glass's delta — control-group SD denominator
+#' Glass's delta -- control-group SD denominator
 #'
 #' @param x,y Numeric vectors (NA dropped).
 #' @param control Which group is the control: `"x"` or `"y"` (default).
@@ -245,7 +245,7 @@ partial_eta_squared <- function(ss_effect, ss_error) {
 }
 
 
-#' Omega-squared — less biased than eta-squared
+#' Omega-squared -- less biased than eta-squared
 #'
 #' @param ss_effect,ss_total Sums of squares.
 #' @param df_effect Numerator d.f. of the effect.
@@ -417,7 +417,7 @@ number_needed_to_treat <- function(a, b, c, d, confidence = 0.95) {
 }
 
 
-#' Number needed to harm (NNH) — sign-reversed NNT
+#' Number needed to harm (NNH) -- sign-reversed NNT
 #'
 #' @inheritParams odds_ratio
 #' @return A `morie_effect_size`.

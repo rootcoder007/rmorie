@@ -5,10 +5,15 @@
 \alias{Taupartial}
 \title{Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467}
 \usage{
-Taupartial(x, y, z)
+Taupartial(x, y, z) 
 }
 \description{
 Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{z}{Argument \code{z}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{x11}, \code{x12}, \code{x21}, \code{x22}, \code{dropped}, \code{npairs}, \code{n}.

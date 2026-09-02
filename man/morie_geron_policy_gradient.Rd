@@ -5,7 +5,7 @@
 \alias{morie_geron_policy_gradient}
 \title{Policy gradient (REINFORCE) estimator over discounted returns (Geron Ch 19, hmpg)}
 \usage{
-morie_geron_policy_gradient(trajectories, policy, gamma = 0.99, baseline = FALSE)
+morie_geron_policy_gradient(trajectories, policy, gamma = 0.99, baseline = FALSE) 
 }
 \arguments{
 \item{trajectories}{List of episodes, each a list of `(state, action, reward)`.}

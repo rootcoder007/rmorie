@@ -30,6 +30,11 @@ literature bond angles and their standard deviations (equation 45).}
 the spec.}
 
 \item{clash_tol}{Clash tolerance in angstrom, 1.5 in the spec.}
+
+
+
+
+
 }
 \value{
 A list with \code{bondlength}, \code{bondangle}, \code{clash},

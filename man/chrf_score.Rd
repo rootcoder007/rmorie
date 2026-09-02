@@ -5,7 +5,8 @@
 \alias{chrf_score}
 \title{chrf_score}
 \usage{
-chrf_score(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, word_order = 0L)
+chrf_score(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, 
+    word_order = 0L) 
 }
 \arguments{
 \item{hypothesis}{Coerced to character by the body, with \code{as.character}.}

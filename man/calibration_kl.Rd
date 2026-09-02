@@ -3,9 +3,9 @@
 % the formals.
 \name{calibration_kl}
 \alias{calibration_kl}
-\title{\eqn{KL(p \,\|\, (1-\alpha)q + \alpha p)}.}
+\title{\eqn{KL(p \,\|\, (1-\alpha)q + \alpha p)}}
 \usage{
-calibration_kl(p, q, alpha = 0.01)
+calibration_kl(p, q, alpha = 0.01) 
 }
 \arguments{
 \item{p}{Target distribution \eqn{p(g \mid u)}.}

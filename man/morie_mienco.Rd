@@ -5,7 +5,7 @@
 \alias{morie_mienco}
 \title{morie_mienco}
 \usage{
-morie_mienco(summary, patches, other_patches, critic, estimator = "jsd")
+morie_mienco(summary, patches, other_patches, critic, estimator = "jsd") 
 }
 \arguments{
 \item{summary}{Passed to \code{critic}.}

@@ -20,6 +20,7 @@ morie_geron_clip(
 \item{normalize}{Cosine-normalise.}
 
 \item{class_prompts}{Optional (C, d) prompt embeddings.}
+
 }
 \value{
 List with \code{loss}, \code{loss_i2t}, \code{loss_t2i}, \code{similarity},

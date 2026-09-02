@@ -18,6 +18,7 @@ G = I_n.}
 \item{sigma_g2}{the chapter's sigma_g^2, the prior variance of those effects.}
 
 \item{max_iter, tol}{fixed-point controls.}
+
 }
 \value{
 list: estimate, z_samples, beta_samples, b, n, method.
@@ -34,15 +35,15 @@ Association 88(422), 669-679, which its reference list carries.
 }
 \details{
 Equation (7.2) is p_ic = P(Y_i = c) = Phi(gamma_c + b_i) -
-Phi(gamma_{c-1} + b_i), c = 1, ..., C, "where now L_i = - b_i + epsilon_i
+Phi(gamma_\{c-1\} + b_i), c = 1, ..., C, "where now L_i = - b_i + epsilon_i
 is the latent variable".  Step 2 of the sampler is: "For each i = 1, ..., n,
 simulate l_i from the normal distribution N(-x_i^T beta, 1) truncated in
-(gamma_{y_i - 1}, gamma_{y_i})", and step 3 draws b from N_n(b~, Sigma~_b)
-with Sigma~_b = (sigma_g^{-2} G^{-1} + I_n)^{-1} and b~ = - Sigma~_b l.
+(gamma_\{y_i - 1\}, gamma_\{y_i\})", and step 3 draws b from N_n(b~, Sigma~_b)
+with Sigma~_b = (sigma_g^\{-2\} G^\{-1\} + I_n)^\{-1\} and b~ = - Sigma~_b l.
 
 SIGN CONVENTION, stated because the book's minus signs are load-bearing and
 the PDF text layer drops them.  The book's latent has mean MINUS the linear
-predictor, and its b~ and its beta~ = - sigma~^2_{beta_j} (x_j^T e_j) carry
+predictor, and its b~ and its beta~ = - sigma~^2_\{beta_j\} (x_j^T e_j) carry
 the matching minus.  This implementation works with l* = -l, the latent on
 the positive orientation, so l* has mean +eta and step 3 becomes
 b~ = Sigma~_b l*.  The two are algebraically the same model and the

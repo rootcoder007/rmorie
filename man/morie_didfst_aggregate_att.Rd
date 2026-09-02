@@ -5,7 +5,7 @@
 \alias{morie_didfst_aggregate_att}
 \title{Aggregate ATT(g,t)}
 \usage{
-morie_didfst_aggregate_att(gt, scheme = "simple", horizon = NULL)
+morie_didfst_aggregate_att(gt, scheme = "simple", horizon = NULL) 
 }
 \arguments{
 \item{gt}{A \code{group_time_att} result.}

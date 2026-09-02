@@ -11,6 +11,7 @@ morie_mainf(yi, vi)
 }
 \arguments{
 \item{yi, vi}{study effects and their within-study variances.}
+
 }
 \value{
 list: estimate, rstudent, dffits, cook_d, hat, tau2_del, Q_del,

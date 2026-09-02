@@ -17,6 +17,7 @@ morie_monte_carlo_integration(f, a = 0, b = 1, N = 1000L, seed = 42L)
 \item{N}{integer; sample size (default 1000).}
 
 \item{seed}{integer.}
+
 }
 \value{
 Named list: estimate, se, N, method.

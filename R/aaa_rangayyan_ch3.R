@@ -147,7 +147,7 @@
 
 # ------------------------------------------------------------- eqs 3.1-3.6
 
-#' Eq (3.1): mu = E[eta] = integral eta p(eta) d eta
+#' Eq (3.1): mu = E\[eta\] = integral eta p(eta) d eta
 #'
 #' A step of the rangayyan_ch3 implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
@@ -652,7 +652,7 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
   list(area = 1, unit_area = TRUE, method = "Rangayyan (2024) eq. (3.25)")
 }
 
-#' Eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
+#' Eq (3.26): delta(t) = 0.5 lim_\{a->0\} a |t|^(a-1).  The exponent is
 #'
 #' negative for every a in (0,1), so the function diverges at t = 0 (NA,
 #' not a large finite number).  Its integral over \[-L, L\] is L^a, which
@@ -700,7 +700,7 @@ Ustep <- function(t, shift = 0) {
   )
 }
 
-#' Eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if
+#' Eq (3.28): integral_\{T1\}^\{T2\} x(t) delta(t - to) dt = x(to) if
 #'
 #' T1 < to < T2, else 0.  Both inequalities are strict, so an impulse
 #' sitting on a limit contributes nothing.

@@ -5,7 +5,7 @@
 \alias{morie_rmrl_reward_machine_run}
 \title{Drive a machine over a sequence of truth assignments. labels is}
 \usage{
-morie_rmrl_reward_machine_run(machine, labels)
+morie_rmrl_reward_machine_run(machine, labels) 
 }
 \arguments{
 \item{machine}{A list; the body reads \code{$terminal}, \code{$u0} from it.}

@@ -30,7 +30,7 @@
 NULL
 
 
-#' The five canonical per-area fields the audit consumes.
+#' The five canonical per-area fields the audit consumes
 #' @export
 MORIE_FAIRNESS_CANONICAL_FIELDS <- c(
   "area", "risk", "outcome", "population", "group"

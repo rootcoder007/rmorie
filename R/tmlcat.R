@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Target E[Y_a] at every level of a categorical treatment.
+#' Target E\[Y_a\] at every level of a categorical treatment
 #'
 #' Each level gets its OWN clever covariate 1\{A = a\}/g_a(W) and its own
 #' fluctuation, because one logistic update cannot solve L score

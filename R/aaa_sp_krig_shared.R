@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Internal: covariance C(h) from a nugget / sill / range / model spec.
+#' Internal: covariance C(h) from a nugget / sill / range / model spec
 #'
 #' C(h) = sill * R(h) for h > 0 and C(0) = nugget + sill: the nugget is a
 #' variance component present only at zero lag (Sec 4.3.6).
@@ -21,7 +21,7 @@
   out
 }
 
-#' Internal: pairwise Euclidean distances between two coordinate sets.
+#' Internal: pairwise Euclidean distances between two coordinate sets
 #' @param a Matrix (n by d).
 #' @param b Matrix (m by d).
 #' @return Numeric matrix (n by m).
@@ -36,7 +36,7 @@
   out
 }
 
-#' Internal: simple kriging solution (Sec 5.2.1).
+#' Internal: simple kriging solution (Sec 5.2.1)
 #'
 #' lambda = Sigma^-1 sigma; p = mu + sigma' Sigma^-1 (Z - mu) (5.10);
 #' variance = sigma^2 - sigma' Sigma^-1 sigma (5.11).
@@ -66,7 +66,7 @@
   list(prediction = pred, variance = pmax(vr, 0), weights = lam, mu = mu)
 }
 
-#' Internal: ordinary kriging in terms of the semivariogram, Sec 5.2.2.2.
+#' Internal: ordinary kriging in terms of the semivariogram, Sec 5.2.2.2
 #'
 #' eqs (5.19)-(5.22) with Gamma = \[gamma(s_i - s_j)\] and
 #' gamma(s0) = \[gamma(s0 - s_1), ..., gamma(s0 - s_n)\]'. The SIGN of the

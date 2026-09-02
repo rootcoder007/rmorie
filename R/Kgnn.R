@@ -6,7 +6,7 @@
 #' A relation with no neighbours for a node contributes nothing rather
 #' than dividing by zero.
 #'
-#' Formula: h_i' = relu(sum_r sum_{j in N_i^r} W_r h_j / |N_i^r| + W_0 h_i).
+#' Formula: h_i' = relu(sum_r sum_\{j in N_i^r\} W_r h_j / |N_i^r| + W_0 h_i).
 #'
 #' @param A_r List of per-relation square adjacency matrices.
 #' @param X Node feature matrix, one row per node.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Cholesky re-parameterization that makes GBLUP an ordinary mixed model.
+#' Cholesky re-parameterization that makes GBLUP an ordinary mixed model
 #'
 #' Formula: G = L L';  Zstar = Z L;  then Y = X beta + Zstar ustar + e with ustar ~ N(0, sigma2_g I) has the same marginal variance as u ~ N(0, sigma2_g G)
 #'

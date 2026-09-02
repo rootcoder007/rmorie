@@ -5,7 +5,7 @@
 \alias{morie_rapaf_levin_ar}
 \title{Levin\'s single-factor attributable risk}
 \usage{
-morie_rapaf_levin_ar(prevalence, rate_ratio)
+morie_rapaf_levin_ar(prevalence, rate_ratio) 
 }
 \arguments{
 \item{prevalence}{Population exposure prevalence, in \code{[0, 1]}.}

@@ -5,7 +5,7 @@
 \alias{k02bfs}
 \title{k02bfs}
 \usage{
-k02bfs(A)
+k02bfs(A) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

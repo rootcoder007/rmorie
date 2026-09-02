@@ -5,7 +5,7 @@
 \alias{morie_ncfRS_neumf}
 \title{morie_ncfRS_neumf}
 \usage{
-morie_ncfRS_neumf(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h)
+morie_ncfRS_neumf(p_gmf, q_gmf, p_mlp, q_mlp, Ws, bs, h) 
 }
 \arguments{
 \item{p_gmf}{Coerced to numeric by the body, with \code{as.numeric}.}

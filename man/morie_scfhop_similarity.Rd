@@ -5,7 +5,7 @@
 \alias{morie_scfhop_similarity}
 \title{How close two CATS vectors are}
 \usage{
-morie_scfhop_similarity(a, b, metric = "tanimoto")
+morie_scfhop_similarity(a, b, metric = "tanimoto") 
 }
 \arguments{
 \item{a,b}{Two descriptors of the same length.}

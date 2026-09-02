@@ -5,7 +5,7 @@
 \alias{MfMaxSnr}
 \title{Eq (4.46) rearranged: M_y^2 / P_eta_o = 2 E_x / P_eta_i, the familiar}
 \usage{
-MfMaxSnr(x, noise_power, t = NULL, dt = 1)
+MfMaxSnr(x, noise_power, t = NULL, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

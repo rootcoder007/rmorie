@@ -5,7 +5,8 @@
 \alias{morie_survrsf_best_split}
 \title{morie_survrsf_best_split}
 \usage{
-morie_survrsf_best_split(X, times, events, features, min_deaths = 3, rule = "logrank", rng = NULL)
+morie_survrsf_best_split(X, times, events, features, min_deaths = 3, rule = "logrank", 
+    rng = NULL) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

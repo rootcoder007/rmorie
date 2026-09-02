@@ -5,7 +5,9 @@
 \alias{nonlinear_cg}
 \title{nonlinear_cg}
 \usage{
-nonlinear_cg(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, keep_path = FALSE)
+nonlinear_cg(f, grad, x0, beta = "fletcher-reeves", restart = NULL, max_iter = NULL, 
+    tol = 1e-10, est = NULL, line_search = "fletcher-reeves", hess_vec = NULL, 
+    keep_path = FALSE) 
 }
 \arguments{
 \item{f}{Passed to \code{line_search_fr}.}

@@ -8,7 +8,7 @@
 # sibling formats handled by `tps_io.R`. This module is the lightweight
 # CSV path -- the loader most callers want.
 
-#' Default project data directory for TPS open data.
+#' Default project data directory for TPS open data
 #'
 #' Resolves to `<repo>/data/datasets/TPS/` when `morie` is loaded out
 #' of a source checkout. Users can override per-call via the `path`
@@ -41,7 +41,7 @@ morie_tps_data_dir <- function() {
 }
 
 
-#' Registry of TPS open-data categories.
+#' Registry of TPS open-data categories
 #'
 #' A named list of one-row metadata records keyed by canonical
 #' category name. Each entry holds `description`, `primary_date`
@@ -168,7 +168,7 @@ MORIE_TPS_REGISTRY <- list(
 }
 
 
-#' Load one TPS dataset by category name (CSV thin path).
+#' Load one TPS dataset by category name (CSV thin path)
 #'
 #' `name` is case-insensitive. Pass `nrows = N` for a quick sample
 #' while developing against the largest tables.
@@ -247,7 +247,7 @@ morie_tps_load_dataset <- function(name,
 }
 
 
-#' List all TPS datasets as a `data.frame`.
+#' List all TPS datasets as a `data.frame`
 #'
 #' Returns one row per registered category with columns `name`,
 #' `description`, and `primary_date`.

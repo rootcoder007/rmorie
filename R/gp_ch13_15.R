@@ -141,7 +141,7 @@ morie_fda_coefficients <- function(Psi, x_t) {
 
 #' Basis inner-product matrix (MVSML eq. 14.7)
 #'
-#' Q_{jl} = integral phi_j(t) psi_l(t) dt evaluated by the trapezoid
+#' Q_\{jl\} = integral phi_j(t) psi_l(t) dt evaluated by the trapezoid
 #' rule over the observation grid.
 #' @param t numeric grid of observation points
 #' @param L1 number of coefficient-function basis terms
@@ -336,7 +336,7 @@ morie_zap_mle <- function(y_positive, tol = 1e-12,
 
 #' ZAP and ZAPC predictions (MVSML eq. 15.3-15.4)
 #'
-#' E[Y] = (1 - theta) mu / (1 - exp(-mu)); supplying `threshold` adds
+#' E\[Y\] = (1 - theta) mu / (1 - exp(-mu)); supplying `threshold` adds
 #' the ZAPC hard classification, which predicts 0 when theta exceeds
 #' the threshold and mu otherwise.  See the erratum note in the
 #' function body on the mu factor the book drops.

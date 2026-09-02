@@ -5,7 +5,7 @@
 \alias{airline_autocovariances}
 \title{airline_autocovariances}
 \usage{
-airline_autocovariances(theta, Theta, sigma2 = 1)
+airline_autocovariances(theta, Theta, sigma2 = 1) 
 }
 \arguments{
 \item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}

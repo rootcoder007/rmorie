@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_propagate}
 \title{morie_sam2vd_propagate}
 \usage{
-morie_sam2vd_propagate(frames, encoder, decoder, prompts = NULL, n_recent = 7, m_prompted = 1)
+morie_sam2vd_propagate(frames, encoder, decoder, prompts = NULL, n_recent = 7, m_prompted = 1) 
 }
 \arguments{
 \item{frames}{A vector; its length is taken and its elements indexed.}

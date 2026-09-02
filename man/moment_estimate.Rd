@@ -5,7 +5,7 @@
 \alias{moment_estimate}
 \title{moment_estimate}
 \usage{
-moment_estimate(rho)
+moment_estimate(rho) 
 }
 \arguments{
 \item{rho}{Passed to \code{.sarima_invert_rho}.}

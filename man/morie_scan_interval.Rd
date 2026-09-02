@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_scan_interval}
 \alias{morie_scan_interval}
+\alias{morie_interval_mapping}
 \title{LOD scan along an interval}
 \usage{
-morie_scan_interval(y, left, right, length, step = 0.01, ...)
+morie_scan_interval(y, left, right, length, step = 0.01, ...) 
+
+morie_interval_mapping(y, left, right, length, step = 0.01, ...) 
 }
 \arguments{
 \item{y}{Numeric phenotype vector.}

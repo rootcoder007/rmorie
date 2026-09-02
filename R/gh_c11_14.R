@@ -9,7 +9,7 @@
 #' Logistic classification here, with W = diag(p(1 - p)).
 #'
 #' Formula: f <- f + 0.3 (K (y - p) - f) to the mode;
-#'   Var(f_1) = ((K^(-1) + W)^(-1))_{11}.
+#'   Var(f_1) = ((K^(-1) + W)^(-1))_\{11\}.
 #'
 #' @param x Covariate values; a small separable design when NULL.
 #' @param y Binary responses matching \code{x}.

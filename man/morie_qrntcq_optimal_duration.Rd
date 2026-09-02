@@ -5,7 +5,7 @@
 \alias{morie_qrntcq_optimal_duration}
 \title{morie_qrntcq_optimal_duration}
 \usage{
-morie_qrntcq_optimal_duration(t.Q = 3, generation.time = NULL, t.max = 20, step = 0.25)
+morie_qrntcq_optimal_duration(t.Q = 3, generation.time = NULL, t.max = 20, step = 0.25) 
 }
 \arguments{
 \item{t.Q}{Numeric; combined arithmetically in the body. Defaults to \code{3}.}

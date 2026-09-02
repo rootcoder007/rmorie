@@ -5,7 +5,7 @@
 \alias{PoleZero}
 \title{Eqs (3.67), (3.69): zeros are the roots of the numerator, poles the}
 \usage{
-PoleZero(b, a = NULL)
+PoleZero(b, a = NULL) 
 }
 \arguments{
 \item{b}{Coerced to numeric by the body, with \code{as.numeric}.}

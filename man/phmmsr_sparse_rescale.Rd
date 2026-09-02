@@ -5,7 +5,7 @@
 \alias{phmmsr_sparse_rescale}
 \title{phmmsr_sparse_rescale}
 \usage{
-phmmsr_sparse_rescale(values, floor = 1e-30, target = 1)
+phmmsr_sparse_rescale(values, floor = 1e-30, target = 1) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

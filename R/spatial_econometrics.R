@@ -34,14 +34,11 @@ morie_weights_totals <- function(W) {
 #' `morie_morans_i` is the statistic
 #' `I = (n/S0) * (z' W z) / (z'z)` with `z = x - mean(x)`.
 #' `morie_morans_i_test` mirrors `spdep::moran.test`: under the null
-#' `E[I] = -1/(n-1)` and the variance takes the randomisation form
+#' `E\[I\] = -1/(n-1)` and the variance takes the randomisation form
 #' (conditioning on the observed values, treating only their
 #' arrangement as random) or the normality form.
 #' @param x numeric vector of observations
 #' @param W numeric spatial weights matrix
-#' @param randomisation use the randomisation null; `FALSE` gives the
-#'   normality null
-#' @param alternative "greater", "less" or "two.sided"
 #' @return `morie_morans_i` a number; `morie_morans_i_test` a list with
 #'   `estimate`, `expectation`, `variance`, `statistic` and `p_value`
 #' @export

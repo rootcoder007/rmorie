@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c6_15.R
 \name{Martcons}
 \alias{Martcons}
-\title{Cesaro-average Hellinger discrepancy of the predictive densities.}
+\title{Cesaro-average Hellinger discrepancy of the predictive densities}
 \usage{
 Martcons(dh2, variances = NULL)
 }

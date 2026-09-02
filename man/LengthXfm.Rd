@@ -5,7 +5,7 @@
 \alias{LengthXfm}
 \title{Eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is}
 \usage{
-LengthXfm(chans, wwin, fs)
+LengthXfm(chans, wwin, fs) 
 }
 \arguments{
 \item{chans}{A vector; its length is taken.}

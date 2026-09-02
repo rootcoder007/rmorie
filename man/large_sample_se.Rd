@@ -5,7 +5,7 @@
 \alias{large_sample_se}
 \title{large_sample_se}
 \usage{
-large_sample_se(theta, Theta, n)
+large_sample_se(theta, Theta, n) 
 }
 \arguments{
 \item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}

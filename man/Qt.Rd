@@ -5,7 +5,7 @@
 \alias{Qt}
 \title{The t is symmetric: qt(p) = -qt(1 - p) and qt(0.5) = 0 exactly}
 \usage{
-Qt(p, df)
+Qt(p, df) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

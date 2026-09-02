@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Category probabilities of the ordinal threshold model.
+#' Category probabilities of the ordinal threshold model
 #'
-#' Formula: p_ic = F(gamma_c + eta_i) - F(gamma_{c-1} + eta_i),  gamma_0 = -inf, gamma_C = +inf
+#' Formula: p_ic = F(gamma_c + eta_i) - F(gamma_\{c-1\} + eta_i),  gamma_0 = -inf, gamma_C = +inf
 #'
 #' @param eta Linear predictor x_i'beta for each record.
-#' @param thresholds The C - 1 finite thresholds gamma_1 < ... < gamma_{C-1}.
+#' @param thresholds The C - 1 finite thresholds gamma_1 < ... < gamma_\{C-1\}.
 #' @param link 'probit' for the standard normal CDF or 'logistic' for the standard logistic CDF.
 #'
 #' @return List with ``probabilities``, ``n``, ``C``.

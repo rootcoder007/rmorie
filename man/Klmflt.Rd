@@ -26,7 +26,7 @@ be told apart from correct work.
 }
 \details{
 Formula: see \code{Kalmf}; predict x_pred = F x, P_pred = F P F' + Q,
-then update with gain K = P_pred H' (H P_pred H' + R)^{-1}.
+then update with gain K = P_pred H' (H P_pred H' + R)^\{-1\}.
 }
 \examples{
 set.seed(1)

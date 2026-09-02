@@ -5,7 +5,7 @@
 \alias{kernel_estimate}
 \title{kernel_estimate}
 \usage{
-kernel_estimate(x, y, omegas, kind = "positive")
+kernel_estimate(x, y, omegas, kind = "positive") 
 }
 \arguments{
 \item{x}{Passed to \code{rbind}.}

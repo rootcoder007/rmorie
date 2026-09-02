@@ -5,7 +5,8 @@
 \alias{morie_geron_random_patches}
 \title{Random patches: subsample BOTH rows and features per base model (Geron Ch 6, hmrpt)}
 \usage{
-morie_geron_random_patches(X, y, base_estimator = NULL, n_estimators = 10, max_samples = NULL, max_features = NULL, seed = 0, task = "auto", bootstrap = FALSE)
+morie_geron_random_patches(X, y, base_estimator = NULL, n_estimators = 10, max_samples = NULL, 
+    max_features = NULL, seed = 0, task = "auto", bootstrap = FALSE) 
 }
 \arguments{
 \item{X,y}{Data and targets.}

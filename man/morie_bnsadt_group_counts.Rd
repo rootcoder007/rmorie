@@ -5,7 +5,7 @@
 \alias{morie_bnsadt_group_counts}
 \title{Published studies falling in each free group's region}
 \usage{
-morie_bnsadt_group_counts(x, sigma, family)
+morie_bnsadt_group_counts(x, sigma, family) 
 }
 \arguments{
 \item{x}{Published point estimates.}

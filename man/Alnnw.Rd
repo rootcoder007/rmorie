@@ -14,6 +14,7 @@ neither may be empty.}
 union.}
 
 \item{gap}{linear gap penalty subtracted per gapped position; non-negative.}
+
 }
 \value{
 list: score, estimate, aligned1, aligned2, length, n_match,

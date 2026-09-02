@@ -10,6 +10,8 @@ morie_hypergeometric_dist(k, N, K, n)
 \item{k}{successes drawn.}
 
 \item{N, K, n}{population, successes in population, draws.}
+
+
 }
 \value{
 list(pmf, binomial_limit, abs_error).

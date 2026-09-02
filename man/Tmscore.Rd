@@ -10,6 +10,7 @@ Tmscore(coords1, coords2, l_ref = NULL)
 \item{coords1, coords2}{Aligned, already superposed residue coordinates.}
 
 \item{l_ref}{Reference length; number of aligned residues by default.}
+
 }
 \value{
 List with \code{estimate}, \code{d0}, \code{rmsd}, \code{L}, \code{L_ref}.

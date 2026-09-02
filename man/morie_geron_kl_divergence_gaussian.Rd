@@ -8,6 +8,7 @@ morie_geron_kl_divergence_gaussian(mu, logvar)
 }
 \arguments{
 \item{mu, logvar}{Numeric objects of the same shape.}
+
 }
 \value{
 List with \code{kl}, \code{per_dimension}, \code{per_sample}, \code{variance},

@@ -5,7 +5,7 @@
 \alias{EegAdapt}
 \title{EegAdapt}
 \usage{
-EegAdapt(x, fs, window = NULL, step = NULL, order = 4, threshold = NULL)
+EegAdapt(x, fs, window = NULL, step = NULL, order = 4, threshold = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
