@@ -180,4 +180,5 @@ morie_quantize_with_codebook <- function(x, codebook) {
 
 #' Public alias resolved by fn/_lazy_map.json
 #' @export
+#' @noRd
 morie_lloyd_max_codebook <- morie_tqlld

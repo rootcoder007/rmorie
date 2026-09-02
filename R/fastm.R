@@ -34,7 +34,10 @@
 #'   n_starts_used, h, n, p, method.
 #' @keywords internal
 #' @examples
-#' Fastm(cbind(c(1, 2, 3, 4, 20), c(1, 2, 3, 4, 20)), 4)$estimate
+#' set.seed(1)
+#' X <- cbind(rnorm(40), rnorm(40))
+#' X[1:4, ] <- X[1:4, ] + 8   # four outliers
+#' Fastm(X)$estimate
 #' @export
 Fastm <- function(X, h = NULL, n_starts = 500L, max_iter = 100L, n_keep = 10L) {
   Xm <- .s03mat(X)

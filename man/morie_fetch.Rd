@@ -29,7 +29,7 @@ extract (matched by basename, then by substring).}
 \item{simplify}{For \code{json}/\code{xml}/\code{html}, whether to
 simplify into a data.frame where possible (default \code{TRUE}).}
 
-\item{...}{Passed to the underlying reader (e.g. \code{\link{read.csv}}
+\item{...}{Passed to the underlying reader (e.g. \code{\[read.csv\]}
 arguments, or \code{\link{morie_fetch_arcgis}} arguments).}
 }
 \value{

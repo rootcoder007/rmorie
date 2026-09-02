@@ -25,7 +25,7 @@ List with \code{estimate}, \code{xpehh_unstandardized},
 }
 \description{
 Site-wise EHH curves over all chromosomes of each population
-(\code{\link{Ehhdec}} \code{ehhs}) integrated outward from the core
+(\code{\[Ehhdec\]} \code{ehhs}) integrated outward from the core
 by the same trapezoid rule as iHS; XP-EHH = ln(I_A / I_B)
 (Sabeti et al. 2007, Methods). Local recombination cancels in the
 ratio. Pass \code{standardize = c(mean, sd)} to normalize.

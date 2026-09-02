@@ -85,7 +85,7 @@
 #'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Requires network access.
 #' url <- paste0(
 #'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
@@ -172,7 +172,7 @@ morie_ingest_statcan_csv <- function(url,
 #'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Requires the 'cansim' package and network access.
 #' df <- morie_ingest_statcan_cansim("35-10-0177")
 #' head(df)

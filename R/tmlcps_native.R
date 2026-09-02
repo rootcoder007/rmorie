@@ -249,4 +249,5 @@ morie_tmlcps <- function(y, A, X, a_grid = NULL, fit = "kernel",
 
 #' Compact alias per ledger/NAMING.md
 #' @export
+#' @noRd
 morie_tmlcontinuoustreatment <- morie_tmlcps

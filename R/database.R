@@ -516,7 +516,7 @@ morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with canonical CPADS columns.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
 #' cpads <- morie_load_cpads(use_ckan = TRUE)
 #' if (!is.null(cpads)) head(cpads)
@@ -572,7 +572,7 @@ morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Requires network access. Fetches the first 5000 rows of the
 #' # Canadian Postsecondary Alcohol and Drug Use Survey from the
 #' # Government of Canada CKAN datastore:

@@ -608,4 +608,5 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
 
 #' Compact alias per ledger/NAMING.md
 #' @export
+#' @noRd
 morie_tmledynamicregime <- morie_tmldyn
