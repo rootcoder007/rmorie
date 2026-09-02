@@ -9,7 +9,7 @@ morie_alammar_instruction_data_template(records, template = NULL)
 }
 \arguments{
 \item{records}{List of lists with instruction/input/output.}
-\item{template}{Format string with `{instruction}` and `{input}`.}
+\item{template}{Format string with `\{instruction\}` and `\{input\}`.}
 }
 \description{
 morie_alammar_instruction_data_template

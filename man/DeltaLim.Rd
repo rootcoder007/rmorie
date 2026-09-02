@@ -3,7 +3,7 @@
 % the formals.
 \name{DeltaLim}
 \alias{DeltaLim}
-\title{Eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is}
+\title{Eq (3.26): delta(t) = 0.5 lim_\{a->0\} a |t|^(a-1).  The exponent is}
 \usage{
 DeltaLim(t, a) 
 }

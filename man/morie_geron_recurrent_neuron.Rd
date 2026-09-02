@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_geron_recurrent_neuron}
 \alias{morie_geron_recurrent_neuron}
-\title{Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_{t-1}` + b) (Geron Ch 13, hmrnn)}
+\title{Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_\{t-1\}` + b) (Geron Ch 13, hmrnn)}
 \usage{
 morie_geron_recurrent_neuron(x_t, h_prev, Wx, Wh, b, activation = "tanh") 
 }
@@ -13,7 +13,7 @@ morie_geron_recurrent_neuron(x_t, h_prev, Wx, Wh, b, activation = "tanh")
 \item{activation}{One of tanh/relu/sigmoid/identity.}
 }
 \description{
-Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_{t-1}` + b) (Geron Ch 13, hmrnn)
+Recurrent neuron step: h_t = phi(Wx x_t + Wh `h_\{t-1\}` + b) (Geron Ch 13, hmrnn)
 }
 \value{
 A list with \code{h}, \code{h_next}, \code{z}, \code{jacobian}, \code{jacobian_norm}, \code{estimate}, \code{n}, \code{method}.
