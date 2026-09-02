@@ -20,28 +20,27 @@
 #' @return The value of \code{uni}, as built in the body.
 #' @export
 .unif_stream <- function(seed, block = 8192L) {
-  st <- list(buf = numeric(0), i = 0L, stream = 0L)
-  uni <- function() {
-    if (st$i >= length(st$buf)) {
-      # LCG, sufficient here (used only for MH accept/reject)
-      n <- block
-      out <- numeric(n)
-      x <- as.integer(seed) + as.integer(st$stream) * 1009L
-      for (i in 1:n) {
-        x <- .ghc_lcg31(x)
-        out[i] <- x / 2147483648
-      }
-      st$buf <- out
-      st$stream <- st$stream + 1L
-      st$i <- 0L
+  # Same block-drawn uniform stream as the morie R arm and the Python
+  # arm (Philox via .ghc_rng/.ghc_unif). State lives in an environment so
+  # every call advances -- a plain list copy silently returned the same
+  # number forever and froze the sampler at k = 0.
+  e <- new.env(parent = emptyenv())
+  e$buf <- numeric(0)
+  e$i <- 1L
+  e$block <- as.integer(block)
+  e$rng <- .ghc_rng(seed)
+  e$uni <- function() {
+    if (e$i > length(e$buf)) {
+      e$buf <- .ghc_unif(e$rng, e$block)
+      e$i <- 1L
     }
-    v <- st$buf[st$i + 1L]
-    st$i <- st$i + 1L
-    if (v <= 0) v <- 1e-15
-    if (v >= 1) v <- 1 - 1e-15
+    v <- e$buf[[e$i]]
+    e$i <- e$i + 1L
+    if (v <= 0.0) v <- 1e-15
+    else if (v >= 1.0) v <- 1.0 - 1e-15
     v
   }
-  uni
+  function() e$uni()
 }
 
 # --------------------------------------------------------------------------
@@ -465,24 +464,22 @@ step_function_loglik <- function(y, s, h, L) {
 changepoint_move_probabilities <- function(lam, k_max, cap = 0.9) {
   lam <- as.numeric(lam)
   k_max <- as.integer(k_max)
-  if (lam <= 0) stop("bayrjmcmc: lam must be positive")
+  if (lam <= 0.0) stop("bayrjmcmc: lam must be positive")
   if (k_max < 1) stop("bayrjmcmc: k_max must be at least 1")
-  raw_b <- vapply(0:k_max, function(k) min(1, lam / (k + 1)), numeric(1))
-  raw_d <- vapply(0:k_max, function(k) if (k == 0) 0 else min(1, k / lam),
-                  numeric(1))
-  raw_b[k_max + 1] <- 0
+  raw_b <- sapply(seq_len(k_max + 1L) - 1L, function(k) min(1.0, lam / (k + 1.0)))
+  raw_d <- c(0.0, sapply(seq_len(k_max), function(k) min(1.0, k / lam)))
+  raw_b[k_max + 1L] <- 0.0
   worst <- max(raw_b + raw_d)
-  c_ <- if (worst > 0) cap / worst else cap
-  b <- c_ * raw_b
-  d <- c_ * raw_d
-  eta <- numeric(k_max + 1)
-  pi_ <- numeric(k_max + 1)
-  for (k in 0:k_max) {
-    rest <- 1 - b[k + 1] - d[k + 1]
-    if (k == 0) { eta[k + 1] <- rest; pi_[k + 1] <- 0 }
-    else { eta[k + 1] <- 0.5 * rest; pi_[k + 1] <- 0.5 * rest }
+  cfac <- if (worst > 0.0) cap / worst else cap
+  b <- cfac * raw_b
+  d <- cfac * raw_d
+  eta <- numeric(k_max + 1L); pi_ <- numeric(k_max + 1L)
+  for (k in seq_len(k_max + 1L) - 1L) {
+    rest <- 1.0 - b[k + 1L] - d[k + 1L]
+    if (k == 0L) { eta[k + 1L] <- rest; pi_[k + 1L] <- 0.0 }
+    else { eta[k + 1L] <- 0.5 * rest; pi_[k + 1L] <- 0.5 * rest }
   }
-  list(eta = eta, pi = pi_, b = b, d = d, c = c_)
+  list(eta = eta, pi = pi_, b = b, d = d, c = cfac)
 }
 
 #' birth_split_heights
@@ -580,15 +577,15 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' @param keep_chain A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s}, \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta}, \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height}, \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
 #' @export
-changepoint_rjmcmc <- function(y = numeric(0), L = 1, n_iter = 40000L,
-                               burn_in = 4000L, lam = 3, k_max = 30L,
-                               alpha = 1, beta = 200, seed = 0L, cap = 0.9,
-                               use_likelihood = TRUE, k_init = 0L,
-                               thin = 1L, keep_chain = FALSE) {
+changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
+                               burn_in = 4000, lam = 3.0, k_max = 30,
+                               alpha = 1.0, beta = 200.0, seed = 0, cap = 0.9,
+                               use_likelihood = TRUE, k_init = 0, thin = 1,
+                               keep_chain = FALSE) {
   L <- as.numeric(L)
-  if (L <= 0) stop("bayrjmcmc: L must be positive")
+  if (L <= 0.0) stop("bayrjmcmc: L must be positive")
   alpha <- as.numeric(alpha); beta <- as.numeric(beta)
-  if (alpha <= 0 || beta <= 0)
+  if (alpha <= 0.0 || beta <= 0.0)
     stop("bayrjmcmc: alpha and beta must be positive")
   n_iter <- as.integer(n_iter); burn_in <- as.integer(burn_in)
   if (n_iter < 1) stop("bayrjmcmc: n_iter must be at least 1")
@@ -598,147 +595,164 @@ changepoint_rjmcmc <- function(y = numeric(0), L = 1, n_iter = 40000L,
   if (thin < 1) stop("bayrjmcmc: thin must be at least 1")
   y <- as.numeric(y)
   for (v in y)
-    if (v < 0 || v > L)
+    if (v < 0.0 || v > L)
       stop(sprintf("bayrjmcmc: point %g lies outside [0, %g]", v, L))
   mp <- changepoint_move_probabilities(lam, k_max, cap = cap)
-  eta <- mp$eta; pi_ <- mp$pi; b <- mp$b; d <- mp$d; c_ <- mp$c
+  eta <- mp$eta; pi_ <- mp$pi; b <- mp$b; d <- mp$d; cfac <- mp$c
   k_init <- as.integer(k_init)
   if (k_init < 0 || k_init > k_max)
     stop("bayrjmcmc: k_init must be in [0, k_max]")
 
   uni <- .unif_stream(seed)
-  s <- vapply(seq_len(k_init), function(i) L * i / (k_init + 1), numeric(1))
-  h <- rep(alpha / beta, k_init + 1)
+  s <- vapply(seq_len(k_init), function(i) L * i / (k_init + 1.0), numeric(1))
+  h <- rep(alpha / beta, k_init + 1L)
+
   loglik_fn <- function(s_, h_) {
-    if (use_likelihood) step_function_loglik(y, s_, h_, L) else 0
+    if (use_likelihood) step_function_loglik(y, s_, h_, L) else 0.0
   }
   cur_ll <- loglik_fn(s, h)
-  counts <- rep(0L, k_max + 1)
-  tried <- list(height = 0L, position = 0L, birth = 0L, death = 0L)
-  acc <- list(height = 0L, position = 0L, birth = 0L, death = 0L)
+  counts <- rep(0L, k_max + 1L)
+  tried <- new.env(hash = TRUE, parent = emptyenv())
+  for (k in c("height", "position", "birth", "death")) tried[[k]] <- 0L
+  acc <- new.env(hash = TRUE, parent = emptyenv())
+  for (k in c("height", "position", "birth", "death")) acc[[k]] <- 0L
   chain <- list()
-  s1_sum <- 0; s1_sq <- 0; s1_n <- 0
-  h_sum <- 0; h_n <- 0L
+  s1_sum <- 0.0; s1_sq <- 0.0; s1_n <- 0L
+  h_sum <- 0.0; h_n <- 0L
 
-  for (it in seq_len(n_iter) - 1L) {
+  for (it in seq_len(n_iter)) {
     k <- length(s)
     pick <- uni()
-    edges <- c(0, s, L)
-    if (pick < b[k + 1]) {
-      # birth
-      tried$birth <- tried$birth + 1L
+    edges <- c(0.0, s, L)
+
+    if (pick < b[k + 1L]) {
+      tried[["birth"]] <- tried[["birth"]] + 1L
       s_star <- L * uni()
       j <- 1L
-      while (j + 1 < length(edges) - 1L && s_star >= edges[j + 1]) j <- j + 1L
+      while (j < length(edges) - 1L && s_star >= edges[j + 1L]) j <- j + 1L
       u <- uni()
-      hh <- birth_split_heights(h[j], u, edges[j], s_star, edges[j + 1])
-      hl <- hh[1]; hr <- hh[2]
-      s_new <- c(s[1:(j - 1)], s_star, s[j:length(s)])
-      h_new <- c(h[1:(j - 1)], hl, hr, h[(j + 1):length(h)])
+      h_split <- birth_split_heights(h[j], u, edges[j], s_star, edges[j + 1L])
+      hl <- h_split[1]; hr <- h_split[2]
+      s_new <- c(s[seq_len(j - 1L)], s_star, (if (j <= length(s)) s[j:length(s)] else numeric(0)))
+      h_new <- c(h[seq_len(j - 1L)], hl, hr, (if (j + 1L <= length(h)) h[(j + 1L):length(h)] else numeric(0)))
       new_ll <- loglik_fn(s_new, h_new)
-      log_prior <- (.log_k_prior_ratio(lam, k)
-        + log(2 * (k + 1) * (2 * k + 3)) - 2 * log(L)
-        + log((s_star - edges[j]) * (edges[j + 1] - s_star) /
-              (edges[j + 1] - edges[j]))
+
+      log_prior <- (
+        .log_k_prior_ratio(lam, k)
+        + log(2.0 * (k + 1.0) * (2.0 * k + 3.0)) - 2.0 * log(L)
+        + log((s_star - edges[j]) * (edges[j + 1L] - s_star)
+              / (edges[j + 1L] - edges[j]))
         + alpha * log(beta) - lgamma(alpha)
-        + (alpha - 1) * log(hl * hr / h[j])
+        + (alpha - 1.0) * log(hl * hr / h[j])
         - beta * (hl + hr - h[j]))
-      log_prop <- log(d[k + 1]) + log(L) - log(b[k + 1]) - log(k + 1)
+      log_prop <- log(d[k + 2L]) + log(L) - log(b[k + 1L]) - log(k + 1.0)
       log_jac <- birth_log_jacobian(h[j], hl, hr)
       log_alpha <- (new_ll - cur_ll) + log_prior + log_prop + log_jac
-      if ((k + 1) <= k_max && log(uni()) < log_alpha) {
+      if (k + 1L <= k_max && log(uni()) < log_alpha) {
         s <- s_new; h <- h_new; cur_ll <- new_ll
-        acc$birth <- acc$birth + 1L
+        acc[["birth"]] <- acc[["birth"]] + 1L
       }
-    } else if (pick < b[k + 1] + d[k + 1]) {
-      # death
-      tried$death <- tried$death + 1L
+    } else if (pick < b[k + 1L] + d[k + 1L]) {
+      tried[["death"]] <- tried[["death"]] + 1L
       i <- as.integer(uni() * k)
       if (i >= k) i <- k - 1L
-      j <- i + 1L
-      s_new <- c(s[1:i], s[(i + 2):length(s)])
-      h_merged <- .merge_height(edges[i + 1], edges[i + 2], edges[i + 3],
-                                 h[j], h[j + 1])
-      h_new <- c(h[1:i], h_merged, h[(j + 2):length(h)])
+      s_new <- c(s[seq_len(i)], (if (i + 2L <= length(s)) s[(i + 2L):length(s)] else numeric(0)))
+      h_merged <- .merge_height(edges[i + 1L], edges[i + 2L], edges[i + 3L],
+                                h[i + 1L], h[i + 2L])
+      h_new <- c(h[seq_len(i)], h_merged, (if (i + 3L <= length(h)) h[(i + 3L):length(h)] else numeric(0)))
       new_ll <- loglik_fn(s_new, h_new)
-      kk <- k - 1
-      s_star <- edges[i + 2]
-      left <- edges[i + 1]; right <- edges[i + 3]
-      log_prior <- (.log_k_prior_ratio(lam, kk)
-        + log(2 * (kk + 1) * (2 * kk + 3)) - 2 * log(L)
+      kk <- k - 1L
+      s_star <- edges[i + 2L]
+      left <- edges[i + 1L]
+      right <- edges[i + 3L]
+      log_prior <- (
+        .log_k_prior_ratio(lam, kk)
+        + log(2.0 * (kk + 1.0) * (2.0 * kk + 3.0)) - 2.0 * log(L)
         + log((s_star - left) * (right - s_star) / (right - left))
         + alpha * log(beta) - lgamma(alpha)
-        + (alpha - 1) * log(h[j] * h[j + 1] / h_merged)
-        - beta * (h[j] + h[j + 1] - h_merged))
-      log_prop <- log(d[kk + 1]) + log(L) - log(b[kk + 1]) - log(kk + 1)
-      log_jac <- birth_log_jacobian(h_merged, h[j], h[j + 1])
+        + (alpha - 1.0) * log(h[i + 1L] * h[i + 2L] / h_merged)
+        - beta * (h[i + 1L] + h[i + 2L] - h_merged))
+      log_prop <- log(d[kk + 2L]) + log(L) - log(b[kk + 1L]) - log(kk + 1.0)
+      log_jac <- birth_log_jacobian(h_merged, h[i + 1L], h[i + 2L])
       log_alpha <- -((cur_ll - new_ll) + log_prior + log_prop + log_jac)
       if (log(uni()) < log_alpha) {
         s <- s_new; h <- h_new; cur_ll <- new_ll
-        acc$death <- acc$death + 1L
+        acc[["death"]] <- acc[["death"]] + 1L
       }
-    } else if (pick < b[k + 1] + d[k + 1] + eta[k + 1]) {
-      # height
-      tried$height <- tried$height + 1L
-      j <- as.integer(uni() * (k + 1)); if (j > k) j <- k
-      hj <- h[j + 1] * exp(uni() - 0.5)
+    } else if (pick < b[k + 1L] + d[k + 1L] + eta[k + 1L]) {
+      tried[["height"]] <- tried[["height"]] + 1L
+      j <- as.integer(uni() * (k + 1L))
+      if (j > k) j <- k
+      hj <- h[j + 1L] * exp(uni() - 0.5)
       h_new <- h
-      h_new[j + 1] <- hj
+      h_new[j + 1L] <- hj
       new_ll <- loglik_fn(s, h_new)
-      log_alpha <- (new_ll - cur_ll + alpha * log(hj / h[j + 1]) -
-                    beta * (hj - h[j + 1]))
+      log_alpha <- ((new_ll - cur_ll) + alpha * log(hj / h[j + 1L]) - beta * (hj - h[j + 1L]))
       if (log(uni()) < log_alpha) {
         h <- h_new; cur_ll <- new_ll
-        acc$height <- acc$height + 1L
+        acc[["height"]] <- acc[["height"]] + 1L
       }
-    } else if (k >= 1) {
-      # position
-      tried$position <- tried$position + 1L
-      j <- as.integer(uni() * k); if (j >= k) j <- k - 1L
-      lo <- edges[j + 1]; hi <- edges[j + 3]
+    } else if (k >= 1L) {
+      tried[["position"]] <- tried[["position"]] + 1L
+      j <- as.integer(uni() * k)
+      if (j >= k) j <- k - 1L
+      lo <- edges[j + 1L]
+      hi <- edges[j + 3L]
       s_star <- lo + (hi - lo) * uni()
       s_new <- s
-      s_new[j + 1] <- s_star
+      s_new[j + 1L] <- s_star
       new_ll <- loglik_fn(s_new, h)
-      log_alpha <- (new_ll - cur_ll +
-        log((hi - s_star) * (s_star - lo) / ((hi - s[j + 1]) * (s[j + 1] - lo))))
+      log_alpha <- (new_ll - cur_ll
+                    + log((hi - s_star) * (s_star - lo)
+                          / ((hi - s[j + 1L]) * (s[j + 1L] - lo))))
       if (log(uni()) < log_alpha) {
         s <- s_new; cur_ll <- new_ll
-        acc$position <- acc$position + 1L
+        acc[["position"]] <- acc[["position"]] + 1L
       }
     }
-    if (it >= burn_in) {
-      counts[length(s) + 1] <- counts[length(s) + 1] + 1L
-      if (length(s) == 1) {
-        s1_sum <- s1_sum + s[1]
-        s1_sq <- s1_sq + s[1]^2
+
+    if (it > burn_in) {
+      counts[length(s) + 1L] <- counts[length(s) + 1L] + 1L
+      if (length(s) == 1L) {
+        s1_sum <- s1_sum + s[1L]
+        s1_sq <- s1_sq + s[1L] * s[1L]
         s1_n <- s1_n + 1L
       }
       for (v in h) { h_sum <- h_sum + v; h_n <- h_n + 1L }
-      if (keep_chain && ((it - burn_in) %% thin) == 0)
-        chain[[length(chain) + 1L]] <- list(s = s, h = h)
+      if (keep_chain && ((it - burn_in - 1L) %% thin) == 0L)
+        chain[[length(chain) + 1L]] <- list(s = list(s), h = list(h))
     }
   }
+
   kept <- sum(counts)
   k_post <- counts / kept
   rates <- list()
-  for (key in names(tried))
-    rates[[key]] <- if (tried[[key]] > 0) acc[[key]] / tried[[key]] else 0
-  list(k_posterior = k_post, k_counts = counts,
-       k_mean = sum((0:k_max) * k_post),
-       s = s, h = h, accept = rates, tried = tried, c = c_,
-       b = b, d = d, eta = eta, pi = pi_,
-       mean_s1_given_k1 = if (s1_n > 0) s1_sum / s1_n else NaN,
-       var_s1_given_k1 = if (s1_n > 1)
-         s1_sq / s1_n - (s1_sum / s1_n)^2 else NaN,
-       mean_height = if (h_n > 0) h_sum / h_n else NaN,
-       chain = chain, n_kept = kept, use_likelihood = use_likelihood,
-       method = paste("Green (1995) §4 change-point sampler: height,",
-                      "position, birth and death moves on a step-function",
-                      "rate, with the §4-3 acceptance ratios"),
-       note = paste("with use_likelihood=False the target is the prior,",
-                    "so k must come back Poisson(lam) truncated at k_max",
-                    "and the heights Gamma(alpha, beta)"))
+  for (key in c("height", "position", "birth", "death")) {
+    tv <- tried[[key]]
+    if (tv > 0L) rates[[key]] <- acc[[key]] / tv
+  }
+  list(
+    k_posterior = k_post,
+    k_counts = counts,
+    k_mean = sum((seq_along(k_post) - 1L) * k_post),
+    s = list(s),
+    h = list(h),
+    accept = rates,
+    tried = as.list(tried),
+    c = cfac,
+    b = b,
+    d = d,
+    eta = eta,
+    pi = pi_,
+    mean_s1_given_k1 = if (s1_n > 0L) s1_sum / s1_n else NaN,
+    var_s1_given_k1 = if (s1_n > 1L) (s1_sq / s1_n - (s1_sum / s1_n)^2) else NaN,
+    mean_height = if (h_n > 0L) h_sum / h_n else NaN,
+    chain = chain,
+    n_kept = kept,
+    use_likelihood = as.logical(use_likelihood),
+    method = "Green (1995) §4 change-point sampler: height, position, birth and death moves on a step-function rate, with the §4-3 acceptance ratios",
+    note = "with use_likelihood=False the target is the prior, so k must come back Poisson(lam) truncated at k_max and the heights Gamma(alpha, beta)"
+  )
 }
 
 # house entry point: the package exports one morie_<module>

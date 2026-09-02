@@ -1383,7 +1383,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
     ate = out$theta, se = out$se,
     ci_lower = out$theta - z * out$se,
     ci_upper = out$theta + z * out$se,
-    n = n, method = "PLR (morie native)"
+    n = n, method = "PLR (rmorie native)"
   )
 }
 
