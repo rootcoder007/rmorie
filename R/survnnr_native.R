@@ -121,7 +121,7 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 morie_survnnr_forward <- function(W, b, x, activation = "tanh") {
   a <- as.numeric(x)
   pre <- list()
-  acts <- list(list(a))
+  acts <- list(a)
   for (k in seq_along(W)) {
     z <- as.numeric(W[[k]] %*% a + b[[k]])
     pre[[k]] <- z

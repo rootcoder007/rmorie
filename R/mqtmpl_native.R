@@ -269,6 +269,60 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 
 #' @keywords internal
 #' @noRd
+#' @keywords internal
+#' @noRd
+# EM interval / composite interval mapping at one QTL position -- the
+# Zeng (1994) eqs (5)-(6) composite likelihood, mirrored line for line
+# from the Python arm (morie.fn.cqtmpl.cim). An empty `cofactors` is
+# exactly Lander-Botstein interval mapping, which is what
+# Broman et al. (2003) scanone(method = "em") computes.
+.ghc_mqtmpl_cim_em <- function(y, left, right, r_left, r_right, cofactors = list(),
+                     max_iter = 200L, tol = 1e-10) {
+  n <- length(y); y <- as.numeric(y)
+  cof <- lapply(cofactors, as.numeric)
+  gL <- vapply(seq_len(n), function(i) if (is.na(left[i]))  0L else as.integer(left[i]),  integer(1))
+  gR <- vapply(seq_len(n), function(i) if (is.na(right[i])) 0L else as.integer(right[i]), integer(1))
+  # G[i, ] = c(P(q = 0), P(q = 1)) given the flanking markers (backcross)
+  G <- t(vapply(seq_len(n), function(i) {
+    out <- numeric(2)
+    for (q in 0:1) {
+      p <- if (gL[i] != q) r_left  else 1 - r_left
+      p <- p * (if (gR[i] != q) r_right else 1 - r_right)
+      out[q + 1L] <- p
+    }
+    tot <- out[1] + out[2]
+    if (tot <= 0) stop("mqtmpl: the flanking marker configuration has probability zero")
+    out / tot
+  }, numeric(2)))
+  my <- sum(y) / n
+  beta <- c(my, 0.1 * (max(y) - min(y) + 1e-12), rep(0, length(cof)))
+  s2 <- sum((y - my)^2) / n
+  history <- numeric(0); post <- rep(0.5, n)
+  cofmat <- if (length(cof)) do.call(cbind, cof) else matrix(0, n, 0)
+  wls <- function(X, yy, w) { A <- crossprod(X * w, X); b <- crossprod(X * w, yy); as.numeric(solve(A, b)) }
+  for (iter in seq_len(as.integer(max_iter))) {
+    base <- beta[1] + if (length(cof)) as.numeric(cofmat %*% beta[-(1:2)]) else 0
+    m0 <- base; m1 <- base + beta[2]
+    d0 <- exp(-((y - m0)^2) / (2 * s2)); d1 <- exp(-((y - m1)^2) / (2 * s2))
+    w0 <- G[, 1] * d0; w1 <- G[, 2] * d1; tot <- w0 + w1
+    if (any(tot <= 0)) stop("mqtmpl: the mixture vanished at individual ", which(tot <= 0)[1])
+    post <- w1 / tot
+    ll <- sum(log(tot / sqrt(2 * pi * s2)))
+    history <- c(history, ll)
+    if (length(history) > 1 && abs(history[length(history)] - history[length(history) - 1]) < tol) break
+    X <- rbind(cbind(1, 0, cofmat), cbind(1, 1, cofmat)); Y <- c(y, y); W <- c(1 - post, post)
+    beta <- wls(X, Y, W)
+    s2 <- sum(W * (Y - as.numeric(X %*% beta))^2) / n
+  }
+  X0 <- cbind(1, cofmat); b0 <- wls(X0, y, rep(1, n))
+  r0 <- y - as.numeric(X0 %*% b0); s0 <- sum(r0^2) / n
+  ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
+  lod <- (history[length(history)] - ll0) * (1 / log(10))
+  list(lod = lod, b0 = beta[1], b = beta[2], cofactor_coefficients = beta[-(1:2)],
+       sigma2 = s2, sigma2_null = s0, loglik = history[length(history)], loglik_null = ll0,
+       iterations = length(history), posterior = post, rss = s2 * n, coef = beta)
+}
+
 .ghc_mqtmpl_scan_em <- function(y, markers, positions, step, cof) {
   n <- length(y); m <- length(markers)
   out_pos <- c(); out_lod <- c(); fits <- list()
@@ -284,25 +338,15 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
         integer(1))
       rL <- .ghc_haldane(min(d, span))
       rR <- .ghc_haldane(max(span - d, 0))
-      gprob <- matrix(0, n, 2)
-      for (i in seq_len(n)) {
-        pr <- .ghc_geno_prob(gL[i], gR[i], rL, rR)
-        gprob[i, ] <- pr
-      }
-      mu <- as.numeric(cof %*% rep(0, ncol(cof)))
-      rss0 <- sum((y - mean(y))^2)
-      g0 <- gprob[, 2]
-      sgg <- sum((g0 - mean(g0))^2)
-      rss1 <- rss0
-      if (sgg > 0) {
-        b <- sum((g0 - mean(g0)) * (y - mean(y))) / sgg
-        a <- mean(y) - b * mean(g0)
-        rss1 <- max(sum((y - (a + b * g0))^2), 1e-300)
-      }
-      lod <- 0.5 * n * log(rss0 / rss1) * .GHC_MQTMPL_LOG10E
+      # the caller passes an intercept column when there are no covariates;
+      # the EM adds its own intercept, so keep only non-constant columns
+      cofl <- if (is.null(cof) || NCOL(cof) == 0L) list() else
+        Filter(function(v) length(unique(v)) > 1L, lapply(seq_len(ncol(cof)), function(c) cof[, c]))
+      fit <- .ghc_mqtmpl_cim_em(y, gL, gR, rL, rR, cofl)
+      lod <- fit$lod
       out_pos <- c(out_pos, as.numeric(positions[j]) + d)
       out_lod <- c(out_lod, lod)
-      fits[[length(fits) + 1L]] <- list(lod = lod)
+      fits[[length(fits) + 1L]] <- fit
       d <- d + as.numeric(step)
     }
   }

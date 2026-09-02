@@ -704,7 +704,11 @@ morie_fetch_parquet <- function(path) {
   cols_meta <- lapply(schema[-1L], function(el) {
     list(
       name = rawToChar(el[["4"]]),
-      type = el[["1"]]
+      type = el[["1"]],
+      # Thrift SchemaElement field 3 = repetition_type (1 = OPTIONAL):
+      # an optional column carries a definition-level block before its
+      # values, whatever its physical type.
+      optional = identical(el[["3"]], 1L)
     )
   })
   row_groups <- meta[["4"]]
@@ -724,7 +728,7 @@ morie_fetch_parquet <- function(path) {
       if (is.null(offset)) offset <- cmeta[["11"]]
       vals <- .mpq_read_column(
         con, offset, codec, n_vals,
-        cols_meta[[ci]]$type
+        cols_meta[[ci]]$type, cols_meta[[ci]]$optional
       )
       nm <- cols_meta[[ci]]$name
       out_cols[[nm]] <- c(out_cols[[nm]], list(vals))
@@ -736,7 +740,7 @@ morie_fetch_parquet <- function(path) {
 }
 
 #' @noRd
-.mpq_read_column <- function(con, offset, codec, n_vals, ptype) {
+.mpq_read_column <- function(con, offset, codec, n_vals, ptype, optional = NA) {
   seek(con, offset)
   # page header (thrift compact)
   hdr_raw <- readBin(con, "raw", 128L)
@@ -773,11 +777,38 @@ morie_fetch_parquet <- function(path) {
   # optional: 4-byte length + RLE run. Detect by checking whether the
   # buffer is exactly the packed size for required values.
   n <- page[["5"]][["1"]]
-  .mpq_plain(buf, n, ptype)
+  .mpq_plain(buf, n, ptype, optional)
+}
+
+#' Decode a Parquet RLE/bit-packed hybrid run of 1-bit definition levels.
+#' @noRd
+.mpq_def_levels <- function(payload, n) {
+  out <- integer(0); i <- 1L
+  while (length(out) < n && i <= length(payload)) {
+    # ULEB128 header
+    hdr <- 0; shift <- 0
+    repeat {
+      b <- as.integer(payload[i]); i <- i + 1L
+      hdr <- hdr + bitwAnd(b, 127L) * 2^shift; shift <- shift + 7
+      if (b < 128L) break
+    }
+    if (hdr %% 2 == 0) {              # RLE run: count, then one value byte
+      cnt <- hdr %/% 2
+      val <- as.integer(payload[i]); i <- i + 1L
+      out <- c(out, rep(val, cnt))
+    } else {                          # bit-packed: hdr>>1 groups of 8 values
+      groups <- (hdr - 1) %/% 2
+      for (g in seq_len(groups)) {
+        b <- as.integer(payload[i]); i <- i + 1L
+        out <- c(out, bitwAnd(bitwShiftR(b, 0:7), 1L))
+      }
+    }
+  }
+  out[seq_len(n)]
 }
 
 #' @noRd
-.mpq_plain <- function(buf, n, ptype) {
+.mpq_plain <- function(buf, n, ptype, optional = NA) {
   need <- switch(as.character(ptype),
     "1" = 4L * n, # INT32
     "2" = 8L * n, # INT64
@@ -785,20 +816,34 @@ morie_fetch_parquet <- function(path) {
     NA_integer_
   )
   off <- 0L
-  if (!is.na(need) && length(buf) > need) {
-    # skip definition-level block: 4-byte LE length + payload
+  defs <- rep(1L, n)
+  # An OPTIONAL column always carries a definition-level block (4-byte LE
+  # length + RLE/bit-packed payload) before its values -- for EVERY physical
+  # type. The old size heuristic only knew the fixed-width types, so a
+  # BYTE_ARRAY column read its own definition levels as the first string
+  # ("d\001") and dropped its last row.
+  has_defs <- if (isTRUE(optional)) TRUE else if (isFALSE(optional)) FALSE else
+    (!is.na(need) && length(buf) > need)
+  if (has_defs) {
     dl_len <- readBin(buf[1:4], "integer", 1L,
       size = 4L,
       endian = "little"
     )
+    defs <- .mpq_def_levels(buf[seq.int(5L, length.out = dl_len)], n)
     off <- 4L + dl_len
   }
+  present <- sum(defs != 0L)
+  splice <- function(vals) {
+    if (present == n) return(vals)
+    out <- rep(vals[NA_integer_][1L], n); out[defs != 0L] <- vals; out
+  }
+  n <- present
   body <- buf[(off + 1L):length(buf)]
   if (identical(ptype, 1L)) {
-    return(readBin(body, "integer", n, size = 4L, endian = "little"))
+    return(splice(readBin(body, "integer", n, size = 4L, endian = "little")))
   }
   if (identical(ptype, 2L)) {
-    return(vapply(seq_len(n), function(i) {
+    return(splice(vapply(seq_len(n), function(i) {
       lo <- readBin(body[(8 * i - 7):(8 * i - 4)], "integer", 1L,
         size = 4L, endian = "little"
       )
@@ -806,10 +851,10 @@ morie_fetch_parquet <- function(path) {
         size = 4L, endian = "little"
       )
       hi * 2^32 + (lo %% 2^32)
-    }, numeric(1)))
+    }, numeric(1))))
   }
   if (identical(ptype, 5L)) {
-    return(readBin(body, "double", n, size = 8L, endian = "little"))
+    return(splice(readBin(body, "double", n, size = 8L, endian = "little")))
   }
   if (identical(ptype, 6L)) { # BYTE_ARRAY
     out <- character(n)
@@ -827,7 +872,7 @@ morie_fetch_parquet <- function(path) {
       }
       i <- i + 4L + len
     }
-    return(out)
+    return(splice(out))
   }
   stop("native Parquet reader: unsupported physical type ", ptype,
     "; install the 'arrow' package.",
