@@ -19,3 +19,13 @@ A step of the RcppExports implementation. Called by \code{morie_normal_pdf}. See
 The value of \code{.Call}.
 }
 \keyword{internal}
+\examples{
+set.seed(20260516)
+x <- rnorm(500)
+y <- 0.6 * x + rnorm(500)
+rmorie:::morie_mean_cpp(x)
+rmorie:::morie_var_cpp(x, 1L)
+rmorie:::morie_var_cpp(x, 0L)
+rmorie:::morie_cor_pearson_cpp(x, y)
+rmorie:::morie_normal_pdf_cpp(x, 0.3, 1.7)
+}

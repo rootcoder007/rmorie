@@ -18,3 +18,30 @@ A step of the sarima_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se}, \code{psi}, \code{method}.
 }
 \keyword{internal}
+\examples{
+y <- c(1, 0.5, 0.25, 0.125, 0.0625, 0.03125)
+r <- morie_geron_arima(y, p = 1, d = 0, q = 0, include_mean = FALSE)
+r$ar
+r$sigma2
+r$forecast(2)
+d1 <- morie_geron_arima(c(1, 3, 5, 7), p = 0, d = 1, q = 0)
+d1$intercept
+d1$forecast(2)
+d1$sigma2
+y2 <- c(1, 2, 1.5, 2.5, 2, 3, 2.5, 3.5, 3, 4, 3.5, 4.5)
+ar <- morie_geron_arima(y2, p = 1, d = 0, q = 1)
+ar$ar
+ar$ma
+ar$intercept
+ar$sigma2
+ar$aic
+ar$forecast(2)
+f <- morie_geron_arima_forecast(c(1, 2, 3, 4.5), phi = 0.5, theta = 0.25, d = 1)
+f$forecast
+f$forecast_differenced
+f$residuals
+f$differenced
+f$sigma2
+f$forecast_differenced
+f$forecast
+}
