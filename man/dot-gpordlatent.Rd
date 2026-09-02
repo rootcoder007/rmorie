@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpordlatent}
 \alias{.gpordlatent}
-\title{\subsection{Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)}{
-}}
+\title{Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)}
 \usage{
 .gpordlatent(n, X_E = NULL, X = NULL, X_EM = NULL, Z_L = NULL, L_g = NULL)
 }

@@ -33,7 +33,6 @@
 #' \eqn{O(N)} and a central limit theorem applies.
 #' 
 #' References
-#' ----------
 #' van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
 #' Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 21 (Sofrygin,
 #' Ogburn & van der Laan): N units connected by a social network with

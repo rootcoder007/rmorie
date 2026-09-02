@@ -17,7 +17,5 @@ The value of \code{out}, as built in the body.
 \description{
 SPDX-License-Identifier: AGPL-3.0-or-later
 }
-\section{Default exposure summary: fraction of neighbours treated.}{
-
-}
+Default exposure summary: fraction of neighbours treated.
 

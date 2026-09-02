@@ -57,7 +57,6 @@
 #' .clusmd_fp
 #'
 #' Fingerprint normalisation -- mirror sasimi.fingerprint on the R side.
-#' ---------------------------------------------------------------------------
 #' Accepts an integer set, a numeric vector of indices, or a 0/1
 #' sequence. Returns an integer vector of on-bit indices (sorted,
 #' deduped).
@@ -140,7 +139,6 @@
 #'
 #' Neighbour lists: for each compound, the set of others within
 #' threshold.
-#' ---------------------------------------------------------------------------
 #' Returns a list of integer vectors (sorted ascending); index i holds
 #' the indices j != i with Tanimoto(fp_i, fp_j) >= threshold. Mirrors
 #' the Python neighbour_lists() function.
@@ -193,7 +191,6 @@
 #' .clusmd_butina_clusters
 #'
 #' Butina clusters: the exclusion-sphere clusters, largest sphere first.
-#' ---------------------------------------------------------------------------
 #' Mirrors Python butina_clusters(): repeatedly pick the live compound
 #' with the largest (live-respecting) neighbour count as a centroid,
 #' then take the centroid together with its live neighbours as the next
@@ -256,7 +253,6 @@
 #' .clusmd_cluster_summary
 #'
 #' Cluster summary: sizes, singleton count, and the assignment.
-#' ---------------------------------------------------------------------------
 #' Mirrors Python cluster_summary(). `assignment\[m\]` = k means compound
 #' m is in cluster k (0-indexed).
 #'
@@ -292,7 +288,6 @@
 #' .clusmd_rich
 #'
 #' Public entry point: cluster fingerprints by exclusion sphere.
-#' ---------------------------------------------------------------------------
 #' Returns a rich-result-shaped named list whose `$payload` carries the
 #' fields the Python arm puts in its RichResult payload, mirroring the
 #' key set exactly. The list itself (and `$payload`) is also a plain

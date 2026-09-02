@@ -12,7 +12,6 @@
 #' All functions return a multi-section \code{morie_rich_result} list.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_hawkes_temporal_fit}}: fit mu, kappa,

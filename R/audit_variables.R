@@ -13,7 +13,6 @@
 #' Rcpp only if profiling showed a real bottleneck.
 #'
 #' Public callables
-#' ----------------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_audit_otis_variables}}

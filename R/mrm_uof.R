@@ -9,7 +9,6 @@
 #' to a notebook without further post-processing.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{mrm_uof_force_concentration}}: Hill-MLE Pareto

@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gponeway}
 \alias{.gponeway}
-\title{\subsection{Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)}{
-}}
+\title{Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)}
 \usage{
 .gponeway(groups)
 }

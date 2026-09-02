@@ -29,7 +29,6 @@
 #' }
 #'
 #' Path portability
-#' ----------------
 #'
 #' No path on the maintainer's workstation is hard-coded.  All file
 #' resolution goes through \code{.morie_resolve_arsau_dir} (defined
@@ -48,7 +47,6 @@
 #' }
 #'
 #' 2023 weapon-records invalidity gate
-#' -----------------------------------
 #'
 #' The 2023 release ships \code{uof_weapon_records_invaliddata.csv},
 #' flagged by the ministry as non-compliant.

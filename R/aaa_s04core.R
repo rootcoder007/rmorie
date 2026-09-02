@@ -64,7 +64,7 @@ NULL
 }
 
 ## R quantile type 7, spelled out so the two arms cannot drift.
-#' # R quantile type 7, spelled out so the two arms cannot drift
+#' R quantile type 7, spelled out so the two arms cannot drift
 #'
 #' A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}.
 #' See the file header for the source the module follows.
@@ -86,7 +86,7 @@ NULL
 }
 
 ## 0-based order, ties by original position -- matches the Python arm.
-#' # 0-based order, ties by original position -- matches the Python arm
+#' 0-based order, ties by original position -- matches the Python arm
 #'
 #' A step of the s04core implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.
@@ -243,7 +243,7 @@ NULL
 
 ## Half-away-from-zero. Deliberately not round(): both languages round
 ## half to even but disagree about which values are exactly half.
-#' # Half-away-from-zero. Deliberately not round(): both languages round
+#' Half-away-from-zero. Deliberately not round(): both languages round
 #'
 #' # half to even but disagree about which values are exactly half.
 #'
@@ -255,7 +255,7 @@ NULL
 ## Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
 ## construction, so Q is unique and there is no sign convention left for
 ## the two arms to disagree about (LAPACK and LINPACK differ here).
-#' # Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
+#' Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
 #'
 #' # construction, so Q is unique and there is no sign convention left
 #' for # the two arms to disagree about (LAPACK and LINPACK differ
@@ -300,7 +300,7 @@ NULL
 
 ## Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4'c and mediator
 ## model M = b0 + b1 a + b2'c; cbar is where the decomposition is read.
-#' # Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
+#' Outcome model Y = th0 + th1 a + th2 m + th3 a m + th4\'c and
 #' mediator
 #'
 #' # model M = b0 + b1 a + b2\'c; cbar is where the decomposition is
@@ -325,7 +325,7 @@ NULL
 }
 
 ## VanderWeele four-way decomposition from fitted coefficients.
-#' # VanderWeele four-way decomposition from fitted coefficients
+#' VanderWeele four-way decomposition from fitted coefficients
 #'
 #' A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, \code{Intvse} and 2 others in the module.
 #' See the file header for the source the module follows.
@@ -352,7 +352,7 @@ NULL
 }
 
 ## One TMLE pass for a binary point treatment. W carries its intercept.
-#' # One TMLE pass for a binary point treatment. W carries its intercept
+#' One TMLE pass for a binary point treatment. W carries its intercept
 #'
 #' A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte}, \code{Tmlper} and 2 others in the module.
 #' See the file header for the source the module follows.
@@ -389,7 +389,7 @@ NULL
 ## shared tail1 core uses each language own QR (MGS in Python, Householder
 ## in R); on an ill-conditioned design those part company around 1e-8,
 ## above the parity threshold and below anything a user would notice.
-#' # Least squares by the SAME modified Gram-Schmidt in both arms. The
+#' Least squares by the SAME modified Gram-Schmidt in both arms. The
 #'
 #' # shared tail1 core uses each language own QR (MGS in Python,
 #' Householder # in R); on an ill-conditioned design those part company
@@ -421,7 +421,7 @@ NULL
 ## Upper-triangular inverse by back substitution. Floors the pivot rather
 ## than testing a condition number, so a rank-deficient design gives the
 ## same large numbers in both arms instead of one raising.
-#' # Upper-triangular inverse by back substitution. Floors the pivot
+#' Upper-triangular inverse by back substitution. Floors the pivot
 #' rather
 #'
 #' # than testing a condition number, so a rank-deficient design gives
@@ -447,7 +447,7 @@ NULL
 ## Optimal assignment, Kuhn-Munkres shortest-augmenting-path form. Exact,
 ## O(n^3). Ties broken by the first strictly improving index so both arms
 ## walk the same path. Returns 0-based column for each row.
-#' # Optimal assignment, Kuhn-Munkres shortest-augmenting-path form.
+#' Optimal assignment, Kuhn-Munkres shortest-augmenting-path form.
 #' Exact,
 #'
 #' # O(n^3). Ties broken by the first strictly improving index so both
@@ -497,7 +497,7 @@ NULL
 }
 
 ## Two-way ANOVA mean squares for the intraclass correlations.
-#' # Two-way ANOVA mean squares for the intraclass correlations
+#' Two-way ANOVA mean squares for the intraclass correlations
 #'
 #' A step of the s04core implementation. Called by \code{Icc12c}, \code{IccA}, \code{IccC}.
 #' See the file header for the source the module follows.
@@ -530,7 +530,7 @@ NULL
 ## Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid of
 ## 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
 ## optimiser, so the arms cannot land on different local optima.
-#' # Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
+#' Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
 #' of
 #'
 #' # 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
@@ -561,7 +561,7 @@ NULL
 }
 
 ## Pareto-smoothed importance sampling on log weights.
-#' # Pareto-smoothed importance sampling on log weights
+#' Pareto-smoothed importance sampling on log weights
 #'
 #' A step of the s04core implementation. Called by \code{Infcrt}, \code{Khatd}, \code{Loopr}.
 #' See the file header for the source the module follows.

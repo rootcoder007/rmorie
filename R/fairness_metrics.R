@@ -9,7 +9,6 @@
 #' predictions that already exist.
 #'
 #' Functions
-#' ---------
 #' \itemize{
 #'   \item \code{\link{morie_fairness_disparate_impact}}: the four-fifths
 #'     rule.

@@ -40,7 +40,6 @@
 #' the largest clever covariate rather than hiding it.
 #' 
 #' References
-#' ----------
 #' van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
 #' Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 4 (the
 #' g-computation formula as iterated conditional expectations; the

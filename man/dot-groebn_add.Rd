@@ -15,6 +15,5 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-\subsection{Polynomial arithmetic}{
-}
+Polynomial arithmetic
 }

@@ -23,7 +23,6 @@
 #' are enough for the empirical paper's figures.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_project_xy}}: degrees -> rotated planar km.

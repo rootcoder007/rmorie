@@ -13,7 +13,6 @@
 #' packages.
 #'
 #' Functions
-#' ---------
 #' \itemize{
 #'   \item \code{\link{stat_command}}: constructor for a single command.
 #'   \item \code{\link{register_stat_command}}: add an entry to the

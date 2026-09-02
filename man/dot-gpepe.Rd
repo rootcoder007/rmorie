@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpepe}
 \alias{.gpepe}
-\title{\subsection{Chapter 3: expected prediction error, p.80}{
-}}
+\title{Chapter 3: expected prediction error, p.80}
 \usage{
 .gpepe(sigma2, x_star, eigenvalues)
 }
