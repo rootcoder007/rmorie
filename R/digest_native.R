@@ -118,7 +118,7 @@ morie_make_raw <- function(object) {
   as.raw(object)
 }
 #' @noRd
-.morie_hex_to_raw <- function(h) as.raw(strtoi(substring(h, seq(1L, nchar(h), 2L), seq(2L, nchar(h), 2L)), 16L))
+.morie_digest_hex_to_raw <- function(h) as.raw(strtoi(substring(h, seq(1L, nchar(h), 2L), seq(2L, nchar(h), 2L)), 16L))
 
 #' HMAC (digest's hmac, natively)
 #'
@@ -147,8 +147,8 @@ morie_hmac <- function(key, object, algo = c("md5", "sha1", "crc32", "sha256", "
   ikey <- xor(padded, as.raw(rep(0x36, blocksize)))
   inner <- morie_digest(c(ikey, morie_make_raw(object)), algo = algo, serialize = serialize, ...)
   okey <- xor(padded, as.raw(rep(0x5c, blocksize)))
-  result <- morie_digest(c(okey, .morie_hex_to_raw(inner)), algo = algo, serialize = serialize, ...)
-  if (raw) .morie_hex_to_raw(result) else result
+  result <- morie_digest(c(okey, .morie_digest_hex_to_raw(inner)), algo = algo, serialize = serialize, ...)
+  if (raw) .morie_digest_hex_to_raw(result) else result
 }
 
 #' Bob Jenkins' one-at-a-time hash of strings to integers (digest's digest2int)
