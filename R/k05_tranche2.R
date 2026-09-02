@@ -275,7 +275,7 @@ morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 #' At each event time with n_j at risk, n_1j in group 1, d_j deaths of
 #' which d_1j in group 1, e_1j = d_j n_1j / n_j and
 #' V_j = d_j (n_j - d_j) n_1j (n_j - n_1j) / (n_j^2 (n_j - 1)). The
-#' family is chi2 = [sum w_j (d_1j - e_1j)]^2 / sum w_j^2 V_j on 1 df,
+#' family is chi2 = \[sum w_j (d_1j - e_1j)\]^2 / sum w_j^2 V_j on 1 df,
 #' with w_j = 1 (log-rank), n_j (Gehan), sqrt(n_j) (Tarone-Ware) or
 #' S(t_j) (Peto). Tarone-Ware's sqrt(n_j) sits deliberately between the
 #' log-rank, most powerful under proportional hazards, and Gehan, most
@@ -391,7 +391,7 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' The raw Schoenfeld residual is the failing subject's covariate minus
 #' the hazard-weighted risk-set mean. Rescaling by the information
 #' turns it into an estimate of the coefficient AT THAT TIME:
-#' s* = beta + d Var(beta) s, with E[s*_j] ~ beta(t_j), so plotting s*
+#' s* = beta + d Var(beta) s, with E\[s*_j\] ~ beta(t_j), so plotting s*
 #' against g(t) shows the coefficient's trajectory and proportional
 #' hazards is the hypothesis that it is flat.
 #'

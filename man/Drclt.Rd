@@ -25,7 +25,7 @@ The point estimate is the doubly robust moment of Sant'Anna and Zhao
 (2020), equation (2.6).  The influence function is summed within
 cluster before it is squared,
 \code{V = a (1/n^2) sum_c (sum_{i in c} psi_i)^2} with the finite
-cluster correction \code{a = [G/(G-1)][(n-1)/(n-k)]}.  With one
+cluster correction \code{a = \[G/(G-1)\]\[(n-1)/(n-k)\]}.  With one
 observation per cluster the sum collapses and \code{V} is the
 independent variance times \code{a}.
 }

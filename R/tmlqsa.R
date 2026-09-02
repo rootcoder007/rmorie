@@ -9,7 +9,7 @@
 #' Formula: D*(psi)(O) = (A/g1 - (1-A)/g0)(Y - Q(A,W))
 #'   + Q(1,W) - Q(0,W) - psi; targeting solves the empirical mean to 0
 #'
-#' @param Y,A Outcome in [0, 1] and binary treatment.
+#' @param Y,A Outcome in \[0, 1\] and binary treatment.
 #' @param QAW,Q1W,Q0W Initial outcome predictions.
 #' @param g1W Initial propensity.
 #' @param gbound Propensity truncation level.

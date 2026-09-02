@@ -30,7 +30,7 @@
 #' @param x_t Current latent.
 #' @param t Current timestep, at least 1.
 #' @param eps_theta Predicted noise, same length as x_t.
-#' @param eta Stochasticity in [0, 1].
+#' @param eta Stochasticity in \[0, 1\].
 #' @param T Total number of steps for the cosine schedule.
 #' @param alpha_bar_t,alpha_bar_prev Optional explicit cumulative alphas.
 #' @return List with \code{estimate}, \code{x_prev}, \code{x0_pred},

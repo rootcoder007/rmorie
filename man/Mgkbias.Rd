@@ -24,7 +24,7 @@ Named list with \code{bias}, \code{a}, \code{b}, \code{h}, \code{book}, \code{me
 }
 \description{
 Theorem 1.3, Eq. (1.15):
-\deqn{\mathrm{Bias}[\tilde f_X(x)] = -2(b(x) - a^2(x)/(2 f_X(x)))h + o(h) + O(n^{-1}h^{-1/4}),}{Bias[ftilde(x)] = -2(b(x) - a^2(x)/(2 f(x))) h + o(h) + O(n^-1 h^-1/4),}
+\deqn{\mathrm{Bias}\[\tilde f_X(x)\] = -2(b(x) - a^2(x)/(2 f_X(x)))h + o(h) + O(n^{-1}h^{-1/4}),}{Bias\[ftilde(x)\] = -2(b(x) - a^2(x)/(2 f(x))) h + o(h) + O(n^-1 h^-1/4),}
 with \code{a} and \code{b} from (1.16) and (1.17). The order is back to \code{h} -- the
 same as Chen's -- while the variance keeps the smaller order of
 Theorem 1.1, which is the point of the chapter.

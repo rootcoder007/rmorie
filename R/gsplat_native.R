@@ -83,7 +83,7 @@ project_covariance <- function(S, W, J) {
 #' Front-to-back alpha compositing
 #'
 #' @param colours Numeric matrix of per-Gaussian RGB (or more channels).
-#' @param alphas Numeric vector of per-Gaussian opacities in [0, 1].
+#' @param alphas Numeric vector of per-Gaussian opacities in \[0, 1\].
 #' @param depths Optional depth vector; absent means input order.
 #' @return List with colour, transmittance, coverage, note.
 #' @export

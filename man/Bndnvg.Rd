@@ -16,15 +16,15 @@ List with \code{lower}, \code{upper}, \code{width},
 \code{estimate}, \code{p_treated}, \code{n}.
 }
 \description{
-The treated mean is taken at face value as \code{E[y(1)]} and nothing at
-all is assumed about \code{E[y(0)]} beyond the observed support, so the
+The treated mean is taken at face value as \code{E\[y(1)\]} and nothing at
+all is assumed about \code{E\[y(0)\]} beyond the observed support, so the
 counterfactual mean is placed at each end of that support in turn. The
 width of the interval is exactly the range of \code{y}, whatever the data
 look like, which is the point: the bound shows how little the data alone
 deliver.
 }
 \details{
-Formula: \code{[E(y | D = 1) - y_1, E(y | D = 1) - y_0]} with
+Formula: \code{\[E(y | D = 1) - y_1, E(y | D = 1) - y_0\]} with
 \code{y_0 = min y} and \code{y_1 = max y}.
 }
 \examples{

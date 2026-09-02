@@ -2,7 +2,7 @@
 % Please edit documentation in R/sccsno_native.R
 \name{.sccsno_band}
 \alias{.sccsno_band}
-\title{Index of the age band containing t (0-based, matching alpha\link{j+1})}
+\title{Index of the age band containing t (0-based, matching alpha[j+1])}
 \usage{
 .sccsno_band(t, age_breaks)
 }

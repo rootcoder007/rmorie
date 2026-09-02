@@ -184,7 +184,7 @@ Qplincon <- function(a, c) {
 
 #' Wolfe primal of the maximum margin problem (MVSML eq. 9.27)
 #'
-#' L = (1/2)||beta||^2 - sum_i alpha_i [ y_i(beta_0 + x_i beta) - 1 ].
+#' L = (1/2)||beta||^2 - sum_i alpha_i \[ y_i(beta_0 + x_i beta) - 1 \].
 #' Its derivatives with respect to beta and beta_0 are (9.28) and (9.29),
 #' both zero at the optimum.
 #' @noRd
@@ -237,10 +237,10 @@ Softsvm <- function(X, y, T, ...) {
 #' KKT conditions of the support vector classifier (MVSML eqs. 9.38-9.43)
 #'
 #' (9.38) L = (1/2)||beta||^2 + T sum_i zeta_i
-#' - sum_i alpha_i [ y_i(beta_0 + x_i beta) - 1 + zeta_i ]
+#' - sum_i alpha_i \[ y_i(beta_0 + x_i beta) - 1 + zeta_i \]
 #' - sum_i delta_i zeta_i, with residuals (9.39) beta - sum alpha_i y_i
 #' x_i, (9.40) sum alpha_i y_i, (9.41) alpha_i + delta_i - T, (9.42)
-#' alpha_i [ y_i(beta_0 + x_i beta) - 1 + zeta_i ] and (9.43) delta_i
+#' alpha_i \[ y_i(beta_0 + x_i beta) - 1 + zeta_i \] and (9.43) delta_i
 #' zeta_i.
 #'
 #' The printed sign of the delta term on p.356 is inconsistent with the
@@ -435,7 +435,7 @@ morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
 
 #' Roughness penalty matrix (MVSML eq. 14.11)
 #'
-#' J_beta = int_0^T [ d^p beta(t) / dt^p ]^2 dt.  Under the basis
+#' J_beta = int_0^T \[ d^p beta(t) / dt^p \]^2 dt.  Under the basis
 #' expansion (14.2) the book writes J_beta = beta' P beta with
 #' P_ij = int_0^T phi_i^(p)(t) phi_j^(p)(t) dt.  The chapter says p is
 #' typically 1 or 2.  Integrals by the trapezoid rule on the grid t.
@@ -549,7 +549,7 @@ Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
 #' resolves that.  The default reference = TRUE drops the first
 #' environment block, the same reference coding the book applies to the
 #' environment design itself on p.607, where its code reads X_E =
-#' model.matrix(~0+Env, data = dat_F)[, -1].  Pass reference = FALSE for
+#' model.matrix(~0+Env, data = dat_F)\[, -1\].  Pass reference = FALSE for
 #' the redundant parameterization as printed.
 #'
 #' @param X A matrix; indexed by row and column.

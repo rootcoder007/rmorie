@@ -28,7 +28,7 @@
 #'
 #' @param X n-by-p data matrix.
 #' @param k_factors number of factors, 1 <= k <= p.
-#' @param h MCD subset size; defaults to [(n + p + 1)/2].
+#' @param h MCD subset size; defaults to \[(n + p + 1)/2\].
 #' @param max_subsets passed to the MCD enumeration.
 #' @return list: estimate, loadings, uniquenesses, communalities, correlation,
 #'   reproduced, eigenvalues, center, k_factors, n, p, method.

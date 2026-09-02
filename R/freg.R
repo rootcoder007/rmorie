@@ -10,7 +10,7 @@
 #'
 #' Search strategy, chosen so both language arms land on identical numbers
 #' rather than merely the same optimum: the criterion is evaluated at every
-#' integer sample lag in [-max_lag, max_lag] over the overlapping part of the
+#' integer sample lag in \[-max_lag, max_lag\] over the overlapping part of the
 #' two curves, normalised by the overlap length so lags are comparable, and
 #' the integer minimiser is refined by a parabola through the criterion at the
 #' minimiser and its two neighbours.  No optimiser, no random restarts.
@@ -29,7 +29,7 @@
 #' @param max_lag largest lag searched; defaults to floor(n / 2).
 #' The reported shift is the delta such that y2(t + delta) best matches
 #' y1(t).  It is NEGATIVE when y2 leads y1 and positive when y2 lags it --
-#' the sign follows from the criterion being evaluated as y1[i] - y2[i+delta].
+#' the sign follows from the criterion being evaluated as y1[i] - y2\[i+delta\].
 #'
 #' @return list: estimate, shift, refinement, criterion, profile, lags, n,
 #'   method.

@@ -27,7 +27,7 @@ to the rest of its original community.
 Determinism: nodes are visited in index order and communities in
 order of first appearance; no random restarts.
 
-Formula: CPM quality \code{H = sum_c [e_c - gamma * C(n_c, 2)]}; a
+Formula: CPM quality \code{H = sum_c \[e_c - gamma * C(n_c, 2)\]}; a
 subset C of community S is well connected when
 \code{E(C, S \ C) >= gamma * |C| * (|S| - |C|)}.
 }

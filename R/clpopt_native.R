@@ -132,7 +132,7 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 }
 
 # Internal: pivot on T[row, col]. Mirrors clpopt._pivot.
-#' Internal: pivot on T[row, col]. Mirrors clpopt._pivot
+#' Internal: pivot on T\[row, col\]. Mirrors clpopt._pivot
 #'
 #' A step of the clpopt_native implementation. Called by \code{.clpopt_run}, \code{simplex}.
 #' See the file header for the source the module follows.

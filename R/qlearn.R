@@ -28,7 +28,7 @@
 #'
 #' The boxed algorithm of Sutton and Barto (2018), Section 6.5, p. 131,
 #' with the update of their eq. 6.8:
-#' \eqn{Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma \max_a Q(S',a) - Q(S,A)]}
+#' \eqn{Q(S,A) \leftarrow Q(S,A) + \alpha \[R + \gamma \max_a Q(S',a) - Q(S,A)\]}
 #' with epsilon-greedy behaviour.  Convergence to the optimal action
 #' values is the theorem of Watkins and Dayan (1992).  Q(terminal, .)
 #' stays 0.  Determinism conventions, mirrored bit-exactly against the

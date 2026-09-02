@@ -2,8 +2,8 @@
 % Please edit documentation in R/aaa_helpers_rouss.R
 \name{.rstrimmedh}
 \alias{.rstrimmedh}
-\title{The maximal-breakdown h of Rousseeuw (1984) Remark 1, \link{n/2} +
-\link{(p+1)/2}}
+\title{The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] +
+[(p+1)/2]}
 \usage{
 .rstrimmedh(n, p)
 }

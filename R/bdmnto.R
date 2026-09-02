@@ -2,7 +2,7 @@
 #' Monotone treatment response bounds.
 #'
 #' L_i = y_i if z_i <= d else ymin; U_i = y_i if z_i >= d else ymax; and
-#' E[Y(d)] lies in [mean(L), mean(U)].
+#' E\[Y(d)\] lies in \[mean(L), mean(U)\].
 #'
 #' @param y Observed outcomes.
 #' @param z Observed treatment levels.

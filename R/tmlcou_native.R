@@ -45,7 +45,7 @@
 # VECTOR arrives, which is every call site
 .tmlcou_expit <- function(x) ifelse(x > -700, 1 / (1 + exp(-x)), 0)
 
-#' Map the outcome to [0,1] by an affine transform
+#' Map the outcome to \[0,1\] by an affine transform
 #'
 #' @param y Outcome vector.
 #' @param lower Lower bound (default: minimum of \code{y}).

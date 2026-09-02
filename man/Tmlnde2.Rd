@@ -27,7 +27,7 @@ when an exposure-induced confounder sits between mediator and outcome.
 The mediator model is fitted on the reference arm and imposed on all.
 }
 \details{
-Formula: \code{E[Y(1, M_a*) - Y(0, M_a*)]}, targeted with
+Formula: \code{E\[Y(1, M_a*) - Y(0, M_a*)\]}, targeted with
 \code{H = D/g - (1 - D)/(1 - g)}.
 }
 \examples{

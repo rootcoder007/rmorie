@@ -13,7 +13,7 @@
 #' Both numbers are computed by separate routes and returned, so their
 #' equality is checkable rather than assumed.
 #'
-#' @param G Square non-negative capacity matrix; G[i, j] is the capacity
+#' @param G Square non-negative capacity matrix; G\[i, j\] is the capacity
 #'   of the directed arc i -> j.
 #' @param source,sink Zero-based vertex indices; must differ.
 #' @return List with \code{estimate}, \code{max_flow}, \code{min_cut},

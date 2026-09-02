@@ -3,7 +3,7 @@
 #' Separable spatio-temporal covariance functions
 #'
 #' A separable covariance decomposes
-#' \eqn{Cov[Z(s,t), Z(s+h,t+k)]} into a purely spatial and a purely temporal
+#' \eqn{Cov\[Z(s,t), Z(s+h,t+k)\]} into a purely spatial and a purely temporal
 #' component, combined by multiplication or addition:
 #' \eqn{C(h,k) = C_s(h) C_t(k)} (product),
 #' \eqn{C(h,k) = C_s(h) + C_t(k)} (sum), or

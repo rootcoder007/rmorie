@@ -3,8 +3,8 @@
 #' The c_1 bias coefficient of the boundary-free KDFE (Eq. 5.8)
 #'
 #' Eq. (5.8):
-#' \deqn{c_1(x) = g''(g^{-1}(x))f_X(x) + [g'(g^{-1}(x))]^2 f_X'(x),}{c1(x) = g''(g^-1(x)) f(x) + [g'(g^-1(x))]^2 f'(x),}
-#' the coefficient in `Bias[Ftilde(x)] = (h^2/2) c1(x) mu2(K) + o(h^2)` of
+#' \deqn{c_1(x) = g''(g^{-1}(x))f_X(x) + \[g'(g^{-1}(x))\]^2 f_X'(x),}{c1(x) = g''(g^-1(x)) f(x) + \[g'(g^-1(x))\]^2 f'(x),}
+#' the coefficient in `Bias\[Ftilde(x)\] = (h^2/2) c1(x) mu2(K) + o(h^2)` of
 #' Theorem 5.2.
 #'
 #' Compare the naive KDFE, whose bias coefficient is just `f'(x) mu2 / 2` --

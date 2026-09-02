@@ -15,7 +15,7 @@ morie_p_ibs_given_ibd(X, Y, T)
 A 3 x 3 matrix, rows indexed by IBD state 0, 1, 2.
 }
 \description{
-Returns the 3 x 3 matrix \code{P[z + 1, s + 1] = P(IBS = s | IBD =
+Returns the 3 x 3 matrix \code{P\[z + 1, s + 1\] = P(IBS = s | IBD =
 z)} for a SNP with \code{X} copies of one allele and \code{Y} of
 the other among \code{T} nonmissing alleles, including the
 ascertainment correction of Purcell et al. (2007), Table 1.

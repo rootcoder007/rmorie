@@ -938,6 +938,7 @@ pcgenv <- function(pcg, fs) {
 #' res <- pcgseg(env, fs = 2000)
 #' res$extra$n_cycles
 #' }
+#' @rdname pcgseg-signal
 pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
   env <- as.numeric(envelope)
   if (length(env) < 4L) {

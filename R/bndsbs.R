@@ -7,7 +7,7 @@
 #' why projection-based inference is conservative; the reported
 #' per-coordinate widths make that visible.
 #'
-#' Formula: \code{proj_k(H) = [min h_k, max h_k]} over the points of
+#' Formula: \code{proj_k(H) = \[min h_k, max h_k\]} over the points of
 #' \code{H}, for each selected coordinate \code{k}.
 #'
 #' @param theta_full Points of the identified set, one per row of an

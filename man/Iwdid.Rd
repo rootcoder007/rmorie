@@ -21,7 +21,7 @@ Iwdid(y, unit, time, cohort, never = 0)
 List with \code{event_time}, \code{att}, \code{overall}, \code{cohorts}, \code{n}.
 }
 \description{
-Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in \link{-l, T-l}}
+Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in [-l, T-l]}
 }
 \examples{
 Iwdid(y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), cohort = c(1, 2, 3, 4, 5, 6, 7, 8))

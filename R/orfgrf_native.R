@@ -65,7 +65,7 @@
 #' \code{min_leaf} rows on each side.
 #'
 #' The previous version carried only the split half down and left the
-#' estimation half as a fixed set, so \code{leaf[leaf \%in\% idxs]} was
+#' estimation half as a fixed set, so \code{leaf\[leaf \%in\% idxs\]} was
 #' empty at every node -- the two halves are disjoint by construction --
 #' and every candidate scored \code{NaN}. No split was ever taken and
 #' every tree was a single leaf.

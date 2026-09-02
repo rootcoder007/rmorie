@@ -24,7 +24,7 @@
 #'
 #' @param chains Numeric vector (a single chain) or matrix whose columns
 #'   are chains and whose rows are iterations.
-#' @param probs Numeric vector of probabilities in [0, 1] at which the
+#' @param probs Numeric vector of probabilities in \[0, 1\] at which the
 #'   running bands are reported.
 #' @return Named list with \code{running_mean} (one numeric vector per
 #'   chain), \code{bands} (per chain, a list of one numeric vector per

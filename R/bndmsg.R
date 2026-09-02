@@ -9,11 +9,11 @@
 #'
 #' With R = 1 when Y is observed and R = 0 when it is not, the law of total
 #' expectation splits the target into an identified and an unidentified piece,
-#' E[Y] = E[Y | R = 1] P(R = 1) + E[Y | R = 0] P(R = 0), and only the second
+#' E[Y] = E\[Y | R = 1\] P(R = 1) + E\[Y | R = 0\] P(R = 0), and only the second
 #' factor of the second term is unknown.  Bounding the unobserved conditional
-#' mean by the a priori support [y_min, y_max] gives the sharp worst-case
-#' interval L = E[Y | R = 1] P(R = 1) + y_min P(R = 0) and
-#' U = E[Y | R = 1] P(R = 1) + y_max P(R = 0), whose width is exactly
+#' mean by the a priori support \[y_min, y_max\] gives the sharp worst-case
+#' interval L = E\[Y | R = 1\] P(R = 1) + y_min P(R = 0) and
+#' U = E\[Y | R = 1\] P(R = 1) + y_max P(R = 0), whose width is exactly
 #' (y_max - y_min) P(R = 0).  Nothing is assumed about the missingness
 #' mechanism: the interval is the identified set.
 #'

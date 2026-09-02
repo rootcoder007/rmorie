@@ -183,7 +183,7 @@ morie_urnpred <- function(nb, ntot, nurns = 10L) {
 # --- ch. 3: the bent coin and model comparison (pp. 50-53, 63) --------
 
 #' Bent-coin likelihood (eq. 3.8, p. 51)
-#' @param pa probability of outcome a, in [0, 1]
+#' @param pa probability of outcome a, in \[0, 1\]
 #' @param fa,fb counts of outcomes a and b
 #' @return list(likelihood, loglik, fa, fb)
 #' @export
@@ -355,7 +355,7 @@ morie_sexbeta <- function(gamma) {
 }
 
 #' Mean-fitness growth rate under recombination (eq. 19.13, p. 273)
-#' @param f normalized fitness, in [0, 1]
+#' @param f normalized fitness, in \[0, 1\]
 #' @param g genome size
 #' @param eta rate constant; default sqrt(2/(pi + 2)) as in the book
 #' @return list(dfbardt, eta, g)

@@ -38,7 +38,7 @@ Adstat <- function(y, cdf) {
 #' \code{\link{Adstat}} for the source and the corrected form of
 #' Hedderich eq. (7.33).
 #'
-#' @param u Numeric vector of probability-integral transforms in [0, 1].
+#' @param u Numeric vector of probability-integral transforms in \[0, 1\].
 #' @return Numeric A^2; \code{Inf} if any value is 0 or 1.
 #' @examples
 #' Adcore(seq(0.05, 0.95, length.out = 20))

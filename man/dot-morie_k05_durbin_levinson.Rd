@@ -2,7 +2,7 @@
 % Please edit documentation in R/k05_tranche1.R
 \name{.morie_k05_durbin_levinson}
 \alias{.morie_k05_durbin_levinson}
-\title{R is indexed from 1 for lag 0, so r\link{k + 1} is lag k}
+\title{R is indexed from 1 for lag 0, so r[k + 1] is lag k}
 \usage{
 .morie_k05_durbin_levinson(r, max_lag)
 }

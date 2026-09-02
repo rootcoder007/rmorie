@@ -36,7 +36,7 @@ List with \code{estimate} (soft V*), \code{policy},
 The exact tabular algorithm underlying soft actor-critic (Haarnoja
 et al. 2018, Section 4.1): soft policy evaluation applies the soft
 Bellman backup of eqs. (2)-(3), Q <- r + gamma E\link[dlm:V]{V}, V =
-E_pi\link{Q - temp log pi}; soft policy improvement projects onto
+E_pi[Q - temp log pi]; soft policy improvement projects onto
 softmax(Q/temp) (eq. 4), the exact minimizer for the tabular class,
 with monotone improvement and convergence per Lemmas 1-2 and
 Theorem 1. At the fixed point V(s) = temp logsumexp(Q(s,.)/temp)

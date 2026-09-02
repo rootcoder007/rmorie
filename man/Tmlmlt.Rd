@@ -30,7 +30,7 @@ The multinomial is built from one-versus-rest logistics normalised to
 sum to one across the arm set -- a working model, chosen because it is
 deterministic and mirrors exactly across the language arms; the
 targeting step repairs its bias as long as it or the outcome model is
-right.  \code{psi_a = mean_i [Q(a, X_i) + eps_a/g_a(X_i)]}.
+right.  \code{psi_a = mean_i \[Q(a, X_i) + eps_a/g_a(X_i)\]}.
 }
 \examples{
 Tmlmlt(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), arm_set = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlcic_native.R
 \name{.tmlcic_fit_working_model}
 \alias{.tmlcic_fit_working_model}
-\title{Logit\link{Qbar(A,W)} on the candidate\'s terms, fitted on rows}
+\title{Logit[Qbar(A,W)] on the candidate\'s terms, fitted on rows}
 \usage{
 .tmlcic_fit_working_model(y, A, W, cand, rows, ridge)
 }

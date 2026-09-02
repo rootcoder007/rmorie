@@ -77,7 +77,7 @@ gail_occupancy_measure <- function(states, actions) {
 #' policy
 #'
 #' Full-batch gradient ascent on eq. 17 (the gradient of
-#' E_pi[log D] + E_piE[log(1 - D)]) with optional ridge. D is a
+#' E_pi\[log D\] + E_piE\[log(1 - D)\]) with optional ridge. D is a
 #' logistic model on features of (s, a); by default the features are
 #' a one-hot indicator over the observed (s, a) pairs, which makes
 #' D fully non-parametric and is the setting in which eq. 16's

@@ -23,7 +23,7 @@ Named list with \code{variance}, \code{se}, \code{amse}, \code{sigma2}, \code{qp
 }
 \description{
 Eqs. (3.2)-(3.3):
-\deqn{V[\hat Q(p)] = \frac{p(1-p)}{n f^2(F^{-1}(p))} + O(n^{-2}),\qquad \mathrm{AMSE} = \frac{[Q'(p)]^2 p(1-p)}{n},}{V[Qhat(p)] = p(1-p)/(n f^2(F^-1(p))) + O(n^-2), AMSE = Q'(p)^2 p(1-p)/n,}
+\deqn{V\[\hat Q(p)\] = \frac{p(1-p)}{n f^2(F^{-1}(p))} + O(n^{-2}),\qquad \mathrm{AMSE} = \frac{\[Q'(p)\]^2 p(1-p)}{n},}{V\[Qhat(p)\] = p(1-p)/(n f^2(F^-1(p))) + O(n^-2), AMSE = Q'(p)^2 p(1-p)/n,}
 the second form using \verb{Q'(p) = 1 / f(Q(p))}.
 }
 \details{

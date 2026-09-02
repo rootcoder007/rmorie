@@ -2,7 +2,7 @@
 
 #' Centered-interval probability from a density
 #'
-#' The interval is [center - width/2, center + width/2].
+#' The interval is \[center - width/2, center + width/2\].
 #'
 #' @param grid,density the density on a strictly increasing grid.
 #' @param center,width the interval centre and total width.

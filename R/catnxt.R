@@ -14,7 +14,7 @@
 #' @param items Item parameters (a, b, c, d), one row per item.
 #' @param theta Current ability estimate.
 #' @param administered One-based indices already administered.
-#' @param exposure Per-item multiplier in [0, 1].
+#' @param exposure Per-item multiplier in \[0, 1\].
 #' @param D Scaling constant.
 #' @return List with \code{next_item}, \code{information},
 #'   \code{weighted}, \code{max_information}, \code{n_available},

@@ -14,7 +14,7 @@
 #' gains from using more advanced 2D-aware position embeddings."
 #'
 #' Equation (1), p. 4:
-#' z_0 = [x_class; x_p^1 E; x_p^2 E; ...; x_p^N E] + E_pos, with
+#' z_0 = \[x_class; x_p^1 E; x_p^2 E; ...; x_p^N E\] + E_pos, with
 #' E in R^\{(P^2 . C) x D\} and E_pos in R^\{(N+1) x D\}.
 #'
 #' This module takes the patch embeddings x_p^i E produced by Vitptm and

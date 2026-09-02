@@ -10,7 +10,7 @@
 #'
 #' Formula: \code{PR(v) = (1 - d)/n + d sum_{u -> v} PR(u)/L(u)}.
 #'
-#' @param A Adjacency matrix; \code{A[i, j]} non-zero is a link i to j.
+#' @param A Adjacency matrix; \code{A\[i, j\]} non-zero is a link i to j.
 #' @param d Damping factor.
 #' @param n_iter Power iterations.
 #' @return List with \code{pr}, \code{estimate}, \code{top}, \code{n}.

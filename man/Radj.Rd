@@ -24,7 +24,7 @@ Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
 Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
 section 8.2.7 "Variable Selection Method", printed page 813,
 equation (8.38):
-\code{R2_a = 1 - [RSS / (n - (p + 1))] / [SSY / (n - 1)]
+\code{R2_a = 1 - \[RSS / (n - (p + 1))\] / \[SSY / (n - 1)\]
 = 1 - (n - 1)/(n - (p + 1)) (1 - R2)}, with p the number of
 independent variables excluding the intercept.  The point the book
 makes in giving it: R2 never decreases when a variable is added, so

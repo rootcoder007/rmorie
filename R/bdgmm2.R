@@ -3,7 +3,7 @@
 #'
 #' t_j = sqrt(n) mbar_j / sigma_j; xi_j = t_j / kappa_n with
 #' kappa_n = sqrt(log n); moment j is retained when xi_j > -1, and
-#' S = sum over retained of [max(t_j, 0)]^2.
+#' S = sum over retained of \[max(t_j, 0)\]^2.
 #'
 #' @param mbar Sample moment means, positive meaning violation.
 #' @param sigma Moment standard deviations, strictly positive.

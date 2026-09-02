@@ -2,7 +2,7 @@
 % Please edit documentation in R/snmcox_native.R
 \name{.snmcox_treat_model}
 \alias{.snmcox_treat_model}
-\title{Fitted E\link{A | L}: logistic when the treatment is binary, least squares
+\title{Fitted E[A | L]: logistic when the treatment is binary, least squares
 else}
 \usage{
 .snmcox_treat_model(A, L, ridge = 1e-08)

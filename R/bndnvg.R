@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Naive gross bound on the average treatment effect
 #'
-#' The treated mean is taken at face value as \code{E[y(1)]} and nothing at
-#' all is assumed about \code{E[y(0)]} beyond the observed support, so the
+#' The treated mean is taken at face value as \code{E\[y(1)\]} and nothing at
+#' all is assumed about \code{E\[y(0)\]} beyond the observed support, so the
 #' counterfactual mean is placed at each end of that support in turn. The
 #' width of the interval is exactly the range of \code{y}, whatever the data
 #' look like, which is the point: the bound shows how little the data alone
 #' deliver.
 #'
-#' Formula: \code{[E(y | D = 1) - y_1, E(y | D = 1) - y_0]} with
+#' Formula: \code{\[E(y | D = 1) - y_1, E(y | D = 1) - y_0\]} with
 #' \code{y_0 = min y} and \code{y_1 = max y}.
 #'
 #' @param y Observed outcome.

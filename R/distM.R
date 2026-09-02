@@ -9,7 +9,7 @@
 #'
 #' Formula: \code{score = <h, r, t> = sum_k h_k r_k t_k}.
 #'
-#' @param triples Rows \code{[head, relation, tail]}, zero-based.
+#' @param triples Rows \code{\[head, relation, tail\]}, zero-based.
 #' @param dim Embedding dimension.
 #' @param E Entity embeddings, optional.
 #' @param R Relation embeddings, optional.

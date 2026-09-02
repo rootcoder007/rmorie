@@ -200,8 +200,8 @@ morie_vit2lf_entropy <- function(w) {
 #'
 #' sign(d) log(1 + |d|), which is odd, zero at zero, and compresses the
 #' range so a bias learnt at one window size extrapolates to another. On
-#' an eight-by-eight window the raw range [-7, 7] becomes
-#' [-2.079, 2.079], the figure the paper quotes.
+#' an eight-by-eight window the raw range \[-7, 7\] becomes
+#' \[-2.079, 2.079\], the figure the paper quotes.
 #'
 #' @param dx Horizontal offset.
 #' @param dy Vertical offset.

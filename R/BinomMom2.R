@@ -5,7 +5,7 @@
 #' p^2 n(n-1) + pn, cross-checked against sum k^2 P(k).
 #'
 #' @param n trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(second_moment).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eq (4.66).

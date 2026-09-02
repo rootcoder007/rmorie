@@ -7,7 +7,7 @@
 #' \code{lam} below \code{1 / (rho(A1) rho(A2))}, a much tighter
 #' constraint than the single-graph case.
 #'
-#' Formula: \code{k(G1, G2) = sum_ij [(I - lam (A1 (x) A2))^{-1}]_ij}.
+#' Formula: \code{k(G1, G2) = sum_ij \[(I - lam (A1 (x) A2))^{-1}\]_ij}.
 #'
 #' @param G1 Square adjacency matrix of the first graph.
 #' @param G2 Square adjacency matrix of the second graph.

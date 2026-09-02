@@ -52,7 +52,7 @@
 #' built from a bank of threshold TMLEs: for every distinct observed
 #' outcome value \code{F_a(t) = P(Y(a) <= t)} is targeted, and the index
 #' is the Riemann-Stieltjes integral
-#' \code{psi = sum_j [(F_0(t_{j-1}) + F_0(t_j))/2] dF_1(t_j)}, whose
+#' \code{psi = sum_j \[(F_0(t_{j-1}) + F_0(t_j))/2\] dF_1(t_j)}, whose
 #' mid-point weight is the half-credit-for-ties convention.  Because
 #' \code{Y(1)} and \code{Y(0)} enter only through their marginals this is
 #' the MARGINAL probabilistic index, not the within-pair one.

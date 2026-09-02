@@ -28,12 +28,12 @@
 #'
 #' Iterates Kleinberg's (1999) mutually reinforcing updates: a page is
 #' a good hub if it points to good authorities, and a good authority
-#' if it is pointed to by good hubs.  With \code{A[i, j] = 1} for a
+#' if it is pointed to by good hubs.  With \code{A\[i, j\] = 1} for a
 #' link from \code{i} to \code{j}, the sweep is
 #' \eqn{a \leftarrow A^\top h}, \eqn{h \leftarrow A a}, each
 #' normalised to unit L2 length.
 #'
-#' @param A Square adjacency matrix; \code{A[i, j]} is a link from
+#' @param A Square adjacency matrix; \code{A\[i, j\]} is a link from
 #'   \code{i} to \code{j}.
 #' @param iters Number of sweeps, default 50.
 #' @return A list with \code{estimate} (the top hub score),

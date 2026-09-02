@@ -4,7 +4,7 @@
 #' SOURCE, AND A CORRECTION TO THE STUB THIS REPLACES.  The stub docstring cited
 #' "Montesinos Lopez Ch 14" for the whole model, including the genomic term g_i.
 #' Chapter 14 does not contain a genomic term at all.  It was read in full --
-#' volume [Pages 579-631] of Montesinos Lopez, Montesinos Lopez and Crossa
+#' volume \[Pages 579-631\] of Montesinos Lopez, Montesinos Lopez and Crossa
 #' (2022), Multivariate Statistical Machine Learning Methods for Genomic
 #' Prediction, Springer, doi:10.1007/978-3-030-89010-0 -- and Section 14.1
 #' pp.579-583 gives ONLY the functional part: a scalar response, one functional
@@ -12,7 +12,7 @@
 #' comes from a different chapter and is cited as such below.  It is NOT in
 #' Chapter 14.
 #'
-#' FUNCTIONAL PART -- Chapter 14, Section 14.1, volume [Pages 579-631],
+#' FUNCTIONAL PART -- Chapter 14, Section 14.1, volume \[Pages 579-631\],
 #' pp.579-583, all equations read from rendered page images:
 #'
 #'   (14.1) Y = mu + int_0^T x(t) beta(t) dt + E
@@ -22,9 +22,9 @@
 #'   (14.5) sigma2hat = (1/n) (y - Xstar betahat)' (y - Xstar betahat)
 #'   (14.6) x_i(t) = sum_{o=1}^{L2} c_io psi_o(t)
 #'   (14.7) chat_i = (Psi' Psi)^-1 Psi' x_i(t)            <- p.581 and p.583
-#'   (14.8) Psi is m-by-L2 with Psi[j, o] = psi_o(t_j)
-#'   (14.9) Xstar = [1n X], X = Xtilde Psi (Psi'Psi)^-1 Q',
-#'          Q[l, o] = int_0^T phi_l(t) psi_o(t) dt
+#'   (14.8) Psi is m-by-L2 with Psi\[j, o\] = psi_o(t_j)
+#'   (14.9) Xstar = \[1n X\], X = Xtilde Psi (Psi'Psi)^-1 Q',
+#'          Q\[l, o\] = int_0^T phi_l(t) psi_o(t) dt
 #'   p.582  BIC = -2 loglik(betahat, sigma2hat; y) + (L1 + 1) log(n)
 #'   p.583  CV1(L2) = sum_j (x(t_j) - xhat_j(t_j))^2, xhat_j the
 #'          leave-point-j-out representation with L2 bases
@@ -35,7 +35,7 @@
 #' and re-solving (Psi-transpose Psi) a second time.
 #'
 #' GENOMIC PART -- Chapter 5, Section 5.3, equation (5.3), volume
-#' [Pages 141-170], p.148, read from the same book:
+#' \[Pages 141-170\], p.148, read from the same book:
 #'
 #'   (5.3)  Y = 1n mu + Z_L b + e,  b ~ N_J(0, sigma_g^2 G),  R = sigma^2 In
 #'

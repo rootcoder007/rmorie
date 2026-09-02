@@ -98,7 +98,7 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
   )
 }
 
-#' Eq (4.29): Theta_xy = E[x(n) y^T(n)], an N x N matrix carrying all
+#' Eq (4.29): Theta_xy = E\[x(n) y^T(n)\], an N x N matrix carrying all
 #'
 #' pairwise delays -- which is why the outer product appears in the
 #' Wiener and RLS normal equations.  Under stationarity the entries

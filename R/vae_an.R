@@ -40,7 +40,7 @@
 #' @param vae list with \code{W} and optionally \code{center}, or NULL.
 #' @param latent_dim k in 1..d, used only when \code{vae} is NULL.
 #' @param n_samples L, latent draws per point.
-#' @param alpha Tail fraction in [0, 1] for the threshold quantile.
+#' @param alpha Tail fraction in \[0, 1\] for the threshold quantile.
 #' @param encoder_sd sigma_z, non-negative.
 #' @param decoder_scale sigma_x; NULL uses the Tipping-Bishop residual.
 #' @param threshold Explicit cut on the log reconstruction probability.

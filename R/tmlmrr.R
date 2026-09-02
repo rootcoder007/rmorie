@@ -9,8 +9,8 @@
 #' which keeps the targeted predictions in \[0, 1\].  The article is open
 #' access but was not retrievable here; the clever covariate and logistic
 #' fluctuation are quoted in their standard published form.  RR =
-#' E[Y(1)]/E[Y(0)] is a smooth function of the two targeted means, so by
-#' the delta method IC_logRR = IC_1/E[Y(1)] - IC_0/E[Y(0)]; the standard
+#' E\[Y(1)\]/E\[Y(0)\] is a smooth function of the two targeted means, so by
+#' the delta method IC_logRR = IC_1/E\[Y(1)\] - IC_0/E\[Y(0)\]; the standard
 #' error is on the log scale and the interval exponentiated back.
 #'
 #' @param y,D outcome and treatment.

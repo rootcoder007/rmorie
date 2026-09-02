@@ -514,7 +514,7 @@ morie_msm_gmm <- function(y, X, Z, weights = NULL) {
 
 #' Linear marginal structural model
 #'
-#' E[Y(a-bar)] = beta_0 + beta_a a-bar fitted by weighted least
+#' E\[Y(a-bar)\] = beta_0 + beta_a a-bar fitted by weighted least
 #' squares with stabilized inverse-probability-of-treatment weights
 #' (Robins, Hernan & Brumback 2000).
 #' @param y outcome vector
@@ -549,7 +549,7 @@ morie_msm_logistic <- function(y, treatment_history, weights = NULL) {
 
 #' Poisson marginal structural model
 #'
-#' log E[Y(a-bar)] = beta_0 + beta_a a-bar; exp(beta_a) is a causal
+#' log E\[Y(a-bar)\] = beta_0 + beta_a a-bar; exp(beta_a) is a causal
 #' rate ratio.
 #' @inheritParams morie_msm_linear
 #' @param offset optional log-exposure offset
@@ -623,7 +623,7 @@ morie_msm_accelerated_failure <- function(time, event, treatment_history,
 
 #' GMM estimator for a marginal structural model
 #'
-#' Solves E[Z (Y - g(a-bar; beta))] = 0 with IPT-weighted moments
+#' Solves E\[Z (Y - g(a-bar; beta))\] = 0 with IPT-weighted moments
 #' (Hansen 1982; Robins 1999).
 #' @inheritParams morie_msm_linear
 #' @param instruments optional instrument matrix; defaults to the design

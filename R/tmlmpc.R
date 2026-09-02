@@ -5,7 +5,7 @@
 #' competing transitions remove people from the risk set, so a marginal
 #' contrast must be built transition by transition.  The target is the
 #' counterfactual cumulative hazard of the FIRST transition label,
-#' \code{Lambda_k^a(t0) = E_W[sum_{j <= t0} h_k(j | a, W)]}, and the
+#' \code{Lambda_k^a(t0) = E_W\[sum_{j <= t0} h_k(j | a, W)\]}, and the
 #' estimate is \code{Lambda_k^1(t0) - Lambda_k^0(t0)}.
 #'
 #' Writing the parameter as a mean over W of a sum of conditional hazards

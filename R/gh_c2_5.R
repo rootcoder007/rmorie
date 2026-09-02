@@ -8,7 +8,7 @@
 #' Proposition G.2 licenses.
 #'
 #' Formula: g_k ~ Gamma(alpha, 1), p = g / sum(g),
-#'   f(x) = p_{b(x)} K on [0, 1] with K equal-width bins.
+#'   f(x) = p_{b(x)} K on \[0, 1\] with K equal-width bins.
 #'
 #' @param x Evaluation points.
 #' @param K Number of bins, at least 1.

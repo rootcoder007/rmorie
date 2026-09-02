@@ -4,7 +4,7 @@
 #' Davison and Hinkley (1997), Bootstrap Methods and their Application,
 #' Cambridge University Press, Section 5.2, which defines the studentised
 #' statistic z* = (t* - t)/v*^(1/2) and gives the limits
-#' [t - z*_(1-alpha/2) v^(1/2), t - z*_(alpha/2) v^(1/2)].  Also Hall (1988),
+#' \[t - z*_(1-alpha/2) v^(1/2), t - z*_(alpha/2) v^(1/2)\].  Also Hall (1988),
 #' "Theoretical comparison of bootstrap confidence intervals", The Annals of
 #' Statistics 16(3), 927-953, doi:10.1214/aos/1176350933, the second-order
 #' accuracy result that motivates studentising in the first place.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_adapt.R
 \name{.morie_rg_ccf}
 \alias{.morie_rg_ccf}
-\title{Theta(k) = E\link{x(n-k) d(n)}, the right-hand side of eq. (3.168)}
+\title{Theta(k) = E[x(n-k) d(n)], the right-hand side of eq. (3.168)}
 \usage{
 .morie_rg_ccf(x, d, lags)
 }

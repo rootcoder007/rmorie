@@ -24,7 +24,7 @@ modularity_by_level, n, resolution.
 }
 \description{
 Multi-level Louvain maximizing the generalized modularity
-\eqn{Q_\gamma = (1/2m)\sum_{ij}[A_{ij} - \gamma k_i k_j/2m]\delta(c_i, c_j)}:
+\eqn{Q_\gamma = (1/2m)\sum_{ij}\[A_{ij} - \gamma k_i k_j/2m\]\delta(c_i, c_j)}:
 a local-moving phase (each node joins the neighbouring community
 with the largest strictly positive gain) alternates with an
 aggregation phase (each community contracts to one node carrying the

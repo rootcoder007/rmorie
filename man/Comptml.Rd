@@ -11,7 +11,7 @@ Comptml(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95)
 
 \item{A}{Binary treatment.}
 
-\item{Q1, Q0}{Initial E\link{clr(Y)_j | A = 1/0, W}.}
+\item{Q1, Q0}{Initial E[clr(Y)_j | A = 1/0, W].}
 
 \item{g1W}{Initial propensity.}
 
@@ -32,7 +32,7 @@ coordinate is targeted separately with the shared propensity.
 }
 \details{
 Formula: Z = clr(Y); for each coordinate j target
-psi_j = E\link{Z_j(1)} - E\link{Z_j(0)}; sum_j psi_j = 0;
+psi_j = E[Z_j(1)] - E[Z_j(0)]; sum_j psi_j = 0;
 the perturbation on the simplex is C(exp(psi))
 }
 \references{

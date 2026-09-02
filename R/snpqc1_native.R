@@ -326,7 +326,7 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
 #' PLINK\'s method-of-moments IBD estimates for every pair. Returns
 #'
 #' list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2)) after
-#' the paper\'s bounding rules and pihat[i, k] = P(Z=2) + P(Z=1)/2.
+#' the paper\'s bounding rules and pihat\[i, k\] = P(Z=2) + P(Z=1)/2.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
 #' @param correction Passed to \code{morie_snpqc1_ibs_given_ibd}. Defaults to \code{TRUE}.

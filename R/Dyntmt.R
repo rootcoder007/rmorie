@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Value of a dynamic treatment regime under a marginal structural model
 #'
-#' \code{V(d) = E[Y(d_bar(H))]} is the mean counterfactual outcome had
+#' \code{V(d) = E\[Y(d_bar(H))\]} is the mean counterfactual outcome had
 #' every subject been treated according to the rule \code{d} applied to
 #' their own evolving history.  It is estimated here by the
 #' inverse-probability weighted (Hajek) form: \code{C_i} indicates that

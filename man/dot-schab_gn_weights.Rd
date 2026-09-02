@@ -17,6 +17,6 @@
 The value of \code{ifelse}.
 }
 \description{
-approximation (4.33), Var\link{gamma_hat(h_m)} = 2 gamma^2 / |N(h_m)|,
+approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|,
 whose reciprocal is the weight in (4.34).
 }

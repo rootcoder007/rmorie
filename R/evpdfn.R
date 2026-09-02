@@ -11,7 +11,7 @@
 #'
 #' @param x First variable.
 #' @param y Second variable.
-#' @param t_grid Points in [0, 1], or NULL for eleven equally spaced.
+#' @param t_grid Points in \[0, 1\], or NULL for eleven equally spaced.
 #' @param u Copula level in (0, 1), or NULL for exp(-1).
 #' @return List with \code{A}, \code{t}, \code{estimate} (A at 1/2),
 #'   \code{chi}, \code{convex_ok}, \code{n}, \code{method}.

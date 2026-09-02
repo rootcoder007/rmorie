@@ -2,7 +2,7 @@
 % Please edit documentation in R/e_div_native.R
 \name{.mor_ed_shuffle}
 \alias{.mor_ed_shuffle}
-\title{Fisher-Yates within each cluster, consuming us\link{pos ...} in the same}
+\title{Fisher-Yates within each cluster, consuming us[pos ...] in the same}
 \usage{
 .mor_ed_shuffle(order, clusters, us, pos)
 }

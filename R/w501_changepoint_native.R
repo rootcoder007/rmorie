@@ -483,8 +483,8 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
 #' (\hat\mu_{k+1:n} - \hat\mu_{1:k}) \|^2} with within-class operator
 #' \eqn{n \Sigma_W = k \hat\Sigma_{1:k} + (n-k) \hat\Sigma_{k+1:n}},
 #' studentised as \eqn{T(k) = (KFDR - d_1)/\sqrt{2 d_2}} with
-#' \eqn{d_1 = tr[(\Sigma_W + \gamma I)^{-1}\Sigma_W]},
-#' \eqn{d_2 = tr[(\Sigma_W + \gamma I)^{-2}\Sigma_W^2]}; the estimate
+#' \eqn{d_1 = tr\[(\Sigma_W + \gamma I)^{-1}\Sigma_W\]},
+#' \eqn{d_2 = tr\[(\Sigma_W + \gamma I)^{-2}\Sigma_W^2\]}; the estimate
 #' is the running maximum over k (their Sec. 2-3). Operators are
 #' represented on the span of the mapped sample via the Gram-matrix
 #' eigendecomposition; the reported scalars are basis-invariant.

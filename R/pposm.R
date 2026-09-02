@@ -5,7 +5,7 @@
 #' replicated observations; the second is the predictive spread and is
 #' always the wider.
 #'
-#' Formula: E[ytilde | y] ~= (1/S) sum_s ytilde^s, interval from
+#' Formula: E\[ytilde | y\] ~= (1/S) sum_s ytilde^s, interval from
 #'   empirical quantiles of the pooled draws
 #'
 #' @param yrep Matrix whose row s is one replicated dataset.

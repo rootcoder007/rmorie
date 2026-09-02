@@ -6,7 +6,7 @@
 #' p = 1/6 gives sigma = 37.
 #'
 #' @param n number of trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(n, p, sd, sd_tot); sd_tot is an alias of sd kept for
 #'   the eq (3.56) callers.
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic

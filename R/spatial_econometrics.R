@@ -91,7 +91,7 @@ morie_morans_i_test <- function(x, W, randomisation = TRUE,
 #' Spatial two-stage least squares
 #'
 #' Fits the spatial lag model `y = rho W y + X beta + e`.  `W y` is
-#' endogenous, so it is instrumented with `[X, WX, W^2 X]` -- the
+#' endogenous, so it is instrumented with `\[X, WX, W^2 X\]` -- the
 #' Kelejian and Prucha (1998) instrument set that `spatialreg::stsls`
 #' uses.  Ordinary least squares on this model is inconsistent.
 #' @param y numeric response

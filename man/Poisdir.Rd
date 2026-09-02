@@ -29,7 +29,7 @@ so the result is deterministic in both language arms.
 Formula: V_j ~ Beta(1 - sigma, M + j sigma);
 W_j = V_j prod_\{l<j\}(1 - V_l);
 E\link{V_j} = (1 - sigma)/(M + 1 + (j - 1) sigma);
-V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{\link{n-1}\}
+V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{[n-1]\}
 }
 \examples{
 Poisdir(sigma = 0.5, M = 5L, k = 5L)

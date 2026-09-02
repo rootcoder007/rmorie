@@ -35,7 +35,7 @@ list: estimate, y_hat, importance, mss, oob_size, mtry, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 633-681}, Chapter 15 "Random Forest for Genomic Prediction",
+volume [Pages 633-681], Chapter 15 "Random Forest for Genomic Prediction",
 read as rendered page images.  Section 15.4, pp. 639-640, gives the forest
 algorithm itself (quoted in aaa_mvsml_rf_shared.R); Section 15.7, p. 656,
 gives the multivariate splitting rule, which is what makes this the
@@ -61,7 +61,7 @@ gives the working form MSS = sum_{j=1}^{q} ( (1/n_L)(sum_{i=1}^{L} y*_ij)^2
 BOOK ERRATUM, recorded, and it inverts the optimisation.  The page says
 "minimizing MSS is equivalent to minimizing" (15.6).  It is equivalent to
 MAXIMISING it.  Expanding (15.5), MSS = sum_j sum_all y^2 -
-\link{ (sum_L y)^2/n_L + (sum_R y)^2/n_R }, so the bracket -- which is exactly
+[ (sum_L y)^2/n_L + (sum_R y)^2/n_R ], so the bracket -- which is exactly
 (15.6) -- enters with a minus sign and the first term does not depend on the
 split.  Three further things on the same page agree: (15.7), the
 classification analogue with the identical functional form, is introduced

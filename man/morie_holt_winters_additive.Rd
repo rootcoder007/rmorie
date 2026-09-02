@@ -18,7 +18,7 @@ morie_holt_winters_additive(
 
 \item{period}{seasonal period.}
 
-\item{alpha, beta, gamma}{smoothing parameters in \eqn{[0, 1]}.}
+\item{alpha, beta, gamma}{smoothing parameters in \eqn{\[0, 1\]}.}
 
 \item{horizon}{steps ahead; defaults to one full period.}
 }

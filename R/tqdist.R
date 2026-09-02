@@ -8,7 +8,7 @@
 #'
 #' Formula: with
 #' \code{m >= (4/3)(1 + eps)/eps^2 log(2/delta)},
-#' \code{Pr[|Prod(q,k) - <q,k>| > eps ||q|| ||k||] <= delta}.
+#' \code{Pr\[|Prod(q,k) - <q,k>| > eps ||q|| ||k||\] <= delta}.
 #'
 #' @param eps Relative distortion target.
 #' @param delta Failure probability.

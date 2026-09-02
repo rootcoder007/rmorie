@@ -9,7 +9,7 @@
 #' inversion because VanRaden's G is singular whenever markers
 #' outnumber individuals.
 #'
-#' Formula: [X'X, X'Z; Z'X, Z'Z + G^{-1} k] [beta; u] = [X'y; Z'y],
+#' Formula: \[X'X, X'Z; Z'X, Z'Z + G^{-1} k\] \[beta; u\] = \[X'y; Z'y\],
 #'   k = sigma_e^2 / sigma_u^2.
 #'
 #' @param y Response vector.

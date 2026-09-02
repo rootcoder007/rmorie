@@ -75,7 +75,7 @@ model on quota / network errors.
 csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 df <- utils::read.csv(csv, colClasses = "character")
 # 4 cases keeps the audit example fast; scale up for a real audit.
-sample <- utils::head(df$case_number[nzchar(df$case_number)], 4L)
+sample <- utils::head(df$case_number\[nzchar(df$case_number)\], 4L)
 audit <- morie_siu_audit_columns(sample, model = "ollama")
 # Worst 8 fields, ripe for parser fixes:
 head(audit, 8)

@@ -19,7 +19,7 @@ Snmlin(
 
 \item{covariate_history, time}{Accepted for signature compatibility.}
 
-\item{propensity}{\eqn{E[A|H]} for cumulative treatment; sample mean
+\item{propensity}{\eqn{E\[A|H\]} for cumulative treatment; sample mean
 if omitted (correct only under randomization).}
 }
 \value{

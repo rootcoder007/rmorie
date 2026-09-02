@@ -63,7 +63,7 @@
 #' rather than hide.
 #'
 #' @param W Square symmetric adjacency matrix (n x n).
-#' @param rho Spatial correlation in \code{[0, 1]}.
+#' @param rho Spatial correlation in \code{\[0, 1\]}.
 #' @param tau Positive scale.
 #' @return A list with \code{Q}, \code{degrees}, \code{rho},
 #'   \code{min_eigenvalue}, \code{singular}, \code{note}.

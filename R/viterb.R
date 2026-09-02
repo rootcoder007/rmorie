@@ -8,7 +8,7 @@
 #' probabilities underflows before the path is decided.
 #'
 #' Formula:
-#' \code{delta_t(j) = max_i [delta_{t-1}(i) + log A_ij] + log B_j(o_t)}.
+#' \code{delta_t(j) = max_i \[delta_{t-1}(i) + log A_ij\] + log B_j(o_t)}.
 #'
 #' @param obs Zero-based observation symbols.
 #' @param trans Transition probabilities.

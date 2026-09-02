@@ -22,8 +22,8 @@ Formula: \eqn{G = \sum_i \sum_{j \ne i} w_{ij} x_i x_j /
 randomisation variance of Getis and Ord (1992) built from
 \eqn{S_0, S_1, S_2} and the moments \eqn{m_r = \sum_i x_i^r}:
 \eqn{B_0 = (n^2-3n+3)S_1 - nS_2 + 3S_0^2},
-\eqn{B_1 = -[(n^2-n)S_1 - 2nS_2 + 6S_0^2]},
-\eqn{B_2 = -[2nS_1 - (n+3)S_2 + 6S_0^2]},
+\eqn{B_1 = -\[(n^2-n)S_1 - 2nS_2 + 6S_0^2\]},
+\eqn{B_2 = -\[2nS_1 - (n+3)S_2 + 6S_0^2\]},
 \eqn{B_3 = 4(n-1)S_1 - 2(n+1)S_2 + 8S_0^2}, \eqn{B_4 = S_1 - S_2 + S_0^2}.
 G is only interpretable for non-negative \code{x}, so negative input
 is rejected rather than silently returned.

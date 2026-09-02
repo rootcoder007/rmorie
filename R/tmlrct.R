@@ -6,7 +6,7 @@
 #' do not enter the clever covariate, because their treatment mechanism
 #' is unknown and a wrong g would discard the one thing the trial
 #' guarantees.  So g is the trial's own empirical randomisation
-#' probability and \code{H = I(trial)/P(trial) * [D/g - (1 - D)/(1 - g)]},
+#' probability and \code{H = I(trial)/P(trial) * \[D/g - (1 - D)/(1 - g)\]},
 #' making the target the ATE in the TRIAL population.  Biased
 #' observational rows cost efficiency, not consistency.
 #'

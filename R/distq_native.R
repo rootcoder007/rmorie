@@ -74,7 +74,7 @@
 
 #' The fixed support {z_i} and its spacing
 #'
-#' Atoms on \code{[v_min, v_max]} at equal intervals:
+#' Atoms on \code{\[v_min, v_max\]} at equal intervals:
 #' \code{z_i = v_min + (i-1) * dz}, \code{dz = (v_max - v_min) / (N - 1)}.
 #'
 #' @param v_min Lower bound of the support.
@@ -128,7 +128,7 @@ distribution_mean <- function(probs, z) {
 #' added to \code{m[l]}.
 #'
 #' @param reward Sampled reward r.
-#' @param gamma Discount in [0, 1]. Ignored when \code{done = TRUE}.
+#' @param gamma Discount in \[0, 1\]. Ignored when \code{done = TRUE}.
 #' @param next_probs Numeric vector of length n_atoms: the next-state
 #'   distribution under the greedy action. Must be a probability vector.
 #' @param v_min Lower bound of the support.
@@ -233,7 +233,7 @@ greedy_action <- function(next_probs_by_action, z) {
 #' distributions.
 #'
 #' @param reward Sampled reward r.
-#' @param gamma Discount in [0, 1]. Ignored when \code{done = TRUE}.
+#' @param gamma Discount in \[0, 1\]. Ignored when \code{done = TRUE}.
 #' @param next_probs_by_action List of per-action next-state
 #'   distributions.
 #' @param current_probs Numeric vector: the current Q-network
@@ -276,16 +276,16 @@ c51_update <- function(reward, gamma, next_probs_by_action, current_probs,
 #' Bernoulli (N = 2) alternative
 #'
 #' The single-parameter form the C51 paper names in its discussion of
-#' the projected operator: \code{Phi T_hat Z = clip((E[T_hat Z] -
+#' the projected operator: \code{Phi T_hat Z = clip((E\[T_hat Z\] -
 #' v_min) / dz, 0, 1)}.
 #'
 #' @param reward Sampled reward r.
-#' @param gamma Discount in [0, 1]. Ignored when \code{done = TRUE}.
+#' @param gamma Discount in \[0, 1\]. Ignored when \code{done = TRUE}.
 #' @param next_probs Two-element probability vector.
 #' @param v_min Lower bound of the support.
 #' @param v_max Upper bound of the support.
 #' @param done Terminal flag.
-#' @return Scalar in [0, 1].
+#' @return Scalar in \[0, 1\].
 #' @export
 bernoulli_algorithm <- function(reward, gamma, next_probs, v_min, v_max,
                                 done = FALSE) {

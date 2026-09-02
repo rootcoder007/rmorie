@@ -169,7 +169,7 @@ PdfMean <- function(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) {
   )
 }
 
-#' Eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both
+#' Eq (3.2): E\[eta^2\].  Equal to the variance only when mu = 0, so both
 #'
 #' are returned rather than one being assumed for the other.
 #'
@@ -655,7 +655,7 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
 #' Eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
 #'
 #' negative for every a in (0,1), so the function diverges at t = 0 (NA,
-#' not a large finite number).  Its integral over [-L, L] is L^a, which
+#' not a large finite number).  Its integral over \[-L, L\] is L^a, which
 #' tends to 1 as a -> 0 -- the unit-area property in the limit.
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.

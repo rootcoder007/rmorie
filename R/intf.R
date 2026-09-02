@@ -10,7 +10,7 @@
 #'
 #' @param coef the K coefficients.
 #' @param basis n-by-K matrix of basis functions evaluated on the grid.
-#' @param t the grid; defaults to equally spaced on [0, 1].
+#' @param t the grid; defaults to equally spaced on \[0, 1\].
 #' @return list: estimate, basis_integrals, n, nbasis, method.
 #' @keywords internal
 #' @examples

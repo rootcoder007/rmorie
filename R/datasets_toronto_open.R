@@ -28,7 +28,7 @@
 #'   `num_resources`, `metadata_modified`, `search_keyword`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
-#' head(d[, c("package_name", "title")])
+#' head(d\[, c("package_name", "title")\])
 #' @export
 morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
@@ -88,7 +88,7 @@ morie_datasets_toronto_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @return A `data.frame` with full station address + EMS metadata.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
-#' head(df[, c("EMS_NAME", "EMS_ADDRESS")])
+#' head(df\[, c("EMS_NAME", "EMS_ADDRESS")\])
 #' @export
 morie_datasets_toronto_ambulance_stations <- function(offline = TRUE,
                                                       max_features = NULL) {
@@ -173,7 +173,7 @@ morie_datasets_toronto_asr_miscellaneous <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' \donttest{
 #' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
-#' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id[1],
+#' df <- try(morie_datasets_toronto_open_ckan_resource(cat_df$resource_id\[1\],
 #'   limit = 5L
 #' ))
 #' if (!inherits(df, "try-error")) head(df)

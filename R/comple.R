@@ -7,9 +7,9 @@
 #' the tail breaks the symmetry while the parameter count stays linear.
 #'
 #' Formula: \code{Re(<e_h, w_r, conj(e_t))>} =
-#' \code{sum_k [Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt]}.
+#' \code{sum_k \[Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt\]}.
 #'
-#' @param triples Matrix of zero-based \code{[head, relation, tail]} indices.
+#' @param triples Matrix of zero-based \code{\[head, relation, tail\]} indices.
 #' @param dim Embedding dimension.
 #' @param re_e,im_e Entity embeddings, optional.
 #' @param re_r,im_r Relation embeddings, optional.

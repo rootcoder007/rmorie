@@ -9,14 +9,14 @@
 #'   minimize_theta sum_{i=1}^{h} (r^2)_{i:n},
 #'
 #' "where (r^2)_{1:n} <= ... <= (r^2)_{n:n} are the ordered squared residuals.
-#' If h = [n/2] + 1 is chosen, the breakdown point of Theorem 1 is obtained,
-#' and for h = [n/2] + [(p+1)/2], the result of Remark 1 holds.  In general, h
+#' If h = \[n/2\] + 1 is chosen, the breakdown point of Theorem 1 is obtained,
+#' and for h = \[n/2\] + \[(p+1)/2\], the result of Remark 1 holds.  In general, h
 #' may depend on some trimming proportion alpha, for instance by means of
-#' h = [n(1 - alpha)] + 1."
+#' h = \[n(1 - alpha)\] + 1."
 #'
 #' The default here is the maximal-breakdown choice of Remark 1,
-#' h = [n/2] + [(p+1)/2], whose breakdown point (p. 873) is
-#' ([(n - p)/2] + 1)/n.  Both breakdown formulas are reported.  The same page
+#' h = \[n/2\] + \[(p+1)/2\], whose breakdown point (p. 873) is
+#' (\[(n - p)/2\] + 1)/n.  Both breakdown formulas are reported.  The same page
 #' states that the LTS converges like n^-1/2, unlike the LMS at n^-1/3, which
 #' is why Section 4 introduces it.
 #'
@@ -33,7 +33,7 @@
 #'
 #' @param y n responses.
 #' @param X n-by-p design matrix; include the intercept column yourself.
-#' @param h number of retained residuals; defaults to [n/2] + [(p+1)/2].
+#' @param h number of retained residuals; defaults to \[n/2\] + \[(p+1)/2\].
 #' @param max_starts cap on the elemental subsets enumerated.
 #' @param max_iter cap on the concentration steps per start.
 #' @return list: estimate, coef, subset, residual, objectives,

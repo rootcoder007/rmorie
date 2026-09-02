@@ -3,7 +3,7 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 633-681], Chapter 15, Section 15.4, pp. 642-643, read as
+#' volume \[Pages 633-681\], Chapter 15, Section 15.4, pp. 642-643, read as
 #' rendered page images.
 #'
 #' The book gives this measure in PROSE ONLY.  It states no equation and
@@ -20,7 +20,7 @@
 #' are referred to as Out-Of-Bag (OOB)."
 #'
 #' Implemented exactly as that prose reads:
-#' Imp(X_j) = mean_b [ PE_b(X_j permuted) - PE_b ] / sd_b [ same ], with PE_b
+#' Imp(X_j) = mean_b \[ PE_b(X_j permuted) - PE_b \] / sd_b \[ same \], with PE_b
 #' the mean squared error over tree b's own out-of-bag rows.  The normalisation
 #' by the standard deviation across trees is the book's, and is what makes the
 #' result a z-like score rather than a raw error difference; pass

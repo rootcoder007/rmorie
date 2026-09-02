@@ -18,7 +18,7 @@ morie_fauzi_cvm_statistic(x, cdf)
 Named list with \code{statistic}, \code{p_value}, \code{n}, \code{method}.
 }
 \description{
-\deqn{CvM_n = n\int [F_n(x)-F(x)]^2 dF(x).}{CvM_n = n int [F_n(x) - F(x)]^2 dF(x).}
+\deqn{CvM_n = n\int \[F_n(x)-F(x)\]^2 dF(x).}{CvM_n = n int \[F_n(x) - F(x)\]^2 dF(x).}
 }
 \details{
 Evaluated by its exact closed form, not by quadrature: substituting the

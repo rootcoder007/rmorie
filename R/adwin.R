@@ -6,7 +6,7 @@
 #' m = 1/(1/n0 + 1/n1), delta' = delta/n and
 #' eps_cut = sqrt(log(4/delta') / (2 m)).
 #'
-#' @param x Stream values, expected in [0, 1].
+#' @param x Stream values, expected in \[0, 1\].
 #' @param delta Confidence parameter in (0, 1).
 #'
 #' @return List with mean, width, window, ndrops, lastcut, changepoints,

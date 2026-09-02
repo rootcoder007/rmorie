@@ -207,7 +207,7 @@ transform_to_real <- function(value, support = "positive", eps = 1e-10) {
 
 #' Monte Carlo ELBO
 #'
-#' \code{E_q[log p(x,z) - log q(z)]}. The common yardstick: both
+#' \code{E_q\[log p(x,z) - log q(z)\]}. The common yardstick: both
 #' approaches optimise it, so a deeper flow must not lower it. The
 #' variance uses the (n-1) denominator so both arms agree to the
 #' last bit when the same samples are passed in.

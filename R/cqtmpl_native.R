@@ -51,7 +51,7 @@
 #' \code{r = 0.5 * (1 - exp(-2 d))} and back.
 #'
 #' @param d Numeric, Morgans.
-#' @return Recombination fraction in \code{[0, 0.5]}.
+#' @return Recombination fraction in \code{\[0, 0.5\]}.
 #' @keywords internal
 #' @noRd
 .haldane <- function(d) {

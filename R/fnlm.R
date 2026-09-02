@@ -28,7 +28,7 @@
 #' @param Y N-by-nt matrix of response curves y_i(t), one curve per row.
 #' @param basis_X ns-by-K1 matrix, the basis theta on the s grid.
 #' @param basis_Y nt-by-K2 matrix, the basis eta on the t grid.
-#' @param s,t the two grids; default to equally spaced on [0, 1].
+#' @param s,t the two grids; default to equally spaced on \[0, 1\].
 #' @return list: estimate, B, beta, Z, J, fitted, residual, sse, ssy, r2, n,
 #'   method.
 #' @keywords internal

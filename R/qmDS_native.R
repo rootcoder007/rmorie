@@ -14,7 +14,7 @@
 # the identity and a pure shift is recovered exactly.
 
 # piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
-#' Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]
+#' Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to \[0, 1\]
 #'
 #' A step of the qmDS_native implementation. Called by \code{morie_qmDS}.
 #' See the file header for the source the module follows.

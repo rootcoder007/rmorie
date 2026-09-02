@@ -14,7 +14,7 @@
 
 #' VanRaden Method 1 genomic relationship matrix
 #'
-#' Computes \eqn{G = ZZ'/[2\sum_j p_j(1-p_j)]} with \eqn{Z = M - 2P}
+#' Computes \eqn{G = ZZ'/\[2\sum_j p_j(1-p_j)\]} with \eqn{Z = M - 2P}
 #' (VanRaden 2008, method 1).  The mean diagonal of \eqn{G} is
 #' reported as \code{estimate}; it exceeds 1 when the sample is more
 #' inbred than the base population implied by \code{freq}.

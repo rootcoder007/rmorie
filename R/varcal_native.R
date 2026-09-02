@@ -164,7 +164,7 @@ varcal_pileup_column <- function(reads, position, reference) {
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference A vector; its length is taken.
 #' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1. Defaults to \code{2}.
-#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in [0, 1]. Defaults to \code{0.05}.
+#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in \[0, 1\]. Defaults to \code{0.05}.
 #' @param min_bq Passed to \code{>=}. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export

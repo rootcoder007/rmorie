@@ -7,8 +7,8 @@
 #' Formula: P_0 Pi(V | X) <= d_TV(P_0, P_U) + P_0 phi
 #'   + (1/Pi(U)) int_V P(1 - phi) dPi(P)
 #'
-#' @param dtv d_TV(P_0, P_U), in [0, 1].
-#' @param p0_phi P_0 phi, the type I error, in [0, 1].
+#' @param dtv d_TV(P_0, P_U), in \[0, 1\].
+#' @param p0_phi P_0 phi, the type I error, in \[0, 1\].
 #' @param prior_mass Pi(U), strictly positive.
 #' @param integral int_V P(1 - phi) dPi(P), non-negative.
 #' @return List with \code{bound}, \code{term_tv}, \code{term_test},

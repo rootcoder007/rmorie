@@ -27,7 +27,7 @@ deviance, n, m.
 Verified against Chalmers (2012), JSS 48(6), p.3 eq. (1), read from a
 rendered image of the page rather than the text layer:
 \code{Phi(x = 1 | theta, alpha, d, gamma) =
-gamma + (1 - gamma) / (1 + exp[-D (alpha' theta + d)])}.
+gamma + (1 - gamma) / (1 + exp\[-D (alpha' theta + d)\])}.
 }
 \details{
 "Compensatory" is the content of \code{alpha' theta}: the abilities

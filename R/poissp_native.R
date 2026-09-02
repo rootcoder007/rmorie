@@ -96,7 +96,7 @@ morie_poissp_rho_bounds <- function(W) {
 }
 
 # negative joint Hessian [[X'MX, X'M], [MX, M + Q]] (+ constraint block)
-#' Negative joint Hessian [[X\'MX, X\'M], [MX, M + Q]] (+ constraint
+#' Negative joint Hessian [[X\'MX, X\'M], \[MX, M + Q\]] (+ constraint
 #' block)
 #'
 #' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}.

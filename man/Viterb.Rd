@@ -27,7 +27,7 @@ probabilities underflows before the path is decided.
 }
 \details{
 Formula:
-\code{delta_t(j) = max_i [delta_{t-1}(i) + log A_ij] + log B_j(o_t)}.
+\code{delta_t(j) = max_i \[delta_{t-1}(i) + log A_ij\] + log B_j(o_t)}.
 }
 \references{
 Viterbi, A. J. (1967). IEEE Trans Inform Theory

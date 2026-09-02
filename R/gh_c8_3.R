@@ -11,7 +11,7 @@
 #'
 #' @param prior_ball Pi_n(B_2(p_0, ebar_n)), in (0, 1].
 #' @param log_entropy log N(xi eps_n, P_\{n,1\}, d), non-negative.
-#' @param sieve_mass Pi_n(P_\{n,2\}), in [0, 1].
+#' @param sieve_mass Pi_n(P_\{n,2\}), in \[0, 1\].
 #' @param eps_bar ebar_n, positive.
 #' @param eps eps_n, at least eps_bar.
 #' @param n Sample size.

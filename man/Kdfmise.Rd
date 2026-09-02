@@ -14,7 +14,7 @@ morie_fauzi_kdfe_mise(n, h, rfp, varint, mu2 = 1, r1 = NULL)
 
 \item{h}{Bandwidth.}
 
-\item{rfp}{\verb{int [f'(x)]^2 dx}, the roughness of the density.}
+\item{rfp}{\verb{int \[f'(x)\]^2 dx}, the roughness of the density.}
 
 \item{varint}{\verb{int F(x)(1 - F(x)) dx}.}
 
@@ -27,7 +27,7 @@ Named list with \code{mise}, \code{biasterm}, \code{varterm}, \code{smoothgain},
 }
 \description{
 The MISE display of Sec. 2.1, assembled from (2.3) and (2.4):
-\deqn{\mathrm{MISE}(\hat F_h) = \frac{h^4}{4}\Big[\int z^2K(z)dz\Big]^2\int [f'(x)]^2dx + \frac1n\int F(1-F)dx - \frac{2h}{n}r_1 + o(h^4 + h/n).}{MISE(Fhat_h) = (h^4/4)[int z^2 K dz]^2 int [f'(x)]^2 dx + (1/n) int F(1-F) dx - (2h/n) r1 + o(h^4 + h/n).}
+\deqn{\mathrm{MISE}(\hat F_h) = \frac{h^4}{4}\Big\[\int z^2K(z)dz\Big\]^2\int \[f'(x)\]^2dx + \frac1n\int F(1-F)dx - \frac{2h}{n}r_1 + o(h^4 + h/n).}{MISE(Fhat_h) = (h^4/4)\[int z^2 K dz\]^2 int \[f'(x)\]^2 dx + (1/n) int F(1-F) dx - (2h/n) r1 + o(h^4 + h/n).}
 }
 \details{
 Differentiating in \code{h} and setting to zero gives

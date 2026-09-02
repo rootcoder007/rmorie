@@ -24,7 +24,7 @@ resid_sum, df, pvalue, reject, n.
 Source READ FROM THE CORPUS PDF, page rendered with pdftoppm:
 Hedderich, Sachs and Reynarowych, Applied Statistics: Methods Using R,
 section 8.5, printed page 843, equations (8.80) and (8.81):
-\code{D = 2 sum [y_i log(y_i / lam_i) - (y_i - lam_i)]}, printed also
+\code{D = 2 sum \[y_i log(y_i / lam_i) - (y_i - lam_i)\]}, printed also
 as \code{2 sum y_i log(y_i / lam_i)}.  The two agree only when
 \code{sum (y_i - lam_i) = 0}, which the book states one paragraph
 above holds exactly when the model carries an intercept.  The general

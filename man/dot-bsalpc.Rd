@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_rangayyan_phys.R
 \name{.bsalpc}
 \alias{.bsalpc}
-\title{Levinson-Durbin linear prediction; returns list(a = a\link{1..p}, e =
+\title{Levinson-Durbin linear prediction; returns list(a = a[1..p], e =
 error)}
 \usage{
 .bsalpc(x, order)

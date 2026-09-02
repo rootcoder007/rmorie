@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Check that a moment sequence is realisable by a measure on [0, 1].
+#' Check that a moment sequence is realisable by a measure on \[0, 1\].
 #'
 #' Hausdorff's condition -- alternating finite differences all
 #' non-negative -- is necessary AND sufficient. \code{min_difference} is
 #' returned because a sequence can be feasible by a tiny margin.
 #'
-#' Formula: m realisable on [0, 1] iff (-1)^k (Delta^k m)_j >= 0 for all
+#' Formula: m realisable on \[0, 1\] iff (-1)^k (Delta^k m)_j >= 0 for all
 #'   j, k >= 0, where (Delta m)_j = m_\{j+1\} - m_j
 #'
 #' @param moments m_0, m_1, ..., m_n with m_0 = 1.

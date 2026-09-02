@@ -5,7 +5,7 @@
 #' \code{unclr.R}; per ledger/wave2/DUPMAP.tsv this is an alias, not a
 #' second copy.
 #'
-#' Formula: \code{NIE = E[Y(1, M(1))] - E[Y(1, M(0))]}, taken within
+#' Formula: \code{NIE = E\[Y(1, M(1))\] - E\[Y(1, M(0))\]}, taken within
 #' unit so the standard error is the paired one.
 #'
 #' @param y11 Unit-level \code{Y(1, M(1))}.

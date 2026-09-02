@@ -12,7 +12,7 @@ morie_horowitz_thm4_1_id_median(x, beta, ncell = 4L, nbin = 10L)
 \arguments{
 \item{x}{Numeric matrix of covariates, n by d.}
 
-\item{beta}{Numeric vector, scale normalised so abs(beta\link{1}) == 1.}
+\item{beta}{Numeric vector, scale normalised so abs(beta[1]) == 1.}
 
 \item{ncell}{Integer; conditioning cells per remaining covariate,
 cut at fixed quantiles.}

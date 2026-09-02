@@ -35,7 +35,7 @@
 #'   parameters (a, b, c) on each scale; use c = 0 for 2PL.
 #' @param symmetric Minimize F1 + F2 instead of F1 only.
 #' @param theta_points Optional evaluation grid (default 41 points on
-#'   [-4, 4]).
+#'   \[-4, 4\]).
 #' @return A list with elements \code{A}, \code{B}, \code{criterion},
 #'   \code{symmetric}, \code{n_common}, \code{method}.
 #' @references Stocking, M. L. and Lord, F. M. (1983). Developing a

@@ -19,7 +19,7 @@ List with \code{rate}, \code{intercept}, \code{tmrca},
 \description{
 For heterochronous sequences on a rooted phylogeny with sampling
 times \eqn{t_i} and root-to-tip distances \eqn{d_{r,i}}, a strict
-molecular clock implies \eqn{E[d_{r,i}] = u (t_i - t_r)} (eq. 1
+molecular clock implies \eqn{E\[d_{r,i}\] = u (t_i - t_r)} (eq. 1
 of the paper). Ordinary least squares of d on t estimates the
 substitution rate u as the slope and the root time \eqn{t_r}
 (time of the most recent common ancestor) as the x-intercept.

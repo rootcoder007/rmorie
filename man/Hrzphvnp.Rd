@@ -91,8 +91,8 @@ The plain estimator sigma_n(y_n) converges no faster than n^(-1/3).
 Under E exp(-3V) < Inf (PHU3(ii)) the Schucany-Sommers bias
 correction
 
-sigma_n = \link{sigma_n(y_n1) - n^(-q(1-delta)) sigma_n(y_n2)}
-/ \link{1 - n^(-q(1-delta))}                          (6.81)
+sigma_n = [sigma_n(y_n1) - n^(-q(1-delta)) sigma_n(y_n2)]
+/ [1 - n^(-q(1-delta))]                          (6.81)
 
 reaches a rate arbitrarily close to the n^(-2/5) that Ishwaran
 (1996) shows is optimal, and that correction is applied.  The
@@ -113,8 +113,8 @@ these sequences.
 
 Then Lambda_0 and lambda_0 follow from
 
-Lambda_n0(y) = exp\link{sigma_n Tn(y)}                          (6.70)
-lambda_n0(y) = sigma_n Tn'(y) exp\link{sigma_n Tn(y)}           (6.71)
+Lambda_n0(y) = exp[sigma_n Tn(y)]                          (6.70)
+lambda_n0(y) = sigma_n Tn'(y) exp[sigma_n Tn(y)]           (6.71)
 
 and beta = sigma alpha.  Because Tn(y0) = 0 by construction,
 Lambda_n0(y0) = 1 exactly, which is the location normalisation the
@@ -138,7 +138,7 @@ actually imposes is Lambda_0(y0) = 1 for some finite y0 > 0
 (p. 223), together with |alpha_1| = 1 on the index.  E\link[dlm:V]{V} = 1 is
 never assumed; what is assumed is Ee^{-3V} < infinity (PHU3(ii)).
 \item h(t|X,V) = h_0(t) exp(X'beta) V.  Equation (6.72) writes the
-hazard as lambda(y|z,v) = lambda_0(y) exp\link{-(sigma z + v)}, i.e.
+hazard as lambda(y|z,v) = lambda_0(y) exp[-(sigma z + v)], i.e.
 with a NEGATIVE index and an exp(-v) frailty.  The published
 parameterisation is the one implemented.
 }

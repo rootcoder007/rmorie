@@ -8,7 +8,7 @@
 #'
 #' Formula: \code{H = D/g - (1 - D)/(1 - g)},
 #' \code{eps = sum H (y - Q) / sum H^2}, \code{Q* = Q + eps H},
-#' \code{psi = mean[Q*(1, W) - Q*(0, W)]}.
+#' \code{psi = mean\[Q*(1, W) - Q*(0, W)\]}.
 #'
 #' @param y Outcome.
 #' @param D Binary treatment.

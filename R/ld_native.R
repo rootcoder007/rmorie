@@ -16,7 +16,7 @@
 #'
 #' For two 0/1-coded loci observed on the same individuals, returns
 #' the squared correlation
-#' \eqn{r^2 = D^2 / [p_A(1-p_A)p_B(1-p_B)]} with
+#' \eqn{r^2 = D^2 / \[p_A(1-p_A)p_B(1-p_B)\]} with
 #' \eqn{D = p_{AB} - p_A p_B} (Lewontin 1964; Hill and Robertson
 #' 1968).  \eqn{r^2} is exactly the squared Pearson correlation of the
 #' two indicator vectors, which is the form used for LD pruning.

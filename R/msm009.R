@@ -2,8 +2,8 @@
 #' Brier score for categorical data.
 #'
 #' Formula: BS = T^-1 sum_i sum_c (pi_ic - d_ic)^2 (eq. 4.14) with d_ic the
-#' indicator of the observed category. The categorical score lies in [0, 2];
-#' halving puts it in [0, 1]. Lower is better.
+#' indicator of the observed category. The categorical score lies in \[0, 2\];
+#' halving puts it in \[0, 1\]. Lower is better.
 #'
 #' @param probs Matrix of predicted class probabilities, one row per case.
 #' @param y_true Observed class labels, zero-based.

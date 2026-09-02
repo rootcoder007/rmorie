@@ -22,7 +22,7 @@
 #' policy is deterministic given the reward table, so no RNG is used.
 #' Index ties break to the lowest machine.
 #'
-#' @param x Reward table (T x K); \code{x[t, j]} is what machine j
+#' @param x Reward table (T x K); \code{x\[t, j\]} is what machine j
 #'   pays at play t.
 #' @param T Number of plays (default all rows; must be >= K).
 #' @return A list with elements \code{estimate} (0-based machine with

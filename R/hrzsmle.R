@@ -18,7 +18,7 @@
 #' @param y Numeric binary 0/1 outcome vector.
 #' @param h Numeric bandwidth; default n^(-1/5).
 #' @param trim Numeric density trimming constant defining A_x.
-#' @param floor Numeric; Ghat is clipped into [floor, 1-floor].
+#' @param floor Numeric; Ghat is clipped into \[floor, 1-floor\].
 #' @param niter Integer sweeps of the coordinate search.
 #' @param delta Numeric initial step of the coordinate search.
 #' @param b0 Optional numeric starting value for betatilde.

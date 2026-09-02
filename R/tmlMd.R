@@ -7,8 +7,8 @@
 #' and the other way round, which a product-of-coefficients estimator
 #' cannot do.
 #'
-#' Formula: \code{NDE = E[Y(1, M_0) - Y(0, M_0)]},
-#' \code{NIE = E[Y(1, M_1) - Y(1, M_0)]}.
+#' Formula: \code{NDE = E\[Y(1, M_0) - Y(0, M_0)\]},
+#' \code{NIE = E\[Y(1, M_1) - Y(1, M_0)\]}.
 #'
 #' @param Y Outcome.
 #' @param X Binary treatment.

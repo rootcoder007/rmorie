@@ -37,7 +37,7 @@ attndiag, mean, first, sumsq)
 \description{
 Quoted from the paper: (1) "h^0_n = Embedding(X_{:,n}); H^{l+1} =
 TrmBlock(H^l); Yhat_{:,n} = Projection(h^L_n)"; (2) "LayerNorm(H) =
-{\link{h_n - Mean(h_n)}/sqrt(Var(h_n)) | n = 1..N}"; attention scores
+{[h_n - Mean(h_n)]/sqrt(Var(h_n)) | n = 1..N}"; attention scores
 "A_{i,j} = (Q K^T / sqrt(d_k))_{i,j}" -- Liu, Y., Hu, T., Zhang, H.,
 Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 (arXiv:2310.06625). The inversion is the point: each VARIATE series

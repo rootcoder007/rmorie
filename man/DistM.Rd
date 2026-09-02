@@ -7,7 +7,7 @@
 DistM(triples, dim, E = NULL, R = NULL, seed = 1)
 }
 \arguments{
-\item{triples}{Rows \code{[head, relation, tail]}, zero-based.}
+\item{triples}{Rows \code{\[head, relation, tail\]}, zero-based.}
 
 \item{dim}{Embedding dimension.}
 

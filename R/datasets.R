@@ -1601,7 +1601,7 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #'   Neighborhoods"; based on Neighborhoods_2012b.
 #' @examplesIf nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
-#' head(df[, c("pri_neigh", "sec_neigh")])
+#' head(df\[, c("pri_neigh", "sec_neigh")\])
 #' @export
 morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
                                                  geometry = FALSE,
@@ -2463,7 +2463,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #'   Areas (current)" (`cauq-8yn6`).
 #' @examplesIf nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
-#' head(df[, c("area_numbe", "community")])
+#' head(df\[, c("area_numbe", "community")\])
 #' @export
 morie_datasets_chicago_community_areas <- function(offline = TRUE,
                                                    geometry = FALSE,
@@ -2884,7 +2884,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
 #'   `portal`, `resource_url`, `fixture`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' reg <- morie_datasets_external_socrata_layers()
-#' reg[, c("dataset_key", "resource_url")]
+#' reg\[, c("dataset_key", "resource_url")\]
 #' @export
 morie_datasets_external_socrata_layers <- function() {
   rows <- list(

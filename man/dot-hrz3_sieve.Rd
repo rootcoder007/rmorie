@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_hrz3.R
 \name{.hrz3_sieve}
 \alias{.hrz3_sieve}
-\title{Series basis on \link{0, 1}, eq. (5.79).  "cos" is the orthonormal cosine}
+\title{Series basis on [0, 1], eq. (5.79).  "cos" is the orthonormal cosine}
 \usage{
 .hrz3_sieve(z, J, kind = "poly")
 }

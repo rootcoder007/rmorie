@@ -8,7 +8,7 @@
 #' differencing out E(. | Z) gives (3.32) and hence
 #' beta = E(Xt Xt')^{-1} E(Xt Yt) with Xt = X - E(X | Z), provided
 #'
-#'   Sigma_X = E[X - E(X|Z)][X - E(X|Z)]' > 0                (3.33)
+#'   Sigma_X = E\[X - E(X|Z)\]\[X - E(X|Z)\]' > 0                (3.33)
 #'
 #' which fails when X is a deterministic function of Z and rules out
 #' an intercept in X, since any intercept is absorbed into g.

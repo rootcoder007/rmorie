@@ -35,7 +35,7 @@ A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volu
 }
 \description{
 The first-order intensity is eq (9.20),
-\eqn{\lambda(s,t) = \lim E[N(ds, dt)] / (|ds| |dt|)}, where
+\eqn{\lambda(s,t) = \lim E\[N(ds, dt)\] / (|ds| |dt|)}, where
 \eqn{N(ds, dt)} counts events in an infinitesimal cylinder with base
 \eqn{ds} and height \eqn{dt} (Dorai-Raj, 2001). The cylinder, rather than a
 ball in \eqn{R^3}, is the same refusal to treat time as a third spatial

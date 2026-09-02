@@ -4,11 +4,11 @@
 #' NOT IN THE BOOK.  Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 #' Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #' Springer, was searched in full -- all seventeen page-range volumes and the
-#' index, [Pages 683-691].  The phrase "factor analytic" occurs exactly once,
-#' in the front matter, volume [Pages i-xxiv]: "for the traits or
+#' index, \[Pages 683-691\].  The phrase "factor analytic" occurs exactly once,
+#' in the front matter, volume \[Pages i-xxiv\]: "for the traits or
 #' environments, unstructured or factor analytic variance-covariance matrices
 #' can be chosen".  The structure is named there and nowhere specified;
-#' Chapter 5, volume [Pages 141-170], carries only the unstructured and
+#' Chapter 5, volume \[Pages 141-170\], carries only the unstructured and
 #' diagonal forms.
 #'
 #' The structure is therefore taken from the primary source for

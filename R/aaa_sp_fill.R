@@ -1829,7 +1829,7 @@ SpatialPca <- function(x, w, naxes = 2L) {
 #' Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved
 #' as
 #'
-#' the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X]
+#' the saddle-point system \[K + n lam I, T; T\', 0\].  T = \[1, s1, s2, X\]
 #' spans the null space of the penalty and must NOT be shrunk; dropping
 #' the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood
 #' (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric
@@ -1982,7 +1982,7 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
   )
 }
 
-#' Psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at
+#' Psi = E\[ {g(A - delta | H) / g(A | H)} Y \] -- the density ratio at
 #' the
 #'
 #' BACK-shifted exposure.  Forward-shifting is the sign error this

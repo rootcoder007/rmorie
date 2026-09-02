@@ -133,7 +133,7 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
 # E[p(X/sigma)] under the marginal law of an unselected study. A finite
 # sum of normal increments because p is a step function -- the reason no
 # quadrature appears anywhere in this module.
-#' E[p(X/sigma)] under the marginal law of an unselected study. A finite
+#' E\[p(X/sigma)\] under the marginal law of an unselected study. A finite
 #'
 #' sum of normal increments because p is a step function -- the reason
 #' no quadrature appears anywhere in this module.

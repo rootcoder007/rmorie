@@ -23,7 +23,7 @@ with a sustained exposure period, Mathematical Modelling 7(9-12),
 1393-1512, introduces the g-formula; van der Laan and Rubin (2006), The
 International Journal of Biostatistics 2(1), art. 11, supplies the
 targeting step.  The outcome-only estimator is the plug-in psi =
-mean_i \link{Qbar(1, X_i) - Qbar(0, X_i)}, which uses no propensity score at
+mean_i [Qbar(1, X_i) - Qbar(0, X_i)], which uses no propensity score at
 all, so it is consistent when the outcome regression is right whatever
 the treatment mechanism.  Neither source was retrievable here as a full
 text; both are quoted in their standard published form.  The targeted

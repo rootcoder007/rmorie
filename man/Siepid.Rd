@@ -11,7 +11,7 @@ Siepid(G, beta, initial, t_max = 20, dt = 0.01)
 
 \item{beta}{Per-edge infection rate.}
 
-\item{initial}{Initial infection probability of each node, in \link{0, 1}.}
+\item{initial}{Initial infection probability of each node, in [0, 1].}
 
 \item{t_max}{Integration horizon. Default 20.}
 

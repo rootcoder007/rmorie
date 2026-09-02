@@ -28,8 +28,8 @@ Bonferroni one, exact at a single candidate (the multiplier is then
 zero) and conservative beyond it.
 }
 \details{
-Formula: \code{[max_k m_k, min_j m_j]} plug-in, and
-\code{[max_k (m_k - z_K s_k / sqrt(n)), min_j (m_j + z_J s_j / sqrt(n))]}
+Formula: \code{\[max_k m_k, min_j m_j\]} plug-in, and
+\code{\[max_k (m_k - z_K s_k / sqrt(n)), min_j (m_j + z_J s_j / sqrt(n))\]}
 with \code{z_J = qnorm(1 - 1 / (2 J))} for the half-median-unbiased
 version.
 }

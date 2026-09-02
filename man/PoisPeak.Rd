@@ -9,7 +9,7 @@ PoisPeak(n, p)
 \arguments{
 \item{n}{trials, >= 0.}
 
-\item{p}{success probability, in \link{0, 1}.}
+\item{p}{success probability, in [0, 1].}
 }
 \value{
 list(k, PP).

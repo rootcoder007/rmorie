@@ -6,7 +6,7 @@
 #' than on the rounding.
 #'
 #' Formula: k_opt = sqrt( c1 (1 - rho) / (c2 rho) );
-#'   m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) [1 + (k - 1) rho]
+#'   m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) \[1 + (k - 1) rho\]
 #'
 #' @param rho Intraclass correlation, 0 < rho <= 1.
 #' @param S2 Element variance in the population.

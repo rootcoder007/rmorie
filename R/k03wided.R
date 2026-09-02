@@ -28,7 +28,7 @@
 #' linear wide part express interactions; eq. (2) is the hidden-layer
 #' computation \eqn{a^{(l+1)} = f(W^{(l)} a^{(l)} + b^{(l)})} with
 #' \eqn{f} the rectifier; and eq. (3) is the prediction
-#' \deqn{P(Y = 1 | x) = \sigma(w_{wide}^T [x, \phi(x)]
+#' \deqn{P(Y = 1 | x) = \sigma(w_{wide}^T \[x, \phi(x)\]
 #'   + w_{deep}^T a^{(l_f)} + b).}
 #'
 #' The paper trains with mini-batch stochastic gradient descent, FTRL

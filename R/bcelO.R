@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Binary cross-entropy (logistic) loss.
 #'
-#' Formula: L(w) = -sum_i sum_j [ y_ij log(yhat_ij) + (1 - y_ij) log(1 - yhat_ij) ]
+#' Formula: L(w) = -sum_i sum_j \[ y_ij log(yhat_ij) + (1 - y_ij) log(1 - yhat_ij) \]
 #'
 #' @param Y Observed 0/1 outcomes; a flat vector is read as one column.
 #' @param P Predicted success probabilities, strictly inside (0, 1).

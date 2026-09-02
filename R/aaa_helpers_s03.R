@@ -724,8 +724,8 @@
 #' Doubly robust DiD for panel data, Sant\'Anna and Zhao (2020) eq.
 #' (2.6):
 #'
-#' tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] w1 = D / E[D] w0 =
-#' [pi(X)(1-D)/(1-pi(X))] / E[pi(X)(1-D)/(1-pi(X))]
+#' tau = E\[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))\] w1 = D / E[D] w0 =
+#' \[pi(X)(1-D)/(1-pi(X))\] / E\[pi(X)(1-D)/(1-pi(X))\]
 #'
 #' @param dy Passed to \code{.s03vec}.
 #' @param D Passed to \code{.s03vec}.
@@ -794,7 +794,7 @@
 #' Int. J. Biostatistics 2(1), art. 11).  The initial Qbar is fluctuated
 #' along the logistic submodel whose score is the clever covariate H =
 #' D/g - (1-D)/(1-g); eps solves the score equation by Newton, then psi
-#' = mean(Q*(1,X) - Q*(0,X)).  y is scaled to [0, 1] so the logistic
+#' = mean(Q*(1,X) - Q*(0,X)).  y is scaled to \[0, 1\] so the logistic
 #' fluctuation is valid for continuous outcomes (Gruber and van der Laan
 #' 2010).
 #'

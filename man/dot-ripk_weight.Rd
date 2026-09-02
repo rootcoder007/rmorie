@@ -25,7 +25,7 @@
 One of two values, depending on the branch taken.
 }
 \description{
-that lies inside the rectangle \link{x0, x1} x \link{y0, y1} -- Ripley\'s edge
+that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley\'s edge
 correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102).
 Two opposite sides can never both be crossed by the same angle, so
 the only overlaps between the four "outside" arcs are the four

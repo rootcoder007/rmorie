@@ -41,7 +41,7 @@
 #' Value iteration for a finite MDP
 #'
 #' Repeats the Bellman optimality sweep
-#' \eqn{V(s) \leftarrow \max_a \sum_{s'} P(s'|s,a) [r + \gamma V(s')]}
+#' \eqn{V(s) \leftarrow \max_a \sum_{s'} P(s'|s,a) \[r + \gamma V(s')\]}
 #' until the largest change in a sweep drops below \code{tol}, then
 #' outputs the deterministic greedy policy (ties to the lowest action
 #' index).  This is the boxed algorithm in Sutton and Barto (2018),

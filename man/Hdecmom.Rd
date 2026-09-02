@@ -32,7 +32,7 @@ where \code{A_k} is the \code{k}-th projection of the H-decomposition (3.10)-(3.
 \details{
 The exponent is the useful part. A naive count would put \code{choose(n, k) ~ n^k}
 terms in \code{A_k}, giving \code{n^(qk)}; the martingale property (3.9),
-\verb{E[rho_k | X_1,...,X_\{k-1\}] = 0}, halves the exponent to \code{n^(qk/2)}. That
+\verb{E\[rho_k | X_1,...,X_\{k-1\}\] = 0}, halves the exponent to \code{n^(qk/2)}. That
 square root makes the higher projections negligible and lets Lemma 3.1 stop
 at \code{k = 3} with an \code{o_L(n^-1/2)} remainder.
 

@@ -12,7 +12,7 @@
 #' initialisation.
 #'
 #' Formula: \code{mu(x) = sum_k pi_k(x) mu_k(x)},
-#' \code{var(x) = sum_k pi_k(x) [s_k^2(x) + mu_k(x)^2] - mu(x)^2}.
+#' \code{var(x) = sum_k pi_k(x) \[s_k^2(x) + mu_k(x)^2\] - mu(x)^2}.
 #'
 #' @param X Training inputs.
 #' @param y Training targets.

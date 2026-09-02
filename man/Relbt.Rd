@@ -7,7 +7,7 @@
 Relbt(r, h2)
 }
 \arguments{
-\item{r}{predictive ability, in \link{-1, 1}.}
+\item{r}{predictive ability, in [-1, 1].}
 
 \item{h2}{narrow-sense heritability, in (0, 1]; recycled against r.}
 }
@@ -17,7 +17,7 @@ list: estimate, reliability, accuracy, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 109-139}, Chapter 4, equation (4.2), p. 129, read as a
+volume [Pages 109-139], Chapter 4, equation (4.2), p. 129, read as a
 rendered page, defines the predictive ability r as Pearson's correlation
 between the testing observations and their predictions.  Dekkers (2007),
 Prediction of response to marker-assisted and genomic selection using

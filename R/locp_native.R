@@ -35,7 +35,7 @@
 #'
 #' At each evaluation point x0 solves the kernel-weighted least
 #' squares problem (ESL Eq. 6.11) on the centered polynomial design
-#' [1, (x - x0), ..., (x - x0)^d]; the fitted value is the local
+#' \[1, (x - x0), ..., (x - x0)^d\]; the fitted value is the local
 #' intercept and the local slope is the coefficient of (x - x0).
 #' Degree-d polynomials are reproduced exactly for any kernel and
 #' bandwidth.

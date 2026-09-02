@@ -6,7 +6,7 @@
 #' the simple-random-sampling variance.
 #'
 #' Formula: V(ybar_sy) = (1/k) sum_\{i=1\}^\{k\} (ybar_i - Ybar)^2;
-#'   deff = V(ybar_sy) / [(1 - f) S^2 / n]
+#'   deff = V(ybar_sy) / \[(1 - f) S^2 / n\]
 #'
 #' @param y The WHOLE population, in the order it would be sampled;
 #'   \code{length(y)} must be an exact multiple of k.
@@ -17,7 +17,7 @@
 #' @references Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 #'   8. Chapter 8 was NOT in the scanned excerpt available to this batch,
 #'   so the standard published form is used; rho is reported by inverting
-#'   V(ybar_sy) = (S^2/n)[1 + (n - 1) rho].
+#'   V(ybar_sy) = (S^2/n)\[1 + (n - 1) rho\].
 #' @export
 #' @examples
 #' Sysamp(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)

@@ -22,10 +22,10 @@ method.
 NOT IN THE BOOK.  Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, was searched in full -- all seventeen page-range volumes and the
-index, \link{Pages 683-691}.  "Functional principal" and "eigenfunction" do not
-occur anywhere; Chapter 14, volume \link{Pages 579-631}, covers functional
+index, [Pages 683-691].  "Functional principal" and "eigenfunction" do not
+occur anywhere; Chapter 14, volume [Pages 579-631], covers functional
 regression by fixed basis expansion (Fourier and B-spline, Section 14.2)
-and never introduces a data-driven basis.  Chapter 2, volume \link{Pages 35-70},
+and never introduces a data-driven basis.  Chapter 2, volume [Pages 35-70],
 Section 2.8, gives multivariate PCA on a rectangular matrix, which is the
 discrete analogue only.
 }

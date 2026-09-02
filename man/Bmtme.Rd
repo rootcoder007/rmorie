@@ -46,7 +46,7 @@ beta, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 171-208}, Chapter 6, Section 6.9 "Bayesian Genomic Multi-trait
+volume [Pages 171-208], Chapter 6, Section 6.9 "Bayesian Genomic Multi-trait
 and Multi-environment Model (BMTME)", pp. 195-197, read as rendered page
 images.  The chapter attributes the model to Montesinos-Lopez et al. (2016),
 G3 6, "A genomic Bayesian multi-trait and multi-environment model".
@@ -62,9 +62,9 @@ environment covariance, R the residual covariance.
 
 The Gibbs sampler is the eight numbered steps on p. 196.  Steps 3 and 4
 carry the structure:
-G~ = \link{(Sigma_T^-1 (x) G^-1) + (R^-1 (x) Z_1^T Z_1)}^-1,
+G~ = [(Sigma_T^-1 (x) G^-1) + (R^-1 (x) Z_1^T Z_1)]^-1,
 g~ = G~ (R^-1 (x) Z_1^T) vec(Y - 1_IJ mu^T - X B - Z_2 b_2);
-G~_2 = \link{(Sigma_T^-1 (x) Sigma_E^-1 (x) G^-1) + (R^-1 (x) Z_2^T Z_2)}^-1,
+G~_2 = [(Sigma_T^-1 (x) Sigma_E^-1 (x) G^-1) + (R^-1 (x) Z_2^T Z_2)]^-1,
 g~_2 = G~_2 (R^-1 (x) Z_2^T) vec(Y - 1_IJ mu^T - X B - Z_1 b_1).  Then
 Sigma_T ~ IW(v_T + J + IJ,
 b_1^T G^-1 b_1 + b_2^T (Sigma_E^-1 (x) G^-1) b_2 + S_T),
@@ -86,7 +86,7 @@ used here.
 
 DETERMINISM.  Nothing is sampled.  Every step is taken at the exact mean of
 its own full conditional, the three inverse-Wishart steps at
-E\link{IW(v, S)} = S/(v - d - 1) with d the order of the matrix, the mean the
+E[IW(v, S)] = S/(v - d - 1) with d the order of the matrix, the mean the
 book's own exponents imply.  Iterating those conditional means is the EM
 fixed point of the same sampler, so both arms land on identical numbers
 rather than on the same posterior.

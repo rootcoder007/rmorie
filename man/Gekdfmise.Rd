@@ -16,7 +16,7 @@ morie_fauzi_thm2_4_mise_brdkdfe(n, h, a, biasint, varint, r1 = NULL, r2 = NULL)
 
 \item{a}{Second smoothing parameter.}
 
-\item{biasint}{\verb{int [(b2^2 - 2 b4 F)/(2 F)]^2 dx}.}
+\item{biasint}{\verb{int \[(b2^2 - 2 b4 F)/(2 F)\]^2 dx}.}
 
 \item{varint}{\verb{int F(x)(1 - F(x)) dx}.}
 
@@ -27,7 +27,7 @@ Named list with \code{mise}, \code{biasterm}, \code{varterm}, \code{smoothgain},
 }
 \description{
 Theorem 2.4:
-\deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big[\frac{b_2^2 - 2b_4F}{2F}\Big]^2 dx + \frac1n\int F(1-F)dx - \frac hn\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big] + o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int [(b2^2 - 2 b4 F)/(2F)]^2 dx + (1/n) int F(1-F) dx - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] + o(h^8 + h/n).}
+\deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big\[\frac{b_2^2 - 2b_4F}{2F}\Big\]^2 dx + \frac1n\int F(1-F)dx - \frac hn\Big\[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big\] + o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int \[(b2^2 - 2 b4 F)/(2F)\]^2 dx + (1/n) int F(1-F) dx - (h/n)\[2(a^4+1)/(a^2-1)^2 r1 + r2\] + o(h^8 + h/n).}
 }
 \details{
 Compare the plain KDFE's MISE from Sec. 2.1, which leads with

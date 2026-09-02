@@ -13,7 +13,7 @@
 #' indicator on the whole vector:
 #' \code{H = I(A = 1)/g(1|X) - I(A = 0)/g(0|X)},
 #' \code{eps = sum H (y - Q)/sum H^2},
-#' \code{psi = mean[Q*(1, X) - Q*(0, X)]}.  With one component this is
+#' \code{psi = mean\[Q*(1, X) - Q*(0, X)\]}.  With one component this is
 #' exactly the binary point-treatment TMLE.
 #'
 #' @param y Outcome.

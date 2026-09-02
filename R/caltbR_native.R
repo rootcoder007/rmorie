@@ -199,7 +199,7 @@ calibration_hellinger <- function(p, q) {
 #'
 #' @param p_u User's played distribution \eqn{p(g \mid u)}.
 #' @param p0 Population prior \eqn{p_0(g)}.
-#' @param beta Mixing weight in \eqn{[0, 1]}.
+#' @param beta Mixing weight in \eqn{\[0, 1\]}.
 #' @return Numeric vector \eqn{\bar p(g)} of length G.
 #' @references Steck (2018), RecSys '18, eq. (7).
 #' @export

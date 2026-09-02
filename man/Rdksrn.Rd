@@ -27,7 +27,7 @@ on one side only, and the linear term removes that bias. The
 triangular kernel is the boundary-optimal one for this estimand.
 }
 \details{
-Formula: \code{tau = lim_{x -> c+} E[Y|X=x] - lim_{x -> c-} E[Y|X=x]},
+Formula: \code{tau = lim_{x -> c+} E\[Y|X=x\] - lim_{x -> c-} E\[Y|X=x\]},
 each limit the intercept of a triangular-kernel weighted line fit on
 its own side.
 }

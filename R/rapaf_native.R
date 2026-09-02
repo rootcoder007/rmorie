@@ -59,7 +59,7 @@ morie_rapaf_population_attributable_risk <- function(case_counts,
 #' Computes Levin's p(R - 1) / (1 + p(R - 1)) from the population
 #' exposure prevalence and the rate ratio.
 #'
-#' @param prevalence Population exposure prevalence, in \code{[0, 1]}.
+#' @param prevalence Population exposure prevalence, in \code{\[0, 1\]}.
 #' @param rate_ratio Rate ratio of exposed to unexposed.
 #' @return Numeric attributable risk.
 #' @references Levin, M. L. (1953). The occurrence of lung cancer in

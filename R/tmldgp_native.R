@@ -169,7 +169,7 @@ shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
 #' Both bar Q and g are fitted by post-lasso; the one-dimensional
 #' fluctuation is then fitted by maximum likelihood, unregularised.
 #'
-#' @param y Outcome vector in [0,1].
+#' @param y Outcome vector in \[0,1\].
 #' @param D Treatment indicator vector.
 #' @param X Covariate matrix.
 #' @param penalty Lasso regularisation strength.

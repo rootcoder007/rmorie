@@ -13,7 +13,7 @@ morie_horowitz_sim_identification(x, beta, y = NULL, mindistinct = 10L)
 \item{x}{Numeric matrix of covariates, n by d, with no constant column.}
 
 \item{beta}{Numeric vector of index coefficients, scale normalised
-so that \code{beta[1] == 1}.}
+so that \code{beta\[1\] == 1}.}
 
 \item{y}{Optional numeric outcome vector; supplied, the spread of
 the mean of Y across index deciles is reported as evidence on

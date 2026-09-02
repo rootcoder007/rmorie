@@ -10,7 +10,7 @@
 #' \code{c(x_s(i), y_i) + c(x_s(j), y_j) <= c(x_s(j), y_i) + c(x_s(i), y_j)}.
 #'
 #' @param X,Y Point sets, kept for interface symmetry.
-#' @param Cost Cost matrix with \code{Cost[i, j] = c(x_i, y_j)}.
+#' @param Cost Cost matrix with \code{Cost\[i, j\] = c(x_i, y_j)}.
 #' @param perm Zero-based assignment: \code{y_i} matched to \code{x_perm[i]}.
 #' @return List with \code{is_cm}, \code{slack}, \code{estimate}, \code{n}.
 #' @references Villani, C. (2003). AMS GSM 58, theorem 2.12.

@@ -446,7 +446,7 @@ bpr_auc_R <- function(W, H, pos, n_items)
 #' @param iters Number of iterations.
 #' @param seed SplitMix64 seed (mirrors the Python arm).
 #' @param regularizer_sign \code{"correct"} (default) or \code{"paper"}.
-#' @param init_scale Initial parameter scale on [-init_scale, init_scale].
+#' @param init_scale Initial parameter scale on \[-init_scale, init_scale\].
 #' @return List with \code{estimate}, \code{W}, \code{H}, \code{k},
 #'   \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc},
 #'   \code{param_norm}, \code{regularizer_sign}, \code{method},

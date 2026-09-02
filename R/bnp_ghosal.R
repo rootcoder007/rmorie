@@ -12,7 +12,7 @@
 #' \eqn{\prod_j (1 - V_j)} is not appended, so the result sums to one
 #' only in the limit.
 #'
-#' @param V numeric vector of stick fractions, each in \eqn{[0, 1]};
+#' @param V numeric vector of stick fractions, each in \eqn{\[0, 1\]};
 #'   values outside the unit interval raise an error
 #' @return numeric vector of the same length as \code{V} holding the
 #'   stick-breaking weights
@@ -73,7 +73,7 @@ morie_gh_discrete_hazard <- function(p) {
 #' a beta with the updated precision \code{alpha + n}.
 #'
 #' @param G0_A prior base-measure mass \eqn{G_0(A)} of the set, in
-#'   \eqn{[0, 1]}
+#'   \eqn{\[0, 1\]}
 #' @param alpha Dirichlet-process precision (positive)
 #' @param n_in_A number of observations falling in A
 #' @param n total number of observations; if zero the empirical mass is
@@ -261,7 +261,7 @@ morie_gh_wn_posterior <- function(X, n, prior_var) {
 #' Returns the first \code{depth} bits of the binary expansion of
 #' \code{x}, which index the nested dyadic Polya-tree partition
 #' containing \code{x}. The input is first clamped to
-#' \eqn{[0, 1 - 10^{-15}]}, so values outside the unit interval are
+#' \eqn{\[0, 1 - 10^{-15}\]}, so values outside the unit interval are
 #' silently pulled to the nearest end.
 #'
 #' @param x numeric scalar in \eqn{[0, 1)}
@@ -331,13 +331,13 @@ morie_gh_pt_posterior_density <- function(x, data, depth = 4L) {
 #' Renormalises both inputs to sum to one and returns
 #' \eqn{1 - \sum_i \sqrt{p_i q_i}}, which is one half of the squared
 #' Hellinger distance \eqn{h^2(p, q) = \sum_i (\sqrt{p_i} -
-#' \sqrt{q_i})^2} and lies in \eqn{[0, 1]}.
+#' \sqrt{q_i})^2} and lies in \eqn{\[0, 1\]}.
 #'
 #' @param p numeric vector of non-negative weights; renormalised
 #'   internally
 #' @param q numeric vector of non-negative weights on the same support;
 #'   renormalised internally
-#' @return numeric scalar in \eqn{[0, 1]}
+#' @return numeric scalar in \eqn{\[0, 1\]}
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -396,8 +396,8 @@ morie_gh_renyi <- function(p, q, alpha = 0.5) {
 #' First two moments of a Dirichlet distribution for a pair of cells
 #'
 #' For \eqn{(\pi_1, \ldots, \pi_k) \sim Dir(\alpha)} with
-#' \eqn{A = \sum_i \alpha_i}, returns \eqn{E[\pi_j]},
-#' \eqn{Var[\pi_j]} and \eqn{Cov[\pi_j, \pi_{j'}]}. The covariance is
+#' \eqn{A = \sum_i \alpha_i}, returns \eqn{E\[\pi_j\]},
+#' \eqn{Var\[\pi_j\]} and \eqn{Cov\[\pi_j, \pi_{j'}\]}. The covariance is
 #' computed from the formula for distinct cells; passing
 #' \code{j == jp} therefore does not reproduce the variance.
 #'

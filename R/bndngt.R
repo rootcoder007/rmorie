@@ -5,8 +5,8 @@
 #' \code{y(1) <= y(0)} for every unit, pins the upper bound at exactly zero;
 #' only the lower bound is estimated, and it uses every \code{(y, D)} pair.
 #'
-#' Formula: \code{lower = [E(y | D = 1) P(D = 1) + y_min P(D = 0)] -
-#' [E(y | D = 0) P(D = 0) + y_max P(D = 1)]}, \code{upper = 0}, with
+#' Formula: \code{lower = \[E(y | D = 1) P(D = 1) + y_min P(D = 0)\] -
+#' \[E(y | D = 0) P(D = 0) + y_max P(D = 1)\]}, \code{upper = 0}, with
 #' \code{y_max = max(y)}.
 #'
 #' @param y Observed outcome.

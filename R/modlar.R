@@ -6,7 +6,7 @@
 #' \code{Modulq}; the two module names differ only in which paper they
 #' cite.
 #'
-#' \code{Q = (1 / 2m) sum_ij [A_ij - k_i k_j / 2m] delta(c_i, c_j)}.
+#' \code{Q = (1 / 2m) sum_ij \[A_ij - k_i k_j / 2m\] delta(c_i, c_j)}.
 #'
 #' @param A Symmetric adjacency or weight matrix.
 #' @param communities Integer community label per node.

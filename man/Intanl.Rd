@@ -22,16 +22,16 @@ List with \code{estimate} (the interaction), \code{beta0},
 }
 \description{
 The marginal structural mean model with an effect modifier V is
-\code{E[Y^a | V] = b0 + b1 a + b2 V a + b3 V}; Hernan and Robins
+\code{E\[Y^a | V\] = b0 + b1 a + b2 V a + b3 V}; Hernan and Robins
 instruct that its parameters be estimated by fitting
-\code{E[Y|A,V] = t0 + t1 A + t2 V A + t3 V} by weighted least squares
+\code{E\[Y|A,V\] = t0 + t1 A + t2 V A + t3 V} by weighted least squares
 with the IP weights.  Additive effect modification is present when
 \code{b2} differs from zero, so \code{b2} is the reported estimate.
 Because the weights are estimated, the robust (sandwich) standard
 error is reported rather than the model-based one.
 }
 \details{
-Formula: E\link{Y^a|V} = b0 + b1 a + b2 V a + b3 V.
+Formula: E[Y^a|V] = b0 + b1 a + b2 V a + b3 V.
 }
 \examples{
 set.seed(1)
