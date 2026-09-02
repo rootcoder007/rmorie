@@ -5,7 +5,8 @@
 \alias{morie_qsfrgr_forest}
 \title{Grow a survival forest and return its trees}
 \usage{
-morie_qsfrgr_forest(X, time, event, n_trees = 20L, mtry = NULL, min_leaf = 3L, max_depth = 6L, honest = TRUE, seed = 0, rule = "logrank")
+morie_qsfrgr_forest(X, time, event, n_trees = 20L, mtry = NULL, min_leaf = 3L, max_depth = 6L, 
+    honest = TRUE, seed = 0, rule = "logrank") 
 }
 \arguments{
 \item{X}{Covariate matrix.}

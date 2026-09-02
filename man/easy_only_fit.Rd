@@ -5,7 +5,8 @@
 \alias{easy_only_fit}
 \title{easy_only_fit}
 \usage{
-easy_only_fit(X, y, difficulty, X_test, y_test, quantile = 0.5, updates = 200, seed = 0, n_repeats = 50)
+easy_only_fit(X, y, difficulty, X_test, y_test, quantile = 0.5, updates = 200, 
+    seed = 0, n_repeats = 50) 
 }
 \arguments{
 \item{X}{Passed to \code{.prgrl_to_rows}.}

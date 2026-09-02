@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Box-Pierce Q test for autocorrelation.
+#' Box-Pierce Q test for autocorrelation
 #'
 #' Formula: \eqn{Q = n \sum_{k=1}^{m} r_k^2}, chi-square on
 #' \code{lags - fitdf} degrees of freedom.  This is the uncorrected

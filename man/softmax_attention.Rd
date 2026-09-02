@@ -5,7 +5,7 @@
 \alias{softmax_attention}
 \title{softmax_attention}
 \usage{
-softmax_attention(Q, K, V, causal = FALSE)
+softmax_attention(Q, K, V, causal = FALSE) 
 }
 \arguments{
 \item{Q}{A matrix; passed to \code{as.matrix}.}

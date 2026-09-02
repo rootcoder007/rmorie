@@ -5,7 +5,7 @@
 \alias{Qexp}
 \title{Qexp}
 \usage{
-Qexp(p, rate = 1)
+Qexp(p, rate = 1) 
 }
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}

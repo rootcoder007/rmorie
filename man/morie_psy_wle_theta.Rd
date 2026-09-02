@@ -12,6 +12,8 @@ morie_psy_wle_theta(y, a = NULL, b = NULL, c = NULL, bounds = c(-6, 6))
 \item{a, b, c}{item parameters; b required.}
 
 \item{bounds}{search interval.}
+
+
 }
 \value{
 list: theta, se, information, loglik, weight_term,

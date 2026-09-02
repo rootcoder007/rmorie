@@ -5,7 +5,7 @@
 \alias{WindowFn}
 \title{Section 3.4.  Truncating a record IS multiplying it by a rectangle,}
 \usage{
-WindowFn(N, window_type = "hamming")
+WindowFn(N, window_type = "hamming") 
 }
 \arguments{
 \item{N}{Coerced to integer by the body, with \code{as.integer}.}

@@ -5,7 +5,7 @@
 \alias{morie_sechsh_chain_entry}
 \title{One step of a hash-chained audit log}
 \usage{
-morie_sechsh_chain_entry(previous_hash, entry, key = NULL)
+morie_sechsh_chain_entry(previous_hash, entry, key = NULL) 
 }
 \arguments{
 \item{previous_hash}{Raw bytes.}
@@ -13,7 +13,7 @@ morie_sechsh_chain_entry(previous_hash, entry, key = NULL)
 \item{key}{Optional raw key.}
 }
 \description{
-h_i = H(h_{i-1} || e_i), or HMAC if a key is given. With a key the log writer does not hold, an attacker with write access still cannot recompute the chain forward.
+h_i = H(h_\{i-1\} || e_i), or HMAC if a key is given. With a key the log writer does not hold, an attacker with write access still cannot recompute the chain forward.
 }
 \value{
 List with \code{hash} and \code{keyed} (and \code{note}   when keyed).

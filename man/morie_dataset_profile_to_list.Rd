@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_profile_to_list}
 \alias{morie_dataset_profile_to_list}
-\title{Serialize a dataset profile to a plain nested list.}
+\title{Serialize a dataset profile to a plain nested list}
 \usage{
 morie_dataset_profile_to_list(profile)
 }

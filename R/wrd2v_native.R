@@ -142,7 +142,7 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
   as.numeric(C) * (D + D * out)
 }
 
-#' Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2
+#' Pn(w) = U(w)^\{3/4\} / Z of Mikolov et al. (2013b) 2.2
 #'
 #' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.

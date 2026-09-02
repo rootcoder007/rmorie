@@ -5,7 +5,7 @@
 \alias{gibbs_feature_update}
 \title{gibbs_feature_update}
 \usage{
-gibbs_feature_update(Z, i, kk, likelihood, alpha)
+gibbs_feature_update(Z, i, kk, likelihood, alpha) 
 }
 \arguments{
 \item{Z}{A matrix; passed to \code{as.matrix}.}

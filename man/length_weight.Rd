@@ -5,7 +5,7 @@
 \alias{length_weight}
 \title{length_weight}
 \usage{
-length_weight(length, l_min = 2500, l_ref = 1e+05)
+length_weight(length, l_min = 2500, l_ref = 1e+05) 
 }
 \arguments{
 \item{length}{Coerced to numeric by the body, with \code{as.numeric}.}

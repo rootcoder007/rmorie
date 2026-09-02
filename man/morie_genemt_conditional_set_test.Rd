@@ -5,7 +5,7 @@
 \alias{morie_genemt_conditional_set_test}
 \title{morie_genemt_conditional_set_test}
 \usage{
-morie_genemt_conditional_set_test(z_scores, set_a, set_b, covariates = NULL)
+morie_genemt_conditional_set_test(z_scores, set_a, set_b, covariates = NULL) 
 }
 \arguments{
 \item{z_scores}{Coerced to numeric by the body, with \code{as.numeric}.}

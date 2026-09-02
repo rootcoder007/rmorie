@@ -30,7 +30,7 @@ Logistic classification here, with W = diag(p(1 - p)).
 }
 \details{
 Formula: f <- f + 0.3 (K (y - p) - f) to the mode;
-Var(f_1) = ((K^(-1) + W)^(-1))_{11}.
+Var(f_1) = ((K^(-1) + W)^(-1))_\{11\}.
 }
 \examples{
 Ghosalgplaplace()

@@ -5,7 +5,7 @@
 \alias{CadPipe}
 \title{Chapter 10: a CAD system is a chain, not a classifier, and the}
 \usage{
-CadPipe(features, labels, k = 5, standardize = TRUE)
+CadPipe(features, labels, k = 5, standardize = TRUE) 
 }
 \arguments{
 \item{features}{Passed to \code{.morie_bx_mat}.}

@@ -5,7 +5,7 @@
 \alias{LogSeries}
 \title{Eq (4.69): log(1 + x) = x - x^2/2 + x^3/3 - ..., |x| < 1.  The radius}
 \usage{
-LogSeries(x, terms = 20)
+LogSeries(x, terms = 20) 
 }
 \arguments{
 \item{x}{Coerced to complex by the body, with \code{as.complex}.}

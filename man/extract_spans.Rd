@@ -5,7 +5,7 @@
 \alias{extract_spans}
 \title{extract_spans}
 \usage{
-extract_spans(path)
+extract_spans(path) 
 }
 \arguments{
 \item{path}{A vector; its length is taken and its elements indexed.}

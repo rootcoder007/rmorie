@@ -5,7 +5,7 @@
 \alias{kernel_matrix}
 \title{kernel_matrix}
 \usage{
-kernel_matrix(X, kernel = "linear", gamma = 1, degree = 3, coef0 = 0)
+kernel_matrix(X, kernel = "linear", gamma = 1, degree = 3, coef0 = 0) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/twoldp.R
 \name{Dprime}
 \alias{Dprime}
-\title{Lewontin's D' for two biallelic loci from unphased genotypes.}
+\title{Lewontin's D' for two biallelic loci from unphased genotypes}
 \usage{
 Dprime(geno1, geno2)
 }
@@ -10,6 +10,7 @@ Dprime(geno1, geno2)
 \item{geno1, geno2}{Genotypes coded as the allele count 0, 1, 2.
 Individuals miscoded or missing at either locus are dropped
 pairwise.}
+
 }
 \value{
 List with \code{estimate} (D'), \code{D}, \code{pAB},

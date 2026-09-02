@@ -2,7 +2,7 @@
 % Please edit documentation in R/agmuzu.R
 \name{Mzworld}
 \alias{Mzworld}
-\title{MuZero world model: representation plus dynamics rollout.}
+\title{MuZero world model: representation plus dynamics rollout}
 \usage{
 Mzworld(observation, actions, representation, dynamics)
 }
@@ -19,7 +19,7 @@ Mzworld(observation, actions, representation, dynamics)
 List with states, rewards, root, K.
 }
 \description{
-s^0 = h(o_1..o_t); r^k, s^k = g(s^{k-1}, a^k) for k = 1..K.
+s^0 = h(o_1..o_t); r^k, s^k = g(s^\{k-1\}, a^k) for k = 1..K.
 }
 \examples{
 representation <- function(o) o

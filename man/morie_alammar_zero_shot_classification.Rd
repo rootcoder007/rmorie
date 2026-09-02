@@ -5,7 +5,7 @@
 \alias{morie_alammar_zero_shot_classification}
 \title{Zero-shot, T5 and judge orchestration around caller functions}
 \usage{
-morie_alammar_zero_shot_classification(text, candidate_labels, nli_model, hypothesis_template = "This example is about \%s.")
+morie_alammar_zero_shot_classification(text, candidate_labels, nli_model, hypothesis_template = "This example is about \%s.") 
 }
 \arguments{
 \item{text}{Input.}

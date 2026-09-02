@@ -2,7 +2,7 @@
 % Please edit documentation in R/doob_trends.R
 \name{analyze_doob_table3_age_overrepresentation}
 \alias{analyze_doob_table3_age_overrepresentation}
-\title{Analyse Doob Affidavit Table 3 — age over-/under-representation}
+\title{Analyse Doob Affidavit Table 3 -- age over-/under-representation}
 \usage{
 analyze_doob_table3_age_overrepresentation()
 }

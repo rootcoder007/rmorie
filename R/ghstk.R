@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Truncated stick-breaking representation of DP(alpha, G0).
+#' Truncated stick-breaking representation of DP(alpha, G0)
 #'
 #' @param x Numeric data vector.
 #' @param alpha DP concentration parameter (default 1).

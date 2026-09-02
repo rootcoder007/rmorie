@@ -5,7 +5,7 @@
 \alias{morie_survnnr_survival_function}
 \title{morie_survnnr_survival_function}
 \usage{
-morie_survnnr_survival_function(fit_result, x, times = NULL)
+morie_survnnr_survival_function(fit_result, x, times = NULL) 
 }
 \arguments{
 \item{fit_result}{Passed to \code{morie_survnnr_baseline_hazard}.}

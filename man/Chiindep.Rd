@@ -5,10 +5,14 @@
 \alias{Chiindep}
 \title{Chi-square test of independence -- Sec. 14.2, p. 505}
 \usage{
-Chiindep(table, correct = FALSE)
+Chiindep(table, correct = FALSE) 
 }
 \description{
 Chi-square test of independence -- Sec. 14.2, p. 505
+}
+\arguments{
+\item{table}{Argument \code{table}; see Usage.}
+\item{correct}{Argument \code{correct}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{n}, \code{r}, \code{c}.

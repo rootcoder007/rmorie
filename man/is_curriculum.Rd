@@ -5,7 +5,7 @@
 \alias{is_curriculum}
 \title{is_curriculum}
 \usage{
-is_curriculum(weights, p = NULL, tol = 1e-12)
+is_curriculum(weights, p = NULL, tol = 1e-12) 
 }
 \arguments{
 \item{weights}{A vector; its length is taken and its elements indexed.}

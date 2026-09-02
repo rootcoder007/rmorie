@@ -19,6 +19,12 @@ morie_geron_extra_trees(
 \item{X, y}{Data.}
 
 \item{n_estimators, max_features, seed, criterion, max_depth, min_samples_leaf}{Config.}
+
+
+
+
+
+
 }
 \value{
 List with \code{predictions}, \code{tree_predictions}, \code{train_score}, \code{single_tree_score}, \code{disagreement}.

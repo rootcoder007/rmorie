@@ -18,6 +18,8 @@ morie_variogram_composite_likelihood(
 \item{model}{One of "exponential", "spherical", "gaussian", "linear".}
 
 \item{max_iter, tol}{Re-weighting controls.}
+
+
 }
 \value{
 A list with \code{nugget}, \code{psill}, \code{range}, \code{sill}, \code{n_pairs},

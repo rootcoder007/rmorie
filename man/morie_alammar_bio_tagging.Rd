@@ -5,11 +5,13 @@
 \alias{morie_alammar_bio_tagging}
 \title{morie_alammar_bio_tagging}
 \usage{
-morie_alammar_bio_tagging(tokens, entity_spans, scheme = "BIO")
+morie_alammar_bio_tagging(tokens, entity_spans, scheme = "BIO") 
 }
 \arguments{
 \item{entity_spans}{List of c(start, end, type), 0-based, end   exclusive, matching the Python mirror.}
 \item{scheme}{BIO or BIOES.}
+
+\item{tokens}{Argument \code{tokens}; see Usage.}
 }
 \description{
 morie_alammar_bio_tagging

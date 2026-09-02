@@ -5,7 +5,7 @@
 \alias{morie_qsfrgr_quantile}
 \title{The smallest time whose survival has fallen to or below 1 - q}
 \usage{
-morie_qsfrgr_quantile(curve, q)
+morie_qsfrgr_quantile(curve, q) 
 }
 \arguments{
 \item{curve}{A curve from the Kaplan-Meier function.}

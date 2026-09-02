@@ -5,7 +5,8 @@
 \alias{morie_propinf_train_fcnn}
 \title{Train a fully connected binary classifier by minibatch SGD}
 \usage{
-morie_propinf_train_fcnn(X, y, hidden = c(8L, 4L), epochs = 40L, lr = 0.1, batch_size = 16L, seed = 0L)
+morie_propinf_train_fcnn(X, y, hidden = c(8L, 4L), epochs = 40L, lr = 0.1, batch_size = 16L, 
+    seed = 0L) 
 }
 \arguments{
 \item{X}{Numeric matrix of inputs.}

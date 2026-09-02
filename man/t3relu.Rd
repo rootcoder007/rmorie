@@ -5,7 +5,7 @@
 \alias{t3relu}
 \title{t3relu}
 \usage{
-t3relu(x)
+t3relu(x) 
 }
 \arguments{
 \item{x}{Passed to \code{ifelse}.}

@@ -5,7 +5,8 @@
 \alias{morie_miprgr_branch_and_bound}
 \title{Branch and bound (Dakin 1965 Fig. 2, marked list)}
 \usage{
-morie_miprgr_branch_and_bound(A, b, c, integer_vars, maximise = TRUE, prune = TRUE, max_nodes = 5000L, solver = "simplex")
+morie_miprgr_branch_and_bound(A, b, c, integer_vars, maximise = TRUE, prune = TRUE, max_nodes = 5000L, 
+    solver = "simplex") 
 }
 \arguments{
 \item{A,b,c,integer_vars,maximise}{As above.}

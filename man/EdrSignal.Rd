@@ -5,7 +5,7 @@
 \alias{EdrSignal}
 \title{Section 2.2.4 for the physiology; the estimator is Arunachalam and}
 \usage{
-EdrSignal(x, qrs, fs, fsr = 4)
+EdrSignal(x, qrs, fs, fsr = 4) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

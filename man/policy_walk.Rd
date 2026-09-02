@@ -5,7 +5,9 @@
 \alias{policy_walk}
 \title{policy_walk}
 \usage{
-policy_walk(T, observations, gamma, n_iter = 1000, delta = 0.25, alpha = 1, prior = "uniform", scale = 1, r_max = 1, J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL)
+policy_walk(T, observations, gamma, n_iter = 1000, delta = 0.25, alpha = 1, 
+    prior = "uniform", scale = 1, r_max = 1, J = 0.1, H = 0, burn = NULL, 
+    seed = 0, R0 = NULL) 
 }
 \arguments{
 \item{T}{Passed to \code{.mdp}.}

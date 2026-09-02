@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Upper tail dependence coefficient
 #'
-#' lambda_U = lim_{u->1-} (1 - 2u + C(u,u)) / (1 - u), estimated by Coles'
+#' lambda_U = lim_\{u->1-\} (1 - 2u + C(u,u)) / (1 - u), estimated by Coles'
 #' chi(u) diagnostic, which converges to exactly this limit.  A thin alias
 #' for \code{ChiDep}: the estimator already exists and is not duplicated
 #' here.

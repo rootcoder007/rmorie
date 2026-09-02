@@ -5,10 +5,11 @@
 \alias{morie_geron_mish}
 \title{Mish activation z*tanh(softplus(z)) (Geron Ch 11, morie.fn hmmish)}
 \usage{
-morie_geron_mish(z)
+morie_geron_mish(z) 
 }
 \arguments{
-\item{z}{Pre-activations. @return List with activation, derivative, softplus, minimum, estimate, n, method.}
+
+\item{z}{Argument \code{z}; see Usage.}
 }
 \description{
 Mish activation z*tanh(softplus(z)) (Geron Ch 11, morie.fn hmmish)

@@ -5,7 +5,7 @@
 \alias{morie_tcmech_rho_from_pure}
 \title{Proposition 1.4: epsilon-DP implies (epsilon^2 / 2)-zCDP}
 \usage{
-morie_tcmech_rho_from_pure(epsilon)
+morie_tcmech_rho_from_pure(epsilon) 
 }
 \arguments{
 \item{epsilon}{The pure differential privacy parameter.}

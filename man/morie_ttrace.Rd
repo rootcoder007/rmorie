@@ -5,7 +5,7 @@
 \alias{morie_ttrace}
 \title{morie_ttrace}
 \usage{
-morie_ttrace(reps = 200, seed = 0, ...)
+morie_ttrace(reps = 200, seed = 0, ...) 
 }
 \arguments{
 \item{reps}{Passed to \code{probability_of_control}. Defaults to \code{200}.}

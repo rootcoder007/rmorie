@@ -5,7 +5,7 @@
 \alias{morie_alammar_chat_template}
 \title{morie_alammar_chat_template}
 \usage{
-morie_alammar_chat_template(turns, template_tokens = NULL)
+morie_alammar_chat_template(turns, template_tokens = NULL) 
 }
 \arguments{
 \item{turns}{List of c(role, content).}

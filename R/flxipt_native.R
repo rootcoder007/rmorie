@@ -209,7 +209,7 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 }
 
 # --- projection onto {a >= 0, sum a = 1}, exact sort-based ---------
-#' Projection onto {a >= 0, sum a = 1}, exact sort-based ---------
+#' Projection onto \{a >= 0, sum a = 1\}, exact sort-based ---------
 #'
 #' A step of the flxipt_native implementation. Called by \code{.flxipt_nnls_simplex}.
 #' See the file header for the source the module follows.

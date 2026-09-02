@@ -38,6 +38,11 @@ a value, but that value means nothing.}
 6 and 7.}
 
 \item{tol}{fixed-point tolerance.}
+
+
+
+
+
 }
 \value{
 list: estimate, gebv, b1, b2, sigma_g, Sigma_T, Sigma_E, R, mu,
@@ -53,8 +58,8 @@ G3 6, "A genomic Bayesian multi-trait and multi-environment model".
 }
 \details{
 Equation (6.11), p. 195: Y = 1_IJ mu^T + X B + Z_1 b_1 + Z_2 b_2 + E, with
-b_2 ~ MN_{IJ x n_T}(0, Sigma_E (x) G, Sigma_T),
-b_1 ~ MN_{J x n_T}(0, G, Sigma_T) and E ~ MN_{IJ x n_T}(0, I_IJ, R).
+b_2 ~ MN_\{IJ x n_T\}(0, Sigma_E (x) G, Sigma_T),
+b_1 ~ MN_\{J x n_T\}(0, G, Sigma_T) and E ~ MN_\{IJ x n_T\}(0, I_IJ, R).
 I environments, J lines, n_T traits; Z_1 the incidence matrix of lines, Z_2
 the incidence matrix of the environment-by-line interaction, G the genomic
 relationship matrix, Sigma_T the trait genetic covariance, Sigma_E the
@@ -76,7 +81,7 @@ so this documentation states it instead.
 
 BOOK ERRATA, all four recorded.  (1) The symbol L in the Sigma_E step is
 never defined anywhere in Section 6.9.  It must be n_T: b_2* is J n_T by I,
-so the exponent |Sigma_E|^{-JL/2} forces L = n_T and step 6's v_E + J L is
+so the exponent |Sigma_E|^\{-JL/2\} forces L = n_T and step 6's v_E + J L is
 v_E + J n_T.  (2) Step 7 writes the residual scale as "S_T + ..." where it
 must be S_R; the same typo appears in the Section 6.8 sampler on p. 193.
 (3) Steps 3 and 4 both label the dimension N_J; the correct dimensions are

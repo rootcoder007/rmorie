@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geographically weighted regression (GWR).
+#' Geographically weighted regression (GWR)
 #'
 #' Local WLS at each site i:
 #' \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i) X)^-1 X^top W(s_i) y}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/catnxt.R
 \name{Catnext}
 \alias{Catnext}
-\title{Pick the next item: maximum Fisher information at the current theta.}
+\title{Pick the next item: maximum Fisher information at the current theta}
 \usage{
 Catnext(items, theta, administered = NULL, exposure = NULL, D = 1)
 }

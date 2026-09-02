@@ -5,7 +5,7 @@
 \alias{g_computation}
 \title{g_computation}
 \usage{
-g_computation(strata, outcome_means, covariate_probs)
+g_computation(strata, outcome_means, covariate_probs) 
 }
 \arguments{
 \item{strata}{Coerced to list by the body, with \code{as.list}.}

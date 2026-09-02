@@ -3,9 +3,9 @@
 % the formals.
 \name{RunInt}
 \alias{RunInt}
-\title{Eq (3.112): the continuous counterpart of the moving-average sum.}
+\title{Eq (3.112): the continuous counterpart of the moving-average sum}
 \usage{
-RunInt(x, t, tau)
+RunInt(x, t, tau) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_tmlcic_default_library}
 \title{The chapter\'s example library: the unadjusted model, one main term}
 \usage{
-morie_tmlcic_default_library(p, interactions = TRUE)
+morie_tmlcic_default_library(p, interactions = TRUE) 
 }
 \arguments{
 \item{p}{A count; the body uses it as \code{seq_len(...)}.}

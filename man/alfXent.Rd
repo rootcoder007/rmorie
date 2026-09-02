@@ -5,7 +5,7 @@
 \alias{alfXent}
 \title{Cross entropy -sum(y log p) for one distribution}
 \usage{
-alfXent(y, p, eps = 1e-12)
+alfXent(y, p, eps = 1e-12) 
 }
 \arguments{
 \item{y}{Numeric; combined arithmetically in the body.}

@@ -5,7 +5,9 @@
 \alias{morie_goldsc}
 \title{The GoldScore fitness of a pose}
 \usage{
-morie_goldsc(receptor, ligand, radii = list(), depths = list(), hbonds = list(), internal = list(), torsions = list(), potential = "4-8", internal_potential = "6-12", vdw_weight = .GOLDSC_VDW_WEIGHT, max_distance = 2.5, cutoff = NULL)
+morie_goldsc(receptor, ligand, radii = list(), depths = list(), hbonds = list(), 
+    internal = list(), torsions = list(), potential = "4-8", internal_potential = "6-12", 
+    vdw_weight = .GOLDSC_VDW_WEIGHT, max_distance = 2.5, cutoff = NULL) 
 }
 \arguments{
 \item{receptor}{Atom rows: x, y, z, type. Every cross pair enters the   external van der Waals sum.}

@@ -14,17 +14,27 @@
 \alias{morie_sparse_kernel_design}
 \title{Kernel and RKHS methods}
 \usage{
-morie_kernel_matrix(X, kernel = "linear", gamma = NULL, degree = 2, coef0 = 1, Z = NULL)
-morie_rkhs_fit(K, y, lambda = 1)
-morie_rkhs_predict(K_new, beta, eta0 = 0)
-morie_rkhs_mixed_equations(C, K, y, lambda = 1, sigma2_e = 1, form = "direct")
-morie_arccos_kernel(X, Z = NULL, depth = 1L, normalize_median = FALSE)
-morie_bayesian_kernel_blup(y, K, sigma2_u = 1, sigma2_e = 1, mu = NULL)
-morie_kernel_blup_gxe(Z_u1, K, Z_E, sigma2_u1 = 1, sigma2_u2 = 1)
-morie_kernel_blup_replicated(Z, K, sigma2_u = 1)
-morie_kernel_eigen_design(K, tol = 1e-10)
-morie_nystrom(X, m_index, kernel = "linear", gamma = NULL)
-morie_sparse_kernel_design(X, m_index, kernel = "linear", gamma = NULL, tol = 1e-10)
+morie_kernel_matrix(X, kernel = "linear", gamma = NULL, degree = 2, coef0 = 1, Z = NULL) 
+
+morie_rkhs_fit(K, y, lambda = 1) 
+
+morie_rkhs_predict(K_new, beta, eta0 = 0) 
+
+morie_rkhs_mixed_equations(C, K, y, lambda = 1, sigma2_e = 1, form = "direct") 
+
+morie_arccos_kernel(X, Z = NULL, depth = 1L, normalize_median = FALSE) 
+
+morie_bayesian_kernel_blup(y, K, sigma2_u = 1, sigma2_e = 1, mu = NULL) 
+
+morie_kernel_blup_gxe(Z_u1, K, Z_E, sigma2_u1 = 1, sigma2_u2 = 1) 
+
+morie_kernel_blup_replicated(Z, K, sigma2_u = 1) 
+
+morie_kernel_eigen_design(K, tol = 1e-10) 
+
+morie_nystrom(X, m_index, kernel = "linear", gamma = NULL) 
+
+morie_sparse_kernel_design(X, m_index, kernel = "linear", gamma = NULL, tol = 1e-10) 
 }
 \arguments{
 \item{X}{numeric matrix of inputs, one row per observation}

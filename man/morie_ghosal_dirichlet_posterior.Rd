@@ -20,6 +20,7 @@ morie_ghosal_dirichlet_posterior(
 \item{base_mean, base_sd}{base measure (N).}
 
 \item{grid}{optional grid (default: 51 pts spanning x).}
+
 }
 \value{
 named list with \code{estimate}, \code{cdf_grid}, \code{cdf_post},

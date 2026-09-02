@@ -2,7 +2,7 @@
 % Please edit documentation in R/spblup.R
 \name{spblup}
 \alias{spblup}
-\title{Best linear unbiased predictor: ordinary kriging.}
+\title{Best linear unbiased predictor: ordinary kriging}
 \usage{
 spblup(coords, z, target, cov_model = NULL)
 }

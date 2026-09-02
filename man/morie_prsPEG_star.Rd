@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_star}
 \title{morie_prsPEG_star}
 \usage{
-morie_prsPEG_star(e)
+morie_prsPEG_star(e) 
 }
 \arguments{
 \item{e}{Passed to \code{.probe}.}

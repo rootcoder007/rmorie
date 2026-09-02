@@ -5,7 +5,8 @@
 \alias{morie_krpkrg_ordinary_kriging}
 \title{morie_krpkrg_ordinary_kriging}
 \usage{
-morie_krpkrg_ordinary_kriging(coords, values, targets, model = "spherical", nugget = 0, sill = 1, rng = 1)
+morie_krpkrg_ordinary_kriging(coords, values, targets, model = "spherical", nugget = 0, sill = 1, 
+    rng = 1) 
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}

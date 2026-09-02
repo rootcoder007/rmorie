@@ -10,6 +10,7 @@ morie_bipartite_matching(left_n, right_n, edges)
 \item{left_n, right_n}{Side sizes.}
 
 \item{edges}{List of (left, right) pairs, numbered from 1.}
+
 }
 \value{
 A list with \code{size}, \code{pairs}, \code{match_right}.

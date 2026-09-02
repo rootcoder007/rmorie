@@ -4,7 +4,7 @@
 #'
 #' Formula: under misclassification with sensitivity Se and specificity
 #' Sp, the expected observed exposed count in a group of size N whose
-#' true exposed count is A is E[A_obs] = Se A + (1 - Sp) (N - A), so the
+#' true exposed count is A is E\[A_obs\] = Se A + (1 - Sp) (N - A), so the
 #' matrix-corrected true count inverts it,
 #' A = (A_obs - (1 - Sp) N) / (Se + Sp - 1).  This is the "divide by
 #' (Se + Sp - 1)" rule written out with its offset term.  It is undefined

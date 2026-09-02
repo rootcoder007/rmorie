@@ -5,7 +5,8 @@
 \alias{copynm}
 \title{Circular binary segmentation (Olshen et al. 2004)}
 \usage{
-copynm(x, alpha = 0.01, permutations = 1000L, min_width = 2L, undo_splits = TRUE, seed = 0L, max_depth = 50L)
+copynm(x, alpha = 0.01, permutations = 1000L, min_width = 2L, undo_splits = TRUE, 
+    seed = 0L, max_depth = 50L) 
 }
 \arguments{
 \item{x}{numeric vector of log-ratio intensities along a chromosome.}

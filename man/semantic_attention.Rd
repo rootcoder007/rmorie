@@ -5,7 +5,7 @@
 \alias{semantic_attention}
 \title{semantic_attention}
 \usage{
-semantic_attention(Z_per_metapath, W, b, q)
+semantic_attention(Z_per_metapath, W, b, q) 
 }
 \arguments{
 \item{Z_per_metapath}{A vector; indexed elementwise.}

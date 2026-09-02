@@ -12,6 +12,7 @@ morie_kamath_ch5_dpo_reward_optimal(pi_star, pi_ref, beta, Z = NULL)
 \item{beta}{Strictly positive.}
 
 \item{Z}{Partition function; default 1.}
+
 }
 \value{
 List with \code{r}, \code{log_ratio}, \code{offset}.

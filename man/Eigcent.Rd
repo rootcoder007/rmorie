@@ -2,12 +2,12 @@
 % Please edit documentation in R/eigcen.R
 \name{Eigcent}
 \alias{Eigcent}
-\title{Eigenvector centrality.}
+\title{Eigenvector centrality}
 \usage{
 Eigcent(A)
 }
 \arguments{
-\item{A}{Symmetric non-negative adjacency matrix.}
+\item{A}{See Usage.}
 }
 \value{
 List with \code{centrality} (max-scaled), \code{unit}, \code{eigenvalue}, \code{n}.

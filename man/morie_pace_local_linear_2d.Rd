@@ -5,7 +5,7 @@
 \alias{morie_pace_local_linear_2d}
 \title{Local linear smoother on a two-dimensional grid}
 \usage{
-morie_pace_local_linear_2d(s, t, z, at_s, at_t, bw, kernel = "epan")
+morie_pace_local_linear_2d(s, t, z, at_s, at_t, bw, kernel = "epan") 
 }
 \arguments{
 \item{s,t,z}{The two coordinates and the value at each pair.}

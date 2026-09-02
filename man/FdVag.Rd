@@ -5,7 +5,7 @@
 \alias{FdVag}
 \title{Sections 6.6.2-6.6.3: PSA is the book\'s preferred FD estimator for a}
 \usage{
-FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL)
+FdVag(x, fs, fmin = 100, fmax = 500, nperseg = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

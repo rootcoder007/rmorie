@@ -5,10 +5,13 @@
 \alias{Loglksum}
 \title{Log-likelihood of independent observations (Lawson eq. 3.2)}
 \usage{
-Loglksum(dens)
+Loglksum(dens) 
 }
 \description{
 Log-likelihood of independent observations (Lawson eq. 3.2)
+}
+\arguments{
+\item{dens}{Argument \code{dens}; see Usage.}
 }
 \value{
 A list with \code{loglik}, \code{terms}, \code{n}.

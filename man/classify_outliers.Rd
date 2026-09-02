@@ -5,7 +5,7 @@
 \alias{classify_outliers}
 \title{classify_outliers}
 \usage{
-classify_outliers(sd, od, sd_cut, od_cut)
+classify_outliers(sd, od, sd_cut, od_cut) 
 }
 \arguments{
 \item{sd}{A vector; its length is taken and its elements indexed.}

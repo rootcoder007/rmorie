@@ -2,18 +2,18 @@
 % Please edit documentation in R/dinoss.R
 \name{Dinocenter}
 \alias{Dinocenter}
-\title{DINO teacher centring and sharpening.}
+\title{DINO teacher centring and sharpening}
 \usage{
 Dinocenter(g_t, center = NULL, m = 0.9, tau_t = 0.04)
 }
 \arguments{
-\item{g_t}{Teacher logits, one row per view.}
+\item{g_t}{See Usage.}
 
-\item{center}{Current centre C of length K; zeros if omitted.}
+\item{center}{See Usage.}
 
-\item{m}{Centre EMA rate.}
+\item{m}{See Usage.}
 
-\item{tau_t}{Teacher temperature.}
+\item{tau_t}{See Usage.}
 }
 \value{
 List with \code{p_t}, \code{center}, \code{center_old}, \code{batch_mean}, \code{B}, \code{K}.

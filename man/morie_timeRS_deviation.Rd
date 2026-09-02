@@ -5,7 +5,7 @@
 \alias{morie_timeRS_deviation}
 \title{Exported helpers}
 \usage{
-morie_timeRS_deviation(t, t_user, beta = .timeRS_BETA)
+morie_timeRS_deviation(t, t_user, beta = .timeRS_BETA) 
 }
 \arguments{
 \item{t}{Passed to \code{.timeRS_deviation}.}

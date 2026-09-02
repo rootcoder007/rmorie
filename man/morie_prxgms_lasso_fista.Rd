@@ -5,7 +5,7 @@
 \alias{morie_prxgms_lasso_fista}
 \title{morie_prxgms_lasso_fista}
 \usage{
-morie_prxgms_lasso_fista(A, b, lam, max.iter = 500L, tol = 1e-10, accelerate = TRUE)
+morie_prxgms_lasso_fista(A, b, lam, max.iter = 500L, tol = 1e-10, accelerate = TRUE) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

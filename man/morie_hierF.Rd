@@ -5,7 +5,7 @@
 \alias{morie_hierF}
 \title{morie_hierF}
 \usage{
-morie_hierF(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10)
+morie_hierF(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10) 
 }
 \arguments{
 \item{base}{Passed to \code{mint_reconcile}.}

@@ -16,6 +16,8 @@ Sirtdy(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1)
 \item{t_max}{Integration horizon. Default 160.}
 
 \item{dt}{Runge-Kutta step. Default 0.1.}
+
+
 }
 \value{
 List with \code{estimate} (overall attack rate), \code{S},

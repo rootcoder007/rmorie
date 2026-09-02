@@ -2,7 +2,7 @@
 % Please edit documentation in R/auglag.R
 \name{Auglag}
 \alias{Auglag}
-\title{Augmented Lagrangian for equality-constrained minimisation.}
+\title{Augmented Lagrangian for equality-constrained minimisation}
 \usage{
 Auglag(f, g, x, lam = NULL, mu = 1)
 }

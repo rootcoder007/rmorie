@@ -231,11 +231,11 @@ morie_builtin_db <- function() {
 #' opt-in SQL backend and requires DuckDB or RSQLite to be installed.
 #'
 #' Note: the DEFAULT cache used by `morie_cache_store()` / `_load()` /
-#' `_list()` needs **no SQL backend at all** — it uses a zero/light
+#' `_list()` needs **no SQL backend at all** -- it uses a zero/light
 #' dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
 #' when available, else base-R `.rds`. Install `duckdb` (or `RSQLite`),
 #' or set `MORIE_CACHE_BACKEND=duckdb`/`sqlite`, or pass `db_path=`, to
-#' use SQL instead — DuckDB is preferred (vectorised + columnar, handles
+#' use SQL instead -- DuckDB is preferred (vectorised + columnar, handles
 #' multi-GB PUMFs and out-of-core analytical queries); an existing
 #' `morie.db` / `morie.duckdb` cache is reused for back-compat. For the
 #' multi-user server tier, pass your own PostgreSQL `con=`.

@@ -5,7 +5,8 @@
 \alias{morie_survrsf_grow_tree}
 \title{morie_survrsf_grow_tree}
 \usage{
-morie_survrsf_grow_tree(X, times, events, mtry = NULL, min_deaths = 3, rule = "logrank", seed = 0, rng = NULL)
+morie_survrsf_grow_tree(X, times, events, mtry = NULL, min_deaths = 3, rule = "logrank", 
+    seed = 0, rng = NULL) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

@@ -3,7 +3,7 @@
 #' Variance of a sum of independent variables
 #'
 #' The running partial sums make the recursion of eq (3.31) explicit:
-#' Var(X1+...+Xn) = Var(X1+...+X_{n-1}) + Var(Xn).
+#' Var(X1+...+Xn) = Var(X1+...+X_\{n-1\}) + Var(Xn).
 #'
 #' @param variances per-variable variances, each >= 0.
 #' @return list(var_sum, partial_sums).

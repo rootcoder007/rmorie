@@ -5,7 +5,7 @@
 \alias{SimplexLP}
 \title{\\' Maximise c\\'x subject to A x <= b, x >= 0, with b >= 0}
 \usage{
-SimplexLP(c, A, b, max_iter = 1000L, tol = 1e-12)
+SimplexLP(c, A, b, max_iter = 1000L, tol = 1e-12) 
 }
 \arguments{
 \item{c}{A vector; its length is taken.}

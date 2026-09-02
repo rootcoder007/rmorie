@@ -5,7 +5,8 @@
 \alias{morie_plcbsc}
 \title{morie_plcbsc}
 \usage{
-morie_plcbsc(y_treated, y_donors, t0, x_treated = NULL, x_donors = NULL, v = NULL, statistic = "effect", ...)
+morie_plcbsc(y_treated, y_donors, t0, x_treated = NULL, x_donors = NULL, v = NULL, 
+    statistic = "effect", ...) 
 }
 \arguments{
 \item{y_treated}{Coerced to numeric by the body, with \code{as.numeric}.}

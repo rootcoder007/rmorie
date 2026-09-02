@@ -5,7 +5,7 @@
 \alias{morie_sentpc_unescape_whitespace}
 \title{Invert \code{escape_whitespace} exactly}
 \usage{
-morie_sentpc_unescape_whitespace(text, strip_prefix = TRUE)
+morie_sentpc_unescape_whitespace(text, strip_prefix = TRUE) 
 }
 \arguments{
 \item{text}{Character.}

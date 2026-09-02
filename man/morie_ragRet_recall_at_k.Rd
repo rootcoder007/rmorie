@@ -5,7 +5,7 @@
 \alias{morie_ragRet_recall_at_k}
 \title{morie_ragRet_recall_at_k}
 \usage{
-morie_ragRet_recall_at_k(approximate, exact)
+morie_ragRet_recall_at_k(approximate, exact) 
 }
 \arguments{
 \item{approximate}{Coerced to integer by the body, with \code{as.integer}.}

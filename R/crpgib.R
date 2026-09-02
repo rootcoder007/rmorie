@@ -2,7 +2,7 @@
 
 #' CRP Gibbs sampler with auxiliary parameters
 #'
-#' Formula: P(z_i | z_{-i}) proportional to n_k^{-i} f(y_i | theta_k),
+#' Formula: P(z_i | z_\{-i\}) proportional to n_k^\{-i\} f(y_i | theta_k),
 #' and to (alpha/m) f(y_i | theta_aux) for each of m auxiliary draws
 #'
 #' Neal's algorithm 8: the cluster parameters are kept explicit rather

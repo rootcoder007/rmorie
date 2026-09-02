@@ -22,6 +22,10 @@ mrm_tps_polygon_moran_per_year(
 
 \item{lat_col, lon_col, k, n_permutations, seed}{as in
 \code{mrm_tps_lisa}.}
+
+
+
+
 }
 \value{
 data.frame with columns \code{year}, \code{n_events},

@@ -5,7 +5,7 @@
 \alias{random_walk_kernel}
 \title{random_walk_kernel}
 \usage{
-random_walk_kernel(scale = 1, n_moves = 1L)
+random_walk_kernel(scale = 1, n_moves = 1L) 
 }
 \arguments{
 \item{scale}{Passed to \code{.smcsam_rwk}. Defaults to \code{1}.}

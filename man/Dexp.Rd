@@ -5,7 +5,7 @@
 \alias{Dexp}
 \title{Dexp}
 \usage{
-Dexp(x, rate = 1, log = FALSE)
+Dexp(x, rate = 1, log = FALSE) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

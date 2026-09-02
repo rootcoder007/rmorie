@@ -6,6 +6,11 @@
 \usage{
 morie_cor_pearson(x, y)
 }
+\arguments{
+\item{x}{See Usage.}
+
+\item{y}{See Usage.}
+}
 \value{
 A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
 }

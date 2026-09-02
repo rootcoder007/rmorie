@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_gibbs}
 \title{Gibbs on a multivariate normal, using its exact conditionals}
 \usage{
-morie_baysmplr_gibbs(mean, cov_inv, x0, n_iter, e)
+morie_baysmplr_gibbs(mean, cov_inv, x0, n_iter, e) 
 }
 \arguments{
 \item{mean}{The mean vector.}

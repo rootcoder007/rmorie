@@ -5,7 +5,8 @@
 \alias{morie_robpca}
 \title{morie_robpca}
 \usage{
-morie_robpca(X, k = NULL, alpha = 0.75, kmax = 10L, n_dirs = 250L, n_start = 250L, seed = 17L, reweight = TRUE)
+morie_robpca(X, k = NULL, alpha = 0.75, kmax = 10L, n_dirs = 250L, n_start = 250L, 
+    seed = 17L, reweight = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{.robpca_matrix}.}

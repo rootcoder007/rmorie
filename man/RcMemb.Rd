@@ -5,7 +5,7 @@
 \alias{RcMemb}
 \title{RcMemb: passive RC membrane potential dynamics}
 \usage{
-RcMemb(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65)
+RcMemb(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_survnnr_forward}
 \title{morie_survnnr_forward}
 \usage{
-morie_survnnr_forward(W, b, x, activation = "tanh")
+morie_survnnr_forward(W, b, x, activation = "tanh") 
 }
 \arguments{
 \item{W}{A vector; its length is taken and its elements indexed.}

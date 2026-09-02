@@ -5,7 +5,7 @@
 \alias{PsdAcf}
 \title{Eq. (4.30): the PSD is the DFT of the ACF.  It holds exactly for the}
 \usage{
-PsdAcf(x)
+PsdAcf(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

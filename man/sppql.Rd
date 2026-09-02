@@ -35,6 +35,7 @@ sppql(
 \item{max_iter, tol}{Outer relinearisation controls.}
 
 \item{check_score}{Evaluate the PQL score equations at the solution.}
+
 }
 \value{
 A list with \code{beta}, \code{se_beta}, \code{cov_beta}, \code{S}, \code{mu}, \code{sigma2},

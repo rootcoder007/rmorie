@@ -34,6 +34,7 @@ for TPS layers.}
 \item{max_features}{Optional hard cap on total returned rows.}
 
 \item{user_agent, timeout}{Standard request knobs.}
+
 }
 \value{
 A base R \code{data.frame}.

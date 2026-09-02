@@ -5,7 +5,7 @@
 \alias{integrate_marginals}
 \title{integrate_marginals}
 \usage{
-integrate_marginals(conditional_marginals, log_weights, x_grid)
+integrate_marginals(conditional_marginals, log_weights, x_grid) 
 }
 \arguments{
 \item{conditional_marginals}{Iterated over elementwise, with \code{lapply}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitcmd.R
 \name{Clrmedian}
 \alias{Clrmedian}
-\title{Geometric median of a composition in clr coordinates.}
+\title{Geometric median of a composition in clr coordinates}
 \usage{
 Clrmedian(X, steps = 100, eps = 1e-12)
 }

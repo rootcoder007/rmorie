@@ -5,7 +5,7 @@
 \alias{morie_jsonlt_unbox}
 \title{Mark a value as a JSON scalar}
 \usage{
-morie_jsonlt_unbox(x)
+morie_jsonlt_unbox(x) 
 }
 \arguments{
 \item{x}{a length-one value.}

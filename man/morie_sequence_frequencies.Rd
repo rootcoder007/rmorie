@@ -5,7 +5,7 @@
 \alias{morie_sequence_frequencies}
 \title{morie_sequence_frequencies}
 \usage{
-morie_sequence_frequencies(Y)
+morie_sequence_frequencies(Y) 
 }
 \arguments{
 \item{Y}{A matrix; passed to \code{as.matrix}.}

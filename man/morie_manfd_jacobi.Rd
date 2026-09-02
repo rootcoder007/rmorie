@@ -5,7 +5,7 @@
 \alias{morie_manfd_jacobi}
 \title{Symmetric eigendecomposition by cyclic Jacobi rotations}
 \usage{
-morie_manfd_jacobi(A, sweeps = 60L)
+morie_manfd_jacobi(A, sweeps = 60L) 
 }
 \arguments{
 \item{A}{A symmetric matrix.}

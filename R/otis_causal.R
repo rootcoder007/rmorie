@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' OTIS causal-inference pipeline: IPW, AIPW, IRM-DML, and Ruhela's
-#' alert-complexity -> regional-volatility cell-frame builders.
+#' alert-complexity -> regional-volatility cell-frame builders
 #'
 #' R port of \code{src/morie/otis_causal.py}. Implements the OTIS
 #' causal-inference pipeline used in the MA-paired thesis work
@@ -208,7 +208,7 @@ NULL
 # IPW (Hajek-stabilised)
 # ---------------------------------------------------------------------------
 
-#' Hajek-stabilised IPW estimator of the ATE on OTIS data.
+#' Hajek-stabilised IPW estimator of the ATE on OTIS data
 #'
 #' Fits a logistic-regression propensity model on \code{covariates},
 #' clips propensities to \eqn{\[\varepsilon, 1-\varepsilon\]}{\[epsilon, 1-epsilon\]}, and
@@ -287,7 +287,7 @@ morie_otis_ipw_ate <- function(df, treatment, outcome, covariates,
 # AIPW (cross-fitted, RRZ 1994)
 # ---------------------------------------------------------------------------
 
-#' Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances.
+#' Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances
 #'
 #' Uses \code{n_folds} cross-fitting: propensity (logistic ridge) and
 #' outcome regression (OLS separately for D=1 and D=0) are fit on K-1
@@ -388,7 +388,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 # IRM-DML (Interactive Regression Model double machine learning)
 # ---------------------------------------------------------------------------
 
-#' Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC).
+#' Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC)
 #'
 #' Computes the doubly-robust ATE / ATTE / ATC via the Chernozhukov et
 #' al. (2018) IRM score with cross-fitted nuisance models. Delegates
@@ -635,7 +635,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
 # Mandela classification helpers (alert-state -> Mandela-rule category)
 # ---------------------------------------------------------------------------
 
-#' Mandela alert-state classifier for an OTIS placement row.
+#' Mandela alert-state classifier for an OTIS placement row
 #'
 #' Encodes the bitfield of three binary alert flags
 #' (MentalHealth, SuicideRisk, SuicideWatch) into the 8-state combo
@@ -753,7 +753,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
   base
 }
 
-#' Ruhela's primary alert-complexity -> regional-volatility builder.
+#' Ruhela's primary alert-complexity -> regional-volatility builder
 #'
 #' Implements Ruhela's "ac >= 2 -> vm" RF (Ruhela Formulation): the
 #' 8-state combo encoding documented in OTIS-RC/notez1a.qmd and used
@@ -811,7 +811,7 @@ morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
   )
 }
 
-#' Naive (max-simultaneous-flags + binary vm) alert -> volatility builder.
+#' Naive (max-simultaneous-flags + binary vm) alert -> volatility builder
 #'
 #' Robustness alternative to
 #' \code{morie_otis_make_pair_alert_to_volatility_ruhela()}: treatment
@@ -872,7 +872,7 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
   )
 }
 
-#' Run both Ruhela and Naive alert -> volatility builders.
+#' Run both Ruhela and Naive alert -> volatility builders
 #'
 #' Convenience wrapper that returns both formulations side-by-side for
 #' RDF (Ruhela Dual Formulation) robustness analyses.
@@ -892,7 +892,7 @@ morie_otis_make_pair_alert_to_volatility_all <- function(df) {
   )
 }
 
-#' a01-aware wrapper for the Ruhela alert -> volatility builder.
+#' a01-aware wrapper for the Ruhela alert -> volatility builder
 #'
 #' Same as \code{morie_otis_make_pair_alert_to_volatility_ruhela()} but
 #' auto-loads a01 (Restrictive Confinement Detailed) via the registered
@@ -925,7 +925,7 @@ morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
 # Canonical 3 (T, Y) pairs for the causal grid
 # ---------------------------------------------------------------------------
 
-#' Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary).
+#' Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary)
 #'
 #' The clinical-alert chain: do mental-health flags causally elevate
 #' subsequent suicide-risk-alert occurrence, conditional on
@@ -955,7 +955,7 @@ morie_otis_make_pair_a <- function(df) {
   )
 }
 
-#' Pair (b): HighAlertComplexity -> AnyReadmission.
+#' Pair (b): HighAlertComplexity -> AnyReadmission
 #'
 #' Treatment T_b = 1 iff at least 2 of (MentalHealth, SuicideRisk,
 #' SuicideWatch) alerts are simultaneously active in the row.
@@ -992,7 +992,7 @@ morie_otis_make_pair_b <- function(df) {
   )
 }
 
-#' Pair (c): RegionalVolatility -> SegregationDays.
+#' Pair (c): RegionalVolatility -> SegregationDays
 #'
 #' Treatment T_c = 1 iff Region_AtTimeOfPlacement != Region_MostRecent.
 #' Outcome Y_c = NumberConsecutiveDays_Segregation winsorised at the
@@ -1034,7 +1034,7 @@ morie_otis_make_pair_c <- function(df) {
 # 3 x 3 causal grid (IPW / AIPW / IRM-DML across the three pairs)
 # ---------------------------------------------------------------------------
 
-#' Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs.
+#' Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs
 #'
 #' Returns one row per (pair, estimator) combination with the ATE,
 #' SE, 95% CI, and per-row notes. The IRM-DML row uses the ATE

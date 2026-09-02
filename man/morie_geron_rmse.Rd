@@ -8,6 +8,7 @@ morie_geron_rmse(y_true, y_pred)
 }
 \arguments{
 \item{y_true, y_pred}{Numeric vectors of equal length.}
+
 }
 \value{
 List with \code{rmse}, \code{mse}, \code{mae}, \code{residuals}, \code{estimate}, \code{n}.

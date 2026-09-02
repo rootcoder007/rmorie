@@ -5,7 +5,8 @@
 \alias{EngCap}
 \title{EngCap: ENG compound action potential from a fibre-velocity}
 \usage{
-EngCap(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70), amp_range = c(0.5, 2), width_ms = 0.3)
+EngCap(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70), amp_range = c(0.5, 
+    2), width_ms = 0.3) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

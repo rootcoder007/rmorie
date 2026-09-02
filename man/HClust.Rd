@@ -5,7 +5,7 @@
 \alias{HClust}
 \title{Section 10.5.1.  Single linkage CHAINS -- it will string distant}
 \usage{
-HClust(X, linkage = "single", k = NULL)
+HClust(X, linkage = "single", k = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

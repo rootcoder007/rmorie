@@ -14,6 +14,7 @@ Logor(beta1, a = 0, b = 1, se = NULL, level = 0.95)
 \item{se}{Optional standard error of beta1; enables the Wald interval.}
 
 \item{level}{Confidence level, strictly inside (0, 1).}
+
 }
 \value{
 list: or, logor, span, and with se also se_logor, ci_low,

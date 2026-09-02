@@ -10,6 +10,7 @@ morie_prob_rules(p_a, p_b, p_ab)
 \item{p_a, p_b}{marginal probabilities.}
 
 \item{p_ab}{joint probability P(A and B).}
+
 }
 \value{
 list: and_independent, or_exclusive, or_general,

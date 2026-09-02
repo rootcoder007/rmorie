@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_aspect_ratio_buckets}
 \title{morie_sdxlcd_aspect_ratio_buckets}
 \usage{
-morie_sdxlcd_aspect_ratio_buckets(ratios, pixels = 1024 * 1024, multiple = 64)
+morie_sdxlcd_aspect_ratio_buckets(ratios, pixels = 1024 * 1024, multiple = 64) 
 }
 \arguments{
 \item{ratios}{See Usage.}

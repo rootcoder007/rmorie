@@ -5,7 +5,7 @@
 \alias{morie_trmRew_complete}
 \title{morie_trmRew_complete}
 \usage{
-morie_trmRew_complete(equations, precedence, max_rules = 60, max_steps = 10000, max_iter = 4000)
+morie_trmRew_complete(equations, precedence, max_rules = 60, max_steps = 10000, max_iter = 4000) 
 }
 \arguments{
 \item{equations}{Iterated over elementwise, with \code{lapply}.}

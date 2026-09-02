@@ -5,7 +5,7 @@
 \alias{disaggregate}
 \title{Spread a bucket forecast back over \code{m} periods}
 \usage{
-disaggregate(aggregate_value, m, profile = NULL)
+disaggregate(aggregate_value, m, profile = NULL) 
 }
 \arguments{
 \item{aggregate_value}{Forecast for the bucket.}

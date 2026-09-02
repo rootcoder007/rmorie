@@ -2,7 +2,7 @@
 % Please edit documentation in R/propalc.R
 \name{Propalloc}
 \alias{Propalloc}
-\title{Allocate n units to strata in proportion to stratum size.}
+\title{Allocate n units to strata in proportion to stratum size}
 \usage{
 Propalloc(Nh, n)
 }

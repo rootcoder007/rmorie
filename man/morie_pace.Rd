@@ -5,7 +5,8 @@
 \alias{morie_pace}
 \title{Sparse functional PCA by conditional expectation (PACE)}
 \usage{
-morie_pace(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL, bw_cov = NULL, kernel = "epan", shrink = TRUE)
+morie_pace(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL, bw_cov = NULL, 
+    kernel = "epan", shrink = TRUE) 
 }
 \arguments{
 \item{Y}{A list of numeric vectors, one per subject: the observed   values.}

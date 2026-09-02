@@ -5,10 +5,12 @@
 \alias{morie_kamath_scaled_dot_attention}
 \title{morie_kamath_scaled_dot_attention}
 \usage{
-morie_kamath_scaled_dot_attention(Q, K, V, d_k = NULL)
+morie_kamath_scaled_dot_attention(Q, K, V, d_k = NULL) 
 }
 \arguments{
 \item{Q,K,V}{Matrices.}
+
+\item{d_k}{Argument \code{d_k}; see Usage.}
 }
 \description{
 morie_kamath_scaled_dot_attention

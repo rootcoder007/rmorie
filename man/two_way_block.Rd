@@ -5,7 +5,7 @@
 \alias{two_way_block}
 \title{two_way_block}
 \usage{
-two_way_block(prompt_tokens, image_tokens)
+two_way_block(prompt_tokens, image_tokens) 
 }
 \arguments{
 \item{prompt_tokens}{Passed to \code{.samdec_mat}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Centred log-ratio transform of a composition.
+#' Centred log-ratio transform of a composition
 #'
 #' Formula: clr(x)_i = log( x_i / g(x) ),  g(x) the geometric mean; sum_i clr(x)_i = 0
 #'

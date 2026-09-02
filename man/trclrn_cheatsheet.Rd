@@ -5,7 +5,7 @@
 \alias{trclrn_cheatsheet}
 \title{trclrn_cheatsheet}
 \usage{
-trclrn_cheatsheet()
+trclrn_cheatsheet() 
 }
 \description{
 A step of the trclrn_native implementation. No other function in the package calls it. See the file header for the source the module follows.

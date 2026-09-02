@@ -5,7 +5,7 @@
 \alias{morie_propinf_flat_representation}
 \title{Baseline feature vector: every weight and bias in one vector}
 \usage{
-morie_propinf_flat_representation(net)
+morie_propinf_flat_representation(net) 
 }
 \arguments{
 \item{net}{Network as returned by \code{morie_propinf_train_fcnn}.}

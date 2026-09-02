@@ -5,7 +5,7 @@
 \alias{caCMIP_cheatsheet}
 \title{caCMIP_cheatsheet}
 \usage{
-caCMIP_cheatsheet()
+caCMIP_cheatsheet() 
 }
 \description{
 Part of the caCMIP_mixedcase_native implementation; see the file header for the source it follows.

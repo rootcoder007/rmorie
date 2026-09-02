@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_summarize_column}
 \alias{morie_dataset_summarize_column}
-\title{Compute level-appropriate summary statistics for one column.}
+\title{Compute level-appropriate summary statistics for one column}
 \usage{
 morie_dataset_summarize_column(x, level)
 }

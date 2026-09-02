@@ -5,7 +5,7 @@
 \alias{xdeep_cin}
 \title{xdeep_cin}
 \usage{
-xdeep_cin(X0, Ws)
+xdeep_cin(X0, Ws) 
 }
 \arguments{
 \item{X0}{Passed to \code{.xdeep_to_mat}.}

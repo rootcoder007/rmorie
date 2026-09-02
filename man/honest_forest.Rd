@@ -5,7 +5,9 @@
 \alias{honest_forest}
 \title{honest_forest}
 \usage{
-honest_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, at = NULL, level = 0.95, correction = TRUE)
+honest_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, 
+    min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, 
+    at = NULL, level = 0.95, correction = TRUE) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

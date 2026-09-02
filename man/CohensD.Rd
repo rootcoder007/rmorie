@@ -5,10 +5,9 @@
 \alias{CohensD}
 \title{\\' Cohen\\'s d and Hedges\\' g for two independent groups}
 \usage{
-CohensD(m1, m2, s1, s2, n1, n2)
+CohensD(m1, m2, s1, s2, n1, n2) 
 }
 \arguments{
-\item{s1,s2}{group standard deviations (denominator n-1) \\' @param n1,n2 group sizes, each at least 2 \\' @return list(d, s_pooled, var_d, se_d, j, j_approx, hedges_g, var_g, \\' se_g, df, n, method) \\' @export }
 \item{m1}{Numeric; combined arithmetically in the body.}
 \item{m2}{Numeric; combined arithmetically in the body.}
 \item{s1}{Numeric; combined arithmetically in the body.}

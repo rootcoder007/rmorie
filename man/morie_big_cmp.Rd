@@ -8,6 +8,7 @@ morie_big_cmp(a, b)
 }
 \arguments{
 \item{a, b}{Values coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+
 }
 \value{
 -1, 0 or 1.

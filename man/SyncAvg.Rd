@@ -5,7 +5,7 @@
 \alias{SyncAvg}
 \title{Eqs (3.95)-(3.96): y_k = x_k + eta_k, and the sum over k separates}
 \usage{
-SyncAvg(observations)
+SyncAvg(observations) 
 }
 \arguments{
 \item{observations}{Iterated over elementwise, with \code{lapply}.}

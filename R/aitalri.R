@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Inverse additive log-ratio transform.
+#' Inverse additive log-ratio transform
 #'
-#' Formula: alr^-1(y) = C( exp(y_1), ..., exp(y_{D-1}), 1 ) with the 1 inserted at the reference position
+#' Formula: alr^-1(y) = C( exp(y_1), ..., exp(y_\{D-1\}), 1 ) with the 1 inserted at the reference position
 #'
 #' @param y Additive log-ratio coordinates, length D - 1.
 #' @param ref 1-based index the reference part is restored to; the default is the last position D.

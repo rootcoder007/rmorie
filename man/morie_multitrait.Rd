@@ -8,12 +8,18 @@
 \alias{morie_bmtme_conditionals}
 \title{Multi-trait and genotype-by-environment models}
 \usage{
-morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL)
-morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL)
-morie_multitrait_ridge(Z1, G)
-morie_gxe_multitrait(Y, Z_L, Z_EL, G, Sigma_T, Sigma_E, Sigma_2T, R_T, X = NULL)
-morie_gxe_blup(y, X_E, Z_L, Z_EL, G, sigma2_g, Sigma_E, sigma2_e = 1)
-morie_bmtme_conditionals(Y, Z1, Z2, G, Sigma_T, Sigma_E, R, b1 = NULL, b2 = NULL, nu_T = NULL, S_T = NULL, nu_E = NULL, S_E = NULL)
+morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL) 
+
+morie_multitrait(Y, Z, G, Sigma_T, R_T, X = NULL) 
+
+morie_multitrait_ridge(Z1, G) 
+
+morie_gxe_multitrait(Y, Z_L, Z_EL, G, Sigma_T, Sigma_E, Sigma_2T, R_T, X = NULL) 
+
+morie_gxe_blup(y, X_E, Z_L, Z_EL, G, sigma2_g, Sigma_E, sigma2_e = 1) 
+
+morie_bmtme_conditionals(Y, Z1, Z2, G, Sigma_T, Sigma_E, R, b1 = NULL, b2 = NULL, nu_T = NULL, 
+    S_T = NULL, nu_E = NULL, S_E = NULL) 
 }
 \arguments{
 \item{Y}{response matrix, one column per trait}

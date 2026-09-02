@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm005.R
 \name{Msm005}
 \alias{Msm005}
-\title{Reparameterized one-way model.}
+\title{Reparameterized one-way model}
 \usage{
 Msm005(groups)
 }

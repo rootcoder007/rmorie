@@ -5,7 +5,7 @@
 \alias{retrieve_augment}
 \title{Retrieve uncurated nearest neighbours for each curated query}
 \usage{
-retrieve_augment(curated, uncurated, per_query = 2L, min_similarity = 0)
+retrieve_augment(curated, uncurated, per_query = 2L, min_similarity = 0) 
 }
 \arguments{
 \item{curated}{Numeric matrix (n_c x d).}

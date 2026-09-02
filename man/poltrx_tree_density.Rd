@@ -5,7 +5,7 @@
 \alias{poltrx_tree_density}
 \title{Piecewise-constant density implied by a finite Polya tree}
 \usage{
-poltrx_tree_density(tree, level = NULL, lo = 0, hi = 1)
+poltrx_tree_density(tree, level = NULL, lo = 0, hi = 1) 
 }
 \arguments{
 \item{tree}{A tree as returned by \code{poltrx_finite_tree}.}

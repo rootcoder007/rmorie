@@ -5,7 +5,7 @@
 \alias{morie_kamath_positional_sin}
 \title{Positional encodings, FFN, layer norm (Eq 2.13-2.14, 2.17-2.18)}
 \usage{
-morie_kamath_positional_sin(i, j, d)
+morie_kamath_positional_sin(i, j, d) 
 }
 \arguments{
 \item{i}{Position.}

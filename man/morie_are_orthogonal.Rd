@@ -8,6 +8,7 @@ morie_are_orthogonal(square_a, square_b)
 }
 \arguments{
 \item{square_a, square_b}{Two squares of the same order.}
+
 }
 \value{
 A list with \code{orthogonal}, \code{pair_condition_holds},

@@ -3,9 +3,9 @@
 % the formals.
 \name{AncOut}
 \alias{AncOut}
-\title{Eq. (3.196): e = x - y, and the ERROR is the canceller\'s output.}
+\title{Eq. (3.196): e = x - y, and the ERROR is the canceller\'s output}
 \usage{
-AncOut(x, y)
+AncOut(x, y) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

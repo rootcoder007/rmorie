@@ -3,9 +3,9 @@
 % the formals.
 \name{calibration_hellinger}
 \alias{calibration_hellinger}
-\title{Hellinger distance \eqn{\|\sqrt p - \sqrt q\|_2 / \sqrt 2}.}
+\title{Hellinger distance \eqn{\|\sqrt p - \sqrt q\|_2 / \sqrt 2}}
 \usage{
-calibration_hellinger(p, q)
+calibration_hellinger(p, q) 
 }
 \arguments{
 \item{p}{Target distribution \eqn{p(g \mid u)}.}

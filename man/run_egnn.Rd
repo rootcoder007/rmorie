@@ -5,7 +5,7 @@
 \alias{run_egnn}
 \title{run_egnn}
 \usage{
-run_egnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
+run_egnn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL) 
 }
 \arguments{
 \item{H}{Iterated over elementwise, with \code{lapply}.}

@@ -5,7 +5,7 @@
 \alias{Csd}
 \title{Eqs (4.30)-(4.31): S_xx = |X|^2 and S_xy = X Y*.  Both routes to the}
 \usage{
-Csd(x, y, fs = 1)
+Csd(x, y, fs = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm009.R
 \name{Msm009}
 \alias{Msm009}
-\title{Brier score for categorical data.}
+\title{Brier score for categorical data}
 \usage{
 Msm009(probs, y_true, n_classes = NULL, halved = FALSE)
 }

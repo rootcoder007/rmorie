@@ -5,7 +5,7 @@
 \alias{svdd}
 \title{svdd}
 \usage{
-svdd(X, C = 1, kernel = "linear", gamma = 1, tol = 1e-10, max_sweeps = 500L)
+svdd(X, C = 1, kernel = "linear", gamma = 1, tol = 1e-10, max_sweeps = 500L) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

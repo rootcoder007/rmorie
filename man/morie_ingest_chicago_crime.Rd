@@ -26,6 +26,7 @@ the server-side SoQL filter \code{year = <year>}.}
 limits.}
 
 \item{user_agent, timeout}{Standard request knobs.}
+
 }
 \value{
 A base R \code{data.frame}.

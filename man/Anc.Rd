@@ -5,7 +5,8 @@
 \alias{Anc}
 \title{Anc}
 \usage{
-Anc(primary, reference, order = 8, mu = 0.01, method = "lms", lam = 0.98, delta = 1)
+Anc(primary, reference, order = 8, mu = 0.01, method = "lms", lam = 0.98, 
+    delta = 1) 
 }
 \arguments{
 \item{primary}{Passed to \code{LmsFilt}.}

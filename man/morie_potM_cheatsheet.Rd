@@ -5,7 +5,7 @@
 \alias{morie_potM_cheatsheet}
 \title{morie_potM_cheatsheet}
 \usage{
-morie_potM_cheatsheet()
+morie_potM_cheatsheet() 
 }
 \description{
 A step of the potM_mixedcase_native implementation. No other function in the package calls it. See the file header for the source the module follows.

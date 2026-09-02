@@ -12,6 +12,7 @@ morie_dseptest(dag, x, y, z = character(0))
 \item{x, y}{the two nodes}
 
 \item{z}{conditioning set}
+
 }
 \value{
 list(dseparated, npaths, nnodes, ncond)

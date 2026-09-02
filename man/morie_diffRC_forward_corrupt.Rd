@@ -5,7 +5,7 @@
 \alias{morie_diffRC_forward_corrupt}
 \title{Forward corruption}
 \usage{
-morie_diffRC_forward_corrupt(x0, alpha_bar_t, rng = NULL)
+morie_diffRC_forward_corrupt(x0, alpha_bar_t, rng = NULL) 
 }
 \arguments{
 \item{x0}{Numeric vector.}

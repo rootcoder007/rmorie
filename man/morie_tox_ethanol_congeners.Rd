@@ -23,6 +23,7 @@ antemortem intake. Default \code{NA} (not measured).}
 
 \item{congener_threshold}{Higher-alcohol level above which fermentation is
 flagged. Default 0.}
+
 }
 \value{
 A list with the \code{verdict} (\code{"antemortem"},

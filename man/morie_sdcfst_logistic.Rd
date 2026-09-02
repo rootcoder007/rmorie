@@ -5,7 +5,7 @@
 \alias{morie_sdcfst_logistic}
 \title{Ridge-penalised logistic regression by Newton-Raphson}
 \usage{
-morie_sdcfst_logistic(X, z, rows, ridge = 1e-06, iters = 50L)
+morie_sdcfst_logistic(X, z, rows, ridge = 1e-06, iters = 50L) 
 }
 \arguments{
 \item{X}{Covariate matrix.}

@@ -5,10 +5,16 @@
 \alias{Linucb}
 \title{LinUCB arm scores (Li et al. 2010)}
 \usage{
-Linucb(x, theta, Ainv, alpha = 1)
+Linucb(x, theta, Ainv, alpha = 1) 
 }
 \description{
 LinUCB arm scores (Li et al. 2010)
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{theta}{Argument \code{theta}; see Usage.}
+\item{Ainv}{Argument \code{Ainv}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{score}, \code{mean}, \code{bonus}, \code{arm}, \code{n_arms}, \code{alpha}.

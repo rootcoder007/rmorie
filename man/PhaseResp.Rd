@@ -5,7 +5,7 @@
 \alias{PhaseResp}
 \title{PhaseResp}
 \usage{
-PhaseResp(b, a = NULL, fs = 1000, n_freqs = 512, unwrap = TRUE)
+PhaseResp(b, a = NULL, fs = 1000, n_freqs = 512, unwrap = TRUE) 
 }
 \arguments{
 \item{b}{Passed to \code{FreqResp}.}

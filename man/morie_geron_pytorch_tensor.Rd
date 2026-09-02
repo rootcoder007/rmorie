@@ -5,7 +5,7 @@
 \alias{morie_geron_pytorch_tensor}
 \title{Torch-style tensor construction (numpy/R-backed, no torch call) (Geron Ch 10, hmpttn)}
 \usage{
-morie_geron_pytorch_tensor(x, device = "cpu", dtype = NULL)
+morie_geron_pytorch_tensor(x, device = "cpu", dtype = NULL) 
 }
 \arguments{
 \item{x}{Data.}

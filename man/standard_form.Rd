@@ -5,7 +5,7 @@
 \alias{standard_form}
 \title{Internal: convert an inequality-form program to Ax = b, x >= 0}
 \usage{
-standard_form(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL)
+standard_form(c, A_ub = NULL, b_ub = NULL, A_eq = NULL, b_eq = NULL, upper = NULL) 
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}

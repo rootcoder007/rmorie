@@ -5,10 +5,14 @@
 \alias{Moodscale}
 \title{Mood scale test -- eqs. (9.2.1)-(9.2.3), pp. 314-316}
 \usage{
-Moodscale(x, y)
+Moodscale(x, y) 
 }
 \description{
 Mood scale test -- eqs. (9.2.1)-(9.2.3), pp. 314-316
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{var_general}, \code{z}, \code{p_value}, \code{m}, \code{n}.

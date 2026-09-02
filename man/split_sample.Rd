@@ -5,7 +5,7 @@
 \alias{split_sample}
 \title{split_sample}
 \usage{
-split_sample(n, V = 10L, seed = 0L)
+split_sample(n, V = 10L, seed = 0L) 
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}

@@ -5,7 +5,7 @@
 \alias{Cohere}
 \title{Eq (4.32).  The book is emphatic: computed from two single}
 \usage{
-Cohere(x, y, fs = 1, nperseg = NULL, noverlap = NULL)
+Cohere(x, y, fs = 1, nperseg = NULL, noverlap = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

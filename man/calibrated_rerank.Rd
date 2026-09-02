@@ -3,9 +3,22 @@
 % the formals.
 \name{calibrated_rerank}
 \alias{calibrated_rerank}
-\title{Greedy maximum-marginal-relevance re-ranking for calibration.}
+\alias{calibratedrecommendations}
+\alias{calibrated_rec}
+\alias{calibratedrec}
+\title{Greedy maximum-marginal-relevance re-ranking for calibration}
 \usage{
-calibrated_rerank(scores, p_g_given_i, p_target, N = 10, lam = 0.5, metric = "kl", alpha = 0.01, rank_weights = NULL)
+calibrated_rerank(scores, p_g_given_i, p_target, N = 10, lam = 0.5, metric = "kl", 
+    alpha = 0.01, rank_weights = NULL) 
+
+calibratedrecommendations(scores, p_g_given_i, p_target, N = 10, lam = 0.5, metric = "kl", 
+    alpha = 0.01, rank_weights = NULL) 
+
+calibrated_rec(scores, p_g_given_i, p_target, N = 10, lam = 0.5, metric = "kl", 
+    alpha = 0.01, rank_weights = NULL) 
+
+calibratedrec(scores, p_g_given_i, p_target, N = 10, lam = 0.5, metric = "kl", 
+    alpha = 0.01, rank_weights = NULL) 
 }
 \arguments{
 \item{scores}{Numeric vector of per-item relevance scores.}

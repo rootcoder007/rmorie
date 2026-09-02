@@ -5,7 +5,7 @@
 \alias{Knn}
 \title{Eq (10.29) and Section 10.4.4.  The book is explicit about why k > 1:}
 \usage{
-Knn(X, y, query, k = 1, metric = "euclidean", C = NULL)
+Knn(X, y, query, k = 1, metric = "euclidean", C = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

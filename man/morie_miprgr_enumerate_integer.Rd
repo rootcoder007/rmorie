@@ -5,7 +5,7 @@
 \alias{morie_miprgr_enumerate_integer}
 \title{Brute-force enumeration over a small integer box}
 \usage{
-morie_miprgr_enumerate_integer(A, b, c, integer_vars, upper = 10, maximise = TRUE)
+morie_miprgr_enumerate_integer(A, b, c, integer_vars, upper = 10, maximise = TRUE) 
 }
 \arguments{
 \item{A,b,c,integer_vars,maximise}{As in \code{branch_and_bound}.}

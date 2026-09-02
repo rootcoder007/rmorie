@@ -9,6 +9,7 @@ Bayfac(log_evidence_1, log_evidence_2)
 \arguments{
 \item{log_evidence_1, log_evidence_2}{log p(D | M1) and log p(D | M2); logs,
 not likelihoods.}
+
 }
 \value{
 list: bf, estimate, log_bf, two_log_bf, log10_bf, bf_21, category,

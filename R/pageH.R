@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Page-Hinkley sequential test for a shift in the mean.
+#' Page-Hinkley sequential test for a shift in the mean
 #'
 #' Formula: with \eqn{\bar x_T} the running mean of the first \eqn{T}
 #' observations, \eqn{m_T = \sum_{t\le T}(x_t - \bar x_t - \delta)},

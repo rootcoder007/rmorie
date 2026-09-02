@@ -27,8 +27,8 @@ first step parameter is arbitrary; it is kept so the printed formula
 is followed literally.
 }
 \details{
-Formula: P_k = exp(sum_{v=0}^{k} a (theta - b_v)) /
-sum_c exp(sum_{v=0}^{c} a (theta - b_v)).
+Formula: P_k = exp(sum_\{v=0\}^\{k\} a (theta - b_v)) /
+sum_c exp(sum_\{v=0\}^\{c\} a (theta - b_v)).
 }
 \examples{
 Gpcm(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_j = c(-1, 0, 1))

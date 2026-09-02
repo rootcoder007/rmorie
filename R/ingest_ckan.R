@@ -29,7 +29,7 @@
 
 # NOTE: canonical .morie_ckan_portal lives in data_access.R; that one
 # resolves short names ("open.canada.ca" -> "https://open.canada.ca/data/en")
-# and errors on unknown short names. Don't redefine it here — the
+# and errors on unknown short names. Don't redefine it here -- the
 # alphabetical load order would clobber the resolver and tests would fail.
 
 # Internal: perform a CKAN Action-API call and unwrap `result`.

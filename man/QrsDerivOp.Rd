@@ -5,7 +5,7 @@
 \alias{QrsDerivOp}
 \title{Eq (4.14): y(n) = (1/8)[2 x(n) + x(n-1) - x(n-3) - 2 x(n-4)].  The}
 \usage{
-QrsDerivOp(x)
+QrsDerivOp(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

@@ -5,7 +5,7 @@
 \alias{leapfrog}
 \title{One leapfrog step: half-kick, drift, half-kick. Reversible and}
 \usage{
-leapfrog(theta, r, eps, grad)
+leapfrog(theta, r, eps, grad) 
 }
 \arguments{
 \item{theta}{Numeric; combined arithmetically in the body.}

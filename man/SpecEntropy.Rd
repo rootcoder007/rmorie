@@ -5,7 +5,7 @@
 \alias{SpecEntropy}
 \title{Eq (3.11) applied to the PSD normalized to unit mass.  Rangayyan}
 \usage{
-SpecEntropy(psd, freqs = NULL, fmin = NULL, fmax = NULL)
+SpecEntropy(psd, freqs = NULL, fmin = NULL, fmax = NULL) 
 }
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}

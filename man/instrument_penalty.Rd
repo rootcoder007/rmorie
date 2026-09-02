@@ -5,7 +5,7 @@
 \alias{instrument_penalty}
 \title{instrument_penalty}
 \usage{
-instrument_penalty(g_small, g_large)
+instrument_penalty(g_small, g_large) 
 }
 \arguments{
 \item{g_small}{Coerced to numeric by the body, with \code{as.numeric}.}

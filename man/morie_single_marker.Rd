@@ -5,7 +5,7 @@
 \alias{morie_single_marker}
 \title{Single-marker regression LOD}
 \usage{
-morie_single_marker(y, g)
+morie_single_marker(y, g) 
 }
 \arguments{
 \item{y}{Numeric phenotype vector.}

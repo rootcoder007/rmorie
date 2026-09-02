@@ -12,6 +12,8 @@ morie_autoform(q, k, v, kernel = 3L, c = 1)
 \item{kernel}{decomposition kernel size}
 
 \item{c}{the Topk constant}
+
+
 }
 \value{
 list(out, taus, weights, k, L, r1, outmean, outmax,
@@ -19,7 +21,7 @@ trendmean, seasrange)
 }
 \description{
 Quoted from the paper: (5) "R_XX(tau) = lim (1/L) sum_t X_t
-X_{t-tau}"; (6) "tau_1..tau_k = arg Topk(R_{Q,K}(tau))" with
+X_\{t-tau\}"; (6) "tau_1..tau_k = arg Topk(R_\{Q,K\}(tau))" with
 "k = floor(c x log L)", "Rhat = SoftMax(R(tau_1)..R(tau_k))",
 "Auto-Correlation(Q,K,V) = sum_i Roll(V, tau_i) Rhat(tau_i)"
 -- Wu, Xu, Wang and Long, NeurIPS 2021 (arXiv:2106.13008). Ties in

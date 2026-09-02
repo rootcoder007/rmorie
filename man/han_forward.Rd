@@ -5,7 +5,8 @@
 \alias{han_forward}
 \title{han_forward}
 \usage{
-han_forward(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, slope = 0.2)
+han_forward(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, 
+    slope = 0.2) 
 }
 \arguments{
 \item{H}{A matrix; indexed by row and column.}

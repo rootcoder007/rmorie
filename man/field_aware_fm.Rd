@@ -5,7 +5,8 @@
 \alias{field_aware_fm}
 \title{field_aware_fm}
 \usage{
-field_aware_fm(rows, labels, fields, n_features, n_fields, k_dim = 4, eta = 0.1, lam = 2e-05, epochs = 10, seed = 0)
+field_aware_fm(rows, labels, fields, n_features, n_fields, k_dim = 4, eta = 0.1, 
+    lam = 2e-05, epochs = 10, seed = 0) 
 }
 \arguments{
 \item{rows}{Passed to \code{fit_ffm}.}

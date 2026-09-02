@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm092.R
 \name{Msm092}
 \alias{Msm092}
-\title{Ordinal latent predictor with environment, markers and interaction.}
+\title{Ordinal latent predictor with environment, markers and interaction}
 \usage{
 Msm092(n, X_E = NULL, X = NULL, X_EM = NULL)
 }

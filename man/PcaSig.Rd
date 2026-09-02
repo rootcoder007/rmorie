@@ -5,7 +5,7 @@
 \alias{PcaSig}
 \title{Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up}
 \usage{
-PcaSig(X, ncomp = NULL)
+PcaSig(X, ncomp = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

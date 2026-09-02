@@ -548,6 +548,11 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
                       "Bayes shrinkage (Love, Huber & Anders 2014)"))
 }
 
+#' Cheat sheet for the deseq2 module
+#'
+#' One-screen reminder of the module's entry points, printed to the console.
+#'
+#' @return The cheat sheet text, invisibly.
 #' @export
 .deseq2_cheatsheet <- function() {
   paste("deseq2: RNA-seq differential expression (Love, Huber & Anders",

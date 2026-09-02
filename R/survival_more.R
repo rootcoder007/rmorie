@@ -453,7 +453,7 @@ Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
 
 #' Cumulative incidence function under competing risks
 #'
-#' Aalen-Johansen: CIF_k(t) = sum S(t_{i-1}) d_ki / n_i, where S is the ALL-CAUSE Kaplan-Meier.
+#' Aalen-Johansen: CIF_k(t) = sum S(t_\{i-1\}) d_ki / n_i, where S is the ALL-CAUSE Kaplan-Meier.
 #' That factor is the point: treating competing events as censored overstates the incidence.
 #'
 #' @param time observed follow-up times.

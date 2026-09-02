@@ -5,7 +5,7 @@
 \alias{morie_linwlr_blip}
 \title{morie_linwlr_blip}
 \usage{
-morie_linwlr_blip(a, w, psi)
+morie_linwlr_blip(a, w, psi) 
 }
 \arguments{
 \item{a}{Passed to \code{.linwlr_vec}.}

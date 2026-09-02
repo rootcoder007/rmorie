@@ -25,6 +25,12 @@ morie_si_estimators(
 \item{estimate, variance, u_crit}{Interval pieces.}
 
 \item{zbar_hat, area, sample_area, s2_hat}{Infinite-population pieces.}
+
+
+
+
+
+
 }
 \value{
 List with p_hat, var_p, ci, total_inf, var_total_inf (pieces

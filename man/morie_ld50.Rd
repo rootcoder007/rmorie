@@ -24,6 +24,8 @@ morie_ld50(
 \item{alpha}{Two-sided level.}
 
 \item{log_dose}{Fit against log(dose).}
+
+
 }
 \value{
 A list with \code{estimate}, \code{ci_lower}, \code{ci_upper}, \code{slope},

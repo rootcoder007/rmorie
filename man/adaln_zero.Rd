@@ -3,9 +3,9 @@
 % the formals.
 \name{adaln_zero}
 \alias{adaln_zero}
-\title{Adaptive LayerNorm with a ZERO-initialised residual gate.}
+\title{Adaptive LayerNorm with a ZERO-initialised residual gate}
 \usage{
-adaln_zero(cond, hidden, W_scale, W_shift, W_alpha, eps = 1e-06)
+adaln_zero(cond, hidden, W_scale, W_shift, W_alpha, eps = 1e-06) 
 }
 \arguments{
 \item{cond}{   numeric, conditioning vector.}

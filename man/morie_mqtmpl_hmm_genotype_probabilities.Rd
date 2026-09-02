@@ -5,7 +5,7 @@
 \alias{morie_mqtmpl_hmm_genotype_probabilities}
 \title{Forward-backward posterior genotype probabilities}
 \usage{
-morie_mqtmpl_hmm_genotype_probabilities(genotypes, positions, error_rate = 0)
+morie_mqtmpl_hmm_genotype_probabilities(genotypes, positions, error_rate = 0) 
 }
 \arguments{
 \item{genotypes}{One row per individual: 0, 1 or NA.}

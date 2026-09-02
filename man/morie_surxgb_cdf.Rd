@@ -5,7 +5,7 @@
 \alias{morie_surxgb_cdf}
 \title{Table 2: the distribution function of Z}
 \usage{
-morie_surxgb_cdf(z, dist = "normal")
+morie_surxgb_cdf(z, dist = "normal") 
 }
 \arguments{
 \item{z}{Numeric; passed to \code{exp}.}

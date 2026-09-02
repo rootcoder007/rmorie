@@ -5,7 +5,7 @@
 \alias{DiffEnt}
 \title{Eq (3.6): H = - integral p log2(p) d eta, in bits.  p log p -> 0 as}
 \usage{
-DiffEnt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+DiffEnt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

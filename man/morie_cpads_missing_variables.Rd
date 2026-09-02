@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_missing_variables}
 \alias{morie_cpads_missing_variables}
-\title{Identify missing canonical CPADS variables in a column set.}
+\title{Identify missing canonical CPADS variables in a column set}
 \usage{
 morie_cpads_missing_variables(columns)
 }
@@ -14,7 +14,7 @@ Character vector of missing canonical CPADS variables (empty
 if every required variable is present).
 }
 \description{
-Identify missing canonical CPADS variables in a column set.
+Identify missing canonical CPADS variables in a column set
 }
 \examples{
 morie_cpads_missing_variables(c("weight", "alcohol_past12m"))

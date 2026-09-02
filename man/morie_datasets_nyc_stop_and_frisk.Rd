@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_nyc_stop_and_frisk}
 \alias{morie_datasets_nyc_stop_and_frisk}
-\title{NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData.}
+\title{NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData}
 \usage{
 morie_datasets_nyc_stop_and_frisk(
   year = NULL,
@@ -34,7 +34,7 @@ SODA2 \verb{$offset} in \code{page_size} chunks. Default \code{FALSE}.}
 A \code{data.frame}.  Schema is NOT normalised across years.
 }
 \description{
-NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData.
+NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData
 }
 \examples{
 df <- morie_datasets_nyc_stop_and_frisk(offline = TRUE)

@@ -33,8 +33,8 @@ from an extracted text layer.
 Equation (5.39): x_k(m) = x(m), x(m+k), x(m+2k), ...,
 x(m + floor((N-m)/k) k), for m = 1, 2, ..., k.
 Equation (5.40): L(m,k) = (1/k) (N-1)/(k floor((N-m)/k))
-sum_{i=1}^{floor((N-m)/k)} |x(m+ik) - x[m+(i-1)k]|.
-Equation (5.41): L(k) = (1/k) sum_{m=1}^{k} L(m,k).
+sum_\{i=1\}^\{floor((N-m)/k)\} |x(m+ik) - x[m+(i-1)k]|.
+Equation (5.41): L(k) = (1/k) sum_\{m=1\}^\{k\} L(m,k).
 "The slope of a straight-line fit to a log-log plot of L(k) against 1/k
 gives the FD of the original signal."
 

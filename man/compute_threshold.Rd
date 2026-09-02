@@ -5,7 +5,7 @@
 \alias{compute_threshold}
 \title{compute_threshold}
 \usage{
-compute_threshold(i1, i2, a1_new, a2_new, alpha, y, E, K, b, C)
+compute_threshold(i1, i2, a1_new, a2_new, alpha, y, E, K, b, C) 
 }
 \arguments{
 \item{i1}{Coerced to integer by the body, with \code{as.integer}.}

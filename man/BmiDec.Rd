@@ -5,7 +5,7 @@
 \alias{BmiDec}
 \title{BmiDec}
 \usage{
-BmiDec(y, C, a = NULL, procnoise = 1e-04, obsnoise = 0.01, p0 = 0.01)
+BmiDec(y, C, a = NULL, procnoise = 1e-04, obsnoise = 0.01, p0 = 0.01) 
 }
 \arguments{
 \item{y}{Passed to \code{.morie_bx_mat}.}

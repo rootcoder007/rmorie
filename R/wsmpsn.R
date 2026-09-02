@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sample correlation, its t test, and a Fisher-z interval.
+#' Sample correlation, its t test, and a Fisher-z interval
 #'
 #' The t test is exact under bivariate normality with df = n - 2; the
 #' interval comes from Fisher's variance-stabilising transform, which is

@@ -10,6 +10,7 @@ morie_kamath_ch6_co_occurrence_bias(w, A_i, A_j)
 \item{w}{Word.}
 
 \item{A_i, A_j}{Named count vectors or token corpora.}
+
 }
 \value{
 List with \code{estimate}, \code{p_given_Ai}, \code{p_given_Aj}.

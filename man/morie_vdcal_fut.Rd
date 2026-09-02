@@ -5,7 +5,7 @@
 \alias{morie_vdcal_fut}
 \title{Solve the model backwards for the tissue free fraction}
 \usage{
-morie_vdcal_fut(vss, fu, par = NULL)
+morie_vdcal_fut(vss, fu, par = NULL) 
 }
 \arguments{
 \item{vss}{The measured volume, in litres per kilogram.}

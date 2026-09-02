@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Explain between-study heterogeneity with study-level covariates
-#
-# A random-effects pool reports heterogeneity; a meta-regression asks
-# where it comes from. The residual \eqn{au^2} is the part the
+#' Explain between-study heterogeneity with study-level covariates
+#'
+#' A random-effects pool reports heterogeneity; a meta-regression asks
+#' where it comes from. The residual \eqn{au^2} is the part the
 # prime moderators fail to explain, and it belongs in the weights, otherwise
 # prime the standard errors are those of a fixed-effect fit and are too small.
 # prime The moderators are study-level, so this is ecological regression: a
@@ -13,7 +13,7 @@
 # prime \code{Var(e_i) = v_i}, weights \code{1/(v_i + tau^2)}. \code{tau^2} is
 # prime the moment estimator \code{max(0, (Q_E - (n - p)) / (tr W -
 # prime tr((X primeWX)^{-1} X'W^2 X)))} -- van Houwelingen, Arends and Stijnen
-#' (2002) Section 4.
+#' (2002) Section 4
 #'
 #' @param yi Study effect estimates.
 #' @param vi Their sampling variances, strictly positive.

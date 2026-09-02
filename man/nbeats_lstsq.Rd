@@ -5,7 +5,7 @@
 \alias{nbeats_lstsq}
 \title{X is L x P, y is length L; return theta}
 \usage{
-nbeats_lstsq(X, y, ridge = 1e-08)
+nbeats_lstsq(X, y, ridge = 1e-08) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{ncol}.}

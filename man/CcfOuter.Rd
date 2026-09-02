@@ -5,7 +5,7 @@
 \alias{CcfOuter}
 \title{Eq (4.29): Theta_xy = E[x(n) y^T(n)], an N x N matrix carrying all}
 \usage{
-CcfOuter(x, y, order, tol = 0.001)
+CcfOuter(x, y, order, tol = 0.001) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

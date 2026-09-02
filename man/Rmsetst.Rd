@@ -2,7 +2,7 @@
 % Please edit documentation in R/rmsef.R
 \name{Rmsetst}
 \alias{Rmsetst}
-\title{Root mean squared error of a set of predictions.}
+\title{Root mean squared error of a set of predictions}
 \usage{
 Rmsetst(y, yhat)
 }

@@ -41,6 +41,7 @@ polygon-ID labels at each ward centroid.}
 \item{border_color}{Polygon edge colour.}
 
 \item{border_lw}{Polygon edge linewidth.}
+
 }
 \value{
 A \code{ggplot} object (when ggplot2 is loaded) or

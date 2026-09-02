@@ -15,9 +15,7 @@ A data.frame with columns:
 \source{
 Canadian Substance Use Survey (CSUS) via Health Infobase Canada.
 }
-\usage{
-substance_categories
-}
+
 \description{
 Canonical substance category mapping used across CSUS HealthInfobase
 data files. Maps short keys to human-readable labels and source filenames.

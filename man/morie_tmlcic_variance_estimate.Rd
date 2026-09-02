@@ -5,7 +5,7 @@
 \alias{morie_tmlcic_variance_estimate}
 \title{morie_tmlcic_variance_estimate}
 \usage{
-morie_tmlcic_variance_estimate(D, y, qa, groups, n, design, target)
+morie_tmlcic_variance_estimate(D, y, qa, groups, n, design, target) 
 }
 \arguments{
 \item{D}{A vector; indexed elementwise.}

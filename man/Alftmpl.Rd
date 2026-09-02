@@ -17,6 +17,7 @@ Alftmpl(t, z, wq, wk, wv, wo)
 each \code{c x ct}.}
 
 \item{wo}{Output projection, \code{cz x (nhead * c)}.}
+
 }
 \value{
 A list with \code{z}, \code{attn}, \code{estimate}, \code{n},

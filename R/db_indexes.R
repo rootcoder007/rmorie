@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Per-dataset index registry. Empirical cardinality measurements from
-# the real included datasets drove these choices — high-cardinality
+# the real included datasets drove these choices -- high-cardinality
 # columns (>1000 distinct values + frequent point-lookup or join key)
 # get B-tree indexes; medium-cardinality columns (rollup dimensions
-# like year × region) get composite indexes with the high-card column.
-# Low-cardinality columns (Gender, Yes/No alerts, Measure ∈ {Max,
-# Median, Mode}) are intentionally not indexed — the index overhead
+# like year ? region) get composite indexes with the high-card column.
+# Low-cardinality columns (Gender, Yes/No alerts, Measure ? {Max,
+# Median, Mode}) are intentionally not indexed -- the index overhead
 # would exceed the lookup benefit.
 
 #' Recommended indexes per known morie cache table
@@ -276,7 +276,7 @@
 #' [.morie_db_index_registry()] for the full list) and creates each
 #' `CREATE INDEX IF NOT EXISTS` against `con`. Specs whose columns
 #' aren't present in the actual table are silently skipped, so this is
-#' safe to call on any morie cache table — including subsets that drop
+#' safe to call on any morie cache table -- including subsets that drop
 #' some columns. Returns the number of `CREATE INDEX` statements that
 #' actually ran (not the number registered).
 #'

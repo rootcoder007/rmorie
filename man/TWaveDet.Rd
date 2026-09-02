@@ -5,7 +5,7 @@
 \alias{TWaveDet}
 \title{Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked}
 \usage{
-TWaveDet(chans, qrs, fs, tdur = 0.16)
+TWaveDet(chans, qrs, fs, tdur = 0.16) 
 }
 \arguments{
 \item{chans}{A vector; its length is taken.}

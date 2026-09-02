@@ -5,7 +5,7 @@
 \alias{morie_vepan_pick}
 \title{Pick (one record) or --per_gene (one per gene)}
 \usage{
-morie_vepan_pick(records, per_gene = FALSE)
+morie_vepan_pick(records, per_gene = FALSE) 
 }
 \arguments{
 \item{records}{See Usage.}

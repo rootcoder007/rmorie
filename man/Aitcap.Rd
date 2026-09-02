@@ -22,11 +22,11 @@ list: yhat, estimate, yhat_majority, dist, k, n, D, method.
 The distance is Aitchison's, taken from the rendered page 10 of
 Mateu-Figueras, Pawlowsky-Glahn and Egozcue, "The normal distribution in
 some constrained sample spaces", which prints
-d_a^2(x, x*) = (1/D) sum_{i<j} (ln(x_i/x_j) - ln(x*_i/x*\emph{j))^2 immediately
+d_a^2(x, x*) = (1/D) sum_\{i<j\} (ln(x_i/x_j) - ln(x*_i/x*\emph{j))^2 immediately
 below inner product (10).  The classifier is the rule named in the
 specification: take the k training points nearest x* in d_a and label x* by
 the group whose members inside that neighbourhood have the smallest total
-distance, ghat(x*) = argmin_g sum}{i in N_k(x*), y_i = g} d_a(x*, x_i).
+distance, ghat(x*) = argmin_g sum}\{i in N_k(x*), y_i = g\} d_a(x*, x_i).
 }
 \details{
 Groups with no member in the neighbourhood are not candidates, since their

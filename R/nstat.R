@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Non-stationary covariance estimation (moving-window kernel).
+#' Non-stationary covariance estimation (moving-window kernel)
 #'
 #' C(s_i, s_j) = sigma(s_i) sigma(s_j) rho(s_i, s_j) with kernel-weighted
 #' local moments and standardised residual correlations.

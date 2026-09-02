@@ -36,6 +36,8 @@ reference, e.g. \code{project = "bigquery-public-data"},
 \item{max_rows}{Optional cap on rows downloaded.}
 
 \item{quiet}{Suppress \pkg{bigrquery} progress output.}
+
+
 }
 \value{
 A base R \code{data.frame}.

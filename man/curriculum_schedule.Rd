@@ -5,7 +5,7 @@
 \alias{curriculum_schedule}
 \title{curriculum_schedule}
 \usage{
-curriculum_schedule(difficulty, n_steps = 5, hard_first = FALSE)
+curriculum_schedule(difficulty, n_steps = 5, hard_first = FALSE) 
 }
 \arguments{
 \item{difficulty}{Passed to \code{.prgrl_to_vec}.}

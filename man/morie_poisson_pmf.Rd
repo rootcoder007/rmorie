@@ -5,10 +5,14 @@
 \alias{morie_poisson_pmf}
 \title{morie_poisson_pmf}
 \usage{
-morie_poisson_pmf(y, lambda)
+morie_poisson_pmf(y, lambda) 
 }
 \description{
 morie_poisson_pmf
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{lambda}{Argument \code{lambda}; see Usage.}
 }
 \value{
 A numeric value.

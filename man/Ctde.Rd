@@ -18,6 +18,7 @@ Ctde(X, M, Y, m, C = NULL, a = 1, astar = 0)
 \item{C}{Optional matrix of covariates, one row per observation.}
 
 \item{a, astar}{Exposure contrast; the default is 1 versus 0.}
+
 }
 \value{
 list: estimate (CDE(m)), pnde, tnde, tnie, pnie, te,

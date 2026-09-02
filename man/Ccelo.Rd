@@ -2,7 +2,7 @@
 % Please edit documentation in R/ccelO.R
 \name{Ccelo}
 \alias{Ccelo}
-\title{Categorical cross-entropy loss.}
+\title{Categorical cross-entropy loss}
 \usage{
 Ccelo(Y, P)
 }

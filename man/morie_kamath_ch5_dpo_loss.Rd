@@ -10,6 +10,7 @@ morie_kamath_ch5_dpo_loss(pi_theta, pi_ref, beta)
 \item{pi_theta, pi_ref}{Lists of two-response policies.}
 
 \item{beta}{Positive.}
+
 }
 \value{
 List with \code{estimate}, \code{margins}, implicit rewards.

@@ -48,7 +48,7 @@
     # gradient probing. Without this, the optimiser occasionally lands in
     # regions where s2 = Inf / 0 and the loglik becomes NA/NaN, producing
     # noisy "NA/NaN function evaluation" warnings (correct result, harmless
-    # warning). Bounds chosen so exp(log_s2) stays in [1e-30, 1e30] — far
+    # warning). Bounds chosen so exp(log_s2) stays in [1e-30, 1e30] -- far
     # wider than any realistic variance.
     if (!is.finite(log_s2[t])) log_s2[t] <- log_s2[t - 1]
     log_s2[t] <- max(-70, min(70, log_s2[t]))

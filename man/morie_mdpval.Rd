@@ -8,7 +8,7 @@ morie_mdpval(P, R, gamma, tol = 1e-10, max_iter = 1e+05, V0 = NULL)
 }
 \arguments{
 \item{P}{List of A transition matrices, each (S, S), rows summing
-to 1; \code{P[[a]]\[s, s2\] = P(s2 | s, a)}.}
+to 1; \code{P[\[a\]]\[s, s2\] = P(s2 | s, a)}.}
 
 \item{R}{Reward: (S, A) matrix of r(s, a), or a list of A (S, S)
 per-transition reward matrices averaged under P.}

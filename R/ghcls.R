@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Probit-GP classifier (Laplace approximation).
+#' Probit-GP classifier (Laplace approximation)
 #'
 #' @param x Numeric matrix of features.
 #' @param y Numeric binary labels (0/1).

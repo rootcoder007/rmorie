@@ -3,7 +3,7 @@
 \name{vrgft}
 \alias{vrgft}
 \alias{morie_variogram_fitting}
-\title{Variogram model fit by weighted least squares.}
+\title{Variogram model fit by weighted least squares}
 \usage{
 vrgft(x, coords, model = "exponential", n_bins = 10, max_dist = NULL)
 

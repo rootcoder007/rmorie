@@ -5,7 +5,7 @@
 \alias{morie_blinkg_cheatsheet}
 \title{One-line summary of the blinkg module}
 \usage{
-morie_blinkg_cheatsheet()
+morie_blinkg_cheatsheet() 
 }
 \description{
 One-line summary of the blinkg module

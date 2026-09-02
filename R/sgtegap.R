@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Choose k from the spectrum: the gap after the small eigenvalues.
+#' Choose k from the spectrum: the gap after the small eigenvalues
 #'
 #' The goal is k such that lambda_1..lambda_k are all SMALL and
 #' lambda_\{k+1\} is relatively LARGE -- not simply the largest gap

@@ -5,7 +5,7 @@
 \alias{morie_kamath_ssl_loss}
 \title{The Kamath Ch 2 pretraining loss family (Eq 2.20-2.33)}
 \usage{
-morie_kamath_ssl_loss(L_PTi, lambda_i = NULL)
+morie_kamath_ssl_loss(L_PTi, lambda_i = NULL) 
 }
 \arguments{
 \item{L_PTi}{Pretext losses.}

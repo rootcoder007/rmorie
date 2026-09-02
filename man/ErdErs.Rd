@@ -5,7 +5,7 @@
 \alias{ErdErs}
 \title{ErdErs: event-related desynchronisation / synchronisation for BCI}
 \usage{
-ErdErs(eeg, fs, ref_window, active_window, band = c(8, 13))
+ErdErs(eeg, fs, ref_window, active_window, band = c(8, 13)) 
 }
 \arguments{
 \item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}

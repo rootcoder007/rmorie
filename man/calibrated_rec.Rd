@@ -2,7 +2,7 @@
 % Please edit documentation in R/caltbR_native.R
 \name{calibrated_rec}
 \alias{calibrated_rec}
-\title{Convenience alias matching the Python \code{calibrated_rec} export.}
+\title{Convenience alias matching the Python \code{calibrated_rec} export}
 \usage{
 calibrated_rec(
   scores,
@@ -16,5 +16,16 @@ calibrated_rec(
 )
 }
 \description{
-Convenience alias matching the Python \code{calibrated_rec} export.
+Convenience alias matching the Python \code{calibrated_rec} export
 }
+\arguments{
+\item{scores}{Argument \code{scores}; see Usage.}
+\item{p_g_given_i}{Argument \code{p_g_given_i}; see Usage.}
+\item{p_target}{Argument \code{p_target}; see Usage.}
+\item{N}{Argument \code{N}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{metric}{Argument \code{metric}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{rank_weights}{Argument \code{rank_weights}; see Usage.}
+}
+

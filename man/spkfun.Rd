@@ -2,7 +2,7 @@
 % Please edit documentation in R/spkfun.R
 \name{spkfun}
 \alias{spkfun}
-\title{Ripley's K-function.}
+\title{Ripley's K-function}
 \usage{
 spkfun(
   points,

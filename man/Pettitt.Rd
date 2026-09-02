@@ -2,7 +2,7 @@
 % Please edit documentation in R/pettit.R
 \name{Pettitt}
 \alias{Pettitt}
-\title{Pettitt's non-parametric single change-point test.}
+\title{Pettitt's non-parametric single change-point test}
 \usage{
 Pettitt(x)
 }

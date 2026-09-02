@@ -21,6 +21,8 @@ morie_geron_ddpm(
 \item{beta_schedule}{"linear"/"cosine"/vector.}
 
 \item{epochs, lr, seed}{Training config.}
+
+
 }
 \value{
 List with \code{loss_history}, \code{final_loss}, \code{loss_by_t}, \code{A}, \code{b}, \code{alpha_bar}, \code{sample}.

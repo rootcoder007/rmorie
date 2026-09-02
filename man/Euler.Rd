@@ -5,7 +5,7 @@
 \alias{Euler}
 \title{Eq (3.74): exp(j omega t) = cos(omega t) + j sin(omega t)}
 \usage{
-Euler(omega, t = 0)
+Euler(omega, t = 0) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

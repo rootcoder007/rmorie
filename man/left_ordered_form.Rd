@@ -5,7 +5,7 @@
 \alias{left_ordered_form}
 \title{left_ordered_form}
 \usage{
-left_ordered_form(Z)
+left_ordered_form(Z) 
 }
 \arguments{
 \item{Z}{A matrix; passed to \code{as.matrix}.}

@@ -1,11 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' EM for the ADMIXTURE ancestry likelihood.
+#' EM for the ADMIXTURE ancestry likelihood
 #'
 #' L(Q,P) = sum_ij \[ g_ij log(sum_k q_ik p_kj)
 #'                 + (2-g_ij) log(sum_k q_ik (1-p_kj)) ], maximised by the
 #' EM updates on allele responsibilities a_ijk and b_ijk.
 #'
-#' @param G Genotype counts in {0,1,2}, I x J.
+#' @param G Genotype counts in \{0,1,2\}, I x J.
 #' @param K Number of ancestral populations.
 #' @param steps Fixed EM iteration count.
 #' @param Q0,P0 Starting values; NULL uses the deterministic defaults

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
-# morie_describe() and morie_describe_by_name() —
+# morie_describe() and morie_describe_by_name() --
 # pedagogical-narrative lookup for morie callables.
 #
 # This file ships the R-side mirror of the Python
@@ -16,7 +16,7 @@
 # Package-level cache for the describe corpus (lazy-loaded).
 .morie_describe_env <- new.env(parent = emptyenv())
 
-#' Load the included describe corpus (lazy, cached for the session).
+#' Load the included describe corpus (lazy, cached for the session)
 #'
 #' @return Named character vector. Names are the callable mnemonics
 #'   (the short 4--7 character forms); values are the markdown
@@ -42,7 +42,7 @@
   .morie_describe_env$corpus
 }
 
-#' Normalise a name for describe-corpus lookup.
+#' Normalise a name for describe-corpus lookup
 #'
 #' Strips the leading `morie_` prefix and the legacy `describe_`
 #' prefix; also strips a trailing `.md` extension if present.
@@ -58,7 +58,7 @@
   name
 }
 
-#' Print the pedagogical narrative for a morie callable.
+#' Print the pedagogical narrative for a morie callable
 #'
 #' Loads the describe_<name>.md narrative shipped in the package's
 #' \code{inst/extdata/describe_corpus.Rds} capsule and prints it to
@@ -112,7 +112,7 @@ morie_describe <- function(callable) {
   morie_describe_by_name(name)
 }
 
-#' String-only variant of \code{\link{morie_describe}}.
+#' String-only variant of \code{\link{morie_describe}}
 #'
 #' Use this when you want to pass a name as a string and avoid the
 #' unquoted-symbol capture behaviour of \code{morie_describe}.

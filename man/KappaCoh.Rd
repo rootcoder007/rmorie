@@ -8,6 +8,7 @@ KappaCoh(rater1, rater2)
 }
 \arguments{
 \item{rater1, rater2}{categorical ratings of the same n subjects}
+
 }
 \value{
 list(kappa, p_observed, p_expected, se, z, n, n_categories)

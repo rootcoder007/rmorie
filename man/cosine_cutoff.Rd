@@ -5,7 +5,7 @@
 \alias{cosine_cutoff}
 \title{cosine_cutoff}
 \usage{
-cosine_cutoff(r, cutoff = 5)
+cosine_cutoff(r, cutoff = 5) 
 }
 \arguments{
 \item{r}{Coerced to numeric by the body, with \code{as.numeric}.}

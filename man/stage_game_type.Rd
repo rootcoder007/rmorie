@@ -5,7 +5,7 @@
 \alias{stage_game_type}
 \title{stage_game_type}
 \usage{
-stage_game_type(A, B, tol = 1e-09)
+stage_game_type(A, B, tol = 1e-09) 
 }
 \arguments{
 \item{A}{Numeric; passed to \code{max}.}

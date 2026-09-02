@@ -5,7 +5,7 @@
 \alias{PzMag}
 \title{Eq (3.72): the geometric reading of a filter.  Approaching a zero}
 \usage{
-PzMag(l_k, r_k, N = NULL, M = NULL)
+PzMag(l_k, r_k, N = NULL, M = NULL) 
 }
 \arguments{
 \item{l_k}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

@@ -411,7 +411,7 @@ reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
 bayrjmcmc <- reversible_jump_mcmc
 
 # --------------------------------------------------------------------------
-# §4: step-function rate for a point process
+# Section 4: step-function rate for a point process
 # --------------------------------------------------------------------------
 
 #' step_function_loglik
@@ -750,7 +750,7 @@ changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
     chain = chain,
     n_kept = kept,
     use_likelihood = as.logical(use_likelihood),
-    method = "Green (1995) §4 change-point sampler: height, position, birth and death moves on a step-function rate, with the §4-3 acceptance ratios",
+    method = "Green (1995) Section 4 change-point sampler: height, position, birth and death moves on a step-function rate, with the Section 4-3 acceptance ratios",
     note = "with use_likelihood=False the target is the prior, so k must come back Poisson(lam) truncated at k_max and the heights Gamma(alpha, beta)"
   )
 }

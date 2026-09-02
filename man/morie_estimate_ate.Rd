@@ -29,6 +29,18 @@ morie_estimate_ate(
 
 \item{propensity_col}{Optional: name of a pre-computed propensity
 score column.}
+
+\item{trim}{See Usage.}
+
+\item{trim_type}{See Usage.}
+
+\item{ps_model}{See Usage.}
+
+\item{ridge_lambda}{See Usage.}
+
+\item{weight_trim}{See Usage.}
+
+\item{weight_trim_side}{See Usage.}
 }
 \value{
 Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}, \code{ess}.

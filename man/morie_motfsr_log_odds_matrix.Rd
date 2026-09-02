@@ -5,7 +5,7 @@
 \alias{morie_motfsr_log_odds_matrix}
 \title{Log-odds classifier matrix}
 \usage{
-morie_motfsr_log_odds_matrix(motif, background)
+morie_motfsr_log_odds_matrix(motif, background) 
 }
 \arguments{
 \item{motif,background}{Frequency matrices.}

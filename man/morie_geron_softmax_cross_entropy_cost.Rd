@@ -10,6 +10,7 @@ morie_geron_softmax_cross_entropy_cost(X, Y, theta)
 \item{X, theta}{Design and (n, K) parameters.}
 
 \item{Y}{0-based labels or a one-hot matrix.}
+
 }
 \value{
 List with \code{cost}, \code{per_instance}, \code{probabilities}, \code{accuracy}.

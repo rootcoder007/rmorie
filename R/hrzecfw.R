@@ -8,7 +8,7 @@
 #' f_U(u) = (1 / 2 pi) integral exp(-i tau u) psi_W(tau) / psi_eps(tau) d tau,
 #' and the only unknown on the right is psi_W, replaced by the empirical
 #' characteristic function printed unnumbered immediately below (5.7),
-#' psi_nW(tau) = (1 / n) sum_{j=1}^n exp(i tau W_j).  The book uses j to index
+#' psi_nW(tau) = (1 / n) sum_\{j=1\}^n exp(i tau W_j).  The book uses j to index
 #' observations because i is the imaginary unit; the same convention is kept
 #' here.  Only the empirical characteristic function itself is computed: the
 #' book notes on the same page that substituting psi_nW directly into (5.7)

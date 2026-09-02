@@ -5,10 +5,16 @@
 \alias{Shedcurve}
 \title{Piecewise log-linear shedding curve (standard)}
 \usage{
-Shedcurve(days, load, t_peak, t_plateau)
+Shedcurve(days, load, t_peak, t_plateau) 
 }
 \description{
 Piecewise log-linear shedding curve (standard)
+}
+\arguments{
+\item{days}{Argument \code{days}; see Usage.}
+\item{load}{Argument \code{load}; see Usage.}
+\item{t_peak}{Argument \code{t_peak}; see Usage.}
+\item{t_plateau}{Argument \code{t_plateau}; see Usage.}
 }
 \value{
 A list with \code{rise_slope}, \code{rise_intercept}, \code{plateau_level}, \code{decay_slope}, \code{decay_intercept}, \code{peak_load}, \code{peak_day}, \code{n}, \code{n_rise}, \code{n_plateau}, \code{n_decay}.

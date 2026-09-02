@@ -5,7 +5,9 @@
 \alias{morie_tldapar}
 \title{morie_tldapar}
 \usage{
-morie_tldapar(n, V = 10L, seed = 0L, define_on_training = NULL, estimate_on_holdout = NULL, fold_estimates = NULL, fold_ics = NULL, effect = NULL, screen = NULL, reuse_fn = NULL, mode = c("split", "combine", "vimp", "reuse"))
+morie_tldapar(n, V = 10L, seed = 0L, define_on_training = NULL, estimate_on_holdout = NULL, 
+    fold_estimates = NULL, fold_ics = NULL, effect = NULL, screen = NULL, 
+    reuse_fn = NULL, mode = c("split", "combine", "vimp", "reuse")) 
 }
 \arguments{
 \item{n}{Passed to \code{split_sample}.}

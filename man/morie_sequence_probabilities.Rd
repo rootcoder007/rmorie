@@ -5,7 +5,7 @@
 \alias{morie_sequence_probabilities}
 \title{morie_sequence_probabilities}
 \usage{
-morie_sequence_probabilities(beta, gamma, x, alpha, y0, link = "logit")
+morie_sequence_probabilities(beta, gamma, x, alpha, y0, link = "logit") 
 }
 \arguments{
 \item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}

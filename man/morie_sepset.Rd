@@ -12,6 +12,7 @@ morie_sepset(dag, x, y, maxsize = 3L)
 \item{x, y}{the two nodes}
 
 \item{maxsize}{largest candidate set considered}
+
 }
 \value{
 list(found, size, sepset, ntested, nnodes)

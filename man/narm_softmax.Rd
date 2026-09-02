@@ -5,7 +5,7 @@
 \alias{narm_softmax}
 \title{narm_softmax}
 \usage{
-narm_softmax(z)
+narm_softmax(z) 
 }
 \arguments{
 \item{z}{Coerced to numeric by the body, with \code{as.numeric}.}

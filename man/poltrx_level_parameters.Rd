@@ -5,7 +5,7 @@
 \alias{poltrx_level_parameters}
 \title{Polya tree level parameter}
 \usage{
-poltrx_level_parameters(level, c = 1, rule = "m_squared")
+poltrx_level_parameters(level, c = 1, rule = "m_squared") 
 }
 \arguments{
 \item{level}{Level index \code{m}, an integer \code{>= 1}.}

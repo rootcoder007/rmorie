@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_diagnostics}
 \alias{morie_weights_diagnostics}
-\title{Comprehensive weight diagnostics.}
+\title{Comprehensive weight diagnostics}
 \usage{
 morie_weights_diagnostics(weights)
 }

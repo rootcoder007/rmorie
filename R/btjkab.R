@@ -9,8 +9,8 @@
 #' The resamples already drawn contain, for free, resamples of every
 #' leave-one-out data set: the replicates whose index set never mentions
 #' observation i are exactly a bootstrap sample of x with i removed.  So
-#' theta_bar_(-i) = mean{t*_b : i not in the b-th index set} and
-#' infl_i = theta_bar_(-i) - mean{t*_b}, with no refitting.  A large
+#' theta_bar_(-i) = mean\{t*_b : i not in the b-th index set\} and
+#' infl_i = theta_bar_(-i) - mean\{t*_b\}, with no refitting.  A large
 #' |infl_i| says observation i moves the whole bootstrap distribution.
 #'
 #' The counting matters: an observation appearing in every resample has no

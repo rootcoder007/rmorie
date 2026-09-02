@@ -14,10 +14,9 @@ morie_morans_i_test(x, W, randomisation = TRUE, alternative = "greater")
 
 \item{W}{numeric spatial weights matrix}
 
-\item{randomisation}{use the randomisation null; \code{FALSE} gives the
-normality null}
+\item{randomisation}{Argument \code{randomisation}; see Usage.}
 
-\item{alternative}{"greater", "less" or "two.sided"}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 \code{morie_morans_i} a number; \code{morie_morans_i_test} a list with
@@ -27,7 +26,7 @@ normality null}
 \code{morie_morans_i} is the statistic
 \verb{I = (n/S0) * (z' W z) / (z'z)} with \code{z = x - mean(x)}.
 \code{morie_morans_i_test} mirrors \code{spdep::moran.test}: under the null
-\code{E[I] = -1/(n-1)} and the variance takes the randomisation form
+\verb{E\[I\] = -1/(n-1)} and the variance takes the randomisation form
 (conditioning on the observed values, treating only their
 arrangement as random) or the normality form.
 }

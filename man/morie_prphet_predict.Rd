@@ -5,7 +5,8 @@
 \alias{morie_prphet_predict}
 \title{morie_prphet_predict}
 \usage{
-morie_prphet_predict(fit, t.new, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0))
+morie_prphet_predict(fit, t.new, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 
+    0)) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$beta}, \code{$changepoints}, \code{$columns} from it.}

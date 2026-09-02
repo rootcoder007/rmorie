@@ -5,7 +5,7 @@
 \alias{morie_sechsh_inclusion_proof}
 \title{Merkle audit path for one leaf}
 \usage{
-morie_sechsh_inclusion_proof(leaves, index)
+morie_sechsh_inclusion_proof(leaves, index) 
 }
 \arguments{
 \item{leaves}{List of raw-byte leaves.}

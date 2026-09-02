@@ -5,7 +5,7 @@
 \alias{WidrowHoff}
 \title{Eq. (3.203): w(n+1) = w(n) + 2 mu e(n) r(n).  The factor of two is in}
 \usage{
-WidrowHoff(w, e, rvec, mu)
+WidrowHoff(w, e, rvec, mu) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

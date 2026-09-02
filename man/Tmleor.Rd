@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlmro.R
 \name{Tmleor}
 \alias{Tmleor}
-\title{Targeted marginal odds ratio, with inference on the log scale.}
+\title{Targeted marginal odds ratio, with inference on the log scale}
 \usage{
 Tmleor(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 }
@@ -18,6 +18,8 @@ Tmleor(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 \item{gbound}{Propensity truncation level.}
 
 \item{level}{Confidence level.}
+
+
 }
 \value{
 List with \code{estimate}, \code{log_or}, \code{se_log},

@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_detect_extreme}
 \alias{morie_weights_detect_extreme}
-\title{Detect extreme weights at +/- k * IQR or by absolute percentile.}
+\title{Detect extreme weights at +/- k * IQR or by absolute percentile}
 \usage{
 morie_weights_detect_extreme(weights, k = 3)
 }
@@ -15,7 +15,7 @@ morie_weights_detect_extreme(weights, k = 3)
 A named list with elements \code{n_extreme}, \code{threshold_lower}, \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values}, \code{pct_extreme}.
 }
 \description{
-Detect extreme weights at +/- k * IQR or by absolute percentile.
+Detect extreme weights at +/- k * IQR or by absolute percentile
 }
 \examples{
 set.seed(1)

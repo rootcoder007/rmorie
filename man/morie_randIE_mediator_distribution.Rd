@@ -5,7 +5,7 @@
 \alias{morie_randIE_mediator_distribution}
 \title{morie_randIE_mediator_distribution}
 \usage{
-morie_randIE_mediator_distribution(A, M, C = NULL, laplace = 0)
+morie_randIE_mediator_distribution(A, M, C = NULL, laplace = 0) 
 }
 \arguments{
 \item{A}{Passed to \code{.labels}.}

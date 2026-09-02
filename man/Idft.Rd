@@ -5,7 +5,7 @@
 \alias{Idft}
 \title{Eq (3.81): the 1/N and the PLUS sign are what distinguish it from the}
 \usage{
-Idft(X)
+Idft(X) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

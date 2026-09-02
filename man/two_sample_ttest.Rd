@@ -12,6 +12,7 @@ two_sample_ttest(x, y, equal_var = TRUE, confidence = 0.95)
 \item{equal_var}{If FALSE, use Welch's correction.}
 
 \item{confidence}{Confidence level.}
+
 }
 \value{
 An object of class \code{"morie_test_result"}.

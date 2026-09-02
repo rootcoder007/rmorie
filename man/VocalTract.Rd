@@ -5,7 +5,8 @@
 \alias{VocalTract}
 \title{VocalTract}
 \usage{
-VocalTract(y, fs, pitch_period = NULL, cutoff = NULL, pitch_range = c(0.002, 0.02))
+VocalTract(y, fs, pitch_period = NULL, cutoff = NULL, pitch_range = c(0.002, 
+    0.02)) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

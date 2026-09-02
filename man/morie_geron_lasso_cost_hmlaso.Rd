@@ -14,6 +14,7 @@ morie_geron_lasso_cost_hmlaso(X, y, theta, alpha, skip_bias = FALSE)
 \item{alpha}{L1 strength.}
 
 \item{skip_bias}{Exclude theta[1].}
+
 }
 \value{
 List with cost, mse, penalty, gradient, n_zero, estimate, n, method.

@@ -5,7 +5,7 @@
 \alias{probabilisticlsa}
 \title{Compact aliases per ledger/NAMING.md}
 \usage{
-probabilisticlsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
+probabilisticlsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0) 
 }
 \arguments{
 \item{n_dw}{Passed to \code{morie_plsa}.}

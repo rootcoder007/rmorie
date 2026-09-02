@@ -5,7 +5,8 @@
 \alias{morie_funkM}
 \title{morie_funkM}
 \usage{
-morie_funkM(ratings, n_users, n_items, factors = 8, epochs = 60, lr = 0.005, reg = 0.02, seed = 0, incremental = FALSE, epochs_per_factor = 20)
+morie_funkM(ratings, n_users, n_items, factors = 8, epochs = 60, lr = 0.005, 
+    reg = 0.02, seed = 0, incremental = FALSE, epochs_per_factor = 20) 
 }
 \arguments{
 \item{ratings}{Passed to \code{.funkM_as_ratings}.}

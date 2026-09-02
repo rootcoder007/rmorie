@@ -5,7 +5,7 @@
 \alias{morie_burkov_binary_cross_entropy}
 \title{Binary cross-entropy for one example (Burkov Eq 1.9)}
 \usage{
-morie_burkov_binary_cross_entropy(y_hat, y)
+morie_burkov_binary_cross_entropy(y_hat, y) 
 }
 \arguments{
 \item{y_hat}{Predicted probabilities in \\[0, 1\\].}

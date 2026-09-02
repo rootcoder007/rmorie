@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{ARSAU_KINDS}
 \alias{ARSAU_KINDS}
-\title{Known ARSAU dataset kinds.}
+\title{Known ARSAU dataset kinds}
 \usage{
 ARSAU_KINDS()
 }
@@ -10,7 +10,7 @@ ARSAU_KINDS()
 A character vector.
 }
 \description{
-Known ARSAU dataset kinds.
+Known ARSAU dataset kinds
 }
 \examples{
 ARSAU_KINDS

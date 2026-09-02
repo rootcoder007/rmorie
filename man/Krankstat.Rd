@@ -5,10 +5,14 @@
 \alias{Krankstat}
 \title{General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363}
 \usage{
-Krankstat(samples, scores = NULL)
+Krankstat(samples, scores = NULL) 
 }
 \description{
 General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{scores}{Argument \code{scores}; see Usage.}
 }
 \value{
 A list with \code{q}, \code{statistic}, \code{df}, \code{p_value}, \code{abar}, \code{score_sums}, \code{k}, \code{n}.

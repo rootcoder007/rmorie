@@ -13,7 +13,8 @@
 
 #' Wrap to [-pi, pi)
 #'
-#' @param theta Angle in radians.
+#' @param x See Usage.
+#' @param y See Usage.
 #' @return Angle in [-pi, pi).
 #' @export
 .tqang_fmod <- function(x, y) x - y * trunc(x / y)

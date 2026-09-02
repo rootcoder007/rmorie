@@ -5,7 +5,7 @@
 \alias{morie_blinkg_bin_filter}
 \title{One marker per genomic bin, the most significant in the bin}
 \usage{
-morie_blinkg_bin_filter(order, positions, bin_size)
+morie_blinkg_bin_filter(order, positions, bin_size) 
 }
 \arguments{
 \item{order}{Marker indices in p-value order.}

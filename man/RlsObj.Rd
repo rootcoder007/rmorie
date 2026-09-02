@@ -5,7 +5,7 @@
 \alias{RlsObj}
 \title{Eq. (3.206): xi = sum lambda^(n-i) e^2(i).  lambda < 1 discounts old}
 \usage{
-RlsObj(errors, lam)
+RlsObj(errors, lam) 
 }
 \arguments{
 \item{errors}{Coerced to numeric by the body, with \code{as.numeric}.}

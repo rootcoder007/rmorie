@@ -5,7 +5,7 @@
 \alias{HrvRatio}
 \title{LF/HF from the AR model PSD.  Often called a sympathovagal balance;}
 \usage{
-HrvRatio(rr, order = 16, fs = 4)
+HrvRatio(rr, order = 16, fs = 4) 
 }
 \arguments{
 \item{rr}{Passed to \code{HrvAr}.}

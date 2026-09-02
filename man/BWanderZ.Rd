@@ -5,7 +5,7 @@
 \alias{BWanderZ}
 \title{Eq (3.133): the same filter in positive powers of z.  The book keeps}
 \usage{
-BWanderZ(z, T = 1, pole = 0.995)
+BWanderZ(z, T = 1, pole = 0.995) 
 }
 \arguments{
 \item{z}{Coerced to complex by the body, with \code{as.complex}.}

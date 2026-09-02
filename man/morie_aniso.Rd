@@ -4,7 +4,7 @@
 \alias{morie_aniso}
 \alias{morie_anisotropy_test}
 \title{Anisotropy detection via Levene comparison of directional pair-difference
-distributions.}
+distributions}
 \usage{
 morie_aniso(x, coords, n_dirs = 4, tol_deg = 22.5)
 

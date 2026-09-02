@@ -5,7 +5,7 @@
 \alias{Cepstrum}
 \title{Real cepstrum: c(n) = IDFT(log|DFT(x)|).  Keeps only the magnitude,}
 \usage{
-Cepstrum(x)
+Cepstrum(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

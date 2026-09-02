@@ -5,7 +5,8 @@
 \alias{CadAcou}
 \title{CadAcou: coronary artery disease detection from acoustic signals}
 \usage{
-CadAcou(coronary_sound, fs, order = 8, hf_band = c(300, 900), ref_band = c(50, 300))
+CadAcou(coronary_sound, fs, order = 8, hf_band = c(300, 900), ref_band = c(50, 
+    300)) 
 }
 \arguments{
 \item{coronary_sound}{Coerced to numeric by the body, with \code{as.numeric}.}

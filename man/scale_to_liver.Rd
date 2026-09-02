@@ -5,7 +5,8 @@
 \alias{scale_to_liver}
 \title{scale_to_liver}
 \usage{
-scale_to_liver(clint_in_vitro, fu_incubation, system = "hepatocytes", species = "human", pbsf = NULL, liver_weight = NULL)
+scale_to_liver(clint_in_vitro, fu_incubation, system = "hepatocytes", species = "human", 
+    pbsf = NULL, liver_weight = NULL) 
 }
 \arguments{
 \item{clint_in_vitro}{Coerced to numeric by the body, with \code{as.numeric}.}

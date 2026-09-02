@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Linear Thompson sampling for contextual bandits.
+#' Linear Thompson sampling for contextual bandits
 #'
 #' Formula: B = I_d + sum b b'; muhat = B^-1 f; mutilde ~ N(muhat, v^2 B^-1); a = argmax_i b_i' mutilde
 #'
@@ -11,6 +11,13 @@
 #' @param horizon Time horizon T; the number of plays so far if omitted.
 #' @param z Standard normal draw used for the posterior sample.
 
+#' @param contexts See Usage.
+#' @param played See Usage.
+#' @param rewards See Usage.
+#' @param R See Usage.
+#' @param delta See Usage.
+#' @param horizon See Usage.
+#' @param z See Usage.
 #' @return List with ``arm``, ``scores``, ``mu_hat``, ``mu_tilde``, ``v``, ``d``.
 #' @references Agrawal and Goyal (2013), Thompson Sampling for Contextual Bandits with Linear Payoffs, ICML/arXiv:1209.3352. Algorithm 1 and the definition v = R sqrt(9 d ln(T/delta)). Verified against the paper.
 #' @export

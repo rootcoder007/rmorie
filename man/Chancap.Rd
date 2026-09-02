@@ -2,14 +2,14 @@
 % Please edit documentation in R/chnntp.R
 \name{Chancap}
 \alias{Chancap}
-\title{Channel capacity by the Blahut-Arimoto algorithm.}
+\title{Channel capacity by the Blahut-Arimoto algorithm}
 \usage{
 Chancap(P, iters = 200)
 }
 \arguments{
-\item{P}{Channel matrix; row x is the output distribution given input x.}
+\item{P}{See Usage.}
 
-\item{iters}{Fixed number of alternations.}
+\item{iters}{See Usage.}
 }
 \value{
 List with \code{capacity_bits}, \code{capacity_nats}, \code{input_dist}, \code{trace} (nats per iteration), \code{iterations}.

@@ -5,7 +5,7 @@
 \alias{EchoCep}
 \title{Complex cepstrum of a wavelet with an echo, eq (4.80)}
 \usage{
-EchoCep(h_hat, a, n_0, n = NULL, n_terms = NULL)
+EchoCep(h_hat, a, n_0, n = NULL, n_terms = NULL) 
 }
 \arguments{
 \item{h_hat}{Coerced to numeric by the body, with \code{as.numeric}.}

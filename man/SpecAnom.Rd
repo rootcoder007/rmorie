@@ -5,7 +5,7 @@
 \alias{SpecAnom}
 \title{Spectral residual saliency (Hou & Zhang 2007).  NOT in Schabenberger}
 \usage{
-SpecAnom(x, q = 3L)
+SpecAnom(x, q = 3L) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}

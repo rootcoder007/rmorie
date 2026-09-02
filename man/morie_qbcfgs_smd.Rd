@@ -5,7 +5,7 @@
 \alias{morie_qbcfgs_smd}
 \title{Standardised mean difference of one covariate between arms}
 \usage{
-morie_qbcfgs_smd(x, d, w = NULL)
+morie_qbcfgs_smd(x, d, w = NULL) 
 }
 \arguments{
 \item{x}{One covariate.}

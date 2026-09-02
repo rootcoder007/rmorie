@@ -5,7 +5,7 @@
 \alias{DNotchSmth}
 \title{Eq (4.23) (Lehner and Rangayyan): s(n) = sum_k p^2(n-k+1) (M - k + 1)}
 \usage{
-DNotchSmth(p, mwin = 16)
+DNotchSmth(p, mwin = 16) 
 }
 \arguments{
 \item{p}{A vector; its length is taken and its elements indexed.}

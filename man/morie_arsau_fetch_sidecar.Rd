@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_fetch_sidecar}
 \alias{morie_arsau_fetch_sidecar}
-\title{Fetch the CKAN sidecar JSON for a registry entry.}
+\title{Fetch the CKAN sidecar JSON for a registry entry}
 \usage{
 morie_arsau_fetch_sidecar(kind, year, limit = 5000L, timeout_sec = 30L)
 }

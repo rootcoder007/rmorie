@@ -53,7 +53,7 @@ model by allowing fully heterogeneous treatment effects:
 }
 \section{CRAN \code{Suggests}}{
 
-Runs on base R alone — no suggested packages required.
+Runs on base R alone -- no suggested packages required.
 If any are unavailable, the function raises an informative error.
 }
 

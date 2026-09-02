@@ -5,7 +5,8 @@
 \alias{morie_tmlcic_tmle_hierarchical}
 \title{morie_tmlcic_tmle_hierarchical}
 \usage{
-morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster, arm = "both", weights = NULL, known_g = NULL, trim = 0.01, ridge = 1e-08, level = 0.95)
+morie_tmlcic_tmle_hierarchical(y, A, E, W, cluster, arm = "both", weights = NULL, known_g = NULL, 
+    trim = 0.01, ridge = 1e-08, level = 0.95) 
 }
 \arguments{
 \item{y}{Passed to \code{.s03vec}.}

@@ -5,7 +5,7 @@
 \alias{edgrn_moderate_dispersion}
 \title{edgrn_moderate_dispersion}
 \usage{
-edgrn_moderate_dispersion(gene_dispersions, common = NULL, prior_df = 10, df_residual = 1)
+edgrn_moderate_dispersion(gene_dispersions, common = NULL, prior_df = 10, df_residual = 1) 
 }
 \arguments{
 \item{gene_dispersions}{Passed to \code{.edgrn_vec}.}

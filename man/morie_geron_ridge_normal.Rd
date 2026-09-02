@@ -12,6 +12,7 @@ morie_geron_ridge_normal(X, y, alpha, intercept_index = 0)
 \item{alpha}{Non-negative penalty.}
 
 \item{intercept_index}{0-based unpenalised index, or NULL.}
+
 }
 \value{
 List with \code{theta}, \code{residuals}, \code{rss}, \code{effective_df},

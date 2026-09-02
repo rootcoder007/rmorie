@@ -200,7 +200,7 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param op One of \code{"-"}, \code{"*"}, \code{"\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\%"}, \code{"+"}.
+#' @param op One of \code{"-"}, \code{"*"}, \code{"\%\%"}, \code{"+"}.
 #' @param vals A vector; indexed elementwise.
 #' @return Nothing; this branch always raises.
 #' @export

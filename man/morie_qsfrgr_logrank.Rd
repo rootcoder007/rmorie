@@ -5,7 +5,7 @@
 \alias{morie_qsfrgr_logrank}
 \title{The log-rank statistic between two groups of row indices}
 \usage{
-morie_qsfrgr_logrank(time, event, left, right)
+morie_qsfrgr_logrank(time, event, left, right) 
 }
 \arguments{
 \item{time}{Observed times.}

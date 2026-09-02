@@ -26,6 +26,9 @@ columns for predicted risk, realised-outcome count, area
 population, and protected attribute.}
 
 \item{notes}{Free-text provenance or caveats, surfaced to the user.}
+
+
+
 }
 \value{
 A list of class \code{morie_city_profile}.

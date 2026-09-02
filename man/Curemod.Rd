@@ -14,6 +14,8 @@ Curemod(time, event, X = NULL, Z = NULL, max_iter = 200, tol = 1e-12)
 \item{Z}{incidence covariates.}
 
 \item{max_iter, tol}{EM controls.}
+
+
 }
 \value{
 list: estimate, cure_fraction, pi, gamma, S0, times, weights, n,

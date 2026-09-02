@@ -10,6 +10,8 @@ morie_geron_ch4_cross_entropy_gradient_vector(X, Y, Theta, k)
 \item{X, Y, Theta}{Design, labels and (n, K) parameters.}
 
 \item{k}{0-based class.}
+
+
 }
 \value{
 List with \code{gradient}, \code{class}, \code{gradient_norm}, \code{mean_error}.

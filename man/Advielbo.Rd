@@ -2,7 +2,7 @@
 % Please edit documentation in R/advinf.R
 \name{Advielbo}
 \alias{Advielbo}
-\title{Mean-field ADVI evidence lower bound.}
+\title{Mean-field ADVI evidence lower bound}
 \usage{
 Advielbo(mu, omega, eta, logjoint)
 }

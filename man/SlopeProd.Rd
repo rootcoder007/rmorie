@@ -8,6 +8,7 @@ SlopeProd(x, y)
 }
 \arguments{
 \item{x, y}{equal-length data vectors, n >= 2.}
+
 }
 \value{
 list(r, slope_product_AC).

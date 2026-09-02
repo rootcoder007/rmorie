@@ -5,7 +5,7 @@
 \alias{morie_goldsc_hbond}
 \title{Sum the tabulated hydrogen bond energies of the close pairs}
 \usage{
-morie_goldsc_hbond(bonds, max_distance = 2.5)
+morie_goldsc_hbond(bonds, max_distance = 2.5) 
 }
 \arguments{
 \item{bonds}{A list of list(distance, energy).}

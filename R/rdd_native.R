@@ -48,7 +48,7 @@
   xo <- xs[ord]; yo <- ys[ord]
   # Vectorized +/-J window: distance and value matrices built from
   # shifted copies (Inf pads the ends), then the J nearest picked by
-  # a running arg-min sweep — no per-observation allocation.
+  # a running arg-min sweep -- no per-observation allocation.
   offs <- c(-(J:1), 1:J)
   Dm <- matrix(Inf, n_use, length(offs))
   Ym <- matrix(0, n_use, length(offs))

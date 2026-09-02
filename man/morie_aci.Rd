@@ -19,7 +19,7 @@ maxalpha)
 }
 \description{
 The book's own online update, quoted from p. 519: err_t = 1 if Y_t
-is outside Chat(alpha_t) else 0; alpha_{t+1} = alpha_t + gamma
+is outside Chat(alpha_t) else 0; alpha_\{t+1\} = alpha_t + gamma
 (alpha - err_t), with alpha_1 = alpha. inside is the sequence of
 coverage outcomes, so this is a pure recursion over caller data.
 The method is Gibbs, I. and Candes, E. (2021), Adaptive Conformal

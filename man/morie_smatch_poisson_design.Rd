@@ -5,7 +5,7 @@
 \alias{morie_smatch_poisson_design}
 \title{morie_smatch_poisson_design}
 \usage{
-morie_smatch_poisson_design(cases, risk_periods, age_breaks = numeric(0))
+morie_smatch_poisson_design(cases, risk_periods, age_breaks = numeric(0)) 
 }
 \arguments{
 \item{cases}{See Usage.}

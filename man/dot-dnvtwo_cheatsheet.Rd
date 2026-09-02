@@ -2,7 +2,7 @@
 % Please edit documentation in R/dnvtwo_native.R
 \name{.dnvtwo_cheatsheet}
 \alias{.dnvtwo_cheatsheet}
-\title{One-paragraph summary of the DINOv2 recipe.}
+\title{One-paragraph summary of the DINOv2 recipe}
 \usage{
 .dnvtwo_cheatsheet()
 }
@@ -10,5 +10,5 @@
 Character string.
 }
 \description{
-One-paragraph summary of the DINOv2 recipe.
+One-paragraph summary of the DINOv2 recipe
 }

@@ -5,7 +5,9 @@
 \alias{mafft_alignment}
 \title{mafft_alignment}
 \usage{
-mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NULL, freqs = NULL, s_a = 0.06, s_op = 2.4, matrix = "normalized", window = 30L, n_peaks = 20L, threshold = 0.7, max_len = 150L, max_iterate = 16L)
+mafft_alignment(sequences, method = "FFT-NS-2", seq_type = NULL, raw_matrix = NULL, 
+    freqs = NULL, s_a = 0.06, s_op = 2.4, matrix = "normalized", window = 30L, 
+    n_peaks = 20L, threshold = 0.7, max_len = 150L, max_iterate = 16L) 
 }
 \arguments{
 \item{sequences}{Passed to \code{.mafft_clean}.}

@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_tlonsl_online_super_learner}
 \alias{morie_tlonsl_online_super_learner}
+\alias{morie_tlonsl}
 \title{morie_tlonsl_online_super_learner}
 \usage{
-morie_tlonsl_online_super_learner(y, library, loss = "squared", burn_in = 5, lags = 1, eta = 1)
+morie_tlonsl_online_super_learner(y, library, loss = "squared", burn_in = 5, lags = 1, eta = 1) 
+
+morie_tlonsl(y, library, loss = "squared", burn_in = 5, lags = 1, eta = 1) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

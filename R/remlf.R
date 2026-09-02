@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Restricted (residual) maximum likelihood log-likelihood of a mixed model.
+#' Restricted (residual) maximum likelihood log-likelihood of a mixed model
 #'
 #' Formula: l_R(theta; y) = -0.5 log|X'V^-1 X| - 0.5 log|V| - 0.5 (y - X betatilde)' V^-1 (y - X betatilde)
 #'

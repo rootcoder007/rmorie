@@ -5,7 +5,7 @@
 \alias{gated_update}
 \title{gated_update}
 \usage{
-gated_update(s, v, U, V, phi)
+gated_update(s, v, U, V, phi) 
 }
 \arguments{
 \item{s}{Passed to \code{.painn_vec}.}

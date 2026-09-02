@@ -11,6 +11,7 @@ morie_percentile_modified_rank(x, y, q = 0.25)
 \item{x, y}{Numeric vectors.}
 
 \item{q}{Tail fraction in (0, 0.5).  Default 0.25.}
+
 }
 \value{
 Named list: statistic, p_value, z, n, m, q.

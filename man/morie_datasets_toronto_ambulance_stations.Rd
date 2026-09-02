@@ -22,6 +22,6 @@ for crime + EMS dispatch analyses.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_toronto_ambulance_stations(offline = TRUE)
-head(df\[, c("EMS_NAME", "EMS_ADDRESS")\])
+head(df[, c("EMS_NAME", "EMS_ADDRESS")])
 \dontshow{\}) # examplesIf}
 }

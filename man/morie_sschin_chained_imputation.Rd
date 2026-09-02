@@ -5,7 +5,7 @@
 \alias{morie_sschin_chained_imputation}
 \title{morie_sschin_chained_imputation}
 \usage{
-morie_sschin_chained_imputation(time, event, X, mi_iter = 5L, cycles = 10L, ties = "breslow")
+morie_sschin_chained_imputation(time, event, X, mi_iter = 5L, cycles = 10L, ties = "breslow") 
 }
 \arguments{
 \item{time}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{Roc}
 \title{Section 10.9.1.  The area the book calls A_z, by the trapezoidal}
 \usage{
-Roc(scores, labels, positive = 1)
+Roc(scores, labels, positive = 1) 
 }
 \arguments{
 \item{scores}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -27,6 +27,14 @@ morie_survey_categorical(
 \item{var_ni, var_n, cov_ni_n, pi_hat, n_hat}{Delta-method pieces.}
 
 \item{var_pi, t_crit}{Kott-Carr pieces.}
+
+
+
+
+
+
+
+
 }
 \value{
 List with n_hat_i, jackknife_var, var_pi_delta, kott_carr.

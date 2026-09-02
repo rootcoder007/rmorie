@@ -33,7 +33,7 @@ maximum is optimistic; the complementary group's ATT is reported
 beside it.
 }
 \details{
-Formula: d* = argmax_{j,c} tau_hat({i : W_ij > c}).
+Formula: d* = argmax_\{j,c\} tau_hat(\{i : W_ij > c\}).
 }
 \examples{
 set.seed(1)

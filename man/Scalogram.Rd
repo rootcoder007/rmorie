@@ -5,7 +5,7 @@
 \alias{Scalogram}
 \title{Scalogram (|CWT|^2), eq (8.107) and Figure 8.29}
 \usage{
-Scalogram(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5)
+Scalogram(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) 
 }
 \arguments{
 \item{x}{Passed to \code{Cwt}.}

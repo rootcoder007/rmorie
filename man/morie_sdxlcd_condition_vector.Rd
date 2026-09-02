@@ -5,7 +5,8 @@
 \alias{morie_sdxlcd_condition_vector}
 \title{morie_sdxlcd_condition_vector}
 \usage{
-morie_sdxlcd_condition_vector(h_original, w_original, c_top = 0, c_left = 0, timestep_embedding = NULL, dim = 8)
+morie_sdxlcd_condition_vector(h_original, w_original, c_top = 0, c_left = 0, timestep_embedding = NULL, 
+    dim = 8) 
 }
 \arguments{
 \item{h_original}{Passed to \code{morie_sdxlcd_size_conditioning}.}

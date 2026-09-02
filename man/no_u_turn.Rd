@@ -5,7 +5,7 @@
 \alias{no_u_turn}
 \title{The NUTS stopping rule: has the trajectory begun to double back?}
 \usage{
-no_u_turn(theta_minus, theta_plus, r_minus, r_plus)
+no_u_turn(theta_minus, theta_plus, r_minus, r_plus) 
 }
 \arguments{
 \item{theta_minus}{Numeric; combined arithmetically in the body.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghgpm.R
 \name{morie_ghosal_gp_matern}
 \alias{morie_ghosal_gp_matern}
-\title{GP posterior mean with Matern kernel.}
+\title{GP posterior mean with Matern kernel}
 \usage{
 morie_ghosal_gp_matern(
   x,
@@ -33,7 +33,7 @@ morie_ghosal_gp_matern(
 Named list with estimate, se, mu, sd, length_scale, nu, noise, n, method.
 }
 \description{
-GP posterior mean with Matern kernel.
+GP posterior mean with Matern kernel
 }
 \examples{
 morie_ghosal_gp_matern(x = rnorm(50), y = rnorm(50))

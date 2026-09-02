@@ -10,6 +10,7 @@ morie_geron_selu(z, lam = 1.05070098735548, alpha = 1.67326324235438)
 \item{z}{Numeric vector.}
 
 \item{lam, alpha}{Positive scale constants.}
+
 }
 \value{
 List with \code{a}, \code{grad}, \code{mean}, \code{var} (population), \code{lam},

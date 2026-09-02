@@ -5,7 +5,8 @@
 \alias{morie_adida}
 \title{ADIDA forecast: aggregate, forecast, disaggregate}
 \usage{
-morie_adida(y, m, horizon = 1L, method = "tsb", alpha = 0.1, beta = 0.05, overlapping = FALSE, profile = NULL, lead_time = NULL)
+morie_adida(y, m, horizon = 1L, method = "tsb", alpha = 0.1, beta = 0.05, 
+    overlapping = FALSE, profile = NULL, lead_time = NULL) 
 }
 \arguments{
 \item{y}{Numeric demand series.}

@@ -25,6 +25,8 @@ morie_geron_grid_search_cv(
 higher is better.}
 
 \item{shuffle, seed}{Passed to the fold generator.}
+
+
 }
 \value{
 List with \code{best_params}, \code{best_score}, \code{best_index},

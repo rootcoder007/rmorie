@@ -5,7 +5,7 @@
 \alias{morie_genmol_sample}
 \title{Reparameterised draws: z = mu + temperature * sigma * epsilon}
 \usage{
-morie_genmol_sample(mu, logvar, n = 1L, temperature = 1, seed = 0)
+morie_genmol_sample(mu, logvar, n = 1L, temperature = 1, seed = 0) 
 }
 \arguments{
 \item{mu,logvar}{The posterior parameters.}

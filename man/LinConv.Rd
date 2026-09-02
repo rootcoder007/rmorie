@@ -5,7 +5,7 @@
 \alias{LinConv}
 \title{Eqs (3.36)-(3.37): y(n) = sum_k x(k) h(n-k) = sum_k h(k) x(n-k),}
 \usage{
-LinConv(x, h, causal = TRUE)
+LinConv(x, h, causal = TRUE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,8 @@
 \alias{Fhn}
 \title{Fhn: FitzHugh-Nagumo two-variable excitable-medium neuron model}
 \usage{
-Fhn(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8, eps = 0.08, v0 = -1.2, w0 = -0.6, stim_start = 0, stim_stop = NULL)
+Fhn(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8, eps = 0.08, 
+    v0 = -1.2, w0 = -0.6, stim_start = 0, stim_stop = NULL) 
 }
 \arguments{
 \item{duration}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}

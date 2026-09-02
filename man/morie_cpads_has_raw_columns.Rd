@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_has_raw_columns}
 \alias{morie_cpads_has_raw_columns}
-\title{Detect whether a data frame looks like raw CPADS PUMF data.}
+\title{Detect whether a data frame looks like raw CPADS PUMF data}
 \usage{
 morie_cpads_has_raw_columns(frame)
 }

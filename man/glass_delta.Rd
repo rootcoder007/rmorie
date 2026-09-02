@@ -2,7 +2,7 @@
 % Please edit documentation in R/effect_sizes.R
 \name{glass_delta}
 \alias{glass_delta}
-\title{Glass's delta — control-group SD denominator}
+\title{Glass's delta -- control-group SD denominator}
 \usage{
 glass_delta(x, y, control = "y", confidence = 0.95)
 }
@@ -12,12 +12,13 @@ glass_delta(x, y, control = "y", confidence = 0.95)
 \item{control}{Which group is the control: \code{"x"} or \code{"y"} (default).}
 
 \item{confidence}{Confidence level for CI. Default 0.95.}
+
 }
 \value{
 A \code{morie_effect_size}.
 }
 \description{
-Glass's delta — control-group SD denominator
+Glass's delta -- control-group SD denominator
 }
 \examples{
 set.seed(83)

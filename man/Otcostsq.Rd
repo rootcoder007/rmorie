@@ -8,6 +8,7 @@ Otcostsq(X, Y)
 }
 \arguments{
 \item{X, Y}{Point sets, \verb{n x d} and \verb{m x d}.}
+
 }
 \value{
 Named list with \code{estimate}, \code{nrow}, \code{ncol}, \code{total}, \code{method}.

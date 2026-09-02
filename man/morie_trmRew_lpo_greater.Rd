@@ -5,7 +5,7 @@
 \alias{morie_trmRew_lpo_greater}
 \title{The lexicographic path order, s >_lpo t}
 \usage{
-morie_trmRew_lpo_greater(s, t, precedence)
+morie_trmRew_lpo_greater(s, t, precedence) 
 }
 \arguments{
 \item{s}{A vector; indexed elementwise.}

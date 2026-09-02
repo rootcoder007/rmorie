@@ -2,7 +2,7 @@
 % Please edit documentation in R/agdcon.R
 \name{Agdproj}
 \alias{Agdproj}
-\title{Accelerated projected gradient on a box.}
+\title{Accelerated projected gradient on a box}
 \usage{
 Agdproj(X, y, lower = NULL, upper = NULL, steps = 100, lipschitz = NULL)
 }
@@ -16,6 +16,7 @@ Agdproj(X, y, lower = NULL, upper = NULL, steps = 100, lipschitz = NULL)
 \item{steps}{Fixed iteration count.}
 
 \item{lipschitz}{L; NULL uses a fixed 50-step power iteration on X'X.}
+
 }
 \value{
 List with beta, objective, lipschitz, steps, nactive, n, p.
@@ -23,8 +24,8 @@ List with beta, objective, lipschitz, steps, nactive, n, p.
 \description{
 FISTA with the proximal map of a box indicator, i.e. the component-wise
 clamp: x_k = clamp(y_k - grad f(y_k)/L),
-t_{k+1} = (1 + sqrt(1 + 4 t_k^2))/2,
-y_{k+1} = x_k + ((t_k-1)/t_{k+1})(x_k - x_{k-1}).
+t_\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+y_\{k+1\} = x_k + ((t_k-1)/t_\{k+1\})(x_k - x_\{k-1\}).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

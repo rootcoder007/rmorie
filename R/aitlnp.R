@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Additive logistic-normal density at a composition.
+#' Additive logistic-normal density at a composition
 #'
 #' The Jacobian factor (prod_i x_i)^-1 runs over ALL D parts including
 #' the reference one; without it the density does not integrate to one

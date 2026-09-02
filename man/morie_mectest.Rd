@@ -8,6 +8,7 @@ morie_mectest(dag1, dag2)
 }
 \arguments{
 \item{dag1, dag2}{directed edge matrices}
+
 }
 \value{
 list(equivalent, sameskeleton, samecolliders, nskeleton,

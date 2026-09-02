@@ -23,6 +23,7 @@ morie_geron_videobert(
 \item{mask_prob}{Masking rate when mask_positions is NULL.}
 
 \item{seed}{LCG seed.}
+
 }
 \value{
 list with loss, token_losses, attention, hidden, masked, predictions,

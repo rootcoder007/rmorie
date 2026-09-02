@@ -16,6 +16,7 @@ Sparsegp(X, y, M = 3, X_test = NULL, gamma = 1, sigma2 = 0.01)
 \item{gamma}{RBF width.}
 
 \item{sigma2}{noise variance.}
+
 }
 \value{
 list: estimate, pred_fitc, pred_dtc, var_fitc, var_dtc,

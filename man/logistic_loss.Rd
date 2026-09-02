@@ -5,7 +5,7 @@
 \alias{logistic_loss}
 \title{logistic_loss}
 \usage{
-logistic_loss(y, phi_val)
+logistic_loss(y, phi_val) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,10 +5,11 @@
 \alias{morie_geron_double_center}
 \title{Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)}
 \usage{
-morie_geron_double_center(D)
+morie_geron_double_center(D) 
 }
 \arguments{
-\item{D}{Distance matrix. @return Gram matrix B.}
+
+\item{D}{Argument \code{D}; see Usage.}
 }
 \description{
 Double-centre a squared-distance matrix (Geron Ch 7, morie.fn hmmds helper)

@@ -34,6 +34,9 @@ the Sec. 3.4 defaults.}
 
 \item{outer}{Robustness iterations; 0 gives the non-robust fit.
 Both routes the paper defines are available.}
+
+
+
 }
 \value{
 A list with \code{seasonal}, \code{trend},

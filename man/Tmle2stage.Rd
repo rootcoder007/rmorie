@@ -14,6 +14,8 @@ Tmle2stage(y, D1, D2, X1 = NULL, X2 = NULL, alpha = 0.05)
 \item{X1, X2}{stage-1 and stage-2 covariates.}
 
 \item{alpha}{interval level.}
+
+
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, ey11, ey10, ey01, ey00, n,
@@ -26,7 +28,7 @@ International Journal of Biostatistics 8(1), art. 9.  The estimator is
 the sequential-regression one: E[Y(d1, d2)] = E[E[E[Y | A2 = d2, L2, A1
 = d1, L1] | A1 = d1, L1]] is estimated from the inside out, with a
 targeting fluctuation at each stage using the cumulative clever
-covariate H_t = 1{A_1 = d_1, ..., A_t = d_t} / prod_{s<=t} g_s.  The
+covariate H_t = 1\{A_1 = d_1, ..., A_t = d_t\} / prod_\{s<=t\} g_s.  The
 article is open access but was not retrievable here; both are quoted in
 their standard published form.  The effect returned is E[Y(1,1)] -
 E[Y(0,0)]; all four regime means are reported.

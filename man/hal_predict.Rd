@@ -5,7 +5,7 @@
 \alias{hal_predict}
 \title{hal_predict}
 \usage{
-hal_predict(model, X)
+hal_predict(model, X) 
 }
 \arguments{
 \item{model}{A list; the body reads \code{$beta}, \code{$columns}, \code{$intercept} from it.}

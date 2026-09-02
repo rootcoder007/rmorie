@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_a01_with_csi_context}
 \alias{morie_otis_analyze_a01_with_csi_context}
-\title{OTIS a01 causal pipeline + Toronto Crime Severity Index context.}
+\title{OTIS a01 causal pipeline + Toronto Crime Severity Index context}
 \usage{
 morie_otis_analyze_a01_with_csi_context(
   data = NULL,

@@ -5,7 +5,7 @@
 \alias{morie_genemt_cheatsheet}
 \title{morie_genemt_cheatsheet}
 \usage{
-morie_genemt_cheatsheet()
+morie_genemt_cheatsheet() 
 }
 \description{
 A step of the genemt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

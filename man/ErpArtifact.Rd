@@ -5,7 +5,7 @@
 \alias{ErpArtifact}
 \title{Section 3.5: averaging M aligned epochs raises the SNR by sqrt(M).  A}
 \usage{
-ErpArtifact(epochs, reject = NULL)
+ErpArtifact(epochs, reject = NULL) 
 }
 \arguments{
 \item{epochs}{Iterated over elementwise, with \code{lapply}.}

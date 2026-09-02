@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_profile}
 \alias{morie_dataset_profile}
-\title{Fully profile a data frame without prior schema knowledge.}
+\title{Fully profile a data frame without prior schema knowledge}
 \usage{
 morie_dataset_profile(
   df,

@@ -5,7 +5,7 @@
 \alias{cubic_interpolate}
 \title{cubic_interpolate}
 \usage{
-cubic_interpolate(ta, fa, da, tb, fb, db)
+cubic_interpolate(ta, fa, da, tb, fb, db) 
 }
 \arguments{
 \item{ta}{Numeric; passed to \code{max}.}

@@ -279,6 +279,10 @@ morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
 #' POT m-observation return level (Coles 2001 eq. 4.12-4.14)
 #' @param u threshold; sigma,xi GPD parameters; zeta_u = P(X > u);
 #'   m observations
+#' @param sigma See Usage.
+#' @param xi See Usage.
+#' @param zeta_u See Usage.
+#' @param m See Usage.
 #' @export
 morie_evt_return_level_pot <- function(u, sigma, xi, zeta_u, m) {
   stopifnot(m * zeta_u > 1)
@@ -290,6 +294,7 @@ morie_evt_return_level_pot <- function(u, sigma, xi, zeta_u, m) {
 
 #' Empirical chi(u) tail dependence (Coles 2001 sec. 8.4 p.164)
 #' @param x,y equal-length series; u quantile level
+#' @param u See Usage.
 #' @export
 morie_evt_chi <- function(x, y, u = 0.95) {
   n <- length(x)
@@ -322,6 +327,7 @@ morie_evt_chibar <- function(x, y, u_grid = seq(0.5, 0.95,
 #' Profile-likelihood CI for the shape xi (Coles 2001 sec. 2.6.5)
 #' @param x data (block maxima or excesses); model "gev" or "gpd"
 #' @param alpha 1 - confidence level
+#' @param model See Usage.
 #' @export
 morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
   crit <- stats::qchisq(1 - alpha, 1) / 2
@@ -378,6 +384,8 @@ morie_evt_xi_ci_profile <- function(x, alpha = 0.05, model = "gev") {
 #' (Coles 2001 sec. 9.1.3 vague-normal-prior recipe)
 #' @param x block maxima; n_draws retained draws; seed RNG seed
 #' @param prior_sd prior standard deviations for (mu, log sigma, xi)
+#' @param n_draws See Usage.
+#' @param seed See Usage.
 #' @export
 morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
                                 prior_sd = c(100, 10, 1)) {
@@ -421,6 +429,7 @@ morie_evt_bayes_gev <- function(x, n_draws = 2000, seed = 42,
 #' Nonstationary GEV with a linear trend in location
 #' (Coles 2001 sec. 6.2)
 #' @param x series of maxima; t optional time index
+#' @param t See Usage.
 #' @export
 morie_evt_gev_trend <- function(x, t = seq_along(x) - 1) {
   n <- length(x)

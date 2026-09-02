@@ -25,6 +25,6 @@ open.toronto.ca dataset page.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 d <- morie_datasets_toronto_open_crime_adjacent_layers(offline = TRUE)
-head(d\[, c("package_name", "title")\])
+head(d[, c("package_name", "title")])
 \dontshow{\}) # examplesIf}
 }

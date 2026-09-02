@@ -3,7 +3,7 @@
 \name{sarre}
 \alias{sarre}
 \alias{morie_spatial_ar_error}
-\title{Spatial autoregressive error model (SAR error, ML).}
+\title{Spatial autoregressive error model (SAR error, ML)}
 \usage{
 sarre(x, y, w)
 

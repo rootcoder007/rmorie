@@ -5,10 +5,15 @@
 \alias{Lrem}
 \title{Log-ratio EM below a detection limit (Palarea-Albaladejo & Martin-Fernandez 2008)}
 \usage{
-Lrem(X, dl, n_iter = 20)
+Lrem(X, dl, n_iter = 20) 
 }
 \description{
 Log-ratio EM below a detection limit (Palarea-Albaladejo & Martin-Fernandez 2008)
+}
+\arguments{
+\item{X}{Argument \code{X}; see Usage.}
+\item{dl}{Argument \code{dl}; see Usage.}
+\item{n_iter}{Argument \code{n_iter}; see Usage.}
 }
 \value{
 The value of \code{morie_unclr_lr_impute}.

@@ -5,7 +5,9 @@
 \alias{morie_blinkg}
 \title{Iterate the scan and the pseudo-QTN selection to a fixed point}
 \usage{
-morie_blinkg(y, geno, positions = NULL, covars = NULL, selection = "ld", criterion = "bic", ld_threshold = .BLINKG_LD_THRESHOLD, alpha = .BLINKG_ALPHA, bin_size = NULL, max_iter = 10L)
+morie_blinkg(y, geno, positions = NULL, covars = NULL, selection = "ld", criterion = "bic", 
+    ld_threshold = .BLINKG_LD_THRESHOLD, alpha = .BLINKG_ALPHA, bin_size = NULL, 
+    max_iter = 10L) 
 }
 \arguments{
 \item{y}{The phenotype.}

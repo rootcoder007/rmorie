@@ -5,7 +5,7 @@
 \alias{morie_glides_vdw}
 \title{Lennard-Jones energy over a list of contacts}
 \usage{
-morie_glides_vdw(pairs, m = 6, n = 12)
+morie_glides_vdw(pairs, m = 6, n = 12) 
 }
 \arguments{
 \item{pairs}{A list of list(distance, r0, eps).}

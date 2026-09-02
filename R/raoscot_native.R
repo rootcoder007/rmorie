@@ -5,12 +5,12 @@
 
 #' Rao-Scott first-order corrected goodness-of-fit chi-square
 #'
-#' X^2 / lambda_bar treated as chi-square_{k-1}, with lambda_bar the
+#' X^2 / lambda_bar treated as chi-square_\{k-1\}, with lambda_bar the
 #' mean generalized design effect: trace-based when the covariance V
 #' of the estimated proportions is supplied, or the paper's cell-deff
 #' estimate sum_i (1 - p0_i) d_i/(k - 1).  If V = c P0 (uniform
 #' clustering), every eigenvalue is c and X^2/c is exactly
-#' chi-square_{k-1}.
+#' chi-square_\{k-1\}.
 #'
 #' @param p_hat Estimated cell proportions (sum to 1).
 #' @param p0 Hypothesized positive proportions (sum to 1).

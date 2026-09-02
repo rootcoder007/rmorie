@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmstn.R
 \name{Suffstat}
 \alias{Suffstat}
-\title{Sufficient statistics for the Bernoulli and Normal models.}
+\title{Sufficient statistics for the Bernoulli and Normal models}
 \usage{
 Suffstat(x, family = "normal")
 }

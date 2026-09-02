@@ -5,10 +5,11 @@
 \alias{morie_gvar_sigmoid}
 \title{Logistic sigmoid on a reverse-mode tape node}
 \usage{
-morie_gvar_sigmoid(x)
+morie_gvar_sigmoid(x) 
 }
 \arguments{
-\item{x}{A tape node. @return A tape node.}
+
+\item{x}{Argument \code{x}; see Usage.}
 }
 \description{
 Logistic sigmoid on a reverse-mode tape node

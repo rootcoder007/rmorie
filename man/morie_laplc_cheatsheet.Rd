@@ -3,9 +3,9 @@
 % the formals.
 \name{morie_laplc_cheatsheet}
 \alias{morie_laplc_cheatsheet}
-\title{Cheatsheet.}
+\title{Cheatsheet}
 \usage{
-morie_laplc_cheatsheet()
+morie_laplc_cheatsheet() 
 }
 \description{
 Cheatsheet.

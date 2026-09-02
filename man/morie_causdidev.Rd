@@ -21,6 +21,7 @@ column per covariate), long format.}
 by cohort size; or supply your own per-observation weights.  All
 three routes are available, since the paper's Theorem 2 imputes
 identically whatever the estimand.}
+
 }
 \value{
 The list returned by \code{\link{morie_boryis}}.

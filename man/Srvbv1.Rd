@@ -44,6 +44,7 @@ morie_fauzi_thm4_1_surv_bias_var(
 \item{mu2}{\verb{int y^2 K(y) dy}.}
 
 \item{vw}{\verb{int V(y)W(y)dy}; defaults to the Gaussian \code{1/sqrt(pi)}.}
+
 }
 \value{
 Named list with \code{biassurv}, \code{varsurv}, \code{biascum}, \code{varcum}, \code{vw}, \code{h}, \code{n}, \code{method}.

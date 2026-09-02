@@ -3,9 +3,12 @@
 % the formals.
 \name{patch_grid}
 \alias{patch_grid}
-\title{Patchify a latent and count tokens.}
+\alias{morie_dits16}
+\title{Patchify a latent and count tokens}
 \usage{
-patch_grid(latent_size, patch)
+patch_grid(latent_size, patch) 
+
+morie_dits16(latent_size, patch) 
 }
 \arguments{
 \item{latent_size}{integer, side length I of the latent.}

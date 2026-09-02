@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_tps_layers}
 \alias{morie_datasets_tps_layers}
-\title{List the TPS open-data layers included with morie.}
+\title{List the TPS open-data layers included with morie}
 \usage{
 morie_datasets_tps_layers()
 }
@@ -10,7 +10,7 @@ morie_datasets_tps_layers()
 A \code{data.frame} with columns \code{name} and \code{url}.
 }
 \description{
-List the TPS open-data layers included with morie.
+List the TPS open-data layers included with morie
 }
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}

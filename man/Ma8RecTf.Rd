@@ -5,7 +5,7 @@
 \alias{Ma8RecTf}
 \title{Eq (3.121): a pole at z = 1 cancelled by one of the numerator\'s}
 \usage{
-Ma8RecTf(z)
+Ma8RecTf(z) 
 }
 \arguments{
 \item{z}{Coerced to complex by the body, with \code{as.complex}.}

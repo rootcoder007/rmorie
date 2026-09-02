@@ -5,7 +5,7 @@
 \alias{HrvAr}
 \title{The RR series is unevenly sampled by construction, so it is}
 \usage{
-HrvAr(rr, order = 16, fs = 4, nfreq = 512)
+HrvAr(rr, order = 16, fs = 4, nfreq = 512) 
 }
 \arguments{
 \item{rr}{Coerced to numeric by the body, with \code{as.numeric}.}

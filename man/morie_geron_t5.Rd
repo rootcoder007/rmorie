@@ -19,6 +19,9 @@ morie_geron_t5(
 \item{tgt}{Optional target sequence for text-to-text framing.}
 
 \item{noise_density, mean_span, seed, prefix}{As in the Python original.}
+
+
+
 }
 \value{
 list with encoder_input, decoder_target, spans, restored, lossless,

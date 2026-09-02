@@ -5,7 +5,7 @@
 \alias{cumulative_incidence}
 \title{cumulative_incidence}
 \usage{
-cumulative_incidence(hazards, times)
+cumulative_incidence(hazards, times) 
 }
 \arguments{
 \item{hazards}{A vector; indexed elementwise.}

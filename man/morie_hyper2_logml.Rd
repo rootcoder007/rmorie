@@ -5,7 +5,7 @@
 \alias{morie_hyper2_logml}
 \title{log N(y; 0, K + s2n I), by Cholesky}
 \usage{
-morie_hyper2_logml(y, X, log_ls, log_sf, log_sn, kind)
+morie_hyper2_logml(y, X, log_ls, log_sf, log_sn, kind) 
 }
 \arguments{
 \item{y}{Targets.}

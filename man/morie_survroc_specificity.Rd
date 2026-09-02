@@ -5,7 +5,7 @@
 \alias{morie_survroc_specificity}
 \title{morie_survroc_specificity}
 \usage{
-morie_survroc_specificity(times, events, marker, threshold, t, route = "km")
+morie_survroc_specificity(times, events, marker, threshold, t, route = "km") 
 }
 \arguments{
 \item{times}{Passed to \code{.survroc_pair}.}

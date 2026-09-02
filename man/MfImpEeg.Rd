@@ -5,7 +5,7 @@
 \alias{MfImpEeg}
 \title{Eq (4.56), identical to eq (4.49).  Section 4.6.2 adds that because h}
 \usage{
-MfImpEeg(x, t0 = NULL, gain = 1, dt = 1)
+MfImpEeg(x, t0 = NULL, gain = 1, dt = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{MfImpulse}.}

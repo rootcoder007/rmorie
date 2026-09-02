@@ -5,10 +5,15 @@
 \alias{morie_lmm_v}
 \title{morie_lmm_v}
 \usage{
-morie_lmm_v(Z, D, R = NULL)
+morie_lmm_v(Z, D, R = NULL) 
 }
 \description{
 morie_lmm_v
+}
+\arguments{
+\item{Z}{Argument \code{Z}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{R}{Argument \code{R}; see Usage.}
 }
 \value{
 A numeric value.

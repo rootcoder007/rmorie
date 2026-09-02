@@ -12,6 +12,8 @@ morie_geron_batch_gradient_descent(X, y, theta, eta, n_iter)
 \item{eta}{Positive learning rate.}
 
 \item{n_iter}{Steps, >= 1.}
+
+
 }
 \value{
 List with \code{theta}, \code{theta_path}, \code{loss_history}, \code{gradient},

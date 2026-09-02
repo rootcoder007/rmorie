@@ -44,6 +44,9 @@ morie_lstm_cell(
 seed from \code{\link{morie_det_rng}("lstmc", deterministic_seed)} is
 installed before sampling so Py<->R streams agree.  Overrides
 \code{seed} when set.}
+
+
+
 }
 \value{
 Named list \code{(h, c, estimate, i, f, g, o, method)}.

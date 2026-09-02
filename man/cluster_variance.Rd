@@ -5,7 +5,7 @@
 \alias{cluster_variance}
 \title{cluster_variance}
 \usage{
-cluster_variance(ic, cluster)
+cluster_variance(ic, cluster) 
 }
 \arguments{
 \item{ic}{Coerced to numeric by the body, with \code{as.numeric}.}

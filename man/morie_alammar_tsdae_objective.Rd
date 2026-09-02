@@ -5,7 +5,7 @@
 \alias{morie_alammar_tsdae_objective}
 \title{morie_alammar_tsdae_objective}
 \usage{
-morie_alammar_tsdae_objective(tokens, delete_ratio = 0.6, seed = 1, reconstruction_logprob = NULL)
+morie_alammar_tsdae_objective(tokens, delete_ratio = 0.6, seed = 1, reconstruction_logprob = NULL) 
 }
 \arguments{
 \item{tokens}{Token vector.}

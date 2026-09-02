@@ -5,7 +5,7 @@
 \alias{FDiff}
 \title{Eq (3.123).  The 1/T is not cosmetic: the book is explicit that it}
 \usage{
-FDiff(x, T = 1, n = NULL)
+FDiff(x, T = 1, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -235,7 +235,7 @@ morie_otis_astcmb <- function(df,
   }
   a <- .otis_binarise(df[[alert_cols[1]]])
   b <- .otis_binarise(df[[alert_cols[2]]])
-  cc <- .otis_binarise(df[[alert_cols[3]]])  # not 'c' — shadows base c()
+  cc <- .otis_binarise(df[[alert_cols[3]]])  # not 'c' -- shadows base c()
   flags <- data.frame(
     id = df[[id_col]], yr = df[[year_col]],
     a1 = as.integer(a == 1 & b == 0 & cc == 0),

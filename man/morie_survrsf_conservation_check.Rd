@@ -5,7 +5,7 @@
 \alias{morie_survrsf_conservation_check}
 \title{Lemma 1: the hazard summed over observed times is the deaths}
 \usage{
-morie_survrsf_conservation_check(times, events)
+morie_survrsf_conservation_check(times, events) 
 }
 \arguments{
 \item{times}{Passed to \code{morie_survrsf_nelson_aalen}.}

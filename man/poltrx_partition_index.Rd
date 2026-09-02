@@ -5,7 +5,7 @@
 \alias{poltrx_partition_index}
 \title{Partition index of a point}
 \usage{
-poltrx_partition_index(x, level, lo = 0, hi = 1)
+poltrx_partition_index(x, level, lo = 0, hi = 1) 
 }
 \arguments{
 \item{x}{Point at which to evaluate.}

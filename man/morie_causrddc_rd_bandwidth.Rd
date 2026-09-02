@@ -5,7 +5,7 @@
 \alias{morie_causrddc_rd_bandwidth}
 \title{morie_causrddc_rd_bandwidth}
 \usage{
-morie_causrddc_rd_bandwidth(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL)
+morie_causrddc_rd_bandwidth(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

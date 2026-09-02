@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Penalized multinomial log-likelihood (ridge).
+#' Penalized multinomial log-likelihood (ridge)
 #'
 #' Formula: l_p(beta; y) = l(beta; y) - lambda sum_c beta_c'beta_c (eq. 7.7),
 #' the quadratic-regularized multinomial likelihood, which removes the need for

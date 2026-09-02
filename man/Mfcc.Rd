@@ -5,7 +5,7 @@
 \alias{Mfcc}
 \title{Mfcc}
 \usage{
-Mfcc(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0, fmax = NULL)
+Mfcc(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0, fmax = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

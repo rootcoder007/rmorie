@@ -3,19 +3,8 @@
 \name{.MOR_PS_EPS}
 \alias{.MOR_PS_EPS}
 \title{Estimate propensity scores via logistic regression}
-\usage{
-.MOR_PS_EPS
-}
-\arguments{
-\item{data}{A data frame.}
 
-\item{treatment}{Name of the binary treatment column.}
 
-\item{covariates}{Character vector of covariate names.}
-
-\item{trim}{Quantile pair used to winsorize extreme scores
-(default 0.01, 0.99).}
-}
 \value{
 Numeric vector of propensity scores (same length as
 \code{nrow(data)}).

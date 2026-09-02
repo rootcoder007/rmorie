@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c8_3.R
 \name{Testcond}
 \alias{Testcond}
-\title{Check the three conditions that deliver a posterior contraction rate.}
+\title{Check the three conditions that deliver a posterior contraction rate}
 \usage{
 Testcond(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n, Cconst)
 }

@@ -12,6 +12,7 @@ morie_partial_cor_test(x, y, z, method = "pearson")
 \item{z}{Numeric vector, matrix, or data frame of controls.}
 
 \item{method}{Correlation method.}
+
 }
 \value{
 A one-row data frame: \code{estimate}, \code{p.value},

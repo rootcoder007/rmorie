@@ -5,7 +5,7 @@
 \alias{morie_survroc_auc_at}
 \title{morie_survroc_auc_at}
 \usage{
-morie_survroc_auc_at(times, events, marker, t, route = "km")
+morie_survroc_auc_at(times, events, marker, t, route = "km") 
 }
 \arguments{
 \item{times}{Passed to \code{morie_survroc_roc_at}.}

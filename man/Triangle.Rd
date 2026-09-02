@@ -5,7 +5,7 @@
 \alias{Triangle}
 \title{Eq (4.45): |a+b| <= |a|+|b|, with equality when the vectors align}
 \usage{
-Triangle(a, b)
+Triangle(a, b) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

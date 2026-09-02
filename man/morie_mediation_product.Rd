@@ -12,6 +12,8 @@ morie_mediation_product(a, b, se_a = NULL, se_b = NULL, alpha = 0.05)
 \item{se_a, se_b}{Optional standard errors, enabling the Sobel interval.}
 
 \item{alpha}{Two-sided level.}
+
+
 }
 \value{
 A list with \code{indirect}, \code{sobel_se}, \code{sobel_ci}.

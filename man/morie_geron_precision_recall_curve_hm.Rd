@@ -5,7 +5,7 @@
 \alias{morie_geron_precision_recall_curve_hm}
 \title{Precision-recall curve: best-F1 point and recall at 90\% precision (Geron Ch 3, hmprc)}
 \usage{
-morie_geron_precision_recall_curve_hm(y_true, scores, pos_label = 1)
+morie_geron_precision_recall_curve_hm(y_true, scores, pos_label = 1) 
 }
 \arguments{
 \item{y_true}{Binary labels.}

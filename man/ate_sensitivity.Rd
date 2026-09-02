@@ -5,7 +5,7 @@
 \alias{ate_sensitivity}
 \title{L1 sensitivity of a TMLE of the ATE}
 \usage{
-ate_sensitivity(n, g_min, y_range = 1)
+ate_sensitivity(n, g_min, y_range = 1) 
 }
 \arguments{
 \item{n}{Sample size.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Value and optimal strategies of a zero-sum matrix game.
+#' Value and optimal strategies of a zero-sum matrix game
 #'
 #' A pure saddle point is detected and returned exactly. Otherwise
 #' fictitious play runs for a FIXED number of rounds and a rigorous

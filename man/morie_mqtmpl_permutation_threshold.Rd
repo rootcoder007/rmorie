@@ -5,7 +5,8 @@
 \alias{morie_mqtmpl_permutation_threshold}
 \title{Permutation threshold}
 \usage{
-morie_mqtmpl_permutation_threshold(y, markers, positions, n_perm = 100, alpha = 0.05, method = "em", step = 0.05, seed = 0)
+morie_mqtmpl_permutation_threshold(y, markers, positions, n_perm = 100, alpha = 0.05, method = "em", 
+    step = 0.05, seed = 0) 
 }
 \arguments{
 \item{y,markers,positions,method,step}{As in \code{scanone}.}

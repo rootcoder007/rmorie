@@ -5,7 +5,7 @@
 \alias{OddPart}
 \title{Eq (3.93): x_o(n) = 0.5 [x(n) - x(-n)]; forced to 0 at the origin}
 \usage{
-OddPart(x, n = NULL)
+OddPart(x, n = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_evenodd}.}

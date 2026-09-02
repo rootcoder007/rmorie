@@ -11,6 +11,7 @@ morie_max_flow_min_cut(capacity, source = 1L, sink = NULL)
 arc capacity from i to j.}
 
 \item{source, sink}{Node indices, numbered from 1.}
+
 }
 \value{
 A list with \code{flow}, \code{cut_capacity}, \code{min_cut_source_side},

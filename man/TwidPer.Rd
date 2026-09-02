@@ -5,7 +5,7 @@
 \alias{TwidPer}
 \title{Eq (3.89): indices reduce modulo N -- why the same roots of unity are}
 \usage{
-TwidPer(npoints, n, k)
+TwidPer(npoints, n, k) 
 }
 \arguments{
 \item{npoints}{Coerced to integer by the body, with \code{as.integer}.}

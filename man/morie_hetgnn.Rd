@@ -5,7 +5,8 @@
 \alias{morie_hetgnn}
 \title{morie_hetgnn}
 \usage{
-morie_hetgnn(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, slope = 0.2)
+morie_hetgnn(H, edges, types, metapaths, a_vec, W_node, W_sem, b_sem, q_sem, 
+    slope = 0.2) 
 }
 \arguments{
 \item{H}{Passed to \code{han_forward}.}

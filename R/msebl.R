@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sum-of-squared-error loss for continuous outcomes.
+#' Sum-of-squared-error loss for continuous outcomes
 #'
 #' Formula: L(w) = 0.5 * sum_i sum_j (yhat_ij - y_ij)^2
 #'

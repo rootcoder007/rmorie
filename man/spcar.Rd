@@ -2,7 +2,7 @@
 % Please edit documentation in R/spcar.R
 \name{spcar}
 \alias{spcar}
-\title{Conditional autoregressive model: the conditional specification.}
+\title{Conditional autoregressive model: the conditional specification}
 \usage{
 spcar(z, w, covariates = NULL, parameterization = "weighted")
 }

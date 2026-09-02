@@ -5,7 +5,7 @@
 \alias{morie_randIE_decompose}
 \title{morie_randIE_decompose}
 \usage{
-morie_randIE_decompose(result)
+morie_randIE_decompose(result) 
 }
 \arguments{
 \item{result}{A list; the body reads \code{$direct}, \code{$indirect}, \code{$total} from it.}

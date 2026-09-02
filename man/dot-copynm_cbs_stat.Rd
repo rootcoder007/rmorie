@@ -2,7 +2,7 @@
 % Please edit documentation in R/copynm_native.R
 \name{.copynm_cbs_stat}
 \alias{.copynm_cbs_stat}
-\title{CBS statistic Z_C = max_{i<j} |Z_{ij}| on v; returns list(z, i, j)}
+\title{CBS statistic Z_C = max_\{i<j\} |Z_\{ij\}| on v; returns list(z, i, j)}
 \usage{
 .copynm_cbs_stat(v)
 }

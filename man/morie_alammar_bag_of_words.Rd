@@ -5,7 +5,7 @@
 \alias{morie_alammar_bag_of_words}
 \title{BoW, c-TF-IDF, BIO tagging, vocabulary overlap (Alammar Ch 1-5)}
 \usage{
-morie_alammar_bag_of_words(tokens, vocab)
+morie_alammar_bag_of_words(tokens, vocab) 
 }
 \arguments{
 \item{tokens,vocab}{Character vectors.}

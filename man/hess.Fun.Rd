@@ -5,7 +5,7 @@
 \alias{hess.Fun}
 \title{hess.Fun}
 \usage{
-hess.Fun(self, x)
+hess.Fun(self, x) 
 }
 \arguments{
 \item{self}{A list; the body reads \code{$.h}, \code{$affine}, \code{$f} from it.}

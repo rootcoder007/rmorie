@@ -2,7 +2,7 @@
 % Please edit documentation in R/phlpr.R
 \name{Ppunit}
 \alias{Ppunit}
-\title{Phillips-Perron unit-root test.}
+\title{Phillips-Perron unit-root test}
 \usage{
 Ppunit(y, lags = NULL, kind = "Z(t_alpha)")
 }

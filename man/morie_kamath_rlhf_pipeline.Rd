@@ -21,6 +21,8 @@ morie_kamath_rlhf_pipeline(
 \item{pi0}{Base policy.}
 
 \item{sft, train_rm, ppo}{Stage functions.}
+
+
 }
 \value{
 List with \code{policy}, \code{policy_sft}, \code{reward_model}, \code{stages}.

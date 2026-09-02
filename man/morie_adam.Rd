@@ -23,6 +23,7 @@ morie_adam(
 \item{eps}{Denominator floor.}
 
 \item{state}{List returned by the previous call, or \code{NULL} to start fresh.}
+
 }
 \value{
 List with \code{update}, \code{state}, \code{m}, \code{v}, \code{t}, \code{step_norm}.

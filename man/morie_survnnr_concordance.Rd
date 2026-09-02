@@ -5,7 +5,7 @@
 \alias{morie_survnnr_concordance}
 \title{morie_survnnr_concordance}
 \usage{
-morie_survnnr_concordance(fit_result, X, times, events)
+morie_survnnr_concordance(fit_result, X, times, events) 
 }
 \arguments{
 \item{fit_result}{Passed to \code{morie_survnnr_risk_score}.}

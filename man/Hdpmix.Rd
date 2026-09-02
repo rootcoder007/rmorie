@@ -14,6 +14,7 @@ Hdpmix(y, groups = NULL, gamma = 1, alpha = 1, truncation = 6)
 \item{gamma, alpha}{top- and group-level concentrations.}
 
 \item{truncation}{number of atoms retained.}
+
 }
 \value{
 list: estimate, beta, pi, counts, shared, group_ids, method.

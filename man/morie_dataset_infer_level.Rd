@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_infer_level}
 \alias{morie_dataset_infer_level}
-\title{Infer the Stevens NOIR measurement level for a single vector.}
+\title{Infer the Stevens NOIR measurement level for a single vector}
 \usage{
 morie_dataset_infer_level(x, name = NULL, ordinal_threshold = 10L)
 }

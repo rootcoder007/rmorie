@@ -30,6 +30,8 @@ numerically on it and the minimum eigenvalue is reported. Construction
 alone is not proof of validity: Sec. 9.3 records that Gneiting (2002)
 found published covariance functions in Cressie and Huang (1999) to be
 invalid.}
+
+
 }
 \value{
 A list with \code{st_covariance}, \code{form}, \code{separable}, \code{spatial_only},

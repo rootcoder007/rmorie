@@ -5,7 +5,9 @@
 \alias{morie_sgflrt_spatial_glmm_fit}
 \title{morie_sgflrt_spatial_glmm_fit}
 \usage{
-morie_sgflrt_spatial_glmm_fit(y, X, coords, family = "poisson", model = "exponential", sigma2 = NULL, phi = NULL, kappa = 1.5, nugget = 0, dispersion = NULL, inner_iter = 50L, outer_cycles = 3L, tol = 1e-10)
+morie_sgflrt_spatial_glmm_fit(y, X, coords, family = "poisson", model = "exponential", sigma2 = NULL, 
+    phi = NULL, kappa = 1.5, nugget = 0, dispersion = NULL, inner_iter = 50L, 
+    outer_cycles = 3L, tol = 1e-10) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

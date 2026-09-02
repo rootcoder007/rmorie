@@ -15,6 +15,7 @@ morie_bound_missing_outcome(y, R, y_min, y_max)
 \item{R}{Response indicator, 1 for observed and 0 for missing.}
 
 \item{y_min, y_max}{A priori lower and upper limits of the support of Y.}
+
 }
 \value{
 list: estimate, lower, upper, width, p_observed, mean_observed, n,
@@ -30,7 +31,7 @@ Identification of Probability Distributions, Springer.
 \details{
 With R = 1 when Y is observed and R = 0 when it is not, the law of total
 expectation splits the target into an identified and an unidentified piece,
-E\link{Y} = E[Y | R = 1] P(R = 1) + E[Y | R = 0] P(R = 0), and only the second
+E[Y] = E[Y | R = 1] P(R = 1) + E[Y | R = 0] P(R = 0), and only the second
 factor of the second term is unknown.  Bounding the unobserved conditional
 mean by the a priori support [y_min, y_max] gives the sharp worst-case
 interval L = E[Y | R = 1] P(R = 1) + y_min P(R = 0) and

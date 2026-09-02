@@ -20,9 +20,9 @@
 #'
 #' Formula: non-Markovian deterministic reverse
 #'
-#' x_{t-1} = sqrt(a_{t-1}) x0_hat + sqrt(1 - a_{t-1} - sigma^2) eps
+#' x_\{t-1\} = sqrt(a_\{t-1\}) x0_hat + sqrt(1 - a_\{t-1\} - sigma^2) eps
 #' + sigma z, with x0_hat = (x_t - sqrt(1 - a_t) eps) / sqrt(a_t) and
-#' sigma = eta sqrt((1 - a_{t-1})/(1 - a_t)) sqrt(1 - a_t/a_{t-1}).  At
+#' sigma = eta sqrt((1 - a_\{t-1\})/(1 - a_t)) sqrt(1 - a_t/a_\{t-1\}).  At
 #' eta = 0 the update is fully deterministic (that is DDIM); at eta = 1
 #' it reproduces the DDPM ancestral step.  The noise z is taken as zero
 #' so the map is a function of its arguments alone.

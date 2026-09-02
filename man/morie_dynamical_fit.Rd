@@ -5,7 +5,8 @@
 \alias{morie_dynamical_fit}
 \title{EM over the rates and the latent variables. E step is the closest}
 \usage{
-morie_dynamical_fit(u, s, alpha0 = NULL, beta0 = 1, gamma0 = 0.5, t_switch0 = NULL, n_iter = 25, grid = 120)
+morie_dynamical_fit(u, s, alpha0 = NULL, beta0 = 1, gamma0 = 0.5, t_switch0 = NULL, 
+    n_iter = 25, grid = 120) 
 }
 \arguments{
 \item{u}{A vector; its length is taken and its elements indexed.}

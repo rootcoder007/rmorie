@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_ckan_search}
 \alias{morie_datasets_ckan_search}
-\title{Search a CKAN open-data portal by free-text query.}
+\title{Search a CKAN open-data portal by free-text query}
 \usage{
 morie_datasets_ckan_search(portal, query, rows = 50L)
 }

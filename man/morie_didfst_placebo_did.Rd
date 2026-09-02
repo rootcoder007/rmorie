@@ -5,7 +5,7 @@
 \alias{morie_didfst_placebo_did}
 \title{Pre-period placebo}
 \usage{
-morie_didfst_placebo_did(Y, D, event_time, split = NULL)
+morie_didfst_placebo_did(Y, D, event_time, split = NULL) 
 }
 \arguments{
 \item{Y}{Numeric panel (n by T).}

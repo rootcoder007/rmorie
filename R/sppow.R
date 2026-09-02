@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Power semivariogram model (unbounded).
+#' Power semivariogram model (unbounded)
 #'
 #' gamma(h) = theta h^lambda, theta >= 0 and 0 <= lambda < 2. Not
 #' second-order stationary: there is no sill. lambda = 1 gives the linear

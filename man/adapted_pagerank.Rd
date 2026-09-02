@@ -5,7 +5,7 @@
 \alias{adapted_pagerank}
 \title{adapted_pagerank}
 \usage{
-adapted_pagerank(adjacency, nodes, p = NULL, d = 0.7, iters = 200, tol = 1e-12)
+adapted_pagerank(adjacency, nodes, p = NULL, d = 0.7, iters = 200, tol = 1e-12) 
 }
 \arguments{
 \item{adjacency}{A vector; indexed elementwise.}

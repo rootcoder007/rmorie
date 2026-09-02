@@ -5,7 +5,7 @@
 \alias{dispersion_trend}
 \title{Fit the dispersion trend (eq. 6)}
 \usage{
-dispersion_trend(mu_bar, disp, max_iter = 10L, tol = 1e-06)
+dispersion_trend(mu_bar, disp, max_iter = 10L, tol = 1e-06) 
 }
 \arguments{
 \item{mu_bar}{Per-gene mean of normalised counts.}

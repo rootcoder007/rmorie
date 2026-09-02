@@ -5,10 +5,14 @@
 \alias{Ksplusdist}
 \title{Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115}
 \usage{
-Ksplusdist(c, n)
+Ksplusdist(c, n) 
 }
 \description{
 Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115
+}
+\arguments{
+\item{c}{Argument \code{c}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{sf}, \code{cdf}, \code{terms}, \code{n}, \code{c}.

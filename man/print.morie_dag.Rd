@@ -5,7 +5,7 @@
 \alias{print.morie_dag}
 \title{Print method for \code{morie_dag} objects}
 \usage{
-print.morie_dag(x, ...)
+\method{print}{morie_dag}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_dag} object.}

@@ -119,7 +119,7 @@
 #' morie_geron_bagging
 #'
 #' (geron_ml_native.R): best single-feature split minimising SSE;
-#' classify rounds each leaf to {0, 1}.
+#' classify rounds each leaf to \{0, 1\}.
 #'
 #' @param Xb A matrix; indexed by row and column.
 #' @param yb A vector; indexed elementwise.

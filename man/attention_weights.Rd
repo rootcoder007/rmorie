@@ -5,7 +5,7 @@
 \alias{attention_weights}
 \title{attention_weights}
 \usage{
-attention_weights(Q, K, n_heads, pad_mask = NULL, causal = FALSE)
+attention_weights(Q, K, n_heads, pad_mask = NULL, causal = FALSE) 
 }
 \arguments{
 \item{Q}{A matrix; indexed by row and column.}

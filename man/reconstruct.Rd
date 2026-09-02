@@ -5,7 +5,7 @@
 \alias{reconstruct}
 \title{reconstruct}
 \usage{
-reconstruct(model)
+reconstruct(model) 
 }
 \arguments{
 \item{model}{A list; the body reads \code{$D}, \code{$S}, \code{$T} from it.}

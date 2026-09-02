@@ -7,6 +7,8 @@
 #' mechanism is Warner randomized response with flip probability
 #' \eqn{1/(1 + e^{\epsilon})}, already shipped as \code{Rrand}.
 #'
+#' @param bit See Usage.
+#' @param epsilon See Usage.
 #' @references Kasiviswanathan, S. P., Lee, H. K., Nissim, K.,
 #'   Raskhodnikova, S., and Smith, A. (2011). What can we learn
 #'   privately? SIAM Journal on Computing 40(3), 793-826.

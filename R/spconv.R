@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Convolution representation of a stationary random field.
+#' Convolution representation of a stationary random field
 #'
 #' Convolving a kernel K with a white-noise field gives a second-order
 #' stationary process whose covariance is the convolution of the kernel

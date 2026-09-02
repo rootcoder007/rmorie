@@ -35,6 +35,7 @@ separately from the response (RE2.2).}
 be generated for their predictors) (RE2.2).}
 
 \item{nofit}{If TRUE, return an unfitted model specification (RE4.1).}
+
 }
 \value{
 A \code{morie_lm} object, or an unfitted \code{morie_lm_spec} when

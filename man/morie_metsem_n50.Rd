@@ -5,7 +5,7 @@
 \alias{morie_metsem_n50}
 \title{The length at which half the assembly is in contigs that long}
 \usage{
-morie_metsem_n50(lengths)
+morie_metsem_n50(lengths) 
 }
 \arguments{
 \item{lengths}{The contig lengths.}

@@ -5,7 +5,7 @@
 \alias{diversity}
 \title{diversity}
 \usage{
-diversity(fps, subset, D = NULL)
+diversity(fps, subset, D = NULL) 
 }
 \arguments{
 \item{fps}{Passed to \code{distance_matrix}.}

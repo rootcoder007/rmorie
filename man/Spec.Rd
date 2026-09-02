@@ -5,7 +5,7 @@
 \alias{Spec}
 \title{Eq (10.101): S- = TN / (subjects without the disease)}
 \usage{
-Spec(tn, fp = NULL)
+Spec(tn, fp = NULL) 
 }
 \arguments{
 \item{tn}{A matrix; passed to \code{as.matrix}.}

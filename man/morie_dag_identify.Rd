@@ -17,7 +17,7 @@ NA), \code{adjustment_set} (character).
 Uses the canonical adjustment set (observed ancestors of exposure
 or outcome, minus descendants of the exposure) and verifies it with
 Bayes-Ball d-separation on the graph with outgoing exposure edges
-removed — if the canonical set fails, no backdoor set exists (van
+removed -- if the canonical set fails, no backdoor set exists (van
 der Zander, Liskiewicz & Textor 2014).
 }
 \examples{

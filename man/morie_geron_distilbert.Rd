@@ -25,6 +25,9 @@ morie_geron_distilbert(
 \item{alpha_ce, alpha_mlm, alpha_cos}{Non-negative loss weights.}
 
 \item{mlm_labels}{0-based labels, required if \code{alpha_mlm > 0}.}
+
+
+
 }
 \value{
 List with \code{loss}, \code{loss_ce}, \code{loss_mlm}, \code{loss_cos},

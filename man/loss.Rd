@@ -5,7 +5,7 @@
 \alias{loss}
 \title{loss}
 \usage{
-loss(y, y_hat, kind = "square")
+loss(y, y_hat, kind = "square") 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

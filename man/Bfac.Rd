@@ -8,6 +8,7 @@ Bfac(log_lik_a, log_lik_b)
 }
 \arguments{
 \item{log_lik_a, log_lik_b}{log marginal likelihoods of the two models.}
+
 }
 \value{
 the list returned by \code{Bayfac}.

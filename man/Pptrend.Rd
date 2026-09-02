@@ -2,7 +2,7 @@
 % Please edit documentation in R/phpprn.R
 \name{Pptrend}
 \alias{Pptrend}
-\title{Phillips-Perron unit-root test with an explicit trend switch.}
+\title{Phillips-Perron unit-root test with an explicit trend switch}
 \usage{
 Pptrend(y, trend = TRUE, lags = NULL, kind = "Z(t_alpha)")
 }

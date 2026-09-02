@@ -10,6 +10,7 @@ FnDist(f, g, t = NULL)
 \item{f, g}{the two curves, sampled at common points.}
 
 \item{t}{the sampling grid; defaults to equally spaced on [0, 1].}
+
 }
 \value{
 list: estimate, l2sq, l1, sup, n, method.

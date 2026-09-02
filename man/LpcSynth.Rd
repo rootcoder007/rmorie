@@ -5,7 +5,7 @@
 \alias{LpcSynth}
 \title{Inverting eq (7.18): y(n) = G e(n) - sum a_k y(n-k).  The minus}
 \usage{
-LpcSynth(a, excitation, gain = 1, initial = NULL)
+LpcSynth(a, excitation, gain = 1, initial = NULL) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

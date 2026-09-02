@@ -5,7 +5,7 @@
 \alias{morie_dssm_click_posterior}
 \title{Clickthrough-trained softmax posterior}
 \usage{
-morie_dssm_click_posterior(query_vector, clicked_vector, unclicked_vectors, gamma = 10)
+morie_dssm_click_posterior(query_vector, clicked_vector, unclicked_vectors, gamma = 10) 
 }
 \arguments{
 \item{query_vector}{numeric. A query embedding.}

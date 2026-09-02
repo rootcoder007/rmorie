@@ -5,7 +5,7 @@
 \alias{morie_geron_reinforcement_learning}
 \title{Reinforcement learning: Monte-Carlo policy evaluation by rollout (Geron Ch 1, hmrl)}
 \usage{
-morie_geron_reinforcement_learning(env, pi, gamma = 0.99, n_episodes = 1, max_steps = 1000, seed = 0)
+morie_geron_reinforcement_learning(env, pi, gamma = 0.99, n_episodes = 1, max_steps = 1000, seed = 0) 
 }
 \arguments{
 \item{env}{List with `reset()` / `step(action)`.}

@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bezout coefficients by the extended Euclidean algorithm.
+#' Bezout coefficients by the extended Euclidean algorithm
 #'
 #' Formula: a x + b y = gcd(a, b)
 #'
 #' @param a First integer.
 #' @param b Second integer.
 
+#' @param a See Usage.
+#' @param b See Usage.
 #' @return List with ``gcd``, ``x``, ``y``, ``check`` (a x + b y), ``a``, ``b``.
 #' @references Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
 #' @export

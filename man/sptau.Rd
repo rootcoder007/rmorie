@@ -3,7 +3,7 @@
 \name{sptau}
 \alias{sptau}
 \alias{morie_spatial_autocorrelation}
-\title{Moran's I spatial autocorrelation (Schabenberger Ch 1).}
+\title{Moran's I spatial autocorrelation (Schabenberger Ch 1)}
 \usage{
 sptau(x, w)
 

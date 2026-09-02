@@ -5,10 +5,14 @@
 \alias{Ksn}
 \title{KS sample size for uniform error c -- Sec. 4.4.3, p. 122}
 \usage{
-Ksn(c, alpha = 0.05)
+Ksn(c, alpha = 0.05) 
 }
 \description{
 KS sample size for uniform error c -- Sec. 4.4.3, p. 122
+}
+\arguments{
+\item{c}{Argument \code{c}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{n}, \code{n_asymp}, \code{k_alpha}, \code{coverage}, \code{c}, \code{alpha}.

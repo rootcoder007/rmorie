@@ -5,7 +5,7 @@
 \alias{Qbinom}
 \title{Qbinom}
 \usage{
-Qbinom(p, size, prob)
+Qbinom(p, size, prob) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

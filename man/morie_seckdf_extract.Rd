@@ -5,7 +5,7 @@
 \alias{morie_seckdf_extract}
 \title{HKDF Extract}
 \usage{
-morie_seckdf_extract(ikm, salt = NULL)
+morie_seckdf_extract(ikm, salt = NULL) 
 }
 \arguments{
 \item{ikm}{Raw input keying material.}

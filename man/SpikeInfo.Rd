@@ -5,7 +5,7 @@
 \alias{SpikeInfo}
 \title{I = H(R) - H(R|S), bits.  H_noise is the STIMULUS-WEIGHTED average of}
 \usage{
-SpikeInfo(spike, stim, nbins = 2L)
+SpikeInfo(spike, stim, nbins = 2L) 
 }
 \arguments{
 \item{spike}{Passed to \code{.morie_spx_chkv}.}

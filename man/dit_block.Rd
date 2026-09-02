@@ -3,9 +3,10 @@
 % the formals.
 \name{dit_block}
 \alias{dit_block}
-\title{One DiT block: adaLN-zero, attention, adaLN-zero, MLP.}
+\title{One DiT block: adaLN-zero, attention, adaLN-zero, MLP}
 \usage{
-dit_block(hidden, cond, attn_fn, mlp_fn, W_scale, W_shift, W_alpha, W_scale2, W_shift2, W_alpha2)
+dit_block(hidden, cond, attn_fn, mlp_fn, W_scale, W_shift, W_alpha, W_scale2, 
+    W_shift2, W_alpha2) 
 }
 \arguments{
 \item{hidden}{   numeric hidden vector.}

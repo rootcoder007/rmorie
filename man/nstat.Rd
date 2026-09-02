@@ -3,7 +3,7 @@
 \name{nstat}
 \alias{nstat}
 \alias{morie_nonstationary_covariance}
-\title{Non-stationary covariance estimation (moving-window kernel).}
+\title{Non-stationary covariance estimation (moving-window kernel)}
 \usage{
 nstat(x, coords, bandwidth = NULL)
 

@@ -5,7 +5,7 @@
 \alias{arrange_segments}
 \title{arrange_segments}
 \usage{
-arrange_segments(segments)
+arrange_segments(segments) 
 }
 \arguments{
 \item{segments}{A vector; indexed elementwise.}

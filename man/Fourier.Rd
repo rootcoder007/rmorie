@@ -5,7 +5,7 @@
 \alias{Fourier}
 \title{Eqs (3.75)-(3.76); the name Section 3.4.4 uses}
 \usage{
-Fourier(x, t = NULL, omega = NULL, f = NULL, dt = NULL)
+Fourier(x, t = NULL, omega = NULL, f = NULL, dt = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{Ctft}.}

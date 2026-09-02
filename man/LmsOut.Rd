@@ -5,7 +5,7 @@
 \alias{LmsOut}
 \title{Eq. (3.195): the adaptive filter runs on the REFERENCE, not on the}
 \usage{
-LmsOut(w, r)
+LmsOut(w, r) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

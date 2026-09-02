@@ -5,7 +5,7 @@
 \alias{morie_qbcfgs_cheatsheet}
 \title{One-line summary of the qbcfgs module}
 \usage{
-morie_qbcfgs_cheatsheet()
+morie_qbcfgs_cheatsheet() 
 }
 \description{
 One-line summary of the qbcfgs module

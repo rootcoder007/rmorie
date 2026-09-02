@@ -5,7 +5,7 @@
 \alias{is_order_sensitive}
 \title{is_order_sensitive}
 \usage{
-is_order_sensitive(method)
+is_order_sensitive(method) 
 }
 \arguments{
 \item{method}{Coerced to character by the body, with \code{as.character}.}

@@ -18,7 +18,7 @@
 #' the plain linear Kalman filter.
 #'
 #' @param y Observation sequence (scalars).
-#' @param f State transition x_t = f(x_{t-1}).
+#' @param f State transition x_t = f(x_\{t-1\}).
 #' @param h Observation map y_t = h(x_t); returns a scalar.
 #' @param F d x d Jacobian df/dx at the state.
 #' @param H Length-d Jacobian dh/dx at the state.

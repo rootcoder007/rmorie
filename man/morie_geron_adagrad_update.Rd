@@ -12,6 +12,8 @@ morie_geron_adagrad_update(theta, grad, s, eta, eps = 1e-10)
 \item{eta}{Positive learning rate.}
 
 \item{eps}{Non-negative floor.}
+
+
 }
 \value{
 List with \code{theta_new}, \code{s_new}, \code{effective_lr}, \code{step}, \code{step_norm}.

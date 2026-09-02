@@ -26,8 +26,8 @@ last smoothed state always equals the last filtered state, which is
 the identity that anchors the recursion.
 }
 \details{
-Formula: C = P_t F' P_{t+1|t}^{-1};
-x_{t|n} = x_{t|t} + C (x_{t+1|n} - x_{t+1|t}).
+Formula: C = P_t F' P_\{t+1|t\}^\{-1\};
+x_\{t|n\} = x_\{t|t\} + C (x_\{t+1|n\} - x_\{t+1|t\}).
 }
 \examples{
 set.seed(1)

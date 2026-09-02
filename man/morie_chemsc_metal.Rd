@@ -5,7 +5,7 @@
 \alias{morie_chemsc_metal}
 \title{One acceptor-metal contact's contribution, at most one}
 \usage{
-morie_chemsc_metal(r, smoothing = "gaussian", par = NULL)
+morie_chemsc_metal(r, smoothing = "gaussian", par = NULL) 
 }
 \arguments{
 \item{r}{The acceptor-metal distance.}

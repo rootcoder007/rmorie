@@ -28,6 +28,9 @@ morie_ghosal_dpmixture_density(
 derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghdpm", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
+
+
+
 }
 \value{
 named list with \code{estimate}, \code{grid}, \code{density}, \code{k_post}, \code{n}

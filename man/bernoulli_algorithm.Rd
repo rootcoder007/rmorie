@@ -5,7 +5,7 @@
 \alias{bernoulli_algorithm}
 \title{Bernoulli (N = 2) alternative}
 \usage{
-bernoulli_algorithm(reward, gamma, next_probs, v_min, v_max, done = FALSE)
+bernoulli_algorithm(reward, gamma, next_probs, v_min, v_max, done = FALSE) 
 }
 \arguments{
 \item{reward}{Sampled reward r.}

@@ -3,7 +3,7 @@
 \name{arsau_datasets}
 \alias{arsau_datasets}
 \title{ARSAU CKAN sidecar helpers + tidy registry view (R-side companion
-to \code{morie.arsau_datasets}).}
+to \code{morie.arsau_datasets})}
 \description{
 The main R-side loaders + registry list-of-lists already live in
 \code{R/arsau.R} (\code{morie_arsau_load_main_records()},

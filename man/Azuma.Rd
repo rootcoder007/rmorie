@@ -2,14 +2,14 @@
 % Please edit documentation in R/mrgdrv.R
 \name{Azuma}
 \alias{Azuma}
-\title{Azuma-Hoeffding concentration bound for martingales.}
+\title{Azuma-Hoeffding concentration bound for martingales}
 \usage{
 Azuma(c, t)
 }
 \arguments{
-\item{c}{Bounded-difference constants c_i, one per step.}
+\item{c}{See Usage.}
 
-\item{t}{Deviation whose probability is bounded.}
+\item{t}{See Usage.}
 }
 \value{
 List with \code{bound} (one-sided), \code{bound_two_sided}, \code{sum_c2}, \code{t}, \code{n}.

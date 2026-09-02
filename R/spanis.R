@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geometric anisotropy: correcting direction dependence by a linear map.
+#' Geometric anisotropy: correcting direction dependence by a linear map
 #'
 #' If Z1(s) is stationary with isotropic covariance C1, then
 #' Z(s) = Z1(Bs) has C(h) = C1(||Bh||), which is geometrically

@@ -5,7 +5,7 @@
 \alias{MfRatio}
 \title{Eq (4.41).  Dividing by the constant E_x is what turns eq (4.39) into}
 \usage{
-MfRatio(X, H, freqs, t0, noise_power)
+MfRatio(X, H, freqs, t0, noise_power) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

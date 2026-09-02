@@ -2,7 +2,7 @@
 % Please edit documentation in R/lassj.R
 \name{Lassoobj}
 \alias{Lassoobj}
-\title{Penalized residual sum of squares of the lasso, with its soft-threshold step.}
+\title{Penalized residual sum of squares of the lasso, with its soft-threshold step}
 \usage{
 Lassoobj(X, y, beta, lam, add_intercept = TRUE)
 }

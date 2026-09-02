@@ -5,7 +5,7 @@
 \alias{alignment_error}
 \title{alignment_error}
 \usage{
-alignment_error(features, box, out_size = 2L, stride = 1)
+alignment_error(features, box, out_size = 2L, stride = 1) 
 }
 \arguments{
 \item{features}{Passed to \code{roi_pool}.}

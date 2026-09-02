@@ -5,7 +5,7 @@
 \alias{trainable_fraction}
 \title{trainable_fraction}
 \usage{
-trainable_fraction(qformer_params, frozen_vision_params, frozen_llm_params)
+trainable_fraction(qformer_params, frozen_vision_params, frozen_llm_params) 
 }
 \arguments{
 \item{qformer_params}{Coerced to numeric by the body, with \code{as.numeric}.}

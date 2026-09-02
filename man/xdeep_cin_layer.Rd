@@ -5,7 +5,7 @@
 \alias{xdeep_cin_layer}
 \title{xdeep_cin_layer}
 \usage{
-xdeep_cin_layer(X_prev, X0, W)
+xdeep_cin_layer(X_prev, X0, W) 
 }
 \arguments{
 \item{X_prev}{Passed to \code{.xdeep_to_mat}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rkhsn.R
 \name{Rkhsnorm}
 \alias{Rkhsnorm}
-\title{Squared RKHS norm of a kernel expansion.}
+\title{Squared RKHS norm of a kernel expansion}
 \usage{
 Rkhsnorm(beta, K)
 }

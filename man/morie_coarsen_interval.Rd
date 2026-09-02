@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_coarsen_interval}
 \alias{morie_coarsen_interval}
+\alias{morie_tmlcen}
 \title{Coarsen_interval: the interval (L, R] implied by one subject\'s}
 \usage{
-morie_coarsen_interval(times, deltas)
+morie_coarsen_interval(times, deltas) 
+
+morie_tmlcen(times, deltas) 
 }
 \arguments{
 \item{times}{Coerced to numeric by the body, with \code{as.numeric}.}

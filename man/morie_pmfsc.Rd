@@ -5,7 +5,9 @@
 \alias{morie_pmfsc}
 \title{Derive a potential if needed, then score the pose}
 \usage{
-morie_pmfsc(receptor, ligand, potential = NULL, observations = NULL, n_complexes = 1, r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24, reference = "bulk", correction = "none", occupied = NULL, kT = 1, cap = 6, missing = 0)
+morie_pmfsc(receptor, ligand, potential = NULL, observations = NULL, n_complexes = 1, 
+    r_max = .PMFSC_DEFAULT_CUTOFF, n_bins = 24, reference = "bulk", correction = "none", 
+    occupied = NULL, kT = 1, cap = 6, missing = 0) 
 }
 \arguments{
 \item{receptor}{Atom rows: x, y, z, type.}

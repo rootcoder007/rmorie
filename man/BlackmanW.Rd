@@ -5,7 +5,7 @@
 \alias{BlackmanW}
 \title{The Blackman window}
 \usage{
-BlackmanW(N)
+BlackmanW(N) 
 }
 \arguments{
 \item{N}{The window length, at least one. A length of one is the   degenerate window and is returned as such rather than divided by   zero.}

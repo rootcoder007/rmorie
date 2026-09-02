@@ -14,6 +14,7 @@ morie_generalized_gamma_aft(time, event, X, max_iter = 500L, tol = 1e-06)
 \item{X}{covariate matrix.}
 
 \item{max_iter, tol}{optimiser controls.}
+
 }
 \value{
 list with \code{beta}, \code{sigma}, \code{q}, \code{loglik},

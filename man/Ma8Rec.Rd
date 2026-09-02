@@ -5,7 +5,7 @@
 \alias{Ma8Rec}
 \title{Eq (3.120): y(n) = y(n-1) + (1/8)x(n) - (1/8)x(n-8).  Two additions a}
 \usage{
-Ma8Rec(x, n = NULL)
+Ma8Rec(x, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

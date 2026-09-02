@@ -5,7 +5,8 @@
 \alias{morie_sdne}
 \title{morie_sdne}
 \usage{
-morie_sdne(adjacency, reconstruction, embeddings, beta = 5, alpha = 0.1, nu = 0, parameters = NULL)
+morie_sdne(adjacency, reconstruction, embeddings, beta = 5, alpha = 0.1, 
+    nu = 0, parameters = NULL) 
 }
 \arguments{
 \item{adjacency}{Passed to \code{.sdne_second_order_loss}.}

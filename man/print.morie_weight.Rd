@@ -5,7 +5,7 @@
 \alias{print.morie_weight}
 \title{Print method for \code{morie_weight} objects}
 \usage{
-print.morie_weight(x, ...)
+\method{print}{morie_weight}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_weight} object.}

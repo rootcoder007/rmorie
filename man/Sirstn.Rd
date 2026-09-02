@@ -16,6 +16,7 @@ Sirstn(S0, I0, beta, gamma, T, seed = 1)
 \item{T}{Time horizon.}
 
 \item{seed}{Seed for the shared minstd stream. Default 1.}
+
 }
 \value{
 List with \code{estimate} (final size), \code{S}, \code{I},

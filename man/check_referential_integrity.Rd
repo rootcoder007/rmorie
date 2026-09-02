@@ -12,6 +12,7 @@ check_referential_integrity(child, parent, child_key, parent_key)
 \item{parent}{Data frame with primary key.}
 
 \item{child_key, parent_key}{Column names.}
+
 }
 \value{
 A logical scalar.

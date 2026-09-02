@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_design_efficiency}
 \title{Design_efficiency: Adaptive against uniform sampling at the same n}
 \usage{
-morie_tlsurvy_design_efficiency(values, influence, n, seed = 0)
+morie_tlsurvy_design_efficiency(values, influence, n, seed = 0) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -15,6 +15,7 @@ morie_two_boot(x, y, statistic = mean, R = 1000L, ...)
 \item{R}{Number of replicates (default 1000).}
 
 \item{...}{Passed on to \code{statistic}.}
+
 }
 \value{
 A \code{morie_boot} object for the difference statistic.

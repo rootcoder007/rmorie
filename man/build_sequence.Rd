@@ -5,7 +5,7 @@
 \alias{build_sequence}
 \title{build_sequence}
 \usage{
-build_sequence(visual_tokens, text_embeddings)
+build_sequence(visual_tokens, text_embeddings) 
 }
 \arguments{
 \item{visual_tokens}{Iterated over elementwise, with \code{lapply}.}

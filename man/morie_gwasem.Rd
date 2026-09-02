@@ -5,7 +5,8 @@
 \alias{morie_gwasem}
 \title{EMMAX GWAS}
 \usage{
-morie_gwasem(y, genotypes, kinship = NULL, covariates = NULL, trait = "quantitative", test = "f", ml = FALSE, per_marker_reml = FALSE, min_maf = 0)
+morie_gwasem(y, genotypes, kinship = NULL, covariates = NULL, trait = "quantitative", 
+    test = "f", ml = FALSE, per_marker_reml = FALSE, min_maf = 0) 
 }
 \arguments{
 \item{y}{Phenotype vector.}

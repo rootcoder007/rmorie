@@ -14,6 +14,8 @@ morie_geron_filter_kernel(kh, kw, c_in, c_out, seed = 0, init = "he")
 \item{seed}{Seed.}
 
 \item{init}{"he" or "zeros".}
+
+
 }
 \value{
 List with kernel, bias, shape, n_parameters, fan_in, std, estimate, n, method.

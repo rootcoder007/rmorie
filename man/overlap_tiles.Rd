@@ -5,7 +5,7 @@
 \alias{overlap_tiles}
 \title{overlap_tiles}
 \usage{
-overlap_tiles(height, width, tile, border)
+overlap_tiles(height, width, tile, border) 
 }
 \arguments{
 \item{height}{Coerced to integer by the body, with \code{as.integer}.}

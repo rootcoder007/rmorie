@@ -13,7 +13,7 @@
 #' is 5, "the max of 3, 4, 4, and 5", and the last is 6, "a max of 3, 2, 5,
 #' and 6".  Those three printed windows are the anchor.
 #'
-#' This is the one-dimensional case, y[i] = max(x\[i*S : i*S+P\]).
+#' This is the one-dimensional case, y\[i\] = max(x\[i*S : i*S+P\]).
 #'
 #' @param x the activation map to pool.
 #' @param kernel window width P, a positive integer no wider than x.

@@ -5,7 +5,7 @@
 \alias{morie_spatial_wordfish_omega_update_cpp}
 \title{morie_spatial_wordfish_omega_update_cpp}
 \usage{
-morie_spatial_wordfish_omega_update_cpp(dtm, psi, alpha, beta, omega)
+morie_spatial_wordfish_omega_update_cpp(dtm, psi, alpha, beta, omega) 
 }
 \arguments{
 \item{dtm}{Passed to \code{.Call}.}

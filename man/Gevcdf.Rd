@@ -10,6 +10,8 @@ Gevcdf(x, mu = 0, sigma = 1, xi = 0)
 \item{x}{Numeric vector.}
 
 \item{mu, sigma, xi}{Location, scale and shape.}
+
+
 }
 \value{
 Numeric vector of probabilities.

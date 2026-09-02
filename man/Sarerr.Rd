@@ -3,7 +3,7 @@
 \name{Sarerr}
 \alias{Sarerr}
 \alias{morie_spatial_ar_error_model}
-\title{Spatial autoregressive error model (SEM) -- alias of \code{sarre}.}
+\title{Spatial autoregressive error model (SEM) -- alias of \code{sarre}}
 \usage{
 Sarerr(y, X, W)
 

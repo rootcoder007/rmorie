@@ -2,12 +2,7 @@
 % Please edit documentation in R/owltrn.R
 \name{Owltrn}
 \alias{Owltrn}
-\title{equivalence, because a negative weight rewards misclassification;
-the standard fix is to shift \code{Y} by its minimum. That shift is
-NOT innocuous -- it changes the relative weights and so can change
-the learned rule, which is exactly the objection that motivated
-residual weighted learning -- so the amount shifted is RETURNED in
-\code{shift} rather than applied silently.}
+\title{Outcome-weighted learning for an optimal treatment regime}
 \usage{
 Owltrn(y, D, W, pi = NULL, lam = 0.01, n_iter = 2000L)
 }
@@ -32,6 +27,14 @@ List with \code{beta}, \code{estimate}, \code{value},
 \code{p}.
 }
 \description{
+Zhao et al.'s reformulation is that maximizing the value
+\eqn{(d) = E\[Y 1{A = d(X)} / pi(A | X)\]} is the same problem as
+MINIMIZING the weighted misclassification risk
+\eqn{\[(Y / pi(A | X)) 1{A != d(X)}\]}, a classification problem in
+which the outcome is the weight and the observed treatment is the
+label. The surrogate is theirs -- the weighted HINGE loss with a
+ridge penalty, a linear-kernel weighted SVM,
+\eqn{in_b (1/n) sum w_i max(0, 1 - A_i x_i primeb) + lam ||b_slope||^2},
 equivalence, because a negative weight rewards misclassification;
 the standard fix is to shift \code{Y} by its minimum. That shift is
 NOT innocuous -- it changes the relative weights and so can change

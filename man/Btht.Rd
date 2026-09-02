@@ -27,7 +27,7 @@ Cambridge University Press, Chapter 4.  The resampling must be done under
 the null, not under the fitted model: the data are shifted so their
 statistic equals theta0, x0_i = x_i - t + theta0, resampled with
 replacement, and the two-sided p-value is
-p = 2 min((1 + #{T*_b >= T_hat})/(B + 1), (1 + #{T*_b <= T_hat})/(B + 1)),
+p = 2 min((1 + #\{T*_b >= T_hat\})/(B + 1), (1 + #\{T*_b <= T_hat\})/(B + 1)),
 capped at one.  The +1 in numerator and denominator is Davison and Hinkley's
 convention (Section 4.2): the observed statistic is itself one of the B + 1
 values under the null, so a p-value of exactly zero -- which the raw

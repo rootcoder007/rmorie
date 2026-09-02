@@ -5,7 +5,7 @@
 \alias{aol_weights}
 \title{AOL weights |R_i - m(H_i)|/pi_i}
 \usage{
-aol_weights(R, A, H, propensity = NULL, prognostic = NULL, ridge = 1e-08)
+aol_weights(R, A, H, propensity = NULL, prognostic = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{R}{Numeric vector of outcomes.}

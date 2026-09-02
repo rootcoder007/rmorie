@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Internal: bounding region as c(xmin, ymin, xmax, ymax).
+#' Internal: bounding region as c(xmin, ymin, xmax, ymax)
 #' @param region Either a length-4 box or an (m, 2) matrix of vertices.
 #' @param points Fallback point set whose bounding box is used.
 #' @return Numeric vector of length 4.
@@ -19,7 +19,7 @@
   r
 }
 
-#' Internal: first-order intensity lambda_hat = N(A) / nu(A), eq (3.8).
+#' Internal: first-order intensity lambda_hat = N(A) / nu(A), eq (3.8)
 #' @param points Event coordinates (n by 2).
 #' @param region Bounding region from .sp_region.
 #' @return Numeric scalar.
@@ -28,9 +28,9 @@
   nrow(as.matrix(points)) / ((region[3] - region[1]) * (region[4] - region[2]))
 }
 
-#' Internal: Ripley's K estimated as in Sec 3.4.2.
+#' Internal: Ripley's K estimated as in Sec 3.4.2
 #'
-#' E_tilde(h) = (1/n) sum_i sum_{j != i} I(h_ij <= h); K = E / lambda_hat.
+#' E_tilde(h) = (1/n) sum_i sum_\{j != i\} I(h_ij <= h); K = E / lambda_hat.
 #' The naive form is negatively biased because events outside the window
 #' are unobserved, so the border correction keeps only events further
 #' than h from the boundary.
@@ -66,7 +66,7 @@
   }, numeric(1))
 }
 
-#' Internal: nearest-neighbour distances h_i.
+#' Internal: nearest-neighbour distances h_i
 #' @param points Event coordinates (n by 2).
 #' @return Numeric vector of length n.
 #' @noRd

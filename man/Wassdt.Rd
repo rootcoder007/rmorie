@@ -13,6 +13,7 @@ raw samples when \code{support} is \code{NULL}.}
 \item{support}{Numeric vector of common support points, strictly
 increasing and the same length as \code{p} and \code{q}, or
 \code{NULL}.}
+
 }
 \value{
 Named list with \code{distance}, \code{n_support},

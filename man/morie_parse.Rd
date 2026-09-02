@@ -5,7 +5,7 @@
 \alias{morie_parse}
 \title{morie_parse}
 \usage{
-morie_parse(g, tokens, method = "lr1", tables = NULL)
+morie_parse(g, tokens, method = "lr1", tables = NULL) 
 }
 \arguments{
 \item{g}{Passed to \code{.prsLR_parse}.}

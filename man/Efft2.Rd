@@ -5,10 +5,15 @@
 \alias{Efft2}
 \title{Two-sample t efficacy -- eq. (13.3.9), p. 494}
 \usage{
-Efft2(m, n, sigma2)
+Efft2(m, n, sigma2) 
 }
 \description{
 Two-sample t efficacy -- eq. (13.3.9), p. 494
+}
+\arguments{
+\item{m}{Argument \code{m}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{sigma2}{Argument \code{sigma2}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{m}, \code{n}, \code{sigma2}.

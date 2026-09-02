@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_csi.R
 \name{MORIE_TPS_TOTAL_CSI_WEIGHTS}
 \alias{MORIE_TPS_TOTAL_CSI_WEIGHTS}
-\title{Total-CSI weights for the 9 TPS open-data categories.}
+\title{Total-CSI weights for the 9 TPS open-data categories}
 \usage{
 MORIE_TPS_TOTAL_CSI_WEIGHTS()
 }
@@ -10,7 +10,7 @@ MORIE_TPS_TOTAL_CSI_WEIGHTS()
 Named numeric vector.
 }
 \description{
-Total-CSI weights for the 9 TPS open-data categories.
+Total-CSI weights for the 9 TPS open-data categories
 }
 \examples{
 MORIE_TPS_TOTAL_CSI_WEIGHTS

@@ -5,7 +5,7 @@
 \alias{morie_tlclust}
 \title{The LTMLE-with-clustering entry point}
 \usage{
-morie_tlclust(Q_seq, H_seq, Y, cluster, ic = NULL)
+morie_tlclust(Q_seq, H_seq, Y, cluster, ic = NULL) 
 }
 \arguments{
 \item{Q_seq}{A list; the body checks with \code{is.list}.}

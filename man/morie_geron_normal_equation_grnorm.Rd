@@ -12,6 +12,7 @@ morie_geron_normal_equation_grnorm(X, y, add_intercept = FALSE, rcond = 1e-12)
 \item{add_intercept}{Prepend a column of ones.}
 
 \item{rcond}{Minimum acceptable reciprocal condition number.}
+
 }
 \value{
 List with \code{theta}, \code{fitted}, \code{residuals}, \code{rss},

@@ -5,7 +5,8 @@
 \alias{CorSound}
 \title{CorSound: coronary artery sound generation model (turbulent flow);}
 \usage{
-CorSound(diameter, flow_velocity, stenosis_pct = 0, p2max = 1, freqs = NULL, nu = 3.5e-06)
+CorSound(diameter, flow_velocity, stenosis_pct = 0, p2max = 1, freqs = NULL, 
+    nu = 3.5e-06) 
 }
 \arguments{
 \item{diameter}{Coerced to numeric by the body, with \code{as.numeric}.}

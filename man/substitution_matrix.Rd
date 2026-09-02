@@ -5,7 +5,7 @@
 \alias{substitution_matrix}
 \title{substitution_matrix}
 \usage{
-substitution_matrix(t, pi = NULL, u = 1)
+substitution_matrix(t, pi = NULL, u = 1) 
 }
 \arguments{
 \item{t}{Numeric; combined arithmetically in the body.}

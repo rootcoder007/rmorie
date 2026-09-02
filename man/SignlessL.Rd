@@ -5,7 +5,7 @@
 \alias{SignlessL}
 \title{\\' Signless Laplacian Q = D + A of an undirected graph}
 \usage{
-SignlessL(A)
+SignlessL(A) 
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}

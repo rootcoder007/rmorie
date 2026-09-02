@@ -3,12 +3,10 @@
 \name{.MORIE_ENTHEO_DEFAULT_BANDS}
 \alias{.MORIE_ENTHEO_DEFAULT_BANDS}
 \title{Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
-and the Timmermann 2023 Methods.}
-\usage{
-.MORIE_ENTHEO_DEFAULT_BANDS
-}
+and the Timmermann 2023 Methods}
+
 \description{
 Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
-and the Timmermann 2023 Methods.
+and the Timmermann 2023 Methods
 }
 \keyword{internal}

@@ -2,14 +2,14 @@
 % Please edit documentation in R/vacthr.R
 \name{Vaccthresh}
 \alias{Vaccthresh}
-\title{Critical vaccination threshold for herd immunity.}
+\title{Critical vaccination threshold for herd immunity}
 \usage{
 Vaccthresh(R0, efficacy = 1)
 }
 \arguments{
-\item{R0}{Basic reproduction number, greater than 1.}
+\item{R0}{See Usage.}
 
-\item{efficacy}{Vaccine efficacy in (0, 1].}
+\item{efficacy}{See Usage.}
 }
 \value{
 List with \code{threshold}, \code{coverage}, \code{feasible}, \code{R0}, \code{efficacy}.

@@ -5,7 +5,7 @@
 \alias{BwDirect}
 \title{Eq (3.145): specified on the discrete-frequency axis outright, so}
 \usage{
-BwDirect(omega, omega_c, N)
+BwDirect(omega, omega_c, N) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

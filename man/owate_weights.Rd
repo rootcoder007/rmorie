@@ -5,7 +5,7 @@
 \alias{owate_weights}
 \title{Theorem 5.4 / Corollary 5.2: optimal weights}
 \usage{
-owate_weights(pscore, sigma2_treated = NULL, sigma2_control = NULL)
+owate_weights(pscore, sigma2_treated = NULL, sigma2_control = NULL) 
 }
 \arguments{
 \item{pscore}{Propensity scores.}
@@ -13,7 +13,7 @@ owate_weights(pscore, sigma2_treated = NULL, sigma2_control = NULL)
 \item{sigma2_control}{Optional conditional variance under control.}
 }
 \description{
-omega*(x) = (sigma1^2 / e + sigma0^2 / (1 - e))^{-1}, which is e(x)(1 - e(x)) under homoskedasticity.
+omega*(x) = (sigma1^2 / e + sigma0^2 / (1 - e))^\{-1\}, which is e(x)(1 - e(x)) under homoskedasticity.
 }
 \value{
 Weight vector.

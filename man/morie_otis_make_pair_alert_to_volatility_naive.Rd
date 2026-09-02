@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_alert_to_volatility_naive}
 \alias{morie_otis_make_pair_alert_to_volatility_naive}
-\title{Naive (max-simultaneous-flags + binary vm) alert -> volatility builder.}
+\title{Naive (max-simultaneous-flags + binary vm) alert -> volatility builder}
 \usage{
 morie_otis_make_pair_alert_to_volatility_naive(df)
 }
@@ -19,7 +19,7 @@ Robustness alternative to
 \code{morie_otis_make_pair_alert_to_volatility_ruhela()}: treatment
 = "max simultaneous flags across the year's rows >= 2"; outcome =
 "any placement row with regA != regB" (binary). Produces a different
-treatment marginal (~24\\% vs ~14\\% under the Ruhela 8-state
+treatment marginal (~24\% vs ~14\% under the Ruhela 8-state
 encoding) and a binary rather than count outcome. Used side-by-side
 as the Naive arm of an RDF (Ruhela Dual Formulation).
 }

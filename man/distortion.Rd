@@ -5,7 +5,7 @@
 \alias{distortion}
 \title{Realised pairwise distortion}
 \usage{
-distortion(A, E)
+distortion(A, E) 
 }
 \arguments{
 \item{A}{Original points, list of equal-length numeric vectors.}

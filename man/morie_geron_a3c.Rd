@@ -33,6 +33,8 @@ morie_geron_a3c(
 \item{max_steps}{Episode cap.}
 
 \item{seed}{Base seed.}
+
+
 }
 \value{
 List with \code{actor}, \code{critic}, \code{returns}, \code{worker_returns},

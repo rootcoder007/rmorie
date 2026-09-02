@@ -5,7 +5,7 @@
 \alias{SpAcf}
 \title{Empirical correlogram R(h) = C(h)/C(0), Schabenberger & Gotway (2005)}
 \usage{
-SpAcf(coords, z, bins = NULL, cutoff = NULL)
+SpAcf(coords, z, bins = NULL, cutoff = NULL) 
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}

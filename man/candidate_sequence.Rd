@@ -5,7 +5,7 @@
 \alias{candidate_sequence}
 \title{candidate_sequence}
 \usage{
-candidate_sequence(A, W, g_models)
+candidate_sequence(A, W, g_models) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

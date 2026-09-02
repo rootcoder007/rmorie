@@ -5,7 +5,7 @@
 \alias{IStft}
 \title{Weighted overlap-add inverse STFT, Griffin & Lim (1984) eq (6)}
 \usage{
-IStft(stft, window = "hann", hop = NULL)
+IStft(stft, window = "hann", hop = NULL) 
 }
 \arguments{
 \item{stft}{A matrix; indexed by row and column.}

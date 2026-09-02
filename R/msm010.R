@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' General univariate linear mixed model.
+#' General univariate linear mixed model
 #'
 #' Formula: Y = X beta + Z b + eps (eq. 5.1) with b ~ N(0, D), eps ~ N(0, R)
 #' and Cov(eps, b) = 0, so E(Y) = X beta and Var(Y) = Z D Z' + R. Returns the

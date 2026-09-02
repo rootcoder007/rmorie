@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghtst.R
 \name{morie_ghosal_np_testing}
 \alias{morie_ghosal_np_testing}
-\title{Polya-tree Bayes factor for H0: F = N(loc, scale^2).}
+\title{Polya-tree Bayes factor for H0: F = N(loc, scale^2)}
 \usage{
 morie_ghosal_np_testing(x, ref_loc = 0, ref_scale = 1, depth = 6, c = 1)
 }
@@ -21,7 +21,7 @@ morie_ghosal_np_testing(x, ref_loc = 0, ref_scale = 1, depth = 6, c = 1)
 Named list with statistic (log BF), p_value, BF10, log_BF10, n, depth, method.
 }
 \description{
-Polya-tree Bayes factor for H0: F = N(loc, scale^2).
+Polya-tree Bayes factor for H0: F = N(loc, scale^2)
 }
 \examples{
 morie_ghosal_np_testing(x = rnorm(50))

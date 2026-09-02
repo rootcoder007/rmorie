@@ -35,7 +35,7 @@ far, which is the closed form the tests check.
 }
 \details{
 Formula: x_pred = F x; P_pred = F P F' + Q; S = H P_pred H' + R;
-K = P_pred H' S^{-1}; x = x_pred + K (y - H x_pred);
+K = P_pred H' S^\{-1\}; x = x_pred + K (y - H x_pred);
 P = (I - K H) P_pred.
 }
 \examples{

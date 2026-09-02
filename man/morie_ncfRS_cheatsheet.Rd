@@ -5,7 +5,7 @@
 \alias{morie_ncfRS_cheatsheet}
 \title{morie_ncfRS_cheatsheet}
 \usage{
-morie_ncfRS_cheatsheet()
+morie_ncfRS_cheatsheet() 
 }
 \description{
 A step of the ncfRS_native implementation. No other function in the package calls it. See the file header for the source the module follows.

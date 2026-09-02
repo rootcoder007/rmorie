@@ -2,10 +2,8 @@
 % Please edit documentation in R/doob_trends.R
 \name{CCRSO_TABLE2_FLOW}
 \alias{CCRSO_TABLE2_FLOW}
-\title{CCRSO Table 2 — prisoner flow 2013/14-2017/18}
-\usage{
-CCRSO_TABLE2_FLOW
-}
+\title{CCRSO Table 2 -- prisoner flow 2013/14-2017/18}
+
 \description{
-CCRSO Table 2 — prisoner flow 2013/14-2017/18
+CCRSO Table 2 -- prisoner flow 2013/14-2017/18
 }

@@ -5,7 +5,7 @@
 \alias{s6_layer}
 \title{s6_layer}
 \usage{
-s6_layer(X, A, W_B, W_C, W_delta, ...)
+s6_layer(X, A, W_B, W_C, W_delta, ...) 
 }
 \arguments{
 \item{X}{Passed to \code{selective_scan}.}

@@ -5,7 +5,7 @@
 \alias{morie_warpL_estimate_rank}
 \title{morie_warpL_estimate_rank}
 \usage{
-morie_warpL_estimate_rank(n_draws, n_labels)
+morie_warpL_estimate_rank(n_draws, n_labels) 
 }
 \arguments{
 \item{n_draws}{Passed to \code{.warpL_estimate_rank}.}

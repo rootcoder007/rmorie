@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_mean}
 \alias{morie_survey_mean}
-\title{Survey-weighted mean (delegates to \code{survey::svymean} when available).}
+\title{Survey-weighted mean (delegates to \code{survey::svymean} when available)}
 \usage{
 morie_survey_mean(design, variable)
 }
@@ -17,7 +17,7 @@ the \code{design} object (\code{morie_survey_mean}).}
 A named \code{list} (see Details).
 }
 \description{
-Survey-weighted mean (delegates to \code{survey::svymean} when available).
+Survey-weighted mean (delegates to \code{survey::svymean} when available)
 }
 \examples{
 \dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}

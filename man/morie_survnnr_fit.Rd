@@ -5,7 +5,8 @@
 \alias{morie_survnnr_fit}
 \title{morie_survnnr_fit}
 \usage{
-morie_survnnr_fit(X, times, events, hidden = c(), activation = "tanh", l2 = 0, lr = 0.1, n_epochs = 400, seed = 0, tol = 1e-10)
+morie_survnnr_fit(X, times, events, hidden = c(), activation = "tanh", l2 = 0, 
+    lr = 0.1, n_epochs = 400, seed = 0, tol = 1e-10) 
 }
 \arguments{
 \item{X}{A vector; its length is taken and its elements indexed.}

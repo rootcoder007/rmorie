@@ -5,7 +5,7 @@
 \alias{variable_importance}
 \title{variable_importance}
 \usage{
-variable_importance(X, Y, screen, effect, V = 5L, seed = 0L)
+variable_importance(X, Y, screen, effect, V = 5L, seed = 0L) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -4,10 +4,21 @@
 \alias{morie_krigun}
 \title{R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend}
 \usage{
-morie_krigun(coords, values, s_predict, trend_order = 1, model = "exponential", nugget = 0, sill = 1, range_ = 1)
+morie_krigun(coords, values, s_predict, trend_order = 1, model = "exponential", 
+    nugget = 0, sill = 1, range_ = 1) 
 }
 \description{
 R arm of morie/fn/krigun.py -- universal kriging with a polynomial trend. The Python body was a placeholder: it averaged `coords` and used neither `values`, `s_predict` nor `trend_order`. There was no R arm at all.   Z(s) = mu(s) + delta(s),  mu(s) = sum_k beta_k f_k(s) with delta zero-mean second-order stationary. The predictor solves the augmented system that enforces unbiasedness on every trend basis function, so the trend coefficients never have to be estimated separately. Order 0 makes the basis a single column of ones, which is exactly the ordinary kriging constraint sum_i lambda_i = 1. ' @noRd
+}
+\arguments{
+\item{coords}{Argument \code{coords}; see Usage.}
+\item{values}{Argument \code{values}; see Usage.}
+\item{s_predict}{Argument \code{s_predict}; see Usage.}
+\item{trend_order}{Argument \code{trend_order}; see Usage.}
+\item{model}{Argument \code{model}; see Usage.}
+\item{nugget}{Argument \code{nugget}; see Usage.}
+\item{sill}{Argument \code{sill}; see Usage.}
+\item{range_}{Argument \code{range_}; see Usage.}
 }
 \value{
 A list with components \code{estimate}, \code{se}, \code{n}, \code{trend_order}, \code{method}.

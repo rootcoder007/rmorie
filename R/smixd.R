@@ -37,7 +37,7 @@
   0.5 * (logdet_S + logdet_K + (n - p) * log(2 * pi * sigma2) + (n - p))
 }
 
-#' Spatial linear mixed model via REML.
+#' Spatial linear mixed model via REML
 #'
 #' Y = X beta + delta + eps,
 #'   delta ~ N(0, sigma2 R_phi),  R_phi exponential,

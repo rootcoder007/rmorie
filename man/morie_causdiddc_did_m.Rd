@@ -5,10 +5,16 @@
 \alias{morie_causdiddc_did_m}
 \title{The DID_M estimator}
 \usage{
-morie_causdiddc_did_m(Y, D, group, period)
+morie_causdiddc_did_m(Y, D, group, period) 
 }
 \description{
 The \code{DID_M} estimator of de Chaisemartin & D\'Haultfoeuille (2020): for each pair of consecutive periods, compare the outcome change of cells that SWITCH treatment against the change of cells whose treatment stays put, then average over switches, weighting by the number of switching observations.  Unbiased for the average effect among switchers under common trends whatever the heterogeneity.
+}
+\arguments{
+\item{Y}{Argument \code{Y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{group}{Argument \code{group}; see Usage.}
+\item{period}{Argument \code{period}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{did_m}, \code{switches},   \code{n_switches}, \code{n_switching_obs}, \code{n},   \code{method}, \code{note}.

@@ -5,7 +5,7 @@
 \alias{PerConv}
 \title{Eq (3.90); the same equation CircConv implements, so it delegates --}
 \usage{
-PerConv(x, h, npoints = NULL)
+PerConv(x, h, npoints = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{CircConv}.}

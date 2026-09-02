@@ -5,7 +5,7 @@
 \alias{morie_kamath_context_simplest}
 \title{morie_kamath_context_simplest}
 \usage{
-morie_kamath_context_simplest(h_T, all_states = NULL)
+morie_kamath_context_simplest(h_T, all_states = NULL) 
 }
 \arguments{
 \item{h_T}{Final state.}

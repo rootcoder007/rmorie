@@ -5,7 +5,8 @@
 \alias{morie_alammar_umap_projection}
 \title{UMAP objective minimised by descent (McInnes et al. 2018,}
 \usage{
-morie_alammar_umap_projection(X, n_neighbors = 5, min_dist = 0.1, d_out = 2, n_steps = 200, learning_rate = 0.05, seed = 1)
+morie_alammar_umap_projection(X, n_neighbors = 5, min_dist = 0.1, d_out = 2, n_steps = 200, 
+    learning_rate = 0.05, seed = 1) 
 }
 \arguments{
 \item{X}{Points.}

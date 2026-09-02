@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_draw_sample}
 \title{Draw_sample: Poisson sampling: include unit i with probability pi_i}
 \usage{
-morie_tlsurvy_draw_sample(pi, seed = 0)
+morie_tlsurvy_draw_sample(pi, seed = 0) 
 }
 \arguments{
 \item{pi}{Coerced to numeric by the body, with \code{as.numeric}.}

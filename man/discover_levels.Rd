@@ -5,7 +5,7 @@
 \alias{discover_levels}
 \title{Eq. (9.2)-(9.3): the levels that minimise and maximise the mean}
 \usage{
-discover_levels(y, A, W, levels, rows = NULL, eval_rows = NULL, ridge = 1e-08)
+discover_levels(y, A, W, levels, rows = NULL, eval_rows = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Outcome vector.}

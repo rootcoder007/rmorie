@@ -29,6 +29,7 @@ Pertarget(
 \item{eps}{additive constant of the proportional variant.}
 
 \item{variant}{"proportional" or "rank".}
+
 }
 \value{
 list: estimate, prob, weight, priority, n, method.

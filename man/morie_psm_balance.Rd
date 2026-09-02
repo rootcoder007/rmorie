@@ -10,6 +10,8 @@ morie_psm_balance(mean_t, mean_c, s_t, s_c)
 \item{mean_t, mean_c}{Group means.}
 
 \item{s_t, s_c}{Group SDs.}
+
+
 }
 \value{
 Numeric bias in percent.

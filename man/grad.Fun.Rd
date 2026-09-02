@@ -5,7 +5,7 @@
 \alias{grad.Fun}
 \title{grad.Fun}
 \usage{
-grad.Fun(self, x)
+grad.Fun(self, x) 
 }
 \arguments{
 \item{self}{A list; the body reads \code{$.g}, \code{$f} from it.}

@@ -5,10 +5,14 @@
 \alias{Efft}
 \title{One-sample t efficacy -- eq. (13.3.2), p. 488}
 \usage{
-Efft(n, sigma2)
+Efft(n, sigma2) 
 }
 \description{
 One-sample t efficacy -- eq. (13.3.2), p. 488
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{sigma2}{Argument \code{sigma2}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{per_obs}, \code{n}, \code{sigma2}.

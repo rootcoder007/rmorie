@@ -35,6 +35,7 @@ holding fewer than 35 sites draws a warning.}
 kriging with the global model.}
 
 \item{local_mean}{Re-estimate the mean inside each window.}
+
 }
 \value{
 A list with \code{local_variograms} (per-window sill and range),

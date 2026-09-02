@@ -5,7 +5,7 @@
 \alias{PdfOverlap}
 \title{BC(p1, p2) = sum_l sqrt(p1 p2): the OVERLAP between two PDFs,}
 \usage{
-PdfOverlap(p1, p2)
+PdfOverlap(p1, p2) 
 }
 \arguments{
 \item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}

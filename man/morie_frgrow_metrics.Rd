@@ -5,7 +5,7 @@
 \alias{morie_frgrow_metrics}
 \title{The efficiency metrics that the supplied descriptors allow}
 \usage{
-morie_frgrow_metrics(kd, hac, logp = NULL, mw = NULL, psa = NULL, route = "rt", temperature = .FRGROW_T_STANDARD)
+morie_frgrow_metrics(kd, hac, logp = NULL, mw = NULL, psa = NULL, route = "rt", temperature = .FRGROW_T_STANDARD) 
 }
 \arguments{
 \item{kd}{The dissociation constant, in molar.}

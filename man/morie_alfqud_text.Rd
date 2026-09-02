@@ -5,7 +5,7 @@
 \alias{morie_alfqud_text}
 \title{A program as one readable line per instruction}
 \usage{
-morie_alfqud_text(program)
+morie_alfqud_text(program) 
 }
 \arguments{
 \item{program}{A list of instructions.}

@@ -5,7 +5,7 @@
 \alias{fit_seed_state}
 \title{fit_seed_state}
 \usage{
-fit_seed_state(z, spec, theta, long_run_b = 0)
+fit_seed_state(z, spec, theta, long_run_b = 0) 
 }
 \arguments{
 \item{z}{A vector; its length is taken.}

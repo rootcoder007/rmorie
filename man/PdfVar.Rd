@@ -5,7 +5,7 @@
 \alias{PdfVar}
 \title{Eq (3.3): sigma^2 = integral (eta - mu)^2 p(eta) d eta.  CV =}
 \usage{
-PdfVar(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+PdfVar(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

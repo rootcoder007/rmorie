@@ -5,7 +5,7 @@
 \alias{optimal_policy}
 \title{optimal_policy}
 \usage{
-optimal_policy(logp_ref, reward, beta)
+optimal_policy(logp_ref, reward, beta) 
 }
 \arguments{
 \item{logp_ref}{Passed to \code{.dpoF_vec}.}

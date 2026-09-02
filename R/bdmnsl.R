@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Monotone treatment selection bounds.
+#' Monotone treatment selection bounds
 #'
 #' E\[Y(d)\] <= P(Z<=d) E\[Y|Z=d\] + P(Z>d) ymax and
 #' E\[Y(d)\] >= P(Z<d) ymin + P(Z>=d) E\[Y|Z=d\].

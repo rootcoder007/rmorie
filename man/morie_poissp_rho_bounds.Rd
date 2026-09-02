@@ -3,12 +3,15 @@
 % the formals.
 \name{morie_poissp_rho_bounds}
 \alias{morie_poissp_rho_bounds}
-\title{The propriety interval for rho.}
+\title{The propriety interval for rho}
 \usage{
-morie_poissp_rho_bounds(W)
+morie_poissp_rho_bounds(W) 
 }
 \description{
 The propriety interval for rho.
+}
+\arguments{
+\item{W}{Argument \code{W}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{eigenvalues}.

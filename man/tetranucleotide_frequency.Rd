@@ -5,7 +5,7 @@
 \alias{tetranucleotide_frequency}
 \title{tetranucleotide_frequency}
 \usage{
-tetranucleotide_frequency(seq, kk = 4L, canonical = TRUE)
+tetranucleotide_frequency(seq, kk = 4L, canonical = TRUE) 
 }
 \arguments{
 \item{seq}{Coerced to character by the body, with \code{as.character}.}

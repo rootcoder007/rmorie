@@ -5,7 +5,7 @@
 \alias{frisch_potential}
 \title{Frisch potential}
 \usage{
-frisch_potential(slacks)
+frisch_potential(slacks) 
 }
 \arguments{
 \item{slacks}{Numeric vector of slack values (must be > 0).}

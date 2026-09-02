@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm004.R
 \name{Msm004}
 \alias{Msm004}
-\title{eq. (1.3) p.16 (re-export).}
+\title{eq. (1.3) p.16 (re-export)}
 \usage{
 Msm004(...)
 }

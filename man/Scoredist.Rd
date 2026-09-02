@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqscr.R
 \name{Scoredist}
 \alias{Scoredist}
-\title{Distortion of an inner-product score under TurboQuant_prod.}
+\title{Distortion of an inner-product score under TurboQuant_prod}
 \usage{
 Scoredist(b, d, query_norm = 1, n_keys = 1)
 }

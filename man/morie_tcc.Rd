@@ -16,6 +16,7 @@ morie_tcc(theta, a, b, c = NULL, upper = NULL, D = 1)
 \item{upper}{upper asymptotes; default 1.}
 
 \item{D}{scaling constant; 1 logistic, 1.702 normal-ogive.}
+
 }
 \value{
 list: tcc, theta, n_items, floor, ceiling, D, method.

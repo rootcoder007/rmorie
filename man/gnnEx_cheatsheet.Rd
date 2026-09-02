@@ -5,7 +5,7 @@
 \alias{gnnEx_cheatsheet}
 \title{gnnEx_cheatsheet}
 \usage{
-gnnEx_cheatsheet()
+gnnEx_cheatsheet() 
 }
 \description{
 A step of the gnnEx_native implementation. No other function in the package calls it. See the file header for the source the module follows.

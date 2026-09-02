@@ -5,7 +5,7 @@
 \alias{Dbinom}
 \title{Dbinom}
 \usage{
-Dbinom(x, size, prob, log = FALSE)
+Dbinom(x, size, prob, log = FALSE) 
 }
 \arguments{
 \item{x}{Passed to \code{round}.}

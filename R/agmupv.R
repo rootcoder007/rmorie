@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero categorical value head and its invertible scaling.
+#' MuZero categorical value head and its invertible scaling
 #'
 #' Softmax the head over the integer support -support..support, take the
 #' expectation y, then invert h(x) = sign(x)(sqrt(|x|+1) - 1 + eps x):
-#' h^{-1}(y) = sign(y)\[((sqrt(1 + 4 eps(|y| + 1 + eps)) - 1)/(2 eps))^2 - 1\].
+#' h^\{-1\}(y) = sign(y)\[((sqrt(1 + 4 eps(|y| + 1 + eps)) - 1)/(2 eps))^2 - 1\].
 #'
 #' @param logits Head outputs over the support, length 2*support + 1.
 #' @param support Half-width of the integer support.

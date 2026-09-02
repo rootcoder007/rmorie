@@ -2,7 +2,7 @@
 % Please edit documentation in R/blupr.R
 \name{Blupint}
 \alias{Blupint}
-\title{BLUP of a random intercept.}
+\title{BLUP of a random intercept}
 \usage{
 Blupint(y, group, s2u, s2e, X = NULL, beta = NULL)
 }

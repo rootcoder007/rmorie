@@ -5,7 +5,7 @@
 \alias{morie_seckdf_derive_context_keys}
 \title{Derive one key per context from a single PRK}
 \usage{
-morie_seckdf_derive_context_keys(ikm, contexts, salt = NULL, length = 32L)
+morie_seckdf_derive_context_keys(ikm, contexts, salt = NULL, length = 32L) 
 }
 \arguments{
 \item{ikm}{Raw input keying material.}

@@ -5,7 +5,7 @@
 \alias{morie_manfd_paths}
 \title{All-pairs shortest paths by Floyd-Warshall, and the components}
 \usage{
-morie_manfd_paths(A)
+morie_manfd_paths(A) 
 }
 \arguments{
 \item{A}{An adjacency matrix.}

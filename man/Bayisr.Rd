@@ -14,6 +14,7 @@ Bayisr(samples, log_target, log_proposal, m, seed = 0L)
 \item{m}{Resample size.}
 
 \item{seed}{SplitMix64 seed.}
+
 }
 \value{
 List with \code{resample}, \code{indices} (0-based, matching

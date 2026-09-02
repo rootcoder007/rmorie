@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm042.R
 \name{Msm042}
 \alias{Msm042}
-\title{Normal linear regression under the Bayesian paradigm.}
+\title{Normal linear regression under the Bayesian paradigm}
 \usage{
 Msm042(X, y, add_intercept = TRUE)
 }

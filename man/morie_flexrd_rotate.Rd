@@ -5,7 +5,7 @@
 \alias{morie_flexrd_rotate}
 \title{Rodrigues' rotation of a point about the axis from a to b}
 \usage{
-morie_flexrd_rotate(p, a, b, degrees)
+morie_flexrd_rotate(p, a, b, degrees) 
 }
 \arguments{
 \item{p}{The point to move.}

@@ -15,6 +15,7 @@ morie_fauzi_r1_integral(kernel = "gaussian", lo = -8, hi = 8, ngrid = 4001L)
 \item{lo, hi}{Quadrature limits, used only for a callable kernel.}
 
 \item{ngrid}{Number of nodes; fixed, never adapted.}
+
 }
 \value{
 Named list with \code{estimate}, \code{kernel}, \code{method}.

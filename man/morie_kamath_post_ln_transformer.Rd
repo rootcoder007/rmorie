@@ -18,6 +18,7 @@ morie_kamath_layer_norm_rows(x, eps = 1e-05)
 \item{attn_fn, ffn_fn}{Shape-preserving sublayers.}
 
 \item{eps}{LayerNorm epsilon.}
+
 }
 \value{
 List with \code{output}, \code{after_attention}, \code{placement}.

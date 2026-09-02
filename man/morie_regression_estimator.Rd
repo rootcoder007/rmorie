@@ -12,6 +12,7 @@ morie_regression_estimator(y, x, weights = NULL, X_mean = NULL)
 \item{weights}{design weights.}
 
 \item{X_mean}{known population mean of x; required.}
+
 }
 \value{
 list: mean, slope, intercept, correlation,

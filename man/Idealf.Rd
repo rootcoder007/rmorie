@@ -20,12 +20,12 @@ The lower and upper ideal-fourth estimates of the quartiles and the
 resulting interquartile range.  With the observations in ascending
 order, let \code{j} be the integer part of \code{n/4 + 5/12} and
 \code{h = n/4 + 5/12 - j}.  Then
-\code{q1 = (1 - h) X[j] + h X\[j + 1\]} and, with \code{k = n - j + 1},
-\code{q2 = (1 - h) X[k] + h X\[k - 1\]}.
+\code{q1 = (1 - h) X\[j\] + h X\[j + 1\]} and, with \code{k = n - j + 1},
+\code{q2 = (1 - h) X\[k\] + h X\[k - 1\]}.
 }
 \details{
 Note the descending indexing in the upper fourth: it interpolates from
-\code{X[k]} back towards \code{X\[k - 1\]}, so \code{q2} mirrors
+\code{X\[k\]} back towards \code{X\[k - 1\]}, so \code{q2} mirrors
 \code{q1}.  Writing \code{X\[k + 1\]} instead breaks that symmetry.
 }
 \examples{

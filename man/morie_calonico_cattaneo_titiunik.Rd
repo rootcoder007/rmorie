@@ -5,7 +5,7 @@
 \alias{morie_calonico_cattaneo_titiunik}
 \title{Alias kept from the generated stub\'s signature}
 \usage{
-morie_calonico_cattaneo_titiunik(y, x, cutoff = 0, ...)
+morie_calonico_cattaneo_titiunik(y, x, cutoff = 0, ...) 
 }
 \arguments{
 \item{y}{Passed to \code{morie_rdrobu}.}

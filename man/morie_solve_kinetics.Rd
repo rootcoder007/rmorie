@@ -5,7 +5,7 @@
 \alias{morie_solve_kinetics}
 \title{The explicit solution of the splicing ODEs at time tau after a}
 \usage{
-morie_solve_kinetics(tau, alpha, beta, gamma, u0 = 0, s0 = 0)
+morie_solve_kinetics(tau, alpha, beta, gamma, u0 = 0, s0 = 0) 
 }
 \arguments{
 \item{tau}{Coerced to numeric by the body, with \code{as.numeric}.}

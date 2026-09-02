@@ -8,6 +8,8 @@ morie_partial_tau(x, y, z)
 }
 \arguments{
 \item{x, y, z}{Numeric vectors of equal length.}
+
+
 }
 \value{
 List with \code{partial_tau}, \code{tau_xy}, \code{tau_xz}, \code{tau_yz}, \code{n}.

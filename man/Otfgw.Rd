@@ -18,6 +18,7 @@ Otfgw(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20)
 \item{alpha}{Trade-off in [0, 1].}
 
 \item{max_iter}{Conditional-gradient steps.}
+
 }
 \value{
 List with \code{T}, \code{cost}, \code{wass_part},

@@ -5,7 +5,7 @@
 \alias{morie_stahdo}
 \title{morie_stahdo}
 \usage{
-morie_stahdo(X, directions = "subsample", n_directions = 500, seed = 1, cutoff = NULL)
+morie_stahdo(X, directions = "subsample", n_directions = 500, seed = 1, cutoff = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.stahdo_stahel_donoho}.}

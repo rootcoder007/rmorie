@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Neutral-to-the-right posterior survival (Doksum 1974).
+#' Neutral-to-the-right posterior survival (Doksum 1974)
 #'
 #' @param time Numeric vector of observed times.
 #' @param event Optional integer/logical event indicator (1 = event, 0 = censored).

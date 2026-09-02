@@ -5,7 +5,9 @@
 \alias{explor}
 \title{explor}
 \usage{
-explor(states, actions, next_states, n_actions = NULL, n_features = 8, eta = 1, beta = 0.2, lr = 0.05, epochs = 1, features = "inverse", discrete = TRUE, seed = 0)
+explor(states, actions, next_states, n_actions = NULL, n_features = 8, 
+    eta = 1, beta = 0.2, lr = 0.05, epochs = 1, features = "inverse", discrete = TRUE, 
+    seed = 0) 
 }
 \arguments{
 \item{states}{Passed to \code{.mat}.}

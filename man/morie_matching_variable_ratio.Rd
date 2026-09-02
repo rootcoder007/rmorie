@@ -27,6 +27,7 @@ morie_matching_variable_ratio(
 
 \item{ps}{Optional pre-computed propensity scores (ignored; retained
 for back-compat).}
+
 }
 \value{
 A list of class \code{morie_match_result}.

@@ -5,7 +5,7 @@
 \alias{cmip_ensemble}
 \title{cmip_ensemble}
 \usage{
-cmip_ensemble(models, weights)
+cmip_ensemble(models, weights) 
 }
 \arguments{
 \item{models}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_phacf3_cheatsheet}
 \title{One-line summary of the phacf3 module}
 \usage{
-morie_phacf3_cheatsheet()
+morie_phacf3_cheatsheet() 
 }
 \description{
 One-line summary of the phacf3 module

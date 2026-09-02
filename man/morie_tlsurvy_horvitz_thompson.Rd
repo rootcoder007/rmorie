@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_horvitz_thompson}
 \title{Horvitz_thompson: The design-unbiased mean: (1/N) sum_{i in S}}
 \usage{
-morie_tlsurvy_horvitz_thompson(values, pi, selected, N = NULL)
+morie_tlsurvy_horvitz_thompson(values, pi, selected, N = NULL) 
 }
 \arguments{
 \item{values}{Coerced to numeric by the body, with \code{as.numeric}.}

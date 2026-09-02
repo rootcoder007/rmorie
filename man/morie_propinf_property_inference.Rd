@@ -5,7 +5,9 @@
 \alias{morie_propinf_property_inference}
 \title{Property inference on fully connected networks}
 \usage{
-morie_propinf_property_inference(shadow_models, shadow_labels, target_models = NULL, target_labels = NULL, representation = "set", meta_hidden = c(16L), phi_hidden = c(8L), repr_dim = 4L, rho_hidden = c(8L), context = "paired", epochs = 30L, lr = 0.05, seed = 0L)
+morie_propinf_property_inference(shadow_models, shadow_labels, target_models = NULL, target_labels = NULL, 
+    representation = "set", meta_hidden = c(16L), phi_hidden = c(8L), repr_dim = 4L, 
+    rho_hidden = c(8L), context = "paired", epochs = 30L, lr = 0.05, seed = 0L) 
 }
 \arguments{
 \item{shadow_models}{List of shadow networks.}

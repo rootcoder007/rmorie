@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlboo.R
 \name{Tmleboot}
 \alias{Tmleboot}
-\title{Nonparametric bootstrap interval for the targeted risk difference.}
+\title{Nonparametric bootstrap interval for the targeted risk difference}
 \usage{
 Tmleboot(
   Y,
@@ -31,6 +31,9 @@ Tmleboot(
 \item{gbound}{Propensity truncation level.}
 
 \item{level}{Confidence level.}
+
+
+
 }
 \value{
 List with \code{estimate}, \code{boot_se}, \code{ci_lower},

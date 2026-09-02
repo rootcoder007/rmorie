@@ -25,7 +25,7 @@
   sum(weights * (gammas - pred)^2)
 }
 
-#' Variogram model fit by weighted least squares.
+#' Variogram model fit by weighted least squares
 #'
 #' Models: exponential, gaussian, spherical.
 #' Exponential form: \deqn{\gamma(h) = c_0 + c_1(1 - e^{-h/a})}{gamma(h) = c_0 + c_1(1 - e^-h/a)}.

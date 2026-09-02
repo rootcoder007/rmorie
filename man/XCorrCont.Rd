@@ -5,7 +5,7 @@
 \alias{XCorrCont}
 \title{The continuous-time form, evaluated by the trapezoidal rule on the}
 \usage{
-XCorrCont(x, y, t, delays)
+XCorrCont(x, y, t, delays) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

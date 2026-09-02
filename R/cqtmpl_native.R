@@ -120,6 +120,7 @@
 #'   \code{length(y)}.
 #' @param max_iter Maximum EM iterations.
 #' @tol Convergence tolerance on the log-likelihood.
+#' @param tol See Usage.
 #' @return A list with the LOD score, fitted coefficients, the
 #'   posterior probabilities, the null log-likelihood, and the
 #'   iteration history.

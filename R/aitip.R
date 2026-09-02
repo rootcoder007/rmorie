@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Aitchison inner product on the simplex.
+#' Aitchison inner product on the simplex
 #'
 #' Formula: <x, y>_a = sum_i clr(x)_i clr(y)_i
-#'                   = (1/D) sum_{i<j} log(x_i/x_j) log(y_i/y_j)
+#'                   = (1/D) sum_\{i<j\} log(x_i/x_j) log(y_i/y_j)
 #'
 #' @param x,y Strictly positive vectors of parts, the same length.
 #' @return List with \code{inner}, \code{inner_pairwise}, \code{cos_angle},

@@ -19,6 +19,9 @@ morie_kamath_glove_weight(x, x_max, alpha)
 \item{x_max, alpha}{Weighting parameters.}
 
 \item{x}{Counts to weight.}
+
+
+
 }
 \value{
 List with \code{estimate}, \code{weights}, \code{residuals}, \code{n_nonzero}.

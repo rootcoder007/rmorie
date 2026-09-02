@@ -5,7 +5,7 @@
 \alias{sdpwts_lmi}
 \title{F(x) = F0 + sum x_i F_i (the LMI)}
 \usage{
-sdpwts_lmi(x, F0, Fs)
+sdpwts_lmi(x, F0, Fs) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

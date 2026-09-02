@@ -5,7 +5,7 @@
 \alias{epsilon_data_independent}
 \title{epsilon_data_independent}
 \usage{
-epsilon_data_independent(T, gamma, delta)
+epsilon_data_independent(T, gamma, delta) 
 }
 \arguments{
 \item{T}{Numeric; combined arithmetically in the body.}

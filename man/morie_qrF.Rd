@@ -5,7 +5,7 @@
 \alias{morie_qrF}
 \title{morie_qrF}
 \usage{
-morie_qrF(y_true, y_pred, theta = 0.5)
+morie_qrF(y_true, y_pred, theta = 0.5) 
 }
 \arguments{
 \item{y_true}{Coerced to numeric by the body, with \code{as.numeric}.}

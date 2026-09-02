@@ -5,7 +5,7 @@
 \alias{tripartite_graph}
 \title{tripartite_graph}
 \usage{
-tripartite_graph(triples)
+tripartite_graph(triples) 
 }
 \arguments{
 \item{triples}{A vector; its length is taken.}

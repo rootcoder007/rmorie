@@ -5,7 +5,7 @@
 \alias{t3bfs}
 \title{t3bfs}
 \usage{
-t3bfs(A, s)
+t3bfs(A, s) 
 }
 \arguments{
 \item{A}{A matrix; indexed by row and column.}

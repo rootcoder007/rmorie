@@ -2,7 +2,7 @@
 % Please edit documentation in R/describe.R
 \name{morie_describe_by_name}
 \alias{morie_describe_by_name}
-\title{String-only variant of \code{\link{morie_describe}}.}
+\title{String-only variant of \code{\link{morie_describe}}}
 \usage{
 morie_describe_by_name(name)
 }

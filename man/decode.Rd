@@ -5,7 +5,7 @@
 \alias{decode}
 \title{decode}
 \usage{
-decode(z, Wp, bp, items = NULL, activation = "sigmoid")
+decode(z, Wp, bp, items = NULL, activation = "sigmoid") 
 }
 \arguments{
 \item{z}{Numeric; combined arithmetically in the body.}

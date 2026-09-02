@@ -5,7 +5,7 @@
 \alias{morie_alammar_reward_model_bt}
 \title{morie_alammar_reward_model_bt}
 \usage{
-morie_alammar_reward_model_bt(scores_w, scores_l)
+morie_alammar_reward_model_bt(scores_w, scores_l) 
 }
 \arguments{
 \item{scores_w,scores_l}{Winner and loser reward scores.}

@@ -3,9 +3,12 @@
 % the formals.
 \name{cnvlfc_embed}
 \alias{cnvlfc_embed}
+\alias{morie_cnvlfc}
 \title{cnvlfc_embed}
 \usage{
-cnvlfc_embed(series, E = 2, tau = 1)
+cnvlfc_embed(series, E = 2, tau = 1) 
+
+morie_cnvlfc(series, E = 2, tau = 1) 
 }
 \arguments{
 \item{series}{Passed to \code{.cnvlfc_embed}.}

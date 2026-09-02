@@ -5,10 +5,14 @@
 \alias{Friedq}
 \title{Friedman two-way ANOVA by ranks -- eqs. (12.2.8)/(12.2.12), pp. 441-445}
 \usage{
-Friedq(data, correct = TRUE)
+Friedq(data, correct = TRUE) 
 }
 \description{
 Friedman two-way ANOVA by ranks -- eqs. (12.2.8)/(12.2.12), pp. 441-445
+}
+\arguments{
+\item{data}{Argument \code{data}; see Usage.}
+\item{correct}{Argument \code{correct}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{q_raw}, \code{s}, \code{df}, \code{p_value}, \code{rank_sums}, \code{k}, \code{n}.

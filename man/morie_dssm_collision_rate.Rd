@@ -5,7 +5,7 @@
 \alias{morie_dssm_collision_rate}
 \title{Trigram-collision rate of a vocabulary}
 \usage{
-morie_dssm_collision_rate(vocabulary, n = 3L)
+morie_dssm_collision_rate(vocabulary, n = 3L) 
 }
 \arguments{
 \item{vocabulary}{character vector. The vocabulary to inspect.}

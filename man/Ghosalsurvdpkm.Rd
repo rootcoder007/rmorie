@@ -31,7 +31,7 @@ frequentist estimator a Bayesian reading.  The discrepancy is
 computed rather than asserted, so shrinking alpha must shrink it.
 }
 \details{
-Formula: S_KM(t) = prod_{t_j <= t} (1 - d_j / R_j);
+Formula: S_KM(t) = prod_\{t_j <= t\} (1 - d_j / R_j);
 S_DP = w S_KM + (1 - w) exp(-rate t), w = n / (alpha + n).
 }
 \examples{

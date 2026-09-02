@@ -5,7 +5,7 @@
 \alias{HannTf}
 \title{Eq (3.103): (1/4)(1 + z^-1)^2, a DOUBLE zero at z = -1, that is at}
 \usage{
-HannTf(z)
+HannTf(z) 
 }
 \arguments{
 \item{z}{Coerced to complex by the body, with \code{as.complex}.}

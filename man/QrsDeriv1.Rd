@@ -5,7 +5,7 @@
 \alias{QrsDeriv1}
 \title{Eq (4.1): y0(n) = |x(n) - x(n-2)|.  The two-sample span is what makes}
 \usage{
-QrsDeriv1(x)
+QrsDeriv1(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

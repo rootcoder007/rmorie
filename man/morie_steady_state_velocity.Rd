@@ -5,7 +5,7 @@
 \alias{morie_steady_state_velocity}
 \title{The baseline model: regress gamma/beta through the origin on the}
 \usage{
-morie_steady_state_velocity(u, s, quantile = 0.95)
+morie_steady_state_velocity(u, s, quantile = 0.95) 
 }
 \arguments{
 \item{u}{A vector; its length is taken and its elements indexed.}

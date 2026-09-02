@@ -5,7 +5,9 @@
 \alias{morie_blstn}
 \title{morie_blstn}
 \usage{
-morie_blstn(query, subjects, w = 11L, match = 5, mismatch = -4, cutoff = NULL, X = 20, word_mode = "exact", threshold = NULL, matrix = NULL, alphabet = "ACGT", lam = NULL, K = NULL, max_hsps = NULL, letter_probs = NULL, pvalues = TRUE)
+morie_blstn(query, subjects, w = 11L, match = 5, mismatch = -4, cutoff = NULL, 
+    X = 20, word_mode = "exact", threshold = NULL, matrix = NULL, alphabet = "ACGT", 
+    lam = NULL, K = NULL, max_hsps = NULL, letter_probs = NULL, pvalues = TRUE) 
 }
 \arguments{
 \item{query}{Coerced to character by the body, with \code{as.character}.}

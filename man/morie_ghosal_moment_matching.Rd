@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghmmt.R
 \name{morie_ghosal_moment_matching}
 \alias{morie_ghosal_moment_matching}
-\title{Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper].}
+\title{Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper]}
 \usage{
 morie_ghosal_moment_matching(
   x,
@@ -30,7 +30,7 @@ morie_ghosal_moment_matching(
 Named list with estimate, se, prior_mean, prior_var, n_A, n, alpha, method.
 }
 \description{
-Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper].
+Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper]
 }
 \examples{
 morie_ghosal_moment_matching(x = rnorm(50))

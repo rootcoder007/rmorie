@@ -5,7 +5,7 @@
 \alias{sample_ibp}
 \title{sample_ibp}
 \usage{
-sample_ibp(n, alpha, seed = 0L)
+sample_ibp(n, alpha, seed = 0L) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

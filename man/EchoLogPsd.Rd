@@ -5,7 +5,7 @@
 \alias{EchoLogPsd}
 \title{Log power spectrum of a wavelet with an echo, eq (4.85)}
 \usage{
-EchoLogPsd(H, a, n_0, omega)
+EchoLogPsd(H, a, n_0, omega) 
 }
 \arguments{
 \item{H}{A vector; its length is taken.}

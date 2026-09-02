@@ -11,7 +11,7 @@
 #' maximum is optimistic; the complementary group's ATT is reported
 #' beside it.
 #'
-#' Formula: d* = argmax_{j,c} tau_hat({i : W_ij > c}).
+#' Formula: d* = argmax_\{j,c\} tau_hat(\{i : W_ij > c\}).
 #'
 #' @param y Outcome change dY.
 #' @param D Treatment indicator, 0 or 1.

@@ -5,7 +5,7 @@
 \alias{morie_diffRC_noise_schedule}
 \title{A linear noise schedule, scaled DOWN}
 \usage{
-morie_diffRC_noise_schedule(T, scale = 0.001, beta_min = 1e-04, beta_max = 0.02)
+morie_diffRC_noise_schedule(T, scale = 0.001, beta_min = 1e-04, beta_max = 0.02) 
 }
 \arguments{
 \item{T}{Integer number of diffusion steps.}

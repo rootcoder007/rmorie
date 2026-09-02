@@ -5,7 +5,7 @@
 \alias{DftX}
 \title{Eq (3.80) with bin k at k fs / N.  Figure 3.38: for even N, DC and}
 \usage{
-DftX(x, fs = 1)
+DftX(x, fs = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{Dft}.}

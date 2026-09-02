@@ -13,6 +13,8 @@ Eqmm(y, a_R, b_R, a_F, b_F)
 Form R (reference) metric.}
 
 \item{a_F, b_F}{The same items' parameters on the Form F metric.}
+
+
 }
 \value{
 List with \code{estimate}, \code{A}, \code{B},

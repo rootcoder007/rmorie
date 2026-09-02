@@ -20,6 +20,7 @@ morie_geron_classification_tree(
 \item{max_depth}{Optional cap.}
 
 \item{min_samples_leaf}{Minimum leaf size.}
+
 }
 \value{
 List with \code{tree}, \code{predictions}, \code{probabilities}, \code{classes},

@@ -5,7 +5,7 @@
 \alias{bpr_predict}
 \title{Predict x_hat_ui = <w_u, h_i>}
 \usage{
-bpr_predict(W, H, u, i)
+bpr_predict(W, H, u, i) 
 }
 \arguments{
 \item{W}{List of length \code{n_users}; each element a length-k   numeric vector (0-based row indexing).}

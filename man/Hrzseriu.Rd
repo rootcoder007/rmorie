@@ -41,7 +41,7 @@ so g minimises E[rho(W, h)]^2 (5.80).  Writing the conditional-mean
 operator as m = A g (5.84) and expanding both sides in the basis
 gives the finite linear system
 
-m_k = sum_{j=1}^{J} b_j q_jk,   k = 1, ..., J              (5.85)
+m_k = sum_\{j=1\}^\{J\} b_j q_jk,   k = 1, ..., J              (5.85)
 
 where mhat = (Psi'Psi)^- Psi'Y and qhat_jk is the k-th coefficient
 from the series regression of psi_j(X) on W.  The estimator is

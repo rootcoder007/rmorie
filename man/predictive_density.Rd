@@ -5,7 +5,7 @@
 \alias{predictive_density}
 \title{Predictive density}
 \usage{
-predictive_density(grid, cluster_params, counts, alpha, kernel, base_predictive)
+predictive_density(grid, cluster_params, counts, alpha, kernel, base_predictive) 
 }
 \arguments{
 \item{grid}{Numeric vector of evaluation points.}

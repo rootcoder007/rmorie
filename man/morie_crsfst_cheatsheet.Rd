@@ -5,7 +5,7 @@
 \alias{morie_crsfst_cheatsheet}
 \title{One-line summary of the crsfst module}
 \usage{
-morie_crsfst_cheatsheet()
+morie_crsfst_cheatsheet() 
 }
 \description{
 One-line summary of the crsfst module

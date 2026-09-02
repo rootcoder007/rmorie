@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Spatial trend surface: linear mean plus correlated error.
+#' Spatial trend surface: linear mean plus correlated error
 #'
-#' Z(s) = sum_{j=0}^p X_j(s) beta_j + e(s) = X beta + e(s), fitted by
+#' Z(s) = sum_\{j=0\}^p X_j(s) beta_j + e(s) = X beta + e(s), fitted by
 #' ordinary least squares; the residuals are what a variogram estimator
 #' should be given.
 #'

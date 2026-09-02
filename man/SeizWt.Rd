@@ -5,7 +5,8 @@
 \alias{SeizWt}
 \title{Fluctuation intensity of DWT coefficients, Sec 8.17 eq (8.132)}
 \usage{
-SeizWt(eeg, fs = 1, wavelet = "db4", levels = 5, scales = c(3, 4, 5), threshold = NULL)
+SeizWt(eeg, fs = 1, wavelet = "db4", levels = 5, scales = c(3, 4, 5), 
+    threshold = NULL) 
 }
 \arguments{
 \item{eeg}{Passed to \code{.tf_need}.}

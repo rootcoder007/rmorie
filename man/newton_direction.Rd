@@ -5,7 +5,7 @@
 \alias{newton_direction}
 \title{newton_direction}
 \usage{
-newton_direction(A, x, s, rp, rd, rc)
+newton_direction(A, x, s, rp, rd, rc) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

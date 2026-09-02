@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # Native causal DAG toolkit (feat/native-specializations, module 13).
-# Pearl's graphical identification pipeline — build a DAG, identify the
+# Pearl's graphical identification pipeline -- build a DAG, identify the
 # backdoor adjustment set (Bayes-Ball d-separation), estimate through
-# the native effect estimators, and refute DoWhy-style — with no
+# the native effect estimators, and refute DoWhy-style -- with no
 # dagitty/V8 or Python runtime.
 
 #' Build a causal DAG
@@ -168,7 +168,7 @@ print.morie_dag <- function(x, ...) {
 #' Uses the canonical adjustment set (observed ancestors of exposure
 #' or outcome, minus descendants of the exposure) and verifies it with
 #' Bayes-Ball d-separation on the graph with outgoing exposure edges
-#' removed — if the canonical set fails, no backdoor set exists (van
+#' removed -- if the canonical set fails, no backdoor set exists (van
 #' der Zander, Liskiewicz & Textor 2014).
 #'
 #' @param dag A `morie_dag`.
@@ -204,7 +204,7 @@ morie_dag_identify <- function(dag) {
 #' @param dag A `morie_dag`.
 #' @param data Data frame containing the observed nodes.
 #' @param method `"backdoor.aipw"` (default), `"backdoor.linear"`, or
-#'   `"backdoor.dml"` — all native estimators.
+#'   `"backdoor.dml"` -- all native estimators.
 #' @return The chosen estimator's result list, plus `adjustment_set`
 #'   and `estimand`.
 #' @examples

@@ -5,7 +5,7 @@
 \alias{morie_alammar_bertopic_pipeline}
 \title{BERTopic pipeline: reduce, cluster, c-TF-IDF (Grootendorst 2022)}
 \usage{
-morie_alammar_bertopic_pipeline(documents, embeddings, min_cluster_size = 2)
+morie_alammar_bertopic_pipeline(documents, embeddings, min_cluster_size = 2) 
 }
 \arguments{
 \item{documents}{List of token vectors.}

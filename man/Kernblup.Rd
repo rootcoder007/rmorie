@@ -2,7 +2,7 @@
 % Please edit documentation in R/kblup.R
 \name{Kernblup}
 \alias{Kernblup}
-\title{Kernel covariance of a replicated-line predictor.}
+\title{Kernel covariance of a replicated-line predictor}
 \usage{
 Kernblup(Z, K, sigma2_u = 1)
 }

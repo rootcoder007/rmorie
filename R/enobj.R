@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Elastic net penalized residual sum of squares.
+#' Elastic net penalized residual sum of squares
 #'
 #' Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda \[ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| \]
 #'

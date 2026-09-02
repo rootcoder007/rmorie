@@ -28,9 +28,9 @@ supported wavelets", Communications on Pure and Applied Mathematics
 \details{
 The scaling filter h of length L = 2N is what the paper constructs:
 the compactly supported solution of the two-scale relation whose
-defining conditions are sum h_k = sqrt(2), sum_k h_k h_{k+2m} =
-delta_{m0}, and sum_k (-1)^k k^m h_k = 0 for m = 0 ... N-1. The
-wavelet filter is the quadrature mirror g_k = (-1)^k h_{L-1-k}. Those
+defining conditions are sum h_k = sqrt(2), sum_k h_k h_\{k+2m\} =
+delta_\{m0\}, and sum_k (-1)^k k^m h_k = 0 for m = 0 ... N-1. The
+wavelet filter is the quadrature mirror g_k = (-1)^k h_\{L-1-k\}. Those
 conditions determine h up to reflection and are checked numerically
 here rather than taken on trust: \code{orthonormality},
 \code{double_shift} and \code{vanishing_moments} are the residuals.

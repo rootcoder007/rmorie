@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R, R/rcpp_docs.R
 \name{.morie_http_post_with_status}
 \alias{.morie_http_post_with_status}
-\title{Status-aware HTTP(S) POST via the libcurl backend (C++).}
+\title{Status-aware HTTP(S) POST via the libcurl backend (C++)}
 \usage{
 .morie_http_post_with_status(
   url,

@@ -5,7 +5,8 @@
 \alias{expand_polynomials}
 \title{expand_polynomials}
 \usage{
-expand_polynomials(phi = numeric(0), Phi = numeric(0), theta = numeric(0), Theta = numeric(0), s = 12)
+expand_polynomials(phi = numeric(0), Phi = numeric(0), theta = numeric(0), Theta = numeric(0), 
+    s = 12) 
 }
 \arguments{
 \item{phi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.}

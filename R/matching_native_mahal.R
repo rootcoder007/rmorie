@@ -2,7 +2,7 @@
 #
 # Native Mahalanobis matching engine (feat/native-specializations,
 # module 2). Rubin (1980): covariance estimated on the CONTROL pool,
-# distance computed after Cholesky whitening — Mahalanobis distance in
+# distance computed after Cholesky whitening -- Mahalanobis distance in
 # the original space equals Euclidean distance in whitened space, so
 # the greedy scan kernel needs no matrix solves per pair. Optional
 # exact-matching strata and a caliper in Mahalanobis-distance units.

@@ -5,7 +5,7 @@
 \alias{morie_pmfsc_bin}
 \title{Which bin a separation falls in, or -1 if it is past the cutoff}
 \usage{
-morie_pmfsc_bin(r, r_max, n_bins)
+morie_pmfsc_bin(r, r_max, n_bins) 
 }
 \arguments{
 \item{r}{The separation.}

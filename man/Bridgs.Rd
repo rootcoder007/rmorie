@@ -14,6 +14,8 @@ Bridgs(draws1, draws2, log_q1, log_q2, tol = 1e-12, max_iter = 1000L)
 \item{tol}{Relative fixed-point tolerance on log r.}
 
 \item{max_iter}{Iteration cap.}
+
+
 }
 \value{
 List with \code{estimate} (r), \code{log_r},

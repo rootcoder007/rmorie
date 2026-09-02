@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Internal: valid interval for a spatial autoregressive parameter.
+#' Internal: valid interval for a spatial autoregressive parameter
 #'
 #' A SAR/CAR/Durbin likelihood exists only where the implied precision
 #' (or |I - rho W|) is positive definite. The bound is an eigenvalue
@@ -36,7 +36,7 @@
   )
 }
 
-#' Internal: `.sp_rho_bounds` shrunk to a closed interval for optimisers.
+#' Internal: `.sp_rho_bounds` shrunk to a closed interval for optimisers
 #' @param W Weights matrix.
 #' @param form "identity" or "weighted".
 #' @param pad Fraction of the width to shrink by at each end.

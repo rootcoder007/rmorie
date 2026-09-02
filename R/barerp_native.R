@@ -711,6 +711,21 @@ barriermethod <- barrier_method
 
 # Dispatcher: the TASK.md main entry point. Same signature and return
 # shape as the Python reference's barerp/barrier_method.
+#' @param f0 See Usage.
+#' @param constraints See Usage.
+#' @param x0 See Usage.
+#' @param t0 See Usage.
+#' @param mu See Usage.
+#' @param eps See Usage.
+#' @param aeq See Usage.
+#' @param beq See Usage.
+#' @param centering See Usage.
+#' @param tol See Usage.
+#' @param max_inner See Usage.
+#' @param max_outer See Usage.
+#' @param grad See Usage.
+#' @param hess See Usage.
+#' @param affine See Usage.
 #' @export
 morie_barerp <- function(f0, constraints, x0,
                          t0 = 1.0, mu = 10.0, eps = 1e-8,

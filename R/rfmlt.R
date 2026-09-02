@@ -12,16 +12,16 @@
 #' Page 656, attributing the rule to Tang and Ishwaran (2017): "Assuming that
 #' there are measures of q traits in each observation, that is,
 #' y_i = (y_i,1, ..., y_i,q)^T, the goal is to minimize the multivariate sums
-#' of squares (MSS), MSS = sum_{j=1}^{q} ( sum_{i=1}^{L} (y_ij - ybar_Lj)^2 +
-#' sum_{i=1}^{R} (y_ij - ybar_Rj)^2 )  (15.5), where ybar_Lj and ybar_Rj are
+#' of squares (MSS), MSS = sum_\{j=1\}^\{q\} ( sum_\{i=1\}^\{L\} (y_ij - ybar_Lj)^2 +
+#' sum_\{i=1\}^\{R\} (y_ij - ybar_Rj)^2 )  (15.5), where ybar_Lj and ybar_Rj are
 #' the sample means of the jth response variable in the left and right daughter
 #' nodes."  The page then requires standardisation -- "such a splitting rule
 #' (15.5) can only be effective if each of the response variables is measured
 #' on the same scale ... We therefore calibrate MSS by assuming that each
 #' response variable has been standardized (with mean zero and variance equal
 #' to one).  The standardization is applied prior to splitting a node" -- and
-#' gives the working form MSS = sum_{j=1}^{q} ( (1/n_L)(sum_{i=1}^{L} y*_ij)^2
-#' + (1/n_R)(sum_{i=1}^{R} y*_ij)^2 )  (15.6).
+#' gives the working form MSS = sum_\{j=1\}^\{q\} ( (1/n_L)(sum_\{i=1\}^\{L\} y*_ij)^2
+#' + (1/n_R)(sum_\{i=1\}^\{R\} y*_ij)^2 )  (15.6).
 #'
 #' BOOK ERRATUM, recorded, and it inverts the optimisation.  The page says
 #' "minimizing MSS is equivalent to minimizing" (15.6).  It is equivalent to

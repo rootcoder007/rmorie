@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_io.R
 \name{morie_tps_list_formats}
 \alias{morie_tps_list_formats}
-\title{Map TPS format name -> path of the file that would be loaded.}
+\title{Map TPS format name -> path of the file that would be loaded}
 \usage{
 morie_tps_list_formats(name)
 }

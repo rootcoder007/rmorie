@@ -5,7 +5,7 @@
 \alias{LmsVarStep}
 \title{Eq. (3.204): eq. (3.203) with a step size that changes each sample}
 \usage{
-LmsVarStep(w, e, rvec, mu_n)
+LmsVarStep(w, e, rvec, mu_n) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

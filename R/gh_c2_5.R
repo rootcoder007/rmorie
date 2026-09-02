@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Histogram (binning) density prior
 #'
-#' f(x) = sum_k (p_k / |B_k|) 1{x in B_k} with the bin probabilities
+#' f(x) = sum_k (p_k / |B_k|) 1\{x in B_k\} with the bin probabilities
 #' Dirichlet.  It is the simplest density prior that is genuinely
 #' nonparametric, and the Dirichlet vector is drawn by normalising
 #' independent gammas -- the standard route, and the one the book's
 #' Proposition G.2 licenses.
 #'
 #' Formula: g_k ~ Gamma(alpha, 1), p = g / sum(g),
-#'   f(x) = p_{b(x)} K on \[0, 1\] with K equal-width bins.
+#'   f(x) = p_\{b(x)\} K on \[0, 1\] with K equal-width bins.
 #'
 #' @param x Evaluation points.
 #' @param K Number of bins, at least 1.

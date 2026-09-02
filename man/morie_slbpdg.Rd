@@ -5,7 +5,10 @@
 \alias{morie_slbpdg}
 \title{Slice-sampled Dirichlet-process mixture of normals}
 \usage{
-morie_slbpdg(y, alpha = 1, n_iter = 500L, burn = NULL, thin = 1L, route = "walker", kappa = 0.5, m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL, seed = 1, max_components = 200L, grid = NULL, alpha_update = NULL, alpha_a = 2, alpha_b = 1, keep_draws = FALSE)
+morie_slbpdg(y, alpha = 1, n_iter = 500L, burn = NULL, thin = 1L, route = "walker", 
+    kappa = 0.5, m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL, seed = 1, 
+    max_components = 200L, grid = NULL, alpha_update = NULL, alpha_a = 2, 
+    alpha_b = 1, keep_draws = FALSE) 
 }
 \arguments{
 \item{y}{The data.}

@@ -5,7 +5,7 @@
 \alias{k02p2z}
 \title{k02p2z}
 \usage{
-k02p2z(z)
+k02p2z(z) 
 }
 \arguments{
 \item{z}{Numeric; passed to \code{abs}.}

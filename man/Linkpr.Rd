@@ -15,6 +15,7 @@ link_prediction(G, u, v, method = "all")
 \item{u, v}{Node indices (1-based).}
 
 \item{method}{One of cn, aa, ra, all.}
+
 }
 \value{
 List with the requested scores, common_neighbours (1-based),

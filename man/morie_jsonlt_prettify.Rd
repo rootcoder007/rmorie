@@ -5,7 +5,7 @@
 \alias{morie_jsonlt_prettify}
 \title{Indent JSON text}
 \usage{
-morie_jsonlt_prettify(txt, indent = 4L)
+morie_jsonlt_prettify(txt, indent = 4) 
 }
 \arguments{
 \item{txt}{JSON text.}

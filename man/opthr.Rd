@@ -15,6 +15,7 @@ morie_opthr(efficiency = 0.95, lower = 1e-06, upper = 20, iters = 200L)
 \item{lower, upper}{bisection bracket.}
 
 \item{iters}{bisection steps.}
+
 }
 \value{
 list: estimate, efficiency, achieved, asymptotic_variance,

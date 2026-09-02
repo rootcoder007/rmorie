@@ -5,10 +5,15 @@
 \alias{Friedchi}
 \title{Chi-square approximation to Friedman Q -- Sec. 12.2, p. 442}
 \usage{
-Friedchi(q, k, n)
+Friedchi(q, k, n) 
 }
 \description{
 Chi-square approximation to Friedman Q -- Sec. 12.2, p. 442
+}
+\arguments{
+\item{q}{Argument \code{q}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{mean}, \code{var_exact}, \code{var_chi2}, \code{ratio}, \code{k}, \code{n}.

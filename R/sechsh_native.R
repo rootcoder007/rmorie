@@ -17,7 +17,7 @@
 
 #' One step of a hash-chained audit log
 #'
-#' h_i = H(h_{i-1} || e_i), or HMAC if a key is given. With a key the
+#' h_i = H(h_\{i-1\} || e_i), or HMAC if a key is given. With a key the
 #' log writer does not hold, an attacker with write access still
 #' cannot recompute the chain forward.
 #'

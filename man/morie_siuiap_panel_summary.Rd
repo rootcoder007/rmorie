@@ -2,7 +2,7 @@
 % Please edit documentation in R/siuiap.R
 \name{morie_siuiap_panel_summary}
 \alias{morie_siuiap_panel_summary}
-\title{Human-readable summary of the SIU IAP panel.}
+\title{Human-readable summary of the SIU IAP panel}
 \usage{
 morie_siuiap_panel_summary()
 }
@@ -11,7 +11,7 @@ A character scalar summarising chair, members, mandate
 dates, and the Public Safety Canada URL.
 }
 \description{
-Human-readable summary of the SIU IAP panel.
+Human-readable summary of the SIU IAP panel
 }
 \examples{
 cat(morie_siuiap_panel_summary())

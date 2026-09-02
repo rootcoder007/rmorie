@@ -5,7 +5,7 @@
 \alias{FDiffFr}
 \title{Eq (3.125).  The second form separates a half-sample delay from a}
 \usage{
-FDiffFr(omega, T = 1)
+FDiffFr(omega, T = 1) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

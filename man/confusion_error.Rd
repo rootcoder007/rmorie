@@ -5,7 +5,7 @@
 \alias{confusion_error}
 \title{confusion_error}
 \usage{
-confusion_error(C, labels = NULL)
+confusion_error(C, labels = NULL) 
 }
 \arguments{
 \item{C}{A matrix; indexed by row and column.}

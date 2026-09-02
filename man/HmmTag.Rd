@@ -31,7 +31,7 @@ short sentence, which is the only way to be sure the back-pointers
 are right.
 }
 \details{
-Formula: argmax_y prod_t P(y_t | y_{t-1}) P(x_t | y_t).
+Formula: argmax_y prod_t P(y_t | y_\{t-1\}) P(x_t | y_t).
 }
 \examples{
 X <- c(0, 1, 2, 1, 0)

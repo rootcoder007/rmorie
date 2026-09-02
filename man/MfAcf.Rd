@@ -5,7 +5,7 @@
 \alias{MfAcf}
 \title{Filtering with h(t) = K x(t0 - t) makes the convolution equivalent to}
 \usage{
-MfAcf(x, gain = 1, dt = 1)
+MfAcf(x, gain = 1, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

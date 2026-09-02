@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_posspr}
 \alias{morie_posspr}
+\alias{sample_urn}
 \title{Draw a Polya urn sequence of cluster labels}
 \usage{
-morie_posspr(n, alpha, seed = 0)
+morie_posspr(n, alpha, seed = 0) 
+
+sample_urn(n, alpha, seed = 0) 
 }
 \arguments{
 \item{n}{Number of draws, at least 1.}

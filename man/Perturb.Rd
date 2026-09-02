@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitprt.R
 \name{Perturb}
 \alias{Perturb}
-\title{Perturbation of one composition by another.}
+\title{Perturbation of one composition by another}
 \usage{
 Perturb(x, y, total = 1)
 }
@@ -10,6 +10,7 @@ Perturb(x, y, total = 1)
 \item{x, y}{Strictly positive vectors of parts, the same length.}
 
 \item{total}{Constant the result sums to.}
+
 }
 \value{
 List with \code{composition}, \code{total}, \code{D}.

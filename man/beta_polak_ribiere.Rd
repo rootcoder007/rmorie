@@ -5,7 +5,7 @@
 \alias{beta_polak_ribiere}
 \title{beta_polak_ribiere}
 \usage{
-beta_polak_ribiere(g_new, g_old, plus = FALSE)
+beta_polak_ribiere(g_new, g_old, plus = FALSE) 
 }
 \arguments{
 \item{g_new}{Numeric; combined arithmetically in the body.}

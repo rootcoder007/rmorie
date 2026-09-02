@@ -14,6 +14,7 @@ length.}
 
 \item{H0}{Non-zero to test coverage of \code{theta_0} (the default);
 zero to report the intersection only, leaving \code{reject} at 0.}
+
 }
 \value{
 List with \code{lower}, \code{upper}, \code{width},

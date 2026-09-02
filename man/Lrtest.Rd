@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmlrt.R
 \name{Lrtest}
 \alias{Lrtest}
-\title{Likelihood ratio test from two maximised log-likelihoods.}
+\title{Likelihood ratio test from two maximised log-likelihoods}
 \usage{
 Lrtest(loglik_full, loglik_null, df)
 }

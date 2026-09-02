@@ -3,12 +3,17 @@
 % the formals.
 \name{morie_poissp_car_precision}
 \alias{morie_poissp_car_precision}
-\title{The proper-CAR precision Q = tau (D_w - rho W).}
+\title{The proper-CAR precision Q = tau (D_w - rho W)}
 \usage{
-morie_poissp_car_precision(W, tau = 1, rho = 1)
+morie_poissp_car_precision(W, tau = 1, rho = 1) 
 }
 \description{
 The proper-CAR precision Q = tau (D_w - rho W).
+}
+\arguments{
+\item{W}{Argument \code{W}; see Usage.}
+\item{tau}{Argument \code{tau}; see Usage.}
+\item{rho}{Argument \code{rho}; see Usage.}
 }
 \value{
 A numeric value.

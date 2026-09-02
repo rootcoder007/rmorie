@@ -5,7 +5,7 @@
 \alias{BciChSel}
 \title{BciChSel}
 \usage{
-BciChSel(trials, nselect, rank = 4, maxiter = 200, tol = 1e-08, seed = 1)
+BciChSel(trials, nselect, rank = 4, maxiter = 200, tol = 1e-08, seed = 1) 
 }
 \arguments{
 \item{trials}{Passed to \code{.morie_bx_chsel}.}

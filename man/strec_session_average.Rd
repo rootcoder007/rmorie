@@ -5,7 +5,7 @@
 \alias{strec_session_average}
 \title{strec_session_average}
 \usage{
-strec_session_average(embeddings)
+strec_session_average(embeddings) 
 }
 \arguments{
 \item{embeddings}{Passed to \code{.strec_as_rows}.}

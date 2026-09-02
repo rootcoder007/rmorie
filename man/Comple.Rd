@@ -24,6 +24,8 @@ Comple(
 \item{re_r, im_r}{Relation embeddings, optional.}
 
 \item{seed}{Seed for the shared Lehmer minstd default embeddings.}
+
+
 }
 \value{
 List with \code{estimate}, \code{scores}, \code{m}, \code{dim}.

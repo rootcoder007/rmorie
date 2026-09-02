@@ -5,7 +5,7 @@
 \alias{morie_matching_nn_select_cpp}
 \title{morie_matching_nn_select_cpp}
 \usage{
-morie_matching_nn_select_cpp(D, with_replacement, caliper, n_neighbors)
+morie_matching_nn_select_cpp(D, with_replacement, caliper, n_neighbors) 
 }
 \arguments{
 \item{D}{Passed to \code{.Call}.}

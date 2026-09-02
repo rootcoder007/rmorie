@@ -9,3 +9,11 @@ morie_tmle_doubly_robust_pen(y, D, X, penalty = 0.05, iters = 100)
 \description{
 Public alias resolved by fn/_lazy_map.json
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{penalty}{Argument \code{penalty}; see Usage.}
+\item{iters}{Argument \code{iters}; see Usage.}
+}
+

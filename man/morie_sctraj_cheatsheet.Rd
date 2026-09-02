@@ -5,7 +5,7 @@
 \alias{morie_sctraj_cheatsheet}
 \title{morie_sctraj_cheatsheet}
 \usage{
-morie_sctraj_cheatsheet()
+morie_sctraj_cheatsheet() 
 }
 \description{
 A step of the sctraj_native implementation. No other function in the package calls it. See the file header for the source the module follows.

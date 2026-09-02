@@ -2,7 +2,7 @@
 % Please edit documentation in R/msdef.R
 \name{Msetst}
 \alias{Msetst}
-\title{Mean squared error of a set of predictions.}
+\title{Mean squared error of a set of predictions}
 \usage{
 Msetst(y, yhat)
 }

@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero recurrent inference step.
+#' MuZero recurrent inference step
 #'
-#' r^k, s^k = g(s^{k-1}, a^k) followed by p^k, v^k = f(s^k).
+#' r^k, s^k = g(s^\{k-1\}, a^k) followed by p^k, v^k = f(s^k).
 #'
-#' @param state Hidden state s^{k-1}.
+#' @param state Hidden state s^\{k-1\}.
 #' @param action Action a^k.
 #' @param dynamics g, returning list(reward, state).
 #' @param prediction f, returning list(policy, value); NULL skips it.

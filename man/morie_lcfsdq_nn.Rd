@@ -5,7 +5,7 @@
 \alias{morie_lcfsdq_nn}
 \title{Distance from each point to its k-th nearest OTHER point}
 \usage{
-morie_lcfsdq_nn(coords, k = 1L, metric = "euclidean")
+morie_lcfsdq_nn(coords, k = 1L, metric = "euclidean") 
 }
 \arguments{
 \item{coords}{Point coordinate matrix.}

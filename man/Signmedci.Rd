@@ -5,10 +5,14 @@
 \alias{Signmedci}
 \title{Median CI from sign-test inversion -- eq. (5.4.11), p. 179}
 \usage{
-Signmedci(x, alpha = 0.05)
+Signmedci(x, alpha = 0.05) 
 }
 \description{
 Median CI from sign-test inversion -- eq. (5.4.11), p. 179
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{r}, \code{s}, \code{coverage}, \code{tail}, \code{n}.

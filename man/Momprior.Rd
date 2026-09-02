@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c3_8.R
 \name{Momprior}
 \alias{Momprior}
-\title{Check that a moment sequence is realisable by a measure on [0, 1].}
+\title{Check that a moment sequence is realisable by a measure on [0, 1]}
 \usage{
 Momprior(moments)
 }

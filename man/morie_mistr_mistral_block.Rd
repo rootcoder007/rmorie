@@ -5,7 +5,8 @@
 \alias{morie_mistr_mistral_block}
 \title{One Mistral decoder block}
 \usage{
-morie_mistr_mistral_block(X, Wq, Wk, Wv, Wo, W1, W2, W3, n_heads, n_kv_heads, window, norm1 = NULL, norm2 = NULL, base = 10000)
+morie_mistr_mistral_block(X, Wq, Wk, Wv, Wo, W1, W2, W3, n_heads, n_kv_heads, window, norm1 = NULL, 
+    norm2 = NULL, base = 10000) 
 }
 \arguments{
 \item{X}{L x d input matrix.}

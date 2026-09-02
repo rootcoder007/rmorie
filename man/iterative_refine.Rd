@@ -5,7 +5,8 @@
 \alias{iterative_refine}
 \title{iterative_refine}
 \usage{
-iterative_refine(alignment, scoring, tree = NULL, s_op = 2.4, max_iterate = 16L, seq_type = "aa", use_fft = TRUE, ...)
+iterative_refine(alignment, scoring, tree = NULL, s_op = 2.4, max_iterate = 16L, 
+    seq_type = "aa", use_fft = TRUE, ...) 
 }
 \arguments{
 \item{alignment}{Iterated over elementwise, with \code{vapply}.}

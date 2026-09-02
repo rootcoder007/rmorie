@@ -5,7 +5,7 @@
 \alias{resolve_synthetic_name_map}
 \title{resolve_synthetic_name_map}
 \usage{
-resolve_synthetic_name_map(name_map, profile)
+resolve_synthetic_name_map(name_map, profile) 
 }
 \arguments{
 \item{name_map}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

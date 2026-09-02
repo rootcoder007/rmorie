@@ -5,7 +5,7 @@
 \alias{anomaly_score}
 \title{anomaly_score}
 \usage{
-anomaly_score(x, g_z, f_x, f_gz, lam = 0.1)
+anomaly_score(x, g_z, f_x, f_gz, lam = 0.1) 
 }
 \arguments{
 \item{x}{Passed to \code{.gan_an_anomaly_score_impl}.}

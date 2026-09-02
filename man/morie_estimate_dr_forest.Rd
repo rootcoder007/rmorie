@@ -32,7 +32,7 @@ A list with \code{ate}, \code{se}, \code{ci_lower},
 Native rmorie causal forest: the R-learner decomposition (Nie &
 Wager 2021) with cross-fit nuisances and a weighted subsampled
 regression forest for tau(x), combined through the AIPW orthogonal
-score — the same estimand grf's
+score -- the same estimand grf's
 \code{average_treatment_effect(method = "AIPW")} targets
 (cross-validated against grf in the package's cross tests). A
 machine-learning alternative to the GLM-based

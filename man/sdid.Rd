@@ -5,7 +5,7 @@
 \alias{sdid}
 \title{sdid}
 \usage{
-sdid(Y, treated, t_post, method = "sdid", zeta = NULL)
+sdid(Y, treated, t_post, method = "sdid", zeta = NULL) 
 }
 \arguments{
 \item{Y}{Passed to \code{.causscd_grid}.}

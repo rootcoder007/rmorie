@@ -5,7 +5,7 @@
 \alias{project_to_llm}
 \title{project_to_llm}
 \usage{
-project_to_llm(query_out, W, b = NULL)
+project_to_llm(query_out, W, b = NULL) 
 }
 \arguments{
 \item{query_out}{A matrix; passed to \code{as.matrix}.}

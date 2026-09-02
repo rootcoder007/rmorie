@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean-square continuity, decided by the covariance at the origin.
+#' Mean-square continuity, decided by the covariance at the origin
 #'
 #' For a field with constant mean and variance, MS continuity at s means
 #' lim_\{h->0\} E\[(Z(s) - Z(s+h))^2\] = 0, and since

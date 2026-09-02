@@ -18,6 +18,7 @@ Lineembed(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0, lr = 0.05)
 \item{steps}{full-batch gradient steps.}
 
 \item{lr}{step size.}
+
 }
 \value{
 list: estimate, O, O_start, U, Uc, n, method.

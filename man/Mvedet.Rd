@@ -29,7 +29,7 @@ point at h = [(n + p + 1)/2].
 Computation follows the standard resampling scheme: for each (p+1)-subset J
 take the mean m_J and covariance C_J of J, and inflate the ellipsoid until
 it covers h points, which means scaling by the h-th smallest squared
-Mahalanobis distance m2_J.  The volume of {x : (x-m)' C^-1 (x-m) <= m2} is
+Mahalanobis distance m2_J.  The volume of \{x : (x-m)' C^-1 (x-m) <= m2\} is
 proportional to m2^(p/2) sqrt(det C) = sqrt(det(m2 * C)), so minimising the
 volume is minimising det(m2_J * C_J) over J.  That determinant is the
 objective reported here.

@@ -5,7 +5,7 @@
 \alias{seasonal_harmonics}
 \title{seasonal_harmonics}
 \usage{
-seasonal_harmonics(m, k = NULL)
+seasonal_harmonics(m, k = NULL) 
 }
 \arguments{
 \item{m}{Numeric; combined arithmetically in the body.}

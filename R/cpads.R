@@ -9,7 +9,7 @@
 # analysis-column contract, validate frames against it, and canonicalize
 # raw PUMF column names into MORIE's analysis schema.
 
-#' Canonical CPADS analysis variables required by morie workflows.
+#' Canonical CPADS analysis variables required by morie workflows
 #'
 #' @keywords internal
 #' @noRd
@@ -27,7 +27,7 @@
   "physical_health"
 )
 
-#' Mapping from canonical CPADS analysis names to raw PUMF column names.
+#' Mapping from canonical CPADS analysis names to raw PUMF column names
 #'
 #' @keywords internal
 #' @noRd
@@ -46,7 +46,7 @@
   ebac_legal = "ebac_legal"
 )
 
-#' Return the CPADS analysis-frame contract.
+#' Return the CPADS analysis-frame contract
 #'
 #' Describes the morie CPADS contract: the canonical analysis
 #' variables expected in a wrangled frame, the raw -> canonical
@@ -88,7 +88,7 @@ morie_cpads_contract <- function() {
   )
 }
 
-#' Identify missing canonical CPADS variables in a column set.
+#' Identify missing canonical CPADS variables in a column set
 #'
 #' @param columns Character vector of column names (e.g. `colnames(df)`).
 #' @return Character vector of missing canonical CPADS variables (empty
@@ -101,7 +101,7 @@ morie_cpads_missing_variables <- function(columns) {
   setdiff(.MORIE_CPADS_REQUIRED_VARIABLES, columns)
 }
 
-#' Validate a data frame against the canonical CPADS analysis contract.
+#' Validate a data frame against the canonical CPADS analysis contract
 #'
 #' @param frame A `data.frame` (or `tibble`).
 #' @param strict Logical; if `TRUE` (default), raise an error when any
@@ -129,7 +129,7 @@ morie_cpads_validate_frame <- function(frame, strict = TRUE) {
   invisible(missing)
 }
 
-#' Detect whether a data frame looks like raw CPADS PUMF data.
+#' Detect whether a data frame looks like raw CPADS PUMF data
 #'
 #' Accepts either `wtpumf` (PUMF release) or `wtdf` (full dataset) as
 #' the weight column; otherwise all documented raw PUMF columns must be
@@ -154,7 +154,7 @@ morie_cpads_has_raw_columns <- function(frame) {
   all(raw_cols %in% cn) || all(raw_cols_alt %in% cn)
 }
 
-#' Coerce numeric, mapping non-numeric strings to `NA_real_` (silent).
+#' Coerce numeric, mapping non-numeric strings to `NA_real_` (silent)
 #' @keywords internal
 #' @noRd
 .morie_cpads_to_numeric <- function(x) {
@@ -162,7 +162,7 @@ morie_cpads_has_raw_columns <- function(frame) {
 }
 
 #' Recode a vector using a named map; values absent from the map become `NA`.
-#' Codes 98 / 99 (CPADS "don't know" / "refused") collapse to `NA`.
+#' Codes 98 / 99 (CPADS "don't know" / "refused") collapse to `NA`
 #' @keywords internal
 #' @noRd
 .morie_cpads_recode_yn <- function(x) {
@@ -173,7 +173,7 @@ morie_cpads_has_raw_columns <- function(frame) {
   out
 }
 
-#' Replace CPADS-style missing codes (98, 99) with `NA`.
+#' Replace CPADS-style missing codes (98, 99) with `NA`
 #' @keywords internal
 #' @noRd
 .morie_cpads_strip_dknr <- function(x) {
@@ -181,7 +181,7 @@ morie_cpads_has_raw_columns <- function(frame) {
   x
 }
 
-#' Canonicalize raw CPADS PUMF columns into morie's analysis schema.
+#' Canonicalize raw CPADS PUMF columns into morie's analysis schema
 #'
 #' First-pass canonicalization layer based on the public CPADS PUMF
 #' field names.  If `frame` already carries the canonical columns it is
@@ -232,7 +232,7 @@ morie_cpads_canonicalize_frame <- function(frame) {
   out
 }
 
-#' Infer the on-disk file format for a CPADS file path.
+#' Infer the on-disk file format for a CPADS file path
 #'
 #' Recognises `.csv`, `.xlsx` / `.xls`, and `.rds`.  Raises for any
 #' other extension.

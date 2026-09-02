@@ -2,7 +2,7 @@
 % Please edit documentation in R/splfun.R
 \name{splfun}
 \alias{splfun}
-\title{L-function, the variance-stabilised K-function.}
+\title{L-function, the variance-stabilised K-function}
 \usage{
 splfun(
   points,

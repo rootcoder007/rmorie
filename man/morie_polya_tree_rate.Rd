@@ -14,6 +14,7 @@ morie_polya_tree_rate(x, s = NULL, n = NULL, levels = 6L, a_scale = 1)
 \item{n}{sample size to evaluate at.}
 
 \item{levels, a_scale}{recorded for the corresponding fit.}
+
 }
 \value{
 list: n, smoothness, rate, minimax_rate, log_factor,

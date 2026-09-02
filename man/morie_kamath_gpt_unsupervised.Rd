@@ -5,7 +5,7 @@
 \alias{morie_kamath_gpt_unsupervised}
 \title{GPT objectives and MoE (Eq 2.34-2.41)}
 \usage{
-morie_kamath_gpt_unsupervised(U, k = NULL, Theta = NULL)
+morie_kamath_gpt_unsupervised(U, k = NULL, Theta = NULL) 
 }
 \arguments{
 \item{U}{Per-token probabilities.}

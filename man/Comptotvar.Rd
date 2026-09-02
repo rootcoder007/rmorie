@@ -2,23 +2,23 @@
 % Please edit documentation in R/aittvr.R
 \name{Comptotvar}
 \alias{Comptotvar}
-\title{Total variance of a compositional data set.}
+\title{Total variance of a compositional data set}
 \usage{
 Comptotvar(X)
 }
 \arguments{
-\item{X}{One composition per row; strictly positive.}
+\item{X}{See Usage.}
 }
 \value{
 List with \code{totvar}, \code{totvar_trace}, \code{clr_var}, \code{n}, \code{D}.
 }
 \description{
-Formula: totvar(x) = trace(Gamma) = (1/D) sum_{i<j} var{log(x_i/x_j)}
+Formula: totvar(x) = trace(Gamma) = (1/D) sum_\{i<j\} var\{log(x_i/x_j)\}
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Comptotvar(V)
 }
 \references{
-Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_{i<j} var{log(x_i/x_j)}.
+Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_\{i<j\} var\{log(x_i/x_j)\}.
 }

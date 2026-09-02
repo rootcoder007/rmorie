@@ -18,6 +18,8 @@ morie_geron_ch4_lasso_regression_cost_function(
 \item{alpha}{Non-negative weight; the penalty uses 2 * alpha.}
 
 \item{penalize_intercept}{Include theta[1] in the penalty.}
+
+
 }
 \value{
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l1_norm},

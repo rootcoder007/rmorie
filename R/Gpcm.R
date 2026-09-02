@@ -6,8 +6,8 @@
 #' first step parameter is arbitrary; it is kept so the printed formula
 #' is followed literally.
 #'
-#' Formula: P_k = exp(sum_{v=0}^{k} a (theta - b_v)) /
-#'   sum_c exp(sum_{v=0}^{c} a (theta - b_v)).
+#' Formula: P_k = exp(sum_\{v=0\}^\{k\} a (theta - b_v)) /
+#'   sum_c exp(sum_\{v=0\}^\{c\} a (theta - b_v)).
 #'
 #' @param y Observed categories, 0-based, one per person.
 #' @param theta Person abilities, same length as y.

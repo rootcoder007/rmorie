@@ -5,10 +5,14 @@
 \alias{Vdw}
 \title{van der Waerden test -- Sec. 8.3.2, p. 301}
 \usage{
-Vdw(x, y)
+Vdw(x, y) 
 }
 \description{
 van der Waerden test -- Sec. 8.3.2, p. 301
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{scores}, \code{m}, \code{n}.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Homogeneous Poisson process (HPP), the CSR reference model.
+#' Homogeneous Poisson process (HPP), the CSR reference model
 #'
 #' Two defining properties (Sec 3.2.2): N(A) ~ Poisson(lambda nu(A)) for
 #' any region A, and counts in DISJOINT regions are independent.

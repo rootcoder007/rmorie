@@ -20,7 +20,7 @@
   0.5 * (s1 + s2)
 }
 
-#' Jensen-Shannon divergence between two discrete distributions.
+#' Jensen-Shannon divergence between two discrete distributions
 #'
 #' Formula: with \eqn{M = (P+Q)/2},
 #' \eqn{JSD(P,Q) = \tfrac12 KL(P\|M) + \tfrac12 KL(Q\|M) =

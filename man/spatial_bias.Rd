@@ -5,7 +5,7 @@
 \alias{spatial_bias}
 \title{Turn the distance matrix into the attention bias}
 \usage{
-spatial_bias(distance, b_table, unreachable_bias = NULL)
+spatial_bias(distance, b_table, unreachable_bias = NULL) 
 }
 \arguments{
 \item{distance}{Square integer distance matrix.}

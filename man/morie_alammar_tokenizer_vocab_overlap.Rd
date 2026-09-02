@@ -5,7 +5,7 @@
 \alias{morie_alammar_tokenizer_vocab_overlap}
 \title{morie_alammar_tokenizer_vocab_overlap}
 \usage{
-morie_alammar_tokenizer_vocab_overlap(vocab_a, vocab_b)
+morie_alammar_tokenizer_vocab_overlap(vocab_a, vocab_b) 
 }
 \arguments{
 \item{vocab_a,vocab_b}{Token vocabularies.}

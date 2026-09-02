@@ -31,6 +31,8 @@ bounding box of both patterns.}
 \item{correction}{"ripley" or "none".}
 
 \item{hypothesis}{"independence" or "random_labelling".}
+
+
 }
 \value{
 A list with \code{estimate} (= \code{K_star}), \code{K_12}, \code{K_21}, \code{L_star},

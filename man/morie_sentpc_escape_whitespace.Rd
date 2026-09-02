@@ -5,7 +5,7 @@
 \alias{morie_sentpc_escape_whitespace}
 \title{Replace spaces with the U+2581 marker}
 \usage{
-morie_sentpc_escape_whitespace(text, add_prefix = TRUE)
+morie_sentpc_escape_whitespace(text, add_prefix = TRUE) 
 }
 \arguments{
 \item{text}{Character.}

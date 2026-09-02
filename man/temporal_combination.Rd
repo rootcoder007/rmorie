@@ -5,7 +5,8 @@
 \alias{temporal_combination}
 \title{Temporal combination across aggregation levels}
 \usage{
-temporal_combination(y, levels, horizon = 1L, method = "tsb", alpha = 0.1, beta = 0.05, weights = NULL)
+temporal_combination(y, levels, horizon = 1L, method = "tsb", alpha = 0.1, beta = 0.05, 
+    weights = NULL) 
 }
 \arguments{
 \item{y}{Numeric demand series.}

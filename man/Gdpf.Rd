@@ -29,7 +29,7 @@ perfect privacy, and delta = 0 for every epsilon; both limits are
 exact and are what the tests check.
 }
 \details{
-Formula: G_mu(alpha) = Phi(Phi^{-1}(1 - alpha) - mu);
+Formula: G_mu(alpha) = Phi(Phi^\{-1\}(1 - alpha) - mu);
 delta(eps) = Phi(-eps/mu + mu/2) - exp(eps) Phi(-eps/mu - mu/2).
 }
 \examples{

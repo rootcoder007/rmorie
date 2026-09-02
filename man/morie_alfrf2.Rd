@@ -5,7 +5,9 @@
 \alias{morie_alfrf2}
 \title{Grow a backbone around a fixed motif by reverse diffusion}
 \usage{
-morie_alfrf2(target_motif, scaffold, T = 20L, denoise = "ideal", denoiser = NULL, beta_start = 1e-04, beta_end = 0.02, spacing = .alfrf2_ca_spacing, passes = 8L, noise_scale = 1, seed = 0)
+morie_alfrf2(target_motif, scaffold, T = 20L, denoise = "ideal", denoiser = NULL, 
+    beta_start = 1e-04, beta_end = 0.02, spacing = .alfrf2_ca_spacing, 
+    passes = 8L, noise_scale = 1, seed = 0) 
 }
 \arguments{
 \item{target_motif}{A list of pairs of a zero-based residue index and   the three coordinates that residue must end up at.}

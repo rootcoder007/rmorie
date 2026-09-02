@@ -5,7 +5,7 @@
 \alias{Sens}
 \title{Eq (10.100): S+ = TP / (subjects with the disease).  Measures the}
 \usage{
-Sens(tp, fn = NULL)
+Sens(tp, fn = NULL) 
 }
 \arguments{
 \item{tp}{A matrix; passed to \code{as.matrix}.}

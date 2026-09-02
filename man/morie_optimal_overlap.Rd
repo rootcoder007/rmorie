@@ -16,3 +16,12 @@ morie_optimal_overlap(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{treatment}{Argument \code{treatment}; see Usage.}
+\item{pscore}{Argument \code{pscore}; see Usage.}
+\item{sigma2_treated}{Argument \code{sigma2_treated}; see Usage.}
+\item{sigma2_control}{Argument \code{sigma2_control}; see Usage.}
+\item{estimand}{Argument \code{estimand}; see Usage.}
+}
+

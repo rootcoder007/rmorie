@@ -5,7 +5,7 @@
 \alias{bpr_opt_R}
 \title{BPR-Opt and its loglik / penalty pieces}
 \usage{
-bpr_opt_R(W, H, pos, n_items, lam = 0.01)
+bpr_opt_R(W, H, pos, n_items, lam = 0.01) 
 }
 \arguments{
 \item{W}{List of length \code{n_users}; each element a length-k numeric vector.}

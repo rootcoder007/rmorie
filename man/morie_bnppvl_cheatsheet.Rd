@@ -5,7 +5,7 @@
 \alias{morie_bnppvl_cheatsheet}
 \title{One-line summary of the bnppvl module}
 \usage{
-morie_bnppvl_cheatsheet()
+morie_bnppvl_cheatsheet() 
 }
 \description{
 One-line summary of the bnppvl module

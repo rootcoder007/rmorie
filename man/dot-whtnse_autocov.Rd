@@ -2,7 +2,7 @@
 % Please edit documentation in R/whtnse.R
 \name{.whtnse_autocov}
 \alias{.whtnse_autocov}
-\title{Internal: Gamma_l = n^-1 sum_{t=l+1}^{n} e_t e_{t-l}\'}
+\title{Internal: Gamma_l = n^-1 sum_\{t=l+1\}^\{n\} e_t e_\{t-l\}\'}
 \usage{
 .whtnse_autocov(E, lag)
 }

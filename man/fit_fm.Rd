@@ -5,7 +5,7 @@
 \alias{fit_fm}
 \title{Least-squares FM by stochastic gradient descent ----------------}
 \usage{
-fit_fm(X, y, k_dim = 4, iters = 300, alpha = 0.02, lam = 0.01, seed = 0)
+fit_fm(X, y, k_dim = 4, iters = 300, alpha = 0.02, lam = 0.01, seed = 0) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

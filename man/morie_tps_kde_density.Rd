@@ -21,6 +21,7 @@ the \code{h} argument of the native \code{morie_kde2d}.}
 \item{ds_name}{Tag for the result title.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
+
 }
 \value{
 A named list with summary stats including max/mean/median

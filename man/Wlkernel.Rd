@@ -14,6 +14,8 @@ Wlkernel(G1, G2, K = 3, labels1 = NULL, labels2 = NULL, normalize = FALSE)
 \item{labels1, labels2}{initial node labels; all-equal by default.}
 
 \item{normalize}{divide by sqrt(k(G1,G1) k(G2,G2)).}
+
+
 }
 \value{
 list: estimate, kernel, per_iter, n_labels, method.

@@ -5,7 +5,7 @@
 \alias{patch_of_box}
 \title{patch_of_box}
 \usage{
-patch_of_box(box, width, height, patch_grid = 14)
+patch_of_box(box, width, height, patch_grid = 14) 
 }
 \arguments{
 \item{box}{Passed to \code{normalise_bbox}.}

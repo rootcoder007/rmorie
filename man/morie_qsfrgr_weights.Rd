@@ -5,7 +5,7 @@
 \alias{morie_qsfrgr_weights}
 \title{The forest's weight on each training observation, summing to one}
 \usage{
-morie_qsfrgr_weights(trees, x, n)
+morie_qsfrgr_weights(trees, x, n) 
 }
 \arguments{
 \item{trees}{A forest.}

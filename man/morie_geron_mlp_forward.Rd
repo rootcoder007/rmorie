@@ -20,6 +20,7 @@ morie_geron_mlp_forward(
 \item{activation}{One of "relu", "tanh", "sigmoid", "identity".}
 
 \item{output_activation}{Optional override for the last layer.}
+
 }
 \value{
 List with \code{output}, \code{activations}, \code{layer_sizes}, \code{n_layers},

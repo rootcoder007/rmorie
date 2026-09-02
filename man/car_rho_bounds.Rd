@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgcar.R
 \name{car_rho_bounds}
 \alias{car_rho_bounds}
-\title{Valid interval for the CAR dependence parameter rho.}
+\title{Valid interval for the CAR dependence parameter rho}
 \usage{
 car_rho_bounds(W, parameterization = "weighted")
 }

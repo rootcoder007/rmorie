@@ -5,7 +5,7 @@
 \alias{morie_timesfm}
 \title{morie_timesfm}
 \usage{
-morie_timesfm(history, predictor, horizon, input_patch_len, output_patch_len)
+morie_timesfm(history, predictor, horizon, input_patch_len, output_patch_len) 
 }
 \arguments{
 \item{history}{Passed to \code{unlist}.}

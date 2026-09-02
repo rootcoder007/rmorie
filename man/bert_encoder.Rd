@@ -5,7 +5,7 @@
 \alias{bert_encoder}
 \title{bert_encoder}
 \usage{
-bert_encoder(X, blocks, n_heads, pad_mask = NULL, pre_norm = FALSE)
+bert_encoder(X, blocks, n_heads, pad_mask = NULL, pre_norm = FALSE) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

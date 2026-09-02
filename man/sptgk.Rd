@@ -16,6 +16,8 @@ sptgk(coords, z, target, phi, dphi, d2phi, semivariogram_fn)
 \item{phi, dphi, d2phi}{The transformation and its first two derivatives.}
 
 \item{semivariogram_fn}{gamma(h) for the Y scale.}
+
+
 }
 \value{
 A list with \code{prediction}, \code{naive_prediction}, \code{correction},

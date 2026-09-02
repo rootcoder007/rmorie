@@ -5,7 +5,7 @@
 \alias{morie_timesfm_input_patches}
 \title{morie_timesfm_input_patches}
 \usage{
-morie_timesfm_input_patches(x, patch_len, pad_value = 0)
+morie_timesfm_input_patches(x, patch_len, pad_value = 0) 
 }
 \arguments{
 \item{x}{Passed to \code{unlist}.}

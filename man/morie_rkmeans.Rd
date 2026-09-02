@@ -5,7 +5,8 @@
 \alias{morie_rkmeans}
 \title{morie_rkmeans}
 \usage{
-morie_rkmeans(X, k = 2, alpha = 0.1, penalty = "square", n_start = 20, max_iter = 100, huber_c = 1.345, seed = 0, centers = NULL)
+morie_rkmeans(X, k = 2, alpha = 0.1, penalty = "square", n_start = 20, max_iter = 100, 
+    huber_c = 1.345, seed = 0, centers = NULL) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

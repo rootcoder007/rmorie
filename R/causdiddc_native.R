@@ -88,7 +88,7 @@
 # The w_{g,t} of Theorem 1, from the residual of D on the two-way
 # fixed effects.  Alternating projections, iterated to convergence --
 # the within-transformation solver, not the matrix-form Frisch-Waugh.
-#' The w_{g,t} of Theorem 1, from the residual of D on the two-way
+#' The w_\{g,t\} of Theorem 1, from the residual of D on the two-way
 #'
 #' fixed effects.  Alternating projections, iterated to convergence --
 #' the within-transformation solver, not the matrix-form Frisch-Waugh.
@@ -323,7 +323,7 @@ morie_causdiddc <- function(Y, D, group, period) {
                     "apart they are"))
 }
 
-#' The w_{g,t} of Theorem 1
+#' The w_\{g,t\} of Theorem 1
 #'
 #' The weights of de Chaisemartin & D'Haultfoeuille (2020) Theorem 1,
 #' from the residual of the treatment indicator on the two sets of

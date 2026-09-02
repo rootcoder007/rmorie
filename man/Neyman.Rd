@@ -32,7 +32,7 @@ and read visually, because the equations are load-bearing.
 \details{
 p. 579, eq. (37), the variance of the estimate sum(M_i ubar_i) of the
 population total under stratified random sampling, is
-sigma^2 = sum_i { (M_i^2 / m_i) ((M_i - m_i) / (M_i - 1)) sigma_i^2 }.
+sigma^2 = sum_i \{ (M_i^2 / m_i) ((M_i - m_i) / (M_i - 1)) sigma_i^2 \}.
 
 p. 580 puts S_i^2 = M_i sigma_i^2 / (M_i - 1) and rewrites (37) as
 eq. (39), whose three terms the page names A, B and -C:

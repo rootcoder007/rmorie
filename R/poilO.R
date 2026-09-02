@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Poisson loss for count outcomes.
+#' Poisson loss for count outcomes
 #'
 #' Formula: L(w) = sum_i sum_j \[ yhat_ij - y_ij log(yhat_ij) \]
 #'

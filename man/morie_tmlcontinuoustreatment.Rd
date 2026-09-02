@@ -17,3 +17,13 @@ morie_tmlcontinuoustreatment(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{A}{Argument \code{A}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{a_grid}{Argument \code{a_grid}; see Usage.}
+\item{fit}{Argument \code{fit}; see Usage.}
+\item{bandwidth}{Argument \code{bandwidth}; see Usage.}
+\item{n_folds}{Argument \code{n_folds}; see Usage.}
+}
+

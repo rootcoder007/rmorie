@@ -5,7 +5,7 @@
 \alias{fu_hepatocytes}
 \title{fu_hepatocytes}
 \usage{
-fu_hepatocytes(log_pd, volume_ratio = 0.005)
+fu_hepatocytes(log_pd, volume_ratio = 0.005) 
 }
 \arguments{
 \item{log_pd}{Passed to \code{.clrnt_binding_term}.}

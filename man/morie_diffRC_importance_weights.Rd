@@ -5,7 +5,7 @@
 \alias{morie_diffRC_importance_weights}
 \title{Importance-sample the timesteps that actually carry loss}
 \usage{
-morie_diffRC_importance_weights(step_losses, uniform = FALSE, smoothing = 0.1)
+morie_diffRC_importance_weights(step_losses, uniform = FALSE, smoothing = 0.1) 
 }
 \arguments{
 \item{step_losses}{Numeric vector of per-step losses.}

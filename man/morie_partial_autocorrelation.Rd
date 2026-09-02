@@ -5,10 +5,14 @@
 \alias{morie_partial_autocorrelation}
 \title{morie_partial_autocorrelation}
 \usage{
-morie_partial_autocorrelation(y, lag_max)
+morie_partial_autocorrelation(y, lag_max) 
 }
 \description{
 morie_partial_autocorrelation
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{lag_max}{Argument \code{lag_max}; see Usage.}
 }
 \value{
 A list with \code{pacf}, \code{acf}, \code{phi}, \code{lag_max}, \code{n}, \code{method}.

@@ -5,7 +5,8 @@
 \alias{decode_mask}
 \title{decode_mask}
 \usage{
-decode_mask(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_factor = 2, output_index = 0)
+decode_mask(prompt_tokens, image_tokens, grid_shape, n_blocks = 2, upsample_factor = 2, 
+    output_index = 0) 
 }
 \arguments{
 \item{prompt_tokens}{Passed to \code{.samdec_mat}.}

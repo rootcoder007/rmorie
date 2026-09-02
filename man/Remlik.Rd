@@ -2,7 +2,7 @@
 % Please edit documentation in R/remlf.R
 \name{Remlik}
 \alias{Remlik}
-\title{Restricted (residual) maximum likelihood log-likelihood of a mixed model.}
+\title{Restricted (residual) maximum likelihood log-likelihood of a mixed model}
 \usage{
 Remlik(X, Z, y, D, R = NULL)
 }

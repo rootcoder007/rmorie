@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' ADMM in scaled form for the LASSO.
+#' ADMM in scaled form for the LASSO
 #'
-#' x <- (X'X + rho I)^{-1}(X'y + rho(z - u));
-#' z <- S_{lam/rho}(x + u); u <- u + x - z.
+#' x <- (X'X + rho I)^\{-1\}(X'y + rho(z - u));
+#' z <- S_\{lam/rho\}(x + u); u <- u + x - z.
 #'
 #' @param X Design matrix.
 #' @param y Response of length n.

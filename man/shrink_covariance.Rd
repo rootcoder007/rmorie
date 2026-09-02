@@ -5,7 +5,7 @@
 \alias{shrink_covariance}
 \title{shrink_covariance}
 \usage{
-shrink_covariance(residuals, lam = NULL)
+shrink_covariance(residuals, lam = NULL) 
 }
 \arguments{
 \item{residuals}{A matrix; passed to \code{nrow}.}

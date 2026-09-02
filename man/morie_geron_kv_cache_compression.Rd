@@ -22,6 +22,9 @@ morie_geron_kv_cache_compression(
 \item{batch_size}{Positive batch size.}
 
 \item{baseline_bits}{Reference width for the compression ratio.}
+
+
+
 }
 \value{
 List with \code{cache_bytes}, \code{megabytes}, \code{gigabytes},

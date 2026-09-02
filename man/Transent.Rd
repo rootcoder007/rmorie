@@ -10,6 +10,7 @@ Transent(x, y, lag = 1)
 \item{x, y}{the two series, of equal length; entries are symbols.}
 
 \item{lag}{the history length.}
+
 }
 \value{
 list: estimate, te_xy, te_yx, net, bits, lag, n, method.

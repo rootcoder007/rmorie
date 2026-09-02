@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_bayoptr}
 \alias{morie_bayoptr}
+\alias{bayesian_optimization_ei_ucb}
 \title{Bayesian optimisation, chosen by acquisition function}
 \usage{
-morie_bayoptr(f, bounds, acquisition = "ei", n_iter = 20L, n_init = 5L, kernel = "matern52", amplitude = 1, length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, n_candidates = 200L, seed = 0L, X0 = NULL, y0 = NULL)
+morie_bayoptr(f, bounds, acquisition = "ei", n_iter = 20L, n_init = 5L, kernel = "matern52", 
+    amplitude = 1, length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, 
+    n_candidates = 200L, seed = 0L, X0 = NULL, y0 = NULL) 
+
+bayesian_optimization_ei_ucb(f, bounds, acquisition = "ei", n_iter = 20L, n_init = 5L, kernel = "matern52", 
+    amplitude = 1, length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, 
+    n_candidates = 200L, seed = 0L, X0 = NULL, y0 = NULL) 
 }
 \arguments{
 \item{f}{Objective \code{function(x)} to minimise; \code{x} is a   numeric vector of length \code{length(bounds)}.}

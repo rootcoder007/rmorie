@@ -2,7 +2,7 @@
 % Please edit documentation in R/lpdwc.R
 \name{Lppd}
 \alias{Lppd}
-\title{lppd, effective parameters and WAIC from a matrix of log densities.}
+\title{lppd, effective parameters and WAIC from a matrix of log densities}
 \usage{
 Lppd(logdens)
 }

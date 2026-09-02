@@ -5,7 +5,8 @@
 \alias{morie_netsts}
 \title{morie_netsts}
 \usage{
-morie_netsts(y, horizon, hidden = 8, n_lags = 4, strategy = "recursive", forget_bias = 1, seed = 0, ridge = 1e-06)
+morie_netsts(y, horizon, hidden = 8, n_lags = 4, strategy = "recursive", forget_bias = 1, 
+    seed = 0, ridge = 1e-06) 
 }
 \arguments{
 \item{y}{Passed to \code{.netsts_vec}.}

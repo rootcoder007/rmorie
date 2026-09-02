@@ -5,7 +5,7 @@
 \alias{cosine_similarity}
 \title{cosine_similarity}
 \usage{
-cosine_similarity(u, v)
+cosine_similarity(u, v) 
 }
 \arguments{
 \item{u}{Passed to \code{.sbert_vec}.}

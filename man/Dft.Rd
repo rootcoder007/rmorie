@@ -5,7 +5,7 @@
 \alias{Dft}
 \title{Eq (3.80), evaluated straight from the definition: exact at any N,}
 \usage{
-Dft(x)
+Dft(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

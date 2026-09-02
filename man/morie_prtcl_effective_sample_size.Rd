@@ -5,7 +5,7 @@
 \alias{morie_prtcl_effective_sample_size}
 \title{morie_prtcl_effective_sample_size}
 \usage{
-morie_prtcl_effective_sample_size(weights)
+morie_prtcl_effective_sample_size(weights) 
 }
 \arguments{
 \item{weights}{Numeric; passed to \code{sum}.}

@@ -5,7 +5,7 @@
 \alias{transform_to_real}
 \title{ADVI\'s bijection to \code{R} with its log-Jacobian}
 \usage{
-transform_to_real(value, support = "positive", eps = 1e-10)
+transform_to_real(value, support = "positive", eps = 1e-10) 
 }
 \arguments{
 \item{value}{Numeric scalar.}

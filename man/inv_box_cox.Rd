@@ -5,7 +5,7 @@
 \alias{inv_box_cox}
 \title{inv_box_cox}
 \usage{
-inv_box_cox(z, omega)
+inv_box_cox(z, omega) 
 }
 \arguments{
 \item{z}{Numeric; passed to \code{exp}.}

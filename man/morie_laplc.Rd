@@ -2,7 +2,7 @@
 % Please edit documentation in R/laplc_native.R
 \name{morie_laplc}
 \alias{morie_laplc}
-\title{Laplace mechanism (primary entry point).}
+\title{Laplace mechanism (primary entry point)}
 \usage{
 morie_laplc(value, sensitivity, epsilon, seed = NULL)
 }

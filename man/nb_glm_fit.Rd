@@ -5,7 +5,8 @@
 \alias{nb_glm_fit}
 \title{Negative binomial GLM by ridge-penalised IRLS}
 \usage{
-nb_glm_fit(K, X, alpha, s = NULL, lam = NULL, max_iter = 100L, tol = 1e-08, beta0 = NULL)
+nb_glm_fit(K, X, alpha, s = NULL, lam = NULL, max_iter = 100L, tol = 1e-08, 
+    beta0 = NULL) 
 }
 \arguments{
 \item{K}{Sample-by-1 response vector.}

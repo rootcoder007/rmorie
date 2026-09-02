@@ -2,7 +2,7 @@
 % Please edit documentation in R/siu.R
 \name{morie_siu_index}
 \alias{morie_siu_index}
-\title{SIU drid → case_number → language index}
+\title{SIU drid ? case_number ? language index}
 \usage{
 morie_siu_index(lang = c("all", "en", "fr", "valid"), canonical_only = FALSE)
 }

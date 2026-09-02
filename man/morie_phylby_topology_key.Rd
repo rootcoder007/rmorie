@@ -5,7 +5,7 @@
 \alias{morie_phylby_topology_key}
 \title{morie_phylby_topology_key}
 \usage{
-morie_phylby_topology_key(tree)
+morie_phylby_topology_key(tree) 
 }
 \arguments{
 \item{tree}{Passed to \code{.phylby_topology_key}.}

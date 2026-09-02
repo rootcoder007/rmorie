@@ -5,7 +5,7 @@
 \alias{EmgFreq}
 \title{Eqs (6.34)-(6.35) on the EMG periodogram.  Both fall as a muscle}
 \usage{
-EmgFreq(x, fs, nperseg = NULL)
+EmgFreq(x, fs, nperseg = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

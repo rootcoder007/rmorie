@@ -2,7 +2,7 @@
 % Please edit documentation in R/smltrt.R
 \name{Ratioest}
 \alias{Ratioest}
-\title{Ratio estimate of a mean or total, using an auxiliary variable.}
+\title{Ratio estimate of a mean or total, using an auxiliary variable}
 \usage{
 Ratioest(y, x, X = NULL, N = Inf, level = 0.95)
 }

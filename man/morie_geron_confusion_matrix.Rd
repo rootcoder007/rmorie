@@ -10,6 +10,7 @@ morie_geron_confusion_matrix(y_true, y_pred, n_classes = NULL)
 \item{y_true, y_pred}{Integer class indices.}
 
 \item{n_classes}{Optional class count.}
+
 }
 \value{
 List with \code{matrix}, \code{accuracy}, \code{precision}, \code{recall}, \code{f1},

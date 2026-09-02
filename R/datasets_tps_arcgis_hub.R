@@ -351,7 +351,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' \donttest{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
-#'   cat$hub_id\[1\],
+#'   cat$hub_id[1],
 #'   format = "csv"
 #' ))
 #' if (!inherits(path, "try-error")) path
@@ -404,7 +404,7 @@ morie_datasets_tps_arcgis_hub_download <- function(hub_id,
 # ---------------------------------------------------------------------------
 
 #' Resolve any ArcGIS Online item id to its FeatureServer URL +
-#' canonical metadata.
+#' canonical metadata
 #'
 #' Lightweight discovery helper -- one network call to the ArcGIS
 #' Online items API (`/sharing/rest/content/items/<item_id>?f=json`),
@@ -448,7 +448,7 @@ morie_datasets_arcgis_item_metadata <- function(item_id) {
   )
 }
 
-#' Generic by-id loader for any ArcGIS Online Feature Service item.
+#' Generic by-id loader for any ArcGIS Online Feature Service item
 #'
 #' Portal-agnostic sibling to
 #' [morie_datasets_tps_arcgis_hub_by_id()]. Works for ANY ArcGIS
@@ -606,7 +606,7 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #'   `af06159170914808983959df6163fc86`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
-#' head(df\[, c("Neighbourhood", "Total_Population", "Seniors65andover")\])
+#' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
 #' @export
 morie_datasets_toronto_zoning_per_neighbourhood <- function(
   layer = c("neighbourhoods", "zoning_stats"),

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm043.R
 \name{Msm043}
 \alias{Msm043}
-\title{Non-informative prior for the linear model.}
+\title{Non-informative prior for the linear model}
 \usage{
 Msm043(sigma2, beta = NULL)
 }

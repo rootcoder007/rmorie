@@ -5,7 +5,7 @@
 \alias{hypercube_instruments}
 \title{hypercube_instruments}
 \usage{
-hypercube_instruments(X, n_levels = 3L)
+hypercube_instruments(X, n_levels = 3L) 
 }
 \arguments{
 \item{X}{A matrix; the body checks with \code{is.matrix}.}

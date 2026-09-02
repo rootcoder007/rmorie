@@ -5,7 +5,8 @@
 \alias{fit_cdae}
 \title{fit_cdae}
 \usage{
-fit_cdae(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, iters = 30L, n_neg = 5L, seed = 0, activation = "sigmoid", init_scale = 0.1)
+fit_cdae(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, 
+    iters = 30L, n_neg = 5L, seed = 0, activation = "sigmoid", init_scale = 0.1) 
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}

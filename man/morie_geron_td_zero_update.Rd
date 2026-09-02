@@ -26,6 +26,7 @@ morie_geron_td_zero_update(
 \item{gamma}{Discount in [0, 1].}
 
 \item{done}{Terminal flag.}
+
 }
 \value{
 List with \code{V}, \code{old_value}, \code{new_value}, \code{target},

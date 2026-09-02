@@ -2,7 +2,7 @@
 % Please edit documentation in R/agbtnm.R
 \name{Bnrunstat}
 \alias{Bnrunstat}
-\title{Batch-normalisation running statistics and inference transform.}
+\title{Batch-normalisation running statistics and inference transform}
 \usage{
 Bnrunstat(
   x,
@@ -24,6 +24,8 @@ Bnrunstat(
 \item{eps}{Numerical floor inside the square root.}
 
 \item{gamma, beta}{Learned scale and shift.}
+
+
 }
 \value{
 List with runmean, runvar, batchmean, batchvar, batchvarunb,

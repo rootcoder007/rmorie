@@ -3,7 +3,7 @@
 \name{stkrg}
 \alias{stkrg}
 \alias{morie_spatiotemporal_kriging}
-\title{Spatiotemporal ordinary kriging with separable exponential covariance.}
+\title{Spatiotemporal ordinary kriging with separable exponential covariance}
 \usage{
 stkrg(x, coords, times, target, sill = 1, nugget = 0, range_s = 1, range_t = 1)
 
@@ -28,6 +28,9 @@ morie_spatiotemporal_kriging(
 \item{target}{list(s0 = (m by d) matrix, t0 = numeric m).}
 
 \item{sill, nugget, range_s, range_t}{Variogram parameters.}
+
+
+
 }
 \value{
 Named list: estimate, se, n, method.

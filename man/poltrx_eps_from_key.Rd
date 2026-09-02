@@ -5,7 +5,7 @@
 \alias{poltrx_eps_from_key}
 \title{Convert a list key of the form "(0,1,1)" back to an integer vector}
 \usage{
-poltrx_eps_from_key(key)
+poltrx_eps_from_key(key) 
 }
 \arguments{
 \item{key}{Compared against \code{"()"}.}

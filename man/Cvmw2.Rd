@@ -5,10 +5,14 @@
 \alias{Cvmw2}
 \title{Cramer-von Mises W^2 -- Problem 4.14, p. 150}
 \usage{
-Cvmw2(x, cdf)
+Cvmw2(x, cdf) 
 }
 \description{
 Cramer-von Mises W^2 -- Problem 4.14, p. 150
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{cdf}{Argument \code{cdf}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{nw2}, \code{z}, \code{n}.

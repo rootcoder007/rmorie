@@ -5,7 +5,7 @@
 \alias{morie_rfppos_distance}
 \title{The straight-line distance between two points}
 \usage{
-morie_rfppos_distance(a, b)
+morie_rfppos_distance(a, b) 
 }
 \arguments{
 \item{a,b}{Coordinate triples.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rrblp.R
 \name{Snpblup}
 \alias{Snpblup}
-\title{SNP-BLUP (ridge regression BLUP) marker effects and breeding values.}
+\title{SNP-BLUP (ridge regression BLUP) marker effects and breeding values}
 \usage{
 Snpblup(X, y, M, sigma2_m, sigma2_e = 1)
 }

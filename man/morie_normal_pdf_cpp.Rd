@@ -5,7 +5,7 @@
 \alias{morie_normal_pdf_cpp}
 \title{morie_normal_pdf_cpp}
 \usage{
-morie_normal_pdf_cpp(x, mean, sd)
+morie_normal_pdf_cpp(x, mean, sd) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

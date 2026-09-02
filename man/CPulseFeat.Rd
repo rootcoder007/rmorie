@@ -5,7 +5,7 @@
 \alias{CPulseFeat}
 \title{Carotid pulse landmarks (Section 1.2.10) and the systolic time}
 \usage{
-CPulseFeat(cp, fs, qrs, hr = NULL)
+CPulseFeat(cp, fs, qrs, hr = NULL) 
 }
 \arguments{
 \item{cp}{A vector; its length is taken.}

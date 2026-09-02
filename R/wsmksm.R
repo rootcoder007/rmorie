@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Two-sample Kolmogorov-Smirnov test of H0: F1 = F2.
+#' Two-sample Kolmogorov-Smirnov test of H0: F1 = F2
 #'
 #' The p-value is the asymptotic one; it is unreliable for very small
 #' samples and for heavily tied data, and \code{ties} is returned so a

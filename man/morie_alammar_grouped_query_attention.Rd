@@ -5,7 +5,7 @@
 \alias{morie_alammar_grouped_query_attention}
 \title{Grouped-query and multi-query attention (Ainslie et al. 2023;}
 \usage{
-morie_alammar_grouped_query_attention(Q_heads, K_groups, V_groups, n_query_heads, n_kv_groups)
+morie_alammar_grouped_query_attention(Q_heads, K_groups, V_groups, n_query_heads, n_kv_groups) 
 }
 \arguments{
 \item{Q_heads}{List of per-head query matrices.}

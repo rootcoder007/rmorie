@@ -10,7 +10,7 @@ morie_felsen(tree, sites, pi = NULL)
 \item{tree}{Nested list: leaf = taxon name (character); internal
 node = list of list(child, branch_length) pairs.}
 
-\item{sites}{List of named lists {taxon = base}.}
+\item{sites}{List of named lists \{taxon = base\}.}
 
 \item{pi}{Stationary base frequencies (default uniform).}
 }
@@ -23,7 +23,7 @@ A list with elements \code{loglik},
 Conditional likelihoods combine by postorder traversal
 (L_s(k) = prod_children sum_j P_sj(v) L_j(child)); site
 likelihood L = sum_s pi_s L_s(root); substitution
-P_ij(t) = e^{-t} delta_ij + (1 - e^{-t}) pi_j.
+P_ij(t) = e^\{-t\} delta_ij + (1 - e^\{-t\}) pi_j.
 }
 \references{
 Felsenstein, J. (1981). Evolutionary trees from DNA

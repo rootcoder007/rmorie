@@ -5,7 +5,7 @@
 \alias{CovXY}
 \title{Eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)}
 \usage{
-CovXY(x, y, ddof = 0)
+CovXY(x, y, ddof = 0) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

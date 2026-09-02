@@ -5,7 +5,7 @@
 \alias{SyncSum}
 \title{Eq (3.96): the sum separates into a signal sum growing linearly in M}
 \usage{
-SyncSum(observations)
+SyncSum(observations) 
 }
 \arguments{
 \item{observations}{Iterated over elementwise, with \code{lapply}.}

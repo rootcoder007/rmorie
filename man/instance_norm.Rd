@@ -5,7 +5,7 @@
 \alias{instance_norm}
 \title{instance_norm}
 \usage{
-instance_norm(x)
+instance_norm(x) 
 }
 \arguments{
 \item{x}{Passed to \code{.patcht_vec}.}

@@ -5,7 +5,7 @@
 \alias{DeltaLim}
 \title{Eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is}
 \usage{
-DeltaLim(t, a)
+DeltaLim(t, a) 
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}

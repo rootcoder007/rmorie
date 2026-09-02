@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Monotone treatment response bounds.
+#' Monotone treatment response bounds
 #'
 #' L_i = y_i if z_i <= d else ymin; U_i = y_i if z_i >= d else ymax; and
 #' E\[Y(d)\] lies in \[mean(L), mean(U)\].

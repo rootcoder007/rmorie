@@ -5,7 +5,8 @@
 \alias{morie_scfhop}
 \title{Rank candidates by pharmacophore, and say which ones are hops}
 \usage{
-morie_scfhop(lead_smiles, scaffold_db, maxdist = 9L, scaling = "type", metric = "tanimoto", rounds = 3L, threshold = 0)
+morie_scfhop(lead_smiles, scaffold_db, maxdist = 9L, scaling = "type", metric = "tanimoto", 
+    rounds = 3L, threshold = 0) 
 }
 \arguments{
 \item{lead_smiles}{The lead compound.}

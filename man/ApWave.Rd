@@ -5,7 +5,8 @@
 \alias{ApWave}
 \title{ApWave: idealised action-potential waveform (ramp and decay)}
 \usage{
-ApWave(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1, t_onset = 0, v_undershoot = NULL, t_recover = NULL)
+ApWave(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1, t_onset = 0, 
+    v_undershoot = NULL, t_recover = NULL) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm333.R
 \name{Msm333}
 \alias{Msm333}
-\title{eq. (3.1) p.71 with the OLS solution pp.72-73 (re-export).}
+\title{eq. (3.1) p.71 with the OLS solution pp.72-73 (re-export)}
 \usage{
 Msm333(...)
 }

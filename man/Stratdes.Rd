@@ -2,7 +2,7 @@
 % Please edit documentation in R/strtfd.R
 \name{Stratdes}
 \alias{Stratdes}
-\title{Allocate a stratified sample and report the variance it achieves.}
+\title{Allocate a stratified sample and report the variance it achieves}
 \usage{
 Stratdes(Nh, Sh, n, Ch = NULL, kind = "neyman")
 }

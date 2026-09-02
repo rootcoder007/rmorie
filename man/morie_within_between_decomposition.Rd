@@ -5,7 +5,7 @@
 \alias{morie_within_between_decomposition}
 \title{morie_within_between_decomposition}
 \usage{
-morie_within_between_decomposition(P)
+morie_within_between_decomposition(P) 
 }
 \arguments{
 \item{P}{Passed to \code{.tmlcll_mat}.}

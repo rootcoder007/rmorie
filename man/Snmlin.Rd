@@ -21,6 +21,7 @@ Snmlin(
 
 \item{propensity}{\eqn{E\[A|H\]} for cumulative treatment; sample mean
 if omitted (correct only under randomization).}
+
 }
 \value{
 Named list with \code{estimate}, \code{psi}, \code{se}, \code{ci_lower},

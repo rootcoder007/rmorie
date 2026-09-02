@@ -6,7 +6,7 @@
 #' Isolated nodes have zero degree and their normalising factor is taken
 #' to be zero rather than infinite.
 #'
-#' Formula: H' = relu(D^{-1/2} A D^{-1/2} X W), D = diag(rowSums(A)).
+#' Formula: H' = relu(D^\{-1/2\} A D^\{-1/2\} X W), D = diag(rowSums(A)).
 #'
 #' @param G Square adjacency matrix.
 #' @param X Node feature matrix, one row per node.

@@ -5,7 +5,7 @@
 \alias{resample}
 \title{resample}
 \usage{
-resample(weights, rng, scheme = "systematic")
+resample(weights, rng, scheme = "systematic") 
 }
 \arguments{
 \item{weights}{Numeric; passed to \code{sum}.}

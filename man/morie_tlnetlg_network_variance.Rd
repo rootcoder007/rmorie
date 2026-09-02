@@ -5,7 +5,7 @@
 \alias{morie_tlnetlg_network_variance}
 \title{morie_tlnetlg_network_variance}
 \usage{
-morie_tlnetlg_network_variance(ic, friends)
+morie_tlnetlg_network_variance(ic, friends) 
 }
 \arguments{
 \item{ic}{Passed to \code{.tlnetlg_vec}.}

@@ -16,7 +16,7 @@ List with \code{estimate} (integrated squared error against
 the truth), \code{K_hat}, \code{method}.
 }
 \description{
-Y_i = f(x_i) + e_i with f = sum_{k <= K} beta_k phi_k.  Choosing K by
+Y_i = f(x_i) + e_i with f = sum_\{k <= K\} beta_k phi_k.  Choosing K by
 the conjugate evidence rather than fixing it delivers the rate
 n^(-2s/(2s+1)) without knowing s.  The design is the equispaced
 cosine basis, so the ridge fit is a per-coefficient shrinkage of the

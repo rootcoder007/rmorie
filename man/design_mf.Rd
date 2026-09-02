@@ -5,7 +5,7 @@
 \alias{design_mf}
 \title{Encoding under which an FM IS matrix factorisation -------------}
 \usage{
-design_mf(u, i, n_users, n_items)
+design_mf(u, i, n_users, n_items) 
 }
 \arguments{
 \item{u}{Coerced to integer by the body, with \code{as.integer}.}

@@ -14,6 +14,8 @@ morie_geron_sgd_update(X, y, theta, eta = 0.1, seed = 0, index = NULL)
 \item{seed}{LCG seed.}
 
 \item{index}{Optional 0-based row override.}
+
+
 }
 \value{
 List with \code{theta}, \code{theta_next}, \code{gradient},

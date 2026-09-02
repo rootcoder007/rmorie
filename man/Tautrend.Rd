@@ -5,10 +5,14 @@
 \alias{Tautrend}
 \title{Kendall tau trend test -- Sec. 11.2.5, p. 406}
 \usage{
-Tautrend(y, alternative = "two-sided")
+Tautrend(y, alternative = "two-sided") 
 }
 \description{
 Kendall tau trend test -- Sec. 11.2.5, p. 406
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 A list with \code{tau}, \code{statistic}, \code{P}, \code{Q}, \code{z}, \code{p_value}, \code{var}, \code{n}.

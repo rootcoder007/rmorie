@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sample size for a stated half-width, with the finite-population step.
+#' Sample size for a stated half-width, with the finite-population step
 #'
 #' Cochran's two-step form: compute n_0 ignoring the population size,
 #' then correct it. Both are returned.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Brier score for a categorical predictive distribution.
+#' Brier score for a categorical predictive distribution
 #'
 #' Formula: BS = (1/T) sum_i sum_c (pihat_ic - d_ic)^2,  d_ic = 1 iff y_i = c
 #'

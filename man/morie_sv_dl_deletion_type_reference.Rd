@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_deletion_type_reference}
 \title{Rewrite the region so a deletion-type search works (Figure 4): a}
 \usage{
-morie_sv_dl_deletion_type_reference(ref, sv_type)
+morie_sv_dl_deletion_type_reference(ref, sv_type) 
 }
 \arguments{
 \item{ref}{Coerced to character by the body, with \code{as.character}.}

@@ -5,7 +5,7 @@
 \alias{t3nodes}
 \title{t3nodes}
 \usage{
-t3nodes(m = 401L, lim = 8)
+t3nodes(m = 401L, lim = 8) 
 }
 \arguments{
 \item{m}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{401L}.}

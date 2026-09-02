@@ -13,5 +13,5 @@
 The value of \code{w}, as built in the body.
 }
 \description{
-c(i) = int_{i-1}^{i} of (2/M - |u - M/2| * 4/M^2) du
+c(i) = int_\{i-1\}^\{i\} of (2/M - |u - M/2| * 4/M^2) du
 }

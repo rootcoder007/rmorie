@@ -5,7 +5,7 @@
 \alias{teacher_votes}
 \title{teacher_votes}
 \usage{
-teacher_votes(teacher_predicts, rows, n_classes = NULL)
+teacher_votes(teacher_predicts, rows, n_classes = NULL) 
 }
 \arguments{
 \item{teacher_predicts}{Coerced to list by the body, with \code{as.list}.}

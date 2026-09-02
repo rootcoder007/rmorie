@@ -8,6 +8,8 @@ morie_geron_softmax_cost_gradient(X, Y, theta)
 }
 \arguments{
 \item{X, Y, theta}{Design, labels and (n, K) parameters.}
+
+
 }
 \value{
 List with \code{gradient}, \code{probabilities}, \code{gradient_norm}.

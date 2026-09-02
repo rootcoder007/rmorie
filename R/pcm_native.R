@@ -7,7 +7,7 @@
 #' Partial credit model category probabilities
 #'
 #' plink Eq. 4 with the first step parameter dropped:
-#' P(X = k | theta) proportional to exp(sum_{v<=k} D a (theta - b_v)),
+#' P(X = k | theta) proportional to exp(sum_\{v<=k\} D a (theta - b_v)),
 #' empty sum = 0 for the lowest category.  a = 1 gives the Masters
 #' (1982) partial credit model; one step reduces to the dichotomous
 #' 2PL.

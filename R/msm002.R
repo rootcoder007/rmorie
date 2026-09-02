@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Single-mean model for a one-way layout.
+#' Single-mean model for a one-way layout
 #'
 #' Formula: GY_ij = beta + e_ij (eq. 1.2), one grand mean for all levels.
 #'

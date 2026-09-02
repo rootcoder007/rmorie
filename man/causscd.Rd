@@ -5,7 +5,7 @@
 \alias{causscd}
 \title{causscd}
 \usage{
-causscd(Y, treated, t_post, zeta = NULL)
+causscd(Y, treated, t_post, zeta = NULL) 
 }
 \arguments{
 \item{Y}{Passed to \code{sdid}.}

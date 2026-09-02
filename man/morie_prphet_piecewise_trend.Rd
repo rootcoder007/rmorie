@@ -5,7 +5,7 @@
 \alias{morie_prphet_piecewise_trend}
 \title{morie_prphet_piecewise_trend}
 \usage{
-morie_prphet_piecewise_trend(t, k.rate, m.off, deltas, cps)
+morie_prphet_piecewise_trend(t, k.rate, m.off, deltas, cps) 
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{morie_phylby_clade_credibility}
 \title{morie_phylby_clade_credibility}
 \usage{
-morie_phylby_clade_credibility(samples)
+morie_phylby_clade_credibility(samples) 
 }
 \arguments{
 \item{samples}{Passed to \code{.phylby_clade_credibility}.}

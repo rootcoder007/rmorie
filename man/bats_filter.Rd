@@ -5,7 +5,7 @@
 \alias{bats_filter}
 \title{bats_filter}
 \usage{
-bats_filter(z, spec, theta, x0, long_run_b = 0)
+bats_filter(z, spec, theta, x0, long_run_b = 0) 
 }
 \arguments{
 \item{z}{A vector; its length is taken and its elements indexed.}

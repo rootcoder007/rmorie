@@ -5,7 +5,7 @@
 \alias{morie_goldsc_cheatsheet}
 \title{One-line summary of the goldsc module}
 \usage{
-morie_goldsc_cheatsheet()
+morie_goldsc_cheatsheet() 
 }
 \description{
 One-line summary of the goldsc module

@@ -7,7 +7,7 @@
 #' the sequential-regression one: E\[Y(d1, d2)\] = E\[E\[E\[Y | A2 = d2, L2, A1
 #' = d1, L1] | A1 = d1, L1]] is estimated from the inside out, with a
 #' targeting fluctuation at each stage using the cumulative clever
-#' covariate H_t = 1{A_1 = d_1, ..., A_t = d_t} / prod_{s<=t} g_s.  The
+#' covariate H_t = 1\{A_1 = d_1, ..., A_t = d_t\} / prod_\{s<=t\} g_s.  The
 #' article is open access but was not retrievable here; both are quoted in
 #' their standard published form.  The effect returned is E\[Y(1,1)\] -
 #' E\[Y(0,0)\]; all four regime means are reported.

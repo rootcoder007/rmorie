@@ -5,7 +5,7 @@
 \alias{morie_hawkes_baseline_integral_cpp}
 \title{morie_hawkes_baseline_integral_cpp}
 \usage{
-morie_hawkes_baseline_integral_cpp(T_horizon, alpha, n_grid = 0L)
+morie_hawkes_baseline_integral_cpp(T_horizon, alpha, n_grid = 0L) 
 }
 \arguments{
 \item{T_horizon}{Passed to \code{.Call}.}

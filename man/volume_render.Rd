@@ -5,7 +5,7 @@
 \alias{volume_render}
 \title{volume_render}
 \usage{
-volume_render(sigma, colour, t)
+volume_render(sigma, colour, t) 
 }
 \arguments{
 \item{sigma}{Passed to \code{.nrfrad_vec}.}

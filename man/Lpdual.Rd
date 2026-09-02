@@ -2,7 +2,7 @@
 % Please edit documentation in R/lpdual.R
 \name{Lpdual}
 \alias{Lpdual}
-\title{Form the dual of a linear program and certify a pair of solutions.}
+\title{Form the dual of a linear program and certify a pair of solutions}
 \usage{
 Lpdual(A, b, c, x = NULL, y = NULL)
 }

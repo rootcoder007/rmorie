@@ -5,7 +5,7 @@
 \alias{Whopf}
 \title{Eqs. (3.168), (3.171): build the Toeplitz correlation matrix and the}
 \usage{
-Whopf(x, d, order)
+Whopf(x, d, order) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

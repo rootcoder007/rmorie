@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Reparameterized one-way model.
+#' Reparameterized one-way model
 #'
 #' Formula: GY_ij = beta-bar + (beta_i - beta-bar) + e_ij (eq. 1.4), the
 #' fixed-effects fit rewritten around the average level.

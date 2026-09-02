@@ -5,7 +5,7 @@
 \alias{morie_dimNet_spherical_harmonic_basis}
 \title{Spherical harmonic angular basis (m = 0)}
 \usage{
-morie_dimNet_spherical_harmonic_basis(angle, n_basis = 4L)
+morie_dimNet_spherical_harmonic_basis(angle, n_basis = 4L) 
 }
 \arguments{
 \item{angle}{Numeric angle in radians.}

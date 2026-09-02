@@ -16,6 +16,7 @@ Alfplddt(s, w1, w2, w3, bins = NULL, rtrue = NULL)
 \item{bins}{Bin centres; defaults to the spec's 1, 3, ..., 99.}
 
 \item{rtrue}{Optional ground-truth lDDT per residue, giving the loss.}
+
 }
 \value{
 A list with \code{plddt}, the bin distributions \code{p}, the

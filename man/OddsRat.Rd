@@ -13,6 +13,9 @@ unexposed cases, unexposed controls}
 \item{conf_level}{two-sided confidence level for the Woolf interval}
 
 \item{correction}{constant added to every cell (0.5 = Haldane-Anscombe)}
+
+
+
 }
 \value{
 list(estimate, log_estimate, se_log, ci_lower, ci_upper, z,

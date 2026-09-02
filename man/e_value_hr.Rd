@@ -10,6 +10,7 @@ e_value_hr(hr, ci_lower = NULL, ci_upper = NULL)
 \item{hr}{Hazard ratio.}
 
 \item{ci_lower, ci_upper}{Optional 95\% CI of HR.}
+
 }
 \value{
 A \code{morie_evalue} named-list.

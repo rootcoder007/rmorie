@@ -2,7 +2,7 @@
 % Please edit documentation in R/alsR.R
 \name{Alsmf}
 \alias{Alsmf}
-\title{Alternating least squares for implicit-feedback matrix factorisation.}
+\title{Alternating least squares for implicit-feedback matrix factorisation}
 \usage{
 Alsmf(R, f = 2, lam = 0.1, alpha = 40, steps = 10, X0 = NULL, Y0 = NULL)
 }
@@ -20,14 +20,15 @@ Alsmf(R, f = 2, lam = 0.1, alpha = 40, steps = 10, X0 = NULL, Y0 = NULL)
 \item{X0, Y0}{Starting factors; NULL uses the deterministic defaults
 x_uk = ((u+k) mod 5 + 1)/10 and y_ik = ((i+2k) mod 7 + 1)/10 with
 zero-based u, i, k.}
+
 }
 \value{
 List with X, Y, loss, fitted, m, n, f, steps.
 }
 \description{
-p_ui = 1{r_ui > 0}, c_ui = 1 + alpha r_ui, and the exact alternating
-solutions x_u = (Y'C^u Y + lam I)^{-1} Y'C^u p(u),
-y_i = (X'C^i X + lam I)^{-1} X'C^i p(i).
+p_ui = 1\{r_ui > 0\}, c_ui = 1 + alpha r_ui, and the exact alternating
+solutions x_u = (Y'C^u Y + lam I)^\{-1\} Y'C^u p(u),
+y_i = (X'C^i X + lam I)^\{-1\} X'C^i p(i).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

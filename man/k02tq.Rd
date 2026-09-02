@@ -5,7 +5,7 @@
 \alias{k02tq}
 \title{k02tq}
 \usage{
-k02tq(p, df)
+k02tq(p, df) 
 }
 \arguments{
 \item{p}{See Usage.}

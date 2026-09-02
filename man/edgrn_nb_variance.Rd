@@ -5,7 +5,7 @@
 \alias{edgrn_nb_variance}
 \title{edgrn_nb_variance}
 \usage{
-edgrn_nb_variance(mu, dispersion)
+edgrn_nb_variance(mu, dispersion) 
 }
 \arguments{
 \item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}

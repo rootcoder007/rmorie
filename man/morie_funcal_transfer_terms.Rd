@@ -5,7 +5,7 @@
 \alias{morie_funcal_transfer_terms}
 \title{morie_funcal_transfer_terms}
 \usage{
-morie_funcal_transfer_terms(assignments, annotations, sources = NULL, min_support = 1)
+morie_funcal_transfer_terms(assignments, annotations, sources = NULL, min_support = 1) 
 }
 \arguments{
 \item{assignments}{A vector; indexed elementwise.}

@@ -12,6 +12,8 @@ rate_ratio(events1, person_time1, events2, person_time2, confidence = 0.95)
 \item{events2, person_time2}{Events and person-time in group 2.}
 
 \item{confidence}{Confidence level. Default 0.95.}
+
+
 }
 \value{
 A \code{morie_effect_size}.

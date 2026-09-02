@@ -5,7 +5,7 @@
 \alias{OaeFeat}
 \title{OaeFeat: otoacoustic emission band analysis}
 \usage{
-OaeFeat(oae, fs, noise_floor = NULL, bands = NULL)
+OaeFeat(oae, fs, noise_floor = NULL, bands = NULL) 
 }
 \arguments{
 \item{oae}{Coerced to numeric by the body, with \code{as.numeric}.}

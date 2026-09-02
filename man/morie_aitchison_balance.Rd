@@ -12,6 +12,7 @@ observations.}
 
 \item{numerator, denominator}{0-based column indices of the two
 disjoint groups, as in the Python module.}
+
 }
 \value{
 list with \code{balance}, \code{normalizer},

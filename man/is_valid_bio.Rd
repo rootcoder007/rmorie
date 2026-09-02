@@ -5,7 +5,7 @@
 \alias{is_valid_bio}
 \title{is_valid_bio}
 \usage{
-is_valid_bio(path)
+is_valid_bio(path) 
 }
 \arguments{
 \item{path}{See Usage.}

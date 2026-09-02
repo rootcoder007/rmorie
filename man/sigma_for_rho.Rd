@@ -5,7 +5,7 @@
 \alias{sigma_for_rho}
 \title{The noise scale that buys a given rho}
 \usage{
-sigma_for_rho(sensitivity, rho)
+sigma_for_rho(sensitivity, rho) 
 }
 \arguments{
 \item{sensitivity}{Sensitivity Delta, must be non-negative.}

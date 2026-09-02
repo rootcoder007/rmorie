@@ -5,7 +5,7 @@
 \alias{morie_vdcal_oie_tozer}
 \title{The volume of distribution, in litres per kilogram}
 \usage{
-morie_vdcal_oie_tozer(fu, fut, par = NULL)
+morie_vdcal_oie_tozer(fu, fut, par = NULL) 
 }
 \arguments{
 \item{fu}{The plasma free fraction.}

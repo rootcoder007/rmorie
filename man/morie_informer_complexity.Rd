@@ -5,7 +5,7 @@
 \alias{morie_informer_complexity}
 \title{morie_informer_complexity}
 \usage{
-morie_informer_complexity(L_Q, L_K, factor = 5)
+morie_informer_complexity(L_Q, L_K, factor = 5) 
 }
 \arguments{
 \item{L_Q}{Coerced to integer by the body, with \code{as.integer}.}

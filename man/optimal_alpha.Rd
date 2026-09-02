@@ -5,7 +5,8 @@
 \alias{optimal_alpha}
 \title{Theorem 5.2: the variance-minimising trimming threshold}
 \usage{
-optimal_alpha(pscore, sigma2_treated = NULL, sigma2_control = NULL, tol = 1e-12, max_iter = 200)
+optimal_alpha(pscore, sigma2_treated = NULL, sigma2_control = NULL, tol = 1e-12, 
+    max_iter = 200) 
 }
 \arguments{
 \item{pscore}{Propensity scores.}

@@ -16,6 +16,7 @@ morie_geron_value_iteration(V, P, R, gamma, tol = 1e-10, max_iter = 10000)
 \item{gamma}{Discount in [0, 1).}
 
 \item{tol, max_iter}{Stopping rule.}
+
 }
 \value{
 List with \code{V}, \code{policy}, \code{Q}, \code{iterations}, \code{residual}, \code{converged}.

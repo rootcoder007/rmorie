@@ -10,6 +10,7 @@ morie_eda_join(x, y, by)
 \item{x, y}{\code{morie_eda_table}s (or data.frames).}
 
 \item{by}{The join column name (explicit; not inferred).}
+
 }
 \value{
 A merged \code{morie_eda_table}.

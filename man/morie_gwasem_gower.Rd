@@ -5,7 +5,7 @@
 \alias{morie_gwasem_gower}
 \title{Gower centring (equation 5)}
 \usage{
-morie_gwasem_gower(S)
+morie_gwasem_gower(S) 
 }
 \arguments{
 \item{S}{n x n matrix.}

@@ -5,10 +5,15 @@
 \alias{Grpnorm}
 \title{Group normalisation (Wu & He 2018)}
 \usage{
-Grpnorm(x, n_groups, eps = 1e-05)
+Grpnorm(x, n_groups, eps = 1e-05) 
 }
 \description{
 Group normalisation (Wu & He 2018)
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{n_groups}{Argument \code{n_groups}; see Usage.}
+\item{eps}{Argument \code{eps}; see Usage.}
 }
 \value{
 A list with \code{x}, \code{mean}, \code{sd}, \code{n_groups}, \code{group_size}.

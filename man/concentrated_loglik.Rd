@@ -5,7 +5,7 @@
 \alias{concentrated_loglik}
 \title{concentrated_loglik}
 \usage{
-concentrated_loglik(y, resid, omega)
+concentrated_loglik(y, resid, omega) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

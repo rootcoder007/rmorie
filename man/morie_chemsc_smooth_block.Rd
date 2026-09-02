@@ -5,7 +5,7 @@
 \alias{morie_chemsc_smooth_block}
 \title{The block function convolved with a Gaussian, in closed form}
 \usage{
-morie_chemsc_smooth_block(d, d_ideal, d_max, sigma)
+morie_chemsc_smooth_block(d, d_ideal, d_max, sigma) 
 }
 \arguments{
 \item{d}{The deviation.}

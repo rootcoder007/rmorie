@@ -24,3 +24,20 @@ sequential_neural_likelihood(
 \description{
 Compact alias for abcnnt
 }
+\arguments{
+\item{simulator}{Argument \code{simulator}; see Usage.}
+\item{x_o}{Argument \code{x_o}; see Usage.}
+\item{log_prior}{Argument \code{log_prior}; see Usage.}
+\item{theta0}{Argument \code{theta0}; see Usage.}
+\item{n_rounds}{Argument \code{n_rounds}; see Usage.}
+\item{n_per_round}{Argument \code{n_per_round}; see Usage.}
+\item{n_layers}{Argument \code{n_layers}; see Usage.}
+\item{hidden}{Argument \code{hidden}; see Usage.}
+\item{epochs}{Argument \code{epochs}; see Usage.}
+\item{lr}{Argument \code{lr}; see Usage.}
+\item{mcmc_burn}{Argument \code{mcmc_burn}; see Usage.}
+\item{mcmc_step}{Argument \code{mcmc_step}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
+\item{n_posterior}{Argument \code{n_posterior}; see Usage.}
+}
+

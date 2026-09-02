@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nested semivariogram: the linear model of regionalization.
+#' Nested semivariogram: the linear model of regionalization
 #'
 #' With Z(s) = mu + sum_j a_j U_j(s) and the U_j orthogonal,
 #' gamma_z(h) = sum_j a_j^2 gamma_j(h). Validity relies on the components

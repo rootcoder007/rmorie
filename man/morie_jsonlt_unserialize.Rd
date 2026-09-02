@@ -5,7 +5,7 @@
 \alias{morie_jsonlt_unserialize}
 \title{Restore an object written by morie_jsonlt_serialize}
 \usage{
-morie_jsonlt_unserialize(txt)
+morie_jsonlt_unserialize(txt) 
 }
 \arguments{
 \item{txt}{JSON produced by morie_jsonlt_serialize.}

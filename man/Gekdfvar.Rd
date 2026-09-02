@@ -22,6 +22,7 @@ morie_fauzi_thm2_3_var_brdkdfe(n, h, a, fx, density, r1 = NULL, r2 = NULL)
 
 \item{r1, r2}{Kernel constants; default to the Gaussian \code{r1} and the \code{r2}
 evaluated at this \code{a}.}
+
 }
 \value{
 Named list with \code{variance}, \code{se}, \code{edfvar}, \code{gain}, \code{r1}, \code{r2}, \code{method}.

@@ -14,6 +14,7 @@ Btcicor(x, y, B = 999, alpha = 0.05, seed = 1)
 \item{alpha}{two-sided error rate.}
 
 \item{seed}{integer seed for the deterministic index generator.}
+
 }
 \value{
 list: lo, hi, estimate, r_hat, z_hat, z_se, lo_z, hi_z, lo_normal,

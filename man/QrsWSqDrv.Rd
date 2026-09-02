@@ -5,7 +5,7 @@
 \alias{QrsWSqDrv}
 \title{Eq (4.4) (Murthy and Rangaraj): g1(n) = sum_i |x(n-i+1) - x(n-i)|^2}
 \usage{
-QrsWSqDrv(x, nwin = 8)
+QrsWSqDrv(x, nwin = 8) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

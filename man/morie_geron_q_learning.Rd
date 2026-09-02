@@ -20,6 +20,7 @@ morie_geron_q_learning(Q, s, a, r, s_next, alpha, gamma, done = FALSE)
 \item{gamma}{In [0, 1].}
 
 \item{done}{Terminal.}
+
 }
 \value{
 List with \code{Q}, \code{td_error}, \code{target}, \code{old_value},

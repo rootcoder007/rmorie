@@ -5,7 +5,7 @@
 \alias{morie_surxgb_dpdf}
 \title{Table 2: f_Z\'(z)}
 \usage{
-morie_surxgb_dpdf(z, dist = "normal")
+morie_surxgb_dpdf(z, dist = "normal") 
 }
 \arguments{
 \item{z}{Passed to \code{morie_surxgb_pdf}.}

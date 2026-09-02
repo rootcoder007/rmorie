@@ -5,7 +5,7 @@
 \alias{morie_smfd}
 \title{P-spline fit}
 \usage{
-morie_smfd(x, y, nseg = 10L, degree = 3L, lam = 1, order = 2L, weights = NULL)
+morie_smfd(x, y, nseg = 10L, degree = 3L, lam = 1, order = 2L, weights = NULL) 
 }
 \arguments{
 \item{x}{Predictor values.}

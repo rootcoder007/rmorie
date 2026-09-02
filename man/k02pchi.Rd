@@ -5,7 +5,7 @@
 \alias{k02pchi}
 \title{k02pchi}
 \usage{
-k02pchi(q, df)
+k02pchi(q, df) 
 }
 \arguments{
 \item{q}{See Usage.}

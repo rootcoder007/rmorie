@@ -5,7 +5,8 @@
 \alias{morie_in_identified_set}
 \title{morie_in_identified_set}
 \usage{
-morie_in_identified_set(freq, beta, gamma, x, alpha_grid, y0_values = c(0, 1), link = "logit", tol = 1e-04, iters = 4000L)
+morie_in_identified_set(freq, beta, gamma, x, alpha_grid, y0_values = c(0, 1), link = "logit", 
+    tol = 1e-04, iters = 4000L) 
 }
 \arguments{
 \item{freq}{A vector; indexed elementwise.}

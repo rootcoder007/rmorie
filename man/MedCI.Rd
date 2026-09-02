@@ -14,6 +14,8 @@ MedCI(a, b, sa, sb, n_sim = 20000, level = 0.95)
 \item{n_sim}{Number of deterministic draws.}
 
 \item{level}{Confidence level.}
+
+
 }
 \value{
 List with \code{estimate}, \code{ci_lo}, \code{ci_hi},

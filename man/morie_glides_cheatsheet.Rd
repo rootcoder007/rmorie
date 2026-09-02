@@ -5,7 +5,7 @@
 \alias{morie_glides_cheatsheet}
 \title{One-line summary of the glides module}
 \usage{
-morie_glides_cheatsheet()
+morie_glides_cheatsheet() 
 }
 \description{
 One-line summary of the glides module

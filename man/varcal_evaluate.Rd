@@ -5,7 +5,7 @@
 \alias{varcal_evaluate}
 \title{varcal_evaluate}
 \usage{
-varcal_evaluate(called, truth, candidates = NULL)
+varcal_evaluate(called, truth, candidates = NULL) 
 }
 \arguments{
 \item{called}{See Usage.}

@@ -5,7 +5,7 @@
 \alias{EnsAvg}
 \title{Eq (3.18): x_bar(t) = (1/M) sum_k x_k(t) for all t -- the prototype}
 \usage{
-EnsAvg(observations)
+EnsAvg(observations) 
 }
 \arguments{
 \item{observations}{Iterated over elementwise, with \code{lapply}.}

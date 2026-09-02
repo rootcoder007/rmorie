@@ -2,10 +2,8 @@
 % Please edit documentation in R/fairness_cityprofile.R
 \name{MORIE_FAIRNESS_CANONICAL_FIELDS}
 \alias{MORIE_FAIRNESS_CANONICAL_FIELDS}
-\title{The five canonical per-area fields the audit consumes.}
-\usage{
-MORIE_FAIRNESS_CANONICAL_FIELDS
-}
+\title{The five canonical per-area fields the audit consumes}
+
 \description{
-The five canonical per-area fields the audit consumes.
+The five canonical per-area fields the audit consumes
 }

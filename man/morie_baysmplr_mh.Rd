@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_mh}
 \title{Random-walk Metropolis with an isotropic normal proposal}
 \usage{
-morie_baysmplr_mh(log_p, x0, n_iter, e, scale = NULL, adapt = FALSE, target_accept = 0.234)
+morie_baysmplr_mh(log_p, x0, n_iter, e, scale = NULL, adapt = FALSE, target_accept = 0.234) 
 }
 \arguments{
 \item{log_p}{The log density.}

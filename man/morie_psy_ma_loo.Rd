@@ -11,6 +11,7 @@ morie_psy_ma_loo(yi, vi, method = "PM")
 
 \item{method}{heterogeneity estimator for each refit: \code{"PM"},
 \code{"REML"} or \code{"DL"}.}
+
 }
 \value{
 list: mu_full, tau2_full, mu_loo, tau2_loo, delta_mu,

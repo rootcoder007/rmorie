@@ -5,7 +5,7 @@
 \alias{morie_alfrf2_schedule}
 \title{The linear variance schedule and its cumulative products}
 \usage{
-morie_alfrf2_schedule(T, beta_start = 1e-04, beta_end = 0.02)
+morie_alfrf2_schedule(T, beta_start = 1e-04, beta_end = 0.02) 
 }
 \arguments{
 \item{T}{The number of steps.}

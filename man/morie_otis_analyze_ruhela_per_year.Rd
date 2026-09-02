@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_ruhela_per_year}
 \alias{morie_otis_analyze_ruhela_per_year}
-\title{Per-fiscal-year full-DLRM Ruhela formulation driver.}
+\title{Per-fiscal-year full-DLRM Ruhela formulation driver}
 \usage{
 morie_otis_analyze_ruhela_per_year(
   data,

@@ -5,7 +5,7 @@
 \alias{morie_rapaf_partial_ar}
 \title{Partial attributable risk}
 \usage{
-morie_rapaf_partial_ar(case_counts, rate_ratios, baseline_map)
+morie_rapaf_partial_ar(case_counts, rate_ratios, baseline_map) 
 }
 \arguments{
 \item{case_counts}{Non-negative case counts per stratum.}

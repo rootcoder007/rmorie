@@ -5,7 +5,7 @@
 \alias{clrgrf_cluster_jackknife}
 \title{clrgrf_cluster_jackknife}
 \usage{
-clrgrf_cluster_jackknife(preds, bags, groups, correction = TRUE)
+clrgrf_cluster_jackknife(preds, bags, groups, correction = TRUE) 
 }
 \arguments{
 \item{preds}{A vector; its length is taken.}

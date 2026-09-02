@@ -8,9 +8,9 @@
 #' land on the same numbers.  A one-point grid collapses to the plain
 #' point-estimate GP, which is the identity the tests check.
 #'
-#' Formula: mu* = k*'(K + s2 I)^{-1} y;
-#'   var* = k** - k*'(K + s2 I)^{-1} k*;
-#'   log p(y) = -0.5 y'(K + s2 I)^{-1} y - 0.5 log|K + s2 I| - (n/2) log 2 pi.
+#' Formula: mu* = k*'(K + s2 I)^\{-1\} y;
+#'   var* = k** - k*'(K + s2 I)^\{-1\} k*;
+#'   log p(y) = -0.5 y'(K + s2 I)^\{-1\} y - 0.5 log|K + s2 I| - (n/2) log 2 pi.
 #'
 #' @param X Input matrix, one row per training point.
 #' @param y Training responses.

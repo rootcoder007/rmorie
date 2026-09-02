@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_two_stage_attention}
 \title{Full Two-Stage Attention layer}
 \usage{
-morie_crsfmr_two_stage_attention(Z, n_router = NULL, router = NULL)
+morie_crsfmr_two_stage_attention(Z, n_router = NULL, router = NULL) 
 }
 \arguments{
 \item{Z}{A length-L list of length-D lists of d_model vectors.}

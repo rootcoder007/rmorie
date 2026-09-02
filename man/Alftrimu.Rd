@@ -21,6 +21,9 @@ right edges, each \code{c x cz} (line 2).}
 \item{layernorm}{Apply the layer normalisations of lines 1 and 4.
 Setting it to FALSE exposes the degenerate single-channel reduction to
 a plain matrix product.}
+
+
+
 }
 \value{
 A list with the updated pair tensor \code{z}, its mean

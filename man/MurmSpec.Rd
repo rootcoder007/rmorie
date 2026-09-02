@@ -3,9 +3,9 @@
 % the formals.
 \name{MurmSpec}
 \alias{MurmSpec}
-\title{MurmSpec: heart murmur frequency analysis; Rangayyan (2024) eq.}
+\title{MurmSpec: heart murmur frequency analysis; Rangayyan (2024) eq}
 \usage{
-MurmSpec(pcg, fs, f1 = 25, f2 = 75, f3 = 150)
+MurmSpec(pcg, fs, f1 = 25, f2 = 75, f3 = 150) 
 }
 \arguments{
 \item{pcg}{Passed to \code{.bsapsd}.}

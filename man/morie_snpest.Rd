@@ -5,7 +5,9 @@
 \alias{morie_snpest}
 \title{On-line DP-mixture filter over a stream of observations}
 \usage{
-morie_snpest(y_stream, alpha = 1, n_particles = 100L, proposal = "optimal", resampler = "systematic", ess_threshold = 0.5, m0 = NULL, kappa0 = 0.01, a0 = 2, b0 = NULL, seed = 1, grid = NULL, seed_stats = TRUE)
+morie_snpest(y_stream, alpha = 1, n_particles = 100L, proposal = "optimal", 
+    resampler = "systematic", ess_threshold = 0.5, m0 = NULL, kappa0 = 0.01, 
+    a0 = 2, b0 = NULL, seed = 1, grid = NULL, seed_stats = TRUE) 
 }
 \arguments{
 \item{y_stream}{The observations, in arrival order. The order MATTERS:   this is a filter, not a batch method, and the answer after t points   is a function of the first t.}

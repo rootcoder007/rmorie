@@ -5,7 +5,7 @@
 \alias{morie_droPDSI_palmer_pdsi}
 \title{morie_droPDSI_palmer_pdsi}
 \usage{
-morie_droPDSI_palmer_pdsi(precip, pet, awc = 100, month = NULL)
+morie_droPDSI_palmer_pdsi(precip, pet, awc = 100, month = NULL) 
 }
 \arguments{
 \item{precip}{Coerced to numeric by the body, with \code{as.numeric}.}

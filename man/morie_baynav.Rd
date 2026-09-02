@@ -5,10 +5,11 @@
 \alias{morie_baynav}
 \title{Variational inference: normalizing flows and automatic}
 \usage{
-morie_baynav(u, w, b, value, support, eps, z0, log_q0, layers, log_joint, log_q, samples)
+morie_baynav(u, w, b, value, support, eps, z0, log_q0, layers, log_joint, 
+    log_q, samples) 
 }
 \arguments{
-\item{u,w,z}{Numeric vectors of equal length.}
+\item{u,w}{Numeric vectors of equal length.}
 \item{b}{Numeric scalar.}
 \item{value}{Numeric scalar for \code{transform_to_real}.}
 \item{support}{One of \code{"positive"}, \code{"unit"},   \code{"real"}.}

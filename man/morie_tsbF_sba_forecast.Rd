@@ -5,7 +5,8 @@
 \alias{morie_tsbF_sba_forecast}
 \title{morie_tsbF_sba_forecast}
 \usage{
-morie_tsbF_sba_forecast(y, alpha = 0.1, horizon = 1, init = "global", z0 = NULL, x0 = NULL, burn_in = 0)
+morie_tsbF_sba_forecast(y, alpha = 0.1, horizon = 1, init = "global", z0 = NULL, x0 = NULL, 
+    burn_in = 0) 
 }
 \arguments{
 \item{y}{Passed to \code{morie_tsbF_croston_forecast}.}

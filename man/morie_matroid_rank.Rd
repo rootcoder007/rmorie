@@ -10,6 +10,7 @@ morie_matroid_rank(ground, independent, subset = NULL)
 \item{ground, independent}{The matroid.}
 
 \item{subset}{Subset to rank; defaults to the whole ground set.}
+
 }
 \value{
 Integer rank.

@@ -5,10 +5,14 @@
 \alias{morie_kamath_mixtral_moe}
 \title{morie_kamath_mixtral_moe}
 \usage{
-morie_kamath_mixtral_moe(x, W_g, expert_weights = NULL)
+morie_kamath_mixtral_moe(x, W_g, expert_weights = NULL) 
 }
 \arguments{
 \item{expert_weights}{Optional list of (W1, W3, W2) per expert;   NULL isolates the gate with identity experts.}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+\item{W_g}{Argument \code{W_g}; see Usage.}
 }
 \description{
 morie_kamath_mixtral_moe

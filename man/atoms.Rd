@@ -3,9 +3,12 @@
 % the formals.
 \name{atoms}
 \alias{atoms}
+\alias{morie_distq}
 \title{The fixed support {z_i} and its spacing}
 \usage{
-atoms(v_min, v_max, n_atoms)
+atoms(v_min, v_max, n_atoms) 
+
+morie_distq(v_min, v_max, n_atoms) 
 }
 \arguments{
 \item{v_min}{Lower bound of the support.}

@@ -5,7 +5,7 @@
 \alias{morie_propinf_permute_hidden_layer}
 \title{Reorder the neurons of a hidden layer}
 \usage{
-morie_propinf_permute_hidden_layer(net, t, sigma)
+morie_propinf_permute_hidden_layer(net, t, sigma) 
 }
 \arguments{
 \item{net}{Network as returned by \code{morie_propinf_train_fcnn}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm002.R
 \name{Msm002}
 \alias{Msm002}
-\title{Single-mean model for a one-way layout.}
+\title{Single-mean model for a one-way layout}
 \usage{
 Msm002(groups)
 }

@@ -5,7 +5,7 @@
 \alias{merge_panels}
 \title{merge_panels}
 \usage{
-merge_panels(panels, study_snps)
+merge_panels(panels, study_snps) 
 }
 \arguments{
 \item{panels}{A vector; its length is taken and its elements indexed.}

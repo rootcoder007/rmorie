@@ -5,7 +5,7 @@
 \alias{nbeats_cheatsheet}
 \title{nbeats_cheatsheet}
 \usage{
-nbeats_cheatsheet()
+nbeats_cheatsheet() 
 }
 \description{
 A step of the nbeats_native implementation. No other function in the package calls it. See the file header for the source the module follows.

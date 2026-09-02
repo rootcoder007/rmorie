@@ -28,8 +28,8 @@ list: estimate, maxerr, meanerr, A, selected, T, nqueries, n, method.
 \description{
 Figure 1 of the paper: repeatedly select a badly-answered query with the
 exponential mechanism, measure it with the Laplace mechanism, and apply the
-multiplicative weights update A_i(x) proportional to A_{i-1}(x)
-exp(q_i(x)(m_i - q_i(A_{i-1}))/2n).  Both random draws are supplied by the
+multiplicative weights update A_i(x) proportional to A_\{i-1\}(x)
+exp(q_i(x)(m_i - q_i(A_\{i-1\}))/2n).  Both random draws are supplied by the
 caller.  Source consulted: Hardt, Ligett and McSherry (2012), A simple and
 practical algorithm for differentially private data release,
 arXiv:1012.4763.

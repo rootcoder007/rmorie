@@ -26,16 +26,16 @@ List with \code{level}, \code{slope}, \code{seasonal},
 SOURCE. Harvey, A.C. (1989), Forecasting, Structural Time Series Models
 and the Kalman Filter, Cambridge University Press;
 doi:10.1017/CBO9781107049994. The basic structural model of Section 2.3
-is y_t = mu_t + gamma_t + eps_t, mu_t = mu_{t-1} + beta_{t-1} + eta_t,
-beta_t = beta_{t-1} + zeta_t, gamma_t = -sum_{j=1}^{s-1} gamma_{t-j} +
+is y_t = mu_t + gamma_t + eps_t, mu_t = mu_\{t-1\} + beta_\{t-1\} + eta_t,
+beta_t = beta_\{t-1\} + zeta_t, gamma_t = -sum_\{j=1\}^\{s-1\} gamma_\{t-j\} +
 omega_t. It is put in state space form (Sec. 3.1) and run through the
 Kalman filter (Sec. 3.2): a' = T a, P' = T P T' + Q, v = y - Z a',
 F = Z P' Z' + 1, K = P' Z'/F, a = a' + K v, P = P' - K Z P'.
 }
 \details{
 Disturbance variances are ratios q to sigma^2, so sigma^2 concentrates
-out exactly (Sec. 3.4): sigma2 = sum_{t>d} v_t^2/F_t / (T-d) and
-logL = -(T-d)/2 (log 2pi + 1 + log sigma2) - 1/2 sum_{t>d} log F_t.
+out exactly (Sec. 3.4): sigma2 = sum_\{t>d\} v_t^2/F_t / (T-d) and
+logL = -(T-d)/2 (log 2pi + 1 + log sigma2) - 1/2 sum_\{t>d\} log F_t.
 
 DIFFUSE PRIOR. Sec. 3.3.4's limit of an infinite prior variance is
 approximated by P_0 = kappa I with kappa large, and by dropping the

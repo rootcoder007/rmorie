@@ -14,6 +14,7 @@ morie_kamath_corrective_rag(query, docs, clf, tau_hi, tau_lo)
 \item{clf}{Confidence function.}
 
 \item{tau_hi, tau_lo}{Upper and lower thresholds.}
+
 }
 \value{
 List with \code{estimate}, \code{action}, \code{ctx}, \code{scores}.

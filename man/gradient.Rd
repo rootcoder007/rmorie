@@ -5,7 +5,7 @@
 \alias{gradient}
 \title{D/d v_{i,f} of hat y, used in the SGD step --------------------}
 \usage{
-gradient(x, V, f, i)
+gradient(x, V, f, i) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

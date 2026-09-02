@@ -26,7 +26,7 @@ node with no incident walks scores zero instead of one.  The
 additive constant beta shifts every score equally.
 }
 \details{
-Formula: x = (I - alpha A)^{-1} (alpha A) y + beta.
+Formula: x = (I - alpha A)^\{-1\} (alpha A) y + beta.
 }
 \examples{
 Katzc(y = c(1, 1, 1), A = matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))

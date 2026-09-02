@@ -5,7 +5,7 @@
 \alias{BilinUnit}
 \title{The unit circle maps onto the imaginary axis and nowhere else}
 \usage{
-BilinUnit(omega, T = 1)
+BilinUnit(omega, T = 1) 
 }
 \arguments{
 \item{omega}{A digital frequency or vector of them, in radians.}

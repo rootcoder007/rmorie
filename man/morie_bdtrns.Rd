@@ -12,6 +12,7 @@ morie_bdtrns(y_obs, p_obs, y_lo, y_hi)
 \item{p_obs}{Observation probability in [0, 1].}
 
 \item{y_lo, y_hi}{Logical outcome bounds.}
+
 }
 \value{
 A list with elements \code{lower}, \code{upper},
@@ -20,7 +21,7 @@ A list with elements \code{lower}, \code{upper},
 }
 \description{
 With observation probability p and bounded outcomes [g0, g1], the
-identification region for E\link{y} is
+identification region for E[y] is
 [m p + g0 (1-p), m p + g1 (1-p)] with m the observed-subsample
 mean; the width is exactly (g1 - g0)(1 - p).
 }

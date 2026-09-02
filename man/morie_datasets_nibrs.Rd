@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_nibrs}
 \alias{morie_datasets_nibrs}
-\title{FBI NIBRS offence-event records via the Crime Data Explorer API.}
+\title{FBI NIBRS offence-event records via the Crime Data Explorer API}
 \usage{
 morie_datasets_nibrs(
   year = NULL,

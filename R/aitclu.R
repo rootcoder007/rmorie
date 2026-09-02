@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Lloyd k-means on compositions, run in clr coordinates.
+#' Lloyd k-means on compositions, run in clr coordinates
 #'
 #' Deterministic by construction so the two language arms agree exactly:
 #' initial centres are the FIRST k rows, assignment ties go to the lowest

@@ -5,7 +5,7 @@
 \alias{morie_locdp}
 \title{Returns:}
 \usage{
-morie_locdp(x, epsilon = 1, seed = NULL)
+morie_locdp(x, epsilon = 1, seed = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

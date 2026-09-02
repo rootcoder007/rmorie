@@ -5,7 +5,7 @@
 \alias{morie_bnppvl_draw}
 \title{One draw of the quantile pyramid down to level m}
 \usage{
-morie_bnppvl_draw(e, m, c = 2.5, schedule = "cubic", centring = "uniform", nullq = NULL)
+morie_bnppvl_draw(e, m, c = 2.5, schedule = "cubic", centring = "uniform", nullq = NULL) 
 }
 \arguments{
 \item{e}{A random stream from the shared generator.}

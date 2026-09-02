@@ -5,7 +5,7 @@
 \alias{t5enc_cheatsheet}
 \title{t5enc_cheatsheet}
 \usage{
-t5enc_cheatsheet()
+t5enc_cheatsheet() 
 }
 \description{
 A step of the t5enc_native implementation. Called by \code{morie_t5enc}. See the file header for the source the module follows.

@@ -20,12 +20,11 @@ morie_one_step_m(x, bend = 1.28, constant = 1.4826)
 
 \item{q}{quantile to estimate}
 
-\item{beta}{bending constant for the percentage bend}
+\item{beta}{Argument \code{beta}; see Usage.}
 
-\item{bend}{bending constant}
+\item{bend}{Argument \code{bend}; see Usage.}
 
-\item{constant}{MAD scaling constant; the R value 1.4826 by default,
-as WRS uses}
+\item{constant}{Argument \code{constant}; see Usage.}
 }
 \value{
 a numeric scalar

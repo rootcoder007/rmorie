@@ -5,7 +5,7 @@
 \alias{MotionArt}
 \title{Section 1.2.11 characterises motion artifact but gives no detection}
 \usage{
-MotionArt(x, fs, win = 1, factor = 4)
+MotionArt(x, fs, win = 1, factor = 4) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

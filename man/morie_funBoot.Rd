@@ -5,7 +5,8 @@
 \alias{morie_funBoot}
 \title{morie_funBoot}
 \usage{
-morie_funBoot(curves, statistic = NULL, alpha = 0.05, B = 500L, metric = "l2", smooth = 0, seed = 0)
+morie_funBoot(curves, statistic = NULL, alpha = 0.05, B = 500L, metric = "l2", 
+    smooth = 0, seed = 0) 
 }
 \arguments{
 \item{curves}{A matrix; indexed by row and column.}

@@ -5,7 +5,7 @@
 \alias{morie_genmol_validity}
 \title{Which decoded strings are molecules, by running the parser}
 \usage{
-morie_genmol_validity(smiles_list)
+morie_genmol_validity(smiles_list) 
 }
 \arguments{
 \item{smiles_list}{The decoded strings.}

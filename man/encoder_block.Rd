@@ -5,7 +5,8 @@
 \alias{encoder_block}
 \title{encoder_block}
 \usage{
-encoder_block(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads, pad_mask = NULL, gain1 = NULL, bias1 = NULL, gain2 = NULL, bias2 = NULL, pre_norm = FALSE)
+encoder_block(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads, pad_mask = NULL, 
+    gain1 = NULL, bias1 = NULL, gain2 = NULL, bias2 = NULL, pre_norm = FALSE) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

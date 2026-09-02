@@ -27,6 +27,7 @@ spstp(
 "birth_death", "sampled_in_time".}
 
 \item{n_space_bins, n_time_bins}{Grid for the marginals and the CSTR test.}
+
 }
 \value{
 A list with \code{intensity}, \code{n}, \code{area}, \code{duration}, \code{volume},

@@ -3,14 +3,14 @@
 # Native design-based weighted GLM (feat/native-specializations,
 # module 8). Replaces survey::svydesign(ids = ~1) + survey::svyglm for
 # the independent-sampling case: coefficients come from a weighted
-# stats::glm fit; variance is the Horvitz-Thompson linearization —
+# stats::glm fit; variance is the Horvitz-Thompson linearization --
 # a sandwich over the centred weighted score contributions with the
-# survey package's n/(n-1) small-sample factor — so results reproduce
+# survey package's n/(n-1) small-sample factor -- so results reproduce
 # svyglm to numerical precision (cross-validated in tests/cross/).
 
 #' Internal helper: svyglm-equivalent weighted GLM with linearized SEs
 #' @srrstats {G1.0} Primary reference: Binder (1983, Int. Stat. Rev.
-#'   51) — design-based variance for GLM parameter estimates via
+#'   51) -- design-based variance for GLM parameter estimates via
 #'   Taylor linearization; Lumley (2004, JSS 9(1)) for the reference
 #'   implementation (survey) this is cross-validated against.
 #' @srrstats {G3.1} The variance estimator (centred score sandwich,

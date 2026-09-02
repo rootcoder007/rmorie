@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Row-normalised spatial weights.
+#' Row-normalised spatial weights
 #'
 #' Formula: w'_ij = w_ij / sum_j w_ij
 #'
 #' @param W Spatial weights matrix.
 
+#' @param W See Usage.
 #' @return List with ``W`` (normalised), ``row_sums``, ``islands``, ``n``.
 #' @references Anselin (1988), Spatial Econometrics: Methods and Models, Kluwer. Not held locally; row standardisation w_ij / sum_j w_ij is the standard published convention and is what spdep's style = 'W' computes.
 #' @export

@@ -30,7 +30,7 @@
 # (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1.
 # The exact finite-n value, not the limit; they differ by about 1% at
 # n = 20, which is the regime where anyone reaches for a bootstrap.
-#' (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1
+#' (7.55): Pr\{i in bootstrap sample b\} = 1 - (1 - 1/n)^n -> 1 - e^-1
 #'
 #' The exact finite-n value, not the limit; they differ by about 1% at n
 #' = 20, which is the regime where anyone reaches for a bootstrap.

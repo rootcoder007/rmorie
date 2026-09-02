@@ -24,6 +24,8 @@ morie_geron_learning_curves_hmlcv(
 \item{fit, predict}{Optional callables (default OLS via lstsq).}
 
 \item{seed}{Split seed.}
+
+
 }
 \value{
 List with train_sizes, rmse_train, rmse_val, final_gap, verdict, estimate, n, method.

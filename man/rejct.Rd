@@ -21,7 +21,7 @@ list: estimate, gross_error_sensitivity, local_shift_sensitivity,
 sup_psi, expected_psi_prime, tuning, psi, n, method.
 }
 \description{
-rho* = inf{r : psi(x) = 0 for |x| > r}, gamma* = sup|psi| / E[psi'],
+rho* = inf\{r : psi(x) = 0 for |x| > r\}, gamma* = sup|psi| / E[psi'],
 lambda* = sup|psi(x)-psi(y)|/|x-y|, all at the standard normal.  Huber's psi
 has rho* infinite, gamma* = k/(2 Phi(k) - 1) and lambda* = 1; Tukey's
 biweight has rho* = c and sup|psi| = 16 c/(25 sqrt 5) at x = c/sqrt 5, with

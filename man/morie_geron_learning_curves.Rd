@@ -12,6 +12,7 @@ morie_geron_learning_curves(X, y, n_splits = 10, val_fraction = 0.2)
 \item{n_splits}{Number of training sizes (unique after rounding).}
 
 \item{val_fraction}{Validation share in (0, 1).}
+
 }
 \value{
 List with \code{train_sizes}, \code{train_rmse}, \code{val_rmse},

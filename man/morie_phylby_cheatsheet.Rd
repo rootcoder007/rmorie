@@ -5,7 +5,7 @@
 \alias{morie_phylby_cheatsheet}
 \title{morie_phylby_cheatsheet}
 \usage{
-morie_phylby_cheatsheet()
+morie_phylby_cheatsheet() 
 }
 \description{
 A step of the phylby_native implementation. No other function in the package calls it. See the file header for the source the module follows.

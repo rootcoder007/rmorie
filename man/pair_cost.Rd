@@ -5,7 +5,7 @@
 \alias{pair_cost}
 \title{pair_cost}
 \usage{
-pair_cost(n, mode = "cross-encoder")
+pair_cost(n, mode = "cross-encoder") 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

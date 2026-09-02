@@ -8,6 +8,7 @@ morie_evt_hill_alias(x, k = NULL)
 }
 \arguments{
 \item{x, k}{as in \code{\link[=morie_evt_hill]{morie_evt_hill()}}.}
+
 }
 \value{
 the \code{\link[=morie_evt_hill]{morie_evt_hill()}} list plus \code{alias_of}.

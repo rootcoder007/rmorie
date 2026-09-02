@@ -36,6 +36,8 @@ morie_zonal_ebm(
 \item{ice_threshold}{temperature (C) below which a zone ices over.}
 
 \item{start}{initial temperature (C).}
+
+
 }
 \value{
 list with \code{temperature}, \code{global_mean},

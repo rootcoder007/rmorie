@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm003.R
 \name{Msm003}
 \alias{Msm003}
-\title{One-way fixed-effects model.}
+\title{One-way fixed-effects model}
 \usage{
 Msm003(groups)
 }

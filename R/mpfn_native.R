@@ -138,7 +138,7 @@ morie_mpfn_readout <- function(H, how = "sum", H0 = NULL, i_fn = NULL,
 #' @param adj Adjacency list.
 #' @param edge_features Edge feature map keyed by "i_j" (integer pair).
 #' @param perm 0-based permutation of node indices.
-#' @param T,how,readout arguments.
+#' @param T,how arguments.
 #' @param tol Tolerance.
 #' @return A list with invariant, max_deviation, readout.
 #' @export

@@ -5,7 +5,7 @@
 \alias{morie_bnsadt_cheatsheet}
 \title{One-line summary of the bnsadt module}
 \usage{
-morie_bnsadt_cheatsheet()
+morie_bnsadt_cheatsheet() 
 }
 \description{
 One-line summary of the bnsadt module

@@ -5,7 +5,7 @@
 \alias{morie_qjlcrn}
 \title{Random projection with binary coins}
 \usage{
-morie_qjlcrn(A, k, distribution = "rademacher", seed = 0L)
+morie_qjlcrn(A, k, distribution = "rademacher", seed = 0L) 
 }
 \arguments{
 \item{A}{List of points, each a numeric vector; all rows must   share the same length.}

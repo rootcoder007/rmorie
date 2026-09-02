@@ -5,7 +5,7 @@
 \alias{varcal_encode_pileup}
 \title{varcal_encode_pileup}
 \usage{
-varcal_encode_pileup(reads, reference, candidate, width = 21, height = 100, channels = "base_quality_strand")
+varcal_encode_pileup(reads, reference, candidate, width = 21, height = 100, channels = "base_quality_strand") 
 }
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}

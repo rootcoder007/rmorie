@@ -5,7 +5,7 @@
 \alias{basic_reproduction_numbers}
 \title{basic_reproduction_numbers}
 \usage{
-basic_reproduction_numbers(beta, nu, mu)
+basic_reproduction_numbers(beta, nu, mu) 
 }
 \arguments{
 \item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{nuclear_norm}
 \title{nuclear_norm}
 \usage{
-nuclear_norm(A)
+nuclear_norm(A) 
 }
 \arguments{
 \item{A}{Passed to \code{.meglt_mat}.}

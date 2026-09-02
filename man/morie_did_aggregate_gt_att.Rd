@@ -20,6 +20,9 @@ morie_did_aggregate_gt_att(
 \code{"calendar_time"}, \code{"event_time"}.}
 
 \item{time_col, cohort_col, att_col, se_col}{Column-name overrides.}
+
+
+
 }
 \value{
 A data frame with \code{group}, \code{estimate},

@@ -8,6 +8,8 @@ morie_kendall_tau_partial(x, y, z)
 }
 \arguments{
 \item{x, y, z}{Numeric vectors of equal length.}
+
+
 }
 \value{
 Named list: statistic (partial tau), p_value, tau_xy,

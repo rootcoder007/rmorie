@@ -21,9 +21,9 @@ List with \code{estimate}, \code{forecast}, \code{lambda_},
 \code{method}.
 }
 \description{
-Formula: I_t = R_t sum_{s>=1} I_{t-s} w_s, where w is the generation
+Formula: I_t = R_t sum_\{s>=1\} I_\{t-s\} w_s, where w is the generation
 interval distribution (normalised to sum to one) and
-Lambda_t = sum_s I_{t-s} w_s is the total infectiousness at time t.
+Lambda_t = sum_s I_\{t-s\} w_s is the total infectiousness at time t.
 Forward projection feeds each simulated incidence back into Lambda for
 the following step.  Read backwards the same identity gives the
 instantaneous reproduction number, Rhat_t = I_t / Lambda_t.

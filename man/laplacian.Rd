@@ -5,7 +5,7 @@
 \alias{laplacian}
 \title{Build the graph Laplacian}
 \usage{
-laplacian(adj, n, normalized = TRUE)
+laplacian(adj, n, normalized = TRUE) 
 }
 \arguments{
 \item{adj}{Adjacency list.}

@@ -5,7 +5,7 @@
 \alias{morie_weighted_moments}
 \title{morie_weighted_moments}
 \usage{
-morie_weighted_moments(m, g)
+morie_weighted_moments(m, g) 
 }
 \arguments{
 \item{m}{A matrix; passed to \code{as.matrix}.}

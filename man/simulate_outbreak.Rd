@@ -5,7 +5,9 @@
 \alias{simulate_outbreak}
 \title{simulate_outbreak}
 \usage{
-simulate_outbreak(R0 = 2.5, dispersion = 0.16, n_initial = 20, trace_prob = 0.8, delay_mean = 3.83, delay_sd = 2.4, si_mean = 4.7, si_sd = 2.9, subclinical = 0, max_cases = 5000, max_weeks = 12, seed = 0, allow_presymptomatic = TRUE)
+simulate_outbreak(R0 = 2.5, dispersion = 0.16, n_initial = 20, trace_prob = 0.8, 
+    delay_mean = 3.83, delay_sd = 2.4, si_mean = 4.7, si_sd = 2.9, subclinical = 0, 
+    max_cases = 5000, max_weeks = 12, seed = 0, allow_presymptomatic = TRUE) 
 }
 \arguments{
 \item{R0}{Passed to \code{negbinom_offspring}. Defaults to \code{2.5}.}

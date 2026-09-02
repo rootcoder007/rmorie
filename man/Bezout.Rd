@@ -2,14 +2,14 @@
 % Please edit documentation in R/bezout.R
 \name{Bezout}
 \alias{Bezout}
-\title{Bezout coefficients by the extended Euclidean algorithm.}
+\title{Bezout coefficients by the extended Euclidean algorithm}
 \usage{
 Bezout(a, b)
 }
 \arguments{
-\item{a}{First integer.}
+\item{a}{See Usage.}
 
-\item{b}{Second integer.}
+\item{b}{See Usage.}
 }
 \value{
 List with \code{gcd}, \code{x}, \code{y}, \code{check} (a x + b y), \code{a}, \code{b}.

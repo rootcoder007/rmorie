@@ -5,7 +5,8 @@
 \alias{rj_log_acceptance}
 \title{rj_log_acceptance}
 \usage{
-rj_log_acceptance(logpost_from, logpost_to, log_j_from, log_j_to, logq_u, logq_u_rev, log_jacobian)
+rj_log_acceptance(logpost_from, logpost_to, log_j_from, log_j_to, logq_u, logq_u_rev, 
+    log_jacobian) 
 }
 \arguments{
 \item{logpost_from}{Numeric; combined arithmetically in the body.}

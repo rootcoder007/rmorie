@@ -8,6 +8,8 @@ morie_geron_logistic_cost_gradient(X, y, theta)
 }
 \arguments{
 \item{X, y, theta}{Design, 0/1 targets and parameters.}
+
+
 }
 \value{
 List with \code{gradient}, \code{grad_norm}, \code{probabilities}, \code{errors}.

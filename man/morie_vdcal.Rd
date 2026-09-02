@@ -5,7 +5,8 @@
 \alias{morie_vdcal}
 \title{Volume of distribution at steady state, forwards or backwards}
 \usage{
-morie_vdcal(smiles, ppb, fut = NULL, vss = NULL, direction = "vss", weight = 70, par = NULL, elogd = NULL, fi = NULL, coefficients = NULL)
+morie_vdcal(smiles, ppb, fut = NULL, vss = NULL, direction = "vss", weight = 70, 
+    par = NULL, elogd = NULL, fi = NULL, coefficients = NULL) 
 }
 \arguments{
 \item{smiles}{Carried through untouched. The model is physiological,   not structural: nothing here reads the structure, and pretending   otherwise would be the fabrication this module exists to avoid.}

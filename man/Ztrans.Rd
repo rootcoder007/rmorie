@@ -5,7 +5,7 @@
 \alias{Ztrans}
 \title{Eq (3.54): X(z) = sum_n x(n) z^-n; eq (3.55) is the causal FIR case}
 \usage{
-Ztrans(x, z = NULL, n0 = 0)
+Ztrans(x, z = NULL, n0 = 0) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

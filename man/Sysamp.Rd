@@ -2,7 +2,7 @@
 % Please edit documentation in R/systmp.R
 \name{Sysamp}
 \alias{Sysamp}
-\title{Every k-th unit: all k systematic samples and the exact variance.}
+\title{Every k-th unit: all k systematic samples and the exact variance}
 \usage{
 Sysamp(y, k)
 }

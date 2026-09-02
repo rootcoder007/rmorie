@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_ckan_package}
 \alias{morie_datasets_ckan_package}
-\title{Pull every CSV resource of a CKAN package as a list of data frames.}
+\title{Pull every CSV resource of a CKAN package as a list of data frames}
 \usage{
 morie_datasets_ckan_package(portal, package_id)
 }
@@ -15,7 +15,7 @@ morie_datasets_ckan_package(portal, package_id)
 Named list mapping \code{resource_name -> data.frame}.
 }
 \description{
-Pull every CSV resource of a CKAN package as a list of data frames.
+Pull every CSV resource of a CKAN package as a list of data frames
 }
 \examples{
 \donttest{

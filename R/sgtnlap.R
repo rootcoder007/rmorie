@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Normalised Laplacian in Chung's sense.
+#' Normalised Laplacian in Chung's sense
 #'
 #' Chung's convention T^-1(v, v) = 0 for an isolated vertex is followed
 #' exactly, so an isolated vertex contributes a zero row and column.

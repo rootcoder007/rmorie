@@ -14,6 +14,7 @@ morie_kamath_image_text_matching(image_emb, text_emb, W, b, fuse = NULL)
 \item{b}{Bias.}
 
 \item{fuse}{Optional fusion function.}
+
 }
 \value{
 List with \code{estimate}, \code{logit}, \code{match}, \code{fused}.

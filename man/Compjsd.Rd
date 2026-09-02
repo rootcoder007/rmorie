@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitjsd.R
 \name{Compjsd}
 \alias{Compjsd}
-\title{Jensen-Shannon divergence for compositional data.}
+\title{Jensen-Shannon divergence for compositional data}
 \usage{
 Compjsd(p, q, base = 2)
 }
@@ -10,6 +10,7 @@ Compjsd(p, q, base = 2)
 \item{p, q}{Non-negative compositions over the same parts.}
 
 \item{base}{Logarithm base; 2 gives bits.}
+
 }
 \value{
 As \code{Jsdiv}.

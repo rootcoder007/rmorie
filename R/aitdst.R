@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Aitchison distance between two compositions.
+#' Aitchison distance between two compositions
 #'
-#' Formula: d_a(x, y)^2 = (1/D) sum_{i<j} ( log(x_i/x_j) - log(y_i/y_j) )^2
+#' Formula: d_a(x, y)^2 = (1/D) sum_\{i<j\} ( log(x_i/x_j) - log(y_i/y_j) )^2
 #'
 #' @param x Composition with strictly positive parts.
 #' @param y Second composition, same length as x, strictly positive.

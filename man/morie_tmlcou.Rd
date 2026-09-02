@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_tmlcou}
 \alias{morie_tmlcou}
+\alias{morie_tmlcountoutcome}
 \title{TMLE of the mean-outcome contrast for a count or bounded outcome}
 \usage{
-morie_tmlcou(y, D, X, offset = NULL, g = NULL, Q1 = NULL, Q0 = NULL, lower = NULL, upper = NULL, iters = 100)
+morie_tmlcou(y, D, X, offset = NULL, g = NULL, Q1 = NULL, Q0 = NULL, lower = NULL, 
+    upper = NULL, iters = 100) 
+
+morie_tmlcountoutcome(y, D, X, offset = NULL, g = NULL, Q1 = NULL, Q0 = NULL, lower = NULL, 
+    upper = NULL, iters = 100) 
 }
 \arguments{
 \item{y}{Outcome vector.}

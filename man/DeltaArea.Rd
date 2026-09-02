@@ -5,7 +5,7 @@
 \alias{DeltaArea}
 \title{Eq (3.25): integral delta(t) dt = 1.  The property defines the delta,}
 \usage{
-DeltaArea(t = NULL, values = NULL, width = NULL)
+DeltaArea(t = NULL, values = NULL, width = NULL) 
 }
 \arguments{
 \item{t}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Penalized Poisson log-linear regression.
+#' Penalized Poisson log-linear regression
 #'
 #' Formula: l_p = sum_i y_i eta_i - sum_i exp(eta_i) - sum_i log(y_i!) - (lambda/2) sum_j beta_j^2,  eta_i = beta_0 + x_i'beta
 #'

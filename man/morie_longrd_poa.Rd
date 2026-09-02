@@ -5,7 +5,7 @@
 \alias{morie_longrd_poa}
 \title{Progressive partial-order consensus: the heaviest path}
 \usage{
-morie_longrd_poa(reads, match = 1, mismatch = -1, gap = -2, sort_reads = TRUE)
+morie_longrd_poa(reads, match = 1, mismatch = -1, gap = -2, sort_reads = TRUE) 
 }
 \arguments{
 \item{reads}{The reads.}

@@ -8,6 +8,7 @@ kendall_correlation(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors.}
+
 }
 \value{
 An object of class \code{"morie_test_result"}.

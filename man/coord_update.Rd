@@ -5,7 +5,7 @@
 \alias{coord_update}
 \title{Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij})}
 \usage{
-coord_update(X, M, phi_x, C = NULL)
+coord_update(X, M, phi_x, C = NULL) 
 }
 \arguments{
 \item{X}{A vector; its length is taken and its elements indexed.}

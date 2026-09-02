@@ -5,7 +5,7 @@
 \alias{g_formula_pooled}
 \title{g_formula_pooled}
 \usage{
-g_formula_pooled(Q_final, weights = NULL)
+g_formula_pooled(Q_final, weights = NULL) 
 }
 \arguments{
 \item{Q_final}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{edge_encoding}
 \title{Average edge features along the shortest path}
 \usage{
-edge_encoding(paths, edge_features, w_table)
+edge_encoding(paths, edge_features, w_table) 
 }
 \arguments{
 \item{paths}{List of (i, j) -> ordered edge tuples along the path.}

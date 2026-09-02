@@ -8,11 +8,15 @@
 \alias{morie_zap_link}
 \title{Zero-altered Poisson models}
 \usage{
-morie_zap_predict(theta_hat, mu_hat, threshold = NULL)
-morie_zap_mean_variance(theta, mu)
-morie_zap_loglik(y_positive, mu = NULL, x = NULL)
-morie_zap_mle(y_positive, tol = 1e-12, max_iter = 200)
-morie_zap_link(mu_pred, theta_pred)
+morie_zap_predict(theta_hat, mu_hat, threshold = NULL) 
+
+morie_zap_mean_variance(theta, mu) 
+
+morie_zap_loglik(y_positive, mu = NULL, x = NULL) 
+
+morie_zap_mle(y_positive, tol = 1e-12, max_iter = 200) 
+
+morie_zap_link(mu_pred, theta_pred) 
 }
 \arguments{
 \item{theta}{probability of the zero state}

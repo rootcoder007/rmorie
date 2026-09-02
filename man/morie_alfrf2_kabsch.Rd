@@ -5,14 +5,14 @@
 \alias{morie_alfrf2_kabsch}
 \title{The rigid motion that best takes P onto Q, and the residual}
 \usage{
-morie_alfrf2_kabsch(P, Q)
+morie_alfrf2_kabsch(P, Q) 
 }
 \arguments{
 \item{P}{The moving points, one row each.}
 \item{Q}{The reference points.}
 }
 \description{
-The rotation is the orthogonal polar factor of the cross-covariance C = sum q p', obtained as C (C'C)^{-1/2} from the eigendecomposition of C'C. If that factor comes out with a negative determinant it is a reflection, not a rotation, and the sign is flipped on the direction of least variance -- the standard correction, and the reason a naive superposition can silently report a mirror image as a match.
+The rotation is the orthogonal polar factor of the cross-covariance C = sum q p', obtained as C (C'C)^\{-1/2\} from the eigendecomposition of C'C. If that factor comes out with a negative determinant it is a reflection, not a rotation, and the sign is flipped on the direction of least variance -- the standard correction, and the reason a naive superposition can silently report a mirror image as a match.
 }
 \value{
 A list with the rotation, the translation, the root-mean-   square deviation and the moved points.

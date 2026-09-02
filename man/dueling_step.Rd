@@ -5,7 +5,8 @@
 \alias{dueling_step}
 \title{One dueling + Double-DQN update}
 \usage{
-dueling_step(value, advantage, action, reward, gamma, next_value, next_advantage, next_target_value, next_target_advantage, mode = "mean", done = FALSE)
+dueling_step(value, advantage, action, reward, gamma, next_value, next_advantage, 
+    next_target_value, next_target_advantage, mode = "mean", done = FALSE) 
 }
 \arguments{
 \item{value}{Scalar V(s).}

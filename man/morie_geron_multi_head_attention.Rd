@@ -14,6 +14,11 @@ morie_geron_multi_head_attention(Q, K, V, WQ, WK, WV, WO, h, mask = NULL)
 \item{h}{Number of heads dividing d_model.}
 
 \item{mask}{Optional attention mask.}
+
+
+
+
+
 }
 \value{
 List with \code{output}, \code{head_outputs}, \code{attention_weights},

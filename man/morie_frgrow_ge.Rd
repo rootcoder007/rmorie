@@ -5,7 +5,7 @@
 \alias{morie_frgrow_ge}
 \title{The efficiency of the atoms that were added, on their own}
 \usage{
-morie_frgrow_ge(kd_parent, hac_parent, kd_grown, hac_grown, route = "rt", temperature = .FRGROW_T_STANDARD)
+morie_frgrow_ge(kd_parent, hac_parent, kd_grown, hac_grown, route = "rt", temperature = .FRGROW_T_STANDARD) 
 }
 \arguments{
 \item{kd_parent}{The parent's dissociation constant.}

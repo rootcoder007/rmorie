@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Pitman-Yor stick-breaking weights and the Gibbs factor V_\{n,k\}.
+#' Pitman-Yor stick-breaking weights and the Gibbs factor V_\{n,k\}
 #'
 #' sigma = 0 recovers DP(M, G); sigma > 0 makes the weights decay
 #' polynomially. The weights returned are EXPECTED weights, not a draw,
@@ -7,7 +7,7 @@
 #'
 #' Formula: V_j ~ Beta(1 - sigma, M + j sigma);
 #'   W_j = V_j prod_\{l<j\}(1 - V_l);
-#'   E[V_j] = (1 - sigma)/(M + 1 + (j - 1) sigma);
+#'   E\[V_j\] = (1 - sigma)/(M + 1 + (j - 1) sigma);
 #'   V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{\[n-1\]\}
 #'
 #' @param sigma Discount parameter; restricted to [0, 1).

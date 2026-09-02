@@ -5,7 +5,7 @@
 \alias{violates_kkt}
 \title{violates_kkt}
 \usage{
-violates_kkt(i, alpha, y, E, C, tol = 0.001)
+violates_kkt(i, alpha, y, E, C, tol = 0.001) 
 }
 \arguments{
 \item{i}{See Usage.}

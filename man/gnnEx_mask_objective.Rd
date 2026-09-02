@@ -5,7 +5,8 @@
 \alias{gnnEx_mask_objective}
 \title{gnnEx_mask_objective}
 \usage{
-gnnEx_mask_objective(predict, edges, edge_logits, feature_logits, y, size_coef = 0.005, entropy_coef = 1)
+gnnEx_mask_objective(predict, edges, edge_logits, feature_logits, y, size_coef = 0.005, 
+    entropy_coef = 1) 
 }
 \arguments{
 \item{predict}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,7 @@
 \alias{morie_sctraj_cluster_distances}
 \title{morie_sctraj_cluster_distances}
 \usage{
-morie_sctraj_cluster_distances(X, labels, cov = "full", weights = NULL)
+morie_sctraj_cluster_distances(X, labels, cov = "full", weights = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.sctraj_matrix}.}

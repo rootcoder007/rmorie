@@ -5,7 +5,7 @@
 \alias{xdeep_hadamard}
 \title{xdeep_hadamard}
 \usage{
-xdeep_hadamard(a, b)
+xdeep_hadamard(a, b) 
 }
 \arguments{
 \item{a}{Passed to \code{.xdeep_to_vec}.}

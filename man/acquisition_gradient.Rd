@@ -5,7 +5,7 @@
 \alias{acquisition_gradient}
 \title{acquisition_gradient}
 \usage{
-acquisition_gradient(gmu, gsd, mu, sd, best, acq = "ei", kappa = 2, xi = 0)
+acquisition_gradient(gmu, gsd, mu, sd, best, acq = "ei", kappa = 2, xi = 0) 
 }
 \arguments{
 \item{gmu}{A vector; its length is taken.}

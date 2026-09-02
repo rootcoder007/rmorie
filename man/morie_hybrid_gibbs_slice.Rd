@@ -5,10 +5,15 @@
 \alias{morie_hybrid_gibbs_slice}
 \title{Entry point: hybrid Gibbs sweep with a slice update per coordinate}
 \usage{
-morie_hybrid_gibbs_slice(log_conditionals, x0, n = 2000L, ...)
+morie_hybrid_gibbs_slice(log_conditionals, x0, n = 2000L, ...) 
 }
 \description{
 Currently every coordinate is slice-updated; this name is preserved to mirror the Python arm\'s hybrid interface, so a future module that mixes conjugate draws and slice draws can slot in here without breaking callers.
+}
+\arguments{
+\item{log_conditionals}{Argument \code{log_conditionals}; see Usage.}
+\item{x0}{Argument \code{x0}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 Same payload as \code{morie_gibbs_slice}.

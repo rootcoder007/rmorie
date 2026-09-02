@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Azuma-Hoeffding concentration bound for martingales.
+#' Azuma-Hoeffding concentration bound for martingales
 #'
 #' Formula: P(M_n - M_0 >= t) <= exp(-t^2 / (2 sum_i c_i^2))
 #'
 #' @param c Bounded-difference constants c_i, one per step.
 #' @param t Deviation whose probability is bounded.
 
+#' @param c See Usage.
+#' @param t See Usage.
 #' @return List with ``bound`` (one-sided), ``bound_two_sided``, ``sum_c2``, ``t``, ``n``.
 #' @references Azuma (1967), Weighted sums of certain dependent random variables, Tohoku Mathematical Journal 19:357-367; Hoeffding (1963), JASA 58:13-30. Neither is held locally; the inequality is stated in this exact form in every standard reference consulted.
 #' @export

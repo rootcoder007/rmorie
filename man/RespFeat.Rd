@@ -5,7 +5,7 @@
 \alias{RespFeat}
 \title{RespFeat: respiratory rate, depth and I:E ratio}
 \usage{
-RespFeat(resp, fs, signal_type = "flow", min_breath_s = 1)
+RespFeat(resp, fs, signal_type = "flow", min_breath_s = 1) 
 }
 \arguments{
 \item{resp}{Coerced to numeric by the body, with \code{as.numeric}.}

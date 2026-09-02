@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlsl.R
 \name{Superlrn}
 \alias{Superlrn}
-\title{Weight candidate predictions by cross-validated risk, on the simplex.}
+\title{Weight candidate predictions by cross-validated risk, on the simplex}
 \usage{
 Superlrn(Z, Y, iters = 500)
 }

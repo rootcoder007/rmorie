@@ -5,7 +5,7 @@
 \alias{smo_platt}
 \title{smo_platt}
 \usage{
-smo_platt(y, K, C = 1, tol = 0.001, eps = 1e-05, max_passes = 200, seed = 0)
+smo_platt(y, K, C = 1, tol = 0.001, eps = 1e-05, max_passes = 200, seed = 0) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

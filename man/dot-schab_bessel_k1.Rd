@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_st_shared.R
 \name{.schab_bessel_k1}
 \alias{.schab_bessel_k1}
-\title{K_1(z) = integral_0^inf exp{-z cosh u} cosh u du}
+\title{K_1(z) = integral_0^inf exp\{-z cosh u\} cosh u du}
 \usage{
 .schab_bessel_k1(z, upper = 40, n_quad = 400L)
 }

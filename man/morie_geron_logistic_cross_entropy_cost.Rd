@@ -10,6 +10,8 @@ morie_geron_logistic_cross_entropy_cost(X, y, theta, eps = 1e-15)
 \item{X, y, theta}{Design, 0/1 targets and parameters.}
 
 \item{eps}{Clip guard in (0, 0.5).}
+
+
 }
 \value{
 List with \code{cost}, \code{probabilities}, \code{per_instance_loss},

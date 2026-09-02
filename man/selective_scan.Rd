@@ -5,7 +5,8 @@
 \alias{selective_scan}
 \title{selective_scan}
 \usage{
-selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, b_delta = 0, rule = "zoh", D_skip = NULL)
+selective_scan(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, 
+    b_delta = 0, rule = "zoh", D_skip = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

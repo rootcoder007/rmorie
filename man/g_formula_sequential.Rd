@@ -5,7 +5,7 @@
 \alias{g_formula_sequential}
 \title{g_formula_sequential}
 \usage{
-g_formula_sequential(Q_seq)
+g_formula_sequential(Q_seq) 
 }
 \arguments{
 \item{Q_seq}{A vector; its length is taken and its elements indexed.}

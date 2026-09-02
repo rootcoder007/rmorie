@@ -2,7 +2,7 @@
 % Please edit documentation in R/omitV.R
 \name{Ovbias}
 \alias{Ovbias}
-\title{Omitted variable bias, classical and partial-R2 form.}
+\title{Omitted variable bias, classical and partial-R2 form}
 \usage{
 Ovbias(
   delta = NULL,
@@ -15,19 +15,19 @@ Ovbias(
 )
 }
 \arguments{
-\item{delta}{Coefficient of the confounder in the treatment regression.}
+\item{delta}{See Usage.}
 
-\item{gamma}{Coefficient of the confounder in the outcome regression.}
+\item{gamma}{See Usage.}
 
-\item{estimate}{The estimate obtained without the confounder.}
+\item{estimate}{See Usage.}
 
-\item{se}{Its standard error.}
+\item{se}{See Usage.}
 
-\item{df}{Residual degrees of freedom of that regression.}
+\item{df}{See Usage.}
 
-\item{r2_yz}{Partial R2 of the confounder with the outcome given treatment and covariates.}
+\item{r2_yz}{See Usage.}
 
-\item{r2_dz}{Partial R2 of the confounder with the treatment given covariates.}
+\item{r2_dz}{See Usage.}
 }
 \value{
 List with \code{bias}, \code{adjusted_estimate}, \code{adjusted_se}, \code{adjusted_t}, \code{relative_bias}, \code{bias_factor}.

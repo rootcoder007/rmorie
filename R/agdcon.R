@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Accelerated projected gradient on a box.
+#' Accelerated projected gradient on a box
 #'
 #' FISTA with the proximal map of a box indicator, i.e. the component-wise
 #' clamp: x_k = clamp(y_k - grad f(y_k)/L),
-#' t_{k+1} = (1 + sqrt(1 + 4 t_k^2))/2,
-#' y_{k+1} = x_k + ((t_k-1)/t_{k+1})(x_k - x_{k-1}).
+#' t_\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+#' y_\{k+1\} = x_k + ((t_k-1)/t_\{k+1\})(x_k - x_\{k-1\}).
 #'
 #' @param X Design matrix.
 #' @param y Response of length n.

@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_complexity}
 \title{Operation counts for the two stages}
 \usage{
-morie_crsfmr_complexity(L, D, c)
+morie_crsfmr_complexity(L, D, c) 
 }
 \arguments{
 \item{L}{Integer, number of segments.}

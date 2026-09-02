@@ -14,6 +14,7 @@ morie_geron_arima(y, p = 1, d = 0, q = 0, include_mean = TRUE)
 \item{d}{Differencing order.}
 
 \item{include_mean}{Fit an intercept.}
+
 }
 \value{
 List with \code{ar}, \code{ma}, \code{intercept}, \code{residuals}, \code{sigma2}, \code{aic},

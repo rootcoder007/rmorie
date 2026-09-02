@@ -5,10 +5,15 @@
 \alias{Smirnov2}
 \title{Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239}
 \usage{
-Smirnov2(d, m, n)
+Smirnov2(d, m, n) 
 }
 \description{
 Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239
+}
+\arguments{
+\item{d}{Argument \code{d}; see Usage.}
+\item{m}{Argument \code{m}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{sf}, \code{cdf}, \code{npaths}, \code{inside}, \code{m}, \code{n}.

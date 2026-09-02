@@ -27,7 +27,7 @@ covariance of simulated random walks on a grid must reproduce
 min(s, t) and, on the diagonal, the variance s.
 }
 \details{
-Formula: W(t_i) = sum_{j <= i} Z_j / sqrt(n_grid), Z_j iid N(0, 1);
+Formula: W(t_i) = sum_\{j <= i\} Z_j / sqrt(n_grid), Z_j iid N(0, 1);
 Cov(W(s), W(t)) = min(s, t).
 }
 \examples{

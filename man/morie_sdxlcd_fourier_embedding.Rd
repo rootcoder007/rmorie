@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_fourier_embedding}
 \title{morie_sdxlcd_fourier_embedding}
 \usage{
-morie_sdxlcd_fourier_embedding(value, dim = 8, scale = 0.001)
+morie_sdxlcd_fourier_embedding(value, dim = 8, scale = 0.001) 
 }
 \arguments{
 \item{value}{Coerced to numeric by the body, with \code{as.numeric}.}

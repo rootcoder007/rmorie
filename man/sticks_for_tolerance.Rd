@@ -5,7 +5,7 @@
 \alias{sticks_for_tolerance}
 \title{sticks_for_tolerance}
 \usage{
-sticks_for_tolerance(alpha, tol = 0.001)
+sticks_for_tolerance(alpha, tol = 0.001) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

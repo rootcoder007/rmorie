@@ -5,7 +5,7 @@
 \alias{morie_burkov_bce_gradients}
 \title{Closed-form BCE gradients for logistic regression (Burkov Eq 1.11)}
 \usage{
-morie_burkov_bce_gradients(y_hat, y, x, N = NULL, j = NULL)
+morie_burkov_bce_gradients(y_hat, y, x, N = NULL, j = NULL) 
 }
 \arguments{
 \item{y_hat,y}{Predictions and targets.}

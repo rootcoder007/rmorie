@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geometric median of a composition in clr coordinates.
+#' Geometric median of a composition in clr coordinates
 #'
 #' clr(x)_j = log(x_j / (prod_l x_l)^(1/D)); the spatial median of the
 #' clr scores minimises sum_i ||clr(x_i) - m|| and is found by the

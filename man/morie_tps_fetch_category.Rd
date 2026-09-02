@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_fetch.R
 \name{morie_tps_fetch_category}
 \alias{morie_tps_fetch_category}
-\title{Fetch one TPS category as a CSV, paging until exhausted.}
+\title{Fetch one TPS category as a CSV, paging until exhausted}
 \usage{
 morie_tps_fetch_category(
   category,

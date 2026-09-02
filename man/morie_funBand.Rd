@@ -3,12 +3,27 @@
 % the formals.
 \name{morie_funBand}
 \alias{morie_funBand}
-\title{Smoothing-spline fit with Wahba\'s Bayesian confidence intervals.}
+\alias{morie_functional_band}
+\title{Smoothing-spline fit with Wahba\'s Bayesian confidence intervals}
 \usage{
-morie_funBand(Y, alpha = 0.05, x = NULL, lam = NULL, quantile = "t", truth = NULL, n_lambda = 40L, log_lambda_range = c(-8, 8))
+morie_funBand(Y, alpha = 0.05, x = NULL, lam = NULL, quantile = "t", truth = NULL, 
+    n_lambda = 40L, log_lambda_range = c(-8, 8)) 
+
+morie_functional_band(Y, alpha = 0.05, x = NULL, lam = NULL, quantile = "t", truth = NULL, 
+    n_lambda = 40L, log_lambda_range = c(-8, 8)) 
 }
 \description{
 Smoothing-spline fit with Wahba\'s Bayesian confidence intervals.
+}
+\arguments{
+\item{Y}{Argument \code{Y}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{quantile}{Argument \code{quantile}; see Usage.}
+\item{truth}{Argument \code{truth}; see Usage.}
+\item{n_lambda}{Argument \code{n_lambda}; see Usage.}
+\item{log_lambda_range}{Argument \code{log_lambda_range}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{fitted}, \code{lower}, \code{upper}, \code{half_width}, \code{residuals}, \code{diag_A}, \code{posterior_variance}, \code{sigma2}, \code{sigma}, \code{lambda}, \code{gcv}, \code{edf_signal}, \code{edf_error}, \code{rss}, \code{multiplier}, \code{quantile}, \code{coverage}, \code{alpha}, \code{n}, \code{x}, \code{method}, \code{note}.

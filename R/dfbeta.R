@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' DFBETAS, the scaled per-coefficient deletion influence.
+#' DFBETAS, the scaled per-coefficient deletion influence
 #'
 #' Formula: DFBETAS_ij = (b_j - b_(i)j) / (s_(i) sqrt(C_jj)), C = (X'X)^-1
 #'
@@ -7,6 +7,9 @@
 #' @param y Response.
 #' @param intercept Prepend a column of ones.
 
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param intercept See Usage.
 #' @return List with ``dfbetas`` (n by p), ``cutoff``, ``leverage``, ``beta``, ``sigma_i``, ``n``, ``p``.
 #' @references Belsley, Kuh and Welsch (1980), Regression Diagnostics: Identifying Influential Data and Sources of Collinearity, Wiley. The book is not held locally; the definitions and the cutoffs used here (2/sqrt(n) for DFBETAS, 2 sqrt(p/n) for DFFITS, scaling by the delete-one root mean square s_(i)) are as documented by the SAS and R reference implementations, which cite BKW for them.
 #' @export

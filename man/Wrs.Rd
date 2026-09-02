@@ -5,10 +5,14 @@
 \alias{Wrs}
 \title{Wilcoxon rank-sum W_N -- Sec. 8.2, pp. 290-291}
 \usage{
-Wrs(x, y)
+Wrs(x, y) 
 }
 \description{
 Wilcoxon rank-sum W_N -- Sec. 8.2, pp. 290-291
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{z}, \code{p_normal}, \code{mean}, \code{var}, \code{wmin}, \code{wmax}, \code{m}, \code{n}.

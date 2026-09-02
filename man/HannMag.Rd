@@ -5,7 +5,7 @@
 \alias{HannMag}
 \title{Eq (3.106): unity at DC, exactly nought at omega = pi, monotone}
 \usage{
-HannMag(omega)
+HannMag(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

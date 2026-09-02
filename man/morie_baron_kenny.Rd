@@ -10,6 +10,8 @@ morie_baron_kenny(y, x, m, alpha = 0.05)
 \item{y, x, m}{Outcome, treatment and mediator vectors.}
 
 \item{alpha}{Significance level for each step.}
+
+
 }
 \value{
 Named list with \code{c}, \code{a}, \code{b},

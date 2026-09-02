@@ -20,6 +20,7 @@ morie_matching_quality(
 \item{covariates}{Character vector of covariates.}
 
 \item{weights}{Optional column of matching weights in \code{matched_data}.}
+
 }
 \value{
 A list with \code{balance_before}, \code{balance_after},

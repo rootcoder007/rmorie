@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ripley's K-function.
+#' Ripley's K-function
 #'
 #' K(h) = (2 pi / lambda^2) integral_0^h x lambda_2(x) dx. For a simple
 #' process lambda K(h) is the expected number of EXTRA events within

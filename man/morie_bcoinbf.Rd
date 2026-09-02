@@ -10,6 +10,7 @@ morie_bcoinbf(fa, fb, p0 = 1/6)
 \item{fa, fb}{counts of outcomes a and b}
 
 \item{p0}{the fixed bias asserted by the simpler model}
+
 }
 \value{
 list(evidence1, evidence0, ratio, logratio)

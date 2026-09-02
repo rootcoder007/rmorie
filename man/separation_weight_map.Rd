@@ -5,7 +5,7 @@
 \alias{separation_weight_map}
 \title{separation_weight_map}
 \usage{
-separation_weight_map(labels, w0 = 10, sigma = 5)
+separation_weight_map(labels, w0 = 10, sigma = 5) 
 }
 \arguments{
 \item{labels}{Passed to \code{.unetbk_as_matrix}.}

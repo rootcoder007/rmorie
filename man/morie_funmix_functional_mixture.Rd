@@ -5,7 +5,8 @@
 \alias{morie_funmix_functional_mixture}
 \title{morie_funmix_functional_mixture}
 \usage{
-morie_funmix_functional_mixture(Y, K, t = NULL, n_basis = 5L, degree = 3L, max_iter = 300L, tol = 1e-10, var_floor = 1e-08)
+morie_funmix_functional_mixture(Y, K, t = NULL, n_basis = 5L, degree = 3L, max_iter = 300L, tol = 1e-10, 
+    var_floor = 1e-08) 
 }
 \arguments{
 \item{Y}{Passed to \code{.funmix_rows}.}

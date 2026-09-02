@@ -5,7 +5,8 @@
 \alias{honest_tree}
 \title{honest_tree}
 \usage{
-honest_tree(X, y, W = NULL, kind = "double-sample", min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, subsample = NULL)
+honest_tree(X, y, W = NULL, kind = "double-sample", min_leaf = 5L, alpha = 0.05, 
+    pi = 0.5, max_depth = 12L, seed = 0L, subsample = NULL) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

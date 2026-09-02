@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_multiframe}
 \alias{morie_weights_multiframe}
-\title{Multi-frame (dual-frame) survey weights (Hartley compositing).}
+\title{Multi-frame (dual-frame) survey weights (Hartley compositing)}
 \usage{
 morie_weights_multiframe(
   weights_a,
@@ -37,7 +37,7 @@ with overlap units down-weighted by \code{theta} and
 \code{1 - theta} respectively.
 }
 \description{
-Multi-frame (dual-frame) survey weights (Hartley compositing).
+Multi-frame (dual-frame) survey weights (Hartley compositing)
 }
 \examples{
 set.seed(1)

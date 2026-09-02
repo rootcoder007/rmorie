@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_contract}
 \alias{morie_cpads_contract}
-\title{Return the CPADS analysis-frame contract.}
+\title{Return the CPADS analysis-frame contract}
 \usage{
 morie_cpads_contract()
 }

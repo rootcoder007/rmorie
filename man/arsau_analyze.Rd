@@ -3,7 +3,7 @@
 \name{arsau_analyze}
 \alias{arsau_analyze}
 \title{Per-record-type ARSAU analysis pipelines (R-side mirror of
-\code{morie.arsau_analyze}).}
+\code{morie.arsau_analyze})}
 \description{
 Each public callable in this file loads one ARSAU dataset via the
 \code{morie_arsau_load_*} loaders defined in \code{R/arsau.R} and

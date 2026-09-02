@@ -32,7 +32,7 @@ means), so the model posterior is exact rather than sampled.
 }
 \details{
 Formula: log m_K(y) = sum_k [-log(2 pi s_k^2)/2 - y_k^2/(2 s_k^2)],
-s_k^2 = 1/n + tau2 1{k < K};  pi_K propto m_K(y) exp(-lam K log n).
+s_k^2 = 1/n + tau2 1\{k < K\};  pi_K propto m_K(y) exp(-lam K log n).
 }
 \examples{
 Ghosaladaptthm()

@@ -10,6 +10,8 @@ mrm_rcbd(data, response_col, treatment_col, block_col)
 \item{data}{data.frame.}
 
 \item{response_col, treatment_col, block_col}{Column names.}
+
+
 }
 \value{
 Named list with anova (data.frame), n, n_treatments,

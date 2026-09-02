@@ -5,7 +5,7 @@
 \alias{sage_layer}
 \title{One depth of Algorithm 1}
 \usage{
-sage_layer(H, adj, W, how = "mean", sizes = NULL, rng = NULL, normalize = TRUE)
+sage_layer(H, adj, W, how = "mean", sizes = NULL, rng = NULL, normalize = TRUE) 
 }
 \arguments{
 \item{H}{Node feature matrix (n x d).}

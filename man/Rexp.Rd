@@ -5,7 +5,7 @@
 \alias{Rexp}
 \title{Rexp}
 \usage{
-Rexp(n, rate = 1, seed = 0, stream = 0)
+Rexp(n, rate = 1, seed = 0, stream = 0) 
 }
 \arguments{
 \item{n}{Passed to \code{.morie_random_uniform}.}

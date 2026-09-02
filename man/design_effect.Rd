@@ -5,7 +5,7 @@
 \alias{design_effect}
 \title{design_effect}
 \usage{
-design_effect(ic, cluster)
+design_effect(ic, cluster) 
 }
 \arguments{
 \item{ic}{Passed to \code{naive_variance}.}

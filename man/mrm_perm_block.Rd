@@ -21,6 +21,8 @@ mrm_perm_block(
 \item{n_perm}{Number of permutations.}
 
 \item{seed}{RNG seed.}
+
+
 }
 \value{
 Named list with observed_statistic, n_perm, p_value,

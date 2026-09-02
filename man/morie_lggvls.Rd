@@ -5,7 +5,8 @@
 \alias{morie_lggvls}
 \title{IPTW for a sustained exposure, with lagged values in the treatment}
 \usage{
-morie_lggvls(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE, kind = "binary", trim = NULL, contrast = "cumulative")
+morie_lggvls(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE, kind = "binary", 
+    trim = NULL, contrast = "cumulative") 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

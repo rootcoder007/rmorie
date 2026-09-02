@@ -5,7 +5,7 @@
 \alias{morie_hadcrut_coverage_error}
 \title{The coverage error of one complete field under one coverage mask}
 \usage{
-morie_hadcrut_coverage_error(reference, seen, route = "hemispheric")
+morie_hadcrut_coverage_error(reference, seen, route = "hemispheric") 
 }
 \arguments{
 \item{reference}{A complete anomaly matrix.}

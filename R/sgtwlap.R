@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Assemble the weighted Laplacian from an edge list.
+#' Assemble the weighted Laplacian from an edge list
 #'
 #' Parallel edges accumulate; a loop contributes to the degree but not to
 #' the diagonal of L (the d_v - w(v, v) term). Vertex labels are one-based.

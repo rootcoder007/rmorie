@@ -5,7 +5,10 @@
 \alias{morie_karpV}
 \title{Genetic programming}
 \usage{
-morie_karpV(fitness = NULL, ops = NULL, gens = 20L, cases = NULL, terminals = "x", functions = NULL, erc = c(-5, 5), pop_size = 100L, max_depth_init = 6L, max_depth = 17L, p_crossover = 0.9, p_mutation = 0, internal_bias = 0.9, seed = 1L, elitism = 0L)
+morie_karpV(fitness = NULL, ops = NULL, gens = 20L, cases = NULL, terminals = "x", 
+    functions = NULL, erc = c(-5, 5), pop_size = 100L, max_depth_init = 6L, 
+    max_depth = 17L, p_crossover = 0.9, p_mutation = 0, internal_bias = 0.9, 
+    seed = 1L, elitism = 0L) 
 }
 \arguments{
 \item{fitness}{function of a tree returning raw fitness, or NULL to   use the sum of absolute errors over cases.}

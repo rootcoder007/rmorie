@@ -5,7 +5,9 @@
 \alias{morie_muzero}
 \title{Run MuZero\'s MCTS}
 \usage{
-morie_muzero(observation, actions, representation, dynamics, prediction, simulations = 50, gamma = 0.997, c1 = 1.25, c2 = 19652, dirichlet_alpha = NULL, exploration_fraction = 0.25, temperature = 1, seed = 0)
+morie_muzero(observation, actions, representation, dynamics, prediction, simulations = 50, 
+    gamma = 0.997, c1 = 1.25, c2 = 19652, dirichlet_alpha = NULL, exploration_fraction = 0.25, 
+    temperature = 1, seed = 0) 
 }
 \arguments{
 \item{observation}{Passed to representation.}

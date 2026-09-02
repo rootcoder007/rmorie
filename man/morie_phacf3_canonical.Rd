@@ -5,7 +5,7 @@
 \alias{morie_phacf3_canonical}
 \title{The canonical (types, bins) form of one feature triangle}
 \usage{
-morie_phacf3_canonical(t1, t2, t3, d12, d13, d23)
+morie_phacf3_canonical(t1, t2, t3, d12, d13, d23) 
 }
 \arguments{
 \item{t1}{First vertex type, zero-based.}

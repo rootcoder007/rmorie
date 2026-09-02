@@ -5,7 +5,7 @@
 \alias{Dt}
 \title{Dt}
 \usage{
-Dt(x, df, log = FALSE)
+Dt(x, df, log = FALSE) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

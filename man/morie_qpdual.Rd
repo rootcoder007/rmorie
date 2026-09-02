@@ -3,9 +3,22 @@
 % the formals.
 \name{morie_qpdual}
 \alias{morie_qpdual}
+\alias{frank_wolfe_qp}
+\alias{qpdual}
+\alias{quadratic_program}
 \title{Frank-Wolfe for a quadratic objective on a compact convex set}
 \usage{
-morie_qpdual(Q, c, x0 = NULL, domain = "simplex", lower = NULL, upper = NULL, step = "exact", max_iter = 1000L, tol = 1e-12)
+morie_qpdual(Q, c, x0 = NULL, domain = "simplex", lower = NULL, upper = NULL, 
+    step = "exact", max_iter = 1000L, tol = 1e-12) 
+
+frank_wolfe_qp(Q, c, x0 = NULL, domain = "simplex", lower = NULL, upper = NULL, 
+    step = "exact", max_iter = 1000L, tol = 1e-12) 
+
+qpdual(Q, c, x0 = NULL, domain = "simplex", lower = NULL, upper = NULL, 
+    step = "exact", max_iter = 1000L, tol = 1e-12) 
+
+quadratic_program(Q, c, x0 = NULL, domain = "simplex", lower = NULL, upper = NULL, 
+    step = "exact", max_iter = 1000L, tol = 1e-12) 
 }
 \arguments{
 \item{Q}{Symmetric n-by-n numeric matrix.}

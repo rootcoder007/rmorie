@@ -5,7 +5,7 @@
 \alias{morie_trupek}
 \title{Trust-region minimisation}
 \usage{
-morie_trupek(f, grad_f, hess_f, x0, ...)
+morie_trupek(f, grad_f, hess_f, x0, ...) 
 }
 \arguments{
 \item{f}{objective.}

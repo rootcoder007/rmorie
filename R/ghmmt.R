@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper\].
+#' Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper\]
 #'
 #' @param x Numeric data vector.
 #' @param alpha DP concentration parameter (default 1).

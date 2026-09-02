@@ -2,18 +2,18 @@
 % Please edit documentation in R/fclust.R
 \name{Fdaclust}
 \alias{Fdaclust}
-\title{Functional clustering by k-means on B-spline coefficients.}
+\title{Functional clustering by k-means on B-spline coefficients}
 \usage{
 Fdaclust(Y, K = 2, basis = NULL, iters = 25)
 }
 \arguments{
-\item{Y}{One curve per row on a common grid.}
+\item{Y}{See Usage.}
 
-\item{K}{Number of clusters.}
+\item{K}{See Usage.}
 
-\item{basis}{B-spline basis on the grid; raw curves if omitted.}
+\item{basis}{See Usage.}
 
-\item{iters}{Fixed number of Lloyd iterations.}
+\item{iters}{See Usage.}
 }
 \value{
 List with \code{labels}, \code{centers}, \code{coef}, \code{wss}, \code{K}, \code{n}.

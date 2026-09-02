@@ -646,7 +646,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
 #' @return A `data.frame`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_boroughs(offline = TRUE)
-#' df\[, c("borocode", "boroname")\]
+#' df[, c("borocode", "boroname")]
 #' @export
 morie_datasets_nyc_boroughs <- function(offline = TRUE,
                                         geometry = FALSE,
@@ -889,7 +889,7 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 #'   `borocode`, `boroname`, `countyfips`, `cdta2020`, `cdtaname`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
-#' head(df\[, c("nta2020", "ntaname", "boroname")\])
+#' head(df[, c("nta2020", "ntaname", "boroname")])
 #' @export
 morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
                                          max_features = NULL) {
@@ -954,7 +954,7 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #'   `centlat`, `centlon`, `intptlat`, `intptlon`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_zctas(offline = TRUE)
-#' head(df\[, c("zcta5", "centlat", "centlon")\])
+#' head(df[, c("zcta5", "centlat", "centlon")])
 #' @export
 morie_datasets_nyc_zctas <- function(offline = TRUE,
                                      max_features = NULL) {

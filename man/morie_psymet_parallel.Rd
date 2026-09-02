@@ -2,7 +2,7 @@
 % Please edit documentation in R/psymet.R
 \name{morie_psymet_parallel}
 \alias{morie_psymet_parallel}
-\title{Horn's parallel analysis -- suggested number of factors.}
+\title{Horn's parallel analysis -- suggested number of factors}
 \usage{
 morie_psymet_parallel(data, nsim = 100, seed = 42)
 }

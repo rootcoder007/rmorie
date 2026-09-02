@@ -13,6 +13,8 @@ morie_malab(ai, n1i, ci, n2i)
 \item{ai, n1i}{events and sample size in the treated arm.}
 
 \item{ci, n2i}{events and sample size in the control arm.}
+
+
 }
 \value{
 list: estimate, x, y, size, risk_difference, log_rr, n, method.

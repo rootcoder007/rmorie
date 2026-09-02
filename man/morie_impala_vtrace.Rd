@@ -25,6 +25,9 @@ morie_impala_vtrace(
 \item{rho_bar, c_bar}{truncation levels.}
 
 \item{bootstrap_value}{value past the end of the segment.}
+
+
+
 }
 \value{
 list with \code{vs}, \code{advantage}, \code{rho}, \code{c},

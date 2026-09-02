@@ -5,7 +5,7 @@
 \alias{morie_survrsf_rule_status}
 \title{Which of the paper\'s four splitting rules are implemented}
 \usage{
-morie_survrsf_rule_status(rule = NULL)
+morie_survrsf_rule_status(rule = NULL) 
 }
 \arguments{
 \item{rule}{Optional; may be \code{NULL}. Carried through into a list the body builds.}

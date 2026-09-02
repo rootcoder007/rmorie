@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean geodesic distance, and its harmonic counterpart.
+#' Mean geodesic distance, and its harmonic counterpart
 #'
 #' Formula: \eqn{L = (1/|R|)\sum_{(i,j) \in R} d(i,j)} over the ordered
 #' pairs with \eqn{i \ne j} that are actually connected, and

@@ -5,7 +5,7 @@
 \alias{SinCosTest}
 \title{Bsasig}
 \usage{
-SinCosTest(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1, fs = 100, duration = 1)
+SinCosTest(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1, fs = 100, duration = 1) 
 }
 \arguments{
 \item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

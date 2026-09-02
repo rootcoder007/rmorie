@@ -5,7 +5,7 @@
 \alias{ApneaEdr}
 \title{Section 10.2.5 frames the problem and the AHI but gives NO detection}
 \usage{
-ApneaEdr(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3)
+ApneaEdr(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) 
 }
 \arguments{
 \item{edr}{A vector; its length is taken.}

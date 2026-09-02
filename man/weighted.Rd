@@ -5,7 +5,7 @@
 \alias{weighted}
 \title{weighted}
 \usage{
-weighted(scores, weights = NULL)
+weighted(scores, weights = NULL) 
 }
 \arguments{
 \item{scores}{Iterated over elementwise, with \code{lapply}.}

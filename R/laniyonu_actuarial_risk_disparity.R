@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of O'Connell & Laniyonu (2025) — CSC actuarial-risk disparity
+#' Replication of O'Connell & Laniyonu (2025) -- CSC actuarial-risk disparity
 #'
 #' R port of \code{morie.laniyonu.actuarial_risk_disparity}.  Audits
 #' the Correctional Service of Canada's four ordinal risk instruments
@@ -127,7 +127,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Stage 1 — threshold-specific ordinal logit
+# Stage 1 -- threshold-specific ordinal logit
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Run Ordinal
@@ -313,7 +313,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Stage 2 — score-net-residual logit
+# Stage 2 -- score-net-residual logit
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Score Net Residual

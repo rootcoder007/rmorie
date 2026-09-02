@@ -10,6 +10,7 @@ morie_kamath_ch6_sgs_invariance(Yhat_i, Yhat_j, psi = NULL)
 \item{Yhat_i, Yhat_j}{Paired outputs.}
 
 \item{psi}{Optional comparator.}
+
 }
 \value{
 List with \code{estimate}, \code{per_pair}, \code{n_invariant}.

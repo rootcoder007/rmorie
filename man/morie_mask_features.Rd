@@ -5,7 +5,7 @@
 \alias{morie_mask_features}
 \title{morie_mask_features}
 \usage{
-morie_mask_features(X, p, rng)
+morie_mask_features(X, p, rng) 
 }
 \arguments{
 \item{X}{Passed to \code{.grace_mask_features}.}

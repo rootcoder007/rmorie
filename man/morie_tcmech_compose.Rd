@@ -5,7 +5,7 @@
 \alias{morie_tcmech_compose}
 \title{Composition: the rhos add and the truncation is the tightest one}
 \usage{
-morie_tcmech_compose(rhos, omegas = NULL)
+morie_tcmech_compose(rhos, omegas = NULL) 
 }
 \arguments{
 \item{rhos}{The per-release budgets.}

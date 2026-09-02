@@ -9,12 +9,19 @@
 \alias{morie_penalized_poisson}
 \title{Ordinal and multinomial models}
 \usage{
-morie_ordinal_probs(eta, thresholds, link = "probit")
-morie_ordinal_probit_gibbs(y, X, n_iter = 1500L, burn_in = 400L, nu_beta = 5, S_beta = 1, seed = 42L)
-morie_multinomial_probs(X, beta0, beta, baseline_last = TRUE)
-morie_multinomial_loglik(X, y, beta0, beta, baseline_last = TRUE)
-morie_penalized_multinomial(X, y, beta0, beta, lambda, penalty = "ridge", baseline_last = TRUE)
-morie_penalized_poisson(X, y, lambda = 1, penalty = "ridge", n_iter = 100L, tol = 1e-10, add_intercept = TRUE)
+morie_ordinal_probs(eta, thresholds, link = "probit") 
+
+morie_ordinal_probit_gibbs(y, X, n_iter = 1500L, burn_in = 400L, nu_beta = 5, S_beta = 1, 
+    seed = 42L) 
+
+morie_multinomial_probs(X, beta0, beta, baseline_last = TRUE) 
+
+morie_multinomial_loglik(X, y, beta0, beta, baseline_last = TRUE) 
+
+morie_penalized_multinomial(X, y, beta0, beta, lambda, penalty = "ridge", baseline_last = TRUE) 
+
+morie_penalized_poisson(X, y, lambda = 1, penalty = "ridge", n_iter = 100L, tol = 1e-10, 
+    add_intercept = TRUE) 
 }
 \arguments{
 \item{y}{response vector of category codes}

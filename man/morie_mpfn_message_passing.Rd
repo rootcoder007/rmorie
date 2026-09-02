@@ -5,7 +5,7 @@
 \alias{morie_mpfn_message_passing}
 \title{T rounds of eq. (1)}
 \usage{
-morie_mpfn_message_passing(H0, adj, edge_features, T = 3L, A = NULL, update = NULL)
+morie_mpfn_message_passing(H0, adj, edge_features, T = 3L, A = NULL, update = NULL) 
 }
 \arguments{
 \item{H0}{Initial states (n x d matrix).}

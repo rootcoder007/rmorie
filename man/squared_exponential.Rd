@@ -5,7 +5,7 @@
 \alias{squared_exponential}
 \title{squared_exponential}
 \usage{
-squared_exponential(a, b, amplitude = 1, length_scale = 1)
+squared_exponential(a, b, amplitude = 1, length_scale = 1) 
 }
 \arguments{
 \item{a}{A vector; its length is taken.}

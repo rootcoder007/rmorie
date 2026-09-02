@@ -5,7 +5,7 @@
 \alias{skipgram_pairs}
 \title{skipgram_pairs}
 \usage{
-skipgram_pairs(walks, window = 2)
+skipgram_pairs(walks, window = 2) 
 }
 \arguments{
 \item{walks}{See Usage.}

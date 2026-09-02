@@ -30,7 +30,7 @@
 #'   `n`, `method` (`"IRM (rmorie native)"`).
 #'
 #' @section CRAN \code{Suggests}:
-#' Runs on base R alone — no suggested packages required.
+#' Runs on base R alone -- no suggested packages required.
 #' If any are unavailable, the function raises an informative error.
 #'
 #' @references

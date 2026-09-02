@@ -14,6 +14,7 @@ morie_geron_simple_rnn_cell(x_t, h_prev, Whh, Wxh, b)
 \item{Wxh}{(H, n) input weights.}
 
 \item{b}{Length-H bias.}
+
 }
 \value{
 List with \code{h}, \code{pre_activation}, \code{derivative},

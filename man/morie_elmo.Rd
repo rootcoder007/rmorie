@@ -5,7 +5,7 @@
 \alias{morie_elmo}
 \title{Morie entry point: matches the Python payload keys}
 \usage{
-morie_elmo(X, layers, raw_weights = NULL, gamma = 1)
+morie_elmo(X, layers, raw_weights = NULL, gamma = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{elmo_representation}.}

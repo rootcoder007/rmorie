@@ -37,6 +37,6 @@ Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1
 \references{
 Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 (1998), FAO Irrigation and Drainage Paper 56, Eqs. 6, 8, 13, 42,
-Example 18. Local: fetched-wave3/fao56-x0490e0{6,7,8}.html,
+Example 18. Local: fetched-wave3/fao56-x0490e0\{6,7,8\}.html,
 zotarelli-2010-fao56-step-by-step-AE459.pdf.
 }

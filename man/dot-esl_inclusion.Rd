@@ -2,7 +2,7 @@
 % Please edit documentation in R/esl_native0.R
 \name{.esl_inclusion}
 \alias{.esl_inclusion}
-\title{(7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1}
+\title{(7.55): Pr\{i in bootstrap sample b\} = 1 - (1 - 1/n)^n -> 1 - e^-1}
 \usage{
 .esl_inclusion(n)
 }

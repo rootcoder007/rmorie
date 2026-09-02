@@ -5,7 +5,7 @@
 \alias{is_positive_semidefinite}
 \title{Test whether a matrix is positive semi-definite}
 \usage{
-is_positive_semidefinite(S, tol = -1e-09)
+is_positive_semidefinite(S, tol = -1e-09) 
 }
 \arguments{
 \item{S}{Square symmetric matrix.}

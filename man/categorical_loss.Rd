@@ -5,7 +5,7 @@
 \alias{categorical_loss}
 \title{Cross-entropy of the target against the current distribution}
 \usage{
-categorical_loss(m, probs, eps = 1e-12)
+categorical_loss(m, probs, eps = 1e-12) 
 }
 \arguments{
 \item{m}{Numeric vector: the projected target.}

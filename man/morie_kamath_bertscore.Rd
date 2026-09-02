@@ -10,6 +10,7 @@ morie_kamath_bertscore(hypothesis_tokens, reference_tokens, embed_fn)
 \item{hypothesis_tokens, reference_tokens}{Token vectors.}
 
 \item{embed_fn}{Function or named list token -> vector.}
+
 }
 \value{
 List with \code{estimate}, \code{f1}, \code{precision}, \code{recall}.

@@ -3,7 +3,7 @@
 \name{indkr}
 \alias{indkr}
 \alias{morie_indicator_kriging}
-\title{Indicator kriging for exceedance probability.}
+\title{Indicator kriging for exceedance probability}
 \usage{
 indkr(x, coords, threshold, target = NULL, nugget = 0, sill = 0.25, range_ = 1)
 
@@ -27,6 +27,8 @@ morie_indicator_kriging(
 \item{target}{Optional target coords; defaults to sample coords.}
 
 \item{nugget, sill, range_}{Indicator-covariance parameters.}
+
+
 }
 \value{
 Named list: estimate, threshold, n, method.

@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_segment_merge}
 \title{Merge adjacent segments (one step up the hierarchy)}
 \usage{
-morie_crsfmr_segment_merge(Z, factor = 2L)
+morie_crsfmr_segment_merge(Z, factor = 2L) 
 }
 \arguments{
 \item{Z}{A length-L list of length-D lists of d_model vectors.}

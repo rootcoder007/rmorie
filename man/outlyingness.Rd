@@ -5,7 +5,7 @@
 \alias{outlyingness}
 \title{outlyingness}
 \usage{
-outlyingness(X, h = NULL, n_dirs = 250L, seed = 17L)
+outlyingness(X, h = NULL, n_dirs = 250L, seed = 17L) 
 }
 \arguments{
 \item{X}{Passed to \code{.robpca_matrix}.}

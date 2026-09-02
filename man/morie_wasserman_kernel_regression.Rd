@@ -12,6 +12,7 @@ morie_wasserman_kernel_regression(x, x_data, y_data, h)
 \item{x_data, y_data}{Paired training sample of equal length.}
 
 \item{h}{Positive bandwidth.}
+
 }
 \value{
 List with \code{estimate}, \code{values}, \code{effective_n}, \code{h}, \code{n}, \code{method}.

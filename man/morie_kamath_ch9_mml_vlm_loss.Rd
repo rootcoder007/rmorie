@@ -13,6 +13,7 @@ morie_kamath_ch9_itm_hard_negative(Pos, HardNeg)
 \item{Pos, Neg}{Probabilities of the correct label in [0, 1].}
 
 \item{HardNeg}{Hard-negative probabilities.}
+
 }
 \value{
 List with \code{estimate}, \code{positive_loss}, \code{negative_loss}.

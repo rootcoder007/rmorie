@@ -5,10 +5,15 @@
 \alias{Ostatcov}
 \title{Covariance of two uniform order statistics -- Sec. 2.4, p. 38}
 \usage{
-Ostatcov(r, s, n)
+Ostatcov(r, s, n) 
 }
 \description{
 Covariance of two uniform order statistics -- Sec. 2.4, p. 38
+}
+\arguments{
+\item{r}{Argument \code{r}; see Usage.}
+\item{s}{Argument \code{s}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{cov}, \code{corr}, \code{var_r}, \code{var_s}, \code{r}, \code{s}, \code{n}.

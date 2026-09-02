@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdmnts.R
 \name{Mivbound}
 \alias{Mivbound}
-\title{Monotone instrumental variable bounds.}
+\title{Monotone instrumental variable bounds}
 \usage{
 Mivbound(lower, upper, prob)
 }
@@ -10,12 +10,13 @@ Mivbound(lower, upper, prob)
 \item{lower, upper}{Per-value bounds in increasing order of v.}
 
 \item{prob}{P(V = v), same order; normalised internally.}
+
 }
 \value{
 List with lower, upper, width, lowerv, upperv, prob, k.
 }
 \description{
-LB(t|v) = max_{u <= v} LB(t|u), UB(t|v) = min_{u >= v} UB(t|u), then
+LB(t|v) = max_\{u <= v\} LB(t|u), UB(t|v) = min_\{u >= v\} UB(t|u), then
 average over P(V = v).
 }
 \examples{

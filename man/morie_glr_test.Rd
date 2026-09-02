@@ -5,7 +5,7 @@
 \alias{morie_glr_test}
 \title{morie_glr_test}
 \usage{
-morie_glr_test(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1)
+morie_glr_test(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1) 
 }
 \arguments{
 \item{x}{Optional; may be \code{NULL}. A vector; its length is taken.}

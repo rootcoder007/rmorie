@@ -5,7 +5,7 @@
 \alias{naive_reuse}
 \title{naive_reuse}
 \usage{
-naive_reuse(define_and_estimate, n, seed = 0L)
+naive_reuse(define_and_estimate, n, seed = 0L) 
 }
 \arguments{
 \item{define_and_estimate}{Accepted by the signature and not used anywhere in the body.}

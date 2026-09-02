@@ -8,6 +8,7 @@ morie_big_sub(a, b)
 }
 \arguments{
 \item{a, b}{Values coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+
 }
 \value{
 A \code{morie_bigint}.

@@ -26,6 +26,7 @@ Gpcla(
 \item{lengthscale, variance}{RBF kernel hyperparameters.}
 
 \item{iters}{Newton iterations.}
+
 }
 \value{
 List with \code{estimate}, \code{p}, \code{predicted},
@@ -34,13 +35,13 @@ List with \code{estimate}, \code{p}, \code{predicted},
 }
 \description{
 With the probit likelihood, Newton's method on
-Psi(f) = log p(y|f) - 0.5 f' K^{-1} f gives the posterior mode; the
+Psi(f) = log p(y|f) - 0.5 f' K^\{-1\} f gives the posterior mode; the
 averaged predictive probability is Phi(mu*/sqrt(1 + var*)).  The mode
 is where the gradient vanishes, and the tests check that directly by
 differentiating Psi numerically rather than trusting the iteration.
 }
 \details{
-Formula: f <- (I + K W)^{-1} K (W f + grad log p(y|f));
+Formula: f <- (I + K W)^\{-1\} K (W f + grad log p(y|f));
 p* = Phi(mu* / sqrt(1 + var*)).
 }
 \examples{

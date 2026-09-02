@@ -2,7 +2,7 @@
 % Please edit documentation in R/lrtsts.R
 \name{Logrank}
 \alias{Logrank}
-\title{Mantel log-rank test comparing two survival curves.}
+\title{Mantel log-rank test comparing two survival curves}
 \usage{
 Logrank(time, event, group)
 }

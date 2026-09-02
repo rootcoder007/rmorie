@@ -5,7 +5,7 @@
 \alias{tlltmle_clever_covariate}
 \title{tlltmle_clever_covariate}
 \usage{
-tlltmle_clever_covariate(A, g, rule = 1)
+tlltmle_clever_covariate(A, g, rule = 1) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

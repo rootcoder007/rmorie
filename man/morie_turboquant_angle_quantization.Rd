@@ -9,3 +9,8 @@ morie_turboquant_angle_quantization(theta, bits = 4)
 \description{
 Public alias resolved by fn/_lazy_map.json
 }
+\arguments{
+\item{theta}{Argument \code{theta}; see Usage.}
+\item{bits}{Argument \code{bits}; see Usage.}
+}
+

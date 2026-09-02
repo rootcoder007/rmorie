@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Genomic selection accuracy: Pearson correlation of observed and predicted.
+#' Genomic selection accuracy: Pearson correlation of observed and predicted
 #'
 #' Formula: r = sum (yhat - mean yhat)(y - mean y) / sqrt(sum (yhat - mean yhat)^2 * sum (y - mean y)^2)
 #'

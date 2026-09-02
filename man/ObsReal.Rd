@@ -5,7 +5,7 @@
 \alias{ObsReal}
 \title{Eq (3.95): y_k(n) = x_k(n) + eta_k(n), the model that synchronized}
 \usage{
-ObsReal(x, eta)
+ObsReal(x, eta) 
 }
 \arguments{
 \item{x}{A list; the body checks with \code{is.list}.}

@@ -5,7 +5,7 @@
 \alias{AICorder}
 \title{Rangayyan eq. (7.60): I(P) = log(eps_P) + 2P/Ne, Ne = 0.4 N for a}
 \usage{
-AICorder(prediction_errors, n_samples, window = "hamming")
+AICorder(prediction_errors, n_samples, window = "hamming") 
 }
 \arguments{
 \item{prediction_errors}{Coerced to numeric by the body, with \code{as.numeric}.}

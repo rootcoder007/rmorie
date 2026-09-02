@@ -12,6 +12,8 @@ morie_kamath_alibi_bias(Q, K, V, slopes, causal = FALSE)
 \item{slopes}{Non-negative ALiBi slopes.}
 
 \item{causal}{Mask the future when TRUE.}
+
+
 }
 \value{
 List with \code{output}, \code{attention}, \code{bias}, \code{slopes}.

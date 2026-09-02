@@ -84,6 +84,9 @@
 }
 
 #' Push x through every MAF layer; returns (u, total_alpha)
+#' @param flow See Usage.
+#' @param x See Usage.
+#' @param t See Usage.
 #' @export
 flow_forward <- function(flow, x, t) {
   u <- as.numeric(x); total <- 0
@@ -96,6 +99,9 @@ flow_forward <- function(flow, x, t) {
 }
 
 #' log q_phi(x | theta), change of variables
+#' @param flow See Usage.
+#' @param x See Usage.
+#' @param t See Usage.
 #' @export
 flow_logprob <- function(flow, x, t) {
   fw <- flow_forward(flow, x, t)
@@ -104,6 +110,11 @@ flow_logprob <- function(flow, x, t) {
 }
 
 #' Build a Masked Autoregressive Flow
+#' @param dim_x See Usage.
+#' @param dim_t See Usage.
+#' @param n_layers See Usage.
+#' @param hidden See Usage.
+#' @param seed See Usage.
 #' @export
 MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   if (dim_x < 1L || dim_t < 1L) stop("abcnnt: dimensions must be positive")
@@ -154,6 +165,12 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 #' The paper backpropagates through autograd; we run central
 #' differences on the masked parameters so the two arms agree
 #' bit-for-bit at the cost of a few extra forward passes.
+#' @param flow See Usage.
+#' @param D See Usage.
+#' @param epochs See Usage.
+#' @param lr See Usage.
+#' @param seed See Usage.
+#' @param batch See Usage.
 #' @export
 train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
                        batch = NULL) {
@@ -184,6 +201,12 @@ train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
 }
 
 #' Random-walk Metropolis, used to draw from the current posterior
+#' @param logpdf See Usage.
+#' @param x0 See Usage.
+#' @param n See Usage.
+#' @param burn See Usage.
+#' @param step See Usage.
+#' @param seed See Usage.
 #' @export
 mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
                         seed = 0L) {
@@ -204,6 +227,20 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
 }
 
 #' Algorithm 1: Sequential Neural Likelihood
+#' @param simulator See Usage.
+#' @param x_o See Usage.
+#' @param log_prior See Usage.
+#' @param theta0 See Usage.
+#' @param n_rounds See Usage.
+#' @param n_per_round See Usage.
+#' @param n_layers See Usage.
+#' @param hidden See Usage.
+#' @param epochs See Usage.
+#' @param lr See Usage.
+#' @param mcmc_burn See Usage.
+#' @param mcmc_step See Usage.
+#' @param seed See Usage.
+#' @param n_posterior See Usage.
 #' @export
 abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
                    n_per_round = 50L, n_layers = 5L, hidden = 20L,

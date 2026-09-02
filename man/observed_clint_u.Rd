@@ -5,7 +5,7 @@
 \alias{observed_clint_u}
 \title{observed_clint_u}
 \usage{
-observed_clint_u(cl_h, fu_blood, species = "human", qh = NULL, liver_model = "well_stirred")
+observed_clint_u(cl_h, fu_blood, species = "human", qh = NULL, liver_model = "well_stirred") 
 }
 \arguments{
 \item{cl_h}{Coerced to numeric by the body, with \code{as.numeric}.}

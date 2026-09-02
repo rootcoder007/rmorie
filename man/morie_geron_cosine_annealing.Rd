@@ -12,6 +12,7 @@ morie_geron_cosine_annealing(t, T, eta_max, eta_min = 0)
 \item{T}{Cycle length.}
 
 \item{eta_max, eta_min}{Rate bounds.}
+
 }
 \value{
 List with \code{eta}, \code{schedule}, \code{T}, \code{eta_max}, \code{eta_min},

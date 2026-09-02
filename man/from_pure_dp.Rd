@@ -5,7 +5,7 @@
 \alias{from_pure_dp}
 \title{Proposition 1.4: epsilon-DP is 0.5 epsilon^2-zCDP}
 \usage{
-from_pure_dp(epsilon)
+from_pure_dp(epsilon) 
 }
 \arguments{
 \item{epsilon}{Pure DP parameter, must be non-negative.}

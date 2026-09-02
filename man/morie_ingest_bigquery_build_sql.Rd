@@ -24,6 +24,8 @@ reference, e.g. project \code{"bigquery-public-data"}, dataset
 \item{limit}{Optional \code{LIMIT}.}
 
 \item{select}{Projection list (default \code{"*"}).}
+
+
 }
 \value{
 A SQL string.

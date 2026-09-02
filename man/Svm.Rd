@@ -5,7 +5,7 @@
 \alias{Svm}
 \title{Section 10.4.5.  Only the patterns with a_i > 0 -- the SUPPORT}
 \usage{
-Svm(X, y, C = 1, maxiter = 2000, tol = 1e-06)
+Svm(X, y, C = 1, maxiter = 2000, tol = 1e-06) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

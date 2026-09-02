@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Lasso-penalized multinomial log-likelihood.
+#' Lasso-penalized multinomial log-likelihood
 #'
 #' Formula: l_p(beta; y) = l(beta; y) - lambda sum_c sum_j |beta_cj|
 #' (eq. 7.10): the same block updating as eq. (7.9) but with the quadratic

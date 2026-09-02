@@ -5,10 +5,12 @@
 \alias{morie_kamath_softmax_element}
 \title{morie_kamath_softmax_element}
 \usage{
-morie_kamath_softmax_element(a_i, a)
+morie_kamath_softmax_element(a_i, a) 
 }
 \arguments{
 \item{a_i}{One score that must appear in a.}
+
+\item{a}{Argument \code{a}; see Usage.}
 }
 \description{
 morie_kamath_softmax_element

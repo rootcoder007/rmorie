@@ -5,10 +5,15 @@
 \alias{Signsimpow}
 \title{Simulated sign-test power over supplied samples -- Sec. 5.4.5, p. 175}
 \usage{
-Signsimpow(samples, m0, kcrit)
+Signsimpow(samples, m0, kcrit) 
 }
 \description{
 Simulated sign-test power over supplied samples -- Sec. 5.4.5, p. 175
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{m0}{Argument \code{m0}; see Usage.}
+\item{kcrit}{Argument \code{kcrit}; see Usage.}
 }
 \value{
 A list with \code{power}, \code{rejections}, \code{nsim}, \code{kmean}, \code{kcrit}.

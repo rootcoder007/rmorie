@@ -35,6 +35,7 @@ morie_fauzi_thm4_2_surv2_bias_var(
 \item{density}{\code{f_X(t)}.}
 
 \item{mu2}{\verb{int y^2 K(y) dy}.}
+
 }
 \value{
 Named list with \code{bias}, \code{variance}, \code{b3}, \code{cov}, \code{h}, \code{n}, \code{method}.

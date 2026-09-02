@@ -5,7 +5,7 @@
 \alias{MfTf}
 \title{Eq (4.48): H(f) = K X*(f) exp(-j 2 pi f t0).  The CONJUGATE is what}
 \usage{
-MfTf(X, freqs, t0, gain = 1)
+MfTf(X, freqs, t0, gain = 1) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

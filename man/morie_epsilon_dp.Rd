@@ -17,6 +17,7 @@ repeatedly.}
 \item{bins}{histogram bins.}
 
 \item{seed}{optional integer seed.}
+
 }
 \value{
 list with \code{epsilon_empirical}, \code{n_usable_bins},

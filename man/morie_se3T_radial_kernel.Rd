@@ -5,7 +5,7 @@
 \alias{morie_se3T_radial_kernel}
 \title{Radial kernel: a learnable function of the distance ALONE}
 \usage{
-morie_se3T_radial_kernel(distance, weights = NULL, sigma = 1)
+morie_se3T_radial_kernel(distance, weights = NULL, sigma = 1) 
 }
 \arguments{
 \item{distance}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_impFB}
 \title{morie_impFB}
 \usage{
-morie_impFB(R, f = 8, alpha = 40, lam = 0.1, iters = 15, seed = 0, fast = TRUE)
+morie_impFB(R, f = 8, alpha = 40, lam = 0.1, iters = 15, seed = 0, fast = TRUE) 
 }
 \arguments{
 \item{R}{A matrix; passed to \code{as.matrix}.}

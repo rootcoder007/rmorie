@@ -18,6 +18,8 @@ morie_geron_yolo(
 \item{model}{Function(image) -> array (S,S,B*5+C).}
 
 \item{n_boxes, conf_threshold, iou_threshold}{As in Python original.}
+
+
 }
 \value{
 list with boxes, scores, classes (0-based), n_detections, n_candidates,

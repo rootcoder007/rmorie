@@ -5,7 +5,7 @@
 \alias{morie_geron_revnet}
 \title{RevNet: reversible residual block, verified by explicit inversion (Geron Ch 12, hmrvn)}
 \usage{
-morie_geron_revnet(x, F, G)
+morie_geron_revnet(x, F, G) 
 }
 \arguments{
 \item{x}{Input, even width on last axis.}

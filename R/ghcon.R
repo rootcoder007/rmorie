@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Schwartz posterior-consistency diagnostic (Bayesian bootstrap).
+#' Schwartz posterior-consistency diagnostic (Bayesian bootstrap)
 #'
 #' @param x Numeric data vector.
 #' @param ref_loc Optional numeric reference location.

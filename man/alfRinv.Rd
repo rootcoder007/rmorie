@@ -5,7 +5,7 @@
 \alias{alfRinv}
 \title{alfRinv}
 \usage{
-alfRinv(Tf)
+alfRinv(Tf) 
 }
 \arguments{
 \item{Tf}{A list; the body reads \code{$R}, \code{$t} from it.}

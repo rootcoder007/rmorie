@@ -12,6 +12,7 @@ morie_kamath_ch4_loftq_objective(W, Q, A, B)
 \item{Q}{Quantised weight.}
 
 \item{A, B}{Factors.}
+
 }
 \value{
 List with \code{estimate}, \code{residual}, \code{quantisation_error}, \code{r}.

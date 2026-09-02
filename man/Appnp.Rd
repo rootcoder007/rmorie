@@ -2,7 +2,7 @@
 % Please edit documentation in R/appnp.R
 \name{Appnp}
 \alias{Appnp}
-\title{Personalised propagation of neural predictions.}
+\title{Personalised propagation of neural predictions}
 \usage{
 Appnp(A, H, alpha = 0.1, K = 10, exact = FALSE, softmax = TRUE)
 }
@@ -23,8 +23,8 @@ Appnp(A, H, alpha = 0.1, K = 10, exact = FALSE, softmax = TRUE)
 List with Z, alpha, K, exact, n, c.
 }
 \description{
-Ahat = Dtilde^{-1/2}(A + I)Dtilde^{-1/2};
-Z = alpha (I - (1-alpha) Ahat)^{-1} H (PPNP), or K steps of
+Ahat = Dtilde^\{-1/2\}(A + I)Dtilde^\{-1/2\};
+Z = alpha (I - (1-alpha) Ahat)^\{-1\} H (PPNP), or K steps of
 Z <- (1-alpha) Ahat Z + alpha H from Z = H (APPNP), with a row-wise
 softmax on the last step.
 }

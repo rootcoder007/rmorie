@@ -12,6 +12,7 @@ morie_geron_linear_regression_life(gdp, theta0, theta1, life_sat = NULL)
 \item{theta0, theta1}{Intercept/slope.}
 
 \item{life_sat}{Optional observed values.}
+
 }
 \value{
 List with prediction, residuals, rmse, r2, theta0, theta1, estimate, n, method.

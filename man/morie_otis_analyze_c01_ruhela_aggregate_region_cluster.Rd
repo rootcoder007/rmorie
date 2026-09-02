@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c01_ruhela_aggregate_region_cluster}
 \alias{morie_otis_analyze_c01_ruhela_aggregate_region_cluster}
 \alias{morie_otis_analyze_c01_mrm_aggregate_region_cluster}
-\title{c01 region-cluster variant (year-clustered GEE).}
+\title{c01 region-cluster variant (year-clustered GEE)}
 \usage{
 morie_otis_analyze_c01_ruhela_aggregate_region_cluster(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c01_mrm_aggregate_region_cluster(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c01 region-cluster variant (year-clustered GEE).
+c01 region-cluster variant (year-clustered GEE)
 }
 \examples{
 \donttest{

@@ -3,7 +3,7 @@
 \name{gwreg}
 \alias{gwreg}
 \alias{morie_geographically_weighted_regression}
-\title{Geographically weighted regression (GWR).}
+\title{Geographically weighted regression (GWR)}
 \usage{
 gwreg(x, y, coords, bandwidth = NULL, kernel = "gaussian")
 

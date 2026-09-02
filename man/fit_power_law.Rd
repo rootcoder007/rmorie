@@ -5,7 +5,7 @@
 \alias{fit_power_law}
 \title{fit_power_law}
 \usage{
-fit_power_law(x, y)
+fit_power_law(x, y) 
 }
 \arguments{
 \item{x}{Passed to \code{.opnclp_vec}.}

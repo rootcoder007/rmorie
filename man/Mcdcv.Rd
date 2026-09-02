@@ -24,7 +24,7 @@ Rousseeuw, P. J. (1984), "Least median of squares regression", Journal of
 the American Statistical Association 79(388), 871-880, and Rousseeuw, P. J.
 (1985), "Multivariate estimation with high breakdown point", Reidel,
 283-297.  The MCD criterion is the one stated in the stub docstring,
-argmin over subsets H of size h of det(cov(X\link[seewave:H]{H})), and it is applied here to
+argmin over subsets H of size h of det(cov(X[H])), and it is applied here to
 the JOINT matrix Z = [X | y].  That is the standard way a high-breakdown
 scatter estimator becomes a high-breakdown regression estimator: partition
 the MCD scatter of (X, y) and read the coefficients off the population

@@ -5,7 +5,8 @@
 \alias{composite_distance}
 \title{composite_distance}
 \usage{
-composite_distance(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL, len_a = NULL, len_b = NULL, w_abundance = 0.5)
+composite_distance(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL, len_a = NULL, len_b = NULL, 
+    w_abundance = 0.5) 
 }
 \arguments{
 \item{tnf_a}{Passed to \code{.metabd_vec}.}

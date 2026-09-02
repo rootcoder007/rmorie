@@ -5,7 +5,7 @@
 \alias{concordance}
 \title{concordance}
 \usage{
-concordance(imputed, truth)
+concordance(imputed, truth) 
 }
 \arguments{
 \item{imputed}{Passed to \code{.impfun_as_double_vec}.}

@@ -5,7 +5,7 @@
 \alias{morie_haldane}
 \title{morie_haldane}
 \usage{
-morie_haldane(distance)
+morie_haldane(distance) 
 }
 \arguments{
 \item{distance}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{SpErrMod}
 \title{SAR ERROR model, eqs (6.35)-(6.37) of Sec. 6.2.2.1 -- NOT the}
 \usage{
-SpErrMod(x, y, w, n_grid = 201L, refine = 60L)
+SpErrMod(x, y, w, n_grid = 201L, refine = 60L) 
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}

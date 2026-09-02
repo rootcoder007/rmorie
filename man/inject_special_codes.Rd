@@ -5,7 +5,7 @@
 \alias{inject_special_codes}
 \title{inject_special_codes}
 \usage{
-inject_special_codes(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L))
+inject_special_codes(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L)) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

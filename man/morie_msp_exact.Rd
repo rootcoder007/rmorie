@@ -5,7 +5,7 @@
 \alias{morie_msp_exact}
 \title{morie_msp_exact}
 \usage{
-morie_msp_exact(query, subject, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT")
+morie_msp_exact(query, subject, match = 5, mismatch = -4, matrix = NULL, alphabet = "ACGT") 
 }
 \arguments{
 \item{query}{Coerced to character by the body, with \code{as.character}.}

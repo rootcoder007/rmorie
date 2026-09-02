@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sum-of-squares loss.
+#' Sum-of-squares loss
 #'
 #' Formula: E = (1/2) sum_i sum_j (y-hat_ij - y_ij)^2 (eq. 10.5), the loss
 #' whose partial derivatives with respect to the weights drive backpropagation.

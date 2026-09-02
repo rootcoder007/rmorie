@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_poststratify}
 \alias{morie_weights_poststratify}
-\title{Post-stratification weight adjustment.}
+\title{Post-stratification weight adjustment}
 \usage{
 morie_weights_poststratify(weights, strata, population_totals)
 }

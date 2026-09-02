@@ -5,7 +5,7 @@
 \alias{Chernoff}
 \title{Rho_a = sum_l p1^a p2^(1-a); C = -ln min_a rho_a.  The Bhattacharyya}
 \usage{
-Chernoff(p1, p2, alpha = NULL, n_grid = 201)
+Chernoff(p1, p2, alpha = NULL, n_grid = 201) 
 }
 \arguments{
 \item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}

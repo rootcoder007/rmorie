@@ -5,7 +5,7 @@
 \alias{SmPgram}
 \title{Daniell (equal-weight) smoothing of the eq (4.57) periodogram.  NOT}
 \usage{
-SmPgram(y, span = 3L)
+SmPgram(y, span = 3L) 
 }
 \arguments{
 \item{y}{Passed to \code{Pgram}.}

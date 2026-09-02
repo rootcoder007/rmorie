@@ -834,7 +834,7 @@ morie_datasets_tps_cyclist_ksi <- function(format = "json",
 #'
 #'   This dataset provides a count of the dispatched calls by
 #'   division, including some specific units such as PRIME, Parking
-#'   and “Other”. This data includes the command level at the time of
+#'   and "Other". This data includes the command level at the time of
 #'   reporting.
 #'
 #' Tags: ASR; TPS; Annual Statistical Report; Toronto Police; Dispatched Calls

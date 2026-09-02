@@ -5,7 +5,7 @@
 \alias{morie_ragRet_ivf_index}
 \title{morie_ragRet_ivf_index}
 \usage{
-morie_ragRet_ivf_index(corpus, n.cells = 4L, iters = 25L, seed = 0L)
+morie_ragRet_ivf_index(corpus, n.cells = 4L, iters = 25L, seed = 0L) 
 }
 \arguments{
 \item{corpus}{Iterated over elementwise, with \code{lapply}.}

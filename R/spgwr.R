@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geographically weighted regression: locally varying coefficients.
+#' Geographically weighted regression: locally varying coefficients
 #'
 #' Same estimator as [gwreg()]; this delegates rather than carrying a
 #' second implementation. The model is fitted locally in the spatial

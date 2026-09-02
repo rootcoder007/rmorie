@@ -5,7 +5,7 @@
 \alias{Srms}
 \title{Eqs (3.8)-(3.10): MS, RMS, SD.  The divisor is N in all three; eq}
 \usage{
-Srms(x)
+Srms(x) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

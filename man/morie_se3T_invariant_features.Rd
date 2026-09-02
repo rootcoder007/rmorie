@@ -5,7 +5,7 @@
 \alias{morie_se3T_invariant_features}
 \title{Invariant features: the distance is invariant, the direction is}
 \usage{
-morie_se3T_invariant_features(positions, i, j)
+morie_se3T_invariant_features(positions, i, j) 
 }
 \arguments{
 \item{positions}{Passed to \code{.se3T_mat}.}

@@ -22,7 +22,7 @@ list: estimate, f0, D, D_main, D_int, closure, method.
 Sobol (1993), Mathematical Modelling and Computational Experiments
 1(4), 407-414.  On the unit cube with independent inputs, f = f_0 +
 sum_i f_i(x_i) + sum_(i<j) f_ij(x_i, x_j) + ... uniquely, every summand
-integrating to zero over each of its own variables, with f_0 = E\link[fixest:f]{f},
+integrating to zero over each of its own variables, with f_0 = E[f],
 f_i = E[f | x_i] - f_0 and f_ij = E[f | x_i, x_j] - f_i - f_j - f_0;
 the component variances sum to the total.  The 1993 paper was not
 retrievable here; the decomposition and its orthogonality are quoted in

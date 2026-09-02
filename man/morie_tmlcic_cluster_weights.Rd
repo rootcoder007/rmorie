@@ -5,7 +5,7 @@
 \alias{morie_tmlcic_cluster_weights}
 \title{The per-individual weights alpha_ij and the cluster groups. Balzer}
 \usage{
-morie_tmlcic_cluster_weights(cluster, weights = NULL)
+morie_tmlcic_cluster_weights(cluster, weights = NULL) 
 }
 \arguments{
 \item{cluster}{Coerced to character by the body, with \code{as.character}.}

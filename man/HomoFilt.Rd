@@ -5,7 +5,7 @@
 \alias{HomoFilt}
 \title{Section 4.7.1, Figure 4.23: log -> linear filter -> exp.  The signal}
 \usage{
-HomoFilt(y, cutoff, keep = "low")
+HomoFilt(y, cutoff, keep = "low") 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

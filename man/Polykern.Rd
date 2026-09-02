@@ -2,7 +2,7 @@
 % Please edit documentation in R/polkn.R
 \name{Polykern}
 \alias{Polykern}
-\title{Polynomial kernel matrix.}
+\title{Polynomial kernel matrix}
 \usage{
 Polykern(X, degree = 2, gamma = NULL, coef0 = 1, Z = NULL)
 }

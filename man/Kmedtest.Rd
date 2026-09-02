@@ -5,10 +5,13 @@
 \alias{Kmedtest}
 \title{k-sample median test -- Sec. 10.2, pp. 344-346}
 \usage{
-Kmedtest(samples)
+Kmedtest(samples) 
 }
 \description{
 k-sample median test -- Sec. 10.2, pp. 344-346
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{u}, \code{t}, \code{median}, \code{prob}, \code{k}, \code{n}.

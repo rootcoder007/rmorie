@@ -5,7 +5,7 @@
 \alias{morie_geron_pca_variance}
 \title{PCA variance accounting: cumulative ratio, threshold cut, probe check (Geron Ch 7, hmpcav)}
 \usage{
-morie_geron_pca_variance(X, n_components = NULL, threshold = 0.95, n_probes = 64, seed = 0)
+morie_geron_pca_variance(X, n_components = NULL, threshold = 0.95, n_probes = 64, seed = 0) 
 }
 \arguments{
 \item{X}{Data (m, p).}

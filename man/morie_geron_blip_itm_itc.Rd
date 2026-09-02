@@ -28,6 +28,9 @@ morie_geron_blip_itm_itc(
 \item{lam_itc, lam_itm, lam_lm}{Task weights.}
 
 \item{normalize}{Cosine similarity.}
+
+
+
 }
 \value{
 List with \code{loss}, \code{itc}, \code{itm}, \code{lm}, \code{similarity},

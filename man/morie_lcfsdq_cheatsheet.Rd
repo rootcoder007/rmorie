@@ -5,7 +5,7 @@
 \alias{morie_lcfsdq_cheatsheet}
 \title{One-line summary of the lcfsdq module}
 \usage{
-morie_lcfsdq_cheatsheet()
+morie_lcfsdq_cheatsheet() 
 }
 \description{
 One-line summary of the lcfsdq module

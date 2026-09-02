@@ -5,7 +5,9 @@
 \alias{morie_rmrl_qlearn_flat}
 \title{morie_rmrl_qlearn_flat}
 \usage{
-morie_rmrl_qlearn_flat(machine, states, actions, step, label, gamma = 0.9, alpha = 0.5, epsilon = 0.1, episodes = 500, horizon = 100, start = NULL, dead_end = NULL, seed = 0)
+morie_rmrl_qlearn_flat(machine, states, actions, step, label, gamma = 0.9, alpha = 0.5, 
+    epsilon = 0.1, episodes = 500, horizon = 100, start = NULL, dead_end = NULL, 
+    seed = 0) 
 }
 \arguments{
 \item{machine}{A list; the body reads \code{$states}, \code{$terminal}, \code{$u0} from it.}

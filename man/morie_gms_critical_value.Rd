@@ -5,7 +5,8 @@
 \alias{morie_gms_critical_value}
 \title{morie_gms_critical_value}
 \usage{
-morie_gms_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, reps = 200L, seed = 0, kappa = NULL)
+morie_gms_critical_value(m, instruments, form = "sum", n_equality = 0L, level = 0.95, 
+    reps = 200L, seed = 0, kappa = NULL) 
 }
 \arguments{
 \item{m}{A matrix; passed to \code{as.matrix}.}

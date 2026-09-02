@@ -5,7 +5,7 @@
 \alias{knn_trainer}
 \title{knn_trainer}
 \usage{
-knn_trainer(k = 1L, smoothing = 0.001)
+knn_trainer(k = 1L, smoothing = 0.001) 
 }
 \arguments{
 \item{k}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.}

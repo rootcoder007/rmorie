@@ -5,7 +5,7 @@
 \alias{shrunk_targeting_unsafe}
 \title{Penalise epsilon itself -- the thing not to do}
 \usage{
-shrunk_targeting_unsafe(Q, H, Y, ridge = 1)
+shrunk_targeting_unsafe(Q, H, Y, ridge = 1) 
 }
 \arguments{
 \item{Q}{Initial outcome regression.}

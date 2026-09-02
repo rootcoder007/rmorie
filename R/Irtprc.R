@@ -8,8 +8,8 @@
 #' a = 1 with the step vector prefixed by a zero, rather than by writing
 #' a second softmax.
 #'
-#' Formula: P(X = k) = exp(sum_{v=1}^{k} (theta - delta_v)) /
-#'   sum_{c=0}^{m} exp(sum_{v=1}^{c} (theta - delta_v)), empty sum zero.
+#' Formula: P(X = k) = exp(sum_\{v=1\}^\{k\} (theta - delta_v)) /
+#'   sum_\{c=0\}^\{m\} exp(sum_\{v=1\}^\{c\} (theta - delta_v)), empty sum zero.
 #'
 #' @param y Observed categories, 0-based (0 .. m).
 #' @param theta Person abilities, same length as y.

@@ -27,8 +27,8 @@ thresholds must strictly increase or a probability goes negative.
 The constraint is checked rather than assumed.
 }
 \details{
-Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*\emph{0 = 1, P*}{m+1} = 0,
-P_k = P*\emph{k - P*}{k+1}.
+Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*\emph{0 = 1, P*}\{m+1\} = 0,
+P_k = P*\emph{k - P*}\{k+1\}.
 }
 \examples{
 Grmsam(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_k = c(-1, 0, 1))

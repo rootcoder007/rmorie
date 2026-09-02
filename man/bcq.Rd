@@ -5,7 +5,9 @@
 \alias{bcq}
 \title{bcq}
 \usage{
-bcq(dataset, states = NULL, actions = NULL, tau = 0.3, gamma = 0.99, lr = 0.5, iters = 2000, loss = "huber", huber_c = 1, behavior = NULL, tol = 1e-12)
+bcq(dataset, states = NULL, actions = NULL, tau = 0.3, gamma = 0.99, 
+    lr = 0.5, iters = 2000, loss = "huber", huber_c = 1, behavior = NULL, 
+    tol = 1e-12) 
 }
 \arguments{
 \item{dataset}{The body requires: bcq: dataset must be non-empty.}

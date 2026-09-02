@@ -99,7 +99,7 @@
   list(freqs = fs * ks / n, power = power)
 }
 
-#' Peak set {p} of eq (4.6): above th and strictly greater than the m
+#' Peak set \{p\} of eq (4.6): above th and strictly greater than the m
 #'
 #' neighbours on each side.
 #'
@@ -2137,7 +2137,7 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 
 #' Eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
 #'
-#' equivalent finite form (sum_{k=0}^{5} z^-k)^2 / 32 so the apparent
+#' equivalent finite form (sum_\{k=0\}^\{5\} z^-k)^2 / 32 so the apparent
 #' pole at z = 1 is removed exactly rather than numerically.  fc = 11
 #' Hz, 5-sample delay, >35 dB at 60 Hz -- all tied to fs = 200 Hz.
 #'
@@ -2215,7 +2215,7 @@ QrsLPassDf <- function(x) {
 #' Eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32
 #' samples
 #'
-#' Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
+#' Evaluated as sum_\{k=0\}^\{31\} z^-k so the z = 1 point is exact.
 #'
 #' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Conditional sum of squares for an ARIMA(p, d, q) model.
+#' Conditional sum of squares for an ARIMA(p, d, q) model
 #'
-#' e_t = (w_t - mu) - sum_i phi_i (w_{t-i} - mu) - sum_j theta_j e_{t-j}
+#' e_t = (w_t - mu) - sum_i phi_i (w_\{t-i\} - mu) - sum_j theta_j e_\{t-j\}
 #' on w = (1-B)^d y with zero presample innovations; CSS = sum e_t^2 and
 #' logLik = -(m/2)(1 + log(2 pi) + log(CSS/m)).
 #'

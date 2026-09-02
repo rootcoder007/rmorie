@@ -5,7 +5,7 @@
 \alias{BilinUnwarp}
 \title{Undo the prewarping: analog frequency back to digital}
 \usage{
-BilinUnwarp(Omega, T = 1)
+BilinUnwarp(Omega, T = 1) 
 }
 \arguments{
 \item{Omega}{An analog frequency or vector of them.}

@@ -5,7 +5,7 @@
 \alias{morie_dreamr_imagine}
 \title{morie_dreamr_imagine}
 \usage{
-morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, value_model = NULL)
+morie_dreamr_imagine(state, action_model, transition, reward_model, horizon, value_model = NULL) 
 }
 \arguments{
 \item{state}{Carried through into a list the body builds.}

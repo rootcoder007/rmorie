@@ -5,7 +5,7 @@
 \alias{BwHp}
 \title{The lowpass poles are reused -- a Butterworth highpass has the same}
 \usage{
-BwHp(cutoff_hz, order = 4, fs = 1000, z = NULL)
+BwHp(cutoff_hz, order = 4, fs = 1000, z = NULL) 
 }
 \arguments{
 \item{cutoff_hz}{Coerced to numeric by the body, with \code{as.numeric}.}

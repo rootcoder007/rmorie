@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Eigenvectors of the normalised Laplacian for the k smallest values.
+#' Eigenvectors of the normalised Laplacian for the k smallest values
 #'
 #' Eigenvectors are sign-fixed on their largest-magnitude entry, without
 #' which the two language arms would disagree on an arbitrary sign. Under

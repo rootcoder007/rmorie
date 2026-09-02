@@ -21,6 +21,8 @@ sensitivity_summary(
 \item{rr, odds_ratio, hazard_ratio}{Optional effect on each scale.}
 
 \item{prevalence}{Outcome prevalence (for OR-to-RR).}
+
+
 }
 \value{
 A data.frame with \verb{metric, value}.

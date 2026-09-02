@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' One-way fixed-effects model.
+#' One-way fixed-effects model
 #'
 #' Formula: GY_ij = beta_i + e_ij (eq. 1.3), a separate fixed effect per level.
 #'

@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Alternating least squares for implicit-feedback matrix factorisation.
+#' Alternating least squares for implicit-feedback matrix factorisation
 #'
-#' p_ui = 1{r_ui > 0}, c_ui = 1 + alpha r_ui, and the exact alternating
-#' solutions x_u = (Y'C^u Y + lam I)^{-1} Y'C^u p(u),
-#' y_i = (X'C^i X + lam I)^{-1} X'C^i p(i).
+#' p_ui = 1\{r_ui > 0\}, c_ui = 1 + alpha r_ui, and the exact alternating
+#' solutions x_u = (Y'C^u Y + lam I)^\{-1\} Y'C^u p(u),
+#' y_i = (X'C^i X + lam I)^\{-1\} X'C^i p(i).
 #'
 #' @param R Non-negative observation counts, m x n.
 #' @param f Number of latent factors.

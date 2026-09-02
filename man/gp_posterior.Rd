@@ -5,7 +5,8 @@
 \alias{gp_posterior}
 \title{gp_posterior}
 \usage{
-gp_posterior(X, y, Xs, kernel = "matern52", amplitude = 1, length_scale = 1, noise = 1e-08, mean = NULL)
+gp_posterior(X, y, Xs, kernel = "matern52", amplitude = 1, length_scale = 1, 
+    noise = 1e-08, mean = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

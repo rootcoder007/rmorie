@@ -23,6 +23,10 @@ morie_geron_dueling_dqn_alt(
 \item{buffer}{Transitions.}
 
 \item{epochs, lr, gamma, target_sync}{Config.}
+
+
+
+
 }
 \value{
 List with \code{Q}, \code{V}, \code{A}, \code{loss_history}, \code{advantage_mean}, \code{value_share}.

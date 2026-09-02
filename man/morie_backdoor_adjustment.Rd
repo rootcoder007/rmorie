@@ -12,6 +12,7 @@ morie_backdoor_adjustment(x, y, z, at = NULL)
 \item{z}{Adjustment set: a vector or a matrix of columns.}
 
 \item{at}{Treatment value to intervene on; defaults to every level.}
+
 }
 \value{
 Named list with \code{distribution}, \code{strata},

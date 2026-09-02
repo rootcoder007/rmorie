@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Cesaro-average Hellinger discrepancy of the predictive densities.
+#' Cesaro-average Hellinger discrepancy of the predictive densities
 #'
 #' The martingale approach needs no tests: what is checked is the
 #' conclusion n^-1 sum d_H^2(phat_i, p_0) -> 0, plus the Lemma 6.52

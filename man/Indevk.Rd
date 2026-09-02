@@ -5,10 +5,14 @@
 \alias{Indevk}
 \title{Independence of k events (Deshmukh eq. 5.1)}
 \usage{
-Indevk(p, joint)
+Indevk(p, joint) 
 }
 \description{
 Independence of k events (Deshmukh eq. 5.1)
+}
+\arguments{
+\item{p}{Argument \code{p}; see Usage.}
+\item{joint}{Argument \code{joint}; see Usage.}
 }
 \value{
 A list with \code{n_conditions}, \code{max_deviation}, \code{independent}, \code{k}.

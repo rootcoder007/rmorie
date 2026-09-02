@@ -5,7 +5,7 @@
 \alias{guide_tree}
 \title{guide_tree}
 \usage{
-guide_tree(D)
+guide_tree(D) 
 }
 \arguments{
 \item{D}{A matrix; indexed by row and column.}

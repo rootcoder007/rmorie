@@ -12,6 +12,8 @@ Plncf(lam, T, h = 6.62607015e-34, c = 299792458, kB = 1.380649e-23)
 \item{T}{Temperature (K), > 0.}
 
 \item{h, c, kB}{Physical constants (2019 SI exact defaults).}
+
+
 }
 \value{
 List with \code{estimate}, \code{peak_wavelength},

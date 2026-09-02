@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' F-function: the empty space (point-to-nearest-event) distribution.
+#' F-function: the empty space (point-to-nearest-event) distribution
 #'
 #' F(r) is the CDF of the distance from an ARBITRARY location to the
 #' nearest event, in contrast to G, which measures from an arbitrary

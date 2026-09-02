@@ -5,7 +5,7 @@
 \alias{alpha_pq}
 \title{alpha_pq}
 \usage{
-alpha_pq(d_tx, p, q)
+alpha_pq(d_tx, p, q) 
 }
 \arguments{
 \item{d_tx}{Coerced to integer by the body, with \code{as.integer}.}

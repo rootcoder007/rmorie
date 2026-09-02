@@ -23,6 +23,7 @@ morie_kamath_ch5_ppo_loss(phi, x, y, r_theta, beta, pi_ref = NULL)
 \item{y}{Per-prompt response name vectors.}
 
 \item{r_theta}{Function (x, y) -> reward.}
+
 }
 \value{
 List with \code{estimate}, \code{expected_reward}, \code{kl}, \code{penalty}.

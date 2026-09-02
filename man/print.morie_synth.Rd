@@ -5,7 +5,7 @@
 \alias{print.morie_synth}
 \title{Print method for \code{morie_synth} objects}
 \usage{
-print.morie_synth(x, ...)
+\method{print}{morie_synth}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_synth} object.}

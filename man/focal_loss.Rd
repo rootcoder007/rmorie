@@ -5,7 +5,7 @@
 \alias{focal_loss}
 \title{focal_loss}
 \usage{
-focal_loss(prob, target, gamma = 2, alpha = 0.25)
+focal_loss(prob, target, gamma = 2, alpha = 0.25) 
 }
 \arguments{
 \item{prob}{Coerced to numeric by the body, with \code{as.numeric}.}

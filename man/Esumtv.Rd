@@ -11,6 +11,7 @@ Esumtv(G, u, v)
 weights are read as CONDUCTANCES, per Klein & Randic.}
 
 \item{u, v}{Zero-based node indices in the same component.}
+
 }
 \value{
 List with \code{estimate}, \code{resistance},

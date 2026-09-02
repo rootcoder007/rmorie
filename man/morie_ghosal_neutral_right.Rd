@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghntr.R
 \name{morie_ghosal_neutral_right}
 \alias{morie_ghosal_neutral_right}
-\title{Neutral-to-the-right posterior survival (Doksum 1974).}
+\title{Neutral-to-the-right posterior survival (Doksum 1974)}
 \usage{
 morie_ghosal_neutral_right(time, event = NULL, c = 1, lam0 = NULL)
 }
@@ -19,7 +19,7 @@ morie_ghosal_neutral_right(time, event = NULL, c = 1, lam0 = NULL)
 Named list with estimate, times, S_post, H_post, c, lam0, n, method.
 }
 \description{
-Neutral-to-the-right posterior survival (Doksum 1974).
+Neutral-to-the-right posterior survival (Doksum 1974)
 }
 \examples{
 morie_ghosal_neutral_right(time = cumsum(rexp(50)))

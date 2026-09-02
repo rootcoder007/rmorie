@@ -30,6 +30,8 @@ Gpsvi(
 \item{lengthscale, variance, noise}{GP hyperparameters.}
 
 \item{jitter}{Ridge added to K_mm.}
+
+
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{variance},
@@ -46,7 +48,7 @@ full GP regression -- that identity is the anchor, and it is the one
 thing a sparse approximation must satisfy.
 }
 \details{
-Formula: Q = K_nm K_mm^{-1} K_mn;
+Formula: Q = K_nm K_mm^\{-1\} K_mn;
 L = log N(y; 0, Q + s2 I) - tr(K_nn - Q) / (2 s2).
 }
 \examples{

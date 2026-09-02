@@ -5,7 +5,7 @@
 \alias{morie_smatch_power}
 \title{morie_smatch_power}
 \usage{
-morie_smatch_power(n_events, log_ri, r, p_exposed, alpha = 0.05)
+morie_smatch_power(n_events, log_ri, r, p_exposed, alpha = 0.05) 
 }
 \arguments{
 \item{n_events}{Coerced to numeric by the body, with \code{as.numeric}.}

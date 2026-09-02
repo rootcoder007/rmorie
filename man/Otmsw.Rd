@@ -12,6 +12,7 @@ Otmsw(X, Y, p = 2, n_proj = 32)
 \item{p}{Exponent, positive.}
 
 \item{n_proj}{Number of candidate directions searched.}
+
 }
 \value{
 List with \code{MSW}, \code{theta_star}, \code{idx_star},

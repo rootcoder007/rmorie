@@ -6,8 +6,8 @@
 #' last smoothed state always equals the last filtered state, which is
 #' the identity that anchors the recursion.
 #'
-#' Formula: C = P_t F' P_{t+1|t}^{-1};
-#'   x_{t|n} = x_{t|t} + C (x_{t+1|n} - x_{t+1|t}).
+#' Formula: C = P_t F' P_\{t+1|t\}^\{-1\};
+#'   x_\{t|n\} = x_\{t|t\} + C (x_\{t+1|n\} - x_\{t+1|t\}).
 #'
 #' @param y Observation matrix; only its length is used.
 #' @param model Named list with entry F.

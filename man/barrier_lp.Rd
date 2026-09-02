@@ -5,7 +5,7 @@
 \alias{barrier_lp}
 \title{Barrier method on a linear program}
 \usage{
-barrier_lp(c, A_ub, b_ub, A_eq = NULL, b_eq = NULL, x0 = NULL, ...)
+barrier_lp(c, A_ub, b_ub, A_eq = NULL, b_eq = NULL, x0 = NULL, ...) 
 }
 \arguments{
 \item{c}{Cost vector.}

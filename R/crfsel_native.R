@@ -41,7 +41,7 @@
 # that depth, so the caller indexes by depth directly.
 #' Split counts by (depth, feature), depth 1 at the root. Mirrors
 #'
-#' morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
+#' morie.fn.crfsel._depth_counts; element [\[depth\]] holds the counts at
 #' that depth, so the caller indexes by depth directly.
 #'
 #' @param tree Passed to \code{walk}.

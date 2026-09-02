@@ -5,7 +5,7 @@
 \alias{morie_quantize_with_codebook}
 \title{Map each sample to its nearest codeword}
 \usage{
-morie_quantize_with_codebook(x, codebook)
+morie_quantize_with_codebook(x, codebook) 
 }
 \arguments{
 \item{x}{Samples.}

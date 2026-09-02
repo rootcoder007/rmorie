@@ -2,7 +2,7 @@
 % Please edit documentation in R/spthom.R
 \name{spthom}
 \alias{spthom}
-\title{Thomas process: the Neyman-Scott process with Gaussian offspring.}
+\title{Thomas process: the Neyman-Scott process with Gaussian offspring}
 \usage{
 spthom(r, rho = 10, mu = 5, sigma = 0.1)
 }

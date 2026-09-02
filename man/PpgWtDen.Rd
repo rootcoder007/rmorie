@@ -5,7 +5,7 @@
 \alias{PpgWtDen}
 \title{Wavelet-shrinkage denoising of PPG, Sec 8.14 with eqs (8.103)-(8.105)}
 \usage{
-PpgWtDen(ppg, fs = 100, wavelet = "db4", levels = 4, threshold_type = "soft")
+PpgWtDen(ppg, fs = 100, wavelet = "db4", levels = 4, threshold_type = "soft") 
 }
 \arguments{
 \item{ppg}{Passed to \code{.tf_need}.}

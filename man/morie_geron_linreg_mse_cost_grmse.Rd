@@ -8,6 +8,8 @@ morie_geron_linreg_mse_cost_grmse(X, y, theta)
 }
 \arguments{
 \item{X, y, theta}{Design, targets and parameters.}
+
+
 }
 \value{
 List with \code{cost}, \code{rmse}, \code{residuals}, \code{predictions}.

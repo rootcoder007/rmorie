@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Complete spatial randomness, and a quadrat check of it.
+#' Complete spatial randomness, and a quadrat check of it
 #'
 #' CSR is the homogeneous Poisson process: constant intensity and
 #' independent events, so neither attraction nor inhibition. It is the

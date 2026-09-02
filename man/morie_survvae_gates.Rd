@@ -5,7 +5,7 @@
 \alias{morie_survvae_gates}
 \title{Softmax over the experts}
 \usage{
-morie_survvae_gates(x, W, bias)
+morie_survvae_gates(x, W, bias) 
 }
 \arguments{
 \item{x}{Covariate vector of length \code{d}.}

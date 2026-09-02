@@ -5,7 +5,7 @@
 \alias{morie_sctraj_shrinkage_weight}
 \title{morie_sctraj_shrinkage_weight}
 \usage{
-morie_sctraj_shrinkage_weight(t, t_min, t_max, arg = "shifted")
+morie_sctraj_shrinkage_weight(t, t_min, t_max, arg = "shifted") 
 }
 \arguments{
 \item{t}{Numeric; combined arithmetically in the body.}

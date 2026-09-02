@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_greg}
 \alias{morie_weights_greg}
-\title{Generalised regression (GREG) calibration.}
+\title{Generalised regression (GREG) calibration}
 \usage{
 morie_weights_greg(weights, X, population_totals, max_iter = 50, tol = 1e-08)
 }

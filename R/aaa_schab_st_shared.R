@@ -401,7 +401,7 @@
   vapply(x, function(xi) sum(wt * cos(xi * sin(theta))) * step / pi, numeric(1))
 }
 
-#' K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
+#' K_1(z) = integral_0^inf exp\{-z cosh u\} cosh u du
 #'
 #' A step of the schab_st_shared implementation. Called by \code{.schab_whittle_covariance}.
 #' See the file header for the source the module follows.

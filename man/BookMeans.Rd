@@ -8,6 +8,7 @@ BookMeans(x = NULL, y = NULL)
 }
 \arguments{
 \item{x, y}{data vectors; default to the book's five worked points.}
+
 }
 \value{
 list(xbar, ybar).

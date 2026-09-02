@@ -29,6 +29,7 @@ temporal_validate(
 \item{split_quantile}{Quantile of dates (if \code{split_date} is NULL).}
 
 \item{scoring}{Scoring metric.}
+
 }
 \value{
 An object of class \code{"class_name"}.

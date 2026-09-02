@@ -5,7 +5,7 @@
 \alias{maxmin_selection}
 \title{maxmin_selection}
 \usage{
-maxmin_selection(fps, k, seed = NULL)
+maxmin_selection(fps, k, seed = NULL) 
 }
 \arguments{
 \item{fps}{Passed to \code{.tncomp_select}.}

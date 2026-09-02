@@ -3,9 +3,9 @@
 \name{llm_arch_helpers}
 \alias{llm_arch_helpers}
 \title{Internal helpers shared across the LLM-architecture suite.
-Not exported; consumed by llm_arch callables only.}
+Not exported; consumed by llm_arch callables only}
 \description{
 Internal helpers shared across the LLM-architecture suite.
-Not exported; consumed by llm_arch callables only.
+Not exported; consumed by llm_arch callables only
 }
 \keyword{internal}

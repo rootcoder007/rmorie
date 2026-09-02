@@ -29,6 +29,7 @@ Y > y_K; all ones if omitted.}
 omitted.}
 
 \item{cycles, gs_iter}{Coordinate-descent controls.}
+
 }
 \value{
 list: estimate, theta_hat, beta_hat, h_j_hat, Lambda0, loglik,
@@ -38,12 +39,12 @@ cell_probs, K, n, method.
 Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Springer, Section 6.2.3, pages 208-209 (volume
 [Pages 189-232], read as rendered page images).  When Y is observed only
-through the interval (y_{j-1}, y_j] that contains it, Lambda_0 is
+through the interval (y_\{j-1\}, y_j] that contains it, Lambda_0 is
 identified at the K boundaries only, so the model of Section 6.2.2 -- a
 proportional hazard with a gamma frailty of variance theta -- becomes
 finite-dimensional.  With y_0 = 0 the book gives, for 1 <= j <= K,
-P(y_{j-1} < Y <= y_j | X = x) equal to
-[1 + theta Lambda_0(y_{j-1}) exp(-x b)]^(-1/theta) minus
+P(y_\{j-1\} < Y <= y_j | X = x) equal to
+[1 + theta Lambda_0(y_\{j-1\}) exp(-x b)]^(-1/theta) minus
 [1 + theta Lambda_0(y_j) exp(-x b)]^(-1/theta), and
 P(Y > y_K | X = x) = [1 + theta Lambda_0(y_K) exp(-x b)]^(-1/theta), and
 then the log likelihood of a random sample of (Y, X).
@@ -51,7 +52,7 @@ then the log likelihood of a random sample of (Y, X).
 \details{
 BOOK NOTE (sign).  The two displayed probabilities carry the exponent
 -1/theta; the log likelihood printed immediately below them on p. 208
-carries +1/t in all three places.  With A_{j-1} < A_j the +1/t reading
+carries +1/t in all three places.  With A_\{j-1\} < A_j the +1/t reading
 makes the bracketed difference negative and its logarithm undefined, while
 the -1/t reading is exactly the probability displayed two lines above.  The
 exponent is -1/t; that is what is implemented.  This is the same dropped
@@ -59,7 +60,7 @@ minus this book is already known for.
 
 Estimation is by direct maximisation of the log likelihood over theta > 0,
 beta and the K jumps of Lambda_0, using theta = exp(tau) and
-Lambda_0(y_j) = sum_{l <= j} exp(c_l) so the parameters are unconstrained
+Lambda_0(y_j) = sum_\{l <= j\} exp(c_l) so the parameters are unconstrained
 and Lambda_0 is automatically nonnegative and increasing.  The maximiser is
 cyclic coordinate golden-section search from a fixed start: deterministic,
 no random restarts.

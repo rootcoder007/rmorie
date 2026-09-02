@@ -5,7 +5,8 @@
 \alias{morie_glmbay_bayesian_glm}
 \title{morie_glmbay_bayesian_glm}
 \usage{
-morie_glmbay_bayesian_glm(X, y, family = "binomial", prior_sd = 2.5, add_intercept = TRUE, max_iter = 100, tol = 1e-10)
+morie_glmbay_bayesian_glm(X, y, family = "binomial", prior_sd = 2.5, add_intercept = TRUE, 
+    max_iter = 100, tol = 1e-10) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Estimate a population total from a simple random sample.
+#' Estimate a population total from a simple random sample
 #'
 #' The total is the mean scaled by N, so its variance is scaled by N^2;
 #' the coefficient of variation, identical for the two, is returned to

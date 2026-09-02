@@ -5,7 +5,7 @@
 \alias{morie_geron_pvt}
 \title{Pyramid Vision Transformer: hierarchical multi-scale patch-embedding stages (Geron Ch 16, hmpvt)}
 \usage{
-morie_geron_pvt(image, stage_cfgs, seed = 0)
+morie_geron_pvt(image, stage_cfgs, seed = 0) 
 }
 \arguments{
 \item{image}{Array (H, W, C) or (H, W).}

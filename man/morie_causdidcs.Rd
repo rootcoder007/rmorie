@@ -17,6 +17,7 @@ morie_causdidcs(y, D, unit, time, cohort = NULL, control = "notyet")
 unit, as an alternative to deriving it from \code{D}.}
 
 \item{control}{\code{"notyet"} (default) or \code{"never"}.}
+
 }
 \value{
 The list returned by \code{\link{morie_cssant}}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spsph.R
 \name{spsph}
 \alias{spsph}
-\title{Spherical semivariogram model.}
+\title{Spherical semivariogram model}
 \usage{
 spsph(h, nugget = 0, sill = 1, range = 1)
 }

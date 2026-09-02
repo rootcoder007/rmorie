@@ -9,7 +9,7 @@
 
 #' F CDF via the regularized incomplete beta:
 #'
-#' P(F <= x) = I_{d1 x / (d1 x + d2)}(d1/2, d2/2)
+#' P(F <= x) = I_\{d1 x / (d1 x + d2)\}(d1/2, d2/2)
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @param d1 Numeric; combined arithmetically in the body.

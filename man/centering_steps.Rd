@@ -5,7 +5,7 @@
 \alias{centering_steps}
 \title{Predicted centering steps}
 \usage{
-centering_steps(m, eps, t0, mu)
+centering_steps(m, eps, t0, mu) 
 }
 \arguments{
 \item{m}{Number of inequality constraints.}

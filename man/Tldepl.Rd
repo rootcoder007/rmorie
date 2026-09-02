@@ -17,7 +17,7 @@ Tldepl(y, copula, theta = 0.95)
 List with \code{estimate}, \code{u}, \code{n}, \code{method}.
 }
 \description{
-lambda_L = lim_{u->0+} C(u,u) / u.  The lower tail of (X, Y) is the
+lambda_L = lim_\{u->0+\} C(u,u) / u.  The lower tail of (X, Y) is the
 upper tail of (-X, -Y), so the estimator is Coles' chi(u) applied to
 the reflected sample; no second estimator is written.  For a radially
 symmetric dependence structure the two coefficients coincide, which is

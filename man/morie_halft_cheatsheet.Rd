@@ -5,7 +5,7 @@
 \alias{morie_halft_cheatsheet}
 \title{One-line summary of the halft module}
 \usage{
-morie_halft_cheatsheet()
+morie_halft_cheatsheet() 
 }
 \description{
 One-line summary of the halft module

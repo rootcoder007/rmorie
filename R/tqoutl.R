@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Split coordinates into outlier and non-outlier sets, bits allocated apart.
+#' Split coordinates into outlier and non-outlier sets, bits allocated apart
 #'
 #' The split is by MAGNITUDE RANK, not an absolute threshold, so the
 #' outlier count is exactly ceiling(frac * d) regardless of scale. Ties

@@ -5,7 +5,7 @@
 \alias{morie_ddpest_predict_density}
 \title{The density at x: sum_h w_h(x) k(y | theta_h(x))}
 \usage{
-morie_ddpest_predict_density(G, x, grid, kernel)
+morie_ddpest_predict_density(G, x, grid, kernel) 
 }
 \arguments{
 \item{G}{A collection.}

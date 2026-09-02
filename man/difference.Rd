@@ -5,7 +5,7 @@
 \alias{difference}
 \title{difference}
 \usage{
-difference(y, d = 0, D = 0, s = 1)
+difference(y, d = 0, D = 0, s = 1) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

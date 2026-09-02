@@ -5,7 +5,7 @@
 \alias{morie_didfst_did_estimate}
 \title{The DiD contrast of eq. (13.7) under arbitrary unit weights}
 \usage{
-morie_didfst_did_estimate(delta, D, weights = NULL)
+morie_didfst_did_estimate(delta, D, weights = NULL) 
 }
 \arguments{
 \item{delta}{Numeric vector of differences.}

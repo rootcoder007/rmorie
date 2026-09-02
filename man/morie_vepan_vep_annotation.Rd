@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_vepan_vep_annotation}
 \alias{morie_vepan_vep_annotation}
+\alias{morie_vepan}
 \title{morie_vepan_vep_annotation}
 \usage{
-morie_vepan_vep_annotation(variants, transcripts, genome, upstream = 5000, downstream = 5000, mode = "all", no_intergenic = FALSE)
+morie_vepan_vep_annotation(variants, transcripts, genome, upstream = 5000, downstream = 5000, 
+    mode = "all", no_intergenic = FALSE) 
+
+morie_vepan(variants, transcripts, genome, upstream = 5000, downstream = 5000, 
+    mode = "all", no_intergenic = FALSE) 
 }
 \arguments{
 \item{variants}{Iterated over elementwise, with \code{lapply}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/besagl.R
 \name{Bymfit}
 \alias{Bymfit}
-\title{Besag-York-Mollie disease-mapping log-posterior kernel.}
+\title{Besag-York-Mollie disease-mapping log-posterior kernel}
 \usage{
 Bymfit(y, E, A, u, v, taus = 1, tauv = 1, X = NULL, beta = NULL)
 }
@@ -22,6 +22,7 @@ Bymfit(y, E, A, u, v, taus = 1, tauv = 1, X = NULL, beta = NULL)
 \item{X}{Covariates, one row per area, or NULL.}
 
 \item{beta}{Covariate coefficients, or NULL.}
+
 }
 \value{
 List with logpost, loglik, logpu, logpv, rr, fitted, usum,
@@ -29,7 +30,7 @@ npair, n.
 }
 \description{
 y_i ~ Poisson(E_i exp(x_i'beta + u_i + v_i)) with an ICAR prior
-p(u) propto exp(-(tau_u/2) sum_{i~j}(u_i - u_j)^2) and v_i ~ N(0,
+p(u) propto exp(-(tau_u/2) sum_\{i~j\}(u_i - u_j)^2) and v_i ~ N(0,
 1/tau_v).  The ICAR normalising rank is n - 1.
 }
 \references{

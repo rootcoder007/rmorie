@@ -5,7 +5,7 @@
 \alias{morie_trmRew_cheatsheet}
 \title{morie_trmRew_cheatsheet}
 \usage{
-morie_trmRew_cheatsheet()
+morie_trmRew_cheatsheet() 
 }
 \description{
 A step of the trmRew_native implementation. No other function in the package calls it. See the file header for the source the module follows.

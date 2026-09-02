@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' ZAP random-forest prediction.
+#' ZAP random-forest prediction
 #'
 #' Formula: Y-hat = (1 - theta-hat) mu-hat / (1 - exp(-mu-hat)) (eq. 15.3):
 #' under ZAP_RF the prediction is the mean of the zero-altered Poisson model.

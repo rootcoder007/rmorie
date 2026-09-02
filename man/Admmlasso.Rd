@@ -2,7 +2,7 @@
 % Please edit documentation in R/admmop.R
 \name{Admmlasso}
 \alias{Admmlasso}
-\title{ADMM in scaled form for the LASSO.}
+\title{ADMM in scaled form for the LASSO}
 \usage{
 Admmlasso(X, y, lam, rho = 1, steps = 100)
 }
@@ -22,8 +22,8 @@ List with x, z, u, objective, primalres, dualres, rho, steps,
 n, p.
 }
 \description{
-x <- (X'X + rho I)^{-1}(X'y + rho(z - u));
-z <- S_{lam/rho}(x + u); u <- u + x - z.
+x <- (X'X + rho I)^\{-1\}(X'y + rho(z - u));
+z <- S_\{lam/rho\}(x + u); u <- u + x - z.
 }
 \examples{
 Admmlasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)

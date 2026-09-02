@@ -5,7 +5,8 @@
 \alias{morie_sv_dl_refine_breakpoint}
 \title{morie_sv_dl_refine_breakpoint}
 \usage{
-morie_sv_dl_refine_breakpoint(call, reference, reads, k = 7, k_min = 3, min_split_support = 2, max_length_diff = 0.1, match = 1, mismatch = -2, gap_open = -4, gap_extend = -1)
+morie_sv_dl_refine_breakpoint(call, reference, reads, k = 7, k_min = 3, min_split_support = 2, 
+    max_length_diff = 0.1, match = 1, mismatch = -2, gap_open = -4, gap_extend = -1) 
 }
 \arguments{
 \item{call}{A list; the body reads \code{$size}, \code{$type} from it.}

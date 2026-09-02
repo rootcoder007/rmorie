@@ -23,6 +23,7 @@ morie_geron_bagging(
 \item{seed}{LCG seed.}
 
 \item{task}{"auto", "regression" or "classification".}
+
 }
 \value{
 List with \code{predict}, \code{train_pred}, \code{train_mse}, \code{oob_pred},

@@ -14,6 +14,7 @@ Sinkdist(a, b, C, eps, max_iter = 200L)
 \item{eps}{Positive regularisation strength, \code{1/lambda}.}
 
 \item{max_iter}{Fixed number of scalings (default 200).}
+
 }
 \value{
 Named list with \code{estimate}, \code{objective}, \code{entropy},

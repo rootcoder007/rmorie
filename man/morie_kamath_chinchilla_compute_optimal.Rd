@@ -20,6 +20,7 @@ morie_kamath_chinchilla_compute_optimal(
 \item{tokens_per_param}{Tokens per parameter.}
 
 \item{flops_per_token_param}{FLOPs constant.}
+
 }
 \value{
 List with \code{estimate}, \code{N_opt}, \code{D_opt}, \code{compute_check}.

@@ -5,7 +5,7 @@
 \alias{IntMag}
 \title{Eq (3.117).  The book prints 1/w, which is right for w > 0 and is how}
 \usage{
-IntMag(omega)
+IntMag(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

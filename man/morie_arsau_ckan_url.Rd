@@ -3,7 +3,7 @@
 \name{morie_arsau_ckan_url}
 \alias{morie_arsau_ckan_url}
 \title{Build the upstream CKAN \code{datastore_search} URL for a registry
-entry.}
+entry}
 \usage{
 morie_arsau_ckan_url(kind, year, limit = 5000L)
 }

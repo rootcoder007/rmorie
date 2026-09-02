@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Critical vaccination threshold for herd immunity.
+#' Critical vaccination threshold for herd immunity
 #'
 #' Formula: p_c = 1 - 1/R0; with vaccine efficacy e the coverage needed is p_c/e
 #'
 #' @param R0 Basic reproduction number, greater than 1.
 #' @param efficacy Vaccine efficacy in (0, 1].
 
+#' @param R0 See Usage.
+#' @param efficacy See Usage.
 #' @return List with ``threshold``, ``coverage``, ``feasible``, ``R0``, ``efficacy``.
 #' @references Anderson and May (1991), Infectious Diseases of Humans: Dynamics and Control, Oxford University Press. Not held locally; p_c = 1 - 1/R0 is the standard published result and is stated in the same form in every open source consulted.
 #' @export

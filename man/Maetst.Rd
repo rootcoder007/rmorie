@@ -2,7 +2,7 @@
 % Please edit documentation in R/maedf.R
 \name{Maetst}
 \alias{Maetst}
-\title{Mean absolute error of a set of predictions.}
+\title{Mean absolute error of a set of predictions}
 \usage{
 Maetst(y, yhat)
 }

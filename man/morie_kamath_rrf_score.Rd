@@ -5,7 +5,7 @@
 \alias{morie_kamath_rrf_score}
 \title{Reciprocal rank fusion score (Kamath Eq 7.1)}
 \usage{
-morie_kamath_rrf_score(r, k = 60)
+morie_kamath_rrf_score(r, k = 60) 
 }
 \arguments{
 \item{r}{1-based rank(s).}

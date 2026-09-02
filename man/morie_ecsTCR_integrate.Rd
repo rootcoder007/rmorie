@@ -5,7 +5,8 @@
 \alias{morie_ecsTCR_integrate}
 \title{Run the two-layer energy balance model}
 \usage{
-morie_ecsTCR_integrate(forcing, lam, gamma = 0.7, epsilon = 1, C = 8, C_deep = 100, solver = "analytic", dt = 1, T0 = 0, TD0 = 0)
+morie_ecsTCR_integrate(forcing, lam, gamma = 0.7, epsilon = 1, C = 8, C_deep = 100, 
+    solver = "analytic", dt = 1, T0 = 0, TD0 = 0) 
 }
 \arguments{
 \item{forcing}{radiative forcing, one entry per year.}

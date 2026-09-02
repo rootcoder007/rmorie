@@ -5,7 +5,7 @@
 \alias{triplet_loss}
 \title{triplet_loss}
 \usage{
-triplet_loss(better, worse, src, ref, margin = 1)
+triplet_loss(better, worse, src, ref, margin = 1) 
 }
 \arguments{
 \item{better}{Passed to \code{.comet_dist}.}

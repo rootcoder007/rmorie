@@ -28,7 +28,7 @@ observed time the curve is a plateau the data cannot pin down, so
 A thin alias for \code{Rmst}; the estimator already exists and is not
 duplicated here.
 
-Formula: RMST(t*) = integral_0^{t*} S(u) du, the survival curve being a
+Formula: RMST(t*) = integral_0^\{t*\} S(u) du, the survival curve being a
 step function integrated as summed rectangles.
 }
 \examples{

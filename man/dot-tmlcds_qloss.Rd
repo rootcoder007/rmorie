@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlcds_native.R
 \name{.tmlcds_qloss}
 \alias{.tmlcds_qloss}
-\title{L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}}
+\title{L(Qbar) = -\{Y log Qbar + (1-Y) log(1-Qbar)\}}
 \usage{
 .tmlcds_qloss(qa, y)
 }

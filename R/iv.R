@@ -77,6 +77,10 @@ NULL
   requireNamespace("AER", quietly = TRUE)
 }
 
+#' @param outcome See Usage.
+#' @param endogenous See Usage.
+#' @param instruments See Usage.
+#' @param exogenous See Usage.
 #' @keywords internal
 .morie_iv_build_formula <- function(outcome, endogenous, instruments,
                                     exogenous = NULL) {
@@ -91,6 +95,13 @@ NULL
   stats::as.formula(paste(outcome, "~", rhs))
 }
 
+#' @param coef_vec See Usage.
+#' @param se_vec See Usage.
+#' @param n_obs See Usage.
+#' @param method See Usage.
+#' @param alpha See Usage.
+#' @param dof See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_iv_result <- function(coef_vec, se_vec, n_obs, method, alpha = 0.05,
                              dof = NA, details = list()) {
@@ -116,6 +127,13 @@ NULL
   )
 }
 
+#' @param data See Usage.
+#' @param outcome See Usage.
+#' @param endogenous See Usage.
+#' @param instruments See Usage.
+#' @param exogenous See Usage.
+#' @param robust See Usage.
+#' @param alpha See Usage.
 #' @keywords internal
 .morie_iv_base_2sls <- function(data, outcome, endogenous, instruments,
                                 exogenous = NULL, robust = TRUE, alpha = 0.05) {
@@ -540,7 +558,7 @@ morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
 }
 
 #' Grid-based Anderson-Rubin confidence interval for a single endogenous
-#' variable.
+#' variable
 #' @inheritParams morie_iv_params
 #' @return A vector of the computed values.
 #' @examples

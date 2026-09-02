@@ -16,6 +16,8 @@ morie_geron_yolo_grid_loss(
 then class scores.}
 
 \item{lam_coord, lam_noobj}{Non-negative loss weights.}
+
+
 }
 \value{
 List with \code{loss}, \code{loss_coord}, \code{loss_obj}, \code{loss_noobj},

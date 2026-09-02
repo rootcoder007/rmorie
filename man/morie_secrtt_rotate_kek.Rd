@@ -5,7 +5,8 @@
 \alias{morie_secrtt_rotate_kek}
 \title{Rotate the KEK: re-wrap every DEK, no record ciphertext touched}
 \usage{
-morie_secrtt_rotate_kek(wrapped_deks, old_kek, new_kek, new_nonces, new_kek_id = "kek-2", audit_log = NULL)
+morie_secrtt_rotate_kek(wrapped_deks, old_kek, new_kek, new_nonces, new_kek_id = "kek-2", 
+    audit_log = NULL) 
 }
 \arguments{
 \item{wrapped_deks}{List of wrapped DEKs.}

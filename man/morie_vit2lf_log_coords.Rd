@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_log_coords}
 \title{Swin V2 log-spaced relative coordinates}
 \usage{
-morie_vit2lf_log_coords(dx, dy)
+morie_vit2lf_log_coords(dx, dy) 
 }
 \arguments{
 \item{dx}{Horizontal offset.}

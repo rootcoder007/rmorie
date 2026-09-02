@@ -2,7 +2,7 @@
 % Please edit documentation in R/airbed.R
 \name{Emisinv}
 \alias{Emisinv}
-\title{Activity-data times emission-factor inventory.}
+\title{Activity-data times emission-factor inventory}
 \usage{
 Emisinv(activity, factor, gwp = NULL)
 }

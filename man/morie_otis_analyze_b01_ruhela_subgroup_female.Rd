@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_b01_ruhela_subgroup_female}
 \alias{morie_otis_analyze_b01_ruhela_subgroup_female}
 \alias{morie_otis_analyze_b01_mrm_subgroup_female}
-\title{b01 subgroup Ruhela: Female-only cell frame.}
+\title{b01 subgroup Ruhela: Female-only cell frame}
 \usage{
 morie_otis_analyze_b01_ruhela_subgroup_female(data = NULL, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_b01_mrm_subgroup_female(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-b01 subgroup Ruhela: Female-only cell frame.
+b01 subgroup Ruhela: Female-only cell frame
 }
 \examples{
 \donttest{ morie_otis_analyze_b01_ruhela_subgroup_female() }

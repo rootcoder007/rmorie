@@ -21,6 +21,7 @@ morie_tps_inspection_game_phase(
 
 \item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
 default) skips writing and says so in the result.}
+
 }
 \value{
 A \code{morie_rich_result} containing the mean, min, max

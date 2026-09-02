@@ -5,7 +5,7 @@
 \alias{log_evidence}
 \title{log_evidence}
 \usage{
-log_evidence(docs, T, V, z, alpha = 0.5, beta = 0.5, m = NULL, n = NULL)
+log_evidence(docs, T, V, z, alpha = 0.5, beta = 0.5, m = NULL, n = NULL) 
 }
 \arguments{
 \item{docs}{Iterated over elementwise, with \code{lapply}.}

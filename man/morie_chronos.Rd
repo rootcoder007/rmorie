@@ -5,7 +5,7 @@
 \alias{morie_chronos}
 \title{morie_chronos}
 \usage{
-morie_chronos(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL)
+morie_chronos(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{tokenize}.}

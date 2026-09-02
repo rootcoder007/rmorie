@@ -30,6 +30,9 @@ morie_kamath_word_movers_distance(cost, p, q, max_iter = 10000)
 \item{p, q}{Marginals.}
 
 \item{max_iter}{Guard.}
+
+
+
 }
 \value{
 List with \code{estimate}, \code{wmd}, \code{normalizer}.

@@ -5,7 +5,7 @@
 \alias{morie_tmlcic_cheatsheet}
 \title{morie_tmlcic_cheatsheet}
 \usage{
-morie_tmlcic_cheatsheet()
+morie_tmlcic_cheatsheet() 
 }
 \description{
 A step of the tmlcic_native implementation. No other function in the package calls it. See the file header for the source the module follows.

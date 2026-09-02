@@ -5,7 +5,7 @@
 \alias{morie_exp3}
 \title{morie_exp3}
 \usage{
-morie_exp3(x, gamma_, T = NULL, seed = 0)
+morie_exp3(x, gamma_, T = NULL, seed = 0) 
 }
 \arguments{
 \item{x}{A matrix; indexed by row and column.}

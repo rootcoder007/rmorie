@@ -5,7 +5,7 @@
 \alias{morie_morrisM}
 \title{morie_morrisM}
 \usage{
-morie_morrisM(fun, k, r = 10, p = 4, seed = 0, bounds = NULL)
+morie_morrisM(fun, k, r = 10, p = 4, seed = 0, bounds = NULL) 
 }
 \arguments{
 \item{fun}{Accepted by the signature and not used anywhere in the body.}

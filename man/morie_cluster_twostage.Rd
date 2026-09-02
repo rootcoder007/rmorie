@@ -22,6 +22,12 @@ morie_cluster_twostage(
 \item{primary_unit_means}{PSU means (two-stage pieces).}
 
 \item{s2_between, s2_within, n, m}{True-variance pieces.}
+
+
+
+
+
+
 }
 \value{
 List with total_pps, total_si, mean_from_total, ts_mean,

@@ -12,6 +12,8 @@ morie_rappor_decode(counts, sizes, f = 0.5, p = 0.5, q = 0.75)
 \item{sizes}{Reports per cohort.}
 
 \item{f, p, q}{RAPPOR parameters.}
+
+
 }
 \value{
 A list whose \code{t} holds the estimated true set-bit counts.

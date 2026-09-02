@@ -39,7 +39,7 @@
   if (w > 1e-12) w else 1e-12
 }
 
-#' Ripley's K function for a mapped point pattern in a rectangle.
+#' Ripley's K function for a mapped point pattern in a rectangle
 #'
 #' \code{lambda K(h)} is the expected number of further events within
 #' distance \code{h} of an arbitrary event. Two estimators are returned.

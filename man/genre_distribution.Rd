@@ -3,9 +3,12 @@
 % the formals.
 \name{genre_distribution}
 \alias{genre_distribution}
-\title{Weighted average of \eqn{p(g \mid i)} over a set of items.}
+\alias{morie_caltbR}
+\title{Weighted average of \eqn{p(g \mid i)} over a set of items}
 \usage{
-genre_distribution(items, p_g_given_i, weights = NULL)
+genre_distribution(items, p_g_given_i, weights = NULL) 
+
+morie_caltbR(items, p_g_given_i, weights = NULL) 
 }
 \arguments{
 \item{items}{Integer vector of item indices (0-based in Python,   1-based in R -- shifted internally).}

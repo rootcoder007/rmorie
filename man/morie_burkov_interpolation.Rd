@@ -5,7 +5,7 @@
 \alias{morie_burkov_interpolation}
 \title{Linear interpolation of n-gram orders (Burkov Ch 2)}
 \usage{
-morie_burkov_interpolation(probs_by_order, lambdas)
+morie_burkov_interpolation(probs_by_order, lambdas) 
 }
 \arguments{
 \item{probs_by_order}{Probabilities.}

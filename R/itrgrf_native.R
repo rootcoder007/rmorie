@@ -115,7 +115,7 @@
   g <- .itrgrf_dr_scores(y, W, mu1, mu0, e, d)
   n <- length(g)
   v <- sum(g) / n
-  se <- if (n > 1) k.sd(g) / sqrt(n) else NaN
+  se <- if (n > 1) stats::sd(g) / sqrt(n) else NaN
   list(value = v, se = se, scores = g)
 }
 
@@ -247,7 +247,7 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
   v_all <- rv_all$value
   v_none <- rv_none$value
 
-  z <- k.qnorm(0.5 + 0.5 * level)
+  z <- stats::qnorm(0.5 + 0.5 * level)
 
   list(
     estimate = v,

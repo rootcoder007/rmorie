@@ -5,7 +5,7 @@
 \alias{strec_attention_weights}
 \title{strec_attention_weights}
 \usage{
-strec_attention_weights(embeddings, W1, W2, W3, W0, b_a = NULL)
+strec_attention_weights(embeddings, W1, W2, W3, W0, b_a = NULL) 
 }
 \arguments{
 \item{embeddings}{Passed to \code{.strec_as_rows}.}

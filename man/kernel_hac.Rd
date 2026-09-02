@@ -5,7 +5,7 @@
 \alias{kernel_hac}
 \title{kernel_hac}
 \usage{
-kernel_hac(v, bandwidth, kernel = "qs", n_params = 0, n = NULL)
+kernel_hac(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) 
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}

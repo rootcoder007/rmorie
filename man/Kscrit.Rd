@@ -5,10 +5,15 @@
 \alias{Kscrit}
 \title{KS critical value (Table F) by exact bisection -- p. 565}
 \usage{
-Kscrit(n, alpha = 0.05, exact = TRUE)
+Kscrit(n, alpha = 0.05, exact = TRUE) 
 }
 \description{
 KS critical value (Table F) by exact bisection -- p. 565
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{exact}{Argument \code{exact}; see Usage.}
 }
 \value{
 A list with \code{dcrit}, \code{dcrit_asymp}, \code{k_alpha}, \code{n}, \code{alpha}.

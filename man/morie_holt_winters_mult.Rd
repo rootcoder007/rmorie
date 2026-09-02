@@ -21,6 +21,8 @@ morie_holt_winters_mult(
 \item{alpha, beta, gamma}{smoothing parameters in \eqn{\[0, 1\]}.}
 
 \item{horizon}{steps ahead; defaults to one full period.}
+
+
 }
 \value{
 as \code{\link{morie_holt_winters_additive}}.

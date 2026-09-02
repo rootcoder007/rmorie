@@ -19,13 +19,14 @@ Twostg(time, event, X, Z = NULL, error = "ph", max_iter = 50L, tol = 1e-10)
 (logistic, proportional odds).}
 
 \item{max_iter, tol}{Newton controls.}
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{cov},
 \code{n_iter}, \code{error}, \code{method}.
 }
 \description{
-Linear transformation model g{S(t | Z)} = h(t) + Z'beta with censored
+Linear transformation model g\{S(t | Z)\} = h(t) + Z'beta with censored
 data: stage 1 estimates the censoring survival G by Kaplan-Meier
 (left limit, validated against the paper's printed Freireich anchor),
 stage 2 solves estimating equation (2.3) with unit weights. Sandwich

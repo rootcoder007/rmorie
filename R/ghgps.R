@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' GP posterior mean with squared-exponential kernel.
+#' GP posterior mean with squared-exponential kernel
 #'
 #' @param x Numeric vector or matrix of input points.
 #' @param y Numeric response vector.

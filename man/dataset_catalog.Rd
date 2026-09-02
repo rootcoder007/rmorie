@@ -23,9 +23,7 @@ A data.frame with columns:
 \source{
 Health Canada, CIHI, Statistics Canada open data portals.
 }
-\usage{
-dataset_catalog
-}
+
 \description{
 A data.frame listing all Canadian public health datasets available
 through the MORIE data management system. Each row describes one

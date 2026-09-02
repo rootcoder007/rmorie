@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_cross_time_stage}
 \title{Cross-time stage (equation 3)}
 \usage{
-morie_crsfmr_cross_time_stage(Z)
+morie_crsfmr_cross_time_stage(Z) 
 }
 \arguments{
 \item{Z}{A length-L list of length-D lists of d_model vectors.}

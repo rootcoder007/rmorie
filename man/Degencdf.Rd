@@ -5,10 +5,14 @@
 \alias{Degencdf}
 \title{Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)}
 \usage{
-Degencdf(x, mu)
+Degencdf(x, mu) 
 }
 \description{
 Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{mu}{Argument \code{mu}; see Usage.}
 }
 \value{
 A list with \code{cdf}, \code{mu}, \code{x}.

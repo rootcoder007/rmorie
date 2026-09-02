@@ -5,7 +5,7 @@
 \alias{density_is_view_independent}
 \title{density_is_view_independent}
 \usage{
-density_is_view_independent(model, point, directions, tol = 1e-09)
+density_is_view_independent(model, point, directions, tol = 1e-09) 
 }
 \arguments{
 \item{model}{Accepted by the signature and not used anywhere in the body.}

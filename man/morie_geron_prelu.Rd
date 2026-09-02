@@ -5,7 +5,7 @@
 \alias{morie_geron_prelu}
 \title{Parametric ReLU: per-channel learnable negative slope (Geron Ch 11, hmprel)}
 \usage{
-morie_geron_prelu(z, alpha = 0.25, upstream = NULL)
+morie_geron_prelu(z, alpha = 0.25, upstream = NULL) 
 }
 \arguments{
 \item{z}{Pre-activations, channels on last axis.}

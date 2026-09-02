@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ljung-Box Q test for autocorrelation.
+#' Ljung-Box Q test for autocorrelation
 #'
 #' Formula: \eqn{Q = n(n+2) \sum_{k=1}^{m} r_k^2 / (n-k)}, referred to
 #' chi-square on \code{lags - fitdf} degrees of freedom.  The

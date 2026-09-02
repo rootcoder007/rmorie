@@ -15,6 +15,8 @@ passed as \code{kernel}.}
 \item{k}{number of components.}
 
 \item{gamma, degree, coef0}{kernel parameters.}
+
+
 }
 \value{
 list: Y, eigvals, estimate, explained, method.

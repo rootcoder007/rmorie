@@ -8,6 +8,7 @@ morie_wasserman_covariance(x, y)
 }
 \arguments{
 \item{x, y}{Paired numeric samples of equal length.}
+
 }
 \value{
 List with \code{estimate} (population, divisor n),

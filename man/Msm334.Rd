@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm334.R
 \name{Msm334}
 \alias{Msm334}
-\title{Expected prediction error of the OLS fit.}
+\title{Expected prediction error of the OLS fit}
 \usage{
 Msm334(sigma2, x_star, eigenvalues)
 }

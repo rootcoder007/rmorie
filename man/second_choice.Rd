@@ -5,7 +5,7 @@
 \alias{second_choice}
 \title{second_choice}
 \usage{
-second_choice(i1, alpha, y, E, C, rng, tol = 0.001)
+second_choice(i1, alpha, y, E, C, rng, tol = 0.001) 
 }
 \arguments{
 \item{i1}{Coerced to integer by the body, with \code{as.integer}.}

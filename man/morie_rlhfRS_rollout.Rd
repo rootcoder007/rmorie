@@ -5,7 +5,7 @@
 \alias{morie_rlhfRS_rollout}
 \title{Run the policy in a tabular session environment}
 \usage{
-morie_rlhfRS_rollout(env, policy, n_episodes = 20L, horizon = 10L, gamma = 0.9, seed = 0)
+morie_rlhfRS_rollout(env, policy, n_episodes = 20L, horizon = 10L, gamma = 0.9, seed = 0) 
 }
 \arguments{
 \item{env}{The environment.}

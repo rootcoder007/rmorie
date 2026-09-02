@@ -12,6 +12,7 @@ morie_kamath_differential_privacy(eps, delta, p_D = NULL, p_Dp = NULL)
 \item{delta}{Failure probability.}
 
 \item{p_D, p_Dp}{Event probabilities on the neighbouring datasets.}
+
 }
 \value{
 List with \code{estimate}, \code{guarantee}, \code{slack}, \code{worst_event}.

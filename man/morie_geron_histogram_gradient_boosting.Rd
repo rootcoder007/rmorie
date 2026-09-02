@@ -26,6 +26,7 @@ morie_geron_histogram_gradient_boosting(
 \item{max_depth}{Tree depth.}
 
 \item{min_samples_leaf}{Min rows/leaf.}
+
 }
 \value{
 List with prediction, train_mse, mse_history, baseline, trees, bins_used, bin_edges, estimate, n, method.

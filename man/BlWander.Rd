@@ -5,7 +5,7 @@
 \alias{BlWander}
 \title{Eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The}
 \usage{
-BlWander(ecg, fs, pole = 0.995)
+BlWander(ecg, fs, pole = 0.995) 
 }
 \arguments{
 \item{ecg}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

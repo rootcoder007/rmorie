@@ -3,7 +3,7 @@
 #' Geometric extrapolation of the raw gamma-kernel mean (Theorem 1.2)
 #'
 #' Theorem 1.2, Eq. (1.13): \eqn{J_h^2(x)\[J_{4h}(x)\]^{-1} = f_X(x) + O(h)}{J_h^2(x)\[J_4h(x)\]^-1 = f(x) + O(h)},
-#' with \eqn{J_h = E[A_h]}{J_h = E[A_h]}.
+#' with \eqn{J_h = E\[A_h\]}{J_h = E\[A_h\]}.
 #'
 #' The exponents are not a guess. Writing
 #' `log J_h = log f + a sqrt(h)/f + (b - a^2/(2f)) h/f`, the pair

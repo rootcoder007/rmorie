@@ -18,6 +18,8 @@ morie_geron_q_learning_update(Q, s, a, r, s_next, alpha, gamma, done = FALSE)
 \item{gamma}{Discount in [0, 1].}
 
 \item{done}{Terminal flag.}
+
+
 }
 \value{
 List with \code{Q}, \code{old_value}, \code{new_value}, \code{target},

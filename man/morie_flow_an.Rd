@@ -5,7 +5,7 @@
 \alias{morie_flow_an}
 \title{morie_flow_an}
 \usage{
-morie_flow_an(X, layers, threshold_quantile = 0.95, reference = NULL)
+morie_flow_an(X, layers, threshold_quantile = 0.95, reference = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.anomaly_score}.}

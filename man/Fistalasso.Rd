@@ -2,7 +2,7 @@
 % Please edit documentation in R/acclso.R
 \name{Fistalasso}
 \alias{Fistalasso}
-\title{FISTA for the LASSO.}
+\title{FISTA for the LASSO}
 \usage{
 Fistalasso(X, y, lam, steps = 100, lipschitz = NULL)
 }
@@ -26,8 +26,8 @@ n, p.
 Minimises F(b) = 0.5 ||X b - y||^2 + lam ||b||\emph{1 by the accelerated
 proximal-gradient scheme of Beck and Teboulle (2009, Sect. 4):
 x_k = soft(y_k - grad f(y_k)/L, lam/L),
-t}{k+1} = (1 + sqrt(1 + 4 t_k^2))/2,
-y_{k+1} = x_k + ((t_k - 1)/t_{k+1})(x_k - x_{k-1}).
+t}\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+y_\{k+1\} = x_k + ((t_k - 1)/t_\{k+1\})(x_k - x_\{k-1\}).
 }
 \examples{
 Fistalasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)

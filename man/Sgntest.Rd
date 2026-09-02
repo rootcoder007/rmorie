@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmsgn.R
 \name{Sgntest}
 \alias{Sgntest}
-\title{Exact sign test of H0: median = md.}
+\title{Exact sign test of H0: median = md}
 \usage{
 Sgntest(x, md = 0)
 }

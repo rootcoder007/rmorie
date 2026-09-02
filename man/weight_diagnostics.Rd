@@ -5,7 +5,7 @@
 \alias{weight_diagnostics}
 \title{weight_diagnostics}
 \usage{
-weight_diagnostics(weights)
+weight_diagnostics(weights) 
 }
 \arguments{
 \item{weights}{Coerced to numeric by the body, with \code{as.numeric}.}

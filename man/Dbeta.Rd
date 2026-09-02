@@ -5,7 +5,7 @@
 \alias{Dbeta}
 \title{Dbeta}
 \usage{
-Dbeta(x, shape1, shape2, log = FALSE)
+Dbeta(x, shape1, shape2, log = FALSE) 
 }
 \arguments{
 \item{x}{Numeric; passed to \code{log}.}

@@ -5,7 +5,7 @@
 \alias{encode_point_prompt}
 \title{encode_point_prompt}
 \usage{
-encode_point_prompt(points, labels, dim = 8, type_embeddings = NULL)
+encode_point_prompt(points, labels, dim = 8, type_embeddings = NULL) 
 }
 \arguments{
 \item{points}{Iterated over elementwise, with \code{lapply}.}

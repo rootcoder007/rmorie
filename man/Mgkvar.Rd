@@ -31,7 +31,7 @@ Named list with \code{variance}, \code{hopt}, \code{mserate}, \code{region}, \co
 }
 \description{
 Theorem 1.5:
-\deqn{\mathrm{Var}\[\tilde f_X(x)\] = 4\mathrm{Var}[A_h] + \mathrm{Var}\[A_{4h}\] - 4\mathrm{Cov}\[A_h,A_{4h}\] + o(n^{-1}h^{-1/4}).}{Var\[ftilde(x)\] = 4 Var[A_h] + Var[A_4h] - 4 Cov\[A_h, A_4h\] + o(n^-1 h^-1/4).}
+\deqn{\mathrm{Var}\[\tilde f_X(x)\] = 4\mathrm{Var}\[A_h\] + \mathrm{Var}\[A_{4h}\] - 4\mathrm{Cov}\[A_h,A_{4h}\] + o(n^{-1}h^{-1/4}).}{Var\[ftilde(x)\] = 4 Var\[A_h\] + Var\[A_4h\] - 4 Cov\[A_h, A_4h\] + o(n^-1 h^-1/4).}
 }
 \details{
 Not a new calculation -- it is the variance of the linear combination

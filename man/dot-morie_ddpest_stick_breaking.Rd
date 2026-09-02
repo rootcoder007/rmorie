@@ -17,7 +17,7 @@
 A list with \code{weights}.
 }
 \description{
-w_1 = V_1, w_h = V_h * prod_{j<h}(1 - V_j), V_h ~ Beta(1, alpha).
+w_1 = V_1, w_h = V_h * prod_\{j<h\}(1 - V_j), V_h ~ Beta(1, alpha).
 Drawn through the inverse CDF V = 1 - U^(1/alpha), consuming ONE
 uniform per stick from the shared generator \code{e}. This is the
 canonical construction used by the Python arm\'s sb.stick_breaking

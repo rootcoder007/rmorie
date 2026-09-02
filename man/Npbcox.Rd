@@ -2,8 +2,7 @@
 % Please edit documentation in R/npbcox.R
 \name{Npbcox}
 \alias{Npbcox}
-\title{exp(x_j'b)]}, which is concave, so the Newton step is taken against
-the observed information and no line search is needed.}
+\title{Cox regression with a gamma-process baseline hazard}
 \usage{
 Npbcox(time, event, X, c = 1, lam0 = NULL, n_iter = 50L, tol = 1e-12)
 }
@@ -30,8 +29,7 @@ List with \code{beta}, \code{se}, \code{estimate},
 \code{n_events}, \code{c}, \code{lam0}.
 }
 \description{
-exp(x_j'b)]}, which is concave, so the Newton step is taken against
-the observed information and no line search is needed.
+
 }
 \examples{
 Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))

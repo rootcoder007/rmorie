@@ -5,7 +5,7 @@
 \alias{Imf}
 \title{One IMF plus its admissibility evidence, Sec 9.4 and eqs (9.8)-(9.11)}
 \usage{
-Imf(x, max_iter = 50, tol = 0.05)
+Imf(x, max_iter = 50, tol = 0.05) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

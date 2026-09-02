@@ -16,6 +16,7 @@ Otunbal(a, b, C, epsilon, lam, max_iter = 200)
 \item{lam}{Marginal-relaxation strength, positive.}
 
 \item{max_iter}{Scaling sweeps.}
+
 }
 \value{
 List with \code{T}, \code{cost}, \code{mass}, \code{mass_a},

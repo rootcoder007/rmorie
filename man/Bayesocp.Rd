@@ -2,22 +2,22 @@
 % Please edit documentation in R/chgbcp.R
 \name{Bayesocp}
 \alias{Bayesocp}
-\title{Bayesian online changepoint detection (re-export).}
+\title{Bayesian online changepoint detection (re-export)}
 \usage{
 Bayesocp(y, hazard = 0.004, mu0 = 0, kappa0 = 1, alpha0 = 1, beta0 = 1)
 }
 \arguments{
-\item{y}{Observed univariate series.}
+\item{y}{See Usage.}
 
-\item{hazard}{Constant hazard of the geometric run-length prior.}
+\item{hazard}{See Usage.}
 
-\item{mu0}{Prior mean.}
+\item{mu0}{See Usage.}
 
-\item{kappa0}{Prior mean precision.}
+\item{kappa0}{See Usage.}
 
-\item{alpha0}{Prior shape.}
+\item{alpha0}{See Usage.}
 
-\item{beta0}{Prior scale.}
+\item{beta0}{See Usage.}
 }
 \value{
 List with the payload of :func:\code{morie.fn.bocpd.bocpd}.

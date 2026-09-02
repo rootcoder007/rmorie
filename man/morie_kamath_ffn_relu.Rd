@@ -5,7 +5,7 @@
 \alias{morie_kamath_ffn_relu}
 \title{morie_kamath_ffn_relu}
 \usage{
-morie_kamath_ffn_relu(z, W_1, W_2, b_1, b_2)
+morie_kamath_ffn_relu(z, W_1, W_2, b_1, b_2) 
 }
 \arguments{
 \item{z}{Input rows.}

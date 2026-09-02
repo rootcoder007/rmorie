@@ -16,6 +16,7 @@ FDiverg(p, q, f = "kl", f_inf = NULL, normalise = TRUE)
 q is zero; defaults to the exact value for a named generator}
 
 \item{normalise}{divide p and q by their totals first}
+
 }
 \value{
 list(divergence, estimate, terms, support, generator, f_inf, n)

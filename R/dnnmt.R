@@ -17,13 +17,13 @@
 #' \[Pages 379-425\], pp.412-413, read from rendered page images because the text
 #' layer of this chapter drops minus signs:
 #'
-#'   Step 4  z_ik^(h) = sum_{p=0}^{P} w_kp^(h) x_ip
+#'   Step 4  z_ik^(h) = sum_\{p=0\}^\{P\} w_kp^(h) x_ip
 #'   Step 5  V_ik^(h) = g^(h)(z_ik^(h))
-#'   Step 6  z_ij^(l) = sum_{k=0}^{M} w_jk^(l) V_ik^(h)
+#'   Step 6  z_ij^(l) = sum_\{k=0\}^\{M\} w_jk^(l) V_ik^(h)
 #'   Step 7  yhat_ij  = g^(l)(z_ij^(l))
 #'   Step 8  E(w) = (1/(2 n L)) sum_i sum_j (yhat_ij - y_ij)^2
 #'   Step 9  delta_ij = (y_ij - yhat_ij) g^(l)-prime(z_ij^(l))
-#'   Step 10 psi_ik   = g^(h)-prime(z_ik^(h)) sum_{j=1}^{L} delta_ij w_jk^(l)
+#'   Step 10 psi_ik   = g^(h)-prime(z_ik^(h)) sum_\{j=1\}^\{L\} delta_ij w_jk^(l)
 #'   Step 11 w_jk^(l) <- w_jk^(l) + eta delta_ij V_ik^(h)
 #'   Step 12 w_kp^(h) <- w_kp^(h) + eta psi_ik x_ip
 #'

@@ -5,7 +5,7 @@
 \alias{morie_chemsc_lipophilic}
 \title{One lipophilic atom pair's contribution, at most one}
 \usage{
-morie_chemsc_lipophilic(r, smoothing = "gaussian", par = NULL)
+morie_chemsc_lipophilic(r, smoothing = "gaussian", par = NULL) 
 }
 \arguments{
 \item{r}{The distance between the pair.}

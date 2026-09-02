@@ -21,7 +21,7 @@ list: estimate, se, ci_lower, ci_upper, pi_lower, pi_upper,
 pi_spread, t, df, p_value, tau2, n, method.
 }
 \description{
-CI = mu +/- t_{k-1} se_HKSJ and PI = mu +/- t_{k-1} sqrt(tau^2 + se^2).
+CI = mu +/- t_\{k-1\} se_HKSJ and PI = mu +/- t_\{k-1\} sqrt(tau^2 + se^2).
 Source consulted: IntHout, Ioannidis and Borm (2014), BMC Medical Research
 Methodology 14:25.  Verified against metafor::rma(test = "knha") and its
 predict() prediction interval.

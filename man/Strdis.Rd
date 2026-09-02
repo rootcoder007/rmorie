@@ -13,6 +13,7 @@ structural_distance(G1, G2, eps = NULL)
 \item{G1, G2}{Adjacency matrices on the same node set.}
 
 \item{eps}{Optional override of the influence constant.}
+
 }
 \value{
 List with distance, similarity, estimate, eps, n.

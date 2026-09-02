@@ -12,6 +12,7 @@ morie_geron_hf_trainer(model, args = list(), train_ds, eval_ds = NULL)
 \item{args}{List with epochs, batch_size, learning_rate, seed.}
 
 \item{train_ds, eval_ds}{List(X, y).}
+
 }
 \value{
 List with params, best_params, train_loss, eval_loss, history, best_epoch, estimate, n, method.

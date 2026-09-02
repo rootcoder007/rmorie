@@ -26,6 +26,7 @@ morie_glm_nb(
 \item{control}{A \code{stats::glm.control} object.}
 
 \item{...}{Passed to \code{glm.control}.}
+
 }
 \value{
 A \code{glm}/\code{negbin} object with \code{$theta}.

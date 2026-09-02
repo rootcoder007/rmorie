@@ -5,7 +5,11 @@
 \alias{morie_abcgp}
 \title{ABC with a Gaussian-process surrogate}
 \usage{
-morie_abcgp(sim, obs, X_grid = NULL, kernel = "sqexp", method = "wilkinson", prior_ppf = NULL, log_prior = NULL, theta0 = NULL, n_sim = 50, epsilon = 1, summary = NULL, n_waves = 3, n_design = 32, threshold = 10, n_sd = 3, accept_kernel = "gaussian", n_iter = 200, proposal_sd = 0.5, xi = 0.05, delta_s = 10, n_alpha = 64, seed = 0)
+morie_abcgp(sim, obs, X_grid = NULL, kernel = "sqexp", method = "wilkinson", 
+    prior_ppf = NULL, log_prior = NULL, theta0 = NULL, n_sim = 50, epsilon = 1, 
+    summary = NULL, n_waves = 3, n_design = 32, threshold = 10, n_sd = 3, 
+    accept_kernel = "gaussian", n_iter = 200, proposal_sd = 0.5, xi = 0.05, 
+    delta_s = 10, n_alpha = 64, seed = 0) 
 }
 \arguments{
 \item{sim}{Simulator \code{function(theta, e)} where \code{e} is the   shared generator environment.}

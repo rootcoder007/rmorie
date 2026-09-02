@@ -39,6 +39,8 @@ morie_fauzi_assumptions_b1_b5(
 \item{tol}{Tolerance for the B1 symmetry and unit-mass checks.}
 
 \item{lo, hi, ngrid}{Fixed quadrature window and node count.}
+
+
 }
 \value{
 Named list with \code{b1}, \code{b2}, \code{b3}, \code{b4}, \code{b5}, \code{mu4}, \code{mass}, \code{method}.

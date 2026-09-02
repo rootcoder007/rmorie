@@ -5,7 +5,7 @@
 \alias{phase1}
 \title{Phase I}
 \usage{
-phase1(cons, x0, aeq = NULL, beq = NULL, max_outer = 60L, ...)
+phase1(cons, x0, aeq = NULL, beq = NULL, max_outer = 60L, ...) 
 }
 \arguments{
 \item{cons}{List of constraints.}

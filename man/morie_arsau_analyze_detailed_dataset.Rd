@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_detailed_dataset}
 \alias{morie_arsau_analyze_detailed_dataset}
-\title{Wide-format analysis of the 2020-2022 detailed-incident dataset.}
+\title{Wide-format analysis of the 2020-2022 detailed-incident dataset}
 \usage{
 morie_arsau_analyze_detailed_dataset(
   year_range = "2020-2022",

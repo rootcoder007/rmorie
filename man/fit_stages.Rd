@@ -5,7 +5,7 @@
 \alias{fit_stages}
 \title{Backward induction across K stages, using every subject}
 \usage{
-fit_stages(stages, propensity = NULL, ridge = 1e-06)
+fit_stages(stages, propensity = NULL, ridge = 1e-06) 
 }
 \arguments{
 \item{stages}{A list of \code{(R, A, H)} triples, one per stage   in chronological order.}

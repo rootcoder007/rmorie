@@ -5,7 +5,7 @@
 \alias{Pchisq}
 \title{Pchisq}
 \usage{
-Pchisq(q, df, lower_tail = TRUE)
+Pchisq(q, df, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Passed to \code{Pgamma}.}

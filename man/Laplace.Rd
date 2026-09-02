@@ -5,7 +5,7 @@
 \alias{Laplace}
 \title{Eq (3.50), by the trapezoidal rule over the samples supplied.  What}
 \usage{
-Laplace(h, t, s)
+Laplace(h, t, s) 
 }
 \arguments{
 \item{h}{Coerced to numeric by the body, with \code{as.numeric}.}

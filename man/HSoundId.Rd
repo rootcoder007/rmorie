@@ -5,7 +5,7 @@
 \alias{HSoundId}
 \title{Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus}
 \usage{
-HSoundId(ecg, cp, fs)
+HSoundId(ecg, cp, fs) 
 }
 \arguments{
 \item{ecg}{A vector; its length is taken.}

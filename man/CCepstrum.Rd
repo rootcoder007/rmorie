@@ -5,7 +5,7 @@
 \alias{CCepstrum}
 \title{Eqs (4.63)-(4.64): the inverse transform of log|X| + j angle(X)}
 \usage{
-CCepstrum(x)
+CCepstrum(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

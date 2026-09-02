@@ -10,7 +10,7 @@
 #' be told apart from correct work.
 #'
 #' Formula: see \code{Kalmf}; predict x_pred = F x, P_pred = F P F' + Q,
-#'   then update with gain K = P_pred H' (H P_pred H' + R)^{-1}.
+#'   then update with gain K = P_pred H' (H P_pred H' + R)^\{-1\}.
 #'
 #' @param y Observation matrix, one row per time point.
 #' @param model Named list with F, H, Q, R and optionally x0, P0.

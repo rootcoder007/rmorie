@@ -5,7 +5,7 @@
 \alias{morie_momento_task_mask}
 \title{Construct a task-appropriate mask}
 \usage{
-morie_momento_task_mask(n_patches, task = "forecast", span = 1, start = NULL)
+morie_momento_task_mask(n_patches, task = "forecast", span = 1, start = NULL) 
 }
 \arguments{
 \item{n_patches}{Number of patches.}

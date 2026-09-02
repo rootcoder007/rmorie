@@ -5,7 +5,7 @@
 \alias{MEcgFilt}
 \title{Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of}
 \usage{
-MEcgFilt(abd, thor, order = 16, mu = 0.01)
+MEcgFilt(abd, thor, order = 16, mu = 0.01) 
 }
 \arguments{
 \item{abd}{A vector; its length is taken and its elements indexed.}

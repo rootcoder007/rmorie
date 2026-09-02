@@ -5,7 +5,7 @@
 \alias{morie_baytsm_dlm_local_level}
 \title{morie_baytsm_dlm_local_level}
 \usage{
-morie_baytsm_dlm_local_level(y, V = 1, W = 0.1, m0 = 0, C0 = 1e+06)
+morie_baytsm_dlm_local_level(y, V = 1, W = 0.1, m0 = 0, C0 = 1e+06) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -3,9 +3,9 @@
 \name{time_series_advanced_helpers}
 \alias{time_series_advanced_helpers}
 \title{Internal helpers shared across the time-series-advanced suite.
-Not exported; consumed by garch/midas/etc callables only.}
+Not exported; consumed by garch/midas/etc callables only}
 \description{
 Internal helpers shared across the time-series-advanced suite.
-Not exported; consumed by garch/midas/etc callables only.
+Not exported; consumed by garch/midas/etc callables only
 }
 \keyword{internal}

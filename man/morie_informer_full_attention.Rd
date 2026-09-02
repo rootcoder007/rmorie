@@ -5,7 +5,7 @@
 \alias{morie_informer_full_attention}
 \title{morie_informer_full_attention}
 \usage{
-morie_informer_full_attention(Q, K, V, scale = NULL)
+morie_informer_full_attention(Q, K, V, scale = NULL) 
 }
 \arguments{
 \item{Q}{Passed to \code{.informer_to_rows}.}

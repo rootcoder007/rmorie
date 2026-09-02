@@ -5,10 +5,17 @@
 \alias{Ostatpdf}
 \title{PDF of the r-th order statistic -- Theorem 2.4.2, eq. (2.4.2), p. 37}
 \usage{
-Ostatpdf(x, r, n, cdf, pdf)
+Ostatpdf(x, r, n, cdf, pdf) 
 }
 \description{
 PDF of the r-th order statistic -- Theorem 2.4.2, eq. (2.4.2), p. 37
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{r}{Argument \code{r}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{cdf}{Argument \code{cdf}; see Usage.}
+\item{pdf}{Argument \code{pdf}; see Usage.}
 }
 \value{
 A list with \code{pdf}, \code{coef}, \code{fx}, \code{dx}, \code{r}, \code{n}.

@@ -26,7 +26,10 @@
 # with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 # 477-491, doi:10.1002/pds.1064.
 
-#' The blipped-down (untreated) time U(psi) = int_0^T exp(psi A(u)) du.
+#' The blipped-down (untreated) time U(psi) = int_0^T exp(psi A(u)) du
+#' @param time See Usage.
+#' @param treat_times See Usage.
+#' @param psi See Usage.
 #' @export
 morie_snmcox_blip_down <- function(time, treat_times, psi) {
   T <- as.numeric(time)
@@ -106,7 +109,15 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
   beta
 }
 
-#' The g-estimation score S(psi) and its standardisation.
+#' The g-estimation score S(psi) and its standardisation
+#' @param psi See Usage.
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param A See Usage.
+#' @param L See Usage.
+#' @param treat_times See Usage.
+#' @param censor_time See Usage.
+#' @param ridge See Usage.
 #' @export
 morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
                                     censor_time = NULL, ridge = 1e-8) {
@@ -148,8 +159,19 @@ morie_snmcox_gest_score <- function(psi, time, event, A, L, treat_times,
        U = U, e = ehat)
 }
 
-#' G-estimate psi in the structural nested failure time model.
+#' G-estimate psi in the structural nested failure time model
 #'
+#' @param time See Usage.
+#' @param event See Usage.
+#' @param treatment_history See Usage.
+#' @param covariate_history See Usage.
+#' @param treat_times See Usage.
+#' @param censor_time See Usage.
+#' @param level See Usage.
+#' @param psi_range See Usage.
+#' @param n_grid See Usage.
+#' @param tol See Usage.
+#' @param ridge See Usage.
 #' @references
 #' Robins, J. M. (1992) Biometrika 79(2), 321-334,
 #' doi:10.1093/biomet/79.2.321.

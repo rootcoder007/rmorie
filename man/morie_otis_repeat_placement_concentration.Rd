@@ -14,6 +14,7 @@ morie_otis_repeat_placement_concentration(
 \item{df}{b09 long-form data.frame.}
 
 \item{band_col, count_col}{Column names.}
+
 }
 \value{
 \code{morie_otis_result}.
@@ -21,7 +22,7 @@ morie_otis_repeat_placement_concentration(
 \description{
 Expands the OTIS b09 banded counts into a per-individual placement-
 count vector, then reports the Gini coefficient, Hill-MLE power-law
-alpha, top-10\\% share, and a Kolmogorov-Smirnov test against an
+alpha, top-10\% share, and a Kolmogorov-Smirnov test against an
 exponential null. Reuses the \code{.gini_int} / \code{.hill_mle}
 helpers from \code{mrm_otis.R}.
 }

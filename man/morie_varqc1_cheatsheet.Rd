@@ -5,7 +5,7 @@
 \alias{morie_varqc1_cheatsheet}
 \title{One-line summary of the varqc1 module}
 \usage{
-morie_varqc1_cheatsheet()
+morie_varqc1_cheatsheet() 
 }
 \description{
 One-line summary of the varqc1 module

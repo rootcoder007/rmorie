@@ -5,7 +5,7 @@
 \alias{morie_twoT_corrected_logits}
 \title{morie_twoT_corrected_logits}
 \usage{
-morie_twoT_corrected_logits(scores, probabilities, temperature = 1)
+morie_twoT_corrected_logits(scores, probabilities, temperature = 1) 
 }
 \arguments{
 \item{scores}{Passed to \code{.twoT_as_vec}.}

@@ -5,7 +5,7 @@
 \alias{CCepClosed}
 \title{CCepClosed}
 \usage{
-CCepClosed(gain, zeros_in, zeros_out, poles_in, poles_out, nmax = 32)
+CCepClosed(gain, zeros_in, zeros_out, poles_in, poles_out, nmax = 32) 
 }
 \arguments{
 \item{gain}{Coerced to complex by the body, with \code{as.complex}.}

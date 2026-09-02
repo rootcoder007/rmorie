@@ -5,7 +5,7 @@
 \alias{morie_ragRet_marginalise}
 \title{morie_ragRet_marginalise}
 \usage{
-morie_ragRet_marginalise(doc.scores, token.probs, mode = "sequence")
+morie_ragRet_marginalise(doc.scores, token.probs, mode = "sequence") 
 }
 \arguments{
 \item{doc.scores}{Coerced to numeric by the body, with \code{as.numeric}.}

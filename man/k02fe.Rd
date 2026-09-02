@@ -5,7 +5,7 @@
 \alias{k02fe}
 \title{k02fe}
 \usage{
-k02fe(y, v)
+k02fe(y, v) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

@@ -5,7 +5,7 @@
 \alias{morie_wrd2v_noise_distribution}
 \title{Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2}
 \usage{
-morie_wrd2v_noise_distribution(counts, power = 0.75)
+morie_wrd2v_noise_distribution(counts, power = 0.75) 
 }
 \arguments{
 \item{counts}{A vector; indexed elementwise.}

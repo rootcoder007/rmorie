@@ -5,7 +5,7 @@
 \alias{PcgAr}
 \title{Chapter 7: the poles of an all-pole PCG model track the resonances}
 \usage{
-PcgAr(x, fs, order = NULL, segment = NULL)
+PcgAr(x, fs, order = NULL, segment = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

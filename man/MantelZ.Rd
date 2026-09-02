@@ -5,7 +5,7 @@
 \alias{MantelZ}
 \title{Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states}
 \usage{
-MantelZ(coords, x, w, u = NULL)
+MantelZ(coords, x, w, u = NULL) 
 }
 \arguments{
 \item{coords}{Accepted by the signature and not used anywhere in the body.}

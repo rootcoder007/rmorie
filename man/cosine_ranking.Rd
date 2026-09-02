@@ -5,7 +5,7 @@
 \alias{cosine_ranking}
 \title{cosine_ranking}
 \usage{
-cosine_ranking(q_hat, model, top_k = 5)
+cosine_ranking(q_hat, model, top_k = 5) 
 }
 \arguments{
 \item{q_hat}{A vector; indexed elementwise.}

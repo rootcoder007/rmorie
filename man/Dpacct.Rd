@@ -2,20 +2,20 @@
 % Please edit documentation in R/momacc.R
 \name{Dpacct}
 \alias{Dpacct}
-\title{Moments accountant for DP-SGD.}
+\title{Moments accountant for DP-SGD}
 \usage{
 Dpacct(sigma, sample_rate, steps, delta = 1e-05, max_order = 64)
 }
 \arguments{
-\item{sigma}{Noise multiplier (noise sd over clipping norm).}
+\item{sigma}{See Usage.}
 
-\item{sample_rate}{Lot sampling probability q in (0, 1).}
+\item{sample_rate}{See Usage.}
 
-\item{steps}{Number of SGD steps composed.}
+\item{steps}{See Usage.}
 
-\item{delta}{Target delta.}
+\item{delta}{See Usage.}
 
-\item{max_order}{Largest integer moment order searched.}
+\item{max_order}{See Usage.}
 }
 \value{
 List with \code{epsilon}, \code{order}, \code{logmgf}, \code{delta}, \code{sigma}, \code{sample_rate}, \code{steps}.

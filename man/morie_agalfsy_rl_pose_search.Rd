@@ -5,7 +5,9 @@
 \alias{morie_agalfsy_rl_pose_search}
 \title{morie_agalfsy_rl_pose_search}
 \usage{
-morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, critic = NULL, max_steps = 600L, min_steps = 300L, window = 50L, tol = 0.3, box = 18, seed = 2)
+morie_agalfsy_rl_pose_search(receptor, ligand, site = NULL, policy = NULL, critic = NULL, 
+    max_steps = 600L, min_steps = 300L, window = 50L, tol = 0.3, box = 18, 
+    seed = 2) 
 }
 \arguments{
 \item{receptor}{Passed to \code{.agalfsy_coords}.}

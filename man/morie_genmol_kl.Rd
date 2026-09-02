@@ -5,7 +5,7 @@
 \alias{morie_genmol_kl}
 \title{The Gaussian KL to a standard normal, in closed form}
 \usage{
-morie_genmol_kl(mu, logvar)
+morie_genmol_kl(mu, logvar) 
 }
 \arguments{
 \item{mu}{The posterior means.}

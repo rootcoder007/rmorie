@@ -5,7 +5,7 @@
 \alias{morie_glides_hbond}
 \title{Hydrogen bonds summed within their three charge classes}
 \usage{
-morie_glides_hbond(bonds, weights = NULL)
+morie_glides_hbond(bonds, weights = NULL) 
 }
 \arguments{
 \item{bonds}{A list of list(class, strength).}

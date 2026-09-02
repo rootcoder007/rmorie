@@ -10,6 +10,8 @@
 #' @param z Normal critical value.
 #' @param interval_fn Function(w, n) returning c(lower, upper) for the
 #'   true-confidence-level sum; NULL skips it.
+#' @param n See Usage.
+#' @param p See Usage.
 #' @return List with pmf, var_mle, wilson (estimate/lower/upper), and
 #'   true_level when interval_fn is given.
 #' @export
@@ -82,6 +84,7 @@ morie_two_group_binomial <- function(w1, n1, w2, n2, z = 1.96) {
 #'
 #' @param x Design matrix (with intercept column). @param y 0/1 response.
 #' @param b Coefficients (fit by Newton-Raphson when NULL).
+#' @param y See Usage.
 #' @return List with beta, cov, loglik, deviance, pi.
 #' @export
 #' @examples
@@ -123,6 +126,10 @@ morie_logistic_fit <- function(x, y, b = NULL) {
 #' @param b1 Coefficient. @param var_b1 Its variance. @param c Unit change.
 #' @param z Critical value. @param xs Covariate vector (leading 1).
 #' @param cov Coefficient covariance. @param xb Linear predictor value.
+#' @param var_b1 See Usage.
+#' @param c See Usage.
+#' @param xs See Usage.
+#' @param xb See Usage.
 #' @return List with or, or_lower, or_upper, var_xb, pi, pi_lower, pi_upper.
 #' @export
 #' @examples
@@ -187,6 +194,9 @@ morie_multinomial_pmf <- function(counts, probs, product = FALSE) {
 #' @param cum_probs Cumulative probabilities excluding P(Y <= J) = 1.
 #' @param j Category index. @param polr If TRUE negate the slopes.
 #' @param pi_hat,var_pi,z Wald pieces.
+#' @param bjs See Usage.
+#' @param xs See Usage.
+#' @param polr See Usage.
 #' @return List with logit, probs, pi_j, wald (as supplied).
 #' @export
 #' @examples
@@ -230,6 +240,12 @@ morie_multicategory_logit <- function(bj0 = NA, bjs = NULL, xs = NULL,
 #' @param bxz Four interaction parameters c(ij, i'j', i'j, ij') for the
 #'   odds ratio of eq 4.7.
 #' @param beta_z_jp,beta_xz_i,s_j,s_jp Ordinal-score ratio pieces.
+#' @param b0 See Usage.
+#' @param bs See Usage.
+#' @param xs See Usage.
+#' @param beta_x_i See Usage.
+#' @param beta_z_j See Usage.
+#' @param beta_xz_ij See Usage.
 #' @return List with score_ci, mu, mu_rate, mu_cell, or_loglinear,
 #'   mean_ratio (as supplied).
 #' @export
@@ -274,6 +290,7 @@ morie_poisson_loglinear <- function(mu_hat = NA, n = NA, z = 1.96,
 #'
 #' @param bics BIC values. @param thetas Per-model estimates.
 #' @param variances Per-model variances.
+#' @param thetas See Usage.
 #' @return List with taus, theta_ma, var_ma.
 #' @export
 #' @examples
@@ -304,6 +321,13 @@ morie_bic_model_average <- function(bics, thetas = NULL,
 #' @param pi Apparent positive probability. @param se,sp Sensitivity and
 #'   specificity. @param i_size Group size I. @param pi_tilde True
 #'   prevalence. @param b0,bs,xs Group-testing logit pieces.
+#' @param se See Usage.
+#' @param sp See Usage.
+#' @param i_size See Usage.
+#' @param pi_tilde See Usage.
+#' @param b0 See Usage.
+#' @param bs See Usage.
+#' @param xs See Usage.
 #' @return List with prevalence, expected_tests, pi_group (as supplied).
 #' @export
 #' @examples
@@ -413,6 +437,9 @@ morie_survey_categorical <- function(weights = NULL, ys = NULL,
 #'
 #' @param b0 Intercept. @param beta_w_a,beta_y_b,beta_z_c MRCV effects.
 #' @param b1,x,random_intercept GLMM pieces.
+#' @param beta_w_a See Usage.
+#' @param beta_y_b See Usage.
+#' @param beta_z_c See Usage.
 #' @return List with mu_spmi, mu_three, eta_glmm (as supplied).
 #' @export
 #' @examples
@@ -479,6 +506,7 @@ morie_bayes_binomial <- function(p_a_given_b = NA, p_b = NA,
 #' @param coef_left,coef_right Cubic coefficients per side.
 #' @param betas,knots Truncated-power pieces (4 + D coefficients).
 #' @param a,b_pt Odds-ratio evaluation points.
+#' @param knot See Usage.
 #' @return List with piecewise, spline, spline_or (as supplied).
 #' @export
 #' @examples

@@ -5,7 +5,7 @@
 \alias{SpeechFeat}
 \title{SpeechFeat: speech formants and autocorrelation pitch}
 \usage{
-SpeechFeat(speech, fs, order = NULL, n_formants = 4, f0_range = c(60, 400))
+SpeechFeat(speech, fs, order = NULL, n_formants = 4, f0_range = c(60, 400)) 
 }
 \arguments{
 \item{speech}{Coerced to numeric by the body, with \code{as.numeric}.}

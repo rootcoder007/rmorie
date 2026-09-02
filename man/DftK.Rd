@@ -5,7 +5,7 @@
 \alias{DftK}
 \title{Eq (3.79): K need not equal N.  K > N samples the same DTFT more}
 \usage{
-DftK(x, k_points)
+DftK(x, k_points) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

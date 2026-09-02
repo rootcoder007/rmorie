@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Posterior predictive p-value comparing T(y, theta) to T(y_rep, theta).
+#' Posterior predictive p-value comparing T(y, theta) to T(y_rep, theta)
 #'
 #' The comparison is made WITHIN each draw, the same theta on both sides.
 #' BDA3 flags values below 0.01 or above 0.99 as major failures.

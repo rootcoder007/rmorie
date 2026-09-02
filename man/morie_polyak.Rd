@@ -5,7 +5,7 @@
 \alias{morie_polyak}
 \title{morie_polyak}
 \usage{
-morie_polyak(iterates, burn_in = 0)
+morie_polyak(iterates, burn_in = 0) 
 }
 \arguments{
 \item{iterates}{Iterated over elementwise, with \code{lapply}.}

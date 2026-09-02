@@ -5,7 +5,7 @@
 \alias{FdPsd}
 \title{Eqs (6.50)-(6.52): an fBm signal has PSD ~ 1/f^beta, and for a 1-D}
 \usage{
-FdPsd(psd, freqs, fmin = NULL, fmax = NULL)
+FdPsd(psd, freqs, fmin = NULL, fmax = NULL) 
 }
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}

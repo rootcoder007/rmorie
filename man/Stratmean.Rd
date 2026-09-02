@@ -2,7 +2,7 @@
 % Please edit documentation in R/stratm.R
 \name{Stratmean}
 \alias{Stratmean}
-\title{Stratified estimate of the population mean, with its variance.}
+\title{Stratified estimate of the population mean, with its variance}
 \usage{
 Stratmean(y, h, Nh, level = 0.95)
 }

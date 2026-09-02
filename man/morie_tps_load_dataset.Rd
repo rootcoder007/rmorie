@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_datasets.R
 \name{morie_tps_load_dataset}
 \alias{morie_tps_load_dataset}
-\title{Load one TPS dataset by category name (CSV thin path).}
+\title{Load one TPS dataset by category name (CSV thin path)}
 \usage{
 morie_tps_load_dataset(name, path = NULL, csv_filename = NULL, nrows = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{morie_cypin_predict}
 \title{The inhibition probability of one descriptor row}
 \usage{
-morie_cypin_predict(x, coefficients)
+morie_cypin_predict(x, coefficients) 
 }
 \arguments{
 \item{x}{A descriptor row.}

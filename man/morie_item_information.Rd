@@ -5,10 +5,16 @@
 \alias{morie_item_information}
 \title{morie_item_information}
 \usage{
-morie_item_information(theta, a = 1, b = 0, c = 0)
+morie_item_information(theta, a = 1, b = 0, c = 0) 
 }
 \description{
 morie_item_information
+}
+\arguments{
+\item{theta}{Argument \code{theta}; see Usage.}
+\item{a}{Argument \code{a}; see Usage.}
+\item{b}{Argument \code{b}; see Usage.}
+\item{c}{Argument \code{c}; see Usage.}
 }
 \value{
 A list with \code{info}, \code{p}, \code{dp}, \code{theta}, \code{a}, \code{b}, \code{c}, \code{n}, \code{total}, \code{method}.

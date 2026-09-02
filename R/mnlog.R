@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Penalized log-likelihood of the multinomial logistic model.
+#' Penalized log-likelihood of the multinomial logistic model
 #'
 #' Formula: l_p = l(beta; y) - lambda sum_c beta_c'beta_c (ridge)  or  - lambda sum_c sum_j |beta_cj| (lasso)
 #'

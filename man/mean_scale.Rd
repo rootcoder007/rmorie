@@ -5,7 +5,7 @@
 \alias{mean_scale}
 \title{mean_scale}
 \usage{
-mean_scale(x, context = NULL)
+mean_scale(x, context = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.chronos_vec}.}

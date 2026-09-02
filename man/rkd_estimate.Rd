@@ -5,7 +5,8 @@
 \alias{rkd_estimate}
 \title{rkd_estimate}
 \usage{
-rkd_estimate(V, Y, kink, bandwidth, order = 2L, kernel = "triangular", policy_slope_change = NULL, B = NULL, fuzzy = FALSE)
+rkd_estimate(V, Y, kink, bandwidth, order = 2L, kernel = "triangular", policy_slope_change = NULL, 
+    B = NULL, fuzzy = FALSE) 
 }
 \arguments{
 \item{V}{Coerced to numeric by the body, with \code{as.numeric}.}

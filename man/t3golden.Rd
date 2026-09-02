@@ -5,7 +5,7 @@
 \alias{t3golden}
 \title{t3golden}
 \usage{
-t3golden(f, lo, hi, iters = 80L)
+t3golden(f, lo, hi, iters = 80L) 
 }
 \arguments{
 \item{f}{Accepted by the signature and not used anywhere in the body.}

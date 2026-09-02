@@ -5,7 +5,8 @@
 \alias{morie_score_distribution}
 \title{morie_score_distribution}
 \usage{
-morie_score_distribution(match = 5, mismatch = -4, letter_probs = NULL, matrix = NULL, subject_probs = NULL)
+morie_score_distribution(match = 5, mismatch = -4, letter_probs = NULL, matrix = NULL, 
+    subject_probs = NULL) 
 }
 \arguments{
 \item{match}{Defaults to \code{5}.}

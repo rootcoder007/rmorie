@@ -2,7 +2,7 @@
 % Please edit documentation in R/mtlmm.R
 \name{Mtlmmfit}
 \alias{Mtlmmfit}
-\title{Multi-trait linear mixed model.}
+\title{Multi-trait linear mixed model}
 \usage{
 Mtlmmfit(Y, Z, G, Sigma_T, R_T, X = NULL)
 }

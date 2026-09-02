@@ -5,7 +5,7 @@
 \alias{morie_geron_reinforce}
 \title{REINFORCE ascent step: gradient from morie_geron_policy_gradient, applied to theta (Geron Ch 19, hmrnfc)}
 \usage{
-morie_geron_reinforce(episodes, policy, gamma = 0.99, eta = 0.01, theta = NULL, baseline = TRUE)
+morie_geron_reinforce(episodes, policy, gamma = 0.99, eta = 0.01, theta = NULL, baseline = TRUE) 
 }
 \arguments{
 \item{episodes}{List of episodes.}

@@ -24,6 +24,8 @@ Gpmlt(
 \item{task_cov}{Inter-task covariance; the identity by default.}
 
 \item{lengthscale, variance, noise}{GP hyperparameters.}
+
+
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{loglik},
@@ -38,7 +40,7 @@ tests check that collapse exactly, because it is the only way to be
 sure the Kronecker indexing is the right way round.
 }
 \details{
-Formula: cov(f_l(x), f_m(x')) = K^f_{lm} k^x(x, x').
+Formula: cov(f_l(x), f_m(x')) = K^f_\{lm\} k^x(x, x').
 }
 \examples{
 Gpmlt(X = 5L, y_tasks = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -5,7 +5,7 @@
 \alias{lemma4_bound}
 \title{lemma4_bound}
 \usage{
-lemma4_bound(counts, gamma)
+lemma4_bound(counts, gamma) 
 }
 \arguments{
 \item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}

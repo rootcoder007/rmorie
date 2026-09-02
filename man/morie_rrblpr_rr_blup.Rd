@@ -5,7 +5,8 @@
 \alias{morie_rrblpr_rr_blup}
 \title{morie_rrblpr_rr_blup}
 \usage{
-morie_rrblpr_rr_blup(y, M, lam = NULL, X = NULL, M_new = NULL, log_lam_lo = -12, log_lam_hi = 12, max_iter = 200L, tol = 1e-09)
+morie_rrblpr_rr_blup(y, M, lam = NULL, X = NULL, M_new = NULL, log_lam_lo = -12, log_lam_hi = 12, 
+    max_iter = 200L, tol = 1e-09) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_pmpfit_check}
 \title{Check Pitman-Yor parameters}
 \usage{
-morie_pmpfit_check(alpha, theta)
+morie_pmpfit_check(alpha, theta) 
 }
 \arguments{
 \item{alpha}{Discount.}

@@ -5,7 +5,7 @@
 \alias{morie_fda_basis}
 \title{Functional basis matrix (MVSML eq. 14.5)}
 \usage{
-morie_fda_basis(t, n_basis, kind = "fourier", period = NULL)
+morie_fda_basis(t, n_basis, kind = "fourier", period = NULL) 
 }
 \arguments{
 \item{t}{numeric grid of observation points}

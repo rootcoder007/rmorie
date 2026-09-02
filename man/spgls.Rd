@@ -2,7 +2,7 @@
 % Please edit documentation in R/spgls.R
 \name{spgls}
 \alias{spgls}
-\title{Generalised least squares with a known covariance matrix.}
+\title{Generalised least squares with a known covariance matrix}
 \usage{
 spgls(x, y, sigma = NULL)
 }

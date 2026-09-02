@@ -5,7 +5,7 @@
 \alias{morie_secaead_cheatsheet}
 \title{morie_secaead_cheatsheet}
 \usage{
-morie_secaead_cheatsheet()
+morie_secaead_cheatsheet() 
 }
 \description{
 A step of the secaead_native implementation. No other function in the package calls it. See the file header for the source the module follows.

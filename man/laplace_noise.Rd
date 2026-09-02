@@ -5,7 +5,7 @@
 \alias{laplace_noise}
 \title{One draw from Lap(0, b) by inverse transform}
 \usage{
-laplace_noise(scale, e)
+laplace_noise(scale, e) 
 }
 \arguments{
 \item{scale}{Noise scale b.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/cluster.R
 \name{Clus1}
 \alias{Clus1}
-\title{One-stage cluster sample: every element of each sampled cluster.}
+\title{One-stage cluster sample: every element of each sampled cluster}
 \usage{
 Clus1(Y, M = Inf, level = 0.95)
 }

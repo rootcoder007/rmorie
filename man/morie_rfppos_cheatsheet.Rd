@@ -5,7 +5,7 @@
 \alias{morie_rfppos_cheatsheet}
 \title{One-line summary of the rfppos module}
 \usage{
-morie_rfppos_cheatsheet()
+morie_rfppos_cheatsheet() 
 }
 \description{
 One-line summary of the rfppos module

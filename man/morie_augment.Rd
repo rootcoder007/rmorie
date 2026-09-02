@@ -5,7 +5,7 @@
 \alias{morie_augment}
 \title{morie_augment}
 \usage{
-morie_augment(g)
+morie_augment(g) 
 }
 \arguments{
 \item{g}{Passed to \code{.prsLR_augment}.}

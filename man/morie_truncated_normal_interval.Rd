@@ -5,7 +5,7 @@
 \alias{morie_truncated_normal_interval}
 \title{morie_truncated_normal_interval}
 \usage{
-morie_truncated_normal_interval(x, level = 0.95, lower_bound = 0)
+morie_truncated_normal_interval(x, level = 0.95, lower_bound = 0) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

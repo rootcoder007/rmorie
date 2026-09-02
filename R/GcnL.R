@@ -5,7 +5,7 @@
 #' propagation operator inside \[-1, 1\], which is what stops repeated
 #' application from exploding.
 #'
-#' Formula: H' = relu(Dt^{-1/2} (A + I) Dt^{-1/2} X W),
+#' Formula: H' = relu(Dt^\{-1/2\} (A + I) Dt^\{-1/2\} X W),
 #'   Dt = diag(rowSums(A + I)).
 #'
 #' @param A Square adjacency matrix.

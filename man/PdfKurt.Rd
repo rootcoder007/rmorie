@@ -5,7 +5,7 @@
 \alias{PdfKurt}
 \title{Eq (3.5): K = (1/sigma^4) integral (eta - mu)^4 p(eta) d eta.  The}
 \usage{
-PdfKurt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+PdfKurt(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

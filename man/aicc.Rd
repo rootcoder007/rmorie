@@ -5,7 +5,7 @@
 \alias{aicc}
 \title{aicc}
 \usage{
-aicc(loglik, n_par, n)
+aicc(loglik, n_par, n) 
 }
 \arguments{
 \item{loglik}{Passed to \code{aic}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{ARSAU_REGISTRY}
 \alias{ARSAU_REGISTRY}
-\title{Return the ARSAU registry as a list of entries.}
+\title{Return the ARSAU registry as a list of entries}
 \usage{
 ARSAU_REGISTRY()
 }

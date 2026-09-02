@@ -10,6 +10,7 @@ morie_bspline_basis(x, n_basis = 15L, degree = 3L)
 \item{x}{Evaluation points.}
 
 \item{n_basis, degree}{Basis size and spline degree.}
+
 }
 \value{
 A matrix with one column per basis function.

@@ -26,6 +26,16 @@ morie_geron_ddpg(
 \item{actor, critic}{Initial weights.}
 
 \item{epochs, lr, gamma, tau, ou_theta, ou_sigma, seed, s0, actor_target, critic_target}{Config.}
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with \code{actor}, \code{critic}, \code{actor_target}, \code{critic_target},

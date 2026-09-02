@@ -5,7 +5,9 @@
 \alias{morie_chemsc}
 \title{Score a pose from coordinates and atom roles}
 \usage{
-morie_chemsc(receptor, ligand, smoothing = "gaussian", dg0 = 0, clash_slope = 1, intra_coefficient = 1, rotatable = list(), torsions = list(), coefficients = NULL, par = NULL)
+morie_chemsc(receptor, ligand, smoothing = "gaussian", dg0 = 0, clash_slope = 1, 
+    intra_coefficient = 1, rotatable = list(), torsions = list(), coefficients = NULL, 
+    par = NULL) 
 }
 \arguments{
 \item{receptor}{A list of atom rows: x, y, z, role, then the   coordinates of the attached atom the geometry needs -- the donor's   hydrogen for a donor, the acceptor's attached heavy atom for an   acceptor. Roles are "donor", "acceptor", "metal", "lipophilic",   "sulphur" and "other". Rows whose partner coordinates are absent   contribute no directional term.}

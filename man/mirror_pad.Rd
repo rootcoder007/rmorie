@@ -5,7 +5,7 @@
 \alias{mirror_pad}
 \title{mirror_pad}
 \usage{
-mirror_pad(image, pad)
+mirror_pad(image, pad) 
 }
 \arguments{
 \item{image}{Passed to \code{.unetbk_as_matrix}.}

@@ -16,7 +16,7 @@
 #' minimiser and its two neighbours.  No optimiser, no random restarts.
 #'
 #' The parabolic step is the three-point vertex
-#' delta = 0.5 (c_{-1} - c_{+1}) / (c_{-1} - 2 c_0 + c_{+1}).  It is zero only
+#' delta = 0.5 (c_\{-1\} - c_\{+1\}) / (c_\{-1\} - 2 c_0 + c_\{+1\}).  It is zero only
 #' when the criterion happens to be symmetric about the integer minimiser,
 #' which a real signal will not be, so the refined estimate generally differs
 #' from the integer lag by a fraction of a sample even when the two curves are
@@ -29,7 +29,7 @@
 #' @param max_lag largest lag searched; defaults to floor(n / 2).
 #' The reported shift is the delta such that y2(t + delta) best matches
 #' y1(t).  It is NEGATIVE when y2 leads y1 and positive when y2 lags it --
-#' the sign follows from the criterion being evaluated as y1[i] - y2\[i+delta\].
+#' the sign follows from the criterion being evaluated as y1\[i\] - y2\[i+delta\].
 #'
 #' @return list: estimate, shift, refinement, criterion, profile, lags, n,
 #'   method.

@@ -3,7 +3,7 @@
 \name{stacv}
 \alias{stacv}
 \alias{morie_spatiotemporal_autocovariance}
-\title{Empirical spatiotemporal autocovariance.}
+\title{Empirical spatiotemporal autocovariance}
 \usage{
 stacv(
   x,
@@ -35,6 +35,8 @@ morie_spatiotemporal_autocovariance(
 \item{n_spatial_bins, n_temporal_bins}{Integer bin counts.}
 
 \item{max_spatial, max_temporal}{Upper cutoffs (default: max/2).}
+
+
 }
 \value{
 Named list: estimate (C, spatial_bins, temporal_bins, counts),

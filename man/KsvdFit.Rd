@@ -5,7 +5,7 @@
 \alias{KsvdFit}
 \title{KsvdFit}
 \usage{
-KsvdFit(Y, natoms, sparsity, maxiter = 15, tol = 1e-10, seed = 1)
+KsvdFit(Y, natoms, sparsity, maxiter = 15, tol = 1e-10, seed = 1) 
 }
 \arguments{
 \item{Y}{Passed to \code{.morie_bx_mat}.}

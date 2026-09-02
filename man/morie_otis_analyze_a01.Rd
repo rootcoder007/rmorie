@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_a01}
 \alias{morie_otis_analyze_a01}
-\title{OTIS a01 high-level causal analysis (MatchIt + IRM-DML).}
+\title{OTIS a01 high-level causal analysis (MatchIt + IRM-DML)}
 \usage{
 morie_otis_analyze_a01(data = NULL, out_dir = NULL)
 }

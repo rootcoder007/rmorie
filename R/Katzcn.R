@@ -4,7 +4,7 @@
 #' The scaled resolvent form: beta = 1 recovers the plain Katz index and
 #' beta rescales every score linearly.
 #'
-#' Formula: C_K = (I - alpha A)^{-1} beta 1.
+#' Formula: C_K = (I - alpha A)^\{-1\} beta 1.
 #'
 #' @param G Square adjacency matrix of the graph.
 #' @param alpha Positive attenuation factor.

@@ -5,7 +5,7 @@
 \alias{is_coherent}
 \title{is_coherent}
 \usage{
-is_coherent(y, S, tol = 1e-09)
+is_coherent(y, S, tol = 1e-09) 
 }
 \arguments{
 \item{y}{A vector; indexed elementwise.}

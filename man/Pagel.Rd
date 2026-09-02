@@ -5,10 +5,14 @@
 \alias{Pagel}
 \title{Page\'s L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449}
 \usage{
-Pagel(data, weights = NULL)
+Pagel(data, weights = NULL) 
 }
 \description{
 Page\'s L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449
+}
+\arguments{
+\item{data}{Argument \code{data}; see Usage.}
+\item{weights}{Argument \code{weights}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{z}, \code{p_value}, \code{rav}, \code{rank_sums}, \code{k}, \code{n}.

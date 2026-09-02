@@ -5,7 +5,7 @@
 \alias{EchoSpec}
 \title{Fourier spectrum of a wavelet with an echo, eq (4.77)}
 \usage{
-EchoSpec(a, n_0, omega, H = NULL)
+EchoSpec(a, n_0, omega, H = NULL) 
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}

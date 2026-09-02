@@ -5,7 +5,7 @@
 \alias{morie_tlsurvy_adaptive_survey_tmle}
 \title{Adaptive_survey_tmle: Sample by the adaptive design, then run the}
 \usage{
-morie_tlsurvy_adaptive_survey_tmle(V, influence_proxy, full_estimator, n, seed = 0)
+morie_tlsurvy_adaptive_survey_tmle(V, influence_proxy, full_estimator, n, seed = 0) 
 }
 \arguments{
 \item{V}{Passed to \code{morie_tlsurvy_inclusion_probabilities}.}

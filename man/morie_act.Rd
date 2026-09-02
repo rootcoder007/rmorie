@@ -5,10 +5,15 @@
 \alias{morie_act}
 \title{morie_act}
 \usage{
-morie_act(name, z, deriv = FALSE)
+morie_act(name, z, deriv = FALSE) 
 }
 \description{
 morie_act
+}
+\arguments{
+\item{name}{Argument \code{name}; see Usage.}
+\item{z}{Argument \code{z}; see Usage.}
+\item{deriv}{Argument \code{deriv}; see Usage.}
 }
 \value{
 The value of \code{stop}.

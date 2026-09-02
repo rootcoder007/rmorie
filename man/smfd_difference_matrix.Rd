@@ -5,7 +5,7 @@
 \alias{smfd_difference_matrix}
 \title{Internal: the d-th order difference matrix, built by iterated}
 \usage{
-smfd_difference_matrix(p, order = 2L)
+smfd_difference_matrix(p, order = 2L) 
 }
 \arguments{
 \item{p}{A matrix; passed to \code{diag}.}

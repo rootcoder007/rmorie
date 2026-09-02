@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_tmldta}
 \alias{morie_tmldta}
+\alias{morie_tmledataadaptive}
 \title{Contrast between data-discovered exposure levels, done honestly}
 \usage{
-morie_tmldta(y, D, X, candidate_strata = NULL, method = "cv-tmle", n_folds = 10, trim = 0.01, ridge = 1e-08, level = 0.95, bounds = NULL)
+morie_tmldta(y, D, X, candidate_strata = NULL, method = "cv-tmle", n_folds = 10, 
+    trim = 0.01, ridge = 1e-08, level = 0.95, bounds = NULL) 
+
+morie_tmledataadaptive(y, D, X, candidate_strata = NULL, method = "cv-tmle", n_folds = 10, 
+    trim = 0.01, ridge = 1e-08, level = 0.95, bounds = NULL) 
 }
 \arguments{
 \item{y}{Outcome vector.}

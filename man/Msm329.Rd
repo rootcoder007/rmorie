@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm329.R
 \name{Msm329}
 \alias{Msm329}
-\title{ZAPC random-forest prediction.}
+\title{ZAPC random-forest prediction}
 \usage{
 Msm329(theta_hat, mu_hat, threshold = 0.5)
 }

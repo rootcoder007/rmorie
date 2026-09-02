@@ -2,7 +2,7 @@
 % Please edit documentation in R/doob_trends.R
 \name{doob_trends}
 \alias{doob_trends}
-\title{Doob Federal Court Affidavit — national-aggregate trend analyses}
+\title{Doob Federal Court Affidavit -- national-aggregate trend analyses}
 \description{
 Replicates the analytical contribution of Prof. Anthony N. Doob's
 expert-witness affidavit in \emph{Canadian Civil Liberties Association
@@ -15,7 +15,7 @@ ALONGSIDE the per-row MRM modules on OTIS provincial data and the
 MRM chi-square family on aggregate contingency tables.
 }
 \references{
-Doob, A. N. (2020). Affidavit (T-539-20) of Anthony Doob — Federal
+Doob, A. N. (2020). Affidavit (T-539-20) of Anthony Doob -- Federal
 Court of Canada, Application Record Vol. 3 of 5. CCLA et al. v.
 Attorney General of Canada.
 }

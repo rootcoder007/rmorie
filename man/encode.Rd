@@ -5,7 +5,7 @@
 \alias{encode}
 \title{encode}
 \usage{
-encode(y_tilde, W, V_u, b, activation = "sigmoid")
+encode(y_tilde, W, V_u, b, activation = "sigmoid") 
 }
 \arguments{
 \item{y_tilde}{See Usage.}

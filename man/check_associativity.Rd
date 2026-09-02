@@ -5,7 +5,7 @@
 \alias{check_associativity}
 \title{Test (a o b) o c == a o (b o c) directly}
 \usage{
-check_associativity(a, b, c, tol = 1e-12)
+check_associativity(a, b, c, tol = 1e-12) 
 }
 \arguments{
 \item{a}{Passed to \code{.ssmpar_compose}.}

@@ -5,7 +5,7 @@
 \alias{morie_alammar_c_tfidf}
 \title{morie_alammar_c_tfidf}
 \usage{
-morie_alammar_c_tfidf(term_counts_by_class, corpus_freq = NULL, A = NULL)
+morie_alammar_c_tfidf(term_counts_by_class, corpus_freq = NULL, A = NULL) 
 }
 \arguments{
 \item{term_counts_by_class}{Classes x terms count matrix.}

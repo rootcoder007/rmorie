@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_push_memory}
 \title{morie_sam2vd_push_memory}
 \usage{
-morie_sam2vd_push_memory(bank, frame_index, features, prompted = FALSE, object_pointer = NULL)
+morie_sam2vd_push_memory(bank, frame_index, features, prompted = FALSE, object_pointer = NULL) 
 }
 \arguments{
 \item{bank}{A list; the body reads \code{$pointers}, \code{$prompted}, \code{$recent} from it.}

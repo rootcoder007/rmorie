@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdgmm2.R
 \name{Gmsbound}
 \alias{Gmsbound}
-\title{Generalised moment selection test statistic.}
+\title{Generalised moment selection test statistic}
 \usage{
 Gmsbound(mbar, sigma, n, kappa = NULL)
 }

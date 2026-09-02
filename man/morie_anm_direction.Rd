@@ -10,6 +10,7 @@ morie_anm_direction(x, y, B = 200L)
 \item{x, y}{Numeric vectors.}
 
 \item{B}{Permutations for the independence p-values.}
+
 }
 \value{
 Named list with \code{direction}, \code{conclusive},

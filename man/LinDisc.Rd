@@ -5,7 +5,7 @@
 \alias{LinDisc}
 \title{Section 10.4.1: d_i(x) = w_i^T x + w_i0, assign to the largest.  The}
 \usage{
-LinDisc(x, weights, w0 = NULL)
+LinDisc(x, weights, w0 = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

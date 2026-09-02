@@ -5,7 +5,7 @@
 \alias{phmmsr_msv_score}
 \title{phmmsr_msv_score}
 \usage{
-phmmsr_msv_score(seq, profile, tau = 0.02, lam = 0.7)
+phmmsr_msv_score(seq, profile, tau = 0.02, lam = 0.7) 
 }
 \arguments{
 \item{seq}{Coerced to list by the body, with \code{as.list}.}

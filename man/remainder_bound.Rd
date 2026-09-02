@@ -5,7 +5,7 @@
 \alias{remainder_bound}
 \title{remainder_bound}
 \usage{
-remainder_bound(err_Q, err_g, delta)
+remainder_bound(err_Q, err_g, delta) 
 }
 \arguments{
 \item{err_Q}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -12,6 +12,7 @@ morie_winkler(y, lower, upper, alpha = 0.1)
 \item{lower, upper}{interval endpoints}
 
 \item{alpha}{nominal miscoverage}
+
 }
 \value{
 list(score, total, coverage, meanwidth, n)

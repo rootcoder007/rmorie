@@ -17,6 +17,7 @@ morie_geron_rlhf_reward_kl_objective(
 \item{policy_logprobs, ref_logprobs}{Non-positive log-probabilities.}
 
 \item{beta}{Non-negative KL weight.}
+
 }
 \value{
 List with \code{objective}, \code{mean_reward}, \code{kl}, \code{kl_terms},

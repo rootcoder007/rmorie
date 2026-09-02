@@ -5,7 +5,7 @@
 \alias{roi_align}
 \title{roi_align}
 \usage{
-roi_align(features, box, out_size = 2L, stride = 1, samples = 2L)
+roi_align(features, box, out_size = 2L, stride = 1, samples = 2L) 
 }
 \arguments{
 \item{features}{Passed to \code{.masrcn_mat}.}

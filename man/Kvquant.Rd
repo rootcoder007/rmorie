@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqalg1.R
 \name{Kvquant}
 \alias{Kvquant}
-\title{Quantize one vector: rotate, scalar-quantize, dequantize, rotate back.}
+\title{Quantize one vector: rotate, scalar-quantize, dequantize, rotate back}
 \usage{
 Kvquant(x, b = 2, seed = 1)
 }

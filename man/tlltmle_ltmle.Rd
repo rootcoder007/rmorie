@@ -5,7 +5,7 @@
 \alias{tlltmle_ltmle}
 \title{tlltmle_ltmle}
 \usage{
-tlltmle_ltmle(Q_seq, H_seq, Y_seq)
+tlltmle_ltmle(Q_seq, H_seq, Y_seq) 
 }
 \arguments{
 \item{Q_seq}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{WtThresh}
 \title{Wavelet shrinkage, eqs (8.103)-(8.105) with the universal threshold}
 \usage{
-WtThresh(x, wavelet = "db4", levels = 3, threshold_type = "soft", threshold = NULL)
+WtThresh(x, wavelet = "db4", levels = 3, threshold_type = "soft", threshold = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

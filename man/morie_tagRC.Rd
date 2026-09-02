@@ -5,7 +5,7 @@
 \alias{morie_tagRC}
 \title{morie_tagRC}
 \usage{
-morie_tagRC(triples, focus, d = 0.7, weight = 0.9, iters = 200)
+morie_tagRC(triples, focus, d = 0.7, weight = 0.9, iters = 200) 
 }
 \arguments{
 \item{triples}{Passed to \code{folkrank}.}

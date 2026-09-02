@@ -5,7 +5,8 @@
 \alias{morie_twoT_retrieve}
 \title{morie_twoT_retrieve}
 \usage{
-morie_twoT_retrieve(query_embedding, item_embeddings, probabilities = NULL, top_k = 5, temperature = 1)
+morie_twoT_retrieve(query_embedding, item_embeddings, probabilities = NULL, top_k = 5, 
+    temperature = 1) 
 }
 \arguments{
 \item{query_embedding}{Passed to \code{.twoT_as_vec}.}

@@ -5,7 +5,7 @@
 \alias{smoothing_bias}
 \title{smoothing_bias}
 \usage{
-smoothing_bias(true_density, x0, h, smoothness = 2)
+smoothing_bias(true_density, x0, h, smoothness = 2) 
 }
 \arguments{
 \item{true_density}{Accepted by the signature and not used anywhere in the body.}

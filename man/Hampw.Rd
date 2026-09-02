@@ -10,6 +10,8 @@ Hampw(y, a = 2, b = 4, c = 8)
 \item{y}{Residuals, usually already scaled by a robust sigma.}
 
 \item{a, b, c}{The three bend points, 0 < a <= b < c.}
+
+
 }
 \value{
 list: estimate (mean weight), weights, n_zero, n, a, b, c, method.

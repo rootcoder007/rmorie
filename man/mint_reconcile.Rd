@@ -5,7 +5,7 @@
 \alias{mint_reconcile}
 \title{mint_reconcile}
 \usage{
-mint_reconcile(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10)
+mint_reconcile(base, S, method = "shrink", residuals = NULL, W = NULL, ridge = 1e-10) 
 }
 \arguments{
 \item{base}{Coerced to numeric by the body, with \code{as.numeric}.}

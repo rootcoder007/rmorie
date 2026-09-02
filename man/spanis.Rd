@@ -2,7 +2,7 @@
 % Please edit documentation in R/spanis.R
 \name{spanis}
 \alias{spanis}
-\title{Geometric anisotropy: correcting direction dependence by a linear map.}
+\title{Geometric anisotropy: correcting direction dependence by a linear map}
 \usage{
 spanis(coords, z, A_matrix = NULL, n_bins = 15, max_dist = NULL)
 }

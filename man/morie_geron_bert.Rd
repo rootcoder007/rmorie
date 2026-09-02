@@ -25,6 +25,9 @@ morie_geron_bert(
 \item{mask_prob}{Masking fraction in (0, 1).}
 
 \item{seed}{LCG seed.}
+
+
+
 }
 \value{
 List with \code{hidden}, \code{mlm_loss}, \code{mlm_losses}, \code{masked_positions},

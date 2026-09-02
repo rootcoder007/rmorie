@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitalri.R
 \name{Alrinv}
 \alias{Alrinv}
-\title{Inverse additive log-ratio transform.}
+\title{Inverse additive log-ratio transform}
 \usage{
 Alrinv(y, ref = NULL, total = 1)
 }
@@ -17,7 +17,7 @@ Alrinv(y, ref = NULL, total = 1)
 List with \code{composition}, \code{ref}, \code{total}, \code{D}.
 }
 \description{
-Formula: alr^-1(y) = C( exp(y_1), ..., exp(y_{D-1}), 1 ) with the 1 inserted at the reference position
+Formula: alr^-1(y) = C( exp(y_1), ..., exp(y_\{D-1\}), 1 ) with the 1 inserted at the reference position
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

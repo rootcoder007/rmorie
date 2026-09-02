@@ -5,7 +5,7 @@
 \alias{morie_pratt_cheatsheet}
 \title{morie_pratt_cheatsheet}
 \usage{
-morie_pratt_cheatsheet()
+morie_pratt_cheatsheet() 
 }
 \description{
 A step of the pratt_native implementation. No other function in the package calls it. See the file header for the source the module follows.

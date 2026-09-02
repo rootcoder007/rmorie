@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_profile_summary_table}
 \alias{morie_dataset_profile_summary_table}
-\title{Render a human-readable dataset profile summary table.}
+\title{Render a human-readable dataset profile summary table}
 \usage{
 morie_dataset_profile_summary_table(profile)
 }

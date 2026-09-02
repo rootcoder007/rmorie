@@ -5,7 +5,7 @@
 \alias{patchify}
 \title{patchify}
 \usage{
-patchify(x, patch_len, stride = NULL)
+patchify(x, patch_len, stride = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.patcht_vec}.}

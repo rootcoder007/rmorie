@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_io.R
 \name{morie_tps_load}
 \alias{morie_tps_load}
-\title{Load TPS dataset \code{name} in the given \code{format}.}
+\title{Load TPS dataset \code{name} in the given \code{format}}
 \usage{
 morie_tps_load(name, format = "csv", nrows = NULL)
 }

@@ -11,7 +11,8 @@ Otcw(X, Y, Cost, perm)
 
 \item{Cost}{Cost matrix with \code{Cost\[i, j\] = c(x_i, y_j)}.}
 
-\item{perm}{Zero-based assignment: \code{y_i} matched to \code{x_perm[i]}.}
+\item{perm}{Zero-based assignment: \code{y_i} matched to \code{x_perm\[i\]}.}
+
 }
 \value{
 List with \code{is_cm}, \code{slack}, \code{estimate}, \code{n}.

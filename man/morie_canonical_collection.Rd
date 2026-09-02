@@ -5,7 +5,7 @@
 \alias{morie_canonical_collection}
 \title{morie_canonical_collection}
 \usage{
-morie_canonical_collection(ag, k = 1)
+morie_canonical_collection(ag, k = 1) 
 }
 \arguments{
 \item{ag}{Passed to \code{.prsLR_canonical_collection}.}

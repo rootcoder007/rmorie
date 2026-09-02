@@ -5,7 +5,7 @@
 \alias{morie_mqtmpl_imputation_weights}
 \title{Normal-model imputation weight}
 \usage{
-morie_mqtmpl_imputation_weights(y, genotype_column, model_dimension = 2)
+morie_mqtmpl_imputation_weights(y, genotype_column, model_dimension = 2) 
 }
 \arguments{
 \item{y}{Phenotype.}

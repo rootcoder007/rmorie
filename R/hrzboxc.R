@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Box-Cox regression by the minimum-distance estimator of Foster et al.
+#' Box-Cox regression by the minimum-distance estimator of Foster et al
 #'
 #' Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Springer, Section 6.1.2, page 195 (volume \[Pages 189-232\],
@@ -12,7 +12,7 @@
 #' F_n\[u; a, b_n(a)\] = n^-1 sum_i I(U_hat_i < u); and since
 #' P(Y < y) = E F_U\[T(y, a) - X beta\], alpha is estimated by minimising
 #' R_n\[a, b_n(a)\] = n^-1 sum_i integral over u of
-#' {I(Y_i < u) - F_n\[T(u, a) - X_i b_n(a)\]}^2 w(u) du.
+#' \{I(Y_i < u) - F_n\[T(u, a) - X_i b_n(a)\]\}^2 w(u) du.
 #'
 #' BOOK NOTE.  The displayed criterion on p. 195 prints the inner argument as
 #' T(y, a); y is not bound anywhere in the expression while u is the variable

@@ -5,10 +5,14 @@
 \alias{Hlwsrlink}
 \title{Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210}
 \usage{
-Hlwsrlink(x, m0 = 0)
+Hlwsrlink(x, m0 = 0) 
 }
 \description{
 Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{m0}{Argument \code{m0}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{tplus}, \code{tminus}, \code{nbelow}, \code{nequal}, \code{nabove}, \code{nwalsh}, \code{n}.

@@ -5,10 +5,14 @@
 \alias{Kctrlmed}
 \title{k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351}
 \usage{
-Kctrlmed(samples, p = c(0.5))
+Kctrlmed(samples, p = c(0.5)) 
 }
 \description{
 k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{p}{Argument \code{p}; see Usage.}
 }
 \value{
 A list with \code{counts}, \code{cuts}, \code{r}, \code{pcell}, \code{statistic}, \code{df}, \code{p_value}, \code{k}.

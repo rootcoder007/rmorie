@@ -5,7 +5,7 @@
 \alias{intermittent_forecast}
 \title{TSB intermittent-demand forecaster}
 \usage{
-intermittent_forecast(y, method = "tsb", alpha = 0.1, beta = 0.05, horizon = 1L)
+intermittent_forecast(y, method = "tsb", alpha = 0.1, beta = 0.05, horizon = 1L) 
 }
 \arguments{
 \item{y}{Numeric series of non-negative demand.}

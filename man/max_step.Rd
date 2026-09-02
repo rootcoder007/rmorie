@@ -5,7 +5,7 @@
 \alias{max_step}
 \title{max_step}
 \usage{
-max_step(v, dv, eta = 0.9995)
+max_step(v, dv, eta = 0.9995) 
 }
 \arguments{
 \item{v}{A vector; its length is taken and its elements indexed.}

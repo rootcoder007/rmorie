@@ -14,6 +14,7 @@ morie_kernel_quantile(x, y, tau = 0.5, grid = NULL, h = NULL)
 \item{grid}{evaluation points.}
 
 \item{h}{bandwidth.}
+
 }
 \value{
 list: grid, quantile, tau, bandwidth, monotone_in_tau.

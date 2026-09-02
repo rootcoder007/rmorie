@@ -5,7 +5,7 @@
 \alias{morie_geron_quantization_aware_training_hm}
 \title{Quantization-aware training with a straight-through estimator (Geron App B, hmqat)}
 \usage{
-morie_geron_quantization_aware_training_hm(model, X, y, epochs = 200, lr = 0.1, bits = 8)
+morie_geron_quantization_aware_training_hm(model, X, y, epochs = 200, lr = 0.1, bits = 8) 
 }
 \arguments{
 \item{model}{Initial full-precision weights.}

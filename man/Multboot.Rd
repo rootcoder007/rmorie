@@ -4,7 +4,7 @@
 \alias{Multboot}
 \alias{morie_ksr08_kosorok_multiplier_bootstrap}
 \alias{morie_kosorok_multiplier_bootstrap}
-\title{Multiplier bootstrap with exponential weights (Dirichlet weights).}
+\title{Multiplier bootstrap with exponential weights (Dirichlet weights)}
 \usage{
 Multboot(x, B = 200, seed = 1)
 

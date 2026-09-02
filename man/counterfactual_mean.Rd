@@ -5,7 +5,7 @@
 \alias{counterfactual_mean}
 \title{counterfactual_mean}
 \usage{
-counterfactual_mean(Y, A, L, a_star, strata_probs = NULL)
+counterfactual_mean(Y, A, L, a_star, strata_probs = NULL) 
 }
 \arguments{
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}

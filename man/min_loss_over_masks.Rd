@@ -5,7 +5,7 @@
 \alias{min_loss_over_masks}
 \title{min_loss_over_masks}
 \usage{
-min_loss_over_masks(predictions, target, loss_fn)
+min_loss_over_masks(predictions, target, loss_fn) 
 }
 \arguments{
 \item{predictions}{A vector; its length is taken.}

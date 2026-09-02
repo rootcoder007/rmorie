@@ -22,7 +22,7 @@
   0.5 * (n * log(2 * pi * sigma2) + logdet_R + n)
 }
 
-#' Spatial GLM (Gaussian-identity case via profile ML).
+#' Spatial GLM (Gaussian-identity case via profile ML)
 #'
 #' Y = X beta + delta + eps, delta ~ GP(0, sigma2 R_phi), R_phi exponential.
 #' Profile-likelihood ML over phi; beta via GLS.

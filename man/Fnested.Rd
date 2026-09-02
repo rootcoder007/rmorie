@@ -14,6 +14,7 @@ intercept is always added.}
 \item{X}{Numeric matrix of predictors without an intercept column.}
 
 \item{y}{Numeric response.}
+
 }
 \value{
 list: statistic, p_value, df1, df2, rss0, rss1, p0, p1, n,

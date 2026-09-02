@@ -16,6 +16,8 @@ Infobtl(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14, pxy = NULL)
 \item{iters, tol}{iteration controls.}
 
 \item{pxy}{the joint p(x, y) directly, instead of X and Y.}
+
+
 }
 \value{
 list: estimate, lagrangian, ixt, ity, p_t_x, p_t, beta, method.

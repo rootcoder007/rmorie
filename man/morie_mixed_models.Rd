@@ -9,12 +9,17 @@
 \alias{morie_reml_loglik}
 \title{Linear mixed-model estimation}
 \usage{
-morie_one_way(groups)
-morie_mme(X, Z, y, Sigma_inv, R_inv = NULL)
-morie_blue_blup_v(X, Z, y, Sigma, R = NULL)
-morie_em_lmm(X, Z, y, D0 = NULL, sigma2_0 = 1, n_iter = 200L, tol = 1e-10)
-morie_lmm_loglik(X, Z, y, D, R = NULL, beta = NULL)
-morie_reml_loglik(X, Z, y, D, R = NULL)
+morie_one_way(groups) 
+
+morie_mme(X, Z, y, Sigma_inv, R_inv = NULL) 
+
+morie_blue_blup_v(X, Z, y, Sigma, R = NULL) 
+
+morie_em_lmm(X, Z, y, D0 = NULL, sigma2_0 = 1, n_iter = 200L, tol = 1e-10) 
+
+morie_lmm_loglik(X, Z, y, D, R = NULL, beta = NULL) 
+
+morie_reml_loglik(X, Z, y, D, R = NULL) 
 }
 \arguments{
 \item{y}{numeric response vector}

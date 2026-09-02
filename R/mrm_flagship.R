@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # The MRM research framework (feat/native-specializations, module 24
-# — the flagship). Multilevel Reconciliation Methodology: load a
+# -- the flagship). Multilevel Reconciliation Methodology: load a
 # special-investigations dataset with provenance, reconcile it against
 # a second source under an explicit matching schema, estimate a causal
 # effect by composing the branch's native estimators (matching / IPW /

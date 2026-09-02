@@ -14,6 +14,8 @@ morie_geron_multihead_attention(Q, K, V, n_heads, W_O = NULL, mask = NULL)
 \item{W_O}{Optional output projection.}
 
 \item{mask}{Optional mask.}
+
+
 }
 \value{
 List with output, head_outputs, attention_weights, d_head, estimate, n, method.

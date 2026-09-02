@@ -5,7 +5,7 @@
 \alias{morie_interval_map}
 \title{Interval mapping by EM on the mixture likelihood}
 \usage{
-morie_interval_map(y, left, right, r_left, r_right, max_iter = 200L, tol = 1e-10)
+morie_interval_map(y, left, right, r_left, r_right, max_iter = 200L, tol = 1e-10) 
 }
 \arguments{
 \item{y}{Numeric phenotype vector.}

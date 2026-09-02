@@ -5,10 +5,15 @@
 \alias{morie_evt_gpd_loglik}
 \title{GPD log-likelihood over excesses (Coles 2001 eq. 4.10)}
 \usage{
-morie_evt_gpd_loglik(y, sigma, xi)
+morie_evt_gpd_loglik(y, sigma, xi) 
 }
 \description{
 GPD log-likelihood over excesses (Coles 2001 eq. 4.10)
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{sigma}{Argument \code{sigma}; see Usage.}
+\item{xi}{Argument \code{xi}; see Usage.}
 }
 \value{
 A numeric value.

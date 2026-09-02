@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c09_ruhela_aggregate}
 \alias{morie_otis_analyze_c09_ruhela_aggregate}
 \alias{morie_otis_analyze_c09_mrm_aggregate}
-\title{c09 aggregate Ruhela: Age 50+ x gender -> RC.}
+\title{c09 aggregate Ruhela: Age 50+ x gender -> RC}
 \usage{
 morie_otis_analyze_c09_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c09_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c09 aggregate Ruhela: Age 50+ x gender -> RC.
+c09 aggregate Ruhela: Age 50+ x gender -> RC
 }
 \examples{
 \donttest{

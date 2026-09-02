@@ -8,6 +8,7 @@
 }
 \arguments{
 \item{e1, e2}{rationals (or numbers coerced with \code{.morie_rg_asfrac}).}
+
 }
 \value{
 A logical scalar.

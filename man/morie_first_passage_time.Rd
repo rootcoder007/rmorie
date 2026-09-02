@@ -30,6 +30,8 @@ morie_first_passage_time(
 \item{f_U, grid_u}{density of U on its grid.}
 
 \item{f_eps, grid_z}{density of eps on its grid.}
+
+
 }
 \value{
 list: probability, theta, f_W_at_initial,

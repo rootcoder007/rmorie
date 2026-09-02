@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Generalized sensitivity and specificity.
+#' Generalized sensitivity and specificity
 #'
 #' Formula: Se_i = TTP_all/(TTP_all + TFN_i) (eq. 4.10) and
 #' Sp_i = TTN_i/(TTN_i + TFP_i) (eq. 4.11).

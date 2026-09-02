@@ -5,7 +5,7 @@
 \alias{morie_karpV_depth}
 \title{Depth of an expression tree}
 \usage{
-morie_karpV_depth(node)
+morie_karpV_depth(node) 
 }
 \arguments{
 \item{node}{the tree.}

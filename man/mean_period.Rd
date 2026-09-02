@@ -5,7 +5,7 @@
 \alias{mean_period}
 \title{mean_period}
 \usage{
-mean_period(y, dt = 1)
+mean_period(y, dt = 1) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

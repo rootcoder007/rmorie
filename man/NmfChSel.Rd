@@ -5,7 +5,7 @@
 \alias{NmfChSel}
 \title{NmfChSel}
 \usage{
-NmfChSel(trials, nselect, rank = 4, maxiter = 200, tol = 1e-08, seed = 1)
+NmfChSel(trials, nselect, rank = 4, maxiter = 200, tol = 1e-08, seed = 1) 
 }
 \arguments{
 \item{trials}{Passed to \code{.morie_bx_chsel}.}

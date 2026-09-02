@@ -176,7 +176,7 @@
   }
   g <- as.numeric(gamma)
   elog <- .morie_lda_e_log_theta(g)
-  val <- k.lgamma(sum(a)) - sum(k.lgamma(a))
+  val <- lgamma(sum(a)) - sum(lgamma(a))
   val <- val + sum((a - 1.0) * elog)
   for (n in seq_len(N)) {
     for (i in seq_len(K)) {
@@ -187,7 +187,7 @@
       val <- val - p * log(p)
     }
   }
-  val <- val - (k.lgamma(sum(g)) - sum(k.lgamma(g)))
+  val <- val - (lgamma(sum(g)) - sum(lgamma(g)))
   val <- val - sum((g - 1.0) * elog)
   return(val)
 }

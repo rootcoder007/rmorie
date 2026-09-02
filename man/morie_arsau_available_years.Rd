@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_available_years}
 \alias{morie_arsau_available_years}
-\title{List ARSAU year / year-range buckets.}
+\title{List ARSAU year / year-range buckets}
 \usage{
 morie_arsau_available_years(data_dir = NULL, language = "en")
 }
@@ -15,7 +15,7 @@ morie_arsau_available_years(data_dir = NULL, language = "en")
 An object of class \code{"morie_arsau_result"}.
 }
 \description{
-List ARSAU year / year-range buckets.
+List ARSAU year / year-range buckets
 }
 \examples{
 r <- morie_arsau_available_years(data_dir = tempdir())

@@ -5,7 +5,7 @@
 \alias{PsdHz}
 \title{Section 6.4: bin k sits at k fs / N, and a band power is the sum of}
 \usage{
-PsdHz(psd, fs, n = NULL, bands = NULL)
+PsdHz(psd, fs, n = NULL, bands = NULL) 
 }
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}

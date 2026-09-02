@@ -5,7 +5,7 @@
 \alias{covariate_kink_test}
 \title{covariate_kink_test}
 \usage{
-covariate_kink_test(V, Z, kink, bandwidth, order = 2L, kernel = "triangular")
+covariate_kink_test(V, Z, kink, bandwidth, order = 2L, kernel = "triangular") 
 }
 \arguments{
 \item{V}{Passed to \code{.side_fit}.}

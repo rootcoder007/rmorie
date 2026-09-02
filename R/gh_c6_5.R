@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Check the extended Schwartz conditions and return the resulting bound.
+#' Check the extended Schwartz conditions and return the resulting bound
 #'
 #' Prior mass on a Kullback-Leibler neighbourhood AND a test rate beating
 #' its radius are both required; either alone is insufficient. The margin

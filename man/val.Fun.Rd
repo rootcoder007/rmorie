@@ -5,7 +5,7 @@
 \alias{val.Fun}
 \title{val.Fun}
 \usage{
-val.Fun(self, x)
+val.Fun(self, x) 
 }
 \arguments{
 \item{self}{A list; the body reads \code{$f} from it.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghebp.R
 \name{morie_ghosal_empirical_bayes}
 \alias{morie_ghosal_empirical_bayes}
-\title{Empirical-Bayes alpha MLE for a DP, given the observed K_n.}
+\title{Empirical-Bayes alpha MLE for a DP, given the observed K_n}
 \usage{
 morie_ghosal_empirical_bayes(x, alpha_grid = NULL)
 }
@@ -15,7 +15,7 @@ morie_ghosal_empirical_bayes(x, alpha_grid = NULL)
 Named list with estimate (alpha-hat), K_n, log_lik_at_estimate, n, method.
 }
 \description{
-Empirical-Bayes alpha MLE for a DP, given the observed K_n.
+Empirical-Bayes alpha MLE for a DP, given the observed K_n
 }
 \examples{
 morie_ghosal_empirical_bayes(x = rnorm(50))

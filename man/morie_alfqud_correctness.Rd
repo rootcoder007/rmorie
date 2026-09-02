@@ -5,7 +5,7 @@
 \alias{morie_alfqud_correctness}
 \title{How many memory slots end up holding the value they should}
 \usage{
-morie_alfqud_correctness(program, inputs, targets, n_reg)
+morie_alfqud_correctness(program, inputs, targets, n_reg) 
 }
 \arguments{
 \item{program}{A list of instructions.}

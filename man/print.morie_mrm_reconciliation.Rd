@@ -5,7 +5,7 @@
 \alias{print.morie_mrm_reconciliation}
 \title{Print method for \code{morie_mrm_reconciliation} objects}
 \usage{
-print.morie_mrm_reconciliation(x, ...)
+\method{print}{morie_mrm_reconciliation}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_mrm_reconciliation} object.}

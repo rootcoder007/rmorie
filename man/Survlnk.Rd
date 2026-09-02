@@ -16,6 +16,7 @@ Survlnk(time, event, X, link = "cloglog", max_iter = 100L, tol = 1e-10)
 \item{link}{"cloglog" or "logit".}
 
 \item{max_iter, tol}{Newton controls.}
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{alpha},
@@ -24,7 +25,7 @@ List with \code{estimate}, \code{se}, \code{alpha},
 \description{
 Observed event times define discrete risk intervals; subject i at
 risk at event time t_k contributes a Bernoulli observation with
-hazard g^{-1}(alpha_k + beta' x_i). cloglog gives the
+hazard g^\{-1\}(alpha_k + beta' x_i). cloglog gives the
 Prentice-Gloeckler grouped proportional-hazards model, logit gives
 Cox's discrete proportional-odds model. Klein & Moeschberger (2003),
 Survival Analysis 2nd ed., Section 8.4.

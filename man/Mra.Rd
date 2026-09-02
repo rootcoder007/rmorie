@@ -5,7 +5,7 @@
 \alias{Mra}
 \title{Multiresolution analysis, eqs (8.111)-(8.114)}
 \usage{
-Mra(x, wavelet = "db4", levels = 3)
+Mra(x, wavelet = "db4", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

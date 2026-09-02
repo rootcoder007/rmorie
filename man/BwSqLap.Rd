@@ -5,7 +5,7 @@
 \alias{BwSqLap}
 \title{Eq (3.136): 2N poles, half in the right half-plane, so this is NOT a}
 \usage{
-BwSqLap(s, Omega_c, N)
+BwSqLap(s, Omega_c, N) 
 }
 \arguments{
 \item{s}{Coerced to complex by the body, with \code{as.complex}.}

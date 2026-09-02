@@ -5,7 +5,7 @@
 \alias{Ppv}
 \title{Ppv}
 \usage{
-Ppv(tp, fp = NULL, prevalence = NULL, sensitivity = NULL, specificity = NULL)
+Ppv(tp, fp = NULL, prevalence = NULL, sensitivity = NULL, specificity = NULL) 
 }
 \arguments{
 \item{tp}{A matrix; passed to \code{as.matrix}.}

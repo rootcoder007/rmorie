@@ -25,6 +25,8 @@ Chipsq(
 centred 1 kb, 5 kb and 10 kb windows (optional).}
 
 \item{use_1k}{Set FALSE when no control sample exists.}
+
+
 }
 \value{
 List with \code{pvalue}, \code{lambda_local},

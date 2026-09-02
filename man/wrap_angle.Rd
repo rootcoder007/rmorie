@@ -5,7 +5,7 @@
 \alias{wrap_angle}
 \title{Wrap to [-pi, pi)}
 \usage{
-wrap_angle(theta)
+wrap_angle(theta) 
 }
 \arguments{
 \item{theta}{Angle in radians.}

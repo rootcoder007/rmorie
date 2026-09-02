@@ -5,7 +5,7 @@
 \alias{HannFrs}
 \title{Eq (3.105): a REAL nonnegative factor times a pure one-sample delay}
 \usage{
-HannFrs(omega)
+HannFrs(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,10 +5,16 @@
 \alias{Epiar}
 \title{Epidemic log-autoregression (Lawson eq. 18.3)}
 \usage{
-Epiar(beta0, beta1, i_lag, b1)
+Epiar(beta0, beta1, i_lag, b1) 
 }
 \description{
 Epidemic log-autoregression (Lawson eq. 18.3)
+}
+\arguments{
+\item{beta0}{Argument \code{beta0}; see Usage.}
+\item{beta1}{Argument \code{beta1}; see Usage.}
+\item{i_lag}{Argument \code{i_lag}; see Usage.}
+\item{b1}{Argument \code{b1}; see Usage.}
 }
 \value{
 A list with \code{logf}, \code{f}, \code{n}.

@@ -5,7 +5,7 @@
 \alias{morie_survrsf_predict_tree}
 \title{morie_survrsf_predict_tree}
 \usage{
-morie_survrsf_predict_tree(tree, x, random_variable = NULL, rng = NULL)
+morie_survrsf_predict_tree(tree, x, random_variable = NULL, rng = NULL) 
 }
 \arguments{
 \item{tree}{A list; the body reads \code{$root} from it.}

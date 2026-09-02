@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Spatial autoregressive error model (SEM) -- alias of \code{sarre}.
+#' Spatial autoregressive error model (SEM) -- alias of \code{sarre}
 #'
 #' \code{y = X beta + u}, \code{u = lam W u + eps},
 #' \code{eps ~ N(0, sigma2 I)}.

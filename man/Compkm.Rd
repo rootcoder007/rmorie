@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitclu.R
 \name{Compkm}
 \alias{Compkm}
-\title{Lloyd k-means on compositions, run in clr coordinates.}
+\title{Lloyd k-means on compositions, run in clr coordinates}
 \usage{
 Compkm(X, k = 2, max_iter = 50)
 }

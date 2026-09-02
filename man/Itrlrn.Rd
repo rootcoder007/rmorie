@@ -27,13 +27,13 @@ List with \code{estimate}, \code{value}, \code{stage_value},
 Q-learning solves the regime backwards.  At the final stage the
 Q-function is fitted by least squares on the stage covariates, the
 action and their interaction; at earlier stages the same regression
-is run on the pseudo-outcome R_t + gamma max_a' Q_{t+1}(s', a').  The
-optimal rule at stage t is 1{Q_t(s,1) > Q_t(s,0)} and the value of
+is run on the pseudo-outcome R_t + gamma max_a' Q_\{t+1\}(s', a').  The
+optimal rule at stage t is 1\{Q_t(s,1) > Q_t(s,0)\} and the value of
 the regime is the average of max_a Q_1(S_1, a).  Every step is a
 closed-form least-squares solve; nothing is simulated.
 }
 \details{
-Formula: Q_t(s,a) <- R_t + gamma max_a' Q_{t+1}(s', a').
+Formula: Q_t(s,a) <- R_t + gamma max_a' Q_\{t+1\}(s', a').
 }
 \examples{
 state <- rep(c(0, 1), 8)

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' F function -- empty-space (point-to-nearest-event) distance function.
+#' F function -- empty-space (point-to-nearest-event) distance function
 #'
 #' \code{F(y) = P(distance from an arbitrary location to the nearest
 #' event <= y)}. The location distribution is uniform over the window; a

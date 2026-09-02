@@ -5,7 +5,7 @@
 \alias{morie_alammar_ann_search}
 \title{Greedy NSW approximate nearest neighbour (Malkov and Yashunin 2020)}
 \usage{
-morie_alammar_ann_search(query_vec, index, ef_search = 8)
+morie_alammar_ann_search(query_vec, index, ef_search = 8) 
 }
 \arguments{
 \item{query_vec}{Query.}

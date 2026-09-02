@@ -5,7 +5,8 @@
 \alias{morie_glides_score}
 \title{Assemble the eight terms into a GScore}
 \usage{
-morie_glides_score(vdw = 0, coulomb = 0, lipo = 0, hbond = 0, metal = 0, buryp = 0, rotb = 0, site = 0, coefficients = NULL, weights = NULL)
+morie_glides_score(vdw = 0, coulomb = 0, lipo = 0, hbond = 0, metal = 0, buryp = 0, 
+    rotb = 0, site = 0, coefficients = NULL, weights = NULL) 
 }
 \arguments{
 \item{vdw}{The van der Waals energy.}

@@ -10,6 +10,7 @@ morie_rational_gf_coefficients(numerator, denominator, n_terms)
 \item{numerator, denominator}{Coefficient vectors, constant first.}
 
 \item{n_terms}{Number of coefficients to return.}
+
 }
 \value{
 A list with \code{coefficients} (numeric), \code{exact_coefficients}

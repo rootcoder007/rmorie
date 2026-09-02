@@ -5,7 +5,8 @@
 \alias{Rbfn}
 \title{Rbfn}
 \usage{
-Rbfn(X, y, ncenters = NULL, spread = 1, centers = NULL, ridge = 1e-08, query = NULL)
+Rbfn(X, y, ncenters = NULL, spread = 1, centers = NULL, ridge = 1e-08, 
+    query = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

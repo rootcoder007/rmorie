@@ -2,7 +2,7 @@
 % Please edit documentation in R/ridgs.R
 \name{Ridgesol}
 \alias{Ridgesol}
-\title{Closed-form ridge regression estimator.}
+\title{Closed-form ridge regression estimator}
 \usage{
 Ridgesol(X, y, lam, add_intercept = TRUE)
 }

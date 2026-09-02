@@ -5,7 +5,7 @@
 \alias{QrsDeriv2}
 \title{Eq (4.2): y1(n) = |x(n) - 2 x(n-2) + x(n-4)|.  The second difference}
 \usage{
-QrsDeriv2(x)
+QrsDeriv2(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

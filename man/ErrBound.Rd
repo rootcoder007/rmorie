@@ -5,7 +5,7 @@
 \alias{ErrBound}
 \title{P_e <= sqrt(P1 P2) exp(-D_B).  NOT FROM THIS BOOK -- the standard}
 \usage{
-ErrBound(p1, p2, db)
+ErrBound(p1, p2, db) 
 }
 \arguments{
 \item{p1}{Coerced to numeric by the body, with \code{as.numeric}.}

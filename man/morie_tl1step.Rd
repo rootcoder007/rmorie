@@ -5,7 +5,7 @@
 \alias{morie_tl1step}
 \title{morie_tl1step}
 \usage{
-morie_tl1step(Q, H_fn, Y, eps_max = 3, steps = 600)
+morie_tl1step(Q, H_fn, Y, eps_max = 3, steps = 600) 
 }
 \arguments{
 \item{Q}{Passed to \code{.tl1step_one_step_tmle}.}

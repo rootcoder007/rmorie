@@ -11,9 +11,9 @@
 #'
 #' Per matching stratum k, with the 2x2 table of item-right/item-wrong
 #' by reference/focal group,
-#' \code{E[A_k] = n1_k m1_k / T_k} and
-#' \code{Var[A_k] = n1_k n2_k m1_k m0_k / (T_k^2 (T_k - 1))}, giving
-#' \code{chi2 = (|sum A_k - sum E[A_k]| - 0.5)^2 / sum Var[A_k]} on one
+#' \code{E\[A_k\] = n1_k m1_k / T_k} and
+#' \code{Var\[A_k\] = n1_k n2_k m1_k m0_k / (T_k^2 (T_k - 1))}, giving
+#' \code{chi2 = (|sum A_k - sum E\[A_k\]| - 0.5)^2 / sum Var\[A_k\]} on one
 #' degree of freedom, and
 #' \code{alpha_MH = sum(A_k D_k/T_k) / sum(B_k C_k/T_k)} with the ETS
 #' delta scale \code{-2.35 log(alpha_MH)}.  Strata with fewer than two

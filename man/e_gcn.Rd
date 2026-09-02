@@ -5,7 +5,7 @@
 \alias{e_gcn}
 \title{Public name resolved by fn/_lazy_map.json}
 \usage{
-e_gcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
+e_gcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL) 
 }
 \arguments{
 \item{H}{Passed to \code{run_egnn}.}

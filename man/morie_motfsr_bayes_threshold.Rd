@@ -5,7 +5,7 @@
 \alias{morie_motfsr_bayes_threshold}
 \title{Bayes-optimal threshold}
 \usage{
-morie_motfsr_bayes_threshold(lambda1, loss = NULL)
+morie_motfsr_bayes_threshold(lambda1, loss = NULL) 
 }
 \arguments{
 \item{lambda1}{Component 1 weight.}

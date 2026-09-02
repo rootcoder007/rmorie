@@ -33,6 +33,8 @@ Azselfplay(
 \item{temp_threshold}{moves played at tau = 1.}
 
 \item{c_puct}{exploration constant.}
+
+
 }
 \value{
 list: estimate, states, pis, actions, zs, moves, final_state,

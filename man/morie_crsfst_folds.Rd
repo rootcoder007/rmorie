@@ -5,7 +5,7 @@
 \alias{morie_crsfst_folds}
 \title{A deterministic partition of the sample into k folds}
 \usage{
-morie_crsfst_folds(n, k, seed = 0)
+morie_crsfst_folds(n, k, seed = 0) 
 }
 \arguments{
 \item{n}{The sample size.}

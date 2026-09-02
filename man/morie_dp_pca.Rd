@@ -16,6 +16,7 @@ morie_dp_pca(X, k = 2, epsilon = 1, delta = 1e-05, C = 1, seed = NULL)
 \item{C}{L2 clipping norm for a row.}
 
 \item{seed}{optional integer seed.}
+
 }
 \value{
 list with \code{components} (p x k), \code{eigenvalues},

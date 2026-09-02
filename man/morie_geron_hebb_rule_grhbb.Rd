@@ -14,6 +14,7 @@ morie_geron_hebb_rule_grhbb(x, y_true, y_pred, w, eta)
 \item{w}{(n_in, n_out) weights.}
 
 \item{eta}{Positive learning rate.}
+
 }
 \value{
 List with \code{w_new}, \code{delta_w}, \code{error}, \code{converged},

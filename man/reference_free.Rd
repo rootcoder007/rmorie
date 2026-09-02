@@ -5,7 +5,7 @@
 \alias{reference_free}
 \title{reference_free}
 \usage{
-reference_free(hyp, src, W, b = NULL)
+reference_free(hyp, src, W, b = NULL) 
 }
 \arguments{
 \item{hyp}{Passed to \code{.comet_vec}.}

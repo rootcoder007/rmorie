@@ -34,6 +34,8 @@ observed maxima.}
 \item{model_fn}{Optional \eqn{\gamma(h, k; \theta)}. When supplied the
 weighted least squares criterion of Sec. 9.4 is evaluated against the
 empirical surface.}
+
+
 }
 \value{
 A list with \code{st_variogram}, \code{counts}, \code{space_lags}, \code{time_lags},

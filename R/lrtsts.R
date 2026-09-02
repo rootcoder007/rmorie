@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mantel log-rank test comparing two survival curves.
+#' Mantel log-rank test comparing two survival curves
 #'
 #' At each distinct death time with \eqn{d} deaths among \eqn{r} at
 #' risk, \eqn{r_1} of them in group 1, \eqn{E_1 \mathrel{+}= d r_1 / r}

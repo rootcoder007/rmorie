@@ -12,6 +12,8 @@ morie_xml_sax(txt, on_start = NULL, on_text = NULL, on_end = NULL)
 \item{on_start, on_text, on_end}{Optional callbacks:
 \code{on_start(tag, attrs)}, \code{on_text(text)},
 \code{on_end(tag)}.}
+
+
 }
 \value{
 Invisibly, the number of elements seen.

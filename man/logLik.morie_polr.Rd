@@ -5,7 +5,7 @@
 \alias{logLik.morie_polr}
 \title{Log-likelihood of method for \code{morie_polr} objects}
 \usage{
-logLik.morie_polr(object, ...)
+\method{logLik}{morie_polr}(object, ...) 
 }
 \arguments{
 \item{object}{A \code{morie_polr} object.}

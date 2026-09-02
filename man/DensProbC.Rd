@@ -10,6 +10,8 @@ DensProbC(grid, density, center, width)
 \item{grid, density}{the density on a strictly increasing grid.}
 
 \item{center, width}{the interval centre and total width.}
+
+
 }
 \value{
 list(probability, center, width).

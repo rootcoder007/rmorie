@@ -5,7 +5,7 @@
 \alias{PzForm}
 \title{Eq (3.69): H(z) = prod (1 - z_k z^-1) / prod (1 - p_k z^-1).  A pole}
 \usage{
-PzForm(zeros, poles, z = NULL, gain = 1)
+PzForm(zeros, poles, z = NULL, gain = 1) 
 }
 \arguments{
 \item{zeros}{Coerced to complex by the body, with \code{as.complex}.}

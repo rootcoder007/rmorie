@@ -356,8 +356,8 @@
 #' (1984)
 #'
 #' Theorem 2, p. 873: in one dimension the LMS location is the midpoint
-#' of the shortest half, found as the smallest of y_{h:n} - y_{1:n},
-#' ..., y_{n:n} - y_{n-h+1:n}.  The same contiguity argument gives the
+#' of the shortest half, found as the smallest of y_\{h:n\} - y_\{1:n\},
+#' ..., y_\{n:n\} - y_\{n-h+1:n\}.  The same contiguity argument gives the
 #' univariate MCD and MVE subsets.  Returns list(start, width, sorted)
 #' with a 1-based start.
 #'
@@ -380,7 +380,7 @@
 # c0 = alpha / F_chi2_{p+2}(q_alpha), alpha = h/n, q_alpha the chi2_p quantile.
 # Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045, "Definition".
 # Pchisq and Qchisq are the package's own native mirrors, not stats::.
-#' C0 = alpha / F_chi2_{p+2}(q_alpha), alpha = h/n, q_alpha the chi2_p
+#' C0 = alpha / F_chi2_\{p+2\}(q_alpha), alpha = h/n, q_alpha the chi2_p
 #' quantile
 #'
 #' Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,

@@ -5,7 +5,7 @@
 \alias{morie_latent_time}
 \title{A gene-shared clock: the per-cell median of the gene times. Each}
 \usage{
-morie_latent_time(fits)
+morie_latent_time(fits) 
 }
 \arguments{
 \item{fits}{A vector; its length is taken and its elements indexed.}

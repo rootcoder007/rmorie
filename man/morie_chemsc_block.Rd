@@ -5,7 +5,7 @@
 \alias{morie_chemsc_block}
 \title{The ChemScore block function of a deviation from ideal}
 \usage{
-morie_chemsc_block(d, d_ideal, d_max)
+morie_chemsc_block(d, d_ideal, d_max) 
 }
 \arguments{
 \item{d}{The deviation.}

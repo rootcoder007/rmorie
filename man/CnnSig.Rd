@@ -5,7 +5,7 @@
 \alias{CnnSig}
 \title{Section 10.8.2 names CNNs as the common deep model but gives no layer}
 \usage{
-CnnSig(x, kernels, bias = NULL, pool = 2, dense = NULL)
+CnnSig(x, kernels, bias = NULL, pool = 2, dense = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

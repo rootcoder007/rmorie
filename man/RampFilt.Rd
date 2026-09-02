@@ -3,9 +3,9 @@
 % the formals.
 \name{RampFilt}
 \alias{RampFilt}
-\title{Eq (3.42): h(t) = 10 (0.25 - t), 0 <= t <= 0.25 s, at fs = 2 kHz.}
+\title{Eq (3.42): h(t) = 10 (0.25 - t), 0 <= t <= 0.25 s, at fs = 2 kHz}
 \usage{
-RampFilt(x = NULL, fs = 2000, duration = 0.25, slope = 10)
+RampFilt(x = NULL, fs = 2000, duration = 0.25, slope = 10) 
 }
 \arguments{
 \item{x}{Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.}

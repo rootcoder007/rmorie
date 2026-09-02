@@ -5,7 +5,7 @@
 \alias{MsCoh}
 \title{C_xy = |S_xy|^2 / (S_xx S_yy) by Welch averaging (Bendat & Piersol}
 \usage{
-MsCoh(x, y, nperseg = NULL, overlap = 0.5)
+MsCoh(x, y, nperseg = NULL, overlap = 0.5) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}

@@ -40,6 +40,18 @@ morie_model_assisted(
 \item{zbar_pi, b_hats, xbar_true, xbar_pi}{Slope-form pieces.}
 
 \item{t_pi_z, t_pi_x, t_x_true}{Ratio pieces.}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with difference, gls_b, regr_general, regr_slopes, ratio,

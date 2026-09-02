@@ -5,7 +5,7 @@
 \alias{SpKappa}
 \title{Cohen\'s kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than}
 \usage{
-SpKappa(x, y, w)
+SpKappa(x, y, w) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}
@@ -13,7 +13,7 @@ SpKappa(x, y, w)
 \item{w}{Passed to \code{.morie_spx_chkw}.}
 }
 \description{
-same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij = I{x_i = y_j}.  The kappa coefficient itself is NOT in the book.
+same-site pairs; the pairing is Mantel\'s M2, eq (1.5), with U_ij = I\{x_i = y_j\}.  The kappa coefficient itself is NOT in the book.
 }
 \value{
 A list with \code{kappa}, \code{p_observed}, \code{p_expected}, \code{categories}, \code{s0}, \code{compares_neighbours_not_same_site}, \code{n}, \code{method}.

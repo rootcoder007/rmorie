@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Expected prediction error of the OLS fit.
+#' Expected prediction error of the OLS fit
 #'
 #' Formula: EPE(x_o) = sigma2 (1 + sum_j (x*_oj)^2 / lambda_j) with
 #' x* = Gamma'x_o and lambda_j the eigenvalues of X'X (p.80): nearly dependent

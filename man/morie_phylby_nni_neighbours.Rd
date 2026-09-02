@@ -5,7 +5,7 @@
 \alias{morie_phylby_nni_neighbours}
 \title{morie_phylby_nni_neighbours}
 \usage{
-morie_phylby_nni_neighbours(tree)
+morie_phylby_nni_neighbours(tree) 
 }
 \arguments{
 \item{tree}{Passed to \code{.phylby_nni_neighbours}.}

@@ -5,7 +5,7 @@
 \alias{is_forecastable}
 \title{is_forecastable}
 \usage{
-is_forecastable(spec, theta, tol = 1e-08)
+is_forecastable(spec, theta, tol = 1e-08) 
 }
 \arguments{
 \item{spec}{Passed to \code{spectral_radius}.}

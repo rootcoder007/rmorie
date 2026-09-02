@@ -5,7 +5,7 @@
 \alias{score_separation}
 \title{score_separation}
 \usage{
-score_separation(normal_scores, anomalous_scores)
+score_separation(normal_scores, anomalous_scores) 
 }
 \arguments{
 \item{normal_scores}{Passed to \code{.gan_an_as_num}.}

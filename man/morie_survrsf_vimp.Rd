@@ -5,7 +5,7 @@
 \alias{morie_survrsf_vimp}
 \title{Sec. 7: random daughter assignment at splits on x. Keys are}
 \usage{
-morie_survrsf_vimp(fit, X, variables = NULL, seed = 1)
+morie_survrsf_vimp(fit, X, variables = NULL, seed = 1) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$events}, \code{$times} from it.}

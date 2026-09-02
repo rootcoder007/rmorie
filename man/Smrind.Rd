@@ -2,22 +2,22 @@
 % Please edit documentation in R/smrest.R
 \name{Smrind}
 \alias{Smrind}
-\title{Standardised mortality ratio, indirect standardisation.}
+\title{Standardised mortality ratio, indirect standardisation}
 \usage{
 Smrind(observed, expected, alpha = 0.05)
 }
 \arguments{
-\item{observed}{Observed deaths.}
+\item{observed}{See Usage.}
 
-\item{expected}{Expected deaths under the reference rates.}
+\item{expected}{See Usage.}
 
-\item{alpha}{Two-sided significance level.}
+\item{alpha}{See Usage.}
 }
 \value{
 List with \code{smr}, \code{ci_lower}, \code{ci_upper}, \code{observed}, \code{expected}.
 }
 \description{
-Formula: SMR = O / E; exact Poisson limits chi2_{alpha/2, 2O}/2 and chi2_{1-alpha/2, 2(O+1)}/2, divided by E
+Formula: SMR = O / E; exact Poisson limits chi2_\{alpha/2, 2O\}/2 and chi2_\{1-alpha/2, 2(O+1)\}/2, divided by E
 }
 \examples{
 Smrind(observed = 5L, expected = 5L)

@@ -5,7 +5,7 @@
 \alias{QrsDerivMx}
 \title{Eq (4.3): y2(n) = 1.3 y0(n) + 1.1 y1(n).  Slope and curvature respond}
 \usage{
-QrsDerivMx(y0, y1)
+QrsDerivMx(y0, y1) 
 }
 \arguments{
 \item{y0}{A vector; its length is taken.}

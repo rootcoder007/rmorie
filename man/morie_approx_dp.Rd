@@ -27,6 +27,7 @@ repeatedly.}
 \item{bins}{histogram bins.}
 
 \item{seed}{optional integer seed.}
+
 }
 \value{
 list with \code{delta_empirical}, \code{n_violating_bins}.

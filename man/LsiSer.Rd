@@ -5,7 +5,7 @@
 \alias{LsiSer}
 \title{Eqs (3.43)-(3.45): s = x*h1, y = s*h2 = x*h, h = h1*h2.  One method,}
 \usage{
-LsiSer(x, h1, h2)
+LsiSer(x, h1, h2) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{Nernst}
 \title{Nernst: equilibrium (reverse) potential of a single ionic species}
 \usage{
-Nernst(T = 310.15, z = 1, conc_out = 5, conc_in = 140, ion = "K+")
+Nernst(T = 310.15, z = 1, conc_out = 5, conc_in = 140, ion = "K+") 
 }
 \arguments{
 \item{T}{Numeric; combined arithmetically in the body. Defaults to \code{310.15}.}

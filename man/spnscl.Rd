@@ -2,7 +2,7 @@
 % Please edit documentation in R/spnscl.R
 \name{spnscl}
 \alias{spnscl}
-\title{Neyman-Scott cluster process: second-order behaviour.}
+\title{Neyman-Scott cluster process: second-order behaviour}
 \usage{
 spnscl(r, rho = 10, mu = 5, sigma = 0.1)
 }

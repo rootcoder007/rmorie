@@ -10,6 +10,8 @@ Hampel(r, a = 2, b = 4, c = 8)
 \item{r}{Residuals, usually already scaled by a robust sigma.}
 
 \item{a, b, c}{The three bend points, 0 < a <= b < c.}
+
+
 }
 \value{
 list: estimate (mean psi), psi, psi_deriv, n_reject, n, a, b, c,

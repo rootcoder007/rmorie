@@ -2,7 +2,7 @@
 % Please edit documentation in R/nybhsn.R
 \name{Lctest}
 \alias{Lctest}
-\title{Nyblom-Hansen test that every OLS parameter is stable.}
+\title{Nyblom-Hansen test that every OLS parameter is stable}
 \usage{
 Lctest(y, X, add_intercept = TRUE, variance = TRUE)
 }

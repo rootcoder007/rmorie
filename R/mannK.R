@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mann-Kendall rank test for monotone trend.
+#' Mann-Kendall rank test for monotone trend
 #'
 #' Formula: \eqn{S = \sum_{i<j} \mathrm{sign}(x_j - x_i)} with null
 #' variance \eqn{\[n(n-1)(2n+5) - \sum t(t-1)(2t+5)\]/18} over the tie

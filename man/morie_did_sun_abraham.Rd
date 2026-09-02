@@ -25,6 +25,9 @@ morie_did_sun_abraham(
 \item{leads, lags}{Relative-time window to report. Defaults -4..4.}
 
 \item{alpha}{CI tail.}
+
+
+
 }
 \value{
 data.frame: rel_time, estimate, std.error, conf.low,

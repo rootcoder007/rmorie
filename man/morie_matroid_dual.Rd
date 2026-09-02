@@ -8,6 +8,7 @@ morie_matroid_dual(ground, independent)
 }
 \arguments{
 \item{ground, independent}{The matroid.}
+
 }
 \value{
 A list of integer vectors.

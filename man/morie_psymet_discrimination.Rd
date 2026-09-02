@@ -2,7 +2,7 @@
 % Please edit documentation in R/psymet.R
 \name{morie_psymet_discrimination}
 \alias{morie_psymet_discrimination}
-\title{Item discrimination (D-statistic).}
+\title{Item discrimination (D-statistic)}
 \usage{
 morie_psymet_discrimination(data, pct = 0.27)
 }

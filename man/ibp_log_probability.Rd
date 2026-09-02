@@ -5,7 +5,7 @@
 \alias{ibp_log_probability}
 \title{ibp_log_probability}
 \usage{
-ibp_log_probability(Z, alpha)
+ibp_log_probability(Z, alpha) 
 }
 \arguments{
 \item{Z}{A matrix; passed to \code{as.matrix}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm010.R
 \name{Msm010}
 \alias{Msm010}
-\title{General univariate linear mixed model.}
+\title{General univariate linear mixed model}
 \usage{
 Msm010(X, Z, y, D, R = NULL)
 }

@@ -29,6 +29,7 @@ Dinov2(
 \item{mask}{0/1 flag per patch, or NULL for every second patch.}
 
 \item{w_ibot, w_koleo}{Weights of the iBOT and KoLeo terms.}
+
 }
 \value{
 List with \code{estimate}, \code{loss}, \code{dino},

@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Besag-York-Mollie disease-mapping log-posterior kernel.
+#' Besag-York-Mollie disease-mapping log-posterior kernel
 #'
 #' y_i ~ Poisson(E_i exp(x_i'beta + u_i + v_i)) with an ICAR prior
-#' p(u) propto exp(-(tau_u/2) sum_{i~j}(u_i - u_j)^2) and v_i ~ N(0,
+#' p(u) propto exp(-(tau_u/2) sum_\{i~j\}(u_i - u_j)^2) and v_i ~ N(0,
 #' 1/tau_v).  The ICAR normalising rank is n - 1.
 #'
 #' @param y Observed counts per area.

@@ -22,7 +22,7 @@ Named list with \code{estimate}, \code{t1}, \code{t2}, \code{a}, \code{method}.
 \description{
 Theorem 2.1: for any \code{a > 0}, \code{a != 1},
 \deqn{\[J_h(x)\]^{t_1}\[J_{ah}(x)\]^{t_2} = F_X(x) + O(h^4),\quad t_1 = \frac{a^2}{a^2-1},\ t_2 = -\frac{1}{a^2-1},}{\[J_h(x)\]^t1 \[J_ah(x)\]^t2 = F(x) + O(h^4), t1 = a^2/(a^2-1), t2 = -1/(a^2-1),}
-with \code{J_h = E[Fhat_h]}. The exponents solve \code{t1 + t2 = 1} (keep \verb{log F})
+with \verb{J_h = E\[Fhat_h\]}. The exponents solve \code{t1 + t2 = 1} (keep \verb{log F})
 and \verb{t1 + a^2 t2 = 0} (kill the \code{h^2} term).
 }
 \details{

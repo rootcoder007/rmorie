@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_classify_mandela_combo}
 \alias{morie_otis_classify_mandela_combo}
-\title{Mandela alert-state classifier for an OTIS placement row.}
+\title{Mandela alert-state classifier for an OTIS placement row}
 \usage{
 morie_otis_classify_mandela_combo(
   mh,

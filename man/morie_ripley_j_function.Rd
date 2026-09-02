@@ -5,10 +5,16 @@
 \alias{morie_ripley_j_function}
 \title{morie_ripley_j_function}
 \usage{
-morie_ripley_j_function(points, window = NULL, r = NULL, n_grid = 40)
+morie_ripley_j_function(points, window = NULL, r = NULL, n_grid = 40) 
 }
 \description{
 morie_ripley_j_function
+}
+\arguments{
+\item{points}{Argument \code{points}; see Usage.}
+\item{window}{Argument \code{window}; see Usage.}
+\item{r}{Argument \code{r}; see Usage.}
+\item{n_grid}{Argument \code{n_grid}; see Usage.}
 }
 \value{
 A list with \code{r}, \code{j}, \code{g}, \code{f}, \code{j_csr}, \code{lambda_est}, \code{n_defined}, \code{method}.

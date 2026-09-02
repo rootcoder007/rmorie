@@ -5,7 +5,7 @@
 \alias{morie_goldsc_split}
 \title{The soft split potential: 4-8 outside the minimum, softer inside}
 \usage{
-morie_goldsc_split(r, r0, eps, outer = c(4, 8), inner = c(2, 4))
+morie_goldsc_split(r, r0, eps, outer = c(4, 8), inner = c(2, 4)) 
 }
 \arguments{
 \item{r}{The separation.}

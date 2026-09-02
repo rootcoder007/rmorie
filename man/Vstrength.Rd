@@ -2,12 +2,12 @@
 % Please edit documentation in R/sgtvst.R
 \name{Vstrength}
 \alias{Vstrength}
-\title{Vertex strengths of a weighted graph.}
+\title{Vertex strengths of a weighted graph}
 \usage{
 Vstrength(W)
 }
 \arguments{
-\item{W}{Weighted adjacency matrix; a zero entry means no edge.}
+\item{W}{See Usage.}
 }
 \value{
 List with \code{strength}, \code{degree}, \code{ratio}, \code{total}, \code{n}.

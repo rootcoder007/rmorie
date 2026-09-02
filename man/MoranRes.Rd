@@ -5,7 +5,7 @@
 \alias{MoranRes}
 \title{Eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book\'s own}
 \usage{
-MoranRes(residuals, w, x = NULL)
+MoranRes(residuals, w, x = NULL) 
 }
 \arguments{
 \item{residuals}{Passed to \code{.morie_spx_chkv}.}

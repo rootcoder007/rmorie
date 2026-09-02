@@ -5,10 +5,14 @@
 \alias{Nieff}
 \title{Natural indirect effect (Zheng & van der Laan 2012)}
 \usage{
-Nieff(y11, y10)
+Nieff(y11, y10) 
 }
 \description{
 Natural indirect effect (Zheng & van der Laan 2012)
+}
+\arguments{
+\item{y11}{Argument \code{y11}; see Usage.}
+\item{y10}{Argument \code{y10}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{mean_y11}, \code{mean_y10}, \code{n}.

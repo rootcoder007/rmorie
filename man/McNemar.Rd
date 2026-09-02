@@ -5,7 +5,7 @@
 \alias{McNemar}
 \title{Section 10.9.2, McNemar\'s test of SYMMETRY.  The book states it on a}
 \usage{
-McNemar(table, correct = NULL)
+McNemar(table, correct = NULL) 
 }
 \arguments{
 \item{table}{A matrix; passed to \code{as.matrix}.}

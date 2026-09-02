@@ -13,6 +13,7 @@ grid.}
 \item{n_components}{number of components to keep, 1 <= k <= min(n-1, m).}
 
 \item{a, b}{end points of the equally spaced grid.}
+
 }
 \value{
 list: estimate, scores, eigenfuncs, eigenvalues, mean, weights, n,

@@ -3,9 +3,15 @@
 % the formals.
 \name{alpha_composite}
 \alias{alpha_composite}
+\alias{gaussian_splatting}
+\alias{gaussiansplatting}
 \title{Front-to-back alpha compositing}
 \usage{
-alpha_composite(colours, alphas, depths = NULL)
+alpha_composite(colours, alphas, depths = NULL) 
+
+gaussian_splatting(colours, alphas, depths = NULL) 
+
+gaussiansplatting(colours, alphas, depths = NULL) 
 }
 \arguments{
 \item{colours}{Numeric matrix of per-Gaussian RGB (or more channels).}

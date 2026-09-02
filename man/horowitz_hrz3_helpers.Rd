@@ -2,8 +2,8 @@
 % Please edit documentation in R/aaa_helpers_hrz3.R
 \name{horowitz_hrz3_helpers}
 \alias{horowitz_hrz3_helpers}
-\title{Internal helpers for the Horowitz inverse-problem shelf.}
+\title{Internal helpers for the Horowitz inverse-problem shelf}
 \description{
-Internal helpers for the Horowitz inverse-problem shelf.
+Internal helpers for the Horowitz inverse-problem shelf
 }
 \keyword{internal}

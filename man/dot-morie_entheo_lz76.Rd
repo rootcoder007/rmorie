@@ -2,15 +2,18 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{.morie_entheo_lz76}
 \alias{.morie_entheo_lz76}
-\title{Lempel-Ziv (LZ76) complexity helper.}
+\title{Lempel-Ziv (LZ76) complexity helper}
 \usage{
 .morie_entheo_lz76(b)
+}
+\arguments{
+\item{b}{See Usage.}
 }
 \value{
 A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
 }
 \description{
-Lempel-Ziv (LZ76) complexity helper.
+Lempel-Ziv (LZ76) complexity helper
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

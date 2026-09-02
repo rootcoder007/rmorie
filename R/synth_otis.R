@@ -447,7 +447,7 @@
 # b01-style columns, the dispatcher falls through to b01 below when
 # the requested id has no dedicated panel.
 
-#' Build a synthetic OTIS data.frame for a given publication id.
+#' Build a synthetic OTIS data.frame for a given publication id
 #'
 #' Returns a data.frame mirroring the column shape + categorical level
 #' set of the published OTIS dataset for the given \code{id} (a01,
@@ -482,7 +482,7 @@ morie_synth_otis <- function(id, n = 200L, seed = 1L) {
   fn(n = n, seed = seed)
 }
 
-#' Build the full 29-dataset OTIS synthetic list.
+#' Build the full 29-dataset OTIS synthetic list
 #'
 #' Returns a named list of synthetic data.frames keyed by OTIS
 #' publication id (a01, b01..b09, c01..c12, d01..d07). Each frame is

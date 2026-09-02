@@ -5,7 +5,7 @@
 \alias{morie_tqipb_tail}
 \title{Tail probability for the inner-product error}
 \usage{
-morie_tqipb_tail(var, eps, norm_sq = 1, x_norm_sq = 1, tail = "chebyshev")
+morie_tqipb_tail(var, eps, norm_sq = 1, x_norm_sq = 1, tail = "chebyshev") 
 }
 \arguments{
 \item{var}{Variance bound, from morie_tqipb_variance.}

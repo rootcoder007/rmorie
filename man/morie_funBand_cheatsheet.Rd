@@ -5,7 +5,7 @@
 \alias{morie_funBand_cheatsheet}
 \title{morie_funBand_cheatsheet}
 \usage{
-morie_funBand_cheatsheet()
+morie_funBand_cheatsheet() 
 }
 \description{
 A step of the funBand_native implementation. No other function in the package calls it. See the file header for the source the module follows.

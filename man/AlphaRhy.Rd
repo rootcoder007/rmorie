@@ -5,7 +5,7 @@
 \alias{AlphaRhy}
 \title{The alpha band by convention; the SAME test serves the other bands,}
 \usage{
-AlphaRhy(x, fs, band = c(8, 13), threshold = 0.3)
+AlphaRhy(x, fs, band = c(8, 13), threshold = 0.3) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

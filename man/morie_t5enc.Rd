@@ -5,7 +5,8 @@
 \alias{morie_t5enc}
 \title{Entry point}
 \usage{
-morie_t5enc(method = c("task_prefix", "span_corruption", "relative_bucket", "format_regression", "parse_prediction", "cheatsheet"), ...)
+morie_t5enc(method = c("task_prefix", "span_corruption", "relative_bucket", 
+    "format_regression", "parse_prediction", "cheatsheet"), ...) 
 }
 \arguments{
 \item{method}{Passed to \code{match.arg}.}

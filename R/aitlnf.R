@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Fit the logistic-normal by transforming, then fitting a normal.
+#' Fit the logistic-normal by transforming, then fitting a normal
 #'
 #' The alr is a bijection onto R^\{D-1\}, so the MLE on the simplex is the
 #' multivariate-normal MLE of the transformed data; no optimisation is

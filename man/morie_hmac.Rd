@@ -20,6 +20,8 @@ morie_hmac(
 \item{algo}{md5, sha1, crc32, sha256, sha512 (digest's set), plus sha224 / sha384.}
 
 \item{serialize, raw, ...}{as in digest.}
+
+
 }
 \value{
 hex digest, or raw with \code{raw = TRUE}.

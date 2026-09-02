@@ -5,7 +5,7 @@
 \alias{IdftRI}
 \title{Eq (3.86): synthesis as a weighted sum of sinusoids.  The imaginary}
 \usage{
-IdftRI(X)
+IdftRI(X) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

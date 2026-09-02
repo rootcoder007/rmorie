@@ -11,7 +11,7 @@
 #' determinant of the sample covariance matrix is as small as possible, and S0
 #' is that covariance matrix multiplied by a consistency factor c0.
 #'
-#' The same source gives c0 = alpha / F_chi2_{p+2}(q_alpha) with alpha = h/n
+#' The same source gives c0 = alpha / F_chi2_\{p+2\}(q_alpha) with alpha = h/n
 #' and q_alpha the alpha-quantile of the chi2_p distribution, gives the most
 #' robust subset size h = \[(n + p + 1)/2\], and gives the requirement h > p,
 #' since otherwise every h-subset has a singular covariance matrix.

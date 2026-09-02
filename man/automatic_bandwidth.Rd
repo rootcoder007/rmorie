@@ -5,7 +5,7 @@
 \alias{automatic_bandwidth}
 \title{automatic_bandwidth}
 \usage{
-automatic_bandwidth(v, kernel = "qs", weights = NULL, n = NULL)
+automatic_bandwidth(v, kernel = "qs", weights = NULL, n = NULL) 
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}

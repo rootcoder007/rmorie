@@ -145,7 +145,7 @@
 
 # Stick-breaking: w_k = V_k prod_{j<k}(1 - V_j), V_k ~ Beta(1, alpha),
 # with the last stick closing so the weights sum to one exactly.
-#' Stick-breaking: w_k = V_k prod_{j<k}(1 - V_j), V_k ~ Beta(1, alpha),
+#' Stick-breaking: w_k = V_k prod_\{j<k\}(1 - V_j), V_k ~ Beta(1, alpha),
 #'
 #' with the last stick closing so the weights sum to one exactly.
 #'

@@ -5,10 +5,14 @@
 \alias{morie_msm_design}
 \title{morie_msm_design}
 \usage{
-morie_msm_design(treatment_history, extra = NULL)
+morie_msm_design(treatment_history, extra = NULL) 
 }
 \description{
 morie_msm_design
+}
+\arguments{
+\item{treatment_history}{Argument \code{treatment_history}; see Usage.}
+\item{extra}{Argument \code{extra}; see Usage.}
 }
 \value{
 A list with \code{X}, \code{a_bar}.

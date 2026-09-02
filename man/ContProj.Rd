@@ -5,7 +5,7 @@
 \alias{ContProj}
 \title{Eq (4.26): the continuous counterpart of eq (4.24).  Tabulated it is}
 \usage{
-ContProj(x, y, t = NULL, dt = 1)
+ContProj(x, y, t = NULL, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

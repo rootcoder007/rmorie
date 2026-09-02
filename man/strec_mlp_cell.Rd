@@ -5,7 +5,7 @@
 \alias{strec_mlp_cell}
 \title{strec_mlp_cell}
 \usage{
-strec_mlp_cell(m, W, b = NULL, activation = "tanh")
+strec_mlp_cell(m, W, b = NULL, activation = "tanh") 
 }
 \arguments{
 \item{m}{Coerced to numeric by the body, with \code{as.numeric}.}

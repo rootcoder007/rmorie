@@ -5,7 +5,7 @@
 \alias{planar_flow}
 \title{Planar flow \code{z + u*tanh(w\'z + b)} with its log-determinant}
 \usage{
-planar_flow(z, u, w, b)
+planar_flow(z, u, w, b) 
 }
 \arguments{
 \item{z,u,w}{Numeric vectors of equal length.}

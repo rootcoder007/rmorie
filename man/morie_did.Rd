@@ -31,6 +31,8 @@ period (NA/Inf = never treated).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{CI level tail. Default 0.05.}
+
+
 }
 \value{
 Object of class \code{"morie_did"}: estimate, std.error,

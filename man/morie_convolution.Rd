@@ -4,7 +4,7 @@
 \alias{morie_conv2d}
 \title{Convolutional feature maps}
 \usage{
-morie_conv2d(image, kernel, bias = 0, stride = 1, activation = NULL)
+morie_conv2d(image, kernel, bias = 0, stride = 1, activation = NULL) 
 }
 \arguments{
 \item{image}{numeric array, height x width or height x width x channels}

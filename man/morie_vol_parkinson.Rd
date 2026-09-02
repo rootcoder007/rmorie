@@ -10,6 +10,7 @@ morie_vol_parkinson(high, low, periods_per_year = NULL)
 \item{high, low}{per-bar highs and lows.}
 
 \item{periods_per_year}{optional annualisation factor.}
+
 }
 \value{
 list: variance, sigma, sigma_annualised, constant,

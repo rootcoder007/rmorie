@@ -2,26 +2,26 @@
 % Please edit documentation in R/sunabr.R
 \name{Iwdid}
 \alias{Iwdid}
-\title{Sun-Abraham interaction-weighted difference in differences.}
+\title{Sun-Abraham interaction-weighted difference in differences}
 \usage{
 Iwdid(y, unit, time, cohort, never = 0)
 }
 \arguments{
-\item{y}{Outcome, one row per unit-period.}
+\item{y}{See Usage.}
 
-\item{unit}{Unit identifier.}
+\item{unit}{See Usage.}
 
-\item{time}{Calendar period.}
+\item{time}{See Usage.}
 
-\item{cohort}{First treated period for the row's unit.}
+\item{cohort}{See Usage.}
 
-\item{never}{Value of \code{cohort} marking never-treated units.}
+\item{never}{See Usage.}
 }
 \value{
 List with \code{event_time}, \code{att}, \code{overall}, \code{cohorts}, \code{n}.
 }
 \description{
-Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in [-l, T-l]}
+Formula: nu_g = (1/|g|) sum_\{l in g\} sum_e CATT(e,l) Pr\{E=e | E in [-l, T-l]\}
 }
 \examples{
 Iwdid(y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), cohort = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm123.R
 \name{Msm123}
 \alias{Msm123}
-\title{RKHS optimization problem.}
+\title{RKHS optimization problem}
 \usage{
 Msm123(K, y, beta, eta0 = 0, lam = 1, loss = "squared")
 }
@@ -23,7 +23,7 @@ Msm123(K, y, beta, eta0 = 0, lam = 1, loss = "squared")
 List with estimate, objective, empirical_risk, rkhs_norm2, method.
 }
 \description{
-Formula: min over f in H of {(1/n) sum_i L(y_i, f(x_i)) + lambda ||f||_H^2}
+Formula: min over f in H of \{(1/n) sum_i L(y_i, f(x_i)) + lambda ||f||_H^2\}
 (eq. 8.1), the penalized empirical risk in a reproducing kernel Hilbert
 space, where L is minus the conditional log-likelihood for the response type
 and ||f||_H^2 measures model complexity. The objective is evaluated at a

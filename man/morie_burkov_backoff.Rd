@@ -5,7 +5,7 @@
 \alias{morie_burkov_backoff}
 \title{N-gram backoff with per-level discount (Burkov Ch 2)}
 \usage{
-morie_burkov_backoff(counts_by_order, alpha = 0.4)
+morie_burkov_backoff(counts_by_order, alpha = 0.4) 
 }
 \arguments{
 \item{counts_by_order}{List of `c(count_ngram, count_prefix)` pairs,   highest order first.}

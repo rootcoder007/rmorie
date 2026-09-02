@@ -5,7 +5,8 @@
 \alias{synthesize}
 \title{synthesize}
 \usage{
-synthesize(target_predict, c, n_features, feature_values = NULL, k_max = NULL, k_min = 1L, conf_min = 0.8, iter_max = 1000L, rej_max = 10L, seed = 0)
+synthesize(target_predict, c, n_features, feature_values = NULL, k_max = NULL, 
+    k_min = 1L, conf_min = 0.8, iter_max = 1000L, rej_max = 10L, seed = 0) 
 }
 \arguments{
 \item{target_predict}{Accepted by the signature and not used anywhere in the body.}

@@ -14,6 +14,7 @@ morie_geron_senet(x, r = 16, W1 = NULL, W2 = NULL, seed = 0)
 \item{W1, W2}{Optional excitation weights (C, C/r) and (C/r, C); default LCG.}
 
 \item{seed}{LCG seed when W1/W2 not supplied.}
+
 }
 \value{
 list with y, s, gate, z, hidden, n_params, estimate, n, method.

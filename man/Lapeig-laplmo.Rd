@@ -2,7 +2,7 @@
 % Please edit documentation in R/laplmo.R
 \name{Lapeig}
 \alias{Lapeig}
-\title{Eigenvectors of the normalised Laplacian for the k smallest values.}
+\title{Eigenvectors of the normalised Laplacian for the k smallest values}
 \usage{
 Lapeig(W, k = 2, tol = 1e-10)
 }

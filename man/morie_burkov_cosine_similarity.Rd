@@ -5,7 +5,7 @@
 \alias{morie_burkov_cosine_similarity}
 \title{Cosine similarity (Burkov Eq 1.5)}
 \usage{
-morie_burkov_cosine_similarity(x, y)
+morie_burkov_cosine_similarity(x, y) 
 }
 \arguments{
 \item{x,y}{Vectors; neither may be zero.}

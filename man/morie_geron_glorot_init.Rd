@@ -12,6 +12,7 @@ morie_geron_glorot_init(fan_in, fan_out, seed = 0, distribution = "uniform")
 \item{seed}{LCG seed.}
 
 \item{distribution}{"uniform" or "normal".}
+
 }
 \value{
 List with \code{W}, \code{limit}, \code{std}, \code{variance}, \code{fan_in},

@@ -5,7 +5,7 @@
 \alias{morie_vdcal_cheatsheet}
 \title{One-line summary of the vdcal module}
 \usage{
-morie_vdcal_cheatsheet()
+morie_vdcal_cheatsheet() 
 }
 \description{
 One-line summary of the vdcal module

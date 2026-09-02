@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of Laniyonu (2018) — Coffee Shops and Street Stops
+#' Replication of Laniyonu (2018) -- Coffee Shops and Street Stops
 #'
 #' R port of \code{morie.laniyonu.gentrification_policing}.  Estimates
 #' the direct, indirect (spatial spillover), and total effect of
@@ -118,7 +118,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Gentrification panel — baseline-conditional 3-level factor
+# Gentrification panel -- baseline-conditional 3-level factor
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Gent Panel

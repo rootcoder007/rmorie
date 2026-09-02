@@ -3,7 +3,7 @@
 \name{okrig}
 \alias{okrig}
 \alias{morie_ordinary_kriging}
-\title{Ordinary kriging prediction (exponential / gaussian / spherical).}
+\title{Ordinary kriging prediction (exponential / gaussian / spherical)}
 \usage{
 okrig(
   x,
@@ -35,6 +35,8 @@ morie_ordinary_kriging(
 \item{model}{"exponential", "gaussian", or "spherical".}
 
 \item{nugget, sill, range_}{Variogram parameters.}
+
+
 }
 \value{
 Named list: estimate, se, n, method.

@@ -5,7 +5,7 @@
 \alias{NormDist}
 \title{Eq (10.112): d_n = |m1 - m2| / (sigma1 + sigma2).  The denominator is}
 \usage{
-NormDist(m1, m2, s1, s2)
+NormDist(m1, m2, s1, s2) 
 }
 \arguments{
 \item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}

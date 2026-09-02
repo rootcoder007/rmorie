@@ -5,7 +5,7 @@
 \alias{morie_diffRC_posterior_mean}
 \title{DDPM posterior mean}
 \usage{
-morie_diffRC_posterior_mean(x_t, x0_hat, alpha_bar_t, alpha_bar_prev, beta_t)
+morie_diffRC_posterior_mean(x_t, x0_hat, alpha_bar_t, alpha_bar_prev, beta_t) 
 }
 \arguments{
 \item{x_t}{Numeric vector.}

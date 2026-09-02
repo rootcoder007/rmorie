@@ -16,13 +16,19 @@ morie_spline_logit(
 )
 }
 \arguments{
-\item{x}{Evaluation point. @param knot Single-knot piecewise pieces.}
+
+\item{knot}{See Usage.}
 
 \item{coef_left, coef_right}{Cubic coefficients per side.}
 
 \item{betas, knots}{Truncated-power pieces (4 + D coefficients).}
 
 \item{a, b_pt}{Odds-ratio evaluation points.}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+
+
 }
 \value{
 List with piecewise, spline, spline_or (as supplied).

@@ -14,6 +14,7 @@ Trsub(g, H, delta = 1, tol = 1e-13, max_iter = 200)
 \item{delta}{the trust-region radius.}
 
 \item{tol, max_iter}{root-finding controls.}
+
 }
 \value{
 list: estimate, s, lam, norm, boundary, hard_case, eigenvalues,

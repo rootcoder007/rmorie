@@ -5,7 +5,7 @@
 \alias{morie_spatial_smacof_step_cpp}
 \title{morie_spatial_smacof_step_cpp}
 \usage{
-morie_spatial_smacof_step_cpp(X, D, W)
+morie_spatial_smacof_step_cpp(X, D, W) 
 }
 \arguments{
 \item{X}{Passed to \code{.Call}.}

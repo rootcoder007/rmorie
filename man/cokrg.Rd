@@ -3,7 +3,7 @@
 \name{cokrg}
 \alias{cokrg}
 \alias{morie_cokrg}
-\title{Simple morie_cokriging for co-located bivariate spatial prediction.}
+\title{Simple morie_cokriging for co-located bivariate spatial prediction}
 \usage{
 cokrg(
   x,
@@ -49,6 +49,9 @@ morie_cokrg(
 \item{cross_sill, cross_range}{Cross-covariance parameters.}
 
 \item{nugget}{Nugget.}
+
+
+
 }
 \value{
 Named list: estimate, se, n, method.

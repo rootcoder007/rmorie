@@ -5,7 +5,7 @@
 \alias{morie_bnppvl_counts}
 \title{Counts of the observations falling in each of the k cells}
 \usage{
-morie_bnppvl_counts(u, q)
+morie_bnppvl_counts(u, q) 
 }
 \arguments{
 \item{u}{Observations mapped onto the unit interval.}

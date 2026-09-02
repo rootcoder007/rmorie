@@ -32,6 +32,7 @@ Gphtr(
 \item{iters}{Alternations; zero gives the homoscedastic GP.}
 
 \item{floor}{Lower bound on a squared residual before its logarithm.}
+
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{variance},

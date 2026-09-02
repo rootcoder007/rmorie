@@ -5,7 +5,7 @@
 \alias{probability_of_improvement}
 \title{probability_of_improvement}
 \usage{
-probability_of_improvement(mu, sd, best, xi = 0)
+probability_of_improvement(mu, sd, best, xi = 0) 
 }
 \arguments{
 \item{mu}{Numeric; combined arithmetically in the body.}

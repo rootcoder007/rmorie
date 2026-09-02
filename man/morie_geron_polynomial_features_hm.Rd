@@ -5,7 +5,7 @@
 \alias{morie_geron_polynomial_features_hm}
 \title{Polynomial feature expansion up to a given total degree (Geron Ch 4, hmplf)}
 \usage{
-morie_geron_polynomial_features_hm(X, degree, include_bias = TRUE, interaction_only = FALSE)
+morie_geron_polynomial_features_hm(X, degree, include_bias = TRUE, interaction_only = FALSE) 
 }
 \arguments{
 \item{X}{Data (m, n) or (m,).}

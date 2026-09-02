@@ -5,7 +5,7 @@
 \alias{morie_geron_onnx_export}
 \title{ONNX export trace: shape-traced graph validated on a concrete input (Geron App B, hmonnx)}
 \usage{
-morie_geron_onnx_export(model, args, file = NULL)
+morie_geron_onnx_export(model, args, file = NULL) 
 }
 \arguments{
 \item{model}{List of layer specs (`op`, `in_features`, `out_features`, ...).}

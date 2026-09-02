@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_trim}
 \alias{morie_weights_trim}
-\title{Trim extreme weights at percentile cutpoints.}
+\title{Trim extreme weights at percentile cutpoints}
 \usage{
 morie_weights_trim(
   weights,

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero pUCT action selection with min-max normalised values.
+#' MuZero pUCT action selection with min-max normalised values
 #'
 #' score(a) = Qbar(s,a) + P(s,a) sqrt(sum_b N(s,b)) / (1 + N(s,a))
 #'            * (c1 + log((sum_b N(s,b) + c2 + 1)/c2)),

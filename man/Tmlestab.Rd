@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlsta.R
 \name{Tmlestab}
 \alias{Tmlestab}
-\title{Stabilize a targeted estimate by truncating the propensity score.}
+\title{Stabilize a targeted estimate by truncating the propensity score}
 \usage{
 Tmlestab(Y, A, QAW, Q1W, Q0W, g1W, gbounds = NULL)
 }
@@ -14,6 +14,9 @@ Tmlestab(Y, A, QAW, Q1W, Q0W, g1W, gbounds = NULL)
 \item{g1W}{Initial propensity.}
 
 \item{gbounds}{Truncation levels to try.}
+
+
+
 }
 \value{
 List with \code{gbounds}, \code{estimate}, \code{se},

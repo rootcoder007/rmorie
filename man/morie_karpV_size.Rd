@@ -5,7 +5,7 @@
 \alias{morie_karpV_size}
 \title{Node count of an expression tree}
 \usage{
-morie_karpV_size(node)
+morie_karpV_size(node) 
 }
 \arguments{
 \item{node}{the tree.}

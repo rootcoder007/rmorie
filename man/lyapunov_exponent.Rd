@@ -5,7 +5,8 @@
 \alias{lyapunov_exponent}
 \title{lyapunov_exponent}
 \usage{
-lyapunov_exponent(y, embedding = NULL, tau = NULL, dt = 1, fit = NULL, min_sep = NULL, max_steps = NULL, method = "rosenstein", k = NULL)
+lyapunov_exponent(y, embedding = NULL, tau = NULL, dt = 1, fit = NULL, min_sep = NULL, 
+    max_steps = NULL, method = "rosenstein", k = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{divergence_curve}.}

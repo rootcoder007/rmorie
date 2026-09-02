@@ -8,6 +8,7 @@ morie_kamath_stereoset_bias(stereo_probs, anti_probs)
 }
 \arguments{
 \item{stereo_probs, anti_probs}{Paired probabilities.}
+
 }
 \value{
 List with \code{estimate}, \code{ss_score}, \code{bias_magnitude}, \code{n_ties}.

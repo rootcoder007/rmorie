@@ -5,7 +5,7 @@
 \alias{FishLda}
 \title{Section 10.4.2: w = S_W^-1 (m1 - m2), the direction maximizing the}
 \usage{
-FishLda(X, y)
+FishLda(X, y) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

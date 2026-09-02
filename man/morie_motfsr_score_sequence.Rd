@@ -5,7 +5,7 @@
 \alias{morie_motfsr_score_sequence}
 \title{Score every W-mer of a sequence}
 \usage{
-morie_motfsr_score_sequence(spec, sequence, alphabet, threshold = NULL)
+morie_motfsr_score_sequence(spec, sequence, alphabet, threshold = NULL) 
 }
 \arguments{
 \item{spec}{Log-odds matrix.}

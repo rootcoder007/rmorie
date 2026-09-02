@@ -5,7 +5,7 @@
 \alias{morie_frgrow_le}
 \title{Binding energy per heavy atom, positive and larger-is-better}
 \usage{
-morie_frgrow_le(kd, hac, route = "rt", temperature = .FRGROW_T_STANDARD)
+morie_frgrow_le(kd, hac, route = "rt", temperature = .FRGROW_T_STANDARD) 
 }
 \arguments{
 \item{kd}{The dissociation constant, in molar.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtnlap.R
 \name{Normlap}
 \alias{Normlap}
-\title{Normalised Laplacian in Chung's sense.}
+\title{Normalised Laplacian in Chung's sense}
 \usage{
 Normlap(W)
 }

@@ -5,7 +5,7 @@
 \alias{MASS_ginv}
 \title{Moore-Penrose pseudo-inverse, MASS::ginv\'s rule: relative cutoff}
 \usage{
-MASS_ginv(X, tol = sqrt(.Machine$double.eps))
+MASS_ginv(X, tol = sqrt(.Machine$double.eps)) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{dim}.}

@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_relative_bias}
 \title{Look a relative position up in a bias table}
 \usage{
-morie_vit2lf_relative_bias(coords, table, window, log_spaced = TRUE)
+morie_vit2lf_relative_bias(coords, table, window, log_spaced = TRUE) 
 }
 \arguments{
 \item{coords}{A two-column matrix of positions.}

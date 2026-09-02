@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Moments accountant for DP-SGD.
+#' Moments accountant for DP-SGD
 #'
 #' Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam exp(alpha(lam) - lam eps)
 #'
@@ -9,6 +9,11 @@
 #' @param delta Target delta.
 #' @param max_order Largest integer moment order searched.
 
+#' @param sigma See Usage.
+#' @param sample_rate See Usage.
+#' @param steps See Usage.
+#' @param delta See Usage.
+#' @param max_order See Usage.
 #' @return List with ``epsilon``, ``order``, ``logmgf``, ``delta``, ``sigma``, ``sample_rate``, ``steps``.
 #' @references Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified against the paper.
 #' @export

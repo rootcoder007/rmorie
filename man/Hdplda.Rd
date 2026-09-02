@@ -27,6 +27,8 @@ Hdplda(
 \item{eta}{symmetric Dirichlet smoothing.}
 
 \item{max_iter, tol}{EM controls.}
+
+
 }
 \value{
 list: estimate, loglik, phi, theta, beta, n_vocab, method.

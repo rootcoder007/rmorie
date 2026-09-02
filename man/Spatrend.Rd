@@ -2,7 +2,7 @@
 % Please edit documentation in R/bivand20138e5.R
 \name{Spatrend}
 \alias{Spatrend}
-\title{Spatial trend surface: linear mean plus correlated error.}
+\title{Spatial trend surface: linear mean plus correlated error}
 \usage{
 Spatrend(X, z, addintercept = TRUE)
 }
@@ -17,7 +17,7 @@ Spatrend(X, z, addintercept = TRUE)
 List with beta, fitted, resid, rss, sigma2, n, p.
 }
 \description{
-Z(s) = sum_{j=0}^p X_j(s) beta_j + e(s) = X beta + e(s), fitted by
+Z(s) = sum_\{j=0\}^p X_j(s) beta_j + e(s) = X beta + e(s), fitted by
 ordinary least squares; the residuals are what a variogram estimator
 should be given.
 }

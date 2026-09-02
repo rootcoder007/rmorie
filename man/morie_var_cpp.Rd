@@ -5,7 +5,7 @@
 \alias{morie_var_cpp}
 \title{morie_var_cpp}
 \usage{
-morie_var_cpp(x, ddof = 1L)
+morie_var_cpp(x, ddof = 1L) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

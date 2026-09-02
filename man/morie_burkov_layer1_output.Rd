@@ -5,7 +5,7 @@
 \alias{morie_burkov_layer1_output}
 \title{First hidden layer phi(W1 x + b1) (Burkov Eq 1.6)}
 \usage{
-morie_burkov_layer1_output(W_1, x, b_1, phi = "relu")
+morie_burkov_layer1_output(W_1, x, b_1, phi = "relu") 
 }
 \arguments{
 \item{W_1}{Weight matrix.}

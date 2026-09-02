@@ -5,7 +5,7 @@
 \alias{clrgrf_cheatsheet}
 \title{clrgrf_cheatsheet}
 \usage{
-clrgrf_cheatsheet()
+clrgrf_cheatsheet() 
 }
 \description{
 A step of the clrgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.

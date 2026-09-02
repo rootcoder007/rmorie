@@ -5,7 +5,7 @@
 \alias{GaussOverlap}
 \title{NOT FROM THIS BOOK.  A full-text search of the 2024 third edition --}
 \usage{
-GaussOverlap(m1, m2, C1, C2)
+GaussOverlap(m1, m2, C1, C2) 
 }
 \arguments{
 \item{m1}{Coerced to numeric by the body, with \code{as.numeric}.}

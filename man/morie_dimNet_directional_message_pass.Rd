@@ -5,7 +5,7 @@
 \alias{morie_dimNet_directional_message_pass}
 \title{One round of directional message passing}
 \usage{
-morie_dimNet_directional_message_pass(messages, adj, R, interact, update, cutoff = 5, n_rbf = 8L, n_sbf = 4L)
+morie_dimNet_directional_message_pass(messages, adj, R, interact, update, cutoff = 5, n_rbf = 8L, n_sbf = 4L) 
 }
 \arguments{
 \item{messages}{Named list keyed by directed edges \code{(j, i)}.}

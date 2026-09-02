@@ -5,7 +5,8 @@
 \alias{morie_cthrgr}
 \title{Natural direct and indirect effects from three honest forests}
 \usage{
-morie_cthrgr(y, D, M, X, route = "gcomputed", n_trees = 8L, min_leaf = 3L, max_depth = 3L, seed = 0, n_draw = 8L, newX = NULL)
+morie_cthrgr(y, D, M, X, route = "gcomputed", n_trees = 8L, min_leaf = 3L, 
+    max_depth = 3L, seed = 0, n_draw = 8L, newX = NULL) 
 }
 \arguments{
 \item{y}{Outcome.}

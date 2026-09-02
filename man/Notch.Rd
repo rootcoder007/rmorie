@@ -5,7 +5,7 @@
 \alias{Notch}
 \title{Notch}
 \usage{
-Notch(notch_freq, bandwidth = NULL, fs = 1000, r = NULL, z = NULL)
+Notch(notch_freq, bandwidth = NULL, fs = 1000, r = NULL, z = NULL) 
 }
 \arguments{
 \item{notch_freq}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{wsp_score}
 \title{wsp_score}
 \usage{
-wsp_score(alignment, scoring, s_op = 2.4, weights = NULL)
+wsp_score(alignment, scoring, s_op = 2.4, weights = NULL) 
 }
 \arguments{
 \item{alignment}{Iterated over elementwise, with \code{vapply}.}

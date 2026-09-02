@@ -4,9 +4,9 @@
 #' Source consulted as a rendered page image, not the OCR text layer:
 #' Mateu-Figueras, Pawlowsky-Glahn and Egozcue, "The normal distribution in
 #' some constrained sample spaces", pp. 10-11, which prints the Aitchison
-#' inner product <x, x*>_a = (1/D) sum_{i<j} ln(x_i/x_j) ln(x*_i/x*_j),
+#' inner product <x, x*>_a = (1/D) sum_\{i<j\} ln(x_i/x_j) ln(x*_i/x*_j),
 #' equation (10), and the default orthonormal basis of Egozcue et al. (2003),
-#' y_i = 1/sqrt(i(i+1)) * ln((x_1 x_2 ... x_i) / x_{i+1}^i), i = 1..D-1,
+#' y_i = 1/sqrt(i(i+1)) * ln((x_1 x_2 ... x_i) / x_\{i+1\}^i), i = 1..D-1,
 #' equation (11).
 #'
 #' Primary reference verified against Crossref: Egozcue, Pawlowsky-Glahn,
@@ -15,7 +15,7 @@
 #' 35(3), 279-300, doi:10.1023/a:1023818214614.
 #'
 #' Equation (11) is algebraically the contrast form used here,
-#' y_i = sqrt(i/(i+1)) * ((1/i) sum_{j<=i} ln x_j - ln x_{i+1}) = v_i' clr(x),
+#' y_i = sqrt(i/(i+1)) * ((1/i) sum_\{j<=i\} ln x_j - ln x_\{i+1\}) = v_i' clr(x),
 #' with clr(x) = ln x - mean(ln x); the mean subtraction cancels because every
 #' contrast column sums to zero, so the two routes agree exactly.
 #'

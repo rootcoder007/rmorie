@@ -5,7 +5,7 @@
 \alias{TwaEmd}
 \title{Odd/even T-wave alternans after EMD detrending, Sec 9.2.3 + Sec 9.4}
 \usage{
-TwaEmd(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.4), max_imfs = 6)
+TwaEmd(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.4), max_imfs = 6) 
 }
 \arguments{
 \item{ecg}{Passed to \code{.tf_need}.}

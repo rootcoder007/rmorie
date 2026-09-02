@@ -5,7 +5,7 @@
 \alias{EcgWaveShp}
 \title{EcgWaveShp}
 \usage{
-EcgWaveShp(qrsdur, stdev, rdur = NULL, sdur = NULL, qpresent = NULL)
+EcgWaveShp(qrsdur, stdev, rdur = NULL, sdur = NULL, qpresent = NULL) 
 }
 \arguments{
 \item{qrsdur}{Numeric; combined arithmetically in the body.}

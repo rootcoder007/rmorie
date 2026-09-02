@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Targeted estimate of the marginal risk difference E[Y_1] - E[Y_0].
+#' Targeted estimate of the marginal risk difference E\[Y_1\] - E\[Y_0\]
 #'
 #' The targeted estimate solves the efficient score equation, so its
 #' influence curve gives an honest standard error where the plug-in mean

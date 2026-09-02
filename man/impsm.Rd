@@ -13,6 +13,8 @@ morie_importance_sampling(x, h = NULL, p = NULL, q = NULL)
 \item{x}{numeric draws from q.}
 
 \item{h, p, q}{functions; default h(x)=x, p=q=dnorm (sanity-check identity).}
+
+
 }
 \value{
 list: estimate, estimate_sn, se, ess, n, method.

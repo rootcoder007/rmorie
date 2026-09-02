@@ -5,7 +5,7 @@
 \alias{morie_phylby_chain_temperature}
 \title{morie_phylby_chain_temperature}
 \usage{
-morie_phylby_chain_temperature(j, lam = 0.2)
+morie_phylby_chain_temperature(j, lam = 0.2) 
 }
 \arguments{
 \item{j}{Coerced to numeric by the body, with \code{as.numeric}.}

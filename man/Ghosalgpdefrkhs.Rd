@@ -10,6 +10,7 @@ Ghosalgpdefrkhs(Sigma, a, b)
 \item{Sigma}{Covariance matrix, k by k.}
 
 \item{a, b}{Coefficient vectors of length k.}
+
 }
 \value{
 List with \code{estimate} (the inner product), \code{h},

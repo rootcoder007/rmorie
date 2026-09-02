@@ -10,7 +10,7 @@
 #' A thin alias for \code{Rmst}; the estimator already exists and is not
 #' duplicated here.
 #'
-#' Formula: RMST(t*) = integral_0^{t*} S(u) du, the survival curve being a
+#' Formula: RMST(t*) = integral_0^\{t*\} S(u) du, the survival curve being a
 #' step function integrated as summed rectangles.
 #'
 #' @param fit Observed event or censoring times.

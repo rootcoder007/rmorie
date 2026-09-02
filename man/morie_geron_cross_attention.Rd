@@ -12,6 +12,9 @@ morie_geron_cross_attention(X_dec, X_enc, WQ, WK, WV, mask = NULL)
 \item{WQ, WK, WV}{Projection matrices.}
 
 \item{mask}{Optional logical matrix.}
+
+
+
 }
 \value{
 List with \code{output}, \code{attention_weights}, \code{logits}, \code{scale}, \code{d_k}.

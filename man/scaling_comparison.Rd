@@ -3,9 +3,9 @@
 % the formals.
 \name{scaling_comparison}
 \alias{scaling_comparison}
-\title{Rank configurations by Gflops.}
+\title{Rank configurations by Gflops}
 \usage{
-scaling_comparison(configs)
+scaling_comparison(configs) 
 }
 \arguments{
 \item{configs}{list of 5-tuples (name, latent, patch, depth, width).}

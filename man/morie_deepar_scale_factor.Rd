@@ -5,7 +5,7 @@
 \alias{morie_deepar_scale_factor}
 \title{Per-series scale factor}
 \usage{
-morie_deepar_scale_factor(z, t0 = NULL)
+morie_deepar_scale_factor(z, t0 = NULL) 
 }
 \arguments{
 \item{z}{Numeric vector.}

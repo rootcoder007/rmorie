@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtlap.R
 \name{Graphlap}
 \alias{Graphlap}
-\title{Combinatorial (unnormalised) Laplacian of a weighted graph.}
+\title{Combinatorial (unnormalised) Laplacian of a weighted graph}
 \usage{
 Graphlap(W)
 }

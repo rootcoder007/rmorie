@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Polya-tree Bayes factor for H0: F = N(loc, scale^2).
+#' Polya-tree Bayes factor for H0: F = N(loc, scale^2)
 #'
 #' @param x Numeric data vector.
 #' @param ref_loc Numeric reference location (default 0).

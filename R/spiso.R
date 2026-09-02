@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Isotropy check by comparing directional semivariograms.
+#' Isotropy check by comparing directional semivariograms
 #'
 #' A second-order stationary field is ISOTROPIC when the covariance
 #' depends only on the LENGTH of the lag, C(h) = C(||h||), so no

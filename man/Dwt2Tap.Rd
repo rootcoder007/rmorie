@@ -5,7 +5,7 @@
 \alias{Dwt2Tap}
 \title{Two-tap (Haar / db1) orthogonal DWT}
 \usage{
-Dwt2Tap(x, levels = 3)
+Dwt2Tap(x, levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

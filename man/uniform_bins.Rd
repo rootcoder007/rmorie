@@ -5,7 +5,7 @@
 \alias{uniform_bins}
 \title{uniform_bins}
 \usage{
-uniform_bins(lo = -15, hi = 15, n_bins = 4096L)
+uniform_bins(lo = -15, hi = 15, n_bins = 4096L) 
 }
 \arguments{
 \item{lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-15}.}

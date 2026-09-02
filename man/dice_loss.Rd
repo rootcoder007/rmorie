@@ -5,7 +5,7 @@
 \alias{dice_loss}
 \title{dice_loss}
 \usage{
-dice_loss(prob, target)
+dice_loss(prob, target) 
 }
 \arguments{
 \item{prob}{Coerced to numeric by the body, with \code{as.numeric}.}

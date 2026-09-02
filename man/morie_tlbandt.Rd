@@ -5,7 +5,7 @@
 \alias{morie_tlbandt}
 \title{morie_tlbandt}
 \usage{
-morie_tlbandt(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0, greedy = FALSE, burn_in = 20L)
+morie_tlbandt(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0, greedy = FALSE, burn_in = 20L) 
 }
 \arguments{
 \item{W}{A matrix; passed to \code{as.matrix}.}

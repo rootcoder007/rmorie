@@ -8,6 +8,8 @@ morie_geron_cross_entropy_gradient(X, Y, theta)
 }
 \arguments{
 \item{X, Y, theta}{As for \code{morie_geron_cross_entropy_cost}.}
+
+
 }
 \value{
 List with \code{gradient}, \code{probabilities}, \code{cost}, \code{grad_norm},

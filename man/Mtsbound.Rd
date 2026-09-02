@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdmnsl.R
 \name{Mtsbound}
 \alias{Mtsbound}
-\title{Monotone treatment selection bounds.}
+\title{Monotone treatment selection bounds}
 \usage{
 Mtsbound(y, z, d, ymin, ymax)
 }
@@ -14,6 +14,7 @@ Mtsbound(y, z, d, ymin, ymax)
 \item{d}{Level whose mean counterfactual is bounded.}
 
 \item{ymin, ymax}{A priori support of the outcome.}
+
 }
 \value{
 List with lower, upper, width, condmean, pbelow, pat, pabove,

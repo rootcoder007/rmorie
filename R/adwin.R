@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' ADWIN adaptive windowing for change detection.
+#' ADWIN adaptive windowing for change detection
 #'
 #' Drops observations from the tail of the window while some split
 #' W = W0 . W1 has |mean(W0) - mean(W1)| >= eps_cut, where

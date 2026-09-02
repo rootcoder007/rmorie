@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Functional clustering by k-means on B-spline coefficients.
+#' Functional clustering by k-means on B-spline coefficients
 #'
 #' Formula: c_i = argmin ||y_i - B c||^2 per curve, then Lloyd k-means on the coefficient vectors
 #'
@@ -8,6 +8,10 @@
 #' @param basis B-spline basis on the grid; raw curves if omitted.
 #' @param iters Fixed number of Lloyd iterations.
 
+#' @param Y See Usage.
+#' @param K See Usage.
+#' @param basis See Usage.
+#' @param iters See Usage.
 #' @return List with ``labels``, ``centers``, ``coef``, ``wss``, ``K``, ``n``.
 #' @references Abraham, Cornillon, Matzner-Lober and Molinari (2003), Unsupervised curve clustering using B-splines, Scandinavian Journal of Statistics 30(3):581-595. The article itself is behind a paywall and could not be obtained; the two-stage form implemented here -- fit B-spline coefficients per curve, then k-means on the coefficient vectors -- is as the method is described in the functional-clustering review literature (arXiv:1803.00276).
 #' @export

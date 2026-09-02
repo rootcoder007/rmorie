@@ -8,7 +8,7 @@
 #' serve every smoothness at once.  The series converges exactly when
 #' the penalty c beats the rate scale.
 #'
-#' Formula: S = sum_{k=1}^{K} pi_k exp(n eps_k^2),
+#' Formula: S = sum_\{k=1\}^\{K\} pi_k exp(n eps_k^2),
 #'   log pi_k = -c k log n - log Z,  n eps_k^2 = eps_scale k log n.
 #'
 #' @param n Sample size entering both the weights and the rate.

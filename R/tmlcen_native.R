@@ -290,7 +290,7 @@ morie_coarsen_interval <- function(times, deltas) {
 }
 
 # censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j | A, W))
-#' Censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j |
+#' Censoring_survival: Gbar_c(k | A, W) = prod_\{j<=k\} (1 - lambda_C(j |
 #' A, W))
 #'
 #' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.

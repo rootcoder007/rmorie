@@ -25,7 +25,7 @@ doi:10.1023/a:1023866030544 (citation verified against Crossref).
 \details{
 For a composition x with constant sum kappa and zero set Z the
 multiplicative replacement puts x'_j = delta_j for j in Z and
-x'\emph{j = x_j (1 - (sum}{k in Z} delta_k) / kappa) otherwise.  The rule
+x'\emph{j = x_j (1 - (sum}\{k in Z\} delta_k) / kappa) otherwise.  The rule
 preserves the total exactly and leaves every ratio between two non-zero
 parts untouched, which is what makes it a perturbation rather than an
 additive fudge that would distort the very log-ratios it protects.  A row

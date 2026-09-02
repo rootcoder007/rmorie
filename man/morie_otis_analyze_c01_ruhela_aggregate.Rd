@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c01_ruhela_aggregate}
 \alias{morie_otis_analyze_c01_ruhela_aggregate}
 \alias{morie_otis_analyze_c01_mrm_aggregate}
-\title{c01 aggregate Ruhela: Female -> RC count.}
+\title{c01 aggregate Ruhela: Female -> RC count}
 \usage{
 morie_otis_analyze_c01_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c01_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c01 aggregate Ruhela: Female -> RC count.
+c01 aggregate Ruhela: Female -> RC count
 }
 \examples{
 \donttest{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm026.R
 \name{Msm026}
 \alias{Msm026}
-\title{Multi-trait genomic linear mixed model.}
+\title{Multi-trait genomic linear mixed model}
 \usage{
 Msm026(Y, Z, G, Sigma_T, R_T)
 }

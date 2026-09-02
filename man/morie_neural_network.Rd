@@ -6,9 +6,11 @@
 \alias{morie_ann_train}
 \title{Feed-forward neural networks}
 \usage{
-morie_ann_forward(X, W, activations = NULL)
-morie_ann_gradients(X, y, W, activations = NULL)
-morie_ann_train(X, y, W, eta = 0.1, n_iter = 500L, activations = NULL, tol = 1e-12)
+morie_ann_forward(X, W, activations = NULL) 
+
+morie_ann_gradients(X, y, W, activations = NULL) 
+
+morie_ann_train(X, y, W, eta = 0.1, n_iter = 500L, activations = NULL, tol = 1e-12) 
 }
 \arguments{
 \item{X}{numeric matrix of inputs, one row per observation}

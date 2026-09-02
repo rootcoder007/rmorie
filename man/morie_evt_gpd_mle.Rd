@@ -5,7 +5,7 @@
 \alias{morie_evt_gpd_mle}
 \title{GPD maximum-likelihood fit (Coles 2001 sec. 4.3.2)}
 \usage{
-morie_evt_gpd_mle(y)
+morie_evt_gpd_mle(y) 
 }
 \arguments{
 \item{y}{threshold excesses}

@@ -3,7 +3,7 @@
 #'
 #' DUPLICATE, resolved by aliasing (wave-2 DUPMAP: varimp -> irfun). Both
 #' names denote the orthogonalised impulse response of a VAR(p): the MA
-#' recursion Phi_0 = I, Phi_h = sum_{j=1..min(h,p)} A_j Phi_{h-j}, with
+#' recursion Phi_0 = I, Phi_h = sum_\{j=1..min(h,p)\} A_j Phi_\{h-j\}, with
 #' shocks orthogonalised by the lower Cholesky factor P of Sigma_u, so
 #' Theta_h = Phi_h P. The name is a trap -- it reads as "variable
 #' importance", but the stub docstring and the wave-2 categorisation both

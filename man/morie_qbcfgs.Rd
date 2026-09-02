@@ -5,7 +5,8 @@
 \alias{morie_qbcfgs}
 \title{A stratum-balanced treatment effect and its balance table}
 \usage{
-morie_qbcfgs(y, D, X, quantile = 0.5, n_strata = 4L, weight = "ate", n_trees = 8L, min_leaf = 3L, max_depth = 3L, seed = 0, clip = 0.01)
+morie_qbcfgs(y, D, X, quantile = 0.5, n_strata = 4L, weight = "ate", n_trees = 8L, 
+    min_leaf = 3L, max_depth = 3L, seed = 0, clip = 0.01) 
 }
 \arguments{
 \item{y}{Outcome.}

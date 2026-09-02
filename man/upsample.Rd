@@ -5,7 +5,7 @@
 \alias{upsample}
 \title{upsample}
 \usage{
-upsample(grid, factor = 2)
+upsample(grid, factor = 2) 
 }
 \arguments{
 \item{grid}{Passed to \code{.samdec_mat}.}

@@ -5,10 +5,16 @@
 \alias{bpr_auc_R}
 \title{Per-user AUC for a BPR matrix-factorisation}
 \usage{
-bpr_auc_R(W, H, pos, n_items)
+bpr_auc_R(W, H, pos, n_items) 
 }
 \description{
 Eq. (1) of Rendle et al. (2009): \eqn{\sum z_u \delta(\hat x_{uij} > 0)}. The indicator is strict, so a tie scores zero.
+}
+\arguments{
+\item{W}{Argument \code{W}; see Usage.}
+\item{H}{Argument \code{H}; see Usage.}
+\item{pos}{Argument \code{pos}; see Usage.}
+\item{n_items}{Argument \code{n_items}; see Usage.}
 }
 \value{
 List with \code{auc}, \code{per_user}, \code{note}.

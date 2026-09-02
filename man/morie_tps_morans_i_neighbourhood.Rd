@@ -38,6 +38,7 @@ incident counts, and normality yields the optimistic p-value.}
 
 \item{use_spdep}{Retained for back-compat; ignored (the native
 Cliff-Ord computation is always used). Default \code{FALSE}.}
+
 }
 \value{
 A named list with classes \code{morie_tps_spatial_result},

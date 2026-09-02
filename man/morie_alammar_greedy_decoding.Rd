@@ -5,7 +5,7 @@
 \alias{morie_alammar_greedy_decoding}
 \title{Greedy and sampled decoding (Alammar Ch 6)}
 \usage{
-morie_alammar_greedy_decoding(logits)
+morie_alammar_greedy_decoding(logits) 
 }
 \arguments{
 \item{logits}{Matrix, one row per step.}

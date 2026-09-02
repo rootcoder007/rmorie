@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_poststratify}
 \alias{morie_survey_poststratify}
-\title{Post-stratification weights (sample-to-population alignment).}
+\title{Post-stratification weights (sample-to-population alignment)}
 \usage{
 morie_survey_poststratify(df, strata_col, population_counts)
 }

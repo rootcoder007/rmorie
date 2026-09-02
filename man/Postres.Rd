@@ -5,10 +5,15 @@
 \alias{Postres}
 \title{Posterior-averaged Poisson residual (Lawson eq. 5.2)}
 \usage{
-Postres(y, e, theta_draws)
+Postres(y, e, theta_draws) 
 }
 \description{
 Posterior-averaged Poisson residual (Lawson eq. 5.2)
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{e}{Argument \code{e}; see Usage.}
+\item{theta_draws}{Argument \code{theta_draws}; see Usage.}
 }
 \value{
 A list with \code{residual}, \code{fitted}, \code{n}, \code{n_draws}.

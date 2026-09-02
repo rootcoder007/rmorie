@@ -5,7 +5,7 @@
 \alias{IirDiffGen}
 \title{Eq (3.144): the time-domain form of eq (3.143), and how a designed}
 \usage{
-IirDiffGen(x, b_k, a_k = NULL, n = NULL)
+IirDiffGen(x, b_k, a_k = NULL, n = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{IirDiff}.}

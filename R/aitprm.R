@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' PERMANOVA pseudo-F from a distance matrix.
+#' PERMANOVA pseudo-F from a distance matrix
 #'
-#' SS_T = (1/N) sum_{i<j} d_ij^2; SS_W = sum_{i<j} d_ij^2 eps_ij/n_g;
+#' SS_T = (1/N) sum_\{i<j\} d_ij^2; SS_W = sum_\{i<j\} d_ij^2 eps_ij/n_g;
 #' F = (SS_A/(a-1)) / (SS_W/(N-a)) with SS_A = SS_T - SS_W.
 #'
 #' @param X Rows are compositions (positive) or numeric vectors.

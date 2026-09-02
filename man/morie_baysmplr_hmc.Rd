@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_hmc}
 \title{Hamiltonian Monte Carlo with a fixed trajectory}
 \usage{
-morie_baysmplr_hmc(log_p, grad, x0, n_iter, e, eps = 0.1, steps = 10L)
+morie_baysmplr_hmc(log_p, grad, x0, n_iter, e, eps = 0.1, steps = 10L) 
 }
 \arguments{
 \item{log_p}{The log density.}

@@ -5,7 +5,7 @@
 \alias{morie_unclr_alr_inv}
 \title{morie_unclr_alr_inv}
 \usage{
-morie_unclr_alr_inv(z, total)
+morie_unclr_alr_inv(z, total) 
 }
 \arguments{
 \item{z}{Numeric; passed to \code{exp}.}

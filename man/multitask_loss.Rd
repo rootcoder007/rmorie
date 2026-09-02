@@ -5,7 +5,7 @@
 \alias{multitask_loss}
 \title{multitask_loss}
 \usage{
-multitask_loss(l_cls, l_box, l_mask)
+multitask_loss(l_cls, l_box, l_mask) 
 }
 \arguments{
 \item{l_cls}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -26,6 +26,30 @@ morie_variogram_design(
 \item{mu, a_i, b_ij, c_ijk, eps}{Nested pieces. @param a,da_list REML
 pieces. @param cov_theta,dv_dtheta VKV pieces. @param v_ok,e_tau2 AKV
 pieces. @param dlam_dtheta,a_mat Tau2 pieces. @param akv,vkv EAC.}
+
+\item{a}{See Usage.}
+
+\item{da_list}{See Usage.}
+
+\item{cov_theta}{See Usage.}
+
+\item{dv_dtheta}{See Usage.}
+
+\item{v_ok}{See Usage.}
+
+\item{e_tau2}{See Usage.}
+
+\item{dlam_dtheta}{See Usage.}
+
+\item{a_mat}{See Usage.}
+
+\item{akv}{See Usage.}
+
+\item{vkv}{See Usage.}
+
+
+
+
 }
 \value{
 List with nested, fisher_info, vkv, akv, e_tau2, eac.

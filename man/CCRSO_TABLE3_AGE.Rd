@@ -2,10 +2,8 @@
 % Please edit documentation in R/doob_trends.R
 \name{CCRSO_TABLE3_AGE}
 \alias{CCRSO_TABLE3_AGE}
-\title{CCRSO/StatsCan Table 3 — 2018 age distribution}
-\usage{
-CCRSO_TABLE3_AGE
-}
+\title{CCRSO/StatsCan Table 3 -- 2018 age distribution}
+
 \description{
-CCRSO/StatsCan Table 3 — 2018 age distribution
+CCRSO/StatsCan Table 3 -- 2018 age distribution
 }

@@ -5,7 +5,7 @@
 \alias{morie_secrtt_seal_record}
 \title{Encrypt a record under its own DEK}
 \usage{
-morie_secrtt_seal_record(plaintext, dek, nonce, aad = raw())
+morie_secrtt_seal_record(plaintext, dek, nonce, aad = raw()) 
 }
 \arguments{
 \item{plaintext}{Raw bytes.}

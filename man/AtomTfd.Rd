@@ -5,7 +5,8 @@
 \alias{AtomTfd}
 \title{Matching-pursuit TFD, eq (9.15) over the Gabor dictionary}
 \usage{
-AtomTfd(x, fs = 1, dictionary = "gabor", max_atoms = 8, nfreq = NULL, min_decay = 0.001)
+AtomTfd(x, fs = 1, dictionary = "gabor", max_atoms = 8, nfreq = NULL, 
+    min_decay = 0.001) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

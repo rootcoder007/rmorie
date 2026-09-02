@@ -5,10 +5,15 @@
 \alias{Wsrsimpow}
 \title{Simulated signed-rank power over supplied samples -- Sec. 5.7.3, p. 204}
 \usage{
-Wsrsimpow(samples, m0, tcrit)
+Wsrsimpow(samples, m0, tcrit) 
 }
 \description{
 Simulated signed-rank power over supplied samples -- Sec. 5.7.3, p. 204
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{m0}{Argument \code{m0}; see Usage.}
+\item{tcrit}{Argument \code{tcrit}; see Usage.}
 }
 \value{
 A list with \code{power}, \code{rejections}, \code{nsim}, \code{tmean}, \code{tcrit}.

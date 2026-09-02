@@ -5,7 +5,8 @@
 \alias{morie_safrl_cmdp_returns}
 \title{morie_safrl_cmdp_returns}
 \usage{
-morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0.9, start = NULL, iters = 5000, tol = 1e-14)
+morie_safrl_cmdp_returns(policy, states, actions, step, reward, costs, gamma = 0.9, start = NULL, 
+    iters = 5000, tol = 1e-14) 
 }
 \arguments{
 \item{policy}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,7 @@
 \alias{postprocessing}
 \title{Lemma 1.8: any function of the output keeps the same rho}
 \usage{
-postprocessing(rho)
+postprocessing(rho) 
 }
 \arguments{
 \item{rho}{zCDP parameter, must be positive.}

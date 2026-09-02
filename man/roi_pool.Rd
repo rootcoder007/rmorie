@@ -5,7 +5,7 @@
 \alias{roi_pool}
 \title{roi_pool}
 \usage{
-roi_pool(features, box, out_size = 2L, stride = 1)
+roi_pool(features, box, out_size = 2L, stride = 1) 
 }
 \arguments{
 \item{features}{Passed to \code{.masrcn_mat}.}

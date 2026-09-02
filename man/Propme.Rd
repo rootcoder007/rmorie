@@ -14,6 +14,8 @@ Propme(a, b, c_prime, se_a = NULL, se_b = NULL, se_c_prime = NULL)
 \item{c_prime}{Direct effect X to Y adjusted for M.}
 
 \item{se_a, se_b, se_c_prime}{Optional standard errors of the paths.}
+
+
 }
 \value{
 List with \code{estimate}, \code{same_sign},

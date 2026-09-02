@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_load}
 \alias{morie_dataset_load}
-\title{Load a dataset from a CSV / TSV / Excel / Parquet / JSON file.}
+\title{Load a dataset from a CSV / TSV / Excel / Parquet / JSON file}
 \usage{
 morie_dataset_load(path, encoding = "UTF-8", ...)
 }

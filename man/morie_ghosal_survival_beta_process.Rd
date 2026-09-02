@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghsrv.R
 \name{morie_ghosal_survival_beta_process}
 \alias{morie_ghosal_survival_beta_process}
-\title{Beta-process posterior survival (Hjort 1990).}
+\title{Beta-process posterior survival (Hjort 1990)}
 \usage{
 morie_ghosal_survival_beta_process(time, event = NULL, c = 1, lam0 = NULL)
 }
@@ -19,7 +19,7 @@ morie_ghosal_survival_beta_process(time, event = NULL, c = 1, lam0 = NULL)
 Named list with estimate, times, S_post, H_post, c, lam0, n, method.
 }
 \description{
-Beta-process posterior survival (Hjort 1990).
+Beta-process posterior survival (Hjort 1990)
 }
 \examples{
 morie_ghosal_survival_beta_process(time = cumsum(rexp(50)))

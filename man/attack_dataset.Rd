@@ -5,7 +5,7 @@
 \alias{attack_dataset}
 \title{attack_dataset}
 \usage{
-attack_dataset(model_predict, in_X, in_y, out_X, out_y)
+attack_dataset(model_predict, in_X, in_y, out_X, out_y) 
 }
 \arguments{
 \item{model_predict}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,8 @@
 \alias{fixed_length_ci}
 \title{fixed_length_ci}
 \usage{
-fixed_length_ci(beta, sigma, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, level = 0.95)
+fixed_length_ci(beta, sigma, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, 
+    level = 0.95) 
 }
 \arguments{
 \item{beta}{Passed to \code{identified_set}.}

@@ -5,7 +5,7 @@
 \alias{Diff1}
 \title{Eq (3.123) run over a record, with the coefficients reported so the}
 \usage{
-Diff1(x, T = 1)
+Diff1(x, T = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{FDiff}.}

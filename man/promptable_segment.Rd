@@ -5,7 +5,7 @@
 \alias{promptable_segment}
 \title{promptable_segment}
 \usage{
-promptable_segment(image_embedding, prompt_tokens, decoder, multimask = TRUE)
+promptable_segment(image_embedding, prompt_tokens, decoder, multimask = TRUE) 
 }
 \arguments{
 \item{image_embedding}{Passed to \code{decoder}.}

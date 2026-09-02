@@ -5,7 +5,8 @@
 \alias{morie_tlboot}
 \title{morie_tlboot}
 \usage{
-morie_tlboot(data, estimator, B = 200L, seed = 0L, method = c("naive", "targeted", "multiplier"), ic = NULL)
+morie_tlboot(data, estimator, B = 200L, seed = 0L, method = c("naive", "targeted", 
+    "multiplier"), ic = NULL) 
 }
 \arguments{
 \item{data}{Coerced to list by the body, with \code{as.list}.}

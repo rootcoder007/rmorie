@@ -5,7 +5,7 @@
 \alias{morie_burkov_kneser_ney}
 \title{Kneser-Ney smoothing (Burkov Ch 2)}
 \usage{
-morie_burkov_kneser_ney(counts_ngram, counts_prefix, continuation_counts, d = 0.75)
+morie_burkov_kneser_ney(counts_ngram, counts_prefix, continuation_counts, d = 0.75) 
 }
 \arguments{
 \item{counts_ngram,counts_prefix}{Counts.}

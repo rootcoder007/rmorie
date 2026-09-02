@@ -5,7 +5,7 @@
 \alias{morie_velocity}
 \title{Nu = beta*u - gamma*s, the derivative of spliced abundance}
 \usage{
-morie_velocity(u, s, beta, gamma)
+morie_velocity(u, s, beta, gamma) 
 }
 \arguments{
 \item{u}{Coerced to numeric by the body, with \code{as.numeric}.}
