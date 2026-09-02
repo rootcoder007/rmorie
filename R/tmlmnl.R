@@ -26,7 +26,9 @@
 #' @examples
 #' Tmlmnl(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmnl <- function(y, D, X, ml_q = NULL, ml_g = NULL) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n == 0L || length(Dv) != n)
     stop("Tmlmnl: y and D must share one length")
   Xm <- as.matrix(X)
@@ -38,10 +40,14 @@ Tmlmnl <- function(y, D, X, ml_q = NULL, ml_g = NULL) {
   K <- 5L
   W <- cbind(1, Xm)
   des <- cbind(Dv, W)
-  g <- numeric(n); Qobs <- numeric(n); Q1 <- numeric(n); Q0 <- numeric(n)
+  g <- numeric(n)
+  Qobs <- numeric(n)
+  Q1 <- numeric(n)
+  Q0 <- numeric(n)
   fold <- (seq_len(n) - 1L) %% K
   for (k in 0:(K - 1L)) {
-    te <- which(fold == k); tr <- which(fold != k)
+    te <- which(fold == k)
+    tr <- which(fold != k)
     if (length(te) == 0L || length(tr) < 2L) next
     gp <- fg(W[tr, , drop = FALSE], Dv[tr], W[te, , drop = FALSE])
     g[te] <- .s4_clip(as.numeric(gp), 0.025, 0.975)

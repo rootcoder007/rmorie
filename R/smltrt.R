@@ -25,7 +25,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ratioest(V, V)
 Ratioest <- function(y, x, X = NULL, N = Inf, level = 0.95) {
-  y <- .t1_vec(y); x <- .t1_vec(x); n <- length(y)
+  y <- .t1_vec(y)
+  x <- .t1_vec(x)
+  n <- length(y)
   if (length(x) != n) stop("y and x must have the same length")
   if (n < 2L) stop("a variance needs at least two observations")
   xb <- mean(x)

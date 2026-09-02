@@ -22,8 +22,10 @@
 #' @examples
 #' Scoredist(b = 5L, d = 5L)
 Scoredist <- function(b, d, query_norm = 1, n_keys = 1) {
-  b <- as.numeric(b); d <- as.integer(d)
-  qn <- as.numeric(query_norm); nk <- as.integer(n_keys)
+  b <- as.numeric(b)
+  d <- as.integer(d)
+  qn <- as.numeric(query_norm)
+  nk <- as.integer(n_keys)
   if (b < 0) stop("the bit-width must be non-negative")
   if (d < 1L) stop("the dimension must be at least 1")
   if (qn < 0) stop("the query norm must be non-negative")

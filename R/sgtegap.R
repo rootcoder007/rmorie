@@ -20,7 +20,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Eigengap(V)
 Eigengap <- function(values, kmax = NULL) {
-  v <- .t1_vec(values); n <- length(v)
+  v <- .t1_vec(values)
+  n <- length(v)
   if (n < 2L) stop("at least two eigenvalues are required")
   if (any(diff(v) < -1e-12))
     stop("eigenvalues must be given in increasing order")

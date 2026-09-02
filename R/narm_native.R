@@ -36,7 +36,8 @@ narm_attention_weights <- function(h_t, H, A1, A2, v) {
   Hm <- as.matrix(H)
   if (nrow(Hm) == 0L) return(numeric(0))
   sc <- numeric(nrow(Hm))
-  A1 <- as.matrix(A1); A2 <- as.matrix(A2)
+  A1 <- as.matrix(A1)
+  A2 <- as.matrix(A2)
   v <- as.numeric(v)
   for (j in seq_len(nrow(Hm))) {
     hj <- Hm[j, ]
@@ -121,7 +122,9 @@ narm_bilinear_scores <- function(embeddings, B, c_t) {
 #' @return A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
 #' @export
 narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
-  N <- as.integer(n_items); H <- as.integer(hidden); D <- as.integer(emb_dim)
+  N <- as.integer(n_items)
+  H <- as.integer(hidden)
+  D <- as.integer(emb_dim)
   if (min(N, H, D) < 1L) stop("narm: all three sizes must be at least 1")
   list(fully_connected = N * H, bilinear = D * H,
        ratio = (N * H) / (D * H),

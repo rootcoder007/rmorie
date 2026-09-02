@@ -85,9 +85,12 @@ Vitfwd <- function(x, patch_size, embed_dim, num_heads, num_layers,
     zn <- .vitlnrows(z)
     heads <- vector("list", k)
     for (hh in seq_len(k)) {
-      Uq <- .vitdraw(d, dh, skip, w_scale); skip <- skip + d * dh
-      Uk <- .vitdraw(d, dh, skip, w_scale); skip <- skip + d * dh
-      Uv <- .vitdraw(d, dh, skip, w_scale); skip <- skip + d * dh
+      Uq <- .vitdraw(d, dh, skip, w_scale)
+      skip <- skip + d * dh
+      Uk <- .vitdraw(d, dh, skip, w_scale)
+      skip <- skip + d * dh
+      Uv <- .vitdraw(d, dh, skip, w_scale)
+      skip <- skip + d * dh
       sa <- Vitatt(.s03matmul(zn, Uq), .s03matmul(zn, Uk), .s03matmul(zn, Uv))
       heads[[hh]] <- sa$output
       attn <- sa$attn
@@ -96,7 +99,8 @@ Vitfwd <- function(x, patch_size, embed_dim, num_heads, num_layers,
     for (hh in seq_len(k)) {
       for (c in seq_len(dh)) cat_[, (hh - 1L) * dh + c] <- heads[[hh]][, c]
     }
-    Umsa <- .vitdraw(k * dh, d, skip, w_scale); skip <- skip + k * dh * d
+    Umsa <- .vitdraw(k * dh, d, skip, w_scale)
+    skip <- skip + k * dh * d
     msa <- .s03matmul(cat_, Umsa)
     z <- z + msa
     zn2 <- .vitlnrows(z)

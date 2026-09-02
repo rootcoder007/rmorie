@@ -29,10 +29,14 @@
   p <- xv^b
   u <- yv / p
   v <- xv / p
-  mu_u <- 0; mu_v <- 0
-  for (i in seq_len(n)) { mu_u <- mu_u + u[i]; mu_v <- mu_v + v[i] }
-  mu_u <- mu_u / n; mu_v <- mu_v / n
-  svv <- 0; suv <- 0
+  mu_u <- 0
+  mu_v <- 0
+  for (i in seq_len(n)) { mu_u <- mu_u + u[i]
+  mu_v <- mu_v + v[i] }
+  mu_u <- mu_u / n
+  mu_v <- mu_v / n
+  svv <- 0
+  suv <- 0
   for (i in seq_len(n)) {
     dv <- v[i] - mu_v
     svv <- svv + dv * dv
@@ -80,11 +84,13 @@ Evhpvr <- function(X, u) {
   if (ncol(M) != 2L) stop("X must have exactly two columns")
   u <- as.numeric(u)
   keep <- M[, 1] > u
-  xv <- M[keep, 1]; yv <- M[keep, 2]
+  xv <- M[keep, 1]
+  yv <- M[keep, 2]
   k <- length(xv)
   if (k < 3L) stop("fewer than three exceedances of u; nothing to fit")
   if (any(xv <= 0)) stop("the conditioning variable must be positive above u")
-  b_lo <- 0; b_hi <- 0.999
+  b_lo <- 0
+  b_hi <- 0.999
   dg <- function(b) {
     h <- 1e-4
     lo <- if (b - h > b_lo) b - h else b_lo
@@ -99,23 +105,29 @@ Evhpvr <- function(X, u) {
     cb <- b_lo + (b_hi - b_lo) * i / grid
     cur <- dg(cb)
     if ((prev <= 0 && 0 <= cur) || (cur <= 0 && 0 <= prev)) {
-      lo <- prev_b; hi <- cb; flo <- prev
+      lo <- prev_b
+      hi <- cb
+      flo <- prev
       for (it in seq_len(100)) {
         mid <- 0.5 * (lo + hi)
         fm <- dg(mid)
-        if ((flo <= 0) == (fm <= 0)) { lo <- mid; flo <- fm } else hi <- mid
+        if ((flo <= 0) == (fm <= 0)) { lo <- mid
+        flo <- fm } else hi <- mid
       }
       b <- 0.5 * (lo + hi)
       break
     }
-    prev_b <- cb; prev <- cur
+    prev_b <- cb
+    prev <- cur
   }
   if (is.na(b)) {
-    bf <- Inf; b <- b_lo
+    bf <- Inf
+    b <- b_lo
     for (i in 0:grid) {
       cb <- b_lo + (b_hi - b_lo) * i / grid
       f <- .ht_prof(xv, yv, cb)$f
-      if (f < bf) { bf <- f; b <- cb }
+      if (f < bf) { bf <- f
+      b <- cb }
     }
   }
   r <- .ht_prof(xv, yv, b)

@@ -325,7 +325,9 @@ simplex <- function(c, A, b, rule = "bland", max_iter = 10000,
         if (i < m) {
           for (r in (i + 1L):m) {
             if (abs(T[r, j + 1L]) > .clpopt_eps) {
-              tmp <- T[i, ]; T[i, ] <- T[r, ]; T[r, ] <- tmp
+              tmp <- T[i, ]
+              T[i, ] <- T[r, ]
+              T[r, ] <- tmp
               swapped <- TRUE
               break
             }

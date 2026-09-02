@@ -41,17 +41,20 @@
 #' Ldcmpr(V, V)
 Ldcmpr <- function(geno1, geno2, phased = FALSE) {
   if (isTRUE(phased)) {
-    a <- as.numeric(geno1); b <- as.numeric(geno2)
+    a <- as.numeric(geno1)
+    b <- as.numeric(geno2)
     if (length(a) != length(b)) stop("geno1 and geno2 must be the same length", call. = FALSE)
     n <- length(a)
     if (n < 2L) stop("need at least 2 haplotypes", call. = FALSE)
     if (!all(a %in% c(0, 1)) || !all(b %in% c(0, 1))) {
       stop("phased inputs must be coded 0/1", call. = FALSE)
     }
-    pA <- sum(a) / n; pB <- sum(b) / n
+    pA <- sum(a) / n
+    pB <- sum(b) / n
     pAB <- sum(a * b) / n
     d <- pAB - pA * pB
-    pa <- 1 - pA; pb <- 1 - pB
+    pa <- 1 - pA
+    pb <- 1 - pB
     denom <- pA * pa * pB * pb
     r <- if (denom > 0) d / sqrt(denom) else NaN
     dmax <- min(pA * pb, pa * pB)
@@ -65,13 +68,17 @@ Ldcmpr <- function(geno1, geno2, phased = FALSE) {
       method = "LD r^2 (Hill-Robertson 1968), phased haplotypes"))
   }
   base <- Dprime(geno1, geno2)
-  g1 <- as.numeric(geno1); g2 <- as.numeric(geno2)
+  g1 <- as.numeric(geno1)
+  g2 <- as.numeric(geno2)
   ok <- g1 %in% c(0, 1, 2) & g2 %in% c(0, 1, 2)
-  x <- g1[ok]; y <- g2[ok]
+  x <- g1[ok]
+  y <- g2[ok]
   n <- length(x)
-  mx <- mean(x); my <- mean(y)
+  mx <- mean(x)
+  my <- mean(y)
   sxy <- sum((x - mx) * (y - my))
-  sxx <- sum((x - mx)^2); syy <- sum((y - my)^2)
+  sxx <- sum((x - mx)^2)
+  syy <- sum((y - my)^2)
   r2g <- if (sxx > 0 && syy > 0) (sxy * sxy) / (sxx * syy) else NaN
   list(
     estimate = base$r2, r = base$r, D = base$D, Dprime = base$estimate,

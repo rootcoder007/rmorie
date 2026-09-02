@@ -46,7 +46,8 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
   out <- list(eps_infinity = 2 * h * log((1 - half_f) / half_f))
   if (!is.null(p) && !is.null(q)) {
     st <- morie_rappor_star(f, p, q)
-    qs <- st$q_star; ps <- st$p_star
+    qs <- st$q_star
+    ps <- st$p_star
     if (!(ps > 0 && ps < 1) || !(qs > 0 && qs < 1))
       stop("morie_rappor: q* and p* must lie strictly in (0, 1)")
     out$eps_1 <- h * log((qs * (1 - ps)) / (ps * (1 - qs)))
@@ -109,10 +110,14 @@ morie_rappor <- function(values, k = 16, h = 2, f = 0.5, p = 0.5, q = 0.75,
   vals <- values
   n <- length(vals)
   if (n < 1) stop("morie_rappor: need at least one value")
-  k <- as.integer(k)[1]; h <- as.integer(h)[1]; m <- as.integer(cohorts)[1]
+  k <- as.integer(k)[1]
+  h <- as.integer(h)[1]
+  m <- as.integer(cohorts)[1]
   if (k < 1) stop("morie_rappor: k must be at least 1")
   if (m < 1) stop("morie_rappor: cohorts must be at least 1")
-  f <- as.numeric(f)[1]; p <- as.numeric(p)[1]; q <- as.numeric(q)[1]
+  f <- as.numeric(f)[1]
+  p <- as.numeric(p)[1]
+  q <- as.numeric(q)[1]
   if (f < 0 || f > 1) stop("morie_rappor: f must lie in [0, 1]")
   if (p < 0 || p > 1) stop("morie_rappor: p must lie in [0, 1]")
   if (q < 0 || q > 1) stop("morie_rappor: q must lie in [0, 1]")
@@ -120,7 +125,9 @@ morie_rappor <- function(values, k = 16, h = 2, f = 0.5, p = 0.5, q = 0.75,
   alphabet <- NULL
   if (var == "basic") {
     alphabet <- sort(unique(as.character(vals)))
-    k <- length(alphabet); h <- 1L; m <- 1L
+    k <- length(alphabet)
+    h <- 1L
+    m <- 1L
   }
 
   g <- .ghc_rng(seed)
@@ -187,7 +194,9 @@ morie_rappor <- function(values, k = 16, h = 2, f = 0.5, p = 0.5, q = 0.75,
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_rappor_decode(V, V)
 morie_rappor_decode <- function(counts, sizes, f = 0.5, p = 0.5, q = 0.75) {
-  f <- as.numeric(f)[1]; p <- as.numeric(p)[1]; q <- as.numeric(q)[1]
+  f <- as.numeric(f)[1]
+  p <- as.numeric(p)[1]
+  q <- as.numeric(q)[1]
   denom <- (1 - f) * (q - p)
   if (denom == 0)
     stop("morie_rappor_decode: (1 - f)(q - p) is zero, so the reports ",

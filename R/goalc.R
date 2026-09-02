@@ -35,13 +35,15 @@ Goalcond <- function(env, policy = NULL, goal_dist = NULL, n_states = NULL,
   pred <- vector("list", ns)
   for (i in seq_len(ns)) pred[[i]] <- integer(0)
   for (i in seq_len(nr)) {
-    s <- as.integer(rows[i, 1]) + 1L; s2 <- as.integer(rows[i, 3]) + 1L
+    s <- as.integer(rows[i, 1]) + 1L
+    s2 <- as.integer(rows[i, 3]) + 1L
     pred[[s2]] <- c(pred[[s2]], s)
   }
   gd <- if (!is.null(goal_dist)) .s03mat(goal_dist) else
     cbind(seq_len(ns) - 1, rep(1, ns))
   if (ncol(gd) == 1L) gd <- cbind(gd, rep(1, nrow(gd)))
-  goals <- as.integer(gd[, 1]); wts <- gd[, 2]
+  goals <- as.integer(gd[, 1])
+  wts <- gd[, 2]
   wtot <- 0
   for (x in wts) wtot <- wtot + x
   ng <- length(goals)
@@ -55,7 +57,8 @@ Goalcond <- function(env, policy = NULL, goal_dist = NULL, n_states = NULL,
     while (length(frontier) > 0L) {
       nxt <- integer(0)
       for (u in frontier) {
-        for (p in pred[[u]]) if (dist[p] < 0L) { dist[p] <- dist[u] + 1L; nxt <- c(nxt, p) }
+        for (p in pred[[u]]) if (dist[p] < 0L) { dist[p] <- dist[u] + 1L
+        nxt <- c(nxt, p) }
       }
       frontier <- nxt
     }

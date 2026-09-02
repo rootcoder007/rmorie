@@ -85,7 +85,8 @@ morie_is_matroid <- function(ground, independent) {
   for (s in fam) {
     for (e in s) {
       if (!has(setdiff(s, e))) {
-        hered_bad <- list(s, setdiff(s, e)); break
+        hered_bad <- list(s, setdiff(s, e))
+        break
       }
     }
     if (!is.null(hered_bad)) break
@@ -97,7 +98,8 @@ morie_is_matroid <- function(ground, independent) {
         if (length(a) >= length(b)) next
         extra <- setdiff(b, a)
         if (!any(vapply(extra, function(x) has(c(a, x)), logical(1)))) {
-          exch_bad <- list(a, b); break
+          exch_bad <- list(a, b)
+          break
         }
       }
       if (!is.null(exch_bad)) break
@@ -218,7 +220,8 @@ morie_matroid_dual <- function(ground, independent) {
 #' @examples
 #' morie_uniform_matroid(n = 5L, k = 5L)
 morie_uniform_matroid <- function(n, k) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (n < 0L || k < 0L) stop("n and k must be non-negative.", call. = FALSE)
   # 1-based, like every other ground set in this package. The Python
   # side is 0-based; counts and weights are index-free and must agree,
@@ -258,7 +261,8 @@ morie_graphic_matroid <- function(edges, n_vertices) {
       x
     }
     for (i in sub) {
-      a <- find(E[[i]][1]); b <- find(E[[i]][2])
+      a <- find(E[[i]][1])
+      b <- find(E[[i]][2])
       if (a == b) return(FALSE)
       uf[a] <- b
     }
@@ -308,11 +312,13 @@ morie_greedy_independent_set <- function(ground, independent, weights) {
 morie_brute_force_max_weight <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
-  best <- NULL; best_set <- NULL
+  best <- NULL
+  best_set <- NULL
   for (s in independent) {
     si <- sort(as.integer(s))
     tot <- if (length(si)) sum(w[as.character(si)]) else 0
-    if (is.null(best) || tot > best) { best <- tot; best_set <- si }
+    if (is.null(best) || tot > best) { best <- tot
+    best_set <- si }
   }
   list(set = best_set, weight = if (is.null(best)) 0 else best)
 }
@@ -356,9 +362,11 @@ morie_minimum_spanning_tree <- function(edges, n_vertices, weights = NULL) {
     x
   }
   ord <- if (m >= 1L) order(w, seq_len(m)) else integer(0)
-  chosen <- integer(0); total <- 0
+  chosen <- integer(0)
+  total <- 0
   for (i in ord) {
-    a <- find(E[[i]][1]); b <- find(E[[i]][2])
+    a <- find(E[[i]][1])
+    b <- find(E[[i]][2])
     if (a != b) {
       uf[a] <- b
       chosen <- c(chosen, i)
@@ -387,13 +395,15 @@ morie_minimum_spanning_tree <- function(edges, n_vertices, weights = NULL) {
 #' @return A list with `size`, `pairs`, `match_right`.
 #' @export
 morie_bipartite_matching <- function(left_n, right_n, edges) {
-  ln <- as.integer(left_n); rn <- as.integer(right_n)
+  ln <- as.integer(left_n)
+  rn <- as.integer(right_n)
   if (ln < 0L || rn < 0L) stop("both sides must be non-negative.",
                                call. = FALSE)
   adj <- vector("list", max(ln, 1L))
   for (i in seq_len(ln)) adj[[i]] <- integer(0)
   for (e in edges) {
-    a <- as.integer(e[1]); b <- as.integer(e[2])
+    a <- as.integer(e[1])
+    b <- as.integer(e[2])
     if (a < 1L || a > ln) {
       stop(sprintf("left endpoint %d leaves 1 .. %d", a, ln), call. = FALSE)
     }
@@ -450,7 +460,8 @@ morie_bipartite_matching <- function(left_n, right_n, edges) {
 #' E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
 #' morie_konig_theorem(3, 3, E)
 morie_konig_theorem <- function(left_n, right_n, edges) {
-  ln <- as.integer(left_n); rn <- as.integer(right_n)
+  ln <- as.integer(left_n)
+  rn <- as.integer(right_n)
   m <- morie_bipartite_matching(ln, rn, edges)
   match_r <- m$match_right
   match_l <- rep(0L, ln)
@@ -460,16 +471,19 @@ morie_konig_theorem <- function(left_n, right_n, edges) {
   for (e in edges) {
     adj[[as.integer(e[1])]] <- c(adj[[as.integer(e[1])]], as.integer(e[2]))
   }
-  vis_l <- rep(FALSE, ln); vis_r <- rep(FALSE, rn)
+  vis_l <- rep(FALSE, ln)
+  vis_r <- rep(FALSE, rn)
   stack <- which(match_l == 0L)
   vis_l[stack] <- TRUE
   while (length(stack)) {
-    u <- stack[length(stack)]; stack <- stack[-length(stack)]
+    u <- stack[length(stack)]
+    stack <- stack[-length(stack)]
     for (v in adj[[u]]) {
       if (v != match_l[u] && !vis_r[v]) {
         vis_r[v] <- TRUE
         nu <- match_r[v]
-        if (nu != 0L && !vis_l[nu]) { vis_l[nu] <- TRUE; stack <- c(stack, nu) }
+        if (nu != 0L && !vis_l[nu]) { vis_l[nu] <- TRUE
+        stack <- c(stack, nu) }
       }
     }
   }
@@ -515,17 +529,21 @@ morie_konig_theorem <- function(left_n, right_n, edges) {
 #' @examples
 #' morie_hall_condition(3, 2, list(c(1, 1), c(2, 1), c(3, 2)))
 morie_hall_condition <- function(left_n, right_n, edges) {
-  ln <- as.integer(left_n); rn <- as.integer(right_n)
+  ln <- as.integer(left_n)
+  rn <- as.integer(right_n)
   nbr <- vector("list", max(ln, 1L))
   for (i in seq_len(ln)) nbr[[i]] <- integer(0)
   for (e in edges) {
-    a <- as.integer(e[1]); b <- as.integer(e[2])
+    a <- as.integer(e[1])
+    b <- as.integer(e[2])
     if (a < 1L || a > ln || b < 1L || b > rn) {
       stop("an edge endpoint is out of range.", call. = FALSE)
     }
     nbr[[a]] <- union(nbr[[a]], b)
   }
-  holds <- TRUE; worst <- NULL; worst_def <- 0L
+  holds <- TRUE
+  worst <- NULL
+  worst_def <- 0L
   if (ln >= 1L) {
     for (r in seq_len(ln)) {
       cmb <- utils::combn(ln, r, simplify = FALSE)
@@ -534,7 +552,8 @@ morie_hall_condition <- function(left_n, right_n, edges) {
         deficit <- length(S) - length(un)
         if (deficit > 0L) {
           holds <- FALSE
-          if (deficit > worst_def) { worst_def <- deficit; worst <- S }
+          if (deficit > worst_def) { worst_def <- deficit
+          worst <- S }
         }
       }
     }
@@ -587,19 +606,25 @@ morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
   R <- C
   flow <- 0
   repeat {
-    parent <- rep(0L, n); parent[s] <- s
+    parent <- rep(0L, n)
+    parent[s] <- s
     queue <- s
     while (length(queue) && parent[t] == 0L) {
-      u <- queue[1]; queue <- queue[-1]
+      u <- queue[1]
+      queue <- queue[-1]
       for (v in seq_len(n)) {
         if (parent[v] == 0L && R[u, v] > 1e-12) {
-          parent[v] <- u; queue <- c(queue, v)
+          parent[v] <- u
+          queue <- c(queue, v)
         }
       }
     }
     if (parent[t] == 0L) break
-    push <- Inf; v <- t
-    while (v != s) { u <- parent[v]; push <- min(push, R[u, v]); v <- u }
+    push <- Inf
+    v <- t
+    while (v != s) { u <- parent[v]
+    push <- min(push, R[u, v])
+    v <- u }
     v <- t
     while (v != s) {
       u <- parent[v]
@@ -609,15 +634,19 @@ morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
     }
     flow <- flow + push
   }
-  reach <- rep(FALSE, n); reach[s] <- TRUE
+  reach <- rep(FALSE, n)
+  reach[s] <- TRUE
   queue <- s
   while (length(queue)) {
-    u <- queue[1]; queue <- queue[-1]
+    u <- queue[1]
+    queue <- queue[-1]
     for (v in seq_len(n)) {
-      if (!reach[v] && R[u, v] > 1e-12) { reach[v] <- TRUE; queue <- c(queue, v) }
+      if (!reach[v] && R[u, v] > 1e-12) { reach[v] <- TRUE
+      queue <- c(queue, v) }
     }
   }
-  cut_cap <- 0; cut_edges <- list()
+  cut_cap <- 0
+  cut_edges <- list()
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (reach[i] && !reach[j] && C[i, j] > 0) {

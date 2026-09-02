@@ -92,8 +92,10 @@ morie_qbcfgs_strata <- function(e, n_strata) {
 morie_qbcfgs_smd <- function(x, d, w = NULL) {
   n <- length(x)
   if (is.null(w)) w <- rep(1, n)
-  t <- which(d == 1L); c0 <- which(d == 0L)
-  s1 <- .w3_csum(w[t]); s0 <- .w3_csum(w[c0])
+  t <- which(d == 1L)
+  c0 <- which(d == 0L)
+  s1 <- .w3_csum(w[t])
+  s0 <- .w3_csum(w[c0])
   if (s1 <= 0 || s0 <= 0) return(NaN)
   m1 <- .w3_csum(w[t] * x[t]) / s1
   m0 <- .w3_csum(w[c0] * x[c0]) / s0
@@ -131,8 +133,10 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
     stop("weight must be one of ", paste(.QBCFGS_WEIGHTS, collapse = ", "))
   ys <- as.numeric(y)
   d <- as.integer(ifelse(as.numeric(D) != 0, 1L, 0L))
-  xs <- as.matrix(X); storage.mode(xs) <- "double"
-  n <- length(ys); p <- ncol(xs)
+  xs <- as.matrix(X)
+  storage.mode(xs) <- "double"
+  n <- length(ys)
+  p <- ncol(xs)
   if (length(d) != n || nrow(xs) != n)
     stop("y, D and X must agree in length")
   q <- as.integer(n_strata)
@@ -154,8 +158,10 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
   n_clipped <- 0L
   e <- numeric(n)
   for (i in seq_len(n)) {
-    if (raw[i] < clip) { e[i] <- clip; n_clipped <- n_clipped + 1L }
-    else if (raw[i] > 1 - clip) { e[i] <- 1 - clip; n_clipped <- n_clipped + 1L }
+    if (raw[i] < clip) { e[i] <- clip
+    n_clipped <- n_clipped + 1L }
+    else if (raw[i] > 1 - clip) { e[i] <- 1 - clip
+    n_clipped <- n_clipped + 1L }
     else e[i] <- raw[i]
   }
 
@@ -179,14 +185,19 @@ morie_qbcfgs <- function(y, D, X, quantile = 0.5, n_strata = 4L,
     w[mem] <- raww * (length(mem) / tot)
   }
 
-  eff <- numeric(q); size <- integer(q)
+  eff <- numeric(q)
+  size <- integer(q)
   for (k in 0:(q - 1L)) {
     mem <- which(s == k)
-    t <- mem[d[mem] == 1L]; c0 <- mem[d[mem] == 0L]
+    t <- mem[d[mem] == 1L]
+    c0 <- mem[d[mem] == 0L]
     size[k + 1L] <- length(mem)
-    if (!length(t) || !length(c0)) { eff[k + 1L] <- NaN; next }
-    w1 <- .w3_csum(w[t]); w0 <- .w3_csum(w[c0])
-    if (w1 <= 0 || w0 <= 0) { eff[k + 1L] <- NaN; next }
+    if (!length(t) || !length(c0)) { eff[k + 1L] <- NaN
+    next }
+    w1 <- .w3_csum(w[t])
+    w0 <- .w3_csum(w[c0])
+    if (w1 <= 0 || w0 <= 0) { eff[k + 1L] <- NaN
+    next }
     m1 <- .w3_csum(w[t] * ys[t]) / w1
     m0 <- .w3_csum(w[c0] * ys[c0]) / w0
     eff[k + 1L] <- m1 - m0

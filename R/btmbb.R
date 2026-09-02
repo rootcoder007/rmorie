@@ -47,7 +47,8 @@ Btmbb <- function(x, block_len = NULL, stat = NULL, B = 200, seed = 1, alpha = 0
   if (!(a > 0 && a < 1)) stop("boot_moving_block: alpha must lie strictly between 0 and 1")
   f <- if (is.null(stat)) .s03mean else stat
   bl <- .btmbb_reps(xx, ell, f, B, seed, FALSE)
-  theta <- bl$theta; k <- bl$k
+  theta <- bl$theta
+  k <- bl$k
   xb <- .s03mean(xx)
   list(theta_b = theta, estimate = as.numeric(f(xx)), se = .s03sd(theta, 1L),
        lo = .s03quantile7(theta, a / 2), hi = .s03quantile7(theta, 1 - a / 2),
@@ -65,7 +66,8 @@ Btmbb <- function(x, block_len = NULL, stat = NULL, B = 200, seed = 1, alpha = 0
   g <- .t1_lcg(seed)
   out <- numeric(as.integer(B))
   for (b in seq_len(as.integer(B))) {
-    smp <- numeric(k * ell); q <- 0L
+    smp <- numeric(k * ell)
+    q <- 0L
     for (j in seq_len(k)) {
       s <- as.integer(g$unif() * starts)
       if (s >= starts) s <- starts - 1L

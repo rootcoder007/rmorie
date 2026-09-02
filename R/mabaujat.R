@@ -15,9 +15,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Baujat(V, V)
 Baujat <- function(yi, vi) {
-  y <- .t1_vec(yi); v <- .t1_vec(vi); k <- length(y)
+  y <- .t1_vec(yi)
+  v <- .t1_vec(vi)
+  k <- length(y)
   if (any(v <= 0)) stop("variances must be positive")
-  w <- 1 / v; sw <- sum(w); th <- sum(w * y) / sw
+  w <- 1 / v
+  sw <- sum(w)
+  th <- sum(w * y) / sw
   xs <- w * (y - th)^2
   sw_i <- sw - w
   th_i <- (sum(w * y) - w * y) / sw_i

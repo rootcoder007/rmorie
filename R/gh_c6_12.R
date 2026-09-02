@@ -20,7 +20,9 @@
 #' @examples
 #' Sepcons(delta = 0.5, k = 5L, n = 5L)
 Sepcons <- function(delta, k, n) {
-  d <- as.numeric(delta); k <- as.integer(k); n <- as.integer(n)
+  d <- as.numeric(delta)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (d <= 0 || d >= 1)
     stop("delta must lie strictly between 0 and 1")
   if (k < 1L) stop("the stage k must be at least 1")

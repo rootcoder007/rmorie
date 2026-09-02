@@ -28,9 +28,12 @@
 #'   arXiv:2101.03961, Eqs 4-6. Local sources in fetched-wave3/.
 #' @export
 Moetop <- function(x, W_g, experts, k = 2L, alpha = 0.01) {
-  X <- as.matrix(x); Wg <- as.matrix(W_g)
-  storage.mode(X) <- "double"; storage.mode(Wg) <- "double"
-  T_ <- nrow(X); din <- ncol(X)
+  X <- as.matrix(x)
+  Wg <- as.matrix(W_g)
+  storage.mode(X) <- "double"
+  storage.mode(Wg) <- "double"
+  T_ <- nrow(X)
+  din <- ncol(X)
   if (nrow(Wg) != din) stop(sprintf("Moetop: W_g rows %d != token width %d", nrow(Wg), din), call. = FALSE)
   N <- ncol(Wg)
   if (length(experts) != N) {
@@ -38,9 +41,11 @@ Moetop <- function(x, W_g, experts, k = 2L, alpha = 0.01) {
   }
   k <- as.integer(k)
   if (k < 1L || k > N) stop(sprintf("Moetop: k must lie in 1..%d, got %d", N, k), call. = FALSE)
-  Es <- vector("list", N); dout <- NULL
+  Es <- vector("list", N)
+  dout <- NULL
   for (i in seq_len(N)) {
-    Em <- as.matrix(experts[[i]]); storage.mode(Em) <- "double"
+    Em <- as.matrix(experts[[i]])
+    storage.mode(Em) <- "double"
     if (nrow(Em) != din) stop(sprintf("Moetop: expert %d rows %d != %d", i, nrow(Em), din), call. = FALSE)
     if (is.null(dout)) dout <- ncol(Em)
     else if (ncol(Em) != dout) stop("Moetop: experts disagree on output width", call. = FALSE)
@@ -48,11 +53,14 @@ Moetop <- function(x, W_g, experts, k = 2L, alpha = 0.01) {
   }
   logits <- X %*% Wg
   gates <- t(apply(logits, 1L, function(row) {
-    m <- max(row); e <- exp(row - m); e / sum(e)
+    m <- max(row)
+    e <- exp(row - m)
+    e / sum(e)
   }))
   if (N == 1L) gates <- matrix(gates, nrow = T_)
   out <- matrix(0, T_, dout)
-  top_idx <- vector("list", T_); top_gate <- vector("list", T_)
+  top_idx <- vector("list", T_)
+  top_gate <- vector("list", T_)
   argmax_count <- rep(0L, N)
   for (t in seq_len(T_)) {
     ord <- order(-gates[t, ], seq_len(N))

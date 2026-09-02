@@ -25,11 +25,13 @@
 #' Genvxt(M)
 Genvxt <- function(X, facets = NULL) {
   M <- .s03mat(X)
-  npr <- nrow(M); ni <- ncol(M)
+  npr <- nrow(M)
+  ni <- ncol(M)
   if (npr < 2L) stop("generalizability_theory: need at least two persons")
   if (ni < 2L) stop("generalizability_theory: need at least two items")
   grand <- mean(M)
-  pm <- rowMeans(M); im <- colMeans(M)
+  pm <- rowMeans(M)
+  im <- colMeans(M)
   msp <- ni * sum((pm - grand)^2) / (npr - 1)
   msi <- npr * sum((im - grand)^2) / (ni - 1)
   res <- 0

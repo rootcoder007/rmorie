@@ -25,7 +25,8 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
     stop(sprintf("bigtm: %d counts for %d prior weights", length(n), length(mm)))
   if (abs(sum(mm) - 1) > 1e-9)
     stop(sprintf("bigtm: m must sum to 1, got %.9f", sum(mm)))
-  b <- as.numeric(beta); Nj <- as.numeric(N_j)
+  b <- as.numeric(beta)
+  Nj <- as.numeric(N_j)
   if (b <= 0) stop("bigtm: beta must be positive")
   lam <- b / (Nj + b)
   f <- if (Nj > 0) n / Nj else rep(0, length(n))
@@ -51,7 +52,8 @@ dirichlet_predictive <- function(N_ij, N_j, beta, m) {
 lda_predictive <- function(N_ik, N_k, beta, m) {
   n <- as.numeric(N_ik)
   mm <- as.numeric(m)
-  b <- as.numeric(beta); Nk <- as.numeric(N_k)
+  b <- as.numeric(beta)
+  Nk <- as.numeric(N_k)
   if (b <= 0) stop("bigtm: beta must be positive")
   lam <- b / (Nk + b)
   f <- if (Nk > 0) n / Nk else rep(0, length(n))
@@ -109,7 +111,9 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
   for (d in seq_along(D)) {
     doc <- D[[d]]
     for (t in 2:length(doc)) {
-      i <- doc[t]; j <- doc[t - 1]; kk <- z[[d]][t]
+      i <- doc[t]
+      j <- doc[t - 1]
+      kk <- z[[d]][t]
       k1 <- paste(i, j, kk, sep = "\r")
       N_ijk[[k1]] <- if (is.null(N_ijk[[k1]])) 1 else N_ijk[[k1]] + 1
       k2 <- paste(j, kk, sep = "\r")
@@ -165,7 +169,8 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
     stop(sprintf("bigtm: prior must be 1 or 2, got %s", prior))
   D <- lapply(docs, function(d) as.integer(d))
   if (length(D) == 0) stop("bigtm: no documents given")
-  Tn <- as.integer(T); Vn <- as.integer(V)
+  Tn <- as.integer(T)
+  Vn <- as.integer(V)
   if (Tn < 1 || Vn < 1) stop("bigtm: T and V must be at least 1")
   for (d in D) for (v in d)
     if (v < 0 || v >= Vn)
@@ -174,20 +179,24 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
   nn <- if (is.null(n)) rep(1 / Tn, Tn) else as.numeric(n)
   if (abs(sum(mm) - 1) > 1e-9 || abs(sum(nn) - 1) > 1e-9)
     stop("bigtm: m and n must each sum to 1")
-  a <- as.numeric(alpha); b <- as.numeric(beta)
+  a <- as.numeric(alpha)
+  b <- as.numeric(beta)
   u <- .lcg_uniform(seed, length(D))
   z <- lapply(seq_along(D), function(i) rep((as.integer(u[i] * Tn) %% Tn),
                                             length(D[[i]])))
   cts <- .counts(D, Tn, Vn, z)
-  N_ijk <- cts$N_ijk; N_jk <- cts$N_jk
-  N_kd <- cts$N_kd; N_d <- cts$N_d
+  N_ijk <- cts$N_ijk
+  N_jk <- cts$N_jk
+  N_kd <- cts$N_kd
+  N_d <- cts$N_d
   acc <- lapply(D, function(doc) matrix(0, nrow = length(doc), ncol = Tn))
   kept <- 0L
   for (it in seq_len(as.integer(iters))) {
     for (d in seq_along(D)) {
       doc <- D[[d]]
       for (t in 2:length(doc)) {
-        i <- doc[t]; j <- doc[t - 1]
+        i <- doc[t]
+        j <- doc[t - 1]
         old <- z[[d]][t]
         k1 <- paste(i, j, old, sep = "\r")
         N_ijk[[k1]] <- N_ijk[[k1]] - 1
@@ -209,7 +218,8 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
         c_ <- 0
         for (kk in 1:Tn) {
           c_ <- c_ + p[kk]
-          if (u2 <= c_) { new_k <- kk; break }
+          if (u2 <= c_) { new_k <- kk
+          break }
         }
         new_k <- new_k - 1
         z[[d]][t] <- new_k
@@ -272,8 +282,10 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 #' @export
 .log_evidence <- function(D, Tn, Vn, z, mm, nn, a, b) {
   cts <- .counts(D, Tn, Vn, z)
-  N_ijk <- cts$N_ijk; N_jk <- cts$N_jk
-  N_kd <- cts$N_kd; N_d <- cts$N_d
+  N_ijk <- cts$N_ijk
+  N_jk <- cts$N_jk
+  N_kd <- cts$N_kd
+  N_d <- cts$N_d
   tot <- 0
   for (k2 in ls(N_jk)) {
     njk <- N_jk[[k2]]
@@ -314,10 +326,12 @@ gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
 log_evidence <- function(docs, T, V, z, alpha = 0.5, beta = 0.5,
                          m = NULL, n = NULL) {
   D <- lapply(docs, function(d) as.integer(d))
-  Tn <- as.integer(T); Vn <- as.integer(V)
+  Tn <- as.integer(T)
+  Vn <- as.integer(V)
   mm <- if (is.null(m)) rep(1 / Vn, Vn) else as.numeric(m)
   nn <- if (is.null(n)) rep(1 / Tn, Tn) else as.numeric(n)
-  a <- as.numeric(alpha); b <- as.numeric(beta)
+  a <- as.numeric(alpha)
+  b <- as.numeric(beta)
   .log_evidence(D, Tn, Vn, z, mm, nn, a, b)
 }
 

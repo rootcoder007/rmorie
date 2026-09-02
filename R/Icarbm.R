@@ -38,7 +38,9 @@ Icarbm <- function(adjacency, tau = 1, u = NULL) {
   Q <- (diag(deg, n) - W) / (t * t)
   cvar <- t * t / deg
   if (is.null(u)) {
-    cmean <- rep(0, n); quad <- NaN; centred <- NaN
+    cmean <- rep(0, n)
+    quad <- NaN
+    centred <- NaN
   } else {
     uv <- .s03vec(u)
     if (length(uv) != n) stop("icar_prior: u and adjacency have different lengths")

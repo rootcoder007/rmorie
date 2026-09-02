@@ -78,7 +78,8 @@ Dgi <- function(G, X, encoder = NULL, seed = 42) {
     for (i in seq_len(n)) acc <- acc + H[i, c]
     s[c] <- .s03sigmoid(acc / n)
   }
-  pos <- numeric(n); neg <- numeric(n)
+  pos <- numeric(n)
+  neg <- numeric(n)
   Ms <- numeric(d)
   for (c in seq_len(d)) {
     acc <- 0
@@ -86,7 +87,8 @@ Dgi <- function(G, X, encoder = NULL, seed = 42) {
     Ms[c] <- acc
   }
   for (i in seq_len(n)) {
-    a <- 0; b <- 0
+    a <- 0
+    b <- 0
     for (c in seq_len(d)) {
       a <- a + H[i, c] * Ms[c]
       b <- b + Hc[i, c] * Ms[c]
@@ -94,7 +96,8 @@ Dgi <- function(G, X, encoder = NULL, seed = 42) {
     pos[i] <- .s03sigmoid(a)
     neg[i] <- .s03sigmoid(b)
   }
-  lp <- 0; ln <- 0
+  lp <- 0
+  ln <- 0
   for (v in pos) lp <- lp + log(v + 1e-300)
   for (v in neg) ln <- ln + log(1 - v + 1e-300)
   loss <- -(lp + ln) / (2 * n)

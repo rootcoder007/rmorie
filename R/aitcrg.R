@@ -31,17 +31,25 @@
 #' Aitcrg(cbind(1, c(1, 2, 3)), rbind(c(.2, .3, .5), c(.3, .3, .4), c(.4, .3, .3)))$beta
 #' @export
 Aitcrg <- function(X, Y_comp, V = NULL) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
-  Ym <- as.matrix(Y_comp); storage.mode(Ym) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
+  Ym <- as.matrix(Y_comp)
+  storage.mode(Ym) <- "double"
   N <- nrow(Xm)
   if (N == 0L || nrow(Ym) == 0L) stop("compositional_regression: no observations")
   if (nrow(Ym) != N) stop("compositional_regression: X and Y_comp have different row counts")
-  p <- ncol(Xm); D <- ncol(Ym)
+  p <- ncol(Xm)
+  D <- ncol(Ym)
   if (D < 2L) stop("compositional_regression: a composition needs at least 2 parts")
   if (any(!(Ym > 0))) stop("compositional_regression: every part of Y_comp must be positive")
   if (N < p) stop("compositional_regression: fewer observations than columns of X")
-  Vm <- if (is.null(V)) .aitcrg_basis(D) else matrix(as.numeric(as.matrix(V)),
-                                                     nrow = nrow(as.matrix(V)))
+  Vm <- if (is.null(V)) {
+    .aitcrg_basis(D)
+  } else {
+    matrix(as.numeric(as.matrix(V)),
+      nrow = nrow(as.matrix(V))
+    )
+  }
   q <- ncol(Vm)
   Yi <- matrix(0, nrow = N, ncol = q)
   for (n in seq_len(N)) Yi[n, ] <- .aitcrg_ilr(Ym[n, ], Vm)
@@ -64,9 +72,11 @@ Aitcrg <- function(X, Y_comp, V = NULL) {
   }
   fitted_comp <- matrix(0, nrow = N, ncol = D)
   for (n in seq_len(N)) fitted_comp[n, ] <- .aitcrg_inv(fitted[n, ], Vm)
-  list(beta = beta, fitted = fitted, resid = resid, fitted_comp = fitted_comp,
-       Y_ilr = Yi, sse = sse, estimate = beta[1, 1], N = N, p = p, D = D,
-       method = "OLS of ilr(Y) on X in the Egozcue et al. (2003) SBP basis")
+  list(
+    beta = beta, fitted = fitted, resid = resid, fitted_comp = fitted_comp,
+    Y_ilr = Yi, sse = sse, estimate = beta[1, 1], N = N, p = p, D = D,
+    method = "OLS of ilr(Y) on X in the Egozcue et al. (2003) SBP basis"
+  )
 }
 
 #' @noRd
@@ -82,7 +92,8 @@ Aitcrg <- function(X, Y_comp, V = NULL) {
 
 #' @noRd
 .aitcrg_ilr <- function(x, V) {
-  lg <- log(x); z <- lg - sum(lg) / length(lg)
+  lg <- log(x)
+  z <- lg - sum(lg) / length(lg)
   out <- numeric(ncol(V))
   for (i in seq_len(ncol(V))) {
     s <- 0

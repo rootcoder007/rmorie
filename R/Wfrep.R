@@ -20,7 +20,8 @@
 #' Wfrep(c(1, 1, 2, 3, 3, 3))
 #' @export
 Wfrep <- function(y, weights = NULL, cells = NULL) {
-  lab <- .wfrep_lab(y); n <- length(lab)
+  lab <- .wfrep_lab(y)
+  n <- length(lab)
   if (n == 0L) stop("weighted_frequency: y is empty")
   w <- if (is.null(weights)) rep(1, n) else .s03vec(weights)
   if (length(w) != n) stop("weighted_frequency: y and weights differ in length")

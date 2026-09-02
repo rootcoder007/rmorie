@@ -72,7 +72,8 @@ Rkhsmt <- function(Y, K, n_iter = 200L, X = NULL, Z1 = NULL, v_T = NULL,
   }
   if (max(abs(KK - t(KK))) > 1e-12) stop("rkhs_multitrait: K must be symmetric")
   if (is.null(X)) {
-    XX <- NULL; p <- 0L
+    XX <- NULL
+    p <- 0L
   } else {
     XX <- .s03mat(X)
     if (nrow(XX) != J) stop("rkhs_multitrait: X has a different number of rows than Y")
@@ -155,7 +156,8 @@ Rkhsmt <- function(Y, K, n_iter = 200L, X = NULL, Z1 = NULL, v_T = NULL,
   n <- nrow(A)
   out <- matrix(0, n, n)
   for (j in seq_len(n)) {
-    e <- numeric(n); e[j] <- 1
+    e <- numeric(n)
+    e[j] <- 1
     out[, j] <- .s03ridgesolve(A, e, ridge)
   }
   (out + t(out)) / 2

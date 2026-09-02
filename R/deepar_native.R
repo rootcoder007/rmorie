@@ -43,7 +43,8 @@ morie_deepar_scale_factor <- function(z, t0 = NULL) {
 #' @export
 morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
   s <- max(as.numeric(sigma), 1e-12)
-  z <- as.numeric(z); mu <- as.numeric(mu)
+  z <- as.numeric(z)
+  mu <- as.numeric(mu)
   -log(s) - 0.5 * log(2 * pi) - 0.5 * ((z - mu) / s) ^ 2
 }
 
@@ -58,7 +59,8 @@ morie_deepar_gaussian_loglik <- function(z, mu, sigma) {
 #' @return Numeric log-density.
 #' @export
 morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
-  zz <- as.numeric(z); m <- max(as.numeric(mu), 1e-12)
+  zz <- as.numeric(z)
+  m <- max(as.numeric(mu), 1e-12)
   a <- as.numeric(alpha)
   if (zz < 0)
     stop(sprintf("deepar: the negative binomial needs a non-negative count, got %s",
@@ -86,7 +88,8 @@ morie_deepar_negative_binomial_loglik <- function(z, mu, alpha) {
 #' @keywords internal
 #' @noRd
 .sample_neg_bin <- function(mu, alpha, e) {
-  m <- max(mu, 1e-12); a <- alpha
+  m <- max(mu, 1e-12)
+  a <- alpha
   if (a < 1e-10) {
     lam <- m
   } else {
@@ -168,7 +171,8 @@ morie_deepar_fit <- function(z, n_lags = 2L,
   if (!(likelihood %in% c("negative-binomial", "gaussian")))
     stop(sprintf("deepar: likelihood must be negative-binomial or gaussian, got %s",
                  likelihood))
-  zv <- as.numeric(z); n <- length(zv)
+  zv <- as.numeric(z)
+  n <- length(zv)
   p <- as.integer(n_lags)
   if (n < p + 4L)
     stop(sprintf("deepar: %d observations is too few for %d lags", n, p))
@@ -216,7 +220,10 @@ morie_deepar_fit <- function(z, n_lags = 2L,
 #' @export
 morie_deepar_sample <- function(fit, z_history, horizon, n_samples = 200L,
                                 seed = 0L) {
-  beta <- fit$beta; p <- fit$n_lags; nu <- fit$nu; alpha <- fit$alpha
+  beta <- fit$beta
+  p <- fit$n_lags
+  nu <- fit$nu
+  alpha <- fit$alpha
   H <- as.integer(horizon)
   hist <- tail(as.numeric(z_history) / nu, p)
   if (length(hist) < p)

@@ -21,17 +21,24 @@
 #' matrl(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08), c(1, 1, 2, 2))$tau2_level3
 #' @export
 matrl <- function(yi, vi, cluster, level = 0.95, upper = NULL) {
-  y <- as.numeric(yi); v <- as.numeric(vi); cl <- cluster
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  cl <- cluster
   n <- length(y)
   gls <- function(t2, t3) {
     keys <- unique(cl)
-    logdet <- 0; q1 <- 0; cross <- 0; qy <- 0
+    logdet <- 0
+    q1 <- 0
+    cross <- 0
+    qy <- 0
     for (key in keys) {
       idx <- which(cl == key)
       d <- v[idx] + t2
       yy <- y[idx]
       di <- 1 / d
-      s1 <- sum(di); sy <- sum(di * yy); syy <- sum(di * yy * yy)
+      s1 <- sum(di)
+      sy <- sum(di * yy)
+      syy <- sum(di * yy * yy)
       denom <- 1 + t3 * s1
       logdet <- logdet + sum(log(d)) + log(denom)
       q1 <- q1 + s1 - t3 * s1 * s1 / denom

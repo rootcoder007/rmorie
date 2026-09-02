@@ -335,7 +335,9 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
     remaining <- if (p > 0L) 0:(p - 1L) else integer(0)
     pr <- .tmlcds_propensity(d, list(), n, trim = trim)
     fl <- .tmlcds_fluctuate(qa, q1, q0, ys, d, pr$g)
-    qa <- fl$qa; q1 <- fl$q1; q0 <- fl$q0
+    qa <- fl$qa
+    q1 <- fl$q1
+    q0 <- fl$q0
     steps[[1L]] <- list(step = 0L, covariates = integer(0),
                         loss = .tmlcds_qloss(qa, ys), epsilon = fl$eps,
                         g = pr$g, psi = rng * mean(q1 - q0))
@@ -352,7 +354,9 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
       }
       chosen <- c(chosen, best$j)
       remaining <- setdiff(remaining, best$j)
-      qa <- best$fl$qa; q1 <- best$fl$q1; q0 <- best$fl$q0
+      qa <- best$fl$qa
+      q1 <- best$fl$q1
+      q0 <- best$fl$q0
       steps[[length(steps) + 1L]] <- list(step = length(chosen),
                                           covariates = as.integer(chosen),
                                           loss = best$loss,
@@ -368,7 +372,9 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
       lam <- as.numeric(penalties[s])
       pr <- .tmlcds_propensity(d, cols, n, penalty = lam, trim = trim)
       fl <- .tmlcds_fluctuate(qa, q1, q0, ys, d, pr$g)
-      qa <- fl$qa; q1 <- fl$q1; q0 <- fl$q0
+      qa <- fl$qa
+      q1 <- fl$q1
+      q0 <- fl$q0
       steps[[s]] <- list(step = s - 1L, penalty = lam,
                          loss = .tmlcds_qloss(qa, ys), epsilon = fl$eps,
                          g = pr$g, psi = rng * mean(q1 - q0))
@@ -399,7 +405,9 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #' @export
 .tmlcds_refit_on <- function(info, steps, s, tr, fold, tuning, penalties,
                              trim) {
-  ys <- info$y_scaled; d <- info$treatment; cols <- info$columns
+  ys <- info$y_scaled
+  d <- info$treatment
+  cols <- info$columns
   ntr <- length(tr)
   if (ntr < 5L) return(Inf)
   st <- steps[[s]]
@@ -414,7 +422,8 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
   ytr <- ys[tr]
   if (length(unique(dtr)) < 2L) return(Inf)
   pr <- .tmlcds_propensity(dtr, sub_cols, ntr, penalty = lam, trim = trim)
-  g_tr <- pr$g; bg <- pr$b
+  g_tr <- pr$g
+  bg <- pr$b
   qc <- info$q_covariates          # 0-based
   Xtr <- lapply(tr, function(i) {
     vapply(qc, function(cc) cols[[cc + 1L]][i], numeric(1))

@@ -20,7 +20,8 @@
 #' @examples
 #' Avgpathlen(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
 Avgpathlen <- function(G, directed = FALSE) {
-  A <- as.matrix(G); n <- nrow(A)
+  A <- as.matrix(G)
+  n <- nrow(A)
   if (n < 2 || ncol(A) != n) stop("G must be a square adjacency matrix with n >= 2")
   adj <- vector("list", n)
   for (i in seq_len(n)) {
@@ -31,17 +32,26 @@ Avgpathlen <- function(G, directed = FALSE) {
     }
     adj[[i]] <- nb
   }
-  total <- 0; harm <- 0; reach <- 0L; diam <- 0L
+  total <- 0
+  harm <- 0
+  reach <- 0L
+  diam <- 0L
   for (s in seq_len(n)) {
-    dist <- rep(-1L, n); dist[s] <- 0L
-    queue <- s; head <- 1L
+    dist <- rep(-1L, n)
+    dist[s] <- 0L
+    queue <- s
+    head <- 1L
     while (head <= length(queue)) {
-      u <- queue[head]; head <- head + 1L
-      for (v in adj[[u]]) if (dist[v] < 0L) { dist[v] <- dist[u] + 1L; queue <- c(queue, v) }
+      u <- queue[head]
+      head <- head + 1L
+      for (v in adj[[u]]) if (dist[v] < 0L) { dist[v] <- dist[u] + 1L
+      queue <- c(queue, v) }
     }
     for (t in seq_len(n)) {
       if (t == s || dist[t] < 0L) next
-      total <- total + dist[t]; harm <- harm + 1 / dist[t]; reach <- reach + 1L
+      total <- total + dist[t]
+      harm <- harm + 1 / dist[t]
+      reach <- reach + 1L
       if (dist[t] > diam) diam <- dist[t]
     }
   }

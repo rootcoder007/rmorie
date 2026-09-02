@@ -23,7 +23,9 @@
 #' Trcwgt(c(1, 1, 1, 1), c(1, 1, 1, 1), 0.99)
 #' @export
 Trcwgt <- function(sw_A, sw_C, quantile = 0.99) {
-  a <- .s03vec(sw_A); c <- .s03vec(sw_C); n <- length(a)
+  a <- .s03vec(sw_A)
+  c <- .s03vec(sw_C)
+  n <- length(a)
   if (n == 0L) stop("truncated_combined_weights: sw_A is empty")
   if (length(c) != n)
     stop("truncated_combined_weights: sw_A and sw_C differ in length")

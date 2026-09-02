@@ -22,9 +22,11 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Zestim(V)
 Zestim <- function(x, kind = "huber", k = 1.345, iters = 200) {
-  x <- .t1_vec(x); n <- length(x)
+  x <- .t1_vec(x)
+  n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")
-  kind <- tolower(kind); k <- as.numeric(k)
+  kind <- tolower(kind)
+  k <- as.numeric(k)
   if (kind == "huber" && k <= 0)
     stop("the Huber constant k must be positive")
   psi <- if (kind == "mean") function(u) u
@@ -32,12 +34,15 @@ Zestim <- function(x, kind = "huber", k = 1.345, iters = 200) {
          else if (kind == "huber") function(u) pmax(-k, pmin(k, u))
          else stop("kind must be 'mean', 'median' or 'huber'")
   Psi <- function(th) sum(psi(x - th)) / n
-  lo <- min(x); hi <- max(x)
+  lo <- min(x)
+  hi <- max(x)
   if (lo == hi)
     return(.t1_result(estimate = lo, psi_at_estimate = 0, lower = lo,
                       upper = hi, iters = 0, n = as.numeric(n),
                       method = "Z-estimator, Kosorok Section 2.2.5"))
-  a <- lo; b <- hi; it <- as.integer(iters)
+  a <- lo
+  b <- hi
+  it <- as.integer(iters)
   for (i in seq_len(it)) {
     m <- 0.5 * (a + b)
     if (Psi(a) * Psi(m) <= 0) b <- m else a <- m

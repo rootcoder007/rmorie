@@ -35,7 +35,7 @@
 #'   \emph{PeerJ Comput Sci} 3:e104, \doi{10.7717/peerj-cs.104}.
 #' @export
 #' @examples
-#' P <- rbind(c(0.6, 0, 0), c(0, 0.5, 0), c(0, 0, 0.4), c(0.4, 0.5, 
+#' P <- rbind(c(0.6, 0, 0), c(0, 0.5, 0), c(0, 0, 0.4), c(0.4, 0.5,
 #'     0), c(0, 0, 0.6))
 #' reads <- c(1200, 900, 700, 1500, 1100)
 #' morie_bracken_abundance(reads, P)

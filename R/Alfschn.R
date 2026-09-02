@@ -33,9 +33,12 @@ Alfschn <- function(frames, angles, littf, parent, litx, frameof) {
   # what makes the result a rotation.
   rotx <- function(a) {
     nrm <- sqrt(a[1]^2 + a[2]^2)
-    cs <- a[1] / nrm; sn <- a[2] / nrm
-    list(R = matrix(c(1, 0, 0, 0, cs, -sn, 0, sn, cs), 3, 3, byrow = TRUE),
-         t = c(0, 0, 0))
+    cs <- a[1] / nrm
+    sn <- a[2] / nrm
+    list(
+      R = matrix(c(1, 0, 0, 0, cs, -sn, 0, sn, cs), 3, 3, byrow = TRUE),
+      t = c(0, 0, 0)
+    )
   }
 
   allf <- vector("list", n)
@@ -51,6 +54,8 @@ Alfschn <- function(frames, angles, littf, parent, litx, frameof) {
     for (a in seq_len(na)) allx[i, a, ] <- alfRap(tf[[frameof[a]]], litx[a, ])
   }
 
-  list(x = allx, frames = allf, estimate = mean(allx), n = n,
-       method = "AlphaFold all-atom coordinates from torsion angles")
+  list(
+    x = allx, frames = allf, estimate = mean(allx), n = n,
+    method = "AlphaFold all-atom coordinates from torsion angles"
+  )
 }

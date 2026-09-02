@@ -22,7 +22,8 @@
 morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
                                                max_iter = 200, tol = 1e-10,
                                                add_intercept = TRUE) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   yv <- as.numeric(y)
   n <- nrow(Xm)
   if (n == 0L) stop("bayreg2: no observations")
@@ -45,8 +46,12 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
   }
 
   w <- rep(1.0, n)
-  f <- wls(w); beta <- f$beta; A <- f$A
-  s2 <- 1.0; it <- 0L; converged <- FALSE
+  f <- wls(w)
+  beta <- f$beta
+  A <- f$A
+  s2 <- 1.0
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
     res <- yv - as.numeric(Xm %*% beta)
     s2 <- sum(w * res * res) / n
@@ -54,15 +59,19 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
     w_new <- (nu + 1.0) / (nu + res * res / s2)
     f <- wls(w_new)
     shift <- max(abs(f$beta - beta))
-    beta <- f$beta; A <- f$A; w <- w_new
-    if (shift < tol) { converged <- TRUE; break }
+    beta <- f$beta
+    A <- f$A
+    w <- w_new
+    if (shift < tol) { converged <- TRUE
+    break }
   }
 
   res <- yv - as.numeric(Xm %*% beta)
   Lc <- chol(A)
   cov <- matrix(0.0, p, p)
   for (a in seq_len(p)) {
-    e <- numeric(p); e[a] <- 1.0
+    e <- numeric(p)
+    e[a] <- 1.0
     cov[, a] <- as.numeric(backsolve(Lc, forwardsolve(t(Lc), e)))
   }
   se <- sqrt(pmax(s2 * diag(cov), 0.0))

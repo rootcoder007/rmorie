@@ -41,8 +41,12 @@
 Mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000L,
                    max_improve = 1000L, pi0 = NULL) {
   ar <- .w505_mdp_args(P, R)
-  Pm <- ar$P; R <- ar$R; S <- ar$S; A <- ar$A
-  gamma <- as.numeric(gamma); tol <- as.numeric(tol)
+  Pm <- ar$P
+  R <- ar$R
+  S <- ar$S
+  A <- ar$A
+  gamma <- as.numeric(gamma)
+  tol <- as.numeric(tol)
   pol <- integer(S)
   if (!is.null(pi0)) {
     for (s in seq_len(S)) {

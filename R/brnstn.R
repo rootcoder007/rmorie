@@ -18,13 +18,16 @@
 #' @examples
 #' Bernstein(sigma2 = 1, M = 1, n = 100, t = 0.1)
 Bernstein <- function(sigma2, M, n, t) {
-  s2 <- as.numeric(sigma2); M <- as.numeric(M)
-  n <- as.integer(n); t <- as.numeric(t)
+  s2 <- as.numeric(sigma2)
+  M <- as.numeric(M)
+  n <- as.integer(n)
+  t <- as.numeric(t)
   if (s2 < 0 || M < 0 || n < 1 || t < 0)
     stop("need sigma2 >= 0, M >= 0, n >= 1, t >= 0")
   den <- 2 * s2 + 2 * M * t / 3
   if (den <= 0) stop("degenerate bound: sigma2 and M are both zero")
-  ex <- -n * t^2 / den; b <- exp(ex)
+  ex <- -n * t^2 / den
+  b <- exp(ex)
   hoef <- if (M > 0) exp(-n * t^2 / (2 * M^2)) else 0
   .t1_result(bound = b, bound_two_sided = min(1, 2 * b), hoeffding = hoef,
              ratio = if (hoef > 0) b / hoef else Inf, exponent = ex,

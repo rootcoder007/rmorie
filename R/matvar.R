@@ -24,12 +24,18 @@
 #' Maternvg(c(0, 0.5, 1, 2), 0, 1, 1, 0.5)$gamma
 #' @export
 Maternvg <- function(h, c0 = 0, c = 1, a = 1, nu = 0.5) {
-  hs <- .s03vec(h); aa <- as.numeric(a); v <- as.numeric(nu)
-  out <- numeric(length(hs)); cor <- numeric(length(hs))
+  hs <- .s03vec(h)
+  aa <- as.numeric(a)
+  v <- as.numeric(nu)
+  out <- numeric(length(hs))
+  cor <- numeric(length(hs))
   expo <- numeric(length(hs))
   for (i in seq_along(hs)) {
     x <- hs[i]
-    if (x <= 0) { out[i] <- 0; cor[i] <- 1; expo[i] <- 0; next }
+    if (x <= 0) { out[i] <- 0
+    cor[i] <- 1
+    expo[i] <- 0
+    next }
     u <- x / aa
     C <- (2^(1 - v) / exp(lgamma(v))) * (u^v) * .s03besselk(v, u)
     cor[i] <- C

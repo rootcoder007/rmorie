@@ -19,16 +19,21 @@
 #'   combination.
 #' @export
 Tmlfed <- function(y, D, X, site) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); Xm <- as.matrix(X)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  Xm <- as.matrix(X)
   sv <- as.integer(round(as.numeric(site)))
   labs <- unique(sv)
-  psis <- numeric(0); ws <- numeric(0); ns <- numeric(0)
+  psis <- numeric(0)
+  ws <- numeric(0)
+  ns <- numeric(0)
   for (lab in labs) {
     idx <- which(sv == lab)
     W <- cbind(1, Xm[idx, , drop = FALSE])
     r <- .s4_tmle(yv[idx], Dv[idx], W)
     v <- sum((r$ic - mean(r$ic))^2) / (length(idx) - 1)
-    psis <- c(psis, r$psi); ns <- c(ns, length(idx))
+    psis <- c(psis, r$psi)
+    ns <- c(ns, length(idx))
     ws <- c(ws, if (v > 0) length(idx) / v else 0)
   }
   sw <- sum(ws)

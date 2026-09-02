@@ -20,7 +20,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mafrt(V, V)
 Mafrt <- function(x, n) {
-  xv <- as.numeric(x); nv <- as.numeric(n)
+  xv <- as.numeric(x)
+  nv <- as.numeric(n)
   if (length(nv) == 1L) nv <- rep(nv, length(xv))
   ft <- asin(sqrt(xv / (nv + 1))) + asin(sqrt((xv + 1) / (nv + 1)))
   vr <- 1 / (nv + 0.5)

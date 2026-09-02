@@ -36,7 +36,8 @@ Epicur <- function(dates, cases, bandwidth, iterations = 2) {
     t <- 1 - a * a
     t * t
   }
-  x <- as.numeric(dates); y <- as.numeric(cases)
+  x <- as.numeric(dates)
+  y <- as.numeric(cases)
   n <- length(x)
   if (n == 0L) stop("empty input: dates has no observations")
   if (length(y) != n) stop("dates and cases must have the same length")
@@ -49,7 +50,11 @@ Epicur <- function(dates, cases, bandwidth, iterations = 2) {
   for (.p in seq_len(it + 1L)) {
     for (k in seq_len(n)) {
       x0 <- x[k]
-      s0 <- 0; s1 <- 0; s2 <- 0; t0 <- 0; t1 <- 0
+      s0 <- 0
+      s1 <- 0
+      s2 <- 0
+      t0 <- 0
+      t1 <- 0
       for (i in seq_len(n)) {
         d <- x[i] - x0
         w <- .tri(d / h) * delta[i]

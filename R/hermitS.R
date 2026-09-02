@@ -17,7 +17,9 @@
 #' hermitS(c(2), K = 3)$basis
 #' @export
 hermitS <- function(x, K = 3L, kind = "physicist") {
-  xs <- as.numeric(x); n <- length(xs); kk <- as.integer(K)
+  xs <- as.numeric(x)
+  n <- length(xs)
+  kk <- as.integer(K)
   basis <- matrix(0, n, kk + 1L)
   basis[, 1] <- 1
   if (kk >= 1) basis[, 2] <- if (kind == "probabilist") xs else 2 * xs

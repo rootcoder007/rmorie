@@ -308,7 +308,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
         .propinf_flat_representation_internal
     raw <- lapply(nets, extract)
     std <- .propinf_standardise(raw)
-    feats <- std$feats; mu <- std$mu; sd <- std$sd
+    feats <- std$feats
+    mu <- std$mu
+    sd <- std$sd
     meta <- .propinf_train_vector_meta(feats, lab, as.integer(meta_hidden),
                                       as.integer(epochs), lr, as.integer(seed))
     scores <- vapply(targets, function(net)
@@ -375,7 +377,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @export
 .propinf_sigmoid <- function(z) {
   if (z >= 0) 1 / (1 + exp(-z)) else {
-    e <- exp(z); e / (1 + e)
+    e <- exp(z)
+    e / (1 + e)
   }
 }
 
@@ -797,7 +800,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     }
     for (idx in order) {
       ap <- .propinf_mlp_forward(net, feats[[idx + 1L]], final = "sigmoid")
-      acts <- ap$acts; pre <- ap$pre
+      acts <- ap$acts
+      pre <- ap$pre
       grads <- .propinf_zero_like(net)
       .propinf_mlp_backward(net, acts, pre, acts[[length(acts)]][[1L]] -
                               labels[idx + 1L], grads, final = "sigmoid")
@@ -872,10 +876,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
   phi_hidden <- as.integer(phi_hidden)
   edge_hidden <- if (is.null(edge_hidden)) phi_hidden
                  else as.integer(edge_hidden)
-  phis <- list(); psis <- list()
+  phis <- list()
+  psis <- list()
   prev_nodes <- 0L
   for (t in seq_along(shapes)) {
-    n_nodes <- shapes[[t]][1L]; n_in <- shapes[[t]][2L]
+    n_nodes <- shapes[[t]][1L]
+    n_in <- shapes[[t]][2L]
     psi <- NULL
     if (t == 1L || context == "none") {
       d_in <- n_in + 1L
@@ -907,9 +913,12 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @return The value of \code{list}.
 #' @export
 .propinf_deepsets_forward <- function(model, sets) {
-  phis <- model$phis; psis <- model$psis; r <- model$repr_dim
+  phis <- model$phis
+  psis <- model$psis
+  r <- model$repr_dim
   ctx <- model$context
-  caches <- list(); L <- list()
+  caches <- list()
+  L <- list()
   prev_reprs <- list()
   scalers <- model$scalers
   for (t in seq_along(sets)) {
@@ -919,11 +928,14 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     for (i in seq_along(layer)) {
       node <- layer[[i]]
       n_w <- length(node) - 1L
-      w <- node[seq_len(n_w)]; b <- node[n_w + 1L]
+      w <- node[seq_len(n_w)]
+      b <- node[n_w + 1L]
       if (!is.null(scalers)) {
         sc <- scalers[[t]]
-        mw <- sc[[1L]][1L]; sw <- sc[[1L]][2L]
-        mb <- sc[[2L]][1L]; sb <- sc[[2L]][2L]
+        mw <- sc[[1L]][1L]
+        sw <- sc[[1L]][2L]
+        mb <- sc[[2L]][1L]
+        sb <- sc[[2L]][2L]
         w <- (w - mw) / sw
         b <- (b - mb) / sb
       }
@@ -937,7 +949,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
           ea_ep <- .propinf_mlp_forward(psis[[t]],
                                         c(w[j], prev_reprs[[j]]),
                                         final = "tanh", hidden_act = "tanh")
-          ea <- ea_ep$acts; ep <- ea_ep$pre
+          ea <- ea_ep$acts
+          ep <- ea_ep$pre
           edges[[length(edges) + 1L]] <- list(acts = ea, pre = ep)
           acc <- acc + ea[[length(ea)]]
         }
@@ -1005,7 +1018,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
       if (ctx == "paired") {
         dacc <- dx[2L:(1L + r)]
         for (j in seq_along(lc$edges)) {
-          ea <- lc$edges[[j]]$acts; ep <- lc$edges[[j]]$pre
+          ea <- lc$edges[[j]]$acts
+          ep <- lc$edges[[j]]$pre
           de <- .propinf_mlp_backward(model$psis[[t]], ea, ep, dacc,
                                       grads$psis[[t]], final = "tanh",
                                       hidden_act = "tanh")
@@ -1075,7 +1089,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
     }
     for (idx in order) {
       fwd <- .propinf_deepsets_forward(model, sets_list[[idx + 1L]])
-      out <- fwd[[1L]]; cache <- fwd[[2L]]
+      out <- fwd[[1L]]
+      cache <- fwd[[2L]]
       grads <- .propinf_zero_grads(model)
       .propinf_deepsets_backward(model, sets_list[[idx + 1L]], cache,
                                  out - labels[idx + 1L], grads)

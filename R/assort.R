@@ -38,17 +38,20 @@
 #' @export
 Assort <- function(y = NULL, A = NULL, excess = TRUE) {
   if (is.null(A)) stop("degree_assortativity: an adjacency matrix is required")
-  Am <- as.matrix(A); storage.mode(Am) <- "double"
+  Am <- as.matrix(A)
+  storage.mode(Am) <- "double"
   n <- nrow(Am)
   if (n == 0L || length(Am) == 0L) stop("degree_assortativity: the graph is empty")
   if (ncol(Am) != n) stop("degree_assortativity: the adjacency matrix is not square")
   deg <- numeric(n)
-  eu <- integer(0); ev <- integer(0)
+  eu <- integer(0)
+  ev <- integer(0)
   for (i in seq_len(n)) {
     for (j in seq_len(n)) {
       if (j <= i) next
       if (Am[i, j] != 0 || Am[j, i] != 0) {
-        eu <- c(eu, i); ev <- c(ev, j)
+        eu <- c(eu, i)
+        ev <- c(ev, j)
         deg[i] <- deg[i] + 1
         deg[j] <- deg[j] + 1
       }
@@ -57,7 +60,11 @@ Assort <- function(y = NULL, A = NULL, excess = TRUE) {
   M <- length(eu)
   if (M == 0L) stop("degree_assortativity: the graph has no edges")
   off <- if (isTRUE(excess)) 1 else 0
-  sjk <- 0; sj <- 0; sk <- 0; sj2 <- 0; sk2 <- 0
+  sjk <- 0
+  sj <- 0
+  sk <- 0
+  sj2 <- 0
+  sk2 <- 0
   for (t in seq_len(M)) {
     for (o in 1:2) {
       p <- if (o == 1L) eu[t] else ev[t]
@@ -65,8 +72,10 @@ Assort <- function(y = NULL, A = NULL, excess = TRUE) {
       jj <- deg[p] - off
       kk <- deg[q] - off
       sjk <- sjk + jj * kk
-      sj <- sj + jj; sk <- sk + kk
-      sj2 <- sj2 + jj * jj; sk2 <- sk2 + kk * kk
+      sj <- sj + jj
+      sk <- sk + kk
+      sj2 <- sj2 + jj * jj
+      sk2 <- sk2 + kk * kk
     }
   }
   m2 <- 2 * M

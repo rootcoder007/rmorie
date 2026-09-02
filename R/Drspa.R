@@ -26,7 +26,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Drspa(V, V)
 Drspa <- function(y, D, X = NULL, W_neighbors = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D)
+  n <- length(yv)
   if (n == 0L) stop("Drspa: empty input, y has no observations")
   if (length(dv) != n) stop("Drspa: y and D must have the same length")
   Xr <- if (is.null(X)) NULL else .s03mat(X)
@@ -43,7 +45,8 @@ Drspa <- function(y, D, X = NULL, W_neighbors = NULL) {
   }
   base <- .s03drdid(yv, dv, Xr)
   cols <- if (is.null(Xr)) matrix(wd, n, 1L) else cbind(Xr, wd)
-  m <- .s03mean(wd); sdv <- if (n > 1L) .s03sd(wd) else 0
+  m <- .s03mean(wd)
+  sdv <- if (n > 1L) .s03sd(wd) else 0
   fit <- if (sdv <= 1e-12) base else .s03drdid(yv, dv, cols)
   .t1_result(estimate = fit$tau, tau_nospatial = base$tau,
              spatial_shift = fit$tau - base$tau, se = fit$se,

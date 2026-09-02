@@ -20,7 +20,9 @@
 #'   (2020). Journal of Econometrics 219(1), 101-122, equation (2.6).
 #' @export
 Drctf <- function(y, D_dose, X = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D_dose); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D_dose)
+  n <- length(yv)
   if (n == 0L) stop("Drctf: empty input, y has no observations")
   if (length(dv) != n) stop("Drctf: y and D_dose must have the same length")
   if (any(dv < 0)) stop("Drctf: D_dose must be non-negative")
@@ -29,17 +31,24 @@ Drctf <- function(y, D_dose, X = NULL) {
   if (!length(zero)) stop("Drctf: no zero-dose units to compare against")
   doses <- sort(unique(dv[dv > 0]))
   if (!length(doses)) stop("Drctf: no treated unit, every dose is zero")
-  att <- numeric(0); sev <- numeric(0); nd <- numeric(0)
+  att <- numeric(0)
+  sev <- numeric(0)
+  nd <- numeric(0)
   for (d in doses) {
-    hit <- which(dv == d); idx <- c(hit, zero)
+    hit <- which(dv == d)
+    idx <- c(hit, zero)
     lab <- c(rep(1, length(hit)), rep(0, length(zero)))
     nd <- c(nd, length(hit))
-    if (length(idx) < 3L) { att <- c(att, NaN); sev <- c(sev, NaN); next }
+    if (length(idx) < 3L) { att <- c(att, NaN)
+    sev <- c(sev, NaN)
+    next }
     xm <- if (is.null(Xr)) NULL else Xr[idx, , drop = FALSE]
     f <- .s03drdid(yv[idx], lab, xm)
-    att <- c(att, f$tau); sev <- c(sev, f$se)
+    att <- c(att, f$tau)
+    sev <- c(sev, f$se)
   }
-  acrt <- numeric(0); adose <- numeric(0)
+  acrt <- numeric(0)
+  adose <- numeric(0)
   if (length(doses) > 1L) for (j in seq_along(doses)[-1L]) {
     acrt <- c(acrt, (att[j] - att[j - 1L]) / (doses[j] - doses[j - 1L]))
     adose <- c(adose, doses[j])

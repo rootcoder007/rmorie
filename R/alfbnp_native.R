@@ -24,10 +24,15 @@
 #' @return The value of \code{m}, as built in the body.
 #' @export
 .alfbnp_atoms <- function(x, what) {
-  if (is.matrix(x)) m <- x
-  else if (is.data.frame(x)) m <- as.matrix(x)
-  else if (is.list(x)) m <- do.call(rbind, lapply(x, as.numeric))
-  else m <- matrix(as.numeric(x), ncol = 3L, byrow = TRUE)
+  if (is.matrix(x)) {
+    m <- x
+  } else if (is.data.frame(x)) {
+    m <- as.matrix(x)
+  } else if (is.list(x)) {
+    m <- do.call(rbind, lapply(x, as.numeric))
+  } else {
+    m <- matrix(as.numeric(x), ncol = 3L, byrow = TRUE)
+  }
   storage.mode(m) <- "double"
   if (ncol(m) != 3L) stop(sprintf("%s: each atom needs exactly x, y, z", what))
   if (nrow(m) == 0L) stop(sprintf("%s: no atoms", what))
@@ -95,14 +100,17 @@
   di <- 0L
   for (si in seq_along(sigmas)) {
     s <- sigmas[si]
-    num <- 0.0; den <- 0.0
+    num <- 0.0
+    den <- 0.0
     for (X in clean) {
-      for (i in seq_len(n)) for (a in 1:3) {
-        xi <- draws[(di %% length(draws)) + 1L]
-        di <- di + 1L
-        noisy <- X[i, a] + s * xi
-        num <- num + noisy * X[i, a]
-        den <- den + noisy * noisy
+      for (i in seq_len(n)) {
+        for (a in 1:3) {
+          xi <- draws[(di %% length(draws)) + 1L]
+          di <- di + 1L
+          noisy <- X[i, a] + s * xi
+          num <- num + noisy * X[i, a]
+          den <- den + noisy * noisy
+        }
       }
     }
     coefs[si] <- if (den > .alfbnp_EPS) num / (den + ridge) else 1.0
@@ -128,10 +136,13 @@
 .alfbnp_clean_list <- function(clean) {
   if (is.array(clean) && length(dim(clean)) == 3L) {
     d <- dim(clean)
-    return(lapply(seq_len(d[1]), function(i)
-      matrix(as.numeric(clean[i, , ]), nrow = d[2], ncol = d[3])))
+    return(lapply(seq_len(d[1]), function(i) {
+      matrix(as.numeric(clean[i, , ]), nrow = d[2], ncol = d[3])
+    }))
   }
-  if (is.matrix(clean)) return(list(clean))
+  if (is.matrix(clean)) {
+    return(list(clean))
+  }
   lapply(clean, function(c) .alfbnp_atoms(c, "alfbnp clean"))
 }
 
@@ -166,19 +177,26 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
                                     gamma_min = 1.0, noise_scale = 1.003,
                                     step_scale = 1.5, noise = NULL, seed = 2,
                                     x_init = NULL, ridge = 1e-6) {
-  X0 <- NULL; ref <- NULL
+  X0 <- NULL
+  ref <- NULL
   if (!is.null(x_init)) {
-    X0 <- .alfbnp_atoms(x_init, "alfbnp x_init"); n <- nrow(X0)
+    X0 <- .alfbnp_atoms(x_init, "alfbnp x_init")
+    n <- nrow(X0)
   } else if (!is.null(clean)) {
     ref <- .alfbnp_clean_list(clean)
     n <- nrow(ref[[1]])
-    for (c in ref) if (nrow(c) != n)
-      stop("alfbnp: the reference structures have different atom counts")
+    for (c in ref) {
+      if (nrow(c) != n) {
+        stop("alfbnp: the reference structures have different atom counts")
+      }
+    }
   } else if (!is.null(n_atoms)) {
     n <- as.integer(n_atoms)
   } else {
-    stop(paste0("alfbnp: give n_atoms, x_init, or clean so the number of ",
-                "atoms is known"))
+    stop(paste0(
+      "alfbnp: give n_atoms, x_init, or clean so the number of ",
+      "atoms is known"
+    ))
   }
   if (n < 1L) stop("alfbnp: need at least one atom")
   T <- as.integer(steps)
@@ -186,19 +204,26 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
   if (!is.null(clean) && is.null(ref)) ref <- .alfbnp_clean_list(clean)
 
   if (is.character(sigma_data)) {
-    if (sigma_data != "fit")
+    if (sigma_data != "fit") {
       stop("alfbnp: sigma_data must be a number or 'fit'")
+    }
     if (is.null(ref)) stop("alfbnp: sigma_data='fit' needs `clean`")
-    tot <- 0.0; cnt <- 0.0
-    for (X in ref) { tot <- tot + sum(X * X); cnt <- cnt + length(X) }
+    tot <- 0.0
+    cnt <- 0.0
+    for (X in ref) {
+      tot <- tot + sum(X * X)
+      cnt <- cnt + length(X)
+    }
     sd_ <- if (cnt > 0) sqrt(tot / cnt) else .alfbnp_SIGMA_DATA
   } else {
     sd_ <- as.numeric(sigma_data)
   }
   if (!(sd_ > 0.0)) stop("alfbnp: sigma_data must be positive")
 
-  sig <- .alfbnp_schedule(T, sd_, as.numeric(s_max), as.numeric(s_min),
-                          as.numeric(rho))
+  sig <- .alfbnp_schedule(
+    T, sd_, as.numeric(s_max), as.numeric(s_min),
+    as.numeric(rho)
+  )
 
   need <- 3L * n * (T + 2L) +
     (if (!is.null(ref)) 3L * n * length(ref) * (T + 1L) else 0L)
@@ -212,11 +237,14 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 
   coefs <- NULL
   if (is.null(denoiser)) {
-    if (is.null(ref))
-      stop(paste0("alfbnp: no denoiser and no `clean` to fit one from. The ",
-                  "network is not bundled and will not be invented: supply ",
-                  "a trained denoiser, or reference structures to fit a ",
-                  "linear one by denoising score matching."))
+    if (is.null(ref)) {
+      stop(paste0(
+        "alfbnp: no denoiser and no `clean` to fit one from. The ",
+        "network is not bundled and will not be invented: supply ",
+        "a trained denoiser, or reference structures to fit a ",
+        "linear one by denoising score matching."
+      ))
+    }
     coefs <- .alfbnp_fit_linear(ref, sig[seq_len(T)], z, as.numeric(ridge))
     route <- "fitted a linear denoiser by denoising score matching"
     dcount <- 0L
@@ -226,8 +254,12 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
     }
   } else {
     route <- "sampled with a supplied denoiser"
-    denoise <- function(x, s) .alfbnp_atoms(denoiser(x, s),
-                                            "alfbnp denoiser output")
+    denoise <- function(x, s) {
+      .alfbnp_atoms(
+        denoiser(x, s),
+        "alfbnp denoiser output"
+      )
+    }
   }
 
   if (!is.null(X0)) {
@@ -252,18 +284,25 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
     var <- t_hat * t_hat - prev * prev
     step_noise <- if (var > 0.0) as.numeric(noise_scale) * sqrt(var) else 0.0
     Xn <- X
-    for (j in seq_len(n)) for (a in 1:3) {
-      Xn[j, a] <- X[j, a] + step_noise * z[(zi %% length(z)) + 1L]
-      zi <- zi + 1L
+    for (j in seq_len(n)) {
+      for (a in 1:3) {
+        Xn[j, a] <- X[j, a] + step_noise * z[(zi %% length(z)) + 1L]
+        zi <- zi + 1L
+      }
     }
     Xd <- denoise(Xn, t_hat)
-    if (nrow(Xd) != n)
-      stop(sprintf("alfbnp: the denoiser returned %d atoms, not %d",
-                   nrow(Xd), n))
+    if (nrow(Xd) != n) {
+      stop(sprintf(
+        "alfbnp: the denoiser returned %d atoms, not %d",
+        nrow(Xd), n
+      ))
+    }
     dt <- sig[i + 1L] - t_hat
-    for (j in seq_len(n)) for (a in 1:3) {
-      grad <- if (t_hat > .alfbnp_EPS) (Xn[j, a] - Xd[j, a]) / t_hat else 0.0
-      X[j, a] <- Xn[j, a] + as.numeric(step_scale) * dt * grad
+    for (j in seq_len(n)) {
+      for (a in 1:3) {
+        grad <- if (t_hat > .alfbnp_EPS) (Xn[j, a] - Xd[j, a]) / t_hat else 0.0
+        X[j, a] <- Xn[j, a] + as.numeric(step_scale) * dt * grad
+      }
     }
     rms <- sqrt(sum(X * X) / (3 * n))
     trace[[length(trace) + 1L]] <- c(i, sig[i + 1L], t_hat, rms)
@@ -279,27 +318,33 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
     rmsd_to_ref <- best
   }
 
-  list(estimate = if (!is.null(rmsd_to_ref)) rmsd_to_ref else sig[T + 1L],
-       coords = X, sigmas = sig,
-       trace = do.call(rbind, trace),
-       denoiser_coefs = coefs,
-       sigma_data = sd_, steps = T,
-       rmsd_to_reference = rmsd_to_ref,
-       n_atoms = as.integer(n),
-       route = route,
-       method = paste0("AlphaFold-3 SampleDiffusion (Abramson et al. 2024, ",
-                       "Algorithm 18) on the Karras sigma schedule, with ",
-                       "the Table 6 defaults; the noise stream is the ",
-                       "package's deterministic low-discrepancy normal ",
-                       "sequence rather than i.i.d. draws, so a run ",
-                       "reproduces exactly"),
-       note = paste0("route says whether the denoiser was supplied or ",
-                     "fitted. The network is not bundled. The rotation half ",
-                     "of CentreRandomAugmentation is deliberately not ",
-                     "applied: it is a training-time augmentation, and at ",
-                     "sampling it only chooses an arbitrary frame, which ",
-                     "both costs reproducibility and gains nothing. Pass ",
-                     "`noise` to recover genuinely stochastic sampling."))
+  list(
+    estimate = if (!is.null(rmsd_to_ref)) rmsd_to_ref else sig[T + 1L],
+    coords = X, sigmas = sig,
+    trace = do.call(rbind, trace),
+    denoiser_coefs = coefs,
+    sigma_data = sd_, steps = T,
+    rmsd_to_reference = rmsd_to_ref,
+    n_atoms = as.integer(n),
+    route = route,
+    method = paste0(
+      "AlphaFold-3 SampleDiffusion (Abramson et al. 2024, ",
+      "Algorithm 18) on the Karras sigma schedule, with ",
+      "the Table 6 defaults; the noise stream is the ",
+      "package's deterministic low-discrepancy normal ",
+      "sequence rather than i.i.d. draws, so a run ",
+      "reproduces exactly"
+    ),
+    note = paste0(
+      "route says whether the denoiser was supplied or ",
+      "fitted. The network is not bundled. The rotation half ",
+      "of CentreRandomAugmentation is deliberately not ",
+      "applied: it is a training-time augmentation, and at ",
+      "sampling it only chooses an arbitrary frame, which ",
+      "both costs reproducibility and gains nothing. Pass ",
+      "`noise` to recover genuinely stochastic sampling."
+    )
+  )
 }
 
 #' .alfbnp_cheatsheet
@@ -311,9 +356,11 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 #' @return A character value.
 #' @export
 .alfbnp_cheatsheet <- function() {
-  paste0("alfbnp: morie_alfbnp_af3_sample(n_atoms, denoiser=) or (clean=) ",
-         "-> AlphaFold-3 diffusion sampling (Abramson et al. 2024 Nature ",
-         "630:493, Algorithm 18)")
+  paste0(
+    "alfbnp: morie_alfbnp_af3_sample(n_atoms, denoiser=) or (clean=) ",
+    "-> AlphaFold-3 diffusion sampling (Abramson et al. 2024 Nature ",
+    "630:493, Algorithm 18)"
+  )
 }
 
 morie_alfbnp <- morie_alfbnp_af3_sample

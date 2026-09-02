@@ -67,7 +67,8 @@ Ocmtmd <- function(y, A, H, Q = NULL) {
     keep <- ps[ps >= a & ps <= 1 - a]
     if (!length(keep)) next
     rhs <- 2 * sum(1 / (keep * (1 - keep))) / length(keep)
-    if (1 / (a * (1 - a)) <= rhs) { alpha <- a; break }
+    if (1 / (a * (1 - a)) <= rhs) { alpha <- a
+    break }
   }
   nkeep <- sum(ps >= alpha & ps <= 1 - alpha)
   .t1_result(estimate = fit$beta[2], b0 = fit$beta[1], b1 = fit$beta[2],

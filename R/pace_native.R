@@ -36,7 +36,8 @@ morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
          call. = FALSE)
   }
   if (bw <= 0) stop("pace: the bandwidth must be positive.", call. = FALSE)
-  t <- as.numeric(t); y <- as.numeric(y)
+  t <- as.numeric(t)
+  y <- as.numeric(y)
   vapply(as.numeric(at), function(t0) {
     d <- t - t0
     w <- .pace_kweight(d / bw, kernel)
@@ -45,9 +46,14 @@ morie_pace_local_linear <- function(t, y, at, bw, kernel = "epan") {
       stop(sprintf("pace: bandwidth %g leaves the point %g with no data.",
                    bw, t0), call. = FALSE)
     }
-    w <- w[keep]; dd <- d[keep]; yy <- y[keep]
-    s0 <- sum(w); s1 <- sum(w * dd); s2 <- sum(w * dd * dd)
-    b0 <- sum(w * yy); b1 <- sum(w * dd * yy)
+    w <- w[keep]
+    dd <- d[keep]
+    yy <- y[keep]
+    s0 <- sum(w)
+    s1 <- sum(w * dd)
+    s2 <- sum(w * dd * dd)
+    b0 <- sum(w * yy)
+    b1 <- sum(w * dd * yy)
     det <- s0 * s2 - s1 * s1
     if (abs(det) < 1e-12) b0 / s0 else (s2 * b0 - s1 * b1) / det
   }, numeric(1))
@@ -75,9 +81,12 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
          call. = FALSE)
   }
   if (bw <= 0) stop("pace: the bandwidth must be positive.", call. = FALSE)
-  s <- as.numeric(s); t <- as.numeric(t); z <- as.numeric(z)
+  s <- as.numeric(s)
+  t <- as.numeric(t)
+  z <- as.numeric(z)
   reach <- if (kernel == "epan") 1L else 4L
-  s0m <- min(s); t0m <- min(t)
+  s0m <- min(s)
+  t0m <- min(t)
   bi <- as.integer((s - s0m) / bw)
   bj <- as.integer((t - t0m) / bw)
   key <- paste(bi, bj, sep = ",")
@@ -98,14 +107,17 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
         stop(sprintf("pace: bandwidth %g leaves (%g, %g) with no data.",
                      bw, sv, tv), call. = FALSE)
       }
-      ds <- s[idx] - sv; dt <- t[idx] - tv
+      ds <- s[idx] - sv
+      dt <- t[idx] - tv
       w <- .pace_kweight(ds / bw, kernel) * .pace_kweight(dt / bw, kernel)
       keep <- w != 0
       if (!any(keep)) {
         stop(sprintf("pace: bandwidth %g leaves (%g, %g) with no data.",
                      bw, sv, tv), call. = FALSE)
       }
-      w <- w[keep]; ds <- ds[keep]; dt <- dt[keep]
+      w <- w[keep]
+      ds <- ds[keep]
+      dt <- dt[keep]
       yv <- z[idx][keep]
       X <- cbind(1, ds, dt)
       Xw <- X * w
@@ -193,7 +205,8 @@ morie_pace <- function(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL,
   }
   K <- as.integer(K)
   if (K < 1L) stop("pace: K must be at least 1.", call. = FALSE)
-  lo <- min(pooled_t); hi <- max(pooled_t)
+  lo <- min(pooled_t)
+  hi <- max(pooled_t)
   if (hi <= lo) {
     stop("pace: all observation times are identical.", call. = FALSE)
   }

@@ -482,7 +482,9 @@ morie_chemsc <- function(receptor, ligand, smoothing = "gaussian",
   rec <- parse(receptor)
   lig <- parse(ligand)
 
-  hbonds <- list(); metals <- numeric(0); lipo <- numeric(0)
+  hbonds <- list()
+  metals <- numeric(0)
+  lipo <- numeric(0)
   clashes <- list()
   for (ra in rec) for (la in lig) {
     d <- .chemsc_dist(ra$xyz, la$xyz)

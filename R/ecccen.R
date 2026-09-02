@@ -17,14 +17,18 @@
 #' ecccen(A, node = 1)
 #' @export
 ecccen <- function(A, node = NULL) {
-  A <- as.matrix(A); n <- nrow(A)
+  A <- as.matrix(A)
+  n <- nrow(A)
   e <- numeric(n)
   for (v in seq_len(n)) e[v] <- max(t3bfs(A, v))
   cent <- ifelse(e > 0, 1 / e, Inf)
-  radius <- min(e); diameter <- max(e)
+  radius <- min(e)
+  diameter <- max(e)
   centre <- which(e == radius) - 1L
-  if (is.null(node)) { est <- mean(cent); ecc <- mean(e) }
-  else { est <- cent[node + 1L]; ecc <- e[node + 1L] }
+  if (is.null(node)) { est <- mean(cent)
+  ecc <- mean(e) }
+  else { est <- cent[node + 1L]
+  ecc <- e[node + 1L] }
   list(estimate = as.numeric(est), ecc = as.numeric(ecc), centrality = cent,
        eccentricity = e, radius = as.numeric(radius),
        diameter = as.numeric(diameter), centre = as.integer(centre),

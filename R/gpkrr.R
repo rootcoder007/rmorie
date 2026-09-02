@@ -23,17 +23,21 @@
 Krrdual <- function(X, y, X_test = NULL, lam = 1e-2, gamma = 1) {
   rbf <- function(x, z) {
     s <- 0
-    for (a in seq_along(x)) { d <- x[a] - z[a]; s <- s + d * d }
+    for (a in seq_along(x)) { d <- x[a] - z[a]
+    s <- s + d * d }
     exp(-as.numeric(gamma) * s)
   }
-  Xm <- .s03mat(X); yv <- .s03vec(y); n <- nrow(Xm)
+  Xm <- .s03mat(X)
+  yv <- .s03vec(y)
+  n <- nrow(Xm)
   K <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) K[i, j] <- rbf(Xm[i, ], Xm[j, ])
   A <- K
   for (i in seq_len(n)) A[i, i] <- A[i, i] + as.numeric(lam)
   alpha <- .s03cholsolve(A, yv)
   Xt <- if (!is.null(X_test)) .s03mat(X_test) else Xm
-  pred <- numeric(nrow(Xt)); var_ <- numeric(nrow(Xt))
+  pred <- numeric(nrow(Xt))
+  var_ <- numeric(nrow(Xt))
   for (t in seq_len(nrow(Xt))) {
     ks <- numeric(n)
     for (i in seq_len(n)) ks[i] <- rbf(Xm[i, ], Xt[t, ])

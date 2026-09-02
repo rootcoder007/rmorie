@@ -30,7 +30,8 @@ Hmmprf <- function(seq, profile) {
   Mm <- .s03mat(profile$match)
   ins <- .s03vec(profile$insert)
   tr <- profile$trans
-  L <- nrow(Mm); A <- ncol(Mm)
+  L <- nrow(Mm)
+  A <- ncol(Mm)
   if (L == 0L) stop("hmm_profile: profile has no positions")
   if (length(ins) != A) stop("hmm_profile: insert distribution has the wrong alphabet size")
   if (any(xs < 0L | xs >= A)) stop("hmm_profile: residue index out of range")
@@ -41,11 +42,21 @@ Hmmprf <- function(seq, profile) {
     m <- max(a, b)
     m + log(exp(a - m) + exp(b - m))
   }
-  lmm <- lg(tr$mm); lmi <- lg(tr$mi); lmd <- lg(tr$md)
-  lim <- lg(tr$im); lii <- lg(tr$ii); ldm <- lg(tr$dm); ldd <- lg(tr$dd)
-  fM <- matrix(-Inf, T + 1L, L + 1L); fI <- fM; fD <- fM
-  vM <- fM; vI <- fM; vD <- fM
-  fM[1, 1] <- 0; vM[1, 1] <- 0
+  lmm <- lg(tr$mm)
+  lmi <- lg(tr$mi)
+  lmd <- lg(tr$md)
+  lim <- lg(tr$im)
+  lii <- lg(tr$ii)
+  ldm <- lg(tr$dm)
+  ldd <- lg(tr$dd)
+  fM <- matrix(-Inf, T + 1L, L + 1L)
+  fI <- fM
+  fD <- fM
+  vM <- fM
+  vI <- fM
+  vD <- fM
+  fM[1, 1] <- 0
+  vM[1, 1] <- 0
   for (i in seq_len(T + 1L)) for (j in seq_len(L + 1L)) {
     if (i == 1L && j == 1L) next
     if (i > 1L && j > 1L) {

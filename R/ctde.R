@@ -67,7 +67,9 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @return A list with \code{beta}, \code{theta}, \code{cbar}, \code{n}.
 #' @export
 .med_fit <- function(X, M, Y, C, who) {
-  a <- .s03vec(X); m <- .s03vec(M); y <- .s03vec(Y)
+  a <- .s03vec(X)
+  m <- .s03vec(M)
+  y <- .s03vec(Y)
   n <- length(a)
   if (n == 0L) stop(paste0(who, ": X is empty"))
   if (length(m) != n || length(y) != n) {
@@ -105,9 +107,12 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @export
 .med_effects <- function(beta, theta, cbar, a, astar) {
   d <- a - astar
-  b0 <- beta[1L]; b1 <- beta[2L]
+  b0 <- beta[1L]
+  b1 <- beta[2L]
   bc <- if (length(beta) > 2L) sum(beta[3:length(beta)] * cbar) else 0
-  t1 <- theta[2L]; t2 <- theta[3L]; t3 <- theta[4L]
+  t1 <- theta[2L]
+  t2 <- theta[3L]
+  t3 <- theta[4L]
   pnde <- (t1 + t3 * (b0 + b1 * astar + bc)) * d
   tnde <- (t1 + t3 * (b0 + b1 * a + bc)) * d
   tnie <- (t2 * b1 + t3 * b1 * a) * d

@@ -27,7 +27,8 @@
 Tmlerob <- function(y, D, X = NULL, trim = 0.025, alpha = 0.05) {
   fit <- .s03tmle(y, D, X, as.numeric(trim))
   raw <- .s03tmle(y, D, X, 0)
-  g0 <- raw$g; t <- as.numeric(trim)
+  g0 <- raw$g
+  t <- as.numeric(trim)
   ntr <- 0L
   for (v in g0) if (v < t || v > 1 - t) ntr <- ntr + 1L
   z <- qnorm(1 - as.numeric(alpha) / 2)

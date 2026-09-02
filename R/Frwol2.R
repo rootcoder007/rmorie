@@ -33,7 +33,8 @@ Frwol2 <- function(f, grad_f, domain, x0, steps = 50) {
   if (!is.function(f) || !is.function(grad_f)) stop("frank_wolfe: f and grad_f must be callable")
   ns <- as.integer(steps)
   if (ns < 1L) stop("frank_wolfe: steps must be at least 1")
-  path <- as.numeric(f(x)); gap <- Inf
+  path <- as.numeric(f(x))
+  gap <- Inf
   for (t in seq_len(ns) - 1L) {
     g <- .s03vec(grad_f(x))
     if (length(g) != d) stop("frank_wolfe: gradient has the wrong length")

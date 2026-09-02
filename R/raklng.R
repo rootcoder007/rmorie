@@ -25,16 +25,19 @@
 #'   \doi{10.1214/aoms/1177731829}.
 #' @export
 Raklng <- function(y, weights, margins, tol = 1e-12, max_iter = 200) {
-  y <- as.numeric(unlist(y)); w <- as.numeric(unlist(weights))
+  y <- as.numeric(unlist(y))
+  w <- as.numeric(unlist(weights))
   if (length(y) == 0L) stop("Raklng: y is empty")
   if (length(w) != length(y)) stop("Raklng: weights must have one entry per observation")
   if (any(w <= 0)) stop("Raklng: weights must be positive")
   if (length(margins) == 0L) stop("Raklng: at least one margin is required")
   marg <- lapply(margins, function(m) {
-    labs <- as.character(unlist(m[[1]])); tgt <- m[[2]]
+    labs <- as.character(unlist(m[[1]]))
+    tgt <- m[[2]]
     if (length(labs) != length(y))
       stop("Raklng: margin labels must have one entry per observation")
-    tt <- as.numeric(tgt); names(tt) <- names(tgt)
+    tt <- as.numeric(tgt)
+    names(tt) <- names(tgt)
     if (!all(labs %in% names(tt))) stop("Raklng: no target for a level")
     if (any(tt < 0)) stop("Raklng: margin targets must be non-negative")
     list(labs = labs, tt = tt)
@@ -42,7 +45,8 @@ Raklng <- function(y, weights, margins, tol = 1e-12, max_iter = 200) {
   tot0 <- sum(marg[[1]]$tt)
   for (m in marg) if (abs(sum(m$tt) - tot0) > 1e-8 * max(1, abs(tot0)))
     stop("Raklng: margins have inconsistent totals")
-  it <- 0L; err <- Inf
+  it <- 0L
+  err <- Inf
   for (it in seq_len(as.integer(max_iter))) {
     for (m in marg) for (k in names(m$tt)) {
       idx <- which(m$labs == k)

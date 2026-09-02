@@ -114,7 +114,8 @@
     XtWX <- crossprod(Xa, WX)
     XtWz <- crossprod(Xa, W * z)
     beta_new <- tryCatch(solve(XtWX, XtWz), error = function(e) beta)
-    if (max(abs(beta_new - beta)) < tol) { beta <- beta_new; break }
+    if (max(abs(beta_new - beta)) < tol) { beta <- beta_new
+    break }
     beta <- beta_new
   }
   eta <- as.numeric(Xa %*% beta)

@@ -24,11 +24,15 @@ Alfpae <- function(z, w, bins = NULL) {
   nb <- length(bins)
   pae <- matrix(0, n, n)
   ps <- array(0, c(n, n, nb))
-  for (i in seq_len(n)) for (j in seq_len(n)) {
-    p <- alfSmax(alfLin(z[i, j, ], w))
-    ps[i, j, ] <- p
-    pae[i, j] <- sum(p * bins)
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      p <- alfSmax(alfLin(z[i, j, ], w))
+      ps[i, j, ] <- p
+      pae[i, j] <- sum(p * bins)
+    }
   }
-  list(pae = pae, p = ps, estimate = mean(pae), n = n,
-       method = "AlphaFold predicted aligned error")
+  list(
+    pae = pae, p = ps, estimate = mean(pae), n = n,
+    method = "AlphaFold predicted aligned error"
+  )
 }

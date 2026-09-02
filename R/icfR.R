@@ -23,31 +23,41 @@
 #' Itemcf(R, 0, 2, 2)$prediction
 #' @export
 Itemcf <- function(R, u = 0, i = 0, k_nn = 2, similarity = "adjusted") {
-  M <- .s03mat(R); nu <- nrow(M); ni <- ncol(M)
+  M <- .s03mat(R)
+  nu <- nrow(M)
+  ni <- ncol(M)
   umean <- numeric(nu)
   for (a in seq_len(nu)) {
     vals <- M[a, !is.na(M[a, ])]
     umean[a] <- if (length(vals)) .s03mean(vals) else 0
   }
   sim <- function(p, q) {
-    num <- 0; d1 <- 0; d2 <- 0
+    num <- 0
+    d1 <- 0
+    d2 <- 0
     for (a in seq_len(nu)) {
       if (is.na(M[a, p]) || is.na(M[a, q])) next
       cen <- if (identical(similarity, "adjusted")) umean[a] else 0
-      xp <- M[a, p] - cen; xq <- M[a, q] - cen
-      num <- num + xp * xq; d1 <- d1 + xp * xp; d2 <- d2 + xq * xq
+      xp <- M[a, p] - cen
+      xq <- M[a, q] - cen
+      num <- num + xp * xq
+      d1 <- d1 + xp * xp
+      d2 <- d2 + xq * xq
     }
     d <- sqrt(d1 * d2)
     if (d > 0) num / d else 0
   }
-  ii <- as.integer(i) + 1L; uu <- as.integer(u) + 1L
+  ii <- as.integer(i) + 1L
+  uu <- as.integer(u) + 1L
   cand <- integer(0)
   for (j in seq_len(ni)) if (j != ii && !is.na(M[uu, j])) cand <- c(cand, j)
   sims <- vapply(cand, function(j) sim(ii, j), 0)
   ord <- order(-abs(sims), cand)
   take <- ord[seq_len(min(as.integer(k_nn), length(ord)))]
-  num <- 0; den <- 0
-  for (t in take) { num <- num + sims[t] * M[uu, cand[t]]; den <- den + abs(sims[t]) }
+  num <- 0
+  den <- 0
+  for (t in take) { num <- num + sims[t] * M[uu, cand[t]]
+  den <- den + abs(sims[t]) }
   pred <- if (den > 0) num / den else NaN
   list(estimate = pred, prediction = pred, neighbours = cand[take] - 1L,
        sims = sims[take],

@@ -44,12 +44,15 @@
 #' Aitdrr(cbind(1, c(0, 1, 2)), rbind(c(.2, .3, .5), c(.3, .3, .4), c(.5, .3, .2)))$phi
 #' @export
 Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol = 1e-10) {
-  Xm <- as.matrix(X_cov); storage.mode(Xm) <- "double"
-  Ym <- as.matrix(Y_comp); storage.mode(Ym) <- "double"
+  Xm <- as.matrix(X_cov)
+  storage.mode(Xm) <- "double"
+  Ym <- as.matrix(Y_comp)
+  storage.mode(Ym) <- "double"
   N <- nrow(Xm)
   if (N == 0L || nrow(Ym) == 0L) stop("dirichlet_regression: no observations")
   if (nrow(Ym) != N) stop("dirichlet_regression: X_cov and Y_comp have different row counts")
-  p <- ncol(Xm); D <- ncol(Ym)
+  p <- ncol(Xm)
+  D <- ncol(Ym)
   if (D < 2L) stop("dirichlet_regression: a composition needs at least 2 parts")
   if (any(!(Ym > 0))) stop("dirichlet_regression: every part of Y_comp must be positive")
   for (i in seq_len(N)) {
@@ -79,7 +82,10 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
       An <- .aitdrr_alpha(Xm, Bn)
       lln <- .aitdrr_ll(An, LY)
       if (lln > ll) {
-        B <- Bn; A <- An; ll <- lln; moved <- TRUE
+        B <- Bn
+        A <- An
+        ll <- lln
+        moved <- TRUE
         break
       }
       st <- st * 0.5
@@ -95,14 +101,18 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
   phi <- 0
   for (v in a0s) phi <- phi + v
   phi <- phi / N
-  list(beta = B, phi = phi, ll = ll, estimate = ll, alpha = A, precision = a0s,
-       score_max_abs = gmax, iterations = it, N = N, p = p, D = D,
-       method = "alpha_ij = exp(x_i' beta_j); ML by score ascent with backtracking")
+  list(
+    beta = B, phi = phi, ll = ll, estimate = ll, alpha = A, precision = a0s,
+    score_max_abs = gmax, iterations = it, N = N, p = p, D = D,
+    method = "alpha_ij = exp(x_i' beta_j); ML by score ascent with backtracking"
+  )
 }
 
 #' @noRd
 .aitdrr_alpha <- function(Xm, B) {
-  N <- nrow(Xm); p <- ncol(Xm); D <- ncol(B)
+  N <- nrow(Xm)
+  p <- ncol(Xm)
+  D <- ncol(B)
   A <- matrix(0, nrow = N, ncol = D)
   for (i in seq_len(N)) {
     for (j in seq_len(D)) {
@@ -134,7 +144,9 @@ Aitdrr <- function(X_cov, Y_comp, ref = NULL, max_iter = 400L, step0 = 0.05, tol
 
 #' @noRd
 .aitdrr_score <- function(Xm, A, LY) {
-  N <- nrow(Xm); p <- ncol(Xm); D <- ncol(A)
+  N <- nrow(Xm)
+  p <- ncol(Xm)
+  D <- ncol(A)
   G <- matrix(0, nrow = p, ncol = D)
   for (i in seq_len(N)) {
     a0 <- 0

@@ -354,7 +354,8 @@ morie_rdd_bandwidth_rot <- function(x, y, cutoff = 0) {
 #' bw$bandwidth
 morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
                                     kernel = "triangular", p = 1) {
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   n <- length(x)
   p <- as.integer(p)
   ik <- .morie_rdd_ik_native(x, y, cutoff, kernel)

@@ -23,7 +23,9 @@
 #' pi_ij <- matrix(c(0.5, 0.2, 0.3, 0.2, 0.4, 0.25, 0.3, 0.25, 0.6), 3, 3)
 #' Htvar1(y, pi, pi_ij)
 Htvar1 <- function(y, pi, pi_ij) {
-  v <- .s03vec(y); p <- .s03vec(pi); P <- .s03mat(pi_ij)
+  v <- .s03vec(y)
+  p <- .s03vec(pi)
+  P <- .s03mat(pi_ij)
   n <- length(v)
   if (n == 0L) stop("ht_variance: y is empty")
   if (length(p) != n) stop("ht_variance: y and pi have different lengths")

@@ -70,7 +70,8 @@
     best <- max.col(-d, ties.method = "first")
     num <- tapply(w * x, factor(best, levels = seq_len(K)), sum)
     den <- tapply(w, factor(best, levels = seq_len(K)), sum)
-    num[is.na(num)] <- 0; den[is.na(den)] <- 0
+    num[is.na(num)] <- 0
+    den[is.na(den)] <- 0
     keep <- den > 0
     c0[keep] <- as.numeric(num[keep] / den[keep])
   }
@@ -97,7 +98,10 @@
 #' @param seed See Usage.
 #' @export
 Kvmse <- function(K, b = 2, seed = 1) {
-  K <- as.matrix(K); n <- nrow(K); d <- ncol(K); b <- as.integer(b)
+  K <- as.matrix(K)
+  n <- nrow(K)
+  d <- ncol(K)
+  b <- as.integer(b)
   if (n < 1L) stop("the cache must hold at least one key")
   if (b < 1L) stop("the bit width must be at least 1")
   Pi <- .kvmse_rotation(d, seed)

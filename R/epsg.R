@@ -26,8 +26,11 @@
 Epsgreedy <- function(arms, epsilon = 0.1, T = 100, rewards = NULL, q0 = 0) {
   mu <- .s03vec(arms)
   kk <- length(mu)
-  e <- as.numeric(epsilon); n <- as.integer(T)
-  q <- rep(as.numeric(q0), kk); cnt <- numeric(kk); total <- 0
+  e <- as.numeric(epsilon)
+  n <- as.integer(T)
+  q <- rep(as.numeric(q0), kk)
+  cnt <- numeric(kk)
+  total <- 0
   best <- 1L
   if (kk > 1L) for (a in seq(2L, kk)) if (mu[a] > mu[best]) best <- a
   for (t in seq_len(n) - 1L) {

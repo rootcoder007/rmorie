@@ -39,7 +39,8 @@
 #' @return A list with \code{beta}, \code{sigma}.
 #' @export
 .sschin_ols <- function(X, y, ridge_rel = 1e-8) {
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   A <- crossprod(X)
   scale_ <- sum(diag(A)) / p
   diag(A) <- diag(A) + ridge_rel * max(scale_, .sschin_EPS)
@@ -65,22 +66,29 @@
 #' @return A list with \code{beta}, \code{var}, \code{loglik}, \code{iterations}, \code{converged}.
 #' @export
 .sschin_cox_breslow <- function(t, e, X, max_iter = 100L, tol = 1e-10) {
-  n <- length(t); p <- ncol(X)
+  n <- length(t)
+  p <- ncol(X)
   if (p == 0L) stop("sschin: the Cox model needs at least one covariate")
   ord <- order(-t, seq_len(n))
-  beta <- numeric(p); it <- 0L; converged <- FALSE
-  info <- matrix(0.0, p, p); ll <- 0.0
+  beta <- numeric(p)
+  it <- 0L
+  converged <- FALSE
+  info <- matrix(0.0, p, p)
+  ll <- 0.0
   for (it in seq_len(as.integer(max_iter))) {
     ll <- 0.0
     grad <- numeric(p)
     info <- matrix(0.0, p, p)
-    s0 <- 0.0; s1 <- numeric(p); s2 <- matrix(0.0, p, p)
+    s0 <- 0.0
+    s1 <- numeric(p)
+    s2 <- matrix(0.0, p, p)
     pos <- 1L
     while (pos <= n) {
       tt <- t[ord[pos]]
       grp <- integer(0)
       while (pos <= n && t[ord[pos]] == tt) {
-        grp <- c(grp, ord[pos]); pos <- pos + 1L
+        grp <- c(grp, ord[pos])
+        pos <- pos + 1L
       }
       for (i in grp) {
         z <- sum(X[i, ] * beta)
@@ -101,15 +109,19 @@
       info <- info + dk * (s2 / max(s0, 1e-300) -
                              outer(s1, s1) / max(s0 * s0, 1e-300))
     }
-    Ir <- info; diag(Ir) <- diag(Ir) + 1e-10
+    Ir <- info
+    diag(Ir) <- diag(Ir) + 1e-10
     step <- .sschin_cholsolve(Ir, grad)
     beta <- beta + step
-    if (max(abs(step)) < tol) { converged <- TRUE; break }
+    if (max(abs(step)) < tol) { converged <- TRUE
+    break }
   }
-  Ir <- info; diag(Ir) <- diag(Ir) + 1e-10
+  Ir <- info
+  diag(Ir) <- diag(Ir) + 1e-10
   cov2 <- matrix(0.0, p, p)
   for (a in seq_len(p)) {
-    ea <- numeric(p); ea[a] <- 1.0
+    ea <- numeric(p)
+    ea[a] <- 1.0
     cov2[, a] <- .sschin_cholsolve(Ir, ea)
   }
   list(beta = beta, var = pmax(diag(cov2), 0.0), loglik = ll,
@@ -181,7 +193,8 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
     stop("sschin: no events -- the partial likelihood is flat")
 
   miss <- is.na(Xr)
-  obs <- Xr; obs[miss] <- 0.0
+  obs <- Xr
+  obs[miss] <- 0.0
   n_missing <- sum(miss)
   cols_missing <- which(apply(miss, 2L, any))
   for (a in cols_missing) if (all(miss[, a]))
@@ -193,7 +206,8 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
     if (length(ok) > 0L) sum(ok) / length(ok) else 0.0
   }, 0)
 
-  ests <- vector("list", m); vars_ <- vector("list", m)
+  ests <- vector("list", m)
+  vars_ <- vector("list", m)
   per <- vector("list", m)
   for (ell in seq_len(m)) {
     # one deterministic normal stream per imputation; a different base
@@ -220,7 +234,8 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
           sig <- 0.0
         } else {
           fit <- .sschin_ols(Xo, yo)
-          beta <- fit$beta; sig <- fit$sigma
+          beta <- fit$beta
+          sig <- fit$sigma
         }
         for (i in rows_mis) {
           rr <- rowf(i)
@@ -248,7 +263,9 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
   se <- sqrt(pmax(Tv, 0.0))
   n_events <- sum(ev > 0.5)
   dfcom <- max(n_events - p, 1L)
-  riv <- numeric(p); fmi <- numeric(p); df <- numeric(p)
+  riv <- numeric(p)
+  fmi <- numeric(p)
+  df <- numeric(p)
   for (a in seq_len(p)) {
     r <- (1.0 + 1.0 / m) * B[a] / max(ubar[a], 1e-300)
     riv[a] <- r
@@ -270,7 +287,8 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
     cb <- cfit$beta
     cc_se <- sqrt(pmax(cfit$var, 0.0))
   } else {
-    cb <- rep(NaN, p); cc_se <- rep(NaN, p)
+    cb <- rep(NaN, p)
+    cc_se <- rep(NaN, p)
   }
 
   list(estimate = qbar, coefficients = qbar, hazard_ratio = exp(qbar),

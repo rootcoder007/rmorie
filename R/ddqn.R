@@ -55,8 +55,12 @@ Ddqn <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                  n_episodes = 100L, start = 0L, terminal = integer(0),
                  max_steps = 1000L, seed = 0) {
   ar <- .w505_mdp_args(P, R)
-  Pm <- ar$P; R <- ar$R; S <- ar$S; A <- ar$A
-  gamma <- as.numeric(gamma); alpha <- as.numeric(alpha)
+  Pm <- ar$P
+  R <- ar$R
+  S <- ar$S
+  A <- ar$A
+  gamma <- as.numeric(gamma)
+  alpha <- as.numeric(alpha)
   epsilon <- as.numeric(epsilon)
   start <- as.integer(start)
   term <- as.integer(terminal)
@@ -102,7 +106,8 @@ Ddqn <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
     }
   }
   Q <- 0.5 * (Q1 + Q2)
-  pol <- numeric(S); V <- numeric(S)
+  pol <- numeric(S)
+  V <- numeric(S)
   for (s in seq_len(S)) {
     b <- .w505_greedy(Q[s, ], A)
     pol[s] <- as.numeric(b - 1L)

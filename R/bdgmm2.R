@@ -18,7 +18,9 @@
 #' @examples
 #' Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
 Gmsbound <- function(mbar, sigma, n, kappa = NULL) {
-  m <- .t1_vec(mbar); s <- .t1_vec(sigma); J <- length(m)
+  m <- .t1_vec(mbar)
+  s <- .t1_vec(sigma)
+  J <- length(m)
   if (length(s) != J) stop("mbar and sigma must have the same length")
   if (any(s <= 0)) stop("standard deviations must be strictly positive")
   n <- as.numeric(n)

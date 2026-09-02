@@ -41,12 +41,15 @@ Bfassum <- function(kernel = NULL, g = NULL, h = NULL, n = NULL, smooth = NA, to
   v <- seq(lo, hi, length.out = ngrid)
   kv <- vapply(v, function(t) as.numeric(kfun(t)), numeric(1))
   trap <- function(y, gg) sum(diff(gg) * (y[-length(y)] + y[-1]) / 2)
-  mass <- trap(kv, v); sym <- max(abs(kv - rev(kv))); mu2 <- trap(v^2 * kv, v)
+  mass <- trap(kv, v)
+  sym <- max(abs(kv - rev(kv)))
+  mu2 <- trap(v^2 * kv, v)
   d1 <- all(kv >= 0) && sym < tol
   d2 <- is.finite(mu2) && abs(mass - 1) < tol
   d3 <- if (is.null(h) || is.null(n)) NA else (h > 0 && h < 1 && n * h > 1)
   if (is.null(g)) {
-    d4 <- NA; monotone <- "unknown"
+    d4 <- NA
+    monotone <- "unknown"
   } else {
     gv <- vapply(v, function(t) as.numeric(g(t)), numeric(1))
     dv <- diff(gv)

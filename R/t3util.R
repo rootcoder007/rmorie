@@ -17,17 +17,25 @@
 #' @return A numeric value.
 #' @export
 t3golden <- function(f, lo, hi, iters = 80L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   cc <- b - .t3invphi * (b - a)
   dd <- a + .t3invphi * (b - a)
-  fc <- f(cc); fd <- f(dd)
+  fc <- f(cc)
+  fd <- f(dd)
   for (i in seq_len(as.integer(iters))) {
     if (fc < fd) {
-      b <- dd; dd <- cc; fd <- fc
-      cc <- b - .t3invphi * (b - a); fc <- f(cc)
+      b <- dd
+      dd <- cc
+      fd <- fc
+      cc <- b - .t3invphi * (b - a)
+      fc <- f(cc)
     } else {
-      a <- cc; cc <- dd; fc <- fd
-      dd <- a + .t3invphi * (b - a); fd <- f(dd)
+      a <- cc
+      cc <- dd
+      fc <- fd
+      dd <- a + .t3invphi * (b - a)
+      fd <- f(dd)
     }
   }
   0.5 * (a + b)
@@ -62,13 +70,16 @@ t3nodes <- function(m = 401L, lim = 8.0) {
 #' @return The value of \code{d}, as built in the body.
 #' @export
 t3bfs <- function(A, s) {
-  A <- as.matrix(A); n <- nrow(A)
-  d <- rep(Inf, n); d[s] <- 0
+  A <- as.matrix(A)
+  n <- nrow(A)
+  d <- rep(Inf, n)
+  d[s] <- 0
   frontier <- s
   while (length(frontier) > 0) {
     nxt <- integer(0)
     for (i in frontier) for (j in seq_len(n)) {
-      if (A[i, j] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1; nxt <- c(nxt, j) }
+      if (A[i, j] != 0 && is.infinite(d[j])) { d[j] <- d[i] + 1
+      nxt <- c(nxt, j) }
     }
     frontier <- nxt
   }
@@ -108,8 +119,10 @@ t3expit <- function(x) 1 / (1 + exp(-x))
 #' @return A vector, from \code{as.numeric}.
 #' @export
 t3ols <- function(X, y) {
-  X <- as.matrix(X); y <- as.numeric(y)
-  xtx <- t(X) %*% X; xty <- t(X) %*% y
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  xtx <- t(X) %*% X
+  xty <- t(X) %*% y
   b <- try(solve(xtx, xty), silent = TRUE)
   if (inherits(b, "try-error")) b <- .morie_pinv(xtx) %*% xty
   as.numeric(b)

@@ -42,7 +42,8 @@ Klmsmh <- function(y, model, filtered, ridge = 1e-12) {
   Pp <- lapply(need("predicted_cov"), .s03mat)
   if (length(xs) != n || length(Ps) != n || length(xp) != n || length(Pp) != n)
     stop("kalman_smoother: filtered quantities do not have n entries")
-  xsm <- xs; Psm <- Ps
+  xsm <- xs
+  Psm <- Ps
   if (n > 1L) for (t in seq(n - 1L, 1L)) {
     A <- Pp[[t + 1L]] + diag(as.numeric(ridge), d)
     PF <- Ps[[t]] %*% t(Fm)

@@ -65,7 +65,8 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
 #' @return A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.
 #' @export
 rate_condition <- function(rate_Q, rate_g, n) {
-  a <- as.numeric(rate_Q); b <- as.numeric(rate_g)
+  a <- as.numeric(rate_Q)
+  b <- as.numeric(rate_g)
   if (a <= 0 || b <= 0)
     stop("tlhaltm: rates must be positive exponents")
   list(sum = a + b, required = 0.5, satisfied = a + b > 0.5,
@@ -134,7 +135,8 @@ efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
 #' @return A list with \code{folds}, \code{training}, \code{V}, \code{note}.
 #' @export
 cv_tmle_split <- function(n, V = 10L, seed = 0L) {
-  n <- as.integer(n); V <- as.integer(V)
+  n <- as.integer(n)
+  V <- as.integer(V)
   if (V < 2L || V > n)
     stop(sprintf("tlhaltm: V must lie in 2..%d, got %d", n, V))
   e_rng <- .ghc_rng(as.numeric(seed))
@@ -143,7 +145,9 @@ cv_tmle_split <- function(n, V = 10L, seed = 0L) {
     j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
     if (j == 0L) j <- 1L
     if (j == i) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j]; idx[j] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j]
+    idx[j] <- tmp
   }
   folds <- lapply(seq_len(V), function(v)
     sort(idx[seq(v, length(idx), by = V)]))

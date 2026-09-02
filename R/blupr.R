@@ -19,9 +19,12 @@
 #' set.seed(1)
 #' Blupint(y = rnorm(30), group = rep(1:5, each = 6), s2u = 1, s2e = 1)
 Blupint <- function(y, group, s2u, s2e, X = NULL, beta = NULL) {
-  y <- .t1_vec(y); n <- length(y); g <- as.character(group)
+  y <- .t1_vec(y)
+  n <- length(y)
+  g <- as.character(group)
   if (length(g) != n) stop("group must have one label per observation")
-  s2u <- as.numeric(s2u); s2e <- as.numeric(s2e)
+  s2u <- as.numeric(s2u)
+  s2e <- as.numeric(s2e)
   if (s2u < 0) stop("s2u must be non-negative")
   if (s2e <= 0) stop("s2e must be strictly positive")
   if (is.null(X)) {
@@ -34,12 +37,19 @@ Blupint <- function(y, group, s2u, s2e, X = NULL, beta = NULL) {
     r <- y - as.numeric(Xm %*% b)
   }
   labs <- unique(g)
-  nj <- integer(0); gm <- numeric(0); u <- numeric(0); sh <- numeric(0)
+  nj <- integer(0)
+  gm <- numeric(0)
+  u <- numeric(0)
+  sh <- numeric(0)
   for (L in labs) {
-    idx <- which(g == L); m <- length(idx)
+    idx <- which(g == L)
+    m <- length(idx)
     mean <- sum(r[idx]) / m
     k <- s2u / (s2u + s2e / m)
-    nj <- c(nj, m); gm <- c(gm, mean); sh <- c(sh, k); u <- c(u, k * mean)
+    nj <- c(nj, m)
+    gm <- c(gm, mean)
+    sh <- c(sh, k)
+    u <- c(u, k * mean)
   }
   .t1_result(u = u, shrink = sh, nj = nj, groupmean = gm, levels = labs,
              vpc = s2u / (s2u + s2e), J = length(labs), n = n,

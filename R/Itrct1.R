@@ -27,15 +27,19 @@
 #' Itrct1(y = rnorm(40), D = rbinom(40, 1, 0.5), V = rbinom(40, 1, 0.5),
 #'        X = matrix(rnorm(80), 40, 2))
 Itrct1 <- function(y, D, V, X) {
-  dy <- .s03vec(y); n <- length(dy)
+  dy <- .s03vec(y)
+  n <- length(dy)
   if (n == 0L) stop("interaction_did: y is empty")
-  d <- .s03vec(D); v <- .s03vec(V)
+  d <- .s03vec(D)
+  v <- .s03vec(V)
   if (length(d) != n || length(v) != n) stop("interaction_did: y, D and V have different lengths")
   if (any(d != 0 & d != 1)) stop("interaction_did: D must be 0 or 1")
   rows <- if (!is.null(X)) .s03mat(X) else NULL
   if (!is.null(rows) && nrow(rows) != n) stop("interaction_did: X and y have different lengths")
   levels <- sort(unique(v))
-  atts <- numeric(length(levels)); ses <- numeric(length(levels)); counts <- numeric(length(levels))
+  atts <- numeric(length(levels))
+  ses <- numeric(length(levels))
+  counts <- numeric(length(levels))
   for (L in seq_along(levels)) {
     idx <- which(v == levels[L])
     sub_d <- d[idx]
@@ -43,13 +47,17 @@ Itrct1 <- function(y, D, V, X) {
       stop("interaction_did: a level of V has only one treatment arm")
     sub_x <- if (!is.null(rows)) rows[idx, , drop = FALSE] else NULL
     r <- .s03drdid(dy[idx], sub_d, sub_x)
-    atts[L] <- r$tau; ses[L] <- r$se; counts[L] <- length(idx)
+    atts[L] <- r$tau
+    ses[L] <- r$se
+    counts[L] <- length(idx)
   }
   K <- length(levels)
   if (K >= 2L) {
-    est <- atts[K] - atts[1]; se <- sqrt(ses[K]^2 + ses[1]^2)
+    est <- atts[K] - atts[1]
+    se <- sqrt(ses[K]^2 + ses[1]^2)
   } else {
-    est <- atts[1]; se <- ses[1]
+    est <- atts[1]
+    se <- ses[1]
   }
   full <- .s03drdid(dy, d, rows)
   .t1_result(estimate = est, se = se, att = atts, att_se = ses,

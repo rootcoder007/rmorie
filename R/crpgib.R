@@ -62,7 +62,8 @@ Crpgib <- function(y, alpha = 1, n_iter = 50, m = 3, mu0 = 0, tau2 = 10,
       pick <- K + m
       for (c in seq_len(K + m)) {
         acc <- acc + w[c]
-        if (u <= acc) { pick <- c; break }
+        if (u <= acc) { pick <- c
+        break }
       }
       if (pick > K) {
         theta <- c(theta, aux[pick - K])

@@ -16,8 +16,10 @@
 #' y <- sample(1:3, 10, replace = TRUE)
 #' Brierscore(P, y)
 Brierscore <- function(P, y) {
-  P <- as.matrix(P); y <- as.integer(y)
-  Tn <- nrow(P); K <- ncol(P)
+  P <- as.matrix(P)
+  y <- as.integer(y)
+  Tn <- nrow(P)
+  K <- ncol(P)
   if (Tn == 0L) stop("p must have at least one row")
   if (length(y) != Tn) stop("y must have one entry per row of p")
   if (any(y < 1L | y > K)) stop("y must be a 1-based category index")

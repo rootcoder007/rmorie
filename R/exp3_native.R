@@ -32,7 +32,8 @@ morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {
   storage.mode(x) <- "double"
   if (length(dim(x)) != 2L)
     stop("x must be a (T, K) reward table")
-  rows <- nrow(x); K <- ncol(x)
+  rows <- nrow(x)
+  K <- ncol(x)
   T_used <- if (is.null(T)) rows else as.integer(T)
   if (T_used > rows)
     stop(sprintf("x has only %d rows", rows))

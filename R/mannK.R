@@ -17,7 +17,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mktest(V)
 Mktest <- function(x, continuity = TRUE) {
-  x <- .t4_vec(x); n <- length(x)
+  x <- .t4_vec(x)
+  n <- length(x)
   if (n < 3) stop("need at least 3 observations")
   S <- 0
   for (j in seq_len(n)) S <- S + sum(sign(x[j] - x[1:j]))

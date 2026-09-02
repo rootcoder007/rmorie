@@ -22,7 +22,8 @@
 #' Bnrunstat(V)
 Bnrunstat <- function(x, runmean = 0, runvar = 1, momentum = 0.1,
                       eps = 1e-5, gamma = 1, beta = 0) {
-  x <- .t1_vec(x); m <- length(x)
+  x <- .t1_vec(x)
+  m <- length(x)
   if (m < 2) stop("need at least two activations to form a variance")
   momentum <- as.numeric(momentum)
   if (momentum < 0 || momentum > 1) stop("momentum must lie in [0, 1]")
@@ -31,10 +32,14 @@ Bnrunstat <- function(x, runmean = 0, runvar = 1, momentum = 0.1,
   vu <- vb * m / (m - 1)
   rm <- (1 - momentum) * as.numeric(runmean) + momentum * mu
   rv <- (1 - momentum) * as.numeric(runvar) + momentum * vu
-  g <- as.numeric(gamma); b <- as.numeric(beta); eps <- as.numeric(eps)
-  .t1_result(runmean = rm, runvar = rv, batchmean = mu, batchvar = vb,
-             batchvarunb = vu,
-             normalized = g * (x - rm) / sqrt(rv + eps) + b,
-             trainnorm = g * (x - mu) / sqrt(vb + eps) + b, m = m,
-             method = "Batch-norm running statistics (Ioffe-Szegedy 2015 Sect. 3.1)")
+  g <- as.numeric(gamma)
+  b <- as.numeric(beta)
+  eps <- as.numeric(eps)
+  .t1_result(
+    runmean = rm, runvar = rv, batchmean = mu, batchvar = vb,
+    batchvarunb = vu,
+    normalized = g * (x - rm) / sqrt(rv + eps) + b,
+    trainnorm = g * (x - mu) / sqrt(vb + eps) + b, m = m,
+    method = "Batch-norm running statistics (Ioffe-Szegedy 2015 Sect. 3.1)"
+  )
 }

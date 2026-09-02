@@ -414,7 +414,8 @@ NULL
     mu <- exp(eta)
     r <- (y - mu) / sqrt(mu) # Pearson residuals (phi = 1 scale)
     # Moment estimator of exchangeable correlation.
-    num <- 0; cnt <- 0
+    num <- 0
+    cnt <- 0
     for (ix in clusters) {
       ni <- length(ix)
       if (ni < 2L) next
@@ -426,13 +427,15 @@ NULL
     alpha <- if (cnt > 0) num / ((cnt - p / 2) * phi) else 0
     alpha <- min(max(alpha, -0.99), 0.99)
     # Fisher scoring step with working covariance.
-    M <- matrix(0, p, p); U <- numeric(p)
+    M <- matrix(0, p, p)
+    U <- numeric(p)
     B <- matrix(0, p, p)
     for (ix in clusters) {
       ni <- length(ix)
       Di <- X[ix, , drop = FALSE] * mu[ix] # d mu / d beta
       Ai_half <- sqrt(mu[ix])
-      Ri <- matrix(alpha, ni, ni); diag(Ri) <- 1
+      Ri <- matrix(alpha, ni, ni)
+      diag(Ri) <- 1
       Vi <- (Ai_half %o% Ai_half) * Ri * phi
       Vinv <- solve(Vi)
       DtV <- crossprod(Di, Vinv)

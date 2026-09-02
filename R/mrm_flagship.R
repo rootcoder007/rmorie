@@ -91,9 +91,11 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
                   suffixes = c(".primary", ".secondary"))
   conflicts <- list()
   for (f in compare %||% character(0)) {
-    cp <- paste0(f, ".primary"); cs <- paste0(f, ".secondary")
+    cp <- paste0(f, ".primary")
+    cs <- paste0(f, ".secondary")
     if (!cp %in% names(merged)) next   # column identical -> no suffix
-    a <- merged[[cp]]; b <- merged[[cs]]
+    a <- merged[[cp]]
+    b <- merged[[cs]]
     bad <- if (is.numeric(a) && is.numeric(b)) {
       abs(a - b) > numeric_tolerance & !(is.na(a) & is.na(b))
     } else {

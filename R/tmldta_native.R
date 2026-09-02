@@ -88,8 +88,10 @@
 #' @return A list with \code{q}, \code{b}.
 #' @export
 .fit_q <- function(y, A, W, levels, rows, ridge) {
-  ref <- levels[1]; others <- levels[-1]
-  n <- length(y); p <- ncol(W)
+  ref <- levels[1]
+  others <- levels[-1]
+  n <- length(y)
+  p <- ncol(W)
   design_row <- function(a, i) {
     d <- as.numeric(levels( factor(rep(0, length(others)),
                                     levels = seq_along(others)) ) == 0)
@@ -143,7 +145,9 @@
   gH <- gL <- numeric(n)
   for (i in seq_len(n)) {
     tot <- pH[i] + pL[i] + pO[i]
-    if (tot <= 0) { gH[i] <- 0.5; gL[i] <- 0.5; next }
+    if (tot <= 0) { gH[i] <- 0.5
+    gL[i] <- 0.5
+    next }
     gH[i] <- min(max(pH[i] / tot, trim), 1 - trim)
     gL[i] <- min(max(pL[i] / tot, trim), 1 - trim)
   }
@@ -204,7 +208,8 @@ split_specific_tmle <- function(y, A, W, levels, aL, aH,
   n <- length(y)
   fq <- .fit_q(y, A, W, levels, fit_rows, ridge)
   fg <- .fit_g(A, W, aL, aH, fit_rows, ridge, trim)
-  gH <- fg$gH; gL <- fg$gL
+  gH <- fg$gH
+  gL <- fg$gL
   H <- ifelse(A == aH, 1 / gH, 0) - ifelse(A == aL, 1 / gL, 0)
   off <- vapply(seq_len(n), function(i) .tmldta_logit(fq$q(A[i], i)),
                  numeric(1))
@@ -290,7 +295,9 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
                          bounds = NULL) {
   if (!method %in% .TMLDTA_METHODS)
     stop("tmldta: method must be one of cv-tmle, sample-split, naive")
-  yv <- as.numeric(y); Av <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Av <- as.numeric(D)
+  n <- length(yv)
   if (length(Av) != n) stop("tmldta: outcome and exposure differ in length")
   Wm <- if (is.null(X)) matrix(0, nrow = n, ncol = 0) else as.matrix(X)
   storage.mode(Wm) <- "double"
@@ -312,7 +319,9 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
   all_rows <- seq_len(n)
   if (method == "naive") {
     dl <- discover_levels(ys, Av, Wm, lv, all_rows, all_rows, ridge)
-    aL <- dl$aL; aH <- dl$aH; dinfo <- dl$info
+    aL <- dl$aL
+    aH <- dl$aH
+    dinfo <- dl$info
     ss <- split_specific_tmle(ys, Av, Wm, lv, aL, aH, all_rows,
                               all_rows, ridge, trim, target = FALSE)
     splits <- list(list(aL = aL, aH = aH, estimate = rng * ss$psi,
@@ -322,12 +331,16 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
     eps_all <- c(0)
   } else {
     folds <- .tmldta_folds(n, n_folds)
-    splits <- list(); per_split <- list(); ics <- list(); eps_all <- c()
+    splits <- list()
+    per_split <- list()
+    ics <- list()
+    eps_all <- c()
     for (est in folds) {
       gen <- setdiff(all_rows, est)
       if (length(gen) == 0L || length(est) == 0L) next
       dl <- discover_levels(ys, Av, Wm, lv, gen, gen, ridge)
-      aL <- dl$aL; aH <- dl$aH
+      aL <- dl$aL
+      aH <- dl$aH
       fit <- if (method == "cv-tmle") gen else est
       ss <- split_specific_tmle(ys, Av, Wm, lv, aL, aH, fit, est,
                                 ridge, trim)
@@ -393,8 +406,10 @@ morie_tmldta <- function(y, D, X, candidate_strata = NULL,
 morie_variable_importance <- function(y, X, candidate_strata = NULL,
                                       method = "cv-tmle",
                                       n_folds = 10, names = NULL, ...) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (p < 2L) stop("variable_importance: need at least 2 columns")
   nm <- if (is.null(names)) paste0("X", seq_len(p)) else as.character(names)
   if (length(nm) != p)

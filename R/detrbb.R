@@ -10,10 +10,13 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .detr_hungarian <- function(cost) {
-  n <- nrow(cost); m <- ncol(cost)
+  n <- nrow(cost)
+  m <- ncol(cost)
   if (n > m) stop("hungarian: need at least as many columns as rows")
-  u <- numeric(n + 1L); v <- numeric(m + 1L)
-  p <- integer(m + 1L); way <- integer(m + 1L)
+  u <- numeric(n + 1L)
+  v <- numeric(m + 1L)
+  p <- integer(m + 1L)
+  way <- integer(m + 1L)
   for (i in seq_len(n)) {
     p[1] <- i
     j0 <- 1L
@@ -22,12 +25,15 @@
     repeat {
       used[j0] <- TRUE
       i0 <- p[j0]
-      delta <- Inf; j1 <- 1L
+      delta <- Inf
+      j1 <- 1L
       for (j in 2:(m + 1L)) {
         if (used[j]) next
         cur <- cost[i0, j - 1L] - u[i0] - v[j]
-        if (cur < minv[j]) { minv[j] <- cur; way[j] <- j0 }
-        if (minv[j] < delta) { delta <- minv[j]; j1 <- j }
+        if (cur < minv[j]) { minv[j] <- cur
+        way[j] <- j0 }
+        if (minv[j] < delta) { delta <- minv[j]
+        j1 <- j }
       }
       for (j in seq_len(m + 1L)) {
         if (used[j]) {
@@ -75,8 +81,10 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Detrbb(D, D)
 Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
-  P <- .s03mat(image); TT <- .s03mat(queries)
-  Q <- nrow(P); G <- nrow(TT)
+  P <- .s03mat(image)
+  TT <- .s03mat(queries)
+  Q <- nrow(P)
+  G <- nrow(TT)
   if (Q == 0L || G == 0L)
     stop("empty input: both boxes and targets are required")
   if (ncol(P) != 4L || ncol(TT) != 4L)
@@ -86,12 +94,14 @@ Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
   if (G > Q) stop("more ground-truth boxes than queries")
   cor <- function(b) c(b[1] - b[3] / 2, b[2] - b[4] / 2,
                        b[1] + b[3] / 2, b[2] + b[4] / 2)
-  l1 <- matrix(0, G, Q); giou <- matrix(0, G, Q)
+  l1 <- matrix(0, G, Q)
+  giou <- matrix(0, G, Q)
   for (g in seq_len(G)) for (q in seq_len(Q)) {
     s <- 0
     for (k in 1:4) s <- s + abs(TT[g, k] - P[q, k])
     l1[g, q] <- s
-    a <- cor(TT[g, ]); b <- cor(P[q, ])
+    a <- cor(TT[g, ])
+    b <- cor(P[q, ])
     iw <- max(min(a[3], b[3]) - max(a[1], b[1]), 0)
     ih <- max(min(a[4], b[4]) - max(a[2], b[2]), 0)
     inter <- iw * ih
@@ -105,7 +115,9 @@ Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
   }
   cost <- 5 * l1 + 2 * giou
   assign <- .detr_hungarian(cost)
-  total <- 0; lt <- 0; gt <- 0
+  total <- 0
+  lt <- 0
+  gt <- 0
   for (g in seq_len(G)) {
     total <- total + cost[g, assign[g]]
     lt <- lt + l1[g, assign[g]]

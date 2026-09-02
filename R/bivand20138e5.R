@@ -17,7 +17,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Spatrend(V, V)
 Spatrend <- function(X, z, addintercept = TRUE) {
-  Xm <- .t1_mat(X); z <- .t1_vec(z); n <- nrow(Xm)
+  Xm <- .t1_mat(X)
+  z <- .t1_vec(z)
+  n <- nrow(Xm)
   if (length(z) != n) stop("X must have one row per observation")
   if (isTRUE(addintercept)) Xm <- .t1_cbind1(Xm)
   dimnames(Xm) <- NULL

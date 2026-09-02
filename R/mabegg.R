@@ -19,7 +19,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Beggtest(V, V)
 Beggtest <- function(yi, vi) {
-  yi <- .t4_vec(yi); vi <- .t4_vec(vi); k <- length(yi)
+  yi <- .t4_vec(yi)
+  vi <- .t4_vec(vi)
+  k <- length(yi)
   if (length(vi) != k) stop("yi and vi must be the same length")
   if (k < 3) stop("need at least 3 studies")
   if (any(vi <= 0)) stop("sampling variances must be positive")

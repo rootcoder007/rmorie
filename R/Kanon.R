@@ -27,7 +27,8 @@
 #' @examples
 #' Kanon(y = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Kanon <- function(y, quasi_ids, k) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("k_anonymity_check: y is empty")
   rows <- .s03mat(quasi_ids)
   if (nrow(rows) != n) stop("k_anonymity_check: quasi_ids and y have different lengths")

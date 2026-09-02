@@ -70,7 +70,8 @@
   N <- numeric(m)
   for (i in seq_len(m)) if (kn[i] <= x && x < kn[i + 1L]) N[i] <- 1.0
   if (x >= tmax) {                      # close the right end
-    for (i in seq.int(m, 1L)) if (kn[i] < kn[i + 1L]) { N[i] <- 1.0; break }
+    for (i in seq.int(m, 1L)) if (kn[i] < kn[i + 1L]) { N[i] <- 1.0
+    break }
   }
   for (d in seq_len(degree)) {
     for (i in seq_len(m - d)) {
@@ -109,7 +110,8 @@
     nu <- sqrt(sum(u * u))
     if (nu < 1e-300) break
     u <- u / nu
-    if (max(abs(u - v)) < 1e-13) { v <- u; break }
+    if (max(abs(u - v)) < 1e-13) { v <- u
+    break }
     v <- u
   }
   # sign convention: largest-magnitude entry positive, so the projection --
@@ -154,7 +156,8 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
                                             degree = 3L, max_iter = 300L,
                                             tol = 1e-10, var_floor = 1e-8) {
   M <- .funmix_rows(Y)
-  n <- nrow(M); m <- ncol(M)
+  n <- nrow(M)
+  m <- ncol(M)
   if (n == 0L) stop("funmix: no curves")
   K <- as.integer(K)
   if (K < 1L) stop("funmix: K must be at least 1")
@@ -163,12 +166,14 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
   if (length(tv) != m)
     stop(sprintf("funmix: %d grid points but curves of length %d",
                  length(tv), m))
-  p <- as.integer(n_basis); degree <- as.integer(degree)
+  p <- as.integer(n_basis)
+  degree <- as.integer(degree)
   if (p > m)
     stop(sprintf(paste0("funmix: %d basis functions for %d time points -- ",
                         "the coefficient fit is not identified"), p, m))
 
-  tmin <- min(tv); tmax <- max(tv)
+  tmin <- min(tv)
+  tmax <- max(tv)
   if (tmax - tmin <= .funmix_EPS) stop("funmix: the grid has no extent")
   kn <- .funmix_knots(tmin, tmax, p, degree)
   B <- t(vapply(tv, function(x) .funmix_bspline_row(x, kn, degree, p, tmax),
@@ -221,7 +226,9 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
 
   path <- numeric(0)
   post <- matrix(0.0, n, K)
-  ll <- -Inf; it <- 0L; converged <- FALSE
+  ll <- -Inf
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
     ll_new <- 0.0
     for (i in seq_len(n)) {
@@ -234,7 +241,9 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
     }
     path <- c(path, ll_new)
     if (it > 1L && abs(ll_new - ll) <= tol * (abs(ll) + 1.0)) {
-      ll <- ll_new; converged <- TRUE; break
+      ll <- ll_new
+      converged <- TRUE
+      break
     }
     ll <- ll_new
     for (j in seq_len(K)) {

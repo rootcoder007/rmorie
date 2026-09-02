@@ -37,7 +37,8 @@ Gpcla <- function(X, y, X_test = NULL, kernel = NULL, lengthscale = 1,
   yv <- as.integer(.s03vec(y))
   if (length(yv) != n) stop("gp_classification: X and y have different lengths")
   if (any(!(yv %in% c(0L, 1L)))) stop("gp_classification: labels must be 0 or 1")
-  ell <- as.numeric(lengthscale); var <- as.numeric(variance)
+  ell <- as.numeric(lengthscale)
+  var <- as.numeric(variance)
   if (ell <= 0 || var <= 0) stop("gp_classification: lengthscale and variance must be positive")
   Xs <- if (is.null(X_test)) A else .s03mat(X_test)
   kf <- function(P, Q) {

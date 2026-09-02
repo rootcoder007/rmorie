@@ -25,7 +25,9 @@
 #'   (2010). Statistics in Medicine 29(7-8):932-944. \doi{10.1002/sim.3767}.
 #' @export
 Manh2h <- function(yi, vi, design, edge) {
-  y <- as.numeric(yi); v <- as.numeric(vi); n <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  n <- length(y)
   if (n == 0L) stop("no studies")
   if (length(v) != n) stop("yi and vi must have equal length")
   if (any(v <= 0)) stop("sampling variances must be strictly positive")
@@ -37,7 +39,8 @@ Manh2h <- function(yi, vi, design, edge) {
   sgn <- rep(0, n)
   sgn[D[, 1] == e[1] & D[, 2] == e[2]] <- 1
   sgn[D[, 1] == e[2] & D[, 2] == e[1]] <- -1
-  di <- which(sgn != 0); rest <- which(sgn == 0)
+  di <- which(sgn != 0)
+  rest <- which(sgn == 0)
   if (!length(di)) stop("no study makes that comparison directly")
   if (!length(rest))
     stop("no indirect evidence remains once the edge is split")
@@ -45,13 +48,17 @@ Manh2h <- function(yi, vi, design, edge) {
   direct <- sum(sgn[di] * y[di] / v[di]) / sw
   v_dir <- 1 / sw
   nd <- .ma_net_design(D[rest, , drop = FALSE])
-  Xr <- nd$X; treats <- nd$treats; T <- nd$T
+  Xr <- nd$X
+  treats <- nd$treats
+  T <- nd$T
   if (!(e[1] %in% treats) || !(e[2] %in% treats))
     stop("the split edge is disconnected from the rest")
   p <- T - 1L
-  w <- 1 / v[rest]; yr <- y[rest]
+  w <- 1 / v[rest]
+  yr <- y[rest]
   fit <- .ma_wls(Xr, yr, w)
-  beta <- fit$beta; cv <- fit$cov
+  beta <- fit$beta
+  cv <- fit$cov
   pos <- match(e, treats)
   cvec <- numeric(p)
   if (pos[1] > 1L) cvec[pos[1] - 1L] <- cvec[pos[1] - 1L] - 1

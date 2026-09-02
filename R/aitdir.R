@@ -40,6 +40,8 @@ Aitdir <- function(x, alpha) {
   for (v in aa) lc <- lc - lgamma(v)
   lf <- lc
   for (i in seq_len(D)) lf <- lf + (aa[i] - 1) * log(xx[i])
-  list(f = exp(lf), estimate = exp(lf), log_f = lf, log_const = lc, alpha0 = a0, D = D,
-       method = "f(x|alpha) = Gamma(sum alpha)/prod Gamma(alpha_i) prod x_i^(alpha_i-1)")
+  list(
+    f = exp(lf), estimate = exp(lf), log_f = lf, log_const = lc, alpha0 = a0, D = D,
+    method = "f(x|alpha) = Gamma(sum alpha)/prod Gamma(alpha_i) prod x_i^(alpha_i-1)"
+  )
 }

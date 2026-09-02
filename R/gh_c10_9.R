@@ -23,7 +23,8 @@
 #' @examples
 #' Ghosalfrsbinreg()
 Ghosalfrsbinreg <- function(n = 800, K = 4, seed = 42) {
-  n <- as.integer(n); K <- as.integer(K)
+  n <- as.integer(n)
+  K <- as.integer(K)
   if (n < 1L) stop("n must be positive")
   if (K < 1L) stop("K must be positive")
   e <- .ghc_rng(seed)

@@ -45,8 +45,11 @@ NULL
 #' @param x Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
-.b1_expit <- function(x) ifelse(x >= 0, 1 / (1 + exp(-x)),
-                                exp(x) / (1 + exp(x)))
+.b1_expit <- function(x) {
+  ifelse(x >= 0, 1 / (1 + exp(-x)),
+    exp(x) / (1 + exp(x))
+  )
+}
 
 #' .b1_target
 #'
@@ -80,17 +83,21 @@ NULL
     r <- Y - mu
     w <- mu * (1 - mu)
     gr <- c(sum(H0 * r), sum(H1 * r))
-    Hm <- matrix(c(sum(H0 * H0 * w) + 1e-10, sum(H0 * H1 * w),
-                   sum(H0 * H1 * w), sum(H1 * H1 * w) + 1e-10), 2, 2)
+    Hm <- matrix(c(
+      sum(H0 * H0 * w) + 1e-10, sum(H0 * H1 * w),
+      sum(H0 * H1 * w), sum(H1 * H1 * w) + 1e-10
+    ), 2, 2)
     st <- as.numeric(solve(Hm, gr))
     e <- e + st
     if (max(abs(st)) < tol) break
   }
-  list(epsilon = e,
-       QAstar = .b1_expit(off + e[1] * H0 + e[2] * H1),
-       Q1star = .b1_expit(.b1_logit(Q1W) + e[2] / g1),
-       Q0star = .b1_expit(.b1_logit(Q0W) + e[1] / g0),
-       g1 = g1, g0 = g0, H1 = H1, H0 = H0)
+  list(
+    epsilon = e,
+    QAstar = .b1_expit(off + e[1] * H0 + e[2] * H1),
+    Q1star = .b1_expit(.b1_logit(Q1W) + e[2] / g1),
+    Q0star = .b1_expit(.b1_logit(Q0W) + e[1] / g0),
+    g1 = g1, g0 = g0, H1 = H1, H0 = H0
+  )
 }
 
 #' .b1_curves
@@ -106,7 +113,8 @@ NULL
 #' @export
 .b1_curves <- function(Y, A, fit) {
   n <- length(Y)
-  mu1 <- mean(fit$Q1star); mu0 <- mean(fit$Q0star)
+  mu1 <- mean(fit$Q1star)
+  mu0 <- mean(fit$Q0star)
   ic1 <- A / fit$g1 * (Y - fit$QAstar) + fit$Q1star - mu1
   ic0 <- (1 - A) / fit$g0 * (Y - fit$QAstar) + fit$Q0star - mu0
   list(mu1 = mu1, mu0 = mu0, ic1 = ic1, ic0 = ic0)

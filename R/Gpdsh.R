@@ -34,15 +34,20 @@ Gpdsh <- function(y_stream, window = 10, tau = 0.5, floor = 1e-12) {
   if (n < 2L * w) stop("gp_density_shift: the stream is shorter than two windows")
   t <- as.numeric(tau)
   if (t < 0) stop("gp_density_shift: tau must be non-negative")
-  kls <- numeric(0); flags <- integer(0); pos <- integer(0)
+  kls <- numeric(0)
+  flags <- integer(0)
+  pos <- integer(0)
   for (s in seq(w, n - w)) {
     a <- v[(s - w + 1L):s]
     b <- v[(s + 1L):(s + w)]
-    ma <- mean(a); mb <- mean(b)
+    ma <- mean(a)
+    mb <- mean(b)
     sa <- sqrt(max(sum((a - ma)^2) / (w - 1), as.numeric(floor)))
     sb <- sqrt(max(sum((b - mb)^2) / (w - 1), as.numeric(floor)))
     d <- log(sa / sb) + (sb * sb + (mb - ma)^2) / (2 * sa * sa) - 0.5
-    kls <- c(kls, d); flags <- c(flags, as.integer(d > t)); pos <- c(pos, s)
+    kls <- c(kls, d)
+    flags <- c(flags, as.integer(d > t))
+    pos <- c(pos, s)
   }
   mx <- which.max(kls)
   .t1_result(estimate = kls[mx], kl = kls, flagged = flags, position = pos,

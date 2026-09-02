@@ -39,7 +39,9 @@
 #' contact_matrix <- matrix(c(2, 1, 1, 2), 2, 2)
 #' Sirtdy(S, I, R, contact_matrix, gamma = 0.1)
 Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
-  s <- .s03vec(S); i0 <- .s03vec(I); r0 <- .s03vec(R)
+  s <- .s03vec(S)
+  i0 <- .s03vec(I)
+  r0 <- .s03vec(R)
   m <- length(s)
   if (m == 0L || length(i0) != m || length(r0) != m)
     stop("sir_age_structured: S, I and R must have the same non-zero length")
@@ -49,17 +51,22 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
   gamma <- as.numeric(gamma)
   if (gamma < 0) stop("sir_age_structured: gamma must be non-negative")
   if (any(c(s, i0, r0) < 0)) stop("sir_age_structured: compartment sizes must be non-negative")
-  t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (dt <= 0 || t_max < 0) stop("sir_age_structured: need dt > 0 and t_max >= 0")
 
   N <- s + i0 + r0
   if (any(N <= 0)) stop("sir_age_structured: every age group must have positive size")
 
   S0 <- s
-  sv <- s; iv <- i0; rv <- r0
+  sv <- s
+  iv <- i0
+  rv <- r0
 
   deriv <- function(a, b, cc) {
-    da <- numeric(m); db <- numeric(m); dc <- numeric(m)
+    da <- numeric(m)
+    db <- numeric(m)
+    dc <- numeric(m)
     for (k in seq_len(m)) {
       lam <- 0
       for (j in seq_len(m)) lam <- lam + C[k, j] * b[j] / N[j]
@@ -84,7 +91,8 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
     iv <- iv + (dt / 6) * (k1[[2]] + 2 * k2[[2]] + 2 * k3[[2]] + k4[[2]])
     rv <- rv + (dt / 6) * (k1[[3]] + 2 * k2[[3]] + 2 * k3[[3]] + k4[[3]])
     cur <- sum(iv) / Ntot
-    if (cur > peak_I) { peak_I <- cur; peak_time <- step * dt }
+    if (cur > peak_I) { peak_I <- cur
+    peak_time <- step * dt }
   }
 
   K <- matrix(0, m, m)
@@ -101,7 +109,8 @@ Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
         w[a] <- acc
       }
       nrm <- sum(abs(w))
-      if (nrm <= 0) { lam <- 0; break }
+      if (nrm <= 0) { lam <- 0
+      break }
       v <- w / nrm
       lam <- nrm
     }

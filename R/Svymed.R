@@ -21,7 +21,8 @@
 #' @export
 Svymed <- function(y, weights = NULL) {
   r <- Svyqtl(y, weights, 0.5)
-  yy <- .s03vec(y); n <- length(yy)
+  yy <- .s03vec(y)
+  n <- length(yy)
   w <- if (is.null(weights)) rep(1, n) else .s03vec(weights)
   tot <- sum(w)
   list(estimate = as.numeric(r$estimate), se = as.numeric(r$se),

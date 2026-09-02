@@ -13,12 +13,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Alr(V)
 Alr <- function(x, ref = NULL) {
-  x <- .t1_vec(x); D <- length(x)
+  x <- .t1_vec(x)
+  D <- length(x)
   if (D < 2L) stop("an additive log-ratio needs at least two parts")
   if (any(x <= 0)) stop("compositions must be strictly positive")
   k <- if (is.null(ref)) D else as.integer(ref)
   if (k < 1L || k > D) stop("ref must be a 1-based part index")
   idx <- setdiff(seq_len(D), k)
-  .t1_result(alr = log(x[idx]) - log(x[k]), ref = k, parts = idx, D = D,
-             method = "Additive log-ratio transform")
+  .t1_result(
+    alr = log(x[idx]) - log(x[k]), ref = k, parts = idx, D = D,
+    method = "Additive log-ratio transform"
+  )
 }

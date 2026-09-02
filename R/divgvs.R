@@ -41,7 +41,8 @@ Divgvs <- function(AVE, factor_correlations) {
       if (i == j) next
       m <- sq[i] - abs(R[i, j])
       if (m < margin) margin <- m
-      if (m <= 0) { ok <- 0L; viol <- viol + 1L }
+      if (m <= 0) { ok <- 0L
+      viol <- viol + 1L }
     }
     pass_factor[i] <- if (k > 1L) ok else 1L
   }

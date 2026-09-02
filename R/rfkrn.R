@@ -87,7 +87,9 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
       Z[i, j] <- cc * cos(s)
     }
   }
-  Ka <- matrix(0, n, n); Ke <- matrix(0, n, n); err <- 0
+  Ka <- matrix(0, n, n)
+  Ke <- matrix(0, n, n)
+  err <- 0
   for (i in seq_len(n)) {
     for (k in seq_len(n)) {
       s <- sum(Z[i, ] * Z[k, ])
@@ -113,10 +115,14 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rfkprimes <- function(k) {
-  out <- integer(0); c <- 2L
+  out <- integer(0)
+  c <- 2L
   while (length(out) < k) {
-    j <- 2L; ok <- TRUE
-    while (j * j <= c) { if (c %% j == 0L) { ok <- FALSE; break }; j <- j + 1L }
+    j <- 2L
+    ok <- TRUE
+    while (j * j <= c) { if (c %% j == 0L) { ok <- FALSE
+    break }
+    j <- j + 1L }
     if (ok) out <- c(out, c)
     c <- c + 1L
   }

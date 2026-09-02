@@ -19,12 +19,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Fdaclust(V)
 Fdaclust <- function(Y, K = 2, basis = NULL, iters = 25) {
-  Y <- as.matrix(Y); n <- nrow(Y); K <- as.integer(K)
+  Y <- as.matrix(Y)
+  n <- nrow(Y)
+  K <- as.integer(K)
   if (n < K || K < 1) stop("need at least K curves")
   coef <- if (is.null(basis)) Y else
     t(vapply(seq_len(n), function(i) .t1_lstsq(as.matrix(basis), Y[i, ])$beta,
              numeric(ncol(as.matrix(basis)))))
-  coef <- as.matrix(coef); p <- ncol(coef)
+  coef <- as.matrix(coef)
+  p <- ncol(coef)
   ord <- order(coef[, 1], seq_len(n))
   centers <- coef[ord[floor((seq_len(K) - 1) * n / K) + 1L], , drop = FALSE]
   labels <- integer(n)

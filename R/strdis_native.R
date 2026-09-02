@@ -22,12 +22,14 @@
 #' Strdis(A, B)
 #' @export
 Strdis <- function(G1, G2, eps = NULL) {
-  A1 <- as.matrix(G1); A2 <- as.matrix(G2)
+  A1 <- as.matrix(G1)
+  A2 <- as.matrix(G2)
   n <- nrow(A1)
   if (ncol(A1) != n || nrow(A2) != n || ncol(A2) != n) {
     stop("G1 and G2 must be square matrices of equal size")
   }
-  d1 <- rowSums(A1); d2 <- rowSums(A2)
+  d1 <- rowSums(A1)
+  d2 <- rowSums(A2)
   if (is.null(eps)) {
     dmax <- max(max(d1), max(d2))
     eps <- 1 / (1 + dmax)

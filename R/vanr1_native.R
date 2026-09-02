@@ -38,7 +38,8 @@
 morie_vanr1 <- function(marker_matrix, freq = NULL) {
   M <- as.matrix(marker_matrix)
   storage.mode(M) <- "double"
-  J <- nrow(M); p <- ncol(M)
+  J <- nrow(M)
+  p <- ncol(M)
   pj <- if (is.null(freq)) colSums(M) / (2 * J) else as.numeric(freq)
   Z <- M - rep(2 * pj, each = J)
   den <- 2 * sum(pj * (1 - pj))

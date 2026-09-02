@@ -26,7 +26,9 @@
 #' @export
 Lineembed <- function(G, dim = 2, order = 1, U = NULL, Uc = NULL, steps = 0,
                       lr = 0.05) {
-  W <- .s03mat(G); n <- nrow(W); d <- as.integer(dim)
+  W <- .s03mat(G)
+  n <- nrow(W)
+  d <- as.integer(dim)
   if (is.null(U)) {
     U <- matrix(0, n, d)
     for (i in seq_len(n)) for (j in seq_len(d)) {

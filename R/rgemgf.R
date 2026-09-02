@@ -55,9 +55,13 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   if (turn_threshold < 0) stop("rangayyan_emg_force: turn_threshold must be nonnegative")
 
   ivs <- .rgemgf_intervals(f)
-  lev <- numeric(0); rv <- numeric(0); zv <- numeric(0); tv <- numeric(0)
+  lev <- numeric(0)
+  rv <- numeric(0)
+  zv <- numeric(0)
+  tv <- numeric(0)
   for (q in seq_along(ivs)) {
-    a <- ivs[[q]][1]; b <- ivs[[q]][2]
+    a <- ivs[[q]][1]
+    b <- ivs[[q]][2]
     sf <- f[(a + 1L):b]
     se <- e[(a + 1L):b]
     m <- length(se)
@@ -67,11 +71,19 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
     tv <- c(tv, if (m >= 3L) TurnsCount(se, threshold = turn_threshold)$turns / (m / fsv) else NA_real_)
   }
   if (length(ivs) >= 2L) {
-    r2r <- .rgemgf_r2(lev, rv); r2z <- .rgemgf_r2(lev, zv); r2t <- .rgemgf_r2(lev, tv)
-    fr <- .rgemgf_linfit(lev, rv); fz <- .rgemgf_linfit(lev, zv); ft <- .rgemgf_linfit(lev, tv)
+    r2r <- .rgemgf_r2(lev, rv)
+    r2z <- .rgemgf_r2(lev, zv)
+    r2t <- .rgemgf_r2(lev, tv)
+    fr <- .rgemgf_linfit(lev, rv)
+    fz <- .rgemgf_linfit(lev, zv)
+    ft <- .rgemgf_linfit(lev, tv)
   } else {
-    r2r <- NA_real_; r2z <- NA_real_; r2t <- NA_real_
-    fr <- c(NA_real_, NA_real_); fz <- fr; ft <- fr
+    r2r <- NA_real_
+    r2z <- NA_real_
+    r2t <- NA_real_
+    fr <- c(NA_real_, NA_real_)
+    fz <- fr
+    ft <- fr
   }
   out <- list(estimate = r2r,
               intervals = ivs, n_intervals = length(ivs),
@@ -119,7 +131,8 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
   }
   fine <- list()
   for (q in seq_along(coarse)) {
-    a <- coarse[[q]][1]; b <- coarse[[q]][2]
+    a <- coarse[[q]][1]
+    b <- coarse[[q]][2]
     seg <- f[a:b]
     t2 <- .RGEMGF_REFINE_FRACTION * max(seg)
     best <- NULL

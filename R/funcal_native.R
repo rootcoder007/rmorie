@@ -232,9 +232,11 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
       if (!is.null(target_taxa)) {
         in_scope <- FALSE
         for (t in target_taxa) {
-          if (t %in% lineage) { in_scope <- TRUE; break }
+          if (t %in% lineage) { in_scope <- TRUE
+          break }
         }
-        if (!in_scope) { dropped <- dropped + 1; next }
+        if (!in_scope) { dropped <- dropped + 1
+        next }
       }
 
       n_target <- 1
@@ -371,7 +373,8 @@ morie_funcal <- function(hits, groups, annotations, taxa = NULL,
     terms <- annotated[[q]]$terms
     has_any <- FALSE
     for (s in names(terms)) {
-      if (length(terms[[s]]) > 0) { has_any <- TRUE; break }
+      if (length(terms[[s]]) > 0) { has_any <- TRUE
+      break }
     }
     if (has_any) n_ann <- n_ann + 1
   }

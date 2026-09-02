@@ -32,7 +32,8 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
     stop("qrntcq: the gamma shape and scale must be positive")
   ts <- if (is.null(grid)) seq(0, t.max, length.out = n)
         else as.numeric(grid)
-  a <- as.numeric(shape); b <- as.numeric(scale)
+  a <- as.numeric(shape)
+  b <- as.numeric(scale)
   dens <- numeric(length(ts))
   for (i in seq_along(ts)) {
     t <- ts[i]
@@ -62,9 +63,11 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
   if (hi <= lo) return(0)
   tot <- 0
   for (i in seq_len(length(ts) - 1L)) {
-    a <- ts[i]; b <- ts[i + 1]
+    a <- ts[i]
+    b <- ts[i + 1]
     if (b <= lo || a >= hi) next
-    l <- max(a, lo); r <- min(b, hi)
+    l <- max(a, lo)
+    r <- min(b, hi)
     if (r <= l) next
     w <- b - a
     ya <- ys[i] + (ys[i + 1] - ys[i]) * (if (w) (l - a) / w else 0)
@@ -91,8 +94,10 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
                                               t.E = 0) {
   g <- if (is.null(generation.time))
     morie_qrntcq_gamma_generation_time() else generation.time
-  ts <- g$t; ys <- g$density
-  q <- as.numeric(t.Q); r <- as.numeric(t.R)
+  ts <- g$t
+  ys <- g$density
+  q <- as.numeric(t.Q)
+  r <- as.numeric(t.R)
   if (r < q) stop(paste0("qrntcq: release at ", r, " precedes quarantine start at ", q))
   if (q < as.numeric(t.E))
     stop(paste0("qrntcq: quarantine cannot start before exposure (t_Q ",
@@ -183,7 +188,8 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
     morie_qrntcq_gamma_generation_time() else generation.time
   ea <- morie_qrntcq_quarantine_efficacy(t.Q, t.R.a, g)$efficacy
   eb <- morie_qrntcq_quarantine_efficacy(t.Q, t.R.b, g)$efficacy
-  da <- t.R.a - t.Q; db <- t.R.b - t.Q
+  da <- t.R.a - t.Q
+  db <- t.R.b - t.Q
   if (da <= 0 || db <= 0)
     stop("qrntcq: both quarantines must have positive duration")
   list(relative.utility = (ea / da) / (eb / db),
@@ -209,7 +215,8 @@ morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,
                                           t.max = 20, step = 0.25) {
   g <- if (is.null(generation.time))
     morie_qrntcq_gamma_generation_time() else generation.time
-  best <- NULL; curve <- list()
+  best <- NULL
+  curve <- list()
   t <- t.Q + step
   while (t <= t.max + .qrntcq_EPS) {
     e <- morie_qrntcq_quarantine_efficacy(t.Q, t, g)$efficacy

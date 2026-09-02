@@ -16,12 +16,15 @@
 #' wquan(c(1, 2, 3), NULL, 0.5)
 #' @export
 wquan <- function(y, weights = NULL, p = 0.5) {
-  yy <- as.numeric(y); n <- length(yy)
+  yy <- as.numeric(y)
+  n <- length(yy)
   wv <- if (is.null(weights)) rep(1, n) else as.numeric(weights)[seq_len(n)]
   ord <- order(yy)
-  xs <- yy[ord]; ws <- wv[ord]
+  xs <- yy[ord]
+  ws <- wv[ord]
   tot <- sum(ws)
-  a <- p * (n + 1); b <- (1 - p) * (n + 1)
+  a <- p * (n + 1)
+  b <- (1 - p) * (n + 1)
   knots <- c(0, cumsum(ws / tot))
   knots[n + 1] <- 1
   cdfv <- stats::pbeta(knots, a, b)

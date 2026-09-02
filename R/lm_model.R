@@ -100,7 +100,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
     for (p in preds) {
       if (is.numeric(fit_data[[p]])) {
         ctr <- if (center) mean(fit_data[[p]]) else 0
-        scl <- if (scale) { s <- stats::sd(fit_data[[p]]); if (s == 0) 1 else s }
+        scl <- if (scale) { s <- stats::sd(fit_data[[p]])
+        if (s == 0) 1 else s }
                else 1
         fit_data[[p]] <- (fit_data[[p]] - ctr) / scl
         transforms[[p]] <- c(center = ctr, scale = scl)

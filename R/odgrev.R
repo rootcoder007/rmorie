@@ -19,18 +19,26 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Outbrkdet(V)
 Outbrkdet <- function(counts, hazard = 0.01, a0 = 1, b0 = 1) {
-  y <- .t1_vec(counts); n <- length(y); H <- as.numeric(hazard)
+  y <- .t1_vec(counts)
+  n <- length(y)
+  H <- as.numeric(hazard)
   if (any(y < 0)) stop("counts must be non-negative")
-  a <- a0; b <- b0; R <- 1
-  cp_prob <- numeric(n); run_len <- integer(n)
+  a <- a0
+  b <- b0
+  R <- 1
+  cp_prob <- numeric(n)
+  run_len <- integer(n)
   for (t in seq_len(n)) {
     xt <- y[t]
     pi <- exp(lgamma(xt + a) - lgamma(a) - lgamma(xt + 1) +
               a * log(b / (b + 1)) - xt * log(b + 1))
     growth <- R * pi * (1 - H)
     cp <- sum(R * pi * H)
-    newR <- c(cp, growth); newR <- newR / sum(newR)
-    a <- c(a0, a + xt); b <- c(b0, b + 1); R <- newR
+    newR <- c(cp, growth)
+    newR <- newR / sum(newR)
+    a <- c(a0, a + xt)
+    b <- c(b0, b + 1)
+    R <- newR
     cp_prob[t] <- if (length(R) > 1) R[2] else NA_real_
     run_len[t] <- which.max(R) - 1L
   }

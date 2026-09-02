@@ -83,7 +83,8 @@
 #' @return A numeric value.
 #' @export
 .tipsne_csum <- function(v) {
-  s <- 0; cc <- 0
+  s <- 0
+  cc <- 0
   for (t in v) {
     u <- s + t
     if (abs(s) >= abs(t)) cc <- cc + ((s - u) + t) else cc <- cc + ((t - u) + s)
@@ -104,7 +105,8 @@
 #' @return A numeric value.
 #' @export
 .tipsne_dot <- function(a, b) {
-  s <- 0; cc <- 0
+  s <- 0
+  cc <- 0
   n <- length(a)
   if (n == 0L) return(0)
   for (i in seq_len(n)) {
@@ -182,7 +184,8 @@
 .tipsne_inv_from_chol <- function(lo) {
   p <- nrow(lo)
   cols <- lapply(seq_len(p), function(j) {
-    e <- numeric(p); e[j] <- 1
+    e <- numeric(p)
+    e[j] <- 1
     .tipsne_solve_chol(lo, e)
   })
   out <- matrix(0, p, p)
@@ -273,9 +276,11 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
   n <- length(y)
   des <- .tipsne_design(arm, X, n)
   if (mi == "deterministic") {
-    beta <- fit$beta; sd <- 0
+    beta <- fit$beta
+    sd <- 0
   } else if (mi == "improper") {
-    beta <- fit$beta; sd <- sqrt(fit$sigma2)
+    beta <- fit$beta
+    sd <- sqrt(fit$sigma2)
   } else {
     # sigma2* = rss / chi2_df, the scaled inverse chi-square posterior
     # draw; chi2 is Gamma(df/2, 2), the shape the matched generator
@@ -334,7 +339,9 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @export
 .tipsne_betacf <- function(a, b, x) {
   tiny <- 1e-30
-  qab <- a + b; qap <- a + 1; qam <- a - 1
+  qab <- a + b
+  qap <- a + 1
+  qam <- a - 1
   cc <- 1
   d <- 1 - qab * x / qap
   if (abs(d) < tiny) d <- tiny
@@ -519,7 +526,8 @@ morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
 
   cell <- function(dc, dt) {
     e <- .ghc_rng(seed)
-    ests <- numeric(m); vars <- numeric(m)
+    ests <- numeric(m)
+    vars <- numeric(m)
     for (r in seq_len(m)) {
       comp <- morie_tipsne_impute(e, yv, arm, X, miss, fit, mi)
       for (i in seq_len(n))
@@ -552,7 +560,8 @@ morie_tipsne <- function(y, D, missing_indicator = NULL, X = NULL,
     tp <- NULL
     if (length(delta_treat) > 1L)
       for (k in 2:length(delta_treat)) {
-        p0 <- row[[k - 1L]]$p; p1 <- row[[k]]$p
+        p0 <- row[[k - 1L]]$p
+        p1 <- row[[k]]$p
         if (((p0 < alpha) != (p1 < alpha)) && p1 != p0) {
           w <- (alpha - p0) / (p1 - p0)
           tp <- delta_treat[k - 1L] + w * (delta_treat[k] - delta_treat[k - 1L])

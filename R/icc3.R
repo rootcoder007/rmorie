@@ -29,7 +29,8 @@
 #' @export
 Icc3 <- function(y, subject, rater) {
   b <- .icc_balanced(y, subject, "icc_two_way_mixed")
-  n <- b$n; k <- b$k
+  n <- b$n
+  k <- b$k
   rs <- .s03vec(rater)
   if (length(rs) != n * k) {
     stop("icc_two_way_mixed: rater must have one entry per rating")

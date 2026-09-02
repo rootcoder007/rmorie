@@ -73,7 +73,8 @@
 #'   Review of Economic Studies, 79(3), 933-959.
 #' @export
 morie_causrddh <- function(x, y, cutoff = 0) {
-  xa <- as.numeric(x); ya <- as.numeric(y)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
   n <- length(xa)
   if (n < 10L) stop("need at least 10 observations")
   cc <- as.numeric(cutoff)
@@ -85,22 +86,27 @@ morie_causrddh <- function(x, y, cutoff = 0) {
   h1 <- 1.84 * sx * n^(-0.2)
   il <- (d >= -h1) & (d < 0)
   ir <- (d >= 0) & (d <= h1)
-  nl <- sum(il); nr <- sum(ir)
+  nl <- sum(il)
+  nr <- sum(ir)
   if (nl < 3L || nr < 3L)
     stop("fewer than 3 observations within the pilot window on one side of the cutoff")
-  yl <- ya[il]; yr <- ya[ir]
-  s2l <- var(yl); s2r <- var(yr)
+  yl <- ya[il]
+  yr <- ya[ir]
+  s2l <- var(yl)
+  s2r <- var(yr)
   f_hat <- (nl + nr) / (2 * n * h1)
   sigma2 <- ((nl - 1) * s2l + (nr - 1) * s2r) / (nl + nr)
 
   ## Step 2
   left <- d < 0
   right <- d >= 0
-  n_neg <- sum(left); n_pos <- sum(right)
+  n_neg <- sum(left)
+  n_pos <- sum(right)
   med_l <- .mor_ik_median(d[left])
   med_r <- .mor_ik_median(d[right])
   keep <- (d >= med_l) & (d <= med_r)
-  dk <- d[keep]; yk <- ya[keep]
+  dk <- d[keep]
+  yk <- ya[keep]
   Xc <- cbind(1, as.numeric(dk >= 0), dk, dk^2, dk^3)
   g <- .mor_ik_ols(Xc, yk)
   m3 <- 6 * g[5]
@@ -109,7 +115,8 @@ morie_causrddh <- function(x, y, cutoff = 0) {
   h2l <- 3.56 * base * n_neg^(-1 / 7)
 
   quad <- function(mask, mask_trim) {
-    dm <- d[mask]; ym <- ya[mask]
+    dm <- d[mask]
+    ym <- ya[mask]
     n2 <- length(dm)
     if (n2 < 4L) stop("fewer than 4 observations in a pilot quadratic window")
     b <- .mor_ik_ols(cbind(1, dm, dm^2), ym)
@@ -118,8 +125,12 @@ morie_causrddh <- function(x, y, cutoff = 0) {
   }
   qr_ <- quad(right & (d <= h2r), d <= med_r)
   ql_ <- quad(left & (d >= -h2l), d >= med_l)
-  m2r <- qr_$m2; n2r <- qr_$n_trim; n2r_full <- qr_$n_full
-  m2l <- ql_$m2; n2l <- ql_$n_trim; n2l_full <- ql_$n_full
+  m2r <- qr_$m2
+  n2r <- qr_$n_trim
+  n2r_full <- qr_$n_full
+  m2l <- ql_$m2
+  n2l <- ql_$n_trim
+  n2l_full <- ql_$n_full
 
   ## Step 3
   rr <- 720 * sigma2 / (n2r * h2r^4)

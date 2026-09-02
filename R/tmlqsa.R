@@ -24,8 +24,12 @@
 #' @examples
 #' Tmleqs(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmleqs <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025) {
-  Y <- .t1_vec(Y); A <- .t1_vec(A); n <- length(Y)
-  QAW <- .t1_vec(QAW); Q1W <- .t1_vec(Q1W); Q0W <- .t1_vec(Q0W)
+  Y <- .t1_vec(Y)
+  A <- .t1_vec(A)
+  n <- length(Y)
+  QAW <- .t1_vec(QAW)
+  Q1W <- .t1_vec(Q1W)
+  Q0W <- .t1_vec(Q0W)
   g1W <- .t1_vec(g1W)
   if (any(c(length(A), length(QAW), length(Q1W), length(Q0W),
             length(g1W)) != n))

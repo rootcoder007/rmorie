@@ -76,7 +76,9 @@ morie_locp <- function(x, y, x0 = NULL, degree = 1, bandwidth = NULL,
     w <- .locp_kernel(kern, abs(xv - p0) / lam)
     sw <- sum(w)
     if (sw <= 0 || sum(w > 0) < d + 1) {
-      fitted[ip] <- NaN; slope[ip] <- NaN; neff[ip] <- sw
+      fitted[ip] <- NaN
+      slope[ip] <- NaN
+      neff[ip] <- sw
       next
     }
     z <- xv - p0
@@ -85,7 +87,8 @@ morie_locp <- function(x, y, x0 = NULL, degree = 1, bandwidth = NULL,
     b <- t(X) %*% (w * yv)
     beta <- tryCatch(solve(A, b), error = function(e) NULL)
     if (is.null(beta)) {
-      fitted[ip] <- NaN; slope[ip] <- NaN
+      fitted[ip] <- NaN
+      slope[ip] <- NaN
     } else {
       fitted[ip] <- beta[1]
       slope[ip] <- if (d >= 1) beta[2] else NaN

@@ -19,7 +19,8 @@
 #' @return A matrix, from \code{matrix}.
 #' @export
 query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
-  n <- as.integer(n_queries); d <- as.integer(dim)
+  n <- as.integer(n_queries)
+  d <- as.integer(dim)
   if (n < 1 || d < 1)
     stop("blip2v: the query count and dimension must be positive")
   set.seed(as.integer(seed))
@@ -40,8 +41,10 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
 #' @export
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
-  Q <- as.matrix(queries); storage.mode(Q) <- "double"
-  F <- as.matrix(image_features); storage.mode(F) <- "double"
+  Q <- as.matrix(queries)
+  storage.mode(Q) <- "double"
+  F <- as.matrix(image_features)
+  storage.mode(F) <- "double"
   dk <- nrow(WQ)
   if (dk <= 0) stop("blip2v: empty projection")
   proj <- function(W, x) as.numeric(W %*% x)
@@ -102,12 +105,14 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #' @return A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
 #' @export
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
-  Q <- as.matrix(query_out); storage.mode(Q) <- "double"
+  Q <- as.matrix(query_out)
+  storage.mode(Q) <- "double"
   T_ <- as.numeric(text_out)
   t <- as.numeric(temperature)
   if (t <= 0) stop("blip2v: the temperature must be positive")
   cos_sim <- function(a, b) {
-    na <- sqrt(sum(a^2)); nb <- sqrt(sum(b^2))
+    na <- sqrt(sum(a^2))
+    nb <- sqrt(sum(b^2))
     if (na <= .blip2v_EPS || nb <= .blip2v_EPS)
       stop("blip2v: a zero embedding has no direction")
     sum(a * b) / (na * nb)
@@ -133,8 +138,10 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
 #' @export
 project_to_llm <- function(query_out, W, b = NULL) {
-  Q <- as.matrix(query_out); storage.mode(Q) <- "double"
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  Q <- as.matrix(query_out)
+  storage.mode(Q) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   d_out <- nrow(W)
   bb <- if (is.null(b)) rep(0, d_out) else as.numeric(b)
   if (ncol(W) != ncol(Q))

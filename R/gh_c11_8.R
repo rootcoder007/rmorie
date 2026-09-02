@@ -20,7 +20,8 @@
 #' @examples
 #' Ghosalfbmprior()
 Ghosalfbmprior <- function(H = 0.7, ts = c(0.25, 0.5, 0.75)) {
-  H <- as.numeric(H); ts <- as.numeric(ts)
+  H <- as.numeric(H)
+  ts <- as.numeric(ts)
   if (H <= 0 || H >= 1) stop("H must lie strictly between 0 and 1")
   if (length(ts) == 0L) stop("ts must be non-empty")
   if (any(ts <= 0)) stop("every time point must be positive")

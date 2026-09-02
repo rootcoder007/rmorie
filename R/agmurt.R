@@ -22,11 +22,14 @@
 #' Mzreanal(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), freshvalues = c(1, 2, 3, 4, 5, 6, 7, 8), visits = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mzreanal <- function(rewards, freshvalues, visits, n = 5, gamma = 0.997,
                      alpha = 1, beta = 1, oldvalues = NULL) {
-  u <- .t1_vec(rewards); nu <- .t1_vec(freshvalues); T <- length(u)
+  u <- .t1_vec(rewards)
+  nu <- .t1_vec(freshvalues)
+  T <- length(u)
   if (length(nu) != T) stop("rewards and freshvalues must have the same length")
   Vs <- .t1_mat(visits)
   if (nrow(Vs) != T) stop("visits must have one row per time step")
-  A <- ncol(Vs); n <- as.integer(n)
+  A <- ncol(Vs)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1")
   g <- as.numeric(gamma)
   z <- numeric(T)
@@ -46,7 +49,9 @@ Mzreanal <- function(rewards, freshvalues, visits, n = 5, gamma = 0.997,
   sp <- sum(pa)
   prob <- if (sp == 0) rep(1 / T, T) else pa / sp
   w <- (1 / (T * prob))^as.numeric(beta)
-  .t1_result(target = z, policy = pol, priority = pr, prob = prob,
-             weight = w, T = T, A = A, n = n, gamma = g,
-             method = "MuZero Reanalyze targets (Schrittwieser et al. 2020 App. H)")
+  .t1_result(
+    target = z, policy = pol, priority = pr, prob = prob,
+    weight = w, T = T, A = A, n = n, gamma = g,
+    method = "MuZero Reanalyze targets (Schrittwieser et al. 2020 App. H)"
+  )
 }

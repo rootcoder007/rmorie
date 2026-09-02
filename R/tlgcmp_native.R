@@ -80,7 +80,8 @@ positivity_check <- function(g, delta = 0.01) {
   gg <- as.numeric(g)
   if (length(gg) == 0L)
     stop("tlgcmp: no propensity scores given")
-  lo <- min(gg); hi <- max(gg)
+  lo <- min(gg)
+  hi <- max(gg)
   worst <- min(lo, 1 - hi)
   list(min_g = lo, max_g = hi, worst = worst,
        satisfied = worst > as.numeric(delta),
@@ -165,7 +166,9 @@ sequential_g_formula <- function(Q_functions, L_supports, L_probs,
 #' @return The value of \code{tot}, as built in the body.
 #' @export
 counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
-  y <- as.numeric(Y); a <- as.numeric(A); l <- as.character(L)
+  y <- as.numeric(Y)
+  a <- as.numeric(A)
+  l <- as.character(L)
   if (!(length(y) == length(a) && length(a) == length(l)))
     stop("tlgcmp: the inputs differ in length")
   levels <- sort(unique(l))

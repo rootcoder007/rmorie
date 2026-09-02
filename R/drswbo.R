@@ -32,7 +32,8 @@ Drdidblock <- function(y, D, unit = NULL, time = NULL, X = NULL,
   dy <- .s03vec(y)
   if (!is.null(y0)) dy <- dy - .s03vec(y0)
   fit <- .s03drdid(dy, D, X)
-  inf <- fit$inf; n <- length(inf)
+  inf <- fit$inf
+  n <- length(inf)
   src <- if (!is.null(clusters)) clusters else if (!is.null(unit)) unit else seq_len(n)
   lab <- as.character(src)
   ids <- character(0)

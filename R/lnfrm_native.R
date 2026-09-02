@@ -30,10 +30,13 @@
 #' @examples
 #' Lnfrm(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lnfrm <- function(time, event, X, cluster, max_outer = 50L, tol = 1e-7) {
-  t <- as.numeric(time); e <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
-  n <- length(t); p <- ncol(Xm)
+  n <- length(t)
+  p <- ncol(Xm)
   cl <- as.vector(cluster)
   ks <- sort(unique(cl))
   q <- length(ks)
@@ -46,11 +49,15 @@ Lnfrm <- function(time, event, X, cluster, max_outer = 50L, tol = 1e-7) {
   newton <- function(sigma2, max_iter = 50L, ntol = 1e-10) {
     theta <- rep(0, p + q)
     pen <- diag(c(rep(0, p), rep(1 / sigma2, q)), p + q)
-    info <- NULL; ll <- 0; it <- 0L
+    info <- NULL
+    ll <- 0
+    it <- 0L
     for (it in seq_len(max_iter)) {
       eta <- pmax(pmin(as.vector(Z %*% theta), 500), -500)
       w <- exp(eta)
-      U <- rep(0, p + q); info <- matrix(0, p + q, p + q); ll <- 0
+      U <- rep(0, p + q)
+      info <- matrix(0, p + q, p + q)
+      ll <- 0
       for (tk in etimes) {
         Dk <- which(t == tk & e == 1)
         R <- which(t >= tk)
@@ -76,7 +83,9 @@ Lnfrm <- function(time, event, X, cluster, max_outer = 50L, tol = 1e-7) {
          ll_pen = ll - sum(b * b) / (2 * sigma2), n_newton = it)
   }
 
-  sigma2 <- 0.5; fit <- NULL; outer <- 0L
+  sigma2 <- 0.5
+  fit <- NULL
+  outer <- 0L
   for (outer in seq_len(max_outer)) {
     fit <- newton(sigma2)
     b <- fit$theta[(p + 1):(p + q)]

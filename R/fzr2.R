@@ -32,7 +32,8 @@ Kdfr2 <- function(a, kernel = "gaussian", lo = -8, hi = 8, ngrid = 4001L) {
   if (a == 1) stop("a = 1 is excluded: (2.5) divides by a^2 - 1.")
   y <- seq(lo, hi, length.out = ngrid)
   if (identical(kernel, "gaussian")) {
-    kfun <- stats::dnorm; wfun <- stats::pnorm
+    kfun <- stats::dnorm
+    wfun <- stats::pnorm
   } else if (is.function(kernel)) {
     kfun <- function(t) vapply(t, function(u) as.numeric(kernel(u)), numeric(1))
     base <- kfun(y)

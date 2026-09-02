@@ -21,7 +21,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Evpdfn(V, V)
 Evpdfn <- function(x, y, t_grid = NULL, u = NULL) {
-  xs <- .s03vec(x); ys <- .s03vec(y)
+  xs <- .s03vec(x)
+  ys <- .s03vec(y)
   n <- length(xs)
   if (n == 0L) stop("empty input: x has no observations")
   if (length(ys) != n) stop("x and y must have the same length")
@@ -36,7 +37,8 @@ Evpdfn <- function(x, y, t_grid = NULL, u = NULL) {
   A <- numeric(length(t_grid))
   for (q in seq_along(t_grid)) {
     tt <- t_grid[q]
-    a <- u^(1 - tt); b <- u^tt
+    a <- u^(1 - tt)
+    b <- u^tt
     cnt <- 0L
     for (i in seq_len(n)) if (ux[i] <= a && uy[i] <= b) cnt <- cnt + 1L
     p <- cnt / n

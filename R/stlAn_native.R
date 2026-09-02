@@ -69,7 +69,11 @@
     lam <- abs(xs[idx[q]] - x0)
   }
   if (lam <= 0) lam <- 1
-  sw <- 0; sxw <- 0; syw <- 0; sxxw <- 0; sxyw <- 0
+  sw <- 0
+  sxw <- 0
+  syw <- 0
+  sxxw <- 0
+  sxyw <- 0
   for (i in idx) {
     w <- .mor_stl_tricube(abs(xs[i] - x0) / lam)
     if (!is.null(rho)) w <- w * rho[i]
@@ -129,7 +133,9 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_stl_median <- function(v) {
-  s <- sort(v); n <- length(s); mid <- n %/% 2L
+  s <- sort(v)
+  n <- length(s)
+  mid <- n %/% 2L
   if (n %% 2L == 1L) s[mid + 1L] else 0.5 * (s[mid] + s[mid + 1L])
 }
 
@@ -179,7 +185,9 @@ morie_stl_decompose <- function(x, period, s_window = 7L, t_window = NULL,
   n_l <- if (!is.null(l_window)) as.integer(l_window) else
     .mor_stl_next_odd(np_)
   if (n_l %% 2L == 0L) n_l <- n_l + 1L
-  T <- numeric(N); S <- numeric(N); R <- numeric(N)
+  T <- numeric(N)
+  S <- numeric(N)
+  R <- numeric(N)
   rho <- rep(1, N)
   for (it_outer in seq_len(as.integer(outer) + 1L)) {
     use_rho <- if (it_outer > 1L) rho else NULL

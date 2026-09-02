@@ -34,7 +34,8 @@ Gphtr <- function(X, y, X_test = NULL, lengthscale = 1, variance = 1,
   if (n == 0L) stop("gp_heteroscedastic: X is empty")
   yv <- .s03vec(y)
   if (length(yv) != n) stop("gp_heteroscedastic: X and y have different lengths")
-  ell <- as.numeric(lengthscale); var <- as.numeric(variance)
+  ell <- as.numeric(lengthscale)
+  var <- as.numeric(variance)
   if (ell <= 0 || var <= 0) stop("gp_heteroscedastic: lengthscale and variance must be positive")
   s0 <- as.numeric(noise0)
   if (s0 <= 0) stop("gp_heteroscedastic: noise0 must be positive")
@@ -46,7 +47,8 @@ Gphtr <- function(X, y, X_test = NULL, lengthscale = 1, variance = 1,
       o[i, j] <- v * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (e * e))
     o
   }
-  K <- kf(A, A, ell, var); Ks <- kf(Xs, A, ell, var)
+  K <- kf(A, A, ell, var)
+  Ks <- kf(Xs, A, ell, var)
   Kn <- kf(A, A, as.numeric(noise_lengthscale), 1)
   Kns <- kf(Xs, A, as.numeric(noise_lengthscale), 1)
   noise <- rep(s0, n)

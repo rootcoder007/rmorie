@@ -20,14 +20,18 @@
 #' @examples
 #' Evhrid(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Evhrid <- function(x, y, lam) {
-  xs <- .s03vec(x); ys <- .s03vec(y); lam <- as.numeric(lam)
+  xs <- .s03vec(x)
+  ys <- .s03vec(y)
+  lam <- as.numeric(lam)
   if (!length(xs) || !length(ys)) stop("empty input: x and y are required")
   if (length(xs) != length(ys)) stop("x and y must have the same length")
   if (!(lam > 0)) stop("lam must be strictly positive")
   if (any(xs <= 0) || any(ys <= 0)) stop("x and y must be strictly positive")
-  V <- numeric(length(xs)); FF <- numeric(length(xs))
+  V <- numeric(length(xs))
+  FF <- numeric(length(xs))
   for (i in seq_along(xs)) {
-    a <- xs[i]; b <- ys[i]
+    a <- xs[i]
+    b <- ys[i]
     V[i] <- a * .s03pnorm(lam + log(b / a) / (2 * lam)) +
       b * .s03pnorm(lam + log(a / b) / (2 * lam))
     FF[i] <- exp(-V[i])

@@ -53,9 +53,11 @@
 morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
                                           model = "spherical", nugget = 0.0,
                                           sill = 1.0, rng = 1.0) {
-  C <- as.matrix(coords); storage.mode(C) <- "double"
+  C <- as.matrix(coords)
+  storage.mode(C) <- "double"
   z <- as.numeric(values)
-  Tg <- as.matrix(targets); storage.mode(Tg) <- "double"
+  Tg <- as.matrix(targets)
+  storage.mode(Tg) <- "double"
   n <- nrow(C)
   if (n == 0L) stop("krpkrg: no data locations")
   if (length(z) != n)
@@ -67,13 +69,15 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
   for (i in seq_len(n)) {
     for (j in seq_len(n))
       G[i, j] <- .krpkrg_gamma(dist2(C[i, ], C[j, ]), model, nugget, sill, rng)
-    G[i, n + 1L] <- 1.0; G[n + 1L, i] <- 1.0
+    G[i, n + 1L] <- 1.0
+    G[n + 1L, i] <- 1.0
   }
   G[n + 1L, n + 1L] <- 0.0
   A <- crossprod(G)
   Lc <- chol(A)
 
-  preds <- numeric(nrow(Tg)); variances <- numeric(nrow(Tg))
+  preds <- numeric(nrow(Tg))
+  variances <- numeric(nrow(Tg))
   weightsets <- vector("list", nrow(Tg))
   for (q in seq_len(nrow(Tg))) {
     g0 <- c(vapply(seq_len(n), function(i)
@@ -81,7 +85,8 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
       numeric(1)), 1.0)
     b <- as.numeric(crossprod(G, g0))
     sol <- as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
-    lam <- sol[seq_len(n)]; mu <- sol[n + 1L]
+    lam <- sol[seq_len(n)]
+    mu <- sol[n + 1L]
     preds[q] <- sum(lam * z)
     v <- sum(lam * g0[seq_len(n)]) + mu
     # exactly 0 at a data location; below the floor it is rounding, and sqrt

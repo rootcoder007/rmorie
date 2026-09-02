@@ -38,8 +38,10 @@
 #'   et al. (2010). Journal of Dairy Science 93(2), 743-752.
 #' @export
 Singgw <- function(A, G, genotyped, w = 0.0) {
-  A <- as.matrix(A); storage.mode(A) <- "double"
-  G <- as.matrix(G); storage.mode(G) <- "double"
+  A <- as.matrix(A)
+  storage.mode(A) <- "double"
+  G <- as.matrix(G)
+  storage.mode(G) <- "double"
   n <- nrow(A)
   if (ncol(A) != n) stop("A must be square", call. = FALSE)
   gset <- as.integer(genotyped)

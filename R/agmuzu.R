@@ -28,7 +28,9 @@ Mzworld <- function(observation, actions, representation, dynamics) {
     s <- out[[2]]
     states[[length(states) + 1L]] <- s
   }
-  .t1_result(states = states, rewards = rewards, root = s0,
-             K = length(rewards),
-             method = "MuZero world-model rollout (Schrittwieser et al. 2020 eq. 1)")
+  .t1_result(
+    states = states, rewards = rewards, root = s0,
+    K = length(rewards),
+    method = "MuZero world-model rollout (Schrittwieser et al. 2020 eq. 1)"
+  )
 }

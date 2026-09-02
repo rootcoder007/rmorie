@@ -105,7 +105,8 @@ left_ordered_form <- function(Z) {
   M <- as.matrix(Z)
   storage.mode(M) <- "integer"
   if (length(M) == 0L) stop("ibpfa: the matrix is empty")
-  n <- nrow(M); K <- ncol(M)
+  n <- nrow(M)
+  K <- ncol(M)
   hist <- matrix(0L, K, 2)
   for (kk in 1:K) {
     h <- 0L
@@ -170,8 +171,10 @@ gibbs_feature_update <- function(Z, i, kk, likelihood, alpha) {
                 note = paste("a feature held by nobody else is dropped; new ones arrive through the Poisson draw")))
   }
   prior <- m_minus / n
-  on <- M; off <- M
-  on[i, kk] <- 1L; off[i, kk] <- 0L
+  on <- M
+  off <- M
+  on[i, kk] <- 1L
+  off[i, kk] <- 0L
   l1 <- as.numeric(likelihood(on)) + log(max(prior, 1e-12))
   l0 <- as.numeric(likelihood(off)) + log(max(1.0 - prior, 1e-12))
   mx <- max(l1, l0)

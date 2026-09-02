@@ -18,8 +18,10 @@
 #' @references Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified against the paper.
 #' @export
 Dpacct <- function(sigma, sample_rate, steps, delta = 1e-05, max_order = 64) {
-  sigma <- as.numeric(sigma); q <- as.numeric(sample_rate)
-  steps <- as.integer(steps); delta <- as.numeric(delta)
+  sigma <- as.numeric(sigma)
+  q <- as.numeric(sample_rate)
+  steps <- as.integer(steps)
+  delta <- as.numeric(delta)
   if (sigma <= 0 || q <= 0 || q >= 1 || steps < 1)
     stop("need sigma > 0, 0 < sample_rate < 1, steps >= 1")
   lam <- 2:as.integer(max_order)

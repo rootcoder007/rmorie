@@ -15,9 +15,12 @@
 #' math2(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$estimate
 #' @export
 math2 <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   fe <- k02fe(y, v)
-  k <- length(y); q <- fe$Q; df <- fe$df
+  k <- length(y)
+  q <- fe$Q
+  df <- fe$df
   h2 <- q / df
   h <- sqrt(h2)
   selnh <- if (q > k) {

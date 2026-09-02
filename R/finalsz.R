@@ -29,7 +29,8 @@
 #' @examples
 #' Finalsz(R0 = 5L)
 Finalsz <- function(R0, s0 = 1, i0 = NULL, tol = 1e-14, max_iter = 200) {
-  R0 <- as.numeric(R0); s0 <- as.numeric(s0)
+  R0 <- as.numeric(R0)
+  s0 <- as.numeric(s0)
   if (R0 < 0) stop("R0 must be non-negative")
   if (!(s0 > 0 && s0 <= 1)) stop("s0 must lie in (0, 1]")
   i0 <- if (is.null(i0)) 1 - s0 else as.numeric(i0)
@@ -37,7 +38,9 @@ Finalsz <- function(R0, s0 = 1, i0 = NULL, tol = 1e-14, max_iter = 200) {
   tol <- as.numeric(tol)
   if (tol <= 0) stop("tol must be positive")
   resid <- function(Z) s0 * (1 - exp(-R0 * (Z + i0))) - Z
-  lo <- 0; hi <- s0; it <- 0L
+  lo <- 0
+  hi <- s0
+  it <- 0L
   if (i0 == 0 && R0 * s0 <= 1) {
     Z <- 0
   } else {

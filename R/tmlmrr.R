@@ -25,14 +25,22 @@
 #' @export
 Tmlerr <- function(y, D, X = NULL, alpha = 0.05, trim = 0) {
   fit <- .s03tmle(y, D, X, trim)
-  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
-  g <- fit$g; q1 <- fit$q1; q0 <- fit$q0
-  lo <- fit$shift; rng <- fit$scale
-  m1 <- 0; m0 <- 0
-  for (i in seq_len(n)) { m1 <- m1 + (lo + rng * q1[i]) / n; m0 <- m0 + (lo + rng * q0[i]) / n }
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  n <- length(yv)
+  g <- fit$g
+  q1 <- fit$q1
+  q0 <- fit$q0
+  lo <- fit$shift
+  rng <- fit$scale
+  m1 <- 0
+  m0 <- 0
+  for (i in seq_len(n)) { m1 <- m1 + (lo + rng * q1[i]) / n
+  m0 <- m0 + (lo + rng * q0[i]) / n }
   ic <- numeric(n)
   for (i in seq_len(n)) {
-    qa1 <- lo + rng * q1[i]; qa0 <- lo + rng * q0[i]
+    qa1 <- lo + rng * q1[i]
+    qa0 <- lo + rng * q0[i]
     i1 <- (d[i] / g[i]) * (yv[i] - qa1) + qa1 - m1
     i0 <- ((1 - d[i]) / (1 - g[i])) * (yv[i] - qa0) + qa0 - m0
     ic[i] <- if (m1 != 0 && m0 != 0) i1 / m1 - i0 / m0 else NaN

@@ -117,7 +117,8 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
   index_is_top <- all(vapply(seq_along(idxs), function(u)
     pv[idxs[u]] <= min(pv[members[[u]]]) + 1e-15, TRUE))
 
-  G <- NULL; n <- 0L
+  G <- NULL
+  n <- 0L
   if (!is.null(genotypes)) {
     G <- .prsclm_rows(genotypes)
     n <- nrow(G)
@@ -132,7 +133,9 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
     }
   }
 
-  retained <- list(); scores <- list(); counts <- integer(0)
+  retained <- list()
+  scores <- list()
+  counts <- integer(0)
   for (t in thr) {
     keep <- idxs[pv[idxs] < t]
     retained[[length(retained) + 1L]] <- as.numeric(keep - 1L)
@@ -148,7 +151,8 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
   }
 
   best <- NULL
-  for (u in seq_along(thr)) if (counts[u] > 0L) { best <- u; break }
+  for (u in seq_along(thr)) if (counts[u] > 0L) { best <- u
+  break }
 
   list(estimate = as.numeric(counts), n_retained = as.integer(counts),
        thresholds = thr, retained = retained,

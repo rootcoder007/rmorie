@@ -40,8 +40,11 @@ Percn <- function(X, w, b, y = NULL, eta = 1) {
     stop("perceptron_activation: y does not match the rows of X")
   }
   n <- nrow(XX)
-  v <- numeric(n); a <- numeric(n); sg <- numeric(n)
-  upd <- numeric(p); upd_b <- 0
+  v <- numeric(n)
+  a <- numeric(n)
+  sg <- numeric(n)
+  upd <- numeric(p)
+  upd_b <- 0
   for (i in seq_len(n)) {
     s <- b0
     for (j in seq_len(p)) s <- s + XX[i, j] * ww[j]

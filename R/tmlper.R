@@ -22,8 +22,12 @@
 #' @examples
 #' Tmlper(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlper <- function(y, D, X, period, n_fourier = 2) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); Xm <- as.matrix(X); n <- length(yv)
-  p <- as.numeric(period); nf <- as.integer(n_fourier)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  Xm <- as.matrix(X)
+  n <- length(yv)
+  p <- as.numeric(period)
+  nf <- as.integer(n_fourier)
   W <- cbind(1, Xm)
   tt <- Xm[, 1]
   for (j in seq_len(nf)) {

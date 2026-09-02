@@ -28,13 +28,19 @@
 #' @export
 Icc1 <- function(y, cluster) {
   b <- .icc_balanced(y, cluster, "icc_one_way")
-  rows <- b$rows; n <- b$n; k <- b$k
-  tot <- 0; tot2 <- 0; ssa <- 0
+  rows <- b$rows
+  n <- b$n
+  k <- b$k
+  tot <- 0
+  tot2 <- 0
+  ssa <- 0
   for (i in seq_len(n)) {
     s <- 0
     for (j in seq_len(k)) {
       e <- rows[i, j]
-      s <- s + e; tot <- tot + e; tot2 <- tot2 + e * e
+      s <- s + e
+      tot <- tot + e
+      tot2 <- tot2 + e * e
     }
     ssa <- ssa + s * s / k
   }
@@ -63,7 +69,8 @@ Icc1 <- function(y, cluster) {
 #' @return A list with \code{rows}, \code{n}, \code{k}.
 #' @export
 .icc_balanced <- function(y, group, who) {
-  ys <- .s03vec(y); gs <- .s03vec(group)
+  ys <- .s03vec(y)
+  gs <- .s03vec(group)
   if (length(ys) == 0L) stop(paste0(who, ": y is empty"))
   if (length(gs) != length(ys)) {
     stop(paste0(who, ": y and the grouping must have the same length"))

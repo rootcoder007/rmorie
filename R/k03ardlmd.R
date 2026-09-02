@@ -75,7 +75,9 @@ Ardlmd <- function(y, X, p = 1L, q = 1L, case = 3L) {
     stop("y and X must have the same number of rows", call. = FALSE)
   }
   k <- ncol(xm)
-  p <- as.integer(p); q <- as.integer(q); case <- as.integer(case)
+  p <- as.integer(p)
+  q <- as.integer(q)
+  case <- as.integer(case)
   if (p < 1L || q < 1L) stop("p and q must be at least 1", call. = FALSE)
   if (!(case %in% c(3L, 5L))) {
     stop("only cases 3 and 5 are fitted here; cases 2 and 4 restrict the ",

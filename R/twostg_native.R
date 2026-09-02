@@ -20,18 +20,24 @@
 .morie_km_censoring <- function(x, delta) {
   n <- length(x)
   ord <- order(x, delta)
-  xs <- x[ord]; ds <- delta[ord]
-  G <- 1; at_risk <- n
-  times <- numeric(0); gvals <- numeric(0)
+  xs <- x[ord]
+  ds <- delta[ord]
+  G <- 1
+  at_risk <- n
+  times <- numeric(0)
+  gvals <- numeric(0)
   i <- 1L
   while (i <= n) {
-    t0 <- xs[i]; j <- i; d_cens <- 0L
+    t0 <- xs[i]
+    j <- i
+    d_cens <- 0L
     while (j <= n && xs[j] == t0) {
       if (ds[j] == 0) d_cens <- d_cens + 1L
       j <- j + 1L
     }
     if (d_cens > 0L) G <- G * (1 - d_cens / at_risk)
-    times <- c(times, t0); gvals <- c(gvals, G)
+    times <- c(times, t0)
+    gvals <- c(gvals, G)
     at_risk <- at_risk - (j - i)
     i <- j
   }
@@ -65,7 +71,8 @@
 #' @return A numeric value.
 #' @export
 .morie_dxi_ph <- function(s) {
-  e <- exp(pmax(pmin(s, 30), -30)); -e / (1 + e)^2
+  e <- exp(pmax(pmin(s, 30), -30))
+  -e / (1 + e)^2
 }
 #' .morie_xi_po
 #'
@@ -77,9 +84,14 @@
 #' @return A numeric value.
 #' @export
 .morie_xi_po <- function(s) {
-  a <- -40; b <- 40; m <- 4000L; h <- (b - a) / m
-  k <- 0:m; t <- a + k * h
-  Ft <- 1 / (1 + exp(-t)); ft <- Ft * (1 - Ft)
+  a <- -40
+  b <- 40
+  m <- 4000L
+  h <- (b - a) / m
+  k <- 0:m
+  t <- a + k * h
+  Ft <- 1 / (1 + exp(-t))
+  ft <- Ft * (1 - Ft)
   Fts <- 1 / (1 + exp(-(t + s)))
   w <- ifelse(k == 0 | k == m, 1, ifelse(k %% 2 == 1, 4, 2))
   sum(w * (1 - Fts) * ft) * h / 3
@@ -94,10 +106,16 @@
 #' @return A numeric value.
 #' @export
 .morie_dxi_po <- function(s) {
-  a <- -40; b <- 40; m <- 4000L; h <- (b - a) / m
-  k <- 0:m; t <- a + k * h
-  Ft <- 1 / (1 + exp(-t)); ft <- Ft * (1 - Ft)
-  Fts <- 1 / (1 + exp(-(t + s))); fts <- Fts * (1 - Fts)
+  a <- -40
+  b <- 40
+  m <- 4000L
+  h <- (b - a) / m
+  k <- 0:m
+  t <- a + k * h
+  Ft <- 1 / (1 + exp(-t))
+  ft <- Ft * (1 - Ft)
+  Fts <- 1 / (1 + exp(-(t + s)))
+  fts <- Fts * (1 - Fts)
   w <- ifelse(k == 0 | k == m, 1, ifelse(k %% 2 == 1, 4, 2))
   sum(w * (-fts) * ft) * h / 3
 }
@@ -126,23 +144,31 @@
 #' Twostg(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Twostg <- function(time, event, X, Z = NULL, error = "ph",
                    max_iter = 50L, tol = 1e-10) {
-  t <- as.numeric(time); d <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  t <- as.numeric(time)
+  d <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   if (!is.null(Z)) {
-    Zm <- as.matrix(Z); storage.mode(Zm) <- "double"
+    Zm <- as.matrix(Z)
+    storage.mode(Zm) <- "double"
     if (nrow(Zm) != length(t)) Zm <- t(Zm)
     Xm <- cbind(Xm, Zm)
   }
-  n <- nrow(Xm); p <- ncol(Xm)
-  if (error == "ph") { xi <- .morie_xi_ph; dxi <- .morie_dxi_ph }
-  else if (error == "po") { xi <- .morie_xi_po; dxi <- .morie_dxi_po }
+  n <- nrow(Xm)
+  p <- ncol(Xm)
+  if (error == "ph") { xi <- .morie_xi_ph
+  dxi <- .morie_dxi_ph }
+  else if (error == "po") { xi <- .morie_xi_po
+  dxi <- .morie_dxi_po }
   else stop("error must be 'ph' or 'po'", call. = FALSE)
   geval <- .morie_km_censoring(t, d)
   G2 <- vapply(seq_len(n), function(j) geval(t[j], before = TRUE)^2, 0)
-  beta <- rep(0, p); it <- 0L
+  beta <- rep(0, p)
+  it <- 0L
   for (it in seq_len(max_iter)) {
-    U <- rep(0, p); J <- matrix(0, p, p)
+    U <- rep(0, p)
+    J <- matrix(0, p, p)
     for (i in seq_len(n)) {
       for (j in seq_len(n)) {
         if (i == j) next

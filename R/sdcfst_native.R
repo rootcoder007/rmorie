@@ -102,7 +102,8 @@
     ys <- y[ord]
     tot <- .w3_csum(ys)
     tot2 <- .w3_csum(ys * ys)
-    sl <- 0; sl2 <- 0
+    sl <- 0
+    sl2 <- 0
     for (k in seq_len(n - 1L)) {
       sl <- sl + ys[k]
       sl2 <- sl2 + ys[k] * ys[k]
@@ -229,7 +230,9 @@ morie_sdcfst_forest <- function(X, y, rows, n_trees = 20L, mtry = NULL,
       for (k in seq(length(pool) - 1L, 1L)) {
         j <- floor(.ghc_unif(e, 1L) * (k + 1))
         if (j > k) j <- k
-        tmp <- pool[k + 1L]; pool[k + 1L] <- pool[j + 1L]; pool[j + 1L] <- tmp
+        tmp <- pool[k + 1L]
+        pool[k + 1L] <- pool[j + 1L]
+        pool[j + 1L] <- tmp
       }
     struct_rows <- sort(pool[seq_len(half)])
     leaf_rows <- sort(pool[(half + 1L):length(pool)])
@@ -327,7 +330,9 @@ morie_sdcfst_logistic <- function(X, z, rows, ridge = 1e-6, iters = 50L) {
     for (t in seq(n - 1L, 1L)) {
       j <- floor(.ghc_unif(e, 1L) * (t + 1))
       if (j > t) j <- t
-      tmp <- idx[t + 1L]; idx[t + 1L] <- idx[j + 1L]; idx[j + 1L] <- tmp
+      tmp <- idx[t + 1L]
+      idx[t + 1L] <- idx[j + 1L]
+      idx[j + 1L] <- tmp
     }
   lab <- integer(n)
   for (pos in seq_len(n)) lab[idx[pos]] <- (pos - 1L) %% k
@@ -378,7 +383,10 @@ morie_sdcfst <- function(y, D, X, K_fold = 5L, score = "aipw",
   e <- .ghc_rng(seed)
   lab <- if (K == 1L) integer(n) else .sdcfst_folds(n, K, e)
 
-  ps <- numeric(n); m0 <- numeric(n); m1 <- numeric(n); mall <- numeric(n)
+  ps <- numeric(n)
+  m0 <- numeric(n)
+  m1 <- numeric(n)
+  mall <- numeric(n)
 
   for (k in 0:(K - 1L)) {
     te <- which(lab == k)
@@ -419,8 +427,10 @@ morie_sdcfst <- function(y, D, X, K_fold = 5L, score = "aipw",
 
   trimmed <- 0L
   for (i in seq_len(n)) {
-    if (ps[i] < trim) { ps[i] <- trim; trimmed <- trimmed + 1L }
-    else if (ps[i] > 1 - trim) { ps[i] <- 1 - trim; trimmed <- trimmed + 1L }
+    if (ps[i] < trim) { ps[i] <- trim
+    trimmed <- trimmed + 1L }
+    else if (ps[i] > 1 - trim) { ps[i] <- 1 - trim
+    trimmed <- trimmed + 1L }
   }
 
   if (score == "partialling_out") {

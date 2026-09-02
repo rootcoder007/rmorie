@@ -18,13 +18,17 @@
 #' x <- as.numeric(filter(rnorm(100), 0.5, method = "recursive"))
 #' Aicar(x, max_p = 5)
 Aicar <- function(x, max_p = 10, demean = TRUE) {
-  x <- .t1_vec(x); T <- length(x); P <- as.integer(max_p)
+  x <- .t1_vec(x)
+  T <- length(x)
+  P <- as.integer(max_p)
   if (T < P + 2) stop("series too short for max_p")
   mu <- if (isTRUE(demean)) mean(x) else 0
   z <- x - mu
   g <- vapply(0:P, function(k) sum(z[(k + 1):T] * z[1:(T - k)]) / T, numeric(1))
   if (g[1] <= 0) stop("series has zero variance")
-  sig <- g[1]; phi <- numeric(0); pacf <- numeric(0)
+  sig <- g[1]
+  phi <- numeric(0)
+  pacf <- numeric(0)
   for (k in seq_len(P)) {
     num <- g[k + 1] - if (k > 1) sum(phi * g[k:2]) else 0
     kk <- num / sig[k]
@@ -35,7 +39,9 @@ Aicar <- function(x, max_p = 10, demean = TRUE) {
   p <- 0:P
   aic <- ifelse(sig > 0, log(sig) + 2 * (p + 1) / T, Inf)
   unn <- ifelse(sig > 0, T * log(sig) + 2 * (p + 1), Inf)
-  .t1_result(p = which.min(aic) - 1L, aic = aic, aic_unnormalised = unn,
-             sigma2 = sig, pacf = pacf, n = T,
-             method = "AIC order selection for AR(p)")
+  .t1_result(
+    p = which.min(aic) - 1L, aic = aic, aic_unnormalised = unn,
+    sigma2 = sig, pacf = pacf, n = T,
+    method = "AIC order selection for AR(p)"
+  )
 }

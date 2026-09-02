@@ -25,11 +25,13 @@ Ghosalsmhazgp <- function(n = 500, seed = 42) {
   e <- .ghc_rng(seed)
   lam0 <- 1
   k <- 6L
-  d_ <- numeric(k); e_ <- numeric(k)
+  d_ <- numeric(k)
+  e_ <- numeric(k)
   for (i in seq_len(n)) {
     x <- -log(max(.ghc_unif(e, 1L), 1e-12)) / lam0
     for (b in seq_len(k)) {
-      lo <- (b - 1) * 0.3; hi <- b * 0.3
+      lo <- (b - 1) * 0.3
+      hi <- b * 0.3
       if (x >= hi) {
         e_[b] <- e_[b] + 0.3
       } else if (x > lo) {

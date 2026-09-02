@@ -36,7 +36,9 @@ Azselfplay <- function(state, policy, value = NULL, mcts_iter = 16,
     list(out, if (!is.null(value)) value(s) else 0)
   }
   s <- state
-  states <- list(); pis <- list(); acts <- integer(0)
+  states <- list()
+  pis <- list()
+  acts <- integer(0)
   m <- 0L
   while (m < as.integer(max_moves)) {
     if (!is.null(terminal) && terminal(s)) break
@@ -49,10 +51,12 @@ Azselfplay <- function(state, policy, value = NULL, mcts_iter = 16,
       a <- res$action
     } else {
       u <- .s03vdc(m, 2L)
-      cc <- 0; a <- length(pi_) - 1L
+      cc <- 0
+      a <- length(pi_) - 1L
       for (j in seq_along(pi_)) {
         cc <- cc + pi_[j]
-        if (u < cc) { a <- j - 1L; break }
+        if (u < cc) { a <- j - 1L
+        break }
       }
     }
     acts <- c(acts, as.integer(a))
@@ -61,8 +65,10 @@ Azselfplay <- function(state, policy, value = NULL, mcts_iter = 16,
     m <- m + 1L
   }
   z <- if (!is.null(outcome)) as.numeric(outcome(s)) else 0
-  zs <- numeric(length(states)); sign <- 1
-  if (length(states) > 0L) for (i in seq_along(states)) { zs[i] <- z * sign; sign <- -sign }
+  zs <- numeric(length(states))
+  sign <- 1
+  if (length(states) > 0L) for (i in seq_along(states)) { zs[i] <- z * sign
+  sign <- -sign }
   list(estimate = z, states = states, pis = pis, actions = acts, zs = zs,
        moves = length(states), final_state = s,
        method = "AlphaZero self-play game producing (s, pi, z) targets")

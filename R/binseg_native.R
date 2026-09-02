@@ -53,7 +53,8 @@ morie_binseg <- function(x, K, cost = "mean", penalty = 0,
     hi <- b - min_seglen
     if (hi >= lo) for (tau in seq.int(lo, hi)) {
       g <- base - (C(a, tau) + C(tau, b)) - penalty
-      if (g > best_gain) { best_gain <- g; best_tau <- tau }
+      if (g > best_gain) { best_gain <- g
+      best_tau <- tau }
     }
     list(tau = best_tau, gain = best_gain)
   }
@@ -63,22 +64,30 @@ morie_binseg <- function(x, K, cost = "mean", penalty = 0,
   order <- integer(0)
   gains <- numeric(0)
   while (length(order) < K) {
-    ca <- NA_integer_; cb <- NA_integer_
-    cg <- NULL; ct <- NA_integer_
+    ca <- NA_integer_
+    cb <- NA_integer_
+    cg <- NULL
+    ct <- NA_integer_
     for (i in seq_along(seg_a)) {
-      a <- seg_a[i]; b <- seg_b[i]
+      a <- seg_a[i]
+      b <- seg_b[i]
       if (b - a < 2L * min_seglen) next
       s <- best_split(a, b)
       if (s$tau > 0L && (is.null(cg) || s$gain > cg)) {
-        ca <- a; cb <- b; cg <- s$gain; ct <- s$tau
+        ca <- a
+        cb <- b
+        cg <- s$gain
+        ct <- s$tau
       }
     }
     if (is.null(cg) || cg <= 0) break
     order <- c(order, ct)
     gains <- c(gains, cg)
     drop <- which(seg_a == ca & seg_b == cb)[1L]
-    seg_a <- seg_a[-drop]; seg_b <- seg_b[-drop]
-    seg_a <- c(seg_a, ca, ct); seg_b <- c(seg_b, ct, cb)
+    seg_a <- seg_a[-drop]
+    seg_b <- seg_b[-drop]
+    seg_a <- c(seg_a, ca, ct)
+    seg_b <- c(seg_b, ct, cb)
   }
   taus <- sort(order)
   bounds <- c(0L, taus, n)

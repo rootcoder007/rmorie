@@ -31,7 +31,8 @@
 #' Gpregb(V, V)
 Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
                    noises = NULL, variance = 1) {
-  A <- .s03mat(X); yv <- .s03vec(y)
+  A <- .s03mat(X)
+  yv <- .s03vec(y)
   n <- nrow(A)
   if (n == 0L) stop("gp_regression_bayes: X is empty")
   if (length(yv) != n) stop("gp_regression_bayes: X and y have different lengths")
@@ -47,7 +48,9 @@ Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
       out[i, j] <- var * exp(-0.5 * sum((P[i, ] - Q[j, ])^2) / (ell * ell))
     out
   }
-  mus <- list(); sds <- list(); lls <- numeric(0)
+  mus <- list()
+  sds <- list()
+  lls <- numeric(0)
   for (e in ells) for (s in s2s) {
     K <- kf(A, A, e) + diag(s, n)
     alpha <- .s03cholsolve(K, yv)
@@ -60,11 +63,15 @@ Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
       v <- .s03cholsolve(K, Ks[j, ])
       sd[j] <- max(var - sum(Ks[j, ] * v), 0)
     }
-    mus[[length(mus) + 1L]] <- mu; sds[[length(sds) + 1L]] <- sd; lls <- c(lls, ll)
+    mus[[length(mus) + 1L]] <- mu
+    sds[[length(sds) + 1L]] <- sd
+    lls <- c(lls, ll)
   }
-  w <- exp(lls - max(lls)); w <- w / sum(w)
+  w <- exp(lls - max(lls))
+  w <- w / sum(w)
   m <- nrow(Xs)
-  mean <- numeric(m); varp <- numeric(m)
+  mean <- numeric(m)
+  varp <- numeric(m)
   for (j in seq_len(m)) {
     mean[j] <- sum(vapply(seq_along(w), function(g) w[g] * mus[[g]][j], 0))
     varp[j] <- sum(vapply(seq_along(w), function(g) w[g] * (sds[[g]][j] + mus[[g]][j]^2), 0)) - mean[j]^2

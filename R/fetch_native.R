@@ -783,23 +783,29 @@ morie_fetch_parquet <- function(path) {
 #' Decode a Parquet RLE/bit-packed hybrid run of 1-bit definition levels
 #' @noRd
 .mpq_def_levels <- function(payload, n) {
-  out <- integer(0); i <- 1L
+  out <- integer(0)
+  i <- 1L
   while (length(out) < n && i <= length(payload)) {
     # ULEB128 header
-    hdr <- 0; shift <- 0
+    hdr <- 0
+    shift <- 0
     repeat {
-      b <- as.integer(payload[i]); i <- i + 1L
-      hdr <- hdr + bitwAnd(b, 127L) * 2^shift; shift <- shift + 7
+      b <- as.integer(payload[i])
+      i <- i + 1L
+      hdr <- hdr + bitwAnd(b, 127L) * 2^shift
+      shift <- shift + 7
       if (b < 128L) break
     }
     if (hdr %% 2 == 0) {              # RLE run: count, then one value byte
       cnt <- hdr %/% 2
-      val <- as.integer(payload[i]); i <- i + 1L
+      val <- as.integer(payload[i])
+      i <- i + 1L
       out <- c(out, rep(val, cnt))
     } else {                          # bit-packed: hdr>>1 groups of 8 values
       groups <- (hdr - 1) %/% 2
       for (g in seq_len(groups)) {
-        b <- as.integer(payload[i]); i <- i + 1L
+        b <- as.integer(payload[i])
+        i <- i + 1L
         out <- c(out, bitwAnd(bitwShiftR(b, 0:7), 1L))
       }
     }
@@ -835,7 +841,9 @@ morie_fetch_parquet <- function(path) {
   present <- sum(defs != 0L)
   splice <- function(vals) {
     if (present == n) return(vals)
-    out <- rep(vals[NA_integer_][1L], n); out[defs != 0L] <- vals; out
+    out <- rep(vals[NA_integer_][1L], n)
+    out[defs != 0L] <- vals
+    out
   }
   n <- present
   body <- buf[(off + 1L):length(buf)]

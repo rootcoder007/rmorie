@@ -18,7 +18,8 @@
 #' @examples
 #' Clstcoef(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
 Clstcoef <- function(G) {
-  A <- as.matrix(G); n <- nrow(A)
+  A <- as.matrix(G)
+  n <- nrow(A)
   adj <- ((A != 0) | (t(A) != 0)) * 1
   diag(adj) <- 0
   deg <- rowSums(adj)

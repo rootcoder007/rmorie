@@ -59,14 +59,16 @@ Ratedist <- function(px, distortion = NULL, D = 0.1, beta_hi = 1e4,
       q <- nq
       if (delta < 1e-14) break
     }
-    R <- 0; dist <- 0
+    R <- 0
+    dist <- 0
     for (i in seq_len(n)) for (j in seq_len(m)) {
       if (Q[i, j] > 0 && q[j] > 0) R <- R + p[i] * Q[i, j] * log(Q[i, j] / q[j])
       dist <- dist + p[i] * Q[i, j] * Dm[i, j]
     }
     list(R = R, dist = dist, q = q)
   }
-  lo <- 0; hi <- as.numeric(beta_hi)
+  lo <- 0
+  hi <- as.numeric(beta_hi)
   for (it in seq_len(120L)) {
     mid <- 0.5 * (lo + hi)
     res <- ba(mid)

@@ -12,10 +12,12 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Compnorm(V)
 Compnorm <- function(x) {
-  x <- .t1_vec(x); D <- length(x)
+  x <- .t1_vec(x)
+  D <- length(x)
   if (D < 2L) stop("a norm on the simplex needs at least two parts")
   if (any(x <= 0)) stop("compositions must be strictly positive")
-  lx <- log(x); tot <- 0
+  lx <- log(x)
+  tot <- 0
   for (i in seq_len(D - 1L)) for (j in (i + 1L):D) tot <- tot + (lx[i] - lx[j])^2
   n2 <- tot / D
   .t1_result(norm = sqrt(n2), norm2 = n2, D = D, method = "Aitchison norm")

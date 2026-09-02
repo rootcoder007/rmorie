@@ -24,7 +24,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Sbcrank(V, V)
 Sbcrank <- function(prior_draw, post_draws, bins = NULL) {
-  pd <- .t1_vec(prior_draw); P <- as.matrix(post_draws)
+  pd <- .t1_vec(prior_draw)
+  P <- as.matrix(post_draws)
   J <- length(pd)
   if (nrow(P) != J) stop("one row of posterior draws per prior draw")
   L <- ncol(P)

@@ -18,15 +18,20 @@
 #' @references Barros and Hirakata (2003), Alternatives for logistic regression in cross-sectional studies: an empirical comparison of models that directly estimate the prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method standard error for log PR used here is the standard binomial one.
 #' @export
 Prevratio <- function(prev_exposed, prev_unexposed, n_exposed = NULL, n_unexposed = NULL, alpha = 0.05) {
-  pe <- as.numeric(prev_exposed); pu <- as.numeric(prev_unexposed)
+  pe <- as.numeric(prev_exposed)
+  pu <- as.numeric(prev_unexposed)
   if (pe <= 0 || pe >= 1 || pu <= 0 || pu >= 1)
     stop("prevalences must be strictly between 0 and 1")
-  pr <- pe / pu; se <- NA_real_; lo <- NA_real_; hi <- NA_real_
+  pr <- pe / pu
+  se <- NA_real_
+  lo <- NA_real_
+  hi <- NA_real_
   if (!is.null(n_exposed) && !is.null(n_unexposed)) {
     se <- sqrt((1 - pe) / (pe * as.numeric(n_exposed)) +
                (1 - pu) / (pu * as.numeric(n_unexposed)))
     z <- stats::qnorm(1 - alpha / 2)
-    lo <- exp(log(pr) - z * se); hi <- exp(log(pr) + z * se)
+    lo <- exp(log(pr) - z * se)
+    hi <- exp(log(pr) + z * se)
   }
   .t1_result(pr = pr, log_pr = log(pr), se_log = se, ci_lower = lo,
              ci_upper = hi, method = "Prevalence ratio")

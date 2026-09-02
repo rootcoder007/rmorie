@@ -28,7 +28,8 @@ Lapeig <- function(W, k = 2, tol = 1e-10) {
   if (k < 1L || k > n) stop("k must satisfy 1 <= k <= n")
   d <- rowSums(W)
   s <- ifelse(d == 0, 0, 1 / sqrt(ifelse(d == 0, 1, d)))
-  L <- -W; diag(L) <- d - diag(W)
+  L <- -W
+  diag(L) <- d - diag(W)
   e <- .t1_eigsym(diag(s, n) %*% L %*% diag(s, n))
   ord <- rev(seq_len(n))
   vals <- e$values[ord]

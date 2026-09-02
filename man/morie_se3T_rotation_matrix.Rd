@@ -50,6 +50,5 @@ equivariant.
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_se3T_rotation_matrix(V, V)
+morie_se3T_rotation_matrix(axis = c(0, 0, 1), angle = pi / 4)
 }

@@ -46,9 +46,12 @@ Btjkab <- function(x, theta_b, B_idx) {
     }
   }
   grand <- .s03mean(tb)
-  infl <- numeric(n); tm <- numeric(n); nout <- integer(n)
+  infl <- numeric(n)
+  tm <- numeric(n)
+  nout <- integer(n)
   for (i in seq_len(n)) {
-    s <- 0; cc <- 0L
+    s <- 0
+    cc <- 0L
     for (b in seq_len(B)) {
       if (!used[b, i]) {
         s <- s + tb[b]

@@ -27,7 +27,8 @@
 #' Ghosalrkhsnorm(f0_coefs = c(1, 2, 3, 4, 5, 6, 7, 8), lambdas = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
 Ghosalrkhsnorm <- function(f0_coefs, lambdas, eps, n_sim = 3000,
                            seed = 42) {
-  f0 <- as.numeric(f0_coefs); lam <- as.numeric(lambdas)
+  f0 <- as.numeric(f0_coefs)
+  lam <- as.numeric(lambdas)
   if (length(f0) != length(lam))
     stop("f0_coefs and lambdas must have the same length")
   if (length(f0) == 0L) stop("f0_coefs must be non-empty")

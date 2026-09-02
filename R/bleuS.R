@@ -42,10 +42,13 @@ BleuS <- function(candidate, references, max_n = 4) {
     lapply(as.list(references), .bleu_tok)
   if (length(refs) == 0L) stop("bleu: no references given")
   for (r in refs) if (length(r) == 0L) stop("bleu: a reference is empty")
-  pn <- numeric(N); num <- numeric(N); den <- numeric(N)
+  pn <- numeric(N)
+  num <- numeric(N)
+  den <- numeric(N)
   for (n in seq_len(N)) {
     ab <- .bleu_mp(cand, refs, n)
-    num[n] <- ab[1]; den[n] <- ab[2]
+    num[n] <- ab[1]
+    den[n] <- ab[2]
     pn[n] <- if (ab[2] > 0) ab[1] / ab[2] else 0
   }
   cc <- length(cand)
@@ -55,7 +58,8 @@ BleuS <- function(candidate, references, max_n = 4) {
   bp <- if (cc > best) 1 else exp(1 - best / cc)
   w <- 1 / N
   if (min(pn) <= 0) {
-    sc <- 0; logsum <- -Inf
+    sc <- 0
+    logsum <- -Inf
   } else {
     logsum <- 0
     for (p in pn) logsum <- logsum + w * log(p)

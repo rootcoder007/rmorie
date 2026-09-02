@@ -32,8 +32,8 @@ relation is unrepresentable. That is what ComplEx was written to fix.
 Formula: \code{score = <h, r, t> = sum_k h_k r_k t_k}.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-DistM(V, V)
+triples <- matrix(c(1L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 1L), ncol = 3, byrow = TRUE)
+DistM(triples, dim = 4)
 }
 \references{
 Yang, Yih, He, Gao & Deng (2015). ICLR 2015, equation (3).

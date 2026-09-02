@@ -58,7 +58,9 @@ lstm_step <- function(x, h, c, Wx, Wh, b) {
   d <- length(h)
   if (length(c) != d)
     stop("elmo: hidden and cell sizes differ")
-  x <- as.numeric(x); h <- as.numeric(h); c <- as.numeric(c)
+  x <- as.numeric(x)
+  h <- as.numeric(h)
+  c <- as.numeric(c)
   Wx <- matrix(as.numeric(Wx), nrow = length(x), ncol = 4 * d)
   Wh <- matrix(as.numeric(Wh), nrow = d, ncol = 4 * d)
   b <- as.numeric(b)
@@ -108,8 +110,12 @@ bilm_forward <- function(X, layers) {
     c(as.numeric(Xm[t, ]), as.numeric(Xm[t, ]))))
   cur <- lapply(seq_len(L), function(t) as.numeric(Xm[t, ]))
   for (layer in layers) {
-    Wxf <- layer$Wxf; Whf <- layer$Whf; bf <- layer$bf
-    Wxb <- layer$Wxb; Whb <- layer$Whb; bb <- layer$bb
+    Wxf <- layer$Wxf
+    Whf <- layer$Whf
+    bf <- layer$bf
+    Wxb <- layer$Wxb
+    Whb <- layer$Whb
+    bb <- layer$bb
     # hidden size = ROWS of Whf; length() of an R matrix counts every
     # element, where the reference len() counts rows
     d <- if (is.matrix(Whf)) nrow(Whf) else length(Whf)
@@ -117,21 +123,25 @@ bilm_forward <- function(X, layers) {
       stop("elmo: token dimension ", ncol(Xm),
            " but hidden dimension ", d,
            "; layer 0 is [x; x] so they must match")
-    h <- rep(0, d); c <- rep(0, d)
+    h <- rep(0, d)
+    c <- rep(0, d)
     fwd <- vector("list", L)
     for (t in seq_len(L)) {
       r <- lstm_step(cur[[t]], h, c, Wxf, Whf, bf)
-      h <- r$h; c <- r$c
+      h <- r$h
+      c <- r$c
       fwd[[t]] <- h
     }
-    h <- rep(0, d); c <- rep(0, d)
+    h <- rep(0, d)
+    c <- rep(0, d)
     bwd <- vector("list", L)
     # rev(seq_len(L)): the colon after seq_len(L) coerced the whole
     # vector to its first element and the backward pass only ever
     # visited t = 1
     for (t in rev(seq_len(L))) {
       r <- lstm_step(cur[[t]], h, c, Wxb, Whb, bb)
-      h <- r$h; c <- r$c
+      h <- r$h
+      c <- r$c
       bwd[[t]] <- h
     }
     # re-align: position k is token k

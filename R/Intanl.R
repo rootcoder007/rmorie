@@ -27,9 +27,11 @@
 #' Intanl(y = rnorm(20), A = rbinom(20, 1, 0.5), V = rbinom(20, 1, 0.5),
 #'        H = runif(20, 0.5, 1.5))
 Intanl <- function(y, A, V, H) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("interaction_analysis: y is empty")
-  a <- .s03vec(A); v <- .s03vec(V)
+  a <- .s03vec(A)
+  v <- .s03vec(V)
   if (length(a) != n || length(v) != n) stop("interaction_analysis: y, A and V have different lengths")
   w <- if (!is.null(H)) .s03vec(H) else rep(1, n)
   if (length(w) != n) stop("interaction_analysis: H and y have different lengths")
@@ -37,7 +39,8 @@ Intanl <- function(y, A, V, H) {
   Z <- cbind(1, a, v * a, v)
   p <- 4L
   if (n <= p) stop("interaction_analysis: need more than four observations")
-  ZtWZ <- matrix(0, p, p); ZtWy <- numeric(p)
+  ZtWZ <- matrix(0, p, p)
+  ZtWy <- numeric(p)
   for (i in seq_len(n)) {
     for (r in seq_len(p)) {
       ZtWy[r] <- ZtWy[r] + Z[i, r] * w[i] * yv[i]

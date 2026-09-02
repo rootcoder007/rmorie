@@ -121,7 +121,8 @@ Vanr2 <- function(marker_matrix, weights = NULL, freq = NULL) {
 Yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
   M <- as.matrix(marker_matrix)
   storage.mode(M) <- "double"
-  J <- nrow(M); p <- ncol(M)
+  J <- nrow(M)
+  p <- ncol(M)
   pi_ <- if (!is.null(freq)) as.numeric(freq) else colMeans(M) / 2
   vr <- 2 * pi_ * (1 - pi_)
   keep <- vr > 0
@@ -130,7 +131,8 @@ Yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
   A <- tcrossprod(Zs) / p
   if (isTRUE(yang_diagonal)) {
     Mk <- M[, keep, drop = FALSE]
-    pk <- pi_[keep]; vk <- vr[keep]
+    pk <- pi_[keep]
+    vk <- vr[keep]
     num <- Mk^2 - sweep(Mk, 2, 1 + 2 * pk, "*") + rep(2 * pk^2, each = J)
     diag(A) <- 1 + rowSums(sweep(num, 2, vk, "/")) / p
   }
@@ -154,7 +156,8 @@ Yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
 #' Zscnm(c(1, 2, 3, 4))
 #' @export
 Zscnm <- function(x, ddof = 1) {
-  v <- as.numeric(x); n <- length(v)
+  v <- as.numeric(x)
+  n <- length(v)
   mu <- sum(v) / n
   den <- n - ddof
   sdv <- if (den > 0) sqrt(sum((v - mu)^2) / den) else 0
@@ -204,18 +207,24 @@ Unitl <- function(x) {
 #' Varrd(c(1, 2, 3, 10, 11, 12), c(TRUE, TRUE, TRUE, FALSE, FALSE, FALSE))
 #' @export
 Varrd <- function(y, split_idx) {
-  v <- as.numeric(y); n <- length(v)
+  v <- as.numeric(y)
+  n <- length(v)
   left_mask <- if (is.logical(split_idx) && length(split_idx) == n) {
     split_idx
   } else {
     seq_len(n) %in% as.integer(split_idx)
   }
-  left <- v[left_mask]; right <- v[!left_mask]
+  left <- v[left_mask]
+  right <- v[!left_mask]
   pvar <- function(z) if (length(z) == 0) 0 else sum((z - mean(z))^2) / length(z)
   sse <- function(z) if (length(z) == 0) 0 else sum((z - mean(z))^2)
-  nl <- length(left); nr <- length(right)
-  wl <- nl / n; wr <- nr / n
-  vp <- pvar(v); vl <- pvar(left); vr <- pvar(right)
+  nl <- length(left)
+  nr <- length(right)
+  wl <- nl / n
+  wr <- nr / n
+  vp <- pvar(v)
+  vl <- pvar(left)
+  vr <- pvar(right)
   dv <- vp - wl * vl - wr * vr
   list(estimate = dv, delta_var = dv,
        sse_weighted = sse(left) * wl + sse(right) * wr,
@@ -292,16 +301,20 @@ Svmsl <- function(X, y, C, ...) {
 #' @export
 Svmep <- function(X, y, C, eps, n_iter = 4000L, kernel = "linear",
                   gamma = NULL, degree = 2, coef0 = 1) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
-  ys <- as.numeric(y); n <- length(ys)
-  Cv <- as.numeric(C); ev <- as.numeric(eps)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
+  ys <- as.numeric(y)
+  n <- length(ys)
+  Cv <- as.numeric(C)
+  ev <- as.numeric(eps)
   K <- morie_kernel_matrix(Xm, kernel = kernel, gamma = gamma,
                            degree = degree, coef0 = coef0)
   K <- as.matrix(K)
   scale_ <- max(abs(diag(K)))
   if (!(scale_ > 0)) scale_ <- 1
   step <- 1 / (n * scale_)
-  a <- rep(0, n); b <- rep(0, n)
+  a <- rep(0, n)
+  b <- rep(0, n)
   for (it in seq_len(as.integer(n_iter))) {
     th <- a - b
     Kt <- as.numeric(K %*% th)

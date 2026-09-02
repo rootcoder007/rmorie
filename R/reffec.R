@@ -28,7 +28,9 @@
 #' @examples
 #' Reffec(R0 = 5L, S = 5L, N = 5L)
 Reffec <- function(R0, S, N) {
-  R0 <- as.numeric(R0); S <- as.numeric(S); N <- as.numeric(N)
+  R0 <- as.numeric(R0)
+  S <- as.numeric(S)
+  N <- as.numeric(N)
   if (R0 < 0) stop("Reffec: R0 must be non-negative")
   if (N <= 0) stop("Reffec: N must be positive")
   if (S < 0 || S > N) stop("Reffec: S must lie in [0, N]")

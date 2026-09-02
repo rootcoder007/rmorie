@@ -34,31 +34,50 @@ Irtmh1 <- function(X, group, total_score, alpha = 0.05) {
   if (length(g) != n || length(s) != n) stop("dif_mantel_haenszel: group and total_score must match X")
   if (any(!(g %in% c(0L, 1L)))) stop("dif_mantel_haenszel: group must be coded 0/1")
   strata <- sort(unique(s))
-  ors <- numeric(J); chis <- numeric(J); ps <- numeric(J); deltas <- numeric(J)
-  cls <- character(J); flags <- integer(J)
+  ors <- numeric(J)
+  chis <- numeric(J)
+  ps <- numeric(J)
+  deltas <- numeric(J)
+  cls <- character(J)
+  flags <- integer(J)
   for (j in seq_len(J)) {
     x <- as.integer(M[, j])
     if (any(!(x %in% c(0L, 1L)))) stop("dif_mantel_haenszel: responses must be 0/1")
-    num <- 0; den <- 0; ea <- 0; va <- 0; obs <- 0
+    num <- 0
+    den <- 0
+    ea <- 0
+    va <- 0
+    obs <- 0
     for (lev in strata) {
       idx <- which(s == lev)
       if (length(idx) == 0L) next
-      A <- sum(g[idx] == 0L & x[idx] == 1L); B <- sum(g[idx] == 0L & x[idx] == 0L)
-      C <- sum(g[idx] == 1L & x[idx] == 1L); D <- sum(g[idx] == 1L & x[idx] == 0L)
+      A <- sum(g[idx] == 0L & x[idx] == 1L)
+      B <- sum(g[idx] == 0L & x[idx] == 0L)
+      C <- sum(g[idx] == 1L & x[idx] == 1L)
+      D <- sum(g[idx] == 1L & x[idx] == 0L)
       nn <- A + B + C + D
       if (nn <= 1) next
-      nR <- A + B; nF <- C + D; n1 <- A + C; n0 <- B + D
+      nR <- A + B
+      nF <- C + D
+      n1 <- A + C
+      n0 <- B + D
       if (nR == 0 || nF == 0 || n1 == 0 || n0 == 0) next
-      num <- num + A * D / nn; den <- den + B * C / nn
-      obs <- obs + A; ea <- ea + nR * n1 / nn
+      num <- num + A * D / nn
+      den <- den + B * C / nn
+      obs <- obs + A
+      ea <- ea + nR * n1 / nn
       va <- va + nR * nF * n1 * n0 / (nn * nn * (nn - 1))
     }
     if (den <= 0 || num <= 0) {
-      ors[j] <- NaN; chis[j] <- NaN; ps[j] <- NaN; deltas[j] <- NaN
+      ors[j] <- NaN
+      chis[j] <- NaN
+      ps[j] <- NaN
+      deltas[j] <- NaN
     } else {
       ors[j] <- num / den
       deltas[j] <- -2.35 * log(ors[j])
-      if (va <= 0) { chis[j] <- NaN; ps[j] <- NaN } else {
+      if (va <= 0) { chis[j] <- NaN
+      ps[j] <- NaN } else {
         chis[j] <- (abs(obs - ea) - 0.5)^2 / va
         ps[j] <- 2 * (1 - .s03pnorm(sqrt(chis[j])))
       }

@@ -42,7 +42,8 @@
 #' h <- Causrddh(x, y, cutoff = 0)
 #' is.numeric(h$estimate)
 Causrddh <- function(x, y, cutoff = 0) {
-  xa <- as.numeric(x); ya <- as.numeric(y)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
   n <- length(xa)
   if (n < 10L) stop("need at least 10 observations", call. = FALSE)
   c0 <- as.numeric(cutoff)[1]
@@ -51,19 +52,26 @@ Causrddh <- function(x, y, cutoff = 0) {
   h1 <- 1.84 * sx * n^(-0.2)
   il <- d >= -h1 & d < 0
   ir <- d >= 0 & d <= h1
-  nl <- sum(il); nr <- sum(ir)
+  nl <- sum(il)
+  nr <- sum(ir)
   if (nl < 3L || nr < 3L) {
     stop("fewer than 3 observations within the pilot window on one side of the cutoff", call. = FALSE)
   }
-  yl <- ya[il]; yr <- ya[ir]
-  s2l <- stats::var(yl); s2r <- stats::var(yr)
+  yl <- ya[il]
+  yr <- ya[ir]
+  s2l <- stats::var(yl)
+  s2r <- stats::var(yr)
   f_hat <- (nl + nr) / (2 * n * h1)
   sigma2 <- ((nl - 1) * s2l + (nr - 1) * s2r) / (nl + nr)
-  left <- d < 0; right <- d >= 0
-  n_neg <- sum(left); n_pos <- sum(right)
-  med_l <- stats::median(d[left]); med_r <- stats::median(d[right])
+  left <- d < 0
+  right <- d >= 0
+  n_neg <- sum(left)
+  n_pos <- sum(right)
+  med_l <- stats::median(d[left])
+  med_r <- stats::median(d[right])
   keep <- d >= med_l & d <= med_r
-  dk <- d[keep]; yk <- ya[keep]
+  dk <- d[keep]
+  yk <- ya[keep]
   Xc <- cbind(1, as.numeric(dk >= 0), dk, dk^2, dk^3)
   g <- qr.solve(crossprod(Xc), crossprod(Xc, yk))
   m3 <- 6 * g[5L]
@@ -71,7 +79,8 @@ Causrddh <- function(x, y, cutoff = 0) {
   h2r <- 3.56 * base * n_pos^(-1 / 7)
   h2l <- 3.56 * base * n_neg^(-1 / 7)
   quad <- function(mask, mask_trim) {
-    dm <- d[mask]; ym <- ya[mask]
+    dm <- d[mask]
+    ym <- ya[mask]
     n2 <- length(dm)
     if (n2 < 4L) stop("fewer than 4 observations in a pilot quadratic window", call. = FALSE)
     Xq <- cbind(1, dm, dm^2)
@@ -151,7 +160,8 @@ Causrddh <- function(x, y, cutoff = 0) {
 #' r <- Causrdd(x, y, cutoff = 0)
 #' abs(r$estimate - 0.5) < 0.4
 Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
-  xa <- as.numeric(x); ya <- as.numeric(y)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
   c0 <- as.numeric(cutoff)[1]
   if (is.null(h)) h <- Causrddh(xa, ya, cutoff = c0)$estimate
   h <- as.numeric(h)[1]
@@ -164,7 +174,8 @@ Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
     stop("kernel must be triangular or uniform", call. = FALSE))
   lm_ <- d < 0 & w > 0
   rm_ <- d >= 0 & w > 0
-  n_l <- sum(lm_); n_r <- sum(rm_)
+  n_l <- sum(lm_)
+  n_r <- sum(rm_)
   if (n_l < 3L || n_r < 3L) {
     stop("fewer than 3 observations with positive kernel weight on one side", call. = FALSE)
   }
@@ -216,13 +227,16 @@ Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
 #' is.list(r)
 Causrddf <- function(x, y, treat, cutoff = 0, h = NULL, h_treat = NULL,
                      kernel = "triangular") {
-  xa <- as.numeric(x); ya <- as.numeric(y); wa <- as.numeric(treat)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
+  wa <- as.numeric(treat)
   c0 <- as.numeric(cutoff)[1]
   if (is.null(h)) h <- Causrddh(xa, ya, cutoff = c0)$estimate
   if (is.null(h_treat)) h_treat <- Causrddh(xa, wa, cutoff = c0)$estimate
   fy <- Causrdd(xa, ya, cutoff = c0, h = h, kernel = kernel)
   fw <- Causrdd(xa, wa, cutoff = c0, h = h_treat, kernel = kernel)
-  ty <- fy$estimate; tw <- fw$estimate
+  ty <- fy$estimate
+  tw <- fw$estimate
   if (abs(tw) < 1e-12) {
     stop("no first-stage discontinuity: the treatment jump at the cutoff is numerically zero", call. = FALSE)
   }

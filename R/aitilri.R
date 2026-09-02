@@ -26,9 +26,13 @@ Aitilri <- function(y, V = NULL, kappa = 1) {
   yy <- as.numeric(.s03vec(y))
   if (length(yy) == 0L) stop("aitchison_ilr_inverse: y is empty")
   if (!(kappa > 0)) stop("aitchison_ilr_inverse: kappa must be positive")
-  Vm <- if (is.null(V)) .aitilri_basis(length(yy) + 1L) else
+  Vm <- if (is.null(V)) {
+    .aitilri_basis(length(yy) + 1L)
+  } else {
     matrix(as.numeric(as.matrix(V)), nrow = nrow(as.matrix(V)))
-  D <- nrow(Vm); p <- ncol(Vm)
+  }
+  D <- nrow(Vm)
+  p <- ncol(Vm)
   if (p != length(yy)) {
     stop(sprintf("aitchison_ilr_inverse: V has %d columns but y has %d entries", p, length(yy)))
   }
@@ -43,8 +47,10 @@ Aitilri <- function(y, V = NULL, kappa = 1) {
   tot <- 0
   for (v in e) tot <- tot + v
   x <- kappa * e / tot
-  list(x = x, estimate = x[1], logx_unclosed = lx, total = kappa, D = D,
-       method = "x = C(exp(V y)), V the Egozcue et al. (2003) SBP basis")
+  list(
+    x = x, estimate = x[1], logx_unclosed = lx, total = kappa, D = D,
+    method = "x = C(exp(V y)), V the Egozcue et al. (2003) SBP basis"
+  )
 }
 
 #' Contrast matrix of the default Egozcue (2003) sequential binary partition

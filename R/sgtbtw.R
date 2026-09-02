@@ -15,17 +15,27 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Btwcent(V)
 Btwcent <- function(A, normalise = FALSE) {
-  A <- as.matrix(A); n <- nrow(A); diag(A) <- 0; B <- A != 0
+  A <- as.matrix(A)
+  n <- nrow(A)
+  diag(A) <- 0
+  B <- A != 0
   cb <- numeric(n)
   for (s in seq_len(n)) {
-    stack <- integer(0); pred <- vector("list", n)
-    sigma <- numeric(n); dist <- rep(-1L, n)
-    sigma[s] <- 1; dist[s] <- 0L; q <- s; h <- 1L
+    stack <- integer(0)
+    pred <- vector("list", n)
+    sigma <- numeric(n)
+    dist <- rep(-1L, n)
+    sigma[s] <- 1
+    dist[s] <- 0L
+    q <- s
+    h <- 1L
     while (h <= length(q)) {
-      v <- q[h]; h <- h + 1L
+      v <- q[h]
+      h <- h + 1L
       stack <- c(stack, v)
       for (w in which(B[v, ])) {
-        if (dist[w] < 0L) { dist[w] <- dist[v] + 1L; q <- c(q, w) }
+        if (dist[w] < 0L) { dist[w] <- dist[v] + 1L
+        q <- c(q, w) }
         if (dist[w] == dist[v] + 1L) {
           sigma[w] <- sigma[w] + sigma[v]
           pred[[w]] <- c(pred[[w]], v)

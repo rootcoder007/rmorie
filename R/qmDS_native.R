@@ -29,12 +29,14 @@
   if (n == 1L) return(0.5)
   if (v <= sorted_x[1L]) return(0)
   if (v >= sorted_x[n]) return(1)
-  lo <- 0L; hi <- n - 1L
+  lo <- 0L
+  hi <- n - 1L
   while (hi - lo > 1L) {
     mid <- (lo + hi) %/% 2L
     if (sorted_x[mid + 1L] <= v) lo <- mid else hi <- mid
   }
-  x0 <- sorted_x[lo + 1L]; x1 <- sorted_x[lo + 2L]
+  x0 <- sorted_x[lo + 1L]
+  x1 <- sorted_x[lo + 2L]
   g <- if (x1 == x0) 0 else (v - x0) / (x1 - x0)
   (lo + g) / (n - 1L)
 }

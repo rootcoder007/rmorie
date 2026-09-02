@@ -100,7 +100,8 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
   xs <- sort(x)
   est <- stats::median(xs)
   if (n %% 2L == 1L) {
-    interval <- c(est, est); unique_w <- TRUE
+    interval <- c(est, est)
+    unique_w <- TRUE
   } else {
     interval <- c(xs[n %/% 2L], xs[n %/% 2L + 1L])
     unique_w <- interval[1] == interval[2]
@@ -110,20 +111,25 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
     f_m <- .morie_kde_at(xs, est)
     se <- if (is.finite(f_m) && f_m > 0) 1 / (2 * f_m * sqrt(n)) else NA_real_
   } else {
-    se_normal <- NA_real_; se <- NA_real_; f_m <- NA_real_
+    se_normal <- NA_real_
+    se <- NA_real_
+    f_m <- NA_real_
   }
   zc <- .morie_z(1 - alpha / 2)
   lo <- if (is.finite(se)) est - zc * se else NA_real_
   hi <- if (is.finite(se)) est + zc * se else NA_real_
 
-  elo <- NA_real_; ehi <- NA_real_; cover <- NA_real_
+  elo <- NA_real_
+  ehi <- NA_real_
+  cover <- NA_real_
   if (n >= 2L) {
     kk <- 0L
     for (cand in seq_len(n %/% 2L)) {
       if (.morie_binom_cdf_half(cand - 1L, n) <= alpha / 2) kk <- cand else break
     }
     if (kk >= 1L) {
-      elo <- xs[kk]; ehi <- xs[n - kk + 1L]
+      elo <- xs[kk]
+      ehi <- xs[n - kk + 1L]
       cover <- 1 - 2 * .morie_binom_cdf_half(kk - 1L, n)
     }
   }
@@ -166,7 +172,8 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
 #' @examples
 #' morie_optimal_overlap_weight(var_a = 5L, var_b = 5L)
 morie_optimal_overlap_weight <- function(var_a, var_b) {
-  va <- as.numeric(var_a); vb <- as.numeric(var_b)
+  va <- as.numeric(var_a)
+  vb <- as.numeric(var_b)
   if (va < 0 || vb < 0) stop("variances must be non-negative.", call. = FALSE)
   if (va + vb <= 0) return(0.5)
   vb / (va + vb)
@@ -216,8 +223,10 @@ morie_optimal_overlap_weight <- function(var_a, var_b) {
 morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
                                    weights_a = NULL, weights_b = NULL,
                                    theta = NULL, alpha = 0.05) {
-  ya <- as.numeric(frame_a); yb <- as.numeric(frame_b)
-  da <- as.numeric(overlap_a); db <- as.numeric(overlap_b)
+  ya <- as.numeric(frame_a)
+  yb <- as.numeric(frame_b)
+  da <- as.numeric(overlap_a)
+  db <- as.numeric(overlap_b)
   if (length(da) != length(ya)) {
     stop(sprintf("overlap_a has length %d but frame_a has %d.",
                  length(da), length(ya)), call. = FALSE)
@@ -248,7 +257,8 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
 
   th_opt <- morie_optimal_overlap_weight(taba[2], tabb[2])
   if (is.null(theta)) {
-    th <- th_opt; src <- "optimal"
+    th <- th_opt
+    src <- "optimal"
   } else {
     th <- as.numeric(theta)
     if (th < 0 || th > 1) {
@@ -313,7 +323,8 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
   dmu <- function(eta) {
     e <- pmin(pmax(eta, -8), 8)
     if (link == "probit") pmax(stats::dnorm(e), 1e-10) else {
-      p <- mu(eta); pmax(p * (1 - p), 1e-10)
+      p <- mu(eta)
+      pmax(p * (1 - p), 1e-10)
     }
   }
   beta <- rep(0, ncol(X))
@@ -322,18 +333,22 @@ morie_dual_frame_total <- function(frame_a, frame_b, overlap_a, overlap_b,
   converged <- FALSE
   for (i in seq_len(max_iter)) {
     eta <- as.vector(X %*% beta)
-    p <- mu(eta); d <- dmu(eta)
+    p <- mu(eta)
+    d <- dmu(eta)
     w <- n * d * d / (p * (1 - p))
     z <- eta + (k - n * p) / (n * d)
     XtW <- t(X) * rep(w, each = ncol(X))
     step <- tryCatch(solve(XtW %*% X, XtW %*% z),
                      error = function(e) .morie_ginv(XtW %*% X) %*% (XtW %*% z))
     step <- as.vector(step)
-    if (max(abs(step - beta)) < tol) { beta <- step; converged <- TRUE; break }
+    if (max(abs(step - beta)) < tol) { beta <- step
+    converged <- TRUE
+    break }
     beta <- step
   }
   eta <- as.vector(X %*% beta)
-  p <- mu(eta); d <- dmu(eta)
+  p <- mu(eta)
+  d <- dmu(eta)
   w <- n * d * d / (p * (1 - p))
   A <- (t(X) * rep(w, each = ncol(X))) %*% X
   cov <- tryCatch(solve(A), error = function(e) .morie_ginv(A))
@@ -367,7 +382,8 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
                                  alpha = 0.05, link = c("probit", "logit"),
                                  log_scale = TRUE) {
   link <- match.arg(link)
-  a <- as.numeric(intercept); b <- as.numeric(slope)
+  a <- as.numeric(intercept)
+  b <- as.numeric(slope)
   V <- as.matrix(cov)
   if (!identical(dim(V), c(2L, 2L))) {
     stop(sprintf("cov must be 2x2; got %d x %d", nrow(V), ncol(V)),
@@ -388,17 +404,24 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
   se_delta <- sqrt(max(V[1, 1] + 2 * x * V[1, 2] + x * x * V[2, 2], 0)) / abs(b)
 
   if (g >= 1) {
-    lo <- -Inf; hi <- Inf; bounded <- FALSE
+    lo <- -Inf
+    hi <- Inf
+    bounded <- FALSE
   } else {
     A <- b * b - t * t * V[2, 2]
     B <- 2 * (ap * b - t * t * V[1, 2])
     C <- ap * ap - t * t * V[1, 1]
     disc <- B * B - 4 * A * C
     if (disc < 0) {
-      lo <- NA_real_; hi <- NA_real_; bounded <- FALSE
+      lo <- NA_real_
+      hi <- NA_real_
+      bounded <- FALSE
     } else {
-      r1 <- (-B - sqrt(disc)) / (2 * A); r2 <- (-B + sqrt(disc)) / (2 * A)
-      lo <- min(r1, r2); hi <- max(r1, r2); bounded <- TRUE
+      r1 <- (-B - sqrt(disc)) / (2 * A)
+      r2 <- (-B + sqrt(disc)) / (2 * A)
+      lo <- min(r1, r2)
+      hi <- max(r1, r2)
+      bounded <- TRUE
     }
   }
   out <- list(ed = x, lower = lo, upper = hi, fieller_g = g,
@@ -446,7 +469,9 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
 morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
                        level = 0.5, alpha = 0.05, log_dose = TRUE) {
   link <- match.arg(link)
-  d <- as.numeric(dose); k <- as.numeric(n_dead); n <- as.numeric(n_total)
+  d <- as.numeric(dose)
+  k <- as.numeric(n_dead)
+  n <- as.numeric(n_total)
   if (length(d) != length(k) || length(d) != length(n)) {
     stop(sprintf(paste("dose, n_dead and n_total must agree in length;",
                        "got %d, %d and %d"), length(d), length(k), length(n)),

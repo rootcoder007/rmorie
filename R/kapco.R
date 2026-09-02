@@ -12,8 +12,10 @@
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.5.2, p. 134, which gives kappa = (P0 - Pe)/(1 - Pe) with P0 the proportion correctly classified and Pe as written above; the book attributes it to Cohen (1960).  Read from the chapter PDF, not recalled.
 #' @export
 Kappacoef <- function(tp, fp, fn, tn) {
-  tp <- as.numeric(tp); fp <- as.numeric(fp)
-  fn <- as.numeric(fn); tn <- as.numeric(tn)
+  tp <- as.numeric(tp)
+  fp <- as.numeric(fp)
+  fn <- as.numeric(fn)
+  tn <- as.numeric(tn)
   n <- tp + fp + fn + tn
   if (n <= 0) stop("the confusion table must have at least one observation")
   p0 <- (tp + tn) / n

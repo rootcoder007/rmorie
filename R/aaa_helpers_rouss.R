@@ -33,12 +33,16 @@
 .rsosort <- function(v) {
   idx <- seq_along(v)
   n <- length(idx)
-  if (n < 2L) return(idx)
+  if (n < 2L) {
+    return(idx)
+  }
   for (i in 2:n) {
     j <- i
     while (j > 1L && (v[idx[j - 1L]] > v[idx[j]] ||
-                      (v[idx[j - 1L]] == v[idx[j]] && idx[j - 1L] > idx[j]))) {
-      tmp <- idx[j - 1L]; idx[j - 1L] <- idx[j]; idx[j] <- tmp
+      (v[idx[j - 1L]] == v[idx[j]] && idx[j - 1L] > idx[j]))) {
+      tmp <- idx[j - 1L]
+      idx[j - 1L] <- idx[j]
+      idx[j] <- tmp
       j <- j - 1L
     }
   }
@@ -80,17 +84,33 @@
   for (cc in seq_len(n)) {
     best <- cc
     bv <- abs(M[cc, cc])
-    if (cc < n) for (r in seq(cc + 1L, n)) if (abs(M[r, cc]) > bv) { bv <- abs(M[r, cc]); best <- r }
-    if (bv <= thresh) { singular <- TRUE; next }
+    if (cc < n) {
+      for (r in seq(cc + 1L, n)) {
+        if (abs(M[r, cc]) > bv) {
+          bv <- abs(M[r, cc])
+          best <- r
+        }
+      }
+    }
+    if (bv <= thresh) {
+      singular <- TRUE
+      next
+    }
     if (best != cc) {
-      tmp <- M[cc, ]; M[cc, ] <- M[best, ]; M[best, ] <- tmp
-      tp <- piv[cc]; piv[cc] <- piv[best]; piv[best] <- tp
+      tmp <- M[cc, ]
+      M[cc, ] <- M[best, ]
+      M[best, ] <- tmp
+      tp <- piv[cc]
+      piv[cc] <- piv[best]
+      piv[best] <- tp
       sgn <- -sgn
     }
-    if (cc < n) for (r in seq(cc + 1L, n)) {
-      f <- M[r, cc] / M[cc, cc]
-      M[r, cc] <- f
-      if (cc < n) for (j in seq(cc + 1L, n)) M[r, j] <- M[r, j] - f * M[cc, j]
+    if (cc < n) {
+      for (r in seq(cc + 1L, n)) {
+        f <- M[r, cc] / M[cc, cc]
+        M[r, cc] <- f
+        if (cc < n) for (j in seq(cc + 1L, n)) M[r, j] <- M[r, j] - f * M[cc, j]
+      }
     }
   }
   list(M = M, piv = piv, sign = sgn, singular = singular)
@@ -135,9 +155,13 @@
 #' @export
 .rsludet <- function(A) {
   n <- nrow(A)
-  if (n == 0L) return(1)
+  if (n == 0L) {
+    return(1)
+  }
   f <- .rslufactor(A)
-  if (f$singular) return(0)
+  if (f$singular) {
+    return(0)
+  }
   d <- f$sign
   for (i in seq_len(n)) d <- d * f$M[i, i]
   d
@@ -157,8 +181,11 @@
 .rslusolve <- function(A, b) {
   n <- nrow(A)
   f <- .rslufactor(A)
-  if (f$singular) return(NULL)
-  M <- f$M; piv <- f$piv
+  if (f$singular) {
+    return(NULL)
+  }
+  M <- f$M
+  piv <- f$piv
   y <- numeric(n)
   for (i in seq_len(n)) {
     s <- b[piv[i]]
@@ -192,9 +219,11 @@
   for (i in idx) for (j in seq_len(p)) mu[j] <- mu[j] + X[i, j]
   mu <- mu / m
   S <- matrix(0, p, p)
-  for (i in idx) for (a in seq_len(p)) {
-    da <- X[i, a] - mu[a]
-    for (b in seq_len(p)) S[a, b] <- S[a, b] + da * (X[i, b] - mu[b])
+  for (i in idx) {
+    for (a in seq_len(p)) {
+      da <- X[i, a] - mu[a]
+      for (b in seq_len(p)) S[a, b] <- S[a, b] + da * (X[i, b] - mu[b])
+    }
   }
   den <- if (m > 1L) m - 1 else 1
   S <- S / den
@@ -215,10 +244,14 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rsmahal2 <- function(X, mu, S) {
-  n <- nrow(X); p <- length(mu)
+  n <- nrow(X)
+  p <- length(mu)
   f <- .rslufactor(S)
-  if (f$singular) return(NULL)
-  M <- f$M; piv <- f$piv
+  if (f$singular) {
+    return(NULL)
+  }
+  M <- f$M
+  piv <- f$piv
   out <- numeric(n)
   for (i in seq_len(n)) {
     b <- X[i, ] - mu
@@ -252,7 +285,9 @@
 #' @return A numeric value.
 #' @export
 .rsnchoosek <- function(n, k) {
-  if (k < 0L || k > n) return(0)
+  if (k < 0L || k > n) {
+    return(0)
+  }
   k <- min(k, n - k)
   r <- 1
   if (k > 0L) for (i in 0:(k - 1L)) r <- r * (n - i) / (i + 1)
@@ -273,14 +308,20 @@
 #' @export
 .rscombos <- function(n, k, cap = NULL) {
   out <- list()
-  if (k > n || k < 0L) return(out)
+  if (k > n || k < 0L) {
+    return(out)
+  }
   cvec <- seq_len(k)
   repeat {
     out[[length(out) + 1L]] <- cvec
-    if (!is.null(cap) && length(out) >= cap) return(out)
+    if (!is.null(cap) && length(out) >= cap) {
+      return(out)
+    }
     i <- k
     while (i >= 1L && cvec[i] == i + n - k) i <- i - 1L
-    if (i < 1L) return(out)
+    if (i < 1L) {
+      return(out)
+    }
     cvec[i] <- cvec[i] + 1L
     if (i < k) for (j in seq(i + 1L, k)) cvec[j] <- cvec[j - 1L] + 1L
   }
@@ -315,7 +356,9 @@
   mc <- .rsmeancov(X, idx)
   d0 <- .rscovdet(mc$S)
   dd <- .rsmahal2(X, mc$mu, mc$S)
-  if (is.null(dd)) return(NULL)
+  if (is.null(dd)) {
+    return(NULL)
+  }
   ord <- .rsosort(dd)
   list(idx = sort(ord[seq_len(h)]), det = d0)
 }
@@ -370,9 +413,14 @@
   n <- length(s)
   best <- 1L
   bw <- s[h] - s[1]
-  if (n > h) for (a in 2:(n - h + 1L)) {
-    w <- s[a + h - 1L] - s[a]
-    if (w < bw) { bw <- w; best <- a }
+  if (n > h) {
+    for (a in 2:(n - h + 1L)) {
+      w <- s[a + h - 1L] - s[a]
+      if (w < bw) {
+        bw <- w
+        best <- a
+      }
+    }
   }
   list(start = best, width = bw, sorted = s)
 }
@@ -394,7 +442,9 @@
 #' @export
 .rsconsistency <- function(h, n, p) {
   alpha <- h / n
-  if (alpha >= 1) return(1)
+  if (alpha >= 1) {
+    return(1)
+  }
   q <- Qchisq(alpha, p)
   f <- Pchisq(q, p + 2)
   if (f > 0) alpha / f else 1
@@ -431,8 +481,15 @@
 .rsintercept <- function(Xm, n, p) {
   for (j in seq_len(p)) {
     allone <- TRUE
-    for (i in seq_len(n)) if (Xm[i, j] != 1) { allone <- FALSE; break }
-    if (allone) return(j)
+    for (i in seq_len(n)) {
+      if (Xm[i, j] != 1) {
+        allone <- FALSE
+        break
+      }
+    }
+    if (allone) {
+      return(j)
+    }
   }
   0L
 }
@@ -521,8 +578,12 @@
 #' @export
 .rscombosstride <- function(n, k, want, max_walk = 5000000) {
   total <- .rsnchoosek(n, k)
-  if (total == 0) return(list())
-  if (total <= want) return(.rscombos(n, k))
+  if (total == 0) {
+    return(list())
+  }
+  if (total <= want) {
+    return(.rscombos(n, k))
+  }
   stride <- total %/% want
   out <- list()
   cvec <- seq_len(k)
@@ -531,13 +592,19 @@
   repeat {
     if (i %% stride == 0) {
       out[[length(out) + 1L]] <- cvec
-      if (length(out) >= want) return(out)
+      if (length(out) >= want) {
+        return(out)
+      }
     }
     walked <- walked + 1
-    if (walked > max_walk) return(out)
+    if (walked > max_walk) {
+      return(out)
+    }
     j <- k
     while (j >= 1L && cvec[j] == j + n - k) j <- j - 1L
-    if (j < 1L) return(out)
+    if (j < 1L) {
+      return(out)
+    }
     cvec[j] <- cvec[j] + 1L
     if (j < k) for (m in seq(j + 1L, k)) cvec[m] <- cvec[m - 1L] + 1L
     i <- i + 1

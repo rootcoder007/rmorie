@@ -17,14 +17,19 @@
 Clrpca <- function(X, k = 2) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")
-  L <- log(X); D <- ncol(X); n <- nrow(X); k <- as.integer(k)
+  L <- log(X)
+  D <- ncol(X)
+  n <- nrow(X)
+  k <- as.integer(k)
   Z <- L - rowMeans(L)
   Zc <- sweep(Z, 2, colMeans(Z), "-")
   e <- .t1_eigsym(stats::cov(Zc))
   tot <- sum(e$values[e$values > 0])
   load <- e$vectors[, seq_len(k), drop = FALSE]
   prop <- e$values[seq_len(k)] / tot
-  .t1_result(values = e$values, loadings = load, scores = Zc %*% load,
-             prop_var = prop, cum_prop = cumsum(prop), k = k, n = n, D = D,
-             method = "Compositional (clr) principal components")
+  .t1_result(
+    values = e$values, loadings = load, scores = Zc %*% load,
+    prop_var = prop, cum_prop = cumsum(prop), k = k, n = n, D = D,
+    method = "Compositional (clr) principal components"
+  )
 }

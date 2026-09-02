@@ -17,18 +17,28 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Agestd(V, V)
 Agestd <- function(rates, standard_pop, person_time = NULL) {
-  r <- .t1_vec(rates); w <- .t1_vec(standard_pop); k <- length(r)
+  r <- .t1_vec(rates)
+  w <- .t1_vec(standard_pop)
+  k <- length(r)
   if (k != length(w)) stop("rates and standard_pop must be the same length")
   sw <- sum(w)
   if (sw <= 0) stop("standard population must have positive total")
   asr <- sum(w * r) / sw
-  var <- NA_real_; se <- NA_real_; lo <- NA_real_; hi <- NA_real_
+  var <- NA_real_
+  se <- NA_real_
+  lo <- NA_real_
+  hi <- NA_real_
   if (!is.null(person_time)) {
     n <- .t1_vec(person_time)
     if (any(n <= 0)) stop("person-time must be positive")
-    var <- sum(w^2 * r / n) / sw^2; se <- sqrt(var)
-    z <- stats::qnorm(0.975); lo <- asr - z * se; hi <- asr + z * se
+    var <- sum(w^2 * r / n) / sw^2
+    se <- sqrt(var)
+    z <- stats::qnorm(0.975)
+    lo <- asr - z * se
+    hi <- asr + z * se
   }
-  .t1_result(asr = asr, variance = var, se = se, ci_lower = lo, ci_upper = hi,
-             weights = w / sw, k = k, method = "Directly age-standardised rate")
+  .t1_result(
+    asr = asr, variance = var, se = se, ci_lower = lo, ci_upper = hi,
+    weights = w / sw, k = k, method = "Directly age-standardised rate"
+  )
 }

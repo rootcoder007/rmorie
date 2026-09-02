@@ -27,7 +27,8 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
                                                     max_iter = 200,
                                                     tol = 1e-10,
                                                     eps = 1e-6) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   yv <- as.numeric(y)
   n <- nrow(Xm)
   if (n == 0L) stop("svyrcq: no observations")
@@ -66,7 +67,8 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
 
   beta <- wls(w, rep(0.0, n))
   obj <- check_loss(beta)
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
     u <- yv - as.numeric(Xm %*% beta)
     d <- pmax(abs(u), eps)
@@ -76,7 +78,8 @@ morie_svyrcq_survey_quantile_regression <- function(X, y, tau = 0.5,
     shift <- max(abs(new - beta))
     beta <- new
     obj <- c(obj, check_loss(beta))
-    if (shift < tol) { converged <- TRUE; break }
+    if (shift < tol) { converged <- TRUE
+    break }
   }
 
   res <- yv - as.numeric(Xm %*% beta)

@@ -38,25 +38,36 @@
 #' Jntfr(time = rexp(30), event = rbinom(30, 1, 0.7),
 #'       terminal = rbinom(30, 1, 0.3), cluster = rep(1:10, 3))
 Jntfr <- function(time, event, terminal, cluster, sweeps = 4) {
-  tv <- .s03vec(time); n <- length(tv)
+  tv <- .s03vec(time)
+  n <- length(tv)
   if (n == 0L) stop("joint_frailty: time is empty")
-  ev <- .s03vec(event); te <- .s03vec(terminal); cl <- .s03vec(cluster)
+  ev <- .s03vec(event)
+  te <- .s03vec(terminal)
+  cl <- .s03vec(cluster)
   if (length(ev) != n || length(te) != n || length(cl) != n)
     stop("joint_frailty: time, event, terminal and cluster have different lengths")
   if (any(tv <= 0)) stop("joint_frailty: time must be positive")
   if (any(te != 0 & te != 1)) stop("joint_frailty: terminal must be 0 or 1")
   if (any(ev < 0)) stop("joint_frailty: event counts must be non-negative")
-  labels <- sort(unique(cl)); g <- length(labels)
-  N <- numeric(g); A <- numeric(g); dl <- numeric(g); Tt <- numeric(g)
+  labels <- sort(unique(cl))
+  g <- length(labels)
+  N <- numeric(g)
+  A <- numeric(g)
+  dl <- numeric(g)
+  Tt <- numeric(g)
   for (i in seq_len(n)) {
     j <- match(cl[i], labels)
-    N[j] <- N[j] + ev[i]; A[j] <- A[j] + tv[i]
-    dl[j] <- dl[j] + te[i]; Tt[j] <- Tt[j] + tv[i]
+    N[j] <- N[j] + ev[i]
+    A[j] <- A[j] + tv[i]
+    dl[j] <- dl[j] + te[i]
+    Tt[j] <- Tt[j] + tv[i]
   }
   if (sum(N) <= 0 || sum(dl) <= 0)
     stop("joint_frailty: need at least one recurrent and one terminal event")
-  lamR <- sum(N) / sum(A); lamT <- sum(dl) / sum(Tt)
-  theta <- 0.5; alpha <- 1
+  lamR <- sum(N) / sum(A)
+  lamT <- sum(dl) / sum(Tt)
+  theta <- 0.5
+  alpha <- 1
   for (sw in seq_len(as.integer(sweeps))) {
     lamR <- .jntfr_golden(function(v) .jntfr_loglik(v, lamT, theta, alpha, N, A, dl, Tt), 1e-4, 10 * sum(N) / sum(A))
     lamT <- .jntfr_golden(function(v) .jntfr_loglik(lamR, v, theta, alpha, N, A, dl, Tt), 1e-4, 10 * sum(dl) / sum(Tt))
@@ -88,7 +99,8 @@ Jntfr <- function(time, event, terminal, cluster, sweeps = 4) {
   for (i in seq_len(NQ)) J[i, i] <- 2 * (i - 1L) + al + 1
   for (i in seq(2L, NQ)) {
     b <- sqrt((i - 1L) * ((i - 1L) + al))
-    J[i, i - 1L] <- b; J[i - 1L, i] <- b
+    J[i, i - 1L] <- b
+    J[i - 1L, i] <- b
   }
   e <- .s03jacobi(J)
   out <- list(x = e$values / k, w = e$vectors[1, ]^2)
@@ -101,7 +113,9 @@ Jntfr <- function(time, event, terminal, cluster, sweeps = 4) {
 #' @noRd
 .jntfr_loglik <- function(lamR, lamT, theta, alpha, N, A, dl, Tt) {
   nd <- .jntfr_nodes(theta)
-  xs <- nd$x; ws <- nd$w; NQ <- length(xs)
+  xs <- nd$x
+  ws <- nd$w
+  NQ <- length(xs)
   tot <- 0
   for (i in seq_along(N)) {
     acc <- 0
@@ -122,19 +136,27 @@ Jntfr <- function(time, event, terminal, cluster, sweeps = 4) {
 #' @noRd
 .jntfr_golden <- function(f, lo, hi, iters = 40L) {
   g <- 0.6180339887498949
-  cc <- hi - g * (hi - lo); dd <- lo + g * (hi - lo)
-  fc <- f(cc); fd <- f(dd)
+  cc <- hi - g * (hi - lo)
+  dd <- lo + g * (hi - lo)
+  fc <- f(cc)
+  fd <- f(dd)
   for (i in seq_len(iters)) {
     # Guarded comparison: near the optimum the objective is flat and the two
     # language arms differ by an ulp or two, which would otherwise send them
     # into different sub-intervals.  Anything inside the guard is a tie and
     # is resolved the same way in both arms.
     if (fc - fd > 1e-10 * (1 + abs(fc) + abs(fd))) {
-      hi <- dd; dd <- cc; fd <- fc
-      cc <- hi - g * (hi - lo); fc <- f(cc)
+      hi <- dd
+      dd <- cc
+      fd <- fc
+      cc <- hi - g * (hi - lo)
+      fc <- f(cc)
     } else {
-      lo <- cc; cc <- dd; fc <- fd
-      dd <- lo + g * (hi - lo); fd <- f(dd)
+      lo <- cc
+      cc <- dd
+      fc <- fd
+      dd <- lo + g * (hi - lo)
+      fd <- f(dd)
     }
   }
   0.5 * (lo + hi)

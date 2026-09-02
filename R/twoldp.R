@@ -34,15 +34,22 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dprime(V, V)
 Dprime <- function(geno1, geno2) {
-  g1 <- .t4_vec(geno1); g2 <- .t4_vec(geno2)
+  g1 <- .t4_vec(geno1)
+  g2 <- .t4_vec(geno2)
   if (length(g1) != length(g2)) stop("geno1 and geno2 must be the same length")
   keep <- g1 == round(g1) & g2 == round(g2) & g1 >= 0 & g1 <= 2 & g2 >= 0 & g2 <= 2
-  a <- as.integer(g1[keep]); b <- as.integer(g2[keep]); n <- length(a)
+  a <- as.integer(g1[keep])
+  b <- as.integer(g2[keep])
+  n <- length(a)
   if (n < 2L) stop("need at least 2 complete genotype pairs")
-  pA <- sum(a) / (2 * n); pB <- sum(b) / (2 * n)
-  if (pA < 0.5) { a <- 2L - a; pA <- 1 - pA }
-  if (pB < 0.5) { b <- 2L - b; pB <- 1 - pB }
-  pa <- 1 - pA; pb <- 1 - pB
+  pA <- sum(a) / (2 * n)
+  pB <- sum(b) / (2 * n)
+  if (pA < 0.5) { a <- 2L - a
+  pA <- 1 - pA }
+  if (pB < 0.5) { b <- 2L - b
+  pB <- 1 - pB }
+  pa <- 1 - pA
+  pb <- 1 - pB
   tab <- matrix(0, 3, 3)
   for (i in seq_len(n)) tab[a[i] + 1L, b[i] + 1L] <- tab[a[i] + 1L, b[i] + 1L] + 1
   nAB <- 2 * tab[3, 3] + tab[3, 2] + tab[2, 3]
@@ -50,7 +57,8 @@ Dprime <- function(geno1, geno2) {
   dmin <- max(-pA * pB, -pa * pb)
   dmax <- min(pA * pb, pa * pB)
   pab <- pA * pB
-  lo <- max(0, pA + pB - 1); hi <- min(pA, pB)
+  lo <- max(0, pA + pB - 1)
+  hi <- min(pA, pB)
   for (it in seq_len(.t4_EM_ITERS)) {
     num <- pab * (1 - pA - pB + pab)
     den <- num + (pA - pab) * (pB - pab)

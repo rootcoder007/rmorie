@@ -23,13 +23,16 @@
 #' set.seed(1)
 #' r <- Tmltrn(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), S = rnorm(10)); TRUE
 Tmltrn <- function(y, D, X, S) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); Sv <- as.numeric(S)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  Sv <- as.numeric(S)
   n <- length(yv)
   if (n == 0L || length(Dv) != n || length(Sv) != n)
     stop("Tmltrn: y, D and S must share one length")
   Xm <- as.matrix(X)
   if (nrow(Xm) != n) stop("Tmltrn: X must have one row per subject")
-  src <- which(Sv > 0.5); tgt <- which(Sv <= 0.5)
+  src <- which(Sv > 0.5)
+  tgt <- which(Sv <= 0.5)
   if (length(src) < 2L || length(tgt) < 1L)
     stop("Tmltrn: need at least two source and one target row")
   W <- cbind(1, Xm)

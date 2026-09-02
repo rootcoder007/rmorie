@@ -51,7 +51,8 @@ Mcdv <- function(X, h = NULL, n_starts = NULL, max_subsets = 200000) {
   for (idx in .rscombos(n, hh)) {
     mc <- .rsmeancov(Xm, idx)
     d <- .rscovdet(mc$S)
-    if (is.null(best_det) || d < best_det) { best_det <- d; best_idx <- idx }
+    if (is.null(best_det) || d < best_det) { best_det <- d
+    best_idx <- idx }
   }
   mc <- .rsmeancov(Xm, best_idx)
   c0 <- .rsconsistency(hh, n, p)

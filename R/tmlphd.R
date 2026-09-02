@@ -28,10 +28,13 @@
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .tmlphd_lasso <- function(X, y, lam, w = NULL, sweeps = 400L) {
-  X <- as.matrix(X); y <- as.numeric(y)
-  n <- nrow(X); p <- ncol(X)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  n <- nrow(X)
+  p <- ncol(X)
   if (is.null(w)) w <- rep(1, n)
-  beta <- numeric(p); fit <- numeric(n)
+  beta <- numeric(p)
+  fit <- numeric(n)
   denom <- as.numeric(colSums(w * X * X)) / n
   for (s in seq_len(sweeps)) {
     for (j in seq_len(p)) {
@@ -62,7 +65,8 @@
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .tmlphd_lasso_logit <- function(X, y, lam, outer = 15L, sweeps = 60L) {
-  X <- as.matrix(X); y <- as.numeric(y)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
   beta <- numeric(ncol(X))
   for (it in seq_len(outer)) {
     eta <- as.numeric(X %*% beta)
@@ -97,7 +101,10 @@
 #'   (2006). IJB 2(1):11.
 #' @export
 Tmlphd <- function(y, D, X, lam) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv); lam <- as.numeric(lam)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
+  lam <- as.numeric(lam)
   if (n == 0L || length(Dv) != n)
     stop("Tmlphd: y and D must share one length")
   if (lam < 0) stop("Tmlphd: lam must be non-negative")

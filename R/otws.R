@@ -16,7 +16,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Otws(V, V)
 Otws <- function(x, y) {
-  xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y)); n <- length(xs)
+  xs <- sort(as.numeric(x))
+  ys <- sort(as.numeric(y))
+  n <- length(xs)
   w <- sum(abs(xs - ys)) / n
   .t1_result(W1 = w, estimate = w, n = n,
              method = "One-dimensional Wasserstein-1 distance")

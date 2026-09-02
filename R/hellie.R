@@ -15,9 +15,11 @@
 #' hellie(c(0.25, 0.75), c(0.25, 0.75))
 #' @export
 hellie <- function(p, q, normalise = TRUE) {
-  pp <- as.numeric(p); qq <- as.numeric(q)
+  pp <- as.numeric(p)
+  qq <- as.numeric(q)
   n <- min(length(pp), length(qq))
-  pv <- pp[seq_len(n)]; qv <- qq[seq_len(n)]
+  pv <- pp[seq_len(n)]
+  qv <- qq[seq_len(n)]
   if (normalise) {
     if (sum(pv) > 0) pv <- pv / sum(pv)
     if (sum(qv) > 0) qv <- qv / sum(qv)

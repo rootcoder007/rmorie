@@ -272,9 +272,11 @@ Klchain <- function(pxy, qxy, base = 2) {
   cond <- 0
   for (i in seq_len(nrow(p))) {
     if (px[i] <= 0) next
-    if (qx[i] <= 0) { cond <- Inf; break }
+    if (qx[i] <= 0) { cond <- Inf
+    break }
     term <- .b2kl(p[i, ] / px[i], q[i, ] / qx[i], base)
-    if (is.infinite(term)) { cond <- Inf; break }
+    if (is.infinite(term)) { cond <- Inf
+    break }
     cond <- cond + px[i] * term
   }
   resid <- if (is.infinite(joint) || is.infinite(cond) || is.infinite(marginal)) {

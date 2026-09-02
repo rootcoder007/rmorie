@@ -37,26 +37,31 @@
 #' @export
 sprfss <- function(coords, z, n_blocks = 4, n_bins = 10, max_dist = NULL,
                    tol = 0.25) {
-  coords <- as.matrix(coords); z <- as.numeric(z)
+  coords <- as.matrix(coords)
+  z <- as.numeric(z)
   if (nrow(coords) != length(z)) {
     stop("`coords` and `z` must have the same number of rows")
   }
   if (n_blocks < 2) stop("`n_blocks` must be >= 2")
-  lo <- apply(coords, 2, min); hi <- apply(coords, 2, max)
+  lo <- apply(coords, 2, min)
+  hi <- apply(coords, 2, max)
   span <- ifelse(hi > lo, hi - lo, 1)
   idx <- pmin(pmax(floor(sweep(sweep(coords, 2, lo), 2, span, "/") * n_blocks),
                    0), n_blocks - 1)
   key <- if (ncol(coords) == 1) idx[, 1] else idx[, 1] * n_blocks + idx[, 2]
-  means <- c(); vars_ <- c()
+  means <- c()
+  vars_ <- c()
   for (k in unique(key)) {
     m <- key == k
-    if (sum(m) >= 3) { means <- c(means, mean(z[m])); vars_ <- c(vars_, stats::var(z[m])) }
+    if (sum(m) >= 3) { means <- c(means, mean(z[m]))
+    vars_ <- c(vars_, stats::var(z[m])) }
   }
   if (length(means) < 2) stop("too few populated blocks; reduce `n_blocks`")
 
   n <- length(z)
   ij <- which(upper.tri(matrix(0, n, n)), arr.ind = TRUE)
-  i2 <- ij[, 1]; j2 <- ij[, 2]
+  i2 <- ij[, 1]
+  j2 <- ij[, 2]
   lagvec <- coords[j2, , drop = FALSE] - coords[i2, , drop = FALSE]
   dv <- z[j2] - z[i2]
   flip <- lagvec[, 1] < 0
@@ -74,7 +79,8 @@ sprfss <- function(coords, z, n_blocks = 4, n_bins = 10, max_dist = NULL,
                       numeric(1))
   # ddof=1 to match `overall_sd` below -- this is a scale normaliser for the
   # increments, and the two spreads in one result must be the same estimator.
-  inc_sd <- stats::sd(dv); if (!is.finite(inc_sd) || inc_sd == 0) inc_sd <- 1
+  inc_sd <- stats::sd(dv)
+  if (!is.finite(inc_sd) || inc_sd == 0) inc_sd <- 1
   inc_bias <- max(abs(inc_means), na.rm = TRUE) / inc_sd
 
   overall_sd <- stats::sd(z)

@@ -28,11 +28,13 @@
 #' rmorie:::Alfcrop(seqlen = 5L, cropsize = 5L)
 Alfcrop <- function(seqlen, cropsize, start = 1, target = NULL, pair = NULL,
                     msa = NULL, mode = "clamped") {
-  if (!mode %in% c("clamped", "unclamped"))
+  if (!mode %in% c("clamped", "unclamped")) {
     stop("mode must be 'clamped' or 'unclamped'")
+  }
   if (cropsize > seqlen) stop("cropsize ", cropsize, " exceeds seqlen ", seqlen)
-  if (start < 1 || start + cropsize - 1 > seqlen)
+  if (start < 1 || start + cropsize - 1 > seqlen) {
     stop("crop [", start, ", ", start + cropsize - 1, "] falls outside 1..", seqlen)
+  }
 
   nn <- seqlen - cropsize
   startmax <- nn + 1
@@ -42,7 +44,9 @@ Alfcrop <- function(seqlen, cropsize, start = 1, target = NULL, pair = NULL,
   cp <- if (is.null(pair)) NULL else pair[idx, idx, drop = FALSE]
   cmsa <- if (is.null(msa)) NULL else msa[, idx, drop = FALSE]
 
-  list(idx = idx, target = ct, pair = cp, msa = cmsa, startmax = startmax,
-       estimate = as.numeric(cropsize), mode = mode,
-       method = "AlphaFold contiguous residue cropping")
+  list(
+    idx = idx, target = ct, pair = cp, msa = cmsa, startmax = startmax,
+    estimate = as.numeric(cropsize), mode = mode,
+    method = "AlphaFold contiguous residue cropping"
+  )
 }

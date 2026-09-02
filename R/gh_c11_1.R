@@ -21,7 +21,8 @@
 #' @export
 Ghosalgpdefrkhs <- function(Sigma, a, b) {
   S <- as.matrix(Sigma)
-  a <- as.numeric(a); b <- as.numeric(b)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
   k <- length(a)
   if (length(b) != k) stop("a and b must have the same length")
   if (!all(dim(S) == c(k, k))) stop("Sigma must be k by k with k = length(a)")

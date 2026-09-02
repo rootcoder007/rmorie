@@ -41,8 +41,10 @@
 Btwild <- function(X, y, B = 200, seed = 1, alpha = 0.05, weights = "mammen") {
   if (!(weights %in% c("mammen", "rademacher")))
     stop("boot_wild_regression: weights must be 'mammen' or 'rademacher'")
-  Xm <- .s03mat(X); yy <- .s03vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .s03mat(X)
+  yy <- .s03vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(yy)) stop("boot_wild_regression: X and y have different lengths")
   if (n <= p) stop("boot_wild_regression: need more rows than columns")
   if (as.integer(B) < 2L) stop("boot_wild_regression: need at least two replicates")
@@ -58,17 +60,25 @@ Btwild <- function(X, y, B = 200, seed = 1, alpha = 0.05, weights = "mammen") {
   hc0 <- diag(sw)
   g <- .t1_lcg(seed)
   reps <- vector("list", as.integer(B))
-  s1 <- 0; s2 <- 0; s3 <- 0; N <- 0L
+  s1 <- 0
+  s2 <- 0
+  s3 <- 0
+  N <- 0L
   for (b in seq_len(as.integer(B))) {
     ys <- numeric(n)
     for (i in seq_len(n)) {
       v <- .btwild_mult(g$unif(), weights)
-      s1 <- s1 + v; s2 <- s2 + v * v; s3 <- s3 + v * v * v; N <- N + 1L
+      s1 <- s1 + v
+      s2 <- s2 + v * v
+      s3 <- s3 + v * v * v
+      N <- N + 1L
       ys[i] <- fit[i] + res[i] * v
     }
     reps[[b]] <- .s03lstsq(Xm, ys)
   }
-  se <- numeric(p); lo <- numeric(p); hi <- numeric(p)
+  se <- numeric(p)
+  lo <- numeric(p)
+  hi <- numeric(p)
   for (j in seq_len(p)) {
     col <- vapply(reps, function(r) r[j], 0)
     se[j] <- .s03sd(col, 1L)

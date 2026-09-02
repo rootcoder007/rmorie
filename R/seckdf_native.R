@@ -52,7 +52,9 @@ morie_seckdf_expand <- function(prk, info = raw(), length = 32L) {
     stop("seckdf: the PRK is ", length(p), " bytes, shorter than the hash length ",
          .KDF_HASH_LEN, " -- Extract was probably skipped on non-uniform input")
   inf <- as.raw(info)
-  out <- raw(); tt <- raw(); i <- 1L
+  out <- raw()
+  tt <- raw()
+  i <- 1L
   while (length(out) < L) {
     tt <- .kdf_hmac(p, c(tt, inf, as.raw(i)))
     out <- c(out, tt)
@@ -80,10 +82,12 @@ morie_seckdf_expand <- function(prk, info = raw(), length = 32L) {
 morie_seckdf_hkdf <- function(ikm, salt = NULL, info = raw(),
                              length = 32L, skip_extract = FALSE) {
   if (isTRUE(skip_extract)) {
-    prk <- as.raw(ikm); salted <- FALSE
+    prk <- as.raw(ikm)
+    salted <- FALSE
   } else {
     e <- morie_seckdf_extract(ikm, salt)
-    prk <- e$prk; salted <- e$salt_supplied
+    prk <- e$prk
+    salted <- e$salt_supplied
   }
   r <- morie_seckdf_expand(prk, info, length)
   list(estimate = .kdf_hex(r$okm), okm = r$okm,

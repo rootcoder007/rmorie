@@ -210,8 +210,10 @@ sdpwts_central_path_gap <- function(t, m) {
   for (it in seq_len(as.integer(iters))) {
     g <- numeric(n)
     for (i in seq_len(n)) {
-      up <- x; up[i] <- up[i] + h
-      dn <- x; dn[i] <- dn[i] - h
+      up <- x
+      up[i] <- up[i] + h
+      dn <- x
+      dn[i] <- dn[i] - h
       fu <- .sdpwts_objective(up, c_vec, F0, Fs, t)
       fd <- .sdpwts_objective(dn, c_vec, F0, Fs, t)
       if (!is.finite(fu) || !is.finite(fd)) {

@@ -20,7 +20,10 @@
 .sarmix_refine <- function(negll, lo1, hi1, lo2, hi2) {
   levels <- 7L
   ngrid <- 21L
-  a1 <- lo1; b1 <- hi1; a2 <- lo2; b2 <- hi2
+  a1 <- lo1
+  b1 <- hi1
+  a2 <- lo2
+  b2 <- hi2
   best <- c(Inf, a1, a2)
   for (lev in seq_len(levels)) {
     s1 <- (b1 - a1) / (ngrid - 1L)
@@ -40,10 +43,14 @@
         if (f < best[1] - 1e-12) best <- c(f, u, v)
       }
     }
-    a1n <- best[2] - s1; b1n <- best[2] + s1
-    a2n <- best[3] - s2; b2n <- best[3] + s2
-    a1 <- max(a1n, lo1); b1 <- min(b1n, hi1)
-    a2 <- max(a2n, lo2); b2 <- min(b2n, hi2)
+    a1n <- best[2] - s1
+    b1n <- best[2] + s1
+    a2n <- best[3] - s2
+    b2n <- best[3] + s2
+    a1 <- max(a1n, lo1)
+    b1 <- min(b1n, hi1)
+    a2 <- max(a2n, lo2)
+    b2 <- min(b2n, hi2)
   }
   best
 }
@@ -90,7 +97,8 @@ Sarmix <- function(y, X, W1, W2) {
   yv <- as.numeric(y)
   A1 <- as.matrix(W1)
   A2 <- as.matrix(W2)
-  n <- nrow(Xm); p <- ncol(Xm)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (length(yv) != n || any(dim(A1) != c(n, n)) || any(dim(A2) != c(n, n)))
     stop("shape mismatch among y, X, W1, W2")
   if (n <= p) stop("need more observations than columns of X")
@@ -123,7 +131,8 @@ Sarmix <- function(y, X, W1, W2) {
   iv1 <- .sp_rho_interval(A1, "identity")
   iv2 <- .sp_rho_interval(A2, "identity")
   best <- .sarmix_refine(negll, iv1[1], iv1[2], iv2[1], iv2[2])
-  rho <- best[2]; lam <- best[3]
+  rho <- best[2]
+  lam <- best[3]
 
   pt <- parts(rho, lam)
   sigma2 <- sum(pt$e^2) / max(n - p, 1)

@@ -23,10 +23,16 @@
 #' mwem(B, Q, eps = 1, T = 2, gumbel = matrix(0, 2, 2), lap = c(0, 0))$maxerr
 #' @export
 mwem <- function(B, queries, eps = 1, T = 10L, gumbel = NULL, lap = NULL) {
-  b <- as.numeric(B); Q <- as.matrix(queries)
-  d <- length(b); nq <- nrow(Q); n <- sum(b); Ti <- as.integer(T)
+  b <- as.numeric(B)
+  Q <- as.matrix(queries)
+  d <- length(b)
+  nq <- nrow(Q)
+  n <- sum(b)
+  Ti <- as.integer(T)
   qb <- as.numeric(Q %*% b)
-  A <- rep(n / d, d); acc <- rep(0, d); selected <- integer(0)
+  A <- rep(n / d, d)
+  acc <- rep(0, d)
+  selected <- integer(0)
   scale <- if (eps > 0) 2 * Ti / eps else 0
   epsi <- if (Ti > 0) eps / (2 * Ti) else 0
   for (i in seq_len(Ti)) {

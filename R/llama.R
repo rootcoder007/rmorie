@@ -35,12 +35,15 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     }
   }
   rope <- function(v, pos, base) {
-    d <- length(v); out <- v
+    d <- length(v)
+    out <- v
     j <- 1L
     while (j + 1L <= d) {
       th <- pos * (base^(-(j - 1) / d))
-      cc <- cos(th); ss <- sin(th)
-      a <- v[j]; b <- v[j + 1L]
+      cc <- cos(th)
+      ss <- sin(th)
+      a <- v[j]
+      b <- v[j + 1L]
       out[j] <- a * cc - b * ss
       out[j + 1L] <- a * ss + b * cc
       j <- j + 2L
@@ -48,7 +51,8 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     out
   }
   X <- .s03mat(tokens)
-  n <- nrow(X); d <- ncol(X)
+  n <- nrow(X)
+  d <- ncol(X)
   rms <- function(v, gain) {
     s <- 0
     for (z in v) s <- s + z * z
@@ -56,8 +60,12 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     gg <- if (!is.null(gain)) .s03vec(gain) else rep(1, length(v))
     if (r > 0) (v / r) * gg else numeric(length(v))
   }
-  Qm <- t(.s03mat(Wq)); Km <- t(.s03mat(Wk)); Vm <- t(.s03mat(Wv))
-  q <- vector("list", n); kk <- vector("list", n); vv <- vector("list", n)
+  Qm <- t(.s03mat(Wq))
+  Km <- t(.s03mat(Wk))
+  Vm <- t(.s03mat(Wv))
+  q <- vector("list", n)
+  kk <- vector("list", n)
+  vv <- vector("list", n)
   for (t in seq_len(n)) {
     xn <- rms(X[t, ], g1)
     q[[t]] <- rope(.s03matvec(Qm, xn), t - 1L, rope_base)
@@ -65,7 +73,8 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     vv[[t]] <- .s03matvec(Vm, xn)
   }
   dk <- length(q[[1]])
-  attn <- vector("list", n); ctx <- vector("list", n)
+  attn <- vector("list", n)
+  ctx <- vector("list", n)
   for (t in seq_len(n)) {
     logits <- numeric(t)
     for (m in seq_len(t)) {
@@ -85,11 +94,14 @@ Llamablock <- function(tokens, model = NULL, Wq = NULL, Wk = NULL, Wv = NULL,
     o <- .s03matvec(Om, ctx[[t]])
     for (j in seq_len(d)) h[t, j] <- X[t, j] + o[j]
   }
-  A <- t(.s03mat(W1)); B <- t(.s03mat(W3)); C <- t(.s03mat(W2))
+  A <- t(.s03mat(W1))
+  B <- t(.s03mat(W3))
+  C <- t(.s03mat(W2))
   out <- matrix(0, n, d)
   for (t in seq_len(n)) {
     hn <- rms(h[t, ], g2)
-    gt <- .s03matvec(A, hn); ut <- .s03matvec(B, hn)
+    gt <- .s03matvec(A, hn)
+    ut <- .s03matvec(B, hn)
     mid <- numeric(length(gt))
     for (i in seq_along(gt)) mid[i] <- .s03swish(gt[i]) * ut[i]
     o <- .s03matvec(C, mid)

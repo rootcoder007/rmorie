@@ -75,7 +75,8 @@ Loglksum <- function(dens) {
 #' Posterior-averaged Poisson residual (Lawson eq. 5.2)
 #' @noRd
 Postres <- function(y, e, theta_draws) {
-  y <- as.numeric(y); e <- as.numeric(e)
+  y <- as.numeric(y)
+  e <- as.numeric(e)
   Tm <- as.matrix(theta_draws)
   G <- nrow(Tm)
   if (G == 0L) stop("need at least one posterior draw")
@@ -88,7 +89,8 @@ Postres <- function(y, e, theta_draws) {
 #' Modulated point-process intensity (Lawson eq. 6.3)
 #' @noRd
 Intmod <- function(lam0, lam1) {
-  a <- as.numeric(lam0); b <- as.numeric(lam1)
+  a <- as.numeric(lam0)
+  b <- as.numeric(lam1)
   if (length(a) != length(b)) stop("lam0 and lam1 must have the same length")
   if (any(a < 0) || any(b < 0)) stop("intensities must be non-negative")
   lam <- a * b
@@ -98,7 +100,8 @@ Intmod <- function(lam0, lam1) {
 #' Case-control logistic likelihood (Lawson eq. 6.6)
 #' @noRd
 Cclogl <- function(eta, y) {
-  e <- as.numeric(eta); yy <- as.numeric(y)
+  e <- as.numeric(eta)
+  yy <- as.numeric(y)
   if (length(e) != length(yy)) stop("eta and y must have the same length")
   if (any(!(yy %in% c(0, 1)))) stop("y must be 0/1 (control/case)")
   list(loglik = sum(yy * e - log1p(exp(e))),
@@ -109,7 +112,9 @@ Cclogl <- function(eta, y) {
 #' Contextual multilevel logit predictor (Lawson eq. 6.8)
 #' @noRd
 Mlogitlp <- function(f, g, R) {
-  f <- as.numeric(f); g <- as.numeric(g); R <- as.numeric(R)
+  f <- as.numeric(f)
+  g <- as.numeric(g)
+  R <- as.numeric(R)
   if (!(length(f) == length(g) && length(g) == length(R)))
     stop("f, g and R must have the same length")
   eta <- f + g + R
@@ -119,7 +124,8 @@ Mlogitlp <- function(f, g, R) {
 #' Log-Gaussian Cox process intensity (Lawson eq. 6.18)
 #' @noRd
 Lgcpint <- function(lam0, beta, S) {
-  a <- as.numeric(lam0); s <- as.numeric(S)
+  a <- as.numeric(lam0)
+  s <- as.numeric(S)
   if (length(a) != length(s)) stop("lam0 and S must have the same length")
   lam <- a * exp(as.numeric(beta) + s)
   list(intensity = lam, total = sum(lam), beta = as.numeric(beta), n = length(lam))
@@ -128,7 +134,8 @@ Lgcpint <- function(lam0, beta, S) {
 #' Spatial factor Poisson log-risk (Lawson eq. 11.1)
 #' @noRd
 Facrisk <- function(alpha0, W, phi) {
-  W <- as.matrix(W); p <- as.numeric(phi)
+  W <- as.matrix(W)
+  p <- as.numeric(phi)
   if (ncol(W) != length(p)) stop("each row of W must have one weight per component")
   lr <- as.numeric(alpha0) + as.numeric(W %*% p)
   list(logrisk = lr, risk = exp(lr), n = length(lr), n_components = length(p))
@@ -137,7 +144,9 @@ Facrisk <- function(alpha0, W, phi) {
 #' Shared-factor multivariate disease mean (Lawson eq. 14.1)
 #' @noRd
 Mvfacmu <- function(e, lam, f) {
-  E <- as.matrix(e); lv <- as.numeric(lam); fv <- as.numeric(f)
+  E <- as.matrix(e)
+  lv <- as.numeric(lam)
+  fv <- as.numeric(f)
   if (nrow(E) != length(fv) || ncol(E) != length(lv))
     stop("e must be n areas by k diseases, matching f and lam")
   rho <- exp(outer(fv, lv))
@@ -147,8 +156,10 @@ Mvfacmu <- function(e, lam, f) {
 #' Multilevel Poisson log-rate (Lawson eq. 15.2)
 #' @noRd
 Mlpois <- function(beta0, beta1, age, race_effect, v, W) {
-  a <- as.numeric(age); r <- as.numeric(race_effect)
-  vv <- as.numeric(v); ww <- as.numeric(W)
+  a <- as.numeric(age)
+  r <- as.numeric(race_effect)
+  vv <- as.numeric(v)
+  ww <- as.numeric(W)
   if (!(length(a) == length(r) && length(r) == length(vv) && length(vv) == length(ww)))
     stop("age, race_effect, v and W must have the same length")
   lr <- as.numeric(beta0) + as.numeric(beta1) * a + r + vv + ww
@@ -158,7 +169,8 @@ Mlpois <- function(beta0, beta1, age, race_effect, v, W) {
 #' Measurement-error normal outcome model (Lawson eq. 16.1)
 #' @noRd
 Menorm <- function(beta0, beta1, x_true, tau) {
-  xt <- as.numeric(x_true); t <- as.numeric(tau)
+  xt <- as.numeric(x_true)
+  t <- as.numeric(tau)
   if (t <= 0) stop("tau is a precision and must be positive")
   mu <- as.numeric(beta0) + as.numeric(beta1) * xt
   list(mu = mu, var = 1 / t, sd = 1 / sqrt(t), n = length(mu))
@@ -167,7 +179,9 @@ Menorm <- function(beta0, beta1, x_true, tau) {
 #' Binary spatial regression with random effect (Lawson eq. 17.1)
 #' @noRd
 Logitre <- function(gamma0, gamma1, d, gamma2, x, R) {
-  d <- as.numeric(d); x <- as.numeric(x); R <- as.numeric(R)
+  d <- as.numeric(d)
+  x <- as.numeric(x)
+  R <- as.numeric(R)
   if (!(length(d) == length(x) && length(x) == length(R)))
     stop("d, x and R must have the same length")
   eta <- as.numeric(gamma0) + as.numeric(gamma1) * d + as.numeric(gamma2) * x + R
@@ -177,7 +191,8 @@ Logitre <- function(gamma0, gamma1, d, gamma2, x, R) {
 #' Epidemic log-autoregression (Lawson eq. 18.3)
 #' @noRd
 Epiar <- function(beta0, beta1, i_lag, b1) {
-  il <- as.numeric(i_lag); bb <- as.numeric(b1)
+  il <- as.numeric(i_lag)
+  bb <- as.numeric(b1)
   if (length(il) != length(bb)) stop("i_lag and b1 must have the same length")
   if (any(il <= 0)) stop("lagged infective counts must be positive to take logs")
   lf <- as.numeric(beta0) + as.numeric(beta1) * log(il) + bb
@@ -187,7 +202,9 @@ Epiar <- function(beta0, beta1, i_lag, b1) {
 #' Epidemic log-autoregression with neighbours (Lawson eq. 18.4)
 #' @noRd
 Epiarnb <- function(beta0, beta1, i_lag, nb_lag, b1) {
-  il <- as.numeric(i_lag); nb <- as.numeric(nb_lag); bb <- as.numeric(b1)
+  il <- as.numeric(i_lag)
+  nb <- as.numeric(nb_lag)
+  bb <- as.numeric(b1)
   if (!(length(il) == length(nb) && length(nb) == length(bb)))
     stop("i_lag, nb_lag and b1 must have the same length")
   tot <- il + nb
@@ -204,7 +221,9 @@ Epiarnb <- function(beta0, beta1, i_lag, nb_lag, b1) {
 #' Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)
 #' @noRd
 Cfinvpmf <- function(t, phi_re, phi_im, x) {
-  tv <- as.numeric(t); pr <- as.numeric(phi_re); pim <- as.numeric(phi_im)
+  tv <- as.numeric(t)
+  pr <- as.numeric(phi_re)
+  pim <- as.numeric(phi_im)
   if (!(length(tv) == length(pr) && length(pr) == length(pim)))
     stop("t, phi_re and phi_im must have the same length")
   if (length(tv) < 2L) stop("need at least two quadrature nodes")
@@ -221,7 +240,9 @@ Cfinvpmf <- function(t, phi_re, phi_im, x) {
 #' Independence of k events (Deshmukh eq. 5.1)
 #' @noRd
 Indevk <- function(p, joint) {
-  pv <- as.numeric(p); k <- length(pv); jv <- as.numeric(joint)
+  pv <- as.numeric(p)
+  k <- length(pv)
+  jv <- as.numeric(joint)
   if (length(jv) != 2^k)
     stop(sprintf("joint must hold one probability per subset mask, i.e. %d entries", 2^k))
   worst <- 0
@@ -240,7 +261,8 @@ Indrv2 <- function(joint) {
   J <- as.matrix(joint)
   tot <- sum(J)
   if (abs(tot - 1) > 1e-9) stop(sprintf("joint probabilities must sum to 1, got %s", tot))
-  rows <- rowSums(J); cols <- colSums(J)
+  rows <- rowSums(J)
+  cols <- colSums(J)
   worst <- max(abs(J - outer(rows, cols)))
   list(max_deviation = worst, independent = worst <= 1e-12,
        margin_row = rows, margin_col = cols)
@@ -249,7 +271,8 @@ Indrv2 <- function(joint) {
 #' Limit-superior event, infinitely often (Deshmukh eq. 6.1)
 #' @noRd
 Limsupio <- function(dev, k) {
-  D <- as.matrix(dev); kk <- as.integer(k)
+  D <- as.matrix(dev)
+  kk <- as.integer(k)
   if (kk < 1L) stop("k must be a positive integer")
   thr <- 1 / kk
   flags <- as.integer(D[, ncol(D)] >= thr)
@@ -260,7 +283,8 @@ Limsupio <- function(dev, k) {
 #' Degenerate limiting distribution of the sample mean (Deshmukh eq. 10.3)
 #' @noRd
 Degencdf <- function(x, mu) {
-  xv <- as.numeric(x); m <- as.numeric(mu)
+  xv <- as.numeric(x)
+  m <- as.numeric(mu)
   out <- ifelse(xv < m, 0, ifelse(xv > m, 1, NaN))
   list(cdf = out, mu = m, x = xv)
 }
@@ -273,7 +297,8 @@ Degencdf <- function(x, mu) {
 #' Graph Laplacian pseudoinverse (Klein & Randic 1993)
 #' @noRd
 Lappinv <- function(A, tol = 1e-9) {
-  A <- as.matrix(A); n <- nrow(A)
+  A <- as.matrix(A)
+  n <- nrow(A)
   if (ncol(A) != n) stop("A must be square")
   if (max(abs(A - t(A))) > 1e-12) stop("A must be symmetric")
   L <- diag(rowSums(A), n) - A
@@ -290,7 +315,9 @@ Lappinv <- function(A, tol = 1e-9) {
 #' Resistance distance matrix (Klein & Randic 1993)
 #' @noRd
 Resdist <- function(A, tol = 1e-9) {
-  lp <- Lappinv(A, tol); Lp <- lp$Lplus; n <- lp$n
+  lp <- Lappinv(A, tol)
+  Lp <- lp$Lplus
+  n <- lp$n
   d <- diag(Lp)
   R <- outer(d, d, "+") - 2 * Lp
   list(R = R, Lplus = Lp, n = n, rank = lp$rank)
@@ -307,7 +334,8 @@ Commdist <- function(A, tol = 1e-9) {
 #' Kirchhoff index (Klein & Randic 1993)
 #' @noRd
 Kirchidx <- function(A, tol = 1e-9) {
-  rd <- Resdist(A, tol); n <- rd$n
+  rd <- Resdist(A, tol)
+  n <- rd$n
   lp <- Lappinv(A, tol)
   nz <- abs(lp$eigenvalues) > tol
   list(Kf = 0.5 * sum(rd$R), Kf_spectral = n * sum(1 / lp$eigenvalues[nz]),
@@ -322,9 +350,12 @@ Kirchidx <- function(A, tol = 1e-9) {
 #' Gromov-Wasserstein discrepancy (Memoli 2011)
 #' @noRd
 Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
-  X <- as.matrix(Cx); Y <- as.matrix(Cy)
-  av <- as.numeric(a); bv <- as.numeric(b)
-  n <- length(av); m <- length(bv)
+  X <- as.matrix(Cx)
+  Y <- as.matrix(Cy)
+  av <- as.numeric(a)
+  bv <- as.numeric(b)
+  n <- length(av)
+  m <- length(bv)
   if (nrow(X) != n || nrow(Y) != m)
     stop("Cx must be n x n and Cy must be m x m, matching a and b")
   if (abs(sum(av) - 1) > 1e-9 || abs(sum(bv) - 1) > 1e-9)
@@ -357,7 +388,8 @@ Gwdist <- function(Cx, Cy, a, b, n_iter = 50, epsilon = 0.05, n_sinkhorn = 50) {
   for (it in seq_len(as.integer(n_iter))) {
     G <- grad(Tm)
     K <- exp(-G / epsilon) * Tm
-    u <- rep(1, n); v <- rep(1, m)
+    u <- rep(1, n)
+    v <- rep(1, m)
     for (s in seq_len(as.integer(n_sinkhorn))) {
       den <- as.numeric(K %*% v)
       u <- ifelse(den > 0, av / den, 0)
@@ -413,7 +445,9 @@ morie_unclr_alr_inv <- function(z, total) {
 #' @return A list with \code{X}, \code{n}, \code{n_parts}, \code{n_iter}, \code{n_censored}.
 #' @export
 morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
-  Xm <- as.matrix(X); n <- nrow(Xm); d <- ncol(Xm)
+  Xm <- as.matrix(X)
+  n <- nrow(Xm)
+  d <- ncol(Xm)
   dlv <- as.numeric(dl)
   if (length(dlv) != d) stop("dl must give one detection limit per part")
   totals <- rowSums(Xm)
@@ -439,7 +473,8 @@ morie_unclr_lr_impute <- function(X, dl, n_iter, draw = NULL) {
           cm <- mu[j] + sum(w * (Z[i, obs] - mu[obs]))
           cv <- S[j, j] - sum(w * sjo)
         } else {
-          cm <- mu[j]; cv <- S[j, j]
+          cm <- mu[j]
+          cv <- S[j, j]
         }
         sdv <- sqrt(max(cv, 1e-300))
         alpha <- (psi - cm) / sdv
@@ -478,7 +513,9 @@ Lrda <- function(X, dl, draw, n_iter = 20) {
 #' Delete-d jackknife variance (Shao & Wu 1989)
 #' @noRd
 Jackd <- function(theta, n, d) {
-  tv <- as.numeric(theta); n <- as.integer(n); d <- as.integer(d)
+  tv <- as.numeric(theta)
+  n <- as.integer(n)
+  d <- as.integer(d)
   if (d < 1L || d >= n) stop("d must satisfy 1 <= d < n")
   nsub <- choose(n, d)
   if (length(tv) != nsub)
@@ -497,7 +534,9 @@ Jackd <- function(theta, n, d) {
 #' Moments of a linear rank statistic (Gibbons & Chakraborti Thm 7.3.1-7.3.2)
 #' @noRd
 Lrankmom <- function(a, m) {
-  av <- as.numeric(a); N <- length(av); m <- as.integer(m)
+  av <- as.numeric(a)
+  N <- length(av)
+  m <- as.integer(m)
   if (!(m > 0L && m < N)) stop("m must satisfy 0 < m < N")
   n <- N - m
   abar <- mean(av)
@@ -530,8 +569,10 @@ Wtrunc <- function(w, q = 0.99) {
 #' Unified mixed-model per-SNP association test (Yu et al. 2006)
 #' @noRd
 Gwasmlm <- function(y, X, snp, Vinv) {
-  yv <- as.numeric(y); g <- as.numeric(snp)
-  Xm <- as.matrix(X); Vi <- as.matrix(Vinv)
+  yv <- as.numeric(y)
+  g <- as.numeric(snp)
+  Xm <- as.matrix(X)
+  Vi <- as.matrix(Vinv)
   n <- length(yv)
   if (length(g) != n || nrow(Xm) != n || nrow(Vi) != n)
     stop("y, X, snp and Vinv must all have n rows")
@@ -559,7 +600,9 @@ Gwasmlm <- function(y, X, snp, Vinv) {
 #' Multiply-imputed Wald test (Li et al. 1991)
 #' @noRd
 Mitest <- function(theta, U) {
-  Th <- as.matrix(theta); m <- nrow(Th); k <- ncol(Th)
+  Th <- as.matrix(theta)
+  m <- nrow(Th)
+  k <- ncol(Th)
   if (m < 2L) stop("need at least 2 imputations")
   qbar <- colMeans(Th)
   Ubar <- Reduce(`+`, lapply(U, as.matrix)) / m
@@ -582,7 +625,9 @@ Mitest <- function(theta, U) {
 #' Continuous-shrinkage polygenic effects (Ge et al. 2019)
 #' @noRd
 Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
-  bh <- as.numeric(beta_hat); Dm <- as.matrix(D); ps <- as.numeric(psi)
+  bh <- as.numeric(beta_hat)
+  Dm <- as.matrix(D)
+  ps <- as.numeric(psi)
   p <- length(bh)
   if (nrow(Dm) != p || length(ps) != p)
     stop("beta_hat, D and psi must be conformable")
@@ -603,24 +648,31 @@ Csshrink <- function(beta_hat, D, psi, n, sigma2 = 1) {
 #' Piecewise log-linear shedding curve (standard)
 #' @noRd
 Shedcurve <- function(days, load, t_peak, t_plateau) {
-  d <- as.numeric(days); v <- as.numeric(load)
+  d <- as.numeric(days)
+  v <- as.numeric(load)
   if (length(d) != length(v)) stop("days and load must have the same length")
   if (any(v <= 0)) stop("viral load must be positive to take log10")
   y <- log10(v)
-  tp <- as.numeric(t_peak); tq <- as.numeric(t_plateau)
+  tp <- as.numeric(t_peak)
+  tq <- as.numeric(t_plateau)
   if (!(tp < tq)) stop("t_peak must be strictly before t_plateau")
   slope <- function(idx) {
     if (length(idx) < 2L)
       return(c(NaN, if (length(idx) > 0L) mean(y[idx]) else NaN))
-    xs <- d[idx]; ys <- y[idx]
-    mx <- mean(xs); my <- mean(ys)
+    xs <- d[idx]
+    ys <- y[idx]
+    mx <- mean(xs)
+    my <- mean(ys)
     sxx <- sum((xs - mx)^2)
     if (sxx == 0) return(c(NaN, my))
     b <- sum((xs - mx) * (ys - my)) / sxx
     c(b, my - b * mx)
   }
-  rise <- which(d < tp); plat <- which(d >= tp & d <= tq); dec <- which(d > tq)
-  sr <- slope(rise); sd_ <- slope(dec)
+  rise <- which(d < tp)
+  plat <- which(d >= tp & d <= tq)
+  dec <- which(d > tq)
+  sr <- slope(rise)
+  sd_ <- slope(dec)
   list(rise_slope = sr[1], rise_intercept = sr[2],
        plateau_level = if (length(plat)) mean(y[plat]) else NaN,
        decay_slope = sd_[1], decay_intercept = sd_[2],
@@ -637,16 +689,22 @@ Shedcurve <- function(days, load, t_peak, t_plateau) {
 #' Cross-validated TMLE of the ATE (Zheng & van der Laan 2011)
 #' @noRd
 Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
-  yv <- as.numeric(y); av <- as.numeric(a)
-  g0 <- as.numeric(q0); g1 <- as.numeric(q1); gv <- as.numeric(g)
-  fv <- as.integer(fold); n <- length(yv)
+  yv <- as.numeric(y)
+  av <- as.numeric(a)
+  g0 <- as.numeric(q0)
+  g1 <- as.numeric(q1)
+  gv <- as.numeric(g)
+  fv <- as.integer(fold)
+  n <- length(yv)
   if (!all(c(length(av), length(g0), length(g1), length(gv), length(fv)) == n))
     stop("all inputs must have the same length")
   if (any(yv < 0 | yv > 1)) stop("y must be bounded in [0, 1]")
   if (any(gv <= 0 | gv >= 1)) stop("propensities must lie strictly inside (0, 1)")
-  lg <- function(p) { p <- pmin(pmax(p, 1e-12), 1 - 1e-12); log(p / (1 - p)) }
+  lg <- function(p) { p <- pmin(pmax(p, 1e-12), 1 - 1e-12)
+  log(p / (1 - p)) }
   folds <- sort(unique(fv))
-  psi_fold <- numeric(length(folds)); eps_fold <- numeric(length(folds))
+  psi_fold <- numeric(length(folds))
+  eps_fold <- numeric(length(folds))
   for (q in seq_along(folds)) {
     idx <- which(fv == folds[q])
     H <- av[idx] / gv[idx] - (1 - av[idx]) / (1 - gv[idx])
@@ -676,9 +734,11 @@ Cvtmle <- function(y, a, q0, q1, g, fold, n_newton = 50) {
 #' Natural direct effect (Zheng & van der Laan 2012)
 #' @noRd
 Ndeff <- function(y10, y00) {
-  a <- as.numeric(y10); b <- as.numeric(y00)
+  a <- as.numeric(y10)
+  b <- as.numeric(y00)
   if (length(a) != length(b)) stop("y10 and y00 must have the same length")
-  d <- a - b; n <- length(d)
+  d <- a - b
+  n <- length(d)
   list(estimate = mean(d), se = if (n > 1L) sqrt(stats::var(d) / n) else NaN,
        mean_y10 = mean(a), mean_y00 = mean(b), n = n)
 }
@@ -686,9 +746,11 @@ Ndeff <- function(y10, y00) {
 #' Natural indirect effect (Zheng & van der Laan 2012)
 #' @noRd
 Nieff <- function(y11, y10) {
-  a <- as.numeric(y11); b <- as.numeric(y10)
+  a <- as.numeric(y11)
+  b <- as.numeric(y10)
   if (length(a) != length(b)) stop("y11 and y10 must have the same length")
-  d <- a - b; n <- length(d)
+  d <- a - b
+  n <- length(d)
   list(estimate = mean(d), se = if (n > 1L) sqrt(stats::var(d) / n) else NaN,
        mean_y11 = mean(a), mean_y10 = mean(b), n = n)
 }
@@ -700,7 +762,9 @@ Nieff <- function(y11, y10) {
 #' X-learner heterogeneous treatment effect (Kunzel et al. 2019)
 #' @noRd
 Xlearn <- function(tau1, tau0, g) {
-  t1 <- as.numeric(tau1); t0 <- as.numeric(tau0); gv <- as.numeric(g)
+  t1 <- as.numeric(tau1)
+  t0 <- as.numeric(tau0)
+  gv <- as.numeric(g)
   if (!(length(t1) == length(t0) && length(t0) == length(gv)))
     stop("tau1, tau0 and g must have the same length")
   if (any(gv < 0 | gv > 1)) stop("propensities must lie in [0, 1]")
@@ -719,15 +783,18 @@ Xlearn <- function(tau1, tau0, g) {
 #' Rotary position embedding (Su et al. 2021, RoFormer)
 #' @noRd
 Rope <- function(q, m, theta) {
-  qv <- as.numeric(q); th <- as.numeric(theta)
+  qv <- as.numeric(q)
+  th <- as.numeric(theta)
   if (length(qv) %% 2L != 0L) stop("q must have even length (rotations act on pairs)")
   half <- length(qv) %/% 2L
   if (length(th) != half) stop("theta must give one angle per coordinate pair")
   mm <- as.numeric(m)
   out <- numeric(length(qv))
   for (i in seq_len(half)) {
-    cc <- cos(mm * th[i]); ss <- sin(mm * th[i])
-    a <- qv[2 * i - 1]; b <- qv[2 * i]
+    cc <- cos(mm * th[i])
+    ss <- sin(mm * th[i])
+    a <- qv[2 * i - 1]
+    b <- qv[2 * i]
     out[2 * i - 1] <- cc * a - ss * b
     out[2 * i] <- ss * a + cc * b
   }
@@ -737,17 +804,21 @@ Rope <- function(q, m, theta) {
 #' Group normalisation (Wu & He 2018)
 #' @noRd
 Grpnorm <- function(x, n_groups, eps = 1e-5) {
-  xv <- as.numeric(x); G <- as.integer(n_groups)
+  xv <- as.numeric(x)
+  G <- as.integer(n_groups)
   if (G < 1L || length(xv) %% G != 0L)
     stop("length of x must be divisible by n_groups")
   per <- length(xv) %/% G
-  out <- numeric(length(xv)); mus <- numeric(G); sds <- numeric(G)
+  out <- numeric(length(xv))
+  mus <- numeric(G)
+  sds <- numeric(G)
   for (g in seq_len(G)) {
     ix <- ((g - 1L) * per + 1L):(g * per)
     seg <- xv[ix]
     mu <- mean(seg)
     sdv <- sqrt(sum((seg - mu)^2) / per + as.numeric(eps))
-    mus[g] <- mu; sds[g] <- sdv
+    mus[g] <- mu
+    sds[g] <- sdv
     out[ix] <- (seg - mu) / sdv
   }
   list(x = out, mean = mus, sd = sds, n_groups = G, group_size = per)
@@ -765,7 +836,9 @@ Sumpl <- function(H) {
 #' Graph isomorphism network aggregation (Xu et al. 2019)
 #' @noRd
 Ginagg <- function(A, H, eps = 0) {
-  Am <- as.matrix(A); Hm <- as.matrix(H); n <- nrow(Hm)
+  Am <- as.matrix(A)
+  Hm <- as.matrix(H)
+  n <- nrow(Hm)
   if (nrow(Am) != n || ncol(Am) != n) stop("A must be n x n matching H")
   e <- as.numeric(eps)
   list(H = (1 + e) * Hm + Am %*% Hm, eps = e, n_nodes = n, dim = ncol(Hm))
@@ -818,11 +891,14 @@ Lgcnprop <- function(A, E, K, alpha = NULL) {
 #' LinUCB arm scores (Li et al. 2010)
 #' @noRd
 Linucb <- function(x, theta, Ainv, alpha = 1) {
-  xv <- as.numeric(x); Th <- as.matrix(theta); d <- length(xv)
+  xv <- as.numeric(x)
+  Th <- as.matrix(theta)
+  d <- length(xv)
   if (ncol(Th) != d) stop("each theta must match the context dimension")
   if (length(Ainv) != nrow(Th)) stop("need one inverse design matrix per arm")
   na <- nrow(Th)
-  mean_ <- numeric(na); bonus <- numeric(na)
+  mean_ <- numeric(na)
+  bonus <- numeric(na)
   for (aa in seq_len(na)) {
     Ai <- as.matrix(Ainv[[aa]])
     if (nrow(Ai) != d || ncol(Ai) != d) stop("each Ainv must be d x d")
@@ -839,11 +915,14 @@ Linucb <- function(x, theta, Ainv, alpha = 1) {
 #' Structured state-space convolution kernel (Gu, Goel & Re 2022, S4)
 #' @noRd
 Ssmk <- function(A, B, C, L) {
-  Am <- as.matrix(A); Bv <- as.numeric(B); Cv <- as.numeric(C)
+  Am <- as.matrix(A)
+  Bv <- as.numeric(B)
+  Cv <- as.numeric(C)
   n <- nrow(Am)
   if (length(Bv) != n || length(Cv) != n)
     stop("B and C must match the state dimension of A")
-  K <- numeric(as.integer(L)); v <- Bv
+  K <- numeric(as.integer(L))
+  v <- Bv
   for (l in seq_len(as.integer(L))) {
     K[l] <- sum(Cv * v)
     v <- as.numeric(Am %*% v)
@@ -854,7 +933,8 @@ Ssmk <- function(A, B, C, L) {
 #' Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)
 #' @noRd
 Ssmconv <- function(K, x) {
-  Kv <- as.numeric(K); xv <- as.numeric(x)
+  Kv <- as.numeric(K)
+  xv <- as.numeric(x)
   vapply(seq_along(xv), function(t) {
     nl <- min(t, length(Kv))
     sum(Kv[seq_len(nl)] * xv[t - seq_len(nl) + 1L])
@@ -864,7 +944,8 @@ Ssmconv <- function(K, x) {
 #' Dominant periods from the amplitude spectrum (Wu et al. 2023, TimesNet)
 #' @noRd
 Fftperiod <- function(x, k = 1) {
-  xv <- as.numeric(x); n <- length(xv)
+  xv <- as.numeric(x)
+  n <- length(xv)
   if (n < 4L) stop("need at least 4 observations")
   amps <- morie_unclr_dft_amp(xv)
   half <- n %/% 2L
@@ -879,7 +960,9 @@ Fftperiod <- function(x, k = 1) {
 #' Series decomposition and autocorrelation (Wu et al. 2021, Autoformer)
 #' @noRd
 Serdecomp <- function(x, kernel) {
-  xv <- as.numeric(x); n <- length(xv); kk <- as.integer(kernel)
+  xv <- as.numeric(x)
+  n <- length(xv)
+  kk <- as.integer(kernel)
   if (kk < 1L || kk %% 2L == 0L) stop("kernel must be a positive odd integer")
   if (kk > n) stop("kernel must not exceed the series length")
   h <- kk %/% 2L

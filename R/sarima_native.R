@@ -69,7 +69,9 @@ series_g <- function(log = FALSE) {
 #' @return The value of \code{w}, as built in the body.
 #' @export
 difference <- function(y, d = 0, D = 0, s = 1) {
-  d <- as.integer(d); D <- as.integer(D); s <- as.integer(s)
+  d <- as.integer(d)
+  D <- as.integer(D)
+  s <- as.integer(s)
   if (d < 0 || D < 0) stop("sarima: d and D must be non-negative")
   if (D && s < 2) stop(sprintf("sarima: seasonal differencing needs s >= 2, got %d", s))
   w <- as.numeric(y)
@@ -177,7 +179,8 @@ sample_acf <- function(x, lags) {
 #' @return A list with \code{gamma}, \code{rho}, \code{rho_1}, \code{rho_12}, \code{nonzero_lags}.
 #' @export
 airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
-  th <- as.numeric(theta); TH <- as.numeric(Theta)
+  th <- as.numeric(theta)
+  TH <- as.numeric(Theta)
   g0 <- (1 + th * th) * (1 + TH * TH) * sigma2
   g1 <- -th * (1 + TH * TH) * sigma2
   g11 <- th * TH * sigma2
@@ -251,7 +254,8 @@ preliminary_estimates <- function(w, s = 12) {
 #' @return The value of \code{ssq}, as built in the body.
 #' @export
 css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
-  ar <- as.numeric(ar); ma <- as.numeric(ma)
+  ar <- as.numeric(ar)
+  ma <- as.numeric(ma)
   n <- length(w)
   if (n == 0) stop("sarima: no observations")
   a <- rep(0, n)
@@ -278,7 +282,8 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @return A list with \code{T}, \code{R}, \code{r}.
 #' @export
 .sarima_state_space <- function(ar, ma) {
-  p <- length(ar); q <- length(ma)
+  p <- length(ar)
+  q <- length(ma)
   r <- max(p, q + 1)
   T <- matrix(0, r, r)
   if (r > 1) for (i in 1:(r - 1)) T[i, i + 1] <- 1
@@ -327,11 +332,14 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 #' @return A list with \code{loglik}, \code{sigma2}, \code{n}, \code{exact_ssq}, \code{sum_log_f}.
 #' @export
 loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
-  ar <- as.numeric(ar); ma <- as.numeric(ma)
+  ar <- as.numeric(ar)
+  ma <- as.numeric(ma)
   n <- length(w)
   if (n == 0) stop("sarima: no observations")
   ss_obj <- .sarima_state_space(ar, ma)
-  T <- ss_obj$T; R <- ss_obj$R; r <- ss_obj$r
+  T <- ss_obj$T
+  R <- ss_obj$R
+  r <- ss_obj$r
   P <- .sarima_initial_covariance(T, R, r)
   a <- rep(0, r)
   ssq <- 0
@@ -406,17 +414,26 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
     s <- 0.1
     fx <- fn(x0)
     for (it in seq_len(maxit)) {
-      xl <- x0 - s; xu <- x0 + s
-      fl <- fn(xl); fu <- fn(xu)
+      xl <- x0 - s
+      xu <- x0 + s
+      fl <- fn(xl)
+      fu <- fn(xu)
       improved <- FALSE
-      if (fl < fx - 1e-12) { x0 <- xl; fx <- fl; improved <- TRUE }
-      else if (fu < fx - 1e-12) { x0 <- xu; fx <- fu; improved <- TRUE }
+      if (fl < fx - 1e-12) { x0 <- xl
+      fx <- fl
+      improved <- TRUE }
+      else if (fu < fx - 1e-12) { x0 <- xu
+      fx <- fu
+      improved <- TRUE }
       if (!improved) s <- s * 0.5
       if (s < 1e-10) break
     }
     return(list(x = x0, fun = fx, success = TRUE))
   }
-  alpha <- 1; gamma <- 2; rho <- 0.5; sigma <- 0.5
+  alpha <- 1
+  gamma <- 2
+  rho <- 0.5
+  sigma <- 0.5
   simplex <- matrix(0, n + 1L, n)
   simplex[1, ] <- x0
   for (i in 2:(n + 1L)) {
@@ -436,14 +453,18 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
     if (fxr < fv[1L]) {
       xe <- xbar + gamma * (xr - xbar)
       fxe <- fn(xe)
-      if (fxe < fxr) { simplex[n + 1L, ] <- xe; fv[n + 1L] <- fxe }
-      else { simplex[n + 1L, ] <- xr; fv[n + 1L] <- fxr }
+      if (fxe < fxr) { simplex[n + 1L, ] <- xe
+      fv[n + 1L] <- fxe }
+      else { simplex[n + 1L, ] <- xr
+      fv[n + 1L] <- fxr }
     } else if (fxr < fv[n]) {
-      simplex[n + 1L, ] <- xr; fv[n + 1L] <- fxr
+      simplex[n + 1L, ] <- xr
+      fv[n + 1L] <- fxr
     } else {
       xc <- xbar + sigma * (simplex[n + 1L, ] - xbar)
       fxc <- fn(xc)
-      if (fxc < fv[n + 1L]) { simplex[n + 1L, ] <- xc; fv[n + 1L] <- fxc }
+      if (fxc < fv[n + 1L]) { simplex[n + 1L, ] <- xc
+      fv[n + 1L] <- fxc }
       else {
         for (i in 2:(n + 1L)) {
           simplex[i, ] <- simplex[1L, ] + 0.5 * (simplex[i, ] - simplex[1L, ])
@@ -475,8 +496,12 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   if (!(method %in% .SARIMA_METHODS))
     stop(sprintf("sarima: method must be one of %s, got %s",
                  paste(.SARIMA_METHODS, collapse = ", "), method))
-  p <- as.integer(order[1]); d <- as.integer(order[2]); q <- as.integer(order[3])
-  P <- as.integer(seasonal_order[1]); D <- as.integer(seasonal_order[2]); Q <- as.integer(seasonal_order[3])
+  p <- as.integer(order[1])
+  d <- as.integer(order[2])
+  q <- as.integer(order[3])
+  P <- as.integer(seasonal_order[1])
+  D <- as.integer(seasonal_order[2])
+  Q <- as.integer(seasonal_order[3])
   s <- as.integer(s)
   if (min(p, d, q, P, D, Q) < 0) stop("sarima: orders must be non-negative")
   w <- difference(y, d, D, s)
@@ -491,9 +516,11 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
       stop(sprintf("sarima: the moment route is defined for the (0,d,1)x(0,D,1) airline model only, got orders (%d,%d)x(%d,%d)",
                    p, q, P, Q))
     pre <- preliminary_estimates(w, s)
-    theta <- c(pre$theta); Theta <- c(pre$Theta)
+    theta <- c(pre$theta)
+    Theta <- c(pre$Theta)
     em <- expand_polynomials(numeric(0), numeric(0), theta, Theta, s)
-    ar <- em$ar; ma <- em$ma
+    ar <- em$ar
+    ma <- em$ma
     ll <- loglik(w, ar, ma)
     cs <- css(w, ar, ma, full = TRUE)
     return(.sarima_package(y, w, numeric(0), theta, numeric(0), Theta, s, order, seasonal_order, ll, cs, method, NULL))
@@ -501,9 +528,12 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 
   .unpack <- function(v) {
     i <- 1
-    phi <- v[i:(i + p - 1)]; i <- i + p
-    th <- v[i:(i + q - 1)]; i <- i + q
-    Ph <- v[i:(i + P - 1)]; i <- i + P
+    phi <- v[i:(i + p - 1)]
+    i <- i + p
+    th <- v[i:(i + q - 1)]
+    i <- i + q
+    Ph <- v[i:(i + P - 1)]
+    i <- i + P
     Th <- v[i:(i + Q - 1)]
     list(phi = phi, th = th, Ph = Ph, Th = Th)
   }
@@ -512,7 +542,8 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
     up <- .unpack(v)
     if (!.sarima_roots_ok(up$phi) || !.sarima_roots_ok(up$Ph)) return(1e10)
     em <- expand_polynomials(up$phi, up$Ph, up$th, up$Th, s)
-    ar <- em$ar; ma <- em$ma
+    ar <- em$ar
+    ma <- em$ma
     if (!.sarima_roots_ok(ma)) return(1e10)
     tryCatch({
       if (method == "css") return(css(w, ar, ma))
@@ -540,7 +571,8 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
     cand <- as.numeric(r2$x)
     val <- .objective(cand)
     if (val < best - 1e-11) {
-      best <- val; xhat <- cand
+      best <- val
+      xhat <- cand
     } else {
       xhat <- if (val < best) cand else xhat
       break
@@ -549,7 +581,8 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
   }
   up <- .unpack(xhat)
   em <- expand_polynomials(up$phi, up$Ph, up$th, up$Th, s)
-  ar <- em$ar; ma <- em$ma
+  ar <- em$ar
+  ma <- em$ma
   ll <- loglik(w, ar, ma)
   cs <- css(w, ar, ma, full = TRUE)
   .sarima_package(y, w, up$phi, up$th, up$Ph, up$Th, s, order, seasonal_order, ll, cs, method, res)
@@ -649,9 +682,11 @@ forecast <- function(fitted, h = 12) {
   h <- as.integer(h)
   if (h < 1) stop("sarima: h must be at least 1")
   y <- as.numeric(fitted$y)
-  d <- fitted$order[2]; D <- fitted$seasonal_order[2]
+  d <- fitted$order[2]
+  D <- fitted$seasonal_order[2]
   s <- fitted$s
-  ar <- fitted$ar; ma <- fitted$ma
+  ar <- fitted$ar
+  ma <- fitted$ma
   dpoly <- .sarima_diff_poly(1, 1)
   Dpoly <- .sarima_diff_poly(D, s)
   lhs <- .sarima_poly_mult(c(1, -ar), .sarima_poly_mult(dpoly, Dpoly))
@@ -692,7 +727,9 @@ forecast <- function(fitted, h = 12) {
 #' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta}, \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
 #' @export
 large_sample_se <- function(theta, Theta, n) {
-  th <- as.numeric(theta); TH <- as.numeric(Theta); n <- as.integer(n)
+  th <- as.numeric(theta)
+  TH <- as.numeric(Theta)
+  n <- as.integer(n)
   if (n < 1) stop("sarima: n must be positive")
   v_th <- (1 - th * th) / n
   v_TH <- (1 - TH * TH) / n

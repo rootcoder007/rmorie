@@ -14,12 +14,18 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Alrinv(V)
 Alrinv <- function(y, ref = NULL, total = 1) {
-  y <- .t1_vec(y); D <- length(y) + 1L
+  y <- .t1_vec(y)
+  D <- length(y) + 1L
   if (length(y) == 0L) stop("y must be non-empty")
   k <- if (is.null(ref)) D else as.integer(ref)
   if (k < 1L || k > D) stop("ref must be a 1-based part index")
-  full <- numeric(D); full[setdiff(seq_len(D), k)] <- y
-  e <- exp(full - max(full)); s <- sum(e); t <- as.numeric(total)
-  .t1_result(composition = t * e / s, ref = k, total = t, D = D,
-             method = "Inverse additive log-ratio transform")
+  full <- numeric(D)
+  full[setdiff(seq_len(D), k)] <- y
+  e <- exp(full - max(full))
+  s <- sum(e)
+  t <- as.numeric(total)
+  .t1_result(
+    composition = t * e / s, ref = k, total = t, D = D,
+    method = "Inverse additive log-ratio transform"
+  )
 }

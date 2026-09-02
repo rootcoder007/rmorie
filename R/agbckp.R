@@ -30,16 +30,20 @@ Mctsbackup <- function(leaf, value, path, N = NULL, W = NULL, rewards = NULL,
   r <- if (!is.null(rewards)) .s03vec(rewards) else numeric(L)
   g <- numeric(L)
   acc <- as.numeric(value)
-  if (L > 0L) for (i in seq(L, 1L)) {
-    if (alternate) acc <- -acc
-    acc <- r[i] + as.numeric(gamma) * acc
-    g[i] <- acc
-    n[i] <- n[i] + 1
-    w[i] <- w[i] + acc
+  if (L > 0L) {
+    for (i in seq(L, 1L)) {
+      if (alternate) acc <- -acc
+      acc <- r[i] + as.numeric(gamma) * acc
+      g[i] <- acc
+      n[i] <- n[i] + 1
+      w[i] <- w[i] + acc
+    }
   }
   q <- numeric(L)
   if (L > 0L) for (i in seq_len(L)) q[i] <- if (n[i] > 0) w[i] / n[i] else 0
-  list(estimate = if (L > 0L) q[1] else NaN, n = n, w = w, q = q, g = g,
-       leaf = leaf,
-       method = "AlphaZero MCTS backup along the simulation path")
+  list(
+    estimate = if (L > 0L) q[1] else NaN, n = n, w = w, q = q, g = g,
+    leaf = leaf,
+    method = "AlphaZero MCTS backup along the simulation path"
+  )
 }

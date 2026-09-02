@@ -43,18 +43,22 @@ Meteor <- function(candidate, reference, lowercase = TRUE) {
       as.character(x)
     }
   }
-  cand <- tok(candidate); ref <- tok(reference)
-  if (lowercase) { cand <- tolower(cand); ref <- tolower(ref) }
+  cand <- tok(candidate)
+  ref <- tok(reference)
+  if (lowercase) { cand <- tolower(cand)
+  ref <- tolower(ref) }
   if (length(cand) == 0L || length(ref) == 0L) {
     stop("candidate and reference must be nonempty", call. = FALSE)
   }
   used <- rep(FALSE, length(ref))
-  ci <- integer(0); rj <- integer(0)
+  ci <- integer(0)
+  rj <- integer(0)
   for (i in seq_along(cand)) {
     for (j in seq_along(ref)) {
       if (!used[j] && ref[j] == cand[i]) {
         used[j] <- TRUE
-        ci <- c(ci, i); rj <- c(rj, j)
+        ci <- c(ci, i)
+        rj <- c(rj, j)
         break
       }
     }

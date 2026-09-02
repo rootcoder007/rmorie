@@ -17,11 +17,13 @@ Olsnormeq <- function(X, y, add_intercept = TRUE) {
   Xm <- .t1_mat(X)
   if (isTRUE(add_intercept)) Xm <- .t1_cbind1(Xm)
   y <- .t1_vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   if (n <= p) stop("need more records than columns for the residual variance")
   fit <- .t1_lstsq(Xm, y)
-  rss <- sum(fit$resid^2); s2 <- rss / (n - p)
+  rss <- sum(fit$resid^2)
+  s2 <- rss / (n - p)
   .t1_result(beta = fit$beta, fitted = fit$fitted, resid = fit$resid,
              rss = rss, sigma2 = s2,
              se = sqrt(s2 * diag(fit$xtxinv)),

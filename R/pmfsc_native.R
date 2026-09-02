@@ -237,10 +237,13 @@ morie_pmfsc_score <- function(pairs, potential,
                               r_max = .PMFSC_DEFAULT_CUTOFF,
                               n_bins = 24, missing = 0) {
   terms <- numeric(0)
-  used <- 0L; beyond <- 0L; unknown <- 0L
+  used <- 0L
+  beyond <- 0L
+  unknown <- 0L
   for (pr in pairs) {
     k <- morie_pmfsc_bin(pr[[3]], r_max, n_bins)
-    if (k < 0L) { beyond <- beyond + 1L; next }
+    if (k < 0L) { beyond <- beyond + 1L
+    next }
     key <- .pmfsc_key(as.character(pr[[1]]), as.character(pr[[2]]))
     if (is.null(potential[[key]])) {
       unknown <- unknown + 1L

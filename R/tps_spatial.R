@@ -229,7 +229,9 @@ NULL
 #' @noRd
 .tps_moran_variance <- function(W, n, z = NULL, randomisation = TRUE) {
   k <- .tps_moran_wconst(W)
-  S0 <- k$S0; S1 <- k$S1; S2 <- k$S2
+  S0 <- k$S0
+  S1 <- k$S1
+  S2 <- k$S2
   S02 <- S0^2 + 1e-300
   EI2 <- 1 / (n - 1)^2
   if (!randomisation) {

@@ -67,6 +67,7 @@
 #'   detected system libraries).
 #'
 #' @examples
+#' \dontrun{
 #' # \dontrun (not \donttest) deliberately: this installs packages into the
 #' # user library -- never proper to execute under R CMD check or pkgdown,
 #' # which runs \donttest examples (a run of this one compiled rstan from
@@ -82,6 +83,7 @@
 #'   morie_install_extras(which = c("hawkes", "sf", "spdep"))
 #' }
 #'
+#' }
 #' @export
 morie_install_extras <- function(which = "missing",
                                  ask = interactive(),

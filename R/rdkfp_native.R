@@ -42,7 +42,8 @@
   touch <- vector("list", a)
   for (k in seq_len(a)) touch[[k]] <- integer(0)
   for (k in seq_len(nb)) {
-    ii <- bd$i[k] + 1L; jj <- bd$j[k] + 1L
+    ii <- bd$i[k] + 1L
+    jj <- bd$j[k] + 1L
     touch[[ii]] <- c(touch[[ii]], k)
     touch[[jj]] <- c(touch[[jj]], k)
   }
@@ -56,7 +57,8 @@
         out <- c(out, cur[ord])
       }
       if (size == maxpath) break
-      nxt <- list(); seen <- new.env(hash = TRUE, parent = emptyenv())
+      nxt <- list()
+      seen <- new.env(hash = TRUE, parent = emptyenv())
       for (s in cur) {
         atoms <- unique(c(bd$i[s], bd$j[s])) + 1L
         for (at in atoms) for (bi in touch[[at]]) {
@@ -83,10 +85,12 @@
         at <- ends[k]
         for (bi in touch[[at]]) {
           if (bi %in% path) next
-          ii <- bd$i[bi] + 1L; jj <- bd$j[bi] + 1L
+          ii <- bd$i[bi] + 1L
+          jj <- bd$j[bi] + 1L
           other <- if (ii == at) jj else ii
           if (other %in% used) next
-          ne <- ends; ne[k] <- other
+          ne <- ends
+          ne[k] <- other
           walk(c(path, bi), ne)
         }
       }
@@ -96,7 +100,8 @@
     if (length(acc) > 0L) {
       keys <- vapply(acc, .mor_rdk_key, character(1))
       keep <- !duplicated(keys)
-      acc <- acc[keep]; keys <- keys[keep]
+      acc <- acc[keep]
+      keys <- keys[keep]
       # final order is (length, tuple), so the walk order does not
       # survive and need not be reproduced
       out <- acc[order(vapply(acc, length, integer(1)), keys,
@@ -149,18 +154,21 @@ morie_rdkfp <- function(adjacency, atomnum, aromatic = NULL,
     if (length(ar) != a) stop("aromatic must have one entry per atom")
   }
   ainv <- (at %% 128) * 2 + ar
-  minpath <- as.integer(minpath); maxpath <- as.integer(maxpath)
+  minpath <- as.integer(minpath)
+  maxpath <- as.integer(maxpath)
   if (minpath < 1L) stop("minpath must be at least 1")
   if (maxpath < minpath) stop("maxpath must be at least minpath")
   nbits <- as.integer(nbits)
   if (nbits < 1L) stop("nbits must be positive")
 
   subs <- .mor_rdk_subgraphs(a, bd, minpath, maxpath, isTRUE(branched))
-  bits <- integer(nbits); cnt <- integer(nbits)
+  bits <- integer(nbits)
+  cnt <- integer(nbits)
   feats <- numeric(length(subs))
   for (si in seq_along(subs)) {
     sub <- subs[[si]]
-    ei <- bd$i[sub] + 1L; ej <- bd$j[sub] + 1L
+    ei <- bd$i[sub] + 1L
+    ej <- bd$j[sub] + 1L
     atoms <- unique(c(ei, ej))
     deg <- integer(a)
     for (k in seq_along(sub)) {
@@ -169,20 +177,30 @@ morie_rdkfp <- function(adjacency, atomnum, aromatic = NULL,
     }
     bh <- numeric(length(sub))
     for (k in seq_along(sub)) {
-      i <- ei[k]; j <- ej[k]
+      i <- ei[k]
+      j <- ej[k]
       nbr <- 0
       for (m in seq_along(sub)) {
         if (m == k) next
-        p <- ei[m]; q <- ej[m]
+        p <- ei[m]
+        q <- ej[m]
         if (p == i || p == j || q == i || q == j) nbr <- nbr + 1
       }
-      a1 <- ainv[i]; a2 <- ainv[j]
-      d1 <- deg[i]; d2 <- deg[j]
+      a1 <- ainv[i]
+      a2 <- ainv[j]
+      d1 <- deg[i]
+      d2 <- deg[j]
       if (a1 < a2) {
-        tmp <- a1; a1 <- a2; a2 <- tmp
-        tmp <- d1; d1 <- d2; d2 <- tmp
+        tmp <- a1
+        a1 <- a2
+        a2 <- tmp
+        tmp <- d1
+        d1 <- d2
+        d2 <- tmp
       } else if (a1 == a2 && d1 < d2) {
-        tmp <- d1; d1 <- d2; d2 <- tmp
+        tmp <- d1
+        d1 <- d2
+        d2 <- tmp
       }
       bo <- if (isTRUE(use_bond_order)) bd$o[sub[k]] else 1
       h <- .mor_fp_mix(0, nbr)

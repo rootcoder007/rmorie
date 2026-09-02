@@ -55,13 +55,21 @@ Objfair <- function(h_values, x_pairs, L = 1, metric = NULL) {
     if (length(d) != m) stop("Objfair: metric and x_pairs differ in length")
     if (any(d < 0)) stop("Objfair: distances must be non-negative")
   }
-  viol <- 0L; lreq <- 0; maxgap <- 0; bi <- -1L; bj <- -1L
+  viol <- 0L
+  lreq <- 0
+  maxgap <- 0
+  bi <- -1L
+  bj <- -1L
   for (k in seq_len(m)) {
-    i <- P[k, 1] + 1L; j <- P[k, 2] + 1L
+    i <- P[k, 1] + 1L
+    j <- P[k, 2] + 1L
     gap <- abs(h[i] - h[j])
-    if (gap > maxgap) { maxgap <- gap; bi <- P[k, 1]; bj <- P[k, 2] }
+    if (gap > maxgap) { maxgap <- gap
+    bi <- P[k, 1]
+    bj <- P[k, 2] }
     if (d[k] == 0) {
-      if (gap > 0) { viol <- viol + 1L; lreq <- Inf }
+      if (gap > 0) { viol <- viol + 1L
+      lreq <- Inf }
     } else {
       if (gap > lam * d[k]) viol <- viol + 1L
       ratio <- gap / d[k]

@@ -28,10 +28,13 @@ Alfrcyl <- function(losses, nprime = NULL) {
   nc <- length(losses)
   if (nc == 0L) stop("losses must not be empty")
   avg <- sum(losses) / nc
-  if (!is.null(nprime) && (nprime < 1 || nprime > nc))
+  if (!is.null(nprime) && (nprime < 1 || nprime > nc)) {
     stop("nprime ", nprime, " outside 1..", nc)
+  }
   est <- if (is.null(nprime)) avg else losses[nprime]
-  list(estimate = est, average = avg, expected = sum(losses) / nc,
-       ncycle = nc, nprime = nprime,
-       method = "AlphaFold recycling training objective")
+  list(
+    estimate = est, average = avg, expected = sum(losses) / nc,
+    ncycle = nc, nprime = nprime,
+    method = "AlphaFold recycling training objective"
+  )
 }

@@ -336,7 +336,10 @@ morie_poissp <- function(counts, X = NULL, offset = NULL, W = NULL,
   }
 
   fit <- .poissp_fit_mode(y, Xd, off, Q, constrain, iters, tol, ridge)
-  beta <- fit$beta; u <- fit$u; m <- fit$m; eta <- fit$eta
+  beta <- fit$beta
+  u <- fit$u
+  m <- fit$m
+  eta <- fit$eta
   p <- ncol(Xd)
   score <- as.numeric(crossprod(Xd, y - m))
 

@@ -13,12 +13,16 @@
 #' @return A numeric value.
 #' @export
 .defdtr_bilinear <- function(F, y, x) {
-  H <- nrow(F); W <- ncol(F)
+  H <- nrow(F)
+  W <- ncol(F)
   y <- min(max(y, 0), H - 1)
   x <- min(max(x, 0), W - 1)
-  y0 <- floor(y); x0 <- floor(x)
-  y1 <- min(y0 + 1, H - 1); x1 <- min(x0 + 1, W - 1)
-  dy <- y - y0; dx <- x - x0
+  y0 <- floor(y)
+  x0 <- floor(x)
+  y1 <- min(y0 + 1, H - 1)
+  x1 <- min(x0 + 1, W - 1)
+  dy <- y - y0
+  dx <- x - x0
   F[y0 + 1, x0 + 1] * (1 - dy) * (1 - dx) +
     F[y0 + 1, x1 + 1] * (1 - dy) * dx +
     F[y1 + 1, x0 + 1] * dy * (1 - dx) +
@@ -84,7 +88,8 @@ Defdtr <- function(x, queries, K = 4, offsets = NULL, weights = NULL,
     ry <- Qm[q, 2] * (H - 1)
     rx <- Qm[q, 1] * (W - 1)
     refs[q, ] <- c(ry, rx)
-    s <- 0; tot <- 0
+    s <- 0
+    tot <- 0
     for (k in seq_len(K)) tot <- tot + wt[q, k]
     for (k in seq_len(K)) {
       v <- .defdtr_bilinear(F, ry + off[q, k, 1], rx + off[q, k, 2])

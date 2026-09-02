@@ -26,7 +26,8 @@
 #' @examples
 #' Jzdiff(y = 5L, p = 0.5, q = 0.5)
 Jzdiff <- function(y, p, q) {
-  pv <- .s03vec(p); qv <- .s03vec(q)
+  pv <- .s03vec(p)
+  qv <- .s03vec(q)
   if (length(pv) == 0L) stop("jenson_zhang_disparity: p is empty")
   if (length(qv) != length(pv)) stop("jenson_zhang_disparity: p and q have different lengths")
   if (!is.null(y)) {
@@ -35,9 +36,13 @@ Jzdiff <- function(y, p, q) {
   }
   if (any(c(pv, qv) < 0)) stop("jenson_zhang_disparity: weights must be non-negative")
   if (sum(pv) <= 0 || sum(qv) <= 0) stop("jenson_zhang_disparity: weights must sum to something positive")
-  P <- pv / sum(pv); Q <- qv / sum(qv); M <- (P + Q) / 2
+  P <- pv / sum(pv)
+  Q <- qv / sum(qv)
+  M <- (P + Q) / 2
   H <- function(p) -sum(p[p > 0] * log(p[p > 0]))
-  hp <- H(P); hq <- H(Q); hm <- H(M)
+  hp <- H(P)
+  hq <- H(Q)
+  hm <- H(M)
   js <- max(hm - (hp + hq) / 2, 0)
   .t1_result(estimate = js, divergence = js, distance = sqrt(js),
              entropy_p = hp, entropy_q = hq, entropy_m = hm, n = length(P),

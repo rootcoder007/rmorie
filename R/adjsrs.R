@@ -19,9 +19,12 @@ Neffsrs <- function(w) {
   n <- length(w)
   if (n == 0) stop("w must be non-empty")
   if (any(w <= 0)) stop("weights must be strictly positive")
-  s1 <- sum(w); s2 <- sum(w^2)
+  s1 <- sum(w)
+  s2 <- sum(w^2)
   deff <- n * s2 / (s1 * s1)
-  .t1_result(neff = s1 * s1 / s2, deff = deff, cv2 = deff - 1,
-             n = n, sumw = s1, sumw2 = s2,
-             method = "Kish effective sample size, deff = 1 + cv^2(w)")
+  .t1_result(
+    neff = s1 * s1 / s2, deff = deff, cv2 = deff - 1,
+    n = n, sumw = s1, sumw2 = s2,
+    method = "Kish effective sample size, deff = 1 + cv^2(w)"
+  )
 }

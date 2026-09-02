@@ -47,11 +47,14 @@ morie_slice <- function(log_target, init = 0, width = 1, n_iter = 5000L,
     R <- L + width
     j <- floor(max_steps * .ghc_unif(e, 1L))
     k <- max_steps - 1 - j
-    while (j > 0 && log_target(L) > log_y) { L <- L - width; j <- j - 1 }
-    while (k > 0 && log_target(R) > log_y) { R <- R + width; k <- k - 1 }
+    while (j > 0 && log_target(L) > log_y) { L <- L - width
+    j <- j - 1 }
+    while (k > 0 && log_target(R) > log_y) { R <- R + width
+    k <- k - 1 }
     repeat {
       x_prop <- L + .ghc_unif(e, 1L) * (R - L)
-      if (log_target(x_prop) >= log_y) { x <- x_prop; break }
+      if (log_target(x_prop) >= log_y) { x <- x_prop
+      break }
       if (x_prop < x) L <- x_prop else R <- x_prop
     }
     samples[i] <- x

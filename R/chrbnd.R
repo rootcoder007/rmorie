@@ -38,7 +38,9 @@ Chrbnd <- function(y, X = NULL, instrument = NULL, alpha = 0.05,
   if (length(ids) != n) stop("y and instrument must have the same length")
   keys <- unique(ids)
   V <- length(keys)
-  means <- numeric(V); ses <- numeric(V); sizes <- numeric(V)
+  means <- numeric(V)
+  ses <- numeric(V)
+  sizes <- numeric(V)
   for (q in seq_len(V)) {
     vals <- yv[ids == keys[q]]
     m <- length(vals)

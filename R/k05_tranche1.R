@@ -43,7 +43,9 @@
   for (i in seq.int(n - 1L, 1L)) {
     j <- as.integer(u[pos] * (i + 1))
     if (j > i) j <- i
-    tmp <- idx[i + 1L]; idx[i + 1L] <- idx[j + 1L]; idx[j + 1L] <- tmp
+    tmp <- idx[i + 1L]
+    idx[i + 1L] <- idx[j + 1L]
+    idx[j + 1L] <- tmp
     pos <- pos + 1L
   }
   idx
@@ -123,9 +125,12 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 #' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11}, \code{pi01}, \code{pi11}, \code{pi}.
 #' @export
 .morie_k05_lr_ind <- function(h) {
-  a <- h[-length(h)]; b <- h[-1]
-  n00 <- sum(a == 0 & b == 0); n01 <- sum(a == 0 & b == 1)
-  n10 <- sum(a == 1 & b == 0); n11 <- sum(a == 1 & b == 1)
+  a <- h[-length(h)]
+  b <- h[-1]
+  n00 <- sum(a == 0 & b == 0)
+  n01 <- sum(a == 0 & b == 1)
+  n10 <- sum(a == 1 & b == 0)
+  n11 <- sum(a == 1 & b == 1)
   total <- n00 + n01 + n10 + n11
   pi0 <- if ((n00 + n01) > 0) n01 / (n00 + n01) else 0
   pi1 <- if ((n10 + n11) > 0) n11 / (n10 + n11) else 0
@@ -327,7 +332,8 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
     ge <- 0L
     for (j in seq_len(n_mc)) {
       z <- .morie_normal_quantile(.morie_random_uniform(n, seed = seed, stream = j))
-      m <- mean(z); s <- stats::sd(z)
+      m <- mean(z)
+      s <- stats::sd(z)
       if (!(s > 0)) next
       if (max(.morie_k05_tk(z, n, m, s)$tk) >= stat) ge <- ge + 1L
     }

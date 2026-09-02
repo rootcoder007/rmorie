@@ -14,7 +14,8 @@
 #' @export
 Remlik <- function(X, Z, y, D, R = NULL) {
   out <- morie_reml_loglik(X, Z, y, D, R = R)
-  Xm <- .t1_mat(X); Zm <- .t1_mat(Z)
+  Xm <- .t1_mat(X)
+  Zm <- .t1_mat(Z)
   .t1_result(loglik = as.numeric(out$loglik), beta = as.numeric(out$beta),
              n = nrow(Xm), p = ncol(Xm), q = ncol(Zm),
              method = "REML log-likelihood, MVSML Sect. 5.2.1.2")

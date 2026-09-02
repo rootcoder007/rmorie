@@ -34,10 +34,15 @@ Alfplddt <- function(s, w1, w2, w3, bins = NULL, rtrue = NULL) {
     r[i] <- sum(p * bins)
   }
   loss <- NULL
-  if (!is.null(rtrue))
-    loss <- mean(vapply(seq_len(n),
-                        function(i) alfXent(alfOnehot(rtrue[i], bins), ps[i, ]),
-                        numeric(1)))
-  list(plddt = r, p = ps, loss = loss, estimate = mean(r), n = n,
-       method = "AlphaFold per-residue confidence (pLDDT)")
+  if (!is.null(rtrue)) {
+    loss <- mean(vapply(
+      seq_len(n),
+      function(i) alfXent(alfOnehot(rtrue[i], bins), ps[i, ]),
+      numeric(1)
+    ))
+  }
+  list(
+    plddt = r, p = ps, loss = loss, estimate = mean(r), n = n,
+    method = "AlphaFold per-residue confidence (pLDDT)"
+  )
 }

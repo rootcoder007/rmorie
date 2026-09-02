@@ -19,7 +19,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ljungbox(V)
 Ljungbox <- function(y, lags = 1, fitdf = 0) {
-  y <- .t4_vec(y); n <- length(y); m <- as.integer(lags); fitdf <- as.integer(fitdf)
+  y <- .t4_vec(y)
+  n <- length(y)
+  m <- as.integer(lags)
+  fitdf <- as.integer(fitdf)
   if (m < 1 || n <= m) stop("need 1 <= lags < length(y)")
   r <- .t4_acfbiased(y, m)
   q <- n * (n + 2) * sum(r^2 / (n - seq_len(m)))

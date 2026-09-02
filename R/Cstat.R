@@ -27,7 +27,9 @@
 #' Cstat(c(1, 2, 3, 4), c(1, 1, 1, 0), c(4, 3, 2, 1))
 #' @export
 Cstat <- function(time, event, risk_score, method = "harrell") {
-  time <- .s03vec(time); event <- .s03vec(event); risk_score <- .s03vec(risk_score)
+  time <- .s03vec(time)
+  event <- .s03vec(event)
+  risk_score <- .s03vec(risk_score)
   n <- length(time)
   if (length(event) != n || length(risk_score) != n)
     stop("time, event, and risk_score must have the same length.")
@@ -35,7 +37,10 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
     stop("method must be 'harrell' or 'uno'.")
   if (method == "uno") return(.cstat_uno(time, event, risk_score))
 
-  concordant <- 0; discordant <- 0; tied <- 0; comparable <- 0
+  concordant <- 0
+  discordant <- 0
+  tied <- 0
+  comparable <- 0
   for (i in seq_len(n)) {
     if (event[i] == 0) next
     for (j in seq_len(n)) {
@@ -78,12 +83,16 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
   n <- length(time)
   cen_event <- as.numeric(event == 0)
   ord <- order(time)
-  t_s <- time[ord]; e_s <- cen_event[ord]
-  S_c <- 1; km_c_times <- numeric(0); km_c_vals <- numeric(0)
+  t_s <- time[ord]
+  e_s <- cen_event[ord]
+  S_c <- 1
+  km_c_times <- numeric(0)
+  km_c_vals <- numeric(0)
   for (t_j in sort(unique(t_s[e_s == 1]))) {
     n_r <- sum(t_s >= t_j)
     n_e <- sum(t_s == t_j & e_s == 1)
-    km_c_times <- c(km_c_times, t_j); km_c_vals <- c(km_c_vals, S_c)
+    km_c_times <- c(km_c_times, t_j)
+    km_c_vals <- c(km_c_vals, S_c)
     S_c <- S_c * (if (n_r > 0) 1 - n_e / n_r else 1)
   }
   tau <- if (sum(event) > 0) .s03quantile7(time[event == 1], 0.75) else max(time)
@@ -93,7 +102,8 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
     idx <- max(idx, 0L)
     km_c_vals[min(idx, length(km_c_vals) - 1L) + 1L]
   }
-  num <- 0; denom <- 0
+  num <- 0
+  denom <- 0
   for (i in seq_len(n)) {
     if (event[i] == 0 || time[i] > tau) next
     w_i <- 1 / max(get_km_c(time[i])^2, 1e-10)

@@ -25,7 +25,8 @@
 #' @examples
 #' Eqms(y = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 Eqms <- function(y, b_R, b_F, ddof = 1) {
-  bR <- as.numeric(b_R); bF <- as.numeric(b_F)
+  bR <- as.numeric(b_R)
+  bF <- as.numeric(b_F)
   k <- length(bR)
   if (k < 2L) stop("need at least two common items")
   if (length(bF) != k) stop("b_R and b_F must have the same length")

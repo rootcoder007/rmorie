@@ -20,7 +20,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tqhs(V, V)
 Tqhs <- function(k, S_mat) {
-  kv <- as.numeric(k); Sm <- as.matrix(S_mat)
+  kv <- as.numeric(k)
+  Sm <- as.matrix(S_mat)
   signs <- .s4_sgn(as.numeric(Sm %*% kv))
   .t1_result(signs = signs, m = length(signs), d = length(kv),
              estimate = sum(signs) / length(signs),

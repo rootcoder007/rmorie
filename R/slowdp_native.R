@@ -135,7 +135,8 @@ decay_diagnostics <- function(weights, alpha) {
   monotone <- TRUE
   if (K >= 2L) {
     for (i in seq_len(K - 1L)) {
-      if (p[i] + 1e-12 < p[i + 1]) { monotone <- FALSE; break }
+      if (p[i] + 1e-12 < p[i + 1]) { monotone <- FALSE
+      break }
     }
   }
   list(realised_tail = realised, expected_tail = exp_tail,

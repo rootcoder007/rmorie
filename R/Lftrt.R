@@ -25,13 +25,17 @@
 #' Lftrt(c(0, 0, 1, 2), c(5, 6, 7, 8), c(1, 1, 0, 1))
 #' @export
 Lftrt <- function(entry, time, event, alpha = 0.05) {
-  entry <- .s03vec(entry); time <- .s03vec(time); event <- .s03vec(event)
+  entry <- .s03vec(entry)
+  time <- .s03vec(time)
+  event <- .s03vec(event)
   n <- length(time)
   unique_t <- sort(unique(time[event == 1]))
   nt <- length(unique_t)
-  surv <- numeric(nt); se_arr <- numeric(nt)
+  surv <- numeric(nt)
+  se_arr <- numeric(nt)
   z <- stats::qnorm(1 - alpha / 2)
-  s <- 1; gw <- 0
+  s <- 1
+  gw <- 0
   for (j in seq_len(nt)) {
     tj <- unique_t[j]
     nj <- sum(entry < tj & time >= tj)

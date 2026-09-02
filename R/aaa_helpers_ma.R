@@ -22,7 +22,9 @@
   A <- crossprod(X * w, X)
   beta <- as.numeric(.s03ridgesolve(A, as.numeric(crossprod(X * w, y)), 1e-12))
   cv <- vapply(seq_len(p), function(j) {
-    e <- numeric(p); e[j] <- 1; as.numeric(.s03ridgesolve(A, e, 1e-12))
+    e <- numeric(p)
+    e[j] <- 1
+    as.numeric(.s03ridgesolve(A, e, 1e-12))
   }, numeric(p))
   list(beta = beta, cov = matrix(cv, p, p), A = A)
 }
@@ -41,8 +43,9 @@
 #' @export
 .ma_net_design <- function(design) {
   D <- as.matrix(design)
-  if (ncol(D) != 2L)
+  if (ncol(D) != 2L) {
     stop("design must have two columns: baseline, comparator")
+  }
   treats <- sort(unique(as.integer(D)))
   T <- length(treats)
   if (T < 2L) stop("a network needs at least two treatments")

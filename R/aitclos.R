@@ -20,6 +20,8 @@ Compclos <- function(x, total = 1) {
   if (any(x <= 0)) stop("compositions must be strictly positive")
   s <- sum(x)
   k <- as.numeric(total)
-  .t1_result(closed = k * x / s, total = k, sum_raw = s, D = length(x),
-             method = "Closure C(x) onto the simplex")
+  .t1_result(
+    closed = k * x / s, total = k, sum_raw = s, D = length(x),
+    method = "Closure C(x) onto the simplex"
+  )
 }

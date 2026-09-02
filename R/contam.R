@@ -15,7 +15,8 @@
   if (eps >= 1) return(0)
   target <- eps / (1 - eps)
   g <- function(k) 2 * exp(-0.5 * k * k) / sqrt(2 * pi) / k - 2 * .s03pnorm(-k)
-  lo <- 1e-8; hi <- 40
+  lo <- 1e-8
+  hi <- 40
   for (i in seq_len(300)) {
     mid <- 0.5 * (lo + hi)
     if (g(mid) > target) lo <- mid else hi <- mid

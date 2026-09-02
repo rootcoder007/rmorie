@@ -16,7 +16,8 @@
 #' @examples
 #' Pmedex(nie = c(1, 2, 3, 4, 5, 6, 7, 8), te = 5L)
 Pmedex <- function(nie, te) {
-  nie <- as.numeric(nie); te <- as.numeric(te)
+  nie <- as.numeric(nie)
+  te <- as.numeric(te)
   .t1_result(estimate = if (te != 0) nie / te else NaN,
              implied_nde = te - nie, te = te,
              method = "Proportion of the total effect explained")

@@ -96,7 +96,8 @@ morie_cox_score_process <- function(beta, z, time, event, t_grid = NULL) {
     stop(sprintf("beta has %d entries for %d columns.", length(b), ncol(Z)),
          call. = FALSE)
   }
-  n <- nrow(Z); p <- ncol(Z)
+  n <- nrow(Z)
+  p <- ncol(Z)
   w <- exp(as.numeric(Z %*% b))
   et <- sort(tv[ev == 1])
   if (length(et) == 0L) {
@@ -200,7 +201,8 @@ morie_survival_psi <- function(S, t_grid, S0, L, G) {
 #' @export
 morie_m_normality <- function(m_dot_scores, V = NULL) {
   S <- as.matrix(m_dot_scores)
-  n <- nrow(S); p <- ncol(S)
+  n <- nrow(S)
+  p <- ncol(S)
   if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n),
                    call. = FALSE)
   Sigma <- crossprod(S) / n
@@ -245,7 +247,8 @@ morie_m_normality <- function(m_dot_scores, V = NULL) {
 morie_semipar_efficiency <- function(scores, nuisance_scores = NULL) {
   S <- as.matrix(scores)
   if (nrow(S) < ncol(S)) S <- t(S)
-  n <- nrow(S); p <- ncol(S)
+  n <- nrow(S)
+  p <- ncol(S)
   if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n),
                    call. = FALSE)
   full <- crossprod(S) / n

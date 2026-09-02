@@ -49,7 +49,8 @@ Btbca <- function(theta_hat, theta_b, x, stat, alpha = 0.05) {
   if (p <= 0) p <- 0.5 / (R + 1)
   if (p >= 1) p <- 1 - 0.5 / (R + 1)
   w <- .s03qnorm(p)
-  s2 <- 0; s3 <- 0
+  s2 <- 0
+  s3 <- 0
   for (j in seq_len(n)) {
     tj <- as.numeric(stat(xx[-j]))
     lj <- (n - 1) * (t - tj)

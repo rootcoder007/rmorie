@@ -20,7 +20,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tukrho(V)
 Tukrho <- function(r, c = 4.685) {
-  v <- as.numeric(unlist(r)); c <- as.numeric(c)
+  v <- as.numeric(unlist(r))
+  c <- as.numeric(c)
   cap <- c * c / 6
   u <- v / c
   inside <- abs(u) <= 1

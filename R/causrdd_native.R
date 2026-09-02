@@ -86,7 +86,8 @@
 #' morie_causrdd(x, y)
 morie_causrdd <- function(x, y, cutoff = 0, h = NULL,
                           kernel = "triangular") {
-  xa <- as.numeric(x); ya <- as.numeric(y)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
   cc <- as.numeric(cutoff)
   if (is.null(h)) h <- morie_causrddh(xa, ya, cutoff = cc)$estimate
   h <- as.numeric(h)
@@ -95,7 +96,8 @@ morie_causrdd <- function(x, y, cutoff = 0, h = NULL,
   w <- .mor_rdd_kernel(kernel, d / h)
   lm_ <- (d < 0) & (w > 0)
   rm_ <- (d >= 0) & (w > 0)
-  n_l <- sum(lm_); n_r <- sum(rm_)
+  n_l <- sum(lm_)
+  n_r <- sum(rm_)
   if (n_l < 3L || n_r < 3L)
     stop("fewer than 3 observations with positive kernel weight on one side")
   L <- .mor_rdd_side(d[lm_], ya[lm_], w[lm_])

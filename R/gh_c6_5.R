@@ -22,8 +22,10 @@
 #' @examples
 #' Kldsupp(prior_mass = 0.5, kl_radius = 0.1, test_rate = 0.2, n = 100)
 Kldsupp <- function(prior_mass, kl_radius, test_rate, n) {
-  pm <- as.numeric(prior_mass); cc <- as.numeric(kl_radius)
-  Cc <- as.numeric(test_rate); n <- as.integer(n)
+  pm <- as.numeric(prior_mass)
+  cc <- as.numeric(kl_radius)
+  Cc <- as.numeric(test_rate)
+  n <- as.integer(n)
   if (pm <= 0 || pm > 1) stop("the prior mass must lie in (0, 1]")
   if (cc < 0) stop("the Kullback-Leibler radius must be non-negative")
   if (n < 1L) stop("n must be at least 1")

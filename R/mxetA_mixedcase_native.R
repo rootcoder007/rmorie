@@ -30,7 +30,8 @@
 #' @export
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
   Fm <- as.matrix(F)
-  nt <- nrow(Fm); m <- ncol(Fm)
+  nt <- nrow(Fm)
+  m <- ncol(Fm)
   if (nt < 1L || m < 1L) {
     stop("F must be a rectangular n_t x m matrix")
   }

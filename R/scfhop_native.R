@@ -79,13 +79,16 @@
 #' @export
 morie_scfhop_types <- function(smiles) {
   g <- morie_avalon_parse(smiles)
-  el <- g$el; arom <- g$arom; n <- length(el)
+  el <- g$el
+  arom <- g$arom
+  n <- length(el)
   adj <- .avalon_adj(n, g$bonds)
   nh <- morie_avalon_h(el, arom, g$chg, g$hexp, g$bonds)
   # A carbon is a carbonyl carbon when it holds a doubly bonded oxygen,
   # and a carboxyl carbon when it also holds a single-bonded one. Both
   # are read off the bond orders, not guessed from the element.
-  dbl_o <- integer(n); sng_o <- integer(n)
+  dbl_o <- integer(n)
+  sng_o <- integer(n)
   for (i in seq_len(n)) for (e in adj[[i]]) {
     if (el[e[1] + 1L] == "O") {
       if (e[2] == 2) dbl_o[i] <- dbl_o[i] + 1L
@@ -94,7 +97,8 @@ morie_scfhop_types <- function(smiles) {
   }
   out <- vector("list", n)
   for (i in seq_len(n)) {
-    t <- character(0); e0 <- el[i]
+    t <- character(0)
+    e0 <- el[i]
     if (e0 %in% c("N", "O")) {
       t <- c(t, "A")
       if (nh[i] > 0L) t <- c(t, "D")
@@ -212,14 +216,16 @@ morie_scfhop_similarity <- function(a, b, metric = "tanimoto") {
   if (length(a) != length(b))
     stop("two descriptors of different lengths cannot be compared")
   if (metric == "tanimoto") {
-    lo <- .w3_csum(pmin(a, b)); hi <- .w3_csum(pmax(a, b))
+    lo <- .w3_csum(pmin(a, b))
+    hi <- .w3_csum(pmax(a, b))
     return(if (hi > 0) lo / hi else 0)
   }
   if (metric == "euclidean")
     return(1 / (1 + sqrt(.w3_csum((a - b) * (a - b)))))
   if (metric == "cosine") {
     num <- .w3_csum(a * b)
-    na <- sqrt(.w3_csum(a * a)); nb <- sqrt(.w3_csum(b * b))
+    na <- sqrt(.w3_csum(a * a))
+    nb <- sqrt(.w3_csum(b * b))
     return(if (na > 0 && nb > 0) num / (na * nb) else 0)
   }
   stop("the metric is tanimoto, euclidean or cosine")
@@ -254,7 +260,8 @@ morie_scfhop_murcko <- function(smiles) {
     }
     for (i in seq_len(n))
       if (keep[i] && inring[i] != 1L && deg[i] <= 1L) {
-        keep[i] <- FALSE; changed <- TRUE
+        keep[i] <- FALSE
+        changed <- TRUE
       }
   }
   atoms <- which(keep) - 1L
@@ -290,7 +297,8 @@ morie_scfhop_signature <- function(smiles, rounds = 3L) {
   nb <- vector("list", m)
   for (k in seq_len(m)) nb[[k]] <- list()
   for (b in mk$bonds) {
-    p1 <- pos[b[1] + 1L]; p2 <- pos[b[2] + 1L]
+    p1 <- pos[b[1] + 1L]
+    p2 <- pos[b[2] + 1L]
     nb[[p1]][[length(nb[[p1]]) + 1L]] <- c(p2, b[3])
     nb[[p2]][[length(nb[[p2]]) + 1L]] <- c(p1, b[3])
   }
@@ -336,7 +344,9 @@ morie_scfhop <- function(lead_smiles, scaffold_db, maxdist = 9L,
   lsig <- morie_scfhop_signature(lead_smiles, rounds)
   lmk <- morie_scfhop_murcko(lead_smiles)
   nq <- length(scaffold_db)
-  sim <- numeric(nq); diff <- logical(nq); ssz <- integer(nq)
+  sim <- numeric(nq)
+  diff <- logical(nq)
+  ssz <- integer(nq)
   hop <- logical(nq)
   for (q in seq_len(nq)) {
     sm <- scaffold_db[q]

@@ -64,7 +64,8 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 error_cache <- function(alpha, y, K, b) {
-  a <- as.numeric(alpha); yy <- as.numeric(y)
+  a <- as.numeric(alpha)
+  yy <- as.numeric(y)
   n <- length(a)
   out <- numeric(n)
   for (i in seq_len(n)) {
@@ -184,7 +185,8 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
                               C) {
   yy <- as.numeric(y)
   a <- as.numeric(alpha)
-  i <- as.integer(i1); j <- as.integer(i2)
+  i <- as.integer(i1)
+  j <- as.integer(i2)
   d1 <- as.numeric(a1_new) - a[i]
   d2 <- as.numeric(a2_new) - a[j]
   b1 <- as.numeric(b) + as.numeric(E[i]) +
@@ -231,7 +233,8 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
   examine_all <- TRUE
   passes <- 0L
   changed_total <- 0L
-  full_passes <- 0L; nb_passes <- 0L
+  full_passes <- 0L
+  nb_passes <- 0L
   while (passes < as.integer(max_passes)) {
     passes <- passes + 1L
     E <- error_cache(a, yy, K, b)
@@ -245,7 +248,8 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
       i2 <- pick$index
       if (is.null(i2)) next
       bounds <- morie_svmopt$.svmopt_bounds(i1, i2, a, yy, C)
-      L <- bounds$L; H <- bounds$H
+      L <- bounds$L
+      H <- bounds$H
       if (H <= L + .SMOOPT_EPS) next
       eta <- K[i1, i1] + K[i2, i2] - 2.0 * K[i1, i2]
       if (eta <= .SMOOPT_EPS) next
@@ -255,7 +259,8 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
           (a2_new + a[i2] + as.numeric(eps))) next
       a1_new <- a[i1] - yy[i1] * yy[i2] * (a2_new - a[i2])
       th <- compute_threshold(i1, i2, a1_new, a2_new, a, yy, E, K, b, C)
-      a[i1] <- a1_new; a[i2] <- a2_new
+      a[i1] <- a1_new
+      a[i2] <- a2_new
       b <- th$b
       E <- error_cache(a, yy, K, b)
       changed <- changed + 1L

@@ -42,24 +42,37 @@ Hexgrd <- function(coords, values = NULL, cell_size = 1) {
     values <- as.numeric(values)
     if (length(values) != n) stop("`values` must match `coords` length")
   }
-  xmin <- min(coords[, 1]); ymin <- min(coords[, 2])
+  xmin <- min(coords[, 1])
+  ymin <- min(coords[, 2])
   sx <- (coords[, 1] - xmin) / w
   sy <- (coords[, 2] - ymin) / (w * sqrt(3))
-  con1 <- 0.25; con2 <- 1 / 3
-  keyj <- integer(n); keyi <- integer(n); keyo <- integer(n)
+  con1 <- 0.25
+  con2 <- 1 / 3
+  keyj <- integer(n)
+  keyi <- integer(n)
+  keyo <- integer(n)
   for (i in seq_len(n)) {
-    sxi <- sx[i]; syi <- sy[i]
-    j1 <- as.integer(floor(sxi + 0.5)); i1 <- as.integer(floor(syi + 0.5))
+    sxi <- sx[i]
+    syi <- sy[i]
+    j1 <- as.integer(floor(sxi + 0.5))
+    i1 <- as.integer(floor(syi + 0.5))
     d1 <- (sxi - j1)^2 + 3 * (syi - i1)^2
     if (d1 < con1) {
-      keyj[i] <- j1; keyi[i] <- i1; keyo[i] <- 0L
+      keyj[i] <- j1
+      keyi[i] <- i1
+      keyo[i] <- 0L
     } else {
-      j2 <- as.integer(floor(sxi)); i2 <- as.integer(floor(syi))
+      j2 <- as.integer(floor(sxi))
+      i2 <- as.integer(floor(syi))
       d2 <- (sxi - j2 - 0.5)^2 + 3 * (syi - i2 - 0.5)^2
       if (d1 > con2 || d1 > d2) {
-        keyj[i] <- j2; keyi[i] <- i2; keyo[i] <- 1L
+        keyj[i] <- j2
+        keyi[i] <- i2
+        keyo[i] <- 1L
       } else {
-        keyj[i] <- j1; keyi[i] <- i1; keyo[i] <- 0L
+        keyj[i] <- j1
+        keyi[i] <- i1
+        keyo[i] <- 0L
       }
     }
   }
@@ -69,7 +82,10 @@ Hexgrd <- function(coords, values = NULL, cell_size = 1) {
   ukey <- paste(uk$j, uk$i, uk$o)
   cell_id <- match(key, ukey)
   m <- nrow(uk)
-  counts <- integer(m); xcm <- numeric(m); ycm <- numeric(m); vsum <- numeric(m)
+  counts <- integer(m)
+  xcm <- numeric(m)
+  ycm <- numeric(m)
+  vsum <- numeric(m)
   for (i in seq_len(n)) {
     ci <- cell_id[i]
     counts[ci] <- counts[ci] + 1L

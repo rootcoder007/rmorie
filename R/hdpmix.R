@@ -32,7 +32,8 @@ Hdpmix <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 6) {
   tot <- 0
   for (x in beta) tot <- tot + x
   beta <- if (tot > 0) beta / tot else rep(1 / K, K)
-  counts <- vector("list", length(ids)); pi_ <- vector("list", length(ids))
+  counts <- vector("list", length(ids))
+  pi_ <- vector("list", length(ids))
   for (ci in seq_along(ids)) {
     row <- numeric(K)
     for (i in seq_along(z)) {

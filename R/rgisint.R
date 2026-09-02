@@ -45,9 +45,13 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
   if (length(f) != n) stop("rangayyan_isometric_contraction: emg and force must have the same length")
   fsv <- as.numeric(fs)
   if (fsv <= 0) stop("rangayyan_isometric_contraction: fs must be positive")
-  lev <- numeric(0); rv <- numeric(0); dur <- numeric(0); ivs <- list()
+  lev <- numeric(0)
+  rv <- numeric(0)
+  dur <- numeric(0)
+  ivs <- list()
   for (r in .rgisint_runs(f)) {
-    a <- r[1]; b <- r[2]
+    a <- r[1]
+    b <- r[2]
     if (f[a] <= rest_level) next
     lev <- c(lev, f[a])
     rv <- c(rv, Rms(e[a:b])$rms)

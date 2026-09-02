@@ -19,26 +19,31 @@
 #' @return A list with \code{instruments}, \code{n_instruments}, \code{n_levels}, \code{note}.
 #' @export
 morie_hypercube_instruments <- function(X, n_levels = 3L) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   n <- nrow(Xm)
   if (n == 0L) stop("bndsmw: no observations")
   d <- ncol(Xm)
-  lo <- apply(Xm, 2, min); hi <- apply(Xm, 2, max)
+  lo <- apply(Xm, 2, min)
+  hi <- apply(Xm, 2, max)
   span <- pmax(hi - lo, .bndsmw_GHC_EPS)
   G <- list()
   for (lev in seq_len(as.integer(n_levels) - 1L)) {
     cells <- 2 ^ lev
     total <- cells ^ d
     for (c_ in seq_len(total) - 1L) {
-      idx <- integer(d); rem <- c_
-      for (kk in seq_len(d)) { idx[kk] <- rem %% cells; rem <- rem %/% cells }
+      idx <- integer(d)
+      rem <- c_
+      for (kk in seq_len(d)) { idx[kk] <- rem %% cells
+      rem <- rem %/% cells }
       g <- numeric(n)
       for (i in seq_len(n)) {
         inside <- TRUE
         for (j in seq_len(d)) {
           u <- (Xm[i, j] - lo[j]) / span[j]
           hi_ <- if (idx[j] == cells - 1L) 1.0 + 1e-12 else 1.0
-          if (!(idx[j] / cells <= u && u < hi_)) { inside <- FALSE; break }
+          if (!(idx[j] / cells <= u && u < hi_)) { inside <- FALSE
+          break }
         }
         g[i] <- if (inside) 1 else 0
       }
@@ -61,7 +66,8 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 #' @return A list with \code{mean}, \code{sd}, \code{n}.
 #' @export
 morie_weighted_moments <- function(m, g) {
-  M <- as.matrix(m); storage.mode(M) <- "double"
+  M <- as.matrix(m)
+  storage.mode(M) <- "double"
   n <- nrow(M)
   if (n < 2L) stop("bndsmw: need at least 2 observations")
   gv <- as.numeric(g)
@@ -70,7 +76,8 @@ morie_weighted_moments <- function(m, g) {
   if (any(gv < 0))
     stop("bndsmw: instrument weights must be non-negative")
   J <- ncol(M)
-  means <- numeric(J); sds <- numeric(J)
+  means <- numeric(J)
+  sds <- numeric(J)
   for (j in seq_len(J)) {
     v <- M[, j] * gv
     mu <- mean(v)
@@ -130,7 +137,8 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
     stop("bndsmw: ", length(q), " measure weights for ", length(G), " instruments")
   if (abs(sum(q) - 1) > 1e-6)
     stop("bndsmw: the measure Q must sum to 1, got ", sum(q))
-  tot <- 0; parts <- numeric(length(G))
+  tot <- 0
+  parts <- numeric(length(G))
   for (a in seq_along(G)) {
     g <- G[[a]]
     wm <- morie_weighted_moments(m, g)
@@ -164,7 +172,8 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 morie_gms_critical_value <- function(m, instruments, form = "sum",
                                      n_equality = 0L, level = 0.95,
                                      reps = 200L, seed = 0, kappa = NULL) {
-  M <- as.matrix(m); storage.mode(M) <- "double"
+  M <- as.matrix(m)
+  storage.mode(M) <- "double"
   n <- nrow(M)
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
@@ -221,7 +230,8 @@ morie_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                                  n_equality = 0L, level = 0.95,
                                  n_levels = 2L, reps = 100L, seed = 0) {
   inst <- morie_hypercube_instruments(X, n_levels = n_levels)
-  keep <- list(); stats <- list()
+  keep <- list()
+  stats <- list()
   for (th in theta_grid) {
     m <- moment_fn(th)
     t <- morie_cvm_statistic(m, inst, form = form, n_equality = n_equality)

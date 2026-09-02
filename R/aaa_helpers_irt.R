@@ -12,7 +12,8 @@
   }
   if (length(v) != n) {
     stop(sprintf("%s has length %d; expected 1 or %d", name, length(v), n),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   v
 }

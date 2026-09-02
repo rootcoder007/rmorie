@@ -25,7 +25,10 @@
   n <- sqrt(sum(v * v))
   if (n <= .GSPLAT_EPS)
     stop("gsplat: the rotation quaternion is zero")
-  w <- v[1] / n; x <- v[2] / n; y <- v[3] / n; z <- v[4] / n
+  w <- v[1] / n
+  x <- v[2] / n
+  y <- v[3] / n
+  z <- v[4] / n
   matrix(c(1 - 2 * (y * y + z * z), 2 * (x * y - w * z), 2 * (x * z + w * y),
            2 * (x * y + w * z), 1 - 2 * (x * x + z * z), 2 * (y * z - w * x),
            2 * (x * z - w * y), 2 * (y * z + w * x), 1 - 2 * (x * x + y * y)),
@@ -56,7 +59,8 @@ covariance_from_scale_rotation <- function(scale, quaternion) {
 #' @return List with eigenvalues, min_eigenvalue, psd.
 #' @export
 is_positive_semidefinite <- function(S, tol = -1e-9) {
-  M <- as.matrix(S); storage.mode(M) <- "double"
+  M <- as.matrix(S)
+  storage.mode(M) <- "double"
   ee <- eigen(M, symmetric = TRUE, only.values = TRUE)$values
   list(eigenvalues = as.numeric(ee), min_eigenvalue = min(ee),
        psd = min(ee) >= as.numeric(tol))
@@ -70,9 +74,12 @@ is_positive_semidefinite <- function(S, tol = -1e-9) {
 #' @return List with projected, dim, note.
 #' @export
 project_covariance <- function(S, W, J) {
-  C <- as.matrix(S); storage.mode(C) <- "double"
-  Wm <- as.matrix(W); storage.mode(Wm) <- "double"
-  Jm <- as.matrix(J); storage.mode(Jm) <- "double"
+  C <- as.matrix(S)
+  storage.mode(C) <- "double"
+  Wm <- as.matrix(W)
+  storage.mode(Wm) <- "double"
+  Jm <- as.matrix(J)
+  storage.mode(Jm) <- "double"
   T <- Jm %*% Wm
   TC <- T %*% C
   out <- TC %*% t(T)
@@ -88,7 +95,8 @@ project_covariance <- function(S, W, J) {
 #' @return List with colour, transmittance, coverage, note.
 #' @export
 alpha_composite <- function(colours, alphas, depths = NULL) {
-  C <- as.matrix(colours); storage.mode(C) <- "double"
+  C <- as.matrix(colours)
+  storage.mode(C) <- "double"
   a <- as.numeric(alphas)
   if (nrow(C) != length(a))
     stop(paste0("gsplat: ", nrow(C), " colours but ", length(a),
@@ -97,7 +105,8 @@ alpha_composite <- function(colours, alphas, depths = NULL) {
     stop("gsplat: alphas must lie in [0,1]")
   order <- if (is.null(depths)) seq_along(a) - 1L
            else order(as.numeric(depths), decreasing = FALSE) - 1L
-  T <- 1.0; acc <- rep(0, ncol(C))
+  T <- 1.0
+  acc <- rep(0, ncol(C))
   for (ii in order) {
     acc <- acc + T * a[ii + 1L] * C[ii + 1L, ]
     T <- T * (1.0 - a[ii + 1L])
@@ -123,11 +132,14 @@ adaptive_density_control <- function(gradients, scales, opacities,
                                      grad_threshold = 0.0002,
                                      scale_threshold = 0.01,
                                      opacity_threshold = 0.005) {
-  g <- as.numeric(gradients); s <- as.numeric(scales)
+  g <- as.numeric(gradients)
+  s <- as.numeric(scales)
   o <- as.numeric(opacities)
   if (!(length(g) == length(s) && length(s) == length(o)))
     stop("gsplat: the inputs differ in length")
-  clone <- integer(0); split <- integer(0); prune <- integer(0)
+  clone <- integer(0)
+  split <- integer(0)
+  prune <- integer(0)
   for (i in seq_along(g)) {
     if (o[i] < as.numeric(opacity_threshold)) {
       prune <- c(prune, i - 1L)

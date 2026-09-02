@@ -59,7 +59,9 @@ Gnsetenr <- function(correlations, in_set, p = 1, nperm = 0L,
     }
     nr <- sum(abs(r_s[member])^p)
     miss_w <- 1 / (n - nhh)
-    run <- 0; best <- 0; best_i <- 0L
+    run <- 0
+    best <- 0
+    best_i <- 0L
     running <- numeric(n)
     for (i in seq_len(n)) {
       if (member[i]) {
@@ -68,7 +70,8 @@ Gnsetenr <- function(correlations, in_set, p = 1, nperm = 0L,
         run <- run - miss_w
       }
       running[i] <- run
-      if (abs(run) > abs(best)) { best <- run; best_i <- i - 1L }
+      if (abs(run) > abs(best)) { best <- run
+      best_i <- i - 1L }
     }
     list(es = best, arg = best_i, running = running)
   }
@@ -78,7 +81,8 @@ Gnsetenr <- function(correlations, in_set, p = 1, nperm = 0L,
               method = "GSEA enrichment score (Subramanian et al. 2005)")
   if (nperm > 0) {
     if (!is.null(seed)) set.seed(seed)
-    same_sign <- 0L; as_extreme <- 0L
+    same_sign <- 0L
+    as_extreme <- 0L
     for (b in seq_len(nperm)) {
       idx <- sample.int(n, nh)
       pm <- rep(FALSE, n)

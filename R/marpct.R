@@ -16,7 +16,9 @@
 #' marpct(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08), 1:4)$QE
 #' @export
 marpct <- function(yi, vi, mods) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   m <- as.matrix(mods)
   if (nrow(m) != k) m <- t(m)
   x <- cbind(1, m)

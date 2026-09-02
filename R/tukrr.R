@@ -25,11 +25,16 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tukrr(V, V)
 Tukrr <- function(X, y, c = 4.685, n_iter = 25) {
-  Xm <- as.matrix(X); yv <- as.numeric(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- as.matrix(X)
+  yv <- as.numeric(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   fit <- .t1_lstsq(Xm, yv)
-  beta <- fit$beta; fitted <- fit$fitted; resid <- fit$resid
-  w <- rep(1, n); s <- 1
+  beta <- fit$beta
+  fitted <- fit$fitted
+  resid <- fit$resid
+  w <- rep(1, n)
+  s <- 1
   for (it in seq_len(as.integer(n_iter))) {
     med <- .s4_median(resid)
     s <- .s4_median(abs(resid - med)) / 0.6744897501960817

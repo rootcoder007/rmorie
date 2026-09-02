@@ -21,12 +21,14 @@
 #' Metapath(A, c("A", "P"), c("A", "P"))$estimate
 #' @export
 Metapath <- function(G, node_types = NULL, metapath = NULL) {
-  W <- .s03mat(G); n <- nrow(W)
+  W <- .s03mat(G)
+  n <- nrow(W)
   ty <- if (!is.null(node_types)) as.character(node_types) else rep("0", n)
   mp <- if (!is.null(metapath)) as.character(metapath) else rep(ty[1], 2L)
   M <- diag(1, n)
   if (length(mp) > 1L) for (step in seq_len(length(mp) - 1L)) {
-    a <- mp[step]; b <- mp[step + 1L]
+    a <- mp[step]
+    b <- mp[step + 1L]
     S <- matrix(0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n)) {
       if (ty[i] == a && ty[j] == b) S[i, j] <- W[i, j]
@@ -44,7 +46,9 @@ Metapath <- function(G, node_types = NULL, metapath = NULL) {
     ps[i, j] <- if (den > 0) 2 * M[i, j] / den else 0
   }
   counts <- numeric(n)
-  for (i in seq_len(n)) { s <- 0; for (j in seq_len(n)) s <- s + M[i, j]; counts[i] <- s }
+  for (i in seq_len(n)) { s <- 0
+  for (j in seq_len(n)) s <- s + M[i, j]
+  counts[i] <- s }
   list(estimate = tot, M = M, pathsim = ps, counts = counts, symmetric = sym,
        method = "Meta-path instance counts and PathSim (Sun et al. 2011)")
 }

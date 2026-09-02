@@ -348,7 +348,8 @@
   for (it in seq_len(lim)) {
     lam <- 0.5 * (lo + hi)
     Ls <- .trupek_chol(H + diag(lam, n))
-    if (is.null(Ls)) { lo <- lam; next }
+    if (is.null(Ls)) { lo <- lam
+    next }
     s <- -.trupek_chol_solve(Ls, g)
     ns <- .trupek_norm(s)
     if (abs(ns - delta) <= tol * delta) break

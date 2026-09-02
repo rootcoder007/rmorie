@@ -100,7 +100,8 @@ aipw_scores <- function(Y, W, mu1, mu0, e) {
 #' @export
 toc_curve <- function(scores, priority) {
   chk <- .slvgrf_check(scores, priority)
-  g <- chk$g; s <- chk$s
+  g <- chk$g
+  s <- chk$s
   n <- length(g)
   order <- order(-s, seq_len(n) - 1L)
   ate <- sum(g) / n
@@ -183,7 +184,8 @@ qini_coefficient <- function(scores, priority) {
 #' @export
 qini_curve <- function(scores, priority, cost = NULL) {
   chk <- .slvgrf_check(scores, priority)
-  g <- chk$g; s <- chk$s
+  g <- chk$g
+  s <- chk$s
   n <- length(g)
   order <- order(-s, seq_len(n) - 1L)
   if (is.null(cost)) {
@@ -228,7 +230,8 @@ qini_curve <- function(scores, priority, cost = NULL) {
 rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                       seed = 0) {
   chk <- .slvgrf_check(scores, priority)
-  g <- chk$g; s <- chk$s
+  g <- chk$g
+  s <- chk$s
   n <- length(g)
   if (n < 8L)
     stop(sprintf("slvgrf: the half-sample bootstrap needs at least 8 units, got %d", n))

@@ -236,11 +236,17 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
     det2 <- .robpca_det_from_chol(C2)
     if (det2 >= detval - 1e-15 * max(detval, 1.0)) {
       if (det2 < detval) {
-        cur <- nxt; mu <- mu2; C <- C2; detval <- det2
+        cur <- nxt
+        mu <- mu2
+        C <- C2
+        detval <- det2
       }
       break
     }
-    cur <- nxt; mu <- mu2; C <- C2; detval <- det2
+    cur <- nxt
+    mu <- mu2
+    C <- C2
+    detval <- det2
   }
   list(idx = cur, mu = mu, C = C, det = detval)
 }

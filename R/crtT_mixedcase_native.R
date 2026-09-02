@@ -18,9 +18,12 @@
 #' @export
 .crt_egcd <- function(a, b) {
   # extended Euclid: returns (g, c, d) with c*a + d*b = g
-  old_r <- a; r <- b
-  old_s <- 1; s <- 0
-  old_t <- 0; t <- 1
+  old_r <- a
+  r <- b
+  old_s <- 1
+  s <- 0
+  old_t <- 0
+  t <- 1
   while (r != 0) {
     q <- old_r %/% r
     tmp <- r
@@ -60,7 +63,8 @@ crtT <- function(residues, moduli) {
       ai <- a[k]
       mi <- m[k]
       eg <- .crt_egcd(mod, mi)
-      g <- eg$g; c <- eg$c
+      g <- eg$g
+      c <- eg$c
       if (g != 1L)
         stop(sprintf("moduli must be pairwise coprime (gcd(%d, %d) = %d)",
                      mod, mi, g))

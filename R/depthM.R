@@ -21,7 +21,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mahaldep(V)
 Mahaldep <- function(x, mu = NULL, Sigma = NULL) {
-  X <- as.matrix(x); n <- nrow(X); p <- ncol(X)
+  X <- as.matrix(x)
+  n <- nrow(X)
+  p <- ncol(X)
   if (is.null(mu)) mu <- colMeans(X) else mu <- .t4_vec(mu)
   if (length(mu) != p) stop("mu must have one entry per column of x")
   if (is.null(Sigma)) {

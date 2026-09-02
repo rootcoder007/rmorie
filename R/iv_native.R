@@ -81,7 +81,8 @@
              as.matrix(df[, c(endogenous, exogenous), drop = FALSE]))
   Z <- cbind(`(Intercept)` = 1,
              as.matrix(df[, c(instruments, exogenous), drop = FALSE]))
-  storage.mode(X) <- "double"; storage.mode(Z) <- "double"
+  storage.mode(X) <- "double"
+  storage.mode(Z) <- "double"
   list(y = y, X = X, Z = Z, df = df)
 }
 

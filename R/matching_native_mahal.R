@@ -50,7 +50,9 @@
   strata <- if (is.null(exact)) rep("", nrow(df)) else
     do.call(paste, c(df[, exact, drop = FALSE], sep = "\r"))
 
-  ti_all <- integer(0); ci_all <- integer(0); d_all <- numeric(0)
+  ti_all <- integer(0)
+  ci_all <- integer(0)
+  d_all <- numeric(0)
   for (s in unique(strata[idx_t])) {
     st <- idx_t[strata[idx_t] == s]
     sc <- idx_c[strata[idx_c] == s]

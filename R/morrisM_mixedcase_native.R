@@ -32,7 +32,9 @@
 #' @export
 morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
                           bounds = NULL) {
-  k <- as.integer(k); r <- as.integer(r); p <- as.integer(p)
+  k <- as.integer(k)
+  r <- as.integer(r)
+  p <- as.integer(p)
   if (is.null(bounds)) {
     bounds <- lapply(seq_len(k), function(i) c(0, 1))
   }
@@ -70,11 +72,13 @@ morie_morrisM <- function(fun, k, r = 10, p = 4, seed = 0,
       if (x[i] + step > 1 + 1e-12 || x[i] + step < -1e-12) {
         step <- -step
       }
-      x2 <- x; x2[i] <- x[i] + step
+      x2 <- x
+      x2[i] <- x[i] + step
       y2 <- as.numeric(fun(scale_x(x2)))
       n_runs <- n_runs + 1L
       ee[[i]] <- c(ee[[i]], (y2 - y) / step)
-      x <- x2; y <- y2
+      x <- x2
+      y <- y2
     }
   }
   mu <- vapply(ee, mean, numeric(1))

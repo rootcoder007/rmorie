@@ -21,7 +21,8 @@
 #' @examples
 #' Ghosalntrbvm()
 Ghosalntrbvm <- function(n = 1500, n_sim = 300, seed = 42) {
-  n <- as.integer(n); n_sim <- as.integer(n_sim)
+  n <- as.integer(n)
+  n_sim <- as.integer(n_sim)
   if (n < 1L) stop("n must be positive")
   if (n_sim < 2L) stop("n_sim must be at least 2")
   e <- .ghc_rng(seed)

@@ -67,7 +67,9 @@
   if (x > (a + 1) / (a + b + 2)) {
     return(1 - .edgrn_betainc(b, a, 1 - x, iters))
   }
-  f <- 1; cc <- 1; d <- 0
+  f <- 1
+  cc <- 1
+  d <- 0
   for (i in 0:(iters - 1)) {
     m <- i %/% 2
     if (i == 0) {
@@ -148,7 +150,8 @@
 #' @return A list with \code{variance}, \code{poisson}, \code{biological}, \code{bcv}, \code{note}.
 #' @export
 edgrn_nb_variance <- function(mu, dispersion) {
-  m <- as.numeric(mu); p <- as.numeric(dispersion)
+  m <- as.numeric(mu)
+  p <- as.numeric(dispersion)
   if (m < 0 || p < 0)
     stop("edgrn: the mean and dispersion must be non-negative")
   list(variance = m * (1 + m * p), poisson = m,
@@ -173,7 +176,8 @@ edgrn_nb_variance <- function(mu, dispersion) {
 edgrn_tmm_factor <- function(counts_sample, counts_reference,
                             trim_m = 0.3, trim_a = 0.05,
                             lib_sample = NULL, lib_reference = NULL) {
-  y <- .edgrn_vec(counts_sample); r <- .edgrn_vec(counts_reference)
+  y <- .edgrn_vec(counts_sample)
+  r <- .edgrn_vec(counts_reference)
   if (length(y) != length(r))
     stop(sprintf("edgrn: %d genes in the sample but %d in the reference",
                  length(y), length(r)))
@@ -181,22 +185,27 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
   Nr <- if (is.null(lib_reference)) sum(r) else as.numeric(lib_reference)
   if (Nk <= 0 || Nr <= 0)
     stop("edgrn: a library size is zero")
-  Mv <- numeric(0); Av <- numeric(0); Wv <- numeric(0)
+  Mv <- numeric(0)
+  Av <- numeric(0)
+  Wv <- numeric(0)
   for (g in seq_along(y)) {
     if (y[g] <= 0 || r[g] <= 0) next
     Mg <- log2(y[g] / Nk) - log2(r[g] / Nr)
     Ag <- 0.5 * (log2(y[g] / Nk) + log2(r[g] / Nr))
     w <- ((Nk - y[g]) / (Nk * y[g])) + ((Nr - r[g]) / (Nr * r[g]))
-    Mv <- c(Mv, Mg); Av <- c(Av, Ag)
+    Mv <- c(Mv, Mg)
+    Av <- c(Av, Ag)
     Wv <- c(Wv, if (w > .edgrn_eps) 1 / w else 0)
   }
   if (!length(Mv))
     stop("edgrn: no gene is positive in both libraries, so no ratio can be formed")
   n <- length(Mv)
-  tm <- as.numeric(trim_m); ta <- as.numeric(trim_a)
+  tm <- as.numeric(trim_m)
+  ta <- as.numeric(trim_a)
   if (tm < 0 || tm >= 0.5 || ta < 0 || ta >= 0.5)
     stop("edgrn: the trim fractions must lie in [0, 0.5)")
-  om <- order(Mv); oa <- order(Av)
+  om <- order(Mv)
+  oa <- order(Av)
   cut_m <- as.integer(floor(n * tm))
   cut_a <- as.integer(floor(n * ta))
   keep <- intersect(om[(cut_m + 1):(n - cut_m)],
@@ -223,7 +232,8 @@ edgrn_tmm_factor <- function(counts_sample, counts_reference,
 #' @return A list with \code{effective}, \code{offset}, \code{note}.
 #' @export
 edgrn_effective_library_size <- function(library_size, factor) {
-  N <- as.numeric(library_size); f <- as.numeric(factor)
+  N <- as.numeric(library_size)
+  f <- as.numeric(factor)
   if (N <= 0 || f <= 0)
     stop("edgrn: the library size and factor must be positive")
   list(effective = N * f, offset = log(N * f),
@@ -249,7 +259,8 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
     stop("edgrn: no dispersions given")
   if (any(p < 0))
     stop("edgrn: a dispersion cannot be negative")
-  d0 <- as.numeric(prior_df); dg <- as.numeric(df_residual)
+  d0 <- as.numeric(prior_df)
+  dg <- as.numeric(df_residual)
   if (d0 < 0 || dg <= 0)
     stop("edgrn: the degrees of freedom must be positive")
   pos <- p[p > .edgrn_eps]
@@ -285,8 +296,10 @@ edgrn_moderate_dispersion <- function(gene_dispersions, common = NULL,
 #' @return A list with \code{p_value}, \code{logFC}, \code{dispersion}, \code{note}.
 #' @export
 edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
-  ya <- as.numeric(count_a); yb <- as.numeric(count_b)
-  Na <- as.numeric(lib_a); Nb <- as.numeric(lib_b)
+  ya <- as.numeric(count_a)
+  yb <- as.numeric(count_b)
+  Na <- as.numeric(lib_a)
+  Nb <- as.numeric(lib_b)
   phi <- as.numeric(dispersion)
   if (min(ya, yb) < 0 || Na <= 0 || Nb <= 0)
     stop("edgrn: counts must be non-negative and library sizes positive")
@@ -294,7 +307,8 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
   p_common <- total / (Na + Nb)
   obs <- .edgrn_nb_logpmf(ya, Na * p_common, phi) +
          .edgrn_nb_logpmf(yb, Nb * p_common, phi)
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   s_max <- as.integer(total)
   for (s in 0:s_max) {
     lp <- .edgrn_nb_logpmf(s, Na * p_common, phi) +
@@ -323,7 +337,9 @@ edgrn_exact_test <- function(count_a, count_b, lib_a, lib_b, dispersion) {
 #' @export
 edgrn_ql_f_test <- function(lrt, q, quasi_dispersion, df_residual,
                             df_prior = NULL) {
-  L <- as.numeric(lrt); Q <- as.integer(q); P <- as.numeric(quasi_dispersion)
+  L <- as.numeric(lrt)
+  Q <- as.integer(q)
+  P <- as.numeric(quasi_dispersion)
   d2 <- as.numeric(df_residual) + if (is.null(df_prior)) 0 else as.numeric(df_prior)
   if (Q < 1 || P <= 0 || d2 <= 0)
     stop("edgrn: need q >= 1 and positive dispersion and degrees of freedom")

@@ -21,11 +21,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mafsn(V)
 Mafsn <- function(z_scores, alpha = 0.05) {
-  z <- as.numeric(z_scores); k <- length(z)
+  z <- as.numeric(z_scores)
+  k <- length(z)
   if (k == 0L) stop("no studies")
   a <- as.numeric(alpha)
   if (a <= 0 || a >= 1) stop("alpha must lie strictly between 0 and 1")
-  za <- .s03qnorm(1 - a); s <- sum(z)
+  za <- .s03qnorm(1 - a)
+  s <- sum(z)
   .t1_result(Nfs = s^2 / za^2 - k, z_combined = s / sqrt(k), z_alpha = za,
              k = k, method = "Rosenthal's fail-safe N")
 }

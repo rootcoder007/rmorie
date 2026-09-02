@@ -28,13 +28,17 @@
 #' @examples
 #' Ppsamp(y = c(1, 2, 3, 4, 5, 6, 7, 8), size = c(1, 2, 3, 4, 5, 6, 7, 8), n = 3L)
 Ppsamp <- function(y, size, n) {
-  y <- as.numeric(unlist(y)); x <- as.numeric(unlist(size))
+  y <- as.numeric(unlist(y))
+  x <- as.numeric(unlist(size))
   if (length(y) == 0L) stop("Ppsamp: y is empty")
   if (length(x) != length(y)) stop("Ppsamp: size must have one entry per unit")
   if (any(x <= 0)) stop("Ppsamp: sizes must be positive")
   n <- as.integer(n)
   if (n < 1L) stop("Ppsamp: n must be at least 1")
-  N <- length(y); X <- sum(x); p <- x / X; pi <- n * p
+  N <- length(y)
+  X <- sum(x)
+  p <- x / X
+  pi <- n * p
   if (any(pi > 1))
     stop("Ppsamp: an inclusion probability exceeds 1; that unit must be selected with certainty")
   Y <- sum(y)

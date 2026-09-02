@@ -17,7 +17,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rtrenew(V, V)
 Rtrenew <- function(incidence, gen_int, delays = NULL) {
-  y <- .t1_vec(incidence); w <- .t1_vec(gen_int)
+  y <- .t1_vec(incidence)
+  w <- .t1_vec(gen_int)
   if (sum(w) <= 0) stop("gen_int must have positive mass")
   w <- w / sum(w)
   shift <- 0L
@@ -28,8 +29,10 @@ Rtrenew <- function(incidence, gen_int, delays = NULL) {
     shift <- as.integer(round(sum((seq_along(d) - 1) * d)))
   }
   infections <- if (shift > 0) y[-seq_len(shift)] else y
-  n <- length(infections); s <- length(w)
-  times <- integer(0); rt <- numeric(0)
+  n <- length(infections)
+  s <- length(w)
+  times <- integer(0)
+  rt <- numeric(0)
   if (n > s) for (t in (s + 1L):n) {
     force <- sum(w * infections[(t - 1L):(t - s)])
     times <- c(times, t - 1L)

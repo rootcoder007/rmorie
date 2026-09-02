@@ -73,8 +73,11 @@
 #' @references Belloni, A. & Chernozhukov, V. (2013).
 #' @export
 lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
-  rows <- as.matrix(X); storage.mode(rows) <- "double"
-  t <- as.numeric(y); n <- nrow(rows); p <- ncol(rows)
+  rows <- as.matrix(X)
+  storage.mode(rows) <- "double"
+  t <- as.numeric(y)
+  n <- nrow(rows)
+  p <- ncol(rows)
   if (length(t) != n) stop("tmldgp: rows and outcomes differ in length")
   lam <- as.numeric(lam)
   if (lam < 0) stop("tmldgp: lambda cannot be negative")
@@ -108,9 +111,11 @@ lasso_path <- function(X, y, lam, iters = 500, tol = 1e-9) {
 #' @references Belloni, A. & Chernozhukov, V. (2013).
 #' @export
 post_lasso <- function(X, y, lam) {
-  rows <- as.matrix(X); storage.mode(rows) <- "double"
+  rows <- as.matrix(X)
+  storage.mode(rows) <- "double"
   t <- as.numeric(y)
-  sel <- lasso_path(rows, t, lam); S <- sel$support
+  sel <- lasso_path(rows, t, lam)
+  S <- sel$support
   if (length(S) == 0L) {
     m <- mean(t)
     return(list(support = integer(0), coef = numeric(0),
@@ -146,7 +151,9 @@ post_lasso <- function(X, y, lam) {
 #'   \code{caveat}.
 #' @export
 shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
-  q <- as.numeric(Q); h <- as.numeric(H); yy <- as.numeric(Y)
+  q <- as.numeric(Q)
+  h <- as.numeric(H)
+  yy <- as.numeric(Y)
   n <- length(q)
   if (!(length(h) == length(yy) && length(yy) == n))
     stop("tmldgp: Q, H, Y must have the same length")
@@ -183,8 +190,10 @@ shrunk_targeting_unsafe <- function(Q, H, Y, ridge = 1) {
 #'   J. & Gruber, S. (2016).
 #' @export
 morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
-  yv <- as.numeric(y); a <- as.numeric(D)
-  W <- as.matrix(X); storage.mode(W) <- "double"
+  yv <- as.numeric(y)
+  a <- as.numeric(D)
+  W <- as.matrix(X)
+  storage.mode(W) <- "double"
   n <- length(yv)
   if (!(length(a) == nrow(W) && nrow(W) == n))
     stop("tmldgp: the inputs differ in length")
@@ -198,10 +207,14 @@ morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
   row1 <- c(1, rep(0, ncol(W)))
   row0 <- c(0, rep(0, ncol(W)))
   q1 <- pmin(pmax(vapply(seq_len(n), function(i) {
-    r <- row1; r[-1] <- W[i, ]; qfit$predict(r)
+    r <- row1
+    r[-1] <- W[i, ]
+    qfit$predict(r)
   }, numeric(1)), 1e-6), 1 - 1e-6)
   q0 <- pmin(pmax(vapply(seq_len(n), function(i) {
-    r <- row0; r[-1] <- W[i, ]; qfit$predict(r)
+    r <- row0
+    r[-1] <- W[i, ]
+    qfit$predict(r)
   }, numeric(1)), 1e-6), 1 - 1e-6)
   H <- a / gg - (1 - a) / (1 - gg)
   qa <- ifelse(a == 1, q1, q0)

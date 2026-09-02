@@ -58,7 +58,9 @@ NULL
 .s4_median <- function(x) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
-  if (n == 0L) return(NaN)
+  if (n == 0L) {
+    return(NaN)
+  }
   m <- n %/% 2L
   if (n %% 2L == 1L) x[m + 1L] else 0.5 * (x[m] + x[m + 1L])
 }
@@ -77,8 +79,12 @@ NULL
 .s4_quantile7 <- function(x, p) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
-  if (n == 0L) return(NaN)
-  if (n == 1L) return(x[1L])
+  if (n == 0L) {
+    return(NaN)
+  }
+  if (n == 1L) {
+    return(x[1L])
+  }
   h <- (n - 1) * p
   lo <- floor(h)
   hi <- min(lo + 1, n - 1)
@@ -135,8 +141,10 @@ NULL
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .s4_glmbin <- function(X, y, iters = 25L, ridge = 1e-8) {
-  X <- as.matrix(X); y <- as.numeric(y)
-  n <- nrow(X); p <- ncol(X)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  n <- nrow(X)
+  p <- ncol(X)
   beta <- rep(0, p)
   for (it in seq_len(iters)) {
     eta <- as.numeric(X %*% beta)
@@ -162,7 +170,8 @@ NULL
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s4_rbf <- function(X, Z, ell = 1) {
-  X <- as.matrix(X); Z <- as.matrix(Z)
+  X <- as.matrix(X)
+  Z <- as.matrix(Z)
   out <- matrix(0, nrow(X), nrow(Z))
   for (i in seq_len(nrow(X))) {
     for (j in seq_len(nrow(Z))) {
@@ -186,7 +195,8 @@ NULL
 #' @return A list with \code{mean}, \code{var}.
 #' @export
 .s4_gppost <- function(K, Ks, Kss, y, noise = 1e-6) {
-  K <- as.matrix(K); Ks <- as.matrix(Ks)
+  K <- as.matrix(K)
+  Ks <- as.matrix(Ks)
   n <- nrow(K)
   A <- K + diag(noise, n)
   alpha <- as.numeric(solve(A, as.numeric(y)))
@@ -266,13 +276,16 @@ NULL
 #' @export
 .s4_qr_mgs <- function(A) {
   A <- as.matrix(A)
-  n <- nrow(A); p <- ncol(A)
+  n <- nrow(A)
+  p <- ncol(A)
   Q <- A
   R <- matrix(0, p, p)
   for (j in seq_len(p)) {
-    if (j > 1L) for (i in seq_len(j - 1L)) {
-      R[i, j] <- sum(Q[, i] * Q[, j])
-      Q[, j] <- Q[, j] - R[i, j] * Q[, i]
+    if (j > 1L) {
+      for (i in seq_len(j - 1L)) {
+        R[i, j] <- sum(Q[, i] * Q[, j])
+        Q[, j] <- Q[, j] - R[i, j] * Q[, i]
+      }
     }
     R[j, j] <- sqrt(sum(Q[, j]^2))
     d <- if (R[j, j] > 1e-300) R[j, j] else 1e-300
@@ -313,7 +326,9 @@ NULL
 #' @return A list with \code{theta}, \code{beta}, \code{cbar}.
 #' @export
 .s4_medmodels <- function(Y, A, M, Cc = NULL) {
-  Y <- as.numeric(Y); A <- as.numeric(A); M <- as.numeric(M)
+  Y <- as.numeric(Y)
+  A <- as.numeric(A)
+  M <- as.numeric(M)
   n <- length(Y)
   Cm <- if (is.null(Cc)) NULL else as.matrix(Cc)
   XO <- if (is.null(Cm)) cbind(1, A, M, A * M) else cbind(1, A, M, A * M, Cm)
@@ -347,8 +362,10 @@ NULL
   intref <- theta[4] * (bc - m) * d
   intmed <- theta[4] * beta[2] * d * d
   pie <- (theta[3] * beta[2] + theta[4] * beta[2] * astar) * d
-  list(cde = cde, intref = intref, intmed = intmed, pie = pie,
-       te = cde + intref + intmed + pie)
+  list(
+    cde = cde, intref = intref, intmed = intmed, pie = pie,
+    te = cde + intref + intmed + pie
+  )
 }
 
 ## One TMLE pass for a binary point treatment. W carries its intercept.
@@ -365,7 +382,10 @@ NULL
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
 #' @export
 .s4_tmle <- function(y, D, W, gbound = 0.025) {
-  y <- as.numeric(y); D <- as.numeric(D); W <- as.matrix(W); n <- length(y)
+  y <- as.numeric(y)
+  D <- as.numeric(D)
+  W <- as.matrix(W)
+  n <- length(y)
   gb <- .s4_glmbin(W, D)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), gbound, 1 - gbound)
   qb <- .s4_ols(cbind(D, W), y)$beta
@@ -381,8 +401,10 @@ NULL
   psi <- sum(Q1s - Q0s) / n
   ic <- H * (y - Qs) + Q1s - Q0s - psi
   se <- if (n > 1) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN
-  list(psi = psi, se = se, eps = eps, g = g, H = H, Q1 = Q1s, Q0 = Q0s,
-       ic = ic, n = n)
+  list(
+    psi = psi, se = se, eps = eps, g = g, H = H, Q1 = Q1s, Q0 = Q0s,
+    ic = ic, n = n
+  )
 }
 
 ## Least squares by the SAME modified Gram-Schmidt in both arms. The
@@ -401,10 +423,13 @@ NULL
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
 .s4_ols <- function(X, y) {
-  X <- as.matrix(X); y <- as.numeric(y)
-  n <- nrow(X); p <- ncol(X)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  n <- nrow(X)
+  p <- ncol(X)
   qr_ <- .s4_qr_mgs(X)
-  Q <- qr_$Q; R <- qr_$R
+  Q <- qr_$Q
+  R <- qr_$R
   qty <- as.numeric(crossprod(Q, y))
   beta <- numeric(p)
   for (j in seq(p, 1L)) {
@@ -414,8 +439,10 @@ NULL
   }
   fitted <- as.numeric(X %*% beta)
   rinv <- .s4_triinv(R, p)
-  list(beta = beta, fitted = fitted, resid = y - fitted,
-       xtxinv = rinv %*% t(rinv))
+  list(
+    beta = beta, fitted = fitted, resid = y - fitted,
+    xtxinv = rinv %*% t(rinv)
+  )
 }
 
 ## Upper-triangular inverse by back substitution. Floors the pivot rather
@@ -457,29 +484,43 @@ NULL
 #' @return The value of \code{ans}, as built in the body.
 #' @export
 .s4_hungarian <- function(cost) {
-  Cst <- as.matrix(cost); n <- nrow(Cst)
+  Cst <- as.matrix(cost)
+  n <- nrow(Cst)
   INF <- Inf
-  u <- rep(0, n + 1L); v <- rep(0, n + 1L)
-  p <- rep(0L, n + 1L); way <- rep(0L, n + 1L)
+  u <- rep(0, n + 1L)
+  v <- rep(0, n + 1L)
+  p <- rep(0L, n + 1L)
+  way <- rep(0L, n + 1L)
   for (i in seq_len(n)) {
     p[1L] <- i
     j0 <- 0L
-    minv <- rep(INF, n + 1L); used <- rep(FALSE, n + 1L)
+    minv <- rep(INF, n + 1L)
+    used <- rep(FALSE, n + 1L)
     repeat {
       used[j0 + 1L] <- TRUE
-      i0 <- p[j0 + 1L]; delta <- INF; j1 <- 0L
+      i0 <- p[j0 + 1L]
+      delta <- INF
+      j1 <- 0L
       for (j in seq_len(n)) {
         if (!used[j + 1L]) {
           cur <- Cst[i0, j] - u[i0 + 1L] - v[j + 1L]
-          if (cur < minv[j + 1L]) { minv[j + 1L] <- cur; way[j + 1L] <- j0 }
-          if (minv[j + 1L] < delta) { delta <- minv[j + 1L]; j1 <- j }
+          if (cur < minv[j + 1L]) {
+            minv[j + 1L] <- cur
+            way[j + 1L] <- j0
+          }
+          if (minv[j + 1L] < delta) {
+            delta <- minv[j + 1L]
+            j1 <- j
+          }
         }
       }
       for (j in 0:n) {
         if (used[j + 1L]) {
           u[p[j + 1L] + 1L] <- u[p[j + 1L] + 1L] + delta
           v[j + 1L] <- v[j + 1L] - delta
-        } else minv[j + 1L] <- minv[j + 1L] - delta
+        } else {
+          minv[j + 1L] <- minv[j + 1L] - delta
+        }
       }
       j0 <- j1
       if (p[j0 + 1L] == 0L) break
@@ -512,8 +553,10 @@ NULL
   yv <- as.numeric(y)
   sv <- as.integer(round(as.numeric(subject)))
   rv <- as.integer(round(as.numeric(rater)))
-  subs <- unique(sv); rats <- unique(rv)
-  n <- length(subs); k <- length(rats)
+  subs <- unique(sv)
+  rats <- unique(rv)
+  n <- length(subs)
+  k <- length(rats)
   grand <- sum(yv) / length(yv)
   rm_ <- vapply(subs, function(s) mean(yv[sv == s]), 0)
   cm_ <- vapply(rats, function(r) mean(yv[rv == r]), 0)
@@ -521,10 +564,12 @@ NULL
   ss_c <- n * sum((cm_ - grand)^2)
   ss_t <- sum((yv - grand)^2)
   ss_e <- ss_t - ss_r - ss_c
-  list(ms_r = if (n > 1) ss_r / (n - 1) else NaN,
-       ms_c = if (k > 1) ss_c / (k - 1) else NaN,
-       ms_e = if (n > 1 && k > 1) ss_e / ((n - 1) * (k - 1)) else NaN,
-       k = as.numeric(k), n = as.numeric(n))
+  list(
+    ms_r = if (n > 1) ss_r / (n - 1) else NaN,
+    ms_c = if (k > 1) ss_c / (k - 1) else NaN,
+    ms_e = if (n > 1 && k > 1) ss_e / ((n - 1) * (k - 1)) else NaN,
+    k = as.numeric(k), n = as.numeric(n)
+  )
 }
 
 ## Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid of
@@ -541,7 +586,9 @@ NULL
 #' @export
 .s4_gpdfit <- function(x) {
   N <- length(x)
-  if (N < 5L) return(list(k = NaN, sigma = NaN))
+  if (N < 5L) {
+    return(list(k = NaN, sigma = NaN))
+  }
   M <- 30L + as.integer(floor(sqrt(N)))
   xstar <- x[as.integer(floor(N / 4 + 0.5))]
   jj <- seq_len(M)
@@ -571,16 +618,21 @@ NULL
 #' @return A list with \code{lw}, \code{k}.
 #' @export
 .s4_psis <- function(lw) {
-  lw <- as.numeric(lw); Sn <- length(lw)
+  lw <- as.numeric(lw)
+  Sn <- length(lw)
   lw <- lw - max(lw)
   M <- as.integer(min(0.2 * Sn, 3 * sqrt(Sn)))
-  if (M < 5L) return(list(lw = lw, k = NaN))
+  if (M < 5L) {
+    return(list(lw = lw, k = NaN))
+  }
   o <- order(lw, seq_along(lw))
   tail <- o[(Sn - M + 1L):Sn]
   cut <- lw[o[Sn - M]]
   ecut <- exp(cut)
   x <- sort(exp(lw[tail]) - ecut)
-  if (x[length(x)] <= 0) return(list(lw = lw, k = NaN))
+  if (x[length(x)] <= 0) {
+    return(list(lw = lw, k = NaN))
+  }
   g <- .s4_gpdfit(x)
   if (!is.nan(g$k) && !is.nan(g$sigma)) {
     for (z in seq_len(M)) {

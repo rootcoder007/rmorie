@@ -32,21 +32,27 @@
 #' set.seed(1)
 #' r <- Rdkkin(y = rnorm(10), x = rnorm(10)); TRUE
 Rdkkin <- function(y, x, D = NULL, cutoff = 0, bandwidth = 1) {
-  y <- as.numeric(unlist(y)); x <- as.numeric(unlist(x))
+  y <- as.numeric(unlist(y))
+  x <- as.numeric(unlist(x))
   if (length(y) == 0L) stop("Rdkkin: y is empty")
   if (length(x) != length(y)) stop("Rdkkin: x must have one entry per observation")
   s <- .rd_sides(x, cutoff, bandwidth, "Rdkkin")
   yR <- .rd_wls(s$r[s$right], y[s$right], s$w[s$right])
   yL <- .rd_wls(s$r[s$left], y[s$left], s$w[s$left])
-  num <- yR$b - yL$b; vn <- yR$var_b + yL$var_b
+  num <- yR$b - yL$b
+  vn <- yR$var_b + yL$var_b
   if (is.null(D)) {
-    bdR <- 1; bdL <- 0; vd <- 0
+    bdR <- 1
+    bdL <- 0
+    vd <- 0
   } else {
     D <- as.numeric(unlist(D))
     if (length(D) != length(y)) stop("Rdkkin: D must have one entry per observation")
     dR <- .rd_wls(s$r[s$right], D[s$right], s$w[s$right])
     dL <- .rd_wls(s$r[s$left], D[s$left], s$w[s$left])
-    bdR <- dR$b; bdL <- dL$b; vd <- dR$var_b + dL$var_b
+    bdR <- dR$b
+    bdL <- dL$b
+    vd <- dR$var_b + dL$var_b
   }
   den <- bdR - bdL
   if (abs(den) < 1e-10) stop("Rdkkin: no kink in assignment; the denominator is zero")

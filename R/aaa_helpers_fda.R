@@ -26,7 +26,9 @@
 .fdtrapz <- function(t, v) {
   s <- 0
   n <- length(t)
-  if (n < 2L) return(s)
+  if (n < 2L) {
+    return(s)
+  }
   for (i in seq_len(n - 1L)) s <- s + 0.5 * (v[i] + v[i + 1L]) * (t[i + 1L] - t[i])
   s
 }

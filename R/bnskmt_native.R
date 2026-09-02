@@ -18,7 +18,9 @@
 #' @return A numeric value.
 #' @export
 S_function <- function(std_moments, form = "sum", n_equality = 0L) {
-  v <- as.numeric(std_moments); J <- length(v); ne <- as.integer(n_equality)
+  v <- as.numeric(std_moments)
+  J <- length(v)
+  ne <- as.integer(n_equality)
   ineq <- v[seq_len(J - ne)]
   # guard: with no equality moments the colon slice DESCENDS through
   # v[J + 1] and poisons the statistic with NA
@@ -42,16 +44,21 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @export
 weighted_moments <- function(m, g) {
   if (is.matrix(m)) M <- split(m, row(m)) else M <- m
-  M <- lapply(M, as.numeric); n <- length(M)
+  M <- lapply(M, as.numeric)
+  n <- length(M)
   if (n < 2L) stop("bnskmt: need at least 2 observations")
   gv <- as.numeric(g)
   if (length(gv) != n) stop(sprintf("bnskmt: %d weights for %d observations", length(gv), n))
   if (any(gv < 0.0)) stop("bnskmt: instrument weights must be non-negative")
-  J <- length(M[[1L]]); means <- numeric(J); sds <- numeric(J)
+  J <- length(M[[1L]])
+  means <- numeric(J)
+  sds <- numeric(J)
   for (j in seq_len(J)) {
     v <- sapply(seq_len(n), function(i) M[[i]][j] * gv[i])
-    mu <- mean(v); var <- sum((v - mu) ^ 2) / (n - 1L)
-    means[j] <- mu; sds[j] <- sqrt(max(var, 0.0))
+    mu <- mean(v)
+    var <- sum((v - mu) ^ 2) / (n - 1L)
+    means[j] <- mu
+    sds[j] <- sqrt(max(var, 0.0))
   }
   list(mean = means, sd = sds, n = n)
 }
@@ -69,7 +76,8 @@ weighted_moments <- function(m, g) {
 hypercube_instruments <- function(X, n_levels = 3L) {
   if (!is.list(X) && !is.matrix(X)) stop("bnskmt: X must be a matrix or list of rows")
   if (is.matrix(X)) Xm <- split(X, row(X)) else Xm <- X
-  Xm <- lapply(Xm, as.numeric); n <- length(Xm)
+  Xm <- lapply(Xm, as.numeric)
+  n <- length(Xm)
   if (n == 0L) stop("bnskmt: no observations")
   d <- length(Xm[[1L]])
   lo <- sapply(seq_len(d), function(j) min(sapply(Xm, function(r) r[j])))
@@ -79,7 +87,8 @@ hypercube_instruments <- function(X, n_levels = 3L) {
   for (lev in seq_len(as.integer(n_levels) - 1L)) {
     cells <- 2 ^ lev
     for (c in 0:(cells ^ d - 1L)) {
-      idx <- integer(d); rem <- c
+      idx <- integer(d)
+      rem <- c
       for (jj in seq_len(d)) { idx[jj] <- rem %/% cells ^ ((d - jj) %% d) %% cells
                                rem <- rem - (rem %/% cells ^ ((d - jj) %% d)) * cells ^ ((d - jj) %% d) }
       g <- numeric(n)
@@ -89,7 +98,8 @@ hypercube_instruments <- function(X, n_levels = 3L) {
           pos <- (Xm[[i]][j] - lo[j]) / span[j]
           edge <- if (idx[j] == cells - 1L) 1e-12 else 0.0
           if (!(idx[j] / cells <= pos && pos < (idx[j] + 1L) / cells + edge))
-            { inside <- FALSE; break }
+            { inside <- FALSE
+            break }
         }
         g[i] <- if (inside) 1.0 else 0.0
       }
@@ -115,7 +125,9 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
   if (length(G) == 0L) stop("bnskmt: the instrument class is empty")
-  best <- 0.0; arg <- NA_integer_; parts <- numeric(length(G))
+  best <- 0.0
+  arg <- NA_integer_
+  parts <- numeric(length(G))
   for (a in seq_along(G)) {
     wm <- weighted_moments(m, G[[a]])
     n <- wm$n
@@ -123,7 +135,8 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
                   function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .bnskmt_EPS))
     s <- S_function(std, form = form, n_equality = n_equality)
     parts[a] <- s
-    if (s > best) { best <- s; arg <- a }
+    if (s > best) { best <- s
+    arg <- a }
   }
   list(statistic = best, argmax = arg, per_instrument = parts,
        form = form, n_instruments = length(G),
@@ -150,7 +163,8 @@ ks_critical_value <- function(m, instruments, form = "sum",
                               n_equality = 0L, level = 0.95,
                               reps = 200L, seed = 0L, kappa = NULL) {
   if (is.matrix(m)) M <- split(m, row(m)) else M <- m
-  M <- lapply(M, as.numeric); n <- length(M)
+  M <- lapply(M, as.numeric)
+  n <- length(M)
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
     instruments$instruments else instruments
   kap <- if (is.null(kappa)) sqrt(log(max(n, 3L))) else as.numeric(kappa)
@@ -202,7 +216,8 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                               n_equality = 0L, level = 0.95,
                               n_levels = 2L, reps = 100L, seed = 0L) {
   inst <- hypercube_instruments(X, n_levels = n_levels)
-  keep <- c(); stats <- list()
+  keep <- c()
+  stats <- list()
   for (th in theta_grid) {
     m <- moment_fn(th)
     t <- ks_statistic(m, inst, form = form, n_equality = n_equality)
@@ -241,14 +256,16 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
     stop(sprintf("bnskmt: %d measure weights for %d instruments", length(q), length(G)))
   if (abs(sum(q) - 1.0) > 1e-6)
     stop(sprintf("bnskmt: the measure Q must sum to 1, got %.6f", sum(q)))
-  tot <- 0.0; parts <- numeric(length(G))
+  tot <- 0.0
+  parts <- numeric(length(G))
   for (a in seq_along(G)) {
     wm <- weighted_moments(m, G[[a]])
     n <- wm$n
     std <- sapply(seq_along(wm$mean),
                   function(j) sqrt(n) * wm$mean[j] / max(wm$sd[j], .bnskmt_EPS))
     s <- S_function(std, form = form, n_equality = n_equality)
-    parts[a] <- s; tot <- tot + q[a] * s
+    parts[a] <- s
+    tot <- tot + q[a] * s
   }
   list(statistic = tot, per_instrument = parts, form = form,
        n_instruments = length(G),

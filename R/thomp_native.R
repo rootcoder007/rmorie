@@ -36,12 +36,16 @@ morie_thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
     stop("alpha0/beta0 must have length K")
   }
   e <- .ghc_rng(seed)
-  actions <- numeric(T); rewards <- numeric(T); counts <- numeric(K)
+  actions <- numeric(T)
+  rewards <- numeric(T)
+  counts <- numeric(K)
   for (t in seq_len(T)) {
-    best <- 1L; besttheta <- -1
+    best <- 1L
+    besttheta <- -1
     for (k in seq_len(K)) {
       th <- .ghc_beta1(e, a[k], b[k])
-      if (th > besttheta) { besttheta <- th; best <- k }
+      if (th > besttheta) { besttheta <- th
+      best <- k }
     }
     u <- .ghc_unif(e, 1L)
     r <- if (u < p[best]) 1 else 0

@@ -21,13 +21,18 @@
 #' @examples
 #' Pagehink(x = c(1, 2, 3, 4, 5, 6, 7, 8), threshold = 0.5)
 Pagehink <- function(x, threshold, delta = 0.005, direction = "increase") {
-  x <- .t4_vec(x); n <- length(x)
+  x <- .t4_vec(x)
+  n <- length(x)
   if (n == 0L) stop("empty stream")
   if (!direction %in% c("increase", "decrease")) stop("direction must be 'increase' or 'decrease'")
   sgn <- if (direction == "increase") 1 else -1
   delta <- as.numeric(delta)
-  run <- 0; m <- 0; ext <- 0
-  path <- numeric(n); detected <- FALSE; cp <- 0L
+  run <- 0
+  m <- 0
+  ext <- 0
+  path <- numeric(n)
+  detected <- FALSE
+  cp <- 0L
   for (t in seq_len(n)) {
     run <- run + x[t]
     xbar <- run / t
@@ -35,7 +40,8 @@ Pagehink <- function(x, threshold, delta = 0.005, direction = "increase") {
     if (t == 1L || m < ext) ext <- m
     ph <- m - ext
     path[t] <- ph
-    if (!detected && ph > threshold) { detected <- TRUE; cp <- t }
+    if (!detected && ph > threshold) { detected <- TRUE
+    cp <- t }
   }
   .t4_result(statistic = path[n], detected = detected,
              changepoint = as.integer(cp), ph = path, n = as.integer(n),

@@ -30,8 +30,10 @@
 #' @export
 Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
                    max_iter = 100, tol = 1e-12) {
-  y <- as.numeric(cases); sid <- as.integer(matching_id)
-  x <- as.numeric(exposure); n <- length(y)
+  y <- as.numeric(cases)
+  sid <- as.integer(matching_id)
+  x <- as.numeric(exposure)
+  n <- length(y)
   if (n == 0L) stop("no observations")
   if (length(sid) != n || length(x) != n)
     stop("all inputs must have the same length")
@@ -48,13 +50,19 @@ Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
     if (length(idx) < 2L)
       stop("every matched set needs at least one control")
   }
-  beta <- 0; it <- 0L; conv <- FALSE; info <- 0
+  beta <- 0
+  it <- 0L
+  conv <- FALSE
+  info <- 0
   for (it in seq_len(as.integer(max_iter))) {
-    score <- 0; info <- 0
+    score <- 0
+    info <- 0
     for (idx in sets) {
       mx <- max(beta * x[idx])
       ex <- exp(beta * x[idx] - mx)
-      s0 <- sum(ex); s1 <- sum(ex * x[idx]); s2 <- sum(ex * x[idx]^2)
+      s0 <- sum(ex)
+      s1 <- sum(ex * x[idx])
+      s2 <- sum(ex * x[idx]^2)
       xc <- x[idx][y[idx] == 1][1]
       score <- score + xc - s1 / s0
       info <- info + s2 / s0 - (s1 / s0)^2
@@ -63,7 +71,8 @@ Matccd <- function(cases, controls, matching_id, exposure, level = 0.95,
       stop(paste("the conditional information is zero; the exposure does",
                  "not vary within any matched set"))
     beta <- beta + score / info
-    if (abs(score) < as.numeric(tol)) { conv <- TRUE; break }
+    if (abs(score) < as.numeric(tol)) { conv <- TRUE
+    break }
   }
   ll <- 0
   for (idx in sets) {

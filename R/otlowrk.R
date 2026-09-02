@@ -28,10 +28,15 @@
 #' @export
 Sinkhlowr <- function(a, b, C, rank = 2, epsilon = 0.1, max_iter = 20,
                       inner = 50, gamma = 1) {
-  av <- .s03vec(a); bv <- .s03vec(b); Cm <- .s03mat(C)
-  n <- length(av); m <- length(bv); r <- as.integer(rank)
+  av <- .s03vec(a)
+  bv <- .s03vec(b)
+  Cm <- .s03mat(C)
+  n <- length(av)
+  m <- length(bv)
+  r <- as.integer(rank)
   g <- rep(1 / r, r)
-  Q <- matrix(0, n, r); R <- matrix(0, m, r)
+  Q <- matrix(0, n, r)
+  R <- matrix(0, m, r)
   for (i in seq_len(n)) for (t in seq_len(r)) Q[i, t] <- av[i] * g[t]
   for (j in seq_len(m)) for (t in seq_len(r)) R[j, t] <- bv[j] * g[t]
   for (it in seq_len(as.integer(max_iter))) {

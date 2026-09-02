@@ -34,13 +34,15 @@
 #'   Pass Filter. International Economic Review, 44(2), 435-465.
 #' @export
 morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
-  pl <- as.numeric(p_low); pu <- as.numeric(p_high)
+  pl <- as.numeric(p_low)
+  pu <- as.numeric(p_high)
   if (!(2 <= pl && pl < pu))
     stop(sprintf("crfflt: need 2 <= p_low < p_high, got (%.4f, %.4f)",
                  pl, pu))
   n <- as.integer(n)
   if (n < 0L) stop("crfflt: n must be non-negative")
-  a <- 2 * pi / pu; b <- 2 * pi / pl
+  a <- 2 * pi / pu
+  b <- 2 * pi / pl
   B <- (b - a) / pi
   if (n >= 1L) {
     js <- seq_len(n)
@@ -65,7 +67,8 @@ morie_crfflt_ideal_weights <- function(p_low, p_high, n) {
 #' @keywords internal
 #' @noRd
 .drift_adjust <- function(x) {
-  v <- as.numeric(x); T <- length(v)
+  v <- as.numeric(x)
+  T <- length(v)
   if (T < 2L) stop("crfflt: need at least 2 observations")
   mu <- (v[T] - v[1]) / (T - 1L)
   list(adjusted = v - (seq_len(T) - 1L) * mu, drift = mu)
@@ -105,12 +108,14 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
   if (!(method %in% c("asymmetric", "symmetric", "one_sided")))
     stop(sprintf("crfflt: method must be one of asymmetric, symmetric, one_sided, got %s",
                  method))
-  v <- as.numeric(x); T <- length(v)
+  v <- as.numeric(x)
+  T <- length(v)
   if (T < 5L) stop(sprintf("crfflt: need at least 5 observations, got %d", T))
   mu <- 0
   if (isTRUE(drift) && method != "symmetric") {
     da <- .drift_adjust(v)
-    v <- da$adjusted; mu <- da$drift
+    v <- da$adjusted
+    mu <- da$drift
   }
   B <- morie_crfflt_ideal_weights(p_low, p_high, T)$B
 
@@ -157,9 +162,11 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
                 reference = "Christiano & Fitzgerald (2003) eq. (1.4)"))
   }
 
-  out <- numeric(T); sums <- numeric(T)
+  out <- numeric(T)
+  sums <- numeric(T)
   for (t in seq_len(T)) {
-    f <- T - t; b <- t - 1L
+    f <- T - t
+    b <- t - 1L
     w <- numeric(T)
     w[t] <- w[t] + if (f >= 1L && b >= 1L) B[1] else 0.5 * B[1]
     if (f >= 1L)
@@ -190,7 +197,8 @@ morie_crfflt_cf_filter <- function(x, p_low = 6.0, p_high = 32.0,
 #' @return Numeric magnitude.
 #' @export
 morie_crfflt_frequency_response <- function(weights, omega) {
-  w <- as.numeric(weights); n <- length(w)
+  w <- as.numeric(weights)
+  n <- length(w)
   c <- (n - 1L) %/% 2L
   re <- sum(w * cos(omega * (seq_len(n) - 1L - c)))
   im <- sum(-w * sin(omega * (seq_len(n) - 1L - c)))

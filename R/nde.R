@@ -33,16 +33,23 @@
 #' @examples
 #' Nde(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Nde <- function(X, M, Y) {
-  x <- .t1_vec(X); m <- .t1_vec(M); y <- .t1_vec(Y); n <- length(x)
+  x <- .t1_vec(X)
+  m <- .t1_vec(M)
+  y <- .t1_vec(Y)
+  n <- length(x)
   if (n == 0L) stop("X is empty")
   if (length(m) != n || length(y) != n) {
     stop("X, M and Y must have the same length")
   }
   if (n < 4L) stop("need at least 4 observations to fit the SEM")
   b <- .t1_lstsq(cbind(1, x), m)$beta
-  b0 <- b[1]; b1 <- b[2]
+  b0 <- b[1]
+  b1 <- b[2]
   cf <- .t1_lstsq(cbind(1, x, m, x * m), y)$beta
-  c0 <- cf[1]; c1 <- cf[2]; c2 <- cf[3]; c3 <- cf[4]
+  c0 <- cf[1]
+  c1 <- cf[2]
+  c2 <- cf[3]
+  c3 <- cf[4]
   y10 <- c0 + c1 + c2 * b0 + c3 * b0
   y00 <- c0 + c2 * b0
   r <- Ndeff(y10, y00)

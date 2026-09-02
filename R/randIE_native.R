@@ -39,7 +39,9 @@
 #' @return A list with \code{p}, \code{levels}, \code{strata}, \code{arms}, \code{n}.
 #' @export
 morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
-  a <- .labels(A, "A"); m <- .labels(M, "M"); n <- length(a)
+  a <- .labels(A, "A")
+  m <- .labels(M, "M")
+  n <- length(a)
   if (length(m) != n)
     stop(paste0("randIE: ", n, " treatments but ", length(m),
                 " mediator values"))
@@ -55,7 +57,8 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
   }
   out <- list()
   for (k in names(cells)) {
-    vals <- cells[[k]]; tot <- length(vals) + laplace * length(levels.v)
+    vals <- cells[[k]]
+    tot <- length(vals) + laplace * length(levels.v)
     parts <- strsplit(k, "\r", fixed = TRUE)[[1]]
     key2 <- c(parts[1], parts[2])
     out[[length(out) + 1L]] <- list(key = key2,
@@ -98,14 +101,17 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
     stop(paste0("randIE: route must be gformula or weighting, got ",
                 route))
   y <- as.numeric(Y)
-  av <- .labels(A, "A"); mv <- .labels(M, "M"); n <- length(y)
+  av <- .labels(A, "A")
+  mv <- .labels(M, "M")
+  n <- length(y)
   if (!(length(av) == length(mv) && length(av) == n))
     stop(paste0("randIE: Y, A and M must agree in length (",
                 n, ", ", length(av), ", ", length(mv), ")"))
   cv <- if (is.null(C)) rep("*", n) else .labels(C, "C")
   if (length(cv) != n)
     stop(paste0("randIE: ", length(cv), " strata for ", n, " units"))
-  a <- as.character(a); a.star <- as.character(a.star)
+  a <- as.character(a)
+  a.star <- as.character(a.star)
   if (!(a %in% av))
     stop(paste0("randIE: treatment arm '", a,
                 "' not observed; arms are ", paste(sort(unique(av)),
@@ -115,10 +121,12 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                 "' not observed; arms are ", paste(sort(unique(av)),
                                                     collapse = ", ")))
   md <- morie_randIE_mediator_distribution(av, mv, cv, laplace = laplace)
-  strata <- md$strata; levels.v <- md$levels
+  strata <- md$strata
+  levels.v <- md$levels
   pc <- vapply(strata, function(s)
     sum(cv == s) / n, numeric(1))
-  ybar <- list(); cnt <- list()
+  ybar <- list()
+  cnt <- list()
   for (i in seq_len(n)) {
     key <- paste0(av[i], "\r", mv[i], "\r", cv[i])
     ybar[[key]] <- if (is.null(ybar[[key]])) 0 else ybar[[key]]
@@ -126,18 +134,21 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
     cnt[[key]] <- if (is.null(cnt[[key]])) 0 else cnt[[key]] + 1
   }
   for (k in names(ybar)) ybar[[k]] <- ybar[[k]] / cnt[[k]]
-  total <- 0; missing <- list()
+  total <- 0
+  missing <- list()
   for (s.idx in seq_along(strata)) {
     s <- strata[s.idx]
     pmk <- paste0(a.star, "\r", s)
     pm <- md$p[[pmk]]
-    if (is.null(pm)) { missing[[length(missing) + 1L]] <- list("mediator", a.star, s); next }
+    if (is.null(pm)) { missing[[length(missing) + 1L]] <- list("mediator", a.star, s)
+    next }
     for (lv in levels.v) {
       w <- pm[lv == md$levels]
       if (is.na(w) || w <= 0) next
       key <- paste0(a, "\r", lv, "\r", s)
       if (is.null(ybar[[key]])) {
-        missing[[length(missing) + 1L]] <- list("outcome", a, lv, s); next
+        missing[[length(missing) + 1L]] <- list("outcome", a, lv, s)
+        next
       }
       total <- total + pc[s.idx] * w * ybar[[key]]
     }
@@ -149,7 +160,8 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                 " -- psi(", a, ", ", a.star,
                 ") is not identified from this sample"))
   if (route == "weighting") {
-    num <- 0; den <- 0
+    num <- 0
+    den <- 0
     for (i in seq_len(n)) {
       if (av[i] != a) next
       pkey.star <- paste0(a.star, "\r", cv[i])
@@ -160,7 +172,8 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
         else md$p[[pkey.obs]][mv[i] == md$levels]
       if (is.na(p.obs) || p.obs <= .randIE_EPS) next
       w <- if (is.na(p.star)) 0 else p.star / p.obs
-      num <- num + w * y[i]; den <- den + w
+      num <- num + w * y[i]
+      den <- den + w
     }
     if (den <= .randIE_EPS)
       stop(paste0("randIE: the mediator-density ratio put no weight on arm '", a, "'"))
@@ -198,8 +211,11 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
   psi <- function(a, a.star)
     morie_randIE_interventional_mean(Y, A, M, C, a = a, a.star = a.star,
                                      route = route, laplace = laplace)$estimate
-  t <- as.character(treated); c <- as.character(control)
-  p11 <- psi(t, t); p10 <- psi(t, c); p00 <- psi(c, c)
+  t <- as.character(treated)
+  c <- as.character(control)
+  p11 <- psi(t, t)
+  p10 <- psi(t, c)
+  p00 <- psi(c, c)
   p01 <- tryCatch(psi(c, t), error = function(e) NULL)
   list(estimate = p11 - p00,
        total = p11 - p00,
@@ -222,7 +238,9 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 #' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual}, \code{proportion.mediated}.
 #' @export
 morie_randIE_decompose <- function(result) {
-  tot <- result$total; d <- result$direct; i <- result$indirect
+  tot <- result$total
+  d <- result$direct
+  i <- result$indirect
   list(total = tot, direct = d, indirect = i,
        residual = tot - (d + i),
        proportion.mediated = if (abs(tot) > .randIE_EPS) i / tot else NaN)

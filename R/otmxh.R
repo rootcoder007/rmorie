@@ -24,10 +24,15 @@
 #' @examples
 #' Otmxh(mus1 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas1 = c(1, 2, 3, 4, 5, 6, 7, 8), w1 = c(1, 2, 3, 4, 5, 6, 7, 8), mus2 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas2 = c(1, 2, 3, 4, 5, 6, 7, 8), w2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 Otmxh <- function(mus1, Sigmas1, w1, mus2, Sigmas2, w2) {
-  M1 <- as.matrix(mus1); M2 <- as.matrix(mus2)
-  S1 <- lapply(Sigmas1, as.matrix); S2 <- lapply(Sigmas2, as.matrix)
-  p <- .ot_hist(w1, normalise = TRUE); q <- .ot_hist(w2, normalise = TRUE)
-  K1 <- nrow(M1); K2 <- nrow(M2); d <- ncol(M1)
+  M1 <- as.matrix(mus1)
+  M2 <- as.matrix(mus2)
+  S1 <- lapply(Sigmas1, as.matrix)
+  S2 <- lapply(Sigmas2, as.matrix)
+  p <- .ot_hist(w1, normalise = TRUE)
+  q <- .ot_hist(w2, normalise = TRUE)
+  K1 <- nrow(M1)
+  K2 <- nrow(M2)
+  d <- ncol(M1)
   if (ncol(M2) != d)
     stop("the two mixtures must live in the same dimension")
   if (length(S1) != K1 || length(S2) != K2 || length(p) != K1 ||

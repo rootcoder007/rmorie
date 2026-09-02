@@ -26,7 +26,9 @@
 #' @examples
 #' Mareg(yi = c(1, 2, 3, 4, 5, 6, 7, 8), vi = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mareg <- function(yi, vi, X) {
-  y <- as.numeric(yi); v <- as.numeric(vi); Xm <- as.matrix(X)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  Xm <- as.matrix(X)
   n <- length(y)
   if (n == 0L) stop("no studies")
   if (length(v) != n || nrow(Xm) != n)

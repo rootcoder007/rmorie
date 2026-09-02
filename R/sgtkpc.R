@@ -23,7 +23,8 @@
 #' @export
 Kernelpca <- function(X, kernel = "rbf", k = 2, gamma = 1, degree = 2,
                       coef0 = 1) {
-  Xm <- .s03mat(X); n <- nrow(Xm)
+  Xm <- .s03mat(X)
+  n <- nrow(Xm)
   gram <- function(Xm) {
     K <- matrix(0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n)) {
@@ -36,7 +37,8 @@ Kernelpca <- function(X, kernel = "rbf", k = 2, gamma = 1, degree = 2,
         s <- (gamma * s + coef0)^degree
       } else {
         s <- 0
-        for (a in seq_len(ncol(Xm))) { dd <- Xm[i, a] - Xm[j, a]; s <- s + dd * dd }
+        for (a in seq_len(ncol(Xm))) { dd <- Xm[i, a] - Xm[j, a]
+        s <- s + dd * dd }
         s <- exp(-gamma * s)
       }
       K[i, j] <- s
@@ -45,13 +47,16 @@ Kernelpca <- function(X, kernel = "rbf", k = 2, gamma = 1, degree = 2,
   }
   K <- if (is.character(kernel)) gram(Xm) else .s03mat(kernel)
   rm_ <- numeric(n)
-  for (i in seq_len(n)) { s <- 0; for (j in seq_len(n)) s <- s + K[i, j]; rm_[i] <- s / n }
+  for (i in seq_len(n)) { s <- 0
+  for (j in seq_len(n)) s <- s + K[i, j]
+  rm_[i] <- s / n }
   gm <- 0
   for (v in rm_) gm <- gm + v / n
   Kt <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) Kt[i, j] <- K[i, j] - rm_[i] - rm_[j] + gm
   eg <- .s03jacobi(Kt)
-  vals <- eg$values; vecs <- eg$vectors
+  vals <- eg$values
+  vecs <- eg$vectors
   kk <- as.integer(k)
   if (kk > n) kk <- n
   ev <- numeric(kk)

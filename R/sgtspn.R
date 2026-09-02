@@ -14,7 +14,8 @@
 #' sgtspn(matrix(1, 4, 4) - diag(4))$estimate
 #' @export
 sgtspn <- function(A, drop = 0L) {
-  m <- as.matrix(A); dimnames(m) <- NULL
+  m <- as.matrix(A)
+  dimnames(m) <- NULL
   n <- nrow(m)
   deg <- rowSums(m)
   lap <- diag(deg, nrow = n) - m

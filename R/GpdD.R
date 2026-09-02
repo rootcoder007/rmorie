@@ -26,7 +26,8 @@
 #' @examples
 #' GpdD(sigma = 0.5, xi = 5L)
 GpdD <- function(sigma, xi, x = NULL, p = NULL) {
-  s <- as.numeric(sigma); k <- as.numeric(xi)
+  s <- as.numeric(sigma)
+  k <- as.numeric(xi)
   if (s <= 0) stop("gpd_distribution: sigma must be positive")
   xs <- if (is.null(x)) c(0.5, 1, 2, 4) else .s03vec(x)
   ps <- if (is.null(p)) c(0.5, 0.9, 0.95, 0.99) else .s03vec(p)

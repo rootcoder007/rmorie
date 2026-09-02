@@ -21,7 +21,9 @@
 #' Dfbetb(V, V)
 Dfbetb <- function(y, X, intercept = TRUE) {
   f <- .bkw_influence(y, X, intercept)
-  n <- f$n; p <- f$p; D <- f$D
+  n <- f$n
+  p <- f$p
+  D <- f$D
   out <- matrix(0, n, p)
   worst <- 0
   n_infl <- 0L

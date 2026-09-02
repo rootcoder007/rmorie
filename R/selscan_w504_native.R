@@ -29,12 +29,15 @@
     if (core - 1L < 1L) integer(0) else (core - 1L):1L
   }
   area <- 0
-  prev_p <- pos[core]; prev_e <- ehh[core]
+  prev_p <- pos[core]
+  prev_e <- ehh[core]
   truncated <- TRUE
   for (j in idx) {
     area <- area + abs(pos[j] - prev_p) * 0.5 * (ehh[j] + prev_e)
-    prev_p <- pos[j]; prev_e <- ehh[j]
-    if (ehh[j] < min_ehh) { truncated <- FALSE; break }
+    prev_p <- pos[j]
+    prev_e <- ehh[j]
+    if (ehh[j] < min_ehh) { truncated <- FALSE
+    break }
   }
   list(area = area, truncated = truncated)
 }
@@ -89,11 +92,14 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
   }
   u <- log(ihh_a / ihh_d)
   if (!is.null(standardize)) {
-    mu <- as.numeric(standardize[1]); sd_ <- as.numeric(standardize[2])
+    mu <- as.numeric(standardize[1])
+    sd_ <- as.numeric(standardize[2])
     if (sd_ <= 0) stop("standardize sd must be positive", call. = FALSE)
-    est <- (u - mu) / sd_; std <- TRUE
+    est <- (u - mu) / sd_
+    std <- TRUE
   } else {
-    est <- u; std <- FALSE
+    est <- u
+    std <- FALSE
   }
   list(estimate = est, ihs_unstandardized = u, ihh_a = ihh_a,
        ihh_d = ihh_d, daf = dec$n1 / dec$n,
@@ -151,11 +157,14 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
   }
   u <- log(IA / IB)
   if (!is.null(standardize)) {
-    mu <- as.numeric(standardize[1]); sd_ <- as.numeric(standardize[2])
+    mu <- as.numeric(standardize[1])
+    sd_ <- as.numeric(standardize[2])
     if (sd_ <= 0) stop("standardize sd must be positive", call. = FALSE)
-    est <- (u - mu) / sd_; std <- TRUE
+    est <- (u - mu) / sd_
+    std <- TRUE
   } else {
-    est <- u; std <- FALSE
+    est <- u
+    std <- FALSE
   }
   list(estimate = est, xpehh_unstandardized = u, I_A = IA, I_B = IB,
        truncated_a = aL$truncated || aR$truncated,
@@ -177,9 +186,12 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #' @export
 .morie_p_ibs_ibd <- function(X, Y, T_) {
   # PLINK Table 1 with finite-sample corrections (Purcell 2007 p 566)
-  X <- as.numeric(X); Y <- as.numeric(Y); T_ <- as.numeric(T_)
+  X <- as.numeric(X)
+  Y <- as.numeric(Y)
+  T_ <- as.numeric(T_)
   if (T_ < 4 || X + Y != T_) stop("need T = X + Y >= 4", call. = FALSE)
-  p <- X / T_; q <- Y / T_
+  p <- X / T_
+  q <- Y / T_
   c3 <- (T_ / (T_ - 1)) * (T_ / (T_ - 2)) * (T_ / (T_ - 3))
   c2 <- (T_ / (T_ - 1)) * (T_ / (T_ - 2))
   p00 <- 2 * p * p * q * q * ((X - 1) / X) * ((Y - 1) / Y) * c3
@@ -224,8 +236,10 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #' K <- Ibdmtx(G)
 #' c(nrow(K), ncol(K))
 Ibdmtx <- function(G) {
-  Gm <- as.matrix(G); storage.mode(Gm) <- "double"
-  n <- nrow(Gm); m <- ncol(Gm)
+  Gm <- as.matrix(G)
+  storage.mode(Gm) <- "double"
+  n <- nrow(Gm)
+  m <- ncol(Gm)
   if (n < 2L) stop("need at least 2 individuals", call. = FALSE)
   valid <- function(v) v %in% c(0, 1, 2)
   tables <- vector("list", m)
@@ -233,13 +247,16 @@ Ibdmtx <- function(G) {
   for (j in seq_len(m)) {
     obs <- Gm[valid(Gm[, j]), j]
     T_ <- 2 * length(obs)
-    Xa <- T_ - sum(obs); Ya <- sum(obs)
+    Xa <- T_ - sum(obs)
+    Ya <- sum(obs)
     if (T_ < 4 || Xa == 0 || Ya == 0) next
     tables[[j]] <- .morie_p_ibs_ibd(Xa, Ya, T_)
     used <- used + 1L
   }
-  pihat <- matrix(1, n, n); Z0 <- matrix(0, n, n)
-  Z1 <- matrix(0, n, n); Z2 <- matrix(1, n, n)
+  pihat <- matrix(1, n, n)
+  Z0 <- matrix(0, n, n)
+  Z1 <- matrix(0, n, n)
+  Z2 <- matrix(1, n, n)
   counts_out <- list()
   for (i in seq_len(n - 1L)) {
     for (k in (i + 1L):n) {
@@ -247,7 +264,8 @@ Ibdmtx <- function(G) {
       Nexp <- matrix(0, 3, 3)
       for (j in seq_len(m)) {
         if (is.null(tables[[j]])) next
-        g1 <- Gm[i, j]; g2 <- Gm[k, j]
+        g1 <- Gm[i, j]
+        g2 <- Gm[k, j]
         if (!valid(g1) || !valid(g2)) next
         ibs <- 2L - as.integer(abs(g1 - g2))
         Nobs[ibs + 1L] <- Nobs[ibs + 1L] + 1
@@ -259,16 +277,28 @@ Ibdmtx <- function(G) {
       z0 <- Nobs[1] / Nexp[1, 1]
       z1 <- (Nobs[2] - z0 * Nexp[1, 2]) / Nexp[2, 2]
       z2 <- (Nobs[3] - z0 * Nexp[1, 3] - z1 * Nexp[2, 3]) / Nexp[3, 3]
-      if (z0 > 1) { z0 <- 1; z1 <- 0; z2 <- 0 }
+      if (z0 > 1) { z0 <- 1
+      z1 <- 0
+      z2 <- 0 }
       else if (z0 < 0) {
-        z0 <- 0; s <- z1 + z2
-        if (s > 0) { z1 <- z1 / s; z2 <- z2 / s }
+        z0 <- 0
+        s <- z1 + z2
+        if (s > 0) { z1 <- z1 / s
+        z2 <- z2 / s }
       }
-      if (z1 < 0) { z1 <- 0; s <- z0 + z2; if (s > 0) { z0 <- z0 / s; z2 <- z2 / s } }
-      if (z2 < 0) { z2 <- 0; s <- z0 + z1; if (s > 0) { z0 <- z0 / s; z1 <- z1 / s } }
+      if (z1 < 0) { z1 <- 0
+      s <- z0 + z2
+      if (s > 0) { z0 <- z0 / s
+      z2 <- z2 / s } }
+      if (z2 < 0) { z2 <- 0
+      s <- z0 + z1
+      if (s > 0) { z0 <- z0 / s
+      z1 <- z1 / s } }
       pi_ <- 0.5 * z1 + z2
       if (pi_ * pi_ <= z2) {
-        z0 <- (1 - pi_)^2; z1 <- 2 * pi_ * (1 - pi_); z2 <- pi_ * pi_
+        z0 <- (1 - pi_)^2
+        z1 <- 2 * pi_ * (1 - pi_)
+        z2 <- pi_ * pi_
       }
       pihat[i, k] <- pihat[k, i] <- pi_
       Z0[i, k] <- Z0[k, i] <- z0

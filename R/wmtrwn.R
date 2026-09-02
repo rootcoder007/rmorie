@@ -13,7 +13,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rownorm(V)
 Rownorm <- function(W) {
-  W <- as.matrix(W); n <- nrow(W); rs <- rowSums(W)
+  W <- as.matrix(W)
+  n <- nrow(W)
+  rs <- rowSums(W)
   out <- W
   for (i in seq_len(n)) out[i, ] <- if (rs[i] != 0) W[i, ] / rs[i] else 0
   .t1_result(W = out, row_sums = rs, islands = which(rs == 0) - 1L, n = n,

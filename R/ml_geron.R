@@ -35,8 +35,10 @@
 #' @return A numeric value.
 #' @export
 .morie_gr_xor32 <- function(a, b) {
-  ah <- a %/% 65536; al <- a %% 65536
-  bh <- b %/% 65536; bl <- b %% 65536
+  ah <- a %/% 65536
+  al <- a %% 65536
+  bh <- b %/% 65536
+  bl <- b %% 65536
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 
@@ -139,7 +141,9 @@ morie_mcdrop <- function(logits) {
   a <- as.array(logits)
   d <- dim(a)
   if (length(d) != 3L) stop("logits must be an n by T by k array.", call. = FALSE)
-  n <- d[1]; tt <- d[2]; k <- d[3]
+  n <- d[1]
+  tt <- d[2]
+  k <- d[3]
   probs <- matrix(0, n, k)
   sds <- matrix(0, n, k)
   ents <- numeric(n)
@@ -214,7 +218,8 @@ morie_ttsplit <- function(ids, testratio = 0.2) {
 morie_tvtsplit <- function(ids, valratio = 0.2, testratio = 0.2) {
   ids <- as.numeric(ids)
   if (length(ids) == 0L) stop("ids must be non-empty.", call. = FALSE)
-  valratio <- as.numeric(valratio); testratio <- as.numeric(testratio)
+  valratio <- as.numeric(valratio)
+  testratio <- as.numeric(testratio)
   if (valratio <= 0 || testratio <= 0 || valratio + testratio >= 1) {
     stop("valratio and testratio must be positive and sum below 1.", call. = FALSE)
   }
@@ -294,16 +299,24 @@ morie_stratsplt <- function(strata, testratio = 0.2) {
 #' dim(z)
 morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
                             padding = c(0, 0)) {
-  xs <- as.array(x); ks <- as.array(kernel)
-  dx <- dim(xs); dk <- dim(ks)
+  xs <- as.array(x)
+  ks <- as.array(kernel)
+  dx <- dim(xs)
+  dk <- dim(ks)
   if (length(dx) != 3L || length(dk) != 4L) {
     stop("x must be 3-D and kernel 4-D.", call. = FALSE)
   }
-  h <- dx[1]; w <- dx[2]; cin <- dx[3]
-  fh <- dk[1]; fw <- dk[2]; cout <- dk[4]
+  h <- dx[1]
+  w <- dx[2]
+  cin <- dx[3]
+  fh <- dk[1]
+  fw <- dk[2]
+  cout <- dk[4]
   if (dk[3] != cin) stop("kernel in-channels must match the input.", call. = FALSE)
-  sh <- as.integer(stride[1]); sw <- as.integer(stride[2])
-  ph <- as.integer(padding[1]); pw <- as.integer(padding[2])
+  sh <- as.integer(stride[1])
+  sw <- as.integer(stride[2])
+  ph <- as.integer(padding[1])
+  pw <- as.integer(padding[2])
   if (sh < 1L || sw < 1L || ph < 0L || pw < 0L) {
     stop("stride must be positive and padding non-negative.", call. = FALSE)
   }
@@ -410,7 +423,8 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 morie_trkassign <- function(posdist, appdist = NULL, weight = 0.5, maxn = 8L) {
   pos <- as.matrix(posdist)
   storage.mode(pos) <- "double"
-  nt <- nrow(pos); nd <- ncol(pos)
+  nt <- nrow(pos)
+  nd <- ncol(pos)
   if (nt < 1L) stop("posdist must have at least one row.", call. = FALSE)
   if (nt > maxn || nd > maxn) {
     stop("exhaustive assignment is capped at maxn.", call. = FALSE)
@@ -473,10 +487,13 @@ morie_pretprep <- function(image, size, mean, sd, logits = NULL, topk = 1L) {
   img <- as.array(image)
   d <- dim(img)
   if (length(d) != 3L) stop("image must be a 3-D array.", call. = FALSE)
-  h <- d[1]; w <- d[2]; cc <- d[3]
+  h <- d[1]
+  w <- d[2]
+  cc <- d[3]
   size <- as.integer(size)
   if (size < 1L) stop("size must be positive.", call. = FALSE)
-  mean <- as.numeric(mean); sd <- as.numeric(sd)
+  mean <- as.numeric(mean)
+  sd <- as.numeric(sd)
   if (length(mean) != cc || length(sd) != cc || any(sd <= 0)) {
     stop("mean and sd need one positive entry per channel.", call. = FALSE)
   }

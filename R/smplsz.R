@@ -19,7 +19,8 @@
 #'   S^2 / (e^2/q^2 + S^2/N) -- the same quantity rearranged.
 #' @export
 Nsamp <- function(e, S, N = Inf, level = 0.95) {
-  e <- as.numeric(e); S <- as.numeric(S)
+  e <- as.numeric(e)
+  S <- as.numeric(S)
   if (e <= 0) stop("the half-width e must be positive")
   if (S < 0) stop("S must be non-negative")
   if (level <= 0 || level >= 1)

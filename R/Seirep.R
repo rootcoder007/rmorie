@@ -34,8 +34,11 @@
 #' Seirep(S = 990, E = 10, I = 0, R = 0, beta = 0.3, sigma = 0.2, gamma = 0.1)
 Seirep <- function(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1) {
   y <- c(as.numeric(S), as.numeric(E), as.numeric(I), as.numeric(R))
-  beta <- as.numeric(beta); sigma <- as.numeric(sigma); gamma <- as.numeric(gamma)
-  t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  beta <- as.numeric(beta)
+  sigma <- as.numeric(sigma)
+  gamma <- as.numeric(gamma)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (any(y < 0)) stop("seir_compartmental: compartment sizes must be non-negative")
   if (beta < 0 || sigma < 0 || gamma < 0) stop("seir_compartmental: rates must be non-negative")
   if (dt <= 0 || t_max < 0) stop("seir_compartmental: need dt > 0 and t_max >= 0")
@@ -56,7 +59,8 @@ Seirep <- function(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1) {
     k3 <- deriv(y + 0.5 * dt * k2)
     k4 <- deriv(y + dt * k3)
     y <- y + (dt / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
-    if (y[3] > peak_I) { peak_I <- y[3]; peak_time <- step * dt }
+    if (y[3] > peak_I) { peak_I <- y[3]
+    peak_time <- step * dt }
   }
 
   r0 <- if (gamma > 0) beta / gamma else Inf

@@ -21,8 +21,10 @@
 #' @examples
 #' Lecam(dtv = 0.3, p0_phi = 0.4, prior_mass = 0.5, integral = 0.2)
 Lecam <- function(dtv, p0_phi, prior_mass, integral) {
-  dtv <- as.numeric(dtv); p0 <- as.numeric(p0_phi)
-  pm <- as.numeric(prior_mass); it <- as.numeric(integral)
+  dtv <- as.numeric(dtv)
+  p0 <- as.numeric(p0_phi)
+  pm <- as.numeric(prior_mass)
+  it <- as.numeric(integral)
   if (dtv < 0 || dtv > 1) stop("dtv must lie in [0, 1]")
   if (p0 < 0 || p0 > 1) stop("P_0 phi must lie in [0, 1]")
   if (pm <= 0) stop("the prior mass Pi(U) must be positive")

@@ -19,9 +19,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Adwin(V)
 Adwin <- function(x, delta = 0.05) {
-  x <- .t1_vec(x); delta <- as.numeric(delta)
+  x <- .t1_vec(x)
+  delta <- as.numeric(delta)
   if (!(delta > 0 && delta < 1)) stop("delta must lie in (0, 1)")
-  W <- numeric(0); drops <- 0L; cuts <- integer(0); last <- NA_real_
+  W <- numeric(0)
+  drops <- 0L
+  cuts <- integer(0)
+  last <- NA_real_
   for (pos in seq_along(x)) {
     W <- c(W, x[pos])
     shrunk <- TRUE
@@ -47,8 +51,10 @@ Adwin <- function(x, delta = 0.05) {
     }
   }
   n <- length(W)
-  .t1_result(mean = if (n > 0) sum(W) / n else NA_real_, width = n,
-             window = W, ndrops = drops, lastcut = last,
-             changepoints = cuts, n = length(x), delta = delta,
-             method = "ADWIN adaptive windowing (Bifet-Gavalda 2007 Sect. 3)")
+  .t1_result(
+    mean = if (n > 0) sum(W) / n else NA_real_, width = n,
+    window = W, ndrops = drops, lastcut = last,
+    changepoints = cuts, n = length(x), delta = delta,
+    method = "ADWIN adaptive windowing (Bifet-Gavalda 2007 Sect. 3)"
+  )
 }

@@ -32,12 +32,14 @@ public. The POST runs through rmorie's native libcurl backend --- no
 extra package dependency.
 }
 \examples{
+\dontrun{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Two CPI series, last 3 periods each -- no API key needed.
 morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 }
 \dontshow{\}) # examplesIf}
+}
 }
 \seealso{
 \code{\link{morie_ingest_statcan_cansim}}

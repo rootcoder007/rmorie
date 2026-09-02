@@ -26,19 +26,24 @@
 #' Gpdkl(V, V)
 Gpdkl <- function(X, y, X_test = NULL, nn = NULL, lengthscale = 1,
                   variance = 1, noise = 0.01) {
-  A <- .s03mat(X); yv <- .s03vec(y)
+  A <- .s03mat(X)
+  yv <- .s03vec(y)
   n <- nrow(A)
   if (n == 0L) stop("deep_kernel_gp: X is empty")
   if (length(yv) != n) stop("deep_kernel_gp: X and y have different lengths")
   d <- ncol(A)
   Xs <- if (is.null(X_test)) A else .s03mat(X_test)
-  ell <- as.numeric(lengthscale); var <- as.numeric(variance); s2 <- as.numeric(noise)
+  ell <- as.numeric(lengthscale)
+  var <- as.numeric(variance)
+  s2 <- as.numeric(noise)
   if (ell <= 0 || var <= 0) stop("deep_kernel_gp: lengthscale and variance must be positive")
   if (s2 < 0) stop("deep_kernel_gp: noise must be non-negative")
   if (is.null(nn)) {
-    GA <- A; GS <- Xs
+    GA <- A
+    GS <- Xs
   } else {
-    W1 <- .s03mat(nn$W1); W2 <- .s03mat(nn$W2)
+    W1 <- .s03mat(nn$W1)
+    W2 <- .s03mat(nn$W2)
     b1 <- if (is.null(nn$b1)) rep(0, ncol(W1)) else .s03vec(nn$b1)
     b2 <- if (is.null(nn$b2)) rep(0, ncol(W2)) else .s03vec(nn$b2)
     act <- if (is.null(nn$tanh)) TRUE else isTRUE(nn$tanh)
@@ -53,7 +58,8 @@ Gpdkl <- function(X, y, X_test = NULL, nn = NULL, lengthscale = 1,
       }
       out
     }
-    GA <- ap(A); GS <- ap(Xs)
+    GA <- ap(A)
+    GS <- ap(Xs)
   }
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))

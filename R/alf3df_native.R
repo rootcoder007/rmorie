@@ -75,12 +75,15 @@ morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
                                   sigma_max = 80, rho = 7) {
   n <- as.integer(n_steps)
   if (n < 2L) stop("need at least two noise levels")
-  if (sigma_min <= 0 || sigma_max <= sigma_min)
+  if (sigma_min <= 0 || sigma_max <= sigma_min) {
     stop("need 0 < sigma_min < sigma_max")
+  }
   a <- sigma_max^(1 / rho)
   b <- sigma_min^(1 / rho)
-  c(vapply(0:(n - 1L), function(i) (a + i * (b - a) / (n - 1))^rho,
-           numeric(1)), 0)
+  c(vapply(
+    0:(n - 1L), function(i) (a + i * (b - a) / (n - 1))^rho,
+    numeric(1)
+  ), 0)
 }
 
 #' A uniform random rotation matrix by Shoemake's quaternion method
@@ -93,15 +96,26 @@ morie_alf3df_schedule <- function(n_steps, sigma_min = 0.002,
 #' @return A three by three rotation matrix.
 #' @export
 morie_alf3df_rotation <- function(e) {
-  u1 <- .ghc_unif(e, 1L); u2 <- .ghc_unif(e, 1L); u3 <- .ghc_unif(e, 1L)
-  s1 <- sqrt(1 - u1); s2 <- sqrt(u1)
-  t1 <- 2 * pi * u2; t2 <- 2 * pi * u3
-  x <- s1 * sin(t1); y <- s1 * cos(t1)
-  z <- s2 * sin(t2); w <- s2 * cos(t2)
-  matrix(c(1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w),
-           2 * (x * y + z * w), 1 - 2 * (x * x + z * z), 2 * (y * z - x * w),
-           2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y)),
-         3L, 3L, byrow = TRUE)
+  u1 <- .ghc_unif(e, 1L)
+  u2 <- .ghc_unif(e, 1L)
+  u3 <- .ghc_unif(e, 1L)
+  s1 <- sqrt(1 - u1)
+  s2 <- sqrt(u1)
+  t1 <- 2 * pi * u2
+  t2 <- 2 * pi * u3
+  x <- s1 * sin(t1)
+  y <- s1 * cos(t1)
+  z <- s2 * sin(t2)
+  w <- s2 * cos(t2)
+  matrix(
+    c(
+      1 - 2 * (y * y + z * z), 2 * (x * y - z * w), 2 * (x * z + y * w),
+      2 * (x * y + z * w), 1 - 2 * (x * x + z * z), 2 * (y * z - x * w),
+      2 * (x * z - y * w), 2 * (y * z + x * w), 1 - 2 * (x * x + y * y)
+    ),
+    3L, 3L,
+    byrow = TRUE
+  )
 }
 
 #' Recentre on the centroid, then rotate at random
@@ -117,7 +131,9 @@ morie_alf3df_rotation <- function(e) {
 #' @export
 morie_alf3df_augment <- function(x, e) {
   n <- nrow(x)
-  if (!n) return(list(x = x, centroid = c(0, 0, 0)))
+  if (!n) {
+    return(list(x = x, centroid = c(0, 0, 0)))
+  }
   cen <- vapply(1:3, function(t) .w3_csum(x[, t]) / n, numeric(1))
   R <- morie_alf3df_rotation(e)
   out <- matrix(0, n, 3L)
@@ -151,13 +167,15 @@ morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
                               gamma = 0, noise_scale = 1,
                               step_scale = 1, order = "heun", e = NULL,
                               augment = FALSE) {
-  if (!(order %in% .ALF3DF_ORDERS))
+  if (!(order %in% .ALF3DF_ORDERS)) {
     stop("order must be one of ", paste(.ALF3DF_ORDERS, collapse = ", "))
+  }
   t <- as.numeric(t)
   if (t <= 0) stop("the current noise level must be positive")
   sn <- if (is.null(sigma_next)) 0 else as.numeric(sigma_next)
   if (sn < 0 || sn > t) stop("the next level must lie in [0, t]")
-  cur <- as.matrix(x); storage.mode(cur) <- "double"
+  cur <- as.matrix(x)
+  storage.mode(cur) <- "double"
   if (augment) {
     if (is.null(e)) stop("the augmentation needs a random stream")
     cur <- morie_alf3df_augment(cur, e)$x
@@ -167,8 +185,11 @@ morie_alf3df_step <- function(x, t, score_fn, sigma_next = NULL,
   if (gamma > 0) {
     if (is.null(e)) stop("churn needs a random stream")
     amt <- sqrt(that * that - t * t) * as.numeric(noise_scale)
-    for (i in seq_len(nrow(cur))) for (c0 in 1:3)
-      cur[i, c0] <- cur[i, c0] + amt * .ghc_norm(e, 1L)
+    for (i in seq_len(nrow(cur))) {
+      for (c0 in 1:3) {
+        cur[i, c0] <- cur[i, c0] + amt * .ghc_norm(e, 1L)
+      }
+    }
   }
 
   den <- as.matrix(score_fn(cur, that))
@@ -212,12 +233,17 @@ morie_alf3df_sample <- function(shape_n, score_fn, n_steps = 8L,
   e <- .ghc_rng(seed)
   n <- as.integer(shape_n)
   x <- matrix(0, n, 3L)
-  for (i in seq_len(n)) for (c0 in 1:3)
-    x[i, c0] <- sig[1] * .ghc_norm(e, 1L)
+  for (i in seq_len(n)) {
+    for (c0 in 1:3) {
+      x[i, c0] <- sig[1] * .ghc_norm(e, 1L)
+    }
+  }
   traj <- numeric(0)
   for (i in seq_len(length(sig) - 1L)) {
-    r <- morie_alf3df_step(x, sig[i], score_fn, sig[i + 1L], gamma,
-                           noise_scale, step_scale, order, e, augment)
+    r <- morie_alf3df_step(
+      x, sig[i], score_fn, sig[i + 1L], gamma,
+      noise_scale, step_scale, order, e, augment
+    )
     x <- r$x
     traj <- c(traj, r$sigma_hat)
   }
@@ -242,21 +268,31 @@ morie_alf3df <- function(x, t, score_fn, ...) {
   # then summing those totals groups the arithmetic differently and the
   # two arms would part company in the last bit.
   flat <- numeric(0)
-  if (n) for (i in seq_len(n)) for (c0 in 1:3)
-    flat <- c(flat, (nx[i, c0] - cen[c0]) * (nx[i, c0] - cen[c0]))
+  if (n) {
+    for (i in seq_len(n)) {
+      for (c0 in 1:3) {
+        flat <- c(flat, (nx[i, c0] - cen[c0]) * (nx[i, c0] - cen[c0]))
+      }
+    }
+  }
   rad <- if (n) sqrt(.w3_csum(flat) / n) else NaN
-  list(x = nx, direction = r$direction, sigma_hat = r$sigma_hat,
-       sigma = as.numeric(t), centroid = cen, radius_of_gyration = rad,
-       estimate = rad, se = NaN, n_atoms = n,
-       method = "AlphaFold-3 style diffusion sampling step")
+  list(
+    x = nx, direction = r$direction, sigma_hat = r$sigma_hat,
+    sigma = as.numeric(t), centroid = cen, radius_of_gyration = rad,
+    estimate = rad, se = NaN, n_atoms = n,
+    method = "AlphaFold-3 style diffusion sampling step"
+  )
 }
 
 #' One-line summary of the alf3df module
 #'
 #' @return A character scalar.
 #' @export
-morie_alf3df_cheatsheet <- function()
-  paste0("alf3df: AlphaFold-3 style diffusion step. orders ",
-         paste(.ALF3DF_ORDERS, collapse = ", "),
-         "; Karras schedule and update, centre-random augmentation, ",
-         "AF3 constants supplied by the caller")
+morie_alf3df_cheatsheet <- function() {
+  paste0(
+    "alf3df: AlphaFold-3 style diffusion step. orders ",
+    paste(.ALF3DF_ORDERS, collapse = ", "),
+    "; Karras schedule and update, centre-random augmentation, ",
+    "AF3 constants supplied by the caller"
+  )
+}

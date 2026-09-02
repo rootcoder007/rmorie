@@ -242,7 +242,8 @@ forecast_summary <- function(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) {
     pick <- c[length(c)]
     for (i in seq_along(c)) {
       acc <- acc + p[i]
-      if (acc >= as.numeric(qq)) { pick <- c[i]; break }
+      if (acc >= as.numeric(qq)) { pick <- c[i]
+      break }
     }
     out[[as.character(qq)]] <- pick
   }

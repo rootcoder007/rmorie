@@ -16,9 +16,14 @@
 #' survcind(c(1, 2, 3), c(1, 1, 1), c(3, 2, 1))
 #' @export
 survcind <- function(time, event, predicted_risk) {
-  t <- as.numeric(time); e <- as.numeric(event); r <- as.numeric(predicted_risk)
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  r <- as.numeric(predicted_risk)
   n <- min(length(t), length(e), length(r))
-  conc <- 0; disc <- 0; tied <- 0; comp <- 0
+  conc <- 0
+  disc <- 0
+  tied <- 0
+  comp <- 0
   if (n > 1) for (i in seq_len(n - 1)) for (j in (i + 1):n) {
     if (t[i] != t[j]) {
       lo <- if (t[i] < t[j]) i else j

@@ -19,7 +19,8 @@
 #' Wvar(c(1, 2, 3, 10))
 #' @export
 Wvar <- function(y, weights = NULL) {
-  yy <- .s03vec(y); n <- length(yy)
+  yy <- .s03vec(y)
+  n <- length(yy)
   if (n == 0L) stop("weighted_variance: y is empty")
   w <- if (is.null(weights)) rep(1, n) else .s03vec(weights)
   if (length(w) != n) stop("weighted_variance: y and weights differ in length")

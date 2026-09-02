@@ -147,7 +147,8 @@ morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
     for (b in seq_along(trees)) {
       nd <- leaf_of(trees[[b]], Q[q, ])$node
       rows <- nd$I
-      if (length(rows) == 0L) { per_tree[b] <- 0.0; next }
+      if (length(rows) == 0L) { per_tree[b] <- 0.0
+      next }
       if (unit == "row") {
         per_tree[b] <- mean(yv[rows + 1L])
       } else {

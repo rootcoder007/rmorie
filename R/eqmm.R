@@ -26,8 +26,10 @@
 #' @examples
 #' Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 Eqmm <- function(y, a_R, b_R, a_F, b_F) {
-  aR <- as.numeric(a_R); bR <- as.numeric(b_R)
-  aF <- as.numeric(a_F); bF <- as.numeric(b_F)
+  aR <- as.numeric(a_R)
+  bR <- as.numeric(b_R)
+  aF <- as.numeric(a_F)
+  bF <- as.numeric(b_F)
   k <- length(aR)
   if (k == 0L) stop("empty input: no common items")
   if (length(bR) != k || length(aF) != k || length(bF) != k)

@@ -93,7 +93,8 @@
 #' @return A list with \code{policy}, \code{v}.
 #' @export
 .mor_rl_out <- function(Q, S, A) {
-  pol <- numeric(S); V <- numeric(S)
+  pol <- numeric(S)
+  V <- numeric(S)
   for (s in seq_len(S)) {
     b <- .mor_rl_greedy(Q[s, ], A)
     pol[s] <- b - 1L
@@ -134,8 +135,13 @@
 morie_qlearn <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                          n_episodes = 100L, start = 0L, terminal = c(),
                          max_steps = 1000L, seed = 0, Q0 = NULL) {
-  z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A
-  gamma <- as.numeric(gamma); alpha <- as.numeric(alpha)
+  z <- .mdp_args(P, R)
+  Pm <- z$Pm
+  R <- z$R
+  S <- z$S
+  A <- z$A
+  gamma <- as.numeric(gamma)
+  alpha <- as.numeric(alpha)
   epsilon <- as.numeric(epsilon)
   start <- as.integer(start)
   term <- .mor_rl_terminal(terminal)

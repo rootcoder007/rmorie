@@ -54,7 +54,8 @@ Krig <- function(known_coords, known_values, predict_coords,
   A[seq_len(n), n + 1L] <- 1
   A[n + 1L, seq_len(n)] <- 1
   dp <- dmat(K, P)
-  pred <- numeric(m); vars <- numeric(m)
+  pred <- numeric(m)
+  vars <- numeric(m)
   for (j in seq_len(m)) {
     g0 <- sv(dp[, j])
     b <- c(g0, 1)

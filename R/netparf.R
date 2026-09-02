@@ -28,7 +28,8 @@
 #'   Reports, 3(4), 297-305. doi:10.1007/s40471-016-0086-4
 #' @export
 Netparf <- function(y, exposure, network) {
-  yv <- as.numeric(y); ev <- as.numeric(exposure)
+  yv <- as.numeric(y)
+  ev <- as.numeric(exposure)
   n <- length(yv)
   if (n == 0L) stop("Netparf: y is empty")
   if (length(ev) != n) stop("Netparf: y and exposure have different lengths")
@@ -41,10 +42,13 @@ Netparf <- function(y, exposure, network) {
   nu <- ifelse(den > 0, num / den, 0)
   Xd <- cbind(1, ev, nu)
   beta <- .t1_lstsq(Xd, yv)$beta
-  b0 <- beta[1]; b1 <- beta[2]; b2 <- beta[3]
+  b0 <- beta[1]
+  b1 <- beta[2]
+  b2 <- beta[3]
   my <- mean(yv)
   if (my == 0) stop("Netparf: mean outcome is zero, PAF undefined")
-  me <- mean(ev); mn <- mean(nu)
+  me <- mean(ev)
+  mn <- mean(nu)
   pd <- b1 * me / my
   ps <- b2 * mn / my
   .t1_result(estimate = pd + ps, paf = pd + ps, paf_direct = pd,

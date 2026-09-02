@@ -154,17 +154,21 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
                                 rule = "hadcrut5", T_var = NULL,
                                 sst_var = NULL) {
-  n_lat <- nrow(T); n_lon <- ncol(T)
+  n_lat <- nrow(T)
+  n_lon <- ncol(T)
   anom <- matrix(NA_real_, n_lat, n_lon)
   var <- matrix(NA_real_, n_lat, n_lon)
   wl <- matrix(0, n_lat, n_lon)
   seen <- matrix(FALSE, n_lat, n_lon)
   for (i in seq_len(n_lat)) for (j in seq_len(n_lon)) {
-    tl <- T[i, j]; ts <- sst[i, j]
-    hl <- !is.na(tl); hs <- !is.na(ts)
+    tl <- T[i, j]
+    ts <- sst[i, j]
+    hl <- !is.na(tl)
+    hs <- !is.na(ts)
     ice <- if (is.null(sea_ice)) 0 else as.numeric(sea_ice[i, j])
     ab <- morie_hadcrut_weights(land_fraction[i, j], ice, hl, hs, rule)
-    a <- ab[1]; b <- ab[2]
+    a <- ab[1]
+    b <- ab[2]
     if (a + b <= 0) next
     v <- 0
     if (a > 0) v <- v + a * as.numeric(tl)
@@ -203,7 +207,10 @@ morie_hadcrut_blend <- function(T, sst, land_fraction, sea_ice = NULL,
 #' @export
 .hadcrut_region_mean <- function(grid, rows, var = NULL) {
   n_lat <- nrow(grid)
-  num <- numeric(0); den <- numeric(0); qnum <- numeric(0); n <- 0L
+  num <- numeric(0)
+  den <- numeric(0)
+  qnum <- numeric(0)
+  n <- 0L
   for (i in rows) {
     w <- .hadcrut_band_weight(i, n_lat)
     for (j in seq_len(ncol(grid))) {
@@ -244,7 +251,8 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
   n_lat <- nrow(grid)
   lats <- vapply(seq_len(n_lat), function(i) .hadcrut_cell_lat(i, n_lat),
                  numeric(1))
-  south <- which(lats < 0); north <- which(lats >= 0)
+  south <- which(lats < 0)
+  north <- which(lats >= 0)
   s <- .hadcrut_region_mean(grid, south, var)
   nn <- .hadcrut_region_mean(grid, north, var)
   if (route == "area") {
@@ -253,7 +261,8 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
                 n_cells = g$n)
   } else {
     ab <- if (route == "hemispheric") c(0.5, 0.5) else c(2 / 3, 1 / 3)
-    a <- ab[1]; b <- ab[2]
+    a <- ab[1]
+    b <- ab[2]
     if (is.na(nn$mean) && is.na(s$mean)) {
       out <- list(mean = NA_real_, var = NA_real_, weight = 0, n_cells = 0L)
     } else if (is.na(nn$mean)) {
@@ -269,8 +278,10 @@ morie_hadcrut_area_mean <- function(grid, route = "hemispheric", var = NULL) {
                   weight = nn$weight + s$weight, n_cells = nn$n + s$n)
     }
   }
-  out$north <- nn$mean; out$south <- s$mean
-  out$n_north <- nn$n; out$n_south <- s$n
+  out$north <- nn$mean
+  out$south <- s$mean
+  out$n_north <- nn$n
+  out$n_south <- s$n
   out$route <- route
   out
 }
@@ -340,9 +351,12 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
   level <- as.numeric(level)
   if (!(level > 0 && level < 1))
     stop("level must lie strictly inside (0, 1)")
-  T <- as.matrix(T); sst <- as.matrix(sst)
-  storage.mode(T) <- "double"; storage.mode(sst) <- "double"
-  n_lat <- nrow(T); n_lon <- ncol(T)
+  T <- as.matrix(T)
+  sst <- as.matrix(sst)
+  storage.mode(T) <- "double"
+  storage.mode(sst) <- "double"
+  n_lat <- nrow(T)
+  n_lon <- ncol(T)
   if (n_lat < 2L) stop("need at least two latitude bands")
   if (nrow(sst) != n_lat || ncol(sst) != n_lon)
     stop("sst must be a rectangular grid matching T")
@@ -351,7 +365,8 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
 
   bl <- morie_hadcrut_blend(T, sst, land_fraction, sea_ice, rule, T_var,
                             sst_var)
-  anom <- bl$anomaly; seen <- bl$observed
+  anom <- bl$anomaly
+  seen <- bl$observed
   vg <- if (is.null(T_var) && is.null(sst_var)) NULL else bl$variance
   agg <- morie_hadcrut_area_mean(anom, route, vg)
   est <- agg$mean
@@ -365,7 +380,8 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
   got <- .w3_csum(rep(bw, each = n_lon)[as.vector(t(seen))])
   se_unc <- if (!is.na(agg$var)) sqrt(agg$var) else NULL
 
-  se_cor <- NULL; members <- NULL
+  se_cor <- NULL
+  members <- NULL
   if (!is.null(ensemble)) {
     members <- vapply(ensemble, function(g)
       morie_hadcrut_area_mean(g, route)$mean, numeric(1))
@@ -377,7 +393,8 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
     }
   }
 
-  se_cov <- NULL; cov_draws <- NULL
+  se_cov <- NULL
+  cov_draws <- NULL
   if (!is.null(reference)) {
     cov_draws <- vapply(reference, function(r)
       morie_hadcrut_coverage_error(r, seen, route), numeric(1))
@@ -389,7 +406,8 @@ morie_hadcrut <- function(T, sst, land_fraction = NULL, sea_ice = NULL,
   parts <- c(se_unc, se_cor, se_cov)
   se <- if (length(parts)) sqrt(.w3_csum(parts * parts)) else NULL
 
-  lo <- NULL; hi <- NULL
+  lo <- NULL
+  hi <- NULL
   if (!is.na(est)) {
     if (interval == "ensemble" && !is.null(members) && length(members) > 1L) {
       srt <- sort(members, method = "radix")

@@ -16,7 +16,9 @@
 #' matau2pi(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$pi_lower
 #' @export
 matau2pi <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   d <- k02dl(y, v)
   se <- sqrt(d$var)
   spread <- sqrt(d$tau2 + d$var)

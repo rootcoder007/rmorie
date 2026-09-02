@@ -139,7 +139,10 @@ morie_slbpdg_density <- function(x, w, mu, s2)
     an <- a0 + 0.5 * n
     bn <- b0 + 0.5 * ss + 0.5 * kappa0 * n * (ybar - m0) * (ybar - m0) / kn
   } else {
-    kn <- kappa0; mn <- m0; an <- a0; bn <- b0
+    kn <- kappa0
+    mn <- m0
+    an <- a0
+    bn <- b0
   }
   # s2 first, then mu: the mean's variance depends on the draw of s2, so
   # the order is forced, and it fixes the stream position too.
@@ -214,7 +217,8 @@ morie_slbpdg_density <- function(x, w, mu, s2)
   n <- length(xs)
   if (x <= xs[1]) return(ys[1])
   if (x >= xs[n]) return(ys[n])
-  lo <- 1L; hi <- n
+  lo <- 1L
+  hi <- n
   while (hi - lo > 1L) {
     mid <- (lo + hi) %/% 2L
     if (xs[mid] <= x) lo <- mid else hi <- mid
@@ -276,7 +280,8 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
   if (n < 2L) stop("need at least two observations")
   n_iter <- as.integer(n_iter)
   if (is.null(burn)) burn <- n_iter %/% 2L
-  burn <- as.integer(burn); thin <- as.integer(thin)
+  burn <- as.integer(burn)
+  thin <- as.integer(thin)
   ybar <- .w3_csum(ys) / n
   var <- .w3_csum((ys - ybar) * (ys - ybar)) / (n - 1)
   if (is.null(m0)) m0 <- ybar
@@ -293,7 +298,8 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
   # One component to start, everybody in it.
   v <- .ghc_beta1(e, 1, alpha)
   th <- .slbpdg_theta(e, ys, m0, kappa0, a0, b0)
-  mus <- th[1]; s2s <- th[2]
+  mus <- th[1]
+  s2s <- th[2]
   d <- integer(n)
 
   dens <- numeric(length(grid))
@@ -307,7 +313,8 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
 
   for (it in seq_len(n_iter)) {
     sw <- morie_slbpdg_weights(v)
-    w <- sw$w; rest <- sw$rest
+    w <- sw$w
+    rest <- sw$rest
 
     # 1. the slice variables
     u <- numeric(n)
@@ -329,9 +336,11 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
       }
       v <- c(v, .ghc_beta1(e, 1, alpha))
       tk <- .slbpdg_theta(e, numeric(0), m0, kappa0, a0, b0)
-      mus <- c(mus, tk[1]); s2s <- c(s2s, tk[2])
+      mus <- c(mus, tk[1])
+      s2s <- c(s2s, tk[2])
       sw <- morie_slbpdg_weights(v)
-      w <- sw$w; rest <- sw$rest
+      w <- sw$w
+      rest <- sw$rest
     }
     if (length(v) >= max_components) hit_ceiling <- TRUE
     K <- length(v)
@@ -367,7 +376,8 @@ morie_slbpdg <- function(y, alpha = 1, n_iter = 500L, burn = NULL,
     # 5. the component parameters
     for (k in seq_len(K)) {
       tk <- .slbpdg_theta(e, ys[d == (k - 1L)], m0, kappa0, a0, b0)
-      mus[k] <- tk[1]; s2s[k] <- tk[2]
+      mus[k] <- tk[1]
+      s2s[k] <- tk[2]
     }
 
     occupied <- sum(counts > 0L)

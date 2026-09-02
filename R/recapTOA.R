@@ -15,7 +15,8 @@
 #' @export
 recapTOA <- function(S = 1361, alpha = 0.3, OLR = NULL) {
   sigma_sb <- 5.670374419e-8
-  Sv <- as.numeric(S); av <- as.numeric(alpha)
+  Sv <- as.numeric(S)
+  av <- as.numeric(alpha)
   n <- max(length(Sv), length(av))
   absorbed <- numeric(n)
   for (i in seq_len(n)) {

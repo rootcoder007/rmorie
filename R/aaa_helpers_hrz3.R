@@ -217,8 +217,10 @@ NULL
   d <- .hrz3_ade(X, y, h)
   lead <- d[1L]
   if (abs(lead) < 1e-300) {
-    stop(paste("the first covariate has a zero average derivative, so the",
-               "normalisation |beta_1| = 1 (HT2(a)) is not available."))
+    stop(paste(
+      "the first covariate has a zero average derivative, so the",
+      "normalisation |beta_1| = 1 (HT2(a)) is not available."
+    ))
   }
   d / abs(lead)
 }

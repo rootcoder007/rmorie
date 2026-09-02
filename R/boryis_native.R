@@ -65,9 +65,12 @@
 #' @export
 .mor_bjs_solve <- function(obs, u_a, u_l, u_b, Xc, max_iter = 2000L,
                            tol = 1e-13) {
-  n <- nrow(obs); T <- ncol(obs)
-  n_i <- rowSums(obs); m_t <- colSums(obs)
-  a <- numeric(n); lam <- numeric(T)
+  n <- nrow(obs)
+  T <- ncol(obs)
+  n_i <- rowSums(obs)
+  m_t <- colSums(obs)
+  a <- numeric(n)
+  lam <- numeric(T)
   k <- if (is.null(Xc)) 0L else length(Xc)
   b <- if (k == 0L) NULL else numeric(k)
   XtX <- NULL
@@ -83,7 +86,8 @@
     m
   }
   for (it in seq_len(as.integer(max_iter))) {
-    a0 <- a; l0 <- lam
+    a0 <- a
+    l0 <- lam
     other <- ifelse(obs, matrix(lam, n, T, byrow = TRUE), 0)
     if (!is.null(b)) other <- other + ifelse(obs, xb(b), 0)
     a <- (u_a - rowSums(other)) / n_i
@@ -128,7 +132,8 @@
 morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
                                    tol = 1e-13) {
   Y <- as.matrix(Y)
-  n <- nrow(Y); T <- ncol(Y)
+  n <- nrow(Y)
+  T <- ncol(Y)
   obs <- !treated
   .mor_bjs_check(obs, n, T)
   Xc <- NULL
@@ -157,7 +162,8 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 #' @export
 .mor_bjs_weights <- function(W, treated, Xc, max_iter = 2000L, tol = 1e-13) {
   obs <- !treated
-  n <- nrow(W); T <- ncol(W)
+  n <- nrow(W)
+  T <- ncol(W)
   u_b <- if (is.null(Xc)) NULL else
     vapply(Xc, function(M) sum(M * W), numeric(1))
   s <- .mor_bjs_solve(obs, rowSums(W), colSums(W), u_b, Xc, max_iter, tol)
@@ -209,9 +215,12 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 #' morie_boryis(y, D, unit, time)
 morie_boryis <- function(y, D, unit, time, X = NULL, weights = NULL) {
   p <- .mor_did_panel(y, unit, time)
-  Y <- p$Y; units <- p$units; periods <- p$periods
+  Y <- p$Y
+  units <- p$units
+  periods <- p$periods
   ft <- .mor_did_first(D, unit, time, units, periods)
-  g <- ft$g; Dm <- ft$Dm
+  g <- ft$g
+  Dm <- ft$Dm
   treated <- Dm > 0
   if (!any(treated)) stop("no observation is treated.")
   Xp <- NULL
@@ -223,7 +232,8 @@ morie_boryis <- function(y, D, unit, time, X = NULL, weights = NULL) {
   im <- morie_impute_untreated(Y, treated, Xp)
   Y0 <- im$Y0
   tau <- Y - Y0
-  n_u <- nrow(Y); T <- ncol(Y)
+  n_u <- nrow(Y)
+  T <- ncol(Y)
 
   if (is.null(weights) || identical(weights, "equal")) {
     W <- treated * 1
@@ -255,7 +265,8 @@ morie_boryis <- function(y, D, unit, time, X = NULL, weights = NULL) {
   fin <- is.finite(g)
   if (any(fin))
     rel[fin, ] <- matrix(seq_len(T) - 1L, sum(fin), T, byrow = TRUE) - g[fin]
-  event <- list(); pre <- list()
+  event <- list()
+  pre <- list()
   for (r in sort(unique(rel[!is.na(rel)]))) {
     m <- !is.na(rel) & rel == r
     k <- sprintf("%.17g", r)

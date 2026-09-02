@@ -41,9 +41,14 @@ Atfla <- function(y = NULL, Q = NULL, K = NULL, V = NULL, block_size = 2, causal
   if (is.null(Q) || is.null(K) || is.null(V)) {
     stop("flash_attention_block: Q, K and V are all required")
   }
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
-  storage.mode(Qm) <- "double"; storage.mode(Km) <- "double"; storage.mode(Vm) <- "double"
-  nq <- nrow(Qm); nk <- nrow(Km)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
+  storage.mode(Qm) <- "double"
+  storage.mode(Km) <- "double"
+  storage.mode(Vm) <- "double"
+  nq <- nrow(Qm)
+  nk <- nrow(Km)
   if (nq == 0L || nk == 0L) stop("flash_attention_block: Q and K must be non-empty")
   d <- ncol(Qm)
   if (ncol(Km) != d) stop("flash_attention_block: Q and K must share the key dimension")
@@ -65,7 +70,8 @@ Atfla <- function(y = NULL, Q = NULL, K = NULL, V = NULL, block_size = 2, causal
       row <- numeric(length(idx))
       for (a in seq_along(idx)) {
         j <- idx[a]
-        if (isTRUE(causal) && j > i) { row[a] <- -Inf; next }
+        if (isTRUE(causal) && j > i) { row[a] <- -Inf
+        next }
         dot <- 0
         for (t in seq_len(d)) dot <- dot + Qm[i, t] * Km[j, t]
         row[a] <- dot * sc

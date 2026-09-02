@@ -60,7 +60,9 @@ morie_ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
       lpp <- log_p(prop)
       u <- .ghc_unif(e, 1L)
       if (log(u) < (lpp - lp[k]) / temps[k]) {
-        x[k] <- prop; lp[k] <- lpp; acc[k] <- acc[k] + 1L
+        x[k] <- prop
+        lp[k] <- lpp
+        acc[k] <- acc[k] + 1L
       }
     }
     if (sweep %% as.integer(swap_every) == 0L) {
@@ -69,8 +71,12 @@ morie_ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
         delta <- (1 / temps[k] - 1 / temps[k + 1L]) * (lp[k + 1L] - lp[k])
         u <- .ghc_unif(e, 1L)
         if (log(u) < min(0, delta)) {
-          tmp <- x[k]; x[k] <- x[k + 1L]; x[k + 1L] <- tmp
-          tmp <- lp[k]; lp[k] <- lp[k + 1L]; lp[k + 1L] <- tmp
+          tmp <- x[k]
+          x[k] <- x[k + 1L]
+          x[k + 1L] <- tmp
+          tmp <- lp[k]
+          lp[k] <- lp[k + 1L]
+          lp[k + 1L] <- tmp
           swap_acc[k] <- swap_acc[k] + 1L
         }
       }

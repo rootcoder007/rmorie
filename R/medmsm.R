@@ -22,7 +22,10 @@
 #'   11:550-560.
 #' @export
 Medmsm <- function(y, A, M, H) {
-  yv <- as.numeric(y); Av <- as.numeric(A); Mv <- as.numeric(M); n <- length(yv)
+  yv <- as.numeric(y)
+  Av <- as.numeric(A)
+  Mv <- as.numeric(M)
+  n <- length(yv)
   Hm <- cbind(1, as.matrix(H))
   gb <- .s4_glmbin(Hm, Av)
   g <- .s4_clip(.s4_expit(as.numeric(Hm %*% gb)), 0.025, 0.975)

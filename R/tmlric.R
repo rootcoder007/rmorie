@@ -25,17 +25,22 @@
 #' @examples
 #' Tmlric(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), prevalence = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlric <- function(y, D, X, prevalence) {
-  y <- as.numeric(y); D <- as.numeric(D); n <- length(y)
+  y <- as.numeric(y)
+  D <- as.numeric(D)
+  n <- length(y)
   Xm <- cbind(1, as.matrix(X))
   q0 <- as.numeric(prevalence)
-  n1 <- sum(y > 0.5); n0 <- n - n1
+  n1 <- sum(y > 0.5)
+  n0 <- n - n1
   w <- ifelse(y > 0.5, q0 * n / n1, (1 - q0) * n / n0)
   gb <- .s4_glmbin(Xm, D)
   g <- .s4_clip(.s4_expit(as.numeric(Xm %*% gb)), 0.01, 0.99)
   qdes <- cbind(D, Xm)
   qb <- .s4_glmbin(qdes, y)
   qhat <- function(d) .s4_clip(.s4_expit(as.numeric(cbind(d, Xm) %*% qb)), 1e-6, 1 - 1e-6)
-  Q <- qhat(D); Q1 <- qhat(rep(1, n)); Q0 <- qhat(rep(0, n))
+  Q <- qhat(D)
+  Q1 <- qhat(rep(1, n))
+  Q0 <- qhat(rep(0, n))
   H <- D / g - (1 - D) / (1 - g)
   den <- sum(w * H * H)
   eps <- if (den != 0) sum(w * H * (y - Q)) / den else 0

@@ -56,7 +56,8 @@ Btsubs <- function(x, m = NULL, stat = NULL, B = 200, seed = 1, alpha = 0.05) {
     idx <- .btsubs_idx(g, n, m)
     theta[b] <- as.numeric(f(xx[idx]))
   }
-  tm <- sqrt(m); tn <- sqrt(n)
+  tm <- sqrt(m)
+  tn <- sqrt(n)
   roots <- tm * (theta - th)
   qlo <- .s03quantile7(roots, a / 2)
   qhi <- .s03quantile7(roots, 1 - a / 2)
@@ -75,7 +76,9 @@ Btsubs <- function(x, m = NULL, stat = NULL, B = 200, seed = 1, alpha = 0.05) {
   for (i in seq_len(m)) {
     k <- (i - 1L) + as.integer(g$unif() * (n - (i - 1L)))
     if (k > n - 1L) k <- n - 1L
-    tmp <- p[i]; p[i] <- p[k + 1L]; p[k + 1L] <- tmp
+    tmp <- p[i]
+    p[i] <- p[k + 1L]
+    p[k + 1L] <- tmp
   }
   p[seq_len(m)] + 1L
 }

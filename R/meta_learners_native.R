@@ -11,7 +11,8 @@
 #' @noRd
 .morie_cate_x_learner <- function(X, y, d, n_folds = 5L,
                                   random_state = 42L) {
-  i1 <- which(d == 1); i0 <- which(d == 0)
+  i1 <- which(d == 1)
+  i0 <- which(d == 0)
   if (length(i1) < 2L || length(i0) < 2L)
     stop("x_learner needs both treatment arms", call. = FALSE)
   # stage 1: arm-wise outcome models (GCV ridge, train on arm,
@@ -40,11 +41,14 @@
     stop("dr_learner needs both treatment arms", call. = FALSE)
   set.seed(random_state)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(X)))
-  mu1 <- numeric(nrow(X)); mu0 <- numeric(nrow(X))
+  mu1 <- numeric(nrow(X))
+  mu0 <- numeric(nrow(X))
   ps <- .morie_dml_xfit_logit(X, d, n_folds, random_state)
   for (k in seq_len(n_folds)) {
-    te <- which(folds == k); tr <- setdiff(seq_len(nrow(X)), te)
-    tr1 <- tr[d[tr] == 1]; tr0 <- tr[d[tr] == 0]
+    te <- which(folds == k)
+    tr <- setdiff(seq_len(nrow(X)), te)
+    tr1 <- tr[d[tr] == 1]
+    tr0 <- tr[d[tr] == 0]
     mu1[te] <- if (length(tr1) >= ncol(X) + 2L)
       .morie_dml_ridge_predict(X[tr1, , drop = FALSE], y[tr1],
                                X[te, , drop = FALSE]) else mean(y[tr1])

@@ -48,7 +48,8 @@ Ipfsfa <- function(f, constraints, x0, mu0 = 1, outer = 8, inner = 30) {
     }
     v
   }
-  shift <- function(x, idx, amt) { x[idx] <- x[idx] + amt; x }
+  shift <- function(x, idx, amt) { x[idx] <- x[idx] + amt
+  x }
   for (o in seq_len(as.integer(outer))) {
     for (k in seq_len(as.integer(inner))) {
       base <- phi(x, mu)
@@ -67,15 +68,19 @@ Ipfsfa <- function(f, constraints, x0, mu0 = 1, outer = 8, inner = 30) {
         if (j < n) for (k2 in seq(j + 1L, n)) {
           v <- (cross[[paste(j, k2, 1, 1)]] - cross[[paste(j, k2, 1, -1)]] -
                 cross[[paste(j, k2, -1, 1)]] + cross[[paste(j, k2, -1, -1)]]) / (4 * hh * hh)
-          H[j, k2] <- v; H[k2, j] <- v
+          H[j, k2] <- v
+          H[k2, j] <- v
         }
       }
       step <- tryCatch(.s03cholsolve(H, -g), error = function(e) -g)
-      a <- 1; moved <- FALSE
+      a <- 1
+      moved <- FALSE
       for (i in seq_len(60)) {
         xn <- x + a * step
         fv <- phi(xn, mu)
-        if (!is.na(fv) && fv < base) { x <- xn; moved <- TRUE; break }
+        if (!is.na(fv) && fv < base) { x <- xn
+        moved <- TRUE
+        break }
         a <- a / 2
       }
       if (!moved) break

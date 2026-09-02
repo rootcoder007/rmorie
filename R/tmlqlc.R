@@ -27,17 +27,21 @@
 #' @examples
 #' Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlqlc <- function(state, action, reward, time) {
-  sv <- as.numeric(state); av <- as.numeric(action)
-  rv <- as.numeric(reward); tv <- as.numeric(time)
+  sv <- as.numeric(state)
+  av <- as.numeric(action)
+  rv <- as.numeric(reward)
+  tv <- as.numeric(time)
   n <- length(sv)
   if (n == 0L || length(av) != n || length(rv) != n || length(tv) != n)
     stop("Tmlqlc: state, action, reward and time must share one length")
-  stages <- sort(unique(tv)); T <- length(stages)
+  stages <- sort(unique(tv))
+  T <- length(stages)
   rows <- lapply(stages, function(s) which(tv == s))
   m <- length(rows[[1L]])
   for (r in rows) if (length(r) != m)
     stop("Tmlqlc: every stage must have the same number of rows")
-  V <- numeric(m); ic <- numeric(m)
+  V <- numeric(m)
+  ic <- numeric(m)
   for (t in seq(T, 1L)) {
     idx <- rows[[t]]
     des <- cbind(1, sv[idx], av[idx], sv[idx] * av[idx])
@@ -46,7 +50,8 @@ Tmlqlc <- function(state, action, reward, time) {
     bb <- .s4_glmbin(cbind(1, sv[idx]), av[idx])
     b1 <- .s4_clip(.s4_expit(as.numeric(cbind(1, sv[idx]) %*% bb)), 0.025, 0.975)
     q <- function(a) as.numeric(cbind(1, sv[idx], a, sv[idx] * a) %*% qb)
-    q1 <- q(1); q0 <- q(0)
+    q1 <- q(1)
+    q0 <- q(0)
     astar <- ifelse(q1 >= q0, 1, 0)
     ba <- ifelse(astar > 0.5, b1, 1 - b1)
     H <- ifelse(abs(av[idx] - astar) < 0.5, 1, 0) / ba

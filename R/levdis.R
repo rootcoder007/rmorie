@@ -21,12 +21,14 @@
 Editdist <- function(s1, s2, insert = 1, delete = 1, substitute = 1) {
   a <- if (is.character(s1) && length(s1) == 1L) strsplit(s1, "", fixed = TRUE)[[1]] else s1
   b <- if (is.character(s2) && length(s2) == 1L) strsplit(s2, "", fixed = TRUE)[[1]] else s2
-  m <- length(a); n <- length(b)
+  m <- length(a)
+  n <- length(b)
   if (m == 0L) return(n * insert)
   if (n == 0L) return(m * delete)
   prev <- (0:n) * insert
   for (i in seq_len(m)) {
-    cur <- numeric(n + 1L); cur[1] <- i * delete
+    cur <- numeric(n + 1L)
+    cur[1] <- i * delete
     for (j in seq_len(n)) {
       cost <- if (identical(a[i], b[j])) 0 else substitute
       cur[j + 1L] <- min(prev[j + 1L] + delete, cur[j] + insert, prev[j] + cost)

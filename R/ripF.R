@@ -39,20 +39,25 @@ RipF <- function(points, window, r) {
   if (n < 1L) stop("`points` needs at least 1 event")
   w <- as.numeric(window)
   if (length(w) != 4L) stop("`window` must be (xmin, xmax, ymin, ymax)")
-  x0 <- w[1]; x1 <- w[2]; y0 <- w[3]; y1 <- w[4]
+  x0 <- w[1]
+  x1 <- w[2]
+  y0 <- w[3]
+  y1 <- w[4]
   if (!(x1 > x0 && y1 > y0))
     stop("`window` must have xmax > xmin and ymax > ymin")
   rs <- as.numeric(r)
   if (min(rs) < 0) stop("`r` must be non-negative")
 
-  px <- as.numeric(P[, 1]); py <- as.numeric(P[, 2])
+  px <- as.numeric(P[, 1])
+  py <- as.numeric(P[, 2])
   if (any(px < x0 | px > x1 | py < y0 | py > y1))
     stop("every point must lie inside `window`")
 
   dx <- (x1 - x0) / grid
   dy <- (y1 - y0) / grid
   m <- grid * grid
-  dmin <- numeric(m); bmin <- numeric(m)
+  dmin <- numeric(m)
+  bmin <- numeric(m)
   idx <- 0L
   for (a in seq_len(grid)) {
     ux <- x0 + (a - 0.5) * dx
@@ -71,7 +76,9 @@ RipF <- function(points, window, r) {
 
   lam <- n / ((x1 - x0) * (y1 - y0))
   nr <- length(rs)
-  f <- numeric(nr); fb <- numeric(nr); csr <- numeric(nr)
+  f <- numeric(nr)
+  fb <- numeric(nr)
+  csr <- numeric(nr)
   for (t in seq_len(nr)) {
     h <- rs[t]
     f[t] <- sum(dmin <= h) / m

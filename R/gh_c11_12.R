@@ -20,7 +20,9 @@
 #' @examples
 #' Ghosalselfsimgp()
 Ghosalselfsimgp <- function(H = 0.6, lam = 3, t = 0.2) {
-  H <- as.numeric(H); lam <- as.numeric(lam); t <- as.numeric(t)
+  H <- as.numeric(H)
+  lam <- as.numeric(lam)
+  t <- as.numeric(t)
   if (H <= 0 || H >= 1) stop("H must lie strictly between 0 and 1")
   if (lam <= 0) stop("lam must be positive")
   if (t <= 0) stop("t must be positive")

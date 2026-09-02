@@ -47,15 +47,18 @@ morie_abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0) {
   eps <- as.numeric(eps)
   if (eps <= 0) stop("eps must be positive")
   bounds <- lapply(prior, as.numeric)
-  if (any(vapply(bounds, function(b) b[2] <= b[1], logical(1))))
+  if (any(vapply(bounds, function(b) b[2] <= b[1], logical(1)))) {
     stop("each prior pair must satisfy low < high")
+  }
   e <- .ghc_rng(seed)
-  accepted <- list(); dists <- numeric(0)
+  accepted <- list()
+  dists <- numeric(0)
   for (k in seq_len(as.integer(n_draws))) {
     theta <- vapply(bounds, function(b) .ghc_unif(e, 1L, b[1], b[2]), numeric(1))
     s <- as.numeric(sim(theta, e))
-    if (length(s) != length(obs))
+    if (length(s) != length(obs)) {
       stop("sim() must return summaries matching obs")
+    }
     d <- sqrt(sum((s - obs)^2))
     if (d <= eps) {
       accepted[[length(accepted) + 1L]] <- theta
@@ -63,13 +66,18 @@ morie_abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0) {
     }
   }
   kk <- length(accepted)
-  pm <- if (kk > 0L)
-    vapply(seq_along(bounds), function(j)
-      sum(vapply(accepted, function(a) a[j], numeric(1))) / kk, numeric(1))
-  else rep(NaN, length(bounds))
-  list(samples = accepted, n_accepted = kk,
-       acceptance_rate = kk / as.numeric(n_draws), distances = dists,
-       posterior_mean = pm, eps = eps, n_draws = as.integer(n_draws),
-       seed = as.integer(seed),
-       method = "ABC rejection (Pritchard et al. 1999)")
+  pm <- if (kk > 0L) {
+    vapply(seq_along(bounds), function(j) {
+      sum(vapply(accepted, function(a) a[j], numeric(1))) / kk
+    }, numeric(1))
+  } else {
+    rep(NaN, length(bounds))
+  }
+  list(
+    samples = accepted, n_accepted = kk,
+    acceptance_rate = kk / as.numeric(n_draws), distances = dists,
+    posterior_mean = pm, eps = eps, n_draws = as.integer(n_draws),
+    seed = as.integer(seed),
+    method = "ABC rejection (Pritchard et al. 1999)"
+  )
 }

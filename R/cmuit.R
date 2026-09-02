@@ -19,16 +19,20 @@
 #' Condmi(c(0, 0, 1, 1), c(0, 1, 0, 1), NULL, c(1, 1, 2, 2))$cmi
 #' @export
 Condmi <- function(y, x = NULL, y2 = NULL, z = NULL) {
-  if (is.null(y2)) { a <- as.character(y); b <- as.character(x) }
-  else { a <- as.character(x); b <- as.character(y2) }
+  if (is.null(y2)) { a <- as.character(y)
+  b <- as.character(x) }
+  else { a <- as.character(x)
+  b <- as.character(y2) }
   cc <- as.character(if (!is.null(z)) z else rep(0, length(a)))
   n <- length(a)
   lv <- sort(unique(cc), method = "radix")
-  cmi <- 0; per <- list()
+  cmi <- 0
+  per <- list()
   for (v in lv) {
     idx <- which(cc == v)
     pz <- length(idx) / n
-    if (length(idx) < 2L) { per[[length(per) + 1L]] <- c(pz, 0); next }
+    if (length(idx) < 2L) { per[[length(per) + 1L]] <- c(pz, 0)
+    next }
     sub <- Mutinfo(a[idx], b[idx])
     cmi <- cmi + pz * sub$mi
     per[[length(per) + 1L]] <- c(pz, sub$mi)

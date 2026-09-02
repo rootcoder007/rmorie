@@ -22,12 +22,17 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Arimaxhr(V, V)
 Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
-  y <- .t1_vec(y); Xm <- .t1_mat(X); n <- length(y)
+  y <- .t1_vec(y)
+  Xm <- .t1_mat(X)
+  n <- length(y)
   if (nrow(Xm) != n) stop("X must have one row per observation")
   r <- ncol(Xm)
-  p <- as.integer(p); q <- as.integer(q); d <- as.integer(d)
+  p <- as.integer(p)
+  q <- as.integer(q)
+  d <- as.integer(d)
   if (p < 0L || q < 0L || d < 0L) stop("orders must be non-negative")
-  w <- y; Xd <- Xm
+  w <- y
+  Xd <- Xm
   if (d > 0L) for (i in seq_len(d)) {
     w <- diff(w)
     Xd <- apply(Xd, 2L, diff)
@@ -36,7 +41,8 @@ Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
   Xr <- cbind(1, Xd)
   dimnames(Xr) <- NULL
   f1 <- .t1_lstsq(Xr, w)
-  nz <- f1$resid; nw <- length(nz)
+  nz <- f1$resid
+  nw <- length(nz)
   if (is.null(m)) m <- max(p + q + 1L, as.integer(sqrt(nw)) + 1L)
   m <- as.integer(m)
   if (nw <= m + max(p, q) + 1L)
@@ -45,7 +51,8 @@ Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
   Xa <- cbind(1, sapply(seq_len(m), function(i) nz[idx - i]))
   dim(Xa) <- c(length(idx), m + 1L)
   fa <- .t1_lstsq(Xa, nz[idx])
-  eh <- rep(0, nw); eh[idx] <- fa$resid
+  eh <- rep(0, nw)
+  eh[idx] <- fa$resid
   s <- m + max(p, q)
   jdx <- (s + 1L):nw
   Xb <- matrix(1, nrow = length(jdx), ncol = 1L)
@@ -53,8 +60,10 @@ Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
   if (q > 0L) Xb <- cbind(Xb, sapply(seq_len(q), function(j) eh[jdx - j]))
   dim(Xb) <- c(length(jdx), 1L + p + q)
   fb <- .t1_lstsq(Xb, nz[jdx])
-  b <- fb$beta; res <- fb$resid
-  nobs <- length(jdx); k <- p + q + 1L + r
+  b <- fb$beta
+  res <- fb$resid
+  nobs <- length(jdx)
+  k <- p + q + 1L + r
   .t1_result(beta = f1$beta[-1], phi = if (p > 0L) b[2:(1L + p)] else numeric(0),
              theta = if (q > 0L) b[(2L + p):(1L + p + q)] else numeric(0),
              intercept = f1$beta[1],

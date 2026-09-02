@@ -29,7 +29,8 @@
   adj <- vector("list", n_atoms)
   for (i in seq_len(n_atoms)) adj[[i]] <- integer(0)
   for (b in bonds) {
-    i <- as.integer(b[[1]]); j <- as.integer(b[[2]])
+    i <- as.integer(b[[1]])
+    j <- as.integer(b[[2]])
     if (i == j) stop("toptor: a bond from an atom to itself")
     if (!(i >= 0 && i < n_atoms && j >= 0 && j < n_atoms))
       stop("toptor: bond refers to an atom outside the molecule")
@@ -72,7 +73,8 @@
 #' @references Nilakantan, R. et al. (1987).
 #' @export
 topological_torsions <- function(elements, bonds, common_types = NULL) {
-  els <- as.character(elements); n <- length(els)
+  els <- as.character(elements)
+  n <- length(els)
   if (n == 0L) stop("toptor: the molecule has no heavy atoms")
   keep <- if (is.null(common_types)) .COMMON_TYPES else as.character(common_types)
   types <- ifelse(els %in% keep, els, "Y")
@@ -142,7 +144,8 @@ torsion_similarity <- function(t1, t2) {
   sets <- lapply(torsion_sets, function(t) {
     if (is.list(t)) names(t) else unique(as.character(t))
   })
-  a <- as.numeric(activities); n <- length(sets)
+  a <- as.numeric(activities)
+  n <- length(sets)
   if (n != length(a)) stop("toptor: one activity per structure is required")
   if (n < 2L) stop("toptor: the trend vector needs at least two structures")
   permutations <- as.integer(permutations)
@@ -168,7 +171,9 @@ torsion_similarity <- function(t1, t2) {
     order <- seq_len(n)
     for (t in n:2) {
       u <- as.integer(.ghc_unif(e, 1L) * t) + 1L
-      tmp <- order[t]; order[t] <- order[u]; order[u] <- tmp
+      tmp <- order[t]
+      order[t] <- order[u]
+      order[u] <- tmp
     }
     v <- build(order)
     lens[k] <- sqrt(sum(v^2))

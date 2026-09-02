@@ -15,7 +15,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Azuma(V, V)
 Azuma <- function(c, t) {
-  cc <- .t1_vec(c); t <- as.numeric(t)
+  cc <- .t1_vec(c)
+  t <- as.numeric(t)
   if (any(cc < 0)) stop("bounded-difference constants must be non-negative")
   s <- sum(cc^2)
   if (s <= 0) stop("sum of squared differences must be positive")

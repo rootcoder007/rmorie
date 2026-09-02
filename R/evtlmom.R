@@ -42,7 +42,9 @@
 Evtlmom <- function(x, s = 0, t = 0, order = 2) {
   xs <- sort(.s03vec(x))
   n <- length(xs)
-  s <- as.integer(s); t <- as.integer(t); order <- as.integer(order)
+  s <- as.integer(s)
+  t <- as.integer(t)
+  order <- as.integer(order)
   if (n == 0L) stop("empty input: x has no observations")
   if (s < 0L || t < 0L) stop("trimming parameters must be non-negative")
   if (order < 1L) stop("order must be at least 1")

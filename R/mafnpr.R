@@ -23,12 +23,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mafnpr(V, V)
 Mafnpr <- function(yi, se_i, level = 0.95) {
-  y <- as.numeric(yi); s <- as.numeric(se_i); k <- length(y)
+  y <- as.numeric(yi)
+  s <- as.numeric(se_i)
+  k <- length(y)
   if (k == 0L) stop("no studies")
   if (length(s) != k)
     stop("effects and standard errors must have equal length")
   if (any(s <= 0)) stop("standard errors must be strictly positive")
-  w <- 1 / s^2; sw <- sum(w)
+  w <- 1 / s^2
+  sw <- sum(w)
   center <- sum(w * y) / sw
   z <- .s03qnorm(1 - (1 - as.numeric(level)) / 2)
   .t1_result(x_funnel = y, y_funnel = s, precision = 1 / s, center = center,

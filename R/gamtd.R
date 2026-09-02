@@ -21,13 +21,18 @@
 #' Nsteptd(c(1, 1, 1), c(0, 0, 0, 5), 2, 0.9)$returns
 #' @export
 Nsteptd <- function(traj, V, n = 1, gamma = 0.99, alpha = 0.1, states = NULL) {
-  R <- .s03vec(traj); v <- .s03vec(V)
-  Tn <- length(R); nn <- as.integer(n); g <- as.numeric(gamma)
+  R <- .s03vec(traj)
+  v <- .s03vec(V)
+  Tn <- length(R)
+  nn <- as.integer(n)
+  g <- as.numeric(gamma)
   idx <- if (!is.null(states)) as.integer(states) else seq_len(Tn + 1L) - 1L
-  G <- numeric(Tn); booted <- numeric(Tn)
+  G <- numeric(Tn)
+  booted <- numeric(Tn)
   for (t in seq_len(Tn) - 1L) {
     h <- t + nn
-    acc <- 0; j <- t
+    acc <- 0
+    j <- t
     while (j < h && j < Tn) {
       acc <- acc + (g^(j - t)) * R[j + 1L]
       j <- j + 1L

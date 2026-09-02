@@ -64,7 +64,8 @@
 #' columns this node is allowed to consider, which is how mtry enters.
 #' @noRd
 .tree_best_split <- function(X, g, h, idx, feats, min_node, lambda, gamma_pen) {
-  G <- sum(g[idx]); H <- sum(h[idx])
+  G <- sum(g[idx])
+  H <- sum(h[idx])
   parent <- G * G / (H + lambda)
   best <- list(gain = 0, j = NA_integer_, thr = NA_real_)
   for (j in feats) {
@@ -79,8 +80,10 @@
     cut <- which(vs[-n] < vs[-1L])
     cut <- cut[cut >= min_node & (n - cut) >= min_node]
     if (!length(cut)) next
-    GL <- gs[cut]; HL <- hs[cut]
-    GR <- G - GL;  HR <- H - HL
+    GL <- gs[cut]
+    HL <- hs[cut]
+    GR <- G - GL
+    HR <- H - HL
     gain <- 0.5 * (GL * GL / (HL + lambda) + GR * GR / (HR + lambda) - parent) -
       gamma_pen
     k <- which.max(gain)
@@ -102,7 +105,8 @@
 #' @noRd
 .tree_grow <- function(X, g, h, idx, depth, max_depth, min_node, mtry,
                        lambda, alpha, gamma_pen, importance) {
-  G <- sum(g[idx]); H <- sum(h[idx])
+  G <- sum(g[idx])
+  H <- sum(h[idx])
   leaf <- list(leaf = TRUE, w = .tree_leaf_weight(G, H, lambda, alpha))
   if (depth >= max_depth || length(idx) < 2L * min_node) return(leaf)
   p <- ncol(X)
@@ -112,7 +116,8 @@
   # Accumulate total gain per feature; this is the importance measure.
   importance$val[s$j] <- importance$val[s$j] + s$gain
   go_left <- X[idx, s$j] <= s$thr
-  l <- idx[go_left]; r <- idx[!go_left]
+  l <- idx[go_left]
+  r <- idx[!go_left]
   if (!length(l) || !length(r)) return(leaf)
   list(
     leaf = FALSE, j = s$j, thr = s$thr,
@@ -194,7 +199,8 @@
     cut <- cut[cut >= min_node & (n - cut) >= min_node]
     if (!length(cut)) next
     for (k in cut) {
-      cl <- cs[k, ]; cr <- tot - cl
+      cl <- cs[k, ]
+      cr <- tot - cl
       w <- (k * gini(cl, k) + (n - k) * gini(cr, n - k)) / n
       if (parent - w > best$gain) {
         best <- list(gain = parent - w, j = j,
@@ -219,7 +225,8 @@
   if (is.null(s)) return(leaf)
   importance$val[s$j] <- importance$val[s$j] + s$gain * length(idx)
   go_left <- X[idx, s$j] <= s$thr
-  l <- idx[go_left]; r <- idx[!go_left]
+  l <- idx[go_left]
+  r <- idx[!go_left]
   if (!length(l) || !length(r)) return(leaf)
   list(
     leaf = FALSE, j = s$j, thr = s$thr,
@@ -267,7 +274,8 @@
   # runtime for a slightly worse out-of-bag error.
   if (is.null(min_node)) min_node <- if (task == "regression") 5L else 1L
   X <- as.matrix(X)
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   if (is.null(mtry)) {
     # ESL p. 592: p/3 for regression, sqrt(p) for classification.
     mtry <- if (task == "regression") max(1L, floor(p / 3)) else
@@ -281,10 +289,12 @@
   if (task == "regression") {
     yv <- as.numeric(y)
     fitted <- numeric(n)
-    oob_sum <- numeric(n); oob_cnt <- integer(n)
+    oob_sum <- numeric(n)
+    oob_cnt <- integer(n)
     for (b in seq_len(n_estimators)) {
       boot <- sample.int(n, n, replace = TRUE)
-      Xb <- X[boot, , drop = FALSE]; yb <- yv[boot]
+      Xb <- X[boot, , drop = FALSE]
+      yb <- yv[boot]
       # Squared-error loss: g = -y (so the leaf weight -G/H is the mean),
       # h = 1. With lambda = 0 the second-order gain is exactly the
       # variance reduction CART maximises.
@@ -313,10 +323,12 @@
   Y <- matrix(0, n, K)
   Y[cbind(seq_len(n), as.integer(yf))] <- 1
   votes <- matrix(0, n, K)
-  oob_votes <- matrix(0, n, K); oob_cnt <- integer(n)
+  oob_votes <- matrix(0, n, K)
+  oob_cnt <- integer(n)
   for (b in seq_len(n_estimators)) {
     boot <- sample.int(n, n, replace = TRUE)
-    e <- new.env(parent = emptyenv()); e$val <- numeric(p)
+    e <- new.env(parent = emptyenv())
+    e$val <- numeric(p)
     tr <- .tree_grow_gini(X[boot, , drop = FALSE], Y[boot, , drop = FALSE],
                           seq_along(boot), 0L, max_depth, min_node, mtry, e)
     forest[[b]] <- tr
@@ -379,7 +391,8 @@
                           subsample = 1.0) {
   task <- match.arg(task)
   X <- as.matrix(X)
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   imp <- numeric(p)
   trees <- vector("list", n_estimators)
   if (task == "regression") {

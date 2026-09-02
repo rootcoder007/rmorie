@@ -40,7 +40,8 @@
 .cfa_inv <- function(A) {
   m <- nrow(A)
   cols <- lapply(seq_len(m), function(k) {
-    e <- numeric(m); e[k] <- 1
+    e <- numeric(m)
+    e[k] <- 1
     .s03cholsolve(A, e)
   })
   out <- matrix(0, m, m)

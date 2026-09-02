@@ -29,7 +29,8 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
   g <- as.numeric(gamma)
   rbf <- function(x, z) {
     s <- 0
-    for (a in seq_along(x)) { d <- x[a] - z[a]; s <- s + d * d }
+    for (a in seq_along(x)) { d <- x[a] - z[a]
+    s <- s + d * d }
     exp(-g * s)
   }
   cross <- function(A, B) {
@@ -37,9 +38,11 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
     for (i in seq_len(nrow(A))) for (j in seq_len(nrow(B))) out[i, j] <- rbf(A[i, ], B[j, ])
     out
   }
-  Xm <- .s03mat(X); yv <- .s03vec(y)
+  Xm <- .s03mat(X)
+  yv <- .s03vec(y)
   Z <- if (!is.null(inducing)) .s03mat(inducing) else Xm
-  n <- nrow(Xm); m <- nrow(Z)
+  n <- nrow(Xm)
+  m <- nrow(Z)
   Kmm <- cross(Z, Z)
   for (i in seq_len(m)) Kmm[i, i] <- Kmm[i, i] + as.numeric(jitter)
   Knm <- cross(Xm, Z)
@@ -51,7 +54,8 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
     d <- if (identical(kind, "fitc")) 1 - q else 0
     lam[i] <- if (d > 0) d else 0
   }
-  A <- Kmm; rhs <- numeric(m)
+  A <- Kmm
+  rhs <- numeric(m)
   for (i in seq_len(n)) {
     d <- lam[i] + as.numeric(sigma2)
     for (s in seq_len(m)) {
@@ -62,14 +66,18 @@ Fitcgp <- function(X, y, X_test = NULL, inducing = NULL, gamma = 1,
   alpha <- .s03cholsolve(A, rhs)
   Xt <- if (!is.null(X_test)) .s03mat(X_test) else Xm
   Ktm <- cross(Xt, Z)
-  pred <- numeric(nrow(Xt)); var_ <- numeric(nrow(Xt))
+  pred <- numeric(nrow(Xt))
+  var_ <- numeric(nrow(Xt))
   for (t in seq_len(nrow(Xt))) {
     s <- 0
     for (a in seq_len(m)) s <- s + Ktm[t, a] * alpha[a]
     pred[t] <- s
-    wa <- .s03cholsolve(A, Ktm[t, ]); wb <- .s03cholsolve(Kmm, Ktm[t, ])
-    qa <- 0; qb <- 0
-    for (a in seq_len(m)) { qa <- qa + Ktm[t, a] * wa[a]; qb <- qb + Ktm[t, a] * wb[a] }
+    wa <- .s03cholsolve(A, Ktm[t, ])
+    wb <- .s03cholsolve(Kmm, Ktm[t, ])
+    qa <- 0
+    qb <- 0
+    for (a in seq_len(m)) { qa <- qa + Ktm[t, a] * wa[a]
+    qb <- qb + Ktm[t, a] * wb[a] }
     var_[t] <- 1 - qb + qa
   }
   list(estimate = if (length(pred)) pred[1] else NaN, pred = pred, var = var_,

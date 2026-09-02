@@ -56,17 +56,20 @@ LapEig <- function(A, k = 2L) {
           cc <- 1 / sqrt(t0^2 + 1)
           ss <- t0 * cc
           for (kk in seq_len(n)) {
-            akp <- a[kk, p]; akq <- a[kk, q]
+            akp <- a[kk, p]
+            akq <- a[kk, q]
             a[kk, p] <- cc * akp - ss * akq
             a[kk, q] <- ss * akp + cc * akq
           }
           for (kk in seq_len(n)) {
-            apk <- a[p, kk]; aqk <- a[q, kk]
+            apk <- a[p, kk]
+            aqk <- a[q, kk]
             a[p, kk] <- cc * apk - ss * aqk
             a[q, kk] <- ss * apk + cc * aqk
           }
           for (kk in seq_len(n)) {
-            vkp <- V[kk, p]; vkq <- V[kk, q]
+            vkp <- V[kk, p]
+            vkq <- V[kk, q]
             V[kk, p] <- cc * vkp - ss * vkq
             V[kk, q] <- ss * vkp + cc * vkq
           }

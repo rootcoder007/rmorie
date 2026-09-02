@@ -52,9 +52,11 @@ Btsbb <- function(x, p = NULL, stat = NULL, B = 200, seed = 1, alpha = 0.05) {
   if (!(a > 0 && a < 1)) stop("boot_stationary_block: alpha must lie strictly between 0 and 1")
   f <- if (is.null(stat)) .s03mean else stat
   g <- .t1_lcg(seed)
-  theta <- numeric(as.integer(B)); runs <- 0L
+  theta <- numeric(as.integer(B))
+  runs <- 0L
   for (b in seq_len(as.integer(B))) {
-    smp <- numeric(n); j <- 0L
+    smp <- numeric(n)
+    j <- 0L
     for (t in seq_len(n)) {
       if (t == 1L || g$unif() < p) {
         runs <- runs + 1L

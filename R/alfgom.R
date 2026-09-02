@@ -33,7 +33,9 @@ Rolloutmc <- function(state, rollout_net, horizon = 16, step = NULL,
                       terminal = NULL, outcome = NULL, value_net = NULL,
                       lam = 0.5, stream = NULL) {
   s <- state
-  traj <- list(s); acts <- integer(0); i <- 0L
+  traj <- list(s)
+  acts <- integer(0)
+  i <- 0L
   while (i < as.integer(horizon)) {
     if (!is.null(terminal) && terminal(s)) break
     p <- .s03vec(rollout_net(s))
@@ -41,10 +43,14 @@ Rolloutmc <- function(state, rollout_net, horizon = 16, step = NULL,
     for (x in p) tot <- tot + x
     if (tot > 0) p <- p / tot
     u <- if (!is.null(stream) && i < length(stream)) as.numeric(stream[i + 1L]) else .s03vdc(i, 2L)
-    cc <- 0; a <- length(p) - 1L
+    cc <- 0
+    a <- length(p) - 1L
     for (j in seq_along(p)) {
       cc <- cc + p[j]
-      if (u < cc) { a <- j - 1L; break }
+      if (u < cc) {
+        a <- j - 1L
+        break
+      }
     }
     acts <- c(acts, as.integer(a))
     if (is.null(step)) break
@@ -54,13 +60,16 @@ Rolloutmc <- function(state, rollout_net, horizon = 16, step = NULL,
   }
   z <- if (!is.null(outcome)) as.numeric(outcome(s)) else 0
   if (is.null(value_net)) {
-    vt <- NaN; val <- z
+    vt <- NaN
+    val <- z
   } else {
     vt <- as.numeric(value_net(state))
     L <- as.numeric(lam)
     val <- (1 - L) * vt + L * z
   }
-  list(estimate = val, z = z, v_theta = vt, lam = as.numeric(lam), plies = i,
-       trajectory = traj, actions = acts,
-       method = "AlphaGo mixed leaf value (1-lambda) v_theta + lambda z_L")
+  list(
+    estimate = val, z = z, v_theta = vt, lam = as.numeric(lam), plies = i,
+    trajectory = traj, actions = acts,
+    method = "AlphaGo mixed leaf value (1-lambda) v_theta + lambda z_L"
+  )
 }

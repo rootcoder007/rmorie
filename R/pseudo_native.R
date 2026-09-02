@@ -34,10 +34,12 @@
 #'   fetched-wave3/pearl-2001-direct-indirect-effects-UAI.pdf.
 #' @export
 Pseudo <- function(B, x, y, edges = NULL) {
-  Bm <- as.matrix(B); storage.mode(Bm) <- "double"
+  Bm <- as.matrix(B)
+  storage.mode(Bm) <- "double"
   if (nrow(Bm) != ncol(Bm)) stop("B must be a square matrix", call. = FALSE)
   k <- nrow(Bm)
-  x <- as.integer(x); y <- as.integer(y)
+  x <- as.integer(x)
+  y <- as.integer(y)
   if (x < 1L || x > k || y < 1L || y > k || x == y) {
     stop("x and y must be distinct indices into B", call. = FALSE)
   }
@@ -45,7 +47,8 @@ Pseudo <- function(B, x, y, edges = NULL) {
   for (i in seq_len(k)) P <- P %*% Bm
   if (max(abs(P)) > 0) stop("B is not acyclic (B^k != 0)", call. = FALSE)
   path_sum <- function(A) {
-    Tm <- diag(k); Pm <- diag(k)
+    Tm <- diag(k)
+    Pm <- diag(k)
     for (i in seq_len(k)) {
       Pm <- Pm %*% A
       Tm <- Tm + Pm
@@ -59,7 +62,8 @@ Pseudo <- function(B, x, y, edges = NULL) {
     Bg <- matrix(0, k, k)
     used <- 0L
     for (e in edges) {
-      i <- as.integer(e[[1]]); j <- as.integer(e[[2]])
+      i <- as.integer(e[[1]])
+      j <- as.integer(e[[2]])
       if (i < 1L || i > k || j < 1L || j > k) {
         stop(sprintf("edge (%d, %d) out of range", i, j), call. = FALSE)
       }

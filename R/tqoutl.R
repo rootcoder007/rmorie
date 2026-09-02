@@ -26,9 +26,11 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Outsplit(V)
 Outsplit <- function(x, b_out = 8, b_in = 2, frac = 0.01) {
-  x <- .t1_vec(x); d <- length(x)
+  x <- .t1_vec(x)
+  d <- length(x)
   if (d < 1L) stop("the vector must be non-empty")
-  bo <- as.integer(b_out); bi <- as.integer(b_in)
+  bo <- as.integer(b_out)
+  bi <- as.integer(b_in)
   if (bo < 1L || bi < 1L) stop("both bit widths must be at least 1")
   if (bo < bi) stop("outliers must not get fewer bits than the bulk")
   f <- as.numeric(frac)

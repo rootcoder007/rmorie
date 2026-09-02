@@ -26,7 +26,8 @@
 #' @examples
 #' Krfgrp(seed = 1, k = 5L)
 Krfgrp <- function(seed, k) {
-  T <- .s03mat(seed); n0 <- nrow(T)
+  T <- .s03mat(seed)
+  n0 <- nrow(T)
   if (n0 == 0L) stop("kronecker_graph: seed is empty")
   if (ncol(T) != n0) stop("kronecker_graph: seed must be square")
   if (any(T < 0 | T > 1)) stop("kronecker_graph: seed entries must lie in [0, 1]")
@@ -36,10 +37,13 @@ Krfgrp <- function(seed, k) {
   if (N > 4096) stop("kronecker_graph: n0^k exceeds 4096 nodes")
   P <- matrix(0, N, N)
   for (i in seq_len(N)) for (j in seq_len(N)) {
-    a <- i - 1L; b <- j - 1L; v <- 1
+    a <- i - 1L
+    b <- j - 1L
+    v <- 1
     for (l in seq_len(kk)) {
       v <- v * T[(a %% n0) + 1L, (b %% n0) + 1L]
-      a <- a %/% n0; b <- b %/% n0
+      a <- a %/% n0
+      b <- b %/% n0
     }
     P[i, j] <- v
   }

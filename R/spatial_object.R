@@ -83,7 +83,8 @@ NULL
 #' @export
 morie_spatial <- function(data, coords = c("lon", "lat"), crs = 4326) {
   data <- .morie_check_data(data, required = coords, arg = "data")
-  xy <- as.matrix(data[coords]); storage.mode(xy) <- "double"
+  xy <- as.matrix(data[coords])
+  storage.mode(xy) <- "double"
   if (anyNA(xy)) stop("coordinates contain missing values", call. = FALSE)
   out <- list(coords = xy, data = data[setdiff(names(data), coords)],
               coord_names = coords, crs = crs,
@@ -101,7 +102,8 @@ morie_spatial <- function(data, coords = c("lon", "lat"), crs = 4326) {
 #'   data.frame(lon = 1:3, lat = 1:3)))
 #' @export
 morie_spatial_coords <- function(x) {
-  stopifnot(inherits(x, "morie_spatial")); x$coords
+  stopifnot(inherits(x, "morie_spatial"))
+  x$coords
 }
 
 #' CRS of a spatial object (EPSG + WKT2-style label)
@@ -147,7 +149,8 @@ morie_spatial_transform <- function(x, to_crs) {
     stop("only 4326 <-> 3857 reprojection is supported", call. = FALSE)
   }
   colnames(out_xy) <- x$coord_names
-  x$coords <- out_xy; x$crs <- to_crs
+  x$coords <- out_xy
+  x$crs <- to_crs
   x$units <- if (to_crs == 4326) "degrees" else "metres"
   x                                                    # same class (SP4.0a)
 }
@@ -156,10 +159,13 @@ morie_spatial_transform <- function(x, to_crs) {
 #' @noRd
 .sp_haversine <- function(xy) {
   # great-circle distance matrix for lon/lat degrees (metres)
-  R <- 6371000; rad <- xy * pi / 180
-  n <- nrow(xy); d <- matrix(0, n, n)
+  R <- 6371000
+  rad <- xy * pi / 180
+  n <- nrow(xy)
+  d <- matrix(0, n, n)
   for (i in seq_len(n)) {
-    dlon <- rad[, 1] - rad[i, 1]; dlat <- rad[, 2] - rad[i, 2]
+    dlon <- rad[, 1] - rad[i, 1]
+    dlat <- rad[, 2] - rad[i, 2]
     a <- sin(dlat / 2)^2 + cos(rad[i, 2]) * cos(rad[, 2]) * sin(dlon / 2)^2
     d[i, ] <- 2 * R * asin(pmin(1, sqrt(a)))
   }
@@ -195,10 +201,12 @@ morie_spatial_neighbors <- function(x, type = c("knn", "distance",
                                     k = 4L, d = NULL) {
   type <- match.arg(type)
   dm <- morie_spatial_distance(x)
-  n <- nrow(dm); W <- matrix(0L, n, n)
+  n <- nrow(dm)
+  W <- matrix(0L, n, n)
   if (type == "knn") {
     for (i in seq_len(n)) {
-      nn <- order(dm[i, ])[2:(k + 1)]; W[i, nn] <- 1L
+      nn <- order(dm[i, ])[2:(k + 1)]
+      W[i, nn] <- 1L
     }
   } else if (type == "distance") {
     if (is.null(d)) d <- stats::median(dm[dm > 0])
@@ -207,8 +215,10 @@ morie_spatial_neighbors <- function(x, type = c("knn", "distance",
     xy <- x$coords
     for (i in seq_len(n)) for (j in seq_len(n)) {
       if (i == j) next
-      dx <- abs(xy[i, 1] - xy[j, 1]); dy <- abs(xy[i, 2] - xy[j, 2])
-      ux <- min(diff(sort(unique(xy[, 1])))); uy <- min(diff(sort(unique(xy[, 2]))))
+      dx <- abs(xy[i, 1] - xy[j, 1])
+      dy <- abs(xy[i, 2] - xy[j, 2])
+      ux <- min(diff(sort(unique(xy[, 1]))))
+      uy <- min(diff(sort(unique(xy[, 2]))))
       adj_rook <- (dx <= ux + 1e-9 & dy < 1e-9) | (dy <= uy + 1e-9 & dx < 1e-9)
       adj_queen <- dx <= ux + 1e-9 & dy <= uy + 1e-9
       if (type == "rook" && adj_rook) W[i, j] <- 1L
@@ -233,7 +243,8 @@ morie_spatial_weights <- function(neighbors, style = c("W", "B")) {
          call. = FALSE)
   }
   if (style == "B") return(W)
-  rs <- rowSums(W); rs[rs == 0] <- 1
+  rs <- rowSums(W)
+  rs[rs == 0] <- 1
   W / rs
 }
 
@@ -253,8 +264,10 @@ morie_spatial_moran <- function(x, var, neighbors = NULL) {
   z <- if (is.character(var)) x$data[[var]] else as.numeric(var)
   if (is.null(neighbors)) neighbors <- morie_spatial_neighbors(x, "knn", k = 4L)
   Wt <- morie_spatial_weights(neighbors, "W")
-  n <- length(z); zc <- z - mean(z)
-  num <- sum(Wt * outer(zc, zc)); den <- sum(zc^2)
+  n <- length(z)
+  zc <- z - mean(z)
+  num <- sum(Wt * outer(zc, zc))
+  den <- sum(zc^2)
   Wsum <- sum(Wt)
   list(I = (n / Wsum) * (num / den), expected = -1 / (n - 1))
 }

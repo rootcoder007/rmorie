@@ -87,11 +87,13 @@
       r, 1 - 2 * r, r,
       0 + r, r, 1 - r)
   }
-  tl <- trans(r_left); tr <- trans(r_right)
+  tl <- trans(r_left)
+  tr <- trans(r_right)
   Tl <- matrix(tl, 3, 3, byrow = TRUE)
   Tr <- matrix(tr, 3, 3, byrow = TRUE)
   # left and right marker genotype probabilities
-  lm <- left; rm <- right
+  lm <- left
+  rm <- right
   # joint unnormalised: lm[Q] * tl[Q, L] * rm[L'] * tr[L', R]? -- follow
   # the Python arm's closed form below.
   for (q in 1:3) for (l in 1:3) for (r in 1:3)
@@ -130,7 +132,9 @@
 morie_cqtmpl <- function(y, left, right, r_left, r_right,
                          cofactors = list(), max_iter = 200L,
                          tol = 1e-10) {
-  y <- as.numeric(y); left <- as.numeric(left); right <- as.numeric(right)
+  y <- as.numeric(y)
+  left <- as.numeric(left)
+  right <- as.numeric(right)
   n <- length(y)
   if (!(n == length(left) && n == length(right)))
     stop("cqtmpl: y and the flanking markers must have the same length")
@@ -174,7 +178,8 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
     for (i in seq_len(n)) {
       d0 <- exp(-((y[i] - mean_at(i, 0)) ^ 2) / (2 * s2))
       d1 <- exp(-((y[i] - mean_at(i, 1)) ^ 2) / (2 * s2))
-      m0 <- G[[i]][1] * d0; m1 <- G[[i]][2] * d1
+      m0 <- G[[i]][1] * d0
+      m1 <- G[[i]][2] * d1
       tot <- m0 + m1
       if (tot <= 0) stop(sprintf("cqtmpl: the mixture vanished at individual %d", i))
       post[i] <- m1 / tot
@@ -190,8 +195,10 @@ morie_cqtmpl <- function(y, left, right, r_left, r_right,
     for (i in seq_len(n)) {
       X[2L * i - 1L, ] <- c(1, 0, vapply(cof, function(cc) cc[i], numeric(1)))
       X[2L * i, ]     <- c(1, 1, vapply(cof, function(cc) cc[i], numeric(1)))
-      Y[2L * i - 1L] <- y[i]; Y[2L * i] <- y[i]
-      W[2L * i - 1L] <- 1 - post[i]; W[2L * i] <- post[i]
+      Y[2L * i - 1L] <- y[i]
+      Y[2L * i] <- y[i]
+      W[2L * i - 1L] <- 1 - post[i]
+      W[2L * i] <- post[i]
     }
     beta <- .cqtmpl_wls(X, Y, W)
     s2 <- sum(W * (Y - as.numeric(X %*% beta)) ^ 2) / n

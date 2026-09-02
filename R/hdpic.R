@@ -20,7 +20,9 @@
 #' Hpdint(c(1, 2, 2.1, 2.2, 9), 0.2)$lo
 #' @export
 Hpdint <- function(samples, alpha = 0.05) {
-  v <- sort(.s03vec(samples)); n <- length(v); a <- as.numeric(alpha)
+  v <- sort(.s03vec(samples))
+  n <- length(v)
+  a <- as.numeric(alpha)
   # the window must contain at least (1 - alpha) n of the draws, so it
   # spans ceil((1 - alpha) n) order statistics -- ceil((1 - alpha) n) - 1
   # index steps.  Taking floor((1 - alpha) n) STEPS instead makes the
@@ -31,10 +33,12 @@ Hpdint <- function(samples, alpha = 0.05) {
   if (want < 2L) want <- 2L
   if (want > n) want <- n
   j <- want - 1L
-  best <- 0L; width <- v[j + 1L] - v[1]
+  best <- 0L
+  width <- v[j + 1L] - v[1]
   if (n - j > 1L) for (i in seq_len(n - j - 1L)) {
     w <- v[i + j + 1L] - v[i + 1L]
-    if (w < width) { width <- w; best <- i }
+    if (w < width) { width <- w
+    best <- i }
   }
   list(estimate = width, width = width, lo = v[best + 1L],
        hi = v[best + j + 1L], eq_lo = .s03quantile7(v, a / 2),

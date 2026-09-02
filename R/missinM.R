@@ -34,7 +34,8 @@
 #'   elementary consequences of the shift equation and are stated in full.
 #' @export
 MissinM <- function(Y, R, delta_grid, reference = 0) {
-  r <- .t1_vec(R); n <- length(r)
+  r <- .t1_vec(R)
+  n <- length(r)
   if (n == 0L) stop("R is empty")
   yraw <- unlist(Y)
   if (length(yraw) != n) stop("Y and R must have the same length")

@@ -50,7 +50,8 @@ ess <- function(weights) {
 #' @return The value of \code{lo}, as built in the body.
 #' @export
 .smcsam_pick <- function(cum, u) {
-  lo <- 1L; hi <- length(cum)
+  lo <- 1L
+  hi <- length(cum)
   while (lo < hi) {
     mid <- (lo + hi) %/% 2L
     if (cum[mid] < u) lo <- mid + 1L else hi <- mid
@@ -165,7 +166,8 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
 #' @return The value of \code{function}.
 #' @export
 .smcsam_rwk <- function(scale, n_moves) {
-  force(scale); force(n_moves)
+  force(scale)
+  force(n_moves)
   function(x, log_target, rng) {
     cur <- as.numeric(x)
     lp  <- log_target(cur)
@@ -174,7 +176,9 @@ temperature_ladder <- function(n_steps, kind = "geometric", power = 1.0) {
       prop <- cur + as.numeric(scale) * .ghc_norm(rng, length(cur))
       lq <- log_target(prop)
       if (is.finite(lq) && log(runif(1, 0, 1)) < (lq - lp)) {
-        cur <- prop; lp <- lq; acc <- acc + 1L
+        cur <- prop
+        lp <- lq
+        acc <- acc + 1L
       }
     }
     list(x = cur, accept = acc / as.numeric(n_moves))
@@ -248,7 +252,8 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
   accept_trace <- numeric(0)
 
   for (n in seq(2L, length(phis))) {
-    prev <- phis[n - 1L]; cur <- phis[n]
+    prev <- phis[n - 1L]
+    cur <- phis[n]
     # incremental weights BEFORE the move (equation 31, MCMC rule)
     if (weight_rule == "mcmc") {
       inc <- vapply(seq_len(N),

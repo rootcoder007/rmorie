@@ -38,10 +38,14 @@
   A <- .t1_mat(adjacency)
   a <- nrow(A)
   if (ncol(A) != a) stop("adjacency must be square", call. = FALSE)
-  bi <- integer(0); bj <- integer(0); bo <- numeric(0)
+  bi <- integer(0)
+  bj <- integer(0)
+  bo <- numeric(0)
   if (a > 1L) for (i in seq_len(a - 1L)) for (j in (i + 1L):a) {
     if (A[i, j] != A[j, i]) stop("adjacency must be symmetric", call. = FALSE)
-    if (A[i, j] != 0) { bi <- c(bi, i); bj <- c(bj, j); bo <- c(bo, A[i, j]) }
+    if (A[i, j] != 0) { bi <- c(bi, i)
+    bj <- c(bj, j)
+    bo <- c(bo, A[i, j]) }
   }
   list(a = a, i = bi, j = bj, o = as.numeric(as.integer(bo)))
 }
@@ -64,7 +68,8 @@
   a <- B$a
   deg <- integer(a)
   if (length(B$i)) for (k in seq_along(B$i)) {
-    deg[B$i[k]] <- deg[B$i[k]] + 1L; deg[B$j[k]] <- deg[B$j[k]] + 1L
+    deg[B$i[k]] <- deg[B$i[k]] + 1L
+    deg[B$j[k]] <- deg[B$j[k]] + 1L
   }
   inv <- numeric(a)
   for (i in seq_len(a)) {
@@ -107,12 +112,22 @@
 .ecfp_morgan <- function(B, invariants, radius, nbits, use_bond_order = TRUE) {
   a <- B$a
   nb <- length(B$i)
-  inc_b <- vector("list", a); inc_n <- vector("list", a); inc_o <- vector("list", a)
-  for (i in seq_len(a)) { inc_b[[i]] <- integer(0); inc_n[[i]] <- integer(0); inc_o[[i]] <- numeric(0) }
+  inc_b <- vector("list", a)
+  inc_n <- vector("list", a)
+  inc_o <- vector("list", a)
+  for (i in seq_len(a)) { inc_b[[i]] <- integer(0)
+  inc_n[[i]] <- integer(0)
+  inc_o[[i]] <- numeric(0) }
   if (nb) for (k in seq_len(nb)) {
-    ii <- B$i[k]; jj <- B$j[k]; oo <- if (use_bond_order) B$o[k] else 1
-    inc_b[[ii]] <- c(inc_b[[ii]], k); inc_n[[ii]] <- c(inc_n[[ii]], jj); inc_o[[ii]] <- c(inc_o[[ii]], oo)
-    inc_b[[jj]] <- c(inc_b[[jj]], k); inc_n[[jj]] <- c(inc_n[[jj]], ii); inc_o[[jj]] <- c(inc_o[[jj]], oo)
+    ii <- B$i[k]
+    jj <- B$j[k]
+    oo <- if (use_bond_order) B$o[k] else 1
+    inc_b[[ii]] <- c(inc_b[[ii]], k)
+    inc_n[[ii]] <- c(inc_n[[ii]], jj)
+    inc_o[[ii]] <- c(inc_o[[ii]], oo)
+    inc_b[[jj]] <- c(inc_b[[jj]], k)
+    inc_n[[jj]] <- c(inc_n[[jj]], ii)
+    inc_o[[jj]] <- c(inc_o[[jj]], oo)
   }
   cur <- as.numeric(invariants)
   ident <- as.numeric(invariants)
@@ -125,30 +140,37 @@
   if (radius > 0L) for (layer in seq_len(radius) - 1L) {
     nxt <- numeric(a)
     round_env <- atom_env
-    keys <- character(0); invars <- numeric(0); idxs <- integer(0)
+    keys <- character(0)
+    invars <- numeric(0)
+    idxs <- integer(0)
     for (i in seq_len(a)) {
       if (dead[i]) next
       e <- round_env[[i]]
-      bts <- numeric(0); nis <- numeric(0)
+      bts <- numeric(0)
+      nis <- numeric(0)
       if (length(inc_b[[i]])) for (m in seq_along(inc_b[[i]])) {
         e <- c(e, inc_b[[i]][m], atom_env[[inc_n[[i]][m]]])
-        bts <- c(bts, inc_o[[i]][m]); nis <- c(nis, cur[inc_n[[i]][m]])
+        bts <- c(bts, inc_o[[i]][m])
+        nis <- c(nis, cur[inc_n[[i]][m]])
       }
       round_env[[i]] <- unique(as.integer(e))
       ord <- order(bts, nis, method = "radix")
-      bts <- bts[ord]; nis <- nis[ord]
+      bts <- bts[ord]
+      nis <- nis[ord]
       invar <- .ecfp_mix(0, layer)
       invar <- .ecfp_mix(invar, cur[i])
       if (length(bts)) for (m in seq_along(bts)) invar <- .ecfp_mix(.ecfp_mix(invar, bts[m]), nis[m])
       nxt[i] <- invar
       keys <- c(keys, .ecfp_envkey(round_env[[i]]))
-      invars <- c(invars, invar); idxs <- c(idxs, i)
+      invars <- c(invars, invar)
+      idxs <- c(idxs, i)
     }
     if (length(keys)) {
       ord <- order(keys, invars, idxs, method = "radix")
       for (t in ord) {
         if (!(keys[t] %in% seen)) {
-          seen <- c(seen, keys[t]); ident <- c(ident, invars[t])
+          seen <- c(seen, keys[t])
+          ident <- c(ident, invars[t])
         } else dead[idxs[t]] <- TRUE
       }
     }
@@ -158,8 +180,11 @@
 
   nbits <- as.integer(nbits)
   if (is.na(nbits) || nbits < 1L) stop("nbits must be positive", call. = FALSE)
-  bits <- integer(nbits); cnt <- integer(nbits)
-  for (v in ident) { b <- v %% nbits; bits[b + 1L] <- 1L; cnt[b + 1L] <- cnt[b + 1L] + 1L }
+  bits <- integer(nbits)
+  cnt <- integer(nbits)
+  for (v in ident) { b <- v %% nbits
+  bits[b + 1L] <- 1L
+  cnt[b + 1L] <- cnt[b + 1L] + 1L }
   list(bits = bits, count = cnt, ident = ident)
 }
 

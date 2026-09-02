@@ -32,7 +32,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Nrgmwd(V)
 Nrgmwd <- function(y, alpha = 1, tau = 1, mu0 = 0, sigma0 = 1) {
-  a <- as.numeric(alpha); tt <- as.numeric(tau)
+  a <- as.numeric(alpha)
+  tt <- as.numeric(tau)
   if (a <= 0) stop("Nrgmwd: alpha must be positive")
   if (tt <= 0) stop("Nrgmwd: tau must be positive")
   s0 <- as.numeric(sigma0)

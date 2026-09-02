@@ -21,14 +21,16 @@
 #' @examples
 #' Martcons(dh2 = c(0.1, 0.2, 0.15))
 Martcons <- function(dh2, variances = NULL) {
-  d <- .t1_vec(dh2); n <- length(d)
+  d <- .t1_vec(dh2)
+  n <- length(d)
   if (n < 1L) stop("at least one discrepancy is required")
   if (any(d < 0 | d > 1))
     stop("squared Hellinger distances must lie in [0, 1]")
   ces <- cumsum(d) / seq_len(n)
   half <- n %/% 2L
   tail <- sum(d[(half + 1L):n]) / (n - half)
-  if (is.null(variances)) { ls <- NaN; sm <- NaN } else {
+  if (is.null(variances)) { ls <- NaN
+  sm <- NaN } else {
     v <- .t1_vec(variances)
     if (length(v) != n) stop("variances must have the same length as dh2")
     if (any(v < 0)) stop("variances must be non-negative")

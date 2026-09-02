@@ -48,9 +48,11 @@ Advcmp <- function(epsilon, delta = 0, k = 1, delta_prime = 1e-6) {
   et <- lead + quad
   eb <- kk * e
   dt <- kk * d + dp
-  list(epsilon_total = et, estimate = et, delta_total = dt, epsilon_basic = eb,
-       delta_basic = kk * d, leading_term = lead, quadratic_term = quad,
-       tighter = if (et < eb) "advanced" else "basic",
-       epsilon_effective = if (et < eb) et else eb, k = kk,
-       method = "Dwork, Rothblum and Vadhan (2010) advanced composition")
+  list(
+    epsilon_total = et, estimate = et, delta_total = dt, epsilon_basic = eb,
+    delta_basic = kk * d, leading_term = lead, quadratic_term = quad,
+    tighter = if (et < eb) "advanced" else "basic",
+    epsilon_effective = if (et < eb) et else eb, k = kk,
+    method = "Dwork, Rothblum and Vadhan (2010) advanced composition"
+  )
 }

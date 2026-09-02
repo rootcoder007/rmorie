@@ -19,7 +19,7 @@ Format method for \code{morie_otis_result} objects
 }
 \examples{
 \donttest{
-  df <- morie_otis_load()
+df <- morie_otis_load()
   res <- morie_otis_all_analyses(df, year = 2024)
 cat(format(res))
 }

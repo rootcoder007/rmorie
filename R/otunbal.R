@@ -24,9 +24,11 @@
 #'   \doi{10.1090/mcom/3303}.
 #' @export
 Otunbal <- function(a, b, C, epsilon, lam, max_iter = 200) {
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
   Cm <- as.matrix(C)
-  n <- length(aa); m <- length(bb)
+  n <- length(aa)
+  m <- length(bb)
   if (nrow(Cm) != n || ncol(Cm) != m)
     stop("cost matrix does not match the marginals")
   T <- .ot_sinkhorn_unbalanced(aa, bb, Cm, as.numeric(epsilon),

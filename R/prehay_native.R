@@ -38,8 +38,10 @@
 #' @examples
 #' Prehay(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), M = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Prehay <- function(x, M, y, B = 1000L, alpha = 0.05, seed = 1L) {
-  x <- as.numeric(x); y <- as.numeric(y)
-  M <- as.matrix(M); storage.mode(M) <- "double"
+  x <- as.numeric(x)
+  y <- as.numeric(y)
+  M <- as.matrix(M)
+  storage.mode(M) <- "double"
   n <- length(x)
   if (nrow(M) != n || length(y) != n) {
     stop("x, M, y must have matching first dimension", call. = FALSE)
@@ -75,10 +77,12 @@ Prehay <- function(x, M, y, B = 1000L, alpha = 0.05, seed = 1L) {
   lo_i <- min(max(lo_i, 1L), B)
   hi_i <- min(max(hi_i, 1L), B)
   st <- sort(boot_tot)
-  sl <- numeric(j); su <- numeric(j)
+  sl <- numeric(j)
+  su <- numeric(j)
   for (k in seq_len(j)) {
     sk <- sort(boot_spec[, k])
-    sl[k] <- sk[lo_i]; su[k] <- sk[hi_i]
+    sl[k] <- sk[lo_i]
+    su[k] <- sk[hi_i]
   }
   list(estimate = total, specific = spec,
        a = p0$a, b = unname(p0$b), c_prime = unname(p0$c_prime),

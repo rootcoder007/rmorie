@@ -101,12 +101,14 @@ Btmult <- function(n, B = 200L, rng = 2L, exhaustive = FALSE) {
 #' @return The value of \code{ps}, as built in the body.
 #' @export
 .bt_primes <- function(m) {
-  ps <- integer(0); c <- 2L
+  ps <- integer(0)
+  c <- 2L
   while (length(ps) < m) {
     ok <- TRUE
     for (q in ps) {
       if (q * q > c) break
-      if (c %% q == 0L) { ok <- FALSE; break }
+      if (c %% q == 0L) { ok <- FALSE
+      break }
     }
     if (ok) ps <- c(ps, c)
     c <- c + 1L

@@ -39,15 +39,18 @@ spcovf <- function(coords, z, n_bins = 15, max_dist = NULL) {
   cross <- (z[ij[, 1]] - mu) * (z[ij[, 2]] - mu)
   if (is.null(max_dist)) max_dist <- if (length(d)) max(d) / 2 else 1
   keep <- d <= max_dist
-  d <- d[keep]; cross <- cross[keep]
+  d <- d[keep]
+  cross <- cross[keep]
   edges <- seq(0, max_dist, length.out = n_bins + 1)
   b <- pmin(pmax(findInterval(d, edges, rightmost.closed = TRUE), 1), n_bins)
-  lag <- rep(NA_real_, n_bins); cov <- rep(NA_real_, n_bins)
+  lag <- rep(NA_real_, n_bins)
+  cov <- rep(NA_real_, n_bins)
   cnt <- integer(n_bins)
   for (k in seq_len(n_bins)) {
     m <- b == k
     cnt[k] <- sum(m)
-    if (cnt[k] > 0) { lag[k] <- mean(d[m]); cov[k] <- mean(cross[m]) }
+    if (cnt[k] > 0) { lag[k] <- mean(d[m])
+    cov[k] <- mean(cross[m]) }
   }
   sill <- stats::var(z)
   gam <- .sp_empirical_variogram(coords, z, n_bins, max_dist)$gamma

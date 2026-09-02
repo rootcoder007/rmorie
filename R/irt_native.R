@@ -49,14 +49,16 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
   if (!all(X %in% c(0, 1) | is.na(X))) {
     stop("`responses` must be binary 0/1 (NAs allowed).", call. = FALSE)
   }
-  n <- nrow(X); k <- ncol(X)
+  n <- nrow(X)
+  k <- ncol(X)
   q <- .morie_irt_quad(n_quad)
   Q <- length(q$theta)
   a <- rep(1, k)
   b <- as.numeric(-stats::qlogis(pmin(pmax(colMeans(X, na.rm = TRUE),
                                            0.02), 0.98)))
   obs <- !is.na(X)
-  X0 <- X; X0[!obs] <- 0
+  X0 <- X
+  X0[!obs] <- 0
   ll_old <- -Inf
   n_iter <- 0L
   converged <- FALSE
@@ -66,7 +68,8 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
     # E-step: person x quadrature log-likelihood
     P <- stats::plogis(outer(q$theta, b, "-") *
                          matrix(a, Q, k, byrow = TRUE))  # Q x k
-    logP <- log(pmax(P, 1e-12)); log1P <- log(pmax(1 - P, 1e-12))
+    logP <- log(pmax(P, 1e-12))
+    log1P <- log(pmax(1 - P, 1e-12))
     LL <- X0 %*% t(logP) + (obs - X0) %*% t(log1P)       # n x Q
     LL <- sweep(LL, 2L, log(q$w), "+")
     m <- apply(LL, 1L, max)
@@ -98,10 +101,12 @@ morie_irt_2pl <- function(responses, n_quad = 41L, max_iter = 200L,
         par_new <- par - step
         par_new[1] <- min(max(par_new[1], 0.05), 8)
         par_new[2] <- min(max(par_new[2], -6), 6)
-        if (max(abs(par_new - par)) < 1e-8) { par <- par_new; break }
+        if (max(abs(par_new - par)) < 1e-8) { par <- par_new
+        break }
         par <- par_new
       }
-      a[j] <- par[1]; b[j] <- par[2]
+      a[j] <- par[1]
+      b[j] <- par[2]
     }
     if (abs(ll - ll_old) < tol * max(1, abs(ll))) {
       converged <- TRUE
@@ -167,7 +172,8 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
                           tol = 1e-5) {
   X <- as.matrix(responses)
   storage.mode(X) <- "integer"
-  n <- nrow(X); k <- ncol(X)
+  n <- nrow(X)
+  k <- ncol(X)
   q <- .morie_irt_quad(n_quad)
   Q <- length(q$theta)
   n_cat <- apply(X, 2L, function(z) max(z, na.rm = TRUE))
@@ -186,7 +192,10 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
     Pge[, seq_len(ncol(Pge) - 1L), drop = FALSE] -
       Pge[, -1L, drop = FALSE]
   }
-  ll_old <- -Inf; converged <- FALSE; n_iter <- 0L; post <- NULL
+  ll_old <- -Inf
+  converged <- FALSE
+  n_iter <- 0L
+  post <- NULL
   for (it in seq_len(max_iter)) {
     n_iter <- it
     LLq <- matrix(0, n, Q)
@@ -232,7 +241,9 @@ morie_irt_grm <- function(responses, n_quad = 31L, max_iter = 100L,
       }
     }
     if (abs(ll - ll_old) < tol * max(1, abs(ll))) {
-      converged <- TRUE; ll_old <- ll; break
+      converged <- TRUE
+      ll_old <- ll
+      break
     }
     ll_old <- ll
   }
@@ -272,7 +283,8 @@ morie_irt_eap <- function(fit, responses, n_quad = 41L) {
   Q <- length(q$theta)
   k <- length(a)
   obs <- !is.na(X)
-  X0 <- X; X0[!obs] <- 0
+  X0 <- X
+  X0[!obs] <- 0
   P <- stats::plogis(outer(q$theta, b, "-") *
                        matrix(a, Q, k, byrow = TRUE))
   LL <- X0 %*% t(log(pmax(P, 1e-12))) +

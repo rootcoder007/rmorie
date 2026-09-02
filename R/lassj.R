@@ -15,8 +15,11 @@
 Lassoobj <- function(X, y, beta, lam, add_intercept = TRUE) {
   Xm <- .t1_mat(X)
   if (isTRUE(add_intercept)) Xm <- .t1_cbind1(Xm)
-  y <- .t1_vec(y); b <- .t1_vec(beta); lam <- as.numeric(lam)
-  n <- nrow(Xm); p <- ncol(Xm)
+  y <- .t1_vec(y)
+  b <- .t1_vec(beta)
+  lam <- as.numeric(lam)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   if (length(b) != p) stop("beta must have one entry per column of the design")
   if (lam < 0) stop("lambda must be non-negative")

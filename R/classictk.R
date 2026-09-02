@@ -119,15 +119,18 @@ MapMet <- function(pred_rank, relevant, k) {
   rels <- if (is.list(relevant)) relevant else list(relevant)
   if (length(rels) != length(ranks))
     stop("need one relevant set per ranking", call. = FALSE)
-  aps <- numeric(length(ranks)); apn <- numeric(length(ranks))
+  aps <- numeric(length(ranks))
+  apn <- numeric(length(ranks))
   for (q in seq_along(ranks)) {
     rl <- unique(rels[[q]])
     if (!length(rl)) stop("average precision needs relevant items",
                           call. = FALSE)
     top <- head(ranks[[q]], kk)
-    hits <- 0; s <- 0
+    hits <- 0
+    s <- 0
     for (i in seq_along(top)) {
-      if (top[i] %in% rl) { hits <- hits + 1; s <- s + hits / i }
+      if (top[i] %in% rl) { hits <- hits + 1
+      s <- s + hits / i }
     }
     aps[q] <- s / min(length(rl), kk)
     apn[q] <- s / length(rl)
@@ -151,24 +154,40 @@ MapMet <- function(pred_rank, relevant, k) {
 #' Diophs(6, 9, 21)
 #' @export
 Diophs <- function(a, b, c) {
-  ai <- as.integer(a); bi <- as.integer(b); ci <- as.integer(c)
+  ai <- as.integer(a)
+  bi <- as.integer(b)
+  ci <- as.integer(c)
   if (ai == 0 && bi == 0) stop("a and b cannot both be zero", call. = FALSE)
-  old_r <- abs(ai); r <- abs(bi)
-  old_s <- 1; s <- 0; old_t <- 0; t <- 1
+  old_r <- abs(ai)
+  r <- abs(bi)
+  old_s <- 1
+  s <- 0
+  old_t <- 0
+  t <- 1
   while (r != 0) {
     q <- old_r %/% r
-    tmp <- old_r - q * r; old_r <- r; r <- tmp
-    tmp <- old_s - q * s; old_s <- s; s <- tmp
-    tmp <- old_t - q * t; old_t <- t; t <- tmp
+    tmp <- old_r - q * r
+    old_r <- r
+    r <- tmp
+    tmp <- old_s - q * s
+    old_s <- s
+    s <- tmp
+    tmp <- old_t - q * t
+    old_t <- t
+    t <- tmp
   }
-  g <- old_r; x <- old_s; y <- old_t
+  g <- old_r
+  x <- old_s
+  y <- old_t
   if (ai < 0) x <- -x
   if (bi < 0) y <- -y
   solvable <- (ci %% g) == 0
   if (solvable) {
     m <- ci %/% g
-    x0 <- x * m; y0 <- y * m
-    xs <- bi %/% g; ys <- -(ai %/% g)
+    x0 <- x * m
+    y0 <- y * m
+    xs <- bi %/% g
+    ys <- -(ai %/% g)
   } else x0 <- y0 <- xs <- ys <- NULL
   list(estimate = if (solvable) 1 else 0, solvable = solvable,
        x = x0, y = y0, gcd = g, x_step = xs, y_step = ys,
@@ -191,13 +210,22 @@ Diophs <- function(a, b, c) {
 DiopT <- function(n) {
   nn <- as.integer(n)
   if (nn < 1) stop("order must be at least 1", call. = FALSE)
-  a <- 0; b <- 1; cc <- 1; d <- nn
-  num <- c(a); den <- c(b)
+  a <- 0
+  b <- 1
+  cc <- 1
+  d <- nn
+  num <- c(a)
+  den <- c(b)
   while (cc <= nn) {
-    num <- c(num, cc); den <- c(den, d)
+    num <- c(num, cc)
+    den <- c(den, d)
     k <- (nn + b) %/% d
-    nc <- k * cc - a; nd <- k * d - b
-    a <- cc; b <- d; cc <- nc; d <- nd
+    nc <- k * cc - a
+    nd <- k * d - b
+    a <- cc
+    b <- d
+    cc <- nc
+    d <- nd
   }
   list(estimate = length(num), terms = cbind(num, den),
        values = num / den, n = nn,
@@ -224,8 +252,10 @@ ContFr <- function(x, n) {
   if (nn < 1) stop("need at least one term", call. = FALSE)
   if (nn > 20) stop("a double supports at most 20 partial quotients",
                     call. = FALSE)
-  v <- as.numeric(x); r <- v
-  terms <- integer(0); reliable <- 0L
+  v <- as.numeric(x)
+  r <- v
+  terms <- integer(0)
+  reliable <- 0L
   for (i in seq_len(nn)) {
     a <- floor(r)
     terms <- c(terms, as.integer(a))
@@ -234,14 +264,24 @@ ContFr <- function(x, n) {
     reliable <- i
     r <- 1 / r
   }
-  hm1 <- 1; hm2 <- 0; km1 <- 0; km2 <- 1
-  hs <- numeric(0); ks <- numeric(0)
+  hm1 <- 1
+  hm2 <- 0
+  km1 <- 0
+  km2 <- 1
+  hs <- numeric(0)
+  ks <- numeric(0)
   for (a in terms) {
-    h <- a * hm1 + hm2; kk <- a * km1 + km2
-    hs <- c(hs, h); ks <- c(ks, kk)
-    hm2 <- hm1; hm1 <- h; km2 <- km1; km1 <- kk
+    h <- a * hm1 + hm2
+    kk <- a * km1 + km2
+    hs <- c(hs, h)
+    ks <- c(ks, kk)
+    hm2 <- hm1
+    hm1 <- h
+    km2 <- km1
+    km1 <- kk
   }
-  h <- hs[length(hs)]; kk <- ks[length(ks)]
+  h <- hs[length(hs)]
+  kk <- ks[length(ks)]
   list(estimate = h / kk, terms = terms,
        convergents = cbind(hs, ks), reliable_terms = reliable,
        residual = v - h / kk, n = length(terms),
@@ -269,14 +309,24 @@ Conti <- function(n) {
   if (nn < 1 || nn > length(pit))
     stop(sprintf("n must be between 1 and %d", length(pit)), call. = FALSE)
   terms <- pit[seq_len(nn)]
-  hm1 <- 1; hm2 <- 0; km1 <- 0; km2 <- 1
-  hs <- numeric(0); ks <- numeric(0)
+  hm1 <- 1
+  hm2 <- 0
+  km1 <- 0
+  km2 <- 1
+  hs <- numeric(0)
+  ks <- numeric(0)
   for (a in terms) {
-    h <- a * hm1 + hm2; kk <- a * km1 + km2
-    hs <- c(hs, h); ks <- c(ks, kk)
-    hm2 <- hm1; hm1 <- h; km2 <- km1; km1 <- kk
+    h <- a * hm1 + hm2
+    kk <- a * km1 + km2
+    hs <- c(hs, h)
+    ks <- c(ks, kk)
+    hm2 <- hm1
+    hm1 <- h
+    km2 <- km1
+    km1 <- kk
   }
-  h <- hs[length(hs)]; kk <- ks[length(ks)]
+  h <- hs[length(hs)]
+  kk <- ks[length(ks)]
   val <- h / kk
   list(estimate = val, terms = terms, convergents = cbind(hs, ks),
        numerator = h, denominator = kk,
@@ -329,16 +379,21 @@ Resaln <- function(p, q) {
     while (length(a) > 1 && a[length(a)] == 0) a <- a[-length(a)]
     a
   }
-  a <- trim(p); b <- trim(q)
-  m <- length(a) - 1; n <- length(b) - 1
+  a <- trim(p)
+  b <- trim(q)
+  m <- length(a) - 1
+  n <- length(b) - 1
   if (m < 1 && n < 1)
     stop("at least one polynomial must be non-constant", call. = FALSE)
-  ah <- rev(a); bh <- rev(b)
+  ah <- rev(a)
+  bh <- rev(b)
   size <- m + n
   S <- matrix(0, size, size)
   if (n > 0) for (i in seq_len(n)) S[i, i + seq_along(ah) - 1] <- ah
   if (m > 0) for (i in seq_len(m)) S[n + i, i + seq_along(bh) - 1] <- bh
-  A <- S; sgn <- 1; prev <- 1
+  A <- S
+  sgn <- 1
+  prev <- 1
   if (size > 1) {
     for (k in seq_len(size - 1)) {
       if (A[k, k] == 0) {
@@ -348,7 +403,9 @@ Resaln <- function(p, q) {
                                      share_root = TRUE,
                                      method = "resultant via the Sylvester matrix (Bareiss)"))
         sw <- k + sw[1]
-        tmp <- A[k, ]; A[k, ] <- A[sw, ]; A[sw, ] <- tmp
+        tmp <- A[k, ]
+        A[k, ] <- A[sw, ]
+        A[sw, ] <- tmp
         sgn <- -sgn
       }
       for (i in (k + 1):size) {
@@ -382,7 +439,8 @@ Resaln <- function(p, q) {
 #' ZscoreA(c(1, 2, 3, 4, 50), 2)
 #' @export
 ZscoreA <- function(x, k, ddof = 1) {
-  v <- as.numeric(x); n <- length(v)
+  v <- as.numeric(x)
+  n <- length(v)
   if (n < 2) stop("need at least two observations", call. = FALSE)
   kk <- as.numeric(k)
   mu <- sum(v) / n
@@ -410,12 +468,14 @@ ZscoreA <- function(x, k, ddof = 1) {
 #' Detrnd(c(1, 3.1, 5, 7.2, 9.1))
 #' @export
 Detrnd <- function(x, t = NULL) {
-  v <- as.numeric(x); n <- length(v)
+  v <- as.numeric(x)
+  n <- length(v)
   if (n < 2) stop("need at least two observations", call. = FALSE)
   tv <- if (!is.null(t)) as.numeric(t) else seq_len(n) - 1
   if (length(tv) != n) stop("t and x must have the same length",
                             call. = FALSE)
-  tb <- sum(tv) / n; xb <- sum(v) / n
+  tb <- sum(tv) / n
+  xb <- sum(v) / n
   stt <- sum((tv - tb)^2)
   if (stt == 0) stop("t must not be constant", call. = FALSE)
   b <- sum((tv - tb) * (v - xb)) / stt
@@ -442,7 +502,8 @@ Detrnd <- function(x, t = NULL) {
 #' Rbfk(c(0, 0), c(3, 4), 2)
 #' @export
 Rbfk <- function(x, y, sigma) {
-  a <- as.numeric(x); b <- as.numeric(y)
+  a <- as.numeric(x)
+  b <- as.numeric(y)
   if (length(a) != length(b))
     stop("x and y must have the same length", call. = FALSE)
   s <- as.numeric(sigma)

@@ -25,7 +25,9 @@
 #' @examples
 #' Bcdblk(Q = 0.5, b = 5L, blocks = c("a", "b", "c"))
 Bcdblk <- function(Q, b, blocks, x0 = NULL, n_iter = 20) {
-  Qm <- as.matrix(Q); bv <- as.numeric(b); p <- length(bv)
+  Qm <- as.matrix(Q)
+  bv <- as.numeric(b)
+  p <- length(bv)
   x <- if (is.null(x0)) rep(0, p) else as.numeric(x0)
   obj <- function(v) 0.5 * as.numeric(t(v) %*% Qm %*% v) - sum(bv * v)
   trace <- obj(x)

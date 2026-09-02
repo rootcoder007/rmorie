@@ -28,7 +28,8 @@
 #'   Computer Security Foundations Symposium, 263-275.
 #' @export
 morie_rdpc <- function(alpha, sigma, sensitivity = 1) {
-  alpha <- as.numeric(alpha); sigma <- as.numeric(sigma)
+  alpha <- as.numeric(alpha)
+  sigma <- as.numeric(sigma)
   sensitivity <- as.numeric(sensitivity)
   if (!(alpha > 1)) stop("alpha must exceed 1")
   if (sigma <= 0) stop("sigma must be positive")

@@ -20,7 +20,8 @@
 #'   Applications 48:257-263. \doi{10.1016/0024-3795(82)90112-4}.
 #' @export
 Otwsg <- function(mu1, Sigma1, mu2, Sigma2) {
-  a <- as.numeric(mu1); b <- as.numeric(mu2)
+  a <- as.numeric(mu1)
+  b <- as.numeric(mu2)
   w2sq <- .ot_w2gauss(mu1, Sigma1, mu2, Sigma2)
   mp <- sum((a - b)^2)
   .t1_result(W2 = sqrt(w2sq), W2_sq = w2sq, mean_part = mp,

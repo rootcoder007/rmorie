@@ -81,7 +81,8 @@ Bmtme <- function(Y, G, n_env, n_iter = 200L, X = NULL, v_T = NULL, S_T = NULL,
   if (I < 1L) stop("bmtme_model: n_env must be at least 1")
   if (I * J != N) stop("bmtme_model: Y must have n_env * nrow(G) rows")
   if (is.null(X)) {
-    XX <- NULL; p <- 0L
+    XX <- NULL
+    p <- 0L
   } else {
     XX <- .s03mat(X)
     if (nrow(XX) != N) stop("bmtme_model: X has a different number of rows than Y")
@@ -107,7 +108,9 @@ Bmtme <- function(Y, G, n_env, n_iter = 200L, X = NULL, v_T = NULL, S_T = NULL,
   b2 <- matrix(0, N, nT)
   beta <- matrix(0, max(p, 1L), nT)
   mu <- numeric(nT)
-  SigT <- diag(1, nT); SigE <- diag(1, I); Rm <- diag(1, nT)
+  SigT <- diag(1, nT)
+  SigE <- diag(1, I)
+  Rm <- diag(1, nT)
   resid <- function(drop_mu = FALSE, drop_beta = FALSE, drop_b1 = FALSE, drop_b2 = FALSE) {
     out <- YY
     if (!drop_mu) out <- out - matrix(mu, N, nT, byrow = TRUE)
@@ -127,7 +130,9 @@ Bmtme <- function(Y, G, n_env, n_iter = 200L, X = NULL, v_T = NULL, S_T = NULL,
     }
     Rr <- resid(drop_mu = TRUE)
     mu <- colSums(Rr) / N
-    Rinv <- .mvsinv(Rm); STinv <- .mvsinv(SigT); SEinv <- .mvsinv(SigE)
+    Rinv <- .mvsinv(Rm)
+    STinv <- .mvsinv(SigT)
+    SEinv <- .mvsinv(SigE)
     Rr <- resid(drop_b1 = TRUE)
     M <- kronecker(STinv, Ginv) + kronecker(Rinv, Z1tZ1)
     RHS <- crossprod(Z1, Rr) %*% Rinv

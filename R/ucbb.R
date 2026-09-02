@@ -34,8 +34,10 @@
 #' Ucbb(x)$actions
 #' @export
 Ucbb <- function(x, T = NULL) {
-  x <- as.matrix(x); storage.mode(x) <- "double"
-  rows <- nrow(x); K <- ncol(x)
+  x <- as.matrix(x)
+  storage.mode(x) <- "double"
+  rows <- nrow(x)
+  K <- ncol(x)
   T <- if (is.null(T)) rows else as.integer(T)
   if (T < K) stop(sprintf("need at least K = %d plays", K), call. = FALSE)
   if (T > rows) stop(sprintf("x has only %d rows", rows), call. = FALSE)

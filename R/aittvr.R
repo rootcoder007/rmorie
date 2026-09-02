@@ -15,13 +15,20 @@
 Comptotvar <- function(X) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")
-  L <- log(X); D <- ncol(X); n <- nrow(X)
+  L <- log(X)
+  D <- ncol(X)
+  n <- nrow(X)
   tot <- 0
-  for (i in seq_len(D - 1)) for (j in (i + 1):D)
-    tot <- tot + stats::var(L[, i] - L[, j])
+  for (i in seq_len(D - 1)) {
+    for (j in (i + 1):D) {
+      tot <- tot + stats::var(L[, i] - L[, j])
+    }
+  }
   tot <- tot / D
   clr <- L - rowMeans(L)
   cv <- apply(clr, 2, stats::var)
-  .t1_result(totvar = tot, totvar_trace = sum(cv), clr_var = cv,
-             n = n, D = D, method = "Compositional total variance")
+  .t1_result(
+    totvar = tot, totvar_trace = sum(cv), clr_var = cv,
+    n = n, D = D, method = "Compositional total variance"
+  )
 }

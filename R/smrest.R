@@ -16,7 +16,8 @@
 #' @examples
 #' Smrind(observed = 5L, expected = 5L)
 Smrind <- function(observed, expected, alpha = 0.05) {
-  o <- as.numeric(observed); e <- as.numeric(expected)
+  o <- as.numeric(observed)
+  e <- as.numeric(expected)
   if (o < 0) stop("observed must be non-negative")
   if (e <= 0) stop("expected must be positive")
   lo <- if (o == 0) 0 else stats::qchisq(alpha / 2, 2 * o) / 2

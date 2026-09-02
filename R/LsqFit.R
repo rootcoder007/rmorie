@@ -21,7 +21,10 @@ LsqFit <- function(x = NULL, y = NULL) {
   if (length(x) != length(y) || length(x) < 2L || any(is.na(x)) || any(is.na(y))) {
     stop("x and y must be equal-length, n >= 2.", call. = FALSE)
   }
-  mx <- mean(x); my <- mean(y); mxy <- mean(x * y); mx2 <- mean(x * x)
+  mx <- mean(x)
+  my <- mean(y)
+  mxy <- mean(x * y)
+  mx2 <- mean(x * x)
   denom <- mx2 - mx * mx
   if (denom == 0) stop("all x identical: slope undefined.", call. = FALSE)
   a_slope <- (mxy - mx * my) / denom

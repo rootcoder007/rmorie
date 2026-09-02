@@ -28,11 +28,14 @@
 #'   Avin, C., Shpitser, I. & Pearl, J. (2005). IJCAI-05, 357-363.
 #' @export
 Tmlpse <- function(y, D, M_chain, X, path) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); pv <- as.numeric(path)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  pv <- as.numeric(path)
   n <- length(yv)
   if (n == 0L || length(Dv) != n)
     stop("Tmlpse: y and D must share one length")
-  Mm <- as.matrix(M_chain); Xm <- as.matrix(X)
+  Mm <- as.matrix(M_chain)
+  Xm <- as.matrix(X)
   if (nrow(Mm) != n || nrow(Xm) != n)
     stop("Tmlpse: M_chain and X must have one row per subject")
   K <- ncol(Mm)

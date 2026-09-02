@@ -16,15 +16,19 @@
 #' @examples
 #' Mzvalue(c(0, 1, 0), support = 1)
 Mzvalue <- function(logits, support = 300, epsilon = 0.001) {
-  z <- .t1_vec(logits); s <- as.integer(support)
+  z <- .t1_vec(logits)
+  s <- as.integer(support)
   if (length(z) != 2L * s + 1L) stop("logits must have length 2*support + 1")
   eps <- as.numeric(epsilon)
   if (eps <= 0) stop("epsilon must be strictly positive")
-  e <- exp(z - max(z)); p <- e / sum(e)
+  e <- exp(z - max(z))
+  p <- e / sum(e)
   y <- sum(p * (seq_len(2L * s + 1L) - 1L - s))
   sg <- if (y >= 0) 1 else -1
   a <- (sqrt(1 + 4 * eps * (abs(y) + 1 + eps)) - 1) / (2 * eps)
-  .t1_result(value = sg * (a * a - 1), expected = y, prob = p,
-             support = s, epsilon = eps, k = 2L * s + 1L,
-             method = "MuZero categorical value head (Schrittwieser et al. 2020 App. F)")
+  .t1_result(
+    value = sg * (a * a - 1), expected = y, prob = p,
+    support = s, epsilon = eps, k = 2L * s + 1L,
+    method = "MuZero categorical value head (Schrittwieser et al. 2020 App. F)"
+  )
 }

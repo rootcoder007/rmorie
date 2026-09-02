@@ -23,11 +23,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Siglip(V, V)
 Siglip <- function(image_emb, text_emb, t_prime = 1, bias = 0) {
-  A <- as.matrix(image_emb); B <- as.matrix(text_emb); n <- nrow(A)
+  A <- as.matrix(image_emb)
+  B <- as.matrix(text_emb)
+  n <- nrow(A)
   unit <- function(M) M / sqrt(rowSums(M^2))
-  A <- unit(A); B <- unit(B)
+  A <- unit(A)
+  B <- unit(B)
   logits <- t_prime * (A %*% t(B)) + bias
-  Z <- matrix(-1, n, n); diag(Z) <- 1
+  Z <- matrix(-1, n, n)
+  diag(Z) <- 1
   loss <- -sum(log(.s4_expit(Z * logits))) / n
   hit <- sum(apply(logits, 1, which.max) == seq_len(n))
   .t1_result(estimate = loss, logits = logits, acc = hit / n, n = n,

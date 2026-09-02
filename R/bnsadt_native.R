@@ -151,7 +151,8 @@ morie_bnsadt_p <- function(z, family = "symmetric_step", params = numeric(0)) {
   s <- sqrt(tau * tau + sigma * sigma)
   edges <- c(-Inf, sigma * cuts, Inf)
   terms <- vapply(seq_along(betas), function(k) {
-    lo <- edges[k]; hi <- edges[k + 1L]
+    lo <- edges[k]
+    hi <- edges[k + 1L]
     plo <- if (lo == -Inf) 0 else .w3_ncdf((lo - mu) / s)
     phi <- if (hi == Inf) 1 else .w3_ncdf((hi - mu) / s)
     betas[k] * (phi - plo)
@@ -310,7 +311,8 @@ morie_bnsadt_fit <- function(x, sigma, family = "symmetric_step",
   num <- numeric(0)
   den <- numeric(length(betas))
   for (k in seq_along(betas)) {
-    lo <- edges[k]; hi <- edges[k + 1L]
+    lo <- edges[k]
+    hi <- edges[k + 1L]
     clo <- if (lo == -Inf) 0 else .w3_ncdf((lo - theta) / sigma)
     chi <- if (hi == Inf) 1 else .w3_ncdf((hi - theta) / sigma)
     den[k] <- betas[k] * (chi - clo)
@@ -391,7 +393,8 @@ morie_bnsadt <- function(y, D, family = "symmetric_step", grid = NULL,
     j <- 1L
     for (i in seq_len(n))
       if (abs(x[i] / sigma[i]) > abs(x[j] / sigma[j])) j <- i
-    target <- x[j]; target_se <- sigma[j]
+    target <- x[j]
+    target_se <- sigma[j]
   } else if (is.null(target_se))
     stop("target_se is required when target is given")
 

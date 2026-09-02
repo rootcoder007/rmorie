@@ -17,7 +17,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Localmoran(V, V)
 Localmoran <- function(x, W, mlvar = TRUE) {
-  x <- .t1_vec(x); W <- as.matrix(W); n <- length(x)
+  x <- .t1_vec(x)
+  W <- as.matrix(W)
+  n <- length(x)
   z <- x - mean(x)
   m2 <- sum(z^2) / (if (isTRUE(mlvar)) n else n - 1)
   lag <- as.numeric(W %*% z)

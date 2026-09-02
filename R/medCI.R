@@ -26,8 +26,10 @@
 #'   \doi{10.1207/s15327906mbr3901_4}.
 #' @export
 MedCI <- function(a, b, sa, sb, n_sim = 20000, level = 0.95) {
-  av <- as.numeric(a); bv <- as.numeric(b)
-  sav <- as.numeric(sa); sbv <- as.numeric(sb)
+  av <- as.numeric(a)
+  bv <- as.numeric(b)
+  sav <- as.numeric(sa)
+  sbv <- as.numeric(sb)
   if (sav <= 0 || sbv <= 0)
     stop("standard errors must be strictly positive")
   n <- as.integer(n_sim)
@@ -35,7 +37,8 @@ MedCI <- function(a, b, sa, sb, n_sim = 20000, level = 0.95) {
   lv <- as.numeric(level)
   if (lv <= 0 || lv >= 1)
     stop("level must lie strictly between 0 and 1")
-  za <- .s03normdraws(n, 2L); zb <- .s03normdraws(n, 3L)
+  za <- .s03normdraws(n, 2L)
+  zb <- .s03normdraws(n, 3L)
   prod <- sort((av + sav * za) * (bv + sbv * zb))
   alo <- (1 - lv) / 2
   lo <- .s03quantile7(prod, alo)

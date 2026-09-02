@@ -75,12 +75,16 @@ morie_rosenb <- function(matched_pairs, Gamma_grid = c(1, 1.5, 2, 3),
                          alpha = 0.05) {
   gs <- as.numeric(Gamma_grid)
   if (length(gs) == 0L) stop("rosenb: Gamma_grid is empty")
-  pu <- numeric(length(gs)); pl <- numeric(length(gs))
-  W <- NA_real_; n_pairs <- NA_integer_
+  pu <- numeric(length(gs))
+  pl <- numeric(length(gs))
+  W <- NA_real_
+  n_pairs <- NA_integer_
   for (k in seq_along(gs)) {
     r <- .mor_ros_signed(matched_pairs, Gamma = gs[k])
-    pu[k] <- r$p_upper; pl[k] <- r$p_lower
-    W <- r$W; n_pairs <- r$n_pairs
+    pu[k] <- r$p_upper
+    pl[k] <- r$p_lower
+    W <- r$W
+    n_pairs <- r$n_pairs
   }
   crit <- NULL
   for (k in seq_along(gs)) if (pu[k] <= as.numeric(alpha)) crit <- gs[k]

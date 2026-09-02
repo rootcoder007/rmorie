@@ -19,7 +19,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Wsdt2d(V, V)
 Wsdt2d <- function(X_samples, Y_samples, p = 2) {
-  A <- as.matrix(X_samples); B <- as.matrix(Y_samples); n <- nrow(A)
+  A <- as.matrix(X_samples)
+  B <- as.matrix(Y_samples)
+  n <- nrow(A)
   Cst <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     Cst[i, j] <- sum(abs(A[i, ] - B[j, ])^2)^(p / 2)

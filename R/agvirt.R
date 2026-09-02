@@ -17,15 +17,20 @@
 #' @examples
 #' Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8), pending = c(1, 2, 3, 4, 5, 6, 7, 8))
 Virtloss <- function(W, N, pending, nvl = 1) {
-  W <- .t1_vec(W); N <- .t1_vec(N); P <- .t1_vec(pending)
+  W <- .t1_vec(W)
+  N <- .t1_vec(N)
+  P <- .t1_vec(pending)
   k <- length(W)
-  if (length(N) != k || length(P) != k)
+  if (length(N) != k || length(P) != k) {
     stop("W, N and pending must have the same length")
+  }
   if (any(N < 0) || any(P < 0)) stop("counts must be non-negative")
   nvl <- as.numeric(nvl)
   Nv <- N + nvl * P
   Wv <- W - nvl * P
-  .t1_result(Q = ifelse(Nv == 0, 0, Wv / Nv), N = Nv, W = Wv,
-             Qclean = ifelse(N == 0, 0, W / N), k = k, nvl = nvl,
-             method = "Virtual loss in parallel MCTS (Chaslot et al. 2008 Sect. 3.3)")
+  .t1_result(
+    Q = ifelse(Nv == 0, 0, Wv / Nv), N = Nv, W = Wv,
+    Qclean = ifelse(N == 0, 0, W / N), k = k, nvl = nvl,
+    method = "Virtual loss in parallel MCTS (Chaslot et al. 2008 Sect. 3.3)"
+  )
 }

@@ -20,15 +20,20 @@
 #' Bootpct(c(1, 2, 3, 4, 5, 6, 7, 8, 9, 10), 0.2)$lo
 #' @export
 Bootpct <- function(theta_b, alpha = 0.05, theta_hat = NULL) {
-  v <- .s03vec(theta_b); n <- length(v); a <- as.numeric(alpha)
-  lo <- .s03quantile7(v, a / 2); hi <- .s03quantile7(v, 1 - a / 2)
+  v <- .s03vec(theta_b)
+  n <- length(v)
+  a <- as.numeric(alpha)
+  lo <- .s03quantile7(v, a / 2)
+  hi <- .s03quantile7(v, 1 - a / 2)
   th <- if (!is.null(theta_hat)) as.numeric(theta_hat) else .s03mean(v)
   cnt <- 0
   for (x in v) if (x < th) cnt <- cnt + 1
   p <- if (n) cnt / n else 0.5
   if (p <= 0) p <- 0.5 / n
   if (p >= 1) p <- 1 - 0.5 / n
-  z0 <- qnorm(p); za <- qnorm(a / 2); zb <- qnorm(1 - a / 2)
+  z0 <- qnorm(p)
+  za <- qnorm(a / 2)
+  zb <- qnorm(1 - a / 2)
   list(lo = lo, hi = hi, estimate = hi - lo,
        bc_lo = .s03quantile7(v, pnorm(2 * z0 + za)),
        bc_hi = .s03quantile7(v, pnorm(2 * z0 + zb)), z0 = z0, n = n,

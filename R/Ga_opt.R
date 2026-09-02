@@ -25,7 +25,8 @@
 #'        generations = 10)
 Ga_opt <- function(f, population, generations = 20, mutation = 0.1) {
   P <- .s03mat(population)
-  m <- nrow(P); d <- ncol(P)
+  m <- nrow(P)
+  d <- ncol(P)
   if (m < 2L) stop("genetic_algorithm: population needs at least two individuals")
   if (d == 0L) stop("genetic_algorithm: individuals are empty")
   if (!is.function(f)) stop("genetic_algorithm: f must be callable")
@@ -42,7 +43,8 @@ Ga_opt <- function(f, population, generations = 20, mutation = 0.1) {
     best_path <- c(best_path, fit[ord[1]])
     kids <- matrix(0, m - h, d)
     if (m - h > 0L) for (i in seq_len(m - h) - 1L) {
-      a <- keep[i %% h + 1L, ]; b <- keep[(i + 1L) %% h + 1L, ]
+      a <- keep[i %% h + 1L, ]
+      b <- keep[(i + 1L) %% h + 1L, ]
       cp <- if (d > 1L) (i %% (d - 1L)) + 1L else 0L
       child <- ifelse(seq_len(d) <= cp, a, b)
       for (j in seq_len(d)) {

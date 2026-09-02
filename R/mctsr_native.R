@@ -82,7 +82,8 @@ morie_mctsr <- function(root_state, actions, step, reward, is_terminal,
         act[[nid]] <- a
         kids[[nid]] <- integer(0)
         untried[[nid]] <- as.list(actions(s2))
-        Nv[nid] <- 0; Qv[nid] <- 0
+        Nv[nid] <- 0
+        Qv[nid] <- 0
         kids[[v]] <- c(kids[[v]], nid)
         v <- nid
         break

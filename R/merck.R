@@ -12,7 +12,8 @@
 #' @examples
 #' Mercerchk(K = 5L)
 Mercerchk <- function(K, tol = 1e-9) {
-  Km <- as.matrix(K); n <- nrow(Km)
+  Km <- as.matrix(K)
+  n <- nrow(Km)
   if (n == 0L || ncol(Km) != n) stop("K must be a non-empty square matrix")
   gap <- max(abs(Km - t(Km)))
   out <- morie_is_psd(Km, tol = as.numeric(tol))

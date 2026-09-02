@@ -35,16 +35,24 @@ Alfrecyc <- function(m1, z, x, wd, bins = NULL, ncycle = 1) {
   mc <- m1
   d <- matrix(0, n, n)
   for (cyc in seq_len(ncycle)) {
-    for (i in seq_len(n)) for (j in seq_len(n))
-      d[i, j] <- sqrt(alfVn2(x[i, ] - x[j, ]))
+    for (i in seq_len(n)) {
+      for (j in seq_len(n)) {
+        d[i, j] <- sqrt(alfVn2(x[i, ] - x[j, ]))
+      }
+    }
     zn <- array(0, c(n, n, cz))
-    for (i in seq_len(n)) for (j in seq_len(n))
-      zn[i, j, ] <- alfLin(alfOnehot(d[i, j], bins), wd) + alfLnorm(zc[i, j, ])
+    for (i in seq_len(n)) {
+      for (j in seq_len(n)) {
+        zn[i, j, ] <- alfLin(alfOnehot(d[i, j], bins), wd) + alfLnorm(zc[i, j, ])
+      }
+    }
     zc <- zn
     mn <- matrix(0, n, ncol(mc))
     for (i in seq_len(n)) mn[i, ] <- alfLnorm(mc[i, ])
     mc <- mn
   }
-  list(z = zc, m1 = mc, d = d, estimate = mean(zc), n = n, ncycle = ncycle,
-       method = "AlphaFold recycling embedder")
+  list(
+    z = zc, m1 = mc, d = d, estimate = mean(zc), n = n, ncycle = ncycle,
+    method = "AlphaFold recycling embedder"
+  )
 }

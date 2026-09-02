@@ -78,9 +78,12 @@ morie_metsem_kmers <- function(seq, k) {
 #' @return A list with \code{out}, \code{inc}, \code{nodes}.
 #' @export
 .metsem_index <- function(edges, k) {
-  out <- list(); inc <- list(); nodes <- character(0)
+  out <- list()
+  inc <- list()
+  nodes <- character(0)
   for (km in sort(names(edges), method = "radix")) {
-    a <- substr(km, 1L, k - 1L); b <- substr(km, 2L, k)
+    a <- substr(km, 1L, k - 1L)
+    b <- substr(km, 2L, k)
     nodes <- c(nodes, a, b)
     out[[a]] <- c(out[[a]], km)
     inc[[b]] <- c(inc[[b]], km)
@@ -102,9 +105,12 @@ morie_metsem_kmers <- function(seq, k) {
 #' @export
 morie_metsem_graph <- function(reads, k) {
   k <- as.integer(k)
-  edges <- list(); short <- 0L; used <- 0L
+  edges <- list()
+  short <- 0L
+  used <- 0L
   for (r in as.character(reads)) {
-    if (nchar(r) < k) { short <- short + 1L; next }
+    if (nchar(r) < k) { short <- short + 1L
+    next }
     used <- used + 1L
     for (km in morie_metsem_kmers(r, k))
       edges[[km]] <- if (is.null(edges[[km]])) 1L else edges[[km]] + 1L
@@ -193,7 +199,8 @@ morie_metsem_unitigs <- function(g) {
   seen <- character(0)
   paths <- list()
   for (v in g$nodes) {
-    od <- .metsem_outdeg(g, v); id <- .metsem_indeg(g, v)
+    od <- .metsem_outdeg(g, v)
+    id <- .metsem_indeg(g, v)
     if (od > 0L && !(od == 1L && id == 1L)) {
       for (e in g$out[[v]]) {
         if (e %in% seen) next
@@ -258,7 +265,9 @@ morie_metsem_n50 <- function(lengths) {
 .metsem_drop <- function(g, es) {
   for (e in es) if (!is.null(g$edges[[e]])) g$edges[[e]] <- NULL
   ix <- .metsem_index(g$edges, g$k)
-  g$out <- ix$out; g$inc <- ix$inc; g$nodes <- ix$nodes
+  g$out <- ix$out
+  g$inc <- ix$inc
+  g$nodes <- ix$nodes
   g
 }
 
@@ -289,7 +298,8 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
   if (is.null(tip_length)) tip_length <- 2L * k
   g <- morie_metsem_graph(rs, k)
   n_edges0 <- length(g$edges)
-  tips <- 0L; bubbles <- 0L
+  tips <- 0L
+  bubbles <- 0L
   for (it in seq_len(as.integer(rounds))) {
     us <- morie_metsem_unitigs(g)
     keys <- vapply(us, function(u) paste0(u$start, "|", u$end),
@@ -303,10 +313,12 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
       grp <- grp[order(-cv, sq, method = "radix")]
       for (q in 2:length(grp))
         if (grp[[q]]$coverage <= bubble_ratio * grp[[1]]$coverage) {
-          drop <- c(drop, grp[[q]]$path); bubbles <- bubbles + 1L
+          drop <- c(drop, grp[[q]]$path)
+          bubbles <- bubbles + 1L
         }
     }
-    if (length(drop)) { g <- .metsem_drop(g, drop); next }
+    if (length(drop)) { g <- .metsem_drop(g, drop)
+    next }
     drop <- character(0)
     for (ui in seq_along(us)) {
       u <- us[[ui]]
@@ -325,7 +337,8 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
       best <- neigh[1]
       for (v in neigh) if (v > best) best <- v
       if (u$coverage <= tip_ratio * best) {
-        drop <- c(drop, u$path); tips <- tips + 1L
+        drop <- c(drop, u$path)
+        tips <- tips + 1L
       }
     }
     if (!length(drop)) break
@@ -334,11 +347,13 @@ morie_metsem <- function(reads, k, tip_length = NULL, tip_ratio = 0.2,
 
   us <- morie_metsem_unitigs(g)
   if (is.null(min_length)) {
-    keep <- us; short <- list()
+    keep <- us
+    short <- list()
   } else {
     ok <- vapply(us, function(u) u$length >= as.integer(min_length),
                  logical(1))
-    keep <- us[ok]; short <- us[!ok]
+    keep <- us[ok]
+    short <- us[!ok]
   }
   lens <- if (length(keep)) vapply(keep, function(u) u$length,
                                    numeric(1)) else numeric(0)

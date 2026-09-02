@@ -18,16 +18,19 @@
 opthr <- function(efficiency = 0.95, lower = 1e-6, upper = 20, iters = 200L) {
   are <- function(k) {
     if (k <= 0) return(0)
-    phi <- stats::pnorm(k); den <- stats::dnorm(k)
+    phi <- stats::pnorm(k)
+    den <- stats::dnorm(k)
     a <- 2 * phi - 1
     a * a / (a - 2 * k * den + 2 * k * k * (1 - phi))
   }
-  lo <- as.numeric(lower); hi <- as.numeric(upper)
+  lo <- as.numeric(lower)
+  hi <- as.numeric(upper)
   for (i in seq_len(as.integer(iters))) {
     mid <- 0.5 * (lo + hi)
     if (are(mid) < efficiency) lo <- mid else hi <- mid
   }
-  k <- 0.5 * (lo + hi); ach <- are(k)
+  k <- 0.5 * (lo + hi)
+  ach <- are(k)
   list(estimate = k, efficiency = as.numeric(efficiency), achieved = ach,
        asymptotic_variance = 1 / ach, breakdown_hint = 0.5, n = 0L,
        method = "Huber tuning constant for a target normal efficiency (Huber 1964)")

@@ -24,7 +24,8 @@ Geglu <- function(y, x = NULL, W = NULL, V = NULL, b = NULL, c = NULL,
   u <- .s03matvec(t(.s03mat(V)), v)
   bb <- if (!is.null(b)) .s03vec(b) else numeric(length(g))
   cc <- if (!is.null(c)) .s03vec(c) else numeric(length(u))
-  gate <- numeric(length(g)); out <- numeric(length(g))
+  gate <- numeric(length(g))
+  out <- numeric(length(g))
   for (i in seq_along(g)) {
     gate[i] <- .s03gelu(g[i] + bb[i])
     out[i] <- gate[i] * (u[i] + cc[i])

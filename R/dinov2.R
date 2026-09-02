@@ -28,7 +28,8 @@
 #' Dinov2(x = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
 Dinov2 <- function(x, student, teacher, tau = 0.1, tau_t = 0.04,
                    mask = NULL, w_ibot = 1, w_koleo = 0.1) {
-  S <- .s03mat(student); TT <- .s03mat(teacher)
+  S <- .s03mat(student)
+  TT <- .s03mat(teacher)
   if (!nrow(S) || !nrow(TT))
     stop("empty input: student and teacher logits are required")
   if (nrow(S) != nrow(TT) || ncol(S) != ncol(TT))
@@ -44,7 +45,8 @@ Dinov2 <- function(x, student, teacher, tau = 0.1, tau_t = 0.04,
   mk <- if (is.null(mask)) as.integer(seq_len(P) %% 2L == 0L) else
     as.integer(.s03vec(mask) != 0)
   if (length(mk) != P) stop("mask must have one flag per patch")
-  ibot <- 0; nm <- 0L
+  ibot <- 0
+  nm <- 0L
   if (P > 0L) for (i in seq_len(P)) {
     if (!mk[i]) next
     a <- .dino_softmax(S[1L + i, ], tau)

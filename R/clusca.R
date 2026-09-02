@@ -23,7 +23,9 @@
 Clustcoef <- function(y, A = NULL, node = NULL) {
   W <- .s03mat(if (!is.null(A)) A else y)
   n <- nrow(W)
-  loc <- numeric(n); tri <- 0; trip <- 0
+  loc <- numeric(n)
+  tri <- 0
+  trip <- 0
   for (v in seq_len(n)) {
     nb <- integer(0)
     for (u in seq_len(n)) if (u != v && W[v, u] != 0) nb <- c(nb, u)

@@ -155,7 +155,8 @@
   for (lyr in layers) {
     r <- .coupling_forward(z, lyr[[1L]], lyr[[2L]], lyr[[3L]],
                             lyr[[4L]], lyr[[5L]])
-    z <- r$y; logdet <- logdet + r$logdet
+    z <- r$y
+    logdet <- logdet + r$logdet
   }
   list(z = z, logdet = logdet)
 }
@@ -176,7 +177,8 @@
   for (lyr in rev(layers)) {
     r <- .coupling_inverse(x, lyr[[1L]], lyr[[2L]], lyr[[3L]],
                             lyr[[4L]], lyr[[5L]])
-    x <- r$x; logdet <- logdet + r$logdet
+    x <- r$x
+    logdet <- logdet + r$logdet
   }
   list(x = x, logdet = logdet)
 }

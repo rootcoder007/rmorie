@@ -51,7 +51,9 @@ Hmcsam <- function(log_p, grad_log_p, x0, step_size = 0.1, L = 10, n_iter = 200)
     list(x = x, p = p)
   }
   draws <- matrix(0, it, d)
-  acc <- 0L; counter <- 1L; dH <- numeric(it)
+  acc <- 0L
+  counter <- 1L
+  dH <- numeric(it)
   for (s in seq_len(it)) {
     p0 <- vapply(seq_len(d) - 1L, function(j) .s03qnorm(.s03vdc(counter + j, 2L)), 0)
     counter <- counter + d
@@ -62,7 +64,8 @@ Hmcsam <- function(log_p, grad_log_p, x0, step_size = 0.1, L = 10, n_iter = 200)
     u <- .s03vdc(counter, 3L)
     counter <- counter + 1L
     accept <- if (H1 <= H0) TRUE else (u < exp(-(H1 - H0)))
-    if (accept) { x <- lf$x; acc <- acc + 1L }
+    if (accept) { x <- lf$x
+    acc <- acc + 1L }
     draws[s, ] <- x
   }
   .t1_result(estimate = mean(draws[, 1]), mean = colMeans(draws), draws = draws,

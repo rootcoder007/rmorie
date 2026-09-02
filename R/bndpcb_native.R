@@ -48,8 +48,10 @@ morie_coverage_by_region <- function(theta, level = 0.95, lower_bound = 0,
   e <- .ghc_rng(seed)
   th <- as.numeric(theta)
   cut <- if (is.null(split)) as.numeric(lower_bound) else as.numeric(split)
-  tot <- 0; cov <- 0
-  stot <- 0; scov <- 0
+  tot <- 0
+  cov <- 0
+  stot <- 0
+  scov <- 0
   widths <- numeric()
   n <- as.integer(draws)
   z <- qnorm(0.5 + level / 2)
@@ -63,7 +65,8 @@ morie_coverage_by_region <- function(theta, level = 0.95, lower_bound = 0,
     tot <- tot + 1
     cov <- cov + as.integer(ok)
     widths <- c(widths, max(hi - lo, 0))
-    if (x < cut) { stot <- stot + 1; scov <- scov + as.integer(ok) }
+    if (x < cut) { stot <- stot + 1
+    scov <- scov + as.integer(ok) }
   }
   list(marginal_coverage = cov / tot,
        subset_coverage = if (stot > 0) scov / stot else NaN,

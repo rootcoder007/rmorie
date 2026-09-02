@@ -50,20 +50,24 @@ Gstabwt <- function(treatment = NULL, history = NULL,
                     numerator_model = NULL, denominator_model = NULL) {
   if (is.null(denominator_model))
     stop("denominator_model (f(A_t | H_t)) is required", call. = FALSE)
-  D <- as.matrix(denominator_model); storage.mode(D) <- "double"
-  n <- nrow(D); nt <- ncol(D)
+  D <- as.matrix(denominator_model)
+  storage.mode(D) <- "double"
+  n <- nrow(D)
+  nt <- ncol(D)
   if (n == 0) stop("need at least one subject", call. = FALSE)
   if (any(D <= 0)) stop("denominator probabilities must be positive",
                         call. = FALSE)
   N <- if (is.null(numerator_model)) matrix(1, n, nt) else {
-    M <- as.matrix(numerator_model); storage.mode(M) <- "double"
+    M <- as.matrix(numerator_model)
+    storage.mode(M) <- "double"
     if (nrow(M) != n || ncol(M) != nt)
       stop("numerator_model must match denominator_model", call. = FALSE)
     M
   }
   if (!is.null(treatment) && NROW(treatment) != n)
     stop("treatment must have one row per subject", call. = FALSE)
-  den <- apply(D, 1, prod); num <- apply(N, 1, prod)
+  den <- apply(D, 1, prod)
+  num <- apply(N, 1, prod)
   w <- num / den
   list(estimate = sum(w) / n, weights = w, unstabilized = 1 / den,
        mean_weight = sum(w) / n, max_weight = max(w), n = n, n_times = nt,
@@ -88,20 +92,24 @@ Gstabwt <- function(treatment = NULL, history = NULL,
 #' Stbciw(matrix(c(0.9, 0.8, 0.95, 0.85), nrow = 2))
 #' @export
 Stbciw <- function(C, H = NULL, numerator = NULL) {
-  D <- as.matrix(C); storage.mode(D) <- "double"
-  n <- nrow(D); nt <- ncol(D)
+  D <- as.matrix(C)
+  storage.mode(D) <- "double"
+  n <- nrow(D)
+  nt <- ncol(D)
   if (n == 0) stop("need at least one subject", call. = FALSE)
   if (any(D <= 0 | D > 1))
     stop("censoring probabilities must lie in (0, 1]", call. = FALSE)
   N <- if (is.null(numerator)) matrix(1, n, nt) else {
-    M <- as.matrix(numerator); storage.mode(M) <- "double"
+    M <- as.matrix(numerator)
+    storage.mode(M) <- "double"
     if (nrow(M) != n || ncol(M) != nt)
       stop("numerator must match C", call. = FALSE)
     M
   }
   if (!is.null(H) && NROW(H) != n)
     stop("H must have one row per subject", call. = FALSE)
-  den <- apply(D, 1, prod); num <- apply(N, 1, prod)
+  den <- apply(D, 1, prod)
+  num <- apply(N, 1, prod)
   w <- num / den
   list(estimate = sum(w) / n, weights = w, unstabilized = 1 / den,
        mean_weight = sum(w) / n, max_weight = max(w), n = n, n_times = nt,
@@ -132,12 +140,15 @@ Stbciw <- function(C, H = NULL, numerator = NULL) {
 #' @export
 Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
                    ml_propensity = NULL) {
-  ys <- as.numeric(y); dd <- as.numeric(D); n <- length(ys)
+  ys <- as.numeric(y)
+  dd <- as.numeric(D)
+  n <- length(ys)
   if (n == 0) stop("need at least one observation", call. = FALSE)
   if (length(dd) != n) stop("y and D must have the same length", call. = FALSE)
   if (is.null(ml_outcome) || is.null(ml_propensity))
     stop("ml_outcome (m1, m0) and ml_propensity are required", call. = FALSE)
-  m1 <- as.numeric(ml_outcome[[1]]); m0 <- as.numeric(ml_outcome[[2]])
+  m1 <- as.numeric(ml_outcome[[1]])
+  m0 <- as.numeric(ml_outcome[[2]])
   e <- as.numeric(ml_propensity)
   if (length(m1) != n || length(m0) != n || length(e) != n)
     stop("nuisance predictions must have length n", call. = FALSE)
@@ -179,8 +190,12 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
 #'          rep(0.8, 4), rep(0.3, 4))
 #' @export
 Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
-  ys <- as.numeric(y); tt <- as.numeric(T); g <- as.numeric(ps)
-  q1 <- as.numeric(Q1); q0 <- as.numeric(Q0); n <- length(ys)
+  ys <- as.numeric(y)
+  tt <- as.numeric(T)
+  g <- as.numeric(ps)
+  q1 <- as.numeric(Q1)
+  q0 <- as.numeric(Q0)
+  n <- length(ys)
   if (n == 0 || length(tt) != n || length(g) != n ||
       length(q1) != n || length(q0) != n)
     stop("all inputs must be non-empty and the same length", call. = FALSE)
@@ -189,18 +204,24 @@ Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
   if (any(ys < 0 | ys > 1))
     stop("y must be bounded in [0, 1] for the fluctuation", call. = FALSE)
   LO <- 1e-12
-  lg <- function(p) { p <- pmin(pmax(p, LO), 1 - LO); log(p / (1 - p)) }
+  lg <- function(p) { p <- pmin(pmax(p, LO), 1 - LO)
+  log(p / (1 - p)) }
   ex <- function(z) ifelse(z >= 0, 1 / (1 + exp(-z)), exp(z) / (1 + exp(z)))
   h1 <- tt / g
   h0 <- (1 - tt) / (1 - g)
   qa <- ifelse(tt == 1, q1, q0)
   off <- lg(qa)
-  e0 <- 0; e1 <- 0
+  e0 <- 0
+  e1 <- 0
   for (it in seq_len(as.integer(n_iter))) {
     mu <- ex(off + e0 * h0 + e1 * h1)
-    r <- ys - mu; w <- mu * (1 - mu)
-    s0 <- sum(h0 * r); s1 <- sum(h1 * r)
-    a00 <- sum(w * h0 * h0); a01 <- sum(w * h0 * h1); a11 <- sum(w * h1 * h1)
+    r <- ys - mu
+    w <- mu * (1 - mu)
+    s0 <- sum(h0 * r)
+    s1 <- sum(h1 * r)
+    a00 <- sum(w * h0 * h0)
+    a01 <- sum(w * h0 * h1)
+    a11 <- sum(w * h1 * h1)
     det <- a00 * a11 - a01 * a01
     if (abs(det) < 1e-14) break
     e0 <- e0 + (a11 * s0 - a01 * s1) / det
@@ -208,7 +229,8 @@ Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
   }
   q1s <- ex(lg(q1) + e1 / g)
   q0s <- ex(lg(q0) + e0 / (1 - g))
-  ey1 <- sum(q1s) / n; ey0 <- sum(q0s) / n
+  ey1 <- sum(q1s) / n
+  ey0 <- sum(q0s) / n
   ate <- ey1 - ey0
   ic <- h1 * (ys - q1s) - h0 * (ys - q0s) + (q1s - q0s) - ate
   se <- sqrt(sum(ic * ic) / (n * n))
@@ -240,7 +262,9 @@ Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
 #' Cde(c(1, 2, 3, 4, 5, 6), c(0, 1, 0, 1, 0, 1), c(1, 1, 2, 2, 3, 3), 2)
 #' @export
 Cde <- function(Y, X, M, m) {
-  ys <- as.numeric(Y); xs <- as.numeric(X); ms <- as.numeric(M)
+  ys <- as.numeric(Y)
+  xs <- as.numeric(X)
+  ms <- as.numeric(M)
   n <- length(ys)
   if (length(xs) != n || length(ms) != n)
     stop("Y, X and M must have the same length", call. = FALSE)
@@ -285,7 +309,8 @@ Cde <- function(Y, X, M, m) {
 Snmlin <- function(y, treatment_history, covariate_history = NULL,
                    time = NULL, propensity = NULL) {
   ys <- as.numeric(y)
-  A <- as.matrix(treatment_history); storage.mode(A) <- "double"
+  A <- as.matrix(treatment_history)
+  storage.mode(A) <- "double"
   n <- length(ys)
   if (nrow(A) != n || n == 0)
     stop("y and treatment_history must agree and be non-empty", call. = FALSE)
@@ -299,7 +324,8 @@ Snmlin <- function(y, treatment_history, covariate_history = NULL,
   psi <- sum(r * ys) / den
   u <- r * (ys - psi * a)
   se <- if (n > 1) sqrt(sum(u * u)) / abs(den) else NaN
-  ab <- sum(a) / n; yb <- sum(ys) / n
+  ab <- sum(a) / n
+  yb <- sum(ys) / n
   saa <- sum((a - ab)^2)
   ols <- if (saa > 0) sum((a - ab) * (ys - yb)) / saa else NaN
   z <- 1.959963984540054

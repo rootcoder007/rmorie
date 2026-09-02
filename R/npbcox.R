@@ -53,7 +53,9 @@ Npbcox <- function(time, event, X, c = 1.0, lam0 = NULL, n_iter = 50L,
   parts <- function(b) {
     eta <- as.numeric(Xm %*% b)
     w <- exp(eta)
-    ll <- 0; g <- numeric(p); H <- matrix(0, p, p)
+    ll <- 0
+    g <- numeric(p)
+    H <- matrix(0, p, p)
     for (tk in ev) {
       R <- which(t >= tk)
       D <- which(t == tk & d == 1)
@@ -87,8 +89,12 @@ Npbcox <- function(time, event, X, c = 1.0, lam0 = NULL, n_iter = 50L,
     ifelse(diag(cov) > 0, sqrt(diag(cov)), NaN)
 
   w <- pr$w
-  dH <- numeric(length(ev)); Hc <- numeric(length(ev)); S <- numeric(length(ev))
-  acc <- 0; surv <- 1; prev <- 0
+  dH <- numeric(length(ev))
+  Hc <- numeric(length(ev))
+  S <- numeric(length(ev))
+  acc <- 0
+  surv <- 1
+  prev <- 0
   for (k in seq_along(ev)) {
     tk <- ev[k]
     risk <- sum(w[t >= tk])

@@ -250,7 +250,9 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
   if (ncol(Xsm) != d)
     stop("bayopt: a query point has the wrong dimension")
   ns <- nrow(Xsm)
-  out_m <- numeric(ns); out_v <- numeric(ns); out_sd <- numeric(ns)
+  out_m <- numeric(ns)
+  out_v <- numeric(ns)
+  out_sd <- numeric(ns)
   for (s_ in 1:ns) {
     q <- Xsm[s_, ]
     ks <- numeric(n)
@@ -289,7 +291,8 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
 gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
                                   amplitude = 1, length_scale = 1,
                                   noise = 1e-8, mean = NULL) {
-  rows <- as.matrix(X); storage.mode(rows) <- "double"
+  rows <- as.matrix(X)
+  storage.mode(rows) <- "double"
   ys <- as.numeric(y)
   q <- as.numeric(xs)
   if (nrow(rows) == 0) stop("bayopt: no observations")
@@ -315,7 +318,8 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
   mu_s <- m + sum(ks * alpha)
   var_s <- max(k(q, q, amplitude, length_scale) - sum(ks * v), 0)
   sd_s <- sqrt(var_s)
-  gmu <- numeric(d); gsd <- numeric(d)
+  gmu <- numeric(d)
+  gsd <- numeric(d)
   for (dd in 1:d) {
     dk <- numeric(n)
     for (i in 1:n) {
@@ -495,12 +499,15 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
            numeric(1))
   }
 
-  best_pt <- NULL; best_val <- -Inf; evals <- 0
+  best_pt <- NULL
+  best_val <- -Inf
+  evals <- 0
   span <- max(vapply(1:d, function(i) box[[i]][2] - box[[i]][1], numeric(1)))
   step <- span * 0.1
   for (s0 in starts) {
     pt <- clip(as.numeric(s0))
-    val <- score_pt(pt); evals <- evals + 1
+    val <- score_pt(pt)
+    evals <- evals + 1
     for (it in seq_len(as.integer(max_iter))) {
       g <- gp_posterior_gradient(X, y, pt, kernel, amplitude, length_scale,
                                  noise)
@@ -512,9 +519,12 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
       t <- step
       for (bl in 1:30) {
         cand <- clip(pt + t * g_ / gn)
-        cval <- score_pt(cand); evals <- evals + 1
+        cval <- score_pt(cand)
+        evals <- evals + 1
         if (cval > val + 1e-15) {
-          pt <- cand; val <- cval; step <- t * 1.3
+          pt <- cand
+          val <- cval
+          step <- t * 1.3
           moved <- TRUE
           break
         }
@@ -523,7 +533,8 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
       if (!moved) break
     }
     if (val > best_val) {
-      best_pt <- pt; best_val <- val
+      best_pt <- pt
+      best_val <- val
     }
   }
   list(x = best_pt, acq = best_val, n_starts = length(starts),
@@ -578,7 +589,8 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
   if (is.null(X0) && n_init < 2)
     stop("bayopt: at least two initial points are needed")
   d <- length(box)
-  st <- as.integer(seed); if (st <= 0) st <- 1L
+  st <- as.integer(seed)
+  if (st <= 0) st <- 1L
   rnd <- function() {
     st <<- .ghc_lcg31(st)
     st / 2147483648
@@ -589,7 +601,8 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
   }
 
   if (!is.null(X0)) {
-    X <- as.matrix(X0); storage.mode(X) <- "double"
+    X <- as.matrix(X0)
+    storage.mode(X) <- "double"
     if (is.null(y0)) {
       Y <- vapply(seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
                   numeric(1))
@@ -616,7 +629,8 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
       got <- maximise_acquisition(X, Y, best, box, acq, kernel,
                                   amplitude, length_scale, noise, kappa,
                                   xi, n_starts = n_starts, seed = st)
-      x_new <- got$x; a_val <- got$acq
+      x_new <- got$x
+      a_val <- got$acq
     } else {
       cand <- t(sapply(seq_len(as.integer(n_candidates)), function(i) draw()))
       post <- gp_posterior(X, Y, cand, kernel, amplitude, length_scale,
@@ -626,7 +640,8 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
                                            acq, kappa, xi),
                        numeric(1))
       k <- which.max(scores)
-      x_new <- cand[k, ]; a_val <- scores[k]
+      x_new <- cand[k, ]
+      a_val <- scores[k]
     }
     X <- rbind(X, x_new)
     Y <- c(Y, as.numeric(f(x_new)))

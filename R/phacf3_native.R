@@ -128,12 +128,17 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
                 c(3, 1, 2), c(3, 2, 1))
   tt <- c(t1, t2, t3)
   dd <- matrix(0L, 3L, 3L)
-  dd[1, 2] <- d12; dd[2, 1] <- d12
-  dd[1, 3] <- d13; dd[3, 1] <- d13
-  dd[2, 3] <- d23; dd[3, 2] <- d23
+  dd[1, 2] <- d12
+  dd[2, 1] <- d12
+  dd[1, 3] <- d13
+  dd[3, 1] <- d13
+  dd[2, 3] <- d23
+  dd[3, 2] <- d23
   best <- NULL
   for (p in perms) {
-    i <- p[1]; j <- p[2]; k <- p[3]
+    i <- p[1]
+    j <- p[2]
+    k <- p[3]
     cand <- c(tt[i], tt[j], tt[k], dd[i, j], dd[i, k], dd[j, k])
     if (is.null(best) || .phacf3_less(cand, best)) best <- cand
   }
@@ -222,9 +227,11 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 morie_phacf3_tanimoto <- function(a, b) {
   if (length(a) != length(b))
     stop("fingerprints must be the same length")
-  inter <- numeric(length(a)); union <- numeric(length(a))
+  inter <- numeric(length(a))
+  union <- numeric(length(a))
   for (i in seq_along(a)) {
-    x <- as.numeric(a[i]); y <- as.numeric(b[i])
+    x <- as.numeric(a[i])
+    y <- as.numeric(b[i])
     inter[i] <- if (x < y) x else y
     union[i] <- if (x > y) x else y
   }
@@ -268,8 +275,12 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
   if (is.null(space))
     space <- morie_phacf3_space(feats, length(edges) - 1L, edges)
   fp <- integer(length(space$strings))
-  hi <- integer(0); hj <- integer(0); hk <- integer(0); hb <- integer(0)
-  out_of_range <- 0L; degenerate <- 0L
+  hi <- integer(0)
+  hj <- integer(0)
+  hk <- integer(0)
+  hb <- integer(0)
+  out_of_range <- 0L
+  degenerate <- 0L
   if (n >= 3L) for (i in 1:(n - 2L)) for (j in (i + 1L):(n - 1L))
     for (k in (j + 1L):n) {
       d12 <- .phacf3_dist(pts[[i]]$xyz, pts[[j]]$xyz)
@@ -296,7 +307,9 @@ morie_phacf3 <- function(mol_3d, feature_set = .PHACF3_FEATURES,
       bit <- get(.phacf3_str(key), envir = space$index)
       if (mode == "binary") fp[bit + 1L] <- 1L
       else fp[bit + 1L] <- fp[bit + 1L] + 1L
-      hi <- c(hi, i - 1L); hj <- c(hj, j - 1L); hk <- c(hk, k - 1L)
+      hi <- c(hi, i - 1L)
+      hj <- c(hj, j - 1L)
+      hk <- c(hk, k - 1L)
       hb <- c(hb, bit)
     }
   on <- which(fp > 0L) - 1L

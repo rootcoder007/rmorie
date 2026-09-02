@@ -24,12 +24,16 @@
 #'   17(3):279-301. \doi{10.1177/0962280207080643}.
 #' @export
 Manlmm <- function(yi, vi, design) {
-  y <- as.numeric(yi); v <- as.numeric(vi); n <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  n <- length(y)
   if (n == 0L) stop("no studies")
   if (length(v) != n) stop("yi and vi must have equal length")
   if (any(v <= 0)) stop("sampling variances must be strictly positive")
   nd <- .ma_net_design(design)
-  X <- nd$X; treats <- nd$treats; T <- nd$T
+  X <- nd$X
+  treats <- nd$treats
+  T <- nd$T
   if (nrow(X) != n) stop("design must have one row per study")
   p <- T - 1L
   w0 <- 1 / v

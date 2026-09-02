@@ -32,11 +32,17 @@
 .gwr_kernel <- function(d, h, kernel) {
   if (kernel == "gaussian") exp(-0.5 * (d / h)^2)
   else if (kernel == "bisquare") {
-    u <- d / h; w <- (1 - u^2)^2; ifelse(u < 1, w, 0)
+    u <- d / h
+    w <- (1 - u^2)^2
+    ifelse(u < 1, w, 0)
   } else if (kernel == "tricube") {
-    u <- d / h; w <- (1 - u^3)^3; ifelse(u < 1, w, 0)
+    u <- d / h
+    w <- (1 - u^3)^3
+    ifelse(u < 1, w, 0)
   } else {
-    w <- rep(0, length(d)); w[d <= h] <- 1; w
+    w <- rep(0, length(d))
+    w[d <= h] <- 1
+    w
   }
 }
 
@@ -55,7 +61,8 @@
     dx <- C[(i + 1L):nrow(C), 1] - C[i, 1]
     dy <- C[(i + 1L):nrow(C), 2] - C[i, 2]
     e <- sqrt(dx * dx + dy * dy)
-    if (any(e > 0)) { dmin <- min(dmin, min(e[e > 0])); dmax <- max(dmax, max(e)) }
+    if (any(e > 0)) { dmin <- min(dmin, min(e[e > 0]))
+    dmax <- max(dmax, max(e)) }
   }
   if (dmin <= 0) dmin <- dmax / 1000
   c(dmax / 1000, dmax)
@@ -74,7 +81,8 @@
   n <- nrow(C)
   D <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    dx <- C[i, 1] - C[j, 1]; dy <- C[i, 2] - C[j, 2]
+    dx <- C[i, 1] - C[j, 1]
+    dy <- C[i, 2] - C[j, 2]
     D[i, j] <- sqrt(dx * dx + dy * dy)
   }
   D
@@ -94,7 +102,8 @@
   # rank-deficient count, and the effective rank threshold.
   n <- nrow(M)
   L <- matrix(0, n, n)
-  piv <- integer(n); used <- rep(FALSE, n)
+  piv <- integer(n)
+  used <- rep(FALSE, n)
   diag_max <- max(diag(M))
   ridge <- 1e-10 * diag_max
   rdef <- 0L
@@ -102,9 +111,11 @@
     candidates <- which(!used)
     diags <- diag(M)[candidates]
     p <- candidates[which.max(diags)]
-    piv[k] <- p; used[p] <- TRUE
+    piv[k] <- p
+    used[p] <- TRUE
     Mk <- M[p, p]
-    if (Mk < ridge) { rdef <- rdef + 1L; Mk <- Mk + ridge }
+    if (Mk < ridge) { rdef <- rdef + 1L
+    Mk <- Mk + ridge }
     L[k, k] <- sqrt(Mk)
     rows <- which(!used)
     L[k, rows] <- M[p, rows] / L[k, k]
@@ -129,20 +140,26 @@
 #' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid}, \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
 #' @export
 .gwr_fit <- function(y, X, D, bw, kernel, adaptive) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   d_sorted <- apply(D, 1, sort)
   Params <- matrix(0, n, p)
   SE <- matrix(0, n, p)
-  Fitted <- numeric(n); Resid <- numeric(n)
-  tr_S <- 0; sigma2_num <- 0
-  rdef_total <- 0L; edf_resid <- n
+  Fitted <- numeric(n)
+  Resid <- numeric(n)
+  tr_S <- 0
+  sigma2_num <- 0
+  rdef_total <- 0L
+  edf_resid <- n
   if (adaptive) {
     for (i in seq_len(n)) {
       ord <- order(D[i, ])
       b <- min(as.integer(bw), n - 1L)
       idx <- ord[seq_len(b + 1L)]
-      w <- rep(0, n); w[idx] <- 1
-      Xw <- X * w; yw <- y * w
+      w <- rep(0, n)
+      w[idx] <- 1
+      Xw <- X * w
+      yw <- y * w
       XtWX <- crossprod(Xw, X)
       XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
@@ -166,8 +183,10 @@
   } else {
     for (i in seq_len(n)) {
       wv <- .gwr_kernel(D[i, ], bw, kernel)
-      Xw <- X * wv; yw <- y * wv
-      XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
+      Xw <- X * wv
+      yw <- y * wv
+      XtWX <- crossprod(Xw, X)
+      XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L) {
         XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
@@ -178,7 +197,8 @@
       xb <- as.numeric(X %*% beta)
       cov_beta <- solve(XtWX)
       SE[i, ] <- sqrt(pmax(diag(cov_beta), 0))
-      Fitted[i] <- xb[i]; Resid[i] <- y[i] - xb[i]
+      Fitted[i] <- xb[i]
+      Resid[i] <- y[i] - xb[i]
       S_i <- as.numeric(X[i, , drop = FALSE] %*% solve(XtWX) %*% t(Xw))
       tr_S <- tr_S + S_i[i]
       sigma2_num <- sigma2_num + (y[i] - xb[i])^2
@@ -240,22 +260,30 @@
 #' @return The value of \code{acc}, as built in the body.
 #' @export
 .gwr_cv_score <- function(y, X, D, bw, kernel, adaptive) {
-  n <- length(y); p <- ncol(X); acc <- 0
+  n <- length(y)
+  p <- ncol(X)
+  acc <- 0
   if (adaptive) {
     for (i in seq_len(n)) {
       ord <- order(D[i, ])
       b <- min(as.integer(bw), n - 2L)
       idx <- ord[seq_len(b + 1L)]
       keep <- idx[idx != i]
-      if (length(keep) < p) { acc <- acc + y[i]^2; next }
-      w <- rep(0, n); w[keep] <- 1
-      Xw <- X * w; yw <- y * w
-      XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
+      if (length(keep) < p) { acc <- acc + y[i]^2
+      next }
+      w <- rep(0, n)
+      w[keep] <- 1
+      Xw <- X * w
+      yw <- y * w
+      XtWX <- crossprod(Xw, X)
+      XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L)
         XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
-      L <- rcond$L; Pp <- rcond$piv
-      P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
+      L <- rcond$L
+      Pp <- rcond$piv
+      P <- matrix(0, p, p)
+      for (k in seq_len(p)) P[k, Pp[k]] <- 1
       LP <- L %*% P
       beta <- backsolve(LP, backsolve(LP, XtWy, transpose = TRUE))
       pred <- sum(X[i, ] * beta)
@@ -265,13 +293,17 @@
     for (i in seq_len(n)) {
       wv <- .gwr_kernel(D[i, ], bw, kernel)
       wv[i] <- 0
-      Xw <- X * wv; yw <- y * wv
-      XtWX <- crossprod(Xw, X); XtWy <- as.numeric(crossprod(Xw, y))
+      Xw <- X * wv
+      yw <- y * wv
+      XtWX <- crossprod(Xw, X)
+      XtWy <- as.numeric(crossprod(Xw, y))
       rcond <- .gwr_pivot_chol_rcond(XtWX)
       if (rcond$rdef > 0L)
         XtWX <- XtWX + diag(p) * 1e-10 * max(diag(XtWX))
-      L <- rcond$L; Pp <- rcond$piv
-      P <- matrix(0, p, p); for (k in seq_len(p)) P[k, Pp[k]] <- 1
+      L <- rcond$L
+      Pp <- rcond$piv
+      P <- matrix(0, p, p)
+      for (k in seq_len(p)) P[k, Pp[k]] <- 1
       LP <- L %*% P
       beta <- backsolve(LP, backsolve(LP, XtWy, transpose = TRUE))
       pred <- sum(X[i, ] * beta)
@@ -318,13 +350,24 @@
 #' @export
 .gwr_golden <- function(fn, lo, hi, tol) {
   phi <- (sqrt(5) - 1) / 2
-  a <- lo; b <- hi
-  c <- b - phi * (b - a); d <- a + phi * (b - a)
-  fc <- fn(c); fd <- fn(d)
+  a <- lo
+  b <- hi
+  c <- b - phi * (b - a)
+  d <- a + phi * (b - a)
+  fc <- fn(c)
+  fd <- fn(d)
   for (i in seq_len(200L)) {
     if (abs(b - a) < tol * (abs(a) + abs(b)) + tol) break
-    if (fc < fd) { b <- d; d <- c; fd <- fc; c <- b - phi * (b - a); fc <- fn(c) }
-    else { a <- c; c <- d; fc <- fd; d <- a + phi * (b - a); fd <- fn(d) }
+    if (fc < fd) { b <- d
+    d <- c
+    fd <- fc
+    c <- b - phi * (b - a)
+    fc <- fn(c) }
+    else { a <- c
+    c <- d
+    fc <- fd
+    d <- a + phi * (b - a)
+    fd <- fn(d) }
   }
   x <- 0.5 * (a + b)
   c(x, fn(x))
@@ -338,10 +381,12 @@ morie_gwrcal_prepare <- function(y, X, coords) {
   yv <- as.numeric(y)
   n <- length(yv)
   if (n < 3L) stop("gwrcal: need at least three observations")
-  Xr <- as.matrix(X); storage.mode(Xr) <- "double"
+  Xr <- as.matrix(X)
+  storage.mode(Xr) <- "double"
   if (nrow(Xr) != n) stop("gwrcal: X has ", nrow(Xr), " rows for ", n, " responses")
   p <- ncol(Xr)
-  C <- as.matrix(coords); storage.mode(C) <- "double"
+  C <- as.matrix(coords)
+  storage.mode(C) <- "double"
   if (nrow(C) != n) stop("gwrcal: coords has ", nrow(C), " rows for ", n, " observations")
   if (any(!is.finite(Xr))) stop("gwrcal: X contains a non-finite value")
   if (any(!is.finite(C))) stop("gwrcal: coords contains a non-finite value")
@@ -390,7 +435,11 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
                          adaptive = FALSE, bounds = NULL,
                          search = NULL, n_points = 30L, tol = 1e-4) {
   pr <- morie_gwrcal_prepare(y, X, coords)
-  yv <- pr$y; Xr <- pr$X; C <- pr$coords; n <- pr$n; p <- pr$p
+  yv <- pr$y
+  Xr <- pr$X
+  C <- pr$coords
+  n <- pr$n
+  p <- pr$p
   if (!(kernel %in% .GWR_KERNELS))
     stop("gwrcal: kernel must be one of ", paste(.GWR_KERNELS, collapse = ", "))
   if (!(criterion %in% .GWR_CRITERIA))
@@ -408,7 +457,8 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
       as.integer(lo) - 1L
   } else {
     bnds <- if (is.null(bounds)) .gwr_default_bounds(C) else bounds
-    lo <- bnds[1]; hi <- bnds[2]
+    lo <- bnds[1]
+    hi <- bnds[2]
     if (!(hi > lo))
       stop("gwrcal: the upper bound must exceed the lower one")
     grid <- seq(lo, hi, length.out = n_points)
@@ -417,15 +467,18 @@ morie_gwrcal <- function(y, X, coords, kernel = "gaussian", criterion = "aicc",
     .gwr_criterion(yv, Xr, D, b, kernel, adaptive, criterion), numeric(1))
   if (search == "grid") {
     best <- which.min(scores)
-    bw <- grid[best]; score <- scores[best]
+    bw <- grid[best]
+    score <- scores[best]
     if (adaptive) bw <- as.integer(bw)
   } else {
     out <- .gwr_golden(function(h)
       .gwr_criterion(yv, Xr, D, h, kernel, FALSE, criterion), lo, hi, tol)
-    bw <- as.numeric(out[1]); score <- as.numeric(out[2])
+    bw <- as.numeric(out[1])
+    score <- as.numeric(out[2])
   }
   fit <- .gwr_fit(yv, Xr, D, bw, kernel, adaptive)
-  tr_S <- fit$tr_S; sigma2 <- fit$sigma2
+  tr_S <- fit$tr_S
+  sigma2 <- fit$sigma2
   resid <- fit$resid
   tss <- sum((yv - mean(yv))^2)
   rss <- sum(resid^2)

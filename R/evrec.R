@@ -13,13 +13,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Evtrecords(V)
 Evtrecords <- function(x) {
-  x <- .t1_vec(x); n <- length(x)
+  x <- .t1_vec(x)
+  n <- length(x)
   if (n < 1) stop("need at least one observation")
   cm <- cummax(x)
   isrec <- c(TRUE, x[-1] > cm[-n])
   times <- which(isrec) - 1L
   i <- seq_len(n)
-  ev <- sum(1 / i); vv <- sum(1 / i - 1 / i^2)
+  ev <- sum(1 / i)
+  vv <- sum(1 / i - 1 / i^2)
   .t1_result(count = length(times), times = times, values = x[isrec],
              expected = ev, variance = vv,
              z = if (vv > 0) (length(times) - ev) / sqrt(vv) else NA_real_,

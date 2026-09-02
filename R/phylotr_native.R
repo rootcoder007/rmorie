@@ -56,12 +56,16 @@ Phylotr <- function(distance, labels = NULL) {
   joins <- list()
   m <- n
   while (m > 3L) {
-    best <- Inf; bi <- 0L; bj <- 0L
+    best <- Inf
+    bi <- 0L
+    bj <- 0L
     for (i in seq_len(m)) {
       for (j in seq_len(m)) {
         if (j > i) {
           s <- sij(D, m, i, j)
-          if (s < best) { best <- s; bi <- i; bj <- j }
+          if (s < best) { best <- s
+          bi <- i
+          bj <- j }
         }
       }
     }

@@ -33,7 +33,8 @@
 #' Bayfac(-10.2, -14.7)$log_bf
 #' @export
 Bayfac <- function(log_evidence_1, log_evidence_2) {
-  l1 <- as.numeric(log_evidence_1); l2 <- as.numeric(log_evidence_2)
+  l1 <- as.numeric(log_evidence_1)
+  l2 <- as.numeric(log_evidence_2)
   if (is.na(l1) || is.na(l2)) stop("bayes_factor: log evidences must not be NaN")
   if (is.infinite(l1) && is.infinite(l2) && ((l1 > 0) == (l2 > 0))) {
     stop("bayes_factor: both log evidences are the same infinity, B is undefined")

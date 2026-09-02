@@ -49,7 +49,8 @@
   if (skip < 0L) stop("draw: skip must be non-negative")
   d <- .s03normdraws(skip + nr * nc, 2L)
   matrix(as.numeric(scale) * d[skip + seq_len(nr * nc)],
-         nrow = nr, ncol = nc, byrow = TRUE)
+    nrow = nr, ncol = nc, byrow = TRUE
+  )
 }
 
 # LN(v) = (v - mean v) / sqrt(pop.var v + eps), gamma = 1, beta = 0.

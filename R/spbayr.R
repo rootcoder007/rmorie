@@ -48,7 +48,8 @@ spbayr <- function(counts, expected, adjacency, spatial_prior = "lcar",
   if (!temporal_prior %in% c("none", "rw1", "rw2")) {
     stop("`temporal_prior` must be 'none', 'rw1' or 'rw2'", call. = FALSE)
   }
-  y <- as.numeric(counts); e <- as.numeric(expected)
+  y <- as.numeric(counts)
+  e <- as.numeric(expected)
   R <- .schab_neighbour_structure(adjacency)
   n <- nrow(R)
   if (identical(spatial_prior, "exchangeable")) {

@@ -16,9 +16,14 @@
 #' mard(12, 38, 7, 43)$estimate
 #' @export
 mard <- function(ai, bi, ci, di, level = 0.95) {
-  a <- as.numeric(ai); b <- as.numeric(bi); cc <- as.numeric(ci); d <- as.numeric(di)
-  n1 <- a + b; n2 <- cc + d
-  p1 <- a / n1; p2 <- cc / n2
+  a <- as.numeric(ai)
+  b <- as.numeric(bi)
+  cc <- as.numeric(ci)
+  d <- as.numeric(di)
+  n1 <- a + b
+  n2 <- cc + d
+  p1 <- a / n1
+  p2 <- cc / n2
   yi <- p1 - p2
   vi <- a * b / n1^3 + cc * d / n2^3
   se <- sqrt(vi)

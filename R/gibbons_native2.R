@@ -13,10 +13,12 @@
 #' EDF count is binomial -- Gibbons Theorem 2.3.1 (book p. 33)
 #' @noRd
 Edfbinom <- function(n, fx, i = NULL) {
-  n <- as.integer(n); fx <- as.numeric(fx)
+  n <- as.integer(n)
+  fx <- as.numeric(fx)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (fx < 0 || fx > 1) stop("fx must lie in [0, 1].", call. = FALSE)
-  pmf <- NaN; cdf <- NaN
+  pmf <- NaN
+  cdf <- NaN
   if (!is.null(i)) {
     i <- as.integer(i)
     if (i < 0L || i > n) stop("i must lie in 0..n.", call. = FALSE)
@@ -30,7 +32,8 @@ Edfbinom <- function(n, fx, i = NULL) {
 #' CDF of the r-th order statistic -- Theorem 2.4.1, eq. (2.4.1), p. 37
 #' @noRd
 Ostatcdf <- function(t, r, n, cdf) {
-  r <- as.integer(r); n <- as.integer(n)
+  r <- as.integer(r)
+  n <- as.integer(n)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
   p <- if (is.function(cdf)) as.numeric(cdf(t)) else as.numeric(cdf)
   if (p < 0 || p > 1) stop("F_X(t) must lie in [0, 1].", call. = FALSE)
@@ -42,7 +45,8 @@ Ostatcdf <- function(t, r, n, cdf) {
 #' PDF of the r-th order statistic -- Theorem 2.4.2, eq. (2.4.2), p. 37
 #' @noRd
 Ostatpdf <- function(x, r, n, cdf, pdf) {
-  r <- as.integer(r); n <- as.integer(n)
+  r <- as.integer(r)
+  n <- as.integer(n)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
   fx <- if (is.function(cdf)) as.numeric(cdf(x)) else as.numeric(cdf)
   dx <- if (is.function(pdf)) as.numeric(pdf(x)) else as.numeric(pdf)
@@ -54,10 +58,13 @@ Ostatpdf <- function(x, r, n, cdf, pdf) {
 #' Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38
 #' @noRd
 Ostatbeta <- function(u, r, n) {
-  r <- as.integer(r); n <- as.integer(n); u <- as.numeric(u)
+  r <- as.integer(r)
+  n <- as.integer(n)
+  u <- as.numeric(u)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
   if (u < 0 || u > 1) stop("u must lie in [0, 1].", call. = FALSE)
-  a <- as.numeric(r); b <- as.numeric(n - r + 1)
+  a <- as.numeric(r)
+  b <- as.numeric(n - r + 1)
   coef <- factorial(n) / (factorial(r - 1) * factorial(n - r))
   list(pdf = coef * u^(r - 1) * (1 - u)^(n - r),
        cdf = stats::pbeta(u, a, b),
@@ -68,7 +75,9 @@ Ostatbeta <- function(u, r, n) {
 #' Asymptotic normality of the sample quantile -- Theorem 2.10.1, p. 60
 #' @noRd
 Ostatasymp <- function(p, n, xp, fxp) {
-  p <- as.numeric(p); n <- as.integer(n); fxp <- as.numeric(fxp)
+  p <- as.numeric(p)
+  n <- as.integer(n)
+  fxp <- as.numeric(fxp)
   if (p <= 0 || p >= 1) stop("p must lie strictly inside (0, 1).", call. = FALSE)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (fxp <= 0) stop("fxp must be strictly positive.", call. = FALSE)
@@ -79,7 +88,8 @@ Ostatasymp <- function(p, n, xp, fxp) {
 #' Empirical distribution function -- eq. (2.3.1), p. 32
 #' @noRd
 Edfstep <- function(x, t) {
-  xs <- sort(as.numeric(x)); n <- length(xs)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   ts <- as.numeric(t)
   counts <- vapply(ts, function(v) sum(xs <= v), 0)
@@ -89,7 +99,9 @@ Edfstep <- function(x, t) {
 #' Moments of a uniform order statistic -- Sec. 2.4, p. 38
 #' @noRd
 Ostatmom <- function(r, n, k = 1) {
-  r <- as.integer(r); n <- as.integer(n); k <- as.integer(k)
+  r <- as.integer(r)
+  n <- as.integer(n)
+  k <- as.integer(k)
   if (r < 1L || r > n) stop("need 1 <= r <= n.", call. = FALSE)
   if (k < 1L) stop("k must be at least 1.", call. = FALSE)
   j <- 0:(k - 1)
@@ -100,7 +112,9 @@ Ostatmom <- function(r, n, k = 1) {
 #' Covariance of two uniform order statistics -- Sec. 2.4, p. 38
 #' @noRd
 Ostatcov <- function(r, s, n) {
-  r <- as.integer(r); s <- as.integer(s); n <- as.integer(n)
+  r <- as.integer(r)
+  s <- as.integer(s)
+  n <- as.integer(n)
   if (r < 1L || r > s || s > n) stop("need 1 <= r <= s <= n.", call. = FALSE)
   den <- (n + 1)^2 * (n + 2)
   cv <- r * (n - s + 1) / den
@@ -113,9 +127,12 @@ Ostatcov <- function(r, s, n) {
 #' Joint density of X_(r), X_(s) -- Sec. 2.5, p. 39
 #' @noRd
 Ostatjoint <- function(x, y, r, s, n, cdf, pdf) {
-  r <- as.integer(r); s <- as.integer(s); n <- as.integer(n)
+  r <- as.integer(r)
+  s <- as.integer(s)
+  n <- as.integer(n)
   if (r < 1L || r >= s || s > n) stop("need 1 <= r < s <= n.", call. = FALSE)
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   coef <- factorial(n) /
     (factorial(r - 1) * factorial(s - r - 1) * factorial(n - s))
   if (x >= y) {
@@ -132,7 +149,8 @@ Ostatjoint <- function(x, y, r, s, n, cdf, pdf) {
 #' Joint density of all n order statistics -- Sec. 2.2, p. 31
 #' @noRd
 Ostatjall <- function(x, pdf) {
-  xs <- as.numeric(x); n <- length(xs)
+  xs <- as.numeric(x)
+  n <- length(xs)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   ordered <- all(diff(xs) > 0)
   pr <- prod(vapply(xs, function(v) as.numeric(pdf(v)), 0))
@@ -144,7 +162,9 @@ Ostatjall <- function(x, pdf) {
 #' Sample quantile as an order statistic -- Sec. 2.6, p. 42
 #' @noRd
 Sampquant <- function(x, p) {
-  xs <- sort(as.numeric(x)); n <- length(xs); p <- as.numeric(p)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  p <- as.numeric(p)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   if (p <= 0 || p >= 1) stop("p must lie strictly inside (0, 1).", call. = FALSE)
   r <- as.integer(floor(n * p)) + 1L
@@ -156,17 +176,23 @@ Sampquant <- function(x, p) {
 #' Placement / exceedance null law -- Problem 2.28(c), p. 70
 #' @noRd
 Exceed <- function(i, m, n, j = NULL) {
-  i <- as.integer(i); m <- as.integer(m); n <- as.integer(n)
+  i <- as.integer(i)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (i < 1L || i > n) stop("need 1 <= i <= n.", call. = FALSE)
   if (m < 1L) stop("m must be at least 1.", call. = FALSE)
-  den <- choose(m + n, n); k <- 0:m
+  den <- choose(m + n, n)
+  k <- 0:m
   pmf <- choose(m + n - i - k, m - k) * choose(i + k - 1, k) / den
-  mu <- sum(k * pmf); e2 <- sum(k * k * pmf)
-  pmf_j <- NaN; cdf_j <- NaN
+  mu <- sum(k * pmf)
+  e2 <- sum(k * k * pmf)
+  pmf_j <- NaN
+  cdf_j <- NaN
   if (!is.null(j)) {
     j <- as.integer(j)
     if (j < 0L || j > m) stop("j must lie in 0..m.", call. = FALSE)
-    pmf_j <- pmf[j + 1L]; cdf_j <- sum(pmf[1:(j + 1L)])
+    pmf_j <- pmf[j + 1L]
+    cdf_j <- sum(pmf[1:(j + 1L)])
   }
   list(pmf = pmf, pmf_j = pmf_j, cdf_j = cdf_j, mean = mu, var = e2 - mu^2,
        i = i, m = m, n = n)
@@ -175,8 +201,10 @@ Exceed <- function(i, m, n, j = NULL) {
 #' Placements of Y among the X order statistics -- Sec. 2.11, p. 65
 #' @noRd
 Placement <- function(x, y) {
-  xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y))
-  m <- length(xs); n <- length(ys)
+  xs <- sort(as.numeric(x))
+  ys <- sort(as.numeric(y))
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   plc <- vapply(ys, function(v) sum(xs <= v), 0)
   list(placements = plc, ranks = plc + seq_len(n),
@@ -186,8 +214,11 @@ Placement <- function(x, y) {
 #' Distribution-free quantile confidence interval -- Sec. 5.2, p. 158
 #' @noRd
 Quantci <- function(x, p, r, s) {
-  xs <- sort(as.numeric(x)); n <- length(xs)
-  r <- as.integer(r); s <- as.integer(s); p <- as.numeric(p)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  r <- as.integer(r)
+  s <- as.integer(s)
+  p <- as.numeric(p)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   if (r < 1L || r >= s || s > n) stop("need 1 <= r < s <= n.", call. = FALSE)
   if (p <= 0 || p >= 1) stop("p must lie strictly inside (0, 1).", call. = FALSE)
@@ -200,12 +231,15 @@ Quantci <- function(x, p, r, s) {
 #' Distribution-free quantile test -- Sec. 5.3, p. 163
 #' @noRd
 Quanttest <- function(x, q0, p = 0.5, alternative = "two-sided") {
-  xs <- as.numeric(x); n <- length(xs); p <- as.numeric(p)
+  xs <- as.numeric(x)
+  n <- length(xs)
+  p <- as.numeric(p)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   if (p <= 0 || p >= 1) stop("p must lie strictly inside (0, 1).", call. = FALSE)
   k <- sum(xs <= as.numeric(q0))
   pm <- function(i) choose(n, i) * p^i * (1 - p)^(n - i)
-  lower <- sum(pm(0:k)); upper <- sum(pm(k:n))
+  lower <- sum(pm(0:k))
+  upper <- sum(pm(k:n))
   pv <- switch(alternative,
     "less" = lower, "greater" = upper,
     "two-sided" = min(1, 2 * min(lower, upper)),
@@ -220,7 +254,9 @@ Signk <- function(x, m0 = 0) {
   xs <- as.numeric(x) - as.numeric(m0)
   n_raw <- length(xs)
   if (n_raw < 1L) stop("x must be non-empty.", call. = FALSE)
-  nz <- sum(xs == 0); n <- n_raw - nz; k <- sum(xs > 0)
+  nz <- sum(xs == 0)
+  n <- n_raw - nz
+  k <- sum(xs > 0)
   list(statistic = k, n = n, nzero = nz, mean = n / 2, var = n / 4,
        n_raw = n_raw)
 }
@@ -228,7 +264,8 @@ Signk <- function(x, m0 = 0) {
 #' Exact sign-test p-value -- eq. (5.4.3), p. 169
 #' @noRd
 Signp <- function(k, n, alternative = "two-sided") {
-  k <- as.integer(k); n <- as.integer(n)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (k < 0L || k > n) stop("k must lie in 0..n.", call. = FALSE)
   half <- 0.5^n
@@ -245,10 +282,13 @@ Signp <- function(k, n, alternative = "two-sided") {
 #' Sign-test normal approximation -- eq. (5.4.7), p. 174
 #' @noRd
 Signz <- function(k, n, alternative = "two-sided", correct = TRUE) {
-  k <- as.integer(k); n <- as.integer(n)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (k < 0L || k > n) stop("k must lie in 0..n.", call. = FALSE)
-  mean <- n / 2; sd <- sqrt(n / 4); d <- k - mean
+  mean <- n / 2
+  sd <- sqrt(n / 4)
+  d <- k - mean
   if (correct) {
     if (d > 0) d <- d - 0.5 else if (d < 0) d <- d + 0.5
   }
@@ -267,11 +307,15 @@ Signzero <- function(x, m0 = 0, method = "discard") {
   xs <- as.numeric(x) - as.numeric(m0)
   n_raw <- length(xs)
   if (n_raw < 1L) stop("x must be non-empty.", call. = FALSE)
-  nz <- sum(xs == 0); kpos <- sum(xs > 0); kneg <- n_raw - nz - kpos
+  nz <- sum(xs == 0)
+  kpos <- sum(xs > 0)
+  kneg <- n_raw - nz - kpos
   if (method == "discard") {
-    k <- kpos; n <- n_raw - nz
+    k <- kpos
+    n <- n_raw - nz
   } else if (method == "half") {
-    k <- kpos + nz / 2; n <- n_raw
+    k <- kpos + nz / 2
+    n <- n_raw
   } else if (method == "conservative") {
     if (kpos < kneg) { k <- kpos + nz } else { k <- kpos }
     n <- n_raw
@@ -285,7 +329,9 @@ Signzero <- function(x, m0 = 0, method = "discard") {
 #' Power of the sign test -- eq. (5.4.8), Table 5.4.1, p. 174
 #' @noRd
 Signpow <- function(n, theta, alpha = 0.05, exact = TRUE) {
-  n <- as.integer(n); theta <- as.numeric(theta); alpha <- as.numeric(alpha)
+  n <- as.integer(n)
+  theta <- as.numeric(theta)
+  alpha <- as.numeric(alpha)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (theta <= 0 || theta >= 1)
     stop("theta must lie strictly inside (0, 1).", call. = FALSE)
@@ -294,12 +340,16 @@ Signpow <- function(n, theta, alpha = 0.05, exact = TRUE) {
   za <- stats::qnorm(1 - alpha)
   approx <- 1 - stats::pnorm((n * (0.5 - theta) + 0.5 * sqrt(n) * za) /
                              sqrt(n * theta * (1 - theta)))
-  ka <- n; aex <- NaN; pex <- NaN
+  ka <- n
+  aex <- NaN
+  pex <- NaN
   if (exact) {
     half <- 0.5^n
     for (cc in 0:n) {
       tail <- sum(choose(n, cc:n)) * half
-      if (tail <= alpha) { ka <- cc; aex <- tail; break }
+      if (tail <= alpha) { ka <- cc
+      aex <- tail
+      break }
     }
     ii <- ka:n
     pex <- sum(choose(n, ii) * theta^ii * (1 - theta)^(n - ii))
@@ -324,11 +374,14 @@ Signsimpow <- function(samples, m0, kcrit) {
 #' Sign-test sample size -- eq. (5.4.9), p. 179
 #' @noRd
 Signn <- function(theta, alpha = 0.05, beta = 0.10) {
-  theta <- as.numeric(theta); alpha <- as.numeric(alpha); beta <- as.numeric(beta)
+  theta <- as.numeric(theta)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
   if (theta == 0.5) stop("theta must differ from 0.5.", call. = FALSE)
   if (theta <= 0 || theta >= 1)
     stop("theta must lie strictly inside (0, 1).", call. = FALSE)
-  za <- stats::qnorm(1 - alpha); zb <- stats::qnorm(1 - beta)
+  za <- stats::qnorm(1 - alpha)
+  zb <- stats::qnorm(1 - beta)
   root <- (sqrt(theta * (1 - theta)) * zb + 0.5 * za) / (0.5 - theta)
   nraw <- root * root
   list(n = as.integer(ceiling(nraw)), n_raw = nraw, root_n = abs(root),
@@ -338,11 +391,14 @@ Signn <- function(theta, alpha = 0.05, beta = 0.10) {
 #' Two-sided sign-test sample size -- eq. (5.4.9) with alpha/2, p. 179
 #' @noRd
 Signnasy <- function(theta, alpha = 0.05, beta = 0.10) {
-  theta <- as.numeric(theta); alpha <- as.numeric(alpha); beta <- as.numeric(beta)
+  theta <- as.numeric(theta)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
   if (theta == 0.5) stop("theta must differ from 0.5.", call. = FALSE)
   if (theta <= 0 || theta >= 1)
     stop("theta must lie strictly inside (0, 1).", call. = FALSE)
-  za <- stats::qnorm(1 - alpha / 2); zb <- stats::qnorm(1 - beta)
+  za <- stats::qnorm(1 - alpha / 2)
+  zb <- stats::qnorm(1 - beta)
   root <- (sqrt(theta * (1 - theta)) * zb + 0.5 * za) / (0.5 - theta)
   nraw <- root * root
   list(n = as.integer(ceiling(nraw)), n_raw = nraw, root_n = abs(root),
@@ -352,14 +408,19 @@ Signnasy <- function(theta, alpha = 0.05, beta = 0.10) {
 #' Median CI from sign-test inversion -- eq. (5.4.11), p. 179
 #' @noRd
 Signmedci <- function(x, alpha = 0.05) {
-  xs <- sort(as.numeric(x)); n <- length(xs); alpha <- as.numeric(alpha)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  alpha <- as.numeric(alpha)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
-  half <- 0.5^n; r <- 0L; tail <- 0
+  half <- 0.5^n
+  r <- 0L
+  tail <- 0
   for (cand in 1:n) {
     t <- sum(choose(n, 0:(cand - 1))) * half
-    if (t <= alpha / 2) { r <- as.integer(cand); tail <- t } else break
+    if (t <= alpha / 2) { r <- as.integer(cand)
+    tail <- t } else break
   }
   if (r == 0L) {
     return(list(lower = NaN, upper = NaN, r = 0L, s = 0L, coverage = NaN,
@@ -373,11 +434,13 @@ Signmedci <- function(x, alpha = 0.05) {
 #' Midranks of |d| with signs -- Sec. 5.5, p. 189
 #' @noRd
 Absrank <- function(d) {
-  ds <- as.numeric(d); n <- length(ds)
+  ds <- as.numeric(d)
+  n <- length(ds)
   if (n < 1L) stop("d must be non-empty.", call. = FALSE)
   a <- abs(ds)
   ranks <- rank(a, ties.method = "average")
-  tb <- table(a); ties <- as.numeric(tb[tb > 1])
+  tb <- table(a)
+  ties <- as.numeric(tb[tb > 1])
   signs <- sign(ds)
   list(ranks = ranks, signs = signs, signed = signs * ranks,
        ties = ties, n = n)
@@ -387,11 +450,14 @@ Absrank <- function(d) {
 #' @noRd
 Wsr <- function(x, m0 = 0) {
   ds <- as.numeric(x) - as.numeric(m0)
-  nzero <- sum(ds == 0); ds <- ds[ds != 0]; n <- length(ds)
+  nzero <- sum(ds == 0)
+  ds <- ds[ds != 0]
+  n <- length(ds)
   if (n < 1L) stop("no non-zero differences.", call. = FALSE)
   a <- abs(ds)
   ranks <- rank(a, ties.method = "average")
-  tb <- as.numeric(table(a)); tb <- tb[tb > 1]
+  tb <- as.numeric(table(a))
+  tb <- tb[tb > 1]
   corr <- if (length(tb)) sum(tb * (tb^2 - 1)) else 0
   tplus <- sum(ranks[ds > 0])
   mean <- n * (n + 1) / 4
@@ -417,9 +483,12 @@ Wsrmom <- function(n) {
 #' @noRd
 Wsrties <- function(d, m0 = 0) {
   ds <- as.numeric(d) - as.numeric(m0)
-  nzero <- sum(ds == 0); a <- sort(abs(ds[ds != 0])); n <- length(a)
+  nzero <- sum(ds == 0)
+  a <- sort(abs(ds[ds != 0]))
+  n <- length(a)
   if (n < 1L) stop("no non-zero differences.", call. = FALSE)
-  tb <- as.numeric(table(a)); ties <- tb[tb > 1]
+  tb <- as.numeric(table(a))
+  ties <- tb[tb > 1]
   corr <- if (length(ties)) sum(ties * (ties^2 - 1)) / 48 else 0
   v0 <- n * (n + 1) * (2 * n + 1) / 24
   list(var = v0 - corr, var_uncorrected = v0, correction = corr, n = n,
@@ -429,7 +498,8 @@ Wsrties <- function(d, m0 = 0) {
 #' Signed-rank normal approximation -- eq. (5.7.9), p. 202
 #' @noRd
 Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
-  n <- as.integer(n); tplus <- as.numeric(tplus)
+  n <- as.integer(n)
+  tplus <- as.numeric(tplus)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   mean <- n * (n + 1) / 4
   var <- n * (n + 1) * (2 * n + 1) / 24
@@ -449,7 +519,9 @@ Wsrz <- function(tplus, n, alternative = "two-sided", correct = FALSE) {
 #' Signed-rank power -- eqs. (5.7.13)-(5.7.14), p. 205
 #' @noRd
 Wsrpow <- function(n, p1, p2, alpha = 0.05) {
-  n <- as.integer(n); p1 <- as.numeric(p1); p2 <- as.numeric(p2)
+  n <- as.integer(n)
+  p1 <- as.numeric(p1)
+  p2 <- as.numeric(p2)
   alpha <- as.numeric(alpha)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
@@ -483,12 +555,15 @@ Wsrsimpow <- function(samples, m0, tcrit) {
 #' Signed-rank sample size -- eq. (5.7.15), p. 206
 #' @noRd
 Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
-  p2 <- as.numeric(p2); alpha <- as.numeric(alpha); beta <- as.numeric(beta)
+  p2 <- as.numeric(p2)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
   if (p2 == 0.5) stop("p2 must differ from 0.5.", call. = FALSE)
   if (p2 <= 0 || p2 >= 1)
     stop("p2 must lie strictly inside (0, 1).", call. = FALSE)
   a <- if (twosided) alpha / 2 else alpha
-  za <- stats::qnorm(1 - a); zb <- stats::qnorm(1 - beta)
+  za <- stats::qnorm(1 - a)
+  zb <- stats::qnorm(1 - beta)
   nraw <- (za + zb)^2 / (3 * (p2 - 0.5)^2)
   list(n = as.integer(ceiling(nraw)), n_raw = nraw, z_alpha = za,
        z_beta = zb, p2 = p2)
@@ -498,7 +573,8 @@ Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
 #' @noRd
 .gbWsrNull <- function(n) {
   total <- n * (n + 1) / 2
-  counts <- numeric(total + 1); counts[1] <- 1
+  counts <- numeric(total + 1)
+  counts[1] <- 1
   for (r in 1:n) {
     for (t in seq(total, r, by = -1)) counts[t + 1] <- counts[t + 1] + counts[t - r + 1]
   }
@@ -508,7 +584,9 @@ Wsrn <- function(p2, alpha = 0.05, beta = 0.05, twosided = FALSE) {
 #' Walsh-average confidence interval -- Sec. 5.7.5, pp. 207-209
 #' @noRd
 Wsrci <- function(x, tcrit) {
-  xs <- as.numeric(x); n <- length(xs); tcrit <- as.integer(tcrit)
+  xs <- as.numeric(x)
+  n <- length(xs)
+  tcrit <- as.integer(tcrit)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   if (tcrit < 0L) stop("tcrit must be non-negative.", call. = FALSE)
   walsh <- sort(as.numeric(outer(xs, xs, "+")[!lower.tri(matrix(0, n, n))]) / 2)
@@ -524,7 +602,8 @@ Wsrci <- function(x, tcrit) {
 #' Signed-rank test of symmetry -- Sec. 5.7.7, p. 211
 #' @noRd
 Wsrsym <- function(x, centre = 0) {
-  ds <- as.numeric(x) - as.numeric(centre); ds <- ds[ds != 0]
+  ds <- as.numeric(x) - as.numeric(centre)
+  ds <- ds[ds != 0]
   n <- length(ds)
   if (n < 2L) stop("need at least 2 non-zero differences.", call. = FALSE)
   ranks <- rank(abs(ds), ties.method = "average")
@@ -541,11 +620,14 @@ Wsrsym <- function(x, centre = 0) {
 #' Hodges-Lehmann estimator and Walsh counting identity -- pp. 209-210
 #' @noRd
 Hlwsrlink <- function(x, m0 = 0) {
-  xs <- as.numeric(x); n <- length(xs); m0 <- as.numeric(m0)
+  xs <- as.numeric(x)
+  n <- length(xs)
+  m0 <- as.numeric(m0)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   walsh <- sort(as.numeric(outer(xs, xs, "+")[!lower.tri(matrix(0, n, n))]) / 2)
   nw <- length(walsh)
-  below <- sum(walsh < m0); equal <- sum(walsh == m0)
+  below <- sum(walsh < m0)
+  equal <- sum(walsh == m0)
   above <- nw - below - equal
   list(estimate = stats::median(walsh), tplus = above + equal / 2,
        tminus = below + equal / 2, nbelow = below, nequal = equal,
@@ -555,14 +637,18 @@ Hlwsrlink <- function(x, m0 = 0) {
 #' Total runs asymptotic normality -- eq. (3.2.9), p. 82
 #' @noRd
 Runsz <- function(r, n1, n2, correct = FALSE) {
-  n1 <- as.integer(n1); n2 <- as.integer(n2); r <- as.numeric(r)
+  n1 <- as.integer(n1)
+  n2 <- as.integer(n2)
+  r <- as.numeric(r)
   if (n1 < 1L || n2 < 1L) stop("n1 and n2 must be at least 1.", call. = FALSE)
-  n <- n1 + n2; lam <- n1 / n
+  n <- n1 + n2
+  lam <- n1 / n
   mean <- 2 * n * lam * (1 - lam)
   sd <- 2 * sqrt(n) * lam * (1 - lam)
   me <- 2 * n1 * n2 / n + 1
   ve <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))
-  d <- r - mean; de <- r - me
+  d <- r - mean
+  de <- r - me
   if (correct) {
     if (d > 0) d <- d - 0.5 else if (d < 0) d <- d + 0.5
     if (de > 0) de <- de - 0.5 else if (de < 0) de <- de + 0.5
@@ -578,8 +664,12 @@ Runsz <- function(r, n1, n2, correct = FALSE) {
 Runsudvar <- function(n, r = NULL, alpha = 0.05) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
-  mean <- (2 * n - 1) / 3; var <- (16 * n - 29) / 90; sd <- sqrt(var)
-  zl <- NaN; zr <- NaN; pv <- NaN
+  mean <- (2 * n - 1) / 3
+  var <- (16 * n - 29) / 90
+  sd <- sqrt(var)
+  zl <- NaN
+  zr <- NaN
+  pv <- NaN
   if (!is.null(r)) {
     r <- as.numeric(r)
     zl <- (r + 0.5 - mean) / sd
@@ -603,7 +693,8 @@ Rvnmom <- function(n) {
 #' Rank von Neumann test -- eqs. (3.5.1)-(3.5.2), p. 95
 #' @noRd
 Rvntest <- function(x, alternative = "two-sided") {
-  xs <- as.numeric(x); n <- length(xs)
+  xs <- as.numeric(x)
+  n <- length(xs)
   if (n < 3L) stop("need at least 3 observations.", call. = FALSE)
   ranks <- rank(xs, ties.method = "average")
   nm <- sum((ranks[-n] - ranks[-1])^2)
@@ -622,7 +713,9 @@ Rvntest <- function(x, alternative = "two-sided") {
 #' Exact null distribution of R -- Theorem 3.2.2, eq. (3.2.3), p. 79
 #' @noRd
 .gbRunsPmf <- function(n1, n2) {
-  n <- n1 + n2; den <- choose(n, n1); support <- 2:n
+  n <- n1 + n2
+  den <- choose(n, n1)
+  support <- 2:n
   vapply(support, function(rr) {
     if (rr %% 2 == 0) {
       k <- rr %/% 2
@@ -638,17 +731,24 @@ Rvntest <- function(x, alternative = "two-sided") {
 #' Table D: exact runs distribution -- Theorem 3.2.2, p. 79
 #' @noRd
 Runstab <- function(n1, n2, r = NULL) {
-  n1 <- as.integer(n1); n2 <- as.integer(n2)
+  n1 <- as.integer(n1)
+  n2 <- as.integer(n2)
   if (n1 < 1L || n2 < 1L) stop("n1 and n2 must be at least 1.", call. = FALSE)
-  n <- n1 + n2; support <- 2:n
-  pmf <- .gbRunsPmf(n1, n2); cdf <- cumsum(pmf)
-  mu <- sum(support * pmf); e2 <- sum(support^2 * pmf)
-  pmf_r <- NaN; cdf_r <- NaN; sf_r <- NaN
+  n <- n1 + n2
+  support <- 2:n
+  pmf <- .gbRunsPmf(n1, n2)
+  cdf <- cumsum(pmf)
+  mu <- sum(support * pmf)
+  e2 <- sum(support^2 * pmf)
+  pmf_r <- NaN
+  cdf_r <- NaN
+  sf_r <- NaN
   if (!is.null(r)) {
     r <- as.integer(r)
     if (r < 2L || r > n) stop("r must lie in 2..n1+n2.", call. = FALSE)
     idx <- r - 1L
-    pmf_r <- pmf[idx]; cdf_r <- cdf[idx]
+    pmf_r <- pmf[idx]
+    cdf_r <- cdf[idx]
     sf_r <- 1 - (if (idx > 1L) cdf[idx - 1L] else 0)
   }
   list(support = support, pmf = pmf, cdf = cdf, pmf_r = pmf_r,
@@ -659,27 +759,34 @@ Runstab <- function(n1, n2, r = NULL) {
 #' Exact runs-test critical region -- Sec. 3.2, p. 84; Table D
 #' @noRd
 Runscrit <- function(n1, n2, alpha = 0.05, tail = "two-sided") {
-  n1 <- as.integer(n1); n2 <- as.integer(n2); alpha <- as.numeric(alpha)
+  n1 <- as.integer(n1)
+  n2 <- as.integer(n2)
+  alpha <- as.numeric(alpha)
   if (n1 < 1L || n2 < 1L) stop("n1 and n2 must be at least 1.", call. = FALSE)
   if (!tail %in% c("two-sided", "left", "right"))
     stop("tail must be two-sided, left or right.", call. = FALSE)
-  n <- n1 + n2; support <- 2:n
+  n <- n1 + n2
+  support <- 2:n
   pmf <- .gbRunsPmf(n1, n2)
   a <- if (tail == "two-sided") alpha / 2 else alpha
-  lower <- NaN; al <- 0
+  lower <- NaN
+  al <- 0
   if (tail %in% c("two-sided", "left")) {
     acc <- 0
     for (i in seq_along(support)) {
       acc <- acc + pmf[i]
-      if (acc <= a) { lower <- as.numeric(support[i]); al <- acc } else break
+      if (acc <= a) { lower <- as.numeric(support[i])
+      al <- acc } else break
     }
   }
-  upper <- NaN; au <- 0
+  upper <- NaN
+  au <- 0
   if (tail %in% c("two-sided", "right")) {
     acc <- 0
     for (i in rev(seq_along(support))) {
       acc <- acc + pmf[i]
-      if (acc <= a) { upper <- as.numeric(support[i]); au <- acc } else break
+      if (acc <= a) { upper <- as.numeric(support[i])
+      au <- acc } else break
     }
   }
   list(lower = lower, upper = upper, alpha_lower = al, alpha_upper = au,
@@ -689,14 +796,18 @@ Runscrit <- function(n1, n2, alpha = 0.05, tail = "two-sided") {
 #' Attainable exact sizes of a discrete test -- Sec. 1.2.9, p. 26
 #' @noRd
 Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
-  p <- as.numeric(pmf); k <- length(p)
+  p <- as.numeric(pmf)
+  k <- length(p)
   if (k < 1L) stop("pmf must be non-empty.", call. = FALSE)
   alpha <- as.numeric(alpha)
   sizes <- if (upper) rev(cumsum(rev(p))) else cumsum(p)
-  best <- NaN; cut <- -1L
+  best <- NaN
+  cut <- -1L
   rng <- if (upper) rev(seq_len(k)) else seq_len(k)
   for (i in rng) {
-    if (sizes[i] <= alpha) { best <- sizes[i]; cut <- as.integer(i - 1L); break }
+    if (sizes[i] <= alpha) { best <- sizes[i]
+    cut <- as.integer(i - 1L)
+    break }
   }
   list(sizes = sizes, alpha_exact = best, cut = cut, nlevels = k)
 }
@@ -704,17 +815,21 @@ Exactsize <- function(pmf, alpha = 0.05, upper = TRUE) {
 #' Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27
 #' @noRd
 Randtest <- function(pmf, alpha = 0.05, pmf_alt = NULL) {
-  p <- as.numeric(pmf); k <- length(p)
+  p <- as.numeric(pmf)
+  k <- length(p)
   if (k < 2L) stop("pmf needs at least 2 support points.", call. = FALSE)
   alpha <- as.numeric(alpha)
-  t2 <- k; hard <- 0
+  t2 <- k
+  hard <- 0
   for (i in rev(seq_len(k))) {
     tail <- sum(p[i:k])
-    if (tail <= alpha) { t2 <- as.integer(i - 1L); hard <- tail } else break
+    if (tail <= alpha) { t2 <- as.integer(i - 1L)
+    hard <- tail } else break
   }
   t1 <- t2 - 1L
   if (t1 < 0L) {
-    gamma <- 0; t1 <- 0L
+    gamma <- 0
+    t1 <- 0L
   } else {
     gamma <- if (p[t1 + 1L] > 0) (alpha - hard) / p[t1 + 1L] else 0
     gamma <- min(1, max(0, gamma))
@@ -736,7 +851,8 @@ Consist <- function(nvals, effect, alpha = 0.05) {
   ns <- as.integer(nvals)
   if (!length(ns)) stop("nvals must be non-empty.", call. = FALSE)
   if (any(ns < 1L)) stop("sample sizes must be at least 1.", call. = FALSE)
-  effect <- as.numeric(effect); alpha <- as.numeric(alpha)
+  effect <- as.numeric(effect)
+  alpha <- as.numeric(alpha)
   za <- stats::qnorm(1 - alpha)
   pw <- 1 - stats::pnorm(za - sqrt(ns) * effect)
   mono <- all(diff(pw) >= -1e-15)
@@ -747,12 +863,15 @@ Consist <- function(nvals, effect, alpha = 0.05) {
 #' Chi-square goodness of fit -- eq. (4.2.1), p. 104
 #' @noRd
 Chigof <- function(observed, expected, ddof = 0) {
-  o <- as.numeric(observed); e <- as.numeric(expected); k <- length(o)
+  o <- as.numeric(observed)
+  e <- as.numeric(expected)
+  k <- length(o)
   if (k < 2L) stop("need at least 2 categories.", call. = FALSE)
   if (length(e) != k) stop("observed and expected must have equal length.", call. = FALSE)
   if (any(e <= 0)) stop("expected frequencies must be strictly positive.", call. = FALSE)
   contrib <- (o - e)^2 / e
-  q <- sum(contrib); df <- k - 1L - as.integer(ddof)
+  q <- sum(contrib)
+  df <- k - 1L - as.integer(ddof)
   if (df < 1L) stop("degrees of freedom must be at least 1.", call. = FALSE)
   list(statistic = q, df = df, p_value = stats::pchisq(q, df, lower.tail = FALSE),
        k = k, n = sum(o), contrib = contrib)
@@ -761,7 +880,8 @@ Chigof <- function(observed, expected, ddof = 0) {
 #' KS statistics via the PIT -- Theorem 4.3.1, p. 111
 #' @noRd
 Ksdistfree <- function(x, cdf) {
-  xs <- sort(as.numeric(x)); n <- length(xs)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   z <- vapply(xs, function(v) as.numeric(cdf(v)), 0)
   dp <- max(seq_len(n) / n - z)
@@ -772,11 +892,14 @@ Ksdistfree <- function(x, cdf) {
 #' Exact P(D_n < d) -- Theorem 4.3.2 via Durbin's matrix identity, p. 111
 #' @noRd
 Ksexact <- function(d, n) {
-  d <- as.numeric(d); n <- as.integer(n)
+  d <- as.numeric(d)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (d <= 0) return(list(cdf = 0, sf = 1, k = 0L, t = 0, n = n, d = d))
   if (d >= 1) return(list(cdf = 1, sf = 0, k = n, t = 0, n = n, d = d))
-  k <- as.integer(ceiling(n * d)); t <- k - n * d; m <- 2L * k - 1L
+  k <- as.integer(ceiling(n * d))
+  t <- k - n * d
+  m <- 2L * k - 1L
   h <- matrix(0, m, m)
   for (i in seq_len(m)) for (j in seq_len(m)) if (i - j + 1 >= 0) h[i, j] <- 1
   for (i in seq_len(m)) {
@@ -788,27 +911,38 @@ Ksexact <- function(d, n) {
     if (i - j + 1 > 0) for (g in seq_len(i - j + 1)) h[i, j] <- h[i, j] / g
   }
   eq <- 0
-  res <- diag(m); base <- h; e_base <- 0; p <- n
+  res <- diag(m)
+  base <- h
+  e_base <- 0
+  p <- n
   rescale <- function(a, e) {
     v <- a[(m %/% 2) + 1L, (m %/% 2) + 1L]
-    if (v > 1e140) { a <- a * 1e-140; e <- e + 140 }
+    if (v > 1e140) { a <- a * 1e-140
+    e <- e + 140 }
     list(a = a, e = e)
   }
   while (p > 0) {
     if (bitwAnd(p, 1L) == 1L) {
-      res <- res %*% base; eq <- eq + e_base
-      rr <- rescale(res, eq); res <- rr$a; eq <- rr$e
+      res <- res %*% base
+      eq <- eq + e_base
+      rr <- rescale(res, eq)
+      res <- rr$a
+      eq <- rr$e
     }
     p <- p %/% 2L
     if (p > 0) {
-      base <- base %*% base; e_base <- 2 * e_base
-      rr <- rescale(base, e_base); base <- rr$a; e_base <- rr$e
+      base <- base %*% base
+      e_base <- 2 * e_base
+      rr <- rescale(base, e_base)
+      base <- rr$a
+      e_base <- rr$e
     }
   }
   s <- res[k, k]
   for (i in seq_len(n)) {
     s <- s * i / n
-    if (s < 1e-140) { s <- s * 1e140; eq <- eq + 140 }
+    if (s < 1e-140) { s <- s * 1e140
+    eq <- eq + 140 }
   }
   val <- if (eq != 0) s * 10^(-eq) else s
   val <- min(1, max(0, val))
@@ -818,11 +952,13 @@ Ksexact <- function(d, n) {
 #' Exact P(D+ >= c) -- Theorem 4.3.4, Birnbaum-Tingey, p. 115
 #' @noRd
 Ksplusdist <- function(c, n) {
-  c <- as.numeric(c); n <- as.integer(n)
+  c <- as.numeric(c)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (c <= 0) return(list(sf = 1, cdf = 0, terms = 0L, n = n, c = c))
   if (c >= 1) return(list(sf = 0, cdf = 1, terms = 0L, n = n, c = c))
-  jmax <- as.integer(floor(n * (1 - c))); j <- 0:jmax
+  jmax <- as.integer(floor(n * (1 - c)))
+  j <- 0:jmax
   total <- sum(choose(n, j) * (c + j / n)^(j - 1) * (1 - c - j / n)^(n - j))
   sf <- min(1, max(0, c * total))
   list(sf = sf, cdf = 1 - sf, terms = jmax + 1L, n = n, c = c)
@@ -835,11 +971,13 @@ Ksplusdist <- function(c, n) {
 #' KS critical value (Table F) by exact bisection -- p. 565
 #' @noRd
 Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
-  n <- as.integer(n); alpha <- as.numeric(alpha)
+  n <- as.integer(n)
+  alpha <- as.numeric(alpha)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
-  lo <- 1e-6; hi <- 10
+  lo <- 1e-6
+  hi <- 10
   for (i in 1:200) {
     mid <- (lo + hi) / 2
     if (.gbKsQ(mid) > alpha) lo <- mid else hi <- mid
@@ -848,7 +986,8 @@ Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
   dasy <- ka / sqrt(n)
   dex <- NaN
   if (exact) {
-    lo <- 1e-9; hi <- 1
+    lo <- 1e-9
+    hi <- 1
     for (i in 1:200) {
       mid <- (lo + hi) / 2
       if (1 - Ksexact(mid, n)$cdf > alpha) lo <- mid else hi <- mid
@@ -861,13 +1000,16 @@ Kscrit <- function(n, alpha = 0.05, exact = TRUE) {
 #' KS confidence band -- Sec. 4.4.2, p. 121
 #' @noRd
 Ksband <- function(x, dcrit, at = NULL) {
-  xs <- sort(as.numeric(x)); n <- length(xs); dcrit <- as.numeric(dcrit)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  dcrit <- as.numeric(dcrit)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   if (dcrit <= 0 || dcrit >= 1)
     stop("dcrit must lie strictly inside (0, 1).", call. = FALSE)
   pts <- if (is.null(at)) xs else as.numeric(at)
   edf <- vapply(pts, function(v) sum(xs <= v) / n, 0)
-  lo <- pmax(edf - dcrit, 0); hi <- pmin(edf + dcrit, 1)
+  lo <- pmax(edf - dcrit, 0)
+  hi <- pmin(edf + dcrit, 1)
   list(at = pts, edf = edf, lower = lo, upper = hi, width = hi - lo,
        dcrit = dcrit, n = n)
 }
@@ -875,18 +1017,21 @@ Ksband <- function(x, dcrit, at = NULL) {
 #' KS sample size for uniform error c -- Sec. 4.4.3, p. 122
 #' @noRd
 Ksn <- function(c, alpha = 0.05) {
-  c <- as.numeric(c); alpha <- as.numeric(alpha)
+  c <- as.numeric(c)
+  alpha <- as.numeric(alpha)
   if (c <= 0 || c >= 1) stop("c must lie strictly inside (0, 1).", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
-  lo <- 1e-6; hi <- 10
+  lo <- 1e-6
+  hi <- 10
   for (i in 1:200) {
     mid <- (lo + hi) / 2
     if (.gbKsQ(mid) > alpha) lo <- mid else hi <- mid
   }
   ka <- (lo + hi) / 2
   nasy <- as.integer(ceiling((ka / c)^2))
-  n <- max(1L, nasy - 20L); cov <- 0
+  n <- max(1L, nasy - 20L)
+  cov <- 0
   for (i in 1:400) {
     cov <- Ksexact(c, n)$cdf
     if (cov >= 1 - alpha) break
@@ -898,7 +1043,8 @@ Ksn <- function(c, alpha = 0.05) {
 #' Cramer-von Mises W^2 -- Problem 4.14, p. 150
 #' @noRd
 Cvmw2 <- function(x, cdf) {
-  xs <- sort(as.numeric(x)); n <- length(xs)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
   if (n < 1L) stop("x must be non-empty.", call. = FALSE)
   z <- vapply(xs, function(v) as.numeric(cdf(v)), 0)
   j <- seq_len(n)
@@ -909,12 +1055,14 @@ Cvmw2 <- function(x, cdf) {
 #' KS vs Cramer-von Mises on one sample -- Sec. 4.9, p. 146
 #' @noRd
 Kscvmcmp <- function(x, cdf) {
-  xs <- sort(as.numeric(x)); n <- length(xs)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   z <- vapply(xs, function(v) as.numeric(cdf(v)), 0)
   j <- seq_len(n)
   devs <- pmax(j / n - z, z - (j - 1) / n)
-  d <- max(devs); arg <- which.max(devs)
+  d <- max(devs)
+  arg <- which.max(devs)
   terms <- (z - (2 * j - 1) / (2 * n))^2
   w2 <- 1 / (12 * n) + sum(terms)
   list(d = d, w2 = w2, argmax = as.integer(arg - 1L),
@@ -941,20 +1089,26 @@ Kscvmcmp <- function(x, cdf) {
 #' Lilliefors test for normality -- Sec. 4.5, p. 126; Table O
 #' @noRd
 Lillienorm <- function(x, alpha = 0.05) {
-  xs <- sort(as.numeric(x)); n <- length(xs); alpha <- as.numeric(alpha)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  alpha <- as.numeric(alpha)
   if (n < 4L) stop("need at least 4 observations.", call. = FALSE)
   lev <- c(0.100, 0.050, 0.010, 0.001)
   col <- which(abs(lev - alpha) < 1e-12)
   if (!length(col)) stop("alpha must be one of 0.10, 0.05, 0.01, 0.001.", call. = FALSE)
-  mu <- mean(xs); sd <- stats::sd(xs)
+  mu <- mean(xs)
+  sd <- stats::sd(xs)
   if (sd <= 0) stop("sample has zero variance.", call. = FALSE)
-  z <- stats::pnorm((xs - mu) / sd); j <- seq_len(n)
+  z <- stats::pnorm((xs - mu) / sd)
+  j <- seq_len(n)
   d <- max(pmax(j / n - z, z - (j - 1) / n))
   if (n > 100L) {
-    ntab <- 0L; dcrit <- .gbTableO$TAIL[col] / sqrt(n)
+    ntab <- 0L
+    dcrit <- .gbTableO$TAIL[col] / sqrt(n)
   } else {
     idx <- max(which(.gbTableO$N <= n))
-    ntab <- as.integer(.gbTableO$N[idx]); dcrit <- .gbTableO$V[idx, col]
+    ntab <- as.integer(.gbTableO$N[idx])
+    dcrit <- .gbTableO$V[idx, col]
   }
   list(statistic = d, dcrit = dcrit, reject = as.integer(d > dcrit),
        mean = mu, sd = sd, n = n, n_table = ntab, alpha = alpha)
@@ -980,7 +1134,9 @@ Lillienorm <- function(x, alpha = 0.05) {
 #' Lilliefors test for exponentiality -- Sec. 4.6, p. 133; Table T
 #' @noRd
 Lillieexp <- function(x, alpha = 0.05) {
-  xs <- sort(as.numeric(x)); n <- length(xs); alpha <- as.numeric(alpha)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  alpha <- as.numeric(alpha)
   if (n < 4L) stop("need at least 4 observations.", call. = FALSE)
   if (any(xs < 0)) stop("exponential data must be non-negative.", call. = FALSE)
   lev <- c(0.100, 0.050, 0.010, 0.001)
@@ -988,13 +1144,16 @@ Lillieexp <- function(x, alpha = 0.05) {
   if (!length(col)) stop("alpha must be one of 0.10, 0.05, 0.01, 0.001.", call. = FALSE)
   mu <- mean(xs)
   if (mu <= 0) stop("sample mean must be strictly positive.", call. = FALSE)
-  z <- 1 - exp(-xs / mu); j <- seq_len(n)
+  z <- 1 - exp(-xs / mu)
+  j <- seq_len(n)
   d <- max(pmax(j / n - z, z - (j - 1) / n))
   if (n > 100L) {
-    ntab <- 0L; dcrit <- .gbTableT$TAIL[col] / sqrt(n)
+    ntab <- 0L
+    dcrit <- .gbTableT$TAIL[col] / sqrt(n)
   } else {
     idx <- max(which(.gbTableT$N <= n))
-    ntab <- as.integer(.gbTableT$N[idx]); dcrit <- .gbTableT$V[idx, col]
+    ntab <- as.integer(.gbTableT$N[idx])
+    dcrit <- .gbTableT$V[idx, col]
   }
   list(statistic = d, dcrit = dcrit, reject = as.integer(d > dcrit),
        mean = mu, n = n, n_table = ntab, alpha = alpha)
@@ -1014,7 +1173,9 @@ Lillieexp <- function(x, alpha = 0.05) {
 #' Anderson-Darling W_n^2 -- eq. (4.7.1), p. 138; Table 4.7.1, p. 140
 #' @noRd
 Adtest <- function(x, cdf, case = "specified", alpha = 0.05) {
-  xs <- sort(as.numeric(x)); n <- length(xs); alpha <- as.numeric(alpha)
+  xs <- sort(as.numeric(x))
+  n <- length(xs)
+  alpha <- as.numeric(alpha)
   if (n < 2L) stop("need at least 2 observations.", call. = FALSE)
   if (!case %in% names(.gbAdTable$rows))
     stop("case must be a row label of Table 4.7.1.", call. = FALSE)
@@ -1042,14 +1203,17 @@ Adtest <- function(x, cdf, case = "specified", alpha = 0.05) {
 #' Wald-Wolfowitz two-sample runs test -- Sec. 6.2, p. 231
 #' @noRd
 Wwruns <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   o <- order(c(xs, ys), c(rep(0L, m), rep(1L, n)))
   labels <- c(rep(0L, m), rep(1L, n))[o]
   r <- 1L + sum(labels[-1] != labels[-length(labels)])
   nn <- m + n
-  pmf <- .gbRunsPmf(m, n); support <- 2:nn
+  pmf <- .gbRunsPmf(m, n)
+  support <- 2:nn
   tail <- sum(pmf[support <= r])
   mean <- 2 * m * n / nn + 1
   var <- 2 * m * n * (2 * m * n - nn) / (nn^2 * (nn - 1))
@@ -1061,8 +1225,10 @@ Wwruns <- function(x, y) {
 #' Runs-test tie bounds -- Sec. 6.2.1, p. 233
 #' @noRd
 Wwties <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   vals <- sort(unique(c(xs, ys)))
   ga <- vapply(vals, function(v) sum(xs == v), 0L)
@@ -1071,7 +1237,8 @@ Wwties <- function(x, y) {
   runs <- function(s) if (!length(s)) 0L else 1L + sum(s[-1] != s[-length(s)])
   lo <- integer(0)
   for (i in seq_along(vals)) {
-    a <- ga[i]; b <- gb[i]
+    a <- ga[i]
+    b <- gb[i]
     if (a > 0L && b > 0L) {
       if (length(lo) && lo[length(lo)] == 0L) {
         lo <- c(lo, rep(0L, a), rep(1L, b))
@@ -1082,19 +1249,25 @@ Wwties <- function(x, y) {
   }
   hi <- integer(0)
   for (i in seq_along(vals)) {
-    a <- ga[i]; b <- gb[i]
+    a <- ga[i]
+    b <- gb[i]
     if (a > 0L && b > 0L) {
-      ii <- 0L; jj <- 0L
+      ii <- 0L
+      jj <- 0L
       start <- if (length(hi) && hi[length(hi)] == 0L) 1L else 0L
       while (ii < a || jj < b) {
-        if (start == 0L && ii < a) { hi <- c(hi, 0L); ii <- ii + 1L }
-        else if (jj < b) { hi <- c(hi, 1L); jj <- jj + 1L }
-        else if (ii < a) { hi <- c(hi, 0L); ii <- ii + 1L }
+        if (start == 0L && ii < a) { hi <- c(hi, 0L)
+        ii <- ii + 1L }
+        else if (jj < b) { hi <- c(hi, 1L)
+        jj <- jj + 1L }
+        else if (ii < a) { hi <- c(hi, 0L)
+        ii <- ii + 1L }
         start <- 1L - start
       }
     } else hi <- c(hi, rep(0L, a), rep(1L, b))
   }
-  rmin <- runs(lo); rmax <- runs(hi)
+  rmin <- runs(lo)
+  rmax <- runs(hi)
   list(rmin = rmin, rmax = rmax, nties = nties,
        ambiguous = as.integer(rmin != rmax), m = m, n = n)
 }
@@ -1102,17 +1275,21 @@ Wwties <- function(x, y) {
 #' Exact two-sample runs test -- Sec. 6.2, p. 231
 #' @noRd
 Wwexact <- function(x, y, tail = "left") {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   if (!tail %in% c("left", "right", "two-sided"))
     stop("tail must be left, right or two-sided.", call. = FALSE)
   o <- order(c(xs, ys), c(rep(0L, m), rep(1L, n)))
   labels <- c(rep(0L, m), rep(1L, n))[o]
   r <- 1L + sum(labels[-1] != labels[-length(labels)])
-  nn <- m + n; support <- 2:nn
+  nn <- m + n
+  support <- 2:nn
   pmf <- .gbRunsPmf(m, n)
-  left <- sum(pmf[support <= r]); right <- sum(pmf[support >= r])
+  left <- sum(pmf[support <= r])
+  right <- sum(pmf[support >= r])
   pv <- switch(tail, "left" = left, "right" = right,
                "two-sided" = min(1, 2 * min(left, right)))
   list(statistic = r, p_value = min(1, pv), p_left = left, p_right = right,
@@ -1123,7 +1300,8 @@ Wwexact <- function(x, y, tail = "left") {
 #' @noRd
 .gbKs2count <- function(m, n, d, onesided = FALSE) {
   lim <- d - 1e-12
-  prev <- numeric(n + 1); row <- numeric(n + 1)
+  prev <- numeric(n + 1)
+  row <- numeric(n + 1)
   for (i in 0:m) {
     for (j in 0:n) {
       dev <- i / m - j / n
@@ -1147,13 +1325,17 @@ Wwexact <- function(x, y, tail = "left") {
 #' Two-sample KS test -- Sec. 6.3, p. 239
 #' @noRd
 Ks2 <- function(x, y) {
-  xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y))
-  m <- length(xs); n <- length(ys)
+  xs <- sort(as.numeric(x))
+  ys <- sort(as.numeric(y))
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   pts <- sort(unique(c(xs, ys)))
   sm <- vapply(pts, function(t) sum(xs <= t) / m, 0)
   sn <- vapply(pts, function(t) sum(ys <= t) / n, 0)
-  dp <- max(sm - sn); dm <- max(sn - sm); d <- max(dp, dm)
+  dp <- max(sm - sn)
+  dm <- max(sn - sm)
+  d <- max(dp, dm)
   list(statistic = d, p_value = .gbKs2count(m, n, d, FALSE),
        dplus = dp, dminus = dm, m = m, n = n)
 }
@@ -1161,10 +1343,13 @@ Ks2 <- function(x, y) {
 #' Two-sample KS asymptotic -- Sec. 6.3, p. 241
 #' @noRd
 Ks2asymp <- function(d, m, n) {
-  d <- as.numeric(d); m <- as.integer(m); n <- as.integer(n)
+  d <- as.numeric(d)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (d < 0) stop("d must be non-negative.", call. = FALSE)
-  neff <- m * n / (m + n); k <- sqrt(neff) * d
+  neff <- m * n / (m + n)
+  k <- sqrt(neff) * d
   pv <- if (k <= 0) 1 else min(1, max(0, .gbKsQ(k)))
   list(p_value = pv, k = k, neff = neff, m = m, n = n)
 }
@@ -1172,10 +1357,13 @@ Ks2asymp <- function(d, m, n) {
 #' Exact two-sided Smirnov distribution -- Sec. 6.3, p. 239
 #' @noRd
 Smirnov2 <- function(d, m, n) {
-  d <- as.numeric(d); m <- as.integer(m); n <- as.integer(n)
+  d <- as.numeric(d)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (d <= 0 || d > 1) stop("d must lie in (0, 1].", call. = FALSE)
-  sf <- .gbKs2count(m, n, d, FALSE); total <- choose(m + n, m)
+  sf <- .gbKs2count(m, n, d, FALSE)
+  total <- choose(m + n, m)
   list(sf = sf, cdf = 1 - sf, npaths = total, inside = (1 - sf) * total,
        m = m, n = n)
 }
@@ -1183,7 +1371,9 @@ Smirnov2 <- function(d, m, n) {
 #' Exact one-sided Smirnov distribution -- Sec. 6.3, p. 241
 #' @noRd
 Smirnov1 <- function(d, m, n) {
-  d <- as.numeric(d); m <- as.integer(m); n <- as.integer(n)
+  d <- as.numeric(d)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (d <= 0 || d > 1) stop("d must lie in (0, 1].", call. = FALSE)
   sf <- .gbKs2count(m, n, d, TRUE)
@@ -1194,18 +1384,23 @@ Smirnov1 <- function(d, m, n) {
 #' Two-sample median test -- Sec. 6.4, p. 247
 #' @noRd
 Medtest <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
-  pooled <- sort(c(xs, ys)); nn <- m + n
+  pooled <- sort(c(xs, ys))
+  nn <- m + n
   med <- if (nn %% 2 == 1) pooled[(nn %/% 2) + 1] else
     (pooled[nn %/% 2] + pooled[(nn %/% 2) + 1]) / 2
-  t <- sum(pooled > med); u <- sum(xs > med)
+  t <- sum(pooled > med)
+  u <- sum(xs > med)
   pk <- function(k) {
     if (k < 0 || k > m || t - k < 0 || t - k > n) return(0)
     choose(m, k) * choose(n, t - k) / choose(nn, t)
   }
-  lower <- sum(vapply(0:u, pk, 0)); upper <- sum(vapply(u:m, pk, 0))
+  lower <- sum(vapply(0:u, pk, 0))
+  upper <- sum(vapply(u:m, pk, 0))
   mean <- m * t / nn
   var <- if (nn > 1) m * n * t * (nn - t) / (nn^2 * (nn - 1)) else NaN
   list(statistic = u, p_value = min(1, 2 * min(lower, upper)),
@@ -1216,8 +1411,11 @@ Medtest <- function(x, y) {
 #' Median-test confidence interval -- Sec. 6.4.2, p. 251
 #' @noRd
 Medtestci <- function(x, y, c) {
-  xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y))
-  m <- length(xs); n <- length(ys); c <- as.integer(c)
+  xs <- sort(as.numeric(x))
+  ys <- sort(as.numeric(y))
+  m <- length(xs)
+  n <- length(ys)
+  c <- as.integer(c)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   if (c < 1L || c > min(m, n)) stop("c must lie in 1..min(m, n).", call. = FALSE)
   list(lower = ys[c] - xs[m - c + 1L], upper = ys[n - c + 1L] - xs[c],
@@ -1228,7 +1426,9 @@ Medtestci <- function(x, y, c) {
 #' @noRd
 .gbSimpson <- function(f, nodes = 2001) {
   if (nodes %% 2 == 0) nodes <- nodes + 1
-  h <- 1 / (nodes - 1); i <- 0:(nodes - 1); u <- i * h
+  h <- 1 / (nodes - 1)
+  i <- 0:(nodes - 1)
+  u <- i * h
   w <- ifelse(i == 0 | i == nodes - 1, 1, ifelse(i %% 2 == 1, 4, 2))
   sum(w * vapply(u, f, 0)) * h / 3
 }
@@ -1236,7 +1436,9 @@ Medtestci <- function(x, y, c) {
 #' Precedence/median-test power -- eqs. (6.4.9)-(6.4.10), p. 254
 #' @noRd
 Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
-  m <- as.integer(m); n <- as.integer(n); r <- as.integer(r)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  r <- as.integer(r)
   wcrit <- as.integer(wcrit)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (r < 1L || r > m) stop("need 1 <= r <= m.", call. = FALSE)
@@ -1255,30 +1457,42 @@ Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
 #' Two-sided median test with exact region -- Sec. 6.4, p. 247
 #' @noRd
 Medtest2 <- function(x, y, alpha = 0.05) {
-  xs <- as.numeric(x); ys <- as.numeric(y); alpha <- as.numeric(alpha)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  alpha <- as.numeric(alpha)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
-  pooled <- sort(c(xs, ys)); nn <- m + n
+  pooled <- sort(c(xs, ys))
+  nn <- m + n
   med <- if (nn %% 2 == 1) pooled[(nn %/% 2) + 1] else
     (pooled[nn %/% 2] + pooled[(nn %/% 2) + 1]) / 2
-  t <- sum(pooled > med); u <- sum(xs > med)
+  t <- sum(pooled > med)
+  u <- sum(xs > med)
   pk <- function(k) {
     if (k < 0 || k > m || t - k < 0 || t - k > n) return(0)
     choose(m, k) * choose(n, t - k) / choose(nn, t)
   }
-  lo <- NaN; al <- 0; acc <- 0
+  lo <- NaN
+  al <- 0
+  acc <- 0
   for (k in 0:m) {
     acc <- acc + pk(k)
-    if (acc <= alpha / 2) { lo <- as.numeric(k); al <- acc } else break
+    if (acc <= alpha / 2) { lo <- as.numeric(k)
+    al <- acc } else break
   }
-  hi <- NaN; au <- 0; acc <- 0
+  hi <- NaN
+  au <- 0
+  acc <- 0
   for (k in m:0) {
     acc <- acc + pk(k)
-    if (acc <= alpha / 2) { hi <- as.numeric(k); au <- acc } else break
+    if (acc <= alpha / 2) { hi <- as.numeric(k)
+    au <- acc } else break
   }
-  lower <- sum(vapply(0:u, pk, 0)); upper <- sum(vapply(u:m, pk, 0))
+  lower <- sum(vapply(0:u, pk, 0))
+  upper <- sum(vapply(u:m, pk, 0))
   list(statistic = u, p_value = min(1, 2 * min(lower, upper)),
        lower = lo, upper = hi, alpha_exact = al + au, t = t, m = m, n = n)
 }
@@ -1286,13 +1500,18 @@ Medtest2 <- function(x, y, alpha = 0.05) {
 #' Ties at the combined median -- Sec. 6.4, p. 247
 #' @noRd
 Medties <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
-  pooled <- sort(c(xs, ys)); nn <- m + n
+  pooled <- sort(c(xs, ys))
+  nn <- m + n
   med <- if (nn %% 2 == 1) pooled[(nn %/% 2) + 1] else
     (pooled[nn %/% 2] + pooled[(nn %/% 2) + 1]) / 2
-  nties <- sum(pooled == med); xt <- sum(xs == med); us <- sum(xs > med)
+  nties <- sum(pooled == med)
+  xt <- sum(xs == med)
+  us <- sum(xs > med)
   list(u_strict = as.numeric(us), u_inclusive = as.numeric(us + xt),
        u_split = us + xt / 2, t_strict = sum(pooled > med),
        t_inclusive = sum(pooled >= med), nties = nties, median = med,
@@ -1302,17 +1521,21 @@ Medties <- function(x, y) {
 #' Control median test -- Sec. 6.5, eq. (6.5.1), p. 256
 #' @noRd
 Ctrlmed <- function(x, y, alternative = "two-sided") {
-  xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y))
-  m <- length(xs); n <- length(ys)
+  xs <- sort(as.numeric(x))
+  ys <- sort(as.numeric(y))
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   if (n %% 2 == 0)
     stop("the control sample size n must be odd (n = 2r+1).", call. = FALSE)
   r <- (n - 1L) %/% 2L
   my <- ys[r + 1L]
   v <- sum(xs <= my)
-  den <- choose(m + 2 * r + 1, m); j <- 0:m
+  den <- choose(m + 2 * r + 1, m)
+  j <- 0:m
   pmf <- choose(m + r - j, m - j) * choose(j + r, j) / den
-  lower <- sum(pmf[1:(v + 1L)]); upper <- sum(pmf[(v + 1L):(m + 1L)])
+  lower <- sum(pmf[1:(v + 1L)])
+  upper <- sum(pmf[(v + 1L):(m + 1L)])
   pv <- switch(alternative,
     "greater" = upper, "less" = lower,
     "two-sided" = min(1, 2 * min(lower, upper)),
@@ -1325,7 +1548,9 @@ Ctrlmed <- function(x, y, alternative = "two-sided") {
 #' Curtailed control median test -- eq. (6.5.2), p. 258
 #' @noRd
 Ctrlmedcur <- function(m, n, alpha = 0.05) {
-  m <- as.integer(m); n <- as.integer(n); alpha <- as.numeric(alpha)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  alpha <- as.numeric(alpha)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (n %% 2 == 0)
     stop("the control sample size n must be odd (n = 2r+1).", call. = FALSE)
@@ -1334,12 +1559,16 @@ Ctrlmedcur <- function(m, n, alpha = 0.05) {
   za <- stats::qnorm(1 - alpha)
   draw <- m / 2 - za * sqrt(m * (m + n) / (4 * n))
   r <- (n - 1L) %/% 2L
-  den <- choose(m + 2 * r + 1, m); j <- 0:m
+  den <- choose(m + 2 * r + 1, m)
+  j <- 0:m
   pmf <- choose(m + r - j, m - j) * choose(j + r, j) / den
-  dex <- NaN; aex <- 0; acc <- 0
+  dex <- NaN
+  aex <- 0
+  acc <- 0
   for (k in 0:m) {
     acc <- acc + pmf[k + 1L]
-    if (acc <= alpha) { dex <- as.numeric(k); aex <- acc } else break
+    if (acc <= alpha) { dex <- as.numeric(k)
+    aex <- acc } else break
   }
   list(d = floor(draw), d_raw = draw, d_exact = dex, alpha_exact = aex,
        z_alpha = za, m = m, n = n)
@@ -1348,7 +1577,9 @@ Ctrlmedcur <- function(m, n, alpha = 0.05) {
 #' Control median test power -- Sec. 6.5.2, p. 258
 #' @noRd
 Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
-  m <- as.integer(m); n <- as.integer(n); d <- as.integer(d)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  d <- as.integer(d)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (n %% 2 == 0)
     stop("the control sample size n must be odd (n = 2r+1).", call. = FALSE)
@@ -1370,9 +1601,11 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
 #' @noRd
 .gbRankCounts <- function(m, n) {
   total <- m * n
-  counts <- numeric(total + 1); counts[1] <- 1
+  counts <- numeric(total + 1)
+  counts[1] <- 1
   for (i in seq_len(m)) {
-    new <- numeric(total + 1); run <- 0
+    new <- numeric(total + 1)
+    run <- 0
     for (k in 0:total) {
       run <- run + counts[k + 1]
       if (k - n - 1 >= 0) run <- run - counts[k - n]
@@ -1386,15 +1619,20 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
 #' Mann-Whitney U -- Sec. 6.6, eqs. (6.6.1), (6.6.14), p. 260
 #' @noRd
 Mwu <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   u <- sum(outer(xs, ys, ">")) + 0.5 * sum(outer(xs, ys, "=="))
   total <- m * n
   pmf <- .gbRankCounts(m, n) / choose(m + n, m)
-  ui <- as.integer(round(u)); ui <- max(0L, min(total, ui))
-  lower <- sum(pmf[1:(ui + 1L)]); upper <- sum(pmf[(ui + 1L):(total + 1L)])
-  mean <- m * n / 2; var <- m * n * (m + n + 1) / 12
+  ui <- as.integer(round(u))
+  ui <- max(0L, min(total, ui))
+  lower <- sum(pmf[1:(ui + 1L)])
+  upper <- sum(pmf[(ui + 1L):(total + 1L)])
+  mean <- m * n / 2
+  var <- m * n * (m + n + 1) / 12
   z <- (u - mean) / sqrt(var)
   list(statistic = u, p_value = min(1, 2 * min(lower, upper)), z = z,
        p_normal = 2 * (1 - stats::pnorm(abs(z))), mean = mean, var = var,
@@ -1404,10 +1642,14 @@ Mwu <- function(x, y) {
 #' Mann-Whitney shift CI -- Sec. 6.6.2, p. 267
 #' @noRd
 Mwuci <- function(x, y, k) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys); k <- as.integer(k)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
+  k <- as.integer(k)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
-  d <- sort(as.numeric(outer(xs, ys, "-"))); nd <- length(d)
+  d <- sort(as.numeric(outer(xs, ys, "-")))
+  nd <- length(d)
   if (k < 0L || k >= nd) stop("k must lie in 0..mn-1.", call. = FALSE)
   list(lower = d[k + 1L], upper = d[nd - k], estimate = stats::median(d),
        k = k, ndiff = nd, m = m, n = n)
@@ -1416,14 +1658,18 @@ Mwuci <- function(x, y, k) {
 #' Mann-Whitney sample size -- eq. (6.6.18), p. 269 (Noether 1987)
 #' @noRd
 Mwun <- function(p, c = 0.5, alpha = 0.05, beta = 0.10, twosided = FALSE) {
-  p <- as.numeric(p); c <- as.numeric(c)
-  alpha <- as.numeric(alpha); beta <- as.numeric(beta)
+  p <- as.numeric(p)
+  c <- as.numeric(c)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
   if (p == 0.5) stop("p must differ from 0.5.", call. = FALSE)
   if (c <= 0 || c >= 1) stop("c must lie strictly inside (0, 1).", call. = FALSE)
   a <- if (twosided) alpha / 2 else alpha
-  za <- stats::qnorm(1 - a); zb <- stats::qnorm(1 - beta)
+  za <- stats::qnorm(1 - a)
+  zb <- stats::qnorm(1 - beta)
   nraw <- (za + zb)^2 / (12 * c * (1 - c) * (p - 0.5)^2)
-  ntot <- as.integer(ceiling(nraw)); mm <- as.integer(round(c * ntot))
+  ntot <- as.integer(ceiling(nraw))
+  mm <- as.integer(round(c * ntot))
   list(n = ntot, n_raw = nraw, m = mm, n_y = ntot - mm, z_alpha = za,
        z_beta = zb, c = c, p = p)
 }
@@ -1431,19 +1677,24 @@ Mwun <- function(p, c = 0.5, alpha = 0.05, beta = 0.10, twosided = FALSE) {
 #' Wilcoxon rank-sum W_N -- Sec. 8.2, pp. 290-291
 #' @noRd
 Wrs <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   rk <- rank(c(xs, ys), ties.method = "average")
   w <- sum(rk[seq_len(m)])
-  wmin <- m * (m + 1) / 2; wmax <- m * (2 * nn - m + 1) / 2
+  wmin <- m * (m + 1) / 2
+  wmax <- m * (2 * nn - m + 1) / 2
   total <- m * n
   pmf <- .gbRankCounts(m, n) / choose(nn, m)
-  shifted <- as.integer(round(w - wmin)); shifted <- max(0L, min(total, shifted))
+  shifted <- as.integer(round(w - wmin))
+  shifted <- max(0L, min(total, shifted))
   lower <- sum(pmf[1:(shifted + 1L)])
   upper <- sum(pmf[(shifted + 1L):(total + 1L)])
-  mean <- m * (nn + 1) / 2; var <- m * n * (nn + 1) / 12
+  mean <- m * (nn + 1) / 2
+  var <- m * n * (nn + 1) / 12
   z <- (w - mean) / sqrt(var)
   list(statistic = w, p_value = min(1, 2 * min(lower, upper)), z = z,
        p_normal = 2 * (1 - stats::pnorm(abs(z))), mean = mean, var = var,
@@ -1453,11 +1704,14 @@ Wrs <- function(x, y) {
 #' Rank-sum shift CI -- Sec. 8.2, p. 292
 #' @noRd
 Wrsci <- function(x, y, wcrit) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   k <- as.integer(round(as.numeric(wcrit) - m * (m + 1) / 2))
-  d <- sort(as.numeric(outer(xs, ys, "-"))); nd <- length(d)
+  d <- sort(as.numeric(outer(xs, ys, "-")))
+  nd <- length(d)
   if (k < 0L || k >= nd)
     stop("wcrit implies an index outside 0..mn-1.", call. = FALSE)
   list(lower = d[k + 1L], upper = d[nd - k], k = k,
@@ -1468,7 +1722,9 @@ Wrsci <- function(x, y, wcrit) {
 #' @noRd
 Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
                  ties = NULL) {
-  m <- as.integer(m); n <- as.integer(n); w <- as.numeric(w)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  w <- as.numeric(w)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   nn <- m + n
   mean <- m * (nn + 1) / 2
@@ -1493,7 +1749,9 @@ Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
 #' @noRd
 .gbEnos <- function(i, n, lo = -8, hi = 8, nodes = 4001) {
   if (nodes %% 2 == 0) nodes <- nodes + 1
-  h <- (hi - lo) / (nodes - 1); k <- 0:(nodes - 1); z <- lo + k * h
+  h <- (hi - lo) / (nodes - 1)
+  k <- 0:(nodes - 1)
+  z <- lo + k * h
   w <- ifelse(k == 0 | k == nodes - 1, 1, ifelse(k %% 2 == 1, 4, 2))
   coef <- exp(lgamma(n + 1) - lgamma(i) - lgamma(n - i + 1))
   p <- stats::pnorm(z)
@@ -1503,8 +1761,10 @@ Wrsz <- function(w, m, n, alternative = "two-sided", correct = FALSE,
 #' Terry-Hoeffding normal-scores test -- Sec. 8.3.1, p. 299
 #' @noRd
 Normscores <- function(x, y, nodes = 4001) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   lab <- c(rep(0L, m), rep(1L, n))
@@ -1521,16 +1781,21 @@ Normscores <- function(x, y, nodes = 4001) {
 #' van der Waerden test -- Sec. 8.3.2, p. 301
 #' @noRd
 Vdw <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   lab <- c(rep(0L, m), rep(1L, n))
-  o <- order(c(xs, ys), lab); tag <- lab[o]
+  o <- order(c(xs, ys), lab)
+  tag <- lab[o]
   scores <- stats::qnorm(seq_len(nn) / (nn + 1))
   stat <- sum(scores[tag == 0L])
-  abar <- mean(scores); ss <- sum((scores - abar)^2)
-  mean <- m * abar; var <- m * n * ss / (nn * (nn - 1))
+  abar <- mean(scores)
+  ss <- sum((scores - abar)^2)
+  mean <- m * abar
+  var <- m * n * ss / (nn * (nn - 1))
   z <- (stat - mean) / sqrt(var)
   list(statistic = stat, z = z, p_value = 2 * (1 - stats::pnorm(abs(z))),
        mean = mean, var = var, scores = scores, m = m, n = n)
@@ -1539,15 +1804,19 @@ Vdw <- function(x, y) {
 #' Percentile modified rank test for location -- eqs. (8.3.5)-(8.3.6), p. 304
 #' @noRd
 Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
-  s <- as.numeric(s); r <- if (is.null(r)) s else as.numeric(r)
+  s <- as.numeric(s)
+  r <- if (is.null(r)) s else as.numeric(r)
   if (s <= 0 || s > 1 || r <= 0 || r > 1)
     stop("s and r must lie in (0, 1].", call. = FALSE)
   nn <- m + n
   lab <- c(rep(0L, m), rep(1L, n))
-  o <- order(c(xs, ys), lab); z <- as.numeric(lab[o] == 0L)
+  o <- order(c(xs, ys), lab)
+  z <- as.numeric(lab[o] == 0L)
   S <- min(as.integer(floor(nn * s)) + 1L, nn)
   R <- min(as.integer(floor(nn * r)) + 1L, nn)
   half <- if (nn %% 2 == 0) 0.5 else 0
@@ -1557,8 +1826,10 @@ Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
   blower <- sum(vapply(seq_len(R), function(i) (R - i + 1 - half) * z[i], 0))
   tupper <- sum(vapply((nn - S + 1L):nn,
                        function(i) (i - (nn - S) - half) * z[i], 0))
-  abar <- mean(a); ss <- sum((a - abar)^2)
-  mean <- m * abar; var <- m * n * ss / (nn * (nn - 1))
+  abar <- mean(a)
+  ss <- sum((a - abar)^2)
+  mean <- m * abar
+  var <- m * n * ss / (nn * (nn - 1))
   vb <- if (nn %% 2 == 0 && S == R)
     m * n * S * (4 * S^2 - 1) / (6 * nn * (nn - 1)) else NaN
   stat <- tupper - blower
@@ -1571,8 +1842,11 @@ Pctrankloc <- function(x, y, s = 0.5, r = NULL) {
 #' Covariance of two linear rank statistics -- Theorem 7.3.3, p. 279
 #' @noRd
 Lrankcov <- function(a, b, m, n) {
-  av <- as.numeric(a); bv <- as.numeric(b)
-  m <- as.integer(m); n <- as.integer(n); nn <- m + n
+  av <- as.numeric(a)
+  bv <- as.numeric(b)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  nn <- m + n
   if (length(av) != nn || length(bv) != nn)
     stop("score vectors must have length m + n.", call. = FALSE)
   if (nn < 2L) stop("N must be at least 2.", call. = FALSE)
@@ -1587,7 +1861,9 @@ Lrankcov <- function(a, b, m, n) {
 #' Linear rank statistic properties -- Theorem 7.3.7, p. 283
 #' @noRd
 Lrankprop <- function(a, z) {
-  av <- as.numeric(a); zv <- as.numeric(z); nn <- length(av)
+  av <- as.numeric(a)
+  zv <- as.numeric(z)
+  nn <- length(av)
   if (length(zv) != nn) stop("a and z must have the same length.", call. = FALSE)
   if (nn < 1L) stop("a must be non-empty.", call. = FALSE)
   t <- sum(av * zv)
@@ -1602,12 +1878,16 @@ Lrankprop <- function(a, z) {
 #' Chernoff-Savage null moments -- Theorem 7.3.8 / Corollary 7.3.1, p. 285
 #' @noRd
 Lrankasymp <- function(j, jprime, lam, n, nodes = 2001) {
-  lam <- as.numeric(lam); n <- as.integer(n); nodes <- as.integer(nodes)
+  lam <- as.numeric(lam)
+  n <- as.integer(n)
+  nodes <- as.integer(nodes)
   if (lam <= 0 || lam >= 1)
     stop("lam must lie strictly inside (0, 1).", call. = FALSE)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   if (nodes < 3L) stop("nodes must be at least 3.", call. = FALSE)
-  h <- 1 / (nodes - 1); us <- (0:(nodes - 1)) * h; eps <- 1e-9
+  h <- 1 / (nodes - 1)
+  us <- (0:(nodes - 1)) * h
+  eps <- 1e-9
   uu <- pmin(1 - eps, pmax(eps, us))
   jv <- vapply(uu, function(u) as.numeric(j(u)), 0)
   jp <- vapply(uu, function(u) as.numeric(jprime(u)), 0)
@@ -1624,7 +1904,9 @@ Lrankasymp <- function(j, jprime, lam, n, nodes = 2001) {
 #' Rank-test inversion interval -- Secs. 5.7.5, 6.4.2, 6.6.2
 #' @noRd
 Rankci <- function(values, k, level = NULL) {
-  v <- sort(as.numeric(values)); mm <- length(v); k <- as.integer(k)
+  v <- sort(as.numeric(values))
+  mm <- length(v)
+  k <- as.integer(k)
   if (mm < 2L) stop("need at least 2 values.", call. = FALSE)
   if (k < 0L || k >= mm) stop("k must lie in 0..M-1.", call. = FALSE)
   list(lower = v[k + 1L], upper = v[mm - k], estimate = stats::median(v),
@@ -1642,15 +1924,19 @@ Rankci <- function(values, k, level = NULL) {
 #' Theorem 7.3.2 moments of sum a_i Z_i under H0
 #' @noRd
 .gbLrMoments <- function(a, m, n) {
-  nn <- m + n; abar <- mean(a); ss <- sum((a - abar)^2)
+  nn <- m + n
+  abar <- mean(a)
+  ss <- sum((a - abar)^2)
   list(mean = m * abar, var = m * n * ss / (nn * (nn - 1)))
 }
 
 #' Mood scale test -- eqs. (9.2.1)-(9.2.3), pp. 314-316
 #' @noRd
 Moodscale <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   z <- .gbTagged(xs, ys)
@@ -1667,7 +1953,8 @@ Moodscale <- function(x, y) {
 #' Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316
 #' @noRd
 Moodmom <- function(m, n) {
-  m <- as.integer(m); n <- as.integer(n)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   nn <- m + n
   mean <- m * (nn^2 - 1) / 12
@@ -1678,8 +1965,10 @@ Moodmom <- function(m, n) {
 #' Freund-Ansari-Bradley-David-Barton test -- eq. (9.3.1), p. 316
 #' @noRd
 Ansbrad <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   z <- .gbTagged(xs, ys)
@@ -1694,28 +1983,44 @@ Ansbrad <- function(x, y) {
 #' Siegel-Tukey scale test -- Sec. 9.4, p. 320
 #' @noRd
 Sgltukey <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
   if (length(xs) < 1L || length(ys) < 1L)
     stop("both samples must be non-empty.", call. = FALSE)
   lab <- c(rep(0L, length(xs)), rep(1L, length(ys)))
-  o <- order(c(xs, ys), lab); tag <- lab[o]
+  o <- order(c(xs, ys), lab)
+  tag <- lab[o]
   dropped <- 0L
   if (length(tag) %% 2L == 1L) {
-    tag <- tag[-((length(tag) %/% 2L) + 1L)]; dropped <- 1L
+    tag <- tag[-((length(tag) %/% 2L) + 1L)]
+    dropped <- 1L
   }
-  nn <- length(tag); m <- sum(tag == 0L); n <- nn - m
+  nn <- length(tag)
+  m <- sum(tag == 0L)
+  n <- nn - m
   if (m < 1L || n < 1L)
     stop("dropping the middle value emptied a sample.", call. = FALSE)
-  a <- numeric(nn); lo <- 1L; hi <- nn; nxt <- 1
+  a <- numeric(nn)
+  lo <- 1L
+  hi <- nn
+  nxt <- 1
   repeat {
     if (lo > hi) break
-    a[lo] <- nxt; nxt <- nxt + 1
+    a[lo] <- nxt
+    nxt <- nxt + 1
     if (lo == hi) break
-    a[hi] <- nxt; nxt <- nxt + 1; hi <- hi - 1L
+    a[hi] <- nxt
+    nxt <- nxt + 1
+    hi <- hi - 1L
     if (lo + 1L > hi) break
-    a[hi] <- nxt; nxt <- nxt + 1; hi <- hi - 1L; lo <- lo + 1L
+    a[hi] <- nxt
+    nxt <- nxt + 1
+    hi <- hi - 1L
+    lo <- lo + 1L
     if (lo > hi) break
-    a[lo] <- nxt; nxt <- nxt + 1; lo <- lo + 1L
+    a[lo] <- nxt
+    nxt <- nxt + 1
+    lo <- lo + 1L
   }
   stat <- sum(a[tag == 0L])
   mv <- .gbLrMoments(a, m, n)
@@ -1728,8 +2033,10 @@ Sgltukey <- function(x, y) {
 #' Klotz normal-scores scale test -- eq. (9.5.1), p. 322
 #' @noRd
 Klotzsc <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   nn <- m + n
   z <- .gbTagged(xs, ys)
@@ -1744,10 +2051,13 @@ Klotzsc <- function(x, y) {
 #' Percentile modified rank test for scale -- Sec. 9.6, p. 323
 #' @noRd
 Pctranksc <- function(x, y, s = 0.5, r = NULL) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
-  s <- as.numeric(s); r <- if (is.null(r)) s else as.numeric(r)
+  s <- as.numeric(s)
+  r <- if (is.null(r)) s else as.numeric(r)
   if (s <= 0 || s > 1 || r <= 0 || r > 1)
     stop("s and r must lie in (0, 1].", call. = FALSE)
   nn <- m + n
@@ -1761,9 +2071,12 @@ Pctranksc <- function(x, y, s = 0.5, r = NULL) {
   blower <- sum(vapply(seq_len(R), function(i) (R - i + 1 - half) * z[i], 0))
   tupper <- sum(vapply((nn - S + 1L):nn,
                        function(i) (i - (nn - S) - half) * z[i], 0))
-  abar <- mean(a); ss <- sum((a - abar)^2)
-  mean <- m * abar; var <- m * n * ss / (nn * (nn - 1))
-  mb <- NaN; vb <- NaN
+  abar <- mean(a)
+  ss <- sum((a - abar)^2)
+  mean <- m * abar
+  var <- m * n * ss / (nn * (nn - 1))
+  mb <- NaN
+  vb <- NaN
   if (nn %% 2 == 0 && S == R) {
     mb <- m * S^2 / nn
     vb <- m * n * S * (4 * nn * S^2 - nn - 6 * S^3) / (6 * nn^2 * (nn - 1))
@@ -1778,15 +2091,18 @@ Pctranksc <- function(x, y, s = 0.5, r = NULL) {
 #' Sukhatme scale test -- eq. (9.7.1), p. 323
 #' @noRd
 Sukhatme <- function(x, y, alternative = "two-sided") {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   t <- 0L
   for (xi in xs) for (yj in ys) {
     if ((yj < xi && xi < 0) || (0 < xi && xi < yj)) t <- t + 1L
   }
   nn <- m + n
-  mean <- m * n / 4; var <- m * n * (nn + 7) / 48
+  mean <- m * n / 4
+  var <- m * n * (nn + 7) / 48
   z <- (t - mean) / sqrt(var)
   pv <- switch(alternative,
     "less" = stats::pnorm(z), "greater" = 1 - stats::pnorm(z),
@@ -1799,8 +2115,11 @@ Sukhatme <- function(x, y, alternative = "two-sided") {
 #' Scale-ratio CI from Sukhatme -- eqs. (9.8.1)-(9.8.2), p. 328
 #' @noRd
 Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys); alpha <- as.numeric(alpha)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
+  alpha <- as.numeric(alpha)
   if (m < 1L || n < 1L) stop("both samples must be non-empty.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
@@ -1815,7 +2134,8 @@ Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
   kk <- max(1L, min(npos, kk))
   kp <- as.integer(m * n / 2 - kk + 1)
   kp <- max(1L, min(npos, kp))
-  lo <- min(kk, kp); hi <- max(kk, kp)
+  lo <- min(kk, kp)
+  hi <- max(kk, kp)
   list(lower = rr[lo], upper = rr[hi], k = kk, kprime = kp, k_raw = kraw,
        npos = npos, estimate = stats::median(rr), m = m, n = n)
 }
@@ -1823,17 +2143,24 @@ Scaleci <- function(x, y, alpha = 0.05, k = NULL) {
 #' Westenberg interquartile scale test -- eq. (9.9.1), p. 329
 #' @noRd
 Wstnbrg <- function(x, y) {
-  xs <- as.numeric(x); ys <- sort(as.numeric(y))
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- sort(as.numeric(y))
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 2L) stop("need m >= 1 and n >= 2.", call. = FALSE)
   nn <- m + n
   qf <- function(p) {
-    h <- (n - 1) * p; lo <- floor(h); hi <- min(lo + 1, n - 1)
+    h <- (n - 1) * p
+    lo <- floor(h)
+    hi <- min(lo + 1, n - 1)
     ys[lo + 1] + (h - lo) * (ys[hi + 1] - ys[lo + 1])
   }
-  q1 <- qf(0.25); q3 <- qf(0.75)
+  q1 <- qf(0.25)
+  q3 <- qf(0.75)
   u <- sum(xs >= q1 & xs <= q3)
-  half <- nn %/% 2L; den <- choose(nn, half); kk <- 0:m
+  half <- nn %/% 2L
+  den <- choose(nn, half)
+  kk <- 0:m
   pmf <- ifelse(half - kk >= 0 & half - kk <= n,
                 choose(m, kk) * choose(n, half - kk) / den, 0)
   list(statistic = u, p_value = min(1, sum(pmf[1:(u + 1L)])), pmf = pmf,
@@ -1844,10 +2171,13 @@ Wstnbrg <- function(x, y) {
 #' Rosenbaum outside-extremes scale test -- eq. (9.9.2), p. 329
 #' @noRd
 Rosenbm <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
-  m <- length(xs); n <- length(ys)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  m <- length(xs)
+  n <- length(ys)
   if (m < 1L || n < 2L) stop("need m >= 1 and n >= 2.", call. = FALSE)
-  ymin <- min(ys); ymax <- max(ys)
+  ymin <- min(ys)
+  ymax <- max(ys)
   r <- sum(xs < ymin | xs > ymax)
   kk <- 0:m
   pmf <- n * (n - 1) * choose(m, kk) * beta(m + n - 1 - kk, kk + 2)
@@ -1859,15 +2189,18 @@ Rosenbm <- function(x, y) {
 #' k-sample median test -- Sec. 10.2, pp. 344-346
 #' @noRd
 Kmedtest <- function(samples) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   if (any(vapply(ss, length, 0L) < 1L))
     stop("every sample must be non-empty.", call. = FALSE)
-  pooled <- sort(unlist(ss)); nn <- length(pooled)
+  pooled <- sort(unlist(ss))
+  nn <- length(pooled)
   d <- if (nn %% 2 == 1) pooled[(nn %/% 2) + 1] else
     (pooled[nn %/% 2] + pooled[(nn %/% 2) + 1]) / 2
   u <- vapply(ss, function(s) sum(s < d), 0)
-  t <- sum(u); ns <- vapply(ss, length, 0L)
+  t <- sum(u)
+  ns <- vapply(ss, length, 0L)
   if (t == 0 || t == nn) stop("no split at the combined median.", call. = FALSE)
   q <- (nn^2 / (t * (nn - t))) * sum((u - ns * t / nn)^2 / ns)
   prob <- prod(choose(ns, u)) / choose(nn, t)
@@ -1879,16 +2212,19 @@ Kmedtest <- function(samples) {
 #' k-sample control median test -- Sec. 10.3, eq. (10.3.1), pp. 350-351
 #' @noRd
 Kctrlmed <- function(samples, p = c(0.5)) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   ps <- sort(as.numeric(p))
   if (!length(ps) || any(ps <= 0 | ps >= 1))
     stop("p must lie strictly inside (0, 1).", call. = FALSE)
-  ctrl <- sort(ss[[1]]); n1 <- length(ctrl)
+  ctrl <- sort(ss[[1]])
+  n1 <- length(ctrl)
   r <- as.integer(floor(n1 * ps)) + 1L
   if (any(r > n1))
     stop("a quantile index exceeds the control sample size.", call. = FALSE)
-  cuts <- ctrl[r]; q <- length(cuts)
+  cuts <- ctrl[r]
+  q <- length(cuts)
   counts <- lapply(ss[-1], function(s) {
     row <- integer(q + 1L)
     for (v in s) {
@@ -1916,7 +2252,9 @@ Kctrlmed <- function(samples, p = c(0.5)) {
 #' Control-vector covariance -- Theorem 10.7.1, p. 375
 #' @noRd
 Kctrlasymp <- function(lam, dens, pval) {
-  lam <- as.numeric(lam); dens <- as.numeric(dens); fv <- as.numeric(pval)
+  lam <- as.numeric(lam)
+  dens <- as.numeric(dens)
+  fv <- as.numeric(pval)
   k <- length(lam)
   if (k < 2L) stop("need at least 2 populations.", call. = FALSE)
   if (length(dens) != k || length(fv) != k)
@@ -1924,7 +2262,8 @@ Kctrlasymp <- function(lam, dens, pval) {
   if (any(lam <= 0 | lam >= 1))
     stop("every lambda must lie strictly inside (0, 1).", call. = FALSE)
   if (any(dens <= 0)) stop("densities must be strictly positive.", call. = FALSE)
-  p <- fv[1]; qs <- dens[-1] / dens[1]
+  p <- fv[1]
+  qs <- dens[-1] / dens[1]
   sig <- outer(qs, qs) * p * (1 - p) / lam[1]
   diag(sig) <- diag(sig) + fv[-1] * (1 - fv[-1]) / lam[-1]
   list(sigma = sig, q = qs, p = p, k = k)
@@ -1933,15 +2272,19 @@ Kctrlasymp <- function(lam, dens, pval) {
 #' Kruskal-Wallis H -- eqs. (10.4.2)/(10.4.5)/(10.4.7), pp. 354-358
 #' @noRd
 Kwh <- function(samples, correct = TRUE) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   ns <- vapply(ss, length, 0L)
   if (any(ns < 1L)) stop("every sample must be non-empty.", call. = FALSE)
-  v <- unlist(ss); grp <- rep(seq_len(k), ns); nn <- length(v)
+  v <- unlist(ss)
+  grp <- rep(seq_len(k), ns)
+  nn <- length(v)
   rk <- rank(v, ties.method = "average")
   rs <- vapply(seq_len(k), function(i) sum(rk[grp == i]), 0)
   h <- 12 / (nn * (nn + 1)) * sum(rs^2 / ns) - 3 * (nn + 1)
-  tb <- as.numeric(table(v)); tb <- tb[tb > 1]
+  tb <- as.numeric(table(v))
+  tb <- tb[tb > 1]
   corr <- 1
   if (correct && length(tb)) corr <- 1 - sum(tb * (tb^2 - 1)) / (nn * (nn^2 - 1))
   hc <- if (corr > 0) h / corr else NaN
@@ -1953,7 +2296,9 @@ Kwh <- function(samples, correct = TRUE) {
 #' Kruskal-Wallis defining form -- eqs. (10.4.2)/(10.4.7), pp. 354, 357
 #' @noRd
 Kwalt <- function(rank_sums, ns) {
-  rs <- as.numeric(rank_sums); nv <- as.integer(ns); k <- length(rs)
+  rs <- as.numeric(rank_sums)
+  nv <- as.integer(ns)
+  k <- length(rs)
   if (k < 2L || length(nv) != k)
     stop("need at least 2 samples and matching sizes.", call. = FALSE)
   if (any(nv < 1L)) stop("sample sizes must be at least 1.", call. = FALSE)
@@ -1967,9 +2312,11 @@ Kwalt <- function(rank_sums, ns) {
 #' Chi-square approximation to H -- Sec. 10.4.1, p. 357
 #' @noRd
 Kwchi <- function(h, k, ns = NULL) {
-  h <- as.numeric(h); k <- as.integer(k)
+  h <- as.numeric(h)
+  k <- as.integer(k)
   if (k < 2L) stop("k must be at least 2.", call. = FALSE)
-  df <- k - 1L; flag <- 0L
+  df <- k - 1L
+  flag <- 0L
   if (!is.null(ns)) {
     nv <- as.integer(ns)
     if (k == 3L && all(nv <= 5L)) flag <- 1L
@@ -1982,19 +2329,24 @@ Kwchi <- function(h, k, ns = NULL) {
 #' Kruskal-Wallis multiple comparisons -- eq. (10.4.8), p. 357
 #' @noRd
 Kwmc <- function(rank_means, ns, alpha = 0.20) {
-  rm <- as.numeric(rank_means); nv <- as.integer(ns)
-  k <- length(rm); alpha <- as.numeric(alpha)
+  rm <- as.numeric(rank_means)
+  nv <- as.integer(ns)
+  k <- length(rm)
+  alpha <- as.numeric(alpha)
   if (k < 2L || length(nv) != k)
     stop("need at least 2 samples and matching sizes.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
   nn <- sum(nv)
   zstar <- stats::qnorm(1 - alpha / (k * (k - 1)))
-  bounds <- matrix(0, k, k); diffs <- matrix(0, k, k); sig <- list()
+  bounds <- matrix(0, k, k)
+  diffs <- matrix(0, k, k)
+  sig <- list()
   for (i in seq_len(k)) for (j in seq_len(k)) {
     b <- zstar * sqrt(nn * (nn + 1) / 12 * (1 / nv[i] + 1 / nv[j]))
     d <- abs(rm[i] - rm[j])
-    bounds[i, j] <- b; diffs[i, j] <- d
+    bounds[i, j] <- b
+    diffs[i, j] <- d
     if (i < j && d >= b) sig[[length(sig) + 1L]] <- c(i - 1L, j - 1L)
   }
   eq <- if (length(unique(nv)) == 1L) zstar * sqrt(k * (nn + 1) / 6) else NaN
@@ -2005,11 +2357,15 @@ Kwmc <- function(rank_means, ns, alpha = 0.20) {
 #' General k-sample rank statistic -- eqs. (10.5.1)-(10.5.2), pp. 362-363
 #' @noRd
 Krankstat <- function(samples, scores = NULL) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   ns <- vapply(ss, length, 0L)
-  v <- unlist(ss); grp <- rep(seq_len(k), ns); nn <- length(v)
-  o <- order(v); gs <- grp[o]
+  v <- unlist(ss)
+  grp <- rep(seq_len(k), ns)
+  nn <- length(v)
+  o <- order(v)
+  gs <- grp[o]
   a <- if (is.null(scores)) as.numeric(seq_len(nn)) else as.numeric(scores)
   if (length(a) != nn) stop("scores must have length N.", call. = FALSE)
   abar <- mean(a)
@@ -2025,7 +2381,8 @@ Krankstat <- function(samples, scores = NULL) {
 #' Jonckheere-Terpstra B -- Sec. 10.6, eqs. (10.6.2)-(10.6.3), p. 365
 #' @noRd
 Jtstat <- function(samples, alternative = "greater") {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   ns <- vapply(ss, length, 0L)
   if (any(ns < 1L)) stop("every sample must be non-empty.", call. = FALSE)
@@ -2049,7 +2406,8 @@ Jtstat <- function(samples, alternative = "greater") {
 #' JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366
 #' @noRd
 Jtmom <- function(ns) {
-  nv <- as.integer(ns); k <- length(nv)
+  nv <- as.integer(ns)
+  k <- length(nv)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   if (any(nv < 1L)) stop("sample sizes must be at least 1.", call. = FALSE)
   nn <- sum(nv)
@@ -2064,7 +2422,8 @@ Jtmom <- function(ns) {
 #' JT as the pairwise U matrix -- Sec. 10.6, eq. (10.6.1), p. 365
 #' @noRd
 Jtsum <- function(samples) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
   u <- matrix(0, k, k)
   for (i in seq_len(k - 1L)) for (j in (i + 1L):k) {
@@ -2079,17 +2438,21 @@ Jtsum <- function(samples) {
 #' Treatments-vs-control precedence test -- eq. (10.7.3), p. 373
 #' @noRd
 Ctrltree <- function(samples, r = NULL) {
-  ss <- lapply(samples, as.numeric); k <- length(ss)
+  ss <- lapply(samples, as.numeric)
+  k <- length(ss)
   if (k < 2L) stop("need at least 2 samples.", call. = FALSE)
-  ctrl <- sort(ss[[1]]); n1 <- length(ctrl)
+  ctrl <- sort(ss[[1]])
+  n1 <- length(ctrl)
   if (n1 < 1L) stop("the control sample must be non-empty.", call. = FALSE)
   rr <- if (is.null(r)) (n1 %/% 2L) + 1L else as.integer(r)
   if (rr < 1L || rr > n1) stop("r must lie in 1..n1.", call. = FALSE)
   t <- ctrl[rr]
-  treat <- unlist(ss[-1]); mt <- length(treat)
+  treat <- unlist(ss[-1])
+  mt <- length(treat)
   if (mt < 1L) stop("need at least one treatment observation.", call. = FALSE)
   w <- sum(treat < t)
-  den <- choose(n1 + mt, mt); j <- 0:mt
+  den <- choose(n1 + mt, mt)
+  j <- 0:mt
   pmf <- choose(n1 + mt - rr - j, mt - j) * choose(rr + j - 1, j) / den
   list(statistic = w, p_value = min(1, sum(pmf[1:(w + 1L)])), pmf = pmf,
        t = t, r = rr, mtreat = mt, mean = sum(j * pmf), k = k)
@@ -2101,9 +2464,11 @@ Taunull <- function(n, s = NULL) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   maxinv <- (n * (n - 1L)) %/% 2L
-  counts <- numeric(maxinv + 1L); counts[1] <- 1
+  counts <- numeric(maxinv + 1L)
+  counts[1] <- 1
   for (i in 2:n) {
-    new <- numeric(maxinv + 1L); run <- 0
+    new <- numeric(maxinv + 1L)
+    run <- 0
     for (k in 0:maxinv) {
       run <- run + counts[k + 1L]
       if (k - i >= 0) run <- run - counts[k - i + 1L]
@@ -2114,7 +2479,9 @@ Taunull <- function(n, s = NULL) {
   pmf <- counts / sum(counts)
   support <- maxinv - 2 * (0:maxinv)
   var_tau <- 2 * (2 * n + 5) / (9 * n * (n - 1))
-  pmf_s <- NaN; cdf_s <- NaN; sf_s <- NaN
+  pmf_s <- NaN
+  cdf_s <- NaN
+  sf_s <- NaN
   if (!is.null(s)) {
     sv <- as.integer(s)
     if ((maxinv - sv) %% 2 != 0 || sv < -maxinv || sv > maxinv)
@@ -2131,12 +2498,15 @@ Taunull <- function(n, s = NULL) {
 #' Kendall tau trend test -- Sec. 11.2.5, p. 406
 #' @noRd
 Tautrend <- function(y, alternative = "two-sided") {
-  ys <- as.numeric(y); n <- length(ys)
+  ys <- as.numeric(y)
+  n <- length(ys)
   if (n < 3L) stop("need at least 3 observations.", call. = FALSE)
   d <- outer(ys, ys, "-")
-  p <- sum(d[upper.tri(d)] < 0); q <- sum(d[upper.tri(d)] > 0)
+  p <- sum(d[upper.tri(d)] < 0)
+  q <- sum(d[upper.tri(d)] > 0)
   npairs <- n * (n - 1) / 2
-  s <- p - q; tau <- s / npairs
+  s <- p - q
+  tau <- s / npairs
   var <- 2 * (2 * n + 5) / (9 * n * (n - 1))
   z <- tau / sqrt(var)
   pv <- switch(alternative,
@@ -2150,10 +2520,13 @@ Tautrend <- function(y, alternative = "two-sided") {
 #' Spearman rank correlation -- Sec. 11.3, eq. (11.3.2), p. 407
 #' @noRd
 Spearrho <- function(x, y) {
-  xs <- as.numeric(x); ys <- as.numeric(y); n <- length(xs)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  n <- length(xs)
   if (length(ys) != n) stop("x and y must have the same length.", call. = FALSE)
   if (n < 3L) stop("need at least 3 pairs.", call. = FALSE)
-  rx <- rank(xs, ties.method = "average"); ry <- rank(ys, ties.method = "average")
+  rx <- rank(xs, ties.method = "average")
+  ry <- rank(ys, ties.method = "average")
   tied <- as.integer(length(unique(xs)) < n || length(unique(ys)) < n)
   d2 <- sum((rx - ry)^2)
   short <- 1 - 6 * d2 / (n * (n^2 - 1))
@@ -2165,15 +2538,18 @@ Spearrho <- function(x, y) {
 #' Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413
 #' @noRd
 Rhotest <- function(r, n, alternative = "two-sided") {
-  r <- as.numeric(r); n <- as.integer(n)
+  r <- as.numeric(r)
+  n <- as.integer(n)
   if (n < 3L) stop("n must be at least 3.", call. = FALSE)
   if (r < -1 || r > 1) stop("r must lie in [-1, 1].", call. = FALSE)
   z <- r * sqrt(n - 1)
   t <- if (abs(r) >= 1) sign(r) * Inf else r * sqrt((n - 2) / (1 - r^2))
   if (alternative == "greater") {
-    pn <- 1 - stats::pnorm(z); pt <- stats::pt(t, n - 2, lower.tail = FALSE)
+    pn <- 1 - stats::pnorm(z)
+    pt <- stats::pt(t, n - 2, lower.tail = FALSE)
   } else if (alternative == "less") {
-    pn <- stats::pnorm(z); pt <- stats::pt(t, n - 2)
+    pn <- stats::pnorm(z)
+    pt <- stats::pt(t, n - 2)
   } else if (alternative == "two-sided") {
     pn <- 2 * (1 - stats::pnorm(abs(z)))
     pt <- 2 * stats::pt(abs(t), n - 2, lower.tail = FALSE)
@@ -2187,11 +2563,14 @@ Rhotest <- function(r, n, alternative = "two-sided") {
 #' Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422
 #' @noRd
 Normcorr <- function(x, y, rho = 0, nodes = 4001) {
-  xs <- as.numeric(x); ys <- as.numeric(y); n <- length(xs)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  n <- length(xs)
   if (length(ys) != n) stop("x and y must have the same length.", call. = FALSE)
   if (n < 4L) stop("need at least 4 pairs.", call. = FALSE)
   xi <- vapply(seq_len(n), function(i) .gbEnos(i, n, nodes = nodes), 0)
-  ox <- order(xs); ry <- rank(ys, ties.method = "first")
+  ox <- order(xs)
+  ry <- rank(ys, ties.method = "first")
   num <- sum(xi * xi[ry[ox]])
   den <- sum(xi^2)
   rf <- num / den
@@ -2207,21 +2586,35 @@ Normcorr <- function(x, y, rho = 0, nodes = 4001) {
 #' Kendall partial tau -- Sec. 12.6, eq. (12.6.1), p. 467
 #' @noRd
 Taupartial <- function(x, y, z) {
-  xs <- as.numeric(x); ys <- as.numeric(y); zs <- as.numeric(z); n <- length(xs)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
+  zs <- as.numeric(z)
+  n <- length(xs)
   if (length(ys) != n || length(zs) != n)
     stop("x, y and z must have the same length.", call. = FALSE)
   if (n < 3L) stop("need at least 3 subjects.", call. = FALSE)
-  x11 <- 0L; x12 <- 0L; x21 <- 0L; x22 <- 0L; dropped <- 0L
+  x11 <- 0L
+  x12 <- 0L
+  x21 <- 0L
+  x22 <- 0L
+  dropped <- 0L
   for (i in seq_len(n - 1L)) for (j in (i + 1L):n) {
-    sx <- sign(xs[j] - xs[i]); sy <- sign(ys[j] - ys[i]); sz <- sign(zs[j] - zs[i])
-    if (sx == 0 || sy == 0 || sz == 0) { dropped <- dropped + 1L; next }
-    xc <- sx * sz > 0; yc <- sy * sz > 0
+    sx <- sign(xs[j] - xs[i])
+    sy <- sign(ys[j] - ys[i])
+    sz <- sign(zs[j] - zs[i])
+    if (sx == 0 || sy == 0 || sz == 0) { dropped <- dropped + 1L
+    next }
+    xc <- sx * sz > 0
+    yc <- sy * sz > 0
     if (yc && xc) x11 <- x11 + 1L
     else if (yc && !xc) x12 <- x12 + 1L
     else if (!yc && xc) x21 <- x21 + 1L
     else x22 <- x22 + 1L
   }
-  c1 <- x11 + x21; c2 <- x12 + x22; r1 <- x11 + x12; r2 <- x21 + x22
+  c1 <- x11 + x21
+  c2 <- x12 + x22
+  r1 <- x11 + x12
+  r2 <- x21 + x22
   den <- c1 * c2 * r1 * r2
   stat <- if (den > 0) (x11 * x22 - x12 * x21) / sqrt(den) else NaN
   list(statistic = stat, x11 = x11, x12 = x12, x21 = x21, x22 = x22,
@@ -2231,12 +2624,15 @@ Taupartial <- function(x, y, z) {
 #' Within-block midranks and tie sum for the Friedman family
 #' @noRd
 .gbFriedRanks <- function(rows) {
-  k <- length(rows); n <- length(rows[[1]])
-  rsum <- numeric(n); tiesum <- 0
+  k <- length(rows)
+  n <- length(rows[[1]])
+  rsum <- numeric(n)
+  tiesum <- 0
   for (r in rows) {
     if (length(r) != n) stop("every block must have n observations.", call. = FALSE)
     rk <- rank(r, ties.method = "average")
-    tb <- as.numeric(table(r)); tb <- tb[tb > 1]
+    tb <- as.numeric(table(r))
+    tb <- tb[tb > 1]
     if (length(tb)) tiesum <- tiesum + sum(tb * (tb^2 - 1))
     rsum <- rsum + rk
   }
@@ -2246,11 +2642,14 @@ Taupartial <- function(x, y, z) {
 #' Friedman two-way ANOVA by ranks -- eqs. (12.2.8)/(12.2.12), pp. 441-445
 #' @noRd
 Friedq <- function(data, correct = TRUE) {
-  rows <- lapply(data, as.numeric); k <- length(rows)
+  rows <- lapply(data, as.numeric)
+  k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
   n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
-  fr <- .gbFriedRanks(rows); rsum <- fr$rsum; tiesum <- fr$tiesum
+  fr <- .gbFriedRanks(rows)
+  rsum <- fr$rsum
+  tiesum <- fr$tiesum
   q <- 12 / (k * n * (n + 1)) * sum(rsum^2) - 3 * k * (n + 1)
   s <- sum((rsum - k * (n + 1) / 2)^2)
   qc <- q
@@ -2263,11 +2662,14 @@ Friedq <- function(data, correct = TRUE) {
 #' Tie-corrected Friedman Q -- eq. (12.2.12), p. 445
 #' @noRd
 Friedties <- function(data) {
-  rows <- lapply(data, as.numeric); k <- length(rows)
+  rows <- lapply(data, as.numeric)
+  k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
   n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
-  fr <- .gbFriedRanks(rows); rsum <- fr$rsum; tiesum <- fr$tiesum
+  fr <- .gbFriedRanks(rows)
+  rsum <- fr$rsum
+  tiesum <- fr$tiesum
   s <- sum((rsum - k * (n + 1) / 2)^2)
   q0 <- 12 * s / (k * n * (n + 1))
   den <- k * n * (n^2 - 1) - tiesum
@@ -2280,11 +2682,14 @@ Friedties <- function(data) {
 #' Chi-square approximation to Friedman Q -- Sec. 12.2, p. 442
 #' @noRd
 Friedchi <- function(q, k, n) {
-  q <- as.numeric(q); k <- as.integer(k); n <- as.integer(n)
+  q <- as.numeric(q)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (k < 2L || n < 2L)
     stop("need k >= 2 blocks and n >= 2 treatments.", call. = FALSE)
   df <- n - 1L
-  ve <- 2 * (n - 1) * (k - 1) / k; vc <- 2 * (n - 1)
+  ve <- 2 * (n - 1) * (k - 1) / k
+  vc <- 2 * (n - 1)
   list(statistic = q, df = df,
        p_value = stats::pchisq(q, df, lower.tail = FALSE),
        mean = n - 1, var_exact = ve, var_chi2 = vc, ratio = ve / vc,
@@ -2294,12 +2699,14 @@ Friedchi <- function(q, k, n) {
 #' Friedman S and Q moments -- eq. (12.2.7), p. 442
 #' @noRd
 Friedvar <- function(k, n) {
-  k <- as.integer(k); n <- as.integer(n)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (k < 2L || n < 2L)
     stop("need k >= 2 blocks and n >= 2 treatments.", call. = FALSE)
   ms <- k * n * (n^2 - 1) / 12
   vs <- n^2 * k * (k - 1) * (n + 1)^2 / 72
-  vq <- 2 * (n - 1) * (k - 1) / k; vc <- 2 * (n - 1)
+  vq <- 2 * (n - 1) * (k - 1) / k
+  vc <- 2 * (n - 1)
   list(mean_s = ms, var_s = vs, mean_q = n - 1, var_q = vq, var_chi2 = vc,
        deficit = vc - vq, k = k, n = n)
 }
@@ -2307,17 +2714,21 @@ Friedvar <- function(k, n) {
 #' Friedman multiple comparisons -- eq. (12.2.13), p. 445
 #' @noRd
 Friedmc <- function(rank_sums, k, alpha = 0.20) {
-  rs <- as.numeric(rank_sums); n <- length(rs)
-  k <- as.integer(k); alpha <- as.numeric(alpha)
+  rs <- as.numeric(rank_sums)
+  n <- length(rs)
+  k <- as.integer(k)
+  alpha <- as.numeric(alpha)
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
   zstar <- stats::qnorm(1 - alpha / (n * (n - 1)))
   bound <- zstar * sqrt(k * n * (n + 1) / 6)
-  diffs <- matrix(0, n, n); sig <- list()
+  diffs <- matrix(0, n, n)
+  sig <- list()
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    d <- abs(rs[i] - rs[j]); diffs[i, j] <- d
+    d <- abs(rs[i] - rs[j])
+    diffs[i, j] <- d
     if (i < j && d >= bound) sig[[length(sig) + 1L]] <- c(i - 1L, j - 1L)
   }
   list(bound = bound, zstar = zstar, diffs = diffs, significant = sig,
@@ -2327,7 +2738,8 @@ Friedmc <- function(rank_sums, k, alpha = 0.20) {
 #' Page's L test -- eqs. (12.3.1)-(12.3.2), pp. 448-449
 #' @noRd
 Pagel <- function(data, weights = NULL) {
-  rows <- lapply(data, as.numeric); k <- length(rows)
+  rows <- lapply(data, as.numeric)
+  k <- length(rows)
   if (k < 2L) stop("need at least 2 blocks.", call. = FALSE)
   n <- length(rows[[1]])
   if (n < 2L) stop("need at least 2 treatments.", call. = FALSE)
@@ -2345,7 +2757,8 @@ Pagel <- function(data, weights = NULL) {
 #' Exact null distribution of Page's L -- Sec. 12.3, p. 448
 #' @noRd
 Pageexact <- function(k, n, ell = NULL) {
-  k <- as.integer(k); n <- as.integer(n)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (k < 1L) stop("k must be at least 1.", call. = FALSE)
   if (n < 2L || n > 8L)
     stop("n must lie in 2..8 for exact enumeration.", call. = FALSE)
@@ -2354,7 +2767,8 @@ Pageexact <- function(k, n, ell = NULL) {
   span <- hi - lo
   block <- numeric(span + 1L)
   rec <- function(rem, acc, pos) {
-    if (pos == n) { block[acc - lo + 1L] <<- block[acc - lo + 1L] + 1; return(invisible()) }
+    if (pos == n) { block[acc - lo + 1L] <<- block[acc - lo + 1L] + 1
+    return(invisible()) }
     for (v in rem) rec(rem[rem != v], acc + (pos + 1L) * v, pos + 1L)
   }
   rec(seq_len(n), 0L, 0L)
@@ -2369,14 +2783,18 @@ Pageexact <- function(k, n, ell = NULL) {
     cur <- new
   }
   support <- lo * k + (0:(length(cur) - 1L))
-  mu <- sum(support * cur); e2 <- sum(support^2 * cur)
-  pmf_l <- NaN; sf_l <- NaN
+  mu <- sum(support * cur)
+  e2 <- sum(support^2 * cur)
+  pmf_l <- NaN
+  sf_l <- NaN
   if (!is.null(ell)) {
     li <- as.integer(round(as.numeric(ell))) - lo * k
     if (li >= 0L && li < length(cur)) {
-      pmf_l <- cur[li + 1L]; sf_l <- sum(cur[(li + 1L):length(cur)])
+      pmf_l <- cur[li + 1L]
+      sf_l <- sum(cur[(li + 1L):length(cur)])
     } else {
-      pmf_l <- 0; sf_l <- if (li >= length(cur)) 0 else 1
+      pmf_l <- 0
+      sf_l <- if (li >= length(cur)) 0 else 1
     }
   }
   list(support = support, pmf = cur, pmf_l = pmf_l, sf_l = sf_l,
@@ -2386,7 +2804,9 @@ Pageexact <- function(k, n, ell = NULL) {
 #' Page's L normal approximation -- eq. (12.3.2), p. 449
 #' @noRd
 Pageasymp <- function(ell, k, n, correct = TRUE) {
-  ell <- as.numeric(ell); k <- as.integer(k); n <- as.integer(n)
+  ell <- as.numeric(ell)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (k < 1L) stop("k must be at least 1.", call. = FALSE)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   e <- if (correct) ell - 0.5 else ell
@@ -2400,7 +2820,9 @@ Pageasymp <- function(ell, k, n, correct = TRUE) {
 #' Concordance W significance test -- Sec. 12.4.2, p. 455
 #' @noRd
 Wsignif <- function(w, k, n) {
-  w <- as.numeric(w); k <- as.integer(k); n <- as.integer(n)
+  w <- as.numeric(w)
+  k <- as.integer(k)
+  n <- as.integer(n)
   if (w < 0 || w > 1) stop("w must lie in [0, 1].", call. = FALSE)
   if (k < 2L || n < 2L)
     stop("need k >= 2 rankings of n >= 2 objects.", call. = FALSE)
@@ -2414,11 +2836,14 @@ Wsignif <- function(w, k, n) {
 #' ARE from derivatives and variances -- Theorem 13.2.2, eq. (13.2.1), p. 485
 #' @noRd
 Arepitman <- function(deriv, var, deriv_star, var_star) {
-  d <- as.numeric(deriv); v <- as.numeric(var)
-  ds <- as.numeric(deriv_star); vs <- as.numeric(var_star)
+  d <- as.numeric(deriv)
+  v <- as.numeric(var)
+  ds <- as.numeric(deriv_star)
+  vs <- as.numeric(var_star)
   if (v <= 0 || vs <= 0) stop("variances must be strictly positive.", call. = FALSE)
   if (ds == 0) stop("the reference derivative must be non-zero.", call. = FALSE)
-  e1 <- d^2 / v; e2 <- ds^2 / vs
+  e1 <- d^2 / v
+  e2 <- ds^2 / vs
   list(are = (d / ds)^2 * vs / v, check = e1 / e2, efficacy = e1,
        efficacy_star = e2)
 }
@@ -2426,7 +2851,8 @@ Arepitman <- function(deriv, var, deriv_star, var_star) {
 #' Efficacy -- eq. (13.2.4), p. 486
 #' @noRd
 Efficacy <- function(deriv, var) {
-  d <- as.numeric(deriv); v <- as.numeric(var)
+  d <- as.numeric(deriv)
+  v <- as.numeric(var)
   if (v <= 0) stop("var must be strictly positive.", call. = FALSE)
   list(efficacy = d^2 / v, deriv = d, var = v)
 }
@@ -2434,7 +2860,8 @@ Efficacy <- function(deriv, var) {
 #' Sign test efficacy -- eq. (13.3.3), p. 489
 #' @noRd
 Effsign <- function(n, fmed) {
-  n <- as.integer(n); f <- as.numeric(fmed)
+  n <- as.integer(n)
+  f <- as.numeric(fmed)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (f <= 0) stop("fmed must be strictly positive.", call. = FALSE)
   e <- 4 * n * f^2
@@ -2444,7 +2871,8 @@ Effsign <- function(n, fmed) {
 #' One-sample t efficacy -- eq. (13.3.2), p. 488
 #' @noRd
 Efft <- function(n, sigma2) {
-  n <- as.integer(n); s2 <- as.numeric(sigma2)
+  n <- as.integer(n)
+  s2 <- as.numeric(sigma2)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
   if (s2 <= 0) stop("sigma2 must be strictly positive.", call. = FALSE)
   list(efficacy = n / s2, per_obs = 1 / s2, n = n, sigma2 = s2)
@@ -2453,7 +2881,9 @@ Efft <- function(n, sigma2) {
 #' Signed-rank efficacy -- eq. (13.3.4), p. 490
 #' @noRd
 Effwsr <- function(n, f0, integral) {
-  n <- as.integer(n); f0 <- as.numeric(f0); ii <- as.numeric(integral)
+  n <- as.integer(n)
+  f0 <- as.numeric(f0)
+  ii <- as.numeric(integral)
   if (n < 2L) stop("n must be at least 2.", call. = FALSE)
   e <- 24 * (f0 / (n - 1) + ii)^2 * n * (n - 1)^2 / ((n + 1) * (2 * n + 1))
   list(efficacy = e, limit = 12 * n * ii^2, integral = ii, n = n)
@@ -2462,7 +2892,9 @@ Effwsr <- function(n, f0, integral) {
 #' Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
 #' @noRd
 Effwrs <- function(m, n, integral) {
-  m <- as.integer(m); n <- as.integer(n); ii <- as.numeric(integral)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  ii <- as.numeric(integral)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   list(efficacy = 12 * m * n * ii^2 / (m + n + 1), integral = ii, m = m, n = n)
 }
@@ -2470,7 +2902,9 @@ Effwrs <- function(m, n, integral) {
 #' Two-sample t efficacy -- eq. (13.3.9), p. 494
 #' @noRd
 Efft2 <- function(m, n, sigma2) {
-  m <- as.integer(m); n <- as.integer(n); s2 <- as.numeric(sigma2)
+  m <- as.integer(m)
+  n <- as.integer(n)
+  s2 <- as.numeric(sigma2)
   if (m < 1L || n < 1L) stop("m and n must be at least 1.", call. = FALSE)
   if (s2 <= 0) stop("sigma2 must be strictly positive.", call. = FALSE)
   list(efficacy = m * n / (s2 * (m + n)), m = m, n = n, sigma2 = s2)
@@ -2479,11 +2913,15 @@ Efft2 <- function(m, n, sigma2) {
 #' Chi-square test of independence -- Sec. 14.2, p. 505
 #' @noRd
 Chiindep <- function(table, correct = FALSE) {
-  tb <- as.matrix(table); storage.mode(tb) <- "double"
-  r <- nrow(tb); c <- ncol(tb)
+  tb <- as.matrix(table)
+  storage.mode(tb) <- "double"
+  r <- nrow(tb)
+  c <- ncol(tb)
   if (r < 2L) stop("need at least 2 rows.", call. = FALSE)
   if (c < 2L) stop("need at least 2 columns.", call. = FALSE)
-  rs <- rowSums(tb); cs <- colSums(tb); nn <- sum(rs)
+  rs <- rowSums(tb)
+  cs <- colSums(tb)
+  nn <- sum(rs)
   if (nn <= 0) stop("the table must contain positive counts.", call. = FALSE)
   exp <- outer(rs, cs) / nn
   if (any(exp <= 0)) stop("an expected frequency is zero.", call. = FALSE)
@@ -2500,11 +2938,14 @@ Chiindep <- function(table, correct = FALSE) {
 #' k x 2 equal-proportions test -- eq. (14.3.2), p. 514
 #' @noRd
 Chik2 <- function(successes, ns) {
-  y <- as.numeric(successes); nv <- as.numeric(ns); k <- length(y)
+  y <- as.numeric(successes)
+  nv <- as.numeric(ns)
+  k <- length(y)
   if (k < 2L || length(nv) != k)
     stop("need at least 2 groups and matching sizes.", call. = FALSE)
   if (any(nv <= 0)) stop("group sizes must be positive.", call. = FALSE)
-  nn <- sum(nv); ph <- sum(y) / nn
+  nn <- sum(nv)
+  ph <- sum(y) / nn
   if (ph <= 0 || ph >= 1)
     stop("the pooled proportion must lie inside (0, 1).", call. = FALSE)
   q <- sum(y^2 / nv) / (ph * (1 - ph)) - nn * ph / (1 - ph)
@@ -2527,15 +2968,22 @@ Chik2 <- function(successes, ns) {
 Fisherex <- function(table, alternative = "two-sided") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb[1, 1]; b <- tb[1, 2]; cc <- tb[2, 1]; d <- tb[2, 2]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
+  cc <- tb[2, 1]
+  d <- tb[2, 2]
   if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
-  r1 <- a + b; r2 <- cc + d; c1 <- a + cc
-  lo <- max(0, c1 - r2); hi <- min(r1, c1)
+  r1 <- a + b
+  r2 <- cc + d
+  c1 <- a + cc
+  lo <- max(0, c1 - r2)
+  hi <- min(r1, c1)
   if (hi < lo) stop("degenerate margins.", call. = FALSE)
   ks <- lo:hi
   probs <- vapply(ks, function(k) .gbHyper(k, r1, r2, c1), 0)
   pobs <- probs[ks == a]
-  pg <- sum(probs[ks >= a]); pl <- sum(probs[ks <= a])
+  pg <- sum(probs[ks >= a])
+  pl <- sum(probs[ks <= a])
   pv <- switch(alternative,
     "greater" = pg, "less" = pl,
     "two-sided" = sum(probs[probs <= pobs * (1 + 1e-12)]),
@@ -2549,12 +2997,19 @@ Fisherex <- function(table, alternative = "two-sided") {
 Fisherex1 <- function(table, alternative = "greater") {
   tb <- round(as.matrix(table))
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb[1, 1]; b <- tb[1, 2]; cc <- tb[2, 1]; d <- tb[2, 2]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
+  cc <- tb[2, 1]
+  d <- tb[2, 2]
   if (min(a, b, cc, d) < 0) stop("counts must be non-negative.", call. = FALSE)
-  r1 <- a + b; r2 <- cc + d; c1 <- a + cc; nn <- r1 + r2
+  r1 <- a + b
+  r2 <- cc + d
+  c1 <- a + cc
+  nn <- r1 + r2
   ks <- max(0, c1 - r2):min(r1, c1)
   probs <- vapply(ks, function(k) .gbHyper(k, r1, r2, c1), 0)
-  pg <- sum(probs[ks >= a]); pl <- sum(probs[ks <= a])
+  pg <- sum(probs[ks >= a])
+  pl <- sum(probs[ks <= a])
   pv <- switch(alternative, "greater" = pg, "less" = pl,
                stop("alternative must be greater or less.", call. = FALSE))
   list(p_value = min(1, pv), p_greater = pg, p_less = pl,
@@ -2564,14 +3019,18 @@ Fisherex1 <- function(table, alternative = "greater") {
 #' McNemar test -- eq. (14.5.1), p. 523
 #' @noRd
 Mcnemarq <- function(table, correct = FALSE) {
-  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  tb <- as.matrix(table)
+  storage.mode(tb) <- "double"
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  x12 <- tb[1, 2]; x21 <- tb[2, 1]; nd <- x12 + x21
+  x12 <- tb[1, 2]
+  x21 <- tb[2, 1]
+  nd <- x12 + x21
   if (nd <= 0) stop("there are no discordant pairs.", call. = FALSE)
   d <- abs(x12 - x21)
   if (correct) d <- max(0, d - 1)
   q <- d^2 / nd
-  k <- as.integer(round(min(x12, x21))); ni <- as.integer(round(nd))
+  k <- as.integer(round(min(x12, x21)))
+  ni <- as.integer(round(nd))
   pex <- min(1, 2 * sum(choose(ni, 0:k)) * 0.5^ni)
   list(statistic = q, df = 1L,
        p_value = stats::pchisq(q, 1, lower.tail = FALSE), p_exact = pex,
@@ -2581,14 +3040,16 @@ Mcnemarq <- function(table, correct = FALSE) {
 #' McNemar CI -- Sec. 14.5, eq. (14.5.2), p. 523
 #' @noRd
 Mcnemarci <- function(table, alpha = 0.05) {
-  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  tb <- as.matrix(table)
+  storage.mode(tb) <- "double"
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
   alpha <- as.numeric(alpha)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
   nn <- sum(tb)
   if (nn <= 0) stop("the table must contain positive counts.", call. = FALSE)
-  p12 <- tb[1, 2] / nn; p21 <- tb[2, 1] / nn
+  p12 <- tb[1, 2] / nn
+  p21 <- tb[2, 1] / nn
   est <- p12 - p21
   se <- sqrt(max(0, (p12 + p21 - est^2) / nn))
   sen <- sqrt((p12 + p21) / nn)
@@ -2600,16 +3061,20 @@ Mcnemarci <- function(table, alpha = 0.05) {
 #' Multinomial goodness of fit -- Sec. 14.6, p. 528
 #' @noRd
 Multgof <- function(observed, probs, ddof = 0) {
-  o <- as.numeric(observed); p <- as.numeric(probs); k <- length(o)
+  o <- as.numeric(observed)
+  p <- as.numeric(probs)
+  k <- length(o)
   if (k < 2L || length(p) != k)
     stop("need at least 2 matching categories.", call. = FALSE)
   if (abs(sum(p) - 1) > 1e-9) stop("probs must sum to 1.", call. = FALSE)
   if (any(p <= 0)) stop("probs must be strictly positive.", call. = FALSE)
-  nn <- sum(o); exp <- nn * p
+  nn <- sum(o)
+  exp <- nn * p
   q <- sum((o - exp)^2 / exp)
   df <- k - 1L - as.integer(ddof)
   if (df < 1L) stop("degrees of freedom must be at least 1.", call. = FALSE)
-  ni <- as.integer(round(nn)); ci <- as.integer(round(o))
+  ni <- as.integer(round(nn))
+  ci <- as.integer(round(o))
   lp <- lgamma(ni + 1) + sum(ci * log(p) - lgamma(ci + 1))
   list(statistic = q, df = df,
        p_value = stats::pchisq(q, df, lower.tail = FALSE),
@@ -2619,11 +3084,15 @@ Multgof <- function(observed, probs, ddof = 0) {
 #' Linear rank test for ordered categories -- Sec. 14.6.1, p. 531
 #' @noRd
 Linbylin <- function(table, scores = NULL) {
-  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  tb <- as.matrix(table)
+  storage.mode(tb) <- "double"
   if (nrow(tb) != 2L) stop("table must have exactly 2 rows.", call. = FALSE)
   c <- ncol(tb)
   if (c < 2L) stop("both rows must have the same length, >= 2.", call. = FALSE)
-  cs <- colSums(tb); n1 <- sum(tb[1, ]); n2 <- sum(tb[2, ]); nn <- n1 + n2
+  cs <- colSums(tb)
+  n1 <- sum(tb[1, ])
+  n2 <- sum(tb[2, ])
+  nn <- n1 + n2
   if (nn < 2) stop("the table must contain at least 2 observations.", call. = FALSE)
   if (is.null(scores)) {
     w <- cumsum(c(0, cs[-c])) + (cs + 1) / 2
@@ -2646,19 +3115,25 @@ Linbylin <- function(table, scores = NULL) {
 #' @noRd
 #' @rdname Oddsrat-gibbons
 Oddsrat <- function(table, alpha = 0.05, cc = 0) {
-  tb <- as.matrix(table); storage.mode(tb) <- "double"
+  tb <- as.matrix(table)
+  storage.mode(tb) <- "double"
   tb <- tb + as.numeric(cc)
   if (nrow(tb) != 2L || ncol(tb) != 2L) stop("table must be 2 x 2.", call. = FALSE)
-  a <- tb[1, 1]; b <- tb[1, 2]; c2 <- tb[2, 1]; d <- tb[2, 2]
+  a <- tb[1, 1]
+  b <- tb[1, 2]
+  c2 <- tb[2, 1]
+  d <- tb[2, 2]
   if (min(a, b, c2, d) <= 0)
     stop(paste("every cell must be positive for the logit method;",
                "pass cc=0.5 to add a continuity constant."), call. = FALSE)
   alpha <- as.numeric(alpha)
   if (alpha <= 0 || alpha >= 1)
     stop("alpha must lie strictly inside (0, 1).", call. = FALSE)
-  orr <- a * d / (b * c2); lor <- log(orr)
+  orr <- a * d / (b * c2)
+  lor <- log(orr)
   var <- 1 / a + 1 / b + 1 / c2 + 1 / d
-  se <- sqrt(var); z <- stats::qnorm(1 - alpha / 2)
+  se <- sqrt(var)
+  z <- stats::qnorm(1 - alpha / 2)
   chi <- lor^2 / var
   list(estimate = orr, log_or = lor, se = se,
        lower = exp(lor - z * se), upper = exp(lor + z * se),

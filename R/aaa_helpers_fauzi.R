@@ -90,8 +90,12 @@
   if (any(x < 0)) stop("gamma kernels need data on [0, infinity).")
   if (any(v < 0)) stop("the evaluation points must lie in [0, infinity).")
   shape <- 1 / sqrt(h)
-  vapply(v, function(pt) mean(stats::dgamma(x, shape = shape,
-                                            scale = pt * sqrt(h) + h)), numeric(1))
+  vapply(v, function(pt) {
+    mean(stats::dgamma(x,
+      shape = shape,
+      scale = pt * sqrt(h) + h
+    ))
+  }, numeric(1))
 }
 
 #' Exact one-sided Kolmogorov distribution function, Birnbaum-Tingey
@@ -103,9 +107,14 @@
 #' the last bit rather than merely to plotting accuracy.
 #' @noRd
 .morie_fauzi_ksone <- function(d, n) {
-  d <- as.numeric(d); n <- as.integer(n)
-  if (d <= 0) return(0)
-  if (d >= 1) return(1)
+  d <- as.numeric(d)
+  n <- as.integer(n)
+  if (d <= 0) {
+    return(0)
+  }
+  if (d >= 1) {
+    return(1)
+  }
   limit <- as.integer(n * (1 - d))
   s <- 0
   for (j in 0:limit) {

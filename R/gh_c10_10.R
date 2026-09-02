@@ -21,7 +21,8 @@
 #' @examples
 #' Ghosalfrspoireg()
 Ghosalfrspoireg <- function(n = 800, K = 3, seed = 42) {
-  n <- as.integer(n); K <- as.integer(K)
+  n <- as.integer(n)
+  K <- as.integer(K)
   if (n < 1L) stop("n must be positive")
   if (K < 1L) stop("K must be positive")
   e <- .ghc_rng(seed)
@@ -30,7 +31,9 @@ Ghosalfrspoireg <- function(n = 800, K = 3, seed = 42) {
   # Knuth's product method, one uniform at a time, so the draw sequence
   # matches the Python arm exactly.
   rpois1 <- function(lam) {
-    L <- exp(-lam); k <- 0; p <- 1
+    L <- exp(-lam)
+    k <- 0
+    p <- 1
     repeat {
       p <- p * .ghc_unif(e, 1L)
       if (p <= L) return(k)

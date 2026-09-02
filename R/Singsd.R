@@ -44,7 +44,8 @@
 #' Singsd(y = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
 Singsd <- function(y, window) {
   x <- .s03vec(y)
-  N <- length(x); M <- as.integer(window)
+  N <- length(x)
+  M <- as.integer(window)
   if (N < 3L) stop("singular_spectrum: y must have at least 3 points")
   if (M < 2L || M > N - 1L)
     stop("singular_spectrum: window must satisfy 2 <= window <= len(y) - 1")
@@ -62,7 +63,8 @@ Singsd <- function(y, window) {
   for (i in seq_len(M)) for (j in seq_len(M)) C[i, j] <- cvec[abs(i - j) + 1L]
 
   jc <- .s03jacobi(C)
-  vals <- jc$values; vecs <- jc$vectors
+  vals <- jc$values
+  vecs <- jc$vectors
   ord <- rev(seq_len(M))
   lam <- vals[ord]
   E <- vecs[, ord, drop = FALSE]
@@ -82,7 +84,8 @@ Singsd <- function(y, window) {
     for (t in seq_len(N)) {
       lo <- max(1L, t - K + 1L)
       hi <- min(M, t)
-      s <- 0; cnt <- 0L
+      s <- 0
+      cnt <- 0L
       for (j in lo:hi) {
         s <- s + A[t - j + 1L, k] * E[j, k]
         cnt <- cnt + 1L

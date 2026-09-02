@@ -20,8 +20,12 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Waicd(V)
 Waicd <- function(log_lik) {
-  L <- as.matrix(log_lik); Sn <- nrow(L); n <- ncol(L)
-  lppd <- 0; pw <- 0; high <- 0L
+  L <- as.matrix(log_lik)
+  Sn <- nrow(L)
+  n <- ncol(L)
+  lppd <- 0
+  pw <- 0
+  high <- 0L
   for (i in seq_len(n)) {
     col <- L[, i]
     m <- max(col)

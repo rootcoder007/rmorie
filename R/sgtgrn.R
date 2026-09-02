@@ -18,7 +18,8 @@
 #' @references Kipf, T. N. & Welling, M. (2017). ICLR 2017, equation (2).
 #' @export
 Sgtgrn <- function(A_hat, X, W, activation = "relu") {
-  A <- as.matrix(A_hat); n <- nrow(A)
+  A <- as.matrix(A_hat)
+  n <- nrow(A)
   Ai <- A + diag(1, n)
   d <- rowSums(Ai)
   An <- Ai / outer(sqrt(d), sqrt(d))

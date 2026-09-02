@@ -41,10 +41,13 @@ Klmcmc <- function(chain, target, bins = 20, lo = NULL, hi = NULL) {
   if (any(q < 0)) stop("kl_mcmc_diagnostic: target must be non-negative")
   if (sum(q) <= 0) stop("kl_mcmc_diagnostic: target has no mass on the binning range")
   q <- q / sum(q)
-  kl <- 0; empty <- 0L
+  kl <- 0
+  empty <- 0L
   for (i in seq_len(B)) {
     if (p[i] <= 0) next
-    if (q[i] <= 0) { kl <- Inf; empty <- empty + 1L; next }
+    if (q[i] <= 0) { kl <- Inf
+    empty <- empty + 1L
+    next }
     kl <- kl + p[i] * log(p[i] / q[i])
   }
   .t1_result(estimate = kl, kl = kl, p = p, q = q, unsupported_bins = empty,

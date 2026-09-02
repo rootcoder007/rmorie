@@ -44,7 +44,8 @@
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .cmlmer_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   npt <- as.integer(points)
   nst <- as.integer(stages)
   for (s in seq_len(nst)) {
@@ -189,20 +190,26 @@
   D <- .cmlmer_snap12(1.0 - K)
   alive <- seq_len(n)
   while (length(alive) > g) {
-    bi <- -1L; bj <- -1L; best <- NULL
+    bi <- -1L
+    bj <- -1L
+    best <- NULL
     for (ai in seq_len(length(alive) - 1L)) {
       for (aj in seq.int(ai + 1L, length(alive))) {
         d <- D[alive[ai], alive[aj]]
         if (is.null(best) || d < best - 1e-15) {
-          best <- d; bi <- alive[ai]; bj <- alive[aj]
+          best <- d
+          bi <- alive[ai]
+          bj <- alive[aj]
         }
       }
     }
-    na <- length(members[[bi]]); nb <- length(members[[bj]])
+    na <- length(members[[bi]])
+    nb <- length(members[[bj]])
     for (cc in alive) {
       if (cc == bi || cc == bj) next
       nd <- .cmlmer_snap12((na * D[bi, cc] + nb * D[bj, cc]) / (na + nb))
-      D[bi, cc] <- nd; D[cc, bi] <- nd
+      D[bi, cc] <- nd
+      D[cc, bi] <- nd
     }
     members[[bi]] <- c(members[[bi]], members[[bj]])
     members[[bj]] <- integer(0)
@@ -230,7 +237,8 @@
 #' @return A list with \code{ll}, \code{delta}, \code{beta}, \code{s2g}, \code{L}.
 #' @export
 .cmlmer_reml_at <- function(logdelta, Vk, y, X) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   delta <- exp(logdelta)
   V <- Vk
   diag(V) <- diag(V) + delta
@@ -296,7 +304,8 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
                         "%d, got %d"), n, g))
 
   cl <- .cmlmer_upgma(Km, g)
-  lab <- cl$lab; groups <- cl$groups
+  lab <- cl$lab
+  groups <- cl$groups
   ng <- length(groups)
   Kg <- matrix(0.0, ng, ng)
   for (a in seq_len(ng)) for (b in seq_len(ng))
@@ -310,8 +319,11 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
     function(t) .cmlmer_reml_at(t, ZKZ, yv, Xm)$ll,
     as.numeric(log_delta_lo), as.numeric(log_delta_hi))
   fit <- .cmlmer_reml_at(logdelta, ZKZ, yv, Xm)
-  ll <- fit$ll; delta <- fit$delta; beta0 <- fit$beta
-  s2g <- fit$s2g; L <- fit$L
+  ll <- fit$ll
+  delta <- fit$delta
+  beta0 <- fit$beta
+  s2g <- fit$s2g
+  L <- fit$L
   s2e <- delta * s2g
   h2 <- s2g / (s2g + s2e)
 
@@ -324,7 +336,10 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
   }
 
   # ---- per-marker GLS test under the fitted covariance
-  mb <- numeric(nm); mse <- numeric(nm); mt <- numeric(nm); mp <- numeric(nm)
+  mb <- numeric(nm)
+  mse <- numeric(nm)
+  mt <- numeric(nm)
+  mp <- numeric(nm)
   Viy <- .cmlmer_solve(L, yv)
   for (j in seq_len(nm)) {
     Xj <- cbind(Xm, Mm[, j])
@@ -336,17 +351,24 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
     rhs <- as.numeric(crossprod(Xj, Viy))
     Lj <- tryCatch(.cmlmer_chol(A), error = function(e) NULL)
     if (is.null(Lj)) {
-      mb[j] <- NaN; mse[j] <- NaN; mt[j] <- NaN; mp[j] <- NaN; next
+      mb[j] <- NaN
+      mse[j] <- NaN
+      mt[j] <- NaN
+      mp[j] <- NaN
+      next
     }
     bj <- .cmlmer_solve(Lj, rhs)
     r <- yv - as.numeric(Xj %*% bj)
     Vir <- .cmlmer_solve(L, r)
     s2 <- sum(r * Vir) / (n - q)
-    e <- numeric(q); e[q] <- 1.0
+    e <- numeric(q)
+    e[q] <- 1.0
     cjj <- .cmlmer_solve(Lj, e)[q]
     se <- sqrt(max(s2 * cjj, 0.0))
     tj <- if (se > .cmlmer_EPS) bj[q] / se else NaN
-    mb[j] <- bj[q]; mse[j] <- se; mt[j] <- tj
+    mb[j] <- bj[q]
+    mse[j] <- se
+    mt[j] <- tj
     mp[j] <- if (!is.nan(tj)) 2.0 * (1.0 - pnorm(abs(tj))) else NaN
   }
 
@@ -357,7 +379,8 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
         stop(sprintf("cmlmer: compare_levels entry %d is outside 1..%d",
                      gl, n))
       cl2 <- .cmlmer_upgma(Km, gl)
-      gr2 <- cl2$groups; ng2 <- length(gr2)
+      gr2 <- cl2$groups
+      ng2 <- length(gr2)
       Kg2 <- matrix(0.0, ng2, ng2)
       for (a in seq_len(ng2)) for (b in seq_len(ng2))
         Kg2[a, b] <- sum(Km[gr2[[a]], gr2[[b]]]) /

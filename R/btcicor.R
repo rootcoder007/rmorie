@@ -36,7 +36,8 @@
 #' Btcicor(c(1, 2, 3, 4, 5), c(2, 1, 4, 3, 5), B = 99)$r_hat
 #' @export
 Btcicor <- function(x, y, B = 999, alpha = 0.05, seed = 1) {
-  xv <- .s03vec(x); yv <- .s03vec(y)
+  xv <- .s03vec(x)
+  yv <- .s03vec(y)
   n <- length(xv)
   if (n == 0L) stop("boot_ci_correlation: x is empty")
   if (length(yv) != n) stop("boot_ci_correlation: x and y have different lengths")
@@ -48,15 +49,18 @@ Btcicor <- function(x, y, B = 999, alpha = 0.05, seed = 1) {
   r_hat <- .s03corr(xv, yv)
   s <- as.numeric(as.integer(seed)) %% 2147483647
   if (s <= 0) s <- s + 2147483646
-  zs <- numeric(0); rs <- numeric(0)
+  zs <- numeric(0)
+  rs <- numeric(0)
   for (b in seq_len(Bn)) {
-    xa <- numeric(n); ya <- numeric(n)
+    xa <- numeric(n)
+    ya <- numeric(n)
     for (i in seq_len(n)) {
       s <- (16807 * s) %% 2147483647
       u <- (s - 1) / 2147483646
       j <- floor(u * n)
       if (j >= n) j <- n - 1
-      xa[i] <- xv[j + 1L]; ya[i] <- yv[j + 1L]
+      xa[i] <- xv[j + 1L]
+      ya[i] <- yv[j + 1L]
     }
     r <- .s03corr(xa, ya)
     if (is.na(r)) next

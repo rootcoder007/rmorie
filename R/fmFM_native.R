@@ -56,7 +56,8 @@ predict_naive <- function(x, w0, w, V) {
 #' @export
 .fmFM_predict <- function(x, w0, w, V) {
   xs <- as.numeric(x)
-  n <- length(xs); kk <- length(V[[1]])
+  n <- length(xs)
+  kk <- length(V[[1]])
   s <- as.numeric(w0) + sum(w * xs)
   for (f in seq_len(kk)) {
     a <- sum(vapply(seq_len(n), function(i) V[[i]][f] * xs[i],
@@ -127,19 +128,22 @@ design_mf <- function(u, i, n_users, n_items) {
 #' @export
 fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
                    lam = 0.01, seed = 0) {
-  rows <- as.matrix(X); storage.mode(rows) <- "double"
+  rows <- as.matrix(X)
+  storage.mode(rows) <- "double"
   t <- as.numeric(y)
   if (nrow(rows) != length(t)) {
     stop(sprintf("fmFM: %d rows but %d targets", nrow(rows), length(t)))
   }
   if (nrow(rows) == 0L) stop("fmFM: no data")
-  n <- ncol(rows); kk <- as.integer(k_dim)
+  n <- ncol(rows)
+  kk <- as.integer(k_dim)
   if (kk < 1L) stop("fmFM: k must be at least 1")
   set.seed(seed)
   w0 <- 0
   w <- rep(0, n)
   V <- replicate(kk, runif(n) - 0.5) * 0.1
-  a <- as.numeric(alpha); lm <- as.numeric(lam)
+  a <- as.numeric(alpha)
+  lm <- as.numeric(lam)
   hist <- numeric(iters)
   for (it in seq_len(iters)) {
     for (r in seq_len(nrow(rows))) {

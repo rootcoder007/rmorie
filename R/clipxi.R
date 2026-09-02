@@ -41,7 +41,8 @@ Clipxi <- function(image, backbone = "vit-l/14", seed = 42) {
   W <- ncol(M)
   if (H %% P != 0L || W %% P != 0L)
     stop("image dimensions must be multiples of the patch size")
-  gh <- H %/% P; gw <- W %/% P
+  gh <- H %/% P
+  gw <- W %/% P
   npatch <- gh * gw
   dim <- min(as.integer(cfg[["width"]]), 64L)
   out_dim <- min(as.integer(cfg[["embed"]]), 32L)

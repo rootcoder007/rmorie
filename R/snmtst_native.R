@@ -88,7 +88,8 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
   if (Mv < 0.0)
     stop(sprintf("snmtst: M must be non-negative, got %r", M))
   sp <- .snmtst_split(beta, n_pre, n_post)
-  pre <- sp$pre; post <- sp$post
+  pre <- sp$pre
+  post <- sp$post
   lv <- .snmtst_target(post, l_vec)
   Tp <- length(post)
   if (family == "SD") {
@@ -108,11 +109,13 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
     point <- sum(lv * (post - lin))
     if (is.null(grid)) {
       half <- Mv * sum(abs(c_coef))
-      lo <- point - half; hi <- point + half
+      lo <- point - half
+      hi <- point + half
     } else {
       br <- .snmtst_brute(point, c_coef, Mv, as.integer(grid),
                           post = post, lin = lin, lv = lv)
-      lo <- br$lo; hi <- br$hi
+      lo <- br$lo
+      hi <- br$hi
     }
     return(list(lower = lo, upper = hi, estimate = point,
                 linear_path = lin, max_deviation = dev,
@@ -162,23 +165,29 @@ identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
                   function(j) -M + 2.0 * M * j / (grid - 1L),
                   numeric(1))
   idx <- rep(0L, p)
-  lo <- NULL; hi <- NULL
+  lo <- NULL
+  hi <- NULL
   direct <- !is.null(post) && !is.null(lin) && !is.null(lv)
   repeat {
     if (direct) {
       r <- steps[idx + 1L]
-      e_prev2 <- 0.0; e_prev <- 0.0; e <- numeric(p)
+      e_prev2 <- 0.0
+      e_prev <- 0.0
+      e <- numeric(p)
       for (t in seq_len(p)) {
         cur <- 2.0 * e_prev - e_prev2 + r[t]
         e[t] <- cur
-        e_prev2 <- e_prev; e_prev <- cur
+        e_prev2 <- e_prev
+        e_prev <- cur
       }
       val <- sum(lv * (post - (lin + e)))
     } else {
       val <- point - sum(c * steps[idx + 1L])
     }
-    if (is.null(lo)) { lo <- val; hi <- val }
-    else { lo <- min(lo, val); hi <- max(hi, val) }
+    if (is.null(lo)) { lo <- val
+    hi <- val }
+    else { lo <- min(lo, val)
+    hi <- max(hi, val) }
     q <- p
     while (q >= 1L) {
       idx[q] <- idx[q] + 1L
@@ -250,7 +259,8 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
     return(list(breakdown = as.numeric(M_max), family = family,
                 sign = sign,
                 status = "survives the whole search range; increase M_max to find the true breakdown"))
-  lo <- 0.0; hi <- as.numeric(M_max)
+  lo <- 0.0
+  hi <- as.numeric(M_max)
   while (hi - lo > tol) {
     mid <- 0.5 * (lo + hi)
     if (holds(mid)) lo <- mid else hi <- mid

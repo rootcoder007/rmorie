@@ -20,7 +20,8 @@
 #' @examples
 #' Fano(M = 5L, mutual_info = 5L)
 Fano <- function(M, mutual_info, base_e = TRUE) {
-  M <- as.integer(M); I <- as.numeric(mutual_info)
+  M <- as.integer(M)
+  I <- as.numeric(mutual_info)
   if (M < 2L) stop("M must be at least 2")
   if (I < 0) stop("the mutual information must be non-negative")
   lg <- if (isTRUE(base_e)) log(M) else log(M, base = 2)

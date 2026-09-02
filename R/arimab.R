@@ -23,7 +23,9 @@
 #' Arimahr(V)
 Arimahr <- function(y, p = 1, q = 1, d = 0, m = NULL) {
   y <- .t1_vec(y)
-  p <- as.integer(p); q <- as.integer(q); d <- as.integer(d)
+  p <- as.integer(p)
+  q <- as.integer(q)
+  d <- as.integer(d)
   if (p < 0L || q < 0L || d < 0L) stop("orders must be non-negative")
   w <- y
   if (d > 0L) for (i in seq_len(d)) w <- diff(w)
@@ -45,8 +47,10 @@ Arimahr <- function(y, p = 1, q = 1, d = 0, m = NULL) {
   if (q > 0L) Xb <- cbind(Xb, sapply(seq_len(q), function(j) eh[jdx - j]))
   dim(Xb) <- c(length(jdx), 1L + p + q)
   fb <- .t1_lstsq(Xb, w[jdx])
-  b <- fb$beta; res <- fb$resid
-  nobs <- length(jdx); k <- p + q + 1L
+  b <- fb$beta
+  res <- fb$resid
+  nobs <- length(jdx)
+  k <- p + q + 1L
   .t1_result(phi = if (p > 0L) b[2:(1L + p)] else numeric(0),
              theta = if (q > 0L) b[(2L + p):(1L + p + q)] else numeric(0),
              intercept = b[1],

@@ -38,7 +38,9 @@ morie_diffRC_noise_schedule <- function(T, scale = 0.001,
   s <- as.numeric(scale)
   if (n < 1L) stop("diffRC: T must be at least 1")
   if (s < 0) stop("diffRC: the noise scale cannot be negative")
-  betas <- numeric(n); abar <- numeric(n); acc <- 1
+  betas <- numeric(n)
+  abar <- numeric(n)
+  acc <- 1
   denom <- max(n - 1L, 1L)
   for (t in seq_len(n)) {
     b <- s * (beta_min + (beta_max - beta_min) * (t - 1L) / denom)
@@ -68,7 +70,8 @@ morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
   if (ab < 0 || ab > 1)
     stop(sprintf("diffRC: alpha_bar must lie in [0,1], got %s",
                  format(ab)))
-  sm <- sqrt(ab); sv <- sqrt(max(1 - ab, 0))
+  sm <- sqrt(ab)
+  sv <- sqrt(max(1 - ab, 0))
   mn <- sm * x
   if (is.null(rng) || sv <= 1e-12)
     return(list(x_t = mn, mean = mn, std = sv, sampled = FALSE))
@@ -88,10 +91,12 @@ morie_diffRC_forward_corrupt <- function(x0, alpha_bar_t, rng = NULL) {
 #' @export
 morie_diffRC_posterior_mean <- function(x_t, x0_hat, alpha_bar_t,
                                         alpha_bar_prev, beta_t) {
-  xt <- as.numeric(x_t); x0 <- as.numeric(x0_hat)
+  xt <- as.numeric(x_t)
+  x0 <- as.numeric(x0_hat)
   if (length(xt) != length(x0))
     stop("diffRC: x_t and the estimate of x_0 differ in length")
-  ab <- as.numeric(alpha_bar_t); abp <- as.numeric(alpha_bar_prev)
+  ab <- as.numeric(alpha_bar_t)
+  abp <- as.numeric(alpha_bar_prev)
   b <- as.numeric(beta_t)
   denom <- 1 - ab
   if (denom <= 1e-12)
@@ -124,7 +129,8 @@ morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
                 effective_steps = as.numeric(n)))
   s <- as.numeric(smoothing)
   w <- sqrt(L) + s
-  z <- sum(w); p <- w / z
+  z <- sum(w)
+  p <- w / z
   eff <- 1 / sum(p ^ 2)
   list(weights = p, uniform = FALSE, effective_steps = eff,
        note = paste("effective sample size falls as the loss",
@@ -145,7 +151,9 @@ morie_diffRC_importance_weights <- function(step_losses, uniform = FALSE,
 #' @export
 morie_diffRC_denoise <- function(x_t, model, schedule, t_start = NULL) {
   x <- as.numeric(x_t)
-  ab <- schedule$alpha_bar; beta <- schedule$beta; T <- schedule$T
+  ab <- schedule$alpha_bar
+  beta <- schedule$beta
+  T <- schedule$T
   t <- if (is.null(t_start)) T - 1L else as.integer(t_start)
   if (t < 0L || t >= T)
     stop("diffRC: t is outside the schedule")

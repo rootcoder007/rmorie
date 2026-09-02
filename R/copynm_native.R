@@ -79,7 +79,8 @@
   for (t in seq_len(n)) S[t + 1L] <- S[t] + v[t]
   Sn <- S[n + 1L]
   best <- -1.0
-  bi <- 0L; bj <- 0L
+  bi <- 0L
+  bj <- 0L
   # i in [0, n-1], j in [i+1, n]; both half-open with Python
   for (i in 0:(n - 1L)) {
     for (j in (i + 1L):n) {
@@ -89,7 +90,9 @@
       inner <- (S[j + 1L] - S[i + 1L]) / m - (Sn - S[j + 1L] + S[i + 1L]) / k
       z <- abs(inner) / sqrt(1.0 / m + 1.0 / k)
       if (z > best) {
-        best <- z; bi <- i; bj <- j
+        best <- z
+        bi <- i
+        bj <- j
       }
     }
   }
@@ -114,7 +117,9 @@
     u <- as.integer(.ghc_unif(e, 1L) * (t + 1L))
     if (u > t) u <- t                    # match Python's int() truncation
     if (u < 0L) u <- 0L
-    tmp <- w[t + 1L]; w[t + 1L] <- w[u + 1L]; w[u + 1L] <- tmp
+    tmp <- w[t + 1L]
+    w[t + 1L] <- w[u + 1L]
+    w[u + 1L] <- tmp
   }
   invisible(w)
 }
@@ -173,7 +178,9 @@ cbs_statistic <- function(x) {
   v <- v[is.finite(v)]
   if (length(v) < 1L) stop("copynm: x must be non-empty")
   r <- .copynm_cbs_stat(v)
-  r$z <- unname(r$z); r$i <- as.integer(r$i); r$j <- as.integer(r$j)
+  r$z <- unname(r$z)
+  r$i <- as.integer(r$i)
+  r$j <- as.integer(r$j)
   r
 }
 
@@ -200,7 +207,8 @@ cbs_statistic <- function(x) {
 #' @export
 copynm <- function(x, alpha = 0.01, permutations = 1000L, min_width = 2L,
                    undo_splits = TRUE, seed = 0L, max_depth = 50L) {
-  v <- as.numeric(x); v <- v[is.finite(v)]
+  v <- as.numeric(x)
+  v <- v[is.finite(v)]
   if (length(v) < 1L) stop("copynm: x must be non-empty")
   alpha <- as.numeric(alpha)
   if (!is.finite(alpha) || alpha <= 0 || alpha >= 1)
@@ -221,10 +229,13 @@ copynm <- function(x, alpha = 0.01, permutations = 1000L, min_width = 2L,
     n <- b - a
     if (n < max(3L, min_width) || depth > max_depth) return(invisible())
     seg <- v[(a + 1L):b]
-    lo_v <- min(seg); hi_v <- max(seg)
+    lo_v <- min(seg)
+    hi_v <- max(seg)
     if (hi_v - lo_v <= 0.0) return(invisible())  # constant: skip
     st <- .copynm_cbs_stat(seg)
-    z <- st$z; i <- st$i; j <- st$j
+    z <- st$z
+    i <- st$i
+    j <- st$j
     exceed <- 0L
     limit <- alpha * permutations
     used <- 0L
@@ -269,7 +280,8 @@ copynm <- function(x, alpha = 0.01, permutations = 1000L, min_width = 2L,
   segs <- list()
   fitted <- numeric(length(v))
   for (t in seq_len(length(edges) - 1L)) {
-    a <- edges[t]; b <- edges[t + 1L]
+    a <- edges[t]
+    b <- edges[t + 1L]
     m <- mean(v[(a + 1L):b])
     segs[[length(segs) + 1L]] <- list(start = a, end = b, mean = m)
     fitted[(a + 1L):b] <- m

@@ -21,7 +21,9 @@
 #' @examples
 #' Scoretest(successes = 5L, n = 5L)
 Scoretest <- function(successes, n, p0 = 0.5) {
-  n <- as.integer(n); S <- as.numeric(successes); p0 <- as.numeric(p0)
+  n <- as.integer(n)
+  S <- as.numeric(successes)
+  p0 <- as.numeric(p0)
   if (n < 1L) stop("n must be at least 1")
   if (S < 0 || S > n) stop("successes must lie in 0..n")
   if (p0 <= 0 || p0 >= 1) stop("p0 must lie strictly between 0 and 1")

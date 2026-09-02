@@ -38,7 +38,8 @@
 #' set.seed(1)
 #' Causgsw(s_sample = runif(50, 0.1, 0.9), s_target = runif(30, 0.1, 0.9))
 Causgsw <- function(s_sample, s_target) {
-  ss <- as.numeric(s_sample); st <- as.numeric(s_target)
+  ss <- as.numeric(s_sample)
+  st <- as.numeric(s_target)
   if (length(ss) < 1L || length(st) < 2L) {
     stop("need at least 1 sample and 2 target scores", call. = FALSE)
   }

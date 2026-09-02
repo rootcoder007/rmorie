@@ -48,7 +48,12 @@ Mvedet <- function(X, h = NULL, n_starts = 100000L) {
   if (hh <= p) stop("mve: h must exceed p")
   if (hh > n) stop("mve: h cannot exceed the number of observations")
   if (n < p + 1L) stop("mve: need at least p + 1 observations")
-  bobj <- NULL; bm2 <- NULL; bmu <- NULL; bC <- NULL; bJ <- NULL; bcov <- NULL
+  bobj <- NULL
+  bm2 <- NULL
+  bmu <- NULL
+  bC <- NULL
+  bJ <- NULL
+  bcov <- NULL
   for (J in .rscombosstride(n, p + 1L, as.integer(n_starts))) {
     mc <- .rsmeancov(Xm, J)
     dd <- .rsmahal2(Xm, mc$mu, mc$S)
@@ -58,7 +63,11 @@ Mvedet <- function(X, h = NULL, n_starts = 100000L) {
     dC <- .rscovdet(mc$S)
     obj <- (m2 ^ p) * dC
     if (is.null(bobj) || obj < bobj) {
-      bobj <- obj; bm2 <- m2; bmu <- mc$mu; bC <- mc$S; bJ <- J
+      bobj <- obj
+      bm2 <- m2
+      bmu <- mc$mu
+      bC <- mc$S
+      bJ <- J
       bcov <- sort(ord[seq_len(hh)])
     }
   }

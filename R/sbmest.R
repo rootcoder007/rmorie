@@ -16,22 +16,28 @@
 #' sbmest(matrix(c(0,1,1,0), 2, 2), c(1, 1))$block_sizes
 #' @export
 sbmest <- function(A, blocks) {
-  a <- as.matrix(A); dimnames(a) <- NULL
+  a <- as.matrix(A)
+  dimnames(a) <- NULL
   n <- nrow(a)
   lab <- as.character(blocks)
   keys <- unique(lab)
   b <- length(keys)
   idx <- match(lab, keys)
-  e <- matrix(0, b, b); np <- matrix(0, b, b)
+  e <- matrix(0, b, b)
+  np <- matrix(0, b, b)
   for (i in seq_len(n - 1L)) for (j in (i + 1L):n) {
-    r <- idx[i]; s <- idx[j]
-    e[r, s] <- e[r, s] + a[i, j]; np[r, s] <- np[r, s] + 1
-    if (r != s) { e[s, r] <- e[s, r] + a[i, j]; np[s, r] <- np[s, r] + 1 }
+    r <- idx[i]
+    s <- idx[j]
+    e[r, s] <- e[r, s] + a[i, j]
+    np[r, s] <- np[r, s] + 1
+    if (r != s) { e[s, r] <- e[s, r] + a[i, j]
+    np[s, r] <- np[s, r] + 1 }
   }
   p <- ifelse(np > 0, e / np, 0)
   ll <- 0
   for (i in seq_len(n - 1L)) for (j in (i + 1L):n) {
-    pr <- p[idx[i], idx[j]]; y <- a[i, j]
+    pr <- p[idx[i], idx[j]]
+    y <- a[i, j]
     if (pr > 0 && pr < 1) ll <- ll + y * log(pr) + (1 - y) * log(1 - pr)
   }
   sizes <- as.integer(tabulate(idx, nbins = b))

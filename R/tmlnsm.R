@@ -24,7 +24,10 @@
 #' @examples
 #' Tmlnsm(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), bw = 0.5)
 Tmlnsm <- function(y, D, X, bw) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv); bw <- as.numeric(bw)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
+  bw <- as.numeric(bw)
   if (n == 0L || length(Dv) != n)
     stop("Tmlnsm: y and D must share one length")
   if (!(bw > 0)) stop("Tmlnsm: bw must be positive")
@@ -33,18 +36,23 @@ Tmlnsm <- function(y, D, X, bw) {
   W <- cbind(1, Xm)
   gb <- .s4_glmbin(W, Dv)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)
-  grid <- sort(unique(yv)); K <- length(grid)
+  grid <- sort(unique(yv))
+  K <- length(grid)
   bk <- .tmlmpi_cdf_bank(yv, Dv, W, g, grid)
-  F <- bk$F; IC <- bk$IC
+  F <- bk$F
+  IC <- bk$IC
   out <- list()
   for (a in 1:2) {
     j <- K
-    for (k in seq_len(K)) if (F[[a]][k] >= 0.5) { j <- k; break }
+    for (k in seq_len(K)) if (F[[a]][k] >= 0.5) { j <- k
+    break }
     if (j == 1L) {
-      m <- grid[1L]; w <- 0
+      m <- grid[1L]
+      w <- 0
       icf <- IC[[a]][1L, ]
     } else {
-      f0 <- F[[a]][j - 1L]; f1 <- F[[a]][j]
+      f0 <- F[[a]][j - 1L]
+      f1 <- F[[a]][j]
       w <- if (f1 <= f0) 0 else (0.5 - f0) / (f1 - f0)
       m <- grid[j - 1L] + w * (grid[j] - grid[j - 1L])
       icf <- (1 - w) * IC[[a]][j - 1L, ] + w * IC[[a]][j, ]

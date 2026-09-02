@@ -54,7 +54,9 @@ Aitzmu <- function(X, delta) {
       }
     }
   }
-  list(X_imp = if (was_matrix) out else as.numeric(out[1, ]), estimate = out[1, 1],
-       n_zero = nz, n = nrow(rows), D = D,
-       method = "Martin-Fernandez et al. (2003) multiplicative replacement")
+  list(
+    X_imp = if (was_matrix) out else as.numeric(out[1, ]), estimate = out[1, 1],
+    n_zero = nz, n = nrow(rows), D = D,
+    method = "Martin-Fernandez et al. (2003) multiplicative replacement"
+  )
 }

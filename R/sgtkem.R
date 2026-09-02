@@ -14,7 +14,8 @@
 #' sgtkem(matrix(c(0,1,0,1,0,1,0,1,0), 3, 3), alpha = 0.1)$centrality
 #' @export
 sgtkem <- function(A, alpha = NULL, beta = 1) {
-  m <- as.matrix(A); dimnames(m) <- NULL
+  m <- as.matrix(A)
+  dimnames(m) <- NULL
   n <- nrow(m)
   sym <- 0.5 * (m + t(m))
   rho <- max(abs(eigen(sym, symmetric = TRUE, only.values = TRUE)$values))

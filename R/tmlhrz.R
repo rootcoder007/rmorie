@@ -28,7 +28,9 @@
 #' @examples
 #' Tmlhrz(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlhrz <- function(time, event, D, X) {
-  tv <- as.numeric(time); ev <- as.numeric(event); Dv <- as.numeric(D)
+  tv <- as.numeric(time)
+  ev <- as.numeric(event)
+  Dv <- as.numeric(D)
   n <- length(tv)
   if (n == 0L || length(ev) != n || length(Dv) != n)
     stop("Tmlhrz: time, event and D must share one length")
@@ -37,13 +39,17 @@ Tmlhrz <- function(time, event, D, X) {
   W <- cbind(1, Xm)
   grid <- sort(unique(tv[ev > 0.5]))
   if (length(grid) == 0L) stop("Tmlhrz: no observed events")
-  K <- length(grid); t0 <- grid[K]
+  K <- length(grid)
+  t0 <- grid[K]
   gb <- .s4_glmbin(W, Dv)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)
 
-  ii <- integer(0); kk <- integer(0); ybin <- numeric(0)
+  ii <- integer(0)
+  kk <- integer(0)
+  ybin <- numeric(0)
   for (i in seq_len(n)) for (k in seq_len(K)) if (grid[k] <= tv[i]) {
-    ii <- c(ii, i); kk <- c(kk, k)
+    ii <- c(ii, i)
+    kk <- c(kk, k)
     ybin <- c(ybin, if (ev[i] > 0.5 && grid[k] == tv[i]) 1 else 0)
   }
   rows <- cbind(1, grid[kk], Dv[ii], Xm[ii, , drop = FALSE])
@@ -53,28 +59,36 @@ Tmlhrz <- function(time, event, D, X) {
     z <- sum(c(1, grid[k], a, Xm[i, ]) * hb)
     .s4_clip(.s4_expit(z), 1e-6, 1 - 1e-6)
   }
-  h0 <- matrix(0, n, K); h1 <- matrix(0, n, K)
+  h0 <- matrix(0, n, K)
+  h1 <- matrix(0, n, K)
   for (i in seq_len(n)) for (k in seq_len(K)) {
-    h0[i, k] <- haz(i, k, 0); h1[i, k] <- haz(i, k, 1)
+    h0[i, k] <- haz(i, k, 0)
+    h1[i, k] <- haz(i, k, 1)
   }
   curves <- function(sh0, sh1) {
-    s0 <- matrix(0, n, K); s1 <- matrix(0, n, K)
+    s0 <- matrix(0, n, K)
+    s1 <- matrix(0, n, K)
     for (i in seq_len(n)) {
-      p0 <- 1; p1 <- 1
+      p0 <- 1
+      p1 <- 1
       for (k in seq_len(K)) {
-        a0 <- h0[i, k]; a1 <- h1[i, k]
+        a0 <- h0[i, k]
+        a1 <- h1[i, k]
         if (!is.null(sh0)) {
           a0 <- .s4_clip(.s4_expit(.s4_logit(a0) + sh0[i, k]), 1e-12, 1 - 1e-12)
           a1 <- .s4_clip(.s4_expit(.s4_logit(a1) + sh1[i, k]), 1e-12, 1 - 1e-12)
         }
-        p0 <- p0 * (1 - a0); p1 <- p1 * (1 - a1)
-        s0[i, k] <- p0; s1[i, k] <- p1
+        p0 <- p0 * (1 - a0)
+        p1 <- p1 * (1 - a1)
+        s0[i, k] <- p0
+        s1[i, k] <- p1
       }
     }
     list(s0 = s0, s1 = s1)
   }
   S0 <- curves(NULL, NULL)
-  H0 <- matrix(0, n, K); H1 <- matrix(0, n, K)
+  H0 <- matrix(0, n, K)
+  H1 <- matrix(0, n, K)
   for (i in seq_len(n)) for (k in seq_len(K)) {
     pv0 <- if (k > 1L) S0$s0[i, k - 1L] else 1
     pv1 <- if (k > 1L) S0$s1[i, k - 1L] else 1
@@ -100,10 +114,13 @@ Tmlhrz <- function(time, event, D, X) {
   psi1 <- sum(Sst$s1[, K]) / n
   if (psi0 <= 0 || psi0 >= 1 || psi1 <= 0 || psi1 >= 1)
     stop("Tmlhrz: targeted survival left (0, 1); grid too coarse")
-  L0 <- -log(psi0); L1 <- -log(psi1); est <- L1 / L0
+  L0 <- -log(psi0)
+  L1 <- -log(psi1)
+  est <- L1 / L0
   p <- .s4_clip(.s4_expit(.s4_logit(hobs) + eps * Hobs), 1e-12, 1 - 1e-12)
   term <- Hobs * (ybin - p)
-  ic0 <- numeric(n); ic1 <- numeric(n)
+  ic0 <- numeric(n)
+  ic1 <- numeric(n)
   for (r in seq_along(ii)) {
     if (Dv[ii[r]] > 0.5) ic1[ii[r]] <- ic1[ii[r]] + term[r]
     else ic0[ii[r]] <- ic0[ii[r]] + term[r]

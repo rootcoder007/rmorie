@@ -28,7 +28,8 @@ Otmcluster <- function(X_list, k, max_iter = 10) {
   clouds <- lapply(X_list, as.matrix)
   N <- length(clouds)
   if (N == 0L) stop("no input clouds")
-  n <- nrow(clouds[[1]]); d <- ncol(clouds[[1]])
+  n <- nrow(clouds[[1]])
+  d <- ncol(clouds[[1]])
   for (Xc in clouds) if (nrow(Xc) != n || ncol(Xc) != d)
     stop("all clouds must have the same shape")
   K <- as.integer(k)
@@ -36,7 +37,8 @@ Otmcluster <- function(X_list, k, max_iter = 10) {
     stop("k must lie between 1 and the number of clouds")
   u <- rep(1 / n, n)
   centers <- lapply(seq_len(K), function(c) clouds[[c]])
-  labels <- integer(N); inertia <- 0
+  labels <- integer(N)
+  inertia <- 0
   it <- as.integer(max_iter)
   for (t in seq_len(it)) {
     inertia <- 0

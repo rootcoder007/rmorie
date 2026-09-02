@@ -28,11 +28,13 @@ Ghosalinfdimbvm <- function(theta0 = 0.4, n = 2000, seed = 42) {
     stop("theta0 must lie strictly between 0 and 1")
   e <- .ghc_rng(seed)
   S <- sum(.ghc_unif(e, n) < theta0)
-  a <- 1 + S; b <- 1 + n - S
+  a <- 1 + S
+  b <- 1 + n - S
   mle <- S / n
   sd <- sqrt(mle * (1 - mle) / n)
   grid <- 2000L
-  lo <- max(mle - 6 * sd, 1e-9); hi <- min(mle + 6 * sd, 1 - 1e-9)
+  lo <- max(mle - 6 * sd, 1e-9)
+  hi <- min(mle + 6 * sd, 1 - 1e-9)
   t <- lo + (hi - lo) * (seq_len(grid) - 0.5) / grid
   bpdf <- exp(lgamma(a + b) - lgamma(a) - lgamma(b) +
                 (a - 1) * log(t) + (b - 1) * log(1 - t))

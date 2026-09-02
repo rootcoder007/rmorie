@@ -30,13 +30,15 @@
 #'   Genetics, 38, 226-231.
 #' @export
 morie_ld <- function(locus_a, locus_b) {
-  a <- as.numeric(locus_a); b <- as.numeric(locus_b)
+  a <- as.numeric(locus_a)
+  b <- as.numeric(locus_b)
   if (length(a) != length(b)) stop("Locus arrays must have the same length.")
   if (length(a) == 0L) stop("Arrays must not be empty.")
   if (!all(a %in% c(0, 1))) stop("locus_a must contain only 0 and 1.")
   if (!all(b %in% c(0, 1))) stop("locus_b must contain only 0 and 1.")
   n <- length(a)
-  pA <- mean(a); pB <- mean(b)
+  pA <- mean(a)
+  pB <- mean(b)
   denom <- pA * (1 - pA) * pB * (1 - pB)
   if (denom == 0)
     return(list(name = "LD_r2", statistic = 0, n = n,

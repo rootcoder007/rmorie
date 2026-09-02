@@ -15,7 +15,9 @@
 #' @examples
 #' Mivbound(lower = 5L, upper = 5L, prob = 0.5)
 Mivbound <- function(lower, upper, prob) {
-  L <- .t1_vec(lower); U <- .t1_vec(upper); p <- .t1_vec(prob)
+  L <- .t1_vec(lower)
+  U <- .t1_vec(upper)
+  p <- .t1_vec(prob)
   k <- length(L)
   if (length(U) != k || length(p) != k)
     stop("lower, upper and prob must have the same length")

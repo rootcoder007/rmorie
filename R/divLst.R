@@ -23,7 +23,11 @@ Intradiv <- function(list, sim_matrix = NULL) {
   items <- as.integer(list) + 1L
   S <- .s03mat(sim_matrix)
   kk <- length(items)
-  tot <- 0; ils <- 0; np <- 0L; lo <- Inf; hi <- -Inf
+  tot <- 0
+  ils <- 0
+  np <- 0L
+  lo <- Inf
+  hi <- -Inf
   if (kk > 1L) for (a in seq_len(kk - 1L)) for (b in seq(a + 1L, kk)) {
     s <- S[items[a], items[b]]
     tot <- tot + 1 - s

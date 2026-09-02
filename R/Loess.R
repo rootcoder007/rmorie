@@ -20,17 +20,24 @@
 #' Loess(1:10, c(1.2, 2.3, 2.9, 4.1, 5.2, 5.8, 7.3, 8.1, 8.9, 10.2), 0.5)$fitted
 #' @export
 Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
-  xa <- as.numeric(x); ya <- as.numeric(y)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
   ordr <- base::order(xa)
-  xv <- xa[ordr]; yv <- ya[ordr]
+  xv <- xa[ordr]
+  yv <- ya[ordr]
   n <- length(xv)
-  ys <- numeric(n); rw <- rep(1, n); res <- numeric(n); w <- numeric(n)
+  ys <- numeric(n)
+  rw <- rep(1, n)
+  res <- numeric(n)
+  w <- numeric(n)
   ns <- max(2L, min(n, as.integer(n * span + 1e-7)))
   lowest <- function(xs, nleft, nright, userw) {
     rng <- xv[n] - xv[1]
     h <- max(xs - xv[nleft], xv[nright] - xs)
-    h9 <- 0.999 * h; h1 <- 0.001 * h
-    a <- 0; j <- nleft
+    h9 <- 0.999 * h
+    h1 <- 0.001 * h
+    a <- 0
+    j <- nleft
     while (j <= n) {
       w[j] <<- 0
       r <- abs(xv[j] - xs)
@@ -57,12 +64,15 @@ Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
     sum(w[idx] * yv[idx])
   }
   for (it in 0:as.integer(iterations)) {
-    nleft <- 1L; nright <- ns
+    nleft <- 1L
+    nright <- ns
     for (i in seq_len(n)) {
       while (nright < n) {
-        d1 <- xv[i] - xv[nleft]; d2 <- xv[nright + 1L] - xv[i]
+        d1 <- xv[i] - xv[nleft]
+        d2 <- xv[nright + 1L] - xv[i]
         if (d1 <= d2) break
-        nleft <- nleft + 1L; nright <- nright + 1L
+        nleft <- nleft + 1L
+        nright <- nright + 1L
       }
       val <- lowest(xv[i], nleft, nright, it > 0L)
       ys[i] <- if (is.null(val)) yv[i] else val
@@ -73,7 +83,8 @@ Loess <- function(x, y, span = 2 / 3, iterations = 3L) {
     m1 <- n %/% 2L
     m2 <- n - m1 - 1L
     cmad <- 3 * (absr[m1 + 1L] + absr[m2 + 1L])
-    c9 <- 0.999 * cmad; c1 <- 0.001 * cmad
+    c9 <- 0.999 * cmad
+    c1 <- 0.001 * cmad
     for (i in seq_len(n)) {
       r <- abs(res[i])
       rw[i] <- if (r <= c1) 1 else if (r <= c9) (1 - (r / cmad)^2)^2 else 0

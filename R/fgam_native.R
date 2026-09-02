@@ -24,7 +24,9 @@
 .fgam_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
-  w <- rep(h, n_t); w[1L] <- 0.5 * h; w[n_t] <- 0.5 * h
+  w <- rep(h, n_t)
+  w[1L] <- 0.5 * h
+  w[n_t] <- 0.5 * h
   w
 }
 
@@ -46,7 +48,8 @@
     stop(sprintf("fgam: a cubic basis needs at least %d functions",
                  degree + 1L))
   span <- hi - lo
-  if (span <= .fgam_EPS) { span <- 1.0; hi <- lo + 1.0 }
+  if (span <= .fgam_EPS) { span <- 1.0
+  hi <- lo + 1.0 }
   inner <- if (n_int > 0L)
     lo + span * (seq_len(n_int)) / (n_int + 1.0) else numeric(0)
   c(rep(lo, degree + 1L), inner, rep(hi, degree + 1L))
@@ -100,9 +103,12 @@
   D <- matrix(0.0, max(rows, 0L), n)
   if (rows > 0L) for (i in seq_len(rows)) {
     if (order == 2L) {
-      D[i, i] <- 1.0; D[i, i + 1L] <- -2.0; D[i, i + 2L] <- 1.0
+      D[i, i] <- 1.0
+      D[i, i + 1L] <- -2.0
+      D[i, i + 2L] <- 1.0
     } else {
-      D[i, i] <- -1.0; D[i, i + 1L] <- 1.0
+      D[i, i] <- -1.0
+      D[i, i + 1L] <- 1.0
     }
   }
   crossprod(D)
@@ -125,21 +131,25 @@
 #' @export
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
                                       lam_x = 1.0, lam_t = 1.0) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   y <- as.numeric(Y)
   n <- nrow(Xm)
   if (n == 0L) stop("fgam: no curves")
   if (length(y) != n)
     stop(sprintf("fgam: %d curves but %d responses", n, length(y)))
   T <- ncol(Xm)
-  if (!is.null(basis)) { n_x <- as.integer(basis); n_t <- as.integer(basis) }
-  n_x <- as.integer(n_x); n_t <- as.integer(n_t)
+  if (!is.null(basis)) { n_x <- as.integer(basis)
+  n_t <- as.integer(basis) }
+  n_x <- as.integer(n_x)
+  n_t <- as.integer(n_t)
   if (n_x < 4L || n_t < 4L)
     stop("fgam: each cubic marginal basis needs at least 4 functions")
   w <- .fgam_grid_weights(T)
   grid <- if (T > 1L) (seq_len(T) - 1.0) / (T - 1.0) else 0.0
 
-  lo <- min(Xm); hi <- max(Xm)
+  lo <- min(Xm)
+  hi <- max(Xm)
   kx <- .fgam_knots(lo, hi, n_x)
   kt <- .fgam_knots(0.0, 1.0, n_t)
   Bt <- t(vapply(grid, function(t) .fgam_bspline(t, kt, n_t), numeric(n_t)))
@@ -199,7 +209,8 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
     edf <- edf + sum(zi * as.numeric(backsolve(Lc, forwardsolve(t(Lc), zi))))
   }
 
-  sst <- sum(yc ^ 2); sse <- sum(resid ^ 2)
+  sst <- sum(yc ^ 2)
+  sse <- sum(resid ^ 2)
   r2 <- if (sst > .fgam_EPS) 1.0 - sse / sst else 0.0
 
   nx_out <- 11L
@@ -214,7 +225,8 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
   lin <- 0.0
   for (t in seq_len(T)) {
     col <- vapply(seq_len(nx_out), function(j) surface[[j]][t], numeric(1))
-    mx <- sum(xs) / nx_out; mc <- sum(col) / nx_out
+    mx <- sum(xs) / nx_out
+    mc <- sum(col) / nx_out
     den <- sum((xs - mx) ^ 2)
     sl <- if (den > .fgam_EPS) sum((xs - mx) * (col - mc)) / den else 0.0
     lin <- max(lin, max(abs(col - (mc + sl * (xs - mx)))))

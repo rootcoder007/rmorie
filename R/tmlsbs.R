@@ -28,22 +28,27 @@
 #' @examples
 #' Tmlsbs(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlsbs <- function(y, D, X) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n < 8L || length(Dv) != n)
     stop("Tmlsbs: y and D must share one length >= 8")
   Xm <- as.matrix(X)
   if (nrow(Xm) != n) stop("Tmlsbs: X must have one row per subject")
   p <- ncol(Xm)
   idx <- seq_len(n) - 1L
-  sel <- which(idx %% 2L == 1L); est <- which(idx %% 2L == 0L)
+  sel <- which(idx %% 2L == 1L)
+  est <- which(idx %% 2L == 0L)
   fit <- .s4_ols(cbind(1, Dv[sel]), yv[sel])
   res <- fit$resid
   score <- numeric(p)
   for (j in seq_len(p)) {
     col <- Xm[sel, j]
-    mc <- mean(col); mr <- mean(res)
+    mc <- mean(col)
+    mr <- mean(res)
     num <- sum((col - mc) * (res - mr))
-    dc <- sqrt(sum((col - mc)^2)); dr <- sqrt(sum((res - mr)^2))
+    dc <- sqrt(sum((col - mc)^2))
+    dr <- sqrt(sum((res - mr)^2))
     score[j] <- if (dc > 0 && dr > 0) abs(num) / (dc * dr) else 0
   }
   k <- (p + 1L) %/% 2L

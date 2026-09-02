@@ -19,7 +19,8 @@
 #' @examples
 #' Atompairfp(adjacency = 5L, atomtype = 5L)
 Atompairfp <- function(adjacency, atomtype, nbits = 2048, maxdist = 30) {
-  A <- .t1_mat(adjacency); a <- nrow(A)
+  A <- .t1_mat(adjacency)
+  a <- nrow(A)
   if (ncol(A) != a) stop("adjacency must be square")
   t <- as.integer(.t1_vec(atomtype))
   if (length(t) != a) stop("atomtype must have one entry per atom")
@@ -27,23 +28,29 @@ Atompairfp <- function(adjacency, atomtype, nbits = 2048, maxdist = 30) {
   if (nbits < 1L) stop("nbits must be positive")
   D <- matrix(-1L, a, a)
   for (s in seq_len(a)) {
-    dist <- rep(-1L, a); dist[s] <- 0L; frontier <- s
+    dist <- rep(-1L, a)
+    dist[s] <- 0L
+    frontier <- s
     while (length(frontier) > 0L) {
       nxt <- integer(0)
       for (u in frontier) {
         v <- which(A[u, ] != 0 & dist == -1L)
-        if (length(v) > 0L) { dist[v] <- dist[u] + 1L; nxt <- c(nxt, v) }
+        if (length(v) > 0L) { dist[v] <- dist[u] + 1L
+        nxt <- c(nxt, v) }
       }
       frontier <- nxt
     }
     D[s, ] <- dist
   }
-  bits <- integer(nbits); cnt <- integer(nbits)
-  npairs <- 0L; dists <- integer(0)
+  bits <- integer(nbits)
+  cnt <- integer(nbits)
+  npairs <- 0L
+  dists <- integer(0)
   if (a > 1L) for (i in seq_len(a - 1L)) for (j in (i + 1L):a) {
     dd <- D[i, j]
     if (dd == -1L || dd > as.integer(maxdist)) next
-    ta <- min(t[i], t[j]); tb <- max(t[i], t[j])
+    ta <- min(t[i], t[j])
+    tb <- max(t[i], t[j])
     h <- ((ta * 1000003 + tb) * 1000033 + dd) %% nbits
     bits[h + 1L] <- 1L
     cnt[h + 1L] <- cnt[h + 1L] + 1L

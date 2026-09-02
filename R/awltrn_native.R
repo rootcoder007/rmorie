@@ -125,7 +125,10 @@
 #' @export
 owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
-  r <- chk$r; a <- chk$a; p <- chk$p; n <- chk$n
+  r <- chk$r
+  a <- chk$a
+  p <- chk$p
+  n <- chk$n
   c <- if (is.null(shift)) {
     if (min(r) >= 0) 0 else -min(r)
   } else as.numeric(shift)
@@ -171,7 +174,11 @@ owl_weights <- function(R, A, H, propensity = NULL, shift = NULL) {
 aol_weights <- function(R, A, H, propensity = NULL, prognostic = NULL,
                         ridge = 1e-8) {
   chk <- .awltrn_check(R, A, H, propensity)
-  r <- chk$r; a <- chk$a; Hm <- chk$Hm; p <- chk$p; n <- chk$n
+  r <- chk$r
+  a <- chk$a
+  Hm <- chk$Hm
+  p <- chk$p
+  n <- chk$n
   if (is.null(prognostic)) {
     D <- .awltrn_design(Hm, n)
     beta <- .awltrn_lstsq(D, r, ridge)
@@ -241,7 +248,11 @@ weighted_rule <- function(H, labels, weights, ridge = 1e-6) {
 #' @export
 regimen_value <- function(R, A, H, rule, propensity = NULL) {
   chk <- .awltrn_check(R, A, H, propensity)
-  r <- chk$r; a <- chk$a; Hm <- chk$Hm; p <- chk$p; n <- chk$n
+  r <- chk$r
+  a <- chk$a
+  Hm <- chk$Hm
+  p <- chk$p
+  n <- chk$n
   ind <- vapply(seq_len(n), function(i) {
     rule(Hm[i, ]) == a[i]
   }, logical(1))
@@ -319,7 +330,9 @@ fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
   n <- length(stages[[1L]][[1L]])
   for (j in seq_len(K)) {
     st <- stages[[j]]
-    Rk <- st[[1L]]; Ak <- st[[2L]]; Hk <- st[[3L]]
+    Rk <- st[[1L]]
+    Ak <- st[[2L]]
+    Hk <- st[[3L]]
     Hm_j <- .awltrn_to_Hm(Hk, n)
     if (length(Rk) != n || length(Ak) != n || nrow(Hm_j) != n)
       stop(sprintf("awltrn: stage %d has a different number of subjects",
@@ -330,7 +343,9 @@ fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
   used <- list()
   for (j in K:1L) {
     st <- stages[[j]]
-    Rk <- st[[1L]]; Ak <- st[[2L]]; Hk <- st[[3L]]
+    Rk <- st[[1L]]
+    Ak <- st[[2L]]
+    Hk <- st[[3L]]
     rv <- as.numeric(Rk)
     pseudo <- rv + future
     fit <- fit_aol(pseudo, Ak, Hk, propensity = propensity,

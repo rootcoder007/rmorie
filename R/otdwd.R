@@ -24,7 +24,8 @@ Otdwd <- function(K, max_iter = 200) {
   n <- nrow(Km)
   if (ncol(Km) != n) stop("Sinkhorn-Knopp scaling needs a square matrix")
   if (any(Km <= 0)) stop("the matrix must be entrywise positive")
-  d1 <- rep(1, n); d2 <- rep(1, n)
+  d1 <- rep(1, n)
+  d2 <- rep(1, n)
   it <- as.integer(max_iter)
   for (k in seq_len(it)) {
     d1 <- 1 / as.numeric(Km %*% d2)

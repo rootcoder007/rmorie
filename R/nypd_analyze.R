@@ -120,7 +120,8 @@ morie_nypd_all_analyses <- function(arrests_df = NULL, complaint_df = NULL,
       # law_cat_cd: "F" = felony (unfavorable), else misdemeanour/violation.
       felony <- as.integer(toupper(trimws(as.character(arrests_df$law_cat_cd))) == "F")
       keep <- !is.na(race) & nzchar(race) & !is.na(felony)
-      race <- race[keep]; felony <- felony[keep]
+      race <- race[keep]
+      felony <- felony[keep]
       di <- morie_fairness_disparate_impact(y_pred = felony, group = race)
       dp <- morie_fairness_demographic_parity(y_pred = felony, group = race)
       rates <- tapply(felony, race, mean)

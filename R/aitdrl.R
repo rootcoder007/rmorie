@@ -53,7 +53,9 @@ Aitdrl <- function(alpha, X) {
   for (i in seq_len(D)) score[i] <- N * (d0 - .s03digamma(aa[i])) + slx[i]
   gmax <- 0
   for (v in score) if (abs(v) > gmax) gmax <- abs(v)
-  list(ll = ll, estimate = ll, score = score, score_max_abs = gmax, sum_log_x = slx,
-       log_const = lc, N = N, D = D,
-       method = "l = N[lnG(sum a) - sum lnG(a_i)] + sum_i (a_i-1) sum_n ln x_ni")
+  list(
+    ll = ll, estimate = ll, score = score, score_max_abs = gmax, sum_log_x = slx,
+    log_const = lc, N = N, D = D,
+    method = "l = N[lnG(sum a) - sum lnG(a_i)] + sum_i (a_i-1) sum_n ln x_ni"
+  )
 }

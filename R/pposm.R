@@ -20,12 +20,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ppmean(V)
 Ppmean <- function(yrep) {
-  Y <- as.matrix(yrep); S <- nrow(Y); n <- ncol(Y)
+  Y <- as.matrix(yrep)
+  S <- nrow(Y)
+  n <- ncol(Y)
   if (S < 2L) stop("at least two replicated datasets are required")
   rm_ <- rowMeans(Y)
   est <- mean(rm_)
   pooled <- as.numeric(t(Y))
-  q <- sort(pooled); N <- length(q)
+  q <- sort(pooled)
+  N <- length(q)
   lo <- q[max(1L, floor(0.025 * (N - 1)) + 1L)]
   hi <- q[min(N, ceiling(0.975 * (N - 1)) + 1L)]
   .t1_result(estimate = est, sd = stats::sd(rm_),

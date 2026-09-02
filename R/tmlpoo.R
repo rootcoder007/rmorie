@@ -24,35 +24,49 @@
 #'          site = c(1, 1, 1, 2, 2, 2))$estimate
 #' @export
 Tmlepool <- function(y, D, X = NULL, site = NULL, alpha = 0.05) {
-  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  n <- length(yv)
   Xr <- if (!is.null(X)) .s03mat(X) else NULL
   lab <- as.character(if (!is.null(site)) site else rep(0, n))
   ids <- character(0)
   for (s in lab) if (!(s %in% ids)) ids <- c(ids, s)
-  psis <- numeric(length(ids)); ses <- numeric(length(ids)); ns <- integer(length(ids))
+  psis <- numeric(length(ids))
+  ses <- numeric(length(ids))
+  ns <- integer(length(ids))
   for (si in seq_along(ids)) {
     idx <- which(lab == ids[si])
-    ys <- yv[idx]; ds <- d[idx]
+    ys <- yv[idx]
+    ds <- d[idx]
     xs <- if (!is.null(Xr)) Xr[idx, , drop = FALSE] else NULL
     ns[si] <- length(idx)
     if (length(idx) < 3L || sum(ds) <= 0 || sum(ds) >= length(ds)) {
-      psis[si] <- NaN; ses[si] <- NaN; next
+      psis[si] <- NaN
+      ses[si] <- NaN
+      next
     }
     f <- .s03tmle(ys, ds, xs)
-    psis[si] <- f$psi; ses[si] <- f$se
+    psis[si] <- f$psi
+    ses[si] <- f$se
   }
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   for (i in seq_along(ids)) {
     if (!is.nan(psis[i]) && !is.nan(ses[i]) && ses[i] > 0) {
-      w <- 1 / (ses[i] * ses[i]); num <- num + w * psis[i]; den <- den + w
+      w <- 1 / (ses[i] * ses[i])
+      num <- num + w * psis[i]
+      den <- den + w
     }
   }
   pool <- if (den > 0) num / den else NaN
   sep <- if (den > 0) sqrt(1 / den) else NaN
-  Q <- 0; S <- 0L
+  Q <- 0
+  S <- 0L
   for (i in seq_along(ids)) {
     if (!is.nan(psis[i]) && !is.nan(ses[i]) && ses[i] > 0) {
-      w <- 1 / (ses[i] * ses[i]); Q <- Q + w * (psis[i] - pool)^2; S <- S + 1L
+      w <- 1 / (ses[i] * ses[i])
+      Q <- Q + w * (psis[i] - pool)^2
+      S <- S + 1L
     }
   }
   df <- S - 1L

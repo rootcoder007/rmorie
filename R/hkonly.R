@@ -16,7 +16,8 @@
 #' @examples
 #' Ldphr(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Ldphr <- function(counts, epsilon, n = NULL) {
-  counts <- .t1_vec(counts); eps <- as.numeric(epsilon)
+  counts <- .t1_vec(counts)
+  eps <- as.numeric(epsilon)
   if (eps <= 0) stop("epsilon must be positive")
   total <- if (is.null(n)) sum(counts) else as.numeric(n)
   if (total <= 0) stop("need at least one report")

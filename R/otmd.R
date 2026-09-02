@@ -20,14 +20,19 @@
 #' @examples
 #' Otmd(X = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8), Sigma = 0.5)
 Otmd <- function(X, Y, Sigma) {
-  A <- as.matrix(X); B <- as.matrix(Y); S <- as.matrix(Sigma)
+  A <- as.matrix(X)
+  B <- as.matrix(Y)
+  S <- as.matrix(Sigma)
   d <- ncol(A)
   if (ncol(B) != d || nrow(S) != d || ncol(S) != d)
     stop("Sigma must be d by d and match both point clouds")
   Si <- vapply(seq_len(d), function(j) {
-    e <- numeric(d); e[j] <- 1; .s03cholsolve(S, e)
+    e <- numeric(d)
+    e[j] <- 1
+    .s03cholsolve(S, e)
   }, numeric(d))
-  n <- nrow(A); m <- nrow(B)
+  n <- nrow(A)
+  m <- nrow(B)
   C <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) {
     dv <- A[i, ] - B[j, ]

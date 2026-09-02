@@ -85,8 +85,10 @@ Vaecf <- function(R, K = 5, latent_dim = 2, beta = 0.2, n_samples = 16,
   eps <- .vitdraw(L, m, skip + 2L * ni * m + m * ni, 1)
   mu <- .s03matmul(Xn, Wm)
   lv <- .s03matmul(Xn, Wl)
-  llu <- numeric(nu); klu <- numeric(nu)
-  rec <- numeric(nu); ndc <- numeric(nu)
+  llu <- numeric(nu)
+  klu <- numeric(nu)
+  rec <- numeric(nu)
+  ndc <- numeric(nu)
   rank <- matrix(0, nu, ni)
   for (u in seq_len(nu)) {
     sig <- exp(0.5 * lv[u, ])
@@ -122,7 +124,8 @@ Vaecf <- function(R, K = 5, latent_dim = 2, beta = 0.2, n_samples = 16,
     idx <- order(-lgm, seq_len(ni))
     rank[u, ] <- idx
     nrel <- sum(R0[u, ] > 0)
-    hit <- 0; dcg <- 0
+    hit <- 0
+    dcg <- 0
     for (r in seq_len(K)) {
       h <- if (R0[u, idx[r]] > 0) 1 else 0
       hit <- hit + h

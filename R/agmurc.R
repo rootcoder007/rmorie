@@ -17,12 +17,17 @@
 #' Mzrecur(state = 0, action = 1, dynamics = dynamics)
 Mzrecur <- function(state, action, dynamics, prediction = NULL) {
   out <- dynamics(state, action)
-  r <- out[[1]]; s <- out[[2]]
-  p <- NULL; v <- NULL
+  r <- out[[1]]
+  s <- out[[2]]
+  p <- NULL
+  v <- NULL
   if (!is.null(prediction)) {
     pv <- prediction(s)
-    p <- pv[[1]]; v <- as.numeric(pv[[2]])
+    p <- pv[[1]]
+    v <- as.numeric(pv[[2]])
   }
-  .t1_result(state = s, reward = as.numeric(r), policy = p, value = v,
-             method = "MuZero recurrent inference (Schrittwieser et al. 2020)")
+  .t1_result(
+    state = s, reward = as.numeric(r), policy = p, value = v,
+    method = "MuZero recurrent inference (Schrittwieser et al. 2020)"
+  )
 }
