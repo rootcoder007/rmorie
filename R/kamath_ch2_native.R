@@ -46,7 +46,8 @@
 #' @param f Optional cell.
 #' @export
 morie_kamath_encoder_state <- function(h_t_1, x_t, f = NULL) {
-  h <- as.numeric(h_t_1); x <- as.numeric(x_t)
+  h <- as.numeric(h_t_1)
+  x <- as.numeric(x_t)
   if (is.null(f)) {
     if (length(h) != length(x)) {
       stop("the default cell needs matching shapes; pass a callable f for projected inputs.",
@@ -69,13 +70,17 @@ morie_kamath_context_vector <- function(h_1_h_T, mapping = "mean") {
   H <- as.matrix(h_1_h_T)
   if (nrow(H) == 0L) stop("no hidden states supplied.", call. = FALSE)
   if (is.function(mapping)) {
-    c_ <- as.numeric(mapping(H)); name <- "callable"
+    c_ <- as.numeric(mapping(H))
+    name <- "callable"
   } else if (mapping == "mean") {
-    c_ <- colMeans(H); name <- "mean"
+    c_ <- colMeans(H)
+    name <- "mean"
   } else if (mapping == "last") {
-    c_ <- H[nrow(H), ]; name <- "last"
+    c_ <- H[nrow(H), ]
+    name <- "last"
   } else if (mapping == "max") {
-    c_ <- apply(H, 2, max); name <- "max"
+    c_ <- apply(H, 2, max)
+    name <- "max"
   } else {
     stop(sprintf("mapping must be mean, last, max or a function; got '%s'.",
                  mapping), call. = FALSE)
@@ -110,7 +115,9 @@ morie_kamath_context_simplest <- function(h_T, all_states = NULL) {
 #' @param g Optional cell.
 #' @export
 morie_kamath_decoder_state <- function(s_t_1, y_t_1, c, g = NULL) {
-  s <- as.numeric(s_t_1); y <- as.numeric(y_t_1); cc <- as.numeric(c)
+  s <- as.numeric(s_t_1)
+  y <- as.numeric(y_t_1)
+  cc <- as.numeric(c)
   if (is.null(g)) {
     if (length(s) != length(y) || length(s) != length(cc)) {
       stop("the default cell needs matching shapes; pass a callable g for projected inputs.",
@@ -180,22 +187,28 @@ morie_kamath_seq2seq_cross_entropy <- function(y, c, U = NULL) {
 #' @param alpha Score family or function.
 #' @export
 morie_kamath_attention_score <- function(q, k_i, alpha = "scaled_dot") {
-  q <- as.numeric(q); k <- as.numeric(k_i)
+  q <- as.numeric(q)
+  k <- as.numeric(k_i)
   if (length(q) != length(k)) {
     stop("q and k_i must have the same dimension.", call. = FALSE)
   }
   if (is.function(alpha)) {
-    a <- as.numeric(alpha(q, k)); name <- "callable"
+    a <- as.numeric(alpha(q, k))
+    name <- "callable"
   } else if (alpha == "dot") {
-    a <- sum(q * k); name <- "dot"
+    a <- sum(q * k)
+    name <- "dot"
   } else if (alpha == "scaled_dot") {
-    a <- sum(q * k) / sqrt(length(q)); name <- "scaled_dot"
+    a <- sum(q * k) / sqrt(length(q))
+    name <- "scaled_dot"
   } else if (alpha == "cosine") {
-    nq <- sqrt(sum(q^2)); nk <- sqrt(sum(k^2))
+    nq <- sqrt(sum(q^2))
+    nk <- sqrt(sum(k^2))
     if (nq == 0 || nk == 0) {
       stop("cosine score is undefined for a zero vector.", call. = FALSE)
     }
-    a <- sum(q * k) / (nq * nk); name <- "cosine"
+    a <- sum(q * k) / (nq * nk)
+    name <- "cosine"
   } else {
     stop(sprintf("unknown alpha '%s'.", alpha), call. = FALSE)
   }
@@ -253,7 +266,8 @@ morie_kamath_attention_output <- function(b, v) {
 #' @param d_k Optional dimension pin.
 #' @export
 morie_kamath_scaled_dot_score <- function(q, k, d_k = NULL) {
-  q <- as.numeric(q); k <- as.numeric(k)
+  q <- as.numeric(q)
+  k <- as.numeric(k)
   if (length(q) != length(k)) {
     stop("q and k must have the same dimension.", call. = FALSE)
   }
@@ -285,8 +299,12 @@ morie_kamath_scaled_dot_attention <- function(Q, K, V, d_k = NULL) {
 #' @param W_Qi,W_Ki,W_Vi Per-head projections.
 #' @export
 morie_kamath_multihead_head_i <- function(Q, K, V, W_Qi, W_Ki, W_Vi) {
-  Q <- as.matrix(Q); K <- as.matrix(K); V <- as.matrix(V)
-  Wq <- as.matrix(W_Qi); Wk <- as.matrix(W_Ki); Wv <- as.matrix(W_Vi)
+  Q <- as.matrix(Q)
+  K <- as.matrix(K)
+  V <- as.matrix(V)
+  Wq <- as.matrix(W_Qi)
+  Wk <- as.matrix(W_Ki)
+  Wv <- as.matrix(W_Vi)
   for (pair in list(list("Q", Q, Wq), list("K", K, Wk),
                     list("V", V, Wv))) {
     if (ncol(pair[[2]]) != nrow(pair[[3]])) {
@@ -328,7 +346,9 @@ morie_kamath_multihead_concat <- function(heads, W_O) {
 #'   convention; differs from Vaswani's for finite masks).
 #' @export
 morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
-  Q <- as.matrix(Q); K <- as.matrix(K); V <- as.matrix(V)
+  Q <- as.matrix(Q)
+  K <- as.matrix(K)
+  V <- as.matrix(V)
   M <- as.matrix(M)
   if (ncol(Q) != ncol(K)) stop("Q and K must share d_k.", call. = FALSE)
   if (nrow(K) != nrow(V)) {
@@ -356,7 +376,9 @@ morie_kamath_masked_attention <- function(Q, K, V, M, d_k = NULL) {
 #' @param d Model width.
 #' @export
 morie_kamath_positional_sin <- function(i, j, d) {
-  i <- as.integer(i); j <- as.integer(j); d <- as.integer(d)
+  i <- as.integer(i)
+  j <- as.integer(j)
+  d <- as.integer(d)
   if (d < 1L) stop("the model dimension d must be positive.",
                    call. = FALSE)
   if (i < 0L || j < 0L) {
@@ -374,7 +396,9 @@ morie_kamath_positional_sin <- function(i, j, d) {
 #' @rdname morie_kamath_positional_sin
 #' @export
 morie_kamath_positional_cos <- function(i, j, d) {
-  i <- as.integer(i); j <- as.integer(j); d <- as.integer(d)
+  i <- as.integer(i)
+  j <- as.integer(j)
+  d <- as.integer(d)
   if (d < 1L) stop("the model dimension d must be positive.",
                    call. = FALSE)
   if (i < 0L || j < 0L) {
@@ -393,8 +417,11 @@ morie_kamath_positional_cos <- function(i, j, d) {
 #' @param W_1,W_2,b_1,b_2 FFN parameters.
 #' @export
 morie_kamath_ffn_relu <- function(z, W_1, W_2, b_1, b_2) {
-  Z <- as.matrix(z); W1 <- as.matrix(W_1); W2 <- as.matrix(W_2)
-  b1 <- as.numeric(b_1); b2 <- as.numeric(b_2)
+  Z <- as.matrix(z)
+  W1 <- as.matrix(W_1)
+  W2 <- as.matrix(W_2)
+  b1 <- as.numeric(b_1)
+  b2 <- as.numeric(b_2)
   if (ncol(Z) != nrow(W1)) stop("z's width must match W_1's rows.",
                                 call. = FALSE)
   if (ncol(W1) != length(b1)) stop("b_1 must match W_1's columns.",
@@ -553,7 +580,8 @@ morie_kamath_span_loss <- function(x, xhat, i, j) {
   if (any(p < 0 | p > 1)) {
     stop("probabilities must lie in [0, 1].", call. = FALSE)
   }
-  i <- as.integer(i); j <- as.integer(j)
+  i <- as.integer(i)
+  j <- as.integer(j)
   if (i < 0L || j < i || j >= length(p)) {
     stop(sprintf("the span [%d, %d] must lie inside the sequence of length %d with i <= j.",
                  i, j, length(p)), call. = FALSE)
@@ -671,7 +699,8 @@ morie_kamath_mixtral_moe <- function(x, W_g, expert_weights = NULL) {
                    length(expert_weights), n), call. = FALSE)
     }
     experts <- lapply(expert_weights, function(ws) {
-      W1 <- as.matrix(ws[[1]]); W3 <- as.matrix(ws[[2]])
+      W1 <- as.matrix(ws[[1]])
+      W3 <- as.matrix(ws[[2]])
       W2 <- as.matrix(ws[[3]])
       if (!all(dim(W1) == dim(W3))) {
         stop("W1 and W3 must share a shape.", call. = FALSE)

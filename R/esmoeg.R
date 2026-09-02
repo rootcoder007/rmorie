@@ -48,7 +48,8 @@ Esmoeg <- function(loadings, target, iters = 200, tol = 1e-13) {
     MtM <- matrix(0, m, m)
     for (a in seq_len(m)) for (b in seq_len(m)) MtM[a, b] <- sum(M[, a] * M[, b])
     ej <- .s03jacobi(MtM)
-    vals <- ej$values; vecs <- ej$vectors
+    vals <- ej$values
+    vecs <- ej$vectors
     if (any(vals <= 1e-24))
       stop("target rotation is degenerate (Lambda' H is rank deficient)")
     MV <- matrix(0, m, m)

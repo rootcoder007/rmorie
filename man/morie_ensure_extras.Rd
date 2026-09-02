@@ -64,7 +64,6 @@ morie_estimate_irm <- function(...) {
   # CI / Rscript: errors with install-hint instead of installing
   morie_ensure_extras(c("DoubleML"), ask = FALSE)
 }
-
 }
 \seealso{
 \code{\link[=morie_install_extras]{morie_install_extras()}} for the user-facing bulk installer.

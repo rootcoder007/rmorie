@@ -64,9 +64,11 @@
     stop(paste0("sv_dl: a pair needs chrom1/pos1/strand1 and ",
                 "chrom2/pos2/strand2"))
   }
-  c1 <- as.character(p[["chrom1"]]); p1 <- as.integer(p[["pos1"]])
+  c1 <- as.character(p[["chrom1"]])
+  p1 <- as.integer(p[["pos1"]])
   s1 <- as.character(p[["strand1"]])
-  c2 <- as.character(p[["chrom2"]]); p2 <- as.integer(p[["pos2"]])
+  c2 <- as.character(p[["chrom2"]])
+  p2 <- as.integer(p[["pos2"]])
   s2 <- as.character(p[["strand2"]])
   rl <- if (!is.null(p[["read_length"]])) p[["read_length"]] else 100L
   l1 <- as.integer(if (!is.null(p[["len1"]])) p[["len1"]] else rl)
@@ -83,8 +85,14 @@
   swap <- (c2 < c1) || (c2 == c1 && p2 < p1)
   if (swap) {
     tmp <- list(c1, p1, s1, l1)
-    c1 <- c2; p1 <- p2; s1 <- s2; l1 <- l2
-    c2 <- tmp[[1L]]; p2 <- tmp[[2L]]; s2 <- tmp[[3L]]; l2 <- tmp[[4L]]
+    c1 <- c2
+    p1 <- p2
+    s1 <- s2
+    l1 <- l2
+    c2 <- tmp[[1L]]
+    p2 <- tmp[[2L]]
+    s2 <- tmp[[3L]]
+    l2 <- tmp[[4L]]
   }
   list(chrom1=c1, pos1=p1, strand1=s1, len1=l1,
        chrom2=c2, pos2=p2, strand2=s2, len2=l2,

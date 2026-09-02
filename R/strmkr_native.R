@@ -56,7 +56,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   if (ncol(P) != 2L) stop("strmkr: coords must be two-dimensional")
   rr <- as.numeric(r)
   if (rr <= 0.0) stop("strmkr: the interaction radius must be positive")
-  nx <- as.integer(nx); ny <- as.integer(ny)
+  nx <- as.integer(nx)
+  ny <- as.integer(ny)
   if (nx < 1L || ny < 1L)
     stop("strmkr: the dummy grid must be at least 1 by 1")
 
@@ -80,7 +81,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   # sufficient statistic: pairs closer together than r
   npairs <- 0L
   if (n > 1L) for (i in seq_len(n - 1L)) for (j in seq.int(i + 1L, n)) {
-    dx <- P[i, 1] - P[j, 1]; dy <- P[i, 2] - P[j, 2]
+    dx <- P[i, 1] - P[j, 1]
+    dy <- P[i, 2] - P[j, 2]
     if (sqrt(dx * dx + dy * dy) < rr) npairs <- npairs + 1L
   }
 
@@ -113,7 +115,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
     c0 <- 0L
     for (j in seq_len(n)) {
       if (i == j) next
-      dx <- quad[i, 1] - P[j, 1]; dy <- quad[i, 2] - P[j, 2]
+      dx <- quad[i, 1] - P[j, 1]
+      dy <- quad[i, 2] - P[j, 2]
       if (sqrt(dx * dx + dy * dy) < rr) c0 <- c0 + 1L
     }
     tstat[i] <- c0
@@ -123,7 +126,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   X <- cbind(1.0, tstat)
   yq <- isdata / w
   beta <- c(log(max(n, 1L) / area), 0.0)
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   A <- matrix(0.0, 2L, 2L)
   for (it in seq_len(as.integer(max_iter))) {
     eta <- as.numeric(X %*% beta)
@@ -141,7 +145,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
              (A[1, 1] * rhs[2] - A[2, 1] * rhs[1]) / det)
     shift <- max(abs(new - beta))
     beta <- new
-    if (shift < tol) { converged <- TRUE; break }
+    if (shift < tol) { converged <- TRUE
+    break }
   }
 
   det <- A[1, 1] * A[2, 2] - A[1, 2] * A[2, 1]
@@ -153,7 +158,8 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
   mu <- exp(pmax(-500.0, pmin(500.0, eta)))
   logpl <- sum(w * (yq * eta - mu))
 
-  beta_hat <- exp(beta[1]); gamma_hat <- exp(beta[2])
+  beta_hat <- exp(beta[1])
+  gamma_hat <- exp(beta[2])
   logpl_pois <- n * log(max(n / area, 1e-300)) - n
   out <- list(
     estimate = c(beta_hat, gamma_hat),

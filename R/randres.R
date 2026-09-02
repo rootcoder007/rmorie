@@ -21,8 +21,11 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Randres(V)
 Randres <- function(y, truth = NULL, p = 0.7) {
-  v <- as.numeric(unlist(y)); n <- length(v)
-  lam <- sum(v) / n; p <- as.numeric(p); d <- 2 * p - 1
+  v <- as.numeric(unlist(y))
+  n <- length(v)
+  lam <- sum(v) / n
+  p <- as.numeric(p)
+  d <- 2 * p - 1
   pi_ <- if (d != 0) (lam - (1 - p)) / d else NaN
   var <- if (d != 0) lam * (1 - lam) / (n * d * d) else NaN
   tr <- if (is.null(truth)) NaN else sum(as.numeric(truth)) / n

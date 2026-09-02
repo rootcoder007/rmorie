@@ -102,7 +102,8 @@ Vaean <- function(X, vae = NULL, latent_dim = 1, n_samples = 32, alpha = 0.1,
   if (is.null(decoder_scale)) {
     rest <- 0
     cnt <- 0L
-    if (d > k) for (t in seq_len(d - k)) { rest <- rest + ev[t]; cnt <- cnt + 1L }
+    if (d > k) for (t in seq_len(d - k)) { rest <- rest + ev[t]
+    cnt <- cnt + 1L }
     s <- if (cnt > 0L && rest > 0) sqrt(rest / cnt) else 1
   } else {
     s <- as.numeric(decoder_scale)

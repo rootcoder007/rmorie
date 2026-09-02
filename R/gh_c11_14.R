@@ -28,7 +28,8 @@ Ghosalgplaplace <- function(x = NULL, y = NULL, length = 0.5, seed = 42) {
     x <- c(0.1, 0.25, 0.4, 0.6, 0.75, 0.9)
     y <- c(0, 0, 0, 1, 1, 1)
   }
-  xs <- as.numeric(x); ys <- as.numeric(y)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
   n <- base::length(xs)
   if (n == 0L) stop("x must be non-empty")
   if (base::length(ys) != n) stop("x and y must have the same length")

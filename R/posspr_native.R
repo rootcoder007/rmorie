@@ -90,7 +90,8 @@ morie_posspr <- function(n, alpha, seed = 0) {
       chosen <- NA_integer_
       for (j in seq_along(counts)) {
         acc <- acc + w$existing[j]
-        if (u <= acc) { chosen <- as.integer(j - 1L); break }
+        if (u <= acc) { chosen <- as.integer(j - 1L)
+        break }
       }
       if (is.na(chosen)) {
         counts <- c(counts, 1.0)

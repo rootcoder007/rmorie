@@ -15,7 +15,10 @@ Clr <- function(x) {
   x <- .t1_vec(x)
   if (length(x) == 0L) stop("x must be non-empty")
   if (any(x <= 0)) stop("compositions must be strictly positive")
-  lg <- mean(log(x)); z <- log(x) - lg
-  .t1_result(clr = z, geomean = exp(lg), D = length(x), sum_check = sum(z),
-             method = "Centred log-ratio transform")
+  lg <- mean(log(x))
+  z <- log(x) - lg
+  .t1_result(
+    clr = z, geomean = exp(lg), D = length(x), sum_check = sum(z),
+    method = "Centred log-ratio transform"
+  )
 }

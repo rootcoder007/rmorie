@@ -80,7 +80,8 @@ KrigFDA <- function(coords, values, new_coords, model = "exponential",
   K[seq_len(n), n + seq_len(p)] <- X
   K[n + seq_len(p), seq_len(n)] <- t(X)
 
-  est <- numeric(nrow(tg)); se <- numeric(nrow(tg))
+  est <- numeric(nrow(tg))
+  se <- numeric(nrow(tg))
   wts <- vector("list", nrow(tg))
   for (m in seq_len(nrow(tg))) {
     row <- tg[m, , drop = FALSE]

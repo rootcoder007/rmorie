@@ -37,7 +37,8 @@
 #' @return A numeric value.
 #' @export
 .pibmd_kl_gaussian <- function(mq, sq2, mp, sp2) {
-  sp2 <- max(sp2, 1e-300); sq2 <- max(sq2, 1e-300)
+  sp2 <- max(sp2, 1e-300)
+  sq2 <- max(sq2, 1e-300)
   0.5 * log(sp2 / sq2) + (sq2 + (mq - mp) ^ 2) / (2.0 * sp2) - 0.5
 }
 
@@ -111,9 +112,11 @@
 #' @return A numeric value.
 #' @export
 .pibmd_kl_kde <- function(q, p, n_grid) {
-  n <- length(q); m <- length(p)
+  n <- length(q)
+  m <- length(p)
   if (n < 2L || m < 2L) return(NaN)
-  hq <- .pibmd_bandwidth(q); hp <- .pibmd_bandwidth(p)
+  hq <- .pibmd_bandwidth(q)
+  hp <- .pibmd_bandwidth(p)
   lo <- min(min(q) - 4.0 * hq, min(p) - 4.0 * hp)
   hi <- max(max(q) + 4.0 * hq, max(p) + 4.0 * hp)
   if (hi - lo <= .pibmd_EPS) return(0.0)
@@ -123,9 +126,11 @@
   fp <- vapply(xs, function(x) .pibmd_kde(x, p, hp), 0)
   # renormalise on the grid so truncation does not masquerade as
   # divergence -- the two densities must each integrate to one here
-  zq <- sum(fq) * dx; zp <- sum(fp) * dx
+  zq <- sum(fq) * dx
+  zp <- sum(fp) * dx
   if (zq <= .pibmd_EPS || zp <= .pibmd_EPS) return(NaN)
-  a <- fq / zq; b <- fp / zp
+  a <- fq / zq
+  b <- fp / zp
   keep <- a > 1e-300
   sum(a[keep] * log(a[keep] / pmax(b[keep], 1e-300)) * dx)
 }
@@ -164,7 +169,8 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
   moments_only <- FALSE
   if (is.list(prior) && !is.null(names(prior)) &&
       all(c("mean", "sd") %in% names(prior))) {
-    mp <- as.numeric(prior$mean); sdp <- as.numeric(prior$sd)
+    mp <- as.numeric(prior$mean)
+    sdp <- as.numeric(prior$sd)
     if (sdp <= 0.0)
       stop("pibmd: the prior standard deviation must be positive")
     sp2 <- sdp * sdp
@@ -178,10 +184,14 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
       stop(paste0("pibmd: at least two prior draws are needed -- pass ",
                   "list(mean = ..., sd = ...) for a normal prior known only ",
                   "by its moments"))
-    mm <- .pibmd_moments(p); mp <- mm[1]; sp2 <- mm[2]
+    mm <- .pibmd_moments(p)
+    mp <- mm[1]
+    sp2 <- mm[2]
   }
 
-  mq2 <- .pibmd_moments(q); mq <- mq2[1]; sq2 <- mq2[2]
+  mq2 <- .pibmd_moments(q)
+  mq <- mq2[1]
+  sq2 <- mq2[2]
   if (sp2 <= .pibmd_EPS)
     stop(paste0("pibmd: the prior has no spread, so every divergence from ",
                 "it is infinite"))

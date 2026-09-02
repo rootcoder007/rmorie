@@ -13,7 +13,8 @@
 #' @return A list with \code{mu}, \code{var}, \code{sw}, \code{Q}, \code{df}.
 #' @export
 k02fe <- function(y, v) {
-  y <- as.numeric(y); v <- as.numeric(v)
+  y <- as.numeric(y)
+  v <- as.numeric(v)
   w <- 1 / v
   sw <- sum(w)
   mu <- sum(w * y) / sw
@@ -32,7 +33,8 @@ k02fe <- function(y, v) {
 #' @return A list with \code{tau2}, \code{mu}, \code{var}, \code{Q}, \code{df}.
 #' @export
 k02dl <- function(y, v) {
-  y <- as.numeric(y); v <- as.numeric(v)
+  y <- as.numeric(y)
+  v <- as.numeric(v)
   fe <- k02fe(y, v)
   w <- 1 / v
   cc <- fe$sw - sum(w * w) / fe$sw
@@ -54,9 +56,11 @@ k02dl <- function(y, v) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 k02mm <- function(y, v, tau0) {
-  y <- as.numeric(y); v <- as.numeric(v)
+  y <- as.numeric(y)
+  v <- as.numeric(v)
   a <- 1 / (v + tau0)
-  sa <- sum(a); sa2 <- sum(a * a)
+  sa <- sum(a)
+  sa2 <- sum(a * a)
   yb <- sum(a * y) / sa
   num <- sum(a * (y - yb)^2) - sum(a * v) + sum(a * a * v) / sa
   den <- sa - sa2 / sa
@@ -132,17 +136,25 @@ k02pchi <- function(q, df) stats::pchisq(q, df, lower.tail = FALSE)
 #' @return A numeric value.
 #' @export
 k02gold <- function(f, lo, hi, iters = 80L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   cc <- b - .k02invphi * (b - a)
   dd <- a + .k02invphi * (b - a)
-  fc <- f(cc); fd <- f(dd)
+  fc <- f(cc)
+  fd <- f(dd)
   for (i in seq_len(as.integer(iters))) {
     if (fc < fd) {
-      b <- dd; dd <- cc; fd <- fc
-      cc <- b - .k02invphi * (b - a); fc <- f(cc)
+      b <- dd
+      dd <- cc
+      fd <- fc
+      cc <- b - .k02invphi * (b - a)
+      fc <- f(cc)
     } else {
-      a <- cc; cc <- dd; fc <- fd
-      dd <- a + .k02invphi * (b - a); fd <- f(dd)
+      a <- cc
+      cc <- dd
+      fc <- fd
+      dd <- a + .k02invphi * (b - a)
+      fd <- f(dd)
     }
   }
   0.5 * (a + b)
@@ -161,8 +173,10 @@ k02gh <- function(n) {
   n <- as.integer(n)
   pim4 <- 0.7511255444649425
   eps <- 3.0e-14
-  x <- numeric(n); w <- numeric(n)
-  z <- 0; pp <- 0
+  x <- numeric(n)
+  w <- numeric(n)
+  z <- 0
+  pp <- 0
   m <- (n + 1L) %/% 2L
   for (i in seq_len(m)) {
     if (i == 1L) {
@@ -177,9 +191,11 @@ k02gh <- function(n) {
       z <- 2 * z - x[i - 2L]
     }
     for (it in 1:20) {
-      p1 <- pim4; p2 <- 0
+      p1 <- pim4
+      p2 <- 0
       for (j in 1:n) {
-        p3 <- p2; p2 <- p1
+        p3 <- p2
+        p2 <- p1
         p1 <- z * sqrt(2 / j) * p2 - sqrt((j - 1) / j) * p3
       }
       pp <- sqrt(2 * n) * p2
@@ -187,8 +203,10 @@ k02gh <- function(n) {
       z <- z1 - p1 / pp
       if (abs(z - z1) <= eps) break
     }
-    x[i] <- z; x[n - i + 1L] <- -z
-    w[i] <- 2 / (pp * pp); w[n - i + 1L] <- w[i]
+    x[i] <- z
+    x[n - i + 1L] <- -z
+    w[i] <- 2 / (pp * pp)
+    w[n - i + 1L] <- w[i]
   }
   list(x = x, w = w)
 }
@@ -204,8 +222,10 @@ k02gh <- function(n) {
 #' @return A numeric value.
 #' @export
 k02mod <- function(A, comm) {
-  a <- as.matrix(A); n <- nrow(a)
-  k <- rowSums(a); m2 <- sum(a)
+  a <- as.matrix(A)
+  n <- nrow(a)
+  k <- rowSums(a)
+  m2 <- sum(a)
   if (m2 <= 0) return(0)
   q <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) {
@@ -224,15 +244,20 @@ k02mod <- function(A, comm) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 k02bfs <- function(A) {
-  a <- as.matrix(A); n <- nrow(a)
+  a <- as.matrix(A)
+  n <- nrow(a)
   nbr <- lapply(seq_len(n), function(i) which(a[i, ] != 0 & seq_len(n) != i))
   out <- matrix(-1L, n, n)
   for (s in seq_len(n)) {
-    dist <- rep(-1L, n); dist[s] <- 0L
-    queue <- c(s); head <- 1L
+    dist <- rep(-1L, n)
+    dist[s] <- 0L
+    queue <- c(s)
+    head <- 1L
     while (head <= length(queue)) {
-      u <- queue[head]; head <- head + 1L
-      for (v in nbr[[u]]) if (dist[v] < 0L) { dist[v] <- dist[u] + 1L; queue <- c(queue, v) }
+      u <- queue[head]
+      head <- head + 1L
+      for (v in nbr[[u]]) if (dist[v] < 0L) { dist[v] <- dist[u] + 1L
+      queue <- c(queue, v) }
     }
     out[s, ] <- dist
   }

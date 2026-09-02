@@ -17,7 +17,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Boxpierce(V)
 Boxpierce <- function(x, lags = 1, fitdf = 0) {
-  x <- .t4_vec(x); n <- length(x); m <- as.integer(lags); fitdf <- as.integer(fitdf)
+  x <- .t4_vec(x)
+  n <- length(x)
+  m <- as.integer(lags)
+  fitdf <- as.integer(fitdf)
   if (m < 1 || n <= m) stop("need 1 <= lags < length(x)")
   r <- .t4_acfbiased(x, m)
   q <- n * sum(r^2)

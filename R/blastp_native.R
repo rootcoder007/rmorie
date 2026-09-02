@@ -16,24 +16,34 @@
 #' @return A list with \code{score}, \code{qi}, \code{sj}, \code{ln}.
 #' @export
 .blast_best <- function(a, b, score) {
-  n <- length(a); m <- length(b)
-  best <- 0; bi <- 0; bj <- 0; ln <- 0
+  n <- length(a)
+  m <- length(b)
+  best <- 0
+  bi <- 0
+  bj <- 0
+  ln <- 0
   for (d in (-(m - 1)):(n - 1)) {
-    run <- 0; start <- 0
-    i0 <- max(0, d); j0 <- i0 - d
+    run <- 0
+    start <- 0
+    i0 <- max(0, d)
+    j0 <- i0 - d
     pos <- 0
-    i <- i0; j <- j0
+    i <- i0
+    j <- j0
     while (i < n && j < m) {
       run <- run + score(a[i + 1], b[j + 1])
       if (run <= 0) {
-        run <- 0; start <- pos + 1
+        run <- 0
+        start <- pos + 1
       } else if (run > best) {
         best <- run
         ln <- pos - start + 1
         bi <- max(0, d) + start
         bj <- bi - d
       }
-      i <- i + 1; j <- j + 1; pos <- pos + 1
+      i <- i + 1
+      j <- j + 1
+      pos <- pos + 1
     }
   }
   list(score = best, qi = bi, sj = bj, ln = ln)
@@ -74,7 +84,8 @@ morie_blastp <- function(query, subject, match = 1, mismatch = -1,
     function(x, y) if (x == y) match else mismatch
   }
   res <- .blast_best(q, s, score)
-  m <- length(q); n <- length(s)
+  m <- length(q)
+  n <- length(s)
   E <- K * m * n * exp(-lam * res$score)
   list(score = res$score, e_value = E, p_value = 1 - exp(-E),
        q_start = res$qi, s_start = res$sj, length = res$ln,

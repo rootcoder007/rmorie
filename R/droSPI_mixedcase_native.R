@@ -23,8 +23,12 @@
 # scale - 1 entries, and the same payload keys (with params keyed
 # by the stringified group key, matching the Python payload).
 
-.drospi_c0 <- 2.515517; .drospi_c1 <- 0.802853; .drospi_c2 <- 0.010328
-.drospi_d1 <- 1.432788; .drospi_d2 <- 0.189269; .drospi_d3 <- 0.001308
+.drospi_c0 <- 2.515517
+.drospi_c1 <- 0.802853
+.drospi_c2 <- 0.010328
+.drospi_d1 <- 1.432788
+.drospi_d2 <- 0.189269
+.drospi_d3 <- 0.001308
 
 #' .drospi_as_z
 #'
@@ -116,11 +120,14 @@ morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
   spi <- vector("list", n)
   for (i in seq_len(n)) {
     tv <- totals[[i]]
-    if (is.na(tv)) { spi[[i]] <- NA_real_; next }
+    if (is.na(tv)) { spi[[i]] <- NA_real_
+    next }
     key <- if (isTRUE(by_month)) as.character(((i - 1L) %% 12L))
            else "pooled"
     par <- params[[key]]
-    q <- par[1L]; alpha <- par[2L]; beta <- par[3L]
+    q <- par[1L]
+    alpha <- par[2L]
+    beta <- par[3L]
     g <- if (tv > 0) pgamma(tv, shape = alpha, scale = beta) else 0.0
     h <- q + (1.0 - q) * g
     h <- min(max(h, 1e-9), 1.0 - 1e-9)

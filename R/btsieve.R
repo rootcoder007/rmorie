@@ -55,11 +55,18 @@ Btsieve <- function(x, fit_fn = NULL, rvs_fn = NULL, stat = NULL, B = 200,
   f <- if (is.null(stat)) .s03mean else stat
   if (is.null(fit_fn)) {
     ft <- .btsieve_arfit(xx, p_max)
-    phi <- ft$phi; res <- ft$resid; order <- ft$p; aic <- ft$aic
+    phi <- ft$phi
+    res <- ft$resid
+    order <- ft$p
+    aic <- ft$aic
     model <- list(phi = phi, mu = ft$mu)
   } else {
     ft <- fit_fn(xx)
-    model <- ft$model; res <- ft$resid; phi <- numeric(0); order <- 0L; aic <- NaN
+    model <- ft$model
+    res <- ft$resid
+    phi <- numeric(0)
+    order <- 0L
+    aic <- NaN
   }
   res <- res - .s03mean(res)
   r <- if (is.null(rvs_fn)) .btsieve_arrvs else rvs_fn
@@ -88,7 +95,8 @@ Btsieve <- function(x, fit_fn = NULL, rvs_fn = NULL, stat = NULL, B = 200,
     if (m < 2L) break
     y <- z[(p_max + 1L):n]
     if (p == 0L) {
-      phi <- numeric(0); res <- y
+      phi <- numeric(0)
+      res <- y
     } else {
       X <- matrix(0, m, p)
       for (k in seq_len(p)) X[, k] <- z[(p_max + 1L - k):(n - k)]
@@ -106,10 +114,13 @@ Btsieve <- function(x, fit_fn = NULL, rvs_fn = NULL, stat = NULL, B = 200,
 
 #' @noRd
 .btsieve_arrvs <- function(model, resid, n, g) {
-  phi <- model$phi; mu <- model$mu
-  p <- length(phi); m <- length(resid)
+  phi <- model$phi
+  mu <- model$mu
+  p <- length(phi)
+  m <- length(resid)
   hist <- numeric(max(p, 1L))
-  out <- numeric(n); q <- 0L
+  out <- numeric(n)
+  q <- 0L
   BURN <- 100L
   for (t in seq_len(BURN + n)) {
     j <- as.integer(g$unif() * m)
@@ -118,7 +129,8 @@ Btsieve <- function(x, fit_fn = NULL, rvs_fn = NULL, stat = NULL, B = 200,
     if (p > 0L) for (k in seq_len(p)) v <- v + phi[k] * hist[k]
     if (length(hist) > 1L) for (k in length(hist):2L) hist[k] <- hist[k - 1L]
     hist[1] <- v
-    if (t > BURN) { q <- q + 1L; out[q] <- v + mu }
+    if (t > BURN) { q <- q + 1L
+    out[q] <- v + mu }
   }
   out
 }

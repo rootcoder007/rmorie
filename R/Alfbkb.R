@@ -35,6 +35,8 @@ Alfbkb <- function(s, w, b = NULL, frames = NULL) {
     out[[i]] <- Tf
   }
   est <- mean(vapply(out, function(Tf) mean(Tf$t), numeric(1)))
-  list(frames = out, quat = quats, estimate = est, n = n,
-       method = "AlphaFold backbone update (quaternion to rigid frame)")
+  list(
+    frames = out, quat = quats, estimate = est, n = n,
+    method = "AlphaFold backbone update (quaternion to rigid frame)"
+  )
 }

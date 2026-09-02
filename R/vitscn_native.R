@@ -26,8 +26,11 @@
 #' @examples
 #' Vitscn(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 Vitscn <- function(q, k, v, tau = 0.1, B = NULL) {
-  Qa <- as.matrix(q); Ka <- as.matrix(k); Va <- as.matrix(v)
-  storage.mode(Qa) <- "double"; storage.mode(Ka) <- "double"
+  Qa <- as.matrix(q)
+  Ka <- as.matrix(k)
+  Va <- as.matrix(v)
+  storage.mode(Qa) <- "double"
+  storage.mode(Ka) <- "double"
   storage.mode(Va) <- "double"
   t <- as.numeric(tau)[1]
   if (!(t > 0.01)) stop(sprintf("Vitscn: tau must exceed 0.01 (paper constraint), got %g", t), call. = FALSE)
@@ -37,22 +40,27 @@ Vitscn <- function(q, k, v, tau = 0.1, B = NULL) {
     a <- switch(nm, q = Qa, k = Ka, v = Va)
     if (!all(is.finite(a))) stop(sprintf("Vitscn: %s contains non-finite values", nm), call. = FALSE)
   }
-  nq <- nrow(Qa); nk <- nrow(Ka)
+  nq <- nrow(Qa)
+  nk <- nrow(Ka)
   if (is.null(B)) {
     Bm <- matrix(0, nq, nk)
   } else {
-    Bm <- as.matrix(B); storage.mode(Bm) <- "double"
+    Bm <- as.matrix(B)
+    storage.mode(Bm) <- "double"
     if (nrow(Bm) != nq || ncol(Bm) != nk) {
       stop(sprintf("Vitscn: B must be (%d, %d)", nq, nk), call. = FALSE)
     }
   }
-  qn <- sqrt(rowSums(Qa * Qa)); kn <- sqrt(rowSums(Ka * Ka))
+  qn <- sqrt(rowSums(Qa * Qa))
+  kn <- sqrt(rowSums(Ka * Ka))
   if (any(qn == 0) || any(kn == 0)) {
     stop("Vitscn: cosine similarity undefined for a zero row", call. = FALSE)
   }
   S <- (Qa %*% t(Ka)) / (qn %o% kn) / t + Bm
   W <- t(apply(S, 1L, function(row) {
-    m <- max(row); e <- exp(row - m); e / sum(e)
+    m <- max(row)
+    e <- exp(row - m)
+    e / sum(e)
   }))
   if (nk == 1L) W <- matrix(W, nrow = nq)
   out <- W %*% Va

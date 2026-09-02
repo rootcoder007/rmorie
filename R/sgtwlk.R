@@ -23,7 +23,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Sgtwlk(V)
 Sgtwlk <- function(A, labels0 = NULL, max_iter = 3) {
-  Am <- as.matrix(A); n <- nrow(Am)
+  Am <- as.matrix(A)
+  n <- nrow(Am)
   lab <- if (is.null(labels0)) rep(0L, n) else as.integer(round(as.numeric(labels0)))
   hist <- length(unique(lab))
   for (it in seq_len(as.integer(max_iter))) {

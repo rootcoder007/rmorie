@@ -44,18 +44,23 @@
 
 #' @noRd
 .krigsv_wls2 <- function(x, y, w) {
-  sw <- sum(w); sx <- sum(w * x); sxx <- sum(w * x * x)
-  sy <- sum(w * y); sxy <- sum(w * x * y)
+  sw <- sum(w)
+  sx <- sum(w * x)
+  sxx <- sum(w * x * x)
+  sy <- sum(w * y)
+  sxy <- sum(w * x * y)
   det <- sw * sxx - sx * sx
   if (abs(det) > 1e-300) {
     c0 <- (sxx * sy - sx * sxy) / det
     cc <- (sw * sxy - sx * sy) / det
   } else {
-    c0 <- -1; cc <- -1
+    c0 <- -1
+    cc <- -1
   }
   if (c0 < 0 || cc < 0) {
     if (c0 < 0 && cc < 0) {
-      c0 <- 0; cc <- 0
+      c0 <- 0
+      cc <- 0
     } else if (c0 < 0) {
       c0 <- 0
       cc <- if (sxx > 0) sxy / sxx else 0
@@ -73,18 +78,22 @@
 morie_variogram_fit <- function(coords, values, model = "exponential",
                                 n_bins = 15, max_dist = NULL) {
   ev <- .sp_empirical_variogram(coords, values, n_bins, max_dist)
-  lag <- as.numeric(ev$lag); gam <- as.numeric(ev$gamma)
+  lag <- as.numeric(ev$lag)
+  gam <- as.numeric(ev$gamma)
   cnt <- as.integer(ev$n_pairs)
   use <- which(cnt > 0 & !is.na(lag))
   if (length(use) < 3L) {
     stop("fewer than three non-empty lag classes; cannot fit three parameters",
          call. = FALSE)
   }
-  hs <- lag[use]; gs <- gam[use]; ws <- as.numeric(cnt[use])
+  hs <- lag[use]
+  gs <- gam[use]
+  ws <- as.numeric(cnt[use])
 
   NGRID <- 200L
   hmax <- max(hs)
-  lo <- log(hmax / 20); hi <- log(2 * hmax)
+  lo <- log(hmax / 20)
+  hi <- log(2 * hmax)
   best <- NULL
   for (k in seq_len(NGRID) - 1L) {
     a <- exp(lo + (hi - lo) * k / (NGRID - 1L))
@@ -94,8 +103,11 @@ morie_variogram_fit <- function(coords, values, model = "exponential",
       best <- c(a = a, fit)
     }
   }
-  a <- best[["a"]]; c0 <- best[["c0"]]; cc <- best[["c"]]
-  lo_a <- exp(lo); hi_a <- exp(hi)
+  a <- best[["a"]]
+  c0 <- best[["c0"]]
+  cc <- best[["c"]]
+  lo_a <- exp(lo)
+  hi_a <- exp(hi)
   range_at_bound <- (abs(a - lo_a) <= 1e-12 * lo_a) || (abs(a - hi_a) <= 1e-12 * hi_a)
 
   fitted <- c0 + cc * (1 - .krigsv_rho(hs / a, model))

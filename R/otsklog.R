@@ -25,13 +25,18 @@
 #' @export
 Sinkhlog <- function(a, b, C, epsilon = 0.1, max_iter = 200, tol = 1e-13,
                      f0 = NULL, g0 = NULL) {
-  av <- .s03vec(a); bv <- .s03vec(b); Cm <- .s03mat(C)
-  n <- length(av); m <- length(bv); e <- as.numeric(epsilon)
+  av <- .s03vec(a)
+  bv <- .s03vec(b)
+  Cm <- .s03mat(C)
+  n <- length(av)
+  m <- length(bv)
+  e <- as.numeric(epsilon)
   f <- if (!is.null(f0)) .s03vec(f0) else numeric(n)
   g <- if (!is.null(g0)) .s03vec(g0) else numeric(m)
   la <- ifelse(av > 0, log(pmax(av, 1e-300)), -1e300)
   lb <- ifelse(bv > 0, log(pmax(bv, 1e-300)), -1e300)
-  it <- 0L; err <- NaN
+  it <- 0L
+  err <- NaN
   for (itr in seq_len(as.integer(max_iter))) {
     it <- itr
     for (i in seq_len(n)) {

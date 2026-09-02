@@ -149,7 +149,9 @@ morie_rank_index <- function(x, y, variant = "mrc", M = NULL) {
     cc <- as.numeric(outer(X[, 2L], X[, 2L], "-"))
     ww <- as.numeric(wm)
     keep <- ww != 0
-    a <- a[keep]; cc <- cc[keep]; ww <- ww[keep]
+    a <- a[keep]
+    cc <- cc[keep]
+    ww <- ww[keep]
     # value as t -> -inf: a + t c -> +inf exactly when c < 0
     base <- sum(ww[cc < 0 | (cc == 0 & a > 0)])
     moving <- cc != 0

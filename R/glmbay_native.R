@@ -54,7 +54,8 @@
 morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
                                       prior_sd = 2.5, add_intercept = TRUE,
                                       max_iter = 100, tol = 1e-10) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   yv <- as.numeric(y)
   n <- nrow(Xm)
   if (n == 0L) stop("glmbay: no observations")
@@ -68,7 +69,10 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
     stop("glmbay: the prior standard deviation must be positive")
   tau <- 1.0 / (ps * ps)
 
-  beta <- rep(0.0, p); it <- 0L; converged <- FALSE; H <- NULL
+  beta <- rep(0.0, p)
+  it <- 0L
+  converged <- FALSE
+  H <- NULL
   for (it in seq_len(as.integer(max_iter))) {
     eta <- as.numeric(Xm %*% beta)
     mu <- lk$inv(eta)
@@ -80,14 +84,17 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
     Lc <- chol(A)
     new <- as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
     shift <- max(abs(new - beta))
-    beta <- new; H <- A
-    if (shift < tol) { converged <- TRUE; break }
+    beta <- new
+    H <- A
+    if (shift < tol) { converged <- TRUE
+    break }
   }
 
   Lc <- chol(H)
   cov <- matrix(0.0, p, p)
   for (a in seq_len(p)) {
-    e <- numeric(p); e[a] <- 1.0
+    e <- numeric(p)
+    e[a] <- 1.0
     cov[, a] <- as.numeric(backsolve(Lc, forwardsolve(t(Lc), e)))
   }
   se <- sqrt(pmax(diag(cov), 0.0))

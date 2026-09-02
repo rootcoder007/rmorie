@@ -29,9 +29,13 @@
 #'          eps_bar = 0.1, eps = 0.2, n = 100, Cconst = 1)
 Testcond <- function(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n,
                      Cconst) {
-  pb <- as.numeric(prior_ball); le <- as.numeric(log_entropy)
-  sm <- as.numeric(sieve_mass); eb <- as.numeric(eps_bar)
-  ep <- as.numeric(eps); n <- as.integer(n); Cc <- as.numeric(Cconst)
+  pb <- as.numeric(prior_ball)
+  le <- as.numeric(log_entropy)
+  sm <- as.numeric(sieve_mass)
+  eb <- as.numeric(eps_bar)
+  ep <- as.numeric(eps)
+  n <- as.integer(n)
+  Cc <- as.numeric(Cconst)
   if (pb <= 0 || pb > 1) stop("the prior ball mass must lie in (0, 1]")
   if (le < 0) stop("the log entropy must be non-negative")
   if (sm < 0 || sm > 1) stop("the sieve mass must lie in [0, 1]")
@@ -43,7 +47,9 @@ Testcond <- function(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n,
   s1 <- log(pb) + Cc * neb
   s2 <- n * ep^2 - le
   s3 <- if (sm > 0) -(Cc + 4) * neb - log(sm) else Inf
-  c1 <- as.numeric(s1 >= 0); c2 <- as.numeric(s2 >= 0); c3 <- as.numeric(s3 >= 0)
+  c1 <- as.numeric(s1 >= 0)
+  c2 <- as.numeric(s2 >= 0)
+  c3 <- as.numeric(s3 >= 0)
   .t1_result(holds = as.numeric(c1 && c2 && c3), cond_prior = c1,
              cond_entropy = c2, cond_sieve = c3, slack_prior = s1,
              slack_entropy = s2, slack_sieve = s3, n_eps_bar_sq = neb,

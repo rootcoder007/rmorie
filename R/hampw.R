@@ -31,13 +31,17 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
   r <- .s03vec(y)
   if (length(r) == 0L) stop("hampel_three_part: y is empty")
   ck <- .hampel_check(a, b, c, "hampel_three_part")
-  a <- ck[1L]; b <- ck[2L]; c <- ck[3L]
-  w <- numeric(length(r)); nz <- 0L
+  a <- ck[1L]
+  b <- ck[2L]
+  c <- ck[3L]
+  w <- numeric(length(r))
+  nz <- 0L
   for (i in seq_along(r)) {
     u <- abs(r[i])
     wi <- if (u <= a) 1 else if (u <= b) a / u else if (u <= c) {
       a * (c - u) / ((c - b) * u)
-    } else { nz <- nz + 1L; 0 }
+    } else { nz <- nz + 1L
+    0 }
     w[i] <- wi
   }
   list(estimate = sum(w) / length(r), weights = w, n_zero = nz,
@@ -58,7 +62,9 @@ Hampw <- function(y, a = 2, b = 4, c = 8) {
 #' @return A vector, from \code{c}.
 #' @export
 .hampel_check <- function(a, b, c, who) {
-  a <- as.numeric(a); b <- as.numeric(b); c <- as.numeric(c)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  c <- as.numeric(c)
   if (!(a > 0 && a <= b && b < c)) {
     stop(paste0(who, ": the constants must satisfy 0 < a <= b < c"))
   }

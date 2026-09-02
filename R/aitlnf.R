@@ -21,7 +21,9 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Lgtnfit(D)
 Lgtnfit <- function(X, ddof = 1) {
-  X <- as.matrix(X); n <- nrow(X); D <- ncol(X)
+  X <- as.matrix(X)
+  n <- nrow(X)
+  D <- ncol(X)
   if (n < 2L) stop("at least two compositions are required")
   if (D < 2L) stop("a composition needs at least two parts")
   if (any(X <= 0)) stop("compositions must be strictly positive")
@@ -45,7 +47,9 @@ Lgtnfit <- function(X, ddof = 1) {
     ll <- ll - 0.5 * p * log(2 * pi) - 0.5 * logdet -
       sum(log(X[k, ])) - 0.5 * q
   }
-  .t1_result(mu = mu, Sigma = S, center = cen, loglik = ll,
-             n = as.numeric(n), D = as.numeric(D),
-             method = "Logistic-normal MLE via the alr transform")
+  .t1_result(
+    mu = mu, Sigma = S, center = cen, loglik = ll,
+    n = as.numeric(n), D = as.numeric(D),
+    method = "Logistic-normal MLE via the alr transform"
+  )
 }

@@ -25,25 +25,36 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Drhtg(V, V)
 Drhtg <- function(y, D, X = NULL, strata = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D)
+  n <- length(yv)
   if (n == 0L) stop("Drhtg: empty input, y has no observations")
   if (length(dv) != n) stop("Drhtg: y and D must have the same length")
   Xr <- if (is.null(X)) NULL else .s03mat(X)
   st <- if (is.null(strata)) rep("all", n) else as.character(strata)
   if (length(st) != n) stop("Drhtg: strata must have the same length as y")
   labels <- sort(unique(st))
-  catt <- numeric(0); sev <- numeric(0); ns <- numeric(0)
+  catt <- numeric(0)
+  sev <- numeric(0)
+  ns <- numeric(0)
   for (s in labels) {
-    idx <- which(st == s); ds <- dv[idx]
+    idx <- which(st == s)
+    ds <- dv[idx]
     if (length(idx) < 3L || sum(ds) <= 0 || sum(ds) >= length(ds)) {
-      catt <- c(catt, NaN); sev <- c(sev, NaN); ns <- c(ns, length(idx)); next
+      catt <- c(catt, NaN)
+      sev <- c(sev, NaN)
+      ns <- c(ns, length(idx))
+      next
     }
     xm <- if (is.null(Xr)) NULL else Xr[idx, , drop = FALSE]
     fit <- .s03drdid(yv[idx], ds, xm)
-    catt <- c(catt, fit$tau); sev <- c(sev, fit$se); ns <- c(ns, length(idx))
+    catt <- c(catt, fit$tau)
+    sev <- c(sev, fit$se)
+    ns <- c(ns, length(idx))
   }
   good <- !is.na(catt)
-  den <- sum(ns[good]); num <- sum(ns[good] * catt[good])
+  den <- sum(ns[good])
+  num <- sum(ns[good] * catt[good])
   est <- if (den > 0) num / den else NaN
   hv <- if (den > 0) sum(ns[good] * (catt[good] - est)^2) / den else 0
   pooled <- if (sum(dv) > 0 && sum(dv) < n) .s03drdid(yv, dv, Xr)$tau else NaN

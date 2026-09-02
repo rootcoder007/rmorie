@@ -24,13 +24,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Kabsch(V, V)
 Kabsch <- function(coords1, coords2) {
-  P <- .s03mat(coords1); Q <- .s03mat(coords2)
+  P <- .s03mat(coords1)
+  Q <- .s03mat(coords2)
   if (nrow(P) == 0L || nrow(Q) == 0L) stop("kabsch_superpose: coordinate set is empty")
   if (nrow(P) != nrow(Q)) stop("kabsch_superpose: coordinate sets have different point counts")
   d <- ncol(P)
   if (ncol(Q) != d) stop("kabsch_superpose: coordinate sets have different dimensions")
   n <- nrow(P)
-  A <- sweep(P, 2, colMeans(P)); B <- sweep(Q, 2, colMeans(Q))
+  A <- sweep(P, 2, colMeans(P))
+  B <- sweep(Q, 2, colMeans(Q))
   H <- t(A) %*% B
   ei <- .s03jacobi(t(H) %*% H)
   idx <- rev(seq_len(d))
@@ -41,7 +43,8 @@ Kabsch <- function(coords1, coords2) {
   U <- matrix(0, d, d)
   for (j in seq_len(d)) U[, j] <- as.numeric(H %*% V[, j]) / sing[j]
   dd <- if (det(V %*% t(U)) >= 0) 1 else -1
-  scal <- rep(1, d); scal[d] <- dd
+  scal <- rep(1, d)
+  scal[d] <- dd
   R <- V %*% diag(scal, d) %*% t(U)
   ss <- sum((A %*% t(R) - B)^2)
   rmsd <- sqrt(ss / n)

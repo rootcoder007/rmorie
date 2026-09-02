@@ -29,15 +29,19 @@
 #' @export
 .mor_did_panel <- function(y, unit, time) {
   y <- as.numeric(y)
-  u <- as.vector(unit); t <- as.vector(time)
+  u <- as.vector(unit)
+  t <- as.vector(time)
   if (!(length(y) == length(u) && length(u) == length(t)))
     stop(sprintf(paste("y, unit and time must have the same length,",
                        "got %d, %d and %d."), length(y), length(u), length(t)))
-  units <- sort(unique(u)); periods <- sort(unique(t))
-  n <- length(units); T <- length(periods)
+  units <- sort(unique(u))
+  periods <- sort(unique(t))
+  n <- length(units)
+  T <- length(periods)
   if (n < 2L || T < 2L)
     stop(sprintf("need at least 2 units and 2 periods, got %d and %d.", n, T))
-  ui <- match(u, units); ti <- match(t, periods)
+  ui <- match(u, units)
+  ti <- match(t, periods)
   if (anyDuplicated(cbind(ui, ti)))
     stop("the panel has duplicate (unit, time) observations.")
   Y <- matrix(NA_real_, n, T)
@@ -115,7 +119,8 @@
 #' S <- c("a", "b", "c")
 #' morie_grouptimeatt(V, S)
 morie_grouptimeatt <- function(Y, g, control = "notyet") {
-  n <- nrow(Y); T <- ncol(Y)
+  n <- nrow(Y)
+  T <- ncol(Y)
   out <- list()
   cohorts <- sort(unique(g[is.finite(g)]))
   for (gg in cohorts) {
@@ -128,7 +133,8 @@ morie_grouptimeatt <- function(Y, g, control = "notyet") {
       ctrl <- if (control == "never") !is.finite(g) else g > max(t, gg)
       if (sum(treated) == 0L || sum(ctrl) == 0L) next
       dY <- Y[, t + 1L] - Y[, base]
-      mt <- mean(dY[treated]); mc <- mean(dY[ctrl])
+      mt <- mean(dY[treated])
+      mc <- mean(dY[ctrl])
       infl <- numeric(n)
       infl[treated] <- (dY[treated] - mt) / sum(treated) * n
       infl[ctrl] <- -(dY[ctrl] - mc) / sum(ctrl) * n
@@ -238,7 +244,9 @@ morie_cssant <- function(y, D, unit, time, cohort = NULL,
   if (!(control %in% c("notyet", "never")))
     stop("control must be 'notyet' or 'never'.")
   p <- .mor_did_panel(y, unit, time)
-  Y <- p$Y; units <- p$units; periods <- p$periods
+  Y <- p$Y
+  units <- p$units
+  periods <- p$periods
   if (is.null(cohort)) {
     g <- .mor_did_first(D, unit, time, units, periods)$g
   } else {

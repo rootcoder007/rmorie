@@ -24,29 +24,37 @@ Alfopm <- function(m, wa, wb, wo, layernorm = TRUE) {
 
   av <- array(0, c(s, n, cc))
   bv <- array(0, c(s, n, cc))
-  for (si in seq_len(s)) for (i in seq_len(n)) {
-    x <- if (layernorm) alfLnorm(m[si, i, ]) else as.numeric(m[si, i, ])
-    av[si, i, ] <- alfLin(x, wa)
-    bv[si, i, ] <- alfLin(x, wb)
+  for (si in seq_len(s)) {
+    for (i in seq_len(n)) {
+      x <- if (layernorm) alfLnorm(m[si, i, ]) else as.numeric(m[si, i, ])
+      av[si, i, ] <- alfLin(x, wa)
+      bv[si, i, ] <- alfLin(x, wb)
+    }
   }
 
   # line 3: outer product averaged over sequences, flattened in the same
   # (p, q) order as the Python arm
   o <- array(0, c(n, n, cc * cc))
-  for (i in seq_len(n)) for (j in seq_len(n)) {
-    f <- numeric(cc * cc)
-    idx <- 1L
-    for (p in seq_len(cc)) for (q in seq_len(cc)) {
-      f[idx] <- sum(av[, i, p] * bv[, j, q]) / s
-      idx <- idx + 1L
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      f <- numeric(cc * cc)
+      idx <- 1L
+      for (p in seq_len(cc)) {
+        for (q in seq_len(cc)) {
+          f[idx] <- sum(av[, i, p] * bv[, j, q]) / s
+          idx <- idx + 1L
+        }
+      }
+      o[i, j, ] <- f
     }
-    o[i, j, ] <- f
   }
 
   cz <- nrow(wo)
   z <- array(0, c(n, n, cz))
   for (i in seq_len(n)) for (j in seq_len(n)) z[i, j, ] <- alfLin(o[i, j, ], wo)
 
-  list(z = z, o = o, estimate = mean(z), n = n,
-       method = "AlphaFold outer product mean (pair representation update)")
+  list(
+    z = z, o = o, estimate = mean(z), n = n,
+    method = "AlphaFold outer product mean (pair representation update)"
+  )
 }

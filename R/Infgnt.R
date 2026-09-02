@@ -32,13 +32,17 @@ Infgnt <- function(log_p, theta, support, discrete = TRUE, h = 1e-5) {
   hv <- as.numeric(h)
   if (hv <= 0) stop("information_geometry: h must be positive")
   dx <- if (isTRUE(discrete)) 1 else (xs[2] - xs[1])
-  G <- matrix(0, d, d); total <- 0
+  G <- matrix(0, d, d)
+  total <- 0
   for (x in xs) {
     w <- exp(as.numeric(log_p(x, th))) * dx
     total <- total + w
     sc <- numeric(d)
     for (j in seq_len(d)) {
-      tp <- th; tm <- th; tp[j] <- tp[j] + hv; tm[j] <- tm[j] - hv
+      tp <- th
+      tm <- th
+      tp[j] <- tp[j] + hv
+      tm[j] <- tm[j] - hv
       sc[j] <- (as.numeric(log_p(x, tp)) - as.numeric(log_p(x, tm))) / (2 * hv)
     }
     G <- G + w * (sc %o% sc)

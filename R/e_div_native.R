@@ -105,13 +105,18 @@
 #' @return A vector, from \code{c}.
 #' @export
 .mor_ed_best_split <- function(P, a, b, min_size) {
-  bestq <- -Inf; bt <- -1L; bk <- -1L
-  lo <- a + min_size; hi <- b - min_size
+  bestq <- -Inf
+  bt <- -1L
+  bk <- -1L
+  lo <- a + min_size
+  hi <- b - min_size
   if (hi >= lo) for (tau in seq.int(lo, hi)) {
     k0 <- tau + min_size
     if (k0 <= b) for (kappa in seq.int(k0, b)) {
       q <- .mor_ed_qhat(P, a, tau, kappa)
-      if (q > bestq) { bestq <- q; bt <- tau; bk <- kappa }
+      if (q > bestq) { bestq <- q
+      bt <- tau
+      bk <- kappa }
     }
   }
   c(bestq, bt, bk)
@@ -131,7 +136,8 @@
 #' @export
 .mor_ed_shuffle <- function(order, clusters, us, pos) {
   for (ci in seq_len(nrow(clusters))) {
-    a <- clusters[ci, 1L]; b <- clusters[ci, 2L]
+    a <- clusters[ci, 1L]
+    b <- clusters[ci, 2L]
     L <- b - a
     if (L > 1L) for (i in seq.int(L - 1L, 1L)) {
       j <- as.integer(us[pos] * (i + 1))
@@ -180,7 +186,9 @@ morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
   if (n < 2L * min_size) stop("series too short")
   if (!(alpha > 0 && alpha < 2)) stop("alpha must be in (0, 2)")
   R <- as.integer(R)
-  cps <- integer(0); pvals <- numeric(0); qstats <- numeric(0)
+  cps <- integer(0)
+  pvals <- numeric(0)
+  qstats <- numeric(0)
   clusters_of <- function(taus) {
     s <- sort(taus)
     cbind(c(0L, s), c(s, n))
@@ -189,12 +197,15 @@ morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
   repeat {
     if (!is.null(max_cp) && length(cps) >= max_cp) break
     clusters <- clusters_of(cps)
-    bestq <- -Inf; tau_hat <- -1L
+    bestq <- -Inf
+    tau_hat <- -1L
     for (ci in seq_len(nrow(clusters))) {
-      a <- clusters[ci, 1L]; b <- clusters[ci, 2L]
+      a <- clusters[ci, 1L]
+      b <- clusters[ci, 2L]
       if (b - a >= 2L * min_size) {
         r_ <- .mor_ed_best_split(P, a, b, min_size)
-        if (r_[1] > bestq) { bestq <- r_[1]; tau_hat <- as.integer(r_[2]) }
+        if (r_[1] > bestq) { bestq <- r_[1]
+        tau_hat <- as.integer(r_[2]) }
       }
     }
     if (tau_hat < 0L) break
@@ -208,7 +219,8 @@ morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
       Pp <- .mor_ed_prefix(.mor_ed_dist(zp, alpha))
       bq <- -Inf
       for (ci in seq_len(nrow(clusters))) {
-        a <- clusters[ci, 1L]; b <- clusters[ci, 2L]
+        a <- clusters[ci, 1L]
+        b <- clusters[ci, 2L]
         if (b - a >= 2L * min_size) {
           q <- .mor_ed_best_split(Pp, a, b, min_size)[1]
           if (q > bq) bq <- q

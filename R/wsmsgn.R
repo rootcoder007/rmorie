@@ -21,10 +21,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Sgntest(V)
 Sgntest <- function(x, md = 0) {
-  x <- .t1_vec(x); n <- length(x)
+  x <- .t1_vec(x)
+  n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")
   md <- as.numeric(md)
-  pos <- sum(x > md); neg <- sum(x < md); m <- pos + neg
+  pos <- sum(x > md)
+  neg <- sum(x < md)
+  m <- pos + neg
   if (m == 0L) stop("every observation equals md; the test is vacuous")
   k <- max(pos, neg)
   j <- k:m

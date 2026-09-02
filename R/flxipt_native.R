@@ -24,7 +24,8 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .flxipt_expand <- function(W, spec) {
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   n <- nrow(W)
   if (n == 0L) return(matrix(0, nrow = 0, ncol = 1))
   p <- ncol(W)
@@ -106,8 +107,10 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @export
 .flxipt_logit_irls <- function(X, y, ridge = 1e-10, penalty = 0,
                                max_iter = 200, tol = 1e-8) {
-  X <- as.matrix(X); y <- as.numeric(y)
-  n <- nrow(X); m <- ncol(X)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  n <- nrow(X)
+  m <- ncol(X)
   b <- rep(0, m)
   for (it in seq_len(max_iter)) {
     eta <- as.numeric(X %*% b)
@@ -120,7 +123,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
     A <- XtW %*% X + diag(ridge + penalty, m, m)
     b_new <- tryCatch(as.numeric(solve(A, XtW %*% z)),
                       error = function(e) b)
-    if (max(abs(b_new - b)) < tol) { b <- b_new; break }
+    if (max(abs(b_new - b)) < tol) { b <- b_new
+    break }
     b <- b_new
   }
   b
@@ -139,7 +143,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .flxipt_lstsq <- function(X, y, ridge = 1e-10) {
-  X <- as.matrix(X); y <- as.numeric(y)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
   m <- ncol(X)
   A <- t(X) %*% X + diag(ridge, m, m)
   as.numeric(solve(A, t(X) %*% y))
@@ -222,11 +227,14 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
   u <- sort(v, decreasing = TRUE)
-  css <- 0; rho <- 0; theta <- 0
+  css <- 0
+  rho <- 0
+  theta <- 0
   for (j in seq_len(n)) {
     css <- css + u[j]
     t <- (css - 1) / j
-    if (u[j] - t > 0) { rho <- j; theta <- t }
+    if (u[j] - t > 0) { rho <- j
+    theta <- t }
   }
   pmax(v - theta, 0)
 }
@@ -246,7 +254,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 .flxipt_nnls_simplex <- function(Z, y, iters = 8000, tol = 1e-14) {
-  n <- nrow(Z); J <- ncol(Z)
+  n <- nrow(Z)
+  J <- ncol(Z)
   if (J == 0L) return(numeric(0))
   if (J == 1L) return(1)
   G <- crossprod(Z) / n
@@ -260,7 +269,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
     nrm <- sqrt(sum(u^2))
     if (nrm <= 0) break
     v <- u / nrm
-    if (abs(nrm - lam) < 1e-13 * max(nrm, 1)) { lam <- nrm; break }
+    if (abs(nrm - lam) < 1e-13 * max(nrm, 1)) { lam <- nrm
+    break }
     lam <- nrm
   }
   step <- if (lam > 0) 1 / lam else 1
@@ -278,7 +288,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
     mom <- (tk - 1) / tn
     z <- nxt + mom * (nxt - a)
     shift <- max(abs(nxt - a))
-    a <- nxt; tk <- tn
+    a <- nxt
+    tk <- tn
     if (shift < tol) break
   }
 
@@ -300,7 +311,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 cv_risk <- function(y, Z, loss = "l2") {
-  y <- as.numeric(y); Z <- as.matrix(Z)
+  y <- as.numeric(y)
+  Z <- as.matrix(Z)
   J <- ncol(Z)
   out <- numeric(J)
   if (loss == "l2") {
@@ -434,7 +446,8 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
                           meta = "nnls", trim = 0.01, ridge = 1e-8,
                           stabilize = FALSE) {
-  Av <- as.numeric(A); n <- length(Av)
+  Av <- as.numeric(A)
+  n <- length(Av)
   if (any(!(Av %in% c(0, 1)))) {
     stop("flxipt: the treatment must be binary 0/1")
   }
@@ -490,7 +503,8 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
                      meta = "nnls", trim = 0.01, ridge = 1e-8,
                      level = 0.95) {
-  yv <- as.numeric(y); Av <- as.numeric(A)
+  yv <- as.numeric(y)
+  Av <- as.numeric(A)
   n <- length(yv)
   if (length(Av) != n) {
     stop(sprintf("flxipt: %d outcomes but %d treatments", n, length(Av)))

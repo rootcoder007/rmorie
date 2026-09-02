@@ -13,13 +13,16 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Predacc(V, V)
 Predacc <- function(y, yhat) {
-  y <- as.numeric(y); yhat <- as.numeric(yhat)
+  y <- as.numeric(y)
+  yhat <- as.numeric(yhat)
   if (length(y) != length(yhat)) stop("y and yhat must have the same length")
   n <- length(y)
   if (n < 2L) stop("need at least two observations")
-  my <- sum(y) / n; mh <- sum(yhat) / n
+  my <- sum(y) / n
+  mh <- sum(yhat) / n
   num <- sum((yhat - mh) * (y - my))
-  dy <- sum((y - my)^2); dh <- sum((yhat - mh)^2)
+  dy <- sum((y - my)^2)
+  dh <- sum((yhat - mh)^2)
   if (dy <= 0 || dh <= 0) stop("observed and predicted must both vary")
   r <- num / sqrt(dh * dy)
   .t1_result(accuracy = r, r2 = r * r, n = n,

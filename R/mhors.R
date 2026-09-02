@@ -30,11 +30,17 @@ Mhors <- function(tables, confidence = 0.95) {
   M <- as.matrix(tables)
   if (!nrow(M)) stop("At least one table required")
   if (ncol(M) != 4L) stop("tables must have four columns: a, b, c, d")
-  a <- as.numeric(M[, 1]); b <- as.numeric(M[, 2])
-  cc <- as.numeric(M[, 3]); d <- as.numeric(M[, 4])
+  a <- as.numeric(M[, 1])
+  b <- as.numeric(M[, 2])
+  cc <- as.numeric(M[, 3])
+  d <- as.numeric(M[, 4])
   nk <- a + b + cc + d
   keep <- nk != 0
-  a <- a[keep]; b <- b[keep]; cc <- cc[keep]; d <- d[keep]; nk <- nk[keep]
+  a <- a[keep]
+  b <- b[keep]
+  cc <- cc[keep]
+  d <- d[keep]
+  nk <- nk[keep]
   num <- sum(a * d / nk)
   den <- sum(b * cc / nk)
   P <- sum((a + d) * a * d / nk^2)

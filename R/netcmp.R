@@ -25,8 +25,11 @@
 #' @export
 Graphcmp <- function(G1, G2, kernel = "wl", h = 3, k_size = 3, lam = 0.1) {
   rw <- function(a, b) {
-    A <- .s03mat(a); B <- .s03mat(b)
-    n <- nrow(A); m <- nrow(B); N <- n * m
+    A <- .s03mat(a)
+    B <- .s03mat(b)
+    n <- nrow(A)
+    m <- nrow(B)
+    N <- n * m
     M <- matrix(0, N, N)
     for (i in seq_len(n)) for (j in seq_len(m)) for (p in seq_len(n)) for (q in seq_len(m)) {
       M[(i - 1L) * m + j, (p - 1L) * m + q] <- -lam * A[i, p] * B[j, q]
@@ -44,7 +47,9 @@ Graphcmp <- function(G1, G2, kernel = "wl", h = 3, k_size = 3, lam = 0.1) {
   } else {
     function(a, b) Wlkernel(a, b, h)$estimate
   }
-  raw <- f(G1, G2); k11 <- f(G1, G1); k22 <- f(G2, G2)
+  raw <- f(G1, G2)
+  k11 <- f(G1, G1)
+  k22 <- f(G2, G2)
   d <- if (k11 > 0 && k22 > 0) sqrt(k11 * k22) else 0
   list(estimate = if (d > 0) raw / d else NaN, raw = raw, k11 = k11,
        k22 = k22, kernel = kernel,

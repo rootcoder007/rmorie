@@ -32,7 +32,8 @@
 #' @export
 morie_rapaf_population_attributable_risk <- function(case_counts,
                                                       rate_ratios) {
-  cc <- as.numeric(case_counts); rr <- as.numeric(rate_ratios)
+  cc <- as.numeric(case_counts)
+  rr <- as.numeric(rate_ratios)
   n <- length(cc)
   if (length(rr) != n)
     stop(sprintf("rapaf: %d strata of cases but %d rate ratios",
@@ -66,7 +67,8 @@ morie_rapaf_population_attributable_risk <- function(case_counts,
 #'   man. Acta Unio Internationalis Contra Cancrum, 9(3), 531-541.
 #' @export
 morie_rapaf_levin_ar <- function(prevalence, rate_ratio) {
-  p <- as.numeric(prevalence); R <- as.numeric(rate_ratio)
+  p <- as.numeric(prevalence)
+  R <- as.numeric(rate_ratio)
   if (p < 0 || p > 1)
     stop(sprintf("rapaf: prevalence must be in [0, 1], got %g", p))
   if (R <= 0) stop("rapaf: the rate ratio must be positive")
@@ -93,7 +95,8 @@ morie_rapaf_levin_ar <- function(prevalence, rate_ratio) {
 #' @export
 morie_rapaf_partial_ar <- function(case_counts, rate_ratios,
                                    baseline_map) {
-  cc <- as.numeric(case_counts); rr <- as.numeric(rate_ratios)
+  cc <- as.numeric(case_counts)
+  rr <- as.numeric(rate_ratios)
   n <- length(cc)
   if (length(rr) != n)
     stop(sprintf("rapaf: %d strata of cases but %d rate ratios",
@@ -101,7 +104,8 @@ morie_rapaf_partial_ar <- function(case_counts, rate_ratios,
   if (n < 2L) stop(sprintf("rapaf: need at least 2 strata, got %d", n))
   if (any(cc < 0)) stop("rapaf: case counts must be non-negative")
   if (any(rr <= 0)) stop("rapaf: rate ratios must be positive")
-  tot <- sum(cc); if (tot <= 1e-12) stop("rapaf: there are no cases")
+  tot <- sum(cc)
+  if (tot <= 1e-12) stop("rapaf: there are no cases")
   bm <- as.integer(baseline_map)
   if (length(bm) != n)
     stop(sprintf("rapaf: %d baseline targets for %d strata",
@@ -131,20 +135,25 @@ morie_rapaf_partial_ar <- function(case_counts, rate_ratios,
 morie_rapaf_rate_ratios_from_logit <- function(case_counts,
                                                control_counts, design,
                                                ridge = 1e-8) {
-  ca <- as.numeric(case_counts); co <- as.numeric(control_counts)
+  ca <- as.numeric(case_counts)
+  co <- as.numeric(control_counts)
   D <- as.matrix(design)
   n <- length(ca)
   if (length(co) != n || nrow(D) != n)
     stop("rapaf: cases, controls and design must agree in length")
-  rows <- list(); y <- numeric(0); w <- numeric(0)
+  rows <- list()
+  y <- numeric(0)
+  w <- numeric(0)
   for (j in seq_len(n)) {
     if (ca[j] > 0) {
       rows[[length(rows) + 1L]] <- D[j, ]
-      y <- c(y, 1.0); w <- c(w, ca[j])
+      y <- c(y, 1.0)
+      w <- c(w, ca[j])
     }
     if (co[j] > 0) {
       rows[[length(rows) + 1L]] <- D[j, ]
-      y <- c(y, 0.0); w <- c(w, co[j])
+      y <- c(y, 0.0)
+      w <- c(w, co[j])
     }
   }
   if (length(rows) == 0L)
@@ -178,14 +187,16 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
                                                 level = 0.95,
                                                 draws = 2000L,
                                                 seed = 0L) {
-  cc <- as.numeric(case_counts); rr <- as.numeric(rate_ratios)
+  cc <- as.numeric(case_counts)
+  rr <- as.numeric(rate_ratios)
   n <- length(cc)
   if (length(rr) != n)
     stop(sprintf("rapaf: %d strata of cases but %d rate ratios",
                  n, length(rr)))
   if (any(cc < 0)) stop("rapaf: case counts must be non-negative")
   if (any(rr <= 0)) stop("rapaf: rate ratios must be positive")
-  tot <- sum(cc); if (tot <= 1e-12) stop("rapaf: there are no cases")
+  tot <- sum(cc)
+  if (tot <= 1e-12) stop("rapaf: there are no cases")
   se <- as.numeric(log_rr_se)
   if (length(se) != length(rr))
     stop(sprintf("rapaf: %d standard errors for %d rate ratios",

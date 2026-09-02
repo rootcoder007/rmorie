@@ -22,7 +22,8 @@
 #' @examples
 #' Otpr(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 Otpr <- function(a, b, C, m) {
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
   Cm <- as.matrix(C)
   if (nrow(Cm) != length(aa) || ncol(Cm) != length(bb))
     stop("cost matrix does not match the marginals")

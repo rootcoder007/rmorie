@@ -35,8 +35,10 @@
 #' Btpair(X, y, B = 20)$se
 #' @export
 Btpair <- function(X, y, B = 200, seed = 1, alpha = 0.05) {
-  Xm <- .s03mat(X); yy <- .s03vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .s03mat(X)
+  yy <- .s03vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(yy)) stop("boot_pairs_regression: X and y have different lengths")
   if (n <= p) stop("boot_pairs_regression: need more rows than columns")
   if (as.integer(B) < 2L) stop("boot_pairs_regression: need at least two replicates")
@@ -44,7 +46,8 @@ Btpair <- function(X, y, B = 200, seed = 1, alpha = 0.05) {
   if (!(a > 0 && a < 1)) stop("boot_pairs_regression: alpha must lie strictly between 0 and 1")
   bh <- .s03lstsq(Xm, yy)
   g <- .t1_lcg(seed)
-  reps <- vector("list", as.integer(B)); ill <- 0L
+  reps <- vector("list", as.integer(B))
+  ill <- 0L
   for (b in seq_len(as.integer(B))) {
     idx <- integer(n)
     for (i in seq_len(n)) {
@@ -55,7 +58,9 @@ Btpair <- function(X, y, B = 200, seed = 1, alpha = 0.05) {
     if (length(unique(idx)) < p) ill <- ill + 1L
     reps[[b]] <- .s03lstsq(Xm[idx, , drop = FALSE], yy[idx])
   }
-  se <- numeric(p); lo <- numeric(p); hi <- numeric(p)
+  se <- numeric(p)
+  lo <- numeric(p)
+  hi <- numeric(p)
   for (j in seq_len(p)) {
     col <- vapply(reps, function(r) r[j], 0)
     se[j] <- .s03sd(col, 1L)

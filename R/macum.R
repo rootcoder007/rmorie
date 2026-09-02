@@ -16,16 +16,31 @@
 #' macum(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$cumulative
 #' @export
 macum <- function(yi, vi, order = NULL, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   idx <- if (is.null(order)) seq_len(k) else base::order(as.numeric(order))
   crit <- k02z(0.5 + 0.5 * level)
-  est <- numeric(k); ses <- numeric(k); lo <- numeric(k); hi <- numeric(k); t2s <- numeric(k)
+  est <- numeric(k)
+  ses <- numeric(k)
+  lo <- numeric(k)
+  hi <- numeric(k)
+  t2s <- numeric(k)
   for (j in seq_len(k)) {
     sub <- idx[seq_len(j)]
-    if (j == 1L) { t2 <- 0; mu <- y[sub]; vr <- v[sub] }
-    else { d <- k02dl(y[sub], v[sub]); t2 <- d$tau2; mu <- d$mu; vr <- d$var }
+    if (j == 1L) { t2 <- 0
+    mu <- y[sub]
+    vr <- v[sub] }
+    else { d <- k02dl(y[sub], v[sub])
+    t2 <- d$tau2
+    mu <- d$mu
+    vr <- d$var }
     se <- sqrt(vr)
-    est[j] <- mu; ses[j] <- se; lo[j] <- mu - crit * se; hi[j] <- mu + crit * se; t2s[j] <- t2
+    est[j] <- mu
+    ses[j] <- se
+    lo[j] <- mu - crit * se
+    hi[j] <- mu + crit * se
+    t2s[j] <- t2
   }
   list(estimate = est[k], cumulative = est, se = ses, ci_lower = lo,
        ci_upper = hi, tau2 = t2s, order_index = as.integer(idx - 1L), n = k,

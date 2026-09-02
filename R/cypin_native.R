@@ -83,7 +83,10 @@
 #' @export
 morie_cypin_descriptors <- function(smiles) {
   g <- morie_avalon_parse(smiles)
-  el <- g$el; arom <- g$arom; chg <- g$chg; bonds <- g$bonds
+  el <- g$el
+  arom <- g$arom
+  chg <- g$chg
+  bonds <- g$bonds
   n <- length(el)
   adj <- .avalon_adj(n, bonds)
   nh <- morie_avalon_h(el, arom, chg, g$hexp, bonds)
@@ -101,14 +104,16 @@ morie_cypin_descriptors <- function(smiles) {
 
   ringbond <- character(0)
   for (r in rings) for (k in seq_along(r)) {
-    a <- r[k]; b <- r[if (k == length(r)) 1L else k + 1L]
+    a <- r[k]
+    b <- r[if (k == length(r)) 1L else k + 1L]
     ringbond <- c(ringbond, if (a < b) sprintf("%d-%d", a, b)
                             else sprintf("%d-%d", b, a))
   }
   rot <- 0L
   for (bd in bonds) {
     if (bd[3] != 1) next
-    a <- bd[1]; b <- bd[2]
+    a <- bd[1]
+    b <- bd[2]
     key <- if (a < b) sprintf("%d-%d", a, b) else sprintf("%d-%d", b, a)
     if (key %in% ringbond) next
     if (length(adj[[a + 1L]]) > 1L && length(adj[[b + 1L]]) > 1L)
@@ -122,7 +127,9 @@ morie_cypin_descriptors <- function(smiles) {
     if (allaro) naro <- naro + 1L
   }
 
-  hbd <- 0L; hba <- 0L; basic <- 0L
+  hbd <- 0L
+  hba <- 0L
+  basic <- 0L
   for (i in seq_len(n)) {
     if ("D" %in% ty[[i]]) hbd <- hbd + 1L
     if ("A" %in% ty[[i]]) hba <- hba + 1L
@@ -131,7 +138,8 @@ morie_cypin_descriptors <- function(smiles) {
   hal <- sum(el %in% c("F", "Cl", "Br", "I"))
   pol <- sum(el %in% c("N", "O"))
 
-  ncarb <- 0L; nsp3 <- 0L
+  ncarb <- 0L
+  nsp3 <- 0L
   for (i in seq_len(n)) {
     if (el[i] != "C") next
     ncarb <- ncarb + 1L

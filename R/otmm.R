@@ -25,13 +25,18 @@
 #' set.seed(1)
 #' r <- Otmm(X = rnorm(10), Y = rnorm(10), batch_size = 8L, n_batches = 8L, epsilon = 0.5); TRUE
 Otmm <- function(X, Y, batch_size, n_batches, epsilon) {
-  A <- as.matrix(X); B <- as.matrix(Y)
-  n <- nrow(A); m <- nrow(B); d <- ncol(A)
+  A <- as.matrix(X)
+  B <- as.matrix(Y)
+  n <- nrow(A)
+  m <- nrow(B)
+  d <- ncol(A)
   if (ncol(B) != d) stop("point clouds must share a dimension")
-  bs <- as.integer(batch_size); M <- as.integer(n_batches)
+  bs <- as.integer(batch_size)
+  M <- as.integer(n_batches)
   if (bs < 1L || M < 1L) stop("batch_size and n_batches must be positive")
   if (bs > n || bs > m) stop("batch_size exceeds a cloud")
-  eps <- as.numeric(epsilon); u <- rep(1 / bs, bs)
+  eps <- as.numeric(epsilon)
+  u <- rep(1 / bs, bs)
   per <- vapply(seq_len(M) - 1L, function(b) {
     ix <- ((b * bs + seq_len(bs) - 1L) %% n) + 1L
     iy <- ((b * bs + seq_len(bs) - 1L) %% m) + 1L

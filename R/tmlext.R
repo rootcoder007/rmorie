@@ -27,7 +27,9 @@
 #'         c(0, 0, 0, 1, 1, 1))$ess
 #' @export
 Tmleext <- function(y, D, X = NULL, external = NULL, alpha = 0.05) {
-  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  n <- length(yv)
   S <- 1 - as.numeric(if (!is.null(external)) external else rep(0, n))
   Z <- .s03design(X, n)
   ps <- vapply(.s03matvec(Z, .s03logit(Z, S, 60L)), .s03sigmoid, 0)
@@ -36,12 +38,15 @@ Tmleext <- function(y, D, X = NULL, external = NULL, alpha = 0.05) {
     w[i] <- if (S[i] > 0.5) 1 else if (ps[i] < 1) ps[i] / (1 - ps[i]) else 0
   }
   we <- w[S < 0.5]
-  s1 <- 0; s2 <- 0
-  for (x in we) { s1 <- s1 + x; s2 <- s2 + x * x }
+  s1 <- 0
+  s2 <- 0
+  for (x in we) { s1 <- s1 + x
+  s2 <- s2 + x * x }
   ess <- if (s2 > 0) (s1 * s1) / s2 else 0
   fit <- .s03tmle(yv, d, X)
   ic <- fit$inf
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   for (i in seq_len(n)) {
     num <- num + w[i] * (fit$q1[i] - fit$q0[i]) * fit$scale
     den <- den + w[i]

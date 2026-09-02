@@ -14,7 +14,8 @@
 #' @examples
 #' Svmwolfe(alpha = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Svmwolfe <- function(alpha, X, y, K = NULL) {
-  a <- .t1_vec(alpha); yv <- .t1_vec(y)
+  a <- .t1_vec(alpha)
+  yv <- .t1_vec(y)
   if (length(a) != length(yv)) stop("alpha and y must have the same length")
   L <- morie_svm_dual_objective(a, X, yv, K = K)
   lin <- sum(a)

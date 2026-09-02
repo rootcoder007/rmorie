@@ -18,11 +18,18 @@
 #' malrr(12, 38, 7, 43)$estimate
 #' @export
 malrr <- function(ai, bi, ci, di, add = 0.5, level = 0.95) {
-  a <- as.numeric(ai); b <- as.numeric(bi); cc <- as.numeric(ci); d <- as.numeric(di)
+  a <- as.numeric(ai)
+  b <- as.numeric(bi)
+  cc <- as.numeric(ci)
+  d <- as.numeric(di)
   zero <- (a == 0) | (b == 0) | (cc == 0) | (d == 0)
   adj <- ifelse(zero, add, 0)
-  a <- a + adj; b <- b + adj; cc <- cc + adj; d <- d + adj
-  n1 <- a + b; n2 <- cc + d
+  a <- a + adj
+  b <- b + adj
+  cc <- cc + adj
+  d <- d + adj
+  n1 <- a + b
+  n2 <- cc + d
   yi <- log((a / n1) / (cc / n2))
   vi <- 1 / a - 1 / n1 + 1 / cc - 1 / n2
   se <- sqrt(vi)

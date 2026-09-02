@@ -26,11 +26,16 @@
 #' @export
 Btdir <- function(n, B = 200, rng = 1) {
   W <- .btdir_rows(n, B, rng)
-  n <- as.integer(n); B <- as.integer(B)
-  err <- 0; tot <- 0; tot2 <- 0
+  n <- as.integer(n)
+  B <- as.integer(B)
+  err <- 0
+  tot <- 0
+  tot2 <- 0
   for (row in W) {
     s <- 0
-    for (w in row) { s <- s + w; tot <- tot + w; tot2 <- tot2 + w * w }
+    for (w in row) { s <- s + w
+    tot <- tot + w
+    tot2 <- tot2 + w * w }
     d <- abs(s - 1)
     if (d > err) err <- d
   }
@@ -44,13 +49,15 @@ Btdir <- function(n, B = 200, rng = 1) {
 
 #' @noRd
 .btdir_rows <- function(n, B, seed = 1) {
-  n <- as.integer(n); B <- as.integer(B)
+  n <- as.integer(n)
+  B <- as.integer(B)
   if (n < 1L) stop("boot_dirichlet_weights: n must be at least 1")
   if (B < 1L) stop("boot_dirichlet_weights: B must be at least 1")
   g <- .t1_lcg(seed)
   W <- vector("list", B)
   for (b in seq_len(B)) {
-    if (n == 1L) { W[[b]] <- 1; next }
+    if (n == 1L) { W[[b]] <- 1
+    next }
     v <- sort(vapply(seq_len(n - 1L), function(i) g$unif(), 0))
     row <- numeric(n)
     row[1] <- v[1]

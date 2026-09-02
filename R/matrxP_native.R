@@ -39,12 +39,14 @@ morie_matrxP <- function(x, window) {
   m <- as.integer(window)
   if (m < 2L || m > nlen %/% 2L) stop("need 2 <= window <= len(x)/2")
   nsub <- nlen - m + 1L
-  cs <- numeric(nlen + 1L); css <- numeric(nlen + 1L)
+  cs <- numeric(nlen + 1L)
+  css <- numeric(nlen + 1L)
   for (i in seq_len(nlen)) {
     cs[i + 1L] <- cs[i] + xs[i]
     css[i + 1L] <- css[i] + xs[i] * xs[i]
   }
-  mu <- numeric(nsub); sdv <- numeric(nsub)
+  mu <- numeric(nsub)
+  sdv <- numeric(nsub)
   for (i in seq_len(nsub)) {
     s <- cs[i + m] - cs[i]
     ss <- css[i + m] - css[i]
@@ -66,11 +68,14 @@ morie_matrxP <- function(x, window) {
         if (arg < 0) arg <- 0
         d <- sqrt(2 * m * arg)
       }
-      if (d < P[i]) { P[i] <- d; I[i] <- j }
-      if (d < P[j]) { P[j] <- d; I[j] <- i }
+      if (d < P[i]) { P[i] <- d
+      I[i] <- j }
+      if (d < P[j]) { P[j] <- d
+      I[j] <- i }
     }
   }
-  ib <- 1L; iw <- 1L
+  ib <- 1L
+  iw <- 1L
   for (i in seq_len(nsub)) {
     if (P[i] > P[ib]) ib <- i
     if (P[i] < P[iw]) iw <- i

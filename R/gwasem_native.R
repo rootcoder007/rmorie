@@ -29,7 +29,8 @@
 #' @return n x n symmetric matrix.
 #' @export
 morie_gwasem_kinship <- function(genotypes) {
-  G <- as.matrix(genotypes); storage.mode(G) <- "double"
+  G <- as.matrix(genotypes)
+  storage.mode(G) <- "double"
   n <- nrow(G)
   if (n == 0L || ncol(G) == 0L)
     stop("gwasem: genotypes must be a non-empty individual x marker matrix")
@@ -55,7 +56,8 @@ morie_gwasem_kinship <- function(genotypes) {
 #' @return Centred matrix.
 #' @export
 morie_gwasem_gower <- function(S) {
-  S <- as.matrix(S); storage.mode(S) <- "double"
+  S <- as.matrix(S)
+  storage.mode(S) <- "double"
   n <- nrow(S)
   if (n < 2L) stop("gwasem: need at least two individuals")
   rowmean <- rowMeans(S)
@@ -137,7 +139,8 @@ morie_gwasem_gower <- function(S) {
 #' @return A numeric value.
 #' @export
 .gwasem_loglik <- function(yt, Xt, d, ml) {
-  n <- length(yt); p <- ncol(Xt)
+  n <- length(yt)
+  p <- ncol(Xt)
   M <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p))
     M[a, b] <- sum(Xt[, a] * Xt[, b] / d)
@@ -174,7 +177,8 @@ morie_gwasem_gower <- function(S) {
 .gwasem_reml_delta <- function(y, X, evals, evecs, ml = FALSE,
                                 lo = -10, hi = 10, n_grid = 100L,
                                 refine = 60L) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   yt <- as.numeric(t(evecs) %*% y)
   Xt <- as.matrix(t(evecs) %*% X)
   loglik <- function(delta) {
@@ -185,13 +189,24 @@ morie_gwasem_gower <- function(S) {
   us <- seq(lo, hi, length.out = n_grid + 1L)
   ll <- vapply(us, function(u) loglik(exp(u)), numeric(1))
   best <- which.max(ll)
-  a <- us[max(1L, best - 1L)]; b <- us[min(n_grid + 1L, best + 1L)]
+  a <- us[max(1L, best - 1L)]
+  b <- us[min(n_grid + 1L, best + 1L)]
   phi <- (sqrt(5) - 1) / 2
-  c <- b - phi * (b - a); d <- a + phi * (b - a)
-  fc <- loglik(exp(c)); fd <- loglik(exp(d))
+  c <- b - phi * (b - a)
+  d <- a + phi * (b - a)
+  fc <- loglik(exp(c))
+  fd <- loglik(exp(d))
   for (i in seq_len(refine)) {
-    if (fc > fd) { b <- d; d <- c; fd <- fc; c <- b - phi * (b - a); fc <- loglik(exp(c)) }
-    else { a <- c; c <- d; fc <- fd; d <- a + phi * (b - a); fd <- loglik(exp(d)) }
+    if (fc > fd) { b <- d
+    d <- c
+    fd <- fc
+    c <- b - phi * (b - a)
+    fc <- loglik(exp(c)) }
+    else { a <- c
+    c <- d
+    fc <- fd
+    d <- a + phi * (b - a)
+    fd <- loglik(exp(d)) }
   }
   delta <- exp(0.5 * (a + b))
   d <- evals + delta
@@ -272,13 +287,18 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 .gwasem_f_sf <- function(f, df1, df2) {
   if (f <= 0) return(1.0)
   x <- df2 / (df2 + df1 * f)
-  a <- 0.5 * df2; b <- 0.5 * df1
+  a <- 0.5 * df2
+  b <- 0.5 * df1
   log_beta <- lbeta(a, b) + a * log(x) + b * log(1 - x)
   cf <- function(a, b, x) {
-    qab <- a + b; qap <- a + 1; qam <- a - 1
-    c <- 1; d <- 1 - qab * x / qap
+    qab <- a + b
+    qap <- a + 1
+    qam <- a - 1
+    c <- 1
+    d <- 1 - qab * x / qap
     if (abs(d) < 1e-300) d <- 1e-300
-    d <- 1 / d; h <- d
+    d <- 1 / d
+    h <- d
     for (mm in seq_len(300L)) {
       m2 <- 2 * mm
       aa <- mm * (b - mm) * x / ((qam + m2) * (a + m2))
@@ -360,7 +380,8 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
                          trait = "quantitative", test = "f", ml = FALSE,
                          per_marker_reml = FALSE, min_maf = 0) {
   yv <- as.numeric(y)
-  G <- as.matrix(genotypes); storage.mode(G) <- "double"
+  G <- as.matrix(genotypes)
+  storage.mode(G) <- "double"
   n <- length(yv)
   if (n == 0L || nrow(G) != n)
     stop("gwasem: one genotype row per phenotype")
@@ -374,34 +395,44 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
 
   K <- if (is.null(kinship)) morie_gwasem_kinship(G) else as.matrix(kinship)
   vc <- morie_gwasem_reml(yv, K, covariates, ml)
-  evals <- vc$evals; evecs <- vc$evecs; delta <- vc$delta
+  evals <- vc$evals
+  evecs <- vc$evecs
+  delta <- vc$delta
 
   base <- if (is.null(covariates)) matrix(1, n, 1)
           else cbind(1, as.matrix(covariates))
   base_t <- as.matrix(t(evecs) %*% base)
   y_t <- as.numeric(t(evecs) %*% yv)
 
-  beta <- numeric(m); se <- numeric(m)
-  stat <- numeric(m); pval <- numeric(m); skipped <- integer(0)
+  beta <- numeric(m)
+  se <- numeric(m)
+  stat <- numeric(m)
+  pval <- numeric(m)
+  skipped <- integer(0)
   for (j in seq_len(m)) {
     col <- G[, j]
     p_hat <- sum(col) / (2.0 * n)
     if (min(p_hat, 1 - p_hat) < min_maf || max(col) == min(col)) {
       skipped <- c(skipped, j)
-      beta[j] <- NA; se[j] <- NA; stat[j] <- 0; pval[j] <- 1
+      beta[j] <- NA
+      se[j] <- NA
+      stat[j] <- 0
+      pval[j] <- 1
       next
     }
     if (per_marker_reml) {
       Xfull <- cbind(base, col)
       vcj <- morie_gwasem_reml(yv, K, covariates, ml)
-      dj <- vcj$delta; ev <- vcj$evals
+      dj <- vcj$delta
+      ev <- vcj$evals
       rot <- as.matrix(t(vcj$evecs) %*% Xfull)
       yr <- as.numeric(t(vcj$evecs) %*% yv)
       d <- ev + dj
     } else {
       col_t <- as.numeric(t(evecs) %*% col)
       rot <- cbind(base_t, col_t)
-      yr <- y_t; d <- evals + delta
+      yr <- y_t
+      d <- evals + delta
     }
     p <- ncol(rot)
     M <- matrix(0, p, p)
@@ -413,18 +444,24 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
     inv <- tryCatch(.gwasem_inv(M), error = function(e) NULL)
     if (is.null(bb) || is.null(inv)) {
       skipped <- c(skipped, j)
-      beta[j] <- NA; se[j] <- NA; stat[j] <- 0; pval[j] <- 1
+      beta[j] <- NA
+      se[j] <- NA
+      stat[j] <- 0
+      pval[j] <- 1
       next
     }
     rss <- sum((yr - as.numeric(rot %*% bb))^2 / d)
-    df <- n - p; s2 <- rss / df
+    df <- n - p
+    s2 <- rss / df
     b_k <- bb[p]
     var_k <- s2 * inv[p, p]
     se_k <- sqrt(max(var_k, 0))
-    beta[j] <- b_k; se[j] <- se_k
+    beta[j] <- b_k
+    se[j] <- se_k
     if (test == "f") {
       f <- if (var_k > 0) b_k * b_k / var_k else 0
-      stat[j] <- f; pval[j] <- .gwasem_f_sf(f, 1, df)
+      stat[j] <- f
+      pval[j] <- .gwasem_f_sf(f, 1, df)
     } else {
       p0 <- p - 1
       M0 <- M[seq_len(p0), seq_len(p0), drop = FALSE]
@@ -439,7 +476,8 @@ morie_gwasem <- function(y, genotypes, kinship = NULL, covariates = NULL,
       num <- sum(xres * r0 / d)
       den <- sum(xres * xres / d) * s20
       chi <- if (den > 0) num^2 / den else 0
-      stat[j] <- chi; pval[j] <- .gwasem_norm_sf(sqrt(max(chi, 0)))
+      stat[j] <- chi
+      pval[j] <- .gwasem_norm_sf(sqrt(max(chi, 0)))
     }
   }
   tested <- setdiff(seq_len(m), skipped)

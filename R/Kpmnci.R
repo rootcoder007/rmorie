@@ -26,15 +26,22 @@ Kpmnci <- function(fit, alpha) {
   a <- as.numeric(alpha)
   if (!(a > 0 && a < 1)) stop("km_pointwise_ci: alpha must lie in (0, 1)")
   z <- .s03qnorm(1 - a / 2)
-  m <- rt$m; nr <- rt$nr; d <- rt$d
-  S <- numeric(m); sig2 <- numeric(m); s <- 1; v <- 0
+  m <- rt$m
+  nr <- rt$nr
+  d <- rt$d
+  S <- numeric(m)
+  sig2 <- numeric(m)
+  s <- 1
+  v <- 0
   for (j in seq_len(m)) {
     s <- s * (1 - d[j] / nr[j])
     v <- if (nr[j] > d[j]) v + d[j] / (nr[j] * (nr[j] - d[j])) else Inf
-    S[j] <- s; sig2[j] <- v
+    S[j] <- s
+    sig2[j] <- v
   }
   se <- ifelse(is.finite(sig2), S * sqrt(sig2), NaN)
-  lo <- pmax(S - z * se, 0); hi <- pmin(S + z * se, 1)
+  lo <- pmax(S - z * se, 0)
+  hi <- pmin(S + z * se, 1)
   .t1_result(estimate = S[m], time = rt$t, surv = S, se = se, sigma2 = sig2,
              lower = lo, upper = hi, z = z, alpha = a, n_times = m,
              n_risk_start = nr[1], n = m,
@@ -45,7 +52,9 @@ Kpmnci <- function(fit, alpha) {
 #' @noRd
 .kpm_risk_table <- function(fit) {
   if (is.null(fit)) stop("km_pointwise_ci: fit is empty")
-  t <- .s03vec(fit$time); nr <- .s03vec(fit$n_risk); d <- .s03vec(fit$n_event)
+  t <- .s03vec(fit$time)
+  nr <- .s03vec(fit$n_risk)
+  d <- .s03vec(fit$n_event)
   m <- length(t)
   if (m == 0L) stop("km_pointwise_ci: fit has no event times")
   if (length(nr) != m || length(d) != m) stop("km_pointwise_ci: time, n_risk and n_event have different lengths")

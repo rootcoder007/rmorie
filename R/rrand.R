@@ -24,7 +24,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rrand(V)
 Rrand <- function(bit, epsilon = 1) {
-  b <- as.numeric(unlist(bit)); n <- length(b)
+  b <- as.numeric(unlist(bit))
+  n <- length(b)
   eps <- as.numeric(epsilon)
   q <- 1 / (1 + exp(eps))
   g <- .t1_lcg(1)

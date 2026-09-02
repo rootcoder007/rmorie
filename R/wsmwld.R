@@ -22,7 +22,8 @@ Waldstat <- function(theta_hat, se, theta0 = 0, level = 0.95) {
   if (se <= 0) stop("the standard error must be positive")
   if (level <= 0 || level >= 1)
     stop("level must lie strictly between 0 and 1")
-  theta_hat <- as.numeric(theta_hat); theta0 <- as.numeric(theta0)
+  theta_hat <- as.numeric(theta_hat)
+  theta0 <- as.numeric(theta0)
   W <- (theta_hat - theta0) / se
   p <- 2 * (1 - stats::pnorm(abs(W)))
   z <- stats::qnorm((1 + level) / 2)

@@ -42,7 +42,7 @@ A list with the hyperparameter draws, their posterior means   and standard devia
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-morie_hyper2(V, M)
+X <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 3)
+y <- c(1.5, 2.1, 2.9)
+morie_hyper2(X, y)
 }

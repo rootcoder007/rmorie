@@ -298,7 +298,7 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
 #' @references Ontario Ministry of the Solicitor General data
 #'   dictionaries accompanying the ARSAU CSV releases.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Point at a downloaded ARSAU data-dictionary workbook:
 #' d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
 #' }
@@ -475,7 +475,7 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 #'   \code{\link{morie_arsau_sidecar_to_frame}}.
 #' @references Ontario Data Catalogue CKAN API.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
 #'   limit = 50L
 #' ))
@@ -548,7 +548,7 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 #' @return Invisibly, a list with \code{downloaded} (paths),
 #'   \code{skipped} (registry keys), and \code{target_dir}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_arsau_download(tempdir(),
 #'   kinds = ARSAU_KINDS()[1],
 #'   years = ARSAU_YEARS()[1], quiet = TRUE

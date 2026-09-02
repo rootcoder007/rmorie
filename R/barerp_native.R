@@ -136,8 +136,10 @@ central_path_dual <- function(fvals, t) {
 #' @return Non-negative integer.
 #' @export
 centering_steps <- function(m, eps, t0, mu) {
-  m <- as.numeric(m); eps <- as.numeric(eps)
-  t0 <- as.numeric(t0); mu <- as.numeric(mu)
+  m <- as.numeric(m)
+  eps <- as.numeric(eps)
+  t0 <- as.numeric(t0)
+  mu <- as.numeric(mu)
   if (mu <= 1.0) stop("barerp: mu must exceed 1")
   if (eps <= 0.0 || t0 <= 0.0) stop("barerp: eps and t0 must be positive")
   val <- log(m / (eps * t0)) / log(mu)
@@ -165,8 +167,10 @@ centering_steps <- function(m, eps, t0, mu) {
   out <- numeric(n)
   for (j in seq_len(n)) {
     step <- h * max(1.0, abs(x[j]))
-    up <- x; up[j] <- up[j] + step
-    dn <- x; dn[j] <- dn[j] - step
+    up <- x
+    up[j] <- up[j] + step
+    dn <- x
+    dn[j] <- dn[j] - step
     out[j] <- (f(up) - f(dn)) / (2.0 * step)
   }
   out
@@ -192,11 +196,18 @@ centering_steps <- function(m, eps, t0, mu) {
     sa <- h * max(1.0, abs(x[a]))
     for (b in seq.int(a, n)) {
       sb <- h * max(1.0, abs(x[b]))
-      xpp <- x; xpm <- x; xmp <- x; xmm <- x
-      xpp[a] <- xpp[a] + sa; xpp[b] <- xpp[b] + sb
-      xpm[a] <- xpm[a] + sa; xpm[b] <- xpm[b] - sb
-      xmp[a] <- xmp[a] - sa; xmp[b] <- xmp[b] + sb
-      xmm[a] <- xmm[a] - sa; xmm[b] <- xmm[b] - sb
+      xpp <- x
+      xpm <- x
+      xmp <- x
+      xmm <- x
+      xpp[a] <- xpp[a] + sa
+      xpp[b] <- xpp[b] + sb
+      xpm[a] <- xpm[a] + sa
+      xpm[b] <- xpm[b] - sb
+      xmp[a] <- xmp[a] - sa
+      xmp[b] <- xmp[b] + sb
+      xmm[a] <- xmm[a] - sa
+      xmm[b] <- xmm[b] - sb
       if (a == b) {
         val <- (f(xpp) - 2.0 * f0 + f(xmm)) / (4.0 * sa * sa)
       } else {
@@ -446,7 +457,8 @@ central_point <- function(f0, cons, x, t,
     for (k in seq_len(80L)) {
       trial <- x + s * step
       val <- objective(trial)
-      if (val <= cur + alpha * s * gts) { accepted <- TRUE; break }
+      if (val <= cur + alpha * s * gts) { accepted <- TRUE
+      break }
       s <- s * beta
     }
     if (!accepted) break
@@ -583,7 +595,9 @@ barrier_method <- function(f0, constraints, x0,
   if (centering == "none") {
     t <- m / eps
     cp <- central_point(f0, cons, x, t, aeq, "newton", tol, max_inner)
-    x <- cp$x; it <- cp$iters; dec <- cp$decrement
+    x <- cp$x
+    it <- cp$iters
+    dec <- cp$decrement
     fv <- vapply(cons, function(c) c$f(x), numeric(1))
     return(list(
       x = x, fun = f0$f(x), gap = m / t, t = t,
@@ -602,10 +616,13 @@ barrier_method <- function(f0, constraints, x0,
   converged <- FALSE
   for (outer in seq_len(as.integer(max_outer))) {
     cp <- central_point(f0, cons, x, t, aeq, centering, tol, max_inner)
-    x <- cp$x; it <- cp$iters; dec <- cp$decrement
+    x <- cp$x
+    it <- cp$iters
+    dec <- cp$decrement
     total <- total + it
     history[[length(history) + 1L]] <- c(t, m / t, f0$f(x), it)
-    if (m / t < eps) { converged <- TRUE; break }
+    if (m / t < eps) { converged <- TRUE
+    break }
     t <- t * mu
   }
 
@@ -667,7 +684,8 @@ barrier_lp <- function(c, A_ub, b_ub, A_eq = NULL, b_eq = NULL,
     # force() the promises: without it every closure in the loop below
     # evaluates rows[i, ] at first CALL, when i has already advanced to
     # the last row, and all the constraints collapse into one.
-    force(row); force(bi)
+    force(row)
+    force(bi)
     list(f = function(z, r = row, bb = bi) sum(r * z) - bb,
          grad = function(z, r = row) r,
          affine = TRUE)

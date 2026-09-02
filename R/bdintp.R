@@ -19,7 +19,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Qcritset(V)
 Qcritset <- function(mbar, se = NULL, n = 1, cutoff = NULL) {
-  M <- .t1_mat(mbar); g <- nrow(M); J <- ncol(M)
+  M <- .t1_mat(mbar)
+  g <- nrow(M)
+  J <- ncol(M)
   if (is.null(se)) {
     S <- matrix(1, g, J)
   } else {
@@ -37,7 +39,8 @@ Qcritset <- function(mbar, se = NULL, n = 1, cutoff = NULL) {
   if (n <= 0) stop("n must be positive")
   Q <- rowSums(pmax(M / S, 0)^2)
   nQ <- n * Q
-  mn <- min(nQ); am <- which.min(nQ) - 1L
+  mn <- min(nQ)
+  am <- which.min(nQ) - 1L
   cut <- if (is.null(cutoff)) mn else as.numeric(cutoff)
   ins <- as.integer(nQ <= cut)
   .t1_result(Q = Q, nQ = nQ, argmin = am, minQ = mn, inset = ins,

@@ -47,7 +47,8 @@ Btsubrho <- function(x, stat = NULL, m_grid = NULL, B = 200, seed = 1, q = 0.75)
     qq <- as.numeric(q)
     if (!(qq > 0 && qq < 1)) stop("boot_subsample_rate: q must lie strictly between 0 and 1")
     m_grid <- integer(0)
-    j <- 0L; pw <- 1
+    j <- 0L
+    pw <- 1
     repeat {
       mj <- as.integer(ceiling(pw * n))
       if (mj < 2L) break
@@ -88,9 +89,13 @@ Btsubrho <- function(x, stat = NULL, m_grid = NULL, B = 200, seed = 1, q = 0.75)
 #' @noRd
 .btsubrho_ks <- function(a, b) {
   pts <- sort(unique(c(a, b)))
-  na <- length(a); nb <- length(b)
-  sa <- sort(a); sb <- sort(b)
-  d <- 0; ia <- 0L; ib <- 0L
+  na <- length(a)
+  nb <- length(b)
+  sa <- sort(a)
+  sb <- sort(b)
+  d <- 0
+  ia <- 0L
+  ib <- 0L
   for (t in pts) {
     while (ia < na && sa[ia + 1L] <= t) ia <- ia + 1L
     while (ib < nb && sb[ib + 1L] <= t) ib <- ib + 1L

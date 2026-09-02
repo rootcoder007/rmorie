@@ -20,7 +20,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tqdist(V, V)
 Tqdist <- function(eps, delta) {
-  eps <- as.numeric(eps); delta <- as.numeric(delta)
+  eps <- as.numeric(eps)
+  delta <- as.numeric(delta)
   m <- (4 / 3) * (1 + eps) / (eps * eps) * log(2 / delta)
   m_min <- ceiling(m)
   .t1_result(m_min = m_min, m_real = m, estimate = m_min, eps = eps,

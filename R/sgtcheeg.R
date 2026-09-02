@@ -10,7 +10,9 @@
 #' @references Sgtcheegerconstant (1970), A lower bound for the smallest eigenvalue of the Laplacian, in Problems in Analysis; Chung (1997), Spectral Graph Theory, AMS. Neither is held locally; the conductance definition and the sweep-cut construction are standard published results. The sweep value is checked against exhaustive enumeration over all subsets in the batch's anchor file.
 #' @export
 Sgtcheegerconstant <- function(A) {
-  A <- as.matrix(A); n <- nrow(A); diag(A) <- 0
+  A <- as.matrix(A)
+  n <- nrow(A)
+  diag(A) <- 0
   deg <- rowSums(A)
   if (any(deg <= 0)) stop("isolated vertices: conductance is undefined")
   ds <- 1 / sqrt(deg)
@@ -19,14 +21,18 @@ Sgtcheegerconstant <- function(A) {
   lam2 <- e$values[n - 1]
   f <- e$vectors[, n - 1] * ds
   ord <- order(f, seq_len(n))
-  total <- sum(deg); best <- Inf; bestset <- integer(0)
+  total <- sum(deg)
+  best <- Inf
+  bestset <- integer(0)
   for (k in seq_len(n - 1)) {
     Sset <- ord[seq_len(k)]
     cut <- sum(A[Sset, -Sset, drop = FALSE])
-    vol <- sum(deg[Sset]); den <- min(vol, total - vol)
+    vol <- sum(deg[Sset])
+    den <- min(vol, total - vol)
     if (den > 0) {
       val <- cut / den
-      if (val < best) { best <- val; bestset <- sort(Sset) }
+      if (val < best) { best <- val
+      bestset <- sort(Sset) }
     }
   }
   .t1_result(sweep_min = best, lower_bound = lam2 / 2,

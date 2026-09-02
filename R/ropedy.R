@@ -24,8 +24,10 @@
 #' @examples
 #' Ropedy(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5, m = 5L)
 Ropedy <- function(y, q, m, theta = 10000, L_new = NULL, L_train = NULL) {
-  qv <- as.numeric(q); d <- length(qv)
-  scale <- 1; base <- as.numeric(theta)
+  qv <- as.numeric(q)
+  d <- length(qv)
+  scale <- 1
+  base <- as.numeric(theta)
   if (!is.null(L_new) && !is.null(L_train) && L_train > 0) {
     a <- as.numeric(L_new) / as.numeric(L_train)
     scale <- if (d > 2) a^(d / (d - 2)) else a
@@ -36,8 +38,10 @@ Ropedy <- function(y, q, m, theta = 10000, L_new = NULL, L_train = NULL) {
   out <- qv
   for (i in seq_len(half)) {
     ang <- as.numeric(m) * freqs[i]
-    c_ <- cos(ang); s_ <- sin(ang)
-    a0 <- qv[2 * i - 1]; a1 <- qv[2 * i]
+    c_ <- cos(ang)
+    s_ <- sin(ang)
+    a0 <- qv[2 * i - 1]
+    a1 <- qv[2 * i]
     out[2 * i - 1] <- a0 * c_ - a1 * s_
     out[2 * i] <- a0 * s_ + a1 * c_
   }

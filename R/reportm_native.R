@@ -81,7 +81,8 @@ morie_reportm <- function(counts, epsilon, sensitivity = 1, seed = 1) {
     h <- u - 0.5
     s <- if (h > 0) 1 else if (h < 0) -1 else 0
     noisy <- x[i] - b * s * log(1 - 2 * abs(h))
-    if (noisy > best) { best <- noisy; idx <- i - 1L }
+    if (noisy > best) { best <- noisy
+    idx <- i - 1L }
   }
   list(index = as.numeric(idx), winner = best, estimate = as.numeric(idx),
        epsilon = eps, scale = b, n = n,

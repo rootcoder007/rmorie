@@ -1945,8 +1945,10 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
     srt[round(n * b / nbins)]
   }, numeric(1))
   binof <- function(v) {
-    for (b in seq_len(nbins - 1L)) if (v <= edges[b]) {
-      return(b - 1L)
+    for (b in seq_len(nbins - 1L)) {
+      if (v <= edges[b]) {
+        return(b - 1L)
+      }
     }
     nbins - 1L
   }

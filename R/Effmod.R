@@ -34,14 +34,17 @@
 #' y <- rbinom(n, 1, 0.2 + 0.2 * A + 0.2 * V)
 #' Effmod(y = y, A = A, V = V)
 Effmod <- function(y, A, V, H = NULL) {
-  yv <- .s03vec(y); av <- .s03vec(A); vv <- .s03vec(V)
+  yv <- .s03vec(y)
+  av <- .s03vec(A)
+  vv <- .s03vec(V)
   n <- length(yv)
   if (n == 0L) stop("Effmod: empty input, y has no observations")
   if (length(av) != n || length(vv) != n)
     stop("Effmod: y, A and V must have the same length")
   if (any(av != 0 & av != 1)) stop("Effmod: A must be binary 0/1")
   if (any(vv != 0 & vv != 1)) stop("Effmod: V must be binary 0/1")
-  ca <- c(0, 1, 0, 1); cv <- c(0, 0, 1, 1)
+  ca <- c(0, 1, 0, 1)
+  cv <- c(0, 0, 1, 1)
   idx <- lapply(seq_len(4L), function(k) which(av == ca[k] & vv == cv[k]))
   cnt <- vapply(idx, length, 0L)
   if (any(cnt == 0L)) stop("Effmod: every A x V cell must be non-empty")
@@ -58,9 +61,14 @@ Effmod <- function(y, A, V, H = NULL) {
     beta <- .s03lstsq(Z, yv)
     p <- beta[1:4]
   }
-  p00 <- p[1L]; p10 <- p[2L]; p01 <- p[3L]; p11 <- p[4L]
+  p00 <- p[1L]
+  p10 <- p[2L]
+  p01 <- p[3L]
+  p11 <- p[4L]
   if (p00 <= 0) stop("Effmod: the reference cell risk must be strictly positive")
-  rr10 <- p10 / p00; rr01 <- p01 / p00; rr11 <- p11 / p00
+  rr10 <- p10 / p00
+  rr01 <- p01 / p00
+  rr11 <- p11 / p00
   reri <- rr11 - rr10 - rr01 + 1
   mult <- if (rr10 > 0 && rr01 > 0) rr11 / (rr10 * rr01) else NaN
   .t1_result(estimate = reri, p00 = p00, p10 = p10, p01 = p01, p11 = p11,

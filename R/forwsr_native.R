@@ -30,7 +30,8 @@
 #' @return A list with \code{M}, \code{y}, \code{n}, \code{p}.
 #' @export
 .forwsr_prep <- function(X, y) {
-  M <- as.matrix(X); storage.mode(M) <- "double"
+  M <- as.matrix(X)
+  storage.mode(M) <- "double"
   yy <- as.numeric(y)
   n <- nrow(M)
   if (n != length(yy))
@@ -92,7 +93,9 @@
     if (abs(Ab[piv, c]) < 1e-12)
       stop("forwsr: the subset is rank deficient; its design has collinear columns")
     if (piv != c) {
-      tmp <- Ab[c, ]; Ab[c, ] <- Ab[piv, ]; Ab[piv, ] <- tmp
+      tmp <- Ab[c, ]
+      Ab[c, ] <- Ab[piv, ]
+      Ab[piv, ] <- tmp
     }
     for (r in seq_len(p)) {
       if (r == c) next
@@ -145,7 +148,8 @@
 #'   doi:10.1111/j.1467-9868.2008.00692.x, equation (12).
 #' @export
 morie_forwsr_consistency_factor <- function(m, n) {
-  m <- as.integer(m); n <- as.integer(n)
+  m <- as.integer(m)
+  n <- as.integer(n)
   if (m >= n) return(1.0)
   if (m <= 0L) stop("forwsr: the subset cannot be empty")
   psi <- .forwsr_norm_ppf((n + m) / (2.0 * n))
@@ -164,7 +168,10 @@ morie_forwsr_consistency_factor <- function(m, n) {
 #' @export
 morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
   pr <- .forwsr_prep(X, y)
-  M <- pr$M; yy <- pr$y; n <- pr$n; p <- pr$p
+  M <- pr$M
+  yy <- pr$y
+  n <- pr$n
+  p <- pr$p
   idx <- if (is.null(subset)) seq_len(n) - 1L else as.integer(subset)
   if (length(idx) < p)
     stop(sprintf("forwsr: a subset of %d cannot fit %d coefficients",
@@ -202,9 +209,11 @@ morie_forwsr_ols_fit <- function(X, y, subset = NULL) {
 #' @export
 morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
-  n <- pr$n; p <- pr$p
+  n <- pr$n
+  p <- pr$p
   e <- .ghc_rng(as.numeric(seed))
-  best <- NULL; best_med <- Inf
+  best <- NULL
+  best_med <- Inf
   for (d in seq_len(as.integer(n_draw))) {
     idx <- integer(0)
     for (k in seq_len(p)) {
@@ -216,7 +225,8 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
     if (is.null(f)) next
     sq <- sort(f$residuals^2)
     med <- sq[length(sq) %/% 2L + 1L]
-    if (med < best_med) { best_med <- med; best <- sort(idx) }
+    if (med < best_med) { best_med <- med
+    best <- sort(idx) }
   }
   if (is.null(best))
     stop("forwsr: every sampled subset was rank deficient; is the design collinear?")
@@ -237,7 +247,8 @@ morie_forwsr_lms_start <- function(X, y, n_draw = 500L, seed = 1L) {
 morie_forwsr_forward_search <- function(X, y, start = NULL,
                                         n_draw = 500L, seed = 1L) {
   pr <- .forwsr_prep(X, y)
-  n <- pr$n; p <- pr$p
+  n <- pr$n
+  p <- pr$p
   cur <- if (is.null(start)) {
     morie_forwsr_lms_start(X, y, n_draw, seed)$subset
   } else {
@@ -317,12 +328,14 @@ morie_forwsr <- function(X, y, start = NULL, n_draw = 500L, seed = 1L,
   for (s in steps) {
     if (s$m - p < as.integer(min_df)) next
     v <- s$min_deletion_residual
-    if (!is.na(v) && v > as.numeric(threshold)) { jump <- s$m; break }
+    if (!is.na(v) && v > as.numeric(threshold)) { jump <- s$m
+    break }
   }
   flagged <- integer(0)
   if (length(steps) > 1L) {
     for (i in seq_len(length(steps) - 1L)) {
-      a <- steps[[i]]$subset; b <- steps[[i + 1L]]$subset
+      a <- steps[[i]]$subset
+      b <- steps[[i + 1L]]$subset
       new <- setdiff(b, a)
       if (!is.null(jump) && steps[[i + 1L]]$m > jump && length(new) > 0L)
         flagged <- c(flagged, new[1L])

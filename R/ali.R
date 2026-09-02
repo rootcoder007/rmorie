@@ -16,9 +16,11 @@
 #' ali(c(0.5), c(0.4), 0)
 #' @export
 ali <- function(u, v, theta = 0) {
-  uu <- as.numeric(u); vv <- as.numeric(v)
+  uu <- as.numeric(u)
+  vv <- as.numeric(v)
   n <- min(length(uu), length(vv))
-  uu <- uu[seq_len(n)]; vv <- vv[seq_len(n)]
+  uu <- uu[seq_len(n)]
+  vv <- vv[seq_len(n)]
   th <- as.numeric(theta)
   d <- 1 - th * (1 - uu) * (1 - vv)
   cdf <- uu * vv / d

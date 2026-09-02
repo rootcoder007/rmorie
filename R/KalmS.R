@@ -30,14 +30,22 @@
 #' KalmS(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
 KalmS <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL, ridge = 1e-12) {
   Y <- .s03mat(y)
-  n <- nrow(Y); m <- ncol(Y)
+  n <- nrow(Y)
+  m <- ncol(Y)
   if (n == 0L) stop("kalman_smoother: y is empty")
-  Fm <- .s03mat(F); Hm <- .s03mat(H); Qm <- .s03mat(Q); Rm <- .s03mat(R)
+  Fm <- .s03mat(F)
+  Hm <- .s03mat(H)
+  Qm <- .s03mat(Q)
+  Rm <- .s03mat(R)
   d <- nrow(Fm)
   if (nrow(Hm) != m || ncol(Hm) != d) stop("kalman_smoother: H must be m x d")
   x <- if (is.null(x0)) rep(0, d) else .s03vec(x0)
   P <- if (is.null(P0)) diag(1, d) else .s03mat(P0)
-  xs <- list(); Ps <- list(); xp <- list(); Pp <- list(); ll <- 0
+  xs <- list()
+  Ps <- list()
+  xp <- list()
+  Pp <- list()
+  ll <- 0
   for (t in seq_len(n)) {
     xpred <- as.numeric(Fm %*% x)
     Ppred <- Fm %*% P %*% t(Fm) + Qm
@@ -51,9 +59,13 @@ KalmS <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL, ridge = 1e-12) {
     sv <- .s03cholsolve(S, v)
     L <- .s03chol(S)
     ll <- ll - 0.5 * (m * log(2 * pi) + 2 * sum(log(diag(L))) + sum(v * sv))
-    xs[[t]] <- x; Ps[[t]] <- P; xp[[t]] <- xpred; Pp[[t]] <- Ppred
+    xs[[t]] <- x
+    Ps[[t]] <- P
+    xp[[t]] <- xpred
+    Pp[[t]] <- Ppred
   }
-  xsm <- xs; Psm <- Ps
+  xsm <- xs
+  Psm <- Ps
   if (n > 1L) for (t in seq(n - 1L, 1L)) {
     A <- Pp[[t + 1L]] + diag(as.numeric(ridge), d)
     PF <- Ps[[t]] %*% t(Fm)

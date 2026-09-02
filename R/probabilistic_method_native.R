@@ -68,7 +68,8 @@ morie_first_moment_ramsey <- function(k) {
   best <- k - 1L
   while (n < CAP) {
     log2e <- (lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)) / log(2) + expo
-    if (log2e < 0) { best <- n; n <- n + 1L } else break
+    if (log2e < 0) { best <- n
+    n <- n + 1L } else break
   }
   capped <- n >= CAP
   log2_at <- (lgamma(best + 1) - lgamma(k + 1) -
@@ -115,15 +116,19 @@ morie_alteration_ramsey <- function(k) {
   }
   ACAP <- 200000L
   expo <- 1 - choose(k, 2)
-  best_n <- k; best_val <- 0
+  best_n <- k
+  best_val <- 0
   reached_end <- TRUE
   n <- k
   while (n < ACAP) {
     log2e <- (lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)) / log(2) + expo
-    if (log2e > 60) { reached_end <- FALSE; break }
+    if (log2e > 60) { reached_end <- FALSE
+    break }
     val <- n - 2^log2e
-    if (val > best_val) { best_val <- val; best_n <- n }
-    else if (n > best_n + 5000L) { reached_end <- FALSE; break }
+    if (val > best_val) { best_val <- val
+    best_n <- n }
+    else if (n > best_n + 5000L) { reached_end <- FALSE
+    break }
     n <- n + 1L
   }
   bound <- floor(best_val)
@@ -159,7 +164,8 @@ morie_alteration_ramsey <- function(k) {
 #' @examples
 #' morie_lovasz_local_lemma(p = 0.5, d = 5L)
 morie_lovasz_local_lemma <- function(p, d) {
-  p <- as.numeric(p); d <- as.integer(d)
+  p <- as.numeric(p)
+  d <- as.integer(d)
   if (p < 0 || p > 1) {
     stop(sprintf("p must lie in [0, 1]; got %s", p), call. = FALSE)
   }
@@ -191,7 +197,9 @@ morie_lovasz_local_lemma <- function(p, d) {
 #' morie_chernoff_bound(n = 5L, p = 0.5, t = 5L)
 morie_chernoff_bound <- function(n, p, t, tail = c("upper", "lower")) {
   tail <- match.arg(tail)
-  n <- as.integer(n); p <- as.numeric(p); t <- as.numeric(t)
+  n <- as.integer(n)
+  p <- as.numeric(p)
+  t <- as.numeric(t)
   if (is.na(n) || n < 1L) {
     stop(sprintf("n must be positive; got %s", n), call. = FALSE)
   }
@@ -249,7 +257,9 @@ morie_chernoff_bound <- function(n, p, t, tail = c("upper", "lower")) {
 #' @examples
 #' morie_azuma_bound(100, 1, 30)
 morie_azuma_bound <- function(n, c, t) {
-  n <- as.integer(n); c <- as.numeric(c); t <- as.numeric(t)
+  n <- as.integer(n)
+  c <- as.numeric(c)
+  t <- as.numeric(t)
   if (is.na(n) || n < 1L) {
     stop(sprintf("n must be positive; got %s", n), call. = FALSE)
   }
@@ -274,7 +284,8 @@ morie_azuma_bound <- function(n, c, t) {
 #' @examples
 #' morie_second_moment_threshold(expectation = 5L, variance = 5L)
 morie_second_moment_threshold <- function(expectation, variance) {
-  e <- as.numeric(expectation); v <- as.numeric(variance)
+  e <- as.numeric(expectation)
+  v <- as.numeric(variance)
   if (v < 0) {
     stop(sprintf("variance must be non-negative; got %s", v), call. = FALSE)
   }

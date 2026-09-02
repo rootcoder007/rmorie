@@ -12,7 +12,8 @@
 #' @examples
 #' Bcelo(Y = 5L, P = 0.5)
 Bcelo <- function(Y, P) {
-  Y <- .t1_mat(Y); P <- .t1_mat(P)
+  Y <- .t1_mat(Y)
+  P <- .t1_mat(P)
   if (nrow(Y) == 0L || nrow(Y) != nrow(P) || ncol(Y) != ncol(P))
     stop("Y and P must be non-empty and the same shape")
   if (any(P <= 0) || any(P >= 1))

@@ -66,7 +66,8 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
   if (K < 1L) stop("metabd: k must be at least 1")
   if (nchar(s) < K) stop("metabd: the sequence is shorter than k")
   comp <- c(A = "T", C = "G", G = "C", T = "A")
-  counts <- list(); tot <- 0L
+  counts <- list()
+  tot <- 0L
   chars <- strsplit(s, "")[[1L]]
   for (i in seq_len(nchar(s) - K + 1L)) {
     m <- paste0(chars[i:(i + K - 1L)], collapse = "")
@@ -99,12 +100,14 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
 #' @return A list with \code{correlation}, \code{n_samples}.
 #' @export
 abundance_correlation <- function(cov_a, cov_b) {
-  a <- .metabd_vec(cov_a); b <- .metabd_vec(cov_b)
+  a <- .metabd_vec(cov_a)
+  b <- .metabd_vec(cov_b)
   if (length(a) != length(b))
     stop("metabd: the coverage vectors differ in length")
   if (length(a) < 2L)
     stop("metabd: abundance covariance needs at least 2 samples; with one sample only composition is informative")
-  ma <- sum(a) / length(a); mb <- sum(b) / length(b)
+  ma <- sum(a) / length(a)
+  mb <- sum(b) / length(b)
   num <- sum((a - ma) * (b - mb))
   den <- sqrt(sum((a - ma)^2) * sum((b - mb)^2))
   list(correlation = if (den > .METABD_EPS) num / den else 0.0,
@@ -150,12 +153,14 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
                                len_a = NULL, len_b = NULL,
                                w_abundance = 0.5) {
-  a <- .metabd_vec(tnf_a); b <- .metabd_vec(tnf_b)
+  a <- .metabd_vec(tnf_a)
+  b <- .metabd_vec(tnf_b)
   if (length(a) != length(b))
     stop("metabd: the composition vectors differ in length")
   d_tnf <- sqrt(sum((a - b)^2))
   wa <- as.numeric(w_abundance)
-  d_abd <- 0.0; usable <- FALSE
+  d_abd <- 0.0
+  usable <- FALSE
   if (!is.null(cov_a) && !is.null(cov_b) && length(.metabd_vec(cov_a)) >= 2L) {
     r <- abundance_correlation(cov_a, cov_b)$correlation
     d_abd <- 1.0 - r
@@ -191,11 +196,13 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
   T <- .metabd_mat(tnfs)
   n <- length(T)
   L <- if (is.null(lengths)) rep(1e5, n) else .metabd_vec(lengths)
-  bins <- list(); assigned <- rep(FALSE, n)
+  bins <- list()
+  assigned <- rep(FALSE, n)
   order <- order(-L)
   for (i in order) {
     if (assigned[i]) next
-    cur <- c(i); assigned[i] <- TRUE
+    cur <- c(i)
+    assigned[i] <- TRUE
     for (j in order) {
       if (assigned[j]) next
       d <- composite_distance(
@@ -204,7 +211,8 @@ bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
         if (is.null(coverages)) NULL else coverages[[j]],
         L[i], L[j])$distance
       if (d < as.numeric(threshold)) {
-        cur <- c(cur, j); assigned[j] <- TRUE
+        cur <- c(cur, j)
+        assigned[j] <- TRUE
       }
     }
     bins[[length(bins) + 1L]] <- cur

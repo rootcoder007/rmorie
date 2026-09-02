@@ -272,7 +272,9 @@
                  paste(.bprMF_SIGNS, collapse = ", "),
                  sQuote(reg)))
   }
-  U <- as.integer(n_users); I <- as.integer(n_items); K <- as.integer(k_dim)
+  U <- as.integer(n_users)
+  I <- as.integer(n_items)
+  K <- as.integer(k_dim)
   if (U < 1L || I < 2L || K < 1L) {
     stop("bprMF: need at least 1 user, 2 items and 1 factor")
   }
@@ -292,7 +294,8 @@
     H[[ii]] <- raw_h[(lo + 1L):(lo + K)]
   }
   sgn <- if (reg == "correct") -1 else 1
-  a <- as.numeric(alpha); lm <- as.numeric(lam)
+  a <- as.numeric(alpha)
+  lm <- as.numeric(lam)
   history <- numeric(0)
   checkpoint_every <- max(1L, as.integer(iters) %/% 20L)
   for (it in seq_len(as.integer(iters))) {
@@ -312,14 +315,20 @@
     xi <- .bprMF_predict(W, H, u_idx, i)
     xj <- .bprMF_predict(W, H, u_idx, j)
     g <- .bprMF_sigmoid(-(xi - xj))
-    wu <- W[[u_idx + 1L]]; hi <- H[[i + 1L]]; hj <- H[[j + 1L]]
+    wu <- W[[u_idx + 1L]]
+    hi <- H[[i + 1L]]
+    hj <- H[[j + 1L]]
     for (f_ in seq_len(K)) {
-      wuf <- wu[f_]; hif <- hi[f_]; hjf <- hj[f_]
+      wuf <- wu[f_]
+      hif <- hi[f_]
+      hjf <- hj[f_]
       wu[f_] <- wuf + a * (g * (hif - hjf) + sgn * lm * wuf)
       hi[f_] <- hif + a * (g * wuf + sgn * lm * hif)
       hj[f_] <- hjf + a * (g * (-wuf) + sgn * lm * hjf)
     }
-    W[[u_idx + 1L]] <- wu; H[[i + 1L]] <- hi; H[[j + 1L]] <- hj
+    W[[u_idx + 1L]] <- wu
+    H[[i + 1L]] <- hi
+    H[[j + 1L]] <- hj
     if (it %% checkpoint_every == 0L) {
       history <- c(history,
                    .bprMF_bpr_opt(W, H, pos, I, lm)$bpr_opt)

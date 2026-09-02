@@ -39,13 +39,17 @@ Evstud <- function(y, D, unit, time, cohort, max_lead = NULL, max_lag = NULL,
   y <- as.numeric(y)
   n <- length(y)
   if (n == 0L) stop("empty input: y has no observations")
-  D <- as.numeric(D); unit <- as.character(unit)
-  time <- as.numeric(time); coh <- as.numeric(cohort)
+  D <- as.numeric(D)
+  unit <- as.character(unit)
+  time <- as.numeric(time)
+  coh <- as.numeric(cohort)
   if (!(length(D) == n && length(unit) == n && length(time) == n &&
         length(coh) == n))
     stop("y, D, unit, time and cohort must have equal length")
-  us <- sort(unique(unit)); ts <- sort(unique(time))
-  U <- length(us); Tn <- length(ts)
+  us <- sort(unique(unit))
+  ts <- sort(unique(time))
+  U <- length(us)
+  Tn <- length(ts)
   if (U < 2L || Tn < 2L) stop("need at least two units and two periods")
   ui <- match(unit, us) - 1L
   ti <- match(time, ts) - 1L
@@ -74,10 +78,12 @@ Evstud <- function(y, D, unit, time, cohort, max_lead = NULL, max_lag = NULL,
   s2 <- sum(resid * resid) / dof
   XtX <- matrix(0, p, p)
   for (a in seq_len(p)) for (cc in seq_len(p)) XtX[a, cc] <- sum(X[, a] * X[, cc])
-  coef <- numeric(length(ets)); se <- numeric(length(ets))
+  coef <- numeric(length(ets))
+  se <- numeric(length(ets))
   for (k in seq_along(ets)) {
     j <- off + k
-    e <- numeric(p); e[j] <- 1
+    e <- numeric(p)
+    e[j] <- 1
     col <- .s03cholsolve(XtX, e)
     coef[k] <- b[j]
     se[k] <- sqrt(s2 * col[j])

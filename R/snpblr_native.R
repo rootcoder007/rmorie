@@ -43,7 +43,8 @@ Snpblr <- function(y, M, lam = NULL, h2 = NULL, freq = NULL) {
   y <- as.numeric(y)
   Mm <- as.matrix(M)
   storage.mode(Mm) <- "double"
-  n <- nrow(Mm); m <- ncol(Mm)
+  n <- nrow(Mm)
+  m <- ncol(Mm)
   if (length(y) != n) stop("y and M row count differ", call. = FALSE)
   if (is.null(lam) == is.null(h2)) {
     stop("give exactly one of lam or h2", call. = FALSE)

@@ -27,14 +27,18 @@ Ghosalfrsreg <- function(n = 600, seed = 42) {
   f0 <- sin(2 * pi * xs)
   ys <- f0 + 0.4 * .ghc_norm(e, n)
   phi <- function(x, k) sqrt(2) * cos((k + 1) * pi * x)
-  best_ev <- NULL; K_hat <- NA_integer_; coef <- numeric(0)
+  best_ev <- NULL
+  K_hat <- NA_integer_
+  coef <- numeric(0)
   for (K in 1:8) {
     cf <- vapply(0:(K - 1), function(k)
       sum(ys * phi(xs, k)) / n * n / (n + 1), numeric(1))
     P <- outer(xs, 0:(K - 1), phi)
     rss <- sum((ys - as.numeric(P %*% cf))^2)
     ev <- -0.5 * n * log(rss / n) - 0.5 * K * log(n)
-    if (is.null(best_ev) || ev > best_ev) { best_ev <- ev; K_hat <- K; coef <- cf }
+    if (is.null(best_ev) || ev > best_ev) { best_ev <- ev
+    K_hat <- K
+    coef <- cf }
   }
   P <- outer(xs, 0:(K_hat - 1), phi)
   risk <- sum((as.numeric(P %*% coef) - f0)^2) / n

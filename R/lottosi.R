@@ -23,7 +23,9 @@
 #' @examples
 #' Ppssamp(z = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 Ppssamp <- function(z, y, n, seed = 1) {
-  z <- .t1_vec(z); y <- .t1_vec(y); N <- length(z)
+  z <- .t1_vec(z)
+  y <- .t1_vec(y)
+  N <- length(z)
   if (length(y) != N) stop("z and y must have the same length")
   if (any(z <= 0)) stop("sizes must be strictly positive")
   n <- as.integer(n)

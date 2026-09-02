@@ -16,7 +16,8 @@
 #' @return A list with \code{beta}, \code{fit}, \code{res}.
 #' @export
 .pesdol_ols <- function(X, y) {
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   XtX <- crossprod(X)
   # numerical floor scaled to the matrix, matching the Python arm
   scale <- sum(diag(XtX)) / ncol(X)
@@ -43,19 +44,22 @@
 #' @export
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   yv <- as.numeric(y)
-  Xm <- as.matrix(x); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(x)
+  storage.mode(Xm) <- "double"
   n0 <- length(yv)
   if (n0 != nrow(Xm))
     stop(sprintf("pesdol: %d responses but %d regressor rows", n0, nrow(Xm)))
   m <- ncol(Xm)
-  p <- as.integer(p); q <- as.integer(q)
+  p <- as.integer(p)
+  q <- as.integer(q)
   if (p < 1L || q < 0L) stop("pesdol: need p >= 1 and q >= 0")
   start <- max(p, q) + 1L
   if (n0 - start < p + q * m + m + 3L)
     stop(sprintf(paste0("pesdol: too few observations for ARDL(%d, %d) with ",
                         "%d regressors"), p, q, m))
 
-  rows <- list(); dep <- numeric(0)
+  rows <- list()
+  dep <- numeric(0)
   for (t in seq(start + 1L, n0)) {
     r <- c(1.0, yv[t - 1L])
     for (j in seq_len(m)) r <- c(r, Xm[t - 1L, j])
@@ -68,7 +72,8 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   }
   X <- do.call(rbind, rows)
   f <- .pesdol_ols(X, dep)
-  n <- nrow(X); kk <- ncol(X)
+  n <- nrow(X)
+  kk <- ncol(X)
   rss_u <- sum(f$res ^ 2)
 
   keep <- c(1L, seq(1L + m + 2L, kk))
@@ -87,7 +92,8 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
               "4" = c(2.86, 4.01), "5" = c(2.62, 3.79))
   bd <- TAB[[as.character(m)]]
   if (is.null(bd)) bd <- c(NaN, NaN)
-  lo <- bd[1]; hi <- bd[2]
+  lo <- bd[1]
+  hi <- bd[2]
   verdict <- if (is.nan(F) || is.nan(lo)) "unavailable" else
     if (F > hi) "cointegrated" else
       if (F < lo) "no long-run relationship" else "inconclusive"

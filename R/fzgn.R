@@ -36,7 +36,8 @@ Qedgew <- function(x, n, h, sigma, e1, e2, e3, e4, e5, e6, delta = 0, book = FAL
   if (h <= 0) stop("bandwidth must be positive.")
   if (sigma <= 0) stop("sigma_n must be positive.")
   xv <- as.numeric(x) - delta / (sigma * sqrt(n))
-  phi <- stats::dnorm(xv); base <- stats::pnorm(xv)
+  phi <- stats::dnorm(xv)
+  base <- stats::pnorm(xv)
   he2 <- xv^2 - 1
   he3 <- xv^3 - 3 * xv
   he5 <- xv^5 - 10 * xv^3 + 15 * xv

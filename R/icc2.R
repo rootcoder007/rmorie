@@ -39,7 +39,8 @@
 #' @export
 Icc2 <- function(y, subject, rater) {
   b <- .icc_balanced(y, subject, "icc_two_way_random")
-  n <- b$n; k <- b$k
+  n <- b$n
+  k <- b$k
   rs <- .s03vec(rater)
   if (length(rs) != n * k) {
     stop("icc_two_way_random: rater must have one entry per rating")
@@ -68,13 +69,17 @@ Icc2 <- function(y, subject, rater) {
 #' @return A list with \code{bms}, \code{wms}, \code{jms}, \code{ems}.
 #' @export
 .icc_mean_squares <- function(rows, n, k) {
-  tot <- 0; tot2 <- 0; ssa <- 0
+  tot <- 0
+  tot2 <- 0
+  ssa <- 0
   colsum <- numeric(k)
   for (i in seq_len(n)) {
     s <- 0
     for (j in seq_len(k)) {
       e <- rows[i, j]
-      s <- s + e; tot <- tot + e; tot2 <- tot2 + e * e
+      s <- s + e
+      tot <- tot + e
+      tot2 <- tot2 + e * e
       colsum[j] <- colsum[j] + e
     }
     ssa <- ssa + s * s / k

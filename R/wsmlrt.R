@@ -18,7 +18,8 @@
 #'   Theta_0". Fetched as the full text of the book.
 #' @export
 Lrtest <- function(loglik_full, loglik_null, df) {
-  lf <- as.numeric(loglik_full); ln <- as.numeric(loglik_null)
+  lf <- as.numeric(loglik_full)
+  ln <- as.numeric(loglik_null)
   df <- as.integer(df)
   if (df < 1L) stop("df must be at least 1")
   lam <- 2 * (lf - ln)

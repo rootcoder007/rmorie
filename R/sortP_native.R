@@ -58,7 +58,8 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
   X <- if (is.matrix(features)) features else
     do.call(rbind, lapply(features, function(r) as.numeric(r)))
-  n <- nrow(X); d <- ncol(X)
+  n <- nrow(X)
+  d <- ncol(X)
   kk <- as.integer(k_keep)
   if (kk < 1L) stop("sortP: k must be at least 1")
   ch <- as.integer(sort_channel)

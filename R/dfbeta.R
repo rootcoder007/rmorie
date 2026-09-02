@@ -17,11 +17,17 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dfbetas(V, V)
 Dfbetas <- function(X, y, intercept = TRUE) {
-  X <- as.matrix(X); if (isTRUE(intercept)) X <- .t1_cbind1(X)
-  y <- .t1_vec(y); n <- nrow(X); p <- ncol(X)
-  f <- .t1_lstsq(X, y); h <- .t1_hatdiag(X, f$xtxinv)
-  rss <- sum(f$resid^2); df <- n - p
-  out <- matrix(NA_real_, n, p); si <- rep(NA_real_, n)
+  X <- as.matrix(X)
+  if (isTRUE(intercept)) X <- .t1_cbind1(X)
+  y <- .t1_vec(y)
+  n <- nrow(X)
+  p <- ncol(X)
+  f <- .t1_lstsq(X, y)
+  h <- .t1_hatdiag(X, f$xtxinv)
+  rss <- sum(f$resid^2)
+  df <- n - p
+  out <- matrix(NA_real_, n, p)
+  si <- rep(NA_real_, n)
   cj <- sqrt(diag(f$xtxinv))
   for (i in seq_len(n)) {
     d <- 1 - h[i]

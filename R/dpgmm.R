@@ -25,19 +25,23 @@
 #' @export
 Dpgmm <- function(y, alpha = 1, prior_mu = 0, prior_sigma = 1,
                   truncation = 5, max_iter = 200, tol = 1e-13) {
-  v <- .s03vec(y); n <- length(v); K <- as.integer(truncation)
+  v <- .s03vec(y)
+  n <- length(v)
+  K <- as.integer(truncation)
   prior <- Stickw(alpha, K)$pi
   tot <- 0
   for (x in prior) tot <- tot + x
   prior <- if (tot > 0) prior / tot else rep(1 / K, K)
-  lo <- min(v); hi <- max(v)
+  lo <- min(v)
+  hi <- max(v)
   mu <- numeric(K)
   for (i in seq_len(K)) mu[i] <- lo + (hi - lo) * (i - 1 + 0.5) / K
   sd_ <- rep(max((hi - lo) / K, 1e-6), K)
   w <- prior
   ll <- -Inf
   for (it in seq_len(as.integer(max_iter))) {
-    R <- matrix(0, n, K); newll <- 0
+    R <- matrix(0, n, K)
+    newll <- 0
     for (i in seq_len(n)) {
       lp <- numeric(K)
       for (cc in seq_len(K)) {
@@ -66,7 +70,8 @@ Dpgmm <- function(y, alpha = 1, prior_mu = 0, prior_sigma = 1,
     wt <- 0
     for (cc in seq_len(K)) wt <- wt + w[cc]
     w <- w / wt
-    if (abs(newll - ll) < tol) { ll <- newll; break }
+    if (abs(newll - ll) < tol) { ll <- newll
+    break }
     ll <- newll
   }
   active <- 0L

@@ -21,7 +21,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Treedepth(V)
 Treedepth <- function(depths, max_depth = 10) {
-  d <- .t1_vec(depths); n <- length(d)
+  d <- .t1_vec(depths)
+  n <- length(d)
   if (n < 1L) stop("at least one iteration is required")
   if (any(d < 0)) stop("tree depths must be non-negative")
   md <- as.integer(max_depth)

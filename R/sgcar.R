@@ -46,7 +46,8 @@ car_rho_bounds <- function(W, parameterization = "weighted") {
 #' @examples
 #' car_rho_ols(Z = 5L, W = 5L)
 car_rho_ols <- function(Z, W, X = NULL) {
-  Z <- as.numeric(Z); W <- as.matrix(W)
+  Z <- as.numeric(Z)
+  W <- as.matrix(W)
   X <- if (is.null(X)) matrix(1, length(Z), 1) else as.matrix(X)
   e <- as.numeric(Z - X %*% qr.solve(X, Z))
   denom <- as.numeric(crossprod(e, W %*% (W %*% e)))
@@ -113,7 +114,8 @@ sgcar <- function(Z, W, X = NULL, parameterization = "weighted") {
     if (identical(parameterization, "weighted")) D - rho * W else diag(n) - rho * W
   }
   b <- car_rho_bounds(W, parameterization)
-  lo <- b[1]; hi <- b[2]
+  lo <- b[1]
+  hi <- b[2]
   eps <- 1e-6 * max(hi - lo, 1e-12)
 
   neg_ll <- function(rho) {

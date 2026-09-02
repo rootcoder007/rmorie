@@ -26,8 +26,12 @@
 #'   Learning.
 #' @export
 Tmlerd <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
-  Y <- .t1_vec(Y); A <- .t1_vec(A); n <- length(Y)
-  QAW <- .t1_vec(QAW); Q1W <- .t1_vec(Q1W); Q0W <- .t1_vec(Q0W)
+  Y <- .t1_vec(Y)
+  A <- .t1_vec(A)
+  n <- length(Y)
+  QAW <- .t1_vec(QAW)
+  Q1W <- .t1_vec(Q1W)
+  Q0W <- .t1_vec(Q0W)
   g1W <- .t1_vec(g1W)
   if (any(c(length(A), length(QAW), length(Q1W), length(Q0W),
             length(g1W)) != n))

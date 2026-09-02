@@ -26,38 +26,48 @@
 #'          c("a", "a", "b", "b"))$tau_naive
 #' @export
 Drchange <- function(y, D, period = NULL, unit = NULL, X = NULL) {
-  yv <- .s03vec(y); d <- .s03vec(D)
-  p <- as.numeric(period); u <- as.character(unit)
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  p <- as.numeric(period)
+  u <- as.character(unit)
   Xr <- if (!is.null(X)) .s03mat(X) else NULL
   pers <- sort(unique(p))
   units <- character(0)
   for (x in u) if (!(x %in% units)) units <- c(units, x)
-  contrast <- numeric(0); seq_ <- numeric(0); xs <- list()
+  contrast <- numeric(0)
+  seq_ <- numeric(0)
+  xs <- list()
   for (uu in units) {
     idx <- which(u == uu)
     if (length(idx) < 2L) next
-    i0 <- NA_integer_; i1 <- NA_integer_
+    i0 <- NA_integer_
+    i1 <- NA_integer_
     for (i in idx) {
       if (p[i] == pers[1]) i0 <- i else if (p[i] == pers[2]) i1 <- i
     }
     if (is.na(i0) || is.na(i1)) next
     if (d[i0] > d[i1]) {
-      contrast <- c(contrast, yv[i0] - yv[i1]); seq_ <- c(seq_, 1)
+      contrast <- c(contrast, yv[i0] - yv[i1])
+      seq_ <- c(seq_, 1)
     } else {
-      contrast <- c(contrast, yv[i1] - yv[i0]); seq_ <- c(seq_, 0)
+      contrast <- c(contrast, yv[i1] - yv[i0])
+      seq_ <- c(seq_, 0)
     }
     if (!is.null(Xr)) xs[[length(xs) + 1L]] <- Xr[i0, ]
   }
-  m1 <- contrast[seq_ > 0.5]; m0 <- contrast[seq_ < 0.5]
+  m1 <- contrast[seq_ > 0.5]
+  m0 <- contrast[seq_ < 0.5]
   naive <- 0.5 * ((if (length(m1)) .s03mean(m1) else 0) +
                     (if (length(m0)) .s03mean(m0) else 0))
   carry <- (if (length(m1)) .s03mean(m1) else NaN) -
     (if (length(m0)) .s03mean(m0) else NaN)
   if (length(m1) && length(m0) && length(contrast) >= 3L) {
     fit <- .s03drdid(contrast, seq_, if (!is.null(Xr)) do.call(rbind, xs) else NULL)
-    est <- fit$tau; se <- fit$se
+    est <- fit$tau
+    se <- fit$se
   } else {
-    est <- naive; se <- NaN
+    est <- naive
+    se <- NaN
   }
   list(estimate = est, tau_naive = naive, carryover = carry, se = se,
        n_units = length(contrast),

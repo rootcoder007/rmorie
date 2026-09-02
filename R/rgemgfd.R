@@ -52,9 +52,12 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
   if (fsv <= 0) stop("rangayyan_emg_fractal_dim: fs must be positive")
   seglen <- as.integer(round(fsv))
   if (seglen < 4L) stop("rangayyan_emg_fractal_dim: fs is too low for a one-second segment")
-  lev <- numeric(0); fd <- numeric(0); ivs <- list()
+  lev <- numeric(0)
+  fd <- numeric(0)
+  ivs <- list()
   for (r in .rgisint_runs(f)) {
-    a <- r[1]; b <- r[2]
+    a <- r[1]
+    b <- r[2]
     if (f[a] <= rest_level) next
     stop_i <- min(b, a + seglen - 1L)
     if (stop_i - a + 1L < 4L) next
@@ -89,9 +92,11 @@ rgemgfd <- function(emg, force, fs, kmax = 10L, rest_level = 0) {
   if (N < 4L) stop("higuchi_fd: need at least four samples")
   if (kk < 2L) stop("higuchi_fd: kmax must be at least two")
   kk <- min(kk, N %/% 2L)
-  Lk <- numeric(0); ks <- integer(0)
+  Lk <- numeric(0)
+  ks <- integer(0)
   for (k in seq_len(kk)) {
-    acc <- 0; used <- 0L
+    acc <- 0
+    used <- 0L
     for (m in seq_len(k)) {
       idx <- seq.int(m, N, by = k)          # eq (5.39)
       if (length(idx) < 2L) next

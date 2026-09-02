@@ -28,18 +28,25 @@
 #' @export
 Leidenclus <- function(graph, resolution = 1, quality = "modularity",
                        max_iter = 20) {
-  W <- .s03mat(graph); n <- nrow(W); g <- as.numeric(resolution)
+  W <- .s03mat(graph)
+  n <- nrow(W)
+  g <- as.numeric(resolution)
   comps <- function(members) {
-    seen <- rep(FALSE, length(members)); out <- list()
+    seen <- rep(FALSE, length(members))
+    out <- list()
     for (a in seq_along(members)) {
       if (seen[a]) next
-      stack <- c(a); seen[a] <- TRUE; comp <- integer(0)
+      stack <- c(a)
+      seen[a] <- TRUE
+      comp <- integer(0)
       while (length(stack) > 0L) {
-        u <- stack[length(stack)]; stack <- stack[-length(stack)]
+        u <- stack[length(stack)]
+        stack <- stack[-length(stack)]
         comp <- c(comp, members[u])
         for (b in seq_along(members)) {
           if (!seen[b] && W[members[u], members[b]] != 0) {
-            seen[b] <- TRUE; stack <- c(stack, b)
+            seen[b] <- TRUE
+            stack <- c(stack, b)
           }
         }
       }
@@ -52,7 +59,9 @@ Leidenclus <- function(graph, resolution = 1, quality = "modularity",
     for (i in seq_len(n)) for (j in seq_len(n)) m2 <- m2 + W[i, j]
     if (m2 <= 0) return(0)
     deg <- numeric(n)
-    for (i in seq_len(n)) { s <- 0; for (j in seq_len(n)) s <- s + W[i, j]; deg[i] <- s }
+    for (i in seq_len(n)) { s <- 0
+    for (j in seq_len(n)) s <- s + W[i, j]
+    deg[i] <- s }
     q <- 0
     for (i in seq_len(n)) for (j in seq_len(n)) {
       if (lab[i] == lab[j]) q <- q + (W[i, j] - g * deg[i] * deg[j] / m2) / m2
@@ -66,14 +75,16 @@ Leidenclus <- function(graph, resolution = 1, quality = "modularity",
     moved <- FALSE
     for (v in seq_len(n)) {
       cur <- lab[v]
-      bestq <- modq(lab); bestc <- cur
+      bestq <- modq(lab)
+      bestc <- cur
       cands <- integer(0)
       for (u in seq_len(n)) if (W[v, u] != 0 && !(lab[u] %in% cands)) cands <- c(cands, lab[u])
       for (cc in sort(cands)) {
         if (cc == cur) next
         lab[v] <- cc
         q <- modq(lab)
-        if (q > bestq + 1e-12) { bestq <- q; bestc <- cc }
+        if (q > bestq + 1e-12) { bestq <- q
+        bestc <- cc }
       }
       lab[v] <- bestc
       if (bestc != cur) moved <- TRUE
@@ -82,7 +93,8 @@ Leidenclus <- function(graph, resolution = 1, quality = "modularity",
   }
   ids <- integer(0)
   for (cc in lab) if (!(cc %in% ids)) ids <- c(ids, cc)
-  newlab <- integer(n); nxt <- 0L
+  newlab <- integer(n)
+  nxt <- 0L
   for (cc in ids) {
     members <- which(lab == cc)
     for (comp in comps(members)) {

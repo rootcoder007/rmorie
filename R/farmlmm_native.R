@@ -120,7 +120,8 @@
 #' @export
 .kinship_from_markers <- function(G, markers = NULL) {
   M <- .farmlmm_to_mat(G)
-  n <- nrow(M); p <- ncol(M)
+  n <- nrow(M)
+  p <- ncol(M)
   cols <- if (is.null(markers)) seq_len(p) else as.integer(markers) + 1L
   if (length(cols) == 0L) stop("farmlmm: kinship needs at least one marker")
   Z <- matrix(0, nrow = length(cols), ncol = n)
@@ -153,7 +154,8 @@
   n <- nrow(M)
   g <- M[, as.integer(marker) + 1L]
   kg <- as.numeric(K %*% g) / n
-  mg <- mean(g); mk <- mean(kg)
+  mg <- mean(g)
+  mk <- mean(kg)
   num <- sum((g - mg) * (kg - mk))
   den <- sqrt(sum((g - mg) ^ 2) * sum((kg - mk) ^ 2))
   list(correlation = if (den > .farmlmm_EPS) num / den else 0,
@@ -176,18 +178,22 @@
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)
-  n <- nrow(M); p <- ncol(M)
+  n <- nrow(M)
+  p <- ncol(M)
   if (length(yv) != n) {
     stop(sprintf("farmlmm: %d phenotypes but %d genotypes", length(yv), n))
   }
   cov <- as.integer(covariates) + 1L
-  pv <- numeric(p); betas <- numeric(p)
+  pv <- numeric(p)
+  betas <- numeric(p)
   for (j in seq_len(p)) {
     cols <- c(j, setdiff(cov, j))
     X <- M[, cols, drop = FALSE]
     co <- tryCatch(.farmlmm_wls(X, yv, rep(1, n), 1e-8)$coef, error = function(e) NULL)
     if (is.null(co)) {
-      pv[j] <- 1; betas[j] <- 0; next
+      pv[j] <- 1
+      betas[j] <- 0
+      next
     }
     fit <- co[1L] + as.numeric(X %*% co[-1L])
     res <- yv - fit
@@ -251,7 +257,9 @@
   M <- .farmlmm_to_mat(G)
   p <- ncol(M)
   thr <- if (is.null(threshold)) 0.05 / p else as.numeric(threshold)
-  sel <- integer(0); hist <- list(); converged <- FALSE
+  sel <- integer(0)
+  hist <- list()
+  converged <- FALSE
   fem <- NULL
   for (it in seq_len(as.integer(max_iter))) {
     fem <- .fixed_effect_scan(yv, M, sel - 1L)

@@ -132,7 +132,8 @@ loss <- function(y, y_hat, kind = "square") {
   if (!(kind %in% .cdae_losses))
     stop(sprintf("cdaeRC: loss must be one of %s, got %r",
                  paste(.cdae_losses, collapse = ", "), kind))
-  yv <- as.numeric(y); yh <- as.numeric(y_hat)
+  yv <- as.numeric(y)
+  yh <- as.numeric(y_hat)
   if (kind %in% c("log", "hinge") && yv == 0.0)
     stop(sprintf("cdaeRC: the %s loss needs y = -1 for negatives, not 0", kind))
   if (kind == "square") return(0.5 * (yv - yh)^2)
@@ -170,7 +171,9 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                      alpha = 0.05, lam = 0.01, iters = 30L,
                      n_neg = 5L, seed = 0, activation = "sigmoid",
                      init_scale = 0.1) {
-  U <- as.integer(n_users); I <- as.integer(n_items); K <- as.integer(k_dim)
+  U <- as.integer(n_users)
+  I <- as.integer(n_items)
+  K <- as.integer(k_dim)
   if (U < 1L || I < 2L || K < 1L)
     stop("cdaeRC: need at least 1 user, 2 items and 1 hidden node")
   rng <- .ghc_rng(seed)
@@ -184,7 +187,8 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
   V  <- replicate(U, replicate(K, rand()), simplify = FALSE)
   b  <- rep(0.0, K)
   bp <- rep(0.0, I)
-  a <- as.numeric(alpha); lm <- as.numeric(lam)
+  a <- as.numeric(alpha)
+  lm <- as.numeric(lam)
   hist <- numeric(0)
   for (it in seq_len(as.integer(iters))) {
     tot <- 0.0
@@ -262,8 +266,11 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' @export
 recommend <- function(model, pos, u, n_items, top_k = 5L,
                       activation = "sigmoid") {
-  W <- model$W; Wp <- model$W_prime; V <- model$V
-  b <- model$b; bp <- model$b_prime
+  W <- model$W
+  Wp <- model$W_prime
+  V <- model$V
+  b <- model$b
+  bp <- model$b_prime
   u_int <- as.integer(u)
   seen <- unique(as.integer((if (!is.null(names(pos))) pos[[as.character(u_int)]] else pos[[u_int + 1L]]) %||% c()))
   seen_set <- seen + 1L

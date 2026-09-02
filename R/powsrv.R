@@ -23,8 +23,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Powsrv(V)
 Powsrv <- function(effect_size, alpha = 0.05, DEFF = 1, n = 100) {
-  d <- as.numeric(effect_size); alpha <- as.numeric(alpha)
-  deff <- as.numeric(DEFF); n <- as.integer(n)
+  d <- as.numeric(effect_size)
+  alpha <- as.numeric(alpha)
+  deff <- as.numeric(DEFF)
+  n <- as.integer(n)
   if (!(alpha > 0 && alpha < 1)) stop("Powsrv: alpha must lie in (0, 1)")
   if (deff <= 0) stop("Powsrv: DEFF must be positive")
   if (n < 1L) stop("Powsrv: n must be at least 1")

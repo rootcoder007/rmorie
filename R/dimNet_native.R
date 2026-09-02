@@ -30,9 +30,13 @@
 #' @return Numeric angle in radians.
 #' @export
 morie_dimNet_angle_between <- function(r_k, r_j, r_i) {
-  a <- as.numeric(r_k); b <- as.numeric(r_j); c <- as.numeric(r_i)
-  u <- a - b; v <- c - b
-  nu <- sqrt(sum(u * u)); nv <- sqrt(sum(v * v))
+  a <- as.numeric(r_k)
+  b <- as.numeric(r_j)
+  c <- as.numeric(r_i)
+  u <- a - b
+  v <- c - b
+  nu <- sqrt(sum(u * u))
+  nv <- sqrt(sum(v * v))
   if (nu <= 1e-12 || nv <= 1e-12)
     stop("dimNet: an angle needs three distinct positions")
   cs <- sum(u * v) / (nu * nv)
@@ -45,7 +49,8 @@ morie_dimNet_angle_between <- function(r_k, r_j, r_i) {
 #' @return A list with \code{triplets} and \code{pairs}.
 #' @export
 morie_dimNet_triplet_count <- function(adj) {
-  pairs <- 0; trips <- 0
+  pairs <- 0
+  trips <- 0
   for (j in names(adj)) {
     d <- length(setdiff(adj[[j]], j))
     pairs <- pairs + d
@@ -66,7 +71,8 @@ morie_dimNet_triplet_count <- function(adj) {
 #' @return Numeric vector of length \code{n_basis}.
 #' @export
 morie_dimNet_bessel_basis <- function(d, cutoff = 5.0, n_basis = 8L) {
-  c <- as.numeric(cutoff); dv <- as.numeric(d)
+  c <- as.numeric(cutoff)
+  dv <- as.numeric(d)
   if (c <= 0) stop("dimNet: the cutoff must be positive")
   if (dv <= 0) stop("dimNet: the distance must be positive")
   vapply(seq_len(as.integer(n_basis)),
@@ -121,7 +127,8 @@ morie_dimNet_directional_message_pass <- function(messages, adj, R,
   keys <- names(messages)
   for (k in keys) {
     parts <- strsplit(k, "->", fixed = TRUE)[[1]]
-    j <- parts[1]; i <- parts[2]
+    j <- parts[1]
+    i <- parts[2]
     nbrs <- setdiff(adj[[j]], c(i, j))
     acc <- NULL
     for (kk in nbrs) {

@@ -23,8 +23,12 @@
 #'   mu1/(1-mu1)/(mu0/(1-mu0)) and builds IC.logOR on the log scale.
 #' @export
 Tmleor <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
-  Y <- .t1_vec(Y); A <- .t1_vec(A); n <- length(Y)
-  QAW <- .t1_vec(QAW); Q1W <- .t1_vec(Q1W); Q0W <- .t1_vec(Q0W)
+  Y <- .t1_vec(Y)
+  A <- .t1_vec(A)
+  n <- length(Y)
+  QAW <- .t1_vec(QAW)
+  Q1W <- .t1_vec(Q1W)
+  Q0W <- .t1_vec(Q0W)
   g1W <- .t1_vec(g1W)
   if (any(c(length(A), length(QAW), length(Q1W), length(Q0W),
             length(g1W)) != n))
@@ -34,7 +38,8 @@ Tmleor <- function(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95) {
   if (n < 2L) stop("at least two observations are required")
   fit <- .b1_target(Y, A, QAW, Q1W, Q0W, g1W, gbound)
   cv <- .b1_curves(Y, A, fit)
-  mu1 <- cv$mu1; mu0 <- cv$mu0
+  mu1 <- cv$mu1
+  mu0 <- cv$mu0
   if (mu1 <= 0 || mu1 >= 1 || mu0 <= 0 || mu0 >= 1)
     stop("a targeted mean hit 0 or 1; the odds ratio is undefined")
   psi <- (mu1 / (1 - mu1)) / (mu0 / (1 - mu0))

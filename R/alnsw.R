@@ -30,15 +30,19 @@
 #' Alnsw("GGTTGACTA", "TGTTACGG", gap = 2)$score
 #' @export
 Alnsw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
-  a <- .aln_symbols(seq1); b <- .aln_symbols(seq2)
-  n <- length(a); m <- length(b)
+  a <- .aln_symbols(seq1)
+  b <- .aln_symbols(seq2)
+  n <- length(a)
+  m <- length(b)
   if (n == 0L || m == 0L) stop("smith_waterman: neither sequence may be empty")
   g <- as.numeric(gap)
   if (g < 0) stop("smith_waterman: gap must be non-negative")
   alpha <- sort(unique(c(a, b)))
   sf <- .aln_score(sub_matrix, alpha, "smith_waterman")
   H <- matrix(0, nrow = n + 1L, ncol = m + 1L)
-  bi <- 0L; bj <- 0L; best <- 0
+  bi <- 0L
+  bj <- 0L
+  best <- 0
   for (i in seq_len(n)) {
     for (j in seq_len(m)) {
       d <- H[i, j] + sf(a[i], b[j])
@@ -49,21 +53,34 @@ Alnsw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
       if (u > v) v <- u
       if (l > v) v <- l
       H[i + 1L, j + 1L] <- v
-      if (v > best) { best <- v; bi <- i; bj <- j }
+      if (v > best) { best <- v
+      bi <- i
+      bj <- j }
     }
   }
-  o1 <- character(0); o2 <- character(0)
-  i <- bi; j <- bj
+  o1 <- character(0)
+  o2 <- character(0)
+  i <- bi
+  j <- bj
   while (i > 0L && j > 0L && H[i + 1L, j + 1L] > 0) {
     if (H[i + 1L, j + 1L] == H[i, j] + sf(a[i], b[j])) {
-      o1 <- c(a[i], o1); o2 <- c(b[j], o2); i <- i - 1L; j <- j - 1L
+      o1 <- c(a[i], o1)
+      o2 <- c(b[j], o2)
+      i <- i - 1L
+      j <- j - 1L
     } else if (H[i + 1L, j + 1L] == H[i, j + 1L] - g) {
-      o1 <- c(a[i], o1); o2 <- c("-", o2); i <- i - 1L
+      o1 <- c(a[i], o1)
+      o2 <- c("-", o2)
+      i <- i - 1L
     } else {
-      o1 <- c("-", o1); o2 <- c(b[j], o2); j <- j - 1L
+      o1 <- c("-", o1)
+      o2 <- c(b[j], o2)
+      j <- j - 1L
     }
   }
-  nm <- 0L; nx <- 0L; ng <- 0L
+  nm <- 0L
+  nx <- 0L
+  ng <- 0L
   for (p in seq_along(o1)) {
     if (o1[p] == "-" || o2[p] == "-") ng <- ng + 1L
     else if (o1[p] == o2[p]) nm <- nm + 1L

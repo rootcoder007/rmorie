@@ -29,7 +29,8 @@ Vgrm <- function(coords, values, bins = 15L) {
   n <- length(values)
   if (nrow(coords) != n) stop("`coords` and `values` must have the same number of rows")
   pr <- utils::combn(n, 2L)
-  i <- pr[1L, ]; j <- pr[2L, ]
+  i <- pr[1L, ]
+  j <- pr[2L, ]
   d <- sqrt(rowSums((coords[i, , drop = FALSE] - coords[j, , drop = FALSE])^2))
   sq <- (values[i] - values[j])^2
   if (length(bins) == 1L) {
@@ -46,9 +47,11 @@ Vgrm <- function(coords, values, bins = 15L) {
     n_bins <- length(edges) - 1L
     keep <- d >= edges[1L] & d <= edges[length(edges)]
   }
-  d <- d[keep]; sq <- sq[keep]
+  d <- d[keep]
+  sq <- sq[keep]
   idx <- pmin(pmax(findInterval(d, edges, rightmost.closed = FALSE), 1L), n_bins)
-  lag <- rep(NA_real_, n_bins); gam <- rep(NA_real_, n_bins)
+  lag <- rep(NA_real_, n_bins)
+  gam <- rep(NA_real_, n_bins)
   cnt <- integer(n_bins)
   for (b in seq_len(n_bins)) {
     m <- idx == b

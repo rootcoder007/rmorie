@@ -172,7 +172,12 @@
 #' @export
 .tlsate_pate_influence_curve <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
-  a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
+  a <- d$a
+  y <- d$y
+  q1 <- d$q1
+  q0 <- d$q0
+  gg <- d$gg
+  n <- d$n
   psi <- as.numeric(psi)
   qa <- ifelse(a == 1.0, q1, q0)
   h <- a / gg - (1.0 - a) / (1.0 - gg)
@@ -194,7 +199,12 @@
 #' @export
 .tlsate_sate_influence_curve <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
-  a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
+  a <- d$a
+  y <- d$y
+  q1 <- d$q1
+  q0 <- d$q0
+  gg <- d$gg
+  n <- d$n
   qa <- ifelse(a == 1.0, q1, q0)
   h <- a / gg - (1.0 - a) / (1.0 - gg)
   h * (y - qa)
@@ -244,7 +254,12 @@
 #' @export
 .tlsate_sate_tmle <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
-  a <- d$a; y <- d$y; q1 <- d$q1; q0 <- d$q0; gg <- d$gg; n <- d$n
+  a <- d$a
+  y <- d$y
+  q1 <- d$q1
+  q0 <- d$q0
+  gg <- d$gg
+  n <- d$n
 
   H <- a / gg - (1.0 - a) / (1.0 - gg)
   qa <- ifelse(a == 1.0, q1, q0)

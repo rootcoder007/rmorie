@@ -13,7 +13,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Poislo(V, V)
 Poislo <- function(Y, Yhat) {
-  Y <- .t1_mat(Y); H <- .t1_mat(Yhat)
+  Y <- .t1_mat(Y)
+  H <- .t1_mat(Yhat)
   if (nrow(Y) == 0L || nrow(Y) != nrow(H) || ncol(Y) != ncol(H))
     stop("Y and Yhat must be non-empty and the same shape")
   if (any(H <= 0)) stop("predicted Poisson means must be strictly positive")

@@ -17,7 +17,8 @@
   K <- ncol(V)
   tot <- 0
   for (f in seq_len(K)) {
-    s1 <- 0; s2 <- 0
+    s1 <- 0
+    s2 <- 0
     for (i in seq_len(n)) {
       t <- V[i, f] * x[i]
       s1 <- s1 + t
@@ -77,7 +78,9 @@ DeepF <- function(X, y = NULL, K = 4, mlp_h = 4, w0 = 0, seed = 42,
   for (t in seq_len(h)) b1[t] <- .ghc_norm(e, 1L, 0, 0.1)
   W2 <- numeric(h)
   for (t in seq_len(h)) W2[t] <- .ghc_norm(e, 1L, 0, 0.1)
-  fm <- numeric(n); dp <- numeric(n); ph <- numeric(n)
+  fm <- numeric(n)
+  dp <- numeric(n)
+  ph <- numeric(n)
   for (i in seq_len(n)) {
     x <- Xm[i, ]
     lin <- w0

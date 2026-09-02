@@ -30,8 +30,12 @@
 #' Tmleboot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmleboot <- function(Y, A, QAW, Q1W, Q0W, g1W, B = 200, seed = 1,
                      gbound = 0.025, level = 0.95) {
-  Y <- .t1_vec(Y); A <- .t1_vec(A); n <- length(Y)
-  QAW <- .t1_vec(QAW); Q1W <- .t1_vec(Q1W); Q0W <- .t1_vec(Q0W)
+  Y <- .t1_vec(Y)
+  A <- .t1_vec(A)
+  n <- length(Y)
+  QAW <- .t1_vec(QAW)
+  Q1W <- .t1_vec(Q1W)
+  Q0W <- .t1_vec(Q0W)
   g1W <- .t1_vec(g1W)
   if (any(c(length(A), length(QAW), length(Q1W), length(Q0W),
             length(g1W)) != n))
@@ -60,7 +64,8 @@ Tmleboot <- function(Y, A, QAW, Q1W, Q0W, g1W, B = 200, seed = 1,
     reps <- c(reps, mean(f$Q1star) - mean(f$Q0star))
   }
   if (length(reps) < 2L) stop("too few usable bootstrap replicates")
-  q <- sort(reps); m <- length(q)
+  q <- sort(reps)
+  m <- length(q)
   a <- (1 - level) / 2
   lo <- q[max(1L, floor(a * (m - 1)) + 1L)]
   hi <- q[min(m, ceiling((1 - a) * (m - 1)) + 1L)]

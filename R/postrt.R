@@ -27,7 +27,8 @@ Postrt <- function(y, weights, stratum, N_h) {
   if (length(w) != length(d$y))
     stop("Postrt: weights must have one entry per observation")
   if (any(w <= 0)) stop("Postrt: weights must be positive")
-  wa <- w; fac <- numeric(0)
+  wa <- w
+  fac <- numeric(0)
   for (k in d$order) {
     idx <- which(d$s == k)
     tot <- sum(w[idx])

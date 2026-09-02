@@ -12,7 +12,8 @@
 #' @examples
 #' Eigcent(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
 Eigcent <- function(A) {
-  A <- as.matrix(A); n <- nrow(A)
+  A <- as.matrix(A)
+  n <- nrow(A)
   e <- .t1_eigsym(A)
   v <- e$vectors[, 1]
   if (sum(v) < 0) v <- -v

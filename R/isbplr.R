@@ -24,14 +24,18 @@
 #' @export
 Ibp3par <- function(y, sigma = 0.5, alpha = 1, c = 1) {
   n <- if (length(y) == 1L && is.numeric(y)) as.integer(y) else length(.s03vec(y))
-  s <- as.numeric(sigma); a <- as.numeric(alpha); cc <- as.numeric(c)
+  s <- as.numeric(sigma)
+  a <- as.numeric(alpha)
+  cc <- as.numeric(c)
   newd <- numeric(n)
   for (i in seq_len(n)) {
     newd[i] <- a * exp(lgamma(1 + cc) + lgamma(i - 1 + cc + s) -
                          lgamma(i + cc) - lgamma(cc + s))
   }
-  path <- numeric(n); acc <- 0
-  for (i in seq_len(n)) { acc <- acc + newd[i]; path[i] <- acc }
+  path <- numeric(n)
+  acc <- 0
+  for (i in seq_len(n)) { acc <- acc + newd[i]
+  path[i] <- acc }
   one <- 0
   for (i in seq_len(n)) one <- one + a * cc / (i - 1 + cc)
   list(estimate = acc, K_n = acc, K_path = path, new_dishes = newd,

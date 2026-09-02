@@ -20,8 +20,10 @@
 #' Mutinfo(c(0, 0, 1, 1), c(0, 1, 0, 1))$mi
 #' @export
 Mutinfo <- function(y, x = NULL, y2 = NULL) {
-  if (is.null(y2)) { a <- as.character(y); b <- as.character(x) }
-  else { a <- as.character(x); b <- as.character(y2) }
+  if (is.null(y2)) { a <- as.character(y)
+  b <- as.character(x) }
+  else { a <- as.character(x)
+  b <- as.character(y2) }
   n <- length(a)
   la <- sort(unique(a), method = "radix")
   lb <- sort(unique(b), method = "radix")
@@ -29,11 +31,14 @@ Mutinfo <- function(y, x = NULL, y2 = NULL) {
   for (i in seq_len(n)) {
     P[match(a[i], la), match(b[i], lb)] <- P[match(a[i], la), match(b[i], lb)] + 1 / n
   }
-  px <- numeric(length(la)); py <- numeric(length(lb))
+  px <- numeric(length(la))
+  py <- numeric(length(lb))
   for (i in seq_along(la)) for (j in seq_along(lb)) {
-    px[i] <- px[i] + P[i, j]; py[j] <- py[j] + P[i, j]
+    px[i] <- px[i] + P[i, j]
+    py[j] <- py[j] + P[i, j]
   }
-  mi <- 0; hxy <- 0
+  mi <- 0
+  hxy <- 0
   for (i in seq_along(la)) for (j in seq_along(lb)) {
     if (P[i, j] > 0) {
       mi <- mi + P[i, j] * log(P[i, j] / (px[i] * py[j]))

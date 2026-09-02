@@ -27,7 +27,8 @@ Ghosalbppathgen <- function(c = 1.5, t_max = 1, n_jumps = 300,
   if (c <= 0) stop("c must be positive")
   if (n_jumps < 1L) stop("n_jumps must be positive")
   e <- .ghc_rng(seed)
-  tau <- numeric(n_jumps); J <- numeric(n_jumps)
+  tau <- numeric(n_jumps)
+  J <- numeric(n_jumps)
   for (k in seq_len(n_jumps)) {
     tau[k] <- .ghc_unif(e, 1L) * t_max
     J[k] <- .ghc_beta1(e, 1, c) / n_jumps * c * 5

@@ -50,29 +50,36 @@
   # mutual-edge count is invariant; identical RNG draw order.
   key <- function(i, j) paste0(i, "_", j)
   present <- new.env(hash = TRUE)
-  si <- integer(0); sj <- integer(0)          # single edges
-  mi <- integer(0); mj <- integer(0)          # mutual pairs [min,max]
+  si <- integer(0)
+  sj <- integer(0)          # single edges
+  mi <- integer(0)
+  mj <- integer(0)          # mutual pairs [min,max]
   seen <- new.env(hash = TRUE)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     if (i == j || !adj[i, j]) next
     if (adj[j, i]) {
-      lo <- min(i, j); hi <- max(i, j)
+      lo <- min(i, j)
+      hi <- max(i, j)
       kk <- key(lo, hi)
       if (!exists(kk, seen, inherits = FALSE)) {
         assign(kk, TRUE, seen)
-        mi <- c(mi, lo); mj <- c(mj, hi)
+        mi <- c(mi, lo)
+        mj <- c(mj, hi)
       }
     } else {
-      si <- c(si, i); sj <- c(sj, j)
+      si <- c(si, i)
+      sj <- c(sj, j)
     }
   }
-  S <- cbind(si, sj); M <- cbind(mi, mj)
+  S <- cbind(si, sj)
+  M <- cbind(mi, mj)
   for (r in seq_len(nrow(S))) assign(key(S[r, 1], S[r, 2]), TRUE, present)
   for (r in seq_len(nrow(M))) {
     assign(key(M[r, 1], M[r, 2]), TRUE, present)
     assign(key(M[r, 2], M[r, 1]), TRUE, present)
   }
-  ns <- nrow(S); nm <- nrow(M)
+  ns <- nrow(S)
+  nm <- nrow(M)
   tot <- ns + nm
   frac_m <- if (tot > 0) nm / tot else 0
   has <- function(i, j) exists(key(i, j), present, inherits = FALSE)
@@ -83,28 +90,40 @@
     ub <- .ghc_unif(e, 1)
     if (pool_mut) {
       if (nm < 2) next
-      a <- floor(ua * nm) + 1; b <- floor(ub * nm) + 1
+      a <- floor(ua * nm) + 1
+      b <- floor(ub * nm) + 1
       if (a == b) next
-      i1 <- M[a, 1]; j1 <- M[a, 2]; i2 <- M[b, 1]; j2 <- M[b, 2]
+      i1 <- M[a, 1]
+      j1 <- M[a, 2]
+      i2 <- M[b, 1]
+      j2 <- M[b, 2]
       if (length(unique(c(i1, j1, i2, j2))) < 4) next
       if (has(i1, j2) || has(j2, i1) || has(i2, j1) || has(j1, i2)) next
       rm(list = c(key(i1, j1), key(j1, i1), key(i2, j2), key(j2, i2)),
          envir = present)
-      assign(key(i1, j2), TRUE, present); assign(key(j2, i1), TRUE, present)
-      assign(key(i2, j1), TRUE, present); assign(key(j1, i2), TRUE, present)
+      assign(key(i1, j2), TRUE, present)
+      assign(key(j2, i1), TRUE, present)
+      assign(key(i2, j1), TRUE, present)
+      assign(key(j1, i2), TRUE, present)
       M[a, ] <- c(min(i1, j2), max(i1, j2))
       M[b, ] <- c(min(i2, j1), max(i2, j1))
     } else {
       if (ns < 2) next
-      a <- floor(ua * ns) + 1; b <- floor(ub * ns) + 1
+      a <- floor(ua * ns) + 1
+      b <- floor(ub * ns) + 1
       if (a == b) next
-      i1 <- S[a, 1]; j1 <- S[a, 2]; i2 <- S[b, 1]; j2 <- S[b, 2]
+      i1 <- S[a, 1]
+      j1 <- S[a, 2]
+      i2 <- S[b, 1]
+      j2 <- S[b, 2]
       if (length(unique(c(i1, j1, i2, j2))) < 4) next
       if (has(i1, j2) || has(i2, j1)) next
       if (isTRUE(preserve_mutual) && (has(j2, i1) || has(j1, i2))) next
       rm(list = c(key(i1, j1), key(i2, j2)), envir = present)
-      assign(key(i1, j2), TRUE, present); assign(key(i2, j1), TRUE, present)
-      S[a, 2] <- j2; S[b, 2] <- j1
+      assign(key(i1, j2), TRUE, present)
+      assign(key(i2, j1), TRUE, present)
+      S[a, 2] <- j2
+      S[b, 2] <- j1
     }
   }
   new <- matrix(0L, n, n)

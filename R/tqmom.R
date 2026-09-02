@@ -18,7 +18,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tqmom(V, V)
 Tqmom <- function(sigma, l) {
-  sigma <- as.numeric(sigma); l <- as.numeric(l)
+  sigma <- as.numeric(sigma)
+  l <- as.numeric(l)
   val <- sigma^l * 2^(l / 2) * gamma((l + 1) / 2) / sqrt(pi)
   .t1_result(moment = val, estimate = val, sigma = sigma, l = l,
              method = "Absolute moment of a centred normal")

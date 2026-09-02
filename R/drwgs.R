@@ -26,9 +26,11 @@
 Drweights <- function(y, D, X = NULL, y0 = NULL) {
   dy <- .s03vec(y)
   if (!is.null(y0)) dy <- dy - .s03vec(y0)
-  d <- .s03vec(D); n <- length(dy)
+  d <- .s03vec(D)
+  n <- length(dy)
   fit <- .s03drdid(dy, d, X)
-  pi_ <- fit$pi; mu0 <- fit$mu0
+  pi_ <- fit$pi
+  mu0 <- fit$mu0
   ed <- 0
   for (x in d) ed <- ed + x / n
   treg <- 0

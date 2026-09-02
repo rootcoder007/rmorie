@@ -25,25 +25,31 @@
 Graphlet <- function(G1, G2, k_size = 3, normalize = TRUE) {
   types <- character(0)
   sig <- function(A, idx) {
-    m <- 0L; deg <- integer(length(idx))
+    m <- 0L
+    deg <- integer(length(idx))
     for (a in seq_along(idx)) {
       if (a < length(idx)) for (b in seq(a + 1L, length(idx))) {
         if (A[idx[a], idx[b]] != 0) {
-          m <- m + 1L; deg[a] <- deg[a] + 1L; deg[b] <- deg[b] + 1L
+          m <- m + 1L
+          deg[a] <- deg[a] + 1L
+          deg[b] <- deg[b] + 1L
         }
       }
     }
     paste0(m, ":", paste(sort(deg), collapse = ","))
   }
   counts <- function(G, kk) {
-    A <- .s03mat(G); n <- nrow(A)
-    cn <- character(0); cv <- numeric(0)
+    A <- .s03mat(G)
+    n <- nrow(A)
+    cn <- character(0)
+    cv <- numeric(0)
     idx <- seq_len(kk)
     repeat {
       s <- sig(A, idx)
       if (is.na(match(s, types))) types[[length(types) + 1L]] <<- s
       i <- match(s, cn)
-      if (is.na(i)) { cn <- c(cn, s); cv <- c(cv, 1) } else cv[i] <- cv[i] + 1
+      if (is.na(i)) { cn <- c(cn, s)
+      cv <- c(cv, 1) } else cv[i] <- cv[i] + 1
       i <- kk
       while (i >= 1L && idx[i] == n - kk + i) i <- i - 1L
       if (i < 1L) break
@@ -54,9 +60,12 @@ Graphlet <- function(G1, G2, k_size = 3, normalize = TRUE) {
     list(cn = cn, cv = cv, tot = as.numeric(tot))
   }
   kk <- as.integer(k_size)
-  a1 <- counts(G1, kk); a2 <- counts(G2, kk)
-  getc <- function(a, s) { i <- match(s, a$cn); if (is.na(i)) 0 else a$cv[i] }
-  f1 <- numeric(length(types)); f2 <- numeric(length(types))
+  a1 <- counts(G1, kk)
+  a2 <- counts(G2, kk)
+  getc <- function(a, s) { i <- match(s, a$cn)
+  if (is.na(i)) 0 else a$cv[i] }
+  f1 <- numeric(length(types))
+  f2 <- numeric(length(types))
   for (t in seq_along(types)) {
     f1[t] <- if (normalize && a1$tot > 0) getc(a1, types[t]) / a1$tot else getc(a1, types[t])
     f2[t] <- if (normalize && a2$tot > 0) getc(a2, types[t]) / a2$tot else getc(a2, types[t])

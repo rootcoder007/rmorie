@@ -23,15 +23,20 @@
 #' @examples
 #' Fistalasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
-  Xm <- .t1_mat(X); y <- .t1_vec(y)
-  lam <- as.numeric(lam); steps <- as.integer(steps)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .t1_mat(X)
+  y <- .t1_vec(y)
+  lam <- as.numeric(lam)
+  steps <- as.integer(steps)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   if (lam < 0) stop("lam must be non-negative")
   if (steps < 0) stop("steps must be non-negative")
   L <- if (is.null(lipschitz)) .k01_speclip(Xm, p) else as.numeric(lipschitz)
   if (L <= 0) L <- 1
-  x <- rep(0, p); yv <- rep(0, p); t <- 1
+  x <- rep(0, p)
+  yv <- rep(0, p)
+  t <- 1
   for (k in seq_len(steps)) {
     r <- as.numeric(Xm %*% yv) - y
     g <- as.numeric(t(Xm) %*% r)
@@ -45,10 +50,12 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
   res <- as.numeric(Xm %*% x) - y
   rss <- 0.5 * sum(res^2)
   l1 <- sum(abs(x))
-  .t1_result(beta = x, objective = rss + lam * l1, rss = rss, l1 = l1,
-             lipschitz = L, steps = steps, nonzero = sum(x != 0),
-             n = n, p = p,
-             method = "FISTA for the LASSO (Beck-Teboulle 2009 Sect. 4)")
+  .t1_result(
+    beta = x, objective = rss + lam * l1, rss = rss, l1 = l1,
+    lipschitz = L, steps = steps, nonzero = sum(x != 0),
+    n = n, p = p,
+    method = "FISTA for the LASSO (Beck-Teboulle 2009 Sect. 4)"
+  )
 }
 
 #' .k01_soft
@@ -80,7 +87,9 @@ Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
   for (i in seq_len(iters)) {
     w <- as.numeric(t(Xm) %*% (Xm %*% v))
     nw <- sqrt(sum(w^2))
-    if (nw == 0) return(0)
+    if (nw == 0) {
+      return(0)
+    }
     v <- w / nw
     lam <- nw
   }

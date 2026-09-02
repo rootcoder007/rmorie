@@ -18,7 +18,8 @@
 #' @examples
 #' Tsallen(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
 Tsallen <- function(y, q) {
-  v <- as.numeric(unlist(y)); n <- length(v)
+  v <- as.numeric(unlist(y))
+  n <- length(v)
   tb <- table(v)
   p <- as.numeric(tb) / n
   q <- as.numeric(q)

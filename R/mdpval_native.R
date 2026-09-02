@@ -72,11 +72,17 @@
 #' morie_mdpval(P = 1, R = 5L, gamma = 0.5)
 morie_mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000,
                          V0 = NULL) {
-  z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A
-  gamma <- as.numeric(gamma); tol <- as.numeric(tol)
+  z <- .mdp_args(P, R)
+  Pm <- z$Pm
+  R <- z$R
+  S <- z$S
+  A <- z$A
+  gamma <- as.numeric(gamma)
+  tol <- as.numeric(tol)
   V <- rep(0, S)
   if (!is.null(V0)) V <- as.numeric(V0)[seq_len(S)]
-  delta <- Inf; it <- 0L
+  delta <- Inf
+  it <- 0L
   while (it < as.integer(max_iter)) {
     it <- it + 1L
     delta <- 0
@@ -93,7 +99,8 @@ morie_mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000,
     }
     if (delta < tol) break
   }
-  Q <- matrix(0, S, A); pol <- numeric(S)
+  Q <- matrix(0, S, A)
+  pol <- numeric(S)
   for (s in seq_len(S)) {
     for (a in seq_len(A))
       Q[s, a] <- R[s, a] + gamma * sum(Pm[[a]][s, ] * V)

@@ -184,7 +184,10 @@ alfRcomp <- function(A, B) list(R = A$R %*% B$R, t = alfRap(A, B$t))
 #' @export
 alfQ2rot <- function(b, c, d) {
   n <- sqrt(1 + b * b + c * c + d * d)
-  a <- 1 / n; b <- b / n; c <- c / n; d <- d / n
+  a <- 1 / n
+  b <- b / n
+  c <- c / n
+  d <- d / n
   matrix(c(
     a * a + b * b - c * c - d * d, 2 * b * c - 2 * a * d, 2 * b * d + 2 * a * c,
     2 * b * c + 2 * a * d, a * a - b * b + c * c - d * d, 2 * c * d - 2 * a * b,

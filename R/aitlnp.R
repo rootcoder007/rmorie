@@ -22,14 +22,16 @@
 #' @examples
 #' Lgtnpdf(c(0.3, 0.3, 0.4), mu = c(0, 0), Sigma = diag(2))
 Lgtnpdf <- function(x, mu, Sigma) {
-  x <- .t1_vec(x); D <- length(x)
+  x <- .t1_vec(x)
+  D <- length(x)
   if (D < 2L) stop("a composition needs at least two parts")
   if (any(x <= 0)) stop("compositions must be strictly positive")
   mu <- .t1_vec(mu)
   if (length(mu) != D - 1L) stop("mu must have D-1 entries")
   S <- as.matrix(Sigma)
-  if (nrow(S) != D - 1L || ncol(S) != D - 1L)
+  if (nrow(S) != D - 1L || ncol(S) != D - 1L) {
     stop("Sigma must be (D-1) x (D-1)")
+  }
   L <- chol(S)
   logdet <- 2 * sum(log(diag(L)))
   y <- log(x[seq_len(D - 1L)]) - log(x[D])
@@ -37,8 +39,10 @@ Lgtnpdf <- function(x, mu, Sigma) {
   q <- sum(dv * solve(S, dv))
   lj <- -sum(log(x))
   ld <- -0.5 * (D - 1) * log(2 * pi) - 0.5 * logdet + lj - 0.5 * q
-  .t1_result(density = exp(ld), log_density = ld, alr = y,
-             quadratic_form = q, log_jacobian = lj, log_det = logdet,
-             D = as.numeric(D),
-             method = "Additive logistic-normal density, Aitchison Chapter 6")
+  .t1_result(
+    density = exp(ld), log_density = ld, alr = y,
+    quadratic_form = q, log_jacobian = lj, log_det = logdet,
+    D = as.numeric(D),
+    method = "Additive logistic-normal density, Aitchison Chapter 6"
+  )
 }

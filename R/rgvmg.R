@@ -62,14 +62,17 @@ rgvmg <- function(vmg, fs, band = NULL) {
   }
   total <- sum(psd)
   if (total <= 0) {
-    mean_f <- NA_real_; med_f <- NA_real_; frac <- NA_real_
+    mean_f <- NA_real_
+    med_f <- NA_real_
+    frac <- NA_real_
   } else {
     mean_f <- sum(freqs * psd) / total
     run <- 0
     med_f <- freqs[length(freqs)]
     for (j in seq_along(psd)) {
       run <- run + psd[j]
-      if (run >= 0.5 * total) { med_f <- freqs[j]; break }
+      if (run >= 0.5 * total) { med_f <- freqs[j]
+      break }
     }
     frac <- sum(psd[freqs >= lo & freqs <= hi]) / total
   }

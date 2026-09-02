@@ -26,7 +26,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Cncpat(V, V)
 Cncpat <- function(base, condition, zero_conv_weight = 0, seed = 42) {
-  B <- .s03mat(base); Cm <- .s03mat(condition)
+  B <- .s03mat(base)
+  Cm <- .s03mat(condition)
   H <- nrow(B)
   if (H == 0L) stop("empty input: base has no rows")
   W <- ncol(B)

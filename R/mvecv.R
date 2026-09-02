@@ -42,7 +42,8 @@ Mvecv <- function(y, X, h = NULL, n_starts = 100000L) {
   if (q == 0L) stop("min_volume_ellipsoid: X has no columns")
   Z <- cbind(Xm, yy)
   r <- Mvedet(Z, h, n_starts)
-  S <- r$cov; mu <- r$center
+  S <- r$cov
+  mu <- r$center
   p <- q + 1L
   Sxx <- S[seq_len(q), seq_len(q), drop = FALSE]
   Sxy <- S[seq_len(q), p]

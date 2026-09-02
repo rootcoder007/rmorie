@@ -135,11 +135,17 @@ offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
   D <- list()
   for (t in dataset) {
     if (length(t) == 4L) {
-      s <- t[[1L]]; a <- t[[2L]]; r <- as.numeric(t[[3L]])
-      s1 <- t[[4L]]; done <- FALSE
+      s <- t[[1L]]
+      a <- t[[2L]]
+      r <- as.numeric(t[[3L]])
+      s1 <- t[[4L]]
+      done <- FALSE
     } else if (length(t) == 5L) {
-      s <- t[[1L]]; a <- t[[2L]]; r <- as.numeric(t[[3L]])
-      s1 <- t[[4L]]; done <- as.logical(t[[5L]])
+      s <- t[[1L]]
+      a <- t[[2L]]
+      r <- as.numeric(t[[3L]])
+      s1 <- t[[4L]]
+      done <- as.logical(t[[5L]])
     } else {
       stop("offlrl: each transition must be (s, a, r, s_next) or (s, a, r, s_next, done)")
     }

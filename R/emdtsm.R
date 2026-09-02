@@ -40,24 +40,32 @@ Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
       return(yk[1] + s * (xq - xk[1]))
     }
     h <- xk[2:m] - xk[1:(m - 1L)]
-    a <- numeric(m); b <- numeric(m); cc <- numeric(m); d <- numeric(m)
-    b[1] <- 1; b[m] <- 1
+    a <- numeric(m)
+    b <- numeric(m)
+    cc <- numeric(m)
+    d <- numeric(m)
+    b[1] <- 1
+    b[m] <- 1
     for (i in 2:(m - 1L)) {
       a[i] <- h[i - 1L]
       b[i] <- 2 * (h[i - 1L] + h[i])
       cc[i] <- h[i]
       d[i] <- 3 * ((yk[i + 1L] - yk[i]) / h[i] - (yk[i] - yk[i - 1L]) / h[i - 1L])
     }
-    cp <- numeric(m); dp <- numeric(m)
-    cp[1] <- cc[1] / b[1]; dp[1] <- d[1] / b[1]
+    cp <- numeric(m)
+    dp <- numeric(m)
+    cp[1] <- cc[1] / b[1]
+    dp[1] <- d[1] / b[1]
     for (i in 2:m) {
       den <- b[i] - a[i] * cp[i - 1L]
       cp[i] <- cc[i] / den
       dp[i] <- (d[i] - a[i] * dp[i - 1L]) / den
     }
-    C <- numeric(m); C[m] <- dp[m]
+    C <- numeric(m)
+    C[m] <- dp[m]
     for (i in seq(m - 1L, 1L)) C[i] <- dp[i] - cp[i] * C[i + 1L]
-    B <- numeric(m - 1L); D <- numeric(m - 1L)
+    B <- numeric(m - 1L)
+    D <- numeric(m - 1L)
     for (i in seq_len(m - 1L)) {
       B[i] <- (yk[i + 1L] - yk[i]) / h[i] - h[i] * (2 * C[i] + C[i + 1L]) / 3
       D[i] <- (C[i + 1L] - C[i]) / (3 * h[i])
@@ -78,7 +86,8 @@ Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
   }
   .ext <- function(v) {
     n <- length(v)
-    hi <- integer(0); lo <- integer(0)
+    hi <- integer(0)
+    lo <- integer(0)
     if (n > 2L) for (i in 2:(n - 1L)) {
       if (v[i] > v[i - 1L] && v[i] >= v[i + 1L]) hi <- c(hi, i)
       if (v[i] < v[i - 1L] && v[i] <= v[i + 1L]) lo <- c(lo, i)

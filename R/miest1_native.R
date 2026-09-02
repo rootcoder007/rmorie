@@ -40,7 +40,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_miest1(V, V)
 morie_miest1 <- function(X, Y, k = 3, algorithm = 1) {
-  xs <- as.matrix(X); ys <- as.matrix(Y)
+  xs <- as.matrix(X)
+  ys <- as.matrix(Y)
   if (ncol(xs) > 1 && nrow(xs) == 1) xs <- t(xs)
   if (ncol(ys) > 1 && nrow(ys) == 1) ys <- t(ys)
   n <- nrow(xs)
@@ -64,7 +65,8 @@ morie_miest1 <- function(X, Y, k = 3, algorithm = 1) {
       mi_sum <- mi_sum + digamma(nx + 1) + digamma(ny + 1)
     } else {
       knn <- ord[seq_len(k)]
-      ex <- max(dx[knn]); ey <- max(dy[knn])
+      ex <- max(dx[knn])
+      ey <- max(dy[knn])
       nx <- sum(dx[others] <= ex)
       ny <- sum(dy[others] <= ey)
       mi_sum <- mi_sum + digamma(max(nx, 1)) + digamma(max(ny, 1))

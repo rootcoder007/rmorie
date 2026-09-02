@@ -103,8 +103,10 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
   y <- .TYPES[[as.character(variant)]]
   if (is.null(y))
     stop("secarg: variant must be one of argon2d, argon2i, argon2id")
-  P <- as.raw(password); S <- as.raw(salt)
-  K <- as.raw(secret); X <- as.raw(associated)
+  P <- as.raw(password)
+  S <- as.raw(salt)
+  K <- as.raw(secret)
+  X <- as.raw(associated)
   if (length(S) < 8L)
     stop("secarg: the salt must be at least 8 bytes (the RFC recommends 16), got ",
          length(S))
@@ -131,7 +133,10 @@ morie_secarg_prehash <- function(password, salt, parallelism, tag_length,
 #' @return The value of \code{<<-}.
 #' @export
 .gb_mut <- function(v, a, b, c, d) {
-  va <- v[a]; vb <- v[b]; vc <- v[c]; vd <- v[d]
+  va <- v[a]
+  vb <- v[b]
+  vc <- v[c]
+  vd <- v[d]
   v[a] <<- bitwAnd(va + vb +
                      2L * (bitwAnd(va, .MASK32) *
                            bitwAnd(vb, .MASK32)), .MASK64)
@@ -267,8 +272,13 @@ morie_secarg_compress <- function(X, Y) {
                        counter) {
   zero <- rep(0, 128)
   inp <- rep(0, 128)
-  inp[1] <- pass_no; inp[2] <- lane; inp[3] <- slice_no
-  inp[4] <- m_prime; inp[5] <- passes; inp[6] <- y; inp[7] <- counter
+  inp[1] <- pass_no
+  inp[2] <- lane
+  inp[3] <- slice_no
+  inp[4] <- m_prime
+  inp[5] <- passes
+  inp[6] <- y
+  inp[7] <- counter
   morie_secarg_compress(zero, morie_secarg_compress(zero, inp))
 }
 

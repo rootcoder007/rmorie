@@ -31,8 +31,13 @@
 morie_sarsa <- function(P, R, gamma, alpha = 0.1, epsilon = 0.1,
                         n_episodes = 100L, start = 0L, terminal = c(),
                         max_steps = 1000L, seed = 0, Q0 = NULL) {
-  z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A
-  gamma <- as.numeric(gamma); alpha <- as.numeric(alpha)
+  z <- .mdp_args(P, R)
+  Pm <- z$Pm
+  R <- z$R
+  S <- z$S
+  A <- z$A
+  gamma <- as.numeric(gamma)
+  alpha <- as.numeric(alpha)
   epsilon <- as.numeric(epsilon)
   start <- as.integer(start)
   term <- .mor_rl_terminal(terminal)

@@ -21,7 +21,8 @@ Bucherind <- function(d_AB, v_AB, d_CB, v_CB, alpha = 0.05) {
   d <- as.numeric(d_AB) - as.numeric(d_CB)
   var <- as.numeric(v_AB) + as.numeric(v_CB)
   if (var <= 0) stop("variances must be positive")
-  se <- sqrt(var); z <- d / se
+  se <- sqrt(var)
+  z <- d / se
   zc <- stats::qnorm(1 - alpha / 2)
   .t1_result(estimate = d, variance = var, se = se, z = z,
              p_value = 2 * stats::pnorm(-abs(z)),

@@ -44,7 +44,8 @@
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .sxrhrt_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   npt <- as.integer(points)
   nst <- as.integer(stages)
   for (s in seq_len(nst)) {
@@ -164,11 +165,15 @@
 #' @return A list with \code{ll}, \code{beta}, \code{L}.
 #' @export
 .sxrhrt_reml <- function(theta, y, X, Km, male) {
-  s2gm <- theta[1]; s2gf <- theta[2]; rg <- theta[3]
-  s2em <- theta[4]; s2ef <- theta[5]
+  s2gm <- theta[1]
+  s2gf <- theta[2]
+  rg <- theta[3]
+  s2em <- theta[4]
+  s2ef <- theta[5]
   if (s2gm <= 0.0 || s2gf <= 0.0 || s2em <= 0.0 || s2ef <= 0.0) return(NULL)
   if (abs(rg) >= 1.0) return(NULL)
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   cov2 <- rg * sqrt(s2gm * s2gf)
   S <- matrix(0.0, n, n)
   for (i in seq_len(n)) {
@@ -218,7 +223,8 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   if (length(sv) != n)
     stop(sprintf("sxrhrt: %d phenotypes but %d sex labels", n, length(sv)))
   male <- sv == as.numeric(male_label)
-  nm <- sum(male); nf <- n - nm
+  nm <- sum(male)
+  nf <- n - nm
   if (nm < 2L || nf < 2L)
     stop(sprintf(paste0("sxrhrt: %d in one sex and %d in the other -- a ",
                         "variance cannot be estimated from fewer than two"),
@@ -248,7 +254,8 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   }
 
   path <- at(theta)
-  cycles <- 0L; converged <- FALSE
+  cycles <- 0L
+  converged <- FALSE
   prev_theta <- NULL
   for (cycles in seq_len(as.integer(max_cycles))) {
     prev <- path[length(path)]
@@ -256,12 +263,16 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
       local({
         ii <- idx
         f <- function(logv) {
-          th <- theta; th[ii] <- exp(logv); at(th)
+          th <- theta
+          th[ii] <- exp(logv)
+          at(th)
         }
         theta[ii] <<- exp(.sxrhrt_gridmax(f, lo, hi))
       })
     }
-    fr <- function(r) { th <- theta; th[3] <- r; at(th) }
+    fr <- function(r) { th <- theta
+    th[3] <- r
+    at(th) }
     theta[3] <- .sxrhrt_gridmax(fr, -0.999, 0.999)
     cur <- at(theta)
     path <- c(path, cur)
@@ -269,7 +280,8 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
     # hibrid: a last-bit difference makes the two languages stop one cycle
     # apart and land on different estimates
     if (!is.null(prev_theta) && all(theta == prev_theta)) {
-      converged <- TRUE; break
+      converged <- TRUE
+      break
     }
     prev_theta <- theta
   }
@@ -278,25 +290,34 @@ morie_sxrhrt_sex_specific_h2 <- function(y, sex, K, X = NULL,
   if (is.null(res))
     stop(paste0("sxrhrt: the fitted covariance is not positive definite -- ",
                 "the relationship matrix is probably not a valid GRM"))
-  ll <- res$ll; beta <- res$beta
-  s2gm <- theta[1]; s2gf <- theta[2]; rg <- theta[3]
-  s2em <- theta[4]; s2ef <- theta[5]
+  ll <- res$ll
+  beta <- res$beta
+  s2gm <- theta[1]
+  s2gf <- theta[2]
+  rg <- theta[3]
+  s2em <- theta[4]
+  s2ef <- theta[5]
   h2m <- s2gm / (s2gm + s2em)
   h2f <- s2gf / (s2gf + s2ef)
 
   # a likelihood-ratio test against rg = 1: does the architecture differ?
-  th1 <- theta; th1[3] <- 0.999999
+  th1 <- theta
+  th1[3] <- 0.999999
   lrt_rg1 <- max(2.0 * (ll - at(th1)), 0.0)
   # and against equal heritabilities
-  feq <- function(logv) { th <- theta; th[1] <- exp(logv)
-                          th[2] <- exp(logv); at(th) }
+  feq <- function(logv) { th <- theta
+  th[1] <- exp(logv)
+                          th[2] <- exp(logv)
+                          at(th) }
   eq <- exp(.sxrhrt_gridmax(feq, lo, hi))
   th2 <- c(eq, eq, theta[3], theta[4], theta[5])
   for (i in seq_len(20L)) {
     for (idx in c(4L, 5L)) {
       local({
         ii <- idx
-        f2 <- function(logv) { th <- th2; th[ii] <- exp(logv); at(th) }
+        f2 <- function(logv) { th <- th2
+        th[ii] <- exp(logv)
+        at(th) }
         th2[ii] <<- exp(.sxrhrt_gridmax(f2, lo, hi))
       })
     }

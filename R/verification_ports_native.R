@@ -278,7 +278,8 @@ morie_neural_kantorovich_map <- function(source, target, n_iter = 400L,
   if (K < 2L) stop("n_basis must be at least 2", call. = FALSE)
   na <- length(a)
   mu <- mean(a)
-  sd <- stats::sd(a); if (sd == 0) sd <- 1
+  sd <- stats::sd(a)
+  if (sd == 0) sd <- 1
   z <- (a - mu) / sd
   knots <- seq(min(z), max(z), length.out = K)   # linspace, as in Python
   set.seed(seed)

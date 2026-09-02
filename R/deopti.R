@@ -27,10 +27,12 @@
 #' @export
 Diffevol <- function(f, population, F = 0.8, CR = 0.9, generations = 20) {
   P <- .s03mat(population)
-  npop <- nrow(P); d <- ncol(P)
+  npop <- nrow(P)
+  d <- ncol(P)
   fv <- numeric(npop)
   for (i in seq_len(npop)) fv[i] <- as.numeric(f(P[i, ]))
-  evals <- npop; step <- 0L
+  evals <- npop
+  step <- 0L
   for (gen in seq_len(as.integer(generations))) {
     for (i in seq_len(npop)) {
       i0 <- i - 1L
@@ -50,7 +52,8 @@ Diffevol <- function(f, population, F = 0.8, CR = 0.9, generations = 20) {
       fu <- as.numeric(f(u))
       evals <- evals + 1L
       step <- step + 1L
-      if (fu <= fv[i]) { P[i, ] <- u; fv[i] <- fu }
+      if (fu <= fv[i]) { P[i, ] <- u
+      fv[i] <- fu }
     }
   }
   best <- 1L

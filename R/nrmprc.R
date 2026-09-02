@@ -32,7 +32,8 @@ Nrmprc <- function(y, alpha = 1, tau = 1, u_max = 10, n_grid = 6000) {
   a <- as.numeric(alpha)
   if (tt <= 0) stop("Nrmprc: tau must be positive")
   if (a <= 0) stop("Nrmprc: alpha must be positive")
-  ng <- as.integer(n_grid); um <- as.numeric(u_max)
+  ng <- as.integer(n_grid)
+  um <- as.numeric(u_max)
   i <- seq_len(ng)
   u <- (i - 0.5) * um / ng
   tot <- sum(u * u^(-1.5) * exp(-tt^2 * u / 2) / sqrt(2 * pi) * um / ng)

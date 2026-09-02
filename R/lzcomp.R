@@ -19,12 +19,18 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Lzcomp(V)
 Lzcomp <- function(y) {
-  s <- as.character(as.numeric(unlist(y))); n <- length(s)
-  i <- 0L; k <- 1L; l <- 1L; c_ <- 1L; kmax <- 1L
+  s <- as.character(as.numeric(unlist(y)))
+  n <- length(s)
+  i <- 0L
+  k <- 1L
+  l <- 1L
+  c_ <- 1L
+  kmax <- 1L
   repeat {
     if (s[i + k] == s[l + k]) {
       k <- k + 1L
-      if (l + k > n) { c_ <- c_ + 1L; break }
+      if (l + k > n) { c_ <- c_ + 1L
+      break }
     } else {
       if (k > kmax) kmax <- k
       i <- i + 1L
@@ -32,7 +38,9 @@ Lzcomp <- function(y) {
         c_ <- c_ + 1L
         l <- l + kmax
         if (l + 1L > n) break
-        i <- 0L; k <- 1L; kmax <- 1L
+        i <- 0L
+        k <- 1L
+        kmax <- 1L
       } else k <- 1L
     }
   }

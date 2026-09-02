@@ -33,7 +33,8 @@
 #' Brier(c(1, 2, 3, 4), c(1, 1, 0, 1), c(0.9, 0.7, 0.5, 0.3), 2.5)
 #' @export
 Brier <- function(time, event, predicted_survival, eval_time, method = "ipcw") {
-  time <- .s03vec(time); event <- .s03vec(event)
+  time <- .s03vec(time)
+  event <- .s03vec(event)
   n <- length(time)
   if (length(event) != n) stop("time and event must have the same length.")
   if (!all(event %in% c(0, 1))) stop("event must be binary (0/1).")
@@ -51,22 +52,31 @@ Brier <- function(time, event, predicted_survival, eval_time, method = "ipcw") {
 
   cen <- as.numeric(event == 0)
   ord <- order(time)
-  t_s <- time[ord]; c_s <- cen[ord]; e_o <- event[ord]
+  t_s <- time[ord]
+  c_s <- cen[ord]
+  e_o <- event[ord]
 
-  S_c <- 1; km_c_times <- numeric(0); km_c_vals <- numeric(0)
+  S_c <- 1
+  km_c_times <- numeric(0)
+  km_c_vals <- numeric(0)
   for (t_j in sort(unique(t_s[c_s == 1]))) {
-    n_r <- sum(t_s >= t_j); n_c <- sum(t_s == t_j & c_s == 1)
-    km_c_times <- c(km_c_times, t_j); km_c_vals <- c(km_c_vals, S_c)
+    n_r <- sum(t_s >= t_j)
+    n_c <- sum(t_s == t_j & c_s == 1)
+    km_c_times <- c(km_c_times, t_j)
+    km_c_vals <- c(km_c_vals, S_c)
     S_c <- S_c * (if (n_r > 0) 1 - n_c / n_r else 1)
   }
-  if (!length(km_c_times)) { km_c_times <- 0; km_c_vals <- 1 }
+  if (!length(km_c_times)) { km_c_times <- 0
+  km_c_vals <- 1 }
   get_km_c <- function(t) {
     idx <- sum(km_c_times < t) - 1L
     if (idx < 0L) return(1)
     km_c_vals[min(idx, length(km_c_vals) - 1L) + 1L]
   }
 
-  S_km <- 1; ko_times <- numeric(0); ko_vals <- numeric(0)
+  S_km <- 1
+  ko_times <- numeric(0)
+  ko_vals <- numeric(0)
   for (t_j in sort(unique(t_s[c_s == 0]))) {
     n_r <- sum(t_s >= t_j)
     n_e <- sum(t_s == t_j & c_s == 0 & e_o == 1)
@@ -75,7 +85,8 @@ Brier <- function(time, event, predicted_survival, eval_time, method = "ipcw") {
     # Appending before the update stored S(t_j-) and made the marginal KM
     # one event-step stale, which biased scaled_brier / IPA.
     S_km <- S_km * (if (n_r > 0) 1 - n_e / n_r else 1)
-    ko_times <- c(ko_times, t_j); ko_vals <- c(ko_vals, S_km)
+    ko_times <- c(ko_times, t_j)
+    ko_vals <- c(ko_vals, S_km)
   }
   get_km_surv <- function(t) {
     if (!length(ko_times)) return(1)
@@ -85,10 +96,14 @@ Brier <- function(time, event, predicted_survival, eval_time, method = "ipcw") {
   }
 
   k_n <- length(eval_times)
-  bs_vals <- numeric(k_n); bs_null_vals <- numeric(k_n)
+  bs_vals <- numeric(k_n)
+  bs_null_vals <- numeric(k_n)
   for (k in seq_len(k_n)) {
-    t_eval <- eval_times[k]; s_hat <- pred_2d[, k]; s_null <- get_km_surv(t_eval)
-    bs <- 0; bs_null <- 0
+    t_eval <- eval_times[k]
+    s_hat <- pred_2d[, k]
+    s_null <- get_km_surv(t_eval)
+    bs <- 0
+    bs_null <- 0
     for (i in seq_len(n)) {
       if (time[i] <= t_eval && event[i] == 1) {
         w <- if (method == "ipcw") 1 / max(get_km_c(time[i]), 1e-10) else 1
@@ -99,7 +114,8 @@ Brier <- function(time, event, predicted_survival, eval_time, method = "ipcw") {
         bs_null <- bs_null + (1 - s_null)^2
       }
     }
-    bs_vals[k] <- bs / n; bs_null_vals[k] <- bs_null / n
+    bs_vals[k] <- bs / n
+    bs_null_vals[k] <- bs_null / n
   }
   scaled_bs <- ifelse(bs_null_vals > 0, 1 - bs_vals / bs_null_vals, 0)
   ibs <- if (k_n > 1L) {

@@ -52,7 +52,10 @@ Semsro <- function(sample_cov, fitted_cov) {
 
   E <- S - G
   m <- p * (p + 1) / 2
-  ss_raw <- 0; ss_std <- 0; max_abs <- 0; max_abs_std <- 0
+  ss_raw <- 0
+  ss_std <- 0
+  max_abs <- 0
+  max_abs_std <- 0
   for (i in seq_len(p)) {
     for (j in seq_len(i)) {
       e <- E[i, j]

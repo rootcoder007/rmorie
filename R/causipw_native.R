@@ -37,7 +37,9 @@
 #' set.seed(1)
 #' Causipw(treat = rbinom(50, 1, 0.5), y = rnorm(50), ps = runif(50, 0.2, 0.8))
 Causipw <- function(treat, y, ps, alpha = 0.1) {
-  t <- as.numeric(treat); yv <- as.numeric(y); e <- as.numeric(ps)
+  t <- as.numeric(treat)
+  yv <- as.numeric(y)
+  e <- as.numeric(ps)
   n <- length(t)
   if (length(yv) != n || length(e) != n) {
     stop("treat, y, ps must have equal length", call. = FALSE)

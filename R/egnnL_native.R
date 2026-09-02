@@ -37,7 +37,8 @@
 #' @return A numeric value.
 #' @export
 .sqdist <- function(a, b) {
-  a <- as.numeric(a); b <- as.numeric(b)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
   sum((a - b)^2)
 }
 
@@ -190,7 +191,8 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
   x <- lapply(X, function(r) as.numeric(r))
   for (k in seq_len(as.integer(layers))) {
     r <- egcl(h, x, phi_e, phi_x, phi_h, A, C)
-    h <- r$H; x <- r$X
+    h <- r$H
+    x <- r$X
   }
   list(estimate = list(h, x), H = h, X = x,
        layers = as.integer(layers),

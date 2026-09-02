@@ -27,7 +27,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Matrim(V, V)
 Matrim <- function(yi, vi, side = "left", n_iter = 50) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   sgn <- if (identical(side, "left")) 1 else -1
   w <- 1 / v
   theta <- sum(w * y) / sum(w)

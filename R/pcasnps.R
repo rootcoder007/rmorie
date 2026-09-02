@@ -63,7 +63,8 @@ Pcasnps <- function(genotypes, n_components = 2L) {
   pcs <- eg$vectors[, ord[seq_len(k)], drop = FALSE]
   tot <- sum(ev)
   vexp <- if (tot > 0) ev / tot else rep(NaN, n)
-  s1 <- sum(ev); s2 <- sum(ev * ev)
+  s1 <- sum(ev)
+  s2 <- sum(ev * ev)
   den <- (n - 1) * s2 - s1 * s1
   neff <- if (den > 0) (n + 1) * s1 * s1 / den else NaN
   if (!is.na(neff) && neff > 0) {

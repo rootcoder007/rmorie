@@ -14,8 +14,10 @@
 #' EsumConv(1:2, c(0.5, 0.5), 1:3, rep(1 / 3, 3))$e_sum
 #' @export
 EsumConv <- function(values_x, probs_x, values_y, probs_y) {
-  vx <- as.numeric(values_x); px <- as.numeric(probs_x)
-  vy <- as.numeric(values_y); py <- as.numeric(probs_y)
+  vx <- as.numeric(values_x)
+  px <- as.numeric(probs_x)
+  vy <- as.numeric(values_y)
+  py <- as.numeric(probs_y)
   if (length(vx) != length(px) || length(vy) != length(py) ||
         length(vx) == 0L || length(vy) == 0L) {
     stop("values and probs must be equal-length, non-empty.", call. = FALSE)

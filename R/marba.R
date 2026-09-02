@@ -23,7 +23,8 @@
 #' @examples
 #' Marba(g = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, rho = 0.5)
 Marba <- function(g, n, rho) {
-  nn <- as.numeric(n); r <- as.numeric(rho)
+  nn <- as.numeric(n)
+  r <- as.numeric(rho)
   if (nn < 2) stop("n must be at least two")
   if (r < -1 || r > 1) stop("rho must lie in [-1, 1]")
   df <- nn - 1

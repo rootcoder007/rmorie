@@ -26,7 +26,9 @@
 #' set.seed(1)
 #' r <- Tmlmda(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), missing = rnorm(10)); TRUE
 Tmlmda <- function(y, D, X, missing) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); mv <- as.numeric(missing)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  mv <- as.numeric(missing)
   n <- length(yv)
   if (n == 0L || length(Dv) != n || length(mv) != n)
     stop("Tmlmda: y, D and missing must share one length")
@@ -42,7 +44,8 @@ Tmlmda <- function(y, D, X, missing) {
   obs <- which(delta > 0.5)
   qb <- .s4_ols(cbind(Dv, W)[obs, , drop = FALSE], yv[obs])$beta
   qhat <- function(a) as.numeric(cbind(a, W) %*% qb)
-  Q1 <- qhat(1); Q0 <- qhat(0)
+  Q1 <- qhat(1)
+  Q0 <- qhat(0)
   Qobs <- ifelse(Dv > 0.5, Q1, Q0)
   pi_obs <- ifelse(Dv > 0.5, pihat(1), pihat(0))
   H <- delta / pi_obs * (Dv / g - (1 - Dv) / (1 - g))

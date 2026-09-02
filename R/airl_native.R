@@ -41,10 +41,14 @@
 #' @return A character value.
 #' @export
 .state_key <- function(s) {
-  if (is.character(s)) return(s)
+  if (is.character(s)) {
+    return(s)
+  }
   if (is.list(s)) s <- unlist(s, use.names = FALSE)
   s <- as.numeric(s)
-  if (length(s) == 0L) return("")
+  if (length(s) == 0L) {
+    return("")
+  }
   paste0(sprintf("%.17g", s), collapse = "\x1f")
 }
 
@@ -58,10 +62,13 @@
 #' @return A character value.
 #' @export
 .action_key <- function(a) {
-  if (is.character(a)) return(a)
+  if (is.character(a)) {
+    return(a)
+  }
   if (is.list(a)) a <- unlist(a, use.names = FALSE)
-  if (is.numeric(a) && length(a) == 1L)
+  if (is.numeric(a) && length(a) == 1L) {
     return(sprintf("%.17g", as.numeric(a)))
+  }
   as.character(a)
 }
 
@@ -118,38 +125,52 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
                        gamma = 0.99, state_only = TRUE, lr = 0.1,
                        epochs = 500L, l2 = 0.0) {
   to_rows <- function(x) {
-    if (is.matrix(x) || is.data.frame(x))
+    if (is.matrix(x) || is.data.frame(x)) {
       lapply(seq_len(nrow(x)), function(i) x[i, ])
-    else as.list(x)
+    } else {
+      as.list(x)
+    }
   }
   prep <- function(S, A, S1, LP, name) {
-    S  <- lapply(to_rows(S),  .state_key)
+    S <- lapply(to_rows(S), .state_key)
     S1 <- lapply(to_rows(S1), .state_key)
-    A  <- as.list(A)
+    A <- as.list(A)
     LP <- as.numeric(LP)
     n <- length(S)
     if (!(length(A) == length(S1) && length(A) == length(LP) &&
-          length(A) == n) || n == 0L)
-      stop(paste0("airl: ", name,
-                  " states, actions, next states and log_policy must be non-empty and the same length"))
-    Map(function(s, a, s1, lp) list(s = s, a = a, s1 = s1, lp = lp),
-        S, A, S1, LP)
+      length(A) == n) || n == 0L) {
+      stop(paste0(
+        "airl: ", name,
+        " states, actions, next states and log_policy must be non-empty and the same length"
+      ))
+    }
+    Map(
+      function(s, a, s1, lp) list(s = s, a = a, s1 = s1, lp = lp),
+      S, A, S1, LP
+    )
   }
 
-  E <- prep(expert_states, expert_actions, expert_next,
-            expert_log_policy, "expert")
-  P <- prep(policy_states, policy_actions, policy_next,
-            policy_log_policy, "policy")
+  E <- prep(
+    expert_states, expert_actions, expert_next,
+    expert_log_policy, "expert"
+  )
+  P <- prep(
+    policy_states, policy_actions, policy_next,
+    policy_log_policy, "policy"
+  )
 
-  states <- sort(unique(c(vapply(E, function(t) t$s,  character(1)),
-                          vapply(E, function(t) t$s1, character(1)),
-                          vapply(P, function(t) t$s,  character(1)),
-                          vapply(P, function(t) t$s1, character(1)))))
+  states <- sort(unique(c(
+    vapply(E, function(t) t$s, character(1)),
+    vapply(E, function(t) t$s1, character(1)),
+    vapply(P, function(t) t$s, character(1)),
+    vapply(P, function(t) t$s1, character(1))
+  )))
   if (state_only) {
     gkeys <- states
   } else {
-    gkeys <- sort(unique(vapply(c(E, P), function(t)
-      paste0(t$s, "\x1f", .action_key(t$a)), character(1))))
+    gkeys <- sort(unique(vapply(c(E, P), function(t) {
+      paste0(t$s, "\x1f", .action_key(t$a))
+    }, character(1))))
   }
   gi <- setNames(seq_along(gkeys), gkeys)
   hi <- setNames(seq_along(states), states)
@@ -162,26 +183,35 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
   l2 <- as.numeric(l2)
 
   gkey_of <- function(t) {
-    if (state_only) t$s
-    else paste0(t$s, "\x1f", .action_key(t$a))
+    if (state_only) {
+      t$s
+    } else {
+      paste0(t$s, "\x1f", .action_key(t$a))
+    }
   }
   f_of <- function(t) {
     g[match(gkey_of(t), names(gi), nomatch = 0L)] +
       gamma * h[match(t$s1, names(hi), nomatch = 0L)] -
-      h[match(t$s,  names(hi), nomatch = 0L)]
+      h[match(t$s, names(hi), nomatch = 0L)]
   }
   d_of <- function(t) {
     z <- f_of(t) - t$lp
-    if (z >= 0) 1 / (1 + exp(-z))
-    else { e <- exp(z); e / (1 + e) }
+    if (z >= 0) {
+      1 / (1 + exp(-z))
+    } else {
+      e <- exp(z)
+      e / (1 + e)
+    }
   }
 
   # The model is tabular, so identical transitions contribute identical
   # gradients. Collapse to weighted unique rows: the gradient is
   # unchanged and the fit stops being quadratic in the number of samples.
   full_key <- function(t) {
-    paste0(gkey_of(t), "\x1f", t$s1, "\x1f", t$s, "\x1f",
-           sprintf("%.17g", t$lp))
+    paste0(
+      gkey_of(t), "\x1f", t$s1, "\x1f", t$s, "\x1f",
+      sprintf("%.17g", t$lp)
+    )
   }
   compress <- function(rows) {
     keys <- vapply(rows, full_key, character(1))
@@ -202,23 +232,23 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
     # d/df log (1 - D) =    - D    (policy)
     for (k in seq_along(Ec$rows)) {
       t <- Ec$rows[[k]]
-      gi_k  <- match(gkey_of(t), names(gi), nomatch = 0L)
+      gi_k <- match(gkey_of(t), names(gi), nomatch = 0L)
       hi_s1 <- match(t$s1, names(hi), nomatch = 0L)
-      hi_s  <- match(t$s,  names(hi), nomatch = 0L)
+      hi_s <- match(t$s, names(hi), nomatch = 0L)
       c_val <- (1 - d_of(t)) * Ec$wgt[k]
-      dg[gi_k]  <- dg[gi_k]  + c_val
+      dg[gi_k] <- dg[gi_k] + c_val
       dh[hi_s1] <- dh[hi_s1] + c_val * gamma
-      dh[hi_s]  <- dh[hi_s]  - c_val
+      dh[hi_s] <- dh[hi_s] - c_val
     }
     for (k in seq_along(Pc$rows)) {
       t <- Pc$rows[[k]]
-      gi_k  <- match(gkey_of(t), names(gi), nomatch = 0L)
+      gi_k <- match(gkey_of(t), names(gi), nomatch = 0L)
       hi_s1 <- match(t$s1, names(hi), nomatch = 0L)
-      hi_s  <- match(t$s,  names(hi), nomatch = 0L)
+      hi_s <- match(t$s, names(hi), nomatch = 0L)
       c_val <- -d_of(t) * Pc$wgt[k]
-      dg[gi_k]  <- dg[gi_k]  + c_val
+      dg[gi_k] <- dg[gi_k] + c_val
       dh[hi_s1] <- dh[hi_s1] + c_val * gamma
-      dh[hi_s]  <- dh[hi_s]  - c_val
+      dh[hi_s] <- dh[hi_s] - c_val
     }
     g <- g + lr * (dg - l2 * g)
     h <- h + lr * (dh - l2 * h)
@@ -229,7 +259,7 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
   # line 6: r = log D - log(1 - D), which equals f - log pi exactly.
   reward <- vapply(dp, function(v) .log(v) - .log(1 - v), numeric(1))
   ll <- (sum(vapply(de, .log, numeric(1))) / length(de) +
-         sum(vapply(dp, function(v) .log(1 - v), numeric(1))) / length(dp))
+    sum(vapply(dp, function(v) .log(1 - v), numeric(1))) / length(dp))
   acc <- (sum(de > 0.5) + sum(dp <= 0.5)) / (length(de) + length(dp))
 
   list(

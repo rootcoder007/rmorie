@@ -83,7 +83,8 @@ morie_flexrd_rotate <- function(p, a, b, degrees) {
   k <- ax / n
   v <- p - a
   t <- as.numeric(degrees) * pi / 180
-  cc <- cos(t); ss <- sin(t)
+  cc <- cos(t)
+  ss <- sin(t)
   kv <- .w3_dot(k, v)
   cr <- c(k[2] * v[3] - k[3] * v[2], k[3] * v[1] - k[1] * v[3],
           k[1] * v[2] - k[2] * v[1])
@@ -262,11 +263,14 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
       for (it in seq_len(as.integer(passes))) {
         moved <- FALSE
         for (k in seq_along(chis)) for (a in angles) {
-          trial <- chosen; trial[k] <- a
+          trial <- chosen
+          trial[k] <- a
           rc2 <- build(trial)
           e2 <- morie_flexrd_energy(rc2, pose, rr, lr, soft, epsilon,
                                     cutoff)
-          if (e2 < e) { e <- e2; chosen <- trial; cur <- rc2
+          if (e2 < e) { e <- e2
+          chosen <- trial
+          cur <- rc2
                         moved <- TRUE }
         }
         if (!moved) break
@@ -278,8 +282,11 @@ morie_flexrd <- function(receptor, ligand, flex_residues, angles = NULL,
     if (is.null(best) || cand[[1]] < best[[1]]) best <- cand
   }
 
-  e_hard <- best[[1]]; pidx <- best[[2]]; chosen <- best[[3]]
-  e_soft <- best[[4]]; refined <- best[[5]]
+  e_hard <- best[[1]]
+  pidx <- best[[2]]
+  chosen <- best[[3]]
+  e_soft <- best[[4]]
+  refined <- best[[5]]
   rigid_soft <- morie_flexrd_energy(rc, poses[[pidx]], rr, lr, soft,
                                     epsilon, cutoff)
   rigid_hard <- morie_flexrd_energy(rc, poses[[pidx]], rr, lr, 1, epsilon,

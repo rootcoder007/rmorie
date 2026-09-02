@@ -23,18 +23,25 @@ Evmrlp <- function(x, u_grid = NULL) {
   n <- length(x)
   if (n < 2L) stop("empty input: need at least two observations")
   if (is.null(u_grid)) {
-    lo <- min(x); hi <- .s03quantile7(x, 0.9)
+    lo <- min(x)
+    hi <- .s03quantile7(x, 0.9)
     u_grid <- lo + (hi - lo) * (0:19) / 19
   } else u_grid <- .s03vec(u_grid)
   if (!length(u_grid)) stop("u_grid is empty")
-  us <- c(); es <- c(); se <- c(); nex <- c()
+  us <- c()
+  es <- c()
+  se <- c()
+  nex <- c()
   for (u in u_grid) {
     ex <- x[x > u] - u
     k <- length(ex)
     if (k < 2L) next
     m <- sum(ex) / k
     v <- sum((ex - m)^2) / (k - 1)
-    us <- c(us, u); es <- c(es, m); se <- c(se, sqrt(v / k)); nex <- c(nex, k)
+    us <- c(us, u)
+    es <- c(es, m)
+    se <- c(se, sqrt(v / k))
+    nex <- c(nex, k)
   }
   if (length(us) < 2L)
     stop("no threshold leaves two exceedances; grid too high")

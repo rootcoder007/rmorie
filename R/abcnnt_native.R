@@ -36,28 +36,35 @@
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
   order <- seq_len(dim_x)
   if (reverse) order <- rev(order)
-  deg_in <- order                          # 0-based, used as integers
+  deg_in <- order # 0-based, used as integers
   deg_out <- order
   deg_h <- (seq_len(hidden) - 1L) %% dim_x
   s1 <- 1 / sqrt(dim_x + dim_t)
   s2 <- 1 / sqrt(hidden)
   W1 <- matrix(.ghc_norm(e, hidden * (dim_x + dim_t), 0, s1),
-               nrow = hidden, ncol = dim_x + dim_t)
+    nrow = hidden, ncol = dim_x + dim_t
+  )
   b1 <- rep(0, hidden)
   Wm <- matrix(.ghc_norm(e, dim_x * hidden, 0, s2), nrow = dim_x, ncol = hidden)
   Wa <- matrix(.ghc_norm(e, dim_x * hidden, 0, s2), nrow = dim_x, ncol = hidden)
-  bm <- rep(0, dim_x); ba <- rep(0, dim_x)
+  bm <- rep(0, dim_x)
+  ba <- rep(0, dim_x)
   M1 <- matrix(0, hidden, dim_x + dim_t)
   for (k in seq_len(hidden)) {
     for (j in seq_len(dim_x)) M1[k, j] <- if (deg_h[k] >= deg_in[j]) 1 else 0
     for (j in seq_len(dim_t)) M1[k, dim_x + j] <- 1
   }
   M2 <- matrix(0, dim_x, hidden)
-  for (i in seq_len(dim_x)) for (k in seq_len(hidden))
-    M2[i, k] <- if (deg_out[i] > deg_h[k]) 1 else 0
-  list(W1 = W1, b1 = b1, Wm = Wm, bm = bm, Wa = Wa, ba = ba,
-       M1 = M1, M2 = M2, dim_x = dim_x, dim_t = dim_t,
-       hidden = hidden, order = order)
+  for (i in seq_len(dim_x)) {
+    for (k in seq_len(hidden)) {
+      M2[i, k] <- if (deg_out[i] > deg_h[k]) 1 else 0
+    }
+  }
+  list(
+    W1 = W1, b1 = b1, Wm = Wm, bm = bm, Wa = Wa, ba = ba,
+    M1 = M1, M2 = M2, dim_x = dim_x, dim_t = dim_t,
+    hidden = hidden, order = order
+  )
 }
 
 # Returns list(mu, al, h). Tanh hidden activations, clipped log-scale.
@@ -73,7 +80,9 @@
 #' @return A list with \code{mu}, \code{al}, \code{h}.
 #' @export
 .abcnnt_layer_stats <- function(layer, x, t) {
-  dx <- layer$dim_x; dt <- layer$dim_t; H <- layer$hidden
+  dx <- layer$dim_x
+  dt <- layer$dim_t
+  H <- layer$hidden
   inp <- c(x, t)
   z <- layer$b1 + (layer$M1 * (layer$W1 %*% matrix(inp, ncol = 1)))[, 1]
   h <- tanh(z)
@@ -89,7 +98,8 @@
 #' @param t See Usage.
 #' @export
 flow_forward <- function(flow, x, t) {
-  u <- as.numeric(x); total <- 0
+  u <- as.numeric(x)
+  total <- 0
   for (layer in flow$layers) {
     st <- .abcnnt_layer_stats(layer, u, t)
     u <- (u - st$mu) * exp(-st$al)
@@ -106,7 +116,7 @@ flow_forward <- function(flow, x, t) {
 flow_logprob <- function(flow, x, t) {
   fw <- flow_forward(flow, x, t)
   d <- length(fw$u)
-  -0.5 * sum(fw$u ^ 2) - 0.5 * d * log(2 * pi) - fw$total
+  -0.5 * sum(fw$u^2) - 0.5 * d * log(2 * pi) - fw$total
 }
 
 #' Build a Masked Autoregressive Flow
@@ -118,13 +128,16 @@ flow_logprob <- function(flow, x, t) {
 #' @export
 MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   if (dim_x < 1L || dim_t < 1L) stop("abcnnt: dimensions must be positive")
-  if (n_layers < 1L || hidden < 1L)
+  if (n_layers < 1L || hidden < 1L) {
     stop("abcnnt: n_layers and hidden must be positive")
+  }
   e <- .ghc_rng(seed + 17L)
   layers <- vector("list", as.integer(n_layers))
-  for (k in seq_len(as.integer(n_layers)))
+  for (k in seq_len(as.integer(n_layers))) {
     layers[[k]] <- .abcnnt_made_layer(dim_x, dim_t, hidden, e,
-                                      reverse = (k %% 2L == 1L))
+      reverse = (k %% 2L == 1L)
+    )
+  }
   list(layers = layers, dim_x = dim_x, dim_t = dim_t)
 }
 
@@ -143,16 +156,18 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
   out <- list()
   for (L in flow$layers) {
     for (k in seq_len(L$hidden)) {
-      for (j in seq_len(L$dim_x + L$dim_t))
+      for (j in seq_len(L$dim_x + L$dim_t)) {
         if (L$M1[k, j] == 1) out[[length(out) + 1L]] <- list(L$W1, c(k, j))
+      }
       out[[length(out) + 1L]] <- list(L$b1, c(k))
     }
     for (i in seq_len(L$dim_x)) {
-      for (k in seq_len(L$hidden))
+      for (k in seq_len(L$hidden)) {
         if (L$M2[i, k] == 1) {
           out[[length(out) + 1L]] <- list(L$Wm, c(i, k))
           out[[length(out) + 1L]] <- list(L$Wa, c(i, k))
         }
+      }
       out[[length(out) + 1L]] <- list(L$bm, c(i))
       out[[length(out) + 1L]] <- list(L$ba, c(i))
     }
@@ -175,25 +190,32 @@ MAF <- function(dim_x, dim_t, n_layers = 5L, hidden = 20L, seed = 0L) {
 train_flow <- function(flow, D, epochs = 40L, lr = 0.01, seed = 0L,
                        batch = NULL) {
   if (length(D) == 0L) stop("abcnnt: no training pairs")
-  if (epochs < 1L || lr <= 0)
+  if (epochs < 1L || lr <= 0) {
     stop("abcnnt: epochs must be >= 1 and lr positive")
+  }
   e <- .ghc_rng(seed + 23L)
   ps <- .abcnnt_params(flow)
   n <- length(D)
   bs <- if (is.null(batch)) n else max(1L, min(as.integer(batch), n))
-  total <- function(sample)
-    sum(vapply(sample, function(p) flow_logprob(flow, p[[2]], p[[1]]),
-               numeric(1))) / length(sample)
+  total <- function(sample) {
+    sum(vapply(
+      sample, function(p) flow_logprob(flow, p[[2]], p[[1]]),
+      numeric(1)
+    )) / length(sample)
+  }
   h <- 1e-4
   for (ep in seq_len(as.integer(epochs))) {
     idx <- as.integer(.ghc_unif(e, bs) * n) + 1L
     idx <- pmin(idx, n)
     sample <- D[idx]
     for (p in ps) {
-      arr <- p[[1]]; j <- p[[2]]
+      arr <- p[[1]]
+      j <- p[[2]]
       old <- arr[j]
-      arr[j] <- old + h; up <- total(sample)
-      arr[j] <- old - h; dn <- total(sample)
+      arr[j] <- old + h
+      up <- total(sample)
+      arr[j] <- old - h
+      dn <- total(sample)
       arr[j] <- old + lr * (up - dn) / (2 * h)
     }
   }
@@ -213,13 +235,17 @@ mcmc_sample <- function(logpdf, x0, n, burn = 100L, step = 0.5,
   if (n < 1L) stop("abcnnt: n must be positive")
   if (step <= 0) stop("abcnnt: step must be positive")
   e <- .ghc_rng(seed + 31L)
-  cur <- as.numeric(x0); lc <- logpdf(cur)
-  out <- matrix(0, as.integer(n), length(cur)); acc <- 0L
+  cur <- as.numeric(x0)
+  lc <- logpdf(cur)
+  out <- matrix(0, as.integer(n), length(cur))
+  acc <- 0L
   for (it in seq_len(as.integer(burn) + as.integer(n))) {
     prop <- cur + step * .ghc_norm(e, length(cur))
     lp <- logpdf(prop)
     if (log(max(.ghc_unif(e, 1L), 1e-300)) < lp - lc) {
-      cur <- prop; lc <- lp; acc <- acc + 1L
+      cur <- prop
+      lc <- lp
+      acc <- acc + 1L
     }
     if (it > as.integer(burn)) out[it - as.integer(burn), ] <- cur
   }
@@ -246,19 +272,24 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
                    n_per_round = 50L, n_layers = 5L, hidden = 20L,
                    epochs = 40L, lr = 0.01, mcmc_burn = 100L,
                    mcmc_step = 0.5, seed = 0L, n_posterior = 200L) {
-  x_o <- as.numeric(x_o); theta0 <- as.numeric(theta0)
-  if (length(x_o) == 0L || length(theta0) == 0L)
+  x_o <- as.numeric(x_o)
+  theta0 <- as.numeric(theta0)
+  if (length(x_o) == 0L || length(theta0) == 0L) {
     stop("abcnnt: x_o and theta0 must be non-empty")
-  if (n_rounds < 1L || n_per_round < 1L)
+  }
+  if (n_rounds < 1L || n_per_round < 1L) {
     stop("abcnnt: n_rounds and n_per_round must be positive")
+  }
   e_round <- .ghc_rng(seed + 5L)
   flow <- MAF(length(x_o), length(theta0), n_layers, hidden, seed)
   D <- list()
   history <- list()
   logpost <- log_prior
   for (r in seq_len(as.integer(n_rounds))) {
-    mc <- mcmc_sample(logpost, theta0, as.integer(n_per_round),
-                      mcmc_burn, mcmc_step, seed + r)
+    mc <- mcmc_sample(
+      logpost, theta0, as.integer(n_per_round),
+      mcmc_burn, mcmc_step, seed + r
+    )
     for (k in seq_len(nrow(mc$samples))) {
       th <- mc$samples[k, ]
       D[[length(D) + 1L]] <- list(th, as.numeric(simulator(th, e_round)))
@@ -266,29 +297,41 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
     train_flow(flow, D, epochs, lr, seed + r, batch = NULL)
     logpost <- function(th, f = flow) {
       lp <- log_prior(th)
-      if (lp == -Inf) return(-Inf)
+      if (lp == -Inf) {
+        return(-Inf)
+      }
       lp + flow_logprob(f, x_o, th)
     }
-    tail_ll <- sum(vapply(D[max(1L, length(D) - 9L):length(D)],
-                          function(p) flow_logprob(flow, x_o, p[[1]]),
-                          numeric(1))) / 10
-    history[[length(history) + 1L]] <- list(round = r, n_total = length(D),
-                                            acceptance = mc$acceptance,
-                                            loglik_at_xo = tail_ll)
+    tail_ll <- sum(vapply(
+      D[max(1L, length(D) - 9L):length(D)],
+      function(p) flow_logprob(flow, x_o, p[[1]]),
+      numeric(1)
+    )) / 10
+    history[[length(history) + 1L]] <- list(
+      round = r, n_total = length(D),
+      acceptance = mc$acceptance,
+      loglik_at_xo = tail_ll
+    )
   }
-  post <- mcmc_sample(logpost, theta0, as.integer(n_posterior), mcmc_burn,
-                      mcmc_step, seed + 999L)
-  d <- length(theta0); M <- nrow(post$samples)
+  post <- mcmc_sample(
+    logpost, theta0, as.integer(n_posterior), mcmc_burn,
+    mcmc_step, seed + 999L
+  )
+  d <- length(theta0)
+  M <- nrow(post$samples)
   m <- colMeans(post$samples)
   v <- apply(post$samples, 2, function(z) {
-    mu <- mean(z); sum((z - mu) ^ 2) / max(M - 1, 1)
+    mu <- mean(z)
+    sum((z - mu)^2) / max(M - 1, 1)
   })
-  list(estimate = m, posterior_mean = m,
-       posterior_sd = sqrt(v), posterior_samples = post$samples, flow = flow,
-       D = D, n_simulations = length(D), history = history,
-       acceptance = post$acceptance, n_rounds = as.integer(n_rounds),
-       method = "Sequential Neural Likelihood (Papamakarios, Sterratt & Murray 2019) with a Masked Autoregressive Flow",
-       note = "Algorithm 1 retrains on the whole of D each round, not the newest round, and proposes from the current posterior estimate; round 1 proposes from the prior since p_hat_0 = p(theta). Flow gradients are central differences, which is slow and avoids a hand-rolled backward pass")
+  list(
+    estimate = m, posterior_mean = m,
+    posterior_sd = sqrt(v), posterior_samples = post$samples, flow = flow,
+    D = D, n_simulations = length(D), history = history,
+    acceptance = post$acceptance, n_rounds = as.integer(n_rounds),
+    method = "Sequential Neural Likelihood (Papamakarios, Sterratt & Murray 2019) with a Masked Autoregressive Flow",
+    note = "Algorithm 1 retrains on the whole of D each round, not the newest round, and proposes from the current posterior estimate; round 1 proposes from the prior since p_hat_0 = p(theta). Flow gradients are central differences, which is slow and avoids a hand-rolled backward pass"
+  )
 }
 
 #' Compact alias for abcnnt

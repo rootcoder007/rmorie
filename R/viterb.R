@@ -20,8 +20,10 @@
 #' @export
 Viterb <- function(obs, trans, emit, init = NULL) {
   o <- as.integer(round(as.numeric(obs))) + 1L
-  A <- as.matrix(trans); B <- as.matrix(emit)
-  K <- nrow(A); T_ <- length(o)
+  A <- as.matrix(trans)
+  B <- as.matrix(emit)
+  K <- nrow(A)
+  T_ <- length(o)
   NEG <- -1e300
   lg <- function(v) ifelse(v > 0, log(v), NEG)
   pi_ <- if (is.null(init)) rep(1 / K, K) else as.numeric(init)
@@ -38,7 +40,8 @@ Viterb <- function(obs, trans, emit, init = NULL) {
     delta <- nd
   }
   last <- which.max(delta)
-  path <- integer(T_); path[T_] <- last
+  path <- integer(T_)
+  path[T_] <- last
   if (T_ > 1L) for (t in seq(T_ - 1L, 1L)) {
     last <- psi[t, last]
     path[t] <- last

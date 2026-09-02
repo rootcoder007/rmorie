@@ -23,9 +23,13 @@
 #'   of Machine Learning Research 84:1608-1617 (AISTATS).
 #' @export
 Otdiv <- function(a, b, Cab, Caa, Cbb, epsilon, max_iter = 200) {
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
-  Cx <- as.matrix(Cab); Ca <- as.matrix(Caa); Cb <- as.matrix(Cbb)
-  n <- length(aa); m <- length(bb)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
+  Cx <- as.matrix(Cab)
+  Ca <- as.matrix(Caa)
+  Cb <- as.matrix(Cbb)
+  n <- length(aa)
+  m <- length(bb)
   if (nrow(Cx) != n || ncol(Cx) != m)
     stop("cross cost does not match the marginals")
   if (nrow(Ca) != n || nrow(Cb) != m)
@@ -35,7 +39,9 @@ Otdiv <- function(a, b, Cab, Caa, Cbb, epsilon, max_iter = 200) {
     s <- .ot_sinkhorn(p, q, Cm, eps, max_iter)
     sum(s$T * Cm) + eps * .ot_kl(s$T, outer(p, q))
   }
-  ab <- oteps(aa, bb, Cx); a2 <- oteps(aa, aa, Ca); b2 <- oteps(bb, bb, Cb)
+  ab <- oteps(aa, bb, Cx)
+  a2 <- oteps(aa, aa, Ca)
+  b2 <- oteps(bb, bb, Cb)
   .t1_result(S_eps = ab - 0.5 * (a2 + b2), OT_ab = ab, OT_aa = a2,
              OT_bb = b2, n = n, m = m, method = "Sinkhorn divergence")
 }

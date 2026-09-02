@@ -28,14 +28,18 @@ Twostage <- function(Y, Nl, M, N, level = 0.95) {
   if (m < 2L) stop("at least two PSUs are needed for a variance")
   Nl <- .t1_vec(Nl)
   if (length(Nl) != m) stop("Nl must have one entry per sampled PSU")
-  M <- as.numeric(M); N <- as.numeric(N)
+  M <- as.numeric(M)
+  N <- as.numeric(N)
   if (M < m) stop("M must be at least the number of sampled PSUs")
   yb <- s2 <- nl <- numeric(m)
   for (i in seq_len(m)) {
-    yi <- .t1_vec(Y[[i]]); k <- length(yi)
+    yi <- .t1_vec(Y[[i]])
+    k <- length(yi)
     if (k < 2L) stop("every sampled PSU needs at least two elements")
     if (k > Nl[i]) stop("a PSU sample cannot exceed its population")
-    nl[i] <- k; yb[i] <- mean(yi); s2[i] <- stats::var(yi)
+    nl[i] <- k
+    yb[i] <- mean(yi)
+    s2[i] <- stats::var(yi)
   }
   est <- sum(Nl * yb) / sum(Nl)
   f1 <- (M - m) / M

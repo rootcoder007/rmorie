@@ -52,11 +52,17 @@ Gkcov <- function(x, h, n, f = NULL, boundary = FALSE, c = NULL, density = NULL,
     if (h >= 0.25) stop("Theorem 1.4 needs 1 - 2 sqrt(h) > 0, i.e. h < 1/4.")
     if (isTRUE(boundary)) {
       if (is.null(c)) stop("the boundary branch of Theorem 1.4 needs c.")
-      den <- 3 * c * s + 5; num1 <- c * s + 1; num2 <- 2 * c * s + 4
-      pw <- h^0.75; form <- "boundary"
+      den <- 3 * c * s + 5
+      num1 <- c * s + 1
+      num2 <- 2 * c * s + 4
+      pw <- h^0.75
+      form <- "boundary"
     } else {
-      den <- 3 * x + 5 * s; num1 <- x + s; num2 <- 2 * x + 4 * s
-      pw <- h^0.25; form <- "interior"
+      den <- 3 * x + 5 * s
+      num1 <- x + s
+      num2 <- 2 * x + 4 * s
+      pw <- h^0.25
+      form <- "interior"
     }
     if (den <= 0 || num1 <= 0 || num2 <= 0) {
       stop("Theorem 1.4 needs positive bases; check x, c and h.")
@@ -76,21 +82,26 @@ Gkcov <- function(x, h, n, f = NULL, boundary = FALSE, c = NULL, density = NULL,
                 method = "Cov[A_h, A_4h], Theorem 1.4 closed form"))
   }
 
-  s1 <- 1 / sqrt(h); b1 <- x * sqrt(h) + h
-  s2 <- 1 / sqrt(4 * h); b2 <- x * sqrt(4 * h) + 4 * h
+  s1 <- 1 / sqrt(h)
+  b1 <- x * sqrt(h) + h
+  s2 <- 1 / sqrt(4 * h)
+  b2 <- x * sqrt(4 * h) + 4 * h
   if (!is.null(sample)) {
     w <- as.numeric(sample)
     if (any(w < 0)) stop("gamma kernels need data on [0, infinity).")
     k1 <- stats::dgamma(w, shape = s1, scale = b1)
     k2 <- stats::dgamma(w, shape = s2, scale = b2)
-    jh <- mean(k1); j4h <- mean(k2); cross <- mean(k1 * k2)
+    jh <- mean(k1)
+    j4h <- mean(k2)
+    cross <- mean(k1 * k2)
   } else {
     grid <- seq(0, upper, length.out = ngrid)
     fv <- vapply(grid, function(g) as.numeric(density(g)), numeric(1))
     k1 <- stats::dgamma(grid, shape = s1, scale = b1)
     k2 <- stats::dgamma(grid, shape = s2, scale = b2)
     trap <- function(y, g) sum(diff(g) * (y[-length(y)] + y[-1]) / 2)
-    jh <- trap(k1 * fv, grid); j4h <- trap(k2 * fv, grid)
+    jh <- trap(k1 * fv, grid)
+    j4h <- trap(k2 * fv, grid)
     cross <- trap(k1 * k2 * fv, grid)
   }
   list(covariance = (cross - jh * j4h) / n, form = "plugin", cross = cross,

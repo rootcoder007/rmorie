@@ -51,10 +51,12 @@ Krpalp <- function(data, level = "nominal") {
       s <- vals[i] + vals[j]
       return(if (s == 0) 0 else ((vals[i] - vals[j]) / s)^2)
     }
-    lo <- min(i, j); hi <- max(i, j)
+    lo <- min(i, j)
+    hi <- max(i, j)
     (sum(nc[lo:hi]) - (nc[i] + nc[j]) / 2)^2
   }
-  do <- 0; de <- 0
+  do <- 0
+  de <- 0
   for (i in seq_len(V)) for (j in seq_len(V)) {
     dd <- d2(i, j)
     do <- do + o[i, j] * dd

@@ -35,8 +35,12 @@ NULL
 #' @return A matrix, from \code{matrix}.
 #' @export
 .t4_mat <- function(X) {
-  if (is.matrix(X)) return(matrix(as.numeric(X), nrow = nrow(X)))
-  if (is.data.frame(X)) return(as.matrix(X))
+  if (is.matrix(X)) {
+    return(matrix(as.numeric(X), nrow = nrow(X)))
+  }
+  if (is.data.frame(X)) {
+    return(as.matrix(X))
+  }
   matrix(as.numeric(X), ncol = 1L)
 }
 
@@ -113,7 +117,8 @@ NULL
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
 .t4_olsfit <- function(X, y) {
-  X <- as.matrix(X); y <- as.numeric(y)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
   xtx <- crossprod(X)
   xtxinv <- solve(xtx)
   beta <- as.numeric(xtxinv %*% crossprod(X, y))
@@ -134,8 +139,11 @@ NULL
 .t4_kendallS <- function(x, y) {
   n <- length(x)
   S <- 0
-  for (i in seq_len(n - 1)) for (j in (i + 1):n)
-    S <- S + sign(x[j] - x[i]) * sign(y[j] - y[i])
+  for (i in seq_len(n - 1)) {
+    for (j in (i + 1):n) {
+      S <- S + sign(x[j] - x[i]) * sign(y[j] - y[i])
+    }
+  }
   S
 }
 
@@ -152,7 +160,8 @@ NULL
 .t4_kendalltaub <- function(x, y) {
   n <- length(x)
   S <- .t4_kendallS(x, y)
-  tx <- .t4_tiecounts(x); ty <- .t4_tiecounts(y)
+  tx <- .t4_tiecounts(x)
+  ty <- .t4_tiecounts(y)
   n0 <- n * (n - 1) / 2
   n1 <- sum(tx * (tx - 1)) / 2
   n2 <- sum(ty * (ty - 1)) / 2

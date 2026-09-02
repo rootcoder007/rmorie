@@ -29,7 +29,9 @@
 #' set.seed(1)
 #' r <- Drbnk(y = rnorm(10), D_t = rnorm(10)); TRUE
 Drbnk <- function(y, D_t, X = NULL, pi_t = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D_t); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D_t)
+  n <- length(yv)
   if (n == 0L) stop("Drbnk: empty input, y has no observations")
   if (length(dv) != n) stop("Drbnk: y and D_t must have the same length")
   s <- sum(dv)
@@ -39,12 +41,15 @@ Drbnk <- function(y, D_t, X = NULL, pi_t = NULL) {
   if (any(e <= 0 | e >= 1))
     stop("Drbnk: pi_t must lie strictly inside (0, 1)")
   Z <- .s03design(X, n)
-  i1 <- which(dv >= 0.5); i0 <- which(dv < 0.5)
+  i1 <- which(dv >= 0.5)
+  i0 <- which(dv < 0.5)
   b1 <- .s03lstsq(Z[i1, , drop = FALSE], yv[i1])
   b0 <- .s03lstsq(Z[i0, , drop = FALSE], yv[i0])
-  m1 <- .s03matvec(Z, b1); m0 <- .s03matvec(Z, b0)
+  m1 <- .s03matvec(Z, b1)
+  m0 <- .s03matvec(Z, b0)
   psi <- m1 - m0 + dv * (yv - m1) / e - (1 - dv) * (yv - m0) / (1 - e)
-  h <- numeric(n); acc <- 0
+  h <- numeric(n)
+  acc <- 0
   for (i in seq_len(n)) {
     lam <- 1 / (n - i + 1)
     q <- (1 - acc) * lam

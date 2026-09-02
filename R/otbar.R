@@ -25,7 +25,9 @@
 #'   32:685-693 (ICML).
 #' @export
 Otbar <- function(A, C_list, weights, epsilon, max_iter = 200) {
-  Am <- as.matrix(A); n <- nrow(Am); K <- ncol(Am)
+  Am <- as.matrix(A)
+  n <- nrow(Am)
+  K <- ncol(Am)
   Cs <- lapply(C_list, as.matrix)
   if (length(Cs) != K)
     stop("one cost matrix per input histogram is required")

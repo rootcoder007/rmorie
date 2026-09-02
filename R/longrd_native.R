@@ -76,7 +76,8 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
                                gap = -2) {
   av <- if (nchar(a)) strsplit(a, "")[[1]] else character(0)
   bv <- if (nchar(b)) strsplit(b, "")[[1]] else character(0)
-  n <- length(av); m <- length(bv)
+  n <- length(av)
+  m <- length(bv)
   s <- matrix(0, n + 1L, m + 1L)
   if (n > 0L) for (i in seq_len(n)) s[i + 1L, 1] <- s[i, 1] + gap
   if (m > 0L) for (j in seq_len(m)) s[1, j + 1L] <- s[1, j] + gap
@@ -89,17 +90,26 @@ morie_longrd_align <- function(a, b, match = 1, mismatch = -1,
     if (l > best) best <- l
     s[i + 1L, j + 1L] <- best
   }
-  ga <- character(0); gb <- character(0)
-  i <- n; j <- m
+  ga <- character(0)
+  gb <- character(0)
+  i <- n
+  j <- m
   while (i > 0L || j > 0L) {
     if (i > 0L && j > 0L &&
         s[i + 1L, j + 1L] == s[i, j] +
           (if (av[i] == bv[j]) match else mismatch)) {
-      ga <- c(av[i], ga); gb <- c(bv[j], gb); i <- i - 1L; j <- j - 1L
+      ga <- c(av[i], ga)
+      gb <- c(bv[j], gb)
+      i <- i - 1L
+      j <- j - 1L
     } else if (i > 0L && s[i + 1L, j + 1L] == s[i, j + 1L] + gap) {
-      ga <- c(av[i], ga); gb <- c("-", gb); i <- i - 1L
+      ga <- c(av[i], ga)
+      gb <- c("-", gb)
+      i <- i - 1L
     } else {
-      ga <- c("-", ga); gb <- c(bv[j], gb); j <- j - 1L
+      ga <- c("-", ga)
+      gb <- c(bv[j], gb)
+      j <- j - 1L
     }
   }
   list(score = s[n + 1L, m + 1L],
@@ -166,9 +176,11 @@ morie_longrd_pileup <- function(draft, reads, match = 1, mismatch = -1,
     al <- morie_longrd_align(draft, read, match, mismatch, gap)
     gd <- strsplit(al$a, "")[[1]]
     gr <- strsplit(al$b, "")[[1]]
-    pos <- 0L; pend <- ""
+    pos <- 0L
+    pend <- ""
     for (k in seq_along(gd)) {
-      if (gd[k] == "-") { pend <- paste0(pend, gr[k]); next }
+      if (gd[k] == "-") { pend <- paste0(pend, gr[k])
+      next }
       if (nzchar(pend)) {
         slot <- ins[[pos + 1L]]
         slot[[pend]] <- if (is.null(slot[[pend]])) 1L else
@@ -291,14 +303,19 @@ morie_longrd <- function(assembly, reads, method = "pileup",
   if (!length(rs)) stop("polishing needs reads")
 
   pu <- morie_longrd_pileup(draft, rs, match, mismatch, gap)
-  cols <- pu$cols; ins <- pu$ins
+  cols <- pu$cols
+  ins <- pu$ins
   dv <- strsplit(draft, "")[[1]]
   n <- length(dv)
-  depth <- integer(n); support <- numeric(n); called <- character(n)
+  depth <- integer(n)
+  support <- numeric(n)
+  called <- character(n)
   protected <- 0L
   for (p in seq_len(n)) {
     r <- .longrd_call(cols[[p]], dv[p], min_depth, min_frac)
-    called[p] <- r[[1]]; depth[p] <- r[[2]]; support[p] <- r[[3]]
+    called[p] <- r[[1]]
+    depth[p] <- r[[2]]
+    support[p] <- r[[3]]
     if (isTRUE(r[[4]])) protected <- protected + 1L
   }
 

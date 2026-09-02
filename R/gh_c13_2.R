@@ -39,7 +39,8 @@ Ghosalsurvdpkm <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {
   a <- as.numeric(alpha)
   if (a <= 0) stop(sprintf("alpha must be positive, got %g.", a))
   ord <- order(xv)
-  ts <- xv[ord]; es <- ev[ord]
+  ts <- xv[ord]
+  es <- ev[ord]
   uniq <- sort(unique(ts))
   km <- numeric(length(uniq))
   surv <- 1

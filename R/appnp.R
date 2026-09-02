@@ -23,11 +23,13 @@
 #' Appnp(A, H)
 Appnp <- function(A, H, alpha = 0.1, K = 10, exact = FALSE,
                   softmax = TRUE) {
-  Am <- .t1_mat(A); n <- nrow(Am)
+  Am <- .t1_mat(A)
+  n <- nrow(Am)
   if (ncol(Am) != n) stop("A must be square")
   Hm <- .t1_mat(H)
   if (nrow(Hm) != n) stop("H must have one row per node")
-  c <- ncol(Hm); alpha <- as.numeric(alpha)
+  c <- ncol(Hm)
+  alpha <- as.numeric(alpha)
   if (!(alpha > 0 && alpha <= 1)) stop("alpha must lie in (0, 1]")
   At <- (Am + t(Am)) / 2 + diag(n)
   deg <- rowSums(At)
@@ -46,7 +48,8 @@ Appnp <- function(A, H, alpha = 0.1, K = 10, exact = FALSE,
   }
   Z <- matrix(as.numeric(Z), nrow = n)
   if (isTRUE(softmax)) {
-    Z <- t(apply(Z, 1L, function(r) { e <- exp(r - max(r)); e / sum(e) }))
+    Z <- t(apply(Z, 1L, function(r) { e <- exp(r - max(r))
+    e / sum(e) }))
     dim(Z) <- c(n, c)
   }
   .t1_result(Z = Z, alpha = alpha, K = steps, exact = isTRUE(exact),

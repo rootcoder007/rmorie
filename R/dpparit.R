@@ -34,7 +34,8 @@ Dpparit <- function(n = 100, alpha = 1, sigma = 0.5, seed = 42) {
     pick <- K + 1L
     for (c in seq_len(K + 1L)) {
       acc <- acc + w[c]
-      if (u <= acc) { pick <- c; break }
+      if (u <= acc) { pick <- c
+      break }
     }
     if (pick == K + 1L) counts <- c(counts, 0L)
     counts[pick] <- counts[pick] + 1L

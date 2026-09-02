@@ -42,9 +42,11 @@
 #' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 #' @export
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   y <- as.numeric(Y)
-  n <- nrow(Xm); T <- ncol(Xm)
+  n <- nrow(Xm)
+  T <- ncol(Xm)
   if (n == 0L) stop("rgs: no curves")
   if (length(y) != n)
     stop(sprintf("rgs: %d curves but %d responses", n, length(y)))
@@ -52,10 +54,12 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
     stop("rgs: the covariance operator needs at least two curves")
   w <- .rgs_grid_weights(T)
 
-  B <- NULL; kk <- NULL
+  B <- NULL
+  kk <- NULL
   if (!is.null(basis)) {
     if (is.matrix(basis) || is.data.frame(basis)) {
-      B <- as.matrix(basis); storage.mode(B) <- "double"
+      B <- as.matrix(basis)
+      storage.mode(B) <- "double"
       if (nrow(B) != T)
         stop(sprintf("rgs: the basis has %d rows for a grid of %d",
                      nrow(B), T))
@@ -92,10 +96,12 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
 
   if (!is.null(B)) kk <- min(ncol(B), T)
   if (is.null(kk)) {
-    run <- 0.0; kk <- T
+    run <- 0.0
+    kk <- T
     for (j in seq_len(T)) {
       run <- run + explained[j]
-      if (run >= 0.99) { kk <- j; break }
+      if (run >= 0.99) { kk <- j
+      break }
     }
   }
   kk <- max(1L, min(as.integer(kk), T, n - 1L))

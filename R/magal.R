@@ -23,12 +23,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Magal(V, V)
 Magal <- function(yi, se_i) {
-  y <- as.numeric(yi); s <- as.numeric(se_i); k <- length(y)
+  y <- as.numeric(yi)
+  s <- as.numeric(se_i)
+  k <- length(y)
   if (k == 0L) stop("no studies")
   if (length(s) != k)
     stop("effects and standard errors must have equal length")
   if (any(s <= 0)) stop("standard errors must be strictly positive")
-  z <- y / s; x <- 1 / s
+  z <- y / s
+  x <- 1 / s
   slope <- sum(z * x) / sum(x^2)
   resid <- z - slope * x
   .t1_result(z = z, x = x, slope = slope, resid = resid,

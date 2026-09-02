@@ -83,12 +83,15 @@ nuclear_norm <- function(A) {
 coherence <- function(A, rank = NULL) {
   M <- .meglt_mat(A)
   sv <- .meglt_svd(M)
-  s <- sv$s; U <- sv$U; Vt <- sv$Vt
+  s <- sv$s
+  U <- sv$U
+  Vt <- sv$Vt
   tol <- max(length(M), length(M[[1L]])) * (if (length(s) > 0L) s[1L] else 0) * 1e-12
   r <- if (is.null(rank)) sum(s > tol) else as.integer(rank)
   if (r < 1L)
     stop("meglt: the matrix is numerically zero")
-  n1 <- length(M); n2 <- length(M[[1L]])
+  n1 <- length(M)
+  n2 <- length(M[[1L]])
   mu_u <- 0
   for (i in seq_len(n1)) {
     ss <- 0
@@ -121,7 +124,8 @@ coherence <- function(A, rank = NULL) {
 sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
   if (!(exponent %in% c(1.2, 1.25)))
     stop("meglt: the exponent must be 1.2 (moderate rank) or 1.25 (all ranks), got ", format(exponent))
-  nn <- as.integer(n); rr <- as.integer(r)
+  nn <- as.integer(n)
+  rr <- as.integer(r)
   if (nn < 2L || rr < 1L)
     stop("meglt: need n >= 2 and r >= 1")
   m <- as.numeric(C) * (nn^as.numeric(exponent)) * rr * log(nn)
@@ -147,7 +151,8 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
                 tol = 1e-6) {
   A <- .meglt_mat(M)
-  n1 <- length(A); n2 <- length(A[[1L]])
+  n1 <- length(A)
+  n2 <- length(A[[1L]])
   obs <- unique(matrix(c(as.integer(sapply(observed, `[`, 1L)),
                         as.integer(sapply(observed, `[`, 2L))),
                       ncol = 2L))
@@ -160,7 +165,9 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
   for (it in seq_len(as.integer(iters))) {
     Amat <- do.call(rbind, A)
     sv <- .meglt_svd(Y)
-    U <- sv$U; s <- sv$s; V <- sv$Vt
+    U <- sv$U
+    s <- sv$s
+    V <- sv$Vt
     sh <- pmax(0, s - t)
     # truncate to the singular values that exist and transpose V:
     # the full-rank U was non-conformable with diag(sh), and Vt held
@@ -170,7 +177,8 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
       t(V[, seq_len(k), drop = FALSE])
     res <- 0
     for (r in seq_len(nrow(obs))) {
-      i <- obs[r, 1L]; j <- obs[r, 2L]
+      i <- obs[r, 1L]
+      j <- obs[r, 2L]
       d <- A[[i + 1L]][j + 1L] - X[i + 1L, j + 1L]
       res <- res + d^2
       Y[i + 1L, j + 1L] <- Y[i + 1L, j + 1L] + as.numeric(step) * d
@@ -198,13 +206,15 @@ svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
 #' @export
 relative_error <- function(X, M) {
   A <- .meglt_mat(M)
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   for (i in seq_along(A)) for (j in seq_along(A[[1L]])) {
     d <- X[[i]][j] - A[[i]][j]
     num <- num + d^2
     den <- den + A[[i]][j]^2
   }
-  num <- sqrt(num); den <- sqrt(den)
+  num <- sqrt(num)
+  den <- sqrt(den)
   if (den <= .MEGLT_EPS)
     stop("meglt: the reference matrix is zero")
   num / den

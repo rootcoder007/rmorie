@@ -28,10 +28,14 @@
 #' @export
 Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
                      grid = NULL) {
-  t <- .s03vec(time); e <- .s03vec(event); n <- length(t)
+  t <- .s03vec(time)
+  e <- .s03vec(event)
+  n <- length(t)
   Xr <- if (!is.null(X)) .s03mat(X) else matrix(0, n, 1)
   g <- if (!is.null(grid)) sort(unique(.s03vec(grid))) else sort(unique(t[e > 0.5]))
-  rows <- list(); ys <- numeric(0); who <- integer(0)
+  rows <- list()
+  ys <- numeric(0)
+  who <- integer(0)
   for (i in seq_len(n)) {
     for (j in seq_along(g)) {
       if (g[j] > t[i]) break
@@ -48,19 +52,27 @@ Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
   f <- rep(qnorm(pbar), m)
   trees <- list()
   stump <- function(X, r, w) {
-    nn <- nrow(X); p <- ncol(X); best <- NULL
+    nn <- nrow(X)
+    p <- ncol(X)
+    best <- NULL
     for (a in seq_len(p)) {
       vals <- sort(unique(X[, a]))
       if (length(vals) < 2L) next
       for (tt in seq_len(length(vals) - 1L)) {
         thr <- 0.5 * (vals[tt] + vals[tt + 1L])
-        sl <- 0; wl <- 0; sr <- 0; wr <- 0
+        sl <- 0
+        wl <- 0
+        sr <- 0
+        wr <- 0
         for (i in seq_len(nn)) {
-          if (X[i, a] <= thr) { sl <- sl + w[i] * r[i]; wl <- wl + w[i] }
-          else { sr <- sr + w[i] * r[i]; wr <- wr + w[i] }
+          if (X[i, a] <= thr) { sl <- sl + w[i] * r[i]
+          wl <- wl + w[i] }
+          else { sr <- sr + w[i] * r[i]
+          wr <- wr + w[i] }
         }
         if (wl <= 0 || wr <= 0) next
-        ml <- sl / wl; mr <- sr / wr
+        ml <- sl / wl
+        mr <- sr / wr
         gain <- wl * ml * ml + wr * mr * mr
         if (is.null(best) || gain > best[[1]]) best <- list(gain, a, thr, ml, mr)
       }
@@ -68,7 +80,8 @@ Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
     best
   }
   for (it in seq_len(as.integer(n_trees))) {
-    r <- numeric(m); w <- numeric(m)
+    r <- numeric(m)
+    w <- numeric(m)
     for (i in seq_len(m)) {
       p <- pnorm(f[i])
       p <- min(max(p, 1e-8), 1 - 1e-8)
@@ -80,7 +93,10 @@ Bartsurv <- function(time, event, X = NULL, n_trees = 5, shrink = 0.3,
     }
     st <- stump(Rm, r, w)
     if (is.null(st)) break
-    a <- st[[2]]; thr <- st[[3]]; ml <- st[[4]]; mr <- st[[5]]
+    a <- st[[2]]
+    thr <- st[[3]]
+    ml <- st[[4]]
+    mr <- st[[5]]
     trees[[length(trees) + 1L]] <- c(a - 1, thr, ml, mr)
     for (i in seq_len(m)) {
       f[i] <- f[i] + as.numeric(shrink) * (if (Rm[i, a] <= thr) ml else mr)

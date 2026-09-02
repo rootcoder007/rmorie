@@ -33,7 +33,10 @@
 Sacc <- function(P, R, gamma, temp = 1, tol = 1e-12, max_eval = 100000L,
                  max_improve = 1000L) {
   ar <- .w505_mdp_args(P, R)
-  Pm <- ar$P; Rm <- ar$R; S <- ar$S; A <- ar$A
+  Pm <- ar$P
+  Rm <- ar$R
+  S <- ar$S
+  A <- ar$A
   gamma <- as.numeric(gamma)[1]
   temp <- as.numeric(temp)[1]
   tol <- as.numeric(tol)[1]
@@ -75,9 +78,11 @@ Sacc <- function(P, R, gamma, temp = 1, tol = 1e-12, max_eval = 100000L,
         logpi[s, a] <- if (p > 0) log(p) else -1e300
       }
     }
-    if (moved < tol) { converged <- TRUE; break }
+    if (moved < tol) { converged <- TRUE
+    break }
   }
-  V <- numeric(S); H <- numeric(S)
+  V <- numeric(S)
+  H <- numeric(S)
   for (s in seq_len(S)) {
     V[s] <- sum(pi_[s, ] * (Q[s, ] - temp * logpi[s, ]))
     H[s] <- -sum(ifelse(pi_[s, ] > 0, pi_[s, ] * logpi[s, ], 0))

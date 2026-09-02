@@ -36,12 +36,15 @@ Otbarfree <- function(X_list, weights, n_supp, max_iter = 20) {
     stop("n_supp must lie between 1 and the pooled size")
   step <- nrow(pool) / ns
   Y <- pool[floor((seq_len(ns) - 1L) * step) + 1L, , drop = FALSE]
-  it <- as.integer(max_iter); cost <- 0
+  it <- as.integer(max_iter)
+  cost <- 0
   a <- rep(1 / ns, ns)
   for (t in seq_len(it)) {
-    Z <- matrix(0, ns, d); cost <- 0
+    Z <- matrix(0, ns, d)
+    cost <- 0
     for (k in seq_len(K)) {
-      Xk <- clouds[[k]]; mk <- nrow(Xk)
+      Xk <- clouds[[k]]
+      mk <- nrow(Xk)
       C <- .ot_costmat(Y, Xk, 2)
       r <- .ot_emd(a, rep(1 / mk, mk), C)
       cost <- cost + w[k] * r$cost

@@ -92,12 +92,17 @@ morie_ranova <- function(y, group) {
 #' @return A list with \code{ll}, \code{mu}.
 #' @export
 .reml_loglik <- function(gs, ns, s2a, s2e) {
-  logdetV <- 0; xvx <- 0; xvy <- 0; yvy <- 0
+  logdetV <- 0
+  xvx <- 0
+  xvy <- 0
+  yvy <- 0
   for (i in seq_along(gs)) {
-    g <- gs[[i]]; n <- ns[i]
+    g <- gs[[i]]
+    n <- ns[i]
     d <- s2e + n * s2a
     logdetV <- logdetV + (n - 1) * log(s2e) + log(d)
-    s <- sum(g); ss <- sum(g * g)
+    s <- sum(g)
+    ss <- sum(g * g)
     xvx <- xvx + n / d
     xvy <- xvy + s / d
     yvy <- yvy + ss / s2e - (s2a / (s2e * d)) * s * s

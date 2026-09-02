@@ -37,9 +37,12 @@
 #' @examples
 #' morie_p_ibs_given_ibd(X = 2, Y = 2, T = 4)
 morie_p_ibs_given_ibd <- function(X, Y, T) {
-  X <- as.numeric(X); Y <- as.numeric(Y); T <- as.numeric(T)
+  X <- as.numeric(X)
+  Y <- as.numeric(Y)
+  T <- as.numeric(T)
   if (T < 4 || X + Y != T) stop("need T = X + Y >= 4")
-  p <- X / T; q <- Y / T
+  p <- X / T
+  q <- Y / T
   c3 <- (T / (T - 1)) * (T / (T - 2)) * (T / (T - 3))
   c2 <- (T / (T - 1)) * (T / (T - 2))
   p00 <- 2 * p * p * q * q * ((X - 1) / X) * ((Y - 1) / Y) * c3
@@ -100,7 +103,9 @@ morie_ibdmtx <- function(G) {
     used <- used + 1L
   }
   pihat <- matrix(1, n, n)
-  Z0 <- matrix(0, n, n); Z1 <- matrix(0, n, n); Z2 <- matrix(1, n, n)
+  Z0 <- matrix(0, n, n)
+  Z1 <- matrix(0, n, n)
+  Z2 <- matrix(1, n, n)
   counts_out <- list()
   for (i in seq_len(n - 1L)) {
     for (k in seq.int(i + 1L, n)) {
@@ -108,7 +113,8 @@ morie_ibdmtx <- function(G) {
       Nexp <- matrix(0, 3, 3)
       for (j in seq_len(m)) {
         if (is.null(tables[[j]])) next
-        g1 <- rows[i, j]; g2 <- rows[k, j]
+        g1 <- rows[i, j]
+        g2 <- rows[k, j]
         if (!(g1 %in% valid) || !(g2 %in% valid)) next
         ibs <- 2 - abs(g1 - g2)
         Nobs[ibs + 1L] <- Nobs[ibs + 1L] + 1
@@ -121,21 +127,26 @@ morie_ibdmtx <- function(G) {
       z2 <- (Nobs[3] - z0 * Nexp[1, 3] - z1 * Nexp[2, 3]) / Nexp[3, 3]
       # bounding, Purcell et al. 2007 p. 566
       if (z0 > 1) {
-        z0 <- 1; z1 <- 0; z2 <- 0
+        z0 <- 1
+        z1 <- 0
+        z2 <- 0
       } else if (z0 < 0) {
         z0 <- 0
         s <- z1 + z2
-        if (s > 0) { z1 <- z1 / s; z2 <- z2 / s }
+        if (s > 0) { z1 <- z1 / s
+        z2 <- z2 / s }
       }
       if (z1 < 0) {
         z1 <- 0
         s <- z0 + z2
-        if (s > 0) { z0 <- z0 / s; z2 <- z2 / s }
+        if (s > 0) { z0 <- z0 / s
+        z2 <- z2 / s }
       }
       if (z2 < 0) {
         z2 <- 0
         s <- z0 + z1
-        if (s > 0) { z0 <- z0 / s; z1 <- z1 / s }
+        if (s > 0) { z0 <- z0 / s
+        z1 <- z1 / s }
       }
       pi_ <- 0.5 * z1 + z2
       if (pi_ * pi_ <= z2) {

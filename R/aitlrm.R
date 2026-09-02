@@ -17,13 +17,16 @@
 Complrm <- function(X, total = 1) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")
-  n <- nrow(X); D <- ncol(X)
+  n <- nrow(X)
+  D <- ncol(X)
   L <- log(X)
   Z <- L - rowSums(L) / D
   zm <- colMeans(Z)
   e <- exp(zm)
   k <- as.numeric(total)
-  .t1_result(clr_mean = zm, center = k * e / sum(e), sum_clr_mean = sum(zm),
-             n = n, D = D,
-             method = "Log-ratio mean (clr average, closed back)")
+  .t1_result(
+    clr_mean = zm, center = k * e / sum(e), sum_clr_mean = sum(zm),
+    n = n, D = D,
+    method = "Log-ratio mean (clr average, closed back)"
+  )
 }

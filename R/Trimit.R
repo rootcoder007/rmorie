@@ -26,16 +26,20 @@
 #' Trimit(c(1, 2, 3, 4), c(1, 1, 1, 9), 4)
 #' @export
 Trimit <- function(y, weights, threshold) {
-  yy <- .s03vec(y); w <- .s03vec(weights); n <- length(yy)
+  yy <- .s03vec(y)
+  w <- .s03vec(weights)
+  n <- length(yy)
   if (n == 0L) stop("weight_trimming: y is empty")
   if (length(w) != n) stop("weight_trimming: y and weights differ in length")
   if (any(w < 0)) stop("weight_trimming: weights must be non-negative")
-  thr <- as.numeric(threshold); tot <- sum(w)
+  thr <- as.numeric(threshold)
+  tot <- sum(w)
   if (thr <= 0) stop("weight_trimming: threshold must be positive")
   if (thr * n < tot)
     stop("weight_trimming: threshold below the mean weight, no feasible redistribution")
   mu0 <- sum(w * yy) / tot
-  cur <- w; it <- 0L
+  cur <- w
+  it <- 0L
   for (k in seq_len(100L)) {
     over <- sum(cur[cur > thr] - thr)
     if (over <= 1e-15) break

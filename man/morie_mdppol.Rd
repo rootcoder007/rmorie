@@ -25,5 +25,8 @@ A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_
 }
 \keyword{internal}
 \examples{
-morie_mdppol(P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+P <- list(matrix(c(0.7, 0.3, 0.4, 0.6), nrow = 2, byrow = TRUE),
+          matrix(c(0.2, 0.8, 0.5, 0.5), nrow = 2, byrow = TRUE))
+R <- matrix(c(1, 0, 0, 2), nrow = 2)
+morie_mdppol(P = P, R = R, gamma = 0.9)
 }

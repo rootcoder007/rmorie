@@ -306,7 +306,8 @@ morie_weight_super <- function(data, treatment, covariates,
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   Zcv <- matrix(NA_real_, n, length(learners))
   for (f in seq_len(n_folds)) {
-    tr <- which(folds != f); te <- which(folds == f)
+    tr <- which(folds != f)
+    te <- which(folds == f)
     for (li in seq_along(learners)) {
       Zcv[te, li] <- tryCatch(learners[[li]](tr, te),
                               error = function(e) rep(mean(t01[tr]),

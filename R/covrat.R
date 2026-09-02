@@ -23,7 +23,8 @@
 #' Covrat(V, V)
 Covrat <- function(y, X, intercept = TRUE) {
   f <- .bkw_influence(y, X, intercept)
-  n <- f$n; p <- f$p
+  n <- f$n
+  p <- f$p
   s2 <- f$sse / (n - p)
   out <- numeric(n)
   for (i in seq_len(n)) {

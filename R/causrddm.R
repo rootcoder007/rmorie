@@ -66,10 +66,13 @@
 #' x <- c(runif(100, -1, 0), runif(120, 0, 1))
 #' Rddmanip(x)
 Rddmanip <- function(x, cutoff = 0, bw = NULL, binsize = NULL) {
-  x <- .t4_vec(x); rn <- length(x)
+  x <- .t4_vec(x)
+  rn <- length(x)
   if (rn < 20L) stop("need at least 20 observations")
   cutoff <- as.numeric(cutoff)
-  rsd <- stats::sd(x); rmin <- min(x); rmax <- max(x)
+  rsd <- stats::sd(x)
+  rmin <- min(x)
+  rmax <- max(x)
   if (cutoff <= rmin || cutoff >= rmax) stop("cutoff must lie strictly within the range of x")
   b <- if (!is.null(binsize)) as.numeric(binsize) else 2 * rsd * rn^(-1 / 2)
   lo <- floor((rmin - cutoff) / b) * b + b / 2 + cutoff
@@ -78,7 +81,8 @@ Rddmanip <- function(x, cutoff = 0, bw = NULL, binsize = NULL) {
   cellval <- numeric(j)
   mids <- floor((x - cutoff) / b) * b + b / 2 + cutoff
   idx <- as.integer(round((mids - lo) / b)) + 1L
-  idx[idx < 1L] <- 1L; idx[idx > j] <- j
+  idx[idx < 1L] <- 1L
+  idx[idx > j] <- j
   for (i in idx) cellval[i] <- cellval[i] + 1
   cellval <- cellval / rn / b
   cellmp <- vapply(seq_len(j), function(i) {
@@ -86,9 +90,12 @@ Rddmanip <- function(x, cutoff = 0, bw = NULL, binsize = NULL) {
     floor((v - cutoff) / b) * b + b / 2 + cutoff
   }, numeric(1))
   if (is.null(bw)) {
-    mpl <- cellmp[cellmp < cutoff]; mpr <- cellmp[cellmp >= cutoff]
-    vl <- cellval[cellmp < cutoff]; vr <- cellval[cellmp >= cutoff]
-    L <- .t4_poly4(mpl, vl); R <- .t4_poly4(mpr, vr)
+    mpl <- cellmp[cellmp < cutoff]
+    mpr <- cellmp[cellmp >= cutoff]
+    vl <- cellval[cellmp < cutoff]
+    vr <- cellval[cellmp >= cutoff]
+    L <- .t4_poly4(mpl, vl)
+    R <- .t4_poly4(mpr, vr)
     fppl <- 2 * L$beta[3] + 6 * L$beta[4] * mpl + 12 * L$beta[5] * mpl^2
     fppr <- 2 * R$beta[3] + 6 * R$beta[4] * mpr + 12 * R$beta[5] * mpr^2
     hleft <- 3.348 * (L$mse * (cutoff - lo) / sum(fppl^2))^(1 / 5)
@@ -103,7 +110,8 @@ Rddmanip <- function(x, cutoff = 0, bw = NULL, binsize = NULL) {
   cval <- c(numeric(pad), cellval, numeric(pad))
   jp <- j + 2L * pad
   dist <- cmp - cutoff
-  fhat <- numeric(2); names(fhat) <- c("left", "right")
+  fhat <- numeric(2)
+  names(fhat) <- c("left", "right")
   for (side in c("left", "right")) {
     w <- 1 - abs(dist / bw)
     keep <- if (side == "left") cmp < cutoff else cmp >= cutoff
@@ -111,7 +119,8 @@ Rddmanip <- function(x, cutoff = 0, bw = NULL, binsize = NULL) {
     w <- (w / sum(w)) * jp
     fhat[side] <- .t4_wls_int(dist, cval, w)
   }
-  fl <- fhat[["left"]]; fr <- fhat[["right"]]
+  fl <- fhat[["left"]]
+  fr <- fhat[["right"]]
   if (fl <= 0 || fr <= 0) stop("non-positive density estimate at the cutoff")
   theta <- log(fr) - log(fl)
   se <- sqrt((1 / (rn * bw)) * (24 / 5) * (1 / fr + 1 / fl))

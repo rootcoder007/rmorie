@@ -26,7 +26,9 @@
 #' set.seed(1)
 #' r <- Drvst(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drvst <- function(y, D, X = NULL, q = 0.95) {
-  yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D)
+  n <- length(yv)
   if (n == 0L) stop("Drvst: empty input, y has no observations")
   if (length(dv) != n) stop("Drvst: y and D must have the same length")
   if (!(q > 0 && q <= 1)) stop("Drvst: q must lie in (0, 1]")
@@ -35,7 +37,8 @@ Drvst <- function(y, D, X = NULL, q = 0.95) {
     stop("Drvst: D must contain both treated and control units")
   fit <- .s03drdid(yv, dv, X)
   ess <- function(v) {
-    a <- sum(abs(v)); b <- sum(v * v)
+    a <- sum(abs(v))
+    b <- sum(v * v)
     if (b > 0) a * a / b else 0
   }
   w <- fit$w1 - fit$w0

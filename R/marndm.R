@@ -16,7 +16,8 @@
 #' marndm(c(0.1, 0.3, -0.2), c(0.02, 0.05, 0.03))$tau2
 #' @export
 marndm <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   d <- k02dl(y, v)
   se <- sqrt(d$var)
   z <- d$mu / se

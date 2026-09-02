@@ -76,19 +76,22 @@
   nf <- as.integer(n_folds)
   folds <- lapply(seq_len(nf) - 1L, function(f)
     which(seq_len(n) %% nf == f))
-  best <- NULL; best_h <- grid[1]
+  best <- NULL
+  best_h <- grid[1]
   for (h in grid) {
     err <- 0
     for (f in folds) {
       tr <- setdiff(seq_len(n), f)
-      xtr <- xv[tr]; atr <- av[tr]
+      xtr <- xv[tr]
+      atr <- av[tr]
       for (i in f) {
         pred <- .smooth_at(xtr, atr, av[i], h, fit)
         if (is.nan(pred)) err <- err + 1e12
         else err <- err + (xv[i] - pred)^2
       }
     }
-    if (is.null(best) || err < best) { best <- err; best_h <- h }
+    if (is.null(best) || err < best) { best <- err
+    best_h <- h }
   }
   best_h
 }
@@ -110,7 +113,9 @@
 #' @references Kennedy, E. H. et al. (2017). Theorem 1.
 #' @export
 pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
-  yv <- as.numeric(y); av <- as.numeric(A); n <- length(yv)
+  yv <- as.numeric(y)
+  av <- as.numeric(A)
+  n <- length(yv)
   if (length(av) != n)
     stop("pseudo_outcome: outcome and treatment differ in length")
   Xm <- if (is.null(X)) matrix(0, nrow = n, ncol = 0) else as.matrix(X)
@@ -140,7 +145,9 @@ pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
       sum(c(1, a, Xm[j, ], a * Xm[j, ]) * by)
     else sum(c(1, a) * by)
   }
-  xi <- numeric(n); marg <- numeric(n); stand <- numeric(n)
+  xi <- numeric(n)
+  marg <- numeric(n)
+  stand <- numeric(n)
   pi_obs <- numeric(n)
   for (i in seq_len(n)) {
     a_i <- av[i]
@@ -152,7 +159,9 @@ pseudo_outcome <- function(y, A, X, ridge = 1e-8) {
     if (den <= 0)
       stop("pseudo_outcome: pi(A|L) is zero at observation, so positivity fails and xi is undefined")
     xi[i] <- (yv[i] - mu_at(a_i, i)) * m / den + s
-    marg[i] <- m; stand[i] <- s; pi_obs[i] <- den
+    marg[i] <- m
+    stand[i] <- s
+    pi_obs[i] <- den
   }
   list(xi = xi, info = list(marginal_density = marg,
                             standardized_mu = stand,
@@ -184,7 +193,9 @@ effect_curve <- function(xi, A, grid, fit = "kernel",
                          bandwidth = NULL, n_folds = 5) {
   if (!fit %in% .FITS)
     stop("effect_curve: fit must be one of kernel, locallinear, polynomial")
-  xv <- as.numeric(xi); av <- as.numeric(A); n <- length(xv)
+  xv <- as.numeric(xi)
+  av <- as.numeric(A)
+  n <- length(xv)
   gr <- as.numeric(grid)
   if (fit == "polynomial") {
     X <- cbind(1, av, av^2, av^3)
@@ -220,9 +231,11 @@ morie_tmlcps <- function(y, A, X, a_grid = NULL, fit = "kernel",
   av <- as.numeric(A)
   if (length(unique(av)) < 3L)
     stop("tmle_continuous_treatment: the treatment takes fewer than 3 distinct values; this estimates a continuous effect curve and a binary exposure belongs elsewhere")
-  po <- pseudo_outcome(y, A, X); xi <- po$xi
+  po <- pseudo_outcome(y, A, X)
+  xi <- po$xi
   if (is.null(a_grid)) {
-    lo <- min(av); hi <- max(av)
+    lo <- min(av)
+    hi <- max(av)
     a_grid <- lo + (hi - lo) * seq(0, 20) / 20
   }
   ec <- effect_curve(xi, av, a_grid, fit = fit,

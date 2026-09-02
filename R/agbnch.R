@@ -28,7 +28,9 @@ Elorating <- function(games, ladder = NULL, anchor = 0, base = "e",
                       c_elo = 1 / 400) {
   g <- .s03vec(games)
   if (length(g) >= 3L) {
-    w <- g[1]; d <- g[2]; l <- g[3]
+    w <- g[1]
+    d <- g[2]
+    l <- g[3]
     tot <- w + d + l
     score <- if (tot > 0) (w + 0.5 * d) / tot else NaN
   } else {
@@ -47,9 +49,13 @@ Elorating <- function(games, ladder = NULL, anchor = 0, base = "e",
     dd <- c_elo * (r - rating)
     exp_ <- c(exp_, 1 / (1 + (if (identical(base, "e")) exp(dd) else 10^dd)))
   }
-  list(estimate = rating, rating = rating, score = score, expected = exp_,
-       base = base,
-       method = paste0("Elo rating inverted in closed form from a score against an ",
-                       "anchor; AlphaZero's exp convention by default, Elo's ",
-                       "base-10 curve with base=10"))
+  list(
+    estimate = rating, rating = rating, score = score, expected = exp_,
+    base = base,
+    method = paste0(
+      "Elo rating inverted in closed form from a score against an ",
+      "anchor; AlphaZero's exp convention by default, Elo's ",
+      "base-10 curve with base=10"
+    )
+  )
 }

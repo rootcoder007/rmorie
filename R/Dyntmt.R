@@ -34,9 +34,11 @@
 #'   Laan, M. (2014). Journal of Causal Inference 2(2), 147-185.
 #' @export
 Dyntmt <- function(y, D_history, H_history, regime_fn = NULL) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("Dyntmt: empty input, y has no observations")
-  D <- .s03mat(D_history); H <- .s03mat(H_history)
+  D <- .s03mat(D_history)
+  H <- .s03mat(H_history)
   if (nrow(D) != n || nrow(H) != n)
     stop("Dyntmt: D_history and H_history must have one row per subject")
   Tt <- ncol(D)

@@ -14,10 +14,13 @@
 #' @examples
 #' Chancap(P = 1)
 Chancap <- function(P, iters = 200) {
-  P <- as.matrix(P); m <- nrow(P); n <- ncol(P)
+  P <- as.matrix(P)
+  m <- nrow(P)
+  n <- ncol(P)
   if (any(P < 0)) stop("channel probabilities must be non-negative")
   if (any(abs(rowSums(P) - 1) > 1e-9)) stop("each row of P must sum to 1")
-  r <- rep(1 / m, m); trace <- numeric(0)
+  r <- rep(1 / m, m)
+  trace <- numeric(0)
   lr <- function(r) {
     qy <- as.numeric(t(P) %*% r)
     vapply(seq_len(m), function(i) {

@@ -36,13 +36,17 @@ RipG <- function(points, window, r) {
   if (n < 2L) stop("`points` needs at least 2 events")
   w <- as.numeric(window)
   if (length(w) != 4L) stop("`window` must be (xmin, xmax, ymin, ymax)")
-  x0 <- w[1]; x1 <- w[2]; y0 <- w[3]; y1 <- w[4]
+  x0 <- w[1]
+  x1 <- w[2]
+  y0 <- w[3]
+  y1 <- w[4]
   if (!(x1 > x0 && y1 > y0))
     stop("`window` must have xmax > xmin and ymax > ymin")
   rs <- as.numeric(r)
   if (min(rs) < 0) stop("`r` must be non-negative")
 
-  px <- as.numeric(P[, 1]); py <- as.numeric(P[, 2])
+  px <- as.numeric(P[, 1])
+  py <- as.numeric(P[, 2])
   if (any(px < x0 | px > x1 | py < y0 | py > y1))
     stop("every point must lie inside `window`")
 
@@ -60,7 +64,9 @@ RipG <- function(points, window, r) {
 
   lam <- n / ((x1 - x0) * (y1 - y0))
   nr <- length(rs)
-  g <- numeric(nr); gb <- numeric(nr); csr <- numeric(nr)
+  g <- numeric(nr)
+  gb <- numeric(nr)
+  csr <- numeric(nr)
   for (t in seq_len(nr)) {
     h <- rs[t]
     g[t] <- sum(nn <= h) / n

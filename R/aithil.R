@@ -16,7 +16,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Hillq(V)
 Hillq <- function(x, q = 1) {
-  x <- .t1_vec(x); D <- length(x)
+  x <- .t1_vec(x)
+  D <- length(x)
   if (D == 0) stop("x must be non-empty")
   if (any(x < 0)) stop("abundances must be non-negative")
   tot <- sum(x)
@@ -27,7 +28,9 @@ Hillq <- function(x, q = 1) {
   si <- sum(pos^2)
   q <- as.numeric(q)
   h <- if (abs(q - 1) < 1e-12) exp(sh) else sum(pos^q)^(1 / (1 - q))
-  .t1_result(hill = h, q = q, prop = p, richness = length(pos),
-             shannon = sh, simpson = si, D = D,
-             method = "Hill number of order q (Hill 1973 eq. 2)")
+  .t1_result(
+    hill = h, q = q, prop = p, richness = length(pos),
+    shannon = sh, simpson = si, D = D,
+    method = "Hill number of order q (Hill 1973 eq. 2)"
+  )
 }

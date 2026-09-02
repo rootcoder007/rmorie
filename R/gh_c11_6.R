@@ -23,12 +23,15 @@
 #' @examples
 #' Ghosalbmprior()
 Ghosalbmprior <- function(n_grid = 200, n_sim = 400, seed = 42) {
-  n_grid <- as.integer(n_grid); n_sim <- as.integer(n_sim)
+  n_grid <- as.integer(n_grid)
+  n_sim <- as.integer(n_sim)
   if (n_grid < 4L) stop("n_grid must be at least 4")
   if (n_sim < 1L) stop("n_sim must be positive")
   e <- .ghc_rng(seed)
-  s_idx <- n_grid %/% 4L; t_idx <- n_grid %/% 2L
-  acc_st <- 0; acc_ss <- 0
+  s_idx <- n_grid %/% 4L
+  t_idx <- n_grid %/% 2L
+  acc_st <- 0
+  acc_ss <- 0
   for (it in seq_len(n_sim)) {
     w <- cumsum(.ghc_norm(e, n_grid) / sqrt(n_grid))
     ws <- if (s_idx >= 1L) w[s_idx] else 0

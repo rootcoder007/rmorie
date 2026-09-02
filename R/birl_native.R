@@ -56,10 +56,13 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
     # indexes row n + 1
     for (r in seq_len(n - c) + c) {
       v <- abs(M[r, c])
-      if (v > best) { best <- v; piv <- r }
+      if (v > best) { best <- v
+      piv <- r }
     }
     if (best < 1e-14) stop("birl: the value system is singular")
-    if (piv != c) { tmp <- M[c, ]; M[c, ] <- M[piv, ]; M[piv, ] <- tmp }
+    if (piv != c) { tmp <- M[c, ]
+    M[c, ] <- M[piv, ]
+    M[piv, ] <- tmp }
     for (r in 1:n) {
       if (r == c) next
       f <- M[r, c] / M[c, c]
@@ -106,7 +109,9 @@ policy_values <- function(T, R, gamma, policy) {
 #' @return The value of \code{Q}, as built in the body.
 #' @export
 q_values <- function(T, R, gamma, V) {
-  m <- .mdp(T, gamma); nS <- m$nS; nA <- m$nA
+  m <- .mdp(T, gamma)
+  nS <- m$nS
+  nA <- m$nA
   Q <- matrix(0, nS, nA)
   for (s in 1:nS) for (a in 1:nA) {
     Q[s, a] <- R[s] + gamma * sum(T[[s]][[a]] * V)
@@ -128,7 +133,9 @@ q_values <- function(T, R, gamma, V) {
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
-  m <- .mdp(T, gamma); nS <- m$nS; nA <- m$nA
+  m <- .mdp(T, gamma)
+  nS <- m$nS
+  nA <- m$nA
   if (length(R) != nS) stop("birl: one reward per state is required")
   pi <- if (is.null(policy)) rep(1L, nS) else as.integer(policy)
   if (length(pi) != nS) stop("birl: the starting policy has the wrong length")
@@ -163,7 +170,8 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   if (length(observations) == 0) stop("birl: no observations")
   total <- 0
   for (sa in observations) {
-    s <- as.integer(sa[1]); a <- as.integer(sa[2])
+    s <- as.integer(sa[1])
+    a <- as.integer(sa[2])
     if (s < 1 || s > nrow(Q) || a < 1 || a > ncol(Q))
       stop("birl: an observation is out of range")
     row <- alpha * Q[s, ]
@@ -215,7 +223,8 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @return The value of \code{f}, as built in the body.
 #' @export
 .rng <- function(seed) {
-  st <- as.integer(seed); if (st <= 0) st <- 1L
+  st <- as.integer(seed)
+  if (st <= 0) st <- 1L
   f <- function() {
     st <<- .ghc_lcg31(st)
     st / 2147483648
@@ -248,7 +257,9 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
-  m <- .mdp(T, gamma); nS <- m$nS; nA <- m$nA
+  m <- .mdp(T, gamma)
+  nS <- m$nS
+  nA <- m$nA
   if (delta <= 0) stop("birl: delta must be positive")
   if (n_iter < 1) stop("birl: n_iter must be positive")
   burn <- if (is.null(burn)) n_iter %/% 2 else as.integer(burn)
@@ -258,7 +269,8 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
   R <- if (is.null(R0)) vapply(1:nS, function(i)
     grid((2 * rnd() - 1) * r_max), numeric(1)) else vapply(R0, grid, numeric(1))
   got <- policy_iteration(T, R, gamma)
-  pi <- got$policy; Q <- got$Q
+  pi <- got$policy
+  Q <- got$Q
   score <- function(Qm, Rv) {
     lp <- log_prior(Rv, prior, scale, r_max, J, H, NULL)
     if (is.infinite(lp) && lp < 0) return(lp)
@@ -266,7 +278,8 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
   }
   cur <- score(Q, R)
   samples <- matrix(0, n_iter, nS)
-  accepted <- 0L; repolicy <- 0L
+  accepted <- 0L
+  repolicy <- 0L
   for (it in seq_len(n_iter)) {
     s <- as.integer(rnd() * nS) + 1L
     if (s > nS) s <- nS
@@ -282,19 +295,25 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
     changed <- FALSE
     for (st_ in 1:nS) {
       if (Qp[st_, pi[st_]] < max(Qp[st_, ]) - 1e-12) {
-        changed <- TRUE; break
+        changed <- TRUE
+        break
       }
     }
     if (changed) {
       repolicy <- repolicy + 1L
       got2 <- policy_iteration(T, cand, gamma, pi)
-      newpi <- got2$policy; newQ <- got2$Q
+      newpi <- got2$policy
+      newQ <- got2$Q
     } else {
-      newpi <- pi; newQ <- Qp
+      newpi <- pi
+      newQ <- Qp
     }
     prop <- score(newQ, cand)
     if (prop > cur || log(max(rnd(), 1e-300)) < prop - cur) {
-      R <- cand; pi <- newpi; Q <- newQ; cur <- prop
+      R <- cand
+      pi <- newpi
+      Q <- newQ
+      cur <- prop
       accepted <- accepted + 1L
     }
     samples[it, ] <- R

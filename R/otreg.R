@@ -24,9 +24,11 @@
 #' @examples
 #' Otreg(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Otreg <- function(a, b, C, epsilon, max_iter = 200) {
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
   Cm <- as.matrix(C)
-  n <- length(aa); m <- length(bb)
+  n <- length(aa)
+  m <- length(bb)
   if (nrow(Cm) != n || ncol(Cm) != m)
     stop("cost matrix does not match the marginals")
   s <- .ot_sinkhorn(aa, bb, Cm, as.numeric(epsilon), max_iter)

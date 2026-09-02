@@ -26,7 +26,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Drspr(V, V)
 Drspr <- function(y, D, X = NULL, exposure = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D)
+  n <- length(yv)
   if (n == 0L) stop("Drspr: empty input, y has no observations")
   if (length(dv) != n) stop("Drspr: y and D must have the same length")
   ex <- if (is.null(exposure)) rep(0, n) else .s03vec(exposure)
@@ -39,12 +41,14 @@ Drspr <- function(y, D, X = NULL, exposure = NULL) {
   fitpair <- function(a, b) {
     if (!length(a) || !length(b) || length(a) + length(b) < 3L)
       return(c(NaN, NaN))
-    idx <- c(a, b); lab <- c(rep(1, length(a)), rep(0, length(b)))
+    idx <- c(a, b)
+    lab <- c(rep(1, length(a)), rep(0, length(b)))
     xm <- if (is.null(Xr)) NULL else Xr[idx, , drop = FALSE]
     f <- .s03drdid(yv[idx], lab, xm)
     c(f$tau, f$se)
   }
-  d1 <- fitpair(dirt, ctrl); s1 <- fitpair(spil, ctrl)
+  d1 <- fitpair(dirt, ctrl)
+  s1 <- fitpair(spil, ctrl)
   tot <- if (is.na(d1[1]) || is.na(s1[1])) NaN else d1[1] + s1[1]
   .t1_result(estimate = d1[1], att_direct = d1[1], att_spillover = s1[1],
              se_direct = d1[2], se_spillover = s1[2], total = tot,

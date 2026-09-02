@@ -21,14 +21,17 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Glivenko(V, V)
 Glivenko <- function(x, F) {
-  x <- .t1_vec(x); F <- .t1_vec(F); n <- length(x)
+  x <- .t1_vec(x)
+  F <- .t1_vec(F)
+  n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")
   if (length(F) != n) stop("x and F must have the same length")
   Fs <- F[order(x)]
   i <- seq_len(n)
   a <- i / n - Fs
   b <- Fs - (i - 1) / n
-  dp <- max(a); dm <- max(b)
+  dp <- max(a)
+  dm <- max(b)
   arg <- which.max(pmax(a, b))
   D <- max(dp, dm)
   .t1_result(statistic = D, d_plus = dp, d_minus = dm,

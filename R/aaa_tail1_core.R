@@ -79,8 +79,12 @@ NULL
 #' @return A matrix, from \code{matrix}.
 #' @export
 .t1_mat <- function(X) {
-  if (is.matrix(X)) return(matrix(as.numeric(X), nrow = nrow(X)))
-  if (is.data.frame(X)) return(as.matrix(X))
+  if (is.matrix(X)) {
+    return(matrix(as.numeric(X), nrow = nrow(X)))
+  }
+  if (is.data.frame(X)) {
+    return(as.matrix(X))
+  }
   matrix(as.numeric(X), ncol = 1L)
 }
 
@@ -123,8 +127,10 @@ NULL
   # column order: permuting that design to (3, 1, 2) moved the answer
   # from (0.55, 1.35, 0) to (1.35, -0.80, 0). The minimum-norm solution
   # is unique and permutation-invariant.
-  X <- as.matrix(X); y <- as.numeric(y)
-  n <- nrow(X); k <- ncol(X)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  n <- nrow(X)
+  k <- ncol(X)
   sv <- svd(X)
   eps <- .Machine$double.eps
   cut <- if (length(sv$d)) max(sv$d) * eps * max(n, k) else 0

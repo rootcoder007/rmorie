@@ -44,7 +44,8 @@
 morie_yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
   M <- as.matrix(marker_matrix)
   storage.mode(M) <- "double"
-  J <- nrow(M); p <- ncol(M)
+  J <- nrow(M)
+  p <- ncol(M)
   pi_ <- if (is.null(freq)) colSums(M) / (2 * J) else as.numeric(freq)
   var_ <- 2 * pi_ * (1 - pi_)
   keep <- var_ > 0

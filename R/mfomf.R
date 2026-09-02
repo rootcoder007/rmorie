@@ -35,16 +35,20 @@ Modelrl <- function(env, model = NULL, planner = "vi", n_states = NULL,
     if (nr) as.integer(max(pmax(rows[, 1], rows[, 4])) + 1) else 0L
   na <- if (!is.null(n_actions)) as.integer(n_actions) else
     if (nr) as.integer(max(rows[, 2]) + 1) else 0L
-  cnt <- matrix(0, ns, na); rsum <- matrix(0, ns, na)
+  cnt <- matrix(0, ns, na)
+  rsum <- matrix(0, ns, na)
   trans <- array(0, c(ns, na, ns))
   for (i in seq_len(nr)) {
-    s <- as.integer(rows[i, 1]) + 1L; a <- as.integer(rows[i, 2]) + 1L
-    rw <- rows[i, 3]; s2 <- as.integer(rows[i, 4]) + 1L
+    s <- as.integer(rows[i, 1]) + 1L
+    a <- as.integer(rows[i, 2]) + 1L
+    rw <- rows[i, 3]
+    s2 <- as.integer(rows[i, 4]) + 1L
     cnt[s, a] <- cnt[s, a] + 1
     rsum[s, a] <- rsum[s, a] + rw
     trans[s, a, s2] <- trans[s, a, s2] + 1
   }
-  V <- numeric(ns); sweeps <- 0L
+  V <- numeric(ns)
+  sweeps <- 0L
   for (it in seq_len(as.integer(max_iter))) {
     sweeps <- sweeps + 1L
     delta <- 0
@@ -67,14 +71,16 @@ Modelrl <- function(env, model = NULL, planner = "vi", n_states = NULL,
   }
   pol <- integer(ns)
   for (s in seq_len(ns)) {
-    best <- NULL; ba <- -1L
+    best <- NULL
+    ba <- -1L
     for (a in seq_len(na)) {
       if (cnt[s, a] <= 0) next
       q <- rsum[s, a] / cnt[s, a]
       acc <- 0
       for (s2 in seq_len(ns)) if (trans[s, a, s2] > 0) acc <- acc + (trans[s, a, s2] / cnt[s, a]) * V[s2]
       q <- q + as.numeric(gamma) * acc
-      if (is.null(best) || q > best) { best <- q; ba <- a - 1L }
+      if (is.null(best) || q > best) { best <- q
+      ba <- a - 1L }
     }
     pol[s] <- ba
   }

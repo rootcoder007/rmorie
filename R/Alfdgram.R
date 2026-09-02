@@ -27,19 +27,26 @@ Alfdgram <- function(z, w, bins = NULL, dtrue = NULL) {
   nb <- length(bins)
   ps <- array(0, c(n, n, nb))
   dd <- matrix(0, n, n)
-  for (i in seq_len(n)) for (j in seq_len(n)) {
-    sym <- as.numeric(z[i, j, ]) + as.numeric(z[j, i, ])
-    p <- alfSmax(alfLin(sym, w))
-    ps[i, j, ] <- p
-    dd[i, j] <- sum(p * bins)
+  for (i in seq_len(n)) {
+    for (j in seq_len(n)) {
+      sym <- as.numeric(z[i, j, ]) + as.numeric(z[j, i, ])
+      p <- alfSmax(alfLin(sym, w))
+      ps[i, j, ] <- p
+      dd[i, j] <- sum(p * bins)
+    }
   }
   loss <- NULL
   if (!is.null(dtrue)) {
     tot <- 0
-    for (i in seq_len(n)) for (j in seq_len(n))
-      tot <- tot + alfXent(alfOnehot(dtrue[i, j], bins), ps[i, j, ])
+    for (i in seq_len(n)) {
+      for (j in seq_len(n)) {
+        tot <- tot + alfXent(alfOnehot(dtrue[i, j], bins), ps[i, j, ])
+      }
+    }
     loss <- tot / (n * n)
   }
-  list(p = ps, dist = dd, loss = loss, estimate = mean(dd), n = n,
-       method = "AlphaFold distogram prediction")
+  list(
+    p = ps, dist = dd, loss = loss, estimate = mean(dd), n = n,
+    method = "AlphaFold distogram prediction"
+  )
 }

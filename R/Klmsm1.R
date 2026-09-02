@@ -28,7 +28,9 @@
 #' @examples
 #' Klmsm1(p = 0.5, q = 0.5, eps = 0.5)
 Klmsm1 <- function(p, q, eps) {
-  pv <- .s03vec(p); qv <- .s03vec(q); V <- length(pv)
+  pv <- .s03vec(p)
+  qv <- .s03vec(q)
+  V <- length(pv)
   if (V == 0L) stop("kl_molecular_smooth: p is empty")
   if (length(qv) != V) stop("kl_molecular_smooth: p and q have different lengths")
   if (any(c(pv, qv) < 0)) stop("kl_molecular_smooth: counts must be non-negative")
@@ -36,7 +38,8 @@ Klmsm1 <- function(p, q, eps) {
   if (e <= 0) stop("kl_molecular_smooth: eps must be positive")
   P <- (pv + e) / (sum(pv) + V * e)
   Q <- (qv + e) / (sum(qv) + V * e)
-  kl <- sum(P * log(P / Q)); rk <- sum(Q * log(Q / P))
+  kl <- sum(P * log(P / Q))
+  rk <- sum(Q * log(Q / P))
   .t1_result(estimate = kl, kl_pq = kl, kl_qp = rk, symmetric_kl = kl + rk,
              eps = e, vocabulary = V, zeros_p = sum(pv == 0),
              zeros_q = sum(qv == 0), mass_p = sum(pv), mass_q = sum(qv), n = V,

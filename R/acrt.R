@@ -31,13 +31,13 @@ Actorcrit <- function(env, actor = NULL, critic = NULL, rewards = NULL,
   R <- .s03vec(if (!is.null(rewards)) rewards else env)
   V <- .s03vec(if (!is.null(values)) values else if (!is.null(critic)) critic else numeric(0))
   Tn <- length(R)
-  G <- if (!is.null(grad_logpi)) .s03mat(grad_logpi) else
-    if (!is.null(actor)) .s03mat(actor) else matrix(1, Tn, 1)
+  G <- if (!is.null(grad_logpi)) .s03mat(grad_logpi) else if (!is.null(actor)) .s03mat(actor) else matrix(1, Tn, 1)
   Gv <- if (!is.null(grad_v)) .s03mat(grad_v) else matrix(1, Tn, 1)
   th <- if (!is.null(theta)) .s03vec(theta) else numeric(ncol(G))
   ww <- if (!is.null(w)) .s03vec(w) else numeric(ncol(Gv))
   g <- as.numeric(gamma)
-  deltas <- numeric(Tn); I <- 1
+  deltas <- numeric(Tn)
+  I <- 1
   for (t in seq_len(Tn)) {
     vt <- if (t <= length(V)) V[t] else 0
     vn <- if (t + 1L <= length(V)) V[t + 1L] else 0
@@ -47,7 +47,9 @@ Actorcrit <- function(env, actor = NULL, critic = NULL, rewards = NULL,
     for (j in seq_along(ww)) ww[j] <- ww[j] + as.numeric(alpha_w) * d * Gv[t, j]
     if (discount_actor) I <- I * g
   }
-  list(estimate = if (Tn) .s03mean(deltas) else NaN, deltas = deltas,
-       theta = th, w = ww, n = Tn,
-       method = "One-step actor-critic (Sutton and Barto 2018, eqs. 13.12-13.14)")
+  list(
+    estimate = if (Tn) .s03mean(deltas) else NaN, deltas = deltas,
+    theta = th, w = ww, n = Tn,
+    method = "One-step actor-critic (Sutton and Barto 2018, eqs. 13.12-13.14)"
+  )
 }

@@ -25,7 +25,8 @@
 #' Clus1(V)
 Clus1 <- function(Y, M = Inf, level = 0.95) {
   Y <- as.matrix(Y)
-  m <- nrow(Y); k <- ncol(Y)
+  m <- nrow(Y)
+  k <- ncol(Y)
   if (m < 2L) stop("at least two clusters are needed for a variance")
   if (k < 1L) stop("clusters must be non-empty")
   cm <- rowMeans(Y)

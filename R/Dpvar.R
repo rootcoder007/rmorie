@@ -49,9 +49,11 @@
 #'   Nissim, K. and Smith, A. (2006). TCC, LNCS 3876, 265-284.
 #' @export
 Dpvar <- function(x, a, b, epsilon, seed = 42L) {
-  xv <- .s03vec(x); n <- length(xv)
+  xv <- .s03vec(x)
+  n <- length(xv)
   if (n == 0L) stop("Dpvar: empty input, x has no observations")
-  a <- as.numeric(a); b <- as.numeric(b)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
   if (!(a < b)) stop("Dpvar: bounds must satisfy a < b")
   eps <- as.numeric(epsilon)
   if (!(eps > 0)) stop("Dpvar: epsilon must be strictly positive")

@@ -29,9 +29,12 @@
 #' @export
 Ovbnk <- function(beta_short, beta_long, R_short, R_long,
                   R_max = 1, delta = 1) {
-  bs <- as.numeric(beta_short); bl <- as.numeric(beta_long)
-  rs <- as.numeric(R_short); rl <- as.numeric(R_long)
-  rm_ <- as.numeric(R_max); d <- as.numeric(delta)
+  bs <- as.numeric(beta_short)
+  bl <- as.numeric(beta_long)
+  rs <- as.numeric(R_short)
+  rl <- as.numeric(R_long)
+  rm_ <- as.numeric(R_max)
+  d <- as.numeric(delta)
   if (!(rl > rs)) stop("Ovbnk: R_long must exceed R_short")
   if (rm_ < rl) stop("Ovbnk: R_max must be at least R_long")
   if (!(rs >= 0 && rs <= 1 && rl >= 0 && rl <= 1 && rm_ >= 0 && rm_ <= 1))
@@ -41,7 +44,8 @@ Ovbnk <- function(beta_short, beta_long, R_short, R_long,
   beta_star <- bl - bias
   denom <- (bs - bl) * (rm_ - rl)
   delta_star <- if (denom != 0) bl * (rl - rs) / denom else Inf
-  lo <- min(beta_star, bl); hi <- max(beta_star, bl)
+  lo <- min(beta_star, bl)
+  hi <- max(beta_star, bl)
   .t1_result(estimate = beta_star, beta_star = beta_star, bias = bias,
              delta_star = delta_star, bound_lower = lo, bound_upper = hi,
              sign_stable = if (lo * hi > 0) 1 else 0,

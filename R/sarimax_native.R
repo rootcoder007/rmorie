@@ -27,7 +27,9 @@ ROOT_TOL <- 1.001
 #' @export
 .filter_column <- function(w, ar, ma) {
   ss <- .sarima_state_space(ar, ma)
-  T <- ss$T; R <- ss$R; r <- ss$r
+  T <- ss$T
+  R <- ss$R
+  r <- ss$r
   P <- .sarima_initial_covariance(T, R, r)
   a <- rep(0.0, r)
   v_out <- numeric(0)
@@ -171,8 +173,12 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
     stop(sprintf("sarimax: method must be 'ml', 'uls' or 'css', got %s", method))
   }
   y <- as.numeric(y)
-  p <- as.integer(order[1]); d <- as.integer(order[2]); q <- as.integer(order[3])
-  P <- as.integer(seasonal_order[1]); D <- as.integer(seasonal_order[2]); Q <- as.integer(seasonal_order[3])
+  p <- as.integer(order[1])
+  d <- as.integer(order[2])
+  q <- as.integer(order[3])
+  P <- as.integer(seasonal_order[1])
+  D <- as.integer(seasonal_order[2])
+  Q <- as.integer(seasonal_order[3])
   s <- as.integer(s)
   cols <- .columns(X, length(y))
   if (is.null(include_constant)) include_constant <- (d + D) < 2
@@ -193,9 +199,12 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
     # order like (0,1,1)(0,1,1) estimated the wrong parameters
     # entirely. sarima_native.R already guards this; sarimax did not.
     i <- 0L
-    phi <- v[i + seq_len(p)]; i <- i + p
-    th  <- v[i + seq_len(q)]; i <- i + q
-    Ph  <- v[i + seq_len(P)]; i <- i + P
+    phi <- v[i + seq_len(p)]
+    i <- i + p
+    th  <- v[i + seq_len(q)]
+    i <- i + q
+    Ph  <- v[i + seq_len(P)]
+    i <- i + P
     Th  <- v[i + seq_len(Q)]
     list(phi = phi, th = th, Ph = Ph, Th = Th)
   }
@@ -224,7 +233,8 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
       res <- .sarima_minimize_nm(objective, xhat)
       cand <- as.numeric(res$x)
       val <- objective(cand)
-      if (val < best - 1e-11) { best <- val; xhat <- cand } else break
+      if (val < best - 1e-11) { best <- val
+      xhat <- cand } else break
     }
   }
   u <- unpack(xhat)
@@ -281,7 +291,8 @@ aic <- function(loglik, n_par) {
 #' @return A numeric value.
 #' @export
 aicc <- function(loglik, n_par, n) {
-  k <- as.integer(n_par); n <- as.integer(n)
+  k <- as.integer(n_par)
+  n <- as.integer(n)
   if (n - k - 1L <= 0L) return(Inf)
   aic(loglik, k) + 2.0 * k * (k + 1L) / (n - k - 1L)
 }
@@ -328,8 +339,12 @@ starting_models <- function(d, D, s) {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 neighbours <- function(order, seasonal_order, constant, s) {
-  p <- order[1]; d <- order[2]; q <- order[3]
-  P <- seasonal_order[1]; D <- seasonal_order[2]; Q <- seasonal_order[3]
+  p <- order[1]
+  d <- order[2]
+  q <- order[3]
+  P <- seasonal_order[1]
+  D <- seasonal_order[2]
+  Q <- seasonal_order[3]
   out <- list()
   deltas <- list(c(1, 0, 0, 0), c(-1, 0, 0, 0),
                  c(0, 1, 0, 0), c(0, -1, 0, 0),
@@ -338,8 +353,10 @@ neighbours <- function(order, seasonal_order, constant, s) {
                  c(1, 1, 0, 0), c(-1, -1, 0, 0),
                  c(0, 0, 1, 1), c(0, 0, -1, -1))
   for (d_ in deltas) {
-    np_ <- p + d_[1L]; nq <- q + d_[2L]
-    nP <- P + d_[3L]; nQ <- Q + d_[4L]
+    np_ <- p + d_[1L]
+    nq <- q + d_[2L]
+    nP <- P + d_[3L]
+    nQ <- Q + d_[4L]
     if (min(np_, nq, nP, nQ) < 0) next
     if (np_ > MAX_P || nq > MAX_Q) next
     if (nP > MAX_SEASONAL || nQ > MAX_SEASONAL) next
@@ -391,7 +408,9 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' @export
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
                        max_steps = 20) {
-  d <- as.integer(d); D <- as.integer(D); s <- as.integer(s)
+  d <- as.integer(d)
+  D <- as.integer(D)
+  s <- as.integer(s)
   visited <- new.env(hash = TRUE, parent = emptyenv())
   tried <- list()
   score <- function(order, seasonal, constant) {
@@ -426,7 +445,9 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
     if (steps > as.integer(max_steps)) break
     improved <- FALSE
     cur <- best[[1L]]
-    order <- best[[2L]]; seasonal <- best[[3L]]; constant <- best[[4L]]
+    order <- best[[2L]]
+    seasonal <- best[[3L]]
+    constant <- best[[4L]]
     for (nb in neighbours(order, seasonal, constant, s)) {
       r <- score(nb[[1L]], nb[[2L]], nb[[3L]])
       if (!is.null(r) && r$aic < cur$aic - 1e-8) {
@@ -438,7 +459,10 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
     if (!improved) break
   }
   .sarimax_state$searching <- FALSE
-  r <- best[[1L]]; order <- best[[2L]]; seasonal <- best[[3L]]; constant <- best[[4L]]
+  r <- best[[1L]]
+  order <- best[[2L]]
+  seasonal <- best[[3L]]
+  constant <- best[[4L]]
   final <- .try_fit(y, X, order, seasonal, s, constant, method)
   if (!is.null(final)) r <- final
   list(estimate = r$aic, aic = r$aic, fit = r,

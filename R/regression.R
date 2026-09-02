@@ -31,7 +31,9 @@ morie_ols <- function(y, X, add_intercept = TRUE) {
   # orders are accepted now, decided by which argument is rectangular.
   if (is.matrix(y) || is.data.frame(y)) {
     if (NCOL(y) > 1 && NCOL(X) == 1) {
-      tmp <- y; y <- X; X <- tmp
+      tmp <- y
+      y <- X
+      X <- tmp
     }
   }
   y <- as.numeric(y)
@@ -90,8 +92,11 @@ morie_ols <- function(y, X, add_intercept = TRUE) {
 #' fit <- morie_ols(y, X)
 #' dim(morie_robust_vcov(fit, kind = "HC1"))
 morie_robust_vcov <- function(fit, kind = "HC1") {
-  X <- fit$design; e <- fit$residuals
-  Ainv <- fit$XtX_inv; n <- fit$n; k <- fit$k
+  X <- fit$design
+  e <- fit$residuals
+  Ainv <- fit$XtX_inv
+  n <- fit$n
+  k <- fit$k
   h <- rowSums((X %*% Ainv) * X)
   om <- switch(toupper(kind),
                HC0 = e^2,
@@ -138,8 +143,11 @@ morie_robust_se <- function(fit, kind = "HC1") {
 #' FIT <- morie_ols(Y, X)
 #' morie_newey_west_vcov(FIT, lags = 3)
 morie_newey_west_vcov <- function(fit, lags = NULL) {
-  X <- fit$design; e <- fit$residuals
-  Ainv <- fit$XtX_inv; n <- fit$n; k <- fit$k
+  X <- fit$design
+  e <- fit$residuals
+  Ainv <- fit$XtX_inv
+  n <- fit$n
+  k <- fit$k
   if (is.null(lags)) lags <- floor(4 * (n / 100)^(2 / 9))
   u <- X * e
   S <- crossprod(u)

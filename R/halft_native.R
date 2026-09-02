@@ -125,9 +125,12 @@ morie_halft <- function(smiles = NULL, Vd = NULL, Cl = NULL,
   if (route == "two_compartment") {
     if (is.null(V1) || is.null(V2) || is.null(Q))
       stop("the two-compartment route needs V1, V2 and Q")
-    V1 <- as.numeric(V1); V2 <- as.numeric(V2); Q <- as.numeric(Q)
+    V1 <- as.numeric(V1)
+    V2 <- as.numeric(V2)
+    Q <- as.numeric(Q)
     r <- morie_halft_rates(V1, V2, CL, Q)
-    a <- r$alpha; b <- r$beta
+    a <- r$alpha
+    b <- r$beta
     vss <- if (is.null(Vd)) V1 + V2 else as.numeric(Vd)
     # MRT is the primitive and the effective half-life is ln(2) times
     # it. Writing the latter as LN2 * vss / CL instead groups the

@@ -37,7 +37,9 @@
 #' @examples
 #' Bsmed(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Bsmed <- function(x, m, y, B = 1000L, alpha = 0.05, seed = 1L) {
-  x <- as.numeric(x); m <- as.numeric(m); y <- as.numeric(y)
+  x <- as.numeric(x)
+  m <- as.numeric(m)
+  y <- as.numeric(y)
   n <- length(x)
   if (length(m) != n || length(y) != n) {
     stop("x, m, y must have equal length", call. = FALSE)

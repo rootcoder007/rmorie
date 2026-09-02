@@ -114,9 +114,13 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
                                 tau_floor = .VIT2LF_TAU_FLOOR) {
   if (!(mode %in% .VIT2LF_MODES))
     stop("mode must be one of ", paste(.VIT2LF_MODES, collapse = ", "))
-  q <- as.matrix(q); k <- as.matrix(k)
-  storage.mode(q) <- "double"; storage.mode(k) <- "double"
-  nq <- nrow(q); nk <- nrow(k); d <- ncol(q)
+  q <- as.matrix(q)
+  k <- as.matrix(k)
+  storage.mode(q) <- "double"
+  storage.mode(k) <- "double"
+  nq <- nrow(q)
+  nk <- nrow(k)
+  d <- ncol(q)
   if (ncol(k) != d)
     stop("queries and keys must share one head dimension")
   nn <- as.numeric(if (is.null(n)) nk else n)
@@ -165,7 +169,8 @@ morie_vit2lf_logits <- function(q, k, mode = "dot", tau = 1, bias = NULL,
 #' @return The attention weight matrix.
 #' @export
 morie_vit2lf_softmax <- function(logits, mask = NULL) {
-  nq <- nrow(logits); nk <- ncol(logits)
+  nq <- nrow(logits)
+  nk <- ncol(logits)
   out <- matrix(0, nq, nk)
   for (i in seq_len(nq)) {
     live <- if (is.null(mask)) seq_len(nk) else which(mask[i, ])
@@ -279,8 +284,11 @@ morie_vit2lf_relative_bias <- function(coords, table, window,
 morie_vit2lf <- function(q, k, v, mode = "logn", tau = 1, bias = NULL,
                          mask = NULL, n = NULL,
                          tau_floor = .VIT2LF_TAU_FLOOR) {
-  qq <- as.matrix(q); kk <- as.matrix(k); vv <- as.matrix(v)
-  storage.mode(qq) <- "double"; storage.mode(kk) <- "double"
+  qq <- as.matrix(q)
+  kk <- as.matrix(k)
+  vv <- as.matrix(v)
+  storage.mode(qq) <- "double"
+  storage.mode(kk) <- "double"
   storage.mode(vv) <- "double"
   if (!nrow(qq) || !nrow(kk) || !nrow(vv))
     stop("queries, keys and values must be non-empty")

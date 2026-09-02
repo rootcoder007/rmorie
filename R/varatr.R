@@ -70,7 +70,8 @@ Varatr <- function(y, alpha = 0.05, a_grid = NULL, b_grid = NULL) {
     ok <- TRUE
     for (t in seq_len(n)) {
       if (t > 1L) s2 <- om + a * e[t - 1L] * e[t - 1L] + b * s2
-      if (!(s2 > 0)) { ok <- FALSE; break }
+      if (!(s2 > 0)) { ok <- FALSE
+      break }
       ll <- ll + -0.5 * (log(2 * pi) + log(s2) + e[t] * e[t] / s2)
       path[t] <- s2
     }

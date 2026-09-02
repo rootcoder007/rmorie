@@ -23,7 +23,8 @@
 #' @examples
 #' Mlfit(y = 5L, X = 5L, V = 5L)
 Mlfit <- function(y, X, V) {
-  yv <- .t1_vec(y); n <- length(yv)
+  yv <- .t1_vec(y)
+  n <- length(yv)
   Xa <- as.matrix(X)
   if (nrow(Xa) != n) Xa <- t(Xa)
   if (nrow(Xa) != n) stop("X has the wrong number of rows for y")

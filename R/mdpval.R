@@ -10,7 +10,9 @@
 #' @keywords internal
 #' @noRd
 .w505_mdp_args <- function(P, R) {
-  Pm <- lapply(P, function(m) { m <- as.matrix(m); storage.mode(m) <- "double"; m })
+  Pm <- lapply(P, function(m) { m <- as.matrix(m)
+  storage.mode(m) <- "double"
+  m })
   A <- length(Pm)
   if (A < 1L || nrow(Pm[[1]]) != ncol(Pm[[1]])) {
     stop("P must be a list of square (S, S) matrices", call. = FALSE)
@@ -32,7 +34,8 @@
     }
     R <- Rsa
   } else {
-    R <- as.matrix(R); storage.mode(R) <- "double"
+    R <- as.matrix(R)
+    storage.mode(R) <- "double"
     if (!all(dim(R) == c(S, A))) stop("R must be (S, A) or a list of A (S, S)", call. = FALSE)
   }
   list(P = Pm, R = R, S = S, A = A)
@@ -73,11 +76,16 @@
 #' @export
 Mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000L, V0 = NULL) {
   ar <- .w505_mdp_args(P, R)
-  Pm <- ar$P; R <- ar$R; S <- ar$S; A <- ar$A
-  gamma <- as.numeric(gamma); tol <- as.numeric(tol)
+  Pm <- ar$P
+  R <- ar$R
+  S <- ar$S
+  A <- ar$A
+  gamma <- as.numeric(gamma)
+  tol <- as.numeric(tol)
   V <- numeric(S)
   if (!is.null(V0)) for (s in seq_len(S)) V[s] <- as.numeric(V0[s])
-  delta <- Inf; it <- 0L
+  delta <- Inf
+  it <- 0L
   while (it < max_iter) {
     it <- it + 1L
     delta <- 0

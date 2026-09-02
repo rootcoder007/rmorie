@@ -21,7 +21,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' L1med(V)
 L1med <- function(X, tol = NULL, max_iter = 200) {
-  A <- as.matrix(X); n <- nrow(A); d <- ncol(A)
+  A <- as.matrix(X)
+  n <- nrow(A)
+  d <- ncol(A)
   mu <- colSums(A) / n
   for (it in seq_len(as.integer(max_iter))) {
     dist <- sqrt(rowSums((A - matrix(mu, n, d, byrow = TRUE))^2))

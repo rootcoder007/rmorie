@@ -41,7 +41,8 @@ Optionshrl <- function(env, options = NULL, meta = NULL, rewards = NULL,
     beta <- .s03vec(options)
     kk <- length(R)
     for (t in seq_along(beta) - 1L) {
-      if (.s03vdc(t, 2L) < beta[t + 1L]) { kk <- t + 1L; break }
+      if (.s03vdc(t, 2L) < beta[t + 1L]) { kk <- t + 1L
+      break }
     }
   } else {
     kk <- length(R)

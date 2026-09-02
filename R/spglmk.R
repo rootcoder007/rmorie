@@ -31,8 +31,11 @@
 #' @export
 spglmk <- function(nu, Sigma_nu, sigma_0, X, x0, mu0, link_kind = "log",
                    beta = NULL) {
-  nu <- as.numeric(nu); S <- as.matrix(Sigma_nu)
-  s0 <- as.numeric(sigma_0); X <- as.matrix(X); x0 <- as.numeric(x0)
+  nu <- as.numeric(nu)
+  S <- as.matrix(Sigma_nu)
+  s0 <- as.numeric(sigma_0)
+  X <- as.matrix(X)
+  x0 <- as.numeric(x0)
   n <- length(nu)
   if (!all(dim(S) == c(n, n)) || length(s0) != n || nrow(X) != n) {
     stop("`nu`, `Sigma_nu`, `sigma_0` and `X` must agree on n", call. = FALSE)

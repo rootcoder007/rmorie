@@ -22,7 +22,8 @@
 #' Ppcheck(c(1, 2, 3), matrix(c(1, 2, 4, 0, 2, 3), 2, 3, byrow = TRUE))$p_value
 #' @export
 Ppcheck <- function(y, y_rep, statistic = "mean") {
-  v <- .s03vec(y); R <- .s03mat(y_rep)
+  v <- .s03vec(y)
+  R <- .s03mat(y_rep)
   f <- if (is.function(statistic)) statistic else switch(
     as.character(statistic),
     mean = function(z) .s03mean(z),

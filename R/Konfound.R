@@ -33,8 +33,11 @@
 #' @examples
 #' Konfound(est = 5L, se = 5L, n = 5L, threshold = 0.5)
 Konfound <- function(est, se, n, threshold, n_covariates = 0) {
-  est <- as.numeric(est); se <- as.numeric(se)
-  n <- as.integer(n); alpha <- as.numeric(threshold); k <- as.integer(n_covariates)
+  est <- as.numeric(est)
+  se <- as.numeric(se)
+  n <- as.integer(n)
+  alpha <- as.numeric(threshold)
+  k <- as.integer(n_covariates)
   if (se <= 0) stop("konfound: se must be positive")
   if (!(alpha > 0 && alpha < 1)) stop("konfound: threshold must be a significance level in (0, 1)")
   df <- n - k - 3L

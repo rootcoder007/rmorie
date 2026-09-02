@@ -34,13 +34,15 @@ Btnorm <- function(theta_hat, theta_b, alpha = 0.05) {
   bias <- m - t
   z <- .s03qnorm(1 - a / 2)
   centre <- t - bias
-  m2 <- 0; m3 <- 0
+  m2 <- 0
+  m3 <- 0
   for (x in v) {
     d <- x - m
     m2 <- m2 + d * d
     m3 <- m3 + d * d * d
   }
-  m2 <- m2 / n; m3 <- m3 / n
+  m2 <- m2 / n
+  m3 <- m3 / n
   skew <- if (m2 > 0) m3 / m2^1.5 else NA_real_
   list(lo = centre - z * se, hi = centre + z * se, estimate = 2 * z * se, bias = bias,
        se_b = se, centre = centre, skew = skew, z = z, B = n,

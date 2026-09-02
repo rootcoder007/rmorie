@@ -22,7 +22,9 @@
 #' @noRd
 morie_gaussian_variogram_model <- function(h, c0 = 0, c = 1, a = 1) {
   hs <- .expvar_lags(h)
-  c0 <- as.numeric(c0)[1L]; c <- as.numeric(c)[1L]; a <- as.numeric(a)[1L]
+  c0 <- as.numeric(c0)[1L]
+  c <- as.numeric(c)[1L]
+  a <- as.numeric(a)[1L]
   if (c0 < 0) stop("c0 (nugget) must be >= 0", call. = FALSE)
   if (c < 0) stop("c (partial sill) must be >= 0", call. = FALSE)
   if (!(a > 0)) stop("a (range parameter) must be > 0", call. = FALSE)

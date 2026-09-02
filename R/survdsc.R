@@ -23,11 +23,15 @@
 #' @export
 Disctime <- function(time_discrete, event, X = NULL, max_iter = 100,
                      tol = 1e-12, ridge = 1e-8) {
-  t <- as.integer(.s03vec(time_discrete)); e <- .s03vec(event); n <- length(t)
+  t <- as.integer(.s03vec(time_discrete))
+  e <- .s03vec(event)
+  n <- length(t)
   Xr <- if (!is.null(X)) .s03mat(X) else matrix(0, n, 0)
   p <- ncol(Xr)
-  ivals <- sort(unique(t)); Tn <- length(ivals)
-  rows <- list(); ys <- numeric(0)
+  ivals <- sort(unique(t))
+  Tn <- length(ivals)
+  rows <- list()
+  ys <- numeric(0)
   for (i in seq_len(n)) {
     for (j in seq_len(Tn)) {
       if (ivals[j] > t[i]) break
@@ -36,11 +40,15 @@ Disctime <- function(time_discrete, event, X = NULL, max_iter = 100,
       ys <- c(ys, if (ivals[j] == t[i] && e[i] > 0.5) 1 else 0)
     }
   }
-  m <- length(rows); q <- Tn + p
+  m <- length(rows)
+  q <- Tn + p
   Rm <- do.call(rbind, rows)
-  beta <- numeric(q); ll <- -Inf
+  beta <- numeric(q)
+  ll <- -Inf
   for (it in seq_len(as.integer(max_iter))) {
-    gr <- numeric(q); H <- matrix(0, q, q); ll <- 0
+    gr <- numeric(q)
+    H <- matrix(0, q, q)
+    ll <- 0
     for (r in seq_len(m)) {
       eta <- 0
       for (a in seq_len(q)) eta <- eta + Rm[r, a] * beta[a]

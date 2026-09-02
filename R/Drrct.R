@@ -27,7 +27,9 @@
 #' set.seed(1)
 #' r <- Drrct(y_obs = rnorm(10), y_rct = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drrct <- function(y_obs, y_rct, D, X = NULL, G = NULL) {
-  yp <- .s03vec(y_obs); ys <- .s03vec(y_rct); dv <- .s03vec(D)
+  yp <- .s03vec(y_obs)
+  ys <- .s03vec(y_rct)
+  dv <- .s03vec(D)
   n <- length(yp)
   if (n == 0L) stop("Drrct: empty input, y_obs has no observations")
   if (length(ys) != n || length(dv) != n)
@@ -35,11 +37,13 @@ Drrct <- function(y_obs, y_rct, D, X = NULL, G = NULL) {
   Z <- .s03design(X, n)
   W <- cbind(1, dv, Z[, -1L, drop = FALSE])
   if (is.null(G)) {
-    ie <- seq_len(n); io <- seq_len(n)
+    ie <- seq_len(n)
+    io <- seq_len(n)
   } else {
     gv <- .s03vec(G)
     if (length(gv) != n) stop("Drrct: G must have the same length as y_obs")
-    ie <- which(gv >= 0.5); io <- which(gv < 0.5)
+    ie <- which(gv >= 0.5)
+    io <- which(gv < 0.5)
     if (!length(ie) || !length(io))
       stop("Drrct: G must mark both an experimental and an observational subsample")
   }

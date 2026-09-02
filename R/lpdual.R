@@ -26,9 +26,12 @@
 #'   for the first published proof.
 #' @export
 Lpdual <- function(A, b, c, x = NULL, y = NULL) {
-  A <- as.matrix(A); m <- nrow(A); n <- ncol(A)
+  A <- as.matrix(A)
+  m <- nrow(A)
+  n <- ncol(A)
   if (m < 1L || n < 1L) stop("the constraint matrix must be non-empty")
-  b <- .t1_vec(b); c <- .t1_vec(c)
+  b <- .t1_vec(b)
+  c <- .t1_vec(c)
   if (length(b) != m) stop("b must have one entry per constraint")
   if (length(c) != n) stop("c must have one entry per variable")
   x <- if (is.null(x)) rep(0, n) else .t1_vec(x)
@@ -39,7 +42,9 @@ Lpdual <- function(A, b, c, x = NULL, y = NULL) {
   surp <- as.numeric(t(A) %*% y) - c
   pf <- as.numeric(all(slack >= -1e-9) && all(x >= -1e-9))
   df <- as.numeric(all(surp >= -1e-9) && all(y >= -1e-9))
-  po <- sum(c * x); do_ <- sum(b * y); gap <- do_ - po
+  po <- sum(c * x)
+  do_ <- sum(b * y)
+  gap <- do_ - po
   .t1_result(dual_A = t(A), dual_b = c, dual_c = b,
              primal_objective = po, dual_objective = do_, gap = gap,
              primal_feasible = pf, dual_feasible = df,

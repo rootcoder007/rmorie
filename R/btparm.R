@@ -64,6 +64,7 @@ Btparm <- function(theta_hat, rvs_fn = NULL, stat = NULL, B = 200, n = NULL,
 
 #' @noRd
 .btparm_normal <- function(theta, n, g) {
-  mu <- as.numeric(theta[1]); sd <- as.numeric(theta[2])
+  mu <- as.numeric(theta[1])
+  sd <- as.numeric(theta[2])
   vapply(seq_len(as.integer(n)), function(i) mu + sd * g$norm(), 0)
 }

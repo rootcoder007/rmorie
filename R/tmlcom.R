@@ -28,11 +28,15 @@
 #'   combination is documented here as this package's own.
 #' @export
 Comptml <- function(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95) {
-  Yc <- as.matrix(Yc); n <- nrow(Yc); D <- ncol(Yc)
+  Yc <- as.matrix(Yc)
+  n <- nrow(Yc)
+  D <- ncol(Yc)
   if (n < 2L) stop("at least two observations are required")
   if (D < 2L) stop("a composition needs at least two parts")
   if (any(Yc <= 0)) stop("compositions must be strictly positive")
-  A <- .t1_vec(A); Q1 <- as.matrix(Q1); Q0 <- as.matrix(Q0)
+  A <- .t1_vec(A)
+  Q1 <- as.matrix(Q1)
+  Q0 <- as.matrix(Q0)
   g1W <- .t1_vec(g1W)
   if (length(A) != n || length(g1W) != n || nrow(Q1) != n || nrow(Q0) != n)
     stop("every argument must have one entry per observation")
@@ -45,7 +49,8 @@ Comptml <- function(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95) {
   eff <- ses <- lo <- hi <- numeric(D)
   for (j in seq_len(D)) {
     col <- Z[, j]
-    a <- min(c(col, Q1[, j], Q0[, j])); b <- max(c(col, Q1[, j], Q0[, j]))
+    a <- min(c(col, Q1[, j], Q0[, j]))
+    b <- max(c(col, Q1[, j], Q0[, j]))
     rng <- b - a
     if (rng <= 0) stop("a clr coordinate is constant; no effect to target")
     Ys <- (col - a) / rng
@@ -57,7 +62,10 @@ Comptml <- function(Yc, A, Q1, Q0, g1W, gbound = 0.025, level = 0.95) {
     ic <- (cv$ic1 - cv$ic0) * rng
     e <- (cv$mu1 - cv$mu0) * rng
     s <- sqrt(stats::var(ic) / n)
-    eff[j] <- e; ses[j] <- s; lo[j] <- e - z * s; hi[j] <- e + z * s
+    eff[j] <- e
+    ses[j] <- s
+    lo[j] <- e - z * s
+    hi[j] <- e + z * s
   }
   mean_e <- mean(eff)
   eff <- eff - mean_e

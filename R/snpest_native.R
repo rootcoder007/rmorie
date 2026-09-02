@@ -108,7 +108,10 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
     an <- a0 + 0.5 * n
     bn <- b0 + 0.5 * sse + 0.5 * kappa0 * n * (ybar - m0) * (ybar - m0) / kn
   } else {
-    kn <- kappa0; mn <- m0; an <- a0; bn <- b0
+    kn <- kappa0
+    mn <- m0
+    an <- a0
+    bn <- b0
   }
   df <- 2 * an
   scale2 <- bn * (kn + 1) / (an * kn)
@@ -210,7 +213,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
     mean_ <- .w3_csum(ys) / Tn
     var_ <- .w3_csum((ys - mean_) * (ys - mean_)) / (Tn - 1)
   } else {
-    mean_ <- 0; var_ <- 1
+    mean_ <- 0
+    var_ <- 1
   }
   if (is.null(m0)) m0 <- mean_
   if (is.null(b0)) b0 <- if (a0 > 1) var_ * (a0 - 1) else var_
@@ -249,7 +253,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
         pick <- K
         for (j in seq_len(K + 1L)) {
           acc <- acc + probs[j]
-          if (u <= acc) { pick <- j - 1L; break }
+          if (u <= acc) { pick <- j - 1L
+          break }
         }
         incr[p] <- norm - log(alpha + (t - 1))
       } else {
@@ -262,7 +267,8 @@ morie_snpest <- function(y_stream, alpha = 1, n_particles = 100L,
         if (K > 0L)
           for (j in seq_len(K)) {
             acc <- acc + cl[[j]][1]
-            if (u <= acc) { pick <- j - 1L; break }
+            if (u <= acc) { pick <- j - 1L
+            break }
           }
         incr[p] <- lp[pick + 1L] -
           log(if (pick < K) cl[[pick + 1L]][1] else alpha)

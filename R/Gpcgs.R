@@ -43,7 +43,8 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
   if (any(!(yv %in% c(0L, 1L)))) stop("gp_classification_svgp: labels must be 0 or 1")
   m <- as.integer(M)
   if (m < 1L || m > n) stop("gp_classification_svgp: M must lie between 1 and n")
-  ell <- as.numeric(lengthscale); var <- as.numeric(variance)
+  ell <- as.numeric(lengthscale)
+  var <- as.numeric(variance)
   if (ell <= 0 || var <= 0) stop("gp_classification_svgp: lengthscale and variance must be positive")
   kf <- function(P, Q) {
     o <- matrix(0, nrow(P), nrow(Q))
@@ -55,7 +56,8 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
     B <- matrix(0, nn, nn)
     if (nn > 1L) for (i in seq_len(nn - 1L)) {
       v <- sqrt(i / 2)
-      B[i, i + 1L] <- v; B[i + 1L, i] <- v
+      B[i, i + 1L] <- v
+      B[i + 1L, i] <- v
     }
     e <- .s03jacobi(B)
     list(x = e$values, w = sqrt(pi) * e$vectors[1, ]^2)
@@ -69,8 +71,10 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
   Lp <- .s03chol(Kmm)
   q <- gh(as.integer(nodes))
   tri <- function(v) {
-    L <- matrix(0, m, m); t <- 1L
-    for (i in seq_len(m)) for (j in seq_len(i)) { L[i, j] <- v[t]; t <- t + 1L }
+    L <- matrix(0, m, m)
+    t <- 1L
+    for (i in seq_len(m)) for (j in seq_len(i)) { L[i, j] <- v[t]
+    t <- t + 1L }
     L
   }
   bound <- function(theta) {
@@ -99,13 +103,17 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
     list(b = tot - kl, kl = kl)
   }
   theta <- c(rep(0, m), unlist(lapply(seq_len(m), function(i) Lp[i, seq_len(i)])))
-  path <- numeric(0); h <- 1e-5
+  path <- numeric(0)
+  h <- 1e-5
   for (k in seq_len(as.integer(iters))) {
     b0 <- bound(theta)$b
     path <- c(path, b0)
     g <- numeric(length(theta))
     for (t in seq_along(theta)) {
-      tp <- theta; tm <- theta; tp[t] <- tp[t] + h; tm[t] <- tm[t] - h
+      tp <- theta
+      tm <- theta
+      tp[t] <- tp[t] + h
+      tm[t] <- tm[t] - h
       g[t] <- (bound(tp)$b - bound(tm)$b) / (2 * h)
     }
     theta <- theta + as.numeric(step) * g
@@ -117,7 +125,8 @@ Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
   S <- L %*% t(L)
   Xs <- if (is.null(X_test)) A else .s03mat(X_test)
   Ksm <- kf(Xs, Z)
-  p <- numeric(nrow(Xs)); mus <- numeric(nrow(Xs))
+  p <- numeric(nrow(Xs))
+  mus <- numeric(nrow(Xs))
   for (j in seq_len(nrow(Xs))) {
     a <- .s03cholsolve(Kmm, Ksm[j, ])
     mj <- sum(a * mu_u)

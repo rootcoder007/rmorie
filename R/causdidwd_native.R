@@ -199,14 +199,16 @@ morie_two_way_mundlak <- function(Y, unit, period, X) {
     if (is.null(map_t[[key_t]])) map_t[[key_t]] <- integer(0)
     map_t[[key_t]] <- c(map_t[[key_t]], i)
   }
-  ubar <- vector("list", length(map_u)); names(ubar) <- names(map_u)
+  ubar <- vector("list", length(map_u))
+  names(ubar) <- names(map_u)
   for (g in names(map_u)) {
     idx <- map_u[[g]]
     s <- numeric(px)
     for (i in idx) for (j in seq_len(px)) s[j] <- s[j] + Xm[i, j]
     ubar[[g]] <- s / length(idx)
   }
-  tbar <- vector("list", length(map_t)); names(tbar) <- names(map_t)
+  tbar <- vector("list", length(map_t))
+  names(tbar) <- names(map_t)
   for (g in names(map_t)) {
     idx <- map_t[[g]]
     s <- numeric(px)

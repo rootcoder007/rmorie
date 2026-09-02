@@ -34,7 +34,8 @@
 #' Asorxx(A, c("x", "x", "y", "y"))$r
 #' @export
 Asorxx <- function(G, attribute) {
-  A <- as.matrix(G); storage.mode(A) <- "double"
+  A <- as.matrix(G)
+  storage.mode(A) <- "double"
   n <- nrow(A)
   if (n == 0L || length(A) == 0L) stop("assortativity: the graph is empty")
   if (ncol(A) != n) stop("assortativity: the adjacency matrix is not square")
@@ -51,7 +52,8 @@ Asorxx <- function(G, attribute) {
       w <- A[i, j]
       if (w == 0) next
       if (w < 0) stop("assortativity: negative edge weight")
-      ti <- match(att[i], types); tj <- match(att[j], types)
+      ti <- match(att[i], types)
+      tj <- match(att[j], types)
       e[ti, tj] <- e[ti, tj] + 0.5 * w
       e[tj, ti] <- e[tj, ti] + 0.5 * w
       tot <- tot + w
@@ -59,11 +61,15 @@ Asorxx <- function(G, attribute) {
   }
   if (tot <= 0) stop("assortativity: the graph has no edges")
   e <- e / tot
-  a <- numeric(T); b <- numeric(T)
+  a <- numeric(T)
+  b <- numeric(T)
   for (i in seq_len(T)) {
-    sa <- 0; sb <- 0
-    for (j in seq_len(T)) { sa <- sa + e[i, j]; sb <- sb + e[j, i] }
-    a[i] <- sa; b[i] <- sb
+    sa <- 0
+    sb <- 0
+    for (j in seq_len(T)) { sa <- sa + e[i, j]
+    sb <- sb + e[j, i] }
+    a[i] <- sa
+    b[i] <- sb
   }
   tr <- 0
   for (i in seq_len(T)) tr <- tr + e[i, i]

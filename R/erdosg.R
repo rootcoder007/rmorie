@@ -34,31 +34,39 @@
 Erdosg <- function(n, p) {
   PR <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
   .uu <- function(k) .s03vdc(k %/% 12L + 1L, PR[(k %% 12L) + 1L])
-  n <- as.integer(n); p <- as.numeric(p)
+  n <- as.integer(n)
+  p <- as.numeric(p)
   if (n < 1L) stop("n must be positive")
   if (!(p >= 0 && p <= 1)) stop("p must lie in [0, 1]")
   m <- (n * (n - 1L)) %/% 2L
   adj <- matrix(0L, n, n)
-  k <- 0L; edges <- 0L
+  k <- 0L
+  edges <- 0L
   if (n > 1L) for (i in seq_len(n)) {
     if (i < n) for (j in (i + 1L):n) {
       if (.uu(k) < p) {
-        adj[i, j] <- 1L; adj[j, i] <- 1L; edges <- edges + 1L
+        adj[i, j] <- 1L
+        adj[j, i] <- 1L
+        edges <- edges + 1L
       }
       k <- k + 1L
     }
   }
   deg <- rowSums(adj)
-  seen <- rep(FALSE, n); comps <- integer(0)
+  seen <- rep(FALSE, n)
+  comps <- integer(0)
   for (s in seq_len(n)) {
     if (seen[s]) next
     seen[s] <- TRUE
-    q <- s; size <- 0L
+    q <- s
+    size <- 0L
     while (length(q)) {
-      v <- q[1]; q <- q[-1]
+      v <- q[1]
+      q <- q[-1]
       size <- size + 1L
       for (w in seq_len(n)) if (adj[v, w] == 1L && !seen[w]) {
-        seen[w] <- TRUE; q <- c(q, w)
+        seen[w] <- TRUE
+        q <- c(q, w)
       }
     }
     comps <- c(comps, size)

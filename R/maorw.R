@@ -21,8 +21,10 @@
 #'   8(2):157-159. \doi{10.2307/1164923}.
 #' @export
 Maorw <- function(d_obs, d_crit, d_filldraw, k) {
-  do <- as.numeric(d_obs); dc <- as.numeric(d_crit)
-  df <- as.numeric(d_filldraw); kk <- as.numeric(k)
+  do <- as.numeric(d_obs)
+  dc <- as.numeric(d_crit)
+  df <- as.numeric(d_filldraw)
+  kk <- as.numeric(k)
   if (kk < 1) stop("k must be at least one")
   if (abs(dc - df) < 1e-15) stop("d_crit and d_filldraw must differ")
   n <- kk * (do - dc) / (dc - df)

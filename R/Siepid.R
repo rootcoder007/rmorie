@@ -38,7 +38,9 @@ Siepid <- function(G, beta, initial, t_max = 20, dt = 0.01) {
   p <- .s03vec(initial)
   if (length(p) != n) stop("si_epidemic: initial must have one entry per node")
   if (any(p < 0) || any(p > 1)) stop("si_epidemic: initial probabilities must lie in [0, 1]")
-  beta <- as.numeric(beta); t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  beta <- as.numeric(beta)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (beta < 0) stop("si_epidemic: beta must be non-negative")
   if (dt <= 0 || t_max < 0) stop("si_epidemic: need dt > 0 and t_max >= 0")
 

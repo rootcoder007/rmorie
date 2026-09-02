@@ -23,18 +23,25 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ssintc(V, V)
 Ssintc <- function(L, R, event = NULL, n_iter = 200) {
-  Lv <- as.numeric(L); Rv <- as.numeric(R); n <- length(Lv)
+  Lv <- as.numeric(L)
+  Rv <- as.numeric(R)
+  n <- length(Lv)
   lefts <- sort(unique(Lv))
   rights <- sort(unique(Rv[is.finite(Rv)]))
   both <- c(lefts, rights)
-  qs <- numeric(0); rs <- numeric(0)
+  qs <- numeric(0)
+  rs <- numeric(0)
   for (q in lefts) for (r in rights) {
-    if (q < r && !any(both > q & both < r)) { qs <- c(qs, q); rs <- c(rs, r) }
+    if (q < r && !any(both > q & both < r)) { qs <- c(qs, q)
+    rs <- c(rs, r) }
   }
   key <- paste(qs, rs)
   keep <- !duplicated(key)
-  qs <- qs[keep]; rs <- rs[keep]
-  o <- order(qs, rs); qs <- qs[o]; rs <- rs[o]
+  qs <- qs[keep]
+  rs <- rs[keep]
+  o <- order(qs, rs)
+  qs <- qs[o]
+  rs <- rs[o]
   m <- length(qs)
   if (m == 0L) {
     return(.t1_result(estimate = NaN, p = numeric(0), surv = numeric(0),

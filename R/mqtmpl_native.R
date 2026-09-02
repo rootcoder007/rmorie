@@ -129,7 +129,8 @@ morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
     }
     post <- matrix(0, m, 2)
     for (j in seq_len(m)) {
-      p0 <- f[j, 1] * b[j, 1]; p1 <- f[j, 2] * b[j, 2]
+      p0 <- f[j, 1] * b[j, 1]
+      p1 <- f[j, 2] * b[j, 2]
       post[j, ] <- c(p0 / (p0 + p1), p1 / (p0 + p1))
     }
     out[[length(out) + 1L]] <- post
@@ -148,7 +149,8 @@ morie_mqtmpl_hmm_genotype_probabilities <- function(genotypes, positions,
 morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
                                            n_imp = 16, error_rate = 0,
                                            seed = 0) {
-  m <- length(positions); n <- length(genotypes)
+  m <- length(positions)
+  n <- length(genotypes)
   e <- .ghc_rng(seed)
   post <- morie_mqtmpl_hmm_genotype_probabilities(genotypes, positions,
                                                    error_rate)
@@ -171,7 +173,8 @@ morie_mqtmpl_sample_genotypes <- function(genotypes, positions, grid,
       for (gi in seq_along(grid)) {
         gpos <- grid[gi]
         j <- max(which(as.numeric(positions) <= gpos + 1e-12))
-        if (j == m) { row[gi] <- states[j]; next }
+        if (j == m) { row[gi] <- states[j]
+        next }
         d1 <- max(gpos - as.numeric(positions[j]), 0)
         d2 <- max(as.numeric(positions[j + 1L]) - gpos, 0)
         pr <- .ghc_geno_prob(states[j], states[j + 1L],
@@ -198,7 +201,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   if (n != length(genotype_column))
     stop("mqtmpl: one genotype per phenotype")
   g <- as.numeric(genotype_column)
-  my <- mean(y); mg <- mean(g)
+  my <- mean(y)
+  mg <- mean(g)
   sgg <- sum((g - mg)^2)
   if (sgg <= 0) {
     rss <- sum((y - my)^2)
@@ -256,7 +260,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 #' @noRd
 .ghc_mqtmpl_single_marker <- function(y, g) {
   n <- length(y)
-  my <- mean(y); mg <- mean(g)
+  my <- mean(y)
+  mg <- mean(g)
   sgg <- sum((g - mg)^2)
   rss0 <- sum((y - my)^2)
   if (sgg <= 0) return(list(lod = 0))
@@ -278,7 +283,8 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 # Broman et al. (2003) scanone(method = "em") computes.
 .ghc_mqtmpl_cim_em <- function(y, left, right, r_left, r_right, cofactors = list(),
                      max_iter = 200L, tol = 1e-10) {
-  n <- length(y); y <- as.numeric(y)
+  n <- length(y)
+  y <- as.numeric(y)
   cof <- lapply(cofactors, as.numeric)
   gL <- vapply(seq_len(n), function(i) if (is.na(left[i]))  0L else as.integer(left[i]),  integer(1))
   gR <- vapply(seq_len(n), function(i) if (is.na(right[i])) 0L else as.integer(right[i]), integer(1))
@@ -297,25 +303,36 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
   my <- sum(y) / n
   beta <- c(my, 0.1 * (max(y) - min(y) + 1e-12), rep(0, length(cof)))
   s2 <- sum((y - my)^2) / n
-  history <- numeric(0); post <- rep(0.5, n)
+  history <- numeric(0)
+  post <- rep(0.5, n)
   cofmat <- if (length(cof)) do.call(cbind, cof) else matrix(0, n, 0)
-  wls <- function(X, yy, w) { A <- crossprod(X * w, X); b <- crossprod(X * w, yy); as.numeric(solve(A, b)) }
+  wls <- function(X, yy, w) { A <- crossprod(X * w, X)
+  b <- crossprod(X * w, yy)
+  as.numeric(solve(A, b)) }
   for (iter in seq_len(as.integer(max_iter))) {
     base <- beta[1] + if (length(cof)) as.numeric(cofmat %*% beta[-(1:2)]) else 0
-    m0 <- base; m1 <- base + beta[2]
-    d0 <- exp(-((y - m0)^2) / (2 * s2)); d1 <- exp(-((y - m1)^2) / (2 * s2))
-    w0 <- G[, 1] * d0; w1 <- G[, 2] * d1; tot <- w0 + w1
+    m0 <- base
+    m1 <- base + beta[2]
+    d0 <- exp(-((y - m0)^2) / (2 * s2))
+    d1 <- exp(-((y - m1)^2) / (2 * s2))
+    w0 <- G[, 1] * d0
+    w1 <- G[, 2] * d1
+    tot <- w0 + w1
     if (any(tot <= 0)) stop("mqtmpl: the mixture vanished at individual ", which(tot <= 0)[1])
     post <- w1 / tot
     ll <- sum(log(tot / sqrt(2 * pi * s2)))
     history <- c(history, ll)
     if (length(history) > 1 && abs(history[length(history)] - history[length(history) - 1]) < tol) break
-    X <- rbind(cbind(1, 0, cofmat), cbind(1, 1, cofmat)); Y <- c(y, y); W <- c(1 - post, post)
+    X <- rbind(cbind(1, 0, cofmat), cbind(1, 1, cofmat))
+    Y <- c(y, y)
+    W <- c(1 - post, post)
     beta <- wls(X, Y, W)
     s2 <- sum(W * (Y - as.numeric(X %*% beta))^2) / n
   }
-  X0 <- cbind(1, cofmat); b0 <- wls(X0, y, rep(1, n))
-  r0 <- y - as.numeric(X0 %*% b0); s0 <- sum(r0^2) / n
+  X0 <- cbind(1, cofmat)
+  b0 <- wls(X0, y, rep(1, n))
+  r0 <- y - as.numeric(X0 %*% b0)
+  s0 <- sum(r0^2) / n
   ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
   lod <- (history[length(history)] - ll0) * (1 / log(10))
   list(lod = lod, b0 = beta[1], b = beta[2], cofactor_coefficients = beta[-(1:2)],
@@ -324,8 +341,11 @@ morie_mqtmpl_imputation_weights <- function(y, genotype_column,
 }
 
 .ghc_mqtmpl_scan_em <- function(y, markers, positions, step, cof) {
-  n <- length(y); m <- length(markers)
-  out_pos <- c(); out_lod <- c(); fits <- list()
+  n <- length(y)
+  m <- length(markers)
+  out_pos <- c()
+  out_lod <- c()
+  fits <- list()
   for (j in seq_len(m - 1L)) {
     span <- as.numeric(positions[j + 1L]) - as.numeric(positions[j])
     d <- 0
@@ -381,7 +401,8 @@ morie_mqtmpl_scanone <- function(y, markers, positions,
                                 if (length(covariates) > 0L) 64L else 64L,
                                 error_rate, 0))
   if (method == "mr") {
-    out_pos <- c(); out_lod <- c()
+    out_pos <- c()
+    out_lod <- c()
     for (j in seq_along(markers)) {
       typed <- which(!vapply(seq_along(y),
                               function(i) is.na(markers[[j]][i]),

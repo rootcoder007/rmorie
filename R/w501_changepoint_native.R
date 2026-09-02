@@ -67,11 +67,13 @@
   Rset <- c(0L)
   K <- 0
   for (t in seq(min_seglen, n)) {
-    best <- Inf; barg <- 0L
+    best <- Inf
+    barg <- 0L
     for (tau in Rset) {
       if (t - tau < min_seglen) next
       v <- F[tau + 1] + .w501_seg_cost(tb, tau, t, cost) + beta
-      if (v < best) { best <- v; barg <- tau }
+      if (v < best) { best <- v
+      barg <- tau }
     }
     F[t + 1] <- best
     cp[t + 1] <- barg
@@ -204,12 +206,14 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   if (n < 2L * min_seglen) stop("series too short", call. = FALSE)
   tb <- .w501_cost_tables(x)
   best_split <- function(a, b) {
-    best_gain <- -Inf; best_tau <- -1L
+    best_gain <- -Inf
+    best_tau <- -1L
     base <- .w501_seg_cost(tb, a, b, cost)
     for (tau in seq(a + min_seglen, b - min_seglen)) {
       g <- base - (.w501_seg_cost(tb, a, tau, cost) +
                      .w501_seg_cost(tb, tau, b, cost)) - penalty
-      if (g > best_gain) { best_gain <- g; best_tau <- tau }
+      if (g > best_gain) { best_gain <- g
+      best_tau <- tau }
     }
     list(tau = best_tau, gain = best_gain)
   }
@@ -219,7 +223,8 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   while (length(ord) < K) {
     cand <- NULL
     for (si in seq_along(segments)) {
-      a <- segments[[si]][1]; b <- segments[[si]][2]
+      a <- segments[[si]][1]
+      b <- segments[[si]][2]
       if (b - a < 2L * min_seglen) next
       sp <- best_split(a, b)
       if (sp$tau > 0L && (is.null(cand) || sp$gain > cand$gain)) {
@@ -343,11 +348,15 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #' @return A list with \code{q}, \code{tau}, \code{kappa}.
 #' @export
 .w501_best_split <- function(P, a, b, min_size) {
-  best_q <- -Inf; best_tau <- -1L; best_kappa <- -1L
+  best_q <- -Inf
+  best_tau <- -1L
+  best_kappa <- -1L
   for (tau in seq(a + min_size, b - min_size)) {
     for (kappa in seq(tau + min_size, b)) {
       q <- .w501_qhat(P, a, tau, kappa)
-      if (q > best_q) { best_q <- q; best_tau <- tau; best_kappa <- kappa }
+      if (q > best_q) { best_q <- q
+      best_tau <- tau
+      best_kappa <- kappa }
     }
   }
   list(q = best_q, tau = best_tau, kappa = best_kappa)
@@ -367,7 +376,8 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   # Fisher-Yates within each 0-based half-open cluster, mirroring the
   # Python arm swap-for-swap.
   for (cl in clusters) {
-    a <- cl[1]; b <- cl[2]
+    a <- cl[1]
+    b <- cl[2]
     L <- b - a
     if (L > 1L) {
       for (i in seq(L - 1L, 1L)) {
@@ -432,11 +442,13 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
     clusters <- lapply(seq_len(length(st) + 1L), function(i) {
       c(c(0L, st)[i], c(st, n)[i])
     })
-    best_q <- -Inf; best_tau <- -1L
+    best_q <- -Inf
+    best_tau <- -1L
     for (cl in clusters) {
       if (cl[2] - cl[1] >= 2L * min_size) {
         sp <- .w501_best_split(P, cl[1], cl[2], min_size)
-        if (sp$q > best_q) { best_q <- sp$q; best_tau <- sp$tau }
+        if (sp$q > best_q) { best_q <- sp$q
+        best_tau <- sp$tau }
       }
     }
     if (best_tau < 0L) break
@@ -517,7 +529,8 @@ KernelCusum <- function(x, kernel = "gaussian", threshold = NULL,
   n <- nrow(Z)
   if (n < 4L) stop("need n >= 4", call. = FALSE)
   if (is.null(kmax)) kmax <- n - 2L
-  kmin <- as.integer(kmin); kmax <- as.integer(kmax)
+  kmin <- as.integer(kmin)
+  kmax <- as.integer(kmax)
   if (!(kmin > 1L && kmin <= kmax && kmax < n)) {
     stop("need 1 < kmin <= kmax < n", call. = FALSE)
   }
@@ -543,8 +556,10 @@ KernelCusum <- function(x, kernel = "gaussian", threshold = NULL,
   r <- length(keep)
   Cm <- t(eg$vectors[, keep, drop = FALSE] *
             rep(sqrt(eg$values[keep]), each = n))
-  Ts <- numeric(0); kf_all <- numeric(0)
-  d1_all <- numeric(0); d2_all <- numeric(0)
+  Ts <- numeric(0)
+  kf_all <- numeric(0)
+  d1_all <- numeric(0)
+  d2_all <- numeric(0)
   for (k in seq(kmin, kmax)) {
     mu1 <- rowMeans(Cm[, 1:k, drop = FALSE])
     mu2 <- rowMeans(Cm[, (k + 1):n, drop = FALSE])

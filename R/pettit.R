@@ -18,7 +18,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pettitt(V)
 Pettitt <- function(x) {
-  x <- .t4_vec(x); n <- length(x)
+  x <- .t4_vec(x)
+  n <- length(x)
   if (n < 2) stop("need at least 2 observations")
   r <- .t4_ranks(x)
   k <- seq_len(n)

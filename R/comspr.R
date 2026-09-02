@@ -31,12 +31,14 @@
 #' diag(W) <- 0
 #' Specclus(W, k = 2)
 Specclus <- function(W, k = 2, normalized = TRUE, max_iter = 50) {
-  W <- as.matrix(W); n <- nrow(W)
+  W <- as.matrix(W)
+  n <- nrow(W)
   if (ncol(W) != n) stop("W must be square")
   k <- as.integer(k)
   if (k < 2L || k > n) stop("k must satisfy 2 <= k <= n")
   d <- rowSums(W)
-  L <- -W; diag(L) <- d - diag(W)
+  L <- -W
+  diag(L) <- d - diag(W)
   if (isTRUE(normalized)) {
     s <- ifelse(d == 0, 0, 1 / sqrt(ifelse(d == 0, 1, d)))
     L <- diag(s, n) %*% L %*% diag(s, n)
@@ -50,13 +52,15 @@ Specclus <- function(W, k = 2, normalized = TRUE, max_iter = 50) {
     U[nr > 0, ] <- U[nr > 0, , drop = FALSE] / nr[nr > 0]
   }
   cen <- U[seq_len(k), , drop = FALSE]
-  lab <- integer(n); it <- 0L
+  lab <- integer(n)
+  it <- 0L
   for (it in seq_len(as.integer(max_iter))) {
     moved <- FALSE
     for (i in seq_len(n)) {
       dd <- rowSums((cen - matrix(U[i, ], k, k, byrow = TRUE))^2)
       best <- which.min(dd)
-      if (lab[i] != best) { lab[i] <- best; moved <- TRUE }
+      if (lab[i] != best) { lab[i] <- best
+      moved <- TRUE }
     }
     for (cc in seq_len(k)) {
       mem <- which(lab == cc)

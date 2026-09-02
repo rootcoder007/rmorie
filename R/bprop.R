@@ -89,7 +89,8 @@ Bprop <- function(layers, activations, loss_grad, act_fun = "sigmoid") {
   }
   grads <- vector("list", L)
   for (l in seq_len(L)) {
-    rows <- nrow(W[[l]]); cols <- ncol(W[[l]])
+    rows <- nrow(W[[l]])
+    cols <- ncol(W[[l]])
     G <- matrix(0, rows, cols)
     for (i in seq_len(n)) {
       prev <- c(1, A[[l]][i, ])

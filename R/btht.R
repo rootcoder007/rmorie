@@ -49,7 +49,9 @@ Btht <- function(x, theta0 = 0, stat = NULL, B = 999, seed = 1) {
   shifted <- v - t + th0
   s <- as.numeric(as.integer(seed)) %% 2147483647
   if (s <= 0) s <- s + 2147483646
-  reps <- numeric(Bn); ge <- 0L; le <- 0L
+  reps <- numeric(Bn)
+  ge <- 0L
+  le <- 0L
   for (b in seq_len(Bn)) {
     samp <- numeric(n)
     for (i in seq_len(n)) {
@@ -64,7 +66,8 @@ Btht <- function(x, theta0 = 0, stat = NULL, B = 999, seed = 1) {
     if (tb >= t) ge <- ge + 1L
     if (tb <= t) le <- le + 1L
   }
-  pge <- (1 + ge) / (Bn + 1); ple <- (1 + le) / (Bn + 1)
+  pge <- (1 + ge) / (Bn + 1)
+  ple <- (1 + le) / (Bn + 1)
   p <- 2 * min(pge, ple)
   if (p > 1) p <- 1
   list(p = p, estimate = p, T_hat = t, theta0 = th0, T_b = reps, p_upper = pge,

@@ -14,23 +14,27 @@
 #' smwgrp(matrix(c(0,1,1,1,0,1,1,1,0), 3, 3))$clustering
 #' @export
 smwgrp <- function(A) {
-  a <- as.matrix(A); dimnames(a) <- NULL
+  a <- as.matrix(A)
+  dimnames(a) <- NULL
   n <- nrow(a)
   deg <- vapply(seq_len(n), function(i) sum(a[i, -i] != 0), numeric(1))
   cl <- numeric(n)
   for (i in seq_len(n)) {
     nb <- which(a[i, ] != 0 & seq_len(n) != i)
     k <- length(nb)
-    if (k < 2L) { cl[i] <- 0; next }
+    if (k < 2L) { cl[i] <- 0
+    next }
     links <- 0
     for (p in seq_len(k - 1L)) for (q in (p + 1L):k) if (a[nb[p], nb[q]] != 0) links <- links + 1
     cl[i] <- 2 * links / (k * (k - 1))
   }
   cbar <- mean(cl)
   d <- k02bfs(a)
-  tot <- 0; cnt <- 0L
+  tot <- 0
+  cnt <- 0L
   for (i in seq_len(n)) for (j in seq_len(n))
-    if (i != j && d[i, j] >= 0L) { tot <- tot + d[i, j]; cnt <- cnt + 1L }
+    if (i != j && d[i, j] >= 0L) { tot <- tot + d[i, j]
+    cnt <- cnt + 1L }
   lbar <- if (cnt > 0L) tot / cnt else NA_real_
   kbar <- mean(deg)
   crand <- kbar / n

@@ -27,7 +27,8 @@ Sobolidx <- function(model, input_dist = NULL, N = 64, d = NULL) {
   primes <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37, 41, 43, 47)
   dd <- if (!is.null(d)) as.integer(d) else if (!is.null(input_dist)) length(input_dist) else 2L
   n <- as.integer(N)
-  A <- matrix(0, n, dd); B <- matrix(0, n, dd)
+  A <- matrix(0, n, dd)
+  B <- matrix(0, n, dd)
   # A and B must be INDEPENDENT samples.  Continuing one low-discrepancy
   # sequence gives points that are not: with base 2 and n a power of two,
   # vdc(j + n) and vdc(j) share their leading bits, the estimator's cross
@@ -41,16 +42,20 @@ Sobolidx <- function(model, input_dist = NULL, N = 64, d = NULL) {
     if (is.null(input_dist)) return(as.numeric(row))
     vapply(seq_len(dd), function(a) input_dist[[a]](row[a]), 0)
   }
-  fA <- numeric(n); fB <- numeric(n)
-  for (j in seq_len(n)) { fA[j] <- as.numeric(model(tf(A[j, ]))); fB[j] <- as.numeric(model(tf(B[j, ]))) }
+  fA <- numeric(n)
+  fB <- numeric(n)
+  for (j in seq_len(n)) { fA[j] <- as.numeric(model(tf(A[j, ])))
+  fB[j] <- as.numeric(model(tf(B[j, ]))) }
   V <- .s03var(c(fA, fB), 1L)
-  S <- numeric(dd); ST <- numeric(dd)
+  S <- numeric(dd)
+  ST <- numeric(dd)
   for (i in seq_len(dd)) {
     AB <- A
     AB[, i] <- B[, i]
     fAB <- numeric(n)
     for (j in seq_len(n)) fAB[j] <- as.numeric(model(tf(AB[j, ])))
-    vi <- 0; vti <- 0
+    vi <- 0
+    vti <- 0
     for (j in seq_len(n)) {
       vi <- vi + fB[j] * (fAB[j] - fA[j]) / n
       vti <- vti + (fA[j] - fAB[j])^2 / (2 * n)

@@ -172,7 +172,10 @@ mask_units <- function(n_units, rate = 0.3, seed = 0, block = 1) {
 patch_of_box <- function(box, width, height, patch_grid = 14) {
   g <- as.integer(patch_grid)
   nb <- normalise_bbox(box, width, height, g)
-  x0 <- nb[1L]; y0 <- nb[2L]; x1 <- nb[3L]; y1 <- nb[4L]
+  x0 <- nb[1L]
+  y0 <- nb[2L]
+  x1 <- nb[3L]
+  y1 <- nb[4L]
   rs <- seq.int(min(y0, g - 1L), min(max(y1, y0 + 1L), g) - 1L)
   cs <- seq.int(min(x0, g - 1L), min(max(x1, x0 + 1L), g) - 1L)
   if (length(rs) == 0L || length(cs) == 0L) return(integer(0))

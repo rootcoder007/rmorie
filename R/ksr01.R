@@ -18,8 +18,11 @@
 #'   full text of the book.
 #' @export
 Empproc <- function(x, t, F) {
-  x <- .t1_vec(x); t <- .t1_vec(t); F <- .t1_vec(F)
-  n <- length(x); k <- length(t)
+  x <- .t1_vec(x)
+  t <- .t1_vec(t)
+  F <- .t1_vec(F)
+  n <- length(x)
+  k <- length(t)
   if (n < 1L) stop("the sample must be non-empty")
   if (length(F) != k) stop("t and F must have the same length")
   if (any(F < 0 | F > 1)) stop("F must lie in [0, 1]")

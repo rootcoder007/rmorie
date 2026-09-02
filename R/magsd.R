@@ -24,7 +24,9 @@
 #'   Olkin, I. (1985). Statistical Methods for Meta-Analysis, eq. (5.10).
 #' @export
 Magsd <- function(m1, m2, s_ctrl, n1, n2) {
-  s <- as.numeric(s_ctrl); a <- as.numeric(n1); b <- as.numeric(n2)
+  s <- as.numeric(s_ctrl)
+  a <- as.numeric(n1)
+  b <- as.numeric(n2)
   if (s <= 0) stop("the control standard deviation must be positive")
   if (a < 1 || b < 2) stop("need n1 >= 1 and n2 >= 2")
   d <- (as.numeric(m1) - as.numeric(m2)) / s

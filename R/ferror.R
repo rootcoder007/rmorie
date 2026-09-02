@@ -39,7 +39,8 @@ Ferror <- function(incidence, Rt, gen_int) {
   if (H == 0L) stop("Rt must have at least one step")
   if (any(R < 0)) stop("Rt must be non-negative")
   hist <- inc
-  fc <- numeric(H); lam <- numeric(H)
+  fc <- numeric(H)
+  lam <- numeric(H)
   for (k in seq_len(H)) {
     L <- 0
     for (s in seq_len(S)) {

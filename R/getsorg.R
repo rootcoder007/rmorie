@@ -26,7 +26,8 @@
 #' diag(W) <- 0
 #' Getisordg(x, W)
 Getisordg <- function(x, W) {
-  x <- .t4_vec(x); n <- length(x)
+  x <- .t4_vec(x)
+  n <- length(x)
   W <- matrix(as.numeric(as.matrix(W)), nrow = n)
   if (nrow(W) != n || ncol(W) != n) stop("W must be n x n with n = length(x)")
   if (any(x < 0)) stop("Getis-Ord G is undefined for negative x")
@@ -38,14 +39,21 @@ Getisordg <- function(x, W) {
   s0 <- sum(W)
   s1 <- sum(W * W + W * t(W))
   s2 <- sum((rowSums(W) + colSums(W))^2)
-  nn <- n * n; n1 <- n - 1; n2 <- n - 2; n3 <- n - 3
-  eg <- s0 / (n * n1); s02 <- s0 * s0
+  nn <- n * n
+  n1 <- n - 1
+  n2 <- n - 2
+  n3 <- n - 3
+  eg <- s0 / (n * n1)
+  s02 <- s0 * s0
   b0 <- (nn - 3 * n + 3) * s1 - n * s2 + 3 * s02
   b1 <- -((nn - n) * s1 - 2 * n * s2 + 6 * s02)
   b2 <- -(2 * n * s1 - (n + 3) * s2 + 6 * s02)
   b3 <- 4 * n1 * s1 - 2 * (n + 1) * s2 + 8 * s02
   b4 <- s1 - s2 + s02
-  m1 <- sum(x); m2 <- sum(x^2); m3 <- sum(x^3); m4 <- sum(x^4)
+  m1 <- sum(x)
+  m2 <- sum(x^2)
+  m3 <- sum(x^3)
+  m4 <- sum(x^4)
   vg <- (b0 * m2^2 + b1 * m4 + b2 * m1^2 * m2 + b3 * m1 * m3 + b4 * m1^4) /
     (((m1^2 - m2)^2) * n * n1 * n2 * n3) - eg^2
   z <- if (vg > 0) (g - eg) / sqrt(vg) else NaN

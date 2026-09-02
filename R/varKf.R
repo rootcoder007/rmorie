@@ -30,18 +30,22 @@ Svgp <- function(X, y, Z = NULL, gamma = 1, sigma2 = 1e-2, jitter = 1e-8,
   g <- as.numeric(gamma)
   rbf <- function(x, z) {
     s <- 0
-    for (a in seq_along(x)) { d <- x[a] - z[a]; s <- s + d * d }
+    for (a in seq_along(x)) { d <- x[a] - z[a]
+    s <- s + d * d }
     exp(-g * s)
   }
-  Xm <- .s03mat(X); yv <- .s03vec(y)
+  Xm <- .s03mat(X)
+  yv <- .s03vec(y)
   Zm <- if (!is.null(Z)) .s03mat(Z) else Xm
-  n <- nrow(Xm); m <- nrow(Zm)
+  n <- nrow(Xm)
+  m <- nrow(Zm)
   Kmm <- matrix(0, m, m)
   for (i in seq_len(m)) for (j in seq_len(m)) Kmm[i, j] <- rbf(Zm[i, ], Zm[j, ])
   for (i in seq_len(m)) Kmm[i, i] <- Kmm[i, i] + as.numeric(jitter)
   Knm <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) Knm[i, j] <- rbf(Xm[i, ], Zm[j, ])
-  Q <- matrix(0, n, n); trace <- 0
+  Q <- matrix(0, n, n)
+  trace <- 0
   for (i in seq_len(n)) {
     w <- .s03cholsolve(Kmm, Knm[i, ])
     for (j in seq_len(n)) {
@@ -62,7 +66,8 @@ Svgp <- function(X, y, Z = NULL, gamma = 1, sigma2 = 1e-2, jitter = 1e-8,
   fit <- -0.5 * (n * log(2 * pi) + logdet + quad)
   pen <- -0.5 * trace / as.numeric(sigma2)
   Xt <- if (!is.null(X_test)) .s03mat(X_test) else Xm
-  pred <- numeric(nrow(Xt)); var_ <- numeric(nrow(Xt))
+  pred <- numeric(nrow(Xt))
+  var_ <- numeric(nrow(Xt))
   for (t in seq_len(nrow(Xt))) {
     kz <- numeric(m)
     for (j in seq_len(m)) kz[j] <- rbf(Xt[t, ], Zm[j, ])

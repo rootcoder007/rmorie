@@ -166,7 +166,9 @@ knn_trainer <- function(k = 1L, smoothing = 1e-3) {
 #' @return A list with \code{rows}, \code{labels}, \code{classes}.
 #' @export
 attack_dataset <- function(model_predict, in_X, in_y, out_X, out_y) {
-  rows <- list(); lab <- c(); cls <- c()
+  rows <- list()
+  lab <- c()
+  cls <- c()
   if (length(in_X) > 0L) {
     pr <- model_predict(in_X)
     for (i in seq_along(in_X)) {
@@ -348,7 +350,8 @@ synthesize_noisy <- function(X, fraction = 0.1, feature_values = NULL,
 #' @return A list with \code{precision}, \code{recall}, \code{accuracy}, \code{tp}, \code{fp}, \code{fn}, \code{tn}.
 #' @export
 precision_recall <- function(pred, truth) {
-  pred <- as.integer(pred); truth <- as.integer(truth)
+  pred <- as.integer(pred)
+  truth <- as.integer(truth)
   tp <- sum(pred == 1 & truth == 1)
   fp <- sum(pred == 1 & truth == 0)
   fn <- sum(pred == 0 & truth == 1)
@@ -401,10 +404,14 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
   if (!is.null(n_shadow)) specs <- specs[seq_len(min(as.integer(n_shadow), length(specs)))]
   if (length(specs) == 0L)
     stop("memb: at least one shadow model is needed")
-  rows <- list(); labels <- integer(0); classes <- character(0)
+  rows <- list()
+  labels <- integer(0)
+  classes <- character(0)
   for (spec in specs) {
-    tr_X <- spec[[1L]]; tr_y <- spec[[2L]]
-    te_X <- spec[[3L]]; te_y <- spec[[4L]]
+    tr_X <- spec[[1L]]
+    tr_y <- spec[[2L]]
+    te_X <- spec[[3L]]
+    te_y <- spec[[4L]]
     if (length(tr_X) == 0L)
       stop("memb: a shadow model has no training data")
     shadow <- train_fn(tr_X, tr_y)
@@ -431,13 +438,15 @@ memb <- function(target_predict, shadow_data, eval_in, eval_out,
   truth <- c(rep(1L, length(eval_in[[1L]])),
              rep(0L, length(eval_out[[1L]])))
   outputs <- if (length(eval_X) > 0L) target_predict(eval_X) else list()
-  scores <- numeric(length(outputs)); preds <- integer(length(outputs))
+  scores <- numeric(length(outputs))
+  preds <- integer(length(outputs))
   for (i in seq_along(outputs)) {
     vec <- as.numeric(outputs[[i]])
     c <- as.character(eval_y[[i]])
     model <- per_class[[c]]
     if (is.null(model)) {
-      scores[i] <- NaN; preds[i] <- 0L
+      scores[i] <- NaN
+      preds[i] <- 0L
       next
     }
     feat <- if (isTRUE(sort_features)) .memb_sorted_features(vec) else vec

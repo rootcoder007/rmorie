@@ -38,17 +38,20 @@ Ppoclip <- function(env, policy = NULL, clip_eps = 0.2, ratio = NULL,
   }
   e <- as.numeric(clip_eps)
   n <- length(a)
-  tot <- 0; nclip <- 0
+  tot <- 0
+  nclip <- 0
   for (i in seq_len(n)) {
     un <- r[i] * a[i]
     cr <- if (r[i] < 1 - e) 1 - e else if (r[i] > 1 + e) 1 + e else r[i]
     cl <- cr * a[i]
-    if (cl < un) { tot <- tot + cl; nclip <- nclip + 1 } else tot <- tot + un
+    if (cl < un) { tot <- tot + cl
+    nclip <- nclip + 1 } else tot <- tot + un
   }
   lclip <- if (n) tot / n else NaN
   lvf <- NaN
   if (!is.null(v_pred) && !is.null(v_targ)) {
-    vp <- .s03vec(v_pred); vt <- .s03vec(v_targ)
+    vp <- .s03vec(v_pred)
+    vt <- .s03vec(v_targ)
     s <- 0
     for (i in seq_along(vp)) s <- s + (vp[i] - vt[i])^2
     lvf <- if (length(vp)) s / length(vp) else NaN

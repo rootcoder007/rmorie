@@ -54,7 +54,8 @@ morie_sentpc_unescape_whitespace <- function(text,
 #' @noRd
 .sentpc_units <- function(escaped) {
   s <- strsplit(escaped, "")[[1]]
-  out <- character(0); cur <- ""
+  out <- character(0)
+  cur <- ""
   for (ch in s) {
     if (ch == .SENT_SPACE) {
       if (nzchar(cur)) out <- c(out, cur)
@@ -115,7 +116,8 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
   while (length(vocab) < V) {
     pairs <- list()
     for (w in words2) {
-      r <- w$rep; f <- w$f
+      r <- w$rep
+      f <- w$f
       if (length(r) < 2L) next
       for (i in seq_len(length(r) - 1L)) {
         key <- paste0(c(r[i], r[i + 1L]), collapse = "\r")
@@ -132,13 +134,16 @@ morie_sentpc_train_bpe <- function(corpus, vocab_size, add_prefix = TRUE) {
     vocab <- unique(c(vocab, paste0(best, collapse = "")))
     nw <- list()
     for (w in words2) {
-      r <- w$rep; f <- w$f
-      out <- character(0); i <- 1L
+      r <- w$rep
+      f <- w$f
+      out <- character(0)
+      i <- 1L
       while (i <= length(r)) {
         if (i < length(r) && r[i] == best[1] && r[i + 1L] == best[2]) {
           out <- c(out, paste0(best, collapse = ""))
           i <- i + 2L
-        } else { out <- c(out, r[i]); i <- i + 1L }
+        } else { out <- c(out, r[i])
+        i <- i + 1L }
       }
       key <- paste0(out, collapse = "\r")
       if (is.null(nw[[key]])) nw[[key]] <- f else nw[[key]] <- nw[[key]] + f
@@ -164,12 +169,17 @@ morie_sentpc_encode_bpe <- function(text, model, add_prefix = TRUE) {
   for (w in .sentpc_units(esc)) {
     toks <- strsplit(w, "", fixed = TRUE)[[1]]
     for (ab in model$merges) {
-      a <- ab[1]; b <- ab[2]; ab_join <- paste0(ab, collapse = "")
-      i <- 1L; new <- character(0)
+      a <- ab[1]
+      b <- ab[2]
+      ab_join <- paste0(ab, collapse = "")
+      i <- 1L
+      new <- character(0)
       while (i <= length(toks)) {
         if (i < length(toks) && toks[i] == a && toks[i + 1L] == b) {
-          new <- c(new, ab_join); i <- i + 2L
-        } else { new <- c(new, toks[i]); i <- i + 1L }
+          new <- c(new, ab_join)
+          i <- i + 2L
+        } else { new <- c(new, toks[i])
+        i <- i + 1L }
       }
       toks <- new
     }
@@ -217,7 +227,8 @@ morie_sentpc_viterbi_segment <- function(text, piece_logp,
   }
   if (is.infinite(best[n + 1L]) && best[n + 1L] < 0)
     stop("sentpc: no segmentation covers the input -- the piece set must include every character")
-  pieces <- character(0); i <- n + 1L
+  pieces <- character(0)
+  i <- n + 1L
   while (i > 1L) {
     st <- back[[i]]
     pieces <- c(st[2], pieces)

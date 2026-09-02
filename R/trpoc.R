@@ -32,9 +32,11 @@ Trpostep <- function(env, policy = NULL, kl_max = 0.01, ratio = NULL,
   for (i in seq_len(n)) s <- s + r[i] * a[i]
   surr <- if (n) s / n else NaN
   klm <- if (!is.null(kl)) .s03mean(.s03vec(kl)) else NaN
-  step <- numeric(0); ss <- NaN
+  step <- numeric(0)
+  ss <- NaN
   if (!is.null(g) && !is.null(F)) {
-    gv <- .s03vec(g); Fm <- .s03mat(F)
+    gv <- .s03vec(g)
+    Fm <- .s03mat(F)
     x <- .s03ridgesolve(Fm, gv, 1e-10)
     Fx <- .s03matvec(Fm, x)
     q <- 0

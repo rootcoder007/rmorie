@@ -31,14 +31,16 @@ Drdidboot <- function(y, D, X = NULL, B = 199, alpha = 0.05, y0 = NULL) {
   dy <- .s03vec(y)
   if (!is.null(y0)) dy <- dy - .s03vec(y0)
   fit <- .s03drdid(dy, D, X)
-  inf <- fit$inf; n <- length(inf)
+  inf <- fit$inf
+  n <- length(inf)
   boot <- numeric(as.integer(B))
   for (b in seq_len(as.integer(B)) - 1L) {
     s <- 0
     for (i in seq_len(n)) s <- s + .s03mammen(b * n + i - 1L) * inf[i]
     boot[b + 1L] <- fit$tau + s / n
   }
-  q25 <- .s03quantile7(boot, 0.25); q75 <- .s03quantile7(boot, 0.75)
+  q25 <- .s03quantile7(boot, 0.25)
+  q75 <- .s03quantile7(boot, 0.75)
   se <- (q75 - q25) / (qnorm(0.75) - qnorm(0.25))
   se_sd <- if (length(boot) > 1L) .s03sd(boot, 1L) else NaN
   z <- qnorm(1 - as.numeric(alpha) / 2)

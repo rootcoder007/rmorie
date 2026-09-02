@@ -62,7 +62,8 @@ Esnnts <- function(y, reservoir_size = 20, spectral_radius = 0.9, leak = 1,
   W <- W * scale
   x <- numeric(size)
   k <- size + 1L
-  rows <- list(); targ <- numeric(0)
+  rows <- list()
+  targ <- numeric(0)
   for (t in 2:n) {
     u <- y[t - 1L]
     nx <- numeric(size)

@@ -164,7 +164,8 @@ candidate_sequence <- function(A, W, g_models) {
         XtWX <- crossprod(X1, X1 * W)
         XtWz <- crossprod(X1, W * z)
         b_new <- as.numeric(solve(XtWX, XtWz))
-        if (max(abs(b_new - b)) < 1e-10) { b <- b_new; break }
+        if (max(abs(b_new - b)) < 1e-10) { b <- b_new
+        break }
         b <- b_new
         eta <- as.numeric(X1 %*% b)
       }
@@ -194,7 +195,8 @@ candidate_sequence <- function(A, W, g_models) {
 #' @return A list with \code{small}, \code{large}, \code{ratio}, \code{note}.
 #' @export
 instrument_penalty <- function(g_small, g_large) {
-  gs <- as.numeric(g_small); gl <- as.numeric(g_large)
+  gs <- as.numeric(g_small)
+  gl <- as.numeric(g_large)
   a <- max(max(1 / gs), max(1 / (1 - gs)))
   b <- max(max(1 / gl), max(1 / (1 - gl)))
   list(small = a, large = b, ratio = b / a,
@@ -234,14 +236,18 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
     j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
     if (j == 0L) j <- 1L
     if (j == i) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j]; idx[j] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j]
+    idx[j] <- tmp
   }
   folds <- lapply(seq_len(as.integer(V)), function(v)
     idx[seq(v, length(idx), by = as.integer(V))])
   risks <- losses <- pens <- numeric(length(cands))
   for (k in seq_along(cands)) {
     g <- cands[[k]]$g
-    tot <- 0; m <- 0; ics <- numeric(0)
+    tot <- 0
+    m <- 0
+    ics <- numeric(0)
     for (f in folds) {
       tr <- setdiff(seq_len(n), f)
       H <- a[tr] / g[tr] - (1 - a[tr]) / (1 - g[tr])

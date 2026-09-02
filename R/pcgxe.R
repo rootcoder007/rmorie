@@ -76,8 +76,10 @@ Pcgxe <- function(GxE_matrix, k, scale = FALSE) {
     for (j in seq_len(kk)) s <- s + scores[i, j] * W[a, j]
     approx[i, a] <- s
   }
-  tot <- 0; for (v in ev) tot <- tot + v
-  top <- 0; for (j in seq_len(kk)) top <- top + ev[j]
+  tot <- 0
+  for (v in ev) tot <- tot + v
+  top <- 0
+  for (j in seq_len(kk)) top <- top + ev[j]
   list(estimate = if (tot > 0) top / tot else NaN,
        scores = scores, loadings = W,
        sdev = vapply(ev, function(v) if (v > 0) sqrt(v) else 0, 0),

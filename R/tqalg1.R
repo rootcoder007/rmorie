@@ -24,7 +24,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Kvquant(V)
 Kvquant <- function(x, b = 2, seed = 1) {
-  x <- .t1_vec(x); d <- length(x); b <- as.integer(b)
+  x <- .t1_vec(x)
+  d <- length(x)
+  b <- as.integer(b)
   if (d < 1L) stop("the vector must be non-empty")
   if (b < 1L) stop("the bit width must be at least 1")
   Pi <- .kvmse_rotation(d, seed)

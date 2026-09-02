@@ -19,7 +19,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dinocenter(V)
 Dinocenter <- function(g_t, center = NULL, m = 0.9, tau_t = 0.04) {
-  G <- as.matrix(g_t); B <- nrow(G); K <- ncol(G)
+  G <- as.matrix(g_t)
+  B <- nrow(G)
+  K <- ncol(G)
   c0 <- if (is.null(center)) rep(0, K) else .t1_vec(center)
   if (length(c0) != K) stop("center must have length K")
   Z <- sweep(G, 2, c0, "-") / as.numeric(tau_t)

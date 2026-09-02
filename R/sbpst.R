@@ -27,15 +27,18 @@ Stickpost <- function(partition, alpha = 1) {
     labs <- sort(unique(v))
     counts <- vapply(labs, function(cc) sum(v == cc), 0)
   }
-  K <- length(counts); a <- as.numeric(alpha)
+  K <- length(counts)
+  a <- as.numeric(alpha)
   Vs <- numeric(K)
   for (i in seq_len(K)) {
     tail <- 0
     if (i < K) for (j in seq(i + 1L, K)) tail <- tail + counts[j]
     Vs[i] <- (1 + counts[i]) / (1 + counts[i] + a + tail)
   }
-  pi_ <- numeric(K); rest <- 1
-  for (i in seq_len(K)) { pi_[i] <- Vs[i] * rest; rest <- rest * (1 - Vs[i]) }
+  pi_ <- numeric(K)
+  rest <- 1
+  for (i in seq_len(K)) { pi_[i] <- Vs[i] * rest
+  rest <- rest * (1 - Vs[i]) }
   list(estimate = if (K) pi_[1] else NaN, pi = pi_, V = Vs, counts = counts,
        remainder = rest,
        method = "Ishwaran and James (2001) conjugate stick-breaking posterior, at its mean")

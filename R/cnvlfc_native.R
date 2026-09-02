@@ -26,7 +26,8 @@
 #' @export
 .cnvlfc_embed <- function(series, E = 2, tau = 1) {
     v <- as.numeric(series)
-    e <- as.integer(E); t <- as.integer(tau)
+    e <- as.integer(E)
+    t <- as.integer(tau)
     if (e < 1L) stop("cnvlfc: the embedding dimension must be at least 1")
     if (t < 1L) stop("cnvlfc: the delay must be at least 1")
     need <- (e - 1L) * t
@@ -62,8 +63,10 @@
 .cnvlfc_corr <- function(a, b) {
     n <- length(a)
     if (n < 2L) return(NaN)
-    ma <- sum(a) / n; mb <- sum(b) / n
-    sa <- sum((a - ma)^2); sb <- sum((b - mb)^2)
+    ma <- sum(a) / n
+    mb <- sum(b) / n
+    sa <- sum((a - ma)^2)
+    sb <- sum((b - mb)^2)
     if (sa <= 0 || sb <= 0) return(NaN)
     cov <- sum((a - ma) * (b - mb))
     cov / sqrt(sa * sb)
@@ -164,7 +167,8 @@
         ord <- order(d)
         d1 <- d[ord[1L]]
         if (d1 <= 0) {
-            w <- numeric(k); w[1L] <- 1
+            w <- numeric(k)
+            w[1L] <- 1
         } else {
             w <- exp(-d[ord[seq_len(k)]] / d1)
         }
@@ -205,7 +209,8 @@
 #' @export
 .cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                         seed = 1L, exclude = 0L) {
-    X <- as.numeric(x); Y <- as.numeric(y)
+    X <- as.numeric(x)
+    Y <- as.numeric(y)
     m <- nrow(.cnvlfc_embed(Y, E, tau)$points)
     if (is.null(lib_sizes)) {
         base <- as.integer(E) + 3L
@@ -280,14 +285,18 @@
 .cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                      byx = 0.1, x0 = 0.4, y0 = 0.2,
                                      burn = 300L) {
-    x <- as.numeric(x0); y <- as.numeric(y0)
-    nb <- as.integer(burn); nn <- as.integer(n)
-    X <- numeric(nn); Y <- numeric(nn)
+    x <- as.numeric(x0)
+    y <- as.numeric(y0)
+    nb <- as.integer(burn)
+    nn <- as.integer(n)
+    X <- numeric(nn)
+    Y <- numeric(nn)
     total <- nb + nn
     for (i in seq_len(total)) {
         xn <- x * (rx - rx * x - bxy * y)
         yn <- y * (ry - ry * y - byx * x)
-        x <- xn; y <- yn
+        x <- xn
+        y <- yn
         if (!is.finite(x) || !is.finite(y)) {
             stop(sprintf("cnvlfc: the coupled map diverged at step %d; ",
                          "the parameters are outside the bounded regime", i - 1L))

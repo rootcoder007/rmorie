@@ -24,7 +24,9 @@
 .funCA_grid_weights <- function(n_t) {
   if (n_t < 2L) return(1.0)
   h <- 1.0 / (n_t - 1L)
-  w <- rep(h, n_t); w[1L] <- 0.5 * h; w[n_t] <- 0.5 * h
+  w <- rep(h, n_t)
+  w[1L] <- 0.5 * h
+  w[n_t] <- 0.5 * h
   w
 }
 
@@ -88,18 +90,24 @@
 #' @return A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.
 #' @export
 morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
-  Ym <- as.matrix(Y); storage.mode(Ym) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
+  Ym <- as.matrix(Y)
+  storage.mode(Ym) <- "double"
   n <- nrow(Xm)
   if (n == 0L || nrow(Ym) != n)
     stop("funCA: X and Y must hold the same number of curves")
   if (n < 3L)
     stop("funCA: canonical analysis needs at least three paired curves")
-  T <- ncol(Xm); S <- ncol(Ym)
-  wx <- .funCA_grid_weights(T); wy <- .funCA_grid_weights(S)
+  T <- ncol(Xm)
+  S <- ncol(Ym)
+  wx <- .funCA_grid_weights(T)
+  wy <- .funCA_grid_weights(S)
 
-  xbar <- colSums(Xm) / n; ybar <- colSums(Ym) / n
-  Xc <- sweep(Xm, 2L, xbar, "-"); Yc <- sweep(Ym, 2L, ybar, "-")
+  xbar <- colSums(Xm) / n
+  ybar <- colSums(Ym) / n
+  Xc <- sweep(Xm, 2L, xbar, "-")
+  Yc <- sweep(Ym, 2L, ybar, "-")
   Cx <- crossprod(Xc) / n
   Cy <- crossprod(Yc) / n
 
@@ -112,10 +120,12 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
     rank <- sum(lam_all > .funCA_EPS * tot)
     cap <- max(1L, min(cap, rank))
     if (!is.null(want)) return(max(1L, min(as.integer(want), cap)))
-    run <- 0.0; kk <- cap
+    run <- 0.0
+    kk <- cap
     for (j in seq_along(lam_all)) {
       run <- run + lam_all[j] / tot
-      if (run >= 0.95) { kk <- j; break }
+      if (run >= 0.95) { kk <- j
+      break }
     }
     max(1L, min(kk, cap))
   }
@@ -146,8 +156,10 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
   r <- min(pp, qq)
   corrs <- pmin(1.0, sqrt(pmax(ev$values[ord][seq_len(r)], 0.0)))
 
-  weights_x <- list(); weights_y <- list()
-  var_x <- list(); var_y <- list()
+  weights_x <- list()
+  weights_y <- list()
+  var_x <- list()
+  var_y <- list()
   for (j in seq_len(r)) {
     u <- ev$vectors[, ord[j]]
     a_coef <- as.numeric(Rx %*% u)
@@ -158,14 +170,16 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
     b_coef <- as.numeric(Ry %*% v_coef)
     wyj <- as.numeric(fy$phi %*% b_coef)
     top <- which.max(abs(wxj))
-    if (wxj[top] < 0) { wxj <- -wxj; wyj <- -wyj }
+    if (wxj[top] < 0) { wxj <- -wxj
+    wyj <- -wyj }
     weights_x[[j]] <- wxj
     weights_y[[j]] <- wyj
     var_x[[j]] <- as.numeric(Xc %*% (wxj * wx))
     var_y[[j]] <- as.numeric(Yc %*% (wyj * wy))
   }
 
-  tx <- sum(ax$all); ty <- sum(ay$all)
+  tx <- sum(ax$all)
+  ty <- sum(ay$all)
   list(
     estimate = corrs,
     correlations = corrs,

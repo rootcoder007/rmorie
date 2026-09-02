@@ -20,8 +20,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Kstest1(V, V)
 Kstest1 <- function(x, y, terms = 200) {
-  x <- sort(.t1_vec(x)); y <- sort(.t1_vec(y))
-  n1 <- length(x); n2 <- length(y)
+  x <- sort(.t1_vec(x))
+  y <- sort(.t1_vec(y))
+  n1 <- length(x)
+  n2 <- length(y)
   if (n1 < 1L || n2 < 1L) stop("both samples must be non-empty")
   pool <- sort(unique(c(x, y)))
   D <- max(abs(vapply(pool, function(v) sum(x <= v), 0) / n1 -

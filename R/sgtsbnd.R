@@ -22,7 +22,9 @@
 #'   E 84, 066106. \doi{10.1103/PhysRevE.84.066106}; equation (44).
 #' @export
 Sgtsbnd <- function(a, b, k = 2) {
-  a <- as.numeric(a); b <- as.numeric(b); k <- as.integer(k)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  k <- as.integer(k)
   if (k < 2L) stop("Sgtsbnd: k must be at least 2")
   if (a < 0 || b < 0) stop("Sgtsbnd: degrees must be non-negative")
   cc <- (a + (k - 1) * b) / k

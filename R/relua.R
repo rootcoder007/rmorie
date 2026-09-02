@@ -13,7 +13,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Reluact(V)
 Reluact <- function(z, slope = 0) {
-  z <- .t1_vec(z); slope <- as.numeric(slope)
+  z <- .t1_vec(z)
+  slope <- as.numeric(slope)
   .t1_result(activation = ifelse(z > 0, z, slope * z),
              gradient = ifelse(z > 0, 1, slope), n = length(z),
              method = "ReLU activation, MVSML Sect. 10.3.2")

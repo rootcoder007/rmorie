@@ -33,12 +33,17 @@ Rotatesc <- function(triples, dim = NULL, h_re = NULL, h_im = NULL,
     t_re <- flat[3 * d + seq_len(d)]
     t_im <- flat[4 * d + seq_len(d)]
   }
-  hr <- .s03vec(h_re); hi <- .s03vec(h_im); th <- .s03vec(theta)
-  tr <- .s03vec(t_re); ti <- .s03vec(t_im)
+  hr <- .s03vec(h_re)
+  hi <- .s03vec(h_im)
+  th <- .s03vec(theta)
+  tr <- .s03vec(t_re)
+  ti <- .s03vec(t_im)
   d <- length(hr)
-  per <- numeric(d); s <- 0
+  per <- numeric(d)
+  s <- 0
   for (j in seq_len(d)) {
-    cr <- cos(th[j]); si <- sin(th[j])
+    cr <- cos(th[j])
+    si <- sin(th[j])
     re <- hr[j] * cr - hi[j] * si - tr[j]
     im <- hr[j] * si + hi[j] * cr - ti[j]
     m <- sqrt(re * re + im * im)

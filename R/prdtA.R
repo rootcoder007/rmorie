@@ -23,17 +23,21 @@ Prefixev <- function(tokens) {
   toks <- as.character(tokens)
   if (!length(toks)) stop("the expression is empty")
   opset <- c("+", "-", "*", "/", "^")
-  st <- numeric(0); nop <- 0L; mx <- 0L
+  st <- numeric(0)
+  nop <- 0L
+  mx <- 0L
   for (t in rev(toks)) {
     if (t %in% opset) {
       if (length(st) < 2L)
         stop(sprintf("operator '%s' has fewer than two operands", t))
-      a <- st[length(st)]; b <- st[length(st) - 1L]
+      a <- st[length(st)]
+      b <- st[length(st) - 1L]
       st <- st[seq_len(length(st) - 2L)]
       if (t == "/" && b == 0) stop("division by zero in the expression")
       v <- switch(t, "+" = a + b, "-" = a - b, "*" = a * b,
                   "/" = a / b, "^" = a^b)
-      st <- c(st, v); nop <- nop + 1L
+      st <- c(st, v)
+      nop <- nop + 1L
     } else {
       st <- c(st, as.numeric(t))
     }

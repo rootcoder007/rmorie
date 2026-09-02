@@ -25,9 +25,12 @@ Mafrti <- function(ft, n_harmonic) {
   n <- as.numeric(n_harmonic)
   if (n <= 0) stop("the harmonic mean sample size must be positive")
   vals <- as.numeric(ft)
-  out <- numeric(length(vals)); clamped <- 0L
+  out <- numeric(length(vals))
+  clamped <- 0L
   for (i in seq_along(vals)) {
-    t <- vals[i]; st <- sin(t); ct <- cos(t)
+    t <- vals[i]
+    st <- sin(t)
+    ct <- cos(t)
     if (abs(st) < 1e-12) {
       out[i] <- if (ct > 0) 0 else 1
       clamped <- clamped + 1L
@@ -38,8 +41,10 @@ Mafrti <- function(ft, n_harmonic) {
     if (q < 0) q <- 0
     sgn <- if (ct > 0) 1 else if (ct < 0) -1 else 0
     p <- 0.5 * (1 - sgn * sqrt(q))
-    if (p < 0) { p <- 0; clamped <- clamped + 1L }
-    else if (p > 1) { p <- 1; clamped <- clamped + 1L }
+    if (p < 0) { p <- 0
+    clamped <- clamped + 1L }
+    else if (p > 1) { p <- 1
+    clamped <- clamped + 1L }
     out[i] <- p
   }
   .t1_result(p = out, n_harmonic = n, clamped = clamped,

@@ -26,14 +26,20 @@
 #' y <- rbinom(20, 1, 0.5)
 #' Bayeslogit(X, y)
 Bayeslogit <- function(X, y, prior_sd = 10, iters = 50, tol = 1e-12) {
-  X <- as.matrix(X); y <- .t1_vec(y); n <- nrow(X)
+  X <- as.matrix(X)
+  y <- .t1_vec(y)
+  n <- nrow(X)
   if (length(y) != n) stop("X and y must have the same number of rows")
   if (any(!(y %in% c(0, 1)))) stop("y must be binary 0/1")
   s <- as.numeric(prior_sd)
   if (s <= 0) stop("prior_sd must be positive")
-  Z <- .t1_cbind1(X); p <- ncol(Z)
+  Z <- .t1_cbind1(X)
+  p <- ncol(Z)
   if (n < p) stop("more coefficients than observations")
-  b <- rep(0, p); inv_s2 <- 1 / s^2; conv <- 0; it <- 0L
+  b <- rep(0, p)
+  inv_s2 <- 1 / s^2
+  conv <- 0
+  it <- 0L
   for (it in seq_len(as.integer(iters))) {
     eta <- as.numeric(Z %*% b)
     mu <- 1 / (1 + exp(-pmin(500, pmax(-500, eta))))
@@ -41,7 +47,8 @@ Bayeslogit <- function(X, y, prior_sd = 10, iters = 50, tol = 1e-12) {
     H <- t(Z) %*% (Z * (mu * (1 - mu))) + diag(inv_s2, p)
     step <- as.numeric(solve(H, g))
     b <- b + step
-    if (max(abs(step)) < tol) { conv <- 1; break }
+    if (max(abs(step)) < tol) { conv <- 1
+    break }
   }
   eta <- as.numeric(Z %*% b)
   mu <- 1 / (1 + exp(-pmin(500, pmax(-500, eta))))

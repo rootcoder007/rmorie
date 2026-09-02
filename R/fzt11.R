@@ -29,7 +29,9 @@
 #' Gkrawbv(x = 1, h = 0.01, n = 100, fp = 0.1, fpp = -0.2, f = 0.3)
 #' @export
 Gkrawbv <- function(x, h, n, fp, fpp, f, boundary = FALSE, c = NULL) {
-  x <- as.numeric(x); h <- as.numeric(h); n <- as.integer(n)
+  x <- as.numeric(x)
+  h <- as.numeric(h)
+  n <- as.integer(n)
   if (h <= 0) stop("bandwidth must be positive.")
   if (n < 1L) stop("sample size must be at least 1.")
   if (x < 0) stop("gamma kernels need x >= 0.")

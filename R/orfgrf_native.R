@@ -119,8 +119,10 @@
         if (length(JL) < min_leaf || length(JR) < min_leaf) next
         # the imbalance floor, on the half that chooses the split
         if (min(length(JL), length(JR)) < alpha * length(rows_J)) next
-        ml <- mean(st[JL]); mr <- mean(st[JR])
-        nl <- length(JL); nr <- length(JR)
+        ml <- mean(st[JL])
+        mr <- mean(st[JR])
+        nl <- length(JL)
+        nr <- length(JR)
         # the usual variance-reduction gain: the between-group sum of
         # squares the cut creates
         gain <- (nl * nr / (nl + nr)) * (ml - mr)^2
@@ -353,9 +355,12 @@ orf_estimate <- function(Y, T, X, W, x, trees,
     yr <- Y - qh
     tr <- T - gh
   } else if (isTRUE(leave_one_out)) {
-    yr <- numeric(n); tr <- numeric(n)
+    yr <- numeric(n)
+    tr <- numeric(n)
     for (i in seq_len(n)) {
-      if (w[i] <= 0) { yr[i] <- 0; tr[i] <- 0; next }
+      if (w[i] <= 0) { yr[i] <- 0
+      tr[i] <- 0
+      next }
       qh <- local_nuisance(Y, W, w, exclude = i - 1L, ridge = ridge)$fit
       gh <- local_nuisance(T, W, w, exclude = i - 1L, ridge = ridge)$fit
       yr[i] <- Y[i] - qh[i]
@@ -401,11 +406,13 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      ridge = 1e-8,
                                      kind = "double-sample",
                                      leave_one_out = TRUE) {
-  y <- as.numeric(Y); t <- as.numeric(T)
+  y <- as.numeric(Y)
+  t <- as.numeric(T)
   n <- length(y)
   if (length(t) != n)
     stop("orfgrf: ", length(t), " treatments for ", n, " outcomes")
-  Xm <- as.matrix(X); Wm <- as.matrix(W)
+  Xm <- as.matrix(X)
+  Wm <- as.matrix(W)
   if (nrow(Xm) != n || nrow(Wm) != n)
     stop("orfgrf: feature/control rows must equal n")
   if (n < 8L) stop("orfgrf: need at least 8 observations, got ", n)
@@ -416,12 +423,14 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                        max_depth = as.integer(max_depth),
                        seed = as.numeric(seed))
   pts <- if (is.null(x_eval)) Xm else as.matrix(x_eval)
-  thetas <- numeric(nrow(pts)); dens <- numeric(nrow(pts))
+  thetas <- numeric(nrow(pts))
+  dens <- numeric(nrow(pts))
   for (k in seq_len(nrow(pts))) {
     out <- orf_estimate(y, t, Xm, Wm, pts[k, ], trees,
                         residualize = residualize, ridge = ridge,
                         leave_one_out = leave_one_out)
-    thetas[k] <- out$theta; dens[k] <- out$den
+    thetas[k] <- out$theta
+    dens[k] <- out$den
   }
   list(estimate = sum(thetas) / length(thetas),
        theta = thetas, denominator = dens,

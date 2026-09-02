@@ -22,14 +22,16 @@
 #' Svyqtl(c(4, 1, 3, 2, 5), NULL, 0.5)
 #' @export
 Svyqtl <- function(y, weights = NULL, quantile = 0.5) {
-  yy <- .s03vec(y); n <- length(yy)
+  yy <- .s03vec(y)
+  n <- length(yy)
   if (n == 0L) stop("survey_quantile: y is empty")
   w <- if (is.null(weights)) rep(1, n) else .s03vec(weights)
   if (length(w) != n) stop("survey_quantile: y and weights differ in length")
   p <- as.numeric(quantile)
   if (!(p > 0 && p < 1)) stop("survey_quantile: quantile must lie in (0, 1)")
   ord <- order(yy)
-  xs <- yy[ord]; ws <- w[ord]
+  xs <- yy[ord]
+  ws <- w[ord]
   tot <- sum(ws)
   if (tot <= 0) stop("survey_quantile: weights sum to zero")
   cum <- cumsum(ws) / tot

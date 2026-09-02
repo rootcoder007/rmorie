@@ -61,8 +61,10 @@
 #' @return A numeric value.
 #' @export
 .karpv_xor32 <- function(a, b) {
-  ah <- a %/% 65536; al <- a %% 65536
-  bh <- b %/% 65536; bl <- b %% 65536
+  ah <- a %/% 65536
+  al <- a %% 65536
+  bh <- b %/% 65536
+  bl <- b %% 65536
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 

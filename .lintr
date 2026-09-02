@@ -1,6 +1,24 @@
 linters: linters_with_defaults(
+    line_length_linter = line_length_linter(250L),
     object_name_linter = NULL,
-    line_length_linter = line_length_linter(90L)
+    commented_code_linter = NULL,
+    object_length_linter = object_length_linter(length = 80L),
+    object_usage_linter = NULL,
+    indentation_linter = NULL,
+    brace_linter = NULL,
+    commas_linter = NULL
   )
-exclusions: list("R/RcppExports.R", "src", "inst", "vignettes")
+exclusions: list(
+    "tests/testthat" = list(
+      undesirable_function_linter = Inf,
+      library_call_linter = Inf
+    ),
+    "vignettes" = list(
+      library_call_linter = Inf,
+      line_length_linter = Inf
+    ),
+    "R/RcppExports.R" = Inf,
+    "src" = Inf,
+    "inst" = Inf
+  )
 encoding: "UTF-8"

@@ -15,11 +15,14 @@
 #' sgthits(matrix(c(0,1,1,0), 2, 2))$authority
 #' @export
 sgthits <- function(A, iters = 200L) {
-  m <- as.matrix(A); dimnames(m) <- NULL
+  m <- as.matrix(A)
+  dimnames(m) <- NULL
   n <- nrow(m)
   ata <- t(m) %*% m
   aat <- m %*% t(m)
-  a <- rep(1, n); h <- rep(1, n); lam <- 0
+  a <- rep(1, n)
+  h <- rep(1, n)
+  lam <- 0
   for (i in seq_len(as.integer(iters))) {
     a2 <- as.numeric(ata %*% a)
     nm <- sqrt(sum(a2 * a2))
@@ -30,7 +33,8 @@ sgthits <- function(A, iters = 200L) {
     if (nh > 0) h <- h2 / nh
     lam <- nm
   }
-  amax <- max(abs(a)); hmax <- max(abs(h))
+  amax <- max(abs(a))
+  hmax <- max(abs(h))
   if (sum(a) < 0) a <- -a
   if (sum(h) < 0) h <- -h
   list(estimate = if (amax > 0) 1 else 0,

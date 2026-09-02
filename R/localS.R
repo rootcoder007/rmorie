@@ -16,12 +16,16 @@ localS <- function(IF, x = NULL) {
   IF <- as.numeric(IF)
   n <- length(IF)
   xg <- if (is.null(x)) seq_len(n) - 1 else as.numeric(x)
-  best <- -Inf; bi <- 0L; bj <- 0L
+  best <- -Inf
+  bi <- 0L
+  bj <- 0L
   if (n > 1) for (i in seq_len(n - 1)) for (j in (i + 1):n) {
     dx <- xg[j] - xg[i]
     if (dx != 0) {
       v <- abs(IF[j] - IF[i]) / abs(dx)
-      if (v > best) { best <- v; bi <- i - 1L; bj <- j - 1L }
+      if (v > best) { best <- v
+      bi <- i - 1L
+      bj <- j - 1L }
     }
   }
   lam <- if (n > 1) as.numeric(best) else NA_real_

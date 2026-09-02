@@ -54,12 +54,15 @@ Persample <- function(buffer, alpha = 0.6, beta = 0.4, eps = 1e-6,
   w <- if (mx > 0) w / mx else rep(0, n)
   sample_ <- integer(0)
   if (!is.null(n_sample)) {
-    cum <- numeric(n); cc <- 0
-    for (i in seq_len(n)) { cc <- cc + prob[i]; cum[i] <- cc }
+    cum <- numeric(n)
+    cc <- 0
+    for (i in seq_len(n)) { cc <- cc + prob[i]
+    cum[i] <- cc }
     for (j in seq_len(as.integer(n_sample)) - 1L) {
       u <- .s03vdc(j, 2L)
       idx <- n - 1L
-      for (i in seq_len(n)) if (u < cum[i]) { idx <- i - 1L; break }
+      for (i in seq_len(n)) if (u < cum[i]) { idx <- i - 1L
+      break }
       sample_ <- c(sample_, as.integer(idx))
     }
   }

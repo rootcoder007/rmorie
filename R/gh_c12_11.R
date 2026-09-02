@@ -24,7 +24,8 @@
 #' Ghosalcredsetcov()
 Ghosalcredsetcov <- function(theta0 = 0.5, n = 400, level = 0.9,
                              n_sim = 400, seed = 42) {
-  n <- as.integer(n); n_sim <- as.integer(n_sim)
+  n <- as.integer(n)
+  n_sim <- as.integer(n_sim)
   if (n < 1L) stop("n must be positive")
   if (n_sim < 1L) stop("n_sim must be positive")
   if (theta0 <= 0 || theta0 >= 1)
@@ -34,7 +35,8 @@ Ghosalcredsetcov <- function(theta0 = 0.5, n = 400, level = 0.9,
   hits <- 0L
   for (i in seq_len(n_sim)) {
     S <- sum(.ghc_unif(e, n) < theta0)
-    a <- 1 + S; b <- 1 + n - S
+    a <- 1 + S
+    b <- 1 + n - S
     m <- a / (a + b)
     sd <- sqrt(a * b / ((a + b)^2 * (a + b + 1)))
     if (m - z * sd <= theta0 && theta0 <= m + z * sd) hits <- hits + 1L

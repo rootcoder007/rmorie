@@ -35,8 +35,10 @@
 #' @examples
 #' Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 Causdr2 <- function(y, d, X, K = 2L, seed = 1L) {
-  yv <- as.numeric(y); dv <- as.numeric(d)
-  Xa <- as.matrix(X); storage.mode(Xa) <- "double"
+  yv <- as.numeric(y)
+  dv <- as.numeric(d)
+  Xa <- as.matrix(X)
+  storage.mode(Xa) <- "double"
   n <- length(yv)
   if (nrow(Xa) != n || length(dv) != n) {
     stop("y, d, X must have matching first dimension", call. = FALSE)
@@ -65,7 +67,8 @@ Causdr2 <- function(y, d, X, K = 2L, seed = 1L) {
     folds[perm] <- (seq_len(n) - 1L) %% K
   }
   ols <- function(A, b) as.vector(solve(crossprod(A), crossprod(A, b)))
-  lhat <- numeric(n); mhat <- numeric(n)
+  lhat <- numeric(n)
+  mhat <- numeric(n)
   for (k in seq_len(K) - 1L) {
     tr <- if (K > 1L) which(folds != k) else seq_len(n)
     te <- which(folds == k)

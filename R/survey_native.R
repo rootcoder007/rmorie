@@ -118,7 +118,8 @@ morie_hajek_mean <- function(y, pi) {
 #' @export
 morie_ratio_estimator <- function(y, x, weights = NULL, X_total = NULL,
                                   X_mean = NULL) {
-  yv <- as.numeric(y); xv <- as.numeric(x)
+  yv <- as.numeric(y)
+  xv <- as.numeric(x)
   if (length(xv) != length(yv)) {
     stop(sprintf("x has %d entries for %d of y.", length(xv), length(yv)),
          call. = FALSE)
@@ -171,7 +172,8 @@ morie_ratio_estimator <- function(y, x, weights = NULL, X_total = NULL,
 #' morie_regression_estimator(100 + 2 * x + rnorm(60), x, X_mean = 10)$slope
 #' @export
 morie_regression_estimator <- function(y, x, weights = NULL, X_mean = NULL) {
-  yv <- as.numeric(y); xv <- as.numeric(x)
+  yv <- as.numeric(y)
+  xv <- as.numeric(x)
   if (length(xv) != length(yv)) {
     stop(sprintf("x has %d entries for %d of y.", length(xv), length(yv)),
          call. = FALSE)
@@ -228,7 +230,8 @@ morie_greg <- function(y, x, weights, totals) {
   if (nrow(X) != length(yv)) {
     stop("x must have one row per entry of y.", call. = FALSE)
   }
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   w <- as.numeric(weights)
   if (length(w) != n) {
     stop(sprintf("weights has %d entries for %d observations.", length(w), n),
@@ -287,7 +290,8 @@ morie_calibration_chi2 <- function(y, X, weights, totals) {
   if (nrow(Xm) != length(yv)) {
     stop("X must have one row per entry of y.", call. = FALSE)
   }
-  n <- nrow(Xm); p <- ncol(Xm)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   d <- as.numeric(weights)
   if (length(d) != n) {
     stop(sprintf("design weights has %d entries for %d observations.",
@@ -349,7 +353,8 @@ morie_stratified_proportion <- function(y, stratum, weights = NULL) {
   }
   labs <- sort(unique(st))
   if (length(labs) < 2L) stop("need at least 2 strata.", call. = FALSE)
-  ph <- numeric(length(labs)); nh <- numeric(length(labs))
+  ph <- numeric(length(labs))
+  nh <- numeric(length(labs))
   for (i in seq_along(labs)) {
     sel <- st == labs[i]
     m <- sum(sel)
@@ -466,7 +471,8 @@ morie_actuarial_lifetable <- function(intervals, entered, died,
     stop("interval boundaries must be strictly increasing.", call. = FALSE)
   }
   J <- length(edges) - 1L
-  nj <- as.numeric(entered); dj <- as.numeric(died)
+  nj <- as.numeric(entered)
+  dj <- as.numeric(died)
   wj <- if (is.null(withdrawn)) numeric(J) else as.numeric(withdrawn)
   for (nm in c("entered", "died", "withdrawn")) {
     arr <- switch(nm, entered = nj, died = dj, withdrawn = wj)

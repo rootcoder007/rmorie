@@ -21,16 +21,20 @@
 Enetobj <- function(X, y, beta, lam, alpha, add_intercept = TRUE) {
   Xm <- .t1_mat(X)
   if (isTRUE(add_intercept)) Xm <- .t1_cbind1(Xm)
-  y <- .t1_vec(y); b <- .t1_vec(beta)
-  lam <- as.numeric(lam); a <- as.numeric(alpha)
-  n <- nrow(Xm); p <- ncol(Xm)
+  y <- .t1_vec(y)
+  b <- .t1_vec(beta)
+  lam <- as.numeric(lam)
+  a <- as.numeric(alpha)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   if (length(b) != p) stop("beta must have one entry per column of the design")
   if (lam < 0) stop("lambda must be non-negative")
   if (a < 0 || a > 1) stop("alpha must lie in [0, 1]")
   rss <- sum((y - as.numeric(Xm %*% b))^2)
   start <- if (isTRUE(add_intercept)) 2L else 1L
-  l2 <- sum(b[start:p]^2); l1 <- sum(abs(b[start:p]))
+  l2 <- sum(b[start:p]^2)
+  l1 <- sum(abs(b[start:p]))
   pen <- lam * (0.5 * (1 - a) * l2 + a * l1)
   .t1_result(prss = rss + pen, rss = rss, penalty = pen, l1 = l1, l2 = l2,
              lambda = lam, alpha = a, n = n, p = p,

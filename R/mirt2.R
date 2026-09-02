@@ -37,14 +37,17 @@
 #'   consulted.
 #' @export
 Mirt2 <- function(y, theta, a, d, c = 0, D = 1) {
-  av <- .t1_vec(a); m <- length(av)
+  av <- .t1_vec(a)
+  m <- length(av)
   if (m == 0L) stop("a must name at least one dimension")
-  yv <- .t1_vec(y); n <- length(yv)
+  yv <- .t1_vec(y)
+  n <- length(yv)
   if (n == 0L) stop("y is empty")
   if (any(yv != 0 & yv != 1)) stop("y must be binary 0/1")
   cc <- as.numeric(c)
   if (!(cc >= 0 && cc < 1)) stop("c must lie in [0, 1)")
-  dd <- as.numeric(d); Dm <- as.numeric(D)
+  dd <- as.numeric(d)
+  Dm <- as.numeric(D)
   th <- if (m == 1L) matrix(.t1_vec(theta), ncol = 1L) else .t1_mat(theta)
   if (nrow(th) != n) stop("theta must have one row per response")
   if (ncol(th) != m) stop("theta must have one column per element of a")

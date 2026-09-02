@@ -32,7 +32,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Negctc(V, V)
 Negctc <- function(y_neg, D, X = NULL, alpha = 0.05) {
-  y <- .t1_vec(y_neg); d <- .t1_vec(D); n <- length(y)
+  y <- .t1_vec(y_neg)
+  d <- .t1_vec(D)
+  n <- length(y)
   if (n == 0L) stop("y_neg is empty")
   if (length(d) != n) stop("y_neg and D must have the same length")
   a <- as.numeric(alpha)

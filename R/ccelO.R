@@ -13,7 +13,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ccelo(V, V)
 Ccelo <- function(Y, P) {
-  Y <- .t1_mat(Y); P <- .t1_mat(P)
+  Y <- .t1_mat(Y)
+  P <- .t1_mat(P)
   if (nrow(Y) == 0L || nrow(Y) != nrow(P) || ncol(Y) != ncol(P))
     stop("Y and P must be non-empty and the same shape")
   if (any(P <= 0)) stop("predicted probabilities must be strictly positive")

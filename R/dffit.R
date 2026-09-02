@@ -26,7 +26,8 @@
   if (n <= p + 1L) stop("need n > p + 1 observations for deletion diagnostics")
   XtX <- .s03crossprod(D)
   inv <- lapply(seq_len(p), function(k) {
-    e <- numeric(p); e[k] <- 1
+    e <- numeric(p)
+    e[k] <- 1
     .s03cholsolve(XtX, e)
   })
   beta <- .s03cholsolve(XtX, .s03matvec(t(D), y))
@@ -82,7 +83,8 @@
 #' Dffit(V, V)
 Dffit <- function(y, X, intercept = TRUE) {
   f <- .bkw_influence(y, X, intercept)
-  n <- f$n; p <- f$p
+  n <- f$n
+  p <- f$p
   out <- numeric(n)
   for (i in seq_len(n)) {
     si <- .bkw_sdel(f$sse, f$e[i], f$h[i], n, p)

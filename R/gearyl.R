@@ -17,7 +17,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Localgeary(V, V)
 Localgeary <- function(x, W, scale = TRUE) {
-  x <- .t1_vec(x); W <- as.matrix(W); n <- length(x)
+  x <- .t1_vec(x)
+  W <- as.matrix(W)
+  n <- length(x)
   z <- if (isTRUE(scale)) {
     s <- stats::sd(x)
     if (s <= 0) stop("x has zero variance")

@@ -48,8 +48,12 @@ Chipsq <- function(count, width, lambda_bg, count_1k = NULL,
     v
   }
   wv <- vec(width)
-  c1 <- vec(count_1k); c5 <- vec(count_5k); c10 <- vec(count_10k)
-  lam_loc <- numeric(npk); pv <- numeric(npk); fe <- numeric(npk)
+  c1 <- vec(count_1k)
+  c5 <- vec(count_5k)
+  c10 <- vec(count_10k)
+  lam_loc <- numeric(npk)
+  pv <- numeric(npk)
+  fe <- numeric(npk)
   for (i in seq_len(npk)) {
     lam <- lambda_bg
     if (!is.null(c1) && use_1k) lam <- max(lam, c1[i] * wv[i] / 1000)

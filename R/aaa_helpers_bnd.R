@@ -18,8 +18,9 @@
   yv <- as.numeric(unlist(y))
   dv <- as.numeric(unlist(D))
   if (length(yv) == 0L) stop(paste0(name, ": y is empty"))
-  if (length(dv) != length(yv))
+  if (length(dv) != length(yv)) {
     stop(paste0(name, ": y and D must have the same length"))
+  }
   if (any(dv != 0 & dv != 1)) stop(paste0(name, ": D must be coded 0/1"))
   list(y = yv, d = dv)
 }
@@ -114,10 +115,12 @@
 .bnd_interval <- function(moments, name) {
   M <- as.matrix(moments)
   if (nrow(M) < 2L) stop(paste0(name, ": need at least two observations"))
-  if (ncol(M) != 2L)
+  if (ncol(M) != 2L) {
     stop(paste0(name, ": moments must have two columns, yL and yU"))
-  if (any(M[, 2] < M[, 1]))
+  }
+  if (any(M[, 2] < M[, 1])) {
     stop(paste0(name, ": yU is below yL at some observation"))
+  }
   list(yl = as.numeric(M[, 1]), yu = as.numeric(M[, 2]))
 }
 

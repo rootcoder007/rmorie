@@ -35,13 +35,19 @@ Azsearch <- function(state, net, num_sim, step = NULL, c_puct = 1.25,
                      max_depth = NULL, terminal = NULL, alternate = TRUE,
                      root_noise = NULL, eps = 0.25) {
   if (is.null(max_depth)) max_depth <- if (is.null(step)) 1L else 64L
-  ids <- list(); P <- list(); N <- list(); W <- list(); V <- numeric(0)
+  ids <- list()
+  P <- list()
+  N <- list()
+  W <- list()
+  V <- numeric(0)
   expand <- function(s) {
     out <- net(s)
     if (is.list(out) && length(out) == 2L) {
-      p <- .s03vec(out[[1]]); v <- as.numeric(out[[2]])
+      p <- .s03vec(out[[1]])
+      v <- as.numeric(out[[2]])
     } else {
-      p <- .s03vec(out); v <- 0
+      p <- .s03vec(out)
+      v <- 0
     }
     tot <- 0
     for (x in p) tot <- tot + x
@@ -67,30 +73,42 @@ Azsearch <- function(state, net, num_sim, step = NULL, c_puct = 1.25,
     P[[root]] <- (1 - e) * P[[root]] + e * et
   }
   for (sim in seq_len(as.integer(num_sim))) {
-    node <- root; path <- list(); depth <- 0L; v <- 0
+    node <- root
+    path <- list()
+    depth <- 0L
+    v <- 0
     repeat {
-      if (!is.null(terminal) && terminal(ids[[node]])) { v <- V[node]; break }
-      if (depth >= max_depth) { v <- V[node]; break }
+      if (!is.null(terminal) && terminal(ids[[node]])) { v <- V[node]
+      break }
+      if (depth >= max_depth) { v <- V[node]
+      break }
       tot <- 0
       for (x in N[[node]]) tot <- tot + x
       rt <- if (tot > 0) sqrt(tot) else 0
-      best <- 1L; bestscore <- NULL
+      best <- 1L
+      bestscore <- NULL
       for (a in seq_along(P[[node]])) {
         q <- if (N[[node]][a] > 0) W[[node]][a] / N[[node]][a] else 0
         sc <- q + c_puct * P[[node]][a] * rt / (1 + N[[node]][a])
-        if (is.null(bestscore) || sc > bestscore) { bestscore <- sc; best <- a }
+        if (is.null(bestscore) || sc > bestscore) { bestscore <- sc
+        best <- a }
       }
       path[[length(path) + 1L]] <- c(node, best)
       s2 <- if (!is.null(step)) step(ids[[node]], best - 1L) else NULL
-      if (is.null(s2)) { v <- V[node]; break }
+      if (is.null(s2)) { v <- V[node]
+      break }
       idx <- find(s2)
-      if (idx < 0L) { idx <- expand(s2); v <- V[idx]; break }
-      node <- idx; depth <- depth + 1L
+      if (idx < 0L) { idx <- expand(s2)
+      v <- V[idx]
+      break }
+      node <- idx
+      depth <- depth + 1L
     }
     acc <- v
     if (length(path) > 0L) for (i in seq(length(path), 1L)) {
       if (alternate) acc <- -acc
-      nd <- path[[i]][1]; a <- path[[i]][2]
+      nd <- path[[i]][1]
+      a <- path[[i]][2]
       N[[nd]][a] <- N[[nd]][a] + 1
       W[[nd]][a] <- W[[nd]][a] + acc
     }

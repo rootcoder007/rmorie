@@ -24,14 +24,16 @@ Randwk <- function(G, start = 1L, steps = 1L) {
   n <- nrow(M)
   if (n == 0L) stop("Randwk: graph is empty")
   if (ncol(M) != n) stop("Randwk: graph must be square")
-  start <- as.integer(start); steps <- as.integer(steps)
+  start <- as.integer(start)
+  steps <- as.integer(steps)
   if (start < 1L || start > n) stop("Randwk: start is outside the graph")
   if (steps < 0L) stop("Randwk: steps must be non-negative")
   if (any(M < 0)) stop("Randwk: weights must be non-negative")
   d <- rowSums(M)
   if (any(d <= 0)) stop("Randwk: every node must have positive degree")
   P <- M / d
-  p <- numeric(n); p[start] <- 1
+  p <- numeric(n)
+  p[start] <- 1
   for (s in seq_len(steps)) p <- as.numeric(p %*% P)
   am <- which.max(p)
   .t1_result(p = p, estimate = p[am], argmax = am - 1L, p_start = p[start],

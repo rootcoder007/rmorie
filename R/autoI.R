@@ -25,13 +25,15 @@
 Autoint <- function(X, y = NULL, K = 1, Wq = NULL, Wk = NULL, Wv = NULL,
                     Wres = NULL, v = NULL) {
   if (!is.null(v)) {
-    xs <- .s03vec(X); vs <- .s03mat(v)
+    xs <- .s03vec(X)
+    vs <- .s03mat(v)
     E <- matrix(0, length(xs), ncol(vs))
     for (m in seq_along(xs)) for (j in seq_len(ncol(vs))) E[m, j] <- vs[m, j] * xs[m]
   } else {
     E <- .s03mat(X)
   }
-  M <- nrow(E); d <- ncol(E)
+  M <- nrow(E)
+  d <- ncol(E)
   heads <- as.integer(K)
   prj <- function(W, hh) {
     if (is.null(W)) return(NULL)
@@ -41,8 +43,12 @@ Autoint <- function(X, y = NULL, K = 1, Wq = NULL, Wk = NULL, Wv = NULL,
   acc <- matrix(0, M, d)
   att0 <- vector("list", 0)
   for (h in seq_len(heads) - 1L) {
-    Q <- prj(Wq, h); Kp <- prj(Wk, h); Vp <- prj(Wv, h)
-    q <- vector("list", M); kk <- vector("list", M); vv <- vector("list", M)
+    Q <- prj(Wq, h)
+    Kp <- prj(Wk, h)
+    Vp <- prj(Wv, h)
+    q <- vector("list", M)
+    kk <- vector("list", M)
+    vv <- vector("list", M)
     for (m in seq_len(M)) {
       q[[m]] <- if (!is.null(Q)) .s03matvec(Q, E[m, ]) else as.numeric(E[m, ])
       kk[[m]] <- if (!is.null(Kp)) .s03matvec(Kp, E[m, ]) else as.numeric(E[m, ])

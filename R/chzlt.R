@@ -28,7 +28,8 @@
   e <- y - fit
   df <- n - p
   s2 <- sum(e * e) / df
-  ej <- numeric(p); ej[j] <- 1
+  ej <- numeric(p)
+  ej[j] <- 1
   col <- .s03cholsolve(XtX, ej)
   list(beta = beta[j], se = sqrt(s2 * col[j]), df = df)
 }
@@ -96,7 +97,9 @@ Chzlt <- function(model, treat = NULL, cov = NULL, R2_yu = 0, R2_du = 0,
   if (!(R2_yu >= 0 && R2_yu <= 1 && R2_du >= 0 && R2_du < 1))
     stop("R2_yu must lie in [0, 1] and R2_du in [0, 1)")
   f <- .ch_ols_se(y, D, 2L)
-  tau <- f$beta; se <- f$se; df <- f$df
+  tau <- f$beta
+  se <- f$se
+  df <- f$df
   t <- if (se > 0) tau / se else NaN
   bias <- se * sqrt(df) * sqrt(R2_yu * R2_du / (1 - R2_du))
   adj <- if (tau >= 0) tau - bias else tau + bias

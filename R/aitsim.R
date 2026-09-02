@@ -20,15 +20,19 @@ Ginisimp <- function(x) {
   tot <- 0
   for (v in raw) tot <- tot + v
   if (tot <= 0) {
-    return(list(D = NaN, estimate = NaN, lambda = NaN, inv_simpson = NaN,
-                p = numeric(0), n = 0L,
-                method = "Gini-Simpson diversity index"))
+    return(list(
+      D = NaN, estimate = NaN, lambda = NaN, inv_simpson = NaN,
+      p = numeric(0), n = 0L,
+      method = "Gini-Simpson diversity index"
+    ))
   }
   p <- raw / tot
   lam <- 0
   for (v in p) lam <- lam + v * v
   d <- 1 - lam
-  list(D = d, estimate = d, lambda = lam,
-       inv_simpson = if (lam > 0) 1 / lam else Inf,
-       p = p, n = length(p), method = "Gini-Simpson diversity index")
+  list(
+    D = d, estimate = d, lambda = lam,
+    inv_simpson = if (lam > 0) 1 / lam else Inf,
+    p = p, n = length(p), method = "Gini-Simpson diversity index"
+  )
 }

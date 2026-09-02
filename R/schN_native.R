@@ -30,7 +30,8 @@
 #' @export
 .schn_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
-  if (is.matrix(x)) { storage.mode(x) <- "double"; return(x) }
+  if (is.matrix(x)) { storage.mode(x) <- "double"
+  return(x) }
   stop("schn: expected a matrix or list of rows")
 }
 
@@ -65,7 +66,8 @@ gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
                                 gamma = NULL) {
   n <- as.integer(n_gaussians)
   if (n < 2L) stop("schn: at least 2 Gaussians are needed")
-  lo <- as.numeric(mu_min); hi <- as.numeric(mu_max)
+  lo <- as.numeric(mu_min)
+  hi <- as.numeric(mu_max)
   if (hi <= lo) stop("schn: mu_max must exceed mu_min")
   step <- (hi - lo) / (n - 1L)
   g <- if (is.null(gamma)) 1 / (2 * step^2) else as.numeric(gamma)
@@ -107,7 +109,8 @@ cosine_cutoff <- function(r, cutoff = 5.0) {
 cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
   feats <- .schn_mat(X)
   pos <- .schn_mat(R)
-  n <- nrow(feats); d <- ncol(feats)
+  n <- nrow(feats)
+  d <- ncol(feats)
   if (nrow(pos) != n) stop(sprintf("schn: %d feature rows but %d positions", n, nrow(pos)))
   out <- matrix(0, n, d)
   for (i in 1:n) {
@@ -139,10 +142,12 @@ cfconv <- function(X, R, filter_net, cutoff = 5.0, ...) {
 #' @export
 forces_from_energy <- function(energy_fn, R, h = 1e-5) {
   pos <- .schn_mat(R)
-  n <- nrow(pos); d <- ncol(pos)
+  n <- nrow(pos)
+  d <- ncol(pos)
   F <- matrix(0, n, d)
   for (i in 1:n) for (a in 1:d) {
-    up <- pos; dn <- pos
+    up <- pos
+    dn <- pos
     up[i, a] <- up[i, a] + h
     dn[i, a] <- dn[i, a] - h
     F[i, a] <- -(as.numeric(energy_fn(up)) - as.numeric(energy_fn(dn))) / (2 * h)

@@ -29,6 +29,8 @@ Valuehead <- function(x, W = NULL, b = 0, scale = 1) {
   for (i in seq_len(n)) pre <- pre + w[i] * f[i]
   pre <- pre * as.numeric(scale)
   v <- tanh(pre)
-  list(estimate = v, v = v, pre = pre, n = n,
-       method = "AlphaZero value head: linear projection then tanh")
+  list(
+    estimate = v, v = v, pre = pre, n = n,
+    method = "AlphaZero value head: linear projection then tanh"
+  )
 }

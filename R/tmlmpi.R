@@ -22,7 +22,8 @@
 #' @return A list with \code{F}, \code{IC}.
 #' @export
 .tmlmpi_cdf_bank <- function(yv, Dv, W, g, grid) {
-  n <- length(yv); K <- length(grid)
+  n <- length(yv)
+  K <- length(grid)
   Fv <- list(numeric(K), numeric(K))
   IC <- list(matrix(0, K, n), matrix(0, K, n))
   for (j in seq_len(K)) {
@@ -68,7 +69,9 @@
 #' @examples
 #' Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmpi <- function(y, D, X) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n == 0L || length(Dv) != n)
     stop("Tmlmpi: y and D must share one length")
   Xm <- as.matrix(X)
@@ -76,10 +79,13 @@ Tmlmpi <- function(y, D, X) {
   W <- cbind(1, Xm)
   gb <- .s4_glmbin(W, Dv)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)
-  grid <- sort(unique(yv)); K <- length(grid)
+  grid <- sort(unique(yv))
+  K <- length(grid)
   bk <- .tmlmpi_cdf_bank(yv, Dv, W, g, grid)
-  F <- bk$F; IC <- bk$IC
-  psi <- 0; ic <- numeric(n)
+  F <- bk$F
+  IC <- bk$IC
+  psi <- 0
+  ic <- numeric(n)
   for (j in seq_len(K)) {
     f0p <- if (j > 1L) F[[1]][j - 1L] else 0
     f1p <- if (j > 1L) F[[2]][j - 1L] else 0

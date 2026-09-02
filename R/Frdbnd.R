@@ -23,7 +23,8 @@
 #' @examples
 #' Frdbnd(F_0 = c(0.2, 0.5, 0.8), F_1 = c(0.3, 0.6, 0.9))
 Frdbnd <- function(F_0, F_1, joint = NULL) {
-  u <- .s03vec(F_0); v <- .s03vec(F_1)
+  u <- .s03vec(F_0)
+  v <- .s03vec(F_1)
   if (length(u) == 0L) stop("frechet_hoeffding_bounds: F_0 is empty")
   if (length(v) != length(u)) stop("frechet_hoeffding_bounds: F_0 and F_1 have different lengths")
   if (any(c(u, v) < 0 | c(u, v) > 1)) stop("frechet_hoeffding_bounds: marginal probabilities must lie in [0, 1]")

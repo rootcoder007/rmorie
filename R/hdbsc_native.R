@@ -39,9 +39,11 @@
   key[1] <- 0
   edges <- list()
   for (s in seq_len(n)) {
-    u <- -1L; best <- Inf
+    u <- -1L
+    best <- Inf
     for (k in seq_len(n)) {
-      if (!in_tree[k] && key[k] < best) { best <- key[k]; u <- k }
+      if (!in_tree[k] && key[k] < best) { best <- key[k]
+      u <- k }
     }
     in_tree[u] <- TRUE
     if (parent[u] != -1L) {
@@ -50,7 +52,8 @@
     for (v in seq_len(n)) {
       if (!in_tree[v]) {
         w <- max(core[u], core[v], D[u, v])
-        if (w < key[v]) { key[v] <- w; parent[v] <- u }
+        if (w < key[v]) { key[v] <- w
+        parent[v] <- u }
       }
     }
   }
@@ -85,9 +88,13 @@
   node_size <- rep(1L, 2 * n)            # index by (id+1)
   nid <- n
   for (oi in ord) {
-    w <- E[oi, 1]; a <- as.integer(E[oi, 2]); b <- as.integer(E[oi, 3])
-    ra <- find(a); rb <- find(b)
-    na <- node_of[ra + 1L]; nb <- node_of[rb + 1L]
+    w <- E[oi, 1]
+    a <- as.integer(E[oi, 2])
+    b <- as.integer(E[oi, 3])
+    ra <- find(a)
+    rb <- find(b)
+    na <- node_of[ra + 1L]
+    nb <- node_of[rb + 1L]
     children[[as.character(nid)]] <- list(l = na, r = nb, w = w)
     node_size[nid + 1L] <- node_size[na + 1L] + node_size[nb + 1L]
     par[ra + 1L] <- rb
@@ -112,7 +119,8 @@
   out <- integer(0)
   stack <- c(node)
   while (length(stack)) {
-    v <- stack[length(stack)]; stack <- stack[-length(stack)]
+    v <- stack[length(stack)]
+    stack <- stack[-length(stack)]
     if (v < n) {
       out <- c(out, v)
     } else {
@@ -169,31 +177,45 @@ morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
   edges <- .hdb_mst(D, core, n)
   say("single linkage")
   sl <- .hdb_linkage(edges, n)
-  root <- sl$root; children <- sl$children; node_size <- sl$node_size
+  root <- sl$root
+  children <- sl$children
+  node_size <- sl$node_size
 
   # condense (Algorithm 2).  Cluster ids 0-based to mirror Python:
   # root cluster id = n, new ids > n.
   next_cluster <- n + 1L
-  node_to_cluster <- list(); node_to_cluster[[as.character(root)]] <- n
-  birth <- list();       birth[[as.character(n)]] <- 0
-  birth_node <- list();  birth_node[[as.character(n)]] <- root
-  cluster_tree <- list(); cluster_tree[[as.character(n)]] <- integer(0)
-  parent_of <- list();   parent_of[[as.character(n)]] <- NA_integer_
+  node_to_cluster <- list()
+  node_to_cluster[[as.character(root)]] <- n
+  birth <- list()
+  birth[[as.character(n)]] <- 0
+  birth_node <- list()
+  birth_node[[as.character(n)]] <- root
+  cluster_tree <- list()
+  cluster_tree[[as.character(n)]] <- integer(0)
+  parent_of <- list()
+  parent_of[[as.character(n)]] <- NA_integer_
   rows <- list()
   stack <- c(root)
   while (length(stack)) {
-    node <- stack[length(stack)]; stack <- stack[-length(stack)]
+    node <- stack[length(stack)]
+    stack <- stack[-length(stack)]
     cid <- node_to_cluster[[as.character(node)]]
     if (node < n) next
     ch <- children[[as.character(node)]]
-    l <- ch$l; r <- ch$r; dist <- ch$w
+    l <- ch$l
+    r <- ch$r
+    dist <- ch$w
     lam <- if (dist <= 0) Inf else 1 / dist
-    szl <- node_size[l + 1L]; szr <- node_size[r + 1L]
-    ok_l <- szl >= mcs; ok_r <- szr >= mcs
+    szl <- node_size[l + 1L]
+    szr <- node_size[r + 1L]
+    ok_l <- szl >= mcs
+    ok_r <- szr >= mcs
     if (ok_l && ok_r) {
       for (pair in list(c(l, szl), c(r, szr))) {
-        side <- pair[1]; sz <- pair[2]
-        c_ <- next_cluster; next_cluster <- next_cluster + 1L
+        side <- pair[1]
+        sz <- pair[2]
+        c_ <- next_cluster
+        next_cluster <- next_cluster + 1L
         node_to_cluster[[as.character(side)]] <- c_
         birth[[as.character(c_)]] <- lam
         birth_node[[as.character(c_)]] <- side
@@ -209,7 +231,9 @@ morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
         rows[[length(rows) + 1L]] <- c(cid, p, lam, 1)
       }
     } else {
-      if (ok_l) { big <- l; small <- r } else { big <- r; small <- l }
+      if (ok_l) { big <- l
+      small <- r } else { big <- r
+      small <- l }
       for (p in .hdb_points_under(small, children, n)) {
         rows[[length(rows) + 1L]] <- c(cid, p, lam, 1)
       }
@@ -222,7 +246,9 @@ morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
   # stability (Eq. 3)
   stability <- setNames(rep(0, length(cl_ids)), as.character(cl_ids))
   for (row in rows) {
-    parent <- row[1]; lam <- row[3]; sz <- row[4]
+    parent <- row[1]
+    lam <- row[3]
+    sz <- row[4]
     if (is.infinite(lam)) next
     key <- as.character(parent)
     stability[key] <- stability[key] + sz * (lam - birth[[key]])

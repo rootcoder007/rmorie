@@ -19,7 +19,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ppcrep(V, V)
 Ppcrep <- function(t_obs, t_rep) {
-  tr <- .t1_vec(t_rep); S <- length(tr)
+  tr <- .t1_vec(t_rep)
+  S <- length(tr)
   if (S < 2L) stop("at least two replicates are required")
   to <- .t1_vec(t_obs)
   if (length(to) == 1L) to <- rep(to, S)

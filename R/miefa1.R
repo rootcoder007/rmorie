@@ -19,7 +19,9 @@
 #' Mifmi(0.4, 1.2, 5)$estimate
 #' @export
 Mifmi <- function(between, within, m) {
-  b <- as.numeric(between); w <- as.numeric(within); mm <- as.numeric(m)
+  b <- as.numeric(between)
+  w <- as.numeric(within)
+  mm <- as.numeric(m)
   fac <- if (mm > 0) 1 + 1 / mm else NaN
   total <- w + fac * b
   lam <- if (total != 0) (fac * b) / total else NaN

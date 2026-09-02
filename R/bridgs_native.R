@@ -44,8 +44,10 @@
 #'              log_q2 = function(x) -0.5 * (x - 0.5)^2)
 morie_bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
                          max_iter = 1000L) {
-  x1 <- as.list(draws1); x2 <- as.list(draws2)
-  n1 <- length(x1); n2 <- length(x2)
+  x1 <- as.list(draws1)
+  x2 <- as.list(draws2)
+  n1 <- length(x1)
+  n2 <- length(x2)
   if (n1 == 0L || n2 == 0L) stop("both draw sets must be non-empty")
   ll1 <- vapply(x1, function(z) log_q1(z) - log_q2(z), numeric(1))
   ll2 <- vapply(x2, function(z) log_q1(z) - log_q2(z), numeric(1))

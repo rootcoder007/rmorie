@@ -83,7 +83,8 @@
   if (n_folds > n) n_folds <- n
   folds <- vector("list", n_folds)
   for (v in seq_len(n_folds) - 1L) folds[[v + 1L]] <- (seq_len(n) - 1L) %% n_folds == v
-  mh <- numeric(n); eh <- numeric(n)
+  mh <- numeric(n)
+  eh <- numeric(n)
   for (v in seq_along(folds)) {
     val <- which(folds[[v]])
     tr <- setdiff(seq_len(n), val)
@@ -213,7 +214,8 @@
 morie_crfsel <- function(y, W, X, n_trees = 200L, min_leaf = 5L,
                          max_depth = 4L, decay = 2.0, seed = 0L,
                          names = NULL, permutation = FALSE) {
-  yv <- as.numeric(y); Wv <- as.numeric(W)
+  yv <- as.numeric(y)
+  Wv <- as.numeric(W)
   n <- length(yv)
   if (length(Wv) != n)
     stop(sprintf("crfsel: %d outcomes but %d treatments",
@@ -245,9 +247,11 @@ morie_crfsel <- function(y, W, X, n_trees = 200L, min_leaf = 5L,
   if (isTRUE(permutation)) {
     perm <- .permutation_importance(trees, Xm, pseudo, NULL,
                                     as.integer(seed), 3L)
-    permv <- perm$importance; base <- perm$baseline_error
+    permv <- perm$importance
+    base <- perm$baseline_error
   } else {
-    permv <- NULL; base <- NULL
+    permv <- NULL
+    base <- NULL
   }
   ord <- order(-freq)
   ranking <- lapply(seq_along(ord), function(r) {

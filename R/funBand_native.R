@@ -161,7 +161,9 @@ morie_funBand <- function(Y, alpha = 0.05, x = NULL, lam = NULL,
       v <- morie_funBand_gcv_score(y, A)
       if (is.null(best) || v < best$v) best <- list(v = v, lam = lmv, A = A)
     }
-    gcv <- best$v; lam_used <- best$lam; A <- best$A
+    gcv <- best$v
+    lam_used <- best$lam
+    A <- best$A
   } else {
     lam_used <- as.numeric(lam)
     A <- morie_funBand_influence_matrix(xs, lam_used)

@@ -26,10 +26,15 @@
 Ovbias <- function(delta = NULL, gamma = NULL, estimate = NULL, se = NULL, df = NULL, r2_yz = NULL, r2_dz = NULL) {
   bias <- NA_real_
   if (!is.null(delta) && !is.null(gamma)) bias <- as.numeric(delta) * as.numeric(gamma)
-  adj_se <- NA_real_; adj_t <- NA_real_; rel <- NA_real_; bf <- NA_real_
+  adj_se <- NA_real_
+  adj_t <- NA_real_
+  rel <- NA_real_
+  bf <- NA_real_
   if (!is.null(r2_yz) && !is.null(r2_dz) && !is.null(se) && !is.null(df)) {
-    ry <- as.numeric(r2_yz); rd <- as.numeric(r2_dz)
-    s <- as.numeric(se); d <- as.numeric(df)
+    ry <- as.numeric(r2_yz)
+    rd <- as.numeric(r2_dz)
+    s <- as.numeric(se)
+    d <- as.numeric(df)
     if (ry < 0 || ry >= 1 || rd < 0 || rd >= 1)
       stop("partial R2 values must be in [0, 1)")
     if (d <= 1) stop("df must exceed 1")

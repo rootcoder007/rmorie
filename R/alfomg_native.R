@@ -61,8 +61,11 @@
   cc <- length(msa[[1]][[1]])
   for (row in msa) {
     if (length(row) != r) stop("every sequence must have the same length")
-    for (v in row) if (length(v) != cc)
-      stop("every position must have the same width")
+    for (v in row) {
+      if (length(v) != cc) {
+        stop("every position must have the same width")
+      }
+    }
   }
   c(s, r, cc)
 }
@@ -100,19 +103,26 @@ morie_alfomg_softmax <- function(logits) {
 #' @return A list of lists of numeric vectors.
 #' @export
 morie_alfomg_opm <- function(msa) {
-  sh <- .alfomg_shape(msa); s <- sh[1]; r <- sh[2]; cc <- sh[3]
+  sh <- .alfomg_shape(msa)
+  s <- sh[1]
+  r <- sh[2]
+  cc <- sh[3]
   out <- vector("list", r)
   for (i in seq_len(r)) {
     row <- vector("list", r)
     for (j in seq_len(r)) {
       cell <- numeric(cc * cc)
       p <- 0L
-      for (a in seq_len(cc)) for (b in seq_len(cc)) {
-        p <- p + 1L
-        terms <- vapply(seq_len(s),
-                        function(k) msa[[k]][[i]][a] * msa[[k]][[j]][b],
-                        numeric(1))
-        cell[p] <- .w3_csum(terms) / s
+      for (a in seq_len(cc)) {
+        for (b in seq_len(cc)) {
+          p <- p + 1L
+          terms <- vapply(
+            seq_len(s),
+            function(k) msa[[k]][[i]][a] * msa[[k]][[j]][b],
+            numeric(1)
+          )
+          cell[p] <- .w3_csum(terms) / s
+        }
       }
       row[[j]] <- cell
     }
@@ -137,9 +147,11 @@ morie_alfomg_opm <- function(msa) {
 morie_alfomg_bias <- function(pair, w = NULL) {
   r <- length(pair)
   out <- matrix(0, r, r)
-  for (i in seq_len(r)) for (j in seq_len(r)) {
-    z <- pair[[i]][[j]]
-    out[i, j] <- if (is.null(w)) .w3_csum(z) / length(z) else .w3_dot(z, w)
+  for (i in seq_len(r)) {
+    for (j in seq_len(r)) {
+      z <- pair[[i]][[j]]
+      out[i, j] <- if (is.null(w)) .w3_csum(z) / length(z) else .w3_dot(z, w)
+    }
   }
   out
 }
@@ -164,30 +176,45 @@ morie_alfomg_bias <- function(pair, w = NULL) {
 #' @export
 morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
                                        gate = NULL) {
-  sh <- .alfomg_shape(msa); s <- sh[1]; r <- sh[2]; cc <- sh[3]
+  sh <- .alfomg_shape(msa)
+  s <- sh[1]
+  r <- sh[2]
+  cc <- sh[3]
   if (is.null(scale)) scale <- 1 / sqrt(as.numeric(cc))
   scale <- as.numeric(scale)
-  if (nrow(bias) != r || ncol(bias) != r)
+  if (nrow(bias) != r || ncol(bias) != r) {
     stop("the bias must be one scalar per ordered pair of positions")
-  if (!is.null(gate) && length(gate) != cc)
+  }
+  if (!is.null(gate) && length(gate) != cc) {
     stop("the gate must be one multiplier per channel")
-  attn <- vector("list", s); out <- vector("list", s)
+  }
+  attn <- vector("list", s)
+  out <- vector("list", s)
   for (k in seq_len(s)) {
     sq <- msa[[k]]
-    A <- vector("list", r); O <- vector("list", r)
+    A <- vector("list", r)
+    O <- vector("list", r)
     for (i in seq_len(r)) {
-      logits <- vapply(seq_len(r),
-                       function(j) .w3_dot(sq[[i]], sq[[j]]) * scale +
-                         bias[i, j], numeric(1))
+      logits <- vapply(
+        seq_len(r),
+        function(j) {
+          .w3_dot(sq[[i]], sq[[j]]) * scale +
+            bias[i, j]
+        }, numeric(1)
+      )
       a <- morie_alfomg_softmax(logits)
       A[[i]] <- a
-      row <- vapply(seq_len(cc), function(d)
-        .w3_csum(vapply(seq_len(r), function(j) a[j] * sq[[j]][d],
-                        numeric(1))), numeric(1))
+      row <- vapply(seq_len(cc), function(d) {
+        .w3_csum(vapply(
+          seq_len(r), function(j) a[j] * sq[[j]][d],
+          numeric(1)
+        ))
+      }, numeric(1))
       if (!is.null(gate)) row <- row * as.numeric(gate)
       O[[i]] <- row
     }
-    attn[[k]] <- A; out[[k]] <- O
+    attn[[k]] <- A
+    out[[k]] <- O
   }
   list(attn = attn, out = out)
 }
@@ -210,10 +237,16 @@ morie_alfomg_row_attention <- function(msa, bias, scale = NULL,
 #' @export
 morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
                          scale = NULL, gate = NULL) {
-  sh <- .alfomg_shape(msa); s <- sh[1]; r <- sh[2]; cc <- sh[3]
-  if (length(pair) != r || any(vapply(pair, length, integer(1)) != r))
-    stop("the pair representation must be square over the alignment's ",
-         "positions")
+  sh <- .alfomg_shape(msa)
+  s <- sh[1]
+  r <- sh[2]
+  cc <- sh[3]
+  if (length(pair) != r || any(vapply(pair, length, integer(1)) != r)) {
+    stop(
+      "the pair representation must be square over the alignment's ",
+      "positions"
+    )
+  }
   cz <- length(pair[[1]][[1]])
 
   opm <- morie_alfomg_opm(msa)
@@ -225,17 +258,23 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
     pair_out <- pair
     updated <- FALSE
   } else {
-    if (any(vapply(w_opm, length, integer(1)) != cc * cc))
+    if (any(vapply(w_opm, length, integer(1)) != cc * cc)) {
       stop("each projection row must span the whole outer product")
-    if (length(w_opm) != cz)
+    }
+    if (length(w_opm) != cz) {
       stop("the projection must land on the pair width")
+    }
     pair_out <- vector("list", r)
     for (i in seq_len(r)) {
       row <- vector("list", r)
-      for (j in seq_len(r))
-        row[[j]] <- vapply(seq_len(cz), function(d)
-          pair[[i]][[j]][d] + .w3_dot(w_opm[[d]], opm[[i]][[j]]),
-          numeric(1))
+      for (j in seq_len(r)) {
+        row[[j]] <- vapply(
+          seq_len(cz), function(d) {
+            pair[[i]][[j]][d] + .w3_dot(w_opm[[d]], opm[[i]][[j]])
+          },
+          numeric(1)
+        )
+      }
       pair_out[[i]] <- row
     }
     updated <- TRUE
@@ -246,23 +285,34 @@ morie_alfomg <- function(msa, pair, w_bias = NULL, w_opm = NULL,
   # summary of the attention that reads the same regardless of how many
   # sequences or positions there are.
   dg <- numeric(0)
-  for (k in seq_len(s)) for (i in seq_len(r))
-    dg <- c(dg, attn[[k]][[i]][i])
-  list(opm = opm, bias = b, attn = attn, msa_out = ra$out,
-       pair_out = pair_out, pair_updated = updated,
-       self_attention = .w3_csum(dg) / as.numeric(s * r),
-       n_seq = s, n_pos = r, n_channel = cc, n_pair_channel = cz,
-       scale = if (is.null(scale)) 1 / sqrt(as.numeric(cc))
-               else as.numeric(scale),
-       gated = !is.null(gate),
-       method = "OpenFold Evoformer MSA-pair head")
+  for (k in seq_len(s)) {
+    for (i in seq_len(r)) {
+      dg <- c(dg, attn[[k]][[i]][i])
+    }
+  }
+  list(
+    opm = opm, bias = b, attn = attn, msa_out = ra$out,
+    pair_out = pair_out, pair_updated = updated,
+    self_attention = .w3_csum(dg) / as.numeric(s * r),
+    n_seq = s, n_pos = r, n_channel = cc, n_pair_channel = cz,
+    scale = if (is.null(scale)) {
+      1 / sqrt(as.numeric(cc))
+    } else {
+      as.numeric(scale)
+    },
+    gated = !is.null(gate),
+    method = "OpenFold Evoformer MSA-pair head"
+  )
 }
 
 #' One-line summary of the alfomg module
 #'
 #' @return A character scalar.
 #' @export
-morie_alfomg_cheatsheet <- function()
-  paste0("alfomg: OpenFold MSA-pair head. Outer product mean for ",
-         "MSA->pair, row attention with a pair bias for pair->MSA; ",
-         "trained weights are parameters, not constants")
+morie_alfomg_cheatsheet <- function() {
+  paste0(
+    "alfomg: OpenFold MSA-pair head. Outer product mean for ",
+    "MSA->pair, row attention with a pair bias for pair->MSA; ",
+    "trained weights are parameters, not constants"
+  )
+}

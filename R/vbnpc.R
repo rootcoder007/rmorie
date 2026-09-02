@@ -70,17 +70,22 @@ Vbnpc <- function(y, K_truncate = 5, alpha = 1, sigma2 = 1, m0 = 0, s0 = 10,
   converged <- FALSE
   for (k0 in seq_len(as.integer(max_iter))) {
     it <- k0
-    elv <- numeric(K); el1v <- numeric(K)
+    elv <- numeric(K)
+    el1v <- numeric(K)
     for (t in seq_len(K)) {
       dg <- .s03digamma(g1[t] + g2[t])
       elv[t] <- .s03digamma(g1[t]) - dg
       el1v[t] <- .s03digamma(g2[t]) - dg
     }
-    elv[K] <- 0; el1v[K] <- 0
-    cum <- numeric(K); acc <- 0
-    for (t in seq_len(K)) { cum[t] <- acc; acc <- acc + el1v[t] }
+    elv[K] <- 0
+    el1v[K] <- 0
+    cum <- numeric(K)
+    acc <- 0
+    for (t in seq_len(K)) { cum[t] <- acc
+    acc <- acc + el1v[t] }
     for (i in seq_len(n)) {
-      sc <- numeric(K); best <- NA_real_
+      sc <- numeric(K)
+      best <- NA_real_
       for (t in seq_len(K)) {
         lp <- -0.5 * log(2 * pi * sigma2) -
           ((yv[i] - m[t])^2 + s2[t]) / (2 * sigma2)
@@ -88,18 +93,26 @@ Vbnpc <- function(y, K_truncate = 5, alpha = 1, sigma2 = 1, m0 = 0, s0 = 10,
         if (is.na(best) || sc[t] > best) best <- sc[t]
       }
       tot <- 0
-      for (t in seq_len(K)) { sc[t] <- exp(sc[t] - best); tot <- tot + sc[t] }
+      for (t in seq_len(K)) { sc[t] <- exp(sc[t] - best)
+      tot <- tot + sc[t] }
       for (t in seq_len(K)) phi[i, t] <- sc[t] / tot
     }
-    Nt <- numeric(K); Sy <- numeric(K)
+    Nt <- numeric(K)
+    Sy <- numeric(K)
     for (t in seq_len(K)) {
-      a <- 0; b <- 0
-      for (i in seq_len(n)) { a <- a + phi[i, t]; b <- b + phi[i, t] * yv[i] }
-      Nt[t] <- a; Sy[t] <- b
+      a <- 0
+      b <- 0
+      for (i in seq_len(n)) { a <- a + phi[i, t]
+      b <- b + phi[i, t] * yv[i] }
+      Nt[t] <- a
+      Sy[t] <- b
     }
-    tail <- 0; gt <- numeric(K)
-    for (t in seq(K, 1L)) { gt[t] <- tail; tail <- tail + Nt[t] }
-    for (t in seq_len(K)) { g1[t] <- 1 + Nt[t]; g2[t] <- alpha + gt[t] }
+    tail <- 0
+    gt <- numeric(K)
+    for (t in seq(K, 1L)) { gt[t] <- tail
+    tail <- tail + Nt[t] }
+    for (t in seq_len(K)) { g1[t] <- 1 + Nt[t]
+    g2[t] <- alpha + gt[t] }
     for (t in seq_len(K)) {
       prec <- p0 + Nt[t] / sigma2
       s2[t] <- 1 / prec
@@ -110,9 +123,12 @@ Vbnpc <- function(y, K_truncate = 5, alpha = 1, sigma2 = 1, m0 = 0, s0 = 10,
       elv[t] <- .s03digamma(g1[t]) - dg
       el1v[t] <- .s03digamma(g2[t]) - dg
     }
-    elv[K] <- 0; el1v[K] <- 0
-    cum <- numeric(K); acc <- 0
-    for (t in seq_len(K)) { cum[t] <- acc; acc <- acc + el1v[t] }
+    elv[K] <- 0
+    el1v[K] <- 0
+    cum <- numeric(K)
+    acc <- 0
+    for (t in seq_len(K)) { cum[t] <- acc
+    acc <- acc + el1v[t] }
     elbo <- 0
     if (K > 1L) for (t in seq_len(K - 1L)) {
       elbo <- elbo + log(alpha) + (alpha - 1) * el1v[t]
@@ -140,8 +156,10 @@ Vbnpc <- function(y, K_truncate = 5, alpha = 1, sigma2 = 1, m0 = 0, s0 = 10,
   }
   ev <- g1 / (g1 + g2)
   ev[K] <- 1
-  w <- numeric(K); rem <- 1
-  for (t in seq_len(K)) { w[t] <- ev[t] * rem; rem <- rem * (1 - ev[t]) }
+  w <- numeric(K)
+  rem <- 1
+  for (t in seq_len(K)) { w[t] <- ev[t] * rem
+  rem <- rem * (1 - ev[t]) }
   mono <- TRUE
   if (length(path) > 1L) {
     for (i in seq(2L, length(path))) if (path[i] < path[i - 1L] - 1e-8) mono <- FALSE

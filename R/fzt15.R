@@ -30,15 +30,21 @@
 Mgkvar <- function(varh, var4h, cov, n = NULL, boundary = FALSE) {
   var_t <- 4 * varh + var4h - 4 * cov
   if (isTRUE(boundary)) {
-    pow_h <- -4 / 11; pow_mse <- -8 / 11; region <- "boundary"
+    pow_h <- -4 / 11
+    pow_mse <- -8 / 11
+    region <- "boundary"
   } else {
-    pow_h <- -4 / 9; pow_mse <- -8 / 9; region <- "interior"
+    pow_h <- -4 / 9
+    pow_mse <- -8 / 9
+    region <- "interior"
   }
   if (is.null(n)) {
-    hopt <- NA_real_; mserate <- NA_real_
+    hopt <- NA_real_
+    mserate <- NA_real_
   } else {
     if (n < 1) stop("sample size must be at least 1.")
-    hopt <- n^pow_h; mserate <- n^pow_mse
+    hopt <- n^pow_h
+    mserate <- n^pow_mse
   }
   list(variance = var_t, hopt = hopt, mserate = mserate, region = region,
        method = "modified gamma KDE variance (Theorem 1.5)")

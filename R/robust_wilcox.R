@@ -183,8 +183,10 @@ morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_welch_test(V, V)
 morie_welch_test <- function(x, y) {
-  a <- x[!is.na(x)]; b <- y[!is.na(y)]
-  n1 <- length(a); n2 <- length(b)
+  a <- x[!is.na(x)]
+  b <- y[!is.na(y)]
+  n1 <- length(a)
+  n2 <- length(b)
   q1 <- stats::var(a) / n1
   q2 <- stats::var(b) / n2
   se <- sqrt(q1 + q2)
@@ -197,14 +199,17 @@ morie_welch_test <- function(x, y) {
 #' @rdname morie_welch_test
 #' @export
 morie_yuen_test <- function(x, y, tr = 0.2) {
-  a <- x[!is.na(x)]; b <- y[!is.na(y)]
-  n1 <- length(a); n2 <- length(b)
+  a <- x[!is.na(x)]
+  b <- y[!is.na(y)]
+  n1 <- length(a)
+  n2 <- length(b)
   h1 <- n1 - 2 * morie_robust_trim_counts(n1, tr)
   h2 <- n2 - 2 * morie_robust_trim_counts(n2, tr)
   if (h1 < 2 || h2 < 2) stop("too much trimming")
   d1 <- (n1 - 1) * morie_winsorized_variance(a, tr) / (h1 * (h1 - 1))
   d2 <- (n2 - 1) * morie_winsorized_variance(b, tr) / (h2 * (h2 - 1))
-  t1 <- morie_trimmed_mean(a, tr); t2 <- morie_trimmed_mean(b, tr)
+  t1 <- morie_trimmed_mean(a, tr)
+  t2 <- morie_trimmed_mean(b, tr)
   se <- sqrt(d1 + d2)
   tstat <- (t1 - t2) / se
   df <- (d1 + d2)^2 / (d1^2 / (h1 - 1) + d2^2 / (h2 - 1))
@@ -356,7 +361,8 @@ morie_percentage_bend_correlation <- function(x, y, beta = 0.2) {
     s <- (v - morie_pbos(v, beta)) / omega
     pmin(pmax(s, -1), 1)
   }
-  a <- scaled(x); b <- scaled(y)
+  a <- scaled(x)
+  b <- scaled(y)
   r <- sum(a * b) / sqrt(sum(a^2) * sum(b^2))
   tstat <- r * sqrt((n - 2) / (1 - r^2))
   list(cor = r, statistic = tstat, n = n,
@@ -391,8 +397,10 @@ morie_winsorized_correlation <- function(x, y, tr = 0.2) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_cliff_delta(V, V)
 morie_cliff_delta <- function(x, y, alpha = 0.05) {
-  a <- x[!is.na(x)]; b <- y[!is.na(y)]
-  n1 <- length(a); n2 <- length(b)
+  a <- x[!is.na(x)]
+  b <- y[!is.na(y)]
+  n1 <- length(a)
+  n2 <- length(b)
   m <- sign(outer(a, b, "-"))
   d <- mean(m)
   phat <- (1 - d) / 2
@@ -418,12 +426,16 @@ morie_cliff_delta <- function(x, y, alpha = 0.05) {
 #' @rdname morie_cliff_delta
 #' @export
 morie_brunner_munzel <- function(x, y, alpha = 0.05) {
-  a <- x[!is.na(x)]; b <- y[!is.na(y)]
-  n1 <- length(a); n2 <- length(b)
+  a <- x[!is.na(x)]
+  b <- y[!is.na(y)]
+  n1 <- length(a)
+  n2 <- length(b)
   N <- n1 + n2
   R <- rank(c(a, b))
-  R1 <- mean(R[1:n1]); R2 <- mean(R[(n1 + 1):N])
-  Rg1 <- rank(a); Rg2 <- rank(b)
+  R1 <- mean(R[1:n1])
+  R2 <- mean(R[(n1 + 1):N])
+  Rg1 <- rank(a)
+  Rg2 <- rank(b)
   s1 <- sum((R[1:n1] - Rg1 - R1 + (n1 + 1) / 2)^2) / (n1 - 1)
   s2 <- sum((R[(n1 + 1):N] - Rg2 - R2 + (n2 + 1) / 2)^2) / (n2 - 1)
   se <- sqrt(N) * sqrt(N * (s1 / n2^2 / n1 + s2 / n1^2 / n2))
@@ -530,13 +542,16 @@ morie_brunner_dette_munk <- function(groups) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_akp_effect_size(V, V)
 morie_akp_effect_size <- function(x, y, tr = 0.2, equal_variance = TRUE) {
-  a <- x[!is.na(x)]; b <- y[!is.na(y)]
-  n1 <- length(a); n2 <- length(b)
+  a <- x[!is.na(x)]
+  b <- y[!is.na(y)]
+  n1 <- length(a)
+  n2 <- length(b)
   s1 <- morie_winsorized_variance(a, tr)
   s2 <- morie_winsorized_variance(b, tr)
   cterm <- 1
   if (tr > 0) {
-    lo <- stats::qnorm(tr); hi <- stats::qnorm(1 - tr)
+    lo <- stats::qnorm(tr)
+    hi <- stats::qnorm(1 - tr)
     f <- function(u) u^2 * stats::dnorm(u)
     cterm <- stats::integrate(f, lo, hi)$value + 2 * lo^2 * tr
   }

@@ -22,13 +22,17 @@
 #' set.seed(1)
 #' r <- Scbsft(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), baseline = rnorm(10)); TRUE
 Scbsft <- function(y, D, X, baseline) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); bl <- as.numeric(baseline)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  bl <- as.numeric(baseline)
   n <- length(yv)
   V <- cbind(1, as.matrix(X), bl)
-  i1 <- which(Dv > 0.5); i0 <- which(Dv <= 0.5)
+  i1 <- which(Dv > 0.5)
+  i0 <- which(Dv <= 0.5)
   b1 <- .t1_lstsq(V[i1, , drop = FALSE], yv[i1])$beta
   b0 <- .t1_lstsq(V[i0, , drop = FALSE], yv[i0])$beta
-  m1 <- as.numeric(V %*% b1); m0 <- as.numeric(V %*% b0)
+  m1 <- as.numeric(V %*% b1)
+  m0 <- as.numeric(V %*% b0)
   pi_ <- length(i1) / n
   psi <- sum(m1 - m0) / n
   ic <- Dv * (yv - m1) / pi_ - (1 - Dv) * (yv - m0) / (1 - pi_) + m1 - m0 - psi

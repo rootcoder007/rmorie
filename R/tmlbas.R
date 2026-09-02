@@ -21,7 +21,9 @@
 #' @examples
 #' Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlbas <- function(y, D, X, baseline) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); bl <- as.numeric(baseline)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  bl <- as.numeric(baseline)
   n <- length(yv)
   W <- cbind(1, as.matrix(X), bl)
   gb <- .s4_glmbin(W, Dv)

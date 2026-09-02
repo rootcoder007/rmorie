@@ -21,16 +21,19 @@
 #' @examples
 #' Poispred(y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, beta = 0.5)
 Poispred <- function(y, alpha, beta, exposure = NULL) {
-  y <- .t1_vec(y); n <- length(y)
+  y <- .t1_vec(y)
+  n <- length(y)
   if (n < 1L) stop("at least one observation is required")
   if (any(y < 0)) stop("counts must be non-negative")
-  a <- as.numeric(alpha); b <- as.numeric(beta)
+  a <- as.numeric(alpha)
+  b <- as.numeric(beta)
   if (a <= 0 || b <= 0)
     stop("the Gamma prior needs alpha > 0 and beta > 0")
   e <- if (is.null(exposure)) rep(1, n) else .t1_vec(exposure)
   if (length(e) != n) stop("exposure must have one entry per observation")
   if (any(e <= 0)) stop("exposures must be positive")
-  ap <- a + sum(y); bp <- b + sum(e)
+  ap <- a + sum(y)
+  bp <- b + sum(e)
   pm <- ap / bp
   pv <- pm * (1 + 1 / bp)
   .t1_result(alpha_post = ap, beta_post = bp, rate_mean = pm,

@@ -41,8 +41,13 @@
 #' morie_sacc(P = 1, R = 5L, gamma = 0.5)
 morie_sacc <- function(P, R, gamma, temp = 1, tol = 1e-12,
                        max_eval = 100000L, max_improve = 1000L) {
-  z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A
-  gamma <- as.numeric(gamma); temp <- as.numeric(temp)
+  z <- .mdp_args(P, R)
+  Pm <- z$Pm
+  R <- z$R
+  S <- z$S
+  A <- z$A
+  gamma <- as.numeric(gamma)
+  temp <- as.numeric(temp)
   tol <- as.numeric(tol)
   if (temp <= 0) stop("temp must be positive")
   Q <- matrix(0, S, A)
@@ -89,11 +94,14 @@ morie_sacc <- function(P, R, gamma, temp = 1, tol = 1e-12,
         logpi[s, a] <- if (p > 0) log(p) else -1e300
       }
     }
-    if (moved < tol) { converged <- TRUE; break }
+    if (moved < tol) { converged <- TRUE
+    break }
   }
-  V <- numeric(S); H <- numeric(S)
+  V <- numeric(S)
+  H <- numeric(S)
   for (s in seq_len(S)) {
-    acc <- 0; h <- 0
+    acc <- 0
+    h <- 0
     for (a in seq_len(A)) {
       acc <- acc + pi[s, a] * (Q[s, a] - temp * logpi[s, a])
       if (pi[s, a] > 0) h <- h - pi[s, a] * logpi[s, a]

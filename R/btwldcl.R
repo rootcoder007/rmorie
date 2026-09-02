@@ -46,8 +46,10 @@
 #' @export
 Btwldcl <- function(X, y, cluster, B = 200, seed = 1, coef = 1, beta0 = 0,
                     alpha = 0.05) {
-  Xm <- .s03mat(X); yy <- .s03vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .s03mat(X)
+  yy <- .s03vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   groups <- as.character(cluster)
   if (n != length(yy) || n != length(groups))
     stop("boot_wild_cluster: X, y and cluster have different lengths")
@@ -68,7 +70,8 @@ Btwldcl <- function(X, y, cluster, B = 200, seed = 1, coef = 1, beta0 = 0,
   w <- if (se > 0) (bh[j0 + 1L] - as.numeric(beta0)) / se else NaN
   gid <- match(groups, keys)
   g <- .t1_lcg(seed)
-  reps <- vector("list", as.integer(B)); ws <- numeric(as.integer(B))
+  reps <- vector("list", as.integer(B))
+  ws <- numeric(as.integer(B))
   for (b in seq_len(as.integer(B))) {
     v <- vapply(seq_len(G), function(k) if (g$unif() < 0.5) 1 else -1, 0)
     ys <- fit + res * v[gid]

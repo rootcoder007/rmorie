@@ -13,9 +13,12 @@
 #' madMov(c(1, 2, 3, 4, 5, 6), 3)$values
 #' @export
 madMov <- function(x, window, constant = 1.4826) {
-  v <- as.numeric(x); w <- as.integer(window); n <- length(v)
+  v <- as.numeric(x)
+  w <- as.integer(window)
+  n <- length(v)
   m <- n - w + 1L
-  vals <- numeric(max(m, 0L)); ctrs <- numeric(max(m, 0L))
+  vals <- numeric(max(m, 0L))
+  ctrs <- numeric(max(m, 0L))
   if (m >= 1L) for (j in seq_len(m)) {
     seg <- v[j:(j + w - 1L)]
     cc <- stats::median(seg)

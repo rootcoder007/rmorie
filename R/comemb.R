@@ -55,9 +55,11 @@
 Comemb <- function(G, p = 1, q = 1, dim = 8, walk_len = 10, n_walks = 4,
                    window = 3, epochs = 1, lr = 0.05, neg = 2, seed = 42) {
   g <- .dw_adj(G)
-  n <- g$n; nb <- g$nb
+  n <- g$n
+  nb <- g$nb
   if (!(p > 0 && q > 0)) stop("p and q must be strictly positive")
-  dim <- as.integer(dim); walk_len <- as.integer(walk_len)
+  dim <- as.integer(dim)
+  walk_len <- as.integer(walk_len)
   if (dim < 1L) stop("dim must be at least 1")
   if (walk_len < 2L) stop("walk_len must be at least 2")
   e <- .ghc_rng(seed)
@@ -76,7 +78,8 @@ Comemb <- function(G, p = 1, q = 1, dim = 8, walk_len = 10, n_walks = 4,
       pick <- length(wt)
       for (k in seq_along(wt)) {
         acc <- acc + wt[k]
-        if (u <= acc) { pick <- k; break }
+        if (u <= acc) { pick <- k
+        break }
       }
       prev <- cur
       cur <- nb[[cur]][pick]
@@ -87,9 +90,11 @@ Comemb <- function(G, p = 1, q = 1, dim = 8, walk_len = 10, n_walks = 4,
   sg <- .dw_skipgram(walks, n, dim, as.integer(window), as.integer(epochs),
                      as.numeric(lr), as.integer(neg), e)
   W <- sg$W
-  tot <- 0; cnt <- 0L
+  tot <- 0
+  cnt <- 0L
   for (i in seq_len(n)) for (j in nb[[i]]) {
-    a <- sqrt(sum(W[i, ] * W[i, ])); b <- sqrt(sum(W[j, ] * W[j, ]))
+    a <- sqrt(sum(W[i, ] * W[i, ]))
+    b <- sqrt(sum(W[j, ] * W[j, ]))
     if (a > 0 && b > 0) {
       s <- 0
       for (d in seq_len(dim)) s <- s + W[i, d] * W[j, d]

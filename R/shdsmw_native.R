@@ -62,8 +62,10 @@
 #' @return A list with \code{coef}, \code{se}.
 #' @export
 .shdsmw_wls <- function(X, y, w) {
-  X <- as.matrix(X); storage.mode(X) <- "double"
-  y <- .vec(y); w <- .vec(w)
+  X <- as.matrix(X)
+  storage.mode(X) <- "double"
+  y <- .vec(y)
+  w <- .vec(w)
   n <- length(y)
   if (nrow(X) != n) stop("X and y length mismatch")
   # diagonal weight matrix; weighted normal equations X' W X b = X' W y
@@ -121,7 +123,8 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
     if (is.null(L_block) || length(L_block) == 0L) {
       X <- matrix(1, nrow = n, ncol = 1L)
     } else {
-      Lm <- as.matrix(L_block); storage.mode(Lm) <- "double"
+      Lm <- as.matrix(L_block)
+      storage.mode(Lm) <- "double"
       X <- cbind(1, Lm)
     }
     p <- ncol(X)
@@ -130,7 +133,8 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
       p1 <- max(min(m, 1 - 1e-12), 1e-12)
       return(rep(p1, n))
     }
-    pen <- rep(0, p); pen[-1L] <- penalty
+    pen <- rep(0, p)
+    pen[-1L] <- penalty
     eta <- as.numeric(X[, -1L, drop = FALSE] %*%
                       rep(0, p - 1L))
     mu <- rep(mean(A), n)
@@ -152,7 +156,8 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
   }
 
   fit_at <- function(lm) {
-    w <- numeric(n); per <- list()
+    w <- numeric(n)
+    per <- list()
     for (t in seq_along(A_hist)) {
       L_block <- if (length(L_hist) >= t) L_hist[[t]] else NULL
       ps <- ridge_ps(A_hist[[t]], L_block, penalty = lm)
@@ -173,7 +178,8 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
                      deparse(contrast)))
     X <- matrix(e, n, 1L)
     f <- .shdsmw_wls(X, yv, w)
-    s1 <- sum(w); s2 <- sum(w * w)
+    s1 <- sum(w)
+    s2 <- sum(w * w)
     list(lam = as.numeric(lm), estimate = f$coef[1L],
          se = f$se[1L], weights = w,
          mean_weight = s1 / n, max_weight = max(w),

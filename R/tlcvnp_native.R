@@ -114,7 +114,8 @@ smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
 #' @return A list with \code{bias_order}, \code{h}, \code{smoothness}, \code{note}.
 #' @export
 smoothing_bias <- function(true_density, x0, h, smoothness = 2.0) {
-  hh <- as.numeric(h); s <- as.numeric(smoothness)
+  hh <- as.numeric(h)
+  s <- as.numeric(smoothness)
   if (hh <= 0 || s <= 0)
     stop("tlcvnp: bandwidth and smoothness must be positive")
   list(bias_order = hh^s, h = hh, smoothness = s,
@@ -161,7 +162,8 @@ select_bandwidth <- function(X, x0, bandwidths,
         break
       }
     }
-    if (ok) { chosen <- i - 1L; break }
+    if (ok) { chosen <- i - 1L
+    break }
   }
   list(h = hs[chosen + 1L], fit = fits[[chosen + 1L]],
        criterion = criterion,
@@ -197,7 +199,9 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
     j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
     if (j == 0L) j <- 1L
     if (j == i) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j]; idx[j] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j]
+    idx[j] <- tmp
   }
   folds <- lapply(seq_len(as.integer(V)), function(f)
     sort(idx[seq(f, length(idx), by = as.integer(V))]))

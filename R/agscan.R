@@ -35,20 +35,29 @@ Selfconsis <- function(policy_net, seeds = NULL) {
   }
   m <- length(rows)
   if (m == 0L) {
-    return(list(estimate = NaN, jsd = NaN, entropies = numeric(0), n = 0L,
-                method = "Policy self-consistency"))
+    return(list(
+      estimate = NaN, jsd = NaN, entropies = numeric(0), n = 0L,
+      method = "Policy self-consistency"
+    ))
   }
-  norm <- lapply(rows, function(p) { t <- 0; for (x in p) t <- t + x
-                                     if (t > 0) p / t else p })
+  norm <- lapply(rows, function(p) {
+    t <- 0
+    for (x in p) t <- t + x
+    if (t > 0) p / t else p
+  })
   K <- length(norm[[1]])
   pbar <- numeric(K)
   for (p in norm) for (a in seq_len(K)) pbar[a] <- pbar[a] + p[a] / m
   ent <- vapply(norm, ent1, 0)
   jsd <- ent1(pbar) - .s03mean(ent)
-  list(estimate = jsd, jsd = jsd, entropies = ent, mean_entropy = .s03mean(ent),
-       sd_entropy = if (m > 1L) .s03sd(ent, 1L) else NaN,
-       range_entropy = max(ent) - min(ent), mean_policy = pbar, n = m,
-       method = paste0("Self-consistency by Shannon entropy (1948 eq. 11) and ",
-                       "Jensen-Shannon divergence (Lin 1991 eq. 3.1); the ",
-                       "AlphaZero papers state no such statistic"))
+  list(
+    estimate = jsd, jsd = jsd, entropies = ent, mean_entropy = .s03mean(ent),
+    sd_entropy = if (m > 1L) .s03sd(ent, 1L) else NaN,
+    range_entropy = max(ent) - min(ent), mean_policy = pbar, n = m,
+    method = paste0(
+      "Self-consistency by Shannon entropy (1948 eq. 11) and ",
+      "Jensen-Shannon divergence (Lin 1991 eq. 3.1); the ",
+      "AlphaZero papers state no such statistic"
+    )
+  )
 }

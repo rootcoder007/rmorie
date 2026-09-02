@@ -21,8 +21,11 @@
 #' @export
 Retention <- function(y, Q = NULL, K = NULL, V = NULL, gamma = 0.9) {
   Qm <- .s03mat(if (!is.null(Q)) Q else y)
-  Km <- .s03mat(K); Vm <- .s03mat(V)
-  n <- nrow(Qm); dk <- ncol(Qm); dv <- ncol(Vm)
+  Km <- .s03mat(K)
+  Vm <- .s03mat(V)
+  n <- nrow(Qm)
+  dk <- ncol(Qm)
+  dv <- ncol(Vm)
   g <- as.numeric(gamma)
   S <- matrix(0, dk, dv)
   out <- matrix(0, n, dv)

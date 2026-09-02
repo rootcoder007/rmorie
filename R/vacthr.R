@@ -15,7 +15,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Vaccthresh(V)
 Vaccthresh <- function(R0, efficacy = 1) {
-  r0 <- .t1_vec(R0); e <- as.numeric(efficacy)
+  r0 <- .t1_vec(R0)
+  e <- as.numeric(efficacy)
   if (e <= 0 || e > 1) stop("efficacy must be in (0, 1]")
   if (any(r0 <= 0)) stop("R0 must be positive")
   pc <- 1 - 1 / r0

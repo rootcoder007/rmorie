@@ -28,7 +28,8 @@
 #' y <- rnorm(10)
 #' Hertbg(y, K)
 Hertbg <- function(y, K, grid = 41, refine = 40) {
-  yv <- .s03vec(y); Km <- .s03mat(K)
+  yv <- .s03vec(y)
+  Km <- .s03mat(K)
   n <- length(yv)
   if (n < 3L) stop("heritability: need at least three observations")
   if (nrow(Km) != n || ncol(Km) != n) stop("heritability: K must be n x n")
@@ -39,18 +40,22 @@ Hertbg <- function(y, K, grid = 41, refine = 40) {
     L <- .s03chol(V)
     Vi_y <- .s03cholsolve(V, yv)
     Vi_1 <- .s03cholsolve(V, rep(1, n))
-    s11 <- sum(Vi_1); s1y <- sum(Vi_y)
+    s11 <- sum(Vi_1)
+    s1y <- sum(Vi_y)
     yPy <- sum(yv * Vi_y) - s1y * s1y / s11
     list(ll = -0.5 * (2 * sum(log(diag(L))) + log(s11) + (n - 1) * log(yPy)), yPy = yPy)
   }
-  lo <- 1e-6; hi <- 1 - 1e-6
+  lo <- 1e-6
+  hi <- 1 - 1e-6
   hs <- lo + (hi - lo) * (seq_len(g) - 1) / (g - 1)
   lls <- vapply(hs, function(h) reml(h)$ll, 0)
   bh <- hs[which.max(lls)]
   step <- (hi - lo) / (g - 1)
-  a <- max(bh - step, lo); b <- min(bh + step, hi)
+  a <- max(bh - step, lo)
+  b <- min(bh + step, hi)
   for (i in seq_len(as.integer(refine))) {
-    m1 <- a + (b - a) / 3; m2 <- b - (b - a) / 3
+    m1 <- a + (b - a) / 3
+    m2 <- b - (b - a) / 3
     if (reml(m1)$ll < reml(m2)$ll) a <- m1 else b <- m2
   }
   h2 <- (a + b) / 2

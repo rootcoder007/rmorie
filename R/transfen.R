@@ -17,10 +17,12 @@
 #' Transent(c(0, 1, 0, 1, 0, 1), c(0, 0, 1, 0, 1, 0))$te_xy
 #' @export
 Transent <- function(x, y, lag = 1) {
-  a <- as.character(x); b <- as.character(y)
+  a <- as.character(x)
+  b <- as.character(y)
   te1 <- function(src, dst, L) {
     n <- length(dst)
-    keys <- character(0); cnt <- numeric(0)
+    keys <- character(0)
+    cnt <- numeric(0)
     if (n - 2L >= L) for (t in seq(L, n - 2L)) {
       i <- t + 1L
       k1 <- dst[i + 1L]
@@ -28,7 +30,8 @@ Transent <- function(x, y, lag = 1) {
       k3 <- if (L > 1L) src[i - L + 1L] else src[i]
       kk <- paste(k1, k2, k3, sep = "\037")
       j <- match(kk, keys)
-      if (is.na(j)) { keys <- c(keys, kk); cnt <- c(cnt, 1) } else cnt[j] <- cnt[j] + 1
+      if (is.na(j)) { keys <- c(keys, kk)
+      cnt <- c(cnt, 1) } else cnt[j] <- cnt[j] + 1
     }
     tot <- 0
     for (v in cnt) tot <- tot + v
@@ -40,17 +43,23 @@ Transent <- function(x, y, lag = 1) {
     kc <- vapply(parts, function(z) z[3], "")
     kxy <- paste(kb, kc, sep = "\037")
     kx <- paste(ka, kb, sep = "\037")
-    ux <- unique(kxy); p2xy <- numeric(length(ux))
+    ux <- unique(kxy)
+    p2xy <- numeric(length(ux))
     for (i in seq_along(keys)) {
-      j <- match(kxy[i], ux); p2xy[j] <- p2xy[j] + p3[i]
+      j <- match(kxy[i], ux)
+      p2xy[j] <- p2xy[j] + p3[i]
     }
-    uz <- unique(kx); p2x <- numeric(length(uz))
+    uz <- unique(kx)
+    p2x <- numeric(length(uz))
     for (i in seq_along(keys)) {
-      j <- match(kx[i], uz); p2x[j] <- p2x[j] + p3[i]
+      j <- match(kx[i], uz)
+      p2x[j] <- p2x[j] + p3[i]
     }
-    ub <- unique(kb); p1 <- numeric(length(ub))
+    ub <- unique(kb)
+    p1 <- numeric(length(ub))
     for (i in seq_along(keys)) {
-      j <- match(kb[i], ub); p1[j] <- p1[j] + p3[i]
+      j <- match(kb[i], ub)
+      p1[j] <- p1[j] + p3[i]
     }
     ordk <- order(keys, method = "radix")
     te <- 0

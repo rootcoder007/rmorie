@@ -20,9 +20,12 @@
 #' ChiDep(c(1, 2, 3, 4, 5, 6), c(1, 2, 3, 4, 5, 6), 0.5)
 #' @export
 ChiDep <- function(x, y, u = 0.95) {
-  xs <- .s03vec(x); ys <- .s03vec(y); n <- length(xs)
+  xs <- .s03vec(x)
+  ys <- .s03vec(y)
+  n <- length(xs)
   if (n != length(ys) || n < 4L) stop("x and y must be equal-length, n >= 4")
-  rx <- .chidep_ranks01(xs); ry <- .chidep_ranks01(ys)
+  rx <- .chidep_ranks01(xs)
+  ry <- .chidep_ranks01(ys)
   joint <- sum(rx < u & ry < u) / n
   joint <- min(max(joint, 1 / (2 * n)), 1 - 1 / (2 * n))
   chi_u <- 2 - log(joint) / log(u)

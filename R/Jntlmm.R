@@ -37,20 +37,26 @@
 #' @examples
 #' Jntlmm(long_y = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Jntlmm <- function(long_y, time, event, X, Z, cluster) {
-  y <- .s03vec(long_y); n <- length(y)
+  y <- .s03vec(long_y)
+  n <- length(y)
   if (n == 0L) stop("joint_longitudinal_survival: long_y is empty")
-  tv <- .s03vec(time); ev <- .s03vec(event); cl <- .s03vec(cluster)
+  tv <- .s03vec(time)
+  ev <- .s03vec(event)
+  cl <- .s03vec(cluster)
   if (length(tv) != n || length(ev) != n || length(cl) != n)
     stop("joint_longitudinal_survival: long_y, time, event and cluster have different lengths")
   if (any(ev != 0 & ev != 1)) stop("joint_longitudinal_survival: event must be 0 or 1")
   Xd <- .s03design(X, n)
   if (nrow(Xd) != n) stop("joint_longitudinal_survival: X and long_y have different lengths")
-  ord <- sort(unique(cl)); g <- length(ord)
+  ord <- sort(unique(cl))
+  g <- length(ord)
   if (g < 3L) stop("joint_longitudinal_survival: need at least three subjects")
-  st <- numeric(g); sd <- numeric(g)
+  st <- numeric(g)
+  sd <- numeric(g)
   for (i in seq_len(n)) {
     k <- match(cl[i], ord)
-    st[k] <- tv[i]; sd[k] <- ev[i]
+    st[k] <- tv[i]
+    sd[k] <- ev[i]
   }
   if (sum(sd) == 0) stop("joint_longitudinal_survival: no events observed")
   fit <- .jnt_lmm_ri(y, Xd, cl, ord)
@@ -62,10 +68,12 @@ Jntlmm <- function(long_y, time, event, X, Z, cluster) {
     if (nrow(rows) == g) {
       Zs <- cbind(rows, b)
     } else if (nrow(rows) == n) {
-      first <- matrix(0, g, ncol(rows)); seen <- rep(FALSE, g)
+      first <- matrix(0, g, ncol(rows))
+      seen <- rep(FALSE, g)
       for (i in seq_len(n)) {
         k <- match(cl[i], ord)
-        if (!seen[k]) { first[k, ] <- rows[i, ]; seen[k] <- TRUE }
+        if (!seen[k]) { first[k, ] <- rows[i, ]
+        seen[k] <- TRUE }
       }
       Zs <- cbind(first, b)
     } else {
@@ -85,13 +93,16 @@ Jntlmm <- function(long_y, time, event, X, Z, cluster) {
 #' @keywords internal
 #' @noRd
 .jnt_lmm_ri <- function(y, X, grp, ord, iters = 200L) {
-  n <- length(y); p <- ncol(X); g <- length(ord)
+  n <- length(y)
+  p <- ncol(X)
+  g <- length(ord)
   idx <- lapply(ord, function(k) which(grp == k))
   beta <- .s03lstsq(X, y)
   r0 <- y - as.numeric(.s03matvec(X, beta))
   s2 <- sum(r0^2) / max(1, n - p)
   t2 <- s2
-  eb <- numeric(g); vb <- numeric(g)
+  eb <- numeric(g)
+  vb <- numeric(g)
   for (it in seq_len(iters)) {
     fitv <- as.numeric(.s03matvec(X, beta))
     for (k in seq_len(g)) {
@@ -118,17 +129,22 @@ Jntlmm <- function(long_y, time, event, X, Z, cluster) {
 #' @keywords internal
 #' @noRd
 .jnt_cox <- function(t, d, Z, iters = 50L) {
-  g <- length(t); p <- ncol(Z)
+  g <- length(t)
+  p <- ncol(Z)
   beta <- numeric(p)
   ord <- order(t, seq_len(g))
   H <- diag(p)
   for (it in seq_len(iters)) {
-    u <- numeric(p); H <- matrix(0, p, p); ll <- 0
+    u <- numeric(p)
+    H <- matrix(0, p, p)
+    ll <- 0
     for (kk in seq_len(g)) {
       i <- ord[kk]
       if (d[i] != 1) next
       risk <- ord[t[ord] >= t[i]]
-      s0 <- 0; s1 <- numeric(p); s2 <- matrix(0, p, p)
+      s0 <- 0
+      s1 <- numeric(p)
+      s2 <- matrix(0, p, p)
       for (j in risk) {
         e <- exp(sum(Z[j, ] * beta))
         s0 <- s0 + e

@@ -16,8 +16,10 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Mlloglik(V, D)
 Mlloglik <- function(X, y, beta = NULL, sigma2 = NULL) {
-  Xm <- .t1_mat(X); y <- .t1_vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .t1_mat(X)
+  y <- .t1_vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   b <- if (is.null(beta)) .t1_lstsq(Xm, y)$beta else .t1_vec(beta)
   if (length(b) != p) stop("beta must have one entry per column of X")

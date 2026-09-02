@@ -81,7 +81,8 @@ morie_tlhal <- function(X, y, lambdas = NULL, V = 5L, seed = 0L,
 indicator_basis <- function(X, knots = NULL, max_order = 2L) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
-  n <- nrow(rows); d <- ncol(rows)
+  n <- nrow(rows)
+  d <- ncol(rows)
   K <- rows
   if (!is.null(knots)) {
     K <- as.matrix(knots)
@@ -158,7 +159,8 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
   B <- indicator_basis(X, knots, max_order)
   D <- B$design
   t <- as.numeric(y)
-  n <- nrow(D); p <- ncol(D)
+  n <- nrow(D)
+  p <- ncol(D)
   if (length(t) != n)
     stop(sprintf("tlhal: %d rows but %d outcomes", n, length(t)))
   if (as.numeric(lam) <= 0)
@@ -209,7 +211,9 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 .tlhal_project_l1 <- function(v, lam) {
   if (sum(abs(v)) <= lam) return(v)
   u <- sort(abs(v), decreasing = TRUE)
-  css <- 0; rho <- 0; theta <- 0
+  css <- 0
+  rho <- 0
+  theta <- 0
   for (j in seq_along(u)) {
     css <- css + u[j]
     if (u[j] - (css - lam) / (j) > 0) {
@@ -233,12 +237,14 @@ hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
 hal_predict <- function(model, X) {
   rows <- as.matrix(X)
   if (is.null(dim(rows))) rows <- matrix(as.numeric(X), ncol = 1)
-  cols <- model$columns; b <- model$beta
+  cols <- model$columns
+  b <- model$beta
   out <- rep(model$intercept, nrow(rows))
   for (j in seq_along(cols)) {
     if (b[j] == 0) next
     cj <- cols[[j]]
-    S <- cj$S; v <- cj$v
+    S <- cj$S
+    v <- cj$v
     if (length(S) == 1L) {
       out <- out + b[j] * as.numeric(rows[, S] >= v)
     } else {
@@ -276,13 +282,16 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
     j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
     if (j == 0L) j <- 1L
     if (j == i) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j]; idx[j] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j]
+    idx[j] <- tmp
   }
   folds <- lapply(seq_len(as.integer(V)), function(v)
     idx[seq(v, length(idx), by = as.integer(V))])
   risks <- list()
   for (lam in lambdas) {
-    tot <- 0; m <- 0
+    tot <- 0
+    m <- 0
     for (f in folds) {
       tr <- setdiff(seq_len(n), f)
       fit <- hal_fit(rows[tr, , drop = FALSE], t[tr],

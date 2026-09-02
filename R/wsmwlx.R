@@ -25,10 +25,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ranksum(V, V)
 Ranksum <- function(x, y, correct = TRUE) {
-  x <- .t1_vec(x); y <- .t1_vec(y)
-  n1 <- length(x); n2 <- length(y)
+  x <- .t1_vec(x)
+  y <- .t1_vec(y)
+  n1 <- length(x)
+  n2 <- length(y)
   if (n1 < 1L || n2 < 1L) stop("both samples must be non-empty")
-  pool <- c(x, y); N <- n1 + n2
+  pool <- c(x, y)
+  N <- n1 + n2
   rank <- rank(pool, ties.method = "average")
   tab <- table(pool)
   tt <- as.numeric(tab[tab > 1])

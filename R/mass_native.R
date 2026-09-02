@@ -202,7 +202,8 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
   info <- function(th) sum(weights * (-trigamma(th + y) + trigamma(th) -
     1 / th + 2 / (mu + th) - (y + th) / (mu + th)^2))
   t0 <- n / sum(weights * (y / mu - 1)^2)
-  it <- 0L; del <- 1
+  it <- 0L
+  del <- 1
   while ((it <- it + 1L) < limit && abs(del) > eps) {
     t0 <- abs(t0)
     del <- score(t0) / info(t0)
@@ -259,8 +260,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
   th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
   fam <- .morie_negbin_family(th, link)
   iter <- 0L
-  d1 <- sqrt(2 * max(1, fit$df.residual)); d2 <- del <- 1
-  g <- fam$linkfun; Lm <- loglik(th, mu, Y, w); Lm0 <- Lm + 2 * d1
+  d1 <- sqrt(2 * max(1, fit$df.residual))
+  d2 <- del <- 1
+  g <- fam$linkfun
+  Lm <- loglik(th, mu, Y, w)
+  Lm0 <- Lm + 2 * d1
   while ((iter <- iter + 1L) <= control$maxit &&
          (abs(Lm0 - Lm) / d1 + abs(del) / d2) > control$epsilon) {
     eta <- g(mu)
@@ -270,7 +274,9 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
     th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
     fam <- .morie_negbin_family(th, link)
     mu <- fit$fitted.values
-    del <- t0 - th; Lm0 <- Lm; Lm <- loglik(th, mu, Y, w)
+    del <- t0 - th
+    Lm0 <- Lm
+    Lm <- loglik(th, mu, Y, w)
   }
   fit$theta <- as.numeric(th)
   fit$terms <- Terms
@@ -381,7 +387,8 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
   psi <- function(u, deriv = 0) if (!deriv) pmin(1, k / abs(u)) else abs(u) <= k
   # Fused Armadillo Huber-M IRLS; matches MASS::rlm to ~1e-15, ~2x faster.
   cp <- .morie_rlm_cpp(x, y, k, as.integer(maxit), acc)
-  coef <- as.numeric(cp$coef); names(coef) <- colnames(x)
+  coef <- as.numeric(cp$coef)
+  names(coef) <- colnames(x)
   fitted <- drop(x %*% coef)
   structure(list(coefficients = coef, residuals = y - fitted,
                  wresid = as.numeric(cp$resid), fitted.values = fitted,
@@ -427,8 +434,12 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
 #'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary morie_rlm
 summary.morie_rlm <- function(object, ...) {
-  s <- object$s; coef <- object$coefficients; wresid <- object$wresid
-  n <- length(wresid); p <- length(coef); cn <- names(coef)
+  s <- object$s
+  coef <- object$coefficients
+  wresid <- object$wresid
+  n <- length(wresid)
+  p <- length(coef)
+  cn <- names(coef)
   w <- object$psi(wresid / s)
   S <- sum((wresid * w)^2) / (n - p)
   psiprime <- object$psi(wresid / s, deriv = 1)
@@ -477,15 +488,19 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
   x <- stats::model.matrix(attr(mf, "terms"), mf)
   xint <- match("(Intercept)", colnames(x), nomatch = 0L)
   if (xint > 0L) x <- x[, -xint, drop = FALSE]
-  n <- nrow(x); pc <- ncol(x)
+  n <- nrow(x)
+  pc <- ncol(x)
   wt <- if (missing(weights) || is.null(weights)) rep(1, n) else weights
   offset <- rep(0, n)
   y <- stats::model.response(mf)
   if (!is.factor(y)) stop("response must be a factor")
-  lev <- levels(y); llev <- length(lev)
+  lev <- levels(y)
+  llev <- length(lev)
   if (llev <= 2L) stop("response must have 3 or more levels")
-  y <- unclass(y); q <- llev - 1L
-  ind_pc <- seq_len(pc); ind_q <- seq_len(q)
+  y <- unclass(y)
+  q <- llev - 1L
+  ind_pc <- seq_len(pc)
+  ind_q <- seq_len(q)
   # starting values (MASS::polr glm-based scheme)
   q1 <- llev %/% 2L
   X <- cbind(Intercept = rep(1, n), x)
@@ -516,11 +531,15 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
     etheta <- exp(theta[-1L])
     gamm <- c(-Inf, cumsum(c(theta[1L], etheta)), Inf)
     eta <- offset + if (pc) drop(x %*% beta[ind_pc]) else 0
-    z1 <- pmin(100, gamm[y + 1L] - eta); z2 <- pmax(-100, gamm[y] - eta)
-    pr <- pfun(z1) - pfun(z2); p1 <- dfun(z1); p2 <- dfun(z2)
+    z1 <- pmin(100, gamm[y + 1L] - eta)
+    z2 <- pmax(-100, gamm[y] - eta)
+    pr <- pfun(z1) - pfun(z2)
+    p1 <- dfun(z1)
+    p2 <- dfun(z2)
     g1 <- if (pc) drop(t(x) %*% (wt * (p1 - p2) / pr)) else numeric()
     g2 <- -drop(t(Y1 * p1 - Y2 * p2) %*% (wt / pr))
-    jac <- matrix(0, q, q); jac[, 1L] <- 1
+    jac <- matrix(0, q, q)
+    jac[, 1L] <- 1
     for (i in seq_len(q)[-1L]) jac[i:q, i] <- etheta[i - 1L]
     g2 <- drop(g2 %*% jac)
     if (all(pr > 0)) c(g1, g2) else rep(NA_real_, pc + q)
@@ -529,7 +548,8 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
   beta <- res$par
   theta <- beta[pc + ind_q]
   zeta <- cumsum(c(theta[1L], exp(theta[-1L])))
-  cf <- beta[ind_pc]; names(cf) <- colnames(x)
+  cf <- beta[ind_pc]
+  names(cf) <- colnames(x)
   structure(list(coefficients = cf, zeta = zeta, deviance = 2 * res$value,
                  method = method, lev = lev, n = n, edf = pc + q,
                  nobs = sum(wt), convergence = res$convergence),

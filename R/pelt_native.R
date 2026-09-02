@@ -94,7 +94,8 @@
     for (tau in Rset) {
       if (t - tau < min_seglen) next
       v <- F[tau + 1L] + C(tau, t) + beta
-      if (v < best) { best <- v; barg <- tau }
+      if (v < best) { best <- v
+      barg <- tau }
     }
     F[t + 1L] <- best
     cp[t + 1L] <- barg

@@ -32,7 +32,10 @@ Bnstvr <- function(y, D, X) {
   y0 <- min(z$y)
   y1 <- max(z$y)
   grp <- unique(xv)
-  lo1 <- -Inf; hi1 <- Inf; lo0 <- -Inf; hi0 <- Inf
+  lo1 <- -Inf
+  hi1 <- Inf
+  lo0 <- -Inf
+  hi0 <- Inf
   for (g in grp) {
     sel <- xv == g
     cm <- .bnd_cellmeans(z$y[sel], z$d[sel])

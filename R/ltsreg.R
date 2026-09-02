@@ -55,7 +55,10 @@ Ltsreg <- function(y, X, h = NULL, max_starts = 200000, max_iter = 100L) {
   if (hh > n) stop("least_trimmed_squares: h cannot exceed the number of observations")
   total <- .rsnchoosek(n, p)
   if (total > max_starts) stop(sprintf("least_trimmed_squares: %d elemental subsets exceeds max_starts", total))
-  bobj <- NULL; bth <- NULL; bidx <- NULL; bchain <- numeric(0)
+  bobj <- NULL
+  bth <- NULL
+  bidx <- NULL
+  bchain <- numeric(0)
   for (J in .rscombos(n, p)) {
     A <- Xm[J, , drop = FALSE]
     b <- yy[J]
@@ -80,7 +83,10 @@ Ltsreg <- function(y, X, h = NULL, max_starts = 200000, max_iter = 100L) {
       idx <- no$idx
     }
     o <- .rsltsobj(Xm, yy, th, n, p, hh)
-    if (is.null(bobj) || o$tot < bobj) { bobj <- o$tot; bth <- th; bidx <- o$idx; bchain <- chain }
+    if (is.null(bobj) || o$tot < bobj) { bobj <- o$tot
+    bth <- th
+    bidx <- o$idx
+    bchain <- chain }
   }
   if (is.null(bobj)) stop("least_trimmed_squares: every elemental subset was singular")
   res <- numeric(n)

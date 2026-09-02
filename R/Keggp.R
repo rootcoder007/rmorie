@@ -34,7 +34,8 @@
 #'                         5, 3, byrow = TRUE)
 #' Keggp(genes, kegg_pathways)
 Keggp <- function(genes, kegg_pathways, alpha = 0.05) {
-  g <- .s03vec(genes); N <- length(g)
+  g <- .s03vec(genes)
+  N <- length(g)
   if (N == 0L) stop("kegg_pathway: genes is empty")
   if (any(g != 0 & g != 1)) stop("kegg_pathway: genes must be a 0/1 indicator over the universe")
   P <- .s03mat(kegg_pathways)
@@ -54,17 +55,24 @@ Keggp <- function(genes, kegg_pathways, alpha = 0.05) {
     for (j in q:hi) tot <- tot + exp(lch(m, j) + lch(N - m, n - j) - den)
     min(tot, 1)
   }
-  sizes <- numeric(K); ov <- numeric(K); pv <- numeric(K)
+  sizes <- numeric(K)
+  ov <- numeric(K)
+  pv <- numeric(K)
   for (cc in seq_len(K)) {
-    m <- sum(P[, cc]); q <- sum(P[g == 1, cc])
-    sizes[cc] <- m; ov[cc] <- q; pv[cc] <- ptail(q, m, N, nsel)
+    m <- sum(P[, cc])
+    q <- sum(P[g == 1, cc])
+    sizes[cc] <- m
+    ov[cc] <- q
+    pv[cc] <- ptail(q, m, N, nsel)
   }
   ord <- order(pv, seq_len(K))
-  qv <- numeric(K); prev <- 1
+  qv <- numeric(K)
+  prev <- 1
   for (rk in seq(K, 1L)) {
     i <- ord[rk]
     val <- min(pv[i] * K / rk, prev, 1)
-    qv[i] <- val; prev <- val
+    qv[i] <- val
+    prev <- val
   }
   best <- ord[1]
   .t1_result(estimate = pv[best], pvalue = pv, qvalue = qv, overlap = ov,

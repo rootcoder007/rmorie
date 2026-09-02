@@ -36,7 +36,8 @@
 #' @return The value of \code{seq}.
 #' @export
 cutoffs <- function(N, step = 10) {
-  n <- as.integer(N); s <- as.integer(step)
+  n <- as.integer(N)
+  s <- as.integer(step)
   if (n < s)
     stop("fairRC: the ranking of ", n, " is shorter than the first ",
          "cut-off ", s)
@@ -86,7 +87,8 @@ cutoffs <- function(N, step = 10) {
       npos <- sum(protected[seq_len(i)])
       nneg <- i - npos
       r1 <- if (nneg == 0 || npos == 0) 0 else npos / as.numeric(nneg)
-      NP <- sum(protected); NN <- N - NP
+      NP <- sum(protected)
+      NN <- N - NP
       r2 <- if (NN == 0 || NP == 0) 0 else NP / as.numeric(NN)
       tot <- tot + w * abs(r1 - r2)
     }

@@ -41,14 +41,17 @@
 #'   fetched-wave3/curth-vanderschaar-2021-nonparametric-hte-theory-to-learning-AISTATS.pdf.
 #' @export
 Meta1l <- function(y, w, X, ps = NULL) {
-  yv <- as.numeric(y); wv <- as.numeric(w)
-  Xa <- as.matrix(X); storage.mode(Xa) <- "double"
+  yv <- as.numeric(y)
+  wv <- as.numeric(w)
+  Xa <- as.matrix(X)
+  storage.mode(Xa) <- "double"
   n <- length(yv)
   if (nrow(Xa) != n || length(wv) != n) {
     stop("y, w, X must have matching first dimension", call. = FALSE)
   }
   if (!all(wv %in% c(0, 1))) stop("w must be binary 0/1", call. = FALSE)
-  i1 <- which(wv == 1); i0 <- which(wv == 0)
+  i1 <- which(wv == 1)
+  i0 <- which(wv == 0)
   p <- ncol(Xa)
   if (length(i1) <= p + 1L || length(i0) <= p + 1L) {
     stop("need more than p + 1 units in each arm", call. = FALSE)
@@ -56,8 +59,10 @@ Meta1l <- function(y, w, X, ps = NULL) {
   ols <- function(A, b) as.vector(solve(crossprod(A), crossprod(A, b)))
   D <- cbind(1, Xa)
 
-  D1 <- D[i1, , drop = FALSE]; D0 <- D[i0, , drop = FALSE]
-  b1 <- ols(D1, yv[i1]); b0 <- ols(D0, yv[i0])
+  D1 <- D[i1, , drop = FALSE]
+  D0 <- D[i0, , drop = FALSE]
+  b1 <- ols(D1, yv[i1])
+  b0 <- ols(D0, yv[i0])
   cate_t <- as.vector(D %*% b1) - as.vector(D %*% b0)
 
   Ds <- cbind(D, wv)
@@ -66,7 +71,8 @@ Meta1l <- function(y, w, X, ps = NULL) {
 
   d1 <- yv[i1] - as.vector(D1 %*% b0)
   d0 <- as.vector(D0 %*% b1) - yv[i0]
-  t1 <- ols(D1, d1); t0 <- ols(D0, d0)
+  t1 <- ols(D1, d1)
+  t0 <- ols(D0, d0)
   g <- if (is.null(ps)) rep(mean(wv), n) else as.numeric(ps)
   cate_x <- g * as.vector(D %*% t0) + (1 - g) * as.vector(D %*% t1)
 

@@ -43,11 +43,15 @@
   A <- as.matrix(adjacency)
   a <- nrow(A)
   if (ncol(A) != a) stop("adjacency must be square")
-  bi <- integer(0); bj <- integer(0); bo <- numeric(0)
+  bi <- integer(0)
+  bj <- integer(0)
+  bo <- numeric(0)
   if (a > 1L) for (i in seq_len(a - 1L)) for (j in seq.int(i + 1L, a)) {
     if (A[i, j] != A[j, i]) stop("adjacency must be symmetric")
     if (A[i, j] != 0) {
-      bi <- c(bi, i - 1L); bj <- c(bj, j - 1L); bo <- c(bo, trunc(A[i, j]))
+      bi <- c(bi, i - 1L)
+      bj <- c(bj, j - 1L)
+      bo <- c(bo, trunc(A[i, j]))
     }
   }
   list(a = a, i = bi, j = bj, o = bo)
@@ -118,14 +122,17 @@
 #' @export
 .mor_fp_morgan <- function(a, bd, invariants, radius, nbits,
                            use_bond_order = TRUE) {
-  inc_b <- vector("list", a); inc_o <- vector("list", a)
+  inc_b <- vector("list", a)
+  inc_o <- vector("list", a)
   inc_n <- vector("list", a)
   for (k in seq_len(a)) {
-    inc_b[[k]] <- integer(0); inc_o[[k]] <- numeric(0)
+    inc_b[[k]] <- integer(0)
+    inc_o[[k]] <- numeric(0)
     inc_n[[k]] <- integer(0)
   }
   for (k in seq_along(bd$i)) {
-    ii <- bd$i[k] + 1L; jj <- bd$j[k] + 1L
+    ii <- bd$i[k] + 1L
+    jj <- bd$j[k] + 1L
     oo <- if (use_bond_order) bd$o[k] else 1
     inc_b[[ii]] <- c(inc_b[[ii]], k - 1L)
     inc_n[[ii]] <- c(inc_n[[ii]], jj)
@@ -144,10 +151,13 @@
   for (layer in seq_len(as.integer(radius)) - 1L) {
     nxt <- numeric(a)
     round_env <- atom_env
-    keys <- character(0); vals <- numeric(0); idxs <- integer(0)
+    keys <- character(0)
+    vals <- numeric(0)
+    idxs <- integer(0)
     for (i in seq_len(a)) {
       if (dead[i]) next
-      no <- numeric(0); nv <- numeric(0)
+      no <- numeric(0)
+      nv <- numeric(0)
       for (m in seq_along(inc_b[[i]])) {
         round_env[[i]] <- union(round_env[[i]], inc_b[[i]][m])
         round_env[[i]] <- union(round_env[[i]], atom_env[[inc_n[[i]][m]]])
@@ -156,7 +166,8 @@
       }
       if (length(no) > 0L) {
         oidx <- order(no, nv)
-        no <- no[oidx]; nv <- nv[oidx]
+        no <- no[oidx]
+        nv <- nv[oidx]
       }
       invar <- .mor_fp_mix(0, layer)
       invar <- .mor_fp_mix(invar, cur[i])
@@ -188,7 +199,8 @@
 
   nbits <- as.integer(nbits)
   if (nbits < 1L) stop("nbits must be positive")
-  bits <- integer(nbits); cnt <- integer(nbits)
+  bits <- integer(nbits)
+  cnt <- integer(nbits)
   for (v in ident) {
     b <- v %% nbits
     bits[b + 1L] <- 1L

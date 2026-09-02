@@ -25,6 +25,8 @@ Alfstrtr <- function(s, w1, w2, w3, layernorm = TRUE, drop = NULL) {
     if (!is.null(drop)) u <- u * as.numeric(drop[i, ])
     out[i, ] <- if (layernorm) alfLnorm(u) else u
   }
-  list(s = out, estimate = mean(out), n = n,
-       method = "AlphaFold structure module transition")
+  list(
+    s = out, estimate = mean(out), n = n,
+    method = "AlphaFold structure module transition"
+  )
 }

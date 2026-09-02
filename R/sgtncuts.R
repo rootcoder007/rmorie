@@ -19,7 +19,8 @@
 #' Ncut(A, c(1, 1, 2))$ncut
 #' @export
 Ncut <- function(A, labels) {
-  W <- .s03mat(A); n <- nrow(W)
+  W <- .s03mat(A)
+  n <- nrow(W)
   lab <- as.character(labels)
   ids <- character(0)
   for (cc in lab) if (!(cc %in% ids)) ids <- c(ids, cc)
@@ -29,9 +30,12 @@ Ncut <- function(A, labels) {
     for (i in seq_len(n)) if (lab[i] == ids[gi]) for (j in seq_len(n)) s <- s + W[i, j]
     vol[gi] <- s
   }
-  ncut <- 0; nassoc <- 0; cut_total <- 0
+  ncut <- 0
+  nassoc <- 0
+  cut_total <- 0
   for (gi in seq_along(ids)) {
-    cut <- 0; assoc <- 0
+    cut <- 0
+    assoc <- 0
     for (i in seq_len(n)) {
       if (lab[i] != ids[gi]) next
       for (j in seq_len(n)) {
@@ -39,7 +43,8 @@ Ncut <- function(A, labels) {
       }
     }
     cut_total <- cut_total + cut
-    if (vol[gi] > 0) { ncut <- ncut + cut / vol[gi]; nassoc <- nassoc + assoc / vol[gi] }
+    if (vol[gi] > 0) { ncut <- ncut + cut / vol[gi]
+    nassoc <- nassoc + assoc / vol[gi] }
   }
   list(ncut = ncut, estimate = ncut, cut = cut_total / 2, vol = vol,
        nassoc = nassoc, n_groups = length(ids),

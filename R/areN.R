@@ -16,8 +16,10 @@
 #' @examples
 #' Areratio(var1 = 5L, var2 = 5L)
 Areratio <- function(var1, var2, n1 = 1, n2 = 1) {
-  v1 <- as.numeric(var1); v2 <- as.numeric(var2)
-  m1 <- as.numeric(n1); m2 <- as.numeric(n2)
+  v1 <- as.numeric(var1)
+  v2 <- as.numeric(var2)
+  m1 <- as.numeric(n1)
+  m2 <- as.numeric(n2)
   if (v1 <= 0 || v2 <= 0) stop("variances must be strictly positive")
   if (m1 <= 0 || m2 <= 0) stop("sample sizes must be strictly positive")
   are <- (v1 / m1) / (v2 / m2)

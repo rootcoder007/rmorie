@@ -1237,7 +1237,8 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
     inner <- sample(rep(1:3, length.out = length(train)))
     Z <- matrix(NA_real_, length(train), length(ps_learners))
     for (f in 1:3) {
-      itr <- train[inner != f]; ite <- train[inner == f]
+      itr <- train[inner != f]
+      ite <- train[inner == f]
       for (li in seq_along(ps_learners)) {
         Z[inner == f, li] <- tryCatch(ps_learners[[li]](itr, ite),
           error = function(e) rep(mean(d[itr]), length(ite)))
@@ -1259,7 +1260,8 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
     inner <- sample(rep(1:3, length.out = length(train)))
     Z <- matrix(NA_real_, length(train), length(reg_learners))
     for (f in 1:3) {
-      itr <- train[inner != f]; ite <- train[inner == f]
+      itr <- train[inner != f]
+      ite <- train[inner == f]
       for (li in seq_along(reg_learners)) {
         Z[inner == f, li] <- tryCatch(reg_learners[[li]](yy, itr, ite),
           error = function(e) rep(mean(yy[itr]), length(ite)))
@@ -1279,7 +1281,9 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
 
   set.seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
-  e_hat <- numeric(n); mu1_hat <- numeric(n); mu0_hat <- numeric(n)
+  e_hat <- numeric(n)
+  mu1_hat <- numeric(n)
+  mu0_hat <- numeric(n)
   for (k in seq_len(n_folds)) {
     test <- which(folds == k)
     train <- setdiff(seq_len(n), test)
@@ -1444,12 +1448,17 @@ morie_otis_psm_subclass <- function(df, treatment, outcome,
                                                length.out = n_strata + 1L)))
   strata <- cut(ps, breaks = qs, include.lowest = TRUE, labels = FALSE)
   n <- length(y)
-  est <- 0; var_acc <- 0; used_n <- 0L; dropped <- 0L
+  est <- 0
+  var_acc <- 0
+  used_n <- 0L
+  dropped <- 0L
   per <- list()
   for (s in sort(unique(strata))) {
     idx <- which(strata == s)
-    y1 <- y[idx][d[idx] == 1L]; y0 <- y[idx][d[idx] == 0L]
-    if (length(y1) < 2L || length(y0) < 2L) { dropped <- dropped + 1L; next }
+    y1 <- y[idx][d[idx] == 1L]
+    y0 <- y[idx][d[idx] == 0L]
+    if (length(y1) < 2L || length(y0) < 2L) { dropped <- dropped + 1L
+    next }
     w <- length(idx)
     est <- est + w * (mean(y1) - mean(y0))
     var_acc <- var_acc +

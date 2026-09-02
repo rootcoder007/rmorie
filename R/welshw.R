@@ -19,7 +19,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Welshw(V)
 Welshw <- function(y, c = 2.9846) {
-  v <- as.numeric(unlist(y)); c <- as.numeric(c)
+  v <- as.numeric(unlist(y))
+  c <- as.numeric(c)
   w <- exp(-((v / c)^2))
   rho <- (c * c / 2) * (1 - w)
   .t1_result(estimate = sum(rho), w = w, rho = rho, psi = v * w, n = length(v),

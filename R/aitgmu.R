@@ -17,6 +17,8 @@ Compgeo <- function(x) {
   if (any(x <= 0)) stop("compositions must be strictly positive")
   D <- length(x)
   lg <- sum(log(x)) / D
-  .t1_result(geomean = exp(lg), log_geomean = lg, D = D,
-             method = "Geometric mean of a composition")
+  .t1_result(
+    geomean = exp(lg), log_geomean = lg, D = D,
+    method = "Geometric mean of a composition"
+  )
 }

@@ -31,9 +31,13 @@
 #' Kalmf(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
 Kalmf <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL) {
   Y <- .s03mat(y)
-  n <- nrow(Y); m <- ncol(Y)
+  n <- nrow(Y)
+  m <- ncol(Y)
   if (n == 0L) stop("kalman_filter: y is empty")
-  Fm <- .s03mat(F); Hm <- .s03mat(H); Qm <- .s03mat(Q); Rm <- .s03mat(R)
+  Fm <- .s03mat(F)
+  Hm <- .s03mat(H)
+  Qm <- .s03mat(Q)
+  Rm <- .s03mat(R)
   d <- nrow(Fm)
   if (ncol(Fm) != d) stop("kalman_filter: F must be square")
   if (nrow(Hm) != m || ncol(Hm) != d) stop("kalman_filter: H must be m x d")
@@ -41,7 +45,11 @@ Kalmf <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL) {
   x <- if (is.null(x0)) rep(0, d) else .s03vec(x0)
   P <- if (is.null(P0)) diag(1, d) else .s03mat(P0)
   if (length(x) != d || nrow(P) != d) stop("kalman_filter: x0 and P0 must match the state dimension")
-  xs <- list(); Ps <- list(); xp <- list(); Pp <- list(); ll <- 0
+  xs <- list()
+  Ps <- list()
+  xp <- list()
+  Pp <- list()
+  ll <- 0
   for (t in seq_len(n)) {
     xpred <- as.numeric(Fm %*% x)
     Ppred <- Fm %*% P %*% t(Fm) + Qm
@@ -55,7 +63,10 @@ Kalmf <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL) {
     sv <- .s03cholsolve(S, v)
     L <- .s03chol(S)
     ll <- ll - 0.5 * (m * log(2 * pi) + 2 * sum(log(diag(L))) + sum(v * sv))
-    xs[[t]] <- x; Ps[[t]] <- P; xp[[t]] <- xpred; Pp[[t]] <- Ppred
+    xs[[t]] <- x
+    Ps[[t]] <- P
+    xp[[t]] <- xpred
+    Pp[[t]] <- Ppred
   }
   .t1_result(estimate = xs[[n]][1], state = xs, cov = Ps, predicted = xp,
              predicted_cov = Pp, loglik = ll, n = n,

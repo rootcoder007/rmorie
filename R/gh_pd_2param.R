@@ -26,16 +26,21 @@
 #' @examples
 #' Poisdir(sigma = 0.5, M = 5L, k = 5L)
 Poisdir <- function(sigma, M, k, n = NULL) {
-  sigma <- as.numeric(sigma); M <- as.numeric(M); k <- as.integer(k)
+  sigma <- as.numeric(sigma)
+  M <- as.numeric(M)
+  k <- as.integer(k)
   if (sigma < 0 || sigma >= 1)
     stop("only the sigma in [0, 1) branch is implemented; the negative-sigma branch has finite support and is refused")
   if (M <= -sigma) stop("M must exceed -sigma")
   if (k < 1L) stop("k must be at least 1")
   j <- seq_len(k)
   ev <- (1 - sigma) / (M + 1 + (j - 1) * sigma)
-  w <- numeric(k); rest <- 1
-  for (i in j) { w[i] <- rest * ev[i]; rest <- rest * (1 - ev[i]) }
-  lv <- NaN; vv <- NaN
+  w <- numeric(k)
+  rest <- 1
+  for (i in j) { w[i] <- rest * ev[i]
+  rest <- rest * (1 - ev[i]) }
+  lv <- NaN
+  vv <- NaN
   if (!is.null(n)) {
     n <- as.integer(n)
     if (n < 1L) stop("n must be at least 1")

@@ -66,11 +66,13 @@ morie_btarsv <- function(x, p = NULL, statistic = NULL, B = 500,
   xc <- xv - xbar
   if (is.null(p)) {
     pm <- if (is.null(p_max)) max(1, floor(10 * log10(n))) else p_max
-    best_aic <- Inf; best_p <- 1L
+    best_aic <- Inf
+    best_p <- 1L
     for (cand in 1:min(pm, n %/% 3)) {
       v <- .btarsv_yw(xc, cand)$v
       aic <- n * log(max(v, 1e-300)) + 2 * cand
-      if (aic < best_aic) { best_aic <- aic; best_p <- cand }
+      if (aic < best_aic) { best_aic <- aic
+      best_p <- cand }
     }
     p <- best_p
   }

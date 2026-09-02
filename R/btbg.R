@@ -26,7 +26,8 @@
 #' Btbg(rbind(c(1, 2), c(1, 3), c(2, 2)), kind = "regression")$y_pred
 #' @export
 Btbg <- function(models, X_new = NULL, kind = "regression") {
-  rows <- as.matrix(models); storage.mode(rows) <- "double"
+  rows <- as.matrix(models)
+  storage.mode(rows) <- "double"
   B <- nrow(rows)
   if (B == 0L || length(rows) == 0L) stop("boot_bagging_predict: no models")
   m <- ncol(rows)
@@ -41,7 +42,8 @@ Btbg <- function(models, X_new = NULL, kind = "regression") {
   if (!(kd %in% c("regression", "classification"))) {
     stop("boot_bagging_predict: kind must be regression or classification")
   }
-  yp <- numeric(m); share <- numeric(m)
+  yp <- numeric(m)
+  share <- numeric(m)
   for (j in seq_len(m)) {
     col <- rows[, j]
     if (kd == "regression") {

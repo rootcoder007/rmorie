@@ -37,14 +37,18 @@ Smthedge <- function(y, n, which = "sign", book = FALSE) {
   if (n < 1) stop("sample size must be at least 1.")
   if (!which %in% c("sign", "wilcoxon")) stop("which must be \"sign\" or \"wilcoxon\".")
   yv <- as.numeric(y)
-  base <- stats::pnorm(yv); phi <- stats::dnorm(yv)
+  base <- stats::pnorm(yv)
+  phi <- stats::dnorm(yv)
   he3 <- yv^3 - 3 * yv
   if (identical(which, "sign")) {
-    coef <- 1 / (24 * n); corr <- coef * he3 * phi
+    coef <- 1 / (24 * n)
+    corr <- coef * he3 * phi
   } else if (isTRUE(book)) {
-    coef <- 7 / 20; corr <- (7 / 20 * yv^3 - 21 / 20 * yv) * phi
+    coef <- 7 / 20
+    corr <- (7 / 20 * yv^3 - 21 / 20 * yv) * phi
   } else {
-    coef <- 1 / (20 * n); corr <- coef * he3 * phi
+    coef <- 1 / (20 * n)
+    corr <- coef * he3 * phi
   }
   list(estimate = base - corr, normal = base, correction = corr, coef = coef,
        which = which, book = isTRUE(book),

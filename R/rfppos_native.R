@@ -104,8 +104,10 @@ morie_rfppos_distance <- function(a, b) .rfppos_norm(a - b)
 #' @return Degrees.
 #' @export
 morie_rfppos_angle <- function(a, b, c) {
-  u <- a - b; v <- c - b
-  nu <- .rfppos_norm(u); nv <- .rfppos_norm(v)
+  u <- a - b
+  v <- c - b
+  nu <- .rfppos_norm(u)
+  nv <- .rfppos_norm(v)
   if (nu == 0 || nv == 0) stop("an angle needs three distinct points")
   t <- .w3_dot(u, v) / (nu * nv)
   if (t > 1) t <- 1
@@ -124,7 +126,9 @@ morie_rfppos_angle <- function(a, b, c) {
 #' @return Degrees, signed.
 #' @export
 morie_rfppos_dihedral <- function(a, b, c, d) {
-  b1 <- b - a; b2 <- c - b; b3 <- d - c
+  b1 <- b - a
+  b2 <- c - b
+  b3 <- d - c
   n2 <- .rfppos_norm(b2)
   if (n2 == 0) stop("a torsion needs a defined axis")
   u <- b2 / n2
@@ -157,13 +161,16 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
   if (!(mode %in% .rfppos_modes))
     stop("the mode is burgi_dunitz or michael")
   g <- morie_avalon_parse(smiles)
-  el <- g$el; arom <- g$arom; n <- length(el)
+  el <- g$el
+  arom <- g$arom
+  n <- length(el)
   adj <- .avalon_adj(n, g$bonds)
   if (mode == "burgi_dunitz") {
     for (i in seq_len(n)) {
       if (el[i] != "C" || arom[i] == 1L) next
       for (e in adj[[i]]) {
-        v <- e[1]; o <- e[2]
+        v <- e[1]
+        o <- e[2]
         if ((o == 2 && el[v + 1L] %in% c("O", "N")) ||
             (o == 3 && el[v + 1L] == "N")) {
           third <- NULL
@@ -185,7 +192,8 @@ morie_rfppos_warhead <- function(smiles, mode = "burgi_dunitz") {
     if (bd[3] != 2 || el[bd[1] + 1L] != "C" || el[bd[2] + 1L] != "C")
       next
     for (pair in list(c(bd[1], bd[2]), c(bd[2], bd[1]))) {
-      alpha <- pair[1]; beta <- pair[2]
+      alpha <- pair[1]
+      beta <- pair[2]
       for (e in adj[[alpha + 1L]])
         if (e[1] != beta && carbonyl[e[1] + 1L])
           return(c(beta, alpha, e[1]))
@@ -244,7 +252,9 @@ morie_rfppos <- function(pose, cys_residue, mode = "burgi_dunitz",
       angle_tol = as.numeric(angle_tol), ideal = NULL, mode = mode,
       n_atoms = length(g$el),
       method = "covalent near-attack geometry filter"))
-  e <- warhead[1]; r <- warhead[2]; t <- warhead[3]
+  e <- warhead[1]
+  r <- warhead[2]
+  t <- warhead[3]
   if (is.null(ideal))
     ideal <- if (mode == "burgi_dunitz") .rfppos_burgi_dunitz else 90
   ideal <- as.numeric(ideal)

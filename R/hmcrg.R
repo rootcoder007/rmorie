@@ -24,7 +24,9 @@
 #' @examples
 #' Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 Hiermodel <- function(y, sigma, tau) {
-  y <- .t1_vec(y); s <- .t1_vec(sigma); J <- length(y)
+  y <- .t1_vec(y)
+  s <- .t1_vec(sigma)
+  J <- length(y)
   if (length(s) != J) stop("y and sigma must have the same length")
   if (J < 2L) stop("a hierarchical model needs at least two groups")
   if (any(s <= 0))
@@ -35,7 +37,9 @@ Hiermodel <- function(y, sigma, tau) {
   Vmu <- 1 / sum(w)
   mu <- sum(w * y) * Vmu
   if (tau == 0) {
-    th <- rep(mu, J); Vt <- rep(0, J); shr <- rep(1, J)
+    th <- rep(mu, J)
+    Vt <- rep(0, J)
+    shr <- rep(1, J)
   } else {
     prec <- 1 / s^2 + 1 / tau^2
     Vt <- 1 / prec

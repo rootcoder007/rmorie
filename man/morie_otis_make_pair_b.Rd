@@ -20,6 +20,6 @@ readmission).
 }
 \examples{
 \donttest{
-  morie_otis_make_pair_b(morie_otis_load())
+morie_otis_make_pair_b(morie_otis_load())
 }
 }

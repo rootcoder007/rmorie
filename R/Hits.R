@@ -26,7 +26,8 @@ Hits <- function(A, iters = 50) {
   if (ncol(M) != n) stop("hits: adjacency matrix must be square")
   m <- as.integer(iters)
   if (m < 1L) stop("hits: iters must be at least 1")
-  unit <- function(v) { s <- sqrt(sum(v * v)); if (s == 0) v else v / s }
+  unit <- function(v) { s <- sqrt(sum(v * v))
+  if (s == 0) v else v / s }
   h <- unit(rep(1, n))
   a <- rep(0, n)
   for (i in seq_len(m)) {

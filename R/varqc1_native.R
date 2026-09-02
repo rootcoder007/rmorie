@@ -92,7 +92,9 @@ morie_varqc1_hard <- function(records, fields, thresholds) {
   for (i in seq_len(n)) {
     failed <- character(0)
     for (tr in thresholds) {
-      ann <- tr[1]; direction <- tr[2]; cut <- as.numeric(tr[3])
+      ann <- tr[1]
+      direction <- tr[2]
+      cut <- as.numeric(tr[3])
       j <- match(ann, fields)
       if (is.na(j)) next
       v <- records[i, j]
@@ -172,7 +174,8 @@ morie_varqc1_mixture <- function(X, n_components = 2L, n_iter = 50L, seed = 1,
   if (!(covariance %in% .VARQC1_COVARIANCES))
     stop("covariance must be one of ",
          paste(.VARQC1_COVARIANCES, collapse = ", "))
-  n <- nrow(X); d <- ncol(X)
+  n <- nrow(X)
+  d <- ncol(X)
   K <- as.integer(n_components)
   if (K < 1L) stop("need at least one component")
   if (n < K * (d + 1L))
@@ -330,13 +333,15 @@ morie_varqc1 <- function(vcf, thresholds = NULL, fields = NULL, mode = "snp",
     cutv[j] <- ps[keep]
   }
   o <- order(-cutv, tvals)
-  tvals <- tvals[o]; cutv <- cutv[o]
+  tvals <- tvals[o]
+  cutv <- cutv[o]
 
   tranche <- character(n)
   for (i in seq_len(n)) {
     lab <- "FAIL"
     for (j in seq_along(tvals))
-      if (lod[i] >= cutv[j]) { lab <- sprintf("%.1f", tvals[j]); break }
+      if (lod[i] >= cutv[j]) { lab <- sprintf("%.1f", tvals[j])
+      break }
     tranche[i] <- lab
   }
 

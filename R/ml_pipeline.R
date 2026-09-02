@@ -181,7 +181,8 @@ morie_ml_split <- function(data,
   n <- nrow(data)
   if (is.null(strata)) {
     # deterministic proportional counts, then shuffle the assignment
-    counts <- floor(prop * n); counts[1] <- n - sum(counts[-1])
+    counts <- floor(prop * n)
+    counts[1] <- n - sum(counts[-1])
     roles <- sample(rep(names(prop), counts))
   } else {
     roles <- character(n)
@@ -334,7 +335,8 @@ morie_ml_prep <- function(recipe, data) {
         recipe$center_target[[v]] else mean(col)
     } else 0
     scl <- if (isTRUE(recipe$scale)) {
-      s <- stats::sd(col); if (is.na(s) || s == 0) 1 else s
+      s <- stats::sd(col)
+      if (is.na(s) || s == 0) 1 else s
     } else 1
     p[[v]] <- list(impute = if (recipe$impute == "none") NA_real_
                             else morie_ml_impute(data[[v]], recipe$impute)[
@@ -548,7 +550,10 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   w <- rep(0, ncol(X))
   loss_path <- numeric(model$epochs)
   grad_norm <- numeric(0)
-  m_adam <- v_adam <- rep(0, ncol(X)); b1 <- 0.9; b2 <- 0.999; t_adam <- 0
+  m_adam <- v_adam <- rep(0, ncol(X))
+  b1 <- 0.9
+  b2 <- 0.999
+  t_adam <- 0
   converged <- FALSE
   for (ep in seq_len(model$epochs)) {
     if (model$optimizer == "sgd") {
@@ -558,7 +563,8 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
       idx_batches <- list(seq_len(nrow(Xs)))
     }
     for (bi in idx_batches) {
-      Xb <- Xs[bi, , drop = FALSE]; yb <- y[bi]
+      Xb <- Xs[bi, , drop = FALSE]
+      yb <- y[bi]
       p <- L$link(as.numeric(Xb %*% w))
       g <- as.numeric(L$grad(Xb, p, yb)) + model$l2 * w
       grad_norm <- c(grad_norm, sqrt(sum(g^2)))
@@ -566,7 +572,8 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
         t_adam <- t_adam + 1
         m_adam <- b1 * m_adam + (1 - b1) * g
         v_adam <- b2 * v_adam + (1 - b2) * g^2
-        mhat <- m_adam / (1 - b1^t_adam); vhat <- v_adam / (1 - b2^t_adam)
+        mhat <- m_adam / (1 - b1^t_adam)
+        vhat <- v_adam / (1 - b2^t_adam)
         w <- w - model$learning_rate * mhat / (sqrt(vhat) + 1e-8)
       } else {
         w <- w - model$learning_rate * g
@@ -576,10 +583,14 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
     loss_path[ep] <- L$loss(p_full, y) + model$l2 * sum(w^2) / 2
     if (verbose) message(sprintf("epoch %d loss %.6f", ep, loss_path[ep]))
     if (!is.finite(loss_path[ep])) {  # diverged; stop before NA-comparing
-      loss_path <- loss_path[seq_len(ep)]; converged <- FALSE; break
+      loss_path <- loss_path[seq_len(ep)]
+      converged <- FALSE
+      break
     }
     if (ep > 1 && abs(loss_path[ep - 1] - loss_path[ep]) < model$tol) {
-      loss_path <- loss_path[seq_len(ep)]; converged <- TRUE; break
+      loss_path <- loss_path[seq_len(ep)]
+      converged <- TRUE
+      break
     }
   }
   # Map weights from standardised space back to the raw feature scale.
@@ -769,11 +780,13 @@ morie_ml_assess <- function(fit, x, y,
 morie_ml_resample <- function(model, x, y, n_folds = 5L,
                               metric = if (model$type == "logistic") "roc_auc"
                                        else "rmse", seed = 42L) {
-  x <- as.data.frame(x); y <- as.numeric(y)
+  x <- as.data.frame(x)
+  y <- as.numeric(y)
   set.seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(x)))
   scores <- vapply(seq_len(n_folds), function(k) {
-    tr <- folds != k; te <- folds == k
+    tr <- folds != k
+    te <- folds == k
     fit <- morie_ml_train(model, x[tr, , drop = FALSE], y[tr])
     unname(morie_ml_assess(fit, x[te, , drop = FALSE], y[te], metrics = metric))
   }, numeric(1))
@@ -831,7 +844,9 @@ morie_ml_tune <- function(x, y, grid, type = "linear", n_folds = 5L,
 #'                     mtcars[c("hp", "wt")], mtcars$mpg)
 #' @export
 morie_ml_train_time <- function(model, x, y, probe_epochs = 5L) {
-  probe <- model; probe$epochs <- as.integer(probe_epochs); probe$tol <- 0
+  probe <- model
+  probe$epochs <- as.integer(probe_epochs)
+  probe$tol <- 0
   t0 <- proc.time()[["elapsed"]]
   morie_ml_train(probe, x, y)
   per_epoch <- (proc.time()[["elapsed"]] - t0) / probe_epochs

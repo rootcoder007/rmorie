@@ -36,7 +36,9 @@
 #' @export
 Propme <- function(a, b, c_prime,
                    se_a = NULL, se_b = NULL, se_c_prime = NULL) {
-  a <- as.numeric(a); b <- as.numeric(b); c_prime <- as.numeric(c_prime)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  c_prime <- as.numeric(c_prime)
   ab <- a * b
   total <- c_prime + ab
   if (total == 0) stop("total effect c_prime + a*b is zero", call. = FALSE)

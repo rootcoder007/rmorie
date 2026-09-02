@@ -93,7 +93,9 @@
     piv <- cc + which.max(col) - 1L
     if (abs(m[piv, cc]) < 1e-300) stop("singular system.", call. = FALSE)
     if (piv != cc) {
-      tmp <- m[cc, ]; m[cc, ] <- m[piv, ]; m[piv, ] <- tmp
+      tmp <- m[cc, ]
+      m[cc, ] <- m[piv, ]
+      m[piv, ] <- tmp
     }
     pv <- m[cc, cc]
     for (r in seq_len(n)) {
@@ -118,7 +120,8 @@
 #' @export
 .morie_jo_ols <- function(x, y) {
   x <- as.matrix(x)
-  n <- nrow(x); p <- ncol(x)
+  n <- nrow(x)
+  p <- ncol(x)
   xtx <- matrix(0, p, p)
   for (a in seq_len(p)) for (b in seq_len(p)) xtx[a, b] <- sum(x[, a] * x[, b])
   xty <- vapply(seq_len(p), function(a) sum(x[, a] * y), numeric(1))
@@ -335,7 +338,8 @@ morie_logtrans <- function(x, offset = 0) {
     stop("log transform needs x + offset strictly positive.", call. = FALSE)
   }
   w <- log(v + offset)
-  mv <- mean(v); mw <- mean(w)
+  mv <- mean(v)
+  mw <- mean(w)
   sv <- sqrt(sum((v - mv)^2) / length(v))
   sw <- sqrt(sum((w - mw)^2) / length(w))
   list(w = w, mean = mw, sd = sw,
@@ -354,7 +358,8 @@ morie_logtrans <- function(x, offset = 0) {
 #' morie_diffser(V)
 morie_diffser <- function(x, order = 1L, season = 1L) {
   v <- .morie_jo_vec(x)
-  order <- as.integer(order); season <- as.integer(season)
+  order <- as.integer(order)
+  season <- as.integer(season)
   if (order < 1L || season < 1L) {
     stop("order and season must be at least 1.", call. = FALSE)
   }
@@ -416,8 +421,10 @@ morie_rollfeat <- function(x, window, minperiods = NULL) {
   if (mp < 1L || mp > window) {
     stop("minperiods must lie in [1, window].", call. = FALSE)
   }
-  means <- numeric(0); sds <- numeric(0)
-  mins <- numeric(0); maxs <- numeric(0)
+  means <- numeric(0)
+  sds <- numeric(0)
+  mins <- numeric(0)
+  maxs <- numeric(0)
   for (i in seq_along(v)) {
     lo <- max(1L, i - window + 1L)
     w <- v[lo:i]
@@ -425,7 +432,8 @@ morie_rollfeat <- function(x, window, minperiods = NULL) {
     m <- mean(w)
     means <- c(means, m)
     sds <- c(sds, sqrt(sum((w - m)^2) / length(w)))
-    mins <- c(mins, min(w)); maxs <- c(maxs, max(w))
+    mins <- c(mins, min(w))
+    maxs <- c(maxs, max(w))
   }
   list(mean = means, sd = sds, min = mins, max = maxs, nrows = length(means),
        lastmean = if (length(means)) means[length(means)] else NaN,
@@ -445,7 +453,9 @@ morie_rollfeat <- function(x, window, minperiods = NULL) {
 #' @examples
 #' morie_fourfeat(n = 24, period = 12, k = 2)
 morie_fourfeat <- function(n, period, k, start = 0) {
-  n <- as.integer(n); period <- as.numeric(period); k <- as.integer(k)
+  n <- as.integer(n)
+  period <- as.numeric(period)
+  k <- as.integer(k)
   if (n < 1L || period <= 0 || k < 1L) {
     stop("need n >= 1, period > 0 and k >= 1.", call. = FALSE)
   }
@@ -523,7 +533,9 @@ morie_calfeat <- function(dates) {
   storage.mode(dm) <- "integer"
   rows <- list()
   for (i in seq_len(nrow(dm))) {
-    y <- dm[i, 1]; m <- dm[i, 2]; d <- dm[i, 3]
+    y <- dm[i, 1]
+    m <- dm[i, 2]
+    d <- dm[i, 3]
     if (m < 1L || m > 12L) stop("month must lie in 1..12.", call. = FALSE)
     mlen <- .morie_jo_mlen[m] + if (m == 2L && .morie_jo_leap(y)) 1 else 0
     if (d < 1L || d > mlen) stop("day is out of range for that month.", call. = FALSE)
@@ -572,7 +584,8 @@ morie_tsimpute <- function(x, method = "linear", season = 1L) {
   if (season < 1L) stop("season must be at least 1.", call. = FALSE)
   out <- numeric(n)
   for (i in seq_len(n)) {
-    if (!is.na(raw[i])) { out[i] <- raw[i]; next }
+    if (!is.na(raw[i])) { out[i] <- raw[i]
+    next }
     prev <- obs[obs < i]
     nxt <- obs[obs > i]
     out[i] <- if (method == "ffill") {
@@ -586,7 +599,8 @@ morie_tsimpute <- function(x, method = "linear", season = 1L) {
       if (length(same)) mean(raw[same]) else gm
     } else if (method == "linear") {
       if (length(prev) && length(nxt)) {
-        a <- prev[length(prev)]; b <- nxt[1]
+        a <- prev[length(prev)]
+        b <- nxt[1]
         w <- (i - a) / (b - a)
         raw[a] + w * (raw[b] - raw[a])
       } else if (length(prev)) {
@@ -762,7 +776,8 @@ morie_adfur <- function(x, lags = 1L) {
 #' morie_stldecomp(x, period = 12)
 morie_stldecomp <- function(x, period, robust = FALSE, iters = 2L) {
   v <- .morie_jo_vec(x)
-  period <- as.integer(period); iters <- as.integer(iters)
+  period <- as.integer(period)
+  iters <- as.integer(iters)
   if (period < 2L || length(v) < 2L * period) {
     stop("need period >= 2 and at least two full periods.", call. = FALSE)
   }
@@ -774,7 +789,8 @@ morie_stldecomp <- function(x, period, robust = FALSE, iters = 2L) {
   for (it in seq_len(iters)) {
     deseas <- v - seasonal
     for (i in seq_len(n)) {
-      lo <- max(1L, i - half); hi <- min(n, i + half)
+      lo <- max(1L, i - half)
+      hi <- min(n, i + half)
       trend[i] <- mean(deseas[lo:hi])
     }
     detr <- v - trend
@@ -971,7 +987,8 @@ morie_dirrec <- function(x, lags, horizon) {
 #' morie_seasnaive(x, season = 12, horizon = 6)
 morie_seasnaive <- function(x, season, horizon) {
   v <- .morie_jo_vec(x)
-  season <- as.integer(season); horizon <- as.integer(horizon)
+  season <- as.integer(season)
+  horizon <- as.integer(horizon)
   if (season < 1L || horizon < 1L) {
     stop("season and horizon must be at least 1.", call. = FALSE)
   }
@@ -1002,7 +1019,8 @@ morie_seasnaive <- function(x, season, horizon) {
 #' @examples
 #' morie_slidecv(n = 50, trainsize = 30, testsize = 5)
 morie_slidecv <- function(n, trainsize, testsize, step = NULL) {
-  n <- as.integer(n); trainsize <- as.integer(trainsize)
+  n <- as.integer(n)
+  trainsize <- as.integer(trainsize)
   testsize <- as.integer(testsize)
   step <- if (is.null(step)) testsize else as.integer(step)
   if (min(n, trainsize, testsize, step) < 1L) {
@@ -1035,7 +1053,8 @@ morie_slidecv <- function(n, trainsize, testsize, step = NULL) {
 #' @examples
 #' morie_expandcv(n = 50, initial = 30, testsize = 5)
 morie_expandcv <- function(n, initial, testsize, step = NULL) {
-  n <- as.integer(n); initial <- as.integer(initial)
+  n <- as.integer(n)
+  initial <- as.integer(initial)
   testsize <- as.integer(testsize)
   step <- if (is.null(step)) testsize else as.integer(step)
   if (min(n, initial, testsize, step) < 1L) {
@@ -1112,7 +1131,8 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
   if (!(q > 0 && q < 1)) stop("q must lie strictly in (0, 1).", call. = FALSE)
   iters <- as.integer(iters)
   if (iters < 1L) stop("iters must be at least 1.", call. = FALSE)
-  n <- nrow(xm); p <- ncol(xm)
+  n <- nrow(xm)
+  p <- ncol(xm)
   beta <- .morie_jo_ols(xm, yv)
   eps <- 1e-6
   for (it in seq_len(iters)) {
@@ -1164,7 +1184,8 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
   n <- length(scores)
   k <- ceiling((n + 1) * (1 - alpha))
   qhat <- scores[max(1L, min(as.integer(k), n))]
-  lo <- .morie_jo_vec(lo, "lo"); hi <- .morie_jo_vec(hi, "hi")
+  lo <- .morie_jo_vec(lo, "lo")
+  hi <- .morie_jo_vec(hi, "hi")
   if (length(lo) != length(hi)) {
     stop("lo and hi must be the same length.", call. = FALSE)
   }
@@ -1195,7 +1216,8 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
   seqv <- as.logical(inside)
   if (length(seqv) == 0L) stop("inside must be non-empty.", call. = FALSE)
-  alpha <- as.numeric(alpha); gamma <- as.numeric(gamma)
+  alpha <- as.numeric(alpha)
+  gamma <- as.numeric(gamma)
   if (!(alpha > 0 && alpha < 1) || gamma <= 0) {
     stop("alpha must lie in (0, 1) and gamma be positive.", call. = FALSE)
   }
@@ -1384,7 +1406,8 @@ morie_seriesdecomp <- function(x, kernel) {
 #' @examples
 #' morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_autoform <- function(q, k, v, kernel = 3L, c = 1) {
-  qv <- .morie_jo_vec(q, "q"); kv <- .morie_jo_vec(k, "k")
+  qv <- .morie_jo_vec(q, "q")
+  kv <- .morie_jo_vec(k, "k")
   vv <- .morie_jo_vec(v, "v")
   if (length(kv) != length(qv) || length(vv) != length(qv)) {
     stop("q, k and v must be the same length.", call. = FALSE)
@@ -1434,7 +1457,8 @@ morie_autoform <- function(q, k, v, kernel = 3L, c = 1) {
 #' str(morie_patchts(x, patchlen = 8, stride = 4), max.level = 1)
 morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
   chans <- if (is.list(x)) lapply(x, .morie_jo_vec) else list(.morie_jo_vec(x))
-  P <- as.integer(patchlen); S <- as.integer(stride)
+  P <- as.integer(patchlen)
+  S <- as.integer(stride)
   if (P < 1L || S < 1L) stop("patchlen and stride must be positive.", call. = FALSE)
   L <- length(chans[[1]])
   if (any(vapply(chans, length, integer(1)) != L)) {
@@ -1500,7 +1524,8 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
   v <- .morie_jo_vec(y, "y")
   H <- as.integer(horizon)
   if (H < 1L) stop("horizon must be at least 1.", call. = FALSE)
-  ks <- as.integer(kernels); rs <- as.numeric(ratios)
+  ks <- as.integer(kernels)
+  rs <- as.numeric(ratios)
   if (length(ks) == 0L || length(ks) != length(rs) ||
       length(ks) != length(wf) || length(ks) != length(wb)) {
     stop("kernels, ratios, wf and wb must line up.", call. = FALSE)

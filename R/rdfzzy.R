@@ -27,7 +27,9 @@
 #' set.seed(1)
 #' r <- Rdfzzy(y = rnorm(10), x = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Rdfzzy <- function(y, x, D, cutoff = 0, bandwidth = 1) {
-  y <- as.numeric(unlist(y)); x <- as.numeric(unlist(x)); D <- as.numeric(unlist(D))
+  y <- as.numeric(unlist(y))
+  x <- as.numeric(unlist(x))
+  D <- as.numeric(unlist(D))
   if (length(y) == 0L) stop("Rdfzzy: y is empty")
   if (length(x) != length(y) || length(D) != length(y))
     stop("Rdfzzy: x and D must have one entry per observation")
@@ -36,10 +38,12 @@ Rdfzzy <- function(y, x, D, cutoff = 0, bandwidth = 1) {
   yL <- .rd_wls(s$r[s$left], y[s$left], s$w[s$left])
   dR <- .rd_wls(s$r[s$right], D[s$right], s$w[s$right])
   dL <- .rd_wls(s$r[s$left], D[s$left], s$w[s$left])
-  num <- yR$a - yL$a; den <- dR$a - dL$a
+  num <- yR$a - yL$a
+  den <- dR$a - dL$a
   if (abs(den) < 1e-10) stop("Rdfzzy: the first stage is indistinguishable from zero")
   tau <- num / den
-  vn <- yR$var_a + yL$var_a; vd <- dR$var_a + dL$var_a
+  vn <- yR$var_a + yL$var_a
+  vd <- dR$var_a + dL$var_a
   se <- sqrt(vn / (den * den) + (num * num) * vd / (den^4))
   .t1_result(estimate = tau, tau = tau, se = se,
              z = if (se > 0) tau / se else NA_real_,

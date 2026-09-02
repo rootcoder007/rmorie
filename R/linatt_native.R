@@ -28,12 +28,18 @@
 #' @examples
 #' Linatt(Q = 0.5, K = 5L, V = 5L, E = c(1, 2, 3, 4, 5, 6, 7, 8), F_ = c(1, 2, 3, 4, 5, 6, 7, 8))
 Linatt <- function(Q, K, V, E, F_) {
-  Qa <- as.matrix(Q); Ka <- as.matrix(K); Va <- as.matrix(V)
-  Ea <- as.matrix(E); Fa <- as.matrix(F_)
-  storage.mode(Qa) <- "double"; storage.mode(Ka) <- "double"
-  storage.mode(Va) <- "double"; storage.mode(Ea) <- "double"
+  Qa <- as.matrix(Q)
+  Ka <- as.matrix(K)
+  Va <- as.matrix(V)
+  Ea <- as.matrix(E)
+  Fa <- as.matrix(F_)
+  storage.mode(Qa) <- "double"
+  storage.mode(Ka) <- "double"
+  storage.mode(Va) <- "double"
+  storage.mode(Ea) <- "double"
   storage.mode(Fa) <- "double"
-  n <- nrow(Qa); dk <- ncol(Qa)
+  n <- nrow(Qa)
+  dk <- ncol(Qa)
   if (ncol(Ka) != dk) stop(sprintf("Linatt: K width %d != Q width %d", ncol(Ka), dk), call. = FALSE)
   if (nrow(Ka) != nrow(Va)) stop(sprintf("Linatt: K has %d rows but V has %d", nrow(Ka), nrow(Va)), call. = FALSE)
   if (ncol(Ea) != nrow(Ka)) stop(sprintf("Linatt: E must be (k, n) with n = %d", nrow(Ka)), call. = FALSE)
@@ -47,7 +53,9 @@ Linatt <- function(Q, K, V, E, F_) {
   FV <- Fa %*% Va
   S <- (Qa %*% t(EK)) * (1 / sqrt(dk))
   P <- t(apply(S, 1L, function(row) {
-    m <- max(row); e <- exp(row - m); e / sum(e)
+    m <- max(row)
+    e <- exp(row - m)
+    e / sum(e)
   }))
   if (nrow(Ea) == 1L) P <- matrix(P, nrow = n)
   out <- P %*% FV

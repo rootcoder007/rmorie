@@ -26,8 +26,12 @@
 #' Intlpa(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
 #'        b = c(4, 2, 3), x0 = c(0.5, 0.5))
 Intlpa <- function(c, A, b, x0, tau = 0.01, iters = 60) {
-  cv <- .s03vec(c); M <- .s03mat(A); bv <- .s03vec(b); x <- .s03vec(x0)
-  m <- nrow(M); n <- length(cv)
+  cv <- .s03vec(c)
+  M <- .s03mat(A)
+  bv <- .s03vec(b)
+  x <- .s03vec(x0)
+  m <- nrow(M)
+  n <- length(cv)
   if (m == 0L || n == 0L) stop("interior_point_lp: empty problem")
   if (length(bv) != m) stop("interior_point_lp: A and b have different row counts")
   if (length(x) != n) stop("interior_point_lp: x0 has the wrong length")

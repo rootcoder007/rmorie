@@ -21,8 +21,10 @@
 #' @examples
 #' RandW(G1 = 5L, G2 = 5L)
 RandW <- function(G1, G2, lam = 0.05) {
-  A <- as.matrix(G1); B <- as.matrix(G2)
-  n1 <- nrow(A); n2 <- nrow(B)
+  A <- as.matrix(G1)
+  B <- as.matrix(G2)
+  n1 <- nrow(A)
+  n2 <- nrow(B)
   if (n1 == 0L || n2 == 0L) stop("RandW: both graphs must be non-empty")
   if (ncol(A) != n1) stop("RandW: G1 must be square")
   if (ncol(B) != n2) stop("RandW: G2 must be square")

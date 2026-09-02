@@ -29,7 +29,8 @@ morie_kaplan_meier <- function(time, event, alpha = 0.05) {
   if (!all(event %in% c(0, 1))) stop("event must be 0 or 1")
   ut <- sort(unique(time[event == 1]))
   z <- stats::qnorm(1 - alpha / 2)
-  surv <- 1; vs <- 0
+  surv <- 1
+  vs <- 0
   S <- se <- sec <- lo <- hi <- nr <- ne <- numeric(length(ut))
   for (i in seq_along(ut)) {
     u <- ut[i]
@@ -37,12 +38,18 @@ morie_kaplan_meier <- function(time, event, alpha = 0.05) {
     d_i <- sum(time == u & event == 1)
     surv <- surv * (1 - d_i / n_i)
     if (n_i > d_i) vs <- vs + d_i / (n_i * (n_i - d_i))
-    S[i] <- surv; se[i] <- surv * sqrt(vs); sec[i] <- sqrt(vs)
-    nr[i] <- n_i; ne[i] <- d_i
+    S[i] <- surv
+    se[i] <- surv * sqrt(vs)
+    sec[i] <- sqrt(vs)
+    nr[i] <- n_i
+    ne[i] <- d_i
     if (surv > 0 && surv < 1) {
-      ll <- log(-log(surv)); sd <- sqrt(vs) / abs(log(surv))
-      lo[i] <- exp(-exp(ll + z * sd)); hi[i] <- exp(-exp(ll - z * sd))
-    } else { lo[i] <- surv; hi[i] <- surv }
+      ll <- log(-log(surv))
+      sd <- sqrt(vs) / abs(log(surv))
+      lo[i] <- exp(-exp(ll + z * sd))
+      hi[i] <- exp(-exp(ll - z * sd))
+    } else { lo[i] <- surv
+    hi[i] <- surv }
   }
   list(time = ut, surv = S, se = se, se_cumhaz = sec, lower = lo,
        upper = hi, n_risk = nr, n_event = ne, n = length(time),
@@ -62,13 +69,18 @@ morie_kaplan_meier <- function(time, event, alpha = 0.05) {
 #' morie_nelson_aalen(V, V)
 morie_nelson_aalen <- function(time, event) {
   ut <- sort(unique(time[event == 1]))
-  H <- 0; V <- 0
+  H <- 0
+  V <- 0
   ch <- se <- sv <- numeric(length(ut))
   for (i in seq_along(ut)) {
     u <- ut[i]
-    n_i <- sum(time >= u); d_i <- sum(time == u & event == 1)
-    H <- H + d_i / n_i; V <- V + d_i / n_i^2
-    ch[i] <- H; se[i] <- sqrt(V); sv[i] <- exp(-H)
+    n_i <- sum(time >= u)
+    d_i <- sum(time == u & event == 1)
+    H <- H + d_i / n_i
+    V <- V + d_i / n_i^2
+    ch[i] <- H
+    se[i] <- sqrt(V)
+    sv[i] <- exp(-H)
   }
   list(time = ut, cumhaz = ch, se = se, surv = sv)
 }
@@ -85,11 +97,14 @@ morie_nelson_aalen <- function(time, event) {
 #' @examples
 #' morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), group = c("a", "b", "c"))
 morie_logrank_test <- function(time, event, group) {
-  lev <- sort(unique(group)); k <- length(lev)
+  lev <- sort(unique(group))
+  k <- length(lev)
   if (k < 2) stop("need at least 2 groups")
-  obs <- exp_ <- numeric(k); V <- matrix(0, k, k)
+  obs <- exp_ <- numeric(k)
+  V <- matrix(0, k, k)
   for (u in sort(unique(time[event == 1]))) {
-    n_i <- sum(time >= u); d_i <- sum(time == u & event == 1)
+    n_i <- sum(time >= u)
+    d_i <- sum(time == u & event == 1)
     nj <- vapply(lev, function(g) sum(time >= u & group == g), numeric(1))
     dj <- vapply(lev, function(g)
       sum(time == u & event == 1 & group == g), numeric(1))
@@ -129,26 +144,34 @@ morie_logrank_test <- function(time, event, group) {
 #' morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_cox_ph <- function(time, event, X, ties = "efron",
                          max_iter = 50, tol = 1e-9) {
-  X <- as.matrix(X); n <- length(time); p <- ncol(X)
+  X <- as.matrix(X)
+  n <- length(time)
+  p <- ncol(X)
   if (sum(event) == 0) stop("no events: the partial likelihood is empty")
   ut <- sort(unique(time[event == 1]))
   beta <- numeric(p)
   info <- function(b) {
     w <- exp(as.numeric(X %*% b))
-    g <- numeric(p); H <- matrix(0, p, p)
+    g <- numeric(p)
+    H <- matrix(0, p, p)
     for (u in ut) {
-      rk <- time >= u; dd <- time == u & event == 1
+      rk <- time >= u
+      dd <- time == u & event == 1
       m <- sum(dd)
-      s0r <- sum(w[rk]); s1r <- colSums(X[rk, , drop = FALSE] * w[rk])
+      s0r <- sum(w[rk])
+      s1r <- colSums(X[rk, , drop = FALSE] * w[rk])
       s2r <- crossprod(X[rk, , drop = FALSE], X[rk, , drop = FALSE] * w[rk])
-      s0d <- sum(w[dd]); s1d <- colSums(X[dd, , drop = FALSE] * w[dd])
+      s0d <- sum(w[dd])
+      s1d <- colSums(X[dd, , drop = FALSE] * w[dd])
       s2d <- crossprod(X[dd, , drop = FALSE], X[dd, , drop = FALSE] * w[dd])
       g <- g + colSums(X[dd, , drop = FALSE])
       steps <- if (ties == "breslow") 1 else m
       for (r in seq_len(steps) - 1) {
         fr <- if (ties == "breslow") 0 else r / m
         cnt <- if (ties == "breslow") m else 1
-        s0 <- s0r - fr * s0d; s1 <- s1r - fr * s1d; s2 <- s2r - fr * s2d
+        s0 <- s0r - fr * s0d
+        s1 <- s1r - fr * s1d
+        s2 <- s2r - fr * s2d
         g <- g - cnt * s1 / s0
         H <- H + cnt * (s2 / s0 - outer(s1, s1) / s0^2)
       }
@@ -163,7 +186,8 @@ morie_cox_ph <- function(time, event, X, ties = "efron",
   }
   H <- info(beta)$H
   V <- solve(H)
-  se <- sqrt(diag(V)); z <- beta / se
+  se <- sqrt(diag(V))
+  z <- beta / se
   ll <- morie_cox_partial_loglik(time, event, X, beta, ties)
   ll0 <- morie_cox_partial_loglik(time, event, X, numeric(p), ties)
   list(coef = beta, se = se, z = z,
@@ -182,9 +206,11 @@ morie_cox_partial_loglik <- function(time, event, X, beta,
   eta <- as.numeric(X %*% beta)
   ll <- 0
   for (u in sort(unique(time[event == 1]))) {
-    rk <- time >= u; dd <- time == u & event == 1
+    rk <- time >= u
+    dd <- time == u & event == 1
     m <- sum(dd)
-    sr <- sum(exp(eta[rk])); sd <- sum(exp(eta[dd]))
+    sr <- sum(exp(eta[rk]))
+    sd <- sum(exp(eta[dd]))
     ll <- ll + sum(eta[dd])
     if (ties == "breslow") ll <- ll - m * log(sr)
     else for (r in seq_len(m) - 1) ll <- ll - log(sr - r * sd / m)
@@ -207,8 +233,10 @@ morie_concordance_index <- function(time, event, predicted_risk) {
   n <- length(time)
   conc <- disc <- tied <- 0
   for (i in seq_len(n - 1)) for (j in (i + 1):n) {
-    if (time[i] < time[j] && event[i] == 1) { lo <- i; hi <- j }
-    else if (time[j] < time[i] && event[j] == 1) { lo <- j; hi <- i }
+    if (time[i] < time[j] && event[i] == 1) { lo <- i
+    hi <- j }
+    else if (time[j] < time[i] && event[j] == 1) { lo <- j
+    hi <- i }
     else if (time[i] == time[j] && event[i] == 1 && event[j] == 1) {
       if (predicted_risk[i] != predicted_risk[j]) tied <- tied + 1
       next

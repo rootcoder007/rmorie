@@ -39,12 +39,16 @@ Dpld <- function(X, quasi_ids, sensitive, l, c = 1) {
   if (!(c > 0)) stop("Dpld: c must be strictly positive")
   key <- apply(rows, 1L, function(r) paste(sprintf("%.12g", r), collapse = "|"))
   order_keys <- unique(key)
-  distinct_l <- Inf; min_ent <- Inf; c_min <- 0; min_size <- Inf
+  distinct_l <- Inf
+  min_ent <- Inf
+  c_min <- 0
+  min_size <- Inf
   for (kk in order_keys) {
     vals <- sv[key == kk]
     lab <- unique(vals)
     cnt <- vapply(lab, function(s) sum(vals == s), 0)
-    m <- length(lab); tot <- length(vals)
+    m <- length(lab)
+    tot <- length(vals)
     p <- cnt / tot
     ent <- -sum(p * log(p))
     r <- sort(cnt, decreasing = TRUE)

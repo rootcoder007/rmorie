@@ -24,7 +24,9 @@
 #' @examples
 #' Stratdes(Nh = 5L, Sh = 5L, n = 5L)
 Stratdes <- function(Nh, Sh, n, Ch = NULL, kind = "neyman") {
-  Nh <- .t1_vec(Nh); Sh <- .t1_vec(Sh); n <- as.integer(n)
+  Nh <- .t1_vec(Nh)
+  Sh <- .t1_vec(Sh)
+  n <- as.integer(n)
   L <- length(Nh)
   if (length(Sh) != L) stop("Nh and Sh must have the same length")
   if (any(Nh <= 0)) stop("stratum sizes must be positive")
@@ -57,7 +59,8 @@ Stratdes <- function(Nh, Sh, n, Ch = NULL, kind = "neyman") {
     base[k] <- base[k] + 1L
     j <- j + 1L
   }
-  N <- sum(Nh); W <- Nh / N
+  N <- sum(Nh)
+  W <- Nh / N
   var <- sum(W^2 * (1 - base / Nh) * Sh^2 / base)
   .t1_result(nh = base, nh_exact = exact, weights = w, variance = var,
              se = sqrt(var), Wh = W, N = N, n = n, L = L,

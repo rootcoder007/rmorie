@@ -29,7 +29,9 @@ Amalgam <- function(x, parts, total = 1) {
   amal <- sum(x[idx])
   raw <- c(x[keep], amal)
   k <- as.numeric(total)
-  .t1_result(composition = k * raw / sum(raw), amalgamated = amal,
-             parts = idx, kept = keep, D = length(raw),
-             method = "Amalgamation")
+  .t1_result(
+    composition = k * raw / sum(raw), amalgamated = amal,
+    parts = idx, kept = keep, D = length(raw),
+    method = "Amalgamation"
+  )
 }

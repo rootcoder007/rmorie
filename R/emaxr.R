@@ -44,14 +44,16 @@ Emaxr <- function(y, X, cluster, sigma2_u, sigma2_e, beta = NULL) {
   p <- ncol(Xm)
   cluster <- as.character(cluster)
   if (length(cluster) != N) stop("cluster must have one label per observation")
-  s2u <- as.numeric(sigma2_u); s2e <- as.numeric(sigma2_e)
+  s2u <- as.numeric(sigma2_u)
+  s2e <- as.numeric(sigma2_e)
   if (s2u < 0) stop("sigma2_u must be non-negative")
   if (s2e < 0 || (s2e == 0 && is.null(beta))) stop("sigma2_e must be positive")
   labs <- unique(cluster)
   J <- length(labs)
   grp <- lapply(labs, function(cc) which(cluster == cc))
   if (is.null(beta)) {
-    A <- matrix(0, p, p); b <- numeric(p)
+    A <- matrix(0, p, p)
+    b <- numeric(p)
     for (g in grp) {
       nj <- length(g)
       f <- s2u / (s2e + nj * s2u)
@@ -69,9 +71,11 @@ Emaxr <- function(y, X, cluster, sigma2_u, sigma2_e, beta = NULL) {
     if (length(bet) != p) stop("beta must have one entry per column of X")
   }
   r <- y - as.numeric(Xm %*% bet)
-  uh <- numeric(J); vu <- numeric(J)
+  uh <- numeric(J)
+  vu <- numeric(J)
   for (j in seq_len(J)) {
-    g <- grp[[j]]; nj <- length(g)
+    g <- grp[[j]]
+    nj <- length(g)
     den <- s2e + nj * s2u
     sr <- sum(r[g])
     uh[j] <- if (den > 0) s2u * sr / den else 0

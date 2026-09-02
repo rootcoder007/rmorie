@@ -49,7 +49,8 @@ morie_xpehh1 <- function(hapA, hapB, core, positions = NULL,
   if (IA <= 0 || IB <= 0) stop("degenerate EHH curve: zero integrated area")
   u <- log(IA / IB)
   if (!is.null(standardize)) {
-    m <- as.numeric(standardize[1]); s <- as.numeric(standardize[2])
+    m <- as.numeric(standardize[1])
+    s <- as.numeric(standardize[2])
     if (s <= 0) stop("standardize sd must be positive")
     est <- (u - m) / s
     std <- TRUE

@@ -38,19 +38,23 @@ Flowmm <- function(G, source, sink) {
     stop("source and sink must be valid vertex indices")
   if (s == t) stop("source and sink must differ")
   R <- C
-  flow <- 0; aug <- 0L
+  flow <- 0
+  aug <- 0L
   repeat {
     prev <- rep(-1L, n)
     prev[s] <- s
     q <- s
     while (length(q) && prev[t] < 0L) {
-      v <- q[1]; q <- q[-1]
+      v <- q[1]
+      q <- q[-1]
       for (w in seq_len(n)) if (prev[w] < 0L && R[v, w] > 0) {
-        prev[w] <- v; q <- c(q, w)
+        prev[w] <- v
+        q <- c(q, w)
       }
     }
     if (prev[t] < 0L) break
-    b <- Inf; w <- t
+    b <- Inf
+    w <- t
     while (w != s) {
       v <- prev[w]
       if (R[v, w] < b) b <- R[v, w]
@@ -66,11 +70,15 @@ Flowmm <- function(G, source, sink) {
     flow <- flow + b
     aug <- aug + 1L
   }
-  seen <- rep(FALSE, n); seen[s] <- TRUE; q <- s
+  seen <- rep(FALSE, n)
+  seen[s] <- TRUE
+  q <- s
   while (length(q)) {
-    v <- q[1]; q <- q[-1]
+    v <- q[1]
+    q <- q[-1]
     for (w in seq_len(n)) if (!seen[w] && R[v, w] > 0) {
-      seen[w] <- TRUE; q <- c(q, w)
+      seen[w] <- TRUE
+      q <- c(q, w)
     }
   }
   side <- which(seen) - 1L

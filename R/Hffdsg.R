@@ -22,7 +22,8 @@
 #' @examples
 #' Hffdsg(a = 0, b = 1, n = 100, t = 0.1)
 Hffdsg <- function(a, b, n, t) {
-  av <- as.numeric(a); bv <- as.numeric(b)
+  av <- as.numeric(a)
+  bv <- as.numeric(b)
   if (!(bv > av)) stop("hoeffding_inequality: need a < b")
   nn <- as.integer(n)
   if (nn < 1L) stop("hoeffding_inequality: n must be at least 1")

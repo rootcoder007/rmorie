@@ -26,7 +26,9 @@
 #' set.seed(1)
 #' r <- Drnpc(y_main = rnorm(10), y_neg = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drnpc <- function(y_main, y_neg, D, X = NULL, alpha = 0.05) {
-  ym <- .s03vec(y_main); yn <- .s03vec(y_neg); dv <- .s03vec(D)
+  ym <- .s03vec(y_main)
+  yn <- .s03vec(y_neg)
+  dv <- .s03vec(D)
   n <- length(ym)
   if (n == 0L) stop("Drnpc: empty input, y_main has no observations")
   if (length(yn) != n || length(dv) != n)
@@ -37,7 +39,8 @@ Drnpc <- function(y_main, y_neg, D, X = NULL, alpha = 0.05) {
   if (s <= 0 || s >= n)
     stop("Drnpc: D must contain both treated and control units")
   Xr <- if (is.null(X)) NULL else .s03mat(X)
-  fm <- .s03drdid(ym, dv, Xr); fn <- .s03drdid(yn, dv, Xr)
+  fm <- .s03drdid(ym, dv, Xr)
+  fn <- .s03drdid(yn, dv, Xr)
   crit <- .s03qnorm(1 - alpha / 2)
   z <- if (fn$se > 0) fn$tau / fn$se else NaN
   bad <- if (!is.na(z) && abs(z) > crit) 1 else 0

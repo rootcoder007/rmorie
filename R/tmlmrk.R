@@ -29,12 +29,15 @@
 #' @examples
 #' Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmrk <- function(state, action, reward, policy) {
-  sv <- as.numeric(state); av <- as.numeric(action)
-  rv <- as.numeric(reward); pv <- as.numeric(policy)
+  sv <- as.numeric(state)
+  av <- as.numeric(action)
+  rv <- as.numeric(reward)
+  pv <- as.numeric(policy)
   n <- length(sv)
   if (n < 2L || length(av) != n || length(rv) != n)
     stop("Tmlmrk: state, action and reward must share one length >= 2")
-  states <- sort(unique(sv)); ns <- length(states)
+  states <- sort(unique(sv))
+  ns <- length(states)
   if (length(pv) != ns)
     stop("Tmlmrk: policy must give one action per distinct state")
   si <- match(sv, states)
@@ -46,9 +49,11 @@ Tmlmrk <- function(state, action, reward, policy) {
     hit <- sum(sv == s & abs(av - pol[si[i]]) < 1e-9)
     b[i] <- .s4_clip(hit / tot, 0.01, 1)
   }
-  num <- numeric(ns); cntr <- numeric(ns)
+  num <- numeric(ns)
+  cntr <- numeric(ns)
   for (i in seq_len(n)) if (abs(av[i] - pol[si[i]]) < 1e-9) {
-    num[si[i]] <- num[si[i]] + rv[i]; cntr[si[i]] <- cntr[si[i]] + 1
+    num[si[i]] <- num[si[i]] + rv[i]
+    cntr[si[i]] <- cntr[si[i]] + 1
   }
   rhat <- ifelse(cntr > 0, num / cntr, 0)
   H <- ifelse(abs(av - pol[si]) < 1e-9, 1, 0) / b
@@ -61,7 +66,8 @@ Tmlmrk <- function(state, action, reward, policy) {
     bst[k] <- if (length(rows) > 0L) b[rows[1L]] else 1
   }
   rstar <- rhat + eps / bst
-  P <- matrix(0, ns, ns); cnt <- numeric(ns)
+  P <- matrix(0, ns, ns)
+  cnt <- numeric(ns)
   for (i in seq_len(n - 1L)) {
     k <- si[i]
     if (abs(av[i] - pol[k]) < 1e-9) {
@@ -74,7 +80,8 @@ Tmlmrk <- function(state, action, reward, policy) {
   for (k in seq_len(ns)) for (j in seq_len(ns))
     A[k, j] <- (if (j == k) 1 else 0) - P[j, k]
   A[ns, ] <- 1
-  rhs <- numeric(ns); rhs[ns] <- 1
+  rhs <- numeric(ns)
+  rhs[ns] <- 1
   d <- as.numeric(solve(A, rhs))
   V <- sum(d * rstar)
   emp <- as.numeric(table(factor(si, levels = seq_len(ns)))) / n

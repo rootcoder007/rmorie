@@ -26,7 +26,8 @@
 #' Strtwt(c(1, 0, 1, 1, 0, 1, 0, 0), NULL, matrix(c(0, 0, 1, 1, 0, 1, 1, 0), 8, 1))
 #' @export
 Strtwt <- function(A, H = NULL, S = NULL) {
-  a <- .s03vec(A); n <- length(a)
+  a <- .s03vec(A)
+  n <- length(a)
   if (n == 0L) stop("stratified_weights: A is empty")
   if (any(a != 0 & a != 1)) stop("stratified_weights: A must be coded 0/1")
   Sm <- .strtwt_cols(S, n, "S")

@@ -15,7 +15,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Andrewswt(V)
 Andrewswt <- function(r, A = 1.339) {
-  r <- .t1_vec(r); A <- as.numeric(A)
+  r <- .t1_vec(r)
+  A <- as.numeric(A)
   if (A <= 0) stop("A must be positive")
   lim <- A * pi
   w <- ifelse(abs(r) > lim, 0, ifelse(r == 0, 1, sin(r / A) / (r / A)))

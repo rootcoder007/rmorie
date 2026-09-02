@@ -67,7 +67,8 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   if (is.na(M) || M < 1L || M > n) {
     stop("variational_gp_classifier: m_inducing must lie in 1 .. n")
   }
-  ls <- as.numeric(lengthscale); vr <- as.numeric(variance)
+  ls <- as.numeric(lengthscale)
+  vr <- as.numeric(variance)
   if (!(ls > 0) || !(vr > 0)) {
     stop("variational_gp_classifier: lengthscale and variance must be positive")
   }
@@ -85,8 +86,10 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
     vr * exp(-0.5 * s / (ls * ls))
   }
   ltri <- function(p, M) {
-    L <- matrix(0, M, M); t0 <- 1L
-    for (i in seq_len(M)) for (j in seq_len(i)) { L[i, j] <- p[t0]; t0 <- t0 + 1L }
+    L <- matrix(0, M, M)
+    t0 <- 1L
+    for (i in seq_len(M)) for (j in seq_len(i)) { L[i, j] <- p[t0]
+    t0 <- t0 + 1L }
     L
   }
   ord <- order(A[, 1L], seq_len(n))
@@ -104,7 +107,8 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   for (i in seq_len(M)) logdetK <- logdetK + 2 * log(Lk[i, i])
   Kinv <- matrix(0, M, M)
   for (j in seq_len(M)) {
-    e <- numeric(M); e[j] <- 1
+    e <- numeric(M)
+    e[j] <- 1
     Kinv[, j] <- .s03cholsolve(Kmm, e)
   }
   Amat <- matrix(0, n, M)
@@ -120,13 +124,15 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   J <- matrix(0, Q, Q)
   if (Q > 1L) for (k in seq_len(Q - 1L)) {
     b <- sqrt(k / 2)
-    J[k + 1L, k] <- b; J[k, k + 1L] <- b
+    J[k + 1L, k] <- b
+    J[k, k + 1L] <- b
   }
   je <- .s03jacobi(J)
   gx <- je$values
   gw <- numeric(Q)
   for (i in seq_len(Q)) gw[i] <- sqrt(pi) * je$vectors[1L, i] * je$vectors[1L, i]
-  sq <- sqrt(pi); r2 <- sqrt(2)
+  sq <- sqrt(pi)
+  r2 <- sqrt(2)
   npar <- M + (M * (M + 1L)) %/% 2L
   elbo_of <- function(p) {
     mu_u <- p[seq_len(M)]
@@ -164,9 +170,11 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
   }
   p <- numeric(npar)
   t0 <- M + 1L
-  for (i in seq_len(M)) for (j in seq_len(i)) { p[t0] <- Lk[i, j]; t0 <- t0 + 1L }
+  for (i in seq_len(M)) for (j in seq_len(i)) { p[t0] <- Lk[i, j]
+  t0 <- t0 + 1L }
   e0 <- elbo_of(p)
-  cur <- e0$v; kl <- e0$kl
+  cur <- e0$v
+  kl <- e0$kl
   path <- cur
   h <- 1e-5
   for (it in seq_len(as.integer(steps))) {
@@ -187,7 +195,10 @@ Vargpc <- function(X, y, X_test = NULL, m_inducing = 4, lengthscale = 1,
       cand <- p + s * g / gs
       nn <- elbo_of(cand)
       if (nn$v > cur) {
-        p <- cand; cur <- nn$v; kl <- nn$kl; moved <- TRUE
+        p <- cand
+        cur <- nn$v
+        kl <- nn$kl
+        moved <- TRUE
         break
       }
       s <- s * 0.5

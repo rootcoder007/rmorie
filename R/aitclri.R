@@ -15,7 +15,11 @@
 Clrinv <- function(z, total = 1) {
   z <- .t1_vec(z)
   if (length(z) == 0L) stop("z must be non-empty")
-  e <- exp(z - max(z)); s <- sum(e); k <- as.numeric(total)
-  .t1_result(composition = k * e / s, total = k, D = length(z),
-             method = "Inverse centred log-ratio transform")
+  e <- exp(z - max(z))
+  s <- sum(e)
+  k <- as.numeric(total)
+  .t1_result(
+    composition = k * e / s, total = k, D = length(z),
+    method = "Inverse centred log-ratio transform"
+  )
 }

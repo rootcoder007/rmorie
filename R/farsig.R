@@ -45,14 +45,16 @@
 Farsig <- function(counts, baseline_years = 5, reference_window = 3,
                    period = 52, alpha = 0.005, reweight = TRUE, trend = TRUE) {
   .irls <- function(X, y, w, iters = 60L, tol = 1e-12) {
-    n <- length(y); p <- ncol(X)
+    n <- length(y)
+    p <- ncol(X)
     b <- numeric(p)
     m <- sum(y * w) / max(sum(w), 1e-300)
     b[1] <- log(if (m > 0) m else 0.5)
     for (.k in seq_len(iters)) {
       eta <- as.numeric(X %*% b)
       mu <- exp(eta)
-      A <- matrix(0, p, p); rhs <- numeric(p)
+      A <- matrix(0, p, p)
+      rhs <- numeric(p)
       for (i in seq_len(n)) {
         wi <- w[i] * mu[i]
         z <- if (mu[i] > 0) eta[i] + (y[i] - mu[i]) / mu[i] else eta[i]
@@ -66,12 +68,15 @@ Farsig <- function(counts, baseline_years = 5, reference_window = 3,
       b <- nb
       if (d < tol) break
     }
-    eta <- as.numeric(X %*% b); mu <- exp(eta)
+    eta <- as.numeric(X %*% b)
+    mu <- exp(eta)
     A <- matrix(0, p, p)
     for (a in seq_len(p)) for (cc in seq_len(p))
       A[a, cc] <- sum(w * mu * X[, a] * X[, cc])
     inv <- lapply(seq_len(p), function(cc) {
-      e <- numeric(p); e[cc] <- 1; .s03cholsolve(A, e)
+      e <- numeric(p)
+      e[cc] <- 1
+      .s03cholsolve(A, e)
     })
     list(b = b, mu = mu, inv = inv)
   }
@@ -79,7 +84,8 @@ Farsig <- function(counts, baseline_years = 5, reference_window = 3,
   n <- length(y)
   if (n == 0L) stop("empty input: counts has no observations")
   if (any(y < 0)) stop("counts must be non-negative")
-  b <- as.integer(baseline_years); w <- as.integer(reference_window)
+  b <- as.integer(baseline_years)
+  w <- as.integer(reference_window)
   per <- as.integer(period)
   if (b < 1L) stop("baseline_years must be positive")
   if (w < 0L) stop("reference_window must be non-negative")

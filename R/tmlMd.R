@@ -20,12 +20,17 @@
 #' @examples
 #' TmlMd(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = 5L, Cc = c(1, 2, 3, 4, 5, 6, 7, 8))
 TmlMd <- function(Y, X, M, Cc) {
-  yv <- as.numeric(Y); Dv <- as.numeric(X); Mv <- as.numeric(M); n <- length(yv)
+  yv <- as.numeric(Y)
+  Dv <- as.numeric(X)
+  Mv <- as.numeric(M)
+  n <- length(yv)
   W <- cbind(1, as.matrix(Cc))
-  ref <- which(Dv <= 0.5); trt <- which(Dv > 0.5)
+  ref <- which(Dv <= 0.5)
+  trt <- which(Dv > 0.5)
   m0b <- .s4_ols(W[ref, , drop = FALSE], Mv[ref])$beta
   m1b <- .s4_ols(W[trt, , drop = FALSE], Mv[trt])$beta
-  M0 <- as.numeric(W %*% m0b); M1 <- as.numeric(W %*% m1b)
+  M0 <- as.numeric(W %*% m0b)
+  M1 <- as.numeric(W %*% m1b)
   qb <- .s4_ols(cbind(Dv, Mv, W), yv)$beta
   gb <- .s4_glmbin(W, Dv)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)

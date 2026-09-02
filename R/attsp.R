@@ -18,8 +18,12 @@
 #' @examples
 #' Sparseattn(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 Sparseattn <- function(Q, K, V, S = NULL) {
-  Qm <- .t1_mat(Q); Km <- .t1_mat(K); Vm <- .t1_mat(V)
-  nq <- nrow(Qm); d <- ncol(Qm); nk <- nrow(Km)
+  Qm <- .t1_mat(Q)
+  Km <- .t1_mat(K)
+  Vm <- .t1_mat(V)
+  nq <- nrow(Qm)
+  d <- ncol(Qm)
+  nk <- nrow(Km)
   if (ncol(Km) != d) stop("Q and K must share their last dimension")
   if (nrow(Vm) != nk) stop("V must have one row per key")
   dv <- ncol(Vm)

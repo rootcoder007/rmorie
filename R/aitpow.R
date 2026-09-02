@@ -21,6 +21,8 @@ Powering <- function(a, x, total = 1) {
   a <- as.numeric(a)
   p <- x^a
   k <- as.numeric(total)
-  .t1_result(composition = k * p / sum(p), a = a, total = k, D = length(x),
-             method = "Powering on the simplex")
+  .t1_result(
+    composition = k * p / sum(p), a = a, total = k, D = length(x),
+    method = "Powering on the simplex"
+  )
 }

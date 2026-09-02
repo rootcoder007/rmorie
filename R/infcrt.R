@@ -20,8 +20,13 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Infcrt(V)
 Infcrt <- function(log_lik_samples) {
-  L <- as.matrix(log_lik_samples); Sn <- nrow(L); n <- ncol(L)
-  lppd <- 0; pw <- 0; elpd_loo <- 0; ks <- numeric(n)
+  L <- as.matrix(log_lik_samples)
+  Sn <- nrow(L)
+  n <- ncol(L)
+  lppd <- 0
+  pw <- 0
+  elpd_loo <- 0
+  ks <- numeric(n)
   for (i in seq_len(n)) {
     col <- L[, i]
     m <- max(col)

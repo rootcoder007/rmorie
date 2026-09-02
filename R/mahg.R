@@ -18,7 +18,8 @@
 #' mahg(5, 5, 1, 1, 10, 10)
 #' @export
 mahg <- function(m1, m2, s1, s2, n1, n2) {
-  n1f <- as.numeric(n1); n2f <- as.numeric(n2)
+  n1f <- as.numeric(n1)
+  n2f <- as.numeric(n2)
   df <- n1f + n2f - 2
   sp <- sqrt(((n1f - 1) * s1^2 + (n2f - 1) * s2^2) / df)
   d <- (m1 - m2) / sp

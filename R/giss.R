@@ -21,9 +21,12 @@
 #' @export
 giss <- function(T, years = NULL, base = c(1951, 1980), dist = NULL, radius = 1200) {
   arr <- if (is.matrix(T)) T else matrix(as.numeric(T), nrow = 1)
-  nst <- nrow(arr); m <- ncol(arr)
-  if (is.null(years)) { yr <- seq_len(m) - 1; inbase <- rep(TRUE, m) }
-  else { yr <- as.numeric(years); inbase <- yr >= base[1] & yr <= base[2] }
+  nst <- nrow(arr)
+  m <- ncol(arr)
+  if (is.null(years)) { yr <- seq_len(m) - 1
+  inbase <- rep(TRUE, m) }
+  else { yr <- as.numeric(years)
+  inbase <- yr >= base[1] & yr <= base[2] }
   if (!any(inbase)) inbase <- rep(TRUE, m)
   nbase <- sum(inbase)
   baselines <- numeric(nst)

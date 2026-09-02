@@ -213,11 +213,15 @@
   if (abs(r1 - r2) < 1e-14)
     return(.ecstcr_rk4(T, TD, F, lam, gam, eps, C, CD, h))
   if (abs(a12) > 1e-300) {
-    v1a <- a12; v1b <- r1 - a11
-    v2a <- a12; v2b <- r2 - a11
+    v1a <- a12
+    v1b <- r1 - a11
+    v2a <- a12
+    v2b <- r2 - a11
   } else {
-    v1a <- r1 - a22; v1b <- a21
-    v2a <- r2 - a22; v2b <- a21
+    v1a <- r1 - a22
+    v1b <- a21
+    v2a <- r2 - a22
+    v2b <- a21
   }
   dd <- v1a * v2b - v2a * v1b
   if (abs(dd) < 1e-300)
@@ -390,7 +394,8 @@ morie_ecsTCR <- function(model_run = NULL, CO2_traj = NULL,
     n <- as.integer(years)
     out <- numeric(n)
     acc <- 1
-    for (i in seq_len(n)) { acc <- acc * (1 + rate); out[i] <- acc }
+    for (i in seq_len(n)) { acc <- acc * (1 + rate)
+    out[i] <- acc }
     out
   } else as.numeric(CO2_traj)
   forcing <- morie_ecsTCR_co2_forcing(traj, f2x)

@@ -16,8 +16,10 @@
 #' clausC(288)
 #' @export
 clausC <- function(T, Lv = 2.501e6, Rv = 461.5) {
-  es0 <- 611.2; t0 <- 273.15
-  Tv <- as.numeric(T); n <- length(Tv)
+  es0 <- 611.2
+  t0 <- 273.15
+  Tv <- as.numeric(T)
+  n <- length(Tv)
   es <- es0 * exp((Lv / Rv) * (1 / t0 - 1 / Tv))
   der <- Lv * es / (Rv * Tv^2)
   rate <- Lv / (Rv * Tv^2)

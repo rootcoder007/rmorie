@@ -19,7 +19,9 @@
 #'   of Variations 24(4):1489-1501. \doi{10.1051/cocv/2017050}.
 #' @export
 Otsobm <- function(mu, nu, Laplace_inv) {
-  a <- as.numeric(mu); b <- as.numeric(nu); L <- as.matrix(Laplace_inv)
+  a <- as.numeric(mu)
+  b <- as.numeric(nu)
+  L <- as.matrix(Laplace_inv)
   n <- length(a)
   if (length(b) != n || nrow(L) != n || ncol(L) != n)
     stop("Laplace_inv must be n by n and match both measures")

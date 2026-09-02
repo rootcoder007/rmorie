@@ -30,7 +30,8 @@
 #' Mtrbnd(V, V)
 Mtrbnd <- function(y, D, direction = "increasing", d = NULL,
                    y_min = NULL, y_max = NULL) {
-  yv <- .t1_vec(y); z <- .t1_vec(D)
+  yv <- .t1_vec(y)
+  z <- .t1_vec(D)
   if (length(yv) == 0L) stop("y is empty")
   if (length(z) != length(yv)) stop("y and D must have the same length")
   if (!direction %in% c("increasing", "decreasing")) {

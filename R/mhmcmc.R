@@ -25,23 +25,30 @@
 mhmcmc <- function(target, x0 = 0, n_iter = 1000L, u = NULL, z = NULL,
                    scale = 1, q = NULL, burn = 0L) {
   ni <- as.integer(n_iter)
-  uv <- as.numeric(u); zv <- as.numeric(z)
-  x <- as.numeric(x0); px <- as.numeric(target(x))
-  chain <- numeric(ni); accepted <- 0L
+  uv <- as.numeric(u)
+  zv <- as.numeric(z)
+  x <- as.numeric(x0)
+  px <- as.numeric(target(x))
+  chain <- numeric(ni)
+  accepted <- 0L
   for (i in seq_len(ni)) {
     prop <- x + scale * zv[((i - 1) %% length(zv)) + 1]
     pp <- as.numeric(target(prop))
     ratio <- if (px <= 0) (if (pp > 0) 1 else 0) else pp / px
     if (!is.null(q)) {
-      qf <- as.numeric(q(prop, x)); qb <- as.numeric(q(x, prop))
+      qf <- as.numeric(q(prop, x))
+      qb <- as.numeric(q(x, prop))
       ratio <- if (qf > 0) ratio * (qb / qf) else 0
     }
     alpha <- min(ratio, 1)
-    if (uv[((i - 1) %% length(uv)) + 1] < alpha) { x <- prop; px <- pp; accepted <- accepted + 1L }
+    if (uv[((i - 1) %% length(uv)) + 1] < alpha) { x <- prop
+    px <- pp
+    accepted <- accepted + 1L }
     chain[i] <- x
   }
   keep <- if (burn < ni) chain[(burn + 1):ni] else chain
-  m <- mean(keep); k <- length(keep)
+  m <- mean(keep)
+  k <- length(keep)
   sd <- if (k > 1) sqrt(sum((keep - m)^2) / (k - 1)) else NA_real_
   list(estimate = as.numeric(m), sd = as.numeric(sd),
        accept_rate = if (ni > 0) accepted / ni else NA_real_,

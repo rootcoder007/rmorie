@@ -19,7 +19,8 @@
 #' matr(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$estimate
 #' @export
 matr <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   k <- length(y)
   tau_he <- max(0, sum((y - mean(y))^2) / (k - 1) - mean(v))
   tau2 <- k02mm(y, v, tau_he)

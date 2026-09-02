@@ -49,10 +49,13 @@
 #'   (2017). Journal of Causal Inference 5(1).
 #' @export
 Tmlspl <- function(y, D, X, network, exposure_summary = NULL) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n == 0L || length(Dv) != n)
     stop("Tmlspl: y and D must share one length")
-  Xm <- as.matrix(X); A <- as.matrix(network)
+  Xm <- as.matrix(X)
+  A <- as.matrix(network)
   if (nrow(Xm) != n) stop("Tmlspl: X must have one row per subject")
   if (nrow(A) != n || ncol(A) != n) stop("Tmlspl: network must be n by n")
   E <- if (is.null(exposure_summary)) .tmlspl_frac_treated(Dv, A)

@@ -22,11 +22,19 @@ Gradclip <- function(grad, max_norm = 1) {
   for (x in g) s2 <- s2 + x * x
   nrm <- sqrt(s2)
   mx <- as.numeric(max_norm)
-  if (nrm >= mx && nrm > 0) { scale <- mx / nrm; was <- TRUE } else { scale <- 1; was <- FALSE }
+  if (nrm >= mx && nrm > 0) {
+    scale <- mx / nrm
+    was <- TRUE
+  } else {
+    scale <- 1
+    was <- FALSE
+  }
   out <- g * scale
   s2b <- 0
   for (x in out) s2b <- s2b + x * x
-  list(estimate = sqrt(s2b), clipped = out, norm = nrm, scale = scale,
-       was_clipped = was,
-       method = "Global-norm gradient clipping (Pascanu et al. 2013, alg. 1)")
+  list(
+    estimate = sqrt(s2b), clipped = out, norm = nrm, scale = scale,
+    was_clipped = was,
+    method = "Global-norm gradient clipping (Pascanu et al. 2013, alg. 1)"
+  )
 }

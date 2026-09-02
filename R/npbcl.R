@@ -52,19 +52,22 @@ Npbcl <- function(y, alpha = 1, sigma = 1, m0 = NULL, tau0 = 10) {
   sums <- numeric(0)
   total <- 0
   for (i in seq_len(n)) {
-    best <- NA_real_; bestk <- -1L
+    best <- NA_real_
+    bestk <- -1L
     if (length(counts)) {
       for (cc in seq_along(counts)) {
         prec <- p0 + counts[cc] / s2
         mc <- (mu0 * p0 + sums[cc] / s2) / prec
         sc <- 1 / prec + s2
         sco <- log(counts[cc]) + lnorm(v[i], mc, sc)
-        if (is.na(best) || sco > best) { best <- sco; bestk <- cc }
+        if (is.na(best) || sco > best) { best <- sco
+        bestk <- cc }
       }
     }
     newsco <- log(a) + lnorm(v[i], mu0, t0 * t0 + s2)
     if (is.na(best) || newsco > best) {
-      counts <- c(counts, 1); sums <- c(sums, v[i])
+      counts <- c(counts, 1)
+      sums <- c(sums, v[i])
       labels[i] <- length(counts) - 1L
       total <- total + newsco
     } else {

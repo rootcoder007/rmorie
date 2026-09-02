@@ -22,7 +22,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tukeyw(V)
 Tukeyw <- function(y, c = 4.685, n_iter = 20) {
-  v <- as.numeric(unlist(y)); n <- length(v)
+  v <- as.numeric(unlist(y))
+  n <- length(v)
   mu <- .s4_median(v)
   s <- .s4_median(abs(v - mu)) / 0.6744897501960817
   if (s <= 0) s <- 1

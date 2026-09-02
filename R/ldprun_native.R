@@ -43,9 +43,11 @@
 Ldprun <- function(G, window = 50L, step = 5L, r2_threshold = 0.5) {
   Gm <- as.matrix(G)
   storage.mode(Gm) <- "double"
-  n <- nrow(Gm); m <- ncol(Gm)
+  n <- nrow(Gm)
+  m <- ncol(Gm)
   if (n == 0L) stop("empty genotype matrix", call. = FALSE)
-  window <- as.integer(window); step <- as.integer(step)
+  window <- as.integer(window)
+  step <- as.integer(step)
   if (window < 2L || step < 1L) stop("need window >= 2 and step >= 1", call. = FALSE)
   thr <- as.numeric(r2_threshold)
   if (!(thr > 0 && thr <= 1)) stop("r2_threshold must be in (0, 1]", call. = FALSE)
@@ -53,11 +55,14 @@ Ldprun <- function(G, window = 50L, step = 5L, r2_threshold = 0.5) {
   valid <- function(v) v %in% c(0, 1, 2)
   r2_geno <- function(x, y) {
     ok <- valid(x) & valid(y)
-    a <- x[ok]; b <- y[ok]
+    a <- x[ok]
+    b <- y[ok]
     if (length(a) < 2L) return(NaN)
-    mx <- mean(a); my <- mean(b)
+    mx <- mean(a)
+    my <- mean(b)
     sxy <- sum((a - mx) * (b - my))
-    sxx <- sum((a - mx)^2); syy <- sum((b - my)^2)
+    sxx <- sum((a - mx)^2)
+    syy <- sum((b - my)^2)
     if (sxx <= 0 || syy <= 0) return(NaN)
     (sxy * sxy) / (sxx * syy)
   }
@@ -79,15 +84,18 @@ Ldprun <- function(G, window = 50L, step = 5L, r2_threshold = 0.5) {
       if (na >= 2L) {
         for (ai in seq_len(na - 1L)) {
           for (bi in seq.int(ai + 1L, na)) {
-            i <- active[ai]; j <- active[bi]
+            i <- active[ai]
+            j <- active[bi]
             r2 <- r2_geno(Gm[, i], Gm[, j])
-            if (!is.nan(r2) && r2 > thr) { offender <- c(i, j); break }
+            if (!is.nan(r2) && r2 > thr) { offender <- c(i, j)
+            break }
           }
           if (!is.null(offender)) break
         }
       }
       if (is.null(offender)) break
-      i <- offender[1]; j <- offender[2]
+      i <- offender[1]
+      j <- offender[2]
       drop <- if (mafs[j] <= mafs[i]) j else i
       removed[drop] <- TRUE
       active <- active[active != drop]

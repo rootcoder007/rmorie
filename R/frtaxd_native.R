@@ -43,8 +43,10 @@ Frtaxd <- function(coords, species, grid = 4L) {
     j <- if (s > 1L) h / log(s) else NaN
     list(h = h, s = s, j = j)
   }
-  xmin <- min(coords[, 1]); xmax <- max(coords[, 1])
-  ymin <- min(coords[, 2]); ymax <- max(coords[, 2])
+  xmin <- min(coords[, 1])
+  xmax <- max(coords[, 1])
+  ymin <- min(coords[, 2])
+  ymax <- max(coords[, 2])
   xr <- if (xmax > xmin) xmax - xmin else 1
   yr <- if (ymax > ymin) ymax - ymin else 1
   ix <- pmin(pmax(as.integer(floor((coords[, 1] - xmin) / xr * g)), 0L), g - 1L)

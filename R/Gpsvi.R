@@ -31,7 +31,8 @@
 #' Gpsvi(V, V)
 Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
                   lengthscale = 1, variance = 1, noise = 0.1, jitter = 1e-9) {
-  A <- .s03mat(X); yv <- .s03vec(y)
+  A <- .s03mat(X)
+  yv <- .s03vec(y)
   n <- nrow(A)
   if (n == 0L) stop("gp_stochastic_vi: X is empty")
   if (length(yv) != n) stop("gp_stochastic_vi: X and y have different lengths")
@@ -40,7 +41,9 @@ Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
   if (m == 0L) stop("gp_stochastic_vi: no inducing inputs")
   if (ncol(Z) != ncol(A)) stop("gp_stochastic_vi: inducing inputs have the wrong dimension")
   Xs <- if (is.null(X_test)) A else .s03mat(X_test)
-  ell <- as.numeric(lengthscale); var <- as.numeric(variance); s2 <- as.numeric(noise)
+  ell <- as.numeric(lengthscale)
+  var <- as.numeric(variance)
+  s2 <- as.numeric(noise)
   if (ell <= 0 || var <= 0 || s2 <= 0) stop("gp_stochastic_vi: lengthscale, variance and noise must be positive")
   kf <- function(P, Q) {
     out <- matrix(0, nrow(P), nrow(Q))
@@ -60,7 +63,8 @@ Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
   gauss <- -0.5 * sum(yv * a) - sum(log(diag(L))) - 0.5 * n * log(2 * pi)
   elbo <- gauss - trace / (2 * s2)
   Ksm <- kf(Xs, Z)
-  mu <- numeric(nrow(Xs)); sd <- numeric(nrow(Xs))
+  mu <- numeric(nrow(Xs))
+  sd <- numeric(nrow(Xs))
   for (j in seq_len(nrow(Xs))) {
     row <- as.numeric(Kinv %*% Ksm[j, ])
     mu[j] <- sum(row * a)

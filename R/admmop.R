@@ -20,16 +20,23 @@
 #' @examples
 #' Admmlasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Admmlasso <- function(X, y, lam, rho = 1, steps = 100) {
-  Xm <- .t1_mat(X); y <- .t1_vec(y)
-  lam <- as.numeric(lam); rho <- as.numeric(rho); steps <- as.integer(steps)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .t1_mat(X)
+  y <- .t1_vec(y)
+  lam <- as.numeric(lam)
+  rho <- as.numeric(rho)
+  steps <- as.integer(steps)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(y)) stop("X must have one row per entry of y")
   if (lam < 0) stop("lam must be non-negative")
   if (rho <= 0) stop("rho must be strictly positive")
   A <- crossprod(Xm) + rho * diag(p)
   dimnames(A) <- NULL
   Xty <- as.numeric(crossprod(Xm, y))
-  x <- rep(0, p); z <- rep(0, p); u <- rep(0, p); dual <- 0
+  x <- rep(0, p)
+  z <- rep(0, p)
+  u <- rep(0, p)
+  dual <- 0
   for (k in seq_len(steps)) {
     x <- as.numeric(solve(A, Xty + rho * (z - u)))
     zold <- z
@@ -39,8 +46,10 @@ Admmlasso <- function(X, y, lam, rho = 1, steps = 100) {
   }
   res <- as.numeric(Xm %*% z) - y
   obj <- 0.5 * sum(res^2) + lam * sum(abs(z))
-  .t1_result(x = x, z = z, u = u, objective = obj,
-             primalres = sqrt(sum((x - z)^2)), dualres = dual,
-             rho = rho, steps = steps, n = n, p = p,
-             method = "ADMM for the LASSO, scaled form (Boyd et al. 2011 Sect. 6.4)")
+  .t1_result(
+    x = x, z = z, u = u, objective = obj,
+    primalres = sqrt(sum((x - z)^2)), dualres = dual,
+    rho = rho, steps = steps, n = n, p = p,
+    method = "ADMM for the LASSO, scaled form (Boyd et al. 2011 Sect. 6.4)"
+  )
 }

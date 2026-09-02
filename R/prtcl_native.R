@@ -21,7 +21,8 @@
 #' @return A numeric value.
 #' @export
 morie_prtcl_effective_sample_size <- function(weights) {
-  s1 <- sum(weights); s2 <- sum(weights^2)
+  s1 <- sum(weights)
+  s2 <- sum(weights^2)
   if (s2 <= 0) return(0)
   s1 * s1 / s2
 }
@@ -47,7 +48,9 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
   }
   if (!(u >= 0 && u < 1))
     stop(paste0("prtcl: the offset must lie in [0, 1), got ", u))
-  idx <- integer(J); cum <- w[1]; j <- 1L
+  idx <- integer(J)
+  cum <- w[1]
+  j <- 1L
   for (m in seq_len(J)) {
     pos <- (m - 1L + u) / J
     while (pos > cum && j < J) {
@@ -115,7 +118,8 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
                                        seed = 0L, resample.threshold = 1.0,
                                        systematic = TRUE) {
-  obs <- as.numeric(y); N <- length(obs)
+  obs <- as.numeric(y)
+  N <- length(obs)
   J <- as.integer(n.particles)
   if (J < 2L) stop(paste0("prtcl: need at least 2 particles, got ", J))
   if (N == 0L) stop("prtcl: no observations")
@@ -126,7 +130,9 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
   parts <- vector("list", J)
   for (j in seq_len(J)) parts[[j]] <- init(e)
   ll <- 0
-  means <- numeric(N); esss <- numeric(N); resampled <- logical(N)
+  means <- numeric(N)
+  esss <- numeric(N)
+  resampled <- logical(N)
   for (n in seq_len(N)) {
     for (j in seq_len(J)) parts[[j]] <- step(parts[[j]], n - 1L, e)
     lw <- vapply(seq_len(J), function(j) loglik(parts[[j]], obs[n], n - 1L),
@@ -172,8 +178,11 @@ morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
 #' @return A list with \code{means}, \code{loglik}.
 #' @export
 morie_prtcl_kalman_filter_1d <- function(y, a, q, c, r, m0 = 0, p0 = 1) {
-  m <- as.numeric(m0); p <- as.numeric(p0)
-  N <- length(y); means <- numeric(N); ll <- 0
+  m <- as.numeric(m0)
+  p <- as.numeric(p0)
+  N <- length(y)
+  means <- numeric(N)
+  ll <- 0
   for (n in seq_len(N)) {
     m <- a * m
     p <- a * a * p + q

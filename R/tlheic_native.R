@@ -71,7 +71,8 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 #' @return A numeric value.
 #' @export
 numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
-  w <- as.numeric(weights); s <- as.numeric(score)
+  w <- as.numeric(weights)
+  s <- as.numeric(score)
   if (length(w) != length(s))
     stop(sprintf("tlheic: %d weights but %d score values",
                  length(w), length(s)))
@@ -80,7 +81,8 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
     v <- w * (1 + eps * (s - m))
     if (any(v <= 0))
       stop("tlheic: the perturbation left the simplex; use a smaller h")
-    t <- sum(v); v / t
+    t <- sum(v)
+    v / t
   }
   (psi_of_P(tilt(h)) - psi_of_P(tilt(-h))) / (2 * h)
 }
@@ -97,7 +99,8 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 #' @return A numeric value.
 #' @export
 gradient_inner_product <- function(D, score, weights = NULL) {
-  d <- as.numeric(D); s <- as.numeric(score)
+  d <- as.numeric(D)
+  s <- as.numeric(score)
   if (length(d) != length(s))
     stop(sprintf("tlheic: %d gradient values but %d score values",
                  length(d), length(s)))
@@ -123,9 +126,11 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
                          ridge = 1e-8) {
   B <- as.matrix(basis)
-  n <- nrow(B); p <- ncol(B)
+  n <- nrow(B)
+  p <- ncol(B)
   w <- if (is.null(weights)) rep(1 / n, n) else as.numeric(weights)
-  tot <- sum(w); w <- w / tot
+  tot <- sum(w)
+  w <- w / tot
   C <- matrix(0, n, p)
   for (j in seq_len(p)) {
     col <- B[, j]

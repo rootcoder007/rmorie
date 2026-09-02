@@ -55,7 +55,8 @@ morie_bayisr <- function(samples, log_target, log_proposal, m, seed = 0) {
   for (k in seq_len(m)) {
     u <- .ghc_unif(e, 1L) * tot
     j <- n - 1L
-    for (t in seq_len(n)) if (u <= cum[t]) { j <- t - 1L; break }
+    for (t in seq_len(n)) if (u <= cum[t]) { j <- t - 1L
+    break }
     idx[k] <- j
   }
   list(resample = lapply(idx, function(j) xs[[j + 1L]]), indices = idx,

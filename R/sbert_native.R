@@ -32,7 +32,8 @@
 #' @export
 .sbert_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
-  if (is.matrix(x)) { storage.mode(x) <- "double"; return(x) }
+  if (is.matrix(x)) { storage.mode(x) <- "double"
+  return(x) }
   if (is.vector(x)) return(matrix(as.numeric(x), nrow = 1))
   stop("sbert: expected a matrix or list of rows")
 }
@@ -96,10 +97,12 @@ pool <- function(token_vectors, mode = "mean", mask = NULL) {
 #' @return A numeric value.
 #' @export
 cosine_similarity <- function(u, v) {
-  a <- .sbert_vec(u); b <- .sbert_vec(v)
+  a <- .sbert_vec(u)
+  b <- .sbert_vec(v)
   if (length(a) != length(b))
     stop(sprintf("sbert: vectors differ in length (%d, %d)", length(a), length(b)))
-  na <- sqrt(sum(a * a)); nb <- sqrt(sum(b * b))
+  na <- sqrt(sum(a * a))
+  nb <- sqrt(sum(b * b))
   if (na <= .SBERT_EPS || nb <= .SBERT_EPS)
     stop("sbert: cosine similarity is undefined for a zero vector")
   sum(a * b) / (na * nb)
@@ -116,7 +119,8 @@ cosine_similarity <- function(u, v) {
 #' @return A list with \code{features}, \code{u}, \code{v}, \code{abs_diff}, \code{dim}, \code{note}.
 #' @export
 classification_features <- function(u, v) {
-  a <- .sbert_vec(u); b <- .sbert_vec(v)
+  a <- .sbert_vec(u)
+  b <- .sbert_vec(v)
   if (length(a) != length(b))
     stop(sprintf("sbert: vectors differ in length (%d, %d)", length(a), length(b)))
   diff <- abs(a - b)
@@ -187,12 +191,15 @@ sts_score <- function(pairs, embed) {
   calls <- 0L
   for (i in seq_along(pairs)) {
     pr <- pairs[[i]]
-    a <- pr[1]; b <- pr[2]
+    a <- pr[1]
+    b <- pr[2]
     if (!exists(a, envir = cache, inherits = FALSE)) {
-      assign(a, as.numeric(embed(a)), envir = cache); calls <- calls + 1L
+      assign(a, as.numeric(embed(a)), envir = cache)
+      calls <- calls + 1L
     }
     if (!exists(b, envir = cache, inherits = FALSE)) {
-      assign(b, as.numeric(embed(b)), envir = cache); calls <- calls + 1L
+      assign(b, as.numeric(embed(b)), envir = cache)
+      calls <- calls + 1L
     }
     out[i] <- cosine_similarity(get(a, envir = cache), get(b, envir = cache))
   }

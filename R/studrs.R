@@ -22,8 +22,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Studrs(V, V)
 Studrs <- function(y, X) {
-  Xm <- as.matrix(X); yv <- as.numeric(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- as.matrix(X)
+  yv <- as.numeric(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   fit <- .s4_ols(Xm, yv)
   h <- rowSums((Xm %*% fit$xtxinv) * Xm)
   s2 <- sum(fit$resid^2) / (n - p)

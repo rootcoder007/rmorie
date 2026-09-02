@@ -15,7 +15,9 @@
 #' @export
 covLst <- function(recommendations, catalog) {
   cat0 <- unique(as.numeric(catalog))
-  seen <- numeric(0); nlists <- 0L; total <- 0L
+  seen <- numeric(0)
+  nlists <- 0L
+  total <- 0L
   for (lst in recommendations) {
     nlists <- nlists + 1L
     items <- as.numeric(lst)

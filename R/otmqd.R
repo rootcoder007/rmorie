@@ -24,8 +24,11 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Otmqd(V, V)
 Otmqd <- function(X, centroids) {
-  A <- as.matrix(X); Cn <- as.matrix(centroids)
-  n <- nrow(A); K <- nrow(Cn); d <- ncol(A)
+  A <- as.matrix(X)
+  Cn <- as.matrix(centroids)
+  n <- nrow(A)
+  K <- nrow(Cn)
+  d <- ncol(A)
   if (ncol(Cn) != d)
     stop("centroids must live in the same space as the data")
   if (n == 0L || K == 0L) stop("empty data or codebook")

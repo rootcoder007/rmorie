@@ -21,7 +21,9 @@
 #' @examples
 #' Piepar(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), intervention_dist = c(1, 2, 3, 4, 5, 6, 7, 8))
 Piepar <- function(y, X, intervention_dist) {
-  yv <- as.numeric(y); Xm <- as.matrix(X); n <- length(yv)
+  yv <- as.numeric(y)
+  Xm <- as.matrix(X)
+  n <- length(yv)
   W <- cbind(1, Xm)
   fit <- .s4_ols(W, yv)
   xs <- as.numeric(intervention_dist)

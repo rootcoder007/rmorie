@@ -16,17 +16,20 @@
 #' r <- rmorie:::.sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
 .sgt_kmeans_det <- function(rows, k, iters = 100L) {
   rows <- as.matrix(rows)
-  n <- nrow(rows); p <- ncol(rows)
+  n <- nrow(rows)
+  p <- ncol(rows)
   centres <- matrix(rows[1, ], nrow = 1L)
   while (nrow(centres) < k) {
-    best <- -1L; bestd <- -1
+    best <- -1L
+    bestd <- -1
     for (i in seq_len(n)) {
       dmin <- -1
       for (m in seq_len(nrow(centres))) {
         s <- sum((rows[i, ] - centres[m, ])^2)
         if (dmin < 0 || s < dmin) dmin <- s
       }
-      if (dmin > bestd + 1e-12) { bestd <- dmin; best <- i }
+      if (dmin > bestd + 1e-12) { bestd <- dmin
+      best <- i }
     }
     centres <- rbind(centres, rows[best, ])
   }
@@ -34,10 +37,12 @@
   for (it in seq_len(iters)) {
     changed <- FALSE
     for (i in seq_len(n)) {
-      best <- 0L; bestd <- -1
+      best <- 0L
+      bestd <- -1
       for (m in seq_len(k)) {
         s <- sum((rows[i, ] - centres[m, ])^2)
-        if (bestd < 0 || s < bestd - 1e-12) { bestd <- s; best <- m - 1L }
+        if (bestd < 0 || s < bestd - 1e-12) { bestd <- s
+        best <- m - 1L }
       }
       if (lab[i] != best) changed <- TRUE
       lab[i] <- best

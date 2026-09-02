@@ -365,7 +365,8 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
   fits <- list()
   for (a in 1:p) {
     fit <- ar1_fit(rows[, a])
-    rho <- fit["rho"]; s2 <- fit["sigma2"]
+    rho <- fit["rho"]
+    s2 <- fit["sigma2"]
     fits[[a]] <- list(rho = unname(rho), sigma2 = unname(s2))
     if (w[a] == 0) next
     s4 <- s2^2
@@ -395,7 +396,9 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
 #' @export
 automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   ck <- .check_kernel(kernel)
-  q <- ck$const[1]; kq <- ck$const[2]; ik2 <- ck$const[3]
+  q <- ck$const[1]
+  kq <- ck$const[2]
+  ik2 <- ck$const[3]
   rows <- as.matrix(v)
   storage.mode(rows) <- "double"
   Tn <- if (is.null(n)) nrow(rows) else as.integer(n)

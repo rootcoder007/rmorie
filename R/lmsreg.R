@@ -57,7 +57,9 @@ Lmsreg <- function(y, X, c_np = 1, max_subsets = 200000) {
   if (total > max_subsets) stop(sprintf("least_median_squares: %d elemental subsets exceeds max_subsets", total))
   ic <- .rsintercept(Xm, n, p)
   hloc <- n %/% 2L + 1L
-  bobj <- NULL; bth <- NULL; bres <- NULL
+  bobj <- NULL
+  bth <- NULL
+  bres <- NULL
   for (J in .rscombos(n, p)) {
     A <- Xm[J, , drop = FALSE]
     b <- yy[J]
@@ -80,7 +82,9 @@ Lmsreg <- function(y, X, c_np = 1, max_subsets = 200000) {
       res[i] <- s
     }
     obj <- .rsmedsq(res)
-    if (is.null(bobj) || obj < bobj) { bobj <- obj; bth <- th; bres <- res }
+    if (is.null(bobj) || obj < bobj) { bobj <- obj
+    bth <- th
+    bres <- res }
   }
   if (is.null(bobj)) stop("least_median_squares: every elemental subset was singular")
   scale <- 1.483 * as.numeric(c_np) * sqrt(bobj)

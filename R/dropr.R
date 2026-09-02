@@ -14,11 +14,14 @@
 #' set.seed(1)
 #' Dropmask(x = rnorm(10), mask = rbinom(10, 1, 0.5), rate = 0.5)
 Dropmask <- function(x, mask, rate) {
-  x <- .t1_vec(x); m <- .t1_vec(mask); rate <- as.numeric(rate)
+  x <- .t1_vec(x)
+  m <- .t1_vec(mask)
+  rate <- as.numeric(rate)
   if (length(x) != length(m)) stop("x and mask must have the same length")
   if (rate < 0 || rate >= 1) stop("rate must lie in [0, 1)")
   if (any(m != 0 & m != 1)) stop("mask entries must be 0 or 1")
-  s <- 1 / (1 - rate); kept <- sum(m)
+  s <- 1 / (1 - rate)
+  kept <- sum(m)
   .t1_result(activation = x * m * s, kept = kept, dropped = length(x) - kept,
              rate = rate, n = length(x),
              method = "Inverted dropout, MVSML Sect. 10.6")

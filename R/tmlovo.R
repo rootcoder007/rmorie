@@ -24,16 +24,23 @@
 #' Tmleoutcomeonlyregr(c(1, 0, 1, 1, 0, 1), c(1, 0, 1, 0, 1, 0))$psi_gcomp
 #' @export
 Tmleoutcomeonlyregr <- function(y, D, X = NULL, alpha = 0.05) {
-  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  n <- length(yv)
   Z <- .s03design(X, n)
   Q <- cbind(1, d, Z[, -1, drop = FALSE])
   b <- .s03lstsq(Q, yv)
-  q1 <- numeric(n); q0 <- numeric(n)
+  q1 <- numeric(n)
+  q0 <- numeric(n)
   for (i in seq_len(n)) {
-    r1 <- c(1, 1, Z[i, -1]); r0 <- c(1, 0, Z[i, -1])
-    s1 <- 0; s0 <- 0
-    for (j in seq_along(b)) { s1 <- s1 + b[j] * r1[j]; s0 <- s0 + b[j] * r0[j] }
-    q1[i] <- s1; q0[i] <- s0
+    r1 <- c(1, 1, Z[i, -1])
+    r0 <- c(1, 0, Z[i, -1])
+    s1 <- 0
+    s0 <- 0
+    for (j in seq_along(b)) { s1 <- s1 + b[j] * r1[j]
+    s0 <- s0 + b[j] * r0[j] }
+    q1[i] <- s1
+    q0[i] <- s0
   }
   psi <- 0
   for (i in seq_len(n)) psi <- psi + (q1[i] - q0[i]) / n

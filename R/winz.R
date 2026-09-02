@@ -20,8 +20,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Winz(V)
 Winz <- function(x, alpha = 0.1) {
-  v <- as.numeric(unlist(x)); n <- length(v)
-  lo <- .s4_quantile7(v, alpha); hi <- .s4_quantile7(v, 1 - alpha)
+  v <- as.numeric(unlist(x))
+  n <- length(v)
+  lo <- .s4_quantile7(v, alpha)
+  hi <- .s4_quantile7(v, 1 - alpha)
   w <- pmin(pmax(v, lo), hi)
   .t1_result(estimate = sum(w) / n, lower = lo, upper = hi,
              n_changed = sum(w != v), n = n, method = "Winsorized mean")

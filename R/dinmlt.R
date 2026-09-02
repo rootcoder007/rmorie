@@ -54,7 +54,8 @@ Dinmlt <- function(image, global_size = 2, local_size = 8, tau_s = 0.1,
   V <- nrow(M)
   if (V == 0L) stop("empty input: image has no crops")
   d <- ncol(M)
-  G <- as.integer(global_size); L <- as.integer(local_size)
+  G <- as.integer(global_size)
+  L <- as.integer(local_size)
   if (G < 1L) stop("global_size must be at least 1")
   if (V != G + L) stop("image must hold global_size + local_size rows")
   if (!(tau_s > 0 && tau_t > 0))
@@ -75,7 +76,8 @@ Dinmlt <- function(image, global_size = 2, local_size = 8, tau_s = 0.1,
   for (g in seq_len(G)) teach[g, ] <- .dino_softmax(M[g, ], tau_t, cc)
   stud <- matrix(0, V, d)
   for (v in seq_len(V)) stud[v, ] <- .dino_softmax(M[v, ], tau_s)
-  tot <- 0; npair <- 0L
+  tot <- 0
+  npair <- 0L
   for (g in seq_len(G)) for (v in seq_len(V)) {
     if (v == g) next
     s <- 0

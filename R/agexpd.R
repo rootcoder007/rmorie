@@ -22,7 +22,8 @@ Mctsexpand <- function(state, policy_net, legal = NULL, logits = FALSE) {
   out <- if (is.function(policy_net)) policy_net(state) else policy_net
   v <- NaN
   if (is.list(out) && length(out) == 2L) {
-    raw <- .s03vec(out[[1]]); v <- as.numeric(out[[2]])
+    raw <- .s03vec(out[[1]])
+    v <- as.numeric(out[[2]])
   } else {
     raw <- .s03vec(out)
   }
@@ -39,7 +40,9 @@ Mctsexpand <- function(state, policy_net, legal = NULL, logits = FALSE) {
     for (x in mask) live <- live + x
     p <- if (live > 0) mask / live else rep(0, m)
   }
-  list(estimate = v, value = v, p = p, n = numeric(m), w = numeric(m),
-       q = numeric(m), state = state,
-       method = "AlphaZero MCTS expansion via the policy network")
+  list(
+    estimate = v, value = v, p = p, n = numeric(m), w = numeric(m),
+    q = numeric(m), state = state,
+    method = "AlphaZero MCTS expansion via the policy network"
+  )
 }

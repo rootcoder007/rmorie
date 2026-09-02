@@ -20,7 +20,9 @@
 #' locS(c(2.1, 3.4, 1.9, 5.6, 2.8, 3.1, 9.9, 2.5, 3.3, 2.7))$estimate
 #' @export
 locS <- function(x, k = 1.5, tol = 1e-6, maxit = 30L) {
-  v <- as.numeric(x); n <- length(v); kk <- as.numeric(k)
+  v <- as.numeric(x)
+  n <- length(v)
+  kk <- as.numeric(k)
   th <- 2 * stats::pnorm(kk) - 1
   beta <- th + kk * kk * (1 - th) - 2 * kk * stats::dnorm(kk)
   mu0 <- stats::median(v)
@@ -31,14 +33,17 @@ locS <- function(x, k = 1.5, tol = 1e-6, maxit = 30L) {
                 method = "Huber Proposal 2 simultaneous location and scale (Huber 1981, sec. 6.7)"))
   }
   sweep1 <- function(tolv, mx) {
-    a <- mu0; b <- s0; it <- 0L
+    a <- mu0
+    b <- s0
+    it <- 0L
     for (i in seq_len(as.integer(mx))) {
       it <- i
       yy <- pmin(pmax(a - kk * b, v), a + kk * b)
       mu1 <- sum(yy) / n
       s1 <- sqrt((sum((yy - mu1)^2) / (n - 1)) / beta)
       if (abs(a - mu1) < tolv * b && abs(b - s1) < tolv * b) break
-      a <- mu1; b <- s1
+      a <- mu1
+      b <- s1
     }
     list(mu = a, s = b, it = it)
   }

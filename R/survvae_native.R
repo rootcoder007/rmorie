@@ -181,7 +181,9 @@
   n <- length(times)
   if (length(events) != n || length(risks) != n)
     stop("survvae: times, events and risks must have the same length")
-  conc <- 0; disc <- 0; tied <- 0
+  conc <- 0
+  disc <- 0
+  tied <- 0
   for (i in seq_len(n - 1L)) {
     for (j in (i + 1L):n) {
       if (times[i] < times[j]) {
@@ -229,7 +231,8 @@ morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
   t <- as.numeric(t)
   if (length(t) != 1L || is.na(t) || t <= 0)
     stop("survvae: survival times must be positive")
-  shape <- as.numeric(shape); scale <- as.numeric(scale)
+  shape <- as.numeric(shape)
+  scale <- as.numeric(scale)
   if (length(shape) != 1L || is.na(shape) || shape <= 0 ||
       length(scale) != 1L || is.na(scale) || scale <= 0)
     stop("survvae: shape and scale must be positive")
@@ -330,7 +333,8 @@ morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
     stop(sprintf("survvae: alpha must lie in [0, 1], got '%s'",
                  as.character(alpha)))
   K <- length(shapes)
-  tot_u <- 0; tot_c <- 0
+  tot_u <- 0
+  tot_c <- 0
   for (i in seq_along(X)) {
     g <- morie_survvae_gates(X[[i]], W, bias)
     if (events[[i]]) {
@@ -368,7 +372,8 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
                                         alpha = 1) {
   .ghc_survvae_check_primitive(primitive)
   K <- length(shapes)
-  tot_u <- 0; tot_c <- 0
+  tot_u <- 0
+  tot_c <- 0
   for (i in seq_along(X)) {
     g <- morie_survvae_gates(X[[i]], W, bias)
     if (events[[i]]) {
@@ -444,7 +449,8 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
     parts <- tryCatch(.ghc_survvae_unpack(v, K, d),
                       error = function(e) NULL)
     if (is.null(parts)) return(1e12)
-    shapes <- parts$shapes; scales <- parts$scales
+    shapes <- parts$shapes
+    scales <- parts$scales
     ss <- c(shapes, scales)
     if (any(ss <= 0 | ss > 1e6)) return(1e12)
     e <- tryCatch(
@@ -473,7 +479,8 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
       cand <- res$x
       nv <- objective(cand)
       if (nv < val - 1e-9) {
-        val <- nv; cur <- cand
+        val <- nv
+        cur <- cand
       } else {
         if (nv < val) cur <- cand
         break
@@ -484,8 +491,10 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
   }
 
   parts <- .ghc_survvae_unpack(best$cur, K, d)
-  W <- parts$W; bias <- parts$bias
-  shapes <- parts$shapes; scales <- parts$scales
+  W <- parts$W
+  bias <- parts$bias
+  shapes <- parts$shapes
+  scales <- parts$scales
   e <- morie_survvae_elbo(X, times, events, W, bias, shapes, scales,
                            primitive, alpha, prior)
   ex <- morie_survvae_exact_loglik(X, times, events, W, bias, shapes,

@@ -24,7 +24,8 @@
 #' @examples
 #' Lgtnsim(mu = 5L, Sigma = 0.5, n = 5L)
 Lgtnsim <- function(mu, Sigma, n, seed = 1, total = 1) {
-  mu <- .t1_vec(mu); p <- length(mu)
+  mu <- .t1_vec(mu)
+  p <- length(mu)
   if (p < 1L) stop("mu must have at least one entry")
   S <- as.matrix(Sigma)
   if (nrow(S) != p || ncol(S) != p) stop("Sigma must be (D-1) x (D-1)")
@@ -32,8 +33,10 @@ Lgtnsim <- function(mu, Sigma, n, seed = 1, total = 1) {
   if (n < 1L) stop("n must be at least 1")
   L <- t(chol(S))
   g <- .t1_lcg(seed)
-  D <- p + 1L; k <- as.numeric(total)
-  Y <- matrix(0, n, p); Xs <- matrix(0, n, D)
+  D <- p + 1L
+  k <- as.numeric(total)
+  Y <- matrix(0, n, p)
+  Xs <- matrix(0, n, D)
   for (t in seq_len(n)) {
     z <- vapply(seq_len(p), function(i) g$norm(), 0)
     y <- as.numeric(mu + L %*% z)
@@ -42,7 +45,9 @@ Lgtnsim <- function(mu, Sigma, n, seed = 1, total = 1) {
     Xs[t, ] <- k * e / sum(e)
   }
   e <- c(exp(mu), 1)
-  .t1_result(sample = Xs, alr = Y, center = k * e / sum(e),
-             mean_alr = colMeans(Y), n = as.numeric(n), D = as.numeric(D),
-             method = "Logistic-normal sampling via alr^-1")
+  .t1_result(
+    sample = Xs, alr = Y, center = k * e / sum(e),
+    mean_alr = colMeans(Y), n = as.numeric(n), D = as.numeric(D),
+    method = "Logistic-normal sampling via alr^-1"
+  )
 }

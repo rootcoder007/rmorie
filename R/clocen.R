@@ -13,17 +13,29 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Clocent(V)
 Clocent <- function(A) {
-  A <- as.matrix(A); n <- nrow(A); diag(A) <- 0; B <- A != 0
-  clos <- numeric(n); reach <- integer(n); tot <- numeric(n)
+  A <- as.matrix(A)
+  n <- nrow(A)
+  diag(A) <- 0
+  B <- A != 0
+  clos <- numeric(n)
+  reach <- integer(n)
+  tot <- numeric(n)
   for (s in seq_len(n)) {
-    dist <- rep(-1L, n); dist[s] <- 0L; q <- s; h <- 1L
+    dist <- rep(-1L, n)
+    dist[s] <- 0L
+    q <- s
+    h <- 1L
     while (h <= length(q)) {
-      v <- q[h]; h <- h + 1L
+      v <- q[h]
+      h <- h + 1L
       w <- which(B[v, ] & dist < 0L)
-      if (length(w)) { dist[w] <- dist[v] + 1L; q <- c(q, w) }
+      if (length(w)) { dist[w] <- dist[v] + 1L
+      q <- c(q, w) }
     }
-    d <- dist[-s]; d <- d[d > 0]
-    reach[s] <- length(d) + 1L; tot[s] <- sum(d)
+    d <- dist[-s]
+    d <- d[d > 0]
+    reach[s] <- length(d) + 1L
+    tot[s] <- sum(d)
     clos[s] <- if (length(d)) (length(d)) / sum(d) else NA_real_
   }
   .t1_result(closeness = clos, reachable = reach, total_distance = tot, n = n,

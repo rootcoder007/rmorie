@@ -19,9 +19,11 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_prxgms_soft_threshold <- function(v, tau) {
-  v <- as.numeric(v); tau <- as.numeric(tau)
+  v <- as.numeric(v)
+  tau <- as.numeric(tau)
   out <- v
-  pos <- v > tau; neg <- v < -tau
+  pos <- v > tau
+  neg <- v < -tau
   out[pos] <- v[pos] - tau
   out[neg] <- v[neg] + tau
   out[!pos & !neg] <- 0
@@ -51,12 +53,16 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
                                         max.iter = 500L, tol = 1e-10,
                                         accelerate = TRUE, backtrack = FALSE,
                                         eta = 2, g.fun = NULL) {
-  x <- as.numeric(x0); n <- length(x)
+  x <- as.numeric(x0)
+  n <- length(x)
   L <- as.numeric(L)
   if (L <= 0) stop(paste0("prox_gradient: L must be positive, got ", L))
-  y <- x; t <- 1; prev <- x
+  y <- x
+  t <- 1
+  prev <- x
   obj <- numeric(0)
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max.iter))) {
     gy <- as.numeric(grad(y))
     Lk <- L
@@ -84,7 +90,8 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
     fz <- as.numeric(fun(z))
     gz <- if (is.null(g.fun)) 0 else as.numeric(g.fun(z))
     obj <- c(obj, fz + gz)
-    if (step <= tol) { converged <- TRUE; break }
+    if (step <= tol) { converged <- TRUE
+    break }
   }
   list(estimate = prev, x = prev, fun = as.numeric(fun(prev)),
        objective = obj, iterations = as.integer(it),
@@ -111,8 +118,10 @@ morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
 #' @export
 morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,
                                      accelerate = TRUE) {
-  Am <- as.matrix(A); bv <- as.numeric(b)
-  n.rows <- nrow(Am); p <- ncol(Am)
+  Am <- as.matrix(A)
+  bv <- as.numeric(b)
+  n.rows <- nrow(Am)
+  p <- ncol(Am)
   lam <- as.numeric(lam)
   f <- function(x) {
     r <- as.numeric(Am %*% x) - bv
@@ -127,7 +136,8 @@ morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,
     u <- as.numeric(crossprod(Am, Av))
     nrm <- sqrt(sum(u^2))
     if (nrm <= 0) break
-    v <- u / nrm; L <- nrm
+    v <- u / nrm
+    L <- nrm
   }
   L <- max(L, 1e-12)
   prox <- function(v, t) morie_prxgms_soft_threshold(v, lam * t)
@@ -136,7 +146,8 @@ morie_prxgms_lasso_fista <- function(A, b, lam, max.iter = 500L, tol = 1e-10,
                                     max.iter = max.iter, tol = tol,
                                     accelerate = accelerate,
                                     g.fun = g.fun)
-  res$lambda <- lam; res$L <- L
+  res$lambda <- lam
+  res$L <- L
   res
 }
 

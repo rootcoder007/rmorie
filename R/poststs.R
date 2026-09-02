@@ -15,12 +15,14 @@
     stop(paste0(who, ": stratum must have one entry per observation"))
   ord <- unique(s)
   if (!is.null(names(Nh))) {
-    sizes <- as.numeric(Nh); names(sizes) <- names(Nh)
+    sizes <- as.numeric(Nh)
+    names(sizes) <- names(Nh)
   } else {
     v <- as.numeric(unlist(Nh))
     if (length(v) != length(ord))
       stop(paste0(who, ": Nh must give one size per stratum"))
-    sizes <- v; names(sizes) <- ord
+    sizes <- v
+    names(sizes) <- ord
   }
   if (!all(s %in% names(sizes)))
     stop(paste0(who, ": a stratum has no population size"))
@@ -54,7 +56,8 @@
 Poststs <- function(y, stratum, Nh) {
   d <- .ps_strata(y, stratum, Nh, "Poststs")
   N <- sum(d$sizes[d$order])
-  est <- 0; v <- 0
+  est <- 0
+  v <- 0
   for (k in d$order) {
     vals <- d$y[d$s == k]
     nh <- length(vals)

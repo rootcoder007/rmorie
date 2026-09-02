@@ -53,7 +53,8 @@ morie_partial_autocorrelation <- function(y, lag_max) {
       if (abs(den) < 1e-300) {
         stop(sprintf(
           "Levinson-Durbin denominator vanished at lag %d; series is degenerate.",
-          k), call. = FALSE)
+          k
+        ), call. = FALSE)
       }
       phi_kk <- num / den
       phi_cur <- numeric(k)

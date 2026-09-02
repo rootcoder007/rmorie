@@ -20,16 +20,19 @@
 #'   corrected variance for the mean.
 #' @export
 Srstotal <- function(y, N, level = 0.95) {
-  y <- .t1_vec(y); n <- length(y)
+  y <- .t1_vec(y)
+  n <- length(y)
   if (n < 2L) stop("a variance needs at least two observations")
   N <- as.numeric(N)
   if (N < n) stop("N must be at least n")
   if (level <= 0 || level >= 1)
     stop("level must lie strictly between 0 and 1")
-  m <- mean(y); s2 <- stats::var(y)
+  m <- mean(y)
+  s2 <- stats::var(y)
   k <- if (is.infinite(N)) 1 else (N - n) / N
   var <- N^2 * k * s2 / n
-  se <- sqrt(var); est <- N * m
+  se <- sqrt(var)
+  est <- N * m
   z <- stats::qnorm((1 + level) / 2)
   .t1_result(estimate = est, se = se, ci_lower = est - z * se,
              ci_upper = est + z * se, mean = m,

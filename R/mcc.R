@@ -38,8 +38,10 @@ morie_mcc_counts <- function(tp, tn, fp, fn) {
   # integer at roughly n = 800 and silently becomes NA. Python's
   # arbitrary-precision integers hide this failure mode entirely, which
   # is why it only appears on this side of the mirror.
-  tp <- as.numeric(tp); tn <- as.numeric(tn)
-  fp <- as.numeric(fp); fn <- as.numeric(fn)
+  tp <- as.numeric(tp)
+  tn <- as.numeric(tn)
+  fp <- as.numeric(fp)
+  fn <- as.numeric(fn)
   num <- tp * tn - fp * fn
   denom <- sqrt((tp + fp) * (tp + fn) * (tn + fp) * (tn + fn))
   if (denom == 0) {

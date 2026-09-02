@@ -34,7 +34,8 @@
 #' Aitcap(rbind(c(.6, .2, .2), c(.2, .6, .2)), c(1, 2), c(.5, .3, .2), 1)$yhat
 #' @export
 Aitcap <- function(X, y, x_new, k) {
-  rows <- as.matrix(X); storage.mode(rows) <- "double"
+  rows <- as.matrix(X)
+  storage.mode(rows) <- "double"
   if (nrow(rows) == 0L || length(rows) == 0L) stop("compositional_classifyAP: no training data")
   D <- ncol(rows)
   if (D < 2L) stop("compositional_classifyAP: a composition needs at least 2 parts")
@@ -51,14 +52,17 @@ Aitcap <- function(X, y, x_new, k) {
   if (nrow(news) == 0L) stop("compositional_classifyAP: x_new is empty")
   if (ncol(news) != D) stop("compositional_classifyAP: x_new has the wrong number of parts")
   if (any(!(news > 0))) stop("compositional_classifyAP: every part must be positive")
-  yhat <- numeric(nrow(news)); ymaj <- numeric(nrow(news)); d0 <- NULL
+  yhat <- numeric(nrow(news))
+  ymaj <- numeric(nrow(news))
+  d0 <- NULL
   for (t in seq_len(nrow(news))) {
     xs <- news[t, ]
     dist <- numeric(nrow(rows))
     for (i in seq_len(nrow(rows))) dist[i] <- .aitcap_dist(xs, rows[i, ])
     ord <- order(dist, seq_along(dist))[seq_len(kk)]
     gs <- sort(unique(lab[ord]))
-    tot <- numeric(length(gs)); cnt <- numeric(length(gs))
+    tot <- numeric(length(gs))
+    cnt <- numeric(length(gs))
     for (i in ord) {
       w <- which(gs == lab[i])
       tot[w] <- tot[w] + dist[i]
@@ -68,15 +72,20 @@ Aitcap <- function(X, y, x_new, k) {
     ymaj[t] <- gs[which.max(cnt)]
     if (t == 1L) d0 <- dist
   }
-  list(yhat = if (many) yhat else yhat[1], estimate = yhat[1],
-       yhat_majority = if (many) ymaj else ymaj[1], dist = d0,
-       k = kk, n = nrow(rows), D = D,
-       method = "argmin_g sum_{i in N_k, y_i = g} d_a(x*, x_i), Aitchison distance")
+  list(
+    yhat = if (many) yhat else yhat[1], estimate = yhat[1],
+    yhat_majority = if (many) ymaj else ymaj[1], dist = d0,
+    k = kk, n = nrow(rows), D = D,
+    method = "argmin_g sum_{i in N_k, y_i = g} d_a(x*, x_i), Aitchison distance"
+  )
 }
 
 #' @noRd
 .aitcap_dist <- function(a, b) {
-  D <- length(a); la <- log(a); lb <- log(b); s <- 0
+  D <- length(a)
+  la <- log(a)
+  lb <- log(b)
+  s <- 0
   for (i in seq_len(D)) {
     for (j in seq_len(D)) {
       if (j > i) {

@@ -290,7 +290,8 @@ calibrated_rerank <- function(scores, p_g_given_i, p_target, N = 10,
       if (i %in% chosen) next
       cand <- c(chosen, i)
       val  <- (1.0 - lm) * sum(s[cand]) - lm * cal(cand)
-      if (val > best) { best <- val; bi <- i }
+      if (val > best) { best <- val
+      bi <- i }
     }
     chosen <- c(chosen, bi)
     obj[step] <- best

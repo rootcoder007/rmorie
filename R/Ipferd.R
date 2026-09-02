@@ -31,7 +31,8 @@
 #' Ipferd(y = rnorm(20), D = rbinom(20, 1, 0.5), w = runif(20, 1, 2),
 #'        replicate_weights = matrix(runif(200, 0.5, 1.5), 20, 10))
 Ipferd <- function(y, D, w, replicate_weights, scale = NULL) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("ipw_with_replicate: y is empty")
   d <- .s03vec(D)
   wv <- if (!is.null(w)) .s03vec(w) else rep(1, n)
@@ -42,7 +43,8 @@ Ipferd <- function(y, D, w, replicate_weights, scale = NULL) {
   B <- ncol(R)
   if (B < 2L) stop("ipw_with_replicate: need at least two replicates")
   hj <- function(ww) {
-    s1 <- sum(ww[d == 1]); s0 <- sum(ww[d == 0])
+    s1 <- sum(ww[d == 1])
+    s0 <- sum(ww[d == 0])
     if (s1 <= 0 || s0 <= 0) stop("ipw_with_replicate: a replicate leaves one arm with no weight")
     sum(ww[d == 1] * yv[d == 1]) / s1 - sum(ww[d == 0] * yv[d == 0]) / s0
   }

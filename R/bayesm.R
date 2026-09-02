@@ -27,8 +27,10 @@
 #' @export
 Dpbayes <- function(y, posterior_sample = NULL, epsilon = 1, B = 1,
                     sensitivity = NULL) {
-  v <- .s03vec(y); n <- length(v)
-  e <- as.numeric(epsilon); b <- as.numeric(B)
+  v <- .s03vec(y)
+  n <- length(v)
+  e <- as.numeric(epsilon)
+  b <- as.numeric(B)
   temp <- if (e > 0) (2 * b) / e else Inf
   post <- if (!is.null(posterior_sample)) .s03vec(posterior_sample) else v
   m <- .s03mean(post)

@@ -29,7 +29,8 @@
 #' @references Schneier & Kelsey (1999).
 #' @export
 morie_sechsh_chain_entry <- function(previous_hash, entry, key = NULL) {
-  p <- as.raw(previous_hash); e <- as.raw(entry)
+  p <- as.raw(previous_hash)
+  e <- as.raw(entry)
   if (is.null(key)) return(list(hash = .sech_sha256(c(p, e)),
                                 keyed = FALSE))
   list(hash = .sech_hmac(key, c(p, e)), keyed = TRUE,
@@ -78,7 +79,8 @@ morie_sechsh_verify_chain <- function(entries, hashes, key = NULL,
   if (length(entries) != length(hashes))
     stop("sechsh: ", length(entries), " entries but ", length(hashes),
          " hashes -- an entry or a hash has been dropped")
-  prev <- as.raw(genesis); first_bad <- NULL
+  prev <- as.raw(genesis)
+  first_bad <- NULL
   for (i in seq_along(entries)) {
     want <- morie_sechsh_chain_entry(prev, entries[[i]], key)$hash
     if (!.sech_cteq(want, hashes[[i]]))
@@ -134,7 +136,9 @@ morie_sechsh_inclusion_proof <- function(leaves, index) {
   m <- as.integer(index)
   if (m < 0L || m >= length(L))
     stop("sechsh: index ", m, " is outside a log of ", length(L))
-  path <- list(); lo <- 0L; hi <- length(L)
+  path <- list()
+  lo <- 0L
+  hi <- length(L)
   while (hi - lo > 1L) {
     k <- 1L
     while (k * 2L < hi - lo) k <- k * 2L
@@ -170,18 +174,23 @@ morie_sechsh_inclusion_proof <- function(leaves, index) {
 #'   \code{path_used}.
 #' @export
 morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
-  m <- as.integer(index); n <- as.integer(size)
+  m <- as.integer(index)
+  n <- as.integer(size)
   if (m < 0L || m >= n)
     stop("sechsh: index ", m, " is outside a log of ", n)
   node <- .sech_sha256(c(.SECH_LEAF, as.raw(leaf)))
-  lo <- 0L; hi <- n; steps <- list(); used <- 0L
+  lo <- 0L
+  hi <- n
+  steps <- list()
+  used <- 0L
   p <- lapply(path, as.raw)
   while (hi - lo > 1L) {
     if (used >= length(p))
       stop("sechsh: the audit path is too short for a log of ", n)
     k <- 1L
     while (k * 2L < hi - lo) k <- k * 2L
-    sib <- p[[used + 1L]]; used <- used + 1L
+    sib <- p[[used + 1L]]
+    used <- used + 1L
     if (m - lo < k) { steps[[length(steps) + 1L]] <- list(sib = sib,
                                                          on_right = TRUE)
                       hi <- lo + k }
@@ -256,8 +265,14 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
       s1 <- bx(bx(rotr(w2, 17), rotr(w2, 19)), shr(w2, 10))
       W[i + 1L] <- (W[i - 16L + 1L] + s0 + W[i - 7L + 1L] + s1) %% 2^32
     }
-    a <- H[1]; b <- H[2]; cc <- H[3]; d <- H[4]
-    e <- H[5]; f <- H[6]; g <- H[7]; hh <- H[8]
+    a <- H[1]
+    b <- H[2]
+    cc <- H[3]
+    d <- H[4]
+    e <- H[5]
+    f <- H[6]
+    g <- H[7]
+    hh <- H[8]
     for (i in 0:63) {
       S1 <- bx(bx(rotr(e, 6), rotr(e, 11)), rotr(e, 25))
       ch <- bx(ba(e, f), ba(bn(e), g))
@@ -265,9 +280,13 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
       S0 <- bx(bx(rotr(a, 2), rotr(a, 13)), rotr(a, 22))
       mj <- bx(bx(ba(a, b), ba(a, cc)), ba(b, cc))
       T2 <- (S0 + mj) %% 2^32
-      hh <- g; g <- f; f <- e
+      hh <- g
+      g <- f
+      f <- e
       e <- (d + T1) %% 2^32
-      d <- cc; cc <- b; b <- a
+      d <- cc
+      cc <- b
+      b <- a
       a <- (T1 + T2) %% 2^32
     }
     H[1] <- (H[1] + a) %% 2^32
@@ -327,7 +346,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @return A logical value.
 #' @export
 .sech_cteq <- function(a, b) {
-  a <- as.raw(a); b <- as.raw(b)
+  a <- as.raw(a)
+  b <- as.raw(b)
   if (length(a) != length(b)) return(FALSE)
   r <- as.integer(0)
   for (i in seq_along(a)) {

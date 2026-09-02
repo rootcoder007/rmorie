@@ -34,7 +34,7 @@ repository script \code{scripts/export_otis_csv.R}.
 }
 \examples{
 \donttest{
-  df <- morie_otis_load()
+df <- morie_otis_load()
 }
 }
 \seealso{

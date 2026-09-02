@@ -22,7 +22,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bootemp(V)
 Bootemp <- function(x, B = 200, seed = 1) {
-  x <- .t1_vec(x); n <- length(x); B <- as.integer(B)
+  x <- .t1_vec(x)
+  n <- length(x)
+  B <- as.integer(B)
   if (n < 2L) stop("the sample must have at least two observations")
   if (B < 2L) stop("B must be at least 2")
   Pn <- mean(x)
@@ -37,7 +39,8 @@ Bootemp <- function(x, B = 200, seed = 1) {
     }
     stat[b] <- s / n
   }
-  bm <- mean(stat); bsd <- stats::sd(stat)
+  bm <- mean(stat)
+  bsd <- stats::sd(stat)
   q <- sort(stat)
   lo <- q[max(1L, floor(0.025 * (B - 1)) + 1L)]
   hi <- q[min(B, ceiling(0.975 * (B - 1)) + 1L)]

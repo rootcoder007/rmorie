@@ -50,7 +50,8 @@
       K <- length(counts)
       w <- numeric(K + 1L)
       for (c in seq_len(K)) {
-        if (counts[c] == 0L) { w[c] <- 0; next }
+        if (counts[c] == 0L) { w[c] <- 0
+        next }
         prec <- 1 / tau2 + counts[c] / sigma2
         m <- (mu0 / tau2 + sums[c] / sigma2) / prec
         w[c] <- counts[c] * exp(.crp_norm_logpdf(y[i], m, sigma2 + 1 / prec))
@@ -63,9 +64,11 @@
       pick <- K + 1L
       for (c in seq_len(K + 1L)) {
         acc <- acc + w[c]
-        if (u <= acc) { pick <- c; break }
+        if (u <= acc) { pick <- c
+        break }
       }
-      if (pick == K + 1L) { counts <- c(counts, 0L); sums <- c(sums, 0) }
+      if (pick == K + 1L) { counts <- c(counts, 0L)
+      sums <- c(sums, 0) }
       z[i] <- pick
       counts[pick] <- counts[pick] + 1L
       sums[pick] <- sums[pick] + y[i]

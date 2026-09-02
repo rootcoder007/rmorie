@@ -11,7 +11,9 @@
 #' @return A numeric value.
 #' @export
 .t4_jsd <- function(p, q, base) {
-  lg <- log(base); s1 <- 0; s2 <- 0
+  lg <- log(base)
+  s1 <- 0
+  s2 <- 0
   for (i in seq_along(p)) {
     m <- p[i] + q[i]
     if (p[i] != 0 && m != 0) s1 <- s1 + p[i] * log(2 * p[i] / m) / lg
@@ -42,12 +44,14 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Jsdiv(V, V)
 Jsdiv <- function(p, q, base = 2, normalize = TRUE) {
-  p <- .t4_vec(p); q <- .t4_vec(q)
+  p <- .t4_vec(p)
+  q <- .t4_vec(q)
   if (length(p) != length(q)) stop("p and q must have the same length")
   if (any(p < 0) || any(q < 0)) stop("p and q must be non-negative")
   if (normalize) {
     if (sum(p) <= 0 || sum(q) <= 0) stop("p and q must have positive total mass")
-    p <- p / sum(p); q <- q / sum(q)
+    p <- p / sum(p)
+    q <- q / sum(q)
   }
   d <- .t4_jsd(p, q, base)
   if (d < 0) d <- 0

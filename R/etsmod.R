@@ -55,7 +55,9 @@ Etsmod <- function(y, error = "A", trend = FALSE, season = 0,
   }
   .sse <- function(a, b, g) {
     ini <- .ini()
-    l <- ini[[1]]; bt <- ini[[2]]; s <- ini[[3]]
+    l <- ini[[1]]
+    bt <- ini[[2]]
+    s <- ini[[3]]
     tot <- 0
     for (t in seq_len(n)) {
       idx <- if (m > 0L) ((t - 1L) %% m) + 1L else 0L
@@ -82,9 +84,14 @@ Etsmod <- function(y, error = "A", trend = FALSE, season = 0,
       }
     }
   }
-  sse <- best[1]; a <- best[2]; b <- best[3]; g <- best[4]
+  sse <- best[1]
+  a <- best[2]
+  b <- best[3]
+  g <- best[4]
   fin <- .sse(a, b, g)
-  level <- fin[[2]]; slope <- fin[[3]]; s <- fin[[4]]
+  level <- fin[[2]]
+  slope <- fin[[3]]
+  s <- fin[[4]]
   k <- 1L + as.integer(use_b) + as.integer(m > 0L) + 1L + as.integer(use_b) + m
   sigma2 <- sse / n
   aic <- if (sse > 0) n * log(sse / n) + 2 * k else -Inf

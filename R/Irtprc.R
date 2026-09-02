@@ -23,7 +23,9 @@
 #' @examples
 #' Irtprc(y = 5L, theta = 0.5, delta_j = c(1, 2, 3, 4, 5, 6, 7, 8))
 Irtprc <- function(y, theta, delta_j) {
-  ys <- as.integer(.s03vec(y)); th <- .s03vec(theta); dl <- .s03vec(delta_j)
+  ys <- as.integer(.s03vec(y))
+  th <- .s03vec(theta)
+  dl <- .s03vec(delta_j)
   if (length(ys) == 0L) stop("partial_credit: y is empty")
   if (length(th) != length(ys)) stop("partial_credit: y and theta have different lengths")
   if (length(dl) < 1L) stop("partial_credit: delta_j needs at least one step")

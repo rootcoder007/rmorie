@@ -17,9 +17,12 @@
 #' mai2(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$estimate
 #' @export
 mai2 <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   fe <- k02fe(y, v)
-  k <- length(y); q <- fe$Q; df <- fe$df
+  k <- length(y)
+  q <- fe$Q
+  df <- fe$df
   i2 <- 100 * max(0, (q - df) / q)
   h <- sqrt(q / df)
   selnh <- if (q > k) {

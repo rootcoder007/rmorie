@@ -22,21 +22,29 @@
 Jarow <- function(s1, s2, p = 0.1, max_prefix = 4) {
   a <- strsplit(as.character(s1), "")[[1]]
   b <- strsplit(as.character(s2), "")[[1]]
-  la <- length(a); lb <- length(b)
+  la <- length(a)
+  lb <- length(b)
   none <- .t1_result(estimate = 0, jaro = 0, matches = 0, transpositions = 0,
                      prefix = 0, method = "Jaro-Winkler string similarity")
   if (la == 0L || lb == 0L) return(none)
   win <- max(max(la, lb) %/% 2L - 1L, 0L)
-  fa <- rep(FALSE, la); fb <- rep(FALSE, lb); m <- 0L
+  fa <- rep(FALSE, la)
+  fb <- rep(FALSE, lb)
+  m <- 0L
   for (i in seq_len(la)) {
-    lo <- max(1L, i - win); hi <- min(lb, i + win)
+    lo <- max(1L, i - win)
+    hi <- min(lb, i + win)
     if (hi < lo) next
     for (j in lo:hi) {
-      if (!fb[j] && a[i] == b[j]) { fa[i] <- TRUE; fb[j] <- TRUE; m <- m + 1L; break }
+      if (!fb[j] && a[i] == b[j]) { fa[i] <- TRUE
+      fb[j] <- TRUE
+      m <- m + 1L
+      break }
     }
   }
   if (m == 0L) return(none)
-  ka <- a[fa]; kb <- b[fb]
+  ka <- a[fa]
+  kb <- b[fb]
   t_ <- sum(ka != kb) / 2
   jaro <- (m / la + m / lb + (m - t_) / m) / 3
   l <- 0L

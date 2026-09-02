@@ -23,7 +23,8 @@
 #' @examples
 #' Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)
 Misspecbd <- function(estimate, sensitivity, c, se, conf = 0.95) {
-  s <- .t1_vec(sensitivity); c <- as.numeric(c)
+  s <- .t1_vec(sensitivity)
+  c <- as.numeric(c)
   if (c < 0) stop("c must be non-negative")
   se <- as.numeric(se)
   if (se < 0) stop("se must be non-negative")

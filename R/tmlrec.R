@@ -25,7 +25,9 @@
 #' @examples
 #' Tmlrec(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlrec <- function(time, event, D, X) {
-  tv <- as.numeric(time); ev <- as.numeric(event); Dv <- as.numeric(D)
+  tv <- as.numeric(time)
+  ev <- as.numeric(event)
+  Dv <- as.numeric(D)
   n <- length(tv)
   if (n == 0L || length(ev) != n || length(Dv) != n)
     stop("Tmlrec: time, event and D must share one length")
@@ -45,7 +47,8 @@ Tmlrec <- function(time, event, D, X) {
   eps <- if (den != 0) sum(H * (rate - Qobs)) / den else 0
   Q1s <- Q1 + eps / g
   Q0s <- Q0 - eps / (1 - g)
-  mu1 <- sum(Q1s) / n; mu0 <- sum(Q0s) / n
+  mu1 <- sum(Q1s) / n
+  mu0 <- sum(Q0s) / n
   if (mu0 == 0) stop("Tmlrec: the control-arm rate is zero; no rate ratio")
   r <- rate - Qobs - eps * H
   ic1 <- Dv / g * r + Q1s - mu1

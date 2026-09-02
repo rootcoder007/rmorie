@@ -37,7 +37,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Clipsi(V, V)
 Clipsi <- function(I_emb, T_emb, tau = 0.01) {
-  I <- .s03mat(I_emb); TT <- .s03mat(T_emb)
+  I <- .s03mat(I_emb)
+  TT <- .s03mat(T_emb)
   n <- nrow(I)
   if (n == 0L) stop("empty input: I_emb has no rows")
   if (nrow(TT) != n)
@@ -48,7 +49,8 @@ Clipsi <- function(I_emb, T_emb, tau = 0.01) {
   if (!(tau > 0)) stop("tau must be strictly positive")
   In <- t(apply(I, 1, .clip_l2norm))
   Tn <- t(apply(TT, 1, .clip_l2norm))
-  if (d == 1L) { In <- matrix(In, n, 1L); Tn <- matrix(Tn, n, 1L) }
+  if (d == 1L) { In <- matrix(In, n, 1L)
+  Tn <- matrix(Tn, n, 1L) }
   cosm <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     s <- 0

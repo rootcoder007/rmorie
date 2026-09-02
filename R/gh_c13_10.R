@@ -36,7 +36,8 @@ Ghosalntrconsist <- function(ns = c(100, 800, 6400), seed = 42) {
     times <- pmin(x, cens)
     events <- as.numeric(x <= cens)
     ord <- order(times)
-    surv <- 1; at_risk <- n
+    surv <- 1
+    at_risk <- n
     for (i in ord) {
       if (times[i] > 1) break
       if (events[i] > 0) {

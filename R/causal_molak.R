@@ -480,7 +480,9 @@ morie_collider <- function(dag, triple = NULL) {
   hit <- FALSE
   shielded <- FALSE
   if (!is.null(triple)) {
-    a <- triple[1]; cc <- triple[2]; b <- triple[3]
+    a <- triple[1]
+    cc <- triple[2]
+    b <- triple[3]
     hit <- paste(a, cc, b, sep = "\r") %in% cols ||
       paste(b, cc, a, sep = "\r") %in% cols
     shielded <- any(edges[, 1] == a & edges[, 2] == cc) &&
@@ -502,9 +504,12 @@ morie_collider <- function(dag, triple = NULL) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_mectest(V, V)
 morie_mectest <- function(dag1, dag2) {
-  e1 <- .morie_ml_edges(dag1); e2 <- .morie_ml_edges(dag2)
-  s1 <- .morie_ml_skeleton(e1); s2 <- .morie_ml_skeleton(e2)
-  c1 <- .morie_ml_colliders(e1); c2 <- .morie_ml_colliders(e2)
+  e1 <- .morie_ml_edges(dag1)
+  e2 <- .morie_ml_edges(dag2)
+  s1 <- .morie_ml_skeleton(e1)
+  s2 <- .morie_ml_skeleton(e2)
+  c1 <- .morie_ml_colliders(e1)
+  c2 <- .morie_ml_colliders(e2)
   list(equivalent = identical(s1, s2) && identical(c1, c2),
        sameskeleton = identical(s1, s2), samecolliders = identical(c1, c2),
        nskeleton = length(s1), ncolliders1 = length(c1),
@@ -534,7 +539,9 @@ morie_mectest <- function(dag1, dag2) {
 #' str(r, max.level = 1)
 morie_docalc <- function(dag, y, z, x = character(0), w = character(0)) {
   edges <- .morie_ml_edges(dag)
-  x <- as.character(x); w <- as.character(w); zs <- as.character(z)
+  x <- as.character(x)
+  w <- as.character(w)
+  zs <- as.character(z)
   if (length(zs) != 1L) {
     stop("this implementation checks one z node at a time.", call. = FALSE)
   }
@@ -671,7 +678,8 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 #' morie_hsicstat(V, V)
 morie_hsicstat <- function(a, b, sigma_a = NULL, sigma_b = NULL,
                            threshold = 0.01) {
-  a <- as.numeric(a); b <- as.numeric(b)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
   if (length(a) != length(b)) {
     stop("a and b must be the same length.", call. = FALSE)
   }
@@ -726,7 +734,8 @@ morie_causrung <- function(rung) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_poschk(V, V)
 morie_poschk <- function(treat, stratum, tol = 0) {
-  treat <- as.character(treat); stratum <- as.character(stratum)
+  treat <- as.character(treat)
+  stratum <- as.character(stratum)
   if (length(treat) != length(stratum) || length(treat) == 0L) {
     stop("treat and stratum must be non-empty and equal length.", call. = FALSE)
   }
@@ -770,8 +779,10 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' @examples
 #' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rlearn <- function(y, t, m, e, x = NULL) {
-  y <- as.numeric(y); t <- as.numeric(t)
-  m <- as.numeric(m); e <- as.numeric(e)
+  y <- as.numeric(y)
+  t <- as.numeric(t)
+  m <- as.numeric(m)
+  e <- as.numeric(e)
   n <- length(y)
   if (n == 0L || length(t) != n || length(m) != n || length(e) != n) {
     stop("y, t, m, e must be non-empty and the same length.", call. = FALSE)

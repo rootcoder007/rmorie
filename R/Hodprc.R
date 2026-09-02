@@ -30,7 +30,9 @@ Hodprc <- function(y, lam = 1600) {
   K <- diag(1, n)
   for (r in seq_len(n - 2L)) {
     row <- rep(0, n)
-    row[r] <- 1; row[r + 1L] <- -2; row[r + 2L] <- 1
+    row[r] <- 1
+    row[r + 1L] <- -2
+    row[r + 2L] <- 1
     K <- K + lv * (row %o% row)
   }
   tau <- .s03cholsolve(K, v)

@@ -55,7 +55,9 @@ Sfbnds <- function(y, D, Z) {
     if (any(x != 0 & x != 1)) stop(sprintf("sharp_bounds_balke_pearl: %s must be binary 0/1", nm))
     x
   }
-  yy <- chk(y, "y"); dd <- chk(D, "D"); zz <- chk(Z, "Z")
+  yy <- chk(y, "y")
+  dd <- chk(D, "D")
+  zz <- chk(Z, "Z")
   n <- length(yy)
   if (length(dd) != n || length(zz) != n)
     stop("sharp_bounds_balke_pearl: y, D and Z must have the same length")
@@ -65,8 +67,14 @@ Sfbnds <- function(y, D, Z) {
     stop("sharp_bounds_balke_pearl: both instrument arms must be non-empty")
   p <- function(a, b, cc) sum(yy == a & dd == b & zz == cc) / nz[cc + 1L]
 
-  p00_0 <- p(0,0,0); p01_0 <- p(0,1,0); p10_0 <- p(1,0,0); p11_0 <- p(1,1,0)
-  p00_1 <- p(0,0,1); p01_1 <- p(0,1,1); p10_1 <- p(1,0,1); p11_1 <- p(1,1,1)
+  p00_0 <- p(0,0,0)
+  p01_0 <- p(0,1,0)
+  p10_0 <- p(1,0,0)
+  p11_0 <- p(1,1,0)
+  p00_1 <- p(0,0,1)
+  p01_1 <- p(0,1,1)
+  p10_1 <- p(1,0,1)
+  p11_1 <- p(1,1,1)
 
   lower_terms <- c(
     p00_0 + p11_1 - 1,
@@ -86,8 +94,10 @@ Sfbnds <- function(y, D, Z) {
     2 - p01_0 - 2 * p10_0 - p00_1 - p01_1,
     2 - p10_0 - p11_0 - 2 * p01_1 - p10_1,
     2 - p00_0 - p01_0 - p01_1 - 2 * p10_1)
-  lo <- max(lower_terms); up <- min(upper_terms)
-  lo_rm <- max(lower_terms[1:4]); up_rm <- min(upper_terms[1:4])
+  lo <- max(lower_terms)
+  up <- min(upper_terms)
+  lo_rm <- max(lower_terms[1:4])
+  up_rm <- min(upper_terms[1:4])
 
   noncompliance <- (p01_0 + p11_0) + (p00_1 + p10_1)
   itt <- (p10_1 + p11_1) - (p10_0 + p11_0)

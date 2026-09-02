@@ -14,10 +14,12 @@
 #' sgtsbpd(matrix(1, 4, 4) - diag(4))$estimate
 #' @export
 sgtsbpd <- function(A) {
-  m <- as.matrix(A); dimnames(m) <- NULL
+  m <- as.matrix(A)
+  dimnames(m) <- NULL
   m <- 0.5 * (m + t(m))
   e <- eigen(m, symmetric = TRUE)
-  w <- rev(e$values); v <- e$vectors[, rev(seq_len(ncol(e$vectors))), drop = FALSE]
+  w <- rev(e$values)
+  v <- e$vectors[, rev(seq_len(ncol(e$vectors))), drop = FALSE]
   j <- which.max(abs(w))
   vec <- v[, j]
   if (sum(vec) < 0) vec <- -vec

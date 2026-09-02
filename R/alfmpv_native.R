@@ -59,11 +59,16 @@
 #' @export
 .alfmpv_field <- function(chain, name, n, default) {
   v <- if (is.list(chain)) chain[[name]] else NULL
-  if (is.null(v)) return(rep(default, n))
+  if (is.null(v)) {
+    return(rep(default, n))
+  }
   v <- as.numeric(v)
-  if (length(v) != n)
-    stop(sprintf("alfmpv: chain field %s has %d entries but %d hits",
-                 name, length(v), n), call. = FALSE)
+  if (length(v) != n) {
+    stop(sprintf(
+      "alfmpv: chain field %s has %d entries but %d hits",
+      name, length(v), n
+    ), call. = FALSE)
+  }
   v
 }
 
@@ -85,15 +90,18 @@
     chain <- list()
   } else {
     stop(sprintf("alfmpv: chain %d has no species field", idx),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   n <- length(species)
-  list(species = species,
-       evalue = .alfmpv_field(chain, "evalue", n, 0),
-       identity = .alfmpv_field(chain, "identity", n, 0),
-       gaps = .alfmpv_field(chain, "gaps", n, 0),
-       coverage = .alfmpv_field(chain, "coverage", n, 1),
-       n = n)
+  list(
+    species = species,
+    evalue = .alfmpv_field(chain, "evalue", n, 0),
+    identity = .alfmpv_field(chain, "identity", n, 0),
+    gaps = .alfmpv_field(chain, "gaps", n, 0),
+    coverage = .alfmpv_field(chain, "coverage", n, 1),
+    n = n
+  )
 }
 
 # Which hits survive the route's own filter, in order.
@@ -110,7 +118,9 @@
 #' @return The value of \code{which}.
 #' @export
 .alfmpv_keep <- function(tab, mode, min_coverage, max_gap) {
-  if (!tab$n) return(integer(0))
+  if (!tab$n) {
+    return(integer(0))
+  }
   ok <- rep(TRUE, tab$n)
   if (mode == "colabfold") ok <- tab$coverage >= min_coverage
   if (mode == "folddock") ok <- tab$gaps <= max_gap
@@ -131,8 +141,12 @@
 #' @return The value of \code{order}.
 #' @export
 .alfmpv_order <- function(tab, mode, idx, pos) {
-  if (mode == "multimer") return(order(-tab$identity[idx], pos))
-  if (mode == "colabfold") return(order(tab$evalue[idx], pos))
+  if (mode == "multimer") {
+    return(order(-tab$identity[idx], pos))
+  }
+  if (mode == "colabfold") {
+    return(order(tab$evalue[idx], pos))
+  }
   order(pos)
 }
 
@@ -157,27 +171,37 @@
 morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
                                      min_coverage = 0.5, max_gap = 0.9,
                                      copies = NULL, max_pairs = NULL) {
-  if (!(length(mode) == 1L && mode %in% .ALFMPV_MODES))
-    stop(sprintf("alfmpv: mode = %s; expected one of %s", mode,
-                 paste(.ALFMPV_MODES, collapse = ", ")), call. = FALSE)
+  if (!(length(mode) == 1L && mode %in% .ALFMPV_MODES)) {
+    stop(sprintf(
+      "alfmpv: mode = %s; expected one of %s", mode,
+      paste(.ALFMPV_MODES, collapse = ", ")
+    ), call. = FALSE)
+  }
   if (!length(msas)) stop("alfmpv: no chains given", call. = FALSE)
 
-  tabs <- lapply(seq_along(msas), function(i)
-    .alfmpv_chain_table(msas[[i]], i))
+  tabs <- lapply(seq_along(msas), function(i) {
+    .alfmpv_chain_table(msas[[i]], i)
+  })
 
   # A homo-oligomer reuses one chain's alignment for each copy rather
   # than searching again, so the copies are the same table.
   if (!is.null(copies)) {
-    if (length(copies) != length(tabs))
-      stop(sprintf("alfmpv: copies has %d entries for %d chains",
-                   length(copies), length(tabs)), call. = FALSE)
+    if (length(copies) != length(tabs)) {
+      stop(sprintf(
+        "alfmpv: copies has %d entries for %d chains",
+        length(copies), length(tabs)
+      ), call. = FALSE)
+    }
     expanded <- list()
     source <- integer(0)
     for (j in seq_along(copies)) {
       k <- as.integer(copies[j])
-      if (is.na(k) || k < 1L)
-        stop(sprintf("alfmpv: copies[%d] = %s; need at least 1", j,
-                     as.character(copies[j])), call. = FALSE)
+      if (is.na(k) || k < 1L) {
+        stop(sprintf(
+          "alfmpv: copies[%d] = %s; need at least 1", j,
+          as.character(copies[j])
+        ), call. = FALSE)
+      }
       for (r in seq_len(k)) {
         expanded[[length(expanded) + 1L]] <- tabs[[j]]
         source <- c(source, j - 1L)
@@ -195,11 +219,12 @@ morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
   # defined order without sorting strings -- which would put the two arms
   # at the mercy of their collation locales.
   ord <- character(0)
-  for (c0 in seq_len(nc))
+  for (c0 in seq_len(nc)) {
     for (i in kept[[c0]]) {
       s <- tabs[[c0]]$species[i]
       if (!(s %in% ord)) ord <- c(ord, s)
     }
+  }
 
   by_species <- vector("list", nc)
   for (c0 in seq_len(nc)) {
@@ -227,8 +252,11 @@ morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
       if (is.null(v)) integer(0) else v
     })
     if (any(vapply(lists, length, integer(1)) == 0L)) next
-    depth <- if (mode %in% c("colabfold", "folddock")) 1L
-             else min(vapply(lists, length, integer(1)))
+    depth <- if (mode %in% c("colabfold", "folddock")) {
+      1L
+    } else {
+      min(vapply(lists, length, integer(1)))
+    }
     hit_cap <- FALSE
     for (k in seq_len(depth)) {
       if (!is.null(max_pairs) && length(paired) >= as.integer(max_pairs)) {
@@ -241,41 +269,59 @@ morie_alfmpv_msa_pairing <- function(msas, mode = "multimer",
       for (c0 in seq_len(nc)) used[[c0]] <- c(used[[c0]], row[c0])
     }
     if (hit_cap ||
-        (!is.null(max_pairs) && length(paired) >= as.integer(max_pairs)))
+      (!is.null(max_pairs) && length(paired) >= as.integer(max_pairs))) {
       break
+    }
   }
 
-  unpaired <- lapply(seq_len(nc), function(c0)
-    as.integer(setdiff(kept[[c0]], used[[c0]]) - 1L))
+  unpaired <- lapply(seq_len(nc), function(c0) {
+    as.integer(setdiff(kept[[c0]], used[[c0]]) - 1L)
+  })
 
-  rule <- if (mode == "multimer")
-    paste("pair up to the smallest per-species hit count; the surplus",
-          "goes block diagonal (this implementation's reading -- Evans",
-          "et al. state the same-rank rule but not the unequal case)")
-  else "one hit per species, so counts cannot disagree"
+  rule <- if (mode == "multimer") {
+    paste(
+      "pair up to the smallest per-species hit count; the surplus",
+      "goes block diagonal (this implementation's reading -- Evans",
+      "et al. state the same-rank rule but not the unequal case)"
+    )
+  } else {
+    "one hit per species, so counts cannot disagree"
+  }
 
   method <- switch(mode,
-    multimer = paste("AlphaFold-Multimer species pairing (Evans et al.",
-                     "2022, section 2.1)"),
-    colabfold = sprintf(paste("ColabFold best-hit-per-species pairing",
-                              "(Mirdita et al. 2022), coverage >= %g"),
-                        min_coverage),
-    folddock = sprintf(paste("FoldDock top-ranked-per-organism pairing",
-                             "(Bryant et al. 2022), gaps <= %g"), max_gap))
+    multimer = paste(
+      "AlphaFold-Multimer species pairing (Evans et al.",
+      "2022, section 2.1)"
+    ),
+    colabfold = sprintf(
+      paste(
+        "ColabFold best-hit-per-species pairing",
+        "(Mirdita et al. 2022), coverage >= %g"
+      ),
+      min_coverage
+    ),
+    folddock = sprintf(paste(
+      "FoldDock top-ranked-per-organism pairing",
+      "(Bryant et al. 2022), gaps <= %g"
+    ), max_gap)
+  )
 
-  list(paired = paired,
-       species_paired = species_paired,
-       unpaired = unpaired,
-       n_paired = length(paired),
-       n_unpaired = vapply(unpaired, length, integer(1)),
-       n_rows = length(paired) + sum(vapply(unpaired, length, integer(1))),
-       n_chains = nc,
-       chain_source = as.integer(source),
-       n_filtered = vapply(seq_len(nc), function(c0)
-         as.integer(tabs[[c0]]$n - length(kept[[c0]])), integer(1)),
-       mode = mode,
-       pairing_rule = rule,
-       method = method)
+  list(
+    paired = paired,
+    species_paired = species_paired,
+    unpaired = unpaired,
+    n_paired = length(paired),
+    n_unpaired = vapply(unpaired, length, integer(1)),
+    n_rows = length(paired) + sum(vapply(unpaired, length, integer(1))),
+    n_chains = nc,
+    chain_source = as.integer(source),
+    n_filtered = vapply(seq_len(nc), function(c0) {
+      as.integer(tabs[[c0]]$n - length(kept[[c0]]))
+    }, integer(1)),
+    mode = mode,
+    pairing_rule = rule,
+    method = method
+  )
 }
 
 #' AlphaFold-Multimer chain pairing

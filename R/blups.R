@@ -21,7 +21,9 @@
 #' Blupslope(y = rnorm(30), group = rep(1:5, each = 6), Z = cbind(1, rnorm(30)),
 #'           D = diag(2), s2e = 1)
 Blupslope <- function(y, group, Z, D, s2e, X = NULL, beta = NULL) {
-  y <- .t1_vec(y); n <- length(y); g <- as.character(group)
+  y <- .t1_vec(y)
+  n <- length(y)
+  g <- as.character(group)
   if (length(g) != n) stop("group must have one label per observation")
   Zm <- .t1_mat(Z)
   if (nrow(Zm) != n) stop("Z must have one row per observation")
@@ -40,9 +42,12 @@ Blupslope <- function(y, group, Z, D, s2e, X = NULL, beta = NULL) {
     r <- y - as.numeric(Xm %*% b)
   }
   labs <- unique(g)
-  V <- list(); nj <- integer(0); fit <- numeric(n)
+  V <- list()
+  nj <- integer(0)
+  fit <- numeric(n)
   for (L in labs) {
-    idx <- which(g == L); m <- length(idx)
+    idx <- which(g == L)
+    m <- length(idx)
     nj <- c(nj, m)
     Zj <- Zm[idx, , drop = FALSE]
     M <- Zj %*% Dm %*% t(Zj) + s2e * diag(m)
