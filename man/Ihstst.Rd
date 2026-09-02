@@ -26,7 +26,7 @@ List with \code{estimate}, \code{ihs_unstandardized},
 }
 \description{
 EHH decay curves for the ancestral (0) and derived (1) core-allele
-carriers (\code{\link{Ehhdec}}), each integrated by the trapezoid
+carriers (\code{\[Ehhdec\]}), each integrated by the trapezoid
 rule outward from the core until EHH < \code{min_ehh} (0.05 in the
 paper), giving iHH_A and iHH_D; unstandardized iHS =
 ln(iHH_A / iHH_D) (Voight et al. 2006, eq. 1). Pass

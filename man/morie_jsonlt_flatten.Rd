@@ -28,6 +28,6 @@ Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_jsonlt_flatten(V)
+df <- morie_jsonlt_from_json('[{"a":{"b":1,"c":{"d":2}}},{"a":{"b":3,"c":{"d":4}}}]')
+morie_jsonlt_flatten(df)
 }

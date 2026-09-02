@@ -26,6 +26,5 @@ Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_jsonlt_prettify(V)
+cat(morie_jsonlt_prettify('{"a":[1,2,{"b":null}]}'))
 }

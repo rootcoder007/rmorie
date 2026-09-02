@@ -42,7 +42,7 @@ still works (it is forwarded to \pkg{cansim} via the
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Requires the 'cansim' package and network access.
 df <- morie_ingest_statcan_cansim("35-10-0177")
 head(df)

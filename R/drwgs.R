@@ -7,7 +7,7 @@
 #' outcome regression of Heckman, Ichimura and Todd (1997), Review of
 #' Economic Studies 64(4), 605-654, tau = E[(D/E\[D\])(dY - mu_0(X))]; the
 #' inverse propensity estimator of Abadie (2005), Review of Economic
-#' Studies 72(1), 1-19, tau = E[(D - pi(X)) dY / (E[D](1 - pi(X)))]; and
+#' Studies 72(1), 1-19, tau = E[(D - pi(X)) dY / (E\[D\](1 - pi(X)))]; and
 #' the DR estimator, eq. (2.6).  The first is consistent only if mu_0 is
 #' right, the second only if pi is, the third if either is -- so a large
 #' gap between the first two is the diagnostic the paper is built around.

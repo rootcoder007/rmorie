@@ -245,7 +245,7 @@ morie_ingest_chicago_socrata <- function(resource_url,
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_chicago_crime(year = 2024, max_features = 10000L)
 #' head(df)
 #' }

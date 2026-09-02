@@ -110,6 +110,7 @@ morie_posspr <- function(n, alpha, seed = 0) {
 
 #' Python name for \code{morie_posspr}
 #' @export
+#' @noRd
 sample_urn <- morie_posspr
 
 #' Predictive density
