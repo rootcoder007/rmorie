@@ -3,7 +3,7 @@
 % the formals.
 \name{layer_weights}
 \alias{layer_weights}
-\title{Softmax-normalised s^{task}. A simplex, not free weights: these}
+\title{Softmax-normalised s^\{task\}. A simplex, not free weights: these}
 \usage{
 layer_weights(raw) 
 }

@@ -3,7 +3,7 @@
 % the formals.
 \name{coord_update}
 \alias{coord_update}
-\title{Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_{ij})}
+\title{Eq. (4): x_i + C sum_j (x_i - x_j) phi_x(m_\{ij\})}
 \usage{
 coord_update(X, M, phi_x, C = NULL) 
 }

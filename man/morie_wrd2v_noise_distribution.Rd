@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_wrd2v_noise_distribution}
 \alias{morie_wrd2v_noise_distribution}
-\title{Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2}
+\title{Pn(w) = U(w)^\{3/4\} / Z of Mikolov et al. (2013b) 2.2}
 \usage{
 morie_wrd2v_noise_distribution(counts, power = 0.75) 
 }

@@ -3,7 +3,7 @@
 % the formals.
 \name{elmo_mix}
 \alias{elmo_mix}
-\title{Eq. (1): gamma * sum_j s_j h_{k,j}}
+\title{Eq. (1): gamma * sum_j s_j h_\{k,j\}}
 \usage{
 elmo_mix(reps, raw_weights, gamma = 1, position = NULL) 
 }

@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_censoring_survival}
 \alias{morie_censoring_survival}
-\title{Censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j |}
+\title{Censoring_survival: Gbar_c(k | A, W) = prod_\{j<=k\} (1 - lambda_C(j |}
 \usage{
 morie_censoring_survival(times, censored, A = NULL, W = NULL, grid = NULL, by_covariate = TRUE, 
     ridge = 1e-08) 

@@ -3,7 +3,7 @@
 % the formals.
 \name{Pbinom}
 \alias{Pbinom}
-\title{P(X <= k) = I_{1-p}(n - k, k + 1)}
+\title{P(X <= k) = I_\{1-p\}(n - k, k + 1)}
 \usage{
 Pbinom(q, size, prob, lower_tail = TRUE) 
 }
