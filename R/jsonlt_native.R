@@ -372,6 +372,18 @@ morie_jsonlt_base64url_dec <- function(input) {
     return(.jsonlt_as(as.list(x), o, collapse, na, oldna, auto_unbox, indent))
   }
   if (is.null(x)) return(if (identical(o$null, "null")) "null" else "{}")
+  # an S3 class none of the branches above know: jsonlite's ANY method tries
+  # the remaining classes, then unclasses under force = TRUE, else errors
+  if (!is.null(oldClass(x)) && !is.data.frame(x)) {
+    if (length(cls) > 1L) {
+      class(x) <- cls[-1L]
+      return(.jsonlt_as(x, o, collapse, na, oldna, auto_unbox, indent))
+    }
+    if (isTRUE(o$force)) {
+      return(.jsonlt_as(unclass(x), o, collapse, na, oldna, auto_unbox, indent))
+    }
+    stop("No method asJSON S3 class: ", cls, call. = FALSE)
+  }
   # base storage types (after S3 classes, the way jsonlite's S4 dispatch falls
   # through to the implicit class)
   if (is.raw(x)) return(.jsonlt_as_raw(x, o, collapse, na, oldna, auto_unbox, indent))
@@ -706,7 +718,9 @@ print.json <- function(x, ...) {
     t0 <- paste(ch[st:(i - 1L)], collapse = "")
     v <- as.numeric(t0)
     if (isint) {
-      if (bigint_as_char && (v > 9007199254740992 || v < -9007199254740992)) return(t0)
+      digs <- sub("^-", "", t0)
+      big <- nchar(digs) > 16L || (nchar(digs) == 16L && digs > "9007199254740992")
+      if (bigint_as_char && big) return(t0)
       if (v > 2147483647 || v < -2147483647) return(v)
       return(as.integer(v))
     }
