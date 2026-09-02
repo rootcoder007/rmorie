@@ -33,7 +33,7 @@
 .mor_ed_dist <- function(z, alpha) as.matrix(dist(z))^alpha
 
 # P[i + 1, j + 1] = sum of D[1..i, 1..j]
-#' P[i + 1, j + 1] = sum of D[1..i, 1..j]
+#' P\[i + 1, j + 1\] = sum of D\[1..i, 1..j\]
 #'
 #' A step of the e_div_native implementation. Called by \code{morie_e_div}.
 #' See the file header for the source the module follows.
@@ -119,7 +119,7 @@
 
 # Fisher-Yates within each cluster, consuming us[pos ...] in the same
 # order as the Python arm.
-#' Fisher-Yates within each cluster, consuming us[pos ...] in the same
+#' Fisher-Yates within each cluster, consuming us\[pos ...\] in the same
 #'
 #' order as the Python arm.
 #'

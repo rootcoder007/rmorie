@@ -29,7 +29,7 @@ Named list with \code{bias}, \code{variance}, \code{se}, \code{mse}, \code{hopt}
 }
 \description{
 Theorem 5.5, Eqs. (5.10)-(5.11):
-\deqn{\mathrm{Bias}[\tilde f_X(x)] = \frac{h^2 c_2(x)}{2g'(g^{-1}(x))}\mu_2(K) + o(h^2),\quad \mathrm{Var}[\tilde f_X(x)] = \frac{f_X(x)}{nhg'(g^{-1}(x))}\int K^2(v)dv + o(1/(nh)).}{Bias[ftilde(x)] = h^2 c2(x) mu2(K) / (2 g'(g^-1(x))) + o(h^2), Var[ftilde(x)] = f(x) int K^2 / (n h g'(g^-1(x))) + o(1/(nh)).}
+\deqn{\mathrm{Bias}\[\tilde f_X(x)\] = \frac{h^2 c_2(x)}{2g'(g^{-1}(x))}\mu_2(K) + o(h^2),\quad \mathrm{Var}\[\tilde f_X(x)\] = \frac{f_X(x)}{nhg'(g^{-1}(x))}\int K^2(v)dv + o(1/(nh)).}{Bias\[ftilde(x)\] = h^2 c2(x) mu2(K) / (2 g'(g^-1(x))) + o(h^2), Var\[ftilde(x)\] = f(x) int K^2 / (n h g'(g^-1(x))) + o(1/(nh)).}
 }
 \details{
 Both carry \verb{1/g'}, and the SAME power in both -- which is why the

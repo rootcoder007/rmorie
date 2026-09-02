@@ -7,7 +7,7 @@
 #'
 #' It multiplies the `-h/n` term of (4.27), so it is the SIZE OF THE GAIN from
 #' smoothing:
-#' \deqn{\mathrm{Var}[m_{X,i}(t)] = \frac{1}{n}\frac{b_4(t)}{S_X^2(t)} - \frac{h}{n}\frac{b_5(t)}{S_X^2(t)}\int V(y)W(y)dy + o(h/n).}{Var[m(t)] = (1/n) b4/S^2 - (h/n) b5/S^2 int V W dy + o(h/n).}
+#' \deqn{\mathrm{Var}\[m_{X,i}(t)\] = \frac{1}{n}\frac{b_4(t)}{S_X^2(t)} - \frac{h}{n}\frac{b_5(t)}{S_X^2(t)}\int V(y)W(y)dy + o(h/n).}{Var\[m(t)\] = (1/n) b4/S^2 - (h/n) b5/S^2 int V W dy + o(h/n).}
 #'
 #' The sign is the same lesson as `r1` in Chapter 2 -- smoothing a
 #' distribution-type functional REDUCES variance -- and the same reason the

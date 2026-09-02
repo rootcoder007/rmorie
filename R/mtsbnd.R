@@ -7,8 +7,8 @@
 #' direction switch, then delegates.
 #'
 #' Under monotone treatment selection,
-#' \code{E[Y(d)] <= P(X<=d) E[Y|X=d] + P(X>d) ymax} and
-#' \code{E[Y(d)] >= P(X<d) ymin + P(X>=d) E[Y|X=d]}.
+#' \code{E\[Y(d)\] <= P(X<=d) E\[Y|X=d\] + P(X>d) ymax} and
+#' \code{E\[Y(d)\] >= P(X<d) ymin + P(X>=d) E\[Y|X=d\]}.
 #' \code{monotone = FALSE} reverses the selection inequality, which is the
 #' same bound on \code{-Y} over the reflected support with the sides
 #' swapped back.

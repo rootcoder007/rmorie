@@ -21,7 +21,7 @@ Named list with \code{covariance}, \code{surv}, \code{cdf}, \code{n}, \code{meth
 }
 \description{
 Eq. (4.22):
-\deqn{\mathrm{Cov}[S_{X,2}(t), \tilde S_X(t)] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n),}{Cov[S_X2(t), Stilde(t)] = (1/n) S(t) F(t) + o(h/n),}
+\deqn{\mathrm{Cov}\[S_{X,2}(t), \tilde S_X(t)\] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n),}{Cov\[S_X2(t), Stilde(t)\] = (1/n) S(t) F(t) + o(h/n),}
 the same expression as (4.16) for \verb{S_X,1}.
 }
 \details{

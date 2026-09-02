@@ -7,7 +7,7 @@
 #'
 #' @param x Mini-batch of activations, length m >= 2.
 #' @param runmean,runvar Running population moments.
-#' @param momentum Weight given to the new batch, in [0, 1].
+#' @param momentum Weight given to the new batch, in \[0, 1\].
 #' @param eps Numerical floor inside the square root.
 #' @param gamma,beta Learned scale and shift.
 #'

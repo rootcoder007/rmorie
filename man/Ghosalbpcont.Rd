@@ -26,7 +26,7 @@ That cancellation is what the quadrature here confirms.
 }
 \details{
 Formula: int_0^1 u nu(du) = int_0^1 c (1 - u)^(c-1) du = 1,
-so the expected mass on \link{0, t_max} is H0(t_max) = t_max.
+so the expected mass on [0, t_max] is H0(t_max) = t_max.
 }
 \examples{
 Ghosalbpcont()

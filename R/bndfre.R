@@ -8,7 +8,7 @@
 #' critical value would agree with the first at 1e-9 forever and still be a
 #' second copy.
 #'
-#' Formula: \code{[l - c s_l / sqrt(n), u + c s_u / sqrt(n)]} with \code{c}
+#' Formula: \code{\[l - c s_l / sqrt(n), u + c s_u / sqrt(n)\]} with \code{c}
 #' solving \code{Phi(c + sqrt(n) Delta / max(s_l, s_u)) - Phi(-c) = 1 - alpha}.
 #'
 #' @param lower,upper Replicated estimates of the two bounds, same length.

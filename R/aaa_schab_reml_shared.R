@@ -33,7 +33,7 @@
 #' Sigma(theta*) = xi I + (1 - xi) R(h; a). Factoring
 #'
 #' sigma^2 = c0 + sigma0^2 out of Sigma leaves the nugget as a RATIO in
-#' [0, 1] -- the reparameterisation Sec. 5.5.2 calls for.
+#' \[0, 1\] -- the reparameterisation Sec. 5.5.2 calls for.
 #'
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @param nugget_ratio Numeric; combined arithmetically in the body.

@@ -7,7 +7,7 @@
 Ghosalbmprior(n_grid = 200, n_sim = 400, seed = 42)
 }
 \arguments{
-\item{n_grid}{Number of grid steps on \link{0, 1}.}
+\item{n_grid}{Number of grid steps on [0, 1].}
 
 \item{n_sim}{Number of simulated paths.}
 

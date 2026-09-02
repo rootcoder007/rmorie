@@ -4,7 +4,7 @@
 #'
 #' Theorem 1.4. With `R` the Stirling ratio (1.12) and `s = sqrt(h)`, the
 #' interior form (`x/h -> Inf`) is
-#' \deqn{\mathrm{Cov}[A_h, A_{4h}] = \frac{R(s^{-1}-1)R((2s)^{-1}-1)(\frac32-2s)^{\frac{3}{2s}-\frac32}}{2\sqrt{\pi}R(\frac{3}{2s}-2)(3x+5s)(2-2s)^{\frac1s-\frac12}(1-2s)^{\frac{1}{2s}-\frac12}}\Big(\frac{x+s}{3x+5s}\Big)^{\frac{1}{2s}-1}\Big(\frac{2x+4s}{3x+5s}\Big)^{\frac1s-1}\frac{f_X(x)}{nh^{1/4}},}{Cov[A_h, A_4h] = [R(1/s - 1) R(1/(2s) - 1) (3/2 - 2s)^(3/(2s) - 3/2)] / [2 sqrt(pi) R(3/(2s) - 2) (3x + 5s) (2-2s)^(1/s - 1/2) (1-2s)^(1/(2s) - 1/2)] * ((x+s)/(3x+5s))^(1/(2s) - 1) * ((2x+4s)/(3x+5s))^(1/s - 1) * f(x)/(n h^(1/4)),}
+#' \deqn{\mathrm{Cov}\[A_h, A_{4h}\] = \frac{R(s^{-1}-1)R((2s)^{-1}-1)(\frac32-2s)^{\frac{3}{2s}-\frac32}}{2\sqrt{\pi}R(\frac{3}{2s}-2)(3x+5s)(2-2s)^{\frac1s-\frac12}(1-2s)^{\frac{1}{2s}-\frac12}}\Big(\frac{x+s}{3x+5s}\Big)^{\frac{1}{2s}-1}\Big(\frac{2x+4s}{3x+5s}\Big)^{\frac1s-1}\frac{f_X(x)}{nh^{1/4}},}{Cov\[A_h, A_4h\] = \[R(1/s - 1) R(1/(2s) - 1) (3/2 - 2s)^(3/(2s) - 3/2)\] / \[2 sqrt(pi) R(3/(2s) - 2) (3x + 5s) (2-2s)^(1/s - 1/2) (1-2s)^(1/(2s) - 1/2)\] * ((x+s)/(3x+5s))^(1/(2s) - 1) * ((2x+4s)/(3x+5s))^(1/s - 1) * f(x)/(n h^(1/4)),}
 #' and the boundary form (`x/h -> c`) replaces `3x+5s` by `3cs+5`, `x+s` by
 #' `cs+1`, `2x+4s` by `2cs+4`, and `h^(1/4)` by `h^(3/4)`.
 #'
@@ -21,7 +21,7 @@
 #' `h < 1/4` -- the regime it is an asymptotic statement about anyway.
 #'
 #' Passing `sample` or `density` instead of `f` returns the EXACT finite-sample
-#' covariance `(1/n)(E[K(X;x,h)K(X;x,4h)] - J_h J_4h)` rather than its
+#' covariance `(1/n)(E\[K(X;x,h)K(X;x,4h)\] - J_h J_4h)` rather than its
 #' asymptotic evaluation, which is useful for checking how far into the
 #' asymptotics a given `h` actually is.
 #'
@@ -31,7 +31,7 @@
 #' @param f `f_X(x)`; selects the Theorem 1.4 closed form.
 #' @param boundary Logical; use the boundary branch. Requires `c`.
 #' @param c The constant in `x/h -> c`.
-#' @param density `f_X` on `[0, upper]`; selects the exact plug-in form.
+#' @param density `f_X` on `\[0, upper\]`; selects the exact plug-in form.
 #' @param sample Observed data; selects the exact plug-in form.
 #' @param upper Upper limit of the quadrature grid.
 #' @param ngrid Number of grid points; fixed, never adapted.

@@ -13,7 +13,7 @@ Bm25(docs, query, k1 = 1.2, b = 0.75)
 
 \item{k1}{term-frequency saturation, non-negative.}
 
-\item{b}{length normalisation, in \link{0, 1}.}
+\item{b}{length normalisation, in [0, 1].}
 }
 \value{
 list: scores, estimate, ranking, score_smooth_idf, idf, idf_smooth,

@@ -274,7 +274,7 @@ morie_stratsplt <- function(strata, testratio = 0.2) {
 
 #' Output of a convolutional layer, Equation 12-1 (p. 423)
 #'
-#' z[i, j, k] = b[k] + sum_u sum_v sum_kp x[ip, jp, kp] w[u, v, kp, k]
+#' z\[i, j, k\] = b[k] + sum_u sum_v sum_kp x\[ip, jp, kp\] w\[u, v, kp, k\]
 #' with ip = i * sh + u and jp = j * sw + v. This is a
 #' cross-correlation, as the book's own footnote 6 on p. 419 points
 #' out. Exported as morie_convlayer because morie_conv2d was already
@@ -399,7 +399,7 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #' O(n^3) -- swap it in if n ever exceeds a handful.
 #' @param posdist tracks-by-detections position cost matrix
 #' @param appdist matching appearance cost matrix, or NULL
-#' @param weight the appearance share of the combined cost, in [0, 1]
+#' @param weight the appearance share of the combined cost, in \[0, 1\]
 #' @param maxn cap on the exhaustive search
 #' @return list(cost, assignment, nmatched, nunmatchedtracks,
 #'   nunmatcheddets, meancost)

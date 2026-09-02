@@ -25,6 +25,6 @@ a coarser-than-precinct, finer-than-borough geography.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_zctas(offline = TRUE)
-head(df[, c("zcta5", "centlat", "centlon")])
+head(df\[, c("zcta5", "centlat", "centlon")\])
 \dontshow{\}) # examplesIf}
 }

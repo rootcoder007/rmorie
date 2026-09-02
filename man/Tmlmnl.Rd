@@ -32,7 +32,7 @@ targeting step is the TMLE one, so the estimator remains a plug-in.
 \details{
 Formula: with out-of-fold \code{Q} and \code{g},
 \code{H = D/g - (1 - D)/(1 - g)}, \code{eps = sum H (y - Q)/sum H^2},
-\code{psi = mean[Q*(1, X) - Q*(0, X)]}.  Folds are \code{i mod 5} on
+\code{psi = mean\[Q*(1, X) - Q*(0, X)\]}.  Folds are \code{i mod 5} on
 the input order, so both language arms use the same partition.
 }
 \examples{

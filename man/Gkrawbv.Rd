@@ -29,8 +29,8 @@ Named list: bias, variance, mse, rnum, rden, region, h, n, method.
 \code{A_h} is the raw gamma-kernel function of Eq. (1.9). Remark 1.1 is
 explicit that it is NOT the proposed estimator, only the object the
 proposed one is extrapolated from. Its moments are
-\deqn{\mathrm{Bias}[A_h(x)] = (f'(x) + x^2 f''(x)/2)\sqrt{h} + o(\sqrt{h}),}{Bias[A_h(x)] = (f'(x) + x^2 f''(x)/2) sqrt(h) + o(sqrt(h)),}
-\deqn{\mathrm{Var}[A_h(x)] = \frac{R^2(h^{-1/2}-1) f(x)}{2(x+\sqrt{h})\sqrt{\pi}(1-\sqrt{h})R(2h^{-1/2}-2) n h^{1/4}},}{Var[A_h(x)] = R^2(h^-1/2 - 1) f(x) / (2(x+sqrt(h)) sqrt(pi) (1-sqrt(h)) R(2h^-1/2 - 2) n h^(1/4)),}
+\deqn{\mathrm{Bias}\[A_h(x)\] = (f'(x) + x^2 f''(x)/2)\sqrt{h} + o(\sqrt{h}),}{Bias\[A_h(x)\] = (f'(x) + x^2 f''(x)/2) sqrt(h) + o(sqrt(h)),}
+\deqn{\mathrm{Var}\[A_h(x)\] = \frac{R^2(h^{-1/2}-1) f(x)}{2(x+\sqrt{h})\sqrt{\pi}(1-\sqrt{h})R(2h^{-1/2}-2) n h^{1/4}},}{Var\[A_h(x)\] = R^2(h^-1/2 - 1) f(x) / (2(x+sqrt(h)) sqrt(pi) (1-sqrt(h)) R(2h^-1/2 - 2) n h^(1/4)),}
 in the interior, and the same with \code{(x+sqrt(h))} replaced by
 \verb{(c sqrt(h) + 1)} and \code{h^(1/4)} by \code{h^(3/4)} in the boundary region.
 \code{R} is Eq. (1.12).

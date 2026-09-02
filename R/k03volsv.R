@@ -42,7 +42,7 @@
 }
 
 ## Deterministic golden-section maximisation on [lo, hi].
-#' # Deterministic golden-section maximisation on [lo, hi]
+#' # Deterministic golden-section maximisation on \[lo, hi\]
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.
@@ -84,8 +84,8 @@
 #' of a chi-square with one degree of freedom, and so is very far from
 #' normal: it is sharply left-skewed. Treating it as normal anyway, with
 #' its true first two moments
-#' \eqn{E[\log z^2] = \psi(1/2) + \log 2 = -\gamma - \log 2 = -1.2703628}
-#' and \eqn{Var[\log z^2] = \psi'(1/2) = \pi^2/2 = 4.9348022}, turns the
+#' \eqn{E\[\log z^2\] = \psi(1/2) + \log 2 = -\gamma - \log 2 = -1.2703628}
+#' and \eqn{Var\[\log z^2\] = \psi'(1/2) = \pi^2/2 = 4.9348022}, turns the
 #' model into a linear Gaussian one whose Kalman filter prediction errors
 #' give a \emph{quasi} likelihood. Maximising it is consistent and
 #' asymptotically normal but not efficient, and the reported \code{ll} is
@@ -94,7 +94,7 @@
 #'
 #' The filter runs on the state \eqn{h^*_t = h_t - \mu}, with stationary
 #' prior \eqn{Var(h^*_0) = \sigma_\eta^2/(1 - \phi^2)} and measurement
-#' intercept \eqn{\mu + E[\log z^2]}.
+#' intercept \eqn{\mu + E\[\log z^2\]}.
 #'
 #' Maximisation is a deterministic coordinate ascent: golden-section line
 #' search on each of \eqn{\mu}, \eqn{\phi} and \eqn{\log \sigma_\eta} in

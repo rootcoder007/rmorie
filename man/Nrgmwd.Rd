@@ -33,8 +33,8 @@ closed form: \code{E[M] = mu0} and \code{Var[M] = sigma0^2 /
 (alpha + 1)}. After observing \code{y_1, ..., y_n} the posterior is
 again a Dirichlet process with mass \code{alpha + n} and base
 measure \code{(alpha P0 + sum delta_yi) / (alpha + n)}, so
-\code{E[M | y] = (alpha mu0 + sum y_i) / (alpha + n)} and
-\code{Var[M | y] = s2_post / (alpha + n + 1)}. None of these depend
+\code{E\[M | y\] = (alpha mu0 + sum y_i) / (alpha + n)} and
+\code{Var\[M | y\] = s2_post / (alpha + n + 1)}. None of these depend
 on \code{tau}.
 }
 \examples{

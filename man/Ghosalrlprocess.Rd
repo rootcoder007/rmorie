@@ -9,7 +9,7 @@ Ghosalrlprocess(alpha = 0.75, n_grid = 200, n_sim = 300, seed = 42)
 \arguments{
 \item{alpha}{Self-similarity index, positive.}
 
-\item{n_grid}{Discretisation of \link{0, 1}.}
+\item{n_grid}{Discretisation of [0, 1].}
 
 \item{n_sim}{Number of simulated paths.}
 

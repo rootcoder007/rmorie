@@ -105,7 +105,7 @@ Vanr2 <- function(marker_matrix, weights = NULL, freq = NULL) {
 #' \deqn{A_{jk} = N^{-1} \sum_i (x_{ij}-2p_i)(x_{ik}-2p_i)/(2p_i(1-p_i))}{A_jk = (1/N) sum_i (x_ij-2p_i)(x_ik-2p_i)/(2p_i(1-p_i))}
 #' Each locus is standardized by its own Hardy-Weinberg variance.  The
 #' original paper gives the diagonal as
-#' \eqn{1 + N^{-1}\sum_i [x_{ij}^2 - (1+2p_i)x_{ij} + 2p_i^2]/(2p_i(1-p_i))};
+#' \eqn{1 + N^{-1}\sum_i \[x_{ij}^2 - (1+2p_i)x_{ij} + 2p_i^2\]/(2p_i(1-p_i))};
 #' GCTA later made the diagonal match the off-diagonal, which is the
 #' default here.
 #'

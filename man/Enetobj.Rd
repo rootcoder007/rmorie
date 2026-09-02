@@ -15,7 +15,7 @@ Enetobj(X, y, beta, lam, alpha, add_intercept = TRUE)
 
 \item{lam}{Regularization parameter lambda; must be non-negative.}
 
-\item{alpha}{Mixing parameter in \link{0, 1}: 0 is the ridge penalty, 1 is the lasso penalty.}
+\item{alpha}{Mixing parameter in [0, 1]: 0 is the ridge penalty, 1 is the lasso penalty.}
 
 \item{add_intercept}{Treat the first entry of beta as an unpenalized intercept and prepend a column of ones to X.}
 }
@@ -23,7 +23,7 @@ Enetobj(X, y, beta, lam, alpha, add_intercept = TRUE)
 List with \code{prss}, \code{rss}, \code{penalty}, \code{l1}, \code{l2}, \code{lambda}, \code{alpha}, \code{n}, \code{p}.
 }
 \description{
-Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda \link{ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| }
+Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda [ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| ]
 }
 \examples{
 set.seed(1)

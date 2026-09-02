@@ -2,13 +2,13 @@
 
 #' Bayes theorem in explicit form
 #'
-#' P(A|Z) = P(Z|A)P(A) / [P(Z|A)P(A) + P(Z|~A)P(~A)].  The defaults are
+#' P(A|Z) = P(Z|A)P(A) / \[P(Z|A)P(A) + P(Z|~A)P(~A)\].  The defaults are
 #' the book's false-positive worked example: 2 percent prevalence, a 95
 #' percent sensitive test, a 10 percent false-positive rate.
 #'
-#' @param p_a prior P(A), in [0, 1].
-#' @param p_z_given_a likelihood P(Z | A), in [0, 1].
-#' @param p_z_given_not_a likelihood P(Z | not A), in [0, 1].
+#' @param p_a prior P(A), in \[0, 1\].
+#' @param p_z_given_a likelihood P(Z | A), in \[0, 1\].
+#' @param p_z_given_not_a likelihood P(Z | not A), in \[0, 1\].
 #' @return list(posterior).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs. (2.52), (2.58)-(2.62).

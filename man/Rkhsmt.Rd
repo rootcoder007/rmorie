@@ -46,7 +46,7 @@ Statistical Machine Learning Methods for Genomic Prediction, Springer, read
 as rendered page images.
 }
 \details{
-Volume \link{Pages 251-336}, Chapter 8, Section 8.9 "Multi-trait Bayesian
+Volume [Pages 251-336], Chapter 8, Section 8.9 "Multi-trait Bayesian
 Kernel", p. 288, is where the index sends you, and it contains no equation
 at all.  Its whole specification is the sentence "In BGLR, it is possible to
 fit multi-trait Bayesian kernel BLUP methods, and the fitting process is
@@ -55,7 +55,7 @@ Chap. 6).  The only difference is that instead of using a linear kernel, any
 kernel can be used."  The model is therefore taken from where that sentence
 points.
 
-Volume \link{Pages 171-208}, Chapter 6, Section 6.8.1, equation (6.9), p. 191:
+Volume [Pages 171-208], Chapter 6, Section 6.8.1, equation (6.9), p. 191:
 Y = 1_J mu^T + X B + Z_1 b_1 + E, with E ~ MN_{J x n_T}(0, I_J, R) and
 b_1 ~ MN_{J x n_T}(0, G, Sigma_T), that is vec(b_1) ~ N(0, Sigma_T (x) G).
 Section 8.9 replaces G by the kernel K.  The marginal
@@ -65,7 +65,7 @@ attached to it.
 
 The Gibbs sampler is the six numbered steps on p. 193: beta and mu at their
 normal full conditionals; g = vec(b_1) ~ N(g~, G~) with
-G~ = \link{(Sigma_T^-1 (x) G^-1) + (R^-1 (x) Z_1^T Z_1)}^-1 and
+G~ = [(Sigma_T^-1 (x) G^-1) + (R^-1 (x) Z_1^T Z_1)]^-1 and
 g~ = G~ (R^-1 (x) Z_1^T) vec(Y - 1_J mu^T - X B);
 Sigma_T ~ IW(v_T + J, b_1^T G^-1 b_1 + S_T); and
 R ~ IW(v_R + J, S_R + (Y - 1_J mu^T - X B - Z_1 b_1)^T (same)).
@@ -77,7 +77,7 @@ Section 6.9 sampler on p. 196.  S_R is used here.
 
 DETERMINISM.  Nothing is sampled.  Every step is taken at the exact mean of
 its own full conditional -- the normal steps at the means written above, and
-the two inverse-Wishart steps at E\link{IW(v, S)} = S/(v - n_T - 1), the mean the
+the two inverse-Wishart steps at E[IW(v, S)] = S/(v - n_T - 1), the mean the
 book's own exponent |Sigma|^{-(v+n_T+1)/2} implies.  Iterating those
 conditional means is the EM fixed point of the same sampler, so both arms
 land on identical numbers rather than on the same posterior.

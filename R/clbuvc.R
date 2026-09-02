@@ -2,7 +2,7 @@
 
 #' CLUB upper bound on mutual information
 #'
-#' Formula: I_CLUB = E[log q(y|x)] - E_marg[log q(y|x)]
+#' Formula: I_CLUB = E\[log q(y|x)\] - E_marg\[log q(y|x)\]
 #'
 #' The second term averages the SAME conditional density over
 #' mismatched pairs, so the bound is the average log-ratio between

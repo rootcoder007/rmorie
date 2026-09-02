@@ -58,7 +58,7 @@ morie_dimNet_triplet_count <- function(adj) {
 
 #' Spherical Bessel radial basis
 #'
-#' \code{sqrt(2/c) sin(n pi d/c) / d}, orthogonal on \code{[0, c]}.
+#' \code{sqrt(2/c) sin(n pi d/c) / d}, orthogonal on \code{\[0, c\]}.
 #'
 #' @param d Numeric distance.
 #' @param cutoff Numeric cutoff.

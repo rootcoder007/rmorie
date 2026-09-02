@@ -34,6 +34,7 @@ morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @rdname morie_unclr_gaussian
 morie_unclr_phi <- function(z) exp(-0.5 * z^2) / sqrt(2 * pi)
 
 #' morie_unclr_Phi
@@ -45,6 +46,7 @@ morie_unclr_phi <- function(z) exp(-0.5 * z^2) / sqrt(2 * pi)
 #' @param z See Usage.
 #' @return The value of \code{stats::pnorm}.
 #' @export
+#' @rdname morie_unclr_gaussian
 morie_unclr_Phi <- function(z) stats::pnorm(z)
 
 # ====================================================================

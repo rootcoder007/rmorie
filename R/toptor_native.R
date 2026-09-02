@@ -115,7 +115,7 @@ topological_torsions <- function(elements, bonds, common_types = NULL) {
 #'
 #' @param t1 First torsion dictionary (or iterable of codes).
 #' @param t2 Second torsion dictionary (or iterable of codes).
-#' @return Scalar similarity in [0, 1].
+#' @return Scalar similarity in \[0, 1\].
 #' @references Nilakantan, R. et al. (1987).
 #' @export
 torsion_similarity <- function(t1, t2) {

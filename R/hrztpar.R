@@ -3,7 +3,7 @@
 #'
 #' Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Springer, Section 6.1, pages 190-193 (volume
-#' [Pages 189-232], read as rendered page images).  The model is
+#' \[Pages 189-232\], read as rendered page images).  The model is
 #' T(Y, alpha) = X beta + U with U independent of X (6.2), T known up to the
 #' finite-dimensional alpha and F_U left unrestricted.  Page 192 explains why
 #' nonlinear least squares is inconsistent here -- the derivative of T with
@@ -11,7 +11,7 @@
 #' and replaces it with a vector of valid instruments W satisfying E(WU) = 0
 #' and dim(W) >= dim(beta) + 1.  The estimator minimises
 #' G_n(a, b) Omega_n G_n(a, b) (6.8) with
-#' G_n(a, b) = n^-1 sum_i W_i [T(Y_i, a) - X_i b] (6.7), and the book names
+#' G_n(a, b) = n^-1 sum_i W_i \[T(Y_i, a) - X_i b\] (6.7), and the book names
 #' Omega_n = (W W)^-1 as one possible choice, which makes (6.8) the nonlinear
 #' two-stage least-squares estimator.  That choice is used here, and the
 #' instruments are X augmented with the squares of its non-intercept columns,

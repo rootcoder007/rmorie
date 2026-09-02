@@ -17,7 +17,7 @@ List with \code{sigma}, \code{xi}, \code{zeta_u},
 \code{modified_scale}, \code{method}.
 }
 \description{
-Formula: fit GPD on x\link{x>u}; rate zeta_u = N_u/n
+Formula: fit GPD on x[x>u]; rate zeta_u = N_u/n
 }
 \details{
 Maximum likelihood in Grimshaw's one-parameter reduction: with

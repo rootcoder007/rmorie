@@ -13,7 +13,7 @@
 #' l(beta) = sum_i [lnG(alpha_i.) - sum_j lnG(alpha_ij)
 #' + sum_j (alpha_ij - 1) ln y_ij], alpha_i. = sum_j alpha_ij, and the score has
 #' the closed form dl/dbeta_jm = sum_i x_im alpha_ij
-#' [psi(alpha_i.) - psi(alpha_ij) + ln y_ij], by the chain rule
+#' \[psi(alpha_i.) - psi(alpha_ij) + ln y_ij\], by the chain rule
 #' d alpha_ij / d beta_jm = alpha_ij x_im.
 #'
 #' Fitting is deterministic: ascent along the analytic score with a halving

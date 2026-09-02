@@ -109,6 +109,18 @@
     .Call(`_rmorie_morie_twfe_demean_cpp`, M, g1, g2, K1, K2, tol, max_iter)
 }
 
+.rmorie_digest_impl <- function(data, algo, seed) {
+    .Call(`_rmorie_morie_digest_native`, data, algo, seed)
+}
+
+.rmorie_digest2int_impl <- function(x, seed) {
+    .Call(`_rmorie_morie_digest2int_native`, x, seed)
+}
+
+.rmorie_aes_ecb_impl <- function(key, data, encrypt) {
+    .Call(`_rmorie_morie_aes_ecb_native`, key, data, encrypt)
+}
+
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
     .Call(`_rmorie_morie_dsp_lms_cpp`, x, d, order, mu)
 }
@@ -177,26 +189,89 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
 }
 
+#' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
+#'
+#' Phase-3VV promoted helper. Returns the response body as a length-1
+#' character vector. On any libcurl-level failure returns the empty
+#' string (parity with the SIU parser's transport contract).
+#'
+#' @param url Fully-formed URL.
+#' @param timeout_s Total request timeout in seconds.
+#' @param headers Character vector of `"Key: Value"` HTTP headers.
+#' @param user_agent Optional User-Agent override.
+#' @param follow_redirects Logical; default `TRUE`.
+#' @return Length-1 character vector with the response body.
+#' @keywords internal
 .morie_http_get <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
     .Call(`_rmorie_morie_http_get_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
+#' Binary-safe HTTP(S) GET via libcurl.
+#'
+#' Phase-3XX get_bytes wrapper. Returns the response body as an R
+#' raw vector (no NUL truncation), suitable for shapefiles, FGDB
+#' zips, PDFs, KMZ, and any other binary payload the std::string
+#' get() interface would corrupt.
+#'
+#' @inheritParams .morie_http_get
+#' @return Raw vector with the response body. Empty raw vector on
+#'   any libcurl-level transport failure (parity with .morie_http_get's
+#'   empty-string-on-failure contract).
+#' @keywords internal
 .morie_http_get_bytes <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
     .Call(`_rmorie_morie_http_get_bytes_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
+#' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
+#'
+#' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
+#' `jsonlite::toJSON(...)` before passing in. Default content_type
+#' is "application/json"; pass "" to skip the Content-Type header
+#' (caller can set it explicitly via `headers`).
+#'
+#' @inheritParams .morie_http_get
+#' @param body Length-1 character vector containing the request body.
+#' @param content_type Content-Type header value (default
+#'   `"application/json"`). Empty string skips the header.
+#' @return Length-1 character vector with the response body. Empty
+#'   string on libcurl-level transport failure.
+#' @keywords internal
 .morie_http_post <- function(url, body, content_type = "application/json", timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
     .Call(`_rmorie_morie_http_post_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
+#' Status-aware HTTP(S) GET via the libcurl backend (C++).
+#'
+#' Phase-3ZZ helper for callers that need HTTP status-code
+#' inspection (401/403/4xx error handling). Returns a length-2
+#' list: `body` (character) + `status_code` (integer, 0 on
+#' transport failure).
+#'
+#' @inheritParams .morie_http_get
+#' @return Named list with elements `body` (length-1 character
+#'   vector with the response body, possibly empty on 4xx) and
+#'   `status_code` (length-1 integer HTTP status, 0 on libcurl-
+#'   level transport failure).
+#' @keywords internal
 .morie_http_get_with_status <- function(url, timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
     .Call(`_rmorie_morie_http_get_with_status_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
+#' Status-aware HTTP(S) POST via the libcurl backend (C++).
+#'
+#' Phase-3ZZ helper. Same status-code-return contract as
+#' .morie_http_get_with_status, but for POST bodies.
+#'
+#' @inheritParams .morie_http_post
+#' @return Named list with elements `body` + `status_code`.
+#' @keywords internal
 .morie_http_post_with_status <- function(url, body, content_type = "application/json", timeout_s = 60L, headers = as.character( c()), user_agent = "", follow_redirects = TRUE) {
     .Call(`_rmorie_morie_http_post_with_status_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
+#' libcurl version string the morie C++ backend was built against.
+#' @return Length-1 character vector.
+#' @keywords internal
 .morie_http_curl_version <- function() {
     .Call(`_rmorie_morie_http_curl_version_`)
 }
@@ -281,46 +356,122 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }
 
+#' Binary C-SVC via SMO (compiled)
+#' @noRd
 morie_svc_train_cpp <- function(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svc_train_cpp`, X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
+#' eps-SVR via SMO (compiled)
+#' @noRd
 morie_svr_train_cpp <- function(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter) {
     .Call(`_rmorie_morie_svr_train_cpp`, X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter)
 }
 
+#' Decision values for new data given fitted SVM coefficients (compiled)
+#' @noRd
 morie_svm_decision_cpp <- function(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree) {
     .Call(`_rmorie_morie_svm_decision_cpp`, SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree)
 }
 
+#' Grow one regression / second-order tree (compiled)
+#' @noRd
 morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
     .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
 }
 
+#' Predict from a flattened tree (compiled)
+#' @noRd
 morie_tree_predict_cpp <- function(tree, X) {
     .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
 }
 
+#' Fetch a single URL over HTTP(S) via libcurl
+#'
+#' Internal building block of the SIU parser. Returns the response
+#' body, or an empty string on any transport-level failure.
+#'
+#' @param url URL to fetch.
+#' @param timeout_s Request timeout in seconds.
+#' @return The response body as a length-1 character vector.
+#' @keywords internal
 .siu_http_get <- function(url, timeout_s = 60L) {
     .Call(`_rmorie_siu_http_get`, url, timeout_s)
 }
 
+#' libcurl version string morie was built against
+#' @return A length-1 character vector.
+#' @keywords internal
 .siu_curl_version <- function() {
     .Call(`_rmorie_siu_curl_version`)
 }
 
+#' Fetch many URLs concurrently via libcurl, with rate-limiting + retry
+#'
+#' Drives up to \code{concurrency} simultaneous transfers, but with a
+#' global token-bucket limit of \code{rate_rps} request starts per
+#' second across the whole pool. HTTP 429/502/503/504 and transport
+#' errors are retried up to \code{max_retries} times with exponential
+#' backoff (250ms * 2^attempt). Final failures yield an empty string
+#' at their slot.
+#'
+#' Throttling is the safe default for SIU and similar small-gov
+#' endpoints: hammering them with 16-24 concurrent requests triggers
+#' WAF/Cloudflare-style bot-protection that returns short
+#' interstitial pages, which look like data but aren't.
+#'
+#' @param urls Character vector of URLs.
+#' @param concurrency Maximum simultaneous transfers.
+#' @param timeout_s Per-request timeout in seconds.
+#' @param rate_rps Maximum request starts per second across the pool.
+#'   Default \code{4.0} is a polite scrape rate that stays well under
+#'   any common WAF threshold. Set very large (e.g. \code{1e9}) to
+#'   effectively disable throttling.
+#' @param max_retries Maximum retry attempts per URL on 429/5xx /
+#'   transport failure.
+#' @return A character vector of response bodies, parallel to \code{urls}.
+#' @keywords internal
 .siu_http_get_many <- function(urls, concurrency = 4L, timeout_s = 60L, rate_rps = 4.0, max_retries = 3L) {
     .Call(`_rmorie_siu_http_get_many`, urls, concurrency, timeout_s, rate_rps, max_retries)
 }
 
+#' Fetch many URLs and return body + http_code + attempts
+#'
+#' Same throttle/retry behaviour as \code{.siu_http_get_many} but the
+#' return value preserves the HTTP status code and attempt count for
+#' each URL, so callers can distinguish a healthy 200 with a small
+#' body from a 429/503/short interstitial. Used by the DRID manifest
+#' builder (\code{morie_siu_refresh_manifest}).
+#'
+#' @inheritParams .siu_http_get_many
+#' @return A list with three parallel slots: \code{body} (character),
+#'   \code{http_code} (integer), \code{attempts} (integer).
+#' @keywords internal
 .siu_http_get_many_with_status <- function(urls, concurrency = 4L, timeout_s = 60L, rate_rps = 4.0, max_retries = 3L) {
     .Call(`_rmorie_siu_http_get_many_with_status`, urls, concurrency, timeout_s, rate_rps, max_retries)
 }
 
+#' Parse one SIU director's-report HTML page into the 64-column schema
+#'
+#' @param html The report page HTML.
+#' @param drid The director's-report id.
+#' @param url The source URL of the report page.
+#' @return A named character vector with the 64 SIU dataset columns;
+#'   report-derived fields are populated, news fields left empty.
+#' @keywords internal
 .siu_parse_report <- function(html, drid, url) {
     .Call(`_rmorie_siu_parse_report`, html, drid, url)
 }
 
+#' Parse one SIU news-release HTML page
+#'
+#' @param html The news-release page HTML.
+#' @param nrid The news-release id.
+#' @param url The source URL of the news-release page.
+#' @return A named character vector: nrid, source_url_news,
+#'   news_release_title, news_release_date_iso, news_release_date_raw,
+#'   news_release_summary.
+#' @keywords internal
 .siu_parse_news <- function(html, nrid, url) {
     .Call(`_rmorie_siu_parse_news`, html, nrid, url)
 }

@@ -9,13 +9,13 @@
 #' mixture of one identified piece and two entirely unidentified ones, and
 #' the interval simply admits the extremes for those.
 #'
-#' Derivation. \code{E[y D | Z = z]} sums over strata with \code{d(z) = 1},
+#' Derivation. \code{E\[y D | Z = z\]} sums over strata with \code{d(z) = 1},
 #' so differencing in \code{z} leaves only compliers:
-#' \code{E[y(1) | c] = (E[y D | Z = 1] - E[y D | Z = 0]) / pi_c} and
-#' \code{E[y(0) | c] = (E[y (1 - D) | Z = 0] - E[y (1 - D) | Z = 1]) / pi_c},
+#' \code{E\[y(1) | c\] = (E\[y D | Z = 1\] - E\[y D | Z = 0\]) / pi_c} and
+#' \code{E\[y(0) | c\] = (E\[y (1 - D) | Z = 0\] - E\[y (1 - D) | Z = 1\]) / pi_c},
 #' with \code{pi_c = P(D = 1 | Z = 1) - P(D = 1 | Z = 0)}. Their difference
 #' is the Wald ratio. The ATE bound is
-#' \code{pi_c LATE + (1 - pi_c) [y_0 - y_1, y_1 - y_0]}.
+#' \code{pi_c LATE + (1 - pi_c) \[y_0 - y_1, y_1 - y_0\]}.
 #'
 #' @param y Observed outcome.
 #' @param D Binary treatment, coded 0/1.

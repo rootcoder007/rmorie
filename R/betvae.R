@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' beta-VAE objective with an optional capacity target.
 #'
-#' L = E_q[log p(x|z)] - beta D_KL(q||p) with
+#' L = E_q\[log p(x|z)\] - beta D_KL(q||p) with
 #' D_KL = 0.5 sum_j (mu_j^2 + sigma_j^2 - 1 - log sigma_j^2); the
 #' capacity variant uses gamma |D_KL - C| in place of beta D_KL.
 #'

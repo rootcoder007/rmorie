@@ -307,7 +307,7 @@ optimal_rule <- function(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL,
 #'
 #' @param blips Blip vector.
 #' @param tol Tolerance.
-#' @return Scalar in [0,1].
+#' @return Scalar in \[0,1\].
 #' @references Robins, J. M. (2004).
 #' @export
 exceptional_law_share <- function(blips, tol = 0.01) {
@@ -446,7 +446,7 @@ rule_value_seq <- function(y, L0, A0, L1, A1, d0, d1, g0, g1,
 #'
 #' @param y Outcome vector.
 #' @param treatment_history n-by-2 binary matrix.
-#' @param covariate_history List \code{[L0, L1]}.
+#' @param covariate_history List \code{\[L0, L1\]}.
 #' @param regime \code{"optimal"} or supplied rule.
 #' @param method Method choice.
 #' @param n_folds Number of folds.

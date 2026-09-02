@@ -8,7 +8,7 @@ morie_mdpval(P, R, gamma, tol = 1e-10, max_iter = 1e+05, V0 = NULL)
 }
 \arguments{
 \item{P}{List of A transition matrices, each (S, S), rows summing
-to 1; \code{P[[a]][s, s2] = P(s2 | s, a)}.}
+to 1; \code{P[[a]]\[s, s2\] = P(s2 | s, a)}.}
 
 \item{R}{Reward: (S, A) matrix of r(s, a), or a list of A (S, S)
 per-transition reward matrices averaged under P.}
@@ -28,7 +28,7 @@ A list with elements \code{estimate} (V), \code{policy}
 }
 \description{
 Repeats the Bellman optimality sweep
-V(s) <- max_a sum_s2 P(s2|s,a) \link{ r(s,a) + gamma V(s2) } until the
+V(s) <- max_a sum_s2 P(s2|s,a) [ r(s,a) + gamma V(s2) ] until the
 largest change in a sweep falls below \code{tol}, then returns the
 deterministic greedy policy with ties broken to the lowest action
 index (Sutton & Barto 2018, Sec. 4.4 boxed algorithm, p. 83).

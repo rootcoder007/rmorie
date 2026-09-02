@@ -66,7 +66,7 @@
 #' The Stirling defect of the gamma function: `R(z)` increases monotonically
 #' to 1 from below (Remark 1.2), which is exactly the fact the book uses to
 #' read off the `O(n^-1 h^-1/4)` interior and `O(n^-1 h^-3/4)` boundary rates
-#' of `Var[A_h(x)]` in (1.11). Computed through `lgamma` so the `z^(z+1/2)`
+#' of `Var\[A_h(x)\]` in (1.11). Computed through `lgamma` so the `z^(z+1/2)`
 #' factor cannot overflow at the small bandwidths this suite uses
 #' (`z ~ h^(-1/2)`).
 #' @noRd

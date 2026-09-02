@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_schab_sim_shared.R
 \name{.schab_simple_kriging_variance}
 \alias{.schab_simple_kriging_variance}
-\title{Sigma^2_sk at every location, for the E\link{(Zc - Z)^2} = 2 sigma^2_sk}
+\title{Sigma^2_sk at every location, for the E[(Zc - Z)^2] = 2 sigma^2_sk}
 \usage{
 .schab_simple_kriging_variance(cov_all, n_obs)
 }

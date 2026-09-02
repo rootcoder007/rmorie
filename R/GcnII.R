@@ -12,7 +12,7 @@
 #'
 #' @param A Square adjacency matrix.
 #' @param H0 Initial node representation, one row per node.
-#' @param alpha Initial-residual weight in [0, 1].
+#' @param alpha Initial-residual weight in \[0, 1\].
 #' @param beta Identity-mapping weight, retained for the interface.
 #' @param K Number of layers.
 #' @return List with \code{estimate}, \code{H}, \code{alpha},

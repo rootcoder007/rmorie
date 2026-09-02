@@ -5,7 +5,7 @@
 #' non-collapsible. Inference is on the log scale because the sampling
 #' distribution of a ratio is badly skewed.
 #'
-#' Formula: psi = [mu1/(1-mu1)] / [mu0/(1-mu0)];
+#' Formula: psi = \[mu1/(1-mu1)\] / \[mu0/(1-mu0)\];
 #'   IC_logOR = IC_1/(mu1(1-mu1)) - IC_0/(mu0(1-mu0));
 #'   CI = exp(log psi -+ z se_log)
 #'

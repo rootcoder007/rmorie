@@ -22,7 +22,7 @@ at c can stall them.
 }
 \details{
 Formula: \code{w(r) = exp(-(r/c)^2)},
-\code{rho(r) = (c^2/2)[1 - exp(-(r/c)^2)]}, \code{psi = r w(r)}.
+\code{rho(r) = (c^2/2)\[1 - exp(-(r/c)^2)\]}, \code{psi = r w(r)}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

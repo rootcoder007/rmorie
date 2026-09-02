@@ -21,8 +21,8 @@ Named list with \code{estimate}, \code{method}.
 }
 \description{
 Eq. (5.8):
-\deqn{c_1(x) = g''(g^{-1}(x))f_X(x) + [g'(g^{-1}(x))]^2 f_X'(x),}{c1(x) = g''(g^-1(x)) f(x) + [g'(g^-1(x))]^2 f'(x),}
-the coefficient in \verb{Bias[Ftilde(x)] = (h^2/2) c1(x) mu2(K) + o(h^2)} of
+\deqn{c_1(x) = g''(g^{-1}(x))f_X(x) + \[g'(g^{-1}(x))\]^2 f_X'(x),}{c1(x) = g''(g^-1(x)) f(x) + \[g'(g^-1(x))\]^2 f'(x),}
+the coefficient in \verb{Bias\[Ftilde(x)\] = (h^2/2) c1(x) mu2(K) + o(h^2)} of
 Theorem 5.2.
 }
 \details{

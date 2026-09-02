@@ -7,7 +7,7 @@
 Prnkpg(G, damping = 0.85, n_iter = 100)
 }
 \arguments{
-\item{G}{Adjacency matrix; \code{G[i, j]} non-zero is a link i to j.}
+\item{G}{Adjacency matrix; \code{G\[i, j\]} non-zero is a link i to j.}
 
 \item{damping}{Damping factor.}
 

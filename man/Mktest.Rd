@@ -17,7 +17,7 @@ List with \code{statistic} (z), \code{p_value}, \code{S},
 }
 \description{
 Formula: \eqn{S = \sum_{i<j} \mathrm{sign}(x_j - x_i)} with null
-variance \eqn{[n(n-1)(2n+5) - \sum t(t-1)(2t+5)]/18} over the tie
+variance \eqn{\[n(n-1)(2n+5) - \sum t(t-1)(2t+5)\]/18} over the tie
 multiplicities \eqn{t}, and \eqn{z = \mathrm{sign}(S)(|S|-1)/
 \sqrt{\mathrm{var} S}} under the continuity correction.  Kendall's
 tau uses the tie-adjusted denominator.

@@ -79,7 +79,7 @@
 # expectation is E[min(T, horizon)] under independent censoring.
 #' Inverse-probability-of-censoring-weighted RMST pseudo outcome, whose
 #'
-#' expectation is E[min(T, horizon)] under independent censoring.
+#' expectation is E\[min(T, horizon)\] under independent censoring.
 #'
 #' @param time A vector; its length is taken and its elements indexed.
 #' @param event A vector; indexed elementwise.

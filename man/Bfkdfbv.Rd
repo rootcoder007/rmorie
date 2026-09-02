@@ -40,7 +40,7 @@ Named list with \code{bias}, \code{variance}, \code{se}, \code{edfvar}, \code{va
 }
 \description{
 Theorem 5.2, Eqs. (5.6)-(5.7):
-\deqn{\mathrm{Bias}[\tilde F_X(x)] = \frac{h^2}{2}c_1(x)\mu_2(K) + o(h^2),\quad \mathrm{Var}[\tilde F_X(x)] = \frac{F(1-F)}{n} - \frac{2h}{n}g'(g^{-1}(x))f_X(x)r_1 + o(h/n),}{Bias[Ftilde(x)] = (h^2/2) c1(x) mu2(K) + o(h^2), Var[Ftilde(x)] = F(1-F)/n - (2h/n) g'(g^-1(x)) f(x) r1 + o(h/n),}
+\deqn{\mathrm{Bias}\[\tilde F_X(x)\] = \frac{h^2}{2}c_1(x)\mu_2(K) + o(h^2),\quad \mathrm{Var}\[\tilde F_X(x)\] = \frac{F(1-F)}{n} - \frac{2h}{n}g'(g^{-1}(x))f_X(x)r_1 + o(h/n),}{Bias\[Ftilde(x)\] = (h^2/2) c1(x) mu2(K) + o(h^2), Var\[Ftilde(x)\] = F(1-F)/n - (2h/n) g'(g^-1(x)) f(x) r1 + o(h/n),}
 with \code{c1} from (5.8) and \code{r1} from (2.9).
 }
 \details{

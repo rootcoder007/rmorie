@@ -17,7 +17,7 @@
 #' @param G Square adjacency matrix, one row/column per node.
 #' @param beta Per-edge infection rate.
 #' @param gamma Recovery rate into the absorbing R compartment.
-#' @param initial Initial infection probability of each node, in [0, 1].
+#' @param initial Initial infection probability of each node, in \[0, 1\].
 #' @param t_max Integration horizon. Default 50.
 #' @param dt Runge-Kutta step. Default 0.01.
 #' @return List with \code{estimate} (final attack rate), \code{S},

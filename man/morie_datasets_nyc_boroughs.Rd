@@ -58,6 +58,6 @@ returns \code{the_geom} MultiPolygon when \code{geometry = TRUE}.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_boroughs(offline = TRUE)
-df[, c("borocode", "boroname")]
+df\[, c("borocode", "boroname")\]
 \dontshow{\}) # examplesIf}
 }

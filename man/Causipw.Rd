@@ -30,7 +30,7 @@ sample by the ratio (Hajek) IPW form
 \frac{\sum (1-T) Y / (1-e)}{\sum (1-T)/(1-e)}}.
 With \code{alpha = NULL} the optimal cutoff of their Corollary 5.1
 (homoskedastic case) is computed from the scores: alpha = 0 when
-\eqn{\sup 1/(e(1-e)) \le 2 E[1/(e(1-e))]}, otherwise
+\eqn{\sup 1/(e(1-e)) \le 2 E\[1/(e(1-e))\]}, otherwise
 \eqn{1/(\alpha(1-\alpha)) = 2 E[1/(e(1-e)) \mid 1/(e(1-e)) \le
 1/(\alpha(1-\alpha))]}. No analytic standard error is reported;
 inference on the trimmed estimand is left to the caller.

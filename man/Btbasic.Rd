@@ -20,7 +20,7 @@ list: lo, hi, estimate, q_lo, q_hi, theta_hat, B, method.
 Davison and Hinkley (1997), Bootstrap Methods and their Application,
 Cambridge University Press, Section 5.2, limits (2.10)/(5.6).  The interval
 inverts the bootstrap distribution of T - theta rather than reading
-quantiles of T* directly: \link[=2t - t*_(1-alpha/2), 2t - t*_(alpha/2)]{2t - t*\emph{(1-alpha/2), 2t - t*}(alpha/2)}.
+quantiles of T* directly: [2t - t*\emph{(1-alpha/2), 2t - t*}(alpha/2)].
 }
 \details{
 The reversal is the whole point.  If the replicates are skewed to the right

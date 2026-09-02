@@ -2,7 +2,7 @@
 % Please edit documentation in R/e_div_native.R
 \name{.mor_ed_prefix}
 \alias{.mor_ed_prefix}
-\title{P\link{i + 1, j + 1} = sum of D\link{1..i, 1..j}}
+\title{P[i + 1, j + 1] = sum of D[1..i, 1..j]}
 \usage{
 .mor_ed_prefix(D)
 }

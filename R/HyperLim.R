@@ -7,7 +7,7 @@
 #'
 #' @param k successes drawn, >= 0.
 #' @param n draws, >= 0.
-#' @param p success fraction in the population, in [0, 1].
+#' @param p success fraction in the population, in \[0, 1\].
 #' @param N population size, >= n.
 #' @return list(hypergeometric, binomial, abs_error).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic

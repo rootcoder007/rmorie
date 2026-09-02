@@ -7,7 +7,7 @@
 #' restriction \code{c = 0} and a check that exactly three slopes were
 #' supplied.
 #'
-#' \code{P(x = 1 | theta) = 1 / (1 + exp[-D (a1 t1 + a2 t2 + a3 t3 + d)])}.
+#' \code{P(x = 1 | theta) = 1 / (1 + exp\[-D (a1 t1 + a2 t2 + a3 t3 + d)\])}.
 #'
 #' @param y Binary 0/1 responses, length n.
 #' @param theta Ability matrix, n by 3.

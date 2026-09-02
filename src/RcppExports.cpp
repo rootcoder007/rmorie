@@ -337,6 +337,44 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_digest_native
+Rcpp::RawVector morie_digest_native(SEXP data, int algo, double seed);
+RcppExport SEXP _rmorie_morie_digest_native(SEXP dataSEXP, SEXP algoSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type algo(algoSEXP);
+    Rcpp::traits::input_parameter< double >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_digest_native(data, algo, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_digest2int_native
+Rcpp::IntegerVector morie_digest2int_native(Rcpp::CharacterVector x, int seed);
+RcppExport SEXP _rmorie_morie_digest2int_native(SEXP xSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_digest2int_native(x, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aes_ecb_native
+Rcpp::RawVector morie_aes_ecb_native(Rcpp::RawVector key, Rcpp::RawVector data, bool encrypt);
+RcppExport SEXP _rmorie_morie_aes_ecb_native(SEXP keySEXP, SEXP dataSEXP, SEXP encryptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< bool >::type encrypt(encryptSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aes_ecb_native(key, data, encrypt));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_dsp_lms_cpp
 List morie_dsp_lms_cpp(NumericVector x, NumericVector d, int order, double mu);
 RcppExport SEXP _rmorie_morie_dsp_lms_cpp(SEXP xSEXP, SEXP dSEXP, SEXP orderSEXP, SEXP muSEXP) {
@@ -1132,6 +1170,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_hkdf_sha256", (DL_FUNC) &_rmorie_morie_crypto_hkdf_sha256, 4},
     {"_rmorie_morie_crypto_random_bytes", (DL_FUNC) &_rmorie_morie_crypto_random_bytes, 1},
     {"_rmorie_morie_twfe_demean_cpp", (DL_FUNC) &_rmorie_morie_twfe_demean_cpp, 7},
+    {"_rmorie_morie_digest_native", (DL_FUNC) &_rmorie_morie_digest_native, 3},
+    {"_rmorie_morie_digest2int_native", (DL_FUNC) &_rmorie_morie_digest2int_native, 2},
+    {"_rmorie_morie_aes_ecb_native", (DL_FUNC) &_rmorie_morie_aes_ecb_native, 3},
     {"_rmorie_morie_dsp_lms_cpp", (DL_FUNC) &_rmorie_morie_dsp_lms_cpp, 4},
     {"_rmorie_morie_dsp_nlms_cpp", (DL_FUNC) &_rmorie_morie_dsp_nlms_cpp, 5},
     {"_rmorie_morie_dsp_rls_cpp", (DL_FUNC) &_rmorie_morie_dsp_rls_cpp, 5},

@@ -26,7 +26,7 @@ with \code{Sbar} the cumulative survival \verb{int_t^Inf S(u) du} and
 \code{m(t) = Sbar(t)/S(t)} the mean residual life.
 }
 \details{
-It is the numerator of the leading \code{1/n} term of \code{Var[m_X,i(t)]} in (4.27),
+It is the numerator of the leading \code{1/n} term of \verb{Var\[m_X,i(t)\]} in (4.27),
 divided by \code{S(t)^2}.
 
 Substituting \code{m = Sbar/S} gives \verb{b4 = 2 Sbar - Sbar^2/S}, so the whole

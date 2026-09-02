@@ -407,7 +407,7 @@ morie_cox_martingale_residuals <- function(fit) {
 #' Cox deviance residuals
 #'
 #' The martingale residuals symmetrised:
-#' \eqn{d_i = \mathrm{sign}(M_i)\sqrt{-2[M_i + \delta_i\log(\delta_i - M_i)]}},
+#' \eqn{d_i = \mathrm{sign}(M_i)\sqrt{-2\[M_i + \delta_i\log(\delta_i - M_i)\]}},
 #' which is roughly standard normal under a correct model.
 #'
 #' Symmetry degrades under heavy censoring -- a mass of small negative

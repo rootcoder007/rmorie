@@ -8,7 +8,7 @@
 #' follows a t distribution.
 #'
 #' Formula: \code{t_i = e_i / (s_(i) sqrt(1 - h_ii))},
-#' \code{s_(i)^2 = [(n-p)s^2 - e_i^2/(1-h_ii)]/(n-p-1)}.
+#' \code{s_(i)^2 = \[(n-p)s^2 - e_i^2/(1-h_ii)\]/(n-p-1)}.
 #'
 #' @param y Response.
 #' @param X Design; supply your own intercept column.

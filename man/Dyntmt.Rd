@@ -24,7 +24,7 @@ List with \code{estimate}, \code{value}, \code{n_follow},
 \code{ess}, \code{naive_mean}, \code{n_time}, \code{n}.
 }
 \description{
-\code{V(d) = E[Y(d_bar(H))]} is the mean counterfactual outcome had
+\code{V(d) = E\[Y(d_bar(H))\]} is the mean counterfactual outcome had
 every subject been treated according to the rule \code{d} applied to
 their own evolving history.  It is estimated here by the
 inverse-probability weighted (Hajek) form: \code{C_i} indicates that

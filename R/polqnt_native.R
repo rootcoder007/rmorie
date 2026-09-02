@@ -69,7 +69,7 @@
 #' only the angles on uniform grids and keeps the final radius exactly
 #' (Han et al. 2025, Definition 1).  Level-1 angles span
 #' \eqn{[0, 2\pi)} and are given \code{bits_first} bits; deeper levels
-#' span \eqn{[0, \pi/2]} and get \code{bits_rest}.
+#' span \eqn{\[0, \pi/2\]} and get \code{bits_rest}.
 #'
 #' @param x Vector whose length is a power of two, at least 2.
 #' @param bits_first Bits per level-1 angle.

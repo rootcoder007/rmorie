@@ -72,6 +72,6 @@ skimming once and hallucinating 60 answers.
 \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
 # Runs when a local Ollama server is reachable (free default).
 res <- morie_siu_panel(5161, mode = 2)
-res$fields["number_of_subject_officers"]
+res$fields\["number_of_subject_officers"\]
 \dontshow{\}) # examplesIf}
 }

@@ -47,7 +47,6 @@ d alpha_ij / d beta_jm = alpha_ij x_im.
 [lnG(alpha_i.) - sum_j lnG(alpha_ij)
 \itemize{
 \item sum_j (alpha_ij - 1) ln y_ij]: R:lnG(alpha_i.)\%20-\%20sum_j\%20lnG(alpha_ij)\%0A+\%20sum_j\%20(alpha_ij\%20-\%201)\%20ln\%20y_ij
-[psi(alpha_i.) - psi(alpha_ij) + ln y_ij]: R:psi(alpha_i.)\%20-\%20psi(alpha_ij)\%20+\%20ln\%20y_ij
 }
 }
 \details{

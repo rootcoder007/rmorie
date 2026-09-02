@@ -14,13 +14,13 @@ internally}
 renormalised internally}
 }
 \value{
-numeric scalar in \eqn{[0, 1]}
+numeric scalar in \eqn{\[0, 1\]}
 }
 \description{
 Renormalises both inputs to sum to one and returns
 \eqn{1 - \sum_i \sqrt{p_i q_i}}, which is one half of the squared
 Hellinger distance \eqn{h^2(p, q) = \sum_i (\sqrt{p_i} -
-\sqrt{q_i})^2} and lies in \eqn{[0, 1]}.
+\sqrt{q_i})^2} and lies in \eqn{\[0, 1\]}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

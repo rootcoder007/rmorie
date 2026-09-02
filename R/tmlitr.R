@@ -3,11 +3,11 @@
 #'
 #' The rule is read off the blip rather than the outcome regression,
 #' because only its sign matters: \code{d*(V) = I(B(V) > 0)} with
-#' \code{B(V) = E[Y(1) - Y(0) | V]}.  With the rule fixed the target is a
+#' \code{B(V) = E\[Y(1) - Y(0) | V\]}.  With the rule fixed the target is a
 #' mean under a known deterministic regime, so the clever covariate is
 #' \code{H = I(D = d*(V)) / g_{d*(V)}(W)} and a linear fluctuation
 #' \code{Q* = Q + eps H}, \code{eps = sum H (y - Q)/sum H^2}, solves the
-#' efficient score.  \code{psi = mean_i [Q(d_i, W_i) + eps/g_{d_i}(W_i)]}.
+#' efficient score.  \code{psi = mean_i \[Q(d_i, W_i) + eps/g_{d_i}(W_i)\]}.
 #'
 #' The reported SE is the non-uniform influence-curve SE; it is honest
 #' away from the non-uniqueness boundary \code{B(V) = 0}.

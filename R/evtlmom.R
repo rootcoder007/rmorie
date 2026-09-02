@@ -17,11 +17,11 @@
 
 #' Trimmed L-moments TL(s,t) of a sample
 #'
-#' Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E[X_(r+s-k):(r+s+t)]
+#' Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E\[X_(r+s-k):(r+s+t)\]
 #'
 #' with the order statistic expectation estimated by the unbiased
 #' combinatorial weights
-#' E[X_(j:m)] = sum_i C(i-1,j-1) C(n-i,m-j) / C(n,m) x_(i).  Trimming s
+#' E\[X_(j:m)\] = sum_i C(i-1,j-1) C(n-i,m-j) / C(n,m) x_(i).  Trimming s
 #' observations from the left and t from the right makes the moments
 #' exist for heavy tails where ordinary L-moments do not.  With
 #' s = t = 0 they reduce to Hosking's L-moments, so lambda_1 is the

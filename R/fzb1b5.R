@@ -12,7 +12,7 @@
 #' * B4: `f_X` three times continuously differentiable with `f^(4)` existing --
 #'   a smoothness claim about the unknown density that NO routine can verify
 #'   from data. Reported as `NA`; assert it via `smooth`.
-#' * B5: `int [f'(x)]^2 / F(x) dx` and `int f(x) dx` finite.
+#' * B5: `int \[f'(x)\]^2 / F(x) dx` and `int f(x) dx` finite.
 #'
 #' The book is explicit about the division of labour: B1 and B3 are the usual
 #' kernel conditions, B2 and B4 exist only to make the exponential and

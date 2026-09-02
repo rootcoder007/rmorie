@@ -9,7 +9,7 @@
 #' baseline and a binary covariate here, so the truth is known.
 #'
 #' Formula: -log PL(b) = sum over the event ordering of
-#'   [log(sum_{j in risk set} exp(b z_j)) - b z_i]; minimised on a grid.
+#'   \[log(sum_{j in risk set} exp(b z_j)) - b z_i\]; minimised on a grid.
 #'
 #' @param beta0 True log hazard ratio.
 #' @param n Sample size.

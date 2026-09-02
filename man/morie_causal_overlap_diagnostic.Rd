@@ -11,7 +11,7 @@ morie_causal_overlap_diagnostic(ps, treat, bins = 20, eps = 0.05)
 
 \item{treat}{0/1 treatment indicator.}
 
-\item{bins}{histogram bins on \eqn{[0, 1]}.}
+\item{bins}{histogram bins on \eqn{\[0, 1\]}.}
 
 \item{eps}{threshold defining an extreme score.}
 }

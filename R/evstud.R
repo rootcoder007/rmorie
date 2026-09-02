@@ -25,7 +25,7 @@
 #' @param unit,time Unit and period labels.
 #' @param cohort First treated period per observation; NA or Inf marks a
 #'   never-treated unit.
-#' @param max_lead,max_lag Truncate the window to [-max_lead, max_lag].
+#' @param max_lead,max_lag Truncate the window to \[-max_lead, max_lag\].
 #' @param ref Omitted event time.
 #' @return List with \code{estimate}, \code{event_times}, \code{coef},
 #'   \code{se}, \code{sigma2}, \code{resid_df}, \code{n_units},

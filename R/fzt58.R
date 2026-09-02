@@ -6,7 +6,7 @@
 #' is `h = c n^(-d)` with `c > 0` and `1/4 < d < 1/2`, the kernel is symmetric,
 #' and two limiting moment conditions hold, then the standardised smoothed and
 #' ordinary statistics agree in MEAN SQUARE:
-#' \deqn{\lim_n E\Big[\frac{S - E(S)}{\sqrt{V(S)}} - \frac{\tilde S - E(\tilde S)}{\sqrt{V(\tilde S)}}\Big]^2 = 0,}{lim E[(S - E S)/sqrt(V S) - (Stilde - E Stilde)/sqrt(V Stilde)]^2 = 0,}
+#' \deqn{\lim_n E\Big\[\frac{S - E(S)}{\sqrt{V(S)}} - \frac{\tilde S - E(\tilde S)}{\sqrt{V(\tilde S)}}\Big\]^2 = 0,}{lim E\[(S - E S)/sqrt(V S) - (Stilde - E Stilde)/sqrt(V Stilde)\]^2 = 0,}
 #' and likewise for `W` and `Wtilde`.
 #'
 #' Mean-square convergence is stronger than convergence in probability and is

@@ -7,7 +7,7 @@
 PandInd(ps)
 }
 \arguments{
-\item{ps}{marginal probabilities, each in \link{0, 1}.}
+\item{ps}{marginal probabilities, each in [0, 1].}
 }
 \value{
 list(ps, p_and); p_a and p_b are added when exactly two

@@ -9,7 +9,7 @@ FnDist(f, g, t = NULL)
 \arguments{
 \item{f, g}{the two curves, sampled at common points.}
 
-\item{t}{the sampling grid; defaults to equally spaced on \link{0, 1}.}
+\item{t}{the sampling grid; defaults to equally spaced on [0, 1].}
 }
 \value{
 list: estimate, l2sq, l1, sup, n, method.
@@ -22,7 +22,7 @@ and the induced metric is d(f, g) = sqrt(integral (f(t) - g(t))^2 dt).
 \details{
 The integral is taken over the WHOLE observation interval by the composite
 trapezoid rule.  This is deliberate and load-bearing: a sibling module in
-this package once integrated over \link{a+h, b-h}, dropping both end intervals,
+this package once integrated over [a+h, b-h], dropping both end intervals,
 and returned 3.8667 where the closed form is 4.
 }
 \examples{

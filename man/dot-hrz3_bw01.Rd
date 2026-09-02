@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_hrz3.R
 \name{.hrz3_bw01}
 \alias{.hrz3_bw01}
-\title{Default bandwidth on the mid-rank \link{0, 1} scale.  After .hrz3_u01 the}
+\title{Default bandwidth on the mid-rank [0, 1] scale.  After .hrz3_u01 the}
 \usage{
 .hrz3_bw01(n)
 }
@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-marginals are exactly uniform on \link{0, 1}, whose standard deviation is
+marginals are exactly uniform on [0, 1], whose standard deviation is
 1/sqrt(12), so Silverman\'s constant gives a scale rather than only a
 rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 wide: at n = 40 it puts two thirds of the kernel mass outside

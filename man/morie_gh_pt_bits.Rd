@@ -19,7 +19,7 @@ significant first
 Returns the first \code{depth} bits of the binary expansion of
 \code{x}, which index the nested dyadic Polya-tree partition
 containing \code{x}. The input is first clamped to
-\eqn{[0, 1 - 10^{-15}]}, so values outside the unit interval are
+\eqn{\[0, 1 - 10^{-15}\]}, so values outside the unit interval are
 silently pulled to the nearest end.
 }
 \examples{

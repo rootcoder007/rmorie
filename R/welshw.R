@@ -7,7 +7,7 @@
 #' at c can stall them.
 #'
 #' Formula: \code{w(r) = exp(-(r/c)^2)},
-#' \code{rho(r) = (c^2/2)[1 - exp(-(r/c)^2)]}, \code{psi = r w(r)}.
+#' \code{rho(r) = (c^2/2)\[1 - exp(-(r/c)^2)\]}, \code{psi = r w(r)}.
 #'
 #' @param y Scaled residuals.
 #' @param c Tuning constant; 2.9846 gives 95 percent Gaussian efficiency.

@@ -11,6 +11,38 @@
   (architecture-with-trained-weights, fabricated-by-construction, or a
   primary source that does not state the rule); none is shipped as a stub.
 
+## Native JSON codec, complete (2026-09-02)
+
+* `morie_jsonlt_*` is now jsonlite's whole public surface, written in base
+  R and pinned to jsonlite byte-for-byte by `tests/testthat/test-jsonlt-parity.R`
+  whenever jsonlite is installed (1,742 grid cases, 0 differences): every
+  `toJSON()` option including `rownames`, `keep_vec_names`, `json_verbatim`,
+  `always_decimal`, `time_format`, `UTC`, `no_dots`; jsonlite's number
+  formatting (`num_to_char` / `modp_dtoa2` rounding, `digits = NA` and
+  `I(n)`); the `fromJSON()` simplifier (record lists, matrices and
+  higher arrays, `$date`, `_row`, `"NA"`-string vectors, `bigint_as_char`);
+  yajl-layout `prettify()` / `minify()`; `validate()`; `serializeJSON()` /
+  `unserializeJSON()` for every storage mode; `base64_enc/dec` (+url);
+  `read_json` / `write_json` / `parse_json`; ndjson `stream_in` /
+  `stream_out`; `rbind_pages`.
+* The package's own readers route through this codec (`.morie_from_json`,
+  `.s03json_*`), so no code path needs jsonlite at run time; jsonlite stays
+  in Suggests for the parity test only.
+
+## Native hash family (digest's surface, 2026-09-02)
+
+* `morie_digest()`, `morie_hmac()`, `morie_make_raw()`, `morie_digest2int()`,
+  `morie_sha1()` (with every class method) and `morie_aes()` reproduce the
+  digest package's API and bytes: MD5, SHA-1, SHA-224/256/384/512, CRC-32,
+  CRC-32C, xxHash32/64, MurmurHash3 x86_32 and Jenkins one-at-a-time in
+  `src/morie_digest.cpp`, written from their specifications; AES-128/192/256
+  in ECB/CBC/CFB/CTR. `serialize()` header skipping, `length`/`skip`
+  windows, `raw = TRUE`, `seed`, `file = TRUE` and the error modes follow
+  digest exactly. `tests/testthat/test-digest-parity.R` checks the
+  published test vectors always and every routine against digest itself
+  when it is installed. spookyhash, blake3 and xxh3 are not provided (no
+  specification to implement from) and say so when requested.
+
 ## Documentation reconciliation (2026-09-01)
 
 * `man/` and `NAMESPACE` are generated from the `R/` roxygen again. The

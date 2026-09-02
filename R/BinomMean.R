@@ -5,7 +5,7 @@
 #' np, cross-checked against sum k P(k) over the full pmf.
 #'
 #' @param n trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(mean, series_mean).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eq (4.61).

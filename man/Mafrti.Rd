@@ -21,7 +21,7 @@ can read. Back-transforming is not a matter of inverting the formula
 twice: the transform depends on the sample size, and Miller's inverse
 substitutes the harmonic mean of the study sizes for it. Using the
 arithmetic mean instead is a known way to get a proportion outside
-\code{[0, 1]}.
+\code{\[0, 1\]}.
 }
 \details{
 Formula: \code{p = 0.5 (1 - sgn(cos t) sqrt(1 - (sin t + (sin t - 1/sin

@@ -13,7 +13,7 @@ Catnext(items, theta, administered = NULL, exposure = NULL, D = 1)
 
 \item{administered}{One-based indices already administered.}
 
-\item{exposure}{Per-item multiplier in \link{0, 1}.}
+\item{exposure}{Per-item multiplier in [0, 1].}
 
 \item{D}{Scaling constant.}
 }

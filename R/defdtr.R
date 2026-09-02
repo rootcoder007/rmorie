@@ -37,7 +37,7 @@
 #' output is exactly the feature at the reference point.
 #'
 #' @param x An H x W feature map.
-#' @param queries A Q x 2 matrix of reference points in [0, 1].
+#' @param queries A Q x 2 matrix of reference points in \[0, 1\].
 #' @param K Sampling points per query.
 #' @param offsets Q x K x 2 offsets in pixels, or NULL.
 #' @param weights Q x K attention weights, or NULL for 1/K each.

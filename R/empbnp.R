@@ -2,12 +2,12 @@
 
 #' Robbins' nonparametric empirical Bayes
 #'
-#' Formula: E[theta | y = k] = (k + 1) f(k + 1) / f(k)
+#' Formula: E\[theta | y = k\] = (k + 1) f(k + 1) / f(k)
 #'
 #' For Poisson observations the posterior mean of the rate needs no
 #' parametric prior at all: it is recovered from the marginal counts
 #' alone.  The gaussian branch is Tweedie's formula
-#' E[theta | y] = y + d/dy log f(y), estimated from a kernel-smoothed
+#' E\[theta | y\] = y + d/dy log f(y), estimated from a kernel-smoothed
 #' marginal.
 #'
 #' @param y Observed counts (poisson) or values (gaussian).

@@ -307,7 +307,7 @@ synthesize_marginals <- function(X, n, seed = 0) {
 #' source it follows.
 #'
 #' @param X A vector; indexed elementwise.
-#' @param fraction The body requires: memb: fraction must lie in [0, 1]. Defaults to \code{0.1}.
+#' @param fraction The body requires: memb: fraction must lie in \[0, 1\]. Defaults to \code{0.1}.
 #' @param feature_values Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.

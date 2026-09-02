@@ -14,7 +14,7 @@
 #'
 #' @param g The corrected standardised mean difference.
 #' @param n Number of subjects; \code{n >= 2}.
-#' @param rho Correlation between the paired measurements, in [-1, 1].
+#' @param rho Correlation between the paired measurements, in \[-1, 1\].
 #' @return List with \code{var_g}, \code{se}, \code{J}, \code{n},
 #'   \code{rho}.
 #' @references Morris, S. B. (2008). Organizational Research Methods

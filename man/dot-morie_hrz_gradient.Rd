@@ -15,7 +15,7 @@
 The value of \code{g}, as built in the body.
 }
 \description{
-(f\link{i+1} - f\link{i-1}) / (x\link{i+1} - x\link{i-1}) is only second-order accurate
+(f[i+1] - f[i-1]) / (x[i+1] - x[i-1]) is only second-order accurate
 on a uniform grid, and the index here is sorted data, which is
 anything but. Using the naive form put every quantity downstream of
 G\' about 1e-4 away from morie.fn, which is small but is not parity.

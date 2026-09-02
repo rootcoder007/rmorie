@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Target the variance parameter sigma^2 = E[D*^2] and bound it.
+#' Target the variance parameter sigma^2 = E\[D*^2\] and bound it.
 #'
 #' The plug-in var(IC) has its own sampling error that a confidence
 #' interval built on it treats as zero. Targeting sigma^2 gives it an
 #' influence curve D*^2 - sigma^2 and therefore its own interval, on the
 #' LOG scale because a variance is positive.
 #'
-#' Formula: sigma^2 = E[D*(O)^2]; IC = D*(O)^2 - sigma^2;
+#' Formula: sigma^2 = E\[D*(O)^2\]; IC = D*(O)^2 - sigma^2;
 #'   se(sigma^2) = sqrt(var(D*^2)/n); se(psi) = sqrt(sigma^2/n)
 #'
 #' @param ic Efficient influence-curve values, mean zero.
@@ -16,7 +16,7 @@
 #'   \code{se_psi_upper}, \code{kurtosis}, \code{ic_mean}, \code{n}.
 #' @references The row cites vdL-Hubbard-Pajouh (2018). That paper was NOT
 #'   obtainable, so what is implemented is the standard construction that
-#'   follows from the definition: the influence curve of sigma^2 = E[D*^2]
+#'   follows from the definition: the influence curve of sigma^2 = E\[D*^2\]
 #'   is D*^2 - sigma^2. The plug-in variance it refines is the
 #'   var.psi <- var(IC)/n of the CRAN package tmle 2.1.1 (Gruber & van der
 #'   Laan), which was fetched and read.

@@ -10,7 +10,7 @@
 #' sum to one across the arm set -- a working model, chosen because it is
 #' deterministic and mirrors exactly across the language arms; the
 #' targeting step repairs its bias as long as it or the outcome model is
-#' right.  \code{psi_a = mean_i [Q(a, X_i) + eps_a/g_a(X_i)]}.
+#' right.  \code{psi_a = mean_i \[Q(a, X_i) + eps_a/g_a(X_i)\]}.
 #'
 #' @param y Outcome.
 #' @param D Arm label of each subject.

@@ -2,7 +2,7 @@
 
 #' Naive kernel-smoothed Cramer-von Mises statistic (Eq. 5.4)
 #'
-#' Eq. (5.4): \deqn{\widehat{CvM} = n\int [\hat F_X(x)-F(x)]^2 dF(x),}{CvMhat = n int [Fhat_X(x) - F(x)]^2 dF(x),}
+#' Eq. (5.4): \deqn{\widehat{CvM} = n\int \[\hat F_X(x)-F(x)\]^2 dF(x),}{CvMhat = n int \[Fhat_X(x) - F(x)\]^2 dF(x),}
 #' with `Fhat_X` the naive kernel distribution function estimator.
 #'
 #' Unlike the empirical `CvM_n` this has no finite-sum closed form: `Fhat_X` is

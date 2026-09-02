@@ -7,7 +7,7 @@
 Pagrk(A, alpha = 0.85, n_iter = 100)
 }
 \arguments{
-\item{A}{Adjacency; \code{A[i, j]} non-zero means a link from i to j.}
+\item{A}{Adjacency; \code{A\[i, j\]} non-zero means a link from i to j.}
 
 \item{alpha}{Damping factor.}
 

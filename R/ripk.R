@@ -8,7 +8,7 @@
 # there are no triple intersections; inclusion-exclusion is exact.
 #' Internal: proportion of the circle of radius `rad` centred at (x, y)
 #'
-#' that lies inside the rectangle [x0, x1] x [y0, y1] -- Ripley\'s edge
+#' that lies inside the rectangle \[x0, x1\] x \[y0, y1\] -- Ripley\'s edge
 #' correction weight w(s_i, s_j) (Schabenberger & Gotway 2005, p. 102).
 #' Two opposite sides can never both be crossed by the same angle, so
 #' the only overlaps between the four "outside" arcs are the four

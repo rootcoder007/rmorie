@@ -26,7 +26,7 @@
 #' on the whole treatment vector.  The standard way out is an exposure
 #' mapping: reduce the neighbourhood to a scalar summary \code{E_i} and
 #' target the DIRECT effect at a fixed value,
-#' \code{psi = E[Y(1, ebar)] - E[Y(0, ebar)]} with \code{ebar} the
+#' \code{psi = E\[Y(1, ebar)\] - E\[Y(0, ebar)\]} with \code{ebar} the
 #' sample-mean exposure.  Both nuisance models condition on \code{E}.
 #'
 #' The variance cannot be the i.i.d. one -- neighbours' influence curves

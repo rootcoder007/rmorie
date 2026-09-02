@@ -7,7 +7,7 @@
 Hits(A, iters = 50)
 }
 \arguments{
-\item{A}{Square adjacency matrix, A\link{i, j} > 0 for a link i -> j.}
+\item{A}{Square adjacency matrix, A[i, j] > 0 for a link i -> j.}
 
 \item{iters}{Number of I/O sweeps, at least one.}
 }

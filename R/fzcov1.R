@@ -3,7 +3,7 @@
 #' Covariance of the first cumulative-survival estimator with the survival estimator (Eq. 4.16)
 #'
 #' Eq. (4.16):
-#' \deqn{\mathrm{Cov}[S_{X,1}(t), \tilde S_X(t)] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n).}{Cov[S_X1(t), Stilde(t)] = (1/n) S(t) F(t) + o(h/n).}
+#' \deqn{\mathrm{Cov}\[S_{X,1}(t), \tilde S_X(t)\] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n).}{Cov\[S_X1(t), Stilde(t)\] = (1/n) S(t) F(t) + o(h/n).}
 #'
 #' Small, but not negligible: it is exactly the term that survives when
 #' Theorem 4.3 forms the ratio `m_X,1 = S_X,1 / Stilde` and linearises it.

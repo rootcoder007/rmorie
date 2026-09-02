@@ -260,7 +260,7 @@ Martingale <- function(time, event, X, beta) {
 
 #' Deviance residuals from a fitted Cox model
 #'
-#' d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
+#' d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\]), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.

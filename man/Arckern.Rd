@@ -17,7 +17,7 @@ Arckern(X, Z = NULL, depth = 1L)
 List with \code{K}, \code{depth}, \code{n}, \code{m}.
 }
 \description{
-Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * \link{sin(theta) + (pi - theta) cos(theta)},  theta = angle(x_i, x_j)
+Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * [sin(theta) + (pi - theta) cos(theta)],  theta = angle(x_i, x_j)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

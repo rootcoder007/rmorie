@@ -568,7 +568,7 @@ PCepSum <- function(x, h, square = FALSE) {
   )
 }
 
-#' Eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even
+#' Eq (4.83): y_hat_p(n) = \[y_hat(n) + y_hat(-n)\]^2 -- the squared even
 #'
 #' part of the complex cepstrum.  The odd part, where the phase lives,
 #' is annihilated by the folding, which is exactly why the power

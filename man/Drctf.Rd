@@ -18,8 +18,8 @@ List with \code{estimate}, \code{doses}, \code{att},
 \code{se}, \code{acrt}, \code{acrt_dose}, \code{n_zero}, \code{n}.
 }
 \description{
-\code{ATT(d|d') = E[Y(d) - Y(0) | D = d']} is a level effect and
-\code{ACRT(d_j|d_k) = E[Y(d_j) - Y(d_{j-1}) | D = d_k]/(d_j - d_{j-1})}
+\code{ATT(d|d') = E\[Y(d) - Y(0) | D = d'\]} is a level effect and
+\code{ACRT(d_j|d_k) = E\[Y(d_j) - Y(d_{j-1}) | D = d_k\]/(d_j - d_{j-1})}
 is a slope; the paper is explicit that the two can have different
 signs, so both curves are returned and neither stands in for the
 other.  Each \code{ATT(d|d)} is the doubly robust panel moment of

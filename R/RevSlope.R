@@ -4,7 +4,7 @@
 #'
 #' r sigma_x / sigma_y, the slope of X regressed on Y.
 #'
-#' @param r correlation, in [-1, 1].
+#' @param r correlation, in \[-1, 1\].
 #' @param sigma_x spread of X, >= 0.
 #' @param sigma_y spread of Y, > 0.
 #' @return list(slope).

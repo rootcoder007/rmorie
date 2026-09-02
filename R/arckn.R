@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Arc-cosine kernel matrix.
 #'
-#' Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * [sin(theta) + (pi - theta) cos(theta)],  theta = angle(x_i, x_j)
+#' Formula: K(x_i, x_j) = (1/pi) * ||x_i|| * ||x_j|| * \[sin(theta) + (pi - theta) cos(theta)\],  theta = angle(x_i, x_j)
 #'
 #' @param X One record per row.
 #' @param Z Second set of records; None gives the square Gram matrix of X.

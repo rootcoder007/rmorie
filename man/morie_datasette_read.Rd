@@ -41,7 +41,7 @@ so this cannot mutate the remote database.
 \dontshow{if (nzchar(Sys.getenv("MORIE_DATASETTE_URL"))) withAutoprint(\{ # examplesIf}
 dbs <- morie_datasette_databases()
 # Peek at the first table of the first database:
-tabs <- morie_datasette_read(dbs$name[1],
+tabs <- morie_datasette_read(dbs$name\[1\],
   sql = "SELECT name FROM sqlite_master WHERE type='table' LIMIT 5")
 tabs
 \dontshow{\}) # examplesIf}

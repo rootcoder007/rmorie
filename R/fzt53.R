@@ -3,7 +3,7 @@
 #' Asymptotic normality of the boundary-free KDFE (Theorem 5.3)
 #'
 #' Theorem 5.3: under D1-D5,
-#' \deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}[\tilde F_X(x)]}} \to_D N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var[Ftilde(x)]) ->_D N(0,1).}
+#' \deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}\[\tilde F_X(x)\]}} \to_D N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var\[Ftilde(x)\]) ->_D N(0,1).}
 #'
 #' The proof is a Lyapunov argument, easy for a reason worth keeping: because
 #' `0 <= W(v) <= 1` for every `v`, the `(2+delta)` moment of each summand is
@@ -11,16 +11,16 @@
 #' averages bounded variables, so Lyapunov's condition is automatic.
 #'
 #' Returns the standardised statistic and a Wald interval for `F_X(x)`, clipped
-#' to `[0,1]`: the estimand is a probability, and an unclipped Wald interval
+#' to `\[0,1\]`: the estimand is a probability, and an unclipped Wald interval
 #' routinely leaves the unit interval near the boundary -- precisely the region
 #' this construction exists to handle.
 #'
-#' The CENTRING is `F_X(x)`, not `E[Ftilde(x)]`. The theorem standardises by
+#' The CENTRING is `F_X(x)`, not `E\[Ftilde(x)\]`. The theorem standardises by
 #' the variance alone, so the interval inherits the `O(h^2)` bias of Theorem
 #' 5.2 and is not bias-corrected; supply `bias` to subtract it.
 #'
 #' @param estimate `Ftilde(x)`.
-#' @param variance `Var[Ftilde(x)]`, e.g. from `Bfkdfbv`.
+#' @param variance `Var\[Ftilde(x)\]`, e.g. from `Bfkdfbv`.
 #' @param null The value of `F_X(x)` to test against.
 #' @param bias Bias to subtract before standardising.
 #' @param level Confidence level for the interval.

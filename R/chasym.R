@@ -22,7 +22,7 @@
 
 #' Asymptotic-variance check for an IPW marginal structural model
 #'
-#' Formula: compare E[psi^2]/n to the bootstrap
+#' Formula: compare E\[psi^2\]/n to the bootstrap
 #'
 #' The influence function of the IPW mean is psi_i = w_i (Y_i - theta),
 #' so the sandwich variance is

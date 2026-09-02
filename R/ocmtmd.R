@@ -14,7 +14,7 @@
 #' an extrapolation. Crump et al. give the subsample worth analysing,
 #' \code{alpha <= e(x) <= 1 - alpha}, with \code{alpha} the smallest
 #' value satisfying \code{1 / (alpha (1 - alpha)) <=
-#' 2 E[1 / (e (1 - e)); alpha <= e <= 1 - alpha]}, solved here by a
+#' 2 E\[1 / (e (1 - e)); alpha <= e <= 1 - alpha\]}, solved here by a
 #' deterministic ascending scan over the observed propensities. The
 #' propensity is fitted by logistic regression of \code{A} on \code{H}.
 #'
@@ -22,7 +22,7 @@
 #' @param A Binary treatment, 0/1.
 #' @param H Covariate history, no intercept column; one is added.
 #' @param Q Fitted values of the outcome model; if \code{NULL}, the
-#'   outcome is regressed on \code{[1, A, H]} by least squares.
+#'   outcome is regressed on \code{\[1, A, H\]} by least squares.
 #' @return List with \code{estimate}, \code{b0}, \code{b1},
 #'   \code{t_stat}, \code{resid_sd}, \code{mean_resid_treated},
 #'   \code{mean_resid_control}, \code{alpha_crump}, \code{n_kept},

@@ -16,7 +16,7 @@
 #' @param functions N-by-T matrix, one curve per row.
 #' @param groups N group labels.
 #' @param t the argument grid of length T; defaults to equally spaced on
-#'   [0, 1] and is ignored when T == 1.
+#'   \[0, 1\] and is ignored when T == 1.
 #' @return list: estimate, grand, effects, ssb, ssw, ssb_int, ssw_int, F,
 #'   df1, df2, n, method.
 #' @keywords internal

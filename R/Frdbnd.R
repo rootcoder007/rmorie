@@ -10,7 +10,7 @@
 #'
 #' Formula: max(u + v - 1, 0) <= C(u, v) <= min(u, v).
 #'
-#' @param F_0,F_1 Marginal CDF values in [0, 1], of equal length.
+#' @param F_0,F_1 Marginal CDF values in \[0, 1\], of equal length.
 #' @param joint Optional candidate joint CDF at the same points.
 #' @return List with \code{estimate}, \code{lower}, \code{upper},
 #'   \code{independence}, \code{width}, \code{respects_bounds},

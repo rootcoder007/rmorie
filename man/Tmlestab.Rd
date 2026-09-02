@@ -7,7 +7,7 @@
 Tmlestab(Y, A, QAW, Q1W, Q0W, g1W, gbounds = NULL)
 }
 \arguments{
-\item{Y, A}{Outcome in \link{0, 1} and binary treatment.}
+\item{Y, A}{Outcome in [0, 1] and binary treatment.}
 
 \item{QAW, Q1W, Q0W}{Initial outcome predictions.}
 

@@ -2,7 +2,7 @@
 
 #' Geometric extrapolation of the raw gamma-kernel mean (Theorem 1.2)
 #'
-#' Theorem 1.2, Eq. (1.13): \eqn{J_h^2(x)[J_{4h}(x)]^{-1} = f_X(x) + O(h)}{J_h^2(x)[J_4h(x)]^-1 = f(x) + O(h)},
+#' Theorem 1.2, Eq. (1.13): \eqn{J_h^2(x)\[J_{4h}(x)\]^{-1} = f_X(x) + O(h)}{J_h^2(x)\[J_4h(x)\]^-1 = f(x) + O(h)},
 #' with \eqn{J_h = E[A_h]}{J_h = E[A_h]}.
 #'
 #' The exponents are not a guess. Writing
@@ -16,8 +16,8 @@
 #' Supply `a`, `b` and `f` to also get the explicit `O(h)` remainder
 #' `-2(b - a^2/(2f)) h`; without them `remainder` is `NA`.
 #'
-#' @param jh `J_h(x) = E[A_h(x)]`.
-#' @param j4h `J_4h(x) = E[A_4h(x)]`, the same object at bandwidth `4h`.
+#' @param jh `J_h(x) = E\[A_h(x)\]`.
+#' @param j4h `J_4h(x) = E\[A_4h(x)\]`, the same object at bandwidth `4h`.
 #' @param h Bandwidth; needed only for the explicit remainder.
 #' @param a,b,f The coefficients (1.16), (1.17) and `f(x)`.
 #' @return Named list with ``estimate``, ``remainder``, ``t1``, ``t2``, ``method``.

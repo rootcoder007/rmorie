@@ -21,12 +21,12 @@
 A list with \code{f}, \code{mass}.
 }
 \description{
-A Gaussian kernel has unbounded support, so on the compact \link{0, 1}^2 a
+A Gaussian kernel has unbounded support, so on the compact [0, 1]^2 a
 fixed share of its mass falls outside and the raw estimate does NOT
 integrate to one.  Horowitz (2009) p. 173 requires a compactly
 supported kernel (HH5) and notes boundary effects "can be
 accommodated by replacing the kernel K with a boundary kernel".
-Renormalising the discretised density to unit mass on \link{0, 1}^2 is
+Renormalising the discretised density to unit mass on [0, 1]^2 is
 such a correction, and it makes mass == 1 an exact identity that
 fails loudly if the 1/(n h^2) constant is mis-wired.
 }

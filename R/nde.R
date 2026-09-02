@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Pearl's natural direct effect, estimated from a linear SEM
 #'
-#' \code{NDE = E[Y(1, M(0))] - E[Y(0, M(0))]}. The contrast is delegated
+#' \code{NDE = E\[Y(1, M(0))\] - E\[Y(0, M(0))\]}. The contrast is delegated
 #' to \code{Ndeff} (module \code{tmlnde}); what this module adds is the
 #' step \code{tmlnde} deliberately refuses to take -- producing the two
 #' cross-world quantities from data, which requires a model.
@@ -10,8 +10,8 @@
 #' exposure-mediator interaction (VanderWeele 2015, eq. 2.9-2.11):
 #' \code{M = b0 + b1 X + e_M} and
 #' \code{Y = c0 + c1 X + c2 M + c3 X M + e_Y}. Under sequential
-#' ignorability \code{E[M(0)] = b0}, so
-#' \code{E[Y(x, M(0))] = c0 + c1 x + c2 b0 + c3 x b0},
+#' ignorability \code{E\[M(0)\] = b0}, so
+#' \code{E\[Y(x, M(0))\] = c0 + c1 x + c2 b0 + c3 x b0},
 #' \code{NDE = c1 + c3 b0} and \code{NIE = b1 (c2 + c3)} contrasting
 #' \code{x = 1} against \code{x = 0}. \code{NDE + NIE} is the total effect
 #' exactly. With no interaction the NDE collapses to the coefficient on X

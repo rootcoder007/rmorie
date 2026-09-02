@@ -13,7 +13,7 @@ parameters (a, b, c) on each scale; use c = 0 for 2PL.}
 \item{symmetric}{Minimize F1 + F2 instead of F1 only.}
 
 \item{theta_points}{Optional evaluation grid (default 41 points on
-\link{-4, 4}).}
+[-4, 4]).}
 }
 \value{
 A list with elements \code{A}, \code{B}, \code{criterion},

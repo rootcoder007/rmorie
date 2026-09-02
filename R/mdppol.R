@@ -6,7 +6,7 @@
 #' Policy iteration for a finite MDP
 #'
 #' Alternates iterative policy evaluation, sweeps of
-#' \eqn{V(s) \leftarrow \sum_{s'} P(s'|s,\pi(s)) [r + \gamma V(s')]}
+#' \eqn{V(s) \leftarrow \sum_{s'} P(s'|s,\pi(s)) \[r + \gamma V(s')\]}
 #' until the largest change is below \code{tol}, with greedy policy
 #' improvement, stopping when the policy is stable.  This is the boxed
 #' algorithm in Sutton and Barto (2018), Section 4.3, p. 80; policy

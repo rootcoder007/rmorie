@@ -12,7 +12,7 @@
 #' exact analytic gradient. Formerly this minimised eq (4.39) directly,
 #' \eqn{\phi_R(\theta) = \ln|K \Sigma(\theta) K'| + (n-p)\ln(2\pi)
 #'      + Z'K'(K\Sigma(\theta)K')^{-1}KZ}, where K is a matrix of error
-#' contrasts chosen so that \eqn{E[KZ(s)] = 0}. REML maximises the likelihood
+#' contrasts chosen so that \eqn{E\[KZ(s)\] = 0}. REML maximises the likelihood
 #' of \eqn{KZ(s)} rather than of \eqn{Z(s)}, which removes the mean from the
 #' problem and mitigates the downward bias of the ML variance estimates
 #' (Patterson and Thompson, 1971).
@@ -29,7 +29,7 @@
 #' @param coords Matrix of sampling locations, one row per observation.
 #' @param z Numeric vector of observed values.
 #' @param X Design matrix for the mean; defaults to an intercept, the
-#'   \eqn{E[Z(s)] = \mu} case worked in the text.
+#'   \eqn{E\[Z(s)\] = \mu} case worked in the text.
 #' @param variogram_model One of "exponential", "gaussian", "spherical".
 #' @return A list with `nugget`, `partial_sill`, `sill`, `range`, `mean`,
 #'   `neg2_restricted_loglik`, `converged`, `n` and `n_contrasts`.

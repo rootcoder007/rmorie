@@ -24,7 +24,7 @@ A subgroup effect is not the full-sample effect restricted to a few
 rows: the target changes, so the clever covariate changes with it.
 Conditioning on \code{S = 1} divides the efficient influence function
 by \code{P(S = 1)} and zeroes it outside the subgroup, giving
-\code{H = I(S = 1)/P(S = 1) * [D/g(X) - (1 - D)/(1 - g(X))]}.
+\code{H = I(S = 1)/P(S = 1) * \[D/g(X) - (1 - D)/(1 - g(X))\]}.
 }
 \details{
 The nuisance models are fitted on the whole sample -- the point of not

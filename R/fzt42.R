@@ -3,8 +3,8 @@
 #' Bias and variance of the second cumulative-survival estimator (Theorem 4.2)
 #'
 #' Theorem 4.2, Eqs. (4.19)-(4.22):
-#' \deqn{\mathrm{Bias}[S_{X,2}(t)] = \tfrac{h^2}{2}b_3(t)\mu_2(K) + o(h^2),\quad \mathrm{Var}[S_{X,2}(t)] = \tfrac{1}{n}[2\bar S_X(t) - S_X^2(t)] + o(h/n),}{Bias[S_X2(t)] = (h^2/2) b3(t) mu2(K) + o(h^2), Var[S_X2(t)] = (1/n)[2 Sbar(t) - S(t)^2] + o(h/n),}
-#' with `b3(t) = [g'(g^-1(t))]^2 f(t) - g''(g^-1(t)) S(t)` from (4.21).
+#' \deqn{\mathrm{Bias}\[S_{X,2}(t)\] = \tfrac{h^2}{2}b_3(t)\mu_2(K) + o(h^2),\quad \mathrm{Var}\[S_{X,2}(t)\] = \tfrac{1}{n}\[2\bar S_X(t) - S_X^2(t)\] + o(h/n),}{Bias\[S_X2(t)\] = (h^2/2) b3(t) mu2(K) + o(h^2), Var\[S_X2(t)\] = (1/n)\[2 Sbar(t) - S(t)^2\] + o(h/n),}
+#' with `b3(t) = \[g'(g^-1(t))\]^2 f(t) - g''(g^-1(t)) S(t)` from (4.21).
 #'
 #' The variance is IDENTICAL to that of `S_X,1` in Theorem 4.1 -- the same
 #' expression, not merely the same order. Only the bias coefficients differ,

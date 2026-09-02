@@ -8,7 +8,7 @@
 #'
 #' For a candidate peak of the given width with k ChIP tags, the
 #' uniform background rate lambda_BG is replaced by the dynamic
-#' \eqn{\lambda_{local} = \max(\lambda_{BG}, [\lambda_{1k},]
+#' \eqn{\lambda_{local} = \max(\lambda_{BG}, \[\lambda_{1k},\]
 #' \lambda_{5k}, \lambda_{10k})}, where \eqn{\lambda_{Xk}} is the
 #' control tag count of the X-kb window centred on the peak rescaled
 #' to the peak width (count * width / X000). When no control sample

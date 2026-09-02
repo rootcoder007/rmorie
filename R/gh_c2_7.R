@@ -9,8 +9,8 @@
 #' Formula: as displayed; the reported error is the sup over the supplied
 #'   points of |F_K(x) - F(x)|.
 #'
-#' @param x Evaluation points; clipped to [0, 1].
-#' @param F A CDF on [0, 1]; t^2 when NULL.
+#' @param x Evaluation points; clipped to \[0, 1\].
+#' @param F A CDF on \[0, 1\]; t^2 when NULL.
 #' @param K Bernstein degree, at least 1.
 #' @return List with \code{estimate} (value at the middle point),
 #'   \code{F_K}, \code{sup_error}, \code{method}.

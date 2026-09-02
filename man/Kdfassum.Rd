@@ -56,7 +56,7 @@ form, \verb{0 < h < 1} and \verb{n h > 1}.
 \item B4: \code{f_X} three times continuously differentiable with \code{f^(4)} existing --
 a smoothness claim about the unknown density that NO routine can verify
 from data. Reported as \code{NA}; assert it via \code{smooth}.
-\item B5: \verb{int [f'(x)]^2 / F(x) dx} and \verb{int f(x) dx} finite.
+\item B5: \verb{int \[f'(x)\]^2 / F(x) dx} and \verb{int f(x) dx} finite.
 }
 
 The book is explicit about the division of labour: B1 and B3 are the usual

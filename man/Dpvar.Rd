@@ -26,11 +26,11 @@ List with \code{estimate}, \code{var_dp}, \code{mean_dp},
 The Laplace mechanism releases \code{f(x) + Lap(GS_f / eps)} where
 \code{GS_f} is the global sensitivity of \code{f}; the guarantee
 requires the data to lie in a known range, so points are clamped to
-\code{[a, b]} first.  The variance is released by composing two
+\code{\[a, b\]} first.  The variance is released by composing two
 Laplace queries on the clamped data, each spending half the budget:
 the mean, of sensitivity \code{(b - a)/n}, and the second raw moment,
-of sensitivity \code{(sup t^2 - inf t^2)/n} over \code{t in [a, b]}.
-The result is clipped into \code{[0, ((b - a)/2)^2]}, Popoviciu's
+of sensitivity \code{(sup t^2 - inf t^2)/n} over \code{t in \[a, b\]}.
+The result is clipped into \code{\[0, ((b - a)/2)^2\]}, Popoviciu's
 bound, which is post-processing and costs no privacy.  The noise is
 drawn deterministically by inverting the Laplace CDF at van der
 Corput points in bases 2 and 3 so both language arms agree; a real

@@ -13,7 +13,7 @@
 #'   2 alpha exactly for the continuum process.
 #'
 #' @param alpha Self-similarity index, positive.
-#' @param n_grid Discretisation of [0, 1].
+#' @param n_grid Discretisation of \[0, 1\].
 #' @param n_sim Number of simulated paths.
 #' @param seed Seed for the deterministic draws.
 #' @return List with \code{estimate} (empirical growth exponent),

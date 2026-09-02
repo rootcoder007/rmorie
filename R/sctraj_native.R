@@ -531,7 +531,7 @@ morie_sctraj_average_curve <- function(curves, n_points=100,
 
 #' CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)
 #'
-#' on [-1/2, 1/2], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
+#' on \[-1/2, 1/2\], so F(u) = u + 1/2 + sin(2 pi u)/(2 pi).
 #'
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.

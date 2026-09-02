@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Sun-Abraham interaction-weighted difference in differences.
 #'
-#' Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in [-l, T-l]}
+#' Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in \[-l, T-l\]}
 #'
 #' @param y Outcome, one row per unit-period.
 #' @param unit Unit identifier.

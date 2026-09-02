@@ -6,7 +6,7 @@
 #' k = 2 and k = 3 cases are the pairwise and triple intersection terms
 #' of the book's inclusion-exclusion dice example.
 #'
-#' @param p common event probability, in [0, 1].
+#' @param p common event probability, in \[0, 1\].
 #' @param k number of events, >= 0.
 #' @return list(p, k, p_intersection).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic

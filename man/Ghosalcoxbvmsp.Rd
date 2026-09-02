@@ -27,7 +27,7 @@ baseline and a binary covariate here, so the truth is known.
 }
 \details{
 Formula: -log PL(b) = sum over the event ordering of
-\link{log(sum_{j in risk set} exp(b z_j)) - b z_i}; minimised on a grid.
+[log(sum_{j in risk set} exp(b z_j)) - b z_i]; minimised on a grid.
 }
 \examples{
 Ghosalcoxbvmsp()

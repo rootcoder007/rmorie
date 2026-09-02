@@ -39,9 +39,9 @@ independent of X, P(U <= u | a < Z <= b) = F(u) for any a, b in the
 support of Z, so for any y2 < y1
 }
 \details{
-F(u) = P\link{U <= u | T(y2) - u < Z <= T(y1) - u} = A(u)/B(u)   (6.63)
-A(u) = E{I(U <= u) I\link{T(y2) - u < Z <= T(y1) - u}}           (6.64)
-B(u) = E{I\link{T(y2) - u < Z <= T(y1) - u}}                     (6.65)
+F(u) = P[U <= u | T(y2) - u < Z <= T(y1) - u] = A(u)/B(u)   (6.63)
+A(u) = E{I(U <= u) I[T(y2) - u < Z <= T(y1) - u]}           (6.64)
+B(u) = E{I[T(y2) - u < Z <= T(y1) - u]}                     (6.65)
 
 and the estimator replaces these by sample analogues (6.66) with
 U_ni = T_n(Y_i) - Z_ni.
@@ -50,13 +50,13 @@ The conditioning is not a technical nicety and the obvious shortcut
 is wrong.  Page 219: "It may seem that F can be estimated more
 simply by the empirical distribution function of
 U_n = T_n(Y) - X'b_n, but this is not the case."  T is
-n^(-1/2)-consistent only on a compact \link{y2, y1} strictly inside the
+n^(-1/2)-consistent only on a compact [y2, y1] strictly inside the
 support of Y, so U is effectively observed under CENSORING, and the
 empirical CDF is inconsistent under censoring.  (6.66) is consistent
 despite it.
 
 Since the indicator set of A_n is a subset of that of B_n,
-A_n <= B_n pointwise and Fhat lies in \link{0, 1} identically; both are
+A_n <= B_n pointwise and Fhat lies in [0, 1] identically; both are
 asserted rather than assumed.
 }
 \examples{

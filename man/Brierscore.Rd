@@ -25,5 +25,5 @@ y <- sample(1:3, 10, replace = TRUE)
 Brierscore(P, y)
 }
 \references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Eq. (4.14) p. 136.  The book notes the categorical Brier score ranges over \link{0, 2} and suggests reporting BS/2; \code{brier_scaled} is that halved value.  Read from the chapter PDF, not recalled.
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Eq. (4.14) p. 136.  The book notes the categorical Brier score ranges over [0, 2] and suggests reporting BS/2; \code{brier_scaled} is that halved value.  Read from the chapter PDF, not recalled.
 }

@@ -6,7 +6,7 @@
 #' rotatable-bond term divides rather than adds, penalising the entropy
 #' a flexible ligand gives up on binding.
 #'
-#' @param receptor Matrix, rows \code{[x, y, z, radius, type]}; type 1
+#' @param receptor Matrix, rows \code{\[x, y, z, radius, type\]}; type 1
 #'   hydrophobic, 2 hydrogen-bond donor or acceptor, 0 otherwise.
 #' @param ligand_pose Same layout for the ligand pose.
 #' @param n_rot Active rotatable bonds between heavy atoms in the ligand.

@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Elastic net penalized residual sum of squares.
 #'
-#' Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda [ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| ]
+#' Formula: PRSS(beta, lambda, alpha) = RSS(beta) + lambda \[ (1 - alpha)/2 * sum_j b_j^2 + alpha * sum_j |b_j| \]
 #'
 #' @param X Design matrix, one record per row.
 #' @param y Response vector of length n.
 #' @param beta Coefficient vector.
 #' @param lam Regularization parameter lambda; must be non-negative.
-#' @param alpha Mixing parameter in [0, 1]: 0 is the ridge penalty, 1 is the lasso penalty.
+#' @param alpha Mixing parameter in \[0, 1\]: 0 is the ridge penalty, 1 is the lasso penalty.
 #' @param add_intercept Treat the first entry of beta as an unpenalized intercept and prepend a column of ones to X.
 #'
 #' @return List with ``prss``, ``rss``, ``penalty``, ``l1``, ``l2``, ``lambda``, ``alpha``, ``n``, ``p``.

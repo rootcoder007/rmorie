@@ -389,7 +389,7 @@
 #' Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_{t: split on
 #' X_j}
 #'
-#' (n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the
+#' (n_t/n) \[ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) \], i the
 #' within-node sum of squares.  The stored drop is already in raw
 #' sum-of-squares units.
 #'

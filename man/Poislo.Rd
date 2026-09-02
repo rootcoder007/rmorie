@@ -15,7 +15,7 @@ Poislo(Y, Yhat)
 List with \code{loss}, \code{mean_loss}, \code{n}, \code{L}.
 }
 \description{
-Formula: L(w) = sum_i sum_j \link{ yhat_ij - y_ij log(yhat_ij) }
+Formula: L(w) = sum_i sum_j [ yhat_ij - y_ij log(yhat_ij) ]
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

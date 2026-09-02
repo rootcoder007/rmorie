@@ -10,7 +10,7 @@
 #' exactly the failure mode that makes a mask look stronger than it is.  The
 #' displaced point is \code{(x + rho cos(theta), y + rho sin(theta))}.
 #'
-#' Under this mask \code{E[rho] = 2 r / 3} and \code{E[rho^2] = r^2 / 2}, so
+#' Under this mask \code{E[rho] = 2 r / 3} and \code{E\[rho^2\] = r^2 / 2}, so
 #' both the mean and the RMS displacement have closed forms the sample
 #' values can be checked against; they are returned as
 #' \code{expected_displacement} and \code{expected_rms}.

@@ -11,7 +11,7 @@
 #' right one.
 #'
 #' Formula: K(h) = (2 sqrt(pi))^(-1) int cos(h lambda) exp(-lambda^2/4)
-#'   dlambda, by midpoint rule over [-lam_max, lam_max].
+#'   dlambda, by midpoint rule over \[-lam_max, lam_max\].
 #'
 #' @param h Lag at which the kernel is evaluated.
 #' @param n_grid Number of midpoint cells.

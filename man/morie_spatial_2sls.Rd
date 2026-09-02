@@ -20,7 +20,7 @@ list with \code{rho}, \code{beta}, \code{residuals} and \code{sigma2}
 }
 \description{
 Fits the spatial lag model \verb{y = rho W y + X beta + e}.  \verb{W y} is
-endogenous, so it is instrumented with \verb{[X, WX, W^2 X]} -- the
+endogenous, so it is instrumented with \verb{\[X, WX, W^2 X\]} -- the
 Kelejian and Prucha (1998) instrument set that \code{spatialreg::stsls}
 uses.  Ordinary least squares on this model is inconsistent.
 }

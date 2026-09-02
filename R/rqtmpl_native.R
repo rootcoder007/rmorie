@@ -96,9 +96,9 @@ morie_inverse_haldane <- function(r) {
 #' @param left Numeric vector of left-marker genotypes (0 or 1).
 #' @param right Numeric vector of right-marker genotypes (0 or 1).
 #' @param r_left Recombination fraction on the left interval,
-#'   in \code{[0, 0.5]}.
+#'   in \code{\[0, 0.5\]}.
 #' @param r_right Recombination fraction on the right interval,
-#'   in \code{[0, 0.5]}.
+#'   in \code{\[0, 0.5\]}.
 #' @return Numeric vector of length 2, \code{c(G(0), G(1))}.
 #' @export
 morie_genotype_probabilities <- function(left, right, r_left, r_right) {

@@ -112,7 +112,7 @@
 #' @param w Slice width; must be positive.
 #' @param max_steps Maximum number of stepping-out steps per side.
 #' @param lower,upper Support bounds; the draw stays in
-#'   \code{[lower, upper]} without any rejection.
+#'   \code{\[lower, upper\]} without any rejection.
 #' @return List with \code{x}, \code{n_eval}, \code{interval}.
 #' @references Neal, R. M. (2003). Slice sampling. Annals of Statistics
 #'   31(3), 705-767.

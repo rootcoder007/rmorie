@@ -5,7 +5,7 @@
 #' Formula: each of the C(n,2) possible edges is present independently
 #' with probability p.  Realised on a DETERMINISTIC low-discrepancy
 #' stream -- edge slot k is compared against p using van der Corput base
-#' \code{PRIMES[k mod 12]}, so successive dyads are not correlated the
+#' \code{PRIMES\[k mod 12\]}, so successive dyads are not correlated the
 #' way one shared stream would make them, and both language arms build
 #' the identical graph.
 #'
@@ -19,7 +19,7 @@
 #' threshold log(n)/n and the giant-component threshold 1/n.
 #'
 #' @param n Number of vertices (>= 1).
-#' @param p Edge probability in [0, 1].
+#' @param p Edge probability in \[0, 1\].
 #' @return List with \code{estimate}, \code{edges}, \code{density},
 #'   \code{expected_edges}, \code{mean_degree}, \code{expected_degree},
 #'   \code{n_components}, \code{largest_component},

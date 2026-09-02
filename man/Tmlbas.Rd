@@ -27,7 +27,7 @@ adjustment that would open a collider path.
 \details{
 Formula: \code{H = D/g - (1 - D)/(1 - g)},
 \code{eps = sum H (y - Q) / sum H^2}, \code{Q* = Q + eps H},
-\code{psi = mean[Q*(1, W) - Q*(0, W)]}.
+\code{psi = mean\[Q*(1, W) - Q*(0, W)\]}.
 }
 \examples{
 Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))

@@ -9,7 +9,7 @@
 #' @param student Student logits, length k.
 #' @param temperature T > 0.
 #' @param label One-based index of the correct class, or NULL.
-#' @param alpha Weight on the soft objective, in [0, 1].
+#' @param alpha Weight on the soft objective, in \[0, 1\].
 #'
 #' @return List with softce, kl, hardce, total, teacherprob, studentprob,
 #'   temperature, k.

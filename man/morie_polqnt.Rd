@@ -28,7 +28,7 @@ Recursively replaces coordinate pairs by (radius, angle), quantizes
 only the angles on uniform grids and keeps the final radius exactly
 (Han et al. 2025, Definition 1).  Level-1 angles span
 \eqn{[0, 2\pi)} and are given \code{bits_first} bits; deeper levels
-span \eqn{[0, \pi/2]} and get \code{bits_rest}.
+span \eqn{\[0, \pi/2\]} and get \code{bits_rest}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

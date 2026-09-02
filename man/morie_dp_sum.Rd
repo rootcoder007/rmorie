@@ -21,7 +21,7 @@ values), \code{noise_scale}, \code{sensitivity},
 \code{clipped_fraction}.
 }
 \description{
-Values are clipped to \code{[a, b]} and the sum released with Laplace
+Values are clipped to \code{\[a, b\]} and the sum released with Laplace
 noise of scale \eqn{(b-a)/\epsilon}.
 }
 \details{

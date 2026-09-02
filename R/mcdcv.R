@@ -6,7 +6,7 @@
 #' (1985), "Multivariate estimation with high breakdown point", Reidel,
 #' 283-297.  The MCD criterion is the one stated in the stub docstring,
 #' argmin over subsets H of size h of det(cov(X[H])), and it is applied here to
-#' the JOINT matrix Z = [X | y].  That is the standard way a high-breakdown
+#' the JOINT matrix Z = \[X | y\].  That is the standard way a high-breakdown
 #' scatter estimator becomes a high-breakdown regression estimator: partition
 #' the MCD scatter of (X, y) and read the coefficients off the population
 #' regression formula beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X.
@@ -23,7 +23,7 @@
 #'
 #' @param y n responses.
 #' @param X n-by-q predictor matrix WITHOUT an intercept column.
-#' @param h subset size; defaults to [(n + p + 1)/2] with p = q + 1.
+#' @param h subset size; defaults to \[(n + p + 1)/2\] with p = q + 1.
 #' @param max_subsets refuse rather than enumerate more than this many.
 #' @return list: estimate, coef, intercept, center, cov_raw, cov, factor,
 #'   subset, h, n, p, method.

@@ -9,7 +9,7 @@
 \arguments{
 \item{boot_obj}{A list; the body reads \code{$data}, \code{$strata} from it.}
 
-\item{t}{A vector; its length is taken and its elements indexed. Defaults to \code{boot_obj$t[, 1L]}.}
+\item{t}{A vector; its length is taken and its elements indexed. Defaults to \code{boot_obj$t\[, 1L\]}.}
 }
 \value{
 A vector, from \code{as.numeric}.

@@ -16,7 +16,7 @@ X_j}}
 A numeric value.
 }
 \description{
-(n_t/n) \link{ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) }, i the
+(n_t/n) [ i(t) - (n_L/n_t) i(t_L) - (n_R/n_t) i(t_R) ], i the
 within-node sum of squares.  The stored drop is already in raw
 sum-of-squares units.
 }
