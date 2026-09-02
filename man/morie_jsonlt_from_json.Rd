@@ -40,5 +40,6 @@ Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
 }
 \keyword{internal}
 \examples{
-morie_jsonlt_from_json(txt = 5L)
+morie_jsonlt_from_json('[{"a":1,"b":"x"},{"a":2,"b":"y"}]')
+morie_jsonlt_from_json('[[1,2],[3,4]]')
 }

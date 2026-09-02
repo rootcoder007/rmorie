@@ -39,7 +39,10 @@ the local corpus. The estimator is the standard multivariate LS form,
 anchored against stats::lm reached by a different route.
 }
 \examples{
-Varest(cbind(c(1, 2, 3, 4, 5), c(2, 1, 4, 3, 6)), 1)$loglik
+set.seed(2)
+Y <- matrix(rnorm(80), 40, 2)
+Y[-1, ] <- Y[-1, ] + 0.5 * Y[-40, ]   # a weak VAR(1) signal
+Varest(Y, 1)$loglik
 }
 \references{
 Lutkepohl, H. (2005). New Introduction to Multiple Time

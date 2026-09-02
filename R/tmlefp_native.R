@@ -245,8 +245,10 @@ morie_tmlefp <- function(y, treatment, pscore,
 
 #' Compact alias per ledger/NAMING.md
 #' @export
+#' @noRd
 morie_optimal_overlap <- morie_tmlefp
 
 #' Name carried over from the generated stub this replaced
 #' @export
+#' @noRd
 morie_tmle_effective_pi <- morie_tmlefp

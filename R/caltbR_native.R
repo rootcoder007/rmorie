@@ -329,16 +329,19 @@ calibrated_rerank <- function(scores, p_g_given_i, p_target, N = 10,
 #' Convenience alias matching the Python \code{calibratedrecommendations}
 #' export
 #' @export
+#' @noRd
 calibratedrecommendations <- calibrated_rerank
 
 
 #' Convenience alias matching the Python \code{calibrated_rec} export
 #' @export
+#' @noRd
 calibrated_rec <- calibrated_rerank
 
 
 #' Convenience alias matching the Python \code{calibratedrec} export
 #' @export
+#' @noRd
 calibratedrec <- calibrated_rerank
 
 

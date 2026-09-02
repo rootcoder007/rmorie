@@ -24,7 +24,7 @@ A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasona
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-aic(V, V)
-auto_order(y = V)
+set.seed(3)
+y <- as.numeric(stats::arima.sim(list(ar = 0.6), n = 60))
+auto_order(y, max_steps = 4)$order
 }

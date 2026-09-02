@@ -290,7 +290,7 @@ morie_ingest_ckan_resource_show <- function(portal,
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' try(morie_ingest_ckan_read_resource(
 #'   "https://data.ontario.ca",
 #'   "ea9dc29c-b4f1-4426-b1f2-974ce995aca1"))
@@ -390,7 +390,7 @@ morie_ingest_ckan_read_resource <- function(portal,
 #' @param timeout HTTP timeout in seconds.
 #' @return A named list of data.frames.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' try(morie_ingest_ckan_fetch_package_csvs(
 #'   "https://data.ontario.ca",
 #'   "324ff147-816c-4143-a414-d1e973dca140"))

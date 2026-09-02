@@ -70,8 +70,10 @@ morie_tqang <- function(theta, bits = 4) {
 
 #' Public alias resolved by fn/_lazy_map.json
 #' @export
+#' @noRd
 morie_quantize_angles <- morie_tqang
 
 #' Public alias resolved by fn/_lazy_map.json
 #' @export
+#' @noRd
 morie_turboquant_angle_quantization <- morie_tqang

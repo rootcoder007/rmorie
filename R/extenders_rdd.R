@@ -212,7 +212,8 @@ morie_rdd_power_calc <- function(data, cutoff = 0, ...) {
 #' if (requireNamespace("anominate", quietly = TRUE) &&
 #'   requireNamespace("pscl", quietly = TRUE)) {
 #'   data("sen111", package = "anominate") # the rollcall anominate ships
-#'   morie_anominate_ideal_points(sen111, dims = 1, nsamp = 200, burnin = 100)
+#'   # tiny chain: the example must run in seconds
+#'   morie_anominate_ideal_points(sen111, dims = 1, nsamp = 20, burnin = 5)
 #' }
 #' }
 morie_anominate_ideal_points <- function(rcObject, ...) {

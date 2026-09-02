@@ -241,8 +241,10 @@ morie_tmldgp <- function(y, D, X, penalty = 0.05, iters = 100) {
 
 #' Compact alias per ledger/NAMING.md
 #' @export
+#' @noRd
 morie_penalisedtmle <- morie_tmldgp
 
 #' Public alias resolved by fn/_lazy_map.json
 #' @export
+#' @noRd
 morie_tmle_doubly_robust_pen <- morie_tmldgp

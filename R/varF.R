@@ -18,6 +18,9 @@
 #' @references Sims, C.A. (1980). Macroeconomics and Reality.
 #'   Econometrica 48(1):1-48. doi:10.2307/1912017.
 #' @examples
-#' VarF(cbind(c(1, 2, 3, 4, 5), c(2, 1, 4, 3, 6)), 1)$loglik
+#' set.seed(2)
+#' Y <- matrix(rnorm(80), 40, 2)
+#' Y[-1, ] <- Y[-1, ] + 0.5 * Y[-40, ]   # a weak VAR(1) signal
+#' VarF(Y, 1)$loglik
 #' @export
 VarF <- function(Y, p = 1, intercept = TRUE) Varest(Y, p, intercept)

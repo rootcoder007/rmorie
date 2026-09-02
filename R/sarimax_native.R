@@ -11,7 +11,8 @@ MAX_P <- 5
 MAX_Q <- 5
 MAX_SEASONAL <- 2
 ROOT_TOL <- 1.001
-.SEARCHING <- FALSE
+.sarimax_state <- new.env(parent = emptyenv())
+.sarimax_state$searching <- FALSE
 
 #' .filter_column
 #'
@@ -218,7 +219,7 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
   xhat <- x0
   res <- NULL
   if (npar > 0L) {
-    niter <- if (.SEARCHING) 1L else 8L
+    niter <- if (isTRUE(.sarimax_state$searching)) 1L else 8L
     for (i in seq_len(niter)) {
       res <- .sarima_minimize_nm(objective, xhat)
       cand <- as.numeric(res$x)
@@ -411,7 +412,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
   }
   constant <- (d + D) < 2
   best <- NULL
-  .SEARCHING <<- TRUE
+  .sarimax_state$searching <- TRUE
   for (smod in starting_models(d, D, s)) {
     r <- score(smod[[1L]], smod[[2L]], constant)
     if (!is.null(r) && (is.null(best) || r$aic < best[[1L]]$aic)) {
@@ -436,7 +437,7 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
     }
     if (!improved) break
   }
-  .SEARCHING <<- FALSE
+  .sarimax_state$searching <- FALSE
   r <- best[[1L]]; order <- best[[2L]]; seasonal <- best[[3L]]; constant <- best[[4L]]
   final <- .try_fit(y, X, order, seasonal, s, constant, method)
   if (!is.null(final)) r <- final

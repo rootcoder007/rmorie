@@ -36,7 +36,7 @@ Bertrec <- function(seqs, K = 10, scores = NULL, rho = 0.2) {
     L <- length(row)
     step <- if (as.numeric(rho) > 0) as.integer(1 / as.numeric(rho)) else L
     if (step < 1L) step <- 1L
-    pos <- seq(step, L, by = step)
+    pos <- if (step > L) integer(0) else seq.int(step, L, by = step)
     for (j in seq_along(pos)) {
       target <- as.integer(row[pos[j]])
       if (is.null(scores)) {
