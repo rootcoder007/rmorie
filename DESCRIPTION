@@ -223,4 +223,4 @@ Additional_repositories:
   https://rootcoder007.r-universe.dev,
   https://stan-dev.r-universe.dev
 Remotes:
-    rootcoder007/rmorie-bricklayer@feat/native-specializations
+    rootcoder007/rmorie-bricklayer

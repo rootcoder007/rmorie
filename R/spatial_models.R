@@ -215,6 +215,29 @@ morie_local_dp_randomised_response <- function(truth, k, epsilon,
        k = k, n = n)
 }
 
-#' @rdname cokrg
+#' Co-kriging front door
+#'
+#' Two co-kriging routines live in the package and both have callers that
+#' spell the entry point \code{morie_cokriging()}:
+#' \code{\link{morie_cokrig}} (\code{coords, z1, z2, s0, cross_vario, model}:
+#' the ordinary co-kriging system with explicit variograms) and
+#' \code{\link{cokrg}} (\code{x, y, coords, target, ...}: the exponential
+#' model with fitted sills). The convention is picked from the first
+#' argument: a coordinate matrix routes to \code{morie_cokrig}, a numeric
+#' vector to \code{cokrg}. Call either routine directly to avoid the
+#' dispatch.
+#'
+#' @param ... Arguments for \code{morie_cokrig()} or \code{cokrg()}.
+#' @return Whatever the selected routine returns.
+#' @examples
+#' pts <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1))
+#' morie_cokriging(pts, c(1, 2, 3, 4), rep(9, 4), c(0.5, 0.5),
+#'                 cross_vario = function(h) 0 * h)$prediction
+#' morie_cokriging(rnorm(12), rnorm(12), matrix(runif(24), 12, 2),
+#'                 target = c(0.3, 0.7))$estimate
 #' @export
-morie_cokriging <- cokrg
+morie_cokriging <- function(...) {
+  a <- list(...)
+  first <- if (length(a)) a[[1L]] else NULL
+  if (is.matrix(first) || is.data.frame(first)) morie_cokrig(...) else cokrg(...)
+}

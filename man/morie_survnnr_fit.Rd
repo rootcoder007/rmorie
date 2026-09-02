@@ -44,3 +44,10 @@ Biometrics 30(1), 89-99, doi:10.2307/2529620, for the tie handling and the
 baseline cumulative hazard estimator used here.
 }
 \keyword{internal}
+\examples{
+set.seed(1); n <- 40
+X <- lapply(seq_len(n), function(i) rnorm(3)); tm <- rexp(n); ev <- rbinom(n, 1, .7)
+fit <- morie_survnnr_fit(X, tm, ev, hidden = c(4L), n_epochs = 20)
+fit$risk
+fit$epochs >= 2
+}
