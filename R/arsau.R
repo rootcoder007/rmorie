@@ -87,7 +87,7 @@ NULL
 #' @keywords internal
 #' @examples
 #' \donttest{
-#' .morie_resolve_arsau_dir()
+#' rmorie:::.morie_resolve_arsau_dir()
 #' }
 .morie_resolve_arsau_dir <- function(data_dir = NULL, require_exists = TRUE) {
   candidates <- list()

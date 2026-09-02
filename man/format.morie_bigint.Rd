@@ -20,5 +20,5 @@ A character value.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-format.morie_bigint(V)
+rmorie:::format.morie_bigint(V)
 }

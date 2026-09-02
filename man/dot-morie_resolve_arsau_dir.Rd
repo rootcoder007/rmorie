@@ -21,7 +21,7 @@ Stops with an informative error if nothing exists and
 }
 \examples{
 \donttest{
-.morie_resolve_arsau_dir()
+rmorie:::.morie_resolve_arsau_dir()
 }
 }
 \keyword{internal}

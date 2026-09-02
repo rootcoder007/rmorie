@@ -25,7 +25,7 @@ The value of \code{eps}, as built in the body.
 \examples{
 logp <- function(t) -0.5 * sum(t^2)
 grad <- function(t) -t
-e <- .ghc_rng(1)
+e <- rmorie:::.ghc_rng(1)
 find_reasonable_epsilon(c(1, -1), logp, grad,
-                        rnd = function() .ghc_norm(e, 1L))
+                        rnd = function() rmorie:::.ghc_norm(e, 1L))
 }

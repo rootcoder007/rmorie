@@ -21,6 +21,6 @@ Root-mean-square normalisation (Zhang & Sennrich 2019)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-rms_norm(V)
+rmorie:::rms_norm(V)
 }
 \keyword{internal}

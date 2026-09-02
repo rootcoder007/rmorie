@@ -22,5 +22,5 @@ A list with \code{n}, \code{n_raw}, \code{m}, \code{n_y}, \code{z_alpha}, \code{
 }
 \keyword{internal}
 \examples{
-Mwun(p = 0.05)
+rmorie:::Mwun(p = 0.05)
 }

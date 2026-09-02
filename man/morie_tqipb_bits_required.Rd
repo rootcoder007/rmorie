@@ -27,5 +27,5 @@ The bit-width, or NULL if none within max_bits.
 }
 \keyword{internal}
 \examples{
-morie_tqipb_bits_required(eps = 0.5, delta = 0.5, d = 5L)
+rmorie:::morie_tqipb_bits_required(eps = 0.5, delta = 0.5, d = 5L)
 }

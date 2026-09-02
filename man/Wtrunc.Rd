@@ -20,5 +20,5 @@ A list with \code{weights}, \code{cap}, \code{n_truncated}, \code{n}, \code{mean
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wtrunc(V)
+rmorie:::Wtrunc(V)
 }

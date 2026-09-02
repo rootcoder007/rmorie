@@ -21,5 +21,5 @@ A list with \code{power}, \code{z_beta}, \code{shift}, \code{sd0}, \code{n}, \co
 }
 \keyword{internal}
 \examples{
-Wsrpow(n = 5L, p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Wsrpow(n = 5L, p1 = c(1, 2, 3, 4, 5, 6, 7, 8), p2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

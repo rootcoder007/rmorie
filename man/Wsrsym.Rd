@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{z}, \code{p_value}, \code{mean}, \code{var},
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wsrsym(V)
+rmorie:::Wsrsym(V)
 }

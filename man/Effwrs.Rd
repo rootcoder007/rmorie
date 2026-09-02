@@ -20,5 +20,5 @@ A list with \code{efficacy}, \code{integral}, \code{m}, \code{n}.
 }
 \keyword{internal}
 \examples{
-Effwrs(m = 5L, n = 5L, integral = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Effwrs(m = 5L, n = 5L, integral = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

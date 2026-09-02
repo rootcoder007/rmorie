@@ -21,5 +21,5 @@ A list with \code{score}, \code{mean}, \code{bonus}, \code{arm}, \code{n_arms}, 
 }
 \keyword{internal}
 \examples{
-Linucb(x = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8), Ainv = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Linucb(x = 5L, theta = c(1, 2, 3, 4, 5, 6, 7, 8), Ainv = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

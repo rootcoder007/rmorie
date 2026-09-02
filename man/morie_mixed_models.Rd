@@ -69,5 +69,5 @@ X <- cbind(1, rnorm(n))
 Z <- diag(q)[sample(1:q, n, replace = TRUE), ]
 u <- rnorm(q, 0, 1)
 y <- as.numeric(X \%*\% c(1, 0.5) + Z \%*\% u + rnorm(n, 0, 0.3))
-morie_mme(X, Z, y, Sigma_inv = diag(q))
+rmorie:::morie_mme(X, Z, y, Sigma_inv = diag(q))
 }

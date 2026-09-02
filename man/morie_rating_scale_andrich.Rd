@@ -21,5 +21,5 @@ A list with \code{p}, \code{eta}, \code{expected}, \code{info}, \code{theta}, \c
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_rating_scale_andrich(V)
+rmorie:::morie_rating_scale_andrich(V)
 }

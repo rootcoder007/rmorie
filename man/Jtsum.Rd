@@ -19,5 +19,5 @@ A list with \code{u}, \code{statistic}, \code{npairs}, \code{k}, \code{n}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Jtsum(V)
+rmorie:::Jtsum(V)
 }

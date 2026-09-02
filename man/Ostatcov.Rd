@@ -20,5 +20,5 @@ A list with \code{cov}, \code{corr}, \code{var_r}, \code{var_s}, \code{r}, \code
 }
 \keyword{internal}
 \examples{
-Ostatcov(r = 5L, s = 5L, n = 5L)
+rmorie:::Ostatcov(r = 5L, s = 5L, n = 5L)
 }

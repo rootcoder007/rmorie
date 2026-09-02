@@ -19,5 +19,5 @@ A scalar.
 }
 \keyword{internal}
 \examples{
-laplace_noise(scale = 0.5, e = .ghc_rng(1))
+laplace_noise(scale = 0.5, e = rmorie:::.ghc_rng(1))
 }

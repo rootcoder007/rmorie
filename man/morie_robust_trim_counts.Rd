@@ -19,5 +19,5 @@ The value of \code{floor}.
 }
 \keyword{internal}
 \examples{
-morie_robust_trim_counts(n = 20, tr = 0.2)
+rmorie:::morie_robust_trim_counts(n = 20, tr = 0.2)
 }

@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{q_raw}, \code{s}, \code{df}, \code{p_value},
 \keyword{internal}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-Friedq(D)
+rmorie:::Friedq(D)
 }

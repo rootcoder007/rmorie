@@ -55,11 +55,11 @@ gr3 <- function(x) {
     vapply(1:3, function(i) -.w3_csum(vapply(1:3, function(j) Q3[i, 
         j] * dv[j], numeric(1))), numeric(1))
 }
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
 morie_baysmplr_hmc(lp3, gr3, c(0, 0, 0), 60L, e, 0.25, 8L)
 }

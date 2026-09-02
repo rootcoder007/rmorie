@@ -53,7 +53,7 @@
 #' @keywords internal
 #' @return A character scalar: the resolved DMT-data root directory.
 #' @examples
-#' .morie_entheo_dmt_root()
+#' rmorie:::.morie_entheo_dmt_root()
 .morie_entheo_dmt_root <- function() {
   cand <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
   if (!nzchar(cand)) {
@@ -66,7 +66,7 @@
 #' @keywords internal
 #' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
 #' @examples
-#' .morie_entheo_require_root()
+#' rmorie:::.morie_entheo_require_root()
 .morie_entheo_require_root <- function() {
   root <- .morie_entheo_dmt_root()
   if (is.null(root)) {
@@ -252,7 +252,7 @@ morie_entheo_dataset_overview <- function() {
 #' @return A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' .morie_entheo_trapz(V, V)
+#' rmorie:::.morie_entheo_trapz(V, V)
 .morie_entheo_trapz <- function(y, x) {
   if (length(y) < 2L) {
     return(NA_real_)
@@ -444,7 +444,7 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
 #' @return A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' .morie_entheo_lz76(V)
+#' rmorie:::.morie_entheo_lz76(V)
 .morie_entheo_lz76 <- function(b) {
   n <- length(b)
   if (n == 0L) {

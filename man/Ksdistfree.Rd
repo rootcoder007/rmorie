@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{dplus}, \code{dminus}, \code{z}, \code{n}.
 \keyword{internal}
 \examples{
 set.seed(2)
-Ksdistfree(rnorm(25), cdf = pnorm)
+rmorie:::Ksdistfree(rnorm(25), cdf = pnorm)
 }

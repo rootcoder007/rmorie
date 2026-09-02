@@ -32,7 +32,7 @@ the Euclidean distance to the observed summaries is <= eps
 2018, Sec 1.5).
 }
 \examples{
-sim <- function(theta, e) theta[1] + 0.1 * .ghc_norm(e, 1L)
+sim <- function(theta, e) theta[1] + 0.1 * rmorie:::.ghc_norm(e, 1L)
 r <- Abcrej(sim, obs = 1.5, eps = 0.3, prior = list(c(0, 3)),
             n_draws = 400)
 str(r, max.level = 1)

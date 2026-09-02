@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{
 }
 \keyword{internal}
 \examples{
-Multgof(observed = c(22, 18, 20, 40), probs = c(0.2, 0.2, 0.2, 0.4))
+rmorie:::Multgof(observed = c(22, 18, 20, 40), probs = c(0.2, 0.2, 0.2, 0.4))
 }

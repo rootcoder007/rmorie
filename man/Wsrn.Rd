@@ -21,5 +21,5 @@ A list with \code{n}, \code{n_raw}, \code{z_alpha}, \code{z_beta}, \code{p2}.
 }
 \keyword{internal}
 \examples{
-Wsrn(p2 = 0.7, alpha = 0.05, beta = 0.1)
+rmorie:::Wsrn(p2 = 0.7, alpha = 0.05, beta = 0.1)
 }

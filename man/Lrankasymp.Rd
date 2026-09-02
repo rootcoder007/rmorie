@@ -22,6 +22,6 @@ A list with \code{mean}, \code{var}, \code{sd}, \code{integral}, \code{lam}, \co
 }
 \keyword{internal}
 \examples{
-Lrankasymp(j = function(u) qnorm(u), jprime = function(u) 1 / dnorm(qnorm(u)),
+rmorie:::Lrankasymp(j = function(u) qnorm(u), jprime = function(u) 1 / dnorm(qnorm(u)),
            lam = 0.5, n = 20)
 }

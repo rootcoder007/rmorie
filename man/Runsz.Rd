@@ -21,5 +21,5 @@ A list with \code{z}, \code{z_exact}, \code{p_value}, \code{mean}, \code{var}, \
 }
 \keyword{internal}
 \examples{
-Runsz(r = 9, n1 = 10, n2 = 10)
+rmorie:::Runsz(r = 9, n1 = 10, n2 = 10)
 }

@@ -19,5 +19,5 @@ A list with \code{efficacy}, \code{per_obs}, \code{n}, \code{fmed}.
 }
 \keyword{internal}
 \examples{
-Effsign(n = 5L, fmed = 5L)
+rmorie:::Effsign(n = 5L, fmed = 5L)
 }

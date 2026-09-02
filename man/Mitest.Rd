@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{df1}, \code{df2}, \code{r}, \code{estimate},
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Mitest(V, V)
+rmorie:::Mitest(V, V)
 }

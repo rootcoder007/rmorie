@@ -20,6 +20,6 @@ The value of \code{ifelse}.
 }
 \keyword{internal}
 \examples{
-rng <- .ghc_rng(1)
+rng <- rmorie:::.ghc_rng(1)
 corrupt(c(1, 0, 1, 1, 0), q = 0.4, rng)
 }

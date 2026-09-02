@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{h_raw}, \code{correction}, \code{df}, \code{
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kwh(V)
+rmorie:::Kwh(V)
 }

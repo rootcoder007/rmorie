@@ -21,5 +21,5 @@ A list with \code{Psi}, \code{m}, \code{L2}, \code{PsiTPsi}.
 }
 \keyword{internal}
 \examples{
-Basmat(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
+rmorie:::Basmat(t = c(1, 2, 3, 4, 5, 6, 7, 8), n_basis = 5L)
 }

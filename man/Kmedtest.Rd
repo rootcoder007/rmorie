@@ -19,5 +19,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{u}, \code{t}, \co
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kmedtest(V)
+rmorie:::Kmedtest(V)
 }

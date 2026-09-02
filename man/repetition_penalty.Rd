@@ -21,6 +21,6 @@ Repetition penalty (Keskar 2019)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-repetition_penalty(V, V)
+rmorie:::repetition_penalty(V, V)
 }
 \keyword{internal}

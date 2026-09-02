@@ -19,5 +19,5 @@ A list with \code{n}, \code{n_asymp}, \code{k_alpha}, \code{coverage}, \code{c},
 }
 \keyword{internal}
 \examples{
-Ksn(c = 0.2, alpha = 0.05)
+rmorie:::Ksn(c = 0.2, alpha = 0.05)
 }

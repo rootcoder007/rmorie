@@ -26,5 +26,5 @@ n <- 30
 X <- cbind(1, rnorm(n))
 snp <- rbinom(n, 2, 0.3)
 y <- X \%*\% c(1, 0.5) + 0.4 * snp + rnorm(n, 0, 0.5)
-Gwasmlm(as.numeric(y), X, snp, diag(n))
+rmorie:::Gwasmlm(as.numeric(y), X, snp, diag(n))
 }

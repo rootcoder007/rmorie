@@ -21,5 +21,5 @@ A list with \code{at}, \code{edf}, \code{lower}, \code{upper}, \code{width}, \co
 \keyword{internal}
 \examples{
 set.seed(2)
-Ksband(rnorm(25), dcrit = 0.264)
+rmorie:::Ksband(rnorm(25), dcrit = 0.264)
 }

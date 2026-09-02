@@ -25,7 +25,7 @@ The value of \code{out}, as built in the body.
 \examples{
 n <- 12
 A <- matrix(rnorm(n * 6), nrow = n)
-G <- morie_grm(A) + diag(0.3, n)
-morie_chol_lower(G)
-morie_rkhs_cov(Z_L = G, G = G)
+G <- rmorie:::morie_grm(A) + diag(0.3, n)
+rmorie:::morie_chol_lower(G)
+rmorie:::morie_rkhs_cov(Z_L = G, G = G)
 }

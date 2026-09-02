@@ -23,7 +23,7 @@
 #'   equation (48)
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' Alfrcyl(V)
+#' rmorie:::Alfrcyl(V)
 Alfrcyl <- function(losses, nprime = NULL) {
   nc <- length(losses)
   if (nc == 0L) stop("losses must not be empty")

@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @examples
 #' set.seed(1)
-#' r <- .sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
+#' r <- rmorie:::.sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
 .sgt_kmeans_det <- function(rows, k, iters = 100L) {
   rows <- as.matrix(rows)
   n <- nrow(rows); p <- ncol(rows)

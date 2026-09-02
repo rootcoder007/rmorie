@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{n}, \code{nzero}, \code{mean}, \code{var}, \
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Signk(V)
+rmorie:::Signk(V)
 }

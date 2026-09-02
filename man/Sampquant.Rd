@@ -19,5 +19,5 @@ A list with \code{estimate}, \code{r}, \code{n}, \code{p}, \code{u_mean}, \code{
 }
 \keyword{internal}
 \examples{
-Sampquant(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
+rmorie:::Sampquant(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
 }

@@ -20,5 +20,5 @@ A list with \code{loglik}, \code{p}, \code{n_cases}, \code{n}.
 \keyword{internal}
 \examples{
 set.seed(4)
-Cclogl(eta = rnorm(8), y = rbinom(8, 1, 0.5))
+rmorie:::Cclogl(eta = rnorm(8), y = rbinom(8, 1, 0.5))
 }

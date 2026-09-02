@@ -20,5 +20,5 @@ A list with \code{t}, \code{t_reversed}, \code{t_conjugate}, \code{sum_a}, \code
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Lrankprop(V, V)
+rmorie:::Lrankprop(V, V)
 }

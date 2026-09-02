@@ -24,5 +24,5 @@ set.seed(1)
 e <- runif(20, 5, 15)
 theta <- matrix(rgamma(80, 2, 2), 4, 20)
 y <- rpois(20, e * colMeans(theta))
-Postres(y, e, theta)
+rmorie:::Postres(y, e, theta)
 }

@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{table_k}, \code{k
 }
 \keyword{internal}
 \examples{
-Kwchi(h = 0.5, k = 5L)
+rmorie:::Kwchi(h = 0.5, k = 5L)
 }

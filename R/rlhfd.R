@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' rlhf_reward(V)
+#' rmorie:::rlhf_reward(V)
 rlhf_reward <- function(x, w = NULL, b = 0) {
   xm <- as.matrix(x)
   d <- ncol(xm)

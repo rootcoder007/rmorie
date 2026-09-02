@@ -19,5 +19,5 @@ A list with \code{p_value}, \code{p_greater}, \code{p_less}, \code{prob}, \code{
 }
 \keyword{internal}
 \examples{
-Fisherex(rbind(c(8, 2), c(1, 5)))
+rmorie:::Fisherex(rbind(c(8, 2), c(1, 5)))
 }

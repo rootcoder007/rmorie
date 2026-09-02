@@ -22,5 +22,5 @@ A list with \code{statistic}, \code{astar}, \code{crit}, \code{reject}, \code{z}
 \keyword{internal}
 \examples{
 set.seed(2)
-Adtest(rnorm(30), cdf = pnorm)
+rmorie:::Adtest(rnorm(30), cdf = pnorm)
 }

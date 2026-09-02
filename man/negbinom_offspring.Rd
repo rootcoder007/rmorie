@@ -20,6 +20,6 @@ The value of \code{.poisson_draw}.
 }
 \keyword{internal}
 \examples{
-e <- .ghc_rng(1)
+e <- rmorie:::.ghc_rng(1)
 replicate(5, negbinom_offspring(R0 = 2.5, dispersion = 0.16, e))
 }

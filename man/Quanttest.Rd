@@ -22,5 +22,5 @@ A list with \code{statistic}, \code{p_value}, \code{n}, \code{p}, \code{mean}, \
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Quanttest(V, V)
+rmorie:::Quanttest(V, V)
 }

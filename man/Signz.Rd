@@ -21,5 +21,5 @@ A list with \code{z}, \code{p_value}, \code{statistic}, \code{n}, \code{mean}, \
 }
 \keyword{internal}
 \examples{
-Signz(k = 5L, n = 5L)
+rmorie:::Signz(k = 5L, n = 5L)
 }

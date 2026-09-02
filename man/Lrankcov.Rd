@@ -21,5 +21,5 @@ A list with \code{cov}, \code{corr}, \code{var_a}, \code{var_b}, \code{N}, \code
 }
 \keyword{internal}
 \examples{
-Lrankcov(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L, n = 5L)
+rmorie:::Lrankcov(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), m = 3L, n = 5L)
 }

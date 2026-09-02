@@ -19,5 +19,5 @@ A list with \code{pdf}, \code{coef}, \code{prod}, \code{ordered}, \code{n}.
 }
 \keyword{internal}
 \examples{
-Ostatjall(x = c(-1.2, -0.3, 0.4, 1.1), pdf = dnorm)
+rmorie:::Ostatjall(x = c(-1.2, -0.3, 0.4, 1.1), pdf = dnorm)
 }

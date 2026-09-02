@@ -21,5 +21,5 @@ A list with \code{n_conditions}, \code{max_deviation}, \code{independent}, \code
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 S <- c("a", "b", "c")
-Indevk(S, V)
+rmorie:::Indevk(S, V)
 }

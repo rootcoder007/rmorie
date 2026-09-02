@@ -19,5 +19,5 @@ A list with \code{cdf}, \code{sf}, \code{k}, \code{t}, \code{n}, \code{d}.
 }
 \keyword{internal}
 \examples{
-Ksexact(d = 5L, n = 5L)
+rmorie:::Ksexact(d = 5L, n = 5L)
 }

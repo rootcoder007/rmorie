@@ -22,5 +22,5 @@ A list with components \code{by}, \code{size}, \code{tensor}, \code{boolean}, \c
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_spqkv_sparse_attention(V)
+rmorie:::morie_spqkv_sparse_attention(V)
 }

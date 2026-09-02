@@ -19,5 +19,5 @@ A list with \code{mean}, \code{var}, \code{sd}, \code{N}, \code{m}, \code{n}.
 }
 \keyword{internal}
 \examples{
-Moodmom(m = 5L, n = 5L)
+rmorie:::Moodmom(m = 5L, n = 5L)
 }

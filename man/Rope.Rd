@@ -20,6 +20,6 @@ A list with \code{q}, \code{m}, \code{norm}, \code{n}.
 }
 \keyword{internal}
 \examples{
-Rope(q = c(1, 0, 0.5, -0.5), m = 3,
+rmorie:::Rope(q = c(1, 0, 0.5, -0.5), m = 3,
      theta = 10000^(-c(0, 1) / 2))
 }

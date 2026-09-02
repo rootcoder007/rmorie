@@ -30,7 +30,7 @@ rotations, since zero input gives the identity.
 }
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Alfbkb(M, M)
+rmorie:::Alfbkb(M, M)
 }
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 23

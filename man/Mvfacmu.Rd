@@ -20,5 +20,5 @@ A list with \code{rho}, \code{mu}, \code{n}, \code{n_disease}.
 }
 \keyword{internal}
 \examples{
-Mvfacmu(e = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Mvfacmu(e = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

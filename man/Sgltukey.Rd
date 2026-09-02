@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value},
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Sgltukey(V, V)
+rmorie:::Sgltukey(V, V)
 }

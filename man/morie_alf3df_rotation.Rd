@@ -33,7 +33,7 @@ A three by three rotation matrix.
 }
 \keyword{internal}
 \examples{
-e <- .ghc_rng(5)
-e <- .ghc_rng(5)
+e <- rmorie:::.ghc_rng(5)
+e <- rmorie:::.ghc_rng(5)
 morie_alf3df_rotation(e)
 }

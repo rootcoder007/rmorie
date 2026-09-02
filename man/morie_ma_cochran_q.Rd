@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{pvalue}, \code{df}, \code{k}, \code{theta_fe
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_ma_cochran_q(V, V)
+rmorie:::morie_ma_cochran_q(V, V)
 }

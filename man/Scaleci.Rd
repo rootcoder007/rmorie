@@ -22,5 +22,5 @@ A list with \code{lower}, \code{upper}, \code{k}, \code{kprime}, \code{k_raw}, \
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Scaleci(V, V)
+rmorie:::Scaleci(V, V)
 }

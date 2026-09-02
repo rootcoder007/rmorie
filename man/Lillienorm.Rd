@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{dcrit}, \code{reject}, \code{mean}, \code{sd
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Lillienorm(V)
+rmorie:::Lillienorm(V)
 }

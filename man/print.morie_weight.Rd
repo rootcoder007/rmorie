@@ -20,5 +20,5 @@ The value of \code{invisible}.
 \keyword{internal}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-print.morie_weight(D)
+rmorie:::print.morie_weight(D)
 }

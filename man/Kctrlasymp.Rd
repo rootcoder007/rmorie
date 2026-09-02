@@ -20,6 +20,6 @@ A list with \code{sigma}, \code{q}, \code{p}, \code{k}.
 }
 \keyword{internal}
 \examples{
-Kctrlasymp(lam = c(0.4, 0.3, 0.3), dens = c(0.39, 0.35, 0.30),
+rmorie:::Kctrlasymp(lam = c(0.4, 0.3, 0.3), dens = c(0.39, 0.35, 0.30),
            pval = c(0.5, 0.55, 0.6))
 }

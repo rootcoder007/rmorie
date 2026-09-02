@@ -23,5 +23,5 @@ Named list with \code{forecast}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-intermittent_forecast(V)
+rmorie:::intermittent_forecast(V)
 }

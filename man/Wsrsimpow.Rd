@@ -20,5 +20,5 @@ A list with \code{power}, \code{rejections}, \code{nsim}, \code{tmean}, \code{tc
 }
 \keyword{internal}
 \examples{
-Wsrsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Wsrsimpow(samples = c(1, 2, 3, 4, 5, 6, 7, 8), m0 = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

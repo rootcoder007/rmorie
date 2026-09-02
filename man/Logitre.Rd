@@ -25,5 +25,5 @@ A list with \code{eta}, \code{p}, \code{n}.
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_unclr_dft_amp(V)
-Logitre(gamma0 = V, gamma1 = V, d = V, gamma2 = V, x = V, R = V)
+rmorie:::Logitre(gamma0 = V, gamma1 = V, d = V, gamma2 = V, x = V, R = V)
 }

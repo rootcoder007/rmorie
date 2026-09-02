@@ -24,6 +24,6 @@ have an exact solution.
 }
 \examples{
 set.seed(1)
-r <- .rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
+r <- rmorie:::.rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
 }
 \keyword{internal}

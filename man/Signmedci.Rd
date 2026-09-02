@@ -20,5 +20,5 @@ A list with \code{lower}, \code{upper}, \code{r}, \code{s}, \code{coverage}, \co
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Signmedci(V)
+rmorie:::Signmedci(V)
 }

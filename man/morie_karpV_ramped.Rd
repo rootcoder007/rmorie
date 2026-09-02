@@ -23,6 +23,6 @@ a list of trees with a spread of depths and shapes.
 }
 \keyword{internal}
 \examples{
-morie_karpV_ramped(.karpv_rng(3), 60L, .KARPV_FUNCTIONS, "x", 
+morie_karpV_ramped(.karpv_rng(3), 60L, rmorie:::.KARPV_FUNCTIONS, "x", 
     c(-5, 5), 6L)
 }

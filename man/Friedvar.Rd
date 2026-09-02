@@ -19,5 +19,5 @@ A list with \code{mean_s}, \code{var_s}, \code{mean_q}, \code{var_q}, \code{var_
 }
 \keyword{internal}
 \examples{
-Friedvar(k = 5L, n = 5L)
+rmorie:::Friedvar(k = 5L, n = 5L)
 }

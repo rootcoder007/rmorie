@@ -21,6 +21,6 @@ Top-k filtered softmax (Fan 2018)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-top_k_decoding(V)
+rmorie:::top_k_decoding(V)
 }
 \keyword{internal}

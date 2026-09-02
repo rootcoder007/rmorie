@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{t}, \code{r}, \c
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ctrltree(V)
+rmorie:::Ctrltree(V)
 }

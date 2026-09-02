@@ -22,7 +22,7 @@ The value of \code{morie_tlboot}.
 \keyword{internal}
 \examples{
 set.seed(2)
-sampler <- function(e) rnorm(30, .ghc_norm(e, 1L))
+sampler <- function(e) rnorm(30, rmorie:::.ghc_norm(e, 1L))
 r <- targeted_bootstrap(sampler, estimator = function(s) mean(s),
                         B = 100L)
 str(r, max.level = 1)
