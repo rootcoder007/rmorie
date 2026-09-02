@@ -30,3 +30,13 @@ A step of the bayrjmcmc_native implementation. No other function in the package 
 A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s}, \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta}, \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height}, \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+u <- .unif_stream(1L)
+unique(c(u(), u(), u(), u()))
+set.seed(2); y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
+r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+r$k_mean
+r$k_posterior[1]
+r2 <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
+r$k_posterior
+}

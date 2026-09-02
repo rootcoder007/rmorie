@@ -6,8 +6,12 @@
   set.seed(s); x <- rnorm(n); data.frame(x = x, y = b0 + b1 * x + rnorm(n))
 }
 .bfit <- function(iter = 800L, warmup = 400L, chains = 3L, ...) {
-  morie_bayes_lm(y ~ x, .bayes_data(), chains = chains, iter = iter,
-                 warmup = warmup, step = 0.15, quiet = TRUE, ...)
+  fit <- morie_bayes_lm(y ~ x, .bayes_data(), chains = chains, iter = iter,
+                        warmup = warmup, step = 0.15, quiet = TRUE, ...)
+  # a sampler error is stored on the object (BS2.15); surface it here so a
+  # failing expectation downstream names the cause instead of "length 0"
+  if (!is.null(fit$error)) stop("morie_bayes_lm sampler error: ", fit$error)
+  fit
 }
 
 test_that("BS1.2a README documents prior specification with example", {
