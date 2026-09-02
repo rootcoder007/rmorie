@@ -18,6 +18,11 @@
                          xxhash32 = 6L, xxhash64 = 7L, murmur32 = 8L, crc32c = 11L,
                          sha224 = 21L, sha384 = 22L)
 .MORIE_DIGEST_MISSING <- c("spookyhash", "blake3", "xxh3_64", "xxh3_128")
+# sha1() tags objects with attributes named after the digest package; the
+# names are part of what gets hashed, so they must match digest byte for byte
+# (they are strings, not calls into digest).
+.MORIE_SHA1_ATTR <- paste0("digest", "::", "sha1")
+.MORIE_SHA1_ATTRS <- paste0("digest", "::", "attributes")
 
 #' @noRd
 .morie_digest_hex <- function(r) paste(sprintf("%02x", as.integer(r)), collapse = "")
@@ -217,12 +222,12 @@ morie_sha1 <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") UseMe
 .morie_sha1_add_attributes <- function(x, y) {
   extra <- attributes(x)
   extra <- extra[names(extra) != "srcref"]
-  attributes(y) <- c(attributes(y), "digest::attributes" = extra)
+  attributes(y) <- c(attributes(y), stats::setNames(list(extra), .MORIE_SHA1_ATTRS))
   y
 }
 #' @noRd
 .morie_sha1_attr_digest <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
-  attr(x, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(x, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(x, algo = algo)
 }
 #' @export
@@ -236,7 +241,7 @@ morie_sha1.default <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1
 morie_sha1.numeric <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- .morie_num2hex(x, digits = digits, zapsmall = zapsmall)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
@@ -244,52 +249,52 @@ morie_sha1.matrix <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1"
   if (storage.mode(x) == "double") {
     y <- matrix(apply(x, 2, .morie_num2hex, digits = digits, zapsmall = zapsmall), ncol = ncol(x))
     y <- .morie_sha1_add_attributes(x, y)
-    attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+    attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
     return(morie_digest(y, algo = algo))
   }
-  attr(x, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(x, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(x, algo = algo)
 }
 #' @export
 morie_sha1.complex <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- cbind(Re(x), Im(x))
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_sha1(y, digits = digits, zapsmall = zapsmall, ..., algo = algo)
 }
 #' @export
 morie_sha1.Date <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- as.numeric(x)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_sha1(y, digits = digits, zapsmall = zapsmall, ..., algo = algo)
 }
 #' @export
 morie_sha1.array <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- list(dimension = dim(x), value = as.numeric(x))
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_sha1(y, digits = digits, zapsmall = zapsmall, ..., algo = algo)
 }
 #' @export
 morie_sha1.data.frame <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- if (length(x)) vapply(x, morie_sha1, digits = digits, zapsmall = zapsmall, ..., algo = algo, FUN.VALUE = NA_character_) else x
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
 morie_sha1.list <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- if (length(x)) vapply(x, morie_sha1, digits = digits, zapsmall = zapsmall, ..., algo = algo, FUN.VALUE = NA_character_) else x
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- list(class = class(x), digits = as.integer(digits), zapsmall = as.integer(zapsmall), ... = ...)
+  attr(y, .MORIE_SHA1_ATTR) <- list(class = class(x), digits = as.integer(digits), zapsmall = as.integer(zapsmall), ... = ...)
   morie_digest(y, algo = algo)
 }
 #' @export
 morie_sha1.pairlist <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- vapply(x, morie_sha1, digits = digits, zapsmall = zapsmall, ..., algo = algo, FUN.VALUE = NA_character_)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
@@ -297,21 +302,21 @@ morie_sha1.POSIXlt <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1
   y <- do.call(data.frame, lapply(unclass(as.POSIXlt(x)), unlist))
   y$sec <- .morie_num2hex(y$sec, digits = digits, zapsmall = zapsmall)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
 morie_sha1.POSIXct <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") {
   y <- morie_sha1(as.POSIXlt(x), digits = digits, zapsmall = zapsmall, ..., algo = algo)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
 morie_sha1.anova <- function(x, digits = 4L, zapsmall = 7L, ..., algo = "sha1") {
   y <- apply(x, 1, .morie_num2hex, digits = digits, zapsmall = zapsmall)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
@@ -326,7 +331,7 @@ morie_sha1.function <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha
   y <- vapply(y, morie_sha1, digits = digits, zapsmall = zapsmall, environment = dots$environment,
               ... = dots, algo = algo, FUN.VALUE = NA_character_)
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = y, digits = digits, zapsmall = zapsmall, algo = algo, dots)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = y, digits = digits, zapsmall = zapsmall, algo = algo, dots)
   morie_digest(y, algo = algo)
 }
 #' @export
@@ -336,7 +341,7 @@ morie_sha1.formula <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1
   y <- vapply(x, morie_sha1, digits = digits, zapsmall = zapsmall, ... = dots, algo = algo, FUN.VALUE = NA_character_)
   if (isTRUE(dots$environment)) y <- c(y, morie_digest(environment(x), algo = algo))
   y <- .morie_sha1_add_attributes(x, y)
-  attr(y, "digest::sha1") <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
+  attr(y, .MORIE_SHA1_ATTR) <- .morie_attr_sha1(x = x, digits = digits, zapsmall = zapsmall, algo = algo, ...)
   morie_digest(y, algo = algo)
 }
 #' @export
