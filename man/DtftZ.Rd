@@ -5,7 +5,7 @@
 \alias{DtftZ}
 \title{Eq (3.66): the Fourier transform is the z-transform on the unit}
 \usage{
-DtftZ(x, omega, fs = NULL)
+DtftZ(x, omega, fs = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

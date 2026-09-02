@@ -5,7 +5,7 @@
 \alias{e_step}
 \title{Public helpers}
 \usage{
-e_step(n_dw, Pz, Pd_z, Pw_z)
+e_step(n_dw, Pz, Pd_z, Pw_z) 
 }
 \arguments{
 \item{n_dw}{Passed to \code{.plsa_e_step}.}

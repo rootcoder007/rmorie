@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Principal component compression of a marker matrix.
+#' Principal component compression of a marker matrix
 #'
 #' Formula: Q = X'X/(n-1) on scaled columns; W the eigenvectors of Q; PC = X W; keep the first k columns
 #'

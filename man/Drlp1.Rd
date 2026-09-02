@@ -16,6 +16,7 @@ Drlp1(y, D, unit, time, horizon = 3L, X = NULL)
 \item{horizon}{Largest horizon reported; non-negative.}
 
 \item{X}{Optional baseline covariates, one row per unit-period.}
+
 }
 \value{
 List with \code{estimate}, \code{horizons}, \code{beta},

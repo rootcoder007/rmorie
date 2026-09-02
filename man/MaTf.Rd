@@ -5,7 +5,7 @@
 \alias{MaTf}
 \title{Eq (3.99): a polynomial in z^-1 with no poles away from the origin,}
 \usage{
-MaTf(b_k, z, N = NULL)
+MaTf(b_k, z, N = NULL) 
 }
 \arguments{
 \item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}

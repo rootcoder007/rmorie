@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitnrm.R
 \name{Compnorm}
 \alias{Compnorm}
-\title{Aitchison norm of a composition.}
+\title{Aitchison norm of a composition}
 \usage{
 Compnorm(x)
 }
@@ -13,7 +13,7 @@ Compnorm(x)
 List with \code{norm}, \code{norm2}, \code{D}.
 }
 \description{
-Formula: ||x||\emph{a = sqrt( (1/D) sum}{i<j} log(x_i/x_j)^2 )
+Formula: ||x||\emph{a = sqrt( (1/D) sum}\{i<j\} log(x_i/x_j)^2 )
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

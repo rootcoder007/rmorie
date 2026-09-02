@@ -5,10 +5,16 @@
 \alias{morie_gaussian_variogram_model}
 \title{morie_gaussian_variogram_model}
 \usage{
-morie_gaussian_variogram_model(h, c0 = 0, c = 1, a = 1)
+morie_gaussian_variogram_model(h, c0 = 0, c = 1, a = 1) 
 }
 \description{
 morie_gaussian_variogram_model
+}
+\arguments{
+\item{h}{Argument \code{h}; see Usage.}
+\item{c0}{Argument \code{c0}; see Usage.}
+\item{c}{Argument \code{c}; see Usage.}
+\item{a}{Argument \code{a}; see Usage.}
 }
 \value{
 A list with \code{gamma}, \code{covariance}, \code{h}, \code{c0}, \code{c}, \code{a}, \code{sill}, \code{practical_range}, \code{n}, \code{method}.

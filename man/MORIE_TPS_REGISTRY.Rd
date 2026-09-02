@@ -2,10 +2,8 @@
 % Please edit documentation in R/tps_datasets.R
 \name{MORIE_TPS_REGISTRY}
 \alias{MORIE_TPS_REGISTRY}
-\title{Registry of TPS open-data categories.}
-\usage{
-MORIE_TPS_REGISTRY
-}
+\title{Registry of TPS open-data categories}
+
 \description{
 A named list of one-row metadata records keyed by canonical
 category name. Each entry holds \code{description}, \code{primary_date}

@@ -10,6 +10,7 @@ morie_rob_theil_sen(x, y, alpha = 0.05)
 \item{x, y}{paired observations.}
 
 \item{alpha}{miss probability for Sen's interval.}
+
 }
 \value{
 list: slope, intercept, ci, n_pairs, n_tied_x, breakdown,

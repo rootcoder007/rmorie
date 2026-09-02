@@ -5,7 +5,8 @@
 \alias{morie_scumap_smooth_knn_dist}
 \title{morie_scumap_smooth_knn_dist}
 \usage{
-morie_scumap_smooth_knn_dist(distances, n_neighbors, rho = NULL, tol = 1e-05, max_iter = 64, min_scale = 0.001)
+morie_scumap_smooth_knn_dist(distances, n_neighbors, rho = NULL, tol = 1e-05, max_iter = 64, 
+    min_scale = 0.001) 
 }
 \arguments{
 \item{distances}{Coerced to numeric by the body, with \code{as.numeric}.}

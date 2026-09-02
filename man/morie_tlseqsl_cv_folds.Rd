@@ -5,7 +5,7 @@
 \alias{morie_tlseqsl_cv_folds}
 \title{morie_tlseqsl_cv_folds}
 \usage{
-morie_tlseqsl_cv_folds(n, V = 10, seed = 0)
+morie_tlseqsl_cv_folds(n, V = 10, seed = 0) 
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}

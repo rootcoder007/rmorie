@@ -26,6 +26,7 @@ morie_cox_stratified(
 \item{ties}{\code{"efron"} or \code{"breslow"}.}
 
 \item{max_iter, tol}{Newton-Raphson controls.}
+
 }
 \value{
 list with \code{beta}, \code{se}, \code{z}, \code{p_value},

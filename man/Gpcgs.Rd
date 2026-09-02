@@ -33,6 +33,8 @@ Gpcgs(
 \item{nodes}{Gauss-Hermite nodes.}
 
 \item{jitter}{Ridge added to K_mm.}
+
+
 }
 \value{
 List with \code{estimate}, \code{p}, \code{predicted},

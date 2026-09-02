@@ -10,6 +10,7 @@ morie_tfidf(texts, min_df = 1, max_df = 1)
 \item{texts}{Character vector of documents.}
 
 \item{min_df, max_df}{Document-frequency filters.}
+
 }
 \value{
 A list with \code{matrix}, \code{vocabulary}, \code{document_frequency}, \code{idf}.

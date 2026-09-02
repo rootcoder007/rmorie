@@ -5,7 +5,7 @@
 \alias{switching}
 \title{switching}
 \usage{
-switching(scores, criterion, context = NULL)
+switching(scores, criterion, context = NULL) 
 }
 \arguments{
 \item{scores}{Iterated over elementwise, with \code{lapply}.}

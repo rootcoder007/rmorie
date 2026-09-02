@@ -5,7 +5,7 @@
 \alias{private_release}
 \title{Release f(D) + Lap(Delta f / epsilon)}
 \usage{
-private_release(value, sensitivity, epsilon, seed = 0)
+private_release(value, sensitivity, epsilon, seed = 0) 
 }
 \arguments{
 \item{value}{The non-private statistic.}

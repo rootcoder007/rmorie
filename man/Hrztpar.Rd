@@ -34,6 +34,9 @@ morie_horowitz_parametric_T(
 
 \item{a_lo, a_hi, ngrid, refine}{The deterministic one-dimensional search over
 alpha.}
+
+
+
 }
 \value{
 list: estimate, theta_hat, alpha_hat, beta_hat, criterion, resid,

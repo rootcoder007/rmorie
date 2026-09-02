@@ -2,7 +2,7 @@
 % Please edit documentation in R/spgwr.R
 \name{spgwr}
 \alias{spgwr}
-\title{Geographically weighted regression: locally varying coefficients.}
+\title{Geographically weighted regression: locally varying coefficients}
 \usage{
 spgwr(x, y, coords, bandwidth = NULL, kernel = "gaussian")
 }

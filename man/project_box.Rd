@@ -5,7 +5,7 @@
 \alias{project_box}
 \title{project_box}
 \usage{
-project_box(x, lower = NULL, upper = NULL)
+project_box(x, lower = NULL, upper = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,8 @@
 \alias{log_prior}
 \title{log_prior}
 \usage{
-log_prior(R, prior = "uniform", scale = 1, r_max = NULL, J = 0.1, H = 0, neighbours = NULL)
+log_prior(R, prior = "uniform", scale = 1, r_max = NULL, J = 0.1, H = 0, 
+    neighbours = NULL) 
 }
 \arguments{
 \item{R}{A vector; its length is taken and its elements indexed.}

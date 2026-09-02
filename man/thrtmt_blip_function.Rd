@@ -3,9 +3,12 @@
 % the formals.
 \name{thrtmt_blip_function}
 \alias{thrtmt_blip_function}
+\alias{morie_thrtmt}
 \title{thrtmt_blip_function}
 \usage{
-thrtmt_blip_function(y, A, W, V = NULL, ridge = 1e-08)
+thrtmt_blip_function(y, A, W, V = NULL, ridge = 1e-08) 
+
+morie_thrtmt(y, A, W, V = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Passed to \code{.thrtmt_vec}.}

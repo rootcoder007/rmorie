@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nugget effect in the semivariogram: discontinuity at the origin.
+#' Nugget effect in the semivariogram: discontinuity at the origin
 #'
 #' gamma_z(h) = c0 + sigma0^2 gamma_2(h), with Var(Z(s)) = c0 + sigma0^2.
 #' The point of the model is the JUMP: gamma(0) is 0 by definition while

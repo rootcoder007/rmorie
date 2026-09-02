@@ -5,7 +5,7 @@
 \alias{group_privacy}
 \title{Proposition 1.9: groups of size k cost k^2 rho}
 \usage{
-group_privacy(rho, k)
+group_privacy(rho, k) 
 }
 \arguments{
 \item{rho}{zCDP parameter, must be positive.}

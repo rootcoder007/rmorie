@@ -8,7 +8,7 @@
 #' section -- a nonparametric prior paying no price on a parametric truth.
 #'
 #' Formula: K-hat = argmax_K \[log m_K(y) - lam K log n\];
-#'   risk = K-hat/(n + 1) + sum_{k=K-hat}^{d-1} theta_k^2.
+#'   risk = K-hat/(n + 1) + sum_\{k=K-hat\}^\{d-1\} theta_k^2.
 #'
 #' @param d_true Dimension of the true submodel.
 #' @param ns Increasing vector of sample sizes.

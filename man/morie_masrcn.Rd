@@ -5,7 +5,7 @@
 \alias{morie_masrcn}
 \title{morie_masrcn}
 \usage{
-morie_masrcn(op, ...)
+morie_masrcn(op, ...) 
 }
 \arguments{
 \item{op}{A vector; its length is taken.}

@@ -5,7 +5,7 @@
 \alias{VagClean}
 \title{VagClean: muscle-contraction artifact removal from VAG signals (LMS)}
 \usage{
-VagClean(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02, adaptive_mu = TRUE)
+VagClean(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02, adaptive_mu = TRUE) 
 }
 \arguments{
 \item{vag}{Coerced to numeric by the body, with \code{as.numeric}.}

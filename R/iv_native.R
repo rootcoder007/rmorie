@@ -8,7 +8,7 @@
 
 #' Internal helper: k-class IV estimator with robust variance
 #'
-#' beta(k) = (X'(I - k M_Z) X)^{-1} X'(I - k M_Z) y where M_Z is the
+#' beta(k) = (X'(I - k M_Z) X)^\{-1\} X'(I - k M_Z) y where M_Z is the
 #' annihilator of the instrument set. k = 1 gives 2SLS, k = 0 OLS, and
 #' the LIML eigenvalue gives LIML. Robust (HC1) variance uses the
 #' projected regressors as scores, matching
@@ -87,7 +87,7 @@
 
 #' Internal helper: LIML kappa via the eigenvalue problem
 #'
-#' kappa = smallest eigenvalue of (W' M_1 W)(W' M_Z W)^{-1} where
+#' kappa = smallest eigenvalue of (W' M_1 W)(W' M_Z W)^\{-1\} where
 #' W = \[y, endogenous\], M_1 annihilates the exogenous block (incl.
 #' intercept) and M_Z annihilates the full instrument set.
 #' @noRd
@@ -149,7 +149,7 @@
 
 #' Internal helper: continuously-updated GMM (CUE)
 #'
-#' Minimizes n * gbar(beta)' S(beta)^{-1} gbar(beta) over beta with
+#' Minimizes n * gbar(beta)' S(beta)^\{-1\} gbar(beta) over beta with
 #' stats::optim (BFGS), started at the two-step estimate.
 #' @noRd
 .morie_iv_cue_native <- function(y, X, Z, max_iter = 200L,

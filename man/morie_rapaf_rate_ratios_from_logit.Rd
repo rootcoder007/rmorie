@@ -5,7 +5,7 @@
 \alias{morie_rapaf_rate_ratios_from_logit}
 \title{Rate ratios from a logistic regression}
 \usage{
-morie_rapaf_rate_ratios_from_logit(case_counts, control_counts, design, ridge = 1e-08)
+morie_rapaf_rate_ratios_from_logit(case_counts, control_counts, design, ridge = 1e-08) 
 }
 \arguments{
 \item{case_counts}{Non-negative case counts per stratum.}

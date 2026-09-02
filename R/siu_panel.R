@@ -51,7 +51,7 @@
 #' @examplesIf morie_llm_probe_ollama()
 #' # Runs when a local Ollama server is reachable (free default).
 #' res <- morie_siu_panel(5161, mode = 2)
-#' res$fields\["number_of_subject_officers"\]
+#' res$fields["number_of_subject_officers"]
 #' @export
 morie_siu_panel <- function(html,
                             mode = 4L,

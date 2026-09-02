@@ -5,7 +5,7 @@
 \alias{SeizCohere}
 \title{SeizCohere}
 \usage{
-SeizCohere(channels, fs, window, step = NULL, bands = NULL, nperseg = NULL)
+SeizCohere(channels, fs, window, step = NULL, bands = NULL, nperseg = NULL) 
 }
 \arguments{
 \item{channels}{Iterated over elementwise, with \code{lapply}.}

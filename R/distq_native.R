@@ -72,7 +72,7 @@
 
 # ---- public API -------------------------------------------------------
 
-#' The fixed support {z_i} and its spacing
+#' The fixed support \{z_i\} and its spacing
 #'
 #' Atoms on \code{\[v_min, v_max\]} at equal intervals:
 #' \code{z_i = v_min + (i-1) * dz}, \code{dz = (v_max - v_min) / (N - 1)}.
@@ -103,7 +103,7 @@ atoms <- function(v_min, v_max, n_atoms) {
   .distq_atoms(v_min, v_max, n_atoms)
 }
 
-#' E[Z] = sum_i z_i p_i
+#' E\[Z\] = sum_i z_i p_i
 #'
 #' @param probs Numeric vector of probabilities.
 #' @param z Numeric vector of atom positions.
@@ -118,14 +118,14 @@ distribution_mean <- function(probs, z) {
   sum(zz * p)
 }
 
-#' Eq. (7) / Algorithm 1: project r + gamma * z onto {z_i}
+#' Eq. (7) / Algorithm 1: project r + gamma * z onto \{z_i\}
 #'
 #' For each atom j compute \code{tz = clip(r + gamma * z_j, v_min, v_max)},
 #' its fractional position \code{b = (tz - v_min) / dz}, and split
 #' \code{p_j} between the two integer neighbours \code{l = floor(b)} and
 #' \code{u = ceil(b)}. The exact-hit case \code{l == u} is fixed: instead
 #' of writing \code{p * (u - b) + p * (b - l) = 0}, the full mass is
-#' added to \code{m[l]}.
+#' added to \code{m\[l\]}.
 #'
 #' @param reward Sampled reward r.
 #' @param gamma Discount in \[0, 1\]. Ignored when \code{done = TRUE}.

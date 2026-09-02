@@ -5,7 +5,7 @@
 \alias{morie_safrl}
 \title{morie_safrl}
 \usage{
-morie_safrl(g, H, B = NULL, c = NULL, delta = 0.01, tol = 1e-12, max_iter = 5000)
+morie_safrl(g, H, B = NULL, c = NULL, delta = 0.01, tol = 1e-12, max_iter = 5000) 
 }
 \arguments{
 \item{g}{Passed to \code{.safrl_vec}.}

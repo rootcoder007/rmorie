@@ -5,14 +5,14 @@
 \alias{QrsHpLpTf}
 \title{Eq (4.9): Hlp(z) = (1 - z^-32)/(1 - z^-1), a running sum of 32}
 \usage{
-QrsHpLpTf(freq, fs = 200)
+QrsHpLpTf(freq, fs = 200) 
 }
 \arguments{
 \item{freq}{Coerced to numeric by the body, with \code{as.numeric}.}
 \item{fs}{Numeric; combined arithmetically in the body. Defaults to \code{200}.}
 }
 \description{
-samples Evaluated as sum_{k=0}^{31} z^-k so the z = 1 point is exact.
+samples Evaluated as sum_\{k=0\}^\{31\} z^-k so the z = 1 point is exact.
 }
 \value{
 A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{fs}, \code{method}.

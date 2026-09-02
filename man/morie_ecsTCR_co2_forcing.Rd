@@ -5,7 +5,7 @@
 \alias{morie_ecsTCR_co2_forcing}
 \title{Radiative forcing from a CO2 concentration ratio}
 \usage{
-morie_ecsTCR_co2_forcing(ratio, f2x = .ECSTCR_F2X)
+morie_ecsTCR_co2_forcing(ratio, f2x = .ECSTCR_F2X) 
 }
 \arguments{
 \item{ratio}{CO2 relative to pre-industrial.}

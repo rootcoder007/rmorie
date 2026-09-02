@@ -10,6 +10,7 @@ BrayCurt(x, y, close = TRUE)
 \item{x, y}{non-negative parts of equal length}
 
 \item{close}{divide each vector by its own total first}
+
 }
 \value{
 list(bc, estimate, numerator, denominator, similarity, n)

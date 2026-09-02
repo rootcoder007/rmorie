@@ -10,6 +10,7 @@ hellngd(p, q, normalise = TRUE)
 \item{p, q}{non-negative masses over a common support.}
 
 \item{normalise}{rescale each argument to sum to one first.}
+
 }
 \value{
 list: estimate, h2, bc, affinity, n, method.

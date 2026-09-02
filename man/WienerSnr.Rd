@@ -5,7 +5,7 @@
 \alias{WienerSnr}
 \title{Eq. (3.186): W = S_d / (S_d + S_eta).  Three properties the book}
 \usage{
-WienerSnr(sd, seta)
+WienerSnr(sd, seta) 
 }
 \arguments{
 \item{sd}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{probability_of_control}
 \title{probability_of_control}
 \usage{
-probability_of_control(reps = 200, seed = 0, ...)
+probability_of_control(reps = 200, seed = 0, ...) 
 }
 \arguments{
 \item{reps}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200}.}

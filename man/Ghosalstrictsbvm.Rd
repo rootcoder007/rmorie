@@ -32,7 +32,7 @@ independent -- a model can satisfy any two and fail the theorem -- so
 the three are reported separately rather than as one verdict.
 }
 \details{
-Formula: score = 1{prior mass ok} - lan_remainder
+Formula: score = 1\{prior mass ok\} - lan_remainder
 \itemize{
 \item change_of_measure_gap; holds iff all three checks pass at tol.
 }

@@ -5,7 +5,7 @@
 \alias{k02mod}
 \title{k02mod}
 \usage{
-k02mod(A, comm)
+k02mod(A, comm) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

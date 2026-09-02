@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Multi-environment genomic model with a genotype-by-environment term.
+#' Multi-environment genomic model with a genotype-by-environment term
 #'
 #' Formula: Y = 1 mu + X_E beta_E + Z_L b_1 + Z_EL b_2 + eps,  b_1 ~ N(0, sigma2_g G),  b_2 ~ N(0, Sigma_E (x) G)
 #'

@@ -5,7 +5,7 @@
 \alias{crtT}
 \title{crtT}
 \usage{
-crtT(residues, moduli)
+crtT(residues, moduli) 
 }
 \arguments{
 \item{residues}{Coerced to integer by the body, with \code{as.integer}.}

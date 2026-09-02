@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Matern covariance function class.
+#' Matern covariance function class
 #'
 #' C(h) = sigma^2 (1/gamma(nu)) (theta h / 2)^nu 2 K_nu(theta h), for
 #' nu > 0 and theta > 0. Smoothness increases with nu. Because

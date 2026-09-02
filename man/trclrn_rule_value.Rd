@@ -5,7 +5,8 @@
 \alias{trclrn_rule_value}
 \title{trclrn_rule_value}
 \usage{
-trclrn_rule_value(Y, A, X, rule, propensity = NULL, method = "ipw", outcome_model = NULL, min_propensity = 0.01)
+trclrn_rule_value(Y, A, X, rule, propensity = NULL, method = "ipw", outcome_model = NULL, 
+    min_propensity = 0.01) 
 }
 \arguments{
 \item{Y}{Passed to \code{.trclrn_check}.}

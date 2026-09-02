@@ -5,7 +5,7 @@
 \alias{morie_funcal_assign_orthologs}
 \title{morie_funcal_assign_orthologs}
 \usage{
-morie_funcal_assign_orthologs(seeds, groups, taxa = NULL, target_taxa = NULL, target_types = NULL)
+morie_funcal_assign_orthologs(seeds, groups, taxa = NULL, target_taxa = NULL, target_types = NULL) 
 }
 \arguments{
 \item{seeds}{A vector; indexed elementwise.}

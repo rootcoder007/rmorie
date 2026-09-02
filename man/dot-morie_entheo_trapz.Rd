@@ -2,15 +2,20 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{.morie_entheo_trapz}
 \alias{.morie_entheo_trapz}
-\title{Trapezoidal integration on a 1-D grid.}
+\title{Trapezoidal integration on a 1-D grid}
 \usage{
 .morie_entheo_trapz(y, x)
+}
+\arguments{
+\item{y}{See Usage.}
+
+\item{x}{See Usage.}
 }
 \value{
 A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 }
 \description{
-Trapezoidal integration on a 1-D grid.
+Trapezoidal integration on a 1-D grid
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

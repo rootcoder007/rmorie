@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_cheatsheet}
 \title{One-line summary of the vit2lf module}
 \usage{
-morie_vit2lf_cheatsheet()
+morie_vit2lf_cheatsheet() 
 }
 \description{
 One-line summary of the vit2lf module

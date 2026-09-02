@@ -5,7 +5,7 @@
 \alias{centrality_encoding}
 \title{Learnable vector per degree, added at the input layer}
 \usage{
-centrality_encoding(adj, n, z_in, z_out = NULL, directed = FALSE)
+centrality_encoding(adj, n, z_in, z_out = NULL, directed = FALSE) 
 }
 \arguments{
 \item{adj}{Adjacency list.}

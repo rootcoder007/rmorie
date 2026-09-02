@@ -12,6 +12,7 @@ morie_pan_tompkins_update(PEAKI, SPKI = NULL, NPKI = NULL, is_signal = NULL)
 \item{SPKI, NPKI}{running estimates.}
 
 \item{is_signal}{optional per-peak class.}
+
 }
 \value{
 list: SPKI, NPKI, threshold, classified.

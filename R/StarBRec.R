@@ -3,7 +3,7 @@
 #' Stars-and-bars recursion
 #'
 #' Grouping unordered sets by how many times one chosen letter appears
-#' gives N_U_n = sum_{j=0}^{n} (N-1)_U_j -- eq (1.54) in general,
+#' gives N_U_n = sum_\{j=0\}^\{n\} (N-1)_U_j -- eq (1.54) in general,
 #' eq (1.51) for n=4, N=3 and eq (1.52) for general n with N=3.
 #' Eq (1.55) rewrites each term with eq (1.16); the sum is returned
 #' beside the closed form.

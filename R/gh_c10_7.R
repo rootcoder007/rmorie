@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Density estimation via a finite random series prior
 #'
-#' log f = sum_{k <= K} beta_k phi_k - log Z, with the NUMBER of terms K
+#' log f = sum_\{k <= K\} beta_k phi_k - log Z, with the NUMBER of terms K
 #' itself random.  That randomness is the entire adaptation mechanism: a
 #' fixed K ties the rate to whatever smoothness the basis can express,
 #' while a prior on K with fast enough decay lets the posterior settle on

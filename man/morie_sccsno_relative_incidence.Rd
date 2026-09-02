@@ -5,7 +5,7 @@
 \alias{morie_sccsno_relative_incidence}
 \title{Point estimates and Wald intervals on the incidence scale}
 \usage{
-morie_sccsno_relative_incidence(fit, level = 0.95)
+morie_sccsno_relative_incidence(fit, level = 0.95) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$log_ri}, \code{$se_log_ri} from it.}

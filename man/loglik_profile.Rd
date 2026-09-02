@@ -5,7 +5,7 @@
 \alias{loglik_profile}
 \title{loglik_profile}
 \usage{
-loglik_profile(y, grid, make_model, n_particles = 200L, n_reps = 5L, seed = 0L)
+loglik_profile(y, grid, make_model, n_particles = 200L, n_reps = 5L, seed = 0L) 
 }
 \arguments{
 \item{y}{Passed to \code{replicated_pfilter}.}

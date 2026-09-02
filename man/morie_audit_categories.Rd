@@ -22,7 +22,7 @@ shouts the hazards.
 \description{
 One call after every import, before any model. Reports, per
 categorical column: storage, levels in order, counts, the
-reference level R would use, and flags for the known hazards —
+reference level R would use, and flags for the known hazards --
 numeric-looking labels (the signature of codes imported from
 SPSS/Stata without their value labels), still-labelled foreign
 columns (\code{haven_labelled}), case-variant duplicate labels,

@@ -21,7 +21,7 @@ Breiman (1996), "Bagging predictors", Machine Learning 24(2), 123-140,
 doi:10.1007/BF00058655.  Breiman gives two aggregation rules and they are
 not interchangeable: numerical prediction averages the ensemble,
 ghat_bag(x) = (1/B) sum_b ghat_b(x), while classification votes,
-ghat_bag(x) = argmax_k #{b : ghat_b(x) = k}.
+ghat_bag(x) = argmax_k #\{b : ghat_b(x) = k\}.
 }
 \details{
 Averaging class labels is the classic bug: it returns 1.5 for a two-one

@@ -9,7 +9,7 @@
 #' smoothness; it is recovered here from a discretised stochastic
 #' integral.
 #'
-#' Formula: growth = log(var(R_1) / var(R_{1/4})) / log 4, which equals
+#' Formula: growth = log(var(R_1) / var(R_\{1/4\})) / log 4, which equals
 #'   2 alpha exactly for the continuum process.
 #'
 #' @param alpha Self-similarity index, positive.

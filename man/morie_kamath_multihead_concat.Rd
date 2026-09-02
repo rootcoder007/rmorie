@@ -5,7 +5,7 @@
 \alias{morie_kamath_multihead_concat}
 \title{morie_kamath_multihead_concat}
 \usage{
-morie_kamath_multihead_concat(heads, W_O)
+morie_kamath_multihead_concat(heads, W_O) 
 }
 \arguments{
 \item{heads}{List of head outputs.}

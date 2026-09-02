@@ -5,7 +5,7 @@
 \alias{cgmth}
 \title{cgmth}
 \usage{
-cgmth(f, grad_f, x0, tol = 1e-06, max_iter = 1000L, full_output = FALSE)
+cgmth(f, grad_f, x0, tol = 1e-06, max_iter = 1000L, full_output = FALSE) 
 }
 \arguments{
 \item{f}{Accepted by the signature and not used anywhere in the body.}

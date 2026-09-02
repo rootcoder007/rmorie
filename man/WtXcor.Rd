@@ -5,7 +5,7 @@
 \alias{WtXcor}
 \title{Scale-by-scale wavelet cross-correlation, Whitcher et al. (2000)}
 \usage{
-WtXcor(x, y, wavelet = "db4", levels = 3, max_lag = 0)
+WtXcor(x, y, wavelet = "db4", levels = 3, max_lag = 0) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

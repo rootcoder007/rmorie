@@ -5,7 +5,8 @@
 \alias{bpr_learn_bpr_R}
 \title{LearnBPR: bootstrap-sampled stochastic gradient ascent}
 \usage{
-bpr_learn_bpr_R(pos, n_users, n_items, k_dim = 8L, alpha = 0.05, lam = 0.01, iters = 2000L, seed = 0L, regularizer_sign = "correct", init_scale = 0.1)
+bpr_learn_bpr_R(pos, n_users, n_items, k_dim = 8L, alpha = 0.05, lam = 0.01, 
+    iters = 2000L, seed = 0L, regularizer_sign = "correct", init_scale = 0.1) 
 }
 \arguments{
 \item{pos}{Named list of positive-item indices per user (0-based).}

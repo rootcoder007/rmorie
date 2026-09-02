@@ -10,7 +10,7 @@
 #' ordinate, a quantile, a mode) that atomicity is the dominant source of
 #' error.  The smoothed bootstrap resamples from a kernel density estimate
 #' instead, which for a Gaussian kernel is exactly
-#'   x*_i = x_(I_i) + h eps_i,  I_i ~ U{1..n},  eps_i ~ N(0, 1),
+#'   x*_i = x_(I_i) + h eps_i,  I_i ~ U\{1..n\},  eps_i ~ N(0, 1),
 #' so no density has to be evaluated.
 #'
 #' The bandwidth is the whole trade-off and the paper's title is the warning:

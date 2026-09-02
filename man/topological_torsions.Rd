@@ -5,7 +5,7 @@
 \alias{topological_torsions}
 \title{Every topological torsion in a molecule, with multiplicities}
 \usage{
-topological_torsions(elements, bonds, common_types = NULL)
+topological_torsions(elements, bonds, common_types = NULL) 
 }
 \arguments{
 \item{elements}{Heavy-atom element symbols.}

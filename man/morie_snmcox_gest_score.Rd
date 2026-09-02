@@ -3,12 +3,22 @@
 % the formals.
 \name{morie_snmcox_gest_score}
 \alias{morie_snmcox_gest_score}
-\title{The g-estimation score S(psi) and its standardisation.}
+\title{The g-estimation score S(psi) and its standardisation}
 \usage{
-morie_snmcox_gest_score(psi, time, event, A, L, treat_times, censor_time = NULL, ridge = 1e-08)
+morie_snmcox_gest_score(psi, time, event, A, L, treat_times, censor_time = NULL, ridge = 1e-08) 
 }
 \description{
 The g-estimation score S(psi) and its standardisation.
+}
+\arguments{
+\item{psi}{Argument \code{psi}; see Usage.}
+\item{time}{Argument \code{time}; see Usage.}
+\item{event}{Argument \code{event}; see Usage.}
+\item{A}{Argument \code{A}; see Usage.}
+\item{L}{Argument \code{L}; see Usage.}
+\item{treat_times}{Argument \code{treat_times}; see Usage.}
+\item{censor_time}{Argument \code{censor_time}; see Usage.}
+\item{ridge}{Argument \code{ridge}; see Usage.}
 }
 \value{
 A list with \code{s}, \code{z}, \code{m}, \code{U}, \code{e}.

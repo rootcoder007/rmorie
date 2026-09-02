@@ -5,7 +5,7 @@
 \alias{training_stage}
 \title{training_stage}
 \usage{
-training_stage(stage)
+training_stage(stage) 
 }
 \arguments{
 \item{stage}{Coerced to integer by the body, with \code{as.integer}.}

@@ -5,7 +5,10 @@
 \alias{morie_varqc1}
 \title{Filter variant records by hard thresholds, by VQSR, or by both}
 \usage{
-morie_varqc1(vcf, thresholds = NULL, fields = NULL, mode = "snp", method = "hard", positive = NULL, negative = NULL, n_components = 2L, n_iter = 50L, seed = 1, covariance = "full", tranches = c(90, 99, 99.9, 100), vqsr_fields = NULL, min_variance = 1e-06, shrinkage = 0.05)
+morie_varqc1(vcf, thresholds = NULL, fields = NULL, mode = "snp", method = "hard", 
+    positive = NULL, negative = NULL, n_components = 2L, n_iter = 50L, 
+    seed = 1, covariance = "full", tranches = c(90, 99, 99.9, 100), vqsr_fields = NULL, 
+    min_variance = 1e-06, shrinkage = 0.05) 
 }
 \arguments{
 \item{vcf}{Annotation matrix, one row per variant.}

@@ -5,7 +5,8 @@
 \alias{morie_sv_dl_paired_end_calls}
 \title{morie_sv_dl_paired_end_calls}
 \usage{
-morie_sv_dl_paired_end_calls(pairs, median = NULL, sd = NULL, orientation = NULL, n_sd = 3, min_support = 2, window = NULL, spread = "mad")
+morie_sv_dl_paired_end_calls(pairs, median = NULL, sd = NULL, orientation = NULL, n_sd = 3, 
+    min_support = 2, window = NULL, spread = "mad") 
 }
 \arguments{
 \item{pairs}{Iterated over elementwise, with \code{lapply}.}

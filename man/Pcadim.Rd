@@ -2,7 +2,7 @@
 % Please edit documentation in R/pcadr.R
 \name{Pcadim}
 \alias{Pcadim}
-\title{Principal component compression of a marker matrix.}
+\title{Principal component compression of a marker matrix}
 \usage{
 Pcadim(X, k = NULL)
 }

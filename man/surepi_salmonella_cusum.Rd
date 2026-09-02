@@ -5,7 +5,7 @@
 \alias{surepi_salmonella_cusum}
 \title{surepi_salmonella_cusum}
 \usage{
-surepi_salmonella_cusum(counts, mu0, sigma, k_shift = 1, decision = 0.5, min_count = 5)
+surepi_salmonella_cusum(counts, mu0, sigma, k_shift = 1, decision = 0.5, min_count = 5) 
 }
 \arguments{
 \item{counts}{Coerced to numeric by the body, with \code{as.numeric}.}

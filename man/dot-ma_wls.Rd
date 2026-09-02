@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_ma.R
 \name{.ma_wls}
 \alias{.ma_wls}
-\title{Weighted least squares. cov is (X\' W X)^{-1}, the model-based}
+\title{Weighted least squares. cov is (X\' W X)^\{-1\}, the model-based}
 \usage{
 .ma_wls(X, y, w)
 }

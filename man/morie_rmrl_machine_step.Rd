@@ -5,7 +5,7 @@
 \alias{morie_rmrl_machine_step}
 \title{(delta_u(u, sigma), delta_r(u, delta_u(u, sigma)))}
 \usage{
-morie_rmrl_machine_step(machine, u, sigma)
+morie_rmrl_machine_step(machine, u, sigma) 
 }
 \arguments{
 \item{machine}{A list; the body reads \code{$edges}, \code{$terminal} from it.}

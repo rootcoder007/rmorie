@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmwld.R
 \name{Waldstat}
 \alias{Waldstat}
-\title{Wald test of H0: theta = theta0 against a two-sided alternative.}
+\title{Wald test of H0: theta = theta0 against a two-sided alternative}
 \usage{
 Waldstat(theta_hat, se, theta0 = 0, level = 0.95)
 }

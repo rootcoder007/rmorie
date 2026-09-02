@@ -5,7 +5,7 @@
 \alias{Bbb}
 \title{Section 10.2.1.  Bundle-branch block desynchronises ventricular}
 \usage{
-Bbb(qrsdur, criteria = NULL)
+Bbb(qrsdur, criteria = NULL) 
 }
 \arguments{
 \item{qrsdur}{A vector; its length is taken.}

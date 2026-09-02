@@ -5,7 +5,7 @@
 \alias{LmsZhang}
 \title{Eq. (3.205), after Zhang et al.: mu(n) = mu / ((M+1) xbar^2(n)) with}
 \usage{
-LmsZhang(mu, order, r, alpha = 0.02, power_prev = NULL)
+LmsZhang(mu, order, r, alpha = 0.02, power_prev = NULL) 
 }
 \arguments{
 \item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{all_eigenvalues}
 \title{all_eigenvalues}
 \usage{
-all_eigenvalues(spec, theta)
+all_eigenvalues(spec, theta) 
 }
 \arguments{
 \item{spec}{Passed to \code{state_matrices}.}

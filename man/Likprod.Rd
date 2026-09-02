@@ -5,10 +5,13 @@
 \alias{Likprod}
 \title{Joint likelihood of independent observations (Lawson eq. 3.1)}
 \usage{
-Likprod(dens)
+Likprod(dens) 
 }
 \description{
 Joint likelihood of independent observations (Lawson eq. 3.1)
+}
+\arguments{
+\item{dens}{Argument \code{dens}; see Usage.}
 }
 \value{
 A list with \code{likelihood}, \code{loglik}, \code{n}.

@@ -5,7 +5,7 @@
 \alias{morie_crfflt_cf_filter}
 \title{Extract the band by one of three routes}
 \usage{
-morie_crfflt_cf_filter(x, p_low = 6, p_high = 32, method = "asymmetric", p = NULL, drift = TRUE)
+morie_crfflt_cf_filter(x, p_low = 6, p_high = 32, method = "asymmetric", p = NULL, drift = TRUE) 
 }
 \arguments{
 \item{x}{Numeric vector, the series.}

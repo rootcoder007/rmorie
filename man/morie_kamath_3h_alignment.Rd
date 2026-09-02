@@ -15,6 +15,8 @@ morie_kamath_3h_alignment(
 \item{helpful_score, harmless_score, honest_score}{Aligned score vectors.}
 
 \item{weights}{Optional three weights.}
+
+
 }
 \value{
 List with \code{estimate}, \code{score}, \code{weights}.

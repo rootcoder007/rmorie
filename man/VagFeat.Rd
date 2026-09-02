@@ -5,7 +5,7 @@
 \alias{VagFeat}
 \title{VagFeat: statistical vibroarthrogram characterisation}
 \usage{
-VagFeat(vag, fs, n_segments = 8)
+VagFeat(vag, fs, n_segments = 8) 
 }
 \arguments{
 \item{vag}{Coerced to numeric by the body, with \code{as.numeric}.}

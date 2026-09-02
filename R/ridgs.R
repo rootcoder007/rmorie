@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Closed-form ridge regression estimator.
+#' Closed-form ridge regression estimator
 #'
 #' Formula: beta(lambda) = (X'X + lambda D)^-1 X'y,  D = diag(0, 1, ..., 1)
 #'

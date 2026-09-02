@@ -5,7 +5,7 @@
 \alias{morie_secrtt_crypto_shred}
 \title{Report the scope of destroying a KEK}
 \usage{
-morie_secrtt_crypto_shred(kek_id, wrapped_deks)
+morie_secrtt_crypto_shred(kek_id, wrapped_deks) 
 }
 \arguments{
 \item{kek_id}{Identifier of the KEK to be destroyed.}

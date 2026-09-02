@@ -2,7 +2,7 @@
 % Please edit documentation in R/depthM.R
 \name{Mahaldep}
 \alias{Mahaldep}
-\title{Mahalanobis depth of each row of x.}
+\title{Mahalanobis depth of each row of x}
 \usage{
 Mahaldep(x, mu = NULL, Sigma = NULL)
 }

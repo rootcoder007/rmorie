@@ -3,9 +3,9 @@
 % the formals.
 \name{gflops}
 \alias{gflops}
-\title{Forward-pass Gflops for a DiT stack.}
+\title{Forward-pass Gflops for a DiT stack}
 \usage{
-gflops(tokens, depth, width, mlp_ratio = 4)
+gflops(tokens, depth, width, mlp_ratio = 4) 
 }
 \arguments{
 \item{tokens}{   integer T, number of tokens.}

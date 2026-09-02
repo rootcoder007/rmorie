@@ -5,7 +5,7 @@
 \alias{dipole_moment}
 \title{dipole_moment}
 \usage{
-dipole_moment(charges, R, centre = NULL)
+dipole_moment(charges, R, centre = NULL) 
 }
 \arguments{
 \item{charges}{Passed to \code{.painn_vec}.}

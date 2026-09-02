@@ -5,7 +5,7 @@
 \alias{extend_one}
 \title{extend_one}
 \usage{
-extend_one(qchars, schars, qi, si, w, sc, X)
+extend_one(qchars, schars, qi, si, w, sc, X) 
 }
 \arguments{
 \item{qchars}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{morie_mistr_rope_angles}
 \title{RoPE angles}
 \usage{
-morie_mistr_rope_angles(d, base = 10000)
+morie_mistr_rope_angles(d, base = 10000) 
 }
 \arguments{
 \item{d}{Even dimension.}

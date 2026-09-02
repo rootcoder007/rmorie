@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_call_rates}
 \title{Per-SNP and per-individual call rates}
 \usage{
-morie_snpqc1_call_rates(genotypes)
+morie_snpqc1_call_rates(genotypes) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

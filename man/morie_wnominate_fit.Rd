@@ -23,6 +23,7 @@ morie_wnominate_fit(
 \item{max_iter, tol}{Alternating-optimisation controls.}
 
 \item{ridge}{Small penalty for near-separating roll calls.}
+
 }
 \value{
 A list with \code{ideal_points}, \code{rollcall_normals},

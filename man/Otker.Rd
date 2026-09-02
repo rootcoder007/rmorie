@@ -16,6 +16,7 @@ Otker(X, Y, kernel = "gaussian", epsilon = 0.1, gamma = 1, max_iter = 200)
 \item{gamma}{Gaussian bandwidth parameter.}
 
 \item{max_iter}{Sinkhorn sweeps.}
+
 }
 \value{
 List with \code{EMD_approx}, \code{C}, \code{exact_cost},

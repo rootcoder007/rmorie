@@ -5,7 +5,7 @@
 \alias{morie_ddpest_check_marginals}
 \title{Every G_x must still be a probability measure}
 \usage{
-morie_ddpest_check_marginals(G, tol = 1e-09)
+morie_ddpest_check_marginals(G, tol = 1e-09) 
 }
 \arguments{
 \item{G}{A collection as returned by single_weights or single_atoms.}

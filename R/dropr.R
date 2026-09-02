@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Apply a dropout mask with inverted scaling.
+#' Apply a dropout mask with inverted scaling
 #'
-#' Formula: a_i = x_i * m_i / (1 - rate),  m_i in {0, 1} supplied by the caller
+#' Formula: a_i = x_i * m_i / (1 - rate),  m_i in \{0, 1\} supplied by the caller
 #'
 #' @param x Activations of the layer being regularized.
 #' @param mask Keep/drop indicator per unit: 1 keeps, 0 drops.  Supplied by the caller so the result is reproducible.

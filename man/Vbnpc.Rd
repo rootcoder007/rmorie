@@ -29,6 +29,7 @@ Vbnpc(
 \item{max_iter}{Maximum coordinate sweeps.}
 
 \item{tol}{Stop when the ELBO moves by less than this.}
+
 }
 \value{
 List with \code{phi}, \code{m}, \code{s2}, \code{gamma1},
@@ -43,22 +44,22 @@ doi:10.1214/06-BA104.
 }
 \details{
 The DP mixture is written in Sethuraman stick-breaking form,
-V_t ~ Beta(1, alpha), pi_t(V) = V_t prod_{i<t} (1 - V_i), z_n ~ pi,
-y_n | z_n ~ p(. | eta_{z_n}); the variational family is the TRUNCATED
-mean-field family of Section 4, q(V, eta, z) = prod_{t<K} q(V_t)
-prod_{t<=K} q(eta_t) prod_n q(z_n), with V_K set to 1. The truncation
+V_t ~ Beta(1, alpha), pi_t(V) = V_t prod_\{i<t\} (1 - V_i), z_n ~ pi,
+y_n | z_n ~ p(. | eta_\{z_n\}); the variational family is the TRUNCATED
+mean-field family of Section 4, q(V, eta, z) = prod_\{t<K\} q(V_t)
+prod_\{t<=K\} q(eta_t) prod_n q(z_n), with V_K set to 1. The truncation
 is on the variational distribution, not the model.
 
-Coordinate updates (Eqs. 18-21): gamma_{t,1} = 1 + sum_n phi_{n,t};
-gamma_{t,2} = alpha + sum_n sum_{j>t} phi_{n,j}; phi_{n,t} proportional
-to exp(E[log V_t] + sum_{i<t} E[log(1-V_i)] + E_q[log p(y_n|eta_t)]),
+Coordinate updates (Eqs. 18-21): gamma_\{t,1\} = 1 + sum_n phi_\{n,t\};
+gamma_\{t,2\} = alpha + sum_n sum_\{j>t\} phi_\{n,j\}; phi_\{n,t\} proportional
+to exp(E[log V_t] + sum_\{i<t\} E[log(1-V_i)] + E_q[log p(y_n|eta_t)]),
 with E[log V_t] = psi(g1) - psi(g1+g2) and E[log(1-V_t)] = psi(g2) -
 psi(g1+g2).
 
 COMPONENT MODEL. Univariate Gaussian with KNOWN variance sigma2 and a
 conjugate normal base measure N(m0, s0^2), so q(eta_t) = N(m_t, s_t^2)
 is closed form: 1/s_t^2 = 1/s0^2 + N_t/sigma2, m_t = (m0/s0^2 +
-sum_n phi_{n,t} y_n / sigma2) s_t^2, and E_q[log p(y|eta_t)] =
+sum_n phi_\{n,t\} y_n / sigma2) s_t^2, and E_q[log p(y|eta_t)] =
 -log(2 pi sigma2)/2 - ((y - m_t)^2 + s_t^2)/(2 sigma2). An
 unknown-variance component would need a Normal-Gamma base measure and
 is not implemented -- this implementation's scope choice.

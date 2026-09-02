@@ -15,6 +15,7 @@ m-by-L matrix whose columns are basis functions on that grid.}
 \item{a, b}{end points of the grid; the unit interval by default.}
 
 \item{p}{derivative order of equation (14.11); 1 or 2.}
+
 }
 \value{
 list: estimate, penalty, J, P, n, method.

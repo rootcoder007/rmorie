@@ -22,6 +22,12 @@ morie_geron_encoder_decoder_transformer(
 \item{n_layers, n_heads, d_model, vocab_size, max_len, d_ff}{int.}
 
 \item{share_embeddings}{Share one embedding matrix between the stacks.}
+
+
+
+
+
+
 }
 \value{
 List with \code{total_params}, \code{encoder_params}, \code{decoder_params}, \code{src_mask}, \code{tgt_mask}, \code{cross_mask}.

@@ -102,8 +102,6 @@ morie_winsorized_variance <- function(x, tr = 0.2) {
 #' identifier of eq. (2.14): declare X an outlier when
 #' `|X - M| / MADN > 2.24`.
 #' @param x numeric vector
-#' @param constant MAD scaling constant
-#' @param crit cut-off for the outlier rule
 #' @return `morie_mad`, `morie_madn`, `morie_mad_rescaled` numbers;
 #'   `morie_mad_median_rule` a list with `median`, `madn`, `ratio`,
 #'   `is_outlier`, `outliers`, `n_outliers`
@@ -179,8 +177,6 @@ morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
 #' groups version, whose standard error subtracts the Winsorized
 #' covariance.
 #' @param x,y numeric vectors
-#' @param tr amount of trimming
-#' @param alpha significance level
 #' @return list with the estimate, `statistic`, `df`, `se` and `p_value`
 #' @export
 #' @examples
@@ -247,8 +243,6 @@ morie_yuen_paired <- function(x, y, tr = 0.2, alpha = 0.05) {
 #' gives with `df = n - 2 floor(tr n) - 1`.
 #' @param x numeric vector
 #' @param tr amount of trimming
-#' @param alpha significance level
-#' @param null_value value tested against
 #' @return `morie_trimmed_mean_se` a number; `morie_trimmed_mean_ci` a
 #'   list with `estimate`, `ci`, `statistic`, `se`, `df`, `p_value`
 #' @export
@@ -285,10 +279,6 @@ morie_trimmed_mean_ci <- function(x, tr = 0.2, alpha = 0.05,
 #' `morie_one_step_m` is the one-step M-estimator with Huber's Psi.
 #' @param x numeric vector
 #' @param q quantile to estimate
-#' @param beta bending constant for the percentage bend
-#' @param bend bending constant
-#' @param constant MAD scaling constant; the R value 1.4826 by default,
-#'   as WRS uses
 #' @return a numeric scalar
 #' @export
 #' @examples
@@ -351,7 +341,6 @@ morie_one_step_m <- function(x, bend = 1.28, constant = 1.4826) {
 #' values, tested with `n - 2g - 2` degrees of freedom.
 #' @param x,y numeric vectors
 #' @param beta bending constant
-#' @param tr amount of Winsorizing
 #' @return list with `cor`, `statistic`, `p_value` and, for the
 #'   Winsorized version, `cov` and `df`
 #' @export
@@ -533,11 +522,8 @@ morie_brunner_dette_munk <- function(groups) {
 #' warns is unreliable with ties.  `morie_winsorized_regression` solves
 #' the normal equations built from Winsorized covariances.
 #' @param x,y numeric vectors
-#' @param X predictor matrix or vector
 #' @param tr amount of trimming or Winsorizing
 #' @param equal_variance pool the Winsorized variances
-#' @param n_iter maximum refinement iterations
-#' @param tol convergence tolerance
 #' @return a list; see each method's description
 #' @export
 #' @examples

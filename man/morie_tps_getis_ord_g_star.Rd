@@ -26,6 +26,7 @@ morie_tps_getis_ord_g_star(
 \item{top_n}{Number of top hot/cold spots to surface.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
+
 }
 \value{
 A named list with Gi* per hood, the top hot/cold spot

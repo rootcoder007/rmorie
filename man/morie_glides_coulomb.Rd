@@ -5,7 +5,7 @@
 \alias{morie_glides_coulomb}
 \title{Coulomb energy over a list of contacts}
 \usage{
-morie_glides_coulomb(pairs, dielectric = "constant", epsilon = 1)
+morie_glides_coulomb(pairs, dielectric = "constant", epsilon = 1) 
 }
 \arguments{
 \item{pairs}{A list of list(distance, q_i, q_j).}

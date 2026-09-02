@@ -27,6 +27,9 @@ projections (line 3).}
 the model's softplus so nothing is implicit.}
 
 \item{wo}{Output projection of line 11.}
+
+
+
 }
 \value{
 A list with the update \code{s}, \code{attn}, the local output

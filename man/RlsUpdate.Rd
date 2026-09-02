@@ -5,7 +5,7 @@
 \alias{RlsUpdate}
 \title{Eq. (3.224): w(n) = w(n-1) + k(n) alpha(n)}
 \usage{
-RlsUpdate(w_prev, k, alpha)
+RlsUpdate(w_prev, k, alpha) 
 }
 \arguments{
 \item{w_prev}{Coerced to numeric by the body, with \code{as.numeric}.}

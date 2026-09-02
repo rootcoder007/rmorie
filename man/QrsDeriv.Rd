@@ -5,7 +5,7 @@
 \alias{QrsDeriv}
 \title{Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined}
 \usage{
-QrsDeriv(x, fs, thresh = 1)
+QrsDeriv(x, fs, thresh = 1) 
 }
 \arguments{
 \item{x}{Numeric; passed to \code{abs}.}

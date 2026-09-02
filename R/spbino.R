@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Binomial point process: a FIXED number of independent uniform points.
+#' Binomial point process: a FIXED number of independent uniform points
 #'
 #' The count is not random -- that is the whole difference from the
 #' Poisson process. For any sub-region B, N(B) ~ Binomial(n, p) with

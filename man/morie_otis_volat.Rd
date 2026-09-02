@@ -16,6 +16,9 @@ morie_otis_volat(
 \item{df}{data.frame.}
 
 \item{id_col, year_col, regA_col, regB_col}{Column names.}
+
+
+
 }
 \value{
 \code{morie_otis_result}.

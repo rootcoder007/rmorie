@@ -5,7 +5,7 @@
 \alias{morie_slbpdg_density}
 \title{Mixture density at a point}
 \usage{
-morie_slbpdg_density(x, w, mu, s2)
+morie_slbpdg_density(x, w, mu, s2) 
 }
 \arguments{
 \item{x}{The point.}

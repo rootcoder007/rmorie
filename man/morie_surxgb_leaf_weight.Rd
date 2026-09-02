@@ -5,7 +5,7 @@
 \alias{morie_surxgb_leaf_weight}
 \title{Equation (5): w* = -G/(H+lambda)}
 \usage{
-morie_surxgb_leaf_weight(G, H, lam = 1)
+morie_surxgb_leaf_weight(G, H, lam = 1) 
 }
 \arguments{
 \item{G}{Coerced to numeric by the body, with \code{as.numeric}.}

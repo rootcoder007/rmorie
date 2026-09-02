@@ -5,7 +5,7 @@
 \alias{morie_dssm_word_hash}
 \title{Word hashing: replace the bag-of-words with a bag of letter n-grams}
 \usage{
-morie_dssm_word_hash(words, n = 3L, vocabulary = NULL)
+morie_dssm_word_hash(words, n = 3L, vocabulary = NULL) 
 }
 \arguments{
 \item{words}{character vector. The token stream.}

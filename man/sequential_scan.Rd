@@ -5,7 +5,7 @@
 \alias{sequential_scan}
 \title{The recurrence as written: L steps, no parallelism}
 \usage{
-sequential_scan(pairs, x0 = 0)
+sequential_scan(pairs, x0 = 0) 
 }
 \arguments{
 \item{pairs}{A vector; its length is taken.}

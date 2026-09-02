@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Two-stage sample: PSUs drawn, then elements within each PSU.
+#' Two-stage sample: PSUs drawn, then elements within each PSU
 #'
 #' The within term carries the factor m/M, so it vanishes when every PSU
 #' is taken -- the check that the bookkeeping is right.

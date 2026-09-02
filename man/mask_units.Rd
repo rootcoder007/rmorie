@@ -5,7 +5,7 @@
 \alias{mask_units}
 \title{mask_units}
 \usage{
-mask_units(n_units, rate = 0.3, seed = 0, block = 1)
+mask_units(n_units, rate = 0.3, seed = 0, block = 1) 
 }
 \arguments{
 \item{n_units}{Coerced to integer by the body, with \code{as.integer}.}

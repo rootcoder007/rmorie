@@ -5,7 +5,7 @@
 \alias{morie_likemc}
 \title{morie_likemc}
 \usage{
-morie_likemc(model, data, priors, n_iter, seed = 1, step = 0.15, burn = 0)
+morie_likemc(model, data, priors, n_iter, seed = 1, step = 0.15, burn = 0) 
 }
 \arguments{
 \item{model}{A list; the body reads \code{$dt}, \code{$I0}, \code{$N}, \code{$S0} from it.}

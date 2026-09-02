@@ -5,7 +5,7 @@
 \alias{RlsApriori}
 \title{Eq. (3.225): alpha(n) = x(n) - w\'(n-1) r(n).  The A PRIORI error,}
 \usage{
-RlsApriori(x, rvec, w_prev)
+RlsApriori(x, rvec, w_prev) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_read_sidecar}
 \alias{morie_arsau_read_sidecar}
-\title{Read a CKAN datastore_search JSON sidecar.}
+\title{Read a CKAN datastore_search JSON sidecar}
 \usage{
 morie_arsau_read_sidecar(path)
 }
@@ -19,7 +19,7 @@ Handles both bare \code{{fields, records}} and the
 \examples{
 \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 tf <- tempfile(fileext = ".json")
-writeLines('{"fields": \[{"id": "a", "type": "int"}\]}', tf)
+writeLines('{"fields": [{"id": "a", "type": "int"}]}', tf)
 res <- morie_arsau_read_sidecar(tf)
 res$fields
 unlink(tf)

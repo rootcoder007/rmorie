@@ -29,7 +29,7 @@ Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 3.6.1, equations (3.30) to (3.33) (pages
 85-86).  For Y = X'beta + g(Z) + U with E(U | X, Z) = 0,
 differencing out E(. | Z) gives (3.32) and hence
-beta = E(Xt Xt')^{-1} E(Xt Yt) with Xt = X - E(X | Z), provided
+beta = E(Xt Xt')^\{-1\} E(Xt Yt) with Xt = X - E(X | Z), provided
 }
 \details{
 Sigma_X = E[X - E(X|Z)][X - E(X|Z)]' > 0                (3.33)

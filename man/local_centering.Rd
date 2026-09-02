@@ -5,7 +5,7 @@
 \alias{local_centering}
 \title{local_centering}
 \usage{
-local_centering(y, W, X, n_folds = 5, n_trees = 100, min_leaf = 5, seed = 0)
+local_centering(y, W, X, n_folds = 5, n_trees = 100, min_leaf = 5, seed = 0) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

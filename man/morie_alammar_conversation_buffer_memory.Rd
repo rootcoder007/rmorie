@@ -5,7 +5,7 @@
 \alias{morie_alammar_conversation_buffer_memory}
 \title{morie_alammar_conversation_buffer_memory}
 \usage{
-morie_alammar_conversation_buffer_memory(conversation, N)
+morie_alammar_conversation_buffer_memory(conversation, N) 
 }
 \arguments{
 \item{conversation}{List of c(user, assistant) turns.}

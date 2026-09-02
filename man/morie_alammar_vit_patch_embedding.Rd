@@ -5,7 +5,7 @@
 \alias{morie_alammar_vit_patch_embedding}
 \title{ViT patch embedding (Dosovitskiy et al. 2021)}
 \usage{
-morie_alammar_vit_patch_embedding(image, patch_size, E, cls_token = NULL, E_pos = NULL)
+morie_alammar_vit_patch_embedding(image, patch_size, E, cls_token = NULL, E_pos = NULL) 
 }
 \arguments{
 \item{image}{Numeric matrix; must tile exactly.}

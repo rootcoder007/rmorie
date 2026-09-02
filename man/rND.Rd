@@ -5,7 +5,7 @@
 \alias{rND}
 \title{Normalised discounted difference}
 \usage{
-rND(protected, step = 10, normalize = TRUE)
+rND(protected, step = 10, normalize = TRUE) 
 }
 \arguments{
 \item{protected}{Passed to \code{.measure}.}

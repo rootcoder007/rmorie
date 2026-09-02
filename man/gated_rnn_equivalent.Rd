@@ -5,7 +5,7 @@
 \alias{gated_rnn_equivalent}
 \title{gated_rnn_equivalent}
 \usage{
-gated_rnn_equivalent(x, w, b = 0)
+gated_rnn_equivalent(x, w, b = 0) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

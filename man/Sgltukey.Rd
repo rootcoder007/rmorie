@@ -5,10 +5,14 @@
 \alias{Sgltukey}
 \title{Siegel-Tukey scale test -- Sec. 9.4, p. 320}
 \usage{
-Sgltukey(x, y)
+Sgltukey(x, y) 
 }
 \description{
 Siegel-Tukey scale test -- Sec. 9.4, p. 320
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{scores}, \code{dropped}, \code{m}, \code{n}.

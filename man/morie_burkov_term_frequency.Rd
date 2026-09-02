@@ -5,7 +5,7 @@
 \alias{morie_burkov_term_frequency}
 \title{Term frequency and TF-IDF (Burkov Ch 2)}
 \usage{
-morie_burkov_term_frequency(term, document, normalise = FALSE)
+morie_burkov_term_frequency(term, document, normalise = FALSE) 
 }
 \arguments{
 \item{term}{Query term.}

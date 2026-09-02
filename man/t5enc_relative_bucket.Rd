@@ -5,7 +5,7 @@
 \alias{t5enc_relative_bucket}
 \title{t5enc_relative_bucket}
 \usage{
-t5enc_relative_bucket(relative_position, bidirectional = TRUE, num_buckets = 32L, max_distance = 128)
+t5enc_relative_bucket(relative_position, bidirectional = TRUE, num_buckets = 32L, max_distance = 128) 
 }
 \arguments{
 \item{relative_position}{Coerced to integer by the body, with \code{as.integer}.}

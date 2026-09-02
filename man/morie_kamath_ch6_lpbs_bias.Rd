@@ -8,6 +8,7 @@ morie_kamath_ch6_lpbs_bias(p_a, p_prior)
 }
 \arguments{
 \item{p_a, p_prior}{Two-entry probability vectors in (0, 1].}
+
 }
 \value{
 List with \code{estimate}, \code{normalised_log_i}, \code{normalised_log_j}.

@@ -3,9 +3,9 @@
 % the formals.
 \name{morie_survvae_predict_survival}
 \alias{morie_survvae_predict_survival}
-\title{\eqn{S(t | x)} as the gated mixture of expert survivals.}
+\title{\eqn{S(t | x)} as the gated mixture of expert survivals}
 \usage{
-morie_survvae_predict_survival(fit_result, x, times)
+morie_survvae_predict_survival(fit_result, x, times) 
 }
 \arguments{
 \item{fit_result}{A fit returned by \code{morie_survvae} or   \code{morie_survvae_fit_competing}.}

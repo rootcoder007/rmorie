@@ -8,6 +8,7 @@ morie_geron_dynamic_quantization(x, w)
 }
 \arguments{
 \item{x, w}{Conformable numeric matrices.}
+
 }
 \value{
 List with \code{output}, \code{reference}, \code{max_abs_error},

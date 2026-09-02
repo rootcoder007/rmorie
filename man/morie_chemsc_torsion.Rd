@@ -5,7 +5,7 @@
 \alias{morie_chemsc_torsion}
 \title{One rotatable bond's internal torsional strain}
 \usage{
-morie_chemsc_torsion(phi, A, n, phi0)
+morie_chemsc_torsion(phi, A, n, phi0) 
 }
 \arguments{
 \item{phi}{The torsion angle, in degrees.}

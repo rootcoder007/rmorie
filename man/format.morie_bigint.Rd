@@ -5,7 +5,7 @@
 \alias{format.morie_bigint}
 \title{Format method for \code{morie_bigint} objects}
 \usage{
-format.morie_bigint(x, ...)
+\method{format}{morie_bigint}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_bigint} object.}

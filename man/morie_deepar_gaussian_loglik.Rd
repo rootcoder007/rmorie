@@ -5,7 +5,7 @@
 \alias{morie_deepar_gaussian_loglik}
 \title{Gaussian log-likelihood}
 \usage{
-morie_deepar_gaussian_loglik(z, mu, sigma)
+morie_deepar_gaussian_loglik(z, mu, sigma) 
 }
 \arguments{
 \item{z}{Numeric observation.}

@@ -5,7 +5,7 @@
 \alias{PLineNotch}
 \title{Eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain}
 \usage{
-PLineNotch(x, fs, f0 = 60, harmonics = 1)
+PLineNotch(x, fs, f0 = 60, harmonics = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_qrs_check}.}

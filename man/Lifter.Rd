@@ -5,7 +5,7 @@
 \alias{Lifter}
 \title{Section 4.7.3: the vocal tract lives at LOW quefrency, the glottal}
 \usage{
-Lifter(cepstrum_values, low = NULL, high = NULL, keep = "low")
+Lifter(cepstrum_values, low = NULL, high = NULL, keep = "low") 
 }
 \arguments{
 \item{cepstrum_values}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,8 @@
 \alias{morie_didfst_did_forest}
 \title{Heterogeneous ATT: DiD taken locally under forest weights}
 \usage{
-morie_didfst_did_forest(Y, D, X, event_time, x_eval = NULL, n_trees = 200L, min_leaf = 5L, alpha = 0.05, max_depth = 12L, seed = 0L, kind = "double-sample", clusters = NULL)
+morie_didfst_did_forest(Y, D, X, event_time, x_eval = NULL, n_trees = 200L, min_leaf = 5L, 
+    alpha = 0.05, max_depth = 12L, seed = 0L, kind = "double-sample", clusters = NULL) 
 }
 \arguments{
 \item{Y}{Numeric panel (n by T).}

@@ -10,6 +10,7 @@ morie_kamath_ch6_weat_similarity(a, W_1, W_2)
 \item{a}{Attribute vector.}
 
 \item{W_1, W_2}{Target word matrices.}
+
 }
 \value{
 List with \code{estimate}, \code{mean_cos_W1}, \code{mean_cos_W2}.

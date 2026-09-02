@@ -8,6 +8,7 @@ morie_hockey_stick(n, k)
 }
 \arguments{
 \item{n, k}{identity parameters, 1 <= k <= n.}
+
 }
 \value{
 list(sum, binomial, holds).

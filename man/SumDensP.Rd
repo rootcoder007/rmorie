@@ -12,6 +12,9 @@ SumDensP(grid_x, density_x, grid_y, density_y, z, dz)
 \item{z}{strip centre.}
 
 \item{dz}{strip width.}
+
+
+
 }
 \value{
 list(probability, rho_z).

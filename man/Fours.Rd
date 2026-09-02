@@ -33,8 +33,8 @@ says the graph "of the first five of these functions" is Fig. 14.1, which
 plots five distinct curves, not three; and the R code the page gives to
 reproduce that figure is create.fourier.basis(rangeval = c(0, 8),
 nbasis = 5, period = 4) from fda, whose basis alternates.  The alternating
-reading is implemented: phi_1 = 1/sqrt(P), phi_{2h} = sin(h w t)/sqrt(P/2),
-phi_{2h+1} = cos(h w t)/sqrt(P/2).
+reading is implemented: phi_1 = 1/sqrt(P), phi_\{2h\} = sin(h w t)/sqrt(P/2),
+phi_\{2h+1\} = cos(h w t)/sqrt(P/2).
 
 "w is related to period P by w = 2 pi / P, and in practical applications,
 this is often taken as the range of t values where the data are observed",

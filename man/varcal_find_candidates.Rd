@@ -5,7 +5,8 @@
 \alias{varcal_find_candidates}
 \title{varcal_find_candidates}
 \usage{
-varcal_find_candidates(reads, reference, min_alt_count = 2, min_alt_fraction = 0.05, min_bq = 10)
+varcal_find_candidates(reads, reference, min_alt_count = 2, min_alt_fraction = 0.05, 
+    min_bq = 10) 
 }
 \arguments{
 \item{reads}{Passed to \code{.varcal_norm_reads}.}

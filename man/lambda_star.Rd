@@ -5,7 +5,7 @@
 \alias{lambda_star}
 \title{lambda_star}
 \usage{
-lambda_star(dist, hi = 20, tol = 1e-14, max_iter = 300)
+lambda_star(dist, hi = 20, tol = 1e-14, max_iter = 300) 
 }
 \arguments{
 \item{dist}{A vector; indexed elementwise.}

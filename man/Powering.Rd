@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitpow.R
 \name{Powering}
 \alias{Powering}
-\title{Power a composition by a real scalar.}
+\title{Power a composition by a real scalar}
 \usage{
 Powering(a, x, total = 1)
 }

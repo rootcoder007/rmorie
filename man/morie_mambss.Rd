@@ -5,7 +5,8 @@
 \alias{morie_mambss}
 \title{morie_mambss}
 \usage{
-morie_mambss(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, b_delta = 0, rule = "zoh", D_skip = NULL)
+morie_mambss(X, A, W_B, W_C, W_delta, delta_bias = NULL, b_B = NULL, b_C = NULL, 
+    b_delta = 0, rule = "zoh", D_skip = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{selective_scan}.}

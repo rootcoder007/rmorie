@@ -2,10 +2,8 @@
 % Please edit documentation in R/survvae_native.R
 \name{morie_survvae_PRIMITIVES}
 \alias{morie_survvae_PRIMITIVES}
-\title{Accepted primitives for the DSM experts.}
-\usage{
-morie_survvae_PRIMITIVES
-}
+\title{Accepted primitives for the DSM experts}
+
 \description{
 The character vector \code{c("weibull", "lognormal")}, mirroring
 \code{morie.fn.survvae.PRIMITIVES}.

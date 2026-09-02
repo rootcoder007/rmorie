@@ -5,7 +5,7 @@
 \alias{predict_naive}
 \title{Eq. (1) as written -- the O(kn^2) double sum -------------------}
 \usage{
-predict_naive(x, w0, w, V)
+predict_naive(x, w0, w, V) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

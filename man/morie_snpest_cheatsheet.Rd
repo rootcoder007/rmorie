@@ -5,7 +5,7 @@
 \alias{morie_snpest_cheatsheet}
 \title{One-line summary of the snpest module}
 \usage{
-morie_snpest_cheatsheet()
+morie_snpest_cheatsheet() 
 }
 \description{
 One-line summary of the snpest module

@@ -5,7 +5,7 @@
 \alias{Comb}
 \title{H(z) = (1/2)(1 - z^-N): N zeros spaced evenly round the unit circle,}
 \usage{
-Comb(period_samples, fs = 1000, z = NULL)
+Comb(period_samples, fs = 1000, z = NULL) 
 }
 \arguments{
 \item{period_samples}{Coerced to integer by the body, with \code{as.integer}.}

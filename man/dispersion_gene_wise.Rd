@@ -5,7 +5,7 @@
 \alias{dispersion_gene_wise}
 \title{Gene-wise dispersion estimate}
 \usage{
-dispersion_gene_wise(K, X, s, alpha_init = 0.1)
+dispersion_gene_wise(K, X, s, alpha_init = 0.1) 
 }
 \arguments{
 \item{K}{Count vector for one gene.}

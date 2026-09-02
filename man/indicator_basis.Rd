@@ -5,7 +5,7 @@
 \alias{indicator_basis}
 \title{indicator_basis}
 \usage{
-indicator_basis(X, knots = NULL, max_order = 2L)
+indicator_basis(X, knots = NULL, max_order = 2L) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -20,6 +20,7 @@ morie_geron_dalle_autoregressive_token(
 \item{temperature}{Positive temperature for the next-token step only.}
 
 \item{top_k}{Optional truncation.}
+
 }
 \value{
 List with \code{log_likelihood}, \code{token_logprobs}, \code{perplexity},

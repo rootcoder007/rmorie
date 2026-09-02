@@ -10,6 +10,7 @@ morie_ramsey_upper_bound(k, l, use_known = TRUE)
 \item{k, l}{Clique sizes.}
 
 \item{use_known}{Consult the table of known values during recursion.}
+
 }
 \value{
 A list with \code{binomial}, \code{recursive}, \code{best},

@@ -5,7 +5,7 @@
 \alias{tlltmle_cheatsheet}
 \title{tlltmle_cheatsheet}
 \usage{
-tlltmle_cheatsheet()
+tlltmle_cheatsheet() 
 }
 \description{
 A step of the tlltmle_native implementation. No other function in the package calls it. See the file header for the source the module follows.

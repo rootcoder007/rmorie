@@ -1,4 +1,4 @@
-# Pólya urn predictive, and the density it implies.
+# P?lya urn predictive, and the density it implies.
 # Sources: Muller, P. & Quintana, F. A. (2004) "Nonparametric
 # Bayesian Data Analysis", Statistical Science 19(1), 95-110,
 # doi:10.1214/088342304000000017 (the review that organises DP

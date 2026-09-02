@@ -5,7 +5,7 @@
 \alias{alfOnehot}
 \title{One-hot encoding with nearest bin -- Algorithm 5.  Ties go to the}
 \usage{
-alfOnehot(x, bins)
+alfOnehot(x, bins) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

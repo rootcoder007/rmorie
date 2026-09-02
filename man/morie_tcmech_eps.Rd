@@ -5,7 +5,7 @@
 \alias{morie_tcmech_eps}
 \title{The (epsilon, delta) guarantee a rho-tCDP mechanism gives}
 \usage{
-morie_tcmech_eps(rho, delta, omega = NULL)
+morie_tcmech_eps(rho, delta, omega = NULL) 
 }
 \arguments{
 \item{rho}{The concentrated-privacy budget.}

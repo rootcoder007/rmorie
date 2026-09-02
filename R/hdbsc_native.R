@@ -137,6 +137,8 @@
 #' @param X Data matrix (n x d).
 #' @param min_pts mpts core-distance neighbour count.
 #' @param min_cluster_size Minimum cluster size (mclSize).
+#' @param selection See Usage.
+#' @param verbose See Usage.
 #' @return A list with elements \code{labels} (-1 = noise),
 #'   \code{core_distances}, \code{n_clusters}, \code{stabilities},
 #'   \code{condensed_tree}, \code{cluster_tree}, \code{min_pts},

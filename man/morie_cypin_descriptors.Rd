@@ -5,7 +5,7 @@
 \alias{morie_cypin_descriptors}
 \title{The descriptor block, computed exactly from the graph}
 \usage{
-morie_cypin_descriptors(smiles)
+morie_cypin_descriptors(smiles) 
 }
 \arguments{
 \item{smiles}{The compound.}

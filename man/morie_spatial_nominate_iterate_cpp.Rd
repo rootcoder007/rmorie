@@ -5,7 +5,7 @@
 \alias{morie_spatial_nominate_iterate_cpp}
 \title{morie_spatial_nominate_iterate_cpp}
 \usage{
-morie_spatial_nominate_iterate_cpp(votes, X, w, nv, mid, beta, max_iter)
+morie_spatial_nominate_iterate_cpp(votes, X, w, nv, mid, beta, max_iter) 
 }
 \arguments{
 \item{votes}{Passed to \code{.Call}.}

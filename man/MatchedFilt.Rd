@@ -5,7 +5,8 @@
 \alias{MatchedFilt}
 \title{MatchedFilt}
 \usage{
-MatchedFilt(ref, x = NULL, noise_psd = NULL, freqs = NULL, t0 = NULL, gain = 1, dt = 1)
+MatchedFilt(ref, x = NULL, noise_psd = NULL, freqs = NULL, t0 = NULL, gain = 1, 
+    dt = 1) 
 }
 \arguments{
 \item{ref}{Coerced to numeric by the body, with \code{as.numeric}.}

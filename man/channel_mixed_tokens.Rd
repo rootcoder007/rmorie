@@ -5,7 +5,7 @@
 \alias{channel_mixed_tokens}
 \title{channel_mixed_tokens}
 \usage{
-channel_mixed_tokens(X, patch_len, stride = NULL)
+channel_mixed_tokens(X, patch_len, stride = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}

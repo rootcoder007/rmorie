@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Expected steps for a simple random walk to reach a target vertex.
+#' Expected steps for a simple random walk to reach a target vertex
 #'
 #' Formula: with \eqn{P_{ij} = w_{ij}/\sum_k w_{ik}},
 #' \eqn{H(t,t) = 0} and \eqn{H(i,t) = 1 + \sum_j P_{ij} H(j,t)} for

@@ -17,6 +17,7 @@ morie_geron_bidirectional_combine(
 \item{backward_in_reverse_order}{Flip \code{h_backward} before pairing.}
 
 \item{combine}{One of "concat", "sum", "mean".}
+
 }
 \value{
 List with \code{h}, \code{output_dim}, \code{n_steps}, \code{forward_dim}, \code{backward_dim}.

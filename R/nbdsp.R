@@ -16,8 +16,8 @@
 #' the remark above.  The book never writes the mass function, never estimates
 #' the dispersion, and its index (\[Pages 683-691\]) has no entry for it.  The
 #' mass function and the moments used here are the ones the function's own
-#' specification states, P(Y=k) = C(k+r-1, k) p^r (1-p)^k, E[Y] = mu,
-#' Var[Y] = mu + mu^2/r, that is, the NB2 parameterisation; the dispersion is
+#' specification states, P(Y=k) = C(k+r-1, k) p^r (1-p)^k, E\[Y\] = mu,
+#' Var\[Y\] = mu + mu^2/r, that is, the NB2 parameterisation; the dispersion is
 #' estimated from the method-of-moments identity Var = mu + mu^2/r implied by
 #' those same two moments, so nothing beyond that statement is assumed.  The
 #' fit is Fisher scoring on the log link with the NB2 weight

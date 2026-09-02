@@ -5,7 +5,7 @@
 \alias{morie_alfomg_bias}
 \title{The attention bias read off the pair representation}
 \usage{
-morie_alfomg_bias(pair, w = NULL)
+morie_alfomg_bias(pair, w = NULL) 
 }
 \arguments{
 \item{pair}{The pair representation, a list of rows of vectors.}

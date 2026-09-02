@@ -5,7 +5,7 @@
 \alias{viterbi_decode}
 \title{viterbi_decode}
 \usage{
-viterbi_decode(emissions, labels, transitions = NULL, transition_scores = NULL)
+viterbi_decode(emissions, labels, transitions = NULL, transition_scores = NULL) 
 }
 \arguments{
 \item{emissions}{A matrix; passed to \code{as.matrix}.}

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bayesian online changepoint detection (Gaussian run model).
+#' Bayesian online changepoint detection (Gaussian run model)
 #'
-#' Formula: P(r_t=r_{t-1}+1, x_1:t) = P(r_{t-1},x_1:t-1) pi_t^(r) (1-H); P(r_t=0, x_1:t) = sum_r P(r_{t-1},x_1:t-1) pi_t^(r) H
+#' Formula: P(r_t=r_\{t-1\}+1, x_1:t) = P(r_\{t-1\},x_1:t-1) pi_t^(r) (1-H); P(r_t=0, x_1:t) = sum_r P(r_\{t-1\},x_1:t-1) pi_t^(r) H
 #'
 #' @param x Observed univariate series.
 #' @param hazard Constant hazard H = 1/lambda of the geometric run-length prior.
@@ -10,6 +10,12 @@
 #' @param alpha0 Prior shape of the inverse-gamma variance.
 #' @param beta0 Prior scale of the inverse-gamma variance.
 
+#' @param x See Usage.
+#' @param hazard See Usage.
+#' @param mu0 See Usage.
+#' @param kappa0 See Usage.
+#' @param alpha0 See Usage.
+#' @param beta0 See Usage.
 #' @return List with ``cp_prob`` (P(r_t = 1) at each t), ``reset_prob``, ``run_length`` (posterior mode), ``max_cp_prob``, ``hazard``, ``n``.
 #' @references Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
 #' @export

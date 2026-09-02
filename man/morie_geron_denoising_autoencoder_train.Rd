@@ -23,6 +23,7 @@ morie_geron_denoising_autoencoder_train(
 \item{hidden}{Code width (default d).}
 
 \item{seed}{LCG seed.}
+
 }
 \value{
 List with \code{loss_history}, \code{final_loss}, \code{encoder}, \code{decoder},

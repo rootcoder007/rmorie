@@ -7,7 +7,7 @@
 #' log-ratio: the small model keeps one coordinate, the large model six.
 #'
 #' Formula: w_0 = 1 / (1 + exp(l_1 - l_0)),
-#'   l_j = log m_{K_j}(y) + log prior weight of model j.
+#'   l_j = log m_\{K_j\}(y) + log prior weight of model j.
 #'
 #' @param n Precision (sample size) of each coordinate.
 #' @param truth_dim Number of nonzero coordinates in the truth.

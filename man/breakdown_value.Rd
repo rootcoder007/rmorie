@@ -5,7 +5,8 @@
 \alias{breakdown_value}
 \title{breakdown_value}
 \usage{
-breakdown_value(beta, n_pre, n_post, family = "SD", l_vec = NULL, sign = "positive", M_max = 10, tol = 1e-09)
+breakdown_value(beta, n_pre, n_post, family = "SD", l_vec = NULL, sign = "positive", 
+    M_max = 10, tol = 1e-09) 
 }
 \arguments{
 \item{beta}{Passed to \code{identified_set}.}

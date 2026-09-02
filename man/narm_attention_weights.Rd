@@ -5,7 +5,7 @@
 \alias{narm_attention_weights}
 \title{narm_attention_weights}
 \usage{
-narm_attention_weights(h_t, H, A1, A2, v)
+narm_attention_weights(h_t, H, A1, A2, v) 
 }
 \arguments{
 \item{h_t}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spbino.R
 \name{spbino}
 \alias{spbino}
-\title{Binomial point process: a FIXED number of independent uniform points.}
+\title{Binomial point process: a FIXED number of independent uniform points}
 \usage{
 spbino(n = 100, region = NULL, seed = NULL)
 }

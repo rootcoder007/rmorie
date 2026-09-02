@@ -5,7 +5,7 @@
 \alias{morie_metsem_unitigs}
 \title{Maximal non-branching paths, plus the pure cycles}
 \usage{
-morie_metsem_unitigs(g)
+morie_metsem_unitigs(g) 
 }
 \arguments{
 \item{g}{A graph from the graph builder.}

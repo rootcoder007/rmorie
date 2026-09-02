@@ -5,7 +5,7 @@
 \alias{morie_tipsne_cheatsheet}
 \title{One-line summary of the tipsne module}
 \usage{
-morie_tipsne_cheatsheet()
+morie_tipsne_cheatsheet() 
 }
 \description{
 One-line summary of the tipsne module

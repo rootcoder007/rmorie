@@ -2,7 +2,7 @@
 % Please edit documentation in R/spspec.R
 \name{spspec}
 \alias{spspec}
-\title{Sum-of-sinusoids (spectral) representation, eqs (2.26)-(2.27).}
+\title{Sum-of-sinusoids (spectral) representation, eqs (2.26)-(2.27)}
 \usage{
 spspec(h, sigma2 = NULL, omega = NULL, mu = 0, seed = NULL)
 }

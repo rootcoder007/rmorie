@@ -24,7 +24,7 @@
 #'   \code{method}.
 #' @references Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 #'   (1998), FAO Irrigation and Drainage Paper 56, Eqs. 6, 8, 13, 42,
-#'   Example 18. Local: fetched-wave3/fao56-x0490e0{6,7,8}.html,
+#'   Example 18. Local: fetched-wave3/fao56-x0490e0\{6,7,8\}.html,
 #'   zotarelli-2010-fao56-step-by-step-AE459.pdf.
 #' @export
 #' @examples
@@ -94,7 +94,7 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 
 #' Empirical quantile-mapping bias correction (QUANT)
 #'
-#' x' = F_obs^{-1}(F_mod(x)) (Gudmundsson et al. 2012, Eq. 2) with
+#' x' = F_obs^\{-1\}(F_mod(x)) (Gudmundsson et al. 2012, Eq. 2) with
 #' both distributions empirical: piecewise-linear type-7-consistent
 #' CDF and quantile function (percentile tables + linear
 #' interpolation, Boe et al. 2007 procedure; beyond-range values take

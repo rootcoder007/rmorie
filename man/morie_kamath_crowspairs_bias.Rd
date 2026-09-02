@@ -8,6 +8,7 @@ morie_kamath_crowspairs_bias(stereo_pll, anti_pll)
 }
 \arguments{
 \item{stereo_pll, anti_pll}{Pseudo-log-likelihoods (must be <= 0).}
+
 }
 \value{
 List with \code{estimate}, \code{score}, \code{bias_gap}, \code{n_ties}.

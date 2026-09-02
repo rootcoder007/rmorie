@@ -5,10 +5,16 @@
 \alias{Lgcnprop}
 \title{LightGCN layer combination (He et al. 2020)}
 \usage{
-Lgcnprop(A, E, K, alpha = NULL)
+Lgcnprop(A, E, K, alpha = NULL) 
 }
 \description{
 LightGCN layer combination (He et al. 2020)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{E}{Argument \code{E}; see Usage.}
+\item{K}{Argument \code{K}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{E}, \code{K}, \code{alpha}, \code{n_nodes}, \code{dim}.

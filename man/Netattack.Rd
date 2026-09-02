@@ -2,18 +2,18 @@
 % Please edit documentation in R/netatp.R
 \name{Netattack}
 \alias{Netattack}
-\title{Error and attack tolerance of a network.}
+\title{Error and attack tolerance of a network}
 \usage{
 Netattack(A, strategy = "attack", k = 1, seed = 1)
 }
 \arguments{
-\item{A}{Symmetric 0/1 adjacency matrix.}
+\item{A}{See Usage.}
 
-\item{strategy}{Targeted (highest degree first) or random removal.}
+\item{strategy}{See Usage.}
 
-\item{k}{Number of nodes removed.}
+\item{k}{See Usage.}
 
-\item{seed}{Seed of the shared minstd stream used by 'error'.}
+\item{seed}{See Usage.}
 }
 \value{
 List with \code{s_giant}, \code{mean_fragment}, \code{diameter}, \code{removed}, \code{n_components}, \code{n}.

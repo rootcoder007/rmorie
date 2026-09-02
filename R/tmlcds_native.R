@@ -217,7 +217,7 @@
 }
 
 # L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
-#' L(Qbar) = -{Y log Qbar + (1-Y) log(1-Qbar)}
+#' L(Qbar) = -\{Y log Qbar + (1-Y) log(1-Qbar)\}
 #'
 #' A step of the tmlcds_native implementation. Called by \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
@@ -464,12 +464,21 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
   if (m > 0L) tot / m else Inf
 }
 
-#' Collaborative TMLE for the ATE.
+#' Collaborative TMLE for the ATE
 #'
 #' Builds a nested sequence of treatment mechanisms and selects by the
 #' cross-validated loss of the targeted outcome fit, so an instrument
 #' stays out of the propensity model. van der Laan & Rose (2018) Ch. 10
 #' Example 10.3.
+#' @param y See Usage.
+#' @param D See Usage.
+#' @param X See Usage.
+#' @param tuning See Usage.
+#' @param penalties See Usage.
+#' @param n_folds See Usage.
+#' @param trim See Usage.
+#' @param scale See Usage.
+#' @param q_covariates See Usage.
 #' @export
 tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
                       n_folds = 5L, trim = 0.005, scale = NULL,

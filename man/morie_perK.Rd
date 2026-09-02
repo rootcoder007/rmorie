@@ -5,7 +5,7 @@
 \alias{morie_perK}
 \title{morie_perK}
 \usage{
-morie_perK(x1, x2 = NULL, period = 1, lengthscale = 1, variance = 1)
+morie_perK(x1, x2 = NULL, period = 1, lengthscale = 1, variance = 1) 
 }
 \arguments{
 \item{x1}{Coerced to numeric by the body, with \code{as.numeric}.}

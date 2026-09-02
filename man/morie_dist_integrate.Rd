@@ -13,6 +13,7 @@ morie_dist_integrate(dist, integrand = NULL, lower = NULL, upper = NULL)
 
 \item{lower, upper}{Integration limits (default the distribution's
 effective support via extreme quantiles).}
+
 }
 \value{
 A list with \code{value} and the numeric \code{abs.error}.

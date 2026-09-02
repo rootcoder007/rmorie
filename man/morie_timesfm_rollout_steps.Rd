@@ -5,7 +5,7 @@
 \alias{morie_timesfm_rollout_steps}
 \title{morie_timesfm_rollout_steps}
 \usage{
-morie_timesfm_rollout_steps(horizon, output_patch_len)
+morie_timesfm_rollout_steps(horizon, output_patch_len) 
 }
 \arguments{
 \item{horizon}{Coerced to integer by the body, with \code{as.integer}.}

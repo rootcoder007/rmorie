@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' How often the NUTS trajectory hit the tree-depth cap.
+#' How often the NUTS trajectory hit the tree-depth cap
 #'
 #' Saturation is an EFFICIENCY warning, not a validity one: unlike a
 #' divergence it does not bias the draws.

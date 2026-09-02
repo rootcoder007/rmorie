@@ -26,6 +26,7 @@ morie_crim_near_repeat(
 \item{n_perm}{Permutations. Default 499.}
 
 \item{seed}{RNG seed.}
+
 }
 \value{
 List of class \code{"morie_knox"}: statistic (observed

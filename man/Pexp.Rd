@@ -5,7 +5,7 @@
 \alias{Pexp}
 \title{Pexp}
 \usage{
-Pexp(q, rate = 1, lower_tail = TRUE)
+Pexp(q, rate = 1, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Numeric; combined arithmetically in the body.}

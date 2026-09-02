@@ -16,6 +16,7 @@ Wlwmm(time, event, X, occurrence, max_iter = 50L, tol = 1e-09)
 \item{occurrence}{Occurrence number of each row.}
 
 \item{max_iter, tol}{Newton-Raphson controls.}
+
 }
 \value{
 List with \code{estimate} (common beta), \code{se},

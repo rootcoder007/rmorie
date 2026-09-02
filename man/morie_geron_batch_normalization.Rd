@@ -24,6 +24,8 @@ morie_geron_batch_normalization(
 \item{momentum}{EMA factor in [0, 1].}
 
 \item{running_mean, running_var}{Optional previous statistics.}
+
+
 }
 \value{
 List with \code{y}, \code{x_hat}, \code{mu}, \code{var}, \code{running_mean}, \code{running_var}.

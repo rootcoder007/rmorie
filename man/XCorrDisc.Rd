@@ -5,7 +5,7 @@
 \alias{XCorrDisc}
 \title{The RAW sum, not divided by N: the matched-filter output AT each}
 \usage{
-XCorrDisc(x, y, delays = NULL)
+XCorrDisc(x, y, delays = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -27,6 +27,14 @@ morie_geron_td3(
 \item{Q1, Q2}{Optional initial (n_states, n_actions) critics; default zeros.}
 
 \item{epochs, lr, gamma, steps, policy_delay, tau, noise, seed}{As in Python original.}
+
+
+
+
+
+
+
+
 }
 \value{
 list with policy, Q1, Q2, Q1_target, Q2_target, returns,

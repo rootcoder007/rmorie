@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Standard error, interval and score check from an influence curve.
+#' Standard error, interval and score check from an influence curve
 #'
 #' An efficient influence curve must have empirical mean ZERO at the
 #' targeted estimate; \code{score_solved} reports whether it does, because

@@ -5,7 +5,8 @@
 \alias{morie_glm}
 \title{morie_glm}
 \usage{
-morie_glm(y, X, family = "binomial", add_intercept = TRUE, weights = NULL, offset = NULL, max_iter = 25L, tol = 1e-08)
+morie_glm(y, X, family = "binomial", add_intercept = TRUE, weights = NULL, 
+    offset = NULL, max_iter = 25L, tol = 1e-08) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

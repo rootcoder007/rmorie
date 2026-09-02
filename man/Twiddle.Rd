@@ -5,7 +5,7 @@
 \alias{Twiddle}
 \title{Eq (3.82): W_N = exp(-j 2 pi / N), the N-th root of unity}
 \usage{
-Twiddle(npoints, power = 1)
+Twiddle(npoints, power = 1) 
 }
 \arguments{
 \item{npoints}{Coerced to integer by the body, with \code{as.integer}.}

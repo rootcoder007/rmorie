@@ -5,10 +5,14 @@
 \alias{morie_evt_chibar}
 \title{Empirical chibar(u) (Coles 2001 sec. 8.4 p.164)}
 \usage{
-morie_evt_chibar(x, y, u_grid = seq(0.5, 0.95, length.out = 20))
+morie_evt_chibar(x, y, u_grid = seq(0.5, 0.95, length.out = 20)) 
 }
 \arguments{
 \item{u_grid}{quantile grid}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+\item{y}{Argument \code{y}; see Usage.}
 }
 \description{
 Empirical chibar(u) (Coles 2001 sec. 8.4 p.164)

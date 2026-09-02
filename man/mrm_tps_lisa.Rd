@@ -32,6 +32,7 @@ mrm_tps_lisa(
 spatial-statistics convention).}
 
 \item{seed}{RNG seed.}
+
 }
 \value{
 A list with elements \code{n_polygons}, \code{global_moran_I},

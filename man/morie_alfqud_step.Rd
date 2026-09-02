@@ -5,7 +5,7 @@
 \alias{morie_alfqud_step}
 \title{Execute one instruction}
 \usage{
-morie_alfqud_step(st, instr)
+morie_alfqud_step(st, instr) 
 }
 \arguments{
 \item{st}{A list with mem, reg and flag.}

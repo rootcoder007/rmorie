@@ -2,10 +2,8 @@
 % Please edit documentation in R/siuiap.R
 \name{MORIE_SIUIAP_PANEL_MEMBERS}
 \alias{MORIE_SIUIAP_PANEL_MEMBERS}
-\title{SIU IAP panel members (2021-2024 panel, Sapers-chaired).}
-\usage{
-MORIE_SIUIAP_PANEL_MEMBERS
-}
+\title{SIU IAP panel members (2021-2024 panel, Sapers-chaired)}
+
 \description{
-SIU IAP panel members (2021-2024 panel, Sapers-chaired).
+SIU IAP panel members (2021-2024 panel, Sapers-chaired)
 }

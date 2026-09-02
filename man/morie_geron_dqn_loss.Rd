@@ -13,6 +13,7 @@ morie_geron_dqn_loss(Q, Q_target, batch, gamma = 0.99)
 c(s, a, r, s_next, done); s / a / s_next are 0-based.}
 
 \item{gamma}{Discount in [0, 1].}
+
 }
 \value{
 List with \code{loss}, \code{targets}, \code{predictions}, \code{td_errors},

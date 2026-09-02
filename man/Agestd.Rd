@@ -2,16 +2,16 @@
 % Please edit documentation in R/agstds.R
 \name{Agestd}
 \alias{Agestd}
-\title{Directly age-standardised rate.}
+\title{Directly age-standardised rate}
 \usage{
 Agestd(rates, standard_pop, person_time = NULL)
 }
 \arguments{
-\item{rates}{Age-specific rates.}
+\item{rates}{See Usage.}
 
-\item{standard_pop}{Standard population weights by age band.}
+\item{standard_pop}{See Usage.}
 
-\item{person_time}{Person-time in each band of the study population.}
+\item{person_time}{See Usage.}
 }
 \value{
 List with \code{asr}, \code{variance}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{weights}, \code{k}.

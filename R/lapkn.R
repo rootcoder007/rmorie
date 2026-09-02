@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Exponential (Laplace) kernel matrix.
+#' Exponential (Laplace) kernel matrix
 #'
 #' Formula: K(x_i, x_j) = exp(-gamma * ||x_i - x_j||)
 #'

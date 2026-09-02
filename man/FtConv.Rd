@@ -5,7 +5,7 @@
 \alias{FtConv}
 \title{Eqs (4.61)-(4.62): the Fourier transform turns the convolution into a}
 \usage{
-FtConv(x, h, omega, dt = 1)
+FtConv(x, h, omega, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

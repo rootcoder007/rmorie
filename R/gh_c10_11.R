@@ -8,7 +8,7 @@
 #' penalised one with no approximation.  Solved by Gauss-Seidel, the
 #' normal equations being diagonally dominant after the unit ridge.
 #'
-#' Formula: beta_k <- sum_i (y_i - sum_{j != k} beta_j s_ij) s_ik
+#' Formula: beta_k <- sum_i (y_i - sum_\{j != k\} beta_j s_ij) s_ik
 #'   / (sum_i s_ik^2 + 1).
 #'
 #' @param n Sample size.

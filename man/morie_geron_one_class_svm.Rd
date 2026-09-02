@@ -5,7 +5,7 @@
 \alias{morie_geron_one_class_svm}
 \title{One-class SVM (SMO) over an RBF kernel: boundary of the high-density region (Geron Ch 8, hmocsv)}
 \usage{
-morie_geron_one_class_svm(X, nu = 0.5, gamma = 1, max_iter = 2000, tol = 1e-09)
+morie_geron_one_class_svm(X, nu = 0.5, gamma = 1, max_iter = 2000, tol = 1e-09) 
 }
 \arguments{
 \item{X}{Data (n, d).}

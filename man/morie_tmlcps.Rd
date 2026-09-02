@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_tmlcps}
 \alias{morie_tmlcps}
+\alias{morie_tmlcontinuoustreatment}
 \title{The effect curve theta(a) = E(Y^a) for a continuous treatment}
 \usage{
-morie_tmlcps(y, A, X, a_grid = NULL, fit = "kernel", bandwidth = NULL, n_folds = 5)
+morie_tmlcps(y, A, X, a_grid = NULL, fit = "kernel", bandwidth = NULL, n_folds = 5) 
+
+morie_tmlcontinuoustreatment(y, A, X, a_grid = NULL, fit = "kernel", bandwidth = NULL, n_folds = 5) 
 }
 \arguments{
 \item{y}{Outcome vector.}

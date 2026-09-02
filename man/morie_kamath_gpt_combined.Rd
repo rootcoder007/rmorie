@@ -5,7 +5,7 @@
 \alias{morie_kamath_gpt_combined}
 \title{morie_kamath_gpt_combined}
 \usage{
-morie_kamath_gpt_combined(L_1, L_2, lam = 0.5)
+morie_kamath_gpt_combined(L_1, L_2, lam = 0.5) 
 }
 \arguments{
 \item{L_1,L_2,lam}{Objective values and weight.}

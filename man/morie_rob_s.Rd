@@ -12,6 +12,7 @@ morie_rob_s(X, y, n_subsets = 200L, seed = 0)
 \item{n_subsets}{random p-subsets to try.}
 
 \item{seed}{subset seed.}
+
 }
 \value{
 list: beta, scale, residuals, breakdown,

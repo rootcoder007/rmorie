@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Weight candidate predictions by cross-validated risk, on the simplex.
+#' Weight candidate predictions by cross-validated risk, on the simplex
 #'
 #' \code{Z} must hold CROSS-VALIDATED predictions; in-sample predictions
 #' make super learner pick the most overfit candidate and nothing in the

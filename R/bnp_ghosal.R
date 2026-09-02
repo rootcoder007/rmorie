@@ -97,8 +97,8 @@ morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
 #' Mean and variance of the number of distinct values in a DP sample
 #'
 #' For \code{n} draws from a Dirichlet process with precision
-#' \code{alpha}, returns \eqn{E[K_n] = \sum_{i=1}^{n} \alpha /
-#' (\alpha + i - 1)} and \eqn{Var[K_n] = \sum_{i=1}^{n} \alpha (i - 1) /
+#' \code{alpha}, returns \eqn{E\[K_n\] = \sum_{i=1}^{n} \alpha /
+#' (\alpha + i - 1)} and \eqn{Var\[K_n\] = \sum_{i=1}^{n} \alpha (i - 1) /
 #' (\alpha + i - 1)^2}.
 #'
 #' @param n sample size (positive integer)
@@ -176,7 +176,7 @@ morie_gh_dp_median_cdf <- function(G_x, alpha, n_grid = 4000L) {
 #' Log Ewens sampling formula for a partition given by multiplicities
 #'
 #' Computes \eqn{\log\{n! / (\alpha)_n \prod_i \alpha^{m_i} /
-#' (i^{m_i} m_i!)\}}, where \code{multiplicities[i]} is the number of
+#' (i^{m_i} m_i!)\}}, where \code{multiplicities\[i\]} is the number of
 #' blocks of size \code{i} and the sample size \eqn{n = \sum_i i m_i} is
 #' recovered from the multiplicities.
 #'

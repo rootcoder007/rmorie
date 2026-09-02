@@ -5,7 +5,7 @@
 \alias{moment_check}
 \title{moment_check}
 \usage{
-moment_check(replicates, target_mean, target_se, tol = 0.15)
+moment_check(replicates, target_mean, target_se, tol = 0.15) 
 }
 \arguments{
 \item{replicates}{Coerced to numeric by the body, with \code{as.numeric}.}

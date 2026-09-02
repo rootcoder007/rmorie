@@ -5,7 +5,7 @@
 \alias{morie_warpL_rank_weight}
 \title{morie_warpL_rank_weight}
 \usage{
-morie_warpL_rank_weight(rank, alphas)
+morie_warpL_rank_weight(rank, alphas) 
 }
 \arguments{
 \item{rank}{Passed to \code{.warpL_rank_weight}.}

@@ -5,7 +5,8 @@
 \alias{morie_geron_randomized_search}
 \title{Randomized hyperparameter search, scored by K-fold CV (Geron Ch 2, hmrsc)}
 \usage{
-morie_geron_randomized_search(param_dist, n_iter, X, y, estimator = NULL, K = 3, seed = 0, score = NULL)
+morie_geron_randomized_search(param_dist, n_iter, X, y, estimator = NULL, K = 3, seed = 0, 
+    score = NULL) 
 }
 \arguments{
 \item{param_dist}{Named list of distributions: an R `list(lo, hi)` of length 2 is a uniform   INTERVAL (Python\'s `(lo, hi)` tuple); a plain vector is a discrete CHOICE list (Python\'s   `\[...\]`), matching Python\'s own tuple-vs-list distinction. A function is `f(u)`.}

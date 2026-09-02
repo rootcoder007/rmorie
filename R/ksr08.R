@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Multiplier bootstrap with exponential weights (Dirichlet weights).
+#' Multiplier bootstrap with exponential weights (Dirichlet weights)
 #'
 #' The weights are divided by their own mean so the total weight stays n.
 #' With standard exponential multipliers mu = tau = 1, so the scaling

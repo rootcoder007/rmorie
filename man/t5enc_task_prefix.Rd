@@ -5,7 +5,7 @@
 \alias{t5enc_task_prefix}
 \title{t5enc_task_prefix}
 \usage{
-t5enc_task_prefix(task, text)
+t5enc_task_prefix(task, text) 
 }
 \arguments{
 \item{task}{Coerced to character by the body, with \code{as.character}.}

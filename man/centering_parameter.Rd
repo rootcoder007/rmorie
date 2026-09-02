@@ -5,7 +5,7 @@
 \alias{centering_parameter}
 \title{centering_parameter}
 \usage{
-centering_parameter(mu, mu_affine, nu = 3)
+centering_parameter(mu, mu_affine, nu = 3) 
 }
 \arguments{
 \item{mu}{Coerced to numeric by the body, with \code{as.numeric}.}

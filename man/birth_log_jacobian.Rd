@@ -5,7 +5,7 @@
 \alias{birth_log_jacobian}
 \title{birth_log_jacobian}
 \usage{
-birth_log_jacobian(h_j, h_new_left, h_new_right)
+birth_log_jacobian(h_j, h_new_left, h_new_right) 
 }
 \arguments{
 \item{h_j}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{pool}
 \title{pool}
 \usage{
-pool(token_vectors, mode = "mean", mask = NULL)
+pool(token_vectors, mode = "mean", mask = NULL) 
 }
 \arguments{
 \item{token_vectors}{Passed to \code{.sbert_mat}.}

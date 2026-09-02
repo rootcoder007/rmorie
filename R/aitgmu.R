@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geometric mean of the parts of a single composition.
+#' Geometric mean of the parts of a single composition
 #'
 #' Formula: g(x) = (x_1 x_2 ... x_D)^(1/D) = exp( (1/D) sum_j log x_j )
 #'

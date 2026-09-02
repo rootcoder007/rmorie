@@ -69,7 +69,7 @@ predict_naive <- function(x, w0, w, V) {
 }
 
 # --- d/d v_{i,f} of hat y, used in the SGD step --------------------
-#' D/d v_{i,f} of hat y, used in the SGD step --------------------
+#' D/d v_\{i,f\} of hat y, used in the SGD step --------------------
 #'
 #' A step of the fmFM_native implementation. Called by \code{fit_fm}.
 #' See the file header for the source the module follows.

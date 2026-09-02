@@ -9,6 +9,7 @@ morie_terry_hoeffding_test(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors.}
+
 }
 \value{
 Named list: statistic, p_value, z, n, m.

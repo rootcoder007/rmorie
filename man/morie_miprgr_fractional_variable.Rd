@@ -5,7 +5,7 @@
 \alias{morie_miprgr_fractional_variable}
 \title{Most fractional integer variable}
 \usage{
-morie_miprgr_fractional_variable(x, integer_vars, tol = .GHC_MIP_EPS)
+morie_miprgr_fractional_variable(x, integer_vars, tol = .GHC_MIP_EPS) 
 }
 \arguments{
 \item{x}{Solution vector.}

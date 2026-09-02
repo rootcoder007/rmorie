@@ -5,7 +5,7 @@
 \alias{t3ols}
 \title{t3ols}
 \usage{
-t3ols(X, y)
+t3ols(X, y) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{t}.}

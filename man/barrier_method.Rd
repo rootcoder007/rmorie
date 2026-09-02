@@ -5,7 +5,9 @@
 \alias{barrier_method}
 \title{Barrier method}
 \usage{
-barrier_method(f0, constraints, x0, t0 = 1, mu = 10, eps = 1e-08, aeq = NULL, beq = NULL, centering = "newton", tol = 1e-10, max_inner = 200L, max_outer = 200L, grad = NULL, hess = NULL, affine = FALSE)
+barrier_method(f0, constraints, x0, t0 = 1, mu = 10, eps = 1e-08, aeq = NULL, 
+    beq = NULL, centering = "newton", tol = 1e-10, max_inner = 200L, max_outer = 200L, 
+    grad = NULL, hess = NULL, affine = FALSE) 
 }
 \arguments{
 \item{f0}{Objective: a function, a \code{Fun}, or a list with   \code{f}, \code{grad}, \code{hess}, \code{affine}.}

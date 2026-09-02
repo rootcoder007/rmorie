@@ -5,7 +5,7 @@
 \alias{transition_probabilities}
 \title{transition_probabilities}
 \usage{
-transition_probabilities(adj, t, v, p, q, weights = NULL)
+transition_probabilities(adj, t, v, p, q, weights = NULL) 
 }
 \arguments{
 \item{adj}{A vector; indexed elementwise.}

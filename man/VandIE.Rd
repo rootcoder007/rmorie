@@ -16,6 +16,8 @@ VandIE(Y, X, M, Cc = NULL, a = 1, astar = 0, m = 0)
 \item{Cc}{Optional covariates; read at their means.}
 
 \item{a, astar, m}{Exposure contrast and controlled mediator level.}
+
+
 }
 \value{
 List with \code{estimate}, \code{p_cde}, \code{p_intref},
@@ -30,7 +32,7 @@ the same way -- with mixed signs a share can exceed one or go negative
 }
 \details{
 Formula: \code{TE = CDE + INTref + INTmed + PIE}, reported as each
-component over \code{E[TE]}.
+component over \code{E\[TE\]}.
 }
 \examples{
 VandIE(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)

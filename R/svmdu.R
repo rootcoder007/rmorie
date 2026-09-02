@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Wolfe dual objective of the support vector machine.
+#' Wolfe dual objective of the support vector machine
 #'
 #' Formula: L(alpha) = sum_i alpha_i - 0.5 sum_i sum_j alpha_i alpha_j y_i y_j K(x_i, x_j)
 #'

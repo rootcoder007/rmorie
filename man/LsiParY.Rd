@@ -5,7 +5,7 @@
 \alias{LsiParY}
 \title{Eqs (3.48)-(3.49): the parallel counterpart of eq (3.44) -- here the}
 \usage{
-LsiParY(x, h1, h2)
+LsiParY(x, h1, h2) 
 }
 \arguments{
 \item{x}{Passed to \code{LsiPar}.}

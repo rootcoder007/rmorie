@@ -5,7 +5,7 @@
 \alias{project_covariance}
 \title{Project a 3D covariance to a 2D one: J W Sigma W\' J\'}
 \usage{
-project_covariance(S, W, J)
+project_covariance(S, W, J) 
 }
 \arguments{
 \item{S}{3D covariance matrix.}

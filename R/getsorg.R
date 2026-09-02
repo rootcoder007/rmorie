@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Getis-Ord global G, with its exact randomisation moments.
+#' Getis-Ord global G, with its exact randomisation moments
 #'
 #' Formula: \eqn{G = \sum_i \sum_{j \ne i} w_{ij} x_i x_j /
-#' \sum_i \sum_{j \ne i} x_i x_j}, \eqn{E[G] = S_0/(n(n-1))}, and the
+#' \sum_i \sum_{j \ne i} x_i x_j}, \eqn{E\[G\] = S_0/(n(n-1))}, and the
 #' randomisation variance of Getis and Ord (1992) built from
 #' \eqn{S_0, S_1, S_2} and the moments \eqn{m_r = \sum_i x_i^r}:
 #' \eqn{B_0 = (n^2-3n+3)S_1 - nS_2 + 3S_0^2},

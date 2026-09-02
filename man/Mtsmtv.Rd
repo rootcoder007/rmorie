@@ -15,6 +15,7 @@ Mtsmtv(y, D, y_min, y_max, d = NULL)
 
 \item{d}{Level whose mean counterfactual is bounded; defaults to
 \code{max(D)}.}
+
 }
 \value{
 List with lower, upper, width, mts_lower, mts_upper, mtr_lower,

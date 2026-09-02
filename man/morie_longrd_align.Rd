@@ -5,7 +5,7 @@
 \alias{morie_longrd_align}
 \title{Needleman-Wunsch global alignment, with the traceback written out}
 \usage{
-morie_longrd_align(a, b, match = 1, mismatch = -1, gap = -2)
+morie_longrd_align(a, b, match = 1, mismatch = -1, gap = -2) 
 }
 \arguments{
 \item{a,b}{The two sequences.}

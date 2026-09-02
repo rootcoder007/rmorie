@@ -2,20 +2,20 @@
 % Please edit documentation in R/dinopr.R
 \name{Dinoloss}
 \alias{Dinoloss}
-\title{DINO self-distillation cross-entropy.}
+\title{DINO self-distillation cross-entropy}
 \usage{
 Dinoloss(s_logits, t_logits, tau_s = 0.1, tau_t = 0.04, center = NULL)
 }
 \arguments{
-\item{s_logits}{Student logits.}
+\item{s_logits}{See Usage.}
 
-\item{t_logits}{Teacher logits.}
+\item{t_logits}{See Usage.}
 
-\item{tau_s}{Student temperature.}
+\item{tau_s}{See Usage.}
 
-\item{tau_t}{Teacher temperature.}
+\item{tau_t}{See Usage.}
 
-\item{center}{Teacher centre C; zeros if omitted.}
+\item{center}{See Usage.}
 }
 \value{
 List with \code{loss}, \code{per_view}, \code{p_s}, \code{p_t}, \code{B}, \code{K}.

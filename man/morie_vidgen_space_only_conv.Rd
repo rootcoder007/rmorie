@@ -5,7 +5,7 @@
 \alias{morie_vidgen_space_only_conv}
 \title{morie_vidgen_space_only_conv}
 \usage{
-morie_vidgen_space_only_conv(video, kernel)
+morie_vidgen_space_only_conv(video, kernel) 
 }
 \arguments{
 \item{video}{Iterated over elementwise, with \code{lapply}.}

@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_gotoh_score_vectors}
 \title{morie_sv_dl_gotoh_score_vectors}
 \usage{
-morie_sv_dl_gotoh_score_vectors(consensus, ref, match = 1, mismatch = -2, gap_open = -4, gap_extend = -1)
+morie_sv_dl_gotoh_score_vectors(consensus, ref, match = 1, mismatch = -2, gap_open = -4, gap_extend = -1) 
 }
 \arguments{
 \item{consensus}{Coerced to character by the body, with \code{as.character}.}

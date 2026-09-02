@@ -2,7 +2,7 @@
 % Please edit documentation in R/enobj.R
 \name{Enetobj}
 \alias{Enetobj}
-\title{Elastic net penalized residual sum of squares.}
+\title{Elastic net penalized residual sum of squares}
 \usage{
 Enetobj(X, y, beta, lam, alpha, add_intercept = TRUE)
 }

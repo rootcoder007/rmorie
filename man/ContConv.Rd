@@ -5,7 +5,7 @@
 \alias{ContConv}
 \title{Eq (3.30): y(t) = integral x(tau) h(t - tau) d tau.  Tabulated on a}
 \usage{
-ContConv(x, h, dt = 1, t = NULL)
+ContConv(x, h, dt = 1, t = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

@@ -5,7 +5,7 @@
 \alias{spectral_radius}
 \title{spectral_radius}
 \usage{
-spectral_radius(spec, theta, tol = 1e-06)
+spectral_radius(spec, theta, tol = 1e-06) 
 }
 \arguments{
 \item{spec}{Passed to \code{state_matrices}.}

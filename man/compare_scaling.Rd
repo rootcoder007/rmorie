@@ -5,7 +5,7 @@
 \alias{compare_scaling}
 \title{compare_scaling}
 \usage{
-compare_scaling(x_a, y_a, x_b, y_b, label_a = "A", label_b = "B")
+compare_scaling(x_a, y_a, x_b, y_b, label_a = "A", label_b = "B") 
 }
 \arguments{
 \item{x_a}{Passed to \code{fit_power_law}.}

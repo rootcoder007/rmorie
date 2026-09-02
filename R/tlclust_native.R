@@ -41,7 +41,7 @@
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
   if (is.list(Q_seq) && !is.null(Y) && !is.null(cluster)) {
-    r <- tlltmle::ltmle(Q_seq, H_seq, Y)
+    r <- tlltmle_ltmle(Q_seq, H_seq, Y)
     q <- r$Q_star[[length(r$Q_star)]]
     psi <- r$psi
     if (is.null(ic))

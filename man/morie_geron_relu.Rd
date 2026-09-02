@@ -5,7 +5,7 @@
 \alias{morie_geron_relu}
 \title{Rectified linear unit activation, with a leaky negative slope and dead-fraction diagnostic (Geron Ch 9, hmrelu)}
 \usage{
-morie_geron_relu(z, leaky = 0)
+morie_geron_relu(z, leaky = 0) 
 }
 \arguments{
 \item{z}{Pre-activations.}

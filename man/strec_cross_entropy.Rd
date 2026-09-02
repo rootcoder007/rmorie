@@ -5,7 +5,7 @@
 \alias{strec_cross_entropy}
 \title{strec_cross_entropy}
 \usage{
-strec_cross_entropy(probability, target_index)
+strec_cross_entropy(probability, target_index) 
 }
 \arguments{
 \item{probability}{Coerced to numeric by the body, with \code{as.numeric}.}

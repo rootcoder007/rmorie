@@ -5,10 +5,14 @@
 \alias{morie_burkov_tf_idf}
 \title{morie_burkov_tf_idf}
 \usage{
-morie_burkov_tf_idf(term, document, corpus)
+morie_burkov_tf_idf(term, document, corpus) 
 }
 \arguments{
 \item{corpus}{List of token vectors.}
+
+\item{term}{Argument \code{term}; see Usage.}
+
+\item{document}{Argument \code{document}; see Usage.}
 }
 \description{
 morie_burkov_tf_idf

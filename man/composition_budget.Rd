@@ -5,7 +5,7 @@
 \alias{composition_budget}
 \title{Basic composition: k releases cost sum_i epsilon_i}
 \usage{
-composition_budget(epsilons)
+composition_budget(epsilons) 
 }
 \arguments{
 \item{epsilons}{Vector of epsilons.}

@@ -5,7 +5,7 @@
 \alias{Qchisq}
 \title{Qchisq}
 \usage{
-Qchisq(p, df)
+Qchisq(p, df) 
 }
 \arguments{
 \item{p}{Passed to \code{Qgamma}.}

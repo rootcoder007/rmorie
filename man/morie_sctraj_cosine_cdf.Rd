@@ -5,7 +5,7 @@
 \alias{morie_sctraj_cosine_cdf}
 \title{CDF of a cosine kernel of bandwidth 1/2: density 1 + cos(2 pi u)}
 \usage{
-morie_sctraj_cosine_cdf(u)
+morie_sctraj_cosine_cdf(u) 
 }
 \arguments{
 \item{u}{Numeric; combined arithmetically in the body.}

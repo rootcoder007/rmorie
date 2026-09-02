@@ -36,6 +36,9 @@ Default v = n_T + 2, S = I, the smallest degrees of freedom at which the
 inverse-Wishart mean exists.}
 
 \item{tol}{fixed-point tolerance on the genetic effects.}
+
+
+
 }
 \value{
 list: estimate, gebv, b1, Sigma_T, R, mu, beta, n, method.
@@ -56,8 +59,8 @@ kernel can be used."  The model is therefore taken from where that sentence
 points.
 
 Volume [Pages 171-208], Chapter 6, Section 6.8.1, equation (6.9), p. 191:
-Y = 1_J mu^T + X B + Z_1 b_1 + E, with E ~ MN_{J x n_T}(0, I_J, R) and
-b_1 ~ MN_{J x n_T}(0, G, Sigma_T), that is vec(b_1) ~ N(0, Sigma_T (x) G).
+Y = 1_J mu^T + X B + Z_1 b_1 + E, with E ~ MN_\{J x n_T\}(0, I_J, R) and
+b_1 ~ MN_\{J x n_T\}(0, G, Sigma_T), that is vec(b_1) ~ N(0, Sigma_T (x) G).
 Section 8.9 replaces G by the kernel K.  The marginal
 vec(Y) ~ MVN(0, Sigma_g (x) K + Sigma_e (x) I) is that model's marginal; it
 is NOT printed anywhere in the book and no equation number should ever be
@@ -78,7 +81,7 @@ Section 6.9 sampler on p. 196.  S_R is used here.
 DETERMINISM.  Nothing is sampled.  Every step is taken at the exact mean of
 its own full conditional -- the normal steps at the means written above, and
 the two inverse-Wishart steps at E[IW(v, S)] = S/(v - n_T - 1), the mean the
-book's own exponent |Sigma|^{-(v+n_T+1)/2} implies.  Iterating those
+book's own exponent |Sigma|^\{-(v+n_T+1)/2\} implies.  Iterating those
 conditional means is the EM fixed point of the same sampler, so both arms
 land on identical numbers rather than on the same posterior.
 }

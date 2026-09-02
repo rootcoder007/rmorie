@@ -5,7 +5,7 @@
 \alias{start_allowed}
 \title{start_allowed}
 \usage{
-start_allowed(labels)
+start_allowed(labels) 
 }
 \arguments{
 \item{labels}{Character; passed to \code{substr}.}

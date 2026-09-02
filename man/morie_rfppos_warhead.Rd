@@ -5,7 +5,7 @@
 \alias{morie_rfppos_warhead}
 \title{Locate the electrophilic carbon and the atom that orients it}
 \usage{
-morie_rfppos_warhead(smiles, mode = "burgi_dunitz")
+morie_rfppos_warhead(smiles, mode = "burgi_dunitz") 
 }
 \arguments{
 \item{smiles}{The ligand.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Allocate n units to strata in proportion to stratum size.
+#' Allocate n units to strata in proportion to stratum size
 #'
 #' Largest-remainder apportionment is used rather than rounding each n_h
 #' independently, because rounding can miss the target total by several

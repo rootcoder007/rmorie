@@ -12,6 +12,7 @@ morie_geron_precision(y_true, y_pred, positive = 1, average = NULL)
 \item{positive}{0-based positive class when \code{average} is NULL.}
 
 \item{average}{NULL or "macro".}
+
 }
 \value{
 List with \code{precision}, \code{tp}, \code{fp}, \code{per_class}.

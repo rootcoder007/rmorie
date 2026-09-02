@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_rouss.R
 \name{.rsconsistency}
 \alias{.rsconsistency}
-\title{C0 = alpha / F_chi2_{p+2}(q_alpha), alpha = h/n, q_alpha the chi2_p
+\title{C0 = alpha / F_chi2_\{p+2\}(q_alpha), alpha = h/n, q_alpha the chi2_p
 quantile}
 \usage{
 .rsconsistency(h, n, p)

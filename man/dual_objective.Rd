@@ -5,7 +5,7 @@
 \alias{dual_objective}
 \title{dual_objective}
 \usage{
-dual_objective(alpha, y, K)
+dual_objective(alpha, y, K) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

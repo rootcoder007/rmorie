@@ -5,7 +5,7 @@
 \alias{VfEmd}
 \title{IMF-based characterisation of ventricular fibrillation, Sec 8.16}
 \usage{
-VfEmd(ecg, fs = 250, n_imfs = 6, tol = 0.05)
+VfEmd(ecg, fs = 250, n_imfs = 6, tol = 0.05) 
 }
 \arguments{
 \item{ecg}{Passed to \code{.tf_need}.}

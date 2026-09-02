@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Jensen-Shannon divergence for compositional data.
+#' Jensen-Shannon divergence for compositional data
 #'
 #' A composition carries only relative information, so it is closed to
 #' the simplex before the divergence is taken -- which is exactly what

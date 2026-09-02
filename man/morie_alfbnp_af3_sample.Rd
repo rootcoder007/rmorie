@@ -5,7 +5,10 @@
 \alias{morie_alfbnp_af3_sample}
 \title{morie_alfbnp_af3_sample}
 \usage{
-morie_alfbnp_af3_sample(n_atoms = NULL, denoiser = NULL, clean = NULL, steps = 20L, sigma_data = 16, s_max = 160, s_min = 4e-04, rho = 7, gamma_0 = 0.8, gamma_min = 1, noise_scale = 1.003, step_scale = 1.5, noise = NULL, seed = 2, x_init = NULL, ridge = 1e-06)
+morie_alfbnp_af3_sample(n_atoms = NULL, denoiser = NULL, clean = NULL, steps = 20L, sigma_data = 16, 
+    s_max = 160, s_min = 4e-04, rho = 7, gamma_0 = 0.8, gamma_min = 1, 
+    noise_scale = 1.003, step_scale = 1.5, noise = NULL, seed = 2, x_init = NULL, 
+    ridge = 1e-06) 
 }
 \arguments{
 \item{n_atoms}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

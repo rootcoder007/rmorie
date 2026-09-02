@@ -2,18 +2,18 @@
 % Please edit documentation in R/odgrev.R
 \name{Outbrkdet}
 \alias{Outbrkdet}
-\title{Outbreak detection by online changepoint analysis of counts.}
+\title{Outbreak detection by online changepoint analysis of counts}
 \usage{
 Outbrkdet(counts, hazard = 0.01, a0 = 1, b0 = 1)
 }
 \arguments{
-\item{counts}{Non-negative integer case counts per period.}
+\item{counts}{See Usage.}
 
-\item{hazard}{Constant hazard of the geometric run-length prior.}
+\item{hazard}{See Usage.}
 
-\item{a0}{Gamma prior shape on the Poisson rate.}
+\item{a0}{See Usage.}
 
-\item{b0}{Gamma prior rate on the Poisson rate.}
+\item{b0}{See Usage.}
 }
 \value{
 List with \code{cp_prob} (P(r_t = 1)), \code{reset_prob}, \code{run_length}, \code{max_cp_prob}, \code{alarm} (indices with cp_prob > 0.5), \code{n}.

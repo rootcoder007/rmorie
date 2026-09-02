@@ -5,7 +5,7 @@
 \alias{alfRelu}
 \title{alfRelu}
 \usage{
-alfRelu(x)
+alfRelu(x) 
 }
 \arguments{
 \item{x}{Passed to \code{ifelse}.}

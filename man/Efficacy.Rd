@@ -5,10 +5,14 @@
 \alias{Efficacy}
 \title{Efficacy -- eq. (13.2.4), p. 486}
 \usage{
-Efficacy(deriv, var)
+Efficacy(deriv, var) 
 }
 \description{
 Efficacy -- eq. (13.2.4), p. 486
+}
+\arguments{
+\item{deriv}{Argument \code{deriv}; see Usage.}
+\item{var}{Argument \code{var}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{deriv}, \code{var}.

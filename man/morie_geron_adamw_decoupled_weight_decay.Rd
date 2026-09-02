@@ -27,6 +27,11 @@ morie_geron_adamw_decoupled_weight_decay(
 \item{b1, b2, eps}{Adam hyperparameters.}
 
 \item{lam}{Non-negative decoupled decay.}
+
+
+
+
+
 }
 \value{
 List with \code{theta_new}, \code{m_new}, \code{s_new}, \code{adam_step},

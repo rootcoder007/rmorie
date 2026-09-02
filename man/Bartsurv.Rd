@@ -16,6 +16,7 @@ Bartsurv(time, event, X = NULL, n_trees = 5, shrink = 0.3, grid = NULL)
 \item{shrink}{the shrinkage factor.}
 
 \item{grid}{the person-period grid.}
+
 }
 \value{
 list: estimate, hazard, surv, trees, grid, n, method.

@@ -5,7 +5,7 @@
 \alias{naive_variance}
 \title{naive_variance}
 \usage{
-naive_variance(ic)
+naive_variance(ic) 
 }
 \arguments{
 \item{ic}{Coerced to numeric by the body, with \code{as.numeric}.}

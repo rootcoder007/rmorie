@@ -5,7 +5,7 @@
 \alias{morie_infmer}
 \title{Main entry point: morie_infmer}
 \usage{
-morie_infmer(q, k, v, c = 5)
+morie_infmer(q, k, v, c = 5) 
 }
 \arguments{
 \item{q}{A matrix; indexed by row and column.}

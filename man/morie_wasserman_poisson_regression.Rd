@@ -12,6 +12,7 @@ morie_wasserman_poisson_regression(X, y, max_iter = 100L, tol = 1e-10)
 \item{y}{Non-negative integer counts.}
 
 \item{max_iter, tol}{Newton controls.}
+
 }
 \value{
 List with \code{estimate}, \code{beta}, \code{se}, \code{log_likelihood},

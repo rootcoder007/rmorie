@@ -5,7 +5,7 @@
 \alias{alfLnorm}
 \title{Layer normalisation over the channel axis of one vector.  Uses the}
 \usage{
-alfLnorm(v, g = NULL, b = NULL, eps = 1e-05)
+alfLnorm(v, g = NULL, b = NULL, eps = 1e-05) 
 }
 \arguments{
 \item{v}{A vector; its length is taken.}

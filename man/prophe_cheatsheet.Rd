@@ -5,7 +5,7 @@
 \alias{prophe_cheatsheet}
 \title{prophe_cheatsheet}
 \usage{
-prophe_cheatsheet()
+prophe_cheatsheet() 
 }
 \description{
 A step of the prophe_native implementation. No other function in the package calls it. See the file header for the source the module follows.

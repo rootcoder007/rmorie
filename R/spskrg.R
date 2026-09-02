@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Simple kriging: the mean is known.
+#' Simple kriging: the mean is known
 #'
 #' With Z(s) = mu(s) + e(s), e ~ (0, Sigma), the linear predictor
 #' minimising the mean-squared prediction error is

@@ -25,6 +25,12 @@ morie_geron_bidirectional_rnn(
 \item{b_f, b_b, h0_f, h0_b}{Optional biases and initial states.}
 
 \item{activation}{One of "tanh", "relu", "sigmoid", "identity".}
+
+
+
+
+
+
 }
 \value{
 List with \code{output}, \code{h_fwd}, \code{h_bwd}, \code{final}, \code{hidden_size}.

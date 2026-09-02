@@ -5,7 +5,7 @@
 \alias{ValvePcg}
 \title{ValvePcg: prosthetic heart valve evaluation via PCG AR spectrum}
 \usage{
-ValvePcg(pcg, fs, n_peaks = 3, order = NULL)
+ValvePcg(pcg, fs, n_peaks = 3, order = NULL) 
 }
 \arguments{
 \item{pcg}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{estimator_score}
 \title{estimator_score}
 \usage{
-estimator_score(hyp, src, ref, W, b = NULL)
+estimator_score(hyp, src, ref, W, b = NULL) 
 }
 \arguments{
 \item{hyp}{Passed to \code{pooled_features}.}

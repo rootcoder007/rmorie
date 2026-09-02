@@ -5,7 +5,7 @@
 \alias{morie_geron_static_quantization_ptq}
 \title{Static post-training quantization (PTQ) from calibration ranges (Geron App B, hmptq)}
 \usage{
-morie_geron_static_quantization_ptq(model, calibration_data, bits = 8, percentile = 100)
+morie_geron_static_quantization_ptq(model, calibration_data, bits = 8, percentile = 100) 
 }
 \arguments{
 \item{model}{Weights.}

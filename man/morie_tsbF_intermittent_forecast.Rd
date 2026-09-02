@@ -5,7 +5,8 @@
 \alias{morie_tsbF_intermittent_forecast}
 \title{morie_tsbF_intermittent_forecast}
 \usage{
-morie_tsbF_intermittent_forecast(y, method = "tsb", alpha = 0.1, beta = 0.05, horizon = 1, init = "global", z0 = NULL, x0 = NULL, p0 = NULL, burn_in = 0)
+morie_tsbF_intermittent_forecast(y, method = "tsb", alpha = 0.1, beta = 0.05, horizon = 1, init = "global", 
+    z0 = NULL, x0 = NULL, p0 = NULL, burn_in = 0) 
 }
 \arguments{
 \item{y}{Passed to \code{morie_tsbF_tsb_forecast}.}

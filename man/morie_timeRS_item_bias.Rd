@@ -5,7 +5,7 @@
 \alias{morie_timeRS_item_bias}
 \title{morie_timeRS_item_bias}
 \usage{
-morie_timeRS_item_bias(b_i, bins, t, bin_days = 70, n_bins = 30)
+morie_timeRS_item_bias(b_i, bins, t, bin_days = 70, n_bins = 30) 
 }
 \arguments{
 \item{b_i}{Passed to \code{.timeRS_item_bias}.}

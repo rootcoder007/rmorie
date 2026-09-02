@@ -5,7 +5,7 @@
 \alias{hyperparameter_design}
 \title{hyperparameter_design}
 \usage{
-hyperparameter_design(mode, curvature, step = 1, dim = NULL)
+hyperparameter_design(mode, curvature, step = 1, dim = NULL) 
 }
 \arguments{
 \item{mode}{Coerced to numeric by the body, with \code{as.numeric}.}

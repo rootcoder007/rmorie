@@ -21,6 +21,8 @@ morie_fauzi_thm5_1_naive_kernel_equiv(
 \item{cvm_emp, cvm_kernel}{The empirical and naive-kernel CvM statistics.}
 
 \item{tol}{Tolerance against which the differences are reported.}
+
+
 }
 \value{
 Named list with \code{ksdiff}, \code{cvmdiff}, \code{close}, \code{tol}, \code{method}.

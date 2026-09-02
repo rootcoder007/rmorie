@@ -2,7 +2,7 @@
 % Please edit documentation in R/prratio.R
 \name{Prevratio}
 \alias{Prevratio}
-\title{Prevalence ratio.}
+\title{Prevalence ratio}
 \usage{
 Prevratio(
   prev_exposed,
@@ -13,15 +13,15 @@ Prevratio(
 )
 }
 \arguments{
-\item{prev_exposed}{Prevalence in the exposed group.}
+\item{prev_exposed}{See Usage.}
 
-\item{prev_unexposed}{Prevalence in the unexposed group.}
+\item{prev_unexposed}{See Usage.}
 
-\item{n_exposed}{Size of the exposed group.}
+\item{n_exposed}{See Usage.}
 
-\item{n_unexposed}{Size of the unexposed group.}
+\item{n_unexposed}{See Usage.}
 
-\item{alpha}{Two-sided significance level.}
+\item{alpha}{See Usage.}
 }
 \value{
 List with \code{pr}, \code{log_pr}, \code{se_log}, \code{ci_lower}, \code{ci_upper}.

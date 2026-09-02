@@ -5,7 +5,8 @@
 \alias{nbeats_block}
 \title{nbeats_block}
 \usage{
-nbeats_block(window, horizon, kind = "generic", degree = 2, harmonics = 3, ridge = 1e-08)
+nbeats_block(window, horizon, kind = "generic", degree = 2, harmonics = 3, 
+    ridge = 1e-08) 
 }
 \arguments{
 \item{window}{A vector; its length is taken.}

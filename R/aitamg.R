@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Amalgamate a subset of parts into one, keeping the rest.
+#' Amalgamate a subset of parts into one, keeping the rest
 #'
 #' The amalgamated part is appended last; the retained parts keep their
 #' original order. \code{parts} is one-based.
 #'
-#' Formula: amalg(x; S) = C( (x_i : i not in S), sum_{j in S} x_j )
+#' Formula: amalg(x; S) = C( (x_i : i not in S), sum_\{j in S\} x_j )
 #'
 #' @param x Strictly positive vector of parts.
 #' @param parts One-based indices of the parts summed together.

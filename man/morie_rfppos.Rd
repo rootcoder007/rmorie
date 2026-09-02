@@ -5,7 +5,8 @@
 \alias{morie_rfppos}
 \title{Does this pose present its warhead so the cysteine can attack?}
 \usage{
-morie_rfppos(pose, cys_residue, mode = "burgi_dunitz", d_min = 1.5, d_max = 3.5, ideal = NULL, angle_tol = 15, warhead = NULL)
+morie_rfppos(pose, cys_residue, mode = "burgi_dunitz", d_min = 1.5, d_max = 3.5, 
+    ideal = NULL, angle_tol = 15, warhead = NULL) 
 }
 \arguments{
 \item{pose}{A list with \code{smiles} for the ligand and   \code{coords}, one triple per atom in the order the SMILES lists   them.}

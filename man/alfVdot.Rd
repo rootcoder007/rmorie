@@ -5,7 +5,7 @@
 \alias{alfVdot}
 \title{alfVdot}
 \usage{
-alfVdot(a, b)
+alfVdot(a, b) 
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}

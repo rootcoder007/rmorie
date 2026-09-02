@@ -5,7 +5,7 @@
 \alias{tlltmle_tmle_point}
 \title{tlltmle_tmle_point}
 \usage{
-tlltmle_tmle_point(A, Y, Q1, Q0, g)
+tlltmle_tmle_point(A, Y, Q1, Q0, g) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

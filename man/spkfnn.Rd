@@ -2,7 +2,7 @@
 % Please edit documentation in R/spkfnn.R
 \name{spkfnn}
 \alias{spkfnn}
-\title{Leave-one-out cross-validation of a kriging model.}
+\title{Leave-one-out cross-validation of a kriging model}
 \usage{
 spkfnn(coords, z, cov_model = NULL, mu = NULL)
 }

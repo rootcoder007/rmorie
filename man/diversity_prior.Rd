@@ -3,9 +3,9 @@
 % the formals.
 \name{diversity_prior}
 \alias{diversity_prior}
-\title{Diversity prior \eqn{\bar p = \beta p_0 + (1-\beta) p(g \mid u)}.}
+\title{Diversity prior \eqn{\bar p = \beta p_0 + (1-\beta) p(g \mid u)}}
 \usage{
-diversity_prior(p_u, p0, beta)
+diversity_prior(p_u, p0, beta) 
 }
 \arguments{
 \item{p_u}{User\'s played distribution \eqn{p(g \mid u)}.}

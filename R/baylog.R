@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Posterior mode and normal approximation for logistic regression.
+#' Posterior mode and normal approximation for logistic regression
 #'
 #' The N(0, prior_sd^2) prior keeps the Hessian invertible under
 #' separation. The approximation is centred at the MODE and scaled by the

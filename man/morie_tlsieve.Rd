@@ -5,7 +5,7 @@
 \alias{morie_tlsieve}
 \title{morie_tlsieve}
 \usage{
-morie_tlsieve(F_vac_matched, F_pla_matched, F_vac_mismatched, F_pla_mismatched)
+morie_tlsieve(F_vac_matched, F_pla_matched, F_vac_mismatched, F_pla_mismatched) 
 }
 \arguments{
 \item{F_vac_matched}{Passed to \code{.tlsieve_vaccine_efficacy}.}

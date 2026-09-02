@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_b01_ruhela_per_year}
 \alias{morie_otis_analyze_b01_ruhela_per_year}
 \alias{morie_otis_analyze_b01_mrm_per_year}
-\title{Per-year full-DLRM on b01 canonical formulation.}
+\title{Per-year full-DLRM on b01 canonical formulation}
 \usage{
 morie_otis_analyze_b01_ruhela_per_year(data = NULL, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_b01_mrm_per_year(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-Per-year full-DLRM on b01 canonical formulation.
+Per-year full-DLRM on b01 canonical formulation
 }
 \examples{
 \donttest{ morie_otis_analyze_b01_ruhela_per_year() }

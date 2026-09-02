@@ -2,7 +2,7 @@
 % Please edit documentation in R/brcls.R
 \name{Brierscore}
 \alias{Brierscore}
-\title{Brier score for a categorical predictive distribution.}
+\title{Brier score for a categorical predictive distribution}
 \usage{
 Brierscore(P, y)
 }

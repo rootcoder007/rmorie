@@ -5,7 +5,7 @@
 \alias{term_weighting}
 \title{term_weighting}
 \usage{
-term_weighting(X, how = "log_entropy")
+term_weighting(X, how = "log_entropy") 
 }
 \arguments{
 \item{X}{Passed to \code{apply}.}

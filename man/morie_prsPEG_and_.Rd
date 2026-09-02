@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_and_}
 \title{morie_prsPEG_and_}
 \usage{
-morie_prsPEG_and_(e)
+morie_prsPEG_and_(e) 
 }
 \arguments{
 \item{e}{Passed to \code{.probe}.}

@@ -5,7 +5,7 @@
 \alias{morie_pmpfit_tail}
 \title{Tail comparison across discounts}
 \usage{
-morie_pmpfit_tail(n, theta = 1, alphas = c(0, 0.3, 0.6))
+morie_pmpfit_tail(n, theta = 1, alphas = c(0, 0.3, 0.6)) 
 }
 \arguments{
 \item{n}{Number of draws.}

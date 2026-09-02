@@ -5,7 +5,7 @@
 \alias{WtMoment}
 \title{Per-subband sample moments of the DWT coefficients}
 \usage{
-WtMoment(x, wavelet = "db4", levels = 3)
+WtMoment(x, wavelet = "db4", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

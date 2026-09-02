@@ -5,7 +5,7 @@
 \alias{morie_burkov_layer2_output}
 \title{Second-layer scalar output (Burkov Eq 1.7)}
 \usage{
-morie_burkov_layer2_output(W_2, y_1, b_2_1, phi = "identity")
+morie_burkov_layer2_output(W_2, y_1, b_2_1, phi = "identity") 
 }
 \arguments{
 \item{W_2}{Weight row.}

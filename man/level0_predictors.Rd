@@ -5,7 +5,7 @@
 \alias{level0_predictors}
 \title{level0_predictors}
 \usage{
-level0_predictors(G, y, blocks, n_ridge = 5)
+level0_predictors(G, y, blocks, n_ridge = 5) 
 }
 \arguments{
 \item{G}{A matrix; indexed by row and column.}

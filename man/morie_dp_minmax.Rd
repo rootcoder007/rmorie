@@ -16,6 +16,7 @@ morie_dp_minmax(x, epsilon = 1, a = NULL, b = NULL, alpha = 0.01, seed = NULL)
 \item{alpha}{tail fraction, in (0, 0.5).}
 
 \item{seed}{optional integer seed.}
+
 }
 \value{
 list with \code{lower}, \code{upper}, \code{epsilon_each},

@@ -650,7 +650,7 @@ NULL
 #' @rdname morie_hawkes_baseline_integral_cpp
 NULL
 
-#' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) GET via the shared libcurl backend (C++)
 #'
 #' Phase-3VV promoted helper. Returns the response body as a length-1
 #' character vector. On any libcurl-level failure returns the empty
@@ -667,7 +667,7 @@ NULL
 #' @rdname dot-morie_http_get
 NULL
 
-#' Binary-safe HTTP(S) GET via libcurl.
+#' Binary-safe HTTP(S) GET via libcurl
 #'
 #' Phase-3XX get_bytes wrapper. Returns the response body as an R
 #' raw vector (no NUL truncation), suitable for shapefiles, FGDB
@@ -683,7 +683,7 @@ NULL
 #' @rdname dot-morie_http_get_bytes
 NULL
 
-#' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) POST via the shared libcurl backend (C++)
 #'
 #' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
 #' `.s03json_toJSON(...)` before passing in. Default content_type
@@ -701,7 +701,7 @@ NULL
 #' @rdname dot-morie_http_post
 NULL
 
-#' Status-aware HTTP(S) GET via the libcurl backend (C++).
+#' Status-aware HTTP(S) GET via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper for callers that need HTTP status-code
 #' inspection (401/403/4xx error handling). Returns a length-2
@@ -718,7 +718,7 @@ NULL
 #' @rdname dot-morie_http_get_with_status
 NULL
 
-#' Status-aware HTTP(S) POST via the libcurl backend (C++).
+#' Status-aware HTTP(S) POST via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper. Same status-code-return contract as
 #' .morie_http_get_with_status, but for POST bodies.
@@ -730,7 +730,7 @@ NULL
 #' @rdname dot-morie_http_post_with_status
 NULL
 
-#' libcurl version string the morie C++ backend was built against.
+#' libcurl version string the morie C++ backend was built against
 #' @return Length-1 character vector.
 #' @keywords internal
 #' @name .morie_http_curl_version

@@ -5,7 +5,7 @@
 \alias{morie_qrntcq_quarantine_efficacy}
 \title{morie_qrntcq_quarantine_efficacy}
 \usage{
-morie_qrntcq_quarantine_efficacy(t.Q, t.R, generation.time = NULL, t.E = 0)
+morie_qrntcq_quarantine_efficacy(t.Q, t.R, generation.time = NULL, t.E = 0) 
 }
 \arguments{
 \item{t.Q}{Coerced to numeric by the body, with \code{as.numeric}.}

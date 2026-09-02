@@ -5,7 +5,7 @@
 \alias{morie_pratt}
 \title{morie_pratt}
 \usage{
-morie_pratt(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc)
+morie_pratt(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc) 
 }
 \arguments{
 \item{word_states}{See Usage.}

@@ -5,7 +5,7 @@
 \alias{MASS_ginv_fallback}
 \title{Pseudo-inverse fallback for a singular observed information}
 \usage{
-MASS_ginv_fallback(H)
+MASS_ginv_fallback(H) 
 }
 \arguments{
 \item{H}{Passed to \code{eigen}.}

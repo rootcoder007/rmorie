@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Rank statistics for simulation-based calibration, and a uniformity test.
+#' Rank statistics for simulation-based calibration, and a uniformity test
 #'
 #' The SHAPE of the departure names the fault: U means the posterior is
 #' too narrow, a hump too wide, a slope biased. The bin count must divide

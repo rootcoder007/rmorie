@@ -5,7 +5,7 @@
 \alias{Diff2}
 \title{The second derivative has response (jw)(jw) = -w^2, a QUADRATIC rise}
 \usage{
-Diff2(x, T = 1, n = NULL)
+Diff2(x, T = 1, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{layer_weights}
 \title{Softmax-normalised s^{task}. A simplex, not free weights: these}
 \usage{
-layer_weights(raw)
+layer_weights(raw) 
 }
 \arguments{
 \item{raw}{A vector; its length is taken.}

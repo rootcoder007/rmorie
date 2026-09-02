@@ -5,7 +5,7 @@
 \alias{enforce_invertibility}
 \title{Project \code{u} so that \code{u\'w >= -1}}
 \usage{
-enforce_invertibility(u, w)
+enforce_invertibility(u, w) 
 }
 \arguments{
 \item{u,w}{Numeric vectors of equal length.}

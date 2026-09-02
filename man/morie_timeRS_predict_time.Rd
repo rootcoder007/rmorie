@@ -5,7 +5,8 @@
 \alias{morie_timeRS_predict_time}
 \title{morie_timeRS_predict_time}
 \usage{
-morie_timeRS_predict_time(mu, b_u, alpha_u, t_user, b_i, item_bins, t, p_u = NULL, q_i = NULL, per_day = NULL, bin_days = 70, beta = .timeRS_BETA)
+morie_timeRS_predict_time(mu, b_u, alpha_u, t_user, b_i, item_bins, t, p_u = NULL, q_i = NULL, 
+    per_day = NULL, bin_days = 70, beta = .timeRS_BETA) 
 }
 \arguments{
 \item{mu}{Passed to \code{.timeRS_predict_time}.}

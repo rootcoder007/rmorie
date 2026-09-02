@@ -5,7 +5,7 @@
 \alias{DftTw}
 \title{Eq (3.83): the same transform written with twiddle factors, which is}
 \usage{
-DftTw(x)
+DftTw(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{Mahal}
 \title{Section 10.4.3: D^2 = (x - mu)^T C^-1 (x - mu).  Distance in units of}
 \usage{
-Mahal(x, mu, C)
+Mahal(x, mu, C) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

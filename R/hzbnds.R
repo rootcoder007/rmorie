@@ -8,7 +8,7 @@
 #' Identification of Probability Distributions, Springer.
 #'
 #' Missing at random makes E\[Y | R = 0\] = E\[Y | R = 1\], which point identifies
-#' E[Y] at the complete-case mean.  Dropping that assumption leaves only the
+#' E\[Y\] at the complete-case mean.  Dropping that assumption leaves only the
 #' support restriction y_min <= Y <= y_max, and the identified set becomes
 #' \[m p + y_min (1 - p), m p + y_max (1 - p)\] with m = E\[Y | R = 1\] and
 #' p = P(R = 1).  This function reports both, plus the two contrasts (how far

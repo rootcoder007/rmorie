@@ -3,7 +3,7 @@
 \name{morie_arsau_sidecar_to_frame}
 \alias{morie_arsau_sidecar_to_frame}
 \title{Convert a CKAN sidecar's \code{records} array-of-arrays into a
-\code{data.frame}.}
+\code{data.frame}}
 \usage{
 morie_arsau_sidecar_to_frame(sidecar)
 }

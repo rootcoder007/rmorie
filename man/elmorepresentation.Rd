@@ -5,7 +5,7 @@
 \alias{elmorepresentation}
 \title{Compact alias per ledger/NAMING.md}
 \usage{
-elmorepresentation(X, layers, raw_weights = NULL, gamma = 1)
+elmorepresentation(X, layers, raw_weights = NULL, gamma = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{elmo_representation}.}

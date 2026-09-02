@@ -5,7 +5,8 @@
 \alias{morie_bnsadt_fit}
 \title{Maximum likelihood over the selection model, by Nelder-Mead}
 \usage{
-morie_bnsadt_fit(x, sigma, family = "symmetric_step", mu0 = NULL, tau0 = NULL, beta0 = 0.5, iters = 600L)
+morie_bnsadt_fit(x, sigma, family = "symmetric_step", mu0 = NULL, tau0 = NULL, 
+    beta0 = 0.5, iters = 600L) 
 }
 \arguments{
 \item{x}{Published point estimates.}

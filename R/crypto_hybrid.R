@@ -29,7 +29,7 @@
 #' @noRd
 .morie_hkdf_sha256 <- function(ikm, len = 32L, salt = NULL,
                                info = raw(0)) {
-  # 'len' not 'length' — base length() must not be shadowed
+  # 'len' not 'length' -- base length() must not be shadowed
   if (len < 1L || len > 255L * 32L) {
     stop("HKDF output length must be in 1..255*32", call. = FALSE)
   }

@@ -5,7 +5,7 @@
 \alias{morie_sentpc_encode_bpe}
 \title{Apply a trained BPE model}
 \usage{
-morie_sentpc_encode_bpe(text, model, add_prefix = TRUE)
+morie_sentpc_encode_bpe(text, model, add_prefix = TRUE) 
 }
 \arguments{
 \item{text}{Character.}

@@ -5,7 +5,7 @@
 \alias{escape_regex}
 \title{escape_regex}
 \usage{
-escape_regex(x)
+escape_regex(x) 
 }
 \arguments{
 \item{x}{Character; passed to \code{gsub}.}

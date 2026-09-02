@@ -5,7 +5,7 @@
 \alias{BayesCls}
 \title{Eq (10.70): d_i(x) = p(x|C_i) P(C_i), assign to the largest -- the}
 \usage{
-BayesCls(likelihoods, priors = NULL)
+BayesCls(likelihoods, priors = NULL) 
 }
 \arguments{
 \item{likelihoods}{Coerced to numeric by the body, with \code{as.numeric}.}

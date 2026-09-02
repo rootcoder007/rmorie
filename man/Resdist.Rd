@@ -5,10 +5,14 @@
 \alias{Resdist}
 \title{Resistance distance matrix (Klein & Randic 1993)}
 \usage{
-Resdist(A, tol = 1e-09)
+Resdist(A, tol = 1e-09) 
 }
 \description{
 Resistance distance matrix (Klein & Randic 1993)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 A list with \code{R}, \code{Lplus}, \code{n}, \code{rank}.

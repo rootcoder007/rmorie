@@ -10,7 +10,7 @@ morie_e_value(rr, rr_lower = NULL)
 \item{rr}{Risk ratio estimate (> 0). Supply > 1; if < 1, pass its
 reciprocal.}
 
-\item{rr_lower}{Lower bound of the 95\\% CI (used to compute
+\item{rr_lower}{Lower bound of the 95\% CI (used to compute
 E-value for CI).}
 }
 \value{

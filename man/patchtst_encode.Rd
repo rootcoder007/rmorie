@@ -5,7 +5,7 @@
 \alias{patchtst_encode}
 \title{patchtst_encode}
 \usage{
-patchtst_encode(X, patch_len, stride = NULL, normalise = TRUE)
+patchtst_encode(X, patch_len, stride = NULL, normalise = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}

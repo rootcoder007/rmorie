@@ -5,7 +5,9 @@
 \alias{morie_rndnet}
 \title{Public entry point: compute the RND exploration bonus along an}
 \usage{
-morie_rndnet(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip = 5, normalize_obs = TRUE, normalize_reward = TRUE, init_steps = 0, gamma_int = 0.99, seed = 0, target = NULL, predictor = NULL, update = TRUE)
+morie_rndnet(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip = 5, 
+    normalize_obs = TRUE, normalize_reward = TRUE, init_steps = 0, gamma_int = 0.99, 
+    seed = 0, target = NULL, predictor = NULL, update = TRUE) 
 }
 \arguments{
 \item{observations}{A matrix; passed to \code{as.matrix}.}

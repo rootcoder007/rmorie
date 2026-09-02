@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Penalized residual sum of squares of the lasso, with its soft-threshold step.
+#' Penalized residual sum of squares of the lasso, with its soft-threshold step
 #'
 #' Formula: PRSS(beta, lambda) = sum_i (y_i - b0 - sum_j x_ij b_j)^2 + lambda sum_j |b_j|;  S(b, lambda) = sign(b) max(|b| - lambda, 0)
 #'

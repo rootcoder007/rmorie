@@ -5,7 +5,7 @@
 \alias{PCepSum}
 \title{Eq (4.82): the power cepstra of a convolution add, exactly when the}
 \usage{
-PCepSum(x, h, square = FALSE)
+PCepSum(x, h, square = FALSE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

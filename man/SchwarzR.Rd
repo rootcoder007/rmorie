@@ -5,7 +5,7 @@
 \alias{SchwarzR}
 \title{Eq (4.43), the real case of eq (4.42); equality when a = K b, the two}
 \usage{
-SchwarzR(a, b, grid = NULL, dt = 1)
+SchwarzR(a, b, grid = NULL, dt = 1) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

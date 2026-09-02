@@ -26,6 +26,7 @@ morie_rlm(
 matrix rather than a data frame, prepend an intercept column.
 Ignored for the formula interface, where the model frame
 already carries one.}
+
 }
 \value{
 A \code{morie_rlm} object.

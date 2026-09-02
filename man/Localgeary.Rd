@@ -2,16 +2,16 @@
 % Please edit documentation in R/gearyl.R
 \name{Localgeary}
 \alias{Localgeary}
-\title{Local Geary's c per location.}
+\title{Local Geary's c per location}
 \usage{
 Localgeary(x, W, scale = TRUE)
 }
 \arguments{
-\item{x}{Values at the n locations.}
+\item{x}{See Usage.}
 
-\item{W}{Spatial weights.}
+\item{W}{See Usage.}
 
-\item{scale}{Standardise x before computing c_i.}
+\item{scale}{See Usage.}
 }
 \value{
 List with \code{local}, \code{global_c}, \code{z}, \code{n}.

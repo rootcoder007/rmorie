@@ -3,9 +3,12 @@
 % the formals.
 \name{zcdp_of_gaussian}
 \alias{zcdp_of_gaussian}
+\alias{zero_concentrated_dp}
 \title{Proposition 1.6: rho = Delta^2 / (2 sigma^2)}
 \usage{
-zcdp_of_gaussian(sensitivity, sigma)
+zcdp_of_gaussian(sensitivity, sigma) 
+
+zero_concentrated_dp(sensitivity, sigma) 
 }
 \arguments{
 \item{sensitivity}{Sensitivity Delta, must be non-negative.}

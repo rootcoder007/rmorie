@@ -5,7 +5,7 @@
 \alias{forecast_summary}
 \title{forecast_summary}
 \usage{
-forecast_summary(token_probs, bins, quantiles = c(0.1, 0.5, 0.9))
+forecast_summary(token_probs, bins, quantiles = c(0.1, 0.5, 0.9)) 
 }
 \arguments{
 \item{token_probs}{Passed to \code{.chronos_vec}.}

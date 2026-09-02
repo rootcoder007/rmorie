@@ -5,7 +5,7 @@
 \alias{print.morie_rdd}
 \title{Print method for \code{morie_rdd} objects}
 \usage{
-print.morie_rdd(x, ...)
+\method{print}{morie_rdd}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_rdd} object.}

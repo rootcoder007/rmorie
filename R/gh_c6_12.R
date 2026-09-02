@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Hellinger-affinity bound from strong delta-separation at stage k.
+#' Hellinger-affinity bound from strong delta-separation at stage k
 #'
 #' The stage k divides n, so separating only at a large k gives a
 #' correspondingly slower exponential rate.

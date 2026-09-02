@@ -5,7 +5,7 @@
 \alias{morie_karpV_to_string}
 \title{Print an expression tree}
 \usage{
-morie_karpV_to_string(node)
+morie_karpV_to_string(node) 
 }
 \arguments{
 \item{node}{the tree.}

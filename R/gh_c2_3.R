@@ -7,8 +7,8 @@
 #' the posterior tractable.  Trapezoid integration of the exponentiated
 #' draw here.
 #'
-#' Formula: F(x_i) = F(x_{i-1})
-#'   + (exp(W_i) + exp(W_{i-1})) (x_i - x_{i-1}) / 2.
+#' Formula: F(x_i) = F(x_\{i-1\})
+#'   + (exp(W_i) + exp(W_\{i-1\})) (x_i - x_\{i-1\}) / 2.
 #'
 #' @param x Evaluation points; sorted internally.
 #' @param length Squared-exponential length scale, positive.

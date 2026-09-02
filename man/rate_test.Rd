@@ -5,7 +5,7 @@
 \alias{rate_test}
 \title{rate_test}
 \usage{
-rate_test(scores, priority, weight = "autoc", reps = 500, seed = 0)
+rate_test(scores, priority, weight = "autoc", reps = 500, seed = 0) 
 }
 \arguments{
 \item{scores}{Passed to \code{.slvgrf_check}.}

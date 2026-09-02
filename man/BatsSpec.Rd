@@ -5,7 +5,8 @@
 \alias{BatsSpec}
 \title{BatsSpec}
 \usage{
-BatsSpec(periods = numeric(0), harmonics = NULL, use_box_cox = FALSE, use_trend = TRUE, damped = FALSE, p = 0L, q = 0L)
+BatsSpec(periods = numeric(0), harmonics = NULL, use_box_cox = FALSE, 
+    use_trend = TRUE, damped = FALSE, p = 0L, q = 0L) 
 }
 \arguments{
 \item{periods}{A vector; its length is taken and its elements indexed. Defaults to \code{numeric(0)}.}

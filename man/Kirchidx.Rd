@@ -5,10 +5,14 @@
 \alias{Kirchidx}
 \title{Kirchhoff index (Klein & Randic 1993)}
 \usage{
-Kirchidx(A, tol = 1e-09)
+Kirchidx(A, tol = 1e-09) 
 }
 \description{
 Kirchhoff index (Klein & Randic 1993)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 A list with \code{Kf}, \code{Kf_spectral}, \code{n}, \code{rank}.

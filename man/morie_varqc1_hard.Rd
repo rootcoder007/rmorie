@@ -5,7 +5,7 @@
 \alias{morie_varqc1_hard}
 \title{Apply each hard threshold independently}
 \usage{
-morie_varqc1_hard(records, fields, thresholds)
+morie_varqc1_hard(records, fields, thresholds) 
 }
 \arguments{
 \item{records}{Annotation matrix, one row per variant.}

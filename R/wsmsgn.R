@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Exact sign test of H0: median = md.
+#' Exact sign test of H0: median = md
 #'
 #' Ties at md carry no information and are discarded, so the effective n
 #' is returned rather than the input length.

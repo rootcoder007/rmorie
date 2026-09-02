@@ -5,7 +5,7 @@
 \alias{morie_alammar_multi_query_retrieval}
 \title{morie_alammar_multi_query_retrieval}
 \usage{
-morie_alammar_multi_query_retrieval(query, K, retriever, rephraser)
+morie_alammar_multi_query_retrieval(query, K, retriever, rephraser) 
 }
 \arguments{
 \item{query}{Original query.}

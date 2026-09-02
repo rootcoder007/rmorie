@@ -5,7 +5,7 @@
 \alias{morie_momento_masked_loss}
 \title{Masked-position MSE}
 \usage{
-morie_momento_masked_loss(truth, reconstruction, mask)
+morie_momento_masked_loss(truth, reconstruction, mask) 
 }
 \arguments{
 \item{truth,reconstruction}{Patch lists.}

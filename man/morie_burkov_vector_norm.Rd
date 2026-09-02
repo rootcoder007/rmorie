@@ -5,10 +5,13 @@
 \alias{morie_burkov_vector_norm}
 \title{morie_burkov_vector_norm}
 \usage{
-morie_burkov_vector_norm(a)
+morie_burkov_vector_norm(a) 
 }
 \description{
 morie_burkov_vector_norm
+}
+\arguments{
+\item{a}{Argument \code{a}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{squared}, \code{n}, \code{method}.

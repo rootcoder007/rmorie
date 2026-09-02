@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqval.R
 \name{Vcquant}
 \alias{Vcquant}
-\title{Quantize a value cache with the inner-product variant of TurboQuant.}
+\title{Quantize a value cache with the inner-product variant of TurboQuant}
 \usage{
 Vcquant(V, b = 3, seed = 1)
 }

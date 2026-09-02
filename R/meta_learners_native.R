@@ -3,7 +3,7 @@
 # Native X- and DR-learners (feat/native-specializations, module 12).
 # They join the T/S-learners already native in morie_estimate_cate(),
 # reusing the module-10 cross-fit nuisance engines and the module-11
-# forest kernel — no EconML-style dependency anywhere.
+# forest kernel -- no EconML-style dependency anywhere.
 
 #' Internal helper: X-learner CATE
 #' @srrstats {G1.0} Kuenzel, Sekhon, Bickel & Yu (2019, PNAS 116(10)):

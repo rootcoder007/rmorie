@@ -10,6 +10,7 @@ EuclP(p, q, tol = 1e-10)
 \item{p, q}{Coefficient vectors in ascending order.}
 
 \item{tol}{Magnitude at or below which a leading coefficient is zero.}
+
 }
 \value{
 List with \code{estimate}, \code{gcd}, \code{degree},

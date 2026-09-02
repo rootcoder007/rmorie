@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero Reanalyze targets and prioritised-replay weights.
+#' MuZero Reanalyze targets and prioritised-replay weights
 #'
-#' z_t = sum_{j<n} gamma^j u_{t+j} + gamma^n nu_{t+n};
+#' z_t = sum_\{j<n\} gamma^j u_\{t+j\} + gamma^n nu_\{t+n\};
 #' pi_t(a) = N_t(a)/sum_b N_t(b); p_i = |nu_i - z_i|;
 #' P(i) = p_i^alpha / sum_k p_k^alpha; w_i = ((1/N)(1/P(i)))^beta.
 #'

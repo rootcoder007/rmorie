@@ -5,7 +5,7 @@
 \alias{Pnorm}
 \title{Pnorm}
 \usage{
-Pnorm(q, mean = 0, sd = 1, lower_tail = TRUE)
+Pnorm(q, mean = 0, sd = 1, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Numeric; combined arithmetically in the body.}

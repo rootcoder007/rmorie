@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Personalised propagation of neural predictions.
+#' Personalised propagation of neural predictions
 #'
-#' Ahat = Dtilde^{-1/2}(A + I)Dtilde^{-1/2};
-#' Z = alpha (I - (1-alpha) Ahat)^{-1} H (PPNP), or K steps of
+#' Ahat = Dtilde^\{-1/2\}(A + I)Dtilde^\{-1/2\};
+#' Z = alpha (I - (1-alpha) Ahat)^\{-1\} H (PPNP), or K steps of
 #' Z <- (1-alpha) Ahat Z + alpha H from Z = H (APPNP), with a row-wise
 #' softmax on the last step.
 #'

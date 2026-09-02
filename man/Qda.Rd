@@ -5,7 +5,7 @@
 \alias{Qda}
 \title{Eq (10.73) with the mean and covariance estimated per class by}
 \usage{
-Qda(X, y, query, priors = NULL)
+Qda(X, y, query, priors = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

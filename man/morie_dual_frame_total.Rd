@@ -25,6 +25,9 @@ morie_dual_frame_total(
 \item{theta}{Overlap weight; default the variance-minimising value.}
 
 \item{alpha}{Two-sided level.}
+
+
+
 }
 \value{
 A list with \code{estimate}, \code{theta}, \code{theta_optimal}, \code{se},

@@ -5,7 +5,7 @@
 \alias{morie_informer_select_queries}
 \title{morie_informer_select_queries}
 \usage{
-morie_informer_select_queries(Q, K, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0)
+morie_informer_select_queries(Q, K, factor = 5, measure = "maxmean", n_sample = NULL, seed = 0) 
 }
 \arguments{
 \item{Q}{Passed to \code{.informer_to_rows}.}

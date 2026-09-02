@@ -5,7 +5,7 @@
 \alias{Sift}
 \title{Empirical mode decomposition by sifting, Sec 9.4 steps 1-6}
 \usage{
-Sift(x, max_imfs = 10, tol = 0.05)
+Sift(x, max_imfs = 10, tol = 0.05) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

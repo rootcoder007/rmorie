@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Universal kriging with polynomial trend.
+#' Universal kriging with polynomial trend
 #'
 #' Z(s) = mu(s) + delta(s), mu(s) = sum_k beta_k f_k(s).
 #'
@@ -102,4 +102,5 @@ ukrig <- function(x, coords, target, model = "exponential",
 #' @export
 morie_ukrig <- ukrig
 #' @export
+#' @rdname ukrig
 morie_universal_kriging <- ukrig

@@ -17,6 +17,7 @@ Krreg(x, y, x_eval = NULL, bandwidth = NULL, penalty = 1, kernel = "gaussian")
 
 \item{kernel}{One of \code{"gaussian"}, \code{"epanechnikov"},
 \code{"uniform"}.}
+
 }
 \value{
 List with \code{x_eval}, \code{y_hat}, \code{alpha},

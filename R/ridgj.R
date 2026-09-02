@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Penalized residual sum of squares of ridge regression.
+#' Penalized residual sum of squares of ridge regression
 #'
 #' Formula: PRSS(beta, lambda) = sum_i (y_i - b0 - sum_j x_ij b_j)^2 + lambda sum_j b_j^2
 #'

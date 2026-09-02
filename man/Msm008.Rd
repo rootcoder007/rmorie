@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm008.R
 \name{Msm008}
 \alias{Msm008}
-\title{Generalized sensitivity and specificity.}
+\title{Generalized sensitivity and specificity}
 \usage{
 Msm008(y_true, y_pred, class_index = 0, n_classes = NULL)
 }

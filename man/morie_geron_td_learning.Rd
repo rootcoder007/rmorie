@@ -24,6 +24,8 @@ morie_geron_td_learning(
 \item{gamma}{In [0, 1].}
 
 \item{terminal}{Optional logical vector; TRUE drops the bootstrap.}
+
+
 }
 \value{
 List with \code{V}, \code{td_error}, \code{target}, \code{updates}, \code{alpha},

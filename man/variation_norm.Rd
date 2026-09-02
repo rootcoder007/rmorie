@@ -5,7 +5,7 @@
 \alias{variation_norm}
 \title{variation_norm}
 \usage{
-variation_norm(beta)
+variation_norm(beta) 
 }
 \arguments{
 \item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}

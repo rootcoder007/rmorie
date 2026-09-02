@@ -2,7 +2,7 @@
 
 #' Empirical angular measure of the k largest radii
 #'
-#' Formula: H_n(B) = (1/k) sum 1{||X_i|| >= r_n, X_i/||X_i|| in B}
+#' Formula: H_n(B) = (1/k) sum 1\{||X_i|| >= r_n, X_i/||X_i|| in B\}
 #'
 #' The data are first rank-transformed to standard Frechet margins, so
 #' the radial and angular parts separate.  Each of the k largest radii

@@ -18,6 +18,9 @@ Seirep(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1)
 \item{t_max}{Integration horizon. Default 160.}
 
 \item{dt}{Runge-Kutta step. Default 0.1.}
+
+
+
 }
 \value{
 List with \code{estimate} (final size), \code{S}, \code{E},

@@ -5,7 +5,8 @@
 \alias{morie_mqtmpl_scanone}
 \title{Single-QTL genome scan}
 \usage{
-morie_mqtmpl_scanone(y, markers, positions, method = "em", step = 0.02, covariates = list(), error_rate = 0)
+morie_mqtmpl_scanone(y, markers, positions, method = "em", step = 0.02, covariates = list(), 
+    error_rate = 0) 
 }
 \arguments{
 \item{y}{Phenotype vector.}

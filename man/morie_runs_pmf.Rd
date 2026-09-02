@@ -12,6 +12,8 @@ morie_runs_pmf(n1, n2, r1 = NULL, r2 = NULL, r = NULL)
 \item{r1, r2}{run counts for the joint pmf (optional).}
 
 \item{r}{total runs for the total pmf (optional).}
+
+
 }
 \value{
 list: joint (if r1, r2 given), marginal_r1 (vector over

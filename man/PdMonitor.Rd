@@ -5,7 +5,7 @@
 \alias{PdMonitor}
 \title{PdMonitor: Parkinson\'s disease monitoring via multimodal signals}
 \usage{
-PdMonitor(eeg, emg, gait, fs, tremor_band = c(3, 7))
+PdMonitor(eeg, emg, gait, fs, tremor_band = c(3, 7)) 
 }
 \arguments{
 \item{eeg}{Passed to \code{tremor}.}

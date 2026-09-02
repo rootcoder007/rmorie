@@ -5,10 +5,14 @@
 \alias{Moodmom}
 \title{Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316}
 \usage{
-Moodmom(m, n)
+Moodmom(m, n) 
 }
 \description{
 Mood null moments -- eqs. (9.2.2)-(9.2.3), pp. 315-316
+}
+\arguments{
+\item{m}{Argument \code{m}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{mean}, \code{var}, \code{sd}, \code{N}, \code{m}, \code{n}.

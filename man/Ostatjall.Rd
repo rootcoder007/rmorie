@@ -5,10 +5,14 @@
 \alias{Ostatjall}
 \title{Joint density of all n order statistics -- Sec. 2.2, p. 31}
 \usage{
-Ostatjall(x, pdf)
+Ostatjall(x, pdf) 
 }
 \description{
 Joint density of all n order statistics -- Sec. 2.2, p. 31
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{pdf}{Argument \code{pdf}; see Usage.}
 }
 \value{
 A list with \code{pdf}, \code{coef}, \code{prod}, \code{ordered}, \code{n}.

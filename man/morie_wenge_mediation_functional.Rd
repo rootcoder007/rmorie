@@ -5,7 +5,7 @@
 \alias{morie_wenge_mediation_functional}
 \title{morie_wenge_mediation_functional}
 \usage{
-morie_wenge_mediation_functional(Y, E, M, X, strategy = "em", saturated = TRUE, ridge = 1e-08)
+morie_wenge_mediation_functional(Y, E, M, X, strategy = "em", saturated = TRUE, ridge = 1e-08) 
 }
 \arguments{
 \item{Y}{Passed to \code{.s03vec}.}

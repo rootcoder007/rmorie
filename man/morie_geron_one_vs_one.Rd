@@ -14,6 +14,7 @@ morie_geron_one_vs_one(X, y, base_fit = NULL, eta = 0.5, n_iter = 400)
 \item{base_fit}{Optional function(X, y_binary) returning a scorer.}
 
 \item{eta, n_iter}{Passed to \code{\link[=morie_geron_train_logreg]{morie_geron_train_logreg()}}.}
+
 }
 \value{
 List with \code{predictions}, \code{votes}, \code{classes}, \code{pairs},

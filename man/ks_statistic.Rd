@@ -5,7 +5,7 @@
 \alias{ks_statistic}
 \title{ks_statistic}
 \usage{
-ks_statistic(m, instruments, form = "sum", n_equality = 0L)
+ks_statistic(m, instruments, form = "sum", n_equality = 0L) 
 }
 \arguments{
 \item{m}{Passed to \code{weighted_moments}.}

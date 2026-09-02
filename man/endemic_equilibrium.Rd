@@ -5,7 +5,7 @@
 \alias{endemic_equilibrium}
 \title{endemic_equilibrium}
 \usage{
-endemic_equilibrium(beta, nu, mu, strain = 0L)
+endemic_equilibrium(beta, nu, mu, strain = 0L) 
 }
 \arguments{
 \item{beta}{Coerced to numeric by the body, with \code{as.numeric}.}

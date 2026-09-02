@@ -5,7 +5,7 @@
 \alias{morie_tlonsl_cheatsheet}
 \title{morie_tlonsl_cheatsheet}
 \usage{
-morie_tlonsl_cheatsheet()
+morie_tlonsl_cheatsheet() 
 }
 \description{
 A step of the tlonsl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

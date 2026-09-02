@@ -5,7 +5,7 @@
 \alias{morie_mistr_swiglu}
 \title{SwiGLU gate}
 \usage{
-morie_mistr_swiglu(x, W1, W2, W3)
+morie_mistr_swiglu(x, W1, W2, W3) 
 }
 \arguments{
 \item{x}{Input vector.}

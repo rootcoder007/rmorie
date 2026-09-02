@@ -5,7 +5,7 @@
 \alias{selective_ssm_step}
 \title{selective_ssm_step}
 \usage{
-selective_ssm_step(x, h, A, B, C, delta, rule = "zoh")
+selective_ssm_step(x, h, A, B, C, delta, rule = "zoh") 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

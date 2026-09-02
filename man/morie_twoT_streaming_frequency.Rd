@@ -5,7 +5,7 @@
 \alias{morie_twoT_streaming_frequency}
 \title{morie_twoT_streaming_frequency}
 \usage{
-morie_twoT_streaming_frequency(hits, n_steps, alpha = 0.05, init = NULL)
+morie_twoT_streaming_frequency(hits, n_steps, alpha = 0.05, init = NULL) 
 }
 \arguments{
 \item{hits}{Passed to \code{.twoT_get_items}.}

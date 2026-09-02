@@ -5,7 +5,8 @@
 \alias{egcl}
 \title{egcl}
 \usage{
-egcl(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL, V = NULL, mode = "position", phi_v = NULL, dt = 1)
+egcl(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL, V = NULL, mode = "position", 
+    phi_v = NULL, dt = 1) 
 }
 \arguments{
 \item{H}{A vector; its length is taken and its elements indexed.}

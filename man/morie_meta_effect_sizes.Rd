@@ -27,6 +27,14 @@ morie_meta_effect_sizes(
 \item{a, b, c, d}{2 by 2 cell counts.}
 
 \item{r}{Correlation.}
+
+
+
+
+
+
+
+
 }
 \value{
 List of the named effect sizes and standard errors.

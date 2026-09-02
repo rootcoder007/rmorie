@@ -16,6 +16,7 @@ Graphcmp(G1, G2, kernel = "wl", h = 3, k_size = 3, lam = 0.1)
 \item{k_size}{graphlet size.}
 
 \item{lam}{random-walk decay.}
+
 }
 \value{
 list: estimate, raw, k11, k22, kernel, method.

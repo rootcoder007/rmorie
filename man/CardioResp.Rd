@@ -5,7 +5,7 @@
 \alias{CardioResp}
 \title{CardioResp}
 \usage{
-CardioResp(ecg_rate, resp, fs, band = c(0.15, 0.4), nperseg = NULL)
+CardioResp(ecg_rate, resp, fs, band = c(0.15, 0.4), nperseg = NULL) 
 }
 \arguments{
 \item{ecg_rate}{Coerced to numeric by the body, with \code{as.numeric}.}

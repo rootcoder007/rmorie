@@ -5,7 +5,7 @@
 \alias{KatzFd}
 \title{Katz (1988): FD = log10(n) / (log10(n) + log10(d/L)), with L the path}
 \usage{
-KatzFd(x, dt = 1)
+KatzFd(x, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

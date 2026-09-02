@@ -5,7 +5,7 @@
 \alias{PzPhase}
 \title{Eq (3.73).  The (M - N) angle(z_0) term accounts for the zeros or}
 \usage{
-PzPhase(z_0, alpha_k, beta_k, N = NULL, M = NULL)
+PzPhase(z_0, alpha_k, beta_k, N = NULL, M = NULL) 
 }
 \arguments{
 \item{z_0}{Coerced to complex by the body, with \code{as.complex}.}

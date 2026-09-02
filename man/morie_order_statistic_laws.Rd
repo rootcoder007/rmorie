@@ -12,6 +12,7 @@ morie_order_statistic_laws(n, F_x = NULL, t = NULL, r = NULL)
 \item{F_x}{CDF value(s) for the median CDF / EDF moments.}
 
 \item{t, r}{arguments of the binomial-beta identity (optional).}
+
 }
 \value{
 list: median_cdf (odd n only, else NULL), coverage_mean,

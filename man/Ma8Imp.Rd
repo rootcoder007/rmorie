@@ -5,7 +5,7 @@
 \alias{Ma8Imp}
 \title{Eq (3.109): eight equal taps.  Equal weighting is why the stopband}
 \usage{
-Ma8Imp(n = NULL)
+Ma8Imp(n = NULL) 
 }
 \arguments{
 \item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

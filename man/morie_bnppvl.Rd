@@ -5,7 +5,10 @@
 \alias{morie_bnppvl}
 \title{Fit a Beta quantile pyramid and report the predictive for a new draw}
 \usage{
-morie_bnppvl(x, m = 4L, c = 2.5, schedule = "cubic", centring = "uniform", nullq = NULL, likelihood = "exact", lo = 0, hi = 1, sweeps = 400L, burn = 100L, thin = 2L, seed = 0, init = "prior", grid = NULL, probs = c(0.05, 0.25, 0.5, 0.75, 0.95))
+morie_bnppvl(x, m = 4L, c = 2.5, schedule = "cubic", centring = "uniform", 
+    nullq = NULL, likelihood = "exact", lo = 0, hi = 1, sweeps = 400L, 
+    burn = 100L, thin = 2L, seed = 0, init = "prior", grid = NULL, probs = c(0.05, 
+        0.25, 0.5, 0.75, 0.95)) 
 }
 \arguments{
 \item{x}{The observations, which must lie inside the support.}

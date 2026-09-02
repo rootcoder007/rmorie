@@ -5,7 +5,7 @@
 \alias{unit_weights}
 \title{unit_weights}
 \usage{
-unit_weights(Y, treated, t_post, zeta = NULL)
+unit_weights(Y, treated, t_post, zeta = NULL) 
 }
 \arguments{
 \item{Y}{Passed to \code{.causscd_grid}.}

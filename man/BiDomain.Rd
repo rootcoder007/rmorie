@@ -5,7 +5,10 @@
 \alias{BiDomain}
 \title{BiDomain: 1-D monodomain propagation with the bidomain extracellular}
 \usage{
-BiDomain(n_nodes = 100, dx_cm = 0.02, duration_ms = 60, dt_ms = 0.005, sigma_i = 1, sigma_e = 2, C_m = 1, Sv = 1000, I_ion = NULL, stim_nodes = 5, I_stim = 50, stim_ms = 1, v_rest = -85, v_peak = 20, I_ion_peak = 10, threshold_frac = 0.25)
+BiDomain(n_nodes = 100, dx_cm = 0.02, duration_ms = 60, dt_ms = 0.005, 
+    sigma_i = 1, sigma_e = 2, C_m = 1, Sv = 1000, I_ion = NULL, stim_nodes = 5, 
+    I_stim = 50, stim_ms = 1, v_rest = -85, v_peak = 20, I_ion_peak = 10, 
+    threshold_frac = 0.25) 
 }
 \arguments{
 \item{n_nodes}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.}

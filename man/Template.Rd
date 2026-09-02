@@ -5,7 +5,7 @@
 \alias{Template}
 \title{Eqs (4.25), (4.28): the correlation coefficient at every shift}
 \usage{
-Template(x, ref, threshold = NULL, subtract_mean = TRUE)
+Template(x, ref, threshold = NULL, subtract_mean = TRUE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

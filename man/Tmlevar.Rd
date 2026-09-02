@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlvts.R
 \name{Tmlevar}
 \alias{Tmlevar}
-\title{Target the variance parameter sigma^2 = E[D*^2] and bound it.}
+\title{Target the variance parameter sigma^2 = E[D*^2] and bound it}
 \usage{
 Tmlevar(ic, level = 0.95)
 }

@@ -14,6 +14,10 @@ morie_geron_conv_output_size(
 }
 \arguments{
 \item{in_size, kernel, padding, stride, dilation}{Scalars or per-axis vectors.}
+
+
+
+
 }
 \value{
 List with \code{out_size}, \code{receptive_field}, \code{same_padding},

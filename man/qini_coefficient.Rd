@@ -5,7 +5,7 @@
 \alias{qini_coefficient}
 \title{qini_coefficient}
 \usage{
-qini_coefficient(scores, priority)
+qini_coefficient(scores, priority) 
 }
 \arguments{
 \item{scores}{Passed to \code{rate}.}

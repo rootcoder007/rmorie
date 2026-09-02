@@ -5,10 +5,15 @@
 \alias{Jackd}
 \title{Delete-d jackknife variance (Shao & Wu 1989)}
 \usage{
-Jackd(theta, n, d)
+Jackd(theta, n, d) 
 }
 \description{
 Delete-d jackknife variance (Shao & Wu 1989)
+}
+\arguments{
+\item{theta}{Argument \code{theta}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{d}{Argument \code{d}; see Usage.}
 }
 \value{
 A list with \code{variance}, \code{se}, \code{mean}, \code{n_subsets}, \code{n}, \code{d}.

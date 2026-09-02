@@ -5,7 +5,7 @@
 \alias{Wpt}
 \title{Wavelet packet decomposition (full binary tree, natural order)}
 \usage{
-Wpt(x, wavelet = "db4", levels = 3)
+Wpt(x, wavelet = "db4", levels = 3) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

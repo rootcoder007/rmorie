@@ -5,7 +5,7 @@
 \alias{IirTf}
 \title{Eq (3.67).  The leading 1 of the denominator is part of the equation,}
 \usage{
-IirTf(b_k, a_k, z, N = NULL, M = NULL)
+IirTf(b_k, a_k, z, N = NULL, M = NULL) 
 }
 \arguments{
 \item{b_k}{Coerced to numeric by the body, with \code{as.numeric}.}

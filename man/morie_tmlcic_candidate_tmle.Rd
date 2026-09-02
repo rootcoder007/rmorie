@@ -5,7 +5,8 @@
 \alias{morie_tmlcic_candidate_tmle}
 \title{morie_tmlcic_candidate_tmle}
 \usage{
-morie_tmlcic_candidate_tmle(y, A, W, cand, g1, rows = NULL, eval_rows = NULL, ridge = 1e-08, target_step = TRUE)
+morie_tmlcic_candidate_tmle(y, A, W, cand, g1, rows = NULL, eval_rows = NULL, ridge = 1e-08, 
+    target_step = TRUE) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

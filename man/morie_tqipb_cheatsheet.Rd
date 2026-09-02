@@ -5,7 +5,7 @@
 \alias{morie_tqipb_cheatsheet}
 \title{One-line summary of the tqipb module}
 \usage{
-morie_tqipb_cheatsheet()
+morie_tqipb_cheatsheet() 
 }
 \description{
 One-line summary of the tqipb module

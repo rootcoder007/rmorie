@@ -5,7 +5,7 @@
 \alias{infonce}
 \title{infonce}
 \usage{
-infonce(image_embeddings, text_embeddings, temperature = 0.07)
+infonce(image_embeddings, text_embeddings, temperature = 0.07) 
 }
 \arguments{
 \item{image_embeddings}{Passed to \code{.opnclp_mat}.}

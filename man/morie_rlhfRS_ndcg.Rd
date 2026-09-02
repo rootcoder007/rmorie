@@ -5,7 +5,7 @@
 \alias{morie_rlhfRS_ndcg}
 \title{Discounted cumulative gain over its own best possible value}
 \usage{
-morie_rlhfRS_ndcg(relevance, k)
+morie_rlhfRS_ndcg(relevance, k) 
 }
 \arguments{
 \item{relevance}{The graded relevance of the ranked list.}

@@ -20,7 +20,7 @@ Source FETCHED (reference implementation): \code{spdep::joincount.test}
 (Bivand, spdep 1.4-2, \code{R/jc.R}), whose comments cite Cliff, A. D.
 and Ord, J. K. (1981), Spatial Processes: Models and Applications,
 Pion, page 20, equations (1.31) and (1.32) for nonfree sampling:
-\code{E[J_kk] = S0 n_k (n_k - 1) / (2 N (N-1))} and
+\code{E\[J_kk\] = S0 n_k (n_k - 1) / (2 N (N-1))} and
 \code{4 Var + 4 E^2 = S1 n_k(n_k-1)/(N(N-1))
 + (S2 - 2 S1) n_k(n_k-1)(n_k-2)/(N(N-1)(N-2))
 + (S0^2 + S1 - S2) n_k(n_k-1)(n_k-2)(n_k-3)/(N(N-1)(N-2)(N-3))},

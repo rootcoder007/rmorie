@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_ap_d1.R
 \name{Exptest}
 \alias{Exptest}
-\title{Certify that a test sequence has exponentially small error probabilities.}
+\title{Certify that a test sequence has exponentially small error probabilities}
 \usage{
 Exptest(err_null, err_alt, n)
 }

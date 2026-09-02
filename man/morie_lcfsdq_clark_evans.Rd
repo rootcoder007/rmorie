@@ -5,7 +5,7 @@
 \alias{morie_lcfsdq_clark_evans}
 \title{The Clark-Evans index and its z statistic}
 \usage{
-morie_lcfsdq_clark_evans(dists, n, area, perimeter, edge = "none")
+morie_lcfsdq_clark_evans(dists, n, area, perimeter, edge = "none") 
 }
 \arguments{
 \item{dists}{Nearest-neighbour distances.}

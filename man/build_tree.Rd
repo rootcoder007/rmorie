@@ -5,7 +5,7 @@
 \alias{build_tree}
 \title{The recursion of Algorithm 3, returning the paper\'s nine values:}
 \usage{
-build_tree(theta, r, logu, v, j, eps, logp, grad, rnd, joint0)
+build_tree(theta, r, logu, v, j, eps, logp, grad, rnd, joint0) 
 }
 \arguments{
 \item{theta}{Passed to \code{leapfrog}.}

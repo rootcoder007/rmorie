@@ -19,8 +19,8 @@ list: estimate, Phi, omega, period, n, nbasis, method.
 \description{
 Ramsay and Silverman (2005), Functional Data Analysis, 2nd ed., Springer,
 Chapter 3, Section 3.3.1 "The Fourier basis system for periodic data": the
-basis is phi_0(t) = 1, phi_{2r-1}(t) = sin(r omega t),
-phi_{2r}(t) = cos(r omega t), with omega = 2 pi / P and P the period, taken
+basis is phi_0(t) = 1, phi_\{2r-1\}(t) = sin(r omega t),
+phi_\{2r\}(t) = cos(r omega t), with omega = 2 pi / P and P the period, taken
 here as the range of t when it is not supplied.
 }
 \details{

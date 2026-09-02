@@ -28,6 +28,8 @@ mean when \code{NULL}.}
 \item{seed}{resampling seed.}
 
 \item{paired}{resample pairs rather than independently.}
+
+
 }
 \value{
 list: ratio, ci, replicates, se,

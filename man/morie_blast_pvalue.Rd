@@ -5,7 +5,7 @@
 \alias{morie_blast_pvalue}
 \title{morie_blast_pvalue}
 \usage{
-morie_blast_pvalue(score, m, n, lam, K, c = 1L)
+morie_blast_pvalue(score, m, n, lam, K, c = 1L) 
 }
 \arguments{
 \item{score}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,9 @@
 \alias{morie_prphet_fit}
 \title{morie_prphet_fit}
 \usage{
-morie_prphet_fit(t, y, n_changepoints = 10L, changepoint_range = 0.8, changepoints = NULL, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0), changepoint_prior = 0.05, ridge = 1e-08)
+morie_prphet_fit(t, y, n_changepoints = 10L, changepoint_range = 0.8, changepoints = NULL, 
+    seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0), changepoint_prior = 0.05, 
+    ridge = 1e-08) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

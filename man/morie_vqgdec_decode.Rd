@@ -5,7 +5,7 @@
 \alias{morie_vqgdec_decode}
 \title{Decode: indices to codes to image, with the adaptive GAN weight}
 \usage{
-morie_vqgdec_decode(indices, codebook, generator = NULL, grad_rec = NULL, grad_gan = NULL)
+morie_vqgdec_decode(indices, codebook, generator = NULL, grad_rec = NULL, grad_gan = NULL) 
 }
 \arguments{
 \item{indices}{Passed to \code{morie_vqgdec_decode_indices}.}

@@ -5,7 +5,7 @@
 \alias{laplace_marginal}
 \title{laplace_marginal}
 \usage{
-laplace_marginal(log_joint, x_grid, theta)
+laplace_marginal(log_joint, x_grid, theta) 
 }
 \arguments{
 \item{log_joint}{Accepted by the signature and not used anywhere in the body.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_tps_major_crime}
 \alias{morie_datasets_tps_major_crime}
-\title{TPS Major Crime Indicators feed.}
+\title{TPS Major Crime Indicators feed}
 \usage{
 morie_datasets_tps_major_crime(
   year = NULL,
@@ -26,7 +26,7 @@ of hitting the live ArcGIS endpoint.}
 A \code{data.frame} with the documented TPS schema.
 }
 \description{
-TPS Major Crime Indicators feed.
+TPS Major Crime Indicators feed
 }
 \examples{
 res <- morie_datasets_tps_major_crime(offline = TRUE, max_features = 5L)

@@ -14,13 +14,15 @@ morie_cqr(callo, calhi, caly, lo, hi, alpha = 0.1)
 \item{lo, hi}{test interval endpoints to conformalize}
 
 \item{alpha}{nominal miscoverage}
+
+
 }
 \value{
 list(qhat, lower, upper, k, n, meanwidth, widening)
 }
 \description{
 The book's own non-conformity score, quoted from p. 514:
-s(x, y) = max{yhat_t^{alpha/2} - y, y - yhat_t^{1-(alpha/2)}}.
+s(x, y) = max\{yhat_t^\{alpha/2\} - y, y - yhat_t^\{1-(alpha/2)\}\}.
 The conformal quantile of the calibration scores is added to both
 ends of the test interval, using the finite-sample rank
 ceil((n+1)(1-alpha)) that delivers the coverage guarantee.

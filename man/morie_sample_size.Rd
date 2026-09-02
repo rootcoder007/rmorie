@@ -31,9 +31,35 @@ morie_sample_size(
 \item{p_star, se_max, u_crit, s_star, l_max, cv_star, r_max}{Frequentist
 pieces. @param design_effect,n_si Design-effect pieces.}
 
-\item{p, z, n, c, d}{Beta posterior pieces. @param v,l Interval pieces.}
+\item{design_effect}{See Usage.}
+
+\item{n_si}{See Usage.}
+
+
+\item{v}{See Usage.}
+
+\item{l}{See Usage.}
 
 \item{lengths, probs, coverages, alpha}{ALC/ACC pieces.}
+
+
+
+
+
+
+
+\item{p}{Argument \code{p}; see Usage.}
+
+\item{z}{Argument \code{z}; see Usage.}
+
+\item{n}{Argument \code{n}; see Usage.}
+
+\item{c}{Argument \code{c}; see Usage.}
+
+\item{d}{Argument \code{d}; see Usage.}
+
+
+
 }
 \value{
 List with the requested sample sizes and criteria.

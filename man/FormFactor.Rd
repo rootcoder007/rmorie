@@ -5,7 +5,7 @@
 \alias{FormFactor}
 \title{Eqs (5.25)-(5.26): activity = var(x); mobility = sd(x\')/sd(x);}
 \usage{
-FormFactor(x)
+FormFactor(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

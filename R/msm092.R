@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinal latent predictor with environment, markers and interaction.
+#' Ordinal latent predictor with environment, markers and interaction
 #'
 #' Formula: L = X_E beta_E + X beta + X_EM beta_EM + eps (eq. 7.3), the ordinal
 #' latent variable with a flat prior on the environment effects and a

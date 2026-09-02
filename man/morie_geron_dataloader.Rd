@@ -23,6 +23,7 @@ morie_geron_dataloader(
 \item{seed}{LCG seed.}
 
 \item{num_workers}{Non-negative int, only affects \code{worker_assignment}.}
+
 }
 \value{
 List with \code{batches} (0-based indices), \code{order}, \code{n_batches}, \code{dropped}.

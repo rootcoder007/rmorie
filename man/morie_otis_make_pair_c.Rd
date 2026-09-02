@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_c}
 \alias{morie_otis_make_pair_c}
-\title{Pair (c): RegionalVolatility -> SegregationDays.}
+\title{Pair (c): RegionalVolatility -> SegregationDays}
 \usage{
 morie_otis_make_pair_c(df)
 }

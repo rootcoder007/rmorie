@@ -5,7 +5,8 @@
 \alias{morie_dreamr_lambda_return}
 \title{morie_dreamr_lambda_return}
 \usage{
-morie_dreamr_lambda_return(rewards, values, gamma = 0.99, lam = 0.95, estimator = "lambda", k = 1)
+morie_dreamr_lambda_return(rewards, values, gamma = 0.99, lam = 0.95, estimator = "lambda", 
+    k = 1) 
 }
 \arguments{
 \item{rewards}{Passed to \code{.dreamr_vec}.}

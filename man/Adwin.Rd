@@ -2,7 +2,7 @@
 % Please edit documentation in R/adwin.R
 \name{Adwin}
 \alias{Adwin}
-\title{ADWIN adaptive windowing for change detection.}
+\title{ADWIN adaptive windowing for change detection}
 \usage{
 Adwin(x, delta = 0.05)
 }

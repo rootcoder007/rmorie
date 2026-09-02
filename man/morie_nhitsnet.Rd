@@ -16,6 +16,7 @@ morie_nhitsnet(y, horizon, kernels, ratios, wf, wb)
 \item{ratios}{per-block expressivity ratios r_l}
 
 \item{wf, wb}{per-block forecast and backcast weight matrices}
+
 }
 \value{
 list(forecast, residual, nblocks, sizes, first, last, mean,
@@ -24,13 +25,13 @@ residnorm)
 \description{
 Quoted from the paper: (1) "y^(p)\emph{l = MaxPool(y_l, k_l)"; (2)
 "h_l = MLP_l(y^(p)\emph{l); theta^f_l = LINEAR^f(h_l); theta^b_l =
-LINEAR^b(h_l)"; (3) "yhat}{tau,l} = g(tau, theta^f_l)" with
-"|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta\link{t1} +
-((theta\link{t2}-theta\link{t1})/(t2-t1))(tau-t1)"; doubly residual stacking
-"yhat = sum_l yhat_l; y}{l+1} = y_l - ytilde_l" -- Challu, C.,
+LINEAR^b(h_l)"; (3) "yhat}\{tau,l\} = g(tau, theta^f_l)" with
+"|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
+((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
+"yhat = sum_l yhat_l; y}\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
-wf[\link[fixest:l]{l}] and wb[\link[fixest:l]{l}] stand in for MLP_l followed by LINEAR: a single
+wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
 caller-supplied linear map. That collapse is stated rather than
 hidden; the expressivity ratio r_l still governs the coefficient
 count, which is the hierarchical part the paper is about.

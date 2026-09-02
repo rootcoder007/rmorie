@@ -23,6 +23,7 @@ morie_dp_covariance(
 \item{seed}{optional integer seed.}
 
 \item{project_psd}{project the result onto the PSD cone.}
+
 }
 \value{
 list with \code{release}, \code{raw} (pre-projection),

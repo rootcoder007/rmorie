@@ -5,7 +5,7 @@
 \alias{HomPred}
 \title{Section 4.7.3.  The two lifters must PARTITION the quefrency axis}
 \usage{
-HomPred(y, cutoff)
+HomPred(y, cutoff) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

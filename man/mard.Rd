@@ -15,6 +15,8 @@ morie_mard(ai, bi, ci, di, level = 0.95)
 \item{ci, di}{events and non-events in the control arm.}
 
 \item{level}{confidence level.}
+
+
 }
 \value{
 list: estimate, se, variance, risk1, risk2, ci_lower, ci_upper,

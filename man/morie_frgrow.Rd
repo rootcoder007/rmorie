@@ -5,7 +5,7 @@
 \alias{morie_frgrow}
 \title{Score a set of grown analogues against the fragment they came from}
 \usage{
-morie_frgrow(fragment, linker_lib, route = "rt", temperature = .FRGROW_T_STANDARD)
+morie_frgrow(fragment, linker_lib, route = "rt", temperature = .FRGROW_T_STANDARD) 
 }
 \arguments{
 \item{fragment}{The parent: list(kd, hac, logp, mw, psa). The last   three may be NULL.}

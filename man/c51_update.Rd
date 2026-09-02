@@ -5,7 +5,8 @@
 \alias{c51_update}
 \title{Algorithm 1 end to end: greedy action, projection, loss}
 \usage{
-c51_update(reward, gamma, next_probs_by_action, current_probs, v_min, v_max, done = FALSE)
+c51_update(reward, gamma, next_probs_by_action, current_probs, v_min, v_max, 
+    done = FALSE) 
 }
 \arguments{
 \item{reward}{Sampled reward r.}

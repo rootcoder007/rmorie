@@ -5,7 +5,7 @@
 \alias{morie_rnacov_mi}
 \title{Mutual information between two alignment columns, in bits}
 \usage{
-morie_rnacov_mi(alignment, i, j, correction = "none")
+morie_rnacov_mi(alignment, i, j, correction = "none") 
 }
 \arguments{
 \item{alignment}{A character vector of aligned sequences.}

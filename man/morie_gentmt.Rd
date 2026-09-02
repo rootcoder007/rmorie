@@ -5,7 +5,8 @@
 \alias{morie_gentmt}
 \title{morie_gentmt}
 \usage{
-morie_gentmt(y, A, H, method = "weight", degree = 1, n_strata = 5, doses = NULL, trim = NULL)
+morie_gentmt(y, A, H, method = "weight", degree = 1, n_strata = 5, doses = NULL, 
+    trim = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.gentmt_vec}.}

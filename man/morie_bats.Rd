@@ -5,7 +5,9 @@
 \alias{morie_bats}
 \title{BATS and TBATS exponential smoothing}
 \usage{
-morie_bats(y, seasonal_periods = numeric(0), harmonics = NULL, use_box_cox = NULL, use_trend = NULL, damped = NULL, p = 0L, q = 0L, long_run_b = 0, h = 0L, maxiter = 2000L)
+morie_bats(y, seasonal_periods = numeric(0), harmonics = NULL, use_box_cox = NULL, 
+    use_trend = NULL, damped = NULL, p = 0L, q = 0L, long_run_b = 0, h = 0L, 
+    maxiter = 2000L) 
 }
 \arguments{
 \item{y}{Numeric series; strictly positive when \code{use_box_cox}   is TRUE.}

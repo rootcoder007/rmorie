@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinary least squares through the normal equations.
+#' Ordinary least squares through the normal equations
 #'
 #' Formula: (X'X) beta = X'y;  beta = (X'X)^-1 X'y;  Var(beta) = sigma2 (X'X)^-1;  H = X(X'X)^-1 X'
 #'

@@ -12,6 +12,7 @@ morie_ts_backtest(x, h = 10L, order = c(0L, 0L, 0L), seasonal = c(0L, 0L, 0L))
 \item{h}{Holdout length (also the forecast horizon).}
 
 \item{order, seasonal}{ARIMA orders passed to \code{\link[=morie_ts_arima]{morie_ts_arima()}}.}
+
 }
 \value{
 A list with the \code{forecast}, the held-out \code{actual}, and the

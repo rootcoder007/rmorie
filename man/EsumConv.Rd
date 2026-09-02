@@ -10,6 +10,8 @@ EsumConv(values_x, probs_x, values_y, probs_y)
 \item{values_x, probs_x}{the pmf of X; probs must sum to 1.}
 
 \item{values_y, probs_y}{the pmf of Y, independent of X.}
+
+
 }
 \value{
 list(e_sum, e_x_plus_e_y).

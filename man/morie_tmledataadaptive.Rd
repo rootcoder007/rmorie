@@ -20,3 +20,16 @@ morie_tmledataadaptive(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{candidate_strata}{Argument \code{candidate_strata}; see Usage.}
+\item{method}{Argument \code{method}; see Usage.}
+\item{n_folds}{Argument \code{n_folds}; see Usage.}
+\item{trim}{Argument \code{trim}; see Usage.}
+\item{ridge}{Argument \code{ridge}; see Usage.}
+\item{level}{Argument \code{level}; see Usage.}
+\item{bounds}{Argument \code{bounds}; see Usage.}
+}
+

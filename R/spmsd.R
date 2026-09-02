@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean-square differentiability, from the even derivatives of C at 0.
+#' Mean-square differentiability, from the even derivatives of C at 0
 #'
 #' Stein (1999, Ch 2.6), quoted by the book: Z(s) is m-times mean-square
 #' differentiable IF AND ONLY IF d^(2m) C(h) / dh^(2m) at h = 0 exists

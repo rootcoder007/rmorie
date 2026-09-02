@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Nystrom low-rank approximation of a kernel matrix.
+#' Nystrom low-rank approximation of a kernel matrix
 #'
 #' Formula: Q = K_nm * K_mm^- * K_nm',  m the retained subset of records
 #'

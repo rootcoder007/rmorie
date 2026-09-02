@@ -5,7 +5,8 @@
 \alias{morie_clrgrf}
 \title{morie_clrgrf}
 \usage{
-morie_clrgrf(y, X, clusters, at = NULL, n_trees = 200L, min_leaf = 5L, subsample_frac = 0.5, seed = 0L, unit = "cluster", level = 0.95, cluster_sampling = TRUE)
+morie_clrgrf(y, X, clusters, at = NULL, n_trees = 200L, min_leaf = 5L, subsample_frac = 0.5, 
+    seed = 0L, unit = "cluster", level = 0.95, cluster_sampling = TRUE) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

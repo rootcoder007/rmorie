@@ -5,7 +5,7 @@
 \alias{morie_warpL_warp_step}
 \title{morie_warpL_warp_step}
 \usage{
-morie_warpL_warp_step(positive, negatives, embed_user, rng, alphas, lr = 0.05, margin = 1)
+morie_warpL_warp_step(positive, negatives, embed_user, rng, alphas, lr = 0.05, margin = 1) 
 }
 \arguments{
 \item{positive}{Passed to \code{.warpL_vec}.}

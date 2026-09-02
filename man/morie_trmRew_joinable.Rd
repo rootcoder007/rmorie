@@ -5,7 +5,7 @@
 \alias{morie_trmRew_joinable}
 \title{Whether two terms reach a common normal form}
 \usage{
-morie_trmRew_joinable(a, b, rules, max_steps = 10000)
+morie_trmRew_joinable(a, b, rules, max_steps = 10000) 
 }
 \arguments{
 \item{a}{Passed to \code{morie_trmRew_normal_form}.}

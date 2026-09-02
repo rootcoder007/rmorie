@@ -5,7 +5,7 @@
 \alias{morie_alammar_instruction_data_template}
 \title{morie_alammar_instruction_data_template}
 \usage{
-morie_alammar_instruction_data_template(records, template = NULL)
+morie_alammar_instruction_data_template(records, template = NULL) 
 }
 \arguments{
 \item{records}{List of lists with instruction/input/output.}

@@ -5,7 +5,8 @@
 \alias{morie_svdd}
 \title{morie_svdd}
 \usage{
-morie_svdd(X, C = NULL, nu = NULL, kernel = "rbf", gamma = NULL, degree = 3, coef0 = 1, tol = 1e-10, max_iter = 20000)
+morie_svdd(X, C = NULL, nu = NULL, kernel = "rbf", gamma = NULL, degree = 3, 
+    coef0 = 1, tol = 1e-10, max_iter = 20000) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_svdd_mat}.}

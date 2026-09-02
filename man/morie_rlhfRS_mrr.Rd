@@ -5,7 +5,7 @@
 \alias{morie_rlhfRS_mrr}
 \title{One over the rank of the first relevant item, or zero}
 \usage{
-morie_rlhfRS_mrr(relevance)
+morie_rlhfRS_mrr(relevance) 
 }
 \arguments{
 \item{relevance}{The graded relevance of the ranked list.}

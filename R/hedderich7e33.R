@@ -7,8 +7,8 @@
 #' text layer renders (7.33) with two extraction defects, corrected here
 #' against the surrounding prose and Anderson and Darling (1952): the
 #' trailing "n sigma 2" is spillover from the neighbouring column and is
-#' not part of the statistic, and "1 - Y_{N+1-i}" is
-#' "1 - F(Y_{N+1-i})".  What is computed is the standard published form
+#' not part of the statistic, and "1 - Y_\{N+1-i\}" is
+#' "1 - F(Y_\{N+1-i\})".  What is computed is the standard published form
 #' \code{A2 = -N - (1/N) sum_i (2i-1) (log u_i + log(1 - u_{N+1-i}))}
 #' with \code{u_i} the sorted probability-integral transforms.
 #'

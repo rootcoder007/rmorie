@@ -5,10 +5,17 @@
 \alias{Epiarnb}
 \title{Epidemic log-autoregression with neighbours (Lawson eq. 18.4)}
 \usage{
-Epiarnb(beta0, beta1, i_lag, nb_lag, b1)
+Epiarnb(beta0, beta1, i_lag, nb_lag, b1) 
 }
 \description{
 Epidemic log-autoregression with neighbours (Lawson eq. 18.4)
+}
+\arguments{
+\item{beta0}{Argument \code{beta0}; see Usage.}
+\item{beta1}{Argument \code{beta1}; see Usage.}
+\item{i_lag}{Argument \code{i_lag}; see Usage.}
+\item{nb_lag}{Argument \code{nb_lag}; see Usage.}
+\item{b1}{Argument \code{b1}; see Usage.}
 }
 \value{
 A list with \code{logf}, \code{f}, \code{total_lag}, \code{n}.

@@ -27,7 +27,7 @@ smoothed covariance); M-step in closed form.  For the scalar model
   y_t = x_t + v_t,          v_t ~ N(0, R)
 }
 with the smoothed sums S11 = sum(xs_t^2 + Ps_t),
-S10 = sum(xs_t xs_{t-1} + Pcs_t), S00 = sum(xs_{t-1}^2 + Ps_{t-1}),
+S10 = sum(xs_t xs_\{t-1\} + Pcs_t), S00 = sum(xs_\{t-1\}^2 + Ps_\{t-1\}),
 the M-step is exactly phi = S10 / S00, Q = (S11 - phi S10) / n and
 R = mean((y_t - xs_t)^2 + Ps_t).
 }

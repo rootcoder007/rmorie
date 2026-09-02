@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_ld_prune}
 \title{Window-based pruning: drop one of any pair with r^2 above the}
 \usage{
-morie_snpqc1_ld_prune(genotypes, window = 50, step = 5, r2 = 0.2)
+morie_snpqc1_ld_prune(genotypes, window = 50, step = 5, r2 = 0.2) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

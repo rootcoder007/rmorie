@@ -12,6 +12,7 @@ Bnstst(lower, upper, se = 0, cdf = 0.05)
 \item{se}{The null value \code{theta_0}, default 0.}
 
 \item{cdf}{The level \code{alpha}, default 0.05.}
+
 }
 \value{
 List with \code{lower}, \code{upper}, \code{width},

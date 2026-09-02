@@ -5,7 +5,7 @@
 \alias{morie_cypin}
 \title{Descriptors for a compound against one P450 isozyme}
 \usage{
-morie_cypin(smiles, isozyme, model = NULL)
+morie_cypin(smiles, isozyme, model = NULL) 
 }
 \arguments{
 \item{smiles}{The compound.}

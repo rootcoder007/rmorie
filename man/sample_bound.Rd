@@ -5,7 +5,7 @@
 \alias{sample_bound}
 \title{sample_bound}
 \usage{
-sample_bound(n, r, C = 1, exponent = 1.2)
+sample_bound(n, r, C = 1, exponent = 1.2) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

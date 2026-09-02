@@ -5,7 +5,7 @@
 \alias{PcgEnvAvg}
 \title{ECG-triggered synchronised averaging of PCG envelopes, Sec 3.5 +}
 \usage{
-PcgEnvAvg(pcg, ecg, fs = 1000, cycle_len = NULL, envelope_smoothing = NULL)
+PcgEnvAvg(pcg, ecg, fs = 1000, cycle_len = NULL, envelope_smoothing = NULL) 
 }
 \arguments{
 \item{pcg}{Passed to \code{.tf_need}.}

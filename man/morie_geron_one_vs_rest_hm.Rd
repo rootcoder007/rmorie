@@ -5,7 +5,7 @@
 \alias{morie_geron_one_vs_rest_hm}
 \title{One-vs-rest multiclass: K binary classifiers, argmax over scores (Geron Ch 3, hmovr)}
 \usage{
-morie_geron_one_vs_rest_hm(X, y, base_estimator = NULL, X_new = NULL)
+morie_geron_one_vs_rest_hm(X, y, base_estimator = NULL, X_new = NULL) 
 }
 \arguments{
 \item{X,y}{Data and class labels.}

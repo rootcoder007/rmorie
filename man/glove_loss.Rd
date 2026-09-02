@@ -5,7 +5,7 @@
 \alias{glove_loss}
 \title{Eq. (8), evaluated over the nonzero entries only}
 \usage{
-glove_loss(X, W, Wt, b, bt, x_max = 100, alpha = 0.75)
+glove_loss(X, W, Wt, b, bt, x_max = 100, alpha = 0.75) 
 }
 \arguments{
 \item{X}{A list; the body reads \code{$count}, \code{$i}, \code{$j} from it.}

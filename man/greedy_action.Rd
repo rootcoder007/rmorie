@@ -5,7 +5,7 @@
 \alias{greedy_action}
 \title{Greedy action from per-action next-state distributions}
 \usage{
-greedy_action(next_probs_by_action, z)
+greedy_action(next_probs_by_action, z) 
 }
 \arguments{
 \item{next_probs_by_action}{List of numeric vectors, one per action.}

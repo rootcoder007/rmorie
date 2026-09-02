@@ -5,7 +5,8 @@
 \alias{RlsMonitor}
 \title{RlsMonitor}
 \usage{
-RlsMonitor(x, reference = NULL, order = 8, lam = 0.98, settle = NULL, threshold = 3, window = NULL)
+RlsMonitor(x, reference = NULL, order = 8, lam = 0.98, settle = NULL, threshold = 3, 
+    window = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

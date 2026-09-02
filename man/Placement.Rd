@@ -5,10 +5,14 @@
 \alias{Placement}
 \title{Placements of Y among the X order statistics -- Sec. 2.11, p. 65}
 \usage{
-Placement(x, y)
+Placement(x, y) 
 }
 \description{
 Placements of Y among the X order statistics -- Sec. 2.11, p. 65
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{placements}, \code{ranks}, \code{blocks}, \code{total}, \code{m}, \code{n}.

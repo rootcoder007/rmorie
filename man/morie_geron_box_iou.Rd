@@ -8,6 +8,7 @@ morie_geron_box_iou(a, b)
 }
 \arguments{
 \item{a, b}{Numeric length-4 vectors.}
+
 }
 \value{
 Scalar IoU.

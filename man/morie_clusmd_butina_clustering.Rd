@@ -5,7 +5,7 @@
 \alias{morie_clusmd_butina_clustering}
 \title{Butina clustering of fingerprints by exclusion sphere}
 \usage{
-morie_clusmd_butina_clustering(fps, threshold = 0.8, recount = FALSE)
+morie_clusmd_butina_clustering(fps, threshold = 0.8, recount = FALSE) 
 }
 \arguments{
 \item{fps}{A list of fingerprints.}

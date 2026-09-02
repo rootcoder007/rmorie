@@ -5,7 +5,7 @@
 \alias{OrthFilt}
 \title{Daubechies filter bank taps and their orthonormality identities}
 \usage{
-OrthFilt(order = 4)
+OrthFilt(order = 4) 
 }
 \arguments{
 \item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}

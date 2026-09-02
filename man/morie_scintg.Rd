@@ -5,7 +5,8 @@
 \alias{morie_scintg}
 \title{morie_scintg}
 \usage{
-morie_scintg(Z, batches, K = NULL, sigma = 0.1, theta = 2, lam = 1, max_iter = 10, cluster_iter = 25, tol = 1e-04, seed = 0, reference = NULL, diversity = "penalise")
+morie_scintg(Z, batches, K = NULL, sigma = 0.1, theta = 2, lam = 1, max_iter = 10, 
+    cluster_iter = 25, tol = 1e-04, seed = 0, reference = NULL, diversity = "penalise") 
 }
 \arguments{
 \item{Z}{Passed to \code{.scintg_matrix}.}

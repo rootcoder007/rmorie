@@ -5,7 +5,7 @@
 \alias{morie_graphcontrastive}
 \title{morie_graphcontrastive}
 \usage{
-morie_graphcontrastive(U, V, tau = 0.5, intra = TRUE)
+morie_graphcontrastive(U, V, tau = 0.5, intra = TRUE) 
 }
 \arguments{
 \item{U}{Passed to \code{.grace_objective}.}

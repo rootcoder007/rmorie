@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Brier score for categorical data.
+#' Brier score for categorical data
 #'
 #' Formula: BS = T^-1 sum_i sum_c (pi_ic - d_ic)^2 (eq. 4.14) with d_ic the
 #' indicator of the observed category. The categorical score lies in \[0, 2\];

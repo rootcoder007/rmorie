@@ -5,7 +5,7 @@
 \alias{Pbeta}
 \title{Pbeta}
 \usage{
-Pbeta(q, shape1, shape2, lower_tail = TRUE)
+Pbeta(q, shape1, shape2, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

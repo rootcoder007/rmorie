@@ -5,7 +5,7 @@
 \alias{Qnorm}
 \title{Qnorm}
 \usage{
-Qnorm(p, mean = 0, sd = 1, lower_tail = TRUE)
+Qnorm(p, mean = 0, sd = 1, lower_tail = TRUE) 
 }
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}

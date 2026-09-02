@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_heterozygosity}
 \title{Per-individual heterozygosity rate over non-missing calls}
 \usage{
-morie_snpqc1_heterozygosity(genotypes)
+morie_snpqc1_heterozygosity(genotypes) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

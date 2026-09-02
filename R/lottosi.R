@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Draw n units with probability proportional to size, and estimate.
+#' Draw n units with probability proportional to size, and estimate
 #'
 #' The "lottery" or cumulative-total method, drawing WITH replacement, so
 #' the same unit can legitimately appear twice. Selection uses a pinned

@@ -5,7 +5,10 @@
 \alias{morie_motfsr}
 \title{Discover motifs by fitting the MM mixture model}
 \usage{
-morie_motfsr(sequences, w, alphabet = NULL, n_motifs = 1, beta = 0.01, lambda0 = NULL, max_iter = 1000, tol = 1e-06, normalize_overlaps = TRUE, starts = "subsequences", start_weight = 0.5, max_starts = 200, start_scoring = "one_step", erase_by = "letter", loss = NULL)
+morie_motfsr(sequences, w, alphabet = NULL, n_motifs = 1, beta = 0.01, lambda0 = NULL, 
+    max_iter = 1000, tol = 1e-06, normalize_overlaps = TRUE, starts = "subsequences", 
+    start_weight = 0.5, max_starts = 200, start_scoring = "one_step", erase_by = "letter", 
+    loss = NULL) 
 }
 \arguments{
 \item{sequences}{Dataset.}

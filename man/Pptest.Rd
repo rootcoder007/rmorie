@@ -2,7 +2,7 @@
 % Please edit documentation in R/pptest.R
 \name{Pptest}
 \alias{Pptest}
-\title{Phillips-Perron test for a unit root, trend included.}
+\title{Phillips-Perron test for a unit root, trend included}
 \usage{
 Pptest(x, lags = NULL, kind = "Z(t_alpha)")
 }

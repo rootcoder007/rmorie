@@ -5,7 +5,8 @@
 \alias{morie_strmkr_strauss_process}
 \title{morie_strmkr_strauss_process}
 \usage{
-morie_strmkr_strauss_process(coords, r, gamma = NULL, window = NULL, nx = 12L, ny = 12L, max_iter = 100L, tol = 1e-11)
+morie_strmkr_strauss_process(coords, r, gamma = NULL, window = NULL, nx = 12L, ny = 12L, max_iter = 100L, 
+    tol = 1e-11) 
 }
 \arguments{
 \item{coords}{Passed to \code{.strmkr_rows}.}

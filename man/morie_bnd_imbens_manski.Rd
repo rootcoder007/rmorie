@@ -22,6 +22,8 @@ morie_bnd_imbens_manski(
 \item{n}{sample size.}
 
 \item{alpha}{miss probability.}
+
+
 }
 \value{
 list: ci, c, z_one_sided, z_two_sided, delta, covers,

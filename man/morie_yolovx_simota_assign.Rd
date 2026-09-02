@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_yolovx_simota_assign}
 \alias{morie_yolovx_simota_assign}
+\alias{morie_yolovx}
 \title{Dynamic top-k, an approximation to optimal transport. k_g is the}
 \usage{
-morie_yolovx_simota_assign(costs, ious, top_q = 10, max_k = NULL)
+morie_yolovx_simota_assign(costs, ious, top_q = 10, max_k = NULL) 
+
+morie_yolovx(costs, ious, top_q = 10, max_k = NULL) 
 }
 \arguments{
 \item{costs}{Passed to \code{.s03mat}.}

@@ -5,7 +5,7 @@
 \alias{Acfseg}
 \title{Section 8.5.2, eqs. (8.27)-(8.29), after Michael and Houchin}
 \usage{
-Acfseg(test, reference, lags = NULL, thp = 1, thf = 1)
+Acfseg(test, reference, lags = NULL, thp = 1, thf = 1) 
 }
 \arguments{
 \item{test}{Coerced to numeric by the body, with \code{as.numeric}.}

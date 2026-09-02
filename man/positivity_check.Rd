@@ -5,7 +5,7 @@
 \alias{positivity_check}
 \title{positivity_check}
 \usage{
-positivity_check(g, delta = 0.01)
+positivity_check(g, delta = 0.01) 
 }
 \arguments{
 \item{g}{Coerced to numeric by the body, with \code{as.numeric}.}

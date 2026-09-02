@@ -5,7 +5,7 @@
 \alias{FDiffPh}
 \title{Eq (3.127): slope -1/2, so half a sample of group delay plus the}
 \usage{
-FDiffPh(omega)
+FDiffPh(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

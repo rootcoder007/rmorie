@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm028.R
 \name{Msm028}
 \alias{Msm028}
-\title{Multi-trait model with extra fixed effects.}
+\title{Multi-trait model with extra fixed effects}
 \usage{
 Msm028(Y, Z, G, Sigma_T, R_T, X = NULL)
 }

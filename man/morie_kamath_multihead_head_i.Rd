@@ -5,10 +5,16 @@
 \alias{morie_kamath_multihead_head_i}
 \title{morie_kamath_multihead_head_i}
 \usage{
-morie_kamath_multihead_head_i(Q, K, V, W_Qi, W_Ki, W_Vi)
+morie_kamath_multihead_head_i(Q, K, V, W_Qi, W_Ki, W_Vi) 
 }
 \arguments{
 \item{W_Qi,W_Ki,W_Vi}{Per-head projections.}
+
+\item{Q}{Argument \code{Q}; see Usage.}
+
+\item{K}{Argument \code{K}; see Usage.}
+
+\item{V}{Argument \code{V}; see Usage.}
 }
 \description{
 morie_kamath_multihead_head_i

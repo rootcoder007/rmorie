@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' SAC model -- spatial lag and spatial error sharing one weights matrix.
+#' SAC model -- spatial lag and spatial error sharing one weights matrix
 #'
 #' \code{y = rho W y + X beta + u}, \code{u = lam W u + eps},
 #' \code{eps ~ N(0, sigma2 I)}.

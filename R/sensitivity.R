@@ -437,7 +437,7 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 
 
 # =====================================================================
-# Omitted-variable bias (Cinelli & Hazlett 2020 — sensemakr)
+# Omitted-variable bias (Cinelli & Hazlett 2020 -- sensemakr)
 # =====================================================================
 
 #' Omitted-variable bias analysis (sensemakr framework)
@@ -517,7 +517,7 @@ omitted_variable_bias <- function(estimate, se, dof, r2_yd_x,
 #' @param sample_filters Optional. Accepted shapes (for Python<->R parity):
 #'   (a) `list(list(name = "...", fn = function(df) ...), ...)` (R native),
 #'   (b) `list(c("name", fn), ...)` or `list(list("name", fn), ...)` (Python
-#'       `list\[tuple\[str, callable\]\]` shape — positional pair). Default: full
+#'       `list\[tuple\[str, callable\]\]` shape -- positional pair). Default: full
 #'       sample only.
 #' @param model_types    Character vector of model families:
 #'   `"ols"`, `"logistic"`, `"robust"`. Default `c("ols")`.

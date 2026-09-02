@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm007.R
 \name{Msm007}
 \alias{Msm007}
-\title{Generalized precision.}
+\title{Generalized precision}
 \usage{
 Msm007(y_true, y_pred, class_index = 0, n_classes = NULL)
 }
@@ -20,7 +20,7 @@ List with estimate, TFP, TTP_all, pCCC, method.
 }
 \description{
 Formula: P_i = TTP_all / (TTP_all + TFP_i) on a one-versus-all basis
-(eq. 4.9), with TFP_i = sum_{j != i} n_ji from eq. (4.6).
+(eq. 4.9), with TFP_i = sum_\{j != i\} n_ji from eq. (4.6).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/agdsts.R
 \name{Distilkl}
 \alias{Distilkl}
-\title{Temperature-scaled knowledge-distillation loss.}
+\title{Temperature-scaled knowledge-distillation loss}
 \usage{
 Distilkl(teacher, student, temperature = 2, label = NULL, alpha = 0.5)
 }

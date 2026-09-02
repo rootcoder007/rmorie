@@ -5,7 +5,7 @@
 \alias{morie_hadcrut_cheatsheet}
 \title{One-line summary of the hadcrut module}
 \usage{
-morie_hadcrut_cheatsheet()
+morie_hadcrut_cheatsheet() 
 }
 \description{
 One-line summary of the hadcrut module

@@ -5,7 +5,7 @@
 \alias{SpecDec}
 \title{Alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =}
 \usage{
-SpecDec(draft, target, gamma = 4L)
+SpecDec(draft, target, gamma = 4L) 
 }
 \arguments{
 \item{draft}{Passed to \code{.morie_spx_chkv}.}

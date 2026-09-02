@@ -5,7 +5,9 @@
 \alias{reversible_jump_mcmc}
 \title{reversible_jump_mcmc}
 \usage{
-reversible_jump_mcmc(models, moves, init_model, init_theta = c(), n_iter = 10000L, burn_in = 0L, thin = 1L, seed = 0L, within = NULL, within_scale = 0.5, within_weight = 1, move_weight = 1, jacobian = "analytic", keep_chain = TRUE)
+reversible_jump_mcmc(models, moves, init_model, init_theta = c(), n_iter = 10000L, 
+    burn_in = 0L, thin = 1L, seed = 0L, within = NULL, within_scale = 0.5, 
+    within_weight = 1, move_weight = 1, jacobian = "analytic", keep_chain = TRUE) 
 }
 \arguments{
 \item{models}{A vector; its length is taken and its elements indexed.}

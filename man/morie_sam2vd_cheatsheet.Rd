@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_cheatsheet}
 \title{morie_sam2vd_cheatsheet}
 \usage{
-morie_sam2vd_cheatsheet()
+morie_sam2vd_cheatsheet() 
 }
 \description{
 A step of the sam2vd_native implementation. No other function in the package calls it. See the file header for the source the module follows.

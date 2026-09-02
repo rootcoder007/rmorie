@@ -5,7 +5,7 @@
 \alias{rate_condition}
 \title{rate_condition}
 \usage{
-rate_condition(rate_Q, rate_g, n)
+rate_condition(rate_Q, rate_g, n) 
 }
 \arguments{
 \item{rate_Q}{Coerced to numeric by the body, with \code{as.numeric}.}

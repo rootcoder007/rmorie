@@ -15,6 +15,7 @@ morie_fauzi_c1_coefficient(dg, d2g, density, fp)
 \item{density}{\code{f_X(x)}.}
 
 \item{fp}{\verb{f_X'(x)}.}
+
 }
 \value{
 Named list with \code{estimate}, \code{method}.

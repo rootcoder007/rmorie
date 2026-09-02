@@ -5,7 +5,7 @@
 \alias{smo}
 \title{smo}
 \usage{
-smo(y, K, C = 1, tol = 1e-08, max_iter = 20000)
+smo(y, K, C = 1, tol = 1e-08, max_iter = 20000) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

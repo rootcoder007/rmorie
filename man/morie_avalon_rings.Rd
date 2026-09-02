@@ -5,7 +5,7 @@
 \alias{morie_avalon_rings}
 \title{One ring per ring-closure bond: that bond plus the shortest path}
 \usage{
-morie_avalon_rings(n, bonds, closures)
+morie_avalon_rings(n, bonds, closures) 
 }
 \arguments{
 \item{n}{The atom count.}

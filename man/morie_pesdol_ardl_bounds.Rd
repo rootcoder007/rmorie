@@ -5,7 +5,7 @@
 \alias{morie_pesdol_ardl_bounds}
 \title{morie_pesdol_ardl_bounds}
 \usage{
-morie_pesdol_ardl_bounds(y, x, p = 1, q = 1)
+morie_pesdol_ardl_bounds(y, x, p = 1, q = 1) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

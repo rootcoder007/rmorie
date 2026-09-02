@@ -2,7 +2,7 @@
 % Please edit documentation in R/fpcadj.R
 \name{Fpc}
 \alias{Fpc}
-\title{Finite population correction factor for sampling without replacement.}
+\title{Finite population correction factor for sampling without replacement}
 \usage{
 Fpc(N, n)
 }

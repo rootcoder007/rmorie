@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Multi-trait model with extra fixed effects.
+#' Multi-trait model with extra fixed effects
 #'
 #' Formula: Y = (1_IJ (x) I_nT) mu + X beta + Z b + eps (eq. 5.5a), the
 #' multi-trait model of eq. (5.5) extended with a fixed-effects term X beta.

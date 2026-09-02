@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' eq. (3.1) p.71 with the OLS solution pp.72-73 (re-export).
+#' eq. (3.1) p.71 with the OLS solution pp.72-73 (re-export)
 #'
 #' The stub generator stamped several extracted page fragments with the same
 #' function name, so the implementation lives once in \code{Msm332()} and this

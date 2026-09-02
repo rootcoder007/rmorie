@@ -2,7 +2,7 @@
 % Please edit documentation in R/spiso.R
 \name{spiso}
 \alias{spiso}
-\title{Isotropy check by comparing directional semivariograms.}
+\title{Isotropy check by comparing directional semivariograms}
 \usage{
 spiso(coords, z, n_dir = 4, n_bins = 10, max_dist = NULL, tol = 0.25)
 }

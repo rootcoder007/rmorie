@@ -10,6 +10,9 @@ morie_kamath_dpo_loss(logp_w, logp_l, logp_ref_w, logp_ref_l, beta)
 \item{logp_w, logp_l, logp_ref_w, logp_ref_l}{Log-probabilities (<= 0).}
 
 \item{beta}{Positive scale.}
+
+
+
 }
 \value{
 List with \code{estimate}, \code{per_pair}, implicit rewards.

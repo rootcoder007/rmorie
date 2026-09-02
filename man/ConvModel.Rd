@@ -5,7 +5,7 @@
 \alias{ConvModel}
 \title{Eq (4.61): y(t) = x(t) * h(t), the model homomorphic DEconvolution}
 \usage{
-ConvModel(x, h)
+ConvModel(x, h) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

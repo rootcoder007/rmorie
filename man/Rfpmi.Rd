@@ -19,6 +19,7 @@ the data, so the number of trees is the only thing that needs carrying.}
 
 \item{normalise}{divide by the standard deviation of the per-tree
 differences, as the book's own sentence prescribes.}
+
 }
 \value{
 list: estimate, importance, ranking, oob_size, mtry, n, method.

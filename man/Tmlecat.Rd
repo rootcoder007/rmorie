@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlcat.R
 \name{Tmlecat}
 \alias{Tmlecat}
-\title{Target E\link{Y_a} at every level of a categorical treatment.}
+\title{Target E[Y_a] at every level of a categorical treatment}
 \usage{
 Tmlecat(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95)
 }

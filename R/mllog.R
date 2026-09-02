@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Maximum likelihood log-likelihood of the linear regression model.
+#' Maximum likelihood log-likelihood of the linear regression model
 #'
 #' Formula: log L = -(n/2) log(2 pi) - n log(sigma) - (1/(2 sigma^2)) (y - X beta)'(y - X beta)
 #'

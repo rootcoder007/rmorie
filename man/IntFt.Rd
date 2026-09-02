@@ -5,7 +5,7 @@
 \alias{IntFt}
 \title{Eq (3.115): Y(w) = X(w)/(jw) + pi X(0) delta(w).  The delta carries}
 \usage{
-IntFt(X, omega, X0 = NULL)
+IntFt(X, omega, X0 = NULL) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

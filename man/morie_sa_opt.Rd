@@ -5,7 +5,8 @@
 \alias{morie_sa_opt}
 \title{morie_sa_opt}
 \usage{
-morie_sa_opt(fun, x0, step = 1, T0 = 1, n_iter = 1000, schedule = "geometric", alpha = 0.99, lower = NULL, upper = NULL, seed = 0)
+morie_sa_opt(fun, x0, step = 1, T0 = 1, n_iter = 1000, schedule = "geometric", 
+    alpha = 0.99, lower = NULL, upper = NULL, seed = 0) 
 }
 \arguments{
 \item{fun}{Accepted by the signature and not used anywhere in the body.}

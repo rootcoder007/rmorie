@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' A single Newton step on the estimating equation from theta0.
+#' A single Newton step on the estimating equation from theta0
 #'
 #' If theta0 is root-n consistent then one step is asymptotically
 #' equivalent to the full Z-estimator, so the step is taken exactly once.

@@ -13,6 +13,7 @@ morie_marpct(yi, vi, mods)
 \item{yi, vi}{study effects and their within-study variances.}
 
 \item{mods}{moderator matrix or vector; an intercept column is added.}
+
 }
 \value{
 list: estimate, tau2_total, tau2_resid, QE, df_resid,

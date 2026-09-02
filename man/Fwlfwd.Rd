@@ -32,7 +32,7 @@ number of rounds so both language arms take identical steps.
 }
 \details{
 Formula: S <- S + argmin_v <grad f(x), v>;
-x <- argmin{ f(x) : x in conv(S) }.
+x <- argmin\{ f(x) : x in conv(S) \}.
 }
 \examples{
 V <- rbind(c(0, 0), c(1, 0), c(0, 1))

@@ -5,7 +5,7 @@
 \alias{morie_tlnetlg_longitudinal_network_gcomp}
 \title{morie_tlnetlg_longitudinal_network_gcomp}
 \usage{
-morie_tlnetlg_longitudinal_network_gcomp(Q_seq, friends, W, policy, T)
+morie_tlnetlg_longitudinal_network_gcomp(Q_seq, friends, W, policy, T) 
 }
 \arguments{
 \item{Q_seq}{A vector; its length is taken and its elements indexed.}

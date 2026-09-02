@@ -5,7 +5,7 @@
 \alias{morie_causdiddc}
 \title{de Chaisemartin-D\'Haultfoeuille (2020) TWFE vs DID_M}
 \usage{
-morie_causdiddc(Y, D, group, period)
+morie_causdiddc(Y, D, group, period) 
 }
 \arguments{
 \item{Y}{Outcome, long format.}

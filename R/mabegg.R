@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Begg and Mazumdar's rank correlation test for publication bias.
+#' Begg and Mazumdar's rank correlation test for publication bias
 #'
 #' The effects are standardised so that under the null they are
 #' independent of their variances: \eqn{w_i = 1/v_i},

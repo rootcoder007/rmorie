@@ -236,7 +236,7 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
 #' Log-odds classifier matrix
 #'
 #' @param motif,background Frequency matrices.
-#' @return spec with spec[i][k] = log(motif[i][k] / background[k]).
+#' @return spec with spec\[i\]\[k\] = log(motif\[i\]\[k\] / background\[k\]).
 #' @export
 morie_motfsr_log_odds_matrix <- function(motif, background) {
   out <- vector("list", length(motif))

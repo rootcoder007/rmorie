@@ -14,6 +14,7 @@ Tmlepool(y, D, X = NULL, site = NULL, alpha = 0.05)
 \item{site}{site identifier.}
 
 \item{alpha}{interval level.}
+
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, site_psi, site_se, site_n, Q,

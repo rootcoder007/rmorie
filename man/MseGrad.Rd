@@ -5,7 +5,7 @@
 \alias{MseGrad}
 \title{Eq. (3.167): grad J = -2 Theta + 2 Phi w.  The surface is quadratic}
 \usage{
-MseGrad(phi, theta, w)
+MseGrad(phi, theta, w) 
 }
 \arguments{
 \item{phi}{A matrix; passed to \code{as.matrix}.}

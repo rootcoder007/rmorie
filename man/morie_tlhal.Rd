@@ -5,7 +5,9 @@
 \alias{morie_tlhal}
 \title{morie_tlhal}
 \usage{
-morie_tlhal(X, y, lambdas = NULL, V = 5L, seed = 0L, lam = 1, iters = 2000L, step = 0.05, max_order = 2L, knots = NULL, intercept = TRUE, mode = c("fit", "predict", "cv", "norm"))
+morie_tlhal(X, y, lambdas = NULL, V = 5L, seed = 0L, lam = 1, iters = 2000L, 
+    step = 0.05, max_order = 2L, knots = NULL, intercept = TRUE, mode = c("fit", 
+        "predict", "cv", "norm")) 
 }
 \arguments{
 \item{X}{Passed to \code{cv_select_lambda}.}

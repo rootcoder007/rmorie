@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Quantize a value cache with the inner-product variant of TurboQuant.
+#' Quantize a value cache with the inner-product variant of TurboQuant
 #'
 #' One bit per coordinate is spent on the sign sketch of the RESIDUAL, so
 #' the scalar stage gets only b - 1 and b must be at least 2.

@@ -5,7 +5,7 @@
 \alias{multiplier_bootstrap}
 \title{multiplier_bootstrap}
 \usage{
-multiplier_bootstrap(ic, B = 1000L, seed = 0L)
+multiplier_bootstrap(ic, B = 1000L, seed = 0L) 
 }
 \arguments{
 \item{ic}{Passed to \code{morie_tlboot}.}

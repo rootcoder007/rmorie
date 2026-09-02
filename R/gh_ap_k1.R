@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Fano lower bound on the error probability of an M-ary test.
+#' Fano lower bound on the error probability of an M-ary test
 #'
 #' The bound is informative only once log M exceeds I + log 2.
 #'

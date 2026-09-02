@@ -5,7 +5,7 @@
 \alias{morie_gwasem_kinship}
 \title{IBS relatedness matrix}
 \usage{
-morie_gwasem_kinship(genotypes)
+morie_gwasem_kinship(genotypes) 
 }
 \arguments{
 \item{genotypes}{n x m matrix of minor-allele counts.}

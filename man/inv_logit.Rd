@@ -5,7 +5,7 @@
 \alias{inv_logit}
 \title{inv_logit}
 \usage{
-inv_logit(x)
+inv_logit(x) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

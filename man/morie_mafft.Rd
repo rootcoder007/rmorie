@@ -5,7 +5,7 @@
 \alias{morie_mafft}
 \title{morie_mafft}
 \usage{
-morie_mafft(op, ...)
+morie_mafft(op, ...) 
 }
 \arguments{
 \item{op}{A vector; its length is taken.}

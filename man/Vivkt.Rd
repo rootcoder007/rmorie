@@ -16,6 +16,8 @@ Vivkt(X, M, Y, Cc = NULL, a = 1, astar = 0, m = 0)
 \item{Cc}{Optional covariates; read at their means.}
 
 \item{a, astar, m}{Exposure contrast and controlled mediator level.}
+
+
 }
 \value{
 List with \code{estimate}, \code{pde}, \code{tie}, \code{cde},

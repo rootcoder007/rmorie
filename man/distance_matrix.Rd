@@ -5,7 +5,7 @@
 \alias{distance_matrix}
 \title{distance_matrix}
 \usage{
-distance_matrix(fps)
+distance_matrix(fps) 
 }
 \arguments{
 \item{fps}{Iterated over elementwise, with \code{lapply}.}

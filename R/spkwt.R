@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Solve the kriging system for the weights.
+#' Solve the kriging system for the weights
 #'
 #' Simple kriging solves Sigma lambda = sigma. Ordinary kriging adds the
 #' unbiasedness constraint sum(lambda) = 1 through a Lagrange multiplier,

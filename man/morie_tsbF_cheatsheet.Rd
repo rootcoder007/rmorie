@@ -5,7 +5,7 @@
 \alias{morie_tsbF_cheatsheet}
 \title{morie_tsbF_cheatsheet}
 \usage{
-morie_tsbF_cheatsheet()
+morie_tsbF_cheatsheet() 
 }
 \description{
 A step of the tsbF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

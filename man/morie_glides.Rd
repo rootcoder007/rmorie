@@ -5,7 +5,11 @@
 \alias{morie_glides}
 \title{Score a pose in the Glide form}
 \usage{
-morie_glides(receptor, ligand_pose, radii = list(), depths = list(), charges = list(), lipophilic = character(0), hbonds = list(), dielectric = "constant", epsilon = 1, m = 6, n = 12, r1 = 4.1, r2 = 7.1, metal = 0, buryp = 0, n_rot = 0, rot_penalty = 0.35, site = 0, coefficients = NULL, weights = NULL, cutoff = NULL)
+morie_glides(receptor, ligand_pose, radii = list(), depths = list(), charges = list(), 
+    lipophilic = character(0), hbonds = list(), dielectric = "constant", 
+    epsilon = 1, m = 6, n = 12, r1 = 4.1, r2 = 7.1, metal = 0, buryp = 0, 
+    n_rot = 0, rot_penalty = 0.35, site = 0, coefficients = NULL, weights = NULL, 
+    cutoff = NULL) 
 }
 \arguments{
 \item{receptor}{Atom rows: x, y, z, type.}

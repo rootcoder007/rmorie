@@ -5,7 +5,7 @@
 \alias{estimate_eic}
 \title{estimate_eic}
 \usage{
-estimate_eic(psi_of_P, basis, weights = NULL, h = 1e-05, ridge = 1e-08)
+estimate_eic(psi_of_P, basis, weights = NULL, h = 1e-05, ridge = 1e-08) 
 }
 \arguments{
 \item{psi_of_P}{Passed to \code{numerical_derivative}.}

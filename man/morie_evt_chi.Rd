@@ -5,10 +5,12 @@
 \alias{morie_evt_chi}
 \title{Empirical chi(u) tail dependence (Coles 2001 sec. 8.4 p.164)}
 \usage{
-morie_evt_chi(x, y, u = 0.95)
+morie_evt_chi(x, y, u = 0.95) 
 }
 \arguments{
 \item{x,y}{equal-length series; u quantile level}
+
+\item{u}{Argument \code{u}; see Usage.}
 }
 \description{
 Empirical chi(u) tail dependence (Coles 2001 sec. 8.4 p.164)

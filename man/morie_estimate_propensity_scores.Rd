@@ -5,7 +5,8 @@
 \alias{morie_estimate_propensity_scores}
 \title{morie_estimate_propensity_scores}
 \usage{
-morie_estimate_propensity_scores(data, treatment, covariates, trim = c(0.01, 0.99), trim_type = "value", ps_model = "mle", ridge_lambda = 1)
+morie_estimate_propensity_scores(data, treatment, covariates, trim = c(0.01, 0.99), trim_type = "value", 
+    ps_model = "mle", ridge_lambda = 1) 
 }
 \arguments{
 \item{data}{Passed to \code{.fit_propensity}.}

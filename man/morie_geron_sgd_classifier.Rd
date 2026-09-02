@@ -20,6 +20,10 @@ morie_geron_sgd_classifier(
 \item{y}{Binary labels (2 distinct values).}
 
 \item{lr, n_iter, alpha, seed, shuffle}{As in the Python original.}
+
+
+
+
 }
 \value{
 list with w, b, loss_curve, decision, predicted, accuracy, n_support,

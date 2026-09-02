@@ -5,10 +5,14 @@
 \alias{Ks2}
 \title{Two-sample KS test -- Sec. 6.3, p. 239}
 \usage{
-Ks2(x, y)
+Ks2(x, y) 
 }
 \description{
 Two-sample KS test -- Sec. 6.3, p. 239
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{dplus}, \code{dminus}, \code{m}, \code{n}.

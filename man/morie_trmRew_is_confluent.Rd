@@ -5,7 +5,7 @@
 \alias{morie_trmRew_is_confluent}
 \title{Confluence via Newman\'s lemma: terminating and locally confluent}
 \usage{
-morie_trmRew_is_confluent(rules, precedence, max_steps = 10000)
+morie_trmRew_is_confluent(rules, precedence, max_steps = 10000) 
 }
 \arguments{
 \item{rules}{Passed to \code{morie_trmRew_is_terminating}.}

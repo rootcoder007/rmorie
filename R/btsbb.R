@@ -22,7 +22,7 @@
 #' and the number of block starts is exactly 1 + Binomial(n - 1, p) per
 #' replicate, because the first step always starts a block and each of the
 #' remaining n - 1 steps restarts independently with probability p, so
-#' E[n_runs] = B (1 + (n-1) p) exactly -- a closed form free of the censoring
+#' E\[n_runs\] = B (1 + (n-1) p) exactly -- a closed form free of the censoring
 #' that makes the realised block LENGTHS a biased sample of the Geometric law.
 #' mean_block is reported as n B / n_runs and is stated to be that ratio, not
 #' a Geometric mean.

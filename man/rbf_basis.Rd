@@ -5,7 +5,7 @@
 \alias{rbf_basis}
 \title{rbf_basis}
 \usage{
-rbf_basis(x, n_centres = 5, width = NULL)
+rbf_basis(x, n_centres = 5, width = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.polkrn_vec}.}

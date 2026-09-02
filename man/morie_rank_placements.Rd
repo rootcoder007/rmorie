@@ -8,6 +8,7 @@ morie_rank_placements(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors.}
+
 }
 \value{
 Named list: placements, ranks_y, U_y, E_U, Var_U, m, n.

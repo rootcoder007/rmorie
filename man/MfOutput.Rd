@@ -5,7 +5,7 @@
 \alias{MfOutput}
 \title{Eq (4.34), computed as y = x * h: exact for a finite record, where}
 \usage{
-MfOutput(x, h, dt = 1)
+MfOutput(x, h, dt = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

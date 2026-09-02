@@ -5,7 +5,7 @@
 \alias{preference_vector}
 \title{preference_vector}
 \usage{
-preference_vector(nodes, focus, weight = 0.9)
+preference_vector(nodes, focus, weight = 0.9) 
 }
 \arguments{
 \item{nodes}{Coerced to list by the body, with \code{as.list}.}

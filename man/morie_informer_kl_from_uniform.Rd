@@ -5,7 +5,7 @@
 \alias{morie_informer_kl_from_uniform}
 \title{morie_informer_kl_from_uniform}
 \usage{
-morie_informer_kl_from_uniform(q, K, scale = NULL)
+morie_informer_kl_from_uniform(q, K, scale = NULL) 
 }
 \arguments{
 \item{q}{Passed to \code{morie_informer_sparsity_measure}.}

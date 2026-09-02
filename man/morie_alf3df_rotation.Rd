@@ -5,7 +5,7 @@
 \alias{morie_alf3df_rotation}
 \title{A uniform random rotation matrix by Shoemake's quaternion method}
 \usage{
-morie_alf3df_rotation(e)
+morie_alf3df_rotation(e) 
 }
 \arguments{
 \item{e}{A random stream from the shared generator.}

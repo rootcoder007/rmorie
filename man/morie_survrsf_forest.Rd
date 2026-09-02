@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_survrsf_forest}
 \alias{morie_survrsf_forest}
+\alias{morie_survrsf}
 \title{morie_survrsf_forest}
 \usage{
-morie_survrsf_forest(X, times, events, n_trees = 50, mtry = NULL, min_deaths = 3, rule = "logrank", seed = 0)
+morie_survrsf_forest(X, times, events, n_trees = 50, mtry = NULL, min_deaths = 3, 
+    rule = "logrank", seed = 0) 
+
+morie_survrsf(X, times, events, n_trees = 50, mtry = NULL, min_deaths = 3, 
+    rule = "logrank", seed = 0) 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

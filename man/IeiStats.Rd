@@ -5,7 +5,7 @@
 \alias{IeiStats}
 \title{IeiStats: point-process inter-event interval statistics}
 \usage{
-IeiStats(event_times, T = NULL, n_bins = 20)
+IeiStats(event_times, T = NULL, n_bins = 20) 
 }
 \arguments{
 \item{event_times}{Coerced to numeric by the body, with \code{as.numeric}.}

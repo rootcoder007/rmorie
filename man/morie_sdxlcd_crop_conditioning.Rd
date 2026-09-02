@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_crop_conditioning}
 \title{morie_sdxlcd_crop_conditioning}
 \usage{
-morie_sdxlcd_crop_conditioning(c_top = 0, c_left = 0, dim = 8)
+morie_sdxlcd_crop_conditioning(c_top = 0, c_left = 0, dim = 8) 
 }
 \arguments{
 \item{c_top}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.}

@@ -5,7 +5,7 @@
 \alias{morie_geron_numerical_diff}
 \title{Numerical differentiation via central finite differences, Richardson-checked (Geron App A, hmnmd)}
 \usage{
-morie_geron_numerical_diff(f, x, h = 1e-05)
+morie_geron_numerical_diff(f, x, h = 1e-05) 
 }
 \arguments{
 \item{f}{Function `f(x) -> scalar`.}

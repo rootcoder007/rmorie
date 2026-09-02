@@ -5,7 +5,7 @@
 \alias{morie_tmlcic_influence_curve}
 \title{morie_tmlcic_influence_curve}
 \usage{
-morie_tmlcic_influence_curve(y, A, q1, q0, qa, gA, rows, psi, target)
+morie_tmlcic_influence_curve(y, A, q1, q0, qa, gA, rows, psi, target) 
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}

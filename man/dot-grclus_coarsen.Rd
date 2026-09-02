@@ -2,7 +2,7 @@
 % Please edit documentation in R/grclus_native.R
 \name{.grclus_coarsen}
 \alias{.grclus_coarsen}
-\title{Mate: 0-based, mate\link{u} = v means u matched with v}
+\title{Mate: 0-based, mate[u] = v means u matched with v}
 \usage{
 .grclus_coarsen(adj, vw, mate)
 }

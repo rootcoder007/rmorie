@@ -5,7 +5,7 @@
 \alias{MantelM2}
 \title{Eqs (1.4) and (1.5) with the book\'s own default choices,}
 \usage{
-MantelM2(coords, x, w = NULL, u = NULL)
+MantelM2(coords, x, w = NULL, u = NULL) 
 }
 \arguments{
 \item{coords}{A matrix; passed to \code{as.matrix}.}

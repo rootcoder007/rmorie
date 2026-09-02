@@ -92,6 +92,9 @@
   as.integer(max.col(-d, ties.method = "first")) - 1L
 }
 
+#' @param K See Usage.
+#' @param b See Usage.
+#' @param seed See Usage.
 #' @export
 Kvmse <- function(K, b = 2, seed = 1) {
   K <- as.matrix(K); n <- nrow(K); d <- ncol(K); b <- as.integer(b)

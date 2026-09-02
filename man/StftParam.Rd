@@ -5,7 +5,7 @@
 \alias{StftParam}
 \title{STFT window selection under the time-bandwidth limit, eq (8.10)}
 \usage{
-StftParam(fs, desired_t_res, desired_f_res)
+StftParam(fs, desired_t_res, desired_f_res) 
 }
 \arguments{
 \item{fs}{Numeric; combined arithmetically in the body.}

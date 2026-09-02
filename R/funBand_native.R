@@ -74,11 +74,13 @@
   0.5 * (K + t(K))
 }
 
-#' The influence matrix A(lambda) = (I + lambda K)^-1, computed spectrally.
+#' The influence matrix A(lambda) = (I + lambda K)^-1, computed spectrally
 #'
 #' K = U diag(d) U', so A = U diag(1/(1 + lambda d)) U'. Factorising
 #' I + lambda K directly loses positive definiteness once lambda * ||K||
 #' reaches about 1e12, which is exactly the limit the anchors probe.
+#' @param x See Usage.
+#' @param lam See Usage.
 #' @export
 morie_funBand_influence_matrix <- function(x, lam) {
   xs <- as.numeric(x)
@@ -100,7 +102,9 @@ morie_funBand_influence_matrix <- function(x, lam) {
   0.5 * (A + t(A))
 }
 
-#' GCV, Wahba (1983) eq. (2.16).
+#' GCV, Wahba (1983) eq. (2.16)
+#' @param y See Usage.
+#' @param A See Usage.
 #' @export
 morie_funBand_gcv_score <- function(y, A) {
   n <- length(y)
@@ -111,8 +115,16 @@ morie_funBand_gcv_score <- function(y, A) {
   (rss / n) / ((tr_ia / n) ^ 2)
 }
 
-#' Smoothing-spline fit with Wahba's Bayesian confidence intervals.
+#' Smoothing-spline fit with Wahba's Bayesian confidence intervals
 #'
+#' @param Y See Usage.
+#' @param alpha See Usage.
+#' @param x See Usage.
+#' @param lam See Usage.
+#' @param quantile See Usage.
+#' @param truth See Usage.
+#' @param n_lambda See Usage.
+#' @param log_lambda_range See Usage.
 #' @references
 #' Wahba, G. (1983) Journal of the Royal Statistical Society Series B 45(1),
 #' 133-150, doi:10.1111/j.2517-6161.1983.tb01239.x.

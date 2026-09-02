@@ -3,7 +3,7 @@
 \name{Sarlag}
 \alias{Sarlag}
 \alias{morie_spatial_ar_lag_model}
-\title{Spatial autoregressive lag model -- alias of \code{sarla}.}
+\title{Spatial autoregressive lag model -- alias of \code{sarla}}
 \usage{
 Sarlag(y, X, W)
 

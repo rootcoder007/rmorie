@@ -5,7 +5,7 @@
 \alias{trclrn_tree_rules}
 \title{trclrn_tree_rules}
 \usage{
-trclrn_tree_rules(tree, names = NULL, indent = 0)
+trclrn_tree_rules(tree, names = NULL, indent = 0) 
 }
 \arguments{
 \item{tree}{A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$n}, \code{$right}, \code{$threshold}, \code{$treatment} from it.}

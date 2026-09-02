@@ -5,7 +5,7 @@
 \alias{morie_secrtt_unwrap_dek}
 \title{Unwrap a DEK and record the call}
 \usage{
-morie_secrtt_unwrap_dek(wrapped, kek, audit_log = NULL)
+morie_secrtt_unwrap_dek(wrapped, kek, audit_log = NULL) 
 }
 \arguments{
 \item{wrapped}{List with \code{wrapped}, \code{nonce}, \code{tag},   \code{kek_id}, optional \code{aad}.}

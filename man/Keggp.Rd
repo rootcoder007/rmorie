@@ -33,7 +33,7 @@ indicator vectors over a fixed gene universe so that both language
 arms index genes identically.
 }
 \details{
-Formula: P(X >= q) = sum_{j>=q} C(m,j) C(N-m, n-j) / C(N, n).
+Formula: P(X >= q) = sum_\{j>=q\} C(m,j) C(N-m, n-j) / C(N, n).
 }
 \examples{
 genes <- c(1, 0, 1, 0, 1)

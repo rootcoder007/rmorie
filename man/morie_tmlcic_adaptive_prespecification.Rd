@@ -5,7 +5,8 @@
 \alias{morie_tmlcic_adaptive_prespecification}
 \title{morie_tmlcic_adaptive_prespecification}
 \usage{
-morie_tmlcic_adaptive_prespecification(y, A, W, groups, design, target, library = NULL, g_library = NULL, n_folds = NULL, ridge = 1e-08)
+morie_tmlcic_adaptive_prespecification(y, A, W, groups, design, target, library = NULL, g_library = NULL, 
+    n_folds = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

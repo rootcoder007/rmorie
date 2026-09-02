@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c6_12.R
 \name{Sepcons}
 \alias{Sepcons}
-\title{Hellinger-affinity bound from strong delta-separation at stage k.}
+\title{Hellinger-affinity bound from strong delta-separation at stage k}
 \usage{
 Sepcons(delta, k, n)
 }

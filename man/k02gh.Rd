@@ -5,7 +5,7 @@
 \alias{k02gh}
 \title{k02gh}
 \usage{
-k02gh(n)
+k02gh(n) 
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{numeric(...)}.}

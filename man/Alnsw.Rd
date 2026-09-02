@@ -13,6 +13,7 @@ Alnsw(seq1, seq2, sub_matrix = NULL, gap = 1)
 union.}
 
 \item{gap}{linear gap penalty; non-negative.}
+
 }
 \value{
 list: score, estimate, aligned1, aligned2, length, start1, end1,

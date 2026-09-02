@@ -5,7 +5,7 @@
 \alias{IntFr}
 \title{Eq (3.116): H(w) = 1/(jw), the DC term of eq (3.115) set aside as the}
 \usage{
-IntFr(omega)
+IntFr(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

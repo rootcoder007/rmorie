@@ -5,7 +5,8 @@
 \alias{progressive_align}
 \title{progressive_align}
 \usage{
-progressive_align(seqs, scoring, tree = NULL, seq_type = "aa", s_op = 2.4, use_fft = TRUE, ...)
+progressive_align(seqs, scoring, tree = NULL, seq_type = "aa", s_op = 2.4, use_fft = TRUE, 
+    ...) 
 }
 \arguments{
 \item{seqs}{A vector; its length is taken and its elements indexed.}

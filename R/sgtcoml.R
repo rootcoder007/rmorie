@@ -8,7 +8,9 @@
 #' Source consulted: Blondel, Guillaume, Lambiotte and Lefebvre (2008), JSTAT
 #' P10008, section 2.
 #'
-#' @param A symmetric adjacency (or weight) matrix.
+#' @param a See Usage.
+#' @param n See Usage.
+#' @param m2 See Usage.
 #' @return list: estimate, communities, n_communities, modularity_before,
 #'   sweeps, n, method.
 #' @keywords internal

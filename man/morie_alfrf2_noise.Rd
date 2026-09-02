@@ -5,7 +5,7 @@
 \alias{morie_alfrf2_noise}
 \title{The forward process in closed form}
 \usage{
-morie_alfrf2_noise(x0, abar_t, eps)
+morie_alfrf2_noise(x0, abar_t, eps) 
 }
 \arguments{
 \item{x0}{The clean structure, a matrix of coordinates.}

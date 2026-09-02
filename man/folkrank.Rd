@@ -5,7 +5,7 @@
 \alias{folkrank}
 \title{folkrank}
 \usage{
-folkrank(triples, focus, d = 0.7, weight = 0.9, iters = 200)
+folkrank(triples, focus, d = 0.7, weight = 0.9, iters = 200) 
 }
 \arguments{
 \item{triples}{Passed to \code{tripartite_graph}.}

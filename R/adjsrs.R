@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Effective simple-random-sample size of a weighted design.
+#' Effective simple-random-sample size of a weighted design
 #'
 #' deff = 1 + cv^2(w) = n * sum(w^2) / (sum w)^2 and
 #' n_eff = n / deff = (sum w)^2 / sum(w^2).

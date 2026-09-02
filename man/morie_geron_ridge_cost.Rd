@@ -12,6 +12,8 @@ morie_geron_ridge_cost(X, y, theta, alpha, intercept_index = 0)
 \item{alpha}{Non-negative penalty.}
 
 \item{intercept_index}{0-based index left unpenalised, or NULL.}
+
+
 }
 \value{
 List with \code{cost}, \code{mse}, \code{penalty}, \code{gradient}, \code{alpha},

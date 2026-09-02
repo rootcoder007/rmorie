@@ -5,7 +5,7 @@
 \alias{WienerConv}
 \title{Eqs. (3.173)-(3.174): the normal equations written as a convolution}
 \usage{
-WienerConv(w, phi, theta)
+WienerConv(w, phi, theta) 
 }
 \arguments{
 \item{w}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -23,6 +23,7 @@ morie_geron_double_dqn_target(
 \item{gamma}{Discount.}
 
 \item{done}{Optional flags.}
+
 }
 \value{
 List with \code{target}, \code{selected_action}, \code{q_eval},

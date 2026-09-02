@@ -5,7 +5,8 @@
 \alias{CLogPz}
 \title{CLogPz: complex log of a rational X(z) over its poles and zeros;}
 \usage{
-CLogPz(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0), c_k = complex(0), d_k = complex(0), M_I = NULL, M_O = NULL, N_I = NULL, N_O = NULL)
+CLogPz(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0), c_k = complex(0), 
+    d_k = complex(0), M_I = NULL, M_O = NULL, N_I = NULL, N_O = NULL) 
 }
 \arguments{
 \item{z}{Coerced to complex by the body, with \code{as.complex}.}

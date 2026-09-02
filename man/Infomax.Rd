@@ -5,7 +5,7 @@
 \alias{Infomax}
 \title{Infomax}
 \usage{
-Infomax(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-08, seed = 1)
+Infomax(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-08, seed = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

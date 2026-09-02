@@ -5,7 +5,8 @@
 \alias{morie_flexrd}
 \title{Dock a ligand into a receptor whose side chains may move}
 \usage{
-morie_flexrd(receptor, ligand, flex_residues, angles = NULL, soft = 0.7, epsilon = 1, cutoff = 8, search = "coordinate", passes = 3L, n_keep = 3L)
+morie_flexrd(receptor, ligand, flex_residues, angles = NULL, soft = 0.7, epsilon = 1, 
+    cutoff = 8, search = "coordinate", passes = 3L, n_keep = 3L) 
 }
 \arguments{
 \item{receptor}{A list with coords and radii, one per receptor atom.}

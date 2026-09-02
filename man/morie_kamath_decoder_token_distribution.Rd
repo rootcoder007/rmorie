@@ -5,10 +5,16 @@
 \alias{morie_kamath_decoder_token_distribution}
 \title{morie_kamath_decoder_token_distribution}
 \usage{
-morie_kamath_decoder_token_distribution(s_t_1, y_t_1, c, W = NULL)
+morie_kamath_decoder_token_distribution(s_t_1, y_t_1, c, W = NULL) 
 }
 \arguments{
 \item{W}{Optional vocab x 3d score projection.}
+
+\item{s_t_1}{Argument \code{s_t_1}; see Usage.}
+
+\item{y_t_1}{Argument \code{y_t_1}; see Usage.}
+
+\item{c}{Argument \code{c}; see Usage.}
 }
 \description{
 morie_kamath_decoder_token_distribution

@@ -5,7 +5,7 @@
 \alias{HrvFreq}
 \title{Section 8.12.  Task Force bands by default; Bianchi et al. bands on}
 \usage{
-HrvFreq(rr, fsr = 4, bands = "taskforce")
+HrvFreq(rr, fsr = 4, bands = "taskforce") 
 }
 \arguments{
 \item{rr}{A vector; its length is taken and its elements indexed.}

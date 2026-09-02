@@ -10,6 +10,7 @@ morie_rmsdtr(P, Q, weights = NULL)
 \item{P, Q}{Matrices (rows = paired points, d = 2 or 3 columns).}
 
 \item{weights}{Optional non-negative pair weights.}
+
 }
 \value{
 A list with elements \code{estimate} (RMSD),

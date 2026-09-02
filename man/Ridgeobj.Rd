@@ -2,7 +2,7 @@
 % Please edit documentation in R/ridgj.R
 \name{Ridgeobj}
 \alias{Ridgeobj}
-\title{Penalized residual sum of squares of ridge regression.}
+\title{Penalized residual sum of squares of ridge regression}
 \usage{
 Ridgeobj(X, y, beta, lam, add_intercept = TRUE)
 }

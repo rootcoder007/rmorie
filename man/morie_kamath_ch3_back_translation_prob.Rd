@@ -17,6 +17,7 @@ morie_kamath_ch3_back_translation_prob(
 \item{thatt}{Pivot translation.}
 
 \item{p_forward, p_backward}{Leg probabilities in [0, 1].}
+
 }
 \value{
 List with \code{estimate}.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Covariance and semivariogram under second-order stationarity.
+#' Covariance and semivariogram under second-order stationarity
 #'
 #' gamma(h) = C(0) - C(h). The identity requires second-order
 #' stationarity: an intrinsically stationary process has a semivariogram

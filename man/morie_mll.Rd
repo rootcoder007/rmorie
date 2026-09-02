@@ -5,10 +5,14 @@
 \alias{morie_mll}
 \title{morie_mll}
 \usage{
-morie_mll(probs, y_true)
+morie_mll(probs, y_true) 
 }
 \description{
 morie_mll
+}
+\arguments{
+\item{probs}{Argument \code{probs}; see Usage.}
+\item{y_true}{Argument \code{y_true}; see Usage.}
 }
 \value{
 A numeric value.

@@ -21,6 +21,7 @@ morie_fauzi_thm2_4_mise_brdkdfe(n, h, a, biasint, varint, r1 = NULL, r2 = NULL)
 \item{varint}{\verb{int F(x)(1 - F(x)) dx}.}
 
 \item{r1, r2}{Kernel constants; default to Gaussian \code{r1} and \code{r2(a)}.}
+
 }
 \value{
 Named list with \code{mise}, \code{biasterm}, \code{varterm}, \code{smoothgain}, \code{h}, \code{a}, \code{method}.

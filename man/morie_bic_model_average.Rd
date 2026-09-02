@@ -7,9 +7,12 @@
 morie_bic_model_average(bics, thetas = NULL, variances = NULL)
 }
 \arguments{
-\item{bics}{BIC values. @param thetas Per-model estimates.}
+
+\item{thetas}{See Usage.}
 
 \item{variances}{Per-model variances.}
+
+\item{bics}{Argument \code{bics}; see Usage.}
 }
 \value{
 List with taus, theta_ma, var_ma.

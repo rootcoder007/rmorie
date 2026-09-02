@@ -14,6 +14,8 @@ Contcorr(a, b, c, d, cc = 0.5, always = FALSE)
 \item{cc}{the constant to add; 0.5 is the usual choice.}
 
 \item{always}{add the correction even when no cell is zero.}
+
+
 }
 \value{
 list: a_adj, b_adj, c_adj, d_adj, estimate (log OR), se,

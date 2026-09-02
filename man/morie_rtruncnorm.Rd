@@ -5,10 +5,16 @@
 \alias{morie_rtruncnorm}
 \title{morie_rtruncnorm}
 \usage{
-morie_rtruncnorm(mean, sd, lo, hi)
+morie_rtruncnorm(mean, sd, lo, hi) 
 }
 \description{
 morie_rtruncnorm
+}
+\arguments{
+\item{mean}{Argument \code{mean}; see Usage.}
+\item{sd}{Argument \code{sd}; see Usage.}
+\item{lo}{Argument \code{lo}; see Usage.}
+\item{hi}{Argument \code{hi}; see Usage.}
 }
 \value{
 A numeric value.

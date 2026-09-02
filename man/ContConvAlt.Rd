@@ -5,7 +5,7 @@
 \alias{ContConvAlt}
 \title{Eq (3.31): y(t) = integral h(tau) x(t - tau) d tau, given by the book}
 \usage{
-ContConvAlt(x, h, dt = 1, t = NULL)
+ContConvAlt(x, h, dt = 1, t = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{ContConv}.}

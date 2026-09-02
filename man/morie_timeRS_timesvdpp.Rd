@@ -5,7 +5,8 @@
 \alias{morie_timeRS_timesvdpp}
 \title{Compact aliases per ledger/NAMING.md}
 \usage{
-morie_timeRS_timesvdpp(ratings, n_users, n_items, bin_days = 70, n_bins = 30, epochs = 40, lr = 0.005, reg = 0.02, beta = .timeRS_BETA)
+morie_timeRS_timesvdpp(ratings, n_users, n_items, bin_days = 70, n_bins = 30, epochs = 40, 
+    lr = 0.005, reg = 0.02, beta = .timeRS_BETA) 
 }
 \arguments{
 \item{ratings}{Passed to \code{.timeRS_fit_time_bias}.}

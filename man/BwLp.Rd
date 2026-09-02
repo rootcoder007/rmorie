@@ -5,7 +5,7 @@
 \alias{BwLp}
 \title{The book\'s route end to end: prewarp by eq (3.141), place poles by}
 \usage{
-BwLp(cutoff_hz, order = 4, fs = 1000, z = NULL)
+BwLp(cutoff_hz, order = 4, fs = 1000, z = NULL) 
 }
 \arguments{
 \item{cutoff_hz}{Coerced to numeric by the body, with \code{as.numeric}.}

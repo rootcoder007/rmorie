@@ -5,7 +5,8 @@
 \alias{morie_tdcvar}
 \title{morie_tdcvar}
 \usage{
-morie_tdcvar(y, A, L_t, time = NULL, contrast = "cumulative", kind = "binary", stabilize = TRUE, trim = NULL)
+morie_tdcvar(y, A, L_t, time = NULL, contrast = "cumulative", kind = "binary", 
+    stabilize = TRUE, trim = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.tdcvar_vec}.}

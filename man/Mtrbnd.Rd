@@ -17,6 +17,7 @@ Mtrbnd(y, D, direction = "increasing", d = NULL, y_min = NULL, y_max = NULL)
 \code{max(D)}.}
 
 \item{y_min, y_max}{A priori outcome support; default the observed range.}
+
 }
 \value{
 List with lower, upper, width, nfixed, n, d.

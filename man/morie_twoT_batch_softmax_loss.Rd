@@ -5,7 +5,7 @@
 \alias{morie_twoT_batch_softmax_loss}
 \title{morie_twoT_batch_softmax_loss}
 \usage{
-morie_twoT_batch_softmax_loss(query_embeddings, item_embeddings, probabilities = NULL, temperature = 0.05)
+morie_twoT_batch_softmax_loss(query_embeddings, item_embeddings, probabilities = NULL, temperature = 0.05) 
 }
 \arguments{
 \item{query_embeddings}{Passed to \code{.twoT_as_mat}.}

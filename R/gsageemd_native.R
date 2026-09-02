@@ -18,10 +18,7 @@
 
 #' Aggregate a set of neighbour vectors
 #'
-#' @param vectors Numeric matrix (one row per neighbour) or list of
-#'   rows.
-#' @param how One of "mean", "max_pool", "lstm_order".
-#' @param W Optional weight matrix for max_pool.
+#' @param x See Usage.
 #' @return Permutation-invariant summary vector.
 #' @export
 .gsageemd_mat <- function(x) {

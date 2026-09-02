@@ -5,7 +5,8 @@
 \alias{projected_gradient}
 \title{projected_gradient}
 \usage{
-projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max_iter = 2000, tol = 1e-10)
+projected_gradient(f, grad, x0, project, step = NULL, rule = "backtracking", max_iter = 2000, 
+    tol = 1e-10) 
 }
 \arguments{
 \item{f}{Accepted by the signature and not used anywhere in the body.}

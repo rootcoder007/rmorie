@@ -9,7 +9,7 @@
 #'
 #' Section 10.8.1 gives the algorithm literally: step 9,
 #' delta_ij = (y_ij - yhat_ij) g'(z_ij); step 10,
-#' psi_ik = g'(z_ik) sum_{j=1..L} delta_ij w_jk; step 11,
+#' psi_ik = g'(z_ik) sum_\{j=1..L\} delta_ij w_jk; step 11,
 #' w_jk(t+1) = w_jk(t) + eta delta_ij V_ik (10.13); step 12,
 #' w_kp(t+1) = w_kp(t) + eta psi_ik x_ip (10.17); and step 8 accumulates
 #' E = (1/(2 n L)) sum_ij (yhat_ij - y_ij)^2.  Example 10.1 runs a four
@@ -21,7 +21,7 @@
 #' w_new = w_old + eta * gradient reproduces (10.13) and (10.17).
 #'
 #' @param layers list of weight matrices W_1..W_L, W_l with one row per unit
-#'   of layer l and a leading bias column, so z_l = W_l \[1, a_{l-1}\].
+#'   of layer l and a leading bias column, so z_l = W_l \[1, a_\{l-1\}\].
 #' @param activations the forward pass a_0..a_L, one row per pattern; a_0 is
 #'   the input without a bias column.
 #' @param loss_grad n-by-units_L matrix of dE/dyhat, which step 9 takes to be

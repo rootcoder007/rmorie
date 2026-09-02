@@ -5,7 +5,7 @@
 \alias{gradient_inner_product}
 \title{gradient_inner_product}
 \usage{
-gradient_inner_product(D, score, weights = NULL)
+gradient_inner_product(D, score, weights = NULL) 
 }
 \arguments{
 \item{D}{Coerced to numeric by the body, with \code{as.numeric}.}

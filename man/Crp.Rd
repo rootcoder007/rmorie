@@ -2,18 +2,18 @@
 % Please edit documentation in R/dpcrp.R
 \name{Crp}
 \alias{Crp}
-\title{Chinese restaurant process seating.}
+\title{Chinese restaurant process seating}
 \usage{
 Crp(n, alpha = 1, u = NULL, seed = 1)
 }
 \arguments{
-\item{n}{Number of customers.}
+\item{n}{See Usage.}
 
-\item{alpha}{Concentration parameter, positive.}
+\item{alpha}{See Usage.}
 
-\item{u}{Caller-supplied uniforms, one per customer.}
+\item{u}{See Usage.}
 
-\item{seed}{Seed of the shared minstd stream when \code{u} is omitted.}
+\item{seed}{See Usage.}
 }
 \value{
 List with \code{table} (assignment per customer), \code{counts}, \code{n_tables}, \code{expected_tables}, \code{alpha}, \code{n}.
@@ -25,5 +25,5 @@ Formula: P(z_i = k) = n_k / (i - 1 + alpha) for an occupied table k, and alpha /
 Crp(n = 5L)
 }
 \references{
-Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E\link{K} = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
+Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
 }

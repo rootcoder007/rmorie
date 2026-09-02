@@ -17,6 +17,7 @@ morie_kamath_speculative_decoding(
 \item{proposed}{Optional 0-based proposal.}
 
 \item{u}{Optional uniform draw.}
+
 }
 \value{
 List with \code{estimate}, \code{accept_prob}, \code{residual}, \code{rejection_rate}.

@@ -5,10 +5,14 @@
 \alias{morie_evt_gpd_quantile}
 \title{GPD quantile (inverse of Coles 2001 eq. 4.2)}
 \usage{
-morie_evt_gpd_quantile(p, sigma, xi)
+morie_evt_gpd_quantile(p, sigma, xi) 
 }
 \arguments{
 \item{p}{probability in [0, 1)}
+
+\item{sigma}{Argument \code{sigma}; see Usage.}
+
+\item{xi}{Argument \code{xi}; see Usage.}
 }
 \description{
 GPD quantile (inverse of Coles 2001 eq. 4.2)

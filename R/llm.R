@@ -111,7 +111,7 @@ morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
     stringsAsFactors = FALSE)
 }
 
-#' Internal helper: resolve the Ollama model to use.
+#' Internal helper: resolve the Ollama model to use
 #'
 #' No hardcoded model name -- models are pulled per-machine and upstream tags
 #' get retired (llama3.2, gemma3), so an assumed default errors on most

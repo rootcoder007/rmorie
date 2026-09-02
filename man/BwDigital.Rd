@@ -5,7 +5,7 @@
 \alias{BwDigital}
 \title{BwDigital}
 \usage{
-BwDigital(Omega_c = NULL, N = NULL, T = 1, fc = NULL, fs = NULL, z = NULL)
+BwDigital(Omega_c = NULL, N = NULL, T = 1, fc = NULL, fs = NULL, z = NULL) 
 }
 \arguments{
 \item{Omega_c}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

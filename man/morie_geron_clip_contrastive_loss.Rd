@@ -17,6 +17,7 @@ morie_geron_clip_contrastive_loss(
 \item{tau}{Positive temperature.}
 
 \item{normalize}{L2-normalise first.}
+
 }
 \value{
 List with \code{loss}, \code{loss_i2t}, \code{loss_t2i}, \code{similarity},

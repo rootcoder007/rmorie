@@ -2,7 +2,7 @@
 % Please edit documentation in R/clstrs.R
 \name{Clusdes}
 \alias{Clusdes}
-\title{Choose the cluster size that buys the most precision per unit cost.}
+\title{Choose the cluster size that buys the most precision per unit cost}
 \usage{
 Clusdes(rho, S2, c1, c2, budget)
 }

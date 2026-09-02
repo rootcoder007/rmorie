@@ -5,7 +5,7 @@
 \alias{WvDist}
 \title{Wigner-Ville distribution, eq (8.123)}
 \usage{
-WvDist(x, fs = 1, nfreq = NULL)
+WvDist(x, fs = 1, nfreq = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

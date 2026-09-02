@@ -5,7 +5,7 @@
 \alias{Pgram}
 \title{Eq (4.57) specialised to R^1 in Sec. 4.7.1.1, checked against the}
 \usage{
-Pgram(y)
+Pgram(y) 
 }
 \arguments{
 \item{y}{Passed to \code{.morie_spx_chkv}.}

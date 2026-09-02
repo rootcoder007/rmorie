@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Per-record-type ARSAU analysis pipelines (R-side mirror of
-#' \code{morie.arsau_analyze}).
+#' \code{morie.arsau_analyze})
 #'
 #' Each public callable in this file loads one ARSAU dataset via the
 #' \code{morie_arsau_load_*} loaders defined in \code{R/arsau.R} and
@@ -188,7 +188,7 @@ NULL
 # 1. main_records analysis
 # ---------------------------------------------------------------------------
 
-#' End-to-end analysis of the ARSAU main_records CSV for one year.
+#' End-to-end analysis of the ARSAU main_records CSV for one year
 #'
 #' Chains:
 #' \itemize{
@@ -264,7 +264,7 @@ morie_arsau_analyze_main_records <- function(year, language = "en", data_dir = N
 # 2. individual_records analysis
 # ---------------------------------------------------------------------------
 
-#' End-to-end analysis of the ARSAU individual_records CSV for one year.
+#' End-to-end analysis of the ARSAU individual_records CSV for one year
 #'
 #' Chains demographic-disparity tests over Race, Gender, and
 #' AgeCategory against the \code{IndivInjuries_PhysicalInjuries}
@@ -385,7 +385,7 @@ morie_arsau_analyze_individual_records <- function(year, language = "en",
 # 3. probe_cycle_records analysis
 # ---------------------------------------------------------------------------
 
-#' Analysis of ARSAU probe_cycle_records (CEW telemetry).
+#' Analysis of ARSAU probe_cycle_records (CEW telemetry)
 #'
 #' The probe-cycle file is intentionally narrow (BatchFileName +
 #' Indiv_Index + a comma-separated cycle string).  This function
@@ -492,7 +492,7 @@ morie_arsau_analyze_probe_cycle_records <- function(year, language = "en",
 # 4. weapon_records analysis
 # ---------------------------------------------------------------------------
 
-#' Analysis of ARSAU weapon_records.
+#' Analysis of ARSAU weapon_records
 #'
 #' Chains \code{\link{mrm_uof_weapon_diversity}} over
 #' \code{Weapon x Location} (the only two categorical columns the file
@@ -635,7 +635,7 @@ morie_arsau_analyze_weapon_records <- function(year, allow_invalid = FALSE,
 # 5. aggregate_summary analysis
 # ---------------------------------------------------------------------------
 
-#' Analysis of the ARSAU aggregate-summary-by-year file (2020-2022).
+#' Analysis of the ARSAU aggregate-summary-by-year file (2020-2022)
 #'
 #' The aggregate file is a long-format
 #' \code{YEAR_2020 / YEAR_2021 / YEAR_2022} panel keyed by
@@ -738,7 +738,7 @@ morie_arsau_analyze_aggregate_summary <- function(year_range = "2020-2022",
 # 6. detailed_dataset analysis
 # ---------------------------------------------------------------------------
 
-#' Wide-format analysis of the 2020-2022 detailed-incident dataset.
+#' Wide-format analysis of the 2020-2022 detailed-incident dataset
 #'
 #' Chains:
 #' \itemize{

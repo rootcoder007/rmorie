@@ -2,28 +2,28 @@
 % Please edit documentation in R/bocpd.R
 \name{Bocpd}
 \alias{Bocpd}
-\title{Bayesian online changepoint detection (Gaussian run model).}
+\title{Bayesian online changepoint detection (Gaussian run model)}
 \usage{
 Bocpd(x, hazard = 0.004, mu0 = 0, kappa0 = 1, alpha0 = 1, beta0 = 1)
 }
 \arguments{
-\item{x}{Observed univariate series.}
+\item{x}{See Usage.}
 
-\item{hazard}{Constant hazard H = 1/lambda of the geometric run-length prior.}
+\item{hazard}{See Usage.}
 
-\item{mu0}{Prior mean.}
+\item{mu0}{See Usage.}
 
-\item{kappa0}{Prior mean precision (pseudo-count).}
+\item{kappa0}{See Usage.}
 
-\item{alpha0}{Prior shape of the inverse-gamma variance.}
+\item{alpha0}{See Usage.}
 
-\item{beta0}{Prior scale of the inverse-gamma variance.}
+\item{beta0}{See Usage.}
 }
 \value{
 List with \code{cp_prob} (P(r_t = 1) at each t), \code{reset_prob}, \code{run_length} (posterior mode), \code{max_cp_prob}, \code{hazard}, \code{n}.
 }
 \description{
-Formula: P(r_t=r_{t-1}+1, x_1:t) = P(r_{t-1},x_1:t-1) pi_t^(r) (1-H); P(r_t=0, x_1:t) = sum_r P(r_{t-1},x_1:t-1) pi_t^(r) H
+Formula: P(r_t=r_\{t-1\}+1, x_1:t) = P(r_\{t-1\},x_1:t-1) pi_t^(r) (1-H); P(r_t=0, x_1:t) = sum_r P(r_\{t-1\},x_1:t-1) pi_t^(r) H
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

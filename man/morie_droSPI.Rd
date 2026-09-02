@@ -5,7 +5,7 @@
 \alias{morie_droSPI}
 \title{morie_droSPI}
 \usage{
-morie_droSPI(precip, scale = 3L, by_month = TRUE)
+morie_droSPI(precip, scale = 3L, by_month = TRUE) 
 }
 \arguments{
 \item{precip}{Coerced to numeric by the body, with \code{as.numeric}.}

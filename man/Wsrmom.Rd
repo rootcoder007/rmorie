@@ -5,10 +5,13 @@
 \alias{Wsrmom}
 \title{Null moments of T+ -- eq. (5.7.2), p. 197}
 \usage{
-Wsrmom(n)
+Wsrmom(n) 
 }
 \description{
 Null moments of T+ -- eq. (5.7.2), p. 197
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{mean}, \code{var}, \code{sd}, \code{total}, \code{skew}, \code{n}.

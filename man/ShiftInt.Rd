@@ -5,7 +5,7 @@
 \alias{ShiftInt}
 \title{Psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at}
 \usage{
-ShiftInt(y, a, h, delta = 1, trim = NULL)
+ShiftInt(y, a, h, delta = 1, trim = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.morie_spx_chkv}.}
@@ -15,7 +15,7 @@ ShiftInt(y, a, h, delta = 1, trim = NULL)
 \item{trim}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
 }
 \description{
-the BACK-shifted exposure.  Forward-shifting is the sign error this estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2), so w = exp{(delta/tau^2)(A - H\'gamma - delta/2)}.  Diaz & van der Laan (2012, 2018).  NOT in Schabenberger & Gotway.
+the BACK-shifted exposure.  Forward-shifting is the sign error this estimand invites.  Gaussian working model A|H ~ N(H\'gamma, tau^2), so w = exp\{(delta/tau^2)(A - H\'gamma - delta/2)\}.  Diaz & van der Laan (2012, 2018).  NOT in Schabenberger & Gotway.
 }
 \value{
 A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight}, \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta}, \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n}, \code{method}.

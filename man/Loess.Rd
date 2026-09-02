@@ -15,6 +15,7 @@ morie_loess(x, y, span = 2/3, iterations = 3L)
 \item{span}{fraction of points per neighbourhood.}
 
 \item{iterations}{robustness iterations.}
+
 }
 \value{
 list: estimate, x, fitted, residuals, robustness_weights, span,

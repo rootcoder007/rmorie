@@ -5,7 +5,7 @@
 \alias{tie_probability}
 \title{Tie probability for two consecutive draws}
 \usage{
-tie_probability(alpha)
+tie_probability(alpha) 
 }
 \arguments{
 \item{alpha}{Concentration, positive.}

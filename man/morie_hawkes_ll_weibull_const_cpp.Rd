@@ -5,7 +5,7 @@
 \alias{morie_hawkes_ll_weibull_const_cpp}
 \title{morie_hawkes_ll_weibull_const_cpp}
 \usage{
-morie_hawkes_ll_weibull_const_cpp(t, T_horizon, a0, eta, alpha, lam)
+morie_hawkes_ll_weibull_const_cpp(t, T_horizon, a0, eta, alpha, lam) 
 }
 \arguments{
 \item{t}{Passed to \code{.Call}.}

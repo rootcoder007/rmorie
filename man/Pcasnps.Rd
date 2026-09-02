@@ -7,7 +7,7 @@
 Pcasnps(genotypes, n_components = 2L)
 }
 \arguments{
-\item{genotypes}{Genotype counts in {0, 1, 2}, individuals by
+\item{genotypes}{Genotype counts in \{0, 1, 2\}, individuals by
 markers.}
 
 \item{n_components}{Number of leading components to return.}

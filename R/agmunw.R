@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero n-step bootstrapped value targets.
+#' MuZero n-step bootstrapped value targets
 #'
-#' z_t = sum_{j=0}^{n-1} gamma^j u_{t+j} + gamma^n nu_{t+n}, with the
+#' z_t = sum_\{j=0\}^\{n-1\} gamma^j u_\{t+j\} + gamma^n nu_\{t+n\}, with the
 #' bootstrap term dropped past the end of the trajectory.
 #'
 #' @param rewards Environment rewards, one per transition.

@@ -5,7 +5,7 @@
 \alias{morie_asmnvr}
 \title{De novo assembly via the de Bruijn graph and an Eulerian path}
 \usage{
-morie_asmnvr(reads, k = NULL, multiplicity = "set")
+morie_asmnvr(reads, k = NULL, multiplicity = "set") 
 }
 \arguments{
 \item{reads}{Character vector of reads (need not be equal length).}

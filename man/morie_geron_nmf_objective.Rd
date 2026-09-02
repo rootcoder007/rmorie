@@ -8,6 +8,8 @@ morie_geron_nmf_objective(X, W, H)
 }
 \arguments{
 \item{X, W, H}{Non-negative matrices with X ~ W H.}
+
+
 }
 \value{
 List with \code{objective}, \code{reconstruction}, \code{residual},

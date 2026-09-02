@@ -24,6 +24,7 @@ with the Python signature).}
 \item{weights}{Optional column of matching / weighting weights.}
 
 \item{alpha}{Significance level for confidence intervals.}
+
 }
 \value{
 A list of class \code{morie_te_result}.

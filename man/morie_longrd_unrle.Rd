@@ -5,7 +5,7 @@
 \alias{morie_longrd_unrle}
 \title{Expand a run-length encoding back to the sequence}
 \usage{
-morie_longrd_unrle(runs)
+morie_longrd_unrle(runs) 
 }
 \arguments{
 \item{runs}{A list of base and count pairs.}

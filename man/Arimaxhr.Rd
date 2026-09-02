@@ -2,7 +2,7 @@
 % Please edit documentation in R/arimax.R
 \name{Arimaxhr}
 \alias{Arimaxhr}
-\title{ARIMAX: exogenous regression with ARMA errors.}
+\title{ARIMAX: exogenous regression with ARMA errors}
 \usage{
 Arimaxhr(y, X, p = 1, q = 1, d = 0, m = NULL)
 }
@@ -16,6 +16,7 @@ Arimaxhr(y, X, p = 1, q = 1, d = 0, m = NULL)
 \item{d}{Order of differencing.}
 
 \item{m}{Stage-one long-autoregression order, or NULL.}
+
 }
 \value{
 List with beta, phi, theta, intercept, sigma2, noise, resid,

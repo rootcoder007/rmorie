@@ -5,7 +5,7 @@
 \alias{morie_kamath_ragas_faithfulness}
 \title{RAGAS faithfulness (Kamath Ch 7)}
 \usage{
-morie_kamath_ragas_faithfulness(answer, context, entails = NULL)
+morie_kamath_ragas_faithfulness(answer, context, entails = NULL) 
 }
 \arguments{
 \item{answer}{Claims.}

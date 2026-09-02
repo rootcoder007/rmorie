@@ -13,6 +13,9 @@ morie_geron_googlenet(
 }
 \arguments{
 \item{n_classes, input_size, in_channels, dropout}{Config.}
+
+
+
 }
 \value{
 List with \code{layers}, \code{modules}, \code{total_params}, \code{final_feature_map}, \code{total_reduction_saving}.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_download}
 \alias{morie_arsau_download}
-\title{Bulk-download ARSAU CSVs from the Ontario Data Catalogue.}
+\title{Bulk-download ARSAU CSVs from the Ontario Data Catalogue}
 \usage{
 morie_arsau_download(
   target_dir,

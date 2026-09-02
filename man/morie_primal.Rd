@@ -5,7 +5,8 @@
 \alias{morie_primal}
 \title{morie_primal}
 \usage{
-morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, theta = 1, norm_K = NULL, max_iter = 500, tol = 1e-10)
+morie_primal(K, Kt, prox_f_star, prox_g, x0, y0, tau = NULL, sigma = NULL, 
+    theta = 1, norm_K = NULL, max_iter = 500, tol = 1e-10) 
 }
 \arguments{
 \item{K}{Accepted by the signature and not used anywhere in the body.}

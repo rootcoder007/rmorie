@@ -31,6 +31,8 @@ morie_rappor(
 instantaneous step) or \code{"basic"} (one-hot, no Bloom filter).}
 
 \item{seed}{RNG seed.}
+
+
 }
 \value{
 A list with the reports, per-cohort bit \code{counts} and

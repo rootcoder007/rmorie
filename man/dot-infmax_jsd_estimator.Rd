@@ -2,7 +2,7 @@
 % Please edit documentation in R/infmax_native.R
 \name{.infmax_jsd_estimator}
 \alias{.infmax_jsd_estimator}
-\title{I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)]}
+\title{I_JSD = E_P[-sp(-T)] - E_\{PxP~\}[sp(T)]}
 \usage{
 .infmax_jsd_estimator(joint_scores, marginal_scores)
 }

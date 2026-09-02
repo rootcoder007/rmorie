@@ -5,7 +5,7 @@
 \alias{SepIndex}
 \title{Section 10.10.1: J = tr(S_B) / tr(S_W).  The trace ratio ignores the}
 \usage{
-SepIndex(X, y)
+SepIndex(X, y) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

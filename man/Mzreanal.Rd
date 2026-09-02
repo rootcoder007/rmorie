@@ -2,7 +2,7 @@
 % Please edit documentation in R/agmurt.R
 \name{Mzreanal}
 \alias{Mzreanal}
-\title{MuZero Reanalyze targets and prioritised-replay weights.}
+\title{MuZero Reanalyze targets and prioritised-replay weights}
 \usage{
 Mzreanal(
   rewards,
@@ -29,13 +29,14 @@ Mzreanal(
 \item{alpha, beta}{Prioritised-replay exponents.}
 
 \item{oldvalues}{Values for the priority gap; NULL uses freshvalues.}
+
 }
 \value{
 List with target, policy, priority, prob, weight, T, A, n,
 gamma.
 }
 \description{
-z_t = sum_{j<n} gamma^j u_{t+j} + gamma^n nu_{t+n};
+z_t = sum_\{j<n\} gamma^j u_\{t+j\} + gamma^n nu_\{t+n\};
 pi_t(a) = N_t(a)/sum_b N_t(b); p_i = |nu_i - z_i|;
 P(i) = p_i^alpha / sum_k p_k^alpha; w_i = ((1/N)(1/P(i)))^beta.
 }

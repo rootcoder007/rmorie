@@ -2,16 +2,16 @@
 % Please edit documentation in R/otmaprc.R
 \name{Brenier1d}
 \alias{Brenier1d}
-\title{Brenier optimal transport map in one dimension.}
+\title{Brenier optimal transport map in one dimension}
 \usage{
 Brenier1d(x, y, p = 2)
 }
 \arguments{
-\item{x}{Source sample.}
+\item{x}{See Usage.}
 
-\item{y}{Target sample, the same length.}
+\item{y}{See Usage.}
 
-\item{p}{Cost exponent |x - y|^p.}
+\item{p}{See Usage.}
 }
 \value{
 List with \code{map} (image of each input in its original order), \code{cost}, \code{order_x}, \code{order_y}, \code{n}.

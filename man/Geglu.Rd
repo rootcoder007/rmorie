@@ -16,6 +16,8 @@ Geglu(y, x = NULL, W = NULL, V = NULL, b = NULL, c = NULL, W2 = NULL)
 \item{b, c}{biases.}
 
 \item{W2}{optional output projection.}
+
+
 }
 \value{
 list: estimate, out, gate, ffn, method.

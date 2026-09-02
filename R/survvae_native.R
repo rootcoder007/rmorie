@@ -204,7 +204,7 @@
   (conc + 0.5 * tied) / total
 }
 
-#' Accepted primitives for the DSM experts.
+#' Accepted primitives for the DSM experts
 #'
 #' The character vector \code{c("weibull", "lognormal")}, mirroring
 #' \code{morie.fn.survvae.PRIMITIVES}.
@@ -241,7 +241,7 @@ morie_survvae_log_pdf <- function(t, shape, scale, primitive = "weibull") {
   -log(t) - log(shape) - 0.5 * log(2 * pi) - 0.5 * z * z
 }
 
-#' Log survival of one expert -- what a censored case needs.
+#' Log survival of one expert -- what a censored case needs
 #'
 #' Closed-form log survival of the chosen primitive, used by
 #' \code{morie_survvae_elbo} for censored observations and by
@@ -295,7 +295,7 @@ morie_survvae_gates <- function(x, W, bias) {
   e / sum(e)
 }
 
-#' The paper's lower bound: gates outside the logarithm.
+#' The paper's lower bound: gates outside the logarithm
 #'
 #' ELBO_U + \code{alpha} * ELBO_C - prior_penalty, where each term
 #' uses the gate weights OUTSIDE the log (Jensen). Verifying that
@@ -351,7 +351,7 @@ morie_survvae_elbo <- function(X, y_lower, events, W, bias, shapes, scales,
        prior_penalty = pen, alpha = as.numeric(alpha))
 }
 
-#' The true mixture log-likelihood the bound sits underneath.
+#' The true mixture log-likelihood the bound sits underneath
 #'
 #' Computes \eqn{\ln \sum_k g_k \exp(\cdot)} rather than the
 #' Jensen-relaxed sum. The anchor verifies this is at least as large
@@ -389,7 +389,7 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
        uncensored = tot_u, censored = tot_c)
 }
 
-#' Maximise the combined loss over gates and expert parameters.
+#' Maximise the combined loss over gates and expert parameters
 #'
 #' Nelder-Mead over the stacked vector
 #' \eqn{(W, b, \log \beta, \log \eta)} with random multi-restart.
@@ -499,7 +499,7 @@ morie_survvae <- function(X, times, events, K = 3L, primitive = "weibull",
        method = sprintf("Deep Survival Machines: mixture of %s experts with softmax gates, ELBO_U + alpha ELBO_C + prior; Nagpal et al. (2021) Sec. III", primitive))
 }
 
-#' \eqn{S(t | x)} as the gated mixture of expert survivals.
+#' \eqn{S(t | x)} as the gated mixture of expert survivals
 #'
 #' @param fit_result A fit returned by \code{morie_survvae} or
 #'   \code{morie_survvae_fit_competing}.
@@ -524,7 +524,7 @@ morie_survvae_predict_survival <- function(fit_result, x, times) {
   list(time = as.numeric(times), survival = out, gates = g)
 }
 
-#' Risk at a horizon: \eqn{1 - S(t | x)}.
+#' Risk at a horizon: \eqn{1 - S(t | x)}
 #'
 #' Default horizon is the median observation time -- the
 #' \code{len // 2}-th element of the sorted \code{times} field of the
@@ -549,7 +549,7 @@ morie_survvae_risk_score <- function(fit_result, X, horizon = NULL) {
   }, numeric(1L))
 }
 
-#' Harrell's C at a horizon.
+#' Harrell's C at a horizon
 #'
 #' Mirrors \code{morie.fn.survrsf.c_index}: pairwise count of
 #' concordances, discordances and tied risks over the comparable
@@ -569,7 +569,7 @@ morie_survvae_concordance <- function(fit_result, X, times, events,
                morie_survvae_risk_score(fit_result, X, horizon))
 }
 
-#' One fit per risk, other causes treated as censoring.
+#' One fit per risk, other causes treated as censoring
 #'
 #' For each non-zero cause label \code{lab}, refits the model
 #' treating \code{lab} as the event of interest and every other
@@ -604,7 +604,7 @@ morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
        method = "competing risks by treating other causes as independent censoring; Nagpal et al. (2021) Sec. III-D")
 }
 
-#' Compact one-paragraph summary of the model.
+#' Compact one-paragraph summary of the model
 #'
 #' Returns the Python arm's \code{cheatsheet()} string, so both arms
 #' carry the same compact description.

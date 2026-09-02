@@ -5,7 +5,7 @@
 \alias{strec_trilinear}
 \title{strec_trilinear}
 \usage{
-strec_trilinear(a, b, c)
+strec_trilinear(a, b, c) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

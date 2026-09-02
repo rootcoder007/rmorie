@@ -5,7 +5,7 @@
 \alias{RatZ}
 \title{RatZ}
 \usage{
-RatZ(gain, r, zeros_in, zeros_out, poles_in, poles_out, z = NULL)
+RatZ(gain, r, zeros_in, zeros_out, poles_in, poles_out, z = NULL) 
 }
 \arguments{
 \item{gain}{Coerced to complex by the body, with \code{as.complex}.}

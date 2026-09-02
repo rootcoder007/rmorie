@@ -18,6 +18,8 @@ Alffape(frames_pred, x, frames_true, x_true, Z = 10, dclamp = 10, eps = 1e-04)
 \item{eps}{Added under the square root of line 3.  It makes a perfect
 prediction score \code{sqrt(eps) / Z} rather than exactly zero; pass
 \code{eps = 0} for the unregularised form.}
+
+
 }
 \value{
 A list with the loss \code{estimate}, the distance matrix

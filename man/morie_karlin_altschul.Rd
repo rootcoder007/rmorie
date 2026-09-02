@@ -5,7 +5,8 @@
 \alias{morie_karlin_altschul}
 \title{morie_karlin_altschul}
 \usage{
-morie_karlin_altschul(dist = NULL, match = 5, mismatch = -4, letter_probs = NULL, matrix = NULL, subject_probs = NULL, max_terms = 1000, tol = 1e-12, bound = "upper")
+morie_karlin_altschul(dist = NULL, match = 5, mismatch = -4, letter_probs = NULL, matrix = NULL, 
+    subject_probs = NULL, max_terms = 1000, tol = 1e-12, bound = "upper") 
 }
 \arguments{
 \item{dist}{Optional; may be \code{NULL}. A vector; indexed elementwise.}

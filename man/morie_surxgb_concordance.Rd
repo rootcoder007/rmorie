@@ -5,7 +5,7 @@
 \alias{morie_surxgb_concordance}
 \title{Harrell\'s C for the fit; a larger prediction is a longer life, so}
 \usage{
-morie_surxgb_concordance(fit, X, times, events)
+morie_surxgb_concordance(fit, X, times, events) 
 }
 \arguments{
 \item{fit}{Passed to \code{morie_surxgb_predict}.}

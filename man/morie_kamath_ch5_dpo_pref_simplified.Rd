@@ -15,6 +15,7 @@ morie_kamath_ch5_dpo_pref_substituted(pi_star, pi_ref, beta, Z = NULL)
 \item{beta}{Positive.}
 
 \item{Z}{Partition function carried through; default 1.}
+
 }
 \value{
 List with \code{estimate}, \code{margin}, implicit rewards.

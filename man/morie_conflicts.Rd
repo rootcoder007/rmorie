@@ -5,7 +5,7 @@
 \alias{morie_conflicts}
 \title{morie_conflicts}
 \usage{
-morie_conflicts(g, method = "lr1")
+morie_conflicts(g, method = "lr1") 
 }
 \arguments{
 \item{g}{Passed to \code{.prsLR_build_tables}.}

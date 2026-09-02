@@ -16,7 +16,7 @@
 #'
 #' @param margins List of the prescribed marginals.
 #' @param C_tensor Cost tensor, flattened row-major (last index varying
-#'   fastest), of length \code{prod_s length(margins[[s]])}.
+#'   fastest), of length \code{prod_s length(margins[\[s\]])}.
 #' @param epsilon Entropic strength, positive.
 #' @param max_iter Sweeps over the marginals.
 #' @return List with \code{T}, \code{cost}, \code{mass}, \code{marg_err},

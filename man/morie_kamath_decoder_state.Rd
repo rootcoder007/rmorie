@@ -5,7 +5,7 @@
 \alias{morie_kamath_decoder_state}
 \title{morie_kamath_decoder_state}
 \usage{
-morie_kamath_decoder_state(s_t_1, y_t_1, c, g = NULL)
+morie_kamath_decoder_state(s_t_1, y_t_1, c, g = NULL) 
 }
 \arguments{
 \item{s_t_1,y_t_1,c}{Decoder inputs.}

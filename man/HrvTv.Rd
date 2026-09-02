@@ -5,7 +5,8 @@
 \alias{HrvTv}
 \title{Time-varying HRV band powers, Sec 8.12}
 \usage{
-HrvTv(rr_intervals, fs_resamp = 4, window_len = 64, noverlap = NULL, standard = "taskforce")
+HrvTv(rr_intervals, fs_resamp = 4, window_len = 64, noverlap = NULL, 
+    standard = "taskforce") 
 }
 \arguments{
 \item{rr_intervals}{Passed to \code{.tf_need}.}

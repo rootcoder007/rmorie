@@ -5,7 +5,8 @@
 \alias{morie_frfgrf}
 \title{Main entry point: same argument names and defaults as}
 \usage{
-morie_frfgrf(y, X, n_trees = 100, min_leaf = 5, subsample_frac = 0.5, alpha = 0.05, pi = 0.5, seed = 0, kind = "double-sample", sizes = NULL)
+morie_frfgrf(y, X, n_trees = 100, min_leaf = 5, subsample_frac = 0.5, alpha = 0.05, 
+    pi = 0.5, seed = 0, kind = "double-sample", sizes = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.frfgrf_forest_fit_check}.}

@@ -5,7 +5,7 @@
 \alias{morie_flexrd_cheatsheet}
 \title{One-line summary of the flexrd module}
 \usage{
-morie_flexrd_cheatsheet()
+morie_flexrd_cheatsheet() 
 }
 \description{
 One-line summary of the flexrd module

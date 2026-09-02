@@ -5,7 +5,7 @@
 \alias{morie_chemsc_cheatsheet}
 \title{One-line summary of the chemsc module}
 \usage{
-morie_chemsc_cheatsheet()
+morie_chemsc_cheatsheet() 
 }
 \description{
 One-line summary of the chemsc module

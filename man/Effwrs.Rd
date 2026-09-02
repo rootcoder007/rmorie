@@ -5,10 +5,15 @@
 \alias{Effwrs}
 \title{Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494}
 \usage{
-Effwrs(m, n, integral)
+Effwrs(m, n, integral) 
 }
 \description{
 Mann-Whitney / rank-sum efficacy -- eq. (13.3.10), p. 494
+}
+\arguments{
+\item{m}{Argument \code{m}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{integral}{Argument \code{integral}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{integral}, \code{m}, \code{n}.

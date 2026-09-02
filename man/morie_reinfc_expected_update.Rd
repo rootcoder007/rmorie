@@ -5,7 +5,7 @@
 \alias{morie_reinfc_expected_update}
 \title{morie_reinfc_expected_update}
 \usage{
-morie_reinfc_expected_update(p, r0, r1, alpha = 1, b = 0)
+morie_reinfc_expected_update(p, r0, r1, alpha = 1, b = 0) 
 }
 \arguments{
 \item{p}{Numeric; combined arithmetically in the body.}

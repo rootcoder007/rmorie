@@ -15,7 +15,7 @@
 #' nonzero, which reduces the leading smoothing bias from O(h^2) to O(h^r).
 #'
 #' The order-r Gaussian kernel is built here in the classical Hermite form
-#' K_r(u) = phi(u) sum_{j=0}^{r/2 - 1} (-1)^j / (2^j j!) He_{2j}(u), phi the
+#' K_r(u) = phi(u) sum_\{j=0\}^\{r/2 - 1\} (-1)^j / (2^j j!) He_\{2j\}(u), phi the
 #' standard normal density and He the probabilists Hermite polynomials.
 #' r = 2 recovers phi itself, r = 4 gives phi(u)(3 - u^2)/2 and r = 6 gives
 #' phi(u)(15 - 10 u^2 + u^4)/8.  The moments returned are computed exactly, by

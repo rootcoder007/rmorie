@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sun-Abraham interaction-weighted difference in differences.
+#' Sun-Abraham interaction-weighted difference in differences
 #'
-#' Formula: nu_g = (1/|g|) sum_{l in g} sum_e CATT(e,l) Pr{E=e | E in \[-l, T-l\]}
+#' Formula: nu_g = (1/|g|) sum_\{l in g\} sum_e CATT(e,l) Pr\{E=e | E in \[-l, T-l\]\}
 #'
 #' @param y Outcome, one row per unit-period.
 #' @param unit Unit identifier.
@@ -9,6 +9,11 @@
 #' @param cohort First treated period for the row's unit.
 #' @param never Value of ``cohort`` marking never-treated units.
 
+#' @param y See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
+#' @param cohort See Usage.
+#' @param never See Usage.
 #' @return List with ``event_time``, ``att``, ``overall``, ``cohorts``, ``n``.
 #' @references Sun and Abraham (2021), Estimating dynamic treatment effects in event studies with heterogeneous treatment effects, Journal of Econometrics 225(3):175-199. Equations (26) and (28) for the estimand and the IW estimator, Section 4.2 for the DID choice of pre-period and control cohort. Verified against the paper.
 #' @export

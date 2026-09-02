@@ -621,7 +621,7 @@ Dbinom <- function(x, size, prob, log = FALSE) {
   if (log) lg else exp(lg)
 }
 
-#' P(X <= k) = I_{1-p}(n - k, k + 1)
+#' P(X <= k) = I_\{1-p\}(n - k, k + 1)
 #'
 #' A step of the dist_native implementation. Called by \code{Qbinom}.
 #' See the file header for the source the module follows.

@@ -10,6 +10,7 @@ morie_kamath_rlaif_objective(ai_preferences, max_iter = 1000, tol = 1e-12)
 \item{ai_preferences}{List of (winner, loser) pairs.}
 
 \item{max_iter, tol}{Iteration controls.}
+
 }
 \value{
 List with \code{items}, \code{strengths}, \code{scores}, \code{loss}, \code{accuracy}.

@@ -14,6 +14,7 @@ morie_faithchk(dag, x, y, z = character(0), indep = TRUE)
 \item{z}{conditioning set}
 
 \item{indep}{the observed distributional independence}
+
 }
 \value{
 list(dseparated, indep, faithful, markov, violation)

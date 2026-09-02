@@ -5,7 +5,8 @@
 \alias{gnnEx_explain_node}
 \title{gnnEx_explain_node}
 \usage{
-gnnEx_explain_node(predict, adj, v, y, n_features, L = 2, iters = 300, lr = 0.1, size_coef = 0.005, entropy_coef = 1, seed = 0, penalize = TRUE)
+gnnEx_explain_node(predict, adj, v, y, n_features, L = 2, iters = 300, lr = 0.1, 
+    size_coef = 0.005, entropy_coef = 1, seed = 0, penalize = TRUE) 
 }
 \arguments{
 \item{predict}{Passed to \code{gnnEx_mask_objective}.}

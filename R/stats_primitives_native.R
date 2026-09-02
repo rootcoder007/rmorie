@@ -233,7 +233,7 @@ morie_bartels_rank_test <- function(x, alternative = "two.sided") {
 }
 
 # ---------------------------------------------------------------------------
-# E-value family (replaces EValue) — Ding-VanderWeele closed forms
+# E-value family (replaces EValue) -- Ding-VanderWeele closed forms
 # ---------------------------------------------------------------------------
 
 #' Internal helper: E-value from a risk-ratio-scale point

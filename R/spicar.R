@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Intrinsic CAR (ICAR) prior: precision structure, not a fit.
+#' Intrinsic CAR (ICAR) prior: precision structure, not a fit
 #'
 #' ICAR is the CAR model at rho = 1. Its precision matrix is the graph
 #' Laplacian Q = D - W with D = diag(W 1), which makes the prior

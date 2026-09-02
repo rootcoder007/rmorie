@@ -5,7 +5,7 @@
 \alias{morie_longrd_cheatsheet}
 \title{One-line summary of the longrd module}
 \usage{
-morie_longrd_cheatsheet()
+morie_longrd_cheatsheet() 
 }
 \description{
 One-line summary of the longrd module

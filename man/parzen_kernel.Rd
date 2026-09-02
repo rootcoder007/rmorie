@@ -5,7 +5,7 @@
 \alias{parzen_kernel}
 \title{parzen_kernel}
 \usage{
-parzen_kernel(x)
+parzen_kernel(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

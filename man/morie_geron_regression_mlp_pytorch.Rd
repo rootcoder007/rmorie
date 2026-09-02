@@ -5,7 +5,7 @@
 \alias{morie_geron_regression_mlp_pytorch}
 \title{Regression MLP as an nn.Sequential architecture (numpy/R-trained, no torch call) (Geron Ch 10, hmrgpt)}
 \usage{
-morie_geron_regression_mlp_pytorch(X, y, hidden = 8, epochs = 400, lr = 0.05, seed = 0)
+morie_geron_regression_mlp_pytorch(X, y, hidden = 8, epochs = 400, lr = 0.05, seed = 0) 
 }
 \arguments{
 \item{X,y}{Data and targets.}

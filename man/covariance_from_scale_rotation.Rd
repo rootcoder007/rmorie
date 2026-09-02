@@ -5,7 +5,7 @@
 \alias{covariance_from_scale_rotation}
 \title{Build a covariance matrix from a scale vector and a quaternion}
 \usage{
-covariance_from_scale_rotation(scale, quaternion)
+covariance_from_scale_rotation(scale, quaternion) 
 }
 \arguments{
 \item{scale}{Positive length-3 scale vector.}

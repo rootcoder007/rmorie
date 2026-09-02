@@ -31,6 +31,12 @@ morie_cnn_genomic(
 derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("cnnge", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
+
+
+
+
+
+
 }
 \value{
 list(estimate, y_hat, W_conv, b_conv, W1, b1, w2, b2, se, n, method).

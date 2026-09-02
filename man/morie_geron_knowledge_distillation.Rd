@@ -23,6 +23,7 @@ morie_geron_knowledge_distillation(
 \item{T}{Temperature.}
 
 \item{alpha}{Hard-label weight.}
+
 }
 \value{
 List with loss, ce_loss, kl_loss, teacher_probs, student_probs, agreement, estimate, n, method.

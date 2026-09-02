@@ -5,7 +5,7 @@
 \alias{morie_qrntcq_gamma_generation_time}
 \title{morie_qrntcq_gamma_generation_time}
 \usage{
-morie_qrntcq_gamma_generation_time(shape = 2.83, scale = 1.86, grid = NULL, t.max = 30, n = 3001L)
+morie_qrntcq_gamma_generation_time(shape = 2.83, scale = 1.86, grid = NULL, t.max = 30, n = 3001L) 
 }
 \arguments{
 \item{shape}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.83}.}

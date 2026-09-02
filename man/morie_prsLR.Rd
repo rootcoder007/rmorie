@@ -5,7 +5,7 @@
 \alias{morie_prsLR}
 \title{morie_prsLR}
 \usage{
-morie_prsLR(grammar_, tokens, method = "lr1")
+morie_prsLR(grammar_, tokens, method = "lr1") 
 }
 \arguments{
 \item{grammar_}{Passed to \code{.prsLR_grammar}.}

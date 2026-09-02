@@ -5,7 +5,7 @@
 \alias{morie_warpL_sample_violation}
 \title{morie_warpL_sample_violation}
 \usage{
-morie_warpL_sample_violation(score_positive, negative_scorer, n_labels, rng, margin = 1, max_draws = NULL)
+morie_warpL_sample_violation(score_positive, negative_scorer, n_labels, rng, margin = 1, max_draws = NULL) 
 }
 \arguments{
 \item{score_positive}{Passed to \code{.warpL_sample_violation}.}

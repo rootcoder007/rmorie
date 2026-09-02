@@ -2,7 +2,7 @@
 % Please edit documentation in R/relua.R
 \name{Reluact}
 \alias{Reluact}
-\title{Rectifier linear unit activation and its gradient.}
+\title{Rectifier linear unit activation and its gradient}
 \usage{
 Reluact(z, slope = 0)
 }

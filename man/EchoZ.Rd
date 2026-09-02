@@ -5,7 +5,7 @@
 \alias{EchoZ}
 \title{Z-transform of a wavelet with an echo, eq (4.76)}
 \usage{
-EchoZ(a, n_0, z, H = NULL)
+EchoZ(a, n_0, z, H = NULL) 
 }
 \arguments{
 \item{a}{Numeric; combined arithmetically in the body.}

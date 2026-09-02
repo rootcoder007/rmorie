@@ -5,7 +5,7 @@
 \alias{treatment_weights}
 \title{treatment_weights}
 \usage{
-treatment_weights(histories, propensities, stabilise = TRUE, marginal = NULL, truncate = NULL)
+treatment_weights(histories, propensities, stabilise = TRUE, marginal = NULL, truncate = NULL) 
 }
 \arguments{
 \item{histories}{A vector; its length is taken and its elements indexed.}

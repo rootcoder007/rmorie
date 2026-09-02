@@ -12,6 +12,7 @@ GaussCount(x, n_reps = 1e+05, mu = 35, sigma = 5.4)
 \item{n_reps}{number of repetitions, > 0.}
 
 \item{mu, sigma}{Gaussian mean and standard deviation; sigma > 0.}
+
 }
 \value{
 list(expected_count, mu, sigma).

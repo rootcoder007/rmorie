@@ -5,7 +5,7 @@
 \alias{morie_tmle_cross_lagged}
 \title{morie_tmle_cross_lagged}
 \usage{
-morie_tmle_cross_lagged(y, D, X, time, g = NULL, bounds = NULL)
+morie_tmle_cross_lagged(y, D, X, time, g = NULL, bounds = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.tmlcll_vec}.}

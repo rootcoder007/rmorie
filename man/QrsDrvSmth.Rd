@@ -5,7 +5,7 @@
 \alias{QrsDrvSmth}
 \title{Eq (4.5): the M-point moving average that collapses the several}
 \usage{
-QrsDrvSmth(g1, mwin = 8)
+QrsDrvSmth(g1, mwin = 8) 
 }
 \arguments{
 \item{g1}{A vector; its length is taken.}

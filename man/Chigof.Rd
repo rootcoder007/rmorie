@@ -5,10 +5,15 @@
 \alias{Chigof}
 \title{Chi-square goodness of fit -- eq. (4.2.1), p. 104}
 \usage{
-Chigof(observed, expected, ddof = 0)
+Chigof(observed, expected, ddof = 0) 
 }
 \description{
 Chi-square goodness of fit -- eq. (4.2.1), p. 104
+}
+\arguments{
+\item{observed}{Argument \code{observed}; see Usage.}
+\item{expected}{Argument \code{expected}; see Usage.}
+\item{ddof}{Argument \code{ddof}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{k}, \code{n}, \code{contrib}.

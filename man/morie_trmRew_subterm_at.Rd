@@ -5,7 +5,7 @@
 \alias{morie_trmRew_subterm_at}
 \title{The subterm at a position}
 \usage{
-morie_trmRew_subterm_at(t, pos)
+morie_trmRew_subterm_at(t, pos) 
 }
 \arguments{
 \item{t}{See Usage.}

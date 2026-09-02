@@ -10,6 +10,8 @@ morie_postodds(lik1, lik0, prior1 = 0.5, prior0 = 0.5)
 \item{lik1, lik0}{evidences for the two models}
 
 \item{prior1, prior0}{prior probabilities of the two models}
+
+
 }
 \value{
 list(odds, logodds, p1, bayesfactor)

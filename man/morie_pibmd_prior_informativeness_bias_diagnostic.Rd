@@ -5,7 +5,7 @@
 \alias{morie_pibmd_prior_informativeness_bias_diagnostic}
 \title{morie_pibmd_prior_informativeness_bias_diagnostic}
 \usage{
-morie_pibmd_prior_informativeness_bias_diagnostic(samples, prior, n_grid = 512L)
+morie_pibmd_prior_informativeness_bias_diagnostic(samples, prior, n_grid = 512L) 
 }
 \arguments{
 \item{samples}{Coerced to numeric by the body, with \code{as.numeric}.}

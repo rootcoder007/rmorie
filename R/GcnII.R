@@ -8,7 +8,7 @@
 #' weight is passed -- the second bracket collapses to I for every beta.
 #'
 #' Formula: H <- relu((1 - alpha) Ah H + alpha H0), repeated K times,
-#'   with Ah = Dt^{-1/2}(A + I)Dt^{-1/2}.
+#'   with Ah = Dt^\{-1/2\}(A + I)Dt^\{-1/2\}.
 #'
 #' @param A Square adjacency matrix.
 #' @param H0 Initial node representation, one row per node.

@@ -26,6 +26,7 @@ morie_geron_mdp(
 \item{max_iter}{Sweep cap.}
 
 \item{tol}{Convergence threshold.}
+
 }
 \value{
 List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.

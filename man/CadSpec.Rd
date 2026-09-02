@@ -5,7 +5,7 @@
 \alias{CadSpec}
 \title{CadSpec: frequency-domain feature extraction for CAD}
 \usage{
-CadSpec(x, fs, bands = NULL)
+CadSpec(x, fs, bands = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.bsapsd}.}

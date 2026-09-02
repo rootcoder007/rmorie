@@ -5,10 +5,14 @@
 \alias{Wsrties}
 \title{Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203}
 \usage{
-Wsrties(d, m0 = 0)
+Wsrties(d, m0 = 0) 
 }
 \description{
 Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
+}
+\arguments{
+\item{d}{Argument \code{d}; see Usage.}
+\item{m0}{Argument \code{m0}; see Usage.}
 }
 \value{
 A list with \code{var}, \code{var_uncorrected}, \code{correction}, \code{n}, \code{nzero}, \code{ties}.

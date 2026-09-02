@@ -21,6 +21,8 @@ morie_copula_survival(
 \item{family}{copula family.}
 
 \item{theta}{parameter; inverted from the sample tau if NULL.}
+
+
 }
 \value{
 list: family, theta, tau_sample, joint_survival, s1, s2,

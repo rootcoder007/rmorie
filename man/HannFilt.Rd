@@ -5,7 +5,7 @@
 \alias{HannFilt}
 \title{Eq (3.100): y(n) = (1/4)[x(n) + 2x(n-1) + x(n-2)].  Three taps in the}
 \usage{
-HannFilt(x, n = NULL)
+HannFilt(x, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

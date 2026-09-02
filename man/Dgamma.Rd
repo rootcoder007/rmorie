@@ -5,7 +5,7 @@
 \alias{Dgamma}
 \title{Dgamma}
 \usage{
-Dgamma(x, shape, rate = 1, log = FALSE)
+Dgamma(x, shape, rate = 1, log = FALSE) 
 }
 \arguments{
 \item{x}{Numeric; passed to \code{log}.}

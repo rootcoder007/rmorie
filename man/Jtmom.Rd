@@ -5,10 +5,13 @@
 \alias{Jtmom}
 \title{JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366}
 \usage{
-Jtmom(ns)
+Jtmom(ns) 
 }
 \description{
 JT null moments -- eqs. (10.6.2)-(10.6.3), pp. 365-366
+}
+\arguments{
+\item{ns}{Argument \code{ns}; see Usage.}
 }
 \value{
 A list with \code{mean}, \code{mean_pairwise}, \code{var}, \code{sd}, \code{k}, \code{n}.

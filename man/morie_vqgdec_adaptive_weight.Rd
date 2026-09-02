@@ -5,7 +5,7 @@
 \alias{morie_vqgdec_adaptive_weight}
 \title{Adaptive_weight: lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)}
 \usage{
-morie_vqgdec_adaptive_weight(grad_rec, grad_gan, delta = 1e-06, clip = 10000)
+morie_vqgdec_adaptive_weight(grad_rec, grad_gan, delta = 1e-06, clip = 10000) 
 }
 \arguments{
 \item{grad_rec}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{zero_fraction}
 \title{Share of non-positive periods}
 \usage{
-zero_fraction(y)
+zero_fraction(y) 
 }
 \arguments{
 \item{y}{Numeric series of demand observations.}

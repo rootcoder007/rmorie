@@ -5,7 +5,8 @@
 \alias{morie_compare_sets}
 \title{morie_compare_sets}
 \usage{
-morie_compare_sets(phi_hat, half_width, se_phi, level = 0.95, conditional_prior = NULL, n_grid = 401L)
+morie_compare_sets(phi_hat, half_width, se_phi, level = 0.95, conditional_prior = NULL, 
+    n_grid = 401L) 
 }
 \arguments{
 \item{phi_hat}{Passed to \code{morie_identified_set_interval}.}

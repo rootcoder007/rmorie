@@ -10,7 +10,7 @@ Otmot(margins, C_tensor, epsilon, max_iter = 200)
 \item{margins}{List of the prescribed marginals.}
 
 \item{C_tensor}{Cost tensor, flattened row-major (last index varying
-fastest), of length \code{prod_s length(margins[[s]])}.}
+fastest), of length \code{prod_s length(margins[\[s\]])}.}
 
 \item{epsilon}{Entropic strength, positive.}
 

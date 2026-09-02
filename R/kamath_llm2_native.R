@@ -267,6 +267,7 @@
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
 #' @param C A matrix; indexed by row and column.
+#' @param max_iter See Usage.
 #' @return A list with \code{flow}, \code{u}, \code{v}.
 #' @export
 .morie_km2_transport <- function(a, b, C, max_iter = 10000L) {

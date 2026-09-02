@@ -24,6 +24,8 @@ morie_esl_oob_632(
 \item{y, y_pred}{optional response and fitted values, for (7.58).}
 
 \item{p1, q1}{optional proportions, for (7.59).}
+
+
 }
 \value{
 list: value, err_632, err_632_plus, weight,

@@ -5,7 +5,7 @@
 \alias{Glr}
 \title{Eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window}
 \usage{
-Glr(x, m, n = NULL, order = 4)
+Glr(x, m, n = NULL, order = 4) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

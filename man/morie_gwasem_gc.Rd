@@ -5,7 +5,7 @@
 \alias{morie_gwasem_gc}
 \title{Genomic-control inflation factor}
 \usage{
-morie_gwasem_gc(stats, df = 1)
+morie_gwasem_gc(stats, df = 1) 
 }
 \arguments{
 \item{stats}{Numeric vector of chi-square statistics.}

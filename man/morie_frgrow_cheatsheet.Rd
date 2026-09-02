@@ -5,7 +5,7 @@
 \alias{morie_frgrow_cheatsheet}
 \title{One-line summary of the frgrow module}
 \usage{
-morie_frgrow_cheatsheet()
+morie_frgrow_cheatsheet() 
 }
 \description{
 One-line summary of the frgrow module

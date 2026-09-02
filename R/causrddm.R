@@ -34,7 +34,7 @@
   list(beta = fit$beta, mse = sum(fit$resid^2) / dof)
 }
 
-#' McCrary's test for a discontinuity in the density at the cutoff.
+#' McCrary's test for a discontinuity in the density at the cutoff
 #'
 #' The running variable is binned, the bin heights become a density, and
 #' a local linear regression with triangular kernel is run on each side

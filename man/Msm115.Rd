@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm115.R
 \name{Msm115}
 \alias{Msm115}
-\title{Lasso-penalized multinomial log-likelihood.}
+\title{Lasso-penalized multinomial log-likelihood}
 \usage{
 Msm115(X, y, beta0, beta, lam = 1, baseline_last = TRUE)
 }

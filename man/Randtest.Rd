@@ -5,10 +5,15 @@
 \alias{Randtest}
 \title{Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27}
 \usage{
-Randtest(pmf, alpha = 0.05, pmf_alt = NULL)
+Randtest(pmf, alpha = 0.05, pmf_alt = NULL) 
 }
 \description{
 Randomized decision rule of exact size -- Sec. 1.2.9, pp. 26-27
+}
+\arguments{
+\item{pmf}{Argument \code{pmf}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{pmf_alt}{Argument \code{pmf_alt}; see Usage.}
 }
 \value{
 A list with \code{gamma}, \code{t2}, \code{t1}, \code{size_hard}, \code{size}, \code{power}.

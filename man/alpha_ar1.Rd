@@ -5,7 +5,7 @@
 \alias{alpha_ar1}
 \title{alpha_ar1}
 \usage{
-alpha_ar1(v, q = 2, weights = NULL)
+alpha_ar1(v, q = 2, weights = NULL) 
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}

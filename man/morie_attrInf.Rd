@@ -5,7 +5,8 @@
 \alias{morie_attrInf}
 \title{Attribute inference by model inversion}
 \usage{
-morie_attrInf(tree, targets, priors, confusion = NULL, labels = NULL, sensitive = 0L, mode = "blackbox", candidates = NULL, unknown = NULL)
+morie_attrInf(tree, targets, priors, confusion = NULL, labels = NULL, sensitive = 0L, 
+    mode = "blackbox", candidates = NULL, unknown = NULL) 
 }
 \arguments{
 \item{tree}{Nested tree: each non-leaf is a list with   \code{feature} (integer index) and \code{branches} (a named   list whose names are the branch values mapping to child   subtrees); each leaf is a list with \code{label} and, for the   white-box route, \code{count}.}

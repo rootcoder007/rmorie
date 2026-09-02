@@ -5,7 +5,7 @@
 \alias{morie_llavx}
 \title{morie_llavx}
 \usage{
-morie_llavx(op, ...)
+morie_llavx(op, ...) 
 }
 \arguments{
 \item{op}{A vector; its length is taken.}

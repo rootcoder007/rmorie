@@ -5,10 +5,14 @@
 \alias{morie_pinv}
 \title{morie_pinv}
 \usage{
-morie_pinv(A, rcond = 1e-15)
+morie_pinv(A, rcond = 1e-15) 
 }
 \description{
 morie_pinv
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{rcond}{Argument \code{rcond}; see Usage.}
 }
 \value{
 The value of \code{\%*\%}.

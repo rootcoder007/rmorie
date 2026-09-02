@@ -15,9 +15,9 @@ morie_vif(X, add_intercept = TRUE)
 \arguments{
 \item{fit}{a \code{morie_ols} fit}
 
-\item{X}{predictor matrix}
+\item{X}{Argument \code{X}; see Usage.}
 
-\item{add_intercept}{include an intercept in the auxiliary fits}
+\item{add_intercept}{Argument \code{add_intercept}; see Usage.}
 }
 \value{
 a list of the statistic and, where exact, its p-value

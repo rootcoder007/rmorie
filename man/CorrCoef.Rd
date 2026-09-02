@@ -5,7 +5,7 @@
 \alias{CorrCoef}
 \title{Bsastat}
 \usage{
-CorrCoef(x, y)
+CorrCoef(x, y) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,8 @@
 \alias{morie_bet_violation}
 \title{morie_bet_violation}
 \usage{
-morie_bet_violation(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, grid = NULL)
+morie_bet_violation(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, 
+    grid = NULL) 
 }
 \arguments{
 \item{theta}{Passed to \code{morie_coverage_by_region}.}

@@ -5,7 +5,7 @@
 \alias{Ictft}
 \title{Eq (3.77): the 1/(2 pi) belongs to the omega form only.  Getting that}
 \usage{
-Ictft(X, t, omega = NULL, f = NULL)
+Ictft(X, t, omega = NULL, f = NULL) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

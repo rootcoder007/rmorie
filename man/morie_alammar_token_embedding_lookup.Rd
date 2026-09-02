@@ -5,7 +5,7 @@
 \alias{morie_alammar_token_embedding_lookup}
 \title{Token lookup, masked pooling, contextual extraction (Alammar Ch 2/8)}
 \usage{
-morie_alammar_token_embedding_lookup(ids, E_tok)
+morie_alammar_token_embedding_lookup(ids, E_tok) 
 }
 \arguments{
 \item{ids}{0-based token ids.}

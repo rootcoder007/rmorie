@@ -5,7 +5,7 @@
 \alias{morie_vqgdec_patch_discriminator}
 \title{Patch_discriminator: score patches, not the whole image. Gives a}
 \usage{
-morie_vqgdec_patch_discriminator(image, patch = 4, scorer = NULL)
+morie_vqgdec_patch_discriminator(image, patch = 4, scorer = NULL) 
 }
 \arguments{
 \item{image}{Passed to \code{.vqgdec_to_matrix}.}

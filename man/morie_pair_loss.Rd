@@ -5,7 +5,7 @@
 \alias{morie_pair_loss}
 \title{morie_pair_loss}
 \usage{
-morie_pair_loss(U, V, i, tau = 0.5, intra = TRUE)
+morie_pair_loss(U, V, i, tau = 0.5, intra = TRUE) 
 }
 \arguments{
 \item{U}{A matrix; passed to \code{as.matrix}.}

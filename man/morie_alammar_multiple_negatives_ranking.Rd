@@ -5,10 +5,12 @@
 \alias{morie_alammar_multiple_negatives_ranking}
 \title{morie_alammar_multiple_negatives_ranking}
 \usage{
-morie_alammar_multiple_negatives_ranking(anchors, positives, tau = 0.05)
+morie_alammar_multiple_negatives_ranking(anchors, positives, tau = 0.05) 
 }
 \arguments{
 \item{anchors,positives}{Row-matched batches; every other positive   is an in-batch negative.}
+
+\item{tau}{Argument \code{tau}; see Usage.}
 }
 \description{
 morie_alammar_multiple_negatives_ranking

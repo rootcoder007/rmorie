@@ -5,7 +5,7 @@
 \alias{ngcf_message}
 \title{ngcf_message}
 \usage{
-ngcf_message(e_i, e_u, W1, W2, p_ui, affinity = TRUE)
+ngcf_message(e_i, e_u, W1, W2, p_ui, affinity = TRUE) 
 }
 \arguments{
 \item{e_i}{Coerced to numeric by the body, with \code{as.numeric}.}

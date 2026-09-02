@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_csi.R
 \name{MORIE_TPS_CSI_CATEGORIES}
 \alias{MORIE_TPS_CSI_CATEGORIES}
-\title{Canonical CSI category names (the 9 TPS open-data feeds).}
+\title{Canonical CSI category names (the 9 TPS open-data feeds)}
 \usage{
 MORIE_TPS_CSI_CATEGORIES()
 }
@@ -10,7 +10,7 @@ MORIE_TPS_CSI_CATEGORIES()
 Character vector.
 }
 \description{
-Canonical CSI category names (the 9 TPS open-data feeds).
+Canonical CSI category names (the 9 TPS open-data feeds)
 }
 \examples{
 MORIE_TPS_CSI_CATEGORIES

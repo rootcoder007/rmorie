@@ -18,6 +18,11 @@ morie_geron_variational_bayes_gmm(
 \item{X}{Data (n, d).}
 
 \item{n_components, max_iter, alpha0, tol, var_floor, seed}{As in Python original.}
+
+
+
+
+
 }
 \value{
 list with weights, means, variances, resp, labels, alpha,

@@ -5,7 +5,7 @@
 \alias{detokenize}
 \title{detokenize}
 \usage{
-detokenize(tokens, bins, scale)
+detokenize(tokens, bins, scale) 
 }
 \arguments{
 \item{tokens}{Passed to \code{dequantize}.}

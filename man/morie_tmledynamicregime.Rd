@@ -22,3 +22,18 @@ morie_tmledynamicregime(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{treatment_history}{Argument \code{treatment_history}; see Usage.}
+\item{covariate_history}{Argument \code{covariate_history}; see Usage.}
+\item{regime}{Argument \code{regime}; see Usage.}
+\item{method}{Argument \code{method}; see Usage.}
+\item{n_folds}{Argument \code{n_folds}; see Usage.}
+\item{V0}{Argument \code{V0}; see Usage.}
+\item{V1}{Argument \code{V1}; see Usage.}
+\item{trim}{Argument \code{trim}; see Usage.}
+\item{known_g}{Argument \code{known_g}; see Usage.}
+\item{ridge}{Argument \code{ridge}; see Usage.}
+\item{level}{Argument \code{level}; see Usage.}
+}
+

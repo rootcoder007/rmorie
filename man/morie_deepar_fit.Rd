@@ -5,7 +5,7 @@
 \alias{morie_deepar_fit}
 \title{Fit the conditional mean by a scaled autoregression}
 \usage{
-morie_deepar_fit(z, n_lags = 2L, likelihood = "negative-binomial", ridge = 1e-06)
+morie_deepar_fit(z, n_lags = 2L, likelihood = "negative-binomial", ridge = 1e-06) 
 }
 \arguments{
 \item{z}{Numeric vector.}

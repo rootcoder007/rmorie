@@ -3,9 +3,12 @@
 % the formals.
 \name{bpr_sigmoid}
 \alias{bpr_sigmoid}
+\alias{morie_bprMF}
 \title{BPR sigmoid}
 \usage{
-bpr_sigmoid(x)
+bpr_sigmoid(x) 
+
+morie_bprMF(x) 
 }
 \arguments{
 \item{x}{Numeric scalar (or vector).}

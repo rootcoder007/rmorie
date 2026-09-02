@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Target the variance parameter sigma^2 = E\[D*^2\] and bound it.
+#' Target the variance parameter sigma^2 = E\[D*^2\] and bound it
 #'
 #' The plug-in var(IC) has its own sampling error that a confidence
 #' interval built on it treats as zero. Targeting sigma^2 gives it an

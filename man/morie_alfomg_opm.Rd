@@ -5,7 +5,7 @@
 \alias{morie_alfomg_opm}
 \title{MSA to pair: the outer product mean}
 \usage{
-morie_alfomg_opm(msa)
+morie_alfomg_opm(msa) 
 }
 \arguments{
 \item{msa}{The alignment, a list of sequences, each a list of   channel vectors.}

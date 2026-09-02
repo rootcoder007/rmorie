@@ -12,6 +12,8 @@ morie_kamath_ch6_weat_effect_size(A_1, A_2, W_1, W_2, ddof = 0)
 \item{W_1, W_2}{Target matrices.}
 
 \item{ddof}{Degrees of freedom subtracted; 0 = population.}
+
+
 }
 \value{
 List with \code{estimate}, \code{numerator}, \code{std}.

@@ -5,7 +5,7 @@
 \alias{mehtad_residuals}
 \title{mehtad_residuals}
 \usage{
-mehtad_residuals(A, b, c, x, y, s)
+mehtad_residuals(A, b, c, x, y, s) 
 }
 \arguments{
 \item{A}{Passed to \code{.mehtad_mat}.}

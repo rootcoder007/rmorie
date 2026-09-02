@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable_taxonomy.R
 \name{print.morie_variable_taxonomy}
 \alias{print.morie_variable_taxonomy}
-\title{Print method for taxonomy entries.}
+\title{Print method for taxonomy entries}
 \usage{
 \method{print}{morie_variable_taxonomy}(x, ...)
 }
@@ -15,7 +15,7 @@
 \code{x}, invisibly.
 }
 \description{
-Print method for taxonomy entries.
+Print method for taxonomy entries
 }
 \examples{
 \donttest{

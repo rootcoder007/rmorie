@@ -5,7 +5,7 @@
 \alias{SpecRad}
 \title{The SAR bound |rho| < 1/rho(W) comes from the non-singularity}
 \usage{
-SpecRad(g, iters = 400L)
+SpecRad(g, iters = 400L) 
 }
 \arguments{
 \item{g}{Passed to \code{.morie_spx_chkw}.}

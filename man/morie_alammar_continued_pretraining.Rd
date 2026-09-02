@@ -5,7 +5,7 @@
 \alias{morie_alammar_continued_pretraining}
 \title{morie_alammar_continued_pretraining}
 \usage{
-morie_alammar_continued_pretraining(domain_corpus, mlm_loss_fn, n_mlm_steps, task_loss_fn = NULL)
+morie_alammar_continued_pretraining(domain_corpus, mlm_loss_fn, n_mlm_steps, task_loss_fn = NULL) 
 }
 \arguments{
 \item{domain_corpus}{Documents.}

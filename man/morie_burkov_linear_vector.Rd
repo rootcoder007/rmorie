@@ -5,7 +5,7 @@
 \alias{morie_burkov_linear_vector}
 \title{Vector-form linear model w.x + b (Burkov Eq 1.4)}
 \usage{
-morie_burkov_linear_vector(w, x, b)
+morie_burkov_linear_vector(w, x, b) 
 }
 \arguments{
 \item{w,x}{Vectors.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spbesf.R
 \name{spbesf}
 \alias{spbesf}
-\title{Modified Bessel function of the second kind, K_nu.}
+\title{Modified Bessel function of the second kind, K_nu}
 \usage{
 spbesf(x, nu = 0.5)
 }

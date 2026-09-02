@@ -5,7 +5,7 @@
 \alias{morie_alammar_mean_reciprocal_rank}
 \title{Retrieval metrics: MRR, recall@k, NDCG@k, MTEB aggregation}
 \usage{
-morie_alammar_mean_reciprocal_rank(rankings, relevant_indices)
+morie_alammar_mean_reciprocal_rank(rankings, relevant_indices) 
 }
 \arguments{
 \item{rankings}{List of ranked id vectors.}

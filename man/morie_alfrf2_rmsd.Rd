@@ -5,7 +5,7 @@
 \alias{morie_alfrf2_rmsd}
 \title{Root-mean-square deviation after optimal superposition}
 \usage{
-morie_alfrf2_rmsd(P, Q)
+morie_alfrf2_rmsd(P, Q) 
 }
 \arguments{
 \item{P}{The moving points.}

@@ -5,7 +5,7 @@
 \alias{morie_farmlmm}
 \title{morie_farmlmm}
 \usage{
-morie_farmlmm(y, G, max_iter = 10L, threshold = NULL, seed = 0L)
+morie_farmlmm(y, G, max_iter = 10L, threshold = NULL, seed = 0L) 
 }
 \arguments{
 \item{y}{Passed to \code{.farmcpu}.}

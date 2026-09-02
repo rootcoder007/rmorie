@@ -5,7 +5,7 @@
 \alias{LogSep}
 \title{Eq (4.59): log[y] = log[x] + log[p], for x != 0 and p != 0.  The}
 \usage{
-LogSep(x, p)
+LogSep(x, p) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

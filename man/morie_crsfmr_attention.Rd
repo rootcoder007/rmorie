@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_attention}
 \title{Scaled dot-product attention}
 \usage{
-morie_crsfmr_attention(Q, K, V)
+morie_crsfmr_attention(Q, K, V) 
 }
 \arguments{
 \item{Q}{Numeric matrix (rows are queries).}

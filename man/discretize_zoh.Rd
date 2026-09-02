@@ -5,7 +5,7 @@
 \alias{discretize_zoh}
 \title{discretize_zoh}
 \usage{
-discretize_zoh(delta, A, B, rule = "zoh")
+discretize_zoh(delta, A, B, rule = "zoh") 
 }
 \arguments{
 \item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -20,7 +20,7 @@ morie_sgtkem(A, alpha = NULL, beta = 1)
 list: estimate, centrality, normalized, alpha, radius, n, method.
 }
 \description{
-x = sum_{k>=1} alpha^k A^k 1 = ((I - alpha A)^-1 - I) 1, convergent for
+x = sum_\{k>=1\} alpha^k A^k 1 = ((I - alpha A)^-1 - I) 1, convergent for
 alpha < 1/rho(A); alpha defaults to half that radius.  Source consulted:
 Katz (1953), Psychometrika 18(1), 39-43.
 }

@@ -5,7 +5,8 @@
 \alias{value_distribution_iteration}
 \title{Value-distribution iteration}
 \usage{
-value_distribution_iteration(reward_atoms, reward_probs, gamma, v_min, v_max, n_atoms, iters = 400L, tol = 1e-13)
+value_distribution_iteration(reward_atoms, reward_probs, gamma, v_min, v_max, n_atoms, iters = 400L, 
+    tol = 1e-13) 
 }
 \arguments{
 \item{reward_atoms}{Numeric vector of possible reward values.}

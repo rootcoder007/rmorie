@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_maf}
 \title{Minor allele frequency per SNP, over non-missing calls}
 \usage{
-morie_snpqc1_maf(genotypes)
+morie_snpqc1_maf(genotypes) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

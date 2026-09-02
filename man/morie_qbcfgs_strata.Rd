@@ -5,7 +5,7 @@
 \alias{morie_qbcfgs_strata}
 \title{Equal-size strata by the rank of the fitted propensity}
 \usage{
-morie_qbcfgs_strata(e, n_strata)
+morie_qbcfgs_strata(e, n_strata) 
 }
 \arguments{
 \item{e}{Fitted propensities.}

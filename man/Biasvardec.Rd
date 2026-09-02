@@ -2,7 +2,7 @@
 % Please edit documentation in R/bvtrA.R
 \name{Biasvardec}
 \alias{Biasvardec}
-\title{Bias-variance decomposition of the expected prediction error.}
+\title{Bias-variance decomposition of the expected prediction error}
 \usage{
 Biasvardec(F, f, sigma2)
 }
@@ -17,7 +17,7 @@ Biasvardec(F, f, sigma2)
 List with \code{bias2}, \code{variance}, \code{irreducible}, \code{total}, \code{bias2_point}, \code{variance_point}, \code{R}, \code{n}.
 }
 \description{
-Formula: E(y - fhat)^2 = Var(e) + Bias\link{fhat}^2 + Var(fhat)
+Formula: E(y - fhat)^2 = Var(e) + Bias[fhat]^2 + Var(fhat)
 }
 \examples{
 set.seed(1)

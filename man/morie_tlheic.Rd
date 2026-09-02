@@ -5,7 +5,9 @@
 \alias{morie_tlheic}
 \title{morie_tlheic}
 \usage{
-morie_tlheic(psi_of_P = NULL, basis = NULL, D = NULL, score = NULL, weights = NULL, h = 1e-05, tol = 1e-04, ridge = 1e-08, mode = c("estimate", "verify", "grad", "deriv"))
+morie_tlheic(psi_of_P = NULL, basis = NULL, D = NULL, score = NULL, weights = NULL, 
+    h = 1e-05, tol = 1e-04, ridge = 1e-08, mode = c("estimate", "verify", 
+        "grad", "deriv")) 
 }
 \arguments{
 \item{psi_of_P}{Passed to \code{numerical_derivative}.}

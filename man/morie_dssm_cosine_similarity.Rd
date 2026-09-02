@@ -5,7 +5,7 @@
 \alias{morie_dssm_cosine_similarity}
 \title{Cosine similarity in the common semantic space}
 \usage{
-morie_dssm_cosine_similarity(query_vector, doc_vector)
+morie_dssm_cosine_similarity(query_vector, doc_vector) 
 }
 \arguments{
 \item{query_vector}{numeric. A query embedding (any vector-like).}

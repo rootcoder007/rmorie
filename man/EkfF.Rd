@@ -9,7 +9,7 @@ EkfF(y, f, h, F, H, Q, R, x0 = NULL, P0 = NULL)
 \arguments{
 \item{y}{Observation sequence (scalars).}
 
-\item{f}{State transition x_t = f(x_{t-1}).}
+\item{f}{State transition x_t = f(x_\{t-1\}).}
 
 \item{h}{Observation map y_t = h(x_t); returns a scalar.}
 

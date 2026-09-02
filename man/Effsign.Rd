@@ -5,10 +5,14 @@
 \alias{Effsign}
 \title{Sign test efficacy -- eq. (13.3.3), p. 489}
 \usage{
-Effsign(n, fmed)
+Effsign(n, fmed) 
 }
 \description{
 Sign test efficacy -- eq. (13.3.3), p. 489
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{fmed}{Argument \code{fmed}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{per_obs}, \code{n}, \code{fmed}.

@@ -5,7 +5,7 @@
 \alias{morie_frequentist_confidence_set}
 \title{morie_frequentist_confidence_set}
 \usage{
-morie_frequentist_confidence_set(theta_set, se_phi, level = 0.95, target = "parameter")
+morie_frequentist_confidence_set(theta_set, se_phi, level = 0.95, target = "parameter") 
 }
 \arguments{
 \item{theta_set}{A list; the body reads \code{$lower}, \code{$upper}, \code{$width} from it.}

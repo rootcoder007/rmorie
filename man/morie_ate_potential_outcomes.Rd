@@ -12,6 +12,7 @@ morie_ate_potential_outcomes(y1, y0, paired = TRUE, alpha = 0.05)
 \item{paired}{Treat the arrays as the same units under both arms.}
 
 \item{alpha}{Significance level for the interval.}
+
 }
 \value{
 Named list with \code{ate}, \code{se}, \code{ci_low},

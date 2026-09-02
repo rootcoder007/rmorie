@@ -5,7 +5,7 @@
 \alias{morie_geron_next_sentence_prediction}
 \title{Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)}
 \usage{
-morie_geron_next_sentence_prediction(sent_A, sent_B, encoder = NULL, w = NULL, b = 0, label = NULL)
+morie_geron_next_sentence_prediction(sent_A, sent_B, encoder = NULL, w = NULL, b = 0, label = NULL) 
 }
 \arguments{
 \item{sent_A,sent_B}{Tokenised sentences.}

@@ -7,7 +7,7 @@
 # fresh checkout, in CI with no network, and inside CRAN-safe tests
 # that mock out the live endpoint.
 
-#' Resolve a dataset loader through the live -> included -> synthetic chain.
+#' Resolve a dataset loader through the live -> included -> synthetic chain
 #'
 #' Internal dispatch used by the unified \code{morie_datasets_*}
 #' loaders that accept a \code{source = c("auto", "live", "included",

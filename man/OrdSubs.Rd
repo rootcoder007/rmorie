@@ -8,6 +8,7 @@ OrdSubs(N, n)
 }
 \arguments{
 \item{N, n}{pool size and subgroup size, 0 <= n <= N.}
+
 }
 \value{
 list(n_objects, n_picks, count, forms_agree).

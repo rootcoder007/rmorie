@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitsbc.R
 \name{Subcomp}
 \alias{Subcomp}
-\title{Form the subcomposition on a selected subset of parts.}
+\title{Form the subcomposition on a selected subset of parts}
 \usage{
 Subcomp(x, parts, total = 1)
 }

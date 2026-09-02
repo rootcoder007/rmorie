@@ -17,6 +17,10 @@ morie_stsi_estimators(
 \item{stratum_means, stratum_weights, stratum_variances}{Stratum pieces.}
 
 \item{c0, stratum_costs, stratum_sizes}{Cost model pieces.}
+
+
+
+
 }
 \value{
 List with mean, variance, cost (as supplied).

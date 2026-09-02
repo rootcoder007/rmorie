@@ -5,7 +5,7 @@
 \alias{autoc}
 \title{autoc}
 \usage{
-autoc(scores, priority)
+autoc(scores, priority) 
 }
 \arguments{
 \item{scores}{Passed to \code{rate}.}

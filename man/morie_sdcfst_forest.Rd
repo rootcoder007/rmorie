@@ -5,7 +5,8 @@
 \alias{morie_sdcfst_forest}
 \title{Grow an honest regression forest on the given rows}
 \usage{
-morie_sdcfst_forest(X, y, rows, n_trees = 20L, mtry = NULL, min_leaf = 5L, max_depth = 6L, e = NULL)
+morie_sdcfst_forest(X, y, rows, n_trees = 20L, mtry = NULL, min_leaf = 5L, max_depth = 6L, 
+    e = NULL) 
 }
 \arguments{
 \item{X}{Covariate matrix.}

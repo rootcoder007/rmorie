@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Exponential semivariogram model.
+#' Exponential semivariogram model
 #'
 #' gamma(h) = c0 + sigma0^2 (1 - exp(-3h/alpha)) for h > 0.
 #'

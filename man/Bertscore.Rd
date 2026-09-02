@@ -2,7 +2,7 @@
 % Please edit documentation in R/bertS.R
 \name{Bertscore}
 \alias{Bertscore}
-\title{BERTScore precision, recall and F1.}
+\title{BERTScore precision, recall and F1}
 \usage{
 Bertscore(reference, candidate, idf = NULL)
 }

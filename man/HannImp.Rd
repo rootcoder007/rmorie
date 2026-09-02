@@ -5,7 +5,7 @@
 \alias{HannImp}
 \title{Eq (3.101): three nonzero taps and nothing else.  The response is}
 \usage{
-HannImp(n = NULL)
+HannImp(n = NULL) 
 }
 \arguments{
 \item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}

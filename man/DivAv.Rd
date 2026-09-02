@@ -5,7 +5,7 @@
 \alias{DivAv}
 \title{The book averages the pairwise divergences for a single measure over}
 \usage{
-DivAv(means, covs)
+DivAv(means, covs) 
 }
 \arguments{
 \item{means}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{morie_momento_harmonise}
 \title{Harmonise a list of series into one batch}
 \usage{
-morie_momento_harmonise(series_list, patch_len, normalise = TRUE)
+morie_momento_harmonise(series_list, patch_len, normalise = TRUE) 
 }
 \arguments{
 \item{series_list}{A list of series (each a list of numeric rows,   i.e. a time x channel matrix in row form).}

@@ -5,7 +5,7 @@
 \alias{morie_avalon}
 \title{Hash a molecule's structural features into a bit vector}
 \usage{
-morie_avalon(smiles, n_bits = 512L, maxpath = 5L, classes = NULL)
+morie_avalon(smiles, n_bits = 512L, maxpath = 5L, classes = NULL) 
 }
 \arguments{
 \item{smiles}{The molecule, in the SMILES subset the parser accepts.}

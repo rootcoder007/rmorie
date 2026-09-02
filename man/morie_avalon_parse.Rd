@@ -5,7 +5,7 @@
 \alias{morie_avalon_parse}
 \title{A SMILES string as an atom-bond graph}
 \usage{
-morie_avalon_parse(smiles)
+morie_avalon_parse(smiles) 
 }
 \arguments{
 \item{smiles}{The molecule, in the subset the parser accepts.}

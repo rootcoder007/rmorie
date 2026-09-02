@@ -3,12 +3,16 @@
 % the formals.
 \name{morie_funBand_gcv_score}
 \alias{morie_funBand_gcv_score}
-\title{GCV, Wahba (1983) eq. (2.16).}
+\title{GCV, Wahba (1983) eq. (2.16)}
 \usage{
-morie_funBand_gcv_score(y, A)
+morie_funBand_gcv_score(y, A) 
 }
 \description{
 GCV, Wahba (1983) eq. (2.16).
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{A}{Argument \code{A}; see Usage.}
 }
 \value{
 A numeric value.

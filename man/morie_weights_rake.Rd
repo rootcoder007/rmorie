@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_rake}
 \alias{morie_weights_rake}
-\title{Raking calibration (iterative proportional fitting).}
+\title{Raking calibration (iterative proportional fitting)}
 \usage{
 morie_weights_rake(
   weights,

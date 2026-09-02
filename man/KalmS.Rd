@@ -34,9 +34,9 @@ Q = 0 and F = I the state is constant, so every smoothed state equals
 the final filtered state -- an exact identity the tests use.
 }
 \details{
-Formula: C = P_t F' P_{t+1|t}^{-1};
-x_{t|n} = x_{t|t} + C (x_{t+1|n} - x_{t+1|t});
-P_{t|n} = P_{t|t} + C (P_{t+1|n} - P_{t+1|t}) C'.
+Formula: C = P_t F' P_\{t+1|t\}^\{-1\};
+x_\{t|n\} = x_\{t|t\} + C (x_\{t+1|n\} - x_\{t+1|t\});
+P_\{t|n\} = P_\{t|t\} + C (P_\{t+1|n\} - P_\{t+1|t\}) C'.
 }
 \examples{
 set.seed(1)

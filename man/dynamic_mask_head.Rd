@@ -5,7 +5,7 @@
 \alias{dynamic_mask_head}
 \title{dynamic_mask_head}
 \usage{
-dynamic_mask_head(output_token, image_grid_vectors, mlp = NULL)
+dynamic_mask_head(output_token, image_grid_vectors, mlp = NULL) 
 }
 \arguments{
 \item{output_token}{Passed to \code{.samdec_vec}.}

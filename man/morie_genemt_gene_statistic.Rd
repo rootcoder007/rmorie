@@ -5,7 +5,7 @@
 \alias{morie_genemt_gene_statistic}
 \title{morie_genemt_gene_statistic}
 \usage{
-morie_genemt_gene_statistic(y, G, keep = 0.999)
+morie_genemt_gene_statistic(y, G, keep = 0.999) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

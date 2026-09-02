@@ -5,7 +5,8 @@
 \alias{morie_phylby_log_posterior}
 \title{morie_phylby_log_posterior}
 \usage{
-morie_phylby_log_posterior(tree, seqs, pi = NULL, rate = 1, branch_prior_mean = 0.1, partitions = NULL, rates = NULL, temperature = 1)
+morie_phylby_log_posterior(tree, seqs, pi = NULL, rate = 1, branch_prior_mean = 0.1, partitions = NULL, 
+    rates = NULL, temperature = 1) 
 }
 \arguments{
 \item{tree}{Passed to \code{.phylby_log_posterior}.}

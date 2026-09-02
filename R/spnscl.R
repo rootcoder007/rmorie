@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Neyman-Scott cluster process: second-order behaviour.
+#' Neyman-Scott cluster process: second-order behaviour
 #'
 #' Parents form a homogeneous Poisson process of intensity rho; each
 #' produces N offspring displaced independently by a radially symmetric

@@ -16,9 +16,7 @@ A data.frame with columns:
 \source{
 \url{https://open.canada.ca}
 }
-\usage{
-ckan_metadata
-}
+
 \description{
 Package IDs and metadata URLs for accessing CPADS, CSADS, and CSUS
 datasets via the Canadian Open Data CKAN API.

@@ -5,10 +5,14 @@
 \alias{Ssmconv}
 \title{Causal convolution y_t = sum_l K_l x_{t-l} (standard)}
 \usage{
-Ssmconv(K, x)
+Ssmconv(K, x) 
 }
 \description{
-Causal convolution y_t = sum_l K_l x_{t-l} (standard)
+Causal convolution y_t = sum_l K_l x_\{t-l\} (standard)
+}
+\arguments{
+\item{K}{Argument \code{K}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
 }
 \value{
 A vector.

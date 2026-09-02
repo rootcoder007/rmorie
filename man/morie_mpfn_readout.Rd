@@ -5,7 +5,7 @@
 \alias{morie_mpfn_readout}
 \title{Readout R}
 \usage{
-morie_mpfn_readout(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL)
+morie_mpfn_readout(H, how = "sum", H0 = NULL, i_fn = NULL, j_fn = NULL) 
 }
 \arguments{
 \item{H}{n x d matrix.}

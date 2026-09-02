@@ -26,6 +26,7 @@ morie_geron_blip2(
 \item{temperature}{Positive temperature.}
 
 \item{seed}{LCG seed.}
+
 }
 \value{
 List with \code{query_output}, \code{llm_input}, \code{attention}, \code{similarity},

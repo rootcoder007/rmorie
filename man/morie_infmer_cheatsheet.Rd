@@ -5,7 +5,7 @@
 \alias{morie_infmer_cheatsheet}
 \title{Cheatsheet accessor}
 \usage{
-morie_infmer_cheatsheet()
+morie_infmer_cheatsheet() 
 }
 \description{
 A step of the infmer_native implementation. No other function in the package calls it. See the file header for the source the module follows.

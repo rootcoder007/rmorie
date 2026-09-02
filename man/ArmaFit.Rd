@@ -5,7 +5,7 @@
 \alias{ArmaFit}
 \title{Section 7.7: H(z) = B(z)/A(z), needed when the signal has spectral}
 \usage{
-ArmaFit(x, p, q, fs = 1)
+ArmaFit(x, p, q, fs = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

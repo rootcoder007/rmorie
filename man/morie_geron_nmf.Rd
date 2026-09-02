@@ -5,7 +5,7 @@
 \alias{morie_geron_nmf}
 \title{Non-negative matrix factorization by multiplicative updates (Geron Ch 7, hmnmf)}
 \usage{
-morie_geron_nmf(X, n_components = 2, max_iter = 400, tol = 1e-06, seed = 42)
+morie_geron_nmf(X, n_components = 2, max_iter = 400, tol = 1e-06, seed = 42) 
 }
 \arguments{
 \item{X}{Non-negative matrix (m, p).}

@@ -5,7 +5,7 @@
 \alias{elmo_mix}
 \title{Eq. (1): gamma * sum_j s_j h_{k,j}}
 \usage{
-elmo_mix(reps, raw_weights, gamma = 1, position = NULL)
+elmo_mix(reps, raw_weights, gamma = 1, position = NULL) 
 }
 \arguments{
 \item{reps}{A vector; its length is taken and its elements indexed.}

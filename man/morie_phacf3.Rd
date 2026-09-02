@@ -5,7 +5,8 @@
 \alias{morie_phacf3}
 \title{Fingerprint a set of typed 3D feature points}
 \usage{
-morie_phacf3(mol_3d, feature_set = .PHACF3_FEATURES, edges = .PHACF3_DEFAULT_EDGES, mode = "binary", space = NULL)
+morie_phacf3(mol_3d, feature_set = .PHACF3_FEATURES, edges = .PHACF3_DEFAULT_EDGES, 
+    mode = "binary", space = NULL) 
 }
 \arguments{
 \item{mol_3d}{A list of rows: x, y, z, type. The type must be a   member of the alphabet.}

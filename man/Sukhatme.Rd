@@ -5,10 +5,15 @@
 \alias{Sukhatme}
 \title{Sukhatme scale test -- eq. (9.7.1), p. 323}
 \usage{
-Sukhatme(x, y, alternative = "two-sided")
+Sukhatme(x, y, alternative = "two-sided") 
 }
 \description{
 Sukhatme scale test -- eq. (9.7.1), p. 323
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{phat}, \code{m}, \code{n}.

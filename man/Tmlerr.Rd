@@ -14,6 +14,7 @@ Tmlerr(y, D, X = NULL, alpha = 0.05, trim = 0)
 \item{alpha}{interval level.}
 
 \item{trim}{propensity truncation.}
+
 }
 \value{
 list: estimate, rr, log_rr, se_log, ci_lo, ci_hi, ey1, ey0,

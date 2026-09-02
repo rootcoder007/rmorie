@@ -5,7 +5,7 @@
 \alias{morie_metsem_kmers}
 \title{Every k-mer of a sequence, in order, with repeats kept}
 \usage{
-morie_metsem_kmers(seq, k)
+morie_metsem_kmers(seq, k) 
 }
 \arguments{
 \item{seq}{A sequence.}

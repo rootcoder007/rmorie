@@ -5,7 +5,8 @@
 \alias{MlpBp}
 \title{MlpBp}
 \usage{
-MlpBp(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500, tol = 1e-04, seed = 1)
+MlpBp(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500, tol = 1e-04, 
+    seed = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{.morie_bx_mat}.}

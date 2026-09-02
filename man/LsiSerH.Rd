@@ -5,7 +5,7 @@
 \alias{LsiSerH}
 \title{Eq (3.45): cascading two LSI systems convolves their impulse}
 \usage{
-LsiSerH(h_1, h_2, n = NULL)
+LsiSerH(h_1, h_2, n = NULL) 
 }
 \arguments{
 \item{h_1}{Coerced to numeric by the body, with \code{as.numeric}.}

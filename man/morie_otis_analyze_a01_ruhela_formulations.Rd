@@ -4,7 +4,7 @@
 \alias{morie_otis_analyze_a01_ruhela_formulations}
 \alias{morie_otis_analyze_a01_dlrm}
 \alias{morie_otis_analyze_a01_mrm}
-\title{OTIS a01 Ruhela formulations (full DLRM).}
+\title{OTIS a01 Ruhela formulations (full DLRM)}
 \usage{
 morie_otis_analyze_a01_ruhela_formulations(data = NULL, out_dir = NULL)
 

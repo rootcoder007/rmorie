@@ -12,6 +12,7 @@ Otsw(X, Y, p = 2, n_proj = 32)
 \item{p}{Exponent, positive.}
 
 \item{n_proj}{Number of directions.}
+
 }
 \value{
 List with \code{SW}, \code{SW_p}, \code{per_proj}, \code{n},

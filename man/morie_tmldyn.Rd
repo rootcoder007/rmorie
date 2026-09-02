@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_tmldyn}
 \alias{morie_tmldyn}
+\alias{morie_tmledynamicregime}
 \title{Mean outcome under the (V-)optimal dynamic treatment rule}
 \usage{
-morie_tmldyn(y, treatment_history, covariate_history, regime = "optimal", method = "cv-tmle", n_folds = 10, V0 = NULL, V1 = NULL, trim = 0.01, known_g = NULL, ridge = 1e-08, level = 0.95)
+morie_tmldyn(y, treatment_history, covariate_history, regime = "optimal", 
+    method = "cv-tmle", n_folds = 10, V0 = NULL, V1 = NULL, trim = 0.01, 
+    known_g = NULL, ridge = 1e-08, level = 0.95) 
+
+morie_tmledynamicregime(y, treatment_history, covariate_history, regime = "optimal", 
+    method = "cv-tmle", n_folds = 10, V0 = NULL, V1 = NULL, trim = 0.01, 
+    known_g = NULL, ridge = 1e-08, level = 0.95) 
 }
 \arguments{
 \item{y}{Outcome vector.}

@@ -5,7 +5,7 @@
 \alias{morie_halft_rates}
 \title{alpha and beta, the roots of the disposition quadratic}
 \usage{
-morie_halft_rates(V1, V2, CL, Q)
+morie_halft_rates(V1, V2, CL, Q) 
 }
 \arguments{
 \item{V1}{Central volume.}

@@ -5,7 +5,7 @@
 \alias{morie_prphet_holiday_matrix}
 \title{morie_prphet_holiday_matrix}
 \usage{
-morie_prphet_holiday_matrix(t, holidays, lower = 0, upper = 0)
+morie_prphet_holiday_matrix(t, holidays, lower = 0, upper = 0) 
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}

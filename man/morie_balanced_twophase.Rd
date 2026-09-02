@@ -37,6 +37,21 @@ morie_balanced_twophase(
 \item{n1h, n1, s2_2h, n2h, zbar_2h, zbar_hat}{Two-phase stratification.}
 
 \item{s2_z, s2_e, n2}{Two-phase regression pieces.}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with regression_total, balanced_variance,

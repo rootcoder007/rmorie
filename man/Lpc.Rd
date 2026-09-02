@@ -5,7 +5,7 @@
 \alias{Lpc}
 \title{Eqs (7.17)-(7.18), (7.25), (7.35).  The ACF is the BIASED estimator}
 \usage{
-Lpc(x, order, method = "autocorrelation")
+Lpc(x, order, method = "autocorrelation") 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

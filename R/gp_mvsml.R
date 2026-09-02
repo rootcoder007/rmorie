@@ -1,5 +1,5 @@
 # MVSML shelf: R mirror of the morie Python genomic-prediction core
-# (src/morie/fn/_gp_core.py).  Montesinos López, Montesinos López &
+# (src/morie/fn/_gp_core.py).  Montesinos L?pez, Montesinos L?pez &
 # Crossa (2022), Springer, DOI 10.1007/978-3-030-89010-0.
 # Certified equations: (1.2)-(1.5) pp.15-16; (2.1)-(2.2) p.36;
 # (2.3)-(2.4) p.53; GRM method 3 p.52; PCA sec. 2.8 pp.63-64;

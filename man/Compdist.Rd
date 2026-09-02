@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitdst.R
 \name{Compdist}
 \alias{Compdist}
-\title{Aitchison distance between two compositions.}
+\title{Aitchison distance between two compositions}
 \usage{
 Compdist(x, y)
 }
@@ -15,7 +15,7 @@ Compdist(x, y)
 List with \code{distance}, \code{distance2}, \code{D}.
 }
 \description{
-Formula: d_a(x, y)^2 = (1/D) sum_{i<j} ( log(x_i/x_j) - log(y_i/y_j) )^2
+Formula: d_a(x, y)^2 = (1/D) sum_\{i<j\} ( log(x_i/x_j) - log(y_i/y_j) )^2
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

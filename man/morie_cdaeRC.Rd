@@ -5,7 +5,8 @@
 \alias{morie_cdaeRC}
 \title{morie_cdaeRC}
 \usage{
-morie_cdaeRC(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, iters = 30L, n_neg = 5L, seed = 0, activation = "sigmoid", init_scale = 0.1)
+morie_cdaeRC(pos, n_users, n_items, k_dim = 8L, q = 0.2, alpha = 0.05, lam = 0.01, 
+    iters = 30L, n_neg = 5L, seed = 0, activation = "sigmoid", init_scale = 0.1) 
 }
 \arguments{
 \item{pos}{Passed to \code{fit_cdae}.}

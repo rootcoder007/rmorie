@@ -5,7 +5,7 @@
 \alias{MfPeak}
 \title{Eq (4.38): M_y = |y(t0)|, the numerator of the SNR everything else}
 \usage{
-MfPeak(X, H, freqs, t0)
+MfPeak(X, H, freqs, t0) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

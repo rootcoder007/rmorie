@@ -5,7 +5,7 @@
 \alias{ngcf_propagate}
 \title{ngcf_propagate}
 \usage{
-ngcf_propagate(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2)
+ngcf_propagate(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2) 
 }
 \arguments{
 \item{E}{A matrix; indexed by row and column.}

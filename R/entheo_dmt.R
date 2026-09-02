@@ -25,19 +25,19 @@
 # Module-level constants
 # ---------------------------------------------------------------------------
 
-#' EEG cortical regions used by the Timmermann 2023 IRASA pool.
+#' EEG cortical regions used by the Timmermann 2023 IRASA pool
 #' @keywords internal
 .MORIE_ENTHEO_EEG_REGIONS <- c(
   "Central", "Frontal", "Occipital",
   "Parietal", "Temporal"
 )
 
-#' Canonical EEG bands (delta..gamma) ordered by ascending frequency.
+#' Canonical EEG bands (delta..gamma) ordered by ascending frequency
 #' @keywords internal
 .MORIE_ENTHEO_EEG_BANDS <- c("delta", "theta", "alpha", "beta", "gamma")
 
 #' Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
-#' and the Timmermann 2023 Methods.
+#' and the Timmermann 2023 Methods
 #' @keywords internal
 .MORIE_ENTHEO_DEFAULT_BANDS <- list(
   list(name = "delta", lo = 0.5, hi = 4.0),
@@ -62,7 +62,7 @@
   if (dir.exists(cand)) cand else NULL
 }
 
-#' Require the dataset root or stop with a curated error.
+#' Require the dataset root or stop with a curated error
 #' @keywords internal
 #' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
 #' @examples
@@ -80,7 +80,8 @@
   root
 }
 
-#' Lightweight .mat loader (delegates to R.matlab).
+#' Lightweight .mat loader (delegates to R.matlab)
+#' @param path See Usage.
 #' @keywords internal
 #' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
 .morie_entheo_loadmat <- function(path) {
@@ -244,7 +245,9 @@ morie_entheo_dataset_overview <- function() {
 # Layer 2: analyses
 # ---------------------------------------------------------------------------
 
-#' Trapezoidal integration on a 1-D grid.
+#' Trapezoidal integration on a 1-D grid
+#' @param y See Usage.
+#' @param x See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
 #' @examples
@@ -435,7 +438,8 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
   )
 }
 
-#' Lempel-Ziv (LZ76) complexity helper.
+#' Lempel-Ziv (LZ76) complexity helper
+#' @param b See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
 #' @examples
@@ -624,7 +628,7 @@ morie_entheo_analyze_subject <- function(subject_id,
 # 3MMM.29 (2026-05-25): on-demand DMT_Imaging clone
 # ===========================================================================
 
-#' Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache.
+#' Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache
 #'
 #' `morie_entheo_clone_dmt_imaging()` shells out to `git clone` to
 #' fetch the open-source DMT_Imaging dataset published by Christopher

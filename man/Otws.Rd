@@ -8,6 +8,7 @@ Otws(x, y)
 }
 \arguments{
 \item{x, y}{Samples of equal length.}
+
 }
 \value{
 List with \code{W1}, \code{estimate}, \code{n}.

@@ -5,7 +5,7 @@
 \alias{morie_warpL_cheatsheet}
 \title{morie_warpL_cheatsheet}
 \usage{
-morie_warpL_cheatsheet()
+morie_warpL_cheatsheet() 
 }
 \description{
 A step of the warpL_native implementation. No other function in the package calls it. See the file header for the source the module follows.

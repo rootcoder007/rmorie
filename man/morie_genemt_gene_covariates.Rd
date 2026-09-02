@@ -5,7 +5,7 @@
 \alias{morie_genemt_gene_covariates}
 \title{morie_genemt_gene_covariates}
 \usage{
-morie_genemt_gene_covariates(n_markers, gene_length, ld_scores = NULL)
+morie_genemt_gene_covariates(n_markers, gene_length, ld_scores = NULL) 
 }
 \arguments{
 \item{n_markers}{Coerced to numeric by the body, with \code{as.numeric}.}

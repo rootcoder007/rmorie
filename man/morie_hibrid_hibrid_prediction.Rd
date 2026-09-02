@@ -5,7 +5,8 @@
 \alias{morie_hibrid_hibrid_prediction}
 \title{morie_hibrid_hibrid_prediction}
 \usage{
-morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno, sigma2_sca = NULL, X = NULL, p1_new = NULL, p2_new = NULL, max_iter = 300L, tol = 1e-10)
+morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno, sigma2_sca = NULL, X = NULL, p1_new = NULL, 
+    p2_new = NULL, max_iter = 300L, tol = 1e-10) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

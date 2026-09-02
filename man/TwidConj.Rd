@@ -5,7 +5,7 @@
 \alias{TwidConj}
 \title{Eq (3.88): W_N^(-nk) = conj(W_N^(nk)) -- a negative power costs only}
 \usage{
-TwidConj(npoints, n, k)
+TwidConj(npoints, n, k) 
 }
 \arguments{
 \item{npoints}{Coerced to integer by the body, with \code{as.integer}.}

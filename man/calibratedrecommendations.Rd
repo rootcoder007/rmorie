@@ -3,7 +3,7 @@
 \name{calibratedrecommendations}
 \alias{calibratedrecommendations}
 \title{Convenience alias matching the Python \code{calibratedrecommendations}
-export.}
+export}
 \usage{
 calibratedrecommendations(
   scores,
@@ -18,5 +18,16 @@ calibratedrecommendations(
 }
 \description{
 Convenience alias matching the Python \code{calibratedrecommendations}
-export.
+export
 }
+\arguments{
+\item{scores}{Argument \code{scores}; see Usage.}
+\item{p_g_given_i}{Argument \code{p_g_given_i}; see Usage.}
+\item{p_target}{Argument \code{p_target}; see Usage.}
+\item{N}{Argument \code{N}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{metric}{Argument \code{metric}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{rank_weights}{Argument \code{rank_weights}; see Usage.}
+}
+

@@ -5,7 +5,7 @@
 \alias{morie_kamath_attention_output}
 \title{morie_kamath_attention_output}
 \usage{
-morie_kamath_attention_output(b, v)
+morie_kamath_attention_output(b, v) 
 }
 \arguments{
 \item{b}{Weights.}

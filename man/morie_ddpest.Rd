@@ -5,7 +5,7 @@
 \alias{morie_ddpest}
 \title{Dependent Dirichlet process entry point}
 \usage{
-morie_ddpest(method, ...)
+morie_ddpest(method, ...) 
 }
 \arguments{
 \item{method}{Operation name (character).}

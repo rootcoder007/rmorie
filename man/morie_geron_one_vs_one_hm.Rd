@@ -5,7 +5,7 @@
 \alias{morie_geron_one_vs_one_hm}
 \title{One-vs-one multiclass: K(K-1)/2 pairwise classifiers with voting (Geron Ch 3, hmovo)}
 \usage{
-morie_geron_one_vs_one_hm(X, y, base_estimator = NULL, X_new = NULL)
+morie_geron_one_vs_one_hm(X, y, base_estimator = NULL, X_new = NULL) 
 }
 \arguments{
 \item{X,y}{Data and class labels.}

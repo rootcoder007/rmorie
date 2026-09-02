@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtegap.R
 \name{Eigengap}
 \alias{Eigengap}
-\title{Choose k from the spectrum: the gap after the small eigenvalues.}
+\title{Choose k from the spectrum: the gap after the small eigenvalues}
 \usage{
 Eigengap(values, kmax = NULL)
 }

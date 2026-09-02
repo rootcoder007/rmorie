@@ -5,7 +5,7 @@
 \alias{morie_unclr_lr_impute}
 \title{morie_unclr_lr_impute}
 \usage{
-morie_unclr_lr_impute(X, dl, n_iter, draw = NULL)
+morie_unclr_lr_impute(X, dl, n_iter, draw = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

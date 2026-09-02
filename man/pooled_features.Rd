@@ -5,7 +5,7 @@
 \alias{pooled_features}
 \title{pooled_features}
 \usage{
-pooled_features(hyp, src, ref)
+pooled_features(hyp, src, ref) 
 }
 \arguments{
 \item{hyp}{Passed to \code{.comet_vec}.}

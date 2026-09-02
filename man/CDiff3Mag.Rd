@@ -5,7 +5,7 @@
 \alias{CDiff3Mag}
 \title{Eq (3.130): (1/T)|sin w|.  Nought at BOTH ends -- at DC from the}
 \usage{
-CDiff3Mag(omega, T = 1)
+CDiff3Mag(omega, T = 1) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

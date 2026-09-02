@@ -5,10 +5,14 @@
 \alias{Intmod}
 \title{Modulated point-process intensity (Lawson eq. 6.3)}
 \usage{
-Intmod(lam0, lam1)
+Intmod(lam0, lam1) 
 }
 \description{
 Modulated point-process intensity (Lawson eq. 6.3)
+}
+\arguments{
+\item{lam0}{Argument \code{lam0}; see Usage.}
+\item{lam1}{Argument \code{lam1}; see Usage.}
 }
 \value{
 A list with \code{intensity}, \code{total}, \code{n}.

@@ -5,7 +5,7 @@
 \alias{multi_head_attention}
 \title{multi_head_attention}
 \usage{
-multi_head_attention(Q, K, V, n_heads, pad_mask = NULL, causal = FALSE)
+multi_head_attention(Q, K, V, n_heads, pad_mask = NULL, causal = FALSE) 
 }
 \arguments{
 \item{Q}{A matrix; passed to \code{nrow}.}

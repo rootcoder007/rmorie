@@ -5,7 +5,7 @@
 \alias{ClogSum}
 \title{Eqs (4.63), (4.65): complex logs of the z-transforms add.  Arg() is a}
 \usage{
-ClogSum(x, h, z)
+ClogSum(x, h, z) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

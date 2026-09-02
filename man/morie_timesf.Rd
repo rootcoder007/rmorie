@@ -5,7 +5,7 @@
 \alias{morie_timesf}
 \title{morie_timesf}
 \usage{
-morie_timesf(history, predictor, horizon, input_patch_len, output_patch_len)
+morie_timesf(history, predictor, horizon, input_patch_len, output_patch_len) 
 }
 \arguments{
 \item{history}{Passed to \code{morie_timesfm}.}

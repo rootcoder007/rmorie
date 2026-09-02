@@ -12,6 +12,7 @@ morie_geron_lstm(x_t, h_prev, c_prev, weights)
 \item{h_prev, c_prev}{Previous short/long-term states.}
 
 \item{weights}{Named list with W_i,U_i,b_i,W_f,U_f,b_f,W_o,U_o,b_o,W_g,U_g,b_g.}
+
 }
 \value{
 List with h_t, c_t, i_t, f_t, o_t, g_t, estimate, n, method.

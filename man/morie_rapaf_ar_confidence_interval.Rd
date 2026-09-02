@@ -5,7 +5,8 @@
 \alias{morie_rapaf_ar_confidence_interval}
 \title{Monte Carlo confidence interval for AR}
 \usage{
-morie_rapaf_ar_confidence_interval(case_counts, rate_ratios, log_rr_se, level = 0.95, draws = 2000L, seed = 0L)
+morie_rapaf_ar_confidence_interval(case_counts, rate_ratios, log_rr_se, level = 0.95, draws = 2000L, 
+    seed = 0L) 
 }
 \arguments{
 \item{case_counts}{Non-negative case counts per stratum.}

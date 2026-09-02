@@ -12,6 +12,7 @@ morie_bowarc(dag, bidirected, x, y)
 \item{bidirected}{two-column matrix of bidirected edges}
 
 \item{x, y}{the ordered pair to test}
+
 }
 \value{
 list(isbow, direct, confounded, nbows, bowfree, acyclic,

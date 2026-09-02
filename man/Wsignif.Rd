@@ -5,10 +5,15 @@
 \alias{Wsignif}
 \title{Concordance W significance test -- Sec. 12.4.2, p. 455}
 \usage{
-Wsignif(w, k, n)
+Wsignif(w, k, n) 
 }
 \description{
 Concordance W significance test -- Sec. 12.4.2, p. 455
+}
+\arguments{
+\item{w}{Argument \code{w}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{w}, \code{df}, \code{p_value}, \code{s}, \code{table_n}, \code{k}, \code{n}.

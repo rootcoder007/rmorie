@@ -14,6 +14,8 @@ Shfrm(time, event, X, cluster, theta = NULL)
 \item{X}{Covariate matrix.}
 
 \item{cluster}{Cluster labels.}
+
+\item{theta}{See Usage.}
 }
 \value{
 List with \code{estimate}, \code{se}, \code{theta},

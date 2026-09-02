@@ -12,6 +12,8 @@ morie_sobel_test(a, b, se_a, se_b, variant = "sobel")
 \item{se_a, se_b}{their standard errors.}
 
 \item{variant}{one of "sobel", "aroian", "goodman".}
+
+
 }
 \value{
 list: statistic (z), pvalue, indirect_effect, se, variant,

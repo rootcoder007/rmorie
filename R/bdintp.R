@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Criterion-function set estimate for moment inequalities.
+#' Criterion-function set estimate for moment inequalities
 #'
 #' Q_n(theta) = sum_j \[max(mbar_j/sigma_j, 0)\]^2 and
-#' C_n = {theta : n Q_n(theta) <= cutoff}.
+#' C_n = \{theta : n Q_n(theta) <= cutoff\}.
 #'
 #' @param mbar Sample moment means, one row per candidate theta.
 #' @param se Moment standard deviations, length J or the shape of mbar.

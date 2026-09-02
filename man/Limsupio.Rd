@@ -5,10 +5,14 @@
 \alias{Limsupio}
 \title{Limit-superior event, infinitely often (Deshmukh eq. 6.1)}
 \usage{
-Limsupio(dev, k)
+Limsupio(dev, k) 
 }
 \description{
 Limit-superior event, infinitely often (Deshmukh eq. 6.1)
+}
+\arguments{
+\item{dev}{Argument \code{dev}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
 }
 \value{
 A list with \code{threshold}, \code{in_event}, \code{prob}, \code{n_paths}.

@@ -24,7 +24,7 @@ Isolated nodes have zero degree and their normalising factor is taken
 to be zero rather than infinite.
 }
 \details{
-Formula: H' = relu(D^{-1/2} A D^{-1/2} X W), D = diag(rowSums(A)).
+Formula: H' = relu(D^\{-1/2\} A D^\{-1/2\} X W), D = diag(rowSums(A)).
 }
 \examples{
 G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)

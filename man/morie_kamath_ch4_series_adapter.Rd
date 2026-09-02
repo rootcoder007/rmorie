@@ -17,6 +17,7 @@ morie_kamath_ch4_parallel_adapter(H_o, H_i, W_down, W_up, f = NULL)
 \item{f}{Activation; default ReLU.}
 
 \item{H_i}{Layer input feeding the parallel branch.}
+
 }
 \value{
 List with \code{output}, \code{delta}, \code{bottleneck_rank}.

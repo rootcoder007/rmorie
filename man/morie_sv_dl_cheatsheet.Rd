@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_cheatsheet}
 \title{morie_sv_dl_cheatsheet}
 \usage{
-morie_sv_dl_cheatsheet()
+morie_sv_dl_cheatsheet() 
 }
 \description{
 A step of the sv_dl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

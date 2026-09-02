@@ -5,7 +5,7 @@
 \alias{scalar_vector_message}
 \title{scalar_vector_message}
 \usage{
-scalar_vector_message(s_j, v_j, r_ij, phi_s, phi_v, W_rbf)
+scalar_vector_message(s_j, v_j, r_ij, phi_s, phi_v, W_rbf) 
 }
 \arguments{
 \item{s_j}{Passed to \code{.painn_vec}.}

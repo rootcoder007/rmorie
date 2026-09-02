@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Pettitt's non-parametric single change-point test.
+#' Pettitt's non-parametric single change-point test
 #'
 #' Formula: with \eqn{r_i} the midranks of \code{x},
 #' \eqn{U_k = 2\sum_{i\le k} r_i - k(n+1)}, statistic

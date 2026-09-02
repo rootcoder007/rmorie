@@ -5,7 +5,7 @@
 \alias{dueling_q}
 \title{Duel aggregation across a batch of states}
 \usage{
-dueling_q(values, advantages, mode = "mean")
+dueling_q(values, advantages, mode = "mean") 
 }
 \arguments{
 \item{values}{Numeric vector of state values V(s).}

@@ -16,6 +16,7 @@ morie_pretprep(image, size, mean, sd, logits = NULL, topk = 1L)
 \item{logits}{optional class logits, for the p. 459 argmax read-out}
 
 \item{topk}{how many classes to report}
+
 }
 \value{
 list(pixels, size, channels, cropside, pixelmean, pixelmax,

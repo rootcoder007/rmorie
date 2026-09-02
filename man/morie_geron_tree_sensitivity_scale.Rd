@@ -22,6 +22,9 @@ morie_geron_tree_sensitivity_scale(
 \item{feature}{Optional single column.}
 
 \item{criterion, max_depth}{CART controls.}
+
+
+
 }
 \value{
 List with \code{predictions_match}, \code{thresholds}, \code{scaled_thresholds}, \code{thresholds_match}, \code{knn_match}.

@@ -5,7 +5,7 @@
 \alias{project_ball}
 \title{project_ball}
 \usage{
-project_ball(x, radius = 1, centre = NULL)
+project_ball(x, radius = 1, centre = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

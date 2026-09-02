@@ -5,10 +5,14 @@
 \alias{morie_gwrcal_global_aicc}
 \title{morie_gwrcal_global_aicc}
 \usage{
-morie_gwrcal_global_aicc(y, X)
+morie_gwrcal_global_aicc(y, X) 
 }
 \description{
 morie_gwrcal_global_aicc
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
 }
 \value{
 The value of \code{.gwr_aicc}.

@@ -118,7 +118,7 @@ morie_vqgdec_decode_indices <- function(indices, codebook) {
 
 # adaptive_weight: lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
 # Balances the two losses at the decoder's last layer.
-#' Adaptive_weight: lambda = grad_GL[L_rec] / (grad_GL[L_GAN] + delta)
+#' Adaptive_weight: lambda = grad_GL\[L_rec\] / (grad_GL\[L_GAN\] + delta)
 #'
 #' Balances the two losses at the decoder\'s last layer.
 #'

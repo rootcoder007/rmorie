@@ -5,7 +5,7 @@
 \alias{morie_alf3df}
 \title{The ledger entry point: one step, reported richly}
 \usage{
-morie_alf3df(x, t, score_fn, ...)
+morie_alf3df(x, t, score_fn, ...) 
 }
 \arguments{
 \item{x}{Current coordinates.}

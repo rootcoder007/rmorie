@@ -5,7 +5,7 @@
 \alias{morie_ncfRS_gmf}
 \title{morie_ncfRS_gmf}
 \usage{
-morie_ncfRS_gmf(p_u, q_i, h = NULL, activation = "sigmoid")
+morie_ncfRS_gmf(p_u, q_i, h = NULL, activation = "sigmoid") 
 }
 \arguments{
 \item{p_u}{Coerced to numeric by the body, with \code{as.numeric}.}

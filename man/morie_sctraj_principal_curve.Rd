@@ -5,7 +5,8 @@
 \alias{morie_sctraj_principal_curve}
 \title{morie_sctraj_principal_curve}
 \usage{
-morie_sctraj_principal_curve(X, init, weights = NULL, max_iter = 15, tol = 0.001, span = 0.4, n_knots = NULL)
+morie_sctraj_principal_curve(X, init, weights = NULL, max_iter = 15, tol = 0.001, span = 0.4, 
+    n_knots = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.sctraj_matrix}.}

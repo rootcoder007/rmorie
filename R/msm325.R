@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Zero-truncated Poisson splitting criterion.
+#' Zero-truncated Poisson splitting criterion
 #'
 #' Formula: LL+ = -N+ log(1 - exp(-mu)) + log(mu) sum_i Y_i+ - N+ mu
 #' - sum_i log(Y_i+!) (eq. 15.2), the zero-truncated Poisson log-likelihood

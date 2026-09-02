@@ -2,7 +2,7 @@
 % Please edit documentation in R/betbnm.R
 \name{Betabinom}
 \alias{Betabinom}
-\title{Beta-binomial conjugate updating.}
+\title{Beta-binomial conjugate updating}
 \usage{
 Betabinom(y, n, alpha = 1, beta = 1, m = NULL)
 }
@@ -14,6 +14,7 @@ Betabinom(y, n, alpha = 1, beta = 1, m = NULL)
 \item{alpha, beta}{Prior shapes, strictly positive.}
 
 \item{m}{Future trials for the posterior predictive; NULL uses n.}
+
 }
 \value{
 List with postalpha, postbeta, postmean, postvar, postmode,

@@ -5,10 +5,14 @@
 \alias{Klotzsc}
 \title{Klotz normal-scores scale test -- eq. (9.5.1), p. 322}
 \usage{
-Klotzsc(x, y)
+Klotzsc(x, y) 
 }
 \description{
 Klotz normal-scores scale test -- eq. (9.5.1), p. 322
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{mean}, \code{var}, \code{z}, \code{p_value}, \code{scores}, \code{m}, \code{n}.

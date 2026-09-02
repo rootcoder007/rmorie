@@ -2,7 +2,7 @@
 % Please edit documentation in R/smltot.R
 \name{Srstotal}
 \alias{Srstotal}
-\title{Estimate a population total from a simple random sample.}
+\title{Estimate a population total from a simple random sample}
 \usage{
 Srstotal(y, N, level = 0.95)
 }

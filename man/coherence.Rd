@@ -5,7 +5,7 @@
 \alias{coherence}
 \title{coherence}
 \usage{
-coherence(A, rank = NULL)
+coherence(A, rank = NULL) 
 }
 \arguments{
 \item{A}{Passed to \code{.meglt_mat}.}

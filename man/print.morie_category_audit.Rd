@@ -5,7 +5,7 @@
 \alias{print.morie_category_audit}
 \title{Print method for \code{morie_category_audit} objects}
 \usage{
-print.morie_category_audit(x, ...)
+\method{print}{morie_category_audit}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_category_audit} object.}

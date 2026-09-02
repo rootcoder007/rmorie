@@ -10,6 +10,8 @@ morie_wasserman_viterbi(obs, A, B, pi)
 \item{obs}{0-based observation indices.}
 
 \item{A, B, pi}{As in \code{\link[=morie_wasserman_hmm_forward]{morie_wasserman_hmm_forward()}}.}
+
+
 }
 \value{
 List with \code{estimate} (log probability of the best path),

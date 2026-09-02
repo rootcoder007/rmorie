@@ -5,7 +5,7 @@
 \alias{smfd_bspline_one}
 \title{Internal: Cox-de Boor recursion for one B-spline. k is 1-based}
 \usage{
-smfd_bspline_one(x, k, degree, knots)
+smfd_bspline_one(x, k, degree, knots) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

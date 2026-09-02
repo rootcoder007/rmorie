@@ -5,7 +5,7 @@
 \alias{morie_geron_regression_tree}
 \title{CART regression tree minimising per-leaf MSE (Geron Ch 5, hmrdt)}
 \usage{
-morie_geron_regression_tree(X, y, max_depth = 3, min_samples_leaf = 1)
+morie_geron_regression_tree(X, y, max_depth = 3, min_samples_leaf = 1) 
 }
 \arguments{
 \item{X,y}{Data and targets.}

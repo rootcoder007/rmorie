@@ -9,7 +9,7 @@
 #' threshold), the output will be 1 if the net input is greater than zero;
 #' otherwise the output will be 0".  The inequality is strict, so v = 0 falls
 #' in the 0 branch here as it does there.  The bias enters as the weight on
-#' the constant input, the way Section 10.8 writes z = sum_{p=0}^P w_kp x_ip
+#' the constant input, the way Section 10.8 writes z = sum_\{p=0\}^P w_kp x_ip
 #' with x_i0 = 1.
 #'
 #' The update w <- w + eta y_i x_i is Rosenblatt's, not the book's: Section

@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_a}
 \alias{morie_otis_make_pair_a}
-\title{Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary).}
+\title{Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary)}
 \usage{
 morie_otis_make_pair_a(df)
 }

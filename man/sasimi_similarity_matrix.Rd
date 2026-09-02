@@ -5,7 +5,7 @@
 \alias{sasimi_similarity_matrix}
 \title{sasimi_similarity_matrix}
 \usage{
-sasimi_similarity_matrix(fps, coefficient = "tanimoto")
+sasimi_similarity_matrix(fps, coefficient = "tanimoto") 
 }
 \arguments{
 \item{fps}{Iterated over elementwise, with \code{lapply}.}
@@ -22,7 +22,7 @@ The value of \code{M}, as built in the body.
 Jaccard, P. (1912) "The distribution of the flora in the alpine
 zone", *New Phytologist* 11(2), 37-50,
 doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-:math:`c/(a+b-c)` itself.
+\eqn{c/(a+b-c)} itself.
 
 Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
 similarity searching", *Journal of Chemical Information and Computer

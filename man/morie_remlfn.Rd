@@ -5,7 +5,7 @@
 \alias{morie_remlfn}
 \title{morie_remlfn}
 \usage{
-morie_remlfn(y, group, tol = 1e-10, max_iter = 5000, solver = "auto")
+morie_remlfn(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

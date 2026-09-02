@@ -5,10 +5,14 @@
 \alias{Ksdistfree}
 \title{KS statistics via the PIT -- Theorem 4.3.1, p. 111}
 \usage{
-Ksdistfree(x, cdf)
+Ksdistfree(x, cdf) 
 }
 \description{
 KS statistics via the PIT -- Theorem 4.3.1, p. 111
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{cdf}{Argument \code{cdf}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{dplus}, \code{dminus}, \code{z}, \code{n}.

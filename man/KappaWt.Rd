@@ -10,6 +10,7 @@ KappaWt(rater1, rater2, weights = "linear")
 \item{rater1, rater2}{ordered-category ratings of the same n subjects}
 
 \item{weights}{"linear", "quadratic", or a k x k disagreement matrix}
+
 }
 \value{
 list(kappa, observed_disagreement, expected_disagreement, n,

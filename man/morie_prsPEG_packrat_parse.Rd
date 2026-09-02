@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_packrat_parse}
 \title{morie_prsPEG_packrat_parse}
 \usage{
-morie_prsPEG_packrat_parse(expr, text, full = TRUE)
+morie_prsPEG_packrat_parse(expr, text, full = TRUE) 
 }
 \arguments{
 \item{expr}{Passed to \code{attr}.}

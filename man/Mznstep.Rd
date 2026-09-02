@@ -2,7 +2,7 @@
 % Please edit documentation in R/agmunw.R
 \name{Mznstep}
 \alias{Mznstep}
-\title{MuZero n-step bootstrapped value targets.}
+\title{MuZero n-step bootstrapped value targets}
 \usage{
 Mznstep(rewards, values, n = 5, gamma = 0.997)
 }
@@ -19,7 +19,7 @@ Mznstep(rewards, values, n = 5, gamma = 0.997)
 List with target, T, n, gamma, mean.
 }
 \description{
-z_t = sum_{j=0}^{n-1} gamma^j u_{t+j} + gamma^n nu_{t+n}, with the
+z_t = sum_\{j=0\}^\{n-1\} gamma^j u_\{t+j\} + gamma^n nu_\{t+n\}, with the
 bootstrap term dropped past the end of the trajectory.
 }
 \examples{

@@ -5,7 +5,7 @@
 \alias{FishCrit}
 \title{J = (m1 - m2)^2 / (s1^2 + s2^2).  Close kin to eq (10.112) but NOT}
 \usage{
-FishCrit(x1, x2)
+FishCrit(x1, x2) 
 }
 \arguments{
 \item{x1}{Coerced to numeric by the body, with \code{as.numeric}.}

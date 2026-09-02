@@ -18,9 +18,9 @@ morie_mad_median_rule(x, crit = 2.24)
 \arguments{
 \item{x}{numeric vector}
 
-\item{constant}{MAD scaling constant}
+\item{constant}{Argument \code{constant}; see Usage.}
 
-\item{crit}{cut-off for the outlier rule}
+\item{crit}{Argument \code{crit}; see Usage.}
 }
 \value{
 \code{morie_mad}, \code{morie_madn}, \code{morie_mad_rescaled} numbers;

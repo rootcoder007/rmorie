@@ -5,7 +5,8 @@
 \alias{morie_slice_chain}
 \title{Univariate slice-sampling chain}
 \usage{
-morie_slice_chain(logf, x0, n = 2000L, w = 1, burn = 0L, seed = 1L, lower = -Inf, upper = Inf, thin = 1L)
+morie_slice_chain(logf, x0, n = 2000L, w = 1, burn = 0L, seed = 1L, lower = -Inf, 
+    upper = Inf, thin = 1L) 
 }
 \arguments{
 \item{logf}{Log unnormalised density.}

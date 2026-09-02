@@ -5,7 +5,7 @@
 \alias{morie_trmRew_decides}
 \title{Whether two terms are equal in the theory the rules present. Sound}
 \usage{
-morie_trmRew_decides(s, t, rules, max_steps = 10000)
+morie_trmRew_decides(s, t, rules, max_steps = 10000) 
 }
 \arguments{
 \item{s}{Passed to \code{morie_trmRew_normal_form}.}

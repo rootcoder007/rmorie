@@ -5,7 +5,7 @@
 \alias{morie_trnsfr_transfer_msm}
 \title{morie_trnsfr_transfer_msm}
 \usage{
-morie_trnsfr_transfer_msm(Y, A, H, cohort, target = 0, e = NULL, trim = 0.001, ridge = 1e-06)
+morie_trnsfr_transfer_msm(Y, A, H, cohort, target = 0, e = NULL, trim = 0.001, ridge = 1e-06) 
 }
 \arguments{
 \item{Y}{Passed to \code{.s03vec}.}

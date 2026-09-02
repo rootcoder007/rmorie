@@ -5,7 +5,7 @@
 \alias{fu_microsomes}
 \title{fu_microsomes}
 \usage{
-fu_microsomes(log_pd, protein = 1)
+fu_microsomes(log_pd, protein = 1) 
 }
 \arguments{
 \item{log_pd}{Passed to \code{.clrnt_binding_term}.}

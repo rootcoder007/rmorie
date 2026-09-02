@@ -27,6 +27,7 @@ default (0, 1e-4, 1e-3, 1e-2).  The first entry must be exactly 0.}
 \item{max_iter, tol}{fixed-point controls.}
 
 \item{delta}{optional Dirichlet parameter; all ones when absent.}
+
 }
 \value{
 list: estimate, beta_samples, class_probs, pi, sigma_g2, sigma_e2,

@@ -5,7 +5,8 @@
 \alias{morie_tmle_censoring}
 \title{Tmle_censoring: causal survival under censoring}
 \usage{
-morie_tmle_censoring(time, event, censor, treatment, covariates, kind = "right", grid = NULL, a = 1, r = NULL, g = NULL, gc = NULL, trim = 0.001)
+morie_tmle_censoring(time, event, censor, treatment, covariates, kind = "right", grid = NULL, 
+    a = 1, r = NULL, g = NULL, gc = NULL, trim = 0.001) 
 }
 \arguments{
 \item{time}{Passed to \code{morie_ipcw_interval}.}

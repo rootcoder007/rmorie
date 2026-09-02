@@ -5,7 +5,7 @@
 \alias{morie_tlseqsl_sequential_super_learner}
 \title{morie_tlseqsl_sequential_super_learner}
 \usage{
-morie_tlseqsl_sequential_super_learner(histories, outcomes, library, T, V = 5, seed = 0)
+morie_tlseqsl_sequential_super_learner(histories, outcomes, library, T, V = 5, seed = 0) 
 }
 \arguments{
 \item{histories}{A vector; its length is taken and its elements indexed.}

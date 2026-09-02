@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_kinship_matrix}
 \title{Genomic kinship from centred, scaled genotypes:}
 \usage{
-morie_snpqc1_kinship_matrix(genotypes)
+morie_snpqc1_kinship_matrix(genotypes) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

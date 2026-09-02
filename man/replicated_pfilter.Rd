@@ -5,7 +5,7 @@
 \alias{replicated_pfilter}
 \title{replicated_pfilter}
 \usage{
-replicated_pfilter(y, n_particles, init, step, loglik, n_reps = 10L, seed = 0L)
+replicated_pfilter(y, n_particles, init, step, loglik, n_reps = 10L, seed = 0L) 
 }
 \arguments{
 \item{y}{Passed to \code{particle_filter_simple}.}

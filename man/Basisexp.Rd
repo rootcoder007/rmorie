@@ -31,7 +31,7 @@ minimising RSS(theta) = sum_i (y_i - f_theta(x_i))^2 (2.32).
 \details{
 The dictionaries are the ones the book names: polynomial (x^k),
 trigonometric (cos/sin harmonics), and the linear spline basis
-b1 = 1, b2 = x, b_{m+2}(x) = (x - t_m)_+.  The basis functions carry no
+b1 = 1, b2 = x, b_\{m+2\}(x) = (x - t_m)_+.  The basis functions carry no
 hidden parameters, so the minimisation is closed form and is solved by the
 normal equations rather than by search.
 }

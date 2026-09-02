@@ -5,7 +5,7 @@
 \alias{simplex}
 \title{Two-phase primal simplex on Ax = b, x >= 0. Mirrors clpopt.simplex}
 \usage{
-simplex(c, A, b, rule = "bland", max_iter = 10000, initial_basis = NULL)
+simplex(c, A, b, rule = "bland", max_iter = 10000, initial_basis = NULL) 
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}

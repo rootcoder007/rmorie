@@ -5,7 +5,7 @@
 \alias{stats_free_interp}
 \title{Piecewise-linear interpolation onto `grid`, written out rather than}
 \usage{
-stats_free_interp(beats, values, grid)
+stats_free_interp(beats, values, grid) 
 }
 \arguments{
 \item{beats}{A vector; its length is taken and its elements indexed.}

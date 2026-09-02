@@ -27,6 +27,8 @@ morie_causal_survival_forest(
 \item{horizon}{Restriction time; default the 90th percentile of \code{time}.}
 
 \item{n_trees, min_leaf, seed}{Forest hyperparameters.}
+
+
 }
 \value{
 List with \code{cate}, \code{cate_oob}, \code{ate}, \code{horizon},

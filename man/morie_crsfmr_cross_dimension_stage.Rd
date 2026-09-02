@@ -5,7 +5,7 @@
 \alias{morie_crsfmr_cross_dimension_stage}
 \title{Cross-dimension stage through a router}
 \usage{
-morie_crsfmr_cross_dimension_stage(Z, router = NULL, n_router = NULL)
+morie_crsfmr_cross_dimension_stage(Z, router = NULL, n_router = NULL) 
 }
 \arguments{
 \item{Z}{A length-L list of length-D lists of d_model vectors.}

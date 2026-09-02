@@ -5,7 +5,8 @@
 \alias{morie_ncfRS_fit_gmf}
 \title{morie_ncfRS_fit_gmf}
 \usage{
-morie_ncfRS_fit_gmf(pos, n_users, n_items, k_dim = 8, alpha = 0.05, iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE)
+morie_ncfRS_fit_gmf(pos, n_users, n_items, k_dim = 8, alpha = 0.05, iters = 2000, 
+    n_neg = 4, seed = 0, learn_h = TRUE) 
 }
 \arguments{
 \item{pos}{A vector; indexed elementwise.}

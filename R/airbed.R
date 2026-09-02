@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Activity-data times emission-factor inventory.
+#' Activity-data times emission-factor inventory
 #'
 #' Emissions = AD * EF, summed over the cells of a sector-by-fuel table
 #' and optionally weighted by per-gas global warming potentials.

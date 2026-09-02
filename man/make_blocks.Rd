@@ -5,7 +5,7 @@
 \alias{make_blocks}
 \title{make_blocks}
 \usage{
-make_blocks(n_markers, chromosomes = NULL, block_size = 1000)
+make_blocks(n_markers, chromosomes = NULL, block_size = 1000) 
 }
 \arguments{
 \item{n_markers}{Coerced to integer by the body, with \code{as.integer}.}

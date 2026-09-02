@@ -27,6 +27,8 @@ Gpsps(
 \item{weights, variances, means}{Length-Q mixture parameters.}
 
 \item{noise}{Observation noise variance.}
+
+
 }
 \value{
 List with \code{estimate}, \code{mean}, \code{variance},

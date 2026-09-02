@@ -28,7 +28,7 @@ A list with components \code{coefficients} (named numeric vector),
 \description{
 Mirrors the Python \code{morie.run_weighted_logistic_analysis()}. Fits a
 binary-outcome model with design-based (Binder-linearized) standard
-errors via rmorie's native weighted GLM — numerically identical to
+errors via rmorie's native weighted GLM -- numerically identical to
 \code{survey::svyglm(ids = ~1)} but with no survey dependency.
 }
 \examples{

@@ -2,16 +2,16 @@
 % Please edit documentation in R/dfbeta.R
 \name{Dfbetas}
 \alias{Dfbetas}
-\title{DFBETAS, the scaled per-coefficient deletion influence.}
+\title{DFBETAS, the scaled per-coefficient deletion influence}
 \usage{
 Dfbetas(X, y, intercept = TRUE)
 }
 \arguments{
-\item{X}{Design matrix.}
+\item{X}{See Usage.}
 
-\item{y}{Response.}
+\item{y}{See Usage.}
 
-\item{intercept}{Prepend a column of ones.}
+\item{intercept}{See Usage.}
 }
 \value{
 List with \code{dfbetas} (n by p), \code{cutoff}, \code{leverage}, \code{beta}, \code{sigma_i}, \code{n}, \code{p}.

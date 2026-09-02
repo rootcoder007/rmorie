@@ -5,7 +5,7 @@
 \alias{EvenOdd}
 \title{Eqs (3.92)-(3.94).  Eq (3.94) is an identity, so the reconstruction}
 \usage{
-EvenOdd(x, n = NULL)
+EvenOdd(x, n = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_evenodd}.}

@@ -5,7 +5,7 @@
 \alias{co2RF_cheatsheet}
 \title{co2RF_cheatsheet}
 \usage{
-co2RF_cheatsheet()
+co2RF_cheatsheet() 
 }
 \description{
 A step of the co2RF_native implementation. No other function in the package calls it. See the file header for the source the module follows.

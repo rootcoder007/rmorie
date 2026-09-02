@@ -5,10 +5,15 @@
 \alias{Rankci}
 \title{Rank-test inversion interval -- Secs. 5.7.5, 6.4.2, 6.6.2}
 \usage{
-Rankci(values, k, level = NULL)
+Rankci(values, k, level = NULL) 
 }
 \description{
 Rank-test inversion interval -- Secs. 5.7.5, 6.4.2, 6.6.2
+}
+\arguments{
+\item{values}{Argument \code{values}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
+\item{level}{Argument \code{level}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{estimate}, \code{k}, \code{m}, \code{level}.

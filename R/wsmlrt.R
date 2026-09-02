@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Likelihood ratio test from two maximised log-likelihoods.
+#' Likelihood ratio test from two maximised log-likelihoods
 #'
 #' The degrees of freedom are the DIFFERENCE IN DIMENSION, not the number
 #' of parameters in either model. A negative statistic is raised rather

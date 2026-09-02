@@ -5,10 +5,15 @@
 \alias{Ostatbeta}
 \title{Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38}
 \usage{
-Ostatbeta(u, r, n)
+Ostatbeta(u, r, n) 
 }
 \description{
 Uniform order statistic is Beta(r, n-r+1) -- Theorem 2.4.3, p. 38
+}
+\arguments{
+\item{u}{Argument \code{u}; see Usage.}
+\item{r}{Argument \code{r}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{pdf}, \code{cdf}, \code{mean}, \code{var}, \code{alpha}, \code{beta}, \code{r}, \code{n}.

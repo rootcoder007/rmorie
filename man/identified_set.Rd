@@ -5,7 +5,7 @@
 \alias{identified_set}
 \title{identified_set}
 \usage{
-identified_set(beta, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, grid = NULL)
+identified_set(beta, n_pre, n_post, M = 0, family = "SD", l_vec = NULL, grid = NULL) 
 }
 \arguments{
 \item{beta}{Passed to \code{.snmtst_split}.}

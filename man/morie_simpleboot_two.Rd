@@ -15,6 +15,7 @@ time (e.g. \code{mean}, \code{median}); two.boot's contract.}
 \item{R}{Number of bootstrap replicates (default 1000).}
 
 \item{...}{Forwarded to the per-sample statistic.}
+
 }
 \value{
 A \code{morie_boot} object for the difference statistic.

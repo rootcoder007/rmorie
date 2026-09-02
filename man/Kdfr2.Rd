@@ -17,6 +17,7 @@ morie_fauzi_r2_integral(a, kernel = "gaussian", lo = -8, hi = 8, ngrid = 4001L)
 \item{lo, hi}{Quadrature limits.}
 
 \item{ngrid}{Number of nodes; fixed, never adapted.}
+
 }
 \value{
 Named list with \code{estimate}, \code{a}, \code{method}.

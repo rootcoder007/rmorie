@@ -5,7 +5,7 @@
 \alias{RlsNormal}
 \title{Eq. (3.207): the same form as Wiener-Hopf, but with time-averaged and}
 \usage{
-RlsNormal(phi, theta)
+RlsNormal(phi, theta) 
 }
 \arguments{
 \item{phi}{Passed to \code{WienerHopf}.}

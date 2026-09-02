@@ -5,10 +5,15 @@
 \alias{morie_epe}
 \title{morie_epe}
 \usage{
-morie_epe(sigma2, x_star, eigenvalues)
+morie_epe(sigma2, x_star, eigenvalues) 
 }
 \description{
 morie_epe
+}
+\arguments{
+\item{sigma2}{Argument \code{sigma2}; see Usage.}
+\item{x_star}{Argument \code{x_star}; see Usage.}
+\item{eigenvalues}{Argument \code{eigenvalues}; see Usage.}
 }
 \value{
 A numeric value.

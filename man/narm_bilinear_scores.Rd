@@ -5,7 +5,7 @@
 \alias{narm_bilinear_scores}
 \title{narm_bilinear_scores}
 \usage{
-narm_bilinear_scores(embeddings, B, c_t)
+narm_bilinear_scores(embeddings, B, c_t) 
 }
 \arguments{
 \item{embeddings}{A matrix; passed to \code{as.matrix}.}

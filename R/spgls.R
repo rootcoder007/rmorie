@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Generalised least squares with a known covariance matrix.
+#' Generalised least squares with a known covariance matrix
 #'
 #' When the errors are spatially correlated with known Var(Z(s)) = Sigma,
 #' the efficient estimator is

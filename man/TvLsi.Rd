@@ -5,7 +5,7 @@
 \alias{TvLsi}
 \title{A time-variant system needs h(n, m), one response per output instant:}
 \usage{
-TvLsi(x, h)
+TvLsi(x, h) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -16,6 +16,8 @@ omitted.}
 
 \item{WQ, WK, WV}{Optional projections (d x d_k / d x d_k / d x d_v);
 identity if omitted.}
+
+
 }
 \value{
 List with \code{output} (H x W x d_v array), \code{bias},

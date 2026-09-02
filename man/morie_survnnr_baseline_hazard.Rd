@@ -5,7 +5,7 @@
 \alias{morie_survnnr_baseline_hazard}
 \title{morie_survnnr_baseline_hazard}
 \usage{
-morie_survnnr_baseline_hazard(fit_result)
+morie_survnnr_baseline_hazard(fit_result) 
 }
 \arguments{
 \item{fit_result}{A list; the body reads \code{$events}, \code{$risk}, \code{$times} from it.}

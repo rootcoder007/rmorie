@@ -5,7 +5,7 @@
 \alias{lag_summary}
 \title{lag_summary}
 \usage{
-lag_summary(series, t, lags = 2)
+lag_summary(series, t, lags = 2) 
 }
 \arguments{
 \item{series}{Coerced to numeric by the body, with \code{as.numeric}.}

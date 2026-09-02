@@ -2,7 +2,7 @@
 % Please edit documentation in R/mmeeq.R
 \name{Hendmme}
 \alias{Hendmme}
-\title{Henderson's mixed model equations for the BLUE and the BLUP.}
+\title{Henderson's mixed model equations for the BLUE and the BLUP}
 \usage{
 Hendmme(X, Z, y, Sigma_inv, R_inv = NULL)
 }

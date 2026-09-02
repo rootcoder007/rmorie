@@ -14,6 +14,7 @@ morie_rob_m(X, y, psi = "huber", c = NULL, max_iter = 100L)
 \item{c}{tuning constant; the family's 95\% value when \code{NULL}.}
 
 \item{max_iter}{IRLS iterations.}
+
 }
 \value{
 list: beta, scale, residuals, weights, psi, c, monotone,

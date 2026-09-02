@@ -5,7 +5,7 @@
 \alias{cv_tmle_split}
 \title{cv_tmle_split}
 \usage{
-cv_tmle_split(n, V = 10L, seed = 0L)
+cv_tmle_split(n, V = 10L, seed = 0L) 
 }
 \arguments{
 \item{n}{A count; the body uses it as \code{seq_len(...)}.}

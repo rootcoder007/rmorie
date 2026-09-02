@@ -5,7 +5,7 @@
 \alias{morie_prxgms_soft_threshold}
 \title{morie_prxgms_soft_threshold}
 \usage{
-morie_prxgms_soft_threshold(v, tau)
+morie_prxgms_soft_threshold(v, tau) 
 }
 \arguments{
 \item{v}{A vector; indexed elementwise.}

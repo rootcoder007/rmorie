@@ -13,6 +13,7 @@ observation.}
 \item{k}{Number of neighbours (1 <= k < n).}
 
 \item{algorithm}{1 (Eq. 8, default) or 2 (Eq. 9).}
+
 }
 \value{
 A list with elements \code{mi}, \code{mi_bits}, \code{k},

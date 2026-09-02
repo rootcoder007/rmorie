@@ -5,7 +5,7 @@
 \alias{expected_features}
 \title{expected_features}
 \usage{
-expected_features(n, alpha)
+expected_features(n, alpha) 
 }
 \arguments{
 \item{n}{Coerced to integer by the body, with \code{as.integer}.}

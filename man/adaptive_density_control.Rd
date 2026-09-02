@@ -5,7 +5,8 @@
 \alias{adaptive_density_control}
 \title{Adaptive density control: clone, split or prune each Gaussian}
 \usage{
-adaptive_density_control(gradients, scales, opacities, grad_threshold = 2e-04, scale_threshold = 0.01, opacity_threshold = 0.005)
+adaptive_density_control(gradients, scales, opacities, grad_threshold = 2e-04, scale_threshold = 0.01, 
+    opacity_threshold = 0.005) 
 }
 \arguments{
 \item{gradients}{Per-Gaussian positional gradient.}

@@ -5,7 +5,7 @@
 \alias{distribution_mean}
 \title{E[Z] = sum_i z_i p_i}
 \usage{
-distribution_mean(probs, z)
+distribution_mean(probs, z) 
 }
 \arguments{
 \item{probs}{Numeric vector of probabilities.}

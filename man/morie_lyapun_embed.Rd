@@ -5,7 +5,7 @@
 \alias{morie_lyapun_embed}
 \title{morie_lyapun_embed}
 \usage{
-morie_lyapun_embed(y, m, tau)
+morie_lyapun_embed(y, m, tau) 
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}

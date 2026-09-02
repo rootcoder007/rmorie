@@ -5,7 +5,7 @@
 \alias{WienerFilt}
 \title{WienerFilt}
 \usage{
-WienerFilt(x, desired = NULL, order = 8, sd = NULL, seta = NULL, fs = 1)
+WienerFilt(x, desired = NULL, order = 8, sd = NULL, seta = NULL, fs = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Power a composition by a real scalar.
+#' Power a composition by a real scalar
 #'
 #' Formula: a (.) x = C( x_1^a, ..., x_D^a )
 #'

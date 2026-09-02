@@ -14,6 +14,7 @@ morie_geron_warm_restarts(t, T0 = 10, factor = 2, eta_max = 0.1, eta_min = 0)
 \item{factor}{Geometric growth (>=1).}
 
 \item{eta_max, eta_min}{Learning-rate bounds.}
+
 }
 \value{
 list with eta, cycle, cycle_length, step_in_cycle, restarts, T0,

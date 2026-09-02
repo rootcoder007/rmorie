@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_fay_brr}
 \alias{morie_weights_fay_brr}
-\title{Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1).}
+\title{Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1)}
 \usage{
 morie_weights_fay_brr(
   weights,
@@ -28,7 +28,7 @@ morie_weights_fay_brr(
 A numeric \code{matrix}.
 }
 \description{
-Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1).
+Fay's BRR weights with perturbation coefficient \code{fay_coefficient} in [0,1)
 }
 \examples{
 set.seed(1)

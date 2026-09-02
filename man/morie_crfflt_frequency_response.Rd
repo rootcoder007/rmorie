@@ -5,7 +5,7 @@
 \alias{morie_crfflt_frequency_response}
 \title{Magnitude of the frequency response of a symmetric weight vector}
 \usage{
-morie_crfflt_frequency_response(weights, omega)
+morie_crfflt_frequency_response(weights, omega) 
 }
 \arguments{
 \item{weights}{Numeric vector of weights.}

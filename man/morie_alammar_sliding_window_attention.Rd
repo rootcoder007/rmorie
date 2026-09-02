@@ -5,7 +5,7 @@
 \alias{morie_alammar_sliding_window_attention}
 \title{Sliding-window causal attention (Beltagy et al. 2020)}
 \usage{
-morie_alammar_sliding_window_attention(Q, K, V, window_size)
+morie_alammar_sliding_window_attention(Q, K, V, window_size) 
 }
 \arguments{
 \item{Q,K,V}{One sequence\'s matrices.}

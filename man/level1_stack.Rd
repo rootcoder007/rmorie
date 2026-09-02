@@ -5,7 +5,7 @@
 \alias{level1_stack}
 \title{level1_stack}
 \usage{
-level1_stack(preds, y, cv = "kfold", k = 5, lam = NULL)
+level1_stack(preds, y, cv = "kfold", k = 5, lam = NULL) 
 }
 \arguments{
 \item{preds}{A vector; its length is taken.}

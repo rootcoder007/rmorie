@@ -137,7 +137,7 @@ NULL
 #'   licensed under the Open Government Licence -- Toronto.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_to_neighbourhoods("158", offline = TRUE)
-#' head(df\[, c("AREA_SHORT_CODE", "AREA_NAME")\])
+#' head(df[, c("AREA_SHORT_CODE", "AREA_NAME")])
 #' @export
 morie_to_neighbourhoods <- function(version = c("158", "140", "nia"),
                                      offline = TRUE,

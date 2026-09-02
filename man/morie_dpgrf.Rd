@@ -5,7 +5,7 @@
 \alias{morie_dpgrf}
 \title{Areal difference boundaries by Dirichlet-process clustering}
 \usage{
-morie_dpgrf(W, label_draws, threshold = 0.5)
+morie_dpgrf(W, label_draws, threshold = 0.5) 
 }
 \arguments{
 \item{W}{Square symmetric adjacency matrix (n x n).}

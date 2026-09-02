@@ -10,6 +10,7 @@ Crsent(p, q, base = 2)
 \item{p, q}{Non-negative vectors of the same length; each closed here.}
 
 \item{base}{Log base; 2 gives bits.}
+
 }
 \value{
 Named list with \code{estimate}, \code{entropy}, \code{kl}, \code{n}, \code{method}.

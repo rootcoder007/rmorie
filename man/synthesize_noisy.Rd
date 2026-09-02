@@ -5,7 +5,7 @@
 \alias{synthesize_noisy}
 \title{synthesize_noisy}
 \usage{
-synthesize_noisy(X, fraction = 0.1, feature_values = NULL, seed = 0)
+synthesize_noisy(X, fraction = 0.1, feature_values = NULL, seed = 0) 
 }
 \arguments{
 \item{X}{A vector; indexed elementwise.}

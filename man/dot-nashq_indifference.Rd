@@ -2,7 +2,7 @@
 % Please edit documentation in R/nashq_native.R
 \name{.nashq_indifference}
 \alias{.nashq_indifference}
-\title{Unknowns x_0..x_{k-1}, v}
+\title{Unknowns x_0..x_\{k-1\}, v}
 \usage{
 .nashq_indifference(payoff, k)
 }

@@ -5,7 +5,8 @@
 \alias{iptw_ate}
 \title{ATE by weighted regression of Y on A --------------------------}
 \usage{
-iptw_ate(y, A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, ridge = 1e-08, level = 0.95)
+iptw_ate(y, A, H, library = NULL, n_folds = 10, meta = "nnls", trim = 0.01, 
+    ridge = 1e-08, level = 0.95) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

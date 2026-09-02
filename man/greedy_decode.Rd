@@ -5,7 +5,7 @@
 \alias{greedy_decode}
 \title{greedy_decode}
 \usage{
-greedy_decode(emissions, labels)
+greedy_decode(emissions, labels) 
 }
 \arguments{
 \item{emissions}{A matrix; passed to \code{as.matrix}.}

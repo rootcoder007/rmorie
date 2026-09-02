@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R, R/rcpp_docs.R
 \name{.morie_http_get_bytes}
 \alias{.morie_http_get_bytes}
-\title{Binary-safe HTTP(S) GET via libcurl.}
+\title{Binary-safe HTTP(S) GET via libcurl}
 \usage{
 .morie_http_get_bytes(
   url,

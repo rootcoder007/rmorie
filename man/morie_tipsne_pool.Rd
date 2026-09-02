@@ -5,7 +5,7 @@
 \alias{morie_tipsne_pool}
 \title{Combine per-imputation estimates and variances by Rubin's rules}
 \usage{
-morie_tipsne_pool(ests, vars, pooling = "rubin1987", df_complete = NULL)
+morie_tipsne_pool(ests, vars, pooling = "rubin1987", df_complete = NULL) 
 }
 \arguments{
 \item{ests}{Point estimates, one per imputation.}

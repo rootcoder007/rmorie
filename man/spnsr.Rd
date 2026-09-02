@@ -2,7 +2,7 @@
 % Please edit documentation in R/spnsr.R
 \name{spnsr}
 \alias{spnsr}
-\title{Effects of nugget, sill and range on a kriging prediction.}
+\title{Effects of nugget, sill and range on a kriging prediction}
 \usage{
 spnsr(
   nugget = 0,

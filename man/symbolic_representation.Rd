@@ -5,7 +5,7 @@
 \alias{symbolic_representation}
 \title{symbolic_representation}
 \usage{
-symbolic_representation(captions, boxes)
+symbolic_representation(captions, boxes) 
 }
 \arguments{
 \item{captions}{Coerced to list by the body, with \code{as.list}.}

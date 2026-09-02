@@ -5,7 +5,7 @@
 \alias{sort_pooling}
 \title{sort_pooling}
 \usage{
-sort_pooling(features, k_keep, sort_channel = -1)
+sort_pooling(features, k_keep, sort_channel = -1) 
 }
 \arguments{
 \item{features}{A matrix; the body checks with \code{is.matrix}.}

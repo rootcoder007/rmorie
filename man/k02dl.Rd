@@ -5,7 +5,7 @@
 \alias{k02dl}
 \title{k02dl}
 \usage{
-k02dl(y, v)
+k02dl(y, v) 
 }
 \arguments{
 \item{y}{Numeric; combined arithmetically in the body.}

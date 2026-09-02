@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitprm.R
 \name{Permanova}
 \alias{Permanova}
-\title{PERMANOVA pseudo-F from a distance matrix.}
+\title{PERMANOVA pseudo-F from a distance matrix}
 \usage{
 Permanova(X, group, aitchison = TRUE)
 }
@@ -17,7 +17,7 @@ Permanova(X, group, aitchison = TRUE)
 List with F, SSA, SSW, SST, df1, df2, N, a, sizes.
 }
 \description{
-SS_T = (1/N) sum_{i<j} d_ij^2; SS_W = sum_{i<j} d_ij^2 eps_ij/n_g;
+SS_T = (1/N) sum_\{i<j\} d_ij^2; SS_W = sum_\{i<j\} d_ij^2 eps_ij/n_g;
 F = (SS_A/(a-1)) / (SS_W/(N-a)) with SS_A = SS_T - SS_W.
 }
 \examples{

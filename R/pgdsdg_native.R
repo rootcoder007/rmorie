@@ -280,6 +280,18 @@ projected_gradient <- function(f, grad, x0, project, step = NULL,
   )
 }
 
+#' Projected gradient descent
+#'
+#' Minimise \code{f} over a convex set by gradient steps followed by projection.
+#' \code{morie_pgdsdg} is the module alias of \code{projected_gradient_descent}.
+#' @param f Objective function.
+#' @param grad Its gradient.
+#' @param x0 Starting point.
+#' @param project Projection onto the feasible set.
+#' @param ... Further arguments: step size, rule, iteration and tolerance controls; see the source.
+#' @return A list with the iterate, objective value and convergence trace.
+#' @aliases morie_pgdsdg
+#' @export
 morie_pgdsdg <- projected_gradient_descent <- function(f, grad, x0, project, ...) {
   projected_gradient(f, grad, x0, project, ...)
 }

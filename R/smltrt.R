@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ratio estimate of a mean or total, using an auxiliary variable.
+#' Ratio estimate of a mean or total, using an auxiliary variable
 #'
 #' The estimator is biased; the bias is O(1/n) and is not corrected here,
 #' matching Cochran's Chapter 6 treatment.

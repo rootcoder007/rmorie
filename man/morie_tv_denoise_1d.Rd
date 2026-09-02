@@ -5,7 +5,7 @@
 \alias{morie_tv_denoise_1d}
 \title{morie_tv_denoise_1d}
 \usage{
-morie_tv_denoise_1d(signal, lam = 1, max_iter = 1000, tol = 1e-12, theta = 1)
+morie_tv_denoise_1d(signal, lam = 1, max_iter = 1000, tol = 1e-12, theta = 1) 
 }
 \arguments{
 \item{signal}{Coerced to numeric by the body, with \code{as.numeric}.}

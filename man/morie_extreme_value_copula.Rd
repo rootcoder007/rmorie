@@ -12,6 +12,7 @@ morie_extreme_value_copula(u, v, A = "gumbel", theta = 2)
 \item{A}{"gumbel", "galambos", "independence", or a function.}
 
 \item{theta}{parameter for the built-in families.}
+
 }
 \value{
 list: cdf, pickands_at_half, valid_pickands, A, theta, method.

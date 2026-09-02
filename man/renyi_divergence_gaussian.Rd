@@ -5,7 +5,7 @@
 \alias{renyi_divergence_gaussian}
 \title{Renyi divergence D_alpha between two Gaussians of equal variance}
 \usage{
-renyi_divergence_gaussian(mu0, mu1, sigma, alpha)
+renyi_divergence_gaussian(mu0, mu1, sigma, alpha) 
 }
 \arguments{
 \item{mu0}{Mean of the first Gaussian.}

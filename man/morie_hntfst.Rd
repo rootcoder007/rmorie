@@ -5,7 +5,9 @@
 \alias{morie_hntfst}
 \title{morie_hntfst}
 \usage{
-morie_hntfst(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, at = NULL, level = 0.95, correction = TRUE)
+morie_hntfst(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, 
+    min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, 
+    at = NULL, level = 0.95, correction = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{honest_forest}.}

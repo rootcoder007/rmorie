@@ -12,6 +12,7 @@
 \item{parm, level}{Standard \code{\link[stats:confint]{stats::confint()}} arguments.}
 
 \item{...}{Unused.}
+
 }
 \value{
 Coefficient confidence intervals.

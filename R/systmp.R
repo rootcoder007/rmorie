@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Every k-th unit: all k systematic samples and the exact variance.
+#' Every k-th unit: all k systematic samples and the exact variance
 #'
 #' A systematic sample has only k possible outcomes, so its design
 #' variance is exact rather than estimated. \code{deff} is its ratio to

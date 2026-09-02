@@ -2,18 +2,18 @@
 % Please edit documentation in R/clocen.R
 \name{Clocent}
 \alias{Clocent}
-\title{Closeness centrality.}
+\title{Closeness centrality}
 \usage{
 Clocent(A)
 }
 \arguments{
-\item{A}{Adjacency matrix; non-zero means an edge.}
+\item{A}{See Usage.}
 }
 \value{
 List with \code{closeness}, \code{reachable}, \code{total_distance}, \code{n}.
 }
 \description{
-Formula: C_C(v) = (r - 1) / sum_{u reachable} d(v, u)
+Formula: C_C(v) = (r - 1) / sum_\{u reachable\} d(v, u)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

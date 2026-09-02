@@ -5,7 +5,7 @@
 \alias{morie_conditional_prior_uniform}
 \title{morie_conditional_prior_uniform}
 \usage{
-morie_conditional_prior_uniform(theta_set, n_grid = 401L)
+morie_conditional_prior_uniform(theta_set, n_grid = 401L) 
 }
 \arguments{
 \item{theta_set}{A list; the body reads \code{$lower}, \code{$upper} from it.}

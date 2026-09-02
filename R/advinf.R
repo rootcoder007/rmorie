@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mean-field ADVI evidence lower bound.
+#' Mean-field ADVI evidence lower bound
 #'
 #' L(mu, omega) = mean_s log p(x, mu + exp(omega) eta_s)
 #'                + sum_k omega_k + (K/2)(1 + log 2 pi).

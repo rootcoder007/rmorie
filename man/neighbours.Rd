@@ -5,7 +5,7 @@
 \alias{neighbours}
 \title{neighbours}
 \usage{
-neighbours(order, seasonal_order, constant, s)
+neighbours(order, seasonal_order, constant, s) 
 }
 \arguments{
 \item{order}{A vector; indexed elementwise.}

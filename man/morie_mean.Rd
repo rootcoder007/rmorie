@@ -6,6 +6,9 @@
 \usage{
 morie_mean(x)
 }
+\arguments{
+\item{x}{See Usage.}
+}
 \value{
 A numeric scalar: the mean of \code{x}.
 }

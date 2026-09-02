@@ -6,7 +6,7 @@
 # imported from other packages (SPSS/Stata/SAS) invite
 # `as.numeric(factor)` level-INDEX coercion, positional recodes
 # reassign groups wholesale, and alphabetical releveling silently
-# changes the reference category — any of which can relabel entire
+# changes the reference category -- any of which can relabel entire
 # demographic groups and multiply reported odds ratios severalfold
 # without a single warning. Published analyses have carried exactly
 # this class of error for years before correction.
@@ -31,7 +31,7 @@
 #' @param keep Optional character vector of labels allowed to pass
 #'   through unchanged (everything else must be mapped).
 #' @return A character vector (with an \code{morie_recode_audit}
-#'   attribute recording the applied mapping) — convert with
+#'   attribute recording the applied mapping) -- convert with
 #'   \code{\link{morie_safe_factor}} to fix levels explicitly.
 #' @examples
 #' x <- c("W", "B", "O", "W")
@@ -78,7 +78,7 @@ morie_safe_recode <- function(x, mapping, keep = character()) {
 #'
 #' @param x Character (or factor) vector.
 #' @param levels Complete character vector of allowed levels, in the
-#'   intended order — the FIRST is the reference category.
+#'   intended order -- the FIRST is the reference category.
 #' @param reference Optional; assert which level is the reference
 #'   (must equal \code{levels\[1\]}).
 #' @return A factor with exactly the declared levels.
@@ -110,7 +110,7 @@ morie_safe_factor <- function(x, levels, reference = NULL) {
 #'
 #' One call after every import, before any model. Reports, per
 #' categorical column: storage, levels in order, counts, the
-#' reference level R would use, and flags for the known hazards —
+#' reference level R would use, and flags for the known hazards --
 #' numeric-looking labels (the signature of codes imported from
 #' SPSS/Stata without their value labels), still-labelled foreign
 #' columns (\code{haven_labelled}), case-variant duplicate labels,

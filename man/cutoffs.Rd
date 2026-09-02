@@ -5,7 +5,7 @@
 \alias{cutoffs}
 \title{cutoffs}
 \usage{
-cutoffs(N, step = 10)
+cutoffs(N, step = 10) 
 }
 \arguments{
 \item{N}{Coerced to integer by the body, with \code{as.integer}.}

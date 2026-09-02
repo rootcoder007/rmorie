@@ -2,7 +2,7 @@
 % Please edit documentation in R/esatic.R
 \name{Eapinfo}
 \alias{Eapinfo}
-\title{EAP ability estimate with its posterior sd and Fisher information.}
+\title{EAP ability estimate with its posterior sd and Fisher information}
 \usage{
 Eapinfo(
   items,
@@ -27,6 +27,8 @@ Eapinfo(
 \item{lower, upper}{Quadrature range.}
 
 \item{nqp}{Number of quadrature points.}
+
+
 }
 \value{
 List with \code{estimate}, \code{se}, \code{information},

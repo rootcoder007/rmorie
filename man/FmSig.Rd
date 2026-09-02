@@ -5,7 +5,7 @@
 \alias{FmSig}
 \title{Rangayyan names FM as a signal model but prints no equation for it,}
 \usage{
-FmSig(m, fc, fs, kf = 1, amplitude = 1)
+FmSig(m, fc, fs, kf = 1, amplitude = 1) 
 }
 \arguments{
 \item{m}{Coerced to numeric by the body, with \code{as.numeric}.}

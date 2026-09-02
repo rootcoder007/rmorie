@@ -5,7 +5,7 @@
 \alias{morie_vidgen_cheatsheet}
 \title{morie_vidgen_cheatsheet}
 \usage{
-morie_vidgen_cheatsheet()
+morie_vidgen_cheatsheet() 
 }
 \description{
 A step of the vidgen_native implementation. No other function in the package calls it. See the file header for the source the module follows.

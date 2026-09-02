@@ -31,6 +31,8 @@ expected.}
 \item{cluster}{Optional cluster ID column for CR1 standard errors.}
 
 \item{alpha}{Significance level for confidence intervals (default 0.05).}
+
+
 }
 \value{
 A data frame, one row per placebo group.

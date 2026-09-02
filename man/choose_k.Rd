@@ -5,7 +5,7 @@
 \alias{choose_k}
 \title{choose_k}
 \usage{
-choose_k(graph_sizes, coverage = 0.6)
+choose_k(graph_sizes, coverage = 0.6) 
 }
 \arguments{
 \item{graph_sizes}{Coerced to integer by the body, with \code{as.integer}.}

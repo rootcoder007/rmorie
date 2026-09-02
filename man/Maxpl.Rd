@@ -30,7 +30,7 @@ is 5, "the max of 3, 4, 4, and 5", and the last is 6, "a max of 3, 2, 5,
 and 6".  Those three printed windows are the anchor.
 }
 \details{
-This is the one-dimensional case, y\link[fixest:i]{i} = max(x[i\emph{S : i}S+P]).
+This is the one-dimensional case, y[i] = max(x[i\emph{S : i}S+P]).
 }
 \examples{
 Maxpl(c(3, 3, 7, 4), 4, 1)$estimate

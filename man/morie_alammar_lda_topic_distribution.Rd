@@ -5,7 +5,8 @@
 \alias{morie_alammar_lda_topic_distribution}
 \title{LDA by collapsed Gibbs on the shared LCG (Griffiths and Steyvers}
 \usage{
-morie_alammar_lda_topic_distribution(documents, n_topics, alpha = 0.1, beta = 0.01, n_iter = 200, seed = 1)
+morie_alammar_lda_topic_distribution(documents, n_topics, alpha = 0.1, beta = 0.01, n_iter = 200, 
+    seed = 1) 
 }
 \arguments{
 \item{documents}{List of token vectors.}

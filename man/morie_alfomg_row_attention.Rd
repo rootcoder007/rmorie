@@ -5,7 +5,7 @@
 \alias{morie_alfomg_row_attention}
 \title{Pair to MSA: row-wise attention with a pair bias}
 \usage{
-morie_alfomg_row_attention(msa, bias, scale = NULL, gate = NULL)
+morie_alfomg_row_attention(msa, bias, scale = NULL, gate = NULL) 
 }
 \arguments{
 \item{msa}{The alignment.}

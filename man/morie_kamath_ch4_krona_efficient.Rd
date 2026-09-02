@@ -10,6 +10,7 @@ morie_kamath_ch4_krona_efficient(A, B, x)
 \item{A, B}{Factors.}
 
 \item{x}{Vector of length ncol(A) * ncol(B).}
+
 }
 \value{
 List with \code{y}, \code{folded_shape}, \code{products_avoided}.

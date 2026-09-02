@@ -160,7 +160,7 @@ morie_pace_local_linear_2d <- function(s, t, z, at_s, at_t, bw,
 #'   \code{bw_cov}, \code{kernel}, \code{shrink}, \code{n_obs} and
 #'   \code{method}.
 #' @references
-#'   Yao, F., Müller, H.-G. and Wang, J.-L. (2005) "Functional data
+#'   Yao, F., Muller, H.-G. and Wang, J.-L. (2005) "Functional data
 #'     analysis for sparse longitudinal data." Journal of the American
 #'     Statistical Association 100(470), 577-590.
 #'     doi:10.1198/016214504000001745.
@@ -310,6 +310,6 @@ morie_pace <- function(Y, argvals, K = 2L, n_grid = 21L, bw_mu = NULL,
     shrink = shrink,
     n_obs = length(pooled_t),
     method = paste("PACE sparse FPCA with conditional-expectation",
-                   "scores (Yao, Müller & Wang 2005)")
+                   "scores (Yao, M\u00fcller & Wang 2005)")
   )
 }

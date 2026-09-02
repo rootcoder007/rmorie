@@ -42,7 +42,7 @@ reverse percent.}
 
 Empirical distribution on the included OT data:
 \itemize{
-\item 123 1:1 rows (78\\% of 140 hoods)            -- both percents == 100
+\item 123 1:1 rows (78\% of 140 hoods)            -- both percents == 100
 \item 34 split rows (16 historical hoods)         -- pct_158_in_140 == 100
 \item 1 merge                                     -- both percents == 100
 \item 1 split+merge                               -- one sliver < 100

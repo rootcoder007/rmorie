@@ -5,10 +5,14 @@
 \alias{Lappinv}
 \title{Graph Laplacian pseudoinverse (Klein & Randic 1993)}
 \usage{
-Lappinv(A, tol = 1e-09)
+Lappinv(A, tol = 1e-09) 
 }
 \description{
 Graph Laplacian pseudoinverse (Klein & Randic 1993)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 A list with \code{Lplus}, \code{eigenvalues}, \code{rank}, \code{n}.

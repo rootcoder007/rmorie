@@ -5,10 +5,15 @@
 \alias{Xlearn}
 \title{X-learner heterogeneous treatment effect (Kunzel et al. 2019)}
 \usage{
-Xlearn(tau1, tau0, g)
+Xlearn(tau1, tau0, g) 
 }
 \description{
 X-learner heterogeneous treatment effect (Kunzel et al. 2019)
+}
+\arguments{
+\item{tau1}{Argument \code{tau1}; see Usage.}
+\item{tau0}{Argument \code{tau0}; see Usage.}
+\item{g}{Argument \code{g}; see Usage.}
 }
 \value{
 A list with \code{tau}, \code{ate}, \code{se}, \code{n}.

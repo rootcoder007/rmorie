@@ -5,7 +5,7 @@
 \alias{IcaClean}
 \title{IcaClean}
 \usage{
-IcaClean(X, ncomp = NULL, kurtosis = 3, drop = NULL, maxiter = 200, seed = 1)
+IcaClean(X, ncomp = NULL, kurtosis = 3, drop = NULL, maxiter = 200, seed = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{IcaFix}.}

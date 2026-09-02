@@ -20,6 +20,7 @@ morie_geron_layer_norm_rnn(
 \item{eps}{Variance floor.}
 
 \item{activation}{tanh/relu/none.}
+
 }
 \value{
 List with h, normalized, mu, var, estimate, n, method.

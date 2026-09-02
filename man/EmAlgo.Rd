@@ -5,7 +5,7 @@
 \alias{EmAlgo}
 \title{\\' Run EM for a fixed number of steps and audit its monotonicity}
 \usage{
-EmAlgo(log_lik, Q, x0, steps)
+EmAlgo(log_lik, Q, x0, steps) 
 }
 \arguments{
 \item{steps}{A count; the body uses it as \code{seq_len(...)}.}

@@ -5,7 +5,7 @@
 \alias{morie_sctraj_lineages_from_tree}
 \title{Every path from root to a leaf, in order}
 \usage{
-morie_sctraj_lineages_from_tree(tree, root)
+morie_sctraj_lineages_from_tree(tree, root) 
 }
 \arguments{
 \item{tree}{A list; the body reads \code{$adjacency} from it.}

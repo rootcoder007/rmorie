@@ -5,7 +5,7 @@
 \alias{alfLin}
 \title{Dense projection of a vector; W is (n_out x n_in)}
 \usage{
-alfLin(v, W, b = NULL)
+alfLin(v, W, b = NULL) 
 }
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}

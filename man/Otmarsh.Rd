@@ -12,6 +12,7 @@ Otmarsh(a, b, C, delta)
 \item{C}{Ground cost, n by m.}
 
 \item{delta}{Mass removed from the source, in total or per bin.}
+
 }
 \value{
 List with \code{T}, \code{cost}, \code{a_shift},

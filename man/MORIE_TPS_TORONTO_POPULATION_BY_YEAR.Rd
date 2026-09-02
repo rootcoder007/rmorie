@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_csi.R
 \name{MORIE_TPS_TORONTO_POPULATION_BY_YEAR}
 \alias{MORIE_TPS_TORONTO_POPULATION_BY_YEAR}
-\title{Toronto reference population by fiscal year (StatsCan 17-10-0009-01).}
+\title{Toronto reference population by fiscal year (StatsCan 17-10-0009-01)}
 \usage{
 MORIE_TPS_TORONTO_POPULATION_BY_YEAR()
 }
@@ -10,7 +10,7 @@ MORIE_TPS_TORONTO_POPULATION_BY_YEAR()
 Named integer vector (year-as-string -> population).
 }
 \description{
-Toronto reference population by fiscal year (StatsCan 17-10-0009-01).
+Toronto reference population by fiscal year (StatsCan 17-10-0009-01)
 }
 \examples{
 MORIE_TPS_TORONTO_POPULATION_BY_YEAR

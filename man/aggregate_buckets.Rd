@@ -5,7 +5,7 @@
 \alias{aggregate_buckets}
 \title{Sum a series into buckets of \code{m} periods}
 \usage{
-aggregate_buckets(y, m, overlapping = FALSE)
+aggregate_buckets(y, m, overlapping = FALSE) 
 }
 \arguments{
 \item{y}{Numeric series.}

@@ -29,6 +29,7 @@ morie_identify_estimate_refute(
 \item{seed}{Random seed.}
 
 \item{alpha}{Two-sided level.}
+
 }
 \value{
 A list with \code{estimate}, \code{se}, \code{identified}, \code{adjustment_set},

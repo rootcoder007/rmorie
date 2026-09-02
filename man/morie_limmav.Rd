@@ -5,7 +5,8 @@
 \alias{morie_limmav}
 \title{morie_limmav}
 \usage{
-morie_limmav(counts, design, contrast = NULL, lib_sizes = NULL, span = 0.5, weights = TRUE, moderate = TRUE)
+morie_limmav(counts, design, contrast = NULL, lib_sizes = NULL, span = 0.5, 
+    weights = TRUE, moderate = TRUE) 
 }
 \arguments{
 \item{counts}{Passed to \code{.limmav_voom_weights}.}

@@ -5,7 +5,7 @@
 \alias{IirDiff}
 \title{IirDiff}
 \usage{
-IirDiff(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL, n = NULL)
+IirDiff(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL, n = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{CCepSum}
 \title{Eq (4.66): y_hat = x_hat + h_hat.  The residual is not exactly zero}
 \usage{
-CCepSum(x, h)
+CCepSum(x, h) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_karpV_evaluate}
 \title{Evaluate an expression tree}
 \usage{
-morie_karpV_evaluate(node, env)
+morie_karpV_evaluate(node, env) 
 }
 \arguments{
 \item{node}{the tree.}

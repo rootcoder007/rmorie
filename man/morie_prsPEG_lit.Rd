@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_lit}
 \title{morie_prsPEG_lit}
 \usage{
-morie_prsPEG_lit(s)
+morie_prsPEG_lit(s) 
 }
 \arguments{
 \item{s}{A vector; its length is taken.}

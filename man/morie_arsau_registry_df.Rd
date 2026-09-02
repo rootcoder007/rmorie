@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_registry_df}
 \alias{morie_arsau_registry_df}
-\title{ARSAU registry rendered as a tidy \code{data.frame}.}
+\title{ARSAU registry rendered as a tidy \code{data.frame}}
 \usage{
 morie_arsau_registry_df(language = "en")
 }

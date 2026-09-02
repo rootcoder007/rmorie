@@ -5,7 +5,7 @@
 \alias{CorrConv}
 \title{Correlation IS convolution with one sequence reversed}
 \usage{
-CorrConv(x, y)
+CorrConv(x, y) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

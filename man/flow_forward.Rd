@@ -5,10 +5,15 @@
 \alias{flow_forward}
 \title{Push x through every MAF layer; returns (u, total_alpha)}
 \usage{
-flow_forward(flow, x, t)
+flow_forward(flow, x, t) 
 }
 \description{
 Push x through every MAF layer; returns (u, total_alpha)
+}
+\arguments{
+\item{flow}{Argument \code{flow}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
+\item{t}{Argument \code{t}; see Usage.}
 }
 \value{
 A list with \code{u}, \code{total}.

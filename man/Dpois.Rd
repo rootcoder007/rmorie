@@ -5,7 +5,7 @@
 \alias{Dpois}
 \title{Dpois}
 \usage{
-Dpois(x, lambda, log = FALSE)
+Dpois(x, lambda, log = FALSE) 
 }
 \arguments{
 \item{x}{Passed to \code{round}.}

@@ -5,7 +5,7 @@
 \alias{morie_kamath_rtd_loss}
 \title{morie_kamath_rtd_loss}
 \usage{
-morie_kamath_rtd_loss(xhat, d)
+morie_kamath_rtd_loss(xhat, d) 
 }
 \arguments{
 \item{xhat}{Per-token probability of ORIGINAL.}

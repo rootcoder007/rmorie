@@ -5,7 +5,7 @@
 \alias{top1_loss}
 \title{TOP1 ranking loss}
 \usage{
-top1_loss(r_target, r_negatives, regularize = TRUE)
+top1_loss(r_target, r_negatives, regularize = TRUE) 
 }
 \arguments{
 \item{r_target}{Target score.}

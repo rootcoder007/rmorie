@@ -5,7 +5,7 @@
 \alias{strec_stamp_scores}
 \title{strec_stamp_scores}
 \usage{
-strec_stamp_scores(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL, attention = NULL)
+strec_stamp_scores(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL, attention = NULL) 
 }
 \arguments{
 \item{embeddings}{Passed to \code{.strec_as_rows}.}

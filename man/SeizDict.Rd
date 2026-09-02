@@ -5,7 +5,7 @@
 \alias{SeizDict}
 \title{SeizDict}
 \usage{
-SeizDict(signals, labels, iterations = 7, atoms = NULL, test = NULL)
+SeizDict(signals, labels, iterations = 7, atoms = NULL, test = NULL) 
 }
 \arguments{
 \item{signals}{Passed to \code{.morie_bx_mat}.}

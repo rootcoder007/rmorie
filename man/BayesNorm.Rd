@@ -5,7 +5,7 @@
 \alias{BayesNorm}
 \title{Eq (10.72).  The book takes logarithms at eq (10.71) because the}
 \usage{
-BayesNorm(x, means, covs, priors = NULL, full = FALSE)
+BayesNorm(x, means, covs, priors = NULL, full = FALSE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

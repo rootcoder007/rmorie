@@ -5,7 +5,7 @@
 \alias{morie_wrd2v_training_complexity}
 \title{morie_wrd2v_training_complexity}
 \usage{
-morie_wrd2v_training_complexity(architecture, D, V, N = NULL, C = NULL, hierarchical = TRUE)
+morie_wrd2v_training_complexity(architecture, D, V, N = NULL, C = NULL, hierarchical = TRUE) 
 }
 \arguments{
 \item{architecture}{Compared against \code{"cbow"}.}

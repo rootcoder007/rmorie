@@ -20,6 +20,7 @@ morie_geron_knowledge_distillation_loss(
 \item{alpha}{Soft/hard mix in [0, 1].}
 
 \item{T}{Positive temperature.}
+
 }
 \value{
 List with \code{loss}, \code{ce_hard}, \code{kl_soft},

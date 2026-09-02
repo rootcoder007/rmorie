@@ -12,6 +12,8 @@ morie_tmle_sensitivity(y, d, x, gamma_grid = NULL, trunc = 0.01)
 \item{gamma_grid}{Odds-ratio bounds (all >= 1).}
 
 \item{trunc}{Propensity truncation.}
+
+
 }
 \value{
 List with \code{gamma}, \code{lower}, \code{upper}, \code{ate}, \code{gamma_critical},

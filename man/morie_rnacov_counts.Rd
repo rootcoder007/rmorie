@@ -5,7 +5,7 @@
 \alias{morie_rnacov_counts}
 \title{Joint and marginal letter counts for two columns, gaps dropped}
 \usage{
-morie_rnacov_counts(alignment, i, j)
+morie_rnacov_counts(alignment, i, j) 
 }
 \arguments{
 \item{alignment}{A character vector of aligned sequences.}

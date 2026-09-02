@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_sv_dl_structural_variant}
 \alias{morie_sv_dl_structural_variant}
+\alias{morie_sv_dl}
 \title{morie_sv_dl_structural_variant}
 \usage{
-morie_sv_dl_structural_variant(pairs, reference = NULL, split_reads = NULL, orientation = NULL, median = NULL, sd = NULL, n_sd = 3, min_support = 2, k = 7, k_min = 3, min_split_support = 2, max_length_diff = 0.1, window = NULL, spread = "mad")
+morie_sv_dl_structural_variant(pairs, reference = NULL, split_reads = NULL, orientation = NULL, 
+    median = NULL, sd = NULL, n_sd = 3, min_support = 2, k = 7, k_min = 3, 
+    min_split_support = 2, max_length_diff = 0.1, window = NULL, spread = "mad") 
+
+morie_sv_dl(pairs, reference = NULL, split_reads = NULL, orientation = NULL, 
+    median = NULL, sd = NULL, n_sd = 3, min_support = 2, k = 7, k_min = 3, 
+    min_split_support = 2, max_length_diff = 0.1, window = NULL, spread = "mad") 
 }
 \arguments{
 \item{pairs}{Passed to \code{morie_sv_dl_paired_end_calls}.}

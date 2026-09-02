@@ -5,7 +5,7 @@
 \alias{Msc}
 \title{The square of eq (4.32).  The two forms are NOT interchangeable:}
 \usage{
-Msc(x, y, fs = 1, nperseg = NULL, noverlap = NULL)
+Msc(x, y, fs = 1, nperseg = NULL, noverlap = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{Cohere}.}

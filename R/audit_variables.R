@@ -121,7 +121,7 @@ NULL
 # Public callables
 # ---------------------------------------------------------------------------
 
-#' Audit every OTIS variable.
+#' Audit every OTIS variable
 #'
 #' For each OTIS dataset, this function expects a list of column
 #' specifications.  By default it constructs the specs from the
@@ -169,7 +169,7 @@ morie_audit_otis_variables <- function(dataset_specs = NULL) {
 }
 
 
-#' Audit every ARSAU variable.
+#' Audit every ARSAU variable
 #'
 #' @param dataset_specs See \code{\link{morie_audit_otis_variables}}.
 #' @return A list with class \code{morie_audit_result}.
@@ -201,7 +201,7 @@ morie_audit_arsau_variables <- function(dataset_specs = NULL) {
 }
 
 
-#' Audit both OTIS and ARSAU.
+#' Audit both OTIS and ARSAU
 #'
 #' @param otis_specs,arsau_specs See per-domain functions.
 #' @return Named list with \code{$otis} and \code{$arsau} audit results.
@@ -221,7 +221,7 @@ morie_audit_all_variables <- function(otis_specs = NULL,
 }
 
 
-#' Build a list of column specs from a parsed CSV header.
+#' Build a list of column specs from a parsed CSV header
 #'
 #' Convenience helper: given a data.frame just-loaded by
 #' \code{morie_arsau_load_*()}, returns the
@@ -256,7 +256,7 @@ morie_specs_from_df <- function(df) {
 }
 
 
-#' Write a Markdown audit report.
+#' Write a Markdown audit report
 #'
 #' @param out_path Path to write to.
 #' @param audit_result A \code{morie_audit_result} or list of them.
@@ -329,7 +329,7 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
 }
 
 
-#' Print method for audit results.
+#' Print method for audit results
 #' @param x A \code{morie_audit_result}.
 #' @param ... Unused.
 #' @return \code{x}, invisibly.

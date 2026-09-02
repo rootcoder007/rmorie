@@ -6,6 +6,11 @@
 #' generated stub for module ldiff described that same check, so this is
 #' an alias.
 #'
+#' @param X See Usage.
+#' @param quasi_ids See Usage.
+#' @param sensitive See Usage.
+#' @param l See Usage.
+#' @param c See Usage.
 #' @references Machanavajjhala, A., Kifer, D., Gehrke, J., and
 #'   Venkitasubramaniam, M. (2007). l-diversity: privacy beyond
 #'   k-anonymity. ACM Transactions on Knowledge Discovery from Data 1(1),

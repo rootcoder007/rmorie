@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' MuZero world model: representation plus dynamics rollout.
+#' MuZero world model: representation plus dynamics rollout
 #'
-#' s^0 = h(o_1..o_t); r^k, s^k = g(s^{k-1}, a^k) for k = 1..K.
+#' s^0 = h(o_1..o_t); r^k, s^k = g(s^\{k-1\}, a^k) for k = 1..K.
 #'
 #' @param observation Observation history passed to representation.
 #' @param actions Actions a^1..a^K.

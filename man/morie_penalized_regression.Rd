@@ -23,6 +23,7 @@ morie_penalized_regression(
 \item{lam}{Penalty strength.}
 
 \item{max_iter, tol}{Convergence controls.}
+
 }
 \value{
 list(estimate, beta, intercept, se, alpha, lam, n_iter, n, p, method).

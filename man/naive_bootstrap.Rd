@@ -5,7 +5,7 @@
 \alias{naive_bootstrap}
 \title{Compat with the Python arm: expose the three entry points}
 \usage{
-naive_bootstrap(data, estimator, B = 200L, seed = 0L)
+naive_bootstrap(data, estimator, B = 200L, seed = 0L) 
 }
 \arguments{
 \item{data}{Passed to \code{morie_tlboot}.}

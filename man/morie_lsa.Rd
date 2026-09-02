@@ -5,7 +5,7 @@
 \alias{morie_lsa}
 \title{morie_lsa}
 \usage{
-morie_lsa(X, k_dim = NULL, how = "log_entropy", query = NULL, top_k = 5L)
+morie_lsa(X, k_dim = NULL, how = "log_entropy", query = NULL, top_k = 5L) 
 }
 \arguments{
 \item{X}{Passed to \code{lsa_decompose}.}

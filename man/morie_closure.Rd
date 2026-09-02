@@ -5,7 +5,7 @@
 \alias{morie_closure}
 \title{morie_closure}
 \usage{
-morie_closure(items, ag, first, nts, k = 1)
+morie_closure(items, ag, first, nts, k = 1) 
 }
 \arguments{
 \item{items}{Passed to \code{.prsLR_closure}.}

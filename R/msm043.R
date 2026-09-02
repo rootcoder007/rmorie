@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Non-informative prior for the linear model.
+#' Non-informative prior for the linear model
 #'
 #' Formula: f(beta, sigma2) proportional to sigma^-2 (eq. 6.2), flat in beta
 #' and in log(sigma). It is improper because it does not integrate to one, yet

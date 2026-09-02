@@ -5,7 +5,8 @@
 \alias{morie_geron_ncsn}
 \title{Noise conditional score network: affine score models per noise level (Geron Ch 18, hmncsn)}
 \usage{
-morie_geron_ncsn(X, sigmas = 1, epochs = 400, lr = 0.5, n_noise = 32, seed = 0, n_samples = 0, langevin_steps = 20, step_eps = 0.05)
+morie_geron_ncsn(X, sigmas = 1, epochs = 400, lr = 0.5, n_noise = 32, seed = 0, 
+    n_samples = 0, langevin_steps = 20, step_eps = 0.05) 
 }
 \arguments{
 \item{X}{Training data (m, d).}

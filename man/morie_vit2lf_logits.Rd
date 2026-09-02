@@ -5,7 +5,7 @@
 \alias{morie_vit2lf_logits}
 \title{The pre-softmax attention scores, one row per query}
 \usage{
-morie_vit2lf_logits(q, k, mode = "dot", tau = 1, bias = NULL, n = NULL, tau_floor = .VIT2LF_TAU_FLOOR)
+morie_vit2lf_logits(q, k, mode = "dot", tau = 1, bias = NULL, n = NULL, tau_floor = .VIT2LF_TAU_FLOOR) 
 }
 \arguments{
 \item{q}{Query matrix, one row per query position.}

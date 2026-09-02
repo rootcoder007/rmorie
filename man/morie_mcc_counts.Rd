@@ -9,6 +9,9 @@ morie_mcc_counts(tp, tn, fp, fn)
 \arguments{
 \item{tp, tn, fp, fn}{Non-negative integer counts of true positives,
 true negatives, false positives and false negatives.}
+
+
+
 }
 \value{
 Named list with \code{value}, \code{statistic} (the same

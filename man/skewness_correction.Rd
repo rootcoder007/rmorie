@@ -5,7 +5,7 @@
 \alias{skewness_correction}
 \title{skewness_correction}
 \usage{
-skewness_correction(third_derivative, precision)
+skewness_correction(third_derivative, precision) 
 }
 \arguments{
 \item{third_derivative}{Coerced to numeric by the body, with \code{as.numeric}.}

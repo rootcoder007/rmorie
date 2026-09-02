@@ -4,10 +4,13 @@
 \alias{morie_secarg_parameter_advice}
 \title{Argon2: a memory-hard password hash built on BLAKE2b}
 \usage{
-morie_secarg_parameter_advice(profile = "first")
+morie_secarg_parameter_advice(profile = "first") 
 }
 \description{
 Argon2: a memory-hard password hash built on BLAKE2b. Sources: Biryukov, A., Dinu, D., Khovratovich, D. & Josefsson, S. Generation of Memory-Hard Functions for Password Hashing and Other Applications", 2016 IEEE EuroS&P, 292-302, Native implementation mirroring morie.fn.secarg exactly: the same prehash H_0 over every parameter, the same block init from H_0, the same J_1/J_2 reference indices and the same G (rows then columns) under BLAKE2b.
+}
+\arguments{
+\item{profile}{Argument \code{profile}; see Usage.}
 }
 \value{
 A list with components \code{first}, \code{variant}, \code{memory}, \code{passes}, \code{parallelism}, \code{tag_length}, \code{salt_bytes}, \code{note}, \code{t}, \code{p}, \code{second}.

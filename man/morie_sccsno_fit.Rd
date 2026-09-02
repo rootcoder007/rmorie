@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_sccsno_fit}
 \alias{morie_sccsno_fit}
+\alias{morie_sccsno}
 \title{morie_sccsno_fit}
 \usage{
-morie_sccsno_fit(cases, risk_periods, age_breaks = c(), iters = 100, tol = 1e-10, ridge = 1e-10)
+morie_sccsno_fit(cases, risk_periods, age_breaks = c(), iters = 100, tol = 1e-10, 
+    ridge = 1e-10) 
+
+morie_sccsno(cases, risk_periods, age_breaks = c(), iters = 100, tol = 1e-10, 
+    ridge = 1e-10) 
 }
 \arguments{
 \item{cases}{See Usage.}

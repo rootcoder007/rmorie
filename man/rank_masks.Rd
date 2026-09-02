@@ -5,7 +5,7 @@
 \alias{rank_masks}
 \title{rank_masks}
 \usage{
-rank_masks(masks, predicted_iou, target = NULL)
+rank_masks(masks, predicted_iou, target = NULL) 
 }
 \arguments{
 \item{masks}{A vector; its length is taken.}

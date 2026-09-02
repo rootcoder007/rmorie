@@ -5,7 +5,7 @@
 \alias{morie_geron_precision_hm}
 \title{Precision = TP / (TP + FP) (Geron Ch 3, hmpre)}
 \usage{
-morie_geron_precision_hm(y_true, y_pred, pos_label = 1)
+morie_geron_precision_hm(y_true, y_pred, pos_label = 1) 
 }
 \arguments{
 \item{y_true,y_pred}{Labels, same length.}

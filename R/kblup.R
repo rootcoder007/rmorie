@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Kernel covariance of a replicated-line predictor.
+#' Kernel covariance of a replicated-line predictor
 #'
 #' Formula: K_* = Var(Z u) = sigma2_u * Z K Z'
 #'

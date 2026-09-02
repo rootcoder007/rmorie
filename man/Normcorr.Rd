@@ -5,10 +5,16 @@
 \alias{Normcorr}
 \title{Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422}
 \usage{
-Normcorr(x, y, rho = 0, nodes = 4001)
+Normcorr(x, y, rho = 0, nodes = 4001) 
 }
 \description{
 Fieller-Hartley-Pearson normal-scores correlation -- Sec. 11.5, p. 422
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{rho}{Argument \code{rho}; see Usage.}
+\item{nodes}{Argument \code{nodes}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{zf}, \code{mean_zf}, \code{var_zf}, \code{z}, \code{p_value}, \code{scores}, \code{n}.

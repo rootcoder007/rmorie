@@ -5,7 +5,7 @@
 \alias{PzResp}
 \title{Eqs (3.71)-(3.73): on the unit circle the magnitude is the product}
 \usage{
-PzResp(zeros, poles, omega, gain = 1)
+PzResp(zeros, poles, omega, gain = 1) 
 }
 \arguments{
 \item{zeros}{Coerced to complex by the body, with \code{as.complex}.}

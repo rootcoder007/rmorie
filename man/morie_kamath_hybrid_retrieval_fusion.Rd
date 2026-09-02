@@ -12,6 +12,7 @@ morie_kamath_hybrid_retrieval_fusion(s_dense, s_sparse, lam, normalize = FALSE)
 \item{lam}{Mixing weight in [0, 1].}
 
 \item{normalize}{Min-max the arms first.}
+
 }
 \value{
 List with \code{scores}, \code{ranking}, \code{estimate}.

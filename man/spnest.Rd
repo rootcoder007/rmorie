@@ -2,7 +2,7 @@
 % Please edit documentation in R/spnest.R
 \name{spnest}
 \alias{spnest}
-\title{Nested semivariogram: the linear model of regionalization.}
+\title{Nested semivariogram: the linear model of regionalization}
 \usage{
 spnest(h, components)
 }

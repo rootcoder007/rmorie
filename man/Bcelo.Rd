@@ -2,7 +2,7 @@
 % Please edit documentation in R/bcelO.R
 \name{Bcelo}
 \alias{Bcelo}
-\title{Binary cross-entropy (logistic) loss.}
+\title{Binary cross-entropy (logistic) loss}
 \usage{
 Bcelo(Y, P)
 }

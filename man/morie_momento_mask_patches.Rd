@@ -5,7 +5,7 @@
 \alias{morie_momento_mask_patches}
 \title{Mask named patches with a fill value}
 \usage{
-morie_momento_mask_patches(patches, mask_idx, fill = 0)
+morie_momento_mask_patches(patches, mask_idx, fill = 0) 
 }
 \arguments{
 \item{patches}{A list of numeric patches.}

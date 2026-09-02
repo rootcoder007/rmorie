@@ -18,7 +18,7 @@ List with \code{estimate}, \code{probs}, \code{n_obs},
 \code{n_mod}, \code{method}.
 }
 \description{
-x' = F_obs^{-1}(F_mod(x)) (Gudmundsson et al. 2012, Eq. 2) with
+x' = F_obs^\{-1\}(F_mod(x)) (Gudmundsson et al. 2012, Eq. 2) with
 both distributions empirical: piecewise-linear type-7-consistent
 CDF and quantile function (percentile tables + linear
 interpolation, Boe et al. 2007 procedure; beyond-range values take

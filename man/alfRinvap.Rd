@@ -5,7 +5,7 @@
 \alias{alfRinvap}
 \title{T^-1 o x, without materialising the inverse frame}
 \usage{
-alfRinvap(Tf, x)
+alfRinvap(Tf, x) 
 }
 \arguments{
 \item{Tf}{A list; the body reads \code{$R}, \code{$t} from it.}

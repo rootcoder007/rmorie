@@ -29,6 +29,7 @@ morie_adamw_step(
 \item{theta}{Current parameters, needed for the decay term.}
 
 \item{state}{List from the previous call, or \code{NULL}.}
+
 }
 \value{
 List with \code{update}, \code{state}, \code{m}, \code{v}, \code{decay}, \code{t}, \code{step_norm}.

@@ -5,7 +5,7 @@
 \alias{morie_secaead_chacha20}
 \title{XOR the data with the keystream from counter onward}
 \usage{
-morie_secaead_chacha20(key, counter, nonce, data)
+morie_secaead_chacha20(key, counter, nonce, data) 
 }
 \arguments{
 \item{key}{Passed to \code{morie_secaead_chacha20_block}.}

@@ -5,7 +5,7 @@
 \alias{project_patches}
 \title{project_patches}
 \usage{
-project_patches(patch_features, W, b = NULL)
+project_patches(patch_features, W, b = NULL) 
 }
 \arguments{
 \item{patch_features}{Iterated over elementwise, with \code{lapply}.}

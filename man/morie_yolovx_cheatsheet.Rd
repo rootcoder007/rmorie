@@ -5,7 +5,7 @@
 \alias{morie_yolovx_cheatsheet}
 \title{morie_yolovx_cheatsheet}
 \usage{
-morie_yolovx_cheatsheet()
+morie_yolovx_cheatsheet() 
 }
 \description{
 A step of the yolovx_native implementation. No other function in the package calls it. See the file header for the source the module follows.

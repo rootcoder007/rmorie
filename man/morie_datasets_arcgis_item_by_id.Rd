@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets_tps_arcgis_hub.R
 \name{morie_datasets_arcgis_item_by_id}
 \alias{morie_datasets_arcgis_item_by_id}
-\title{Generic by-id loader for any ArcGIS Online Feature Service item.}
+\title{Generic by-id loader for any ArcGIS Online Feature Service item}
 \usage{
 morie_datasets_arcgis_item_by_id(
   item_id,

@@ -14,6 +14,7 @@ Tmleext(y, D, X = NULL, external = NULL, alpha = 0.05)
 \item{external}{indicator, 1 for external units.}
 
 \item{alpha}{interval level.}
+
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, ess, n_external, psi_internal,

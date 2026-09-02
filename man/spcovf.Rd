@@ -2,7 +2,7 @@
 % Please edit documentation in R/spcovf.R
 \name{spcovf}
 \alias{spcovf}
-\title{Empirical covariance function of a second-order stationary field.}
+\title{Empirical covariance function of a second-order stationary field}
 \usage{
 spcovf(coords, z, n_bins = 15, max_dist = NULL)
 }

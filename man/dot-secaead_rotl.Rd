@@ -2,7 +2,7 @@
 % Please edit documentation in R/secaead_native.R
 \name{.secaead_rotl}
 \alias{.secaead_rotl}
-\title{Left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays}
+\title{Left-rotate a 32-bit word by n (n in \{7, 8, 12, 16\}); x*2^n stays}
 \usage{
 .secaead_rotl(x, n)
 }

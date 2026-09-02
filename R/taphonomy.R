@@ -2,7 +2,7 @@
 
 #' srr Bayesian (BS) standards
 #'
-#' rmorie's Bayesian layer is `morie_taphonomy_bhm()` — a hierarchical
+#' rmorie's Bayesian layer is `morie_taphonomy_bhm()` -- a hierarchical
 #' preservation model with a conjugate closed-form default and optional
 #' HMC/NUTS backends (`cmdstanr`, `brms`, `rstanarm`) plus the Ghosal
 #' Bayesian-nonparametric helpers. The sampling, seeding, and convergence
@@ -104,7 +104,7 @@ NULL
 #' @noRd
 .taphonomy_vars <- function() {
   list(
-    # Anthropogenic "processing" — candidate treatment(s).
+    # Anthropogenic "processing" -- candidate treatment(s).
     treatment = c(
       lime_treatment = "integer"   # 1 = interred with quicklime, 0 = not
     ),

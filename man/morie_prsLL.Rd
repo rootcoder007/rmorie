@@ -5,7 +5,7 @@
 \alias{morie_prsLL}
 \title{Entry point -----}
 \usage{
-morie_prsLL(grammar_, tokens, route = "table")
+morie_prsLL(grammar_, tokens, route = "table") 
 }
 \arguments{
 \item{grammar_}{A list; the body reads \code{$rules}, \code{$start} from it.}

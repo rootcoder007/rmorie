@@ -12,6 +12,8 @@ morie_geron_flash_attention(Q, K, V, block_size = 2, causal = FALSE)
 \item{block_size}{Tile side (>=1).}
 
 \item{causal}{Mask future keys.}
+
+
 }
 \value{
 List with \code{output}, \code{direct_output}, \code{max_abs_error}, \code{n_blocks}, \code{peak_score_memory}.

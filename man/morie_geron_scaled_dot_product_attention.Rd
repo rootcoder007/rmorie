@@ -10,6 +10,8 @@ morie_geron_scaled_dot_product_attention(Q, K, V, mask = NULL)
 \item{Q, K, V}{Query, key and value matrices.}
 
 \item{mask}{Optional logical mask, TRUE = attend.}
+
+
 }
 \value{
 List with \code{output}, \code{weights}, \code{scores}, \code{d_k}.

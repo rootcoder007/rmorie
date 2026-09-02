@@ -35,6 +35,10 @@ Ppoclip(
 \item{entropy}{per-step policy entropy.}
 
 \item{c1, c2}{value and entropy coefficients.}
+
+
+
+
 }
 \value{
 list: estimate, l_clip, l_vf, l_entropy, total, frac_clipped,

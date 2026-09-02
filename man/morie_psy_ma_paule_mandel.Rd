@@ -10,6 +10,8 @@ morie_psy_ma_paule_mandel(yi, vi, max_iter = 200L, tol = 1e-12)
 \item{yi, vi}{effects and within-study variances.}
 
 \item{max_iter, tol}{bisection controls.}
+
+
 }
 \value{
 list: tau2, tau, mu, se, ci, Q, I2, tau2_dl, at_boundary,

@@ -5,7 +5,7 @@
 \alias{starting_models}
 \title{starting_models}
 \usage{
-starting_models(d, D, s)
+starting_models(d, D, s) 
 }
 \arguments{
 \item{d}{Passed to \code{c}.}

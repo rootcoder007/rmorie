@@ -5,7 +5,8 @@
 \alias{morie_identified_set}
 \title{morie_identified_set}
 \usage{
-morie_identified_set(Y, x, beta_grid, gamma_grid, alpha_grid, beta_fixed = NULL, link = "logit", tol = 0.001)
+morie_identified_set(Y, x, beta_grid, gamma_grid, alpha_grid, beta_fixed = NULL, link = "logit", 
+    tol = 0.001) 
 }
 \arguments{
 \item{Y}{Passed to \code{morie_sequence_frequencies}.}

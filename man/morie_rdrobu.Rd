@@ -5,7 +5,7 @@
 \alias{morie_rdrobu}
 \title{morie_rdrobu}
 \usage{
-morie_rdrobu(y, x, cutoff = 0, alpha = 0.05, ...)
+morie_rdrobu(y, x, cutoff = 0, alpha = 0.05, ...) 
 }
 \arguments{
 \item{y}{Passed to \code{morie_causrddc}.}

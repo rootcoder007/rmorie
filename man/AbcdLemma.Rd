@@ -5,7 +5,7 @@
 \alias{AbcdLemma}
 \title{Eq. (3.213), the matrix inversion lemma:}
 \usage{
-AbcdLemma(A, B, C, D)
+AbcdLemma(A, B, C, D) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{as.matrix}.}

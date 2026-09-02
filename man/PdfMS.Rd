@@ -5,7 +5,7 @@
 \alias{PdfMS}
 \title{Eq (3.2): E[eta^2].  Equal to the variance only when mu = 0, so both}
 \usage{
-PdfMS(pdf = NULL, x = NULL, lower = -Inf, upper = Inf)
+PdfMS(pdf = NULL, x = NULL, lower = -Inf, upper = Inf) 
 }
 \arguments{
 \item{pdf}{Passed to \code{.morie_rg_pdfint}.}

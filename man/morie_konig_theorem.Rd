@@ -10,6 +10,7 @@ morie_konig_theorem(left_n, right_n, edges)
 \item{left_n, right_n}{Side sizes.}
 
 \item{edges}{List of (left, right) pairs, numbered from 1.}
+
 }
 \value{
 A list with \code{matching_size}, \code{cover_size}, \code{cover_is_valid},

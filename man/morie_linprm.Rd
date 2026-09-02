@@ -5,7 +5,7 @@
 \alias{morie_linprm}
 \title{morie_linprm}
 \usage{
-morie_linprm(c, A, b, tol = 1e-10, max_iter = 200)
+morie_linprm(c, A, b, tol = 1e-10, max_iter = 200) 
 }
 \arguments{
 \item{c}{Coerced to numeric by the body, with \code{as.numeric}.}

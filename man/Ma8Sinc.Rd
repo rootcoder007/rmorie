@@ -5,7 +5,7 @@
 \alias{Ma8Sinc}
 \title{Eq (3.122): the Dirichlet kernel, a real sinc-like envelope times a}
 \usage{
-Ma8Sinc(omega)
+Ma8Sinc(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

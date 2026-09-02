@@ -5,7 +5,7 @@
 \alias{Sifting}
 \title{Eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if}
 \usage{
-Sifting(x, t0, lower, upper)
+Sifting(x, t0, lower, upper) 
 }
 \arguments{
 \item{x}{A function; the body checks with \code{is.function}.}

@@ -5,7 +5,7 @@
 \alias{copying_model}
 \title{copying_model}
 \usage{
-copying_model(study_hap, reference_haps, rho = 0.001, theta = 0.01)
+copying_model(study_hap, reference_haps, rho = 0.001, theta = 0.01) 
 }
 \arguments{
 \item{study_hap}{Coerced to integer by the body, with \code{as.integer}.}

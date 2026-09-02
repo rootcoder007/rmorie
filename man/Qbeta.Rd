@@ -5,7 +5,7 @@
 \alias{Qbeta}
 \title{Qbeta}
 \usage{
-Qbeta(p, shape1, shape2)
+Qbeta(p, shape1, shape2) 
 }
 \arguments{
 \item{p}{Iterated over elementwise, with \code{vapply}.}

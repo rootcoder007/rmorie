@@ -2,7 +2,7 @@
 % Please edit documentation in R/RcppExports.R, R/rcpp_docs.R
 \name{.morie_http_curl_version}
 \alias{.morie_http_curl_version}
-\title{libcurl version string the morie C++ backend was built against.}
+\title{libcurl version string the morie C++ backend was built against}
 \usage{
 .morie_http_curl_version()
 }
@@ -12,8 +12,8 @@ Length-1 character vector.
 Length-1 character vector.
 }
 \description{
-libcurl version string the morie C++ backend was built against.
+libcurl version string the morie C++ backend was built against
 
-libcurl version string the morie C++ backend was built against.
+libcurl version string the morie C++ backend was built against
 }
 \keyword{internal}

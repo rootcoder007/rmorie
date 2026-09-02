@@ -33,6 +33,9 @@ equivalent of SQL \code{WHERE}.}
 calls share a throttled pool; tokens give per-app quotas).}
 
 \item{user_agent, timeout}{Standard request knobs.}
+
+
+
 }
 \value{
 A base R \code{data.frame}.

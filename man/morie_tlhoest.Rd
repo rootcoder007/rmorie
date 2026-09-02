@@ -5,7 +5,7 @@
 \alias{morie_tlhoest}
 \title{morie_tlhoest}
 \usage{
-morie_tlhoest(psi_plugin, D1, D2_kernel, O)
+morie_tlhoest(psi_plugin, D1, D2_kernel, O) 
 }
 \arguments{
 \item{psi_plugin}{Passed to \code{.tlhoest_first_order_expansion}.}
@@ -28,10 +28,10 @@ higher-order rather than first-order asymptotic representations, to
 provide guidelines for estimators with sound finite-sample behaviour
 that are asymptotically efficient under less restrictive conditions;
 the requirement that the second-order remainder tend to zero faster
-than n^{-1/2} for the first-order representation to be useful; and the
+than n^\{-1/2\} for the first-order representation to be useful; and the
 example that when the density of the data-generating distribution is
 directly involved in the target parameter, a density estimator
-converging faster than n^{-1/4} in a suitable norm is often required
+converging faster than n^\{-1/4\} in a suitable norm is often required
 to make that remainder negligible.
 
 Carone, M., Diaz, I. & van der Laan, M. J. (2018) "Higher-Order

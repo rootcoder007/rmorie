@@ -2,7 +2,7 @@
 % Please edit documentation in R/poispr.R
 \name{Poispred}
 \alias{Poispred}
-\title{Conjugate Poisson analysis with its negative-binomial predictive.}
+\title{Conjugate Poisson analysis with its negative-binomial predictive}
 \usage{
 Poispred(y, alpha, beta, exposure = NULL)
 }

@@ -5,7 +5,7 @@
 \alias{HomDeconv}
 \title{Section 4.7.2: DFT -> complex log -> IDFT -> lifter -> DFT -> exp ->}
 \usage{
-HomDeconv(y, cutoff, keep = "low")
+HomDeconv(y, cutoff, keep = "low") 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

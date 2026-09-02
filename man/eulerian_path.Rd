@@ -5,7 +5,7 @@
 \alias{eulerian_path}
 \title{Hierholzer\'s algorithm with the exact existence condition checked:}
 \usage{
-eulerian_path(edges, indeg, outdeg)
+eulerian_path(edges, indeg, outdeg) 
 }
 \arguments{
 \item{edges}{A vector; indexed elementwise.}

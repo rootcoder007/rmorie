@@ -5,7 +5,7 @@
 \alias{morie_plsa}
 \title{morie_plsa}
 \usage{
-morie_plsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0)
+morie_plsa(n_dw, K, iters = 100, tol = 1e-08, seed = 0) 
 }
 \arguments{
 \item{n_dw}{Passed to \code{.plsa_check}.}

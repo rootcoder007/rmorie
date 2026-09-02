@@ -37,6 +37,11 @@ morie_fauzi_gn_edgeworth_correction(
 
 \item{book}{Logical; use the book's \verb{3 e2n + e4n} instead of the primary
 source's \verb{3 e3n + e4n}.}
+
+
+
+
+
 }
 \value{
 Named list with \code{estimate}, \code{normal}, \code{correction}, \code{book}, \code{method}.

@@ -5,7 +5,7 @@
 \alias{stage_one_objectives}
 \title{stage_one_objectives}
 \usage{
-stage_one_objectives(query_out, text_out, temperature = 0.07)
+stage_one_objectives(query_out, text_out, temperature = 0.07) 
 }
 \arguments{
 \item{query_out}{A matrix; passed to \code{as.matrix}.}

@@ -5,7 +5,7 @@
 \alias{morie_cvm_statistic}
 \title{morie_cvm_statistic}
 \usage{
-morie_cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL)
+morie_cvm_statistic(m, instruments, form = "sum", n_equality = 0L, weights = NULL) 
 }
 \arguments{
 \item{m}{Passed to \code{morie_weighted_moments}.}

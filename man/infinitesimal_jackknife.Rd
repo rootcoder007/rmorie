@@ -5,7 +5,7 @@
 \alias{infinitesimal_jackknife}
 \title{infinitesimal_jackknife}
 \usage{
-infinitesimal_jackknife(preds, in_bag, n, s, correction = TRUE)
+infinitesimal_jackknife(preds, in_bag, n, s, correction = TRUE) 
 }
 \arguments{
 \item{preds}{A vector; its length is taken.}

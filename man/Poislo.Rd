@@ -2,7 +2,7 @@
 % Please edit documentation in R/poilO.R
 \name{Poislo}
 \alias{Poislo}
-\title{Poisson loss for count outcomes.}
+\title{Poisson loss for count outcomes}
 \usage{
 Poislo(Y, Yhat)
 }

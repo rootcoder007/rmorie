@@ -3,9 +3,14 @@
 % the formals.
 \name{morie_tmldyk}
 \alias{morie_tmldyk}
+\alias{morie_tmlediffkernel}
 \title{Differentially private TMLE of the ATE}
 \usage{
-morie_tmldyk(y, D, X, epsilon = 1, g_min = 0.05, seed = 0, g = NULL, Q1 = NULL, Q0 = NULL)
+morie_tmldyk(y, D, X, epsilon = 1, g_min = 0.05, seed = 0, g = NULL, Q1 = NULL, 
+    Q0 = NULL) 
+
+morie_tmlediffkernel(y, D, X, epsilon = 1, g_min = 0.05, seed = 0, g = NULL, Q1 = NULL, 
+    Q0 = NULL) 
 }
 \arguments{
 \item{y}{Outcome vector in [0,1].}

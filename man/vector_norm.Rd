@@ -5,7 +5,7 @@
 \alias{vector_norm}
 \title{vector_norm}
 \usage{
-vector_norm(v)
+vector_norm(v) 
 }
 \arguments{
 \item{v}{Passed to \code{.painn_mat}.}

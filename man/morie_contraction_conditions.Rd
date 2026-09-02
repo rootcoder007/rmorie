@@ -23,6 +23,7 @@ morie_contraction_conditions(
 \item{prior_mass, entropy}{measured quantities, when available.}
 
 \item{C}{constant in the prior-mass condition.}
+
 }
 \value{
 list: n, eps, n_eps_squared, entropy_budget,

@@ -5,7 +5,7 @@
 \alias{numerical_derivative}
 \title{numerical_derivative}
 \usage{
-numerical_derivative(psi_of_P, weights, score, h = 1e-05)
+numerical_derivative(psi_of_P, weights, score, h = 1e-05) 
 }
 \arguments{
 \item{psi_of_P}{Accepted by the signature and not used anywhere in the body.}

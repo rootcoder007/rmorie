@@ -5,7 +5,7 @@
 \alias{XCorrProc}
 \title{The ensemble expectation is estimated by a TIME average, which is}
 \usage{
-XCorrProc(x, y, lags = NULL, remove_mean = TRUE)
+XCorrProc(x, y, lags = NULL, remove_mean = TRUE) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

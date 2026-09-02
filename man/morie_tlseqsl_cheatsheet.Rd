@@ -5,7 +5,7 @@
 \alias{morie_tlseqsl_cheatsheet}
 \title{morie_tlseqsl_cheatsheet}
 \usage{
-morie_tlseqsl_cheatsheet()
+morie_tlseqsl_cheatsheet() 
 }
 \description{
 A step of the tlseqsl_native implementation. No other function in the package calls it. See the file header for the source the module follows.

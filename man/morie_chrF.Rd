@@ -5,7 +5,8 @@
 \alias{morie_chrF}
 \title{morie_chrF}
 \usage{
-morie_chrF(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, word_order = 0L)
+morie_chrF(hypothesis, reference, n_char = 6L, beta = 2, remove_whitespace = TRUE, 
+    word_order = 0L) 
 }
 \arguments{
 \item{hypothesis}{Passed to \code{chrf_score}.}

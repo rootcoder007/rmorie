@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Form the dual of a linear program and certify a pair of solutions.
+#' Form the dual of a linear program and certify a pair of solutions
 #'
 #' No linear program is SOLVED here. Duality is a certificate: a feasible
 #' primal and dual with equal objectives are optimal, and \code{gap} is

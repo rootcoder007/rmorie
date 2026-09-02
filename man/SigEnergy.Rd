@@ -5,7 +5,7 @@
 \alias{SigEnergy}
 \title{Eq (4.40): E_x = integral x^2 dt = integral |X|^2 df, Parseval named}
 \usage{
-SigEnergy(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL)
+SigEnergy(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) 
 }
 \arguments{
 \item{x}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Wald test of H0: theta = theta0 against a two-sided alternative.
+#' Wald test of H0: theta = theta0 against a two-sided alternative
 #'
 #' Formula: W = (theta_hat - theta0)/se; reject when |W| > z_\{alpha/2\};
 #'   p = 2(1 - Phi(|W|))

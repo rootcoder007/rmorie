@@ -8,6 +8,7 @@ morie_geron_ch4_normal_equation(X, y)
 }
 \arguments{
 \item{X, y}{Design and targets, m >= n.}
+
 }
 \value{
 List with \code{theta}, \code{cost}, \code{residuals}, \code{rank},

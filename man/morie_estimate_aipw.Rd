@@ -5,7 +5,9 @@
 \alias{morie_estimate_aipw}
 \title{morie_estimate_aipw}
 \usage{
-morie_estimate_aipw(data, treatment, outcome, covariates, propensity_col = NULL, outcome_model = c("linear", "logistic"), trim = c(0.01, 0.99), trim_type = "value", ps_model = "mle", ridge_lambda = 1, outcome_fit = "separate")
+morie_estimate_aipw(data, treatment, outcome, covariates, propensity_col = NULL, 
+    outcome_model = c("linear", "logistic"), trim = c(0.01, 0.99), trim_type = "value", 
+    ps_model = "mle", ridge_lambda = 1, outcome_fit = "separate") 
 }
 \arguments{
 \item{data}{A vector; indexed elementwise.}

@@ -5,10 +5,14 @@
 \alias{morie_alammar_setfit_twostep}
 \title{morie_alammar_setfit_twostep}
 \usage{
-morie_alammar_setfit_twostep(embeddings, labels)
+morie_alammar_setfit_twostep(embeddings, labels) 
 }
 \description{
 morie_alammar_setfit_twostep
+}
+\arguments{
+\item{embeddings}{Argument \code{embeddings}; see Usage.}
+\item{labels}{Argument \code{labels}; see Usage.}
 }
 \value{
 A list with \code{positive_pairs}, \code{negative_pairs}, \code{n_positive}, \code{n_negative}, \code{head_train_accuracy}, \code{head_predictions}, \code{estimate}, \code{n}, \code{method}.

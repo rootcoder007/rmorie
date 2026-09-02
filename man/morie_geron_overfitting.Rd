@@ -10,6 +10,7 @@ morie_geron_overfitting(train_err, val_err, tol = 0)
 \item{train_err, val_err}{Equal-length non-negative error curves.}
 
 \item{tol}{Non-negative gap tolerance.}
+
 }
 \value{
 List with \code{gap}, \code{gaps}, \code{ratio}, \code{overfitting},

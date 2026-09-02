@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-# Pair correlation function g(r) from the derivative of Ripley's K
-#
-# Formula: \eqn{g(r) = K prime(r) / (2 pi r)}. \code{K} is estimated with
-# the reduced-sample (border) correction and differentiated by a
-# central difference of half-width \code{h},
-# \code{g_hat(r) = (K_hat(r + h) - K_hat(r - h)) / (2 h) / (2 pi r)},
-# which is deterministic -- no kernel smoothing and no data-dependent
-# bandwidth rule. Under complete spatial randomness \eqn{K(r) = pi
+#' Pair correlation function g(r) from the derivative of Ripley's K
+#'
+#' Formula: \eqn{g(r) = K prime(r) / (2 pi r)}. \code{K} is estimated with
+#' the reduced-sample (border) correction and differentiated by a
+#' central difference of half-width \code{h},
+#' \code{g_hat(r) = (K_hat(r + h) - K_hat(r - h)) / (2 h) / (2 pi r)},
+#' which is deterministic -- no kernel smoothing and no data-dependent
+#' bandwidth rule. Under complete spatial randomness \eqn{K(r) = pi
 # prime r^2} so \code{g(r) = 1} at every radius; above one means clustering
-#' at that scale and below one regularity.
+#' at that scale and below one regularity
 #'
 #' @param points Point coordinates, n by 2.
 #' @param window \code{c(xmin, ymin, xmax, ymax)} or an (m, 2) vertex

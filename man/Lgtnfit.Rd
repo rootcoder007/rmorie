@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitlnf.R
 \name{Lgtnfit}
 \alias{Lgtnfit}
-\title{Fit the logistic-normal by transforming, then fitting a normal.}
+\title{Fit the logistic-normal by transforming, then fitting a normal}
 \usage{
 Lgtnfit(X, ddof = 1)
 }

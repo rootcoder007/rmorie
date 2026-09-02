@@ -5,7 +5,7 @@
 \alias{morie_prtcl_kalman_filter_1d}
 \title{morie_prtcl_kalman_filter_1d}
 \usage{
-morie_prtcl_kalman_filter_1d(y, a, q, c, r, m0 = 0, p0 = 1)
+morie_prtcl_kalman_filter_1d(y, a, q, c, r, m0 = 0, p0 = 1) 
 }
 \arguments{
 \item{y}{A vector; its length is taken and its elements indexed.}

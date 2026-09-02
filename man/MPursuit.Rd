@@ -5,7 +5,7 @@
 \alias{MPursuit}
 \title{MPursuit}
 \usage{
-MPursuit(x, dictionary = NULL, natoms = 20, tol = 1e-10, decaystop = NULL)
+MPursuit(x, dictionary = NULL, natoms = 20, tol = 1e-10, decaystop = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

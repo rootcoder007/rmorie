@@ -5,7 +5,7 @@
 \alias{morie_avalon_fnv}
 \title{FNV-1a over the bytes of a feature key}
 \usage{
-morie_avalon_fnv(s, seed = 2166136261)
+morie_avalon_fnv(s, seed = 2166136261) 
 }
 \arguments{
 \item{s}{A character scalar.}

@@ -5,7 +5,7 @@
 \alias{print.morie_frac}
 \title{print.morie_frac}
 \usage{
-print.morie_frac(x, ...)
+\method{print}{morie_frac}(x, ...) 
 }
 \arguments{
 \item{x}{Passed to \code{format}.}

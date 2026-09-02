@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Thomas process: the Neyman-Scott process with Gaussian offspring.
+#' Thomas process: the Neyman-Scott process with Gaussian offspring
 #'
 #' Poisson(mu) offspring per parent displaced by an isotropic Gaussian of
 #' standard deviation sigma, parents Poisson(rho), giving

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spsemv.R
 \name{spsemv}
 \alias{spsemv}
-\title{Empirical semivariogram: half the mean squared difference.}
+\title{Empirical semivariogram: half the mean squared difference}
 \usage{
 spsemv(coords, z, n_bins = 15, max_dist = NULL)
 }

@@ -5,7 +5,9 @@
 \alias{offlrl}
 \title{offlrl}
 \usage{
-offlrl(dataset, states = NULL, actions = NULL, alpha = 1, gamma = 0.99, variant = "H", backup = "max", policy = NULL, mu = NULL, lr = 0.5, iters = 2000, tol = 1e-12)
+offlrl(dataset, states = NULL, actions = NULL, alpha = 1, gamma = 0.99, 
+    variant = "H", backup = "max", policy = NULL, mu = NULL, lr = 0.5, 
+    iters = 2000, tol = 1e-12) 
 }
 \arguments{
 \item{dataset}{The body requires: offlrl: dataset must be non-empty.}

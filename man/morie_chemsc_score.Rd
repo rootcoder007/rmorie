@@ -5,7 +5,10 @@
 \alias{morie_chemsc_score}
 \title{Assemble a ChemScore from its already-measured geometric terms}
 \usage{
-morie_chemsc_score(hbonds = list(), metals = numeric(0), lipophilic = numeric(0), rotatable = list(), clashes = list(), torsions = list(), smoothing = "gaussian", dg0 = 0, clash_slope = 1, intra_coefficient = 1, coefficients = NULL, par = NULL)
+morie_chemsc_score(hbonds = list(), metals = numeric(0), lipophilic = numeric(0), 
+    rotatable = list(), clashes = list(), torsions = list(), smoothing = "gaussian", 
+    dg0 = 0, clash_slope = 1, intra_coefficient = 1, coefficients = NULL, 
+    par = NULL) 
 }
 \arguments{
 \item{hbonds}{A list of list(r, alpha, betas) per donor-acceptor pair.}

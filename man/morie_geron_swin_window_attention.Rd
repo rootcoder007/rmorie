@@ -14,6 +14,8 @@ morie_geron_swin_window_attention(X, window_size, WQ, WK, WV, shift = 0)
 \item{WQ, WK, WV}{Projections with d_model rows.}
 
 \item{shift}{Cyclic shift in [0, M-1].}
+
+
 }
 \value{
 List with \code{output}, \code{window_weights}, \code{n_windows},

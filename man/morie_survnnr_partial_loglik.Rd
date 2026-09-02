@@ -5,7 +5,7 @@
 \alias{morie_survnnr_partial_loglik}
 \title{morie_survnnr_partial_loglik}
 \usage{
-morie_survnnr_partial_loglik(times, events, risk)
+morie_survnnr_partial_loglik(times, events, risk) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

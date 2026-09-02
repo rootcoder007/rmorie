@@ -30,6 +30,8 @@ Drdidblock(
 \item{alpha}{two-sided level.}
 
 \item{y0}{period-0 outcome.}
+
+
 }
 \value{
 list: estimate, se, ci_lo, ci_hi, boot, n_clusters, n, B, method.

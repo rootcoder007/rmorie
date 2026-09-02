@@ -5,10 +5,12 @@
 \alias{morie_evt_gev_trend}
 \title{Nonstationary GEV with a linear trend in location}
 \usage{
-morie_evt_gev_trend(x, t = seq_along(x) - 1)
+morie_evt_gev_trend(x, t = seq_along(x) - 1) 
 }
 \arguments{
 \item{x}{series of maxima; t optional time index}
+
+\item{t}{Argument \code{t}; see Usage.}
 }
 \description{
 (Coles 2001 sec. 6.2)

@@ -5,7 +5,7 @@
 \alias{morie_longrd_pileup}
 \title{What every read says at every draft position, and between them}
 \usage{
-morie_longrd_pileup(draft, reads, match = 1, mismatch = -1, gap = -2)
+morie_longrd_pileup(draft, reads, match = 1, mismatch = -1, gap = -2) 
 }
 \arguments{
 \item{draft}{The draft sequence.}

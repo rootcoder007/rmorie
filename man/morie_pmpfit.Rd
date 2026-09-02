@@ -5,7 +5,7 @@
 \alias{morie_pmpfit}
 \title{Pitman-Yor two-parameter Poisson-Dirichlet stick breaking}
 \usage{
-morie_pmpfit(alpha, theta, K, seed = 0L)
+morie_pmpfit(alpha, theta, K, seed = 0L) 
 }
 \arguments{
 \item{alpha}{Discount, in [0, 1).}

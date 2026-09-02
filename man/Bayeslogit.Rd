@@ -2,7 +2,7 @@
 % Please edit documentation in R/baylog.R
 \name{Bayeslogit}
 \alias{Bayeslogit}
-\title{Posterior mode and normal approximation for logistic regression.}
+\title{Posterior mode and normal approximation for logistic regression}
 \usage{
 Bayeslogit(X, y, prior_sd = 10, iters = 50, tol = 1e-12)
 }

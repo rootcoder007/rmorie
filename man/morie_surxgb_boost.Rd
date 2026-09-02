@@ -3,9 +3,16 @@
 % the formals.
 \name{morie_surxgb_boost}
 \alias{morie_surxgb_boost}
+\alias{morie_surxgb}
 \title{morie_surxgb_boost}
 \usage{
-morie_surxgb_boost(X, y_lower, y_upper, n_rounds = 50, eta = 0.1, max_depth = 3, lam = 1, gamma = 0, min_child = 5, sigma = 1, dist = "normal", base_score = NULL, derivatives = "analytic")
+morie_surxgb_boost(X, y_lower, y_upper, n_rounds = 50, eta = 0.1, max_depth = 3, 
+    lam = 1, gamma = 0, min_child = 5, sigma = 1, dist = "normal", base_score = NULL, 
+    derivatives = "analytic") 
+
+morie_surxgb(X, y_lower, y_upper, n_rounds = 50, eta = 0.1, max_depth = 3, 
+    lam = 1, gamma = 0, min_child = 5, sigma = 1, dist = "normal", base_score = NULL, 
+    derivatives = "analytic") 
 }
 \arguments{
 \item{X}{A matrix; indexed by row and column.}

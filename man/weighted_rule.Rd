@@ -5,7 +5,7 @@
 \alias{weighted_rule}
 \title{Weighted linear classifier, returned as a decision function}
 \usage{
-weighted_rule(H, labels, weights, ridge = 1e-06)
+weighted_rule(H, labels, weights, ridge = 1e-06) 
 }
 \arguments{
 \item{H}{Matrix of covariates (one row per subject).}

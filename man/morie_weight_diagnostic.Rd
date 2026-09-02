@@ -11,6 +11,8 @@ morie_weight_diagnostic(w, data, treatment, covariates)
 
 \item{data, treatment, covariates}{The inputs the weights were
 built from.}
+
+
 }
 \value{
 A data.frame of balance statistics with attribute

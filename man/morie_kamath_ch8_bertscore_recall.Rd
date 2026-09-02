@@ -20,6 +20,7 @@ morie_kamath_ch8_bertscore_f1(P_BERT, R_BERT)
 \item{normalize}{Cosine instead of raw dot products.}
 
 \item{P_BERT, R_BERT}{Precision and recall.}
+
 }
 \value{
 List with \code{estimate}, \code{per_token}, \code{greedy_match}.

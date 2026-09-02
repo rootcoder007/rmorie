@@ -5,7 +5,7 @@
 \alias{bartlett_kernel}
 \title{bartlett_kernel}
 \usage{
-bartlett_kernel(x)
+bartlett_kernel(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

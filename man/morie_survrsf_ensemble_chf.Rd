@@ -5,7 +5,7 @@
 \alias{morie_survrsf_ensemble_chf}
 \title{morie_survrsf_ensemble_chf}
 \usage{
-morie_survrsf_ensemble_chf(fit, X, t, oob = TRUE, random_variable = NULL, seed = 1)
+morie_survrsf_ensemble_chf(fit, X, t, oob = TRUE, random_variable = NULL, seed = 1) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$inbag}, \code{$trees} from it.}

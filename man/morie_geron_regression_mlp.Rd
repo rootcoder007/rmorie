@@ -5,7 +5,7 @@
 \alias{morie_geron_regression_mlp}
 \title{Regression MLP: ReLU hidden layers, linear head, full-batch GD (Geron Ch 9, hmregn)}
 \usage{
-morie_geron_regression_mlp(X, y, hidden_sizes = 8, epochs = 400, lr = 0.05, seed = 0)
+morie_geron_regression_mlp(X, y, hidden_sizes = 8, epochs = 400, lr = 0.05, seed = 0) 
 }
 \arguments{
 \item{X,y}{Data and targets.}

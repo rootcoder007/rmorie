@@ -5,7 +5,7 @@
 \alias{CCepX}
 \title{Eqs (4.63)-(4.64) with the unwrapping diagnostics the book calls "an}
 \usage{
-CCepX(x)
+CCepX(x) 
 }
 \arguments{
 \item{x}{Passed to \code{CCepstrum}.}

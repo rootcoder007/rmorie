@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitclos.R
 \name{Compclos}
 \alias{Compclos}
-\title{Closure operator C(x) onto the simplex of constant sum \code{total}.}
+\title{Closure operator C(x) onto the simplex of constant sum \code{total}}
 \usage{
 Compclos(x, total = 1)
 }

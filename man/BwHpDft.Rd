@@ -5,7 +5,7 @@
 \alias{BwHpDft}
 \title{Eq (3.149): the lowpass with the ratio inverted.  At k = 0 the ratio}
 \usage{
-BwHpDft(K, kc = NULL, N = 2, fc = NULL, fs = NULL)
+BwHpDft(K, kc = NULL, N = 2, fc = NULL, fs = NULL) 
 }
 \arguments{
 \item{K}{Coerced to integer by the body, with \code{as.integer}.}

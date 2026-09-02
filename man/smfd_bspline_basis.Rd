@@ -5,7 +5,7 @@
 \alias{smfd_bspline_basis}
 \title{Internal: the n x p B-spline design matrix. Mirrors Python}
 \usage{
-smfd_bspline_basis(x, knots, degree = 3L)
+smfd_bspline_basis(x, knots, degree = 3L) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

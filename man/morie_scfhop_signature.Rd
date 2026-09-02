@@ -5,7 +5,7 @@
 \alias{morie_scfhop_signature}
 \title{A Weisfeiler-Leman colour of the framework, as a fingerprint}
 \usage{
-morie_scfhop_signature(smiles, rounds = 3L)
+morie_scfhop_signature(smiles, rounds = 3L) 
 }
 \arguments{
 \item{smiles}{The molecule.}

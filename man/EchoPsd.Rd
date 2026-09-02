@@ -5,7 +5,7 @@
 \alias{EchoPsd}
 \title{Power spectrum of a wavelet with an echo, eq (4.84)}
 \usage{
-EchoPsd(H, a, n_0, z)
+EchoPsd(H, a, n_0, z) 
 }
 \arguments{
 \item{H}{A vector; its length is taken.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Batch-normalisation running statistics and inference transform.
+#' Batch-normalisation running statistics and inference transform
 #'
 #' runmean <- (1-momentum) runmean + momentum mean(x);
 #' runvar  <- (1-momentum) runvar + momentum (m/(m-1)) biased_var(x);

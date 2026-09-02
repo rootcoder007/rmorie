@@ -5,11 +5,13 @@
 \alias{morie_jsonlt_flatten}
 \title{Expand nested data.frame columns}
 \usage{
-morie_jsonlt_flatten(df, recursive = TRUE)
+morie_jsonlt_flatten(x, recursive = TRUE) 
 }
 \arguments{
-\item{df}{a data.frame.}
+
 \item{recursive}{expand nested frames all the way down.}
+
+\item{x}{Argument \code{x}; see Usage.}
 }
 \description{
 A data.frame column that is itself a data.frame becomes columns named outer.inner.

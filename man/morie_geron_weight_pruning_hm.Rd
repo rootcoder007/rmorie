@@ -5,7 +5,7 @@
 \alias{morie_geron_weight_pruning_hm}
 \title{Global magnitude weight pruning to an exact sparsity, cubic ramp schedule (Geron Ch 17, hmpru)}
 \usage{
-morie_geron_weight_pruning_hm(model, sparsity, n_rounds = 1)
+morie_geron_weight_pruning_hm(model, sparsity, n_rounds = 1) 
 }
 \arguments{
 \item{model}{Numeric vector or named list.}

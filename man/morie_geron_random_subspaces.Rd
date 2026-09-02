@@ -5,7 +5,8 @@
 \alias{morie_geron_random_subspaces}
 \title{Random subspaces: feature bagging without row subsampling (Geron Ch 6, hmrsp)}
 \usage{
-morie_geron_random_subspaces(X, y, base_estimator = NULL, n_estimators = 10, max_features = NULL, seed = 0, task = "auto")
+morie_geron_random_subspaces(X, y, base_estimator = NULL, n_estimators = 10, max_features = NULL, 
+    seed = 0, task = "auto") 
 }
 \arguments{
 \item{X,y}{Data and targets.}

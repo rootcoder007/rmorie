@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' SNP-BLUP (ridge regression BLUP) marker effects and breeding values.
+#' SNP-BLUP (ridge regression BLUP) marker effects and breeding values
 #'
 #' Formula: Z = M (scaled markers), Sigma = sigma2_M I in Henderson's equations; GEBV = M uhat
 #'

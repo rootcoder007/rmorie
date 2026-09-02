@@ -5,7 +5,7 @@
 \alias{Pgamma}
 \title{Pgamma}
 \usage{
-Pgamma(q, shape, rate = 1, lower_tail = TRUE)
+Pgamma(q, shape, rate = 1, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

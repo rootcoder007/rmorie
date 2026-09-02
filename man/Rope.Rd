@@ -5,10 +5,15 @@
 \alias{Rope}
 \title{Rotary position embedding (Su et al. 2021, RoFormer)}
 \usage{
-Rope(q, m, theta)
+Rope(q, m, theta) 
 }
 \description{
 Rotary position embedding (Su et al. 2021, RoFormer)
+}
+\arguments{
+\item{q}{Argument \code{q}; see Usage.}
+\item{m}{Argument \code{m}; see Usage.}
+\item{theta}{Argument \code{theta}; see Usage.}
 }
 \value{
 A list with \code{q}, \code{m}, \code{norm}, \code{n}.

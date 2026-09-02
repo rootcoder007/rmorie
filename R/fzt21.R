@@ -4,7 +4,7 @@
 #'
 #' Theorem 2.1: for any `a > 0`, `a != 1`,
 #' \deqn{\[J_h(x)\]^{t_1}\[J_{ah}(x)\]^{t_2} = F_X(x) + O(h^4),\quad t_1 = \frac{a^2}{a^2-1},\ t_2 = -\frac{1}{a^2-1},}{\[J_h(x)\]^t1 \[J_ah(x)\]^t2 = F(x) + O(h^4), t1 = a^2/(a^2-1), t2 = -1/(a^2-1),}
-#' with `J_h = E[Fhat_h]`. The exponents solve `t1 + t2 = 1` (keep `log F`)
+#' with `J_h = E\[Fhat_h\]`. The exponents solve `t1 + t2 = 1` (keep `log F`)
 #' and `t1 + a^2 t2 = 0` (kill the `h^2` term).
 #'
 #' Contrast Chapter 1, where the same device forced the bandwidth ratio to 4:

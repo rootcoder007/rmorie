@@ -5,10 +5,15 @@
 \alias{Ostatmom}
 \title{Moments of a uniform order statistic -- Sec. 2.4, p. 38}
 \usage{
-Ostatmom(r, n, k = 1)
+Ostatmom(r, n, k = 1) 
 }
 \description{
 Moments of a uniform order statistic -- Sec. 2.4, p. 38
+}
+\arguments{
+\item{r}{Argument \code{r}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
 }
 \value{
 A list with \code{moment}, \code{mean}, \code{var}, \code{r}, \code{n}, \code{k}.

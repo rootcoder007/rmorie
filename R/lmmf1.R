@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Linear mixed model in the form Y = X beta + Z u + e, with its two means and marginal variance.
+#' Linear mixed model in the form Y = X beta + Z u + e, with its two means and marginal variance
 #'
 #' Formula: Y = X beta + Z u + e,  u ~ N(0, Sigma), e ~ N(0, R);  E(Y) = X beta, E(Y|u) = X beta + Z u, Var(Y) = Z Sigma Z' + R
 #'

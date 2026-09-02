@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Hill numbers of order q.
+#' Hill numbers of order q
 #'
 #' qD = (sum_i p_i^q)^(1/(1-q)) for q != 1, and
 #' 1D = exp(-sum_i p_i log p_i) in the limit q -> 1.

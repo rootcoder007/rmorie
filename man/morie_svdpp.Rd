@@ -5,7 +5,8 @@
 \alias{morie_svdpp}
 \title{morie_svdpp}
 \usage{
-morie_svdpp(ratings, n_users, n_items, factors = 4, epochs = 30, lr = 0.007, reg = 0.015, exponent = -0.5, seed = 0, implicit = TRUE)
+morie_svdpp(ratings, n_users, n_items, factors = 4, epochs = 30, lr = 0.007, 
+    reg = 0.015, exponent = -0.5, seed = 0, implicit = TRUE) 
 }
 \arguments{
 \item{ratings}{Passed to \code{.svdpp_fit}.}

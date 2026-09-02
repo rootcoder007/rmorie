@@ -5,7 +5,7 @@
 \alias{morie_geron_rnn_visual_attention}
 \title{RNN visual attention: additive (Bahdanau-style) context over a feature map (Geron Ch 16, hmrvat)}
 \usage{
-morie_geron_rnn_visual_attention(features, h, W, U, v)
+morie_geron_rnn_visual_attention(features, h, W, U, v) 
 }
 \arguments{
 \item{features}{Spatial map (H, W, D) or (N, D).}

@@ -5,7 +5,7 @@
 \alias{morie_ess_ipseq}
 \title{Effective sample size from the initial-positive autocorrelations}
 \usage{
-morie_ess_ipseq(x)
+morie_ess_ipseq(x) 
 }
 \arguments{
 \item{x}{Numeric vector of draws.}

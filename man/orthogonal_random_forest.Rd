@@ -5,7 +5,9 @@
 \alias{orthogonal_random_forest}
 \title{ORF for the heterogeneous treatment effect theta_0(x)}
 \usage{
-orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5, alpha = 0.05, max_depth = 12, seed = 0, residualize = "local", ridge = 1e-08, kind = "double-sample", leave_one_out = TRUE)
+orthogonal_random_forest(Y, T, X, W, x_eval = NULL, n_trees = 100, min_leaf = 5, alpha = 0.05, 
+    max_depth = 12, seed = 0, residualize = "local", ridge = 1e-08, kind = "double-sample", 
+    leave_one_out = TRUE) 
 }
 \arguments{
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}

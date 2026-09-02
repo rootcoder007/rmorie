@@ -5,7 +5,7 @@
 \alias{EegBands}
 \title{Band limits from Section 1.2.6, fractional power by eq (6.44) as used}
 \usage{
-EegBands(x, fs, bands = NULL)
+EegBands(x, fs, bands = NULL) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

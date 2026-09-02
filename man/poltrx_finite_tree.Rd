@@ -5,7 +5,7 @@
 \alias{poltrx_finite_tree}
 \title{Draw a truncated Polya tree}
 \usage{
-poltrx_finite_tree(levels, c = 1, rule = "m_squared", rng = NULL, seed = 0)
+poltrx_finite_tree(levels, c = 1, rule = "m_squared", rng = NULL, seed = 0) 
 }
 \arguments{
 \item{levels}{Truncation level \code{M}, integer \code{>= 1}.}

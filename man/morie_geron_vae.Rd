@@ -10,6 +10,10 @@ morie_geron_vae(X, latent_dim = 2, epochs = 200, lr = 0.05, beta = 1, seed = 0)
 \item{X}{Training data (n, d).}
 
 \item{latent_dim, epochs, lr, beta, seed}{As in Python original.}
+
+
+
+
 }
 \value{
 list with mu, log_var, z, reconstruction, recon_error, kl, elbo,

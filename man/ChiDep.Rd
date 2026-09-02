@@ -10,6 +10,7 @@ ChiDep(x, y, u = 0.95)
 \item{x, y}{Equal-length numeric vectors, n >= 4.}
 
 \item{u}{Threshold in (0, 1), default 0.95.}
+
 }
 \value{
 List with \code{estimate}, \code{u}, \code{n}, \code{method}.

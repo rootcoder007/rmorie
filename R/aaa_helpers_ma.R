@@ -6,7 +6,7 @@
 # Weighted least squares. cov is (X' W X)^{-1}, the model-based
 # covariance -- correct when the weights really are inverse variances,
 # which is the whole premise of inverse-variance meta-analysis.
-#' Weighted least squares. cov is (X\' W X)^{-1}, the model-based
+#' Weighted least squares. cov is (X\' W X)^\{-1\}, the model-based
 #'
 #' covariance -- correct when the weights really are inverse variances,
 #' which is the whole premise of inverse-variance meta-analysis.

@@ -2,7 +2,7 @@
 % Please edit documentation in R/blups.R
 \name{Blupslope}
 \alias{Blupslope}
-\title{BLUP of random intercept and slope.}
+\title{BLUP of random intercept and slope}
 \usage{
 Blupslope(y, group, Z, D, s2e, X = NULL, beta = NULL)
 }
@@ -25,7 +25,7 @@ Blupslope(y, group, Z, D, s2e, X = NULL, beta = NULL)
 List with v, levels, nj, fitted, J, q, n.
 }
 \description{
-vhat_j = D Z_j' (Z_j D Z_j' + s2e I)^{-1} (y_j - X_j beta).
+vhat_j = D Z_j' (Z_j D Z_j' + s2e I)^\{-1\} (y_j - X_j beta).
 }
 \examples{
 set.seed(1)

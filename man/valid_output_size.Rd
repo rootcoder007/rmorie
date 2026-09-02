@@ -5,7 +5,7 @@
 \alias{valid_output_size}
 \title{valid_output_size}
 \usage{
-valid_output_size(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L)
+valid_output_size(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) 
 }
 \arguments{
 \item{input_size}{Coerced to integer by the body, with \code{as.integer}.}

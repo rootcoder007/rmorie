@@ -5,7 +5,7 @@
 \alias{morie_vepan_consequence_rank}
 \title{Severity rank of an SO term; 1 is worst. Unknown terms sort last}
 \usage{
-morie_vepan_consequence_rank(term)
+morie_vepan_consequence_rank(term) 
 }
 \arguments{
 \item{term}{See Usage.}

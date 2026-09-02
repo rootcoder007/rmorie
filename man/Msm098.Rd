@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm098.R
 \name{Msm098}
 \alias{Msm098}
-\title{Ordinal predictor with environment and genetic effects.}
+\title{Ordinal predictor with environment and genetic effects}
 \usage{
 Msm098(n, X_E, Z_L, L_g = NULL)
 }

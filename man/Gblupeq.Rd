@@ -2,7 +2,7 @@
 % Please edit documentation in R/gblpq.R
 \name{Gblupeq}
 \alias{Gblupeq}
-\title{Cholesky re-parameterization that makes GBLUP an ordinary mixed model.}
+\title{Cholesky re-parameterization that makes GBLUP an ordinary mixed model}
 \usage{
 Gblupeq(Z, G, sigma2_g)
 }

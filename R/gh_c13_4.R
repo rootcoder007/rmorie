@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Discrete-time beta process
 #'
-#' H(t) = sum_{s <= t} dH(s) with independent
+#' H(t) = sum_\{s <= t\} dH(s) with independent
 #' dH(s_k) ~ Be(c_k h_k, c_k(1 - h_k)).  The Beta parameterisation is
 #' chosen so that E dH(s_k) = h_k EXACTLY, whatever c is: c controls only
 #' the spread, so the prior mean hazard can be specified without

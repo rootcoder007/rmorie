@@ -5,7 +5,7 @@
 \alias{morie_infmax}
 \title{Entry point -- the headline Deep InfoMax local objective}
 \usage{
-morie_infmax(global_features, feature_maps, critic, estimator = "jsd")
+morie_infmax(global_features, feature_maps, critic, estimator = "jsd") 
 }
 \arguments{
 \item{global_features}{Passed to \code{.infmax_local_objective}.}

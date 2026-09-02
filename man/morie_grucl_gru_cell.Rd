@@ -42,6 +42,8 @@ morie_gru_cell(
 seed from \code{\link{morie_det_rng}("grucl", deterministic_seed)} is
 installed before sampling so Py<->R streams agree.  Overrides
 \code{seed} when set.}
+
+
 }
 \value{
 Named list \code{(h, estimate, z, r, n, method)}.

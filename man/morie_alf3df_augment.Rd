@@ -5,7 +5,7 @@
 \alias{morie_alf3df_augment}
 \title{Recentre on the centroid, then rotate at random}
 \usage{
-morie_alf3df_augment(x, e)
+morie_alf3df_augment(x, e) 
 }
 \arguments{
 \item{x}{A coordinate matrix, one row per atom.}

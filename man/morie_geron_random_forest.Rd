@@ -5,7 +5,8 @@
 \alias{morie_geron_random_forest}
 \title{Random forest: bagged CART trees with random per-split feature subsets (Geron Ch 6, hmrfc)}
 \usage{
-morie_geron_random_forest(X, y, n_estimators = 10, max_features = "sqrt", seed = 0, max_depth = 4, min_samples_leaf = 1, task = "auto")
+morie_geron_random_forest(X, y, n_estimators = 10, max_features = "sqrt", seed = 0, max_depth = 4, 
+    min_samples_leaf = 1, task = "auto") 
 }
 \arguments{
 \item{X,y}{Data and targets.}

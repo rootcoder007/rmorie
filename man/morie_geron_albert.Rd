@@ -25,6 +25,9 @@ morie_geron_albert(
 \item{vocab_size}{Optional; defaults to max(X) + 1.}
 
 \item{seed}{LCG seed.}
+
+
+
 }
 \value{
 List with \code{hidden} (array batch x T x d), \code{n_params},

@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_sex_check}
 \title{morie_snpqc1_sex_check}
 \usage{
-morie_snpqc1_sex_check(x_genotypes, reported_sex = NULL, male_min = 0.8, female_max = 0.2)
+morie_snpqc1_sex_check(x_genotypes, reported_sex = NULL, male_min = 0.8, female_max = 0.2) 
 }
 \arguments{
 \item{x_genotypes}{Passed to \code{.snpqc1_check}.}

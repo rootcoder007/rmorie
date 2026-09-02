@@ -5,7 +5,9 @@
 \alias{maximise_acquisition}
 \title{maximise_acquisition}
 \usage{
-maximise_acquisition(X, y, best, box, acq = "ei", kernel = "matern52", amplitude = 1, length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, starts = NULL, n_starts = 8, max_iter = 60, tol = 1e-08, seed = 0)
+maximise_acquisition(X, y, best, box, acq = "ei", kernel = "matern52", amplitude = 1, 
+    length_scale = 1, noise = 1e-08, kappa = 2, xi = 0, starts = NULL, 
+    n_starts = 8, max_iter = 60, tol = 1e-08, seed = 0) 
 }
 \arguments{
 \item{X}{Passed to \code{gp_posterior}.}

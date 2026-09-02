@@ -5,7 +5,7 @@
 \alias{morie_sdcfst_predict}
 \title{Average of the trees' leaf values at x}
 \usage{
-morie_sdcfst_predict(forest, x)
+morie_sdcfst_predict(forest, x) 
 }
 \arguments{
 \item{forest}{A forest from morie_sdcfst_forest.}

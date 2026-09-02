@@ -5,7 +5,7 @@
 \alias{gru_step}
 \title{One GRU update}
 \usage{
-gru_step(x, h, Wz, Uz, Wr, Ur, Wh, Uh)
+gru_step(x, h, Wz, Uz, Wr, Ur, Wh, Uh) 
 }
 \arguments{
 \item{x}{Input vector.}

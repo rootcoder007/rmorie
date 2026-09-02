@@ -5,7 +5,7 @@
 \alias{print.morie_rtm}
 \title{Print method for \code{morie_rtm} objects}
 \usage{
-print.morie_rtm(x, ...)
+\method{print}{morie_rtm}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_rtm} object.}

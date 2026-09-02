@@ -5,10 +5,15 @@
 \alias{morie_gwrcal_prepare}
 \title{morie_gwrcal_prepare}
 \usage{
-morie_gwrcal_prepare(y, X, coords)
+morie_gwrcal_prepare(y, X, coords) 
 }
 \description{
 morie_gwrcal_prepare
+}
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{coords}{Argument \code{coords}; see Usage.}
 }
 \value{
 A list with \code{y}, \code{X}, \code{coords}, \code{n}, \code{p}.

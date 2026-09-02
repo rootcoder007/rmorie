@@ -5,7 +5,7 @@
 \alias{morie_tlhoest_remainder_order}
 \title{morie_tlhoest_remainder_order}
 \usage{
-morie_tlhoest_remainder_order(order)
+morie_tlhoest_remainder_order(order) 
 }
 \arguments{
 \item{order}{Coerced to integer by the body, with \code{as.integer}.}
@@ -25,10 +25,10 @@ higher-order rather than first-order asymptotic representations, to
 provide guidelines for estimators with sound finite-sample behaviour
 that are asymptotically efficient under less restrictive conditions;
 the requirement that the second-order remainder tend to zero faster
-than n^{-1/2} for the first-order representation to be useful; and the
+than n^\{-1/2\} for the first-order representation to be useful; and the
 example that when the density of the data-generating distribution is
 directly involved in the target parameter, a density estimator
-converging faster than n^{-1/4} in a suitable norm is often required
+converging faster than n^\{-1/4\} in a suitable norm is often required
 to make that remainder negligible.
 
 Carone, M., Diaz, I. & van der Laan, M. J. (2018) "Higher-Order

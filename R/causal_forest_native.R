@@ -5,7 +5,7 @@
 # and e(x) = E[W|X] with the module-10 nuisance engines, then fit a
 # weighted subsampled regression forest (C++ kernel) on the pseudo-
 # outcome (Y - m)/(W - e) with weights (W - e)^2. ATE via the AIPW
-# orthogonal score with tau(x) as the heterogeneous nuisance —
+# orthogonal score with tau(x) as the heterogeneous nuisance --
 # the same estimand grf::average_treatment_effect(method = "AIPW")
 # targets. No grf at runtime.
 

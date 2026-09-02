@@ -9,7 +9,7 @@
 #' full GP regression -- that identity is the anchor, and it is the one
 #' thing a sparse approximation must satisfy.
 #'
-#' Formula: Q = K_nm K_mm^{-1} K_mn;
+#' Formula: Q = K_nm K_mm^\{-1\} K_mn;
 #'   L = log N(y; 0, Q + s2 I) - tr(K_nn - Q) / (2 s2).
 #'
 #' @param X Training inputs.

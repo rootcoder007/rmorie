@@ -5,7 +5,8 @@
 \alias{morie_secarg_prehash}
 \title{Argon2 prehash H_0 over every parameter}
 \usage{
-morie_secarg_prehash(password, salt, parallelism, tag_length, memory, passes, variant = "argon2id", secret = raw(), associated = raw(), version = .VERSION)
+morie_secarg_prehash(password, salt, parallelism, tag_length, memory, passes, variant = "argon2id", 
+    secret = raw(), associated = raw(), version = .VERSION) 
 }
 \arguments{
 \item{password}{Raw bytes.}

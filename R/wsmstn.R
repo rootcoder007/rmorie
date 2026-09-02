@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Sufficient statistics for the Bernoulli and Normal models.
+#' Sufficient statistics for the Bernoulli and Normal models
 #'
 #' Sufficient statistics are far from unique; this returns the standard
 #' minimal choice.

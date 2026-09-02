@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Finite population correction factor for sampling without replacement.
+#' Finite population correction factor for sampling without replacement
 #'
 #' The factor multiplies the VARIANCE; the standard error carries its
 #' square root, returned separately because that is the one that gets

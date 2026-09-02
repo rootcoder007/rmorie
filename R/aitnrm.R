@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Aitchison norm of a composition.
+#' Aitchison norm of a composition
 #'
-#' Formula: ||x||_a = sqrt( (1/D) sum_{i<j} log(x_i/x_j)^2 )
+#' Formula: ||x||_a = sqrt( (1/D) sum_\{i<j\} log(x_i/x_j)^2 )
 #'
 #' @param x Composition with strictly positive parts.
 #'

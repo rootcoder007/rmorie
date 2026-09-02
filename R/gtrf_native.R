@@ -23,7 +23,7 @@
 #'
 #' @param adj Adjacency list.
 #' @param n Number of vertices.
-#' @param normalized If TRUE, return I - D^{-1/2} A D^{-1/2}.
+#' @param normalized If TRUE, return I - D^\{-1/2\} A D^\{-1/2\}.
 #' @return Square Laplacian matrix.
 #' @export
 laplacian <- function(adj, n, normalized = TRUE) {

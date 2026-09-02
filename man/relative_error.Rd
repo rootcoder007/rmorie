@@ -5,7 +5,7 @@
 \alias{relative_error}
 \title{relative_error}
 \usage{
-relative_error(X, M)
+relative_error(X, M) 
 }
 \arguments{
 \item{X}{A vector; indexed elementwise.}

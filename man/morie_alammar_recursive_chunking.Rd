@@ -5,7 +5,7 @@
 \alias{morie_alammar_recursive_chunking}
 \title{Recursive chunking, buffer memory, templates (Alammar Ch 6-12)}
 \usage{
-morie_alammar_recursive_chunking(text, separators = NULL, target_size = 200, overlap = 0)
+morie_alammar_recursive_chunking(text, separators = NULL, target_size = 200, overlap = 0) 
 }
 \arguments{
 \item{text}{Input string.}

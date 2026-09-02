@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtwlap.R
 \name{Wgtlap}
 \alias{Wgtlap}
-\title{Assemble the weighted Laplacian from an edge list.}
+\title{Assemble the weighted Laplacian from an edge list}
 \usage{
 Wgtlap(edges, n = NULL)
 }

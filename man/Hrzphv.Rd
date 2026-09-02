@@ -45,6 +45,9 @@ theta near 0 is the no-frailty limit, in which the M step is the Tsiatis
 baseline and beta is the partial-likelihood estimate.}
 
 \item{em_iter, cycles, gs_iter, tol}{Deterministic optimiser controls.}
+
+
+
 }
 \value{
 list: estimate, sigma2_hat, theta_hat, beta_hat, h0_hat, Lambda0,

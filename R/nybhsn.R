@@ -42,7 +42,7 @@
   out
 }
 
-#' Nyblom-Hansen test that every OLS parameter is stable.
+#' Nyblom-Hansen test that every OLS parameter is stable
 #'
 #' Fit \eqn{y = Xb + e} by least squares and form the first-order
 #' conditions \eqn{f_{it} = x_{it} e_t} for the m regression parameters

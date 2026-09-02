@@ -5,7 +5,7 @@
 \alias{narm_local_encoder}
 \title{narm_local_encoder}
 \usage{
-narm_local_encoder(H, alpha)
+narm_local_encoder(H, alpha) 
 }
 \arguments{
 \item{H}{A matrix; passed to \code{as.matrix}.}

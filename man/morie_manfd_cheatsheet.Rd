@@ -5,7 +5,7 @@
 \alias{morie_manfd_cheatsheet}
 \title{One-line summary of the manfd module}
 \usage{
-morie_manfd_cheatsheet()
+morie_manfd_cheatsheet() 
 }
 \description{
 One-line summary of the manfd module

@@ -5,7 +5,8 @@
 \alias{split_specific_tmle}
 \title{Eq. (9.9)-(9.13): one split\'s TMLE at fixed levels}
 \usage{
-split_specific_tmle(y, A, W, levels, aL, aH, fit_rows, est_rows, ridge = 1e-08, trim = 0.01, target = TRUE)
+split_specific_tmle(y, A, W, levels, aL, aH, fit_rows, est_rows, ridge = 1e-08, trim = 0.01, 
+    target = TRUE) 
 }
 \arguments{
 \item{y}{Outcome vector.}

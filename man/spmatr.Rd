@@ -2,7 +2,7 @@
 % Please edit documentation in R/spmatr.R
 \name{spmatr}
 \alias{spmatr}
-\title{Matern covariance function class.}
+\title{Matern covariance function class}
 \usage{
 spmatr(h, sigma2 = 1, nu = 0.5, a = 1)
 }

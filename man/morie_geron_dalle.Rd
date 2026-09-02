@@ -26,6 +26,7 @@ morie_geron_dalle(
 \item{image_vocab}{Codebook size (default model width).}
 
 \item{grid}{c(h,w).}
+
 }
 \value{
 List with \code{image_tokens}, \code{token_grid}, \code{log_likelihood},

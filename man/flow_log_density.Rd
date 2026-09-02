@@ -5,7 +5,7 @@
 \alias{flow_log_density}
 \title{Push a sample through a flow and correct the density}
 \usage{
-flow_log_density(z0, log_q0, layers)
+flow_log_density(z0, log_q0, layers) 
 }
 \arguments{
 \item{z0}{Numeric vector; the base sample.}

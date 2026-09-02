@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior.
+#' Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior
 #'
 #' @param x Numeric data vector.
 #' @param a_prior Gamma shape hyperparameter (default 1).

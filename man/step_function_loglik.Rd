@@ -5,7 +5,7 @@
 \alias{step_function_loglik}
 \title{step_function_loglik}
 \usage{
-step_function_loglik(y, s, h, L)
+step_function_loglik(y, s, h, L) 
 }
 \arguments{
 \item{y}{See Usage.}

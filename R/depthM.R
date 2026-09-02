@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Mahalanobis depth of each row of x.
+#' Mahalanobis depth of each row of x
 #'
 #' Formula: \eqn{MD(z) = 1/(1 + (z-\mu)' \Sigma^{-1} (z-\mu))}.  Depth
 #' is 1 exactly at \eqn{\mu} and decreases monotonically outwards, so a

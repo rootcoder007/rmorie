@@ -146,7 +146,7 @@
 #'   Open Government Licence -- Ontario.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
-#' head(df\[, c("IncidentYear", "PoliceService", "IncidentType")\])
+#' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
 #' @export
 morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                   offline = TRUE,
@@ -402,7 +402,7 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @return A `data.frame`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
-#' df\[, c("Indiv_Index", "Race", "AgeCategory", "Gender")\]
+#' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                         offline = TRUE,

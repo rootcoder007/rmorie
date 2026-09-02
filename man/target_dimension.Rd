@@ -5,7 +5,7 @@
 \alias{target_dimension}
 \title{Johnson-Lindenstrauss target dimension}
 \usage{
-target_dimension(n, epsilon, beta = 1)
+target_dimension(n, epsilon, beta = 1) 
 }
 \arguments{
 \item{n}{Number of points, integer \code{>= 2}.}

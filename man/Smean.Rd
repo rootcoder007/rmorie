@@ -5,7 +5,7 @@
 \alias{Smean}
 \title{Eq (3.7): mu = (1/N) sum eta(n) -- the DC component of the signal}
 \usage{
-Smean(x)
+Smean(x) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_rg_aslist}.}

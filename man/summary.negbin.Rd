@@ -5,7 +5,7 @@
 \alias{summary.negbin}
 \title{Summarise method for \code{negbin} objects}
 \usage{
-summary.negbin(object, dispersion = 1, ...)
+\method{summary}{negbin}(object, dispersion = 1, ...) 
 }
 \arguments{
 \item{object}{A \code{negbin} object.}

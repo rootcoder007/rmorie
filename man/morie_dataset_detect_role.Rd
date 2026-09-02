@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_detect_role}
 \alias{morie_dataset_detect_role}
-\title{Detect the suggested epidemiological role of a column.}
+\title{Detect the suggested epidemiological role of a column}
 \usage{
 morie_dataset_detect_role(x, name)
 }
@@ -16,7 +16,7 @@ One of \code{"id"}, \code{"weight"}, \code{"stratum"}, \code{"cluster"},
 \code{"treatment"}, \code{"outcome"}, \code{"covariate"}.
 }
 \description{
-Detect the suggested epidemiological role of a column.
+Detect the suggested epidemiological role of a column
 }
 \examples{
 morie_dataset_detect_role(1:5, "case_id") # "id"

@@ -5,7 +5,7 @@
 \alias{Sem}
 \title{Section 8.5.1, the spectral error measure: the mean squared}
 \usage{
-Sem(psd, reference)
+Sem(psd, reference) 
 }
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}

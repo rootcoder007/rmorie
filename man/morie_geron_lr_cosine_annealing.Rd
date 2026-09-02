@@ -12,6 +12,7 @@ morie_geron_lr_cosine_annealing(eta_min, eta_max, t, T)
 \item{t}{Step in [0, T].}
 
 \item{T}{Positive horizon.}
+
 }
 \value{
 List with \code{eta}, \code{schedule}, \code{halfway_value},

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Atom-pair fingerprint.
+#' Atom-pair fingerprint
 #'
 #' Each unordered pair of atoms contributes the triple (type_i, type_j,
 #' bond distance), folded by

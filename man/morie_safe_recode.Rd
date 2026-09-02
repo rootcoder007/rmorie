@@ -17,7 +17,7 @@ through unchanged (everything else must be mapped).}
 }
 \value{
 A character vector (with an \code{morie_recode_audit}
-attribute recording the applied mapping) — convert with
+attribute recording the applied mapping) -- convert with
 \code{\link{morie_safe_factor}} to fix levels explicitly.
 }
 \description{

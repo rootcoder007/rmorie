@@ -5,7 +5,7 @@
 \alias{size_factors}
 \title{Median-of-ratios size factors}
 \usage{
-size_factors(counts)
+size_factors(counts) 
 }
 \arguments{
 \item{counts}{Gene-by-sample integer count matrix.}

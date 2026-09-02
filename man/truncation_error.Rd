@@ -5,7 +5,7 @@
 \alias{truncation_error}
 \title{truncation_error}
 \usage{
-truncation_error(alpha, K)
+truncation_error(alpha, K) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

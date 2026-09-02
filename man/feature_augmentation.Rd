@@ -5,7 +5,7 @@
 \alias{feature_augmentation}
 \title{feature_augmentation}
 \usage{
-feature_augmentation(base_output, consumer)
+feature_augmentation(base_output, consumer) 
 }
 \arguments{
 \item{base_output}{Passed to \code{consumer}.}

@@ -24,6 +24,8 @@ morie_esl_svc(
 \item{newdata}{Points to classify; defaults to \code{X}.}
 
 \item{tol, max_passes, seed}{SMO controls.}
+
+
 }
 \value{
 List with \code{w}, \code{b}, \code{margin}, \code{alpha}, \code{support}, \code{decision},

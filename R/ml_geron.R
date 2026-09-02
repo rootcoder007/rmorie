@@ -274,7 +274,7 @@ morie_stratsplt <- function(strata, testratio = 0.2) {
 
 #' Output of a convolutional layer, Equation 12-1 (p. 423)
 #'
-#' z\[i, j, k\] = b[k] + sum_u sum_v sum_kp x\[ip, jp, kp\] w\[u, v, kp, k\]
+#' z\[i, j, k\] = b\[k\] + sum_u sum_v sum_kp x\[ip, jp, kp\] w\[u, v, kp, k\]
 #' with ip = i * sh + u and jp = j * sw + v. This is a
 #' cross-correlation, as the book's own footnote 6 on p. 419 points
 #' out. Exported as morie_convlayer because morie_conv2d was already

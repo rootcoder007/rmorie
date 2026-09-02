@@ -2,7 +2,7 @@
 % Please edit documentation in R/betvae.R
 \name{Betavae}
 \alias{Betavae}
-\title{beta-VAE objective with an optional capacity target.}
+\title{beta-VAE objective with an optional capacity target}
 \usage{
 Betavae(
   x,

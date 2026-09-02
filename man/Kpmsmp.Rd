@@ -19,7 +19,7 @@ List with \code{estimate} (half-width at the last time),
 }
 \description{
 With sigma^2(t) the Greenwood sum, the band over the observed range is
-S(t) +/- h_alpha n^{-1/2} (1 + n sigma^2(t)) S(t), where h_alpha is
+S(t) +/- h_alpha n^\{-1/2\} (1 + n sigma^2(t)) S(t), where h_alpha is
 the upper alpha point of the supremum of a Brownian bridge.  h is
 found by bisection on the Kolmogorov series rather than read from a
 table, so any alpha may be used; at alpha = 0.05 it reproduces the
@@ -27,7 +27,7 @@ tabulated 1.3581.  Unlike the pointwise Greenwood interval the band
 holds simultaneously over t, so it is strictly wider.
 }
 \details{
-Formula: P(sup|B| > h) = 2 sum_k (-1)^{k+1} exp(-2 k^2 h^2) = alpha.
+Formula: P(sup|B| > h) = 2 sum_k (-1)^\{k+1\} exp(-2 k^2 h^2) = alpha.
 }
 \references{
 Hall and Wellner (1980), Confidence bands for a survival

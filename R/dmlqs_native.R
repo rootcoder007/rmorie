@@ -42,7 +42,7 @@
 #' Coerce an adjacency mapping to a list keyed by character atom id,
 #'
 #' each value a sorted unique integer vector of neighbours (with v
-#' itself excluded -- mirrors Python `set(adj[v]) - {v}`).
+#' itself excluded -- mirrors Python `set(adj\[v\]) - {v}`).
 #'
 #' @param adj Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return Nothing; this branch always raises.

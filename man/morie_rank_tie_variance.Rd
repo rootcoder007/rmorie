@@ -10,6 +10,7 @@ morie_rank_tie_variance(x = NULL, y = NULL, groups = NULL)
 \item{x, y}{the two samples (two-sample mode), or}
 
 \item{groups}{list of samples (Kruskal-Wallis mode).}
+
 }
 \value{
 two-sample: list U, W, mean_U, var_corrected,

@@ -5,7 +5,7 @@
 \alias{morie_tipsne_impute}
 \title{One completed outcome vector under the chosen imputation route}
 \usage{
-morie_tipsne_impute(e, y, arm, X, miss, fit, mi)
+morie_tipsne_impute(e, y, arm, X, miss, fit, mi) 
 }
 \arguments{
 \item{e}{A generator environment from .ghc_rng.}

@@ -32,6 +32,7 @@ spbayr(
 \item{interaction}{One of "I", "II", "III", "IV", or NULL.}
 
 \item{sigma2}{Scale parameter.}
+
 }
 \value{
 A list with \code{smr}, \code{precision}, \code{spatial_prior}, and when a

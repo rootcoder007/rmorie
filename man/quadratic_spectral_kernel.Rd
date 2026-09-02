@@ -5,7 +5,7 @@
 \alias{quadratic_spectral_kernel}
 \title{quadratic_spectral_kernel}
 \usage{
-quadratic_spectral_kernel(x)
+quadratic_spectral_kernel(x) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

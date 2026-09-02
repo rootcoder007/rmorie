@@ -19,3 +19,15 @@ morie_tmlediffkernel(
 \description{
 Compact alias per ledger/NAMING.md
 }
+\arguments{
+\item{y}{Argument \code{y}; see Usage.}
+\item{D}{Argument \code{D}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
+\item{epsilon}{Argument \code{epsilon}; see Usage.}
+\item{g_min}{Argument \code{g_min}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
+\item{g}{Argument \code{g}; see Usage.}
+\item{Q1}{Argument \code{Q1}; see Usage.}
+\item{Q0}{Argument \code{Q0}; see Usage.}
+}
+

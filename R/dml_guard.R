@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Internal guard for DoubleML cross-fitting via {future}
+#' Internal guard for DoubleML cross-fitting via \{future\}
 #'
 #' DoubleML cross-fits through \pkg{future}. Three failure modes are
 #' guarded here, uniformly, for every `$fit()` call site:

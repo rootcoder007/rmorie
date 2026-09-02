@@ -20,13 +20,13 @@ List with \code{estimate}, \code{se}, \code{lower},
 }
 \description{
 The estimator inverts the Horvitz-Thompson estimator of the
-distribution function, F_w(t) = sum_{y_i <= t} w_i / sum_i w_i.  With
+distribution function, F_w(t) = sum_\{y_i <= t\} w_i / sum_i w_i.  With
 equal weights it is exactly the type-1 sample quantile.  The interval
 is Woodruff's: invert the CDF at p -/+ z times the linearized standard
 error of F_w at the point estimate.
 }
 \details{
-Formula: Q_p = inf{t : F_w(t) >= p}.
+Formula: Q_p = inf\{t : F_w(t) >= p\}.
 }
 \examples{
 Svyqtl(c(4, 1, 3, 2, 5), NULL, 0.5)

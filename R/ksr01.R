@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Empirical process G_n(t) = sqrt(n)(F_n(t) - F(t)) at given points.
+#' Empirical process G_n(t) = sqrt(n)(F_n(t) - F(t)) at given points
 #'
 #' The returned covariance is that of the LIMIT, not of G_n, and is
 #' singular at the ends because F(t)(1 - F(t)) vanishes there.

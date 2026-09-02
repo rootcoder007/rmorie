@@ -5,7 +5,7 @@
 \alias{q_values}
 \title{q_values}
 \usage{
-q_values(T, R, gamma, V)
+q_values(T, R, gamma, V) 
 }
 \arguments{
 \item{T}{A vector; indexed elementwise.}

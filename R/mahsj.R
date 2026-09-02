@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' HKSJ confidence interval with a t prediction interval
 #'
-#' CI = mu +/- t_{k-1} se_HKSJ and PI = mu +/- t_{k-1} sqrt(tau^2 + se^2).
+#' CI = mu +/- t_\{k-1\} se_HKSJ and PI = mu +/- t_\{k-1\} sqrt(tau^2 + se^2).
 #' Source consulted: IntHout, Ioannidis and Borm (2014), BMC Medical Research
 #' Methodology 14:25.  Verified against metafor::rma(test = "knha") and its
 #' predict() prediction interval.

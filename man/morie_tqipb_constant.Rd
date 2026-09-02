@@ -5,7 +5,7 @@
 \alias{morie_tqipb_constant}
 \title{Per-unit-norm inner-product distortion constant}
 \usage{
-morie_tqipb_constant(bits, d, route = "table")
+morie_tqipb_constant(bits, d, route = "table") 
 }
 \arguments{
 \item{bits}{Bit-width per coordinate, at least 1.}

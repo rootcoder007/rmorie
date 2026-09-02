@@ -29,6 +29,7 @@ morie_tmle_ate(
 \item{scale_outcome}{Rescale \code{y} to \[0, 1\] and map back.}
 
 \item{max_iter, tol}{Fluctuation Newton controls.}
+
 }
 \value{
 List with \code{ate}, \code{se}, \code{ci}, \code{eif}, \code{epsilon}, \code{q1}, \code{q0},

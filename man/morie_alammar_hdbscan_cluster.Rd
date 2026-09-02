@@ -5,7 +5,7 @@
 \alias{morie_alammar_hdbscan_cluster}
 \title{Density clustering, HDBSCAN style (Campello et al. 2013)}
 \usage{
-morie_alammar_hdbscan_cluster(X, min_cluster_size = 3, min_samples = NULL)
+morie_alammar_hdbscan_cluster(X, min_cluster_size = 3, min_samples = NULL) 
 }
 \arguments{
 \item{X}{Point matrix.}

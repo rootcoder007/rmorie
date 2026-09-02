@@ -5,7 +5,7 @@
 \alias{leaf_of}
 \title{leaf_of}
 \usage{
-leaf_of(tree, x)
+leaf_of(tree, x) 
 }
 \arguments{
 \item{tree}{See Usage.}

@@ -5,7 +5,7 @@
 \alias{morie_vepan_annotate}
 \title{morie_vepan_annotate}
 \usage{
-morie_vepan_annotate(variant, transcripts, genome, upstream = 5000, downstream = 5000)
+morie_vepan_annotate(variant, transcripts, genome, upstream = 5000, downstream = 5000) 
 }
 \arguments{
 \item{variant}{Passed to \code{.vepan_variant}.}

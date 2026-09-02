@@ -29,6 +29,7 @@ Persample(
 \item{t, T}{anneal beta linearly to 1 at t = T.}
 
 \item{n_sample}{draw this many indices deterministically.}
+
 }
 \value{
 list: estimate, prob, weight, priority, beta_t, sample, n,

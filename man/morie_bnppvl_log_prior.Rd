@@ -5,7 +5,7 @@
 \alias{morie_bnppvl_log_prior}
 \title{The log prior density of a pyramid, factorised level by level}
 \usage{
-morie_bnppvl_log_prior(q, m, c = 2.5, schedule = "cubic", centring = "uniform", nullq = NULL)
+morie_bnppvl_log_prior(q, m, c = 2.5, schedule = "cubic", centring = "uniform", nullq = NULL) 
 }
 \arguments{
 \item{q}{The dyadic grid.}

@@ -36,7 +36,7 @@
 #' (Blei et al. 2017) -- both approaches optimise it, so a flow of
 #' depth 0 must equal plain mean-field.
 #'
-#' @param u,w,z Numeric vectors of equal length.
+#' @param u,w Numeric vectors of equal length.
 #' @param b Numeric scalar.
 #' @param value Numeric scalar for \code{transform_to_real}.
 #' @param support One of \code{"positive"}, \code{"unit"},

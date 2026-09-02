@@ -10,7 +10,7 @@ morie_safe_factor(x, levels, reference = NULL)
 \item{x}{Character (or factor) vector.}
 
 \item{levels}{Complete character vector of allowed levels, in the
-intended order — the FIRST is the reference category.}
+intended order -- the FIRST is the reference category.}
 
 \item{reference}{Optional; assert which level is the reference
 (must equal \code{levels\[1\]}).}

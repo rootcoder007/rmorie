@@ -5,7 +5,7 @@
 \alias{morie_egcn}
 \title{Morie entry point: matches the Python payload keys}
 \usage{
-morie_egcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL)
+morie_egcn(H, X, layers, phi_e, phi_x, phi_h, A = NULL, C = NULL) 
 }
 \arguments{
 \item{H}{Carried through into a list the body builds.}

@@ -5,7 +5,7 @@
 \alias{lsa_decompose}
 \title{lsa_decompose}
 \usage{
-lsa_decompose(X, k_dim = NULL, how = "log_entropy")
+lsa_decompose(X, k_dim = NULL, how = "log_entropy") 
 }
 \arguments{
 \item{X}{Passed to \code{term_weighting}.}

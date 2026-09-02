@@ -3,13 +3,19 @@
 % the formals.
 \name{morie_survvae_concordance}
 \alias{morie_survvae_concordance}
-\title{Harrell\'s C at a horizon.}
+\title{Harrell\'s C at a horizon}
 \usage{
-morie_survvae_concordance(fit_result, X, times, events, horizon = NULL)
+morie_survvae_concordance(fit_result, X, times, events, horizon = NULL) 
 }
 \arguments{
 \item{times}{Numeric vector of survival times.}
 \item{events}{Event indicator.}
+
+\item{fit_result}{Argument \code{fit_result}; see Usage.}
+
+\item{X}{Argument \code{X}; see Usage.}
+
+\item{horizon}{Argument \code{horizon}; see Usage.}
 }
 \description{
 Mirrors \code{morie.fn.survrsf.c_index}: pairwise count of concordances, discordances and tied risks over the comparable pairs.

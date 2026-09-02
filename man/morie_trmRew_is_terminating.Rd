@@ -5,7 +5,7 @@
 \alias{morie_trmRew_is_terminating}
 \title{Whether every rule strictly decreases in the LPO. Sufficient, not}
 \usage{
-morie_trmRew_is_terminating(rules, precedence)
+morie_trmRew_is_terminating(rules, precedence) 
 }
 \arguments{
 \item{rules}{A vector; its length is taken and its elements indexed.}

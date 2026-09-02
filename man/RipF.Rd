@@ -3,7 +3,7 @@
 \name{RipF}
 \alias{RipF}
 \alias{morie_ripley_f_function}
-\title{F function -- empty-space (point-to-nearest-event) distance function.}
+\title{F function -- empty-space (point-to-nearest-event) distance function}
 \usage{
 RipF(points, window, r)
 

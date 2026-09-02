@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Bayes factor for H0: p = p* against a nonparametric alternative.
+#' Bayes factor for H0: p = p* against a nonparametric alternative
 #'
 #' Everything is done in logs. \code{lam} is the prior weight of the
 #' ALTERNATIVE, so the null carries 1 - lam.

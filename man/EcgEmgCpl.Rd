@@ -5,7 +5,7 @@
 \alias{EcgEmgCpl}
 \title{Section 2.2.6 (EMG RMS and mean frequency rise with contraction)}
 \usage{
-EcgEmgCpl(ecg, emg, qrs, fs)
+EcgEmgCpl(ecg, emg, qrs, fs) 
 }
 \arguments{
 \item{ecg}{A vector; its length is taken.}

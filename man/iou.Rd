@@ -5,7 +5,7 @@
 \alias{iou}
 \title{iou}
 \usage{
-iou(a, b, threshold = 0.5)
+iou(a, b, threshold = 0.5) 
 }
 \arguments{
 \item{a}{Passed to \code{.sammkr_flat}.}

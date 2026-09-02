@@ -24,6 +24,8 @@ morie_quantile_causal_forest(
 \item{quantile}{Quantile level in (0, 1).}
 
 \item{n_trees, min_leaf, seed}{Forest hyperparameters.}
+
+
 }
 \value{
 List with \code{cdf_effect}, \code{shift_effect}, \code{threshold},

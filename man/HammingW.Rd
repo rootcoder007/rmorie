@@ -5,7 +5,7 @@
 \alias{HammingW}
 \title{W(n) = 0.54 - 0.46 cos(2 pi n/(N-1)).  The 0.54/0.46 split cancels}
 \usage{
-HammingW(N)
+HammingW(N) 
 }
 \arguments{
 \item{N}{Coerced to integer by the body, with \code{as.integer}.}

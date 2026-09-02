@@ -5,7 +5,8 @@
 \alias{morie_prxgms_prox_gradient}
 \title{morie_prxgms_prox_gradient}
 \usage{
-morie_prxgms_prox_gradient(fun, grad, prox, x0, L = 1, max.iter = 500L, tol = 1e-10, accelerate = TRUE, backtrack = FALSE, eta = 2, g.fun = NULL)
+morie_prxgms_prox_gradient(fun, grad, prox, x0, L = 1, max.iter = 500L, tol = 1e-10, accelerate = TRUE, 
+    backtrack = FALSE, eta = 2, g.fun = NULL) 
 }
 \arguments{
 \item{fun}{Accepted by the signature and not used anywhere in the body.}

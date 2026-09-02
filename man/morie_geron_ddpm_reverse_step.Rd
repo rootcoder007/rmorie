@@ -27,6 +27,8 @@ morie_geron_ddpm_reverse_step(
 \item{z}{Optional noise; otherwise LCG normals.}
 
 \item{seed}{LCG seed.}
+
+
 }
 \value{
 List with \code{x_prev}, \code{mean}, \code{noise_term}, \code{eps_coef},

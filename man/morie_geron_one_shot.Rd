@@ -5,7 +5,7 @@
 \alias{morie_geron_one_shot}
 \title{One-shot in-context prompting: assemble prompt, call model (Geron Ch 15, hmosf)}
 \usage{
-morie_geron_one_shot(model, example, query, verbalizer = NULL)
+morie_geron_one_shot(model, example, query, verbalizer = NULL) 
 }
 \arguments{
 \item{model}{Function `model(prompt) -> prediction`.}

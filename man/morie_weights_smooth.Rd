@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_smooth}
 \alias{morie_weights_smooth}
-\title{Smooth survey weights via shrinkage toward the mean (or log-mean).}
+\title{Smooth survey weights via shrinkage toward the mean (or log-mean)}
 \usage{
 morie_weights_smooth(
   weights,
@@ -23,7 +23,7 @@ mean factor.}
 A numeric value.
 }
 \description{
-Smooth survey weights via shrinkage toward the mean (or log-mean).
+Smooth survey weights via shrinkage toward the mean (or log-mean)
 }
 \examples{
 set.seed(1)

@@ -5,7 +5,7 @@
 \alias{varcal_cheatsheet}
 \title{varcal_cheatsheet}
 \usage{
-varcal_cheatsheet()
+varcal_cheatsheet() 
 }
 \description{
 A step of the varcal_native implementation. No other function in the package calls it. See the file header for the source the module follows.

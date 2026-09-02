@@ -5,7 +5,7 @@
 \alias{sdpwts_is_psd}
 \title{Eigenvalue test on the constraint matrix}
 \usage{
-sdpwts_is_psd(M, tol = -1e-10)
+sdpwts_is_psd(M, tol = -1e-10) 
 }
 \arguments{
 \item{M}{A matrix; passed to \code{as.matrix}.}

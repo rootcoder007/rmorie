@@ -5,7 +5,7 @@
 \alias{morie_matching_abadie_imbens_kernel_cpp}
 \title{morie_matching_abadie_imbens_kernel_cpp}
 \usage{
-morie_matching_abadie_imbens_kernel_cpp(y, t, treated_pos, control_pos)
+morie_matching_abadie_imbens_kernel_cpp(y, t, treated_pos, control_pos) 
 }
 \arguments{
 \item{y}{Passed to \code{.Call}.}

@@ -15,6 +15,7 @@ morie_impute_untreated(Y, treated, X = NULL, max_iter = 2000L, tol = 1e-13)
 periods.}
 
 \item{max_iter, tol}{Solver controls.}
+
 }
 \value{
 A list with \code{Y0}, \code{alpha} (unit effects),

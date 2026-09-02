@@ -26,6 +26,9 @@ error (0 = point estimate only, SE is \code{NA}).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{Significance level.}
+
+
+
 }
 \value{
 A result list; see \code{\link{morie_did_2x2}}.

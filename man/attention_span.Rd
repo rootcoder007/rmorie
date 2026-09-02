@@ -5,7 +5,7 @@
 \alias{attention_span}
 \title{attention_span}
 \usage{
-attention_span(weights, position = NULL)
+attention_span(weights, position = NULL) 
 }
 \arguments{
 \item{weights}{See Usage.}

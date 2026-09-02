@@ -5,7 +5,7 @@
 \alias{moment_vectors}
 \title{moment_vectors}
 \usage{
-moment_vectors(e, X)
+moment_vectors(e, X) 
 }
 \arguments{
 \item{e}{A vector; its length is taken.}

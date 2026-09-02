@@ -131,7 +131,7 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' The rigid motion that best takes P onto Q, and the residual
 #'
 #' The rotation is the orthogonal polar factor of the cross-covariance
-#' C = sum q p', obtained as C (C'C)^{-1/2} from the eigendecomposition
+#' C = sum q p', obtained as C (C'C)^\{-1/2\} from the eigendecomposition
 #' of C'C. If that factor comes out with a negative determinant it is a
 #' reflection, not a rotation, and the sign is flipped on the direction
 #' of least variance -- the standard correction, and the reason a naive

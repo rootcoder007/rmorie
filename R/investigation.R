@@ -2,7 +2,7 @@
 #'
 #' Mirrors the Python `morie.run_weighted_logistic_analysis()`. Fits a
 #' binary-outcome model with design-based (Binder-linearized) standard
-#' errors via rmorie's native weighted GLM — numerically identical to
+#' errors via rmorie's native weighted GLM -- numerically identical to
 #' `survey::svyglm(ids = ~1)` but with no survey dependency.
 #'
 #' @param data A `data.frame` containing outcome, predictors, and (optionally)

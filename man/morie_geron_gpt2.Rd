@@ -14,6 +14,7 @@ morie_geron_gpt2(X, n_layers = NULL, n_heads = NULL, size = "small", ...)
 \item{size}{"small"/"medium"/"large"/"xl".}
 
 \item{...}{Other decoder_only args.}
+
 }
 \value{
 List with \code{total_params}, \code{non_embedding_params}, \code{config}, \code{params_vs_small}, \code{all_sizes}.

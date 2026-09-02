@@ -25,6 +25,12 @@ morie_geron_mistral7b(
 \item{n_layers, d_model, n_heads, n_kv_heads, d_ff, vocab_size, window}{Architecture.}
 
 \item{dtype_bytes}{Cache bytes/elem.}
+
+
+
+
+
+
 }
 \value{
 List with total_parameters, parameters_per_layer, breakdown, d_head, kv_cache_bytes,

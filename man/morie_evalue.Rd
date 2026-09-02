@@ -27,6 +27,7 @@ morie_evalue(
 \item{sd}{For OLS, the outcome standard deviation.}
 
 \item{true}{Null value (default 1 for ratio scales, 0 for MD/OLS).}
+
 }
 \value{
 A list with \code{point} (E-value for the estimate) and

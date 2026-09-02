@@ -5,7 +5,7 @@
 \alias{bigram_topic_predictive}
 \title{bigram_topic_predictive}
 \usage{
-bigram_topic_predictive(N_ijk, N_jk, beta, m, prior = 1)
+bigram_topic_predictive(N_ijk, N_jk, beta, m, prior = 1) 
 }
 \arguments{
 \item{N_ijk}{Coerced to numeric by the body, with \code{as.numeric}.}

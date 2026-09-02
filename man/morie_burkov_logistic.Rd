@@ -5,7 +5,7 @@
 \alias{morie_burkov_logistic}
 \title{Logistic regression sigma(w.x + b) (Burkov Eq 1.8)}
 \usage{
-morie_burkov_logistic(w, x, b)
+morie_burkov_logistic(w, x, b) 
 }
 \arguments{
 \item{w,x}{Vectors.}

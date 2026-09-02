@@ -5,10 +5,16 @@
 \alias{Signz}
 \title{Sign-test normal approximation -- eq. (5.4.7), p. 174}
 \usage{
-Signz(k, n, alternative = "two-sided", correct = TRUE)
+Signz(k, n, alternative = "two-sided", correct = TRUE) 
 }
 \description{
 Sign-test normal approximation -- eq. (5.4.7), p. 174
+}
+\arguments{
+\item{k}{Argument \code{k}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
+\item{correct}{Argument \code{correct}; see Usage.}
 }
 \value{
 A list with \code{z}, \code{p_value}, \code{statistic}, \code{n}, \code{mean}, \code{var}, \code{alternative}.

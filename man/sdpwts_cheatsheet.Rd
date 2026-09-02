@@ -5,7 +5,7 @@
 \alias{sdpwts_cheatsheet}
 \title{sdpwts_cheatsheet}
 \usage{
-sdpwts_cheatsheet()
+sdpwts_cheatsheet() 
 }
 \description{
 A step of the sdpwts_native implementation. No other function in the package calls it. See the file header for the source the module follows.

@@ -5,7 +5,7 @@
 \alias{generate_walks}
 \title{generate_walks}
 \usage{
-generate_walks(adj, num_walks = 10, length = 10, p = 1, q = 1, seed = 0, weights = NULL)
+generate_walks(adj, num_walks = 10, length = 10, p = 1, q = 1, seed = 0, weights = NULL) 
 }
 \arguments{
 \item{adj}{Passed to \code{names}.}

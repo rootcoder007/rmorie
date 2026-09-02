@@ -5,7 +5,7 @@
 \alias{online_tmle_series}
 \title{online_tmle_series}
 \usage{
-online_tmle_series(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10)
+online_tmle_series(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) 
 }
 \arguments{
 \item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}

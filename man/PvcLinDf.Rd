@@ -5,7 +5,7 @@
 \alias{PvcLinDf}
 \title{Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR}
 \usage{
-PvcLinDf(rr, ff, train = NULL)
+PvcLinDf(rr, ff, train = NULL) 
 }
 \arguments{
 \item{rr}{A vector; its length is taken.}

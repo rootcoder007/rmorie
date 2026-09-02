@@ -5,7 +5,7 @@
 \alias{as.double.morie_frac}
 \title{As.numeric() dispatches to as.double methods, not as.numeric ones}
 \usage{
-as.double.morie_frac(x, ...)
+\method{as.double}{morie_frac}(x, ...) 
 }
 \arguments{
 \item{x}{A list; the body reads \code{$d}, \code{$n} from it.}

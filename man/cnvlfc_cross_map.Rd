@@ -5,7 +5,8 @@
 \alias{cnvlfc_cross_map}
 \title{cnvlfc_cross_map}
 \usage{
-cnvlfc_cross_map(driver, response, E = 2L, tau = 1L, library = NULL, seed = 1L, exclude = 0L)
+cnvlfc_cross_map(driver, response, E = 2L, tau = 1L, library = NULL, seed = 1L, 
+    exclude = 0L) 
 }
 \arguments{
 \item{driver}{Passed to \code{.cnvlfc_cross_map}.}

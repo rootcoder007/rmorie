@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' G function -- nearest-neighbour event-to-event distance distribution.
+#' G function -- nearest-neighbour event-to-event distance distribution
 #'
 #' \code{G(y) = P(nearest-neighbour distance <= y)}. With \code{h_i} the
 #' distance from event \code{i} to the nearest other event, the raw

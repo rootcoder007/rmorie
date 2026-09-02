@@ -2,7 +2,7 @@
 % Please edit documentation in R/arimab.R
 \name{Arimahr}
 \alias{Arimahr}
-\title{Hannan-Rissanen estimation of an ARIMA(p, d, q) model.}
+\title{Hannan-Rissanen estimation of an ARIMA(p, d, q) model}
 \usage{
 Arimahr(y, p = 1, q = 1, d = 0, m = NULL)
 }
@@ -15,6 +15,7 @@ Arimahr(y, p = 1, q = 1, d = 0, m = NULL)
 
 \item{m}{Order of the stage-one autoregression; NULL uses
 max(p + q + 1, floor(sqrt(n)) + 1).}
+
 }
 \value{
 List with phi, theta, intercept, sigma2, resid, m, p, q, d,

@@ -43,7 +43,7 @@ Taking the cluster size Poisson, so tau^2 = m, the bracket collapses to
 m^2, and comparing (3.6.2) with the general second-moment form gives
 rho_2(u) = (lambda m)^2 + lambda m^2 gamma(u), hence
 g(u) = 1 + gamma(u) / lambda and K(t) = pi t^2 + H(t) / lambda with
-H(t) = Int_{|u| <= t} gamma(u) du.
+H(t) = Int_\{|u| <= t\} gamma(u) du.
 
 This function is the planar case n = 2 with satellites uniform on the
 disc of radius r about their centre, the model that carries Matern name

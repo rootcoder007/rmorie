@@ -5,7 +5,8 @@
 \alias{morie_genmol}
 \title{Sample molecules from a latent model and score what came back}
 \usage{
-morie_genmol(model, n_samples, conditions = NULL, route = "vae", temperature = 1, seed = 0, steps = 20L, T = 10L, beta = 1)
+morie_genmol(model, n_samples, conditions = NULL, route = "vae", temperature = 1, 
+    seed = 0, steps = 20L, T = 10L, beta = 1) 
 }
 \arguments{
 \item{model}{A list with mu and logvar for the latent prior, and   decoder, a function from a latent vector to a SMILES string.   Without a decoder nothing is generated and the reason says so.}

@@ -5,7 +5,7 @@
 \alias{ar1_fit}
 \title{ar1_fit}
 \usage{
-ar1_fit(x)
+ar1_fit(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

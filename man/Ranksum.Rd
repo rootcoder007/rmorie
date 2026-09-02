@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmwlx.R
 \name{Ranksum}
 \alias{Ranksum}
-\title{Wilcoxon rank-sum test, normal approximation with a tie correction.}
+\title{Wilcoxon rank-sum test, normal approximation with a tie correction}
 \usage{
 Ranksum(x, y, correct = TRUE)
 }
@@ -10,6 +10,7 @@ Ranksum(x, y, correct = TRUE)
 \item{x, y}{The two samples.}
 
 \item{correct}{Apply the 1/2 continuity correction.}
+
 }
 \value{
 List with \code{statistic}, \code{U}, \code{z},
@@ -23,9 +24,9 @@ mean.
 }
 \details{
 Formula: W = sum of the ranks of x in the pooled sample;
-E\link[dlm:W]{W} = n1(n1 + n2 + 1)/2;
-Var\link[dlm:W]{W} = n1 n2 (N + 1)/12 - n1 n2 sum(t^3 - t)/(12 N (N - 1));
-z = (W - E\link[dlm:W]{W} -+ 1/2) / sd
+E[W] = n1(n1 + n2 + 1)/2;
+Var[W] = n1 n2 (N + 1)/12 - n1 n2 sum(t^3 - t)/(12 N (N - 1));
+z = (W - E[W] -+ 1/2) / sd
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -41,7 +41,7 @@ Download a CIHI indicator .xlsx data table
 \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 # Any table from the catalogue, e.g. the injury/trauma ED table:
-u <- morie_datasets_cihi_data_tables()$url\[1\]
+u <- morie_datasets_cihi_data_tables()$url[1]
 df <- morie_ingest_cihi_xlsx(u)
 }
 \dontshow{\}) # examplesIf}

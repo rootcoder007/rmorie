@@ -5,7 +5,7 @@
 \alias{morie_poissp_cheatsheet}
 \title{morie_poissp_cheatsheet}
 \usage{
-morie_poissp_cheatsheet()
+morie_poissp_cheatsheet() 
 }
 \description{
 A step of the poissp_native implementation. No other function in the package calls it. See the file header for the source the module follows.

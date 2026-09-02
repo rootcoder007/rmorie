@@ -5,7 +5,7 @@
 \alias{gelu}
 \title{GELU exact using erf; avoid pnorm dependency for portability}
 \usage{
-gelu(x)
+gelu(x) 
 }
 \arguments{
 \item{x}{Numeric; combined arithmetically in the body.}

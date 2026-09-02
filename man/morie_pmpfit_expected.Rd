@@ -5,7 +5,7 @@
 \alias{morie_pmpfit_expected}
 \title{Expected number of clusters under Pitman-Yor}
 \usage{
-morie_pmpfit_expected(n, alpha, theta)
+morie_pmpfit_expected(n, alpha, theta) 
 }
 \arguments{
 \item{n}{Number of draws, at least 1.}
@@ -13,7 +13,7 @@ morie_pmpfit_expected(n, alpha, theta)
 \item{theta}{Concentration.}
 }
 \description{
-Computes E[K_n] by the exact recursion ek_{i+1} = ek_i + (theta + ek_i * alpha) / (theta + i). The DP\'s count grows like theta*log(n); a positive discount makes it grow like n^alpha.
+Computes E[K_n] by the exact recursion ek_\{i+1\} = ek_i + (theta + ek_i * alpha) / (theta + i). The DP\'s count grows like theta*log(n); a positive discount makes it grow like n^alpha.
 }
 \value{
 A list with `expected`, `n`, `alpha`, `theta`, `regime`,   `note`.

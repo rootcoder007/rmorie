@@ -2,7 +2,7 @@
 % Please edit documentation in R/tqoutl.R
 \name{Outsplit}
 \alias{Outsplit}
-\title{Split coordinates into outlier and non-outlier sets, bits allocated apart.}
+\title{Split coordinates into outlier and non-outlier sets, bits allocated apart}
 \usage{
 Outsplit(x, b_out = 8, b_in = 2, frac = 0.01)
 }

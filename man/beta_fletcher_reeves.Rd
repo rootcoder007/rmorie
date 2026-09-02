@@ -5,7 +5,7 @@
 \alias{beta_fletcher_reeves}
 \title{beta_fletcher_reeves}
 \usage{
-beta_fletcher_reeves(g_new, g_old)
+beta_fletcher_reeves(g_new, g_old) 
 }
 \arguments{
 \item{g_new}{Passed to \code{.cgnonl_dot}.}

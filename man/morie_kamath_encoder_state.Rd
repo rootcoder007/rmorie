@@ -5,7 +5,7 @@
 \alias{morie_kamath_encoder_state}
 \title{Kamath Ch 2 encoder-decoder scaffolding (Eq 2.1-2.6)}
 \usage{
-morie_kamath_encoder_state(h_t_1, x_t, f = NULL)
+morie_kamath_encoder_state(h_t_1, x_t, f = NULL) 
 }
 \arguments{
 \item{h_t_1,x_t}{Previous state and input.}

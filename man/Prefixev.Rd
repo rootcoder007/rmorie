@@ -2,7 +2,7 @@
 % Please edit documentation in R/prdtA.R
 \name{Prefixev}
 \alias{Prefixev}
-\title{Evaluate a Polish-notation expression, right to left.}
+\title{Evaluate a Polish-notation expression, right to left}
 \usage{
 Prefixev(tokens)
 }

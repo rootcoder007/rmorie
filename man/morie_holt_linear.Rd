@@ -24,6 +24,7 @@ one-step SSE when NULL.}
 \item{damped}{logical; damp the trend.}
 
 \item{phi}{damping parameter in (0, 1].}
+
 }
 \value{
 list: forecast, level, trend, fitted, residuals, sse,

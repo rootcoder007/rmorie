@@ -2,7 +2,7 @@
 % Please edit documentation in R/bdintp.R
 \name{Qcritset}
 \alias{Qcritset}
-\title{Criterion-function set estimate for moment inequalities.}
+\title{Criterion-function set estimate for moment inequalities}
 \usage{
 Qcritset(mbar, se = NULL, n = 1, cutoff = NULL)
 }
@@ -21,7 +21,7 @@ cutoff, g, J.
 }
 \description{
 Q_n(theta) = sum_j [max(mbar_j/sigma_j, 0)]^2 and
-C_n = {theta : n Q_n(theta) <= cutoff}.
+C_n = \{theta : n Q_n(theta) <= cutoff\}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

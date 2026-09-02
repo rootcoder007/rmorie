@@ -8,7 +8,7 @@
 #' number of rounds so both language arms take identical steps.
 #'
 #' Formula: S <- S + argmin_v <grad f(x), v>;
-#'   x <- argmin{ f(x) : x in conv(S) }.
+#'   x <- argmin\{ f(x) : x in conv(S) \}.
 #'
 #' @param f Objective function of a numeric vector.
 #' @param grad_f Gradient function.

@@ -12,6 +12,8 @@ morie_geron_gan_minimax(real, fake, D_real, D_fake, eps = 1e-12)
 \item{D_real, D_fake}{Discriminator probabilities in [0, 1].}
 
 \item{eps}{Clip guard in (0, 0.5).}
+
+
 }
 \value{
 List with \code{value}, \code{d_loss}, \code{g_loss_nonsaturating},

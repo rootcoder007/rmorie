@@ -5,7 +5,7 @@
 \alias{WienerHopf}
 \title{Eq. (3.168): Phi w = Theta.  At the solution the input vector and the}
 \usage{
-WienerHopf(phi, theta)
+WienerHopf(phi, theta) 
 }
 \arguments{
 \item{phi}{A matrix; passed to \code{as.matrix}.}

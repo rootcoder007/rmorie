@@ -5,7 +5,7 @@
 \alias{trclrn_predict_rule}
 \title{trclrn_predict_rule}
 \usage{
-trclrn_predict_rule(tree, X)
+trclrn_predict_rule(tree, X) 
 }
 \arguments{
 \item{tree}{See Usage.}

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 #' Internal helpers shared across the Ghosal Bayesian-nonparametrics suite.
-#' Not exported; consumed by ghosal_* callables only.
+#' Not exported; consumed by ghosal_* callables only
 #' @keywords internal
 #' @name ghosal_bnp_helpers
 NULL

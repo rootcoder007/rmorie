@@ -2,7 +2,7 @@
 % Please edit documentation in R/dropr.R
 \name{Dropmask}
 \alias{Dropmask}
-\title{Apply a dropout mask with inverted scaling.}
+\title{Apply a dropout mask with inverted scaling}
 \usage{
 Dropmask(x, mask, rate)
 }
@@ -17,7 +17,7 @@ Dropmask(x, mask, rate)
 List with \code{activation}, \code{kept}, \code{dropped}, \code{rate}, \code{n}.
 }
 \description{
-Formula: a_i = x_i * m_i / (1 - rate),  m_i in {0, 1} supplied by the caller
+Formula: a_i = x_i * m_i / (1 - rate),  m_i in \{0, 1\} supplied by the caller
 }
 \examples{
 set.seed(1)

@@ -5,7 +5,7 @@
 \alias{orf_estimate}
 \title{One point estimate theta(x). residualize="local" fits the}
 \usage{
-orf_estimate(Y, T, X, W, x, trees, residualize = "local", ridge = 1e-08, leave_one_out = TRUE)
+orf_estimate(Y, T, X, W, x, trees, residualize = "local", ridge = 1e-08, leave_one_out = TRUE) 
 }
 \arguments{
 \item{Y}{A vector; its length is taken and its elements indexed.}

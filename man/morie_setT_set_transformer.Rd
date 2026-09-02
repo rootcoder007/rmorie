@@ -5,7 +5,7 @@
 \alias{morie_setT_set_transformer}
 \title{Back-compatible wrapper over \code{setT}}
 \usage{
-morie_setT_set_transformer(X = NULL, k = NULL, S = NULL, params = NULL)
+morie_setT_set_transformer(X = NULL, k = NULL, S = NULL, params = NULL) 
 }
 \arguments{
 \item{X}{Numeric matrix \code{n x d}.}

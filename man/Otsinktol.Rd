@@ -10,6 +10,7 @@ Otsinktol(T, a, b)
 \item{T}{Coupling matrix.}
 
 \item{a, b}{Target marginals; each closed here.}
+
 }
 \value{
 Named list with \code{estimate}, \code{row_error}, \code{col_error},

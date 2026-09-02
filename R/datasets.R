@@ -13,7 +13,7 @@
 # Internal helpers
 # ---------------------------------------------------------------------------
 
-#' Resolve a included synthetic CSV path from the morie R package.
+#' Resolve a included synthetic CSV path from the morie R package
 #' @keywords internal
 #' @noRd
 .morie_dataset_pkg_csv <- function(name) {
@@ -29,7 +29,7 @@
   path
 }
 
-#' Read a included synthetic frame, warning the user it's a toy dataset.
+#' Read a included synthetic frame, warning the user it's a toy dataset
 #' @keywords internal
 #' @noRd
 .morie_dataset_read_synthetic <- function(name, kind, columns = NULL) {
@@ -58,7 +58,7 @@
   utils::read.csv(path, stringsAsFactors = FALSE)
 }
 
-#' Build a SQL-ish `WHERE` clause for an "OCC_YEAR = ?" or "1=1" filter.
+#' Build a SQL-ish `WHERE` clause for an "OCC_YEAR = ?" or "1=1" filter
 #' @keywords internal
 #' @noRd
 .morie_dataset_year_where <- function(year) {
@@ -195,7 +195,7 @@
   )
 }
 
-#' Status-aware POST + JSON body. 3ZZ.
+#' Status-aware POST + JSON body. 3ZZ
 #' @keywords internal
 #' @noRd
 .morie_dataset_http_post_json_with_status <- function(url, body,
@@ -414,7 +414,7 @@
   httr2::resp_body_json(resp, simplifyVector = TRUE)
 }
 
-#' Convert a list-of-records / data.frame response into a clean data.frame.
+#' Convert a list-of-records / data.frame response into a clean data.frame
 #' @keywords internal
 #' @noRd
 .morie_dataset_records_to_df <- function(records) {
@@ -435,7 +435,7 @@
 # TPS -- Toronto Police Service ArcGIS
 # ---------------------------------------------------------------------------
 
-#' Default TPS ArcGIS layer registry (verified 2026-05).
+#' Default TPS ArcGIS layer registry (verified 2026-05)
 #' @keywords internal
 #' @noRd
 #' Fetch a TPS ArcGIS FeatureServer layer as a data frame.
@@ -474,7 +474,7 @@
   df
 }
 
-#' TPS Major Crime Indicators feed.
+#' TPS Major Crime Indicators feed
 #'
 #' @param year Integer or `NULL`.  If set, filter to `OCC_YEAR == year`
 #'   server-side.
@@ -510,7 +510,7 @@ morie_datasets_tps_major_crime <- function(year = NULL,
   )
 }
 
-#' TPS Shootings and Firearm Discharges feed.
+#' TPS Shootings and Firearm Discharges feed
 #'
 #' @inheritParams morie_datasets_tps_major_crime
 #' @return A `data.frame`.
@@ -528,7 +528,7 @@ morie_datasets_tps_shootings <- function(year = NULL, max_features = NULL) {
   )
 }
 
-#' TPS Homicides feed.
+#' TPS Homicides feed
 #'
 #' @inheritParams morie_datasets_tps_major_crime
 #' @return A `data.frame`.
@@ -546,7 +546,7 @@ morie_datasets_tps_homicide <- function(year = NULL, max_features = NULL) {
   )
 }
 
-#' List the TPS open-data layers included with morie.
+#' List the TPS open-data layers included with morie
 #'
 #' @return A `data.frame` with columns `name` and `url`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
@@ -689,7 +689,7 @@ morie_datasets_otis_a01 <- function(offline = TRUE, ...) {
 # SIU -- Special Investigations Unit director's reports
 # ---------------------------------------------------------------------------
 
-#' SIU director's-reports index (legacy PDF anchors).
+#' SIU director's-reports index (legacy PDF anchors)
 #'
 #' The SIU re-launched their site in 2025 with a JS-rendered case list;
 #' this returns the legacy-pattern anchor frame which may be empty.
@@ -733,7 +733,7 @@ morie_datasets_siu_director_reports <- function() {
   )
 }
 
-#' Download an SIU director's-report PDF and return its plain text.
+#' Download an SIU director's-report PDF and return its plain text
 #'
 #' @param url Character; direct PDF URL.  Required unless `offline = TRUE`.
 #' @param offline Logical; if `TRUE`, return the included synthetic
@@ -773,7 +773,7 @@ morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
 ")
 }
 
-#' Extract structured fields from an SIU director's-report text or URL.
+#' Extract structured fields from an SIU director's-report text or URL
 #'
 #' @param text_or_url Character scalar; either the report text (re-used)
 #'   or a PDF URL (fetched and parsed first).
@@ -821,7 +821,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 # Socrata -- Chicago + NYC OpenData
 # ---------------------------------------------------------------------------
 
-#' Documented Socrata column schema for Chicago Crimes (ijzp-q8t2).
+#' Documented Socrata column schema for Chicago Crimes (ijzp-q8t2)
 #' @keywords internal
 #' @noRd
 .MORIE_CHICAGO_CRIME_COLUMNS <- c(
@@ -832,7 +832,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
   "latitude", "longitude", "location"
 )
 
-#' Generic Socrata JSON fetch (handles `$where`, `$limit`, `$$app_token`).
+#' Generic Socrata JSON fetch (handles `$where`, `$limit`, `$$app_token`)
 #'
 #' Two modes:
 #'   * `paginate = FALSE` (default): single SODA2 request. Honours
@@ -1253,7 +1253,7 @@ morie_datasets_chicago_crime <- function(year = NULL,
   )
 }
 
-#' NYC OpenData SQF resource map (verified 2026-05).
+#' NYC OpenData SQF resource map (verified 2026-05)
 #' @keywords internal
 #' @noRd
 .MORIE_NYC_SQF_RESOURCES <- list(
@@ -1262,7 +1262,7 @@ morie_datasets_chicago_crime <- function(year = NULL,
   `2022` = "https://data.cityofnewyork.us/resource/e4yi-bvqr.json"
 )
 
-#' NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData.
+#' NYPD Stop, Question and Frisk (SQF) microdata via NYC OpenData
 #'
 #' @param year Integer or `NULL`; release year (one of 2022, 2023, 2024).
 #'   `NULL` defaults to the most-recent registered year.
@@ -1316,7 +1316,7 @@ morie_datasets_nyc_stop_and_frisk <- function(year = NULL,
 # BigQuery -- thin wrapper (optional dep: bigrquery)
 # ---------------------------------------------------------------------------
 
-#' Pull a BigQuery table (or filtered slice) as a `data.frame`.
+#' Pull a BigQuery table (or filtered slice) as a `data.frame`
 #'
 #' Requires the `bigrquery` package and Application Default Credentials.
 #'
@@ -1362,7 +1362,7 @@ morie_datasets_bigquery <- function(project, dataset, table,
 # CKAN -- generic open-data portal helpers
 # ---------------------------------------------------------------------------
 
-#' Search a CKAN open-data portal by free-text query.
+#' Search a CKAN open-data portal by free-text query
 #'
 #' Examples: `"https://open.canada.ca/data"`, `"https://data.ontario.ca"`,
 #' `"https://data.gov.uk"`, `"https://data.europa.eu"`.
@@ -1393,7 +1393,7 @@ morie_datasets_ckan_search <- function(portal, query, rows = 50L) {
   .morie_dataset_records_to_df(results)
 }
 
-#' Pull every CSV resource of a CKAN package as a list of data frames.
+#' Pull every CSV resource of a CKAN package as a list of data frames
 #'
 #' @param portal Character; CKAN portal base URL.
 #' @param package_id Character; CKAN package id or slug.
@@ -1435,7 +1435,7 @@ morie_datasets_ckan_package <- function(portal, package_id) {
 # US forensics endpoints -- NIBRS, NamUs, NIST RDS
 # ---------------------------------------------------------------------------
 
-#' FBI NIBRS offence-event records via the Crime Data Explorer API.
+#' FBI NIBRS offence-event records via the Crime Data Explorer API
 #'
 #' Requires an API key (`api_key=` or `FBI_CDE_API_KEY` env var).
 #'
@@ -1483,7 +1483,7 @@ morie_datasets_nibrs <- function(year = NULL, max_features = NULL,
   df
 }
 
-#' NamUs missing-persons case metadata.
+#' NamUs missing-persons case metadata
 #'
 #' @param state Character; two-letter US state code or `NULL` (national).
 #' @param max_features Integer or `NULL`; cap on returned rows.
@@ -1525,7 +1525,7 @@ morie_datasets_namus_missing_persons <- function(state = NULL,
   .morie_dataset_records_to_df(body$results %||% body)
 }
 
-#' NIST Reference Datasets (RDS) catalog metadata.
+#' NIST Reference Datasets (RDS) catalog metadata
 #'
 #' @param dataset_id Character or `NULL`; specific NIST RDS id.
 #' @param query Character or `NULL`; free-text search.
@@ -1601,7 +1601,7 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #'   Neighborhoods"; based on Neighborhoods_2012b.
 #' @examplesIf nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
-#' head(df\[, c("pri_neigh", "sec_neigh")\])
+#' head(df[, c("pri_neigh", "sec_neigh")])
 #' @export
 morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
                                                  geometry = FALSE,
@@ -2463,7 +2463,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #'   Areas (current)" (`cauq-8yn6`).
 #' @examplesIf nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
-#' head(df\[, c("area_numbe", "community")\])
+#' head(df[, c("area_numbe", "community")])
 #' @export
 morie_datasets_chicago_community_areas <- function(offline = TRUE,
                                                    geometry = FALSE,
@@ -2884,7 +2884,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
 #'   `portal`, `resource_url`, `fixture`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' reg <- morie_datasets_external_socrata_layers()
-#' reg\[, c("dataset_key", "resource_url")\]
+#' reg[, c("dataset_key", "resource_url")]
 #' @export
 morie_datasets_external_socrata_layers <- function() {
   rows <- list(

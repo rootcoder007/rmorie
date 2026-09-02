@@ -3,9 +3,18 @@
 % the formals.
 \name{morie_tmlefp}
 \alias{morie_tmlefp}
+\alias{morie_optimal_overlap}
+\alias{morie_tmle_effective_pi}
 \title{Optimal-overlap estimands and their trimming rules}
 \usage{
-morie_tmlefp(y, treatment, pscore, sigma2_treated = NULL, sigma2_control = NULL, estimand = "ate")
+morie_tmlefp(y, treatment, pscore, sigma2_treated = NULL, sigma2_control = NULL, 
+    estimand = "ate") 
+
+morie_optimal_overlap(y, treatment, pscore, sigma2_treated = NULL, sigma2_control = NULL, 
+    estimand = "ate") 
+
+morie_tmle_effective_pi(y, treatment, pscore, sigma2_treated = NULL, sigma2_control = NULL, 
+    estimand = "ate") 
 }
 \arguments{
 \item{y}{Outcome vector.}

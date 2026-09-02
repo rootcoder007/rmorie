@@ -5,10 +5,16 @@
 \alias{Scaleci}
 \title{Scale-ratio CI from Sukhatme -- eqs. (9.8.1)-(9.8.2), p. 328}
 \usage{
-Scaleci(x, y, alpha = 0.05, k = NULL)
+Scaleci(x, y, alpha = 0.05, k = NULL) 
 }
 \description{
 Scale-ratio CI from Sukhatme -- eqs. (9.8.1)-(9.8.2), p. 328
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
+\item{k}{Argument \code{k}; see Usage.}
 }
 \value{
 A list with \code{lower}, \code{upper}, \code{k}, \code{kprime}, \code{k_raw}, \code{npos}, \code{estimate}, \code{m}, \code{n}.

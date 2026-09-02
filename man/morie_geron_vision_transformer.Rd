@@ -20,6 +20,10 @@ morie_geron_vision_transformer(
 \item{patch_size}{Patch side length.}
 
 \item{n_layers, d_model, n_heads, n_classes, seed}{As in Python original.}
+
+
+
+
 }
 \value{
 list with logits, cls, tokens, patches, n_patches, seq_len, patch_dim,

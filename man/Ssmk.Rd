@@ -5,10 +5,16 @@
 \alias{Ssmk}
 \title{Structured state-space convolution kernel (Gu, Goel & Re 2022, S4)}
 \usage{
-Ssmk(A, B, C, L)
+Ssmk(A, B, C, L) 
 }
 \description{
 Structured state-space convolution kernel (Gu, Goel & Re 2022, S4)
+}
+\arguments{
+\item{A}{Argument \code{A}; see Usage.}
+\item{B}{Argument \code{B}; see Usage.}
+\item{C}{Argument \code{C}; see Usage.}
+\item{L}{Argument \code{L}; see Usage.}
 }
 \value{
 A list with \code{K}, \code{L}, \code{state_dim}.

@@ -5,7 +5,8 @@
 \alias{morie_linwlr}
 \title{morie_linwlr}
 \usage{
-morie_linwlr(y, A, W = NULL, propensity = NULL, method = "gest", baseline = NULL, pi_covariates = NULL, ridge = 1e-10)
+morie_linwlr(y, A, W = NULL, propensity = NULL, method = "gest", baseline = NULL, 
+    pi_covariates = NULL, ridge = 1e-10) 
 }
 \arguments{
 \item{y}{Passed to \code{.linwlr_vec}.}

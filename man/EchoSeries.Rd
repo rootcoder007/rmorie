@@ -5,7 +5,7 @@
 \alias{EchoSeries}
 \title{Eqs (4.79)-(4.80): the complex cepstrum of a wavelet plus one echo}
 \usage{
-EchoSeries(a, n0, terms = 10, omega = NULL)
+EchoSeries(a, n0, terms = 10, omega = NULL) 
 }
 \arguments{
 \item{a}{Coerced to numeric by the body, with \code{as.numeric}.}

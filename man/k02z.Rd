@@ -5,7 +5,7 @@
 \alias{k02z}
 \title{k02z}
 \usage{
-k02z(p)
+k02z(p) 
 }
 \arguments{
 \item{p}{See Usage.}

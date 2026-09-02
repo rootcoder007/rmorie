@@ -23,6 +23,7 @@ morie_geron_instance_based(
 \item{task}{auto/classification/regression.}
 
 \item{weights}{uniform/distance.}
+
 }
 \value{
 List with prediction, neighbors, distances, task, feature_ranges, estimate, n, method.

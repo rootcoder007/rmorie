@@ -5,7 +5,7 @@
 \alias{nbeats_forecast}
 \title{nbeats_forecast}
 \usage{
-nbeats_forecast(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
+nbeats_forecast(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

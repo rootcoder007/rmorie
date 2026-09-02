@@ -5,7 +5,8 @@
 \alias{morie_mdppol}
 \title{morie_mdppol}
 \usage{
-morie_mdppol(P, R, gamma, tol = 1e-12, max_eval = 1e+05, max_improve = 1000, pi0 = NULL)
+morie_mdppol(P, R, gamma, tol = 1e-12, max_eval = 1e+05, max_improve = 1000, 
+    pi0 = NULL) 
 }
 \arguments{
 \item{P}{Passed to \code{.mdppol_args}.}

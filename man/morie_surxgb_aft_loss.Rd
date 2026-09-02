@@ -5,7 +5,7 @@
 \alias{morie_surxgb_aft_loss}
 \title{morie_surxgb_aft_loss}
 \usage{
-morie_surxgb_aft_loss(y_lower, y_upper, u, sigma = 1, dist = "normal")
+morie_surxgb_aft_loss(y_lower, y_upper, u, sigma = 1, dist = "normal") 
 }
 \arguments{
 \item{y_lower}{Coerced to numeric by the body, with \code{as.numeric}.}

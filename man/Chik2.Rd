@@ -5,10 +5,14 @@
 \alias{Chik2}
 \title{k x 2 equal-proportions test -- eq. (14.3.2), p. 514}
 \usage{
-Chik2(successes, ns)
+Chik2(successes, ns) 
 }
 \description{
 k x 2 equal-proportions test -- eq. (14.3.2), p. 514
+}
+\arguments{
+\item{successes}{Argument \code{successes}; see Usage.}
+\item{ns}{Argument \code{ns}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{df}, \code{p_value}, \code{phat}, \code{props}, \code{k}, \code{n}.

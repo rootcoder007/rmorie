@@ -5,7 +5,7 @@
 \alias{morie_scfhop_types}
 \title{Assign each atom its pharmacophore categories}
 \usage{
-morie_scfhop_types(smiles)
+morie_scfhop_types(smiles) 
 }
 \arguments{
 \item{smiles}{The molecule.}

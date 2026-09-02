@@ -14,6 +14,7 @@ morie_btiseq(x, mu0 = 0, B_outer = 300, B_inner = 150, seed = 0)
 \item{B_outer, B_inner}{Bootstrap sizes.}
 
 \item{seed}{SplitMix64 seed (mirrors the Python arm).}
+
 }
 \value{
 A list with elements \code{statistic}, \code{p_boot},

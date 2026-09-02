@@ -5,7 +5,7 @@
 \alias{Ghk}
 \title{Ghk: Goldman-Hodgkin-Katz voltage equation for the resting potential}
 \usage{
-Ghk(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15)
+Ghk(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) 
 }
 \arguments{
 \item{ion_concs}{A vector; indexed elementwise.}

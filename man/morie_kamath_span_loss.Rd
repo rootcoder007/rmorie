@@ -5,10 +5,14 @@
 \alias{morie_kamath_span_loss}
 \title{morie_kamath_span_loss}
 \usage{
-morie_kamath_span_loss(x, xhat, i, j)
+morie_kamath_span_loss(x, xhat, i, j) 
 }
 \arguments{
 \item{i,j}{0-based inclusive span bounds.}
+
+\item{x}{Argument \code{x}; see Usage.}
+
+\item{xhat}{Argument \code{xhat}; see Usage.}
 }
 \description{
 morie_kamath_span_loss

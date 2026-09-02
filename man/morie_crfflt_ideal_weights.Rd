@@ -5,7 +5,7 @@
 \alias{morie_crfflt_ideal_weights}
 \title{Ideal band pass weights}
 \usage{
-morie_crfflt_ideal_weights(p_low, p_high, n)
+morie_crfflt_ideal_weights(p_low, p_high, n) 
 }
 \arguments{
 \item{p_low}{Numeric, lower period bound.}

@@ -5,7 +5,7 @@
 \alias{morie_bnsadt_loglik}
 \title{Log-likelihood of the published estimates under the selection model}
 \usage{
-morie_bnsadt_loglik(x, sigma, mu, tau, family = "symmetric_step", params = numeric(0))
+morie_bnsadt_loglik(x, sigma, mu, tau, family = "symmetric_step", params = numeric(0)) 
 }
 \arguments{
 \item{x}{Published point estimates.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Augmented Lagrangian for equality-constrained minimisation.
+#' Augmented Lagrangian for equality-constrained minimisation
 #'
 #' L_A = f(x) + sum_i lambda_i g_i(x) + (mu/2) sum_i g_i(x)^2, with the
 #' first-order multiplier update lambda <- lambda + mu g(x).

@@ -24,6 +24,7 @@ morie_autoencoder_anomaly(
 
 \item{contamination}{expected anomaly fraction, used for the
 threshold.}
+
 }
 \value{
 list with \code{score}, \code{rank} (0-based),

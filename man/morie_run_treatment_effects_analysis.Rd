@@ -25,7 +25,7 @@ list with:
 \item \code{treatment_effects_summary} -- data.frame of ATE / ATT / ATC
 point estimates (SE / CI columns present but NA, matching Python).
 \item \code{cate_subgroup_estimates} -- data.frame of within-subgroup
-Hajek IPW CATEs with sandwich-style SEs and Wald 95\\\% CIs.
+Hajek IPW CATEs with sandwich-style SEs and Wald 95\\% CIs.
 \item \code{analysis_frame} -- the trimmed data.frame with attached
 propensity score and IPW weight columns (\code{ps}, \code{w_ate}, \code{w_att},
 \code{w_atc}).

@@ -13,6 +13,8 @@ morie_hawkes_st_intensity(events, t_q, x_q, y_q, params)
 \item{t_q, x_q, y_q}{Query time and location.}
 
 \item{params}{List \code{list(mu, alpha, beta, sigma)}.}
+
+
 }
 \value{
 The intensity \eqn{\lambda(t_q, x_q, y_q)} (a non-negative scalar).

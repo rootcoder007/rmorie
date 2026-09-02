@@ -5,7 +5,7 @@
 \alias{morie_ragRet_top_k}
 \title{morie_ragRet_top_k}
 \usage{
-morie_ragRet_top_k(query, corpus, k.top = 5L, metric = "inner_product")
+morie_ragRet_top_k(query, corpus, k.top = 5L, metric = "inner_product") 
 }
 \arguments{
 \item{query}{Coerced to numeric by the body, with \code{as.numeric}.}

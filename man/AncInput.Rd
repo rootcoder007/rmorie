@@ -5,7 +5,7 @@
 \alias{AncInput}
 \title{Section 3.10.1: the primary input is x = v + m.  The method needs the}
 \usage{
-AncInput(v, m)
+AncInput(v, m) 
 }
 \arguments{
 \item{v}{Coerced to numeric by the body, with \code{as.numeric}.}

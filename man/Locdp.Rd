@@ -5,10 +5,14 @@
 \alias{Locdp}
 \title{Local differential privacy via randomized response (alias)}
 \usage{
-Locdp(bit, epsilon = 1)
+Locdp(bit, epsilon = 1) 
 }
 \description{
 Alias of \code{Rrand}. The generated stub for module locdp described the local model of differential privacy (each user randomizes before collection, Kasiviswanathan et al. 2011); the canonical local-DP mechanism is Warner randomized response with flip probability \eqn{1/(1 + e^{\epsilon})}, already shipped as \code{Rrand}.
+}
+\arguments{
+\item{bit}{Argument \code{bit}; see Usage.}
+\item{epsilon}{Argument \code{epsilon}; see Usage.}
 }
 \value{
 The value of \code{Rrand}.

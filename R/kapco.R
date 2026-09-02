@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Cohen's Kappa coefficient of agreement for a two-class confusion table.
+#' Cohen's Kappa coefficient of agreement for a two-class confusion table
 #'
 #' Formula: kappa = (P0 - Pe) / (1 - Pe),  Pe = (tp+fn)/n*(tp+fp)/n + (fp+tn)/n*(fn+tn)/n
 #'

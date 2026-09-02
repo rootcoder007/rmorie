@@ -5,7 +5,7 @@
 \alias{VagTfd}
 \title{Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy}
 \usage{
-VagTfd(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12)
+VagTfd(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Effects of nugget, sill and range on a kriging prediction.
+#' Effects of nugget, sill and range on a kriging prediction
 #'
 #' Evaluated on a fixed one-dimensional layout so the effects are
 #' exhibited rather than described. The NUGGET drives the weights toward

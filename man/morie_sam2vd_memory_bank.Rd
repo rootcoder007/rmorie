@@ -5,7 +5,7 @@
 \alias{morie_sam2vd_memory_bank}
 \title{morie_sam2vd_memory_bank}
 \usage{
-morie_sam2vd_memory_bank(n_recent = 7, m_prompted = 1)
+morie_sam2vd_memory_bank(n_recent = 7, m_prompted = 1) 
 }
 \arguments{
 \item{n_recent}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{7}.}

@@ -5,7 +5,7 @@
 \alias{EggFeat}
 \title{EggFeat: electrogastrogram dominant frequency and band powers}
 \usage{
-EggFeat(egg, fs, normal_band = c(0.0333, 0.0667))
+EggFeat(egg, fs, normal_band = c(0.0333, 0.0667)) 
 }
 \arguments{
 \item{egg}{Coerced to numeric by the body, with \code{as.numeric}.}

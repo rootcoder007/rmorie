@@ -5,7 +5,7 @@
 \alias{morie_kamath_attention_softmax}
 \title{morie_kamath_attention_softmax}
 \usage{
-morie_kamath_attention_softmax(a)
+morie_kamath_attention_softmax(a) 
 }
 \arguments{
 \item{a}{Score vector.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Indicator kriging for exceedance probability.
+#' Indicator kriging for exceedance probability
 #'
 #' Encode I_i = 1(x_i <= threshold) and ordinary-krige the indicator
 #' field at each target s0 to obtain P_hat(Z(s0) <= threshold).

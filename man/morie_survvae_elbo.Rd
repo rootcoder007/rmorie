@@ -3,9 +3,10 @@
 % the formals.
 \name{morie_survvae_elbo}
 \alias{morie_survvae_elbo}
-\title{The paper\'s lower bound: gates outside the logarithm.}
+\title{The paper\'s lower bound: gates outside the logarithm}
 \usage{
-morie_survvae_elbo(X, y_lower, events, W, bias, shapes, scales, primitive = "weibull", alpha = 1, prior = 0)
+morie_survvae_elbo(X, y_lower, events, W, bias, shapes, scales, primitive = "weibull", 
+    alpha = 1, prior = 0) 
 }
 \arguments{
 \item{X}{List of covariate vectors, length \code{n}.}

@@ -5,7 +5,7 @@
 \alias{KDelta}
 \title{Eq (3.34): delta(n) = 1 if n = 0, 0 otherwise.  Unlike eq (3.24) this}
 \usage{
-KDelta(n, shift = 0, amplitude = 1)
+KDelta(n, shift = 0, amplitude = 1) 
 }
 \arguments{
 \item{n}{A vector; its length is taken.}

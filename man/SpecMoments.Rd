@@ -5,7 +5,7 @@
 \alias{SpecMoments}
 \title{Eqs (6.32)-(6.43).  The sums run over ONE HALF of the periodic PSD:}
 \usage{
-SpecMoments(psd, fs = 1, freqs = NULL)
+SpecMoments(psd, fs = 1, freqs = NULL) 
 }
 \arguments{
 \item{psd}{Coerced to numeric by the body, with \code{as.numeric}.}

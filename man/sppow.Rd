@@ -2,7 +2,7 @@
 % Please edit documentation in R/sppow.R
 \name{sppow}
 \alias{sppow}
-\title{Power semivariogram model (unbounded).}
+\title{Power semivariogram model (unbounded)}
 \usage{
 sppow(h, nugget = 0, c1 = 1, alpha = 1)
 }

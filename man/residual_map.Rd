@@ -5,7 +5,7 @@
 \alias{residual_map}
 \title{residual_map}
 \usage{
-residual_map(x, g_z, shape = NULL)
+residual_map(x, g_z, shape = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{.gan_an_as_num}.}

@@ -5,7 +5,7 @@
 \alias{validate_workflow_map}
 \title{validate_workflow_map}
 \usage{
-validate_workflow_map(script_map)
+validate_workflow_map(script_map) 
 }
 \arguments{
 \item{script_map}{Character; the body checks with \code{is.character}.}

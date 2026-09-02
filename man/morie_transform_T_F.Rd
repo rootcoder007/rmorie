@@ -33,6 +33,7 @@ morie_transform_T_F(
 
 \item{y1, y2}{trimming window y2 < y1 for (6.66); the 10th and 90th
 percentiles of y when NULL.}
+
 }
 \value{
 list: y_grid, T_hat, u_grid, F_hat, beta, y0, window,

@@ -2,18 +2,19 @@
 % Please edit documentation in R/audit_variables.R
 \name{morie_audit_all_variables}
 \alias{morie_audit_all_variables}
-\title{Audit both OTIS and ARSAU.}
+\title{Audit both OTIS and ARSAU}
 \usage{
 morie_audit_all_variables(otis_specs = NULL, arsau_specs = NULL)
 }
 \arguments{
 \item{otis_specs, arsau_specs}{See per-domain functions.}
+
 }
 \value{
 Named list with \code{$otis} and \code{$arsau} audit results.
 }
 \description{
-Audit both OTIS and ARSAU.
+Audit both OTIS and ARSAU
 }
 \examples{
 spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)

@@ -5,7 +5,7 @@
 \alias{SparseCode}
 \title{SparseCode}
 \usage{
-SparseCode(x, D, sparsity = NULL, lam = NULL, maxiter = 2000, tol = 1e-10)
+SparseCode(x, D, sparsity = NULL, lam = NULL, maxiter = 2000, tol = 1e-10) 
 }
 \arguments{
 \item{x}{A vector; its length is taken.}

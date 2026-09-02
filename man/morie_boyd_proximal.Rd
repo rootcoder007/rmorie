@@ -14,6 +14,7 @@ morie_boyd_proximal(h, v, t = 1, lo = NULL, hi = NULL)
 \item{t}{Step size, positive.}
 
 \item{lo, hi}{Box bounds, required when \code{h = "box"}.}
+
 }
 \value{
 List with \code{prox}, \code{moreau}, \code{h_value}, \code{h_name}.

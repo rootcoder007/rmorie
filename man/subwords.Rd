@@ -5,7 +5,7 @@
 \alias{subwords}
 \title{subwords}
 \usage{
-subwords(word, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE)
+subwords(word, n_min = 3, n_max = 6, boundary = TRUE, whole_word = TRUE) 
 }
 \arguments{
 \item{word}{Coerced to character by the body, with \code{as.character}.}

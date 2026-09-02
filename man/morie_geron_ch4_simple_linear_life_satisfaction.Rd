@@ -14,6 +14,7 @@ morie_geron_ch4_simple_linear_life_satisfaction(
 \item{theta_0, theta_1}{Finite intercept and slope.}
 
 \item{GDP_per_capita}{Non-negative scalar or vector.}
+
 }
 \value{
 List with \code{life_satisfaction}, \code{theta_0}, \code{theta_1}.

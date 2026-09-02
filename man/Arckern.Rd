@@ -2,7 +2,7 @@
 % Please edit documentation in R/arckn.R
 \name{Arckern}
 \alias{Arckern}
-\title{Arc-cosine kernel matrix.}
+\title{Arc-cosine kernel matrix}
 \usage{
 Arckern(X, Z = NULL, depth = 1L)
 }

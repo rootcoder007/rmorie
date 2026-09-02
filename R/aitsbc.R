@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Form the subcomposition on a selected subset of parts.
+#' Form the subcomposition on a selected subset of parts
 #'
 #' \code{parts} is a vector of one-based part indices.
 #'

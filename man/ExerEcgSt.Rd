@@ -5,7 +5,7 @@
 \alias{ExerEcgSt}
 \title{ST level at J + jofs relative to the PQ isoelectric level, and the}
 \usage{
-ExerEcgSt(x, qrs, fs, jofs = 0.06, thresh = 0.1)
+ExerEcgSt(x, qrs, fs, jofs = 0.06, thresh = 0.1) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

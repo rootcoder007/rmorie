@@ -2,7 +2,7 @@
 % Please edit documentation in R/bxprc.R
 \name{Boxpierce}
 \alias{Boxpierce}
-\title{Box-Pierce Q test for autocorrelation.}
+\title{Box-Pierce Q test for autocorrelation}
 \usage{
 Boxpierce(x, lags = 1, fitdf = 0)
 }

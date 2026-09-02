@@ -8,6 +8,7 @@ LsqResid(x, y)
 }
 \arguments{
 \item{x, y}{equal-length data vectors, n >= 2.}
+
 }
 \value{
 list(residual_sum, A, B).

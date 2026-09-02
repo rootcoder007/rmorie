@@ -5,7 +5,8 @@
 \alias{hal_fit}
 \title{hal_fit}
 \usage{
-hal_fit(X, y, lam = 1, iters = 2000L, step = 0.05, max_order = 2L, knots = NULL, intercept = TRUE)
+hal_fit(X, y, lam = 1, iters = 2000L, step = 0.05, max_order = 2L, knots = NULL, 
+    intercept = TRUE) 
 }
 \arguments{
 \item{X}{Passed to \code{indicator_basis}.}

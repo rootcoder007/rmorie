@@ -5,7 +5,7 @@
 \alias{morie_surxgb_cheatsheet}
 \title{morie_surxgb_cheatsheet}
 \usage{
-morie_surxgb_cheatsheet()
+morie_surxgb_cheatsheet() 
 }
 \description{
 A step of the surxgb_native implementation. No other function in the package calls it. See the file header for the source the module follows.

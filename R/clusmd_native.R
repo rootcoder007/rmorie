@@ -257,7 +257,7 @@
 #'
 #' Cluster summary: sizes, singleton count, and the assignment.
 #' ---------------------------------------------------------------------------
-#' Mirrors Python cluster_summary(). `assignment[m]` = k means compound
+#' Mirrors Python cluster_summary(). `assignment\[m\]` = k means compound
 #' m is in cluster k (0-indexed).
 #'
 #' @param clusters A vector; its length is taken and its elements indexed.

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Kulldorff spatial scan statistic.
+#' Kulldorff spatial scan statistic
 #'
-#' max_z (O_z/E_z)^{O_z} ((O_+ - O_z)/(E_+ - E_z))^{O_+ - O_z}, reported
+#' max_z (O_z/E_z)^\{O_z\} ((O_+ - O_z)/(E_+ - E_z))^\{O_+ - O_z\}, reported
 #' on the log scale and restricted by default to windows whose internal
 #' risk exceeds the overall risk.
 #'

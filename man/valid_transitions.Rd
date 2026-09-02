@@ -5,7 +5,7 @@
 \alias{valid_transitions}
 \title{valid_transitions}
 \usage{
-valid_transitions(labels)
+valid_transitions(labels) 
 }
 \arguments{
 \item{labels}{A vector; its length is taken and its elements indexed.}

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Default hyperparameters of the Bayesian ridge regression prior.
+#' Default hyperparameters of the Bayesian ridge regression prior
 #'
 #' Formula: S = Var(Y)(1 - R2)(nu + 2);  S_beta = Var(Y) R2 (nu_beta + 2)
 #'

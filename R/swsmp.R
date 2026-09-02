@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Draw one systematic sample with a random start, and estimate from it.
+#' Draw one systematic sample with a random start, and estimate from it
 #'
 #' The start comes from a pinned Lehmer generator so the two language
 #' arms produce the SAME sample; vary \code{seed} for a different start.

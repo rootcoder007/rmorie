@@ -5,7 +5,7 @@
 #' mass. Regazzini, Lijoi & Prunster asked what the linear functional
 #' \code{M = int x P~(dx)} then looks like; for the gamma CRM, whose
 #' normalization is the Dirichlet process, the first two moments are
-#' closed form: \code{E[M] = mu0} and \code{Var[M] = sigma0^2 /
+#' closed form: \code{E\[M\] = mu0} and \code{Var\[M\] = sigma0^2 /
 #' (alpha + 1)}. After observing \code{y_1, ..., y_n} the posterior is
 #' again a Dirichlet process with mass \code{alpha + n} and base
 #' measure \code{(alpha P0 + sum delta_yi) / (alpha + n)}, so

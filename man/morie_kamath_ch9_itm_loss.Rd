@@ -12,6 +12,7 @@ morie_kamath_ch9_itm_loss(theta, v, t, y)
 \item{v, t}{Images and texts.}
 
 \item{y}{0/1 match labels.}
+
 }
 \value{
 List with \code{estimate}, \code{per_pair}, \code{scores}.

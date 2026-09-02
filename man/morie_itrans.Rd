@@ -29,16 +29,23 @@ morie_itrans(
 \item{wffn1, bffn1, wffn2, bffn2}{the feed-forward network}
 
 \item{wproj, bproj}{the output projection}
+
+
+
+
+
+
+
 }
 \value{
 list(forecast, attn, tokens, nvariates, T, D, horizon,
 attndiag, mean, first, sumsq)
 }
 \description{
-Quoted from the paper: (1) "h^0_n = Embedding(X_{:,n}); H^{l+1} =
-TrmBlock(H^l); Yhat_{:,n} = Projection(h^L_n)"; (2) "LayerNorm(H) =
-{[h_n - Mean(h_n)]/sqrt(Var(h_n)) | n = 1..N}"; attention scores
-"A_{i,j} = (Q K^T / sqrt(d_k))_{i,j}" -- Liu, Y., Hu, T., Zhang, H.,
+Quoted from the paper: (1) "h^0_n = Embedding(X_\{:,n\}); H^\{l+1\} =
+TrmBlock(H^l); Yhat_\{:,n\} = Projection(h^L_n)"; (2) "LayerNorm(H) =
+\{[h_n - Mean(h_n)]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
+"A_\{i,j\} = (Q K^T / sqrt(d_k))_\{i,j\}" -- Liu, Y., Hu, T., Zhang, H.,
 Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 (arXiv:2310.06625). The inversion is the point: each VARIATE series
 becomes one token, so attention is N x N over variates rather than

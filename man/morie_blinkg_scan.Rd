@@ -5,7 +5,7 @@
 \alias{morie_blinkg_scan}
 \title{Test every marker with the current pseudo-QTNs as covariates}
 \usage{
-morie_blinkg_scan(y, geno, covars = NULL, qtn = integer(0))
+morie_blinkg_scan(y, geno, covars = NULL, qtn = integer(0)) 
 }
 \arguments{
 \item{y}{The phenotype.}

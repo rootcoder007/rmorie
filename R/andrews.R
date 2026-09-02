@@ -1,11 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Andrews sine psi function.
+#' Andrews sine psi function
 #'
 #' Formula: rho(r) = c^2(1 - cos(r/c)), psi(r) = c sin(r/c) for |r| <= c pi, and 0 otherwise
 #'
 #' @param r Scaled residuals.
 #' @param c Tuning constant; 1.339 gives 95% Gaussian efficiency.
 
+#' @param r See Usage.
+#' @param c See Usage.
 #' @return List with ``psi``, ``rho``, ``psi_deriv``, ``rejected`` (count with |r| > c pi), ``c``, ``n``.
 #' @references Andrews, Bickel, Hampel, Huber, Rogers and Tukey (1972), Robust Estimates of Location, Princeton University Press; Andrews (1974), Technometrics 16:523-531. Not held locally; the form and the tuning constant 1.339 are as implemented by statsmodels' AndrewWave norm, the reference implementation, whose source was read: rho = a^2(1 - cos(z/a)), psi = a sin(z/a), weights = sin(z/a)/(z/a), psi_deriv = cos(z/a), all zero (rho constant) beyond |z| > a pi.
 #' @export

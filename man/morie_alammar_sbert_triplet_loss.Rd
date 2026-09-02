@@ -5,7 +5,7 @@
 \alias{morie_alammar_sbert_triplet_loss}
 \title{morie_alammar_sbert_triplet_loss}
 \usage{
-morie_alammar_sbert_triplet_loss(anchor, positive, negative, margin = 1)
+morie_alammar_sbert_triplet_loss(anchor, positive, negative, margin = 1) 
 }
 \arguments{
 \item{anchor,positive,negative}{Row-matched matrices.}

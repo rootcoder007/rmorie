@@ -5,7 +5,7 @@
 \alias{morie_mean_cpp}
 \title{morie_mean_cpp}
 \usage{
-morie_mean_cpp(x)
+morie_mean_cpp(x) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

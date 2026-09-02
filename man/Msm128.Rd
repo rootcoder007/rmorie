@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm128.R
 \name{Msm128}
 \alias{Msm128}
-\title{RKHS estimation in the frequentist framework.}
+\title{RKHS estimation in the frequentist framework}
 \usage{
 Msm128(K, y, lam = 1)
 }
@@ -17,9 +17,9 @@ Msm128(K, y, lam = 1)
 List with estimate, eta0, beta, fitted, objective, penalty, method.
 }
 \description{
-Formula: min over (eta_0, beta) of {(1/n) sum_i L(y_i, eta_0 + k_i'beta)
+Formula: min over (eta_0, beta) of \{(1/n) sum_i L(y_i, eta_0 + k_i'beta)
 \itemize{
-\item (lambda/2) beta'K beta} (eq. 8.3), obtained by substituting the representer
+\item (lambda/2) beta'K beta\} (eq. 8.3), obtained by substituting the representer
 form (8.2) into (8.1). beta'K beta is the empirical RKHS norm and lambda
 controls the trade-off between goodness of fit and complexity; with the
 squared-error loss the stationarity conditions are linear and are solved

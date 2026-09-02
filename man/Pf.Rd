@@ -5,7 +5,7 @@
 \alias{Pf}
 \title{Pf}
 \usage{
-Pf(q, df1, df2, lower_tail = TRUE)
+Pf(q, df1, df2, lower_tail = TRUE) 
 }
 \arguments{
 \item{q}{Iterated over elementwise, with \code{vapply}.}

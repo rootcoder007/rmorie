@@ -5,7 +5,7 @@
 \alias{morie_slbpdg_cheatsheet}
 \title{One-line summary of the slbpdg module}
 \usage{
-morie_slbpdg_cheatsheet()
+morie_slbpdg_cheatsheet() 
 }
 \description{
 One-line summary of the slbpdg module

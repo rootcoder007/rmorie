@@ -5,7 +5,8 @@
 \alias{morie_tqipb_bits_required}
 \title{Smallest bit-width meeting a target (eps, delta)}
 \usage{
-morie_tqipb_bits_required(eps, delta, d, norm_sq = 1, x_norm_sq = 1, n_blocks = 1, route = "table", tail = "chebyshev", max_bits = 32)
+morie_tqipb_bits_required(eps, delta, d, norm_sq = 1, x_norm_sq = 1, n_blocks = 1, route = "table", 
+    tail = "chebyshev", max_bits = 32) 
 }
 \arguments{
 \item{eps}{Relative accuracy.}

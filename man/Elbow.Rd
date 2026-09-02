@@ -5,7 +5,7 @@
 \alias{Elbow}
 \title{WCSS falls monotonically with k and reaches zero at k = n, so it}
 \usage{
-Elbow(X, kmax = 8, kmin = 1)
+Elbow(X, kmax = 8, kmin = 1) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

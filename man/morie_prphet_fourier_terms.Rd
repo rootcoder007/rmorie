@@ -5,7 +5,7 @@
 \alias{morie_prphet_fourier_terms}
 \title{morie_prphet_fourier_terms}
 \usage{
-morie_prphet_fourier_terms(t, period, order)
+morie_prphet_fourier_terms(t, period, order) 
 }
 \arguments{
 \item{t}{A vector; its length is taken and its elements indexed.}

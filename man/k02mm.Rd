@@ -5,7 +5,7 @@
 \alias{k02mm}
 \title{k02mm}
 \usage{
-k02mm(y, v, tau0)
+k02mm(y, v, tau0) 
 }
 \arguments{
 \item{y}{Numeric; combined arithmetically in the body.}

@@ -5,7 +5,7 @@
 \alias{toc_curve}
 \title{toc_curve}
 \usage{
-toc_curve(scores, priority)
+toc_curve(scores, priority) 
 }
 \arguments{
 \item{scores}{Passed to \code{.slvgrf_check}.}

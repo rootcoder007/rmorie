@@ -5,7 +5,7 @@
 \alias{morie_scumap_fit_ab}
 \title{morie_scumap_fit_ab}
 \usage{
-morie_scumap_fit_ab(min_dist = 0.1, spread = 1, n_grid = 300, iters = 200)
+morie_scumap_fit_ab(min_dist = 0.1, spread = 1, n_grid = 300, iters = 200) 
 }
 \arguments{
 \item{min_dist}{Numeric; combined arithmetically in the body. Defaults to \code{0.1}.}

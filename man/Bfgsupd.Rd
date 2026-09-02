@@ -2,7 +2,7 @@
 % Please edit documentation in R/bfgsop.R
 \name{Bfgsupd}
 \alias{Bfgsupd}
-\title{BFGS secant update of the Hessian and its inverse.}
+\title{BFGS secant update of the Hessian and its inverse}
 \usage{
 Bfgsupd(H, s, y, inverse = TRUE)
 }
@@ -10,9 +10,9 @@ Bfgsupd(H, s, y, inverse = TRUE)
 \item{H}{Current approximation; the inverse Hessian when inverse is
 TRUE, the Hessian otherwise.}
 
-\item{s}{Step x_{k+1} - x_k.}
+\item{s}{Step x_\{k+1\} - x_k.}
 
-\item{y}{Gradient change g_{k+1} - g_k.}
+\item{y}{Gradient change g_\{k+1\} - g_k.}
 
 \item{inverse}{Update the inverse Hessian.}
 }

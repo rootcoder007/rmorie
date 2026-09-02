@@ -22,6 +22,12 @@ morie_geron_finetune_lm(
 \item{dataset}{Training examples.}
 
 \item{epochs, lr, theta, freeze, batch_size, weight_decay, warmup}{Config.}
+
+
+
+
+
+
 }
 \value{
 List with \code{theta}, \code{theta_init}, \code{loss_history}, \code{drift}, \code{lr_schedule}, \code{frozen}.

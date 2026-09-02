@@ -2,7 +2,7 @@
 % Please edit documentation in R/mxenv.R
 \name{Gxeblup}
 \alias{Gxeblup}
-\title{Multi-environment genomic model with a genotype-by-environment term.}
+\title{Multi-environment genomic model with a genotype-by-environment term}
 \usage{
 Gxeblup(y, X_E, Z_L, Z_EL, G, sigma2_g, Sigma_E, sigma2_e = 1)
 }

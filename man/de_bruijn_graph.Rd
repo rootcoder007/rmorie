@@ -5,7 +5,7 @@
 \alias{de_bruijn_graph}
 \title{Build G(S, l) with l = k. Vertices are (k-1)-mers; each k-mer is}
 \usage{
-de_bruijn_graph(reads, k, multiplicity = "set")
+de_bruijn_graph(reads, k, multiplicity = "set") 
 }
 \arguments{
 \item{reads}{Coerced to character by the body, with \code{as.character}.}

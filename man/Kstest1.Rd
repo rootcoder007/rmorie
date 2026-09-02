@@ -2,7 +2,7 @@
 % Please edit documentation in R/wsmksm.R
 \name{Kstest1}
 \alias{Kstest1}
-\title{Two-sample Kolmogorov-Smirnov test of H0: F1 = F2.}
+\title{Two-sample Kolmogorov-Smirnov test of H0: F1 = F2}
 \usage{
 Kstest1(x, y, terms = 200)
 }
@@ -10,6 +10,7 @@ Kstest1(x, y, terms = 200)
 \item{x, y}{The two samples, each of length at least 1.}
 
 \item{terms}{Terms of the alternating series used for H(t).}
+
 }
 \value{
 List with \code{statistic}, \code{scaled}, \code{p_value},

@@ -5,7 +5,7 @@
 \alias{morie_tlseqsl_cv_risk}
 \title{morie_tlseqsl_cv_risk}
 \usage{
-morie_tlseqsl_cv_risk(X, y, algorithm, V = 10, loss = "squared", seed = 0)
+morie_tlseqsl_cv_risk(X, y, algorithm, V = 10, loss = "squared", seed = 0) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

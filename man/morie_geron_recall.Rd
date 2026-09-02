@@ -12,6 +12,7 @@ morie_geron_recall(y_true, y_pred, positive = 1, average = NULL)
 \item{positive}{0-based positive class when \code{average} is NULL.}
 
 \item{average}{NULL or "macro".}
+
 }
 \value{
 List with \code{recall}, \code{tp}, \code{fn}, \code{per_class}, \code{f1}.

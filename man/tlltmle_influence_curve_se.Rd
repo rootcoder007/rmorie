@@ -5,7 +5,7 @@
 \alias{tlltmle_influence_curve_se}
 \title{tlltmle_influence_curve_se}
 \usage{
-tlltmle_influence_curve_se(d)
+tlltmle_influence_curve_se(d) 
 }
 \arguments{
 \item{d}{Coerced to numeric by the body, with \code{as.numeric}.}

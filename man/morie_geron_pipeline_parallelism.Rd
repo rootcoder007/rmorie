@@ -5,7 +5,7 @@
 \alias{morie_geron_pipeline_parallelism}
 \title{Pipeline parallelism: contiguous stage partition plus a microbatch schedule (Geron Ch 17, hmppp)}
 \usage{
-morie_geron_pipeline_parallelism(model, n_stages, n_microbatches = 4)
+morie_geron_pipeline_parallelism(model, n_stages, n_microbatches = 4) 
 }
 \arguments{
 \item{model}{Sequence of layer sizes (or weight arrays; lengths are used).}

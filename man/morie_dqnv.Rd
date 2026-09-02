@@ -5,7 +5,9 @@
 \alias{morie_dqnv}
 \title{morie_dqnv}
 \usage{
-morie_dqnv(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1, steps = 20000, C = 100, buffer_size = 1000, batch = 16, seed = 0, use_replay = TRUE, use_target = TRUE)
+morie_dqnv(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1, steps = 20000, 
+    C = 100, buffer_size = 1000, batch = 16, seed = 0, use_replay = TRUE, 
+    use_target = TRUE) 
 }
 \arguments{
 \item{P}{A vector; indexed elementwise.}

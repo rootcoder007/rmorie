@@ -5,7 +5,7 @@
 \alias{morie_alammar_kv_cache_lookup}
 \title{KV-cache append plus one attention row (Alammar Ch 3)}
 \usage{
-morie_alammar_kv_cache_lookup(K_cache, V_cache, k_new, v_new, q_new)
+morie_alammar_kv_cache_lookup(K_cache, V_cache, k_new, v_new, q_new) 
 }
 \arguments{
 \item{K_cache,V_cache}{Existing caches or NULL.}

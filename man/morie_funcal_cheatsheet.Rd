@@ -5,7 +5,7 @@
 \alias{morie_funcal_cheatsheet}
 \title{morie_funcal_cheatsheet}
 \usage{
-morie_funcal_cheatsheet()
+morie_funcal_cheatsheet() 
 }
 \description{
 A step of the funcal_native implementation. No other function in the package calls it. See the file header for the source the module follows.

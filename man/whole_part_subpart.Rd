@@ -5,7 +5,7 @@
 \alias{whole_part_subpart}
 \title{whole_part_subpart}
 \usage{
-whole_part_subpart(masks, target_hierarchy = NULL)
+whole_part_subpart(masks, target_hierarchy = NULL) 
 }
 \arguments{
 \item{masks}{A vector; its length is taken and its elements indexed.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/spnug.R
 \name{spnug}
 \alias{spnug}
-\title{Nugget effect in the semivariogram: discontinuity at the origin.}
+\title{Nugget effect in the semivariogram: discontinuity at the origin}
 \usage{
 spnug(h, nugget = 0, sill = 1, range = 1, model = "exponential")
 }

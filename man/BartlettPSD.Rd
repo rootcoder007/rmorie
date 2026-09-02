@@ -5,7 +5,7 @@
 \alias{BartlettPSD}
 \title{BartlettPSD}
 \usage{
-BartlettPSD(x, fs = 1, n_segments = NULL, segment_length = NULL)
+BartlettPSD(x, fs = 1, n_segments = NULL, segment_length = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

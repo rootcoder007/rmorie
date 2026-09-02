@@ -12,6 +12,8 @@ morie_kmt_bound(n, x = 1, a = NULL, b = NULL, c = NULL)
 \item{x}{deviation parameter.}
 
 \item{a, b, c}{the universal constants; all three required.}
+
+
 }
 \value{
 list: threshold, probability_bound, n.

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Generalised moment selection test statistic.
+#' Generalised moment selection test statistic
 #'
 #' t_j = sqrt(n) mbar_j / sigma_j; xi_j = t_j / kappa_n with
 #' kappa_n = sqrt(log n); moment j is retained when xi_j > -1, and

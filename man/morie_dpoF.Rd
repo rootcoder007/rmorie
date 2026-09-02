@@ -5,7 +5,9 @@
 \alias{morie_dpoF}
 \title{morie_dpoF}
 \usage{
-morie_dpoF(logp_w = NULL, logp_l = NULL, logp_ref_w = NULL, logp_ref_l = NULL, beta = 0.1, model = "bradley-terry", logp = NULL, logp_ref = NULL, label_smoothing = 0)
+morie_dpoF(logp_w = NULL, logp_l = NULL, logp_ref_w = NULL, logp_ref_l = NULL, 
+    beta = 0.1, model = "bradley-terry", logp = NULL, logp_ref = NULL, 
+    label_smoothing = 0) 
 }
 \arguments{
 \item{logp_w}{Passed to \code{.dpoF_vec}.}

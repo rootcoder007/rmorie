@@ -3,7 +3,7 @@
 #'
 #' He, Zhang, Ren and Sun (2016), Deep residual learning for image
 #' recognition, CVPR 770-778 (arXiv:1512.03385), equation (1), y = F(x,
-#' {W_i}) + x, specialised by Silver et al. (2017), Nature 550, 354-359,
+#' \{W_i\}) + x, specialised by Silver et al. (2017), Nature 550, 354-359,
 #' methods, to two 3x3 convolutions each followed by batch normalisation,
 #' with a rectifier after the first and after the skip addition:
 #' y = relu(x + BN(conv2(relu(BN(conv1(x)))))).  Silver et al. (2018),

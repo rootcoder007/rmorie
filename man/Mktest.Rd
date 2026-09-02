@@ -2,7 +2,7 @@
 % Please edit documentation in R/mannK.R
 \name{Mktest}
 \alias{Mktest}
-\title{Mann-Kendall rank test for monotone trend.}
+\title{Mann-Kendall rank test for monotone trend}
 \usage{
 Mktest(x, continuity = TRUE)
 }

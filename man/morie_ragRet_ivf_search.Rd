@@ -5,7 +5,7 @@
 \alias{morie_ragRet_ivf_search}
 \title{morie_ragRet_ivf_search}
 \usage{
-morie_ragRet_ivf_search(query, corpus, index, k.top = 5L, nprobe = 1L, metric = "inner_product")
+morie_ragRet_ivf_search(query, corpus, index, k.top = 5L, nprobe = 1L, metric = "inner_product") 
 }
 \arguments{
 \item{query}{Coerced to numeric by the body, with \code{as.numeric}.}

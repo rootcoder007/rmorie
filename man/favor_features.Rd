@@ -5,7 +5,7 @@
 \alias{favor_features}
 \title{favor_features}
 \usage{
-favor_features(X, omegas, kind = "positive", eps = 1e-06)
+favor_features(X, omegas, kind = "positive", eps = 1e-06) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

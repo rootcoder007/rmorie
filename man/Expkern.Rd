@@ -2,7 +2,7 @@
 % Please edit documentation in R/lapkn.R
 \name{Expkern}
 \alias{Expkern}
-\title{Exponential (Laplace) kernel matrix.}
+\title{Exponential (Laplace) kernel matrix}
 \usage{
 Expkern(X, gamma = NULL, Z = NULL)
 }

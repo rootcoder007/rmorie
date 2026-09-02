@@ -5,7 +5,7 @@
 \alias{cause_specific_hazards}
 \title{cause_specific_hazards}
 \usage{
-cause_specific_hazards(time, event_type, times, A = NULL, arm = NULL, weights = NULL)
+cause_specific_hazards(time, event_type, times, A = NULL, arm = NULL, weights = NULL) 
 }
 \arguments{
 \item{time}{Passed to \code{.tmlcmp_vec}.}

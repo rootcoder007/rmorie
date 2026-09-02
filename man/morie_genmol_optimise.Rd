@@ -5,7 +5,7 @@
 \alias{morie_genmol_optimise}
 \title{Gradient ascent on a property, in the latent space}
 \usage{
-morie_genmol_optimise(z0, property_fn, steps = 20L, lr = 0.1, eps = 1e-04)
+morie_genmol_optimise(z0, property_fn, steps = 20L, lr = 0.1, eps = 1e-04) 
 }
 \arguments{
 \item{z0}{The starting latent.}

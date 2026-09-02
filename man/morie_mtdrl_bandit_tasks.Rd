@@ -5,7 +5,7 @@
 \alias{morie_mtdrl_bandit_tasks}
 \title{A distribution of bandit tasks}
 \usage{
-morie_mtdrl_bandit_tasks(n_arms = 2, n_tasks = 100, seed = 0, structure = "independent")
+morie_mtdrl_bandit_tasks(n_arms = 2, n_tasks = 100, seed = 0, structure = "independent") 
 }
 \arguments{
 \item{n_arms}{Number of arms.}

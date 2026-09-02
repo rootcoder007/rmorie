@@ -5,7 +5,7 @@
 \alias{policy_iteration}
 \title{policy_iteration}
 \usage{
-policy_iteration(T, R, gamma, policy = NULL, max_iter = 200)
+policy_iteration(T, R, gamma, policy = NULL, max_iter = 200) 
 }
 \arguments{
 \item{T}{Passed to \code{.mdp}.}

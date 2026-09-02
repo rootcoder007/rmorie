@@ -5,7 +5,7 @@
 \alias{softplus}
 \title{softplus}
 \usage{
-softplus(z)
+softplus(z) 
 }
 \arguments{
 \item{z}{Coerced to numeric by the body, with \code{as.numeric}.}

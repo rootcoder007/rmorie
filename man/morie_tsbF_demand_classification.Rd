@@ -5,7 +5,7 @@
 \alias{morie_tsbF_demand_classification}
 \title{morie_tsbF_demand_classification}
 \usage{
-morie_tsbF_demand_classification(y, adi_cut = 1.32, cv2_cut = 0.49)
+morie_tsbF_demand_classification(y, adi_cut = 1.32, cv2_cut = 0.49) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

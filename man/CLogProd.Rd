@@ -5,7 +5,7 @@
 \alias{CLogProd}
 \title{CLogProd: complex log turning Y = X H into log X + log H;}
 \usage{
-CLogProd(X, H, omega = NULL)
+CLogProd(X, H, omega = NULL) 
 }
 \arguments{
 \item{X}{Coerced to complex by the body, with \code{as.complex}.}

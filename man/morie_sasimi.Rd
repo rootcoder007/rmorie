@@ -5,7 +5,7 @@
 \alias{morie_sasimi}
 \title{morie_sasimi}
 \usage{
-morie_sasimi(fp_a, fp_b, coefficient = "tanimoto", alpha = NULL, beta = NULL)
+morie_sasimi(fp_a, fp_b, coefficient = "tanimoto", alpha = NULL, beta = NULL) 
 }
 \arguments{
 \item{fp_a}{Passed to \code{sasimi_counts}.}
@@ -25,7 +25,7 @@ A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, 
 Jaccard, P. (1912) "The distribution of the flora in the alpine
 zone", *New Phytologist* 11(2), 37-50,
 doi:10.1111/j.1469-8137.1912.tb05611.x, for the coefficient
-:math:`c/(a+b-c)` itself.
+\eqn{c/(a+b-c)} itself.
 
 Willett, P., Barnard, J. M. & Downs, G. M. (1998) "Chemical
 similarity searching", *Journal of Chemical Information and Computer

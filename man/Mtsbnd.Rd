@@ -17,6 +17,7 @@ Mtsbnd(Y, X, monotone = TRUE, d = NULL, ymin = NULL, ymax = NULL)
 \code{max(X)}.}
 
 \item{ymin, ymax}{A priori outcome support; default to the observed range.}
+
 }
 \value{
 List with lower, upper, width, condmean, pbelow, pat, pabove,

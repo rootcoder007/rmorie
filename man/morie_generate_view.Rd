@@ -5,7 +5,7 @@
 \alias{morie_generate_view}
 \title{morie_generate_view}
 \usage{
-morie_generate_view(X, edges, p_edge, p_feature, rng)
+morie_generate_view(X, edges, p_edge, p_feature, rng) 
 }
 \arguments{
 \item{X}{Passed to \code{.grace_generate_view}.}

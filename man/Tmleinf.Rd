@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlinf.R
 \name{Tmleinf}
 \alias{Tmleinf}
-\title{Standard error, interval and score check from an influence curve.}
+\title{Standard error, interval and score check from an influence curve}
 \usage{
 Tmleinf(psi, ic, level = 0.95, null_value = 0)
 }

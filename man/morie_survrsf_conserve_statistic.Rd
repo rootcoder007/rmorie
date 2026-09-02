@@ -5,7 +5,7 @@
 \alias{morie_survrsf_conserve_statistic}
 \title{Conservation-of-events splitting, Ishwaran & Kogalur (2007)}
 \usage{
-morie_survrsf_conserve_statistic(times, events, group)
+morie_survrsf_conserve_statistic(times, events, group) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

@@ -5,7 +5,7 @@
 \alias{pseudo_outcome}
 \title{Kennedy et al. Theorem 1\'s xi(Z; pi, mu), one value per row}
 \usage{
-pseudo_outcome(y, A, X, ridge = 1e-08)
+pseudo_outcome(y, A, X, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Outcome vector.}

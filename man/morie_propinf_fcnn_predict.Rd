@@ -5,7 +5,7 @@
 \alias{morie_propinf_fcnn_predict}
 \title{Predict with a fully connected binary classifier}
 \usage{
-morie_propinf_fcnn_predict(net, X)
+morie_propinf_fcnn_predict(net, X) 
 }
 \arguments{
 \item{net}{Network as returned by \code{morie_propinf_train_fcnn}.}

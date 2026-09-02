@@ -5,7 +5,7 @@
 \alias{stochastic_intervention}
 \title{stochastic_intervention}
 \usage{
-stochastic_intervention(A, nodes, shift = NULL, prob = NULL)
+stochastic_intervention(A, nodes, shift = NULL, prob = NULL) 
 }
 \arguments{
 \item{A}{Coerced to numeric by the body, with \code{as.numeric}.}

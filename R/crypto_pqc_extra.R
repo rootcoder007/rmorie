@@ -18,7 +18,7 @@
 #' SLH-DSA-SHA2-128s keypair (hash-based signatures, FIPS 205)
 #'
 #' Hash-based signatures rest only on the security of the underlying
-#' hash function — the most conservative post-quantum assumption.
+#' hash function -- the most conservative post-quantum assumption.
 #' Requires a liboqs build that includes SLH-DSA / SPHINCS+.
 #'
 #' @return List with `pk` (raw, 32 B) and `sk` (raw, 64 B).
@@ -136,8 +136,8 @@ morie_crypto_hqc_decaps <- function(sk, ct) {
 #'
 #' The textbook hash-based signature (Lamport 1979): 256 secret pairs
 #' of 32 random bytes; the public key is their SHA-256 images.
-#' Security reduces entirely to SHA-256 preimage resistance — a
-#' post-quantum assumption — but each keypair signs EXACTLY ONE
+#' Security reduces entirely to SHA-256 preimage resistance -- a
+#' post-quantum assumption -- but each keypair signs EXACTLY ONE
 #' message. Signing twice with the same key leaks enough secrets to
 #' forge; \code{\link{morie_crypto_lamport_sign}} therefore refuses a
 #' key it has already used in this session. For many-time hash-based

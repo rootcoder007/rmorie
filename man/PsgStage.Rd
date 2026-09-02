@@ -5,7 +5,7 @@
 \alias{PsgStage}
 \title{PsgStage: polysomnography signal fusion for sleep staging}
 \usage{
-PsgStage(eeg, eog, emg, fs, epoch_len = 30)
+PsgStage(eeg, eog, emg, fs, epoch_len = 30) 
 }
 \arguments{
 \item{eeg}{Coerced to numeric by the body, with \code{as.numeric}.}

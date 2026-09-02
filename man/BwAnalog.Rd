@@ -5,7 +5,7 @@
 \alias{BwAnalog}
 \title{The analog Butterworth transfer function from its left-half-plane poles}
 \usage{
-BwAnalog(Omega_c, N, G = NULL, s = NULL)
+BwAnalog(Omega_c, N, G = NULL, s = NULL) 
 }
 \arguments{
 \item{Omega_c}{The cutoff, which must be positive.}

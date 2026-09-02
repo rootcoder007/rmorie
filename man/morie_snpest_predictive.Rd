@@ -5,7 +5,7 @@
 \alias{morie_snpest_predictive}
 \title{log p(x | cluster with sufficient statistics)}
 \usage{
-morie_snpest_predictive(x, n, s, ss, m0, kappa0, a0, b0)
+morie_snpest_predictive(x, n, s, ss, m0, kappa0, a0, b0) 
 }
 \arguments{
 \item{x}{The point.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/audit_variables.R
 \name{morie_write_audit_markdown}
 \alias{morie_write_audit_markdown}
-\title{Write a Markdown audit report.}
+\title{Write a Markdown audit report}
 \usage{
 morie_write_audit_markdown(out_path, audit_result)
 }
@@ -15,7 +15,7 @@ morie_write_audit_markdown(out_path, audit_result)
 The path written.
 }
 \description{
-Write a Markdown audit report.
+Write a Markdown audit report
 }
 \examples{
 df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))

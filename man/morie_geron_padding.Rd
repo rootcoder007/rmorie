@@ -5,7 +5,7 @@
 \alias{morie_geron_padding}
 \title{Zero-padding for valid/same convolutions (Geron Ch 12, hmpd)}
 \usage{
-morie_geron_padding(x, pad_h = NULL, pad_w = NULL, kernel_size = NULL, stride = 1)
+morie_geron_padding(x, pad_h = NULL, pad_w = NULL, kernel_size = NULL, stride = 1) 
 }
 \arguments{
 \item{x}{Array (h, w), (h, w, c) or (n, h, w, c).}

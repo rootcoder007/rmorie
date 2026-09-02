@@ -2,7 +2,7 @@
 % Please edit documentation in R/postrt.R
 \name{Postrt}
 \alias{Postrt}
-\title{weighted mean.}
+\title{Post-stratification as a weight adjustment}
 \usage{
 Postrt(y, weights, stratum, N_h)
 }
@@ -20,7 +20,10 @@ List with \code{estimate}, \code{weights}, \code{factors},
 \code{N}, \code{n}, \code{strata}.
 }
 \description{
-weighted mean.
+The same method as \eqn{link{Poststs}} seen from the weight side:
+with unit design weights the two return the same number. The adjusted
+weights sum to \eqn{_h} within every stratum exactly, which is the
+weighted mean
 }
 \examples{
 Postrt(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), N_h = c(1, 2, 3, 4, 5, 6, 7, 8))

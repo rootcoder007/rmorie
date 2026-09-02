@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Degree matrix and volume of a graph.
+#' Degree matrix and volume of a graph
 #'
 #' Formula: D = diag(d_1, ..., d_n),  d_v = sum_u A_uv;  vol(G) = sum_v d_v
 #'

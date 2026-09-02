@@ -5,7 +5,10 @@
 \alias{morie_ecsTCR}
 \title{Equilibrium and transient climate sensitivity}
 \usage{
-morie_ecsTCR(model_run = NULL, CO2_traj = NULL, route = "parameters", lam = NULL, gamma = 0.7, epsilon = 1, C = 8, C_deep = 100, f2x = .ECSTCR_F2X, solver = "analytic", years = 70L, rate = 0.01, temperature = NULL, imbalance = NULL, forcing_multiple = 2, dt = 1)
+morie_ecsTCR(model_run = NULL, CO2_traj = NULL, route = "parameters", lam = NULL, 
+    gamma = 0.7, epsilon = 1, C = 8, C_deep = 100, f2x = .ECSTCR_F2X, solver = "analytic", 
+    years = 70L, rate = 0.01, temperature = NULL, imbalance = NULL, forcing_multiple = 2, 
+    dt = 1) 
 }
 \arguments{
 \item{model_run}{a surface temperature series; alias for temperature.}

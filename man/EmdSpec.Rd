@@ -5,7 +5,7 @@
 \alias{EmdSpec}
 \title{EMD-based instantaneous-frequency spectrum, Sec 9.4 eqs (9.8)-(9.12)}
 \usage{
-EmdSpec(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05)
+EmdSpec(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

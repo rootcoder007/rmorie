@@ -5,7 +5,9 @@
 \alias{morie_nashq}
 \title{morie_nashq}
 \usage{
-morie_nashq(states, actions, step, rewards, gamma = 0.9, alpha = 0.5, epsilon = 0.1, episodes = 500, horizon = 50, start = NULL, selection = "global_optimal", terminal = NULL, seed = 0, agent = 0L, tol = 1e-09)
+morie_nashq(states, actions, step, rewards, gamma = 0.9, alpha = 0.5, epsilon = 0.1, 
+    episodes = 500, horizon = 50, start = NULL, selection = "global_optimal", 
+    terminal = NULL, seed = 0, agent = 0L, tol = 1e-09) 
 }
 \arguments{
 \item{states}{Coerced to list by the body, with \code{as.list}.}

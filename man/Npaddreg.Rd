@@ -43,7 +43,7 @@ unique only after the location normalisation E[m_j(X^j)] = 0 (3.6);
 then E(Y) = mu (3.7) and
 }
 \details{
-m_1(x^1) = integral E(Y|X=x) p_{-1}(x^{-1}) dx^{-1} - mu   (3.8)
+m_1(x^1) = integral E(Y|X=x) p_\{-1\}(x^\{-1\}) dx^\{-1\} - mu   (3.8)
 
 estimated by averaging the product-kernel estimator (3.9) over the
 sample.  Bandwidths are explicit with fixed defaults; nothing is

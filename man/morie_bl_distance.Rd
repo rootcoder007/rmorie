@@ -12,6 +12,7 @@ morie_bl_distance(X_n, X, n_functions = 200L, seed = 1L)
 \item{n_functions}{number of BL_1 members to sample.}
 
 \item{seed}{RNG seed.}
+
 }
 \value{
 list: bl_distance, is_lower_bound, n_functions.

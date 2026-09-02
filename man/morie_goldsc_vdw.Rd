@@ -5,7 +5,7 @@
 \alias{morie_goldsc_vdw}
 \title{Sum a Lennard-Jones potential over a list of contacts}
 \usage{
-morie_goldsc_vdw(pairs, radii, depths, potential = "4-8", cutoff = NULL)
+morie_goldsc_vdw(pairs, radii, depths, potential = "4-8", cutoff = NULL) 
 }
 \arguments{
 \item{pairs}{A list of list(distance, type_i, type_j).}

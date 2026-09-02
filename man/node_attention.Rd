@@ -5,7 +5,7 @@
 \alias{node_attention}
 \title{node_attention}
 \usage{
-node_attention(h_i, neighbours, H, a_vec, W, slope = 0.2)
+node_attention(h_i, neighbours, H, a_vec, W, slope = 0.2) 
 }
 \arguments{
 \item{h_i}{Passed to \code{proj}.}

@@ -10,6 +10,7 @@ morie_geron_ddpm_simple_loss(eps, eps_pred, reduction = "mean")
 \item{eps, eps_pred}{Numeric matrices of equal shape (vectors = 1 row).}
 
 \item{reduction}{"mean" or "sum"; selects \code{estimate} only.}
+
 }
 \value{
 List with \code{loss}, \code{sum_squared_error}, \code{per_sample},

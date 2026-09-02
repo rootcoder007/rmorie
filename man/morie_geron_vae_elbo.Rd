@@ -16,6 +16,7 @@ morie_geron_vae_elbo(x, mu, logvar, recon, likelihood = "gaussian", beta = 1)
 \item{likelihood}{"gaussian" or "bernoulli".}
 
 \item{beta}{Non-negative KL weight.}
+
 }
 \value{
 List with \code{elbo}, \code{loss}, \code{reconstruction_term}, \code{kl},

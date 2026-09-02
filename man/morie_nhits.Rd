@@ -5,7 +5,7 @@
 \alias{morie_nhits}
 \title{morie_nhits}
 \usage{
-morie_nhits(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08)
+morie_nhits(y, horizon, lookback = NULL, blocks = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Passed to \code{.nhits_vec}.}

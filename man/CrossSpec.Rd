@@ -5,7 +5,7 @@
 \alias{CrossSpec}
 \title{Raw cross-periodogram S_xy(w) = X(w) conj(Y(w)) / (2 pi n) on}
 \usage{
-CrossSpec(x, y)
+CrossSpec(x, y) 
 }
 \arguments{
 \item{x}{Passed to \code{.morie_spx_chkv}.}

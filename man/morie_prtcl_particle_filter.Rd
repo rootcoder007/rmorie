@@ -5,7 +5,8 @@
 \alias{morie_prtcl_particle_filter}
 \title{morie_prtcl_particle_filter}
 \usage{
-morie_prtcl_particle_filter(y, n.particles, init, step, loglik, seed = 0L, resample.threshold = 1, systematic = TRUE)
+morie_prtcl_particle_filter(y, n.particles, init, step, loglik, seed = 0L, resample.threshold = 1, 
+    systematic = TRUE) 
 }
 \arguments{
 \item{y}{Coerced to numeric by the body, with \code{as.numeric}.}

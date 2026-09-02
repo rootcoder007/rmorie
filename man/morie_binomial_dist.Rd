@@ -10,6 +10,7 @@ morie_binomial_dist(n, p, k = NULL)
 \item{n, p}{trial count and success probability.}
 
 \item{k}{optional specific count.}
+
 }
 \value{
 list: pmf (if k given), mean, second_moment, variance,

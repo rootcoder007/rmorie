@@ -17,16 +17,19 @@ list(w1, b1, w2, b2, wskip)}
 \item{wglobal}{global linear map from lookback to horizon}
 
 \item{horizon}{forecast length}
+
+
+
 }
 \value{
 list(forecast, temporal, global, horizon, p, encdim, nfeat,
 first, last, mean)
 }
 \description{
-Quoted from the paper: (3) "xtilde_{i,t} = ResidualBlock(x_{i,t})";
+Quoted from the paper: (3) "xtilde_\{i,t\} = ResidualBlock(x_\{i,t\})";
 (4) "e^(i) = Encoder(y^i; xtilde^i; a^(i))"; (5) "g^(i) =
-Decoder(e^(i))"; (6) "D^(i) = Reshape(g^(i))"; "yhat^i_{L+t} =
-TemporalDecoder(d_{i,t}; xtilde^i_{L+t})" -- Das, A., Kong, W.,
+Decoder(e^(i))"; (6) "D^(i) = Reshape(g^(i))"; "yhat^i_\{L+t\} =
+TemporalDecoder(d_\{i,t\}; xtilde^i_\{L+t\})" -- Das, A., Kong, W.,
 Leach, A., Mathur, S., Sen, R. and Yu, R., Long-term Forecasting
 with TiDE, TMLR 2023 (arXiv:2304.08424). The paper states the
 residual block and the global linear residual in prose rather than

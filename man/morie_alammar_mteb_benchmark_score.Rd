@@ -5,7 +5,7 @@
 \alias{morie_alammar_mteb_benchmark_score}
 \title{morie_alammar_mteb_benchmark_score}
 \usage{
-morie_alammar_mteb_benchmark_score(task_scores, category_map)
+morie_alammar_mteb_benchmark_score(task_scores, category_map) 
 }
 \arguments{
 \item{task_scores}{Named list/vector.}

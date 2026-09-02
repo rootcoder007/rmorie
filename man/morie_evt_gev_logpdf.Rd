@@ -10,6 +10,8 @@ morie_evt_gev_logpdf(x, mu, sigma, xi)
 \item{x}{quantile(s)}
 
 \item{mu, sigma, xi}{GEV location, scale (> 0), shape}
+
+
 }
 \value{
 numeric vector of log-densities (-Inf off support, eq. 3.8)

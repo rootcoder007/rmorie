@@ -12,6 +12,7 @@ morie_geron_blip(images, texts, temperature = 1, caption_logprobs = NULL)
 \item{temperature}{Positive temperature.}
 
 \item{caption_logprobs}{Optional per-caption mean token log-probs.}
+
 }
 \value{
 List with \code{itc_loss}, \code{itm_loss}, \code{lm_loss}, \code{total_loss},

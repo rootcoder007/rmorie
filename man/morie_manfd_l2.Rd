@@ -5,7 +5,7 @@
 \alias{morie_manfd_l2}
 \title{Pairwise L2 distance between curves, by the trapezoid rule}
 \usage{
-morie_manfd_l2(Y, grid = NULL)
+morie_manfd_l2(Y, grid = NULL) 
 }
 \arguments{
 \item{Y}{A matrix with one curve per row.}

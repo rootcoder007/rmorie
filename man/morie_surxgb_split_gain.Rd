@@ -5,7 +5,7 @@
 \alias{morie_surxgb_split_gain}
 \title{Equation (7): the loss reduction, net of the leaf price}
 \usage{
-morie_surxgb_split_gain(GL, HL, GR, HR, lam = 1, gamma = 0)
+morie_surxgb_split_gain(GL, HL, GR, HR, lam = 1, gamma = 0) 
 }
 \arguments{
 \item{GL}{Numeric; combined arithmetically in the body.}

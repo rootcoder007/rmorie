@@ -28,7 +28,7 @@ survival prior.  The path is simulated on a grid with H0 the
 unit-exponential cumulative hazard.
 }
 \details{
-Formula: H(t_k) = sum_{j <= k} dH_j,
+Formula: H(t_k) = sum_\{j <= k\} dH_j,
 dH_j ~ Be(c dH0_j, c(1 - dH0_j)).
 }
 \examples{

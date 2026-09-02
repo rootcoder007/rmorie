@@ -5,10 +5,12 @@
 \alias{morie_alammar_sampling_decoding}
 \title{morie_alammar_sampling_decoding}
 \usage{
-morie_alammar_sampling_decoding(logits, seed = 0)
+morie_alammar_sampling_decoding(logits, seed = 0) 
 }
 \arguments{
 \item{seed}{LCG seed; the Python mirror draws the same tokens.}
+
+\item{logits}{Argument \code{logits}; see Usage.}
 }
 \description{
 morie_alammar_sampling_decoding

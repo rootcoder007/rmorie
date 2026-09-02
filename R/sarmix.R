@@ -48,7 +48,7 @@
   best
 }
 
-#' Combined spatial autoregressive lag + autoregressive error (SARAR).
+#' Combined spatial autoregressive lag + autoregressive error (SARAR)
 #'
 #' Model (Kelejian & Prucha 1998, eqs. (1)-(2), p. 101):
 #' \code{y = rho W1 y + X beta + u}, \code{u = lam W2 u + eps},

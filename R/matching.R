@@ -46,11 +46,15 @@ NULL
   invisible(TRUE)
 }
 
+#' @param data See Usage.
+#' @param cols See Usage.
 #' @keywords internal
 .morie_matching_drop_na <- function(data, cols) {
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 
+#' @param df See Usage.
+#' @param ps See Usage.
 #' @keywords internal
 .morie_matching_distance <- function(df, ps) {
   # MatchIt reads a numeric `distance` as the propensity score itself,
@@ -70,6 +74,8 @@ NULL
        call. = FALSE)
 }
 
+#' @param p See Usage.
+#' @param eps See Usage.
 #' @keywords internal
 .morie_matching_logit <- function(p, eps = 1e-6) {
   p <- pmin(pmax(p, eps), 1 - eps)
@@ -86,6 +92,12 @@ NULL
   )
 }
 
+#' @param matched_data See Usage.
+#' @param n_treated See Usage.
+#' @param n_matched_control See Usage.
+#' @param match_pairs See Usage.
+#' @param method See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_result <- function(matched_data, n_treated, n_matched_control,
                                    match_pairs, method,
@@ -107,6 +119,7 @@ NULL
   exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
+#' @param fn See Usage.
 #' @keywords internal
 .morie_matching_need_matchit <- function(fn) {
   if (!.morie_matching_have("MatchIt")) {
@@ -117,6 +130,11 @@ NULL
   invisible(TRUE)
 }
 
+#' @param mi See Usage.
+#' @param df See Usage.
+#' @param treatment See Usage.
+#' @param method_label See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_matchit_to_result <- function(mi, df, treatment, method_label,
                                               details = list()) {
@@ -958,6 +976,7 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 # Treatment effect estimation from matched samples
 # ---------------------------------------------------------------------------
 
+#' @param estimand See Usage.
 #' @keywords internal
 .morie_matching_te_empty <- function(estimand) {
   out <- list(
@@ -974,6 +993,12 @@ morie_matching_balance_table <- function(data, treatment, covariates,
   out
 }
 
+#' @param estimand See Usage.
+#' @param estimate See Usage.
+#' @param se See Usage.
+#' @param n_obs See Usage.
+#' @param alpha See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_te_result <- function(estimand, estimate, se, n_obs,
                                       alpha = 0.05, details = list()) {

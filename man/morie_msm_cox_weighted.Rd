@@ -5,10 +5,19 @@
 \alias{morie_msm_cox_weighted}
 \title{morie_msm_cox_weighted}
 \usage{
-morie_msm_cox_weighted(time, event, treatment_history, weights = NULL, n_iter = 60, tol = 1e-10)
+morie_msm_cox_weighted(time, event, treatment_history, weights = NULL, n_iter = 60, 
+    tol = 1e-10) 
 }
 \description{
 morie_msm_cox_weighted
+}
+\arguments{
+\item{time}{Argument \code{time}; see Usage.}
+\item{event}{Argument \code{event}; see Usage.}
+\item{treatment_history}{Argument \code{treatment_history}; see Usage.}
+\item{weights}{Argument \code{weights}; see Usage.}
+\item{n_iter}{Argument \code{n_iter}; see Usage.}
+\item{tol}{Argument \code{tol}; see Usage.}
 }
 \value{
 A list with \code{beta}, \code{hazard_ratio}.

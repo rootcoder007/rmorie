@@ -5,7 +5,7 @@
 \alias{n_parameters}
 \title{n_parameters}
 \usage{
-n_parameters(n_features, n_fields, k_dim, model = "ffm")
+n_parameters(n_features, n_fields, k_dim, model = "ffm") 
 }
 \arguments{
 \item{n_features}{Coerced to integer by the body, with \code{as.integer}.}

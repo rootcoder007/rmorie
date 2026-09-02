@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_seq}
 \title{morie_prsPEG_seq}
 \usage{
-morie_prsPEG_seq(...)
+morie_prsPEG_seq(...) 
 }
 \arguments{
 \item{...}{Passed through.}

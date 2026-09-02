@@ -2,7 +2,7 @@
 % Please edit documentation in R/mabegg.R
 \name{Beggtest}
 \alias{Beggtest}
-\title{Begg and Mazumdar's rank correlation test for publication bias.}
+\title{Begg and Mazumdar's rank correlation test for publication bias}
 \usage{
 Beggtest(yi, vi)
 }

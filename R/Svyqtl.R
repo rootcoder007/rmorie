@@ -2,12 +2,12 @@
 #' Survey quantile by inversion of the weighted CDF
 #'
 #' The estimator inverts the Horvitz-Thompson estimator of the
-#' distribution function, F_w(t) = sum_{y_i <= t} w_i / sum_i w_i.  With
+#' distribution function, F_w(t) = sum_\{y_i <= t\} w_i / sum_i w_i.  With
 #' equal weights it is exactly the type-1 sample quantile.  The interval
 #' is Woodruff's: invert the CDF at p -/+ z times the linearized standard
 #' error of F_w at the point estimate.
 #'
-#' Formula: Q_p = inf{t : F_w(t) >= p}.
+#' Formula: Q_p = inf\{t : F_w(t) >= p\}.
 #'
 #' @param y Numeric observations.
 #' @param weights Optional design weights; equal weights if NULL.

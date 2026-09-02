@@ -5,7 +5,7 @@
 \alias{temperature_ladder}
 \title{temperature_ladder}
 \usage{
-temperature_ladder(n_steps, kind = "geometric", power = 1)
+temperature_ladder(n_steps, kind = "geometric", power = 1) 
 }
 \arguments{
 \item{n_steps}{Coerced to integer by the body, with \code{as.integer}.}

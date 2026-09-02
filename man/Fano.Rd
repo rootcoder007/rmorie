@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_ap_k1.R
 \name{Fano}
 \alias{Fano}
-\title{Fano lower bound on the error probability of an M-ary test.}
+\title{Fano lower bound on the error probability of an M-ary test}
 \usage{
 Fano(M, mutual_info, base_e = TRUE)
 }

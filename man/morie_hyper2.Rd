@@ -5,7 +5,9 @@
 \alias{morie_hyper2}
 \title{Posterior over GP hyperparameters, predictions averaged over it}
 \usage{
-morie_hyper2(X, y, prior = NULL, kind = "squared_exponential", route = "marginal", n_iter = 200L, burn = NULL, thin = 1L, seed = 1, Xstar = NULL, w = 1, m = 10L, jitter = 1e-08)
+morie_hyper2(X, y, prior = NULL, kind = "squared_exponential", route = "marginal", 
+    n_iter = 200L, burn = NULL, thin = 1L, seed = 1, Xstar = NULL, w = 1, 
+    m = 10L, jitter = 1e-08) 
 }
 \arguments{
 \item{X}{Training inputs.}

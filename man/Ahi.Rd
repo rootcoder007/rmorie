@@ -5,7 +5,8 @@
 \alias{Ahi}
 \title{Ahi}
 \usage{
-Ahi(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.1, hypofrac = 0.5, minsec = 10, desat = 0, envsec = 1)
+Ahi(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.1, hypofrac = 0.5, 
+    minsec = 10, desat = 0, envsec = 1) 
 }
 \arguments{
 \item{airflow}{Passed to \code{.morie_bx_vec}.}

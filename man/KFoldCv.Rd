@@ -5,7 +5,7 @@
 \alias{KFoldCv}
 \title{Section 10.10.3.  The book\'s point is that the training and test}
 \usage{
-KFoldCv(X, y, k = 5, classifier = NULL, stratified = TRUE)
+KFoldCv(X, y, k = 5, classifier = NULL, stratified = TRUE) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

@@ -5,7 +5,8 @@
 \alias{morie_varqc1_mixture}
 \title{EM for a Gaussian mixture, returning Cholesky factors}
 \usage{
-morie_varqc1_mixture(X, n_components = 2L, n_iter = 50L, seed = 1, covariance = "full", min_variance = 1e-06, jitter = 1e-08, shrinkage = 0.05)
+morie_varqc1_mixture(X, n_components = 2L, n_iter = 50L, seed = 1, covariance = "full", 
+    min_variance = 1e-06, jitter = 1e-08, shrinkage = 0.05) 
 }
 \arguments{
 \item{X}{Training matrix.}

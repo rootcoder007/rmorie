@@ -5,7 +5,7 @@
 \alias{DicNotch}
 \title{Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares}
 \usage{
-DicNotch(cp, fs, qrs = NULL, mwin = 16)
+DicNotch(cp, fs, qrs = NULL, mwin = 16) 
 }
 \arguments{
 \item{cp}{A vector; its length is taken and its elements indexed.}

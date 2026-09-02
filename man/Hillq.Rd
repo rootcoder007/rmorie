@@ -2,7 +2,7 @@
 % Please edit documentation in R/aithil.R
 \name{Hillq}
 \alias{Hillq}
-\title{Hill numbers of order q.}
+\title{Hill numbers of order q}
 \usage{
 Hillq(x, q = 1)
 }

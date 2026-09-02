@@ -5,10 +5,9 @@
 \alias{CoxPL}
 \title{\\' Cox partial likelihood, its score and information, optionally}
 \usage{
-CoxPL(time, event, X, beta = NULL, max_iter = 50L, tol = 1e-10)
+CoxPL(time, event, X, beta = NULL, max_iter = 50L, tol = 1e-10) 
 }
 \arguments{
-\item{max_iter,tol}{Newton-Raphson controls, used only when beta is NULL \\' @return list(loglik, score, information, coefficients, vcov, se, n, \\' n_event, iterations, converged, method) \\' @export }
 \item{time}{A vector; its length is taken.}
 \item{event}{A vector; its length is taken.}
 \item{X}{A matrix; passed to \code{nrow}.}

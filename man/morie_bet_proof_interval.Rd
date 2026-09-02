@@ -5,7 +5,7 @@
 \alias{morie_bet_proof_interval}
 \title{morie_bet_proof_interval}
 \usage{
-morie_bet_proof_interval(x, level = 0.95, lower_bound = 0, min_width = NULL)
+morie_bet_proof_interval(x, level = 0.95, lower_bound = 0, min_width = NULL) 
 }
 \arguments{
 \item{x}{Passed to \code{morie_truncated_normal_interval}.}

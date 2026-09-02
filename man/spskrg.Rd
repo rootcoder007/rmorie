@@ -2,7 +2,7 @@
 % Please edit documentation in R/spskrg.R
 \name{spskrg}
 \alias{spskrg}
-\title{Simple kriging: the mean is known.}
+\title{Simple kriging: the mean is known}
 \usage{
 spskrg(coords, z, target, cov_model = NULL, mu = NULL)
 }

@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Spatial autoregressive (lag) model.
+#' Spatial autoregressive (lag) model
 #'
 #' Same estimator as [sarla()], which fits the concentrated
 #' log-likelihood in rho; this delegates rather than carrying a second

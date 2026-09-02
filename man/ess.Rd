@@ -5,7 +5,7 @@
 \alias{ess}
 \title{ess}
 \usage{
-ess(weights)
+ess(weights) 
 }
 \arguments{
 \item{weights}{Numeric; passed to \code{sum}.}

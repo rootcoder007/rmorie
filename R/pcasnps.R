@@ -25,7 +25,7 @@
 #' Monomorphic markers carry no information and would divide by zero;
 #' they are dropped and counted rather than left to produce Inf.
 #'
-#' @param genotypes Genotype counts in {0, 1, 2}, individuals by
+#' @param genotypes Genotype counts in \{0, 1, 2\}, individuals by
 #'   markers.
 #' @param n_components Number of leading components to return.
 #' @return List with \code{eigenvalues}, \code{pcs},

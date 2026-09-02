@@ -29,6 +29,7 @@ Crpgib(
 \item{sigma2}{Known within-cluster variance.}
 
 \item{seed}{Seed of the deterministic stream.}
+
 }
 \value{
 List with \code{estimate} (number of clusters), \code{z},
@@ -36,7 +37,7 @@ List with \code{estimate} (number of clusters), \code{z},
 \code{n}, \code{method}.
 }
 \description{
-Formula: P(z_i | z_{-i}) proportional to n_k^{-i} f(y_i | theta_k),
+Formula: P(z_i | z_\{-i\}) proportional to n_k^\{-i\} f(y_i | theta_k),
 and to (alpha/m) f(y_i | theta_aux) for each of m auxiliary draws
 }
 \details{

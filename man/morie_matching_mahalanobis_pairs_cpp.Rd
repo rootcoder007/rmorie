@@ -5,7 +5,7 @@
 \alias{morie_matching_mahalanobis_pairs_cpp}
 \title{morie_matching_mahalanobis_pairs_cpp}
 \usage{
-morie_matching_mahalanobis_pairs_cpp(X_t, X_c, S_inv)
+morie_matching_mahalanobis_pairs_cpp(X_t, X_c, S_inv) 
 }
 \arguments{
 \item{X_t}{Passed to \code{.Call}.}

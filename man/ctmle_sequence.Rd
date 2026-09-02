@@ -5,7 +5,8 @@
 \alias{ctmle_sequence}
 \title{Build the nested sequence of (G, targeted Q) and score each step}
 \usage{
-ctmle_sequence(y, D, X, tuning = "discrete", penalties = NULL, trim = 0.005, scale = NULL, q_covariates = NULL)
+ctmle_sequence(y, D, X, tuning = "discrete", penalties = NULL, trim = 0.005, 
+    scale = NULL, q_covariates = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.tmlcds_vec}.}

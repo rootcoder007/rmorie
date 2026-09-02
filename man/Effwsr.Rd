@@ -5,10 +5,15 @@
 \alias{Effwsr}
 \title{Signed-rank efficacy -- eq. (13.3.4), p. 490}
 \usage{
-Effwsr(n, f0, integral)
+Effwsr(n, f0, integral) 
 }
 \description{
 Signed-rank efficacy -- eq. (13.3.4), p. 490
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
+\item{f0}{Argument \code{f0}; see Usage.}
+\item{integral}{Argument \code{integral}; see Usage.}
 }
 \value{
 A list with \code{efficacy}, \code{limit}, \code{integral}, \code{n}.

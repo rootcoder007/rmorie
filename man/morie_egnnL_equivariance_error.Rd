@@ -5,7 +5,7 @@
 \alias{morie_egnnL_equivariance_error}
 \title{morie_egnnL_equivariance_error}
 \usage{
-morie_egnnL_equivariance_error(H, X, phi_e, phi_x, phi_h, Q, g, layers = 2, C = NULL)
+morie_egnnL_equivariance_error(H, X, phi_e, phi_x, phi_h, Q, g, layers = 2, C = NULL) 
 }
 \arguments{
 \item{H}{Passed to \code{run_egnn}.}

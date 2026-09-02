@@ -8,6 +8,7 @@ morie_partitions_into_parts(n, k)
 }
 \arguments{
 \item{n, k}{Non-negative whole numbers.}
+
 }
 \value{
 A \code{morie_bigint}.

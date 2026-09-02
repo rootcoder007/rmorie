@@ -5,7 +5,7 @@
 \alias{morie_alfrf2_cheatsheet}
 \title{One-line summary of the alfrf2 module}
 \usage{
-morie_alfrf2_cheatsheet()
+morie_alfrf2_cheatsheet() 
 }
 \description{
 One-line summary of the alfrf2 module

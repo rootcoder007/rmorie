@@ -10,6 +10,7 @@ mrm_two_treatment_test(a, b, alpha = 0.05)
 \item{a, b}{Outcome vectors under treatments A and B.}
 
 \item{alpha}{CI level (default 0.05).}
+
 }
 \value{
 Named list with estimate, se, t_statistic, df,

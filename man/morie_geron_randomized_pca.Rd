@@ -5,7 +5,7 @@
 \alias{morie_geron_randomized_pca}
 \title{Randomized PCA via a power-iterated random projection sketch (Geron Ch 7, hmrpca)}
 \usage{
-morie_geron_randomized_pca(X, n_components, seed = 0, n_oversamples = 10, n_power_iter = 2)
+morie_geron_randomized_pca(X, n_components, seed = 0, n_oversamples = 10, n_power_iter = 2) 
 }
 \arguments{
 \item{X}{Data (m, p).}

@@ -10,7 +10,7 @@
 #' beta_hat_i = 1 - Phi(|t*_i|) per bootstrap sample (Loh Eq. 2);
 #' alpha' is the 2a-quantile of the beta_hat_i and the interval is
 #' the normal-theory interval at level alpha'.  Sec. 2.2:
-#' z_{1-alpha'} equals the (1-2a)-quantile of |t*|, so the result IS
+#' z_\{1-alpha'\} equals the (1-2a)-quantile of |t*|, so the result IS
 #' the bootstrap-t interval; the identity gap is reported.
 #'
 #' @param x Numeric sample.

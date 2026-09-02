@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_pihat_matrix}
 \title{Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix}
 \usage{
-morie_snpqc1_pihat_matrix(genotypes, correction = TRUE)
+morie_snpqc1_pihat_matrix(genotypes, correction = TRUE) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{morie_snpqc1_ibd_moments}.}

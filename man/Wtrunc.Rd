@@ -5,10 +5,14 @@
 \alias{Wtrunc}
 \title{Inverse-probability weight truncation (Cole & Hernan 2008)}
 \usage{
-Wtrunc(w, q = 0.99)
+Wtrunc(w, q = 0.99) 
 }
 \description{
 Inverse-probability weight truncation (Cole & Hernan 2008)
+}
+\arguments{
+\item{w}{Argument \code{w}; see Usage.}
+\item{q}{Argument \code{q}; see Usage.}
 }
 \value{
 A list with \code{weights}, \code{cap}, \code{n_truncated}, \code{n}, \code{mean_before}, \code{mean_after}.

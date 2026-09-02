@@ -5,7 +5,7 @@
 \alias{morie_bnppct_expand}
 \title{Widen a bracket by doubling until f changes sign across it}
 \usage{
-morie_bnppct_expand(f, lo, hi, iters = 60L)
+morie_bnppct_expand(f, lo, hi, iters = 60L) 
 }
 \arguments{
 \item{f}{The function.}

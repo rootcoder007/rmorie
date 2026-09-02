@@ -2,7 +2,7 @@
 % Please edit documentation in R/lmmf1.R
 \name{Lmmform}
 \alias{Lmmform}
-\title{Linear mixed model in the form Y = X beta + Z u + e, with its two means and marginal variance.}
+\title{Linear mixed model in the form Y = X beta + Z u + e, with its two means and marginal variance}
 \usage{
 Lmmform(X, beta, Z, u, Sigma, R = NULL)
 }

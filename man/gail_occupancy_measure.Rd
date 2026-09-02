@@ -5,7 +5,7 @@
 \alias{gail_occupancy_measure}
 \title{Empirical occupancy measure}
 \usage{
-gail_occupancy_measure(states, actions)
+gail_occupancy_measure(states, actions) 
 }
 \arguments{
 \item{states,actions}{Lists of equal length; \code{states} may   contain numeric vectors or scalars, \code{actions} anything.}

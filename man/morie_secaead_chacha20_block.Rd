@@ -5,7 +5,7 @@
 \alias{morie_secaead_chacha20_block}
 \title{One 64-byte keystream block. The permuted state is ADDED to the}
 \usage{
-morie_secaead_chacha20_block(key, counter, nonce, rounds = 20)
+morie_secaead_chacha20_block(key, counter, nonce, rounds = 20) 
 }
 \arguments{
 \item{key}{Passed to \code{.secaead_as_bytes}.}

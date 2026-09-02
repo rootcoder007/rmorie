@@ -5,7 +5,7 @@
 \alias{MurmDet}
 \title{MurmDet: murmur presence detection in PCG via spectral analysis}
 \usage{
-MurmDet(pcg, fs, threshold = 0.15, hf_band = c(150, 600))
+MurmDet(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) 
 }
 \arguments{
 \item{pcg}{Passed to \code{.bsapsd}.}

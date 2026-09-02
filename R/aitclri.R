@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Inverse centred log-ratio transform.
+#' Inverse centred log-ratio transform
 #'
 #' Formula: clr^-1(z) = C( exp(z_1), ..., exp(z_D) )
 #'

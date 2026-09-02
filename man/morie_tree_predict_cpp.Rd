@@ -5,10 +5,14 @@
 \alias{morie_tree_predict_cpp}
 \title{Predict from a flattened tree (compiled)}
 \usage{
-morie_tree_predict_cpp(tree, X)
+morie_tree_predict_cpp(tree, X) 
 }
 \description{
 Predict from a flattened tree (compiled)
+}
+\arguments{
+\item{tree}{Argument \code{tree}; see Usage.}
+\item{X}{Argument \code{X}; see Usage.}
 }
 \value{
 The value of \code{.Call}.

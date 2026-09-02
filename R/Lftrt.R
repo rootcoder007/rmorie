@@ -9,8 +9,8 @@
 #'
 #' R arm of the existing Python \code{lftrt} module.
 #'
-#' Formula: S(t) = prod_{t_j <= t} (1 - d_j / n_j) with
-#' n_j = #{i : entry_i < t_j <= time_i}.
+#' Formula: S(t) = prod_\{t_j <= t\} (1 - d_j / n_j) with
+#' n_j = #\{i : entry_i < t_j <= time_i\}.
 #'
 #' @param entry Left-truncation (entry) times.
 #' @param time Observed event or censoring times.

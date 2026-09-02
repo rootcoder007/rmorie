@@ -5,7 +5,7 @@
 \alias{morie_wrd2v_subsample_probability}
 \title{Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0}
 \usage{
-morie_wrd2v_subsample_probability(counts, t = 1e-05)
+morie_wrd2v_subsample_probability(counts, t = 1e-05) 
 }
 \arguments{
 \item{counts}{A vector; indexed elementwise.}

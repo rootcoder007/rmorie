@@ -5,7 +5,7 @@
 \alias{LogFT}
 \title{Eqs (4.58)-(4.60): y = x p, log y = log x + log p, and so}
 \usage{
-LogFT(x, p, omega, t = NULL, dt = NULL)
+LogFT(x, p, omega, t = NULL, dt = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

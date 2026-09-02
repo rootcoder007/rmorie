@@ -2,7 +2,7 @@
 % Please edit documentation in R/mllog.R
 \name{Mlloglik}
 \alias{Mlloglik}
-\title{Maximum likelihood log-likelihood of the linear regression model.}
+\title{Maximum likelihood log-likelihood of the linear regression model}
 \usage{
 Mlloglik(X, y, beta = NULL, sigma2 = NULL)
 }

@@ -3,7 +3,7 @@
 # Native double machine learning engines (feat/native-specializations,
 # module 10). Chernozhukov et al. (2018): Neyman-orthogonal scores +
 # K-fold cross-fitting. Nuisance learners are GCV-tuned ridge
-# regressions (outcome) and logistic regression (propensity) — fully
+# regressions (outcome) and logistic regression (propensity) -- fully
 # deterministic, no DoubleML/mlr3/ranger at runtime. Repetitions
 # aggregate by DoubleML's median rule.
 
@@ -94,7 +94,7 @@
 
 #' Internal helper: native PLR DML engine (median-aggregated reps)
 #' @srrstats {G1.0} Primary reference: Chernozhukov et al. (2018,
-#'   Econometrics J. 21(1)) — double/debiased ML, partially linear
+#'   Econometrics J. 21(1)) -- double/debiased ML, partially linear
 #'   model, Neyman-orthogonal score, cross-fitting; DoubleML (Bach et
 #'   al. 2024, JSS) is the reference implementation cross-validated
 #'   against in tests/cross/.

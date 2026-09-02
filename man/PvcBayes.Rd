@@ -5,7 +5,7 @@
 \alias{PvcBayes}
 \title{Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2}
 \usage{
-PvcBayes(features, labels, priors = NULL, query = NULL)
+PvcBayes(features, labels, priors = NULL, query = NULL) 
 }
 \arguments{
 \item{features}{Passed to \code{.morie_bx_mat}.}

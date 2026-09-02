@@ -1,4 +1,4 @@
-# Buchberger's algorithm for Gröbner bases.
+# Buchberger's algorithm for Gr?bner bases.
 #
 # Source: morie.fn.groebn (Buchberger 1965 PhD thesis -- the
 # S-polynomial, the all-S-polynomials-reduce-to-zero criterion, the

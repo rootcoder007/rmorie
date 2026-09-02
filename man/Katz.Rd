@@ -21,7 +21,7 @@ status vector solves a single linear system.  Convergence of the
 series needs alpha below the reciprocal of the spectral radius of A.
 }
 \details{
-Formula: x = (I - alpha A)^{-1} 1 = sum_{k >= 0} alpha^k A^k 1.
+Formula: x = (I - alpha A)^\{-1\} 1 = sum_\{k >= 0\} alpha^k A^k 1.
 }
 \examples{
 Katz(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))

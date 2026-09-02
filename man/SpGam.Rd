@@ -5,7 +5,7 @@
 \alias{SpGam}
 \title{Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved}
 \usage{
-SpGam(y, x, coords, lam = 0)
+SpGam(y, x, coords, lam = 0) 
 }
 \arguments{
 \item{y}{Passed to \code{.morie_spx_chkv}.}

@@ -5,10 +5,15 @@
 \alias{Mvfacmu}
 \title{Shared-factor multivariate disease mean (Lawson eq. 14.1)}
 \usage{
-Mvfacmu(e, lam, f)
+Mvfacmu(e, lam, f) 
 }
 \description{
 Shared-factor multivariate disease mean (Lawson eq. 14.1)
+}
+\arguments{
+\item{e}{Argument \code{e}; see Usage.}
+\item{lam}{Argument \code{lam}; see Usage.}
+\item{f}{Argument \code{f}; see Usage.}
 }
 \value{
 A list with \code{rho}, \code{mu}, \code{n}, \code{n_disease}.

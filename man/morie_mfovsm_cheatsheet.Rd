@@ -5,7 +5,7 @@
 \alias{morie_mfovsm_cheatsheet}
 \title{Cheatsheet}
 \usage{
-morie_mfovsm_cheatsheet()
+morie_mfovsm_cheatsheet() 
 }
 \description{
 A step of the mfovsm_native implementation. No other function in the package calls it. See the file header for the source the module follows.

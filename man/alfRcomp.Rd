@@ -5,7 +5,7 @@
 \alias{alfRcomp}
 \title{Frame composition A o B, i.e. (A o B) o x = A o (B o x)}
 \usage{
-alfRcomp(A, B)
+alfRcomp(A, B) 
 }
 \arguments{
 \item{A}{A list; the body reads \code{$R} from it.}

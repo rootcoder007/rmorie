@@ -14,6 +14,8 @@ Otmxh(mus1, Sigmas1, w1, mus2, Sigmas2, w2)
 \item{w1}{Mixture weights, rescaled to sum to one.}
 
 \item{mus2, Sigmas2, w2}{The same for the second mixture.}
+
+
 }
 \value{
 List with \code{MW2}, \code{MW2_sq}, \code{T}, \code{C},

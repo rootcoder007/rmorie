@@ -5,7 +5,7 @@
 \alias{kendall_tau}
 \title{kendall_tau}
 \usage{
-kendall_tau(scores, human)
+kendall_tau(scores, human) 
 }
 \arguments{
 \item{scores}{Passed to \code{.comet_vec}.}

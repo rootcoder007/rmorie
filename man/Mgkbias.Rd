@@ -18,6 +18,9 @@ morie_fauzi_thm1_3_mise_mgkde(x, h, f, fp, fpp, fppp, book = TRUE)
 
 \item{book}{Logical; reproduce (1.17) as printed (default) or use the
 derived form.}
+
+
+
 }
 \value{
 Named list with \code{bias}, \code{a}, \code{b}, \code{h}, \code{book}, \code{method}.

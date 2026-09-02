@@ -15,6 +15,7 @@ Alfopm(m, wa, wb, wo, layernorm = TRUE)
 
 \item{layernorm}{Apply the layer normalisation of line 1.  FALSE exposes
 the degenerate single-channel reduction to a Gram matrix.}
+
 }
 \value{
 A list with the pair update \code{z}, the flattened outer product

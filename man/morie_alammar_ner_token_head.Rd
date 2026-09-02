@@ -5,11 +5,13 @@
 \alias{morie_alammar_ner_token_head}
 \title{morie_alammar_ner_token_head}
 \usage{
-morie_alammar_ner_token_head(h_tokens, W, b, tags = NULL)
+morie_alammar_ner_token_head(h_tokens, W, b, tags = NULL) 
 }
 \arguments{
 \item{h_tokens}{Token hidden states, one row each.}
 \item{W,tags}{Weight matrix and 0-based tag targets (or NULL).}
+
+\item{b}{Argument \code{b}; see Usage.}
 }
 \description{
 morie_alammar_ner_token_head

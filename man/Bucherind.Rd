@@ -2,20 +2,20 @@
 % Please edit documentation in R/manmar.R
 \name{Bucherind}
 \alias{Bucherind}
-\title{Bucher adjusted indirect comparison.}
+\title{Bucher adjusted indirect comparison}
 \usage{
 Bucherind(d_AB, v_AB, d_CB, v_CB, alpha = 0.05)
 }
 \arguments{
-\item{d_AB}{Direct estimate of A versus B.}
+\item{d_AB}{See Usage.}
 
-\item{v_AB}{Its variance.}
+\item{v_AB}{See Usage.}
 
-\item{d_CB}{Direct estimate of C versus B.}
+\item{d_CB}{See Usage.}
 
-\item{v_CB}{Its variance.}
+\item{v_CB}{See Usage.}
 
-\item{alpha}{Two-sided significance level.}
+\item{alpha}{See Usage.}
 }
 \value{
 List with \code{estimate}, \code{variance}, \code{se}, \code{z}, \code{p_value}, \code{ci_lower}, \code{ci_upper}.

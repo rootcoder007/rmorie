@@ -5,7 +5,7 @@
 \alias{IntPh}
 \title{Eq (3.118): a constant -pi/2, because 1/(jw) is a fixed quarter turn}
 \usage{
-IntPh(omega)
+IntPh(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{morie_trmRew_rewrite_step}
 \title{One rewrite, or NULL when the term is in normal form. Innermost}
 \usage{
-morie_trmRew_rewrite_step(t, rules, strategy = "innermost")
+morie_trmRew_rewrite_step(t, rules, strategy = "innermost") 
 }
 \arguments{
 \item{t}{Passed to \code{morie_trmRew_positions}.}

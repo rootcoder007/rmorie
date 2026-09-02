@@ -5,7 +5,7 @@
 \alias{morie_sdxlcd_discarded_fraction}
 \title{morie_sdxlcd_discarded_fraction}
 \usage{
-morie_sdxlcd_discarded_fraction(sizes, minimum = 256)
+morie_sdxlcd_discarded_fraction(sizes, minimum = 256) 
 }
 \arguments{
 \item{sizes}{A matrix; indexed by row and column.}

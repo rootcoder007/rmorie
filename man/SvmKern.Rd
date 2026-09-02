@@ -5,7 +5,8 @@
 \alias{SvmKern}
 \title{SvmKern}
 \usage{
-SvmKern(X, y, query = NULL, kernel = "rbf", gamma = NULL, degree = 3, coef0 = 0, C = 1, maxiter = 2000, tol = 1e-06)
+SvmKern(X, y, query = NULL, kernel = "rbf", gamma = NULL, degree = 3, 
+    coef0 = 0, C = 1, maxiter = 2000, tol = 1e-06) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

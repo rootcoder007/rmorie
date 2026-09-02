@@ -5,7 +5,7 @@
 \alias{morie_snpest_t_logpdf}
 \title{log density of a Student t}
 \usage{
-morie_snpest_t_logpdf(x, df, loc, scale2)
+morie_snpest_t_logpdf(x, df, loc, scale2) 
 }
 \arguments{
 \item{x}{The point.}

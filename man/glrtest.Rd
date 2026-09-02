@@ -5,7 +5,7 @@
 \alias{glrtest}
 \title{glrtest}
 \usage{
-glrtest(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1)
+glrtest(x, p0, p1, threshold = NULL, family = "bernoulli", sd = 1) 
 }
 \arguments{
 \item{x}{Passed to \code{morie_glr_test}.}

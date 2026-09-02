@@ -5,7 +5,8 @@
 \alias{morie_vit2lf}
 \title{Attention with the logits scaled by log n, by a cosine, or by both}
 \usage{
-morie_vit2lf(q, k, v, mode = "logn", tau = 1, bias = NULL, mask = NULL, n = NULL, tau_floor = .VIT2LF_TAU_FLOOR)
+morie_vit2lf(q, k, v, mode = "logn", tau = 1, bias = NULL, mask = NULL, n = NULL, 
+    tau_floor = .VIT2LF_TAU_FLOOR) 
 }
 \arguments{
 \item{q}{Queries, one row per query position.}

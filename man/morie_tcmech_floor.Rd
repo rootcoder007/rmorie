@@ -5,7 +5,7 @@
 \alias{morie_tcmech_floor}
 \title{The epsilon a truncated guarantee cannot get below, at any rho}
 \usage{
-morie_tcmech_floor(delta, omega = NULL)
+morie_tcmech_floor(delta, omega = NULL) 
 }
 \arguments{
 \item{delta}{The failure probability.}

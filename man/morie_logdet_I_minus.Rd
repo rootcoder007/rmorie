@@ -5,10 +5,14 @@
 \alias{morie_logdet_I_minus}
 \title{morie_logdet_I_minus}
 \usage{
-morie_logdet_I_minus(rho, W)
+morie_logdet_I_minus(rho, W) 
 }
 \description{
 morie_logdet_I_minus
+}
+\arguments{
+\item{rho}{Argument \code{rho}; see Usage.}
+\item{W}{Argument \code{W}; see Usage.}
 }
 \value{
 The value of \code{[}.

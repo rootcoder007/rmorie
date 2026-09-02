@@ -20,7 +20,7 @@ Vargpc(
 \arguments{
 \item{X}{n-by-d training inputs.}
 
-\item{y}{Binary labels in {0, 1}.}
+\item{y}{Binary labels in \{0, 1\}.}
 
 \item{X_test}{Test inputs, or NULL to predict at X.}
 
@@ -35,6 +35,7 @@ Vargpc(
 \item{step_size}{Initial step, positive.}
 
 \item{jitter}{Added to the diagonal of K_mm.}
+
 }
 \value{
 List with \code{prob}, \code{pred}, \code{fit_prob},
@@ -51,17 +52,17 @@ PMLR 38:351-360.
 \details{
 The inducing-point posterior q(u) = N(m, S) at inputs Z induces
 q(f_n) = N(a_n' m, k_nn - a_n' k_mn + a_n' S a_n) with
-a_n = K_mm^{-1} k_mn (Eqs. 6-8), and the bound maximised is
-ELBO = sum_n E_{q(f_n)}[log p(y_n|f_n)] - KL(q(u) || p(u)), the
+a_n = K_mm^\{-1\} k_mn (Eqs. 6-8), and the bound maximised is
+ELBO = sum_n E_\{q(f_n)\}[log p(y_n|f_n)] - KL(q(u) || p(u)), the
 Bernoulli expectation done by Gauss-Hermite quadrature. The Gaussian
-KL is closed form: (1/2)[tr(K^{-1} S) + m' K^{-1} m - M + log|K| -
+KL is closed form: (1/2)[tr(K^\{-1\} S) + m' K^\{-1\} m - M + log|K| -
 log|S|].
 
 QUADRATURE. Nodes and weights are not tabulated: they come from
 Golub-Welsch, the eigenvalues of the symmetric tridiagonal Jacobi
 matrix with zero diagonal and off-diagonal sqrt(k/2), weights
-sqrt(pi) v_{1i}^2. \code{quad_check} is the error in
-E_{N(0,1)}[f^2] = 1, which a wrong node set cannot pass.
+sqrt(pi) v_\{1i\}^2. \code{quad_check} is the error in
+E_\{N(0,1)\}[f^2] = 1, which a wrong node set cannot pass.
 
 OPTIMISATION. m and the Cholesky factor of S are fitted by gradient
 ascent with central finite differences and deterministic backtracking.

@@ -5,7 +5,7 @@
 \alias{QrsThresh}
 \title{Eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory}
 \usage{
-QrsThresh(peaki, spki, npki, issignal)
+QrsThresh(peaki, spki, npki, issignal) 
 }
 \arguments{
 \item{peaki}{Numeric; combined arithmetically in the body.}

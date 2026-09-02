@@ -5,7 +5,7 @@
 \alias{discrimination_loss}
 \title{discrimination_loss}
 \usage{
-discrimination_loss(f_x, f_gz)
+discrimination_loss(f_x, f_gz) 
 }
 \arguments{
 \item{f_x}{Passed to \code{.gan_an_discrimination_loss_impl}.}

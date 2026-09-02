@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' DINO teacher centring and sharpening.
+#' DINO teacher centring and sharpening
 #'
 #' Formula: P_t = softmax((g_t - C)/tau_t); C <- m C + (1-m) (1/B) sum_i g_t(x_i)
 #'
@@ -8,6 +8,10 @@
 #' @param m Centre EMA rate.
 #' @param tau_t Teacher temperature.
 
+#' @param g_t See Usage.
+#' @param center See Usage.
+#' @param m See Usage.
+#' @param tau_t See Usage.
 #' @return List with ``p_t``, ``center``, ``center_old``, ``batch_mean``, ``B``, ``K``.
 #' @references Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021), Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294. Verified against the paper: equation (1) for the temperature softmax, equation (4) for the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
 #' @export

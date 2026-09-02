@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_optimal_split}
 \title{Argmax_{i<j} f_i + r_j -- the split with a microinsertion gap}
 \usage{
-morie_sv_dl_optimal_split(f, r)
+morie_sv_dl_optimal_split(f, r) 
 }
 \arguments{
 \item{f}{A vector; its length is taken and its elements indexed.}

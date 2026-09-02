@@ -2,18 +2,18 @@
 % Please edit documentation in R/otmtxe.R
 \name{Rasscale}
 \alias{Rasscale}
-\title{RAS matrix scaling to prescribed margins.}
+\title{RAS matrix scaling to prescribed margins}
 \usage{
 Rasscale(K, row_target, col_target, max_iter = 200)
 }
 \arguments{
-\item{K}{Non-negative kernel matrix.}
+\item{K}{See Usage.}
 
-\item{row_target}{Required row sums.}
+\item{row_target}{See Usage.}
 
-\item{col_target}{Required column sums.}
+\item{col_target}{See Usage.}
 
-\item{max_iter}{Fixed number of alternations.}
+\item{max_iter}{See Usage.}
 }
 \value{
 List with \code{M}, \code{u}, \code{v}, \code{row_error}, \code{col_error}, \code{iterations}.

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' BLUP of random intercept and slope.
+#' BLUP of random intercept and slope
 #'
-#' vhat_j = D Z_j' (Z_j D Z_j' + s2e I)^{-1} (y_j - X_j beta).
+#' vhat_j = D Z_j' (Z_j D Z_j' + s2e I)^\{-1\} (y_j - X_j beta).
 #'
 #' @param y Response.
 #' @param group Group label per observation.

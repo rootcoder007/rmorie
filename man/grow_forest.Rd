@@ -5,7 +5,9 @@
 \alias{grow_forest}
 \title{grow_forest}
 \usage{
-grow_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, clusters = NULL)
+grow_forest(X, y, W = NULL, kind = "double-sample", n_trees = 200L, subsample_frac = 0.5, 
+    min_leaf = 5L, alpha = 0.05, pi = 0.5, max_depth = 12L, seed = 0L, 
+    clusters = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{honest_tree}.}

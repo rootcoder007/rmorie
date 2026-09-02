@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_cheatsheet}
 \title{One-line summary of the baysmplr module}
 \usage{
-morie_baysmplr_cheatsheet()
+morie_baysmplr_cheatsheet() 
 }
 \description{
 One-line summary of the baysmplr module

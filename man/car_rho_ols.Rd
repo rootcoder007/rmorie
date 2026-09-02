@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgcar.R
 \name{car_rho_ols}
 \alias{car_rho_ols}
-\title{Haining's least-squares estimator of the CAR dependence parameter.}
+\title{Haining's least-squares estimator of the CAR dependence parameter}
 \usage{
 car_rho_ols(Z, W, X = NULL)
 }

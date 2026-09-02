@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Score (Rao) test of H0: p = p0 for a binomial proportion.
+#' Score (Rao) test of H0: p = p0 for a binomial proportion
 #'
 #' The variance is evaluated at the NULL p0, not at the estimate, which
 #' is why the score test still works when phat is 0 or 1.

@@ -2,8 +2,8 @@
 % Please edit documentation in R/aaa_mvsml_rf_shared.R
 \name{.rfmdi_imp}
 \alias{.rfmdi_imp}
-\title{Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_{t: split on
-X_j}}
+\title{Mean decrease in impurity: Imp(X_j) = (1/B) sum_b sum_\{t: split on
+X_j\}}
 \usage{
 .rfmdi_imp(trees, p)
 }

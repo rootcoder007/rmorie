@@ -2,7 +2,7 @@
 % Please edit documentation in R/spcsr.R
 \name{spcsr}
 \alias{spcsr}
-\title{Complete spatial randomness, and a quadrat check of it.}
+\title{Complete spatial randomness, and a quadrat check of it}
 \usage{
 spcsr(points, region = NULL)
 }

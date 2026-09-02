@@ -2,7 +2,7 @@
 % Please edit documentation in R/msm001.R
 \name{Msm001}
 \alias{Msm001}
-\title{Statistical learning model, systematic plus random part.}
+\title{Statistical learning model, systematic plus random part}
 \usage{
 Msm001(x, f = NULL, noise = NULL)
 }

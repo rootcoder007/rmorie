@@ -2,7 +2,7 @@
 % Please edit documentation in R/aitclri.R
 \name{Clrinv}
 \alias{Clrinv}
-\title{Inverse centred log-ratio transform.}
+\title{Inverse centred log-ratio transform}
 \usage{
 Clrinv(z, total = 1)
 }

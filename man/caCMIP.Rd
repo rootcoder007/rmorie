@@ -5,7 +5,7 @@
 \alias{caCMIP}
 \title{caCMIP}
 \usage{
-caCMIP(models, obs, sigma_d, sigma_s, projections = NULL)
+caCMIP(models, obs, sigma_d, sigma_s, projections = NULL) 
 }
 \arguments{
 \item{models}{Iterated over elementwise, with \code{lapply}.}

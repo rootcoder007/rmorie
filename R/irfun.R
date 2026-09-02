@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Orthogonalised impulse response function of a VAR(p)
 #'
-#' The MA representation y_t = sum_h Phi_h u_{t-h} is built from the
-#' recursion Phi_0 = I, Phi_h = sum_{j=1}^{min(h,p)} A_j Phi_{h-j}, and the
+#' The MA representation y_t = sum_h Phi_h u_\{t-h\} is built from the
+#' recursion Phi_0 = I, Phi_h = sum_\{j=1\}^\{min(h,p)\} A_j Phi_\{h-j\}, and the
 #' shocks are orthogonalised by the lower Cholesky factor P of Sigma_u,
 #' Theta_h = Phi_h P. Column \code{shock_var} of Theta_h is the response
 #' to a one-standard-deviation shock in that variable.

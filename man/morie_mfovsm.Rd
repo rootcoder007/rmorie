@@ -5,7 +5,8 @@
 \alias{morie_mfovsm}
 \title{morie_mfovsm}
 \usage{
-morie_mfovsm(y, feature, A, H, v_in_numerator = TRUE, contrast = "cumulative", trim = NULL)
+morie_mfovsm(y, feature, A, H, v_in_numerator = TRUE, contrast = "cumulative", 
+    trim = NULL) 
 }
 \arguments{
 \item{y}{Passed to \code{.mfovsm_vec}.}

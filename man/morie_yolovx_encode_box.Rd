@@ -5,7 +5,7 @@
 \alias{morie_yolovx_encode_box}
 \title{Four distances from a location to the box sides}
 \usage{
-morie_yolovx_encode_box(box, cx, cy, stride = 1)
+morie_yolovx_encode_box(box, cx, cy, stride = 1) 
 }
 \arguments{
 \item{box}{Coerced to numeric by the body, with \code{as.numeric}.}

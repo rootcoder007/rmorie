@@ -5,7 +5,8 @@
 \alias{andrews_monahan_hac}
 \title{andrews_monahan_hac}
 \usage{
-andrews_monahan_hac(e, X = NULL, prewhiten = TRUE, var_order = 1, kernel = "qs", bandwidth = NULL, weights = NULL, n_params = NULL, cap = 0.97, adjust = TRUE)
+andrews_monahan_hac(e, X = NULL, prewhiten = TRUE, var_order = 1, kernel = "qs", 
+    bandwidth = NULL, weights = NULL, n_params = NULL, cap = 0.97, adjust = TRUE) 
 }
 \arguments{
 \item{e}{A matrix; passed to \code{as.matrix}.}

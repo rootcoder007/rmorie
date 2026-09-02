@@ -5,10 +5,15 @@
 \alias{morie_kamath_positional_cos}
 \title{morie_kamath_positional_cos}
 \usage{
-morie_kamath_positional_cos(i, j, d)
+morie_kamath_positional_cos(i, j, d) 
 }
 \description{
 morie_kamath_positional_cos
+}
+\arguments{
+\item{i}{Argument \code{i}; see Usage.}
+\item{j}{Argument \code{j}; see Usage.}
+\item{d}{Argument \code{d}; see Usage.}
 }
 \value{
 A list with \code{estimate}, \code{n}, \code{method}.

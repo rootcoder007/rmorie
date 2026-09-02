@@ -12,6 +12,7 @@ morie_geron_dpo(pi, pi_ref, preferences = NULL, beta = 0.1)
 \item{preferences}{0/1 winner index per row (default all 0).}
 
 \item{beta}{Inverse temperature (>0).}
+
 }
 \value{
 List with \code{loss}, \code{per_pair_loss}, \code{margin}, \code{reward_chosen}, \code{reward_rejected}, \code{accuracy}.

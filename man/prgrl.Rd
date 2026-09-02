@@ -5,7 +5,8 @@
 \alias{prgrl}
 \title{prgrl}
 \usage{
-prgrl(X, y, difficulty, X_test = NULL, y_test = NULL, updates = 200, n_steps = 5, seed = 0, n_repeats = 50, order = "sampled")
+prgrl(X, y, difficulty, X_test = NULL, y_test = NULL, updates = 200, 
+    n_steps = 5, seed = 0, n_repeats = 50, order = "sampled") 
 }
 \arguments{
 \item{X}{Passed to \code{.prgrl_to_rows}.}

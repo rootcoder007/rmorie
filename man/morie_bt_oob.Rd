@@ -18,6 +18,7 @@ morie_bt_oob(x, y, fit_fn, predict_fn, B = 100L, loss = NULL, seed = 0)
 \item{loss}{elementwise loss; squared error when \code{NULL}.}
 
 \item{seed}{resampling seed.}
+
 }
 \value{
 list: err_oob, err_apparent, per_observation, n_dropped,

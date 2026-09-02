@@ -5,7 +5,7 @@
 \alias{SpatialPca}
 \title{MULTISPATI: diagonalise H = (1/n) X\' ((W + W\')/2) X on the centred,}
 \usage{
-SpatialPca(x, w, naxes = 2L)
+SpatialPca(x, w, naxes = 2L) 
 }
 \arguments{
 \item{x}{A matrix; passed to \code{as.matrix}.}

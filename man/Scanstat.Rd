@@ -2,7 +2,7 @@
 % Please edit documentation in R/bivand201310e3.R
 \name{Scanstat}
 \alias{Scanstat}
-\title{Kulldorff spatial scan statistic.}
+\title{Kulldorff spatial scan statistic}
 \usage{
 Scanstat(O, E, zones, highonly = TRUE)
 }
@@ -21,7 +21,7 @@ List with loglr, best (zero-based), maxloglr, bestzone, Oz,
 Ez, rrin, rrout, Otot, Etot, nzone.
 }
 \description{
-max_z (O_z/E_z)^{O_z} ((O_+ - O_z)/(E_+ - E_z))^{O_+ - O_z}, reported
+max_z (O_z/E_z)^\{O_z\} ((O_+ - O_z)/(E_+ - E_z))^\{O_+ - O_z\}, reported
 on the log scale and restricted by default to windows whose internal
 risk exceeds the overall risk.
 }

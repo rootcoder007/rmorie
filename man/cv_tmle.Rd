@@ -5,7 +5,7 @@
 \alias{cv_tmle}
 \title{cv_tmle}
 \usage{
-cv_tmle(fold_estimates, fold_ics, n)
+cv_tmle(fold_estimates, fold_ics, n) 
 }
 \arguments{
 \item{fold_estimates}{Coerced to numeric by the body, with \code{as.numeric}.}

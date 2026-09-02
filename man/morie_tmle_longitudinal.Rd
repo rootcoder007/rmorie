@@ -10,6 +10,8 @@ morie_tmle_longitudinal(y, a, l, trunc = 0.01)
 \item{y, a, l}{As in \code{\link[=morie_tmle_time_varying]{morie_tmle_time_varying()}}.}
 
 \item{trunc}{Treatment-probability truncation.}
+
+
 }
 \value{
 List with \code{estimate}, \code{ey_always}, \code{ey_never}, \code{n_periods},

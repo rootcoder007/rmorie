@@ -5,7 +5,7 @@
 \alias{svt}
 \title{svt}
 \usage{
-svt(M, observed, tau = NULL, step = 1.9, iters = 200L, tol = 1e-06)
+svt(M, observed, tau = NULL, step = 1.9, iters = 200L, tol = 1e-06) 
 }
 \arguments{
 \item{M}{Passed to \code{.meglt_mat}.}

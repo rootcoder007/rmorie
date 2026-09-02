@@ -5,7 +5,7 @@
 \alias{morie_kamath_layer_norm}
 \title{morie_kamath_layer_norm}
 \usage{
-morie_kamath_layer_norm(h_i, mu = NULL, sigma = NULL, g = 1, eps = 1e-05)
+morie_kamath_layer_norm(h_i, mu = NULL, sigma = NULL, g = 1, eps = 1e-12) 
 }
 \arguments{
 \item{h_i}{Vector.}

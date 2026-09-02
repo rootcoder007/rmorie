@@ -16,7 +16,7 @@ morie_dag_estimate(
 \item{data}{Data frame containing the observed nodes.}
 
 \item{method}{\code{"backdoor.aipw"} (default), \code{"backdoor.linear"}, or
-\code{"backdoor.dml"} — all native estimators.}
+\code{"backdoor.dml"} -- all native estimators.}
 }
 \value{
 The chosen estimator's result list, plus \code{adjustment_set}

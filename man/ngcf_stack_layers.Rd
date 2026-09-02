@@ -5,7 +5,7 @@
 \alias{ngcf_stack_layers}
 \title{ngcf_stack_layers}
 \usage{
-ngcf_stack_layers(E0, adjacency, Ws, affinity = TRUE, slope = 0.2)
+ngcf_stack_layers(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) 
 }
 \arguments{
 \item{E0}{A matrix; passed to \code{as.matrix}.}

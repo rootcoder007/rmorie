@@ -5,7 +5,7 @@
 \alias{to_approx_dp}
 \title{Proposition 1.3: (rho + 2 sqrt(rho log(1/delta)), delta)-DP}
 \usage{
-to_approx_dp(rho, delta)
+to_approx_dp(rho, delta) 
 }
 \arguments{
 \item{rho}{zCDP parameter, must be positive.}

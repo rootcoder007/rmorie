@@ -14,6 +14,8 @@ morie_kamath_ch5_reward_kl_penalty(x, y, pi_RL, pi_SFT, beta, r_theta = NULL)
 \item{beta}{Penalty weight.}
 
 \item{r_theta}{Reward or function (x, y).}
+
+
 }
 \value{
 List with \code{estimate}, \code{penalised_reward}, \code{penalty}.

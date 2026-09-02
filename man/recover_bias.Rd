@@ -5,7 +5,7 @@
 \alias{recover_bias}
 \title{recover_bias}
 \usage{
-recover_bias(alpha, y, grad, C)
+recover_bias(alpha, y, grad, C) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

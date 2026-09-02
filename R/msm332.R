@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Linear multiple regression fitted by OLS.
+#' Linear multiple regression fitted by OLS
 #'
 #' Formula: Y = beta_0 + sum_j X_j beta_j + eps (eq. 3.1) fitted by least
 #' squares: beta = (X'X)^-1X'y, Var(beta) = sigma2 (X'X)^-1 and

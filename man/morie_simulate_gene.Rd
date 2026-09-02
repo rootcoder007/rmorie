@@ -5,7 +5,7 @@
 \alias{morie_simulate_gene}
 \title{A gene through induction (on) then repression (off) on the closed}
 \usage{
-morie_simulate_gene(alpha, beta, gamma, t_switch, times)
+morie_simulate_gene(alpha, beta, gamma, t_switch, times) 
 }
 \arguments{
 \item{alpha}{Numeric; combined arithmetically in the body.}

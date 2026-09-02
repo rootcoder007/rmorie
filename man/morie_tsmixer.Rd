@@ -16,14 +16,17 @@ morie_tsmixer(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon)
 \item{wproj, bproj}{the temporal projection of eq. (4)}
 
 \item{horizon}{forecast length}
+
+
+
 }
 \value{
 list(forecast, mixed, nchannels, L, horizon, mean, first,
 last, sumsq)
 }
 \description{
-Quoted from the paper: (4) "TP_{L->T}(X)\emph{{*,i} = W_1 X}{\emph{,i} + b_1";
-(5) "TM(X)_{},i} = Norm(X_{\emph{,i} + Drop(sigma(TP_{L->L}(X)_{},i})))"
+Quoted from the paper: (4) "TP_\{L->T\}(X)\emph{\{*,i\} = W_1 X}\{\emph{,i\} + b_1";
+(5) "TM(X)_\{},i\} = Norm(X_\{\emph{,i\} + Drop(sigma(TP_\{L->L\}(X)_\{},i\})))"
 -- Chen, S.-A., Li, C.-L., Yoder, N. C., Arik, S. O. and Pfister,
 T., TSMixer: An All-MLP Architecture for Time Series Forecasting,
 TMLR 2023 (arXiv:2303.06053), Appendix B.3.1. Feature mixing and

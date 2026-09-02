@@ -3,9 +3,12 @@
 % the formals.
 \name{dueling_aggregate}
 \alias{dueling_aggregate}
+\alias{morie_dueldqn}
 \title{Duel aggregation: combine a value and an advantage vector into Q(s, .)}
 \usage{
-dueling_aggregate(value, advantage, mode = "mean")
+dueling_aggregate(value, advantage, mode = "mean") 
+
+morie_dueldqn(value, advantage, mode = "mean") 
 }
 \arguments{
 \item{value}{Scalar value V(s).}

@@ -5,7 +5,7 @@
 \alias{morie_ipcw_interval}
 \title{Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)}
 \usage{
-morie_ipcw_interval(W, A, times, deltas, a = 1, r = NULL, g = NULL, gc = NULL, ridge = 1e-08)
+morie_ipcw_interval(W, A, times, deltas, a = 1, r = NULL, g = NULL, gc = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{W}{Passed to \code{.tmlcen_W_mat}.}

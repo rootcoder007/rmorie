@@ -5,7 +5,7 @@
 \alias{tukey_hanning_kernel}
 \title{tukey_hanning_kernel}
 \usage{
-tukey_hanning_kernel(x)
+tukey_hanning_kernel(x) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{error_cache}
 \title{error_cache}
 \usage{
-error_cache(alpha, y, K, b)
+error_cache(alpha, y, K, b) 
 }
 \arguments{
 \item{alpha}{Coerced to numeric by the body, with \code{as.numeric}.}

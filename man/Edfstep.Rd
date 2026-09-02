@@ -5,10 +5,14 @@
 \alias{Edfstep}
 \title{Empirical distribution function -- eq. (2.3.1), p. 32}
 \usage{
-Edfstep(x, t)
+Edfstep(x, t) 
 }
 \description{
 Empirical distribution function -- eq. (2.3.1), p. 32
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{t}{Argument \code{t}; see Usage.}
 }
 \value{
 A list with \code{edf}, \code{count}, \code{n}, \code{sorted}.

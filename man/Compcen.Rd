@@ -2,14 +2,14 @@
 % Please edit documentation in R/aitcen.R
 \name{Compcen}
 \alias{Compcen}
-\title{Centre of a compositional data set.}
+\title{Centre of a compositional data set}
 \usage{
 Compcen(X, total = 1)
 }
 \arguments{
-\item{X}{One composition per row; all entries strictly positive.}
+\item{X}{See Usage.}
 
-\item{total}{Constant the closure sums to.}
+\item{total}{See Usage.}
 }
 \value{
 List with \code{center}, \code{geometric_mean}, \code{n}, \code{D}.
@@ -22,5 +22,5 @@ V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Compcen(V)
 }
 \references{
-Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_{i<j} var{log(x_i/x_j)}.
+Aitchison, A Concise Guide to Compositional Data Analysis, Chapter 2. Verified against the text: the centre estimate is xi-hat = C(g_1, ..., g_D) with g_i the geometric mean of the ith component, and totvar(x) = trace(Gamma) = (1/D) sum_\{i<j\} var\{log(x_i/x_j)\}.
 }

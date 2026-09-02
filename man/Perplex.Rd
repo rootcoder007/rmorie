@@ -2,14 +2,14 @@
 % Please edit documentation in R/prgxnt.R
 \name{Perplex}
 \alias{Perplex}
-\title{Perplexity of a language model.}
+\title{Perplexity of a language model}
 \usage{
 Perplex(log_probs, N = NULL)
 }
 \arguments{
-\item{log_probs}{Natural-log probabilities assigned to the observed tokens.}
+\item{log_probs}{See Usage.}
 
-\item{N}{Token count to normalise by; \code{len(log_probs)} if omitted.}
+\item{N}{See Usage.}
 }
 \value{
 List with \code{perplexity}, \code{cross_entropy_nats}, \code{cross_entropy_bits}, \code{N}.

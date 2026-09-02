@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_fetch.R
 \name{morie_tps_fetch_dataframe}
 \alias{morie_tps_fetch_dataframe}
-\title{Fetch a TPS category and return it as a \code{data.frame}.}
+\title{Fetch a TPS category and return it as a \code{data.frame}}
 \usage{
 morie_tps_fetch_dataframe(category, ...)
 }

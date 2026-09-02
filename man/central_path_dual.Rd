@@ -5,7 +5,7 @@
 \alias{central_path_dual}
 \title{Central-path dual}
 \usage{
-central_path_dual(fvals, t)
+central_path_dual(fvals, t) 
 }
 \arguments{
 \item{fvals}{Numeric vector of \eqn{f_i(x)} values.}

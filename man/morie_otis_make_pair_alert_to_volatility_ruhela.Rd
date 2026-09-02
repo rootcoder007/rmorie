@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_alert_to_volatility_ruhela}
 \alias{morie_otis_make_pair_alert_to_volatility_ruhela}
-\title{Ruhela's primary alert-complexity -> regional-volatility builder.}
+\title{Ruhela's primary alert-complexity -> regional-volatility builder}
 \usage{
 morie_otis_make_pair_alert_to_volatility_ruhela(df)
 }

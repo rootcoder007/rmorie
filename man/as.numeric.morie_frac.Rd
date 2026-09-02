@@ -5,7 +5,7 @@
 \alias{as.numeric.morie_frac}
 \title{as.numeric.morie_frac}
 \usage{
-as.numeric.morie_frac(x, ...)
+\method{as.numeric}{morie_frac}(x, ...) 
 }
 \arguments{
 \item{x}{A list; the body reads \code{$d}, \code{$n} from it.}

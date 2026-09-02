@@ -5,7 +5,7 @@
 \alias{morie_sv_dl_classify_pair}
 \title{morie_sv_dl_classify_pair}
 \usage{
-morie_sv_dl_classify_pair(p, median, sd, orientation = c("+", "-"), n_sd = 3)
+morie_sv_dl_classify_pair(p, median, sd, orientation = c("+", "-"), n_sd = 3) 
 }
 \arguments{
 \item{p}{A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1}, \code{$strand2} from it.}

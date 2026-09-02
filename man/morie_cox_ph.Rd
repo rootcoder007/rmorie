@@ -24,6 +24,7 @@ morie_survival_cox(time, event, X, ties = "efron", max_iter = 50, tol = 1e-09)
 \item{max_iter, tol}{iteration controls}
 
 \item{beta}{coefficient vector at which to evaluate the likelihood}
+
 }
 \value{
 list with \code{coef}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio},

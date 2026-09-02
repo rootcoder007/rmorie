@@ -12,6 +12,9 @@ morie_geron_xgboost_gain(GL, HL, GR, HR, lam = 1, gamma = 0)
 \item{lam}{Non-negative L2 leaf penalty.}
 
 \item{gamma}{Non-negative split cost.}
+
+
+
 }
 \value{
 List with \code{gain}, \code{left_score}, \code{right_score},

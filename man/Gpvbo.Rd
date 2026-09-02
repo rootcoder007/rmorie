@@ -16,6 +16,8 @@ Gpvbo(X, y, X_grid, lengthscale = 1, variance = 1, noise = 1e-06, xi = 0)
 \item{lengthscale, variance, noise}{GP hyperparameters.}
 
 \item{xi}{Exploration offset.}
+
+
 }
 \value{
 List with \code{estimate}, \code{acquisition}, \code{mean},

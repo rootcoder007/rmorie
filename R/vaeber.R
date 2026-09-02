@@ -5,7 +5,7 @@
 #' Variational Bayes", ICLR 2014; arXiv:1312.6114.
 #'
 #' The bound is Eq. (3), L = -KL(q_phi(z|x) || p_theta(z)) +
-#' E_{q_phi}\[log p_theta(x|z)\], estimated by the SGVB estimator of
+#' E_\{q_phi\}\[log p_theta(x|z)\], estimated by the SGVB estimator of
 #' Eq. (7) with the reparameterisation z = mu + sigma * eps,
 #' eps ~ N(0, I). With a Gaussian encoder and a standard normal prior the
 #' KL is closed form (Appendix B / Eq. 10):

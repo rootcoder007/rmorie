@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Eigenvalues of the normalised Laplacian, in increasing order.
+#' Eigenvalues of the normalised Laplacian, in increasing order
 #'
 #' The spectrum lies in \[0, 2\] for every graph, and the multiplicity of
 #' the eigenvalue 0 is the number of connected components.

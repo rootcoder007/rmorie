@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Which stationarity assumption the data can support.
+#' Which stationarity assumption the data can support
 #'
 #' The hierarchy of Sec 2.2. STRICT stationarity means the spatial
 #' distribution is invariant under translation, so the field repeats

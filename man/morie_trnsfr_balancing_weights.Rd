@@ -5,7 +5,7 @@
 \alias{morie_trnsfr_balancing_weights}
 \title{Minimum-variance weights that match the target\'s X means: solve}
 \usage{
-morie_trnsfr_balancing_weights(X, S, ridge = 1e-08)
+morie_trnsfr_balancing_weights(X, S, ridge = 1e-08) 
 }
 \arguments{
 \item{X}{Passed to \code{.s03mat}.}

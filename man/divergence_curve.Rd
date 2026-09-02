@@ -5,7 +5,7 @@
 \alias{divergence_curve}
 \title{divergence_curve}
 \usage{
-divergence_curve(y, m = NULL, tau = NULL, dt = 1, min_sep = NULL, max_steps = NULL)
+divergence_curve(y, m = NULL, tau = NULL, dt = 1, min_sep = NULL, max_steps = NULL) 
 }
 \arguments{
 \item{y}{A vector; its length is taken.}

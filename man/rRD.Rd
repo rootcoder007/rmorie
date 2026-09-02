@@ -5,7 +5,7 @@
 \alias{rRD}
 \title{Normalised discounted ratio. Only meaningful when the protected}
 \usage{
-rRD(protected, step = 10, normalize = TRUE)
+rRD(protected, step = 10, normalize = TRUE) 
 }
 \arguments{
 \item{protected}{Coerced to logical by the body, with \code{as.logical}.}

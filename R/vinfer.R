@@ -7,7 +7,7 @@
 #'
 #' The mean-field family factorises q(z) = prod_j q_j(z_j), and Section 3
 #' gives the coordinate update that maximises the lower bound with the
-#' other factors fixed: log q*_j(z_j) = E_{q_{-j}}\[log p(x, z)\] + const.
+#' other factors fixed: log q*_j(z_j) = E_\{q_\{-j\}\}\[log p(x, z)\] + const.
 #' The bound is ELBO(q) = E_q\[log p(x,z)\] - E_q\[log q(z)\] <= log p(x), and
 #' no coordinate update may decrease it -- asserted here as
 #' \code{elbo_monotone} rather than assumed.

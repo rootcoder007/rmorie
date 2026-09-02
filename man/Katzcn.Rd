@@ -22,7 +22,7 @@ The scaled resolvent form: beta = 1 recovers the plain Katz index and
 beta rescales every score linearly.
 }
 \details{
-Formula: C_K = (I - alpha A)^{-1} beta 1.
+Formula: C_K = (I - alpha A)^\{-1\} beta 1.
 }
 \examples{
 Katzcn(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))

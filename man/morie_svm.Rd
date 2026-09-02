@@ -9,12 +9,17 @@
 \alias{morie_svm_label_matrix}
 \title{Support vector machines}
 \usage{
-morie_svm_fit_dual(X, y, C = NULL, n_iter = 4000L, tol = 1e-09, K = NULL)
-morie_svm_dual_objective(alpha, X, y, K = NULL)
-morie_svm_beta(alpha, X, y)
-morie_svm_intercept(alpha, X, y, K = NULL, tol = 1e-08)
-morie_svm_decision(X, beta0, beta)
-morie_svm_label_matrix(X, y)
+morie_svm_fit_dual(X, y, C = NULL, n_iter = 4000L, tol = 1e-09, K = NULL) 
+
+morie_svm_dual_objective(alpha, X, y, K = NULL) 
+
+morie_svm_beta(alpha, X, y) 
+
+morie_svm_intercept(alpha, X, y, K = NULL, tol = 1e-08) 
+
+morie_svm_decision(X, beta0, beta) 
+
+morie_svm_label_matrix(X, y) 
 }
 \arguments{
 \item{X}{numeric matrix of inputs, one row per observation}

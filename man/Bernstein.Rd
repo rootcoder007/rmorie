@@ -2,18 +2,18 @@
 % Please edit documentation in R/brnstn.R
 \name{Bernstein}
 \alias{Bernstein}
-\title{Bernstein's concentration inequality.}
+\title{Bernstein's concentration inequality}
 \usage{
 Bernstein(sigma2, M, n, t)
 }
 \arguments{
-\item{sigma2}{Bound on the per-summand variance.}
+\item{sigma2}{See Usage.}
 
-\item{M}{Almost-sure bound on |X_i - E X_i|.}
+\item{M}{See Usage.}
 
-\item{n}{Number of summands.}
+\item{n}{See Usage.}
 
-\item{t}{Deviation per summand.}
+\item{t}{See Usage.}
 }
 \value{
 List with \code{bound}, \code{bound_two_sided}, \code{hoeffding}, \code{ratio}, \code{exponent}.

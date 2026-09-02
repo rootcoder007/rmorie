@@ -5,7 +5,7 @@
 \alias{morie_sentpc_decode}
 \title{Join pieces and unescape}
 \usage{
-morie_sentpc_decode(pieces, strip_prefix = TRUE)
+morie_sentpc_decode(pieces, strip_prefix = TRUE) 
 }
 \arguments{
 \item{pieces}{Character vector of pieces.}

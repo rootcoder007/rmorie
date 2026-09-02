@@ -5,7 +5,7 @@
 \alias{morie_clusmd_cluster_summary}
 \title{Summary of a Butina clustering}
 \usage{
-morie_clusmd_cluster_summary(clusters)
+morie_clusmd_cluster_summary(clusters) 
 }
 \arguments{
 \item{clusters}{Output of \code{morie_clusmd_butina_clusters}.}

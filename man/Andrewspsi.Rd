@@ -2,14 +2,14 @@
 % Please edit documentation in R/andrews.R
 \name{Andrewspsi}
 \alias{Andrewspsi}
-\title{Andrews sine psi function.}
+\title{Andrews sine psi function}
 \usage{
 Andrewspsi(r, c = 1.339)
 }
 \arguments{
-\item{r}{Scaled residuals.}
+\item{r}{See Usage.}
 
-\item{c}{Tuning constant; 1.339 gives 95\% Gaussian efficiency.}
+\item{c}{See Usage.}
 }
 \value{
 List with \code{psi}, \code{rho}, \code{psi_deriv}, \code{rejected} (count with |r| > c pi), \code{c}, \code{n}.

@@ -5,7 +5,7 @@
 \alias{morie_geron_optics}
 \title{OPTICS: reachability ordering and cluster extraction (Geron Ch 8, hmopt)}
 \usage{
-morie_geron_optics(X, min_samples = 5, max_eps = Inf, eps_cluster = NULL)
+morie_geron_optics(X, min_samples = 5, max_eps = Inf, eps_cluster = NULL) 
 }
 \arguments{
 \item{X}{Data (n, d).}

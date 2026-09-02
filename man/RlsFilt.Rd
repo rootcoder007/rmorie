@@ -5,7 +5,7 @@
 \alias{RlsFilt}
 \title{Section 3.10.3, eqs. (3.215), (3.221), (3.224)-(3.225).  P is}
 \usage{
-RlsFilt(primary, reference, order = 8, lam = 0.98, delta = 1)
+RlsFilt(primary, reference, order = 8, lam = 0.98, delta = 1) 
 }
 \arguments{
 \item{primary}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,7 +5,7 @@
 \alias{private_ci}
 \title{An interval that accounts for the mechanism\'s own variance}
 \usage{
-private_ci(value, sensitivity, epsilon, se, seed = 0, level = 1.96)
+private_ci(value, sensitivity, epsilon, se, seed = 0, level = 1.96) 
 }
 \arguments{
 \item{value}{Non-private statistic.}

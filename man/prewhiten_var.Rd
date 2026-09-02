@@ -5,7 +5,7 @@
 \alias{prewhiten_var}
 \title{prewhiten_var}
 \usage{
-prewhiten_var(v, order = 1, cap = 0.97, adjust = TRUE)
+prewhiten_var(v, order = 1, cap = 0.97, adjust = TRUE) 
 }
 \arguments{
 \item{v}{A matrix; passed to \code{as.matrix}.}

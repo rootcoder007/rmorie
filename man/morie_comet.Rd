@@ -5,7 +5,7 @@
 \alias{morie_comet}
 \title{morie_comet}
 \usage{
-morie_comet(hyp, src, ref, W, b = NULL)
+morie_comet(hyp, src, ref, W, b = NULL) 
 }
 \arguments{
 \item{hyp}{Passed to \code{estimator_score}.}

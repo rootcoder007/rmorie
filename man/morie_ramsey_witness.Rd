@@ -10,6 +10,7 @@ morie_ramsey_witness(colouring, k, l)
 \item{colouring}{Symmetric 0/1 matrix.}
 
 \item{k, l}{Clique sizes to rule out.}
+
 }
 \value{
 A list with \code{valid}, \code{red_clique}, \code{blue_clique}, \code{certifies}.

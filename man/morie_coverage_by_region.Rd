@@ -5,7 +5,8 @@
 \alias{morie_coverage_by_region}
 \title{morie_coverage_by_region}
 \usage{
-morie_coverage_by_region(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, split = NULL)
+morie_coverage_by_region(theta, level = 0.95, lower_bound = 0, draws = 20000L, seed = 0, 
+    split = NULL) 
 }
 \arguments{
 \item{theta}{Coerced to numeric by the body, with \code{as.numeric}.}

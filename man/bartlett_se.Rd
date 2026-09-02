@@ -5,7 +5,7 @@
 \alias{bartlett_se}
 \title{bartlett_se}
 \usage{
-bartlett_se(rho, n)
+bartlett_se(rho, n) 
 }
 \arguments{
 \item{rho}{A list; the body reads \code{$1} from it.}

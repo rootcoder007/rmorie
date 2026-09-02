@@ -5,7 +5,9 @@
 \alias{morie_phylby}
 \title{morie_phylby}
 \usage{
-morie_phylby(alignment, n_iter = 2000, burnin = NULL, n_chains = 4, lam = 0.2, swap_every = 10, sample_every = 10, pi = NULL, rate = 1, branch_prior_mean = 0.1, partitions = NULL, tree = NULL, n_runs = 2, tune = 1, seed = 0)
+morie_phylby(alignment, n_iter = 2000, burnin = NULL, n_chains = 4, lam = 0.2, 
+    swap_every = 10, sample_every = 10, pi = NULL, rate = 1, branch_prior_mean = 0.1, 
+    partitions = NULL, tree = NULL, n_runs = 2, tune = 1, seed = 0) 
 }
 \arguments{
 \item{alignment}{A vector; indexed elementwise.}

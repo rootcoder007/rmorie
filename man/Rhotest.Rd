@@ -5,10 +5,15 @@
 \alias{Rhotest}
 \title{Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413}
 \usage{
-Rhotest(r, n, alternative = "two-sided")
+Rhotest(r, n, alternative = "two-sided") 
 }
 \description{
 Test of zero Spearman correlation -- Secs. 11.3.2-11.3.3, pp. 412-413
+}
+\arguments{
+\item{r}{Argument \code{r}; see Usage.}
+\item{n}{Argument \code{n}; see Usage.}
+\item{alternative}{Argument \code{alternative}; see Usage.}
 }
 \value{
 A list with \code{z}, \code{p_normal}, \code{t}, \code{df}, \code{p_value}, \code{var}, \code{n}.

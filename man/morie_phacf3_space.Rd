@@ -5,7 +5,7 @@
 \alias{morie_phacf3_space}
 \title{Every canonical triangle the alphabet allows, in a fixed order}
 \usage{
-morie_phacf3_space(features = .PHACF3_FEATURES, n_bins = NULL, edges = .PHACF3_DEFAULT_EDGES)
+morie_phacf3_space(features = .PHACF3_FEATURES, n_bins = NULL, edges = .PHACF3_DEFAULT_EDGES) 
 }
 \arguments{
 \item{features}{The feature alphabet.}

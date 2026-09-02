@@ -26,6 +26,7 @@ morie_geron_few_shot(
 \item{separator, template}{Prompt format.}
 
 \item{max_context}{Optional cap.}
+
 }
 \value{
 List with \code{prediction}, \code{zero_shot_prediction}, \code{prompt}, \code{changed_by_context}, \code{k}.

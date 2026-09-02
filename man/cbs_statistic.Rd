@@ -5,7 +5,7 @@
 \alias{cbs_statistic}
 \title{Circular binary segmentation statistic}
 \usage{
-cbs_statistic(x)
+cbs_statistic(x) 
 }
 \arguments{
 \item{x}{numeric vector of log-ratio intensities along a chromosome.}

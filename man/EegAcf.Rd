@@ -5,7 +5,7 @@
 \alias{EegAcf}
 \title{Phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the}
 \usage{
-EegAcf(x, fs, maxlag = NULL)
+EegAcf(x, fs, maxlag = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

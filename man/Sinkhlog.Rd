@@ -27,6 +27,8 @@ Sinkhlog(
 \item{tol}{marginal tolerance.}
 
 \item{f0, g0}{optional warm-start potentials.}
+
+
 }
 \value{
 list: T, cost, f, g, estimate, err, n_iter, method.

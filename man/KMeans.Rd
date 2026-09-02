@@ -5,7 +5,7 @@
 \alias{KMeans}
 \title{Section 10.5.1.  WCSS falls at every step, so the iteration always}
 \usage{
-KMeans(X, k, maxiter = 100, tol = 1e-10, init = NULL)
+KMeans(X, k, maxiter = 100, tol = 1e-10, init = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

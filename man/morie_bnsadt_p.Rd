@@ -5,7 +5,7 @@
 \alias{morie_bnsadt_p}
 \title{Publication probability of a study with z-statistic z}
 \usage{
-morie_bnsadt_p(z, family = "symmetric_step", params = numeric(0))
+morie_bnsadt_p(z, family = "symmetric_step", params = numeric(0)) 
 }
 \arguments{
 \item{z}{The z-statistic.}

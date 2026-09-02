@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Hannan-Rissanen estimation of an ARIMA(p, d, q) model.
+#' Hannan-Rissanen estimation of an ARIMA(p, d, q) model
 #'
 #' Stage one fits a long AR(m) by OLS and keeps its residuals as
 #' innovation proxies; stage two regresses w_t on p own lags and q lagged

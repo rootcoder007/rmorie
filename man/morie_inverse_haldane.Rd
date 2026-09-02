@@ -5,7 +5,7 @@
 \alias{morie_inverse_haldane}
 \title{Inverse Haldane map function}
 \usage{
-morie_inverse_haldane(r)
+morie_inverse_haldane(r) 
 }
 \arguments{
 \item{r}{Recombination fraction in \code{[0, 0.5)}.}

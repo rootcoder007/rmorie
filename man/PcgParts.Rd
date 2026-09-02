@@ -5,7 +5,7 @@
 \alias{PcgParts}
 \title{The six-step procedure of Section 4.9.  Timing is imported from the}
 \usage{
-PcgParts(pcg, ecg, cp, fs)
+PcgParts(pcg, ecg, cp, fs) 
 }
 \arguments{
 \item{pcg}{A vector; its length is taken and its elements indexed.}

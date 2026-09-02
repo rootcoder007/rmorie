@@ -12,6 +12,7 @@ morie_geron_block_layer_norm(X, gamma = NULL, beta = NULL, eps = 1e-05)
 \item{gamma, beta}{Optional length-d scale and shift.}
 
 \item{eps}{Positive variance floor.}
+
 }
 \value{
 Normalized matrix.

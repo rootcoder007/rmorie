@@ -489,7 +489,7 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #\' @export
 #' \' Minimise f + g by proximal forward-backward splitting
 #'
-#' \' \' x_{n+1} = x_n + lambda (prox_{lr g}(x_n - lr grad f(x_n)) -
+#' \' \' x_\{n+1\} = x_n + lambda (prox_\{lr g\}(x_n - lr grad f(x_n)) -
 #' x_n), \' equation (21) of Combettes & Pesquet (2011),
 #' arXiv:0912.3522. \' Runs a fixed number of iterations. \' \'
 #' @param f smooth part, reported only as the objective \' @param

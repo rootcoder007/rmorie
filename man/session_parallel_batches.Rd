@@ -3,9 +3,15 @@
 % the formals.
 \name{session_parallel_batches}
 \alias{session_parallel_batches}
+\alias{gru4rec}
+\alias{gruforrecommendation}
 \title{Build session-parallel mini-batches}
 \usage{
-session_parallel_batches(sessions, batch_size)
+session_parallel_batches(sessions, batch_size) 
+
+gru4rec(sessions, batch_size) 
+
+gruforrecommendation(sessions, batch_size) 
 }
 \arguments{
 \item{sessions}{List of integer sequences of length >= 2.}

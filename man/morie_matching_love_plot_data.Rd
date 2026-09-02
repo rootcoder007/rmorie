@@ -21,6 +21,7 @@ morie_matching_love_plot_data(
 
 \item{weights_col}{Optional column of matching weights in
 \code{matched_data}.}
+
 }
 \value{
 A data frame with columns \code{covariate}, \code{smd_before},

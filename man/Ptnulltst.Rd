@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c10_13.R
 \name{Ptnulltst}
 \alias{Ptnulltst}
-\title{Bayes factor for H0: p = p* against a nonparametric alternative.}
+\title{Bayes factor for H0: p = p* against a nonparametric alternative}
 \usage{
 Ptnulltst(loglik_null, log_marginal_alt, lam = 0.5)
 }

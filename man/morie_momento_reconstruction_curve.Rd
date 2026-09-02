@@ -5,7 +5,7 @@
 \alias{morie_momento_reconstruction_curve}
 \title{Reconstruction error vs mask rate}
 \usage{
-morie_momento_reconstruction_curve(patches, reconstructor, rates, seed = 0)
+morie_momento_reconstruction_curve(patches, reconstructor, rates, seed = 0) 
 }
 \arguments{
 \item{patches}{Patch list.}

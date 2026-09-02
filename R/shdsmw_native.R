@@ -87,6 +87,13 @@
 }
 
 #' IP-weighted MSM with a ridge-penalized propensity model
+#' @param y See Usage.
+#' @param treatment_history See Usage.
+#' @param covariate_history See Usage.
+#' @param lam See Usage.
+#' @param contrast See Usage.
+#' @param path See Usage.
+#' @param trim See Usage.
 #' @export
 shrinkage_msm <- function(y, treatment_history, covariate_history,
                           lam = 0.0, contrast = "cumulative",
@@ -201,6 +208,11 @@ shrinkage_msm <- function(y, treatment_history, covariate_history,
 }
 
 #' Just the penalty path, for sensitivity-only questions
+#' @param y See Usage.
+#' @param treatment_history See Usage.
+#' @param covariate_history See Usage.
+#' @param path See Usage.
+#' @param contrast See Usage.
 #' @export
 penalty_path <- function(y, treatment_history, covariate_history,
                          path = NULL, contrast = "cumulative") {

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' ARSAU CKAN sidecar helpers + tidy registry view (R-side companion
-#' to \code{morie.arsau_datasets}).
+#' to \code{morie.arsau_datasets})
 #'
 #' The main R-side loaders + registry list-of-lists already live in
 #' \code{R/arsau.R} (\code{morie_arsau_load_main_records()},
@@ -56,7 +56,7 @@ NULL
 # Registry as a tidy data.frame
 # ---------------------------------------------------------------------------
 
-#' ARSAU registry rendered as a tidy \code{data.frame}.
+#' ARSAU registry rendered as a tidy \code{data.frame}
 #'
 #' Returns one row per \code{(year_or_range, kind)} entry in the
 #' package's internal registry, with the same columns as the Python
@@ -120,7 +120,7 @@ morie_arsau_registry_df <- function(language = "en") {
 # ---------------------------------------------------------------------------
 
 #' Extract a simplified \code{\[name, type, notes\]} schema from a
-#' parsed CKAN sidecar.
+#' parsed CKAN sidecar
 #'
 #' Accepts the result of \code{\link{morie_arsau_read_sidecar}} (a
 #' list with \code{fields} and \code{records} entries) and returns a
@@ -187,7 +187,7 @@ morie_arsau_sidecar_schema <- function(sidecar) {
 
 
 #' Convert a CKAN sidecar's \code{records} array-of-arrays into a
-#' \code{data.frame}.
+#' \code{data.frame}
 #'
 #' The \code{fields\[\].id} array supplies the column names; records
 #' are array-of-array, so the column order in the JSON matches the
@@ -280,7 +280,7 @@ morie_arsau_sidecar_to_frame <- function(sidecar) {
 # XLSX / Markdown data-dictionary readers
 # ---------------------------------------------------------------------------
 
-#' Read an Ontario-Catalogue XLSX data-dictionary sidecar.
+#' Read an Ontario-Catalogue XLSX data-dictionary sidecar
 #'
 #' Some ARSAU releases ship a companion \code{*.xlsx} file alongside
 #' the CSV that holds the column-level data dictionary (variable name
@@ -350,7 +350,7 @@ morie_arsau_read_xlsx_dictionary <- function(path, sheet = 1L) {
 }
 
 
-#' Read an Ontario-Catalogue Markdown data-dictionary sidecar.
+#' Read an Ontario-Catalogue Markdown data-dictionary sidecar
 #'
 #' Parses a simple pipe-table Markdown sidecar of the form
 #' \preformatted{
@@ -421,7 +421,7 @@ morie_arsau_read_markdown_dictionary <- function(path) {
 # ---------------------------------------------------------------------------
 
 #' Build the upstream CKAN \code{datastore_search} URL for a registry
-#' entry.
+#' entry
 #'
 #' Returns \code{NA_character_} for entries that do not publish a
 #' sidecar (e.g. the 2023 weapon_records release).
@@ -461,7 +461,7 @@ morie_arsau_ckan_url <- function(kind, year, limit = 5000L) {
 }
 
 
-#' Fetch the CKAN sidecar JSON for a registry entry.
+#' Fetch the CKAN sidecar JSON for a registry entry
 #'
 #' Optional helper.  Requires \pkg{httr2} (and \pkg{jsonlite} via the
 #' existing \code{\link{morie_arsau_read_sidecar}} contract).
@@ -529,7 +529,7 @@ morie_arsau_fetch_sidecar <- function(kind, year, limit = 5000L,
 # Native network bulk-download driver
 # ---------------------------------------------------------------------------
 
-#' Bulk-download ARSAU CSVs from the Ontario Data Catalogue.
+#' Bulk-download ARSAU CSVs from the Ontario Data Catalogue
 #'
 #' Native R port of the maintainer's \code{scripts/refresh_arsau.py}
 #' mirror: walks the bundled \code{ARSAU_REGISTRY()} and pulls each

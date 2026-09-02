@@ -5,7 +5,10 @@
 \alias{morie_baysmplr}
 \title{Pick a sampler for this problem and run it}
 \usage{
-morie_baysmplr(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L, burn = NULL, seed = 1, sampler = NULL, cov_inv = NULL, mean = NULL, eps = 0.1, steps = 10L, scale = NULL, adapt = FALSE, nuts_threshold = 20L, dual_average = FALSE, max_depth = 8L)
+morie_baysmplr(log_p, grad_p = NULL, x0 = NULL, n_iter = 500L, burn = NULL, 
+    seed = 1, sampler = NULL, cov_inv = NULL, mean = NULL, eps = 0.1, steps = 10L, 
+    scale = NULL, adapt = FALSE, nuts_threshold = 20L, dual_average = FALSE, 
+    max_depth = 8L) 
 }
 \arguments{
 \item{log_p}{Log density, up to a constant, of a numeric vector.}

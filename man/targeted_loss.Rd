@@ -5,7 +5,7 @@
 \alias{targeted_loss}
 \title{targeted_loss}
 \usage{
-targeted_loss(Q_star, Y)
+targeted_loss(Q_star, Y) 
 }
 \arguments{
 \item{Q_star}{Coerced to numeric by the body, with \code{as.numeric}.}

@@ -5,10 +5,13 @@
 \alias{Rvnmom}
 \title{RVN null moments -- Sec. 3.5, p. 95 (Bartels 1982)}
 \usage{
-Rvnmom(n)
+Rvnmom(n) 
 }
 \description{
 RVN null moments -- Sec. 3.5, p. 95 (Bartels 1982)
+}
+\arguments{
+\item{n}{Argument \code{n}; see Usage.}
 }
 \value{
 A list with \code{mean}, \code{var}, \code{var_approx}, \code{sd}, \code{denom}, \code{n}.

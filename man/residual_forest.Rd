@@ -5,7 +5,8 @@
 \alias{residual_forest}
 \title{residual_forest}
 \usage{
-residual_forest(y_res, w_res, X, at = NULL, n_trees = 200, min_leaf = 5, seed = 0, alpha = 0.05, pi = 0.5)
+residual_forest(y_res, w_res, X, at = NULL, n_trees = 200, min_leaf = 5, seed = 0, 
+    alpha = 0.05, pi = 0.5) 
 }
 \arguments{
 \item{y_res}{A vector; its length is taken.}

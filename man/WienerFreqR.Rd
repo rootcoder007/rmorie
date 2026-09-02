@@ -5,7 +5,7 @@
 \alias{WienerFreqR}
 \title{Eq. (3.175): W(w) S_xx(w) = S_xd(w).  Bins where S_xx vanishes carry}
 \usage{
-WienerFreqR(W, sxx, sxd)
+WienerFreqR(W, sxx, sxd) 
 }
 \arguments{
 \item{W}{Coerced to complex by the body, with \code{as.complex}.}

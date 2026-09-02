@@ -36,6 +36,7 @@ which is the whole point of (6.24), so anything other than
 
 \item{delta1, delta2}{The exponents of p. 200, needing
 0 < delta2 < delta1 < 1.}
+
 }
 \value{
 list: estimate, alpha_hat, beta_hat, gamma_hat, lambda_hat, rho,

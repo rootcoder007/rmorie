@@ -5,7 +5,7 @@
 \alias{EchoLogSp}
 \title{Complex log spectrum of a wavelet with an echo, eqs (4.78)-(4.79)}
 \usage{
-EchoLogSp(a, n_0, omega, H_hat = NULL, n_terms = NULL)
+EchoLogSp(a, n_0, omega, H_hat = NULL, n_terms = NULL) 
 }
 \arguments{
 \item{a}{Numeric; passed to \code{abs}.}

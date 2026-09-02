@@ -17,6 +17,7 @@ morie_kamath_word_ngrams(word, n_min, n_max, boundary = "<>")
 \item{n_min, n_max}{Gram length range.}
 
 \item{boundary}{Two-character boundary marker.}
+
 }
 \value{
 List with \code{vector}, \code{ngrams}, \code{n_known}, \code{missing}.

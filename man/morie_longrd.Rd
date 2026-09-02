@@ -5,7 +5,8 @@
 \alias{morie_longrd}
 \title{Polish a draft assembly with the reads it was built from}
 \usage{
-morie_longrd(assembly, reads, method = "pileup", min_depth = 3L, min_frac = 0.5, ins_frac = 0.5, match = 1, mismatch = -1, gap = -2, sort_reads = TRUE)
+morie_longrd(assembly, reads, method = "pileup", min_depth = 3L, min_frac = 0.5, 
+    ins_frac = 0.5, match = 1, mismatch = -1, gap = -2, sort_reads = TRUE) 
 }
 \arguments{
 \item{assembly}{The draft.}

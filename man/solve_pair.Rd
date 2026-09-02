@@ -5,7 +5,7 @@
 \alias{solve_pair}
 \title{solve_pair}
 \usage{
-solve_pair(i, j, alpha, y, K, grad, C)
+solve_pair(i, j, alpha, y, K, grad, C) 
 }
 \arguments{
 \item{i}{Passed to \code{.svmopt_bounds}.}

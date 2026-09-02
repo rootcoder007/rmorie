@@ -5,7 +5,7 @@
 \alias{MfNoiseIn}
 \title{Eq (4.35): S_eta_i = P_eta_i / 2.  The factor of two is the TWO-SIDED}
 \usage{
-MfNoiseIn(power, freqs = NULL)
+MfNoiseIn(power, freqs = NULL) 
 }
 \arguments{
 \item{power}{Coerced to numeric by the body, with \code{as.numeric}.}

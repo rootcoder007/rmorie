@@ -1,4 +1,4 @@
-# Reference: Cuesta-Albertos, J. A., Gordaliza, A., & Matrán, C. (1997)
+# Reference: Cuesta-Albertos, J. A., Gordaliza, A., & Matr?n, C. (1997)
 # "Trimmed k-Means: An Attempt to Robustify Quantizers",
 # The Annals of Statistics 25(2), 553-576.
 

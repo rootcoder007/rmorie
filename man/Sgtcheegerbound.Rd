@@ -2,7 +2,7 @@
 % Please edit documentation in R/sgtcheb.R
 \name{Sgtcheegerbound}
 \alias{Sgtcheegerbound}
-\title{Exact Sgtcheegerbound constant, with the eigenvalue bounds it satisfies.}
+\title{Exact Sgtcheegerbound constant, with the eigenvalue bounds it satisfies}
 \usage{
 Sgtcheegerbound(W, max_n = 20)
 }

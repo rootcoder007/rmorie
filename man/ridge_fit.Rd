@@ -5,7 +5,7 @@
 \alias{ridge_fit}
 \title{ridge_fit}
 \usage{
-ridge_fit(X, y, lam)
+ridge_fit(X, y, lam) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{nrow}.}

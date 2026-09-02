@@ -5,7 +5,7 @@
 \alias{morie_surxgb_predict}
 \title{Predicted ln y for new cases}
 \usage{
-morie_surxgb_predict(fit, X)
+morie_surxgb_predict(fit, X) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$base_score}, \code{$eta}, \code{$trees} from it.}

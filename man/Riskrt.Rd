@@ -18,6 +18,8 @@ Riskrt(
 \item{n_exposed, n_unexposed}{Optional arm sizes.}
 
 \item{confidence}{One of 0.90, 0.95, 0.99.}
+
+
 }
 \value{
 Named list with \code{estimate}, \code{ln_estimate}, \code{se_ln},

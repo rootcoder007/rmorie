@@ -5,7 +5,8 @@
 \alias{morie_prphet_design}
 \title{morie_prphet_design}
 \usage{
-morie_prphet_design(t, cps, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 0))
+morie_prphet_design(t, cps, seasonalities = NULL, holidays = NULL, holiday_window = c(0, 
+    0)) 
 }
 \arguments{
 \item{t}{Passed to \code{morie_prphet_trend_matrix}.}

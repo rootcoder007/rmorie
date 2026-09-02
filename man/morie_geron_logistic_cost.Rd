@@ -10,6 +10,8 @@ morie_geron_logistic_cost(X, y, theta, add_bias = FALSE)
 \item{X, y, theta}{Design, 0/1 labels, coefficients.}
 
 \item{add_bias}{Prepend a ones column.}
+
+
 }
 \value{
 List with \code{cost}, \code{per_instance}, \code{p_hat}, \code{logits},

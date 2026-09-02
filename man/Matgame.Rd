@@ -2,7 +2,7 @@
 % Please edit documentation in R/mtxrl.R
 \name{Matgame}
 \alias{Matgame}
-\title{Value and optimal strategies of a zero-sum matrix game.}
+\title{Value and optimal strategies of a zero-sum matrix game}
 \usage{
 Matgame(A, iters = 2000)
 }

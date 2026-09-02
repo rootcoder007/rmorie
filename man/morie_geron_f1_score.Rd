@@ -10,6 +10,7 @@ morie_geron_f1_score(y_true, y_pred, positive_class = 1)
 \item{y_true, y_pred}{Non-negative integer labels.}
 
 \item{positive_class}{0-based class to score.}
+
 }
 \value{
 List with \code{f1}, \code{precision}, \code{recall}, \code{macro_f1},

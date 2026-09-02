@@ -5,10 +5,15 @@
 \alias{Consist}
 \title{Consistency of a test -- Sec. 1.2.10, p. 23}
 \usage{
-Consist(nvals, effect, alpha = 0.05)
+Consist(nvals, effect, alpha = 0.05) 
 }
 \description{
 Consistency of a test -- Sec. 1.2.10, p. 23
+}
+\arguments{
+\item{nvals}{Argument \code{nvals}; see Usage.}
+\item{effect}{Argument \code{effect}; see Usage.}
+\item{alpha}{Argument \code{alpha}; see Usage.}
 }
 \value{
 A list with \code{power}, \code{consistent}, \code{monotone}, \code{limit}, \code{effect}.

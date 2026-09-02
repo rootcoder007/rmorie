@@ -5,7 +5,7 @@
 \alias{QrsHPassIo}
 \title{Eq (4.13): p(n) = p(n-1) - (1/32) x(n) + x(n-16) - x(n-17) +}
 \usage{
-QrsHPassIo(x)
+QrsHPassIo(x) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

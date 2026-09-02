@@ -5,7 +5,7 @@
 \alias{morie_survrsf_mortality}
 \title{morie_survrsf_mortality}
 \usage{
-morie_survrsf_mortality(fit, X, oob = TRUE, random_variable = NULL, seed = 1)
+morie_survrsf_mortality(fit, X, oob = TRUE, random_variable = NULL, seed = 1) 
 }
 \arguments{
 \item{fit}{A list; the body reads \code{$inbag}, \code{$times}, \code{$trees} from it.}

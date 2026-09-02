@@ -21,7 +21,7 @@ B. K., Lessler, J. and Stuart, E. A. (2011), "Weight Trimming and
 Propensity Score Weighting", PLoS ONE 6(3), e18174, actually perform:
 "we trimmed high weights downwards, with cutpoints ranging from the
 99th to the 50th percentiles ... all weights with value above the
-\link{cutpoint} were set equal to the \link{cutpoint}".  Note that they cap the
+[cutpoint] were set equal to the [cutpoint]".  Note that they cap the
 HIGH side only, which is why side = "upper" is the default here.
 Contrast .mor_trim_ps, which caps the SCORES. See also Cole, S. R.
 and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),

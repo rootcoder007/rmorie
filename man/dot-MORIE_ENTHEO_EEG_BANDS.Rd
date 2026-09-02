@@ -2,11 +2,9 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{.MORIE_ENTHEO_EEG_BANDS}
 \alias{.MORIE_ENTHEO_EEG_BANDS}
-\title{Canonical EEG bands (delta..gamma) ordered by ascending frequency.}
-\usage{
-.MORIE_ENTHEO_EEG_BANDS
-}
+\title{Canonical EEG bands (delta..gamma) ordered by ascending frequency}
+
 \description{
-Canonical EEG bands (delta..gamma) ordered by ascending frequency.
+Canonical EEG bands (delta..gamma) ordered by ascending frequency
 }
 \keyword{internal}

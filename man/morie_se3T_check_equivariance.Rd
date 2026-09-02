@@ -5,7 +5,8 @@
 \alias{morie_se3T_check_equivariance}
 \title{Check equivariance: rotate and translate the input; the output must}
 \usage{
-morie_se3T_check_equivariance(positions, type0, type1, layer = NULL, axis = c(0.3, -0.7, 0.4), angle = 1.1, translation = c(2, -1, 0.5), tol = 1e-09)
+morie_se3T_check_equivariance(positions, type0, type1, layer = NULL, axis = c(0.3, -0.7, 0.4), 
+    angle = 1.1, translation = c(2, -1, 0.5), tol = 1e-09) 
 }
 \arguments{
 \item{positions}{Passed to \code{.se3T_mat}.}

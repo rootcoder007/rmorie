@@ -8,6 +8,7 @@ morie_geron_overfitting_gap(train_scores, val_scores)
 }
 \arguments{
 \item{train_scores, val_scores}{Equal-length per-epoch scores.}
+
 }
 \value{
 List with \code{gap}, \code{final_gap}, \code{max_gap}, \code{max_gap_epoch},

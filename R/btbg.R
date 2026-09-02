@@ -5,7 +5,7 @@
 #' doi:10.1007/BF00058655.  Breiman gives two aggregation rules and they are
 #' not interchangeable: numerical prediction averages the ensemble,
 #' ghat_bag(x) = (1/B) sum_b ghat_b(x), while classification votes,
-#' ghat_bag(x) = argmax_k #{b : ghat_b(x) = k}.
+#' ghat_bag(x) = argmax_k #\{b : ghat_b(x) = k\}.
 #'
 #' Averaging class labels is the classic bug: it returns 1.5 for a two-one
 #' split between classes 1 and 2, a label that does not exist.  This function

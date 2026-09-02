@@ -5,7 +5,7 @@
 \alias{Ustep}
 \title{Eq (3.27): u(t) = 1 for t > 0, 0 otherwise.  Strict: u(0) = 0 here,}
 \usage{
-Ustep(t, shift = 0)
+Ustep(t, shift = 0) 
 }
 \arguments{
 \item{t}{Passed to \code{.morie_rg_aslist}.}

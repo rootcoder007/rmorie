@@ -71,7 +71,7 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
     e <- .ghc_rng(as.numeric(seed))
     out <- numeric(B)
     for (b in seq_len(B)) {
-      out[b] <- as.numeric(estimator(P_star_sampler(e)))
+      out[b] <- as.numeric(estimator(data(e)))
     }
     m <- mean(out)
     if (B > 1L)

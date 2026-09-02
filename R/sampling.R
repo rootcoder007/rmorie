@@ -75,7 +75,7 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
     } else {
       stop("For proportional = TRUE, supply a single integer for n_per_stratum.")
     }
-    # Python sampling.py: stratified_sample does NOT floor at 1 — a
+    # Python sampling.py: stratified_sample does NOT floor at 1 -- a
     # tiny stratum under proportional allocation can legitimately get
     # zero. Match that contract (allows zero-stratum allocs).
     alloc <- as.integer(round(strata_sizes / sum(strata_sizes) * total_n))

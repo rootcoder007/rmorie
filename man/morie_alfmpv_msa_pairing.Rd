@@ -5,7 +5,8 @@
 \alias{morie_alfmpv_msa_pairing}
 \title{MSA pairing for a protein complex}
 \usage{
-morie_alfmpv_msa_pairing(msas, mode = "multimer", min_coverage = 0.5, max_gap = 0.9, copies = NULL, max_pairs = NULL)
+morie_alfmpv_msa_pairing(msas, mode = "multimer", min_coverage = 0.5, max_gap = 0.9, copies = NULL, 
+    max_pairs = NULL) 
 }
 \arguments{
 \item{msas}{one entry per chain: either a plain vector of species   identifiers, or a list with a species element and any of evalue,   identity, gaps and coverage as parallel vectors.}

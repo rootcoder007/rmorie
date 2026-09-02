@@ -5,7 +5,7 @@
 \alias{print.morie_knox}
 \title{Print method for \code{morie_knox} objects}
 \usage{
-print.morie_knox(x, ...)
+\method{print}{morie_knox}(x, ...) 
 }
 \arguments{
 \item{x}{A \code{morie_knox} object.}

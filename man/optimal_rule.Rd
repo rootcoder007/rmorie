@@ -5,7 +5,7 @@
 \alias{optimal_rule}
 \title{The estimated V-optimal rule, as (d0, d1)}
 \usage{
-optimal_rule(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL, ridge = 1e-08)
+optimal_rule(y, L0, A0, L1, A1, V0 = NULL, V1 = NULL, ridge = 1e-08) 
 }
 \arguments{
 \item{y}{Outcome vector.}

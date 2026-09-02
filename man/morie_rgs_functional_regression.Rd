@@ -5,7 +5,7 @@
 \alias{morie_rgs_functional_regression}
 \title{morie_rgs_functional_regression}
 \usage{
-morie_rgs_functional_regression(X, Y, basis = NULL)
+morie_rgs_functional_regression(X, Y, basis = NULL) 
 }
 \arguments{
 \item{X}{A matrix; passed to \code{as.matrix}.}

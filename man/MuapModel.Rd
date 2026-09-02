@@ -5,7 +5,8 @@
 \alias{MuapModel}
 \title{MuapModel: motor unit action potential as summed single-fibre}
 \usage{
-MuapModel(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3, amp_uV = 8, width_ms = 1, phases = 3)
+MuapModel(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3, amp_uV = 8, 
+    width_ms = 1, phases = 3) 
 }
 \arguments{
 \item{t}{Coerced to numeric by the body, with \code{as.numeric}.}

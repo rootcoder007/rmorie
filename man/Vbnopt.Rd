@@ -27,7 +27,10 @@ Vbnopt(
 
 \item{max_iter}{Maximum coordinate sweeps.}
 
-\item{tol}{Stop when E\link[boot:tau]{tau} moves by less than this.}
+\item{tol}{Stop when E[tau] moves by less than this.}
+
+
+
 }
 \value{
 As \code{\link{Vinfer}}.
@@ -39,7 +42,7 @@ Both name the same procedure from the same paper: Jordan,
 Ghahramani, Jaakkola and Saul (1999), Machine Learning 37(2):183-233,
 doi:10.1023/A:1007665907178 -- maximise ELBO(q) = E_q[log p(x,z)] -
 E_q[log q(z)] over a factorised q by the coordinate update
-log q*\emph{j = E}{q_{-j}}[log p(x,z)] + const. "ELBO max" and
+log q*\emph{j = E}\{q_\{-j\}\}[log p(x,z)] + const. "ELBO max" and
 "mean-field" are two names for one thing: the factorisation is the
 constraint, the ELBO is the objective.
 }

@@ -5,7 +5,7 @@
 \alias{HannW}
 \title{W(n) = 0.5[1 - cos(2 pi n/(N-1))].  Reaches exactly zero at both}
 \usage{
-HannW(N)
+HannW(N) 
 }
 \arguments{
 \item{N}{Coerced to integer by the body, with \code{as.integer}.}

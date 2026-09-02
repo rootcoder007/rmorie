@@ -17,6 +17,7 @@ morie_geron_he_init_hmhei(
 \item{seed}{Seed.}
 
 \item{distribution}{"normal" or "uniform".}
+
 }
 \value{
 List with W, std_target, var_target, limit, empirical_std, estimate, n, method.

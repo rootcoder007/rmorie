@@ -2,7 +2,7 @@
 % Please edit documentation in R/pageH.R
 \name{Pagehink}
 \alias{Pagehink}
-\title{Page-Hinkley sequential test for a shift in the mean.}
+\title{Page-Hinkley sequential test for a shift in the mean}
 \usage{
 Pagehink(x, threshold, delta = 0.005, direction = "increase")
 }

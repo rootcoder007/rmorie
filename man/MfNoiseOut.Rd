@@ -5,7 +5,7 @@
 \alias{MfNoiseOut}
 \title{Eqs (4.36)-(4.37): S_eta_o = (P/2)|H|^2 and its integral.  eq (4.36)}
 \usage{
-MfNoiseOut(power, H, freqs = NULL, df = 1)
+MfNoiseOut(power, H, freqs = NULL, df = 1) 
 }
 \arguments{
 \item{power}{Coerced to numeric by the body, with \code{as.numeric}.}

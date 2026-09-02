@@ -5,7 +5,7 @@
 \alias{morie_unclr_sym_norm}
 \title{morie_unclr_sym_norm}
 \usage{
-morie_unclr_sym_norm(A, self_loops)
+morie_unclr_sym_norm(A, self_loops) 
 }
 \arguments{
 \item{A}{A matrix; passed to \code{nrow}.}

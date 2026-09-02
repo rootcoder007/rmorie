@@ -5,7 +5,7 @@
 \alias{recommend}
 \title{recommend}
 \usage{
-recommend(model, pos, u, n_items, top_k = 5L, activation = "sigmoid")
+recommend(model, pos, u, n_items, top_k = 5L, activation = "sigmoid") 
 }
 \arguments{
 \item{model}{A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W}, \code{$W_prime} from it.}

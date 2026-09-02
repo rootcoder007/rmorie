@@ -5,7 +5,7 @@
 \alias{Ma8Fr}
 \title{Eq (3.111).  The book\'s factored form is EXACT: the bracket is the}
 \usage{
-Ma8Fr(omega)
+Ma8Fr(omega) 
 }
 \arguments{
 \item{omega}{Coerced to numeric by the body, with \code{as.numeric}.}

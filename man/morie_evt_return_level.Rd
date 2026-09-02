@@ -5,10 +5,16 @@
 \alias{morie_evt_return_level}
 \title{GEV T-period return level (Coles 2001 eq. 3.4/3.10)}
 \usage{
-morie_evt_return_level(mu, sigma, xi, T)
+morie_evt_return_level(mu, sigma, xi, T) 
 }
 \arguments{
 \item{T}{return period (> 1)}
+
+\item{mu}{Argument \code{mu}; see Usage.}
+
+\item{sigma}{Argument \code{sigma}; see Usage.}
+
+\item{xi}{Argument \code{xi}; see Usage.}
 }
 \description{
 GEV T-period return level (Coles 2001 eq. 3.4/3.10)

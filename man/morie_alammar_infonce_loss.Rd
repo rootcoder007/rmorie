@@ -5,11 +5,15 @@
 \alias{morie_alammar_infonce_loss}
 \title{morie_alammar_infonce_loss}
 \usage{
-morie_alammar_infonce_loss(anchor, positive, negatives, tau = 0.07)
+morie_alammar_infonce_loss(anchor, positive, negatives, tau = 0.07) 
 }
 \arguments{
 \item{negatives}{Matrix of negative embeddings.}
 \item{tau}{Temperature.}
+
+\item{anchor}{Argument \code{anchor}; see Usage.}
+
+\item{positive}{Argument \code{positive}; see Usage.}
 }
 \description{
 morie_alammar_infonce_loss

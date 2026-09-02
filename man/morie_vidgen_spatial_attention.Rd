@@ -5,7 +5,7 @@
 \alias{morie_vidgen_spatial_attention}
 \title{morie_vidgen_spatial_attention}
 \usage{
-morie_vidgen_spatial_attention(video)
+morie_vidgen_spatial_attention(video) 
 }
 \arguments{
 \item{video}{See Usage.}

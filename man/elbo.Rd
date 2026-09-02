@@ -5,7 +5,7 @@
 \alias{elbo}
 \title{Monte Carlo ELBO}
 \usage{
-elbo(log_joint, log_q, samples)
+elbo(log_joint, log_q, samples) 
 }
 \arguments{
 \item{log_joint,log_q}{Functions of a sample, each returning a   numeric scalar.}

@@ -5,7 +5,7 @@
 \alias{elmo}
 \title{Public name resolved by fn/_lazy_map.json}
 \usage{
-elmo(X, layers, raw_weights = NULL, gamma = 1)
+elmo(X, layers, raw_weights = NULL, gamma = 1) 
 }
 \arguments{
 \item{X}{Passed to \code{elmo_representation}.}

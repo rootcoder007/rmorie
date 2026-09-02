@@ -134,7 +134,7 @@
   bitwXor(ah, bh) * 65536 + bitwXor(al, bl)
 }
 
-#' Left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays
+#' Left-rotate a 32-bit word by n (n in \{7, 8, 12, 16\}); x*2^n stays
 #'
 #' below 2^48 for these n, well within double precision
 #'

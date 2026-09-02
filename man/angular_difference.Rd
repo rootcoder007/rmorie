@@ -5,7 +5,7 @@
 \alias{angular_difference}
 \title{Signed shortest difference a - b, in [-pi, pi)}
 \usage{
-angular_difference(a, b)
+angular_difference(a, b) 
 }
 \arguments{
 \item{a}{First angle.}

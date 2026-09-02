@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable_taxonomy.R
 \name{morie_recommended_summary}
 \alias{morie_recommended_summary}
-\title{Recommended summary statistic for a single variable.}
+\title{Recommended summary statistic for a single variable}
 \usage{
 morie_recommended_summary(tax)
 }
@@ -10,10 +10,10 @@ morie_recommended_summary(tax)
 \item{tax}{A \code{morie_variable_taxonomy}.}
 }
 \value{
-Character scalar — plain-language hint at which summary suits.
+Character scalar -- plain-language hint at which summary suits.
 }
 \description{
-Recommended summary statistic for a single variable.
+Recommended summary statistic for a single variable
 }
 \examples{
 tax <- structure(

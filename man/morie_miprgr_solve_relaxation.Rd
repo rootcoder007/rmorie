@@ -5,7 +5,7 @@
 \alias{morie_miprgr_solve_relaxation}
 \title{LP relaxation at one node}
 \usage{
-morie_miprgr_solve_relaxation(A, b, c, bounds = list(), n = NULL, maximise = TRUE, solver = "simplex")
+morie_miprgr_solve_relaxation(A, b, c, bounds = list(), n = NULL, maximise = TRUE, solver = "simplex") 
 }
 \arguments{
 \item{A}{List of row vectors of the original inequality system.}

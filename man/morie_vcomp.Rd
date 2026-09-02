@@ -5,7 +5,7 @@
 \alias{morie_vcomp}
 \title{morie_vcomp}
 \usage{
-morie_vcomp(y, group, method = "reml", conf_level = 0.95)
+morie_vcomp(y, group, method = "reml", conf_level = 0.95) 
 }
 \arguments{
 \item{y}{Passed to \code{morie_ranova}.}

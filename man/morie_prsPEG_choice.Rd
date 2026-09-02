@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_choice}
 \title{morie_prsPEG_choice}
 \usage{
-morie_prsPEG_choice(...)
+morie_prsPEG_choice(...) 
 }
 \arguments{
 \item{...}{Passed through.}

@@ -533,7 +533,7 @@ morie_tps_analyze_one <- function(df, name = "?") {
   function(df) morie_tps_analyze_one(df, name = name)
 }
 
-#' Convenience alias: full TPS capsule on the Assault dataset.
+#' Convenience alias: full TPS capsule on the Assault dataset
 #' @param df A TPS Assault data.frame.
 #' @return A \code{morie_tps_result}.
 #' @examples

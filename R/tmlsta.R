@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Stabilize a targeted estimate by truncating the propensity score.
+#' Stabilize a targeted estimate by truncating the propensity score
 #'
 #' Truncation caps the clever-covariate weight at the price of bias; the
 #' whole trade-off curve is returned rather than one point.

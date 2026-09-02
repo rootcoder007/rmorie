@@ -5,7 +5,7 @@
 \alias{synthetic_required_keys}
 \title{synthetic_required_keys}
 \usage{
-synthetic_required_keys()
+synthetic_required_keys() 
 }
 \description{
 A step of the synthetic implementation. Called by \code{resolve_synthetic_name_map}. See the file header for the source the module follows.

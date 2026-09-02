@@ -2,7 +2,7 @@
 % Please edit documentation in R/pcfunc.R
 \name{Pcfunc}
 \alias{Pcfunc}
-\title{at that scale and below one regularity.}
+\title{Pair correlation function g(r) from the derivative of Ripley's K}
 \usage{
 Pcfunc(points, window, r, h = NULL)
 }
@@ -22,7 +22,7 @@ List with \code{g}, \code{r}, \code{K}, \code{h},
 \code{estimate}, \code{lambda_hat}, \code{n}.
 }
 \description{
-at that scale and below one regularity.
+
 }
 \references{
 Stoyan, D. & Stoyan, H. (1994). Fractals, Random Shapes

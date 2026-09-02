@@ -5,7 +5,7 @@
 \alias{bpr_loss}
 \title{BPR ranking loss}
 \usage{
-bpr_loss(r_target, r_negatives)
+bpr_loss(r_target, r_negatives) 
 }
 \arguments{
 \item{r_target}{Target score.}

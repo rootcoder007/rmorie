@@ -5,7 +5,7 @@
 \alias{instruction_prompt}
 \title{instruction_prompt}
 \usage{
-instruction_prompt(symbolic, kind = "conversation")
+instruction_prompt(symbolic, kind = "conversation") 
 }
 \arguments{
 \item{symbolic}{A list; the body reads \code{$text} from it.}

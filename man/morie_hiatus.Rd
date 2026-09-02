@@ -5,7 +5,8 @@
 \alias{morie_hiatus}
 \title{morie_hiatus}
 \usage{
-morie_hiatus(beta, nu, mu, sigma, S0 = NULL, I0 = NULL, t_end = 2000, dt = 0.05, mutation = 0, record_every = 100L)
+morie_hiatus(beta, nu, mu, sigma, S0 = NULL, I0 = NULL, t_end = 2000, dt = 0.05, 
+    mutation = 0, record_every = 100L) 
 }
 \arguments{
 \item{beta}{Passed to \code{.hiatus_simulate}.}

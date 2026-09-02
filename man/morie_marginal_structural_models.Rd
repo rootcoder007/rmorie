@@ -11,14 +11,21 @@
 \alias{morie_msm_time_varying_exposure}
 \title{Marginal structural models}
 \usage{
-morie_msm_linear(y, treatment_history, weights = NULL)
-morie_msm_logistic(y, treatment_history, weights = NULL)
-morie_msm_poisson(y, treatment_history, offset = NULL, weights = NULL)
-morie_msm_negative_binomial(y, treatment_history, alpha = 1, offset = NULL, weights = NULL)
-morie_msm_cox_marginal(time, event, treatment_history, weights = NULL)
-morie_msm_accelerated_failure(time, event, treatment_history, weights = NULL)
-morie_msm_gmm_estimator(y, treatment_history, instruments = NULL, weights = NULL)
-morie_msm_time_varying_exposure(y, exposure_history, weights = NULL)
+morie_msm_linear(y, treatment_history, weights = NULL) 
+
+morie_msm_logistic(y, treatment_history, weights = NULL) 
+
+morie_msm_poisson(y, treatment_history, offset = NULL, weights = NULL) 
+
+morie_msm_negative_binomial(y, treatment_history, alpha = 1, offset = NULL, weights = NULL) 
+
+morie_msm_cox_marginal(time, event, treatment_history, weights = NULL) 
+
+morie_msm_accelerated_failure(time, event, treatment_history, weights = NULL) 
+
+morie_msm_gmm_estimator(y, treatment_history, instruments = NULL, weights = NULL) 
+
+morie_msm_time_varying_exposure(y, exposure_history, weights = NULL) 
 }
 \arguments{
 \item{y}{outcome vector}

@@ -5,7 +5,7 @@
 \alias{morie_baysmplr_choose}
 \title{The dispatch decision and the sentence that explains it}
 \usage{
-morie_baysmplr_choose(dim, has_grad, has_conditionals = FALSE, nuts_threshold = 20L)
+morie_baysmplr_choose(dim, has_grad, has_conditionals = FALSE, nuts_threshold = 20L) 
 }
 \arguments{
 \item{dim}{Dimension of the parameter.}

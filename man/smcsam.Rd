@@ -5,7 +5,9 @@
 \alias{smcsam}
 \title{smcsam}
 \usage{
-smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, kernel = NULL, ess_threshold = 0.5, scheme = "systematic", seed = 0L, weight_rule = "mcmc", log_forward = NULL, log_backward = NULL)
+smcsam(log_gamma, initial, n_particles = 500L, ladder = NULL, n_steps = 20L, 
+    kernel = NULL, ess_threshold = 0.5, scheme = "systematic", seed = 0L, 
+    weight_rule = "mcmc", log_forward = NULL, log_backward = NULL) 
 }
 \arguments{
 \item{log_gamma}{Accepted by the signature and not used anywhere in the body.}

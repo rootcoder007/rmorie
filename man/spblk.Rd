@@ -3,7 +3,7 @@
 \name{spblk}
 \alias{spblk}
 \alias{morie_spatial_block_kriging}
-\title{Ordinary block kriging.}
+\title{Ordinary block kriging}
 \usage{
 spblk(x, coords, blocks, n_quad = 25, nugget = 0, sill = 1, range_ = 1)
 
@@ -29,6 +29,8 @@ morie_spatial_block_kriging(
 \item{n_quad}{Default 25.}
 
 \item{nugget, sill, range_}{Exponential-covariance parameters.}
+
+
 }
 \value{
 Named list: estimate, se, n, method.

@@ -5,7 +5,7 @@
 \alias{morie_survrsf_logrank_score_statistic}
 \title{morie_survrsf_logrank_score_statistic}
 \usage{
-morie_survrsf_logrank_score_statistic(times, events, group, scores = NULL)
+morie_survrsf_logrank_score_statistic(times, events, group, scores = NULL) 
 }
 \arguments{
 \item{times}{A vector; its length is taken.}

@@ -5,7 +5,7 @@
 \alias{SnrFilt}
 \title{The power form of Section 3.2.1 applied to the residual against a}
 \usage{
-SnrFilt(clean, filtered)
+SnrFilt(clean, filtered) 
 }
 \arguments{
 \item{clean}{Coerced to numeric by the body, with \code{as.numeric}.}

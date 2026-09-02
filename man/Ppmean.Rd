@@ -2,7 +2,7 @@
 % Please edit documentation in R/pposm.R
 \name{Ppmean}
 \alias{Ppmean}
-\title{Posterior predictive mean, sd and interval from replicated datasets.}
+\title{Posterior predictive mean, sd and interval from replicated datasets}
 \usage{
 Ppmean(yrep)
 }

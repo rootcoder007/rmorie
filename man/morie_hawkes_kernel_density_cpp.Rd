@@ -5,7 +5,7 @@
 \alias{morie_hawkes_kernel_density_cpp}
 \title{morie_hawkes_kernel_density_cpp}
 \usage{
-morie_hawkes_kernel_density_cpp(u, kind, psi)
+morie_hawkes_kernel_density_cpp(u, kind, psi) 
 }
 \arguments{
 \item{u}{Passed to \code{.Call}.}

@@ -5,10 +5,14 @@
 \alias{Ctrltree}
 \title{Treatments-vs-control precedence test -- eq. (10.7.3), p. 373}
 \usage{
-Ctrltree(samples, r = NULL)
+Ctrltree(samples, r = NULL) 
 }
 \description{
 Treatments-vs-control precedence test -- eq. (10.7.3), p. 373
+}
+\arguments{
+\item{samples}{Argument \code{samples}; see Usage.}
+\item{r}{Argument \code{r}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{t}, \code{r}, \code{mtreat}, \code{mean}, \code{k}.

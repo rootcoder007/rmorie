@@ -5,7 +5,7 @@
 \alias{forces_from_energy}
 \title{forces_from_energy}
 \usage{
-forces_from_energy(energy_fn, R, h = 1e-05)
+forces_from_energy(energy_fn, R, h = 1e-05) 
 }
 \arguments{
 \item{energy_fn}{Accepted by the signature and not used anywhere in the body.}

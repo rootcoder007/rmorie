@@ -5,7 +5,7 @@
 \alias{morie_burkov_laplace}
 \title{Laplace add-1 smoothing (Burkov Ch 2)}
 \usage{
-morie_burkov_laplace(counts_ngram, counts_prefix, V)
+morie_burkov_laplace(counts_ngram, counts_prefix, V) 
 }
 \arguments{
 \item{counts_ngram,counts_prefix}{Counts.}

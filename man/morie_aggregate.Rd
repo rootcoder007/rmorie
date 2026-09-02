@@ -5,7 +5,7 @@
 \alias{morie_aggregate}
 \title{Collapse the ATT(g, t) to one number or a profile (Sec. 7)}
 \usage{
-morie_aggregate(result, scheme = "simple", weights = NULL)
+morie_aggregate(result, scheme = "simple", weights = NULL) 
 }
 \arguments{
 \item{result}{Output of \code{morie_etwfe} or   \code{morie_imputation}.}

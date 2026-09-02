@@ -5,7 +5,8 @@
 \alias{morie_glove}
 \title{Fit GloVe vectors}
 \usage{
-morie_glove(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05, x_max = 100, alpha = 0.75, harmonic = TRUE, min_count = 1, seed = 0, combine = "sum")
+morie_glove(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05, x_max = 100, 
+    alpha = 0.75, harmonic = TRUE, min_count = 1, seed = 0, combine = "sum") 
 }
 \arguments{
 \item{corpus}{Passed to \code{cooccurrence}.}

@@ -15,7 +15,7 @@
 # Measurement-level vocabulary
 # ---------------------------------------------------------------------------
 
-#' Allowed Stevens (1946) measurement levels.
+#' Allowed Stevens (1946) measurement levels
 #' @keywords internal
 #' @noRd
 .MORIE_DATASET_LEVELS <- c("nominal", "ordinal", "interval", "ratio")
@@ -42,7 +42,7 @@
   )
 )
 
-#' Case-insensitive single-pattern search.
+#' Case-insensitive single-pattern search
 #' @keywords internal
 #' @noRd
 .morie_dataset_match <- function(name, key) {
@@ -56,7 +56,7 @@
 # Per-column measurement-level inference (NOIR)
 # ---------------------------------------------------------------------------
 
-#' Infer the Stevens NOIR measurement level for a single vector.
+#' Infer the Stevens NOIR measurement level for a single vector
 #'
 #' Decision rules, in order:
 #' 1. Character / factor with `n_unique <= ordinal_threshold` and an ordinal
@@ -123,7 +123,7 @@ morie_dataset_infer_level <- function(x, name = NULL, ordinal_threshold = 10L) {
 # Per-column role detection
 # ---------------------------------------------------------------------------
 
-#' Detect the suggested epidemiological role of a column.
+#' Detect the suggested epidemiological role of a column
 #'
 #' @param x A vector.
 #' @param name Column name (drives the heuristic patterns).
@@ -167,7 +167,7 @@ morie_dataset_detect_role <- function(x, name) {
 # Per-column summary statistics
 # ---------------------------------------------------------------------------
 
-#' Compute level-appropriate summary statistics for one column.
+#' Compute level-appropriate summary statistics for one column
 #'
 #' Interval / ratio columns get mean/sd/min/q25/median/q75/max; nominal
 #' / ordinal columns get a `top_counts` list of value -> count for the
@@ -206,7 +206,7 @@ morie_dataset_summarize_column <- function(x, level) {
 # Column-level + dataset-level profile records
 # ---------------------------------------------------------------------------
 
-#' Build a single-column profile record.
+#' Build a single-column profile record
 #'
 #' @param series A vector.
 #' @param name Column name.
@@ -245,7 +245,7 @@ morie_dataset_column_profile <- function(series, name,
   )
 }
 
-#' Fully profile a data frame without prior schema knowledge.
+#' Fully profile a data frame without prior schema knowledge
 #'
 #' Walks every column, infers its NOIR level and epidemiological role,
 #' computes summary statistics, and resolves a best-guess treatment,
@@ -335,7 +335,7 @@ morie_dataset_profile <- function(df,
   )
 }
 
-#' Serialize a dataset profile to a plain nested list.
+#' Serialize a dataset profile to a plain nested list
 #'
 #' Suitable for JSON / RDS round-trips.
 #'
@@ -359,7 +359,7 @@ morie_dataset_profile_to_list <- function(profile) {
   )
 }
 
-#' Render a human-readable dataset profile summary table.
+#' Render a human-readable dataset profile summary table
 #'
 #' Plain text only; no `rich` dependency.
 #'
@@ -395,7 +395,7 @@ morie_dataset_profile_summary_table <- function(profile) {
 # File loader
 # ---------------------------------------------------------------------------
 
-#' Load a dataset from a CSV / TSV / Excel / Parquet / JSON file.
+#' Load a dataset from a CSV / TSV / Excel / Parquet / JSON file
 #'
 #' File format is detected from the extension.  Supported extensions:
 #' `.csv`, `.tsv`, `.xlsx` / `.xls`, `.parquet` / `.pq`, `.json` /
@@ -444,7 +444,7 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
     if (requireNamespace("jsonlite", quietly = TRUE)) {
       return(.s03json_stream_in(file(path), verbose = FALSE, ...))
     }
-    # Module 23: native fallback — parse each line, bind rows.
+    # Module 23: native fallback -- parse each line, bind rows.
     lines <- readLines(path, warn = FALSE)
     lines <- lines[nzchar(trimws(lines))]
     rows <- lapply(lines, function(l) {
@@ -469,7 +469,7 @@ morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
 # Analysis plan suggestion
 # ---------------------------------------------------------------------------
 
-#' Suggest an ordered analysis plan based on a dataset profile.
+#' Suggest an ordered analysis plan based on a dataset profile
 #'
 #' Uses the inferred measurement levels, binary indicators, and
 #' detected treatment/outcome/weight columns to recommend

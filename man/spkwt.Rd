@@ -2,7 +2,7 @@
 % Please edit documentation in R/spkwt.R
 \name{spkwt}
 \alias{spkwt}
-\title{Solve the kriging system for the weights.}
+\title{Solve the kriging system for the weights}
 \usage{
 spkwt(cov_matrix, cov_target, coords = NULL, unbiased = FALSE)
 }

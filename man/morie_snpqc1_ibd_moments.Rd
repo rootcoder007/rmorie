@@ -5,7 +5,7 @@
 \alias{morie_snpqc1_ibd_moments}
 \title{PLINK\'s method-of-moments IBD estimates for every pair. Returns}
 \usage{
-morie_snpqc1_ibd_moments(genotypes, correction = TRUE)
+morie_snpqc1_ibd_moments(genotypes, correction = TRUE) 
 }
 \arguments{
 \item{genotypes}{Passed to \code{.snpqc1_check}.}

@@ -5,7 +5,7 @@
 \alias{morie_geron_mixed_precision}
 \title{Mixed-precision training plan: FP16 forward, FP32 master weights (Geron Ch 17, hmmxp2)}
 \usage{
-morie_geron_mixed_precision(model, loss_scale = 1024, grads = NULL)
+morie_geron_mixed_precision(model, loss_scale = 1024, grads = NULL) 
 }
 \arguments{
 \item{model}{Numeric vector or named list of numeric vectors (weights).}

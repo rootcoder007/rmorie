@@ -12,6 +12,7 @@ morie_geron_adaboost_weight_update(y_true, y_pred, weights, alpha_t)
 \item{weights}{Non-negative sample weights.}
 
 \item{alpha_t}{Predictor weight of the round just fitted.}
+
 }
 \value{
 List with \code{weights_new}, \code{misclassified}, \code{weighted_error},

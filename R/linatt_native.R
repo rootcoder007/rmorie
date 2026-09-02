@@ -40,7 +40,7 @@ Linatt <- function(Q, K, V, E, F_) {
   if (ncol(Fa) != nrow(Va)) stop(sprintf("Linatt: F must be (k, n) with n = %d", nrow(Va)), call. = FALSE)
   if (nrow(Ea) != nrow(Fa)) stop(sprintf("Linatt: E and F must share k, got %d and %d", nrow(Ea), nrow(Fa)), call. = FALSE)
   for (nm in c("Q", "K", "V", "E", "F")) {
-    a <- switch(nm, Q = Qa, K = Ka, V = Va, E = Ea, F = Fa)
+    a <- switch(EXPR = nm, Q = Qa, K = Ka, V = Va, E = Ea, F = Fa)
     if (!all(is.finite(a))) stop(sprintf("Linatt: %s contains non-finite values", nm), call. = FALSE)
   }
   EK <- Ea %*% Ka

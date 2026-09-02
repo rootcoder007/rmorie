@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Asymptotic relative efficiency of two estimators.
+#' Asymptotic relative efficiency of two estimators
 #'
 #' ARE(T2, T1) = (var1/n1) / (var2/n2); the normal benchmarks 2/pi
 #' (median vs mean) and 3/pi (Hodges-Lehmann vs mean) are returned as

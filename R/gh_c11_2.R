@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Concentration-function terms
 #'
-#' phi_{w0}(eps) = inf{ ||h||_H^2 / 2 : ||h - w0|| <= eps }
+#' phi_\{w0\}(eps) = inf\{ ||h||_H^2 / 2 : ||h - w0|| <= eps \}
 #'   - log P(||W|| < eps).
 #' The two terms are the whole of Gaussian contraction theory: a
 #' decentering (RKHS approximation) term and a small-ball term, and the
@@ -10,7 +10,7 @@
 #' zeroing the rest, so the first term is a finite sum; the small-ball
 #' probability is estimated on the l2 norm by Monte Carlo.
 #'
-#' Formula: ||h||_H^2 = sum_{i kept} f0_i^2 / lambda_i;
+#' Formula: ||h||_H^2 = sum_\{i kept\} f0_i^2 / lambda_i;
 #'   small-ball exponent = -log P(sqrt(sum_i lambda_i Z_i^2) < eps).
 #'
 #' @param f0_coefs Coefficients of the target w0.

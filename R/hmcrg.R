@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Hierarchical normal model: shrinkage of group means towards mu.
+#' Hierarchical normal model: shrinkage of group means towards mu
 #'
 #' tau is taken as GIVEN; the log marginal posterior of tau, up to an
 #' additive constant and under a flat prior, is returned so a caller can

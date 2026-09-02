@@ -3,9 +3,14 @@
 % the formals.
 \name{edgrn_tmm_factor}
 \alias{edgrn_tmm_factor}
+\alias{morie_edgrn}
 \title{edgrn_tmm_factor}
 \usage{
-edgrn_tmm_factor(counts_sample, counts_reference, trim_m = 0.3, trim_a = 0.05, lib_sample = NULL, lib_reference = NULL)
+edgrn_tmm_factor(counts_sample, counts_reference, trim_m = 0.3, trim_a = 0.05, 
+    lib_sample = NULL, lib_reference = NULL) 
+
+morie_edgrn(counts_sample, counts_reference, trim_m = 0.3, trim_a = 0.05, 
+    lib_sample = NULL, lib_reference = NULL) 
 }
 \arguments{
 \item{counts_sample}{Passed to \code{.edgrn_vec}.}

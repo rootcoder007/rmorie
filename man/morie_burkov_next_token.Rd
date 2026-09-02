@@ -5,7 +5,7 @@
 \alias{morie_burkov_next_token}
 \title{Autoregressive next-token probability, bigram MLE (Burkov Eq 2.2/2.3)}
 \usage{
-morie_burkov_next_token(t_next, s)
+morie_burkov_next_token(t_next, s) 
 }
 \arguments{
 \item{t_next}{Candidate token.}

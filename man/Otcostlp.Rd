@@ -10,6 +10,7 @@ Otcostlp(X, Y, p = 2)
 \item{X, Y}{Point sets, \verb{n x d} and \verb{m x d}.}
 
 \item{p}{Norm order, at least 1 (default 2).}
+
 }
 \value{
 Named list with \code{estimate}, \code{p}, \code{nrow}, \code{ncol}, \code{total}, \code{method}.

@@ -5,7 +5,7 @@
 \alias{phmmsr_striped_layout}
 \title{phmmsr_striped_layout}
 \usage{
-phmmsr_striped_layout(length, vector_width = 4)
+phmmsr_striped_layout(length, vector_width = 4) 
 }
 \arguments{
 \item{length}{Coerced to integer by the body, with \code{as.integer}.}

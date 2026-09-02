@@ -5,10 +5,14 @@
 \alias{Wwruns}
 \title{Wald-Wolfowitz two-sample runs test -- Sec. 6.2, p. 231}
 \usage{
-Wwruns(x, y)
+Wwruns(x, y) 
 }
 \description{
 Wald-Wolfowitz two-sample runs test -- Sec. 6.2, p. 231
+}
+\arguments{
+\item{x}{Argument \code{x}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
 }
 \value{
 A list with \code{statistic}, \code{p_value}, \code{z}, \code{p_normal}, \code{mean}, \code{var}, \code{m}, \code{n}.

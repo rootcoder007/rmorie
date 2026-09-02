@@ -5,7 +5,7 @@
 \alias{VagClass}
 \title{VagClass}
 \usage{
-VagClass(segments, durations = NULL, segclass = NULL, arthro = NULL)
+VagClass(segments, durations = NULL, segclass = NULL, arthro = NULL) 
 }
 \arguments{
 \item{segments}{Passed to \code{.morie_bx_mat}.}

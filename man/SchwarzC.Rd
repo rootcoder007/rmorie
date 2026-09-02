@@ -5,7 +5,7 @@
 \alias{SchwarzC}
 \title{Eq (4.42), with equality exactly when A = K B* -- which, applied with}
 \usage{
-SchwarzC(A, B, grid)
+SchwarzC(A, B, grid) 
 }
 \arguments{
 \item{A}{Coerced to complex by the body, with \code{as.complex}.}

@@ -26,6 +26,7 @@ morie_horowitz_both_nonpar_transform(
 \item{nu}{Integer, grid points for F.}
 
 \item{bandwidth}{Numeric or NULL, passed to the estimator of T.}
+
 }
 \value{
 Named list with T_hat, F_hat, beta_hat, u_grid, A_n, B_n,
@@ -40,8 +41,8 @@ support of Z, so for any y2 < y1
 }
 \details{
 F(u) = P[U <= u | T(y2) - u < Z <= T(y1) - u] = A(u)/B(u)   (6.63)
-A(u) = E{I(U <= u) I[T(y2) - u < Z <= T(y1) - u]}           (6.64)
-B(u) = E{I[T(y2) - u < Z <= T(y1) - u]}                     (6.65)
+A(u) = E\{I(U <= u) I[T(y2) - u < Z <= T(y1) - u]\}           (6.64)
+B(u) = E\{I[T(y2) - u < Z <= T(y1) - u]\}                     (6.65)
 
 and the estimator replaces these by sample analogues (6.66) with
 U_ni = T_n(Y_i) - Z_ni.

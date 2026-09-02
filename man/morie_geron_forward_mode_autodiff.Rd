@@ -10,6 +10,7 @@ morie_geron_forward_mode_autodiff(x, x_prime, f)
 \item{x, x_prime}{Finite value and seed derivative.}
 
 \item{f}{Function of one \code{morie_gr_dual}.}
+
 }
 \value{
 List with \code{value}, \code{derivative}, \code{finite_difference_check},

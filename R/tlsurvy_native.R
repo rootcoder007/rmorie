@@ -175,7 +175,7 @@ morie_tlsurvy_draw_sample <- function(pi, seed=0) {
 # horvitz_thompson: The design-unbiased mean: (1/N) sum_{i in S} y_i/pi_i.
 # Unbiased for the FULL-data mean, which is the quantity of interest
 # -- the sample is a computational device, not the population.
-#' Horvitz_thompson: The design-unbiased mean: (1/N) sum_{i in S}
+#' Horvitz_thompson: The design-unbiased mean: (1/N) sum_\{i in S\}
 #' y_i/pi_i
 #'
 #' Unbiased for the FULL-data mean, which is the quantity of interest --

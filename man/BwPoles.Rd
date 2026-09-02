@@ -5,7 +5,7 @@
 \alias{BwPoles}
 \title{Eq (3.137): all 2N poles on a circle of radius Omega_c, spaced pi/N}
 \usage{
-BwPoles(Omega_c, N, k = NULL)
+BwPoles(Omega_c, N, k = NULL) 
 }
 \arguments{
 \item{Omega_c}{Coerced to numeric by the body, with \code{as.numeric}.}

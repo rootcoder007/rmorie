@@ -5,7 +5,7 @@
 \alias{AmSig}
 \title{Section 5.5.1: y(t) = x(t) cos(wc t) -- double-sideband SUPPRESSED}
 \usage{
-AmSig(x, fc, fs, conventional = FALSE, depth = 1)
+AmSig(x, fc, fs, conventional = FALSE, depth = 1) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

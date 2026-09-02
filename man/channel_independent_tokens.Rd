@@ -5,7 +5,7 @@
 \alias{channel_independent_tokens}
 \title{channel_independent_tokens}
 \usage{
-channel_independent_tokens(X, patch_len, stride = NULL)
+channel_independent_tokens(X, patch_len, stride = NULL) 
 }
 \arguments{
 \item{X}{Passed to \code{.patcht_mat}.}

@@ -2,7 +2,7 @@
 % Please edit documentation in R/lottosi.R
 \name{Ppssamp}
 \alias{Ppssamp}
-\title{Draw n units with probability proportional to size, and estimate.}
+\title{Draw n units with probability proportional to size, and estimate}
 \usage{
 Ppssamp(z, y, n, seed = 1)
 }

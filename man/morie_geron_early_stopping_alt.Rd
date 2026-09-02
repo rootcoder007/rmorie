@@ -21,6 +21,11 @@ morie_geron_early_stopping_alt(
 \item{n_iter, eta, fit_intercept}{Training config.}
 
 \item{patience}{Optional online stopping patience.}
+
+
+
+
+
 }
 \value{
 List with \code{theta}, \code{best_iter}, \code{best_val_rmse}, \code{stopped_iter}, \code{is_u_shaped}.

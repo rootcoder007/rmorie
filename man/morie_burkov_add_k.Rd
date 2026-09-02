@@ -5,7 +5,7 @@
 \alias{morie_burkov_add_k}
 \title{Add-k smoothing (Burkov Ch 2)}
 \usage{
-morie_burkov_add_k(counts_ngram, counts_prefix, V, k = 0.5)
+morie_burkov_add_k(counts_ngram, counts_prefix, V, k = 0.5) 
 }
 \arguments{
 \item{counts_ngram,counts_prefix}{Counts.}

@@ -5,7 +5,7 @@
 \alias{morie_crkbsg_cokriging}
 \title{morie_crkbsg_cokriging}
 \usage{
-morie_crkbsg_cokriging(coords, y, z, s_predict, cross_variogram = NULL, coords_z = NULL)
+morie_crkbsg_cokriging(coords, y, z, s_predict, cross_variogram = NULL, coords_z = NULL) 
 }
 \arguments{
 \item{coords}{Passed to \code{.crkbsg_rows}.}

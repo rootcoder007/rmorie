@@ -24,6 +24,8 @@ Dpgmm(
 \item{truncation}{number of components K.}
 
 \item{max_iter, tol}{EM controls.}
+
+
 }
 \value{
 list: estimate, weights, mu, sigma, loglik, prior_pi, n, method.

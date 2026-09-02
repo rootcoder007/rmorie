@@ -27,6 +27,8 @@ morie_causal_survival_blp(
 \item{horizon}{Restriction time; default the 90th percentile of \code{time}.}
 
 \item{n_trees, min_leaf, seed}{Forest hyperparameters.}
+
+
 }
 \value{
 List with \code{alpha}, \code{beta}, \code{se_beta}, \code{p_value},

@@ -5,7 +5,7 @@
 \alias{morie_survrsf_logrank_statistic}
 \title{The two-sample log-rank statistic used for splitting}
 \usage{
-morie_survrsf_logrank_statistic(times, events, group)
+morie_survrsf_logrank_statistic(times, events, group) 
 }
 \arguments{
 \item{times}{A vector; its length is taken and its elements indexed.}

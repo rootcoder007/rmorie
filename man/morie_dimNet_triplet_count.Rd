@@ -5,7 +5,7 @@
 \alias{morie_dimNet_triplet_count}
 \title{Triplet count of a directed graph}
 \usage{
-morie_dimNet_triplet_count(adj)
+morie_dimNet_triplet_count(adj) 
 }
 \arguments{
 \item{adj}{Named list mapping each node to its neighbours.}

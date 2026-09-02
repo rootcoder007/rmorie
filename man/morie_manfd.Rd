@@ -5,7 +5,7 @@
 \alias{morie_manfd}
 \title{Embed functional data on its manifold}
 \usage{
-morie_manfd(Y, k = 4L, method = "isomap", grid = NULL, dim = 2L, sweeps = 60L)
+morie_manfd(Y, k = 4L, method = "isomap", grid = NULL, dim = 2L, sweeps = 60L) 
 }
 \arguments{
 \item{Y}{A matrix with one curve per row.}

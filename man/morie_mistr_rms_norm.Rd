@@ -5,7 +5,7 @@
 \alias{morie_mistr_rms_norm}
 \title{RMSNorm}
 \usage{
-morie_mistr_rms_norm(x, weight = NULL, eps = 1e-06)
+morie_mistr_rms_norm(x, weight = NULL, eps = 1e-06) 
 }
 \arguments{
 \item{x}{Vector of length d.}

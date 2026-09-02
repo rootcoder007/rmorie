@@ -5,7 +5,7 @@
 \alias{morie_tncomp}
 \title{morie_tncomp}
 \usage{
-morie_tncomp(fps, k, objective = "maxmin", seed = NULL)
+morie_tncomp(fps, k, objective = "maxmin", seed = NULL) 
 }
 \arguments{
 \item{fps}{Passed to \code{.tncomp_select}.}

@@ -5,7 +5,7 @@
 \alias{morie_tdcvar_cheatsheet}
 \title{morie_tdcvar_cheatsheet}
 \usage{
-morie_tdcvar_cheatsheet()
+morie_tdcvar_cheatsheet() 
 }
 \description{
 A step of the tdcvar_native implementation. No other function in the package calls it. See the file header for the source the module follows.

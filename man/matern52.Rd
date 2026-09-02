@@ -5,7 +5,7 @@
 \alias{matern52}
 \title{matern52}
 \usage{
-matern52(a, b, amplitude = 1, length_scale = 1)
+matern52(a, b, amplitude = 1, length_scale = 1) 
 }
 \arguments{
 \item{a}{A vector; its length is taken.}

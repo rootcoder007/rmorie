@@ -162,8 +162,6 @@ morie_newey_west_vcov <- function(fit, lags = NULL) {
 #' a value above about 10 means that coefficient's variance is inflated
 #' an order of magnitude by collinearity.
 #' @param fit a `morie_ols` fit
-#' @param X predictor matrix
-#' @param add_intercept include an intercept in the auxiliary fits
 #' @return a list of the statistic and, where exact, its p-value
 #' @export
 #' @examples

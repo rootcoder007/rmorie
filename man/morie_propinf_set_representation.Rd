@@ -5,7 +5,7 @@
 \alias{morie_propinf_set_representation}
 \title{Set feature representation: each layer as a set of (weights, bias)}
 \usage{
-morie_propinf_set_representation(net)
+morie_propinf_set_representation(net) 
 }
 \arguments{
 \item{net}{Network as returned by \code{morie_propinf_train_fcnn}.}

@@ -15,6 +15,7 @@ morie_mabay(yi, vi, tau2 = NULL, level = 0.95)
 \item{tau2}{optional between-study variance; DerSimonian-Laird if absent.}
 
 \item{level}{credible-interval level.}
+
 }
 \value{
 list: estimate, se, ci_lower, ci_upper, tau2, theta_mean, theta_sd,

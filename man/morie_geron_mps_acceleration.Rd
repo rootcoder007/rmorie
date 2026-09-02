@@ -5,7 +5,7 @@
 \alias{morie_geron_mps_acceleration}
 \title{Apple MPS placement plan: dtype demotion cost, no Metal call made (Geron Ch 10, hmpmps)}
 \usage{
-morie_geron_mps_acceleration(tensor, dtype = NULL)
+morie_geron_mps_acceleration(tensor, dtype = NULL) 
 }
 \arguments{
 \item{tensor}{Data.}

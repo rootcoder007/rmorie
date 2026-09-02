@@ -19,6 +19,8 @@ morie_kamath_ch5_rm_bradley_terry(x, y_w, y_l, r_theta)
 \item{i}{Choice, 0 or 1 per pair.}
 
 \item{y_w, y_l}{Winning and losing responses.}
+
+
 }
 \value{
 List with \code{estimate}, \code{margins}, \code{per_pair}.

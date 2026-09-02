@@ -5,7 +5,7 @@
 \alias{LsiParH}
 \title{Eq (3.49): parallel branches add their impulse responses, and the}
 \usage{
-LsiParH(h_1, h_2, n = NULL)
+LsiParH(h_1, h_2, n = NULL) 
 }
 \arguments{
 \item{h_1}{Coerced to numeric by the body, with \code{as.numeric}.}

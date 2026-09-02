@@ -2,12 +2,12 @@
 % Please edit documentation in R/netcls.R
 \name{Netclocent}
 \alias{Netclocent}
-\title{Closeness centrality of a node (re-export).}
+\title{Closeness centrality of a node (re-export)}
 \usage{
 Netclocent(A)
 }
 \arguments{
-\item{A}{Adjacency matrix.}
+\item{A}{See Usage.}
 }
 \value{
 List with the payload of :func:\code{morie.fn.clocen.clocent}.

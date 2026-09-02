@@ -18,6 +18,8 @@ paper's own estimates were 0.129 and 0.011 for thyroid cancer across the
 94 departements of France.}
 
 \item{max_iter, tol}{Newton controls.}
+
+
 }
 \value{
 A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{smr},

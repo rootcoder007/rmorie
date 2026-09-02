@@ -25,7 +25,7 @@ effect compares what happened with what would happen under a realistic
 redistribution of exposure.
 }
 \details{
-Formula: \code{PIE = E\[Y(do(X = x*))\] - E[Y]}, the first term by
+Formula: \code{PIE = E\[Y(do(X = x*))\] - E\[Y\]}, the first term by
 standardising the fitted outcome regression over the proposed
 exposure distribution.
 }

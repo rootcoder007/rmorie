@@ -5,7 +5,7 @@
 \alias{morie_cor_pearson_cpp}
 \title{morie_cor_pearson_cpp}
 \usage{
-morie_cor_pearson_cpp(x, y)
+morie_cor_pearson_cpp(x, y) 
 }
 \arguments{
 \item{x}{Passed to \code{.Call}.}

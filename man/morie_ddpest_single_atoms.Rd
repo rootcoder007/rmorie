@@ -5,7 +5,7 @@
 \alias{morie_ddpest_single_atoms}
 \title{Common atoms, weights moving with x}
 \usage{
-morie_ddpest_single_atoms(xs, alpha, K, weight_fn, atom_sampler = NULL, seed = 0)
+morie_ddpest_single_atoms(xs, alpha, K, weight_fn, atom_sampler = NULL, seed = 0) 
 }
 \arguments{
 \item{xs}{Covariate values.}

@@ -33,6 +33,17 @@ morie_rct_tests(
 \item{a, b, c, d}{Cell counts.}
 
 \item{differences}{Paired differences.}
+
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 List with b_t, b_t_random, t, df, chi2, t_paired, df_paired

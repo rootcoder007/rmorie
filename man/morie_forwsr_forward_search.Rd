@@ -4,10 +4,17 @@
 \alias{morie_forwsr_forward_search}
 \title{SPDX-License-Identifier: AGPL-3.0-or-later}
 \usage{
-morie_forwsr_forward_search(X, y, start = NULL, n_draw = 500L, seed = 1L)
+morie_forwsr_forward_search(X, y, start = NULL, n_draw = 500L, seed = 1L) 
 }
 \description{
 SPDX-License-Identifier: AGPL-3.0-or-later morie.fn -- function file (rootcoder007/morie) Sources:   Analysis, Springer, ISBN 978-0-387-95017-5,   least-median-of-squares start, the residual ordering that defines   each subset, and the monitoring of the deletion residuals.   unknown number of multivariate outliers", Journal of the Royal   Statistical Society Series B 71(2), 447-454 -- equation (12), the   consistency factor for a scale estimated from a truncated sample, Native implementation mirroring Python morie.fn.forwsr exactly: the same Gauss-Jordan solve with partial pivoting, the same SplitMix64 draws for the LMS start, the same residual ordering, and the same consistency correction. Row indices are 0-based here, as they are in the Python arm; R subscripts add one at the point of use.
+}
+\arguments{
+\item{X}{Argument \code{X}; see Usage.}
+\item{y}{Argument \code{y}; see Usage.}
+\item{start}{Argument \code{start}; see Usage.}
+\item{n_draw}{Argument \code{n_draw}; see Usage.}
+\item{seed}{Argument \code{seed}; see Usage.}
 }
 \value{
 A list with components \code{m}, \code{beta}, \code{sigma}, \code{s2}, \code{consistency_factor}, \code{sigma_corrected}, \code{min_deletion_residual}, \code{subset}.

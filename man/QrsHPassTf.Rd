@@ -5,7 +5,7 @@
 \alias{QrsHPassTf}
 \title{Eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure}
 \usage{
-QrsHPassTf(freq, fs = 200)
+QrsHPassTf(freq, fs = 200) 
 }
 \arguments{
 \item{freq}{Coerced to numeric by the body, with \code{as.numeric}.}

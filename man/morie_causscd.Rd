@@ -5,7 +5,7 @@
 \alias{morie_causscd}
 \title{morie_causscd}
 \usage{
-morie_causscd(Y, treated, t_post, zeta = NULL)
+morie_causscd(Y, treated, t_post, zeta = NULL) 
 }
 \arguments{
 \item{Y}{Passed to \code{causscd}.}

@@ -5,7 +5,7 @@
 \alias{morie_chemsc_hbond}
 \title{One donor-acceptor pair's contribution, at most one}
 \usage{
-morie_chemsc_hbond(r, alpha, betas, smoothing = "gaussian", par = NULL)
+morie_chemsc_hbond(r, alpha, betas, smoothing = "gaussian", par = NULL) 
 }
 \arguments{
 \item{r}{The H...A distance.}

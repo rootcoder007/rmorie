@@ -5,7 +5,7 @@
 \alias{morie_rfppos_angle}
 \title{The angle at b, in degrees, subtended by a and c}
 \usage{
-morie_rfppos_angle(a, b, c)
+morie_rfppos_angle(a, b, c) 
 }
 \arguments{
 \item{a,b,c}{Coordinate triples; b is the vertex.}

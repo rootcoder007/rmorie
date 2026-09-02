@@ -10,6 +10,9 @@ morie_geron_xlnet(X, n_layers = 1, vocab_size = NULL, d_model = 8, seed = 0)
 \item{X}{Integer (0-based) token ids, length >= 2.}
 
 \item{n_layers, vocab_size, d_model, seed}{As in Python original.}
+
+
+
 }
 \value{
 list with permutation, content_mask, query_mask, logprobs,

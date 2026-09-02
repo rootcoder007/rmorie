@@ -12,6 +12,8 @@ morie_geron_self_attention(X, WQ, WK, WV, mask = NULL)
 \item{WQ, WK, WV}{Projections with d_model rows.}
 
 \item{mask}{Optional attention mask.}
+
+
 }
 \value{
 List with \code{output}, \code{weights}, \code{Q}, \code{K}, \code{V}.

@@ -12,6 +12,8 @@ morie_geron_sft(model = NULL, instruction_data, epochs = 200, lr = 0.5, l2 = 0)
 \item{instruction_data}{List of list(instruction, response) pairs (strings or numeric/int).}
 
 \item{epochs, lr, l2}{As in the Python original.}
+
+
 }
 \value{
 list with W, loss, sum_loss, loss_curve, accuracy, predicted, probabilities,

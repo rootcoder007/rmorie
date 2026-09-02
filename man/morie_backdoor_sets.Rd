@@ -12,6 +12,7 @@ morie_backdoor_sets(adj, treatment, outcome, max_size = NULL)
 \item{treatment, outcome}{Node indices (1-based).}
 
 \item{max_size}{Optional cap on set size.}
+
 }
 \value{
 A list of integer vectors.

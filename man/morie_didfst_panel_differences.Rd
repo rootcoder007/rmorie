@@ -5,7 +5,7 @@
 \alias{morie_didfst_panel_differences}
 \title{Post-minus-pre differences}
 \usage{
-morie_didfst_panel_differences(Y, event_time)
+morie_didfst_panel_differences(Y, event_time) 
 }
 \arguments{
 \item{Y}{Numeric matrix (n by T).}

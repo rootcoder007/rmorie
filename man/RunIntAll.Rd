@@ -5,7 +5,7 @@
 \alias{RunIntAll}
 \title{Eq (3.113).  Over a finite record the lower limit is the first}
 \usage{
-RunIntAll(x, t)
+RunIntAll(x, t) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

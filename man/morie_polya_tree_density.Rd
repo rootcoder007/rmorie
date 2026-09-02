@@ -23,6 +23,7 @@ morie_polya_tree_density(
 \item{a_scale}{positive multiplier on \eqn{a_m = a\_scale\,m^2}.}
 
 \item{lo, hi}{bounds of the partitioned interval.}
+
 }
 \value{
 list: grid, density, levels, a_rule,

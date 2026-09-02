@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Generalized precision.
+#' Generalized precision
 #'
 #' Formula: P_i = TTP_all / (TTP_all + TFP_i) on a one-versus-all basis
-#' (eq. 4.9), with TFP_i = sum_{j != i} n_ji from eq. (4.6).
+#' (eq. 4.9), with TFP_i = sum_\{j != i\} n_ji from eq. (4.6).
 #'
 #' @param y_true Observed class labels, zero-based.
 #' @param y_pred Predicted class labels, zero-based.

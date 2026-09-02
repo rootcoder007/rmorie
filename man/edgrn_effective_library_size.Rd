@@ -5,7 +5,7 @@
 \alias{edgrn_effective_library_size}
 \title{edgrn_effective_library_size}
 \usage{
-edgrn_effective_library_size(library_size, factor)
+edgrn_effective_library_size(library_size, factor) 
 }
 \arguments{
 \item{library_size}{Coerced to numeric by the body, with \code{as.numeric}.}

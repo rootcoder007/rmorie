@@ -5,7 +5,7 @@
 \alias{double_q_target}
 \title{Double-DQN target}
 \usage{
-double_q_target(reward, gamma, q_online_next, q_target_next, done = FALSE)
+double_q_target(reward, gamma, q_online_next, q_target_next, done = FALSE) 
 }
 \arguments{
 \item{reward}{Scalar immediate reward.}

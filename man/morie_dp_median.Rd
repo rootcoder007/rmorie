@@ -15,6 +15,7 @@ morie_dp_median(x, epsilon = 1, a = NULL, b = NULL, seed = NULL)
 non-private query -- the function warns.}
 
 \item{seed}{optional integer seed.}
+
 }
 \value{
 list with \code{release}, \code{true_median}, \code{interval},

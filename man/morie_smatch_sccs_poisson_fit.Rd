@@ -5,7 +5,8 @@
 \alias{morie_smatch_sccs_poisson_fit}
 \title{morie_smatch_sccs_poisson_fit}
 \usage{
-morie_smatch_sccs_poisson_fit(cases, risk_periods, age_breaks = numeric(0), iters = 200, tol = 1e-12, ridge = 1e-09)
+morie_smatch_sccs_poisson_fit(cases, risk_periods, age_breaks = numeric(0), iters = 200, tol = 1e-12, 
+    ridge = 1e-09) 
 }
 \arguments{
 \item{cases}{Passed to \code{morie_smatch_poisson_design}.}

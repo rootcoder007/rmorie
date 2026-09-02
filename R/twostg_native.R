@@ -104,7 +104,7 @@
 
 #' Cheng-Wei-Ying two-stage transformation-model estimator
 #'
-#' Linear transformation model g{S(t | Z)} = h(t) + Z'beta with censored
+#' Linear transformation model g\{S(t | Z)\} = h(t) + Z'beta with censored
 #' data: stage 1 estimates the censoring survival G by Kaplan-Meier
 #' (left limit, validated against the paper's printed Freireich anchor),
 #' stage 2 solves estimating equation (2.3) with unit weights. Sandwich

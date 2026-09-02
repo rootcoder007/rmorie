@@ -5,7 +5,7 @@
 \alias{SwtDen}
 \title{SWT (cycle-spinning) denoising, eqs (8.103)-(8.104) + Coifman &}
 \usage{
-SwtDen(x, wavelet = "db4", levels = 3, threshold = NULL, threshold_type = "soft")
+SwtDen(x, wavelet = "db4", levels = 3, threshold = NULL, threshold_type = "soft") 
 }
 \arguments{
 \item{x}{Passed to \code{.tf_need}.}

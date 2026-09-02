@@ -5,7 +5,7 @@
 \alias{invariance_error}
 \title{invariance_error}
 \usage{
-invariance_error(energy_fn, R, Q, g = NULL)
+invariance_error(energy_fn, R, Q, g = NULL) 
 }
 \arguments{
 \item{energy_fn}{Passed to \code{forces_from_energy}.}

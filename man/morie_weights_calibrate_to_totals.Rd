@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_calibrate_to_totals}
 \alias{morie_weights_calibrate_to_totals}
-\title{Dispatch helper -- calibrate to totals via "raking" or "greg".}
+\title{Dispatch helper -- calibrate to totals via "raking" or "greg"}
 \usage{
 morie_weights_calibrate_to_totals(
   weights,
@@ -30,7 +30,7 @@ Allowed values depend on the caller.}
 A named list with elements \code{weights}, \code{converged}, \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
 }
 \description{
-Dispatch helper -- calibrate to totals via "raking" or "greg".
+Dispatch helper -- calibrate to totals via "raking" or "greg"
 }
 \examples{
 set.seed(1)

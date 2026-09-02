@@ -5,7 +5,7 @@
 \alias{sdpwts_barrier}
 \title{Log det F(x), INFINITE outside the cone}
 \usage{
-sdpwts_barrier(x, F0, Fs)
+sdpwts_barrier(x, F0, Fs) 
 }
 \arguments{
 \item{x}{Passed to \code{sdpwts_lmi}.}

@@ -5,7 +5,7 @@
 \alias{morie_funkM_imputed_svd_error}
 \title{What filling the holes and running an SVD actually gives}
 \usage{
-morie_funkM_imputed_svd_error(ratings, n_users, n_items, rank = 2, fill = "zero")
+morie_funkM_imputed_svd_error(ratings, n_users, n_items, rank = 2, fill = "zero") 
 }
 \arguments{
 \item{ratings}{Passed to \code{.funkM_as_ratings}.}

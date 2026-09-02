@@ -5,7 +5,7 @@
 \alias{forecast}
 \title{forecast}
 \usage{
-forecast(fitted, h = 12)
+forecast(fitted, h = 12) 
 }
 \arguments{
 \item{fitted}{A list; the body reads \code{$ar}, \code{$ma}, \code{$order}, \code{$residuals}, \code{$s}, \code{$seasonal_order}, \code{$sigma2}, \code{$y} from it.}

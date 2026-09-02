@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' BLUP of a random intercept.
+#' BLUP of a random intercept
 #'
 #' uhat_j = (s2u / (s2u + s2e/n_j)) * mean_j(y - X beta).
 #'

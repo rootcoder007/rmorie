@@ -8,6 +8,7 @@
 }
 \arguments{
 \item{e1, e2}{Tape nodes or numbers.}
+
 }
 \value{
 A tape node.

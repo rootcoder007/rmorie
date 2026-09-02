@@ -5,10 +5,11 @@
 \alias{morie_geron_pairwise_distances}
 \title{Euclidean pairwise distance matrix (Geron Ch 7, morie.fn hmmds helper)}
 \usage{
-morie_geron_pairwise_distances(X)
+morie_geron_pairwise_distances(X) 
 }
 \arguments{
-\item{X}{Data matrix. @return Distance matrix.}
+
+\item{X}{Argument \code{X}; see Usage.}
 }
 \description{
 Euclidean pairwise distance matrix (Geron Ch 7, morie.fn hmmds helper)

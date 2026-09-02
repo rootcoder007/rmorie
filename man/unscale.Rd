@@ -5,7 +5,7 @@
 \alias{unscale}
 \title{Invert the affine map -- the influence curve scales with it}
 \usage{
-unscale(value, lower, upper)
+unscale(value, lower, upper) 
 }
 \arguments{
 \item{value}{Value in the rescaled units.}

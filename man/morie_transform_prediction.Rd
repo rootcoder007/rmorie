@@ -29,6 +29,7 @@ morie_transform_prediction(
 \item{gamma}{quantile level in (0, 1); the median when NULL.}
 
 \item{y_grid, u_grid}{required when T_hat / F_hat are vectors.}
+
 }
 \value{
 list: probability, quantile, gamma, u_gamma, index,

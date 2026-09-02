@@ -3,7 +3,7 @@
 \name{Ripk}
 \alias{Ripk}
 \alias{morie_ripley_k_function}
-\title{Ripley's K function for a mapped point pattern in a rectangle.}
+\title{Ripley's K function for a mapped point pattern in a rectangle}
 \usage{
 Ripk(points, window, r)
 

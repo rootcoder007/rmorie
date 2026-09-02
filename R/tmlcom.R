@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Treatment effect on a composition, estimated in clr coordinates.
+#' Treatment effect on a composition, estimated in clr coordinates
 #'
 #' The parts sum to a constant, so an effect read off the parts is
 #' confounded by the closure. Estimating on clr coordinates removes the

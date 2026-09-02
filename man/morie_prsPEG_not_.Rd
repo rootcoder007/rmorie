@@ -5,7 +5,7 @@
 \alias{morie_prsPEG_not_}
 \title{morie_prsPEG_not_}
 \usage{
-morie_prsPEG_not_(e)
+morie_prsPEG_not_(e) 
 }
 \arguments{
 \item{e}{Passed to \code{.probe}.}

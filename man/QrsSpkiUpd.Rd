@@ -5,7 +5,7 @@
 \alias{QrsSpkiUpd}
 \title{Eq (4.18): SPKI = 0.25 PEAKI + 0.75 SPKI, replacing the 0.125/0.875}
 \usage{
-QrsSpkiUpd(peaki, spki)
+QrsSpkiUpd(peaki, spki) 
 }
 \arguments{
 \item{peaki}{Numeric; combined arithmetically in the body.}

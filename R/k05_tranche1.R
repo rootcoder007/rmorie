@@ -356,7 +356,7 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 
 #' Sample autocorrelation function
 #'
-#' r_k = sum (y_t - ybar)(y_{t-k} - ybar) / sum (y_t - ybar)^2. Both
+#' r_k = sum (y_t - ybar)(y_\{t-k\} - ybar) / sum (y_t - ybar)^2. Both
 #' numerator and denominator divide by n, not n-k: that is the
 #' biased-but-positive-semidefinite convention, the one R's
 #' \code{acf} uses and the one \code{morie_acf} already uses. Chosen
@@ -418,7 +418,7 @@ morie_sample_acf <- function(y, max_lag = 20) {
 
 #' Sample partial autocorrelation function
 #'
-#' phi_kk is the correlation between y_t and y_{t-k} once the
+#' phi_kk is the correlation between y_t and y_\{t-k\} once the
 #' intervening lags are projected out, obtained from the sample
 #' autocorrelations by the Durbin-Levinson recursion, which solves the
 #' Yule-Walker system in O(k^2) rather than inverting a Toeplitz matrix

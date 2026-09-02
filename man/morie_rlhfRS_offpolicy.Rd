@@ -5,7 +5,8 @@
 \alias{morie_rlhfRS_offpolicy}
 \title{Estimate a policy's value from another policy's log}
 \usage{
-morie_rlhfRS_offpolicy(log, policy, behaviour, estimator = "ips", reward_model = NULL, clip = NULL)
+morie_rlhfRS_offpolicy(log, policy, behaviour, estimator = "ips", reward_model = NULL, 
+    clip = NULL) 
 }
 \arguments{
 \item{log}{The logged decisions.}

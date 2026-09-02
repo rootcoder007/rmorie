@@ -42,6 +42,8 @@ morie_fauzi_theorem_4_3(
 \item{mu2}{\verb{int y^2 K(y) dy}.}
 
 \item{VW}{\verb{int V(y) W(y) dy}; the Gaussian value if \code{NULL}.}
+
+
 }
 \value{
 list: t, bias_1, bias_2, variance, b4, b5,

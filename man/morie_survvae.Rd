@@ -3,9 +3,10 @@
 % the formals.
 \name{morie_survvae}
 \alias{morie_survvae}
-\title{Maximise the combined loss over gates and expert parameters.}
+\title{Maximise the combined loss over gates and expert parameters}
 \usage{
-morie_survvae(X, times, events, K = 3L, primitive = "weibull", alpha = 1, prior = 0, seed = 0, restarts = 4L)
+morie_survvae(X, times, events, K = 3L, primitive = "weibull", alpha = 1, prior = 0, 
+    seed = 0, restarts = 4L) 
 }
 \arguments{
 \item{X}{List of covariate vectors, length \code{n}.}

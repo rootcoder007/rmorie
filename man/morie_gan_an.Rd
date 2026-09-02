@@ -5,7 +5,8 @@
 \alias{morie_gan_an}
 \title{morie_gan_an}
 \usage{
-morie_gan_an(x, generator, feature_fn, z_dim, steps = 200, lr = 0.05, lam = 0.1, seed = 0, h = 1e-04, step_decay = 0.05)
+morie_gan_an(x, generator, feature_fn, z_dim, steps = 200, lr = 0.05, lam = 0.1, 
+    seed = 0, h = 1e-04, step_decay = 0.05) 
 }
 \arguments{
 \item{x}{Passed to \code{.gan_an_anomaly_score_impl}.}

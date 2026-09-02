@@ -5,7 +5,7 @@
 \alias{TwidCS}
 \title{Eq (3.84): W_N^(nk) = cos(.) - j sin(.).  Note the MINUS on the sine:}
 \usage{
-TwidCS(npoints, n, k)
+TwidCS(npoints, n, k) 
 }
 \arguments{
 \item{npoints}{Coerced to integer by the body, with \code{as.integer}.}

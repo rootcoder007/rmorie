@@ -5,7 +5,7 @@
 \alias{morie_mpfn_update_gru}
 \title{U_t as a GRU}
 \usage{
-morie_mpfn_update_gru(h, m, Wz, Uz, Wr, Ur, Wh, Uh)
+morie_mpfn_update_gru(h, m, Wz, Uz, Wr, Ur, Wh, Uh) 
 }
 \arguments{
 \item{h}{Current state.}

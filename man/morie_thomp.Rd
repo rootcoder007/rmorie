@@ -5,7 +5,7 @@
 \alias{morie_thomp}
 \title{morie_thomp}
 \usage{
-morie_thomp(p, T, alpha0 = NULL, beta0 = NULL, seed = 0)
+morie_thomp(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) 
 }
 \arguments{
 \item{p}{A vector; its length is taken and its elements indexed.}

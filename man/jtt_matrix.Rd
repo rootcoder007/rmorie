@@ -5,7 +5,7 @@
 \alias{jtt_matrix}
 \title{jtt_matrix}
 \usage{
-jtt_matrix(pam = 200L, scale = 10)
+jtt_matrix(pam = 200L, scale = 10) 
 }
 \arguments{
 \item{pam}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200L}.}

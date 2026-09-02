@@ -5,7 +5,7 @@
 \alias{gnnEx_conditional_entropy}
 \title{H(Y | .) for a predicted distribution}
 \usage{
-gnnEx_conditional_entropy(probs)
+gnnEx_conditional_entropy(probs) 
 }
 \arguments{
 \item{probs}{Coerced to numeric by the body, with \code{as.numeric}.}

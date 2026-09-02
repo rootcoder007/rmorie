@@ -8,6 +8,7 @@ morie_big_binom(n, k)
 }
 \arguments{
 \item{n, k}{Whole numbers.}
+
 }
 \value{
 A \code{morie_bigint}.

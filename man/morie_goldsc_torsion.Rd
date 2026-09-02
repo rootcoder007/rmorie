@@ -5,7 +5,7 @@
 \alias{morie_goldsc_torsion}
 \title{The ligand's internal torsional strain}
 \usage{
-morie_goldsc_torsion(torsions)
+morie_goldsc_torsion(torsions) 
 }
 \arguments{
 \item{torsions}{A list of c(phi, A, n, phi0).}

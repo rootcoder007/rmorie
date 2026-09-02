@@ -5,7 +5,7 @@
 \alias{Rms}
 \title{Eq (3.9): RMS = sqrt((1/N) sum x^2), divisor N.  With a window, the}
 \usage{
-Rms(x, window = NULL)
+Rms(x, window = NULL) 
 }
 \arguments{
 \item{x}{Coerced to numeric by the body, with \code{as.numeric}.}

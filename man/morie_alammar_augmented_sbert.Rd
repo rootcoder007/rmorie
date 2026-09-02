@@ -5,7 +5,7 @@
 \alias{morie_alammar_augmented_sbert}
 \title{morie_alammar_augmented_sbert}
 \usage{
-morie_alammar_augmented_sbert(unlabeled_pairs, cross_encoder, gold_pairs = NULL, gold_labels = NULL)
+morie_alammar_augmented_sbert(unlabeled_pairs, cross_encoder, gold_pairs = NULL, gold_labels = NULL) 
 }
 \arguments{
 \item{unlabeled_pairs}{List of c(a, b).}

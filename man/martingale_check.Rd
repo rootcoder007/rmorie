@@ -5,7 +5,7 @@
 \alias{martingale_check}
 \title{martingale_check}
 \usage{
-martingale_check(D, past, tol = 0.2)
+martingale_check(D, past, tol = 0.2) 
 }
 \arguments{
 \item{D}{Coerced to numeric by the body, with \code{as.numeric}.}

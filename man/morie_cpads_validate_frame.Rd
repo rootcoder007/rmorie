@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_validate_frame}
 \alias{morie_cpads_validate_frame}
-\title{Validate a data frame against the canonical CPADS analysis contract.}
+\title{Validate a data frame against the canonical CPADS analysis contract}
 \usage{
 morie_cpads_validate_frame(frame, strict = TRUE)
 }
@@ -18,7 +18,7 @@ Character vector of missing canonical variable names
 (invisibly when strict and complete).
 }
 \description{
-Validate a data frame against the canonical CPADS analysis contract.
+Validate a data frame against the canonical CPADS analysis contract
 }
 \examples{
 vars <- morie_cpads_contract()$required_variables

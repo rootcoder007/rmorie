@@ -5,7 +5,8 @@
 \alias{morie_rndnet_combine_returns}
 \title{Public: section 2.3, R = R_E + R_I as two value heads. The extrinsic}
 \usage{
-morie_rndnet_combine_returns(reward_ext, reward_int, gamma_ext = 0.999, gamma_int = 0.99, done = NULL)
+morie_rndnet_combine_returns(reward_ext, reward_int, gamma_ext = 0.999, gamma_int = 0.99, 
+    done = NULL) 
 }
 \arguments{
 \item{reward_ext}{Coerced to numeric by the body, with \code{as.numeric}.}

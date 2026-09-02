@@ -5,7 +5,7 @@
 \alias{morie_didfst_group_time_att}
 \title{Callaway-Sant\'Anna ATT(g,t) under staggered adoption}
 \usage{
-morie_didfst_group_time_att(Y, first_treated, comparison = "not-yet-treated")
+morie_didfst_group_time_att(Y, first_treated, comparison = "not-yet-treated") 
 }
 \arguments{
 \item{Y}{Numeric panel (n by T).}

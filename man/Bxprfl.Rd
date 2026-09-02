@@ -40,7 +40,7 @@ zero-frequency property that matters: page 8 requires the band-pass weights
 to SUM TO ZERO, so the filter annihilates a constant and, applied to a
 series with a unit root, returns a stationary one.  Equation (8) makes the
 adjustment additive, a_h = b_h + theta with
-theta = (target - sum_{h=-K}^{K} b_h)/(2K + 1), target 1 for the low-pass
+theta = (target - sum_\{h=-K\}^\{K\} b_h)/(2K + 1), target 1 for the low-pass
 case the paper writes out and target 0 for the band-pass case it states in
 the following paragraph.  Without that adjustment the filter has non-zero
 gain at frequency zero and leaks the trend straight into the "cycle" -- the

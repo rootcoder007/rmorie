@@ -5,7 +5,7 @@
 \alias{CDiff3Tf}
 \title{Eq (3.129).  The factored form is the point: the operator IS a}
 \usage{
-CDiff3Tf(z, T = 1)
+CDiff3Tf(z, T = 1) 
 }
 \arguments{
 \item{z}{Coerced to complex by the body, with \code{as.complex}.}

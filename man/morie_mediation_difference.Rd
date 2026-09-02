@@ -12,6 +12,7 @@ morie_mediation_difference(c, c_prime, a = NULL, b = NULL)
 \item{c_prime}{Direct-effect coefficient, controlling for the mediator.}
 
 \item{a, b}{Optional path coefficients, enabling the identity check.}
+
 }
 \value{
 A list with \code{indirect}, \code{proportion_mediated}, \code{product},

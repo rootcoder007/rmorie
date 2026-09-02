@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Evaluate a Polish-notation expression, right to left.
+#' Evaluate a Polish-notation expression, right to left
 #'
 #' Scanning from the RIGHT, an operand is pushed and an operator pops
 #' exactly its arity; no parentheses and no precedence table are needed. A

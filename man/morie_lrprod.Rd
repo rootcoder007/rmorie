@@ -8,6 +8,7 @@ morie_lrprod(num, den)
 }
 \arguments{
 \item{num, den}{per-observation probabilities under the two hypotheses}
+
 }
 \value{
 list(ratio, p1, logratio, n)

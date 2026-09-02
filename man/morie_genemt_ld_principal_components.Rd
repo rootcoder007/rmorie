@@ -3,9 +3,12 @@
 % the formals.
 \name{morie_genemt_ld_principal_components}
 \alias{morie_genemt_ld_principal_components}
+\alias{morie_genemt}
 \title{morie_genemt_ld_principal_components}
 \usage{
-morie_genemt_ld_principal_components(G, keep = 0.999)
+morie_genemt_ld_principal_components(G, keep = 0.999) 
+
+morie_genemt(G, keep = 0.999) 
 }
 \arguments{
 \item{G}{A matrix; passed to \code{as.matrix}.}

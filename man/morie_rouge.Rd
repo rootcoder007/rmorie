@@ -5,7 +5,7 @@
 \alias{morie_rouge}
 \title{morie_rouge}
 \usage{
-morie_rouge(candidate, reference, variant = "L", n = 1, alpha = 1.2, beta = 1)
+morie_rouge(candidate, reference, variant = "L", n = 1, alpha = 1.2, beta = 1) 
 }
 \arguments{
 \item{candidate}{Passed to \code{morie_rouge_l}.}

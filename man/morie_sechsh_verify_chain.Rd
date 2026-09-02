@@ -5,7 +5,7 @@
 \alias{morie_sechsh_verify_chain}
 \title{Verify a hash-chained audit log}
 \usage{
-morie_sechsh_verify_chain(entries, hashes, key = NULL, genesis = .SECH_GEN)
+morie_sechsh_verify_chain(entries, hashes, key = NULL, genesis = .SECH_GEN) 
 }
 \arguments{
 \item{entries}{List of entries.}

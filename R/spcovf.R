@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Empirical covariance function of a second-order stationary field.
+#' Empirical covariance function of a second-order stationary field
 #'
 #' For a second-order stationary random field the covariance depends on
 #' the lag alone, C(h) = Cov\[Z(s), Z(s+h)\], with C(0) = Var\[Z(s)\] the

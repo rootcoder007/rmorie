@@ -5,7 +5,7 @@
 \alias{numeric_log_jacobian}
 \title{numeric_log_jacobian}
 \usage{
-numeric_log_jacobian(mapfun, z, h = 1e-06)
+numeric_log_jacobian(mapfun, z, h = 1e-06) 
 }
 \arguments{
 \item{mapfun}{Accepted by the signature and not used anywhere in the body.}

@@ -5,7 +5,7 @@
 \alias{morie_scfhop_cheatsheet}
 \title{One-line summary of the scfhop module}
 \usage{
-morie_scfhop_cheatsheet()
+morie_scfhop_cheatsheet() 
 }
 \description{
 One-line summary of the scfhop module

@@ -5,7 +5,7 @@
 \alias{walk}
 \title{walk}
 \usage{
-walk(adj, start, length, p = 1, q = 1, seed = 0, weights = NULL)
+walk(adj, start, length, p = 1, q = 1, seed = 0, weights = NULL) 
 }
 \arguments{
 \item{adj}{Passed to \code{transition_probabilities}.}

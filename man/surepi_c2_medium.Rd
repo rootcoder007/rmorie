@@ -5,7 +5,7 @@
 \alias{surepi_c2_medium}
 \title{surepi_c2_medium}
 \usage{
-surepi_c2_medium(counts, threshold = 3, sigma_floor = 1)
+surepi_c2_medium(counts, threshold = 3, sigma_floor = 1) 
 }
 \arguments{
 \item{counts}{Passed to \code{surepi_ears_detect}.}

@@ -31,7 +31,7 @@ mean update.
 \details{
 Formula: Lambda_i = max(p_i (1 - p_i), 1e-4);
 mu <- 0.7 mu + 0.3 (mu + K (y - p));
-Sigma_{11} = ((K^(-1) + diag(Lambda))^(-1))_{11}.
+Sigma_\{11\} = ((K^(-1) + diag(Lambda))^(-1))_\{11\}.
 }
 \examples{
 Ghosalepgp()

@@ -2,7 +2,7 @@
 % Please edit documentation in R/smplsz.R
 \name{Nsamp}
 \alias{Nsamp}
-\title{Sample size for a stated half-width, with the finite-population step.}
+\title{Sample size for a stated half-width, with the finite-population step}
 \usage{
 Nsamp(e, S, N = Inf, level = 0.95)
 }

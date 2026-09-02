@@ -26,6 +26,7 @@ the same SNPs, coded 0/1.}
 \item{standardize}{Optional \code{c(mean, sd)} for the empirical
 genome-wide standardisation.  Both the raw and standardised
 routes are available.}
+
 }
 \value{
 A list with \code{estimate}, \code{xpehh_unstandardized},

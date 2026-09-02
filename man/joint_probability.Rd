@@ -5,7 +5,7 @@
 \alias{joint_probability}
 \title{joint_probability}
 \usage{
-joint_probability(Pz, Pd_z, Pw_z)
+joint_probability(Pz, Pd_z, Pw_z) 
 }
 \arguments{
 \item{Pz}{Passed to \code{.plsa_joint_probability}.}

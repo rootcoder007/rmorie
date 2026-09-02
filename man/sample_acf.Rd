@@ -5,7 +5,7 @@
 \alias{sample_acf}
 \title{sample_acf}
 \usage{
-sample_acf(x, lags)
+sample_acf(x, lags) 
 }
 \arguments{
 \item{x}{A vector; its length is taken and its elements indexed.}

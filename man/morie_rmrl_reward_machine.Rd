@@ -5,7 +5,7 @@
 \alias{morie_rmrl_reward_machine}
 \title{A simple reward machine <U, u0, delta_u, delta_r> (Defs 3.1-3.2)}
 \usage{
-morie_rmrl_reward_machine(edges, u0 = 0, terminal = c())
+morie_rmrl_reward_machine(edges, u0 = 0, terminal = c()) 
 }
 \arguments{
 \item{edges}{See Usage.}

@@ -5,7 +5,8 @@
 \alias{morie_alf3df_step}
 \title{One step of the sampler, from noise level t down to sigma_next}
 \usage{
-morie_alf3df_step(x, t, score_fn, sigma_next = NULL, gamma = 0, noise_scale = 1, step_scale = 1, order = "heun", e = NULL, augment = FALSE)
+morie_alf3df_step(x, t, score_fn, sigma_next = NULL, gamma = 0, noise_scale = 1, 
+    step_scale = 1, order = "heun", e = NULL, augment = FALSE) 
 }
 \arguments{
 \item{x}{Current coordinates, one row per atom, three columns.}

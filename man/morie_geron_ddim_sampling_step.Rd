@@ -23,6 +23,7 @@ morie_geron_ddim_sampling_step(
 \item{alpha_bar}{Non-increasing schedule in (0, 1].}
 
 \item{clip_x0}{Optional c(lo, hi) clamp on x0.}
+
 }
 \value{
 List with \code{x_prev}, \code{x0_pred}, \code{alpha_bar_t}, \code{alpha_bar_prev},

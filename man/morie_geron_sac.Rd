@@ -25,6 +25,11 @@ returning list(s2, r, done), and integers n_states, n_actions.}
 \item{critic}{Optional initial (n_states, n_actions) Q table; default zeros.}
 
 \item{epochs, lr, alpha, gamma, steps, seed}{As in the Python original.}
+
+
+
+
+
 }
 \value{
 list with policy, Q, V, entropy, returns, estimate, n, method.

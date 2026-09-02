@@ -5,7 +5,7 @@
 \alias{morie_hyper2_slice}
 \title{Neal's univariate slice sampler: stepping out, then shrinkage}
 \usage{
-morie_hyper2_slice(logf, x0, e, w = 1, m = 10L)
+morie_hyper2_slice(logf, x0, e, w = 1, m = 10L) 
 }
 \arguments{
 \item{logf}{The log target.}

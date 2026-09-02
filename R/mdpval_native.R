@@ -55,7 +55,7 @@
 #' index (Sutton & Barto 2018, Sec. 4.4 boxed algorithm, p. 83).
 #'
 #' @param P List of A transition matrices, each (S, S), rows summing
-#'   to 1; \code{P[[a]]\[s, s2\] = P(s2 | s, a)}.
+#'   to 1; \code{P[\[a\]]\[s, s2\] = P(s2 | s, a)}.
 #' @param R Reward: (S, A) matrix of r(s, a), or a list of A (S, S)
 #'   per-transition reward matrices averaged under P.
 #' @param gamma Discount factor.

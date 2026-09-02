@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Best linear unbiased predictor: ordinary kriging.
+#' Best linear unbiased predictor: ordinary kriging
 #'
 #' When the mean is unknown but constant, unbiasedness requires the
 #' weights to sum to one. The constraint is carried by a Lagrange

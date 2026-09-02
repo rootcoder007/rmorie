@@ -12,6 +12,7 @@ morie_serial_mediation(x, m1, m2, y)
 \item{m1, m2}{Ordered mediators.}
 
 \item{y}{Outcome.}
+
 }
 \value{
 List with \code{direct}, \code{via_m1}, \code{via_m2}, \code{serial},
