@@ -222,7 +222,12 @@ morie_sha1 <- function(x, digits = 14L, zapsmall = 7L, ..., algo = "sha1") UseMe
 .morie_sha1_add_attributes <- function(x, y) {
   extra <- attributes(x)
   extra <- extra[names(extra) != "srcref"]
-  attributes(y) <- c(attributes(y), stats::setNames(list(extra), .MORIE_SHA1_ATTRS))
+  # digest does c(attributes(y), "digest::attributes" = extra): c() splices
+  # the list and prefixes each element name with the argument name
+  if (length(extra)) {
+    names(extra) <- paste0(.MORIE_SHA1_ATTRS, ".", names(extra))
+    attributes(y) <- c(attributes(y), extra)
+  }
   y
 }
 #' @noRd
