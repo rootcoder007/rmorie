@@ -16,7 +16,7 @@
 #' fixed cells of the remaining covariates.
 #'
 #' @param x Numeric matrix of covariates, n by d.
-#' @param beta Numeric vector, scale normalised so abs(beta[1]) == 1.
+#' @param beta Numeric vector, scale normalised so abs(beta\[1\]) == 1.
 #' @param ncell Integer; conditioning cells per remaining covariate,
 #'   cut at fixed quantiles.
 #' @param nbin Integer; bins of the range of X_1 used to measure

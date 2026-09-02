@@ -7,7 +7,7 @@
 #' under randomisation and keeps the gain when the baseline association
 #' differs between arms.
 #'
-#' Formula: \code{psi = mean[m_1(V) - m_0(V)]} with influence
+#' Formula: \code{psi = mean\[m_1(V) - m_0(V)\]} with influence
 #' contribution \code{D(y - m1)/pi - (1 - D)(y - m0)/(1 - pi)}.
 #'
 #' @param y Outcome.

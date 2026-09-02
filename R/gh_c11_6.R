@@ -11,7 +11,7 @@
 #' Formula: W(t_i) = sum_{j <= i} Z_j / sqrt(n_grid), Z_j iid N(0, 1);
 #'   Cov(W(s), W(t)) = min(s, t).
 #'
-#' @param n_grid Number of grid steps on [0, 1].
+#' @param n_grid Number of grid steps on \[0, 1\].
 #' @param n_sim Number of simulated paths.
 #' @param seed Seed for the deterministic draws.
 #' @return List with \code{estimate} (empirical covariance),

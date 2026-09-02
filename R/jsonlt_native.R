@@ -1,1092 +1,1529 @@
-# jsonlt -- jsonlite's JSON mapping, implemented natively.
+# jsonlt -- jsonlite's JSON mapping, implemented natively in base R.
 #
-# aaa_helpers_s03.R covers the four functions the package actually called.
-# This is the rest of jsonlite's documented surface, and it exists in both
-# languages so the mapping can be checked by running it rather than by
-# asserting it.
-#
-# The hard part is not brackets and commas. jsonlite is a MAPPING between
-# R's data model and JSON's, and R's model does not fit: there are no
-# scalars, so every length-one value is ambiguous; a data.frame is a list
-# of columns that people want written as an array of rows; NA is neither
-# null nor a number; a factor is an integer vector wearing a string coat.
-# Each of those has a documented, switchable rule here.
+# This is the complete public surface of jsonlite 2.0.0 (toJSON / fromJSON
+# with every option, read_json / write_json / parse_json, prettify / minify /
+# validate, flatten, unbox, serializeJSON / unserializeJSON, base64,
+# stream_in / stream_out, rbind_pages), written so that the bytes match:
+# the encoder reproduces jsonlite's asJSON dispatch and its C helpers
+# (num_to_char / modp_dtoa2, escape_chars, collapse_*), the simplifier
+# reproduces simplify() / simplifyDataFrame() / null_to_na(), and the text
+# tools reproduce yajl's generator. A parity harness runs every option over
+# a corpus of R objects against jsonlite itself and asserts identical
+# output; the codec exists so nothing in the package needs jsonlite at run
+# time.
 #
 # Reference
 #   Ooms, J. (2014) "The jsonlite Package: A Practical and Consistent
 #     Mapping Between JSON Data and R Objects." arXiv:1403.2805.
 #   Bray, T. (ed.) (2017) "The JavaScript Object Notation (JSON) Data
 #     Interchange Format." RFC 8259.
+#   jsonlite 2.0.0 sources (R/ and src/), the executable specification.
 
-# ---------------------------------------------------------------- options
+# ================================================================ numbers
 
-#' .jsonlt_opts
+#' Format doubles and integers the way jsonlite's num_to_char() does
 #'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_opts}, \code{morie_jsonlt_to_json}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param dataframe Carried through into a list the body builds. Defaults to \code{"rows"}.
-#' @param matrix Carried through into a list the body builds. Defaults to \code{"rowmajor"}.
-#' @param Date Carried through into a list the body builds. Defaults to \code{"ISO8601"}.
-#' @param POSIXt Carried through into a list the body builds. Defaults to \code{"string"}.
-#' @param factor Carried through into a list the body builds. Defaults to \code{"string"}.
-#' @param complex Carried through into a list the body builds. Defaults to \code{"string"}.
-#' @param raw Carried through into a list the body builds. Defaults to \code{"base64"}.
-#' @param null Carried through into a list the body builds. Defaults to \code{"list"}.
-#' @param na Carried through into a list the body builds.
-#' @param auto_unbox A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param digits Carried through into a list the body builds. Defaults to \code{4}.
-#' @param force A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return The value of \code{o}, as built in the body.
-#' @export
-.jsonlt_opts <- function(dataframe = "rows", matrix = "rowmajor",
-                         Date = "ISO8601", POSIXt = "string",
-                         factor = "string", complex = "string",
-                         raw = "base64", null = "list", na = NULL,
-                         auto_unbox = FALSE, digits = 4, force = FALSE) {
-  o <- list(dataframe = dataframe, matrix = matrix, Date = Date,
-            POSIXt = POSIXt, factor = factor, complex = complex,
-            raw = raw, null = null, na = na, auto_unbox = isTRUE(auto_unbox),
-            digits = digits, force = isTRUE(force))
-  chk <- function(nm, allowed) {
-    v <- o[[nm]]
-    if (is.null(v)) return(invisible(NULL))
-    if (!(length(v) == 1L && v %in% allowed))
-      stop(sprintf("jsonlt: %s = %s; expected one of %s", nm,
-                   paste(v, collapse = ","),
-                   paste(allowed, collapse = ", ")), call. = FALSE)
-    invisible(NULL)
+#' `digits` is decimal places (jsonlite default 4), `I(n)` means n
+#' significant digits, `NA` means 15 significant digits. Non-finite values
+#' become "NA"/"NaN"/"Inf"/"-Inf" strings, null, or NA_character_
+#' (dropped later) depending on `na_as_string`.
+#' @noRd
+.jsonlt_num_to_char <- function(x, digits = 4, na_as_string = NA,
+                                use_signif = FALSE, always_decimal = FALSE) {
+  n <- length(x)
+  out <- character(n)
+  if (is.integer(x)) {
+    ok <- !is.na(x)
+    out[ok] <- as.character(x[ok])
+    out[!ok] <- if (is.na(na_as_string)) NA_character_
+                else if (na_as_string) "\"NA\"" else "null"
+    return(out)
   }
-  chk("dataframe", c("rows", "columns", "values"))
-  chk("matrix", c("rowmajor", "columnmajor"))
-  chk("Date", c("ISO8601", "epoch"))
-  chk("POSIXt", c("string", "ISO8601", "epoch", "mongo"))
-  chk("factor", c("string", "integer"))
-  chk("complex", c("string", "list"))
-  chk("raw", c("base64", "hex", "int", "mongo"))
-  chk("null", c("list", "null"))
-  chk("na", c("null", "string"))
-  o
-}
-
-# I(n) as a digits argument means n SIGNIFICANT digits, matching
-# jsonlite's digits = I(n). Anything else is decimal places.
-#' I(n) as a digits argument means n SIGNIFICANT digits, matching
-#'
-#' jsonlite\'s digits = I(n). Anything else is decimal places.
-#'
-#' @param digits Passed to \code{inherits}.
-#' @return The value of \code{inherits}.
-#' @export
-.jsonlt_sig <- function(digits) inherits(digits, "AsIs")
-
-# ---------------------------------------------------------------- numbers
-
-# The one place a double becomes text. Both arms go through C's printf
-# with the same format string, so the bytes match; each language's own
-# float-to-string would put them one ulp apart and call it a failure.
-#' The one place a double becomes text. Both arms go through C\'s printf
-#'
-#' with the same format string, so the bytes match; each language\'s own
-#' float-to-string would put them one ulp apart and call it a failure.
-#'
-#' @param x Passed to \code{is.nan}.
-#' @param digits Optional; may be \code{NULL}. Passed to \code{.jsonlt_sig}.
-#' @return The value of \code{.jsonlt_tidy}.
-#' @export
-.jsonlt_num <- function(x, digits) {
-  if (is.nan(x)) return("\"NaN\"")
-  if (is.infinite(x)) return(if (x > 0) "\"Inf\"" else "\"-Inf\"")
-  s <- if (is.null(digits)) sprintf("%.17g", x)
-       else if (.jsonlt_sig(digits)) sprintf("%.*g", max(1L, as.integer(digits)), x)
-       else sprintf("%.*f", max(0L, as.integer(digits)), x)
-  .jsonlt_tidy(s)
-}
-
-#' .jsonlt_tidy
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_num}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param s Compared against \code{"-0"}.
-#' @return The value of \code{s}, as built in the body.
-#' @export
-.jsonlt_tidy <- function(s) {
-  if (grepl("[eE]", s)) {
-    parts <- strsplit(s, "[eE]")[[1]]
-    mant <- parts[1]
-    expo <- parts[2]
-    if (grepl(".", mant, fixed = TRUE))
-      mant <- sub("\\.$", "", sub("0+$", "", mant))
-    sign <- ""
-    if (substr(expo, 1L, 1L) %in% c("+", "-")) {
-      if (substr(expo, 1L, 1L) == "-") sign <- "-"
-      expo <- substring(expo, 2L)
+  # digits = NULL is this codec's own extension: full precision (%.17g), the
+  # setting the package's internal JSON round trips rely on
+  if (is.null(digits)) {
+    digits <- 17L
+    use_signif <- TRUE
+  }
+  precision <- if (is.na(digits)) NA_integer_ else as.integer(digits)
+  sig_digits <- if (isTRUE(use_signif) && !is.na(precision)) ceiling(min(17, precision)) else 0L
+  for (i in seq_len(n)) {
+    val <- x[i]
+    if (!is.finite(val)) {
+      out[i] <- if (is.na(na_as_string)) {
+        NA_character_
+      } else if (na_as_string) {
+        if (is.na(val) && !is.nan(val)) "\"NA\""
+        else if (is.nan(val)) "\"NaN\""
+        else if (val > 0) "\"Inf\"" else "\"-Inf\""
+      } else {
+        "null"
+      }
+      next
     }
-    expo <- sub("^0+", "", expo)
-    if (!nzchar(expo)) expo <- "0"
-    return(paste0(mant, "e", sign, expo))
+    buf <- if (is.na(precision)) {
+      sprintf("%.15g", val)
+    } else if (isTRUE(use_signif)) {
+      sprintf("%.*g", as.integer(sig_digits), val)
+    } else if (precision > -1L && precision < 10L && abs(val) < 2147483647 &&
+               abs(val) > 1e-5) {
+      .jsonlt_dtoa2(val, precision)
+    } else {
+      decimals <- ceiling(min(17, max(1, log10(abs(val))) + precision))
+      sprintf("%.*g", as.integer(decimals), val)
+    }
+    if (isTRUE(always_decimal) && grepl("^[0-9-]+$", buf)) buf <- paste0(buf, ".0")
+    out[i] <- buf
   }
-  if (grepl(".", s, fixed = TRUE))
-    s <- sub("\\.$", "", sub("0+$", "", s))
-  if (s == "-0" || !nzchar(s)) s <- "0"
+  out
+}
+
+# modp_dtoa2(): fixed decimal digits, trailing zeros removed, with its own
+# rounding rule (round half to odd-frac / half-up on rollover). Reproduced
+# step by step so the last digit matches jsonlite's.
+#' @noRd
+.jsonlt_dtoa2 <- function(value, prec) {
+  prec <- max(0L, min(9L, as.integer(prec)))
+  p10 <- 10^prec
+  neg <- value < 0
+  if (neg) value <- -value
+  whole <- trunc(value)
+  tmp <- (value - whole) * p10
+  frac <- trunc(tmp)
+  diff <- tmp - frac
+  if (diff > 0.5) {
+    frac <- frac + 1
+    if (frac >= p10) {
+      frac <- 0
+      whole <- whole + 1
+    }
+  } else if (diff == 0.5 && prec > 0L && (frac %% 2 == 1)) {
+    frac <- frac + 1
+    if (frac >= p10) {
+      frac <- 0
+      whole <- whole + 1
+    }
+  } else if (diff == 0.5 && prec == 0L && (whole %% 2 == 1)) {
+    frac <- frac + 1
+    if (frac >= p10) {
+      frac <- 0
+      whole <- whole + 1
+    }
+  }
+  if (value > 2147483647) return(sprintf("%e", if (neg) -value else value))
+  count <- prec
+  if (prec > 0L) while (count > 0L && (frac %% 10 == 0)) {
+    count <- count - 1L
+    frac <- frac %/% 10
+  }
+  digs <- character(0)
+  while (count > 0L) {
+    count <- count - 1L
+    digs <- c(as.character(frac %% 10), digs)
+    frac <- frac %/% 10
+  }
+  if (frac > 0) whole <- whole + 1
+  s <- sprintf("%.0f", whole)
+  if (length(digs)) s <- paste0(s, ".", paste(digs, collapse = ""))
+  if (neg) s <- paste0("-", s)
   s
 }
 
-# ---------------------------------------------------------------- strings
+# ================================================================ strings
 
-#' .jsonlt_esc
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_df_columns}, \code{.jsonlt_df_rows}, \code{.jsonlt_encode} and 5 others in the module.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param s Character; passed to \code{grepl}.
-#' @return A character value.
-#' @export
-.jsonlt_esc <- function(s) {
-  s <- gsub("\\", "\\\\", s, fixed = TRUE)
-  s <- gsub("\"", "\\\"", s, fixed = TRUE)
-  s <- gsub("\b", "\\b", s, fixed = TRUE)
-  s <- gsub("\f", "\\f", s, fixed = TRUE)
-  s <- gsub("\n", "\\n", s, fixed = TRUE)
-  s <- gsub("\r", "\\r", s, fixed = TRUE)
-  s <- gsub("\t", "\\t", s, fixed = TRUE)
-  # Control characters must be escaped, not passed through. The table
-  # starts at 1: R strings cannot hold a NUL, so there is nothing at 0 to
-  # match and gsub rejects the zero-length pattern it would be given.
+#' Escape a character vector as JSON string literals (jsonlite's C_escape_chars)
+#' @noRd
+.jsonlt_esc <- function(x) {
+  if (!length(x)) return(character(0))
+  x <- enc2utf8(x)
+  x <- gsub("\\", "\\\\", x, fixed = TRUE)
+  x <- gsub("\"", "\\\"", x, fixed = TRUE)
+  x <- gsub("\n", "\\n", x, fixed = TRUE)
+  x <- gsub("\r", "\\r", x, fixed = TRUE)
+  x <- gsub("\t", "\\t", x, fixed = TRUE)
+  x <- gsub("\b", "\\b", x, fixed = TRUE)
+  x <- gsub("\f", "\\f", x, fixed = TRUE)
+  x <- gsub("</", "<\\/", x, fixed = TRUE)
   for (cc in c(1:7, 11L, 14:31)) {
     ch <- rawToChar(as.raw(cc))
-    if (grepl(ch, s, fixed = TRUE))
-      s <- gsub(ch, sprintf("\\u%04x", cc), s, fixed = TRUE)
+    hit <- grepl(ch, x, fixed = TRUE, useBytes = TRUE)
+    if (any(hit)) x[hit] <- gsub(ch, sprintf("\\u%04x", cc), x[hit], fixed = TRUE, useBytes = TRUE)
   }
-  paste0("\"", s, "\"")
+  paste0("\"", x, "\"")
 }
+
+# ================================================================ base64
 
 .JSONLT_B64 <- strsplit(paste0("ABCDEFGHIJKLMNOPQRSTUVWXYZ",
                                "abcdefghijklmnopqrstuvwxyz",
                                "0123456789+/"), "")[[1]]
 
-# Base64 without a library, so both arms produce the same string.
-#' Base64 without a library, so both arms produce the same string
+#' Base64 encode a raw vector or character string
 #'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_raw_enc}, \code{.jsonlt_ser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param data Coerced to integer by the body, with \code{as.integer}.
-#' @return A character value.
+#' @param input raw vector, or character (joined by newlines first).
+#' @return a base64 string; `NA_character_` for `NULL`.
 #' @export
-.jsonlt_b64 <- function(data) {
-  b <- as.integer(data)
+morie_jsonlt_base64_enc <- function(input) {
+  if (is.null(input)) return(NA_character_)
+  if (is.character(input)) input <- charToRaw(paste(input, collapse = "\n"))
+  stopifnot(is.raw(input))
+  b <- as.integer(input)
   n <- length(b)
-  out <- character(0)
-  i <- 1L
-  while (i + 2L <= n) {
-    v <- b[i] * 65536L + b[i + 1L] * 256L + b[i + 2L]
-    out <- c(out, paste0(.JSONLT_B64[bitwAnd(v %/% 262144L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v %/% 4096L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v %/% 64L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v, 63L) + 1L]))
-    i <- i + 3L
+  if (!n) return("")
+  pad <- (3L - n %% 3L) %% 3L
+  b <- c(b, integer(pad))
+  m <- matrix(b, nrow = 3L)
+  v <- m[1L, ] * 65536L + m[2L, ] * 256L + m[3L, ]
+  chars <- rbind(.JSONLT_B64[v %/% 262144L %% 64L + 1L],
+                 .JSONLT_B64[v %/% 4096L %% 64L + 1L],
+                 .JSONLT_B64[v %/% 64L %% 64L + 1L],
+                 .JSONLT_B64[v %% 64L + 1L])
+  out <- paste(as.vector(chars), collapse = "")
+  if (pad) substr(out, nchar(out) - pad + 1L, nchar(out)) <- strrep("=", pad)
+  # jsonlite's encoder breaks lines every 72 characters
+  if (nchar(out) > 72L) {
+    starts <- seq(1L, nchar(out), by = 72L)
+    out <- paste(substring(out, starts, pmin(starts + 71L, nchar(out))), collapse = "\n")
   }
-  rem <- n - i + 1L
-  if (rem == 1L) {
-    v <- b[i] * 65536L
-    out <- c(out, paste0(.JSONLT_B64[bitwAnd(v %/% 262144L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v %/% 4096L, 63L) + 1L], "=="))
-  } else if (rem == 2L) {
-    v <- b[i] * 65536L + b[i + 1L] * 256L
-    out <- c(out, paste0(.JSONLT_B64[bitwAnd(v %/% 262144L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v %/% 4096L, 63L) + 1L],
-                         .JSONLT_B64[bitwAnd(v %/% 64L, 63L) + 1L], "="))
-  }
-  paste(out, collapse = "")
+  out
 }
 
-#' .jsonlt_unb64
+#' Base64 decode to a raw vector
 #'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_unser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param s Character; passed to \code{gsub}.
-#' @return The value of \code{as.raw}.
+#' @param input base64 text (character, joined by newlines) or raw.
+#' @return a raw vector.
 #' @export
-.jsonlt_unb64 <- function(s) {
-  ch <- strsplit(gsub("[[:space:]=]", "", s), "")[[1]]
-  acc <- 0
-  bits <- 0L
+morie_jsonlt_base64_dec <- function(input) {
+  if (is.character(input)) input <- charToRaw(paste(input, collapse = "\n"))
+  stopifnot(is.raw(input))
+  s <- rawToChar(input)
+  ch <- strsplit(gsub("[^A-Za-z0-9+/]", "", s), "")[[1]]
+  if (!length(ch)) return(raw(0))
+  v <- match(ch, .JSONLT_B64) - 1L
+  if (anyNA(v)) stop("Error in base64 decode", call. = FALSE)
+  nfull <- length(v) %/% 4L
+  rem <- length(v) %% 4L
   out <- integer(0)
-  for (c0 in ch) {
-    acc <- acc * 64 + (match(c0, .JSONLT_B64) - 1L)
-    bits <- bits + 6L
-    if (bits >= 8L) {
-      bits <- bits - 8L
-      out <- c(out, bitwAnd(as.integer(acc %/% (2^bits)), 255L))
-      acc <- acc %% (2^bits)
-    }
+  if (nfull) {
+    m <- matrix(v[seq_len(nfull * 4L)], nrow = 4L)
+    w <- m[1L, ] * 262144L + m[2L, ] * 4096L + m[3L, ] * 64L + m[4L, ]
+    out <- as.vector(rbind(w %/% 65536L, w %/% 256L %% 256L, w %% 256L))
+  }
+  if (rem == 2L) {
+    w <- v[nfull * 4L + 1L] * 262144L + v[nfull * 4L + 2L] * 4096L
+    out <- c(out, w %/% 65536L)
+  } else if (rem == 3L) {
+    w <- v[nfull * 4L + 1L] * 262144L + v[nfull * 4L + 2L] * 4096L + v[nfull * 4L + 3L] * 64L
+    out <- c(out, w %/% 65536L, w %/% 256L %% 256L)
   }
   as.raw(out)
 }
 
-# as.data.frame() flattens a nested data.frame column into outer.inner
-# columns. That is morie_jsonlt_flatten's job, opt-in, and doing it here
-# would make a nested structure impossible to represent at all.
-#' As.data.frame() flattens a nested data.frame column into outer.inner
-#'
-#' columns. That is morie_jsonlt_flatten\'s job, opt-in, and doing it
-#' here would make a nested structure impossible to represent at all.
-#'
-#' @param cols A vector; its length is taken and its elements indexed.
-#' @param nms See Usage.
-#' @return The value of \code{structure}.
+#' @rdname morie_jsonlt_base64_enc
 #' @export
-.jsonlt_df <- function(cols, nms) {
-  names(cols) <- nms
-  n <- if (length(cols)) NROW(cols[[1]]) else 0L
-  structure(cols, class = "data.frame", row.names = seq_len(n))
+morie_jsonlt_base64url_enc <- function(input) {
+  sub("=+$", "", chartr("+/", "-_", morie_jsonlt_base64_enc(input)))
 }
 
-# ---------------------------------------------------------------- encoder
-
-#' .jsonlt_na_token
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \code{.jsonlt_cell}, \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param o A list; the body reads \code{$na} from it.
-#' @return One of two values, depending on the branch taken.
+#' @rdname morie_jsonlt_base64_dec
 #' @export
-.jsonlt_na_token <- function(o) if (identical(o$na, "string")) "\"NA\"" else "null"
-
-.JSONLT_EPOCH <- as.Date("1970-01-01")
-
-#' .jsonlt_posix
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_scalar}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param v Coerced to numeric by the body, with \code{as.numeric}.
-#' @param o A list; the body reads \code{$digits}, \code{$POSIXt} from it.
-#' @return The value of \code{.jsonlt_esc}.
-#' @export
-.jsonlt_posix <- function(v, o) {
-  ms <- as.numeric(v) * 1000
-  if (identical(o$POSIXt, "epoch")) return(.jsonlt_num(ms, o$digits))
-  if (identical(o$POSIXt, "mongo"))
-    return(paste0("{\"$date\":", .jsonlt_num(ms, o$digits), "}"))
-  fmt <- if (identical(o$POSIXt, "ISO8601")) "%Y-%m-%dT%H:%M:%SZ"
-         else "%Y-%m-%d %H:%M:%S"
-  .jsonlt_esc(format(v, fmt, tz = "UTC"))
+morie_jsonlt_base64url_dec <- function(input) {
+  text <- gsub("[\r\n]", "", chartr("-_", "+/", input))[[1]]
+  mod <- nchar(text) %% 4L
+  if (mod > 0L) text <- paste0(text, strrep("=", 4L - mod))
+  morie_jsonlt_base64_dec(text)
 }
 
-# One element of an atomic vector, already known to be non-NA.
-#' One element of an atomic vector, already known to be non-NA
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_atomic}, \code{.jsonlt_cell}, \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param v A flag; the body branches on it.
-#' @param o A list; the body reads \code{$Date}, \code{$digits} from it.
-#' @return The value of \code{.jsonlt_esc}.
-#' @export
-.jsonlt_scalar <- function(v, o) {
-  if (inherits(v, "POSIXt")) return(.jsonlt_posix(v, o))
-  if (inherits(v, "Date")) {
-    if (identical(o$Date, "epoch"))
-      return(.jsonlt_num(as.numeric(v), o$digits))
-    return(.jsonlt_esc(format(v, "%Y-%m-%d")))
+# ================================================================ collapse
+
+# jsonlite's C collapse helpers. `indent` is NA for compact output, else an
+# integer with attribute indent_spaces (negative = tabs).
+#' @noRd
+.jsonlt_indent_init <- function(pretty) {
+  if (isTRUE(pretty)) pretty <- 2L
+  if (is.numeric(pretty)) {
+    stopifnot(abs(pretty) < 20)
+    structure(0L, indent_spaces = as.integer(pretty))
+  } else {
+    NA_integer_
   }
-  if (is.logical(v)) return(if (v) "true" else "false")
-  if (is.complex(v)) {
-    re <- .jsonlt_num(Re(v), o$digits)
-    im <- .jsonlt_num(abs(Im(v)), o$digits)
-    return(.jsonlt_esc(paste0(re, if (Im(v) < 0) "-" else "+", im, "i")))
+}
+#' @noRd
+.jsonlt_indent_inc <- function(indent) {
+  sp <- attr(indent, "indent_spaces")
+  if (length(sp)) structure(indent + abs(sp), indent_spaces = sp) else NA_integer_
+}
+#' @noRd
+.jsonlt_ws <- function(n, indent) {
+  sp <- attr(indent, "indent_spaces")
+  strrep(if (length(sp) && sp < 0) "\t" else " ", n)
+}
+#' @noRd
+.jsonlt_collapse <- function(x, inner = TRUE, indent = NA_integer_) {
+  if (is.na(indent)) return(paste0("[", paste(x, collapse = ","), "]"))
+  if (isTRUE(inner)) return(paste0("[", paste(x, collapse = ", "), "]"))
+  if (!length(x)) return("[]")
+  ni <- as.integer(indent)
+  sp <- abs(attr(indent, "indent_spaces"))
+  paste0("[\n", paste0(.jsonlt_ws(ni + sp, indent), x, collapse = ",\n"),
+         "\n", .jsonlt_ws(ni, indent), "]")
+}
+#' @noRd
+.jsonlt_collapse_object <- function(keys, vals, indent = NA_integer_) {
+  keep <- !is.na(vals)
+  keys <- keys[keep]
+  vals <- vals[keep]
+  if (!length(vals)) return("{}")
+  if (is.na(indent)) return(paste0("{", paste0(keys, ":", vals, collapse = ","), "}"))
+  if (!length(vals)) return("{}")
+  ni <- as.integer(indent)
+  sp <- abs(attr(indent, "indent_spaces"))
+  paste0("{\n", paste0(.jsonlt_ws(ni + sp, indent), keys, ": ", vals, collapse = ",\n"),
+         "\n", .jsonlt_ws(ni, indent), "}")
+}
+#' @noRd
+.jsonlt_row_collapse <- function(m, indent = NA_integer_) {
+  vapply(seq_len(nrow(m)), function(i) .jsonlt_collapse(m[i, ], inner = TRUE, indent = indent),
+         character(1))
+}
+#' @noRd
+.jsonlt_row_collapse_object <- function(keys, m, indent = NA_integer_) {
+  vapply(seq_len(nrow(m)), function(i) .jsonlt_collapse_object(keys, m[i, ], indent),
+         character(1))
+}
+#' @noRd
+.jsonlt_cleannames <- function(nms, no_dots = FALSE) {
+  nms[nms == ""] <- NA_character_
+  miss <- is.na(nms)
+  nms[miss] <- as.character(seq_along(nms))[miss]
+  if (isTRUE(no_dots)) nms <- gsub(".", "_", nms, fixed = TRUE)
+  make.unique(nms)
+}
+
+# ================================================================ encoder
+
+# The encoder is jsonlite's asJSON generic, one branch per class, with the
+# same argument threading (na / oldna / collapse / auto_unbox / indent).
+#' @noRd
+.jsonlt_as <- function(x, o, collapse = TRUE, na = NULL, oldna = NULL,
+                       auto_unbox = o$auto_unbox, indent = o$indent,
+                       is_df = FALSE, keep_vec_names = o$keep_vec_names) {
+  cls <- class(x)
+  if (inherits(x, "scalar")) {
+    y <- x
+    if (length(cls) > 1L) class(y) <- cls[-1L] else y <- unclass(y)
+    return(.jsonlt_as(y, o, collapse = FALSE, na = na, oldna = oldna,
+                      auto_unbox = auto_unbox, indent = indent))
   }
-  if (is.integer(v)) return(sprintf("%d", v))
-  if (is.numeric(v)) return(.jsonlt_num(as.numeric(v), o$digits))
-  .jsonlt_esc(as.character(v))
-}
-
-#' .jsonlt_atomic
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}, \code{.jsonlt_ser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x A vector; its length is taken and its elements indexed.
-#' @param o A list; the body reads \code{$auto_unbox}, \code{$complex}, \code{$digits} from it.
-#' @param unbox_ok Passed to \code{&&}.
-#' @return A character value.
-#' @export
-.jsonlt_atomic <- function(x, o, unbox_ok) {
-  if (is.complex(x) && identical(o$complex, "list"))
-    return(paste0("{\"r\":", .jsonlt_atomic(Re(x), o, FALSE),
-                  ",\"i\":", .jsonlt_atomic(Im(x), o, FALSE), "}"))
-  n <- length(x)
-  parts <- character(n)
-  for (i in seq_len(n)) {
-    # NaN is a number, not a missing value. R's is.na() answers TRUE for
-    # it, so this has to ask the narrower question first or every NaN
-    # leaves as null.
-    parts[i] <- if (is.numeric(x[i]) && is.nan(x[i]))
-                  .jsonlt_num(as.numeric(x[i]), o$digits)
-                else if (is.na(x[i])) .jsonlt_na_token(o)
-                else .jsonlt_scalar(x[i], o)
-  }
-  if (n == 1L && unbox_ok && o$auto_unbox) return(parts[1])
-  paste0("[", paste(parts, collapse = ","), "]")
-}
-
-#' .jsonlt_raw_enc
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param rv Passed to \code{.jsonlt_b64}.
-#' @param o A list; the body reads \code{$raw} from it.
-#' @return The value of \code{.jsonlt_esc}.
-#' @export
-.jsonlt_raw_enc <- function(rv, o) {
-  if (identical(o$raw, "int"))
-    return(paste0("[", paste(sprintf("%d", as.integer(rv)), collapse = ","), "]"))
-  if (identical(o$raw, "hex"))
-    return(.jsonlt_esc(paste(sprintf("%02x", as.integer(rv)), collapse = "")))
-  if (identical(o$raw, "mongo"))
-    return(paste0("{\"$binary\":", .jsonlt_esc(.jsonlt_b64(rv)),
-                  ",\"$type\":\"00\"}"))
-  .jsonlt_esc(.jsonlt_b64(rv))
-}
-
-# One data.frame cell. NULL means "leave this field out", which is what
-# jsonlite does for NA inside rows when na is unset.
-#' One data.frame cell. NULL means "leave this field out", which is what
-#'
-#' jsonlite does for NA inside rows when na is unset.
-#'
-#' @param col A matrix; indexed by row and column.
-#' @param i See Usage.
-#' @param o A list; the body reads \code{$factor}, \code{$na} from it.
-#' @return The value of \code{.jsonlt_scalar}.
-#' @export
-.jsonlt_cell <- function(col, i, o) {
-  if (is.data.frame(col)) return(.jsonlt_df_rows(col[i, , drop = FALSE], o))
-  if (is.matrix(col)) return(.jsonlt_atomic(as.vector(col[i, ]), o, FALSE))
-  if (is.factor(col)) {
-    v <- if (identical(o$factor, "integer")) as.integer(col)[i]
-         else as.character(col)[i]
-    if (is.na(v) && is.null(o$na)) return(NULL)
-    return(if (is.na(v)) .jsonlt_na_token(o) else .jsonlt_scalar(v, o))
-  }
-  if (is.raw(col)) return(.jsonlt_raw_enc(col[i], o))
-  if (is.list(col)) return(.jsonlt_encode(col[[i]], o, TRUE))
-  v <- col[i]
-  if (is.na(v) && is.null(o$na)) return(NULL)
-  if (is.na(v)) return(.jsonlt_na_token(o))
-  .jsonlt_scalar(v, o)
-}
-
-#' .jsonlt_df_rows
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param df A matrix; passed to \code{nrow}.
-#' @param o Passed to \code{.jsonlt_cell}.
-#' @return A character value.
-#' @export
-.jsonlt_df_rows <- function(df, o) {
-  nm <- names(df)
-  rows <- character(nrow(df))
-  for (i in seq_len(nrow(df))) {
-    parts <- character(0)
-    for (j in seq_along(nm)) {
-      cell <- .jsonlt_cell(df[[j]], i, o)
-      if (is.null(cell)) next
-      parts <- c(parts, paste0(.jsonlt_esc(nm[j]), ":", cell))
-    }
-    rows[i] <- paste0("{", paste(parts, collapse = ","), "}")
-  }
-  paste0("[", paste(rows, collapse = ","), "]")
-}
-
-#' .jsonlt_df_columns
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param df A vector; indexed elementwise.
-#' @param o Passed to \code{.jsonlt_encode}.
-#' @return A character value.
-#' @export
-.jsonlt_df_columns <- function(df, o) {
-  nm <- names(df)
-  parts <- vapply(seq_along(nm), function(j)
-    paste0(.jsonlt_esc(nm[j]), ":", .jsonlt_encode(df[[j]], o, FALSE)),
-    character(1))
-  paste0("{", paste(parts, collapse = ","), "}")
-}
-
-#' .jsonlt_df_values
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_encode}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param df A matrix; passed to \code{nrow}.
-#' @param o Passed to \code{.jsonlt_cell}.
-#' @return A character value.
-#' @export
-.jsonlt_df_values <- function(df, o) {
-  rows <- character(nrow(df))
-  for (i in seq_len(nrow(df))) {
-    parts <- vapply(seq_along(df), function(j) {
-      cell <- .jsonlt_cell(df[[j]], i, o)
-      if (is.null(cell)) "null" else cell
-    }, character(1))
-    rows[i] <- paste0("[", paste(parts, collapse = ","), "]")
-  }
-  paste0("[", paste(rows, collapse = ","), "]")
-}
-
-#' .jsonlt_encode
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_cell}, \code{.jsonlt_df_columns}, \code{morie_jsonlt_to_json}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x Optional; may be \code{NULL}. A matrix; indexed by row and column.
-#' @param o A list; the body reads \code{$dataframe}, \code{$factor}, \code{$force}, \code{$matrix}, \code{$null} from it.
-#' @param unbox_ok Passed to \code{.jsonlt_atomic}.
-#' @return Nothing; this branch always raises.
-#' @export
-.jsonlt_encode <- function(x, o, unbox_ok) {
-  if (is.null(x)) return(if (identical(o$null, "list")) "{}" else "null")
-  if (inherits(x, "jsonlt_scalar")) {
-    v <- unclass(x)
-    return(if (is.na(v)) .jsonlt_na_token(o) else .jsonlt_scalar(v, o))
+  if (inherits(x, "json")) {
+    if (isTRUE(o$json_verbatim)) return(as.character(x))
+    return(.jsonlt_as(as.character(x), o, collapse, na, oldna, auto_unbox, indent))
   }
   if (inherits(x, "AsIs") && !is.data.frame(x)) {
-    y <- x
-    class(y) <- setdiff(class(y), "AsIs")
-    if (is.atomic(y)) return(.jsonlt_atomic(y, o, FALSE))
-    return(.jsonlt_encode(y, o, FALSE))
+    class(x) <- setdiff(cls, "AsIs")
+    if (is.atomic(x) && length(x) == 1L) auto_unbox <- FALSE
+    return(.jsonlt_as(x, o, collapse, na, oldna, auto_unbox, indent))
   }
-  if (is.data.frame(x)) {
-    if (identical(o$dataframe, "columns")) return(.jsonlt_df_columns(x, o))
-    if (identical(o$dataframe, "values")) return(.jsonlt_df_values(x, o))
-    return(.jsonlt_df_rows(x, o))
-  }
-  if (is.matrix(x)) {
-    if (identical(o$matrix, "columnmajor"))
-      return(paste0("[", paste(vapply(seq_len(ncol(x)), function(j)
-        .jsonlt_atomic(as.vector(x[, j]), o, FALSE), character(1)),
-        collapse = ","), "]"))
-    return(paste0("[", paste(vapply(seq_len(nrow(x)), function(i)
-      .jsonlt_atomic(as.vector(x[i, ]), o, FALSE), character(1)),
-      collapse = ","), "]"))
-  }
+  if (is.data.frame(x))
+    return(.jsonlt_as_df(x, o, collapse, na, oldna, indent, keep_vec_names))
   if (is.factor(x)) {
     if (identical(o$factor, "integer"))
-      return(.jsonlt_atomic(as.integer(x), o, unbox_ok))
-    return(.jsonlt_atomic(as.character(x), o, unbox_ok))
+      return(.jsonlt_as(unclass(x), o, collapse, na, oldna, auto_unbox, indent))
+    xc <- as.character(x)
+    if (isTRUE(keep_vec_names)) names(xc) <- names(x)
+    return(.jsonlt_as(xc, o, collapse, na, oldna, auto_unbox, indent, keep_vec_names = keep_vec_names))
   }
-  if (is.raw(x)) return(.jsonlt_raw_enc(x, o))
-  if (is.list(x)) {
-    nm <- names(x)
-    if (!is.null(nm)) {
-      parts <- vapply(seq_along(x), function(i)
-        paste0(.jsonlt_esc(nm[i]), ":", .jsonlt_encode(x[[i]], o, TRUE)),
-        character(1))
-      return(paste0("{", paste(parts, collapse = ","), "}"))
+  if (inherits(x, "Date")) {
+    out <- if (identical(o$Date, "epoch")) unclass(x) else format(x)
+    return(.jsonlt_as(out, o, collapse, na, oldna, auto_unbox, indent))
+  }
+  if (inherits(x, "POSIXt")) {
+    if (identical(o$POSIXt, "mongo")) {
+      if (inherits(x, "POSIXlt")) x <- as.POSIXct(x)
+      df <- data.frame("$date" = floor(unclass(x) * 1000), check.names = FALSE)
+      o2 <- o
+      o2$digits <- NA
+      o2$always_decimal <- FALSE
+      tmp <- .jsonlt_as(df, o2, collapse = FALSE, na = na, oldna = oldna, indent = indent)
+      tmp[is.na(x)] <- .jsonlt_as(NA_character_, o, collapse = FALSE, na = na)
+      return(if (isTRUE(collapse)) .jsonlt_collapse(tmp, inner = FALSE, indent = indent) else tmp)
     }
-    if (!length(x)) return("[]")
-    parts <- vapply(seq_along(x), function(i)
-      .jsonlt_encode(x[[i]], o, TRUE), character(1))
-    return(paste0("[", paste(parts, collapse = ","), "]"))
+    if (identical(o$POSIXt, "epoch")) {
+      o2 <- o
+      o2$always_decimal <- FALSE
+      return(.jsonlt_as(floor(unclass(as.POSIXct(x)) * 1000), o2, collapse, na, oldna, auto_unbox, indent))
+    }
+    fmt <- o$time_format
+    if (is.null(fmt)) fmt <- if (identical(o$POSIXt, "string")) "" else if (isTRUE(o$UTC)) "%Y-%m-%dT%H:%M:%SZ" else "%Y-%m-%dT%H:%M:%S"
+    s <- if (isTRUE(o$UTC)) format(x, format = fmt, tz = "UTC") else format(x, format = fmt)
+    return(.jsonlt_as(s, o, collapse, na, oldna, auto_unbox, indent))
   }
-  if (is.atomic(x)) return(.jsonlt_atomic(x, o, unbox_ok))
-  if (o$force) return(.jsonlt_esc(paste(format(x), collapse = " ")))
-  stop(sprintf("jsonlt: no JSON mapping for class %s; pass force = TRUE to ",
-               paste(class(x), collapse = "/")),
-       "write it as a string", call. = FALSE)
+  if (inherits(x, "ts")) return(.jsonlt_as(as.vector(x), o, collapse, na, oldna, auto_unbox, indent))
+  if (inherits(x, "hms")) {
+    out <- if (identical(o$hms, "secs")) as.numeric(x, units = "secs") else as.character(x)
+    out[is.na(x)] <- NA
+    return(.jsonlt_as(out, o, collapse, na, oldna, auto_unbox, indent))
+  }
+  if (inherits(x, "blob")) {
+    if (identical(o$raw, "base64")) {
+      str <- vapply(x, morie_jsonlt_base64_enc, character(1))
+      return(.jsonlt_as(str, o, collapse, na, oldna, auto_unbox, indent))
+    }
+    return(.jsonlt_as(as.list(x), o, collapse, na, oldna, auto_unbox, indent))
+  }
+  if (is.null(x)) return(if (identical(o$null, "null")) "null" else "{}")
+  # base storage types (after S3 classes, the way jsonlite's S4 dispatch falls
+  # through to the implicit class)
+  if (is.raw(x)) return(.jsonlt_as_raw(x, o, collapse, na, oldna, auto_unbox, indent))
+  if (is.matrix(x) || (is.array(x) && length(dim(x)) >= 2L))
+    return(.jsonlt_as_array(x, o, collapse, na, oldna, auto_unbox, indent, keep_vec_names))
+  if (is.list(x) || is.pairlist(x))
+    return(.jsonlt_as_list(x, o, collapse, na, oldna, auto_unbox, indent, is_df))
+  if (is.character(x)) return(.jsonlt_as_chr(x, o, collapse, na, auto_unbox, indent, keep_vec_names))
+  if (is.logical(x)) return(.jsonlt_as_lgl(x, o, collapse, na, auto_unbox, indent, keep_vec_names))
+  if (is.complex(x)) return(.jsonlt_as_cplx(x, o, collapse, na, oldna, auto_unbox, indent))
+  if (is.numeric(x)) return(.jsonlt_as_num(x, o, collapse, na, auto_unbox, indent, keep_vec_names))
+  if (length(cls) > 1L) {
+    class(x) <- cls[-1L]
+    return(.jsonlt_as(x, o, collapse, na, oldna, auto_unbox, indent))
+  }
+  if (isS4(x)) {
+    if (isTRUE(o$force)) return(.jsonlt_as(attributes(x), o, collapse, na, oldna, auto_unbox, indent))
+    stop("No method for S4 class:", cls, call. = FALSE)
+  }
+  if (isTRUE(o$force)) {
+    y <- unclass(x)
+    if (is.atomic(y) || is.list(y) || is.null(y))
+      return(.jsonlt_as(y, o, collapse, na, oldna, auto_unbox, indent))
+    return(.jsonlt_as(NULL, o))
+  }
+  stop("No method asJSON S3 class: ", cls, call. = FALSE)
 }
 
-#' Serialise an R object to JSON
+#' @noRd
+.jsonlt_as_num <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
+  if (isTRUE(keep_vec_names) && length(names(x))) {
+    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
+  }
+  na <- if (is.null(na)) "string" else match.arg(na, c("string", "null", "NA"))
+  nas <- switch(na, string = TRUE, null = FALSE, "NA" = NA)
+  if (!is.null(attr(x, "dim")) && length(dim(x)) < 2L) x <- c(x)
+  tmp <- .jsonlt_num_to_char(x, o$digits, nas, o$use_signif, o$always_decimal)
+  if (isTRUE(auto_unbox) && length(tmp) == 1L) return(tmp)
+  if (collapse) .jsonlt_collapse(tmp, indent = indent) else tmp
+}
+#' @noRd
+.jsonlt_as_chr <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
+  if (isTRUE(keep_vec_names) && length(names(x))) {
+    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
+  }
+  tmp <- .jsonlt_esc(as.character(x))
+  miss <- which(is.na(x))
+  if (length(miss)) {
+    na <- if (is.null(na)) "null" else match.arg(na, c("null", "string", "NA"))
+    tmp[miss] <- if (na == "null") "null" else if (na == "string") "\"NA\"" else NA_character_
+  }
+  if (isTRUE(auto_unbox) && length(tmp) == 1L) return(tmp)
+  if (isTRUE(collapse)) .jsonlt_collapse(tmp, indent = indent) else tmp
+}
+#' @noRd
+.jsonlt_as_lgl <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
+  if (isTRUE(keep_vec_names) && length(names(x))) {
+    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
+  }
+  na <- if (is.null(na)) "null" else match.arg(na, c("null", "string", "NA"))
+  tmp <- ifelse(x, "true", "false")
+  if (!identical(na, "NA")) {
+    miss <- which(is.na(x))
+    if (length(miss)) tmp[miss] <- if (identical(na, "string")) "\"NA\"" else "null"
+  }
+  if (!is.character(tmp)) tmp <- as.character(tmp)
+  if (isTRUE(auto_unbox) && length(tmp) == 1L) return(tmp)
+  if (collapse) .jsonlt_collapse(tmp, indent = indent) else tmp
+}
+#' @noRd
+.jsonlt_as_cplx <- function(x, o, collapse, na, oldna, auto_unbox, indent) {
+  na <- if (is.null(na)) "string" else match.arg(na, c("string", "null", "NA"))
+  if (identical(o$complex, "string")) {
+    mystring <- prettyNum(x = x, digits = if (is.null(o$digits)) 5 else o$digits)
+    miss <- which(!is.finite(x))
+    if (length(miss) && na %in% c("null", "NA")) mystring[miss] <- NA_character_
+    return(.jsonlt_as_chr(mystring, o, collapse, na, auto_unbox, indent, FALSE))
+  }
+  if (na == "NA") na <- oldna
+  .jsonlt_as(list(real = Re(x), imaginary = Im(x)), o, collapse, na = na, oldna = oldna,
+             auto_unbox = auto_unbox, indent = indent)
+}
+#' @noRd
+.jsonlt_as_raw <- function(x, o, collapse, na, oldna, auto_unbox, indent) {
+  raw <- o$raw
+  if (raw == "mongo") {
+    type <- if (length(attr(x, "type"))) attr(x, "type") else 5
+    return(.jsonlt_as(list(`$binary` = morie_jsonlt_unbox(morie_jsonlt_base64_enc(x)),
+                           `$type` = morie_jsonlt_unbox(as.character(type))), o))
+  }
+  if (raw == "hex") return(.jsonlt_as(format(as.hexmode(as.integer(x)), width = 2L), o, collapse, na, oldna, auto_unbox, indent))
+  if (raw == "int") return(.jsonlt_as(as.integer(x), o, collapse, na, oldna, auto_unbox, indent))
+  if (raw == "js") return(paste0("(new Uint8Array(", .jsonlt_as(as.integer(x), o, collapse = TRUE), "))"))
+  .jsonlt_as(morie_jsonlt_base64_enc(x), o, collapse, na, oldna, auto_unbox, indent)
+}
+#' @noRd
+.jsonlt_as_array <- function(x, o, collapse, na, oldna, auto_unbox, indent, keep_vec_names) {
+  if (identical(na, "NA")) na <- oldna
+  if (length(dim(x)) < 2L)
+    return(.jsonlt_as(c(x), o, collapse, na = na, indent = .jsonlt_indent_inc(indent)))
+  columnmajor <- identical(o$matrix, "columnmajor")
+  if (columnmajor && !collapse)
+    return(apply(x, 1L, function(r) .jsonlt_as(r, o, na = na, indent = .jsonlt_indent_inc(indent))))
+  m <- .jsonlt_as(c(x), o, collapse = FALSE, na = na, auto_unbox = FALSE)
+  dim(m) <- dim(x)
+  tmp <- if (length(dim(x)) == 2L && !columnmajor) {
+    .jsonlt_row_collapse(m, indent = .jsonlt_indent_inc(indent))
+  } else {
+    .jsonlt_collapse_array(m, columnmajor = columnmajor, indent = indent)
+  }
+  if (collapse) .jsonlt_collapse(tmp, inner = FALSE, indent = indent) else tmp
+}
+#' @noRd
+.jsonlt_collapse_array <- function(x, columnmajor = FALSE, indent) {
+  n <- length(dim(x))
+  dims <- 1:(n - 1) + as.numeric(columnmajor)
+  x <- apply(x, dims, .jsonlt_collapse, inner = TRUE, indent = indent)
+  for (i in rev(seq_along(dim(x)))[-1]) {
+    dims <- 1:(length(dim(x)) - 1) + as.numeric(columnmajor)
+    inc <- .jsonlt_indent_inc(indent)
+    ind <- if (is.na(inc)) inc else structure(as.integer(inc) * i, indent_spaces = attr(inc, "indent_spaces"))
+    x <- apply(x, dims, .jsonlt_collapse, inner = FALSE, indent = ind)
+  }
+  x
+}
+#' @noRd
+.jsonlt_as_list <- function(x, o, collapse, na, oldna, auto_unbox, indent, is_df) {
+  if (identical(na, "NA")) na <- oldna
+  if (is.pairlist(x)) x <- as.vector(x, mode = "list")
+  inc <- .jsonlt_indent_inc(indent)
+  tmp <- if (is_df && auto_unbox) {
+    vapply(x, function(y) .jsonlt_as(y, o, na = na, oldna = oldna, auto_unbox = is.list(y), indent = inc), character(1))
+  } else {
+    vapply(x, function(y) .jsonlt_as(y, o, na = na, oldna = oldna, auto_unbox = auto_unbox, indent = inc), character(1))
+  }
+  if (!is.null(names(x))) {
+    keys <- .jsonlt_esc(.jsonlt_cleannames(names(x), o$no_dots))
+    return(.jsonlt_collapse_object(keys, unname(tmp), indent))
+  }
+  if (collapse) .jsonlt_collapse(unname(tmp), inner = FALSE, indent = indent) else unname(tmp)
+}
+#' @noRd
+.jsonlt_as_df <- function(x, o, collapse, na, oldna, indent, keep_vec_names) {
+  dataframe <- o$dataframe
+  has_names <- identical(length(names(x)), ncol(x))
+  rn <- attr(x, "row.names")
+  if (isTRUE(o$rownames) || (is.null(o$rownames) && is.character(rn) && !all(grepl("^\\d+$", rn)))) {
+    if (has_names) x[["_row"]] <- rn
+  }
+  for (i in which(vapply(x, function(c) isTRUE(is.list(c) && !is.data.frame(c) && !is.null(names(c))), logical(1))))
+    x[[i]] <- unname(x[[i]])
+  for (i in which(vapply(x, inherits, logical(1), "POSIXlt"))) x[[i]] <- as.POSIXct(x[[i]])
+  if (dataframe == "columns")
+    return(.jsonlt_as_list(as.list(x), o, collapse = TRUE, na = na, oldna = oldna,
+                           auto_unbox = o$auto_unbox, indent = indent, is_df = TRUE))
+  if (is.null(na) || !length(na) || identical(na, "NA")) oldna <- NULL else oldna <- na
+  if (dataframe == "rows" && has_names) na <- if (is.null(na)) "NA" else match.arg(na, c("NA", "null", "string"))
+  if (!nrow(x)) return(.jsonlt_as(list(), o, collapse = collapse, indent = indent))
+  for (i in which(vapply(x, is.raw, logical(1)))) x[[i]] <- format(as.hexmode(as.integer(x[[i]])), width = 2L)
+  if (identical(o$complex, "list"))
+    for (i in which(vapply(x, is.complex, logical(1))))
+      x[[i]] <- data.frame(real = Re(x[[i]]), imaginary = Im(x[[i]]))
+  dfnames <- .jsonlt_esc(.jsonlt_cleannames(names(x), o$no_dots))
+  inc <- .jsonlt_indent_inc(indent)
+  cols <- lapply(x, function(col) {
+    .jsonlt_as(col, o, collapse = FALSE, na = na, oldna = oldna,
+               auto_unbox = o$auto_unbox, indent = inc)
+  })
+  out <- matrix(unlist(cols, use.names = FALSE), nrow = nrow(x))
+  tmp <- if (dataframe == "rows" && length(dfnames) == ncol(out)) {
+    .jsonlt_row_collapse_object(dfnames, out, indent = inc)
+  } else {
+    .jsonlt_row_collapse(out, indent = indent)
+  }
+  if (isTRUE(collapse)) .jsonlt_collapse(tmp, inner = FALSE, indent = indent) else tmp
+}
+
+#' Encode an R object as JSON (jsonlite's toJSON, natively)
 #'
-#' @param x object to serialise.
-#' @param pretty FALSE, TRUE, or an indent width.
-#' @param ... jsonlite's toJSON options: dataframe, matrix, Date, POSIXt,
-#'   factor, complex, raw, null, na, auto_unbox, digits, force.
-#' @return a length-one character vector of JSON.
+#' Every option of jsonlite's `toJSON()` with the same default and the same
+#' bytes out: `dataframe`, `matrix`, `Date`, `POSIXt`, `factor`, `complex`,
+#' `raw`, `null`, `na`, `auto_unbox`, `digits` (`I(n)` for significant
+#' digits, `NA` for 15), `pretty` (TRUE = 2 spaces, or a width), `force`,
+#' plus `rownames`, `keep_vec_names`, `json_verbatim`, `always_decimal`,
+#' `time_format`, `UTC`, `no_dots`, `hms`.
+#'
+#' @param x the object to encode.
+#' @param dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,pretty,force,... as in jsonlite.
+#' @return a length-one character vector of class `json`.
+#' @examples
+#' morie_jsonlt_to_json(list(a = 1:3, b = "x"), auto_unbox = TRUE)
+#' morie_jsonlt_to_json(data.frame(id = 1:2, v = c(1.5, NA)), pretty = TRUE)
 #' @export
-morie_jsonlt_to_json <- function(x, pretty = FALSE, ...) {
-  o <- .jsonlt_opts(...)
-  s <- .jsonlt_encode(x, o, TRUE)
-  if (isTRUE(pretty)) return(morie_jsonlt_prettify(s, 4L))
-  if (is.numeric(pretty)) return(morie_jsonlt_prettify(s, as.integer(pretty)))
-  s
+morie_jsonlt_to_json <- function(x, dataframe = c("rows", "columns", "values"),
+                                 matrix = c("rowmajor", "columnmajor"),
+                                 Date = c("ISO8601", "epoch"),
+                                 POSIXt = c("string", "ISO8601", "epoch", "mongo"),
+                                 factor = c("string", "integer"),
+                                 complex = c("string", "list"),
+                                 raw = c("base64", "hex", "mongo", "int", "js"),
+                                 null = c("list", "null"), na = c("null", "string"),
+                                 auto_unbox = FALSE, digits = 4, pretty = FALSE,
+                                 force = FALSE, ...) {
+  dots <- list(...)
+  o <- list(dataframe = match.arg(dataframe), matrix = match.arg(matrix),
+            Date = match.arg(Date), POSIXt = match.arg(POSIXt), factor = match.arg(factor),
+            complex = match.arg(complex), raw = match.arg(raw), null = match.arg(null),
+            auto_unbox = isTRUE(auto_unbox), digits = digits,
+            use_signif = if (!is.null(dots$use_signif)) isTRUE(dots$use_signif) else inherits(digits, "AsIs"),
+            force = isTRUE(force), indent = .jsonlt_indent_init(pretty),
+            rownames = dots$rownames, keep_vec_names = isTRUE(dots$keep_vec_names),
+            json_verbatim = isTRUE(dots$json_verbatim), always_decimal = isTRUE(dots$always_decimal),
+            time_format = dots$time_format, UTC = isTRUE(dots$UTC), no_dots = isTRUE(dots$no_dots),
+            hms = if (is.null(dots$hms)) "string" else match.arg(dots$hms, c("string", "secs")))
+  na <- if (!missing(na)) match.arg(na) else NULL
+  ans <- .jsonlt_as(x, o, na = na, oldna = NULL, auto_unbox = o$auto_unbox, indent = o$indent)
+  class(ans) <- "json"
+  ans
 }
 
-#' Mark a value as a JSON scalar
+#' Mark a value as a JSON scalar (jsonlite's unbox)
 #'
-#' @param x a length-one value.
-#' @return x, tagged so it is never written as an array.
+#' @param x an atomic vector of length one, a one-row data.frame, or a
+#'   length-one POSIXt.
+#' @return `x` with class `scalar`, so it is written without brackets.
 #' @export
 morie_jsonlt_unbox <- function(x) {
-  if (length(x) != 1L)
-    stop(sprintf("jsonlt: unbox() needs length 1, got %d", length(x)),
-         call. = FALSE)
-  structure(x, class = c("jsonlt_scalar", class(x)))
+  if (is.null(x)) return(x)
+  if (is.data.frame(x)) {
+    if (nrow(x) == 1L) return(.jsonlt_as_scalar(x))
+    stop("Tried to unbox dataframe with ", nrow(x), " rows.", call. = FALSE)
+  }
+  if (length(x) == 1L && inherits(x, "POSIXt")) return(.jsonlt_as_scalar(x))
+  if (!is.atomic(x) || length(dim(x)) > 1L)
+    stop("Only atomic vectors of length 1 or data frames with 1 row can be unboxed.", call. = FALSE)
+  if (identical(length(x), 1L)) return(.jsonlt_as_scalar(x))
+  stop("Tried to unbox a vector of length ", length(x), call. = FALSE)
+}
+#' @noRd
+.jsonlt_as_scalar <- function(obj) {
+  class(obj) <- c("scalar", class(obj))
+  obj
 }
 
-# ---------------------------------------------------------------- parser
-
-#' .jsonlt_parse
-#'
-#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param txt Passed to \code{paste}.
-#' @return The value of \code{v}, as built in the body.
 #' @export
-.jsonlt_parse <- function(txt) {
+print.json <- function(x, ...) {
+  cat(x, "\n")
+  invisible(x)
+}
+
+# ================================================================ parser
+
+# A yajl-equivalent parser: one pass over the text with a byte cursor.
+# Numbers follow yajl_tree: no '.'/'e' -> integer (double above 2^31-1,
+# character above 2^53 when bigint_as_char); otherwise strtod.
+#' @noRd
+.jsonlt_parse <- function(txt, bigint_as_char = FALSE) {
   s <- paste(txt, collapse = "\n")
+  s <- enc2utf8(s)
+  if (startsWith(s, "\ufeff")) {
+    warning("JSON string contains (illegal) UTF8 byte-order-mark!", call. = FALSE)
+    s <- substring(s, 2L)
+  }
+  if (startsWith(s, "\x1e")) s <- substring(s, 2L)
   ch <- strsplit(s, "", fixed = TRUE)[[1]]
   n <- length(ch)
   i <- 1L
-
-  bad <- function(msg)
-    stop(sprintf("jsonlt: %s at character %d", msg, i), call. = FALSE)
-  ws <- function() {
-    while (i <= n && (ch[i] == " " || ch[i] == "\t" || ch[i] == "\n" ||
-                      ch[i] == "\r")) i <<- i + 1L
-  }
-
+  bad <- function(msg) stop(sprintf("%s at character %d", msg, i), call. = FALSE)
+  ws <- function() while (i <= n && (ch[i] == " " || ch[i] == "\t" || ch[i] == "\n" || ch[i] == "\r")) i <<- i + 1L
   str_ <- function() {
-    if (i > n || ch[i] != "\"") bad("expected a string")
     i <<- i + 1L
-    out <- character(0)
-    while (i <= n && ch[i] != "\"") {
-      if (ch[i] == "\\") {
+    st <- i
+    parts <- character(0)
+    repeat {
+      if (i > n) bad("unterminated string")
+      c0 <- ch[i]
+      if (c0 == "\"") break
+      if (c0 == "\\") {
+        if (i > st) parts <- c(parts, paste(ch[st:(i - 1L)], collapse = ""))
         i <<- i + 1L
         e <- ch[i]
-        out <- c(out,
-                 if (e == "n") "\n" else if (e == "t") "\t"
-                 else if (e == "r") "\r" else if (e == "b") "\b"
-                 else if (e == "f") "\f"
-                 else if (e == "u") {
-                   cp <- strtoi(paste(ch[(i + 1L):(i + 4L)], collapse = ""), 16L)
-                   i <<- i + 4L
-                   if (cp >= 0xD800 && cp <= 0xDBFF &&
-                       i + 2L <= n && ch[i + 1L] == "\\" && ch[i + 2L] == "u") {
-                     lo <- strtoi(paste(ch[(i + 3L):(i + 6L)], collapse = ""), 16L)
-                     i <<- i + 6L
-                     cp <- 0x10000 + bitwShiftL(cp - 0xD800, 10L) + (lo - 0xDC00)
-                   }
-                   intToUtf8(cp)
-                 } else e)
-      } else out <- c(out, ch[i])
+        parts <- c(parts, switch(e, n = "\n", t = "\t", r = "\r", b = "\b", f = "\f",
+                                 "\"" = "\"", "\\" = "\\", "/" = "/",
+                                 u = {
+                                   cp <- strtoi(paste(ch[(i + 1L):(i + 4L)], collapse = ""), 16L)
+                                   if (is.na(cp)) bad("invalid \\u escape")
+                                   i <<- i + 4L
+                                   if (cp >= 0xD800 && cp <= 0xDBFF && i + 6L <= n && ch[i + 1L] == "\\" && ch[i + 2L] == "u") {
+                                     lo <- strtoi(paste(ch[(i + 3L):(i + 6L)], collapse = ""), 16L)
+                                     if (!is.na(lo) && lo >= 0xDC00 && lo <= 0xDFFF) {
+                                       i <<- i + 6L
+                                       cp <- 0x10000 + (cp - 0xD800) * 1024 + (lo - 0xDC00)
+                                     }
+                                   }
+                                   if (cp == 0) bad("NUL in string")
+                                   intToUtf8(cp)
+                                 },
+                                 bad("invalid escape")))
+        i <<- i + 1L
+        st <- i
+        next
+      }
+      if (utf8ToInt(c0) < 32L) bad("control character in string")
       i <<- i + 1L
     }
+    if (i > st) parts <- c(parts, paste(ch[st:(i - 1L)], collapse = ""))
     i <<- i + 1L
-    paste(out, collapse = "")
+    paste(parts, collapse = "")
   }
-
   num_ <- function() {
     st <- i
-    if (i <= n && ch[i] == "-") i <<- i + 1L
-    while (i <= n && grepl("[0-9]", ch[i])) i <<- i + 1L
+    if (ch[i] == "-") i <<- i + 1L
+    if (i > n || !grepl("[0-9]", ch[i])) bad("invalid number")
+    if (ch[i] == "0") i <<- i + 1L else while (i <= n && grepl("[0-9]", ch[i])) i <<- i + 1L
     isint <- TRUE
     if (i <= n && ch[i] == ".") {
       isint <- FALSE
       i <<- i + 1L
+      if (i > n || !grepl("[0-9]", ch[i])) bad("invalid number")
       while (i <= n && grepl("[0-9]", ch[i])) i <<- i + 1L
     }
     if (i <= n && (ch[i] == "e" || ch[i] == "E")) {
       isint <- FALSE
       i <<- i + 1L
       if (i <= n && (ch[i] == "+" || ch[i] == "-")) i <<- i + 1L
+      if (i > n || !grepl("[0-9]", ch[i])) bad("invalid number")
       while (i <= n && grepl("[0-9]", ch[i])) i <<- i + 1L
     }
-    txt0 <- paste(ch[st:(i - 1L)], collapse = "")
-    if (!nzchar(txt0)) bad("not a number")
-    v <- as.numeric(txt0)
-    if (isint && abs(v) <= 2147483647) as.integer(v) else v
+    t0 <- paste(ch[st:(i - 1L)], collapse = "")
+    v <- as.numeric(t0)
+    if (isint) {
+      if (bigint_as_char && (v > 9007199254740992 || v < -9007199254740992)) return(t0)
+      if (v > 2147483647 || v < -2147483647) return(v)
+      return(as.integer(v))
+    }
+    v
   }
-
   value <- function() {
     ws()
     if (i > n) bad("unexpected end of input")
     c0 <- ch[i]
     if (c0 == "{") {
       i <<- i + 1L
-      out <- list()
-      nms <- character(0)
       ws()
+      keys <- character(0)
+      vals <- list()
       if (i <= n && ch[i] == "}") {
         i <<- i + 1L
         return(structure(list(), names = character(0)))
       }
       repeat {
         ws()
+        if (i > n || ch[i] != "\"") bad("expected a string key")
         k <- str_()
         ws()
         if (i > n || ch[i] != ":") bad("expected ':'")
         i <<- i + 1L
-        out[[length(out) + 1L]] <- list(value())
-        nms <- c(nms, k)
+        vals[[length(vals) + 1L]] <- list(value())
+        keys <- c(keys, k)
         ws()
-        if (i <= n && ch[i] == ",") { i <<- i + 1L; next }
-        if (i <= n && ch[i] == "}") { i <<- i + 1L; break }
+        if (i <= n && ch[i] == ",") {
+          i <<- i + 1L
+          next
+        }
+        if (i <= n && ch[i] == "}") {
+          i <<- i + 1L
+          break
+        }
         bad("expected ',' or '}'")
       }
-      out <- lapply(out, function(w) w[[1]])
-      names(out) <- nms
+      out <- lapply(vals, function(w) w[[1L]])
+      names(out) <- keys
       return(out)
     }
     if (c0 == "[") {
       i <<- i + 1L
-      out <- list()
       ws()
-      if (i <= n && ch[i] == "]") { i <<- i + 1L; return(list()) }
+      vals <- list()
+      if (i <= n && ch[i] == "]") {
+        i <<- i + 1L
+        return(list())
+      }
       repeat {
-        out[[length(out) + 1L]] <- list(value())
+        vals[[length(vals) + 1L]] <- list(value())
         ws()
-        if (i <= n && ch[i] == ",") { i <<- i + 1L; next }
-        if (i <= n && ch[i] == "]") { i <<- i + 1L; break }
+        if (i <= n && ch[i] == ",") {
+          i <<- i + 1L
+          next
+        }
+        if (i <= n && ch[i] == "]") {
+          i <<- i + 1L
+          break
+        }
         bad("expected ',' or ']'")
       }
-      return(lapply(out, function(w) w[[1]]))
+      return(lapply(vals, function(w) w[[1L]]))
     }
     if (c0 == "\"") return(str_())
-    if (substr(s, i, i + 3L) == "true") { i <<- i + 4L; return(TRUE) }
-    if (substr(s, i, i + 4L) == "false") { i <<- i + 5L; return(FALSE) }
-    if (substr(s, i, i + 3L) == "null") { i <<- i + 4L; return(NULL) }
-    num_()
+    if (c0 == "t" && identical(substr(s, i, i + 3L), "true")) {
+      i <<- i + 4L
+      return(TRUE)
+    }
+    if (c0 == "f" && identical(substr(s, i, i + 4L), "false")) {
+      i <<- i + 5L
+      return(FALSE)
+    }
+    if (c0 == "n" && identical(substr(s, i, i + 3L), "null")) {
+      i <<- i + 4L
+      return(NULL)
+    }
+    if (c0 == "-" || grepl("[0-9]", c0)) return(num_())
+    bad("unexpected character")
   }
-
   v <- value()
   ws()
   if (i <= n) bad("trailing content")
   v
 }
 
-#' .jsonlt_is_scalar
-#'
-#' A step of the jsonlt_native implementation. No other function in the package calls it.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x Optional; may be \code{NULL}. A vector; its length is taken.
-#' @return A logical value.
-#' @export
-.jsonlt_is_scalar <- function(x)
-  is.null(x) || (is.atomic(x) && length(x) == 1L && !is.list(x))
+# ================================================================ simplify
 
-#' .jsonlt_simplify
-#'
-#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_from_json}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x A vector; its length is taken.
-#' @param sv A flag; the body branches on it.
-#' @param sdf A flag; the body branches on it.
-#' @param sm A flag; the body branches on it.
-#' @param flat A flag; the body branches on it.
-#' @return The value of \code{kids}, as built in the body.
-#' @export
-.jsonlt_simplify <- function(x, sv, sdf, sm, flat) {
-  if (!is.list(x)) return(x)
-  if (!is.null(names(x)))
-    return(lapply(x, .jsonlt_simplify, sv, sdf, sm, flat))
-  if (!length(x)) return(x)
-  kids <- lapply(x, .jsonlt_simplify, sv, sdf, sm, flat)
-  if (sdf && all(vapply(kids, function(k)
-      is.list(k) && !is.data.frame(k) && !is.null(names(k)), logical(1)))) {
-    nms <- character(0)
-    for (k in kids) nms <- union(nms, names(k))
-    cols <- list()
-    for (nm in nms) {
-      col <- lapply(kids, function(k) if (is.null(k[[nm]])) NA else k[[nm]])
-      cols[[nm]] <- if (all(vapply(col, .jsonlt_is_scalar, logical(1)))) {
-        unlist(lapply(col, function(v) if (is.null(v)) NA else v),
-               use.names = FALSE)
-      } else if (all(vapply(col, function(v)
-          is.list(v) && !is.data.frame(v) && !is.null(names(v)),
-          logical(1)))) {
-        # every row holds an object here: jsonlite makes this a nested
-        # data.frame column (e.g. ArcGIS features[].attributes)
-        .jsonlt_simplify(unname(col), sv, sdf, sm, flat)
-      } else col
-    }
-    df <- .jsonlt_df(cols, nms)
-    return(if (flat) morie_jsonlt_flatten(df) else df)
+#' @noRd
+.jsonlt_is_namedlist <- function(x) isTRUE(is.list(x) && !is.null(names(x)))
+#' @noRd
+.jsonlt_is_recordlist <- function(x) {
+  if (!(is.list(x) && is.null(names(x)) && length(x))) return(FALSE)
+  one <- FALSE
+  for (el in x) {
+    if (!(.jsonlt_is_namedlist(el) || is.null(el))) return(FALSE)
+    if (!one && .jsonlt_is_namedlist(el)) one <- TRUE
   }
-  # A JSON scalar and a one-element JSON array both land as a length-one
-  # atomic vector, so "every child is an equal-length vector" is true of
-  # [1,2,3] as well as [[1],[2],[3]] -- and only the second is a matrix.
-  # The distinction is in the source text, so keep it: was_arr records
-  # whether the child arrived as an array.
-  was_arr <- vapply(x, is.list, logical(1))
-  if (sm && all(was_arr) && all(vapply(kids, function(k)
-      is.atomic(k) && !is.list(k), logical(1))) &&
-      length(unique(vapply(kids, length, integer(1)))) == 1L &&
-      length(kids[[1]]) > 0L) {
-    return(do.call(rbind, kids))
+  one
+}
+#' @noRd
+.jsonlt_is_scalarlist <- function(x) {
+  if (!is.list(x)) return(FALSE)
+  for (el in x) if (!(is.null(el) || (is.atomic(el) && length(el) < 2L))) return(FALSE)
+  TRUE
+}
+#' @noRd
+.jsonlt_null_to_na <- function(x) {
+  n <- length(x)
+  if (!n) return(x)
+  looks_chr <- FALSE
+  for (i in seq_len(n)) {
+    el <- x[[i]]
+    if (is.null(el)) x[i] <- list(NA)
+    else if (!looks_chr && is.character(el) && !(el[1L] %in% c("NA", "NaN", "Inf", "-Inf"))) looks_chr <- TRUE
   }
-  # Same distinction on the vector side: [1,[2]] must not collapse to a
-  # two-element vector just because [2] happens to hold one value.
-  if (sv && !any(was_arr) && all(vapply(kids, .jsonlt_is_scalar, logical(1))))
-    return(unlist(lapply(kids, function(k) if (is.null(k)) NA else k),
-                  use.names = FALSE))
-  kids
+  if (looks_chr) return(x)
+  for (i in seq_len(n)) {
+    el <- x[[i]]
+    if (is.character(el)) x[[i]] <- switch(el[1L], "NA" = NA, "NaN" = NaN, "Inf" = Inf, "-Inf" = -Inf, el)
+  }
+  x
+}
+#' @noRd
+.jsonlt_is_datelist <- function(x) {
+  if (!is.list(x) || !length(x)) return(FALSE)
+  status <- FALSE
+  for (el in x) {
+    if (is.null(el)) next
+    if (is.character(el) && length(el) && el[1L] == "NA") next
+    if (is.numeric(el) && inherits(el, "POSIXct")) status <- TRUE else return(FALSE)
+  }
+  status
+}
+#' @noRd
+.jsonlt_list_to_vec <- function(x) {
+  isdates <- .jsonlt_is_datelist(x)
+  out <- unlist(.jsonlt_null_to_na(x), recursive = FALSE, use.names = FALSE)
+  if (isdates && is.numeric(out)) structure(out, class = c("POSIXct", "POSIXt")) else out
+}
+#' @noRd
+.jsonlt_all_identical <- function(x) length(x) > 0L && all(x == x[1L])
+#' @noRd
+.jsonlt_parse_date <- function(x) {
+  if (is.numeric(x)) return(structure(x / 1000, class = c("POSIXct", "POSIXt")))
+  if (is.character(x)) {
+    tz <- if (all(grepl("Z$", x))) "UTC" else ""
+    return(as.POSIXct(strptime(x, format = "%Y-%m-%dT%H:%M:%OS", tz = tz)))
+  }
+  x
 }
 
-#' Parse JSON into R objects
+#' @noRd
+.jsonlt_simplify <- function(x, simplifyVector = TRUE, simplifyDataFrame = TRUE,
+                             simplifyMatrix = TRUE, simplifyDate = simplifyVector,
+                             homoList = TRUE, flatten = FALSE, columnmajor = FALSE,
+                             simplifySubMatrix = simplifyMatrix) {
+  if (!is.list(x) || !length(x)) return(x)
+  if (isTRUE(simplifyDataFrame) && .jsonlt_is_recordlist(x)) {
+    mydf <- .jsonlt_simplify_df(x, flatten = flatten, simplifyMatrix = simplifySubMatrix)
+    if (isTRUE(simplifyDate) && is.data.frame(mydf) && identical(names(mydf), "$date") &&
+        (is.numeric(mydf[["$date"]]) || is.character(mydf[["$date"]])))
+      return(.jsonlt_parse_date(mydf[["$date"]]))
+    return(mydf)
+  }
+  if (isTRUE(simplifyVector) && is.null(names(x)) && .jsonlt_is_scalarlist(x))
+    return(.jsonlt_list_to_vec(x))
+  out <- lapply(x, .jsonlt_simplify, simplifyVector = simplifyVector,
+                simplifyDataFrame = simplifyDataFrame, simplifyMatrix = simplifySubMatrix,
+                columnmajor = columnmajor, flatten = flatten)
+  if (isTRUE(simplifyVector) && .jsonlt_is_scalarlist(out) && length(out) &&
+      all(vapply(out, inherits, logical(1), "POSIXt")))
+    return(structure(.jsonlt_list_to_vec(out), class = c("POSIXct", "POSIXt")))
+  if (isTRUE(simplifyMatrix) && isTRUE(simplifyVector) && .jsonlt_is_matrixlist(out) &&
+      all(vapply(x, .jsonlt_is_scalarlist, logical(1)))) {
+    return(if (isTRUE(columnmajor)) do.call(cbind, out) else do.call(rbind, out))
+  }
+  if (isTRUE(simplifyMatrix) && .jsonlt_is_arraylist(out)) {
+    if (isTRUE(columnmajor))
+      return(array(do.call(cbind, out), dim = c(dim(out[[1L]]), length(out))))
+    return(array(do.call(rbind, lapply(out, as.vector)), dim = c(length(out), dim(out[[1L]]))))
+  }
+  if (isTRUE(homoList) && is.null(names(out))) {
+    isempty <- vapply(out, identical, logical(1), list())
+    if (any(isempty) && !all(isempty)) {
+      if (all(vapply(out[!isempty], is.data.frame, logical(1)))) {
+        for (i in which(isempty)) out[[i]] <- data.frame()
+        return(out)
+      }
+      if (all(vapply(out[!isempty], function(z) isTRUE(is.vector(z) && is.atomic(z)), logical(1)))) {
+        for (i in which(isempty)) out[[i]] <- vector(mode = typeof(out[[which(!isempty)[1L]]]))
+        return(out)
+      }
+    }
+  }
+  if (isTRUE(simplifyDate) && is.list(out) && identical(names(out), "$date") &&
+      (is.numeric(out[["$date"]]) || is.character(out[["$date"]])))
+    return(.jsonlt_parse_date(out[["$date"]]))
+  out
+}
+#' @noRd
+.jsonlt_is_matrixlist <- function(x) {
+  isTRUE(is.list(x) && length(x) && is.null(names(x)) &&
+         all(vapply(x, is.atomic, logical(1))) &&
+         .jsonlt_all_identical(vapply(x, length, integer(1))))
+}
+#' @noRd
+.jsonlt_is_arraylist <- function(x) {
+  isTRUE(is.list(x) && length(x) && is.null(names(x)) &&
+         all(vapply(x, is.array, logical(1))) &&
+         .jsonlt_all_identical(vapply(x, function(y) paste(dim(y), collapse = "-"), character(1))))
+}
+#' @noRd
+.jsonlt_simplify_df <- function(recordlist, columns, flatten, simplifyMatrix) {
+  if (!length(recordlist)) {
+    if (!missing(columns))
+      return(as.data.frame(matrix(ncol = length(columns), nrow = 0, dimnames = list(NULL, columns))))
+    return(data.frame())
+  }
+  if (!any(vapply(recordlist, length, integer(1), USE.NAMES = FALSE)) && missing(columns))
+    return(data.frame(matrix(nrow = length(recordlist), ncol = 0)))
+  if (missing(columns))
+    columns <- unique(unlist(lapply(recordlist, names), recursive = FALSE, use.names = FALSE))
+  columnlist <- lapply(columns, function(nm) {
+    lapply(recordlist, function(rec) {
+      k <- match(nm, names(rec))
+      if (is.na(k)) NULL else rec[[k]]
+    })
+  })
+  columnlist <- lapply(columnlist, .jsonlt_simplify, simplifyVector = TRUE, simplifyDataFrame = TRUE,
+                       simplifyMatrix = FALSE, simplifySubMatrix = simplifyMatrix, flatten = flatten)
+  lens <- vapply(columnlist, function(z) if (length(dim(z)) > 1L) nrow(z) else length(z), integer(1))
+  n <- unique(lens)
+  if (length(n) > 1L) stop("Elements not of equal length: ", paste(lens, collapse = " "), call. = FALSE)
+  names(columnlist) <- columns
+  if (isTRUE(flatten)) {
+    dfcols <- vapply(columnlist, is.data.frame, logical(1))
+    if (any(dfcols)) columnlist <- c(columnlist[!dfcols], do.call(c, columnlist[dfcols]))
+  }
+  class(columnlist) <- "data.frame"
+  if ("_row" %in% names(columnlist)) {
+    rn <- columnlist[["_row"]]
+    columnlist["_row"] <- NULL
+    if (is.double(rn)) rn <- as.integer(rn)
+    rn_na <- is.na(rn)
+    if (sum(rn_na) > 0L) rn[rn_na] <- paste0("NA_", seq_len(sum(rn_na)))
+    if (any(duplicated(rn))) {
+      warning('Duplicate names in "_row" field. Data frames must have unique row names.', call. = FALSE)
+      if (is.character(rn)) {
+        row.names(columnlist) <- make.unique(rn)
+      } else {
+        row.names(columnlist) <- seq_len(n)
+      }
+    } else {
+      row.names(columnlist) <- rn
+    }
+  } else {
+    row.names(columnlist) <- seq_len(n)
+  }
+  columnlist
+}
+
+#' Parse JSON into R objects (jsonlite's fromJSON, natively)
 #'
-#' @param txt JSON text, or a path to a file holding it.
-#' @param simplifyVector collapse a flat array to an atomic vector.
-#' @param simplifyDataFrame collapse an array of objects to a data.frame.
-#' @param simplifyMatrix collapse an array of equal-length arrays to a matrix.
-#' @param flatten expand nested data.frame columns to outer.inner columns.
-#' @param simplify FALSE turns all three simplifications off.
+#' @param txt JSON text, a file path, or an http(s) URL.
+#' @param simplifyVector,simplifyDataFrame,simplifyMatrix,flatten as in jsonlite.
+#' @param bigint_as_char integers beyond 2^53 come back as strings.
+#' @param simplify legacy: `FALSE` turns every simplification off.
 #' @param ... ignored, for call compatibility.
 #' @return an R object.
+#' @examples
+#' morie_jsonlt_from_json('[{"a":1,"b":"x"},{"a":2,"b":"y"}]')
+#' morie_jsonlt_from_json('[[1,2],[3,4]]')
 #' @export
 morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
                                    simplifyDataFrame = simplifyVector,
                                    simplifyMatrix = simplifyVector,
-                                   flatten = FALSE,
+                                   flatten = FALSE, bigint_as_char = FALSE,
                                    simplify = NULL, ...) {
-  # jsonlite semantics: simplifyDataFrame / simplifyMatrix default to
-  # simplifyVector, so simplifyVector = FALSE returns plain nested lists.
-  if (identical(simplify, FALSE))
-    simplifyVector <- simplifyDataFrame <- simplifyMatrix <- FALSE
-  if (length(txt) == 1L && !grepl("^\\s*[\\[{\"[:digit:]-]", txt) &&
-      file.exists(txt))
-    txt <- readLines(txt, warn = FALSE)
-  .jsonlt_simplify(.jsonlt_parse(txt), simplifyVector, simplifyDataFrame,
-                   simplifyMatrix, flatten)
+  if (identical(simplify, FALSE)) simplifyVector <- simplifyDataFrame <- simplifyMatrix <- FALSE
+  if (!is.character(txt) && !inherits(txt, "connection"))
+    stop("Argument 'txt' must be a JSON string, URL or file.", call. = FALSE)
+  if (is.character(txt) && length(txt) == 1L && nchar(txt, type = "bytes") < 2084 &&
+      !morie_jsonlt_validate(txt)) {
+    if (grepl("^https?://", txt, useBytes = TRUE)) {
+      txt <- base::url(txt, headers = c(Accept = "application/json, text/*, */*"))
+    } else if (file.exists(txt)) {
+      txt <- file(txt)
+    }
+  }
+  if (inherits(txt, "connection")) {
+    con <- txt
+    if (!isOpen(con)) {
+      open(con, "rb")
+      on.exit(close(con), add = TRUE)
+    }
+    txt <- readLines(con, warn = FALSE, encoding = "UTF-8")
+  }
+  obj <- .jsonlt_parse(txt, bigint_as_char)
+  if (any(isTRUE(simplifyVector), isTRUE(simplifyDataFrame), isTRUE(simplifyMatrix)))
+    return(.jsonlt_simplify(obj, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
+                            simplifyMatrix = simplifyMatrix, flatten = flatten))
+  obj
 }
 
-# ---------------------------------------------------------------- text ops
-
-# Structure only: a comma inside a string stays a comma, which is why this
-# walks characters instead of running a regex over the text.
-#' Structure only: a comma inside a string stays a comma, which is why
-#' this
-#'
-#' walks characters instead of running a regex over the text.
-#'
-#' @param txt Passed to \code{paste}.
-#' @param open_pad Accepted by the signature and not used anywhere in the body.
-#' @param close_pad Accepted by the signature and not used anywhere in the body.
-#' @param comma_pad Accepted by the signature and not used anywhere in the body.
-#' @param colon_txt Passed to \code{c}.
-#' @param keep_ws A flag; the body branches on it.
-#' @return A character value.
+#' @rdname morie_jsonlt_from_json
+#' @param json JSON text.
 #' @export
-.jsonlt_walk <- function(txt, open_pad, close_pad, comma_pad, colon_txt,
-                         keep_ws) {
-  ch <- strsplit(paste(txt, collapse = ""), "", fixed = TRUE)[[1]]
+morie_jsonlt_parse_json <- function(json, simplifyVector = FALSE, ...) {
+  morie_jsonlt_from_json(json, simplifyVector = simplifyVector, ...)
+}
+
+#' Read and write JSON files
+#'
+#' @param path file path.
+#' @param simplifyVector as in jsonlite (`FALSE` by default for files).
+#' @param ... options of [morie_jsonlt_from_json()] / [morie_jsonlt_to_json()].
+#' @return `read_json`: the parsed object; `write_json`: `path`, invisibly.
+#' @export
+morie_jsonlt_read_json <- function(path, simplifyVector = FALSE, ...) {
+  morie_jsonlt_from_json(file(path), simplifyVector = simplifyVector, ...)
+}
+#' @rdname morie_jsonlt_read_json
+#' @param x object to write.
+#' @export
+morie_jsonlt_write_json <- function(x, path, ...) {
+  json <- morie_jsonlt_to_json(x, ...)
+  writeLines(json, path, useBytes = TRUE)
+  invisible(path)
+}
+
+#' Validate JSON text
+#'
+#' @param txt character; lines are joined with newlines.
+#' @return `TRUE`, or `FALSE` with attributes `err` and `offset`.
+#' @export
+morie_jsonlt_validate <- function(txt) {
+  stopifnot(is.character(txt))
+  txt <- paste(txt, collapse = "\n")
+  if (startsWith(txt, "\ufeff"))
+    return(structure(FALSE, err = "JSON string contains UTF8 byte-order-mark."))
+  res <- tryCatch({
+    .jsonlt_parse(txt)
+    TRUE
+  }, error = function(e) e)
+  if (isTRUE(res)) return(TRUE)
+  off <- suppressWarnings(as.integer(sub(".* at character ([0-9]+)$", "\\1", conditionMessage(res))))
+  structure(FALSE, offset = if (is.na(off)) NA_integer_ else off, err = conditionMessage(res))
+}
+
+# ================================================================ text tools
+
+# Tokenizer + yajl-style generator: strings are decoded and re-encoded (so
+# "é" comes out as the character, "\/" as "/"), numbers are copied
+# verbatim, and the beautifier follows yajl_gen exactly (newline after
+# every opener, ",\n" between items, ": " after keys, final newline).
+#' @noRd
+.jsonlt_reformat <- function(txt, pretty, indent_string = "    ") {
+  s <- paste(txt, collapse = "\n")
+  if (startsWith(s, "\ufeff")) s <- substring(s, 2L)
+  ch <- strsplit(s, "", fixed = TRUE)[[1]]
+  n <- length(ch)
+  i <- 1L
   out <- character(0)
   depth <- 0L
-  instr <- FALSE
-  esc <- FALSE
-  for (c0 in ch) {
-    if (instr) {
-      out <- c(out, c0)
-      if (esc) esc <- FALSE
-      else if (c0 == "\\") esc <- TRUE
-      else if (c0 == "\"") instr <- FALSE
+  state <- "start"        # start | array_start | in_array | map_start | map_key | map_val | complete
+  stack <- character(0)
+  bad <- function(msg) stop(sprintf("%s at character %d", msg, i), call. = FALSE)
+  emit <- function(t) out <<- c(out, t)
+  sep <- function() {
+    if (state == "map_key" || state == "in_array") {
+      emit(",")
+      if (pretty) emit("\n")
+    } else if (state == "map_val") {
+      emit(":")
+      if (pretty) emit(" ")
+    }
+  }
+  wsp <- function() if (pretty && state != "map_val" && depth > 0L) emit(strrep(indent_string, depth))
+  atom_done <- function() {
+    state <<- switch(state, start = "complete", map_start = "map_val", map_key = "map_val",
+                     array_start = "in_array", map_val = "map_key", state)
+  }
+  skip_ws <- function() while (i <= n && (ch[i] == " " || ch[i] == "\t" || ch[i] == "\n" || ch[i] == "\r")) i <<- i + 1L
+  read_string <- function() {
+    j <- i + 1L
+    parts <- character(0)
+    st <- j
+    repeat {
+      if (j > n) bad("unterminated string")
+      c0 <- ch[j]
+      if (c0 == "\"") break
+      if (c0 == "\\") {
+        if (j > st) parts <- c(parts, paste(ch[st:(j - 1L)], collapse = ""))
+        j <- j + 1L
+        e <- ch[j]
+        if (e == "u") {
+          cp <- strtoi(paste(ch[(j + 1L):(j + 4L)], collapse = ""), 16L)
+          if (is.na(cp)) bad("invalid \\u escape")
+          j <- j + 4L
+          if (cp >= 0xD800 && cp <= 0xDBFF && j + 6L <= n && ch[j + 1L] == "\\" && ch[j + 2L] == "u") {
+            lo <- strtoi(paste(ch[(j + 3L):(j + 6L)], collapse = ""), 16L)
+            if (!is.na(lo) && lo >= 0xDC00 && lo <= 0xDFFF) {
+              j <- j + 6L
+              cp <- 0x10000 + (cp - 0xD800) * 1024 + (lo - 0xDC00)
+            }
+          }
+          parts <- c(parts, intToUtf8(cp))
+        } else {
+          parts <- c(parts, switch(e, n = "\n", t = "\t", r = "\r", b = "\b", f = "\f", "\"" = "\"", "\\" = "\\", "/" = "/", bad("invalid escape")))
+        }
+        j <- j + 1L
+        st <- j
+        next
+      }
+      j <- j + 1L
+    }
+    if (j > st) parts <- c(parts, paste(ch[st:(j - 1L)], collapse = ""))
+    i <<- j + 1L
+    paste(parts, collapse = "")
+  }
+  encode_string <- function(v) {
+    v <- gsub("\\", "\\\\", v, fixed = TRUE)
+    v <- gsub("\"", "\\\"", v, fixed = TRUE)
+    v <- gsub("\n", "\\n", v, fixed = TRUE)
+    v <- gsub("\r", "\\r", v, fixed = TRUE)
+    v <- gsub("\t", "\\t", v, fixed = TRUE)
+    v <- gsub("\b", "\\b", v, fixed = TRUE)
+    v <- gsub("\f", "\\f", v, fixed = TRUE)
+    v <- gsub("</", "<\\/", v, fixed = TRUE)
+    for (cc in c(1:7, 11L, 14:31)) {
+      c1 <- rawToChar(as.raw(cc))
+      if (grepl(c1, v, fixed = TRUE, useBytes = TRUE)) v <- gsub(c1, sprintf("\\u%04X", cc), v, fixed = TRUE, useBytes = TRUE)
+    }
+    paste0("\"", v, "\"")
+  }
+  read_number <- function() {
+    st <- i
+    if (ch[i] == "-") i <<- i + 1L
+    if (i > n || !grepl("[0-9]", ch[i])) bad("invalid number")
+    while (i <= n && grepl("[0-9.eE+-]", ch[i])) i <<- i + 1L
+    paste(ch[st:(i - 1L)], collapse = "")
+  }
+  while (TRUE) {
+    skip_ws()
+    if (i > n) break
+    if (state == "complete") bad("trailing content")
+    c0 <- ch[i]
+    if (c0 == "{" || c0 == "[") {
+      if (state %in% c("map_key", "map_start")) bad("keys must be strings")
+      sep()
+      wsp()
+      depth <- depth + 1L
+      stack <- c(stack, state)
+      state <- if (c0 == "{") "map_start" else "array_start"
+      emit(c0)
+      if (pretty) emit("\n")
+      i <- i + 1L
       next
     }
-    if (c0 == "\"") { instr <- TRUE; out <- c(out, c0); next }
-    if (c0 == "{" || c0 == "[") {
-      depth <- depth + 1L
-      out <- c(out, c0, open_pad(depth))
-    } else if (c0 == "}" || c0 == "]") {
+    if (c0 == "}" || c0 == "]") {
+      if ((c0 == "}" && !(state %in% c("map_start", "map_key"))) || (c0 == "]" && !(state %in% c("array_start", "in_array")))) bad("unexpected closing bracket")
       depth <- depth - 1L
-      out <- c(out, close_pad(depth), c0)
-    } else if (c0 == ",") {
-      out <- c(out, ",", comma_pad(depth))
-    } else if (c0 == ":") {
-      out <- c(out, colon_txt)
-    } else if (c0 %in% c(" ", "\t", "\n", "\r")) {
-      if (keep_ws) out <- c(out, c0)
-    } else out <- c(out, c0)
+      if (pretty) emit("\n")
+      state <- stack[length(stack)]
+      stack <- stack[-length(stack)]
+      atom_done()
+      wsp()
+      emit(c0)
+      if (pretty && state == "complete") emit("\n")
+      i <- i + 1L
+      next
+    }
+    if (c0 == ",") {
+      if (!(state %in% c("in_array", "map_key"))) bad("unexpected ','")
+      i <- i + 1L
+      skip_ws()
+      if (i > n || ch[i] %in% c("]", "}")) bad("trailing comma")
+      next
+    }
+    if (c0 == ":") {
+      if (state != "map_val") bad("unexpected ':'")
+      i <- i + 1L
+      next
+    }
+    if (c0 == "\"") {
+      v <- read_string()
+      if (state %in% c("map_start", "map_key")) {
+        # key
+        if (state == "map_key") {
+          emit(",")
+          if (pretty) emit("\n")
+        }
+        wsp()
+        emit(encode_string(v))
+        state <- "map_val"
+        skip_ws()
+        if (i > n || ch[i] != ":") bad("expected ':'")
+        next
+      }
+      sep()
+      wsp()
+      emit(encode_string(v))
+      atom_done()
+      if (pretty && state == "complete") emit("\n")
+      next
+    }
+    if (state %in% c("map_key", "map_start")) bad("keys must be strings")
+    if (c0 == "t" && identical(substr(s, i, i + 3L), "true")) {
+      i <- i + 4L
+      tok <- "true"
+    } else if (c0 == "f" && identical(substr(s, i, i + 4L), "false")) {
+      i <- i + 5L
+      tok <- "false"
+    } else if (c0 == "n" && identical(substr(s, i, i + 3L), "null")) {
+      i <- i + 4L
+      tok <- "null"
+    } else if (c0 == "-" || grepl("[0-9]", c0)) {
+      tok <- read_number()
+    } else {
+      bad("unexpected character")
+    }
+    sep()
+    wsp()
+    emit(tok)
+    atom_done()
+    if (pretty && state == "complete") emit("\n")
   }
-  paste(out, collapse = "")
+  if (state != "complete") bad("unexpected end of input")
+  structure(paste(out, collapse = ""), class = "json")
 }
 
-#' Indent JSON text
+#' Indent JSON text (jsonlite's prettify)
 #'
 #' @param txt JSON text.
-#' @param indent spaces per level.
-#' @return the same JSON, indented.
+#' @param indent spaces per level (negative = tabs).
+#' @return the same JSON, indented, with a trailing newline.
 #' @export
-morie_jsonlt_prettify <- function(txt, indent = 4L) {
-  ind <- as.integer(indent)
-  pad <- function(d) paste0("\n", strrep(" ", d * ind))
-  s <- .jsonlt_walk(txt, pad, pad, pad, ": ", FALSE)
-  repeat {
-    s2 <- gsub("\\{[[:space:]]*\\}", "{}", s)
-    s2 <- gsub("\\[[[:space:]]*\\]", "[]", s2)
-    if (identical(s2, s)) break
-    s <- s2
-  }
-  s
+morie_jsonlt_prettify <- function(txt, indent = 4) {
+  stopifnot(is.numeric(indent))
+  indent_string <- strrep(if (indent > 0) " " else "\t", as.integer(abs(indent)))
+  .jsonlt_reformat(txt, TRUE, indent_string)
 }
 
-#' Strip whitespace from JSON text
+#' Strip whitespace from JSON text (jsonlite's minify)
 #'
 #' @param txt JSON text.
 #' @return the same JSON with no whitespace outside strings.
 #' @export
-morie_jsonlt_minify <- function(txt)
-  .jsonlt_walk(txt, function(d) "", function(d) "", function(d) "", ":", FALSE)
+morie_jsonlt_minify <- function(txt) .jsonlt_reformat(txt, FALSE)
 
-#' Expand nested data.frame columns
+#' Expand nested data.frame columns (jsonlite's flatten)
 #'
-#' @param df a data.frame.
+#' @param x a data.frame.
 #' @param recursive expand nested frames all the way down.
 #' @return a data.frame whose nested columns became outer.inner columns.
 #' @export
-morie_jsonlt_flatten <- function(df, recursive = TRUE) {
-  if (!is.data.frame(df)) return(df)
-  cols <- list()
-  for (nm in names(df)) {
-    col <- df[[nm]]
-    if (is.data.frame(col)) {
-      inner <- if (recursive) morie_jsonlt_flatten(col) else col
-      for (nm2 in names(inner))
-        cols[[paste0(nm, ".", nm2)]] <- inner[[nm2]]
-    } else cols[[nm]] <- col
-  }
-  .jsonlt_df(cols, names(cols))
+morie_jsonlt_flatten <- function(x, recursive = TRUE) {
+  stopifnot(is.data.frame(x))
+  nr <- nrow(x)
+  dfcols <- vapply(x, is.data.frame, logical(1))
+  if (!any(dfcols)) return(x)
+  x <- if (recursive) c(x[!dfcols], do.call(c, lapply(x[dfcols], morie_jsonlt_flatten)))
+       else c(x[!dfcols], do.call(c, x[dfcols]))
+  class(x) <- "data.frame"
+  row.names(x) <- if (!nr) character(0) else 1:nr
+  x
 }
 
-# ---------------------------------------------------- serialize/unserialize
+# ================================================================ streaming
 
-#' .jsonlt_ser_opts
+#' Stream newline-delimited JSON (jsonlite's stream_in / stream_out)
 #'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @return The value of \code{.jsonlt_opts}.
+#' @param con a connection (opened in binary mode if not already open).
+#' @param handler optional function called on each simplified page.
+#' @param pagesize records per page.
+#' @param verbose print progress.
+#' @param ... passed to the simplifier / encoder.
+#' @return `stream_in`: a data.frame of all records (or nothing with a
+#'   handler); `stream_out`: invisible.
 #' @export
-.jsonlt_ser_opts <- function()
-  .jsonlt_opts(digits = NULL, na = "null", auto_unbox = FALSE)
-
-#' .jsonlt_ser_attr
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param pairs A vector; its length is taken and its elements indexed.
-#' @return A character value.
+morie_jsonlt_stream_in <- function(con, handler = NULL, pagesize = 500, verbose = TRUE, ...) {
+  if (!inherits(con, "connection")) stop("Argument 'con' must be a connection.", call. = FALSE)
+  count <- 0
+  pages <- list()
+  cb <- if (is.null(handler)) {
+    function(x) {
+      if (length(x)) {
+        count <<- count + length(x)
+        pages[[length(pages) + 1L]] <<- x
+      }
+    }
+  } else {
+    if (verbose) message("using a custom handler function.")
+    function(x) {
+      handler(.jsonlt_post_process(x, ...))
+      count <<- count + length(x)
+    }
+  }
+  if (!isOpen(con, "r")) {
+    if (verbose) message("opening ", class(con)[1L], " input connection.")
+    open(con, "rb")
+    on.exit({
+      if (verbose) message("closing ", class(con)[1L], " input connection.")
+      close(con)
+    }, add = TRUE)
+  }
+  repeat {
+    page <- readLines(con, n = pagesize, encoding = "UTF-8")
+    if (length(page)) {
+      cleanpage <- Filter(nchar, page)
+      cb(lapply(cleanpage, .jsonlt_parse))
+      if (verbose) cat("\r Found", count, "records...")
+    }
+    if (length(page) < pagesize) break
+  }
+  if (is.null(handler)) {
+    if (verbose) cat("\r Imported", count, "records. Simplifying...\n")
+    .jsonlt_post_process(unlist(pages, FALSE, FALSE), ...)
+  } else {
+    invisible()
+  }
+}
+#' @noRd
+.jsonlt_post_process <- function(x, simplifyVector = TRUE, simplifyDataFrame = simplifyVector,
+                                 simplifyMatrix = simplifyVector, flatten = FALSE) {
+  out <- .jsonlt_simplify(x, simplifyVector = simplifyVector, simplifyDataFrame = simplifyDataFrame,
+                          simplifyMatrix = simplifyMatrix, flatten = flatten)
+  if (isTRUE(simplifyDataFrame)) as.data.frame(out) else out
+}
+#' @rdname morie_jsonlt_stream_in
+#' @param x a data.frame to write, one record per line.
+#' @param prefix text prepended to every line (e.g. `""` for RFC 7464).
 #' @export
-.jsonlt_ser_attr <- function(pairs) {
-  if (!length(pairs)) return("{}")
-  paste0("{", paste(vapply(names(pairs), function(k)
-    paste0(.jsonlt_esc(k), ":", .jsonlt_ser(pairs[[k]])), character(1)),
-    collapse = ","), "}")
+morie_jsonlt_stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, prefix = "", ...) {
+  if (!inherits(con, "connection")) stop("Argument 'con' must be a connection.", call. = FALSE)
+  stopifnot(is.data.frame(x))
+  if (!isOpen(con, "w")) {
+    if (verbose) message("opening ", class(con)[1L], " output connection.")
+    open(con, "wb")
+    on.exit({
+      if (verbose) message("closing ", class(con)[1L], " output connection.")
+      close(con)
+    }, add = TRUE)
+  }
+  nr <- nrow(x)
+  npages <- nr %/% pagesize
+  lastpage <- nr %% pagesize
+  write_page <- function(page) {
+    str <- .jsonlt_page_lines(page, ...)
+    if (is.character(prefix) && length(prefix) && nchar(prefix)) str <- paste0(prefix[1L], str)
+    writeLines(enc2utf8(str), con = con, useBytes = TRUE)
+  }
+  for (i in seq_len(npages)) {
+    write_page(x[(pagesize * (i - 1) + 1):(pagesize * i), , drop = FALSE])
+    if (verbose) cat("\rProcessed", i * pagesize, "rows...")
+  }
+  if (lastpage) write_page(x[(nr - lastpage + 1):nr, , drop = FALSE])
+  if (verbose) cat("\rComplete! Processed total of", nr, "rows.\n")
+  invisible()
+}
+#' @noRd
+.jsonlt_page_lines <- function(page, ...) {
+  dots <- list(...)
+  dots$pretty <- NULL
+  # each row encodes as "[{...}]"; the record is what sits inside the brackets
+  rows <- vapply(seq_len(nrow(page)), function(i) {
+    as.character(do.call(morie_jsonlt_to_json, c(list(page[i, , drop = FALSE]), dots)))
+  }, character(1))
+  substr(rows, 2L, nchar(rows) - 1L)
 }
 
-#' .jsonlt_rtype
+#' Row-bind a list of data.frames with differing columns (jsonlite's rbind_pages)
 #'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x Numeric; the body checks with \code{is.numeric}.
-#' @return A character value.
+#' @param pages a list of data.frames (NULL entries are dropped).
+#' @return one data.frame; missing columns are filled with NA.
 #' @export
-.jsonlt_rtype <- function(x) {
-  if (is.logical(x)) return("logical")
-  if (is.integer(x)) return("integer")
-  if (is.complex(x)) return("complex")
-  if (is.numeric(x)) return("double")
-  "character"
+morie_jsonlt_rbind_pages <- function(pages) {
+  stopifnot(is.list(pages))
+  pages <- Filter(Negate(is.null), pages)
+  stopifnot(all(vapply(pages, is.data.frame, logical(1))))
+  if (!length(pages)) return(data.frame())
+  cols <- unique(unlist(lapply(pages, names)))
+  filled <- lapply(pages, function(p) {
+    for (nm in setdiff(cols, names(p))) p[[nm]] <- rep(NA, nrow(p))
+    p[cols]
+  })
+  out <- do.call(rbind, c(filled, list(make.row.names = FALSE, stringsAsFactors = FALSE)))
+  row.names(out) <- NULL
+  out
 }
 
-#' .jsonlt_ser
-#'
-#' A step of the jsonlt_native implementation. Called by \code{.jsonlt_ser_attr}, \code{morie_jsonlt_serialize}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
-#' @return A character value.
-#' @export
-.jsonlt_ser <- function(x) {
-  o <- .jsonlt_ser_opts()
-  if (is.null(x)) return("{\"type\":\"NULL\",\"attributes\":{},\"value\":{}}")
-  if (is.data.frame(x)) {
-    at <- list(names = names(x), class = "data.frame",
-               row.names = seq_len(nrow(x)))
-    return(paste0("{\"type\":\"list\",\"attributes\":", .jsonlt_ser_attr(at),
-                  ",\"value\":[",
-                  paste(vapply(x, .jsonlt_ser, character(1)), collapse = ","),
-                  "]}"))
+# ================================================================ serialize
+
+#' @noRd
+.jsonlt_pack <- function(obj) {
+  mode <- typeof(obj)
+  if (mode == "NULL") return(list(type = morie_jsonlt_unbox("NULL")))
+  if (mode == "closure") obj <- as.list(obj)
+  if (mode == "environment" && isNamespace(obj)) mode <- "namespace"
+  attrib <- attributes(obj)
+  if (isS4(obj)) {
+    mode <- "S4"
+    sn <- methods::slotNames(obj)
+    if (".Data" %in% sn) attrib[[".Data"]] <- obj@.Data
+    attrib <- attrib[sn]
+    names(attrib) <- sn
   }
-  if (is.factor(x)) {
-    at <- list(levels = levels(x), class = "factor")
-    return(paste0("{\"type\":\"integer\",\"attributes\":",
-                  .jsonlt_ser_attr(at), ",\"value\":",
-                  .jsonlt_atomic(as.integer(x), o, FALSE), "}"))
+  value <- switch(mode,
+    environment = NULL, externalptr = NULL,
+    namespace = lapply(as.list(getNamespaceInfo(obj, "spec")), morie_jsonlt_unbox),
+    S4 = list(class = morie_jsonlt_unbox(class(obj)), package = morie_jsonlt_unbox(attr(class(obj), "package"))),
+    raw = morie_jsonlt_unbox(morie_jsonlt_base64_enc(unclass(obj))),
+    logical = as.vector(unclass(obj), mode = "logical"),
+    integer = as.vector(unclass(obj), mode = "integer"),
+    numeric = , double = as.vector(unclass(obj), mode = "double"),
+    character = as.vector(unclass(obj), mode = "character"),
+    complex = as.vector(unclass(obj), mode = "complex"),
+    list = unname(lapply(unclass(obj), .jsonlt_pack)),
+    pairlist = unname(lapply(as.vector(obj, mode = "list"), .jsonlt_pack)),
+    closure = unname(lapply(obj, .jsonlt_pack)),
+    builtin = , special = morie_jsonlt_unbox(morie_jsonlt_base64_enc(serialize(unclass(obj), NULL))),
+    language = , name = , symbol = deparse(unclass(obj)),
+    expression = deparse(obj[[1L]]),
+    {
+      warning("No encoding has been defined for objects with storage mode ", mode, " and will be skipped.")
+      NULL
+    })
+  list(type = morie_jsonlt_unbox(mode),
+       attributes = structure(lapply(attrib, .jsonlt_pack), names = as.character(names(attrib))),
+       value = value)
+}
+#' @noRd
+.jsonlt_unpack <- function(obj) {
+  mode <- obj$type
+  if (identical(mode, "NULL")) return(NULL)
+  if (identical(mode, "S4")) {
+    data <- lapply(obj$attributes, .jsonlt_unpack)
+    return(do.call(methods::new, c(Class = obj$value$class, data)))
   }
-  if (is.raw(x))
-    return(paste0("{\"type\":\"raw\",\"attributes\":{},\"value\":",
-                  .jsonlt_esc(.jsonlt_b64(x)), "}"))
-  if (is.matrix(x)) {
-    at <- list(dim = c(nrow(x), ncol(x)))
-    return(paste0("{\"type\":\"", .jsonlt_rtype(x), "\",\"attributes\":",
-                  .jsonlt_ser_attr(at), ",\"value\":",
-                  .jsonlt_atomic(as.vector(x), o, FALSE), "}"))
+  vals <- obj$value
+  data <- switch(mode,
+    environment = new.env(parent = emptyenv()),
+    namespace = getNamespace(obj$value$name),
+    externalptr = NULL,
+    raw = morie_jsonlt_base64_dec(vals),
+    logical = as.logical(.jsonlt_list_to_vec(vals)),
+    integer = as.integer(.jsonlt_list_to_vec(vals)),
+    numeric = , double = as.double(.jsonlt_list_to_vec(vals)),
+    character = as.character(.jsonlt_list_to_vec(vals)),
+    complex = as.complex(.jsonlt_list_to_vec(vals)),
+    list = , pairlist = , closure = lapply(vals, .jsonlt_unpack),
+    symbol = , name = as.name(unlist(vals)),
+    expression = parse(text = unlist(vals)),
+    language = as.call(parse(text = unlist(vals)))[[1L]],
+    special = , builtin = unserialize(morie_jsonlt_base64_dec(vals)),
+    stop("Switch falling through for encode.mode: ", mode, call. = FALSE))
+  if (identical(data, substitute())) return(substitute())
+  attrs <- lapply(obj$attributes, .jsonlt_unpack)
+  output <- do.call("structure", c(list(.Data = data), attrs), quote = TRUE)
+  if (mode == "closure") {
+    f <- as.function(output)
+    environment(f) <- globalenv()
+    return(f)
   }
-  if (is.list(x)) {
-    at <- if (is.null(names(x))) list() else list(names = names(x))
-    return(paste0("{\"type\":\"list\",\"attributes\":", .jsonlt_ser_attr(at),
-                  ",\"value\":[",
-                  paste(vapply(x, .jsonlt_ser, character(1)), collapse = ","),
-                  "]}"))
-  }
-  paste0("{\"type\":\"", .jsonlt_rtype(x), "\",\"attributes\":{},\"value\":",
-         .jsonlt_atomic(x, o, FALSE), "}")
+  if (mode == "pairlist") return(as.pairlist(output))
+  output
 }
 
-#' Serialise an R object losslessly
+#' Serialise an R object losslessly (jsonlite's serializeJSON)
 #'
 #' Type and attributes travel with the value, so the round trip returns the
 #' same object rather than something that merely prints the same.
 #'
 #' @param x object to serialise.
+#' @param digits decimal digits for doubles (8, as jsonlite).
 #' @param pretty indent the output.
-#' @return a length-one character vector of JSON.
+#' @return a length-one character vector of class `json`.
 #' @export
-morie_jsonlt_serialize <- function(x, pretty = FALSE) {
-  s <- .jsonlt_ser(x)
-  if (isTRUE(pretty)) morie_jsonlt_prettify(s, 4L) else s
-}
-
-#' .jsonlt_coerce
-#'
-#' A step of the jsonlt_native implementation. No other function in the package calls it.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param v Optional; may be \code{NULL}. One of \code{"-Inf"}, \code{"Inf"}, \code{"NaN"}.
-#' @param t One of \code{"complex"}, \code{"double"}, \code{"integer"}, \code{"logical"}.
-#' @return A character value.
-#' @export
-.jsonlt_coerce <- function(v, t) {
-  if (is.null(v)) return(switch(t, logical = NA, integer = NA_integer_,
-                                double = NA_real_, complex = NA_complex_,
-                                NA_character_))
-  if (t == "logical") return(as.logical(v))
-  if (t == "integer") return(as.integer(v))
-  if (t == "double") {
-    if (is.character(v)) {
-      if (v == "Inf") return(Inf)
-      if (v == "-Inf") return(-Inf)
-      if (v == "NaN") return(NaN)
-      return(as.numeric(v))
-    }
-    return(as.numeric(v))
-  }
-  if (t == "complex") return(as.complex(v))
-  as.character(v)
-}
-
-#' .jsonlt_unser
-#'
-#' A step of the jsonlt_native implementation. Called by \code{morie_jsonlt_unserialize}.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param node A list; the body reads \code{$attributes}, \code{$type}, \code{$value} from it.
-#' @return The value of \code{vec}, as built in the body.
-#' @export
-.jsonlt_unser <- function(node) {
-  if (!is.list(node) || is.null(node$type))
-    stop("jsonlt: not a serialize document", call. = FALSE)
-  t <- node$type
-  # An attribute is itself a serialized value and needs the same walk;
-  # reading its "value" field directly is how a names vector comes back
-  # as the literal string "type".
-  at <- lapply(node$attributes, .jsonlt_unser)
-  val <- node$value
-  if (t == "NULL") return(NULL)
-  if (t == "raw") return(.jsonlt_unb64(val))
-  if (t == "list") {
-    kids <- lapply(val, .jsonlt_unser)
-    nms <- if (is.null(at$names)) NULL else as.character(at$names)
-    if (!is.null(at$class) && "data.frame" %in% as.character(at$class)) {
-      return(.jsonlt_df(kids, nms))
-    }
-    if (!is.null(nms) && length(nms) == length(kids)) names(kids) <- nms
-    return(kids)
-  }
-  vals <- if (is.list(val)) val else as.list(val)
-  vec <- unlist(lapply(vals, .jsonlt_coerce, t), use.names = FALSE)
-  if (!is.null(at$levels))
-    return(factor(as.character(at$levels)[vec],
-                  levels = as.character(at$levels)))
-  if (!is.null(at$dim)) {
-    d <- as.integer(at$dim)
-    return(matrix(vec, nrow = d[1], ncol = d[2]))
-  }
-  vec
+morie_jsonlt_serialize <- function(x, digits = 8, pretty = FALSE) {
+  morie_jsonlt_to_json(.jsonlt_pack(x), digits = digits, pretty = pretty)
 }
 
 #' Restore an object written by morie_jsonlt_serialize
 #'
-#' @param txt JSON produced by morie_jsonlt_serialize.
+#' @param txt JSON produced by [morie_jsonlt_serialize()].
 #' @return the original R object.
 #' @export
-morie_jsonlt_unserialize <- function(txt)
-  .jsonlt_unser(morie_jsonlt_from_json(txt, simplify = FALSE))
+morie_jsonlt_unserialize <- function(txt) .jsonlt_unpack(.jsonlt_parse(txt))
 
-# ---------------------------------------------------------------- route
+# ================================================================ route
 
 #' jsonlite's JSON mapping, natively
 #'
 #' @param x the value or JSON text the route acts on.
-#' @param route one of to_json, from_json, prettify, minify, flatten,
-#'   serialize, unserialize.
+#' @param route one of to_json, from_json, prettify, minify, validate,
+#'   flatten, serialize, unserialize, base64_enc, base64_dec.
 #' @param ... options for the chosen route.
 #' @return a list with route, result and method.
 #' @export
 morie_jsonlt <- function(x = NULL, route = "to_json", ...) {
-  routes <- c("to_json", "from_json", "prettify", "minify", "flatten",
-              "serialize", "unserialize")
+  routes <- c("to_json", "from_json", "prettify", "minify", "validate", "flatten",
+              "serialize", "unserialize", "base64_enc", "base64_dec")
   if (!(length(route) == 1L && route %in% routes))
-    stop(sprintf("jsonlt: route = %s; expected one of %s", route,
-                 paste(routes, collapse = ", ")), call. = FALSE)
+    stop(sprintf("jsonlt: route = %s; expected one of %s", route, paste(routes, collapse = ", ")), call. = FALSE)
   dots <- list(...)
   res <- switch(route,
     to_json = do.call(morie_jsonlt_to_json, c(list(x), dots)),
     from_json = do.call(morie_jsonlt_from_json, c(list(x), dots)),
-    prettify = morie_jsonlt_prettify(x, if (is.null(dots$indent)) 4L else dots$indent),
+    prettify = morie_jsonlt_prettify(x, if (is.null(dots$indent)) 4 else dots$indent),
     minify = morie_jsonlt_minify(x),
+    validate = morie_jsonlt_validate(x),
     flatten = morie_jsonlt_flatten(x, if (is.null(dots$recursive)) TRUE else dots$recursive),
-    serialize = morie_jsonlt_serialize(x, if (is.null(dots$pretty)) FALSE else dots$pretty),
-    unserialize = morie_jsonlt_unserialize(x))
-  list(route = route, result = res,
-       method = "jsonlite mapping (Ooms 2014), RFC 8259")
+    serialize = do.call(morie_jsonlt_serialize, c(list(x), dots)),
+    unserialize = morie_jsonlt_unserialize(x),
+    base64_enc = morie_jsonlt_base64_enc(x),
+    base64_dec = morie_jsonlt_base64_dec(x))
+  list(route = route, result = res, method = "jsonlite 2.0.0 mapping (Ooms 2014), RFC 8259")
 }

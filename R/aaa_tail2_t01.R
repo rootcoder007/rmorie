@@ -181,7 +181,7 @@ CooksD <- function(y, X) {
 }
 
 #' Principal Neighbourhood Aggregation (Corso et al. 2020, eq. 7)
-#' @param A square adjacency matrix; a non-zero A[i, j] makes j a
+#' @param A square adjacency matrix; a non-zero A\[i, j\] makes j a
 #'   neighbour of i
 #' @param X node features (n x f)
 #' @param aggregators subset of c("mean", "std", "max", "min")

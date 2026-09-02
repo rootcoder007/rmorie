@@ -7,11 +7,11 @@
 #'
 #' The integral is taken over the WHOLE observation interval by the composite
 #' trapezoid rule.  This is deliberate and load-bearing: a sibling module in
-#' this package once integrated over [a+h, b-h], dropping both end intervals,
+#' this package once integrated over \[a+h, b-h\], dropping both end intervals,
 #' and returned 3.8667 where the closed form is 4.
 #'
 #' @param f,g the two curves, sampled at common points.
-#' @param t the sampling grid; defaults to equally spaced on [0, 1].
+#' @param t the sampling grid; defaults to equally spaced on \[0, 1\].
 #' @return list: estimate, l2sq, l1, sup, n, method.
 #' @keywords internal
 #' @examples

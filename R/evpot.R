@@ -52,7 +52,7 @@
 
 #' Peaks-over-threshold GPD fit + scale-invariance check
 #'
-#' Formula: fit GPD on x[x>u]; rate zeta_u = N_u/n
+#' Formula: fit GPD on x\[x>u\]; rate zeta_u = N_u/n
 #'
 #' Maximum likelihood in Grimshaw's one-parameter reduction: with
 #' t = xi/sigma the profile has xi(t) = mean(log(1 + t y)) and

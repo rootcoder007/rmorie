@@ -13,7 +13,7 @@
 #' wild bootstrap is required instead.
 #'
 #' Because the design never changes, the conditional moments are available in
-#' closed form and are this module's anchor: E*[beta*] = beta_hat and
+#' closed form and are this module's anchor: E*\[beta*\] = beta_hat and
 #' Var*(beta*) = sigma_tilde^2 (X'X)^-1 with sigma_tilde^2 = sum r_i^2 / n,
 #' the resampling distribution's own variance (divisor n, not n - p).
 #' var_closed reports the diagonal.  That is the homoskedastic formula with a

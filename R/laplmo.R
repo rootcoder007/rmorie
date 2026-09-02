@@ -19,6 +19,7 @@
 #'   with its harmonic eigenfunctions. Fetched from the author's own copy
 #'   of the chapter.
 #' @export
+#' @rdname Lapeig-laplmo
 Lapeig <- function(W, k = 2, tol = 1e-10) {
   W <- as.matrix(W)
   n <- nrow(W)

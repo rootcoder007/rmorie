@@ -23,7 +23,7 @@ morie_horowitz_tikhonov_unknown_T(
 
 \item{w}{Numeric vector, the instrument.}
 
-\item{bandwidth}{Numeric or NULL; kernel bandwidth on the \link{0, 1}
+\item{bandwidth}{Numeric or NULL; kernel bandwidth on the [0, 1]
 scale.  Default \verb{1.06 n^(-1/6)/sqrt(12)}: after the mid-rank map
 the marginals are exactly uniform, so Silverman's constant fixes
 the scale and not merely the rate.}
@@ -31,7 +31,7 @@ the scale and not merely the rate.}
 \item{alpha}{Numeric, the regularisation constant a_n in (5.72).
 Must be positive; at 0 the problem is ill-posed.}
 
-\item{grid}{Integer, number of quadrature points on \link{0, 1}.}
+\item{grid}{Integer, number of quadrature points on [0, 1].}
 }
 \value{
 Named list with g_hat, grid_points, r_hat, fxw, raw_mass,

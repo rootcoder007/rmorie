@@ -20,6 +20,6 @@ A vector, from \code{c}.
 }
 \description{
 Section 3. Reading the two subtracted terms of theta(1) and theta(0)
-as potential-outcome means gives, in order, E\link{Y(1,M(1))},
-E\link{Y(0,M(1))}, E\link{Y(1,M(0))}, E\link{Y(0,M(0))}.
+as potential-outcome means gives, in order, E[Y(1,M(1))],
+E[Y(0,M(1))], E[Y(1,M(0))], E[Y(0,M(0))].
 }

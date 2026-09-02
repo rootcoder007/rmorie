@@ -26,7 +26,7 @@ only under S-admissibility.  Relative to a subgroup analysis what
 changes is the weight -- the source rows are reweighted by the
 SAMPLING ODDS,
 \code{H = I(S = 1)/P(S = 0) * (1 - p(X))/p(X) *
-[D/g(X) - (1 - D)/(1 - g(X))]} with \code{p(X) = P(S = 1 | X)}.
+\[D/g(X) - (1 - D)/(1 - g(X))\]} with \code{p(X) = P(S = 1 | X)}.
 Target-population outcomes are never used; only its covariates enter.
 }
 \examples{

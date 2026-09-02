@@ -2,10 +2,10 @@
 #' Manski no-assumption ATE bounds computed within covariate strata
 #'
 #' Inside a stratum \code{X = x}:
-#' \code{E[Y(1)|x] in [m1 p1 + ymin (1-p1), m1 p1 + ymax (1-p1)]} and
-#' \code{E[Y(0)|x] in [m0 p0 + ymin (1-p0), m0 p0 + ymax (1-p0)]}, with
-#' \code{p1 = P(D=1|x)}, \code{p0 = 1 - p1}, \code{m1 = E[Y|D=1,x]},
-#' \code{m0 = E[Y|D=0,x]}. Differencing the opposite ends gives the
+#' \code{E\[Y(1)|x\] in \[m1 p1 + ymin (1-p1), m1 p1 + ymax (1-p1)\]} and
+#' \code{E\[Y(0)|x\] in \[m0 p0 + ymin (1-p0), m0 p0 + ymax (1-p0)\]}, with
+#' \code{p1 = P(D=1|x)}, \code{p0 = 1 - p1}, \code{m1 = E\[Y|D=1,x\]},
+#' \code{m0 = E\[Y|D=0,x\]}. Differencing the opposite ends gives the
 #' stratum ATE bound, whose width is exactly \code{ymax - ymin} however
 #' the data fall -- the signature of the no-assumption bound, and the
 #' reason it always contains zero.
@@ -18,7 +18,7 @@
 #' common effect across strata; it is reported separately and flagged
 #' empty when the strata disagree.
 #'
-#' @param y Observed outcomes, all within \code{[y_min, y_max]}.
+#' @param y Observed outcomes, all within \code{\[y_min, y_max\]}.
 #' @param D Binary treatment indicator.
 #' @param X Stratum label per unit.
 #' @param y_min,y_max A priori outcome support.

@@ -3,7 +3,7 @@
 #' The kernel constant r_2 of the bias-reduced KDFE variance
 #'
 #' Eq. (2.10):
-#' \deqn{r_2 = \int y K(y)[W(y/a) + a^{-1}W(y)K(y/a)]\,dy.}{r2 = int y [K(y) W(y/a) + (1/a) W(y) K(y/a)] dy.}
+#' \deqn{r_2 = \int y K(y)\[W(y/a) + a^{-1}W(y)K(y/a)\]\,dy.}{r2 = int y \[K(y) W(y/a) + (1/a) W(y) K(y/a)\] dy.}
 #'
 #' Read the bracket carefully: the two terms differ in WHICH factor is
 #' rescaled by `a`. It is the cross term from expanding the variance of the

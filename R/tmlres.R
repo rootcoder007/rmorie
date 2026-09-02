@@ -9,11 +9,11 @@
 #' pairs, using a finite-dimensional projection kernel
 #' \code{K_k(x, x') = phi(x)' Omega^{-1} phi(x')},
 #' \code{Omega = n^{-1} sum_i phi(X_i) phi(X_i)'}, and adds it back:
-#' \code{IF22 = -[n(n-1)]^{-1} sum_{i != j} a_i K_k(X_i, X_j) b_j} with
-#' \code{a_i = (D_i - g_i)/[g_i(1 - g_i)]} and
+#' \code{IF22 = -\[n(n-1)\]^{-1} sum_{i != j} a_i K_k(X_i, X_j) b_j} with
+#' \code{a_i = (D_i - g_i)/\[g_i(1 - g_i)\]} and
 #' \code{b_j = H_j (y_j - Q*_j)}.
 #'
-#' The basis is \code{[1, X, X^2]} elementwise; \code{k} is the tuning
+#' The basis is \code{\[1, X, X^2\]} elementwise; \code{k} is the tuning
 #' parameter of the whole method.  When the outcome regression fits
 #' exactly the residuals are zero and the correction is identically
 #' zero -- the cheapest check of the sign convention.

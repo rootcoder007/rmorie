@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Levenshtein distance between two sequences.
 #'
-#' Formula: the Wagner-Fischer dynamic program, \eqn{D[0,0]=0},
-#' \eqn{D[i,0] = i c_{del}}, \eqn{D[0,j] = j c_{ins}},
-#' \eqn{D[i,j] = \min(D[i-1,j]+c_{del},\, D[i,j-1]+c_{ins},\,
-#' D[i-1,j-1] + c_{sub}[s_1[i] \ne s_2[j]])}, answer at \eqn{D[m,n]}.
+#' Formula: the Wagner-Fischer dynamic program, \eqn{D\[0,0\]=0},
+#' \eqn{D\[i,0\] = i c_{del}}, \eqn{D\[0,j\] = j c_{ins}},
+#' \eqn{D\[i,j\] = \min(D\[i-1,j\]+c_{del},\, D\[i,j-1\]+c_{ins},\,
+#' D\[i-1,j-1\] + c_{sub}[s_1[i] \ne s_2[j]])}, answer at \eqn{D\[m,n\]}.
 #' Only the previous row is kept, so memory is O(n); the recurrence is
 #' unchanged.  Inputs are compared element by element, so token vectors
 #' work as well as strings.  Unit costs give Levenshtein's metric;

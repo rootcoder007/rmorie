@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Chernoff bound on an upper tail.
 #'
-#' Formula: P(X >= a) <= min_{s>0} exp(-s a) E[exp(s X)]
+#' Formula: P(X >= a) <= min_{s>0} exp(-s a) E\[exp(s X)\]
 #'
-#' @param mgf The moment generating function s -> E[exp(s X)].
+#' @param mgf The moment generating function s -> E\[exp(s X)\].
 #' @param a Tail threshold.
 #' @param s_grid Positive values of s searched; a fixed geometric grid over (0.01, 8.7] if omitted.
 

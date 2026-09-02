@@ -3,7 +3,7 @@
 #' Variance of the bias-reduced KDFE (Theorem 2.3)
 #'
 #' Theorem 2.3:
-#' \deqn{\mathrm{Var}[\tilde F_X(x)] = \frac{F(1-F)}{n} - \frac{h}{n}\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big]f_X(x) + o(h/n),}{Var[Ftilde(x)] = F(1-F)/n - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] f(x) + o(h/n),}
+#' \deqn{\mathrm{Var}\[\tilde F_X(x)\] = \frac{F(1-F)}{n} - \frac{h}{n}\Big\[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big\]f_X(x) + o(h/n),}{Var\[Ftilde(x)\] = F(1-F)/n - (h/n)\[2(a^4+1)/(a^2-1)^2 r1 + r2\] f(x) + o(h/n),}
 #' with `r1` from (2.9) and `r2` from (2.10).
 #'
 #' The ORDER does not change from the plain KDFE -- it cannot, since `Ftilde`

@@ -2,7 +2,7 @@
 % Please edit documentation in R/k03volsv.R
 \name{.k03_golden}
 \alias{.k03_golden}
-\title{Deterministic golden-section maximisation on lo, hi}
+\title{Deterministic golden-section maximisation on [lo, hi]}
 \usage{
 .k03_golden(f, lo, hi, iters = 80L)
 }

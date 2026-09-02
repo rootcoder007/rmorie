@@ -8,7 +8,7 @@
 #' Formula: n^-1 sum_\{i=1\}^\{n\} d_H^2(phat_i, p_0) -> 0 a.s.;
 #'   Lemma 6.52 needs sum_\{n>=1\} n^-2 var_0(...) < Inf
 #'
-#' @param dh2 Squared Hellinger distances, each in [0, 1].
+#' @param dh2 Squared Hellinger distances, each in \[0, 1\].
 #' @param variances Optional variances of the martingale differences.
 #' @return List with \code{cesaro}, \code{final}, \code{tail_mean},
 #'   \code{lemma652_sum}, \code{summable}, \code{n}.

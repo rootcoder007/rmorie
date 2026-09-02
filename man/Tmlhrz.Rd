@@ -29,7 +29,7 @@ cumulative hazards, \code{Lambda_a(t0) = -log S_a(t0)}.
 \details{
 The nuisance step is a pooled logistic hazard on the person-period
 expansion (one row per subject per at-risk grid point, design
-\code{[1, t, A, W]}).  The targeting step fluctuates the hazard on the
+\code{\[1, t, A, W\]}).  The targeting step fluctuates the hazard on the
 logit scale along
 \code{H_a(t) = -I(A = a)/g_a(W) * S_a(t0|W)/S_a(t-|W)}, solving the
 pooled score for a single \code{eps} by fixed-iteration Newton, and

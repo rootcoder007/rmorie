@@ -205,8 +205,8 @@ NULL
 #' Randomisation -- the observed values are fixed and only their
 #' ASSIGNMENT to locations is random, so the sample kurtosis
 #' \eqn{b_2 = n \sum z_i^4 / (\sum z_i^2)^2} enters:
-#' \deqn{Var_R(I) = \frac{n\left[(n^2-3n+3)S_1 - n S_2 + 3S_0^2\right]
-#'   - b_2\left[(n^2-n)S_1 - 2n S_2 + 6S_0^2\right]}
+#' \deqn{Var_R(I) = \frac{n\left\[(n^2-3n+3)S_1 - n S_2 + 3S_0^2\right\]
+#'   - b_2\left\[(n^2-n)S_1 - 2n S_2 + 6S_0^2\right\]}
 #'   {(n-1)(n-2)(n-3)S_0^2} - E(I)^2.}
 #'
 #' Randomisation is the default because it is the weaker assumption and

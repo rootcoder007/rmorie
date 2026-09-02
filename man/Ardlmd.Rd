@@ -30,7 +30,7 @@ The bounds test asks whether a long-run level relationship exists
 between \code{y} and \code{X} without first having to decide whether
 the regressors are I(0) or I(1). It is run on the conditional
 error-correction form
-\deqn{\Delta y_t = c_0 [+ c_1 t] + \pi_{yy} y_{t-1}
+\deqn{\Delta y_t = c_0 \[+ c_1 t\] + \pi_{yy} y_{t-1}
   + \sum_j \pi_{yx,j} x_{j,t-1} + \sum_{i=1}^{p-1} \psi_i \Delta y_{t-i}
   + \sum_j \sum_{i=0}^{q-1} \beta_{ji} \Delta x_{j,t-i} + u_t,}
 in which the lagged \emph{levels} carry the long-run information and

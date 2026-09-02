@@ -10,7 +10,7 @@
 #' Formula: resample indices with replacement, re-target each replicate,
 #'   take the empirical percentiles of psi*
 #'
-#' @param Y,A Outcome in [0, 1] and binary treatment.
+#' @param Y,A Outcome in \[0, 1\] and binary treatment.
 #' @param QAW,Q1W,Q0W Initial outcome predictions.
 #' @param g1W Initial propensity.
 #' @param B Fixed number of bootstrap replicates.

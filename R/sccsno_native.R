@@ -73,7 +73,7 @@
   sort(unique(pts))
 }
 
-#' Index of the age band containing t (0-based, matching alpha[j+1])
+#' Index of the age band containing t (0-based, matching alpha\[j+1\])
 #'
 #' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}.
 #' See the file header for the source the module follows.

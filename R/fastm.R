@@ -25,7 +25,7 @@
 #' sequence and return the same numbers, not merely numbers of equal quality.
 #'
 #' @param X n-by-p data matrix.
-#' @param h subset size; defaults to [(n + p + 1)/2].
+#' @param h subset size; defaults to \[(n + p + 1)/2\].
 #' @param n_starts how many lexicographic elemental subsets to start from.
 #' @param max_iter cap on the C-steps for each retained subset.
 #' @param n_keep how many best subsets to iterate to convergence; the paper

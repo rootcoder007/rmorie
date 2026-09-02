@@ -9,7 +9,7 @@ Otcw(X, Y, Cost, perm)
 \arguments{
 \item{X, Y}{Point sets, kept for interface symmetry.}
 
-\item{Cost}{Cost matrix with \code{Cost[i, j] = c(x_i, y_j)}.}
+\item{Cost}{Cost matrix with \code{Cost\[i, j\] = c(x_i, y_j)}.}
 
 \item{perm}{Zero-based assignment: \code{y_i} matched to \code{x_perm[i]}.}
 }

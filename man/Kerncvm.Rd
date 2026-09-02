@@ -22,7 +22,7 @@ morie_fauzi_naive_kernel_cvm(x, quantile, h = NULL, ngrid = 2001L)
 Named list with \code{statistic}, \code{p_value}, \code{h}, \code{n}, \code{method}.
 }
 \description{
-Eq. (5.4): \deqn{\widehat{CvM} = n\int [\hat F_X(x)-F(x)]^2 dF(x),}{CvMhat = n int [Fhat_X(x) - F(x)]^2 dF(x),}
+Eq. (5.4): \deqn{\widehat{CvM} = n\int \[\hat F_X(x)-F(x)\]^2 dF(x),}{CvMhat = n int \[Fhat_X(x) - F(x)\]^2 dF(x),}
 with \code{Fhat_X} the naive kernel distribution function estimator.
 }
 \details{

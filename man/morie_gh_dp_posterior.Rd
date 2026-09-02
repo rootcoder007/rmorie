@@ -8,7 +8,7 @@ morie_gh_dp_posterior(G0_A, alpha, n_in_A, n)
 }
 \arguments{
 \item{G0_A}{prior base-measure mass \eqn{G_0(A)} of the set, in
-\eqn{[0, 1]}}
+\eqn{\[0, 1\]}}
 
 \item{alpha}{Dirichlet-process precision (positive)}
 

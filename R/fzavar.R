@@ -3,7 +3,7 @@
 #' Asymptotic variance of the quantile estimator
 #'
 #' Eqs. (3.2)-(3.3):
-#' \deqn{V[\hat Q(p)] = \frac{p(1-p)}{n f^2(F^{-1}(p))} + O(n^{-2}),\qquad \mathrm{AMSE} = \frac{[Q'(p)]^2 p(1-p)}{n},}{V[Qhat(p)] = p(1-p)/(n f^2(F^-1(p))) + O(n^-2), AMSE = Q'(p)^2 p(1-p)/n,}
+#' \deqn{V\[\hat Q(p)\] = \frac{p(1-p)}{n f^2(F^{-1}(p))} + O(n^{-2}),\qquad \mathrm{AMSE} = \frac{\[Q'(p)\]^2 p(1-p)}{n},}{V\[Qhat(p)\] = p(1-p)/(n f^2(F^-1(p))) + O(n^-2), AMSE = Q'(p)^2 p(1-p)/n,}
 #' the second form using `Q'(p) = 1 / f(Q(p))`.
 #'
 #' Both spellings come back, because the equality between them is the thing

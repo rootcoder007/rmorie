@@ -20,8 +20,8 @@
 #' threshold being 100 microvolts in the book's own experiment.
 #'
 #' The goodness of fit is equation (5.28), p. 292:
-#' r^2 = [sum x(n) y(n) - N xbar ybar]^2 /
-#'       ([sum x^2(n) - N xbar^2][sum y^2(n) - N ybar^2]).
+#' r^2 = \[sum x(n) y(n) - N xbar ybar\]^2 /
+#'       (\[sum x^2(n) - N xbar^2\]\[sum y^2(n) - N ybar^2\]).
 #' The captions of Figures 5.15-5.17 give r^2 = 0.98 for RMS, 0.78 for ZCR and
 #' 0.97 for TCR: RMS and TCR track force closely, ZCR does not.
 #'

@@ -26,8 +26,8 @@ estimated. Unlike the worst-case bound, the arm bounds use every
 they stay informative even when one arm is nearly empty.
 }
 \details{
-Formula: \code{upper = [E(y | D = 1) P(D = 1) + y_max P(D = 0)] -
-[E(y | D = 0) P(D = 0) + y_min P(D = 1)]}, \code{lower = 0}.
+Formula: \code{upper = \[E(y | D = 1) P(D = 1) + y_max P(D = 0)\] -
+\[E(y | D = 0) P(D = 0) + y_min P(D = 1)\]}, \code{lower = 0}.
 }
 \examples{
 set.seed(1)

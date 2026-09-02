@@ -8,7 +8,7 @@
 #' the metric is 1/sigma^2 and for Bernoulli(theta) it is
 #' 1/(theta(1 - theta)); both closed forms are what the tests check.
 #'
-#' Formula: g_ij(theta) = E[d_i log p d_j log p].
+#' Formula: g_ij(theta) = E\[d_i log p d_j log p\].
 #'
 #' @param log_p Function log_p(x, theta).
 #' @param theta Parameter value.

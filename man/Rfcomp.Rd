@@ -11,7 +11,7 @@ Rfcomp(X, k_factors = 1L, h = NULL, max_subsets = 2e+05)
 
 \item{k_factors}{number of factors, 1 <= k <= p.}
 
-\item{h}{MCD subset size; defaults to \link{(n + p + 1)/2}.}
+\item{h}{MCD subset size; defaults to [(n + p + 1)/2].}
 
 \item{max_subsets}{passed to the MCD enumeration.}
 }

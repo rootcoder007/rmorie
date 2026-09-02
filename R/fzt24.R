@@ -3,7 +3,7 @@
 #' MISE of the bias-reduced KDFE (Theorem 2.4)
 #'
 #' Theorem 2.4:
-#' \deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big[\frac{b_2^2 - 2b_4F}{2F}\Big]^2 dx + \frac1n\int F(1-F)dx - \frac hn\Big[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big] + o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int [(b2^2 - 2 b4 F)/(2F)]^2 dx + (1/n) int F(1-F) dx - (h/n)[2(a^4+1)/(a^2-1)^2 r1 + r2] + o(h^8 + h/n).}
+#' \deqn{\mathrm{MISE}(\tilde F_X) = h^8 a^4\int\Big\[\frac{b_2^2 - 2b_4F}{2F}\Big\]^2 dx + \frac1n\int F(1-F)dx - \frac hn\Big\[\frac{2(a^4+1)}{(a^2-1)^2}r_1 + r_2\Big\] + o(h^8 + h/n).}{MISE(Ftilde) = h^8 a^4 int \[(b2^2 - 2 b4 F)/(2F)\]^2 dx + (1/n) int F(1-F) dx - (h/n)\[2(a^4+1)/(a^2-1)^2 r1 + r2\] + o(h^8 + h/n).}
 #'
 #' Compare the plain KDFE's MISE from Sec. 2.1, which leads with
 #' `h^4 mu2^2 R(f')/4`: the bias term has gone from `h^4` to `h^8` while the
@@ -21,7 +21,7 @@
 #' @param n Sample size.
 #' @param h Bandwidth.
 #' @param a Second smoothing parameter.
-#' @param biasint `int [(b2^2 - 2 b4 F)/(2 F)]^2 dx`.
+#' @param biasint `int \[(b2^2 - 2 b4 F)/(2 F)\]^2 dx`.
 #' @param varint `int F(x)(1 - F(x)) dx`.
 #' @param r1,r2 Kernel constants; default to Gaussian `r1` and `r2(a)`.
 #' @return Named list with ``mise``, ``biasterm``, ``varterm``, ``smoothgain``, ``h``, ``a``, ``method``.

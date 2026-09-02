@@ -7,7 +7,7 @@
 morie_gh_stick_breaking(V)
 }
 \arguments{
-\item{V}{numeric vector of stick fractions, each in \eqn{[0, 1]};
+\item{V}{numeric vector of stick fractions, each in \eqn{\[0, 1\]};
 values outside the unit interval raise an error}
 }
 \value{

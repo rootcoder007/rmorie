@@ -39,8 +39,8 @@ A list with \code{nonstationary_cov}, \code{correlation},
 matrix is not positive semi-definite.
 }
 \description{
-eq (8.1): \eqn{Corr[Z(s_i),Z(s_j)] = \exp\{-\theta_1 ||s_i-s_j||
-\exp\{\theta_2 |c_i-c_j| + \theta_3 \min[c_i,c_j]\}\}}, with \eqn{c_i}
+eq (8.1): \eqn{Corr\[Z(s_i),Z(s_j)\] = \exp\{-\theta_1 ||s_i-s_j||
+\exp\{\theta_2 |c_i-c_j| + \theta_3 \min\[c_i,c_j\]\}\}}, with \eqn{c_i}
 the distance from site i to the point source. Non-stationary because a
 pair's correlation depends on where it sits relative to the source, not
 only on its separation. With \eqn{\theta_2 = \theta_3 = 0} it collapses

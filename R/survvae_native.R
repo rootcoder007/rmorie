@@ -315,7 +315,7 @@ morie_survvae_gates <- function(x, W, bias) {
 #' @param scales Numeric vector of \code{K} positive scale
 #'   parameters.
 #' @param primitive One of \code{"weibull"} or \code{"lognormal"}.
-#' @param alpha Discount on the censored term, in \code{[0, 1]}.
+#' @param alpha Discount on the censored term, in \code{\[0, 1\]}.
 #' @param prior Strength of the log-parameter L2 penalty.
 #' @return Named list with \code{elbo}, \code{uncensored},
 #'   \code{censored}, \code{prior_penalty}, \code{alpha}.
@@ -405,7 +405,7 @@ morie_survvae_exact_loglik <- function(X, y_lower, events, W, bias,
 #' @param events Event indicator (0/1 or logical), length \code{n}.
 #' @param K Number of experts.
 #' @param primitive One of \code{"weibull"} or \code{"lognormal"}.
-#' @param alpha Discount on the censored term, in \code{[0, 1]}.
+#' @param alpha Discount on the censored term, in \code{\[0, 1\]}.
 #' @param prior Strength of the log-parameter L2 penalty.
 #' @param seed Seed for the shared generator (see
 #'   \code{.ghc_rng}).

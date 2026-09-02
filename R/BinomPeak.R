@@ -5,7 +5,7 @@
 #' The binomial pmf evaluated at k = round(pn).
 #'
 #' @param n trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(k, PB).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eq (4.96).

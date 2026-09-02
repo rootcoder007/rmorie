@@ -14,7 +14,7 @@
 #' BACKUP propagates the reward. Selection uses
 #' UCT_j = Xbar_j + 2*Cp*sqrt(2*log(n)/n_j), unvisited children
 #' valued Inf. Cp = 1/sqrt(2) is the Kocsis-Szepesvari value for
-#' rewards in [0, 1].  Both survey backups are provided: "sum"
+#' rewards in \[0, 1\].  Both survey backups are provided: "sum"
 #' (Algorithm 2) and "negamax" (Algorithm 3, two-player zero-sum).
 #' Both final-move criteria: "robust" (most-visited root child,
 #' default) and "max" (highest mean reward).

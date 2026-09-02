@@ -9,7 +9,7 @@
 #'
 #' The exponent is the useful part. A naive count would put `choose(n, k) ~ n^k`
 #' terms in `A_k`, giving `n^(qk)`; the martingale property (3.9),
-#' `E[rho_k | X_1,...,X_{k-1}] = 0`, halves the exponent to `n^(qk/2)`. That
+#' `E\[rho_k | X_1,...,X_{k-1}\] = 0`, halves the exponent to `n^(qk/2)`. That
 #' square root makes the higher projections negligible and lets Lemma 3.1 stop
 #' at `k = 3` with an `o_L(n^-1/2)` remainder.
 #'

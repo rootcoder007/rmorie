@@ -233,7 +233,7 @@ morie_dssm_collision_rate <- function(vocabulary, n = 3L) {
 #' @param query_vector numeric. A query embedding (any vector-like).
 #' @param doc_vector numeric. A document embedding of the same width.
 #'
-#' @return A single numeric in \code{[-1, 1]}. Raises an error if the
+#' @return A single numeric in \code{\[-1, 1\]}. Raises an error if the
 #'   widths differ or either vector is the zero vector.
 #' @export
 morie_dssm_cosine_similarity <- function(query_vector, doc_vector) {

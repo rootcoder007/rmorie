@@ -22,7 +22,7 @@ list with \code{time}, \code{surv}, \code{se}, \code{se_cumhaz}, \code{lower},
 }
 \description{
 \code{S(t) = prod (1 - d_i/n_i)} with Greenwood's variance and a log-log
-confidence interval, which cannot leave \verb{[0, 1]} the way a symmetric
+confidence interval, which cannot leave \verb{\[0, 1\]} the way a symmetric
 one can.  Note \code{survival::survfit}'s \code{std.err} is the error of the
 CUMULATIVE HAZARD; \code{se} here is the error of \code{S(t)} and \code{se_cumhaz}
 is survfit's, the two differing by a factor of \code{S}.

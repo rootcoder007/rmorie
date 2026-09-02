@@ -20,8 +20,8 @@ List with estimate, brier, mean_log_loss, method.
 }
 \description{
 Formula: BS = T^-1 sum_i sum_c (pi_ic - d_ic)^2 (eq. 4.14) with d_ic the
-indicator of the observed category. The categorical score lies in \link{0, 2};
-halving puts it in \link{0, 1}. Lower is better.
+indicator of the observed category. The categorical score lies in [0, 2];
+halving puts it in [0, 1]. Lower is better.
 }
 \examples{
 Msm009(probs = c(1, 2, 3, 4, 5, 6, 7, 8), y_true = 5L)

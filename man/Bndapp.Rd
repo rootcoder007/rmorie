@@ -23,13 +23,13 @@ List with \code{levels}, \code{lower}, \code{upper}
 }
 \description{
 Joint monotone-treatment-response / monotone-treatment-selection
-bounds on \eqn{E[y(t)]}. Under MTR (each unit response weakly
+bounds on \eqn{E\[y(t)\]}. Under MTR (each unit response weakly
 increasing in the ordered treatment) and MTS (units selecting higher
 treatment have weakly higher mean response functions), Proposition 3
 Corollary 2 of Manski and Pepper (2000), eq. (36), gives sharp bounds
 that need no outcome-support assumption:
-\deqn{\sum_{u<t} E[y|z=u] P(z=u) + E[y|z=t] P(z \ge t) \le E[y(t)]
-  \le \sum_{u>t} E[y|z=u] P(z=u) + E[y|z=t] P(z \le t).}
+\deqn{\sum_{u<t} E\[y|z=u\] P(z=u) + E\[y|z=t\] P(z \ge t) \le E\[y(t)\]
+  \le \sum_{u>t} E\[y|z=u\] P(z=u) + E\[y|z=t\] P(z \le t).}
 For a contrast \eqn{t_1 > t_0} the upper bound is
 \eqn{U(t_1) - L(t_0)}; the lower bound is 0 because MTR alone already
 implies \eqn{y(t_1) \ge y(t_0)} unit by unit (Manski 1997,

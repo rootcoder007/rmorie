@@ -2,7 +2,7 @@
 #' Log-likelihood of a Dirichlet sample
 #'
 #' For N independent compositions on the open (D-1)-simplex,
-#' l(alpha | X) = N[lnGamma(sum alpha_i) - sum lnGamma(alpha_i)]
+#' l(alpha | X) = N\[lnGamma(sum alpha_i) - sum lnGamma(alpha_i)\]
 #' + sum_i (alpha_i - 1) sum_n ln x_ni, the log of the product of Dirichlet
 #' densities with the sufficient statistic sum_n ln x_ni factored out.  The
 #' stub cites Wilks (1962), Mathematical Statistics, Wiley; that text was not
@@ -11,7 +11,7 @@
 #' N lnGamma(D) = N ln (D-1)! for every data set, and at D = 2 it is the beta
 #' log-likelihood.  The score is returned too, since it costs one digamma call
 #' per part and makes the maximum-likelihood condition checkable,
-#' dl/dalpha_i = N[psi(sum alpha) - psi(alpha_i)] + sum_n ln x_ni.
+#' dl/dalpha_i = N\[psi(sum alpha) - psi(alpha_i)\] + sum_n ln x_ni.
 #'
 #' @param alpha strictly positive concentration parameters.
 #' @param X one composition, or a matrix whose N rows are compositions.

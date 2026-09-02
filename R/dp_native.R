@@ -371,7 +371,7 @@ morie_dp_count <- function(D, epsilon = 1, predicate = NULL, seed = NULL,
 
 #' Differentially private bounded sum
 #'
-#' Values are clipped to \code{[a, b]} and the sum released with Laplace
+#' Values are clipped to \code{\[a, b\]} and the sum released with Laplace
 #' noise of scale \eqn{(b-a)/\epsilon}.
 #'
 #' The sensitivity IS the width of the clipping range, so the bounds must

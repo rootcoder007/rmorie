@@ -35,7 +35,7 @@ and Statistics 90(3), 414-427.  Read from the NBER Technical Working Paper
 which states the scheme as "u*_g = u_g with probability 0.5 and
 u*_g = -u_g with probability 0.5, with this assignment AT THE CLUSTER
 LEVEL", naming the +/-1 multipliers Rademacher weights, and the CRVE
-finite-sample factor c = \link[=(N-1)/(N-k)]{G/(G-1)} with
+finite-sample factor c = [G/(G-1)][(N-1)/(N-k)] with
 u_tilde_g = sqrt(c) u_hat_g.
 }
 \details{

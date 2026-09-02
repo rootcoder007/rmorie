@@ -24,7 +24,7 @@ zero-based action index, matching the Python arm.
 \description{
 score(a) = Qbar(s,a) + P(s,a) sqrt(sum_b N(s,b)) / (1 + N(s,a))
 * (c1 + log((sum_b N(s,b) + c2 + 1)/c2)),
-with Qbar the tree-wide min-max rescaling of Q onto \link{0, 1}.
+with Qbar the tree-wide min-max rescaling of Q onto [0, 1].
 }
 \examples{
 Mzpuct(Q = 0.5, N = 5L, P = 0.5)

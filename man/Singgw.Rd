@@ -34,7 +34,7 @@ Legarra, Aguilar and Misztal 2009 and Aguilar et al. 2010), is
 with \eqn{G_w = (1-w) G + w A_{11}} blending a polygenic fraction w
 (their sec. The combined genetic effect; w = 0 gives raw eq. 4).
 The inverse is the sparse update of their eq. (8) (eq. 6 at w = 0):
-\eqn{H^{-1} = A^{-1} + [G_w^{-1} - A_{11}^{-1}, 0; 0, 0]}.
+\eqn{H^{-1} = A^{-1} + \[G_w^{-1} - A_{11}^{-1}, 0; 0, 0\]}.
 }
 \details{
 Limiting cases exercised in the tests: G = A11 gives H = A exactly;

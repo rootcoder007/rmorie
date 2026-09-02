@@ -10,7 +10,7 @@
 #'   psi = mean(Q*(1,W)) - mean(Q*(0,W));
 #'   se = sqrt(var(IC)/n)
 #'
-#' @param Y Outcome in [0, 1].
+#' @param Y Outcome in \[0, 1\].
 #' @param A Binary treatment.
 #' @param QAW,Q1W,Q0W Initial outcome predictions.
 #' @param g1W Initial propensity.

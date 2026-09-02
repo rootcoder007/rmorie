@@ -10,7 +10,7 @@
 #' their own share, and the program is what makes the bounds sharp rather
 #' than merely valid.
 #'
-#' Formula: \code{min / max sum q_jk [y_k(1) - y_k(0)]} subject to
+#' Formula: \code{min / max sum q_jk \[y_k(1) - y_k(0)\]} subject to
 #' \code{sum over types consistent with (a, b, z) of q = P(y = a, D = b |
 #' Z = z)} for all \code{a, b, z}, and \code{q >= 0}.
 #'

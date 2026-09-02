@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Intersection of the MTS and the MTR bound on E[Y(d)]
+#' Intersection of the MTS and the MTR bound on E\[Y(d)\]
 #'
 #' Monotone treatment selection and monotone treatment response are
 #' separate assumptions, each of which alone identifies an interval
-#' containing \code{E[Y(d)]}. Maintaining both means the truth lies in
+#' containing \code{E\[Y(d)\]}. Maintaining both means the truth lies in
 #' both intervals, so the joint bound is their intersection:
 #' \code{lower = max(lower_MTS, lower_MTR)} and
 #' \code{upper = min(upper_MTS, upper_MTR)}.

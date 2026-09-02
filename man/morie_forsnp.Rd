@@ -20,8 +20,8 @@ A list with elements \code{rmp}, \code{lr},
 \description{
 Product rule over loci with the NRC II Recommendation 4.10
 subpopulation correction (theta): homozygote
-\link[=3t+(1-t)p]{2t+(1-t)p}/((1+t)(1+2t)); heterozygote
-2\link[=t+(1-t)p2]{t+(1-t)p1}/((1+t)(1+2t)); LR = 1/RMP.  theta = 0
+[2t+(1-t)p][3t+(1-t)p]/((1+t)(1+2t)); heterozygote
+2[t+(1-t)p1][t+(1-t)p2]/((1+t)(1+2t)); LR = 1/RMP.  theta = 0
 recovers the Hardy-Weinberg product rule.
 }
 \examples{

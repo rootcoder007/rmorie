@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Influence function of an estimator at a point
 #'
-#' \deqn{IF(x; T, F) = \lim_{e \to 0} [T((1-e)F + e \delta_x) - T(F)]/e.}{IF(x; T, F) = lim_{e -> 0} [T((1-e)F + e delta_x) - T(F)]/e.}
+#' \deqn{IF(x; T, F) = \lim_{e \to 0} \[T((1-e)F + e \delta_x) - T(F)\]/e.}{IF(x; T, F) = lim_{e -> 0} \[T((1-e)F + e delta_x) - T(F)\]/e.}
 #'
 #' Hampel, F. R. (1974), "The influence curve and its role in robust
 #' estimation", \emph{Journal of the American Statistical Association} 69(346),

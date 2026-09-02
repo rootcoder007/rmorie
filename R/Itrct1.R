@@ -8,7 +8,7 @@
 #' functions are computed on disjoint subsamples, so the variance of the
 #' contrast is the sum of the level variances.
 #'
-#' Formula: tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] within levels.
+#' Formula: tau = E\[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))\] within levels.
 #'
 #' @param y Outcome change dY per unit.
 #' @param D Treatment indicator, 0 or 1.

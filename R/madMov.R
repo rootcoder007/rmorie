@@ -2,7 +2,7 @@
 #' Moving (rolling) median absolute deviation
 #'
 #' The MAD of each trailing window of length `window`; output element j covers
-#' x[j:(j+window-1)].  Source consulted: Hampel (1974), JASA 69(346), 383-393.
+#' x\[j:(j+window-1)\].  Source consulted: Hampel (1974), JASA 69(346), 383-393.
 #'
 #' @param x series.
 #' @param window window length.

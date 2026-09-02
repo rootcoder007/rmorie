@@ -22,7 +22,7 @@ A list with \code{levels}, \code{lower}, \code{upper},
 \code{t0}, \code{n}, \code{method}.
 }
 \description{
-Sharp bounds on each mean potential outcome \eqn{E[y(t)]} under the
+Sharp bounds on each mean potential outcome \eqn{E\[y(t)\]} under the
 combined assumptions of monotone treatment response and monotone
 treatment selection, plus the implied bound on an average
 treatment effect (Manski and Pepper 2000; Manski 2007, eqs.

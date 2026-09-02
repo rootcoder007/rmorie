@@ -24,7 +24,7 @@ walks, one in each graph, of equal length. Convergence needs
 constraint than the single-graph case.
 }
 \details{
-Formula: \code{k(G1, G2) = sum_ij [(I - lam (A1 (x) A2))^{-1}]_ij}.
+Formula: \code{k(G1, G2) = sum_ij \[(I - lam (A1 (x) A2))^{-1}\]_ij}.
 }
 \examples{
 RandW(G1 = 5L, G2 = 5L)

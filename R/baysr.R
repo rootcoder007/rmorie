@@ -4,7 +4,7 @@
 #' NOT IN THE BOOK.  Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 #' Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #' Springer, was searched in full -- all seventeen page-range volumes and the
-#' index, [Pages 683-691].  Chapter 6, volume [Pages 171-208], is the Bayesian
+#' index, \[Pages 683-691\].  Chapter 6, volume \[Pages 171-208\], is the Bayesian
 #' chapter and carries BRR, BayesA, BayesB, BayesC and the Bayesian LASSO;
 #' BayesR is not among them and the string "BayesR" does not occur anywhere in
 #' the book.

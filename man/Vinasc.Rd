@@ -7,7 +7,7 @@
 Vinasc(receptor, ligand_pose, n_rot = 0)
 }
 \arguments{
-\item{receptor}{Matrix, rows \code{[x, y, z, radius, type]}; type 1
+\item{receptor}{Matrix, rows \code{\[x, y, z, radius, type\]}; type 1
 hydrophobic, 2 hydrogen-bond donor or acceptor, 0 otherwise.}
 
 \item{ligand_pose}{Same layout for the ligand pose.}

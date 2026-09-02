@@ -11,7 +11,7 @@
 #' rows as an iid draw from a joint distribution and so survives
 #' heteroskedasticity and a stochastic design, at the price of not
 #' conditioning on X.  This is the case version: draw i*_1, ..., i*_n
-#' uniformly with replacement from 1..n, refit OLS on (X[i*], y[i*]), collect
+#' uniformly with replacement from 1..n, refit OLS on (X\[i*\], y\[i*\]), collect
 #' beta*.
 #'
 #' Because the design is redrawn a resample can be rank deficient; the fit is

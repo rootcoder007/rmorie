@@ -6,7 +6,7 @@
 #' covariate distribution instead. What remains after standardising to
 #' the reference distribution is the residual disparity.
 #'
-#' Formula: \code{PAD = E[Y|S=1] - E_{X ~ P(X|S=0)}[E(Y|S=1, X)]}.
+#' Formula: \code{PAD = E\[Y|S=1\] - E_{X ~ P(X|S=0)}\[E(Y|S=1, X)\]}.
 #'
 #' @param y Outcome.
 #' @param S_grp Binary group indicator.

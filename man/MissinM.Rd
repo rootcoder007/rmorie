@@ -22,12 +22,12 @@ mar_mean, p_observed, tipping_delta, n_observed, n.
 }
 \description{
 Missingness at random is not testable from the observed data: any
-value of \code{E[Y | R = 0]} is equally consistent with what was seen.
+value of \code{E\[Y | R = 0\]} is equally consistent with what was seen.
 A pattern-mixture sensitivity analysis parameterises the departure
 instead of assuming it away,
-\code{E[Y | R = 0] = E[Y | R = 1] + delta}, so the marginal mean traced
+\code{E\[Y | R = 0\] = E\[Y | R = 1\] + delta}, so the marginal mean traced
 over the grid is
-\code{E[Y](delta) = E[Y|R=1] + (1 - P(R=1)) delta}.
+\code{E[Y](delta) = E\[Y|R=1\] + (1 - P(R=1)) delta}.
 }
 \details{
 \code{delta = 0} is the MAR answer, recovered exactly. The mean is
@@ -36,7 +36,7 @@ is fragile only in proportion to how much data is absent, and with
 nothing missing no delta can move it.
 
 The TIPPING POINT is the delta at which the mean crosses
-\code{reference}, \code{delta* = (reference - E[Y|R=1]) / P(R=0)}, so
+\code{reference}, \code{delta* = (reference - E\[Y|R=1\]) / P(R=0)}, so
 the conclusion can be stated as "the missing units would have to
 differ by delta* for this to reverse". With nothing missing there is
 no such delta and the field is \code{NaN}, not infinity: the

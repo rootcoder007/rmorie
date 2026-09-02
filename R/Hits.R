@@ -8,7 +8,7 @@
 #'
 #' Formula: a <- A' h; h <- A a; both rescaled to unit L2 norm.
 #'
-#' @param A Square adjacency matrix, A[i, j] > 0 for a link i -> j.
+#' @param A Square adjacency matrix, A\[i, j\] > 0 for a link i -> j.
 #' @param iters Number of I/O sweeps, at least one.
 #' @return List with \code{estimate} (largest hub score), \code{hubs},
 #'   \code{authorities}, \code{top_hub}, \code{n}, \code{iters},

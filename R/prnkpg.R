@@ -7,7 +7,7 @@
 #'
 #' Formula: \code{x = (1 - d)/n + d A^T D^-1 x}.
 #'
-#' @param G Adjacency matrix; \code{G[i, j]} non-zero is a link i to j.
+#' @param G Adjacency matrix; \code{G\[i, j\]} non-zero is a link i to j.
 #' @param damping Damping factor.
 #' @param n_iter Power iterations.
 #' @return The value of \code{\link{Pgrank}}.

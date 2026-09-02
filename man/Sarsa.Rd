@@ -52,7 +52,7 @@ The boxed algorithm of Sutton and Barto (2018), Section 6.4, p. 130:
 after taking A in S and observing R and the next state, the next
 action is chosen epsilon-greedily first and the update uses the
 quintuple (S, A, R, S2, A2):
-\eqn{Q(S,A) \leftarrow Q(S,A) + \alpha [R + \gamma Q(S',A') - Q(S,A)]}
+\eqn{Q(S,A) \leftarrow Q(S,A) + \alpha \[R + \gamma Q(S',A') - Q(S,A)\]}
 The name and algorithm come from the modified connectionist
 Q-learning of Rummery and Niranjan (1994).  Q(terminal, .) = 0.
 Determinism conventions match the Python arm bit-exactly: greedy

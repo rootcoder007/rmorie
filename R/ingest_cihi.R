@@ -82,7 +82,7 @@ morie_datasets_cihi_data_tables <- function() {
 #' @examplesIf requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)
 #' \donttest{
 #' # Any table from the catalogue, e.g. the injury/trauma ED table:
-#' u <- morie_datasets_cihi_data_tables()$url[1]
+#' u <- morie_datasets_cihi_data_tables()$url\[1\]
 #' df <- morie_ingest_cihi_xlsx(u)
 #' }
 #' @export

@@ -6,7 +6,7 @@
 #'
 #' Formula: \code{PAF = pe (RR - 1) / (pe (RR - 1) + 1)}.
 #'
-#' @param pe Prevalence of exposure in the population, in [0, 1].
+#' @param pe Prevalence of exposure in the population, in \[0, 1\].
 #' @param RR Relative risk, strictly positive.
 #' @param se_RR Optional standard error of \code{RR}; supplying it adds
 #'   a delta-method confidence interval.

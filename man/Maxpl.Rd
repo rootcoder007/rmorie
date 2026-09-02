@@ -19,7 +19,7 @@ list: estimate, pooled, argmax, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 533-577}, Chapter 13, Section 13.4, pp. 542-543, read as a
+volume [Pages 533-577], Chapter 13, Section 13.4, pp. 542-543, read as a
 rendered page.  "The max pooling operation summarizes the input as the
 maximum within a rectangular neighborhood"; the window slides by the
 stride and the output size in the l-th layer is
@@ -30,7 +30,7 @@ is 5, "the max of 3, 4, 4, and 5", and the last is 6, "a max of 3, 2, 5,
 and 6".  Those three printed windows are the anchor.
 }
 \details{
-This is the one-dimensional case, y\link[fixest:i]{i} = max(x\link[=i*S : i*S+P]{i\emph{S : i}S+P}).
+This is the one-dimensional case, y\link[fixest:i]{i} = max(x[i\emph{S : i}S+P]).
 }
 \examples{
 Maxpl(c(3, 3, 7, 4), 4, 1)$estimate

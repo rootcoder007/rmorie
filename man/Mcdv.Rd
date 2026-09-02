@@ -9,7 +9,7 @@ Mcdv(X, h = NULL, n_starts = NULL, max_subsets = 2e+05)
 \arguments{
 \item{X}{n-by-p data matrix.}
 
-\item{h}{subset size; defaults to \link{(n + p + 1)/2}.}
+\item{h}{subset size; defaults to [(n + p + 1)/2].}
 
 \item{n_starts}{ignored; accepted so the signature matches Fastm.}
 
@@ -33,7 +33,7 @@ is that covariance matrix multiplied by a consistency factor c0.
 \details{
 The same source gives c0 = alpha / F_chi2_{p+2}(q_alpha) with alpha = h/n
 and q_alpha the alpha-quantile of the chi2_p distribution, gives the most
-robust subset size h = \link{(n + p + 1)/2}, and gives the requirement h > p,
+robust subset size h = [(n + p + 1)/2], and gives the requirement h > p,
 since otherwise every h-subset has a singular covariance matrix.
 
 THIS function computes the estimator by its definition, enumerating every

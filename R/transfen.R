@@ -3,7 +3,7 @@
 #'
 #' Schreiber (2000), Measuring information transfer, Physical Review
 #' Letters 85(2), 461-464, eq. (4): T_(Y->X) = sum p(x_(n+1), x_n, y_n)
-#' log[p(x_(n+1) | x_n, y_n) / p(x_(n+1) | x_n)], equivalently
+#' log\[p(x_(n+1) | x_n, y_n) / p(x_(n+1) | x_n)\], equivalently
 #' H(X_(n+1)|X_n) - H(X_(n+1)|X_n, Y_n).  The PRL is paywalled; the
 #' definition is quoted in its standard published form.  Transfer entropy
 #' is DIRECTED, so both directions are computed -- reporting only one

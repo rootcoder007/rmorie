@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_hrz3.R
 \name{.hrz3_u01}
 \alias{.hrz3_u01}
-\title{Mid-rank transform onto \link{0, 1}.  Horowitz (2009) p. 156 observes the}
+\title{Mid-rank transform onto [0, 1].  Horowitz (2009) p. 156 observes the}
 \usage{
 .hrz3_u01(v)
 }
@@ -13,7 +13,7 @@
 A numeric value.
 }
 \description{
-support of (X, W) may be taken to be \link{0, 1}^2 with no loss of
+support of (X, W) may be taken to be [0, 1]^2 with no loss of
 generality, "because it can always be satisfied by, if necessary,
 carrying out a monotone increasing transformation of (X, W)".  The
 mid-rank map is such a transformation and is exactly reproducible in

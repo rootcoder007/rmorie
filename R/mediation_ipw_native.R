@@ -72,8 +72,8 @@
 #' The four normalised means, exactly as written in Huber (2014)
 #'
 #' Section 3. Reading the two subtracted terms of theta(1) and theta(0)
-#' as potential-outcome means gives, in order, E[Y(1,M(1))],
-#' E[Y(0,M(1))], E[Y(1,M(0))], E[Y(0,M(0))].
+#' as potential-outcome means gives, in order, E\[Y(1,M(1))\],
+#' E\[Y(0,M(1))\], E\[Y(1,M(0))\], E\[Y(0,M(0))\].
 #'
 #' @param y Passed to \code{.morie_wmean}.
 #' @param d Numeric; combined arithmetically in the body.
@@ -131,7 +131,7 @@
 #' @param x covariate matrix.
 #' @param link \code{"probit"} (the specification Huber uses) or
 #'   \code{"logit"}.
-#' @param trim propensity scores outside \code{[trim, 1 - trim]} are
+#' @param trim propensity scores outside \code{\[trim, 1 - trim\]} are
 #'   dropped. Defaults to \code{0}, i.e. no trimming: Huber's footnote
 #'   10 states that no trimming is applied, scores near the boundary not
 #'   arising in that paper's simulation or application. Raise it when

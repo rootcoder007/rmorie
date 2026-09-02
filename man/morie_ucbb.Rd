@@ -7,7 +7,7 @@
 morie_ucbb(x, T = NULL)
 }
 \arguments{
-\item{x}{Reward table (T x K); \code{x[t, j]} is what machine j
+\item{x}{Reward table (T x K); \code{x\[t, j\]} is what machine j
 pays at play t.}
 
 \item{T}{Number of plays (default all rows; must be >= K).}

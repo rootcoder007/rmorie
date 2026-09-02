@@ -4,16 +4,16 @@
 #'
 #' Data are taken to be conditionally dependent on an underlying smooth
 #' spatial process. The link relates the CONDITIONAL mean to the covariates
-#' and to the latent field, eq (6.73), \eqn{g[\mu(s)] = x(s)'\beta + S(s)},
+#' and to the latent field, eq (6.73), \eqn{g\[\mu(s)\] = x(s)'\beta + S(s)},
 #' with the conditional variance depending on the mean through eq (6.74),
-#' \eqn{Var[Z(s)|S] = \sigma^2 v(\mu(s))}. Spatial dependence is deferred
+#' \eqn{Var\[Z(s)|S\] = \sigma^2 v(\mu(s))}. Spatial dependence is deferred
 #' entirely to the latent process: the data are conditionally independent
 #' given S.
 #'
 #' The trap this function makes visible is the one Sec. 6.3.4 spells out. In
 #' a linear model the marginal and conditional specifications agree; in a GLM
 #' they do not, because
-#' \eqn{E[Z(s)] = E_S[g^{-1}(x(s)'\beta + S(s))] \ne g^{-1}(x(s)'\beta)}.
+#' \eqn{E\[Z(s)\] = E_S\[g^{-1}(x(s)'\beta + S(s))\] \ne g^{-1}(x(s)'\beta)}.
 #' Taking expectations does not carry through a nonlinear link. Both are
 #' returned, and for the log link, where Example 6.6 gives the correction in
 #' closed form, so is the ratio between them -- \eqn{\exp(\sigma_S^2/2)},

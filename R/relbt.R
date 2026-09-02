@@ -3,7 +3,7 @@
 #'
 #' Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 #' Statistical Machine Learning Methods for Genomic Prediction, Springer,
-#' volume [Pages 109-139], Chapter 4, equation (4.2), p. 129, read as a
+#' volume \[Pages 109-139\], Chapter 4, equation (4.2), p. 129, read as a
 #' rendered page, defines the predictive ability r as Pearson's correlation
 #' between the testing observations and their predictions.  Dekkers (2007),
 #' Prediction of response to marker-assisted and genomic selection using
@@ -12,7 +12,7 @@
 #' reliability, the squared accuracy, is rel = r^2 / h^2.  Chapter 4 defines
 #' r but never divides it by h; that step is Dekkers's.
 #'
-#' @param r predictive ability, in [-1, 1].
+#' @param r predictive ability, in \[-1, 1\].
 #' @param h2 narrow-sense heritability, in (0, 1]; recycled against r.
 #' @return list: estimate, reliability, accuracy, n, method.
 #' @keywords internal

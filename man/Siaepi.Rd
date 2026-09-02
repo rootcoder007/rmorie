@@ -13,7 +13,7 @@ Siaepi(G, beta, gamma, initial, t_max = 50, dt = 0.01)
 
 \item{gamma}{Recovery rate into the absorbing R compartment.}
 
-\item{initial}{Initial infection probability of each node, in \link{0, 1}.}
+\item{initial}{Initial infection probability of each node, in [0, 1].}
 
 \item{t_max}{Integration horizon. Default 50.}
 

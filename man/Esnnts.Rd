@@ -36,7 +36,7 @@ Formula: a fixed random recurrent reservoir with a trained linear
 readout,
 \preformatted{
   x_t = (1 - a) x_{t-1} + a tanh(W x_{t-1} + W_in u_t)
-  yhat_t = v' [1; x_t]
+  yhat_t = v' \[1; x_t\]
 }
 driven in one-step prediction mode (u_t = y_{t-1}, target y_t).  Only
 v is fitted, by ridge regression; W and W_in are fixed and never
@@ -44,7 +44,7 @@ trained.
 }
 \details{
 The reservoir is generated deterministically -- entry k is drawn from
-van der Corput base \code{PRIMES[k mod 12]} -- so both language arms
+van der Corput base \code{PRIMES\[k mod 12\]} -- so both language arms
 build the identical network.  W is rescaled so its induced infinity
 norm equals \code{spectral_radius}; ||W||_inf < 1 is Jaeger's
 sufficient condition for the echo state property (2001, Prop. 3).

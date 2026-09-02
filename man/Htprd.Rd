@@ -22,10 +22,10 @@ list: estimate, best_params, cv_score, scores, grid, keys, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer, read
-as rendered pages.  Volume \link{Pages 427-476}, Chapter 11, Section 11.4,
+as rendered pages.  Volume [Pages 427-476], Chapter 11, Section 11.4,
 pp. 438-441: the tuning is a "full Cartesian grid search (with sample = 1)"
 over the declared flags, run inside an inner cross-validation, and the
-combination with the best inner score is kept.  Volume \link{Pages 109-139},
+combination with the best inner score is kept.  Volume [Pages 109-139],
 Chapter 4, Section 4.4.2, p. 127, states the same rule in general terms --
 train "with every permutation of hyperparameter choices using the training
 set.  Then, the combination of hyperparameters with the best prediction

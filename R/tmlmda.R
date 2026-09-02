@@ -5,7 +5,7 @@
 #' for an observed outcome, the joint intervention is "set \code{A = a}
 #' and \code{Delta = 1}", so the clever covariate carries both
 #' probabilities,
-#' \code{H = Delta/pi(A, X) * [A/g(X) - (1 - A)/(1 - g(X))]}, with
+#' \code{H = Delta/pi(A, X) * \[A/g(X) - (1 - A)/(1 - g(X))\]}, with
 #' \code{pi(a, X)} evaluated at the counterfactual arm.  The initial
 #' outcome regression is fitted on complete cases only, and the
 #' fluctuation \code{Q*(a, X) = Q(a, X) + eps/(g_a(X) pi(a, X))} uses the

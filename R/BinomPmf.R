@@ -6,7 +6,7 @@
 #'
 #' @param k successes, >= 0.
 #' @param n trials, >= 0.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(k, n, p, probability).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs (4.6), (4.60).

@@ -48,7 +48,7 @@ actions on the average), \code{v}, \code{n_steps},
 \description{
 Maintains two tables and, with probability one half per step,
 applies the update of Sutton and Barto (2018) eq. 6.10,
-\eqn{Q_1(S,A) \leftarrow Q_1(S,A) + \alpha [R + \gamma Q_2(S', \arg\max_a Q_1(S',a)) - Q_1(S,A)]}
+\eqn{Q_1(S,A) \leftarrow Q_1(S,A) + \alpha \[R + \gamma Q_2(S', \arg\max_a Q_1(S',a)) - Q_1(S,A)\]}
 else the same with the tables swapped; behaviour actions are
 epsilon-greedy in \eqn{Q_1 + Q_2}.  This is the boxed algorithm of
 their Section 6.7, p. 136; the estimator is van Hasselt (2010), and

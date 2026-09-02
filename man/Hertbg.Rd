@@ -29,7 +29,7 @@ is the degenerate case the tests use.
 }
 \details{
 Formula: h^2 = sigma_g^2 / (sigma_g^2 + sigma_e^2); profile
--0.5 \link{log|V| + log(1'V^{-1}1) + (n - 1) log(y' P y)} with
+-0.5 [log|V| + log(1'V^{-1}1) + (n - 1) log(y' P y)] with
 V = h^2 K + (1 - h^2) I.
 }
 \examples{

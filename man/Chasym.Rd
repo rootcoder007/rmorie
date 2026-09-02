@@ -23,7 +23,7 @@ List with \code{estimate}, \code{theta}, \code{var_if},
 \code{B}, \code{method}.
 }
 \description{
-Formula: compare E\link{psi^2}/n to the bootstrap
+Formula: compare E[psi^2]/n to the bootstrap
 }
 \details{
 The influence function of the IPW mean is psi_i = w_i (Y_i - theta),

@@ -2,13 +2,13 @@
 
 #' Interval probability from a density on a grid
 #'
-#' Trapezoid integration on a 513-point refinement of [a, b].  The
+#' Trapezoid integration on a 513-point refinement of \[a, b\].  The
 #' supplied density must integrate to within 5 percent of 1 over the
 #' whole grid, which catches an unnormalised input.
 #'
 #' @param grid strictly increasing abscissae, length >= 2.
 #' @param density non-negative density values on grid.
-#' @param a,b interval bounds, grid[1] <= a <= b <= grid[length(grid)].
+#' @param a,b interval bounds, grid\[1\] <= a <= b <= grid\[length(grid)\].
 #' @return list(probability, a, b).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eq (4.2).

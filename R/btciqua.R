@@ -18,7 +18,7 @@
 #' letting it pass for precision.
 #'
 #' @param x the sample.
-#' @param tau the quantile level in [0, 1].
+#' @param tau the quantile level in \[0, 1\].
 #' @param B number of resamples.
 #' @param alpha two-sided error rate.
 #' @param seed integer seed for the deterministic index generator.

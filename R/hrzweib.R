@@ -3,7 +3,7 @@
 #'
 #' Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Springer, Section 6.1.3, pages 197-200 (volume
-#' [Pages 189-232], read as rendered page images).  The model is
+#' \[Pages 189-232\], read as rendered page images).  The model is
 #' lambda(y | x) = alpha y^(alpha - 1) exp(-x beta - V) (6.17) and
 #' alpha log Y = X beta + U + V (6.18), with V independent of (X, U) and
 #' otherwise unrestricted.  The book notes below (6.19) why alpha cannot be
@@ -14,7 +14,7 @@
 #' m1 = n^(1 - delta1), m2 = n^(1 - delta2), 0 < delta2 < delta1 < 1,
 #' rho = 1 - (1/2)(n^-delta1 - n^-delta2) / ((delta1 - delta2) log n),
 #' a_n = -rho (delta1 - delta2) log n / (log Y_(m1) - log Y_(m2)) (6.25) and
-#' sigma^2 = [1 / ((delta1 - delta2) log n)]^2 (n^delta1 - n^delta2) / n
+#' sigma^2 = \[1 / ((delta1 - delta2) log n)\]^2 (n^delta1 - n^delta2) / n
 #' (6.27).
 #'
 #' The book adds, in the paragraph after (6.27), that with covariates alpha is

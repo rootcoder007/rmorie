@@ -5,13 +5,13 @@
 #' Formula: for the standard SIR model the final size Z = S(0) - S(inf)
 #' satisfies the implicit relation
 #' \preformatted{
-#'   Z = S(0) (1 - exp(-R0 [Z + I(0)]))
+#'   Z = S(0) (1 - exp(-R0 \[Z + I(0)\]))
 #' }
 #' (Ma & Earn 2006, eq. 4, p.681), which in the limit I(0) -> 0,
 #' S(0) -> 1 collapses to the classical Z = 1 - exp(-R0 Z) (their eq. 5).
 #' Ma & Earn show the relation holds for arbitrary distributions of the
 #' infectious period, so R0 alone determines the final size.  The root is
-#' isolated by bisection on [0, S(0)], where the residual is
+#' isolated by bisection on \[0, S(0)\], where the residual is
 #' non-negative at 0 and strictly negative at S(0).
 #'
 #' @param R0 Basic reproduction number (>= 0).

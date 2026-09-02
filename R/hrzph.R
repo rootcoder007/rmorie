@@ -3,7 +3,7 @@
 #'
 #' Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 #' Econometrics, Springer, Section 6.2.1, pages 201-203 (volume
-#' [Pages 189-232], read as rendered page images).  Note the sign convention:
+#' \[Pages 189-232\], read as rendered page images).  Note the sign convention:
 #' the book writes the model as log Lambda_0(Y) = X beta + U with U
 #' extreme-value (6.31), so the conditional hazard carries exp(-x beta), not
 #' exp(+x beta), and every formula below follows that.  The partial likelihood

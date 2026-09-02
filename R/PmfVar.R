@@ -2,7 +2,7 @@
 
 #' Variance of a discrete pmf
 #'
-#' Var(X) = E[(X - mu)^2] (eq 3.19), cross-checked against the
+#' Var(X) = E\[(X - mu)^2\] (eq 3.19), cross-checked against the
 #' computational form E(X^2) - mu^2 (eq 3.34); their agreement is
 #' eq (3.35) and the square root is eq (3.40).
 #'

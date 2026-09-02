@@ -6,13 +6,13 @@
 #' effect; \code{min_denominator} exists for that reason.
 #'
 #' Formula: H_a = 1\{A = a, M = m\} / (g_a(W) h_m(A, W));
-#'   psi = E[Q*(1, m, W)] - E[Q*(0, m, W)]
+#'   psi = E\[Q*(1, m, W)\] - E\[Q*(0, m, W)\]
 #'
-#' @param Y Outcome in [0, 1].
+#' @param Y Outcome in \[0, 1\].
 #' @param A Binary treatment.
 #' @param M Mediator level of each observation.
-#' @param QAM Initial E[Y | A, M, W] at the observed (A, M).
-#' @param Q1m,Q0m Initial E[Y | A = 1/0, M = m, W].
+#' @param QAM Initial E\[Y | A, M, W\] at the observed (A, M).
+#' @param Q1m,Q0m Initial E\[Y | A = 1/0, M = m, W\].
 #' @param g1W Initial P(A = 1 | W).
 #' @param hmW Initial P(M = m | A, W).
 #' @param m The level the mediator is set to.

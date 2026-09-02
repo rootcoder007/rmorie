@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Poisson loss for count outcomes.
 #'
-#' Formula: L(w) = sum_i sum_j [ yhat_ij - y_ij log(yhat_ij) ]
+#' Formula: L(w) = sum_i sum_j \[ yhat_ij - y_ij log(yhat_ij) \]
 #'
 #' @param Y Observed counts; a flat vector is read as one column.
 #' @param Yhat Predicted Poisson means, strictly positive.

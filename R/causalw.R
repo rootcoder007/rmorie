@@ -160,12 +160,12 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
 #' \eqn{H_1^*=I(A=1)/g(1|W)}, \eqn{H_0^*=I(A=0)/g(0|W)}, and the
 #' fluctuation \eqn{logit(Q^*) = logit(Q) + \epsilon_0 H_0^* + \epsilon_1 H_1^*}
 #' fitted by logistic regression of Y on the clever covariates with
-#' offset \eqn{logit(Q)}.  `y` must be bounded in [0, 1] so the
+#' offset \eqn{logit(Q)}.  `y` must be bounded in \[0, 1\] so the
 #' fluctuation stays inside the model space.  When the initial fit
 #' already solves the score, epsilon is 0 and the estimate equals
 #' `plugin`.
 #'
-#' @param y Outcomes in [0, 1].
+#' @param y Outcomes in \[0, 1\].
 #' @param T Treatment indicator, 0/1.
 #' @param ps Propensity \eqn{g(1|W)}, strictly in (0, 1).
 #' @param Q1,Q0 Initial outcome fits under treatment and control.
@@ -222,10 +222,10 @@ Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
 
 #' Controlled direct effect at a fixed mediator value
 #'
-#' \deqn{CDE(m) = E[Y(1,m)] - E[Y(0,m)]}{CDE(m) = E[Y(1,m)] - E[Y(0,m)]}
+#' \deqn{CDE(m) = E\[Y(1,m)\] - E\[Y(0,m)\]}{CDE(m) = E\[Y(1,m)\] - E\[Y(0,m)\]}
 #' The mediator is set for everybody, not left where it would have
 #' fallen -- that is what separates this from the natural direct
-#' effect.  Under \eqn{E[Y|X,M] = b_0 + b_X X + b_M M + b_{XM} XM} the
+#' effect.  Under \eqn{E\[Y|X,M\] = b_0 + b_X X + b_M M + b_{XM} XM} the
 #' contrast is \eqn{b_X + b_{XM} m}, so with no interaction it does not
 #' depend on m at all.
 #'
@@ -274,7 +274,7 @@ Cde <- function(Y, X, M, m) {
 #' @param y Outcomes.
 #' @param treatment_history Subjects by time.
 #' @param covariate_history,time Accepted for signature compatibility.
-#' @param propensity \eqn{E[A|H]} for cumulative treatment; sample mean
+#' @param propensity \eqn{E\[A|H\]} for cumulative treatment; sample mean
 #'   if omitted (correct only under randomization).
 #' @return Named list with `estimate`, `psi`, `se`, `ci_lower`,
 #'   `ci_upper`, `ols_slope`, `residual_treatment`, `n`, `method`.

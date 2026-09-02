@@ -21,7 +21,7 @@ This module is an ALIAS. Modularity is implemented once, in
 cite.
 }
 \details{
-\code{Q = (1 / 2m) sum_ij [A_ij - k_i k_j / 2m] delta(c_i, c_j)}.
+\code{Q = (1 / 2m) sum_ij \[A_ij - k_i k_j / 2m\] delta(c_i, c_j)}.
 }
 \references{
 Newman (2006), PNAS 103(23), 8577-8582,

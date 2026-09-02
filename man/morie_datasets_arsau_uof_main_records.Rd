@@ -34,7 +34,7 @@ reporting year.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
-head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
+head(df\[, c("IncidentYear", "PoliceService", "IncidentType")\])
 \dontshow{\}) # examplesIf}
 }
 \references{

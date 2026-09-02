@@ -21,7 +21,7 @@ list: estimate, pa, mse, y_hat, pa_fold, fold, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer, read
-as rendered pages.  Volume \link{Pages 109-139}, Chapter 4, Section 4.3.6,
+as rendered pages.  Volume [Pages 109-139], Chapter 4, Section 4.3.6,
 p. 118, defines the scheme: the lines are partitioned into g groups, "the
 information of g-1 groups are used as the training set while all
 individuals of the remaining group are used as the testing set. ...
@@ -31,7 +31,7 @@ correlation between the testing observations and their predictions, and
 equation (4.1) gives the testing mean squared error.
 }
 \details{
-Volume \link{Pages 141-170}, Chapter 5, Section 5.3, equation (5.3), supplies
+Volume [Pages 141-170], Chapter 5, Section 5.3, equation (5.3), supplies
 the predictor: the GBLUP mean 1_n mu + Z_L b with b ~ N(0, sigma_g^2 G).
 Written on the marker scale that is the ridge predictor used here, with
 lam standing for sigma^2 / sigma_beta^2.

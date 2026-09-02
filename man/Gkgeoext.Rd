@@ -10,9 +10,9 @@ Gkgeoext(jh, j4h, h = NULL, a = NULL, b = NULL, f = NULL)
 morie_fauzi_thm1_2_var_mgkde(jh, j4h, h = NULL, a = NULL, b = NULL, f = NULL)
 }
 \arguments{
-\item{jh}{\code{J_h(x) = E[A_h(x)]}.}
+\item{jh}{\verb{J_h(x) = E\[A_h(x)\]}.}
 
-\item{j4h}{\code{J_4h(x) = E[A_4h(x)]}, the same object at bandwidth \verb{4h}.}
+\item{j4h}{\verb{J_4h(x) = E\[A_4h(x)\]}, the same object at bandwidth \verb{4h}.}
 
 \item{h}{Bandwidth; needed only for the explicit remainder.}
 
@@ -22,7 +22,7 @@ morie_fauzi_thm1_2_var_mgkde(jh, j4h, h = NULL, a = NULL, b = NULL, f = NULL)
 Named list with \code{estimate}, \code{remainder}, \code{t1}, \code{t2}, \code{method}.
 }
 \description{
-Theorem 1.2, Eq. (1.13): \eqn{J_h^2(x)[J_{4h}(x)]^{-1} = f_X(x) + O(h)}{J_h^2(x)[J_4h(x)]^-1 = f(x) + O(h)},
+Theorem 1.2, Eq. (1.13): \eqn{J_h^2(x)\[J_{4h}(x)\]^{-1} = f_X(x) + O(h)}{J_h^2(x)\[J_4h(x)\]^-1 = f(x) + O(h)},
 with \eqn{J_h = E[A_h]}{J_h = E[A_h]}.
 }
 \details{

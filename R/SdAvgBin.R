@@ -7,7 +7,7 @@
 #' defaults are the book's worked dice average, sigma_avg = 0.0037.
 #'
 #' @param n number of trials, >= 1.
-#' @param p success probability, in [0, 1].
+#' @param p success probability, in \[0, 1\].
 #' @return list(sd_single, sd_tot, sd_avg).
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eqs (3.57)-(3.58).

@@ -17,7 +17,7 @@
 #' @param Cx Structure matrix of the first object, n by n.
 #' @param Cy Structure matrix of the second object, m by m.
 #' @param a,b Marginals.
-#' @param alpha Trade-off in [0, 1].
+#' @param alpha Trade-off in \[0, 1\].
 #' @param max_iter Conditional-gradient steps.
 #' @return List with \code{T}, \code{cost}, \code{wass_part},
 #'   \code{gromov_part}, \code{n}, \code{m}, \code{iters}.

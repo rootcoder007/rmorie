@@ -25,7 +25,7 @@ score high on consistency and low here.
 }
 \details{
 Formula: \code{ICC(A,1) = (MS_R - MS_E) /
-[MS_R + (k-1) MS_E + k (MS_C - MS_E)/n]}.
+\[MS_R + (k-1) MS_E + k (MS_C - MS_E)/n\]}.
 }
 \examples{
 IccA(y = c(1, 2, 3, 4, 5, 6, 7, 8), subject = c(1, 2, 3, 4, 5, 6, 7, 8), rater = c(1, 2, 3, 4, 5, 6, 7, 8))

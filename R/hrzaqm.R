@@ -11,7 +11,7 @@
 #' rho_alpha(u) = abs(u) + (2 alpha - 1) u, then a local second stage,
 #' giving an asymptotically normal, oracle-efficient estimator with no
 #' curse of dimensionality.  Horowitz and Lee normalise by
-#' integral m_j(v) dv = 0 on [-1, 1].
+#' integral m_j(v) dv = 0 on \[-1, 1\].
 #'
 #' Both stages use a FIXED number of IRLS iterations on the check loss
 #' with no tolerance-based early exit.  Components are centred over

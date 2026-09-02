@@ -7,7 +7,7 @@
 #' coefficient: chi = 0 for asymptotic independence, chi = 1 for perfect
 #' tail dependence.  The joint proportion is bounded away from 0 and 1 by
 #' half an observation so the logarithm stays finite, and chi is clamped
-#' to [0, 1] (property 1, Coles p. 164).
+#' to \[0, 1\] (property 1, Coles p. 164).
 #'
 #' R arm of the existing Python \code{chiDep} module.
 #'

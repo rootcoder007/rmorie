@@ -3,7 +3,7 @@
 #' Covariance of the second cumulative-survival estimator with the survival estimator (Eq. 4.22)
 #'
 #' Eq. (4.22):
-#' \deqn{\mathrm{Cov}[S_{X,2}(t), \tilde S_X(t)] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n),}{Cov[S_X2(t), Stilde(t)] = (1/n) S(t) F(t) + o(h/n),}
+#' \deqn{\mathrm{Cov}\[S_{X,2}(t), \tilde S_X(t)\] = \tfrac{1}{n}S_X(t)F_X(t) + o(h/n),}{Cov\[S_X2(t), Stilde(t)\] = (1/n) S(t) F(t) + o(h/n),}
 #' the same expression as (4.16) for `S_X,1`.
 #'
 #' That the two covariances coincide, and Theorem 4.2's variance coincides with

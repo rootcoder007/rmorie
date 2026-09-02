@@ -72,7 +72,7 @@
 
 #' OLS is R = phi I, so the weights are 1. WLS uses Cressie\'s (1985)
 #'
-#' approximation (4.33), Var[gamma_hat(h_m)] = 2 gamma^2 / |N(h_m)|,
+#' approximation (4.33), Var\[gamma_hat(h_m)\] = 2 gamma^2 / |N(h_m)|,
 #' whose reciprocal is the weight in (4.34).
 #'
 #' @param kind Passed to \code{identical}.

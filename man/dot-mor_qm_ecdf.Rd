@@ -2,7 +2,7 @@
 % Please edit documentation in R/qmDS_native.R
 \name{.mor_qm_ecdf}
 \alias{.mor_qm_ecdf}
-\title{Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to \link{0, 1}}
+\title{Piecewise-linear CDF through (x_(j), j/(n-1)), clamped to [0, 1]}
 \usage{
 .mor_qm_ecdf(sorted_x, v)
 }

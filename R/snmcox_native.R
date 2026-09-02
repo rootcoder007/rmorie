@@ -53,7 +53,7 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 }
 
 # fitted E[A | L]: logistic when the treatment is binary, least squares else
-#' Fitted E[A | L]: logistic when the treatment is binary, least squares
+#' Fitted E\[A | L\]: logistic when the treatment is binary, least squares
 #' else
 #'
 #' A step of the snmcox_native implementation. Called by \code{morie_snmcox_gest_score}.

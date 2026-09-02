@@ -29,7 +29,7 @@ alpha_from_gamma <- function(gamma) {
 
 #' Theorem 5.2: the variance-minimising trimming threshold
 #'
-#' Solves gamma = 2 E[k(X) | k(X) < gamma] by the fixed-point iteration
+#' Solves gamma = 2 E\[k(X) | k(X) < gamma\] by the fixed-point iteration
 #' the equation itself defines, starting from the no-trimming point.
 #' With homoskedastic variances (the default) k(x) = 1 / (e (1 - e)).
 #'
@@ -85,8 +85,8 @@ optimal_alpha <- function(pscore, sigma2_treated = NULL,
 #' Theorem 5.3: the one-sided threshold for the effect on the treated
 #'
 #' A*_t = {x : e(x) <= alpha_t}, with alpha_t = 1 (no trimming) when
-#' sup_x 1 / (1 - e(x)) <= 2 E[1 / (1 - e(X)) | W = 1], and otherwise
-#' solving 1 / (1 - alpha_t) = 2 E[1 / (1 - e(X)) | W = 1, e(X) <= alpha_t].
+#' sup_x 1 / (1 - e(x)) <= 2 E\[1 / (1 - e(X)) | W = 1\], and otherwise
+#' solving 1 / (1 - alpha_t) = 2 E\[1 / (1 - e(X)) | W = 1, e(X) <= alpha_t\].
 #' Homoskedasticity only, as in the paper.
 #'
 #' @param pscore Propensity scores.

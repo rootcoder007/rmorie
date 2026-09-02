@@ -11,7 +11,7 @@
 #' documentation.
 #'
 #' @param coef m by (1 + m p) coefficient matrix, row = equation, columns
-#'   = [intercept, A_1 row, ..., A_p row] -- the layout \code{Varest}
+#'   = \[intercept, A_1 row, ..., A_p row\] -- the layout \code{Varest}
 #'   returns.
 #' @param sigma_u m by m residual covariance.
 #' @param horizon Periods ahead.

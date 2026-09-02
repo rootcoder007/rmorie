@@ -27,7 +27,7 @@ With \eqn{Z(s) = \phi(Y(s))} and Y Gaussian, the natural predictor
 \eqn{\mu_Y} and matching expectations gives eq (5.58),
 \eqn{p_{tg} = \phi(p_{ok}) + \phi''(\mu_Y)/2\,(\sigma^2_{ok} - 2 m_Y)},
 with mean squared prediction error eq (5.59),
-\eqn{[\phi'(\mu_Y)]^2 \sigma^2_{ok}}.
+\eqn{\[\phi'(\mu_Y)\]^2 \sigma^2_{ok}}.
 }
 \details{
 \eqn{m_Y} enters with the sign convention of eq (5.20); a flipped

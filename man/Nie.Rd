@@ -21,7 +21,7 @@ DUPLICATE: the contrast is already implemented as \code{Nieff} in
 second copy.
 }
 \details{
-Formula: \code{NIE = E[Y(1, M(1))] - E[Y(1, M(0))]}, taken within
+Formula: \code{NIE = E\[Y(1, M(1))\] - E\[Y(1, M(0))\]}, taken within
 unit so the standard error is the paired one.
 }
 \examples{

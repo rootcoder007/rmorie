@@ -2,7 +2,7 @@
 
 #' Cramer-von Mises statistic against a fully specified distribution
 #'
-#' \deqn{CvM_n = n\int [F_n(x)-F(x)]^2 dF(x).}{CvM_n = n int [F_n(x) - F(x)]^2 dF(x).}
+#' \deqn{CvM_n = n\int \[F_n(x)-F(x)\]^2 dF(x).}{CvM_n = n int \[F_n(x) - F(x)\]^2 dF(x).}
 #'
 #' Evaluated by its exact closed form, not by quadrature: substituting the
 #' empirical df and integrating gives

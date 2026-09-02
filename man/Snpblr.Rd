@@ -30,7 +30,7 @@ Model (Meuwissen, Hayes and Goddard 2001, BLUP estimation, p. 1822):
 \eqn{e \sim N(0, \sigma_e^2 I)}, solved from Henderson's mixed-model
 equations (Henderson 1975; as printed in Montesinos-Lopez et al.
 2022 ch. 5.2):
-\eqn{[n, 1'Z; Z'1, Z'Z + \lambda I] [\mu; u] = [1'y; Z'y]} with
+\eqn{\[n, 1'Z; Z'1, Z'Z + \lambda I\] \[\mu; u\] = \[1'y; Z'y\]} with
 \eqn{\lambda = \sigma_e^2/\sigma_u^2}. Z is the VanRaden-centred
 marker matrix \eqn{Z_{ij} = M_{ij} - 2 p_j} (VanRaden 2008 Method 1
 centring), and GEBV = Z u-hat.

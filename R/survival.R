@@ -11,7 +11,7 @@
 #' Kaplan-Meier product-limit estimator
 #'
 #' `S(t) = prod (1 - d_i/n_i)` with Greenwood's variance and a log-log
-#' confidence interval, which cannot leave `[0, 1]` the way a symmetric
+#' confidence interval, which cannot leave `\[0, 1\]` the way a symmetric
 #' one can.  Note `survival::survfit`'s `std.err` is the error of the
 #' CUMULATIVE HAZARD; `se` here is the error of `S(t)` and `se_cumhaz`
 #' is survfit's, the two differing by a factor of `S`.

@@ -8,7 +8,7 @@ Bprop(layers, activations, loss_grad, act_fun = "sigmoid")
 }
 \arguments{
 \item{layers}{list of weight matrices W_1..W_L, W_l with one row per unit
-of layer l and a leading bias column, so z_l = W_l \link{1, a_{l-1}}.}
+of layer l and a leading bias column, so z_l = W_l [1, a_{l-1}].}
 
 \item{activations}{the forward pass a_0..a_L, one row per pattern; a_0 is
 the input without a bias column.}
@@ -24,7 +24,7 @@ list: estimate, gradients, deltas, loss, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume \link{Pages 379-425}, Chapter 10, Sections 10.8 and 10.8.1, equations
+volume [Pages 379-425], Chapter 10, Sections 10.8 and 10.8.1, equations
 (10.12) to (10.17), pp. 411-413, and the hand computation of Illustrative
 Example 10.1, pp. 413-417.
 }

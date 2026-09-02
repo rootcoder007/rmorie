@@ -413,7 +413,7 @@ Wsrmom <- function(n) {
        skew = 0, n = n)
 }
 
-#' Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
+#' Tie-corrected Var\[T+\] -- eqs. (5.7.10)-(5.7.11), p. 203
 #' @noRd
 Wsrties <- function(d, m0 = 0) {
   ds <- as.numeric(d) - as.numeric(m0)
@@ -2644,6 +2644,7 @@ Linbylin <- function(table, scores = NULL) {
 
 #' Odds ratio by Woolf's logit method (Woolf 1955) -- NOT from Gibbons
 #' @noRd
+#' @rdname Oddsrat-gibbons
 Oddsrat <- function(table, alpha = 0.05, cc = 0) {
   tb <- as.matrix(table); storage.mode(tb) <- "double"
   tb <- tb + as.numeric(cc)

@@ -128,7 +128,7 @@ composition_budget <- function(epsilons) {
 #' the sensitivity and is therefore part of the privacy guarantee, not
 #' a numerical convenience.
 #'
-#' @param y Outcome vector in [0,1].
+#' @param y Outcome vector in \[0,1\].
 #' @param D Treatment indicator.
 #' @param X Covariate matrix.
 #' @param epsilon Privacy budget.

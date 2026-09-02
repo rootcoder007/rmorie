@@ -7,7 +7,7 @@
 #' @param y Observed category index, 1-based, length T.
 #'
 #' @return List with ``brier``, ``brier_scaled``, ``n``, ``C``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Eq. (4.14) p. 136.  The book notes the categorical Brier score ranges over [0, 2] and suggests reporting BS/2; ``brier_scaled`` is that halved value.  Read from the chapter PDF, not recalled.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Eq. (4.14) p. 136.  The book notes the categorical Brier score ranges over \[0, 2\] and suggests reporting BS/2; ``brier_scaled`` is that halved value.  Read from the chapter PDF, not recalled.
 #' @export
 #' @examples
 #' set.seed(1)

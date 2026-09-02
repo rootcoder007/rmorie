@@ -1297,7 +1297,7 @@ CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
 #'
 #' equations; the convolution, rectifier and pooling used here are those
 #' of LeCun, Bengio and Hinton, Nature 521(7553):436-444, 2015, which is
-#' reference [35] of that section.
+#' reference \[35\] of that section.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param kernels Passed to \code{.morie_bx_mat}.
@@ -1777,7 +1777,7 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
 #' components uncorrelated, which is independence only for Gaussians,
 #' and a linear mixture tends TOWARDS a Gaussian -- so driving the
 #' estimates away from Gaussianity is what unmixes them.  Fixed-point
-#' update from Hyvarinen and Oja, Neural Networks 13, 2000, ref [50] of
+#' update from Hyvarinen and Oja, Neural Networks 13, 2000, ref \[50\] of
 #' that section.
 #'
 #' @param X Passed to \code{.morie_bx_mat}.

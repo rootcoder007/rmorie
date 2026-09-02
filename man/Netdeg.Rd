@@ -17,7 +17,7 @@ List with estimate (normalised C_D), degree (raw), node, n.
 \description{
 \code{C_D(v) = deg(v) / (n - 1)}. The divisor is the largest degree any
 node can have in a simple graph on \code{n} nodes, so \code{C_D} lands
-in \code{[0, 1]} and is comparable across graphs of different size: the
+in \code{\[0, 1\]} and is comparable across graphs of different size: the
 hub of a star scores exactly 1 and an isolate exactly 0. Weighted
 adjacency matrices are summed rather than counted.
 }

@@ -15,7 +15,7 @@
 #' Formula: \code{Rt = R0 S / N}; growing iff \code{Rt > 1}.
 #'
 #' @param R0 Basic reproduction number, non-negative.
-#' @param S Current susceptible count in [0, N].
+#' @param S Current susceptible count in \[0, N\].
 #' @param N Population size, positive.
 #' @return List with \code{estimate}, \code{Rt}, \code{growing},
 #'   \code{susceptible_fraction}, \code{herd_immunity_threshold}.

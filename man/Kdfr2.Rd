@@ -23,7 +23,7 @@ Named list with \code{estimate}, \code{a}, \code{method}.
 }
 \description{
 Eq. (2.10):
-\deqn{r_2 = \int y K(y)[W(y/a) + a^{-1}W(y)K(y/a)]\,dy.}{r2 = int y [K(y) W(y/a) + (1/a) W(y) K(y/a)] dy.}
+\deqn{r_2 = \int y K(y)\[W(y/a) + a^{-1}W(y)K(y/a)\]\,dy.}{r2 = int y \[K(y) W(y/a) + (1/a) W(y) K(y/a)\] dy.}
 }
 \details{
 Read the bracket carefully: the two terms differ in WHICH factor is

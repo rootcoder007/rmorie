@@ -19,7 +19,7 @@ morie_horowitz_series_unknown_T(x, y, w, K = 4L, basis = "poly")
 \item{K}{Integer, the series length J.  The text uses the same basis
 and length for g and for rho, and so does this.}
 
-\item{basis}{Character, "poly" or "cos", on the mid-rank \link{0, 1}
+\item{basis}{Character, "poly" or "cos", on the mid-rank [0, 1]
 scale.}
 }
 \value{
@@ -36,8 +36,8 @@ in applications" (p. 178).  The basis is KNOWN and only coefficients
 are estimated.
 }
 \details{
-With rho(w, h) = E\link{Y - h(X) | W = w} the model implies rho(w, g) = 0,
-so g minimises E\link{rho(W, h)}^2 (5.80).  Writing the conditional-mean
+With rho(w, h) = E[Y - h(X) | W = w] the model implies rho(w, g) = 0,
+so g minimises E[rho(W, h)]^2 (5.80).  Writing the conditional-mean
 operator as m = A g (5.84) and expanding both sides in the basis
 gives the finite linear system
 

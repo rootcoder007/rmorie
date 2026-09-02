@@ -12,7 +12,7 @@ morie_sample_acf(y, max_lag = 20)
 \item{max_lag}{highest lag; clipped to n-1.}
 }
 \value{
-list: acf (index 1 is lag 0, acf\link{1} == 1), acvf, lags, n,
+list: acf (index 1 is lag 0, acf[1] == 1), acvf, lags, n,
 max_lag, ci_bound, method.
 }
 \description{

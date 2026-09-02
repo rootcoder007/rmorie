@@ -5,7 +5,7 @@
 #' names denote the same quantity: with P the lower Cholesky factor of
 #' Sigma_u and Theta_s the MA coefficient matrices of the fitted VAR, the
 #' share of the h-step forecast error variance of variable i due to
-#' orthogonalised shock j is the ratio of sum_s (Theta_s P)[i, j]^2 to its
+#' orthogonalised shock j is the ratio of sum_s (Theta_s P)\[i, j\]^2 to its
 #' row total. \code{Fevdc} implements it; this is a re-export, not a
 #' second copy.
 #'

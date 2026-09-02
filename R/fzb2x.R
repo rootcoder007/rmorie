@@ -5,7 +5,7 @@
 #' Eq. (2.7): \deqn{b_2(x) = \frac{f_X'(x)}{2}\int w^2 K(w)\,dw.}{b2(x) = (f'(x)/2) int w^2 K(w) dw.}
 #'
 #' The leading bias coefficient of the KDFE:
-#' `Bias[Fhat_h(x)] = h^2 b2(x) + o(h^2)`.
+#' `Bias\[Fhat_h(x)\] = h^2 b2(x) + o(h^2)`.
 #'
 #' Note which derivative appears. A kernel DENSITY estimator's leading bias
 #' carries `f''`; the distribution-function estimator carries `f'`, one order

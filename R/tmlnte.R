@@ -6,7 +6,7 @@
 #' conditioning on it would block the path being counted. The mediator is
 #' used only for the contrast report.
 #'
-#' Formula: \code{NTE = E[Y(1) - Y(0)] = NDE + NIE}, targeted with
+#' Formula: \code{NTE = E\[Y(1) - Y(0)\] = NDE + NIE}, targeted with
 #' \code{H = D/g - (1 - D)/(1 - g)}.
 #'
 #' @param y Outcome.

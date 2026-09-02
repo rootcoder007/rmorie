@@ -23,9 +23,9 @@ Minimises eq (4.34),
      \{\hat\gamma(h_m) - \gamma(h_m;\theta)\}^2},
 the generalized sum of squares (4.31) with \eqn{R(\theta)} replaced by the
 diagonal \eqn{W(\theta)} whose entries are Cressie's (1985) approximation
-(4.33), \eqn{Var[\hat\gamma(h_m)] \approx 2\gamma(h_m,\theta)^2/|N(h_m)|}.
+(4.33), \eqn{Var\[\hat\gamma(h_m)\] \approx 2\gamma(h_m,\theta)^2/|N(h_m)|}.
 Dividing through by \eqn{2\gamma^2} gives the equivalent and more familiar
-\eqn{(1/2)\sum_m |N(h_m)| [\hat\gamma(h_m)/\gamma(h_m;\theta) - 1]^2}; the
+\eqn{(1/2)\sum_m |N(h_m)| \[\hat\gamma(h_m)/\gamma(h_m;\theta) - 1\]^2}; the
 two differ by a constant factor and so share a minimiser.
 }
 \details{

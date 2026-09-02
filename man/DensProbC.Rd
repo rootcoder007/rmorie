@@ -15,7 +15,7 @@ DensProbC(grid, density, center, width)
 list(probability, center, width).
 }
 \description{
-The interval is \link{center - width/2, center + width/2}.
+The interval is [center - width/2, center + width/2].
 }
 \examples{
 g <- seq(-6, 6, length.out = 1201); DensProbC(g, stats::dnorm(g), 0, 2)$probability

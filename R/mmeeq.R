@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Henderson's mixed model equations for the BLUE and the BLUP.
 #'
-#' Formula: [[X'R^-1 X, X'R^-1 Z], [Z'R^-1 X, Z'R^-1 Z + Sigma^-1]] [beta; u] = [X'R^-1 y; Z'R^-1 y]
+#' Formula: [[X'R^-1 X, X'R^-1 Z], \[Z'R^-1 X, Z'R^-1 Z + Sigma^-1\]] \[beta; u\] = \[X'R^-1 y; Z'R^-1 y\]
 #'
 #' @param X Design matrix of fixed effects.
 #' @param Z Design matrix of random effects.

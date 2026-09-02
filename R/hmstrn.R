@@ -6,7 +6,7 @@
 #' conditioning on what was known then -- the decision at month six is
 #' made with six months of information, not none.
 #'
-#' Formula: \code{E[Y(d) | H_t] = g0 + g1 t}, fitted with weights
+#' Formula: \code{E\[Y(d) | H_t\] = g0 + g1 t}, fitted with weights
 #' \code{prod_s 1/P(A_s|H_s)} over units consistent with the regime.
 #'
 #' @param y Outcome.

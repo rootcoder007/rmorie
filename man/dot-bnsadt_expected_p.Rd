@@ -2,7 +2,7 @@
 % Please edit documentation in R/bnsadt_native.R
 \name{.bnsadt_expected_p}
 \alias{.bnsadt_expected_p}
-\title{E\link{p(X/sigma)} under the marginal law of an unselected study. A finite}
+\title{E[p(X/sigma)] under the marginal law of an unselected study. A finite}
 \usage{
 .bnsadt_expected_p(sigma, mu, tau, family, params)
 }

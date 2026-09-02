@@ -7,7 +7,7 @@
 #' with `Sbar` the cumulative survival `int_t^Inf S(u) du` and
 #' `m(t) = Sbar(t)/S(t)` the mean residual life.
 #'
-#' It is the numerator of the leading `1/n` term of `Var[m_X,i(t)]` in (4.27),
+#' It is the numerator of the leading `1/n` term of `Var\[m_X,i(t)\]` in (4.27),
 #' divided by `S(t)^2`.
 #'
 #' Substituting `m = Sbar/S` gives `b4 = 2 Sbar - Sbar^2/S`, so the whole

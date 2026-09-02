@@ -7,7 +7,7 @@
 #' Aitchison and Brown (1957) lognormal moments twice gives the
 #' bias-corrected form, eq (5.54),
 #' \eqn{p_{slk}(Z;s_0) = \exp\{p_{sk}(Y;s_0) + \sigma^2_{sk}(Y;s_0)/2\}},
-#' which the text notes equals \eqn{E[Z(s_0) \mid Z]}.
+#' which the text notes equals \eqn{E\[Z(s_0) \mid Z\]}.
 #'
 #' The correction uses the SIMPLE KRIGING variance, not the process variance;
 #' the two differ by \eqn{c'\Sigma^{-1}c}, the variance of the predictor, so

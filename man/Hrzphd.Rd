@@ -37,15 +37,15 @@ cell_probs, K, n, method.
 \description{
 Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Springer, Section 6.2.3, pages 208-209 (volume
-\link{Pages 189-232}, read as rendered page images).  When Y is observed only
+[Pages 189-232], read as rendered page images).  When Y is observed only
 through the interval (y_{j-1}, y_j] that contains it, Lambda_0 is
 identified at the K boundaries only, so the model of Section 6.2.2 -- a
 proportional hazard with a gamma frailty of variance theta -- becomes
 finite-dimensional.  With y_0 = 0 the book gives, for 1 <= j <= K,
 P(y_{j-1} < Y <= y_j | X = x) equal to
-\link{1 + theta Lambda_0(y_{j-1}) exp(-x b)}^(-1/theta) minus
-\link{1 + theta Lambda_0(y_j) exp(-x b)}^(-1/theta), and
-P(Y > y_K | X = x) = \link{1 + theta Lambda_0(y_K) exp(-x b)}^(-1/theta), and
+[1 + theta Lambda_0(y_{j-1}) exp(-x b)]^(-1/theta) minus
+[1 + theta Lambda_0(y_j) exp(-x b)]^(-1/theta), and
+P(Y > y_K | X = x) = [1 + theta Lambda_0(y_K) exp(-x b)]^(-1/theta), and
 then the log likelihood of a random sample of (Y, X).
 }
 \details{

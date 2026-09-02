@@ -27,7 +27,7 @@ Socrata resources.
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 cat_df <- morie_datasets_calgary_opendata_bulk_layers()
-df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
+df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id\[1\], limit = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
 \dontshow{\}) # examplesIf}

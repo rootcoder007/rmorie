@@ -61,7 +61,7 @@ canonical name in ALL CAPS.
 \examples{
 \dontshow{if (nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_chicago_community_areas(offline = TRUE)
-head(df[, c("area_numbe", "community")])
+head(df\[, c("area_numbe", "community")\])
 \dontshow{\}) # examplesIf}
 }
 \references{

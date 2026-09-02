@@ -20,10 +20,10 @@ Named list with \code{estimate}, \code{cde}, \code{intercept}, \code{beta_x},
 \code{beta_m}, \code{interaction}, \code{se}, \code{m}, \code{n}, \code{method}.
 }
 \description{
-\deqn{CDE(m) = E[Y(1,m)] - E[Y(0,m)]}{CDE(m) = E[Y(1,m)] - E[Y(0,m)]}
+\deqn{CDE(m) = E\[Y(1,m)\] - E\[Y(0,m)\]}{CDE(m) = E\[Y(1,m)\] - E\[Y(0,m)\]}
 The mediator is set for everybody, not left where it would have
 fallen -- that is what separates this from the natural direct
-effect.  Under \eqn{E[Y|X,M] = b_0 + b_X X + b_M M + b_{XM} XM} the
+effect.  Under \eqn{E\[Y|X,M\] = b_0 + b_X X + b_M M + b_{XM} XM} the
 contrast is \eqn{b_X + b_{XM} m}, so with no interaction it does not
 depend on m at all.
 }

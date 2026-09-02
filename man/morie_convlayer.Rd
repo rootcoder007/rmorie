@@ -21,7 +21,7 @@ morie_convlayer(x, kernel, bias = NULL, stride = c(1, 1), padding = c(0, 0))
 list(z, height, width, channels, total, maxz, nparams)
 }
 \description{
-z\link{i, j, k} = b\link{k} + sum_u sum_v sum_kp x\link{ip, jp, kp} w\link{u, v, kp, k}
+z[i, j, k] = b\link{k} + sum_u sum_v sum_kp x[ip, jp, kp] w[u, v, kp, k]
 with ip = i * sh + u and jp = j * sw + v. This is a
 cross-correlation, as the book's own footnote 6 on p. 419 points
 out. Exported as morie_convlayer because morie_conv2d was already

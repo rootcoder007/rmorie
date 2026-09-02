@@ -2,7 +2,7 @@
 % Please edit documentation in R/aaa_helpers_hrz3.R
 \name{.hrz3_grid_w}
 \alias{.hrz3_grid_w}
-\title{Equispaced grid on \link{0, 1} with trapezoid quadrature weights}
+\title{Equispaced grid on [0, 1] with trapezoid quadrature weights}
 \usage{
 .hrz3_grid_w(m)
 }

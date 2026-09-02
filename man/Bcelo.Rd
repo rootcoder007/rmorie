@@ -15,7 +15,7 @@ Bcelo(Y, P)
 List with \code{loss}, \code{mean_loss}, \code{n}, \code{L}.
 }
 \description{
-Formula: L(w) = -sum_i sum_j \link{ y_ij log(yhat_ij) + (1 - y_ij) log(1 - yhat_ij) }
+Formula: L(w) = -sum_i sum_j [ y_ij log(yhat_ij) + (1 - y_ij) log(1 - yhat_ij) ]
 }
 \examples{
 Bcelo(Y = 5L, P = 0.5)

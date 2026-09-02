@@ -8,7 +8,7 @@
 #' Formula: \code{x = (1 - alpha)/n + alpha A^T D^-1 x}, with the mass
 #' of dangling nodes spread uniformly so the vector sums to one.
 #'
-#' @param A Adjacency; \code{A[i, j]} non-zero means a link from i to j.
+#' @param A Adjacency; \code{A\[i, j\]} non-zero means a link from i to j.
 #' @param alpha Damping factor.
 #' @param n_iter Power iterations.
 #' @return List with \code{pr}, \code{estimate}, \code{top}, \code{n}.

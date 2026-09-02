@@ -190,7 +190,7 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   }
 }
 
-#' Logit[Qbar(A,W)] on the candidate\'s terms, fitted on rows
+#' Logit\[Qbar(A,W)\] on the candidate\'s terms, fitted on rows
 #'
 #' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_candidate_tmle}.
 #' See the file header for the source the module follows.

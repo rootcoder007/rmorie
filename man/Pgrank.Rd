@@ -7,7 +7,7 @@
 Pgrank(A, d = 0.85, n_iter = 100)
 }
 \arguments{
-\item{A}{Adjacency matrix; \code{A[i, j]} non-zero is a link i to j.}
+\item{A}{Adjacency matrix; \code{A\[i, j\]} non-zero is a link i to j.}
 
 \item{d}{Damping factor.}
 

@@ -54,6 +54,7 @@ Depends:
 Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
   Silicon (Homebrew R may segfault with RSQLite).
 Imports:
+  methods,
   here,
   stats,
   utils,

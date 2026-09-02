@@ -2,7 +2,7 @@
 % Please edit documentation in R/tmlvts.R
 \name{Tmlevar}
 \alias{Tmlevar}
-\title{Target the variance parameter sigma^2 = E\link{D*^2} and bound it.}
+\title{Target the variance parameter sigma^2 = E[D*^2] and bound it.}
 \usage{
 Tmlevar(ic, level = 0.95)
 }
@@ -23,7 +23,7 @@ influence curve D*^2 - sigma^2 and therefore its own interval, on the
 LOG scale because a variance is positive.
 }
 \details{
-Formula: sigma^2 = E\link{D*(O)^2}; IC = D*(O)^2 - sigma^2;
+Formula: sigma^2 = E[D*(O)^2]; IC = D*(O)^2 - sigma^2;
 se(sigma^2) = sqrt(var(D*^2)/n); se(psi) = sqrt(sigma^2/n)
 }
 \examples{
@@ -33,7 +33,7 @@ Tmlevar(V)
 \references{
 The row cites vdL-Hubbard-Pajouh (2018). That paper was NOT
 obtainable, so what is implemented is the standard construction that
-follows from the definition: the influence curve of sigma^2 = E\link{D*^2}
+follows from the definition: the influence curve of sigma^2 = E[D*^2]
 is D*^2 - sigma^2. The plug-in variance it refines is the
 var.psi <- var(IC)/n of the CRAN package tmle 2.1.1 (Gruber & van der
 Laan), which was fetched and read.

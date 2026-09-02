@@ -11,7 +11,7 @@ Intf(coef, basis, t = NULL)
 
 \item{basis}{n-by-K matrix of basis functions evaluated on the grid.}
 
-\item{t}{the grid; defaults to equally spaced on \link{0, 1}.}
+\item{t}{the grid; defaults to equally spaced on [0, 1].}
 }
 \value{
 list: estimate, basis_integrals, n, nbasis, method.

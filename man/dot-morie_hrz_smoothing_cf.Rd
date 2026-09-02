@@ -13,7 +13,7 @@
 The value of \code{ifelse}.
 }
 \description{
-\link{-1, 1} -- the book\'s example is the fourfold convolution of the
+[-1, 1] -- the book\'s example is the fourfold convolution of the
 uniform density with itself, whose characteristic function is sinc^4.
 Compact support in tau is the point: it stops the integrand being
 evaluated where the denominator has died.

@@ -137,7 +137,7 @@
   as.numeric(mu + sim + cvec %*% solve(sigma_obs, resid))
 }
 
-#' Sigma^2_sk at every location, for the E[(Zc - Z)^2] = 2 sigma^2_sk
+#' Sigma^2_sk at every location, for the E\[(Zc - Z)^2\] = 2 sigma^2_sk
 #'
 #' identity that closes Sec. 7.2.2.
 #'

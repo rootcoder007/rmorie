@@ -94,7 +94,7 @@
 
 #' Per-unit-norm inner-product distortion constant
 #'
-#' The returned c satisfies E[(<x_hat, y> - <x, y>)^2] <= c ||x||^2
+#' The returned c satisfies E\[(<x_hat, y> - <x, y>)^2\] <= c ||x||^2
 #' ||y||^2 for the chosen route.
 #'
 #' @param bits Bit-width per coordinate, at least 1.
@@ -170,7 +170,7 @@ morie_tqipb_variance <- function(bits, d, norm_sq = 1, x_norm_sq = 1,
 
 #' Tail probability for the inner-product error
 #'
-#' delta such that Pr[|error| > eps ||x|| ||y||] <= delta.
+#' delta such that Pr\[|error| > eps ||x|| ||y||\] <= delta.
 #'
 #' @param var Variance bound, from morie_tqipb_variance.
 #' @param eps Relative accuracy, positive.

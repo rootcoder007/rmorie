@@ -15,7 +15,7 @@ Distilkl(teacher, student, temperature = 2, label = NULL, alpha = 0.5)
 
 \item{label}{One-based index of the correct class, or NULL.}
 
-\item{alpha}{Weight on the soft objective, in \link{0, 1}.}
+\item{alpha}{Weight on the soft objective, in [0, 1].}
 }
 \value{
 List with softce, kl, hardce, total, teacherprob, studentprob,

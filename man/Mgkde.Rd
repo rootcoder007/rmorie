@@ -20,7 +20,7 @@ morie_fauzi_modified_gamma_kde(x, grid, h)
 Named list with \code{estimate}, \code{ah}, \code{a4h}, \code{grid}, \code{h}, \code{n}, \code{method}.
 }
 \description{
-Eq. (1.14): \eqn{\tilde f_X(x) = [A_h(x)]^2 [A_{4h}(x)]^{-1}}{ftilde(x) = A_h(x)^2 / A_4h(x)},
+Eq. (1.14): \eqn{\tilde f_X(x) = \[A_h(x)\]^2 \[A_{4h}(x)\]^{-1}}{ftilde(x) = A_h(x)^2 / A_4h(x)},
 with \code{A_h} the raw gamma-kernel function (1.9) -- a sample mean of
 Gamma(\code{h^(-1/2)}, \verb{x sqrt(h) + h}) densities.
 }

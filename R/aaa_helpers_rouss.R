@@ -321,8 +321,8 @@
 }
 
 # The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] + [(p+1)/2].
-#' The maximal-breakdown h of Rousseeuw (1984) Remark 1, [n/2] +
-#' [(p+1)/2]
+#' The maximal-breakdown h of Rousseeuw (1984) Remark 1, \[n/2\] +
+#' \[(p+1)/2\]
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Ltsreg}.
 #' See the file header for the source the module follows.
@@ -335,7 +335,7 @@
 .rstrimmedh <- function(n, p) n %/% 2L + (p + 1L) %/% 2L
 
 # The most robust MCD subset size, [(n + p + 1) / 2].
-#' The most robust MCD subset size, [(n + p + 1) / 2]
+#' The most robust MCD subset size, \[(n + p + 1) / 2\]
 #'
 #' A step of the helpers_rouss implementation. Called by \code{Fastm}, \code{Mcdcv}, \code{Mcdv} and 1 others in the module.
 #' See the file header for the source the module follows.

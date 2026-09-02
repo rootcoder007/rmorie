@@ -24,6 +24,6 @@ upward without spatial intersection.
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
-head(df[, c("nta2020", "ntaname", "boroname")])
+head(df\[, c("nta2020", "ntaname", "boroname")\])
 \dontshow{\}) # examplesIf}
 }

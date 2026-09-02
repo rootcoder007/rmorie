@@ -2,7 +2,7 @@
 % Please edit documentation in R/clpopt_native.R
 \name{.clpopt_pivot}
 \alias{.clpopt_pivot}
-\title{Internal: pivot on T\link{row, col}. Mirrors clpopt._pivot}
+\title{Internal: pivot on T[row, col]. Mirrors clpopt._pivot}
 \usage{
 .clpopt_pivot(T, row, col)
 }

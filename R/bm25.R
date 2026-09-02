@@ -27,7 +27,7 @@
 #' @param docs the collection; each document a string or token vector.
 #' @param query the query terms.
 #' @param k1 term-frequency saturation, non-negative.
-#' @param b length normalisation, in [0, 1].
+#' @param b length normalisation, in \[0, 1\].
 #' @return list: scores, estimate, ranking, score_smooth_idf, idf, idf_smooth,
 #'   terms, avgdl, doc_len, k1, b, N, method.
 #' @keywords internal

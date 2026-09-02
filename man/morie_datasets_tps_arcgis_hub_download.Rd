@@ -35,7 +35,7 @@ that on-the-fly exports introduce vs the FeatureServer source).
 cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 \donttest{
 path <- try(morie_datasets_tps_arcgis_hub_download(
-  cat$hub_id[1],
+  cat$hub_id\[1\],
   format = "csv"
 ))
 if (!inherits(path, "try-error")) path

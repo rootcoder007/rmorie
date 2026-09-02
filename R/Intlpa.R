@@ -6,7 +6,7 @@
 #' c'x(tau) - p* <= (m + n) tau, a bound that does not run through this
 #' code and is what the tests check against the simplex optimum.
 #'
-#' Formula: minimise c'x - tau [sum_i log(b_i - a_i'x) + sum_j log x_j].
+#' Formula: minimise c'x - tau \[sum_i log(b_i - a_i'x) + sum_j log x_j\].
 #'
 #' @param c Objective coefficients.
 #' @param A Constraint matrix.

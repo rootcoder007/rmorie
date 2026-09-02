@@ -20,13 +20,13 @@ List with \code{lower}, \code{upper}, \code{width},
 \description{
 If the excluded variable \code{X} shifts who gets treated but not the
 counterfactual means, then each value of \code{X} yields its own
-worst-case interval for the same \code{E[y(t)]}, and the parameter must
+worst-case interval for the same \code{E\[y(t)\]}, and the parameter must
 lie in all of them at once. Intersecting is what makes the assumption
 bite; it is also what makes it refutable, since an empty intersection
 contradicts mean independence.
 }
 \details{
-Formula: \code{E[y(t)] in [max_x lower(x), min_x upper(x)]}, then the ATE
+Formula: \code{E\[y(t)\] in \[max_x lower(x), min_x upper(x)\]}, then the ATE
 interval formed from the two intersected arms.
 }
 \examples{
