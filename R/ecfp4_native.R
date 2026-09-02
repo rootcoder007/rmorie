@@ -250,6 +250,8 @@
 #'   fingerprints. Journal of Chemical Information and Modeling,
 #'   50(5), 742-754.
 #' @export
+#' @examples
+#' morie_ecfp4(adjacency = 5L, atomnum = 5L)
 morie_ecfp4 <- function(adjacency, atomnum, numhs = NULL, charge = NULL,
                         inring = NULL, isotope_delta = NULL,
                         nbits = 2048L, radius = 2L) {

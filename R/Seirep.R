@@ -30,6 +30,8 @@
 #'   diseases. SIAM Review 42(4), 599-653.
 #'   \doi{10.1137/S0036144500371907}
 #' @export
+#' @examples
+#' Seirep(S = 990, E = 10, I = 0, R = 0, beta = 0.3, sigma = 0.2, gamma = 0.1)
 Seirep <- function(S, E, I, R, beta, sigma, gamma, t_max = 160, dt = 0.1) {
   y <- c(as.numeric(S), as.numeric(E), as.numeric(I), as.numeric(R))
   beta <- as.numeric(beta); sigma <- as.numeric(sigma); gamma <- as.numeric(gamma)

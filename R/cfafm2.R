@@ -157,6 +157,8 @@
 #' @references Joreskog (1969), Psychometrika 34(2):183-202;
 #'   Rubin & Thayer (1982), Psychometrika 47(1):69-76.
 #' @export
+#' @examples
+#' Cfafm2(X = c(1, 2, 3, 4, 5, 6, 7, 8), factor_pattern = 5L)
 Cfafm2 <- function(X, factor_pattern) {
   P <- .s03mat(factor_pattern)
   if (!nrow(P)) stop("empty input: factor_pattern is empty")

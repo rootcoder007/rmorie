@@ -25,10 +25,10 @@ Formula: with \code{M = min(0.2 S, 3 sqrt(S))}, substitute
 \code{F^-1((z - 0.5)/M)} for the M largest weights, then cap at
 \code{S^(3/4) mean(w)}.
 }
-\references{
-Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Loopr(V)
+}
+\references{
+Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58.
 }

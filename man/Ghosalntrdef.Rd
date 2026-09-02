@@ -25,11 +25,11 @@ process itself has and shares with the beta process.
 \details{
 Formula: F(t_k) = 1 - exp(-sum_{j <= k} inc_j).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 13.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalntrdef(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 13.4.
 }

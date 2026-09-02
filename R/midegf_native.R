@@ -24,6 +24,8 @@
 #'   948-955.  van Buuren, S. (2018). Flexible Imputation of Missing
 #'   Data, 2nd ed., Sec. 2.3.6.
 #' @export
+#' @examples
+#' morie_midegf(b = 5L, t = 5L, m = 5L)
 morie_midegf <- function(b, t, m, nu_com = NULL) {
   b <- as.numeric(b)
   t <- as.numeric(t)

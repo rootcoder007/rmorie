@@ -133,6 +133,8 @@
 #' @references Daylight Chemical Information Systems (2019). Daylight
 #'   Theory Manual, Chapter 6: Fingerprints.
 #' @export
+#' @examples
+#' morie_rdkfp(adjacency = 5L, atomnum = 5L)
 morie_rdkfp <- function(adjacency, atomnum, aromatic = NULL,
                         nbits = 2048L, minpath = 1L, maxpath = 7L,
                         branched = TRUE, use_bond_order = TRUE) {

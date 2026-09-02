@@ -18,6 +18,9 @@
 #'   Biometrika 69(1), 81-94.  Standard published form; neither source is
 #'   in the local corpus and neither was read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Arimaxhr(V, V)
 Arimaxhr <- function(y, X, p = 1, q = 1, d = 0, m = NULL) {
   y <- .t1_vec(y); Xm <- .t1_mat(X); n <- length(y)
   if (nrow(Xm) != n) stop("X must have one row per observation")

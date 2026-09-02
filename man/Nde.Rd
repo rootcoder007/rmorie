@@ -38,12 +38,12 @@ in the regression of Y on X and M.
 No standard error is reported: the two cross-world means are point
 predictions from the fitted SEM, not a sample of contrasts.
 }
+\examples{
+Nde(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Pearl (2001), Proc. 17th UAI, 411-420; VanderWeele (2015),
 Explanation in Causal Inference, OUP. Standard published form of the
 linear-SEM decomposition; neither source was in the local corpus, so
 the equations are stated in full above.
-}
-\examples{
-Nde(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

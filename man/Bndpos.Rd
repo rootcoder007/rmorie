@@ -29,13 +29,13 @@ they stay informative even when one arm is nearly empty.
 Formula: \code{upper = [E(y | D = 1) P(D = 1) + y_max P(D = 0)] -
 [E(y | D = 0) P(D = 0) + y_min P(D = 1)]}, \code{lower = 0}.
 }
+\examples{
+set.seed(1)
+Bndpos(y = rnorm(40), D = rbinom(40, 1, 0.5), y_max = 3)
+}
 \references{
 Manski, C. F. (1997). Monotone treatment response.
 Econometrica 65(6), 1311-1334. \doi{10.2307/2171738}. Binary-treatment
 form as equation (2.13) and the paragraph beneath it in Molinari, F.
 (2021), Handbook of Econometrics 7A (arXiv:2004.11751 pp. 18-19).
-}
-\examples{
-set.seed(1)
-Bndpos(y = rnorm(40), D = rbinom(40, 1, 0.5), y_max = 3)
 }

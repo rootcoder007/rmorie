@@ -17,13 +17,13 @@ List with \code{composition}, \code{total}, \code{D}.
 \description{
 Formula: x (+) y = C( x_1 y_1, ..., x_D y_D )
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Perturb(V, V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 2. Verified against the reference implementation in the
 CRAN package compositions 2.0-9, whose perturbe is acomp(x * y) --
 the elementwise product, then closed.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Perturb(V, V)
 }

@@ -21,6 +21,9 @@
 #' @references Wilson, Hu, Salakhutdinov and Xing (2016), Deep kernel
 #'   learning, AISTATS 2016, PMLR 51:370-378, eq. (1). arXiv:1511.02222
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gpdkl(V, V)
 Gpdkl <- function(X, y, X_test = NULL, nn = NULL, lengthscale = 1,
                   variance = 1, noise = 0.01) {
   A <- .s03mat(X); yv <- .s03vec(y)

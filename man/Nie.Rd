@@ -24,12 +24,12 @@ second copy.
 Formula: \code{NIE = E[Y(1, M(1))] - E[Y(1, M(0))]}, taken within
 unit so the standard error is the paired one.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nie(V, V)
+}
 \references{
 Pearl, J. (2001). Direct and indirect effects.
 Proceedings of the Seventeenth Conference on Uncertainty in
 Artificial Intelligence, 411-420. Morgan Kaufmann.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Nie(V, V)
 }

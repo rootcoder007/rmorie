@@ -19,6 +19,8 @@
 #'   bounded random variables, JASA 58(301):13-30, Theorem 2.
 #'   \doi{10.1080/01621459.1963.10500830}
 #' @export
+#' @examples
+#' Hffdsg(a = 0, b = 1, n = 100, t = 0.1)
 Hffdsg <- function(a, b, n, t) {
   av <- as.numeric(a); bv <- as.numeric(b)
   if (!(bv > av)) stop("hoeffding_inequality: need a < b")

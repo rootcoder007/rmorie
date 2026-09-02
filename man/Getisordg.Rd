@@ -28,13 +28,13 @@ randomisation variance of Getis and Ord (1992) built from
 G is only interpretable for non-negative \code{x}, so negative input
 is rejected rather than silently returned.
 }
-\references{
-Getis and Ord (1992), Geographical Analysis 24:189-206.  Paywalled; the coded moments were read from Bivand and Ono's spdep, R/globalG.R and spweights.constants in R/utils.R.  B1 uses spdep's B1correct = TRUE default (6 S0^2, not the 3 S0^2 of CrimeStat IV).
-}
 \examples{
 set.seed(1)
 x <- runif(10, 1, 10)
 W <- matrix(rbinom(100, 1, 0.3), 10, 10)
 diag(W) <- 0
 Getisordg(x, W)
+}
+\references{
+Getis and Ord (1992), Geographical Analysis 24:189-206.  Paywalled; the coded moments were read from Bivand and Ono's spdep, R/globalG.R and spweights.constants in R/utils.R.  B1 uses spdep's B1correct = TRUE default (6 S0^2, not the 3 S0^2 of CrimeStat IV).
 }

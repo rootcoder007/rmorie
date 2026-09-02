@@ -24,11 +24,11 @@ place for the dangling-node mass to be handled differently.
 \details{
 Formula: \code{x = (1 - d)/n + d A^T D^-1 x}.
 }
-\references{
-Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
-Stanford InfoLab technical report 1999-66.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Prnkpg(M)
+}
+\references{
+Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
+Stanford InfoLab technical report 1999-66.
 }

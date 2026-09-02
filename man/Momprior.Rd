@@ -2,7 +2,7 @@
 % Please edit documentation in R/gh_c3_8.R
 \name{Momprior}
 \alias{Momprior}
-\title{Check that a moment sequence is realisable by a measure on [0, 1].}
+\title{Check that a moment sequence is realisable by a measure on \link{0, 1}.}
 \usage{
 Momprior(moments)
 }
@@ -19,8 +19,12 @@ non-negative -- is necessary AND sufficient. \code{min_difference} is
 returned because a sequence can be feasible by a tiny margin.
 }
 \details{
-Formula: m realisable on [0, 1] iff (-1)^k (Delta^k m)_j >= 0 for all
+Formula: m realisable on \link{0, 1} iff (-1)^k (Delta^k m)_j >= 0 for all
 j, k >= 0, where (Delta m)\emph{j = m}\{j+1\} - m_j
+}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Momprior(V)
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
@@ -28,8 +32,4 @@ Nonparametric Bayesian Inference, Section 3.4.4. That section gives
 NO formula; the realisability condition is Hausdorff (1921),
 Mathematische Zeitschrift 9, 74-109, and is cited to its own source.
 Ghosal read from the copy of the book held in the corpus.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Momprior(V)
 }

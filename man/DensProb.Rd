@@ -17,7 +17,7 @@ DensProb(grid, density, a, b)
 list(probability, a, b).
 }
 \description{
-Trapezoid integration on a 513-point refinement of [a, b].  The
+Trapezoid integration on a 513-point refinement of \link{a, b}.  The
 supplied density must integrate to within 5 percent of 1 over the
 whole grid, which catches an unnormalised input.
 }

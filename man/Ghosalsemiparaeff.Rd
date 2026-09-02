@@ -25,10 +25,10 @@ functional of the model at once.
 \details{
 Formula: bound = g' I^(-1) g, obtained by solving I x = g.
 }
+\examples{
+Ghosalsemiparaeff(grad_psi = 5L, info_matrix = 5L)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.
-}
-\examples{
-Ghosalsemiparaeff(grad_psi = 5L, info_matrix = 5L)
 }

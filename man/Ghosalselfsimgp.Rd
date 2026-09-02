@@ -27,10 +27,10 @@ Self-similarity is what makes the length-scale rescaling of section
 \details{
 Formula: ((lambda t)^(2H)) / (t^(2H)) = lambda^(2H).
 }
+\examples{
+Ghosalselfsimgp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.5.1.
-}
-\examples{
-Ghosalselfsimgp()
 }

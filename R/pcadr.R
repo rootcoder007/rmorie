@@ -9,6 +9,9 @@
 #' @return List with ``scores``, ``loadings``, ``eigenvalues``, ``compressed``, ``prop_variance``, ``cum_variance``, ``k``, ``n``, ``p``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 2, Sect. 2.8 pp. 63-64.  Delegates to the chapter routine in morie.fn._gp_core, which was verified against this book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own, re-read against the chapter PDF here.  DEFECT FOUND: neither shared core sign-fixes its eigenvectors, so morie.fn._gp_core.pca_compress and the R morie_pca return loadings and scores that differ by a column sign; the three-way parity harness caught it.  The sign is fixed HERE, in the same way morie.fn._tail1core.eigsym does it -- the largest-magnitude entry of every loading column is made positive -- rather than in the shared cores, which this slice must not edit.  With that, a repeated eigenvalue leaves its loadings determined only up to a rotation within the eigenspace and is not a stable quantity in either language.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Pcadim(V)
 Pcadim <- function(X, k = NULL) {
   out <- morie_pca(X, k = k)
   Xm <- .t1_mat(X); n <- nrow(Xm); p <- ncol(Xm)

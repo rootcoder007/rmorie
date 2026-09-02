@@ -24,6 +24,11 @@
 #'   \doi{10.1109/34.735807}; Rasmussen and Williams (2006), ch. 3,
 #'   Algorithm 3.1 and eq. (3.82).
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' y <- rbinom(10, 1, 0.5)
+#' Gpcla(X, y)
 Gpcla <- function(X, y, X_test = NULL, kernel = NULL, lengthscale = 1,
                   variance = 1, iters = 40) {
   A <- .s03mat(X)

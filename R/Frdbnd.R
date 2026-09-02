@@ -20,6 +20,8 @@
 #'   Hoeffding (1940), Masstabinvariante Korrelationstheorie, Schriften
 #'   des Mathematischen Instituts der Universitat Berlin 5:181-233.
 #' @export
+#' @examples
+#' Frdbnd(F_0 = c(0.2, 0.5, 0.8), F_1 = c(0.3, 0.6, 0.9))
 Frdbnd <- function(F_0, F_1, joint = NULL) {
   u <- .s03vec(F_0); v <- .s03vec(F_1)
   if (length(u) == 0L) stop("frechet_hoeffding_bounds: F_0 is empty")

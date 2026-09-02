@@ -9,7 +9,7 @@ morie_bdtrns(y_obs, p_obs, y_lo, y_hi)
 \arguments{
 \item{y_obs}{Observed outcomes.}
 
-\item{p_obs}{Observation probability in [0, 1].}
+\item{p_obs}{Observation probability in \link{0, 1}.}
 
 \item{y_lo, y_hi}{Logical outcome bounds.}
 }
@@ -19,15 +19,15 @@ A list with elements \code{lower}, \code{upper},
 \code{method}.
 }
 \description{
-With observation probability p and bounded outcomes [g0, g1], the
+With observation probability p and bounded outcomes \link{g0, g1}, the
 identification region for E\link{y} is
-[m p + g0 (1-p), m p + g1 (1-p)] with m the observed-subsample
+\link{m p + g0 (1-p), m p + g1 (1-p)} with m the observed-subsample
 mean; the width is exactly (g1 - g0)(1 - p).
+}
+\examples{
+morie_bdtrns(y_obs = c(1, 0, 1), p_obs = 0.6, y_lo = 0, y_hi = 1)
 }
 \references{
 Manski, C. F. (2007). Identification for Prediction
 and Decision. Harvard University Press.
-}
-\examples{
-morie_bdtrns(y_obs = c(1, 0, 1), p_obs = 0.6, y_lo = 0, y_hi = 1)
 }

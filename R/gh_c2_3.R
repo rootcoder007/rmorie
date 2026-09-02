@@ -18,6 +18,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.2.2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalgpincreasingprior(V)
 Ghosalgpincreasingprior <- function(x, length = 0.5, seed = 42) {
   xs <- sort(as.numeric(x))
   if (base::length(xs) == 0L) stop("x must be non-empty")

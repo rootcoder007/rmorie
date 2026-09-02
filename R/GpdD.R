@@ -23,6 +23,8 @@
 #'   order statistics, Annals of Statistics 3(1):119-131.
 #'   \doi{10.1214/aos/1176343003}
 #' @export
+#' @examples
+#' GpdD(sigma = 0.5, xi = 5L)
 GpdD <- function(sigma, xi, x = NULL, p = NULL) {
   s <- as.numeric(sigma); k <- as.numeric(xi)
   if (s <= 0) stop("gpd_distribution: sigma must be positive")

@@ -21,6 +21,11 @@
 #'   \code{method}.
 #' @references Velickovic et al. (2019), Deep Graph Infomax, ICLR 2019.
 #' @export
+#' @examples
+#' set.seed(1)
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' Dgi(G, X)
 Dgi <- function(G, X, encoder = NULL, seed = 42) {
   A <- .s03mat(G)
   n <- nrow(A)

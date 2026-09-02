@@ -11,6 +11,9 @@
 #' @param iters Maximum Lloyd iterations.
 #' @return List with \code{labels} (0-based) and \code{centres}.
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' r <- .sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
 .sgt_kmeans_det <- function(rows, k, iters = 100L) {
   rows <- as.matrix(rows)
   n <- nrow(rows); p <- ncol(rows)

@@ -17,6 +17,9 @@
 #' @references Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58;
 #'   Zhang & Stephens (2009) Technometrics 51:316-325.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Khatd(V)
 Khatd <- function(log_lik) {
   L <- as.matrix(log_lik); Sn <- nrow(L); n <- ncol(L)
   ks <- vapply(seq_len(n), function(i) .s4_psis(-L[, i])$k, 0)

@@ -36,6 +36,9 @@
 #'   residuals, and outlier detection with multiresponse data.
 #'   Biometrics, 28(1), 81-124.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ogkcv(V)
 Ogkcv <- function(y, X = NULL) {
   M <- if (is.null(X)) as.matrix(y) else cbind(as.numeric(y), as.matrix(X))
   n <- nrow(M)

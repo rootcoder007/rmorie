@@ -18,6 +18,8 @@
 #'   implementation in the CRAN package samplingbook 1.2.4, whose Smean
 #'   uses the variance (N - n)/N * (1/(n(n-1))) sum (y - ybar)^2.
 #' @export
+#' @examples
+#' Fpc(N = 5L, n = 5L)
 Fpc <- function(N, n) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1")

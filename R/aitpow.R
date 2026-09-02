@@ -12,6 +12,9 @@
 #'   CRAN package compositions 2.0-9, whose power operator on an acomp
 #'   closes the elementwise power.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Powering(V, V)
 Powering <- function(a, x, total = 1) {
   x <- .t1_vec(x)
   if (any(x <= 0)) stop("compositions must be strictly positive")

@@ -24,11 +24,11 @@ regularisation parameter and a stopping rule.
 \details{
 Formula: \code{W_p^p = min_sigma (1/n) sum_i ||x_i - y_sigma(i)||^p}.
 }
-\references{
-Villani, C. (2009). Optimal Transport: Old and New,
-Springer Grundlehren 338, ch 6; Kuhn, H. W. (1955) NRLQ 2:83-97.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Wsdt2d(V, V)
+}
+\references{
+Villani, C. (2009). Optimal Transport: Old and New,
+Springer Grundlehren 338, ch 6; Kuhn, H. W. (1955) NRLQ 2:83-97.
 }

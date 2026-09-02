@@ -33,9 +33,9 @@ Formula: ring where each node joins its k nearest neighbours, then
 rewire each edge with probability p, refusing self-loops and
 duplicates.
 }
-\references{
-Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
-}
 \examples{
 Watstro(n = 5L, k = 5L, p = 0.5)
+}
+\references{
+Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
 }

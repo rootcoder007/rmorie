@@ -31,12 +31,12 @@ per Eq. 8, G = 0 daily per Eq. 42. Reproduces the printed Example
 18 (Uccle): ET0 = 3.88 mm/day from T 16.9, Rn 13.28, u2 2.078,
 VPD 0.589, P 100.1.
 }
+\examples{
+Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 (1998), FAO Irrigation and Drainage Paper 56, Eqs. 6, 8, 13, 42,
 Example 18. Local: fetched-wave3/fao56-x0490e0{6,7,8}.html,
 zotarelli-2010-fao56-step-by-step-AE459.pdf.
-}
-\examples{
-Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

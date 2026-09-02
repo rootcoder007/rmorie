@@ -145,6 +145,9 @@
 #'   (2013). Density-based clustering based on hierarchical density
 #'   estimates. PAKDD, LNCS 7819, 160-172.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_hdbsc(V)
 morie_hdbsc <- function(X, min_pts = 5, min_cluster_size = 5,
                         selection = "eom", verbose = FALSE) {
   if (!selection %in% c("eom", "leaf"))

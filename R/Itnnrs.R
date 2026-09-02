@@ -23,6 +23,12 @@
 #' @references Kalton and Flores-Cervantes (2003), Weighting methods,
 #'   Journal of Official Statistics 19(2):81-97.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rep(1:2, each = 10), 20, 1)
+#' R <- rep(1, 20)
+#' R[c(3, 7, 15)] <- 0
+#' Itnnrs(y = rnorm(20), R = R, X = X)
 Itnnrs <- function(y, R, X, weights = NULL) {
   yv <- .s03vec(y); n <- length(yv)
   if (n == 0L) stop("item_nonresponse: y is empty")

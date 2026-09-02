@@ -13,6 +13,14 @@ morie_estimate_dr_forest(
 )
 }
 \arguments{
+\item{data}{A vector; indexed elementwise.}
+
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
+
+\item{outcome}{See Usage.}
+
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
+
 \item{target_sample}{Sample to average over, passed to grf: one of
 \code{"all"}, \code{"treated"}, \code{"control"}, \code{"overlap"}.}
 }

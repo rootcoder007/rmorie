@@ -32,12 +32,12 @@ suppressed or generalised.
 \details{
 Formula: min over equivalence classes of |class| >= k.
 }
+\examples{
+Kanon(y = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}
 \references{
 Sweeney (2002), k-anonymity: a model for protecting
 privacy, International Journal of Uncertainty, Fuzziness and
 Knowledge-Based Systems 10(5):557-570.
 \doi{10.1142/S0218488502001648}
-}
-\examples{
-Kanon(y = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

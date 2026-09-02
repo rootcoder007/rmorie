@@ -17,6 +17,8 @@
 #'   Sect. 3.1.1.  Standard published form; the monograph is not in the
 #'   local corpus and was not read.
 #' @export
+#' @examples
+#' Admmlasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Admmlasso <- function(X, y, lam, rho = 1, steps = 100) {
   Xm <- .t1_mat(X); y <- .t1_vec(y)
   lam <- as.numeric(lam); rho <- as.numeric(rho); steps <- as.integer(steps)

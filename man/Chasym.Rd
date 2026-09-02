@@ -23,7 +23,7 @@ List with \code{estimate}, \code{theta}, \code{var_if},
 \code{B}, \code{method}.
 }
 \description{
-Formula: compare E[psi^2]/n to the bootstrap
+Formula: compare E\link{psi^2}/n to the bootstrap
 }
 \details{
 The influence function of the IPW mean is psi_i = w_i (Y_i - theta),
@@ -34,11 +34,11 @@ systematic gap is the signal that the weights are too unstable for
 the normal approximation.  With unit weights the sandwich reduces to
 the plain sample variance over n.
 }
-\references{
-van der Laan & Rose (2011), Targeted Learning, Springer,
-ch. 5; Funk et al. (2011), Am. J. Epidemiology 173(7):761-767.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Chasym(V)
+}
+\references{
+van der Laan & Rose (2011), Targeted Learning, Springer,
+ch. 5; Funk et al. (2011), Am. J. Epidemiology 173(7):761-767.
 }

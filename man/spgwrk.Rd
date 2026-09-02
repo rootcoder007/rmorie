@@ -61,14 +61,14 @@ they are not in conflict: weighted least squares is invariant to a positive
 scalar applied to every weight, so the two produce an identical hat matrix
 and identical local coefficients. Only the printed weights differ.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+spgwrk(V, V)
+}
 \references{
 Schabenberger Ch 5, Sec 5.3.2, pp. 240-241, and Ch 6,
 Sec 6.1.3.1, p. 317. Cleveland, W. S. (1979), JASA 74:829-836, for the
 tri-cube. Charlton, M., Geographically Weighted Regression White Paper,
 pp. 6-7. Fotheringham, Brunsdon & Charlton (2002), pp. 56-57, as cited by
 the GWmodel package, which is the source consulted for the boxcar.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-spgwrk(V, V)
 }

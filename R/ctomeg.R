@@ -20,6 +20,10 @@
 #' @references McDonald (1999), Test Theory: A Unified Treatment,
 #'   Erlbaum, ch. 6.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' Ctomeg(M, S)
 Ctomeg <- function(X, factor_loadings) {
   lam <- .s03vec(factor_loadings)
   p <- length(lam)

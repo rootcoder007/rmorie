@@ -49,11 +49,11 @@ build the identical network.  W is rescaled so its induced infinity
 norm equals \code{spectral_radius}; ||W||_inf < 1 is Jaeger's
 sufficient condition for the echo state property (2001, Prop. 3).
 }
-\references{
-Jaeger (2001), GMD Report 148; Jaeger & Haas (2004),
-Science 304(5667):78-80, doi:10.1126/science.1091277.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Esnnts(V)
+}
+\references{
+Jaeger (2001), GMD Report 148; Jaeger & Haas (2004),
+Science 304(5667):78-80, doi:10.1126/science.1091277.
 }

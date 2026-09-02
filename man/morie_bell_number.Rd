@@ -21,9 +21,9 @@ that sum because it needs only additions.
 \eqn{B_{25} = 4638590332229999353}, past the exact range of a double,
 which is why this returns a \code{morie_bigint}.
 }
-\references{
-Stanley RP (2011) vol. 1, Sec 1.9.
-}
 \examples{
 morie_bell_number(n = 5L)
+}
+\references{
+Stanley RP (2011) vol. 1, Sec 1.9.
 }

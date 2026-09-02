@@ -20,6 +20,9 @@
 #'   Dependability of Behavioral Measurements, Wiley; Brennan (2001),
 #'   Generalizability Theory, Springer, ch. 2.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Genvxt(M)
 Genvxt <- function(X, facets = NULL) {
   M <- .s03mat(X)
   npr <- nrow(M); ni <- ncol(M)

@@ -65,6 +65,9 @@
 #'   `heredity_violation`, `exchange_violation`, `warnings`.
 #' @references Whitney H (1935) \emph{Amer J Math} 57(3):509-533.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_is_matroid(V, V)
 morie_is_matroid <- function(ground, independent) {
   g <- as.integer(ground)
   fam <- lapply(independent, function(s) sort(as.integer(s)))
@@ -129,6 +132,9 @@ morie_is_matroid <- function(ground, independent) {
 #' @param subset Subset to rank; defaults to the whole ground set.
 #' @return Integer rank.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_matroid_rank(V, V)
 morie_matroid_rank <- function(ground, independent, subset = NULL) {
   target <- if (is.null(subset)) as.integer(ground) else as.integer(subset)
   best <- 0L
@@ -147,6 +153,9 @@ morie_matroid_rank <- function(ground, independent, subset = NULL) {
 #' @param ground,independent The matroid.
 #' @return A list of integer vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_matroid_bases(V, V)
 morie_matroid_bases <- function(ground, independent) {
   r <- morie_matroid_rank(ground, independent)
   out <- Filter(function(s) length(s) == r, independent)
@@ -158,6 +167,9 @@ morie_matroid_bases <- function(ground, independent) {
 #' @param ground,independent The matroid.
 #' @return A list of integer vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_matroid_circuits(V, V)
 morie_matroid_circuits <- function(ground, independent) {
   g <- as.integer(ground)
   keys <- vapply(independent, .morie_key, character(1))
@@ -183,6 +195,9 @@ morie_matroid_circuits <- function(ground, independent) {
 #' @param ground,independent The matroid.
 #' @return A list of integer vectors.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_matroid_dual(V, V)
 morie_matroid_dual <- function(ground, independent) {
   g <- as.integer(ground)
   bases <- morie_matroid_bases(g, independent)
@@ -200,6 +215,8 @@ morie_matroid_dual <- function(ground, independent) {
 #' @param n,k Ground size and rank.
 #' @return A list with `ground`, `independent`, `rank`.
 #' @export
+#' @examples
+#' morie_uniform_matroid(n = 5L, k = 5L)
 morie_uniform_matroid <- function(n, k) {
   n <- as.integer(n); k <- as.integer(k)
   if (n < 0L || k < 0L) stop("n and k must be non-negative.", call. = FALSE)
@@ -222,6 +239,8 @@ morie_uniform_matroid <- function(n, k) {
 #' @param n_vertices Number of vertices.
 #' @return A list with `ground`, `independent`, `edges`.
 #' @export
+#' @examples
+#' morie_graphic_matroid(edges = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n_vertices = 5L)
 morie_graphic_matroid <- function(edges, n_vertices) {
   E <- lapply(edges, as.integer)
   m <- length(E)
@@ -262,6 +281,8 @@ morie_graphic_matroid <- function(edges, n_vertices) {
 #' @return A list with `set` and `weight`.
 #' @references Edmonds J (1971) \emph{Math Prog} 1:127-136.
 #' @export
+#' @examples
+#' morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_greedy_independent_set <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
@@ -282,6 +303,8 @@ morie_greedy_independent_set <- function(ground, independent, weights) {
 #' @param weights Numeric vector aligned with `ground`.
 #' @return A list with `set` and `weight`.
 #' @export
+#' @examples
+#' morie_brute_force_max_weight(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_brute_force_max_weight <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
@@ -307,6 +330,9 @@ morie_brute_force_max_weight <- function(ground, independent, weights) {
 #'   `n_components`, `warnings`.
 #' @references Kruskal JB (1956) \emph{Proc AMS} 7(1):48-50.
 #' @export
+#' @examples
+#' K4E <- list(c(1, 2), c(2, 3), c(3, 4), c(4, 1), c(1, 3))
+#' morie_minimum_spanning_tree(K4E, 4, c(4, 1, 3, 2, 5))
 morie_minimum_spanning_tree <- function(edges, n_vertices, weights = NULL) {
   E <- lapply(edges, as.integer)
   m <- length(E)
@@ -420,6 +446,9 @@ morie_bipartite_matching <- function(left_n, right_n, edges) {
 #' @references Konig D (1931). Grafok es matrixok. \emph{Matematikai es
 #'   Fizikai Lapok}, 38, 116-119.
 #' @export
+#' @examples
+#' E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
+#' morie_konig_theorem(3, 3, E)
 morie_konig_theorem <- function(left_n, right_n, edges) {
   ln <- as.integer(left_n); rn <- as.integer(right_n)
   m <- morie_bipartite_matching(ln, rn, edges)
@@ -483,6 +512,8 @@ morie_konig_theorem <- function(left_n, right_n, edges) {
 #'   `matching_size`, `agrees_with_matching`, `warnings`.
 #' @references Hall P (1935) \emph{J London Math Soc} 10:26-30.
 #' @export
+#' @examples
+#' morie_hall_condition(3, 2, list(c(1, 1), c(2, 1), c(3, 2)))
 morie_hall_condition <- function(left_n, right_n, edges) {
   ln <- as.integer(left_n); rn <- as.integer(right_n)
   nbr <- vector("list", max(ln, 1L))
@@ -536,6 +567,10 @@ morie_hall_condition <- function(left_n, right_n, edges) {
 #' @references Ford LR, Fulkerson DR (1956) \emph{Canad J Math}
 #'   8:399-404.
 #' @export
+#' @examples
+#' C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0), 
+#'     4, 4, byrow = TRUE)
+#' morie_max_flow_min_cut(C, 1, 4)
 morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {
   C <- as.matrix(capacity)
   storage.mode(C) <- "double"

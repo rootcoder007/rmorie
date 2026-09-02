@@ -17,6 +17,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Example 11.9, eq. (11.6).
 #' @export
+#' @examples
+#' Ghosalfbmprior()
 Ghosalfbmprior <- function(H = 0.7, ts = c(0.25, 0.5, 0.75)) {
   H <- as.numeric(H); ts <- as.numeric(ts)
   if (H <= 0 || H >= 1) stop("H must lie strictly between 0 and 1")

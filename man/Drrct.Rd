@@ -33,12 +33,12 @@ treatment is the selection-corrected effect.  Fitting both stages on
 one sample makes \code{alpha} orthogonal to the design by
 construction, so the correction is then identically zero.
 }
+\examples{
+set.seed(1)
+r <- Drrct(y_obs = rnorm(10), y_rct = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}
 \references{
 Athey, S., Chetty, R. and Imbens, G. W. (2020/2025). The
 experimental selection correction estimator. arXiv:2006.09676,
 equations (2.3) and (2.4), page 10.
-}
-\examples{
-set.seed(1)
-r <- Drrct(y_obs = rnorm(10), y_rct = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 }

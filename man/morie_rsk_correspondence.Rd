@@ -20,11 +20,11 @@ length is the longest increasing subsequence and the first column
 length is the longest decreasing one, so a purely combinatorial
 statistic falls out of an algebraic construction.
 }
-\references{
-Robinson G de B (1938); Schensted C (1961)
-\emph{Canad J Math} 13:179-191; Knuth DE (1970).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_rsk_correspondence(V)
+}
+\references{
+Robinson G de B (1938); Schensted C (1961)
+\emph{Canad J Math} 13:179-191; Knuth DE (1970).
 }

@@ -31,10 +31,10 @@ the baseline can be left nonparametric.
 Formula: H(t | z) = H0(t) exp(beta z); H(t | z2) / H(t | z1)
 = exp(beta (z2 - z1)).
 }
+\examples{
+Ghosalcoxmodel()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.6.
-}
-\examples{
-Ghosalcoxmodel()
 }

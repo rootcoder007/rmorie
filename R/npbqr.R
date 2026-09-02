@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Quantile regression with a Dirichlet-process scale mixture
-#'
-#' Kottas & Gelfand's point is that fixing the error distribution to a
-#' single asymmetric Laplace is stronger than the quantile restriction
-#' requires; the tau-quantile restriction is preserved by any scale
-#' mixture, so a Dirichlet process is placed on the mixing distribution
-#' of the scale. The location parameter is unaffected, which is why the
-#' regression coefficient can be read off the check-loss fit,
-#' \eqn{_hat = argmin sum rho_tau(y_i - x_i primeb)} with
+# Quantile regression with a Dirichlet-process scale mixture
+#
+# Kottas & Gelfand's point is that fixing the error distribution to a
+# single asymmetric Laplace is stronger than the quantile restriction
+# requires; the tau-quantile restriction is preserved by any scale
+# mixture, so a Dirichlet process is placed on the mixing distribution
+# of the scale. The location parameter is unaffected, which is why the
+# regression coefficient can be read off the check-loss fit,
+# \eqn{_hat = argmin sum rho_tau(y_i - x_i primeb)} with
 # prime \code{rho_tau(u) = u (tau - 1{u < 0})}, and only the error model
 #' changes. The fit uses the shared fixed-iteration IRLS helper, which
 #' takes exactly the same path in both language arms.
@@ -31,6 +31,9 @@
 #'   Statistical Association, 96(456), 1458-1468.
 #'   doi:10.1198/016214501753382363
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Npbqr(V, V)
 Npbqr <- function(y, X, tau = 0.5, alpha = 1, niter = 40L, eps = 1e-3) {
   yv <- as.numeric(y)
   n <- length(yv)

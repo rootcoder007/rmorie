@@ -22,9 +22,9 @@ cross-checked against the matching. When it fails the VIOLATING SET
 is returned: Hall's theorem is most useful as a certificate of
 impossibility, and a bare FALSE is not one.
 }
-\references{
-Hall P (1935) \emph{J London Math Soc} 10:26-30.
-}
 \examples{
 morie_hall_condition(3, 2, list(c(1, 1), c(2, 1), c(3, 2)))
+}
+\references{
+Hall P (1935) \emph{J London Math Soc} 10:26-30.
 }

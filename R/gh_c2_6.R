@@ -19,6 +19,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.3.3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalmixturebasisprior(V)
 Ghosalmixturebasisprior <- function(x, K = 5, seed = 42,
                                     bandwidth = 0.15) {
   xs <- as.numeric(x)

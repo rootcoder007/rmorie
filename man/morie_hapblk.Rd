@@ -30,12 +30,12 @@ on D' exceeds 0.98 and the lower bound exceeds 0.7; strong
 recombination when the upper bound is below 0.9; blocks are
 maximal spans with >= 95\% strong-LD informative pairs.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_hapblk(V)
+}
 \references{
 Gabriel, S. B. et al. (2002). The structure of
 haplotype blocks in the human genome. Science, 296(5576),
 2225-2229.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_hapblk(V)
 }

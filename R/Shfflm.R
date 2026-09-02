@@ -39,6 +39,8 @@
 #'   Thirtieth Annual ACM-SIAM Symposium on Discrete Algorithms, 2468-2479,
 #'   Theorem 7. \doi{10.1137/1.9781611975482.151}
 #' @export
+#' @examples
+#' Shfflm(epsilon0 = 5L, n = 5L, delta = 0.5)
 Shfflm <- function(epsilon0, n, delta) {
   e0 <- as.numeric(epsilon0); nn <- as.numeric(n); d <- as.numeric(delta)
   if (e0 <= 0) stop("shuffle_model: epsilon0 must be positive")

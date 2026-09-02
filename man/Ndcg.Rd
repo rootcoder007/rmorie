@@ -25,10 +25,10 @@ relevances descending. An all-zero relevance list has \code{IDCG = 0};
 NDCG is then undefined and is refused rather than reported as a
 perfect 1.
 }
+\examples{
+Ndcg(pred_rank = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}
 \references{
 Jarvelin and Kekalainen (2002), ACM TOIS 20(4), 422-446,
 \doi{10.1145/582415.582418}.
-}
-\examples{
-Ndcg(pred_rank = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

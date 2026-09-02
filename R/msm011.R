@@ -19,6 +19,8 @@
 #'   Springer, eq. (5.2) p.142 and sec. 5.2.1.2 p.146.
 #'   DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' Msm011(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
 Msm011 <- function(X, Z, y, D, R = NULL, beta = NULL, restricted = FALSE) {
   f <- if (restricted) .gpremlloglik(X, Z, y, D, R)
        else .gplmmloglik(X, Z, y, D, beta = beta, R = R)

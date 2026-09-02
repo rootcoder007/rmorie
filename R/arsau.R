@@ -85,6 +85,10 @@ NULL
 #' @param require_exists If \code{TRUE} (default), error on no match.
 #' @return Character scalar path.
 #' @keywords internal
+#' @examples
+#' \donttest{
+#' .morie_resolve_arsau_dir()
+#' }
 .morie_resolve_arsau_dir <- function(data_dir = NULL, require_exists = TRUE) {
   candidates <- list()
 

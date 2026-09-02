@@ -18,6 +18,9 @@
 #'   published form; neither source is in the local corpus and neither
 #'   was read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Arimahr(V)
 Arimahr <- function(y, p = 1, q = 1, d = 0, m = NULL) {
   y <- .t1_vec(y)
   p <- as.integer(p); q <- as.integer(q); d <- as.integer(d)

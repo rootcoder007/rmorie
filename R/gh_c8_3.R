@@ -24,6 +24,9 @@
 #'   conditions (8.4), (8.5) and (8.6). Read from the copy of the book
 #'   held in the corpus.
 #' @export
+#' @examples
+#' Testcond(prior_ball = 0.5, log_entropy = 10, sieve_mass = 0.1,
+#'          eps_bar = 0.1, eps = 0.2, n = 100, Cconst = 1)
 Testcond <- function(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n,
                      Cconst) {
   pb <- as.numeric(prior_ball); le <- as.numeric(log_entropy)

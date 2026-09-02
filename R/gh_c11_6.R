@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Example 11.5.
 #' @export
+#' @examples
+#' Ghosalbmprior()
 Ghosalbmprior <- function(n_grid = 200, n_sim = 400, seed = 42) {
   n_grid <- as.integer(n_grid); n_sim <- as.integer(n_sim)
   if (n_grid < 4L) stop("n_grid must be at least 4")

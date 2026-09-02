@@ -18,10 +18,10 @@ Named list with \code{estimate}, \code{hxz}, \code{hyz}, \code{hxyz}, \code{hz},
 \deqn{I(X;Y|Z) = H(X,Z) + H(Y,Z) - H(X,Y,Z) - H(Z)}
 Cover & Thomas (2006), eq. (2.60)-(2.61), p. 23.
 }
-\references{
-Cover & Thomas (2006), eq. (2.60).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Cndmi(V)
+}
+\references{
+Cover & Thomas (2006), eq. (2.60).
 }

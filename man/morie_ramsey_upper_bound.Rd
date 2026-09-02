@@ -28,11 +28,11 @@ the result partly a lookup; off, it gives what the argument alone
 supports. The two differ: 25 against 31 for \eqn{R(4,5)}. Any claim
 that the recursion reproduces a known value must use FALSE.
 }
+\examples{
+morie_ramsey_upper_bound(k = 5L, l = 5L)
+}
 \references{
 Greenwood RE, Gleason AM (1955) \emph{Canadian Journal of
 Mathematics} 7:1-7. Erdos P, Szekeres G (1935)
 \emph{Compositio Mathematica} 2:463-470.
-}
-\examples{
-morie_ramsey_upper_bound(k = 5L, l = 5L)
 }

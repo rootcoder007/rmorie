@@ -18,6 +18,8 @@
 #'   Theory and Kernel Machines, LNCS 2777, pages 129-143.
 #'   \doi{10.1007/978-3-540-45167-9_11}.
 #' @export
+#' @examples
+#' RandW(G1 = 5L, G2 = 5L)
 RandW <- function(G1, G2, lam = 0.05) {
   A <- as.matrix(G1); B <- as.matrix(G2)
   n1 <- nrow(A); n2 <- nrow(B)

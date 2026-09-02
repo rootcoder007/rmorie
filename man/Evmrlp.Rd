@@ -24,10 +24,10 @@ Linear in u above a threshold where the GPD holds, with slope
 xi/(1-xi) and intercept sigma_u0/(1-xi); constant when xi = 0.  That
 linearity is what the plot is read for.
 }
-\references{
-Davison & Smith (1990), JRSS B 52(3):393-442.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Evmrlp(V)
+}
+\references{
+Davison & Smith (1990), JRSS B 52(3):393-442.
 }

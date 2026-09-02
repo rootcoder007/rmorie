@@ -13,6 +13,9 @@
 #'   CRAN package compositions 2.0-9, whose scalar applies the centred
 #'   log-ratio to both arguments and sums the elementwise product.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compip(V, V)
 Compip <- function(x, y) {
   x <- .t1_vec(x); y <- .t1_vec(y)
   if (length(x) != length(y)) stop("x and y must have the same number of parts")

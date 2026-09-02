@@ -19,7 +19,7 @@ Bnrunstat(
 
 \item{runmean, runvar}{Running population moments.}
 
-\item{momentum}{Weight given to the new batch, in [0, 1].}
+\item{momentum}{Weight given to the new batch, in \link{0, 1}.}
 
 \item{eps}{Numerical floor inside the square root.}
 
@@ -34,12 +34,12 @@ runmean <- (1-momentum) runmean + momentum mean(x);
 runvar  <- (1-momentum) runvar + momentum (m/(m-1)) biased_var(x);
 y = gamma (x - runmean)/sqrt(runvar + eps) + beta.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bnrunstat(V)
+}
 \references{
 Ioffe and Szegedy (2015), arXiv:1502.03167, Sect. 3.1 and
 Algorithm 2.  Read from the ar5iv rendering; the same paper is in the
 local corpus.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Bnrunstat(V)
 }

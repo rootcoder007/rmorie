@@ -29,6 +29,11 @@
 #'   of Econometrics 7A (arXiv:2004.11751); the mean bound is equation
 #'   (2.11) of the same.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- rnorm(40)
+#' Bndtfm(y = y, D = rbinom(40, 1, 0.5), X = rbinom(40, 1, 0.5),
+#'        transform = exp(y))
 Bndtfm <- function(y, D, X, transform) {
   z <- .bnd_yd(y, D, "Bndtfm")
   xv <- unlist(X)

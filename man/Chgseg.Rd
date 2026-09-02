@@ -19,14 +19,14 @@ The eq (3) optimal-partitioning objective of Killick, Fearnhead and
 Eckley (2012) solved exactly by PELT (their Algorithm 2) with the
 Normal change-in-mean cost. Thin specialisation of \code{Pelt}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Chgseg(V)
+}
 \references{
 Killick, R., Fearnhead, P. and Eckley, I. A. (2012),
 Journal of the American Statistical Association 107(500),
 1590-1598 (arXiv:1101.1438), eq 3, Algorithm 2. Source:
 fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
 changepoint-linear-cost.pdf
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Chgseg(V)
 }

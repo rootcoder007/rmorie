@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.2.3.
 #' @export
+#' @examples
+#' Ghosaltwomodeladp()
 Ghosaltwomodeladp <- function(n = 500, truth_dim = 1, pi0 = 0.5,
                               seed = 42) {
   if (pi0 <= 0 || pi0 >= 1) stop("pi0 must lie strictly between 0 and 1")

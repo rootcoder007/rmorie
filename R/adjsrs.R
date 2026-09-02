@@ -11,6 +11,9 @@
 #'   Standard published form; the monograph is not in the local corpus and
 #'   was not read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Neffsrs(V)
 Neffsrs <- function(w) {
   w <- .t1_vec(w)
   n <- length(w)

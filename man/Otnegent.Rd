@@ -19,10 +19,10 @@ Peyre & Cuturi (2019), eq. (4.1).  Note the \code{- 1}: the OT convention
 is one nat per unit mass larger than the Shannon entropy and must not
 be simplified away.
 }
-\references{
-Peyre & Cuturi (2019), eq. (4.1).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Otnegent(V)
+}
+\references{
+Peyre & Cuturi (2019), eq. (4.1).
 }

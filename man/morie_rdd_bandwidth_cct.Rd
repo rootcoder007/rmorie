@@ -2,28 +2,34 @@
 % Please edit documentation in R/rdd.R
 \name{morie_rdd_bandwidth_cct}
 \alias{morie_rdd_bandwidth_cct}
-\title{Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth}
+\title{Calonico-Cattaneo-Titiunik MSE-optimal bandwidth}
 \usage{
 morie_rdd_bandwidth_cct(x, y, cutoff = 0, kernel = "triangular", p = 1)
 }
 \arguments{
-\item{x}{Numeric vector of running-variable values (used by
-bandwidth selectors + density tests that don't take a
-\code{data.frame}).}
-
-\item{y}{Numeric vector of outcome values aligned with \code{x}.}
+\item{x, y}{The running variable and the outcome.}
 
 \item{cutoff}{The threshold.}
 
-\item{kernel}{One of \code{"triangular"}, \code{"epanechnikov"}, \code{"uniform"}, \code{"gaussian"}.}
+\item{kernel}{One of \code{"triangular"}, \code{"epanechnikov"},
+\code{"uniform"}, \code{"gaussian"}.}
 
 \item{p}{Polynomial order for the local fit.}
 }
 \value{
-A named list with \code{bandwidth}, \code{method} and \code{details} carrying \code{h_mse}, \code{h_cer}, \code{bias_sq} and \code{variance}.
+A named list with \code{bandwidth}, \code{method} and
+\code{details} carrying \code{h_mse}, \code{h_cer},
+\code{bias_sq} and \code{variance}.
 }
 \description{
-Calonico-Cattaneo-Titiunik (CCT) MSE-optimal bandwidth
+The IK bandwidth is used as the pilot; the curvature difference
+across the cutoff gives the squared bias and the two one-sided
+intercept variances give the variance, and the MSE-optimal rule
+balances them. The polynomial order \code{p} enters everywhere --
+the curvature is read off the order \code{p + 1} fit and the rate is
+\eqn{n^{-1/(2p+3)}} -- which is why the previous implementation,
+delegating to IK and discarding \code{p}, could not answer for any
+order but the one IK assumes.
 }
 \examples{
 set.seed(1)

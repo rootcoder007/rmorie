@@ -13,6 +13,9 @@
 #'   (3)-(5).  Standard published form; the article is paywalled and the
 #'   download attempted returned a stub, so it was not read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Permanova(V, V)
 Permanova <- function(X, group, aitchison = TRUE) {
   M <- .t1_mat(X); N <- nrow(M); D <- ncol(M)
   g <- as.character(group)

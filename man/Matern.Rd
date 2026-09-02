@@ -34,7 +34,7 @@ m and variance tau^2; f(x - y) is the density of a satellite position
 about a centre at y; and gamma(u) = Integral f(u + y) f(y) dy is the
 autoconvolution.  With Z(S) the number of satellites in S and mu the
 volume, E\link{Z(S)} = lambda m mu(S), eq. (3.6.1), and
-Cov[Z(S1), Z(S2)] = lambda m mu(S1 ^ S2)
+Cov\link{Z(S1), Z(S2)} = lambda m mu(S1 ^ S2)
 \itemize{
 \item lambda (m^2 + tau^2 - m) Int Int gamma(u - y) du dy, eq. (3.6.2).
 }

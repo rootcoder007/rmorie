@@ -30,11 +30,11 @@ is followed literally.
 Formula: P_k = exp(sum_{v=0}^{k} a (theta - b_v)) /
 sum_c exp(sum_{v=0}^{c} a (theta - b_v)).
 }
+\examples{
+Gpcm(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_j = c(-1, 0, 1))
+}
 \references{
 Muraki (1992), A generalized partial credit model,
 Applied Psychological Measurement 16(2):159-176.
 \doi{10.1177/014662169201600206}
-}
-\examples{
-Gpcm(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_j = c(-1, 0, 1))
 }

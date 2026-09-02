@@ -22,6 +22,8 @@
 #'   Cuturi, M. and Doucet, A. (2014). Proceedings of Machine Learning
 #'   Research 32:685-693 (ICML).
 #' @export
+#' @examples
+#' Otmcluster(X_list = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Otmcluster <- function(X_list, k, max_iter = 10) {
   clouds <- lapply(X_list, as.matrix)
   N <- length(clouds)

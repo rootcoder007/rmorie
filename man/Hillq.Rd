@@ -18,12 +18,12 @@ List with hill, q, prop, richness, shannon, simpson, D.
 qD = (sum_i p_i^q)^(1/(1-q)) for q != 1, and
 1D = exp(-sum_i p_i log p_i) in the limit q -> 1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hillq(V)
+}
 \references{
 Hill, M. O. (1973), Ecology 54(2), 427-432, Equation (2)
 and Sect. 2.  Standard published form; the article is paywalled and
 was not read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Hillq(V)
 }

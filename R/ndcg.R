@@ -16,6 +16,8 @@
 #' @references Jarvelin and Kekalainen (2002), ACM TOIS 20(4), 422-446,
 #'   \doi{10.1145/582415.582418}.
 #' @export
+#' @examples
+#' Ndcg(pred_rank = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Ndcg <- function(pred_rank, relevant, k) {
   items <- as.character(unlist(pred_rank))
   if (length(items) == 0L) stop("pred_rank is empty")

@@ -41,6 +41,10 @@ construction;
 Determinism: MAD and medians only, and the shared sign-fixed Jacobi
 eigensolver, so the basis is identical in both language arms.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ogkcv(V)
+}
 \references{
 Maronna, R. A. & Zamar, R. H. (2002). Robust estimates
 of location and dispersion for high-dimensional datasets.
@@ -48,8 +52,4 @@ Technometrics, 44(4), 307-317. doi:10.1198/004017002188618509
 Gnanadesikan, R. & Kettenring, J. R. (1972). Robust estimates,
 residuals, and outlier detection with multiresponse data.
 Biometrics, 28(1), 81-124.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ogkcv(V)
 }

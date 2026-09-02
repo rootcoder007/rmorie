@@ -31,11 +31,11 @@ non-maximum suppression and no anchor set: the matching is what
 removes the duplicates.  Unmatched queries train to the no-object
 class.
 }
-\references{
-Carion et al. (2020), End-to-End Object Detection with
-Transformers, ECCV 2020:213-229.
-}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 Detrbb(D, D)
+}
+\references{
+Carion et al. (2020), End-to-End Object Detection with
+Transformers, ECCV 2020:213-229.
 }

@@ -26,9 +26,9 @@ A code meeting it is PERFECT, and perfect codes barely exist: over a
 prime power alphabet the only ones are the trivial codes, the Hamming
 codes and the two Golay codes.
 }
-\references{
-Hamming RW (1950) \emph{Bell Syst Tech J} 29:147-160.
-}
 \examples{
 morie_hamming_bound(n = 5L, d = 5L)
+}
+\references{
+Hamming RW (1950) \emph{Bell Syst Tech J} 29:147-160.
 }

@@ -20,6 +20,8 @@
 #' @references Manski, C. F. (2007). Identification for Prediction
 #'   and Decision. Harvard University Press.
 #' @export
+#' @examples
+#' morie_bdtrns(y_obs = c(1, 0, 1), p_obs = 0.6, y_lo = 0, y_hi = 1)
 morie_bdtrns <- function(y_obs, p_obs, y_lo, y_hi) {
   yv <- as.numeric(y_obs)
   if (!length(yv)) stop("need at least one observed outcome")

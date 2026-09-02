@@ -39,6 +39,8 @@
 #' @references Song, Meng & Ermon (2021), Denoising Diffusion Implicit
 #'   Models, ICLR 2021.
 #' @export
+#' @examples
+#' Ddimst(x_t = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, eps_theta = c(1, 2, 3, 4, 5, 6, 7, 8))
 Ddimst <- function(x_t, t, eps_theta, eta = 0, T = 1000,
                    alpha_bar_t = NULL, alpha_bar_prev = NULL) {
   x <- .s03vec(x_t); e <- .s03vec(eps_theta)

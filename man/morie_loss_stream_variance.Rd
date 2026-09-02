@@ -24,11 +24,11 @@ large factor, which makes ordinary drift look like an improvement.
 Dividing by the effective sample size instead gives an inflation of
 \eqn{\sqrt{\tau_{int}}}, which is 1 on an independent stream.
 }
-\references{
-Silver D et al (2018) \emph{Science} 362:1140-1144.
-Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_loss_stream_variance(V)
+}
+\references{
+Silver D et al (2018) \emph{Science} 362:1140-1144.
+Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483.
 }

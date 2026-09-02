@@ -9,6 +9,9 @@
 #' @return List with ``betweenness``, ``normalised``, ``n``.
 #' @references Brandes (2001), A faster algorithm for betweenness centrality, Journal of Mathematical Sociology 25:163-177. Paywalled and not held locally; the dependency recursion implemented here is the standard published form of the algorithm. Its output is checked in the batch's anchor file against brute-force enumeration of all shortest paths on a small graph.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Btwcent(V)
 Btwcent <- function(A, normalise = FALSE) {
   A <- as.matrix(A); n <- nrow(A); diag(A) <- 0; B <- A != 0
   cb <- numeric(n)

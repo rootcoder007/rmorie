@@ -22,6 +22,9 @@
 #'   relate two sets of vectors. Acta Crystallographica, A32,
 #'   922-923.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rmsdtr(V, V)
 morie_rmsdtr <- function(P, Q, weights = NULL) {
   P <- as.matrix(P)
   Q <- as.matrix(Q)

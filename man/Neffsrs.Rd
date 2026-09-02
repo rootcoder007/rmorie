@@ -16,12 +16,12 @@ List with neff, deff, cv2, n, sumw, sumw2.
 deff = 1 + cv^2(w) = n * sum(w^2) / (sum w)^2 and
 n_eff = n / deff = (sum w)^2 / sum(w^2).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Neffsrs(V)
+}
 \references{
 Kish, L. (1965), Survey Sampling, Wiley, Sect. 11.7.
 Standard published form; the monograph is not in the local corpus and
 was not read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Neffsrs(V)
 }

@@ -13,6 +13,8 @@
 #' @return Numeric length-2 vector, the open interval (lo, hi).
 #' @references Schabenberger & Gotway (2005), eq (6.48), p. 340.
 #' @export
+#' @examples
+#' car_rho_bounds(W = 5L)
 car_rho_bounds <- function(W, parameterization = "weighted") {
   W <- as.matrix(W)
   M <- if (identical(parameterization, "weighted")) {
@@ -41,6 +43,8 @@ car_rho_bounds <- function(W, parameterization = "weighted") {
 #' @references Schabenberger & Gotway (2005), p. 340, citing
 #'   Haining (1990), p. 130.
 #' @export
+#' @examples
+#' car_rho_ols(Z = 5L, W = 5L)
 car_rho_ols <- function(Z, W, X = NULL) {
   Z <- as.numeric(Z); W <- as.matrix(W)
   X <- if (is.null(X)) matrix(1, length(Z), 1) else as.matrix(X)

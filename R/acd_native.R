@@ -13,6 +13,9 @@
 #' @return List with pmf, var_mle, wilson (estimate/lower/upper), and
 #'   true_level when interval_fn is given.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_binomial_inference(V, V)
 morie_binomial_inference <- function(w, n, p = NA, z = 1.96,
                                      interval_fn = NULL) {
   stopifnot(w >= 0, w <= n, n > 0)
@@ -44,6 +47,8 @@ morie_binomial_inference <- function(w, n, p = NA, z = 1.96,
 #' @param z Normal critical value.
 #' @return List with x2 (Pearson), lrt, or_hat, or_lower, or_upper.
 #' @export
+#' @examples
+#' morie_two_group_binomial(30, 100, 45, 100)
 morie_two_group_binomial <- function(w1, n1, w2, n2, z = 1.96) {
   p_bar <- (w1 + w2) / (n1 + n2)
   stopifnot(p_bar > 0, p_bar < 1)
@@ -79,6 +84,9 @@ morie_two_group_binomial <- function(w1, n1, w2, n2, z = 1.96) {
 #' @param b Coefficients (fit by Newton-Raphson when NULL).
 #' @return List with beta, cov, loglik, deviance, pi.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_logistic_fit(x = rnorm(10), y = rnorm(10)); TRUE
 morie_logistic_fit <- function(x, y, b = NULL) {
   x <- as.matrix(x)
   y <- as.numeric(y)
@@ -117,6 +125,8 @@ morie_logistic_fit <- function(x, y, b = NULL) {
 #' @param cov Coefficient covariance. @param xb Linear predictor value.
 #' @return List with or, or_lower, or_upper, var_xb, pi, pi_lower, pi_upper.
 #' @export
+#' @examples
+#' morie_logistic_wald()
 morie_logistic_wald <- function(b1 = NA, var_b1 = NA, c = 1, z = 1.96,
                                 xs = NULL, cov = NULL, xb = NA) {
   out <- list()
@@ -151,6 +161,9 @@ morie_logistic_wald <- function(b1 = NA, var_b1 = NA, c = 1, z = 1.96,
 #' @param product If TRUE use the product-multinomial row-wise form.
 #' @return Numeric probability.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_multinomial_pmf(V, V)
 morie_multinomial_pmf <- function(counts, probs, product = FALSE) {
   if (is.matrix(counts) && product) {
     out <- 1
@@ -176,6 +189,8 @@ morie_multinomial_pmf <- function(counts, probs, product = FALSE) {
 #' @param pi_hat,var_pi,z Wald pieces.
 #' @return List with logit, probs, pi_j, wald (as supplied).
 #' @export
+#' @examples
+#' morie_multicategory_logit()
 morie_multicategory_logit <- function(bj0 = NA, bjs = NULL, xs = NULL,
                                       logits_2_to_j = NULL,
                                       cum_probs = NULL, j = NA,
@@ -218,6 +233,8 @@ morie_multicategory_logit <- function(bj0 = NA, bjs = NULL, xs = NULL,
 #' @return List with score_ci, mu, mu_rate, mu_cell, or_loglinear,
 #'   mean_ratio (as supplied).
 #' @export
+#' @examples
+#' morie_poisson_loglinear()
 morie_poisson_loglinear <- function(mu_hat = NA, n = NA, z = 1.96,
                                     b0 = NA, bs = NULL, xs = NULL,
                                     exposure = NA, beta_x_i = NA,
@@ -259,6 +276,9 @@ morie_poisson_loglinear <- function(mu_hat = NA, n = NA, z = 1.96,
 #' @param variances Per-model variances.
 #' @return List with taus, theta_ma, var_ma.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bic_model_average(V)
 morie_bic_model_average <- function(bics, thetas = NULL,
                                     variances = NULL) {
   b <- as.numeric(bics)
@@ -286,6 +306,8 @@ morie_bic_model_average <- function(bics, thetas = NULL,
 #'   prevalence. @param b0,bs,xs Group-testing logit pieces.
 #' @return List with prevalence, expected_tests, pi_group (as supplied).
 #' @export
+#' @examples
+#' morie_diagnostic_prevalence()
 morie_diagnostic_prevalence <- function(pi = NA, se = NA, sp = NA,
                                         i_size = NA, pi_tilde = NA,
                                         b0 = NA, bs = NULL, xs = NULL) {
@@ -314,6 +336,8 @@ morie_diagnostic_prevalence <- function(pi = NA, se = NA, sp = NA,
 #' @param t_values,counts,beta,t_obs Exact-PMF pieces.
 #' @return List with loglik and/or probs, p_at_t.
 #' @export
+#' @examples
+#' morie_exact_conditional()
 morie_exact_conditional <- function(b = NULL, x = NULL, y = NULL,
                                     t_values = NULL, counts = NULL,
                                     beta = NA, t_obs = NA) {
@@ -347,6 +371,8 @@ morie_exact_conditional <- function(b = NULL, x = NULL, y = NULL,
 #' @param var_pi,t_crit Kott-Carr pieces.
 #' @return List with n_hat_i, jackknife_var, var_pi_delta, kott_carr.
 #' @export
+#' @examples
+#' morie_survey_categorical()
 morie_survey_categorical <- function(weights = NULL, ys = NULL,
                                      category = NULL,
                                      replicate_estimates = NULL,
@@ -389,6 +415,9 @@ morie_survey_categorical <- function(weights = NULL, ys = NULL,
 #' @param b1,x,random_intercept GLMM pieces.
 #' @return List with mu_spmi, mu_three, eta_glmm (as supplied).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mrcv_glmm(V)
 morie_mrcv_glmm <- function(b0, beta_w_a = NA, beta_y_b = NA,
                             beta_z_c = NA, b1 = NA, x = NA,
                             random_intercept = NA) {
@@ -417,6 +446,8 @@ morie_mrcv_glmm <- function(b0, beta_w_a = NA, beta_y_b = NA,
 #' @return List with posterior_prob, posterior_density, bayes_estimate,
 #'   grid_weights (as supplied).
 #' @export
+#' @examples
+#' morie_bayes_binomial()
 morie_bayes_binomial <- function(p_a_given_b = NA, p_b = NA,
                                  p_a_given_notb = NA, pi = NA, w = NA,
                                  n = NA, a = NA, b = NA, logliks = NULL,
@@ -450,6 +481,8 @@ morie_bayes_binomial <- function(p_a_given_b = NA, p_b = NA,
 #' @param a,b_pt Odds-ratio evaluation points.
 #' @return List with piecewise, spline, spline_or (as supplied).
 #' @export
+#' @examples
+#' morie_spline_logit()
 morie_spline_logit <- function(x = NA, knot = NA, coef_left = NULL,
                                coef_right = NULL, betas = NULL,
                                knots = NULL, a = NA, b_pt = NA) {

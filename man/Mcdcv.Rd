@@ -11,7 +11,7 @@ Mcdcv(y, X, h = NULL, max_subsets = 2e+05)
 
 \item{X}{n-by-q predictor matrix WITHOUT an intercept column.}
 
-\item{h}{subset size; defaults to [(n + p + 1)/2] with p = q + 1.}
+\item{h}{subset size; defaults to \link{(n + p + 1)/2} with p = q + 1.}
 
 \item{max_subsets}{refuse rather than enumerate more than this many.}
 }
@@ -25,7 +25,7 @@ the American Statistical Association 79(388), 871-880, and Rousseeuw, P. J.
 (1985), "Multivariate estimation with high breakdown point", Reidel,
 283-297.  The MCD criterion is the one stated in the stub docstring,
 argmin over subsets H of size h of det(cov(X\link[seewave:H]{H})), and it is applied here to
-the JOINT matrix Z = [X | y].  That is the standard way a high-breakdown
+the JOINT matrix Z = \link{X | y}.  That is the standard way a high-breakdown
 scatter estimator becomes a high-breakdown regression estimator: partition
 the MCD scatter of (X, y) and read the coefficients off the population
 regression formula beta = Sigma_XX^-1 Sigma_Xy, alpha = mu_y - beta mu_X.

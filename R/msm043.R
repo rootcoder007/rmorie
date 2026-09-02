@@ -14,6 +14,8 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (6.2) p.172. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' Msm043(sigma2 = 5L)
 Msm043 <- function(sigma2, beta = NULL) {
   s2 <- as.numeric(sigma2)
   if (s2 <= 0) stop("sigma2 must be positive")

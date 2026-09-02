@@ -21,6 +21,9 @@
 #' @references Liu et al. (2022), A ConvNet for the 2020s,
 #'   CVPR 2022:11976-11986.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Convnx(V)
 Convnx <- function(x, filters = NULL, kernel = 7, expand = 4,
                    layer_scale = 0, seed = 42) {
   M <- .s03mat(x)

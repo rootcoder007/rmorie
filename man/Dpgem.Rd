@@ -27,11 +27,11 @@ unbroken remainder sum to exactly one at every truncation.  The
 marginal mean of the first weight is 1/(1 + alpha), and the expected
 remaining mass after K breaks is (alpha/(1 + alpha))^K.
 }
+\examples{
+Dpgem()
+}
 \references{
 Sethuraman (1994), Statistica Sinica 4(2):639-650;
 Pitman (2002), Poisson-Dirichlet and GEM invariant distributions,
 Technical Report 621, U.C. Berkeley.
-}
-\examples{
-Dpgem()
 }

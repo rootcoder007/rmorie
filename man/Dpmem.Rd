@@ -43,12 +43,12 @@ the single-cluster case reduces exactly to the conjugate normal
 posterior mean (mu0/tau2 + sum y/sigma2) / (1/tau2 + n/sigma2), the
 degenerate check the fit has to reproduce.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Dpmem(V)
+}
 \references{
 Antoniak (1974), Ann. Statist. 2(6):1152-1174;
 Escobar & West (1995), JASA 90(430):577-588; Neal (2000),
 J. Comput. Graph. Statist. 9(2):249-265.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Dpmem(V)
 }

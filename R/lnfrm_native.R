@@ -27,6 +27,8 @@
 #'   Therneau, Grambsch and Pankratz (2003), Journal of Computational
 #'   and Graphical Statistics 12(1), 156-175.
 #' @export
+#' @examples
+#' Lnfrm(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lnfrm <- function(time, event, X, cluster, max_outer = 50L, tol = 1e-7) {
   t <- as.numeric(time); e <- as.numeric(event)
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"

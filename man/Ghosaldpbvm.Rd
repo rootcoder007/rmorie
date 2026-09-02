@@ -30,11 +30,11 @@ out entirely in the limit, which is the substantive content.
 Formula: F_post(t) = (alpha t + N_t) / (alpha + n);
 Var(sqrt(n)(F_post(t) - t)) -> t(1 - t).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 12.2.
-}
 \examples{
 set.seed(1)
 r <- Ghosaldpbvm(); TRUE
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 12.2.
 }

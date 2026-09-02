@@ -46,13 +46,13 @@ amplification at all; \code{amplifies} flags that case.
 Equations read from a rendered image of p. 11 of arXiv:1811.12469v2: the
 text layer drops the square-root signs.
 }
+\examples{
+Shfflm(epsilon0 = 5L, n = 5L, delta = 0.5)
+}
 \references{
 Erlingsson, U., Feldman, V., Mironov, I., Raghunathan, A.,
 Talwar, K. & Thakurta, A. (2019). Amplification by shuffling: from
 local to central differential privacy via anonymity. Proceedings of the
 Thirtieth Annual ACM-SIAM Symposium on Discrete Algorithms, 2468-2479,
 Theorem 7. \doi{10.1137/1.9781611975482.151}
-}
-\examples{
-Shfflm(epsilon0 = 5L, n = 5L, delta = 0.5)
 }

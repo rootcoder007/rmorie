@@ -37,11 +37,11 @@ out one bandwidth so the boundary regressions see the empty tail.
 A rejection says the density jumps; failing to reject is not evidence
 that assignment is as good as random.
 }
-\references{
-McCrary (2008), Journal of Econometrics 142:698-714.  Paywalled at Elsevier; the coded form was read from McCrary's own implementation as distributed in Dimmery's rdd package, R/DCdensity.R (fetched from the CRAN GitHub mirror), which gives the binning, the 3.348 pilot bandwidth rule, the zero padding, the triangular weights and sethetahat verbatim.
-}
 \examples{
 set.seed(1)
 x <- c(runif(100, -1, 0), runif(120, 0, 1))
 Rddmanip(x)
+}
+\references{
+McCrary (2008), Journal of Econometrics 142:698-714.  Paywalled at Elsevier; the coded form was read from McCrary's own implementation as distributed in Dimmery's rdd package, R/DCdensity.R (fetched from the CRAN GitHub mirror), which gives the binning, the 3.348 pilot bandwidth rule, the zero padding, the triangular weights and sethetahat verbatim.
 }

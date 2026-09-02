@@ -23,11 +23,11 @@ The EMD, a single number.
 \description{
 Earth Mover's Distance between two distributions over one domain
 }
-\references{
-Li, N., Li, T., & Venkatasubramanian, S. (2007).
-t-Closeness: privacy beyond k-anonymity and l-diversity. ICDE.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_emd(V, V)
+}
+\references{
+Li, N., Li, T., & Venkatasubramanian, S. (2007).
+t-Closeness: privacy beyond k-anonymity and l-diversity. ICDE.
 }

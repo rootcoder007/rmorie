@@ -28,10 +28,10 @@ with the all-ones vector in its kernel, so deleting row/column
 grounded system against e_u satisfies R_uv = x_u.  Exact, and no
 pseudoinverse is needed.
 }
+\examples{
+Esumtv(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3), u = 0, v = 1)
+}
 \references{
 Klein & Randic (1993), Journal of Mathematical Chemistry
 12(1):81-95, doi:10.1007/BF01164627.
-}
-\examples{
-Esumtv(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3), u = 0, v = 1)
 }

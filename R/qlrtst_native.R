@@ -78,6 +78,9 @@
 #'   D. W. K. (1993). Econometrica, 61, 821-856.  Hansen, B. E.
 #'   (1997). Journal of Business & Economic Statistics, 15, 60-67.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_qlrtst(V)
 morie_qlrtst <- function(y, X = NULL, trim = 0.15) {
   yv <- as.numeric(y)
   n <- length(yv)

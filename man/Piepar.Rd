@@ -29,9 +29,9 @@ Formula: \code{PIE = E[Y(do(X = x*))] - E[Y]}, the first term by
 standardising the fitted outcome regression over the proposed
 exposure distribution.
 }
-\references{
-Westreich, D. (2014). Epidemiology 25:437-440.
-}
 \examples{
 Piepar(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), intervention_dist = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+Westreich, D. (2014). Epidemiology 25:437-440.
 }

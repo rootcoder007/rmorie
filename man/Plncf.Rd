@@ -25,11 +25,11 @@ B(lam, T) = (2 h c^2 / lam^5) / (exp(hc/(lam kB T)) - 1)
 Stefan-Boltzmann total power. Exactly consistent with the in-tree
 frequency form (plank/Plank) via B_lam = B_nu(c/lam) c/lam^2.
 }
-\references{
-Planck, M. (1900), Verh. Dtsch. Phys. Ges. 2, 237-245;
-BIPM SI (2019) exact constants; CODATA 2018.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Plncf(V, V)
+}
+\references{
+Planck, M. (1900), Verh. Dtsch. Phys. Ges. 2, 237-245;
+BIPM SI (2019) exact constants; CODATA 2018.
 }

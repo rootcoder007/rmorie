@@ -23,10 +23,10 @@ not an error, so it is returned with a flag rather than clamped.
 \details{
 Formula: \code{PM = NIE / (NIE + NDE)}.
 }
+\examples{
+PropMd(NIE = 5L, NDE = 5L)
+}
 \references{
 VanderWeele, T. J. (2013). Epidemiology 24:175-176;
 VanderWeele (2015), Explanation in Causal Inference, section 2.7.
-}
-\examples{
-PropMd(NIE = 5L, NDE = 5L)
 }

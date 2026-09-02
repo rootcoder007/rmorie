@@ -19,6 +19,8 @@
 #'   form; none of the 1970 papers is in the local corpus and none was
 #'   read.
 #' @export
+#' @examples
+#' Bfgsupd(H = 0.5, s = 5L, y = 5L)
 Bfgsupd <- function(H, s, y, inverse = TRUE) {
   M <- .t1_mat(H); p <- nrow(M)
   if (ncol(M) != p) stop("H must be square")

@@ -28,6 +28,10 @@
 #'   multiplier is the idea of Sympson & Hetter (1985), applied here in its
 #'   simplest multiplicative form.
 #' @export
+#' @examples
+#' items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
+#'                 3, 4, byrow = TRUE)
+#' Catnext(items, theta = 0.5)
 Catnext <- function(items, theta, administered = NULL, exposure = NULL,
                     D = 1) {
   It <- as.matrix(items); J <- nrow(It)

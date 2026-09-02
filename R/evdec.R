@@ -18,6 +18,8 @@
 #'   \code{estimate}, \code{n}, \code{method}.
 #' @references Smith (1989), Statistical Science 4(4):367-377.
 #' @export
+#' @examples
+#' Evdec(x = c(1, 2, 3, 4, 5, 6, 7, 8), u = 5L, r = 5L)
 Evdec <- function(x, u, r) {
   x <- .s03vec(x)
   n <- length(x)

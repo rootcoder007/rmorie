@@ -7,6 +7,9 @@
 #' @param temperature Numeric softmax temperature (default 1).
 #' @return Named list with tensor, keep_mask, n_kept, p, method.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' top_p_nucleus(V)
 top_p_nucleus <- function(x, p = 0.9, temperature = 1) {
   if (p <= 0 || p > 1) stop("p must be in (0, 1]")
   z <- as.numeric(x) / temperature

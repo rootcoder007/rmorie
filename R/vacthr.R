@@ -9,6 +9,9 @@
 #' @return List with ``threshold``, ``coverage``, ``feasible``, ``R0``, ``efficacy``.
 #' @references Anderson and May (1991), Infectious Diseases of Humans: Dynamics and Control, Oxford University Press. Not held locally; p_c = 1 - 1/R0 is the standard published result and is stated in the same form in every open source consulted.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Vaccthresh(V)
 Vaccthresh <- function(R0, efficacy = 1) {
   r0 <- .t1_vec(R0); e <- as.numeric(efficacy)
   if (e <= 0 || e > 1) stop("efficacy must be in (0, 1]")

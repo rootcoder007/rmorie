@@ -27,6 +27,9 @@ profile or grid over it.
 Formula: mu_hat and V_mu from (5.20); theta_hat_j and V_j from (5.17);
 log p(tau|y) from (5.21) with a flat prior
 }
+\examples{
+Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+}
 \references{
 Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
 Bayesian Data Analysis, 3rd edition, Section 5.4, equations (5.17),
@@ -34,7 +37,4 @@ Bayesian Data Analysis, 3rd edition, Section 5.4, equations (5.17),
 author's own copy. A flat prior on tau is used and the additive
 constant dropped, so the value is comparable across tau but is not an
 absolute density.
-}
-\examples{
-Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 }

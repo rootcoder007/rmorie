@@ -23,6 +23,9 @@
 #'   sufficiency, Annals of Mathematical Statistics 22(1):79-86.
 #'   \doi{10.1214/aoms/1177729694}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Gpdsh(rnorm(30), window = 10)
 Gpdsh <- function(y_stream, window = 10, tau = 0.5, floor = 1e-12) {
   v <- .s03vec(y_stream)
   n <- length(v)

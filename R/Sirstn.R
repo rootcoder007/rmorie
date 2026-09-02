@@ -31,6 +31,8 @@
 #'   coupled chemical reactions. Journal of Physical Chemistry 81(25),
 #'   2340-2361. \doi{10.1021/j100540a008}
 #' @export
+#' @examples
+#' Sirstn(S0 = 990, I0 = 10, beta = 0.3, gamma = 0.1, T = 100)
 Sirstn <- function(S0, I0, beta, gamma, T, seed = 1) {
   S <- as.numeric(S0); I <- as.numeric(I0); R <- 0
   beta <- as.numeric(beta); gamma <- as.numeric(gamma); T <- as.numeric(T)

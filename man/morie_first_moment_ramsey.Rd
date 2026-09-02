@@ -23,9 +23,9 @@ A search that runs to its own ceiling has found the CEILING, not the
 bound, so \code{search_capped} is reported and warned about rather than
 letting the cap read as a result.
 }
-\references{
-Erdos P (1947) \emph{Bull AMS} 53:292-294.
-}
 \examples{
 morie_first_moment_ramsey(k = 5L)
+}
+\references{
+Erdos P (1947) \emph{Bull AMS} 53:292-294.
 }

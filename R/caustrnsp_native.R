@@ -35,6 +35,9 @@
 #'   Science 29(4), 579-595, doi:10.1214/14-STS486; local copy
 #'   fetched-wave3/pearl-bareinboim-2014-external-validity-transportability-StatSci29.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Caustrnsp(y = rnorm(60), z = rbinom(60, 1, 0.5), s = runif(60, 0.1, 0.9))
 Caustrnsp <- function(y, z, s, mode = "transport", pr_w0 = NULL) {
   yv <- as.numeric(y); zv <- as.numeric(z); sv <- as.numeric(s)
   n <- length(yv)

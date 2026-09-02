@@ -20,6 +20,9 @@
 #'   of Molinari, F. (2021), Handbook of Econometrics 7A
 #'   (arXiv:2004.11751 pp. 18-19), read with the treatment order reversed.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Bndngt(y = rnorm(40), D = rbinom(40, 1, 0.5), y_min = -3)
 Bndngt <- function(y, D, y_min) {
   z <- .bnd_yd(y, D, "Bndngt")
   ymin <- as.numeric(y_min)[1]

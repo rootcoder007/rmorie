@@ -25,6 +25,8 @@
 #'   heterogeneous populations. Journal of Mathematical Biology
 #'   28(4):365-382. \doi{10.1007/BF00178324}.
 #' @export
+#' @examples
+#' Reffec(R0 = 5L, S = 5L, N = 5L)
 Reffec <- function(R0, S, N) {
   R0 <- as.numeric(R0); S <- as.numeric(S); N <- as.numeric(N)
   if (R0 < 0) stop("Reffec: R0 must be non-negative")

@@ -13,6 +13,11 @@
 #' @return List with ``prss``, ``rss``, ``penalty``, ``l1``, ``l2``, ``lambda``, ``alpha``, ``n``, ``p``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.2 p. 94 describes the elastic net as the combination of the ridge and lasso penalties implemented by glmnet, and Chapter 7 p. 230 defines its mixing parameter alpha: alpha = 0 gives the ridge penalty, alpha = 1 the lasso, and values in between the elastic net.  The book names those two endpoints but does not print the mixed objective itself; the (1 - alpha)/2 and alpha weights are the glmnet parameterization of Friedman, Hastie and Tibshirani (2010), Regularization Paths for Generalized Linear Models via Coordinate Descent, Journal of Statistical Software 33(1):1-22, doi:10.18637/jss.v033.i01, which is the package the book cites for this penalty.  Both chapters read from the PDFs; the mixing weights come from the cited paper, and the endpoints agree with the book: alpha = 0 reproduces MVSML Sect. 3.6.1 up to the factor 1/2 on the ridge term, alpha = 1 reproduces Sect. 3.6.2 exactly.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' y <- rnorm(10)
+#' Enetobj(X, y, beta = c(0, 0.5, -0.3), lam = 0.1, alpha = 0.5)
 Enetobj <- function(X, y, beta, lam, alpha, add_intercept = TRUE) {
   Xm <- .t1_mat(X)
   if (isTRUE(add_intercept)) Xm <- .t1_cbind1(Xm)

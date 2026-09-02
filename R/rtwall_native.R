@@ -22,6 +22,9 @@
 #'   impacts of control measures. American Journal of Epidemiology,
 #'   160(6), 509-516.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rtwall(V, V)
 morie_rtwall <- function(onset_times, gi_pmf) {
   t <- as.integer(onset_times)
   w <- as.numeric(gi_pmf)

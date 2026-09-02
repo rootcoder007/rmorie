@@ -31,10 +31,10 @@ Formula: with \code{alpha_ij = 1} when region j lies inside
 observation i, iterate
 \code{p_j = (1/n) sum_i alpha_ij p_j / sum_k alpha_ik p_k}.
 }
-\references{
-Turnbull, B. W. (1976). JRSS B 38:290-295, equation (10).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ssintc(V, V)
+}
+\references{
+Turnbull, B. W. (1976). JRSS B 38:290-295, equation (10).
 }

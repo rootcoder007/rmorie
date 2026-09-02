@@ -59,6 +59,9 @@
 #'   `min_eigenvalue`.
 #' @references Schabenberger Ch 9, Sec 9.3, eqs (9.7)-(9.17)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spstcn(V, V)
 spstcn <- function(spatial_h, temporal_u, params = list(), method = "monotone",
                    coords = NULL, times = NULL) {
   methods <- c("monotone", "power_mixture", "scale_mixture", "differential")

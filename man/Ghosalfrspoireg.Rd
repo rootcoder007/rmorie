@@ -28,10 +28,10 @@ truth f0(x) = 1 + 0.8 cos(pi x) over a uniform grid.
 Formula: grad_k = sum_i (y_i - exp(min(f(x_i), 5))) phi_k(x_i),
 beta <- beta + step grad - decay beta.
 }
+\examples{
+Ghosalfrspoireg()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.4.
-}
-\examples{
-Ghosalfrspoireg()
 }

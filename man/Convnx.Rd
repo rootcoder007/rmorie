@@ -33,11 +33,11 @@ scaled by gamma.  ConvNeXt initialises the layer scale gamma at a
 small value; at gamma = 0 the block is EXACTLY the identity, which is
 the check that the residual path is wired the right way round.
 }
-\references{
-Liu et al. (2022), A ConvNet for the 2020s,
-CVPR 2022:11976-11986.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Convnx(V)
+}
+\references{
+Liu et al. (2022), A ConvNet for the 2020s,
+CVPR 2022:11976-11986.
 }

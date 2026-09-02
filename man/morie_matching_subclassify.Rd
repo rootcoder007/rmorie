@@ -19,12 +19,15 @@ morie_matching_subclassify(
 
 \item{covariates}{Character vector of covariates.}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained for back-compat).}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 
 \item{n_strata}{Number of quantile-based strata (default 5).}
 }
 \value{
-A list with components \code{data_with_strata} (the matched data augmented with \code{._stratum} and \code{._ps} columns) and \code{stratum_effects} (per-stratum sample sizes and PS ranges).
+A list with components \code{data_with_strata} (the matched
+data augmented with \code{._stratum} and \code{._ps} columns) and
+\code{stratum_effects} (per-stratum sample sizes and PS ranges).
 }
 \description{
 Thin wrapper around \code{MatchIt::matchit(method = "subclass")} that

@@ -33,12 +33,12 @@ in-control and out-of-control density and returns the reflected
 cumulative sum \eqn{S_n - \min_{0 \le i \le n} S_i}, the statistic of
 Page's CUSUM scheme.  Mirrors Python \code{morie.fn.glm}.
 }
+\examples{
+set.seed(1)
+morie_glrtest(x = rbinom(50, 1, 0.5), p0 = 0.3, p1 = 0.6)
+}
 \references{
 Lai, T. L. (1995). Sequential changepoint detection in
 quality control and dynamical systems. Journal of the Royal
 Statistical Society B, 57(4), 613-658.
-}
-\examples{
-set.seed(1)
-morie_glrtest(x = rbinom(50, 1, 0.5), p0 = 0.3, p1 = 0.6)
 }

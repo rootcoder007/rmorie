@@ -31,12 +31,12 @@ condition is estimated by the doubly robust moment of Sant'Anna and
 Zhao (2020), equation (2.6), restricted to the two conditions being
 compared, so the two contrasts are on the same scale.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Drspr(V, V)
+}
 \references{
 Aronow, P. M. and Samii, C. (2017). Annals of Applied
 Statistics 11(4), 1912-1947.  Sant'Anna, P. H. C. and Zhao, J.
 (2020). Journal of Econometrics 219(1), 101-122.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Drspr(V, V)
 }

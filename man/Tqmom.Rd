@@ -23,11 +23,11 @@ why \code{sqrt(pi/2)} sits in front of the estimator, cancelling it.
 \details{
 Formula: \code{E|X|^l = sigma^l 2^(l/2) Gamma((l+1)/2) / sqrt(pi)}.
 }
-\references{
-Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
-fact 3.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tqmom(V, V)
+}
+\references{
+Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
+fact 3.4.
 }

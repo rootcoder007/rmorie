@@ -43,8 +43,8 @@ new exposure level and a* the baseline one:
 NDE = {theta1 + theta3 (beta0 + beta1 a* + beta2' c)}(a - a*)
 NIE = (theta2 beta1 + theta3 beta1 a)(a - a*)}
 
-from the mediator model E[M|a,c] = beta0 + beta1 a + beta2' c and the
-outcome model E[Y|a,m,c] = theta0 + theta1 a + theta2 m + theta3 a m +
+from the mediator model E\link{M|a,c} = beta0 + beta1 a + beta2' c and the
+outcome model E\link{Y|a,m,c} = theta0 + theta1 a + theta2 m + theta3 a m +
 theta4' c, both fitted here by ordinary least squares.  Valeri and
 VanderWeele's NDE is the pure one and their NIE the total one; the mirror
 images TNDE and PNIE follow by swapping a and a* and are returned as well.

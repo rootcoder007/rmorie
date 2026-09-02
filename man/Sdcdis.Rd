@@ -48,14 +48,14 @@ The uniform stream is the Lehmer minstd generator shared with every other
 arm of this package, so a given seed reproduces the same mask in R and in
 Python bit for bit.
 }
+\examples{
+set.seed(1)
+Sdcdis(matrix(runif(20), 10, 2), noise_radius = 0.1)
+}
 \references{
 Allshouse, W. B., Fitch, M. K., Hampton, K. H., Gesink,
 D. C., Doherty, I. A., Leone, P. A., Serre, M. L. & Miller, W. C.
 (2010). Geomasking sensitive health data and privacy protection: an
 evaluation using an E911 database. Geocarto International 25(6),
 443-452. \doi{10.1080/10106049.2010.496496}
-}
-\examples{
-set.seed(1)
-Sdcdis(matrix(runif(20), 10, 2), noise_radius = 0.1)
 }

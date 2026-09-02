@@ -32,6 +32,8 @@
 #'   `marginal_variance` and `marginal_ratio`.
 #' @references Schabenberger Ch 6, Sec 6.3.4, eqs (6.73)-(6.74), Example 6.6
 #' @export
+#' @examples
+#' spglmm(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
 spglmm <- function(X, beta, S, sigma2 = 1, family = "poisson",
                    link_kind = NULL, correlation = NULL) {
   if (is.null(link_kind)) link_kind <- .schab_canonical_link(family)

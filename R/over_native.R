@@ -122,6 +122,9 @@
 #'   O. A. (2009). Dealing with limited overlap in estimation of
 #'   average treatment effects. Biometrika, 96(1), 187-199.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_over(V, V)
 morie_over <- function(ps_treated, ps_control) {
   pt <- as.numeric(ps_treated); pc <- as.numeric(ps_control)
   if (length(pt) == 0L || length(pc) == 0L)

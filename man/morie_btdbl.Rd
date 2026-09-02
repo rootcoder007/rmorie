@@ -36,11 +36,11 @@ prepivoted values u_b = H*_b(R_b); c1 is their (1-alpha)
 quantile; the critical root is the c1 quantile of the outer root
 distribution (Beran Eq. 2.7 two-step algorithm).
 }
-\references{
-Beran, R. (1987). Prepivoting to reduce level error
-of confidence sets. Biometrika, 74(3), 457-468.
-}
 \examples{
 set.seed(1)
 morie_btdbl(rnorm(40), B_outer = 50L, B_inner = 20L)
+}
+\references{
+Beran, R. (1987). Prepivoting to reduce level error
+of confidence sets. Biometrika, 74(3), 457-468.
 }

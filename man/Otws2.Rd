@@ -25,11 +25,11 @@ Formula: \code{W_p^p = (1/n) sum_i |x_(i) - y_(i)|^p} for two
 equal-weight samples -- Bobkov and Ledoux (2019) Section 2; Peyre and
 Cuturi (2019) Remark 2.30.
 }
-\references{
-Bobkov, S. and Ledoux, M. (2019). Memoirs of the American
-Mathematical Society 261(1259). \doi{10.1090/memo/1259}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Otws2(V, V)
+}
+\references{
+Bobkov, S. and Ledoux, M. (2019). Memoirs of the American
+Mathematical Society 261(1259). \doi{10.1090/memo/1259}.
 }

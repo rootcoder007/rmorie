@@ -36,11 +36,11 @@ Under monotone treatment selection,
 same bound on \code{-Y} over the reflected support with the sides
 swapped back.
 }
-\references{
-Manski and Pepper (2000), Econometrica 68(4), 997-1010.
-Standard published form; see \code{bdmnsl} for the availability note.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Mtsbnd(V, V)
+}
+\references{
+Manski and Pepper (2000), Econometrica 68(4), 997-1010.
+Standard published form; see \code{bdmnsl} for the availability note.
 }

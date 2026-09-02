@@ -31,14 +31,14 @@ the Dirichlet process's, which is why it is used in its place.
 The Python arm delegates the quadrature to \code{gh_c14_14}, which
 has no R mirror; the midpoint rule is five lines and is written here.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nrmprc(V)
+}
 \references{
 Lijoi, A., Mena, R. H. & Prunster, I. (2005).
 Hierarchical mixture modeling with normalized inverse-Gaussian
 priors. Journal of the American Statistical Association, 100(472),
 1278-1291. Ghosal, S. & van der Vaart, A. (2017). Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 14.6.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Nrmprc(V)
 }

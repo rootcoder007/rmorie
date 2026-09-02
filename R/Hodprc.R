@@ -18,6 +18,9 @@
 #'   cycles: an empirical investigation, Journal of Money, Credit and
 #'   Banking 29(1):1-16. \doi{10.2307/2953682}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Hodprc(V)
 Hodprc <- function(y, lam = 1600) {
   v <- .s03vec(y)
   n <- length(v)

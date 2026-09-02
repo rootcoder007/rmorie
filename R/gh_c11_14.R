@@ -21,6 +21,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 11.7.5.
 #' @export
+#' @examples
+#' Ghosalgplaplace()
 Ghosalgplaplace <- function(x = NULL, y = NULL, length = 0.5, seed = 42) {
   if (is.null(x)) {
     x <- c(0.1, 0.25, 0.4, 0.6, 0.75, 0.9)

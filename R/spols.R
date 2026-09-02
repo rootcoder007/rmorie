@@ -18,6 +18,9 @@
 #'   `objective`, `converged`, `n_lags` and `fitted`.
 #' @references Schabenberger Ch 4, Sec 4.5.1
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' spols(D)
 spols <- function(empirical_variogram, variogram_model = "exponential") {
   ev <- .schab_as_empirical_variogram(empirical_variogram)
   fit <- .schab_fit_semivariogram(ev$lags, ev$gamma, ev$counts,

@@ -35,6 +35,9 @@
 #'   `neg2_restricted_loglik`, `converged`, `n` and `n_contrasts`.
 #' @references Schabenberger Ch 4, Sec 4.5.2
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spreml(V, V)
 spreml <- function(coords, z, X = NULL, variogram_model = "exponential") {
   coords <- as.matrix(coords)
   z <- as.numeric(z)

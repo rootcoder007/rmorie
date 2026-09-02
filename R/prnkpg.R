@@ -14,6 +14,9 @@
 #' @references Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
 #'   Stanford InfoLab technical report 1999-66.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Prnkpg(M)
 Prnkpg <- function(G, damping = 0.85, n_iter = 100) {
   Pgrank(G, d = damping, n_iter = n_iter)
 }

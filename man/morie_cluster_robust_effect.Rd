@@ -21,10 +21,6 @@ List with \code{estimate}, \code{se_cluster}, \code{se_naive}, \code{p_value},
 Sandwich variance summed over clusters with the \code{G/(G-1)}
 correction and a \code{t(G-1)} reference. Mirrors \code{morie.fn.clstcr}.
 }
-\references{
-Cameron AC, Miller DL (2015). \emph{Journal of Human
-Resources} 50(2), 317-372.
-}
 \examples{
 n <- 3000
 x <- stats::rnorm(n)
@@ -35,4 +31,8 @@ L <- stats::rnorm(n)
 a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
 morie_g_formula(y, a, L)
 morie_cluster_robust_effect(y = y, d = a, cluster = e)
+}
+\references{
+Cameron AC, Miller DL (2015). \emph{Journal of Human
+Resources} 50(2), 317-372.
 }

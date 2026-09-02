@@ -10,6 +10,9 @@
 #' @return List with ``y``, ``mu``, ``sigma``, ``n``, ``H``.
 #' @references Ba, Kiros and Hinton (2016), Layer Normalization, arXiv:1607.06450, equation (3). Verified against the paper.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Vitlnorm(V)
 Vitlnorm <- function(x, gamma = NULL, beta = NULL) {
   X <- if (is.matrix(x)) x else matrix(.t1_vec(x), nrow = 1L)
   n <- nrow(X); H <- ncol(X)

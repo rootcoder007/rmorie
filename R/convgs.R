@@ -18,6 +18,8 @@
 #' @references Fornell & Larcker (1981), J. Marketing Research
 #'   18(1):39-50.
 #' @export
+#' @examples
+#' Convgs(loadings = c(0.7, 0.8, 0.75, 0.6))
 Convgs <- function(loadings, residuals = NULL) {
   lam <- .s03vec(loadings)
   p <- length(lam)

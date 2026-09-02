@@ -13,6 +13,9 @@
 #' @references Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 #'   section 4.1 (orthogonalized JL transform).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tqorth(V)
 Tqorth <- function(S_mat) {
   Sm <- as.matrix(S_mat); m <- nrow(Sm); d <- ncol(Sm)
   Q <- .s4_qr_mgs(t(Sm))$Q

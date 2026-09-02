@@ -29,6 +29,9 @@
 #' @param rater1,rater2 categorical ratings of the same n subjects
 #' @return list(kappa, p_observed, p_expected, se, z, n, n_categories)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' KappaCoh(V, V)
 KappaCoh <- function(rater1, rater2) {
   r1 <- rater1; r2 <- rater2
   n <- length(r1)
@@ -81,6 +84,9 @@ KappaCoh <- function(rater1, rater2) {
 #' @return list(kappa, observed_disagreement, expected_disagreement, n,
 #'   n_categories)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' KappaWt(V, V)
 KappaWt <- function(rater1, rater2, weights = "linear") {
   r1 <- rater1; r2 <- rater2
   n <- length(r1)
@@ -108,6 +114,9 @@ KappaWt <- function(rater1, rater2, weights = "linear") {
 #' @return list(d, leverage, residual, std_residual, beta, sigma2, rss,
 #'   max_d, argmax_d, threshold, p, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CooksD(V, V)
 CooksD <- function(y, X) {
   yv <- as.numeric(y)
   Xm <- as.matrix(X)
@@ -180,6 +189,10 @@ CooksD <- function(y, X) {
 #' @return list(out, aggregated, degree, delta, scale, n, n_features,
 #'   n_columns)
 #' @export
+#' @examples
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' PnaAgg(A, X)
 PnaAgg <- function(A, X,
                    aggregators = c("mean", "std", "max", "min"),
                    scalers = c("identity", "amplification", "attenuation")) {
@@ -248,6 +261,9 @@ PnaAgg <- function(A, X,
 #' @return list(r_mean, r_std, a_posterior, b_posterior, lambda, t_start,
 #'   t_end, n_windows, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' RtSi(V, V)
 RtSi <- function(incidence, serial_interval, window = 7L,
                  a_prior = 1, b_prior = 5) {
   inc <- as.numeric(incidence)

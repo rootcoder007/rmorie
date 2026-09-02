@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.5.
 #' @export
+#' @examples
+#' Ghosalcredsetcov()
 Ghosalcredsetcov <- function(theta0 = 0.5, n = 400, level = 0.9,
                              n_sim = 400, seed = 42) {
   n <- as.integer(n); n_sim <- as.integer(n_sim)

@@ -25,6 +25,9 @@
 #'   and `periodogram_from_covariance`.
 #' @references Schabenberger Ch 4, Sec 4.7.1, eqs (4.56)-(4.59), pp. 190-192
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' spperiod(M)
 spperiod <- function(z_lattice, coords = NULL, omit_zero_frequency = TRUE,
                      check_identity = TRUE) {
   p <- .schab_periodogram(z_lattice, omit_zero_frequency = omit_zero_frequency)

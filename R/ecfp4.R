@@ -227,6 +227,8 @@
 #'   2026-08-09.  RDKit: Open-Source Cheminformatics,
 #'   https://www.rdkit.org.
 #' @export
+#' @examples
+#' Ecfp4(adjacency = 5L, atomnum = 5L)
 Ecfp4 <- function(adjacency, atomnum, numhs = NULL, charge = NULL,
                   inring = NULL, isotope_delta = NULL, nbits = 2048,
                   radius = 2) {

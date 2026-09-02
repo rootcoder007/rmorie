@@ -32,11 +32,11 @@ same compositions.
 Formula: Z ~ N(0, I_\{D-1\}); Y = mu + L Z with L L' = Sigma;
 X = alr^-1(Y) = C(exp(Y_1), ..., exp(Y_\{D-1\}), 1)
 }
+\examples{
+Lgtnsim(mu = 5L, Sigma = 0.5, n = 5L)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of
 Compositional Data, Chapter 6. The reference part is the LAST,
 matching aitalr and aitalri.
-}
-\examples{
-Lgtnsim(mu = 5L, Sigma = 0.5, n = 5L)
 }

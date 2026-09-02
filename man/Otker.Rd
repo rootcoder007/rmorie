@@ -35,11 +35,11 @@ Formula: \code{C_ij = k(x_i,x_i) + k(y_j,y_j) - 2 k(x_i,y_j)}, then
 \code{T} by Sinkhorn and \code{EMD_approx = <T, C>} -- Genevay, Peyre
 and Cuturi (2018), Section 3.
 }
-\references{
-Genevay, A., Peyre, G. and Cuturi, M. (2018). Proceedings
-of Machine Learning Research 84:1608-1617 (AISTATS).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Otker(V, V)
+}
+\references{
+Genevay, A., Peyre, G. and Cuturi, M. (2018). Proceedings
+of Machine Learning Research 84:1608-1617 (AISTATS).
 }

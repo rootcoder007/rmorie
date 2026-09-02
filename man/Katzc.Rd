@@ -28,10 +28,10 @@ additive constant beta shifts every score equally.
 \details{
 Formula: x = (I - alpha A)^{-1} (alpha A) y + beta.
 }
+\examples{
+Katzc(y = c(1, 1, 1), A = matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
+}
 \references{
 Katz (1953), Psychometrika 18(1):39-43.
 \doi{10.1007/BF02289026}
-}
-\examples{
-Katzc(y = c(1, 1, 1), A = matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
 }

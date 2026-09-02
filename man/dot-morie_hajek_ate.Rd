@@ -21,8 +21,8 @@ Internal helper, mirrors Python \code{investigation._hajek_ate}.  Operates
 on raw vectors: clipped propensity scores \code{ps}, binary treatment \code{t},
 outcome \code{y}.  Returns a list with \code{ate} / \code{y1} / \code{y0}.
 }
-\keyword{internal}
 \examples{
 set.seed(1)
 r <- .morie_hajek_ate(ps = rnorm(10), t = rnorm(10), y = rnorm(10)); TRUE
 }
+\keyword{internal}

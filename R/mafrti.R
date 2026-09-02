@@ -19,6 +19,8 @@
 #' @references Miller, J. J. (1978). The American Statistician 32(4):138.
 #'   \doi{10.1080/00031305.1978.10479283}.
 #' @export
+#' @examples
+#' Mafrti(ft = c(1, 2, 3, 4, 5, 6, 7, 8), n_harmonic = 5L)
 Mafrti <- function(ft, n_harmonic) {
   n <- as.numeric(n_harmonic)
   if (n <= 0) stop("the harmonic mean sample size must be positive")

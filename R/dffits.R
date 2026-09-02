@@ -10,6 +10,9 @@
 #' @return List with ``dffits``, ``cutoff``, ``leverage``, ``student``, ``n``, ``p``.
 #' @references Belsley, Kuh and Welsch (1980), Regression Diagnostics: Identifying Influential Data and Sources of Collinearity, Wiley. The book is not held locally; the definitions and the cutoffs used here (2/sqrt(n) for DFBETAS, 2 sqrt(p/n) for DFFITS, scaling by the delete-one root mean square s_(i)) are as documented by the SAS and R reference implementations, which cite BKW for them.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Dffitsols(V, V)
 Dffitsols <- function(X, y, intercept = TRUE) {
   X <- as.matrix(X); if (isTRUE(intercept)) X <- .t1_cbind1(X)
   y <- .t1_vec(y); n <- nrow(X); p <- ncol(X)

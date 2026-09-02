@@ -1,16 +1,16 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Couple two spaces that have no common ground metric
-#'
-#' Ordinary transport needs a cost between a point of one space and a
-#' point of the other. When the two live in different spaces -- a graph
-#' and a point cloud, say -- no such cost exists, and the only thing that
-#' can be compared is the pattern of within-space distances. The resulting
-#' objective is quadratic in the plan, so it is minimised by repeatedly
-#' linearising it and running Sinkhorn on the linearisation.
-#'
-#' The Gromov objective is not convex, so what the iteration returns is a
-#' stationary point. When the two spaces share a symmetry and the plan is
-#' started at \eqn{ b prime}, which is itself symmetric, the iteration cannot
+# Couple two spaces that have no common ground metric
+#
+# Ordinary transport needs a cost between a point of one space and a
+# point of the other. When the two live in different spaces -- a graph
+# and a point cloud, say -- no such cost exists, and the only thing that
+# can be compared is the pattern of within-space distances. The resulting
+# objective is quadratic in the plan, so it is minimised by repeatedly
+# linearising it and running Sinkhorn on the linearisation.
+#
+# The Gromov objective is not convex, so what the iteration returns is a
+# stationary point. When the two spaces share a symmetry and the plan is
+# started at \eqn{ b prime}, which is itself symmetric, the iteration cannot
 # prime break the tie and settles on the symmetric average of the two optima
 # prime rather than on either of them.
 # prime

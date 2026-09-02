@@ -26,11 +26,11 @@ contributes an atom of mass 1/k at its angle w = X_1/(X_1 + X_2),
 which makes H a probability measure by construction; the mean
 constraint of a valid angular measure is mean(w) = 1/2.
 }
-\references{
-Einmahl, de Haan & Sinha (1997), Stoch. Proc. Appl.
-70(2):143-171.
-}
 \examples{
 set.seed(1)
 Evangia(matrix(rnorm(40), 20, 2), k = 2)
+}
+\references{
+Einmahl, de Haan & Sinha (1997), Stoch. Proc. Appl.
+70(2):143-171.
 }

@@ -28,12 +28,12 @@ by-product, the direction itself.
 Formula: \code{max_theta W_p(P_theta mu, P_theta nu)} over unit
 directions -- Deshpande et al. (2019) eq. (3).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otmsw(V, V)
+}
 \references{
 Deshpande, I. et al. (2019). Proceedings of the IEEE
 Conference on Computer Vision and Pattern Recognition, 10640-10648.
 \doi{10.1109/CVPR.2019.01090}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Otmsw(V, V)
 }

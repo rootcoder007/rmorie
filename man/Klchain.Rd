@@ -20,10 +20,10 @@ Named list with \code{estimate}, \code{marginal}, \code{conditional},
 Cover & Thomas (2006), Theorem 2.5.3, eq. (2.67), p. 24, with the
 conditional relative entropy of eq. (2.65).
 }
-\references{
-Cover & Thomas (2006), eq. (2.65), (2.67).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Klchain(V, V)
+}
+\references{
+Cover & Thomas (2006), eq. (2.65), (2.67).
 }

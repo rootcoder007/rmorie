@@ -54,6 +54,9 @@
 #'   Tibshirani, R. and Friedman, J. (2009). The Elements of
 #'   Statistical Learning, 2nd ed. Springer, Sec. 6.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_locp(V, V)
 morie_locp <- function(x, y, x0 = NULL, degree = 1, bandwidth = NULL,
                        kernel = "tricube") {
   xv <- as.numeric(x)

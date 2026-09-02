@@ -22,6 +22,9 @@
 #' @references Pazzani & Billsus (2007), Content-Based Recommendation
 #'   Systems, in The Adaptive Web, LNCS 4321:325-341.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' ContRC(V, V)
 ContRC <- function(item_feat, user_profile, ratings = NULL, topn = 3) {
   F <- .s03mat(item_feat)
   ni <- nrow(F)

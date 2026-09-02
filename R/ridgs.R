@@ -11,6 +11,8 @@
 #' @return List with ``beta``, ``fitted``, ``resid``, ``rss``, ``penalty``, ``prss``, ``lambda``, ``n``, ``p``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 82: solving grad PRSS_lambda(beta) = 0 gives beta-hat(lambda) = (X'X + lambda D)^-1 X'y with D the identity carrying a zero in its first entry.  Delegates to the chapter-3 ridge routine already verified against the book for this shelf.  Read from the chapter PDF, not recalled.
 #' @export
+#' @examples
+#' Ridgesol(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Ridgesol <- function(X, y, lam, add_intercept = TRUE) {
   if (as.numeric(lam) < 0) stop("lambda must be non-negative")
   out <- morie_ridge(X, y, as.numeric(lam), add_intercept = isTRUE(add_intercept))

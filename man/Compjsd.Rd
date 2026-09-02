@@ -25,10 +25,10 @@ no log-ratios.  A zero part contributes zero, where a log-ratio
 geometry would be undefined -- a reason to prefer it on sparse
 compositions and a reason not to call it Aitchison.
 }
-\references{
-Lin (1991), IEEE Transactions on Information Theory 37:145-151; coded form from philentropy.  See Jsdiv for the full note.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Compjsd(V, V)
+}
+\references{
+Lin (1991), IEEE Transactions on Information Theory 37:145-151; coded form from philentropy.  See Jsdiv for the full note.
 }

@@ -23,14 +23,14 @@ List with \code{ES}, \code{estimate}, \code{ratio},
 Formula: ES_p = (VaR_p + sigma - xi u) / (1 - xi)
 }
 \details{
-E[X | X > VaR] for the generalised Pareto tail.  The mean excess of a
+E\link{X | X > VaR} for the generalised Pareto tail.  The mean excess of a
 GPD is finite only for xi < 1, so xi >= 1 is refused rather than
 returned as a number.  At xi = 0 the expression collapses to
 VaR + sigma, the memoryless exponential mean excess.
 }
-\references{
-McNeil & Frey (2000), J. Empirical Finance 7(3-4):271-300.
-}
 \examples{
 Evespot(u = 1, sigma = 0.5, xi = 0.1, VaR = 2)
+}
+\references{
+McNeil & Frey (2000), J. Empirical Finance 7(3-4):271-300.
 }

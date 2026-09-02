@@ -24,12 +24,12 @@ what makes the overhead zero.
 Formula: \code{H_S(k) = sign(S k)} with S an m by d standard normal
 matrix; zero maps to +1 so the range is \code{{-1, +1}^m}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tqhs(V, V)
+}
 \references{
 Zandieh, A., Daliri, M. & Han, I. (2024). QJL: 1-bit
 quantized JL transform for KV cache quantization with zero
 overhead. arXiv:2406.03482, definition 3.1.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Tqhs(V, V)
 }

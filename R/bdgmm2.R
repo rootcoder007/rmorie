@@ -15,6 +15,8 @@
 #'   Sects. 3-4.  Standard published form; the article is not in the
 #'   local corpus and was not read.
 #' @export
+#' @examples
+#' Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
 Gmsbound <- function(mbar, sigma, n, kappa = NULL) {
   m <- .t1_vec(mbar); s <- .t1_vec(sigma); J <- length(m)
   if (length(s) != J) stop("mbar and sigma must have the same length")

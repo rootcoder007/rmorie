@@ -21,6 +21,12 @@
 #' @references VanRaden (2008), Journal of Dairy Science
 #'   91(11):4414-4423. \doi{10.3168/jds.2007-0980}
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' K <- X %*% t(X)
+#' y <- rnorm(10)
+#' Hertbg(y, K)
 Hertbg <- function(y, K, grid = 41, refine = 40) {
   yv <- .s03vec(y); Km <- .s03mat(K)
   n <- length(yv)

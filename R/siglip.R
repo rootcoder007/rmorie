@@ -19,6 +19,9 @@
 #' @references Zhai, Mustafa, Kolesnikov & Beyer (2023). ICCV 2023,
 #'   equation (3).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Siglip(V, V)
 Siglip <- function(image_emb, text_emb, t_prime = 1, bias = 0) {
   A <- as.matrix(image_emb); B <- as.matrix(text_emb); n <- nrow(A)
   unit <- function(M) M / sqrt(rowSums(M^2))

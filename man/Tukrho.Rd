@@ -25,11 +25,11 @@ Formula: \code{rho(r) = (c^2/6)(1 - [1 - (r/c)^2]^3)} for
 \code{|r| <= c}, else \code{c^2/6}; \code{psi(r) = r[1 - (r/c)^2]^2}
 inside and 0 outside.
 }
-\references{
-Beaton, A. E. & Tukey, J. W. (1974). Technometrics
-16:147-185.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tukrho(V)
+}
+\references{
+Beaton, A. E. & Tukey, J. W. (1974). Technometrics
+16:147-185.
 }

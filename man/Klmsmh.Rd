@@ -29,10 +29,6 @@ the identity that anchors the recursion.
 Formula: C = P_t F' P_{t+1|t}^{-1};
 x_{t|n} = x_{t|t} + C (x_{t+1|n} - x_{t+1|t}).
 }
-\references{
-Rauch, Tung and Striebel (1965), AIAA Journal
-3(8):1445-1450. \doi{10.2514/3.3166}
-}
 \examples{
 set.seed(1)
 y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
@@ -40,4 +36,8 @@ model <- list(F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1),
               x0 = 0, P0 = matrix(1))
 filtered <- Klmflt(y, model)
 Klmsmh(y, model, filtered)
+}
+\references{
+Rauch, Tung and Striebel (1965), AIAA Journal
+3(8):1445-1450. \doi{10.2514/3.3166}
 }

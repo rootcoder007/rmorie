@@ -19,6 +19,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.2.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalgppriordef(V)
 Ghosalgppriordef <- function(x, length = 0.5, var = 1, seed = 42) {
   xs <- as.numeric(x)
   n <- base::length(xs)

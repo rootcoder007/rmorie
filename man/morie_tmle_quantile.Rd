@@ -25,11 +25,11 @@ machinery runs on \verb{1\{Y <= t\}} over a grid of \code{t}. The two curves are
 monotonised (pointwise TMLE curves need not be monotone) and inverted
 at the requested level. Mirrors \code{morie.fn.tmlqct}.
 }
+\examples{
+morie_tmle_quantile(y = 5L, d = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Diaz I (2017). Efficient estimation of quantiles in
 missing data models. \emph{Journal of Statistical Planning and
 Inference} 190, 39-51.
-}
-\examples{
-morie_tmle_quantile(y = 5L, d = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

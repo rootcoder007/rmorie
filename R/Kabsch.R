@@ -20,6 +20,9 @@
 #'   \doi{10.1107/S0567739476001873}; Kabsch (1978), Acta
 #'   Crystallographica A34(5):827-828. \doi{10.1107/S0567739478001680}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Kabsch(V, V)
 Kabsch <- function(coords1, coords2) {
   P <- .s03mat(coords1); Q <- .s03mat(coords2)
   if (nrow(P) == 0L || nrow(Q) == 0L) stop("kabsch_superpose: coordinate set is empty")

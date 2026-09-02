@@ -25,11 +25,11 @@ noise variance and a mean-zero normal prior of variance
 \code{prior_var}, returns the posterior mean \eqn{n X / (n + 1 /
 \lambda)} and variance \eqn{1 / (n + 1 / \lambda)}.
 }
+\examples{
+morie_gh_wn_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, prior_var = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-morie_gh_wn_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, prior_var = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

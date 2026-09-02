@@ -23,6 +23,9 @@
 #' @references Elliott, Rothenberg & Stock (1996), Econometrica
 #'   64(4):813-836, doi:10.2307/2171846.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Erstst(V)
 Erstst <- function(x, lags = 1, trend = FALSE) {
   y <- as.numeric(x)
   n <- length(y)

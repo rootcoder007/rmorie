@@ -22,11 +22,11 @@ list: estimate, penalty, J, P, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume [Pages 579-631], Chapter 14, Section 14.4, equations (14.10) and
+volume \link{Pages 579-631}, Chapter 14, Section 14.4, equations (14.10) and
 (14.11), p. 601, read as a rendered page.  The penalised sum of squares is
 SSE_lambda(beta) = sum_i (y_i - mu - sum_l x_il beta_l)^2 + lambda J_beta
 (14.10), and "often the penalty term J_beta is based on the integrated pth
-order derivatives", J_beta = int_0^T [d^p/dt^p beta(t)]^2 dt (14.11),
+order derivatives", J_beta = int_0^T \link{d^p/dt^p beta(t)}^2 dt (14.11),
 which "can be expressed as J_beta = beta' P beta, where P is a square
 matrix with entries P_ij = int_0^T phi_i^(p)(t) phi_j^(p)(t)".  "Typical
 chosen values of p are 1 and 2."
@@ -34,7 +34,7 @@ chosen values of p are 1 and 2."
 \details{
 Derivatives are taken by central differences inside the grid and by
 one-sided differences at its two ends, so the trapezoid rule integrates
-over the whole of [a, b] rather than dropping the two end intervals.  Both
+over the whole of \link{a, b} rather than dropping the two end intervals.  Both
 stencils are exact at the polynomial degree the order needs, so f(t) = t^2
 integrates to exactly 4 and an affine function to exactly 0, as (14.11)
 requires.

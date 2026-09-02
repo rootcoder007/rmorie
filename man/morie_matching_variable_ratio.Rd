@@ -25,7 +25,8 @@ morie_matching_variable_ratio(
 
 \item{caliper}{Caliper on the propensity score (in SD units).}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained for back-compat).}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 }
 \value{
 A list of class \code{morie_match_result}.

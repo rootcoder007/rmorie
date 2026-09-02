@@ -12,6 +12,9 @@
 #'   Boogaart & Tolosana-Delgado), whose clo/acomp divide by the row sum
 #'   and rescale to the requested total.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compclos(V)
 Compclos <- function(x, total = 1) {
   x <- .t1_vec(x)
   if (any(x <= 0)) stop("compositions must be strictly positive")

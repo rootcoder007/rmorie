@@ -45,6 +45,10 @@ within-cluster permutation stopping rule of Sec. 2.4 with p-value
 stopping when p exceeds \code{sig}. Permutations use the native
 Philox stream, bit-identical to the Python arm.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+EDivisive(V)
+}
 \references{
 Matteson, D. S. and James, N. A. (2014), A
 nonparametric approach for multiple change point analysis of
@@ -52,8 +56,4 @@ multivariate data, Journal of the American Statistical
 Association 109(505), 334-345 (arXiv:1306.4933), equations 4-8,
 Sections 2.1-2.4. Source: fetched-wave3/matteson-james-2014-
 edivisive-nonparametric-changepoint.pdf
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-EDivisive(V)
 }

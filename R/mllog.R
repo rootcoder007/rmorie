@@ -11,6 +11,10 @@
 #' @return List with ``loglik``, ``beta``, ``sigma2``, ``rss``, ``n``, ``p``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.3 pp. 75-76: the likelihood of the multiple linear regression model, its logarithm as written above, and the maximum likelihood estimators -- beta-hat is the OLS solution and sigma2-hat = (1/n)(y - X beta-hat)'(y - X beta-hat), which divides by n and not by n - p.  Read from the chapter PDF, not recalled.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Mlloglik(V, D)
 Mlloglik <- function(X, y, beta = NULL, sigma2 = NULL) {
   Xm <- .t1_mat(X); y <- .t1_vec(y)
   n <- nrow(Xm); p <- ncol(Xm)

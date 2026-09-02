@@ -26,15 +26,15 @@ Step 1-2 of Borusyak, Jaravel and Spiess (2024), Theorem 2: fit the
 two-way fixed-effect model on untreated cells only and use it to
 impute \eqn{Y_{it}(0)} everywhere.
 }
-\references{
-Borusyak, K., Jaravel, X. and Spiess, J. (2024).
-Revisiting event study designs. Review of Economic Studies,
-91(6), 3253-3285.
-}
 \examples{
 set.seed(1)
 Y <- matrix(rnorm(20), 10, 2)
 treated <- matrix(FALSE, 10, 2)
 treated[8:10, 2] <- TRUE
 morie_impute_untreated(Y, treated)
+}
+\references{
+Borusyak, K., Jaravel, X. and Spiess, J. (2024).
+Revisiting event study designs. Review of Economic Studies,
+91(6), 3253-3285.
 }

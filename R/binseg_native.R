@@ -33,6 +33,8 @@
 #'   method for grouping means in the analysis of variance.
 #'   Biometrics, 30(3), 507-512.
 #' @export
+#' @examples
+#' morie_binseg(x = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
 morie_binseg <- function(x, K, cost = "mean", penalty = 0,
                          min_seglen = 1L) {
   xs <- as.numeric(x)

@@ -17,6 +17,9 @@
 #'   183-202.  Standard published form; the SIAM article is paywalled and
 #'   was not read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Agdproj(V, V)
 Agdproj <- function(X, y, lower = NULL, upper = NULL, steps = 100,
                     lipschitz = NULL) {
   Xm <- .t1_mat(X); y <- .t1_vec(y); steps <- as.integer(steps)

@@ -26,10 +26,10 @@ Zimmerman and Zimmerman's (1991) finding that OLS and WLS perform "more or
 less equally well", and that the greater loss of efficiency comes from
 ignoring the correlations rather than from preferring OLS to WLS.
 }
-\references{
-Schabenberger Ch 4, Sec 4.5.1
-}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 spols(D)
+}
+\references{
+Schabenberger Ch 4, Sec 4.5.1
 }

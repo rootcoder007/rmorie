@@ -145,6 +145,9 @@
 #' @references Li, N., Li, T., & Venkatasubramanian, S. (2007).
 #'   t-Closeness: privacy beyond k-anonymity and l-diversity. ICDE.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_emd(V, V)
 morie_emd <- function(p, q, ground = "ordered", hierarchy = NULL,
                       domain = NULL) {
   g <- tolower(as.character(ground)[1])
@@ -181,6 +184,8 @@ morie_emd <- function(p, q, ground = "ordered", hierarchy = NULL,
 #'   t-Closeness: privacy beyond k-anonymity and l-diversity. ICDE,
 #'   106-115.
 #' @export
+#' @examples
+#' morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tcls <- function(X, quasi_ids, sensitive, t, ground = "ordered",
                        hierarchy = NULL, domain = NULL) {
   n <- length(X)

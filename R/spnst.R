@@ -35,6 +35,9 @@
 #'   Hughes-Oliver, Gonzalez-Farias, Lu and Chen (1998), Statistics &
 #'   Probability Letters 40:267-278.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spnst(V)
 spnst <- function(coords, z = NULL, source = NULL, theta1 = 1, theta2 = 0,
                   theta3 = 0, sill = 1, anisotropy = NULL,
                   source_anisotropy = NULL) {

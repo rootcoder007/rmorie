@@ -26,10 +26,10 @@ what the transport modules actually consume.
 Formula: \code{K <- diag(1/(K 1)) K}, \eqn{K <- K diag(1/(K prime 1))},
 repeated -- Sinkhorn and Knopp (1967), Theorem 1.
 }
+\examples{
+Otdwd(K = 5L)
+}
 \references{
 Sinkhorn, R. and Knopp, P. (1967). Pacific Journal of
 Mathematics 21(2):343-348. \doi{10.2140/pjm.1967.21.343}.
-}
-\examples{
-Otdwd(K = 5L)
 }

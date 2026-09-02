@@ -22,10 +22,6 @@ List with \code{qte}, \code{q1}, \code{q0}, \code{tau}, \code{n}.
 Weighted-quantile difference: treated quantiles weighted by \code{1/e},
 control quantiles by \code{1/(1 - e)}. Mirrors \code{morie.fn.causqte}.
 }
-\references{
-Firpo S (2007). Efficient semiparametric estimation of
-quantile treatment effects. \emph{Econometrica} 75(1), 259-276.
-}
 \examples{
 n <- 3000
 x <- stats::rnorm(n)
@@ -33,4 +29,8 @@ e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
 tr <- as.numeric(stats::runif(n) < e)
 y <- x + stats::rnorm(n) + 3 * tr
 morie_qte_firpo(y, tr, e, tau = c(0.25, 0.5, 0.75))
+}
+\references{
+Firpo S (2007). Efficient semiparametric estimation of
+quantile treatment effects. \emph{Econometrica} 75(1), 259-276.
 }

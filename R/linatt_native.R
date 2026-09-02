@@ -25,6 +25,8 @@
 #'   (2020), arXiv:2006.04768, Section 4, Eq 7. Local source:
 #'   fetched-wave3/wang-etal-2020-linformer-arxiv2006.04768.pdf.
 #' @export
+#' @examples
+#' Linatt(Q = 0.5, K = 5L, V = 5L, E = c(1, 2, 3, 4, 5, 6, 7, 8), F_ = c(1, 2, 3, 4, 5, 6, 7, 8))
 Linatt <- function(Q, K, V, E, F_) {
   Qa <- as.matrix(Q); Ka <- as.matrix(K); Va <- as.matrix(V)
   Ea <- as.matrix(E); Fa <- as.matrix(F_)

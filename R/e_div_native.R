@@ -168,6 +168,9 @@
 #'   nonparametric approach for multiple change point analysis of
 #'   multivariate data. JASA, 109(505), 334-345.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_e_div(V)
 morie_e_div <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
                         max_cp = NULL, seed = 20260809) {
   z <- if (is.matrix(x)) x else matrix(as.numeric(x), ncol = 1L)

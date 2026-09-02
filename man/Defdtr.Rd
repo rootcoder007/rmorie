@@ -9,7 +9,7 @@ Defdtr(x, queries, K = 4, offsets = NULL, weights = NULL, seed = 42)
 \arguments{
 \item{x}{An H x W feature map.}
 
-\item{queries}{A Q x 2 matrix of reference points in [0, 1].}
+\item{queries}{A Q x 2 matrix of reference points in \link{0, 1}.}
 
 \item{K}{Sampling points per query.}
 

@@ -28,10 +28,10 @@ quaternion component to 1 before normalisation guarantees a valid unit
 quaternion without a constraint and biases the layer towards small
 rotations, since zero input gives the identity.
 }
-\references{
-Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 23
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Alfbkb(M, M)
+}
+\references{
+Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 23
 }

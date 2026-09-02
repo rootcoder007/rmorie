@@ -7,7 +7,7 @@
 Martcons(dh2, variances = NULL)
 }
 \arguments{
-\item{dh2}{Squared Hellinger distances, each in [0, 1].}
+\item{dh2}{Squared Hellinger distances, each in \link{0, 1}.}
 
 \item{variances}{Optional variances of the martingale differences.}
 }
@@ -24,13 +24,13 @@ summability condition.
 Formula: n^-1 sum_\{i=1\}^\{n\} d_H^2(phat_i, p_0) -> 0 a.s.;
 Lemma 6.52 needs sum_\{n>=1\} n^-2 var_0(...) < Inf
 }
+\examples{
+Martcons(dh2 = c(0.1, 0.2, 0.15))
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, Section 6.8.4, equations (6.17)
 and (6.18), and Lemma 6.52. The approach is due to Walker (2003,
 2004) as the book's historical notes record. Read from the copy of
 the book held in the corpus.
-}
-\examples{
-Martcons(dh2 = c(0.1, 0.2, 0.15))
 }

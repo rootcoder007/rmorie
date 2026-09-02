@@ -18,10 +18,10 @@ Named list with \code{estimate}, \code{entropy}, \code{kl}, \code{n}, \code{meth
 \deqn{-\sum p \log q = H(p) + D(p\|q)}{-sum p log q = H(p) + D(p||q)}
 Cover & Thomas (2006), eq. (2.1) and (2.26).
 }
-\references{
-Cover & Thomas (2006), eq. (2.26).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Crsent(V, V)
+}
+\references{
+Cover & Thomas (2006), eq. (2.26).
 }

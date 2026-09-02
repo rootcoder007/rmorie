@@ -19,10 +19,10 @@ List with \code{y}, \code{mu}, \code{sigma}, \code{n}, \code{H}.
 \description{
 Formula: mu = (1/H) sum_i a_i, sigma = sqrt((1/H) sum_i (a_i - mu)^2), y = gamma (a - mu)/sigma + beta
 }
-\references{
-Ba, Kiros and Hinton (2016), Layer Normalization, arXiv:1607.06450, equation (3). Verified against the paper.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Vitlnorm(V)
+}
+\references{
+Ba, Kiros and Hinton (2016), Layer Normalization, arXiv:1607.06450, equation (3). Verified against the paper.
 }

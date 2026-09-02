@@ -34,11 +34,11 @@ The claim \eqn{R(5,5) = 50} circulates and is WRONG; DS1 records
 that it has been shown incorrect more than once and is still cited.
 Asking for it returns the interval and a warning.
 }
+\examples{
+morie_ramsey_number(k = 5L)
+}
 \references{
 Radziszowski SP, \emph{Small Ramsey Numbers}, Electronic
 Journal of Combinatorics, Dynamic Survey DS1, revision 17 (2024),
 \doi{10.37236/21}, Tables Ia and Ib.
-}
-\examples{
-morie_ramsey_number(k = 5L)
 }

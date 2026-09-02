@@ -34,6 +34,9 @@
 #'   Humans: Dynamics and Control. Oxford University Press.
 #'   ISBN 0-19-854040-X.
 #' @export
+#' @examples
+#' Seiarp(S = 990, E = 10, I = 0, A = 0, R = 0,
+#'        params = c(0.3, 0.2, 0.1, 0.05, 0.1, 0.5))
 Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
   pr <- .s03vec(params)
   if (length(pr) != 6L)

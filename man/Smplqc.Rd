@@ -42,6 +42,10 @@ method-of-moments inbreeding coefficient
 \eqn{F_i = (O_i - E_i)/(n_i - E_i)} (PLINK 1.9 het report); and the
 heterozygosity rate \eqn{(n_i - O_i)/n_i} used by Marees et al.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Smplqc(V)
+}
 \references{
 Marees, A. T., de Kluiver, H., Stringer, S., et al.
 (2018). A tutorial on conducting genome-wide association studies.
@@ -50,8 +54,4 @@ e1608, Table 1 steps 1 and 5 (fetched-wave3 PDF). PLINK 1.9
 basic statistics documentation, het and missing reports
 (cog-genomics.org/plink/1.9/basic_stats, fetched 2026-08-09).
 Nei, M. (1978). Genetics 89(3), 583-590.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Smplqc(V)
 }

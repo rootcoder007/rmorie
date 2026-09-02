@@ -19,14 +19,14 @@ needed to cover it. Both are computed -- the antichain exhaustively,
 the chain cover by a bipartite matching -- and the equality is then
 CHECKED rather than assumed, since equality is the content.
 }
-\references{
-Dilworth RP (1950) \emph{Annals of Mathematics}
-51(1):161-166.
-}
 \examples{
 divisibility_poset <- function(n) {
     outer(seq_len(n), seq_len(n), function(i, j) j\%\%i == 0)
 }
 n <- 6L
 morie_dilworth_decomposition(divisibility_poset(n))
+}
+\references{
+Dilworth RP (1950) \emph{Annals of Mathematics}
+51(1):161-166.
 }

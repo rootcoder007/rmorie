@@ -30,10 +30,10 @@ way to make a beta process prior less committal.
 Formula: E H(t) = sum_j w_j lambda_j t, with w the normalised
 weights.
 }
+\examples{
+Ghosalmixbp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.4.
-}
-\examples{
-Ghosalmixbp()
 }

@@ -28,11 +28,11 @@ exp(-(h/l)^2), which falls as l shrinks.
 \details{
 Formula: rho_l(h) = exp(-(h / l)^2).
 }
+\examples{
+Ghosalrescalgp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.11 and
 section 11.5.
-}
-\examples{
-Ghosalrescalgp()
 }

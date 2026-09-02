@@ -46,14 +46,14 @@ alternates cycle-subseries smoothing and trend smoothing, and an
 optional outer loop of bisquare robustness weights that makes the
 fit resistant to outliers.
 }
+\examples{
+set.seed(1)
+x <- sin(2 * pi * (1:60) / 12) + 0.02 * (1:60) + rnorm(60) * 0.1
+morie_stl_decompose(x, period = 12)
+}
 \references{
 Cleveland, R. B., Cleveland, W. S., McRae, J. E. and
 Terpenning, I. (1990). STL: a seasonal-trend decomposition
 procedure based on loess. Journal of Official Statistics, 6(1),
 3-73.
-}
-\examples{
-set.seed(1)
-x <- sin(2 * pi * (1:60) / 12) + 0.02 * (1:60) + rnorm(60) * 0.1
-morie_stl_decompose(x, period = 12)
 }

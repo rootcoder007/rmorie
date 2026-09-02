@@ -19,10 +19,10 @@ List with the payload of :func:\code{morie.fn.lismor.localmoran}.
 \description{
 Formula: see localmoran
 }
-\references{
-Anselin (1995), Local Indicators of Spatial Association -- LISA, Geographical Analysis 27(2):93-115, formula (12) p.99. The article is paywalled; the formula and the divide-by-n variance convention were taken from spdep::localmoran, the reference implementation, which cites that equation explicitly.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Lisamoran(V, V)
+}
+\references{
+Anselin (1995), Local Indicators of Spatial Association -- LISA, Geographical Analysis 27(2):93-115, formula (12) p.99. The article is paywalled; the formula and the divide-by-n variance convention were taken from spdep::localmoran, the reference implementation, which cites that equation explicitly.
 }

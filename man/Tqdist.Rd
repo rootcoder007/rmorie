@@ -25,11 +25,11 @@ Formula: with
 \code{m >= (4/3)(1 + eps)/eps^2 log(2/delta)},
 \code{Pr[|Prod(q,k) - <q,k>| > eps ||q|| ||k||] <= delta}.
 }
-\references{
-Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
-lemma 3.5.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tqdist(V, V)
+}
+\references{
+Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
+lemma 3.5.
 }

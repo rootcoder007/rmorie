@@ -11,7 +11,7 @@ Evpdfn(x, y, t_grid = NULL, u = NULL)
 
 \item{y}{Second variable.}
 
-\item{t_grid}{Points in [0, 1], or NULL for eleven equally spaced.}
+\item{t_grid}{Points in \link{0, 1}, or NULL for eleven equally spaced.}
 
 \item{u}{Copula level in (0, 1), or NULL for exp(-1).}
 }
@@ -28,10 +28,10 @@ A(t) is read off the empirical copula at the diagonal-shifted point
 construction, lies between max(t, 1-t) and 1, equals 1 under
 independence and max(t, 1-t) under perfect dependence.
 }
-\references{
-Pickands (1981), Bull. Int. Statist. Inst. 49:859-878.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Evpdfn(V, V)
+}
+\references{
+Pickands (1981), Bull. Int. Statist. Inst. 49:859-878.
 }

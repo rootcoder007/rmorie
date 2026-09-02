@@ -26,6 +26,8 @@ morie_logdet_I_minus <- function(rho, W) {
 #' @return list with the spatial parameter, `beta`, `sigma2`,
 #'   `loglik` and `residuals`
 #' @export
+#' @examples
+#' morie_spatial_lag_model(y = 5L, X = 5L, W = 5L)
 morie_spatial_lag_model <- function(y, X, W, add_intercept = TRUE) {
   X <- as.matrix(X); W <- as.matrix(W)
   n <- length(y)
@@ -88,6 +90,10 @@ morie_spatial_error_model <- function(y, X, W, add_intercept = TRUE) {
 #' @param edge_correction apply the isotropic correction
 #' @return list with `r`, `K`, `L`, `csr_K` and `intensity`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_ripley_k(D, V)
 morie_ripley_k <- function(coords, r_grid, area = NULL,
                            edge_correction = TRUE) {
   P <- as.matrix(coords)
@@ -184,6 +190,8 @@ morie_cokrig <- function(coords, z1, z2, s0, cross_vario = NULL,
 #' @return list with `reports`, `observed`, `estimate`, `p_keep`,
 #'   `p_flip`
 #' @export
+#' @examples
+#' morie_local_dp_randomised_response(truth = list(a = 1, b = 2), k = 5L, epsilon = 5L)
 morie_local_dp_randomised_response <- function(truth, k, epsilon,
                                                seed = 2) {
   k <- as.integer(k)
@@ -207,6 +215,6 @@ morie_local_dp_randomised_response <- function(truth, k, epsilon,
        k = k, n = n)
 }
 
-#' @rdname morie_cokrig
+#' @rdname cokrg
 #' @export
-morie_cokriging <- morie_cokrig
+morie_cokriging <- cokrg

@@ -28,6 +28,8 @@
 #' @param max_part Largest part allowed; defaults to `n`.
 #' @return A list of integer vectors, each weakly decreasing.
 #' @export
+#' @examples
+#' morie_partitions_of(n = 5L)
 morie_partitions_of <- function(n, max_part = NULL) {
   n <- as.integer(n)
   if (is.na(n) || n < 0L) {
@@ -62,6 +64,8 @@ morie_partitions_of <- function(n, max_part = NULL) {
 #' @references Frame JS, Robinson G de B, Thrall RM (1954)
 #'   \emph{Canad J Math} 6:316-324.
 #' @export
+#' @examples
+#' morie_hook_lengths(shape = 5L)
 morie_hook_lengths <- function(shape) {
   lam <- as.integer(shape)
   if (anyNA(lam) || any(lam <= 0L)) {
@@ -167,6 +171,8 @@ morie_hook_lengths <- function(shape) {
 #' @return A list with `count`, `exact`, `factorial`, `hook_product`,
 #'   `remainder`, `divides_exactly`, `hooks`, `shape`, `n`.
 #' @export
+#' @examples
+#' morie_standard_tableaux_count(shape = 5L)
 morie_standard_tableaux_count <- function(shape) {
   h <- morie_hook_lengths(shape)
   n <- h$n
@@ -281,6 +287,9 @@ morie_standard_tableaux_count <- function(shape) {
 #'   that gained a cell. (The Python mirror returns a 0-based index;
 #'   the values differ by one by design, not by accident.)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rsk_insert(V, V)
 morie_rsk_insert <- function(tableau, value) {
   tt <- lapply(tableau, as.numeric)
   x <- as.numeric(value)
@@ -315,6 +324,9 @@ morie_rsk_insert <- function(tableau, value) {
 #' @references Robinson G de B (1938); Schensted C (1961)
 #'   \emph{Canad J Math} 13:179-191; Knuth DE (1970).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rsk_correspondence(V)
 morie_rsk_correspondence <- function(permutation) {
   w <- as.integer(permutation)
   n <- length(w)
@@ -354,6 +366,9 @@ morie_rsk_correspondence <- function(permutation) {
 #' @param p_tableau,q_tableau Tableaux of the same shape.
 #' @return The permutation, as an integer vector.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rsk_inverse(V, V)
 morie_rsk_inverse <- function(p_tableau, q_tableau) {
   p <- lapply(p_tableau, as.numeric)
   q <- lapply(q_tableau, as.numeric)
@@ -420,6 +435,9 @@ morie_rsk_inverse <- function(p_tableau, q_tableau) {
 #' @return A list with `orbits`, `fixed_points`, `cycle_counts`,
 #'   `sum_fixed`, `naive_division`, `naive_is_wrong`, `divides_exactly`.
 #' @export
+#' @examples
+#' group_permutations <- list(c(0, 1, 2), c(1, 2, 0), c(2, 0, 1))
+#' morie_burnside_orbit_count(group_permutations, n_colours = 2)
 morie_burnside_orbit_count <- function(group_permutations, n_colours) {
   g <- lapply(group_permutations, as.integer)
   k <- as.integer(n_colours)
@@ -505,6 +523,8 @@ morie_burnside_orbit_count <- function(group_permutations, n_colours) {
 #'   Gruppen, Graphen und chemische Verbindungen. \emph{Acta
 #'   Mathematica}, 68, 145-254.
 #' @export
+#' @examples
+#' morie_cycle_index_necklaces(n = 5L, k = 5L)
 morie_cycle_index_necklaces <- function(n, k) {
   n <- as.integer(n)
   k <- as.integer(k)

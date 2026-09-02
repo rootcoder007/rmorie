@@ -34,10 +34,12 @@ test_that("explain_known_files returns sorted character vector", {
   expect_true("power_summary.csv" %in% v)
 })
 
-test_that("cheatsheet prints and returns body", {
-  expect_output(out <- cheatsheet())
-  expect_type(out, "character")
-  expect_true(grepl("morie", out, ignore.case = TRUE))
+test_that("cheatsheet lists modules and returns a module sheet", {
+  avail <- cheatsheet()
+  expect_type(avail, "character"); expect_gt(length(avail), 0)
+  expect_error(cheatsheet("no-such-module"), "no cheat sheet")
+  out <- cheatsheet(avail[1])
+  expect_true(is.character(out) || is.list(out) || is.null(out))
 })
 
 test_that("explain_file covers data-wrangling entries", {

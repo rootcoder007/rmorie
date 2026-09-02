@@ -26,6 +26,9 @@ morie_robust_trim_counts <- function(n, tr) {
 #' @return `morie_ideal_fourths` a list with `q1`, `q2`, `j`, `h`, `k`;
 #'   `morie_idealf_iqr` the single number `q2 - q1`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ideal_fourths(V)
 morie_ideal_fourths <- function(x) {
   v <- sort(x[!is.na(x)])
   n <- length(v)
@@ -55,6 +58,9 @@ morie_idealf_iqr <- function(x) {
 #' @return a numeric scalar, except `morie_winsorize` which returns the
 #'   Winsorized sample in the ORIGINAL order
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_trimmed_mean(V)
 morie_trimmed_mean <- function(x, tr = 0.2) {
   v <- sort(x[!is.na(x)])
   n <- length(v)
@@ -102,6 +108,9 @@ morie_winsorized_variance <- function(x, tr = 0.2) {
 #'   `morie_mad_median_rule` a list with `median`, `madn`, `ratio`,
 #'   `is_outlier`, `outliers`, `n_outliers`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mad(V)
 morie_mad <- function(x) {
   v <- x[!is.na(x)]
   stats::median(abs(v - stats::median(v)))
@@ -139,6 +148,9 @@ morie_mad_median_rule <- function(x, crit = 2.24) {
 #' @return list with `lower`, `upper`, `gval`, `iqr`, `is_outlier`,
 #'   `outliers`, `keep`, `n_outliers`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_boxplot_outliers(V)
 morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
   v <- x[!is.na(x)]
   n <- length(v)
@@ -171,6 +183,9 @@ morie_boxplot_outliers <- function(x, carling = FALSE, gval = NULL) {
 #' @param alpha significance level
 #' @return list with the estimate, `statistic`, `df`, `se` and `p_value`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_welch_test(V, V)
 morie_welch_test <- function(x, y) {
   a <- x[!is.na(x)]; b <- y[!is.na(y)]
   n1 <- length(a); n2 <- length(b)
@@ -237,6 +252,9 @@ morie_yuen_paired <- function(x, y, tr = 0.2, alpha = 0.05) {
 #' @return `morie_trimmed_mean_se` a number; `morie_trimmed_mean_ci` a
 #'   list with `estimate`, `ci`, `statistic`, `se`, `df`, `p_value`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_trimmed_mean_se(V)
 morie_trimmed_mean_se <- function(x, tr = 0.2) {
   v <- x[!is.na(x)]
   sqrt(morie_winsorized_variance(v, tr)) / ((1 - 2 * tr) * sqrt(length(v)))
@@ -273,6 +291,9 @@ morie_trimmed_mean_ci <- function(x, tr = 0.2, alpha = 0.05,
 #'   as WRS uses
 #' @return a numeric scalar
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_harrell_davis(V)
 morie_harrell_davis <- function(x, q = 0.5) {
   v <- sort(x[!is.na(x)])
   n <- length(v)
@@ -334,6 +355,9 @@ morie_one_step_m <- function(x, bend = 1.28, constant = 1.4826) {
 #' @return list with `cor`, `statistic`, `p_value` and, for the
 #'   Winsorized version, `cov` and `df`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_percentage_bend_correlation(V, V)
 morie_percentage_bend_correlation <- function(x, y, beta = 0.2) {
   n <- length(x)
   scaled <- function(v) {
@@ -374,6 +398,9 @@ morie_winsorized_correlation <- function(x, y, tr = 0.2) {
 #' @param alpha significance level
 #' @return list with the effect estimate, interval and p-value
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_cliff_delta(V, V)
 morie_cliff_delta <- function(x, y, alpha = 0.05) {
   a <- x[!is.na(x)]; b <- y[!is.na(y)]
   n1 <- length(a); n2 <- length(b)
@@ -435,6 +462,9 @@ morie_brunner_munzel <- function(x, y, alpha = 0.05) {
 #' @param tr amount of trimming
 #' @return list with `statistic`, `df1`, `df2` and `p_value`
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_trimmed_mean_anova(D)
 morie_trimmed_mean_anova <- function(groups, tr = 0.2) {
   J <- length(groups)
   if (J < 2) stop("need at least 2 groups")
@@ -510,6 +540,9 @@ morie_brunner_dette_munk <- function(groups) {
 #' @param tol convergence tolerance
 #' @return a list; see each method's description
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_akp_effect_size(V, V)
 morie_akp_effect_size <- function(x, y, tr = 0.2, equal_variance = TRUE) {
   a <- x[!is.na(x)]; b <- y[!is.na(y)]
   n1 <- length(a); n2 <- length(b)

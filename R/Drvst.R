@@ -22,6 +22,9 @@
 #'   Survey Sampling, Wiley, section 11.7.  Crump, R. K., Hotz, V. J.,
 #'   Imbens, G. W. and Mitnik, O. A. (2009). Biometrika 96(1), 187-199.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drvst(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drvst <- function(y, D, X = NULL, q = 0.95) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drvst: empty input, y has no observations")

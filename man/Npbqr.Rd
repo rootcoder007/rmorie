@@ -2,7 +2,8 @@
 % Please edit documentation in R/npbqr.R
 \name{Npbqr}
 \alias{Npbqr}
-\title{Quantile regression with a Dirichlet-process scale mixture}
+\title{changes. The fit uses the shared fixed-iteration IRLS helper, which
+takes exactly the same path in both language arms.}
 \usage{
 Npbqr(y, X, tau = 0.5, alpha = 1, niter = 40L, eps = 0.001)
 }
@@ -25,29 +26,18 @@ List with \code{beta}, \code{estimate}, \code{sigma},
 \code{alpha}, \code{n}, \code{p}.
 }
 \description{
-Kottas & Gelfand's point is that fixing the error distribution to a
-single asymmetric Laplace is stronger than the quantile restriction
-requires; the tau-quantile restriction is preserved by any scale
-mixture, so a Dirichlet process is placed on the mixing distribution
-of the scale. The location parameter is unaffected, which is why the
-regression coefficient can be read off the check-loss fit,
-\eqn{_hat = argmin sum rho_tau(y_i - x_i primeb)} with
-changes. The fit uses the shared fixed-iteration IRLS helper, which
-takes exactly the same path in both language arms.
-}
-\details{
 The scale part is closed form: the ALD maximum likelihood scale is
 \code{sigma_hat = (1/n) sum rho_tau(r_i)}, and the DP mixing
 distribution induces \code{E\[K_n\] = sum alpha / (alpha + i - 1)}
 distinct scales a priori.
+}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Npbqr(V, V)
 }
 \references{
 Kottas, A. & Gelfand, A. E. (2001). Bayesian
 semiparametric median regression modeling. Journal of the American
 Statistical Association, 96(456), 1458-1468.
 doi:10.1198/016214501753382363
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Npbqr(V, V)
 }

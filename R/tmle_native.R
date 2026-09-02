@@ -74,6 +74,14 @@
 #'   estimator of a causal effect on a bounded continuous outcome.
 #'   \emph{The International Journal of Biostatistics} 6(1), Article 26.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' a <- rbinom(n, 1, plogis(0.5 * W[, 1]))
+#' y <- 1 + W[, 1] + 0.8 * a + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_ate(y, a, W)
+#' str(r, max.level = 1)
 morie_tmle_ate <- function(y, a, w, trunc = 0.01, g = NULL,
                            scale_outcome = TRUE, max_iter = 50L,
                            tol = 1e-10) {
@@ -160,6 +168,14 @@ morie_tmle_ate <- function(y, a, w, trunc = 0.01, g = NULL,
 #' @references van der Laan MJ, Rose S (2011). \emph{Targeted Learning}.
 #'   Springer, Ch. 4-5.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+#' y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_propensity_only(y, d, X)
+#' str(r, max.level = 1)
 morie_tmle_propensity_only <- function(y, d, x, trunc = 0.01) {
   X <- as.matrix(x); storage.mode(X) <- "double"
   n <- length(y)
@@ -188,6 +204,14 @@ morie_tmle_propensity_only <- function(y, d, x, trunc = 0.01) {
 #'   assumption. \emph{Statistical Methods in Medical Research} 21(1),
 #'   31-54.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+#' y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_truncation_sweep(y, d, X)
+#' str(r, max.level = 1)
 morie_tmle_truncation_sweep <- function(y, d, x,
                                         eps_grid = c(0.001, 0.01, 0.025,
                                                      0.05, 0.1)) {
@@ -227,6 +251,14 @@ morie_tmle_truncation_sweep <- function(y, d, x,
 #'   inverse probability weighting estimators via the percentile
 #'   bootstrap. \emph{JRSS-B} 81(4), 735-761.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
+#' y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_sensitivity(y, d, X)
+#' str(r, max.level = 1)
 morie_tmle_sensitivity <- function(y, d, x, gamma_grid = NULL, trunc = 0.01) {
   grid <- if (is.null(gamma_grid)) seq(1, 3, length.out = 9) else {
     as.numeric(gamma_grid)
@@ -266,6 +298,8 @@ morie_tmle_sensitivity <- function(y, d, x, gamma_grid = NULL, trunc = 0.01) {
 #'   missing data models. \emph{Journal of Statistical Planning and
 #'   Inference} 190, 39-51.
 #' @export
+#' @examples
+#' morie_tmle_quantile(y = 5L, d = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
                                 trunc = 0.01) {
   y <- as.numeric(y)
@@ -314,6 +348,8 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
 #'   likelihood estimation of natural direct effects. \emph{The
 #'   International Journal of Biostatistics} 8(1), Article 3.
 #' @export
+#' @examples
+#' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
                                  trunc = 0.01) {
   y <- as.numeric(y); A <- as.numeric(treatment); M <- as.numeric(mediator)
@@ -376,6 +412,15 @@ morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
 #'   estimation of local average treatment effects. \emph{Econometrica}
 #'   62(2), 467-475.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 150
+#' X <- matrix(rnorm(n), n, 1)
+#' z <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, plogis(-0.5 + 1.5 * z))
+#' y <- 1 + 0.8 * d + X[, 1] + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_late(y, d, z, covariates = X)
+#' str(r, max.level = 1)
 morie_tmle_late <- function(y, d, z, covariates = NULL, trunc = 0.01) {
   y <- as.numeric(y); d <- as.numeric(d); z <- as.numeric(z)
   n <- length(y)
@@ -421,6 +466,14 @@ morie_tmle_late <- function(y, d, z, covariates = NULL, trunc = 0.01) {
 #'   interventions. \emph{The International Journal of Biostatistics}
 #'   8(1), Article 9.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 150
+#' L <- matrix(rnorm(n * 2), n, 2)
+#' A <- matrix(rbinom(n * 2, 1, 0.5), n, 2)
+#' y <- 1 + 0.5 * rowSums(A) + L[, 1] + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_time_varying(y, A, L, regime = 1)
+#' str(r, max.level = 1)
 morie_tmle_time_varying <- function(y, a, l, regime = 1, trunc = 0.01) {
   y <- as.numeric(y)
   A <- as.matrix(a); storage.mode(A) <- "double"
@@ -494,6 +547,14 @@ morie_tmle_time_varying <- function(y, a, l, regime = 1, trunc = 0.01) {
 #' @references van der Laan MJ, Gruber S (2012). \emph{The International
 #'   Journal of Biostatistics} 8(1), Article 9.
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 150
+#' L <- matrix(rnorm(n * 2), n, 2)
+#' A <- matrix(rbinom(n * 2, 1, 0.5), n, 2)
+#' y <- 1 + 0.5 * rowSums(A) + L[, 1] + rnorm(n, 0, 0.5)
+#' r <- morie_tmle_longitudinal(y, A, L)
+#' str(r, max.level = 1)
 morie_tmle_longitudinal <- function(y, a, l, trunc = 0.01) {
   A <- as.matrix(a)
   T_ <- ncol(A)
@@ -524,6 +585,15 @@ morie_tmle_longitudinal <- function(y, a, l, trunc = 0.01) {
 #'   adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
 #'   1099-1131.
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 150
+#' W <- matrix(rnorm(n * 2), n, 2)
+#' a <- rbinom(n, 1, 0.5)
+#' tt <- rexp(n, rate = exp(-0.5 * a - 0.3 * W[, 1]))
+#' ev <- rbinom(n, 1, 0.8)
+#' r <- morie_tmle_rmst(tt, ev, a, W)
+#' str(r, max.level = 1)
 morie_tmle_rmst <- function(time, event, a, w, horizon = NULL, trunc = 0.01) {
   time <- as.numeric(time); event <- as.numeric(event)
   if (any(time <= 0)) stop("time must be positive.", call. = FALSE)

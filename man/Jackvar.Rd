@@ -28,11 +28,11 @@ supplied weights make it.
 \details{
 Formula: v_J = ((R - 1)/R) sum_r (theta_r - theta)^2.
 }
-\references{
-Wolter (2007), Introduction to Variance Estimation, 2nd
-ed., Springer, ch. 4, eq. (4.2.5).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Jackvar(V)
+}
+\references{
+Wolter (2007), Introduction to Variance Estimation, 2nd
+ed., Springer, ch. 4, eq. (4.2.5).
 }

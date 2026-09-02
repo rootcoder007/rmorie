@@ -37,6 +37,9 @@
 #'   sign-separated significance, p. 15546. Local source:
 #'   library/pdf/fetched-wave3/Subramanian-2005-GSEA-PNAS.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Gnsetenr(correlations = rnorm(20), in_set = c(rep(TRUE, 5), rep(FALSE, 15)))
 Gnsetenr <- function(correlations, in_set, p = 1, nperm = 0L,
                      seed = NULL) {
   r <- as.numeric(correlations)

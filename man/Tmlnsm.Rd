@@ -30,11 +30,11 @@ influence curve is \code{IC_{m_a} = -IC_{F_a(m_a)}/f_a(m_a)} with
 increments at bandwidth \code{bw}.  A bandwidth much below the grid
 spacing collapses \code{f_a} and inflates the SE.
 }
+\examples{
+Tmlnsm(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), bw = 0.5)
+}
 \references{
 Diaz, I. (2017). Journal of Statistical Planning and
 Inference 190:39-51; van der Laan, M. J. & Rubin, D. (2006). IJB
 2(1):11.
-}
-\examples{
-Tmlnsm(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), bw = 0.5)
 }

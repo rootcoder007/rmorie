@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.6.
 #' @export
+#' @examples
+#' Ghosalcoxmodel()
 Ghosalcoxmodel <- function(beta = 0.7, z = c(0, 1), t = 1, c = 2) {
   zs <- as.numeric(z)
   if (length(zs) != 2L) stop("z must have exactly two covariate values")

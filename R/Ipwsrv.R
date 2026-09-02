@@ -20,6 +20,10 @@
 #'   observational study results, Health Services Research
 #'   49(1):284-303. \doi{10.1111/1475-6773.12090}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Ipwsrv(y = rnorm(20), T = rbinom(20, 1, 0.5), weights = runif(20, 1, 2),
+#'        propensity = runif(20, 0.3, 0.7))
 Ipwsrv <- function(y, T, weights, propensity) {
   yv <- .s03vec(y); n <- length(yv)
   if (n == 0L) stop("ipw_with_survey_weights: y is empty")

@@ -19,6 +19,9 @@
 #'   Conference on Computer Vision and Pattern Recognition, 10640-10648.
 #'   \doi{10.1109/CVPR.2019.01090}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otmsw(V, V)
 Otmsw <- function(X, Y, p = 2, n_proj = 32) {
   A <- as.matrix(X); B <- as.matrix(Y)
   if (nrow(A) != nrow(B))

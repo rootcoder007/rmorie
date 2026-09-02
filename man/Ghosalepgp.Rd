@@ -33,10 +33,10 @@ Formula: Lambda_i = max(p_i (1 - p_i), 1e-4);
 mu <- 0.7 mu + 0.3 (mu + K (y - p));
 Sigma_{11} = ((K^(-1) + diag(Lambda))^(-1))_{11}.
 }
+\examples{
+Ghosalepgp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.7.4.
-}
-\examples{
-Ghosalepgp()
 }

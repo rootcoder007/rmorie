@@ -19,6 +19,9 @@
 #'   (1982), Least squares quantization in PCM, IEEE Transactions on
 #'   Information Theory 28(2), 129-137 (the algorithm itself).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compkm(V)
 Compkm <- function(X, k = 2, max_iter = 50) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")

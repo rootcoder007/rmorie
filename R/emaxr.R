@@ -32,6 +32,9 @@
 #'   Laird & Ware (1982), Biometrics 38(4):963-974,
 #'   doi:10.2307/2529876.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Emaxr(y = rnorm(10), X = rnorm(10), cluster = rnorm(10), sigma2_u = 0.5, sigma2_e = 0.5); TRUE
 Emaxr <- function(y, X, cluster, sigma2_u, sigma2_e, beta = NULL) {
   y <- as.numeric(y)
   N <- length(y)

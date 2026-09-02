@@ -20,7 +20,7 @@ List with \code{lambda}, \code{estimate}, \code{tau},
 \code{n}, \code{method}.
 }
 \description{
-Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E[X_(r+s-k):(r+s+t)]
+Formula: lambda_r^(s,t) = (1/r) sum_k (-1)^k C(r-1,k) E\link{X_(r+s-k):(r+s+t)}
 }
 \details{
 with the order statistic expectation estimated by the unbiased
@@ -31,11 +31,11 @@ exist for heavy tails where ordinary L-moments do not.  With
 s = t = 0 they reduce to Hosking's L-moments, so lambda_1 is the
 sample mean and lambda_2 the L-scale.
 }
-\references{
-Elamir & Seheult (2003), Comput. Statist. Data Anal.
-43(3):299-314.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Evtlmom(V)
+}
+\references{
+Elamir & Seheult (2003), Comput. Statist. Data Anal.
+43(3):299-314.
 }

@@ -20,12 +20,12 @@ List with F, SSA, SSW, SST, df1, df2, N, a, sizes.
 SS_T = (1/N) sum_{i<j} d_ij^2; SS_W = sum_{i<j} d_ij^2 eps_ij/n_g;
 F = (SS_A/(a-1)) / (SS_W/(N-a)) with SS_A = SS_T - SS_W.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Permanova(V, V)
+}
 \references{
 Anderson (2001), Austral Ecology 26(1), 32-46, Equations
 (3)-(5).  Standard published form; the article is paywalled and the
 download attempted returned a stub, so it was not read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Permanova(V, V)
 }

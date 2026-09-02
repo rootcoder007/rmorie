@@ -17,6 +17,8 @@
 #' @references VanderWeele (2015), Explanation in Causal Inference, ch 2;
 #'   van der Laan & Rubin (2006) IJB 2(1):11.
 #' @export
+#' @examples
+#' Tmlnte(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, M = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlnte <- function(y, D, M, X) {
   W <- cbind(1, as.matrix(X))
   r <- .s4_tmle(y, D, W)

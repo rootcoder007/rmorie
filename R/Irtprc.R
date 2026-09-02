@@ -20,6 +20,8 @@
 #' @references Masters (1982), A Rasch model for partial credit
 #'   scoring, Psychometrika 47(2):149-174. \doi{10.1007/BF02296272}
 #' @export
+#' @examples
+#' Irtprc(y = 5L, theta = 0.5, delta_j = c(1, 2, 3, 4, 5, 6, 7, 8))
 Irtprc <- function(y, theta, delta_j) {
   ys <- as.integer(.s03vec(y)); th <- .s03vec(theta); dl <- .s03vec(delta_j)
   if (length(ys) == 0L) stop("partial_credit: y is empty")

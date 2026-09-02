@@ -35,6 +35,8 @@
 #'   (1998). Crop evapotranspiration. FAO Irrigation and Drainage
 #'   Paper 56.
 #' @export
+#' @examples
+#' morie_basEvap(T = 25, R_n = 15, u2 = 2, VPD = 1.5)
 morie_basEvap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   T <- as.numeric(T); R_n <- as.numeric(R_n); u2 <- as.numeric(u2)
   VPD <- as.numeric(VPD); G <- as.numeric(G); P <- as.numeric(P)

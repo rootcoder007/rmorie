@@ -21,11 +21,11 @@ Formula: Y = beta_0 + sum_j X_j beta_j + eps (eq. 3.1) fitted by least
 squares: beta = (X'X)^-1X'y, Var(beta) = sigma2 (X'X)^-1 and
 sigma2 = RSS/(n - p - 1).
 }
+\examples{
+Msm332(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (3.1) pp.71-73. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm332(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
 }

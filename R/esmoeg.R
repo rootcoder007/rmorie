@@ -27,6 +27,9 @@
 #' @references Asparouhov & Muthen (2009), Structural Equation Modeling
 #'   16(3):397-438, doi:10.1080/10705510903008204.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Esmoeg(V, V)
 Esmoeg <- function(loadings, target, iters = 200, tol = 1e-13) {
   L <- .s03mat(loadings)
   H0 <- .s03mat(target)

@@ -26,18 +26,18 @@ A list with elements \code{fitted}, \code{x0},
 \description{
 At each evaluation point x0 solves the kernel-weighted least
 squares problem (ESL Eq. 6.11) on the centered polynomial design
-[1, (x - x0), ..., (x - x0)^d]; the fitted value is the local
+\link{1, (x - x0), ..., (x - x0)^d}; the fitted value is the local
 intercept and the local slope is the coefficient of (x - x0).
 Degree-d polynomials are reproduced exactly for any kernel and
 bandwidth.
+}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_locp(V, V)
 }
 \references{
 Fan, J. and Gijbels, I. (1996). Local Polynomial
 Modelling and Its Applications. Chapman & Hall.  Hastie, T.,
 Tibshirani, R. and Friedman, J. (2009). The Elements of
 Statistical Learning, 2nd ed. Springer, Sec. 6.1.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_locp(V, V)
 }

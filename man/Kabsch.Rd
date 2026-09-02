@@ -28,12 +28,12 @@ H'H, so no external linear algebra is used.
 Formula: H = P'Q, H = U S V', R = V diag(1, ..., d) U' with
 d = sign(det(V U')).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kabsch(V, V)
+}
 \references{
 Kabsch (1976), Acta Crystallographica A32(5):922-923,
 \doi{10.1107/S0567739476001873}; Kabsch (1978), Acta
 Crystallographica A34(5):827-828. \doi{10.1107/S0567739478001680}
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kabsch(V, V)
 }

@@ -16,6 +16,9 @@
 #' @references Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
 #'   Stanford InfoLab technical report 1999-66.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Sgtpgr(M)
 Sgtpgr <- function(A, d = 0.85, max_iter = 100, tol = NULL) {
   Pgrank(A, d = d, n_iter = max_iter)
 }

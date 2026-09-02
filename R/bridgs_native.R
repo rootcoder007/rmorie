@@ -37,6 +37,11 @@
 #'   of normalizing constants via a simple identity. Statistica
 #'   Sinica, 6, 831-860.
 #' @export
+#' @examples
+#' set.seed(1)
+#' morie_bridgs(draws1 = as.list(rnorm(100)), draws2 = as.list(rnorm(100, 0.5)),
+#'              log_q1 = function(x) -0.5 * x^2,
+#'              log_q2 = function(x) -0.5 * (x - 0.5)^2)
 morie_bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
                          max_iter = 1000L) {
   x1 <- as.list(draws1); x2 <- as.list(draws2)

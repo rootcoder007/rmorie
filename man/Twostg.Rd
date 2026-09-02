@@ -31,10 +31,10 @@ data: stage 1 estimates the censoring survival G by Kaplan-Meier
 stage 2 solves estimating equation (2.3) with unit weights. Sandwich
 variance of Section 2 / Appendix 1.
 }
+\examples{
+Twostg(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Cheng, S. C., Wei, L. J. and Ying, Z. (1995), Biometrika
 82(4), 835-845.
-}
-\examples{
-Twostg(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -17,6 +17,8 @@
 #' @param W numeric spatial weights matrix
 #' @return list with `S0`, `S1`, `S2` and `n`
 #' @export
+#' @examples
+#' morie_weights_totals(W = 5L)
 morie_weights_totals <- function(W) {
   W <- as.matrix(W)
   if (nrow(W) != ncol(W)) stop("W must be square")
@@ -43,6 +45,9 @@ morie_weights_totals <- function(W) {
 #' @return `morie_morans_i` a number; `morie_morans_i_test` a list with
 #'   `estimate`, `expectation`, `variance`, `statistic` and `p_value`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_morans_i(V, V)
 morie_morans_i <- function(x, W) {
   W <- as.matrix(W)
   n <- length(x)
@@ -95,6 +100,15 @@ morie_morans_i_test <- function(x, W, randomisation = TRUE,
 #' @param add_intercept prepend an intercept column
 #' @return list with `rho`, `beta`, `residuals` and `sigma2`
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 20
+#' W <- matrix(0, n, n)
+#' for (i in 1:(n - 1)) { W[i, i + 1] <- 1; W[i + 1, i] <- 1 }
+#' W <- W / pmax(rowSums(W), 1)
+#' X <- matrix(rnorm(n), n, 1)
+#' y <- as.numeric(solve(diag(n) - 0.3 * W) %*% (2 * X[, 1] + rnorm(n)))
+#' morie_spatial_2sls(y, X, W)
 morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
   X <- as.matrix(X); W <- as.matrix(W)
   n <- length(y)
@@ -130,6 +144,16 @@ morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
 #' @inheritParams morie_spatial_2sls
 #' @return list with `lambda`, `beta`, `residuals` and `sigma2`
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 20
+#' W <- matrix(0, n, n)
+#' for (i in 1:(n - 1)) { W[i, i + 1] <- 1; W[i + 1, i] <- 1 }
+#' W <- W / pmax(rowSums(W), 1)
+#' X <- matrix(rnorm(n), n, 1)
+#' u <- as.numeric(solve(diag(n) - 0.4 * W) %*% rnorm(n))
+#' y <- as.numeric(2 * X[, 1] + u)
+#' morie_gm_error_sar(y, X, W)
 morie_gm_error_sar <- function(y, X, W, add_intercept = TRUE) {
   X <- as.matrix(X); W <- as.matrix(W)
   n <- length(y)

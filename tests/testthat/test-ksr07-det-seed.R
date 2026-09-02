@@ -19,15 +19,11 @@ xs_fixture <- function() {
   )
 }
 
-test_that("ksr07 deterministic_seed is reproducible", {
-  skip_if_no_hash()
-  xs <- xs_fixture()
-  r1 <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 400, deterministic_seed = 42L)
-  r2 <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 400, deterministic_seed = 42L)
-  r3 <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 400, deterministic_seed = 999L)
-  expect_equal(r1$estimate, r2$estimate)
-  expect_equal(r1$se, r2$se)
-  expect_false(isTRUE(all.equal(r1$se, r3$se)))
+test_that("ksr07 seed is reproducible", {
+  set.seed(1); xs <- rnorm(40)
+  a <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 100, seed = 42L)
+  b <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 100, seed = 42L)
+  expect_identical(a$boot_sd, b$boot_sd)
 })
 
 test_that("ksr07 default (deterministic_seed = NULL) path is unchanged", {

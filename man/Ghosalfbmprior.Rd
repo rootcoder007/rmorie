@@ -26,10 +26,10 @@ leading principal minors positive, by Gaussian elimination).
 \details{
 Formula: K(s, t) = (s^(2H) + t^(2H) - |t - s|^(2H)) / 2.
 }
+\examples{
+Ghosalfbmprior()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.9, eq. (11.6).
-}
-\examples{
-Ghosalfbmprior()
 }

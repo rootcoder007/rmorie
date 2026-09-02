@@ -51,6 +51,8 @@
 #' @references Rosner, B. (1983). Percentage points for a generalized
 #'   ESD many-outlier procedure. Technometrics, 25(2), 165-172.
 #' @export
+#' @examples
+#' morie_t_quantile(p = 0.5, v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_t_quantile <- function(p, v) {
   if (!(p > 0 && p < 1)) stop("p in (0,1) required")
   if (p == 0.5) return(0)

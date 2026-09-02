@@ -31,14 +31,14 @@ equation (3.4) of the paper.  Each \code{ATT(g, g + e)} is the doubly
 robust panel moment of Sant'Anna and Zhao (2020) between the base
 period \code{g - 1} and period \code{g + e}, against the never-treated.
 }
+\examples{
+set.seed(1)
+r <- Drcef(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+}
 \references{
 Callaway, B. and Sant'Anna, P. H. C. (2021).
 Difference-in-differences with multiple time periods. Journal of
 Econometrics 225(2), 200-230, equation (3.4).
 Sant'Anna, P. H. C. and Zhao, J. (2020). Journal of Econometrics
 219(1), 101-122, equation (2.6).
-}
-\examples{
-set.seed(1)
-r <- Drcef(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
 }

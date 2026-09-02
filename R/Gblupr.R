@@ -25,6 +25,15 @@
 #'   predictions, Journal of Dairy Science 91(11):4414-4423.
 #'   \doi{10.3168/jds.2007-0980}
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 30; q <- 5
+#' X <- cbind(1, rnorm(n))
+#' Z <- matrix(rbinom(n * q, 1, 0.5), n, q)
+#' G <- diag(q)
+#' u <- rnorm(q)
+#' y <- X %*% c(1, 0.5) + Z %*% u + rnorm(n)
+#' Gblupr(y, X, Z, G)
 Gblupr <- function(y, X, Z, G, var_u = 1, var_e = 1, ridge = 1e-8) {
   yv <- .s03vec(y); Xm <- .s03mat(X); Zm <- .s03mat(Z); Gm <- .s03mat(G)
   n <- length(yv)

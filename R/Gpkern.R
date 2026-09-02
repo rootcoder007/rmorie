@@ -23,6 +23,9 @@
 #'   arXiv:1302.4922; Rasmussen and Williams (2006), Gaussian Processes
 #'   for Machine Learning, MIT Press, sect. 4.2.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gpkern(V)
 Gpkern <- function(X, Y = NULL, kernel_spec = NULL) {
   A <- .s03mat(X)
   if (nrow(A) == 0L) stop("gp_kernel_compose: X is empty")

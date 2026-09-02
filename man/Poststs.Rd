@@ -28,12 +28,12 @@ for this module.
 Formula: \code{ybar_post = sum_h (N_h / N) ybar_h} with
 \code{var = sum_h (N_h / N)^2 s_h^2 / n_h}.
 }
+\examples{
+Poststs(y = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), Nh = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Holt, D. & Smith, T. M. F. (1979). Post stratification.
 Journal of the Royal Statistical Society Series A 142(1):33-46.
 \doi{10.2307/2344652}. Standard form; the paper is paywalled and not
 held locally.
-}
-\examples{
-Poststs(y = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), Nh = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -7,11 +7,11 @@
 # mvrnorm, the same RNG consumption order, so results match MASS to
 # machine precision (and bit-for-bit under a common seed).
 
-#' Internal: Moore-Penrose generalized inverse (native MASS::ginv)
-#'
-#' Exact re-implementation of \code{MASS::ginv} for real matrices: the
-#' SVD pseudo-inverse with the same singular-value tolerance rule.
-#' @noRd
+# Internal: Moore-Penrose generalized inverse (native MASS::ginv)
+#
+# Exact re-implementation of \code{MASS::ginv} for real matrices: the
+# SVD pseudo-inverse with the same singular-value tolerance rule.
+# @noRd
 # Shared Moore-Penrose pseudo-inverse.  Two further copies used to exist,
 # in causal_shared_native.R (cutoff max(d)*1e-12) and esl_native2.R
 # (cutoff max(dim)*eps*max(d), the numpy convention).  Because R sources
@@ -20,15 +20,13 @@
 # silently in force for all three call sites.  The survivor is kept so
 # behaviour does not change, with tol exposed for callers that need a
 # tighter rank cut.
-#' .morie_ginv
+#' Internal: Moore-Penrose generalized inverse (native MASS::ginv)
 #'
-#' Internal helper in mass_native.R; see the file header for
-#' the source the module follows.
-#'
+#' Exact re-implementation of \code{MASS::ginv} for real matrices: the
+#' SVD pseudo-inverse with the same singular-value tolerance rule.
 #' @param X The body requires: 'X' must be a numeric matrix.
 #' @param tol Numeric; combined arithmetically in the body.
-#' @return The value of \code{if}.
-#' @export
+#' @noRd
 .morie_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
   if (length(dim(X)) > 2L || !is.numeric(X)) {
     stop("'X' must be a numeric matrix", call. = FALSE)
@@ -387,7 +385,9 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
   fitted <- drop(x %*% coef)
   structure(list(coefficients = coef, residuals = y - fitted,
                  wresid = as.numeric(cp$resid), fitted.values = fitted,
-                 s = cp$scale, psi = psi, x = x, weights = numeric(0),
+                 s = cp$scale, psi = psi, x = x,
+                 # MASS `w`: the psi weights at the final scale
+                 weights = psi(as.numeric(cp$resid) / cp$scale),
                  converged = isTRUE(cp$converged), k2 = k,
                  # MASS returns the scale from the START of the final
                  # IRLS iteration, so it does NOT equal

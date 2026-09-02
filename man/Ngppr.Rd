@@ -33,13 +33,13 @@ alpha (digamma(alpha + n) - digamma(alpha))} and
 \code{Var[K_n] = sum_i alpha (i - 1) / (alpha + i - 1)^2}. Both
 expressions for the mean are computed, so each checks the other.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ngppr(V)
+}
 \references{
 Lijoi, A. & Prunster, I. (2010). Models beyond the
 Dirichlet process. In Bayesian Nonparametrics, 80-136. Cambridge
 University Press. Ferguson, T. S. (1973). A Bayesian analysis of
 some nonparametric problems. Annals of Statistics, 1(2), 209-230.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ngppr(V)
 }

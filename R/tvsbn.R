@@ -17,6 +17,9 @@
 #' @references Tversky, A. (1977). Features of similarity. Psychological
 #'   Review 84:327-352, equation (5).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tvsbn(V, V)
 Tvsbn <- function(fp_a, fp_b, alpha = 0.5, beta = 0.5) {
   a <- as.numeric(unlist(fp_a)); b <- as.numeric(unlist(fp_b))
   common <- sum(a != 0 & b != 0)

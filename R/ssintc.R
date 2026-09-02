@@ -19,6 +19,9 @@
 #'   \code{r}, \code{n}, \code{m}.
 #' @references Turnbull, B. W. (1976). JRSS B 38:290-295, equation (10).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ssintc(V, V)
 Ssintc <- function(L, R, event = NULL, n_iter = 200) {
   Lv <- as.numeric(L); Rv <- as.numeric(R); n <- length(Lv)
   lefts <- sort(unique(Lv))

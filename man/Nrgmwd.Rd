@@ -37,13 +37,13 @@ measure \code{(alpha P0 + sum delta_yi) / (alpha + n)}, so
 \code{Var[M | y] = s2_post / (alpha + n + 1)}. None of these depend
 on \code{tau}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Nrgmwd(V)
+}
 \references{
 Regazzini, E., Lijoi, A. & Prunster, I. (2003).
 Distributional results for means of normalized random measures
 with independent increments. Annals of Statistics, 31(2), 560-585.
 doi:10.1214/aos/1051027881
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Nrgmwd(V)
 }

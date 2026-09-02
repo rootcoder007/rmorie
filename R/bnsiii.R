@@ -24,6 +24,8 @@
 #'   equations (4.2), (4.3) and (4.4) of Molinari, F. (2021), Handbook of
 #'   Econometrics 7A (arXiv:2004.11751 pp. 88-89).
 #' @export
+#' @examples
+#' Bnsiii(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), moments = c(1, 2, 3, 4, 5, 6, 7, 8))
 Bnsiii <- function(y, X, moments) {
   yl <- as.numeric(unlist(y))
   yu <- as.numeric(unlist(X))

@@ -47,6 +47,8 @@
 #'   242-265, master revision fetched 2026-08-09.  RDKit: Open-Source
 #'   Cheminformatics, https://www.rdkit.org.
 #' @export
+#' @examples
+#' Ecfp6(adjacency = 5L, atomnum = 5L)
 Ecfp6 <- function(adjacency, atomnum, numhs = NULL, charge = NULL,
                   inring = NULL, isotope_delta = NULL, nbits = 2048,
                   radius = 3) {

@@ -19,10 +19,10 @@ List with \code{local}, \code{global_c}, \code{z}, \code{n}.
 \description{
 Formula: c_i = sum_j w_ij (z_i - z_j)^2 with z the standardised x
 }
-\references{
-Anselin (2019), A Local Indicator of Multivariate Spatial Association: Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented by spdep::localC, the reference implementation.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Localgeary(V, V)
+}
+\references{
+Anselin (2019), A Local Indicator of Multivariate Spatial Association: Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented by spdep::localC, the reference implementation.
 }

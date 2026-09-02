@@ -28,10 +28,10 @@ give -- the nonparametric prior costs nothing for this functional.
 Formula: F_post(1) = (2 F0(1) + N_1) / (2 + n);
 Var(sqrt(n)(F_post(1) - F0(1))) -> F0(1)(1 - F0(1)).
 }
+\examples{
+Ghosalntrbvm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.4.2.
-}
-\examples{
-Ghosalntrbvm()
 }

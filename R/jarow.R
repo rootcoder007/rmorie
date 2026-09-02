@@ -16,6 +16,9 @@
 #' @references Winkler, W. E. (1990). Proc Surv Res Meth Sect ASA
 #'   354-359; Jaro, M. A. (1989) JASA 84:414-420.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Jarow(V, V)
 Jarow <- function(s1, s2, p = 0.1, max_prefix = 4) {
   a <- strsplit(as.character(s1), "")[[1]]
   b <- strsplit(as.character(s2), "")[[1]]

@@ -16,6 +16,9 @@
 #'   Proceedings of the Seventeenth Conference on Uncertainty in
 #'   Artificial Intelligence, 411-420. Morgan Kaufmann.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Nie(V, V)
 Nie <- function(y11, y10) {
   r <- Nieff(y11, y10)
   .t1_result(estimate = r$estimate, se = r$se, mean_y11 = r$mean_y11,

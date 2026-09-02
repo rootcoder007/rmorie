@@ -18,10 +18,10 @@ The hook of a cell is the cell itself, everything to its right in the
 row, and everything below it in the column:
 \eqn{h(i,j) = \lambda_i - j + \lambda'_j - i + 1}.
 }
+\examples{
+morie_hook_lengths(shape = 5L)
+}
 \references{
 Frame JS, Robinson G de B, Thrall RM (1954)
 \emph{Canad J Math} 6:316-324.
-}
-\examples{
-morie_hook_lengths(shape = 5L)
 }

@@ -27,10 +27,10 @@ leaving a single bounded search for b: its stationary point is
 bracketed by a sign change of the profile derivative on a fixed grid
 and then bisected.
 }
-\references{
-Heffernan & Tawn (2004), JRSS B 66(3):497-546.
-}
 \examples{
 set.seed(1)
 Evhpvr(matrix(rnorm(40), 20, 2), u = 1)
+}
+\references{
+Heffernan & Tawn (2004), JRSS B 66(3):497-546.
 }

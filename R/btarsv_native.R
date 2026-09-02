@@ -53,6 +53,9 @@
 #' @references Buhlmann, P. (1997). Sieve bootstrap for time series.
 #'   Bernoulli, 3(2), 123-148.
 #' @export
+#' @examples
+#' set.seed(1)
+#' morie_btarsv(rnorm(60), B = 50, burn = 20)
 morie_btarsv <- function(x, p = NULL, statistic = NULL, B = 500,
                          burn = 100, seed = 0, p_max = NULL) {
   xv <- as.numeric(x)

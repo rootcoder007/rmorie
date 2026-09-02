@@ -23,6 +23,8 @@
 #'   `log_variance` and `bias_factor`.
 #' @references Schabenberger Ch 5, Sec 5.6.1
 #' @export
+#' @examples
+#' splgk(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
 splgk <- function(coords, z, target, cov_model = NULL, mu = NULL) {
   z <- as.numeric(z)
   if (any(z <= 0)) {

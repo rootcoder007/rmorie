@@ -17,9 +17,9 @@ List with \code{gcd}, \code{x}, \code{y}, \code{check} (a x + b y), \code{a}, \c
 \description{
 Formula: a x + b y = gcd(a, b)
 }
-\references{
-Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
-}
 \examples{
 Bezout(240, 46)
+}
+\references{
+Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
 }

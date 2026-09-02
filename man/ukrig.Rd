@@ -2,7 +2,7 @@
 % Please edit documentation in R/ukrig.R
 \name{ukrig}
 \alias{ukrig}
-\alias{morie_universal_kriging}
+\alias{morie_ukrig}
 \title{Universal kriging with polynomial trend.}
 \usage{
 ukrig(
@@ -16,7 +16,7 @@ ukrig(
   trend_order = 1
 )
 
-morie_universal_kriging(
+morie_ukrig(
   x,
   coords,
   target,

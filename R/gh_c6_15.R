@@ -18,6 +18,8 @@
 #'   2004) as the book's historical notes record. Read from the copy of
 #'   the book held in the corpus.
 #' @export
+#' @examples
+#' Martcons(dh2 = c(0.1, 0.2, 0.15))
 Martcons <- function(dh2, variances = NULL) {
   d <- .t1_vec(dh2); n <- length(d)
   if (n < 1L) stop("at least one discrepancy is required")

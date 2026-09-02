@@ -720,9 +720,16 @@ morie_jsonlt_unbox <- function(x) {
     cols <- list()
     for (nm in nms) {
       col <- lapply(kids, function(k) if (is.null(k[[nm]])) NA else k[[nm]])
-      cols[[nm]] <- if (all(vapply(col, .jsonlt_is_scalar, logical(1))))
+      cols[[nm]] <- if (all(vapply(col, .jsonlt_is_scalar, logical(1)))) {
         unlist(lapply(col, function(v) if (is.null(v)) NA else v),
-               use.names = FALSE) else col
+               use.names = FALSE)
+      } else if (all(vapply(col, function(v)
+          is.list(v) && !is.data.frame(v) && !is.null(names(v)),
+          logical(1)))) {
+        # every row holds an object here: jsonlite makes this a nested
+        # data.frame column (e.g. ArcGIS features[].attributes)
+        .jsonlt_simplify(unname(col), sv, sdf, sm, flat)
+      } else col
     }
     df <- .jsonlt_df(cols, nms)
     return(if (flat) morie_jsonlt_flatten(df) else df)
@@ -759,9 +766,12 @@ morie_jsonlt_unbox <- function(x) {
 #' @return an R object.
 #' @export
 morie_jsonlt_from_json <- function(txt, simplifyVector = TRUE,
-                                   simplifyDataFrame = TRUE,
-                                   simplifyMatrix = TRUE, flatten = FALSE,
+                                   simplifyDataFrame = simplifyVector,
+                                   simplifyMatrix = simplifyVector,
+                                   flatten = FALSE,
                                    simplify = NULL, ...) {
+  # jsonlite semantics: simplifyDataFrame / simplifyMatrix default to
+  # simplifyVector, so simplifyVector = FALSE returns plain nested lists.
   if (identical(simplify, FALSE))
     simplifyVector <- simplifyDataFrame <- simplifyMatrix <- FALSE
   if (length(txt) == 1L && !grepl("^\\s*[\\[{\"[:digit:]-]", txt) &&

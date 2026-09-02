@@ -63,6 +63,8 @@
 #' @param x A decimal string, or a numeric below 2^53.
 #' @return An object of class `morie_bigint`.
 #' @export
+#' @examples
+#' morie_bigint(x = 5L)
 morie_bigint <- function(x) {
   if (inherits(x, "morie_bigint")) {
     return(x)
@@ -229,6 +231,9 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' @param a,b Values coercible by [morie_bigint()].
 #' @return -1, 0 or 1.
 #' @export
+#' @examples
+#' morie_big_cmp(morie_bigint("123456789012345678901234567890"),
+#'               morie_bigint("123456789012345678901234567891"))
 morie_big_cmp <- function(a, b) {
   a <- morie_bigint(a)
   b <- morie_bigint(b)
@@ -247,6 +252,10 @@ morie_big_cmp <- function(a, b) {
 #' @param a,b Values coercible by [morie_bigint()].
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' a <- morie_bigint("99999999999999999999")
+#' b <- morie_bigint("1")
+#' as.character(morie_big_add(a, b))
 morie_big_add <- function(a, b) {
   a <- morie_bigint(a)
   b <- morie_bigint(b)
@@ -275,6 +284,10 @@ morie_big_add <- function(a, b) {
 #' @param a,b Values coercible by [morie_bigint()].
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' a <- morie_bigint("100000000000000000000")
+#' b <- morie_bigint("1")
+#' as.character(morie_big_sub(a, b))
 morie_big_sub <- function(a, b) {
   b <- morie_bigint(b)
   morie_big_add(a, .morie_big_new(-b$sign, b$limbs))
@@ -289,6 +302,10 @@ morie_big_sub <- function(a, b) {
 #' @param a,b Values coercible by [morie_bigint()].
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' a <- morie_bigint("123456789")
+#' b <- morie_bigint("987654321")
+#' as.character(morie_big_mul(a, b))
 morie_big_mul <- function(a, b) {
   a <- morie_bigint(a)
   b <- morie_bigint(b)
@@ -324,6 +341,9 @@ morie_big_mul <- function(a, b) {
 #' @param d A positive whole number below 2^31.
 #' @return A list with `quotient` (a `morie_bigint`) and `remainder`.
 #' @export
+#' @examples
+#' r <- morie_big_divmod_small(morie_bigint("1000000000000000000007"), 7L)
+#' str(r, max.level = 1)
 morie_big_divmod_small <- function(a, d) {
   a <- morie_bigint(a)
   d <- as.numeric(d)
@@ -352,6 +372,8 @@ morie_big_divmod_small <- function(a, d) {
 #' @param k Non-negative whole exponent.
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' morie_big_pow(2, 100)
 morie_big_pow <- function(a, k) {
   k <- as.integer(k)
   if (is.na(k) || k < 0L) {
@@ -374,6 +396,8 @@ morie_big_pow <- function(a, k) {
 #' @param n Non-negative whole number.
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' morie_big_factorial(n = 5L)
 morie_big_factorial <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 0L) {
@@ -405,6 +429,8 @@ morie_big_factorial <- function(n) {
 #' @param n,k Whole numbers.
 #' @return A `morie_bigint`.
 #' @export
+#' @examples
+#' morie_big_binom(n = 5L, k = 5L)
 morie_big_binom <- function(n, k) {
   n <- as.integer(n)
   k <- as.integer(k)
@@ -437,6 +463,8 @@ morie_big_binom <- function(n, k) {
 #' @param a Value coercible by [morie_bigint()].
 #' @return Integer digit count; 1 for zero.
 #' @export
+#' @examples
+#' morie_big_ndigits(morie_big_factorial(100))
 morie_big_ndigits <- function(a) nchar(sub("^-", "", as.character(morie_bigint(a))))
 
 #' Is this value exactly representable as an R double?
@@ -447,6 +475,8 @@ morie_big_ndigits <- function(a) nchar(sub("^-", "", as.character(morie_bigint(a
 #' @param a Value coercible by [morie_bigint()].
 #' @return TRUE or FALSE.
 #' @export
+#' @examples
+#' morie_big_fits_double("9007199254740992")
 morie_big_fits_double <- function(a) {
   a <- morie_bigint(a)
   morie_big_cmp(.morie_big_new(1, a$limbs), morie_bigint("9007199254740992")) <= 0L

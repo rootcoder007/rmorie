@@ -39,10 +39,10 @@ z_t = sum_{j<n} gamma^j u_{t+j} + gamma^n nu_{t+n};
 pi_t(a) = N_t(a)/sum_b N_t(b); p_i = |nu_i - z_i|;
 P(i) = p_i^alpha / sum_k p_k^alpha; w_i = ((1/N)(1/P(i)))^beta.
 }
+\examples{
+Mzreanal(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), freshvalues = c(1, 2, 3, 4, 5, 6, 7, 8), visits = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Schrittwieser et al. (2020), arXiv:1911.08265, Appendix H
 and Methods (training).  Read from the ar5iv rendering.
-}
-\examples{
-Mzreanal(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), freshvalues = c(1, 2, 3, 4, 5, 6, 7, 8), visits = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

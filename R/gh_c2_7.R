@@ -17,6 +17,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.3.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalbernsteinfeller(V)
 Ghosalbernsteinfeller <- function(x, F = NULL, K = 30) {
   xs <- as.numeric(x)
   K <- as.integer(K)

@@ -32,6 +32,8 @@
 #'   Eq. 4.4, Definition 3.2, Theorem 3.2; local copy
 #'   fetched-wave3/chernozhukov-etal-2018-double-debiased-machine-learning-EJ21.pdf.
 #' @export
+#' @examples
+#' Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 Causdr2 <- function(y, d, X, K = 2L, seed = 1L) {
   yv <- as.numeric(y); dv <- as.numeric(d)
   Xa <- as.matrix(X); storage.mode(Xa) <- "double"

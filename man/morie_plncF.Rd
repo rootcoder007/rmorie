@@ -29,10 +29,10 @@ Spectral radiance per unit wavelength,
 the Wien displacement peak \eqn{\lambda_{max} = b/T} and the
 Stefan-Boltzmann total emissive power \eqn{\sigma T^4}.
 }
+\examples{
+morie_plncF(lam = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
+}
 \references{
 Rybicki, G. B. and Lightman, A. P. (1979). Radiative
 Processes in Astrophysics. Wiley, Sections 1.5-1.6.
-}
-\examples{
-morie_plncF(lam = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
 }

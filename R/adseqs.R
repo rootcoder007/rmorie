@@ -19,6 +19,10 @@
 #'   this routine uses the EM algorithm for the same likelihood (FRAPPE,
 #'   Tang et al. 2005).
 #' @export
+#' @examples
+#' set.seed(1)
+#' G <- matrix(rbinom(50, 2, 0.3), 10, 5)
+#' Admixq(G, K = 2, steps = 20)
 Admixq <- function(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL) {
   Gm <- matrix(as.numeric(as.matrix(G)), nrow = nrow(as.matrix(G)))
   I <- nrow(Gm); J <- ncol(Gm); K <- as.integer(K); steps <- as.integer(steps)

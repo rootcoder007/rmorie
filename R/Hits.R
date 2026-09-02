@@ -17,6 +17,8 @@
 #'   environment, Journal of the ACM 46(5):604-632.
 #'   \doi{10.1145/324133.324140}
 #' @export
+#' @examples
+#' Hits(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
 Hits <- function(A, iters = 50) {
   M <- .s03mat(A)
   n <- nrow(M)

@@ -22,13 +22,13 @@ clr scores minimises sum_i ||clr(x_i) - m|| and is found by the
 Weiszfeld iteration m <- sum_i y_i/d_i / sum_i 1/d_i.  The estimate is
 mapped back to the simplex by the inverse clr.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Clrmedian(M)
+}
 \references{
 Filzmoser and Hron (2008), Mathematical Geosciences 40(3),
 233-248; clr is Aitchison's transform and the spatial median is
 Weiszfeld's (1937).  The article is paywalled and was not read; only
 the stated construction is claimed.
-}
-\examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Clrmedian(M)
 }

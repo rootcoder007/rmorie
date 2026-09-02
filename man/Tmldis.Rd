@@ -27,10 +27,10 @@ the reference distribution is the residual disparity.
 \details{
 Formula: \code{PAD = E[Y|S=1] - E_{X ~ P(X|S=0)}[E(Y|S=1, X)]}.
 }
+\examples{
+Tmldis(y = c(1, 2, 3, 4, 5, 6, 7, 8), S_grp = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 VanderWeele, T. J. & Robinson, W. R. (2014). Epidemiology
 25:473-484.
-}
-\examples{
-Tmldis(y = c(1, 2, 3, 4, 5, 6, 7, 8), S_grp = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -19,8 +19,8 @@ Named list with tensor, topk_indices, topk_logits, k, method.
 \description{
 Top-k filtered softmax (Fan 2018)
 }
-\keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 top_k_decoding(V)
 }
+\keyword{internal}

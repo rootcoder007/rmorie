@@ -49,6 +49,9 @@
 #'   \code{method}.
 #' @references Grover & Leskovec (2016), node2vec, KDD 2016:855-864.
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
+#' Comemb(G, dim = 4, walk_len = 5, n_walks = 2)
 Comemb <- function(G, p = 1, q = 1, dim = 8, walk_len = 10, n_walks = 4,
                    window = 3, epochs = 1, lr = 0.05, neg = 2, seed = 42) {
   g <- .dw_adj(G)

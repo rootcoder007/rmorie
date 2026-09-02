@@ -44,6 +44,11 @@ Formula: e = exp(D a (theta - b)); P = c + (d - c) e/(1 + e);
 dP = D a e (d - c)/(1 + e)^2; I_j = dP^2/(P(1 - P));
 EAP = int theta pi L dtheta / int pi L dtheta
 }
+\examples{
+items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
+                3, 4, byrow = TRUE)
+Eapinfo(items, x = c(1, 0, 1))
+}
 \references{
 Verified against the reference implementation in the CRAN
 package catR 3.17 (Magis & Raiche), functions Pi, Ii and eapEst.
@@ -51,9 +56,4 @@ catR implements the procedures of van der Linden & Pashley, Item
 selection and ability estimation in adaptive testing, in Elements of
 Adaptive Testing (2010), which this row cites; that chapter was NOT
 obtainable, so the package source is used as the reference.
-}
-\examples{
-items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
-                3, 4, byrow = TRUE)
-Eapinfo(items, x = c(1, 0, 1))
 }

@@ -20,11 +20,11 @@ Both sides are computed and compared, and the cover is separately
 VERIFIED to cover every edge -- a construction returning the right
 size while missing an edge would otherwise pass.
 }
-\references{
-Konig D (1931). Grafok es matrixok. \emph{Matematikai es
-Fizikai Lapok}, 38, 116-119.
-}
 \examples{
 E <- list(c(1, 1), c(1, 2), c(2, 2), c(3, 1), c(3, 3))
 morie_konig_theorem(3, 3, E)
+}
+\references{
+Konig D (1931). Grafok es matrixok. \emph{Matematikai es
+Fizikai Lapok}, 38, 116-119.
 }

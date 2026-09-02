@@ -35,9 +35,9 @@ the two differ by \eqn{c'\Sigma^{-1}c}, the variance of the predictor, so
 using the latter over-corrects, and by the most where kriging is most
 confident.
 }
-\references{
-Schabenberger Ch 5, Sec 5.6.1
-}
 \examples{
 splgk(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+Schabenberger Ch 5, Sec 5.6.1
 }

@@ -20,6 +20,9 @@
 #'   \code{method}.
 #' @references Northrop & Coleman (2014), Extremes 17(2):289-303.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Evtsthr(rexp(200))
 Evtsthr <- function(x, u_grid = NULL, window = 3) {
   x <- .s03vec(x)
   n <- length(x)

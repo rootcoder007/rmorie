@@ -7,17 +7,17 @@
 BayesExp(p_a = 0.02, p_z_given_a = 0.95, p_z_given_not_a = 0.1)
 }
 \arguments{
-\item{p_a}{prior P(A), in [0, 1].}
+\item{p_a}{prior P(A), in \link{0, 1}.}
 
-\item{p_z_given_a}{likelihood P(Z | A), in [0, 1].}
+\item{p_z_given_a}{likelihood P(Z | A), in \link{0, 1}.}
 
-\item{p_z_given_not_a}{likelihood P(Z | not A), in [0, 1].}
+\item{p_z_given_not_a}{likelihood P(Z | not A), in \link{0, 1}.}
 }
 \value{
 list(posterior).
 }
 \description{
-P(A|Z) = P(Z|A)P(A) / [P(Z|A)P(A) + P(Z|~A)P(~A)].  The defaults are
+P(A|Z) = P(Z|A)P(A) / \link{P(Z|A)P(A) + P(Z|~A)P(~A)}.  The defaults are
 the book's false-positive worked example: 2 percent prevalence, a 95
 percent sensitive test, a 10 percent false-positive rate.
 }

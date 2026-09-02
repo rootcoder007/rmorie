@@ -28,11 +28,11 @@ Formula: f(x) = (2 pi)^\{-(D-1)/2\} |Sigma|^\{-1/2\}
 (prod_\{i=1\}^\{D\} x_i)^\{-1\}
 exp( -1/2 (alr(x) - mu)' Sigma^\{-1\} (alr(x) - mu) )
 }
+\examples{
+Lgtnpdf(c(0.3, 0.3, 0.4), mu = c(0, 0), Sigma = diag(2))
+}
 \references{
 Aitchison (1986), The Statistical Analysis of
 Compositional Data, Chapter 6. The reference part is the LAST,
 matching the sibling module aitalr.
-}
-\examples{
-Lgtnpdf(c(0.3, 0.3, 0.4), mu = c(0, 0), Sigma = diag(2))
 }

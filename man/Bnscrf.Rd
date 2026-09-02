@@ -22,12 +22,12 @@ partially identified parameter" are both the Imbens-Manski (2004)
 equation (6) interval. This name is kept working and forwards to
 \code{Bndfre}; it is not a second implementation.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bnscrf(V, V)
+}
 \references{
 Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
 for partially identified parameters. Econometrica 72(6), 1845-1857,
 equation (6). \doi{10.1111/j.1468-0262.2004.00555.x}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Bnscrf(V, V)
 }

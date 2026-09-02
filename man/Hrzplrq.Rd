@@ -44,13 +44,13 @@ differencing cannot be used to eliminate g from (3.2b)".  The
 estimator implemented here is the one the section actually gives,
 due to Chen, Linton and Van Keilegom (2003), based on
 
-E X {tau - I[Y - X'beta - g(Z) <= 0]} = 0                  (3.38)
+E X {tau - I\link{Y - X'beta - g(Z) <= 0}} = 0                  (3.38)
 
 with g replaced by a nonparametric estimator RE-COMPUTED at every
 candidate b:
 
 bhat = argmin_b || n^-1 sum_i X_i
-{tau - I[Y_i - X_i'b - ghat(Z_i, b) <= 0]} ||^2
+{tau - I\link{Y_i - X_i'b - ghat(Z_i, b) <= 0}} ||^2
 
 where ghat(z, b) is the kernel-weighted tau-quantile of Y - X'b
 given Z = z.  Re-estimating g inside the loop is the point: with g

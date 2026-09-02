@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.2.1.
 #' @export
+#' @examples
+#' Ghosalunivweights()
 Ghosalunivweights <- function(n = 100, c = 2, K_max = 200,
                               eps_scale = 1) {
   if (K_max < 1) stop("K_max must be at least 1")

@@ -16,6 +16,9 @@
 #'   Statistics and Computing 17(4), 395-416, Section 8.3. Fetched from
 #'   arXiv:0711.0189.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Eigengap(V)
 Eigengap <- function(values, kmax = NULL) {
   v <- .t1_vec(values); n <- length(v)
   if (n < 2L) stop("at least two eigenvalues are required")

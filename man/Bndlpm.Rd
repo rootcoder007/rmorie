@@ -36,6 +36,10 @@ Formula: \code{min / max sum q_jk [y_k(1) - y_k(0)]} subject to
 \code{sum over types consistent with (a, b, z) of q = P(y = a, D = b |
 Z = z)} for all \code{a, b, z}, and \code{q >= 0}.
 }
+\examples{
+set.seed(1)
+Bndlpm(y = rbinom(40, 1, 0.5), D = rbinom(40, 1, 0.5), Z = rbinom(40, 1, 0.5))
+}
 \references{
 Balke, A. and Pearl, J. (1997). Bounds on treatment effects
 from studies with imperfect compliance. Journal of the American
@@ -44,8 +48,4 @@ Statistical Association 92(439), 1171-1176.
 parameterisation used here is the one described in Molinari, F.
 (2021), Handbook of Econometrics 7A (arXiv:2004.11751 p. 19 and
 note 10).
-}
-\examples{
-set.seed(1)
-Bndlpm(y = rbinom(40, 1, 0.5), D = rbinom(40, 1, 0.5), Z = rbinom(40, 1, 0.5))
 }

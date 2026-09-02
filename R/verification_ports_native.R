@@ -25,6 +25,8 @@
 #'   (1967). Smoothing by spline functions. \emph{Numerische
 #'   Mathematik}, 10(3), 177-183.
 #' @export
+#' @examples
+#' morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
 morie_esl_smoothing_spline <- function(x, y, lambda) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -74,6 +76,9 @@ morie_esl_smoothing_spline <- function(x, y, lambda) {
 #'   inference: theory and applications. \emph{Journal of the American
 #'   Statistical Association}, 78(381), 47-55.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_empirical_bayes(V, V)
 morie_empirical_bayes <- function(estimates, standard_errors) {
   theta <- as.numeric(estimates)
   se <- as.numeric(standard_errors)
@@ -196,6 +201,9 @@ morie_regime_value <- function(y, d, X, regime, propensity = NULL,
 #'   sampler for the horseshoe estimator. \emph{IEEE Signal Processing
 #'   Letters}, 23(1), 179-182.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bayesian_horseshoe(V, V)
 morie_bayesian_horseshoe <- function(X, y, n_iter = 3000L, seed = 42L) {
   set.seed(seed)
   X <- as.matrix(X)
@@ -255,6 +263,9 @@ morie_bayesian_horseshoe <- function(X, y, n_iter = 3000L, seed = 42L) {
 #'   rearrangement of vector-valued functions. \emph{Communications on
 #'   Pure and Applied Mathematics}, 44(4), 375-417.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_neural_kantorovich_map(V, V)
 morie_neural_kantorovich_map <- function(source, target, n_iter = 400L,
                                          lr = 0.05, n_basis = 12L, seed = 0L) {
   a <- as.numeric(source)

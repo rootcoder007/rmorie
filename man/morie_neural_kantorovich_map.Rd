@@ -30,14 +30,14 @@ Monotone by construction (softplus weights are non-negative). This
 is a monotone fit to the closed-form coupling, not a solve of the
 Kantorovich problem.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_neural_kantorovich_map(V, V)
+}
 \references{
 Makkuva, A., Taghvaei, A., Oh, S. and Lee, J. (2020).
 Optimal transport mapping via input convex neural networks. In
 \emph{ICML}. Brenier, Y. (1991). Polar factorization and monotone
 rearrangement of vector-valued functions. \emph{Communications on
 Pure and Applied Mathematics}, 44(4), 375-417.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_neural_kantorovich_map(V, V)
 }

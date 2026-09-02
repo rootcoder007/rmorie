@@ -30,11 +30,11 @@ Formula: with s_i = phi(f_i)/Phi(f_i) for y_i = 1 and
 -phi(f_i)/(1 - Phi(f_i)) otherwise, and W_i = s_i (s_i + f_i),
 solve (K^(-1) + W) df = s - K^(-1) f and step by df/2.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.5.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalnpbinaryreg(V, V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.5.
 }

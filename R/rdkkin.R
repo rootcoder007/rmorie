@@ -28,6 +28,9 @@
 #'   Inference on causal effects in a generalized regression kink design.
 #'   Econometrica 83(6):2453-2483. \doi{10.3982/ECTA11224}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Rdkkin(y = rnorm(10), x = rnorm(10)); TRUE
 Rdkkin <- function(y, x, D = NULL, cutoff = 0, bandwidth = 1) {
   y <- as.numeric(unlist(y)); x <- as.numeric(unlist(x))
   if (length(y) == 0L) stop("Rdkkin: y is empty")

@@ -9,7 +9,7 @@ SdAvgBin(n = 10000, p = 1/6)
 \arguments{
 \item{n}{number of trials, >= 1.}
 
-\item{p}{success probability, in [0, 1].}
+\item{p}{success probability, in \link{0, 1}.}
 }
 \value{
 list(sd_single, sd_tot, sd_avg).

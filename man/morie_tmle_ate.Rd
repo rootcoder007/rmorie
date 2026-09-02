@@ -47,15 +47,6 @@ it can never leave the parameter space.
 \details{
 Mirrors the shared \code{morie.fn._tmle.tmle_ate} core.
 }
-\references{
-van der Laan MJ, Rubin D (2006). Targeted maximum
-likelihood learning. \emph{The International Journal of
-Biostatistics} 2(1), Article 11.
-
-Gruber S, van der Laan MJ (2010). A targeted maximum likelihood
-estimator of a causal effect on a bounded continuous outcome.
-\emph{The International Journal of Biostatistics} 6(1), Article 26.
-}
 \examples{
 set.seed(1)
 n <- 120
@@ -64,4 +55,13 @@ a <- rbinom(n, 1, plogis(0.5 * W[, 1]))
 y <- 1 + W[, 1] + 0.8 * a + rnorm(n, 0, 0.5)
 r <- morie_tmle_ate(y, a, W)
 str(r, max.level = 1)
+}
+\references{
+van der Laan MJ, Rubin D (2006). Targeted maximum
+likelihood learning. \emph{The International Journal of
+Biostatistics} 2(1), Article 11.
+
+Gruber S, van der Laan MJ (2010). A targeted maximum likelihood
+estimator of a causal effect on a bounded continuous outcome.
+\emph{The International Journal of Biostatistics} 6(1), Article 26.
 }

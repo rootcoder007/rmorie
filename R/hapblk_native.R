@@ -61,6 +61,9 @@
 #'   haplotype blocks in the human genome. Science, 296(5576),
 #'   2225-2229.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_hapblk(V)
 morie_hapblk <- function(H, strong_hi = 0.98, strong_lo = 0.70,
                          recomb_hi = 0.90, frac = 0.95) {
   H <- as.matrix(H)

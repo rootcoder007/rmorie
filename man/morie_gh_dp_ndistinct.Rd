@@ -21,12 +21,12 @@ For \code{n} draws from a Dirichlet process with precision
 (\alpha + i - 1)} and \eqn{Var[K_n] = \sum_{i=1}^{n} \alpha (i - 1) /
 (\alpha + i - 1)^2}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_dp_ndistinct(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_dp_ndistinct(V, V)
 }

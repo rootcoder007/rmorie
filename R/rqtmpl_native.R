@@ -22,17 +22,17 @@
 
 LOG10E <- log10(exp(1))
 
-#' Haldane's map function
-#'
-#' Maps a distance in Morgans to a recombination fraction via the
-#' Haldane (1919) formula \code{0.5 * (1 - exp(-2d))}.
-#'
-#' @param distance Map distance in Morgans, non-negative.
-#' @return Recombination fraction in \code{[0, 0.5)}.
-#' @references Haldane, J. B. S. (1919). The combination of linkage
-#'   values, and the calculation of distances between the loci of
-#'   linked factors. Journal of Genetics, 8(4), 299-309.
-#' @export
+# Haldane's map function
+#
+# Maps a distance in Morgans to a recombination fraction via the
+# Haldane (1919) formula \code{0.5 * (1 - exp(-2d))}.
+#
+# @param distance Map distance in Morgans, non-negative.
+# @return Recombination fraction in \code{[0, 0.5)}.
+# @references Haldane, J. B. S. (1919). The combination of linkage
+#   values, and the calculation of distances between the loci of
+#   linked factors. Journal of Genetics, 8(4), 299-309.
+# @export
 
 # Base R has no erf/erfc; both are pnorm in disguise. Defined here so
 # the arm stays base-R only, as the package requires.
@@ -55,14 +55,16 @@ LOG10E <- log10(exp(1))
 #' @export
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
-#' morie_haldane
+#' Haldane's map function
 #'
-#' A step of the rqtmpl_native implementation. Called by \code{morie_scan_interval}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Maps a distance in Morgans to a recombination fraction via the
+#' Haldane (1919) formula \code{0.5 * (1 - exp(-2d))}.
 #'
-#' @param distance Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A numeric value.
+#' @param distance Map distance in Morgans, non-negative.
+#' @return Recombination fraction in \code{[0, 0.5)}.
+#' @references Haldane, J. B. S. (1919). The combination of linkage
+#'   values, and the calculation of distances between the loci of
+#'   linked factors. Journal of Genetics, 8(4), 299-309.
 #' @export
 morie_haldane <- function(distance) {
   d <- as.numeric(distance)

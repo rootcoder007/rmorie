@@ -28,11 +28,11 @@ Formula: \code{z_i = y_i/se_i} against \code{x_i = 1/se_i}; the
 through-the-origin slope \code{sum(z_i x_i)/sum(x_i^2)} is exactly the
 inverse-variance pooled estimate -- Galbraith (1988).
 }
-\references{
-Galbraith, R. F. (1988). Statistics in Medicine
-7(8):889-894. \doi{10.1002/sim.4780070807}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Magal(V, V)
+}
+\references{
+Galbraith, R. F. (1988). Statistics in Medicine
+7(8):889-894. \doi{10.1002/sim.4780070807}.
 }

@@ -39,12 +39,12 @@ slope.
 
 Formula: \code{tau = (b_Y+ - b_Y-) / (b_D+ - b_D-)}.
 }
+\examples{
+set.seed(1)
+r <- Rdkkin(y = rnorm(10), x = rnorm(10)); TRUE
+}
 \references{
 Card, D., Lee, D. S., Pei, Z. & Weber, A. (2015).
 Inference on causal effects in a generalized regression kink design.
 Econometrica 83(6):2453-2483. \doi{10.3982/ECTA11224}.
-}
-\examples{
-set.seed(1)
-r <- Rdkkin(y = rnorm(10), x = rnorm(10)); TRUE
 }

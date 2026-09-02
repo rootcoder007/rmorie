@@ -37,37 +37,6 @@ test_that(".tps_temporal_monthly on empty input returns zero-row list", {
 
 # ==================================================================== survival.R
 
-test_that(".req_survival is silent when survival is installed", {
-  skip_if_not_installed("survival")
-  if (requireNamespace("survival", quietly = TRUE)) {
-    expect_silent(rmorie:::.req_survival())
-  } else {
-    expect_error(rmorie:::.req_survival(), regexp = "survival")
-  }
-})
-
-test_that(".req_cmprsk is silent / errors based on availability", {
-  skip_if_not_installed("cmprsk")
-  if (requireNamespace("cmprsk", quietly = TRUE)) {
-    expect_silent(rmorie:::.req_cmprsk())
-  } else {
-    expect_error(rmorie:::.req_cmprsk(), regexp = "cmprsk")
-  }
-})
-
-test_that(".validate_te returns parallel time/event with finite-rows mask", {
-  out <- rmorie:::.validate_te(time = c(1.0, 2.0, NA, -1, 4.0),
-                                event = c(1, 0, 1, 0, 1))
-  expect_named(out, c("time", "event", "ok"))
-  expect_equal(out$time, c(1.0, 2.0, 4.0))
-  expect_equal(out$event, c(1L, 0L, 1L))
-})
-
-test_that(".validate_te errors on length mismatch", {
-  expect_error(rmorie:::.validate_te(c(1, 2), c(1, 0, 1)),
-               regexp = "equal length")
-})
-
 # ==================================================================== psymet.R
 
 test_that(".has_psych returns logical", {

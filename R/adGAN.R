@@ -13,6 +13,9 @@
 #'   arXiv:1805.06725, equations (5) and (6), read from the ar5iv
 #'   rendering of the arXiv source.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ganomscore(V, V)
 Ganomscore <- function(z, zhat, threshold = 0.5) {
   Z <- .t1_mat(z); H <- .t1_mat(zhat)
   if (nrow(Z) != nrow(H) || ncol(Z) != ncol(H))

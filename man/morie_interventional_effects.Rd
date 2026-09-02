@@ -30,11 +30,6 @@ population distribution given the exposure level, which is identified
 under weaker conditions but answers a population question rather than
 an individual one. Mirrors \code{morie.fn.ipsiMed}.
 }
-\references{
-VanderWeele TJ, Vansteelandt S, Robins JM (2014). Effect
-decomposition in the presence of an exposure-induced
-mediator-outcome confounder. \emph{Epidemiology} 25(2), 300-306.
-}
 \examples{
 set.seed(5)
 n <- 150
@@ -43,4 +38,9 @@ m <- 0.5 * x + rnorm(n, 0, 0.5)
 y <- 1 + 0.4 * x + 0.6 * m + rnorm(n, 0, 0.4)
 r <- morie_interventional_effects(y, x, m, n_draws = 400L)
 str(r, max.level = 1)
+}
+\references{
+VanderWeele TJ, Vansteelandt S, Robins JM (2014). Effect
+decomposition in the presence of an exposure-induced
+mediator-outcome confounder. \emph{Epidemiology} 25(2), 300-306.
 }

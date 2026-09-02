@@ -14,6 +14,9 @@
 #' @return List with \code{estimate}, \code{nov}, \code{p}, \code{n_items}.
 #' @references Vargas, S. & Castells, P. (2011). RecSys 2011, 109-116.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Novlt(V, V)
 Novlt <- function(item, popularity) {
   pop <- as.numeric(popularity)
   p <- pop / sum(pop)

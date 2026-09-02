@@ -23,9 +23,9 @@ list: estimate, kappa_star, V, cvfmax, cvfmin, cvf, vrobust, n, method.
 }
 \description{
 For a location M-estimator with score psi at a symmetric model F the
-asymptotic variance is V = E[psi^2] / (E[psi-prime])^2 and the
+asymptotic variance is V = E\link{psi^2} / (E\link{psi-prime})^2 and the
 change-of-variance function is
-CVF(x) = V * (1 + psi(x)^2/E[psi^2] - 2 psi-prime(x)/E[psi-prime]),
+CVF(x) = V * (1 + psi(x)^2/E\link{psi^2} - 2 psi-prime(x)/E\link{psi-prime}),
 with sensitivity kappa* = sup CVF(x)/V.  Source consulted: Hampel,
 Ronchetti, Rousseeuw and Stahel (1986), Robust Statistics, section 2.5.
 }

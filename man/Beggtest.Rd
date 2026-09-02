@@ -24,10 +24,10 @@ the statistic is Kendall's tau between \eqn{y^*} and \eqn{v}, with
 the two-sided normal-approximation p-value.  Subtracting \eqn{v_b}
 is what makes the null hold; without it the test over-rejects.
 }
-\references{
-Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Beggtest(V, V)
+}
+\references{
+Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
 }

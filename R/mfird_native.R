@@ -22,6 +22,9 @@
 #' @references Reckase, M. D. (2009). Multidimensional Item Response
 #'   Theory. Springer.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mfird(V)
 morie_mfird <- function(a, d = NULL, P = NULL, inverse = FALSE) {
   A <- as.matrix(a)
   n <- nrow(A)

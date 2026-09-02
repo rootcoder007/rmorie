@@ -19,6 +19,8 @@
 #'   so the standard published form is used; rho is reported by inverting
 #'   V(ybar_sy) = (S^2/n)[1 + (n - 1) rho].
 #' @export
+#' @examples
+#' Sysamp(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
 Sysamp <- function(y, k) {
   y <- .t1_vec(y); N <- length(y); k <- as.integer(k)
   if (k < 1L) stop("the interval k must be at least 1")

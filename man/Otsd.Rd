@@ -30,12 +30,12 @@ Formula: \code{SW_p^p = E_theta int_0^1 |Finv_mu(q) - Finv_nu(q)|^p
 dq}, on the midpoint grid \code{q_k = (k - 1/2)/G} -- Rabin et al.
 (2012) Section 3.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otsd(V, V)
+}
 \references{
 Rabin, J., Peyre, G., Delon, J. and Bernot, M. (2012).
 Lecture Notes in Computer Science 6667:435-446.
 \doi{10.1007/978-3-642-24785-9_37}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Otsd(V, V)
 }

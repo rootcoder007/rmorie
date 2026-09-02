@@ -28,12 +28,12 @@ W(k) = (T - 2m)(SSR_0 - SSR_1(k))/SSR_1(k); asymptotic p-value by
 Hansen (1997) Eq. 8, p = P(chi^2_eta > theta0 + theta1 SupF), with
 Table 2 coefficients selected by (m, trim).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_qlrtst(V)
+}
 \references{
 Quandt, R. E. (1960). JASA, 55, 324-330.  Andrews,
 D. W. K. (1993). Econometrica, 61, 821-856.  Hansen, B. E.
 (1997). Journal of Business & Economic Statistics, 15, 60-67.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_qlrtst(V)
 }

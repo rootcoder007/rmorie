@@ -38,13 +38,13 @@ Formula: x_pred = F x; P_pred = F P F' + Q; S = H P_pred H' + R;
 K = P_pred H' S^{-1}; x = x_pred + K (y - H x_pred);
 P = (I - K H) P_pred.
 }
-\references{
-Kalman (1960), A new approach to linear filtering and
-prediction problems, Transactions of the ASME, Journal of Basic
-Engineering 82(1):35-45. \doi{10.1115/1.3662552}
-}
 \examples{
 set.seed(1)
 y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
 Kalmf(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
+}
+\references{
+Kalman (1960), A new approach to linear filtering and
+prediction problems, Transactions of the ASME, Journal of Basic
+Engineering 82(1):35-45. \doi{10.1115/1.3662552}
 }

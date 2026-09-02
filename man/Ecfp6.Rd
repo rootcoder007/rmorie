@@ -55,6 +55,9 @@ is the stated closed form \eqn{h \leftarrow (1000003 h + v) \bmod
 this implementation's own while the identifier partition is the
 published one.
 }
+\examples{
+Ecfp6(adjacency = 5L, atomnum = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010), "Extended-connectivity
 fingerprints", Journal of Chemical Information and Modeling 50(5),
@@ -64,7 +67,4 @@ implementation, Code/GraphMol/Fingerprints/MorganGenerator.cpp lines
 395-495 and Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines
 242-265, master revision fetched 2026-08-09.  RDKit: Open-Source
 Cheminformatics, https://www.rdkit.org.
-}
-\examples{
-Ecfp6(adjacency = 5L, atomnum = 5L)
 }

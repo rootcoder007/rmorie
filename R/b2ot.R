@@ -127,6 +127,9 @@
 #'   `ncol`, `method`.
 #' @references Peyre & Cuturi (2019), eq. (4.1).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otnegent(V)
 Otnegent <- function(T) {
   m <- .b2mat(T)
   if (any(m < 0)) stop("T must be non-negative", call. = FALSE)
@@ -148,6 +151,8 @@ Otnegent <- function(T) {
 #' @return Named list with `estimate`, `entropy`, `epsilon`, `n`, `method`.
 #' @references Peyre & Cuturi (2019), eq. (4.2).
 #' @export
+#' @examples
+#' Otentreg(T = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Otentreg <- function(T, epsilon) {
   eps <- as.numeric(epsilon)
   if (!(eps > 0)) stop("epsilon must be positive", call. = FALSE)
@@ -201,6 +206,8 @@ Otsinkh <- function(a, b, C, epsilon, max_iter = 200L) {
 #'   `trace`, `method`.
 #' @references Cuturi (2013), Sec. 4.1.
 #' @export
+#' @examples
+#' Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L, tol = 0.5)
 Otsinkit <- function(a, b, C, epsilon, tol, max_iter = 200L) {
   tol <- as.numeric(tol)
   if (!(tol > 0)) stop("tol must be positive", call. = FALSE)
@@ -225,6 +232,8 @@ Otsinkit <- function(a, b, C, epsilon, tol, max_iter = 200L) {
 #'   `nrow`, `ncol`, `method`.
 #' @references Peyre & Cuturi (2019), Sec. 4.2.
 #' @export
+#' @examples
+#' Otsinktol(T = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 Otsinktol <- function(T, a, b) {
   m <- .b2mat(T)
   av <- .b2close(a)
@@ -253,6 +262,8 @@ Otsinktol <- function(T, a, b) {
 #'   `entropy_mean`, `hard`, `method`.
 #' @references Cuturi (2013), eq. (2).
 #' @export
+#' @examples
+#' Otsoftas(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Otsoftas <- function(a, b, C, epsilon, max_iter = 200L) {
   s <- .b2sinkhorn(a, b, C, epsilon, max_iter)
   T <- s$T
@@ -290,6 +301,8 @@ Otsoftas <- function(a, b, C, epsilon, max_iter = 200L) {
 #'   `lambda_`, `iters`, `method`.
 #' @references Cuturi (2013), Definition 1, eq. (2).
 #' @export
+#' @examples
+#' Sinkdist(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
 Sinkdist <- function(a, b, C, eps, max_iter = 200L) {
   epsv <- as.numeric(eps)
   if (!(epsv > 0)) stop("eps must be positive", call. = FALSE)
@@ -312,6 +325,9 @@ Sinkdist <- function(a, b, C, eps, max_iter = 200L) {
 #' @return Named list with `estimate`, `nrow`, `ncol`, `total`, `method`.
 #' @references Peyre & Cuturi (2019), Sec. 2.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otcostsq(V, V)
 Otcostsq <- function(X, Y) {
   A <- .b2mat(X)
   B <- .b2mat(Y)
@@ -334,6 +350,9 @@ Otcostsq <- function(X, Y) {
 #' @return Named list with `estimate`, `p`, `nrow`, `ncol`, `total`, `method`.
 #' @references Peyre & Cuturi (2019), Sec. 2.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otcostlp(V, V)
 Otcostlp <- function(X, Y, p = 2) {
   pv <- as.numeric(p)
   if (pv < 1) stop("p must be at least 1", call. = FALSE)
@@ -401,6 +420,10 @@ Otfreeen <- function(T, C, a, b, f, g, epsilon) {
 #'   `displacement`, `method`.
 #' @references Peyre & Cuturi (2019), eq. (4.19).
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' Otbarmap(M, S)
 Otbarmap <- function(T, Y) {
   Tm <- .b2mat(T)
   B <- .b2mat(Y)
@@ -431,6 +454,8 @@ Otbarmap <- function(T, Y) {
 #'   up to a constant moving between `f` and `g`.
 #' @references Peyre & Cuturi (2019), eq. (4.31).
 #' @export
+#' @examples
+#' Otlogpot(u = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Otlogpot <- function(u, v, epsilon) {
   eps <- as.numeric(epsilon)
   if (!(eps > 0)) stop("epsilon must be positive", call. = FALSE)
@@ -456,6 +481,8 @@ Otlogpot <- function(u, v, epsilon) {
 #'   `method`.
 #' @references Peyre & Cuturi (2019), eq. (2.8).
 #' @export
+#' @examples
+#' Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8), T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Otpushfw <- function(mu_grid, T_jac, T_inv_grid) {
   mu <- as.numeric(mu_grid)
   jac <- as.numeric(T_jac)

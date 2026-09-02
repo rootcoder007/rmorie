@@ -27,6 +27,9 @@
 #'   Learning, 515-521.
 #' @seealso \code{\link{Krreg}}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' KrrFDA(V, V)
 KrrFDA <- function(X, y, kernel = "gaussian", lam = 1, x_eval = NULL,
                    bandwidth = NULL) {
   Krreg(X, y, x_eval, bandwidth = bandwidth, penalty = lam, kernel = kernel)

@@ -21,10 +21,10 @@ Hyndman & Athanasopoulos, FPP 3rd ed., Sec. 11.3.  The proportions
 are closed to sum 1 so the parts add back to the total; the raw sum
 is reported so a caller who supplied unnormalised proportions sees it.
 }
-\references{
-Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Topdown(V, V)
+}
+\references{
+Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 }

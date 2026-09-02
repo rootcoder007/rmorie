@@ -31,11 +31,11 @@ S10 = sum(xs_t xs_{t-1} + Pcs_t), S00 = sum(xs_{t-1}^2 + Ps_{t-1}),
 the M-step is exactly phi = S10 / S00, Q = (S11 - phi S10) / n and
 R = mean((y_t - xs_t)^2 + Ps_t).
 }
-\references{
-Shumway & Stoffer (1982), J. Time Series Analysis
-3(4):253-264, doi:10.1111/j.1467-9892.1982.tb00349.x.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Emkfst(V)
+}
+\references{
+Shumway & Stoffer (1982), J. Time Series Analysis
+3(4):253-264, doi:10.1111/j.1467-9892.1982.tb00349.x.
 }

@@ -30,10 +30,10 @@ dropout masks, so the objective needs no labelled pairs at all.  When
 every similarity is identical the loss is exactly log N, the value it
 must return on a degenerate batch.
 }
-\references{
-Gao, Yao & Chen (2021), SimCSE, EMNLP 2021:6894-6910.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Contse(M)
+}
+\references{
+Gao, Yao & Chen (2021), SimCSE, EMNLP 2021:6894-6910.
 }

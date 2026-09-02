@@ -24,12 +24,12 @@ can see whether the choice was clear-cut.
 \details{
 Formula: gamma_k = |lambda_k - lambda_\{k+1\}|; khat = argmax_k gamma_k
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Eigengap(V)
+}
 \references{
 von Luxburg (2007), A Tutorial on Spectral Clustering,
 Statistics and Computing 17(4), 395-416, Section 8.3. Fetched from
 arXiv:0711.0189.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Eigengap(V)
 }

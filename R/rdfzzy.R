@@ -23,6 +23,9 @@
 #'   Econometrica 69(1):201-209. \doi{10.1111/1468-0262.00183}; the fuzzy
 #'   design is their Theorem 3.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Rdfzzy(y = rnorm(10), x = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Rdfzzy <- function(y, x, D, cutoff = 0, bandwidth = 1) {
   y <- as.numeric(unlist(y)); x <- as.numeric(unlist(x)); D <- as.numeric(unlist(D))
   if (length(y) == 0L) stop("Rdfzzy: y is empty")

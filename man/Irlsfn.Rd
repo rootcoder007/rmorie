@@ -29,12 +29,12 @@ caller can iterate.
 \details{
 Formula: beta = (X' W X)^-1 X' W y.
 }
+\examples{
+Irlsfn(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Holland and Welsch (1977), Robust regression using
 iteratively reweighted least-squares, Communications in Statistics
 -- Theory and Methods 6(9):813-827.
 \doi{10.1080/03610927708827533}
-}
-\examples{
-Irlsfn(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

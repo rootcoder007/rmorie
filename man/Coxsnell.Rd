@@ -25,9 +25,9 @@ list with the Cox-Snell residuals and the Nelson-Aalen estimate computed from th
 r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i, the fitted cumulative hazard.
 If the model is right these behave like a censored unit exponential sample.
 }
-\references{
-Cox, D. R. and Snell, E. J. (1968). A general definition of residuals. JRSS-B 30(2), 248-275.
-}
 \examples{
 Coxsnell(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}
+\references{
+Cox, D. R. and Snell, E. J. (1968). A general definition of residuals. JRSS-B 30(2), 248-275.
 }

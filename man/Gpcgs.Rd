@@ -50,17 +50,17 @@ of the paper, so the two arms follow the same path.  At the starting
 point q(u) = p(u) the KL term is exactly zero.
 }
 \details{
-Formula: L = sum_i E_q[log p(y_i | f_i)] - KL(q(u) || p(u)),
+Formula: L = sum_i E_q\link{log p(y_i | f_i)} - KL(q(u) || p(u)),
 mu_i = a_i' m, var_i = k_ii - a_i'(K_mm - S) a_i.
-}
-\references{
-Hensman, Matthews and Ghahramani (2015), Scalable
-variational Gaussian process classification, AISTATS 2015, PMLR
-38:351-360. arXiv:1411.2005
 }
 \examples{
 set.seed(1)
 X <- matrix(rnorm(20), 10, 2)
 y <- rbinom(10, 1, 0.5)
 Gpcgs(X, y)
+}
+\references{
+Hensman, Matthews and Ghahramani (2015), Scalable
+variational Gaussian process classification, AISTATS 2015, PMLR
+38:351-360. arXiv:1411.2005
 }

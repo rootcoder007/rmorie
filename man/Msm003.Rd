@@ -15,12 +15,12 @@ List with estimate, beta, sd_residual, method.
 \description{
 Formula: GY_ij = beta_i + e_ij (eq. 1.3), a separate fixed effect per level.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Msm003(D)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (1.3) p.16. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-Msm003(D)
 }

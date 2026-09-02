@@ -24,14 +24,14 @@ two largest parties' majorities oppose each other count (the CQ
 convention). Ties within a party leave that roll call undefined for
 its members. Mirrors \code{morie.fn.agpar}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_party_unity(V, V)
+}
 \references{
 Poole KT, Rosenthal H (1997). \emph{Congress: A
 Political-Economic History of Roll Call Voting}. Oxford University
 Press. Rice SA (1925). The behavior of legislative groups: a
 method of measurement. \emph{Political Science Quarterly} 40(1),
 60-72.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_party_unity(V, V)
 }

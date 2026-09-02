@@ -28,11 +28,6 @@ two EIFs, which is why dividing the point estimates alone is not
 enough: the denominator's uncertainty has to enter. Mirrors
 \code{morie.fn.tmlivc}.
 }
-\references{
-Imbens GW, Angrist JD (1994). Identification and
-estimation of local average treatment effects. \emph{Econometrica}
-62(2), 467-475.
-}
 \examples{
 set.seed(3)
 n <- 150
@@ -42,4 +37,9 @@ d <- rbinom(n, 1, plogis(-0.5 + 1.5 * z))
 y <- 1 + 0.8 * d + X[, 1] + rnorm(n, 0, 0.5)
 r <- morie_tmle_late(y, d, z, covariates = X)
 str(r, max.level = 1)
+}
+\references{
+Imbens GW, Angrist JD (1994). Identification and
+estimation of local average treatment effects. \emph{Econometrica}
+62(2), 467-475.
 }

@@ -19,10 +19,10 @@ List with \code{K}, \code{gamma}, \code{n}, \code{m}.
 \description{
 Formula: K(x_i, x_j) = exp(-gamma * ||x_i - x_j||)
 }
-\references{
-Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2 p. 264: the book calls this the Exponential Kernel, K(x_i, x_j) = exp(-gamma ||x_i - x_j||), and notes it is close to the Gaussian kernel.  NOTE: the placeholder this replaced was named for the Laplacian kernel; the book's display uses the Euclidean norm, not the L1 norm that the name Laplacian kernel usually implies, and the book's form is what is implemented.  Read from the chapter PDF, not recalled.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Expkern(V)
+}
+\references{
+Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2 p. 264: the book calls this the Exponential Kernel, K(x_i, x_j) = exp(-gamma ||x_i - x_j||), and notes it is close to the Gaussian kernel.  NOTE: the placeholder this replaced was named for the Laplacian kernel; the book's display uses the Euclidean norm, not the L1 norm that the name Laplacian kernel usually implies, and the book's form is what is implemented.  Read from the chapter PDF, not recalled.
 }

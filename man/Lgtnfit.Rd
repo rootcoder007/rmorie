@@ -26,11 +26,11 @@ that value is comparable with aitlnp.
 Formula: Y = alr(X); muhat = mean(Y);
 Sigmahat = sum (Y_k - muhat)(Y_k - muhat)' / (n - ddof)
 }
-\references{
-Aitchison (1986), The Statistical Analysis of
-Compositional Data, Chapter 7.
-}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 Lgtnfit(D)
+}
+\references{
+Aitchison (1986), The Statistical Analysis of
+Compositional Data, Chapter 7.
 }

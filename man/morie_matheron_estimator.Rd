@@ -26,11 +26,11 @@ Equation (4.24). Provided alongside \code{\link[=morie_cressie_hawkins]{morie_cr
 two can be read on identical lag classes; \code{morie_spatial_variogram}
 bins differently and is kept for backwards compatibility.
 }
-\references{
-Schabenberger O, Gotway CA (2005), Sec 4.4.1, eq (4.24)
-and (4.25), pp. 153-158.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_matheron_estimator(V, V)
+}
+\references{
+Schabenberger O, Gotway CA (2005), Sec 4.4.1, eq (4.24)
+and (4.25), pp. 153-158.
 }

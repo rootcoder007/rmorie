@@ -38,13 +38,13 @@ Formula: C = P_t F' P_{t+1|t}^{-1};
 x_{t|n} = x_{t|t} + C (x_{t+1|n} - x_{t+1|t});
 P_{t|n} = P_{t|t} + C (P_{t+1|n} - P_{t+1|t}) C'.
 }
-\references{
-Rauch, Tung and Striebel (1965), Maximum likelihood
-estimates of linear dynamic systems, AIAA Journal 3(8):1445-1450.
-\doi{10.2514/3.3166}
-}
 \examples{
 set.seed(1)
 y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
 KalmS(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
+}
+\references{
+Rauch, Tung and Striebel (1965), Maximum likelihood
+estimates of linear dynamic systems, AIAA Journal 3(8):1445-1450.
+\doi{10.2514/3.3166}
 }

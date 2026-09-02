@@ -22,6 +22,9 @@
 #' @references Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
 #'   2014:701-710.
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
+#' Deepwk(G, dim = 4, walk_len = 5, n_walks = 2)
 Deepwk <- function(G, walk_len = 10, dim = 8, n_walks = 4, window = 3,
                    epochs = 1, lr = 0.05, neg = 2, seed = 42) {
   Deepw(G, walk_len, dim, n_walks, window, epochs, lr, neg, seed)

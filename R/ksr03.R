@@ -17,6 +17,9 @@
 #'   Massart (1990), Annals of Probability 18(3), 1269-1283; it is NOT in
 #'   Kosorok and is cited to its own source.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Glivenko(V, V)
 Glivenko <- function(x, F) {
   x <- .t1_vec(x); F <- .t1_vec(F); n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")

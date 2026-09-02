@@ -9,6 +9,9 @@
 #' @return List with ``loss``, ``mean_loss``, ``n``, ``L``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7, pp. 400-403.  Read from the chapter PDF, not recalled.  The book notes that dividing by two is for convenience in the backpropagation gradient, and that it is also common to report the SSE divided by n times L; ``mean_loss`` is that per-cell value.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ssello(V, V)
 Ssello <- function(Y, Yhat) {
   Y <- .t1_mat(Y); H <- .t1_mat(Yhat)
   if (nrow(Y) == 0L || nrow(Y) != nrow(H) || ncol(Y) != ncol(H))

@@ -30,14 +30,14 @@ which is the point of the construction.
 Formula: O = the ceiling(frac d) coordinates of largest |x_j|;
 effective bits = (|O| b_out + (d - |O|) b_in) / d
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Outsplit(V)
+}
 \references{
 Zandieh et al., arXiv:2504.19874, on splitting channels
 into outlier and non-outlier sets and applying two independent
 TurboQuant instances with higher precision for outliers. Fetched from
 arXiv. The paper does not fix the split RULE; magnitude-rank
 selection is used here and documented as such.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Outsplit(V)
 }

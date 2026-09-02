@@ -20,6 +20,8 @@
 #'   Introduction to Statistical Modeling of Extreme Values, Springer,
 #'   eq. (8.10) p. 146.
 #' @export
+#' @examples
+#' Evmsexp(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 Evmsexp <- function(x, y, alpha) {
   xs <- .s03vec(x); ys <- .s03vec(y); alpha <- as.numeric(alpha)
   if (!length(xs) || !length(ys)) stop("empty input: x and y are required")

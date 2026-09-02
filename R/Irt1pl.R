@@ -15,6 +15,9 @@
 #' @references Rasch (1960), Probabilistic Models for Some Intelligence
 #'   and Attainment Tests, Danmarks Paedagogiske Institut.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Irt1pl(y = rnorm(10), theta = rnorm(10), b = matrix(rnorm(20), 5, 4)); TRUE
 Irt1pl <- function(y, theta, b) {
   ys <- as.integer(.s03vec(y))
   th <- .s03vec(theta)

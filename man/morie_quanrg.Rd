@@ -24,12 +24,12 @@ Enumerates the basic solutions of Theorem 3.1 (exact fits through
 K observations) and returns the minimizer of the asymmetric
 absolute loss; exact for K <= 3 coefficients.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_quanrg(V)
+}
 \references{
 Koenker, R. and Bassett, G. (1978). Regression
 quantiles. Econometrica, 46(1), 33-50.  Koenker, R. (2005).
 Quantile Regression. Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_quanrg(V)
 }

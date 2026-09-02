@@ -31,6 +31,9 @@
 #'   Algorithm section, p. 3711. Source: PMC3037731 (saved as
 #'   library/pdf/fetched-wave3/Boyle-2004-GO-TermFinder-Bioinformatics.html).
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Goenr(hits = rnorm(10), list_size = 8L, term_size = 8L, background_size = 8L); TRUE
 Goenr <- function(hits, list_size, term_size, background_size,
                   correction = c("none", "bonferroni")) {
   correction <- match.arg(correction)

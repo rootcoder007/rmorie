@@ -20,10 +20,10 @@ List with \code{statistic}, \code{p_value}, \code{df}, \code{n}.
 F-test of the x-lag block in an AR model for y. Mirrors
 \code{morie.fn.ggrcst}.
 }
-\references{
-Granger CWJ (1969). \emph{Econometrica} 37(3), 424-438.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_granger_test(V, V)
+}
+\references{
+Granger CWJ (1969). \emph{Econometrica} 37(3), 424-438.
 }

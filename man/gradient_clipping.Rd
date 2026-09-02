@@ -17,8 +17,8 @@ Named list with tensor (clipped), clip_coef, total_norm, max_norm, method.
 \description{
 Global-norm gradient clip (Pascanu 2013)
 }
-\keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 gradient_clipping(V)
 }
+\keyword{internal}

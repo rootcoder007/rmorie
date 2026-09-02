@@ -101,6 +101,9 @@
 #' @references MacEachern (1994), Commun. Statist. B 23(3):727-741;
 #'   Neal (2000), J. Comput. Graph. Statist. 9(2):249-265, algorithm 3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Crpcol(V)
 Crpcol <- function(y, alpha = 1, n_iter = 50, mu0 = 0, tau2 = 10,
                    sigma2 = 1, seed = 42) {
   y <- .s03vec(y)

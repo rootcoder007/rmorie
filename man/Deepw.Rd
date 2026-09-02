@@ -50,11 +50,11 @@ assumption: from a node of degree d each neighbour is taken with
 probability exactly 1/d, so the stationary distribution is
 proportional to degree.
 }
-\references{
-Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
-2014:701-710.
-}
 \examples{
 G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
 Deepw(G, dim = 4, walk_len = 5, n_walks = 2)
+}
+\references{
+Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
+2014:701-710.
 }

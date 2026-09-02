@@ -21,6 +21,8 @@
 #'   Peyre, G. (2015). SIAM Journal on Scientific Computing
 #'   37(2):A1111-A1138. \doi{10.1137/141000439}.
 #' @export
+#' @examples
+#' Otbreg(K = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 Otbreg <- function(K, a, b, max_iter = 200) {
   Km <- as.matrix(K)
   aa <- .ot_hist(a); bb <- .ot_hist(b)

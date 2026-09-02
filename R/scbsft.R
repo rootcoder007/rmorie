@@ -18,6 +18,9 @@
 #' @references Tsiatis, A. A., Davidian, M., Zhang, M. & Lu, X. (2008).
 #'   Statistics in Medicine 27:4658-4677, section 3.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Scbsft(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), baseline = rnorm(10)); TRUE
 Scbsft <- function(y, D, X, baseline) {
   yv <- as.numeric(y); Dv <- as.numeric(D); bl <- as.numeric(baseline)
   n <- length(yv)

@@ -101,6 +101,15 @@
 #' @references Andersen, P. K. and Gill, R. D. (1982), Annals of
 #'   Statistics 10(4), 1100-1120.
 #' @export
+#' @examples
+#' set.seed(1)
+#' occ <- rep(1:3, times = 20)
+#' start <- (occ - 1) * 10
+#' stop <- occ * 10 - runif(60, 0, 3)
+#' event <- rbinom(60, 1, 0.6)
+#' X <- matrix(rnorm(60 * 2), 60, 2)
+#' fit <- Agrec(start, stop, event, X)
+#' length(fit$estimate) == 2L
 Agrec <- function(start, stop, event, X, max_iter = 50L, tol = 1e-9) {
   fit <- .morie_cox_counting(start, stop, event, X,
                              max_iter = max_iter, tol = tol)
@@ -124,6 +133,15 @@ Agrec <- function(start, stop, event, X, max_iter = 50L, tol = 1e-9) {
 #' @references Prentice, R. L., Williams, B. J. and Peterson, A. V.
 #'   (1981), Biometrika 68(2), 373-379.
 #' @export
+#' @examples
+#' set.seed(1)
+#' occ <- rep(1:3, times = 20)
+#' start <- (occ - 1) * 10
+#' stop <- occ * 10 - runif(60, 0, 3)
+#' event <- rbinom(60, 1, 0.6)
+#' X <- matrix(rnorm(60 * 2), 60, 2)
+#' fit <- Pwpgt(start, stop, event, X, occurrence = occ)
+#' length(fit$estimate) == 2L
 Pwpgt <- function(start, stop, event, X, occurrence,
                   max_iter = 50L, tol = 1e-9) {
   gap <- as.numeric(stop) - as.numeric(start)
@@ -152,6 +170,14 @@ Pwpgt <- function(start, stop, event, X, occurrence,
 #' @references Wei, L. J., Lin, D. Y. and Weissfeld, L. (1989), JASA
 #'   84(408), 1065-1073.
 #' @export
+#' @examples
+#' set.seed(1)
+#' occ <- rep(1:3, times = 20)
+#' stop <- occ * 10 - runif(60, 0, 3)
+#' event <- rbinom(60, 1, 0.6)
+#' X <- matrix(rnorm(60 * 2), 60, 2)
+#' fit <- Wlwmm(time = stop, event, X, occurrence = occ)
+#' is.list(fit)
 Wlwmm <- function(time, event, X, occurrence, max_iter = 50L, tol = 1e-9) {
   t <- as.numeric(time); e <- as.numeric(event)
   Xm <- as.matrix(X); storage.mode(Xm) <- "double"
@@ -192,6 +218,8 @@ Wlwmm <- function(time, event, X, occurrence, max_iter = 50L, tol = 1e-9) {
 #' @references Antolini, L., Boracchi, P. and Biganzoli, E. (2005),
 #'   Statistics in Medicine 24(24), 3927-3944.
 #' @export
+#' @examples
+#' Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 Survtdc <- function(time, event, marker, t) {
   tt <- as.numeric(time); e <- as.numeric(event); m <- as.numeric(marker)
   t <- as.numeric(t)[1]

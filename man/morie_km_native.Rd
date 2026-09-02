@@ -35,10 +35,10 @@ Intervals are on the log-log scale by default. A linear interval can
 leave \[0, 1\], and does so exactly in the tails, where the estimate is
 least precise.
 }
+\examples{
+morie_km_native(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}
 \references{
 Kaplan EL, Meier P (1958) \emph{JASA} 53:457-481.
 Greenwood M (1926). Kalbfleisch & Prentice (2002), Sec 1.4.
-}
-\examples{
-morie_km_native(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 }

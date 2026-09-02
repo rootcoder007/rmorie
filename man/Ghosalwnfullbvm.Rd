@@ -30,10 +30,10 @@ dimensions.
 Formula: posterior mean = Y prior_var / (prior_var + 1/n);
 posterior variance = 1 / (1/prior_var + n).
 }
+\examples{
+Ghosalwnfullbvm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.4.1.
-}
-\examples{
-Ghosalwnfullbvm()
 }

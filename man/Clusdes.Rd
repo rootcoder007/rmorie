@@ -28,7 +28,10 @@ than on the rounding.
 }
 \details{
 Formula: k_opt = sqrt( c1 (1 - rho) / (c2 rho) );
-m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) [1 + (k - 1) rho]
+m = budget / (c1 + c2 k); V(ybar) = (S^2 / (m k)) \link{1 + (k - 1) rho}
+}
+\examples{
+Clusdes(rho = 0.05, S2 = 1, c1 = 10, c2 = 1, budget = 1000)
 }
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
@@ -36,7 +39,4 @@ Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 against the linear cost function c1 m + c2 m k. Chapter 9 was NOT in
 the scanned excerpt available to this batch, so the standard
 published form is used.
-}
-\examples{
-Clusdes(rho = 0.05, S2 = 1, c1 = 10, c2 = 1, budget = 1000)
 }

@@ -15,6 +15,9 @@
 #'   \code{acf}, \code{n}, \code{method}.
 #' @references Ljung and Box (1978), On a measure of lack of fit in time series models, Biometrika 65:297-303.  Paywalled at JSTOR (HTTP 403); the statistic was taken from R's own stats::Box.test (src/library/stats/R/ts-tests.R), the canonical reference implementation.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ljungbox(V)
 Ljungbox <- function(y, lags = 1, fitdf = 0) {
   y <- .t4_vec(y); n <- length(y); m <- as.integer(lags); fitdf <- as.integer(fitdf)
   if (m < 1 || n <= m) stop("need 1 <= lags < length(y)")

@@ -20,6 +20,8 @@
 #'   Partitioning variation in multilevel models. Understanding
 #'   Statistics, 1(4), 223-231.
 #' @export
+#' @examples
+#' morie_vpc(sigma2_u = 5L)
 morie_vpc <- function(sigma2_u, link = "logit") {
   s2u <- as.numeric(sigma2_u)
   if (s2u < 0) stop("sigma2_u must be non-negative")

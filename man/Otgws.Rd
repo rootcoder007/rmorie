@@ -2,7 +2,8 @@
 % Please edit documentation in R/otgws.R
 \name{Otgws}
 \alias{Otgws}
-\title{Couple two spaces that have no common ground metric}
+\title{and Cuturi (2019) eq. (10.27)-(10.28), p. 176; Peyre, Cuturi and
+Solomon (2016).}
 \usage{
 Otgws(Cx, Cy, a, b, epsilon, max_iter = 20, inner_iter = 200)
 }
@@ -24,17 +25,6 @@ List with \code{T}, \code{cost}, \code{GW}, \code{n},
 \code{m}, \code{iters}.
 }
 \description{
-Ordinary transport needs a cost between a point of one space and a
-point of the other. When the two live in different spaces -- a graph
-and a point cloud, say -- no such cost exists, and the only thing that
-can be compared is the pattern of within-space distances. The resulting
-objective is quadratic in the plan, so it is minimised by repeatedly
-linearising it and running Sinkhorn on the linearisation.
-}
-\details{
-The Gromov objective is not convex, so what the iteration returns is a
-stationary point. When the two spaces share a symmetry and the plan is
-started at \eqn{ b prime}, which is itself symmetric, the iteration cannot
 and Cuturi (2019) eq. (10.27)-(10.28), p. 176; Peyre, Cuturi and
 Solomon (2016).
 }

@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.5.3.
 #' @export
+#' @examples
+#' Ghosalparamnpbf()
 Ghosalparamnpbf <- function(n = 1500, parametric_truth = TRUE, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")

@@ -23,9 +23,9 @@ The implied direct effect is returned so the gap is visible.
 \details{
 Formula: \code{PTE = NIE / TE}.
 }
-\references{
-VanderWeele, T. J. (2013). Epidemiology 24:175-176.
-}
 \examples{
 Pmedex(nie = c(1, 2, 3, 4, 5, 6, 7, 8), te = 5L)
+}
+\references{
+VanderWeele, T. J. (2013). Epidemiology 24:175-176.
 }

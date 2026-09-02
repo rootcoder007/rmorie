@@ -22,10 +22,10 @@ Named list with \code{estimate} (the gap), \code{ixy}, \code{ixz},
 Cover & Thomas (2006), Section 2.8, Theorem 2.8.1, p. 34.  A
 deterministic identity, not a hypothesis test.
 }
-\references{
-Cover & Thomas (2006), Theorem 2.8.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dpineq(V)
+}
+\references{
+Cover & Thomas (2006), Theorem 2.8.1.
 }

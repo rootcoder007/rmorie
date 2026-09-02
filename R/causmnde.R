@@ -21,6 +21,8 @@
 #'   Inference, Oxford University Press, chapter 14; VanderWeele (2014)
 #'   Epidemiology 25:749-761.
 #' @export
+#' @examples
+#' Causmnde(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Causmnde <- function(X, M, Y, Cc = NULL, a = 1, astar = 0, m = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- .s4_fourway(mm$theta, mm$beta, mm$cbar, a, astar, m)

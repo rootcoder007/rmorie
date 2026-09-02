@@ -14,6 +14,10 @@
 #'   18(14); arXiv:1603.00788, Sects. 2.3-2.5 and Equation (5), read from
 #'   the ar5iv rendering of the arXiv source.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Advielbo(mu = c(0, 0), omega = c(0, 0), eta = matrix(rnorm(4), 2, 2),
+#'          logjoint = function(x) -0.5 * sum(x^2))
 Advielbo <- function(mu, omega, eta, logjoint) {
   mu <- .t1_vec(mu); omega <- .t1_vec(omega)
   E <- .t1_mat(eta)

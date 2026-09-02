@@ -19,12 +19,12 @@ List with value, expected, prob, support, epsilon, k.
 \description{
 Softmax the head over the integer support -support..support, take the
 expectation y, then invert h(x) = sign(x)(sqrt(|x|+1) - 1 + eps x):
-h^{-1}(y) = sign(y)[((sqrt(1 + 4 eps(|y| + 1 + eps)) - 1)/(2 eps))^2 - 1].
+h^{-1}(y) = sign(y)\link{((sqrt(1 + 4 eps(|y| + 1 + eps)) - 1)/(2 eps))^2 - 1}.
+}
+\examples{
+Mzvalue(c(0, 1, 0), support = 1)
 }
 \references{
 Schrittwieser et al. (2020), arXiv:1911.08265, Appendix F.
 Read from the ar5iv rendering of the arXiv source.
-}
-\examples{
-Mzvalue(c(0, 1, 0), support = 1)
 }

@@ -32,10 +32,10 @@ lr = 1 and diverges beyond -- the behaviour the tests pin down.
 \details{
 Formula: x <- x - lr * grad f(x).
 }
+\examples{
+Gradds(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
+}
 \references{
 Cauchy (1847), Methode generale pour la resolution des
 systemes d'equations simultanees, C. R. Acad. Sci. Paris 25:536-538.
-}
-\examples{
-Gradds(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
 }

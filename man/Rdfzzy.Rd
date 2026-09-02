@@ -34,12 +34,12 @@ a denominator of exactly one the estimator collapses to the sharp one.
 Formula: \code{tau_LATE = (lim Y+ - lim Y-) / (lim D+ - lim D-)}; the
 standard error is the delta method applied to that ratio.
 }
+\examples{
+set.seed(1)
+r <- Rdfzzy(y = rnorm(10), x = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}
 \references{
 Hahn, J., Todd, P. & Van der Klaauw, W. (2001).
 Econometrica 69(1):201-209. \doi{10.1111/1468-0262.00183}; the fuzzy
 design is their Theorem 3.
-}
-\examples{
-set.seed(1)
-r <- Rdfzzy(y = rnorm(10), x = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 }

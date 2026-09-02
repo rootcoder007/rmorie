@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.3.2.
 #' @export
+#' @examples
+#' Ghosalstrictsbvm()
 Ghosalstrictsbvm <- function(prior_mass_ok = TRUE, lan_remainder = 0.01,
                              change_of_measure_gap = 0.02, tol = 0.05) {
   lan <- as.numeric(lan_remainder)

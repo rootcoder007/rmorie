@@ -31,11 +31,11 @@ ordering heuristic of their Table 2 makes the search fast without
 changing the answer: it is exact, not approximate, because the
 early abandon only discards candidates that provably cannot win.
 }
+\examples{
+morie_hot(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 3L)
+}
 \references{
 Keogh, E., Lin, J. and Fu, A. (2005). HOT SAX:
 efficiently finding the most unusual time series subsequence.
 ICDM 2005, 226-233.
-}
-\examples{
-morie_hot(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 3L)
 }

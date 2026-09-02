@@ -19,6 +19,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 1.3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalpriorposteriorupdate(V)
 Ghosalpriorposteriorupdate <- function(x, data = NULL, log_lik_one = NULL,
                                        log_prior = NULL) {
   th <- as.numeric(x)

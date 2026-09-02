@@ -19,6 +19,9 @@
 #'   \code{method}.
 #' @references Kish (1965), Survey Sampling, Wiley, sections 8.2 and 5.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Desigeff(V)
 Desigeff <- function(y, weights = NULL, cluster = NULL) {
   y <- .s03vec(y)
   n <- length(y)

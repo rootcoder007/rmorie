@@ -18,12 +18,12 @@ List with estimate, sse, method.
 Formula: E = (1/2) sum_i sum_j (y-hat_ij - y_ij)^2 (eq. 10.5), the loss
 whose partial derivatives with respect to the weights drive backpropagation.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm249(V, V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (10.5) p.409. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm249(V, V)
 }

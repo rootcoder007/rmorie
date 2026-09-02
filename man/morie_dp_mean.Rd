@@ -60,12 +60,12 @@ The width \code{C} must come from prior knowledge of the domain. Taking it
 from the range of \code{y} makes it a function of the private data and
 voids the guarantee; that case is flagged in \code{warnings}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_dp_mean(V)
+}
 \references{
 Dwork C, Roth A (2014) \emph{Found Trends Theor Comput
 Sci} 9(3-4):211-487, Sec 3.3 and Thm A.1. Karwa V, Vadhan S (2017)
 arXiv:1711.03908.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_dp_mean(V)
 }

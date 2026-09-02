@@ -17,6 +17,9 @@
 #'   and Equation (1).  Read from the ar5iv rendering; the same paper is
 #'   in the local corpus.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Distilkl(V, V)
 Distilkl <- function(teacher, student, temperature = 2, label = NULL,
                      alpha = 0.5) {
   t <- .t1_vec(teacher); s <- .t1_vec(student); T <- as.numeric(temperature)

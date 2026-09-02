@@ -17,6 +17,9 @@
 #'   Mathematische Zeitschrift 9, 74-109, and is cited to its own source.
 #'   Ghosal read from the copy of the book held in the corpus.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Momprior(V)
 Momprior <- function(moments) {
   m <- .t1_vec(moments); N <- length(m)
   if (N < 1L) stop("at least the zeroth moment is required")

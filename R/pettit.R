@@ -14,6 +14,9 @@
 #'   \code{changepoint} (1-based), \code{U}, \code{n}, \code{method}.
 #' @references Pettitt (1979), JRSS C 28:126-135.  Paywalled; the coded form was read from Pohlert's CRAN package trend (R/pettitt.test.R), which follows Verstraeten et al. (2006).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Pettitt(V)
 Pettitt <- function(x) {
   x <- .t4_vec(x); n <- length(x)
   if (n < 2) stop("need at least 2 observations")

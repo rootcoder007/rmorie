@@ -31,12 +31,12 @@ Formula: \code{(1/M) sum_m OT_eps(X_m, Y_m)} over \code{M} batches --
 Fatras et al. (2020) eq. (3). The batches here are consecutive slices,
 taken cyclically, so the estimate is deterministic.
 }
+\examples{
+set.seed(1)
+r <- Otmm(X = rnorm(10), Y = rnorm(10), batch_size = 8L, n_batches = 8L, epsilon = 0.5); TRUE
+}
 \references{
 Fatras, K., Zine, Y., Flamary, R., Gribonval, R. and
 Courty, N. (2020). Proceedings of Machine Learning Research
 108:2131-2141 (AISTATS).
-}
-\examples{
-set.seed(1)
-r <- Otmm(X = rnorm(10), Y = rnorm(10), batch_size = 8L, n_batches = 8L, epsilon = 0.5); TRUE
 }

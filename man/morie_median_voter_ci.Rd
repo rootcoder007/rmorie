@@ -31,11 +31,11 @@ With an even electorate every point between the two central ideal
 points is a Condorcet winner, so the winner is a set; \code{unique_winner}
 says whether it collapses to a point.
 }
-\references{
-Black D (1948) \emph{Journal of Political Economy}
-56(1):23-34, \doi{10.1086/256633}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_median_voter_ci(V)
+}
+\references{
+Black D (1948) \emph{Journal of Political Economy}
+56(1):23-34, \doi{10.1086/256633}.
 }

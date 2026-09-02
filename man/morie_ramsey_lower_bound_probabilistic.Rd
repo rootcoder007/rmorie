@@ -25,9 +25,9 @@ seventy-five years later no explicit construction comes close. The
 union-bound calculation is also stronger than the clean
 \eqn{2^{k/2}} form usually quoted from it.
 }
-\references{
-Erdos P (1947) \emph{Bulletin of the AMS} 53:292-294.
-}
 \examples{
 morie_ramsey_lower_bound_probabilistic(k = 5L)
+}
+\references{
+Erdos P (1947) \emph{Bulletin of the AMS} 53:292-294.
 }

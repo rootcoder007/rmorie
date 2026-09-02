@@ -33,6 +33,11 @@ inverse-probability-weighted estimator; positive lambda encodes
 \details{
 Formula: mu(lam) = sum C exp(-lam Y) Y / pi / sum C exp(-lam Y) / pi.
 }
+\examples{
+set.seed(1)
+IpwSn(Y = rnorm(20), X = matrix(rnorm(40), 20, 2), C = rbinom(20, 1, 0.5),
+      lam_grid = c(0, 0.5, 1))
+}
 \references{
 Robins, Rotnitzky and Scharfstein (2000), Sensitivity
 analysis for selection bias and unmeasured confounding, IMA Volumes
@@ -40,9 +45,4 @@ in Mathematics and its Applications 116, Springer, pp. 1-94,
 \doi{10.1007/978-1-4612-1284-3_1}; Scharfstein, Rotnitzky and
 Robins (1999), JASA 94(448):1096-1120.
 \doi{10.1080/01621459.1999.10473862}
-}
-\examples{
-set.seed(1)
-IpwSn(Y = rnorm(20), X = matrix(rnorm(40), 20, 2), C = rbinom(20, 1, 0.5),
-      lam_grid = c(0, 0.5, 1))
 }

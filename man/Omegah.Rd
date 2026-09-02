@@ -27,11 +27,11 @@ putting only the general-factor loadings in the numerator.
 Formula: \code{omega_h = (sum lambda_g)^2 / Var(T)},
 \code{Var(T) = (sum lambda_g)^2 + (sum lambda_s)^2 + sum psi}.
 }
-\references{
-Zinbarg, Revelle, Yovel & Li (2005) Psychometrika
-70:123-133; McDonald, R. P. (1999), Test Theory, ch 6.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Omegah(V, V)
+}
+\references{
+Zinbarg, Revelle, Yovel & Li (2005) Psychometrika
+70:123-133; McDonald, R. P. (1999), Test Theory, ch 6.
 }

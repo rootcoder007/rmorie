@@ -9,7 +9,7 @@ Reffec(R0, S, N)
 \arguments{
 \item{R0}{Basic reproduction number, non-negative.}
 
-\item{S}{Current susceptible count in [0, N].}
+\item{S}{Current susceptible count in \link{0, N}.}
 
 \item{N}{Population size, positive.}
 }
@@ -32,13 +32,13 @@ susceptible fraction reaches \code{1 / R0}.
 
 Formula: \code{Rt = R0 S / N}; growing iff \code{Rt > 1}.
 }
+\examples{
+Reffec(R0 = 5L, S = 5L, N = 5L)
+}
 \references{
 Diekmann, O., Heesterbeek, J. A. P. & Metz, J. A. J.
 (1990). On the definition and the computation of the basic
 reproduction ratio R0 in models for infectious diseases in
 heterogeneous populations. Journal of Mathematical Biology
 28(4):365-382. \doi{10.1007/BF00178324}.
-}
-\examples{
-Reffec(R0 = 5L, S = 5L, N = 5L)
 }

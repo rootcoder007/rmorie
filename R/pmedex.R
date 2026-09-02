@@ -13,6 +13,8 @@
 #' @return List with \code{estimate}, \code{implied_nde}, \code{te}.
 #' @references VanderWeele, T. J. (2013). Epidemiology 24:175-176.
 #' @export
+#' @examples
+#' Pmedex(nie = c(1, 2, 3, 4, 5, 6, 7, 8), te = 5L)
 Pmedex <- function(nie, te) {
   nie <- as.numeric(nie); te <- as.numeric(te)
   .t1_result(estimate = if (te != 0) nie / te else NaN,

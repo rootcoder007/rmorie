@@ -25,6 +25,9 @@
 #'   Pepper (2000), Econometrica 68(4), 997-1010. Standard published
 #'   form; see \code{bdmnto} for the availability note.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mtrbnd(V, V)
 Mtrbnd <- function(y, D, direction = "increasing", d = NULL,
                    y_min = NULL, y_max = NULL) {
   yv <- .t1_vec(y); z <- .t1_vec(D)

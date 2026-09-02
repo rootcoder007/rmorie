@@ -30,13 +30,13 @@ are usually far more variable than either component alone.
 \details{
 Formula: w = d * (T/pi + (1 - T)/(1 - pi)).
 }
-\references{
-DuGoff, Schuler and Stuart (2014), Generalizing
-observational study results, Health Services Research
-49(1):284-303. \doi{10.1111/1475-6773.12090}
-}
 \examples{
 set.seed(1)
 Ipwsrv(y = rnorm(20), T = rbinom(20, 1, 0.5), weights = runif(20, 1, 2),
        propensity = runif(20, 0.3, 0.7))
+}
+\references{
+DuGoff, Schuler and Stuart (2014), Generalizing
+observational study results, Health Services Research
+49(1):284-303. \doi{10.1111/1475-6773.12090}
 }

@@ -21,12 +21,12 @@ After \code{n} observations, the next draw is a fresh value from the
 base measure with probability \eqn{\alpha / (\alpha + n)} and equals
 any given past observation with probability \eqn{1 / (\alpha + n)}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_dp_predictive(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_dp_predictive(V, V)
 }

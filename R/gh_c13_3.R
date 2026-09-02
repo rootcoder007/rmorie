@@ -20,6 +20,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalbetaprocdef(V)
 Ghosalbetaprocdef <- function(grid_t, c = 2, Lambda0_rate = 1, seed = 42) {
   ts <- as.numeric(grid_t)
   if (length(ts) == 0L) stop("grid_t must be non-empty")

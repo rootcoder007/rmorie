@@ -25,6 +25,9 @@
 #'   confidence interval construction and selection. Statistica
 #'   Sinica, 1(2), 477-491.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_btcalib(V)
 morie_btcalib <- function(x, alpha = 0.05, B = 1000, seed = 0) {
   xv <- as.numeric(x)
   n <- length(xv)

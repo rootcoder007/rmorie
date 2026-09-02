@@ -32,14 +32,14 @@ satisfies the implicit relation
 S(0) -> 1 collapses to the classical Z = 1 - exp(-R0 Z) (their eq. 5).
 Ma & Earn show the relation holds for arbitrary distributions of the
 infectious period, so R0 alone determines the final size.  The root is
-isolated by bisection on [0, S(0)], where the residual is
+isolated by bisection on \link{0, S(0)}, where the residual is
 non-negative at 0 and strictly negative at S(0).
+}
+\examples{
+Finalsz(R0 = 5L)
 }
 \references{
 Kermack & McKendrick (1927), Proc. R. Soc. Lond. A
 115(772):700-721, doi:10.1098/rspa.1927.0118; Ma & Earn (2006),
 Bull. Math. Biol. 68(3):679-702, doi:10.1007/s11538-005-9047-7.
-}
-\examples{
-Finalsz(R0 = 5L)
 }

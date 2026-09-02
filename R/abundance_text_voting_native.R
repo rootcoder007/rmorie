@@ -34,6 +34,11 @@
 #' @references Lu J, Breitwieser FP, Thielen P, Salzberg SL (2017)
 #'   \emph{PeerJ Comput Sci} 3:e104, \doi{10.7717/peerj-cs.104}.
 #' @export
+#' @examples
+#' P <- rbind(c(0.6, 0, 0), c(0, 0.5, 0), c(0, 0, 0.4), c(0.4, 0.5, 
+#'     0), c(0, 0, 0.6))
+#' reads <- c(1200, 900, 700, 1500, 1100)
+#' morie_bracken_abundance(reads, P)
 morie_bracken_abundance <- function(kraken_output, kmer_distribution,
                                     max_iter = 1000L, tol = 1e-12) {
   r <- as.numeric(kraken_output)
@@ -150,6 +155,9 @@ morie_bracken_abundance <- function(kraken_output, kmer_distribution,
 #' @references Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483,
 #'   \doi{10.1214/ss/1177011137}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ess_autocorrelation(V)
 morie_ess_autocorrelation <- function(x, max_lag = NULL) {
   v <- as.numeric(x)
   v <- v[is.finite(v)]
@@ -199,6 +207,9 @@ morie_ess_autocorrelation <- function(x, max_lag = NULL) {
 #' @references Silver D et al (2018) \emph{Science} 362:1140-1144.
 #'   Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_loss_stream_variance(V)
 morie_loss_stream_variance <- function(losses, alpha = 0.05) {
   x <- as.numeric(losses)
   x <- x[is.finite(x)]
@@ -257,6 +268,9 @@ morie_loss_stream_variance <- function(losses, alpha = 0.05) {
 #' @param min_df,max_df Document-frequency filters.
 #' @return A list with `matrix`, `vocabulary`, `document_frequency`, `idf`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tfidf(V)
 morie_tfidf <- function(texts, min_df = 1, max_df = 1) {
   docs <- tolower(as.character(texts))
   n <- length(docs)
@@ -295,6 +309,9 @@ morie_tfidf <- function(texts, min_df = 1, max_df = 1) {
 #' @param n_basis,degree Basis size and spline degree.
 #' @return A matrix with one column per basis function.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_bspline_basis(V)
 morie_bspline_basis <- function(x, n_basis = 15L, degree = 3L) {
   x <- as.numeric(x)
   n_basis <- as.integer(n_basis)
@@ -358,6 +375,12 @@ morie_bspline_basis <- function(x, n_basis = 15L, degree = 3L) {
 #' @references Xiao L, Zipunnikov V, Ruppert D, Crainiceanu C (2016)
 #'   \emph{Stat Comput} 26:409-421, \doi{10.1007/s11222-014-9485-x}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' tt <- seq(0, 1, length.out = 30)
+#' Y <- t(replicate(8, sin(2 * pi * tt) + rnorm(30, 0, 0.2)))
+#' r <- morie_face_smooth(Y, argvals = tt, n_basis = 8L)
+#' str(r, max.level = 1)
 morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
                               lambdas = NULL, pve = 0.99,
                               penalty_order = 2L) {
@@ -558,6 +581,9 @@ morie_face_smooth <- function(Y, argvals = NULL, n_basis = 12L, degree = 3L,
 #' @return TRUE or FALSE.
 #' @references Pearl J (2009) \emph{Causality}, 2nd ed., Sec 3.3.
 #' @export
+#' @examples
+#' A <- matrix(FALSE, 3, 3)
+#' morie_is_backdoor_admissible(A, 2, 3, integer(0))
 morie_is_backdoor_admissible <- function(adj, treatment, outcome, Z) {
   A <- matrix(as.logical(adj), nrow(adj), ncol(adj))
   t <- as.integer(treatment)
@@ -585,6 +611,9 @@ morie_is_backdoor_admissible <- function(adj, treatment, outcome, Z) {
 #' @param max_size Optional cap on set size.
 #' @return A list of integer vectors.
 #' @export
+#' @examples
+#' A <- matrix(FALSE, 3, 3)
+#' morie_backdoor_sets(A, 2, 3)
 morie_backdoor_sets <- function(adj, treatment, outcome, max_size = NULL) {
   A <- matrix(as.logical(adj), nrow(adj), ncol(adj))
   n <- nrow(A)
@@ -797,6 +826,15 @@ morie_identify_estimate_refute <- function(dag, data, treatment, outcome,
 #'   `adjustment_movement`, `propensity`, `max_weight_share`, `warnings`.
 #' @references Veitch V, Sridhar D, Blei DM (2020) arXiv:1905.12741.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 60
+#' emb <- matrix(rnorm(n * 5), n, 5)
+#' T <- rbinom(n, 1, plogis(emb[, 1]))
+#' Y <- 1 + 0.8 * T + emb[, 1] + rnorm(n, 0, 0.5)
+#' texts <- replicate(n, paste(sample(letters, 5), collapse = " "))
+#' r <- morie_text_ate(texts, T, Y, n_components = 3L, embedding = emb)
+#' str(r, max.level = 1)
 morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
                            trim = 0.02, alpha = 0.05, embedding = NULL) {
   tv <- as.numeric(T)
@@ -938,6 +976,16 @@ morie_text_ate <- function(texts, T, Y, X = NULL, n_components = 10L,
 #' @references Poole KT, Rosenthal H (1985) \emph{AJPS} 29(2):357-384,
 #'   \doi{10.2307/2111172}.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n_leg <- 20; n_votes <- 15
+#' ideal <- rnorm(n_leg)
+#' votes <- sapply(1:n_votes, function(j) {
+#'   cut <- rnorm(1)
+#'   as.integer(ideal > cut + rnorm(n_leg, 0, 0.3))
+#' })
+#' r <- morie_wnominate_fit(votes, n_dims = 1L)
+#' str(r, max.level = 1)
 morie_wnominate_fit <- function(votes, n_dims = 1L, polarity = NULL,
                                 max_iter = 250L, tol = 1e-7, ridge = 1e-3) {
   V <- as.matrix(votes)

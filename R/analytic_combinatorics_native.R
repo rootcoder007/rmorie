@@ -34,6 +34,8 @@
 #' @return A list with `coefficients` (numeric), `exact_coefficients`
 #'   (decimal strings when exact), `all_integral`, `is_exact`.
 #' @export
+#' @examples
+#' morie_rational_gf_coefficients(c(0, 1), c(1, -1, -1), 300)
 morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
   p <- as.numeric(numerator)
   q <- as.numeric(denominator)
@@ -112,6 +114,8 @@ morie_rational_gf_coefficients <- function(numerator, denominator, n_terms) {
 #' @return A list with `radius`, `growth_rate`, `measured_ratio`,
 #'   `relative_gap`.
 #' @export
+#' @examples
+#' morie_dominant_singularity_growth(c(1, -1, -1))
 morie_dominant_singularity_growth <- function(denominator,
                                               coefficients = NULL) {
   q <- as.numeric(denominator)
@@ -182,6 +186,8 @@ morie_dominant_singularity_growth <- function(denominator,
 #' @return A list with `exact_coefficient`, `asymptotic`, `corrected`,
 #'   `ratio`, `corrected_ratio`.
 #' @export
+#' @examples
+#' morie_singularity_transfer(alpha = 0.5, n = 5L)
 morie_singularity_transfer <- function(alpha, n) {
   a <- as.numeric(alpha)
   n <- as.integer(n)
@@ -227,6 +233,8 @@ morie_singularity_transfer <- function(alpha, n) {
 #' @return A list with `log_factorial`, `series_value`, `error`,
 #'   `bound`, `double_floor`, `error_within_bound`.
 #' @export
+#' @examples
+#' morie_stirling_series_error(n = 5L)
 morie_stirling_series_error <- function(n, terms = 3) {
   n <- as.integer(n)
   k <- as.integer(terms)
@@ -275,6 +283,8 @@ morie_stirling_series_error <- function(n, terms = 3) {
 #' @return A list with `derangements`, `exact` (decimal string),
 #'   `routes_agree`, `is_nearest_integer`, `within_theoretical_bound`.
 #' @export
+#' @examples
+#' morie_derangement_rounding(n = 5L)
 morie_derangement_rounding <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 0L) {
@@ -340,6 +350,8 @@ morie_derangement_rounding <- function(n) {
 #' @return A list with `partitions`, `exact` (decimal string),
 #'   `asymptotic`, `ratio`, `relative_error`.
 #' @export
+#' @examples
+#' morie_hardy_ramanujan_partitions(n = 5L)
 morie_hardy_ramanujan_partitions <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 1L) {

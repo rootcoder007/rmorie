@@ -14,6 +14,9 @@
 #'   \code{n}, \code{method}.
 #' @references Kish (1965), Survey Sampling, Wiley, section 8.2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Deftef(V, V)
 Deftef <- function(design_var, srs_var) {
   d <- .s03vec(design_var)
   s <- .s03vec(srs_var)

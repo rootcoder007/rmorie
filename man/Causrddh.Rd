@@ -29,17 +29,17 @@ two documented errata followed per the paper's own Section 6.2
 worked example (see the Python docstring of morie.fn.causrddh for
 the full derivation).
 }
-\references{
-Imbens, G. and Kalyanaraman, K. (2009), NBER Working
-Paper 14726, Section 4.4 eqs (4.8)-(4.13) and Section 6.2;
-published as Review of Economic Studies 79(3), 933-959 (2012),
-\doi{10.1093/restud/rdr043}. Local source:
-fetched-wave3/imbens-kalyanaraman-2009-w14726-optimal-bandwidth-rdd.pdf.
-}
 \examples{
 set.seed(1)
 x <- runif(200, -1, 1)
 y <- 1 + 2 * x + 0.5 * (x >= 0) + rnorm(200, 0, 0.3)
 h <- Causrddh(x, y, cutoff = 0)
 is.numeric(h$estimate)
+}
+\references{
+Imbens, G. and Kalyanaraman, K. (2009), NBER Working
+Paper 14726, Section 4.4 eqs (4.8)-(4.13) and Section 6.2;
+published as Review of Economic Studies 79(3), 933-959 (2012),
+\doi{10.1093/restud/rdr043}. Local source:
+fetched-wave3/imbens-kalyanaraman-2009-w14726-optimal-bandwidth-rdd.pdf.
 }

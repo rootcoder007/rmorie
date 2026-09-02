@@ -31,14 +31,14 @@ reproducible and identical across language arms.
 \details{
 Formula: x_i <- conditional_i(x, u) for each block in turn.
 }
+\examples{
+conditionals <- list(function(x, u) qnorm(u, 0.5 * x[2], 1),
+                     function(x, u) qnorm(u, 0.5 * x[1], 1))
+Gibbsm(conditionals, x0 = c(0, 0), n_iter = 50, burn = 10)
+}
 \references{
 Geman and Geman (1984), Stochastic relaxation, Gibbs
 distributions, and the Bayesian restoration of images, IEEE
 Transactions on Pattern Analysis and Machine Intelligence
 6(6):721-741. \doi{10.1109/TPAMI.1984.4767596}
-}
-\examples{
-conditionals <- list(function(x, u) qnorm(u, 0.5 * x[2], 1),
-                     function(x, u) qnorm(u, 0.5 * x[1], 1))
-Gibbsm(conditionals, x0 = c(0, 0), n_iter = 50, burn = 10)
 }

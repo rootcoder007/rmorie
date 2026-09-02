@@ -31,12 +31,12 @@ data directions, an UPPER bound, flagged by \code{exact = 0}.
 
 Formula: \code{depth(theta) = min_u #{i: u'(x_i - theta) >= 0} / n}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+DepthH(V, V)
+}
 \references{
 Tukey, J. W. (1975). Proc ICM Vancouver 2:523-531;
 Rousseeuw & Ruts (1996) Appl Statist 45:516-526; Rousseeuw & Struyf
 (1998) Statist Comput 8:193-203.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-DepthH(V, V)
 }

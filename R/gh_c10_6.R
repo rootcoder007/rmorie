@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.4.
 #' @export
+#' @examples
+#' Ghosalrndseriespr()
 Ghosalrndseriespr <- function(K_true = 4, n = 1000, lam = 0.5,
                               K_max = 15, seed = 42) {
   if (K_max < 1) stop("K_max must be at least 1")

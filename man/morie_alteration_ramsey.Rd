@@ -27,9 +27,9 @@ Measured, the union bound wins by one at \eqn{k = 4} and \eqn{k = 5}
 and ties at \eqn{k = 6}. Both are valid, so \code{best_bound} reports the
 maximum and \code{improvement} is signed.
 }
-\references{
-Alon N, Spencer JH (2016), Ch 3.
-}
 \examples{
 morie_alteration_ramsey(k = 5L)
+}
+\references{
+Alon N, Spencer JH (2016), Ch 3.
 }

@@ -19,9 +19,9 @@ List with \code{smr}, \code{ci_lower}, \code{ci_upper}, \code{observed}, \code{e
 \description{
 Formula: SMR = O / E; exact Poisson limits chi2_{alpha/2, 2O}/2 and chi2_{1-alpha/2, 2(O+1)}/2, divided by E
 }
-\references{
-Breslow and Day (1987), Statistical Methods in Cancer Research Volume II: The Design and Analysis of Cohort Studies, IARC. Not held locally; SMR = O/E with exact Poisson limits on O is the standard published form, and is what the existing morie.fn.smr implements.
-}
 \examples{
 Smrind(observed = 5L, expected = 5L)
+}
+\references{
+Breslow and Day (1987), Statistical Methods in Cancer Research Volume II: The Design and Analysis of Cohort Studies, IARC. Not held locally; SMR = O/E with exact Poisson limits on O is the standard published form, and is what the existing morie.fn.smr implements.
 }

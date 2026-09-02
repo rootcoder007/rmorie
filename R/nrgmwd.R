@@ -28,6 +28,9 @@
 #'   with independent increments. Annals of Statistics, 31(2), 560-585.
 #'   doi:10.1214/aos/1051027881
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Nrgmwd(V)
 Nrgmwd <- function(y, alpha = 1, tau = 1, mu0 = 0, sigma0 = 1) {
   a <- as.numeric(alpha); tt <- as.numeric(tau)
   if (a <= 0) stop("Nrgmwd: alpha must be positive")

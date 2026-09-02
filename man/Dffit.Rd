@@ -25,11 +25,11 @@ Formula: DFFITS_i = (e_i / (s_(i) sqrt(1 - h_ii))) sqrt(h_ii / (1 - h_ii))
 \details{
 The cut-off is the Belsley-Kuh-Welsch size-adjusted 2 sqrt(p/n).
 }
-\references{
-Belsley, Kuh & Welsch (1980), Regression Diagnostics,
-Wiley, ch. 2.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dffit(V, V)
+}
+\references{
+Belsley, Kuh & Welsch (1980), Regression Diagnostics,
+Wiley, ch. 2.
 }

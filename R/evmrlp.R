@@ -15,6 +15,9 @@
 #'   \code{estimate} (slope), \code{n}, \code{method}.
 #' @references Davison & Smith (1990), JRSS B 52(3):393-442.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Evmrlp(V)
 Evmrlp <- function(x, u_grid = NULL) {
   x <- .s03vec(x)
   n <- length(x)

@@ -28,6 +28,9 @@
 #'   (1998), Proc. R. Soc. Lond. A 454(1971):903-995,
 #'   doi:10.1098/rspa.1998.0193.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Emdtsm(V)
 Emdtsm <- function(y, max_imf = 10, max_sift = 50, sd_tol = 0.2) {
   .nspline <- function(xk, yk, xq) {
     m <- length(xk)

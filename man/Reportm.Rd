@@ -34,12 +34,12 @@ Laplace draws by inverse CDF,
 \eqn{x = -b\, sign(u - 1/2) \log(1 - 2 |u - 1/2|)}. Ties: first
 maximum in scan order wins in both arms.
 }
+\examples{
+Reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}
 \references{
 Dwork, C., and Roth, A. (2014). The algorithmic
 foundations of differential privacy. FnT-TCS 9(3-4), 211-487.
 Section 3.3, Report Noisy Max and Claim 3.9.
 Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
-}
-\examples{
-Reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 }

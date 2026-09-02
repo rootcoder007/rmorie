@@ -19,10 +19,10 @@ variance \eqn{\theta^2 V_A + (1-\theta)^2 V_B} is minimised at
 \eqn{\theta^* = V_B/(V_A + V_B)} -- weight goes to the frame that
 measures the overlap MORE precisely.
 }
+\examples{
+morie_optimal_overlap_weight(var_a = 5L, var_b = 5L)
+}
 \references{
 Hartley HO (1962). Lohr SL, Rao JNK (2000) \emph{JASA}
 95(449):271-280, \doi{10.1080/01621459.2000.10473920}.
-}
-\examples{
-morie_optimal_overlap_weight(var_a = 5L, var_b = 5L)
 }

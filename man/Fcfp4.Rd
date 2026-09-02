@@ -38,6 +38,9 @@ per-atom flags such an engine would produce.  The flag order above is
 the order of the RDKit pattern table and is what makes the codes
 comparable with an RDKit-derived feature table.
 }
+\examples{
+Fcfp4(adjacency = 5L, features = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010), "Extended-connectivity
 fingerprints", Journal of Chemical Information and Modeling 50(5),
@@ -50,7 +53,4 @@ Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines 172-192 and
 211-240; rounds from MorganGenerator.cpp lines 395-495.  RDKit master
 revision fetched 2026-08-09.  RDKit: Open-Source Cheminformatics,
 https://www.rdkit.org.
-}
-\examples{
-Fcfp4(adjacency = 5L, features = 5L)
 }

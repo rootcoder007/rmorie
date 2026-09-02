@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.2.2.
 #' @export
+#' @examples
+#' Ghosalparamrate()
 Ghosalparamrate <- function(d_true = 2, ns = c(100, 1000, 10000),
                             lam = 1, seed = 42) {
   ns <- as.numeric(ns)

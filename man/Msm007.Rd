@@ -22,12 +22,12 @@ List with estimate, TFP, TTP_all, pCCC, method.
 Formula: P_i = TTP_all / (TTP_all + TFP_i) on a one-versus-all basis
 (eq. 4.9), with TFP_i = sum_{j != i} n_ji from eq. (4.6).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm007(V, V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (4.9) p.132. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm007(V, V)
 }

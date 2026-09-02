@@ -21,6 +21,10 @@
 #'   of Molinari, F. (2021), Handbook of Econometrics 7A
 #'   (arXiv:2004.11751 p. 17).
 #' @export
+#' @examples
+#' set.seed(1)
+#' Bnscbo(y_components = matrix(rnorm(80), 40, 2), D = rbinom(40, 1, 0.5),
+#'        X = c(0.5, 0.5))
 Bnscbo <- function(y_components, D, X) {
   M <- as.matrix(y_components)
   n <- nrow(M)

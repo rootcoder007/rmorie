@@ -45,6 +45,9 @@
 #'   R. M. and McCaffrey, D. F. (2002). Survey Methodology 28(2),
 #'   169-181.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drbsze(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drbsze <- function(y, D, X = NULL, alpha = 0.05) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drbsze: empty input, y has no observations")

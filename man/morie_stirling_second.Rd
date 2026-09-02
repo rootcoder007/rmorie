@@ -19,9 +19,9 @@ A \code{morie_bigint}, or a list of them when \code{k} is NULL.
 exactly \eqn{k} non-empty unlabelled blocks, by the recurrence
 \eqn{S(n,k) = k S(n-1,k) + S(n-1,k-1)}.
 }
-\references{
-Stanley RP (2011) vol. 1, Sec 1.9.
-}
 \examples{
 morie_stirling_second(n = 5L)
+}
+\references{
+Stanley RP (2011) vol. 1, Sec 1.9.
 }

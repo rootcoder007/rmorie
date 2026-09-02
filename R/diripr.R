@@ -18,6 +18,9 @@
 #' @references Gelman et al. (2013), Bayesian Data Analysis, 3rd ed.,
 #'   CRC, ch. 3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Diripr(V)
 Diripr <- function(counts, alpha = 1) {
   y <- .s03vec(counts)
   K <- length(y)

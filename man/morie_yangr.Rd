@@ -26,12 +26,12 @@ its own Hardy-Weinberg variance before averaging (Yang et al.
 2010), so that rare variants are weighted up relative to
 \code{\link{morie_vanr1}}, which standardises once for all markers.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_yangr(V)
+}
 \references{
 Yang, J. et al. (2010). Common SNPs explain a large
 proportion of the heritability for human height. Nature
 Genetics, 42, 565-569.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_yangr(V)
 }

@@ -17,7 +17,7 @@ A numeric scalar: the variance of \code{x}.
 \description{
 Single-pass two-step C++ kernel with optional ddof correction.
 }
-\keyword{internal}
 \examples{
 abs(morie_var(c(1, 2, 3, 4, 5), ddof = 1) - 2.5) < 1e-9
 }
+\keyword{internal}

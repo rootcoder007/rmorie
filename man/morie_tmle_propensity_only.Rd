@@ -25,10 +25,6 @@ be, yet the estimate stays consistent provided the propensity model is
 right. The fully specified TMLE is returned alongside for comparison.
 Mirrors \code{morie.fn.tmlpoy}.
 }
-\references{
-van der Laan MJ, Rose S (2011). \emph{Targeted Learning}.
-Springer, Ch. 4-5.
-}
 \examples{
 set.seed(1)
 n <- 120
@@ -37,4 +33,8 @@ d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
 y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
 r <- morie_tmle_propensity_only(y, d, X)
 str(r, max.level = 1)
+}
+\references{
+van der Laan MJ, Rose S (2011). \emph{Targeted Learning}.
+Springer, Ch. 4-5.
 }

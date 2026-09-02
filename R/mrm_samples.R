@@ -147,9 +147,6 @@ morie_fetch_tps <- function(
       paste(names(urls), collapse = ", ")
     )
   }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite required for morie_fetch_tps().")
-  }
   cache_dir <- path.expand(cache_dir)
   dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)
   out <- file.path(cache_dir, paste0("tps_", category, ".csv"))

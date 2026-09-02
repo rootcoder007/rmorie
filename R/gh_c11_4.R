@@ -26,6 +26,9 @@
 #'   Nonparametric Bayesian Inference, CUP, section 11.3.1 and ch. 11;
 #'   van der Vaart & van Zanten.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalgpdenscrt(V)
 Ghosalgpdenscrt <- function(x, s = NULL, n = NULL,
                             kernel = "squared_exponential") {
   nn <- if (is.null(n)) length(as.numeric(x)) else as.integer(n)

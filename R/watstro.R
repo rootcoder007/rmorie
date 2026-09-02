@@ -21,6 +21,8 @@
 #'   \code{n_edges}, \code{n}.
 #' @references Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
 #' @export
+#' @examples
+#' Watstro(n = 5L, k = 5L, p = 0.5)
 Watstro <- function(n, k, p, seed = 1) {
   n <- as.integer(n); k <- as.integer(k)
   A <- matrix(0, n, n)

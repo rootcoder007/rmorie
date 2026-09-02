@@ -29,6 +29,8 @@
 #'   doi:10.1214/aoms/1177706098; Erdos & Renyi (1959), Publ. Math.
 #'   Debrecen 6:290-297 (the G(n,M) model).
 #' @export
+#' @examples
+#' Erdosg(n = 5L, p = 0.5)
 Erdosg <- function(n, p) {
   PR <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)
   .uu <- function(k) .s03vdc(k %/% 12L + 1L, PR[(k %% 12L) + 1L])

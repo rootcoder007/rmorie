@@ -7,7 +7,7 @@
 Adwin(x, delta = 0.05)
 }
 \arguments{
-\item{x}{Stream values, expected in [0, 1].}
+\item{x}{Stream values, expected in \link{0, 1}.}
 
 \item{delta}{Confidence parameter in (0, 1).}
 }
@@ -21,12 +21,12 @@ W = W0 . W1 has |mean(W0) - mean(W1)| >= eps_cut, where
 m = 1/(1/n0 + 1/n1), delta' = delta/n and
 eps_cut = sqrt(log(4/delta') / (2 m)).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Adwin(V)
+}
 \references{
 Bifet and Gavalda (2007), Proc. SIAM SDM, 443-448,
 Section 3 and Figure 1.  Read from the authors' own PDF at
 www.cs.upc.edu/~gavalda.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Adwin(V)
 }

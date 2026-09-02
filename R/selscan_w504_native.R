@@ -64,6 +64,12 @@
 #'   and Methods "Calculation of iHS". Sabeti, P. C. et al. (2002),
 #'   Nature 419, 832-837. Local: fetched-wave3 Voight-2006 PDF.
 #' @export
+#' @examples
+#' set.seed(1)
+#' hap <- matrix(rbinom(40 * 21, 1, 0.4), 40, 21)
+#' hap[, 11] <- rep(c(0, 1), each = 20)
+#' r <- Ihstst(hap, core = 11, positions = 1:21)
+#' is.list(r)
 Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
                    standardize = NULL) {
   dec <- morie_ehhdec(hap, core, positions)
@@ -117,6 +123,14 @@ Ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
 #'   449(7164), 913-918, Methods pp. 5-6. Local: fetched-wave3
 #'   Sabeti-2007 PDF.
 #' @export
+#' @examples
+#' set.seed(1)
+#' hapA <- matrix(rbinom(40 * 21, 1, 0.4), 40, 21)
+#' hapB <- matrix(rbinom(40 * 21, 1, 0.5), 40, 21)
+#' hapA[, 11] <- rep(c(0, 1), each = 20)
+#' hapB[, 11] <- rep(c(0, 1), each = 20)
+#' r <- Xpehh1(hapA, hapB, core = 11, positions = 1:21)
+#' is.list(r)
 Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
                    standardize = NULL) {
   decA <- morie_ehhdec(hapA, core, positions)
@@ -204,6 +218,11 @@ Xpehh1 <- function(hapA, hapB, core, positions = NULL, min_ehh = 0.05,
 #'   pp. 565-566. Local: fetched-wave3
 #'   Purcell-2007-PLINK-AJHG81-559.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' G <- matrix(sample(0:2, 30 * 12, replace = TRUE), 30, 12)
+#' K <- Ibdmtx(G)
+#' c(nrow(K), ncol(K))
 Ibdmtx <- function(G) {
   Gm <- as.matrix(G); storage.mode(Gm) <- "double"
   n <- nrow(Gm); m <- ncol(Gm)

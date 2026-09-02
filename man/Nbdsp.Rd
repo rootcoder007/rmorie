@@ -21,10 +21,10 @@ list: estimate, mu_hat, r_hat, beta, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer, read
-as rendered pages.  Volume [Pages 35-70], Chapter 2, the generalised linear
+as rendered pages.  Volume \link{Pages 35-70}, Chapter 2, the generalised linear
 model table on p. 40, lists the Counts / Negative binomial row with the Log
 link and mean exp(X beta_hat), which is the link and mean used here.  Volume
-[Pages 379-425], Chapter 10, Section 10.7.2, p. 401, adds that "for count
+\link{Pages 379-425}, Chapter 10, Section 10.7.2, p. 401, adds that "for count
 data the loss function can be obtained under a negative binomial
 distribution, which can do a better job than the Poisson distribution when
 the assumption of equal mean and variance is hard to justify".
@@ -33,7 +33,7 @@ the assumption of equal mean and variance is hard to justify".
 NOT IN THE BOOK BEYOND THAT.  All seventeen page-range volumes were
 searched: the negative binomial appears only as a row in that table and as
 the remark above.  The book never writes the mass function, never estimates
-the dispersion, and its index ([Pages 683-691]) has no entry for it.  The
+the dispersion, and its index (\link{Pages 683-691}) has no entry for it.  The
 mass function and the moments used here are the ones the function's own
 specification states, P(Y=k) = C(k+r-1, k) p^r (1-p)^k, E\link{Y} = mu,
 Var\link{Y} = mu + mu^2/r, that is, the NB2 parameterisation; the dispersion is

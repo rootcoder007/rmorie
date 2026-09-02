@@ -30,6 +30,8 @@
 #'   linear-SEM decomposition; neither source was in the local corpus, so
 #'   the equations are stated in full above.
 #' @export
+#' @examples
+#' Nde(X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Nde <- function(X, M, Y) {
   x <- .t1_vec(X); m <- .t1_vec(M); y <- .t1_vec(Y); n <- length(x)
   if (n == 0L) stop("X is empty")

@@ -26,9 +26,9 @@ Cuturi (2013), Definition 1 and eq. (2).  Cuturi parameterises by
 transport cost and the regularised objective are returned, because
 they are different numbers and are routinely confused.
 }
-\references{
-Cuturi (2013), Definition 1, eq. (2).
-}
 \examples{
 Sinkdist(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5)
+}
+\references{
+Cuturi (2013), Definition 1, eq. (2).
 }

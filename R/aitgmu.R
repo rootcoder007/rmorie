@@ -9,6 +9,9 @@
 #'   Data, Chapter 4, where g(x) is the normalising constant of the
 #'   centred log-ratio transform.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compgeo(V)
 Compgeo <- function(x) {
   x <- .t1_vec(x)
   if (any(x <= 0)) stop("compositions must be strictly positive")

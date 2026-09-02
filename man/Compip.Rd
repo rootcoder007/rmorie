@@ -18,13 +18,13 @@ self-check.
 Formula: <x, y>_a = sum_i clr(x)_i clr(y)\emph{i
 = (1/D) sum}{i<j} log(x_i/x_j) log(y_i/y_j)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compip(V, V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4. Verified against the reference implementation in the
 CRAN package compositions 2.0-9, whose scalar applies the centred
 log-ratio to both arguments and sums the elementwise product.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Compip(V, V)
 }

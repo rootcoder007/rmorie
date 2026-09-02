@@ -23,11 +23,11 @@ and no stationarity required.
 Formula: \code{C(s)} is the number of phrases in the LZ76 exhaustive
 parse; normalised, \code{C(s) log_a(n) / n}.
 }
-\references{
-Lempel, A. & Ziv, J. (1976). IEEE Trans Inform Theory
-22:75-81.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Lzcomp(V)
+}
+\references{
+Lempel, A. & Ziv, J. (1976). IEEE Trans Inform Theory
+22:75-81.
 }

@@ -29,11 +29,11 @@ Formula: \code{V = (X'X)^-1 X' Omega X (X'X)^-1},
 \code{Omega = diag(w_i e_i^2)}; HC0 \code{w = 1}, HC1
 \code{n/(n-p)}, HC2 \code{1/(1-h)}, HC3 \code{1/(1-h)^2}.
 }
-\references{
-White, H. (1980). Econometrica 48:817-838; MacKinnon &
-White (1985) J Econometrics 29:305-325.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Robcov(V, V)
+}
+\references{
+White, H. (1980). Econometrica 48:817-838; MacKinnon &
+White (1985) J Econometrics 29:305-325.
 }

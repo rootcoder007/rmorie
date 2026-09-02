@@ -23,6 +23,9 @@
 #'   Rousseeuw & Ruts (1996) Appl Statist 45:516-526; Rousseeuw & Struyf
 #'   (1998) Statist Comput 8:193-203.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DepthH(V, V)
 DepthH <- function(X, theta) {
   Xm <- as.matrix(X); t_ <- as.numeric(theta)
   n <- nrow(Xm); p <- ncol(Xm)

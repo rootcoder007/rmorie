@@ -35,20 +35,6 @@
 # Minimal honest CART builder. Each tree gets half the observations
 # chosen uniformly without replacement; honesty is enforced by
 # splitting each tree's bag into a structure half and a leaf half.
-#' Minimal honest CART builder. Each tree gets half the observations
-#'
-#' chosen uniformly without replacement; honesty is enforced by
-#' splitting each tree\'s bag into a structure half and a leaf half.
-#'
-#' @param X A matrix; indexed by row and column.
-#' @param y A vector; indexed elementwise.
-#' @param indices A vector; its length is taken and its elements indexed.
-#' @param min_leaf Accepted by the signature and not used anywhere in the body.
-#' @param alpha Accepted by the signature and not used anywhere in the body.
-#' @param max_depth Accepted by the signature and not used anywhere in the body.
-#' @param e Passed to \code{.ghc_unif}.
-#' @return The value of \code{build}.
-#' @export
 #' Internal: honest leaf value, with a fallback when the leaf half is empty
 #'
 #' The value of a leaf is the outcome mean over the LEAF half of the
@@ -61,6 +47,7 @@
 #' @param idxs Row indices in this node.
 #' @return A numeric value.
 #' @keywords internal
+#' @noRd
 .orfgrf_leaf_value <- function(y, leaf, idxs) {
   v <- y[leaf[leaf %in% idxs]]
   if (length(v)) return(mean(v))
@@ -97,6 +84,7 @@
 #'   \code{value} or a split with \code{j}, \code{cut}, \code{left} and
 #'   \code{right}.
 #' @keywords internal
+#' @noRd
 .grow_one_tree <- function(X, y, indices, min_leaf, alpha,
                            max_depth, e, split_target = NULL) {
   st <- if (is.null(split_target)) y else as.numeric(split_target)

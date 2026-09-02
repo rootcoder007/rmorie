@@ -25,6 +25,9 @@
 #'   (2009). More on confidence intervals for partially identified
 #'   parameters. Econometrica 77(4), 1299-1315. \doi{10.3982/ECTA7347}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bnstst(V, V)
 Bnstst <- function(lower, upper, se = 0, cdf = 0.05) {
   r <- Bndfre(lower, upper, as.numeric(cdf)[1])
   t0 <- as.numeric(se)[1]

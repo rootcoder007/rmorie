@@ -32,13 +32,13 @@ Formula: \code{E_X [ m_1(X) p_1(X) + y_0 (1 - p_1(X)) - m_0(X) p_0(X)
 - y_1 (1 - p_0(X)) ]} for the lower bound and the mirror expression for
 the upper, with Gaussian kernel weights.
 }
+\examples{
+set.seed(1)
+r <- Bndnpr(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), bw = 0.5); TRUE
+}
 \references{
 Manski, C. F. (2003). Partial Identification of Probability
 Distributions. Springer, New York. The conditional worst-case bound is
 equation (2.11) of Molinari, F. (2021), Handbook of Econometrics 7A
 (arXiv:2004.11751 p. 17), applied at each \code{x}.
-}
-\examples{
-set.seed(1)
-r <- Bndnpr(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), bw = 0.5); TRUE
 }

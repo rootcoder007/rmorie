@@ -18,6 +18,9 @@
 #' @references Wolter (2007), Introduction to Variance Estimation, 2nd
 #'   ed., Springer, ch. 4, eq. (4.2.5).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Jackvar(V)
 Jackvar <- function(y, weights = NULL, replicates = NULL) {
   v <- .s03vec(y)
   n <- length(v)

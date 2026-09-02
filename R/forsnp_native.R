@@ -44,6 +44,10 @@
 #' @references Buckleton, J., Triggs, C. M. and Walsh, S. J. (2005).
 #'   Forensic DNA Evidence Interpretation. CRC Press.
 #' @export
+#' @examples
+#' genotype <- list(c("A", "a"), c("B", "B"))
+#' freqs <- list(c(A = 0.6, a = 0.4), c(B = 0.7, b = 0.3))
+#' morie_forsnp(genotype, freqs)
 morie_forsnp <- function(genotype, freqs, theta = 0) {
   if (length(genotype) != length(freqs) || !length(genotype)) {
     stop("genotype and freqs must be paired, non-empty")

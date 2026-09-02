@@ -30,13 +30,13 @@ dominates.  Stabilisation caps the control weights at their
 \code{q}-quantile and renormalises.  \code{q = 1} leaves every weight
 untouched, so the estimate then equals the raw estimate exactly.
 }
+\examples{
+set.seed(1)
+r <- Drvst(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}
 \references{
 Sant'Anna, P. H. C. and Zhao, J. (2020). Journal of
 Econometrics 219(1), 101-122, equation (2.6).  Kish, L. (1965).
 Survey Sampling, Wiley, section 11.7.  Crump, R. K., Hotz, V. J.,
 Imbens, G. W. and Mitnik, O. A. (2009). Biometrika 96(1), 187-199.
-}
-\examples{
-set.seed(1)
-r <- Drvst(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 }

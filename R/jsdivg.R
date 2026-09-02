@@ -38,6 +38,9 @@
 #'   \code{base}, \code{n}, \code{method}.
 #' @references Lin (1991), IEEE Transactions on Information Theory 37:145-151.  Paywalled at IEEE; the coded form was read from Drost's philentropy, src/distances_internal.h::jensen_shannon_internal (tarball philentropy_0.10.0 from CRAN), with exactly the zero-guards used here.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Jsdiv(V, V)
 Jsdiv <- function(p, q, base = 2, normalize = TRUE) {
   p <- .t4_vec(p); q <- .t4_vec(q)
   if (length(p) != length(q)) stop("p and q must have the same length")

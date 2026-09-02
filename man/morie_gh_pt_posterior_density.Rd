@@ -25,12 +25,12 @@ multiplies the level-wise posterior branching probabilities
 level weights \eqn{a_m = m^2} and \eqn{N_0} the sample size. The
 result is the posterior density relative to the uniform base measure.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_pt_posterior_density(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_pt_posterior_density(V, V)
 }

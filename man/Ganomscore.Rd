@@ -20,12 +20,12 @@ List with score, scaled, smin, smax, flagged, nflag, m, d.
 A(x) = || G_E(x) - E(G(x)) ||_1 (eq. 5), rescaled over the test set as
 s' = (s - min(S)) / (max(S) - min(S)) (eq. 6).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ganomscore(V, V)
+}
 \references{
 Akcay, Atapour-Abarghouei and Breckon (2018),
 arXiv:1805.06725, equations (5) and (6), read from the ar5iv
 rendering of the arXiv source.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ganomscore(V, V)
 }

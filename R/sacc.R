@@ -28,6 +28,8 @@
 #'   Lemmas 1-2, Theorem 1. Local source:
 #'   fetched-wave3/haarnoja-etal-2018-sac-arxiv1801.01290.pdf.
 #' @export
+#' @examples
+#' Sacc(P = 1, R = 5L, gamma = 0.5)
 Sacc <- function(P, R, gamma, temp = 1, tol = 1e-12, max_eval = 100000L,
                  max_improve = 1000L) {
   ar <- .w505_mdp_args(P, R)

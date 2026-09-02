@@ -11,6 +11,9 @@
 #' @return List with ``s_giant``, ``mean_fragment``, ``diameter``, ``removed``, ``n_components``, ``n``.
 #' @references Albert, Jeong and Barabasi (2000), Error and attack tolerance of complex networks, Nature 406:378-382, arXiv:cond-mat/0008064. Verified against the paper for the definitions of d, S and <s>.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Netattack(M)
 Netattack <- function(A, strategy = "attack", k = 1, seed = 1) {
   A <- as.matrix(A); n <- nrow(A); k <- as.integer(k)
   diag(A) <- 0

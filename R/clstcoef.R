@@ -15,6 +15,8 @@
 #'   \code{n_defined}, \code{n}.
 #' @references Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
 #' @export
+#' @examples
+#' Clstcoef(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
 Clstcoef <- function(G) {
   A <- as.matrix(G); n <- nrow(A)
   adj <- ((A != 0) | (t(A) != 0)) * 1

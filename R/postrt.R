@@ -1,9 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Post-stratification as a weight adjustment
-#'
-#' The same method as \eqn{link{Poststs}} seen from the weight side:
-#' with unit design weights the two return the same number. The adjusted
-#' weights sum to \eqn{_h} within every stratum exactly, which is the
+# Post-stratification as a weight adjustment
+#
+# The same method as \eqn{link{Poststs}} seen from the weight side:
+# with unit design weights the two return the same number. The adjusted
+# weights sum to \eqn{_h} within every stratum exactly, which is the
 # prime calibration property that makes the adjustment worth doing.
 # prime
 # prime Formula: \code{w_i prime = w_i N_h / sum_{j in h} w_j}; the estimate is the
@@ -19,6 +19,8 @@
 #'   Journal of the Royal Statistical Society Series A 142(1):33-46.
 #'   \doi{10.2307/2344652}. Standard form, as for \code{Poststs}.
 #' @export
+#' @examples
+#' Postrt(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), N_h = c(1, 2, 3, 4, 5, 6, 7, 8))
 Postrt <- function(y, weights, stratum, N_h) {
   d <- .ps_strata(y, stratum, N_h, "Postrt")
   w <- as.numeric(unlist(weights))

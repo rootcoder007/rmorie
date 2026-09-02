@@ -29,12 +29,12 @@ cluster correction \code{a = [G/(G-1)][(n-1)/(n-k)]}.  With one
 observation per cluster the sum collapses and \code{V} is the
 independent variance times \code{a}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Drclt(V, V)
+}
 \references{
 Bertrand, M., Duflo, E. and Mullainathan, S. (2004).
 Quarterly Journal of Economics 119(1), 249-275.  Sant'Anna, P. H. C.
 and Zhao, J. (2020). Journal of Econometrics 219(1), 101-122.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Drclt(V, V)
 }

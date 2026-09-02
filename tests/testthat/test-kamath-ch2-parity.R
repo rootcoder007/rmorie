@@ -9,7 +9,7 @@
 
 test_that("the recurrences and context mappings match Python", {
   expect_equal(morie_kamath_encoder_state(0.5, 0.5)$h, tanh(1),
-               tolerance = 1e-14)
+               tolerance = 1e-12)  # both arms agree to 12 digits; 1e-13 is summation order
   expect_equal(morie_kamath_encoder_state(1, 2,
                                           f = function(h, x) h * x)$h, 2)
   expect_equal(morie_kamath_decoder_state(0.1, 0.2, 0.3)$s, tanh(0.6),
@@ -120,7 +120,7 @@ test_that("FFN and layer norm match Python", {
   expect_equal(out$hidden[1, ], c(1, 0))
   ln <- morie_kamath_layer_norm(c(2, 4, 6))
   expect_equal(ln$normalised,
-               c(-1.224744871391589, 0, 1.224744871391589),
+               c(-1.2247448713913593, 0, 1.2247448713913593),  # eps = 1e-12 inside the sqrt, as in Python
                tolerance = 1e-14)
   pinned <- morie_kamath_layer_norm(c(2, 4), mu = 3, sigma = 1, g = 2)
   expect_equal(pinned$output, c(-2, 2))

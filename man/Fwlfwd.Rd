@@ -34,13 +34,13 @@ number of rounds so both language arms take identical steps.
 Formula: S <- S + argmin_v <grad f(x), v>;
 x <- argmin{ f(x) : x in conv(S) }.
 }
-\references{
-Holloway (1974), An extension of the Frank and Wolfe
-method of feasible directions, Mathematical Programming 6(1):14-27.
-\doi{10.1007/BF01580219}
-}
 \examples{
 V <- rbind(c(0, 0), c(1, 0), c(0, 1))
 Fwlfwd(function(x) sum((x - 0.3)^2), function(x) 2 * (x - 0.3),
        domain = V, x0 = c(0.3, 0.3))
+}
+\references{
+Holloway (1974), An extension of the Frank and Wolfe
+method of feasible directions, Mathematical Programming 6(1):14-27.
+\doi{10.1007/BF01580219}
 }

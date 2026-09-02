@@ -29,11 +29,11 @@ decides whether the prior lives on a function space at all.
 Formula: z_k = Z_k (k+1)^(-decay), Z_k iid N(0, 1);
 f(x) = sum_k z_k cos(pi (k+1) x).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalrandombasisexpansion(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.1.
 }

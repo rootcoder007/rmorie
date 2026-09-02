@@ -19,9 +19,9 @@ The RDP epsilon at \code{alpha}.
 \description{
 Exact RDP of the sampled Gaussian mechanism at an integer order
 }
-\references{
-Mironov, Talwar & Zhang (2019), arXiv:1908.10530.
-}
 \examples{
 morie_rdp_sampled_gaussian(2, 0.01, 1.0)
+}
+\references{
+Mironov, Talwar & Zhang (2019), arXiv:1908.10530.
 }

@@ -39,11 +39,11 @@ Formula: pi(K) proportional to exp(-c K log K); for each draw
 f(g) proportional to exp(sum_j beta_j cos(pi j z(g))), renormalised
 by the trapezoid rule, and the reported density is the draw average.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, sections 10.4 and 10.4.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalfrsdensity(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, sections 10.4 and 10.4.1.
 }

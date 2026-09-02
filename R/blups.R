@@ -16,6 +16,10 @@
 #'   (1991), Statistical Science 6(1), 15-32.  Standard published form;
 #'   neither article is in the local corpus and neither was read.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Blupslope(y = rnorm(30), group = rep(1:5, each = 6), Z = cbind(1, rnorm(30)),
+#'           D = diag(2), s2e = 1)
 Blupslope <- function(y, group, Z, D, s2e, X = NULL, beta = NULL) {
   y <- .t1_vec(y); n <- length(y); g <- as.character(group)
   if (length(g) != n) stop("group must have one label per observation")

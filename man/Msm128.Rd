@@ -26,11 +26,11 @@ squared-error loss the stationarity conditions are linear and are solved
 directly.
 }
 }
+\examples{
+Msm128(K = 5L, y = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (8.3) p.254. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm128(K = 5L, y = 5L)
 }

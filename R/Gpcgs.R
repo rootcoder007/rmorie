@@ -28,6 +28,11 @@
 #'   variational Gaussian process classification, AISTATS 2015, PMLR
 #'   38:351-360. arXiv:1411.2005
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' y <- rbinom(10, 1, 0.5)
+#' Gpcgs(X, y)
 Gpcgs <- function(X, y, X_test = NULL, M = 3, lengthscale = 1, variance = 1,
                   iters = 40, step = 0.05, nodes = 11, jitter = 1e-8) {
   A <- .s03mat(X)

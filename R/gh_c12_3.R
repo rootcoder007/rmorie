@@ -18,6 +18,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.2.1.
 #' @export
+#' @examples
+#' Ghosalstrongapxdp()
 Ghosalstrongapxdp <- function(n = 3000, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")

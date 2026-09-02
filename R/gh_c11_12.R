@@ -17,6 +17,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 11.5.1.
 #' @export
+#' @examples
+#' Ghosalselfsimgp()
 Ghosalselfsimgp <- function(H = 0.6, lam = 3, t = 0.2) {
   H <- as.numeric(H); lam <- as.numeric(lam); t <- as.numeric(t)
   if (H <= 0 || H >= 1) stop("H must lie strictly between 0 and 1")

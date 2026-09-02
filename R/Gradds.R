@@ -19,6 +19,8 @@
 #' @references Cauchy (1847), Methode generale pour la resolution des
 #'   systemes d'equations simultanees, C. R. Acad. Sci. Paris 25:536-538.
 #' @export
+#' @examples
+#' Gradds(function(x) sum(x^2), function(x) 2 * x, x0 = c(1, 1))
 Gradds <- function(f, grad_f, x0, lr = 0.1, steps = 100, tol = 1e-12) {
   x <- .s03vec(x0)
   if (length(x) == 0L) stop("gradient_descent: x0 is empty")

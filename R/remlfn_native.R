@@ -406,5 +406,4 @@ morie_reml_variance_components <- morie_remlfn
 }
 
 # Public name resolutions
-morie_reml_loglik <- morie_remlfn
 morie_remlloglik <- morie_remlfn

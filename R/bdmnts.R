@@ -12,6 +12,8 @@
 #'   Standard published form; the article could not be obtained (JSTOR
 #'   access stub, NBER t0224 zero-page PDF) and was not read.
 #' @export
+#' @examples
+#' Mivbound(lower = 5L, upper = 5L, prob = 0.5)
 Mivbound <- function(lower, upper, prob) {
   L <- .t1_vec(lower); U <- .t1_vec(upper); p <- .t1_vec(prob)
   k <- length(L)

@@ -12,6 +12,11 @@
 #' @references Schrittwieser et al. (2020), arXiv:1911.08265, Equation
 #'   (1).  Read from the ar5iv rendering of the arXiv source.
 #' @export
+#' @examples
+#' representation <- function(o) o
+#' dynamics <- function(s, a) list(0.1, s + a)
+#' Mzworld(observation = 0, actions = c(1, 2), representation = representation,
+#'         dynamics = dynamics)
 Mzworld <- function(observation, actions, representation, dynamics) {
   s0 <- representation(observation)
   s <- s0

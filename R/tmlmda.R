@@ -22,6 +22,9 @@
 #'   JASA 93(444):1321-1339; Bang, H. & Robins, J. M. (2005). Biometrics
 #'   61(4):962-973.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Tmlmda(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), missing = rnorm(10)); TRUE
 Tmlmda <- function(y, D, X, missing) {
   yv <- as.numeric(y); Dv <- as.numeric(D); mv <- as.numeric(missing)
   n <- length(yv)

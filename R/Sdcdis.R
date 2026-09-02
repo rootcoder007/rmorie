@@ -41,6 +41,9 @@
 #'   evaluation using an E911 database. Geocarto International 25(6),
 #'   443-452. \doi{10.1080/10106049.2010.496496}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Sdcdis(matrix(runif(20), 10, 2), noise_radius = 0.1)
 Sdcdis <- function(coords, noise_radius, seed = 1) {
   P <- .s03mat(coords)
   n <- nrow(P)

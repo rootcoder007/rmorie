@@ -37,14 +37,6 @@ Chains \code{\link[=morie_causal_survival_forest]{morie_causal_survival_forest()
 passing the out-of-bag CATEs and the IPCW-RMST pseudo outcome.
 Mirrors \code{morie.fn.csurv2}.
 }
-\references{
-Cui Y et al. (2023). Estimating heterogeneous treatment
-effects with right-censored data via causal survival forests.
-\emph{JRSS-B} 85(2), 179-211; Chernozhukov V et al. (2018).
-Fisher-Schultz Lecture: generic machine learning inference on
-heterogeneous treatment effects in randomized experiments, with an
-application to immunization in India. arXiv:1712.04802.
-}
 \examples{
 set.seed(3)
 n <- 150
@@ -55,4 +47,12 @@ ev <- as.numeric(tt < quantile(tt, 0.8))
 tt <- pmin(tt, quantile(tt, 0.8))
 r <- morie_causal_survival_blp(tt, ev, d, X, n_trees = 20L)
 str(r, max.level = 1)
+}
+\references{
+Cui Y et al. (2023). Estimating heterogeneous treatment
+effects with right-censored data via causal survival forests.
+\emph{JRSS-B} 85(2), 179-211; Chernozhukov V et al. (2018).
+Fisher-Schultz Lecture: generic machine learning inference on
+heterogeneous treatment effects in randomized experiments, with an
+application to immunization in India. arXiv:1712.04802.
 }

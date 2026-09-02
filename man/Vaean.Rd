@@ -25,7 +25,7 @@ Vaean(
 
 \item{n_samples}{L, latent draws per point.}
 
-\item{alpha}{Tail fraction in [0, 1] for the threshold quantile.}
+\item{alpha}{Tail fraction in \link{0, 1} for the threshold quantile.}
 
 \item{encoder_sd}{sigma_z, non-negative.}
 

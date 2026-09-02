@@ -30,14 +30,14 @@ matching Cochran's Chapter 6 treatment.
 Formula: Rhat = ybar/xbar; Yhat_R = Rhat X;
 v(Rhat) = (1 - f)/(n xbar^2) * sum (y_i - Rhat x_i)^2/(n - 1)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ratioest(V, V)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 6. Chapter 6 was NOT in the scanned excerpt available to this batch,
 so the standard published form is used; the finite-population factor
 matches the samplingbook 1.2.4 convention (N - n)/N used throughout
 the sibling Cochran modules.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ratioest(V, V)
 }

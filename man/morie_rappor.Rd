@@ -39,10 +39,10 @@ A list with the reports, per-cohort bit \code{counts} and
 \description{
 Mirrors Python \code{morie.fn.rappor}.
 }
-\references{
-Erlingsson, Pihur & Korolova (2014), ACM CCS, 1054-1067.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_rappor(V)
+}
+\references{
+Erlingsson, Pihur & Korolova (2014), ACM CCS, 1054-1067.
 }

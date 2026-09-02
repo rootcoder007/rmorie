@@ -1,29 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Batch 12: ksr09-ksr20, ktaup, kvcmp, latnh
 
-test_that("morie_ksr09_kosorok_z_estimator: location path (y NULL)", {
-  set.seed(1)
-  x <- rnorm(120)
-  r <- morie_ksr09_kosorok_z_estimator(x)
-  expect_type(r, "list")
-  expect_named(r, c("estimate", "se", "n", "method"))
-  expect_equal(r$n, 120L)
-  expect_true(is.finite(r$estimate))
-  expect_true(is.finite(r$se) && r$se > 0)
-  expect_equal(r$estimate, mean(x))
-  expect_type(r$method, "character")
-})
-
-test_that("morie_ksr09_kosorok_z_estimator: OLS slope path (y supplied)", {
-  set.seed(2)
-  x <- rnorm(150)
-  y <- 1.5 * x + rnorm(150)
-  r <- morie_ksr09_kosorok_z_estimator(x, y)
-  expect_named(r, c("estimate", "se", "n", "method"))
-  expect_equal(r$n, 150L)
-  expect_true(is.finite(r$estimate))
-  expect_true(is.finite(r$se) && r$se > 0)
-  expect_gt(r$estimate, 0.5)
+test_that("morie_ksr09_kosorok_z_estimator solves the estimating equation", {
+  set.seed(4); x <- rnorm(150)
+  r <- morie_ksr09_kosorok_z_estimator(x, kind = "mean")
+  expect_true(all(c("estimate", "psi_at_estimate", "lower", "upper", "n") %in% names(r)))
+  expect_equal(r$estimate, mean(x), tolerance = 1e-6)
+  expect_true(abs(r$psi_at_estimate) < 1e-6)
+  h <- morie_ksr09_kosorok_z_estimator(x, kind = "huber", k = 1.345)
+  expect_true(h$lower <= h$estimate && h$estimate <= h$upper)
 })
 
 test_that("morie_ksr09_kosorok_z_estimator: alias matches and accepts integer input", {
@@ -142,21 +127,13 @@ test_that("morie_ksr14_kosorok_profile_likelihood: alias identity", {
   expect_identical(morie_kosorok_profile_likelihood, morie_ksr14_kosorok_profile_likelihood)
 })
 
-test_that("morie_ksr15_kosorok_one_step_estimator: default path", {
-  set.seed(11)
-  x <- rnorm(200)
-  r <- morie_ksr15_kosorok_one_step_estimator(x)
-  expect_type(r, "list")
-  expect_named(r, c("estimate", "se", "n", "method"))
-  expect_equal(r$n, 200L)
-  expect_true(is.finite(r$estimate))
-  expect_true(is.finite(r$se) && r$se > 0)
-})
-
-test_that("morie_ksr15_kosorok_one_step_estimator: one-step from median equals mean", {
-  x <- c(1, 2, 3, 4, 100)
-  r <- morie_ksr15_kosorok_one_step_estimator(x)
-  expect_equal(r$estimate, mean(x))
+test_that("morie_ksr15_kosorok_one_step_estimator takes one Newton step from theta0", {
+  set.seed(5); x <- rnorm(120)
+  r <- morie_ksr15_kosorok_one_step_estimator(x, theta0 = median(x), kind = "mean")
+  expect_true(all(c("estimate", "theta0", "step", "psi_mean", "derivative", "n") %in% names(r)))
+  expect_equal(r$estimate, r$theta0 + r$step, tolerance = 1e-12)
+  # one step from any start hits the mean exactly for the mean psi
+  expect_equal(r$estimate, mean(x), tolerance = 1e-10)
 })
 
 test_that("morie_ksr15_kosorok_one_step_estimator: alias identity", {

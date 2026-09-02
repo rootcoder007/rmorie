@@ -34,6 +34,10 @@
 #'   3rd Innovations in Theoretical Computer Science Conference,
 #'   214-226. doi:10.1145/2090236.2090255
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Objfair(V, M)
 Objfair <- function(h_values, x_pairs, L = 1, metric = NULL) {
   h <- as.numeric(h_values)
   n <- length(h)

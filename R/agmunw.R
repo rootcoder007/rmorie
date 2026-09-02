@@ -14,6 +14,9 @@
 #'   arXiv:1911.08265, Methods (training targets) and Equation (3).  Read
 #'   from the ar5iv rendering of the arXiv source.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mznstep(V, V)
 Mznstep <- function(rewards, values, n = 5, gamma = 0.997) {
   u <- .t1_vec(rewards); v <- .t1_vec(values); T <- length(u)
   if (length(v) != T) stop("rewards and values must have the same length")

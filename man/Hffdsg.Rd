@@ -29,11 +29,11 @@ say anything.
 \details{
 Formula: P(|mean - E mean| >= t) <= 2 exp(-2 n t^2 / (b - a)^2).
 }
+\examples{
+Hffdsg(a = 0, b = 1, n = 100, t = 0.1)
+}
 \references{
 Hoeffding (1963), Probability inequalities for sums of
 bounded random variables, JASA 58(301):13-30, Theorem 2.
 \doi{10.1080/01621459.1963.10500830}
-}
-\examples{
-Hffdsg(a = 0, b = 1, n = 100, t = 0.1)
 }

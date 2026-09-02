@@ -19,6 +19,8 @@
 #'   Pitman (2002), Poisson-Dirichlet and GEM invariant distributions,
 #'   Technical Report 621, U.C. Berkeley.
 #' @export
+#' @examples
+#' Dpgem()
 Dpgem <- function(alpha = 1, K = 10, seed = 42) {
   if (!(alpha > 0)) stop("alpha must be strictly positive")
   K <- as.integer(K)
