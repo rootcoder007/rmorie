@@ -15,16 +15,20 @@
 #' pmiwd(c(0, 0, 1, 1), c(0, 0, 1, 1))
 #' @export
 pmiwd <- function(x, y, window = NULL) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
   n <- min(length(xs), length(ys))
-  xs <- xs[seq_len(n)]; ys <- ys[seq_len(n)]
-  fx <- table(xs); fy <- table(ys)
+  xs <- xs[seq_len(n)]
+  ys <- ys[seq_len(n)]
+  fx <- table(xs)
+  fy <- table(ys)
   key <- paste(xs, ys, sep = "|")
   fxy <- table(key)
   adj <- if (!is.null(window) && window > 1) log2(window - 1) else 0
   nn <- as.numeric(n)
   nm <- sort(names(fxy))
-  pmis <- numeric(length(nm)); mi <- 0
+  pmis <- numeric(length(nm))
+  mi <- 0
   for (i in seq_along(nm)) {
     parts <- strsplit(nm[i], "|", fixed = TRUE)[[1]]
     pxy <- as.numeric(fxy[[nm[i]]]) / nn

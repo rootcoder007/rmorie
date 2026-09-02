@@ -29,7 +29,10 @@ Sgtcheegerbound <- function(W, max_n = 20) {
   if (n < 2L) stop("the Sgtcheegerbound constant needs at least two vertices")
   d <- rowSums(W)
   vol <- sum(d)
-  best <- NA_real_; arg <- integer(0); cut <- 0; vs <- 0
+  best <- NA_real_
+  arg <- integer(0)
+  cut <- 0
+  vs <- 0
   for (mask in seq_len(2^(n - 1) - 1)) {
     bits <- as.integer(intToBits(mask))[seq_len(n - 1)]
     S <- c(1L, which(bits == 1L) + 1L)
@@ -37,10 +40,14 @@ Sgtcheegerbound <- function(W, max_n = 20) {
     if (volS == 0 || volS == vol) next
     e <- sum(W[S, -S, drop = FALSE])
     h <- e / min(volS, vol - volS)
-    if (is.na(best) || h < best) { best <- h; arg <- S; cut <- e; vs <- volS }
+    if (is.na(best) || h < best) { best <- h
+    arg <- S
+    cut <- e
+    vs <- volS }
   }
   s <- ifelse(d == 0, 0, 1 / sqrt(ifelse(d == 0, 1, d)))
-  L <- -W; diag(L) <- d - diag(W)
+  L <- -W
+  diag(L) <- d - diag(W)
   vals <- rev(.t1_eigsym(diag(s, n) %*% L %*% diag(s, n))$values)
   nz <- vals[vals > 1e-10]
   lam1 <- if (length(nz)) nz[1] else 0

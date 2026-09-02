@@ -24,10 +24,14 @@
 #' Alsmf(V)
 Alsmf <- function(R, f = 2, lam = 0.1, alpha = 40, steps = 10,
                   X0 = NULL, Y0 = NULL) {
-  Rm <- .t1_mat(R); m <- nrow(Rm); n <- ncol(Rm); f <- as.integer(f)
+  Rm <- .t1_mat(R)
+  m <- nrow(Rm)
+  n <- ncol(Rm)
+  f <- as.integer(f)
   if (f < 1L) stop("f must be at least 1")
   if (any(Rm < 0)) stop("counts must be non-negative")
-  lam <- as.numeric(lam); al <- as.numeric(alpha)
+  lam <- as.numeric(lam)
+  al <- as.numeric(alpha)
   Cf <- 1 + al * Rm
   P <- (Rm > 0) * 1
   X <- if (is.null(X0))
@@ -36,7 +40,8 @@ Alsmf <- function(R, f = 2, lam = 0.1, alpha = 40, steps = 10,
   Y <- if (is.null(Y0))
     outer(seq_len(n) - 1L, seq_len(f) - 1L,
           function(i, k) ((i + 2 * k) %% 7 + 1) / 10) else .t1_mat(Y0)
-  dim(X) <- c(m, f); dim(Y) <- c(n, f)
+  dim(X) <- c(m, f)
+  dim(Y) <- c(n, f)
   for (s in seq_len(as.integer(steps))) {
     for (u in seq_len(m)) {
       cw <- Cf[u, ]

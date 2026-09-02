@@ -34,10 +34,12 @@
 #' Catnext(items, theta = 0.5)
 Catnext <- function(items, theta, administered = NULL, exposure = NULL,
                     D = 1) {
-  It <- as.matrix(items); J <- nrow(It)
+  It <- as.matrix(items)
+  J <- nrow(It)
   if (J < 1L) stop("the item bank must be non-empty")
   if (ncol(It) != 4L) stop("item rows must be (a, b, c, d)")
-  theta <- as.numeric(theta); D <- as.numeric(D)
+  theta <- as.numeric(theta)
+  D <- as.numeric(D)
   used <- integer(0)
   if (!is.null(administered)) {
     used <- as.integer(.t1_vec(administered))

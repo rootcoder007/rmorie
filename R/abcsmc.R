@@ -32,17 +32,23 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
                    schedule = NULL, kernel_sd = 0.1) {
   S <- .s03vec(summary_stats)
   pr <- if (!is.null(priors)) lapply(priors, as.numeric) else list(c(0, 1))
-  d <- length(pr); N <- as.integer(n_particles)
+  d <- length(pr)
+  N <- as.integer(n_particles)
   sch <- if (!is.null(schedule)) .s03vec(schedule) else c(2, 1, 0.5)
   theta <- matrix(0, N, d)
-  for (i in seq_len(N)) for (a in seq_len(d)) {
-    theta[i, a] <- pr[[a]][1] + (pr[[a]][2] - pr[[a]][1]) * .s03vdc(i - 1L, 1L + a)
+  for (i in seq_len(N)) {
+    for (a in seq_len(d)) {
+      theta[i, a] <- pr[[a]][1] + (pr[[a]][2] - pr[[a]][1]) * .s03vdc(i - 1L, 1L + a)
+    }
   }
   w <- rep(1 / N, N)
   accept <- numeric(0)
   for (t in seq_along(sch)) {
     eps <- sch[t]
-    newth <- list(); neww <- numeric(0); tries <- 0L; i <- 0L
+    newth <- list()
+    neww <- numeric(0)
+    tries <- 0L
+    i <- 0L
     while (length(newth) < N && tries < 20L * N) {
       src <- theta[(i %% N) + 1L, ]
       cand <- numeric(d)
@@ -81,11 +87,17 @@ Abcsmc <- function(model, summary_stats, priors = NULL, n_particles = 32,
     theta <- do.call(rbind, newth)
     w <- if (tot > 0) neww / tot else rep(1 / length(newth), length(newth))
   }
-  s1 <- 0; s2 <- 0
-  for (x in w) { s1 <- s1 + x; s2 <- s2 + x * x }
+  s1 <- 0
+  s2 <- 0
+  for (x in w) {
+    s1 <- s1 + x
+    s2 <- s2 + x * x
+  }
   m0 <- 0
   for (i in seq_len(nrow(theta))) m0 <- m0 + w[i] * theta[i, 1]
-  list(estimate = m0, theta = theta, weights = w,
-       ess = if (s2 > 0) (s1 * s1) / s2 else 0, accept = accept,
-       method = "ABC-SMC over a decreasing tolerance schedule (Toni et al. 2009), on a deterministic particle design")
+  list(
+    estimate = m0, theta = theta, weights = w,
+    ess = if (s2 > 0) (s1 * s1) / s2 else 0, accept = accept,
+    method = "ABC-SMC over a decreasing tolerance schedule (Toni et al. 2009), on a deterministic particle design"
+  )
 }

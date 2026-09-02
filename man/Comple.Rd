@@ -41,8 +41,8 @@ Formula: \code{Re(<e_h, w_r, conj(e_t))>} =
 \code{sum_k \[Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt\]}.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Comple(V, V)
+triples <- matrix(c(1L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 1L), ncol = 3, byrow = TRUE)
+Comple(triples, dim = 4)
 }
 \references{
 Trouillon, T. et al. (2016). Complex embeddings for

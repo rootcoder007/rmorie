@@ -16,15 +16,19 @@
 #' f <- rnorm(10)
 #' Biasvardec(F, f, sigma2 = 1)
 Biasvardec <- function(F, f, sigma2) {
-  F <- .t1_mat(F); f <- .t1_vec(f); s2 <- as.numeric(sigma2)
-  R <- nrow(F); n <- ncol(F)
+  F <- .t1_mat(F)
+  f <- .t1_vec(f)
+  s2 <- as.numeric(sigma2)
+  R <- nrow(F)
+  n <- ncol(F)
   if (R == 0L) stop("F must have at least one replicate row")
   if (n != length(f)) stop("F must have one column per entry of f")
   if (s2 < 0) stop("sigma2 must be non-negative")
   m <- colMeans(F)
   b2 <- (m - f)^2
   vv <- colMeans(sweep(F, 2, m, "-")^2)
-  bias2 <- mean(b2); var <- mean(vv)
+  bias2 <- mean(b2)
+  var <- mean(vv)
   .t1_result(bias2 = bias2, variance = var, irreducible = s2,
              total = s2 + bias2 + var, bias2_point = b2, variance_point = vv,
              R = R, n = n,

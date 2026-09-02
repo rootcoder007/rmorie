@@ -44,10 +44,16 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
   D <- list()
   for (t in dataset) {
     if (length(t) == 4L) {
-      s <- t[[1]]; a <- t[[2]]; r <- as.numeric(t[[3]]); s1 <- t[[4]]
+      s <- t[[1]]
+      a <- t[[2]]
+      r <- as.numeric(t[[3]])
+      s1 <- t[[4]]
       done <- FALSE
     } else if (length(t) == 5L) {
-      s <- t[[1]]; a <- t[[2]]; r <- as.numeric(t[[3]]); s1 <- t[[4]]
+      s <- t[[1]]
+      a <- t[[2]]
+      r <- as.numeric(t[[3]])
+      s1 <- t[[4]]
       done <- as.logical(t[[5]])
     } else {
       stop("bcq: each transition must be (s, a, r, s_next) or (s, a, r, s_next, done)")
@@ -77,7 +83,8 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
     n_sa <- new.env(hash = TRUE, parent = emptyenv())
     n_s <- new.env(hash = TRUE, parent = emptyenv())
     for (d in D) {
-      s <- d[[1]]; a <- d[[2]]
+      s <- d[[1]]
+      a <- d[[2]]
       key <- paste0(s, "|", a)
       n_sa[[key]] <- (n_sa[[key]] %||% 0) + 1
       n_s[[as.character(s)]] <- (n_s[[as.character(s)]] %||% 0) + 1
@@ -124,7 +131,11 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
     target <- new.env(hash = TRUE, parent = emptyenv())
     cnt <- new.env(hash = TRUE, parent = emptyenv())
     for (d in D) {
-      s <- d[[1]]; a <- d[[2]]; r <- d[[3]]; s1 <- d[[4]]; done <- d[[5]]
+      s <- d[[1]]
+      a <- d[[2]]
+      r <- d[[3]]
+      s1 <- d[[4]]
+      done <- d[[5]]
       key <- paste0(s, "|", a)
       if (done) {
         t_val <- r
@@ -158,10 +169,12 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
   value <- new.env(hash = TRUE, parent = emptyenv())
   for (s in S) {
     al <- allowed[[as.character(s)]]
-    best <- al[[1]]; best_q <- Q[[paste0(s, "|", al[[1]])]]
+    best <- al[[1]]
+    best_q <- Q[[paste0(s, "|", al[[1]])]]
     for (a in al) {
       v <- Q[[paste0(s, "|", a)]]
-      if (v > best_q) { best_q <- v; best <- a }
+      if (v > best_q) { best_q <- v
+      best <- a }
     }
     policy[[as.character(s)]] <- best
     value[[as.character(s)]] <- best_q
@@ -169,7 +182,11 @@ bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
 
   berr <- 0.0
   for (d in D) {
-    s <- d[[1]]; a <- d[[2]]; r <- d[[3]]; s1 <- d[[4]]; done <- d[[5]]
+    s <- d[[1]]
+    a <- d[[2]]
+    r <- d[[3]]
+    s1 <- d[[4]]
+    done <- d[[5]]
     if (done) {
       t_val <- r
     } else {

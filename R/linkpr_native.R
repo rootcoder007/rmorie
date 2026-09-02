@@ -32,7 +32,8 @@ Linkpr <- function(G, u, v, method = "all") {
   A <- as.matrix(G)
   n <- nrow(A)
   if (ncol(A) != n) stop("G must be square")
-  u <- as.integer(u); v <- as.integer(v)
+  u <- as.integer(u)
+  v <- as.integer(v)
   if (u < 1L || u > n || v < 1L || v > n) stop("u, v must be valid node indices")
   method <- tolower(as.character(method))
   if (!method %in% c("cn", "aa", "ra", "all")) stop("method must be one of cn, aa, ra, all")
@@ -40,7 +41,8 @@ Linkpr <- function(G, u, v, method = "all") {
   common <- sort(intersect(nbr[[u]], nbr[[v]]))
   deg <- vapply(nbr, length, 0L)
   cn <- as.numeric(length(common))
-  aa <- 0; ra <- 0
+  aa <- 0
+  ra <- 0
   for (z in common) {
     if (deg[z] > 1L) aa <- aa + 1 / log(deg[z])
     ra <- ra + 1 / deg[z]

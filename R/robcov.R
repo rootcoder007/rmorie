@@ -23,8 +23,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Robcov(V, V)
 Robcov <- function(X, y, kind = "HC0") {
-  Xm <- as.matrix(X); yv <- as.numeric(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- as.matrix(X)
+  yv <- as.numeric(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   fit <- .s4_ols(Xm, yv)
   h <- rowSums((Xm %*% fit$xtxinv) * Xm)
   w <- switch(kind, HC1 = rep(n / (n - p), n), HC2 = 1 / (1 - h),

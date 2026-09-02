@@ -18,7 +18,9 @@ Compcen <- function(X, total = 1) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")
   g <- exp(colMeans(log(X)))
-  .t1_result(center = as.numeric(total) * g / sum(g), geometric_mean = g,
-             n = nrow(X), D = ncol(X),
-             method = "Compositional centre (closed geometric mean)")
+  .t1_result(
+    center = as.numeric(total) * g / sum(g), geometric_mean = g,
+    n = nrow(X), D = ncol(X),
+    method = "Compositional centre (closed geometric mean)"
+  )
 }

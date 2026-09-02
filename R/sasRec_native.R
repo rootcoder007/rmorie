@@ -56,12 +56,18 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
   X <- E
   if (is.list(X) && !is.matrix(X)) X <- do.call(rbind, X)
   storage.mode(X) <- "double"
-  n <- nrow(X); d <- ncol(X)
+  n <- nrow(X)
+  d <- ncol(X)
   M <- if (is.null(mask)) causal_mask(n) else mask
-  WQm <- WQ; if (is.list(WQm) && !is.matrix(WQm)) WQm <- do.call(rbind, WQm)
-  WKm <- WK; if (is.list(WKm) && !is.matrix(WKm)) WKm <- do.call(rbind, WKm)
-  WVm <- WV; if (is.list(WVm) && !is.matrix(WVm)) WVm <- do.call(rbind, WVm)
-  storage.mode(WQm) <- "double"; storage.mode(WKm) <- "double"; storage.mode(WVm) <- "double"
+  WQm <- WQ
+  if (is.list(WQm) && !is.matrix(WQm)) WQm <- do.call(rbind, WQm)
+  WKm <- WK
+  if (is.list(WKm) && !is.matrix(WKm)) WKm <- do.call(rbind, WKm)
+  WVm <- WV
+  if (is.list(WVm) && !is.matrix(WVm)) WVm <- do.call(rbind, WVm)
+  storage.mode(WQm) <- "double"
+  storage.mode(WKm) <- "double"
+  storage.mode(WVm) <- "double"
   dk <- nrow(WQm)
   Q <- X %*% t(WQm)
   K <- X %*% t(WKm)
@@ -144,7 +150,8 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #' @return A list with \code{attention_ops}, \code{rnn_ops}, \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
 #' @export
 complexity <- function(n, d) {
-  nn <- as.integer(n); dd <- as.integer(d)
+  nn <- as.integer(n)
+  dd <- as.integer(d)
   if (nn < 1 || dd < 1) stop("sasRec: n and d must be positive")
   list(attention_ops = nn * nn * dd, rnn_ops = nn * dd * dd,
        attention_sequential_steps = 1, rnn_sequential_steps = nn,

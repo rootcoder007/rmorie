@@ -41,8 +41,10 @@ symbolic_representation <- function(captions, boxes) {
   for (rec in bx) {
     rec <- as.list(rec)
     name <- as.character(rec[[1L]])
-    x <- as.numeric(rec[[2L]]); y <- as.numeric(rec[[3L]])
-    w <- as.numeric(rec[[4L]]); h <- as.numeric(rec[[5L]])
+    x <- as.numeric(rec[[2L]])
+    y <- as.numeric(rec[[3L]])
+    w <- as.numeric(rec[[4L]])
+    h <- as.numeric(rec[[5L]])
     lines <- c(lines, paste0(name, ": [", sprintf("%.3f", x), ", ",
                              sprintf("%.3f", y), ", ", sprintf("%.3f", w),
                              ", ", sprintf("%.3f", h), "]"))

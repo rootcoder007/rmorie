@@ -38,8 +38,12 @@
 #' @examples
 #' morie_basEvap(T = 25, R_n = 15, u2 = 2, VPD = 1.5)
 morie_basEvap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
-  T <- as.numeric(T); R_n <- as.numeric(R_n); u2 <- as.numeric(u2)
-  VPD <- as.numeric(VPD); G <- as.numeric(G); P <- as.numeric(P)
+  T <- as.numeric(T)
+  R_n <- as.numeric(R_n)
+  u2 <- as.numeric(u2)
+  VPD <- as.numeric(VPD)
+  G <- as.numeric(G)
+  P <- as.numeric(P)
   if (VPD < 0) stop("basEvap: VPD must be non-negative")
   if (u2 < 0) stop("basEvap: wind speed must be non-negative")
   if (P <= 0) stop("basEvap: pressure must be positive")

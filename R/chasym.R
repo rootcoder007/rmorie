@@ -71,7 +71,8 @@ Chasym <- function(y, A = NULL, H = NULL, B = 200, seed = 42) {
   u <- .msm_lcg(seed)
   reps <- numeric(B)
   for (b in seq_len(B)) {
-    sw_b <- 0; sy_b <- 0
+    sw_b <- 0
+    sy_b <- 0
     for (i in seq_len(n)) {
       k <- as.integer(u() * n) + 1L
       if (k > n) k <- n

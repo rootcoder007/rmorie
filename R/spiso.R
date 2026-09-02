@@ -27,7 +27,8 @@
 #' @export
 spiso <- function(coords, z, n_dir = 4, n_bins = 10, max_dist = NULL,
                   tol = 0.25) {
-  coords <- as.matrix(coords); z <- as.numeric(z)
+  coords <- as.matrix(coords)
+  z <- as.numeric(z)
   if (nrow(coords) != length(z)) {
     stop("`coords` and `z` must have the same number of rows")
   }
@@ -35,7 +36,8 @@ spiso <- function(coords, z, n_dir = 4, n_bins = 10, max_dist = NULL,
   if (n_dir < 2) stop("`n_dir` must be >= 2")
   n <- length(z)
   ij <- which(upper.tri(matrix(0, n, n)), arr.ind = TRUE)
-  i <- ij[, 1]; j <- ij[, 2]
+  i <- ij[, 1]
+  j <- ij[, 2]
   d <- coords[j, , drop = FALSE] - coords[i, , drop = FALSE]
   dist <- sqrt(rowSums(d^2))
   # A lag and its negation are the same direction, so the angle folds onto

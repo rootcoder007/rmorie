@@ -29,16 +29,21 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
   if (!is.null(pxy)) {
     J <- .s03mat(pxy)
   } else {
-    a <- as.character(X); b <- as.character(Y)
-    la <- sort(unique(a), method = "radix"); lb <- sort(unique(b), method = "radix")
+    a <- as.character(X)
+    b <- as.character(Y)
+    la <- sort(unique(a), method = "radix")
+    lb <- sort(unique(b), method = "radix")
     J <- matrix(0, length(la), length(lb))
     for (i in seq_along(a)) {
       J[match(a[i], la), match(b[i], lb)] <- J[match(a[i], la), match(b[i], lb)] + 1 / length(a)
     }
   }
-  n <- nrow(J); m <- ncol(J)
+  n <- nrow(J)
+  m <- ncol(J)
   px <- numeric(n)
-  for (i in seq_len(n)) { s <- 0; for (j in seq_len(m)) s <- s + J[i, j]; px[i] <- s }
+  for (i in seq_len(n)) { s <- 0
+  for (j in seq_len(m)) s <- s + J[i, j]
+  px[i] <- s }
   pygx <- matrix(0, n, m)
   for (i in seq_len(n)) for (j in seq_len(m)) {
     pygx[i, j] <- if (px[i] > 0) J[i, j] / px[i] else 0
@@ -52,7 +57,8 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
     for (v in row) s <- s + v
     Q[i, ] <- row / s
   }
-  pt <- numeric(Tn); pygt <- matrix(0, Tn, m)
+  pt <- numeric(Tn)
+  pygt <- matrix(0, Tn, m)
   for (it in seq_len(as.integer(iters))) {
     for (t in seq_len(Tn)) {
       s <- 0
@@ -92,7 +98,9 @@ Infobtl <- function(X, Y = NULL, beta = 5, T = 2, iters = 500, tol = 1e-14,
     if (Q[i, t] > 0 && pt[t] > 0) ixt <- ixt + px[i] * Q[i, t] * log(Q[i, t] / pt[t])
   }
   py <- numeric(m)
-  for (j in seq_len(m)) { s <- 0; for (i in seq_len(n)) s <- s + J[i, j]; py[j] <- s }
+  for (j in seq_len(m)) { s <- 0
+  for (i in seq_len(n)) s <- s + J[i, j]
+  py[j] <- s }
   ity <- 0
   for (t in seq_len(Tn)) for (j in seq_len(m)) {
     if (pygt[t, j] > 0 && py[j] > 0) ity <- ity + pt[t] * pygt[t, j] * log(pygt[t, j] / py[j])

@@ -22,10 +22,12 @@
 #' @export
 Voronoi <- function(coords, bbox = NULL, values = NULL) {
   clip <- function(poly, a, b, cc) {
-    out <- list(); n <- length(poly)
+    out <- list()
+    n <- length(poly)
     if (n == 0L) return(out)
     for (i in seq_len(n)) {
-      p <- poly[[i]]; q <- poly[[if (i == n) 1L else i + 1L]]
+      p <- poly[[i]]
+      q <- poly[[if (i == n) 1L else i + 1L]]
       dp <- a * p[1] + b * p[2] - cc
       dq <- a * q[1] + b * q[2] - cc
       if (dp <= 0) out[[length(out) + 1L]] <- p
@@ -37,7 +39,8 @@ Voronoi <- function(coords, bbox = NULL, values = NULL) {
     out
   }
   area <- function(poly) {
-    s <- 0; n <- length(poly)
+    s <- 0
+    n <- length(poly)
     if (n < 3L) return(0)
     for (i in seq_len(n)) {
       j <- if (i == n) 1L else i + 1L
@@ -45,17 +48,25 @@ Voronoi <- function(coords, bbox = NULL, values = NULL) {
     }
     abs(s) / 2
   }
-  P <- .s03mat(coords); n <- nrow(P)
+  P <- .s03mat(coords)
+  n <- nrow(P)
   if (is.null(bbox)) {
-    xs <- P[, 1]; ys <- P[, 2]
-    mx <- max(xs) - min(xs); if (mx == 0) mx <- 1
-    my <- max(ys) - min(ys); if (my == 0) my <- 1
+    xs <- P[, 1]
+    ys <- P[, 2]
+    mx <- max(xs) - min(xs)
+    if (mx == 0) mx <- 1
+    my <- max(ys) - min(ys)
+    if (my == 0) my <- 1
     bbox <- c(min(xs) - 0.5 * mx, min(ys) - 0.5 * my,
               max(xs) + 0.5 * mx, max(ys) + 0.5 * my)
   }
   bb <- as.numeric(bbox)
-  x0 <- bb[1]; y0 <- bb[2]; x1 <- bb[3]; y1 <- bb[4]
-  areas <- numeric(n); cells <- vector("list", n)
+  x0 <- bb[1]
+  y0 <- bb[2]
+  x1 <- bb[3]
+  y1 <- bb[4]
+  areas <- numeric(n)
+  cells <- vector("list", n)
   for (i in seq_len(n)) {
     poly <- list(c(x0, y0), c(x1, y0), c(x1, y1), c(x0, y1))
     for (j in seq_len(n)) {

@@ -26,6 +26,8 @@ Subcomp <- function(x, parts, total = 1) {
   if (any(idx < 1L | idx > D)) stop("parts must be one-based indices in 1..D")
   sub <- x[idx]
   k <- as.numeric(total)
-  .t1_result(composition = k * sub / sum(sub), parts = idx, total = k,
-             D_sub = length(idx), D = D, method = "Subcomposition")
+  .t1_result(
+    composition = k * sub / sum(sub), parts = idx, total = k,
+    D_sub = length(idx), D = D, method = "Subcomposition"
+  )
 }

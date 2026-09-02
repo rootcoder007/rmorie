@@ -186,7 +186,8 @@ morie_convex_hull <- function(points) {
   if (nrow(P) < 3L) stop("Need >= 3 points for a convex hull, got ", nrow(P), ".", call. = FALSE)
   idx <- grDevices::chull(P[, 1], P[, 2])
   hull <- P[idx, , drop = FALSE]
-  x <- hull[, 1]; y <- hull[, 2]
+  x <- hull[, 1]
+  y <- hull[, 2]
   area <- 0.5 * abs(sum(x * c(y[-1], y[1])) - sum(y * c(x[-1], x[1])))
   list(hull_indices = idx, hull_points = hull, n_vertices = length(idx),
        area = area, method = "Convex hull (Andrew scan via grDevices::chull)")
@@ -278,7 +279,8 @@ morie_nonbacktracking_matrix <- function(edges, n = NULL) {
   key <- paste(de[, 1], de[, 2])
   pos <- stats::setNames(seq_len(m2), key)
   for (i in seq_len(m2)) {
-    u <- de[i, 1]; v <- de[i, 2]
+    u <- de[i, 1]
+    v <- de[i, 2]
     for (w in which(A[v, ] > 0)) {
       if (w != u && w != v) B[i, pos[[paste(v, w)]]] <- 1
     }

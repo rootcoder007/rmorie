@@ -63,7 +63,8 @@
     top <- if (is.null(cutoff)) max(h) / 2 else as.numeric(cutoff)
     edges <- seq(0, top, length.out = k + 1L)
   }
-  centres <- numeric(0); idx <- list()
+  centres <- numeric(0)
+  idx <- list()
   for (b in seq_len(length(edges) - 1L)) {
     m <- which(h > edges[b] - 1e-12 & h <= edges[b + 1L] + 1e-12)
     if (length(m)) {
@@ -111,7 +112,8 @@ morie_cressie_hawkins <- function(coords, z, bins = NULL, cutoff = NULL,
                                   exact = FALSE, full_correction = FALSE) {
   pr <- .morie_sb_pairs(coords, z)
   gr <- .morie_sb_groups(pr$h, bins, cutoff, exact)
-  gam <- numeric(length(gr$idx)); np <- integer(length(gr$idx))
+  gam <- numeric(length(gr$idx))
+  np <- integer(length(gr$idx))
   mat <- numeric(length(gr$idx))
   for (b in seq_along(gr$idx)) {
     m <- gr$idx[[b]]
@@ -176,7 +178,8 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
     model,
     exponential = 1 - exp(-3 * h / a),
     gaussian = 1 - exp(-3 * (h / a)^2),
-    spherical = { t <- pmin(pmax(h / a, 0), 1); 1.5 * t - 0.5 * t^3 },
+    spherical = { t <- pmin(pmax(h / a, 0), 1)
+    1.5 * t - 0.5 * t^3 },
     linear = pmin(h / a, 1),
     stop(sprintf("unknown model %s.", model), call. = FALSE)
   )
@@ -220,10 +223,12 @@ morie_variogram_composite_likelihood <- function(coords, z,
                                                  max_iter = 60L,
                                                  tol = 1e-10) {
   pr <- .morie_sb_pairs(coords, z)
-  h <- pr$h; t3 <- pr$d^2
+  h <- pr$h
+  t3 <- pr$d^2
   v0 <- stats::var(as.numeric(z))
   theta <- c(max(0.1 * v0, 1e-8), max(0.9 * v0, 1e-8), max(max(h) / 3, 1e-8))
-  prev <- NULL; it <- 0L
+  prev <- NULL
+  it <- 0L
   for (it in seq_len(max_iter)) {
     g_cur <- pmax(.morie_sb_vgm(h, model, theta[1], theta[2], theta[3]), 1e-12)
     w <- 1 / (8 * g_cur^2)
@@ -291,7 +296,9 @@ morie_kriging_pred_error <- function(coords, z, target,
                                      nugget = NULL, psill = NULL,
                                      rng = NULL, jitter = 0.05,
                                      n_jitter = 24L, seed = 0L) {
-  P <- as.matrix(coords); zz <- as.numeric(z); n <- length(zz)
+  P <- as.matrix(coords)
+  zz <- as.numeric(z)
+  n <- length(zz)
   if (nrow(P) != n) P <- t(P)
   T0 <- as.matrix(target)
   if (ncol(T0) != ncol(P)) T0 <- t(T0)
@@ -309,7 +316,9 @@ morie_kriging_pred_error <- function(coords, z, target,
                        obj, method = "Nelder-Mead",
                        control = list(maxit = 2000L, reltol = 1e-12))
     th <- exp(op$par)
-    nugget <- th[1]; psill <- th[2]; rng <- th[3]
+    nugget <- th[1]
+    psill <- th[2]
+    rng <- th[3]
   }
   theta <- c(nugget, psill, rng)
   D <- as.matrix(stats::dist(P))
@@ -321,7 +330,8 @@ morie_kriging_pred_error <- function(coords, z, target,
     C <- sill - .morie_sb_vgm(D, model, t[1], t[2], t[3])
     C <- C + diag(1e-10 * max(sill, 1e-12), n)
     c0 <- sill - .morie_sb_vgm(d0, model, t[1], t[2], t[3])
-    Ci1 <- solve(C, rep(1, n)); Cic <- solve(C, c0)
+    Ci1 <- solve(C, rep(1, n))
+    Cic <- solve(C, c0)
     den <- sum(Ci1)
     lam <- Cic + outer(Ci1, (1 - colSums(Cic)) / den)
     var <- sill - colSums(c0 * Cic) + (1 - colSums(Cic))^2 / den
@@ -333,8 +343,10 @@ morie_kriging_pred_error <- function(coords, z, target,
   dlam <- array(0, dim = c(3L, n, m))
   for (k in 1:3) {
     step <- max(abs(theta[k]) * 1e-4, 1e-8)
-    tp <- theta; tm <- theta
-    tp[k] <- tp[k] + step; tm[k] <- max(tm[k] - step, 1e-12)
+    tp <- theta
+    tm <- theta
+    tp[k] <- tp[k] + step
+    tm[k] <- max(tm[k] - step, 1e-12)
     dlam[k, , ] <- (krige(tp)$lam - krige(tm)$lam) / (tp[k] - tm[k])
   }
   set.seed(seed)

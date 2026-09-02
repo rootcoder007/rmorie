@@ -53,7 +53,8 @@ Bayhier <- function(y, group, sigma2 = NULL, tau2 = NULL) {
   labs <- sort(unique(gl))
   G <- length(labs)
   if (G < 2L) stop("hierarchical_pooling: need at least two groups")
-  ng <- integer(G); sg <- numeric(G)
+  ng <- integer(G)
+  sg <- numeric(G)
   for (i in seq_len(n)) {
     j <- match(gl[i], labs)
     ng[j] <- ng[j] + 1L
@@ -97,7 +98,8 @@ Bayhier <- function(y, group, sigma2 = NULL, tau2 = NULL) {
     sgj <- s2 / ng[j]
     lam[j] <- if ((t2 + sgj) > 0) t2 / (t2 + sgj) else 0
   }
-  num <- 0; den <- 0
+  num <- 0
+  den <- 0
   for (j in seq_len(G)) {
     dd <- t2 + s2 / ng[j]
     w <- if (dd > 0) 1 / dd else 0

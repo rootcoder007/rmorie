@@ -28,7 +28,8 @@ Ghosalbetaprocdef <- function(grid_t, c = 2, Lambda0_rate = 1, seed = 42) {
   if (length(ts) == 0L) stop("grid_t must be non-empty")
   if (c <= 0) stop("c must be positive")
   e <- .ghc_rng(seed)
-  H <- 0; prev <- 0
+  H <- 0
+  prev <- 0
   path <- numeric(length(ts))
   for (i in seq_along(ts)) {
     dH0 <- Lambda0_rate * (ts[i] - prev)

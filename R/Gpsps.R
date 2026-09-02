@@ -28,7 +28,8 @@
 #' Gpsps(V, V)
 Gpsps <- function(X, y, X_test = NULL, Q = 1, weights = NULL, variances = NULL,
                   means = NULL, noise = 0.01) {
-  xs <- .s03vec(X); yv <- .s03vec(y)
+  xs <- .s03vec(X)
+  yv <- .s03vec(y)
   n <- length(xs)
   if (n == 0L) stop("gp_spectral_mixture: X is empty")
   if (length(yv) != n) stop("gp_spectral_mixture: X and y have different lengths")

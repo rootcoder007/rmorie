@@ -24,9 +24,11 @@
 #'   level, as in van der Laan & Rose (2011), Targeted Learning, Chapter 4.
 #' @export
 Tmlecat <- function(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95) {
-  Y <- .t1_vec(Y); n <- length(Y)
+  Y <- .t1_vec(Y)
+  n <- length(Y)
   A <- as.integer(.t1_vec(A))
-  Qm <- as.matrix(Q); Gm <- as.matrix(G)
+  Qm <- as.matrix(Q)
+  Gm <- as.matrix(G)
   if (length(A) != n || nrow(Qm) != n || nrow(Gm) != n)
     stop("every argument must have one entry per observation")
   L <- ncol(Qm)
@@ -59,7 +61,9 @@ Tmlecat <- function(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95) {
     Qas <- .b1_expit(.b1_logit(Qm[, a]) + e / ga)
     p <- mean(Qas)
     ic <- H * (Y - QAs) + Qas - p
-    psi[a] <- p; ics[, a] <- ic; ses[a] <- sqrt(stats::var(ic) / n)
+    psi[a] <- p
+    ics[, a] <- ic
+    ses[a] <- sqrt(stats::var(ic) / n)
   }
   z <- stats::qnorm((1 + level) / 2)
   con <- psi - psi[ref]
@@ -67,7 +71,8 @@ Tmlecat <- function(Y, A, Q, G, ref = 1, gbound = 0.025, level = 0.95) {
   for (a in seq_len(L)) {
     icd <- ics[, a] - ics[, ref]
     cse[a] <- sqrt(stats::var(icd) / n)
-    lo[a] <- con[a] - z * cse[a]; hi[a] <- con[a] + z * cse[a]
+    lo[a] <- con[a] - z * cse[a]
+    hi[a] <- con[a] + z * cse[a]
   }
   .t1_result(psi = psi, se = ses, contrast = con, contrast_se = cse,
              ci_lower = lo, ci_upper = hi, min_g = mg,

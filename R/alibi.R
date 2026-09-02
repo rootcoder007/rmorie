@@ -21,8 +21,10 @@
 #' Alibi(matrix(0, 3, 3))$bias
 #' @export
 Alibi <- function(scores, slopes = NULL, causal = FALSE) {
-  S <- as.matrix(scores); storage.mode(S) <- "double"
-  nq <- nrow(S); nk <- ncol(S)
+  S <- as.matrix(scores)
+  storage.mode(S) <- "double"
+  nq <- nrow(S)
+  nk <- ncol(S)
   if (nq == 0L || nk == 0L) stop("alibi: scores is empty")
   m <- if (is.null(slopes)) 2^-8 else as.numeric(slopes)
   B <- .atalib_bias(nq, nk, m, causal)

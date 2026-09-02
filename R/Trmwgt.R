@@ -22,14 +22,16 @@
 #' Trmwgt(c(1, 1, 1, 100), 0.75)
 #' @export
 Trmwgt <- function(weights, quantile = 0.99) {
-  w <- .s03vec(weights); n <- length(w)
+  w <- .s03vec(weights)
+  n <- length(w)
   if (n == 0L) stop("trim_weights: weights is empty")
   if (any(w < 0)) stop("trim_weights: weights must be non-negative")
   q <- as.numeric(quantile)
   if (!(q > 0 && q <= 1)) stop("trim_weights: quantile must lie in (0, 1]")
   cut <- .s03quantile7(w, q)
   tw <- pmin(w, cut)
-  s0 <- sum(w); s1 <- sum(tw)
+  s0 <- sum(w)
+  s1 <- sum(tw)
   resc <- if (s1 > 0) tw * (s0 / s1) else tw
   list(estimate = as.numeric(cut), weights = tw, rescaled = resc,
        n_trimmed = as.integer(sum(w > cut)),
@@ -49,7 +51,8 @@ Trmwgt <- function(weights, quantile = 0.99) {
 #' @return A numeric value.
 #' @export
 .trmwgt_cv <- function(w) {
-  n <- length(w); m <- sum(w) / n
+  n <- length(w)
+  m <- sum(w) / n
   if (m == 0) return(NaN)
   v <- if (n > 1) sum((w - m)^2) / (n - 1) else 0
   sqrt(v) / m

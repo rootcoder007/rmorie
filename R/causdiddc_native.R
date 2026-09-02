@@ -115,7 +115,8 @@
   r  <- Dv
   for (iter in seq_len(500L)) {
     # strip group means
-    ga <- numeric(G); gw <- numeric(G)
+    ga <- numeric(G)
+    gw <- numeric(G)
     for (i in seq_len(n)) {
       k <- gi[i]
       ga[k] <- ga[k] + r[i] * weights[i]
@@ -126,7 +127,8 @@
       r[i] <- r[i] - ga[k] / gw[k]
     }
     # strip period means
-    ta <- numeric(Tp); tw <- numeric(Tp)
+    ta <- numeric(Tp)
+    tw <- numeric(Tp)
     for (i in seq_len(n)) {
       k <- ti[i]
       ta[k] <- ta[k] + r[i] * weights[i]
@@ -225,13 +227,15 @@
   p <- .causdiddc_panel(Y, D, group, period)
   cells <- .causdiddc_cells(p$Y, p$D, p$g, p$t)
   periods <- sort(unique(p$t))
-  num <- 0.0; den <- 0.0
+  num <- 0.0
+  den <- 0.0
   parts <- list()
   if (length(periods) >= 2L) {
     for (k in seq_len(length(periods) - 1L)) {
       t0 <- periods[k]
       t1 <- periods[k + 1L]
-      stayers_up <- list(); stayers_dn <- list()
+      stayers_up <- list()
+      stayers_dn <- list()
       for (gg in unique(p$g)) {
         a <- cells[[paste0(gg, "\r", t0)]]
         b <- cells[[paste0(gg, "\r", t1)]]

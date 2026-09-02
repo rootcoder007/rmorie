@@ -47,10 +47,12 @@
 #'   above are its standard published form, stated in full.
 #' @export
 Mscmcl <- function(y, D, lam, max_iter = 500, tol = 1e-10) {
-  Y <- as.matrix(y); W <- as.matrix(D)
+  Y <- as.matrix(y)
+  W <- as.matrix(D)
   if (length(dim(Y)) != 2L) stop("y must be a 2-D panel, units by periods")
   if (!identical(dim(W), dim(Y))) stop("D must have the same shape as y")
-  N <- nrow(Y); Tt <- ncol(Y)
+  N <- nrow(Y)
+  Tt <- ncol(Y)
   lm <- as.numeric(lam)
   if (lm < 0) stop("lam must be non-negative")
   if (any(W != 0 & W != 1)) stop("D must be binary 0/1")
@@ -60,7 +62,8 @@ Mscmcl <- function(y, D, lam, max_iter = 500, tol = 1e-10) {
   n_treated <- N * Tt - n_obs
   if (n_treated == 0L) stop("no cell is treated; there is no effect to estimate")
   L <- matrix(0, N, Tt)
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
     Z <- ifelse(obs, Y, L)
     sv <- svd(Z)
@@ -68,7 +71,8 @@ Mscmcl <- function(y, D, lam, max_iter = 500, tol = 1e-10) {
     Lnew <- sv$u %*% diag(s_th, nrow = length(s_th)) %*% t(sv$v)
     diff <- sqrt(sum((Lnew - L)^2))
     L <- Lnew
-    if (diff <= tol) { converged <- TRUE; break }
+    if (diff <= tol) { converged <- TRUE
+    break }
   }
   d <- svd(L, nu = 0, nv = 0)$d
   tau <- as.numeric(t(Y - L))[as.logical(t(W))]

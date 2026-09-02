@@ -43,10 +43,12 @@ Dpsbm <- function(adjacency, alpha = 1, n_iter = 30, seed = 42) {
   if (ncol(A) != n) stop("adjacency must be square")
   if (!(alpha > 0)) stop("alpha must be strictly positive")
   block_ll <- function(z, K) {
-    e <- matrix(0, K, K); tt <- matrix(0, K, K)
+    e <- matrix(0, K, K)
+    tt <- matrix(0, K, K)
     for (i in seq_len(n)) for (j in seq_len(n)) {
       if (i == j) next
-      a <- z[i]; b <- z[j]
+      a <- z[i]
+      b <- z[j]
       tt[a, b] <- tt[a, b] + 1
       if (A[i, j] > 0.5) e[a, b] <- e[a, b] + 1
     }
@@ -62,14 +64,17 @@ Dpsbm <- function(adjacency, alpha = 1, n_iter = 30, seed = 42) {
   for (it in seq_len(as.integer(n_iter))) {
     for (i in seq_len(n)) {
       counts <- vapply(seq_len(K), function(c) sum(z[-i] == c), 0L)
-      logw <- c(); cand <- c()
+      logw <- c()
+      cand <- c()
       for (c in seq_len(K)) {
         if (counts[c] == 0L) next
-        zz <- z; zz[i] <- c
+        zz <- z
+        zz[i] <- c
         logw <- c(logw, log(counts[c]) + block_ll(zz, K))
         cand <- c(cand, c)
       }
-      zz <- z; zz[i] <- K + 1L
+      zz <- z
+      zz[i] <- K + 1L
       logw <- c(logw, log(alpha) + block_ll(zz, K + 1L))
       cand <- c(cand, K + 1L)
       mx <- max(logw)
@@ -81,7 +86,8 @@ Dpsbm <- function(adjacency, alpha = 1, n_iter = 30, seed = 42) {
       pick <- cand[length(cand)]
       for (q in seq_along(w)) {
         acc <- acc + w[q]
-        if (u <= acc) { pick <- cand[q]; break }
+        if (u <= acc) { pick <- cand[q]
+        break }
       }
       z[i] <- pick
       if (pick == K + 1L) K <- K + 1L

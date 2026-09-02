@@ -24,9 +24,12 @@
 #'   Rubin, D. (2006). IJB 2(1):11.
 #' @export
 Tmlrct <- function(y_rct, y_obs, D, X) {
-  y1 <- as.numeric(y_rct); y2 <- as.numeric(y_obs)
-  yv <- c(y1, y2); Dv <- as.numeric(D)
-  n1 <- length(y1); n <- length(yv)
+  y1 <- as.numeric(y_rct)
+  y2 <- as.numeric(y_obs)
+  yv <- c(y1, y2)
+  Dv <- as.numeric(D)
+  n1 <- length(y1)
+  n <- length(yv)
   if (n1 < 2L) stop("Tmlrct: need at least two trial rows")
   if (length(Dv) != n) stop("Tmlrct: D must have one entry per stacked row")
   Xm <- as.matrix(X)

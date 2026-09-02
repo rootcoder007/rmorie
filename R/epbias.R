@@ -39,7 +39,8 @@ Epbias <- function(A_obs, Se, Sp, N = NULL) {
   }
   g <- length(a)
   if (g == 0L) stop("empty input: A_obs has no groups")
-  se <- as.numeric(Se); sp <- as.numeric(Sp)
+  se <- as.numeric(Se)
+  sp <- as.numeric(Sp)
   if (length(se) == 1L) se <- rep(se, g)
   if (length(sp) == 1L) sp <- rep(sp, g)
   if (length(se) != g || length(sp) != g)
@@ -56,7 +57,8 @@ Epbias <- function(A_obs, Se, Sp, N = NULL) {
   at <- (a - (1 - sp) * tot) / (se + sp - 1)
   prev <- at / tot
   .or <- function(x) {
-    n0 <- tot[1] - x[1]; n1 <- tot[2] - x[2]
+    n0 <- tot[1] - x[1]
+    n1 <- tot[2] - x[2]
     if (x[2] <= 0 || n0 <= 0 || n1 <= 0 || x[1] <= 0) NaN
     else (x[1] * n1) / (x[2] * n0)
   }

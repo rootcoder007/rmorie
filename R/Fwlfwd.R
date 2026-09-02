@@ -37,23 +37,33 @@ Fwlfwd <- function(f, grad_f, domain, x0, steps = 10, rounds = 3) {
   if (ns < 1L) stop("fully_corrective_fw: steps must be at least 1")
   invphi <- (sqrt(5) - 1) / 2
   lsearch <- function(x, v) {
-    lo <- 0; hi <- 1
+    lo <- 0
+    hi <- 1
     pt <- function(g) (1 - g) * x + g * v
-    cc <- hi - invphi * (hi - lo); dd <- lo + invphi * (hi - lo)
-    fc <- f(pt(cc)); fd <- f(pt(dd))
+    cc <- hi - invphi * (hi - lo)
+    dd <- lo + invphi * (hi - lo)
+    fc <- f(pt(cc))
+    fd <- f(pt(dd))
     for (i in seq_len(60)) {
       if (fc < fd) {
-        hi <- dd; dd <- cc; fd <- fc
-        cc <- hi - invphi * (hi - lo); fc <- f(pt(cc))
+        hi <- dd
+        dd <- cc
+        fd <- fc
+        cc <- hi - invphi * (hi - lo)
+        fc <- f(pt(cc))
       } else {
-        lo <- cc; cc <- dd; fc <- fd
-        dd <- lo + invphi * (hi - lo); fd <- f(pt(dd))
+        lo <- cc
+        cc <- dd
+        fc <- fd
+        dd <- lo + invphi * (hi - lo)
+        fd <- f(pt(dd))
       }
     }
     pt((lo + hi) / 2)
   }
   active <- integer(0)
-  path <- as.numeric(f(x)); gap <- Inf
+  path <- as.numeric(f(x))
+  gap <- Inf
   for (s in seq_len(ns)) {
     g <- .s03vec(grad_f(x))
     sc <- as.numeric(V %*% g)

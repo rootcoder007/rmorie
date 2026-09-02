@@ -41,7 +41,8 @@ term_weighting <- function(X, how = "log_entropy") {
     stop(sprintf("lsa: weighting must be one of %s, got %r",
                  paste(.WEIGHTS, collapse = ", "), how))
   A <- apply(X, c(1, 2), as.numeric)
-  t <- nrow(A); d <- ncol(A)
+  t <- nrow(A)
+  d <- ncol(A)
   if (how == "raw") return(A)
   if (how == "tfidf") {
     out <- matrix(0, t, d)
@@ -55,7 +56,8 @@ term_weighting <- function(X, how = "log_entropy") {
   out <- matrix(0, t, d)
   for (i in seq_len(t)) {
     gf <- sum(A[i, ])
-    if (gf <= .lsa_EPS) { out[i, ] <- 0; next }
+    if (gf <= .lsa_EPS) { out[i, ] <- 0
+    next }
     ent <- 0.0
     for (j in seq_len(d)) {
       p <- A[i, j] / gf
@@ -81,7 +83,9 @@ term_weighting <- function(X, how = "log_entropy") {
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
   A <- term_weighting(X, how = how)
   sv <- .ghc_svd(A)
-  T0 <- sv$T; S <- sv$S; Dt <- sv$Dt
+  T0 <- sv$T
+  S <- sv$S
+  Dt <- sv$Dt
   full <- length(S)
   kk <- if (is.null(k_dim)) full else as.integer(k_dim)
   if (kk < 1L || kk > full)
@@ -105,8 +109,12 @@ lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 reconstruct <- function(model) {
-  T <- model$T; S <- model$S; D <- model$D
-  nT <- nrow(T); nD <- nrow(D); k <- length(S)
+  T <- model$T
+  S <- model$S
+  D <- model$D
+  nT <- nrow(T)
+  nD <- nrow(D)
+  k <- length(S)
   out <- matrix(0, nT, nD)
   for (i in seq_len(nT)) {
     for (j in seq_len(nD)) {
@@ -130,7 +138,8 @@ reconstruct <- function(model) {
 #' @export
 fold_in <- function(query, model) {
   q <- as.numeric(query)
-  T <- model$T; S <- model$S
+  T <- model$T
+  S <- model$S
   if (length(q) != nrow(T))
     stop(sprintf("lsa: the query has %d terms but the model has %d",
                  length(q), nrow(T)))
@@ -156,8 +165,10 @@ fold_in <- function(query, model) {
 #' @return A list with \code{ranking}, \code{scores}, \code{n_documents}.
 #' @export
 cosine_ranking <- function(q_hat, model, top_k = 5) {
-  D <- model$D; S <- model$S
-  nD <- nrow(D); k <- length(S)
+  D <- model$D
+  S <- model$S
+  nD <- nrow(D)
+  k <- length(S)
   out <- vector("list", nD)
   for (j in seq_len(nD)) {
     dv <- numeric(k)

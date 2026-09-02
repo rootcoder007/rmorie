@@ -25,9 +25,11 @@
 #' cmaopt(function(v) sum(v^2), c(0, 0), 0.5, Z, lam = 4, iters = 3)$fbest
 #' @export
 cmaopt <- function(f, x0, sigma = 0.5, Z = NULL, lam = NULL, iters = 10L) {
-  xmean <- as.numeric(x0); N <- length(xmean)
+  xmean <- as.numeric(x0)
+  N <- length(xmean)
   if (is.null(lam)) lam <- 4 + floor(3 * log(N))
-  lam <- as.integer(lam); mu <- as.integer(lam %/% 2)
+  lam <- as.integer(lam)
+  mu <- as.integer(lam %/% 2)
   wraw <- log(mu + 0.5) - log(seq_len(mu))
   w <- wraw / sum(wraw)
   mueff <- 1 / sum(w^2)
@@ -38,9 +40,14 @@ cmaopt <- function(f, x0, sigma = 0.5, Z = NULL, lam = NULL, iters = 10L) {
   cmu <- min(1 - c1, 2 * (mueff - 2 + 1 / mueff) / ((Nf + 2)^2 + mueff))
   damps <- 1 + 2 * max(0, sqrt((mueff - 1) / (Nf + 1)) - 1) + cs
   chiN <- Nf^0.5 * (1 - 1 / (4 * Nf) + 1 / (21 * Nf^2))
-  pc <- rep(0, N); ps <- rep(0, N); C <- diag(N)
-  sig <- as.numeric(sigma); Zm <- as.matrix(Z)
-  fbest <- Inf; xbest <- xmean; counteval <- 0L
+  pc <- rep(0, N)
+  ps <- rep(0, N)
+  C <- diag(N)
+  sig <- as.numeric(sigma)
+  Zm <- as.matrix(Z)
+  fbest <- Inf
+  xbest <- xmean
+  counteval <- 0L
   symroots <- function(C) {
     ev <- eigen(C, symmetric = TRUE)
     lamv <- pmax(0, ev$values)
@@ -52,16 +59,22 @@ cmaopt <- function(f, x0, sigma = 0.5, Z = NULL, lam = NULL, iters = 10L) {
   }
   for (g in seq_len(as.integer(iters))) {
     rr <- symroots(C)
-    arz <- matrix(0, lam, N); ary <- matrix(0, lam, N)
-    arx <- matrix(0, lam, N); fit <- numeric(lam)
+    arz <- matrix(0, lam, N)
+    ary <- matrix(0, lam, N)
+    arx <- matrix(0, lam, N)
+    fit <- numeric(lam)
     for (k in seq_len(lam)) {
       z <- Zm[(g - 1) * lam + k, ]
       y <- as.numeric(rr$root %*% z)
       x <- xmean + sig * y
-      arz[k, ] <- z; ary[k, ] <- y; arx[k, ] <- x
-      fv <- as.numeric(f(x)); fit[k] <- fv
+      arz[k, ] <- z
+      ary[k, ] <- y
+      arx[k, ] <- x
+      fv <- as.numeric(f(x))
+      fit[k] <- fv
       counteval <- counteval + 1L
-      if (fv < fbest) { fbest <- fv; xbest <- x }
+      if (fv < fbest) { fbest <- fv
+      xbest <- x }
     }
     ord <- order(fit, seq_len(lam))
     sel <- ord[seq_len(mu)]

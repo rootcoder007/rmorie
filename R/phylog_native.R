@@ -38,7 +38,8 @@ Phylog <- function(dates, divergence) {
     stop("dates and divergence must have equal length", call. = FALSE)
   }
   if (n < 3L) stop("need at least 3 tips", call. = FALSE)
-  tbar <- mean(t); dbar <- mean(d)
+  tbar <- mean(t)
+  dbar <- mean(d)
   sxx <- sum((t - tbar)^2)
   sxy <- sum((t - tbar) * (d - dbar))
   syy <- sum((d - dbar)^2)

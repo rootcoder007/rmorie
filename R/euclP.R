@@ -42,21 +42,29 @@ EuclP <- function(p, q, tol = 1e-10) {
   }
   tol <- as.numeric(tol)
   if (tol <= 0) stop("tol must be positive")
-  a <- .trim(as.numeric(p)); b <- .trim(as.numeric(q))
+  a <- .trim(as.numeric(p))
+  b <- .trim(as.numeric(q))
   if (length(a) == 0L || length(b) == 0L)
     stop("empty input: p and q must have coefficients")
   zero_a <- length(a) == 1L && abs(a[1]) <= tol
   zero_b <- length(b) == 1L && abs(b[1]) <= tol
   if (zero_a && zero_b) stop("gcd(0, 0) is undefined")
-  if (zero_b) { tmp <- a; a <- b; b <- tmp; zero_a <- TRUE; zero_b <- FALSE }
+  if (zero_b) { tmp <- a
+  a <- b
+  b <- tmp
+  zero_a <- TRUE
+  zero_b <- FALSE }
   steps <- 0L
   if (zero_a) {
     g <- b
   } else {
-    if (length(a) < length(b)) { tmp <- a; a <- b; b <- tmp }
+    if (length(a) < length(b)) { tmp <- a
+    a <- b
+    b <- tmp }
     while (!(length(b) == 1L && abs(b[1]) <= tol)) {
       r <- .dvm(a, b)
-      a <- b; b <- .trim(r)
+      a <- b
+      b <- .trim(r)
       steps <- steps + 1L
       if (steps > 10000L) stop("Euclid's algorithm failed to terminate")
     }

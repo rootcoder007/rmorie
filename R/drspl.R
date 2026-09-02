@@ -25,25 +25,38 @@
 Drdidsplit <- function(y, D, X = NULL, K = 5, y0 = NULL) {
   dy <- .s03vec(y)
   if (!is.null(y0)) dy <- dy - .s03vec(y0)
-  d <- .s03vec(D); n <- length(dy); KK <- as.integer(K)
+  d <- .s03vec(D)
+  n <- length(dy)
+  KK <- as.integer(K)
   Z <- .s03design(X, n)
   fold <- (seq_len(n) - 1L) %% KK
-  inf <- numeric(n); ftau <- numeric(KK); fn <- integer(KK); num <- 0
+  inf <- numeric(n)
+  ftau <- numeric(KK)
+  fn <- integer(KK)
+  num <- 0
   for (f in seq_len(KK) - 1L) {
-    tr_i <- which(fold != f); te_i <- which(fold == f)
+    tr_i <- which(fold != f)
+    te_i <- which(fold == f)
     if (length(te_i) == 0L || length(tr_i) == 0L) {
-      ftau[f + 1L] <- NaN; fn[f + 1L] <- length(te_i); next
+      ftau[f + 1L] <- NaN
+      fn[f + 1L] <- length(te_i)
+      next
     }
     gam <- .s03logit(Z[tr_i, , drop = FALSE], d[tr_i], 60L)
     keep0 <- tr_i[d[tr_i] < 0.5]
     b0 <- if (length(keep0)) .s03lstsq(Z[keep0, , drop = FALSE], dy[keep0]) else numeric(ncol(Z))
-    s1 <- 0; s0 <- 0
-    pis <- numeric(n); mus <- numeric(n)
+    s1 <- 0
+    s0 <- 0
+    pis <- numeric(n)
+    mus <- numeric(n)
     for (i in te_i) {
-      e <- 0; m <- 0
-      for (j in seq_along(gam)) { e <- e + Z[i, j] * gam[j]; m <- m + Z[i, j] * b0[j] }
+      e <- 0
+      m <- 0
+      for (j in seq_along(gam)) { e <- e + Z[i, j] * gam[j]
+      m <- m + Z[i, j] * b0[j] }
       p <- .s03sigmoid(e)
-      pis[i] <- p; mus[i] <- m
+      pis[i] <- p
+      mus[i] <- m
       s1 <- s1 + d[i]
       s0 <- s0 + p * (1 - d[i]) / (1 - p)
     }
@@ -55,7 +68,8 @@ Drdidsplit <- function(y, D, X = NULL, K = 5, y0 = NULL) {
       t <- t + cc
       inf[i] <- length(te_i) * cc
     }
-    ftau[f + 1L] <- t; fn[f + 1L] <- length(te_i)
+    ftau[f + 1L] <- t
+    fn[f + 1L] <- length(te_i)
     num <- num + length(te_i) * t
   }
   est <- if (n) num / n else NaN

@@ -157,7 +157,8 @@
 nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
   B <- .nashq_mat(B, "B")
-  m <- nrow(A); n <- ncol(A)
+  m <- nrow(A)
+  n <- ncol(A)
   if (nrow(B) != m || ncol(B) != n) {
     stop("nashq: A and B must have the same shape")
   }
@@ -180,9 +181,11 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
         Q <- numeric(n)
         for (a in seq_along(I)) P[I[a]] <- max(0, p[a])
         for (a in seq_along(J)) Q[J[a]] <- max(0, q[a])
-        sp <- sum(P); sq <- sum(Q)
+        sp <- sum(P)
+        sq <- sum(Q)
         if (sp <= tol || sq <= tol) next
-        P <- P / sp; Q <- Q / sq
+        P <- P / sp
+        Q <- Q / sq
         if (!.nashq_is_equilibrium(A, B, P, Q, tol)) next
         key <- paste0(paste(round(P, 9), collapse = ","), "|",
                       paste(round(Q, 9), collapse = ","))
@@ -247,7 +250,8 @@ stage_game_type <- function(A, B, tol = 1e-9) {
   glob <- list()
   sad <- list()
   for (e in eqs) {
-    p <- e$p; q <- e$q
+    p <- e$p
+    q <- e$q
     va <- .nashq_payoff(A, p, q)
     vb <- .nashq_payoff(B, p, q)
     if (va >= best_a - tol && vb >= best_b - tol) {
@@ -303,7 +307,8 @@ stage_game_type <- function(A, B, tol = 1e-9) {
     ba <- max(A)
     bb <- max(B)
     for (e in eqs) {
-      p <- e$p; q <- e$q
+      p <- e$p
+      q <- e$q
       if (.nashq_payoff(A, p, q) >= ba - tol &&
           .nashq_payoff(B, p, q) >= bb - tol) {
         return(e)
@@ -429,7 +434,8 @@ morie_nashq <- function(states, actions, step, rewards,
       j <- .nashq_pick(M1, A2, 1L, epsilon, rng_e)
       s1 <- step(s, A1[[i]], A2[[j]])
       rr <- rewards(s, A1[[i]], A2[[j]], s1)
-      r1 <- rr[[1]]; r2 <- rr[[2]]
+      r1 <- rr[[1]]
+      r2 <- rr[[2]]
       tot[1] <- tot[1] + r1
       tot[2] <- tot[2] + r2
       is_term <- any(vapply(term, function(x) identical(x, s1), logical(1L)))

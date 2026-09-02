@@ -78,11 +78,13 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
                                n_reps = 10L, seed = 0L) {
   R <- as.integer(n_reps)
   if (R < 1L) stop(sprintf("pftrep: need at least 1 replicate, got %d", R))
-  lls <- numeric(R); minless <- numeric(R)
+  lls <- numeric(R)
+  minless <- numeric(R)
   for (r in seq_len(R)) {
     res <- particle_filter_simple(y, n_particles, init, step, loglik,
                                   seed = seed * 1013L + r)
-    lls[r] <- res$loglik; minless[r] <- res$min_ess
+    lls[r] <- res$loglik
+    minless[r] <- res$min_ess
   }
   lme <- logmeanexp(lls)
   mean_ll <- mean(lls)
@@ -114,13 +116,17 @@ loglik_profile <- function(y, grid, make_model, n_particles = 200L,
   g <- as.numeric(grid)
   if (length(g) < 2L)
     stop(sprintf("pftrep: need at least 2 grid points, got %d", length(g)))
-  vals <- numeric(length(g)); ses <- numeric(length(g))
+  vals <- numeric(length(g))
+  ses <- numeric(length(g))
   for (t in seq_along(g)) {
     ms <- make_model(g[t])
-    init <- ms[[1]]; step <- ms[[2]]; loglik <- ms[[3]]
+    init <- ms[[1]]
+    step <- ms[[2]]
+    loglik <- ms[[3]]
     r <- replicated_pfilter(y, n_particles, init, step, loglik,
                             n_reps = n_reps, seed = seed + 97L * t)
-    vals[t] <- r$loglik; ses[t] <- r$se
+    vals[t] <- r$loglik
+    ses[t] <- r$se
   }
   best <- which.max(vals)
   list(estimate = g[best], mle = g[best], grid = g,

@@ -38,21 +38,26 @@
 #' morie_ucbb(V)
 morie_ucbb <- function(x, T = NULL) {
   x <- as.matrix(x)
-  rows <- nrow(x); K <- ncol(x)
+  rows <- nrow(x)
+  K <- ncol(x)
   T <- if (is.null(T)) rows else as.integer(T)
   if (T < K) stop(sprintf("need at least K = %d plays", K))
   if (T > rows) stop(sprintf("x has only %d rows", rows))
-  counts <- rep(0L, K); sums <- rep(0, K)
-  actions <- numeric(T); rewards <- numeric(T)
+  counts <- rep(0L, K)
+  sums <- rep(0, K)
+  actions <- numeric(T)
+  rewards <- numeric(T)
   for (t in seq_len(T)) {
     if (t <= K) {
       j <- t
     } else {
       n <- t - 1L
-      best <- 1L; bestidx <- -Inf
+      best <- 1L
+      bestidx <- -Inf
       for (k in seq_len(K)) {
         idx <- sums[k] / counts[k] + sqrt(2 * log(n) / counts[k])
-        if (idx > bestidx) { bestidx <- idx; best <- k }
+        if (idx > bestidx) { bestidx <- idx
+        best <- k }
       }
       j <- best
     }

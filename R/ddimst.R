@@ -43,7 +43,8 @@
 #' Ddimst(x_t = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, eps_theta = c(1, 2, 3, 4, 5, 6, 7, 8))
 Ddimst <- function(x_t, t, eps_theta, eta = 0, T = 1000,
                    alpha_bar_t = NULL, alpha_bar_prev = NULL) {
-  x <- .s03vec(x_t); e <- .s03vec(eps_theta)
+  x <- .s03vec(x_t)
+  e <- .s03vec(eps_theta)
   n <- length(x)
   if (n == 0L) stop("empty input: x_t has no entries")
   if (length(e) != n) stop("x_t and eps_theta must have the same length")

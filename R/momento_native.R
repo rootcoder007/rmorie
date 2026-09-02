@@ -29,7 +29,8 @@ morie_momento_harmonise <- function(series_list, patch_len,
   P <- as.integer(patch_len)
   if (P < 1L) stop("momento: patch_len must be at least 1")
   if (length(series_list) == 0L) stop("momento: no series given")
-  out <- list(); meta <- list()
+  out <- list()
+  meta <- list()
   for (s in series_list) {
     M <- as.matrix(s)
     if (nrow(M) == 0L) stop("momento: one of the series is empty")
@@ -47,7 +48,8 @@ morie_momento_harmonise <- function(series_list, patch_len,
         if (sd <= .GHC_MOM_EPS) col <- rep(0, L)
         else col <- (col - m) / sd
       } else {
-        m <- 0; sd <- 1
+        m <- 0
+        sd <- 1
       }
       np <- L %/% P
       patches <- vector("list", np)
@@ -108,7 +110,8 @@ morie_momento_masked_loss <- function(truth, reconstruction, mask) {
     stop(paste0("momento: truth, reconstruction and mask must agree ",
                 "in length (", length(T), ", ", length(R), ", ",
                 length(mask), ")"))
-  tot <- 0; cnt <- 0
+  tot <- 0
+  cnt <- 0
   for (i in seq_along(T)) {
     if (!mask[i]) next
     if (length(T[[i]]) != length(R[[i]]))
@@ -136,7 +139,8 @@ morie_momento_masked_loss <- function(truth, reconstruction, mask) {
 #' @export
 morie_momento_task_mask <- function(n_patches, task = "forecast",
                                      span = 1, start = NULL) {
-  n <- as.integer(n_patches); s <- as.integer(span)
+  n <- as.integer(n_patches)
+  s <- as.integer(span)
   if (!(task %in% .GHC_MOM_TASKS))
     stop(paste0("momento: task must be one of ",
                 paste(.GHC_MOM_TASKS, collapse = ", "), ", got ",

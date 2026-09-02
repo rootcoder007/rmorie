@@ -25,7 +25,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tmlevar(V)
 Tmlevar <- function(ic, level = 0.95) {
-  d <- .t1_vec(ic); n <- length(d)
+  d <- .t1_vec(ic)
+  n <- length(d)
   if (n < 3L)
     stop("at least three influence-curve values are required")
   if (level <= 0 || level >= 1)
@@ -37,7 +38,8 @@ Tmlevar <- function(ic, level = 0.95) {
   ses <- sqrt(stats::var(sq) / n)
   z <- stats::qnorm((1 + level) / 2)
   ls <- ses / s2
-  lo <- s2 * exp(-z * ls); hi <- s2 * exp(z * ls)
+  lo <- s2 * exp(-z * ls)
+  hi <- s2 * exp(z * ls)
   .t1_result(sigma2 = s2, se_sigma2 = ses, ci_lower = lo, ci_upper = hi,
              se_psi = sqrt(s2 / n), se_psi_lower = sqrt(lo / n),
              se_psi_upper = sqrt(hi / n),

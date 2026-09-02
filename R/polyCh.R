@@ -15,7 +15,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Chebbasis(V)
 Chebbasis <- function(x, K = 5) {
-  x <- .t1_vec(x); K <- as.integer(K)
+  x <- .t1_vec(x)
+  K <- as.integer(K)
   if (K < 0) stop("K must be non-negative")
   out <- matrix(0, length(x), K + 1L)
   out[, 1] <- 1

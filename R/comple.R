@@ -19,8 +19,8 @@
 #'   simple link prediction. ICML 33, 2071-2080, equation (11).
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' Comple(V, V)
+#' triples <- matrix(c(1L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 1L), ncol = 3, byrow = TRUE)
+#' Comple(triples, dim = 4)
 Comple <- function(triples, dim, re_e = NULL, im_e = NULL, re_r = NULL, im_r = NULL, seed = 1) {
   T_ <- matrix(as.integer(as.matrix(triples)), ncol = 3)
   d <- as.integer(dim)
@@ -34,7 +34,9 @@ Comple <- function(triples, dim, re_e = NULL, im_e = NULL, re_r = NULL, im_r = N
   if (is.null(im_r)) im_r <- draw(nr) else im_r <- as.matrix(im_r)
   scores <- numeric(nrow(T_))
   for (i in seq_len(nrow(T_))) {
-    h <- T_[i, 1] + 1L; r <- T_[i, 2] + 1L; t <- T_[i, 3] + 1L
+    h <- T_[i, 1] + 1L
+    r <- T_[i, 2] + 1L
+    t <- T_[i, 3] + 1L
     scores[i] <- sum(re_e[h, ] * re_r[r, ] * re_e[t, ] +
                      re_e[h, ] * im_r[r, ] * im_e[t, ] +
                      im_e[h, ] * re_r[r, ] * im_e[t, ] -

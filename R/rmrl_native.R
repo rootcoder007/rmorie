@@ -103,7 +103,10 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
     if (length(e) != 4L) {
       stop("reward_machine: each edge must be (u, formula, u_next, reward)")
     }
-    u <- e[[1L]]; phi <- e[[2L]]; u2 <- e[[3L]]; cc <- e[[4L]]
+    u <- e[[1L]]
+    phi <- e[[2L]]
+    u2 <- e[[3L]]
+    cc <- e[[4L]]
     ku <- as.character(u)
     m$edges[[ku]] <- c(m$edges[[ku]],
                        list(list(test=.rmrl_compile(phi), u2=u2,

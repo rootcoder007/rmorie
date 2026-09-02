@@ -31,7 +31,8 @@
   while (length(r) > 1L) {
     first <- length(levels) == 0L
     idx <- seq(1L, length(r), by = 2L)
-    a <- r[idx]; b <- r[idx + 1L]
+    a <- r[idx]
+    b <- r[idx + 1L]
     rad <- sqrt(a * a + b * b)
     t <- atan2(b, a)
     if (first) t[t < 0] <- t[t < 0] + 2 * pi
@@ -93,7 +94,8 @@ morie_polqnt <- function(x, bits_first = 4L, bits_rest = 2L,
   d <- length(v)
   if (d < 2L || bitwAnd(d, d - 1L) != 0L)
     stop("length of x must be a power of two, at least 2")
-  b1 <- as.integer(bits_first); br <- as.integer(bits_rest)
+  b1 <- as.integer(bits_first)
+  br <- as.integer(bits_rest)
   if (b1 < 1L || br < 1L) stop("bit widths must be at least 1")
   dec <- .mor_pq_decompose(v)
   levels <- dec$levels

@@ -47,19 +47,27 @@ Smplqc <- function(G, callrate_min = 0.98, het_sd = 3.0,
                    small_sample = FALSE) {
   Gm <- as.matrix(G)
   storage.mode(Gm) <- "double"
-  n <- nrow(Gm); m <- ncol(Gm)
+  n <- nrow(Gm)
+  m <- ncol(Gm)
   if (n == 0L) stop("empty genotype matrix", call. = FALSE)
   is_valid <- function(v) v %in% c(0, 1, 2)
-  freq <- numeric(m); nobs_col <- integer(m)
+  freq <- numeric(m)
+  nobs_col <- integer(m)
   for (j in seq_len(m)) {
     obs <- Gm[is_valid(Gm[, j]), j]
     nobs_col[j] <- length(obs)
     freq[j] <- if (length(obs) > 0) sum(obs) / (2 * length(obs)) else NaN
   }
-  callrate <- numeric(n); het_rate <- numeric(n); Fv <- numeric(n)
-  obs_hom <- integer(n); exp_hom <- numeric(n); n_obs_v <- integer(n)
+  callrate <- numeric(n)
+  het_rate <- numeric(n)
+  Fv <- numeric(n)
+  obs_hom <- integer(n)
+  exp_hom <- numeric(n)
+  n_obs_v <- integer(n)
   for (i in seq_len(n)) {
-    n_obs <- 0L; o_hom <- 0L; e_hom <- 0
+    n_obs <- 0L
+    o_hom <- 0L
+    e_hom <- 0
     for (j in seq_len(m)) {
       g <- Gm[i, j]
       if (!is_valid(g)) next

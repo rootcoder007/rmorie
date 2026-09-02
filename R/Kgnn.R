@@ -27,14 +27,16 @@ Kgnn <- function(A_r, X, W_r, W0 = NULL) {
   n <- nrow(H)
   if (n == 0L) stop("r_gcn: X is empty")
   p <- ncol(H)
-  Ms <- list(); Ws <- list()
+  Ms <- list()
+  Ws <- list()
   for (r in seq_along(A_r)) {
     M <- .s03mat(A_r[[r]])
     if (nrow(M) != n) stop(sprintf("r_gcn: relation %d has the wrong node count", r - 1L))
     if (ncol(M) != n) stop(sprintf("r_gcn: relation %d is not square", r - 1L))
     Wm <- .s03mat(W_r[[r]])
     if (nrow(Wm) != p) stop(sprintf("r_gcn: W_r[%d] must have one row per input feature", r - 1L))
-    Ms[[r]] <- M; Ws[[r]] <- Wm
+    Ms[[r]] <- M
+    Ws[[r]] <- Wm
   }
   q <- ncol(Ws[[1]])
   W0m <- if (is.null(W0)) diag(1, p, q) else .s03mat(W0)

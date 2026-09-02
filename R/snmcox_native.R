@@ -224,10 +224,14 @@ morie_snmcox <- function(time, event, treatment_history,
 
   root <- NULL
   for (t in seq_len(ng - 1L)) {
-    s0 <- svals[t]; s1 <- svals[t + 1L]
-    if (s0 == 0) { root <- grid[t]; break }
+    s0 <- svals[t]
+    s1 <- svals[t + 1L]
+    if (s0 == 0) { root <- grid[t]
+    break }
     if (s0 * s1 < 0) {
-      a <- grid[t]; b <- grid[t + 1L]; fa <- s0
+      a <- grid[t]
+      b <- grid[t + 1L]
+      fa <- s0
       for (it in seq_len(200L)) {
         mid <- 0.5 * (a + b)
         fm <- morie_snmcox_gest_score(mid, T, ev, A, L, treat_times,
@@ -235,7 +239,8 @@ morie_snmcox <- function(time, event, treatment_history,
         if (fa * fm <= 0) {
           b <- mid
         } else {
-          a <- mid; fa <- fm
+          a <- mid
+          fa <- fm
         }
         if (b - a < tol) break
       }

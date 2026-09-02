@@ -61,11 +61,15 @@
   f2 <- f(x2)
   for (i in seq_len(iters)) {
     if (f1 < f2) {
-      lo <- x1; x1 <- x2; f1 <- f2
+      lo <- x1
+      x1 <- x2
+      f1 <- f2
       x2 <- hi - .k03_gold * (hi - lo)
       f2 <- f(x2)
     } else {
-      hi <- x2; x2 <- x1; f2 <- f1
+      hi <- x2
+      x2 <- x1
+      f2 <- f1
       x1 <- lo + .k03_gold * (hi - lo)
       f1 <- f(x1)
     }
@@ -149,7 +153,9 @@ Volsv <- function(r, init = NULL, sweeps = 25L, offset = 1e-8) {
   if (length(iv) != 3L) {
     stop("init must be (mu, phi, sigma_eta)", call. = FALSE)
   }
-  mu <- iv[1L]; phi <- iv[2L]; sig <- iv[3L]
+  mu <- iv[1L]
+  phi <- iv[2L]
+  sig <- iv[3L]
   if (!(phi > -0.999999 && phi < 0.999999)) {
     stop("initial phi must lie strictly inside (-1, 1)", call. = FALSE)
   }

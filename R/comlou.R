@@ -82,7 +82,8 @@ Comlou <- function(G, resolution = 1, max_pass = 20) {
         for (cc in seq_len(n)) {
           if (!has[cc]) next
           g <- lk[cc] - resolution * ktot[cc] * k[i] / m2
-          if (g > best_g + 1e-12) { best_g <- g; best_c <- cc }
+          if (g > best_g + 1e-12) { best_g <- g
+          best_c <- cc }
         }
         z[i] <- best_c
         ktot[best_c] <- ktot[best_c] + k[i]

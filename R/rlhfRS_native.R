@@ -130,8 +130,10 @@ morie_rlhfRS_mrr <- function(relevance) {
 morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
                                  horizon = 10L, gamma = 0.9,
                                  seed = 0) {
-  P <- env$transition; R <- env$reward
-  n_s <- length(P); n_a <- length(P[[1]])
+  P <- env$transition
+  R <- env$reward
+  n_s <- length(P)
+  n_a <- length(P[[1]])
   if (nrow(policy) != n_s || ncol(policy) != n_a)
     stop("the policy must give a distribution over the environment's ",
          "actions in every state")
@@ -141,22 +143,27 @@ morie_rlhfRS_rollout <- function(env, policy, n_episodes = 20L,
   visits <- matrix(0L, n_s, n_a)
   for (ep in seq_len(as.integer(n_episodes))) {
     s <- start
-    g <- 0; d <- 1
+    g <- 0
+    d <- 1
     for (h in seq_len(as.integer(horizon))) {
       u <- .ghc_unif(e, 1L)
-      acc <- 0; a <- n_a - 1L
+      acc <- 0
+      a <- n_a - 1L
       for (j in seq_len(n_a)) {
         acc <- acc + policy[s + 1L, j]
-        if (u < acc) { a <- j - 1L; break }
+        if (u < acc) { a <- j - 1L
+        break }
       }
       visits[s + 1L, a + 1L] <- visits[s + 1L, a + 1L] + 1L
       g <- g + d * R[[s + 1L]][a + 1L]
       d <- d * gamma
       u <- .ghc_unif(e, 1L)
-      acc <- 0; nxt <- n_s - 1L
+      acc <- 0
+      nxt <- n_s - 1L
       for (j in seq_len(n_s)) {
         acc <- acc + P[[s + 1L]][[a + 1L]][j]
-        if (u < acc) { nxt <- j - 1L; break }
+        if (u < acc) { nxt <- j - 1L
+        break }
       }
       s <- nxt
     }
@@ -202,16 +209,19 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
   # The support condition. Without it the estimate has no bound on its
   # error, so it is refused rather than returned.
   for (i in seq_len(n)) {
-    s <- log[[i]][1]; a <- log[[i]][2]
+    s <- log[[i]][1]
+    a <- log[[i]][2]
     if (behaviour[i] <= 0 && policy[s + 1L, a + 1L] > 0)
       stop(sprintf(paste0("the target policy takes action %d in state ",
                           "%d, which the logging policy never could: ",
                           "no reweighting of this log can estimate its ",
                           "value there"), as.integer(a), as.integer(s)))
   }
-  w <- numeric(n); clipped <- 0L
+  w <- numeric(n)
+  clipped <- 0L
   for (i in seq_len(n)) {
-    s <- log[[i]][1]; a <- log[[i]][2]
+    s <- log[[i]][1]
+    a <- log[[i]][2]
     v <- if (behaviour[i] > 0) policy[s + 1L, a + 1L] / behaviour[i]
          else 0
     if (!is.null(clip) && v > clip) { v <- as.numeric(clip)
@@ -229,13 +239,15 @@ morie_rlhfRS_offpolicy <- function(log, policy, behaviour,
       stop("the doubly robust estimator needs a reward model")
     terms <- numeric(n)
     for (i in seq_len(n)) {
-      s <- log[[i]][1]; a <- log[[i]][2]
+      s <- log[[i]][1]
+      a <- log[[i]][2]
       base <- .w3_csum(policy[s + 1L, ] * reward_model[s + 1L, ])
       terms[i] <- base + w[i] * (rs[i] - reward_model[s + 1L, a + 1L])
     }
     est <- .w3_csum(terms) / n
   }
-  sw <- .w3_csum(w); sw2 <- .w3_csum(w * w)
+  sw <- .w3_csum(w)
+  sw2 <- .w3_csum(w * w)
   ess <- if (sw2 > 0) sw * sw / sw2 else 0
   list(estimate = est, weights = w, n = n, mean_weight = sw / n,
        max_weight = if (n > 0L) max(w) else 0, ess = ess,
@@ -275,7 +287,9 @@ morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
   if (has_sim) {
     r <- morie_rlhfRS_rollout(env, policy, n_episodes, horizon, gamma,
                               seed)
-    out$returns <- r$returns; out$value <- r$mean; out$se <- r$se
+    out$returns <- r$returns
+    out$value <- r$mean
+    out$se <- r$se
     out$ci_lower <- if (is.nan(r$se)) NaN else
       r$mean - 1.959963984540054 * r$se
     out$ci_upper <- if (is.nan(r$se)) NaN else
@@ -284,31 +298,47 @@ morie_rlhfRS <- function(env, policy, n_episodes = 20L, horizon = 10L,
     out$n_episodes <- as.integer(n_episodes)
     out$horizon <- as.integer(horizon)
   } else {
-    out$returns <- numeric(0); out$value <- NULL; out$se <- NULL
-    out$ci_lower <- NULL; out$ci_upper <- NULL
+    out$returns <- numeric(0)
+    out$value <- NULL
+    out$se <- NULL
+    out$ci_lower <- NULL
+    out$ci_upper <- NULL
     out$visits <- matrix(0L, 0L, 0L)
-    out$n_episodes <- 0L; out$horizon <- 0L
+    out$n_episodes <- 0L
+    out$horizon <- 0L
   }
   if (has_log) {
     r <- morie_rlhfRS_offpolicy(env$log, policy, env$behaviour,
                                 estimator, reward_model, clip)
-    out$off_policy <- r$estimate; out$weights <- r$weights
-    out$mean_weight <- r$mean_weight; out$max_weight <- r$max_weight
-    out$ess <- r$ess; out$n_clipped <- r$n_clipped; out$n_log <- r$n
+    out$off_policy <- r$estimate
+    out$weights <- r$weights
+    out$mean_weight <- r$mean_weight
+    out$max_weight <- r$max_weight
+    out$ess <- r$ess
+    out$n_clipped <- r$n_clipped
+    out$n_log <- r$n
   } else {
-    out$off_policy <- NULL; out$weights <- numeric(0)
-    out$mean_weight <- NULL; out$max_weight <- NULL; out$ess <- NULL
-    out$n_clipped <- 0L; out$n_log <- 0L
+    out$off_policy <- NULL
+    out$weights <- numeric(0)
+    out$mean_weight <- NULL
+    out$max_weight <- NULL
+    out$ess <- NULL
+    out$n_clipped <- 0L
+    out$n_log <- 0L
   }
   if (!is.null(relevance)) {
     out$precision_at_k <- morie_rlhfRS_precision(relevance, k)
     out$ndcg_at_k <- morie_rlhfRS_ndcg(relevance, k)
     out$mrr <- morie_rlhfRS_mrr(relevance)
   } else {
-    out$precision_at_k <- NULL; out$ndcg_at_k <- NULL; out$mrr <- NULL
+    out$precision_at_k <- NULL
+    out$ndcg_at_k <- NULL
+    out$mrr <- NULL
   }
-  out$gamma <- as.numeric(gamma); out$k <- as.integer(k)
-  out$estimator <- estimator; out$has_simulator <- has_sim
+  out$gamma <- as.numeric(gamma)
+  out$k <- as.integer(k)
+  out$estimator <- estimator
+  out$has_simulator <- has_sim
   out$has_log <- has_log
   out
 }

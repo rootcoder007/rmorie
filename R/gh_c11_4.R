@@ -39,12 +39,17 @@ Ghosalgpdenscrt <- function(x, s = NULL, n = NULL,
     stop("kernel must be 'squared_exponential', 'matern' or 'rescaled_se'.")
   mm <- .morie_gh_minimax_rate(nn, sv)
   if (kernel == "matern") {
-    rate <- mm; kind <- "polynomial (minimax)"; attains <- TRUE
+    rate <- mm
+    kind <- "polynomial (minimax)"
+    attains <- TRUE
   } else if (kernel == "rescaled_se") {
     rate <- mm * log(nn)^((sv + 1) / (2 * sv + 1))
-    kind <- "polynomial up to a log factor"; attains <- FALSE
+    kind <- "polynomial up to a log factor"
+    attains <- FALSE
   } else {
-    rate <- log(nn)^(-sv); kind <- "LOGARITHMIC"; attains <- FALSE
+    rate <- log(nn)^(-sv)
+    kind <- "LOGARITHMIC"
+    attains <- FALSE
   }
   .t1_result(n = nn, smoothness = sv, kernel = kernel, rate = rate,
              minimax_rate = mm, attains_minimax = attains,

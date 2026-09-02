@@ -49,7 +49,8 @@ Btcbb <- function(x, block_len = NULL, stat = NULL, B = 200, seed = 1, alpha = 0
   if (!(a > 0 && a < 1)) stop("boot_circular_block: alpha must lie strictly between 0 and 1")
   f <- if (is.null(stat)) .s03mean else stat
   bl <- .btmbb_reps(xx, ell, f, B, seed, TRUE)
-  theta <- bl$theta; k <- bl$k
+  theta <- bl$theta
+  k <- bl$k
   tot <- 0
   for (s in 0:(n - 1L)) for (t in 0:(ell - 1L)) tot <- tot + xx[((s + t) %% n) + 1L]
   list(theta_b = theta, estimate = as.numeric(f(xx)), se = .s03sd(theta, 1L),

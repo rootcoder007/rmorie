@@ -175,8 +175,10 @@ morie_frgrow_metrics <- function(kd, hac, logp = NULL, mw = NULL,
   pkd <- -log10(kd)
   le <- morie_frgrow_le(kd, hac, route, temperature)
   out <- list(pkd = pkd, dg = morie_frgrow_dg(kd, temperature), le = le)
-  out["lle"] <- list(NULL); out["lelp"] <- list(NULL)
-  out["bei"] <- list(NULL); out["sei"] <- list(NULL)
+  out["lle"] <- list(NULL)
+  out["lelp"] <- list(NULL)
+  out["bei"] <- list(NULL)
+  out["sei"] <- list(NULL)
   if (!is.null(logp)) {
     out$lle <- pkd - as.numeric(logp)
     # LELP is the one metric where smaller is better, and it is also the

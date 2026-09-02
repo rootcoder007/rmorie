@@ -84,7 +84,8 @@
   total <- sum(vapply(A, function(a) node$children[[a]]$visits,
                        integer(1)))
   sqrt_total <- if (total > 0L) sqrt(total) else 0
-  best <- -Inf; best_a <- A[1]
+  best <- -Inf
+  best_a <- A[1]
   for (a in A) {
     ch <- node$children[[a]]
     expl <- ch$prior * sqrt_total / (1 + ch$visits) *
@@ -93,7 +94,8 @@
                                                      .ghc_muzero_node_value(ch))
          else 0
     sc <- q + expl
-    if (sc > best) { best <- sc; best_a <- a }
+    if (sc > best) { best <- sc
+    best_a <- a }
   }
   best_a
 }
@@ -163,7 +165,8 @@ morie_muzero <- function(observation, actions, representation,
   mm <- list(lo = NULL, hi = NULL)
   for (s in seq_len(simulations)) {
     node <- root
-    path <- list(node); acts <- list()
+    path <- list(node)
+    acts <- list()
     while (isTRUE(node$expanded)) {
       a <- .ghc_muzero_select(node, A, mm, c1, c2)
       acts[[length(acts) + 1L]] <- a

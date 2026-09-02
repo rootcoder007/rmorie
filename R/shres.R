@@ -22,16 +22,22 @@
 #'           0.5)$rho
 #' @export
 Schoenres <- function(time, event, X, beta = NULL) {
-  t <- .s03vec(time); e <- .s03vec(event); Xm <- .s03mat(X)
-  n <- length(t); p <- ncol(Xm)
+  t <- .s03vec(time)
+  e <- .s03vec(event)
+  Xm <- .s03mat(X)
+  n <- length(t)
+  p <- ncol(Xm)
   b <- if (!is.null(beta)) .s03vec(beta) else numeric(p)
   ord <- order(t, seq_len(n))
-  ets <- numeric(0); res <- list(); V <- matrix(0, p, p)
+  ets <- numeric(0)
+  res <- list()
+  V <- matrix(0, p, p)
   for (pos in seq_len(n)) {
     i <- ord[pos]
     if (e[i] < 0.5) next
     risk <- ord[t[ord] >= t[i]]
-    wsum <- 0; xbar <- numeric(p)
+    wsum <- 0
+    xbar <- numeric(p)
     for (j in risk) {
       eta <- 0
       for (a in seq_len(p)) eta <- eta + b[a] * Xm[j, a]

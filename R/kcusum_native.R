@@ -86,7 +86,8 @@ morie_kcusum <- function(x, kernel = "gaussian", threshold = NULL,
   n <- nrow(z)
   if (n < 4L) stop("need n >= 4")
   if (is.null(kmax)) kmax <- n - 2L
-  kmin <- as.integer(kmin); kmax <- as.integer(kmax)
+  kmin <- as.integer(kmin)
+  kmax <- as.integer(kmax)
   if (!(kmin > 1L && kmin <= kmax && kmax < n))
     stop("need 1 < kmin <= kmax < n")
   gr <- .mor_kc_gram(z, kernel, bandwidth)
@@ -102,14 +103,16 @@ morie_kcusum <- function(x, kernel = "gaussian", threshold = NULL,
   C <- matrix(0, r, n)
   for (a in seq_len(r)) C[a, ] <- sqrt(lam[keep[a]]) * U[, keep[a]]
   Ts <- numeric(kmax - kmin + 1L)
-  kf <- numeric(length(Ts)); d1v <- numeric(length(Ts))
+  kf <- numeric(length(Ts))
+  d1v <- numeric(length(Ts))
   d2v <- numeric(length(Ts))
   I_r <- diag(r)
   for (idx in seq_along(Ts)) {
     k <- kmin + idx - 1L
     C1 <- C[, seq_len(k), drop = FALSE]
     C2 <- C[, seq.int(k + 1L, n), drop = FALSE]
-    mu1 <- rowMeans(C1); mu2 <- rowMeans(C2)
+    mu1 <- rowMeans(C1)
+    mu2 <- rowMeans(C2)
     delta <- mu2 - mu1
     A1 <- C1 - mu1
     A2 <- C2 - mu2
@@ -122,7 +125,9 @@ morie_kcusum <- function(x, kernel = "gaussian", threshold = NULL,
     d1 <- sum(diag(solve(M, Sw)))
     d2 <- sum(diag(solve(M, solve(M, Sw %*% Sw))))
     Ts[idx] <- (kfdr - d1) / sqrt(2 * d2)
-    kf[idx] <- kfdr; d1v[idx] <- d1; d2v[idx] <- d2
+    kf[idx] <- kfdr
+    d1v[idx] <- d1
+    d2v[idx] <- d2
   }
   ib <- 1L
   for (i in seq_along(Ts)) if (Ts[i] > Ts[ib]) ib <- i

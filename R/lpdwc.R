@@ -21,7 +21,8 @@
 #' Lppd(V)
 Lppd <- function(logdens) {
   L <- as.matrix(logdens)
-  S <- nrow(L); n <- ncol(L)
+  S <- nrow(L)
+  n <- ncol(L)
   if (S < 2L) stop("at least two posterior draws are required")
   pl <- pv <- numeric(n)
   for (i in seq_len(n)) {
@@ -30,7 +31,9 @@ Lppd <- function(logdens) {
     pl[i] <- m + log(sum(exp(col - m)) / S)
     pv[i] <- stats::var(col)
   }
-  tot <- sum(pl); pw <- sum(pv); el <- tot - pw
+  tot <- sum(pl)
+  pw <- sum(pv)
+  el <- tot - pw
   .t1_result(lppd = tot, p_waic = pw, elpd_waic = el, waic = -2 * el,
              pointwise_lppd = pl, pointwise_var = pv, S = as.numeric(S),
              n = as.numeric(n),

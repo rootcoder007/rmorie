@@ -34,13 +34,15 @@
 #' @export
 morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
                                          link = "logit") {
-  xs <- as.matrix(x); storage.mode(xs) <- "double"
+  xs <- as.matrix(x)
+  storage.mode(xs) <- "double"
   T_ <- nrow(xs)
   if (T_ < 1L) stop("bnshrt: need at least one period")
   b <- as.numeric(beta)
   if (length(b) != ncol(xs))
     stop("bnshrt: beta has ", length(b), " entries for ", ncol(xs), " covariates")
-  g <- as.numeric(gamma); a <- as.numeric(alpha)
+  g <- as.numeric(gamma)
+  a <- as.numeric(alpha)
   if (!(link %in% c("logit", "probit")))
     stop("bnshrt: link must be logit or probit")
   Ff <- if (link == "logit") .bnshrt_logistic else pnorm
@@ -48,7 +50,8 @@ morie_sequence_probabilities <- function(beta, gamma, x, alpha, y0,
   for (code in seq_len(2L ^ T_) - 1L) {
     seq_ <- integer(T_)
     for (t in seq_len(T_)) seq_[t] <- (code %/% (2L ^ (t - 1L))) %% 2L
-    p <- 1; prev <- as.integer(y0)
+    p <- 1
+    prev <- as.integer(y0)
     for (t in seq_len(T_)) {
       idx <- sum(xs[t, ] * b) + g * prev + a
       pt <- Ff(idx)
@@ -104,11 +107,14 @@ morie_sequence_frequencies <- function(Y) {
 .bnshrt_project_simplex <- function(v) {
   n <- length(v)
   u <- sort(v, decreasing = TRUE)
-  css <- 0; rho <- 0; theta <- 0
+  css <- 0
+  rho <- 0
+  theta <- 0
   for (i in seq_len(n)) {
     css <- css + u[i]
     t <- (css - 1) / i
-    if (u[i] - t > 0) { rho <- i; theta <- t }
+    if (u[i] - t > 0) { rho <- i
+    theta <- t }
   }
   pmax(v - theta, 0)
 }
@@ -145,18 +151,23 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
   for (j in seq_along(cols)) for (r in seq_along(keys))
     A[r, j] <- cols[[j]][[keys[r]]]
   target <- as.numeric(freq[keys])
-  m <- length(cols); R_ <- length(keys)
+  m <- length(cols)
+  R_ <- length(keys)
   w <- rep(1 / m, m)
-  v <- rep(1, m); L <- 1
+  v <- rep(1, m)
+  L <- 1
   for (kk in seq_len(60)) {
     Av <- as.numeric(A %*% v)
     AtAv <- as.numeric(2 * crossprod(A, Av))
     nrm <- sqrt(sum(AtAv^2))
     if (nrm <= .bnshrt_GHC_EPS) break
-    v <- AtAv / nrm; L <- nrm
+    v <- AtAv / nrm
+    L <- nrm
   }
   step <- 1 / max(L, .bnshrt_GHC_EPS)
-  y_acc <- w; t_acc <- 1; prev <- w
+  y_acc <- w
+  t_acc <- 1
+  prev <- w
   for (it in seq_len(as.integer(iters))) {
     pred <- as.numeric(A %*% y_acc)
     grad <- as.numeric(2 * crossprod(A, pred - target))
@@ -164,7 +175,8 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
     t_new <- 0.5 * (1 + sqrt(1 + 4 * t_acc^2))
     mom <- (t_acc - 1) / t_new
     y_acc <- w + mom * (w - prev)
-    prev <- w; t_acc <- t_new
+    prev <- w
+    t_acc <- t_new
   }
   pred <- as.numeric(A %*% w)
   disc <- sqrt(sum((pred - target)^2))
@@ -192,7 +204,8 @@ morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
                                  beta_fixed = NULL, link = "logit",
                                  tol = 1e-3) {
   freq <- morie_sequence_frequencies(Y)
-  keep <- list(); disc <- list()
+  keep <- list()
+  disc <- list()
   for (bv in beta_grid) for (gv in gamma_grid) {
     b <- if (is.null(beta_fixed)) c(bv) else c(bv, as.numeric(beta_fixed))
     r <- morie_in_identified_set(freq, b, gv, x, alpha_grid, link = link,

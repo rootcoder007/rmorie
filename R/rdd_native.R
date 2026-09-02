@@ -34,7 +34,9 @@
                 vcov = matrix(NA_real_, p + 1L, p + 1L),
                 n = length(use)))
   }
-  xs <- x[use]; ys <- y[use]; ws <- w[use]
+  xs <- x[use]
+  ys <- y[use]
+  ws <- w[use]
   X <- outer(xs - cutoff, 0:p, "^")
   XtWX <- crossprod(X, ws * X)
   XtWX_inv <- tryCatch(solve(XtWX), error = function(e) .morie_ginv(XtWX))
@@ -45,7 +47,8 @@
   n_use <- length(use)
   J <- min(nn_J, n_use - 1L)
   ord <- order(xs)
-  xo <- xs[ord]; yo <- ys[ord]
+  xo <- xs[ord]
+  yo <- ys[ord]
   # Vectorized +/-J window: distance and value matrices built from
   # shifted copies (Inf pads the ends), then the J nearest picked by
   # a running arg-min sweep -- no per-observation allocation.
@@ -106,14 +109,16 @@
 .morie_rdd_ik_native <- function(x, y, cutoff = 0,
                                  kernel = "triangular") {
   ok <- is.finite(x) & is.finite(y)
-  x <- x[ok]; y <- y[ok]
+  x <- x[ok]
+  y <- y[ok]
   n <- length(x)
   sd_x <- stats::sd(x)
   # Step 1: density + conditional variance at the cutoff
   h1 <- 1.84 * sd_x * n^(-1 / 5)
   il <- x >= cutoff - h1 & x < cutoff
   ir <- x >= cutoff & x <= cutoff + h1
-  n_l <- sum(il); n_r <- sum(ir)
+  n_l <- sum(il)
+  n_r <- sum(ir)
   if (n_l < 3L || n_r < 3L) {
     # Degenerate near-cutoff sample: fall back to the rule of thumb.
     return(list(bandwidth = 1.84 * sd_x * n^(-1 / 5),
@@ -128,7 +133,8 @@
   g <- stats::lm(y ~ Tr + d + I(d^2) + I(d^3))
   m3 <- 6 * stats::coef(g)[["I(d^3)"]]
   if (!is.finite(m3) || m3 == 0) m3 <- 1e-8
-  n_pos <- sum(d >= 0); n_neg <- sum(d < 0)
+  n_pos <- sum(d >= 0)
+  n_neg <- sum(d < 0)
   h2_r <- 3.56 * (s2_c / (f_c * m3^2))^(1 / 7) * n_pos^(-1 / 7)
   h2_l <- 3.56 * (s2_c / (f_c * m3^2))^(1 / 7) * n_neg^(-1 / 7)
   fit2 <- function(mask, h2) {
@@ -178,7 +184,8 @@
   if (is.null(bandwidth)) {
     # McCrary's automatic bandwidth: global quartic on each side.
     auto_h <- function(side) {
-      m <- mids[side]; f <- dens[side]
+      m <- mids[side]
+      f <- dens[side]
       if (length(m) < 6L) return(stats::sd(x))
       q <- stats::lm(f ~ m + I(m^2) + I(m^3) + I(m^4))
       cf <- stats::coef(q)
@@ -191,7 +198,8 @@
     bandwidth <- mean(c(auto_h(mids < cutoff), auto_h(mids >= cutoff)))
   }
   side_fit <- function(side_mask) {
-    m <- mids[side_mask]; f <- dens[side_mask]
+    m <- mids[side_mask]
+    f <- dens[side_mask]
     u <- (m - cutoff) / bandwidth
     w <- pmax(1 - abs(u), 0)
     use <- w > 0

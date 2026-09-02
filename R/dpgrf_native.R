@@ -115,7 +115,8 @@
   a <- as.numeric(alpha)
   if (a <= 0) stop("dpgrf: alpha must be positive")
   e <- if (is.null(rng)) .ghc_rng(seed) else rng
-  counts <- numeric(0); labels <- integer(0)
+  counts <- numeric(0)
+  labels <- integer(0)
   for (k in seq_len(N)) {
     if (length(counts) == 0L) {
       counts <- c(counts, 1)
@@ -126,11 +127,13 @@
     weights <- c(counts, a)
     wsum <- sum(weights)
     u <- .ghc_unif(e, 1L) * wsum
-    acc <- 0.0; chosen <- NA_integer_
+    acc <- 0.0
+    chosen <- NA_integer_
     cs <- cumsum(weights)
     for (j in seq_along(cs)) {
       acc <- cs[j]
-      if (u <= acc) { chosen <- j - 1L; break }
+      if (u <= acc) { chosen <- j - 1L
+      break }
     }
     if (is.na(chosen)) {
       counts <- c(counts, 1)

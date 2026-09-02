@@ -17,7 +17,8 @@
 #' @examples
 #' PropMd(NIE = 5L, NDE = 5L)
 PropMd <- function(NIE, NDE) {
-  nie <- as.numeric(NIE); nde <- as.numeric(NDE)
+  nie <- as.numeric(NIE)
+  nde <- as.numeric(NDE)
   te <- nie + nde
   same <- as.numeric((nie >= 0) == (nde >= 0))
   .t1_result(estimate = if (te != 0) nie / te else NaN, te = te,

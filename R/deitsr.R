@@ -34,7 +34,8 @@ Deitkd <- function(x, teacher = NULL, y = NULL, mode = "hard", lam = 0.5,
   if (length(zt) > 1L) for (i in seq(2L, length(zt))) if (zt[i] > zt[yt]) yt <- i
   if (identical(mode, "soft")) {
     t <- as.numeric(tau)
-    pst <- .s03softmax(zs / t); ptt <- .s03softmax(zt / t)
+    pst <- .s03softmax(zs / t)
+    ptt <- .s03softmax(zt / t)
     kl <- 0
     for (i in seq_along(ptt)) {
       if (ptt[i] > 0) kl <- kl + ptt[i] * (log(ptt[i]) - log(max(pst[i], eps)))

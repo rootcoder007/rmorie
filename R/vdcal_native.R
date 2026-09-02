@@ -102,7 +102,8 @@
 #' @export
 morie_vdcal_oie_tozer <- function(fu, fut, par = NULL) {
   p <- .vdcal_phys(par)
-  fu <- as.numeric(fu); fut <- as.numeric(fut)
+  fu <- as.numeric(fu)
+  fut <- as.numeric(fut)
   if (!(fu > 0 && fu <= 1))
     stop("the plasma free fraction must lie in (0, 1]")
   if (!(fut > 0 && fut <= 1))

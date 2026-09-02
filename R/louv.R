@@ -16,15 +16,19 @@
 #' louv(matrix(c(0,1,1,0), 2, 2))$n_communities
 #' @export
 louv <- function(A, max_levels = 20L) {
-  a0 <- as.matrix(A); dimnames(a0) <- NULL
-  n0 <- nrow(a0); m2 <- sum(a0)
+  a0 <- as.matrix(A)
+  dimnames(a0) <- NULL
+  n0 <- nrow(a0)
+  m2 <- sum(a0)
   if (m2 <= 0) {
     return(list(estimate = 0, communities = seq_len(n0) - 1L, n_communities = n0,
                 levels = 0L, modularity_by_level = numeric(0), n = n0,
                 method = "Louvain community detection (Blondel et al. 2008)"))
   }
   labels <- seq_len(n0) - 1L
-  a <- a0; hist <- numeric(0); levels <- 0L
+  a <- a0
+  hist <- numeric(0)
+  levels <- 0L
   for (lv in seq_len(as.integer(max_levels))) {
     n <- nrow(a)
     ph <- .k02phase1(a, n, m2)

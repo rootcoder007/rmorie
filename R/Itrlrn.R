@@ -32,7 +32,9 @@
 #' time <- rep(1:2, each = 8)
 #' Itrlrn(state, action, reward, time)
 Itrlrn <- function(state, action, reward, time, gamma = 1) {
-  a <- .s03vec(action); r <- .s03vec(reward); tm <- .s03vec(time)
+  a <- .s03vec(action)
+  r <- .s03vec(reward)
+  tm <- .s03vec(time)
   n <- length(r)
   if (n == 0L) stop("iterative_q_learning: reward is empty")
   if (length(a) != n || length(tm) != n) stop("iterative_q_learning: action, reward and time have different lengths")
@@ -40,7 +42,8 @@ Itrlrn <- function(state, action, reward, time, gamma = 1) {
   S <- if (!is.null(state)) .s03mat(state) else matrix(0, n, 0)
   if (nrow(S) != n) stop("iterative_q_learning: state and reward have different lengths")
   k <- ncol(S)
-  stages <- sort(unique(tm)); T <- length(stages)
+  stages <- sort(unique(tm))
+  T <- length(stages)
   if (T == 0L) stop("iterative_q_learning: no stages")
   idx <- lapply(stages, function(s) which(tm == s))
   m <- length(idx[[1]])
@@ -49,7 +52,9 @@ Itrlrn <- function(state, action, reward, time, gamma = 1) {
   if (m <= p) stop("iterative_q_learning: too few records per stage for the Q-model")
   rowf <- function(sv, av) c(1, sv, av, av * sv)
   Vnext <- numeric(m)
-  betas <- vector("list", T); shares <- numeric(T); values <- numeric(T)
+  betas <- vector("list", T)
+  shares <- numeric(T)
+  values <- numeric(T)
   for (t in seq(T, 1L)) {
     g <- idx[[t]]
     Z <- t(vapply(seq_len(m), function(u) rowf(S[g[u], ], a[g[u]]), numeric(p)))

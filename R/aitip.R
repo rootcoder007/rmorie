@@ -17,19 +17,29 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Compip(V, V)
 Compip <- function(x, y) {
-  x <- .t1_vec(x); y <- .t1_vec(y)
+  x <- .t1_vec(x)
+  y <- .t1_vec(y)
   if (length(x) != length(y)) stop("x and y must have the same number of parts")
   if (any(x <= 0) || any(y <= 0)) stop("compositions must be strictly positive")
   D <- length(x)
-  Lx <- log(x); Ly <- log(y)
+  Lx <- log(x)
+  Ly <- log(y)
   zx <- Lx - sum(Lx) / D
   zy <- Ly - sum(Ly) / D
   ip <- sum(zx * zy)
   pw <- 0
-  for (i in seq_len(D)) for (j in seq_len(D)) if (j > i)
-    pw <- pw + (Lx[i] - Lx[j]) * (Ly[i] - Ly[j])
-  nx <- sqrt(sum(zx^2)); ny <- sqrt(sum(zy^2))
+  for (i in seq_len(D)) {
+    for (j in seq_len(D)) {
+      if (j > i) {
+        pw <- pw + (Lx[i] - Lx[j]) * (Ly[i] - Ly[j])
+      }
+    }
+  }
+  nx <- sqrt(sum(zx^2))
+  ny <- sqrt(sum(zy^2))
   cosang <- if (nx > 0 && ny > 0) ip / (nx * ny) else NaN
-  .t1_result(inner = ip, inner_pairwise = pw / D, cos_angle = cosang, D = D,
-             method = "Aitchison inner product")
+  .t1_result(
+    inner = ip, inner_pairwise = pw / D, cos_angle = cosang, D = D,
+    method = "Aitchison inner product"
+  )
 }

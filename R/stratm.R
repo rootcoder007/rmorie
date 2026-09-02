@@ -24,7 +24,9 @@
 #'   whose stratamean forms sum(Meanh*wh) and sum(Varh*wh^2).
 #' @export
 Stratmean <- function(y, h, Nh, level = 0.95) {
-  y <- .t1_vec(y); h <- as.integer(.t1_vec(h)); Nh <- .t1_vec(Nh)
+  y <- .t1_vec(y)
+  h <- as.integer(.t1_vec(h))
+  Nh <- .t1_vec(Nh)
   if (length(y) != length(h)) stop("y and h must have the same length")
   L <- length(Nh)
   if (L < 1L) stop("at least one stratum is required")
@@ -32,17 +34,21 @@ Stratmean <- function(y, h, Nh, level = 0.95) {
     stop("h must hold one-based stratum labels in 1..L")
   if (level <= 0 || level >= 1)
     stop("level must lie strictly between 0 and 1")
-  N <- sum(Nh); W <- Nh / N
+  N <- sum(Nh)
+  W <- Nh / N
   mh <- vh <- nh <- numeric(L)
   for (s in seq_len(L)) {
-    ys <- y[h == s]; m <- length(ys)
+    ys <- y[h == s]
+    m <- length(ys)
     if (m < 2L) stop("every stratum needs at least two observations")
     if (m > Nh[s]) stop("a stratum sample cannot exceed its population")
     nh[s] <- m
     mh[s] <- mean(ys)
     vh[s] <- (Nh[s] - m) / Nh[s] * stats::var(ys) / m
   }
-  est <- sum(W * mh); var <- sum(W^2 * vh); se <- sqrt(var)
+  est <- sum(W * mh)
+  var <- sum(W^2 * vh)
+  se <- sqrt(var)
   z <- stats::qnorm((1 + level) / 2)
   .t1_result(estimate = est, se = se, ci_lower = est - z * se,
              ci_upper = est + z * se, stratum_mean = mh, stratum_var = vh,

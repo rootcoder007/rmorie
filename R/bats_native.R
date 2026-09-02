@@ -317,12 +317,15 @@ label <- function(spec) {
 #' @export
 .unpack <- function(spec, theta) {
   i <- 1L
-  alpha <- theta[i]; i <- i + 1L
+  alpha <- theta[i]
+  i <- i + 1L
   beta <- 0
   phi <- 1
   if (spec$use_trend) {
-    beta <- theta[i]; i <- i + 1L
-    if (spec$damped) { phi <- theta[i]; i <- i + 1L }
+    beta <- theta[i]
+    i <- i + 1L
+    if (spec$damped) { phi <- theta[i]
+    i <- i + 1L }
   }
   if (!is.null(spec$harmonics)) {
     g1 <- numeric(length(spec$periods))
@@ -361,8 +364,12 @@ label <- function(spec) {
 #' @export
 bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   u <- .unpack(spec, theta)
-  alpha <- u$alpha; beta <- u$beta; phi <- u$phi
-  gam <- u$gam; ar <- u$ar; ma <- u$ma
+  alpha <- u$alpha
+  beta <- u$beta
+  phi <- u$phi
+  gam <- u$gam
+  ar <- u$ar
+  ma <- u$ma
   n <- length(z)
   lev <- as.numeric(x0[1])
   i <- 2L
@@ -375,7 +382,8 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   if (trig) {
     lam <- lapply(seq_along(spec$periods), function(a)
       seasonal_harmonics(spec$periods[a], spec$harmonics[a]))
-    s <- list(); sstar <- list()
+    s <- list()
+    sstar <- list()
     for (a in seq_along(spec$periods)) {
       ki <- spec$harmonics[a]
       s[[a]] <- as.numeric(x0[seq(i, length.out = ki)])
@@ -396,7 +404,8 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
   i <- i + spec$p
   elag <- as.numeric(x0[seq(i, length.out = spec$q)])
 
-  resid <- numeric(n); fitted <- numeric(n)
+  resid <- numeric(n)
+  fitted <- numeric(n)
   for (t in seq_len(n)) {
     if (trig) seas <- sum(unlist(s))
     else seas <- sum(vapply(buf, function(b) b[1], numeric(1)))
@@ -413,10 +422,13 @@ bats_filter <- function(z, spec, theta, x0, long_run_b = 0) {
 
     if (trig) {
       for (a in seq_along(spec$periods)) {
-        g1 <- gam[[1]][a]; g2 <- gam[[2]][a]
+        g1 <- gam[[1]][a]
+        g2 <- gam[[2]][a]
         for (j in seq_len(spec$harmonics[a])) {
-          c <- cos(lam[[a]][j]); sn <- sin(lam[[a]][j])
-          sj <- s[[a]][j]; sjs <- sstar[[a]][j]
+          c <- cos(lam[[a]][j])
+          sn <- sin(lam[[a]][j])
+          sj <- s[[a]][j]
+          sjs <- sstar[[a]][j]
           s[[a]][j] <- sj * c + sjs * sn + g1 * d
           sstar[[a]][j] <- -sj * sn + sjs * c + g2 * d
         }
@@ -464,7 +476,8 @@ fit_seed_state <- function(z, spec, theta, long_run_b = 0) {
   cols <- matrix(0, nrow = n, ncol = ns)
   zeros_z <- rep(0, n)
   for (j in seq_len(ns)) {
-    e <- rep(0, ns); e[j] <- 1
+    e <- rep(0, ns)
+    e[j] <- 1
     cols[, j] <- bats_filter(zeros_z, spec, theta, e, long_run_b)$resid
   }
   # design @ x0 = base where design = -cols; minimum-norm via truncated SVD,
@@ -517,7 +530,8 @@ state_matrices <- function(spec, theta) {
   w <- numeric(ns)
   fcols <- matrix(0, nrow = ns, ncol = ns)
   for (j in seq_len(ns)) {
-    e <- rep(0, ns); e[j] <- 1
+    e <- rep(0, ns)
+    e[j] <- 1
     # z chosen so that eps = 0, which leaves x_1 = F e_j
     r1 <- bats_filter(0, spec, theta, e)
     wj <- r1$fitted[1]
@@ -614,19 +628,24 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @return A list with \code{lo}, \code{hi}.
 #' @export
 .bats_bounds <- function(spec) {
-  lo <- 0; hi <- 1
+  lo <- 0
+  hi <- 1
   if (spec$use_trend) {
-    lo <- c(lo, 0); hi <- c(hi, 1)
-    if (spec$damped) { lo <- c(lo, 0.8); hi <- c(hi, 1) }
+    lo <- c(lo, 0)
+    hi <- c(hi, 1)
+    if (spec$damped) { lo <- c(lo, 0.8)
+    hi <- c(hi, 1) }
   }
   ns <- if (!is.null(spec$harmonics)) 2L * length(spec$periods)
         else length(spec$periods)
   # The paper does not put a box on gamma; the forecastability region
   # is enforced in the objective below.
-  lo <- c(lo, rep(-1, ns)); hi <- c(hi, rep(1, ns))
+  lo <- c(lo, rep(-1, ns))
+  hi <- c(hi, rep(1, ns))
   lo <- c(lo, rep(-0.99, spec$p + spec$q))
   hi <- c(hi, rep(0.99, spec$p + spec$q))
-  if (spec$use_box_cox) { lo <- c(lo, 0); hi <- c(hi, 1.5) }
+  if (spec$use_box_cox) { lo <- c(lo, 0)
+  hi <- c(hi, 1.5) }
   list(lo = lo, hi = hi)
 }
 
@@ -678,7 +697,8 @@ concentrated_loglik <- function(y, resid, omega) {
 #' @export
 .fit_spec <- function(y, spec, long_run_b = 0, maxiter = 2000) {
   bds <- .bats_bounds(spec)
-  lo <- bds$lo; hi <- bds$hi
+  lo <- bds$lo
+  hi <- bds$hi
   clamp <- function(th) pmin(pmax(as.numeric(th), lo), hi)
 
   negll <- function(th) {
@@ -699,7 +719,8 @@ concentrated_loglik <- function(y, resid, omega) {
     if (is.na(val) || is.infinite(val)) 1e18 else val
   }
 
-  best_x <- NULL; best_f <- Inf
+  best_x <- NULL
+  best_f <- Inf
   for (st in .starts(spec)) {
     res <- tryCatch(
       optim(st, negll, method = "Nelder-Mead",
@@ -707,7 +728,8 @@ concentrated_loglik <- function(y, resid, omega) {
       error = function(e) list(par = st))
     xr <- as.numeric(res$par)
     fr <- negll(xr)
-    if (fr < best_f) { best_f <- fr; best_x <- xr }
+    if (fr < best_f) { best_f <- fr
+    best_x <- xr }
   }
   th <- clamp(best_x)
   omega <- if (spec$use_box_cox) th[length(th)] else 1
@@ -745,11 +767,17 @@ concentrated_loglik <- function(y, resid, omega) {
   if (h == 0L) return(numeric(0))
 
   u <- .unpack(spec, theta)
-  alpha <- u$alpha; beta <- u$beta; phi <- u$phi
-  gam <- u$gam; ar <- u$ar; ma <- u$ma
+  alpha <- u$alpha
+  beta <- u$beta
+  phi <- u$phi
+  gam <- u$gam
+  ar <- u$ar
+  ma <- u$ma
   c <- bats_filter(z, spec, theta, x0, long_run_b)$carry
-  lev <- c$level; trend <- c$trend
-  dlag <- c$dlag; elag <- c$elag
+  lev <- c$level
+  trend <- c$trend
+  dlag <- c$dlag
+  elag <- c$elag
   trig <- !is.null(spec$harmonics)
   if (trig) {
     s <- lapply(c$s, function(v) as.numeric(v))
@@ -772,10 +800,13 @@ concentrated_loglik <- function(y, resid, omega) {
 
     if (trig) {
       for (a in seq_along(spec$periods)) {
-        g1 <- gam[[1]][a]; g2 <- gam[[2]][a]
+        g1 <- gam[[1]][a]
+        g2 <- gam[[2]][a]
         for (j in seq_len(spec$harmonics[a])) {
-          cc <- cos(lam[[a]][j]); sn <- sin(lam[[a]][j])
-          sj <- s[[a]][j]; sjs <- sstar[[a]][j]
+          cc <- cos(lam[[a]][j])
+          sn <- sin(lam[[a]][j])
+          sj <- s[[a]][j]
+          sjs <- sstar[[a]][j]
           s[[a]][j] <- sj * cc + sjs * sn + g1 * d
           sstar[[a]][j] <- -sj * sn + sjs * cc + g2 * d
         }

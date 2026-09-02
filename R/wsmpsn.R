@@ -24,17 +24,22 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Pearsonr(V, V)
 Pearsonr <- function(x, y, level = 0.95) {
-  x <- .t1_vec(x); y <- .t1_vec(y); n <- length(x)
+  x <- .t1_vec(x)
+  y <- .t1_vec(y)
+  n <- length(x)
   if (length(y) != n) stop("x and y must have the same length")
   if (n < 3L) stop("n must be at least 3 for the z interval")
-  mx <- mean(x); my <- mean(y)
+  mx <- mean(x)
+  my <- mean(y)
   sxy <- sum((x - mx) * (y - my))
-  sxx <- sum((x - mx)^2); syy <- sum((y - my)^2)
+  sxx <- sum((x - mx)^2)
+  syy <- sum((y - my)^2)
   if (sxx <= 0 || syy <= 0)
     stop("a sample with zero variance has no correlation")
   r <- min(1, max(-1, sxy / sqrt(sxx * syy)))
   df <- n - 2L
-  if (abs(r) >= 1) { t <- sign(r) * Inf; p <- 0 } else {
+  if (abs(r) >= 1) { t <- sign(r) * Inf
+  p <- 0 } else {
     t <- r * sqrt(df) / sqrt(1 - r^2)
     p <- 2 * stats::pt(abs(t), df, lower.tail = FALSE)
   }

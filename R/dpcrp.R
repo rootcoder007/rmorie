@@ -18,12 +18,14 @@
 #' @examples
 #' Crp(n = 5L)
 Crp <- function(n, alpha = 1, u = NULL, seed = 1) {
-  n <- as.integer(n); a <- as.numeric(alpha)
+  n <- as.integer(n)
+  a <- as.numeric(alpha)
   if (a <= 0) stop("alpha must be positive")
   if (n < 1) stop("n must be at least 1")
   us <- if (is.null(u)) NULL else .t1_vec(u)
   g <- if (is.null(us)) .t1_lcg(seed) else NULL
-  counts <- numeric(0); table <- integer(n)
+  counts <- numeric(0)
+  table <- integer(n)
   for (i in seq_len(n)) {
     draw <- if (is.null(us)) g$unif() else us[i]
     tot <- (i - 1) + a
@@ -33,7 +35,8 @@ Crp <- function(n, alpha = 1, u = NULL, seed = 1) {
       w <- which(draw < cw)
       if (length(w)) pick <- w[1] - 1L
     }
-    if (pick < 0L) { counts <- c(counts, 0); pick <- length(counts) - 1L }
+    if (pick < 0L) { counts <- c(counts, 0)
+    pick <- length(counts) - 1L }
     counts[pick + 1L] <- counts[pick + 1L] + 1
     table[i] <- pick
   }

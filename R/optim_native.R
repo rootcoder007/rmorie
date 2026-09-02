@@ -320,7 +320,8 @@ morie_lars <- function(g, w, lr = 0.1, mu = 0.9, wd = 0, eta = 0.001,
     stop(sprintf("w has %d entries but g has %d", length(w), length(g)),
          call. = FALSE)
   }
-  wn <- sqrt(sum(w^2)); gn <- sqrt(sum(g^2))
+  wn <- sqrt(sum(w^2))
+  gn <- sqrt(sum(g^2))
   trust <- if (wn > 0 && gn > 0) eta * wn / (gn + wd * wn + eps) else 1
   st <- .morie_opt_state(state, length(g), "v")
   st$v <- mu * st$v + trust * (g + wd * w)
@@ -363,7 +364,8 @@ morie_lamb <- function(g, w, lr = 0.001, beta1 = 0.9, beta2 = 0.999,
   m_hat <- st$m / (1 - beta1^st$t)
   v_hat <- st$v / (1 - beta2^st$t)
   r <- m_hat / (sqrt(v_hat) + eps) + wd * w
-  wn <- sqrt(sum(w^2)); rn <- sqrt(sum(r^2))
+  wn <- sqrt(sum(w^2))
+  rn <- sqrt(sum(r^2))
   trust <- if (wn > 0 && rn > 0) wn / rn else 1
   upd <- -lr * trust * r
   list(update = upd, state = st, trust_ratio = trust, w_norm = wn,
@@ -397,7 +399,8 @@ morie_boyd_newton <- function(grad, hess, ridge = 0) {
   }
   if (max(abs(H - t(H))) > 1e-10) stop("hess must be symmetric", call. = FALSE)
   if (ridge != 0) H <- H + ridge * diag(n)
-  pd <- tryCatch({ chol(H); TRUE }, error = function(e) FALSE)
+  pd <- tryCatch({ chol(H)
+  TRUE }, error = function(e) FALSE)
   step <- tryCatch(-solve(H, g),
                    error = function(e) -qr.solve(H, g, tol = 1e-12))
   list(step = step, decrement = sqrt(max(sum(g * -step), 0)),
@@ -463,7 +466,9 @@ morie_boyd_backtracking <- function(f, grad, x, dx, alpha = 0.25, beta = 0.5,
                                     max_iter = 100L) {
   if (alpha <= 0 || alpha >= 0.5) stop("alpha must be in (0, 0.5)", call. = FALSE)
   if (beta <= 0 || beta >= 1) stop("beta must be in (0, 1)", call. = FALSE)
-  x <- as.numeric(x); g <- as.numeric(grad); d <- as.numeric(dx)
+  x <- as.numeric(x)
+  g <- as.numeric(grad)
+  d <- as.numeric(dx)
   if (length(x) != length(g) || length(x) != length(d)) {
     stop("x, grad and dx must all have the same length", call. = FALSE)
   }
@@ -510,7 +515,8 @@ morie_boyd_proximal <- function(h, v, t = 1, lo = NULL, hi = NULL) {
   v <- as.numeric(v)
   x <- switch(h,
     l1     = sign(v) * pmax(abs(v) - t, 0),
-    l2     = { nv <- sqrt(sum(v^2)); if (nv <= t) numeric(length(v)) else (1 - t / nv) * v },
+    l2     = { nv <- sqrt(sum(v^2))
+    if (nv <= t) numeric(length(v)) else (1 - t / nv) * v },
     l2sq   = v / (1 + 2 * t),
     nonneg = pmax(v, 0),
     box    = {

@@ -38,9 +38,14 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
   if (is.null(Q) || is.null(K) || is.null(V)) {
     stop("alibi_position_bias: Q, K and V are all required")
   }
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
-  storage.mode(Qm) <- "double"; storage.mode(Km) <- "double"; storage.mode(Vm) <- "double"
-  nq <- nrow(Qm); nk <- nrow(Km)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
+  storage.mode(Qm) <- "double"
+  storage.mode(Km) <- "double"
+  storage.mode(Vm) <- "double"
+  nq <- nrow(Qm)
+  nk <- nrow(Km)
   if (nq == 0L || nk == 0L) stop("alibi_position_bias: Q and K must be non-empty")
   d <- ncol(Qm)
   if (ncol(Km) != d) stop("alibi_position_bias: Q and K must share the key dimension")
@@ -49,7 +54,9 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
   sl <- if (is.null(slopes)) 2^-8 else as.numeric(slopes)
   if (length(sl) == 0L) stop("alibi_position_bias: slopes is empty")
   sc <- 1 / sqrt(d)
-  outs <- vector("list", length(sl)); W0 <- NULL; B0 <- NULL
+  outs <- vector("list", length(sl))
+  W0 <- NULL
+  B0 <- NULL
   for (h in seq_along(sl)) {
     B <- .atalib_bias(nq, nk, sl[h], causal)
     O <- matrix(0, nrow = nq, ncol = dv)
@@ -66,7 +73,8 @@ Atalib <- function(y = NULL, Q = NULL, K = NULL, V = NULL, slopes = NULL, causal
       for (j in seq_len(nk)) for (t in seq_len(dv)) O[i, t] <- O[i, t] + w[j] * Vm[j, t]
     }
     outs[[h]] <- O
-    if (h == 1L) { W0 <- Wh; B0 <- B }
+    if (h == 1L) { W0 <- Wh
+    B0 <- B }
   }
   list(output = if (length(sl) == 1L) outs[[1]] else outs, estimate = outs[[1]][1, 1],
        weights = W0, bias = B0, slopes = sl, n_q = nq, n_k = nk, d = d, d_v = dv,

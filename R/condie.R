@@ -20,11 +20,13 @@
 #' condie(0.5, 0, 0.4, 3)
 #' @export
 condie <- function(a1, a3, b, w, sa1 = NULL, sa3 = NULL, sa1a3 = 0, sb = NULL) {
-  wv <- as.numeric(w); n <- length(wv)
+  wv <- as.numeric(w)
+  n <- length(wv)
   slope <- a1 + a3 * wv
   eff <- b * slope
   if (is.null(sa1) || is.null(sa3) || is.null(sb)) {
-    se <- rep(NA_real_, n); se_slope <- rep(NA_real_, n)
+    se <- rep(NA_real_, n)
+    se_slope <- rep(NA_real_, n)
   } else {
     vslope <- sa1^2 + 2 * sa1a3 * wv + sa3^2 * wv^2
     se_slope <- ifelse(vslope >= 0, sqrt(vslope), NA_real_)

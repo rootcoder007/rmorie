@@ -102,7 +102,8 @@ morie_inverse_haldane <- function(r) {
 #' @return Numeric vector of length 2, \code{c(G(0), G(1))}.
 #' @export
 morie_genotype_probabilities <- function(left, right, r_left, r_right) {
-  rl <- as.numeric(r_left); rr <- as.numeric(r_right)
+  rl <- as.numeric(r_left)
+  rr <- as.numeric(r_right)
   if (rl < 0 || rl > 0.5)
     stop(sprintf("rqtmpl: recombination fractions lie in [0, 0.5], got %r", r_left))
   if (rr < 0 || rr > 0.5)
@@ -145,7 +146,8 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
 #' @references Lander, E. S. & Botstein, D. (1989), eq (4).
 #' @export
 morie_single_marker <- function(y, g) {
-  y <- as.numeric(y); g <- as.numeric(g)
+  y <- as.numeric(y)
+  g <- as.numeric(g)
   n <- length(y)
   if (n != length(g))
     stop("rqtmpl: y and g must have the same length")
@@ -200,7 +202,9 @@ morie_single_marker <- function(y, g) {
 #' @export
 morie_interval_map <- function(y, left, right, r_left, r_right,
                                max_iter = 200L, tol = 1e-10) {
-  y <- as.numeric(y); left <- as.numeric(left); right <- as.numeric(right)
+  y <- as.numeric(y)
+  left <- as.numeric(left)
+  right <- as.numeric(right)
   n <- length(y)
   if (!(n == length(left) && n == length(right)))
     stop("rqtmpl: y and the two marker vectors must have the same length")
@@ -242,7 +246,8 @@ morie_interval_map <- function(y, left, right, r_left, r_right,
     }
     s2 <- sum((1 - post) * (y - a_new)^2 +
               post * (y - (a_new + b_new))^2) / n
-    a <- a_new; b <- b_new
+    a <- a_new
+    b <- b_new
   }
   s0 <- sum((y - my)^2) / n
   ll0 <- -0.5 * n * (log(2 * pi * s0) + 1)
@@ -276,7 +281,9 @@ morie_scan_interval <- function(y, left, right, length, step = 0.01, ...) {
   length <- as.numeric(length)
   if (length <= 0)
     stop("rqtmpl: the interval length must be positive")
-  positions <- numeric(0); lods <- numeric(0); fits <- list()
+  positions <- numeric(0)
+  lods <- numeric(0)
+  fits <- list()
   d <- 0
   while (d <= length + 1e-12) {
     r1 <- morie_haldane(min(d, length))
@@ -308,7 +315,8 @@ morie_scan_interval <- function(y, left, right, length, step = 0.01, ...) {
 #' @references Lander, E. S. & Botstein, D. (1989), eqs (5a)-(5c).
 #' @export
 morie_elod <- function(var_qtl, var_residual) {
-  vq <- as.numeric(var_qtl); vr <- as.numeric(var_residual)
+  vq <- as.numeric(var_qtl)
+  vr <- as.numeric(var_residual)
   if (vr <= 0)
     stop("rqtmpl: the residual variance must be positive")
   if (vq < 0)
@@ -337,7 +345,8 @@ morie_threshold <- function(alpha = 0.05) {
   a <- as.numeric(alpha)
   if (a <= 0 || a >= 1)
     stop("rqtmpl: alpha must lie in (0, 1)")
-  lo <- 0; hi <- 40
+  lo <- 0
+  hi <- 40
   for (k in seq_len(200L)) {
     mid <- (lo + hi) / 2
     # .erfc(mid / sqrt(2)) > a  <=>  P(Z > mid) > a

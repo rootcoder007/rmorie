@@ -20,7 +20,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Vcquant(V)
 Vcquant <- function(V, b = 3, seed = 1) {
-  V <- as.matrix(V); n <- nrow(V); d <- ncol(V); b <- as.integer(b)
+  V <- as.matrix(V)
+  n <- nrow(V)
+  d <- ncol(V)
+  b <- as.integer(b)
   if (n < 1L) stop("the cache must hold at least one value vector")
   if (b < 2L)
     stop("b must be at least 2: one bit per coordinate goes to the sign sketch of the residual")
@@ -29,7 +32,8 @@ Vcquant <- function(V, b = 3, seed = 1) {
   g <- .t1_lcg(seed + 1)
   S <- matrix(0, d, d)
   for (i in seq_len(d)) for (j in seq_len(d)) S[i, j] <- g$norm()
-  rec <- matrix(0, n, d); mse <- rn <- numeric(n)
+  rec <- matrix(0, n, d)
+  mse <- rn <- numeric(n)
   for (i in seq_len(n)) {
     x <- V[i, ]
     y <- as.numeric(Pi %*% x)

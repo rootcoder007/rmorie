@@ -35,7 +35,8 @@ Ghosalcoxbvm <- function(x, time = NULL, event = NULL, beta_grid = NULL) {
   if (nrow(X) != length(tv)) X <- t(X)
   if (nrow(X) != length(tv))
     stop("x must have one row per follow-up time.")
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   if (n < 5L) stop(sprintf("need at least 5 observations, got %d.", n))
   ev <- if (is.null(event)) rep(1, n) else as.numeric(event)
   if (length(ev) != n)
@@ -45,12 +46,15 @@ Ghosalcoxbvm <- function(x, time = NULL, event = NULL, beta_grid = NULL) {
   nll_grad_hess <- function(b) {
     eta <- as.numeric(X %*% b)
     w <- exp(eta - max(eta))
-    ll <- 0; gr <- numeric(p); he <- matrix(0, p, p)
+    ll <- 0
+    gr <- numeric(p)
+    he <- matrix(0, p, p)
     for (i in which(ev == 1)) {
       at <- tv >= tv[i]
       sw <- sum(w[at])
       if (sw <= 0) next
-      Xa <- X[at, , drop = FALSE]; wa <- w[at]
+      Xa <- X[at, , drop = FALSE]
+      wa <- w[at]
       xb <- as.numeric(crossprod(Xa, wa)) / sw
       ll <- ll + eta[i] - log(sw)
       gr <- gr + X[i, ] - xb

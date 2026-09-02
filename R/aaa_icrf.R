@@ -26,8 +26,10 @@
     return(rep(v, n))
   }
   if (length(v) != n) {
-    stop(sprintf("%s has length %d; expected 1 or %d to match theta",
-                 name, length(v), n), call. = FALSE)
+    stop(sprintf(
+      "%s has length %d; expected 1 or %d to match theta",
+      name, length(v), n
+    ), call. = FALSE)
   }
   v
 }
@@ -51,8 +53,10 @@ morie_item_characteristic_curve <- function(theta, a = 1, b = 0, c = 0) {
   logit <- av * (th - bv)
   p <- cv + (1 - cv) * .icrf_expit(logit)
 
-  list(p = p, logit = logit, theta = th, a = av, b = bv, c = cv, n = n,
-       method = "Item characteristic curve, 3PL (Birnbaum 1968)")
+  list(
+    p = p, logit = logit, theta = th, a = av, b = bv, c = cv, n = n,
+    method = "Item characteristic curve, 3PL (Birnbaum 1968)"
+  )
 }
 
 #' @noRd

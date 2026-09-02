@@ -22,15 +22,22 @@
 #' Distilkl(V, V)
 Distilkl <- function(teacher, student, temperature = 2, label = NULL,
                      alpha = 0.5) {
-  t <- .t1_vec(teacher); s <- .t1_vec(student); T <- as.numeric(temperature)
-  if (length(t) != length(s))
+  t <- .t1_vec(teacher)
+  s <- .t1_vec(student)
+  T <- as.numeric(temperature)
+  if (length(t) != length(s)) {
     stop("teacher and student logits must have equal length")
+  }
   if (T <= 0) stop("temperature must be strictly positive")
   a <- as.numeric(alpha)
   if (a < 0 || a > 1) stop("alpha must lie in [0, 1]")
   k <- length(t)
-  sm <- function(z, TT) { e <- exp((z - max(z)) / TT); e / sum(e) }
-  p <- sm(t, T); q <- sm(s, T)
+  sm <- function(z, TT) {
+    e <- exp((z - max(z)) / TT)
+    e / sum(e)
+  }
+  p <- sm(t, T)
+  q <- sm(s, T)
   ce <- -sum(p * log(q))
   kl <- sum(ifelse(p > 0, p * log(p / q), 0))
   hard <- NA_real_
@@ -41,7 +48,9 @@ Distilkl <- function(teacher, student, temperature = 2, label = NULL,
     hard <- -log(sm(s, 1)[j])
     total <- a * T * T * ce + (1 - a) * hard
   }
-  .t1_result(softce = ce, kl = kl, hardce = hard, total = total,
-             teacherprob = p, studentprob = q, temperature = T, k = k,
-             method = "Temperature-scaled distillation loss (Hinton et al. 2015 Sect. 2)")
+  .t1_result(
+    softce = ce, kl = kl, hardce = hard, total = total,
+    teacherprob = p, studentprob = q, temperature = T, k = k,
+    method = "Temperature-scaled distillation loss (Hinton et al. 2015 Sect. 2)"
+  )
 }

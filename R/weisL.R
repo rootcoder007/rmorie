@@ -27,7 +27,8 @@
 Wlkernel <- function(G1, G2, K = 3, labels1 = NULL, labels2 = NULL,
                      normalize = FALSE) {
   adj <- function(G) {
-    A <- .s03mat(G); n <- nrow(A)
+    A <- .s03mat(G)
+    n <- nrow(A)
     nb <- vector("list", n)
     for (i in seq_len(n)) {
       v <- integer(0)
@@ -36,28 +37,34 @@ Wlkernel <- function(G1, G2, K = 3, labels1 = NULL, labels2 = NULL,
     }
     nb
   }
-  nb1 <- adj(G1); nb2 <- adj(G2)
-  n1 <- length(nb1); n2 <- length(nb2)
+  nb1 <- adj(G1)
+  nb2 <- adj(G2)
+  n1 <- length(nb1)
+  n2 <- length(nb2)
   l1 <- if (!is.null(labels1)) as.character(labels1) else rep("0", n1)
   l2 <- if (!is.null(labels2)) as.character(labels2) else rep("0", n2)
   alpha <- character(0)
   code <- function(s) {
     i <- match(s, alpha)
-    if (is.na(i)) { alpha[[length(alpha) + 1L]] <<- s; i <- length(alpha) }
+    if (is.na(i)) { alpha[[length(alpha) + 1L]] <<- s
+    i <- length(alpha) }
     i - 1L
   }
   l1 <- vapply(l1, function(s) as.character(code(s)), "")
   l2 <- vapply(l2, function(s) as.character(code(s)), "")
-  total <- 0; per <- numeric(0)
+  total <- 0
+  per <- numeric(0)
   for (it in seq_len(as.integer(K) + 1L) - 1L) {
-    u1 <- sort(unique(l1)); u2 <- sort(unique(l2))
+    u1 <- sort(unique(l1))
+    u2 <- sort(unique(l2))
     keys <- sort(unique(c(u1, u2)))
     dot <- 0
     for (s in keys) dot <- dot + sum(l1 == s) * sum(l2 == s)
     per <- c(per, dot)
     total <- total + dot
     if (it == as.integer(K)) break
-    n1l <- character(n1); n2l <- character(n2)
+    n1l <- character(n1)
+    n2l <- character(n2)
     for (v in seq_len(n1)) {
       ms <- sort(l1[nb1[[v]]])
       n1l[v] <- as.character(code(paste0(l1[v], ",", paste(ms, collapse = "|"))))
@@ -66,7 +73,8 @@ Wlkernel <- function(G1, G2, K = 3, labels1 = NULL, labels2 = NULL,
       ms <- sort(l2[nb2[[v]]])
       n2l[v] <- as.character(code(paste0(l2[v], ",", paste(ms, collapse = "|"))))
     }
-    l1 <- n1l; l2 <- n2l
+    l1 <- n1l
+    l2 <- n2l
   }
   est <- total
   if (normalize) {

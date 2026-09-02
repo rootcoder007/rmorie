@@ -16,7 +16,8 @@
 #' @references Villani, C. (2003). AMS GSM 58, theorem 2.12.
 #' @export
 Otcw <- function(X, Y, Cost, perm) {
-  M <- as.matrix(Cost); p <- as.integer(round(as.numeric(perm))) + 1L
+  M <- as.matrix(Cost)
+  p <- as.integer(round(as.numeric(perm))) + 1L
   n <- length(p)
   total <- sum(vapply(seq_len(n), function(i) M[p[i], i], 0))
   worst <- 0

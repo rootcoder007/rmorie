@@ -60,8 +60,10 @@ morie_ldiff <- function(X, quasi_ids, sensitive, l, c = 1) {
     paste(formatC(as.numeric(rows[i, ]), format = "g", digits = 12),
           collapse = "|"), character(1))
   order_keys <- unique(keys)
-  distinct_l <- NA_real_; min_ent <- NA_real_
-  c_min <- 0; min_size <- NA_real_
+  distinct_l <- NA_real_
+  min_ent <- NA_real_
+  c_min <- 0
+  min_size <- NA_real_
   for (key in order_keys) {
     vals <- sv[keys == key]
     seen <- unique(vals)                 # first-appearance order

@@ -23,9 +23,12 @@
 #' Fiedlercut(A)$labels
 #' @export
 Fiedlercut <- function(A, normalized = TRUE) {
-  W <- .s03mat(A); n <- nrow(W)
+  W <- .s03mat(A)
+  n <- nrow(W)
   d <- numeric(n)
-  for (i in seq_len(n)) { s <- 0; for (j in seq_len(n)) s <- s + W[i, j]; d[i] <- s }
+  for (i in seq_len(n)) { s <- 0
+  for (j in seq_len(n)) s <- s + W[i, j]
+  d[i] <- s }
   L <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     L[i, j] <- (if (i == j) d[i] else 0) - W[i, j]
@@ -38,7 +41,8 @@ Fiedlercut <- function(A, normalized = TRUE) {
     }
   }
   eg <- .s03jacobi(L)
-  vals <- eg$values; vecs <- eg$vectors
+  vals <- eg$values
+  vecs <- eg$vectors
   fied <- if (n > 1L) vecs[, 2] else rep(0, n)
   if (normalized) {
     for (i in seq_len(n)) fied[i] <- if (d[i] > 0) fied[i] / sqrt(d[i]) else 0

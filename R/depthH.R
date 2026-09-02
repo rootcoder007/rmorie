@@ -27,8 +27,10 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' DepthH(V, V)
 DepthH <- function(X, theta) {
-  Xm <- as.matrix(X); t_ <- as.numeric(theta)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- as.matrix(X)
+  t_ <- as.numeric(theta)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   d <- Xm - matrix(t_, n, p, byrow = TRUE)
   dirs <- list()
   if (p == 2L) {

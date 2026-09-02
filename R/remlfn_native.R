@@ -337,23 +337,28 @@ morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto"
       hi <- xb[k] + 0.5
       c <- hi - gr * (hi - lo)
       d <- lo + gr * (hi - lo)
-      pc <- xb; pc[k] <- c
-      pd <- xb; pd[k] <- d
-      fc <- neg(pc); fd <- neg(pd)
+      pc <- xb
+      pc[k] <- c
+      pd <- xb
+      pd[k] <- d
+      fc <- neg(pc)
+      fd <- neg(pd)
       for (j in seq_len(200)) {
         if (fc < fd) {
           hi <- d
           d <- c
           fd <- fc
           c <- hi - gr * (hi - lo)
-          pc <- xb; pc[k] <- c
+          pc <- xb
+          pc[k] <- c
           fc <- neg(pc)
         } else {
           lo <- c
           c <- d
           fc <- fd
           d <- lo + gr * (hi - lo)
-          pd <- xb; pd[k] <- d
+          pd <- xb
+          pd[k] <- d
           fd <- neg(pd)
         }
         if (hi - lo < 1e-14) break

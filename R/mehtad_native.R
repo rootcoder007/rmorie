@@ -85,9 +85,13 @@
 #' @export
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
-  m <- nrow(M); n <- ncol(M)
-  xv <- .mehtad_vec(x); yv <- .mehtad_vec(y); sv <- .mehtad_vec(s)
-  bv <- .mehtad_vec(b); cv <- .mehtad_vec(c)
+  m <- nrow(M)
+  n <- ncol(M)
+  xv <- .mehtad_vec(x)
+  yv <- .mehtad_vec(y)
+  sv <- .mehtad_vec(s)
+  bv <- .mehtad_vec(b)
+  cv <- .mehtad_vec(c)
   rp <- as.numeric(M %*% xv - bv)
   rd <- as.numeric(t(M) %*% yv + sv - cv)
   mu <- sum(xv * sv) / n
@@ -131,7 +135,8 @@ max_step <- function(v, dv, eta = 0.9995) {
 #' @return A list with \code{sigma}, \code{ratio}, \code{nu}, \code{approximation}, \code{note}.
 #' @export
 centering_parameter <- function(mu, mu_affine, nu = 3.0) {
-  m <- as.numeric(mu); ma <- as.numeric(mu_affine)
+  m <- as.numeric(mu)
+  ma <- as.numeric(mu_affine)
   if (m <= 0)
     stop("mehtad: mu must be positive")
   if (ma < 0)
@@ -158,8 +163,10 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' @return The value of \code{backsolve}.
 #' @export
 .mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
-  M <- as.matrix(A); storage.mode(M) <- "double"
-  m <- nrow(M); n <- ncol(M)
+  M <- as.matrix(A)
+  storage.mode(M) <- "double"
+  m <- nrow(M)
+  n <- ncol(M)
   dM <- M * rep(d, each = m)
   N <- dM %*% t(M)
   diag(N) <- diag(N) + ridge
@@ -183,9 +190,12 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' @return A list with \code{dx}, \code{dy}, \code{ds}.
 #' @export
 newton_direction <- function(A, x, s, rp, rd, rc) {
-  M <- as.matrix(A); storage.mode(M) <- "double"
-  m <- nrow(M); n <- ncol(M)
-  xv <- as.numeric(x); sv <- as.numeric(s)
+  M <- as.matrix(A)
+  storage.mode(M) <- "double"
+  m <- nrow(M)
+  n <- ncol(M)
+  xv <- as.numeric(x)
+  sv <- as.numeric(s)
   d <- xv / sv
   t <- -as.numeric(rc) / sv + d * as.numeric(rd)
   rhs <- -as.numeric(rp) - as.numeric(M %*% t)
@@ -215,13 +225,18 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' @export
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
-  M <- as.matrix(A); storage.mode(M) <- "double"
-  m <- nrow(M); n <- ncol(M)
-  bv <- as.numeric(b); cv <- as.numeric(c)
+  M <- as.matrix(A)
+  storage.mode(M) <- "double"
+  m <- nrow(M)
+  n <- ncol(M)
+  bv <- as.numeric(b)
+  cv <- as.numeric(c)
   if (length(bv) != m || length(cv) != n)
     stop(sprintf("mehtad: A is %dx%d but b has %d and c has %d",
                  m, n, length(bv), length(cv)))
-  x <- rep(1.0, n); s <- rep(1.0, n); y <- rep(0.0, m)
+  x <- rep(1.0, n)
+  s <- rep(1.0, n)
+  y <- rep(0.0, m)
   it <- 0L
   for (it in seq_len(as.integer(max_iter))) {
     r <- mehtad_residuals(M, bv, cv, x, y, s)

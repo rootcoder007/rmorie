@@ -20,7 +20,9 @@
 #' @examples
 #' Ghosalgpbinregcrt()
 Ghosalgpbinregcrt <- function(s = 2, d = 1, ns = c(100, 10000)) {
-  s <- as.numeric(s); d <- as.numeric(d); ns <- as.numeric(ns)
+  s <- as.numeric(s)
+  d <- as.numeric(d)
+  ns <- as.numeric(ns)
   if (s <= 0) stop("s must be positive")
   if (d <= 0) stop("d must be positive")
   if (length(ns) == 0L) stop("ns must be non-empty")

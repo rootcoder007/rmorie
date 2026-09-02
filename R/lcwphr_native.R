@@ -62,7 +62,8 @@
 #' @export
 .lcwphr_logit_irls <- function(X, y, max_iter = 100L, tol = 1e-11,
                                ridge_rel = 1e-8) {
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   beta <- numeric(p)
   for (i in seq_len(as.integer(max_iter))) {
     eta <- as.numeric(X %*% beta)
@@ -150,7 +151,10 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
   }
 
   post <- matrix(0.0, n, K)
-  ll <- -Inf; path <- numeric(0); it <- 0L; converged <- FALSE
+  ll <- -Inf
+  path <- numeric(0)
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(as.integer(max_iter))) {
     ll_new <- 0.0
     for (i in seq_len(n)) {
@@ -170,7 +174,9 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
     }
     path <- c(path, ll_new)
     if (it > 1L && abs(ll_new - ll) <= tol * (abs(ll) + 1.0)) {
-      ll <- ll_new; converged <- TRUE; break
+      ll <- ll_new
+      converged <- TRUE
+      break
     }
     ll <- ll_new
     for (j in seq_len(K)) {
@@ -200,20 +206,30 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
   w <- nmr / den
 
   contrast <- function(weights) {
-    num1 <- sum(weights * av * yv); den1 <- sum(weights * av)
-    num0 <- sum(weights * (1.0 - av) * yv); den0 <- sum(weights * (1.0 - av))
+    num1 <- sum(weights * av * yv)
+    den1 <- sum(weights * av)
+    num0 <- sum(weights * (1.0 - av) * yv)
+    den0 <- sum(weights * (1.0 - av))
     if (den1 <= .lcwphr_EPS || den0 <= .lcwphr_EPS)
       return(c(NaN, NaN, NaN))
     c(num1 / den1 - num0 / den0, num1 / den1, num0 / den0)
   }
 
-  class_ate <- numeric(K); class_m1 <- numeric(K); class_m0 <- numeric(K)
-  naive_ate <- numeric(K); naive_m1 <- numeric(K); naive_m0 <- numeric(K)
+  class_ate <- numeric(K)
+  class_m1 <- numeric(K)
+  class_m0 <- numeric(K)
+  naive_ate <- numeric(K)
+  naive_m1 <- numeric(K)
+  naive_m0 <- numeric(K)
   for (j in seq_len(K)) {
     r1 <- contrast(post[, j] * w)
-    class_ate[j] <- r1[1]; class_m1[j] <- r1[2]; class_m0[j] <- r1[3]
+    class_ate[j] <- r1[1]
+    class_m1[j] <- r1[2]
+    class_m0[j] <- r1[3]
     r0 <- contrast(post[, j])
-    naive_ate[j] <- r0[1]; naive_m1[j] <- r0[2]; naive_m0[j] <- r0[3]
+    naive_ate[j] <- r0[1]
+    naive_m1[j] <- r0[2]
+    naive_m0[j] <- r0[3]
   }
 
   ate <- sum(pi_ * class_ate)

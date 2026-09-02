@@ -24,9 +24,12 @@
 #' @export
 Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
   gamma_lower_reg <- function(a, x, iters = 400L) {
-    if (x <= 0) return(0)
+    if (x <= 0) {
+      return(0)
+    }
     if (x < a + 1) {
-      term <- 1 / a; s <- term
+      term <- 1 / a
+      s <- term
       for (n in seq_len(iters - 1L)) {
         term <- term * x / (a + n)
         s <- s + term
@@ -34,7 +37,10 @@ Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
       }
       return(s * exp(-x + a * log(x) - lgamma(a)))
     }
-    b <- x + 1 - a; cc <- 1e300; d <- 1 / b; h <- d
+    b <- x + 1 - a
+    cc <- 1e300
+    d <- 1 / b
+    h <- d
     for (i in seq_len(iters - 1L)) {
       an <- -i * (i - a)
       b <- b + 2
@@ -50,7 +56,8 @@ Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
     1 - exp(-x + a * log(x) - lgamma(a)) * h
   }
   gamma_quantile <- function(a, pp) {
-    lo <- 0; hi <- 1
+    lo <- 0
+    hi <- 1
     while (gamma_lower_reg(a, hi) < pp && hi < 1e8) hi <- hi * 2
     for (i in seq_len(200L)) {
       mid <- 0.5 * (lo + hi)
@@ -60,7 +67,8 @@ Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
   }
   pr <- .s03vec(p)
   m <- length(pr)
-  a <- as.numeric(alpha); e <- as.numeric(eps)
+  a <- as.numeric(alpha)
+  e <- as.numeric(eps)
   if (is.null(eta)) {
     raw <- numeric(m)
     for (i in seq_len(m)) raw[i] <- gamma_quantile(a, .s03vdc(i - 1L, 2L))
@@ -76,7 +84,9 @@ Rootnoise <- function(p, alpha = 0.3, eps = 0.25, eta = NULL) {
   mixed <- (1 - e) * pr + e * et
   h <- 0
   for (x in mixed) if (x > 0) h <- h - x * log(x)
-  list(estimate = if (m > 0L) mixed[1] else NaN, p_noisy = mixed, eta = et,
-       entropy = h, alpha = a, eps = e,
-       method = "Dirichlet exploration noise at the MCTS root")
+  list(
+    estimate = if (m > 0L) mixed[1] else NaN, p_noisy = mixed, eta = et,
+    entropy = h, alpha = a, eps = e,
+    method = "Dirichlet exploration noise at the MCTS root"
+  )
 }

@@ -18,10 +18,16 @@
 #' malor(12, 38, 7, 43)$estimate
 #' @export
 malor <- function(ai, bi, ci, di, add = 0.5, level = 0.95) {
-  a <- as.numeric(ai); b <- as.numeric(bi); cc <- as.numeric(ci); d <- as.numeric(di)
+  a <- as.numeric(ai)
+  b <- as.numeric(bi)
+  cc <- as.numeric(ci)
+  d <- as.numeric(di)
   zero <- (a == 0) | (b == 0) | (cc == 0) | (d == 0)
   adj <- ifelse(zero, add, 0)
-  a <- a + adj; b <- b + adj; cc <- cc + adj; d <- d + adj
+  a <- a + adj
+  b <- b + adj
+  cc <- cc + adj
+  d <- d + adj
   yi <- log(a * d / (b * cc))
   vi <- 1 / a + 1 / b + 1 / cc + 1 / d
   se <- sqrt(vi)

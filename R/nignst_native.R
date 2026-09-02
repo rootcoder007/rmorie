@@ -36,8 +36,10 @@ Nignst <- function(y, mu0, kappa0, nu0, sigma0_sq) {
   yv <- as.numeric(y)
   n <- length(yv)
   if (n < 1L) stop("need at least one observation", call. = FALSE)
-  mu0 <- as.numeric(mu0); kappa0 <- as.numeric(kappa0)
-  nu0 <- as.numeric(nu0); sigma0_sq <- as.numeric(sigma0_sq)
+  mu0 <- as.numeric(mu0)
+  kappa0 <- as.numeric(kappa0)
+  nu0 <- as.numeric(nu0)
+  sigma0_sq <- as.numeric(sigma0_sq)
   if (kappa0 <= 0 || nu0 <= 0 || sigma0_sq <= 0) {
     stop("kappa0, nu0, sigma0_sq must be positive", call. = FALSE)
   }

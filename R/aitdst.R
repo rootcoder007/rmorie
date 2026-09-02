@@ -13,14 +13,23 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Compdist(V, V)
 Compdist <- function(x, y) {
-  x <- .t1_vec(x); y <- .t1_vec(y); D <- length(x)
+  x <- .t1_vec(x)
+  y <- .t1_vec(y)
+  D <- length(x)
   if (D != length(y)) stop("x and y must have the same number of parts")
   if (D < 2L) stop("a distance on the simplex needs at least two parts")
   if (any(x <= 0) || any(y <= 0)) stop("compositions must be strictly positive")
-  lx <- log(x); ly <- log(y); tot <- 0
-  for (i in seq_len(D - 1L)) for (j in (i + 1L):D)
-    tot <- tot + ((lx[i] - lx[j]) - (ly[i] - ly[j]))^2
+  lx <- log(x)
+  ly <- log(y)
+  tot <- 0
+  for (i in seq_len(D - 1L)) {
+    for (j in (i + 1L):D) {
+      tot <- tot + ((lx[i] - lx[j]) - (ly[i] - ly[j]))^2
+    }
+  }
   d2 <- tot / D
-  .t1_result(distance = sqrt(d2), distance2 = d2, D = D,
-             method = "Aitchison distance")
+  .t1_result(
+    distance = sqrt(d2), distance2 = d2, D = D,
+    method = "Aitchison distance"
+  )
 }

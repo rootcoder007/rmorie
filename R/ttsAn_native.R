@@ -58,7 +58,8 @@ morie_t_quantile <- function(p, v) {
   if (p == 0.5) return(0)
   neg <- p < 0.5
   pp <- if (neg) 1 - p else p
-  lo <- 0; hi <- 1
+  lo <- 0
+  hi <- 1
   while (.mor_tts_t_cdf(hi, v) < pp) {
     hi <- hi * 2
     if (hi > 1e300) break
@@ -81,7 +82,9 @@ morie_t_quantile <- function(p, v) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 .mor_tts_median <- function(v) {
-  s <- sort(v); n <- length(s); mid <- n %/% 2L
+  s <- sort(v)
+  n <- length(s)
+  mid <- n %/% 2L
   if (n %% 2L == 1L) s[mid + 1L] else 0.5 * (s[mid] + s[mid + 1L])
 }
 
@@ -101,7 +104,9 @@ morie_t_quantile <- function(p, v) {
   n <- length(res)
   idx <- seq_len(n) - 1L
   vals <- res
-  removed <- integer(0); stats <- numeric(0); lams <- numeric(0)
+  removed <- integer(0)
+  stats <- numeric(0)
+  lams <- numeric(0)
   n_anom <- 0L
   for (i in seq_len(k)) {
     if (hybrid) {
@@ -113,16 +118,20 @@ morie_t_quantile <- function(p, v) {
     }
     if (scale <= 0) break
     d <- abs(vals - ctr)
-    best <- 1L; bdev <- -1
-    for (j in seq_along(vals)) if (d[j] > bdev) { bdev <- d[j]; best <- j }
+    best <- 1L
+    bdev <- -1
+    for (j in seq_along(vals)) if (d[j] > bdev) { bdev <- d[j]
+    best <- j }
     C <- bdev / scale
     p <- 1 - alpha / (2 * (n - i + 1))
     tq <- morie_t_quantile(p, n - i - 1)
     lam <- (n - i) * tq / sqrt((n - i - 1 + tq * tq) * (n - i + 1))
-    stats <- c(stats, C); lams <- c(lams, lam)
+    stats <- c(stats, C)
+    lams <- c(lams, lam)
     removed <- c(removed, idx[best])
     if (C > lam) n_anom <- i
-    vals <- vals[-best]; idx <- idx[-best]
+    vals <- vals[-best]
+    idx <- idx[-best]
     if (length(vals) < 3L) break
   }
   list(anoms = if (n_anom > 0L) removed[seq_len(n_anom)] else integer(0),

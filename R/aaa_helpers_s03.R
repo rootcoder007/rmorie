@@ -25,7 +25,9 @@
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .s03vec <- function(x) {
-  if (is.null(x)) return(numeric(0))
+  if (is.null(x)) {
+    return(numeric(0))
+  }
   as.numeric(unlist(x, use.names = FALSE))
 }
 
@@ -39,7 +41,9 @@
 #' @return A matrix, from \code{matrix}.
 #' @export
 .s03mat <- function(x) {
-  if (is.null(x)) return(matrix(numeric(0), 0, 0))
+  if (is.null(x)) {
+    return(matrix(numeric(0), 0, 0))
+  }
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
     return(x)
@@ -61,7 +65,9 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s03matmul <- function(A, B) {
-  n <- nrow(A); k <- nrow(B); m <- ncol(B)
+  n <- nrow(A)
+  k <- nrow(B)
+  m <- ncol(B)
   out <- matrix(0, n, m)
   for (i in seq_len(n)) {
     for (j in seq_len(m)) {
@@ -84,7 +90,8 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .s03matvec <- function(A, v) {
-  n <- nrow(A); out <- numeric(n)
+  n <- nrow(A)
+  out <- numeric(n)
   for (i in seq_len(n)) {
     s <- 0
     for (p in seq_along(v)) s <- s + A[i, p] * v[p]
@@ -130,11 +137,15 @@
           # three-way parity passed at 1e-9 because both arms did the same
           # thing. Solve against -H, or ridge the matrix into positive
           # definiteness, but do not accept a wrong answer.
-          stop(sprintf(paste("chol: matrix is not positive definite",
-                             "(pivot %d is %.17g); a Cholesky factor does",
-                             "not exist. If this is a log-likelihood",
-                             "Hessian, solve against -H."), i, d),
-               call. = FALSE)
+          stop(
+            sprintf(paste(
+              "chol: matrix is not positive definite",
+              "(pivot %d is %.17g); a Cholesky factor does",
+              "not exist. If this is a log-likelihood",
+              "Hessian, solve against -H."
+            ), i, d),
+            call. = FALSE
+          )
         }
         L[i, j] <- sqrt(d)
       } else {
@@ -231,27 +242,32 @@
       if (i < n) for (j in seq(i + 1L, n)) off <- off + M[i, j] * M[i, j]
     }
     if (off <= 1e-30) break
-    if (n > 1L) for (p in seq_len(n - 1L)) {
-      for (q in seq(p + 1L, n)) {
-        if (abs(M[p, q]) <= 1e-300) next
-        theta <- (M[q, q] - M[p, p]) / (2 * M[p, q])
-        tt <- (if (theta >= 0) 1 else -1) / (abs(theta) + sqrt(theta * theta + 1))
-        cc <- 1 / sqrt(tt * tt + 1)
-        ss <- tt * cc
-        for (k in seq_len(n)) {
-          mkp <- M[k, p]; mkq <- M[k, q]
-          M[k, p] <- cc * mkp - ss * mkq
-          M[k, q] <- ss * mkp + cc * mkq
-        }
-        for (k in seq_len(n)) {
-          mpk <- M[p, k]; mqk <- M[q, k]
-          M[p, k] <- cc * mpk - ss * mqk
-          M[q, k] <- ss * mpk + cc * mqk
-        }
-        for (k in seq_len(n)) {
-          vkp <- V[k, p]; vkq <- V[k, q]
-          V[k, p] <- cc * vkp - ss * vkq
-          V[k, q] <- ss * vkp + cc * vkq
+    if (n > 1L) {
+      for (p in seq_len(n - 1L)) {
+        for (q in seq(p + 1L, n)) {
+          if (abs(M[p, q]) <= 1e-300) next
+          theta <- (M[q, q] - M[p, p]) / (2 * M[p, q])
+          tt <- (if (theta >= 0) 1 else -1) / (abs(theta) + sqrt(theta * theta + 1))
+          cc <- 1 / sqrt(tt * tt + 1)
+          ss <- tt * cc
+          for (k in seq_len(n)) {
+            mkp <- M[k, p]
+            mkq <- M[k, q]
+            M[k, p] <- cc * mkp - ss * mkq
+            M[k, q] <- ss * mkp + cc * mkq
+          }
+          for (k in seq_len(n)) {
+            mpk <- M[p, k]
+            mqk <- M[q, k]
+            M[p, k] <- cc * mpk - ss * mqk
+            M[q, k] <- ss * mpk + cc * mqk
+          }
+          for (k in seq_len(n)) {
+            vkp <- V[k, p]
+            vkq <- V[k, q]
+            V[k, p] <- cc * vkp - ss * vkq
+            V[k, q] <- ss * vkp + cc * vkq
+          }
         }
       }
     }
@@ -278,7 +294,12 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .s03sigmoid <- function(z) {
-  if (z >= 0) 1 / (1 + exp(-z)) else { e <- exp(z); e / (1 + e) }
+  if (z >= 0) {
+    1 / (1 + exp(-z))
+  } else {
+    e <- exp(z)
+    e / (1 + e)
+  }
 }
 
 # Exact GELU, x * Phi(x) (Hendrycks and Gimpel 2016).
@@ -327,7 +348,9 @@
 #' @return A numeric value.
 #' @export
 .s03softmax <- function(v) {
-  if (length(v) == 0L) return(numeric(0))
+  if (length(v) == 0L) {
+    return(numeric(0))
+  }
   m <- max(v)
   e <- exp(v - m)
   s <- 0
@@ -345,9 +368,13 @@
 #' @return A numeric value.
 #' @export
 .s03logsumexp <- function(v) {
-  if (length(v) == 0L) return(-Inf)
+  if (length(v) == 0L) {
+    return(-Inf)
+  }
   m <- max(v)
-  if (m == -Inf) return(m)
+  if (m == -Inf) {
+    return(m)
+  }
   s <- 0
   for (x in v) s <- s + exp(x - m)
   m + log(s)
@@ -364,7 +391,9 @@
 #' @export
 .s03mean <- function(v) {
   n <- length(v)
-  if (n == 0L) return(NaN)
+  if (n == 0L) {
+    return(NaN)
+  }
   s <- 0
   for (x in v) s <- s + x
   s / n
@@ -382,7 +411,9 @@
 #' @export
 .s03var <- function(v, ddof = 1L) {
   n <- length(v)
-  if (n - ddof <= 0L) return(NaN)
+  if (n - ddof <= 0L) {
+    return(NaN)
+  }
   m <- .s03mean(v)
   s <- 0
   for (x in v) s <- s + (x - m) * (x - m)
@@ -413,7 +444,9 @@
 .s03median <- function(v) {
   s <- sort(v)
   n <- length(s)
-  if (n == 0L) return(NaN)
+  if (n == 0L) {
+    return(NaN)
+  }
   h <- n %/% 2L
   if (n %% 2L == 1L) s[h + 1L] else 0.5 * (s[h] + s[h + 1L])
 }
@@ -447,8 +480,12 @@
 .s03quantile7 <- function(v, p) {
   s <- sort(v)
   n <- length(s)
-  if (n == 0L) return(NaN)
-  if (n == 1L) return(s[1L])
+  if (n == 0L) {
+    return(NaN)
+  }
+  if (n == 1L) {
+    return(s[1L])
+  }
   h <- (n - 1) * p
   lo <- floor(h)
   hi <- if (lo + 1 < n) lo + 1 else n - 1
@@ -491,12 +528,20 @@
 #' @export
 .s03corr <- function(x, y) {
   n <- length(x)
-  if (n < 2L) return(NaN)
-  mx <- .s03mean(x); my <- .s03mean(y)
-  sxy <- 0; sxx <- 0; syy <- 0
+  if (n < 2L) {
+    return(NaN)
+  }
+  mx <- .s03mean(x)
+  my <- .s03mean(y)
+  sxy <- 0
+  sxx <- 0
+  syy <- 0
   for (i in seq_len(n)) {
-    dx <- x[i] - mx; dy <- y[i] - my
-    sxy <- sxy + dx * dy; sxx <- sxx + dx * dx; syy <- syy + dy * dy
+    dx <- x[i] - mx
+    dy <- y[i] - my
+    sxy <- sxy + dx * dy
+    sxx <- sxx + dx * dx
+    syy <- syy + dy * dy
   }
   d <- sqrt(sxx * syy)
   if (d > 0) sxy / d else NaN
@@ -514,7 +559,8 @@
 #' @return The value of \code{r}, as built in the body.
 #' @export
 .s03vdc <- function(i, base = 2L) {
-  f <- 1; r <- 0
+  f <- 1
+  r <- 0
   k <- as.integer(i) + 1L
   while (k > 0L) {
     f <- f / base
@@ -598,9 +644,14 @@
   # is an error in modern R), and this helper is SHARED, so every caller
   # that passes a vector -- lda, limmav and anything else using digamma --
   # broke on it.
-  if (length(x) > 1L) return(vapply(x, .s03digamma, numeric(1)))
+  if (length(x) > 1L) {
+    return(vapply(x, .s03digamma, numeric(1)))
+  }
   r <- 0
-  while (x < 6) { r <- r - 1 / x; x <- x + 1 }
+  while (x < 6) {
+    r <- r - 1 / x
+    x <- x + 1
+  }
   f <- 1 / (x * x)
   r + log(x) - 0.5 / x +
     f * (-1 / 12 + f * (1 / 120 + f * (-1 / 252 + f * (1 / 240 + f * (-1 / 132)))))
@@ -639,7 +690,9 @@
 #' @return A numeric value.
 #' @export
 .s03besselk <- function(nu, x, terms = 160L) {
-  if (x <= 0) return(Inf)
+  if (x <= 0) {
+    return(Inf)
+  }
   h <- 0.01
   n <- 2500L
   s <- 0
@@ -675,13 +728,15 @@
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .s03logit <- function(X, y, iters = 60L, ridge = 1e-10, tol = 1e-13) {
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   beta <- numeric(p)
   for (it in seq_len(iters)) {
     eta <- .s03matvec(X, beta)
     mu <- vapply(eta, .s03sigmoid, 0)
     w <- mu * (1 - mu)
-    XtWX <- matrix(0, p, p); Xtr <- numeric(p)
+    XtWX <- matrix(0, p, p)
+    Xtr <- numeric(p)
     for (i in seq_len(n)) {
       r <- y[i] - mu[i]
       for (a in seq_len(p)) {
@@ -711,9 +766,13 @@
 #' @return The value of \code{cbind}.
 #' @export
 .s03design <- function(X, n) {
-  if (is.null(X)) return(matrix(1, n, 1))
+  if (is.null(X)) {
+    return(matrix(1, n, 1))
+  }
   rows <- .s03mat(X)
-  if (nrow(rows) == 0L) return(matrix(1, n, 1))
+  if (nrow(rows) == 0L) {
+    return(matrix(1, n, 1))
+  }
   cbind(1, rows)
 }
 
@@ -734,7 +793,9 @@
 #' @return A list with \code{tau}, \code{inf}, \code{se}, \code{pi}, \code{mu0}, \code{w1}, \code{w0}, \code{gamma}, \code{beta0}.
 #' @export
 .s03drdid <- function(dy, D, X = NULL, weights = NULL) {
-  dyv <- .s03vec(dy); d <- .s03vec(D); n <- length(dyv)
+  dyv <- .s03vec(dy)
+  d <- .s03vec(D)
+  n <- length(dyv)
   Z <- .s03design(X, n)
   w <- if (!is.null(weights)) .s03vec(weights) else rep(1, n)
   gam <- .s03logit(Z, d, 60L)
@@ -743,15 +804,18 @@
   # violation, not an arithmetic accident.
   pi_ <- pmin(pmax(vapply(.s03matvec(Z, gam), .s03sigmoid, 0), 1e-12), 1 - 1e-12)
   keep <- which(d < 0.5)
-  Z0 <- Z[keep, , drop = FALSE]; y0 <- dyv[keep]
+  Z0 <- Z[keep, , drop = FALSE]
+  y0 <- dyv[keep]
   b0 <- if (length(keep)) .s03lstsq(Z0, y0) else numeric(ncol(Z))
   mu0 <- .s03matvec(Z, b0)
-  s1 <- 0; s0 <- 0
+  s1 <- 0
+  s0 <- 0
   for (i in seq_len(n)) {
     s1 <- s1 + w[i] * d[i]
     s0 <- s0 + w[i] * pi_[i] * (1 - d[i]) / (1 - pi_[i])
   }
-  w1 <- numeric(n); w0 <- numeric(n)
+  w1 <- numeric(n)
+  w0 <- numeric(n)
   for (i in seq_len(n)) {
     w1[i] <- if (s1 > 0) w[i] * d[i] / s1 else 0
     w0[i] <- if (s0 > 0) w[i] * pi_[i] * (1 - d[i]) / (1 - pi_[i]) / s0 else 0
@@ -763,8 +827,10 @@
   v <- 0
   for (x in inf) v <- v + x * x
   se <- if (n) sqrt(v / (n * n)) else NaN
-  list(tau = tau, inf = inf, se = se, pi = pi_, mu0 = mu0, w1 = w1, w0 = w0,
-       gamma = gam, beta0 = b0)
+  list(
+    tau = tau, inf = inf, se = se, pi = pi_, mu0 = mu0, w1 = w1, w0 = w0,
+    gamma = gam, beta0 = b0
+  )
 }
 
 # Mammen's two-point multiplier at a van der Corput point: mean 1,
@@ -806,21 +872,31 @@
 #' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{q1}, \code{q0}, \code{inf}, \code{ey1}, \code{ey0}, \code{scale}, \code{shift}.
 #' @export
 .s03tmle <- function(y, D, X = NULL, trim = 0, link = "logit") {
-  yv <- .s03vec(y); d <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  d <- .s03vec(D)
+  n <- length(yv)
   Z <- .s03design(X, n)
   g <- vapply(.s03matvec(Z, .s03logit(Z, d, 60L)), .s03sigmoid, 0)
   t <- as.numeric(trim)
   if (t > 0) g <- pmin(pmax(g, t), 1 - t)
-  lo <- min(yv); hi <- max(yv)
+  lo <- min(yv)
+  hi <- max(yv)
   rng <- if (hi > lo) hi - lo else 1
   ys <- (yv - lo) / rng
   Q <- cbind(1, d, Z[, -1, drop = FALSE])
   bq <- .s03lstsq(Q, ys)
-  q1 <- numeric(n); q0 <- numeric(n); qa <- numeric(n)
+  q1 <- numeric(n)
+  q0 <- numeric(n)
+  qa <- numeric(n)
   for (i in seq_len(n)) {
-    row1 <- c(1, 1, Z[i, -1]); row0 <- c(1, 0, Z[i, -1])
-    s1 <- 0; s0 <- 0
-    for (j in seq_along(bq)) { s1 <- s1 + bq[j] * row1[j]; s0 <- s0 + bq[j] * row0[j] }
+    row1 <- c(1, 1, Z[i, -1])
+    row0 <- c(1, 0, Z[i, -1])
+    s1 <- 0
+    s0 <- 0
+    for (j in seq_along(bq)) {
+      s1 <- s1 + bq[j] * row1[j]
+      s0 <- s0 + bq[j] * row0[j]
+    }
     q1[i] <- min(max(s1, 1e-8), 1 - 1e-8)
     q0[i] <- min(max(s0, 1e-8), 1 - 1e-8)
     qa[i] <- if (d[i] > 0.5) q1[i] else q0[i]
@@ -828,7 +904,8 @@
   H <- d / g - (1 - d) / (1 - g)
   eps <- 0
   for (it in seq_len(80L)) {
-    num <- 0; den <- 0
+    num <- 0
+    den <- 0
     for (i in seq_len(n)) {
       z <- log(qa[i] / (1 - qa[i])) + eps * H[i]
       p <- .s03sigmoid(z)
@@ -840,7 +917,8 @@
     eps <- eps + step
     if (abs(step) < 1e-13) break
   }
-  q1s <- numeric(n); q0s <- numeric(n)
+  q1s <- numeric(n)
+  q0s <- numeric(n)
   for (i in seq_len(n)) {
     q1s[i] <- .s03sigmoid(log(q1[i] / (1 - q1[i])) + eps / g[i])
     q0s[i] <- .s03sigmoid(log(q0[i] / (1 - q0[i])) - eps / (1 - g[i]))
@@ -848,8 +926,12 @@
   psi_s <- 0
   for (i in seq_len(n)) psi_s <- psi_s + (q1s[i] - q0s[i]) / n
   psi <- psi_s * rng
-  m1 <- 0; m0 <- 0
-  for (i in seq_len(n)) { m1 <- m1 + q1s[i] / n; m0 <- m0 + q0s[i] / n }
+  m1 <- 0
+  m0 <- 0
+  for (i in seq_len(n)) {
+    m1 <- m1 + q1s[i] / n
+    m0 <- m0 + q0s[i] / n
+  }
   inf <- numeric(n)
   for (i in seq_len(n)) {
     qas <- if (d[i] > 0.5) q1s[i] else q0s[i]
@@ -858,8 +940,10 @@
   v <- 0
   for (x in inf) v <- v + x * x
   se <- if (n) sqrt(v / (n * n)) else NaN
-  list(psi = psi, se = se, eps = eps, g = g, q1 = q1s, q0 = q0s, inf = inf,
-       ey1 = lo + rng * m1, ey0 = lo + rng * m0, scale = rng, shift = lo)
+  list(
+    psi = psi, se = se, eps = eps, g = g, q1 = q1s, q0 = q0s, inf = inf,
+    ey1 = lo + rng * m1, ey0 = lo + rng * m0, scale = rng, shift = lo
+  )
 }
 # ---------------------------------------------------------------- JSON
 # The four functions the package calls, over the full mapping in
@@ -897,9 +981,13 @@
   dots <- list(...)
   if (is.null(dots$na)) dots$na <- "null"
   if (is.null(dots$null)) dots$null <- "null"
-  do.call(morie_jsonlt_to_json,
-          c(list(x, pretty = pretty, auto_unbox = auto_unbox,
-                 digits = digits), dots))
+  do.call(
+    morie_jsonlt_to_json,
+    c(list(x,
+      pretty = pretty, auto_unbox = auto_unbox,
+      digits = digits
+    ), dots)
+  )
 }
 
 #' .s03json_pretty
@@ -912,8 +1000,9 @@
 #' @param indent Passed to \code{morie_jsonlt_prettify}. Defaults to \code{2L}.
 #' @return The value of \code{morie_jsonlt_prettify}.
 #' @export
-.s03json_pretty <- function(txt, indent = 2L)
+.s03json_pretty <- function(txt, indent = 2L) {
   morie_jsonlt_prettify(txt, indent)
+}
 
 #' .s03json_fromJSON
 #'

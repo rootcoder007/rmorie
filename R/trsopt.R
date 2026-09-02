@@ -23,16 +23,20 @@
 #' Trsub(c(1, 0), matrix(c(2, 0, 0, 1), 2, 2), 0.1)$norm
 #' @export
 Trsub <- function(g, H, delta = 1, tol = 1e-13, max_iter = 200) {
-  gv <- .s03vec(g); B <- .s03mat(H); n <- length(gv)
+  gv <- .s03vec(g)
+  B <- .s03mat(H)
+  n <- length(gv)
   eg <- .s03jacobi(B)
-  vals <- eg$values; vecs <- eg$vectors
+  vals <- eg$values
+  vecs <- eg$vectors
   gt <- numeric(n)
   for (t in seq_len(n)) {
     s <- 0
     for (i in seq_len(n)) s <- s + vecs[i, t] * gv[i]
     gt[t] <- s
   }
-  lam1 <- vals[1]; D <- as.numeric(delta)
+  lam1 <- vals[1]
+  D <- as.numeric(delta)
   snorm <- function(lm) {
     s <- 0
     for (t in seq_len(n)) {

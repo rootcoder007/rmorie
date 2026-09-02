@@ -45,7 +45,8 @@ Bndsbs <- function(theta_full, subset_idx) {
     w <- hi - lo
     tot <- tot + w
     if (w > mx) mx <- w
-    if (pos == 1L) { lo0 <- lo; hi0 <- hi }
+    if (pos == 1L) { lo0 <- lo
+    hi0 <- hi }
   }
   .t1_result(lower = lo0, upper = hi0, width = hi0 - lo0,
              total_width = tot, max_width = mx, d_subset = length(idx),

@@ -90,7 +90,10 @@ encode_point_prompt <- function(points, labels, dim = 8, type_embeddings = NULL)
 #' @export
 encode_box_prompt <- function(box, dim = 8, type_embeddings = NULL) {
   v <- as.numeric(unlist(box))
-  x0 <- v[1]; y0 <- v[2]; x1 <- v[3]; y1 <- v[4]
+  x0 <- v[1]
+  y0 <- v[2]
+  x1 <- v[3]
+  y1 <- v[4]
   if (x1 <= x0 || y1 <= y0)
     stop("samseg: the box is empty or inverted")
   te <- type_embeddings
@@ -140,7 +143,8 @@ encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
 #' @return A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms}, \code{speedup}, \code{interactive}, \code{note}.
 #' @export
 amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
-  e <- as.numeric(encoder_ms); d <- as.numeric(decoder_ms)
+  e <- as.numeric(encoder_ms)
+  d <- as.numeric(decoder_ms)
   P <- as.integer(n_prompts)
   if (P < 1L) stop("samseg: at least one prompt is needed")
   if (e <= 0 || d <= 0) stop("samseg: the timings must be positive")

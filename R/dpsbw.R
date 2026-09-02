@@ -23,14 +23,17 @@
 #' Stickw(1, 5)$pi
 #' @export
 Stickw <- function(alpha = 1, truncation = 10, V = NULL, base = 2) {
-  a <- as.numeric(alpha); K <- as.integer(truncation)
+  a <- as.numeric(alpha)
+  K <- as.integer(truncation)
   Vs <- if (!is.null(V)) .s03vec(V) else {
     out <- numeric(K)
     for (i in seq_len(K)) out[i] <- 1 - (1 - .s03vdc(i - 1L, as.integer(base)))^(1 / a)
     out
   }
-  pi_ <- numeric(length(Vs)); rest <- 1
-  for (i in seq_along(Vs)) { pi_[i] <- Vs[i] * rest; rest <- rest * (1 - Vs[i]) }
+  pi_ <- numeric(length(Vs))
+  rest <- 1
+  for (i in seq_along(Vs)) { pi_[i] <- Vs[i] * rest
+  rest <- rest * (1 - Vs[i]) }
   tot <- 0
   for (x in pi_) tot <- tot + x
   list(estimate = if (length(pi_)) pi_[1] else NaN, pi = pi_, V = Vs,

@@ -24,8 +24,11 @@
 #' @examples
 #' Clusdes(rho = 0.05, S2 = 1, c1 = 10, c2 = 1, budget = 1000)
 Clusdes <- function(rho, S2, c1, c2, budget) {
-  rho <- as.numeric(rho); S2 <- as.numeric(S2)
-  c1 <- as.numeric(c1); c2 <- as.numeric(c2); budget <- as.numeric(budget)
+  rho <- as.numeric(rho)
+  S2 <- as.numeric(S2)
+  c1 <- as.numeric(c1)
+  c2 <- as.numeric(c2)
+  budget <- as.numeric(budget)
   if (rho <= 0 || rho > 1) stop("rho must satisfy 0 < rho <= 1")
   if (S2 <= 0) stop("S2 must be positive")
   if (c1 <= 0 || c2 <= 0) stop("costs must be positive")
@@ -37,7 +40,8 @@ Clusdes <- function(rho, S2, c1, c2, budget) {
     if (mm <= 0) return(c(Inf, mm))
     c((S2 / (mm * kk)) * (1 + (kk - 1) * rho), mm)
   }
-  lo <- max(1, floor(kopt)); hi <- lo + 1
+  lo <- max(1, floor(kopt))
+  hi <- lo + 1
   k <- if (Vf(lo)[1] <= Vf(hi)[1]) lo else hi
   vm <- Vf(k)
   .t1_result(k_opt = kopt, k = as.numeric(k), m = vm[2], variance = vm[1],

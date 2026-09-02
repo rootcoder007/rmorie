@@ -61,9 +61,12 @@ aggregate_buckets <- function(y, m, overlapping = FALSE) {
   } else {
     n_buckets <- n %/% mm
     start <- n - n_buckets * mm
-    vapply(seq_len(n_buckets) - 1L, function(b)
-      sum(yv[(start + b * mm + 1L):(start + (b + 1L) * mm)]),
-      numeric(1))
+    vapply(
+      seq_len(n_buckets) - 1L, function(b) {
+        sum(yv[(start + b * mm + 1L):(start + (b + 1L) * mm)])
+      },
+      numeric(1)
+    )
   }
 }
 
@@ -87,9 +90,12 @@ disaggregate <- function(aggregate_value, m, profile = NULL) {
     w <- rep(1 / mm, mm)
   } else {
     w <- as.numeric(profile)
-    if (length(w) != mm)
-      stop(sprintf("adida: the profile has %d weights for a bucket of %d",
-                   length(w), mm))
+    if (length(w) != mm) {
+      stop(sprintf(
+        "adida: the profile has %d weights for a bucket of %d",
+        length(w), mm
+      ))
+    }
     if (any(w < 0)) stop("adida: profile weights must be non-negative")
     tot <- sum(w)
     if (tot <= 0) stop("adida: the profile sums to zero")
@@ -116,14 +122,18 @@ disaggregate <- function(aggregate_value, m, profile = NULL) {
 #' @references Teunter, R. H., Syntetos, A. A. & Babai, M. Z. (2011).
 #' @keywords internal
 intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
-                                   beta = 0.05, horizon = 1L) {
+                                  beta = 0.05, horizon = 1L) {
   yv <- as.numeric(y)
   if (length(yv) == 0L) stop("adida: empty series")
-  if (!identical(method, "tsb"))
-    stop(sprintf("adida: method '%s' is not implemented in the R arm",
-                 method))
-  if (as.integer(horizon) != 1L)
+  if (!identical(method, "tsb")) {
+    stop(sprintf(
+      "adida: method '%s' is not implemented in the R arm",
+      method
+    ))
+  }
+  if (as.integer(horizon) != 1L) {
     stop("adida: intermittent_forecast is called with horizon = 1")
+  }
   # Initialisation matches the conventional TSB seed: z_0 is the first
   # positive demand observed, p_0 is the empirical rate of positive
   # demand over the history. The Python tsbF initialisation should be
@@ -131,7 +141,8 @@ intermittent_forecast <- function(y, method = "tsb", alpha = 0.1,
   # recursion, identical in both arms.
   pos <- yv[yv > 0]
   if (length(pos) == 0L) {
-    z <- 0; p <- 0
+    z <- 0
+    p <- 0
   } else {
     z <- pos[1L]
     p <- length(pos) / length(yv)
@@ -180,28 +191,37 @@ morie_adida <- function(y, m, horizon = 1L, method = "tsb",
   yv <- as.numeric(y)
   if (!is.null(lead_time)) m <- as.integer(lead_time)
   agg <- aggregate_buckets(yv, m, overlapping = overlapping)
-  if (length(agg) < 2L)
-    stop(sprintf("adida: bucket size %d leaves only %d aggregated points",
-                 as.integer(m), length(agg)))
-  f <- intermittent_forecast(agg, method = method, alpha = alpha,
-                             beta = beta, horizon = 1L)
+  if (length(agg) < 2L) {
+    stop(sprintf(
+      "adida: bucket size %d leaves only %d aggregated points",
+      as.integer(m), length(agg)
+    ))
+  }
+  f <- intermittent_forecast(agg,
+    method = method, alpha = alpha,
+    beta = beta, horizon = 1L
+  )
   agg_fc <- f$forecast[1L]
   per_period <- disaggregate(agg_fc, as.integer(m), profile = profile)
   reps <- as.integer(ceiling(horizon / as.integer(m)))
   mm <- as.integer(m)
-  flat <- vapply(seq_len(reps * mm) - 1L, function(t) per_period[(t %% mm) + 1L],
-                 numeric(1))
-  list(estimate = flat[seq_len(as.integer(horizon))],
-       forecast = flat[seq_len(as.integer(horizon))],
-       aggregate_forecast = agg_fc,
-       lead_time_demand = if (!is.null(lead_time)) agg_fc else NULL,
-       aggregated = agg, m = mm,
-       zero_fraction_original = zero_fraction(yv),
-       zero_fraction_aggregated = zero_fraction(agg),
-       n_buckets = length(agg), overlapping = isTRUE(overlapping),
-       base_method = method,
-       disaggregation_sums_back = abs(sum(per_period) - agg_fc) < 1e-9,
-       method = "ADIDA, Nikolopoulos, Syntetos, Boylan, Petropoulos & Assimakopoulos (2011)")
+  flat <- vapply(
+    seq_len(reps * mm) - 1L, function(t) per_period[(t %% mm) + 1L],
+    numeric(1)
+  )
+  list(
+    estimate = flat[seq_len(as.integer(horizon))],
+    forecast = flat[seq_len(as.integer(horizon))],
+    aggregate_forecast = agg_fc,
+    lead_time_demand = if (!is.null(lead_time)) agg_fc else NULL,
+    aggregated = agg, m = mm,
+    zero_fraction_original = zero_fraction(yv),
+    zero_fraction_aggregated = zero_fraction(agg),
+    n_buckets = length(agg), overlapping = isTRUE(overlapping),
+    base_method = method,
+    disaggregation_sums_back = abs(sum(per_period) - agg_fc) < 1e-9,
+    method = "ADIDA, Nikolopoulos, Syntetos, Boylan, Petropoulos & Assimakopoulos (2011)"
+  )
 }
 
 #' Temporal combination across aggregation levels
@@ -226,32 +246,40 @@ temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
                                  alpha = 0.1, beta = 0.05,
                                  weights = NULL) {
   lv <- as.integer(levels)
-  if (length(lv) < 2L)
+  if (length(lv) < 2L) {
     stop(sprintf("adida: need at least 2 levels to combine, got %d", length(lv)))
+  }
   per <- list()
   for (m in lv) {
-    r <- morie_adida(y, m, horizon = horizon, method = method,
-                     alpha = alpha, beta = beta)
+    r <- morie_adida(y, m,
+      horizon = horizon, method = method,
+      alpha = alpha, beta = beta
+    )
     per[[length(per) + 1L]] <- r$forecast
   }
   if (is.null(weights)) {
     w <- rep(1 / length(lv), length(lv))
   } else {
     w <- as.numeric(weights)
-    if (length(w) != length(lv))
+    if (length(w) != length(lv)) {
       stop(sprintf("adida: %d weights for %d levels", length(w), length(lv)))
+    }
     tot <- sum(w)
     if (tot <= 0) stop("adida: the weights sum to zero")
     w <- w / tot
   }
   hh <- seq_len(as.integer(horizon))
-  comb <- vapply(hh, function(h) sum(w * vapply(per, function(p) p[h], numeric(1))),
-                 numeric(1))
-  list(estimate = comb, forecast = comb, levels = lv, per_level = per,
-       weights = w,
-       spread = max(vapply(per, function(p) p[1L], numeric(1))) -
-                min(vapply(per, function(p) p[1L], numeric(1))),
-       method = "temporal combination across aggregation levels, Petropoulos & Kourentzes (2015)")
+  comb <- vapply(
+    hh, function(h) sum(w * vapply(per, function(p) p[h], numeric(1))),
+    numeric(1)
+  )
+  list(
+    estimate = comb, forecast = comb, levels = lv, per_level = per,
+    weights = w,
+    spread = max(vapply(per, function(p) p[1L], numeric(1))) -
+      min(vapply(per, function(p) p[1L], numeric(1))),
+    method = "temporal combination across aggregation levels, Petropoulos & Kourentzes (2015)"
+  )
 }
 
 #' One-sentence ADIDA cheatsheet
@@ -259,13 +287,15 @@ temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
 #' @return Character string summarising the framework.
 #' @export
 .adida_cheatsheet <- function() {
-  paste0("adida: sum into buckets of m, forecast the aggregate, ",
-         "divide back by m. Aggregation cuts the zero fraction, ",
-         "which is the self-improving mechanism. Set m = LEAD TIME ",
-         "and the aggregate forecast IS lead-time demand, so no ",
-         "disaggregation error at all. Equal-weight disaggregation ",
-         "must sum back to the aggregate exactly. Combine several ",
-         "levels instead of choosing one.")
+  paste0(
+    "adida: sum into buckets of m, forecast the aggregate, ",
+    "divide back by m. Aggregation cuts the zero fraction, ",
+    "which is the self-improving mechanism. Set m = LEAD TIME ",
+    "and the aggregate forecast IS lead-time demand, so no ",
+    "disaggregation error at all. Equal-weight disaggregation ",
+    "must sum back to the aggregate exactly. Combine several ",
+    "levels instead of choosing one."
+  )
 }
 
 # compact alias per ledger/NAMING.md

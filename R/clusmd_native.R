@@ -161,7 +161,8 @@
     Ai <- F[[i]]
     for (j in (i + 1L):n) {
       Bj <- F[[j]]
-      a <- length(Ai); b <- length(Bj)
+      a <- length(Ai)
+      b <- length(Bj)
       if (a == 0L && b == 0L) {
         # Both empty: Tanimoto undefined; the Python arm raises. Same here.
         stop("clusmd: both fingerprints are empty; Tanimoto is undefined")
@@ -225,7 +226,8 @@
       cand_neg <- -counts[k]
       if (cand_neg < best_neg ||
           (cand_neg == best_neg && i < best)) {
-        best <- i; best_neg <- cand_neg
+        best <- i
+        best_neg <- cand_neg
       }
     }
     centre <- best

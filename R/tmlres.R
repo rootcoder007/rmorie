@@ -29,14 +29,18 @@
 #' @examples
 #' Tmlres(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlres <- function(y, D, X) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n < 3L || length(Dv) != n)
     stop("Tmlres: y and D must share one length >= 3")
   Xm <- as.matrix(X)
   if (nrow(Xm) != n) stop("Tmlres: X must have one row per subject")
   W <- cbind(1, Xm)
   base <- .s4_tmle(yv, Dv, W)
-  g <- base$g; H <- base$H; psi1 <- base$psi
+  g <- base$g
+  H <- base$H
+  psi1 <- base$psi
   qb <- .s4_ols(cbind(Dv, W), yv)$beta
   Qobs <- as.numeric(cbind(Dv, W) %*% qb)
   resid <- yv - Qobs - base$eps * H

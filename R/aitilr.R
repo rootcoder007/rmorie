@@ -34,8 +34,13 @@ Aitilr <- function(x, V = NULL) {
   if (length(xx) < 2L) stop("aitchison_ilr: a composition needs at least 2 parts")
   if (any(!(xx > 0))) stop("aitchison_ilr: every part must be strictly positive")
   D <- length(xx)
-  Vm <- if (is.null(V)) .aitilr_basis(D) else matrix(as.numeric(as.matrix(V)),
-                                                     nrow = nrow(as.matrix(V)))
+  Vm <- if (is.null(V)) {
+    .aitilr_basis(D)
+  } else {
+    matrix(as.numeric(as.matrix(V)),
+      nrow = nrow(as.matrix(V))
+    )
+  }
   if (nrow(Vm) != D) stop("aitchison_ilr: V has the wrong number of rows")
   p <- ncol(Vm)
   lg <- log(xx)
@@ -59,9 +64,11 @@ Aitilr <- function(x, V = NULL) {
     }
   }
   a2 <- a2 / D
-  list(y = y, estimate = if (p > 0L) y[1] else NA_real_, clr = z, norm = nrm,
-       aitchison_norm = sqrt(a2), D = D,
-       method = "ilr(x) = V' clr(x), V the Egozcue et al. (2003) SBP basis, eq. (11)")
+  list(
+    y = y, estimate = if (p > 0L) y[1] else NA_real_, clr = z, norm = nrm,
+    aitchison_norm = sqrt(a2), D = D,
+    method = "ilr(x) = V' clr(x), V the Egozcue et al. (2003) SBP basis, eq. (11)"
+  )
 }
 
 #' Contrast matrix of the default Egozcue (2003) sequential binary partition

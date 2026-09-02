@@ -27,7 +27,9 @@ Wgtlap <- function(edges, n = NULL) {
   if (any(E[, 3] < 0)) stop("weights must be non-negative")
   W <- matrix(0, N, N)
   for (i in seq_len(m)) {
-    u <- as.integer(E[i, 1]); v <- as.integer(E[i, 2]); w <- E[i, 3]
+    u <- as.integer(E[i, 1])
+    v <- as.integer(E[i, 2])
+    w <- E[i, 3]
     if (u < 1L || u > N || v < 1L || v > N)
       stop("vertex label out of range 1..n")
     W[u, v] <- W[u, v] + w

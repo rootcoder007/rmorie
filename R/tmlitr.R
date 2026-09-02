@@ -24,10 +24,13 @@
 #' @examples
 #' Tmlitr(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlitr <- function(y, D, W, X) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  n <- length(yv)
   if (n == 0L || length(Dv) != n)
     stop("Tmlitr: y and D must share one length")
-  Wm <- as.matrix(W); Vm <- as.matrix(X)
+  Wm <- as.matrix(W)
+  Vm <- as.matrix(X)
   if (nrow(Wm) != n || nrow(Vm) != n)
     stop("Tmlitr: W and X must have one row per subject")
   Wd <- cbind(1, Wm)
@@ -42,7 +45,8 @@ Tmlitr <- function(y, D, W, X) {
   rule <- ifelse(bfit > 0, 1, 0)
   gd <- ifelse(rule > 0.5, g, 1 - g)
   H <- ifelse(abs(Dv - rule) < 0.5, 1, 0) / gd
-  Q1 <- qhat(1); Q0 <- qhat(0)
+  Q1 <- qhat(1)
+  Q0 <- qhat(0)
   Qd <- ifelse(rule > 0.5, Q1, Q0)
   Qobs <- ifelse(Dv > 0.5, Q1, Q0)
   den <- sum(H * H)

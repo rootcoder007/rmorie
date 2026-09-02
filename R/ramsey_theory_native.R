@@ -81,21 +81,31 @@
 #' morie_ramsey_number(k = 5L)
 morie_ramsey_number <- function(k, l = NULL) {
   if (is.null(l)) l <- k
-  k <- as.integer(k); l <- as.integer(l)
+  k <- as.integer(k)
+  l <- as.integer(l)
   if (is.na(k) || is.na(l) || k < 1L || l < 1L) {
     stop(sprintf("k and l must be at least 1; got %s, %s", k, l),
          call. = FALSE)
   }
-  a <- min(k, l); b <- max(k, l)
+  a <- min(k, l)
+  b <- max(k, l)
   key <- paste(a, b, sep = ",")
   warns <- character(0)
 
   if (a == 1L) {
-    val <- 1L; lo <- 1L; hi <- 1L; credit <- "trivial: R(1, l) = 1"
+    val <- 1L
+    lo <- 1L
+    hi <- 1L
+    credit <- "trivial: R(1, l) = 1"
   } else if (a == 2L) {
-    val <- b; lo <- b; hi <- b; credit <- "trivial: R(2, l) = l"
+    val <- b
+    lo <- b
+    hi <- b
+    credit <- "trivial: R(2, l) = l"
   } else if (!is.null(.morie_ramsey_known[[key]])) {
-    val <- .morie_ramsey_known[[key]]; lo <- val; hi <- val
+    val <- .morie_ramsey_known[[key]]
+    lo <- val
+    hi <- val
     credit <- if (!is.null(.morie_ramsey_credits[[key]]))
       .morie_ramsey_credits[[key]] else "DS1 Table Ia"
   } else if (!is.null(.morie_ramsey_bounds[[key]])) {
@@ -104,7 +114,9 @@ morie_ramsey_number <- function(k, l = NULL) {
     hi <- .morie_ramsey_bounds[[key]][2]
     credit <- "DS1 Tables Ia and Ib (bounds only)"
   } else {
-    val <- NULL; lo <- NULL; hi <- .morie_es_bound(a, b)
+    val <- NULL
+    lo <- NULL
+    hi <- .morie_es_bound(a, b)
     credit <- "no published bound tabulated here"
   }
 
@@ -152,14 +164,16 @@ morie_ramsey_number <- function(k, l = NULL) {
 #' @examples
 #' morie_ramsey_upper_bound(k = 5L, l = 5L)
 morie_ramsey_upper_bound <- function(k, l, use_known = TRUE) {
-  k <- as.integer(k); l <- as.integer(l)
+  k <- as.integer(k)
+  l <- as.integer(l)
   if (k < 1L || l < 1L) {
     stop(sprintf("k and l must be at least 1; got %d, %d", k, l),
          call. = FALSE)
   }
   memo <- new.env(parent = emptyenv())
   rec <- function(a, b) {
-    lo <- min(a, b); hi <- max(a, b)
+    lo <- min(a, b)
+    hi <- max(a, b)
     if (lo == 1L) return(1L)
     if (lo == 2L) return(hi)
     key <- paste(lo, hi, sep = ",")
@@ -271,13 +285,18 @@ morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
   total <- choose(n, 3)
   mono <- total - bi
 
-  red_t <- NULL; blue_t <- NULL; resid <- NULL
+  red_t <- NULL
+  blue_t <- NULL
+  resid <- NULL
   if (isTRUE(brute_force)) {
-    red_t <- 0L; blue_t <- 0L
+    red_t <- 0L
+    blue_t <- 0L
     if (n >= 3L) {
       cmb <- utils::combn(n, 3)
       for (c in seq_len(ncol(cmb))) {
-        i <- cmb[1, c]; j <- cmb[2, c]; k <- cmb[3, c]
+        i <- cmb[1, c]
+        j <- cmb[2, c]
+        k <- cmb[3, c]
         s <- R[i, j] + R[i, k] + R[j, k]
         if (s == 3L) red_t <- red_t + 1L else if (s == 0L)
           blue_t <- blue_t + 1L
@@ -344,7 +363,8 @@ morie_ramsey_witness <- function(colouring, k, l) {
   R <- matrix(as.integer(A != 0), n, n)
   diag(R) <- 0L
   if (!identical(R, t(R))) stop("colouring must be symmetric.", call. = FALSE)
-  k <- as.integer(k); l <- as.integer(l)
+  k <- as.integer(k)
+  l <- as.integer(l)
 
   find <- function(size, want_red) {
     if (size > n) return(NULL)
@@ -355,8 +375,10 @@ morie_ramsey_witness <- function(colouring, k, l) {
       ok <- TRUE
       for (p in seq_len(ncol(pairs))) {
         e <- R[pairs[1, p], pairs[2, p]]
-        if (want_red && e != 1L) { ok <- FALSE; break }
-        if (!want_red && e != 0L) { ok <- FALSE; break }
+        if (want_red && e != 1L) { ok <- FALSE
+        break }
+        if (!want_red && e != 0L) { ok <- FALSE
+        break }
       }
       if (ok) return(as.integer(v) - 1L)
     }
@@ -399,7 +421,8 @@ morie_party_problem <- function(n_people = 6L) {
     C <- matrix(0L, n, n)
     for (i in seq_len(n)) {
       j <- if (i == n) 1L else i + 1L
-      C[i, j] <- 1L; C[j, i] <- 1L
+      C[i, j] <- 1L
+      C[j, i] <- 1L
     }
     witness <- C
     valid <- morie_ramsey_witness(C, 3L, 3L)$valid

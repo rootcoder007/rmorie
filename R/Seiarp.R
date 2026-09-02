@@ -41,14 +41,19 @@ Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
   pr <- .s03vec(params)
   if (length(pr) != 6L)
     stop("seira_asymptomatic: params must be (beta, sigma, gamma, p, kappa, gamma_a)")
-  beta <- pr[1]; sigma <- pr[2]; gamma <- pr[3]
-  p <- pr[4]; kappa <- pr[5]; gamma_a <- pr[6]
+  beta <- pr[1]
+  sigma <- pr[2]
+  gamma <- pr[3]
+  p <- pr[4]
+  kappa <- pr[5]
+  gamma_a <- pr[6]
   if (beta < 0 || sigma < 0 || gamma < 0 || kappa < 0 || gamma_a < 0)
     stop("seira_asymptomatic: rates must be non-negative")
   if (p < 0 || p > 1) stop("seira_asymptomatic: p must lie in [0, 1]")
   y <- c(as.numeric(S), as.numeric(E), as.numeric(I), as.numeric(A), as.numeric(R))
   if (any(y < 0)) stop("seira_asymptomatic: compartment sizes must be non-negative")
-  t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (dt <= 0 || t_max < 0) stop("seira_asymptomatic: need dt > 0 and t_max >= 0")
   N <- y[1] + y[2] + y[3] + y[4] + y[5]
   if (N <= 0) stop("seira_asymptomatic: total population must be positive")
@@ -71,7 +76,8 @@ Seiarp <- function(S, E, I, A, R, params, t_max = 160, dt = 0.1) {
     k3 <- deriv(y + 0.5 * dt * k2)
     k4 <- deriv(y + dt * k3)
     y <- y + (dt / 6) * (k1 + 2 * k2 + 2 * k3 + k4)
-    if (y[3] > peak_I) { peak_I <- y[3]; peak_time <- step * dt }
+    if (y[3] > peak_I) { peak_I <- y[3]
+    peak_time <- step * dt }
   }
 
   sym <- if (gamma > 0) p / gamma else Inf

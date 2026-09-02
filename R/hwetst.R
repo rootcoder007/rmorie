@@ -16,7 +16,9 @@
 #' @export
 hwetst <- function(genotypes) {
   g <- as.numeric(genotypes)
-  n_aa <- g[1]; n_ab <- g[2]; n_bb <- g[3]
+  n_aa <- g[1]
+  n_ab <- g[2]
+  n_bb <- g[3]
   ntot <- n_aa + n_ab + n_bb
   if (ntot <= 0) {
     return(list(statistic = NA_real_, p_value = NA_real_, df = 1L,

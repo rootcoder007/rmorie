@@ -29,7 +29,8 @@ morie_logdet_I_minus <- function(rho, W) {
 #' @examples
 #' morie_spatial_lag_model(y = 5L, X = 5L, W = 5L)
 morie_spatial_lag_model <- function(y, X, W, add_intercept = TRUE) {
-  X <- as.matrix(X); W <- as.matrix(W)
+  X <- as.matrix(X)
+  W <- as.matrix(W)
   n <- length(y)
   if (nrow(X) != n) stop("X has ", nrow(X), " rows but y has ", n)
   if (nrow(W) != n || ncol(W) != n) stop("W must be ", n, " x ", n)
@@ -55,7 +56,8 @@ morie_spatial_lag_model <- function(y, X, W, add_intercept = TRUE) {
 #' @rdname morie_spatial_lag_model
 #' @export
 morie_spatial_error_model <- function(y, X, W, add_intercept = TRUE) {
-  X <- as.matrix(X); W <- as.matrix(W)
+  X <- as.matrix(X)
+  W <- as.matrix(W)
   n <- length(y)
   if (nrow(X) != n) stop("X has ", nrow(X), " rows but y has ", n)
   if (nrow(W) != n || ncol(W) != n) stop("W must be ", n, " x ", n)
@@ -100,8 +102,10 @@ morie_ripley_k <- function(coords, r_grid, area = NULL,
   if (ncol(P) != 2) stop("coords must be an n x 2 matrix")
   n <- nrow(P)
   if (n < 2) stop("need at least 2 points")
-  x0 <- min(P[, 1]); x1 <- max(P[, 1])
-  y0 <- min(P[, 2]); y1 <- max(P[, 2])
+  x0 <- min(P[, 1])
+  x1 <- max(P[, 1])
+  y0 <- min(P[, 2])
+  y1 <- max(P[, 2])
   if (is.null(area)) area <- (x1 - x0) * (y1 - y0)
   if (area <= 0) stop("degenerate window: zero area")
   lam <- n / area
@@ -161,13 +165,16 @@ morie_cokrig <- function(coords, z1, z2, s0, cross_vario = NULL,
   A[1:n, (n + 1):(2 * n)] <- cross_vario(d)
   A[(n + 1):(2 * n), 1:n] <- cross_vario(d)
   A[(n + 1):(2 * n), (n + 1):(2 * n)] <- model(d)
-  A[1:n, 2 * n + 1] <- 1; A[2 * n + 1, 1:n] <- 1
-  A[(n + 1):(2 * n), 2 * n + 2] <- 1; A[2 * n + 2, (n + 1):(2 * n)] <- 1
+  A[1:n, 2 * n + 1] <- 1
+  A[2 * n + 1, 1:n] <- 1
+  A[(n + 1):(2 * n), 2 * n + 2] <- 1
+  A[2 * n + 2, (n + 1):(2 * n)] <- 1
   rhs[1:n] <- model(d0)
   rhs[(n + 1):(2 * n)] <- cross_vario(d0)
   rhs[2 * n + 1] <- 1
   sol <- solve(A, rhs)
-  lam <- sol[1:n]; mu <- sol[(n + 1):(2 * n)]
+  lam <- sol[1:n]
+  mu <- sol[(n + 1):(2 * n)]
   list(prediction = sum(lam * z1) + sum(mu * z2),
        variance = sum(lam * rhs[1:n]) +
          sum(mu * rhs[(n + 1):(2 * n)]) + sol[2 * n + 1],

@@ -33,7 +33,8 @@ laplacian <- function(adj, n, normalized = TRUE) {
     v <- as.integer(k) + 1L
     for (nk in names(adj[[k]])) {
       w <- as.integer(nk) + 1L
-      A[v, w] <- 1; A[w, v] <- 1
+      A[v, w] <- 1
+      A[w, v] <- 1
     }
   }
   d <- rowSums(A)
@@ -63,7 +64,8 @@ laplacian_positional_encoding <- function(adj, n, dim = 2L,
                                            normalized = TRUE) {
   L <- laplacian(adj, n, normalized)
   ee <- eigen(L, symmetric = TRUE)
-  vals <- ee$values; vecs <- ee$vectors
+  vals <- ee$values
+  vecs <- ee$vectors
   order <- order(vals)
   take <- order[seq_len(as.integer(dim) + 1L)[-1L]]
   if (length(take) < as.integer(dim))
@@ -82,7 +84,8 @@ laplacian_positional_encoding <- function(adj, n, dim = 2L,
 #' @return Sign-flipped encoding.
 #' @export
 random_sign_flip <- function(pe, rng) {
-  pe <- as.matrix(pe); storage.mode(pe) <- "double"
+  pe <- as.matrix(pe)
+  storage.mode(pe) <- "double"
   d <- ncol(pe)
   s <- ifelse(.ghc_unif(rng, d) < 0.5, 1, -1)
   pe * matrix(s, nrow = nrow(pe), ncol = d, byrow = TRUE)
@@ -92,8 +95,10 @@ random_sign_flip <- function(pe, rng) {
 #' @noRd
 .gtrf_normalize <- function(X, how) {
   if (how == "none") return(X)
-  X <- as.matrix(X); storage.mode(X) <- "double"
-  n <- nrow(X); d <- ncol(X)
+  X <- as.matrix(X)
+  storage.mode(X) <- "double"
+  n <- nrow(X)
+  d <- ncol(X)
   if (how == "batch") {
     mu <- colSums(X) / n
     sd <- sqrt(colSums((X - matrix(mu, nrow = n, ncol = d,
@@ -121,9 +126,13 @@ random_sign_flip <- function(pe, rng) {
 #' @return List with output, note.
 #' @export
 morie_gtrf_sparse_attention <- function(H, adj, WQ, WK, WV, edge_bias = NULL) {
-  H <- as.matrix(H); storage.mode(H) <- "double"
-  WQ <- as.matrix(WQ); WK <- as.matrix(WK); WV <- as.matrix(WV)
-  storage.mode(WQ) <- "double"; storage.mode(WK) <- "double"
+  H <- as.matrix(H)
+  storage.mode(H) <- "double"
+  WQ <- as.matrix(WQ)
+  WK <- as.matrix(WK)
+  WV <- as.matrix(WV)
+  storage.mode(WQ) <- "double"
+  storage.mode(WK) <- "double"
   storage.mode(WV) <- "double"
   dk <- ncol(WQ)
   Q <- H %*% t(WQ)
@@ -174,12 +183,15 @@ graph_transformer_layer <- function(H, adj, WQ, WK, WV, W1, W2,
   if (!(norm %in% c("batch", "layer", "none")))
     stop(paste0("gtrf: norm must be batch, layer or none, got '",
                 norm, "'"))
-  H <- as.matrix(H); storage.mode(H) <- "double"
+  H <- as.matrix(H)
+  storage.mode(H) <- "double"
   att <- morie_gtrf_sparse_attention(H, adj, WQ, WK, WV, edge_bias)$output
   res <- H + att
   res <- .gtrf_normalize(res, norm)
-  W1 <- as.matrix(W1); W2 <- as.matrix(W2)
-  storage.mode(W1) <- "double"; storage.mode(W2) <- "double"
+  W1 <- as.matrix(W1)
+  W2 <- as.matrix(W2)
+  storage.mode(W1) <- "double"
+  storage.mode(W2) <- "double"
   H1 <- pmax(res %*% t(W1), 0)
   ff <- H1 %*% t(W2)
   out <- res + ff

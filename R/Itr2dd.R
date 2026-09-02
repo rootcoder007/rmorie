@@ -30,7 +30,8 @@
 #' set.seed(1)
 #' Itr2dd(y = rnorm(40), D = rbinom(40, 1, 0.5), W = matrix(rnorm(80), 40, 2))
 Itr2dd <- function(y, D, W, min_frac = 0.25) {
-  dy <- .s03vec(y); n <- length(dy)
+  dy <- .s03vec(y)
+  n <- length(dy)
   if (n == 0L) stop("itr_optimal_did: y is empty")
   d <- .s03vec(D)
   if (length(d) != n) stop("itr_optimal_did: y and D have different lengths")
@@ -41,7 +42,8 @@ Itr2dd <- function(y, D, W, min_frac = 0.25) {
   if (!(min_frac > 0 && min_frac < 1)) stop("itr_optimal_did: min_frac must lie in (0, 1)")
   LEV <- c(0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9)
   full <- .s03drdid(dy, d, rows)
-  best <- NULL; tried <- 0L
+  best <- NULL
+  tried <- 0L
   for (j in seq_len(p)) {
     col <- rows[, j]
     cand <- unique(vapply(LEV, function(q) .s03quantile7(col, q), 0))

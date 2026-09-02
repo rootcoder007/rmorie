@@ -663,7 +663,9 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
   hwe_p <- numeric(0)
   drop <- integer(0)
   counts <- function(rows, j) {
-    a <- 0L; h <- 0L; b <- 0L
+    a <- 0L
+    h <- 0L
+    b <- 0L
     for (i in rows) {
       g <- G[i, j]
       if (is.na(g)) {

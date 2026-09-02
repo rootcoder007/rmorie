@@ -24,12 +24,16 @@
 #' Betavae(x = c(1, 2, 3, 4, 5, 6, 7, 8), xhat = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), logvar = c(1, 2, 3, 4, 5, 6, 7, 8))
 Betavae <- function(x, xhat, mu, logvar, beta = 4, capacity = NULL,
                     gamma = NULL, noisevar = 1) {
-  x <- .t1_vec(x); xh <- .t1_vec(xhat); m <- .t1_vec(mu); lv <- .t1_vec(logvar)
+  x <- .t1_vec(x)
+  xh <- .t1_vec(xhat)
+  m <- .t1_vec(mu)
+  lv <- .t1_vec(logvar)
   if (length(x) != length(xh)) stop("x and xhat must have the same length")
   if (length(m) != length(lv)) stop("mu and logvar must have the same length")
   nv <- as.numeric(noisevar)
   if (nv <= 0) stop("noisevar must be strictly positive")
-  d <- length(x); J <- length(m)
+  d <- length(x)
+  J <- length(m)
   rec <- -sum((x - xh)^2) / (2 * nv) - 0.5 * d * log(2 * pi * nv)
   per <- 0.5 * (m^2 + exp(lv) - 1 - lv)
   kl <- sum(per)

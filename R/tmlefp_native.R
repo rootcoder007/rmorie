@@ -45,7 +45,8 @@ alpha_from_gamma <- function(gamma) {
 optimal_alpha <- function(pscore, sigma2_treated = NULL,
                           sigma2_control = NULL, tol = 1e-12,
                           max_iter = 200) {
-  e <- as.numeric(pscore); n <- length(e)
+  e <- as.numeric(pscore)
+  n <- length(e)
   if (n == 0L) stop("tmlefp: no propensity scores")
   if (any(!(e > 0 & e < 1)))
     stop("tmlefp: propensity scores must lie strictly in (0, 1)")
@@ -72,7 +73,8 @@ optimal_alpha <- function(pscore, sigma2_treated = NULL,
     if (length(sel) == 0L)
       stop("tmlefp: the fixed point excluded every unit; check the propensity scores")
     new <- 2 * mean(sel)
-    if (abs(new - gamma) < tol * max(1, abs(gamma))) { gamma <- new; break }
+    if (abs(new - gamma) < tol * max(1, abs(gamma))) { gamma <- new
+    break }
     gamma <- new
   }
   keep <- k <= gamma
@@ -99,7 +101,9 @@ optimal_alpha <- function(pscore, sigma2_treated = NULL,
 #' @export
 optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
                               max_iter = 200) {
-  e <- as.numeric(pscore); w <- as.integer(treated); n <- length(e)
+  e <- as.numeric(pscore)
+  w <- as.integer(treated)
+  n <- length(e)
   if (n != length(w))
     stop("tmlefp: one treatment indicator per unit")
   if (any(!(e > 0 & e < 1)))
@@ -116,7 +120,8 @@ optimal_alpha_att <- function(pscore, treated, tol = 1e-12,
     if (length(sel) == 0L)
       stop("tmlefp: the fixed point excluded every treated unit")
     new <- 2 * mean(sel)
-    if (abs(new - thr) < tol * max(1, abs(thr))) { thr <- new; break }
+    if (abs(new - thr) < tol * max(1, abs(thr))) { thr <- new
+    break }
     thr <- new
   }
   alpha_t <- 1 - 1 / thr
@@ -197,8 +202,10 @@ morie_tmlefp <- function(y, treatment, pscore,
                           sigma2_treated = NULL,
                           sigma2_control = NULL,
                           estimand = "ate") {
-  yv <- as.numeric(y); w <- as.integer(treatment)
-  e <- as.numeric(pscore); n <- length(yv)
+  yv <- as.numeric(y)
+  w <- as.integer(treatment)
+  e <- as.numeric(pscore)
+  n <- length(yv)
   if (!(n == length(w) && length(w) == length(e)))
     stop("tmlefp: y, treatment and pscore must have the same length")
   if (any(!(w %in% c(0L, 1L))))

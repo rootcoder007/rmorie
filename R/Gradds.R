@@ -29,7 +29,8 @@ Gradds <- function(f, grad_f, x0, lr = 0.1, steps = 100, tol = 1e-12) {
   ns <- as.integer(steps)
   if (ns < 1L) stop("gradient_descent: steps must be at least 1")
   path <- as.numeric(f(x))
-  gn <- Inf; used <- 0L
+  gn <- Inf
+  used <- 0L
   for (i in seq_len(ns)) {
     g <- .s03vec(grad_f(x))
     if (length(g) != length(x)) stop("gradient_descent: gradient has the wrong length")

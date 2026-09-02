@@ -38,8 +38,10 @@
 #' Btnpqr(X, y, 0.5, B = 20)$beta_hat
 #' @export
 Btnpqr <- function(X, y, tau = 0.5, B = 200, alpha = 0.05, seed = 1) {
-  Xm <- .s03mat(X); yy <- .s03vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .s03mat(X)
+  yy <- .s03vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(yy)) stop("boot_quantile_regression: X and y have different lengths")
   if (n <= p) stop("boot_quantile_regression: need more rows than columns")
   t <- as.numeric(tau)
@@ -59,7 +61,9 @@ Btnpqr <- function(X, y, tau = 0.5, B = 200, alpha = 0.05, seed = 1) {
     }
     reps[[b]] <- .btnpqr_fit(Xm[idx, , drop = FALSE], yy[idx], t)
   }
-  se <- numeric(p); lo <- numeric(p); hi <- numeric(p)
+  se <- numeric(p)
+  lo <- numeric(p)
+  hi <- numeric(p)
   for (j in seq_len(p)) {
     col <- vapply(reps, function(r) r[j], 0)
     se[j] <- .s03sd(col, 1L)
@@ -74,7 +78,8 @@ Btnpqr <- function(X, y, tau = 0.5, B = 200, alpha = 0.05, seed = 1) {
 
 #' @noRd
 .btnpqr_fit <- function(Xm, yy, tau, maxit = 200L, tol = 1e-10, eps = 1e-6) {
-  n <- nrow(Xm); p <- ncol(Xm)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   b <- .s03lstsq(Xm, yy)
   for (k in seq_len(maxit)) {
     r <- yy - as.numeric(Xm %*% b)

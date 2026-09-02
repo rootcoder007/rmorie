@@ -28,29 +28,37 @@
 #' Svytbl(c(0, 0, 0, 0, 1, 1, 1, 1), c(0, 0, 1, 1, 0, 1, 1, 1))
 #' @export
 Svytbl <- function(x, y, weights = NULL) {
-  xa <- .wfrep_lab(x); ya <- .wfrep_lab(y); n <- length(xa)
+  xa <- .wfrep_lab(x)
+  ya <- .wfrep_lab(y)
+  n <- length(xa)
   if (n == 0L) stop("survey_xtab: x is empty")
   if (length(ya) != n) stop("survey_xtab: x and y differ in length")
   w <- if (is.null(weights)) rep(1, n) else .s03vec(weights)
   if (length(w) != n) stop("survey_xtab: x and weights differ in length")
-  rl <- sort(unique(xa)); cl <- sort(unique(ya))
-  r <- length(rl); cc <- length(cl)
+  rl <- sort(unique(xa))
+  cl <- sort(unique(ya))
+  r <- length(rl)
+  cc <- length(cl)
   if (r < 2L || cc < 2L)
     stop("survey_xtab: need at least two rows and two columns")
   cnt <- numeric(r * cc)
   for (i in seq_len(n)) {
-    ii <- match(xa[i], rl); jj <- match(ya[i], cl)
+    ii <- match(xa[i], rl)
+    jj <- match(ya[i], cl)
     cnt[(ii - 1L) * cc + jj] <- cnt[(ii - 1L) * cc + jj] + w[i]
   }
-  tot <- sum(cnt); p <- cnt / tot
+  tot <- sum(cnt)
+  p <- cnt / tot
   M <- matrix(p, nrow = r, ncol = cc, byrow = TRUE)
-  pr <- rowSums(M); pc <- colSums(M)
+  pr <- rowSums(M)
+  pc <- colSums(M)
   stat <- 0
   for (i in seq_len(r)) for (j in seq_len(cc)) {
     e <- pr[i] * pc[j]
     if (e > 0) stat <- stat + (M[i, j] - e)^2 / e
   }
-  sw <- sum(w); neff <- sw * sw / sum(w * w)
+  sw <- sum(w)
+  neff <- sw * sw / sum(w * w)
   df <- (r - 1L) * (cc - 1L)
   X2 <- neff * stat
   list(estimate = as.numeric(X2), statistic_naive = as.numeric(n * stat),

@@ -88,7 +88,8 @@ morie_cthrgr <- function(y, D, M, X, route = "gcomputed", n_trees = 8L,
   ys <- as.numeric(y)
   d <- as.numeric(ifelse(as.numeric(D) != 0, 1, 0))
   m <- as.numeric(M)
-  xs <- as.matrix(X); storage.mode(xs) <- "double"
+  xs <- as.matrix(X)
+  storage.mode(xs) <- "double"
   n <- length(ys)
   if (length(d) != n || length(m) != n || nrow(xs) != n)
     stop("y, D, M and X must agree in length")
@@ -128,25 +129,35 @@ morie_cthrgr <- function(y, D, M, X, route = "gcomputed", n_trees = 8L,
     }, numeric(1))
 
   qx <- if (is.null(newX)) xs else {
-    mm <- as.matrix(newX); storage.mode(mm) <- "double"; mm
+    mm <- as.matrix(newX)
+    storage.mode(mm) <- "double"
+    mm
   }
   q <- nrow(qx)
-  nde <- numeric(q); nie <- numeric(q); tot <- numeric(q)
-  ps <- numeric(q); m0v <- numeric(q); m1v <- numeric(q)
+  nde <- numeric(q)
+  nie <- numeric(q)
+  tot <- numeric(q)
+  ps <- numeric(q)
+  m0v <- numeric(q)
+  m1v <- numeric(q)
   for (i in seq_len(q)) {
     x <- qx[i, ]
     ps[i] <- morie_sdcfst_predict(fe, x)
     mb0 <- morie_sdcfst_predict(fm, c(0, x))
     mb1 <- morie_sdcfst_predict(fm, c(1, x))
-    m0v[i] <- mb0; m1v[i] <- mb1
-    a <- numeric(length(draws)); b <- numeric(length(draws))
+    m0v[i] <- mb0
+    m1v[i] <- mb1
+    a <- numeric(length(draws))
+    b <- numeric(length(draws))
     cc <- numeric(length(draws))
     for (j in seq_along(draws)) {
       r <- draws[j]
       y10 <- morie_sdcfst_predict(fy, c(1, mb0 + r, x))
       y00 <- morie_sdcfst_predict(fy, c(0, mb0 + r, x))
       y11 <- morie_sdcfst_predict(fy, c(1, mb1 + r, x))
-      a[j] <- y10 - y00; b[j] <- y11 - y10; cc[j] <- y11 - y00
+      a[j] <- y10 - y00
+      b[j] <- y11 - y10
+      cc[j] <- y11 - y00
     }
     nde[i] <- .w3_csum(a) / length(a)
     nie[i] <- .w3_csum(b) / length(b)

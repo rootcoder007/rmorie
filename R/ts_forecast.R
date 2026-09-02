@@ -120,7 +120,8 @@ morie_ts <- function(x, frequency = 1, start = 1, calendar = NA_character_,
                      units = attr(x, "units")) {
   na_action <- match.arg(na_action)
   if (inherits(x, "ts")) {
-    frequency <- stats::frequency(x); start <- stats::start(x)
+    frequency <- stats::frequency(x)
+    start <- stats::start(x)
   }
   xv <- as.numeric(x)                              # accepts units-typed input
   if (anyNA(xv)) {
@@ -197,10 +198,12 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
     if (have_urca) {
       adf <- suppressWarnings(urca::ur.df(v, type = "drift",
                                           selectlags = "AIC"))
-      adf_stat <- adf@teststat[1]; adf_crit <- adf@cval[1, "5pct"]
+      adf_stat <- adf@teststat[1]
+      adf_crit <- adf@cval[1, "5pct"]
       adf_stationary <- adf_stat < adf_crit          # reject unit root
       kp <- suppressWarnings(urca::ur.kpss(v, type = "mu"))
-      kpss_stat <- kp@teststat[1]; kpss_crit <- kp@cval[1, "5pct"]
+      kpss_stat <- kp@teststat[1]
+      kpss_crit <- kp@cval[1, "5pct"]
       kpss_stationary <- kpss_stat < kpss_crit        # fail to reject H0
     } else {
       # base fallback: split-half mean/variance stability
@@ -217,9 +220,13 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
                      stationary = kpss_stationary),
          ljung_box = lb, both_stationary = adf_stationary && kpss_stationary)
   }
-  d <- 0L; v <- x; res <- test_one(v)
+  d <- 0L
+  v <- x
+  res <- test_one(v)
   while (!res$both_stationary && d < max_d) {
-    d <- d + 1L; v <- diff(v); res <- test_one(v)
+    d <- d + 1L
+    v <- diff(v)
+    res <- test_one(v)
   }
   out <- test_one(x)
   out$suggested_d <- d
@@ -502,7 +509,8 @@ morie_ts_backtest <- function(x, h = 10L, order = c(0L, 0L, 0L),
   x <- as.numeric(x)
   n <- length(x)
   if (h >= n - 2L) stop("holdout `h` too large for the series", call. = FALSE)
-  train <- x[seq_len(n - h)]; actual <- x[(n - h + 1):n]
+  train <- x[seq_len(n - h)]
+  actual <- x[(n - h + 1):n]
   m <- morie_ts_arima(train, order = order, seasonal = seasonal)
   fc <- morie_ts_forecast(m, h = h)
   list(forecast = fc, actual = actual,

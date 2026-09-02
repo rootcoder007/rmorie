@@ -20,11 +20,15 @@
 #' @examples
 #' Betabinom(y = 5L, n = 5L)
 Betabinom <- function(y, n, alpha = 1, beta = 1, m = NULL) {
-  y <- as.integer(y); n <- as.integer(n)
+  y <- as.integer(y)
+  n <- as.integer(n)
   if (n < 0L || y < 0L || y > n) stop("need 0 <= y <= n")
-  a <- as.numeric(alpha); b <- as.numeric(beta)
+  a <- as.numeric(alpha)
+  b <- as.numeric(beta)
   if (a <= 0 || b <= 0) stop("prior shapes must be strictly positive")
-  pa <- a + y; pb <- b + n - y; s <- pa + pb
+  pa <- a + y
+  pb <- b + n - y
+  s <- pa + pb
   pm <- pa / s
   pv <- pa * pb / (s * s * (s + 1))
   mode <- if (pa > 1 && pb > 1) (pa - 1) / (s - 2) else NA_real_

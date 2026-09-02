@@ -56,7 +56,8 @@
 Fcfp4 <- function(adjacency, features, nbits = 2048, radius = 2) {
   B <- .ecfp_bonds(adjacency)
   if (is.matrix(features) || is.data.frame(features)) {
-    F <- as.matrix(features); storage.mode(F) <- "double"
+    F <- as.matrix(features)
+    storage.mode(F) <- "double"
     if (nrow(F) != B$a) stop("features must have one entry per atom", call. = FALSE)
     if (ncol(F) != 6L) stop("features rows must have 6 flags", call. = FALSE)
     code <- numeric(B$a)

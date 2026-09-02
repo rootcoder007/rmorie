@@ -25,7 +25,9 @@ Fpc <- function(N, n) {
   if (n < 1L) stop("n must be at least 1")
   N <- as.numeric(N)
   if (N < n) stop("N must be at least n")
-  if (is.infinite(N)) { f <- 0; k <- 1 } else { f <- n / N; k <- (N - n) / N }
+  if (is.infinite(N)) { f <- 0
+  k <- 1 } else { f <- n / N
+  k <- (N - n) / N }
   .t1_result(fpc = k, se_factor = sqrt(k), fraction = f, N = N, n = n,
              method = "Finite population correction (1 - n/N)")
 }

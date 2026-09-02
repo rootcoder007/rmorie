@@ -99,11 +99,15 @@
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .rfgain <- function(Y, left, right, q) {
-  nL <- length(left); nR <- length(right)
-  if (nL == 0L || nR == 0L) return(NULL)
+  nL <- length(left)
+  nR <- length(right)
+  if (nL == 0L || nR == 0L) {
+    return(NULL)
+  }
   g <- 0
   for (j in seq_len(q)) {
-    sL <- sum(Y[left, j]); sR <- sum(Y[right, j])
+    sL <- sum(Y[left, j])
+    sR <- sum(Y[right, j])
     g <- g + sL * sL / nL + sR * sR / nR
   }
   g
@@ -123,7 +127,9 @@
 #' @export
 .rfimp <- function(Y, rows, q) {
   n <- length(rows)
-  if (n == 0L) return(0)
+  if (n == 0L) {
+    return(0)
+  }
   tot <- 0
   for (j in seq_len(q)) {
     s <- sum(Y[rows, j])
@@ -189,8 +195,10 @@
   env$nodes[[idx]] <- NA
   mean <- if (n > 0L) colSums(Y[rows, , drop = FALSE]) / n else numeric(q)
   if (n < 2L * nodesize || n < 2L) {
-    env$nodes[[idx]] <- list(var = -1L, thr = 0, li = -1L, ri = -1L,
-                             value = mean, n = n, drop = 0)
+    env$nodes[[idx]] <- list(
+      var = -1L, thr = 0, li = -1L, ri = -1L,
+      value = mean, n = n, drop = 0
+    )
     return(idx)
   }
   p <- ncol(X)
@@ -198,15 +206,19 @@
   env$s <- env$s + 1L
   sp <- .rfbest(X, Y, rows, cand, q)
   if (is.null(sp) || length(sp$left) < nodesize || length(sp$right) < nodesize) {
-    env$nodes[[idx]] <- list(var = -1L, thr = 0, li = -1L, ri = -1L,
-                             value = mean, n = n, drop = 0)
+    env$nodes[[idx]] <- list(
+      var = -1L, thr = 0, li = -1L, ri = -1L,
+      value = mean, n = n, drop = 0
+    )
     return(idx)
   }
   drop <- .rfimp(Y, rows, q) - .rfimp(Y, sp$left, q) - .rfimp(Y, sp$right, q)
   li <- .rfgrow(X, Y, sp$left, b, nodesize, mtry, q, env)
   ri <- .rfgrow(X, Y, sp$right, b, nodesize, mtry, q, env)
-  env$nodes[[idx]] <- list(var = sp$var, thr = sp$thr, li = li, ri = ri,
-                           value = mean, n = n, drop = drop)
+  env$nodes[[idx]] <- list(
+    var = sp$var, thr = sp$thr, li = li, ri = ri,
+    value = mean, n = n, drop = drop
+  )
   idx
 }
 
@@ -250,7 +262,9 @@
   for (b in seq_len(n_trees) - 1L) {
     rows <- .rfboot(b, n)
     env <- new.env()
-    env$nodes <- list(); env$k <- 0L; env$s <- 0L
+    env$nodes <- list()
+    env$k <- 0L
+    env$s <- 0L
     root <- .rfgrow(X, Y, rows, b, nodesize, mtry, q, env)
     trees[[b + 1L]] <- list(nodes = env$nodes, root = root)
     oob[[b + 1L]] <- setdiff(seq_len(n), unique(rows))
@@ -354,7 +368,8 @@
     for (b in seq_along(trees)) {
       ob <- oob[[b]]
       if (length(ob) < 2L) next
-      nodes <- trees[[b]]$nodes; root <- trees[[b]]$root
+      nodes <- trees[[b]]$nodes
+      root <- trees[[b]]$root
       base <- 0
       for (i in ob) {
         v <- .rfpredtree(nodes, root, X[i, ])
@@ -373,12 +388,17 @@
       perm <- perm / length(ob)
       diffs <- c(diffs, perm - base)
     }
-    if (length(diffs) == 0L) { imp[j] <- NaN; next }
+    if (length(diffs) == 0L) {
+      imp[j] <- NaN
+      next
+    }
     m <- sum(diffs) / length(diffs)
     if (normalise && length(diffs) > 1L) {
       sdv <- sqrt(sum((diffs - m)^2) / (length(diffs) - 1L))
       imp[j] <- if (sdv > 0) m / sdv else 0
-    } else imp[j] <- m
+    } else {
+      imp[j] <- m
+    }
   }
   imp
 }

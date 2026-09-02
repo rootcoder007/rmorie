@@ -29,7 +29,8 @@ Kdfgeoext <- function(jh, jah, a) {
   if (a <= 0) stop("a must be positive.")
   if (a == 1) stop("a = 1 is excluded: the exponents divide by a^2 - 1.")
   if (jh <= 0 || jah <= 0) stop("J_h and J_ah must be positive; the identity takes logs.")
-  t1 <- a * a / (a * a - 1); t2 <- -1 / (a * a - 1)
+  t1 <- a * a / (a * a - 1)
+  t2 <- -1 / (a * a - 1)
   list(estimate = jh^t1 * jah^t2, t1 = t1, t2 = t2, a = a,
        method = "geometric extrapolation of E[hat F_h] (Theorem 2.1)")
 }

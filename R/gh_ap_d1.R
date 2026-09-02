@@ -20,11 +20,15 @@
 #' @examples
 #' Exptest(err_null = 0.1, err_alt = 0.2, n = 100)
 Exptest <- function(err_null, err_alt, n) {
-  e0 <- as.numeric(err_null); e1 <- as.numeric(err_alt); n <- as.integer(n)
+  e0 <- as.numeric(err_null)
+  e1 <- as.numeric(err_alt)
+  n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1")
   if (e0 <= 0 || e0 > 1 || e1 <= 0 || e1 > 1)
     stop("error probabilities must lie in (0, 1]")
-  c0 <- -log(e0) / n; c1 <- -log(e1) / n; cc <- min(c0, c1)
+  c0 <- -log(e0) / n
+  c1 <- -log(e1) / n
+  cc <- min(c0, c1)
   .t1_result(rate = cc, rate_null = c0, rate_alt = c1,
              bound = exp(-cc * n), exponential = as.numeric(cc > 0),
              n = as.numeric(n),

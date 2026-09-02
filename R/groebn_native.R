@@ -30,7 +30,8 @@
 .groebn_fr <- function(num, den = 1L) {
   num <- as.integer(num)
   den <- as.integer(den)
-  if (den < 0L) { num <- -num; den <- -den }
+  if (den < 0L) { num <- -num
+  den <- -den }
   if (den == 0L) stop("groebn: division by zero in rational")
   if (num == 0L) return(c(0L, 1L))
   g <- .groebn_gcd(abs(num), den)
@@ -48,8 +49,11 @@
 #' @return One of two values, depending on the branch taken.
 #' @export
 .groebn_gcd <- function(a, b) {
-  a <- as.integer(a); b <- as.integer(b)
-  while (b != 0L) { t <- b; b <- a %% b; a <- t }
+  a <- as.integer(a)
+  b <- as.integer(b)
+  while (b != 0L) { t <- b
+  b <- a %% b
+  a <- t }
   if (a < 0L) -a else a
 }
 
@@ -253,7 +257,8 @@
       k <- names(terms)[idx]
       parts <- strsplit(k, "_", fixed = TRUE)[[1L]]
       ev <- suppressWarnings(as.integer(parts))
-      if (any(is.na(ev)) || any(ev < 0L)) { ok <- FALSE; break }
+      if (any(is.na(ev)) || any(ev < 0L)) { ok <- FALSE
+      break }
       parsed[[idx]] <- ev
       if (is.null(n)) n <- length(ev)
       else if (length(ev) != n)
@@ -281,8 +286,10 @@
       items <- terms
       for (item in items) {
         if (is.null(item) || length(item) < 2L) next
-        if (is.list(item)) { e <- item[[1L]]; cf <- item[[2L]] }
-        else { e <- item[1L]; cf <- item[2L] }
+        if (is.list(item)) { e <- item[[1L]]
+        cf <- item[[2L]] }
+        else { e <- item[1L]
+        cf <- item[2L] }
         ev <- suppressWarnings(as.integer(e))
         if (any(is.na(ev)) || any(ev < 0L))
           stop(sprintf("groebn: negative or invalid exponent in %s",
@@ -306,8 +313,10 @@
     items <- if (is.list(terms)) terms else list(terms)
     for (item in items) {
       if (is.null(item) || length(item) < 2L) next
-      if (is.list(item)) { e <- item[[1L]]; cf <- item[[2L]] }
-      else { e <- item[1L]; cf <- item[2L] }
+      if (is.list(item)) { e <- item[[1L]]
+      cf <- item[[2L]] }
+      else { e <- item[1L]
+      cf <- item[2L] }
       ev <- suppressWarnings(as.integer(e))
       if (any(is.na(ev)) || any(ev < 0L))
         stop(sprintf("groebn: negative or invalid exponent in %s",
@@ -682,7 +691,8 @@
   while (length(pairs) > 0L) {
     pr <- pairs[[1L]]
     pairs[[1L]] <- NULL
-    i <- pr[1L]; j <- pr[2L]
+    i <- pr[1L]
+    j <- pr[2L]
     n_pairs <- n_pairs + 1L
     li <- .groebn_leading_monomial(G[[i]], order)
     lj <- .groebn_leading_monomial(G[[j]], order)
@@ -744,7 +754,8 @@
       lh <- .groebn_leading_monomial(h, order)
       lh_v <- .groebn_parse_key(lh)
       if (j > i && lh == lg) next
-      if (.groebn_divides(lh_v, lg_v)) { drop <- TRUE; break }
+      if (.groebn_divides(lh_v, lg_v)) { drop <- TRUE
+      break }
     }
     if (!drop) keep[[length(keep) + 1L]] <- g
   }

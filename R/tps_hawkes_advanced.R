@@ -477,7 +477,7 @@ NULL
 #' non-stationary Hawkes processes. arXiv:2408.09710v1.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   df <- morie_tps_load_tps_dataset("Assault", nrows = 4000)
 #'   rr <- morie_tps_hawkes_advanced_fit(df, kernel = "gamma",
 #'                                         baseline = "sinusoidal",
@@ -699,7 +699,7 @@ morie_tps_compare_hawkes_kernels <- function(df,
 #' @references Kwan TKJ, Chen F, Dunsmuir WTM (2024). arXiv:2408.09710.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #'   df <- morie_tps_load_tps_dataset("Assault", nrows = 2000)
 #'   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
 #'                                                     ds_name = "Assault")

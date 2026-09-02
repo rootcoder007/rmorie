@@ -116,7 +116,8 @@ morie_lcfsdq_nn <- function(coords, k = 1L, metric = "euclidean") {
 #' @return A list with \code{area}, \code{perimeter}, \code{bb}.
 #' @export
 .lcfsdq_window <- function(coords) {
-  xs <- coords[, 1]; ys <- coords[, 2]
+  xs <- coords[, 1]
+  ys <- coords[, 2]
   w <- max(xs) - min(xs)
   h <- max(ys) - min(ys)
   list(area = w * h, perimeter = 2 * (w + h),
@@ -226,7 +227,9 @@ morie_lcfsdq <- function(x, coords, k = 1L, metric = "euclidean",
   gmean <- .w3_csum(xv) / n
   gsd <- if (n > 1L) sqrt(.w3_csum((xv - gmean) * (xv - gmean)) / (n - 1)) else 0
 
-  local_mean <- numeric(n); local_count <- integer(n); local_z <- numeric(n)
+  local_mean <- numeric(n)
+  local_count <- integer(n)
+  local_z <- numeric(n)
   for (i in seq_len(n)) {
     js <- setdiff(seq_len(n), i)
     members <- js[vapply(js, function(j)

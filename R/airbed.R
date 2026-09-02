@@ -17,15 +17,20 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Emisinv(V, V)
 Emisinv <- function(activity, factor, gwp = NULL) {
-  A <- .t1_mat(activity); E <- .t1_mat(factor)
-  if (nrow(A) != nrow(E) || ncol(A) != ncol(E))
+  A <- .t1_mat(activity)
+  E <- .t1_mat(factor)
+  if (nrow(A) != nrow(E) || ncol(A) != ncol(E)) {
     stop("activity and factor must have the same shape")
-  s <- nrow(A); f <- ncol(A)
+  }
+  s <- nrow(A)
+  f <- ncol(A)
   g <- if (is.null(gwp)) rep(1, f) else .t1_vec(gwp)
   if (length(g) != f) stop("gwp must have one entry per column")
   cell <- A * E * rep(g, each = s)
   dim(cell) <- c(s, f)
-  .t1_result(total = sum(cell), cell = cell, bysector = rowSums(cell),
-             byfuel = colSums(cell), s = s, f = f,
-             method = "IPCC inventory equation Emissions = AD * EF")
+  .t1_result(
+    total = sum(cell), cell = cell, bysector = rowSums(cell),
+    byfuel = colSums(cell), s = s, f = f,
+    method = "IPCC inventory equation Emissions = AD * EF"
+  )
 }

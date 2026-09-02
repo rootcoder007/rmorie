@@ -47,7 +47,9 @@ morie_mistr_rms_norm <- function(x, weight = NULL, eps = 1e-6) {
 #' @return The gated projection.
 #' @export
 morie_mistr_swiglu <- function(x, W1, W2, W3) {
-  W1 <- as.matrix(W1); W2 <- as.matrix(W2); W3 <- as.matrix(W3)
+  W1 <- as.matrix(W1)
+  W2 <- as.matrix(W2)
+  W3 <- as.matrix(W3)
   x <- as.numeric(x)
   # the old zero crossprod term used a wrongly sized vector and made
   # every call non-conformable; the gate path is just x W1
@@ -92,8 +94,10 @@ morie_mistr_apply_rope <- function(x, pos, theta = NULL, base = 10000) {
   out <- numeric(d)
   for (i in seq_len(d %/% 2)) {
     ang <- pos * th[i]
-    c <- cos(ang); s <- sin(ang)
-    a <- x[2 * i - 1L]; b <- x[2 * i]
+    c <- cos(ang)
+    s <- sin(ang)
+    a <- x[2 * i - 1L]
+    b <- x[2 * i]
     out[2 * i - 1L] <- a * c - b * s
     out[2 * i] <- a * s + b * c
   }
@@ -145,7 +149,9 @@ morie_mistr_grouped_query_attention <- function(Q, K, V, n_heads,
                                                 n_kv_heads, mask = NULL,
                                                 positions = NULL,
                                                 base = 10000) {
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
   L <- nrow(Qm)
   if (nrow(Km) != L || nrow(Vm) != L)
     stop("mistr: Q, K and V must have the same length")
@@ -213,7 +219,8 @@ morie_mistr_mistral_block <- function(X, Wq, Wk, Wv, Wo, W1, W2, W3,
                                        norm1 = NULL, norm2 = NULL,
                                        base = 10000) {
   Xm <- as.matrix(X)
-  L <- nrow(Xm); d <- ncol(Xm)
+  L <- nrow(Xm)
+  d <- ncol(Xm)
   mask <- morie_mistr_sliding_window_mask(L, window)
   proj <- function(row, Wm) as.numeric(crossprod(row, Wm)[1, ])
   h <- t(apply(Xm, 1, function(t) morie_mistr_rms_norm(t, norm1)))

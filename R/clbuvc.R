@@ -24,14 +24,16 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Clbuvc(V, D)
 Clbuvc <- function(x, y, q = NULL) {
-  xs <- .s03vec(x); ys <- .s03vec(y)
+  xs <- .s03vec(x)
+  ys <- .s03vec(y)
   n <- length(xs)
   if (n < 3L) stop("need at least three observations")
   if (length(ys) != n) stop("x and y must have the same length")
   if (is.null(q)) {
     mx <- sum(xs) / n
     my <- sum(ys) / n
-    sxx <- 0; sxy <- 0
+    sxx <- 0
+    sxy <- 0
     for (i in seq_len(n)) {
       sxx <- sxx + (xs[i] - mx)^2
       sxy <- sxy + (xs[i] - mx) * (ys[i] - my)
@@ -45,7 +47,9 @@ Clbuvc <- function(x, y, q = NULL) {
   } else {
     qq <- .s03vec(q)
     if (length(qq) != 3L) stop("q must be (a, b, sigma2)")
-    a <- qq[1]; b <- qq[2]; s2 <- qq[3]
+    a <- qq[1]
+    b <- qq[2]
+    s2 <- qq[3]
   }
   if (!(s2 > 0)) stop("sigma2 must be strictly positive")
   lp <- function(yi, xi) -0.5 * (log(2 * pi * s2) + (yi - a - b * xi)^2 / s2)
@@ -55,14 +59,18 @@ Clbuvc <- function(x, y, q = NULL) {
   neg <- 0
   for (i in seq_len(n)) for (j in seq_len(n)) neg <- neg + lp(ys[j], xs[i])
   neg <- neg / (n * n)
-  mx <- sum(xs) / n; my <- sum(ys) / n
-  sx <- 0; sy <- 0; sxy <- 0
+  mx <- sum(xs) / n
+  my <- sum(ys) / n
+  sx <- 0
+  sy <- 0
+  sxy <- 0
   for (i in seq_len(n)) {
     sx <- sx + (xs[i] - mx)^2
     sy <- sy + (ys[i] - my)^2
     sxy <- sxy + (xs[i] - mx) * (ys[i] - my)
   }
-  sx <- sqrt(sx / n); sy <- sqrt(sy / n)
+  sx <- sqrt(sx / n)
+  sy <- sqrt(sy / n)
   rho <- if (sx > 0 && sy > 0) (sxy / n) / (sx * sy) else 0
   mi <- if (abs(rho) < 1) -0.5 * log(1 - rho * rho) else Inf
   .t1_result(estimate = pos - neg, club = pos - neg, positive = pos,

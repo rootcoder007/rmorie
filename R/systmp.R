@@ -22,7 +22,9 @@
 #' @examples
 #' Sysamp(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
 Sysamp <- function(y, k) {
-  y <- .t1_vec(y); N <- length(y); k <- as.integer(k)
+  y <- .t1_vec(y)
+  N <- length(y)
+  k <- as.integer(k)
   if (k < 1L) stop("the interval k must be at least 1")
   if (N %% k != 0L) stop("length(y) must be an exact multiple of k")
   n <- N %/% k

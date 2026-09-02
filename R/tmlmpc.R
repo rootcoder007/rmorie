@@ -27,7 +27,9 @@
 #' @examples
 #' Tmlmpc(time = c(1, 2, 3, 4, 5, 6, 7, 8), state = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmpc <- function(time, state, D, X) {
-  tv <- as.numeric(time); sv <- as.numeric(state); Dv <- as.numeric(D)
+  tv <- as.numeric(time)
+  sv <- as.numeric(state)
+  Dv <- as.numeric(D)
   n <- length(tv)
   if (n == 0L || length(sv) != n || length(Dv) != n)
     stop("Tmlmpc: time, state and D must share one length")
@@ -36,13 +38,17 @@ Tmlmpc <- function(time, state, D, X) {
   causes <- sort(unique(sv[sv > 0.5]))
   if (length(causes) == 0L) stop("Tmlmpc: no observed transitions")
   grid <- sort(unique(tv[sv > 0.5]))
-  K <- length(grid); t0 <- grid[K]; target <- causes[1L]
+  K <- length(grid)
+  t0 <- grid[K]
+  target <- causes[1L]
   W <- cbind(1, Xm)
   gb <- .s4_glmbin(W, Dv)
   g <- .s4_clip(.s4_expit(as.numeric(W %*% gb)), 0.025, 0.975)
-  ii <- integer(0); kk <- integer(0)
+  ii <- integer(0)
+  kk <- integer(0)
   for (i in seq_len(n)) for (k in seq_len(K)) if (grid[k] <= tv[i]) {
-    ii <- c(ii, i); kk <- c(kk, k)
+    ii <- c(ii, i)
+    kk <- c(kk, k)
   }
   rows <- cbind(1, grid[kk], Dv[ii], Xm[ii, , drop = FALSE])
   hb <- list()
@@ -59,7 +65,8 @@ Tmlmpc <- function(time, state, D, X) {
   }
   H1 <- lapply(seq_along(causes), function(ci) hz(hb[[ci]], 1))
   H0 <- lapply(seq_along(causes), function(ci) hz(hb[[ci]], 0))
-  Cz1 <- hz(cb, 1); Cz0 <- hz(cb, 0)
+  Cz1 <- hz(cb, 1)
+  Cz0 <- hz(cb, 0)
   atrisk <- function(HL, Cz) {
     R <- matrix(0, n, K)
     for (i in seq_len(n)) {
@@ -73,7 +80,8 @@ Tmlmpc <- function(time, state, D, X) {
     }
     R
   }
-  R1 <- atrisk(H1, Cz1); R0 <- atrisk(H0, Cz0)
+  R1 <- atrisk(H1, Cz1)
+  R0 <- atrisk(H0, Cz0)
   ti <- which(causes == target)
   hobs <- matrix(0, n, K)
   for (i in seq_len(n)) for (k in seq_len(K))
@@ -90,9 +98,11 @@ Tmlmpc <- function(time, state, D, X) {
     eps <- 0
     for (it in seq_len(30L)) {
       p <- .s4_clip(.s4_expit(.s4_logit(ho) + eps * hv), 1e-12, 1 - 1e-12)
-      score <- sum(hv * (ybin - p)); info <- sum(hv * hv * p * (1 - p))
+      score <- sum(hv * (ybin - p))
+      info <- sum(hv * hv * p * (1 - p))
       if (info < 1e-14) break
-      step <- score / info; eps <- eps + step
+      step <- score / info
+      eps <- eps + step
       if (abs(step) < 1e-13) break
     }
     lam <- numeric(n)
@@ -106,7 +116,8 @@ Tmlmpc <- function(time, state, D, X) {
     for (r in seq_along(ii)) ic[ii[r]] <- ic[ii[r]] + term[r]
     list(psi = psi, eps = eps, ic = ic + lam - psi)
   }
-  a1 <- arm(1, R1, H1); a0 <- arm(0, R0, H0)
+  a1 <- arm(1, R1, H1)
+  a0 <- arm(0, R0, H0)
   est <- a1$psi - a0$psi
   ic <- a1$ic - a0$ic
   se <- if (n > 1L) sqrt(sum((ic - mean(ic))^2) / (n - 1) / n) else NaN

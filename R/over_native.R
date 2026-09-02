@@ -26,7 +26,8 @@
 #' @return The value of \code{[}.
 #' @export
 .mor_ks_psmirnov <- function(d, n1, n2, two_sided = TRUE) {
-  md <- n1; nd <- n2
+  md <- n1
+  nd <- n2
   q <- (0.5 + floor(d * md * nd - 1e-7)) / (md * nd)
   u <- numeric(n2 + 1L)
   for (j in 0:n2)
@@ -85,8 +86,10 @@
 #' @return A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus}, \code{d_minus}, \code{n_ties}.
 #' @export
 .mor_ks_2samp <- function(a, b) {
-  x <- sort(as.numeric(a)); y <- sort(as.numeric(b))
-  n1 <- length(x); n2 <- length(y)
+  x <- sort(as.numeric(a))
+  y <- sort(as.numeric(b))
+  n1 <- length(x)
+  n2 <- length(y)
   if (n1 < 1L || n2 < 1L) stop("both samples need at least one observation")
   allv <- sort(unique(c(x, y)))
   ties <- (n1 + n2) - length(allv)
@@ -126,7 +129,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_over(V, V)
 morie_over <- function(ps_treated, ps_control) {
-  pt <- as.numeric(ps_treated); pc <- as.numeric(ps_control)
+  pt <- as.numeric(ps_treated)
+  pc <- as.numeric(ps_control)
   if (length(pt) == 0L || length(pc) == 0L)
     stop("Both arrays must be non-empty.")
   lo <- max(min(pt), min(pc))

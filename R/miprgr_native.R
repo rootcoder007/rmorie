@@ -79,7 +79,8 @@
       z <- reduced(obj)
       enter <- -1
       for (j in allowed) {
-        if (z[j] < -tol) { enter <- j; break }
+        if (z[j] < -tol) { enter <- j
+        break }
       }
       if (enter < 0) return(TRUE)
       ratio <- Inf
@@ -90,7 +91,8 @@
           if (r < ratio - tol ||
               (abs(r - ratio) <= tol && leave >= 0 &&
                basis[[i]] < basis[[leave]])) {
-            ratio <- r; leave <- i
+            ratio <- r
+            leave <- i
           }
         }
       }
@@ -113,7 +115,9 @@
       if (basis[[i]] >= n + m) {
         moved <- FALSE
         for (j in seq_len(n + m)) {
-          if (abs(Tmat[i, j]) > tol) { pivot(i, j); moved <- TRUE; break }
+          if (abs(Tmat[i, j]) > tol) { pivot(i, j)
+          moved <- TRUE
+          break }
         }
       }
     }
@@ -157,7 +161,8 @@
 #' @keywords internal
 #' @noRd
 .ghc_mipinterior <- function(M, rhs, c, tol = 1e-10, max_iter = 200) {
-  m <- length(M); n <- length(M[[1]])
+  m <- length(M)
+  n <- length(M[[1]])
   X <- matrix(0, m, n)
   for (i in seq_len(m)) X[i, ] <- as.numeric(M[[i]])
   rb <- as.numeric(rhs)
@@ -269,11 +274,13 @@ morie_miprgr_solve_relaxation <- function(A, b, c, bounds = list(),
 #' @export
 morie_miprgr_fractional_variable <- function(x, integer_vars,
                                               tol = .GHC_MIP_EPS) {
-  best <- NA_integer_; gap <- 0
+  best <- NA_integer_
+  gap <- 0
   for (j in as.integer(integer_vars)) {
     v <- as.numeric(x[j])
     f <- abs(v - round(v))
-    if (f > tol && f > gap) { best <- j; gap <- f }
+    if (f > tol && f > gap) { best <- j
+    gap <- f }
   }
   list(index = if (is.na(best)) NULL else best,
        fractionality = gap,
@@ -317,17 +324,20 @@ morie_miprgr_enumerate_integer <- function(A, b, c, integer_vars,
   best_x <- NULL
   stack <- list(list())
   while (length(stack) > 0) {
-    pre <- stack[[length(stack)]]; stack[[length(stack)]] <- NULL
+    pre <- stack[[length(stack)]]
+    stack[[length(stack)]] <- NULL
     if (length(pre) == n) {
       ok <- TRUE
       for (i in seq_along(A)) {
         lhs <- sum(as.numeric(A[[i]]) * pre)
-        if (lhs > as.numeric(b[i]) + .GHC_MIP_EPS) { ok <- FALSE; break }
+        if (lhs > as.numeric(b[i]) + .GHC_MIP_EPS) { ok <- FALSE
+        break }
       }
       if (ok) {
         val <- sum(as.numeric(c) * pre)
         better <- if (maximise) val > best else val < best
-        if (better) { best <- val; best_x <- pre }
+        if (better) { best <- val
+        best_x <- pre }
       }
       next
     }
@@ -366,7 +376,9 @@ morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
   incumbent <- if (maximise) -Inf else Inf
   inc_x <- NULL
   lst <- list()
-  nodes <- 0L; pruned <- 0L; max_len <- 0L
+  nodes <- 0L
+  pruned <- 0L
+  max_len <- 0L
   root_bound <- NULL
   while (nodes < as.integer(max_nodes)) {
     bounds <- lapply(lst, function(e) list(var = e$var, sense = e$sense,
@@ -427,7 +439,8 @@ morie_miprgr_branch_and_bound <- function(A, b, c, integer_vars,
       }
       alt <- last$alt
       last$alt <- list(last$sense, last$value)
-      last$sense <- alt[[1]]; last$value <- alt[[2]]
+      last$sense <- alt[[1]]
+      last$value <- alt[[2]]
       last$marked <- TRUE
       lst[[length(lst)]] <- last
       break

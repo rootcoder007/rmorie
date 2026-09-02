@@ -43,27 +43,38 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
   if (is.null(Q) || is.null(K) || is.null(V)) {
     stop("int8_attention: Q, K and V are all required")
   }
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
-  storage.mode(Qm) <- "double"; storage.mode(Km) <- "double"; storage.mode(Vm) <- "double"
-  nq <- nrow(Qm); nk <- nrow(Km)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
+  storage.mode(Qm) <- "double"
+  storage.mode(Km) <- "double"
+  storage.mode(Vm) <- "double"
+  nq <- nrow(Qm)
+  nk <- nrow(Km)
   if (nq == 0L || nk == 0L) stop("int8_attention: Q and K must be non-empty")
   d <- ncol(Qm)
   if (ncol(Km) != d) stop("int8_attention: Q and K must share the key dimension")
   if (nrow(Vm) != nk) stop("int8_attention: V must have one row per key")
   dv <- ncol(Vm)
   if (is.null(scales)) {
-    sq <- .atq8_scales(Qm); sk <- .atq8_scales(Km); sv <- .atq8_scales(Vm)
+    sq <- .atq8_scales(Qm)
+    sk <- .atq8_scales(Km)
+    sv <- .atq8_scales(Vm)
   } else {
     if (length(scales) != 3L) {
       stop("int8_attention: scales must hold three vectors, for Q, K and V")
     }
-    sq <- as.numeric(scales[[1]]); sk <- as.numeric(scales[[2]]); sv <- as.numeric(scales[[3]])
+    sq <- as.numeric(scales[[1]])
+    sk <- as.numeric(scales[[2]])
+    sv <- as.numeric(scales[[3]])
     if (length(sq) != nq || length(sk) != nk || length(sv) != nk) {
       stop("int8_attention: a scale vector has the wrong length")
     }
     if (any(!(c(sq, sk, sv) > 0))) stop("int8_attention: scales must be positive")
   }
-  Qi <- .atq8_quant(Qm, sq); Ki <- .atq8_quant(Km, sk); Vi <- .atq8_quant(Vm, sv)
+  Qi <- .atq8_quant(Qm, sq)
+  Ki <- .atq8_quant(Km, sk)
+  Vi <- .atq8_quant(Vm, sv)
   sc <- 1 / sqrt(d)
   S <- matrix(0, nrow = nq, ncol = nk)
   for (i in seq_len(nq)) {
@@ -93,7 +104,8 @@ Atq8 <- function(y = NULL, Q = NULL, K = NULL, V = NULL, scales = NULL) {
       for (t in seq_len(d)) acc <- acc + Qm[i, t] * Km[j, t]
       row[j] <- acc * sc
     }
-    e <- exp(row - max(row)); ww <- e / sum(e)
+    e <- exp(row - max(row))
+    ww <- e / sum(e)
     for (t in seq_len(dv)) {
       ref <- 0
       for (j in seq_len(nk)) ref <- ref + ww[j] * Vm[j, t]

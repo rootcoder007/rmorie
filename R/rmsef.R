@@ -13,7 +13,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Rmsetst(V, V)
 Rmsetst <- function(y, yhat) {
-  y <- as.numeric(y); yhat <- as.numeric(yhat)
+  y <- as.numeric(y)
+  yhat <- as.numeric(yhat)
   if (length(y) != length(yhat)) stop("y and yhat must have the same length")
   if (length(y) == 0L) stop("y must be non-empty")
   mse <- mean((y - yhat)^2)

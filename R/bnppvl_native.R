@@ -317,16 +317,20 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' @return A list with \code{m1}, \code{m2}.
 #' @export
 .bnppvl_moments <- function(draws, k) {
-  m1 <- numeric(length(draws)); m2 <- numeric(length(draws))
+  m1 <- numeric(length(draws))
+  m2 <- numeric(length(draws))
   for (d in seq_along(draws)) {
     q <- draws[[d]]
-    t1 <- numeric(k); t2 <- numeric(k)
+    t1 <- numeric(k)
+    t2 <- numeric(k)
     for (j in seq_len(k)) {
-      a <- q[j]; b <- q[j + 1L]
+      a <- q[j]
+      b <- q[j + 1L]
       t1[j] <- 0.5 * (a + b) / k
       t2[j] <- (a * a + a * b + b * b) / (3 * k)
     }
-    m1[d] <- .w3_csum(t1); m2[d] <- .w3_csum(t2)
+    m1[d] <- .w3_csum(t1)
+    m2[d] <- .w3_csum(t2)
   }
   list(m1 = m1, m2 = m2)
 }
@@ -455,13 +459,15 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
     stop("centring on a null distribution needs nullq")
   m <- as.integer(m)
   if (m < 1L) stop("the pyramid needs at least one level")
-  lo <- as.numeric(lo); hi <- as.numeric(hi)
+  lo <- as.numeric(lo)
+  hi <- as.numeric(hi)
   if (hi <= lo) stop("hi must exceed lo")
   xs <- as.numeric(x)
   if (!length(xs)) stop("need at least one observation")
   if (any(xs < lo | xs > hi))
     stop("every observation must lie inside [lo, hi]")
-  sweeps <- as.integer(sweeps); burn <- as.integer(burn)
+  sweeps <- as.integer(sweeps)
+  burn <- as.integer(burn)
   thin <- as.integer(thin)
   if (sweeps < 1L || burn < 0L || burn >= sweeps || thin < 1L)
     stop("need 0 <= burn < sweeps and thin >= 1")
@@ -477,10 +483,12 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
   cnt <- morie_bnppvl_counts(u, q)
 
   draws <- list()
-  tried <- 0L; taken <- 0L
+  tried <- 0L
+  taken <- 0L
   for (it in seq_len(sweeps)) {
     for (j in seq_len(k - 1L)) {
-      a <- q[j]; b <- q[j + 2L]
+      a <- q[j]
+      b <- q[j + 2L]
       prop <- a + (b - a) * .ghc_unif(e, 1L)
       tried <- tried + 1L
       if (!(prop > a && prop < b)) {
@@ -494,7 +502,8 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
       lpp <- morie_bnppvl_log_prior(qq, m, c, schedule, centring, nullq)
       # Only the two cells either side of j change, so only their counts
       # have to be recomputed.
-      left <- 0L; right <- 0L
+      left <- 0L
+      right <- 0L
       for (v in u) {
         # The leftmost cell is CLOSED at its lower end, exactly as the
         # cell lookup treats it. Writing a strict inequality here loses
@@ -546,7 +555,8 @@ morie_bnppvl <- function(x, m = 4L, c = 2.5, schedule = "cubic",
   if (is.null(grid))
     grid <- vapply(0:7, function(t) lo + span * (t + 0.5) / 8, numeric(1))
   grid <- as.numeric(grid)
-  dens <- numeric(length(grid)); cdf <- numeric(length(grid))
+  dens <- numeric(length(grid))
+  cdf <- numeric(length(grid))
   for (g in seq_along(grid)) {
     gu <- (grid[g] - lo) / span
     dens[g] <- .w3_csum(vapply(draws, function(dr)

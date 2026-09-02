@@ -25,14 +25,17 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Superlrn(V, V)
 Superlrn <- function(Z, Y, iters = 500) {
-  Z <- as.matrix(Z); n <- nrow(Z); K <- ncol(Z)
+  Z <- as.matrix(Z)
+  n <- nrow(Z)
+  K <- ncol(Z)
   Y <- .t1_vec(Y)
   if (n < 2L) stop("at least two observations are required")
   if (length(Y) != n) stop("Y must have one entry per observation")
   if (K < 1L) stop("at least one candidate is required")
   risk <- colSums((Y - Z)^2) / n
   dbest <- which.min(risk)
-  a <- rep(0, K); a[dbest] <- 1
+  a <- rep(0, K)
+  a[dbest] <- 1
   for (t in seq_len(as.integer(iters))) {
     f <- as.numeric(Z %*% a)
     gr <- -2 / n * as.numeric(t(Z) %*% (Y - f))

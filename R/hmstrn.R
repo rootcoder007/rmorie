@@ -22,11 +22,15 @@
 #' @examples
 #' Hmstrn(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8), covariate_history = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), regime = c(1, 2, 3, 4, 5, 6, 7, 8))
 Hmstrn <- function(y, treatment_history, covariate_history, time, regime) {
-  yv <- as.numeric(y); A <- as.matrix(treatment_history)
+  yv <- as.numeric(y)
+  A <- as.matrix(treatment_history)
   L <- as.matrix(covariate_history)
-  tv <- as.numeric(time); d <- as.numeric(regime)
-  n <- nrow(A); T_ <- ncol(A)
-  means <- numeric(0); times <- numeric(0)
+  tv <- as.numeric(time)
+  d <- as.numeric(regime)
+  n <- nrow(A)
+  T_ <- ncol(A)
+  means <- numeric(0)
+  times <- numeric(0)
   for (t in seq_len(T_)) {
     ok <- apply(abs(A[, seq_len(t), drop = FALSE] -
                     matrix(d[seq_len(t)], n, t, byrow = TRUE)) < 0.5, 1, all)

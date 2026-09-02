@@ -36,7 +36,8 @@ Bfkdfnorm <- function(estimate, variance, null = NULL, bias = 0, level = 0.95) {
   centre <- estimate - bias
   z <- stats::qnorm(0.5 + level / 2)
   if (is.null(null)) {
-    stat <- NA_real_; pval <- NA_real_
+    stat <- NA_real_
+    pval <- NA_real_
   } else {
     stat <- (centre - null) / se
     pval <- 2 * (1 - stats::pnorm(abs(stat)))

@@ -23,7 +23,8 @@
 #' @return A list with \code{t}, \code{e}.
 #' @export
 .ms_check <- function(time, event) {
-  t <- as.numeric(time); e <- as.integer(event)
+  t <- as.numeric(time)
+  e <- as.integer(event)
   if (length(t) != length(e))
     stop("time and event must have the same length")
   if (!length(t)) stop("need at least one observation")
@@ -43,16 +44,23 @@
 #' @return A list with \code{time}, \code{surv}, \code{n_risk}, \code{n_event}, \code{greenwood}.
 #' @export
 .ms_km <- function(time, event) {
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   ut <- sort(unique(t[e == 1L]))
   S <- nr <- ne <- gw <- numeric(length(ut))
-  surv <- 1; v <- 0
+  surv <- 1
+  v <- 0
   for (i in seq_along(ut)) {
     u <- ut[i]
-    n_i <- sum(t >= u); d_i <- sum(t == u & e == 1L)
+    n_i <- sum(t >= u)
+    d_i <- sum(t == u & e == 1L)
     surv <- surv * (1 - d_i / n_i)
     if (n_i > d_i) v <- v + d_i / (n_i * (n_i - d_i))
-    S[i] <- surv; nr[i] <- n_i; ne[i] <- d_i; gw[i] <- v
+    S[i] <- surv
+    nr[i] <- n_i
+    ne[i] <- d_i
+    gw[i] <- v
   }
   list(time = ut, surv = S, n_risk = nr, n_event = ne, greenwood = gw)
 }
@@ -71,13 +79,17 @@
 #' @export
 .ms_baseline <- function(time, event, X, beta) {
   # Breslow cumulative baseline hazard, what survival::basehaz returns
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
-  X <- as.matrix(X); p <- ncol(X)
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
+  X <- as.matrix(X)
+  p <- ncol(X)
   if (nrow(X) != length(t)) stop("X must have one row per observation")
   if (length(beta) != p) stop("beta must have one entry per column of X")
   w <- exp(as.numeric(X %*% beta))
   ut <- sort(unique(t[e == 1L]))
-  H <- numeric(length(ut)); cum <- 0
+  H <- numeric(length(ut))
+  cum <- 0
   for (i in seq_along(ut)) {
     u <- ut[i]
     d_i <- sum(t == u & e == 1L)
@@ -130,28 +142,39 @@ Rmst <- function(time, event, tau = NULL, alpha = 0.05) {
   # reported rather than silently honoured.  RMST answers what a hazard
   # ratio does not -- how much longer on average over a fixed window --
   # and needs no proportional-hazards assumption.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   km <- .ms_km(t, e)
-  ut <- km$time; S <- km$surv; nr <- km$n_risk; ne <- km$n_event
+  ut <- km$time
+  S <- km$surv
+  nr <- km$n_risk
+  ne <- km$n_event
   tmax <- max(t)
   horizon <- if (is.null(tau)) tmax else as.numeric(tau)
   if (horizon <= 0) stop("tau must be positive")
-  area <- 0; prev_t <- 0; prev_S <- 1
+  area <- 0
+  prev_t <- 0
+  prev_S <- 1
   for (i in seq_along(ut)) {
     if (ut[i] >= horizon) break
     area <- area + prev_S * (ut[i] - prev_t)
-    prev_t <- ut[i]; prev_S <- S[i]
+    prev_t <- ut[i]
+    prev_S <- S[i]
   }
   area <- area + prev_S * (horizon - prev_t)
   v <- 0
   for (i in seq_along(ut)) {
     if (ut[i] > horizon) break
     if (nr[i] <= ne[i]) next
-    tail <- 0; pt <- ut[i]; ps <- S[i]
+    tail <- 0
+    pt <- ut[i]
+    ps <- S[i]
     if (i < length(ut)) for (j in (i + 1):length(ut)) {
       if (ut[j] >= horizon) break
       tail <- tail + ps * (ut[j] - pt)
-      pt <- ut[j]; ps <- S[j]
+      pt <- ut[j]
+      ps <- S[j]
     }
     tail <- tail + ps * (horizon - pt)
     v <- v + tail^2 * ne[i] / (nr[i] * (nr[i] - ne[i]))
@@ -193,7 +216,9 @@ Rmstdiff <- function(time, event, group, tau = NULL,
   # two largest observed times: areas over different windows are
   # different quantities, and the shorter arm cannot support the longer
   # window.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   g <- group
   if (length(g) != length(t))
     stop("group must have one entry per observation")
@@ -247,7 +272,9 @@ Martingale <- function(time, event, X, beta) {
   # plotted against a candidate covariate show the transformation the
   # model wants.  Badly skewed (bounded above by 1, unbounded below), so
   # poor for outliers; the deviance residuals are the symmetrized version.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   bl <- .ms_baseline(t, e, X, beta)
   h <- .ms_h0_at(bl$time, bl$cumhaz, t)
   m <- e - h * bl$weight
@@ -278,7 +305,9 @@ Devresid <- function(time, event, X, beta) {
   # term is zero when delta = 0, which is the limit, not a special case
   # swept aside.  The sum of squares is NOT the model deviance for a Cox
   # fit -- the partial likelihood is not a full likelihood.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   m <- Martingale(t, e, X, beta)$residuals
   d <- numeric(length(t))
   for (i in seq_along(t)) {
@@ -320,16 +349,22 @@ Coxsnell <- function(time, event, X, beta) {
   # plotted against them should follow the 45-degree line.  That curve is
   # returned, since the residuals alone say nothing without it.  The
   # check is weak: the plot is fitted, not held out.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   bl <- .ms_baseline(t, e, X, beta)
   r <- .ms_h0_at(bl$time, bl$cumhaz, t) * bl$weight
   ord <- order(r)
-  rt <- numeric(0); rH <- numeric(0); cum <- 0
+  rt <- numeric(0)
+  rH <- numeric(0)
+  cum <- 0
   for (i in ord) {
     if (e[i] != 1L) next
-    n_i <- sum(r >= r[i]); d_i <- sum(r == r[i] & e == 1L)
+    n_i <- sum(r >= r[i])
+    d_i <- sum(r == r[i] & e == 1L)
     cum <- cum + d_i / n_i
-    rt <- c(rt, r[i]); rH <- c(rH, cum)
+    rt <- c(rt, r[i])
+    rH <- c(rH, cum)
   }
   list(residuals = r, diagnostic_x = rt, diagnostic_h = rH,
        max_deviation = if (length(rt)) max(abs(rt - rH)) else 0,
@@ -367,14 +402,20 @@ Schoenfeld <- function(time, event, X, beta, vcov = NULL,
   # time is evidence against PH.  That test is returned.  One residual
   # per event time: with ties only the first event gets one, and
   # ties_dropped counts what that discarded.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
-  X <- as.matrix(X); p <- ncol(X)
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
+  X <- as.matrix(X)
+  p <- ncol(X)
   if (length(beta) != p) stop("beta must have one entry per column of X")
   w <- exp(as.numeric(X %*% beta))
   ut <- sort(unique(t[e == 1L]))
-  times <- numeric(0); res <- NULL; dropped <- 0L
+  times <- numeric(0)
+  res <- NULL
+  dropped <- 0L
   for (u in ut) {
-    rk <- t >= u; ev <- which(t == u & e == 1L)
+    rk <- t >= u
+    ev <- which(t == u & e == 1L)
     dropped <- dropped + length(ev) - 1L
     sw <- .morie_fsum(w[rk])
     xbar <- vapply(seq_len(p),
@@ -397,9 +438,11 @@ Schoenfeld <- function(time, event, X, beta, vcov = NULL,
     if (p == 1L) sc <- matrix(sc, ncol = 1L)
     out$scaled <- sc
     stats_ <- lapply(seq_len(p), function(k) {
-      y <- sc[, k]; n <- length(y)
+      y <- sc[, k]
+      n <- length(y)
       if (n < 3L) return(list(rho = NULL, z = NULL, p_value = NULL))
-      st <- sum((times - mean(times))^2); sy <- sum((y - mean(y))^2)
+      st <- sum((times - mean(times))^2)
+      sy <- sum((y - mean(y))^2)
       if (st <= 0 || sy <= 0) return(list(rho = 0, z = 0, p_value = 1))
       rho <- sum((times - mean(times)) * (y - mean(y))) / sqrt(st * sy)
       zz <- rho * sqrt(n - 1)
@@ -436,7 +479,8 @@ Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
   # -- gives an interval that can include negative hazard ratios and has
   # the wrong coverage.  Constant over time only if PH holds; check with
   # Schoenfeld before quoting one number.
-  b <- as.numeric(beta); s <- as.numeric(se)
+  b <- as.numeric(beta)
+  s <- as.numeric(se)
   if (length(b) != length(s)) stop("beta and se must have the same length")
   if (!length(b)) stop("need at least one coefficient")
   if (any(s < 0)) stop("standard errors cannot be negative")
@@ -473,7 +517,8 @@ Cif <- function(time, cause, code = 1, alpha = 0.05) {
   # 1 - S_k, which OVERSTATES the incidence by assuming those who died of
   # something else would have remained at risk.  Both are returned so the
   # size of that bias is visible on the data at hand.
-  t <- as.numeric(time); c_ <- as.integer(cause)
+  t <- as.numeric(time)
+  c_ <- as.integer(cause)
   if (length(t) != length(c_))
     stop("time and cause must have the same length")
   if (!length(t)) stop("need at least one observation")
@@ -481,16 +526,22 @@ Cif <- function(time, cause, code = 1, alpha = 0.05) {
   if (k == 0L) stop("cause 0 marks censoring; pick an event cause")
   if (!(k %in% c_)) stop(sprintf("cause %d does not occur in the data", k))
   ut <- sort(unique(t[c_ != 0L]))
-  surv <- 1; cum <- 0; v <- 0
+  surv <- 1
+  cum <- 0
+  v <- 0
   F_ <- nr <- nk <- va <- numeric(length(ut))
   for (i in seq_along(ut)) {
     u <- ut[i]
     n_i <- sum(t >= u)
-    d_all <- sum(t == u & c_ != 0L); d_k <- sum(t == u & c_ == k)
+    d_all <- sum(t == u & c_ != 0L)
+    d_k <- sum(t == u & c_ == k)
     cum <- cum + surv * d_k / n_i
     if (n_i > d_all) v <- v + surv^2 * d_k * (n_i - d_k) / n_i^3
     surv <- surv * (1 - d_all / n_i)
-    F_[i] <- cum; nr[i] <- n_i; nk[i] <- d_k; va[i] <- v
+    F_[i] <- cum
+    nr[i] <- n_i
+    nk[i] <- d_k
+    va[i] <- v
   }
   naive <- 1 - .ms_km(t, as.integer(c_ == k))$surv
   zq <- stats::qnorm(1 - alpha / 2)
@@ -529,8 +580,11 @@ Finegray <- function(time, cause, X, code = 1,
   # from a cause-specific Cox model, and the two answer different
   # questions -- a covariate can raise one and lower the other.  The
   # weights assume censoring independent of covariates.
-  t <- as.numeric(time); c_ <- as.integer(cause)
-  X <- as.matrix(X); p <- ncol(X); n <- length(t)
+  t <- as.numeric(time)
+  c_ <- as.integer(cause)
+  X <- as.matrix(X)
+  p <- ncol(X)
+  n <- length(t)
   if (length(c_) != n || nrow(X) != n)
     stop("time, cause and X must agree in length")
   k <- as.integer(code)
@@ -541,19 +595,26 @@ Finegray <- function(time, cause, X, code = 1,
   }
   ut <- sort(unique(t[c_ == k]))
   if (!length(ut)) stop(sprintf("cause %d does not occur in the data", k))
-  beta <- numeric(p); Hm <- diag(p)
+  beta <- numeric(p)
+  Hm <- diag(p)
   for (it in seq_len(as.integer(max_iter))) {
-    gvec <- numeric(p); Hm <- matrix(0, p, p)
+    gvec <- numeric(p)
+    Hm <- matrix(0, p, p)
     for (u in ut) {
-      idx <- integer(0); wts <- numeric(0)
+      idx <- integer(0)
+      wts <- numeric(0)
       for (i in seq_len(n)) {
-        if (t[i] >= u) { idx <- c(idx, i); wts <- c(wts, 1) }
+        if (t[i] >= u) { idx <- c(idx, i)
+        wts <- c(wts, 1) }
         else if (c_[i] != 0L && c_[i] != k) {
           gi <- G(t[i])
-          if (gi > 0) { idx <- c(idx, i); wts <- c(wts, G(u) / gi) }
+          if (gi > 0) { idx <- c(idx, i)
+          wts <- c(wts, G(u) / gi) }
         }
       }
-      keep <- wts > 0; idx <- idx[keep]; wts <- wts[keep]
+      keep <- wts > 0
+      idx <- idx[keep]
+      wts <- wts[keep]
       if (!length(idx)) next
       ev <- which(t == u & c_ == k)
       wt <- wts * exp(as.numeric(X[idx, , drop = FALSE] %*% beta))
@@ -607,25 +668,36 @@ Ltkm <- function(entry, time, event,
   # upward -- the immortal-time bias that makes prevalent-cohort studies
   # look protective.  Both curves are returned so the bias is visible.
   en <- as.numeric(entry)
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   if (length(en) != length(t))
     stop("entry and time must have the same length")
   if (any(en >= t))
     stop("every entry time must be strictly before its follow-up time")
   ut <- sort(unique(t[e == 1L]))
   S <- se <- nr <- ne <- numeric(length(ut))
-  surv <- 1; v <- 0; empty <- numeric(0)
+  surv <- 1
+  v <- 0
+  empty <- numeric(0)
   for (i in seq_along(ut)) {
     u <- ut[i]
-    n_i <- sum(en < u & u <= t); d_i <- sum(t == u & e == 1L)
+    n_i <- sum(en < u & u <= t)
+    d_i <- sum(t == u & e == 1L)
     if (n_i == 0L) {
       empty <- c(empty, u)
-      S[i] <- surv; se[i] <- surv * sqrt(v); nr[i] <- 0; ne[i] <- d_i
+      S[i] <- surv
+      se[i] <- surv * sqrt(v)
+      nr[i] <- 0
+      ne[i] <- d_i
       next
     }
     surv <- surv * (1 - d_i / n_i)
     if (n_i > d_i) v <- v + d_i / (n_i * (n_i - d_i))
-    S[i] <- surv; se[i] <- surv * sqrt(v); nr[i] <- n_i; ne[i] <- d_i
+    S[i] <- surv
+    se[i] <- surv * sqrt(v)
+    nr[i] <- n_i
+    ne[i] <- d_i
   }
   naive <- .ms_km(t, e)$surv
   zq <- stats::qnorm(1 - alpha / 2)
@@ -662,14 +734,17 @@ Landmark <- function(time, event, landmark_time, X = NULL,
   # survived makes the exposed look protected for no reason but that they
   # lived.  The cost is stated, not hidden: n_dropped is the data
   # discarded, and the estimate is conditional on reaching the landmark.
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   lm <- as.numeric(landmark_time)
   if (lm <= 0) stop("the landmark must be positive")
   keep <- which(t > lm)
   if (length(keep) < 2L)
     stop(sprintf(paste("the landmark leaves %d subjects; it is past the",
                        "bulk of the follow-up"), length(keep)))
-  tt <- t[keep] - lm; ee <- e[keep]
+  tt <- t[keep] - lm
+  ee <- e[keep]
   km <- .ms_km(tt, ee)
   out <- list(landmark = lm, n_original = length(t),
               n_retained = length(keep),
@@ -726,13 +801,15 @@ Turnbull <- function(left, right, max_iter = 1000L,
   # each such gap, returned as ambiguous_intervals rather than
   # interpolated away.  Inf marks right censoring.
   L <- as.numeric(left)
-  R <- as.numeric(right); R[is.na(R)] <- Inf
+  R <- as.numeric(right)
+  R[is.na(R)] <- Inf
   if (length(L) != length(R))
     stop("left and right must have the same length")
   n <- length(L)
   if (!n) stop("need at least one interval")
   if (any(L > R)) stop("every left endpoint must not exceed its right")
-  lefts <- sort(unique(L)); rights <- sort(unique(R[is.finite(R)]))
+  lefts <- sort(unique(L))
+  rights <- sort(unique(R[is.finite(R)]))
   inner <- list()
   for (q in lefts) {
     cand <- rights[rights >= q]
@@ -754,7 +831,9 @@ Turnbull <- function(left, right, max_iter = 1000L,
   if (any(rowSums(alpha) == 0))
     stop(paste("an observation is compatible with no Turnbull interval;",
                "check the endpoints"))
-  p <- rep(1 / m, m); it <- 0L; change <- Inf
+  p <- rep(1 / m, m)
+  it <- 0L
+  change <- Inf
   for (it in seq_len(as.integer(max_iter))) {
     den <- as.numeric(alpha %*% p)
     den[den <= 0] <- NA_real_
@@ -788,7 +867,8 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' @return Nothing; this branch always raises.
 #' @export
 .ms_logsf_logpdf <- function(dist, y, mu, logsig) {
-  sig <- exp(logsig); z <- (y - mu) / sig
+  sig <- exp(logsig)
+  z <- (y - mu) / sig
   if (dist %in% c("weibull", "exponential")) {
     ez <- exp(pmin(z, 700))
     return(list(lS = -ez, lf = z - ez - logsig))
@@ -819,10 +899,13 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' @return A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale}, \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic}, \code{fixed_scale}, \code{convergence}.
 #' @export
 .ms_fit_lls <- function(dist, time, event, X = NULL) {
-  z <- .ms_check(time, event); t <- z$t; e <- z$e
+  z <- .ms_check(time, event)
+  t <- z$t
+  e <- z$e
   if (any(t <= 0))
     stop("a log-location-scale model needs positive times")
-  y <- log(t); n <- length(y)
+  y <- log(t)
+  n <- length(y)
   Xm <- if (is.null(X)) matrix(1, n, 1) else cbind(1, as.matrix(X))
   if (nrow(Xm) != n) stop("X must have one row per observation")
   p <- ncol(Xm)
@@ -842,14 +925,17 @@ Turnbull <- function(left, right, max_iter = 1000L,
   # the exponential with no covariates has a single parameter, so route
   # that case to a golden-section search instead of ignoring the warning.
   if (length(x0) == 1L) {
-    lo <- x0 - 10; hi <- x0 + 10
+    lo <- x0 - 10
+    hi <- x0 + 10
     op <- stats::optimize(nll, interval = c(lo, hi), tol = 1e-12)
     fit <- list(par = op$minimum, convergence = 0L)
   } else {
     fit <- stats::optim(x0, nll, method = "Nelder-Mead",
                         control = list(maxit = 5000, reltol = 1e-12))
   }
-  theta <- fit$par; ll <- -nll(theta); k <- length(theta)
+  theta <- fit$par
+  ll <- -nll(theta)
+  k <- length(theta)
   list(dist = dist, coef = theta[seq_len(p)],
        log_scale = if (fixed) 0 else theta[p + 1L],
        scale = if (fixed) 1 else exp(theta[p + 1L]),
@@ -966,7 +1052,8 @@ Paracompare <- function(time, event, X = NULL,
   # ranking cannot silently be over a subset.  The best AIC is not
   # evidence the winner FITS; check the Cox-Snell residuals first.
   nm <- if (is.null(dists)) .ms_dists else dists
-  fits <- list(); errs <- list()
+  fits <- list()
+  errs <- list()
   for (d in nm) {
     r <- tryCatch(
       if (is.null(X)) Parasurv(time, event, dist = d)

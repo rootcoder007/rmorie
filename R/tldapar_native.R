@@ -81,7 +81,9 @@ split_sample <- function(n, V = 10L, seed = 0L) {
     j <- as.integer(.ghc_unif(e_rng, 1L) * (i + 1)) %% (i + 1)
     if (j == 0L) j <- 1L
     if (j == i) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j]; idx[j] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j]
+    idx[j] <- tmp
   }
   est <- lapply(seq_len(V), function(v)
     sort(idx[seq(v, length(idx), by = V)]))

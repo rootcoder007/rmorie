@@ -17,9 +17,12 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Brenier1d(V, V)
 Brenier1d <- function(x, y, p = 2) {
-  x <- .t1_vec(x); y <- .t1_vec(y); n <- length(x)
+  x <- .t1_vec(x)
+  y <- .t1_vec(y)
+  n <- length(x)
   if (length(y) != n) stop("x and y must have the same length")
-  ox <- order(x, seq_len(n)); oy <- order(y, seq_len(n))
+  ox <- order(x, seq_len(n))
+  oy <- order(y, seq_len(n))
   mp <- numeric(n)
   mp[ox] <- y[oy]
   .t1_result(map = mp, cost = sum(abs(x - mp)^as.numeric(p)) / n,

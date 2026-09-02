@@ -18,17 +18,24 @@
 #' qsarh(-(lp - 2)^2 + 5, lp)
 #' @export
 qsarh <- function(activities, logP, sigma = NULL, es = NULL, parabolic = TRUE) {
-  y <- as.numeric(activities); lp <- as.numeric(logP)
+  y <- as.numeric(activities)
+  lp <- as.numeric(logP)
   n <- min(length(y), length(lp))
-  y <- y[seq_len(n)]; lp <- lp[seq_len(n)]
-  X <- cbind(1, lp); nms <- c("k", "logP")
-  if (parabolic) { X <- cbind(X, lp^2); nms <- c(nms, "logP2") }
-  if (!is.null(sigma)) { X <- cbind(X, as.numeric(sigma)[seq_len(n)]); nms <- c(nms, "sigma") }
-  if (!is.null(es)) { X <- cbind(X, as.numeric(es)[seq_len(n)]); nms <- c(nms, "Es") }
+  y <- y[seq_len(n)]
+  lp <- lp[seq_len(n)]
+  X <- cbind(1, lp)
+  nms <- c("k", "logP")
+  if (parabolic) { X <- cbind(X, lp^2)
+  nms <- c(nms, "logP2") }
+  if (!is.null(sigma)) { X <- cbind(X, as.numeric(sigma)[seq_len(n)])
+  nms <- c(nms, "sigma") }
+  if (!is.null(es)) { X <- cbind(X, as.numeric(es)[seq_len(n)])
+  nms <- c(nms, "Es") }
   beta <- t3ols(X, y)
   fit <- as.numeric(X %*% beta)
   resid <- y - fit
-  rss <- sum(resid^2); tss <- sum((y - mean(y))^2)
+  rss <- sum(resid^2)
+  tss <- sum((y - mean(y))^2)
   r2 <- if (tss > 0) 1 - rss / tss else NA_real_
   p <- ncol(X)
   s <- if (n > p) sqrt(rss / (n - p)) else NA_real_

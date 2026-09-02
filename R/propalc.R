@@ -22,12 +22,14 @@
 #' @examples
 #' Propalloc(Nh = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 Propalloc <- function(Nh, n) {
-  Nh <- .t1_vec(Nh); n <- as.integer(n)
+  Nh <- .t1_vec(Nh)
+  n <- as.integer(n)
   L <- length(Nh)
   if (L < 1L) stop("at least one stratum is required")
   if (any(Nh <= 0)) stop("stratum sizes must be positive")
   if (n < 0L) stop("n must be non-negative")
-  N <- sum(Nh); W <- Nh / N
+  N <- sum(Nh)
+  W <- Nh / N
   exact <- n * W
   base <- as.integer(floor(exact))
   rem <- n - sum(base)

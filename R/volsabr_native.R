@@ -25,9 +25,13 @@
 #'   September, 84-108.
 #' @export
 morie_volsabr <- function(K, f, T, alpha, beta, rho, nu) {
-  K <- as.numeric(K); f <- as.numeric(f); T <- as.numeric(T)
-  alpha <- as.numeric(alpha); beta <- as.numeric(beta)
-  rho <- as.numeric(rho); nu <- as.numeric(nu)
+  K <- as.numeric(K)
+  f <- as.numeric(f)
+  T <- as.numeric(T)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
+  rho <- as.numeric(rho)
+  nu <- as.numeric(nu)
   if (K <= 0 || f <= 0 || alpha <= 0 || T < 0) {
     stop("K, f, alpha must be positive; T >= 0")
   }

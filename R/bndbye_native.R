@@ -34,7 +34,8 @@ morie_identified_set_interval <- function(phi_hat, half_width) {
 #' @return A list with \code{grid}, \code{density}.
 #' @export
 morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
-  lo <- as.numeric(theta_set$lower); hi <- as.numeric(theta_set$upper)
+  lo <- as.numeric(theta_set$lower)
+  hi <- as.numeric(theta_set$upper)
   if (hi < lo) stop("bndbye: the identified set is empty")
   if (hi - lo <= .bndbye_GHC_EPS) return(list(grid = lo, density = 1))
   g <- lo + (hi - lo) * seq_len(as.integer(n_grid) - 1L) /
@@ -59,7 +60,8 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
   if (level <= 0 || level >= 1) stop("bndbye: level must lie in (0, 1)")
   cp <- if (is.null(conditional_prior))
     morie_conditional_prior_uniform(theta_set, n_grid) else conditional_prior
-  g <- as.numeric(cp$grid); d <- as.numeric(cp$density)
+  g <- as.numeric(cp$grid)
+  d <- as.numeric(cp$density)
   if (length(g) != length(d))
     stop("bndbye: the prior grid and density differ in length")
   if (length(g) == 1L)
@@ -71,12 +73,15 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
   if (tot <= .bndbye_GHC_EPS) stop("bndbye: the conditional prior has no mass")
   mass <- mass / tot
   ord <- order(-d)
-  acc <- 0; chosen <- integer(0)
+  acc <- 0
+  chosen <- integer(0)
   for (i in ord) {
-    chosen <- c(chosen, i); acc <- acc + mass[i]
+    chosen <- c(chosen, i)
+    acc <- acc + mass[i]
     if (acc >= as.numeric(level)) break
   }
-  lo <- min(g[chosen]); hi <- max(g[chosen])
+  lo <- min(g[chosen])
+  hi <- max(g[chosen])
   list(lower = lo, upper = hi, width = hi - lo, level = as.numeric(level),
        covered = acc, n_grid_points = length(chosen),
        method = "HPD of the conditional prior at phi_hat -- the large-sample limit of the posterior (Moon & Schorfheide 2012)")

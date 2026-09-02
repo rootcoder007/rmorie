@@ -20,8 +20,10 @@
 #' sage(matrix(c(0, 1, 1, 0), 2, 2), matrix(c(1, 0, 0, 1), 2, 2, byrow = TRUE))
 #' @export
 sage <- function(G, X, W = NULL, aggregator = "mean", K = 1L, convolutional = FALSE) {
-  A <- as.matrix(G); H <- as.matrix(X)
-  n <- nrow(A); d <- ncol(H)
+  A <- as.matrix(G)
+  H <- as.matrix(X)
+  n <- nrow(A)
+  d <- ncol(H)
   if (is.null(W)) {
     wm <- if (convolutional) diag(d) else {
       m <- matrix(0, 2 * d, d)

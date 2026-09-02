@@ -13,7 +13,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ssello(V, V)
 Ssello <- function(Y, Yhat) {
-  Y <- .t1_mat(Y); H <- .t1_mat(Yhat)
+  Y <- .t1_mat(Y)
+  H <- .t1_mat(Yhat)
   if (nrow(Y) == 0L || nrow(Y) != nrow(H) || ncol(Y) != ncol(H))
     stop("Y and Yhat must be non-empty and the same shape")
   loss <- 0.5 * sum((H - Y)^2)

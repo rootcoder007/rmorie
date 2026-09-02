@@ -23,7 +23,9 @@
 #' Survip(3.841458820694124, 1, 1)
 #' @export
 Survip <- function(test_stat, DEFF = 1, df = 1) {
-  x <- as.numeric(test_stat); d <- as.numeric(DEFF); k <- as.integer(df)
+  x <- as.numeric(test_stat)
+  d <- as.numeric(DEFF)
+  k <- as.integer(df)
   if (x < 0) stop("survey_p_value: test_stat must be non-negative")
   if (d <= 0) stop("survey_p_value: DEFF must be positive")
   if (k < 1L) stop("survey_p_value: df must be at least 1")

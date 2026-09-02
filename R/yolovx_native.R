@@ -88,7 +88,10 @@ morie_yolovx_decoupled_head <- function(channels, reduced=256,
 morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
   # Four distances from a location to the box sides.
   b <- as.numeric(box)
-  x0 <- b[1L]; y0 <- b[2L]; x1 <- b[3L]; y1 <- b[4L]
+  x0 <- b[1L]
+  y0 <- b[2L]
+  x1 <- b[3L]
+  y1 <- b[4L]
   s <- as.numeric(stride)
   if (s <= 0.0) {
     stop("yolovx: the stride must be positive")
@@ -118,7 +121,10 @@ morie_yolovx_encode_box <- function(box, cx, cy, stride=1.0) {
 morie_yolovx_decode_box <- function(ltrb, cx, cy, stride=1.0) {
   # Back to corners. Inverts encode_box exactly.
   v <- .s03vec(ltrb)
-  l <- v[1L]; t <- v[2L]; r <- v[3L]; b <- v[4L]
+  l <- v[1L]
+  t <- v[2L]
+  r <- v[3L]
+  b <- v[4L]
   s <- as.numeric(stride)
   px <- (as.numeric(cx) + 0.5) * s
   py <- (as.numeric(cy) + 0.5) * s
@@ -168,7 +174,10 @@ morie_yolovx_center_sampling <- function(box, grid_w, grid_h, stride=1.0,
   # The center 3x3 area is positive, not only the center cell. Grid
   # coordinates are 0-based (i, j) to match the Python.
   bx <- as.numeric(box)
-  x0 <- bx[1L]; y0 <- bx[2L]; x1 <- bx[3L]; y1 <- bx[4L]
+  x0 <- bx[1L]
+  y0 <- bx[2L]
+  x1 <- bx[3L]
+  y1 <- bx[4L]
   s <- as.numeric(stride)
   cx <- 0.5 * (x0 + x1)
   cy <- 0.5 * (y0 + y1)

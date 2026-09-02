@@ -36,16 +36,20 @@ Hetero <- function(X, construct_assignment, threshold = 0.85) {
   for (lab in groups) if (sum(g == lab) < 2L) stop("htmt_ratio: every construct needs at least two indicators")
   R <- matrix(0, p, p)
   for (i in seq_len(p)) for (j in seq_len(p)) R[i, j] <- .s03corr(M[, i], M[, j])
-  ratios <- numeric(0); flags <- integer(0); pair1 <- NULL
+  ratios <- numeric(0)
+  flags <- integer(0)
+  pair1 <- NULL
   for (ai in seq_len(length(groups) - 1L)) for (bi in seq(ai + 1L, length(groups))) {
-    A <- which(g == groups[ai]); B <- which(g == groups[bi])
+    A <- which(g == groups[ai])
+    B <- which(g == groups[bi])
     het <- abs(as.numeric(R[A, B]))
     wa <- abs(R[A, A][upper.tri(diag(length(A)))])
     wb <- abs(R[B, B][upper.tri(diag(length(B)))])
     den <- sqrt(mean(wa) * mean(wb))
     v <- if (den == 0) Inf else mean(het) / den
     if (is.null(pair1)) pair1 <- c(groups[ai], groups[bi])
-    ratios <- c(ratios, v); flags <- c(flags, as.integer(v > as.numeric(threshold)))
+    ratios <- c(ratios, v)
+    flags <- c(flags, as.integer(v > as.numeric(threshold)))
   }
   worst <- max(ratios)
   .t1_result(estimate = worst, htmt = ratios, pair_first = pair1, flagged = flags,

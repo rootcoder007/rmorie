@@ -15,8 +15,10 @@
 #' g <- seq(-8, 8, length.out = 1601); SumDens(g, stats::dnorm(g), g, stats::dnorm(g), 1)$density
 #' @export
 SumDens <- function(grid_x, density_x, grid_y, density_y, z) {
-  gx <- as.numeric(grid_x); dx <- as.numeric(density_x)
-  gy <- as.numeric(grid_y); dy <- as.numeric(density_y)
+  gx <- as.numeric(grid_x)
+  dx <- as.numeric(density_x)
+  gy <- as.numeric(grid_y)
+  dy <- as.numeric(density_y)
   z <- as.numeric(z)
   if (length(gx) != length(dx) || length(gy) != length(dy) ||
         length(gx) < 2L || length(gy) < 2L) {

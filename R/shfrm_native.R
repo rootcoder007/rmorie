@@ -33,8 +33,10 @@
 #' @examples
 #' Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Shfrm <- function(time, event, X, cluster, theta = NULL) {
-  t <- as.numeric(time); e <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   n <- length(t)
   cl <- as.vector(cluster)
@@ -93,7 +95,8 @@ Shfrm <- function(time, event, X, cluster, theta = NULL) {
   # Estimated theta is plateau-bounded at ~1e-6 across languages (the
   # marginal likelihood is flat at machine precision near the argmax);
   # the likelihood value agrees to <1e-12.
-  lo <- log(1e-4); hi <- log(20)
+  lo <- log(1e-4)
+  hi <- log(20)
   gr <- (sqrt(5) - 1) / 2
   cc <- hi - gr * (hi - lo)
   dd <- lo + gr * (hi - lo)
@@ -101,11 +104,15 @@ Shfrm <- function(time, event, X, cluster, theta = NULL) {
   fd <- em_at_theta(exp(dd))$ll
   for (it in seq_len(50L)) {
     if (fc > fd) {
-      hi <- dd; dd <- cc; fd <- fc
+      hi <- dd
+      dd <- cc
+      fd <- fc
       cc <- hi - gr * (hi - lo)
       fc <- em_at_theta(exp(cc))$ll
     } else {
-      lo <- cc; cc <- dd; fc <- fd
+      lo <- cc
+      cc <- dd
+      fc <- fd
       dd <- lo + gr * (hi - lo)
       fd <- em_at_theta(exp(dd))$ll
     }

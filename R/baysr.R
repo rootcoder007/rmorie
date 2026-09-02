@@ -87,7 +87,8 @@ Baysr <- function(y, X, pi = NULL, sigma_classes = NULL, max_iter = 500L,
   beta <- numeric(p)
   xtx <- vapply(seq_len(p), function(j) sum(XX[, j]^2), 0)
   vy <- sum((yy - mu)^2) / (n - 1)
-  sg2 <- max(vy / 2, 1e-12); se2 <- max(vy / 2, 1e-12)
+  sg2 <- max(vy / 2, 1e-12)
+  se2 <- max(vy / 2, 1e-12)
   gam <- matrix(0, p, K)
   res <- yy - mu
   for (it in seq_len(as.integer(max_iter))) {
@@ -120,7 +121,8 @@ Baysr <- function(y, X, pi = NULL, sigma_classes = NULL, max_iter = 500L,
     }
     tot <- sum(dl)
     for (k in seq_len(K)) pv[k] <- (sum(gam[, k]) + dl[k]) / (p + tot)
-    ss <- 0; wsum <- 0
+    ss <- 0
+    wsum <- 0
     for (j in seq_len(p)) {
       for (k in seq(2L, K)) {
         if (sc[k] > 0) {

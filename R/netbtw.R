@@ -29,15 +29,20 @@ Netbtw <- function(A, node = 0) {
   for (s in seq_len(n)) {
     S <- integer(0)
     P <- vector("list", n)
-    sigma <- rep(0, n); sigma[s] <- 1
-    d <- rep(-1L, n); d[s] <- 0L
-    Q <- c(s); qh <- 1L
+    sigma <- rep(0, n)
+    sigma[s] <- 1
+    d <- rep(-1L, n)
+    d[s] <- 0L
+    Q <- c(s)
+    qh <- 1L
     while (qh <= length(Q)) {
-      w0 <- Q[qh]; qh <- qh + 1L
+      w0 <- Q[qh]
+      qh <- qh + 1L
       S <- c(S, w0)
       for (w in seq_len(n)) {
         if (M[w0, w] == 0) next
-        if (d[w] < 0L) { Q <- c(Q, w); d[w] <- d[w0] + 1L }
+        if (d[w] < 0L) { Q <- c(Q, w)
+        d[w] <- d[w0] + 1L }
         if (d[w] == d[w0] + 1L) {
           sigma[w] <- sigma[w] + sigma[w0]
           P[[w]] <- c(P[[w]], w0)

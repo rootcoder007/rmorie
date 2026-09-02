@@ -36,21 +36,29 @@ Emkfst <- function(y, init = NULL, max_iter = 50) {
     m <- sum(y) / n
     v <- if (n > 1L) sum((y - m)^2) / (n - 1) else 1
     if (v <= 0) v <- 1
-    phi <- 0.9; Q <- v / 2; R <- v / 2
+    phi <- 0.9
+    Q <- v / 2
+    R <- v / 2
   } else {
     init <- as.numeric(init)
     if (length(init) != 3L) stop("init must be (phi, Q, R)")
-    phi <- init[1]; Q <- init[2]; R <- init[3]
+    phi <- init[1]
+    Q <- init[2]
+    R <- init[3]
   }
   if (Q < 0 || R <= 0) stop("Q must be non-negative and R positive")
-  mu0 <- 0; Sig0 <- 1
+  mu0 <- 0
+  Sig0 <- 1
   path <- numeric(0)
   loglik <- NaN
   for (.it in seq_len(max_iter + 1L)) {
-    xp <- numeric(n + 1L); Pp <- numeric(n + 1L)
-    xf <- numeric(n + 1L); Pf <- numeric(n + 1L)
+    xp <- numeric(n + 1L)
+    Pp <- numeric(n + 1L)
+    xf <- numeric(n + 1L)
+    Pf <- numeric(n + 1L)
     Kg <- numeric(n + 1L)
-    xf[1] <- mu0; Pf[1] <- Sig0
+    xf[1] <- mu0
+    Pf[1] <- Sig0
     loglik <- 0
     for (t in seq_len(n)) {
       xp[t + 1L] <- phi * xf[t]
@@ -64,7 +72,9 @@ Emkfst <- function(y, init = NULL, max_iter = 50) {
     }
     path <- c(path, loglik)
     if (length(path) > max_iter) break
-    xs <- xf; Ps <- Pf; J <- numeric(n + 1L)
+    xs <- xf
+    Ps <- Pf
+    J <- numeric(n + 1L)
     for (t in seq(n, 1L)) {
       J[t] <- if (Pp[t + 1L] > 0) Pf[t] * phi / Pp[t + 1L] else 0
       xs[t] <- xf[t] + J[t] * (xs[t + 1L] - xp[t + 1L])
@@ -75,7 +85,9 @@ Emkfst <- function(y, init = NULL, max_iter = 50) {
     if (n > 1L) for (t in seq(n, 2L)) {
       Pcs[t] <- Pf[t] * J[t - 1L] + J[t] * (Pcs[t + 1L] - phi * Pf[t]) * J[t - 1L]
     }
-    S11 <- 0; S10 <- 0; S00 <- 0
+    S11 <- 0
+    S10 <- 0
+    S00 <- 0
     for (t in seq_len(n)) {
       S11 <- S11 + xs[t + 1L] * xs[t + 1L] + Ps[t + 1L]
       S10 <- S10 + xs[t + 1L] * xs[t] + Pcs[t + 1L]

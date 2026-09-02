@@ -25,13 +25,17 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Otsd(V, V)
 Otsd <- function(X, Y, p = 2, n_proj = 32) {
-  A <- as.matrix(X); B <- as.matrix(Y)
+  A <- as.matrix(X)
+  B <- as.matrix(Y)
   if (ncol(A) != ncol(B)) stop("point clouds must share a dimension")
-  n <- nrow(A); m <- nrow(B); d <- ncol(A)
+  n <- nrow(A)
+  m <- nrow(B)
+  d <- ncol(A)
   if (n == 0L || m == 0L) stop("empty point cloud")
   pp <- as.numeric(p)
   if (pp <= 0) stop("p must be positive")
-  L <- as.integer(n_proj); G <- max(n, m)
+  L <- as.integer(n_proj)
+  G <- max(n, m)
   grid <- (seq_len(G) - 0.5) / G
   TH <- .ot_directions(d, L)
   per <- vapply(seq_len(L), function(k) {

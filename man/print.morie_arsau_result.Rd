@@ -21,7 +21,6 @@ Print method for \code{morie_arsau_result} objects
 \donttest{
 res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 if (!inherits(res, "try-error")) print(res)
-print(res)
 }
 }
 \references{

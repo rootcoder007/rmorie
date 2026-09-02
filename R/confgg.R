@@ -15,21 +15,27 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Configmodel(V)
 Configmodel <- function(degrees, seed = 1) {
-  d <- as.integer(.t1_vec(degrees)); n <- length(d)
+  d <- as.integer(.t1_vec(degrees))
+  n <- length(d)
   if (any(d < 0)) stop("degrees must be non-negative")
   if (sum(d) %% 2 != 0) stop("sum of degrees must be even")
   stubs <- rep(seq_len(n), d)
   g <- .t1_lcg(seed)
-  ea <- integer(0); eb <- integer(0); loops <- 0L
+  ea <- integer(0)
+  eb <- integer(0)
+  loops <- 0L
   while (length(stubs)) {
     i <- as.integer(g$unif() * length(stubs)) + 1L
     if (i > length(stubs)) i <- length(stubs)
-    a <- stubs[i]; stubs <- stubs[-i]
+    a <- stubs[i]
+    stubs <- stubs[-i]
     j <- as.integer(g$unif() * length(stubs)) + 1L
     if (j > length(stubs)) j <- length(stubs)
-    b <- stubs[j]; stubs <- stubs[-j]
+    b <- stubs[j]
+    stubs <- stubs[-j]
     if (a == b) loops <- loops + 1L
-    ea <- c(ea, min(a, b)); eb <- c(eb, max(a, b))
+    ea <- c(ea, min(a, b))
+    eb <- c(eb, max(a, b))
   }
   key <- paste(ea, eb, sep = "-")
   tb <- table(key)

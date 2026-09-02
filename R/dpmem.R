@@ -35,18 +35,21 @@ Dpmem <- function(y, alpha = 1, base_distribution = NULL, n_iter = 50,
   if (n == 0L) stop("empty input: y has no observations")
   if (!(alpha > 0)) stop("alpha must be strictly positive")
   if (is.null(base_distribution)) {
-    mu0 <- 0; tau2 <- 10
+    mu0 <- 0
+    tau2 <- 10
   } else {
     b <- .s03vec(base_distribution)
     if (length(b) != 2L) stop("base_distribution must be (mu0, tau2)")
-    mu0 <- b[1]; tau2 <- b[2]
+    mu0 <- b[1]
+    tau2 <- b[2]
   }
   if (!(tau2 > 0 && sigma2 > 0))
     stop("tau2 and sigma2 must be strictly positive")
   s <- .crp_collapsed_sweep(y, alpha, as.integer(n_iter), mu0, tau2,
                             sigma2, seed)
   K <- length(s$counts)
-  means <- numeric(K); w <- numeric(K)
+  means <- numeric(K)
+  w <- numeric(K)
   for (c in seq_len(K)) {
     prec <- 1 / tau2 + s$counts[c] / sigma2
     means[c] <- (mu0 / tau2 + s$sums[c] / sigma2) / prec

@@ -20,7 +20,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Svariog(V, V)
 Svariog <- function(coords, z, breaks = NULL, nbins = 10, cutoff = NULL) {
-  P <- .t1_mat(coords); z <- .t1_vec(z); n <- nrow(P)
+  P <- .t1_mat(coords)
+  z <- .t1_vec(z)
+  n <- nrow(P)
   if (length(z) != n) stop("z must have one value per location")
   if (n < 2) stop("need at least two observations")
   k <- ncol(P)
@@ -38,7 +40,9 @@ Svariog <- function(coords, z, breaks = NULL, nbins = 10, cutoff = NULL) {
     if (any(diff(br) <= 0)) stop("breaks must be strictly increasing")
     nb <- length(br) - 1L
   }
-  ssq <- numeric(nb); sdi <- numeric(nb); cnt <- integer(nb)
+  ssq <- numeric(nb)
+  sdi <- numeric(nb)
+  cnt <- integer(nb)
   keep <- which(d > br[1] & d <= br[nb + 1L])
   for (t in keep) {
     b <- 1L

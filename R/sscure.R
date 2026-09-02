@@ -23,19 +23,24 @@
 #' @export
 Curemod <- function(time, event, X = NULL, Z = NULL, max_iter = 200,
                     tol = 1e-12) {
-  t <- .s03vec(time); e <- .s03vec(event); n <- length(t)
+  t <- .s03vec(time)
+  e <- .s03vec(event)
+  n <- length(t)
   Zd <- .s03design(Z, n)
   times <- sort(unique(t[e > 0.5]))
   tmax <- if (length(times)) max(times) else Inf
   w <- ifelse(e > 0.5, 1, 0.5)
-  gam <- numeric(ncol(Zd)); S0 <- rep(1, length(times))
+  gam <- numeric(ncol(Zd))
+  S0 <- rep(1, length(times))
   for (it in seq_len(as.integer(max_iter))) {
     gam <- .s03logit(Zd, w, 40L)
     pi_ <- vapply(.s03matvec(Zd, gam), .s03sigmoid, 0)
-    surv <- 1; S0 <- numeric(length(times))
+    surv <- 1
+    S0 <- numeric(length(times))
     for (ti in seq_along(times)) {
       tt <- times[ti]
-      d <- 0; r <- 0
+      d <- 0
+      r <- 0
       for (i in seq_len(n)) {
         if (t[i] >= tt) r <- r + w[i]
         if (abs(t[i] - tt) < 1e-12 && e[i] > 0.5) d <- d + 1
@@ -45,7 +50,8 @@ Curemod <- function(time, event, X = NULL, Z = NULL, max_iter = 200,
     }
     neww <- numeric(n)
     for (i in seq_len(n)) {
-      if (e[i] > 0.5) { neww[i] <- 1; next }
+      if (e[i] > 0.5) { neww[i] <- 1
+      next }
       s <- 1
       for (j in seq_along(times)) if (times[j] <= t[i]) s <- S0[j]
       if (t[i] >= tmax) s <- 0

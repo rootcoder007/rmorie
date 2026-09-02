@@ -24,8 +24,11 @@
 #' @examples
 #' Tmlmlt(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), arm_set = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmlt <- function(y, D, X, arm_set) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); arms <- as.numeric(arm_set)
-  n <- length(yv); k <- length(arms)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  arms <- as.numeric(arm_set)
+  n <- length(yv)
+  k <- length(arms)
   if (n == 0L || length(Dv) != n)
     stop("Tmlmlt: y and D must share one length")
   if (k < 2L) stop("Tmlmlt: need at least two arms")

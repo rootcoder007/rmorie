@@ -94,7 +94,8 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
     stop("kind must be one of ", paste(.HYPER2_KERNELS, collapse = ", "))
   ls <- exp(log_ls)
   sf2 <- exp(2 * log_sf)
-  nx <- nrow(X); nz <- nrow(Z)
+  nx <- nrow(X)
+  nz <- nrow(Z)
   out <- matrix(0, nx, nz)
   for (i in seq_len(nx)) for (j in seq_len(nz)) {
     r <- .hyper2_dist(X[i, ], Z[j, ]) / ls
@@ -189,8 +190,10 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
   hi <- lo + w
   j <- floor(.ghc_unif(e, 1L) * m)
   k <- m - 1 - j
-  while (j > 0 && ly < logf(lo)) { lo <- lo - w; j <- j - 1 }
-  while (k > 0 && ly < logf(hi)) { hi <- hi + w; k <- k - 1 }
+  while (j > 0 && ly < logf(lo)) { lo <- lo - w
+  j <- j - 1 }
+  while (k > 0 && ly < logf(hi)) { hi <- hi + w
+  k <- k - 1 }
   for (t in seq_len(200L)) {
     x1 <- lo + .ghc_unif(e, 1L) * (hi - lo)
     if (ly < logf(x1)) return(x1)
@@ -225,7 +228,8 @@ morie_hyper2_slice <- function(logf, x0, e, w = 1, m = 10L) {
   amin <- a - 2 * pi
   amax <- a
   for (t in seq_len(200L)) {
-    ca <- cos(a); sa <- sin(a)
+    ca <- cos(a)
+    sa <- sin(a)
     fp <- f * ca + v * sa
     if (logl(fp) > ly) return(fp)
     if (a > 0) amax <- a else amin <- a
@@ -271,7 +275,8 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
   if (n < 3L) stop("need at least three points")
   n_iter <- as.integer(n_iter)
   if (is.null(burn)) burn <- n_iter %/% 2L
-  burn <- as.integer(burn); thin <- as.integer(thin)
+  burn <- as.integer(burn)
+  thin <- as.integer(thin)
   theta <- if (is.null(prior)) c(0, 0, -1) else as.numeric(prior)
   if (length(theta) != 3L)
     stop("prior must hold three starting log values")
@@ -324,7 +329,8 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
         target <- local({
           cc <- cix
           function(v) {
-            th <- theta; th[cc] <- v
+            th <- theta
+            th[cc] <- v
             morie_hyper2_logml(yv, Xv, th[1], th[2], th[3], kind) +
               .hyper2_logprior(th)
           }
@@ -339,7 +345,8 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
         target <- local({
           cc <- cix
           function(v) {
-            th <- theta; th[cc] <- v
+            th <- theta
+            th[cc] <- v
             Lt <- chol_of(th)
             ft <- Lmul(Lt, nu)
             loglik(ft, th[3]) + .hyper2_logprior(th)
@@ -375,7 +382,8 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
         target <- local({
           cc <- cix
           function(v) {
-            th <- theta; th[cc] <- v
+            th <- theta
+            th[cc] <- v
             q <- post(th, g)
             ft <- vapply(seq_len(n), function(i)
               q$m[i] + .w3_dot(q$R[i, seq_len(i)], eta[seq_len(i)]), numeric(1))
@@ -409,7 +417,9 @@ morie_hyper2 <- function(X, y, prior = NULL, kind = "squared_exponential",
   # the spread of the means across draws as well as each draw's own
   # variance, which a plug-in estimate at the maximiser cannot.
   ns <- nrow(Xs)
-  pm <- numeric(ns); pv <- numeric(ns); pm2 <- numeric(ns)
+  pm <- numeric(ns)
+  pv <- numeric(ns)
+  pm2 <- numeric(ns)
   for (th in draws) {
     Kxx <- .hyper2_jit(morie_hyper2_kernel(Xv, Xv, th[1], th[2], kind),
                        exp(2 * th[3]) + jitter)

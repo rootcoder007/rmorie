@@ -26,14 +26,17 @@
 Ghosalrlprocess <- function(alpha = 0.75, n_grid = 200, n_sim = 300,
                             seed = 42) {
   alpha <- as.numeric(alpha)
-  n_grid <- as.integer(n_grid); n_sim <- as.integer(n_sim)
+  n_grid <- as.integer(n_grid)
+  n_sim <- as.integer(n_sim)
   if (alpha <= 0) stop("alpha must be positive")
   if (n_grid < 4L) stop("n_grid must be at least 4")
   if (n_sim < 1L) stop("n_sim must be positive")
   e <- .ghc_rng(seed)
   g <- gamma(alpha + 0.5)
-  t1_idx <- n_grid %/% 4L; t2_idx <- n_grid
-  v1 <- 0; v2 <- 0
+  t1_idx <- n_grid %/% 4L
+  t2_idx <- n_grid
+  v1 <- 0
+  v2 <- 0
   mid <- (seq_len(n_grid) - 0.5) / n_grid
   for (it in seq_len(n_sim)) {
     dB <- .ghc_norm(e, n_grid) / sqrt(n_grid)

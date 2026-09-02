@@ -20,7 +20,9 @@
 #' @examples
 #' Itinft(theta = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8))
 Itinft <- function(theta, a, b) {
-  th <- .s03vec(theta); av <- .s03vec(a); bv <- .s03vec(b)
+  th <- .s03vec(theta)
+  av <- .s03vec(a)
+  bv <- .s03vec(b)
   if (length(th) == 0L) stop("item_information_function: theta is empty")
   if (length(av) != length(bv)) stop("item_information_function: a and b have different lengths")
   if (length(av) == 0L) stop("item_information_function: no item parameters")

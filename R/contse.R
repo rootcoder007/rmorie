@@ -31,9 +31,11 @@ Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
   if (!(dropout >= 0 && dropout < 1)) stop("dropout must lie in [0, 1)")
   e <- .ghc_rng(seed)
   keep <- 1 - dropout
-  A <- matrix(0, n, d); B <- matrix(0, n, d)
+  A <- matrix(0, n, d)
+  B <- matrix(0, n, d)
   for (i in seq_len(n)) {
-    ra <- numeric(d); rb <- numeric(d)
+    ra <- numeric(d)
+    rb <- numeric(d)
     for (k in seq_len(d)) {
       ma <- if (.ghc_unif(e, 1L) < dropout) 0 else 1 / keep
       mb <- if (.ghc_unif(e, 1L) < dropout) 0 else 1 / keep
@@ -63,7 +65,8 @@ Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
   for (i in seq_len(n)) for (k in seq_len(d))
     align <- align + (A[i, k] - B[i, k])^2
   align <- align / n
-  unif <- 0; cnt <- 0L
+  unif <- 0
+  cnt <- 0L
   if (n > 1L) for (i in seq_len(n - 1L)) for (j in seq(i + 1L, n)) {
     dd <- 0
     for (k in seq_len(d)) dd <- dd + (A[i, k] - A[j, k])^2

@@ -21,9 +21,15 @@ Pdic <- function(deviance, d_at_mean = NULL) {
   dbar <- .s03mean(d)
   pv <- 0.5 * .s03var(d, 1L)
   if (is.null(d_at_mean)) {
-    pd <- NaN; dhat <- NaN; est <- pv; variant <- "p_V"
+    pd <- NaN
+    dhat <- NaN
+    est <- pv
+    variant <- "p_V"
   } else {
-    dhat <- as.numeric(d_at_mean); pd <- dbar - dhat; est <- pd; variant <- "p_D"
+    dhat <- as.numeric(d_at_mean)
+    pd <- dbar - dhat
+    est <- pd
+    variant <- "p_D"
   }
   list(estimate = est, p_d = pd, p_v = pv, dbar = dbar, d_hat = dhat,
        variant = variant, n = length(d),

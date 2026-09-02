@@ -62,7 +62,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
   }
   nd <- (n * (n - 1L)) %/% 2L
   if (nd < p) stop("fewer dyads than parameters")
-  X <- matrix(0, nd, p); yv <- numeric(nd)
+  X <- matrix(0, nd, p)
+  yv <- numeric(nd)
   d <- 0L
   for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n) {
     d <- d + 1L
@@ -74,7 +75,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
   used <- 0L
   for (k in seq_len(as.integer(iters))) {
     used <- k
-    H <- matrix(0, p, p); g <- numeric(p)
+    H <- matrix(0, p, p)
+    g <- numeric(p)
     for (dd in seq_len(nd)) {
       eta <- sum(X[dd, ] * th)
       mu <- .s03sigmoid(eta)
@@ -92,7 +94,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
     th <- th + step
     if (max(abs(step)) < as.numeric(tol)) break
   }
-  H <- matrix(0, p, p); ll <- 0
+  H <- matrix(0, p, p)
+  ll <- 0
   for (dd in seq_len(nd)) {
     eta <- sum(X[dd, ] * th)
     mu <- .s03sigmoid(eta)
@@ -103,7 +106,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
   }
   se <- numeric(p)
   for (a in seq_len(p)) {
-    e <- numeric(p); e[a] <- 1
+    e <- numeric(p)
+    e[a] <- 1
     se[a] <- sqrt(tryCatch(.s03cholsolve(H, e), error = function(err)
       stop(paste("pseudo-likelihood Hessian is singular: the dyad",
                  "regression is separated or the change statistics are",
@@ -113,7 +117,8 @@ Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
   for (q in seq_len(p)) {
     nm <- names[q]
     obs[q] <- if (nm == "edges") sum(yv)
-      else if (nm == "twostar") { deg <- rowSums(A); sum(deg * (deg - 1) / 2) }
+      else if (nm == "twostar") { deg <- rowSums(A)
+      sum(deg * (deg - 1) / 2) }
       else {
         t <- 0
         for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n)

@@ -15,7 +15,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Andrewspsi(V)
 Andrewspsi <- function(r, c = 1.339) {
-  r <- .t1_vec(r); c <- as.numeric(c)
+  r <- .t1_vec(r)
+  c <- as.numeric(c)
   if (c <= 0) stop("c must be positive")
   lim <- c * pi
   inside <- abs(r) <= lim

@@ -39,8 +39,10 @@ Sietrt <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   p <- .s03vec(initial)
   if (length(p) != n) stop("sis_epidemic: initial must have one entry per node")
   if (any(p < 0) || any(p > 1)) stop("sis_epidemic: initial probabilities must lie in [0, 1]")
-  beta <- as.numeric(beta); gamma <- as.numeric(gamma)
-  t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  beta <- as.numeric(beta)
+  gamma <- as.numeric(gamma)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (beta < 0 || gamma < 0) stop("sis_epidemic: beta and gamma must be non-negative")
   if (dt <= 0 || t_max < 0) stop("sis_epidemic: need dt > 0 and t_max >= 0")
 

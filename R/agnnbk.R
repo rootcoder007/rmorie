@@ -29,7 +29,9 @@ Resblock <- function(x, filters = 1) {
     (v - m) / sqrt(va + 1e-5)
   }
   conv1d <- function(v, kern) {
-    n <- length(v); K <- length(kern); off <- K %/% 2L
+    n <- length(v)
+    K <- length(kern)
+    off <- K %/% 2L
     out <- numeric(n)
     for (i in seq_len(n)) {
       s <- 0
@@ -45,8 +47,10 @@ Resblock <- function(x, filters = 1) {
   if (is.numeric(filters) && length(filters) == 1L) {
     kerns <- list(1, 1)
   } else {
-    kerns <- list(.s03vec(filters[[1]]),
-                  .s03vec(if (length(filters) > 1L) filters[[2]] else filters[[1]]))
+    kerns <- list(
+      .s03vec(filters[[1]]),
+      .s03vec(if (length(filters) > 1L) filters[[2]] else filters[[1]])
+    )
   }
   h <- conv1d(v, kerns[[1]])
   h <- bn(h)
@@ -54,6 +58,8 @@ Resblock <- function(x, filters = 1) {
   h2 <- conv1d(h1, kerns[[2]])
   h2 <- bn(h2)
   y <- pmax(v + h2, 0)
-  list(estimate = .s03mean(y), y = y, h1 = h1, n = length(v),
-       method = "Residual block y = relu(x + BN(conv2(relu(BN(conv1(x))))))")
+  list(
+    estimate = .s03mean(y), y = y, h1 = h1, n = length(v),
+    method = "Residual block y = relu(x + BN(conv2(relu(BN(conv1(x))))))"
+  )
 }

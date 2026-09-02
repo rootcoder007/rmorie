@@ -20,8 +20,10 @@
 #' @examples
 #' Evespot(u = 1, sigma = 0.5, xi = 0.1, VaR = 2)
 Evespot <- function(u, sigma, xi, VaR) {
-  u <- as.numeric(u); sigma <- as.numeric(sigma)
-  xi <- as.numeric(xi); VaR <- as.numeric(VaR)
+  u <- as.numeric(u)
+  sigma <- as.numeric(sigma)
+  xi <- as.numeric(xi)
+  VaR <- as.numeric(VaR)
   if (!(sigma > 0)) stop("sigma must be strictly positive")
   if (xi >= 1) stop("expected shortfall is infinite for xi >= 1")
   es <- (VaR + sigma - xi * u) / (1 - xi)

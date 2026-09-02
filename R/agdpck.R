@@ -26,15 +26,21 @@ Replaypack <- function(replay_buffer, path = NULL) {
     h
   }
   rows <- .s03mat(replay_buffer)
-  parts <- character(0); nv <- 0L
+  parts <- character(0)
+  nv <- 0L
   for (i in seq_len(nrow(rows))) {
     parts <- c(parts, paste(sprintf("%.17g", rows[i, ]), collapse = ","))
     nv <- nv + ncol(rows)
   }
   text <- paste(parts, collapse = "\n")
   written <- FALSE
-  if (!is.null(path)) { writeLines(text, path, sep = ""); written <- TRUE }
-  list(estimate = digest1(text), digest = digest1(text), n_rows = nrow(rows),
-       n_values = nv, text_len = nchar(text), written = written,
-       method = "Canonical (s, pi, z) encoding with a Rabin-Karp digest")
+  if (!is.null(path)) {
+    writeLines(text, path, sep = "")
+    written <- TRUE
+  }
+  list(
+    estimate = digest1(text), digest = digest1(text), n_rows = nrow(rows),
+    n_values = nv, text_len = nchar(text), written = written,
+    method = "Canonical (s, pi, z) encoding with a Rabin-Karp digest"
+  )
 }

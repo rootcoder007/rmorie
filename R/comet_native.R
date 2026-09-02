@@ -43,13 +43,17 @@
 #' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff}, \code{hyp_src_diff}, \code{note}.
 #' @export
 pooled_features <- function(hyp, src, ref) {
-  h <- .comet_vec(hyp); s <- .comet_vec(src); r <- .comet_vec(ref)
+  h <- .comet_vec(hyp)
+  s <- .comet_vec(src)
+  r <- .comet_vec(ref)
   if (!(length(h) == length(s) && length(s) == length(r)))
     stop(sprintf("comet: the three embeddings differ in length (%d, %d, %d)",
                  length(h), length(s), length(r)))
   d <- length(h)
-  hs <- h * s; hr <- h * r
-  ds <- abs(h - s); dr <- abs(h - r)
+  hs <- h * s
+  hr <- h * r
+  ds <- abs(h - s)
+  dr <- abs(h - r)
   list(features = c(h, r, hr, dr, hs, ds), dim = 6L * d,
        hyp_ref_diff = dr, hyp_src_diff = ds,
        note = paste("the SOURCE enters too, which is what separates a",
@@ -71,7 +75,8 @@ pooled_features <- function(hyp, src, ref) {
 #' @return A list with \code{estimate}, \code{score}, \code{method}, \code{note}.
 #' @export
 estimator_score <- function(hyp, src, ref, W, b = NULL) {
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   f <- pooled_features(hyp, src, ref)$features
   if (ncol(W) != length(f))
     stop(sprintf("comet: the head expects %d features but got %d",
@@ -95,7 +100,8 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @return A numeric value.
 #' @export
 .comet_dist <- function(a, b) {
-  x <- .comet_vec(a); y <- .comet_vec(b)
+  x <- .comet_vec(a)
+  y <- .comet_vec(b)
   if (length(x) != length(y))
     stop("comet: embeddings differ in length")
   sqrt(sum((x - y)^2))
@@ -136,16 +142,19 @@ triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
 #' @return A list with \code{tau}, \code{concordant}, \code{discordant}, \code{n_segments}.
 #' @export
 kendall_tau <- function(scores, human) {
-  a <- .comet_vec(scores); b <- .comet_vec(human)
+  a <- .comet_vec(scores)
+  b <- .comet_vec(human)
   if (length(a) != length(b))
     stop(sprintf("comet: %d scores but %d human judgements",
                  length(a), length(b)))
   n <- length(a)
   if (n < 2L) stop("comet: at least 2 segments are needed")
-  conc <- 0; disc <- 0
+  conc <- 0
+  disc <- 0
   for (i in seq_len(n - 1L)) {
     for (j in (i + 1L):n) {
-      da <- a[i] - a[j]; db <- b[i] - b[j]
+      da <- a[i] - a[j]
+      db <- b[i] - b[j]
       if (da == 0 || db == 0) next
       if ((da > 0) == (db > 0)) conc <- conc + 1L
       else disc <- disc + 1L
@@ -169,12 +178,14 @@ kendall_tau <- function(scores, human) {
 #' @return A list with \code{score}, \code{reference_used}, \code{note}.
 #' @export
 reference_free <- function(hyp, src, W, b = NULL) {
-  h <- .comet_vec(hyp); s <- .comet_vec(src)
+  h <- .comet_vec(hyp)
+  s <- .comet_vec(src)
   if (length(h) != length(s))
     stop("comet: the embeddings differ in length")
   d <- length(h)
   f <- c(h, s, h * s, abs(h - s))
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   if (ncol(W) != length(f))
     stop(sprintf("comet: the reference-free head expects %d features but got %d",
                  ncol(W), length(f)))

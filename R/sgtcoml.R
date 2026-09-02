@@ -21,9 +21,11 @@
   comm <- seq_len(n) - 1L
   kdeg <- rowSums(a)
   tot <- kdeg
-  moved <- TRUE; sweeps <- 0L
+  moved <- TRUE
+  sweeps <- 0L
   while (moved && sweeps < 100L) {
-    moved <- FALSE; sweeps <- sweeps + 1L
+    moved <- FALSE
+    sweeps <- sweeps + 1L
     for (i in seq_len(n)) {
       ci <- comm[i]
       tot[ci + 1L] <- tot[ci + 1L] - kdeg[i]
@@ -39,10 +41,12 @@
       cands <- sort(as.integer(names(links)))
       for (cc in cands) {
         g <- links[[as.character(cc)]] / m2 - tot[cc + 1L] * kdeg[i] / (m2 * m2)
-        if (g > bestgain + 1e-12) { bestgain <- g; best <- cc }
+        if (g > bestgain + 1e-12) { bestgain <- g
+        best <- cc }
       }
       tot[best + 1L] <- tot[best + 1L] + kdeg[i]
-      if (best != ci) { comm[i] <- best; moved <- TRUE }
+      if (best != ci) { comm[i] <- best
+      moved <- TRUE }
     }
   }
   list(comm = comm, sweeps = sweeps)
@@ -58,10 +62,12 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .k02relabel <- function(comm) {
-  seen <- integer(0); out <- integer(length(comm))
+  seen <- integer(0)
+  out <- integer(length(comm))
   for (i in seq_along(comm)) {
     w <- which(seen == comm[i])
-    if (length(w) == 0L) { seen <- c(seen, comm[i]); out[i] <- length(seen) - 1L }
+    if (length(w) == 0L) { seen <- c(seen, comm[i])
+    out[i] <- length(seen) - 1L }
     else out[i] <- w[1] - 1L
   }
   out
@@ -71,8 +77,10 @@
 #' @keywords internal
 #' @export
 sgtcoml <- function(A) {
-  a <- as.matrix(A); dimnames(a) <- NULL
-  n <- nrow(a); m2 <- sum(a)
+  a <- as.matrix(A)
+  dimnames(a) <- NULL
+  n <- nrow(a)
+  m2 <- sum(a)
   before <- k02mod(a, seq_len(n) - 1L)
   ph <- if (m2 > 0) .k02phase1(a, n, m2) else list(comm = seq_len(n) - 1L, sweeps = 0L)
   comm <- .k02relabel(ph$comm)

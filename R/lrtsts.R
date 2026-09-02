@@ -19,16 +19,20 @@
 #' set.seed(1)
 #' r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1, 0.5)); TRUE
 Logrank <- function(time, event, group) {
-  time <- .t4_vec(time); event <- .t4_vec(event); g <- .t4_vec(group)
+  time <- .t4_vec(time)
+  event <- .t4_vec(event)
+  g <- .t4_vec(group)
   n <- length(time)
   if (length(event) != n || length(g) != n) stop("time, event and group must be the same length")
   labels <- sort(unique(g))
   if (length(labels) != 2L) stop("Logrank compares exactly two groups")
   ord <- order(time, seq_len(n))
-  tt <- time[ord]; ee <- event[ord]
+  tt <- time[ord]
+  ee <- event[ord]
   gg <- ifelse(g[ord] == labels[1], 1L, 2L)
   o1 <- sum(ee[gg == 1L])
-  e1 <- 0; v <- 0
+  e1 <- 0
+  v <- 0
   i <- 1L
   while (i <= n) {
     j <- i

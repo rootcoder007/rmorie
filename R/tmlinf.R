@@ -23,12 +23,14 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tmleinf(V, V)
 Tmleinf <- function(psi, ic, level = 0.95, null_value = 0) {
-  ic <- .t1_vec(ic); n <- length(ic)
+  ic <- .t1_vec(ic)
+  n <- length(ic)
   if (n < 2L) stop("at least two influence-curve values are required")
   if (level <= 0 || level >= 1)
     stop("level must lie strictly between 0 and 1")
   psi <- as.numeric(psi)
-  m <- mean(ic); sd <- stats::sd(ic)
+  m <- mean(ic)
+  sd <- stats::sd(ic)
   se <- sqrt(stats::var(ic) / n)
   z <- stats::qnorm((1 + level) / 2)
   st <- if (se > 0) (psi - null_value) / se else Inf

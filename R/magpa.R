@@ -20,7 +20,8 @@
 #' magpa(c(3, 7, 12, 2, 9), c(40, 50, 60, 35, 55))$estimate
 #' @export
 magpa <- function(xi, ni, quad = 21L, level = 0.95) {
-  x <- as.numeric(xi); nn <- as.numeric(ni)
+  x <- as.numeric(xi)
+  nn <- as.numeric(ni)
   lchoose1 <- function(nv, kv) {
     tot <- 0
     if (kv >= 1) for (j in 1:kv) tot <- tot + log((nv - kv + j) / j)
@@ -37,9 +38,11 @@ magpa <- function(xi, ni, quad = 21L, level = 0.95) {
       for (q in seq_along(g$x)) {
         eta <- mu + sigma * s2 * g$x[q]
         if (eta >= 0) {
-          lp <- -log1p(exp(-eta)); lq <- -eta - log1p(exp(-eta))
+          lp <- -log1p(exp(-eta))
+          lq <- -eta - log1p(exp(-eta))
         } else {
-          lp <- eta - log1p(exp(eta)); lq <- -log1p(exp(eta))
+          lp <- eta - log1p(exp(eta))
+          lq <- -log1p(exp(eta))
         }
         acc <- acc + g$w[q] * exp(x[i] * lp + (nn[i] - x[i]) * lq)
       }

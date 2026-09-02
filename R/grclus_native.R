@@ -170,11 +170,13 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   }
   adj <- vector("list", nrow(M))
   for (i in seq_len(nrow(M))) {
-    dest <- integer(0); wts <- numeric(0)
+    dest <- integer(0)
+    wts <- numeric(0)
     for (j in seq_len(ncol(M))) {
       w <- M[i, j]
       if (i == j || w == 0) next
-      dest <- c(dest, j); wts <- c(wts, w)
+      dest <- c(dest, j)
+      wts <- c(wts, w)
     }
     adj[[i]] <- list(v = dest, w = wts)
   }
@@ -194,7 +196,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 .grclus_edge_cut <- function(adj, parts) {
   cut <- 0.0
   for (u in seq_along(adj)) {
-    v <- adj[[u]]$v; w <- adj[[u]]$w
+    v <- adj[[u]]$v
+    w <- adj[[u]]$w
     for (k in seq_along(v)) if (parts[u] != parts[[v[k]]]) cut <- cut + w[k]
   }
   cut / 2.0
@@ -281,7 +284,9 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   if (n < 2L) return(idx)
   for (i in n:2L) {
     j <- .grclus_int_in(e, 0L, i)         # 0..i-1
-    tmp <- idx[i]; idx[i] <- idx[j + 1L]; idx[j + 1L] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j + 1L]
+    idx[j + 1L] <- tmp
   }
   idx
 }
@@ -324,7 +329,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
       v <- if (length(tie) == 1L) cands[tie[1L]] else
         cands[tie[.grclus_int_in(e, 0L, length(tie)) + 1L]]
     }
-    mate[u] <- v - 1L; mate[v] <- u - 1L
+    mate[u] <- v - 1L
+    mate[v] <- u - 1L
     matched[u] <- matched[v] <- TRUE
   }
   mate
@@ -398,7 +404,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   n <- length(adj)
   g <- numeric(n)
   for (u in seq_len(n)) {
-    ext <- 0.0; ins <- 0.0
+    ext <- 0.0
+    ins <- 0.0
     src <- adj[[u]]
     for (k in seq_along(src$v)) {
       if (parts[[src$v[k]]] == parts[u]) ins <- ins + src$w[k]
@@ -428,7 +435,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
   n <- length(adj)
   if (is.null(n_starts)) n_starts <- if (greedy) 4L else 10L
   e <- .ghc_rng(seed)
-  best_parts <- NULL; best_cut <- NULL
+  best_parts <- NULL
+  best_cut <- NULL
   n_starts <- min(n_starts, n)
   starts <- rep(0L, n_starts)
   for (i in seq_len(n_starts)) starts[i] <- .grclus_int_in(e, 0L, n)
@@ -441,18 +449,21 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
       frontier[[as.character(kk)]] <- 0L
     while (weight < target && length(ls(frontier)) > 0L) {
       v <- if (greedy) {
-        best_v <- NA; best_g <- NA
+        best_v <- NA
+        best_g <- NA
         keys <- ls(frontier)
         for (kk in keys) {
           v0 <- as.integer(kk)
-          ins <- 0.0; out <- 0.0
+          ins <- 0.0
+          out <- 0.0
           src <- adj[[v0]]
           for (m in seq_along(src$v)) {
             if (parts[[src$v[m]]] == 0L) ins <- ins + src$w[m]
             else out <- out + src$w[m]
           }
           g <- ins - out
-          if (is.na(best_g) || g > best_g) { best_g <- g; best_v <- v0 }
+          if (is.na(best_g) || g > best_g) { best_g <- g
+          best_v <- v0 }
         }
         best_v
       } else {
@@ -470,7 +481,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
     }
     c <- .grclus_edge_cut(adj, parts)
     if (is.null(best_cut) || c < best_cut) {
-      best_cut <- c; best_parts <- parts
+      best_cut <- c
+      best_parts <- parts
     }
   }
   if (is.null(best_parts)) {
@@ -514,20 +526,23 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
     since <- 0L
     moved_any <- FALSE
     repeat {
-      cands <- integer(0); cands_g <- numeric(0)
+      cands <- integer(0)
+      cands_g <- numeric(0)
       for (v in seq_len(n)) {
         if (locked[v]) next
         if (boundary) {
           src <- adj[[v]]$v
           has <- FALSE
-          for (u in src) if (parts[u] != parts[v]) { has <- TRUE; break }
+          for (u in src) if (parts[u] != parts[v]) { has <- TRUE
+          break }
           if (!has) next
         }
         nw0 <- if (parts[v] == 0L) w0 - vw[v] else w0 + vw[v]
         if (!(lo <= nw0 && nw0 <= hi)) {
           if (abs(nw0 - target) >= abs(w0 - target)) next
         }
-        cands <- c(cands, v); cands_g <- c(cands_g, g[v])
+        cands <- c(cands, v)
+        cands_g <- c(cands_g, g[v])
       }
       if (length(cands) == 0L) break
       pick <- which.max(cands_g)
@@ -543,7 +558,9 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
         else g[src$v[m]] <- g[src$v[m]] + 2.0 * src$w[m]
       }
       if (cur_cut < seen_best - 1e-12) {
-        seen_best <- cur_cut; best_state <- parts; since <- 0L
+        seen_best <- cur_cut
+        best_state <- parts
+        since <- 0L
       } else {
         since <- since + 1L
         if (since >= patience) break
@@ -613,7 +630,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 .grclus_bisect <- function(adj, vw, target, matching, initial, refinement,
                            tolerance, coarsest, seed) {
   levels <- list()
-  cur_adj <- adj; cur_vw <- as.numeric(vw)
+  cur_adj <- adj
+  cur_vw <- as.numeric(vw)
   guard <- 0L
   while (length(cur_adj) > max(as.integer(coarsest), 3L) && guard < 100L) {
     guard <- guard + 1L
@@ -622,7 +640,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
     if (length(c$adj) >= length(cur_adj)) break
     levels[[length(levels) + 1L]] <- list(adj = cur_adj, vw = cur_vw,
                                           mapping = c$mapping)
-    cur_adj <- c$adj; cur_vw <- c$vw
+    cur_adj <- c$adj
+    cur_vw <- c$vw
   }
   sum0 <- sum(vw)
   scale <- if (sum0 > 0) sum(cur_vw) / sum0 else 1.0

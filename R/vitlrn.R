@@ -18,7 +18,8 @@
 #' Vitlnorm(V)
 Vitlnorm <- function(x, gamma = NULL, beta = NULL) {
   X <- if (is.matrix(x)) x else matrix(.t1_vec(x), nrow = 1L)
-  n <- nrow(X); H <- ncol(X)
+  n <- nrow(X)
+  H <- ncol(X)
   g <- if (is.null(gamma)) rep(1, H) else .t1_vec(gamma)
   b <- if (is.null(beta)) rep(0, H) else .t1_vec(beta)
   if (length(g) != H || length(b) != H) stop("gamma and beta must have length H")

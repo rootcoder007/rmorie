@@ -18,7 +18,8 @@ Ebfmi <- function(energy) {
   out <- vapply(E, function(e) {
     N <- length(e)
     if (N < 2) stop("need at least two energies per chain")
-    num <- sum(diff(e)^2); den <- sum((e - mean(e))^2)
+    num <- sum(diff(e)^2)
+    den <- sum((e - mean(e))^2)
     if (den > 0) num / den else NA_real_
   }, numeric(1))
   .t1_result(ebfmi = out, min_ebfmi = min(out), n_chains = length(E),

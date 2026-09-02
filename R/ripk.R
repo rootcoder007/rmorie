@@ -77,7 +77,10 @@ Ripk <- function(points, window, r) {
   if (n < 2L) stop("`points` needs at least 2 events")
   w <- as.numeric(window)
   if (length(w) != 4L) stop("`window` must be (xmin, xmax, ymin, ymax)")
-  x0 <- w[1]; x1 <- w[2]; y0 <- w[3]; y1 <- w[4]
+  x0 <- w[1]
+  x1 <- w[2]
+  y0 <- w[3]
+  y1 <- w[4]
   if (!(x1 > x0 && y1 > y0))
     stop("`window` must have xmax > xmin and ymax > ymin")
   rs <- as.numeric(r)
@@ -85,7 +88,8 @@ Ripk <- function(points, window, r) {
   area <- (x1 - x0) * (y1 - y0)
   lam <- n / area
 
-  px <- as.numeric(P[, 1]); py <- as.numeric(P[, 2])
+  px <- as.numeric(P[, 1])
+  py <- as.numeric(P[, 2])
   if (any(px < x0 | px > x1 | py < y0 | py > y1))
     stop("every point must lie inside `window`")
   bdist <- pmin(px - x0, x1 - px, py - y0, y1 - py)
@@ -102,8 +106,10 @@ Ripk <- function(points, window, r) {
   }
 
   nr <- length(rs)
-  kiso <- numeric(nr); kbor <- numeric(nr)
-  lv <- numeric(nr); csr <- numeric(nr)
+  kiso <- numeric(nr)
+  kbor <- numeric(nr)
+  lv <- numeric(nr)
+  csr <- numeric(nr)
   for (t in seq_len(nr)) {
     h <- rs[t]
     acc <- 0
@@ -116,7 +122,8 @@ Ripk <- function(points, window, r) {
     kiso[t] <- kh
     lv[t] <- if (kh > 0) sqrt(kh / pi) else 0
     csr[t] <- pi * h * h
-    m <- 0L; cnt <- 0
+    m <- 0L
+    cnt <- 0
     for (i in seq_len(n)) {
       if (bdist[i] > h) {
         m <- m + 1L

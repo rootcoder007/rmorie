@@ -28,7 +28,8 @@ Evangia <- function(X, k) {
   if (ncol(M) != 2L) stop("X must have exactly two columns")
   k <- as.integer(k)
   if (k < 1L || k > n) stop("k must lie between 1 and the number of rows")
-  r0 <- .s03rank(M[, 1]); r1 <- .s03rank(M[, 2])
+  r0 <- .s03rank(M[, 1])
+  r1 <- .s03rank(M[, 2])
   f0 <- (n + 1) / (n + 1 - r0)
   f1 <- (n + 1) / (n + 1 - r1)
   rad <- f0 + f1

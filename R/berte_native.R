@@ -22,8 +22,10 @@ gelu <- function(x) {
     sign_v <- sign(v)
     av <- abs(v)
     t_ <- 1 / (1 + 0.3275911 * av)
-    a1 <-  0.254829592; a2 <- -0.284496736
-    a3 <-  1.421413741; a4 <- -1.453152027
+    a1 <-  0.254829592
+    a2 <- -0.284496736
+    a3 <-  1.421413741
+    a4 <- -1.453152027
     a5 <-  1.061405429
     y <- 1 - (((((a5 * t_ + a4) * t_) + a3) * t_ + a2) * t_ + a1) * t_ * exp(-av * av)
     sign_v * y
@@ -75,7 +77,8 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 .proj <- function(row, W, b = NULL) {
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   # W is (out x in); as.numeric(W) flattened it to a vector and the
   # product was non-conformable for every real layer
   v <- as.numeric(W %*% as.numeric(row))
@@ -96,9 +99,12 @@ layer_norm <- function(x, gain = NULL, bias = NULL, eps = 1e-12) {
 #' @return The value of \code{heads}, as built in the body.
 #' @export
 attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
-  Q <- as.matrix(Q); storage.mode(Q) <- "double"
-  K <- as.matrix(K); storage.mode(K) <- "double"
-  L <- nrow(Q); d <- ncol(Q)
+  Q <- as.matrix(Q)
+  storage.mode(Q) <- "double"
+  K <- as.matrix(K)
+  storage.mode(K) <- "double"
+  L <- nrow(Q)
+  d <- ncol(Q)
   if (d %% n_heads != 0)
     stop(sprintf("berte: dimension %d is not divisible by %d heads",
                  d, n_heads))
@@ -141,9 +147,12 @@ attention_weights <- function(Q, K, n_heads, pad_mask = NULL, causal = FALSE) {
 #' @export
 multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
                                  causal = FALSE) {
-  Q <- as.matrix(Q); storage.mode(Q) <- "double"
-  V <- as.matrix(V); storage.mode(V) <- "double"
-  L <- nrow(Q); d <- ncol(Q)
+  Q <- as.matrix(Q)
+  storage.mode(Q) <- "double"
+  V <- as.matrix(V)
+  storage.mode(V) <- "double"
+  L <- nrow(Q)
+  d <- ncol(Q)
   hd <- d / n_heads
   w <- attention_weights(Q, K, n_heads, pad_mask = pad_mask, causal = causal)
   out <- matrix(0, L, d)
@@ -181,8 +190,10 @@ multi_head_attention <- function(Q, K, V, n_heads, pad_mask = NULL,
 encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
                           pad_mask = NULL, gain1 = NULL, bias1 = NULL,
                           gain2 = NULL, bias2 = NULL, pre_norm = FALSE) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
-  L <- nrow(Xm); d <- ncol(Xm)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
+  L <- nrow(Xm)
+  d <- ncol(Xm)
   if (pre_norm) {
     src <- t(apply(Xm, 1, layer_norm, gain = gain1, bias = bias1))
   } else {
@@ -223,7 +234,8 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #' @export
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
                          pre_norm = FALSE) {
-  cur <- as.matrix(X); storage.mode(cur) <- "double"
+  cur <- as.matrix(X)
+  storage.mode(cur) <- "double"
   attn <- list()
   for (b in blocks) {
     eb <- encoder_block(cur, b[[1]], b[[2]], b[[3]], b[[4]],

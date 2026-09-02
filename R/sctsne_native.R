@@ -23,7 +23,9 @@
   target <- log(perp)
   P <- matrix(0, n, n)
   for (i in seq_len(n)) {
-    lo <- 1e-20; hi <- 1e20; beta <- 1
+    lo <- 1e-20
+    hi <- 1e20
+    beta <- 1
     pr <- numeric(n)
     for (it in seq_len(max_iter)) {
       num <- exp(-D2[i, ] * beta)
@@ -101,7 +103,8 @@ morie_sctsne <- function(X, dim = 2, perplexity = 10, T = 300,
   kl0 <- qkl(Y)$kl
   for (t_ in seq_len(T)) {
     qq <- qkl(Y)
-    W <- qq$W; s <- qq$s
+    W <- qq$W
+    s <- qq$s
     G <- matrix(0, n, dim)
     for (i in seq_len(n)) {
       coef <- 4 * (P[i, ] - W[i, ] / s) * W[i, ]

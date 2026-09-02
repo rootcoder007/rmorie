@@ -23,21 +23,28 @@ Mctsq <- function(N, v, unvisited = 0) {
     rows <- N
     vz <- .s03vec(v)
     nr <- nrow(rows)
-    q <- numeric(nr); w <- numeric(nr); nn <- numeric(nr)
+    q <- numeric(nr)
+    w <- numeric(nr)
+    nn <- numeric(nr)
     for (i in seq_len(nr)) {
-      tot <- 0; wt <- 0
+      tot <- 0
+      wt <- 0
       for (j in seq_len(ncol(rows))) {
         tot <- tot + rows[i, j]
         wt <- wt + rows[i, j] * vz[j]
       }
-      nn[i] <- tot; w[i] <- wt
+      nn[i] <- tot
+      w[i] <- wt
       q[i] <- if (tot > 0) wt / tot else as.numeric(unvisited)
     }
   } else {
-    nn <- .s03vec(N); w <- .s03vec(v)
+    nn <- .s03vec(N)
+    w <- .s03vec(v)
     q <- numeric(length(nn))
     for (a in seq_along(nn)) q[a] <- if (nn[a] > 0) w[a] / nn[a] else as.numeric(unvisited)
   }
-  list(estimate = if (length(q)) q[1] else NaN, q = q, w = w, n = nn,
-       method = "AlphaZero action value Q(s,a) = W(s,a) / N(s,a)")
+  list(
+    estimate = if (length(q)) q[1] else NaN, q = q, w = w, n = nn,
+    method = "AlphaZero action value Q(s,a) = W(s,a) / N(s,a)"
+  )
 }

@@ -27,31 +27,44 @@
 #' Survlnk(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Survlnk <- function(time, event, X, link = "cloglog",
                     max_iter = 100L, tol = 1e-10) {
-  tt <- as.numeric(time); e <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  tt <- as.numeric(time)
+  e <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(tt)) Xm <- t(Xm)
-  n <- length(tt); p <- ncol(Xm)
+  n <- length(tt)
+  p <- ncol(Xm)
   if (!link %in% c("cloglog", "logit")) {
     stop("link must be 'cloglog' or 'logit'", call. = FALSE)
   }
   etimes <- sort(unique(tt[e == 1]))
   K <- length(etimes)
   if (K == 0L) stop("no events in the data", call. = FALSE)
-  rows_k <- integer(0); rows_i <- integer(0); rows_y <- numeric(0)
+  rows_k <- integer(0)
+  rows_i <- integer(0)
+  rows_y <- numeric(0)
   for (i in seq_len(n)) {
     for (k in seq_len(K)) {
       if (tt[i] >= etimes[k]) {
-        rows_k <- c(rows_k, k); rows_i <- c(rows_i, i)
+        rows_k <- c(rows_k, k)
+        rows_i <- c(rows_i, i)
         rows_y <- c(rows_y, as.numeric(tt[i] == etimes[k] && e[i] == 1))
       } else break
     }
   }
   q <- K + p
-  theta <- rep(0, q); ll <- 0; info <- matrix(0, q, q); it <- 0L
+  theta <- rep(0, q)
+  ll <- 0
+  info <- matrix(0, q, q)
+  it <- 0L
   for (it in seq_len(max_iter)) {
-    U <- rep(0, q); info <- matrix(0, q, q); ll <- 0
+    U <- rep(0, q)
+    info <- matrix(0, q, q)
+    ll <- 0
     for (r in seq_along(rows_k)) {
-      k <- rows_k[r]; i <- rows_i[r]; y <- rows_y[r]
+      k <- rows_k[r]
+      i <- rows_i[r]
+      y <- rows_y[r]
       eta <- theta[k] + sum(Xm[i, ] * theta[(K + 1):q])
       if (link == "cloglog") {
         ec <- exp(pmax(pmin(eta, 30), -30))
@@ -66,7 +79,9 @@ Survlnk <- function(time, event, X, link = "cloglog",
       ll <- ll + y * log(h) + (1 - y) * log(1 - h)
       gscal <- (y - h) / (h * (1 - h)) * dh
       wscal <- dh * dh / (h * (1 - h))
-      g <- rep(0, q); g[k] <- 1; g[(K + 1):q] <- Xm[i, ]
+      g <- rep(0, q)
+      g[k] <- 1
+      g[(K + 1):q] <- Xm[i, ]
       U <- U + gscal * g
       info <- info + wscal * tcrossprod(g)
     }
@@ -102,14 +117,17 @@ Survlnk <- function(time, event, X, link = "cloglog",
 #' @examples
 #' Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 Sscompv <- function(time, event_type, predicted_F) {
-  t <- as.numeric(time); d <- as.numeric(event_type)
+  t <- as.numeric(time)
+  d <- as.numeric(event_type)
   F <- as.numeric(predicted_F)
   n <- length(t)
   if (length(d) != n || length(F) != n) {
     stop("time, event_type and predicted_F must have equal length",
          call. = FALSE)
   }
-  conc <- 0; tied <- 0; comp <- 0L
+  conc <- 0
+  tied <- 0
+  comp <- 0L
   for (i in seq_len(n)) {
     if (d[i] != 1) next
     for (j in seq_len(n)) {

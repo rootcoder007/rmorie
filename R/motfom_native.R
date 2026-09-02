@@ -38,7 +38,8 @@ Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
   if (ncol(P) != 4L) stop("pwm must be (w, 4)", call. = FALSE)
   w <- nrow(P)
   bg <- if (is.null(background)) rep(0.25, 4) else {
-    b <- as.numeric(background); b / sum(b)
+    b <- as.numeric(background)
+    b / sum(b)
   }
   llr <- matrix(0, w, 4)
   for (j in seq_len(w)) {
@@ -81,11 +82,15 @@ Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
   code <- match(chars, c("A", "C", "G", "T"))
   n_win <- length(chars) - w + 1
   if (n_win < 1) stop("sequence shorter than motif", call. = FALSE)
-  scores <- numeric(n_win); pvals <- numeric(n_win)
+  scores <- numeric(n_win)
+  pvals <- numeric(n_win)
   for (i in seq_len(n_win)) {
     a <- code[i:(i + w - 1)]
-    if (anyNA(a)) { scores[i] <- NaN; pvals[i] <- NaN; next }
-    s_bits <- 0; s_int <- 0L
+    if (anyNA(a)) { scores[i] <- NaN
+    pvals[i] <- NaN
+    next }
+    s_bits <- 0
+    s_int <- 0L
     for (j in seq_len(w)) {
       s_bits <- s_bits + llr[j, a[j]]
       s_int <- s_int + illr[j, a[j]]

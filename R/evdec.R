@@ -24,7 +24,8 @@ Evdec <- function(x, u, r) {
   x <- .s03vec(x)
   n <- length(x)
   if (n == 0L) stop("empty input: x has no observations")
-  u <- as.numeric(u); r <- as.integer(r)
+  u <- as.numeric(u)
+  r <- as.integer(r)
   if (r < 1L) stop("r must be at least 1")
   cid <- integer(n)
   cur <- 0L

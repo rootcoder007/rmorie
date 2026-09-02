@@ -60,7 +60,8 @@ morie_hot <- function(x, window, alphabet = 3L, word_length = NULL) {
   subs <- lapply(seq_len(nsub), function(p) .mor_hot_znorm(xs[p:(p + n - 1L)]))
   if (is.null(word_length)) {
     word_length <- 1L
-    for (w in c(3L, 2L)) if (n %% w == 0L) { word_length <- w; break }
+    for (w in c(3L, 2L)) if (n %% w == 0L) { word_length <- w
+    break }
   }
   word_length <- as.integer(word_length)
   words <- vapply(seq_len(nsub), function(p)
@@ -86,7 +87,8 @@ morie_hot <- function(x, window, alphabet = 3L, word_length = NULL) {
         nnd <- -Inf
         break
       }
-      if (d < nnd) { nnd <- d; nnq <- q }
+      if (d < nnd) { nnd <- d
+      nnq <- q }
     }
     if (nnd > best_dist && nnq >= 1L) {
       best_dist <- nnd

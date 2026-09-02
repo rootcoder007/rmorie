@@ -45,7 +45,8 @@ DISTRIBUTIONS <- c("rademacher", "sparse")
 #' @export
 target_dimension <- function(n, epsilon, beta = 1.0) {
   n <- as.integer(n)
-  e <- as.numeric(epsilon); b <- as.numeric(beta)
+  e <- as.numeric(epsilon)
+  b <- as.numeric(beta)
   if (n < 2L) stop("qjlcrn: need at least two points")
   if (!(e > 0 && e < 1))
     stop(sprintf("qjlcrn: epsilon must lie in (0, 1), got %s",
@@ -115,7 +116,8 @@ projection_matrix <- function(d, k, distribution = "rademacher",
   if (!(distribution %in% DISTRIBUTIONS))
     stop(sprintf("qjlcrn: distribution must be one of %s, got %s",
                  paste(DISTRIBUTIONS, collapse = ", "), distribution))
-  d <- as.integer(d); k <- as.integer(k)
+  d <- as.integer(d)
+  k <- as.integer(k)
   if (d < 1L || k < 1L) stop("qjlcrn: dimensions must be positive")
   e <- .ghc_rng(seed)
   s <- sqrt(3)
@@ -211,7 +213,8 @@ distortion <- function(A, E) {
   ratios <- numeric(0)
   if (n >= 2L) {
     for (i in seq_len(n - 1L)) {
-      Ai <- A[[i]]; Ei <- E[[i]]
+      Ai <- A[[i]]
+      Ei <- E[[i]]
       for (j in (i + 1L):n) {
         d0 <- sum((Ai[seq_len(dA)] - A[[j]][seq_len(dA)]) ^ 2)
         d1 <- sum((Ei[seq_len(dE)] - E[[j]][seq_len(dE)]) ^ 2)

@@ -46,7 +46,9 @@
 #' @examples
 #' Dssoot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8))
 Dssoot <- function(Y, X, M, n_boot = 1000L, alpha = 0.05, seed = 42L) {
-  yv <- .s03vec(Y); xv <- .s03vec(X); mv <- .s03vec(M)
+  yv <- .s03vec(Y)
+  xv <- .s03vec(X)
+  mv <- .s03vec(M)
   n <- length(yv)
   if (n == 0L) stop("Dssoot: empty input, Y has no observations")
   if (length(xv) != n || length(mv) != n)
@@ -56,11 +58,15 @@ Dssoot <- function(Y, X, M, n_boot = 1000L, alpha = 0.05, seed = 42L) {
   if (!(alpha > 0 && alpha < 1))
     stop("Dssoot: alpha must lie strictly between 0 and 1")
   if (n < 3L) stop("Dssoot: need at least three observations")
-  LA <- 1664525; LC <- 1013904223; LM <- 4294967296
+  LA <- 1664525
+  LC <- 1013904223
+  LM <- 4294967296
   pa <- .dssoot_ols(mv, xv)
   pb <- .dssoot_ols(yv, xv, mv)
   pc <- .dssoot_ols(yv, xv)
-  a <- pa[2L]; cp <- pb[2L]; b <- pb[3L]
+  a <- pa[2L]
+  cp <- pb[2L]
+  b <- pb[3L]
   ab <- a * b
   state <- as.numeric(as.integer(seed) %% LM)
   draws <- numeric(B)

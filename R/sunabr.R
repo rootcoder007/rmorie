@@ -20,8 +20,11 @@
 #' @examples
 #' Iwdid(y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), cohort = c(1, 2, 3, 4, 5, 6, 7, 8))
 Iwdid <- function(y, unit, time, cohort, never = 0) {
-  y <- .t1_vec(y); time <- as.numeric(time); cohort <- as.numeric(cohort)
-  n <- length(y); nev <- as.numeric(never)
+  y <- .t1_vec(y)
+  time <- as.numeric(time)
+  cohort <- as.numeric(cohort)
+  n <- length(y)
+  nev <- as.numeric(never)
   cellmean <- tapply(y, paste(cohort, time, sep = "|"), mean)
   gm <- function(g, t) {
     k <- paste(g, t, sep = "|")
@@ -30,9 +33,11 @@ Iwdid <- function(y, unit, time, cohort, never = 0) {
   treated <- sort(unique(cohort[cohort != nev]))
   size <- vapply(treated, function(g) length(unique(unit[cohort == g])), numeric(1))
   evs <- sort(unique(as.numeric(outer(sort(unique(time)), treated, "-"))))
-  ev_out <- numeric(0); att_out <- numeric(0)
+  ev_out <- numeric(0)
+  att_out <- numeric(0)
   for (e in evs) {
-    num <- 0; den <- 0
+    num <- 0
+    den <- 0
     for (j in seq_along(treated)) {
       g <- treated[j]
       v <- c(gm(g, g + e), gm(g, g - 1), gm(nev, g + e), gm(nev, g - 1))
@@ -41,7 +46,8 @@ Iwdid <- function(y, unit, time, cohort, never = 0) {
         den <- den + size[j]
       }
     }
-    if (den > 0) { ev_out <- c(ev_out, e); att_out <- c(att_out, num / den) }
+    if (den > 0) { ev_out <- c(ev_out, e)
+    att_out <- c(att_out, num / den) }
   }
   post <- att_out[ev_out >= 0]
   .t1_result(event_time = ev_out, att = att_out,

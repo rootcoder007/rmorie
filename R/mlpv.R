@@ -36,7 +36,8 @@
 #' @examples
 #' Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
 Mlpv <- function(y, X, cluster) {
-  v <- .t1_vec(y); n <- length(v)
+  v <- .t1_vec(y)
+  n <- length(v)
   if (n == 0L) stop("y is empty")
   g <- as.character(unlist(cluster))
   if (length(g) != n) stop("y and cluster must have the same length")

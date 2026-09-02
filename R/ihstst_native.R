@@ -55,7 +55,8 @@ morie_ihstst <- function(hap, core, positions = NULL, min_ehh = 0.05,
     stop("degenerate EHH curve: zero integrated area")
   u <- log(ihh_a / ihh_d)
   if (!is.null(standardize)) {
-    m <- as.numeric(standardize[1]); s <- as.numeric(standardize[2])
+    m <- as.numeric(standardize[1])
+    s <- as.numeric(standardize[2])
     if (s <= 0) stop("standardize sd must be positive")
     est <- (u - m) / s
     std <- TRUE

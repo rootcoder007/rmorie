@@ -76,7 +76,8 @@ kernel_matrix <- function(X, kernel = "linear", gamma = 1.0, degree = 3,
 #' @return A numeric value.
 #' @export
 dual_objective <- function(alpha, y, K) {
-  a <- as.numeric(alpha); yy <- as.numeric(y)
+  a <- as.numeric(alpha)
+  yy <- as.numeric(y)
   n <- length(a)
   q <- 0.0
   for (i in seq_len(n))
@@ -130,7 +131,8 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
   if (i == j)
     stop("svmopt: the working set must contain two DIFFERENT indices")
   bnd <- .svmopt_bounds(i, j, a, as.numeric(y), C)
-  L <- bnd$L; Hh <- bnd$H
+  L <- bnd$L
+  Hh <- bnd$H
   if (Hh <= L + .SVMOPT_EPS)
     return(list(alpha = a, moved = 0.0, clipped = TRUE,
                 L = L, H = Hh,
@@ -164,8 +166,10 @@ solve_pair <- function(i, j, alpha, y, K, grad, C) {
 #' @return A list with \code{gap}, \code{i}, \code{j}, \code{n_up}, \code{n_low}.
 #' @export
 kkt_violation <- function(alpha, y, grad, C) {
-  a <- as.numeric(alpha); yy <- as.numeric(y)
-  up <- integer(0); low <- integer(0)
+  a <- as.numeric(alpha)
+  yy <- as.numeric(y)
+  up <- integer(0)
+  low <- integer(0)
   for (t in seq_along(a)) {
     if ((yy[t] > 0 && a[t] < C - .SVMOPT_EPS) ||
         (yy[t] < 0 && a[t] > .SVMOPT_EPS)) up <- c(up, t)
@@ -194,7 +198,8 @@ kkt_violation <- function(alpha, y, grad, C) {
 #' @return A list with \code{b}, \code{n_free}, \code{bracketed}, \code{note}.
 #' @export
 recover_bias <- function(alpha, y, grad, C) {
-  a <- as.numeric(alpha); yy <- as.numeric(y)
+  a <- as.numeric(alpha)
+  yy <- as.numeric(y)
   free <- which(a > .SVMOPT_EPS & a < C - .SVMOPT_EPS)
   if (length(free) > 0L) {
     vals <- -yy[free] * grad[free]
@@ -234,7 +239,8 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
     stop("svmopt: C must be positive")
   a <- rep(0.0, n)
   grad <- rep(-1.0, n)
-  it <- 0L; gap <- Inf
+  it <- 0L
+  gap <- Inf
   for (it in seq_len(as.integer(max_iter))) {
     v <- kkt_violation(a, yy, grad, C)
     gap <- v$gap

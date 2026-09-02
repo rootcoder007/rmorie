@@ -61,7 +61,9 @@ morie_morans_i_test <- function(x, W, randomisation = TRUE,
   n <- length(x)
   if (nrow(W) != n) stop("W must be n x n to match x")
   tt <- morie_weights_totals(W)
-  S0 <- tt$S0; S1 <- tt$S1; S2 <- tt$S2
+  S0 <- tt$S0
+  S1 <- tt$S1
+  S2 <- tt$S2
   I <- morie_morans_i(x, W)
   ei <- -1 / (n - 1)
   if (randomisation) {
@@ -107,7 +109,8 @@ morie_morans_i_test <- function(x, W, randomisation = TRUE,
 #' y <- as.numeric(solve(diag(n) - 0.3 * W) %*% (2 * X[, 1] + rnorm(n)))
 #' morie_spatial_2sls(y, X, W)
 morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
-  X <- as.matrix(X); W <- as.matrix(W)
+  X <- as.matrix(X)
+  W <- as.matrix(W)
   n <- length(y)
   if (nrow(X) != n) stop("X has ", nrow(X), " rows but y has ", n)
   if (nrow(W) != n || ncol(W) != n)
@@ -152,7 +155,8 @@ morie_spatial_2sls <- function(y, X, W, add_intercept = TRUE) {
 #' y <- as.numeric(2 * X[, 1] + u)
 #' morie_gm_error_sar(y, X, W)
 morie_gm_error_sar <- function(y, X, W, add_intercept = TRUE) {
-  X <- as.matrix(X); W <- as.matrix(W)
+  X <- as.matrix(X)
+  W <- as.matrix(W)
   n <- length(y)
   if (nrow(X) != n) stop("X has ", nrow(X), " rows but y has ", n)
   if (nrow(W) != n || ncol(W) != n)
@@ -182,9 +186,12 @@ morie_gm_error_sar <- function(y, X, W, add_intercept = TRUE) {
                          c(-0.999, 0.999), tol = .Machine$double.eps^0.5)
     lam_new <- o$minimum
     if (abs(lam_new - lam) < 1e-14 && abs(sig_new - sig) < 1e-14) {
-      lam <- lam_new; sig <- sig_new; break
+      lam <- lam_new
+      sig <- sig_new
+      break
     }
-    lam <- lam_new; sig <- sig_new
+    lam <- lam_new
+    sig <- sig_new
   }
   Xf <- X - lam * (W %*% X)
   yf <- as.numeric(y - lam * (W %*% y))

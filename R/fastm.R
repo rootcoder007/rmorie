@@ -71,7 +71,9 @@ Fastm <- function(X, h = NULL, n_starts = 500L, max_iter = 100L, n_keep = 10L) {
   if (length(cidx) == 0L) stop("fast_mcd: every elemental subset was degenerate")
   ord <- .rsosort(cdets)
   keep <- cidx[ord[seq_len(min(as.integer(n_keep), length(ord)))]]
-  best_idx <- NULL; best_det <- NULL; best_chain <- numeric(0)
+  best_idx <- NULL
+  best_det <- NULL
+  best_chain <- numeric(0)
   for (idx in keep) {
     chain <- numeric(0)
     for (q in seq_len(as.integer(max_iter))) {
@@ -85,7 +87,9 @@ Fastm <- function(X, h = NULL, n_starts = 500L, max_iter = 100L, n_keep = 10L) {
     mc <- .rsmeancov(Xm, idx)
     d <- .rscovdet(mc$S)
     chain <- c(chain, d)
-    if (is.null(best_det) || d < best_det) { best_det <- d; best_idx <- idx; best_chain <- chain }
+    if (is.null(best_det) || d < best_det) { best_det <- d
+    best_idx <- idx
+    best_chain <- chain }
   }
   mc <- .rsmeancov(Xm, best_idx)
   c0 <- .rsconsistency(hh, n, p)

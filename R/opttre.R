@@ -60,16 +60,21 @@ Opttre <- function(y, A, W, pi = NULL, max_depth = 2L, min_leaf = 1L) {
     c(sum(yv[s] / pv[s]), sum(1 / pv[s]))
   }
   best_const <- function(idx) {
-    q1 <- leaf_score(idx, 1); q0 <- leaf_score(idx, 0)
+    q1 <- leaf_score(idx, 1)
+    q0 <- leaf_score(idx, 0)
     v1 <- if (q1[2] > 0) q1[1] / q1[2] else -Inf
     v0 <- if (q0[2] > 0) q0[1] / q0[2] else -Inf
     if (v1 > v0) c(1, q1) else c(0, q0)
   }
   rule <- numeric(n)
-  root_var <- -1L; root_point <- NaN; depth_used <- 0L
+  root_var <- -1L
+  root_point <- NaN
+  depth_used <- 0L
   build <- function(idx, depth, record_root) {
     bc <- best_const(idx)
-    best_v <- NA_real_; best_j <- NA_integer_; best_thr <- NA_real_
+    best_v <- NA_real_
+    best_j <- NA_integer_
+    best_thr <- NA_real_
     if (depth < md && length(idx) >= 2L * ml) {
       for (j in seq_len(p)) {
         for (i in idx) {
@@ -77,20 +82,26 @@ Opttre <- function(y, A, W, pi = NULL, max_depth = 2L, min_leaf = 1L) {
           left <- idx[Wm[idx, j] <= thr]
           right <- idx[Wm[idx, j] > thr]
           if (length(left) < ml || length(right) < ml) next
-          bl <- best_const(left); br <- best_const(right)
+          bl <- best_const(left)
+          br <- best_const(right)
           if (bl[3] <= 0 || br[3] <= 0) next
           v <- (bl[2] + br[2]) / (bl[3] + br[3])
           if (is.na(best_v) || v > best_v) {
-            best_v <- v; best_j <- j; best_thr <- thr
+            best_v <- v
+            best_j <- j
+            best_thr <- thr
           }
         }
       }
     }
     v_leaf <- if (bc[3] > 0) bc[2] / bc[3] else -Inf
     if (!is.na(best_v) && best_v > v_leaf) {
-      thr <- best_thr; j <- best_j
-      left <- idx[Wm[idx, j] <= thr]; right <- idx[Wm[idx, j] > thr]
-      if (record_root) { root_var <<- j - 1L; root_point <<- thr }
+      thr <- best_thr
+      j <- best_j
+      left <- idx[Wm[idx, j] <= thr]
+      right <- idx[Wm[idx, j] > thr]
+      if (record_root) { root_var <<- j - 1L
+      root_point <<- thr }
       if (depth + 1L > depth_used) depth_used <<- depth + 1L
       return(build(left, depth + 1L, FALSE) + build(right, depth + 1L, FALSE))
     }

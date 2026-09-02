@@ -91,7 +91,8 @@ morie_baynav <- function(u, w, b, value, support, eps,
 #' @return A list with \code{u, adjusted, u_dot_w, u_dot_w_after, note}.
 #' @export
 enforce_invertibility <- function(u, w) {
-  uv <- as.numeric(u); wv <- as.numeric(w)
+  uv <- as.numeric(u)
+  wv <- as.numeric(w)
   if (length(uv) != length(wv))
     stop("baynav: u and w differ in length")
   uw <- sum(uv * wv)

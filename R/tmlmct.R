@@ -28,8 +28,10 @@
 #' @examples
 #' Tmlmct(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmct <- function(y, A, X) {
-  yv <- as.numeric(y); n <- length(yv)
-  Am <- as.matrix(A); Xm <- as.matrix(X)
+  yv <- as.numeric(y)
+  n <- length(yv)
+  Am <- as.matrix(A)
+  Xm <- as.matrix(X)
   if (n == 0L || nrow(Am) != n || nrow(Xm) != n)
     stop("Tmlmct: y, A and X must share n rows")
   q <- ncol(Am)
@@ -48,7 +50,8 @@ Tmlmct <- function(y, A, X) {
     }
     .s4_clip(p, 0.025, 0.975)
   }
-  g1 <- gprob(1); g0 <- gprob(0)
+  g1 <- gprob(1)
+  g0 <- gprob(0)
   des <- cbind(Am, Wd)
   qb <- .s4_ols(des, yv)$beta
   Q1 <- as.numeric(cbind(matrix(1, n, q), Wd) %*% qb)

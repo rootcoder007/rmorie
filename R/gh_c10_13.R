@@ -23,7 +23,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ptnulltst(V, V)
 Ptnulltst <- function(loglik_null, log_marginal_alt, lam = 0.5) {
-  ln <- as.numeric(loglik_null); la <- as.numeric(log_marginal_alt)
+  ln <- as.numeric(loglik_null)
+  la <- as.numeric(log_marginal_alt)
   lam <- as.numeric(lam)
   if (lam <= 0 || lam >= 1)
     stop("lam must lie strictly between 0 and 1")

@@ -22,24 +22,28 @@
 #' @export
 Hdpgmm <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 4,
                    max_iter = 200, tol = 1e-13) {
-  v <- .s03vec(y); n <- length(v)
+  v <- .s03vec(y)
+  n <- length(v)
   g <- as.character(if (!is.null(groups)) groups else rep(0, n))
   ids <- character(0)
   for (cc in g) if (!(cc %in% ids)) ids <- c(ids, cc)
-  J <- length(ids); gi <- match(g, ids)
+  J <- length(ids)
+  gi <- match(g, ids)
   K <- as.integer(truncation)
   beta <- Stickw(gamma, K)$pi
   tot <- 0
   for (x in beta) tot <- tot + x
   beta <- if (tot > 0) beta / tot else rep(1 / K, K)
-  lo <- min(v); hi <- max(v)
+  lo <- min(v)
+  hi <- max(v)
   mu <- numeric(K)
   for (t in seq_len(K)) mu[t] <- lo + (hi - lo) * (t - 1 + 0.5) / K
   sd_ <- rep(max((hi - lo) / K, 1e-6), K)
   pi_ <- matrix(rep(beta, each = J), J, K)
   ll <- -Inf
   for (it in seq_len(as.integer(max_iter))) {
-    R <- matrix(0, n, K); newll <- 0
+    R <- matrix(0, n, K)
+    newll <- 0
     for (i in seq_len(n)) {
       lp <- numeric(K)
       for (t in seq_len(K)) {
@@ -53,7 +57,8 @@ Hdpgmm <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 4,
       for (t in seq_len(K)) R[i, t] <- exp(lp[t] - m)
     }
     for (j in seq_len(J)) {
-      nj <- 0; row <- numeric(K)
+      nj <- 0
+      row <- numeric(K)
       for (i in seq_len(n)) if (gi[i] == j) {
         for (t in seq_len(K)) row[t] <- row[t] + R[i, t]
         nj <- nj + 1
@@ -61,8 +66,10 @@ Hdpgmm <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 4,
       pi_[j, ] <- (as.numeric(alpha) * beta + row) / (as.numeric(alpha) + nj)
     }
     for (t in seq_len(K)) {
-      nk <- 0; s <- 0
-      for (i in seq_len(n)) { nk <- nk + R[i, t]; s <- s + R[i, t] * v[i] }
+      nk <- 0
+      s <- 0
+      for (i in seq_len(n)) { nk <- nk + R[i, t]
+      s <- s + R[i, t] * v[i] }
       eff <- nk + as.numeric(gamma) * beta[t]
       if (nk > 1e-12) mu[t] <- s / nk
       q <- 0
@@ -70,7 +77,8 @@ Hdpgmm <- function(y, groups = NULL, gamma = 1, alpha = 1, truncation = 4,
       if (eff > 0) sd_[t] <- sqrt(q / eff)
       if (sd_[t] < 1e-8) sd_[t] <- 1e-8
     }
-    if (abs(newll - ll) < tol) { ll <- newll; break }
+    if (abs(newll - ll) < tol) { ll <- newll
+    break }
     ll <- newll
   }
   list(estimate = ll, loglik = ll, mu = mu, sigma = sd_, pi = pi_,

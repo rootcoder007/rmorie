@@ -34,11 +34,13 @@ Moeswitch <- function(y, x = NULL, W_g = NULL, experts = NULL,
   cap <- if (N) as.integer(as.numeric(capacity) * Tn / N) else 0L
   probs <- vector("list", Tn)
   for (t in seq_len(Tn)) probs[[t]] <- .s03softmax(.s03matvec(t(Wg), toks[t, ]))
-  used <- integer(N); assign <- rep(-1L, Tn)
+  used <- integer(N)
+  assign <- rep(-1L, Tn)
   for (t in seq_len(Tn)) {
     best <- 1L
     if (N > 1L) for (i in seq(2L, N)) if (probs[[t]][i] > probs[[t]][best]) best <- i
-    if (used[best] < cap) { assign[t] <- best - 1L; used[best] <- used[best] + 1L }
+    if (used[best] < cap) { assign[t] <- best - 1L
+    used[best] <- used[best] + 1L }
   }
   f <- if (Tn) used / Tn else numeric(N)
   P <- numeric(N)

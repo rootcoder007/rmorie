@@ -16,7 +16,8 @@
 #' mahsj(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$pi_lower
 #' @export
 mahsj <- function(yi, vi, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   k <- length(y)
   d <- k02dl(y, v)
   w <- 1 / (v + d$tau2)

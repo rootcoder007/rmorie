@@ -27,10 +27,12 @@
 #'   Standard published form; see \code{bdmnsl} for the availability note.
 #' @export
 Mtsmtv <- function(y, D, y_min, y_max, d = NULL) {
-  yv <- .t1_vec(y); z <- .t1_vec(D)
+  yv <- .t1_vec(y)
+  z <- .t1_vec(D)
   if (length(yv) == 0L) stop("y is empty")
   if (length(z) != length(yv)) stop("y and D must have the same length")
-  lo <- as.numeric(y_min); hi <- as.numeric(y_max)
+  lo <- as.numeric(y_min)
+  hi <- as.numeric(y_max)
   if (lo > hi) stop("y_min must not exceed y_max")
   lev <- if (is.null(d)) max(z) else as.numeric(d)
   s <- Mtsbound(yv, z, lev, lo, hi)

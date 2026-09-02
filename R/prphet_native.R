@@ -48,7 +48,8 @@
 morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
   out <- numeric(length(t))
   for (i in seq_along(t)) {
-    tv <- t[i]; a <- ifelse(tv >= cps, 1, 0)
+    tv <- t[i]
+    a <- ifelse(tv >= cps, 1, 0)
     rate <- k.rate + sum(a * deltas)
     off <- m.off + sum(a * (-cps * deltas))
     out[i] <- rate * tv + off
@@ -68,7 +69,8 @@ morie_prphet_piecewise_trend <- function(t, k.rate, m.off, deltas, cps) {
 #' @export
 morie_prphet_trend_matrix <- function(t, cps) {
   rows <- matrix(0, nrow = length(t), ncol = 2L + length(cps))
-  rows[, 1] <- t; rows[, 2] <- 1
+  rows[, 1] <- t
+  rows[, 2] <- 1
   if (length(cps) > 0L) {
     for (j in seq_along(cps)) {
       rows[, 2L + j] <- ifelse(t >= cps[j], t - cps[j], 0)
@@ -149,7 +151,9 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
   blocks <- list(tm)
   seas <- if (is.null(seasonalities)) list() else seasonalities
   for (s in seas) {
-    nm <- s[[1]]; per <- s[[2]]; ord <- s[[3]]
+    nm <- s[[1]]
+    per <- s[[2]]
+    ord <- s[[3]]
     blocks[[length(blocks) + 1L]] <- morie_prphet_fourier_terms(t, per, ord)
     for (n in seq_len(as.integer(ord))) {
       cols <- c(cols, paste0(nm, "_cos", n), paste0(nm, "_sin", n))
@@ -189,7 +193,8 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
                              changepoints = NULL, seasonalities = NULL,
                              holidays = NULL, holiday_window = c(0, 0),
                              changepoint_prior = 0.05, ridge = 1e-8) {
-  tv <- as.numeric(t); yv <- as.numeric(y)
+  tv <- as.numeric(t)
+  yv <- as.numeric(y)
   n <- length(tv)
   if (length(yv) != n)
     stop(paste0("prphet: ", n, " times but ", length(yv), " observations"))
@@ -200,7 +205,8 @@ morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8
                 tau))
   cps <- .changepoints(tv, n_changepoints, changepoint_range, changepoints)
   des <- morie_prphet_design(tv, cps, seasonalities, holidays, holiday_window)
-  X <- des$X; cols <- des$cols
+  X <- des$X
+  cols <- des$cols
   p <- length(cols)
   pen <- rep(0, p)
   for (j in seq_along(cols)) {

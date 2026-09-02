@@ -18,7 +18,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Suffstat(V)
 Suffstat <- function(x, family = "normal") {
-  x <- .t1_vec(x); n <- length(x)
+  x <- .t1_vec(x)
+  n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")
   fam <- tolower(family)
   if (fam == "bernoulli") {

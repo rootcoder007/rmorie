@@ -14,7 +14,8 @@
 #' @keywords internal
 #' @noRd
 .setT_ln <- function(row, eps = 1e-5) {
-  n <- length(row); mu <- mean(row)
+  n <- length(row)
+  mu <- mean(row)
   s <- sqrt(mean((row - mu)^2) + eps)
   (row - mu) / s
 }
@@ -34,7 +35,9 @@
 #' @keywords internal
 #' @noRd
 .setT_attend <- function(X, Y, Wq, Wk, Wv) {
-  Q <- X %*% Wq; K <- Y %*% Wk; V <- Y %*% Wv
+  Q <- X %*% Wq
+  K <- Y %*% Wk
+  V <- Y %*% Wv
   dk <- ncol(Q)
   S <- (Q %*% t(K)) / sqrt(dk)
   # softmax per row
@@ -74,7 +77,8 @@
 #' @references Lee et al. (2019), arXiv:1810.00825.
 #' @export
 morie_setT_setT <- function(Z, S, params) {
-  Za <- as.matrix(Z); Sa <- as.matrix(S)
+  Za <- as.matrix(Z)
+  Sa <- as.matrix(S)
   if (ncol(Za) != ncol(Sa))
     stop("setT: Z width ", ncol(Za), " != seed width ", ncol(Sa))
   for (name in c("Wq", "Wk", "Wv", "W1", "b1", "W2", "b2"))
@@ -82,7 +86,8 @@ morie_setT_setT <- function(Z, S, params) {
   p <- lapply(params, function(v) {
     if (is.matrix(v) || is.numeric(v)) as.matrix(v) else v
   })
-  Zl <- Za; Sl <- Sa
+  Zl <- Za
+  Sl <- Sa
   FZ <- .setT_rff(Zl, p$W1, p$b1, p$W2, p$b2)
   M <- .setT_mab(Sl, FZ, p)
   list(output = M$O, attention = M$W, k = nrow(Sl),

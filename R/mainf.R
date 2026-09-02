@@ -16,19 +16,27 @@
 #' mainf(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$cook_d
 #' @export
 mainf <- function(yi, vi) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   d0 <- k02dl(y, v)
   w <- 1 / (v + d0$tau2)
   hat <- w / sum(w)
-  rst <- numeric(k); dff <- numeric(k); ck <- numeric(k)
-  t2d <- numeric(k); qd <- numeric(k); mud <- numeric(k)
+  rst <- numeric(k)
+  dff <- numeric(k)
+  ck <- numeric(k)
+  t2d <- numeric(k)
+  qd <- numeric(k)
+  mud <- numeric(k)
   for (i in seq_len(k)) {
     d <- k02dl(y[-i], v[-i])
     q <- k02fe(y[-i], v[-i])$Q
     rst[i] <- (y[i] - d$mu) / sqrt(v[i] + d$tau2 + d$var)
     dff[i] <- (d0$mu - d$mu) / sqrt(hat[i] * (v[i] + d$tau2))
     ck[i] <- (d0$mu - d$mu)^2 / d0$var
-    t2d[i] <- d$tau2; qd[i] <- q; mud[i] <- d$mu
+    t2d[i] <- d$tau2
+    qd[i] <- q
+    mud[i] <- d$mu
   }
   list(estimate = max(ck), rstudent = rst, dffits = dff, cook_d = ck,
        hat = hat, tau2_del = t2d, Q_del = qd, estimate_del = mud, n = k,

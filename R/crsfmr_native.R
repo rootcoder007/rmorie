@@ -42,7 +42,9 @@
 #' @return A list with \code{out} and \code{weights}.
 #' @export
 morie_crsfmr_attention <- function(Q, K, V) {
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
   if (nrow(Km) != nrow(Vm))
     stop(sprintf("crsfmr: keys and values must have the same length (%d, %d)",
                  nrow(Km), nrow(Vm)))
@@ -253,7 +255,9 @@ morie_crsfmr_segment_merge <- function(Z, factor = 2L) {
 #' @return A list of named integer counts.
 #' @export
 morie_crsfmr_complexity <- function(L, D, c) {
-  Lv <- as.integer(L); Dv <- as.integer(D); cv <- as.integer(c)
+  Lv <- as.integer(L)
+  Dv <- as.integer(D)
+  cv <- as.integer(c)
   list(cross_time = Dv * Lv * Lv,
        cross_dimension_router = cv * Dv * Lv,
        cross_dimension_full = Dv * Dv * Lv,

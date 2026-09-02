@@ -23,7 +23,10 @@
 #' @export
 Bymfit <- function(y, E, A, u, v, taus = 1, tauv = 1, X = NULL,
                    beta = NULL) {
-  y <- .t1_vec(y); E <- .t1_vec(E); u <- .t1_vec(u); v <- .t1_vec(v)
+  y <- .t1_vec(y)
+  E <- .t1_vec(E)
+  u <- .t1_vec(u)
+  v <- .t1_vec(v)
   n <- length(y)
   if (length(E) != n || length(u) != n || length(v) != n)
     stop("y, E, u and v must have the same length")
@@ -31,7 +34,8 @@ Bymfit <- function(y, E, A, u, v, taus = 1, tauv = 1, X = NULL,
   if (any(y < 0)) stop("counts must be non-negative")
   Am <- .t1_mat(A)
   if (nrow(Am) != n || ncol(Am) != n) stop("A must be n by n")
-  ts <- as.numeric(taus); tv <- as.numeric(tauv)
+  ts <- as.numeric(taus)
+  tv <- as.numeric(tauv)
   if (ts <= 0 || tv <= 0) stop("precisions must be strictly positive")
   if (is.null(X)) {
     eta0 <- rep(0, n)
@@ -45,7 +49,8 @@ Bymfit <- function(y, E, A, u, v, taus = 1, tauv = 1, X = NULL,
   rr <- exp(eta0 + u + v)
   mu <- E * rr
   ll <- sum(y * log(mu) - mu - lgamma(y + 1))
-  q <- 0; npair <- 0L
+  q <- 0
+  npair <- 0L
   if (n > 1L) for (i in seq_len(n - 1L)) for (j in (i + 1L):n) {
     if (Am[i, j] != 0 || Am[j, i] != 0) {
       q <- q + (u[i] - u[j])^2

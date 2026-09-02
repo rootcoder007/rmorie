@@ -75,9 +75,13 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
   if (!length(left) || !length(right)) return(0)
   rows <- sort(c(left, right))
   times <- sort(unique(time[rows[event[rows] == 1L]]))
-  ome <- numeric(0); vv <- numeric(0)
+  ome <- numeric(0)
+  vv <- numeric(0)
   for (t in times) {
-    n1 <- 0L; n2 <- 0L; d1 <- 0L; d2 <- 0L
+    n1 <- 0L
+    n2 <- 0L
+    d1 <- 0L
+    d2 <- 0L
     for (i in left) if (time[i] >= t) {
       n1 <- n1 + 1L
       if (event[i] == 1L && time[i] == t) d1 <- d1 + 1L
@@ -86,7 +90,8 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
       n2 <- n2 + 1L
       if (event[i] == 1L && time[i] == t) d2 <- d2 + 1L
     }
-    n <- n1 + n2; d <- d1 + d2
+    n <- n1 + n2
+    d <- d1 + d2
     if (n < 2L || d == 0L) next
     e1 <- d * n1 / n
     ome <- c(ome, d1 - e1)
@@ -259,7 +264,9 @@ morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
     if (n > 1L) for (i in seq(n, 2L)) {
       j <- floor(.ghc_unif(e, 1L) * i)
       if (j > i - 1L) j <- i - 1L
-      tmp <- idx[i]; idx[i] <- idx[j + 1L]; idx[j + 1L] <- tmp
+      tmp <- idx[i]
+      idx[i] <- idx[j + 1L]
+      idx[j + 1L] <- tmp
     }
     take <- idx[seq_len(max(2L * min_leaf, n %/% 2L))]
     if (honest) {
@@ -267,7 +274,8 @@ morie_qsfrgr_forest <- function(X, time, event, n_trees = 20L,
       struct <- sort(take[seq_len(h)])
       leaf <- sort(take[(h + 1L):length(take)])
     } else {
-      struct <- sort(take); leaf <- sort(take)
+      struct <- sort(take)
+      leaf <- sort(take)
     }
     if (!length(struct) || !length(leaf)) next
     trees[[length(trees) + 1L]] <-
@@ -320,13 +328,15 @@ morie_qsfrgr_km <- function(time, event, weights, grid = NULL) {
   n <- length(time)
   ts <- sort(unique(time[event == 1L & weights > 0]))
   s <- 1
-  ct <- numeric(0); cs <- numeric(0)
+  ct <- numeric(0)
+  cs <- numeric(0)
   for (t in ts) {
     d <- .w3_csum(weights[event == 1L & time == t])
     r <- .w3_csum(weights[time >= t])
     if (r <= 0) next
     s <- s * (1 - d / r)
-    ct <- c(ct, t); cs <- c(cs, s)
+    ct <- c(ct, t)
+    cs <- c(cs, s)
   }
   out <- list(t = ct, s = cs)
   if (is.null(grid)) return(out)
@@ -386,7 +396,8 @@ morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
                          newX = NULL, grid = NULL) {
   t <- as.numeric(time)
   e <- as.integer(ifelse(as.numeric(event) != 0, 1L, 0L))
-  xs <- as.matrix(X); storage.mode(xs) <- "double"
+  xs <- as.matrix(X)
+  storage.mode(xs) <- "double"
   n <- length(t)
   if (n < 4L) stop("need at least four observations")
   if (length(e) != n || nrow(xs) != n)
@@ -396,7 +407,9 @@ morie_qsfrgr <- function(time, event, X, quantile = 0.5, n_trees = 20L,
   if (!length(trees))
     stop("no tree could be grown; the sample is too small for the leaf size")
   qx <- if (is.null(newX)) xs else {
-    m <- as.matrix(newX); storage.mode(m) <- "double"; m
+    m <- as.matrix(newX)
+    storage.mode(m) <- "double"
+    m
   }
   if (is.null(grid)) grid <- sort(unique(t))
   grid <- as.numeric(grid)

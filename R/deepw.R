@@ -79,15 +79,19 @@
     for (w in walks) {
       L <- length(w)
       for (i in seq_len(L)) {
-        lo <- max(1L, i - window); hi <- min(L, i + window)
+        lo <- max(1L, i - window)
+        hi <- min(L, i + window)
         for (j in lo:hi) {
           if (i == j) next
-          tgt <- w[i]; ctx <- w[j]
-          cs <- c(ctx); labs <- c(1)
+          tgt <- w[i]
+          ctx <- w[j]
+          cs <- c(ctx)
+          labs <- c(1)
           if (neg > 0L) for (q in seq_len(neg)) {
             k <- as.integer(.ghc_unif(e, 1L) * n) + 1L
             if (k > n) k <- n
-            cs <- c(cs, k); labs <- c(labs, 0)
+            cs <- c(cs, k)
+            labs <- c(labs, 0)
           }
           for (q in seq_along(cs)) {
             cc <- cs[q]
@@ -138,8 +142,11 @@
 Deepw <- function(G, walk_len = 10, dim = 8, n_walks = 4, window = 3,
                   epochs = 1, lr = 0.05, neg = 2, seed = 42) {
   g <- .dw_adj(G)
-  n <- g$n; nb <- g$nb; A <- g$A
-  walk_len <- as.integer(walk_len); dim <- as.integer(dim)
+  n <- g$n
+  nb <- g$nb
+  A <- g$A
+  walk_len <- as.integer(walk_len)
+  dim <- as.integer(dim)
   if (walk_len < 2L) stop("walk_len must be at least 2")
   if (dim < 1L) stop("dim must be at least 1")
   if (as.integer(n_walks) < 1L) stop("n_walks must be at least 1")
@@ -150,9 +157,11 @@ Deepw <- function(G, walk_len = 10, dim = 8, n_walks = 4, window = 3,
   sg <- .dw_skipgram(walks, n, dim, as.integer(window), as.integer(epochs),
                      as.numeric(lr), as.integer(neg), e)
   W <- sg$W
-  tot <- 0; cnt <- 0L
+  tot <- 0
+  cnt <- 0L
   for (i in seq_len(n)) for (j in nb[[i]]) {
-    a <- sqrt(sum(W[i, ] * W[i, ])); b <- sqrt(sum(W[j, ] * W[j, ]))
+    a <- sqrt(sum(W[i, ] * W[i, ]))
+    b <- sqrt(sum(W[j, ] * W[j, ]))
     if (a > 0 && b > 0) {
       s <- 0
       for (d in seq_len(dim)) s <- s + W[i, d] * W[j, d]

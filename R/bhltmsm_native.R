@@ -50,7 +50,8 @@ cumulative_episodes <- function(histories, states = .STATES) {
   if (length(x) == 0) return(NA_real_)
   if (length(x) == 1) return(x)
   h <- (length(x) - 1) * q
-  lo <- floor(h); hi <- ceiling(h)
+  lo <- floor(h)
+  hi <- ceiling(h)
   if (lo == hi) return(x[lo + 1L])
   x[lo + 1L] + (h - lo) * (x[hi + 1L] - x[lo + 1L])
 }
@@ -144,10 +145,12 @@ weight_diagnostics <- function(weights) {
 #' @return A numeric value.
 #' @export
 .corr_r <- function(x, y) {
-  x <- as.numeric(x); y <- as.numeric(y)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
   n <- length(x)
   if (length(y) != n) stop("bhltmsm: length mismatch in corr")
-  mx <- mean(x); my <- mean(y)
+  mx <- mean(x)
+  my <- mean(y)
   num <- sum((x - mx) * (y - my))
   den <- sqrt(sum((x - mx)^2) * sum((y - my)^2))
   if (den == 0) return(0)
@@ -167,8 +170,10 @@ weight_diagnostics <- function(weights) {
 #' @export
 confounding_check <- function(covariate_history, treatment_history,
                               outcome = NULL) {
-  L <- as.matrix(covariate_history); storage.mode(L) <- "double"
-  A <- as.matrix(treatment_history); storage.mode(A) <- "double"
+  L <- as.matrix(covariate_history)
+  storage.mode(L) <- "double"
+  A <- as.matrix(treatment_history)
+  storage.mode(A) <- "double"
   if (nrow(L) != nrow(A))
     stop(sprintf("bhltmsm: %d covariate histories but %d treatment histories",
                  nrow(L), nrow(A)))
@@ -202,8 +207,10 @@ confounding_check <- function(covariate_history, treatment_history,
 #' @return A matrix, from \code{solve}.
 #' @export
 .wls_r <- function(X, y, w) {
-  X <- as.matrix(X); storage.mode(X) <- "double"
-  y <- as.numeric(y); w <- as.numeric(w)
+  X <- as.matrix(X)
+  storage.mode(X) <- "double"
+  y <- as.numeric(y)
+  w <- as.numeric(w)
   X1 <- cbind(1, X)
   storage.mode(X1) <- "double"
   WX <- X1 * w
@@ -226,7 +233,8 @@ confounding_check <- function(covariate_history, treatment_history,
 #' @export
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   y <- as.numeric(outcome)
-  X <- as.matrix(cumulative); storage.mode(X) <- "double"
+  X <- as.matrix(cumulative)
+  storage.mode(X) <- "double"
   n <- length(y)
   if (nrow(X) != n)
     stop(sprintf("bhltmsm: %d outcomes but %d covariate rows", n, nrow(X)))

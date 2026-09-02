@@ -24,9 +24,13 @@
 #'            c(1, 1, 0, 0, 1, 0))$ey11
 #' @export
 Tmle2stage <- function(y, D1, D2, X1 = NULL, X2 = NULL, alpha = 0.05) {
-  yv <- .s03vec(y); d1 <- .s03vec(D1); d2 <- .s03vec(D2); n <- length(yv)
+  yv <- .s03vec(y)
+  d1 <- .s03vec(D1)
+  d2 <- .s03vec(D2)
+  n <- length(yv)
   regime <- function(a1, a2) {
-    Z1 <- .s03design(X1, n); Z2 <- .s03design(X2, n)
+    Z1 <- .s03design(X1, n)
+    Z2 <- .s03design(X2, n)
     H2 <- cbind(Z2, d1)
     g2 <- vapply(.s03matvec(H2, .s03logit(H2, d2, 60L)), .s03sigmoid, 0)
     g1 <- vapply(.s03matvec(Z1, .s03logit(Z1, d1, 60L)), .s03sigmoid, 0)
@@ -62,11 +66,14 @@ Tmle2stage <- function(y, D1, D2, X1 = NULL, X2 = NULL, alpha = 0.05) {
     }
     list(m = m, ic = ic)
   }
-  r11 <- regime(1, 1); r10 <- regime(1, 0)
-  r01 <- regime(0, 1); r00 <- regime(0, 0)
+  r11 <- regime(1, 1)
+  r10 <- regime(1, 0)
+  r01 <- regime(0, 1)
+  r00 <- regime(0, 0)
   est <- r11$m - r00$m
   v <- 0
-  for (i in seq_len(n)) { dd <- r11$ic[i] - r00$ic[i]; v <- v + dd * dd }
+  for (i in seq_len(n)) { dd <- r11$ic[i] - r00$ic[i]
+  v <- v + dd * dd }
   se <- if (n) sqrt(v / (n * n)) else NaN
   z <- qnorm(1 - as.numeric(alpha) / 2)
   list(estimate = est, se = se, ci_lo = est - z * se, ci_hi = est + z * se,

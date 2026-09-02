@@ -152,7 +152,9 @@ morie_repcn <- function(pb, f, n0 = 68, iters = 3L) {
 #' @examples
 #' morie_urnpost(nb = 5L, ntot = 5L)
 morie_urnpost <- function(nb, ntot, nurns = 10L) {
-  nb <- as.integer(nb); ntot <- as.integer(ntot); nurns <- as.integer(nurns)
+  nb <- as.integer(nb)
+  ntot <- as.integer(ntot)
+  nurns <- as.integer(nurns)
   if (nurns < 1L || ntot < 0L || nb < 0L || nb > ntot) {
     stop("need 0 <= nb <= ntot and nurns >= 1.", call. = FALSE)
   }
@@ -190,7 +192,9 @@ morie_urnpred <- function(nb, ntot, nurns = 10L) {
 #' @examples
 #' morie_bcoinlik(pa = 0.3, fa = 3, fb = 7)
 morie_bcoinlik <- function(pa, fa, fb) {
-  pa <- as.numeric(pa); fa <- as.integer(fa); fb <- as.integer(fb)
+  pa <- as.numeric(pa)
+  fa <- as.integer(fa)
+  fb <- as.integer(fb)
   if (pa < 0 || pa > 1 || fa < 0L || fb < 0L) {
     stop("need pa in [0, 1] and non-negative counts.", call. = FALSE)
   }
@@ -220,7 +224,8 @@ morie_bcoinpri <- function(pa) {
 #' @examples
 #' morie_sucrule(fa = 5L, fb = 5L)
 morie_sucrule <- function(fa, fb) {
-  fa <- as.integer(fa); fb <- as.integer(fb)
+  fa <- as.integer(fa)
+  fb <- as.integer(fb)
   if (fa < 0L || fb < 0L) stop("counts must be non-negative.", call. = FALSE)
   p <- (fa + 1) / (fa + fb + 2)
   list(p = p, pnot = 1 - p,
@@ -236,7 +241,8 @@ morie_sucrule <- function(fa, fb) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_evidmix(V, V)
 morie_evidmix <- function(evidences, priors) {
-  ev <- as.numeric(evidences); pr <- as.numeric(priors)
+  ev <- as.numeric(evidences)
+  pr <- as.numeric(priors)
   if (length(ev) != length(pr) || length(ev) == 0L) {
     stop("evidences and priors must be non-empty and equal length.", call. = FALSE)
   }
@@ -254,7 +260,8 @@ morie_evidmix <- function(evidences, priors) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_postodds(V, V)
 morie_postodds <- function(lik1, lik0, prior1 = 0.5, prior0 = 0.5) {
-  lik1 <- as.numeric(lik1); lik0 <- as.numeric(lik0)
+  lik1 <- as.numeric(lik1)
+  lik0 <- as.numeric(lik0)
   odds <- (lik1 * as.numeric(prior1)) / (lik0 * as.numeric(prior0))
   list(odds = odds, logodds = log(odds), p1 = odds / (1 + odds),
        bayesfactor = lik1 / lik0)
@@ -268,7 +275,8 @@ morie_postodds <- function(lik1, lik0, prior1 = 0.5, prior0 = 0.5) {
 #' @examples
 #' morie_bcoinbf(fa = 5L, fb = 5L)
 morie_bcoinbf <- function(fa, fb, p0 = 1 / 6) {
-  fa <- as.integer(fa); fb <- as.integer(fb)
+  fa <- as.integer(fa)
+  fb <- as.integer(fb)
   if (fa < 0L || fb < 0L) stop("counts must be non-negative.", call. = FALSE)
   p0 <- as.numeric(p0)
   lge1 <- lgamma(fa + 1) + lgamma(fb + 1) - lgamma(fa + fb + 2)
@@ -286,7 +294,8 @@ morie_bcoinbf <- function(fa, fb, p0 = 1 / 6) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_lrprod(V, V)
 morie_lrprod <- function(num, den) {
-  num <- as.numeric(num); den <- as.numeric(den)
+  num <- as.numeric(num)
+  den <- as.numeric(den)
   if (length(num) != length(den) || length(num) == 0L) {
     stop("num and den must be non-empty and equal length.", call. = FALSE)
   }
@@ -308,7 +317,8 @@ morie_lrprod <- function(num, den) {
 #' @examples
 #' morie_typset(p = 0.5, n = 5L, h = 0.5, beta = 0.5)
 morie_typset <- function(p, n, h, beta) {
-  p <- as.numeric(p); n <- as.integer(n)
+  p <- as.numeric(p)
+  n <- as.integer(n)
   if (!(p > 0 && p <= 1) || n < 1L) {
     stop("need 0 < p <= 1 and n >= 1.", call. = FALSE)
   }
@@ -330,7 +340,9 @@ morie_typset <- function(p, n, h, beta) {
 #' @examples
 #' morie_gchpost(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = 5L, s2 = 5L)
 morie_gchpost <- function(y, v, s2) {
-  y <- as.numeric(y); v <- as.numeric(v); s2 <- as.numeric(s2)
+  y <- as.numeric(y)
+  v <- as.numeric(v)
+  s2 <- as.numeric(s2)
   if (v <= 0 || s2 <= 0) stop("v and s2 must be positive.", call. = FALSE)
   vr <- 1 / (1 / v + 1 / s2)
   list(mean = v / (v + s2) * y, var = vr, sd = sqrt(vr),
@@ -363,7 +375,8 @@ morie_sexbeta <- function(gamma) {
 #' @examples
 #' morie_sexdfdt(f = 0.6, g = 1000)
 morie_sexdfdt <- function(f, g, eta = NULL) {
-  f <- as.numeric(f); g <- as.numeric(g)
+  f <- as.numeric(f)
+  g <- as.numeric(g)
   if (f < 0 || f > 1 || g <= 0) stop("need f in [0, 1] and G > 0.", call. = FALSE)
   eta <- if (is.null(eta)) .morie_mk_eta else as.numeric(eta)
   list(dfbardt = eta * sqrt(f * (1 - f) * g), eta = eta, g = g)
@@ -385,7 +398,9 @@ morie_sexdfdt <- function(f, g, eta = NULL) {
 #' @examples
 #' morie_sexfsol(t = 10, g = 1000, f0 = 0.5)
 morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
-  t <- as.numeric(t); g <- as.numeric(g); f0 <- as.numeric(f0)
+  t <- as.numeric(t)
+  g <- as.numeric(g)
+  f0 <- as.numeric(f0)
   if (g <= 0 || f0 < 0 || f0 > 1) stop("need G > 0 and f0 in [0, 1].", call. = FALSE)
   eta <- if (is.null(eta)) .morie_mk_eta else as.numeric(eta)
   cbook <- asin(2 * f0 - 1)
@@ -407,7 +422,9 @@ morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
 #' @examples
 #' morie_gllsuff(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 morie_gllsuff <- function(xbar, s, n, mu, sigma) {
-  n <- as.integer(n); sigma <- as.numeric(sigma); s <- as.numeric(s)
+  n <- as.integer(n)
+  sigma <- as.numeric(sigma)
+  s <- as.numeric(s)
   if (n < 1L || sigma <= 0) stop("need n >= 1 and sigma > 0.", call. = FALSE)
   ll <- -n * log(sqrt(2 * pi) * sigma) -
     (n * (as.numeric(mu) - as.numeric(xbar))^2 + s) / (2 * sigma^2)
@@ -423,7 +440,8 @@ morie_gllsuff <- function(xbar, s, n, mu, sigma) {
 #' @examples
 #' morie_mupostsg(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
 morie_mupostsg <- function(xbar, n, sigma) {
-  n <- as.integer(n); sigma <- as.numeric(sigma)
+  n <- as.integer(n)
+  sigma <- as.numeric(sigma)
   if (n < 1L || sigma <= 0) stop("need n >= 1 and sigma > 0.", call. = FALSE)
   v <- sigma^2 / n
   list(mean = as.numeric(xbar), var = v, se = sqrt(v), n = n)
@@ -439,7 +457,9 @@ morie_mupostsg <- function(xbar, n, sigma) {
 #' @examples
 #' morie_sigevid(s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
 morie_sigevid <- function(s, n, sigma, sigmamu = 1) {
-  n <- as.integer(n); sigma <- as.numeric(sigma); sigmamu <- as.numeric(sigmamu)
+  n <- as.integer(n)
+  sigma <- as.numeric(sigma)
+  sigmamu <- as.numeric(sigmamu)
   if (n < 1L || sigma <= 0 || sigmamu <= 0) {
     stop("need n >= 1, sigma > 0, sigmamu > 0.", call. = FALSE)
   }
@@ -521,7 +541,9 @@ morie_msglen <- function(p = NULL, length = NULL) {
 #' @examples
 #' morie_mdlpost(ph = 0.25, pdh = 0.05, deltad = 0.01)
 morie_mdlpost <- function(ph, pdh, deltad = 1) {
-  ph <- as.numeric(ph); pdh <- as.numeric(pdh); deltad <- as.numeric(deltad)
+  ph <- as.numeric(ph)
+  pdh <- as.numeric(pdh)
+  deltad <- as.numeric(deltad)
   if (!(ph > 0 && ph <= 1) || pdh <= 0 || deltad <= 0) {
     stop("need 0 < ph <= 1 and pdh, deltad > 0.", call. = FALSE)
   }
@@ -546,12 +568,14 @@ morie_mdlpost <- function(ph, pdh, deltad = 1) {
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' morie_linevid(V, V)
 morie_linevid <- function(x, t, sigma = 1, slope = TRUE, priorsd = 1) {
-  x <- as.numeric(x); t <- as.numeric(t)
+  x <- as.numeric(x)
+  t <- as.numeric(t)
   n <- length(x)
   if (length(t) != n || n < 1L) {
     stop("x and t must be non-empty and the same length.", call. = FALSE)
   }
-  sigma <- as.numeric(sigma); priorsd <- as.numeric(priorsd)
+  sigma <- as.numeric(sigma)
+  priorsd <- as.numeric(priorsd)
   if (sigma <= 0 || priorsd <= 0) {
     stop("sigma and priorsd must be positive.", call. = FALSE)
   }
@@ -574,7 +598,8 @@ morie_linevid <- function(x, t, sigma = 1, slope = TRUE, priorsd = 1) {
 #' @examples
 #' morie_rminsamp(n = 5L, h = 0.5)
 morie_rminsamp <- function(n, h) {
-  n <- as.numeric(n); h <- as.numeric(h)
+  n <- as.numeric(n)
+  h <- as.numeric(h)
   if (n <= 0 || h < 0 || h > n) stop("need 0 < n and 0 <= h <= n.", call. = FALSE)
   log2r <- n - h
   list(log2rmin = log2r, log10rmin = log2r * log(2) / log(10),

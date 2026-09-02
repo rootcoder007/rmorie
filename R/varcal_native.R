@@ -116,7 +116,8 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @return The value of \code{lapply}.
 #' @export
 .varcal_norm_reads <- function(reads) {
-  lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq); r })
+  lapply(reads, function(r) { r$seq <- .varcal_chars(r$seq)
+  r })
 }
 
 #' varcal_pileup_column

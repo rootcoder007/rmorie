@@ -144,7 +144,11 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
                  method))
   }
   chk <- .trclrn_check(Y, A, X, propensity, min_propensity)
-  y <- chk$y; a <- chk$a; Xm <- chk$Xm; p <- chk$p; n <- chk$n
+  y <- chk$y
+  a <- chk$a
+  Xm <- chk$Xm
+  p <- chk$p
+  n <- chk$n
   tot <- 0.0
   for (i in seq_len(n)) {
     xi <- Xm[i, , drop = FALSE]
@@ -235,7 +239,11 @@ trclrn_fit_tree <- function(Y, A, X, propensity = NULL, method = "ipw",
                 "outcome_model(x, a) -> E[Y | x, a]"))
   }
   chk <- .trclrn_check(Y, A, X, propensity, min_propensity)
-  y <- chk$y; a <- chk$a; Xm <- chk$Xm; p <- chk$p; n <- chk$n
+  y <- chk$y
+  a <- chk$a
+  Xm <- chk$Xm
+  p <- chk$p
+  n <- chk$n
   arms <- chk$arms
   if (as.integer(min_leaf) < 1L) {
     stop("trclrn: min_leaf must be at least 1")

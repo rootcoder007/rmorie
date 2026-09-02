@@ -39,7 +39,8 @@
 #' @return The value of \code{[}.
 #' @export
 draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
-  m <- as.integer(m); d <- as.integer(d)
+  m <- as.integer(m)
+  d <- as.integer(d)
   if (m < 1L || d < 1L)
     stop(sprintf("perfat: need m >= 1 and d >= 1, got %d and %d", m, d))
   set.seed(as.integer(seed))
@@ -142,8 +143,12 @@ kernel_estimate <- function(x, y, omegas, kind = "positive") {
 #' @return The value of \code{out}, as built in the body.
 #' @export
 softmax_attention <- function(Q, K, V, causal = FALSE) {
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
-  L <- nrow(Qm); d <- ncol(Qm); dv <- ncol(Vm)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
+  L <- nrow(Qm)
+  d <- ncol(Qm)
+  dv <- ncol(Vm)
   out <- matrix(0, nrow = L, ncol = dv)
   for (i in seq_len(L)) {
     lim <- if (isTRUE(causal)) i else L
@@ -174,8 +179,12 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
                             kind = "positive", orthogonal = TRUE,
                             causal = FALSE) {
-  Qm <- as.matrix(Q); Km <- as.matrix(K); Vm <- as.matrix(V)
-  L <- nrow(Qm); d <- ncol(Qm); dv <- ncol(Vm)
+  Qm <- as.matrix(Q)
+  Km <- as.matrix(K)
+  Vm <- as.matrix(V)
+  L <- nrow(Qm)
+  d <- ncol(Qm)
+  dv <- ncol(Vm)
   if (nrow(Km) != nrow(Vm))
     stop(sprintf("perfat: %d keys but %d values", nrow(Km), nrow(Vm)))
   if (nrow(Km) != L && !isTRUE(causal))

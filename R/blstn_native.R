@@ -20,7 +20,8 @@
 #' @export
 morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
                             matrix = NULL, alphabet = "ACGT") {
-  q <- as.character(query); s <- as.character(subject)
+  q <- as.character(query)
+  s <- as.character(subject)
   if (is.null(matrix)) {
     sc <- function(a, b) if (a == b) match else mismatch
   } else {
@@ -74,7 +75,8 @@ morie_msp_exact <- function(query, subject, match = 5, mismatch = -4,
 morie_word_hits <- function(query, subject, w, mode = "exact",
                             threshold = NULL, match = 5, mismatch = -4,
                             matrix = NULL, alphabet = "ACGT") {
-  q <- as.character(query); s <- as.character(subject)
+  q <- as.character(query)
+  s <- as.character(subject)
   w <- as.integer(w)
   if (w < 1L) stop("blstn: w must be >= 1")
   if (nchar(q) < w || nchar(s) < w) return(list())
@@ -138,13 +140,15 @@ morie_word_hits <- function(query, subject, w, mode = "exact",
 extend_one <- function(qchars, schars, qi, si, w, sc, X) {
   score <- 0
   for (t in seq_len(w)) score <- score + sc(qchars[qi + t], schars[si + t])
-  run <- score; cur <- score
+  run <- score
+  cur <- score
   best_right <- 0L
   t <- 0L
   while (qi + w + t < length(qchars) && si + w + t < length(schars)) {
     cur <- cur + sc(qchars[qi + w + t + 1L], schars[si + w + t + 1L])
     t <- t + 1L
-    if (cur > run) { run <- cur; best_right <- t }
+    if (cur > run) { run <- cur
+    best_right <- t }
     else if (run - cur > X) break
   }
   cur <- run
@@ -152,7 +156,8 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
   t <- 1L
   while (qi - t >= 0 && si - t >= 0) {
     cur <- cur + sc(qchars[qi - t + 1L], schars[si - t + 1L])
-    if (cur > run) { run <- cur; best_left <- t }
+    if (cur > run) { run <- cur
+    best_left <- t }
     else if (run - cur > X) break
     t <- t + 1L
   }
@@ -214,7 +219,8 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
   }
   cutoff <- as.numeric(cutoff)
 
-  hsps <- list(); n_hits <- 0L
+  hsps <- list()
+  n_hits <- 0L
   for (si in seq_along(subs)) {
     schars <- schars_all[[si]]
     s <- subs[[si]]
@@ -223,7 +229,8 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
     n_hits <- n_hits + length(hits)
     seen <- list()
     for (h in hits) {
-      qi <- h[1] - 1L; sj <- h[2] - 1L
+      qi <- h[1] - 1L
+      sj <- h[2] - 1L
       ext <- extend_one(qchars, schars, qi, sj, w, sc, X)
       key <- paste(si, qi - sj, ext$qs, ext$length, sep = "|")
       if (!is.null(seen[[key]]) || ext$score < cutoff) next
@@ -251,7 +258,8 @@ morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
           g$qstart - g$sstart == d &&
           g$qstart <= h$qstart &&
           h$qstart + h$length <= g$qstart + g$length) {
-        covered <- TRUE; break
+        covered <- TRUE
+        break
       }
     }
     if (!covered) kept[[length(kept) + 1L]] <- h
@@ -336,7 +344,8 @@ morie_blast_nucleotide <- morie_blstn
 #' @return The value of \code{n}, as built in the body.
 #' @export
 lattice_check <- function(x) {
-  v <- as.numeric(x); n <- as.integer(round(v))
+  v <- as.numeric(x)
+  n <- as.integer(round(v))
   if (abs(v - n) > 1e-9)
     stop("blstn: scores must lie on the integer lattice (got ", x,
          "); multiply the whole scheme by a common factor first")
@@ -432,7 +441,9 @@ gcd_span <- function(scores) {
   g <- 0
   for (s in scores) {
     a <- abs(as.integer(s))
-    while (a) { tmp <- g %% a; g <- a; a <- tmp }
+    while (a) { tmp <- g %% a
+    g <- a
+    a <- tmp }
   }
   if (g > 0) g else 1
 }
@@ -485,7 +496,8 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
   series <- 0
   terms_used <- 0
   for (k in seq_len(as.integer(max_terms))) {
-    e_neg <- 0; p_ge0 <- 0
+    e_neg <- 0
+    p_ge0 <- 0
     for (nm in names(conv)) {
       s <- as.integer(nm)
       v <- conv[[nm]]
@@ -503,7 +515,8 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
     }
     conv <- list()
     for (nm in names(nxt)) {
-      v <- nxt[[nm]]; s <- as.integer(nm)
+      v <- nxt[[nm]]
+      s <- as.integer(nm)
       if (v * exp(lam * min(s, 0)) > 1e-300 && v > 1e-300) conv[[nm]] <- v
     }
   }
@@ -534,7 +547,8 @@ morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
 #' @return A numeric value.
 #' @export
 morie_blast_pvalue <- function(score, m, n, lam, K, c = 1L) {
-  lam <- as.numeric(lam); K <- as.numeric(K)
+  lam <- as.numeric(lam)
+  K <- as.numeric(K)
   if (lam <= 0 || K <= 0) stop("blstn: lam and K must be positive")
   c <- as.integer(c)
   if (c < 1L) stop("blstn: c must be >= 1")
@@ -576,7 +590,8 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
   if (tot <= 0) stop("blstn: letter_freqs must be positive")
   freqs <- freqs / tot
   cum <- cumsum(freqs)
-  state <- as.integer(seed); if (state == 0) state <- 1
+  state <- as.integer(seed)
+  if (state == 0) state <- 1
   rnd <- function() {
     state <<- .ghc_lcg31(state)
     state / (1L * 2^31)
@@ -585,7 +600,8 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
   draw <- function(length) {
     out <- character(length)
     for (i in seq_len(length)) {
-      u <- rnd(); k <- 1L
+      u <- rnd()
+      k <- 1L
       while (k < length(cum) && u > cum[k]) k <- k + 1L
       out[i] <- achars[k]
     }
@@ -593,14 +609,16 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
   }
   scores <- numeric(n_sim)
   for (i in seq_len(n_sim)) {
-    a <- draw(as.integer(m)); b <- draw(as.integer(n))
+    a <- draw(as.integer(m))
+    b <- draw(as.integer(n))
     scores[i] <- morie_msp_exact(a, b, match, mismatch, matrix, alphabet)$score
   }
   scores <- sort(scores)
   N <- length(scores)
   lo <- max(1L, as.integer(quantiles[1] * N))
   hi <- min(N - 1L, as.integer(quantiles[2] * N))
-  xs <- numeric(); ys <- numeric()
+  xs <- numeric()
+  ys <- numeric()
   for (r in lo:hi) {
     F <- r / (N + 1)
     if (F > 0 && F < 1) {
@@ -609,11 +627,13 @@ morie_estimate_gumbel <- function(m, n, letter_freqs, match = 5,
     }
   }
   if (length(xs) < 2) stop("blstn: too few distinct simulated scores to fit; raise n_sim")
-  mx <- mean(xs); my <- mean(ys)
+  mx <- mean(xs)
+  my <- mean(ys)
   sxy <- sum((xs - mx) * (ys - my))
   sxx <- sum((xs - mx)^2)
   if (sxx <= 0) stop("blstn: simulated scores are constant; raise n_sim")
-  slope <- sxy / sxx; intercept <- my - slope * mx
+  slope <- sxy / sxx
+  intercept <- my - slope * mx
   lam <- -slope
   if (lam <= 0) stop("blstn: the fitted lambda is not positive")
   list(lam = lam, K = exp(intercept) / (as.numeric(m) * as.numeric(n)),

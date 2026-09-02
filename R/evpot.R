@@ -87,19 +87,22 @@ Evpot <- function(x, u) {
   lo <- -1 / ymax + 1e-10
   hi <- 4 / ybar
   grid <- 4000L
-  gbest <- -Inf; tbest <- NA_real_
+  gbest <- -Inf
+  tbest <- NA_real_
   for (i in 0:grid) {
     t <- lo + (hi - lo) * i / grid
     if (abs(t) < 1e-12) next
     pr <- .gpd_profile(y, t)
     if (is.null(pr)) next
     if (pr$g > gbest || (pr$g == gbest && !is.na(tbest) && t > tbest)) {
-      gbest <- pr$g; tbest <- t
+      gbest <- pr$g
+      tbest <- t
     }
   }
   if (!is.na(tbest)) {
     step <- (hi - lo) / grid
-    a <- tbest - step; b <- tbest + step
+    a <- tbest - step
+    b <- tbest + step
     gr <- 0.5 * (sqrt(5) - 1)
     for (it in seq_len(200)) {
       cc <- b - gr * (b - a)

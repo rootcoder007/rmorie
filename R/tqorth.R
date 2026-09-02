@@ -17,7 +17,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tqorth(V)
 Tqorth <- function(S_mat) {
-  Sm <- as.matrix(S_mat); m <- nrow(Sm); d <- ncol(Sm)
+  Sm <- as.matrix(S_mat)
+  m <- nrow(Sm)
+  d <- ncol(Sm)
   Q <- .s4_qr_mgs(t(Sm))$Q
   So <- t(Q)
   err <- max(abs(tcrossprod(So) - diag(1, m)))

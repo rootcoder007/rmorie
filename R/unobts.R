@@ -97,7 +97,9 @@ Unobts <- function(y, components = "level", period = 4, ratio_grid = NULL,
     for (jj in seq_len(ns_slot)) qv[slots[jj]] <- grid[ix[jj] + 1L]
     a <- numeric(d)
     P <- diag(kappa, d)
-    lv <- numeric(n); lf <- numeric(n); st <- matrix(0, n, d)
+    lv <- numeric(n)
+    lf <- numeric(n)
+    st <- matrix(0, n, d)
     for (t in seq_len(n)) {
       ap <- .s03matvec(Tm, a)
       Pp <- .s03matmul(.s03matmul(Tm, P), t(Tm))
@@ -124,10 +126,13 @@ Unobts <- function(y, components = "level", period = 4, ratio_grid = NULL,
       Pn <- P
       for (i in seq_len(d)) for (jj in seq_len(d)) Pn[i, jj] <- Pp[i, jj] - K[i] * ZP[jj]
       P <- Pn
-      lv[t] <- v; lf[t] <- Fv; st[t, ] <- a
+      lv[t] <- v
+      lf[t] <- Fv
+      st[t, ] <- a
     }
     m <- n - d
-    ss <- 0; lsum <- 0
+    ss <- 0
+    lsum <- 0
     for (t in seq(d + 1L, n)) {
       ss <- ss + lv[t] * lv[t] / lf[t]
       lsum <- lsum + log(lf[t])

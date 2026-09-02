@@ -20,8 +20,10 @@
 #' @export
 .bnskt2_wls <- function(rows, ys, w) {
   X <- do.call(rbind, rows)
-  y <- as.numeric(ys); w <- sqrt(pmax(as.numeric(w), 0.0))
-  Xw <- X * w; yw <- y * w
+  y <- as.numeric(ys)
+  w <- sqrt(pmax(as.numeric(w), 0.0))
+  Xw <- X * w
+  yw <- y * w
   coef <- as.numeric(solve(crossprod(Xw), crossprod(Xw, yw)))
   list(coef = coef)
 }
@@ -42,7 +44,9 @@
 #' @return A list with \code{slope}, \code{coef}, \code{n}.
 #' @export
 .side_fit <- function(v, y, k_pt, bandwidth, order, side, kernel) {
-  rows <- list(); ys <- c(); ws <- c()
+  rows <- list()
+  ys <- c()
+  ws <- c()
   for (i in seq_along(v)) {
     d <- as.numeric(v[i]) - as.numeric(k_pt)
     if (side == "right" && d < 0) next
@@ -112,7 +116,8 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
                          kernel = "triangular",
                          policy_slope_change = NULL, B = NULL,
                          fuzzy = FALSE) {
-  v <- as.numeric(V); y <- as.numeric(Y)
+  v <- as.numeric(V)
+  y <- as.numeric(Y)
   if (length(v) != length(y))
     stop(sprintf("bnskt2: V and Y must agree in length (%d, %d)", length(v), length(y)))
   r <- .side_fit(v, y, kink, bandwidth, as.integer(order), "right", kernel)
@@ -160,12 +165,15 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
 #' @return A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
 #' @export
 density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
-  v <- as.numeric(V); kp <- as.numeric(kink); bw <- as.numeric(bandwidth)
+  v <- as.numeric(V)
+  kp <- as.numeric(kink)
+  bw <- as.numeric(bandwidth)
   inside <- v[abs(v - kp) <= bw]
   if (length(inside) < 4L * as.integer(n_bins))
     stop(sprintf("bnskt2: too few observations within the bandwidth for %d bins", as.integer(n_bins)))
   edges <- kp - bw + 2.0 * bw * (0:as.integer(n_bins)) / as.integer(n_bins)
-  ctr <- numeric(as.integer(n_bins)); dens <- numeric(as.integer(n_bins))
+  ctr <- numeric(as.integer(n_bins))
+  dens <- numeric(as.integer(n_bins))
   for (b in seq_len(as.integer(n_bins))) {
     ctr[b]  <- 0.5 * (edges[b] + edges[b + 1L])
     dens[b] <- sum(inside >= edges[b] & inside < edges[b + 1L]) / length(inside)

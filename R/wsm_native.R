@@ -452,8 +452,10 @@ morie_wsm_mle <- function(data, f, theta0, se = TRUE) {
   H <- matrix(0, k, k)
   for (i in seq_len(k)) {
     for (j in seq_len(k)) {
-      ei <- numeric(k); ei[i] <- step[i]
-      ej <- numeric(k); ej[j] <- step[j]
+      ei <- numeric(k)
+      ei[i] <- step[i]
+      ej <- numeric(k)
+      ej[j] <- step[j]
       H[i, j] <- (negll(th + ei + ej) - negll(th + ei - ej) -
                     negll(th - ei + ej) + negll(th - ei - ej)) /
         (4 * step[i] * step[j])
@@ -533,7 +535,9 @@ morie_wsm_bagging <- function(X, y, model = NULL, B = 100, newdata = NULL,
     function(Xn) as.numeric(cbind(1, Xn) %*% b)
   } else model
   Q <- if (is.null(newdata)) A else {
-    QQ <- as.matrix(newdata); storage.mode(QQ) <- "double"; QQ
+    QQ <- as.matrix(newdata)
+    storage.mode(QQ) <- "double"
+    QQ
   }
   if (ncol(Q) != ncol(A)) {
     stop(sprintf("newdata has %d columns, expected %d.", ncol(Q), ncol(A)),

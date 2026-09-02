@@ -853,7 +853,6 @@ morie_arsau_describe <- function(kind, year, language = "en", data_dir = NULL,
 #' \donttest{
 #' res <- try(morie_arsau_analyze_probe_cycle_records(year = "2024"))
 #' if (!inherits(res, "try-error")) print(res)
-#' print(res)
 #' }
 #' @references
 #'   Ontario Ministry of the Solicitor General, ARSAU

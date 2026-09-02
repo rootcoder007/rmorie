@@ -21,16 +21,22 @@
 #' Arimacss(V)
 Arimacss <- function(y, phi = numeric(0), theta = numeric(0), d = 0,
                      mu = 0) {
-  y <- .t1_vec(y); n <- length(y)
-  ph <- as.numeric(phi); th <- as.numeric(theta)
-  p <- length(ph); q <- length(th); d <- as.integer(d)
+  y <- .t1_vec(y)
+  n <- length(y)
+  ph <- as.numeric(phi)
+  th <- as.numeric(theta)
+  p <- length(ph)
+  q <- length(th)
+  d <- as.integer(d)
   if (d < 0L) stop("d must be non-negative")
   if (n <= d + p) stop("series too short for the requested orders")
   w <- y
   if (d > 0L) for (i in seq_len(d)) w <- diff(w)
   z <- w - as.numeric(mu)
   nw <- length(z)
-  e <- rep(0, nw); css <- 0; m <- 0L
+  e <- rep(0, nw)
+  css <- 0
+  m <- 0L
   if (p < nw) for (t in (p + 1L):nw) {
     v <- z[t]
     if (p > 0L) for (i in seq_len(p)) v <- v - ph[i] * z[t - i]

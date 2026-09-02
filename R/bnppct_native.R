@@ -87,14 +87,16 @@ morie_bnppct_cdf <- function(x, w, mu, s2)
 #' @return A list with the widened lo and hi.
 #' @export
 morie_bnppct_expand <- function(f, lo, hi, iters = 60L) {
-  flo <- f(lo); fhi <- f(hi)
+  flo <- f(lo)
+  fhi <- f(hi)
   k <- 0L
   while ((flo > 0) == (fhi > 0) && k < as.integer(iters)) {
     mid <- 0.5 * (lo + hi)
     half <- hi - mid
     lo <- mid - 2 * half
     hi <- mid + 2 * half
-    flo <- f(lo); fhi <- f(hi)
+    flo <- f(lo)
+    fhi <- f(hi)
     k <- k + 1L
   }
   list(lo = lo, hi = hi)

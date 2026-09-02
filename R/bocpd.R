@@ -23,9 +23,16 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bocpd(V)
 Bocpd <- function(x, hazard = 0.004, mu0 = 0, kappa0 = 1, alpha0 = 1, beta0 = 1) {
-  x <- .t1_vec(x); n <- length(x); H <- as.numeric(hazard)
-  mu <- mu0; kap <- kappa0; al <- alpha0; be <- beta0; R <- 1
-  cp_prob <- numeric(n); run_len <- integer(n)
+  x <- .t1_vec(x)
+  n <- length(x)
+  H <- as.numeric(hazard)
+  mu <- mu0
+  kap <- kappa0
+  al <- alpha0
+  be <- beta0
+  R <- 1
+  cp_prob <- numeric(n)
+  run_len <- integer(n)
   for (t in seq_len(n)) {
     xt <- x[t]
     df <- 2 * al
@@ -39,7 +46,11 @@ Bocpd <- function(x, hazard = 0.004, mu0 = 0, kappa0 = 1, alpha0 = 1, beta0 = 1)
     nkap <- c(kappa0, kap + 1)
     nal <- c(alpha0, al + 0.5)
     nbe <- c(beta0, be + kap * (xt - mu)^2 / (2 * (kap + 1)))
-    R <- newR; mu <- nmu; kap <- nkap; al <- nal; be <- nbe
+    R <- newR
+    mu <- nmu
+    kap <- nkap
+    al <- nal
+    be <- nbe
     cp_prob[t] <- if (length(R) > 1) R[2] else NA_real_
     run_len[t] <- which.max(R) - 1L
   }

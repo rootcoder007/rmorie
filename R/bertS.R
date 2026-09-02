@@ -17,13 +17,19 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bertscore(V, V)
 Bertscore <- function(reference, candidate, idf = NULL) {
-  X <- .t1_mat(reference); Y <- .t1_mat(candidate)
-  k <- nrow(X); d <- ncol(X); l <- nrow(Y)
+  X <- .t1_mat(reference)
+  Y <- .t1_mat(candidate)
+  k <- nrow(X)
+  d <- ncol(X)
+  l <- nrow(Y)
   if (ncol(Y) != d) stop("embeddings must share their dimension")
-  nx <- sqrt(rowSums(X^2)); ny <- sqrt(rowSums(Y^2))
+  nx <- sqrt(rowSums(X^2))
+  ny <- sqrt(rowSums(Y^2))
   if (any(nx == 0) || any(ny == 0)) stop("embeddings must be non-zero")
-  Xn <- X / nx; Yn <- Y / ny
-  dim(Xn) <- c(k, d); dim(Yn) <- c(l, d)
+  Xn <- X / nx
+  Yn <- Y / ny
+  dim(Xn) <- c(k, d)
+  dim(Yn) <- c(l, d)
   Sim <- Xn %*% t(Yn)
   dim(Sim) <- c(k, l)
   rm <- apply(Sim, 1L, max)

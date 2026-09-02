@@ -23,7 +23,8 @@
 #' Fanova(function(x) x[1] + 2 * x[2], NULL, 2, 6)$closure
 #' @export
 Fanova <- function(f, input_dist = NULL, d = 2, grid = 8) {
-  dd <- as.integer(d); g <- as.integer(grid)
+  dd <- as.integer(d)
+  g <- as.integer(grid)
   pts <- (seq_len(g) - 1 + 0.5) / g
   tf <- function(row) {
     if (is.null(input_dist)) return(as.numeric(row))
@@ -35,16 +36,19 @@ Fanova <- function(f, input_dist = NULL, d = 2, grid = 8) {
   for (cc in seq_len(total) - 1L) {
     rem <- cc
     idx <- integer(dd)
-    for (a in seq(dd, 1L)) { idx[a] <- rem %% g; rem <- rem %/% g }
+    for (a in seq(dd, 1L)) { idx[a] <- rem %% g
+    rem <- rem %/% g }
     rows[cc + 1L, ] <- idx
     vals[cc + 1L] <- as.numeric(f(tf(pts[idx + 1L])))
   }
   f0 <- .s03mean(vals)
   D <- 0
   for (v in vals) D <- D + (v - f0)^2 / total
-  main <- numeric(dd); mainf <- vector("list", dd)
+  main <- numeric(dd)
+  mainf <- vector("list", dd)
   for (a in seq_len(dd)) {
-    m <- numeric(g); cnt <- numeric(g)
+    m <- numeric(g)
+    cnt <- numeric(g)
     for (cc in seq_len(total)) {
       m[rows[cc, a] + 1L] <- m[rows[cc, a] + 1L] + vals[cc]
       cnt[rows[cc, a] + 1L] <- cnt[rows[cc, a] + 1L] + 1
@@ -57,7 +61,8 @@ Fanova <- function(f, input_dist = NULL, d = 2, grid = 8) {
   }
   inter <- numeric(0)
   if (dd > 1L) for (a in seq_len(dd - 1L)) for (b in seq(a + 1L, dd)) {
-    m <- matrix(0, g, g); cnt <- matrix(0, g, g)
+    m <- matrix(0, g, g)
+    cnt <- matrix(0, g, g)
     for (cc in seq_len(total)) {
       m[rows[cc, a] + 1L, rows[cc, b] + 1L] <- m[rows[cc, a] + 1L, rows[cc, b] + 1L] + vals[cc]
       cnt[rows[cc, a] + 1L, rows[cc, b] + 1L] <- cnt[rows[cc, a] + 1L, rows[cc, b] + 1L] + 1

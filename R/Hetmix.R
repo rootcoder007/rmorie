@@ -37,16 +37,21 @@ Hetmix <- function(contact_matrix, gamma, iters = 2000, tol = 1e-14) {
   if (any(g <= 0)) stop("heterogeneous_mixing: removal rates must be positive")
   K <- C %*% diag(1 / g, n)
   x <- rep(1 / n, n)
-  lam <- 0; it <- 0L
+  lam <- 0
+  it <- 0L
   for (k in seq_len(as.integer(iters))) {
     y <- as.numeric(K %*% x)
     nrm <- sqrt(sum(y * y))
-    if (nrm == 0) { lam <- 0; break }
+    if (nrm == 0) { lam <- 0
+    break }
     y <- y / nrm
     new <- sum(y * as.numeric(K %*% y))
     it <- it + 1L
-    if (abs(new - lam) <= tol) { lam <- new; x <- y; break }
-    lam <- new; x <- y
+    if (abs(new - lam) <= tol) { lam <- new
+    x <- y
+    break }
+    lam <- new
+    x <- y
   }
   if (sum(x) != 0) x <- x / sum(x)
   .t1_result(estimate = lam, R0 = lam, stable_distribution = x, iterations = it,

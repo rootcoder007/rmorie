@@ -55,7 +55,8 @@ morie_rmsdtr <- function(P, Q, weights = NULL) {
   }
   if (all(abs(B[, d]) < 1e-15)) {
     if (d == 3) {
-      u <- B[, 1]; v <- B[, 2]
+      u <- B[, 1]
+      v <- B[, 2]
       B[, 3] <- c(u[2]*v[3]-u[3]*v[2], u[3]*v[1]-u[1]*v[3],
                   u[1]*v[2]-u[2]*v[1])
     } else if (d == 2) {

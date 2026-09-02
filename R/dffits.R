@@ -17,18 +17,25 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dffitsols(V, V)
 Dffitsols <- function(X, y, intercept = TRUE) {
-  X <- as.matrix(X); if (isTRUE(intercept)) X <- .t1_cbind1(X)
-  y <- .t1_vec(y); n <- nrow(X); p <- ncol(X)
-  f <- .t1_lstsq(X, y); h <- .t1_hatdiag(X, f$xtxinv)
-  rss <- sum(f$resid^2); df <- n - p
-  dff <- rep(NA_real_, n); stu <- rep(NA_real_, n)
+  X <- as.matrix(X)
+  if (isTRUE(intercept)) X <- .t1_cbind1(X)
+  y <- .t1_vec(y)
+  n <- nrow(X)
+  p <- ncol(X)
+  f <- .t1_lstsq(X, y)
+  h <- .t1_hatdiag(X, f$xtxinv)
+  rss <- sum(f$resid^2)
+  df <- n - p
+  dff <- rep(NA_real_, n)
+  stu <- rep(NA_real_, n)
   for (i in seq_len(n)) {
     d <- 1 - h[i]
     if (d <= 0 || df <= 1) next
     s2i <- (rss - f$resid[i]^2 / d) / (df - 1)
     s <- if (s2i > 0) sqrt(s2i) else NA_real_
     t <- f$resid[i] / (s * sqrt(d))
-    stu[i] <- t; dff[i] <- t * sqrt(h[i] / d)
+    stu[i] <- t
+    dff[i] <- t * sqrt(h[i] / d)
   }
   .t1_result(dffits = dff, cutoff = 2 * sqrt(p / n), leverage = h,
              student = stu, n = n, p = p,

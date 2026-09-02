@@ -77,7 +77,8 @@
   for (t in seq_len(w)) {
     k <- coded[[i]][j + t]
     rest <- if (L > 1L) (1 - weight) / (L - 1) else 0
-    row <- rep(rest, L); row[k + 1L] <- if (L > 1L) weight else 1
+    row <- rep(rest, L)
+    row[k + 1L] <- if (L > 1L) weight else 1
     theta[[length(theta) + 1L]] <- row
   }
   theta
@@ -101,19 +102,28 @@
 .ghc_mot_normalise_windows <- function(z, w, max_sweeps = 100) {
   if (w < 2L) return(z)
   for (s in seq_len(max_sweeps)) {
-    worst <- 1 + 1e-12; wi <- -1L; wj <- -1L
+    worst <- 1 + 1e-12
+    wi <- -1L
+    wj <- -1L
     for (i in seq_along(z)) {
-      row <- z[[i]]; m <- length(row)
+      row <- z[[i]]
+      m <- length(row)
       if (m < w) {
         run <- sum(row)
-        if (run > worst) { worst <- run; wi <- i; wj <- 0L }
+        if (run > worst) { worst <- run
+        wi <- i
+        wj <- 0L }
         next
       }
       run <- sum(row[seq_len(w)])
-      if (run > worst) { worst <- run; wi <- i; wj <- 0L }
+      if (run > worst) { worst <- run
+      wi <- i
+      wj <- 0L }
       for (j in 2:(m - w + 1L)) {
         run <- run + row[j + w - 1L] - row[j - 1L]
-        if (run > worst) { worst <- run; wi <- i; wj <- j - 1L }
+        if (run > worst) { worst <- run
+        wi <- i
+        wj <- j - 1L }
       }
     }
     if (wi < 0L) break
@@ -145,8 +155,11 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
                                  normalize_overlaps = TRUE,
                                  erase_by = "letter") {
   prep <- .ghc_mot_prepare(sequences, w, alphabet)
-  coded <- prep$coded; alpha <- prep$alpha; starts <- prep$starts
-  L <- length(alpha); w <- as.integer(w)
+  coded <- prep$coded
+  alpha <- prep$alpha
+  starts <- prep$starts
+  L <- length(alpha)
+  w <- as.integer(w)
   beta <- as.numeric(beta)
   if (beta < 0) stop("motfsr: beta must be >= 0")
   tol <- as.numeric(tol)
@@ -168,21 +181,26 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
   if (!(erase_by %in% c("letter", "start")))
     stop("motfsr: erase_by must be 'letter' or 'start'")
   eps <- if (is.null(erasing)) NULL else lapply(erasing, as.numeric)
-  trace <- c(); converged <- FALSE
+  trace <- c()
+  converged <- FALSE
   z_by_seq <- NULL
   it_done <- 0L
   for (it in seq_len(max_iter)) {
     it_done <- it
     z_by_seq <- lapply(coded, function(row) rep(0, max(0L, length(row) - w + 1L)))
     loglik <- 0
-    log_l1 <- log(lam1); log_l2 <- log(1 - lam1)
+    log_l1 <- log(lam1)
+    log_l2 <- log(1 - lam1)
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]; j <- starts[[sj]][2]
+      i <- starts[[sj]][1]
+      j <- starts[[sj]][2]
       a <- log_l1 + .ghc_mot_log_component(theta, coded, i, j, w, 1L)
       b <- log_l2 + .ghc_mot_log_component(theta, coded, i, j, w, 2L)
       m <- if (a > b) a else b
-      if (m == .GHC_MOT_NEG_INF) { z_by_seq[[i]][j + 1L] <- 0; next }
-      ea <- exp(a - m); eb <- exp(b - m)
+      if (m == .GHC_MOT_NEG_INF) { z_by_seq[[i]][j + 1L] <- 0
+      next }
+      ea <- exp(a - m)
+      eb <- exp(b - m)
       z_by_seq[[i]][j + 1L] <- ea / (ea + eb)
       loglik <- loglik + m + log(ea + eb)
     }
@@ -191,15 +209,18 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
       z_by_seq <- .ghc_mot_normalise_windows(z_by_seq, w)
     z_sum <- 0
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]; j <- starts[[sj]][2]
+      i <- starts[[sj]][1]
+      j <- starts[[sj]][2]
       z_sum <- z_sum + z_by_seq[[i]][j + 1L]
     }
     lam1 <- min(max(z_sum / n, 1e-12), 1 - 1e-12)
     ccount <- vector("list", w + 1L)
     for (r in seq_len(w + 1L)) ccount[[r]] <- rep(0, L)
     for (sj in seq_along(starts)) {
-      i <- starts[[sj]][1]; j <- starts[[sj]][2]
-      z1 <- z_by_seq[[i]][j + 1L]; z2 <- 1 - z1
+      i <- starts[[sj]][1]
+      j <- starts[[sj]][2]
+      z1 <- z_by_seq[[i]][j + 1L]
+      z2 <- 1 - z1
       e <- if (is.null(eps)) 1
            else if (erase_by == "start") eps[[i]][j + 1L] else NA
       for (t in seq_len(w)) {
@@ -212,7 +233,8 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
     new <- vector("list", w + 1L)
     for (r in seq_len(w + 1L)) {
       denom <- sum(ccount[[r]]) + beta
-      if (denom <= 0) { new[[r]] <- as.numeric(mu); next }
+      if (denom <= 0) { new[[r]] <- as.numeric(mu)
+      next }
       new[[r]] <- (ccount[[r]] + beta * mu) / denom
     }
     delta <- 0
@@ -220,7 +242,8 @@ morie_motfsr_mm_fit <- function(sequences, w, alphabet = NULL,
       delta <- delta + (new[[r]][k] - theta[[r]][k])^2
     delta <- sqrt(delta)
     theta <- new
-    if (delta < tol) { converged <- TRUE; break }
+    if (delta < tol) { converged <- TRUE
+    break }
   }
   list(theta = theta,
        motif = lapply(theta[seq.int(2L, w + 1L)], function(r) as.numeric(r)),
@@ -243,7 +266,8 @@ morie_motfsr_log_odds_matrix <- function(motif, background) {
   for (i in seq_along(motif)) {
     r <- numeric(length(motif[[i]]))
     for (k in seq_along(motif[[i]])) {
-      f <- motif[[i]][k]; b <- background[k]
+      f <- motif[[i]][k]
+      b <- background[k]
       r[k] <- if (f <= 0) .GHC_MOT_NEG_INF
               else if (b <= 0) Inf
               else log(f / b)
@@ -265,8 +289,10 @@ morie_motfsr_bayes_threshold <- function(lambda1, loss = NULL) {
     stop("motfsr: lambda1 must lie in (0, 1)")
   t <- log((1 - lambda1) / lambda1)
   if (is.null(loss)) return(t)
-  r11 <- loss[[1]][[1]]; r12 <- loss[[1]][[2]]
-  r21 <- loss[[2]][[1]]; r22 <- loss[[2]][[2]]
+  r11 <- loss[[1]][[1]]
+  r12 <- loss[[1]][[2]]
+  r21 <- loss[[2]][[1]]
+  r22 <- loss[[2]][[2]]
   num <- as.numeric(r12) - as.numeric(r22)
   den <- as.numeric(r21) - as.numeric(r11)
   if (num <= 0 || den <= 0)
@@ -316,7 +342,8 @@ morie_motfsr_score_sequence <- function(spec, sequence, alphabet,
   hi <- min(max(hi, lo), 0.5)
   out <- c()
   v <- lo
-  while (v < hi) { out <- c(out, v); v <- v * 2 }
+  while (v < hi) { out <- c(out, v)
+  v <- v * 2 }
   c(out, hi)
 }
 
@@ -358,9 +385,11 @@ morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
   if (start_weight <= 0 || start_weight >= 1)
     stop("motfsr: start_weight must lie in (0, 1)")
   prep <- .ghc_mot_prepare(sequences, w, alphabet)
-  coded <- prep$coded; alpha <- prep$alpha
+  coded <- prep$coded
+  alpha <- prep$alpha
   all_starts <- prep$starts
-  L <- length(alpha); w <- as.integer(w)
+  L <- length(alpha)
+  w <- as.integer(w)
   mu <- .ghc_mot_mu(coded, L)
   n <- length(all_starts)
   erasing <- lapply(coded, function(row) rep(1, length(row)))
@@ -427,7 +456,8 @@ morie_motfsr <- function(sequences, w, alphabet = NULL, n_motifs = 1,
       for (i in seq_along(erasing)) {
         for (j in seq_along(erasing[[i]])) {
           f <- 1
-          lo_ <- max(0L, j - w); hi_ <- min(j, length(z[[i]]))
+          lo_ <- max(0L, j - w)
+          hi_ <- min(j, length(z[[i]]))
           for (k in (lo_ + 1L):hi_) f <- f * (1 - z[[i]][k])
           erasing[[i]][j] <- erasing[[i]][j] * f
         }

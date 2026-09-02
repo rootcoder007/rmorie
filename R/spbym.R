@@ -44,7 +44,8 @@
 #' @export
 spbym <- function(counts, expected, adjacency, kappa, lam, max_iter = 200L,
                   tol = 1e-11) {
-  y <- as.numeric(counts); e <- as.numeric(expected)
+  y <- as.numeric(counts)
+  e <- as.numeric(expected)
   fit <- .schab_bym_map(y, e, adjacency, kappa, lam, max_iter = max_iter,
                         tol = tol)
   fit$smr <- .schab_smr(y, e)

@@ -32,7 +32,8 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
   V <- as.matrix(vote_matrix)
   storage.mode(V) <- "double"
   pid <- as.character(party_id)
-  n <- nrow(V); q <- ncol(V)
+  n <- nrow(V)
+  q <- ncol(V)
   if (length(pid) != n) {
     stop("party_id must have one entry per legislator.", call. = FALSE)
   }
@@ -40,9 +41,11 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
   maj <- lapply(parties, function(p) {
     rows <- V[pid == p, , drop = FALSE]
     vapply(seq_len(q), function(j) {
-      col <- rows[, j]; col <- col[!is.na(col)]
+      col <- rows[, j]
+      col <- col[!is.na(col)]
       if (!length(col)) return(NA_real_)
-      yea <- sum(col); nay <- length(col) - yea
+      yea <- sum(col)
+      nay <- length(col) - yea
       if (yea > nay) 1 else if (nay > yea) 0 else NA_real_
     }, numeric(1))
   })
@@ -55,7 +58,8 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
     }
     sizes <- vapply(parties, function(p) sum(pid == p), numeric(1))
     big2 <- parties[order(-sizes)][1:2]
-    a <- maj[[big2[1]]]; b <- maj[[big2[2]]]
+    a <- maj[[big2[1]]]
+    b <- maj[[big2[2]]]
     scored <- !is.na(a) & !is.na(b) & a != b
   }
 
@@ -100,8 +104,10 @@ morie_heteroskedastic_scales <- function(votes, ideal_points, alpha, beta) {
   V <- as.matrix(votes)
   storage.mode(V) <- "double"
   x <- as.numeric(ideal_points)
-  alpha <- as.numeric(alpha); beta <- as.numeric(beta)
-  n <- nrow(V); q <- ncol(V)
+  alpha <- as.numeric(alpha)
+  beta <- as.numeric(beta)
+  n <- nrow(V)
+  q <- ncol(V)
   if (length(x) != n) {
     stop("ideal_points must have one entry per legislator.", call. = FALSE)
   }

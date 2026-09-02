@@ -136,7 +136,8 @@ edge_encoding <- function(paths, edge_features, w_table) {
   out <- list()
   for (key in names(paths)) {
     path <- paths[[key]]
-    if (length(path) == 0L) { out[[key]] <- 0; next }
+    if (length(path) == 0L) { out[[key]] <- 0
+    next }
     acc <- 0
     for (step in seq_along(path)) {
       e <- path[[step]]
@@ -151,7 +152,8 @@ edge_encoding <- function(paths, edge_features, w_table) {
       if (is.null(f))
         stop(paste0("grphmr: no features for edge ", ekey))
       w <- w_table[[min(step, length(w_table))]]
-      fv <- as.numeric(f); wv <- as.numeric(w)
+      fv <- as.numeric(f)
+      wv <- as.numeric(w)
       acc <- acc + sum(fv * wv)
     }
     out[[key]] <- acc / length(path)
@@ -171,12 +173,18 @@ edge_encoding <- function(paths, edge_features, w_table) {
 #' @return List with output, weights, method, note.
 #' @export
 graphormer_attention <- function(H, WQ, WK, WV, bias, edge_bias = NULL) {
-  X <- as.matrix(H); storage.mode(X) <- "double"
-  n <- nrow(X); dk <- ncol(WQ)
-  WQ <- as.matrix(WQ); storage.mode(WQ) <- "double"
-  WK <- as.matrix(WK); storage.mode(WK) <- "double"
-  WV <- as.matrix(WV); storage.mode(WV) <- "double"
-  B <- as.matrix(bias); storage.mode(B) <- "double"
+  X <- as.matrix(H)
+  storage.mode(X) <- "double"
+  n <- nrow(X)
+  dk <- ncol(WQ)
+  WQ <- as.matrix(WQ)
+  storage.mode(WQ) <- "double"
+  WK <- as.matrix(WK)
+  storage.mode(WK) <- "double"
+  WV <- as.matrix(WV)
+  storage.mode(WV) <- "double"
+  B <- as.matrix(bias)
+  storage.mode(B) <- "double"
   out <- matrix(0, nrow = n, ncol = nrow(WV))
   weights <- matrix(0, nrow = n, ncol = n)
   for (i in seq_len(n)) {

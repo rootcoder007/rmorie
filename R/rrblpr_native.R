@@ -44,7 +44,8 @@
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .rrblpr_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   npt <- as.integer(points)
   nst <- as.integer(stages)
   for (s in seq_len(nst)) {
@@ -165,7 +166,8 @@
 #' @return A list with \code{ll}, \code{lam}, \code{beta}, \code{s2e}, \code{L}.
 #' @export
 .rrblpr_reml_at <- function(loglam, G, y, X) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   lam <- exp(loglam)
   V <- G / lam
   diag(V) <- diag(V) + 1.0
@@ -226,14 +228,18 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
   G <- tcrossprod(Mm)
 
   profile <- list()
-  ll <- NULL; s2e <- NULL; estimated <- FALSE
+  ll <- NULL
+  s2e <- NULL
+  estimated <- FALSE
   if (is.null(lam)) {
     # max_iter is accepted and ignored: the grid schedule fixes the
     # evaluation count, and dropping the argument would break callers.
     loglam <- .rrblpr_gridmax(function(t) .rrblpr_reml_at(t, G, yv, Xm)$ll,
                               as.numeric(log_lam_lo), as.numeric(log_lam_hi))
     fit <- .rrblpr_reml_at(loglam, G, yv, Xm)
-    lam_hat <- fit$lam; ll <- fit$ll; s2e <- fit$s2e
+    lam_hat <- fit$lam
+    ll <- fit$ll
+    s2e <- fit$s2e
     for (t in 0:20) {
       lt <- as.numeric(log_lam_lo) +
         (as.numeric(log_lam_hi) - as.numeric(log_lam_lo)) * t / 20.0

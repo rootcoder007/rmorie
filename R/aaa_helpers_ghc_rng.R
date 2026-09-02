@@ -40,8 +40,9 @@
 #' @param b A list; the body reads \code{$hi}, \code{$lo} from it.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
-.ghc_xor64 <- function(a, b)
+.ghc_xor64 <- function(a, b) {
   list(hi = .ghc_xor32(a$hi, b$hi), lo = .ghc_xor32(a$lo, b$lo))
+}
 
 #' .ghc_add64
 #'
@@ -72,8 +73,10 @@
 .ghc_shr64 <- function(a, k) {
   # logical right shift, 0 < k < 32 (the only widths SplitMix64 uses)
   p <- 2^k
-  list(hi = floor(a$hi / p),
-       lo = floor(a$lo / p) + (a$hi %% p) * 2^(32 - k))
+  list(
+    hi = floor(a$hi / p),
+    lo = floor(a$lo / p) + (a$hi %% p) * 2^(32 - k)
+  )
 }
 
 #' Exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
@@ -88,12 +91,16 @@
 #' @export
 .ghc_mul32 <- function(a, b) {
   # exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
-  a0 <- a %% 65536; a1 <- a %/% 65536
-  b0 <- b %% 65536; b1 <- b %/% 65536
+  a0 <- a %% 65536
+  a1 <- a %/% 65536
+  b0 <- b %% 65536
+  b1 <- b %/% 65536
   mid <- a0 * b1 + a1 * b0
   lo <- a0 * b0 + (mid %% 65536) * 65536
-  list(hi = (a1 * b1 + mid %/% 65536 + lo %/% .ghc_M32) %% .ghc_M32,
-       lo = lo %% .ghc_M32)
+  list(
+    hi = (a1 * b1 + mid %/% 65536 + lo %/% .ghc_M32) %% .ghc_M32,
+    lo = lo %% .ghc_M32
+  )
 }
 
 #' (a * b) mod 2^64: only the low word of each cross term survives
@@ -109,23 +116,28 @@
 .ghc_mul64 <- function(a, b) {
   # (a * b) mod 2^64: only the low word of each cross term survives
   r <- .ghc_mul32(a$lo, b[2])
-  list(hi = (r$hi + .ghc_mul32(a$hi, b[2])$lo +
-               .ghc_mul32(a$lo, b[1])$lo) %% .ghc_M32,
-       lo = r$lo)
+  list(
+    hi = (r$hi + .ghc_mul32(a$hi, b[2])$lo +
+      .ghc_mul32(a$lo, b[1])$lo) %% .ghc_M32,
+    lo = r$lo
+  )
 }
 
-.GHC_GOLDEN <- c(2654435769, 2135587861)   # 0x9E3779B97F4A7C15
-.GHC_MIX1 <- c(3210233709, 484763065)      # 0xBF58476D1CE4E5B9
-.GHC_MIX2 <- c(2496678331, 321982955)      # 0x94D049BB133111EB
+.GHC_GOLDEN <- c(2654435769, 2135587861) # 0x9E3779B97F4A7C15
+.GHC_MIX1 <- c(3210233709, 484763065) # 0xBF58476D1CE4E5B9
+.GHC_MIX2 <- c(2496678331, 321982955) # 0x94D049BB133111EB
 
 #' @keywords internal
 #' @noRd
 .ghc_rng <- function(seed = 0) {
   s <- as.numeric(seed)
   e <- new.env(parent = emptyenv())
-  e$s0 <- if (s == 0) .GHC_GOLDEN else
+  e$s0 <- if (s == 0) {
+    .GHC_GOLDEN
+  } else {
     c(floor(s / .ghc_M32) %% .ghc_M32, s %% .ghc_M32)
-  e$i <- 0                                # draws consumed so far
+  }
+  e$i <- 0 # draws consumed so far
   e
 }
 
@@ -133,13 +145,19 @@
 #' @noRd
 .ghc_unif <- function(e, n = 1L, low = 0, high = 1) {
   n <- as.integer(n)
-  if (n < 1L) return(numeric(0))
+  if (n < 1L) {
+    return(numeric(0))
+  }
   idx <- e$i + seq_len(n)
   e$i <- e$i + n
   # state_i = s0 + i * GOLDEN  (mod 2^64), the SplitMix64 counter
-  z <- .ghc_add64(list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
-                  .ghc_mul64(list(hi = floor(idx / .ghc_M32),
-                                  lo = idx %% .ghc_M32), .GHC_GOLDEN))
+  z <- .ghc_add64(
+    list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
+    .ghc_mul64(list(
+      hi = floor(idx / .ghc_M32),
+      lo = idx %% .ghc_M32
+    ), .GHC_GOLDEN)
+  )
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 30)), .GHC_MIX1)
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 27)), .GHC_MIX2)
   z <- .ghc_xor64(z, .ghc_shr64(z, 31))
@@ -155,12 +173,18 @@
 #' @noRd
 .ghc_int <- function(e, n = 1L, m) {
   n <- as.integer(n)
-  if (n < 1L) return(integer(0))
+  if (n < 1L) {
+    return(integer(0))
+  }
   idx <- e$i + seq_len(n)
   e$i <- e$i + n
-  z <- .ghc_add64(list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
-                  .ghc_mul64(list(hi = floor(idx / .ghc_M32),
-                                  lo = idx %% .ghc_M32), .GHC_GOLDEN))
+  z <- .ghc_add64(
+    list(hi = rep(e$s0[1], n), lo = rep(e$s0[2], n)),
+    .ghc_mul64(list(
+      hi = floor(idx / .ghc_M32),
+      lo = idx %% .ghc_M32
+    ), .GHC_GOLDEN)
+  )
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 30)), .GHC_MIX1)
   z <- .ghc_mul64(.ghc_xor64(z, .ghc_shr64(z, 27)), .GHC_MIX2)
   z <- .ghc_xor64(z, .ghc_shr64(z, 31))
@@ -175,7 +199,9 @@
   # Box-Muller, cosine branch only, exactly as the Python arm does it:
   # two uniforms are consumed per variate and the sine branch is discarded.
   n <- as.integer(n)
-  if (n < 1L) return(numeric(0))
+  if (n < 1L) {
+    return(numeric(0))
+  }
   uu <- .ghc_unif(e, 2L * n)
   u1 <- pmax(uu[seq(1L, 2L * n, by = 2L)], 1e-300)
   u2 <- uu[seq(2L, 2L * n, by = 2L)]
@@ -231,9 +257,12 @@
     v <- (1 + cc * x)^3
     if (v <= 0) next
     u <- .ghc_unif(e, 1L)
-    if (u < 1 - 0.0331 * x^4) return(d * v * scale)
-    if (u > 0 && log(u) < 0.5 * x * x + d * (1 - v + log(v)))
+    if (u < 1 - 0.0331 * x^4) {
       return(d * v * scale)
+    }
+    if (u > 0 && log(u) < 0.5 * x * x + d * (1 - v + log(v))) {
+      return(d * v * scale)
+    }
   }
 }
 

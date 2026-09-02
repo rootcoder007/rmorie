@@ -28,7 +28,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Mtsbnd(V, V)
 Mtsbnd <- function(Y, X, monotone = TRUE, d = NULL, ymin = NULL, ymax = NULL) {
-  y <- .t1_vec(Y); x <- .t1_vec(X)
+  y <- .t1_vec(Y)
+  x <- .t1_vec(X)
   if (length(y) == 0L) stop("Y is empty")
   if (length(x) != length(y)) stop("Y and X must have the same length")
   lo <- if (is.null(ymin)) min(y) else as.numeric(ymin)

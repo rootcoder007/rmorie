@@ -28,7 +28,8 @@ Hubsa <- function(y, A, tol = 1e-12, max_iter = 1000) {
   h <- .s03vec(y)
   if (length(h) != n) stop("hits_hubs_authorities: y and A have different lengths")
   if (tol <= 0) stop("hits_hubs_authorities: tol must be positive")
-  unit <- function(v) { s <- sqrt(sum(v * v)); if (s == 0) v else v / s }
+  unit <- function(v) { s <- sqrt(sum(v * v))
+  if (s == 0) v else v / s }
   h <- unit(h)
   a <- rep(0, n)
   it <- 0L

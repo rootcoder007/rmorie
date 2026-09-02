@@ -144,7 +144,9 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
     list(xt = xt, ft = f(xt), gt = grad(xt))
   }
   evals <- 0L
-  ta <- 0.0; fa <- f0; da <- slope0
+  ta <- 0.0
+  fa <- f0
+  da <- slope0
   t <- h
   tb <- fb <- db <- NULL
   xb <- gb <- NULL
@@ -153,22 +155,33 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
     evals <- evals + 1L
     dt <- .cgnonl_dot(p, r$gt)
     if (dt >= 0.0 || r$ft > fa) {
-      tb <- t; fb <- r$ft; db <- dt
-      xb <- r$xt; gb <- r$gt
+      tb <- t
+      fb <- r$ft
+      db <- dt
+      xb <- r$xt
+      gb <- r$gt
       break
     }
-    ta <- t; fa <- r$ft; da <- dt
+    ta <- t
+    fa <- r$ft
+    da <- dt
     t <- t * 2.0
   }
   if (is.null(tb)) {
     r <- psi(ta)
     return(list(t = ta, x_new = r$xt, f_new = r$ft, g_new = r$gt, n_eval = evals + 1L))
   }
-  best_t <- tb; best_x <- xb; best_f <- fb; best_g <- gb
+  best_t <- tb
+  best_x <- xb
+  best_f <- fb
+  best_g <- gb
   if (fa < fb) {
     r2 <- psi(ta)
     evals <- evals + 1L
-    best_t <- ta; best_x <- r2$xt; best_f <- r2$ft; best_g <- r2$gt
+    best_t <- ta
+    best_x <- r2$xt
+    best_f <- r2$ft
+    best_g <- r2$gt
   }
   for (i in seq_len(max_cubic)) {
     if (abs(tb - ta) <= tol * max(1.0, abs(tb))) break
@@ -177,14 +190,21 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
     evals <- evals + 1L
     dc <- .cgnonl_dot(p, rc$gt)
     if (rc$ft < best_f) {
-      best_t <- tc; best_x <- rc$xt; best_f <- rc$ft; best_g <- rc$gt
+      best_t <- tc
+      best_x <- rc$xt
+      best_f <- rc$ft
+      best_g <- rc$gt
     }
     if (abs(dc) <= tol * max(1.0, abs(slope0)))
       return(list(t = tc, x_new = rc$xt, f_new = rc$ft, g_new = rc$gt, n_eval = evals))
     if (dc < 0.0) {
-      ta <- tc; fa <- rc$ft; da <- dc
+      ta <- tc
+      fa <- rc$ft
+      da <- dc
     } else {
-      tb <- tc; fb <- rc$ft; db <- dc
+      tb <- tc
+      fb <- rc$ft
+      db <- dc
     }
   }
   list(t = best_t, x_new = best_x, f_new = best_f, g_new = best_g, n_eval = evals)
@@ -271,13 +291,19 @@ nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
       evals <- evals + 1L
     } else {
       r <- line_search_fr(f, grad, x, p, fx, g, est = est)
-      t <- r$t; x_new <- r$x_new; f_new <- r$f_new; g_new <- r$g_new
+      t <- r$t
+      x_new <- r$x_new
+      f_new <- r$f_new
+      g_new <- r$g_new
       evals <- evals + r$n_eval
     }
     g_old <- g
-    x <- x_new; fx <- f_new; g <- g_new
+    x <- x_new
+    fx <- f_new
+    g <- g_new
     if (isTRUE(keep_path)) path[[length(path) + 1L]] <- as.numeric(x)
-    if (.cgnonl_dot(g, g) <= tol * tol) { converged <- TRUE; break }
+    if (.cgnonl_dot(g, g) <= tol * tol) { converged <- TRUE
+    break }
     if (restart != 0L && it %% restart == 0L) {
       p <- -g
       restarts <- restarts + 1L

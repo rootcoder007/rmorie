@@ -96,7 +96,8 @@
   n <- nrow(L)
   M <- matrix(0.0, n, n)
   for (a in seq_len(n)) {
-    e <- numeric(n); e[a] <- 1.0
+    e <- numeric(n)
+    e[a] <- 1.0
     M[, a] <- .sgflrt_solve(L, e)
   }
   M
@@ -220,11 +221,13 @@
 #' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
 #' @export
 .sgflrt_laplace <- function(y, X, Sig, family, inner_iter, tol, disp = 1.0) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   fam <- .sgflrt_family(family, disp)
   L <- .sgflrt_chol(Sig)
   if (is.null(L)) return(NULL)
-  beta <- numeric(p); v <- numeric(n)
+  beta <- numeric(p)
+  v <- numeric(n)
   for (itr in seq_len(as.integer(inner_iter))) {
     u <- as.numeric(L %*% v)
     eta <- as.numeric(X %*% beta) + u
@@ -245,9 +248,11 @@
     LA <- .sgflrt_chol(A)
     if (is.null(LA)) return(NULL)
     sol <- .sgflrt_solve(LA, rhs)
-    nb <- sol[seq_len(p)]; nv <- sol[p + seq_len(n)]
+    nb <- sol[seq_len(p)]
+    nv <- sol[p + seq_len(n)]
     shift <- max(max(abs(nb - beta)), max(abs(nv - v)))
-    beta <- nb; v <- nv
+    beta <- nb
+    v <- nv
     if (shift < tol) break
   }
   u <- as.numeric(L %*% v)
@@ -276,18 +281,24 @@
 #' @return A numeric value.
 #' @export
 .sgflrt_golden <- function(f, lo, hi, iters = 16L) {
-  a <- lo; b <- hi
+  a <- lo
+  b <- hi
   c0 <- b - (b - a) * .sgflrt_INVPHI
   d0 <- a + (b - a) * .sgflrt_INVPHI
-  fc <- f(c0); fd <- f(d0)
+  fc <- f(c0)
+  fd <- f(d0)
   for (i in seq_len(iters)) {
     if (b - a < 1e-8) break
     if (fc > fd) {
-      b <- d0; d0 <- c0; fd <- fc
+      b <- d0
+      d0 <- c0
+      fd <- fc
       c0 <- b - (b - a) * .sgflrt_INVPHI
       fc <- f(c0)
     } else {
-      a <- c0; c0 <- d0; fc <- fd
+      a <- c0
+      c0 <- d0
+      fc <- fd
       d0 <- a + (b - a) * .sgflrt_INVPHI
       fd <- f(d0)
     }
@@ -381,8 +392,10 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
     res <- .sgflrt_laplace(yv, Xm, Sig, family, inner_iter, tol, disp)
     at_bound <- FALSE
   } else {
-    lo_s <- log(1e-6); hi_s <- log(1e3)
-    lo_p <- log(max(dmin, 1e-6) / 4.0); hi_p <- log(dmax * 4.0)
+    lo_s <- log(1e-6)
+    hi_s <- log(1e3)
+    lo_p <- log(max(dmin, 1e-6) / 4.0)
+    hi_p <- log(dmax * 4.0)
     s2h <- if (is.null(sigma2)) 1.0 else as.numeric(sigma2)
     phh <- if (is.null(phi)) dmax / 3.0 else as.numeric(phi)
     for (cyc in seq_len(as.integer(outer_cycles))) {
@@ -427,8 +440,13 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
   if (is.null(res))
     stop(paste0("sgflrt: the penalised system is not positive definite -- ",
                 "try a positive nugget, or a shorter range"))
-  lap <- res$lap; beta <- res$beta; u <- res$u; mu <- res$mu
-  eta <- res$eta; loglik <- res$loglik; w <- res$w
+  lap <- res$lap
+  beta <- res$beta
+  u <- res$u
+  mu <- res$mu
+  eta <- res$eta
+  loglik <- res$loglik
+  w <- res$w
   Lsig <- res$L
 
   # standard errors for beta: the curvature after profiling out v, in the

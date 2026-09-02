@@ -61,10 +61,13 @@
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 #' Pptest(D)
 Pptest <- function(x, lags = NULL, kind = "Z(t_alpha)") {
-  x <- .t4_vec(x); nn <- length(x)
+  x <- .t4_vec(x)
+  nn <- length(x)
   if (nn < 6) stop("need at least 6 observations")
   if (!kind %in% c("Z(alpha)", "Z(t_alpha)")) stop("kind must be 'Z(alpha)' or 'Z(t_alpha)'")
-  yt <- x[-1]; yt1 <- x[-nn]; n <- length(yt)
+  yt <- x[-1]
+  yt1 <- x[-nn]
+  n <- length(yt)
   lag <- if (!is.null(lags)) as.integer(lags) else as.integer(trunc(4 * (n / 100)^0.25))
   if (lag < 1L) lag <- 1L
   X <- cbind(1, seq_len(n) - n / 2, yt1)
@@ -72,8 +75,10 @@ Pptest <- function(x, lags = NULL, kind = "Z(t_alpha)") {
   u <- fit$resid
   ssqru <- sum(u^2) / n
   ssqrtl <- .t4_lrvnw(u, lag)
-  n2 <- n^2; s <- seq_len(n)
-  sy <- sum(yt1); sty <- sum(s * yt1)
+  n2 <- n^2
+  s <- seq_len(n)
+  sy <- sum(yt1)
+  sty <- sum(s * yt1)
   D <- n2 * (n2 - 1) * sum(yt1^2) / 12 - n * sty^2 +
     n * (n + 1) * sty * sy - n * (n + 1) * (2 * n + 1) * sy^2 / 6
   rho <- fit$beta[3]

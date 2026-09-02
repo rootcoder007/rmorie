@@ -14,14 +14,18 @@
 #' Pcadim(V)
 Pcadim <- function(X, k = NULL) {
   out <- morie_pca(X, k = k)
-  Xm <- .t1_mat(X); n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .t1_mat(X)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   kk <- if (is.null(k)) p else as.integer(k)
   if (kk < 1L || kk > p)
     stop("k must lie between 1 and the number of columns of X")
-  W <- out$loadings; PC <- out$scores
+  W <- out$loadings
+  PC <- out$scores
   for (j in seq_len(p)) {
     r <- which.max(abs(W[, j]))
-    if (W[r, j] < 0) { W[, j] <- -W[, j]; PC[, j] <- -PC[, j] }
+    if (W[r, j] < 0) { W[, j] <- -W[, j]
+    PC[, j] <- -PC[, j] }
   }
   .t1_result(scores = PC, loadings = W, eigenvalues = out$eigenvalues,
              compressed = PC[, seq_len(kk), drop = FALSE],

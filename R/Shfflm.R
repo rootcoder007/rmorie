@@ -42,7 +42,9 @@
 #' @examples
 #' Shfflm(epsilon0 = 5L, n = 5L, delta = 0.5)
 Shfflm <- function(epsilon0, n, delta) {
-  e0 <- as.numeric(epsilon0); nn <- as.numeric(n); d <- as.numeric(delta)
+  e0 <- as.numeric(epsilon0)
+  nn <- as.numeric(n)
+  d <- as.numeric(delta)
   if (e0 <= 0) stop("shuffle_model: epsilon0 must be positive")
   if (nn <= 1) stop("shuffle_model: n must exceed 1")
   if (d <= 0 || d >= 1) stop("shuffle_model: delta must lie in (0, 1)")

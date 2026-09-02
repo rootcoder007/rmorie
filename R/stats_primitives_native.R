@@ -34,7 +34,8 @@
 morie_partial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
   storage.mode(X) <- "double"
-  n <- nrow(X); gp <- ncol(X) - 2L
+  n <- nrow(X)
+  gp <- ncol(X) - 2L
   R <- stats::cor(X, method = method)
   P <- tryCatch(solve(R), error = function(e) .morie_ginv(R))
   d <- sqrt(diag(P))
@@ -90,7 +91,8 @@ morie_partial_cor_test <- function(x, y, z, method = "pearson") {
 morie_semipartial_cor <- function(data, method = "pearson") {
   X <- as.matrix(data)
   storage.mode(X) <- "double"
-  n <- nrow(X); gp <- ncol(X) - 2L
+  n <- nrow(X)
+  gp <- ncol(X) - 2L
   # Ding-VanderWeele/Kim semi-partial: from the COVARIANCE precision.
   cvx <- stats::cov(X, method = method)
   icvx <- tryCatch(solve(cvx), error = function(e) .morie_ginv(cvx))
@@ -133,7 +135,9 @@ morie_runs_test <- function(x, threshold = stats::median(x),
                             alternative = "two.sided") {
   x <- x[x != threshold]
   s <- sign(x - threshold)
-  n1 <- sum(s > 0); n2 <- sum(s < 0); n <- n1 + n2
+  n1 <- sum(s > 0)
+  n2 <- sum(s < 0)
+  n <- n1 + n2
   runs <- 1L + sum(s[-1] != s[-length(s)])
   mu <- 2 * n1 * n2 / n + 1
   v <- 2 * n1 * n2 * (2 * n1 * n2 - n) / (n^2 * (n - 1))

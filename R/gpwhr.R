@@ -25,11 +25,17 @@ Warpedgp <- function(X, y, X_test = NULL, warp = "identity", lam = 1e-2,
                      gamma = 1) {
   yv <- .s03vec(y)
   if (identical(warp, "log")) {
-    fwd <- log; inv <- exp; der <- function(v) 1 / v
+    fwd <- log
+    inv <- exp
+    der <- function(v) 1 / v
   } else if (identical(warp, "sqrt")) {
-    fwd <- sqrt; inv <- function(t) t * t; der <- function(v) 0.5 / sqrt(v)
+    fwd <- sqrt
+    inv <- function(t) t * t
+    der <- function(v) 0.5 / sqrt(v)
   } else {
-    fwd <- function(v) v; inv <- function(t) t; der <- function(v) 1
+    fwd <- function(v) v
+    inv <- function(t) t
+    der <- function(v) 1
   }
   t <- vapply(yv, fwd, 0)
   fit <- Krrdual(X, t, X_test, lam, gamma)

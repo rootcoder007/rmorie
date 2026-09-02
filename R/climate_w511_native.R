@@ -30,9 +30,12 @@
 #' @examples
 #' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
-  T <- as.numeric(T)[1]; R_n <- as.numeric(R_n)[1]
-  u2 <- as.numeric(u2)[1]; VPD <- as.numeric(VPD)[1]
-  G <- as.numeric(G)[1]; P <- as.numeric(P)[1]
+  T <- as.numeric(T)[1]
+  R_n <- as.numeric(R_n)[1]
+  u2 <- as.numeric(u2)[1]
+  VPD <- as.numeric(VPD)[1]
+  G <- as.numeric(G)[1]
+  P <- as.numeric(P)[1]
   if (VPD < 0) stop("Basevap: VPD must be non-negative", call. = FALSE)
   if (u2 < 0) stop("Basevap: wind speed must be non-negative", call. = FALSE)
   if (P <= 0) stop("Basevap: pressure must be positive", call. = FALSE)
@@ -63,7 +66,8 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   if (n == 1L) return(0.5)
   if (v <= sx[1]) return(0)
   if (v >= sx[n]) return(1)
-  lo <- 1L; hi <- n
+  lo <- 1L
+  hi <- n
   while (hi - lo > 1L) {
     mid <- (lo + hi) %/% 2L
     if (sx[mid] <= v) lo <- mid else hi <- mid

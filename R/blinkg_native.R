@@ -107,8 +107,10 @@
 .blinkg_design <- function(n, covars, cols) {
   d <- matrix(1, n, 1L + length(covars) + length(cols))
   k <- 1L
-  for (cc in covars) { k <- k + 1L; d[, k] <- cc }
-  for (cc in cols) { k <- k + 1L; d[, k] <- cc }
+  for (cc in covars) { k <- k + 1L
+  d[, k] <- cc }
+  for (cc in cols) { k <- k + 1L
+  d[, k] <- cc }
   d
 }
 
@@ -130,7 +132,10 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
   m <- length(geno)
   if (is.null(covars)) covars <- list()
   qtn <- as.integer(qtn)
-  beta <- numeric(m); se <- numeric(m); tt <- numeric(m); pv <- numeric(m)
+  beta <- numeric(m)
+  se <- numeric(m)
+  tt <- numeric(m)
+  pv <- numeric(m)
   for (j in seq_len(m)) {
     # A pseudo-QTN cannot be its own control, so it comes out of the
     # covariate set exactly while it is the marker under test.
@@ -139,18 +144,27 @@ morie_blinkg_scan <- function(y, geno, covars = NULL, qtn = integer(0)) {
     d <- .blinkg_design(n, covars, cols)
     p <- ncol(d)
     if (n <= p) {
-      beta[j] <- NaN; se[j] <- NaN; tt[j] <- NaN; pv[j] <- NaN
+      beta[j] <- NaN
+      se[j] <- NaN
+      tt[j] <- NaN
+      pv[j] <- NaN
       next
     }
     fit <- try(.w3_ols(y, d), silent = TRUE)
     if (inherits(fit, "try-error")) {
-      beta[j] <- NaN; se[j] <- NaN; tt[j] <- NaN; pv[j] <- NaN
+      beta[j] <- NaN
+      se[j] <- NaN
+      tt[j] <- NaN
+      pv[j] <- NaN
       next
     }
     b <- fit$beta[p]
     v <- fit$sigma2 * fit$xtx_inv[p, p]
     if (!isTRUE(v > 0) || is.nan(v)) {
-      beta[j] <- b; se[j] <- NaN; tt[j] <- NaN; pv[j] <- NaN
+      beta[j] <- b
+      se[j] <- NaN
+      tt[j] <- NaN
+      pv[j] <- NaN
       next
     }
     s <- sqrt(v)

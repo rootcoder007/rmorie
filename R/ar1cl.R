@@ -18,7 +18,9 @@
 #' ar1cl(c(1, -1, 1, -1, 1, -1))
 #' @export
 ar1cl <- function(x, phi = NULL, dt = 1, freq = NULL) {
-  xs <- as.numeric(x); n <- length(xs); m <- mean(xs)
+  xs <- as.numeric(x)
+  n <- length(xs)
+  m <- mean(xs)
   c0 <- sum((xs - m)^2) / n
   c1 <- sum((xs[-1] - m) * (xs[-n] - m)) / n
   ph <- if (is.null(phi)) (if (c0 > 0) c1 / c0 else NA_real_) else as.numeric(phi)

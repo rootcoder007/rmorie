@@ -30,30 +30,42 @@
 #'   bound is stated in full above for checking.
 #' @export
 Mskbnd2 <- function(y, D, X, y_min, y_max) {
-  yv <- .t1_vec(y); d <- .t1_vec(D); n <- length(yv)
+  yv <- .t1_vec(y)
+  d <- .t1_vec(D)
+  n <- length(yv)
   if (n == 0L) stop("y is empty")
   xs <- unlist(X)
   if (length(d) != n || length(xs) != n) {
     stop("y, D and X must have the same length")
   }
-  lo <- as.numeric(y_min); hi <- as.numeric(y_max)
+  lo <- as.numeric(y_min)
+  hi <- as.numeric(y_max)
   if (lo > hi) stop("y_min must not exceed y_max")
   if (any(yv < lo | yv > hi)) stop("observed outcomes must lie in [y_min, y_max]")
   if (any(d != 0 & d != 1)) stop("D must be binary 0/1")
   levels <- unique(xs)
-  tot_lo <- 0; tot_hi <- 0; ilo <- -Inf; ihi <- Inf
+  tot_lo <- 0
+  tot_hi <- 0
+  ilo <- -Inf
+  ihi <- Inf
   for (lev in levels) {
     idx <- which(xs == lev)
     nk <- length(idx)
-    t <- idx[d[idx] == 1]; cc <- idx[d[idx] == 0]
-    p1 <- length(t) / nk; p0 <- length(cc) / nk
+    t <- idx[d[idx] == 1]
+    cc <- idx[d[idx] == 0]
+    p1 <- length(t) / nk
+    p0 <- length(cc) / nk
     m1 <- if (length(t)) sum(yv[t]) / length(t) else 0
     m0 <- if (length(cc)) sum(yv[cc]) / length(cc) else 0
-    e1lo <- m1 * p1 + lo * p0; e1hi <- m1 * p1 + hi * p0
-    e0lo <- m0 * p0 + lo * p1; e0hi <- m0 * p0 + hi * p1
-    klo <- e1lo - e0hi; khi <- e1hi - e0lo
+    e1lo <- m1 * p1 + lo * p0
+    e1hi <- m1 * p1 + hi * p0
+    e0lo <- m0 * p0 + lo * p1
+    e0hi <- m0 * p0 + hi * p1
+    klo <- e1lo - e0hi
+    khi <- e1hi - e0lo
     w <- nk / n
-    tot_lo <- tot_lo + w * klo; tot_hi <- tot_hi + w * khi
+    tot_lo <- tot_lo + w * klo
+    tot_hi <- tot_hi + w * khi
     if (klo > ilo) ilo <- klo
     if (khi < ihi) ihi <- khi
   }

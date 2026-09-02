@@ -52,7 +52,8 @@ morie_gsageemd_aggregate <- function(vectors, how = "mean", W = NULL) {
   if (how == "mean") return(colSums(V) / nrow(V))
   if (how == "max_pool") {
     if (is.null(W)) return(apply(V, 2, max))
-    W <- as.matrix(W); storage.mode(W) <- "double"
+    W <- as.matrix(W)
+    storage.mode(W) <- "double"
     H <- matrix(0, nrow = nrow(V), ncol = nrow(W))
     for (i in seq_len(nrow(V)))
       for (o in seq_len(nrow(W))) {
@@ -109,8 +110,10 @@ sample_neighbors <- function(adj, v, size, rng = NULL) {
 #' @export
 sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
                        rng = NULL, normalize = TRUE) {
-  H <- as.matrix(H); storage.mode(H) <- "double"
-  W <- as.matrix(W); storage.mode(W) <- "double"
+  H <- as.matrix(H)
+  storage.mode(H) <- "double"
+  W <- as.matrix(W)
+  storage.mode(W) <- "double"
   n <- nrow(H)
   out <- matrix(0, nrow = n, ncol = nrow(W))
   for (v in seq_len(n) - 1L) {
@@ -151,7 +154,8 @@ sage_layer <- function(H, adj, W, how = "mean", sizes = NULL,
 morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
                   seed = 0) {
   rng <- .ghc_rng(as.integer(seed))
-  H <- as.matrix(features); storage.mode(H) <- "double"
+  H <- as.matrix(features)
+  storage.mode(H) <- "double"
   for (W in Ws) {
     H <- sage_layer(H, adj, W, how, sizes, rng)
   }
@@ -170,7 +174,8 @@ morie_gsageemd_embed <- function(features, adj, Ws, how = "mean", sizes = NULL,
 #' @return Scalar negative log-likelihood.
 #' @export
 unsupervised_loss <- function(z_u, z_v, z_negatives) {
-  z_u <- as.numeric(z_u); z_v <- as.numeric(z_v)
+  z_u <- as.numeric(z_u)
+  z_v <- as.numeric(z_v)
   pos <- log(pmax(1 / (1 + exp(-sum(z_u * z_v))), .GSAGEEMD_EPS))
   neg <- 0
   for (z_n in z_negatives) {

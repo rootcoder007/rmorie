@@ -56,7 +56,10 @@
 #' @export
 morie_vcov_hc <- function(model, type = "HC3") {
   p <- .morie_vcov_pieces(model)
-  X <- p$X; ef <- p$estfun; n <- p$n; k <- p$k
+  X <- p$X
+  ef <- p$estfun
+  n <- p$n
+  k <- p$k
   br <- p$bread / n
   if (identical(type, "const")) {
     s2 <- sum(p$resid^2) / (n - k)
@@ -115,7 +118,9 @@ morie_vcov_hc <- function(model, type = "HC3") {
 morie_vcov_hac <- function(model, lag = NULL, prewhite = FALSE,
                            adjust = TRUE) {
   p <- .morie_vcov_pieces(model)
-  ef <- p$estfun; n <- p$n; k <- p$k
+  ef <- p$estfun
+  n <- p$n
+  k <- p$k
   if (is.null(lag)) lag <- floor(4 * (n / 100)^(2 / 9))
   meat <- crossprod(ef)
   for (l in seq_len(lag)) {
@@ -152,7 +157,9 @@ morie_vcov_hac <- function(model, lag = NULL, prewhite = FALSE,
 #' @export
 morie_vcov_cl <- function(model, cluster, type = "HC1") {
   p <- .morie_vcov_pieces(model)
-  ef <- p$estfun; n <- p$n; k <- p$k
+  ef <- p$estfun
+  n <- p$n
+  k <- p$k
   cf <- as.factor(cluster)
   G <- nlevels(cf)
   scores <- rowsum(ef, cf, reorder = FALSE)

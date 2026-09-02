@@ -68,8 +68,10 @@
   ch <- as.list(covariate_history)
   if (length(ch) != 2L)
     stop("tmldyn: covariate_history must be two blocks [L0, L1]")
-  L0 <- as.matrix(ch[[1]]); storage.mode(L0) <- "double"
-  L1 <- as.matrix(ch[[2]]); storage.mode(L1) <- "double"
+  L0 <- as.matrix(ch[[1]])
+  storage.mode(L0) <- "double"
+  L1 <- as.matrix(ch[[2]])
+  storage.mode(L1) <- "double"
   if (nrow(L0) != n || nrow(L1) != n)
     stop("tmldyn: covariate blocks have ", nrow(L0), " and ",
          nrow(L1), " rows but there are ", n, " outcomes")
@@ -112,7 +114,8 @@
 #' @keywords internal
 #' @noRd
 .tmldyn_logit_irls <- function(X, y, penalty = 0, max_iter = 60L) {
-  X <- as.matrix(X); y <- as.numeric(y)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
   b <- rep(0, ncol(X))
   for (i in seq_len(max_iter)) {
     p <- 1 / (1 + exp(-as.numeric(X %*% b)))
@@ -147,7 +150,8 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
                                     known = NULL, penalty = 0) {
   n <- length(A0)
   if (!is.null(known)) {
-    p0 <- as.numeric(known[[1]]); p1 <- as.numeric(known[[2]])
+    p0 <- as.numeric(known[[1]])
+    p1 <- as.numeric(known[[2]])
     if (length(p0) != n || length(p1) != n)
       stop("tmldyn: known g has the wrong length")
   } else {
@@ -161,7 +165,8 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
   t <- as.numeric(trim)
   if (!(t >= 0 && t < 0.5))
     stop("tmldyn: trim must be in [0, 0.5)")
-  lo <- max(t, .tmldyn_EPS); hi <- 1 - max(t, .tmldyn_EPS)
+  lo <- max(t, .tmldyn_EPS)
+  hi <- 1 - max(t, .tmldyn_EPS)
   p0 <- pmin(pmax(p0, lo), hi)
   p1 <- pmin(pmax(p1, lo), hi)
   g0 <- ifelse(A0 == 1, p0, 1 - p0)
@@ -189,7 +194,8 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 #' @return A list with \code{q2}, \code{b}.
 #' @export
 .fit_q2 <- function(y, L0, A0, L1, A1, idx, ridge) {
-  p0 <- ncol(L0); p1 <- ncol(L1)
+  p0 <- ncol(L0)
+  p1 <- ncol(L1)
   row_q2 <- function(a0, a1, i) {
     r <- c(1, a0, a1, a0 * a1)
     r <- c(r, L0[i, ], L1[i, ])
@@ -336,7 +342,8 @@ exceptional_law_share <- function(blips, tol = 0.01) {
       all(abs(H[rows]) < 1e-14)) return(0)
   e <- 0
   for (k in seq_len(as.integer(iters))) {
-    num <- 0; den <- 0
+    num <- 0
+    den <- 0
     for (i in rows) {
       p <- .tmldyn_expit(offset_logit[i] + e * H[i])
       num <- num + H[i] * (outcome[i] - p)
@@ -474,34 +481,46 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
                           level = 0.95) {
   if (!method %in% .TMLDYN_METHODS)
     stop("tmldyn: method must be one of cv-tmle, tmle, ipw, gcomp")
-  yv <- as.numeric(y); n <- length(yv)
+  yv <- as.numeric(y)
+  n <- length(yv)
   if (n < 4L) stop("tmldyn: need at least 4 observations")
-  Am <- as.matrix(treatment_history); storage.mode(Am) <- "double"
+  Am <- as.matrix(treatment_history)
+  storage.mode(Am) <- "double"
   if (nrow(Am) != n || ncol(Am) != 2L)
     stop("tmldyn: treatment_history must be n-by-2")
-  A0 <- Am[, 1]; A1 <- Am[, 2]
+  A0 <- Am[, 1]
+  A1 <- Am[, 2]
   if (any(!(A0 %in% c(0, 1))) || any(!(A1 %in% c(0, 1))))
     stop("tmldyn: treatments must be binary 0/1")
   bl <- .blocks(covariate_history, n)
-  L0 <- bl$L0; L1 <- bl$L1
-  ymin <- min(yv); rng <- max(yv) - ymin
+  L0 <- bl$L0
+  L1 <- bl$L1
+  ymin <- min(yv)
+  rng <- max(yv) - ymin
   if (rng <= 0) stop("tmldyn: the outcome is constant")
   ys <- (yv - ymin) / rng
   im <- intervention_mechanism(L0, A0, L1, A1, trim = trim,
                                 known = known_g)
-  g0 <- im$g0; g1 <- im$g1; ginfo <- im$info
+  g0 <- im$g0
+  g1 <- im$g1
+  ginfo <- im$info
   supplied <- .coerce_regime(regime, n)
   if (!is.null(supplied)) {
-    d0 <- supplied$d0; d1 <- supplied$d1
+    d0 <- supplied$d0
+    d1 <- supplied$d1
     full <- sequential_blips(ys, L0, A0, L1, A1, V0 = V0, V1 = V1,
                               ridge = ridge)
-    blip1 <- full$blip1; blip2 <- full$blip2
+    blip1 <- full$blip1
+    blip2 <- full$blip2
     splits <- list(list(train = seq_len(n), val = seq_len(n)))
     rules <- list(list(d0 = d0, d1 = d1))
   } else if (method == "cv-tmle") {
-    splits <- list(); rules <- list()
-    d0 <- rep(0, n); d1 <- list(rep(0, n), rep(0, n))
-    blip1 <- rep(0, n); blip2 <- list(rep(0, n), rep(0, n))
+    splits <- list()
+    rules <- list()
+    d0 <- rep(0, n)
+    d1 <- list(rep(0, n), rep(0, n))
+    blip1 <- rep(0, n)
+    blip2 <- list(rep(0, n), rep(0, n))
     for (val in .tmldyn_folds(n, n_folds)) {
       train <- setdiff(seq_len(n), val)
       fit <- sequential_blips(ys, L0, A0, L1, A1, V0 = V0, V1 = V1,
@@ -509,7 +528,8 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
       splits[[length(splits) + 1L]] <- list(train = train, val = val)
       rules[[length(rules) + 1L]] <- list(d0 = fit$d0, d1 = fit$d1)
       for (i in val) {
-        d0[i] <- fit$d0[i]; blip1[i] <- fit$blip1[i]
+        d0[i] <- fit$d0[i]
+        blip1[i] <- fit$blip1[i]
         for (a in 1:2) {
           d1[[a]][i] <- fit$d1[[a]][i]
           blip2[[a]][i] <- fit$blip2[[a]][i]
@@ -519,8 +539,10 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
   } else {
     fit <- sequential_blips(ys, L0, A0, L1, A1, V0 = V0, V1 = V1,
                              ridge = ridge)
-    d0 <- fit$d0; d1 <- fit$d1
-    blip1 <- fit$blip1; blip2 <- fit$blip2
+    d0 <- fit$d0
+    d1 <- fit$d1
+    blip1 <- fit$blip1
+    blip2 <- fit$blip2
     splits <- list(list(train = seq_len(n), val = seq_len(n)))
     rules <- list(list(d0 = d0, d1 = d1))
   }
@@ -536,13 +558,18 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
   if (method == "ipw") {
     psi_s <- sum(H2 * ys) / n
     eic <- H2 * ys - psi_s
-    q2d <- ys; q1d <- rep(psi_s, n)
-    eps1 <- 0; eps2 <- 0
+    q2d <- ys
+    q1d <- rep(psi_s, n)
+    eps1 <- 0
+    eps2 <- 0
   } else {
-    q2d <- rep(0, n); q1d <- rep(0, n)
+    q2d <- rep(0, n)
+    q1d <- rep(0, n)
     for (k in seq_along(splits)) {
-      tr <- splits[[k]]$train; val <- splits[[k]]$val
-      rd0 <- rules[[k]]$d0; rd1 <- rules[[k]]$d1
+      tr <- splits[[k]]$train
+      val <- splits[[k]]$val
+      rd0 <- rules[[k]]$d0
+      rd1 <- rules[[k]]$d1
       fq2 <- .fit_q2(ys, L0, A0, L1, A1, tr, ridge)
       q2 <- fq2$q2
       pseudo <- vapply(seq_len(n), function(i)
@@ -556,8 +583,10 @@ morie_tmldyn <- function(y, treatment_history, covariate_history,
       }
     }
     if (method == "gcomp") {
-      psi_s <- mean(q1d); eic <- q1d - psi_s
-      eps1 <- 0; eps2 <- 0
+      psi_s <- mean(q1d)
+      eic <- q1d - psi_s
+      eps1 <- 0
+      eps2 <- 0
     } else {
       off2 <- vapply(q2d, .tmldyn_logit, numeric(1))
       eps2 <- .fluctuate(ys, off2, H2, seq_len(n))

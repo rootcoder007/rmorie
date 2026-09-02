@@ -92,12 +92,15 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
   target <- log(perplexity)
   P <- matrix(0, n, n)
   for (i in seq_len(n)) {
-    lo <- -Inf; hi <- Inf; beta <- 1
+    lo <- -Inf
+    hi <- Inf
+    beta <- 1
     di <- D2[i, -i]
     for (it in seq_len(50L)) {
       w <- exp(-di * beta)
       sw <- sum(w)
-      if (sw <= 0) { beta <- beta / 2; next }
+      if (sw <= 0) { beta <- beta / 2
+      next }
       H <- log(sw) + beta * sum(di * w) / sw
       if (abs(H - target) < 1e-5) break
       if (H > target) {

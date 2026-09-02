@@ -27,7 +27,8 @@ Pertarget <- function(replay_buffer, priorities = NULL, z = NULL, v = NULL,
   if (!is.null(priorities)) {
     raw <- .s03vec(priorities)
   } else if (!is.null(z) && !is.null(v)) {
-    zz <- .s03vec(z); vv <- .s03vec(v)
+    zz <- .s03vec(z)
+    vv <- .s03vec(v)
     raw <- abs(zz - vv)
   } else {
     rows <- .s03mat(replay_buffer)
@@ -50,7 +51,9 @@ Pertarget <- function(replay_buffer, priorities = NULL, z = NULL, v = NULL,
   mx <- 0
   for (x in w) if (x > mx) mx <- x
   w <- if (mx > 0) w / mx else rep(0, n)
-  list(estimate = if (n) prob[1] else NaN, prob = prob, weight = w,
-       priority = p, n = n,
-       method = "Prioritized replay priorities from the value residual |z - v|")
+  list(
+    estimate = if (n) prob[1] else NaN, prob = prob, weight = w,
+    priority = p, n = n,
+    method = "Prioritized replay priorities from the value residual |z - v|"
+  )
 }

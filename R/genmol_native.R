@@ -71,7 +71,8 @@
 morie_genmol_kl <- function(mu, logvar) {
   if (length(mu) != length(logvar))
     stop("one log-variance per latent dimension")
-  m <- as.numeric(mu); lv <- as.numeric(logvar)
+  m <- as.numeric(mu)
+  lv <- as.numeric(logvar)
   0.5 * .w3_csum(m * m + exp(lv) - 1 - lv)
 }
 
@@ -143,8 +144,10 @@ morie_genmol_optimise <- function(z0, property_fn, steps = 20L,
   for (it in seq_len(as.integer(steps))) {
     g <- numeric(length(z))
     for (i in seq_along(z)) {
-      up <- z; dn <- z
-      up[i] <- up[i] + eps; dn[i] <- dn[i] - eps
+      up <- z
+      dn <- z
+      up[i] <- up[i] + eps
+      dn[i] <- dn[i] - eps
       g[i] <- (as.numeric(property_fn(up)) -
                  as.numeric(property_fn(dn))) / (2 * eps)
     }
@@ -166,7 +169,8 @@ morie_genmol_optimise <- function(z0, property_fn, steps = 20L,
 #' @export
 morie_genmol_validity <- function(smiles_list)
   vapply(as.character(smiles_list), function(s)
-    tryCatch({ morie_avalon_parse(s); TRUE },
+    tryCatch({ morie_avalon_parse(s)
+    TRUE },
              error = function(z) FALSE), logical(1),
     USE.NAMES = FALSE)
 
@@ -194,7 +198,8 @@ morie_genmol <- function(model, n_samples, conditions = NULL,
   if (!(route %in% .genmol_routes)) stop("the route is vae or diffusion")
   n <- as.integer(n_samples)
   if (n < 1L) stop("a sample of nothing is not a sample")
-  mu <- as.numeric(model$mu); logvar <- as.numeric(model$logvar)
+  mu <- as.numeric(model$mu)
+  logvar <- as.numeric(model$logvar)
   prop <- if (is.null(conditions)) NULL else conditions$property
   train <- if (is.null(conditions) || is.null(conditions$training_set))
     character(0) else as.character(conditions$training_set)
@@ -204,7 +209,9 @@ morie_genmol <- function(model, n_samples, conditions = NULL,
     zs <- morie_genmol_sample(mu, logvar, n, temperature, seed)
   } else {
     sc <- morie_alfrf2_schedule(T)
-    betas <- sc$betas; alphas <- sc$alphas; abar <- sc$abar
+    betas <- sc$betas
+    alphas <- sc$alphas
+    abar <- sc$abar
     T <- as.integer(T)
     e <- .ghc_rng(seed)
     d <- length(mu)
@@ -229,7 +236,8 @@ morie_genmol <- function(model, n_samples, conditions = NULL,
     }
   }
 
-  trajs <- list(); props <- list()
+  trajs <- list()
+  props <- list()
   if (!is.null(prop)) {
     moved <- vector("list", n)
     for (q in seq_len(n)) {

@@ -29,13 +29,15 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ngppr(V)
 Ngppr <- function(y, alpha = 1, tau = 1) {
-  a <- as.numeric(alpha); tt <- as.numeric(tau)
+  a <- as.numeric(alpha)
+  tt <- as.numeric(tau)
   if (a <= 0) stop("Ngppr: alpha must be positive")
   if (tt <= 0) stop("Ngppr: tau must be positive")
   v <- as.numeric(y)
   n <- length(v)
   if (n == 0L) stop("Ngppr: y is empty")
-  ek <- 0; vk <- 0
+  ek <- 0
+  vk <- 0
   for (i in seq_len(n)) {
     ek <- ek + a / (a + i - 1)
     vk <- vk + a * (i - 1) / (a + i - 1)^2

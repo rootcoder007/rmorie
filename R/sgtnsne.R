@@ -23,11 +23,13 @@
 #' Isomapmds(matrix(c(0, 0, 1, 0, 2, 0, 3, 0), 4, 2, byrow = TRUE), 2, 1)$eigvals
 #' @export
 Isomapmds <- function(X, k_nn = 3, dim = 2) {
-  P <- .s03mat(X); n <- nrow(P)
+  P <- .s03mat(X)
+  n <- nrow(P)
   D <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) {
     s <- 0
-    for (a in seq_len(ncol(P))) { dd <- P[i, a] - P[j, a]; s <- s + dd * dd }
+    for (a in seq_len(ncol(P))) { dd <- P[i, a] - P[j, a]
+    s <- s + dd * dd }
     D[i, j] <- sqrt(s)
   }
   G <- matrix(Inf, n, n)
@@ -38,7 +40,8 @@ Isomapmds <- function(X, k_nn = 3, dim = 2) {
     up <- min(kk + 1L, n)
     if (up >= 2L) for (t in seq(2L, up)) {
       j <- ord[t]
-      G[i, j] <- D[i, j]; G[j, i] <- D[i, j]
+      G[i, j] <- D[i, j]
+      G[j, i] <- D[i, j]
     }
   }
   for (m in seq_len(n)) for (i in seq_len(n)) for (j in seq_len(n)) {
@@ -46,17 +49,21 @@ Isomapmds <- function(X, k_nn = 3, dim = 2) {
   }
   ninf <- 0L
   for (i in seq_len(n)) for (j in seq_len(n)) {
-    if (is.infinite(G[i, j])) { ninf <- ninf + 1L; G[i, j] <- 0 }
+    if (is.infinite(G[i, j])) { ninf <- ninf + 1L
+    G[i, j] <- 0 }
   }
   S <- G * G
   rm_ <- numeric(n)
-  for (i in seq_len(n)) { s <- 0; for (j in seq_len(n)) s <- s + S[i, j]; rm_[i] <- s / n }
+  for (i in seq_len(n)) { s <- 0
+  for (j in seq_len(n)) s <- s + S[i, j]
+  rm_[i] <- s / n }
   gm <- 0
   for (v in rm_) gm <- gm + v / n
   B <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(n)) B[i, j] <- -0.5 * (S[i, j] - rm_[i] - rm_[j] + gm)
   eg <- .s03jacobi(B)
-  vals <- eg$values; vecs <- eg$vectors
+  vals <- eg$values
+  vecs <- eg$vectors
   d <- as.integer(dim)
   if (d > n) d <- n
   ev <- numeric(d)

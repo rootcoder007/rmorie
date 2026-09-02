@@ -19,6 +19,6 @@ RDF (Ruhela Dual Formulation) robustness analyses.
 }
 \examples{
 \donttest{
-  morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
+morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
 }
 }

@@ -28,9 +28,11 @@
 #' Otker(V, V)
 Otker <- function(X, Y, kernel = "gaussian", epsilon = 0.1, gamma = 1,
                   max_iter = 200) {
-  A <- as.matrix(X); B <- as.matrix(Y)
+  A <- as.matrix(X)
+  B <- as.matrix(Y)
   if (ncol(A) != ncol(B)) stop("point clouds must share a dimension")
-  n <- nrow(A); m <- nrow(B)
+  n <- nrow(A)
+  m <- nrow(B)
   gram <- function(P, Q) {
     if (kernel == "linear") return(P %*% t(Q))
     if (kernel == "gaussian") {
@@ -43,7 +45,8 @@ Otker <- function(X, Y, kernel = "gaussian", epsilon = 0.1, gamma = 1,
   kxx <- diag(as.matrix(gram(A, A)))
   kyy <- diag(as.matrix(gram(B, B)))
   C <- outer(kxx, kyy, "+") - 2 * Kxy
-  a <- rep(1 / n, n); b <- rep(1 / m, m)
+  a <- rep(1 / n, n)
+  b <- rep(1 / m, m)
   s <- .ot_sinkhorn(a, b, C, as.numeric(epsilon), max_iter)
   ex <- .ot_emd(a, b, C)
   .t1_result(EMD_approx = sum(s$T * C), C = C, exact_cost = ex$cost,

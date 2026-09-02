@@ -26,7 +26,8 @@ Dpgem <- function(alpha = 1, K = 10, seed = 42) {
   K <- as.integer(K)
   if (K < 1L) stop("K must be at least 1")
   e <- .ghc_rng(seed)
-  V <- numeric(K); w <- numeric(K)
+  V <- numeric(K)
+  w <- numeric(K)
   rest <- 1
   for (k in seq_len(K)) {
     v <- .ghc_beta1(e, 1, alpha)

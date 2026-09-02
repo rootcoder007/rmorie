@@ -33,18 +33,23 @@ Evtsthr <- function(x, u_grid = NULL, window = 3) {
   window <- as.integer(window)
   if (window < 2L) stop("window must be at least 2")
   if (length(u_grid) < window) stop("u_grid is shorter than the window")
-  us <- c(); xis <- c(); mods <- c()
+  us <- c()
+  xis <- c()
+  mods <- c()
   for (u in u_grid) {
     if (sum(x > u) < 5L) next
     f <- Evpot(x, u)
-    us <- c(us, u); xis <- c(xis, f$xi); mods <- c(mods, f$modified_scale)
+    us <- c(us, u)
+    xis <- c(xis, f$xi)
+    mods <- c(mods, f$modified_scale)
   }
   if (length(us) < window) stop("too few usable thresholds after filtering")
   scores <- numeric(length(us) - window + 1L)
   for (i in seq_along(scores)) {
     xw <- xis[i:(i + window - 1L)]
     mw <- mods[i:(i + window - 1L)]
-    if (any(mw <= 0)) { scores[i] <- Inf; next }
+    if (any(mw <= 0)) { scores[i] <- Inf
+    next }
     scores[i] <- .s03var(log(mw), 1L) + .s03var(xw, 1L)
   }
   best <- 1L

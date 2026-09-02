@@ -31,7 +31,8 @@
 #' Causbckd(y = rnorm(50), x = rbinom(50, 1, 0.5),
 #'          z = sample(c("a", "b"), 50, replace = TRUE))
 Causbckd <- function(y, x, z) {
-  y <- as.numeric(y); xv <- as.numeric(x)
+  y <- as.numeric(y)
+  xv <- as.numeric(x)
   zl <- as.character(z)
   n <- length(y)
   if (length(xv) != n || length(zl) != n) {
@@ -39,7 +40,8 @@ Causbckd <- function(y, x, z) {
   }
   if (!all(xv %in% c(0, 1))) stop("x must be binary 0/1", call. = FALSE)
   ks <- sort(unique(zl), method = "radix")
-  ate <- 0; v <- 0
+  ate <- 0
+  v <- 0
   strata <- list()
   for (k in ks) {
     i1 <- which(zl == k & xv == 1)

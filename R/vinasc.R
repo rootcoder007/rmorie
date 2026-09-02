@@ -17,8 +17,13 @@
 #'   equation (9) is \code{g(c_inter) = c_inter / (1 + w N_rot)}.
 #' @export
 Vinasc <- function(receptor, ligand_pose, n_rot = 0) {
-  R <- as.matrix(receptor); L <- as.matrix(ligand_pose)
-  g1 <- 0; g2 <- 0; rep_ <- 0; hyd <- 0; hb <- 0
+  R <- as.matrix(receptor)
+  L <- as.matrix(ligand_pose)
+  g1 <- 0
+  g2 <- 0
+  rep_ <- 0
+  hyd <- 0
+  hb <- 0
   for (i in seq_len(nrow(R))) {
     for (j in seq_len(nrow(L))) {
       r <- sqrt(sum((R[i, 1:3] - L[j, 1:3])^2))

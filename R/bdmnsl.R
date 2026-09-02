@@ -21,15 +21,20 @@
 #' Mtsbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
 #'          ymin = -3, ymax = 3)
 Mtsbound <- function(y, z, d, ymin, ymax) {
-  y <- .t1_vec(y); z <- .t1_vec(z); n <- length(y)
+  y <- .t1_vec(y)
+  z <- .t1_vec(z)
+  n <- length(y)
   if (length(z) != n) stop("y and z must have the same length")
-  lo <- as.numeric(ymin); hi <- as.numeric(ymax)
+  lo <- as.numeric(ymin)
+  hi <- as.numeric(ymax)
   if (lo > hi) stop("ymin must not exceed ymax")
   d <- as.numeric(d)
   at <- which(z == d)
   if (length(at) == 0L) stop("no unit is observed at treatment level d")
   cm <- sum(y[at]) / length(at)
-  pb <- sum(z < d) / n; pa <- sum(z > d) / n; pat <- length(at) / n
+  pb <- sum(z < d) / n
+  pa <- sum(z > d) / n
+  pat <- length(at) / n
   ub <- (pb + pat) * cm + pa * hi
   lb <- pb * lo + (pat + pa) * cm
   .t1_result(lower = lb, upper = ub, width = ub - lb, condmean = cm,

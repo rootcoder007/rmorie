@@ -18,9 +18,11 @@
 #' @return A list with \code{estimate}, \code{coefficients}, \code{intercept}, \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings}, \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components}, \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   y <- as.numeric(Y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n == 0L) stop("plsqs: no observations")
   if (length(y) != n)
     stop(sprintf("plsqs: %d rows but %d responses", n, length(y)))
@@ -28,12 +30,19 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   if (a < 1L) stop("plsqs: at least one component is required")
   a <- if (n > 1L) min(a, p, n - 1L) else min(a, p)
 
-  xbar <- colSums(Xm) / n; ybar <- sum(y) / n
-  E <- sweep(Xm, 2L, xbar, "-"); f <- y - ybar
-  ss_x0 <- sum(E ^ 2); ss_y0 <- sum(f ^ 2)
+  xbar <- colSums(Xm) / n
+  ybar <- sum(y) / n
+  E <- sweep(Xm, 2L, xbar, "-")
+  f <- y - ybar
+  ss_x0 <- sum(E ^ 2)
+  ss_y0 <- sum(f ^ 2)
 
-  W <- list(); T <- list(); P <- list(); q <- numeric(0)
-  ex_x <- numeric(0); ex_y <- numeric(0)
+  W <- list()
+  T <- list()
+  P <- list()
+  q <- numeric(0)
+  ex_x <- numeric(0)
+  ex_y <- numeric(0)
   for (it in seq_len(a)) {
     w <- as.numeric(crossprod(E, f))
     nw <- sqrt(sum(w ^ 2))
@@ -48,8 +57,10 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
     ss_y <- qj * qj * tt
     E <- E - outer(t, pl)
     f <- f - qj * t
-    W[[length(W) + 1L]] <- w; T[[length(T) + 1L]] <- t
-    P[[length(P) + 1L]] <- pl; q <- c(q, qj)
+    W[[length(W) + 1L]] <- w
+    T[[length(T) + 1L]] <- t
+    P[[length(P) + 1L]] <- pl
+    q <- c(q, qj)
     ex_x <- c(ex_x, if (ss_x0 > .plsqs_EPS) ss_x / ss_x0 else 0.0)
     ex_y <- c(ex_y, if (ss_y0 > .plsqs_EPS) ss_y / ss_y0 else 0.0)
   }
@@ -60,7 +71,8 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   for (r in seq_len(a)) for (c in seq_len(a))
     PW[r, c] <- sum(P[[r]] * W[[c]])
   diag(PW) <- diag(PW) + .plsqs_EPS
-  A <- crossprod(PW); b <- as.numeric(crossprod(PW, q))
+  A <- crossprod(PW)
+  b <- as.numeric(crossprod(PW, q))
   Lc <- chol(A)
   z <- as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
   beta <- rep(0.0, p)

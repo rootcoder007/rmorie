@@ -39,7 +39,7 @@ year, optionally filtered by gender.
 }
 \examples{
 \donttest{
-  df <- morie_otis_load()
+df <- morie_otis_load()
   morie_otis_rplace(df, year = 2024)
 }
 }

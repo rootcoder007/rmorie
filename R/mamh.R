@@ -23,8 +23,10 @@
 #' @examples
 #' Mamh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mamh <- function(a, b, c, d, confidence = 0.95) {
-  a <- as.numeric(a); b <- as.numeric(b)
-  c <- as.numeric(c); d <- as.numeric(d)
+  a <- as.numeric(a)
+  b <- as.numeric(b)
+  c <- as.numeric(c)
+  d <- as.numeric(d)
   if (length(b) != length(a) || length(c) != length(a) ||
       length(d) != length(a))
     stop("the four cell vectors must have equal length")

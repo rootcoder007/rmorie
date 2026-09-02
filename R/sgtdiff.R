@@ -15,11 +15,13 @@
 #' rowSums(sgtdiff(matrix(c(0,1,1,0), 2, 2), 0.3)$kernel)
 #' @export
 sgtdiff <- function(A, beta = 1) {
-  m <- as.matrix(A); dimnames(m) <- NULL
+  m <- as.matrix(A)
+  dimnames(m) <- NULL
   m <- 0.5 * (m + t(m))
   lap <- diag(rowSums(m), nrow = nrow(m)) - m
   e <- eigen(lap, symmetric = TRUE)
-  w <- rev(e$values); v <- e$vectors[, rev(seq_len(ncol(e$vectors))), drop = FALSE]
+  w <- rev(e$values)
+  v <- e$vectors[, rev(seq_len(ncol(e$vectors))), drop = FALSE]
   k <- (v * rep(exp(-beta * w), each = nrow(v))) %*% t(v)
   k <- 0.5 * (k + t(k))
   list(estimate = sum(diag(k)), kernel = k, eigenvalues = w,

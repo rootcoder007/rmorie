@@ -42,13 +42,15 @@ Ramsw <- function(y, a, max_iter = 100L, tol = 1e-13) {
   w <- rep(1, n)
   for (it in seq_len(as.integer(max_iter))) {
     w <- exp(-aa * abs((v - mu) / s))
-    sw <- 0; sx <- 0
+    sw <- 0
+    sx <- 0
     for (i in seq_len(n)) {
       sw <- sw + w[i]
       sx <- sx + w[i] * v[i]
     }
     new <- if (sw > 0) sx / sw else mu
-    if (abs(new - mu) <= tol) { mu <- new; break }
+    if (abs(new - mu) <= tol) { mu <- new
+    break }
     mu <- new
   }
   list(estimate = mu, weights = w, scale = s, a = aa, iters = it, n = n,

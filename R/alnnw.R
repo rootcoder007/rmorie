@@ -38,8 +38,10 @@
 #' Alnnw("GATTACA", "GCATGCU")$score
 #' @export
 Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
-  a <- .aln_symbols(seq1); b <- .aln_symbols(seq2)
-  n <- length(a); m <- length(b)
+  a <- .aln_symbols(seq1)
+  b <- .aln_symbols(seq2)
+  n <- length(a)
+  m <- length(b)
   if (n == 0L || m == 0L) stop("needleman_wunsch: neither sequence may be empty")
   g <- as.numeric(gap)
   if (g < 0) stop("needleman_wunsch: gap must be non-negative")
@@ -59,18 +61,29 @@ Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
       F[i + 1L, j + 1L] <- best
     }
   }
-  o1 <- character(0); o2 <- character(0)
-  i <- n; j <- m
+  o1 <- character(0)
+  o2 <- character(0)
+  i <- n
+  j <- m
   while (i > 0L || j > 0L) {
     if (i > 0L && j > 0L && F[i + 1L, j + 1L] == F[i, j] + sf(a[i], b[j])) {
-      o1 <- c(a[i], o1); o2 <- c(b[j], o2); i <- i - 1L; j <- j - 1L
+      o1 <- c(a[i], o1)
+      o2 <- c(b[j], o2)
+      i <- i - 1L
+      j <- j - 1L
     } else if (i > 0L && F[i + 1L, j + 1L] == F[i, j + 1L] - g) {
-      o1 <- c(a[i], o1); o2 <- c("-", o2); i <- i - 1L
+      o1 <- c(a[i], o1)
+      o2 <- c("-", o2)
+      i <- i - 1L
     } else {
-      o1 <- c("-", o1); o2 <- c(b[j], o2); j <- j - 1L
+      o1 <- c("-", o1)
+      o2 <- c(b[j], o2)
+      j <- j - 1L
     }
   }
-  nm <- 0L; nx <- 0L; ng <- 0L
+  nm <- 0L
+  nx <- 0L
+  ng <- 0L
   for (p in seq_along(o1)) {
     if (o1[p] == "-" || o2[p] == "-") ng <- ng + 1L
     else if (o1[p] == o2[p]) nm <- nm + 1L
@@ -90,7 +103,8 @@ Alnnw <- function(seq1, seq2, sub_matrix = NULL, gap = 1) {
 #' @noRd
 .aln_score <- function(sub_matrix, alpha, who) {
   if (is.null(sub_matrix)) return(function(x, y) if (x == y) 1 else -1)
-  M <- as.matrix(sub_matrix); storage.mode(M) <- "double"
+  M <- as.matrix(sub_matrix)
+  storage.mode(M) <- "double"
   if (nrow(M) != length(alpha) || ncol(M) != length(alpha)) {
     stop(sprintf("%s: sub_matrix must be square over the symbol alphabet", who))
   }

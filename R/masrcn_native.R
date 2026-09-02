@@ -31,12 +31,16 @@
 #' @return A numeric value.
 #' @export
 .masrcn_bilinear <- function(F, y, x) {
-  h <- length(F); w <- length(F[[1L]])
+  h <- length(F)
+  w <- length(F[[1L]])
   y <- min(max(as.numeric(y), 0), h - 1)
   x <- min(max(as.numeric(x), 0), w - 1)
-  y0 <- as.integer(floor(y)); x0 <- as.integer(floor(x))
-  y1 <- min(y0 + 1L, h - 1L); x1 <- min(x0 + 1L, w - 1L)
-  dy <- y - y0; dx <- x - x0
+  y0 <- as.integer(floor(y))
+  x0 <- as.integer(floor(x))
+  y1 <- min(y0 + 1L, h - 1L)
+  x1 <- min(x0 + 1L, w - 1L)
+  dy <- y - y0
+  dx <- x - x0
   F[[y0 + 1L]][[x0 + 1L]] * (1 - dy) * (1 - dx) +
     F[[y1 + 1L]][[x0 + 1L]] * dy * (1 - dx) +
     F[[y0 + 1L]][[x1 + 1L]] * (1 - dy) * dx +
@@ -80,12 +84,15 @@ roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
   x0 <- as.numeric(box[2L]) / as.numeric(stride)
   y1 <- as.numeric(box[3L]) / as.numeric(stride)
   x1 <- as.numeric(box[4L]) / as.numeric(stride)
-  qy0 <- as.integer(floor(y0)); qx0 <- as.integer(floor(x0))
-  qy1 <- as.integer(floor(y1)); qx1 <- as.integer(floor(x1))
+  qy0 <- as.integer(floor(y0))
+  qx0 <- as.integer(floor(x0))
+  qy1 <- as.integer(floor(y1))
+  qx1 <- as.integer(floor(x1))
   if (qy1 <= qy0 || qx1 <= qx0)
     stop("masrcn: the box collapsed under quantisation, which is itself the problem")
   n <- as.integer(out_size)
-  bh <- (qy1 - qy0) / n; bw <- (qx1 - qx0) / n
+  bh <- (qy1 - qy0) / n
+  bw <- (qx1 - qx0) / n
   out <- list()
   for (i in seq_len(n) - 1L) {
     row <- list()
@@ -133,8 +140,10 @@ roi_align <- function(features, box, out_size = 2L, stride = 1.0,
   x1 <- as.numeric(box[4L]) / as.numeric(stride)
   if (y1 <= y0 || x1 <= x0)
     stop("masrcn: the box has non-positive extent")
-  n <- as.integer(out_size); s <- as.integer(samples)
-  bh <- (y1 - y0) / n; bw <- (x1 - x0) / n
+  n <- as.integer(out_size)
+  s <- as.integer(samples)
+  bh <- (y1 - y0) / n
+  bw <- (x1 - x0) / n
   out <- list()
   for (i in seq_len(n) - 1L) {
     row <- list()
@@ -195,7 +204,8 @@ mask_loss <- function(logits, target, decoupled = TRUE) {
   T <- .masrcn_mat(target)
   if (length(L) != length(T) || length(L[[1L]]) != length(T[[1L]]))
     stop("masrcn: the logits and target differ in shape")
-  tot <- 0.0; m <- 0L
+  tot <- 0.0
+  m <- 0L
   if (decoupled) {
     for (i in seq_along(L)) {
       for (j in seq_along(L[[1L]])) {

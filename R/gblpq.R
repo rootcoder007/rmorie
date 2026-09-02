@@ -16,8 +16,11 @@
 #' G <- diag(5)
 #' Gblupeq(Z, G, sigma2_g = 1)
 Gblupeq <- function(Z, G, sigma2_g) {
-  Zm <- .t1_mat(Z); Gm <- .t1_mat(G); s2 <- as.numeric(sigma2_g)
-  n <- nrow(Zm); q <- ncol(Zm)
+  Zm <- .t1_mat(Z)
+  Gm <- .t1_mat(G)
+  s2 <- as.numeric(sigma2_g)
+  n <- nrow(Zm)
+  q <- ncol(Zm)
   if (nrow(Gm) != q || ncol(Gm) != q)
     stop("G must be q by q with q the number of columns of Z")
   if (s2 < 0) stop("sigma2_g must be non-negative")

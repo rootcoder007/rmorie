@@ -15,10 +15,13 @@
 #' malab(c(12, 20), c(50, 60), c(7, 15), c(50, 55))$estimate
 #' @export
 malab <- function(ai, n1i, ci, n2i) {
-  a <- as.numeric(ai); n1 <- as.numeric(n1i)
-  cc <- as.numeric(ci); n2 <- as.numeric(n2i)
+  a <- as.numeric(ai)
+  n1 <- as.numeric(n1i)
+  cc <- as.numeric(ci)
+  n2 <- as.numeric(n2i)
   ntot <- n1 + n2
-  p1 <- a / n1; p2 <- cc / n2
+  p1 <- a / n1
+  p2 <- cc / n2
   rr <- sum(a * n2 / ntot) / sum(cc * n1 / ntot)
   rd <- sum((a * n2 - cc * n1) / ntot) / sum(n1 * n2 / ntot)
   list(estimate = rr, x = p2, y = p1, size = ntot, risk_difference = rd,

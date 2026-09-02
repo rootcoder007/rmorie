@@ -11,7 +11,8 @@
 #' @examples
 #' Degmat(Adj = 5L)
 Degmat <- function(Adj) {
-  A <- .t1_mat(Adj); n <- nrow(A)
+  A <- .t1_mat(Adj)
+  n <- nrow(A)
   if (n == 0L || ncol(A) != n) stop("Adj must be a non-empty square matrix")
   if (any(A < 0)) stop("edge weights must be non-negative")
   if (any(A != t(A))) stop("Adj must be symmetric")

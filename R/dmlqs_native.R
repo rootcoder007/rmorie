@@ -213,7 +213,8 @@
     if (length(parts) != 2L) {
       stop(sprintf("dmlqs: h0 key '%s' is not 'v,w'", nm[i]))
     }
-    v <- as.integer(parts[1L]); w <- as.integer(parts[2L])
+    v <- as.integer(parts[1L])
+    w <- as.integer(parts[2L])
     H[[.dmlqs_edge_key(v, w)]] <- as.numeric(h0[[i]])
   }
   d <- length(H[[1L]])
@@ -244,7 +245,8 @@
     keys <- names(H)
     for (k in seq_along(keys)) {
       parts <- strsplit(keys[k], ",", fixed = TRUE)[[1]]
-      v <- as.integer(parts[1L]); w <- as.integer(parts[2L])
+      v <- as.integer(parts[1L])
+      w <- as.integer(parts[2L])
       m <- rep(0.0, d)
       nb <- A[[as.character(v)]]
       nb <- if (is.null(nb)) integer(0) else nb

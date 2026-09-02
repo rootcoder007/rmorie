@@ -25,15 +25,20 @@
 #'   Courty, N. (2020). Algorithms 13(9):212. \doi{10.3390/a13090212}.
 #' @export
 Otfgw <- function(M, Cx, Cy, a, b, alpha = 0.5, max_iter = 20) {
-  Mm <- as.matrix(M); A <- as.matrix(Cx); B <- as.matrix(Cy)
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
-  n <- length(aa); m <- length(bb)
+  Mm <- as.matrix(M)
+  A <- as.matrix(Cx)
+  B <- as.matrix(Cy)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
+  n <- length(aa)
+  m <- length(bb)
   if (nrow(Mm) != n || ncol(Mm) != m) stop("M must be n by m")
   if (nrow(A) != n || nrow(B) != m)
     stop("structure matrices must match the marginals")
   al <- as.numeric(alpha)
   if (al < 0 || al > 1) stop("alpha must lie in [0, 1]")
-  t1 <- sum(outer(aa, aa) * A^2); t3 <- sum(outer(bb, bb) * B^2)
+  t1 <- sum(outer(aa, aa) * A^2)
+  t3 <- sum(outer(bb, bb) * B^2)
   T <- outer(aa, bb)
   it <- as.integer(max_iter)
   for (k in seq_len(it) - 1L) {

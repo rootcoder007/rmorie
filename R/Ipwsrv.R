@@ -25,9 +25,11 @@
 #' Ipwsrv(y = rnorm(20), T = rbinom(20, 1, 0.5), weights = runif(20, 1, 2),
 #'        propensity = runif(20, 0.3, 0.7))
 Ipwsrv <- function(y, T, weights, propensity) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("ipw_with_survey_weights: y is empty")
-  t <- .s03vec(T); pi <- .s03vec(propensity)
+  t <- .s03vec(T)
+  pi <- .s03vec(propensity)
   if (length(t) != n || length(pi) != n) stop("ipw_with_survey_weights: y, T and propensity have different lengths")
   d <- if (!is.null(weights)) .s03vec(weights) else rep(1, n)
   if (length(d) != n) stop("ipw_with_survey_weights: weights and y have different lengths")
@@ -35,14 +37,17 @@ Ipwsrv <- function(y, T, weights, propensity) {
   if (any(d < 0)) stop("ipw_with_survey_weights: design weights must be non-negative")
   if (any(t != 0 & t != 1)) stop("ipw_with_survey_weights: T must be 0 or 1")
   w <- d * (t / pi + (1 - t) / (1 - pi))
-  i1 <- t == 1; i0 <- t == 0
-  s1 <- sum(w[i1]); s0 <- sum(w[i0])
+  i1 <- t == 1
+  i0 <- t == 0
+  s1 <- sum(w[i1])
+  s0 <- sum(w[i0])
   if (s1 <= 0 || s0 <= 0) stop("ipw_with_survey_weights: both treatment arms must be non-empty")
   mu1 <- sum(w[i1] * yv[i1]) / s1
   mu0 <- sum(w[i0] * yv[i0]) / s0
   v1 <- sum((w[i1] * (yv[i1] - mu1))^2) / s1^2
   v0 <- sum((w[i0] * (yv[i0] - mu0))^2) / s0^2
-  sw <- sum(w); sw2 <- sum(w^2)
+  sw <- sum(w)
+  sw2 <- sum(w^2)
   ess <- if (sw2 > 0) sw^2 / sw2 else 0
   .t1_result(estimate = mu1 - mu0, mu1 = mu1, mu0 = mu0, se = sqrt(v1 + v0),
              var1 = v1, var0 = v0, sum_w = sw, ess = ess, n1 = sum(i1), n = n,

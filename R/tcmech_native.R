@@ -78,7 +78,8 @@
 #' @return The epsilon achieved.
 #' @export
 morie_tcmech_eps <- function(rho, delta, omega = NULL) {
-  rho <- as.numeric(rho); delta <- as.numeric(delta)
+  rho <- as.numeric(rho)
+  delta <- as.numeric(delta)
   if (rho < 0) stop("rho cannot be negative")
   if (!(delta > 0 && delta < 1))
     stop("delta must lie strictly inside (0, 1)")
@@ -140,7 +141,8 @@ morie_tcmech_rho <- function(epsilon, delta, omega = NULL, iters = 200L) {
          "irreducible term log(1/delta)/(omega - 1) = ", fl,
          " that does not depend on rho. Loosen the truncation, loosen ",
          "delta, or ask for a larger epsilon.")
-  lo <- 0; hi <- 1
+  lo <- 0
+  hi <- 1
   for (i in seq_len(60L)) {
     if (morie_tcmech_eps(hi, delta, omega) >= epsilon) break
     hi <- hi * 2
@@ -162,7 +164,8 @@ morie_tcmech_rho <- function(epsilon, delta, omega = NULL, iters = 200L) {
 #' @return The Gaussian noise scale.
 #' @export
 morie_tcmech_sigma <- function(sensitivity, rho) {
-  s <- as.numeric(sensitivity); r <- as.numeric(rho)
+  s <- as.numeric(sensitivity)
+  r <- as.numeric(rho)
   if (s <= 0) stop("the sensitivity must be positive")
   if (r <= 0) stop("rho must be positive to release anything")
   s / sqrt(2 * r)
@@ -175,7 +178,8 @@ morie_tcmech_sigma <- function(sensitivity, rho) {
 #' @return The implied rho.
 #' @export
 morie_tcmech_rho_from_sigma <- function(sensitivity, sigma) {
-  s <- as.numeric(sensitivity); g <- as.numeric(sigma)
+  s <- as.numeric(sensitivity)
+  g <- as.numeric(sigma)
   if (g <= 0) stop("the noise scale must be positive")
   s * s / (2 * g * g)
 }
@@ -235,8 +239,10 @@ morie_tcmech <- function(y, f_value, C, epsilon, delta, omega = NULL,
   clipped <- numeric(length(vals))
   n_clipped <- 0L
   for (i in seq_along(vals)) {
-    if (vals[i] > c0) { clipped[i] <- c0; n_clipped <- n_clipped + 1L }
-    else if (vals[i] < -c0) { clipped[i] <- -c0; n_clipped <- n_clipped + 1L }
+    if (vals[i] > c0) { clipped[i] <- c0
+    n_clipped <- n_clipped + 1L }
+    else if (vals[i] < -c0) { clipped[i] <- -c0
+    n_clipped <- n_clipped + 1L }
     else clipped[i] <- vals[i]
   }
 

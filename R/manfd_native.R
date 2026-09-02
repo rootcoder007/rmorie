@@ -62,8 +62,10 @@
 #' @return The distance matrix.
 #' @export
 morie_manfd_l2 <- function(Y, grid = NULL) {
-  Y <- as.matrix(Y); storage.mode(Y) <- "double"
-  n <- nrow(Y); p <- ncol(Y)
+  Y <- as.matrix(Y)
+  storage.mode(Y) <- "double"
+  n <- nrow(Y)
+  p <- ncol(Y)
   if (is.null(grid)) grid <- as.numeric(seq_len(p) - 1L)
   grid <- as.numeric(grid)
   if (length(grid) != p) stop("the grid must match the curve length")
@@ -79,7 +81,8 @@ morie_manfd_l2 <- function(Y, grid = NULL) {
       terms <- c(terms, 0.5 * (a * a + b * b) * (grid[t + 1L] - grid[t]))
     }
     v <- if (length(terms)) sqrt(.w3_csum(terms)) else 0
-    D[i, j] <- v; D[j, i] <- v
+    D[i, j] <- v
+    D[j, i] <- v
   }
   D
 }
@@ -162,7 +165,8 @@ morie_manfd_paths <- function(A) {
 #' @export
 morie_manfd_jacobi <- function(A, sweeps = 60L) {
   n <- nrow(A)
-  a <- as.matrix(A); storage.mode(a) <- "double"
+  a <- as.matrix(A)
+  storage.mode(a) <- "double"
   v <- diag(1, n, n)
   for (it in seq_len(as.integer(sweeps))) {
     off <- 0
@@ -177,17 +181,20 @@ morie_manfd_jacobi <- function(A, sweeps = 60L) {
       cc <- 1 / sqrt(t * t + 1)
       s <- t * cc
       for (r in seq_len(n)) {
-        arp <- a[r, p]; arq <- a[r, q]
+        arp <- a[r, p]
+        arq <- a[r, q]
         a[r, p] <- cc * arp - s * arq
         a[r, q] <- s * arp + cc * arq
       }
       for (r in seq_len(n)) {
-        apr <- a[p, r]; aqr <- a[q, r]
+        apr <- a[p, r]
+        aqr <- a[q, r]
         a[p, r] <- cc * apr - s * aqr
         a[q, r] <- s * apr + cc * aqr
       }
       for (r in seq_len(n)) {
-        vrp <- v[r, p]; vrq <- v[r, q]
+        vrp <- v[r, p]
+        vrq <- v[r, q]
         v[r, p] <- cc * vrp - s * vrq
         v[r, q] <- s * vrp + cc * vrq
       }
@@ -258,7 +265,8 @@ morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
                         dim = 2L, sweeps = 60L) {
   if (!(method %in% .MANFD_METHODS))
     stop("method must be one of ", paste(.MANFD_METHODS, collapse = ", "))
-  ys <- as.matrix(Y); storage.mode(ys) <- "double"
+  ys <- as.matrix(Y)
+  storage.mode(ys) <- "double"
   n <- nrow(ys)
   if (n < 3L) stop("need at least three curves")
   D <- morie_manfd_l2(ys, grid)
@@ -267,23 +275,29 @@ morie_manfd <- function(Y, k = 4L, method = "isomap", grid = NULL,
   G <- sp$G
   disconnected <- sp$components > 1L
 
-  coords <- NULL; ev <- numeric(0); n_neg <- 0L
+  coords <- NULL
+  ev <- numeric(0)
+  n_neg <- 0L
   if (method != "geodesic_only" && !disconnected) {
     src <- if (method == "isomap") G else D
     cs <- morie_manfd_scaling(src, dim, sweeps)
-    coords <- cs$coords; ev <- cs$values; n_neg <- cs$n_negative
+    coords <- cs$coords
+    ev <- cs$values
+    n_neg <- cs$n_negative
   }
 
   resid <- NaN
   if (!is.null(coords)) {
     src <- if (method == "isomap") G else D
-    a <- numeric(0); b <- numeric(0)
+    a <- numeric(0)
+    b <- numeric(0)
     for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n) {
       a <- c(a, src[i, j])
       b <- c(b, sqrt(.w3_csum((coords[i, ] - coords[j, ]) *
                                 (coords[i, ] - coords[j, ]))))
     }
-    ma <- .w3_csum(a) / length(a); mb <- .w3_csum(b) / length(b)
+    ma <- .w3_csum(a) / length(a)
+    mb <- .w3_csum(b) / length(b)
     saa <- .w3_csum((a - ma) * (a - ma))
     sbb <- .w3_csum((b - mb) * (b - mb))
     sab <- .w3_csum((a - ma) * (b - mb))

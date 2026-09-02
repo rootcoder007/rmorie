@@ -21,8 +21,11 @@
 #' @examples
 #' Evvarpot(u = 1, sigma = 0.5, xi = 0.1, zeta_u = 0.1, p = 0.99)
 Evvarpot <- function(u, sigma, xi, zeta_u, p) {
-  u <- as.numeric(u); sigma <- as.numeric(sigma); xi <- as.numeric(xi)
-  zeta_u <- as.numeric(zeta_u); p <- as.numeric(p)
+  u <- as.numeric(u)
+  sigma <- as.numeric(sigma)
+  xi <- as.numeric(xi)
+  zeta_u <- as.numeric(zeta_u)
+  p <- as.numeric(p)
   if (!(sigma > 0)) stop("sigma must be strictly positive")
   if (!(zeta_u > 0 && zeta_u <= 1)) stop("zeta_u must lie in (0, 1]")
   if (!(p > 0 && p < 1)) stop("p must lie strictly in (0, 1)")

@@ -78,7 +78,8 @@ rgkneejt <- function(vag, fs, force = 1.5, window = NULL) {
   thr <- ratio * baseline
   slip <- as.integer(env > thr)
 
-  onsets <- integer(0); offsets <- integer(0)
+  onsets <- integer(0)
+  offsets <- integer(0)
   i <- 1L
   while (i <= N) {
     if (slip[i] == 1L) {

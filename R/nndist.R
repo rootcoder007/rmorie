@@ -39,7 +39,9 @@ Nndist <- function(coords, r_grid, window = NULL) {
   rs <- as.numeric(r_grid)
   if (!length(rs)) stop("Nndist: r_grid is empty")
   if (any(rs < 0)) stop("Nndist: r_grid must be non-negative")
-  G <- numeric(length(rs)); Gc <- numeric(length(rs)); mu <- numeric(length(rs))
+  G <- numeric(length(rs))
+  Gc <- numeric(length(rs))
+  mu <- numeric(length(rs))
   for (k in seq_along(rs)) {
     h <- rs[k]
     keep <- b > h

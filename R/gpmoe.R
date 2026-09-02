@@ -27,24 +27,34 @@
 #' @examples
 #' Gpmoe(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_test = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
 Gpmoe <- function(X, y, X_test, K, ell = 1, noise = 1e-6) {
-  Xm <- as.matrix(X); Xt <- as.matrix(X_test); yv <- as.numeric(y)
-  n <- nrow(Xm); m <- nrow(Xt); K <- as.integer(K)
+  Xm <- as.matrix(X)
+  Xt <- as.matrix(X_test)
+  yv <- as.numeric(y)
+  n <- nrow(Xm)
+  m <- nrow(Xt)
+  K <- as.integer(K)
   o <- order(Xm[, 1], seq_len(n))
   blocks <- vector("list", K)
   for (pos in seq_len(n)) {
     k <- min(((pos - 1L) * K) %/% n, K - 1L) + 1L
     blocks[[k]] <- c(blocks[[k]], o[pos])
   }
-  cent <- matrix(0, K, ncol(Xm)); mu_k <- matrix(0, K, m); var_k <- matrix(0, K, m)
+  cent <- matrix(0, K, ncol(Xm))
+  mu_k <- matrix(0, K, m)
+  var_k <- matrix(0, K, m)
   for (k in seq_len(K)) {
     b <- blocks[[k]]
     if (length(b) == 0L) b <- o[1L]
     cent[k, ] <- colSums(Xm[b, , drop = FALSE]) / length(b)
-    Xb <- Xm[b, , drop = FALSE]; yb <- yv[b]
+    Xb <- Xm[b, , drop = FALSE]
+    yb <- yv[b]
     g <- .s4_gppost(.s4_rbf(Xb, Xb, ell), .s4_rbf(Xb, Xt, ell), rep(1, m), yb, noise)
-    mu_k[k, ] <- g$mean; var_k[k, ] <- g$var
+    mu_k[k, ] <- g$mean
+    var_k[k, ] <- g$var
   }
-  gate <- matrix(0, m, K); mean_v <- numeric(m); var_v <- numeric(m)
+  gate <- matrix(0, m, K)
+  mean_v <- numeric(m)
+  var_v <- numeric(m)
   for (j in seq_len(m)) {
     d <- -rowSums((cent - matrix(Xt[j, ], K, ncol(Xm), byrow = TRUE))^2)
     pi_j <- .s4_softmax(d)

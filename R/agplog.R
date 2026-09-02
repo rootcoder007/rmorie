@@ -36,7 +36,10 @@ Gamelog <- function(game, path = NULL, values = NULL, visits = NULL) {
   }
   text <- paste(lines, collapse = "\n")
   written <- FALSE
-  if (!is.null(path)) { writeLines(text, path, sep = ""); written <- TRUE }
+  if (!is.null(path)) {
+    writeLines(text, path, sep = "")
+    written <- TRUE
+  }
   lv <- sort(unique(acts))
   h <- 0
   for (key in lv) {
@@ -45,8 +48,10 @@ Gamelog <- function(game, path = NULL, values = NULL, visits = NULL) {
   }
   tot <- 0
   for (x in v) tot <- tot + x
-  list(estimate = digest1(text), digest = digest1(text), moves = n,
-       total_value = tot, mean_value = if (n) tot / n else NaN,
-       action_entropy = h, written = written,
-       method = "Canonical game log with a Rabin-Karp digest")
+  list(
+    estimate = digest1(text), digest = digest1(text), moves = n,
+    total_value = tot, mean_value = if (n) tot / n else NaN,
+    action_entropy = h, written = written,
+    method = "Canonical game log with a Rabin-Karp digest"
+  )
 }

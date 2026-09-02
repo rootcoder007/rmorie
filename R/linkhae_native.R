@@ -60,7 +60,8 @@ morie_linkhae <- function(items_from, items_to, symmetric = FALSE,
     as.numeric(theta_points)
   l_norm <- length(grid) * s
   crit <- function(x) {
-    A <- x[1]; B <- x[2]
+    A <- x[1]
+    B <- x[2]
     if (A <= 0) return(1e10)
     q1 <- 0
     for (th in grid) {

@@ -29,8 +29,10 @@
 #' morie_linkmm(a_from = c(1, 2, 3, 4, 5, 6, 7, 8), b_from = c(1, 2, 3, 4, 5, 6, 7, 8), a_to = c(1, 2, 3, 4, 5, 6, 7, 8), b_to = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_linkmm <- function(a_from, b_from, a_to, b_to,
                          method = "mean/mean") {
-  af <- as.numeric(a_from); bf <- as.numeric(b_from)
-  at <- as.numeric(a_to); bt <- as.numeric(b_to)
+  af <- as.numeric(a_from)
+  bf <- as.numeric(b_from)
+  at <- as.numeric(a_to)
+  bt <- as.numeric(b_to)
   s <- length(af)
   if (length(bf) != s || length(at) != s || length(bt) != s || s < 2) {
     stop("need >= 2 common items with matching lengths")

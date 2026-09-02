@@ -46,14 +46,17 @@ Mcdcv <- function(y, X, h = NULL, max_subsets = 200000) {
   if (hh > n) stop("min_covariance_determinant: h cannot exceed the number of observations")
   total <- .rsnchoosek(n, hh)
   if (total > max_subsets) stop(sprintf("min_covariance_determinant: %d subsets exceeds max_subsets", total))
-  best_idx <- NULL; best_det <- NULL
+  best_idx <- NULL
+  best_det <- NULL
   for (idx in .rscombos(n, hh)) {
     mc <- .rsmeancov(Z, idx)
     d <- .rscovdet(mc$S)
-    if (is.null(best_det) || d < best_det) { best_det <- d; best_idx <- idx }
+    if (is.null(best_det) || d < best_det) { best_det <- d
+    best_idx <- idx }
   }
   mc <- .rsmeancov(Z, best_idx)
-  S <- mc$S; mu <- mc$mu
+  S <- mc$S
+  mu <- mc$mu
   Sxx <- S[seq_len(q), seq_len(q), drop = FALSE]
   Sxy <- S[seq_len(q), p]
   beta <- .rslusolve(Sxx, Sxy)

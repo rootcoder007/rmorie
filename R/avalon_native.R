@@ -91,7 +91,8 @@
 #' @return A logical value.
 #' @export
 .avalon_lte <- function(a, b) {
-  x <- utf8ToInt(a); y <- utf8ToInt(b)
+  x <- utf8ToInt(a)
+  y <- utf8ToInt(b)
   m <- min(length(x), length(y))
   if (m > 0L) for (i in seq_len(m)) {
     if (x[i] < y[i]) return(TRUE)
@@ -149,38 +150,56 @@ morie_avalon_fnv <- function(s, seed = 2166136261) {
 #' @export
 morie_avalon_parse <- function(smiles) {
   s <- as.character(smiles)
-  el <- character(0); arom <- integer(0); chg <- integer(0)
+  el <- character(0)
+  arom <- integer(0)
+  chg <- integer(0)
   hexp <- integer(0)
-  bonds <- list(); closures <- integer(0)
-  open_ring <- list(); stack <- integer(0)
-  prev <- -1L; order <- 0L
-  i <- 1L; n <- nchar(s)
+  bonds <- list()
+  closures <- integer(0)
+  open_ring <- list()
+  stack <- integer(0)
+  prev <- -1L
+  order <- 0L
+  i <- 1L
+  n <- nchar(s)
   isdig <- function(x) nchar(x) == 1L && x >= "0" && x <= "9"
   while (i <= n) {
     ch <- substr(s, i, i)
     if (ch == "(") {
       if (prev < 0L) stop("a branch cannot open before an atom")
-      stack <- c(stack, prev); i <- i + 1L; next
+      stack <- c(stack, prev)
+      i <- i + 1L
+      next
     }
     if (ch == ")") {
       if (!length(stack)) stop("a branch closed that was never opened")
-      prev <- stack[length(stack)]; stack <- stack[-length(stack)]
-      i <- i + 1L; next
+      prev <- stack[length(stack)]
+      stack <- stack[-length(stack)]
+      i <- i + 1L
+      next
     }
     if (ch %in% names(.avalon_bondsym)) {
-      order <- as.integer(.avalon_bondsym[[ch]]); i <- i + 1L; next
+      order <- as.integer(.avalon_bondsym[[ch]])
+      i <- i + 1L
+      next
     }
-    if (ch == ".") { prev <- -1L; order <- 0L; i <- i + 1L; next }
+    if (ch == ".") { prev <- -1L
+    order <- 0L
+    i <- i + 1L
+    next }
     if (ch == "%" || isdig(ch)) {
       if (ch == "%") {
         if (i + 2L > n || !isdig(substr(s, i + 1L, i + 1L)) ||
             !isdig(substr(s, i + 2L, i + 2L)))
           stop("a percent ring label needs two digits")
-        lab <- substr(s, i + 1L, i + 2L); i <- i + 3L
-      } else { lab <- ch; i <- i + 1L }
+        lab <- substr(s, i + 1L, i + 2L)
+        i <- i + 3L
+      } else { lab <- ch
+      i <- i + 1L }
       if (prev < 0L) stop("a ring closure cannot precede an atom")
       if (lab %in% names(open_ring)) {
-        a <- open_ring[[lab]][1]; o <- open_ring[[lab]][2]
+        a <- open_ring[[lab]][1]
+        o <- open_ring[[lab]][2]
         open_ring[[lab]] <- NULL
         oo <- if (order != 0L) order else if (o != 0L) o else 1L
         bonds[[length(bonds) + 1L]] <- c(a, prev, oo)
@@ -188,51 +207,62 @@ morie_avalon_parse <- function(smiles) {
       } else {
         open_ring[[lab]] <- c(prev, order)
       }
-      order <- 0L; next
+      order <- 0L
+      next
     }
     if (ch == "[") {
       j <- i
       while (j <= n && substr(s, j, j) != "]") j <- j + 1L
       if (j > n) stop("a bracket atom was never closed")
-      body <- substr(s, i + 1L, j - 1L); i <- j + 1L
-      k <- 1L; nb <- nchar(body)
+      body <- substr(s, i + 1L, j - 1L)
+      i <- j + 1L
+      k <- 1L
+      nb <- nchar(body)
       # A leading isotope number is read and discarded: mass is not one
       # of the feature classes, so keeping it would put two bits where
       # the fingerprint defines one.
       while (k <= nb && isdig(substr(body, k, k))) k <- k + 1L
       sym <- ""
       if (k <= nb && grepl("^[A-Za-z]$", substr(body, k, k))) {
-        sym <- substr(body, k, k); k <- k + 1L
+        sym <- substr(body, k, k)
+        k <- k + 1L
         if (k <= nb && substr(body, k, k) %in% letters &&
             paste0(sym, substr(body, k, k)) %in%
               names(.avalon_organic)) {
-          sym <- paste0(sym, substr(body, k, k)); k <- k + 1L
+          sym <- paste0(sym, substr(body, k, k))
+          k <- k + 1L
         }
       }
       if (!nzchar(sym)) stop("a bracket atom must name an element")
       ar <- sym %in% names(.avalon_aromatic)
       e <- if (ar) .avalon_aromatic[[sym]] else sym
-      hh <- -1L; cg <- 0L
+      hh <- -1L
+      cg <- 0L
       while (k <= nb) {
         cc <- substr(body, k, k)
         if (cc == "H") {
-          k <- k + 1L; d <- ""
+          k <- k + 1L
+          d <- ""
           while (k <= nb && isdig(substr(body, k, k))) {
-            d <- paste0(d, substr(body, k, k)); k <- k + 1L
+            d <- paste0(d, substr(body, k, k))
+            k <- k + 1L
           }
           hh <- if (nzchar(d)) as.integer(d) else 1L
         } else if (cc == "+" || cc == "-") {
           sgn <- if (cc == "+") 1L else -1L
-          k <- k + 1L; d <- ""
+          k <- k + 1L
+          d <- ""
           while (k <= nb && isdig(substr(body, k, k))) {
-            d <- paste0(d, substr(body, k, k)); k <- k + 1L
+            d <- paste0(d, substr(body, k, k))
+            k <- k + 1L
           }
           if (nzchar(d)) {
             cg <- sgn * as.integer(d)
           } else {
             cg <- sgn
             while (k <= nb && substr(body, k, k) == cc) {
-              cg <- cg + sgn; k <- k + 1L
+              cg <- cg + sgn
+              k <- k + 1L
             }
           }
         } else if (cc == "@") {
@@ -248,26 +278,32 @@ morie_avalon_parse <- function(smiles) {
     } else {
       two <- if (i + 1L <= n) substr(s, i, i + 1L) else ""
       if (nzchar(two) && two %in% names(.avalon_organic)) {
-        sym <- two; i <- i + 2L
+        sym <- two
+        i <- i + 2L
       } else if (ch %in% names(.avalon_organic) ||
                  ch %in% names(.avalon_aromatic)) {
-        sym <- ch; i <- i + 1L
+        sym <- ch
+        i <- i + 1L
       } else {
         stop("unsupported SMILES character: ", ch)
       }
       ar <- sym %in% names(.avalon_aromatic)
       e <- if (ar) .avalon_aromatic[[sym]] else sym
-      hh <- -1L; cg <- 0L
+      hh <- -1L
+      cg <- 0L
     }
-    el <- c(el, e); arom <- c(arom, if (ar) 1L else 0L)
-    chg <- c(chg, cg); hexp <- c(hexp, hh)
+    el <- c(el, e)
+    arom <- c(arom, if (ar) 1L else 0L)
+    chg <- c(chg, cg)
+    hexp <- c(hexp, hh)
     cur <- length(el) - 1L
     if (prev >= 0L) {
       oo <- if (order != 0L) order else
         if (arom[prev + 1L] == 1L && ar) 4L else 1L
       bonds[[length(bonds) + 1L]] <- c(prev, cur, oo)
     }
-    prev <- cur; order <- 0L
+    prev <- cur
+    order <- 0L
   }
   if (length(open_ring))
     stop("a ring closure was opened and never matched")
@@ -292,7 +328,8 @@ morie_avalon_parse <- function(smiles) {
   for (i in seq_len(n)) adj[[i]] <- list()
   for (k in seq_along(bonds)) {
     b <- bonds[[k]]
-    a1 <- b[1] + 1L; a2 <- b[2] + 1L
+    a1 <- b[1] + 1L
+    a2 <- b[2] + 1L
     adj[[a1]][[length(adj[[a1]]) + 1L]] <- c(b[2], b[3], k)
     adj[[a2]][[length(adj[[a2]]) + 1L]] <- c(b[1], b[3], k)
   }
@@ -323,9 +360,11 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
   }
   out <- integer(n)
   for (i in seq_len(n)) {
-    if (hexp[i] >= 0L) { out[i] <- hexp[i]; next }
+    if (hexp[i] >= 0L) { out[i] <- hexp[i]
+    next }
     v <- .avalon_organic[el[i]]
-    if (is.na(v)) { out[i] <- 0L; next }
+    if (is.na(v)) { out[i] <- 0L
+    next }
     need <- v + chg[i] - used[i] - (if (arom[i] == 1L) 1 else 0)
     out[i] <- as.integer(if (need > 0) need else 0)
   }
@@ -346,11 +385,14 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @export
 .avalon_shortest <- function(adj, src, dst, banned) {
   n <- length(adj)
-  dist <- rep(-1L, n); prv <- rep(-1L, n)
+  dist <- rep(-1L, n)
+  prv <- rep(-1L, n)
   dist[src + 1L] <- 0L
-  q <- c(src); head <- 1L
+  q <- c(src)
+  head <- 1L
   while (head <= length(q)) {
-    u <- q[head]; head <- head + 1L
+    u <- q[head]
+    head <- head + 1L
     for (e in adj[[u + 1L]]) {
       if (e[3] == banned || dist[e[1] + 1L] >= 0L) next
       dist[e[1] + 1L] <- dist[u + 1L] + 1L
@@ -379,7 +421,8 @@ morie_avalon_h <- function(el, arom, chg, hexp, bonds) {
 #' @export
 morie_avalon_rings <- function(n, bonds, closures) {
   adj <- .avalon_adj(n, bonds)
-  rings <- list(); inring <- integer(n)
+  rings <- list()
+  inring <- integer(n)
   for (k in closures) {
     b <- bonds[[k]]
     p <- .avalon_shortest(adj, b[1], b[2], k)
@@ -426,7 +469,8 @@ morie_avalon_rings <- function(n, bonds, closures) {
   out <- character(0)
   key <- function(seq) {
     m <- length(seq)
-    fwd <- character(m); rev_ <- character(m)
+    fwd <- character(m)
+    rev_ <- character(m)
     for (q in seq_len(m)) {
       fwd[q] <- if (q %% 2 == 1L) ty[seq[q] + 1L] else
         as.character(seq[q])
@@ -434,7 +478,8 @@ morie_avalon_rings <- function(n, bonds, closures) {
       rev_[q] <- if (r %% 2 == 1L) ty[seq[r] + 1L] else
         as.character(seq[r])
     }
-    a <- paste(fwd, collapse = "|"); b <- paste(rev_, collapse = "|")
+    a <- paste(fwd, collapse = "|")
+    b <- paste(rev_, collapse = "|")
     paste0("P|", if (.avalon_lte(a, b)) a else b)
   }
   walk <- function(seq, used) {
@@ -451,7 +496,8 @@ morie_avalon_rings <- function(n, bonds, closures) {
     invisible(NULL)
   }
   for (s in 0:(n - 1L)) {
-    used <- rep(FALSE, n); used[s + 1L] <- TRUE
+    used <- rep(FALSE, n)
+    used[s + 1L] <- TRUE
     walk(c(s), used)
   }
   unique(out)
@@ -471,9 +517,11 @@ morie_avalon_rings <- function(n, bonds, closures) {
   D <- matrix(-1L, n, n)
   for (s in 0:(n - 1L)) {
     D[s + 1L, s + 1L] <- 0L
-    q <- c(s); head <- 1L
+    q <- c(s)
+    head <- 1L
     while (head <= length(q)) {
-      u <- q[head]; head <- head + 1L
+      u <- q[head]
+      head <- head + 1L
       for (e in adj[[u + 1L]]) {
         if (D[s + 1L, e[1] + 1L] < 0L) {
           D[s + 1L, e[1] + 1L] <- D[s + 1L, u + 1L] + 1L
@@ -501,7 +549,10 @@ morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
   for (cl in classes) if (!(cl %in% .avalon_classes))
     stop("unknown feature class: ", cl)
   g <- morie_avalon_parse(smiles)
-  el <- g$el; arom <- g$arom; chg <- g$chg; bonds <- g$bonds
+  el <- g$el
+  arom <- g$arom
+  chg <- g$chg
+  bonds <- g$bonds
   n <- length(el)
   adj <- .avalon_adj(n, bonds)
   rr <- morie_avalon_rings(n, bonds, g$closures)
@@ -514,8 +565,11 @@ morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
     out <- c(out, sprintf("A|%s|%d|%d|%d|%d|%d", ty[i], arom[i], chg[i],
                           length(adj[[i]]), inring[i], nh[i]))
   if ("bond" %in% classes) for (b in bonds) {
-    x <- ty[b[1] + 1L]; y <- ty[b[2] + 1L]
-    if (!.avalon_lte(x, y)) { tmp <- x; x <- y; y <- tmp }
+    x <- ty[b[1] + 1L]
+    y <- ty[b[2] + 1L]
+    if (!.avalon_lte(x, y)) { tmp <- x
+    x <- y
+    y <- tmp }
     out <- c(out, sprintf("B|%s|%d|%s", x, b[3], y))
   }
   if ("path" %in% classes)
@@ -531,8 +585,11 @@ morie_avalon_features <- function(smiles, maxpath = 5L, classes = NULL) {
     D <- .avalon_dist(adj, n)
     for (i in seq_len(n)) if (i < n) for (j in (i + 1L):n) {
       if (D[i, j] < 0L) next
-      x <- ty[i]; y <- ty[j]
-      if (!.avalon_lte(x, y)) { tmp <- x; x <- y; y <- tmp }
+      x <- ty[i]
+      y <- ty[j]
+      if (!.avalon_lte(x, y)) { tmp <- x
+      x <- y
+      y <- tmp }
       out <- c(out, sprintf("D|%s|%s|%d", x, y, D[i, j]))
     }
   }

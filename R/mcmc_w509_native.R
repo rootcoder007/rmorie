@@ -45,7 +45,8 @@ Abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0L) {
     stop("each prior pair must satisfy low < high", call. = FALSE)
   }
   e <- .ghc_rng(seed)
-  accepted <- list(); dists <- numeric(0)
+  accepted <- list()
+  dists <- numeric(0)
   for (i in seq_len(as.integer(n_draws))) {
     theta <- vapply(bounds, function(b) .ghc_unif(e, 1L, b[1], b[2]), 0)
     s <- as.numeric(sim(theta, e))
@@ -114,7 +115,8 @@ Bayisr <- function(samples, log_target, log_proposal, m, seed = 0L) {
     u <- .ghc_unif(e, 1L) * tot
     j <- n
     for (s in seq_len(n)) {
-      if (u <= cum[s]) { j <- s; break }
+      if (u <= cum[s]) { j <- s
+      break }
     }
     idx[t] <- j
   }
@@ -151,13 +153,16 @@ Bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
                    max_iter = 1000L) {
   d1 <- if (is.list(draws1)) draws1 else as.list(as.numeric(draws1))
   d2 <- if (is.list(draws2)) draws2 else as.list(as.numeric(draws2))
-  n1 <- length(d1); n2 <- length(d2)
+  n1 <- length(d1)
+  n2 <- length(d2)
   if (n1 == 0L || n2 == 0L) stop("draws must be non-empty", call. = FALSE)
   l1 <- vapply(d1, function(x) as.numeric(log_q1(x)) - as.numeric(log_q2(x)), 0)
   l2 <- vapply(d2, function(x) as.numeric(log_q1(x)) - as.numeric(log_q2(x)), 0)
   shift <- max(c(l1, l2))
-  e1 <- exp(l1 - shift); e2 <- exp(l2 - shift)
-  s1 <- n1 / (n1 + n2); s2 <- n2 / (n1 + n2)
+  e1 <- exp(l1 - shift)
+  e2 <- exp(l2 - shift)
+  s1 <- n1 / (n1 + n2)
+  s2 <- n2 / (n1 + n2)
   r <- 1
   converged <- FALSE
   it <- 0L
@@ -166,7 +171,9 @@ Bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
     den <- sum(1 / (s1 * e1 + s2 * r)) / n1
     r_new <- num / den
     if (abs(log(r_new) - log(r)) <= tol * (1 + abs(log(r_new)))) {
-      r <- r_new; converged <- TRUE; break
+      r <- r_new
+      converged <- TRUE
+      break
     }
     r <- r_new
   }
@@ -220,7 +227,8 @@ Ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
   x <- rep(as.numeric(x0), K)
   lp <- vapply(x, function(v) as.numeric(log_p(v)), 0)
   acc <- rep(0L, K)
-  swap_try <- rep(0L, K - 1L); swap_acc <- rep(0L, K - 1L)
+  swap_try <- rep(0L, K - 1L)
+  swap_acc <- rep(0L, K - 1L)
   cold <- numeric(n_iter)
   for (sweep in seq_len(n_iter)) {
     for (k in seq_len(K)) {
@@ -228,7 +236,9 @@ Ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
       lpp <- as.numeric(log_p(prop))
       u <- .ghc_unif(e, 1L)
       if (log(u) < (lpp - lp[k]) / temps[k]) {
-        x[k] <- prop; lp[k] <- lpp; acc[k] <- acc[k] + 1L
+        x[k] <- prop
+        lp[k] <- lpp
+        acc[k] <- acc[k] + 1L
       }
     }
     if (sweep %% as.integer(swap_every) == 0L) {
@@ -237,8 +247,12 @@ Ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
         delta <- (1 / temps[k] - 1 / temps[k + 1L]) * (lp[k + 1L] - lp[k])
         u <- .ghc_unif(e, 1L)
         if (log(u) < min(0, delta)) {
-          tmp <- x[k]; x[k] <- x[k + 1L]; x[k + 1L] <- tmp
-          tmp <- lp[k]; lp[k] <- lp[k + 1L]; lp[k + 1L] <- tmp
+          tmp <- x[k]
+          x[k] <- x[k + 1L]
+          x[k + 1L] <- tmp
+          tmp <- lp[k]
+          lp[k] <- lp[k + 1L]
+          lp[k + 1L] <- tmp
           swap_acc[k] <- swap_acc[k] + 1L
         }
       }

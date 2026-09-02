@@ -95,7 +95,8 @@ WideD <- function(X_wide, X_deep, y, hidden = 8L, epochs = 300L, lr = 0.05,
   if (length(crosses)) {
     pw0 <- ncol(xw)
     for (pr in crosses) {
-      a <- as.integer(pr[1L]); b <- as.integer(pr[2L])
+      a <- as.integer(pr[1L])
+      b <- as.integer(pr[2L])
       if (a < 0L || a >= pw0 || b < 0L || b >= pw0) {
         stop("cross indices must be columns of X_wide", call. = FALSE)
       }
@@ -173,10 +174,12 @@ WideD <- function(X_wide, X_deep, y, hidden = 8L, epochs = 300L, lr = 0.05,
       top <- acts[[nlayer + 1L]]
       z <- bias + sum(w_wide * xw[i, ]) + sum(w_deep * top)   # eq. (3)
       if (z >= 0) {
-        e <- exp(-z); p <- 1 / (1 + e)
+        e <- exp(-z)
+        p <- 1 / (1 + e)
         loss <- loss + log1p(e) + (1 - yv[i]) * z
       } else {
-        e <- exp(z); p <- e / (1 + e)
+        e <- exp(z)
+        p <- e / (1 + e)
         loss <- loss + log1p(e) - yv[i] * z
       }
       r <- p - yv[i]

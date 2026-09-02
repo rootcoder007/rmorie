@@ -21,7 +21,8 @@
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 #' Pgrank(M)
 Pgrank <- function(A, d = 0.85, n_iter = 100) {
-  M <- as.matrix(A); n <- nrow(M)
+  M <- as.matrix(A)
+  n <- nrow(M)
   out <- rowSums(M)
   pr <- rep(1 / n, n)
   for (it in seq_len(as.integer(n_iter))) {

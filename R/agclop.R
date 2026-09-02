@@ -24,10 +24,14 @@
 #' @export
 Sgdmomstep <- function(theta, grad, momentum = 0.9, weight_decay = 1e-4,
                        lr = 0.2, buf = NULL) {
-  th <- .s03vec(theta); g <- .s03vec(grad)
+  th <- .s03vec(theta)
+  g <- .s03vec(grad)
   b <- if (!is.null(buf)) .s03vec(buf) else numeric(length(th))
-  mu <- as.numeric(momentum); wd <- as.numeric(weight_decay); a <- as.numeric(lr)
-  nb <- numeric(length(th)); nt <- numeric(length(th))
+  mu <- as.numeric(momentum)
+  wd <- as.numeric(weight_decay)
+  a <- as.numeric(lr)
+  nb <- numeric(length(th))
+  nt <- numeric(length(th))
   s2 <- 0
   for (i in seq_along(th)) {
     nb[i] <- mu * b[i] + (g[i] + wd * th[i])
@@ -35,7 +39,9 @@ Sgdmomstep <- function(theta, grad, momentum = 0.9, weight_decay = 1e-4,
     nt[i] <- th[i] - step
     s2 <- s2 + step * step
   }
-  list(estimate = if (length(nt)) nt[1] else NaN, theta_new = nt, buf = nb,
-       step_norm = sqrt(s2),
-       method = "SGD with momentum and L2 weight decay (AlphaZero training)")
+  list(
+    estimate = if (length(nt)) nt[1] else NaN, theta_new = nt, buf = nb,
+    step_norm = sqrt(s2),
+    method = "SGD with momentum and L2 weight decay (AlphaZero training)"
+  )
 }

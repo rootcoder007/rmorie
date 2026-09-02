@@ -34,8 +34,10 @@
 #' Exp3(x, 0.2)$weights
 #' @export
 Exp3 <- function(x, gamma_, T = NULL, seed = 0) {
-  x <- as.matrix(x); storage.mode(x) <- "double"
-  rows <- nrow(x); K <- ncol(x)
+  x <- as.matrix(x)
+  storage.mode(x) <- "double"
+  rows <- nrow(x)
+  K <- ncol(x)
   T <- if (is.null(T)) rows else as.integer(T)
   if (T > rows) stop(sprintf("x has only %d rows", rows), call. = FALSE)
   g <- as.numeric(gamma_)
@@ -55,7 +57,8 @@ Exp3 <- function(x, gamma_, T = NULL, seed = 0) {
     i <- K
     for (j in seq_len(K)) {
       cc <- cc + p[j]
-      if (u <= cc) { i <- j; break }
+      if (u <= cc) { i <- j
+      break }
     }
     r <- x[t, i]
     w[i] <- w[i] * exp(g * (r / p[i]) / K)

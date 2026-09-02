@@ -56,17 +56,20 @@
 #' @export
 Incrtio <- function(IR_e, IR_u, cases_exposed = NULL,
                     cases_unexposed = NULL, confidence = 0.95) {
-  re <- as.numeric(IR_e); ru <- as.numeric(IR_u)
+  re <- as.numeric(IR_e)
+  ru <- as.numeric(IR_u)
   if (ru == 0) stop("unexposed incidence rate must be non-zero", call. = FALSE)
   irr <- re / ru
   se <- lo <- hi <- NULL
   if (!is.null(cases_exposed) && !is.null(cases_unexposed)) {
-    a <- as.numeric(cases_exposed); b <- as.numeric(cases_unexposed)
+    a <- as.numeric(cases_exposed)
+    b <- as.numeric(cases_unexposed)
     if (a <= 0 || b <= 0) stop("case counts must be positive for a CI",
                                call. = FALSE)
     se <- sqrt(1 / a + 1 / b)
     z <- .s02z(confidence)
-    lo <- irr * exp(-z * se); hi <- irr * exp(z * se)
+    lo <- irr * exp(-z * se)
+    hi <- irr * exp(z * se)
   }
   list(estimate = irr, ln_estimate = log(irr), se_ln = se,
        ci_lower = lo, ci_upper = hi, confidence = as.numeric(confidence),
@@ -94,14 +97,19 @@ Incrtio <- function(IR_e, IR_u, cases_exposed = NULL,
 #' @export
 Mhrate <- function(strata, confidence = 0.95) {
   if (!length(strata)) stop("need at least one stratum", call. = FALSE)
-  num <- 0; den <- 0; vnum <- 0
+  num <- 0
+  den <- 0
+  vnum <- 0
   for (s in strata) {
     v <- if (!is.null(names(s)) && all(c("a", "T1", "b", "T0") %in% names(s))) {
       c(as.numeric(s[["a"]]), as.numeric(s[["T1"]]),
         as.numeric(s[["b"]]), as.numeric(s[["T0"]]))
     } else as.numeric(unlist(s))
     if (length(v) != 4) stop("each stratum needs (a, T1, b, T0)", call. = FALSE)
-    a <- v[1]; T1 <- v[2]; b <- v[3]; T0 <- v[4]
+    a <- v[1]
+    T1 <- v[2]
+    b <- v[3]
+    T0 <- v[4]
     Tt <- T1 + T0
     if (Tt <= 0) stop("stratum person-time must be positive", call. = FALSE)
     num <- num + a * T0 / Tt
@@ -137,17 +145,20 @@ Mhrate <- function(strata, confidence = 0.95) {
 #' @export
 Riskdf <- function(p_exposed, p_unexposed, n_exposed = NULL,
                    n_unexposed = NULL, confidence = 0.95) {
-  pe <- as.numeric(p_exposed); pu <- as.numeric(p_unexposed)
+  pe <- as.numeric(p_exposed)
+  pu <- as.numeric(p_unexposed)
   if (pe < 0 || pe > 1 || pu < 0 || pu > 1)
     stop("risks must lie in [0, 1]", call. = FALSE)
   rd <- pe - pu
   se <- lo <- hi <- NULL
   if (!is.null(n_exposed) && !is.null(n_unexposed)) {
-    ne <- as.numeric(n_exposed); nu <- as.numeric(n_unexposed)
+    ne <- as.numeric(n_exposed)
+    nu <- as.numeric(n_unexposed)
     if (ne <= 0 || nu <= 0) stop("arm sizes must be positive", call. = FALSE)
     se <- sqrt(pe * (1 - pe) / ne + pu * (1 - pu) / nu)
     z <- .s02z(confidence)
-    lo <- rd - z * se; hi <- rd + z * se
+    lo <- rd - z * se
+    hi <- rd + z * se
   }
   list(estimate = rd, se = se, ci_lower = lo, ci_upper = hi,
        p_exposed = pe, p_unexposed = pu,
@@ -173,19 +184,22 @@ Riskdf <- function(p_exposed, p_unexposed, n_exposed = NULL,
 #' @export
 Riskrt <- function(p_exposed, p_unexposed, n_exposed = NULL,
                    n_unexposed = NULL, confidence = 0.95) {
-  pe <- as.numeric(p_exposed); pu <- as.numeric(p_unexposed)
+  pe <- as.numeric(p_exposed)
+  pu <- as.numeric(p_unexposed)
   if (pe < 0 || pe > 1 || pu < 0 || pu > 1)
     stop("risks must lie in [0, 1]", call. = FALSE)
   if (pu == 0) stop("unexposed risk must be non-zero", call. = FALSE)
   rr <- pe / pu
   se <- lo <- hi <- NULL
   if (!is.null(n_exposed) && !is.null(n_unexposed)) {
-    ne <- as.numeric(n_exposed); nu <- as.numeric(n_unexposed)
+    ne <- as.numeric(n_exposed)
+    nu <- as.numeric(n_unexposed)
     if (ne <= 0 || nu <= 0) stop("arm sizes must be positive", call. = FALSE)
     if (pe <= 0) stop("exposed risk must be positive for a CI", call. = FALSE)
     se <- sqrt((1 - pe) / (ne * pe) + (1 - pu) / (nu * pu))
     z <- .s02z(confidence)
-    lo <- rr * exp(-z * se); hi <- rr * exp(z * se)
+    lo <- rr * exp(-z * se)
+    hi <- rr * exp(z * se)
   }
   list(estimate = rr, ln_estimate = log(rr), se_ln = se,
        ci_lower = lo, ci_upper = hi, p_exposed = pe, p_unexposed = pu,

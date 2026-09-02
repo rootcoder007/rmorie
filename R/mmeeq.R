@@ -17,8 +17,10 @@
 #' r <- Hendmme(X = rnorm(10), Z = rnorm(10), y = rnorm(10), Sigma_inv = 0.5); TRUE
 Hendmme <- function(X, Z, y, Sigma_inv, R_inv = NULL) {
   out <- morie_mme(X, Z, y, Sigma_inv, R_inv = R_inv)
-  b <- out$blue; uu <- out$blup
-  Xm <- .t1_mat(X); Zm <- .t1_mat(Z)
+  b <- out$blue
+  uu <- out$blup
+  Xm <- .t1_mat(X)
+  Zm <- .t1_mat(Z)
   .t1_result(beta = b, u = uu,
              fitted = as.numeric(Xm %*% b) + as.numeric(Zm %*% uu),
              n = nrow(Xm), p = ncol(Xm), q = ncol(Zm),

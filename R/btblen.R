@@ -71,15 +71,19 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
   thr <- cc * sqrt(log10(n) / n)
   if (is.null(m_max)) m_max <- as.integer(ceiling(sqrt(n))) + KN
   m_max <- as.integer(m_max)
-  mhat <- 1L; found <- FALSE
+  mhat <- 1L
+  found <- FALSE
   for (m in seq_len(min(m_max, kmax))) {
     okm <- TRUE
     for (kk in seq_len(KN)) {
       idx <- m + kk
       if (idx > kmax) break
-      if (abs(R[idx + 1L] / R[1]) >= thr) { okm <- FALSE; break }
+      if (abs(R[idx + 1L] / R[1]) >= thr) { okm <- FALSE
+      break }
     }
-    if (okm) { mhat <- m; found <- TRUE; break }
+    if (okm) { mhat <- m
+    found <- TRUE
+    break }
   }
   if (!found) mhat <- min(m_max, kmax)
   M <- 2L * as.integer(mhat)
@@ -105,7 +109,8 @@ Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {
   D_sb <- 4 * g0 * g0 + (2 / pi) * integ
   D_cb <- (4 / 3) * g0 * g0
   bopt <- function(D) if (G == 0 || D <= 0) 1 else (2 * G * G / D)^(1 / 3) * n^(1 / 3)
-  b_sb <- bopt(D_sb); b_cb <- bopt(D_cb)
+  b_sb <- bopt(D_sb)
+  b_cb <- bopt(D_cb)
   b <- if (identical(method, "stationary")) b_sb else b_cb
   ell <- as.integer(floor(b + 0.5))
   if (ell < 1L) ell <- 1L

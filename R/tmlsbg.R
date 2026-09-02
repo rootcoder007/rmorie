@@ -24,7 +24,9 @@
 #' @examples
 #' Tmlsbg(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), subgroup = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlsbg <- function(y, D, X, subgroup) {
-  yv <- as.numeric(y); Dv <- as.numeric(D); Sv <- as.numeric(subgroup)
+  yv <- as.numeric(y)
+  Dv <- as.numeric(D)
+  Sv <- as.numeric(subgroup)
   n <- length(yv)
   if (n == 0L || length(Dv) != n || length(Sv) != n)
     stop("Tmlsbg: y, D and subgroup must share one length")

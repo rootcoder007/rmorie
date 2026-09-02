@@ -48,7 +48,8 @@ Hdplda <- function(docs, gamma = 1, alpha = 1, truncation = 3, V = NULL,
   theta <- matrix(rep(beta, each = length(D)), length(D), K)
   ll <- -Inf
   for (it in seq_len(as.integer(max_iter))) {
-    cnt <- matrix(0, K, Vn); newll <- 0
+    cnt <- matrix(0, K, Vn)
+    newll <- 0
     post <- matrix(0, length(D), K)
     for (j in seq_along(D)) {
       for (w in D[[j]]) {
@@ -75,7 +76,8 @@ Hdplda <- function(docs, gamma = 1, alpha = 1, truncation = 3, V = NULL,
       for (w in seq_len(Vn)) s <- s + cnt[t, w] + as.numeric(eta)
       phi[t, ] <- (cnt[t, ] + as.numeric(eta)) / s
     }
-    if (abs(newll - ll) < tol) { ll <- newll; break }
+    if (abs(newll - ll) < tol) { ll <- newll
+    break }
     ll <- newll
   }
   list(estimate = ll, loglik = ll, phi = phi, theta = theta, beta = beta,

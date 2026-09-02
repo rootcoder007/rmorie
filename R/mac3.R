@@ -16,13 +16,16 @@
 #' mac3(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08), 1:4)$centers
 #' @export
 mac3 <- function(yi, vi, mods, weighted = TRUE) {
-  y <- as.numeric(yi); v <- as.numeric(vi); k <- length(y)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
+  k <- length(y)
   m <- as.matrix(mods)
   if (nrow(m) != k) m <- t(m)
   w0 <- 1 / v
   ctr <- if (weighted) apply(m, 2, function(col) sum(w0 * col) / sum(w0)) else colMeans(m)
   mc <- sweep(m, 2, ctr, "-")
-  x <- cbind(1, mc); dimnames(x) <- NULL
+  x <- cbind(1, mc)
+  dimnames(x) <- NULL
   p <- ncol(x)
   xtw <- t(x) * rep(w0, each = p)
   xtwxi <- solve(xtw %*% x)

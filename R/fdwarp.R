@@ -26,7 +26,8 @@
 Fdwarp <- function(x, y, cost = "abs", window = NULL) {
   a <- .s03vec(x)
   b <- .s03vec(y)
-  n <- length(a); m <- length(b)
+  n <- length(a)
+  m <- length(b)
   if (n == 0L || m == 0L) stop("functional_warping: both sequences must be non-empty")
   if (!identical(cost, "abs") && !identical(cost, "sq")) stop("functional_warping: cost must be abs or sq")
   if (!is.null(window)) {
@@ -45,7 +46,8 @@ Fdwarp <- function(x, y, cost = "abs", window = NULL) {
     hi <- if (is.null(w)) m - 1L else min(m - 1L, i + w)
     if (hi < lo) next
     for (j in lo:hi) {
-      if (i == 0L && j == 0L) { g[1, 1] <- dfun(0L, 0L); next }
+      if (i == 0L && j == 0L) { g[1, 1] <- dfun(0L, 0L)
+      next }
       best <- Inf
       if (i > 0L && g[i, j + 1L] < best) best <- g[i, j + 1L]
       if (j > 0L && g[i + 1L, j] < best) best <- g[i + 1L, j]
@@ -55,24 +57,40 @@ Fdwarp <- function(x, y, cost = "abs", window = NULL) {
   }
   dist <- g[n, m]
   if (!is.finite(dist)) stop("functional_warping: the window is too narrow to admit any path")
-  pi_ <- integer(0); pj_ <- integer(0)
-  i <- n - 1L; j <- m - 1L
+  pi_ <- integer(0)
+  pj_ <- integer(0)
+  i <- n - 1L
+  j <- m - 1L
   repeat {
-    pi_ <- c(pi_, i); pj_ <- c(pj_, j)
+    pi_ <- c(pi_, i)
+    pj_ <- c(pj_, j)
     if (i == 0L && j == 0L) break
-    bv <- Inf; bi <- i; bj <- j; seen <- FALSE
-    if (i > 0L && j > 0L) { bv <- g[i, j]; bi <- i - 1L; bj <- j - 1L; seen <- TRUE }
+    bv <- Inf
+    bi <- i
+    bj <- j
+    seen <- FALSE
+    if (i > 0L && j > 0L) { bv <- g[i, j]
+    bi <- i - 1L
+    bj <- j - 1L
+    seen <- TRUE }
     if (i > 0L) {
       v <- g[i, j + 1L]
-      if (!seen || v < bv) { bv <- v; bi <- i - 1L; bj <- j; seen <- TRUE }
+      if (!seen || v < bv) { bv <- v
+      bi <- i - 1L
+      bj <- j
+      seen <- TRUE }
     }
     if (j > 0L) {
       v <- g[i + 1L, j]
-      if (!seen || v < bv) { bv <- v; bi <- i; bj <- j - 1L }
+      if (!seen || v < bv) { bv <- v
+      bi <- i
+      bj <- j - 1L }
     }
-    i <- bi; j <- bj
+    i <- bi
+    j <- bj
   }
-  pi_ <- rev(pi_); pj_ <- rev(pj_)
+  pi_ <- rev(pi_)
+  pj_ <- rev(pj_)
   L <- length(pi_)
   list(estimate = dist, distance = dist, normalized = dist / L, path_length = L,
        path = cbind(as.numeric(pi_), as.numeric(pj_)), n = n, m = m,

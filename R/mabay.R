@@ -18,9 +18,11 @@
 #' mabay(c(0.1, 0.3, -0.2, 0.45), c(0.02, 0.05, 0.03, 0.08))$estimate
 #' @export
 mabay <- function(yi, vi, tau2 = NULL, level = 0.95) {
-  y <- as.numeric(yi); v <- as.numeric(vi)
+  y <- as.numeric(yi)
+  v <- as.numeric(vi)
   t2 <- if (is.null(tau2)) k02dl(y, v)$tau2 else as.numeric(tau2)
-  ws <- 1 / (v + t2); sws <- sum(ws)
+  ws <- 1 / (v + t2)
+  sws <- sum(ws)
   mu <- sum(ws * y) / sws
   se <- sqrt(1 / sws)
   crit <- k02z(0.5 + 0.5 * level)
@@ -29,7 +31,8 @@ mabay <- function(yi, vi, tau2 = NULL, level = 0.95) {
     th <- (y / v + mu / t2) / prec
     sd <- sqrt(1 / prec)
   } else {
-    th <- rep(mu, length(y)); sd <- rep(0, length(y))
+    th <- rep(mu, length(y))
+    sd <- rep(0, length(y))
   }
   list(estimate = mu, se = se, ci_lower = mu - crit * se,
        ci_upper = mu + crit * se, tau2 = t2, theta_mean = th, theta_sd = sd,

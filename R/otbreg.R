@@ -25,17 +25,21 @@
 #' Otbreg(K = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 Otbreg <- function(K, a, b, max_iter = 200) {
   Km <- as.matrix(K)
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
-  n <- nrow(Km); m <- ncol(Km)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
+  n <- nrow(Km)
+  m <- ncol(Km)
   if (length(aa) != n || length(bb) != m)
     stop("kernel does not match the marginals")
   if (any(Km <= 0)) stop("the Gibbs kernel must be entrywise positive")
   T <- Km
   it <- as.integer(max_iter)
   for (k in seq_len(it)) {
-    rs <- rowSums(T); f <- ifelse(rs > 0, aa / rs, 0)
+    rs <- rowSums(T)
+    f <- ifelse(rs > 0, aa / rs, 0)
     T <- T * f
-    cs <- colSums(T); g <- ifelse(cs > 0, bb / cs, 0)
+    cs <- colSums(T)
+    g <- ifelse(cs > 0, bb / cs, 0)
     T <- T * rep(g, each = n)
   }
   .t1_result(T = T, iters = it,

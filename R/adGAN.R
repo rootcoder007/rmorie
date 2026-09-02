@@ -17,15 +17,22 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ganomscore(V, V)
 Ganomscore <- function(z, zhat, threshold = 0.5) {
-  Z <- .t1_mat(z); H <- .t1_mat(zhat)
-  if (nrow(Z) != nrow(H) || ncol(Z) != ncol(H))
+  Z <- .t1_mat(z)
+  H <- .t1_mat(zhat)
+  if (nrow(Z) != nrow(H) || ncol(Z) != ncol(H)) {
     stop("z and zhat must have the same shape")
-  m <- nrow(Z); d <- ncol(Z)
+  }
+  m <- nrow(Z)
+  d <- ncol(Z)
   s <- rowSums(abs(Z - H))
-  lo <- min(s); hi <- max(s); rng <- hi - lo
+  lo <- min(s)
+  hi <- max(s)
+  rng <- hi - lo
   sc <- if (rng == 0) rep(0, m) else (s - lo) / rng
   flg <- as.integer(sc > as.numeric(threshold))
-  .t1_result(score = s, scaled = sc, smin = lo, smax = hi,
-             flagged = flg, nflag = sum(flg), m = m, d = d,
-             method = "GANomaly anomaly score (Akcay et al. 2018 eqs. 5-6)")
+  .t1_result(
+    score = s, scaled = sc, smin = lo, smax = hi,
+    flagged = flg, nflag = sum(flg), m = m, d = d,
+    method = "GANomaly anomaly score (Akcay et al. 2018 eqs. 5-6)"
+  )
 }

@@ -29,7 +29,9 @@
 Drdiddyn <- function(y, D = NULL, unit = NULL, time = NULL, cohort = NULL,
                      horizon = 3, X = NULL) {
   yv <- .s03vec(y)
-  u <- as.character(unit); t <- as.numeric(time); g <- as.numeric(cohort)
+  u <- as.character(unit)
+  t <- as.numeric(time)
+  g <- as.numeric(cohort)
   Xr <- if (!is.null(X)) .s03mat(X) else NULL
   units <- character(0)
   for (x in u) if (!(x %in% units)) units <- c(units, x)
@@ -37,39 +39,50 @@ Drdiddyn <- function(y, D = NULL, unit = NULL, time = NULL, cohort = NULL,
   key <- paste(u, t, sep = "|")
   gof <- setNames(g[match(units, u)], units)
   hs <- seq(-as.integer(horizon), as.integer(horizon))
-  att <- numeric(length(hs)); ncell <- integer(length(hs)); post <- numeric(0)
+  att <- numeric(length(hs))
+  ncell <- integer(length(hs))
+  post <- numeric(0)
   treatedg <- sort(unique(g[g > 0 & is.finite(g)]))
   for (hi in seq_along(hs)) {
     e <- hs[hi]
-    dys <- numeric(0); ds <- numeric(0); xs <- list()
+    dys <- numeric(0)
+    ds <- numeric(0)
+    xs <- list()
     for (uu in units) {
       gg <- gof[[uu]]
       treated <- gg > 0 && is.finite(gg)
       if (treated) {
-        p <- gg + e; base <- gg - 1
+        p <- gg + e
+        base <- gg - 1
         i1 <- match(paste(uu, p, sep = "|"), key)
         i0 <- match(paste(uu, base, sep = "|"), key)
         if (!is.na(i1) && !is.na(i0)) {
-          dys <- c(dys, yv[i1] - yv[i0]); ds <- c(ds, 1)
+          dys <- c(dys, yv[i1] - yv[i0])
+          ds <- c(ds, 1)
           if (!is.null(Xr)) xs[[length(xs) + 1L]] <- Xr[i1, ]
         }
       } else {
         for (gg2 in treatedg) {
-          p <- gg2 + e; base <- gg2 - 1
+          p <- gg2 + e
+          base <- gg2 - 1
           i1 <- match(paste(uu, p, sep = "|"), key)
           i0 <- match(paste(uu, base, sep = "|"), key)
           if (!is.na(i1) && !is.na(i0)) {
-            dys <- c(dys, yv[i1] - yv[i0]); ds <- c(ds, 0)
+            dys <- c(dys, yv[i1] - yv[i0])
+            ds <- c(ds, 0)
             if (!is.null(Xr)) xs[[length(xs) + 1L]] <- Xr[i1, ]
           }
         }
       }
     }
     if (length(dys) < 3L || sum(ds) <= 0 || sum(ds) >= length(ds)) {
-      att[hi] <- NaN; ncell[hi] <- length(dys); next
+      att[hi] <- NaN
+      ncell[hi] <- length(dys)
+      next
     }
     fit <- .s03drdid(dys, ds, if (!is.null(Xr)) do.call(rbind, xs) else NULL)
-    att[hi] <- fit$tau; ncell[hi] <- length(dys)
+    att[hi] <- fit$tau
+    ncell[hi] <- length(dys)
     if (e >= 0) post <- c(post, fit$tau)
   }
   good <- post[!is.nan(post)]

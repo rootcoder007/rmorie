@@ -22,9 +22,11 @@
 #' @examples
 #' Bfgsupd(H = 0.5, s = 5L, y = 5L)
 Bfgsupd <- function(H, s, y, inverse = TRUE) {
-  M <- .t1_mat(H); p <- nrow(M)
+  M <- .t1_mat(H)
+  p <- nrow(M)
   if (ncol(M) != p) stop("H must be square")
-  s <- .t1_vec(s); y <- .t1_vec(y)
+  s <- .t1_vec(s)
+  y <- .t1_vec(y)
   if (length(s) != p || length(y) != p)
     stop("s and y must match the dimension of H")
   ys <- sum(y * s)

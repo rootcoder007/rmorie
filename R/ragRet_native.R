@@ -20,7 +20,8 @@
 #' @return A numeric value.
 #' @export
 morie_ragRet_normalise <- function(v) {
-  x <- as.numeric(v); n <- sqrt(sum(x^2))
+  x <- as.numeric(v)
+  n <- sqrt(sum(x^2))
   if (n <= .ragRet_EPS) stop("ragRet: a zero vector has no direction")
   x / n
 }
@@ -75,7 +76,8 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #' @export
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
                                    seed = 0L) {
-  D <- lapply(corpus, as.numeric); n <- length(D)
+  D <- lapply(corpus, as.numeric)
+  n <- length(D)
   c <- as.integer(n.cells)
   if (n < 1L || c < 1L)
     stop("ragRet: need a non-empty corpus and at least one cell")
@@ -91,10 +93,12 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
   d <- length(D[[1]])
   for (it in seq_len(as.integer(iters))) {
     for (j in seq_len(n)) {
-      best <- 1L; bestd <- Inf
+      best <- 1L
+      bestd <- Inf
       for (tt in seq_len(c)) {
         d2 <- sum((D[[j]] - cent[[tt]])^2)
-        if (d2 < bestd) { bestd <- d2; best <- tt }
+        if (d2 < bestd) { bestd <- d2
+        best <- tt }
       }
       assign[j] <- best
     }

@@ -49,7 +49,10 @@
 Rfmdi <- function(forest, X, y, mtry = NULL, nodesize = 5L) {
   XX <- .s03mat(X)
   YY <- if (is.matrix(y) || is.data.frame(y)) .s03mat(y) else matrix(as.numeric(y), ncol = 1L)
-  d <- .rfcheck(XX, YY); n <- d[1]; p <- d[2]; q <- d[3]
+  d <- .rfcheck(XX, YY)
+  n <- d[1]
+  p <- d[2]
+  q <- d[3]
   B <- if (is.null(forest)) 100L else as.integer(forest)
   if (B < 1L) stop("rf_mdi_importance: n_trees must be at least 1")
   ns <- as.integer(nodesize)

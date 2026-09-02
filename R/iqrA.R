@@ -20,13 +20,16 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' IqrA(V)
 IqrA <- function(x, k = 1.5) {
-  v <- as.numeric(unlist(x)); n <- length(v)
+  v <- as.numeric(unlist(x))
+  n <- length(v)
   s <- sort(v)
   n4 <- floor((n + 3) / 2) / 2
   at <- function(d) 0.5 * (s[floor(d)] + s[ceiling(d)])
-  hl <- at(n4); hu <- at(n + 1 - n4)
+  hl <- at(n4)
+  hu <- at(n + 1 - n4)
   spread <- hu - hl
-  lo <- hl - k * spread; hi <- hu + k * spread
+  lo <- hl - k * spread
+  hi <- hu + k * spread
   flags <- as.numeric(v < lo | v > hi)
   nout <- sum(flags)
   .t1_result(estimate = nout / n, n_out = nout, lower = lo, upper = hi,

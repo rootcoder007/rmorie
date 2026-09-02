@@ -22,7 +22,8 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Ghosalnppoissonreg(V, V)
 Ghosalnppoissonreg <- function(x, y, length = 0.7, var = 1) {
-  xs <- as.numeric(x); ys <- as.numeric(y)
+  xs <- as.numeric(x)
+  ys <- as.numeric(y)
   n <- base::length(xs)
   if (n == 0L) stop("x must be non-empty")
   if (base::length(ys) != n) stop("x and y must have the same length")

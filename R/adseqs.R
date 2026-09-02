@@ -25,20 +25,27 @@
 #' Admixq(G, K = 2, steps = 20)
 Admixq <- function(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL) {
   Gm <- matrix(as.numeric(as.matrix(G)), nrow = nrow(as.matrix(G)))
-  I <- nrow(Gm); J <- ncol(Gm); K <- as.integer(K); steps <- as.integer(steps)
+  I <- nrow(Gm)
+  J <- ncol(Gm)
+  K <- as.integer(K)
+  steps <- as.integer(steps)
   if (I == 0 || J == 0) stop("G must be non-empty")
   if (K < 1) stop("K must be at least 1")
   if (any(Gm < 0 | Gm > 2)) stop("genotype counts must lie in [0, 2]")
   if (is.null(Q0)) {
-    Q <- outer(seq_len(I) - 1L, seq_len(K) - 1L,
-               function(i, k) 1 + ((i + k) %% K))
+    Q <- outer(
+      seq_len(I) - 1L, seq_len(K) - 1L,
+      function(i, k) 1 + ((i + k) %% K)
+    )
     Q <- Q / rowSums(Q)
   } else {
     Q <- matrix(as.numeric(as.matrix(Q0)), nrow = I)
   }
   if (is.null(P0)) {
-    P <- outer(seq_len(K) - 1L, seq_len(J) - 1L,
-               function(k, j) (2 + ((k * J + j) %% 7)) / 10)
+    P <- outer(
+      seq_len(K) - 1L, seq_len(J) - 1L,
+      function(k, j) (2 + ((k * J + j) %% 7)) / 10
+    )
   } else {
     P <- matrix(as.numeric(as.matrix(P0)), nrow = K)
   }
@@ -70,7 +77,9 @@ Admixq <- function(G, K = 2, steps = 50, Q0 = NULL, P0 = NULL) {
     P <- ifelse(den == 0, 0.5, num / den)
     dim(P) <- c(K, J)
   }
-  .t1_result(Q = Q, P = P, loglik = ll(Q, P), loglik0 = ll0,
-             I = I, J = J, K = K, steps = steps,
-             method = "EM for the ADMIXTURE likelihood (Alexander et al. 2009 eq. 2)")
+  .t1_result(
+    Q = Q, P = P, loglik = ll(Q, P), loglik0 = ll0,
+    I = I, J = J, K = K, steps = steps,
+    method = "EM for the ADMIXTURE likelihood (Alexander et al. 2009 eq. 2)"
+  )
 }

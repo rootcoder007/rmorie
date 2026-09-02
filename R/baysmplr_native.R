@@ -148,7 +148,10 @@ morie_baysmplr_mh <- function(log_p, x0, n_iter, e, scale = NULL,
     lq <- log_p(prop)
     a <- lq - lp
     if (a >= 0 || log(.ghc_unif(e, 1L)) < a) {
-      x <- prop; lp <- lq; acc <- acc + 1L; ar <- 1
+      x <- prop
+      lp <- lq
+      acc <- acc + 1L
+      ar <- 1
     } else ar <- 0
     if (adapt && (it - 1L) < half)
       scale <- exp(log(scale) + (ar - target_accept) / sqrt(it))
@@ -251,7 +254,9 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
     k1 <- 0.5 * .w3_csum(lf$p * lf$p)
     a <- (lq - k1) - (lp - k0)
     if (a >= 0 || log(.ghc_unif(e, 1L)) < a) {
-      x <- lf$q; lp <- lq; acc <- acc + 1L
+      x <- lf$q
+      lp <- lq
+      acc <- acc + 1L
     }
     draws[[it]] <- x
   }
@@ -294,11 +299,13 @@ morie_baysmplr_hmc <- function(log_p, grad, x0, n_iter, e, eps = 0.1,
     if (v == -1) {
       r2 <- .baysmplr_build_tree(log_p, grad, r$qm, r$pm, u, v, j - 1L, eps,
                                  e, h0)
-      r$qm <- r2$qm; r$pm <- r2$pm
+      r$qm <- r2$qm
+      r$pm <- r2$pm
     } else {
       r2 <- .baysmplr_build_tree(log_p, grad, r$qp, r$pp, u, v, j - 1L, eps,
                                  e, h0)
-      r$qp <- r2$qp; r$pp <- r2$pp
+      r$qp <- r2$qp
+      r$pp <- r2$pp
     }
     if (r$n + r2$n > 0L && .ghc_unif(e, 1L) < r2$n / (r$n + r2$n))
       r$q2 <- r2$q2
@@ -348,24 +355,34 @@ morie_baysmplr_nuts <- function(log_p, grad, x0, n_iter, e, eps = 0.25,
   mu <- log(10 * eps)
   log_eps_bar <- 0
   hbar <- 0
-  gamma <- 0.05; t0 <- 10; kappa <- 0.75
+  gamma <- 0.05
+  t0 <- 10
+  kappa <- 0.75
   for (it in seq_len(n_iter)) {
     p0 <- vapply(seq_len(d), function(j) .ghc_norm(e, 1L), numeric(1))
     h0 <- log_p(x) - 0.5 * .w3_csum(p0 * p0)
     u <- .ghc_unif(e, 1L) * exp(h0)
     if (u <= 0) u <- 1e-300
-    qm <- x; qp <- x; pm <- p0; pp <- p0
+    qm <- x
+    qp <- x
+    pm <- p0
+    pp <- p0
     xnew <- x
-    n <- 1L; s <- 1L; j <- 0L
-    a_sum <- 0; na <- 1L
+    n <- 1L
+    s <- 1L
+    j <- 0L
+    a_sum <- 0
+    na <- 1L
     while (s == 1L && j < as.integer(max_depth)) {
       v <- if (.ghc_unif(e, 1L) < 0.5) -1 else 1
       if (v == -1) {
         r <- .baysmplr_build_tree(log_p, grad, qm, pm, u, v, j, eps, e, h0)
-        qm <- r$qm; pm <- r$pm
+        qm <- r$qm
+        pm <- r$pm
       } else {
         r <- .baysmplr_build_tree(log_p, grad, qp, pp, u, v, j, eps, e, h0)
-        qp <- r$qp; pp <- r$pp
+        qp <- r$qp
+        pp <- r$pp
       }
       if (r$s == 1L && n > 0L && .ghc_unif(e, 1L) < r$n / n) xnew <- r$q2
       a_sum <- a_sum + r$a

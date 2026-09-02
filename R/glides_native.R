@@ -310,7 +310,9 @@ morie_glides <- function(receptor, ligand_pose, radii = list(),
                  as.numeric(a[[3]])), type = as.character(a[[4]])))
   lipset <- as.character(lipophilic)
 
-  vp <- list(); cp <- list(); lp <- numeric(0)
+  vp <- list()
+  cp <- list()
+  lp <- numeric(0)
   for (ra in rec) for (la in lig) {
     d <- .glides_dist(ra$xyz, la$xyz)
     if (!is.null(cutoff) && d > as.numeric(cutoff)) next

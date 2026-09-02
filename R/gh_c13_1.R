@@ -21,7 +21,8 @@
 #'   Nonparametric Bayesian Inference, CUP, section 13.2.
 #' @export
 Ghosalsurvdppost <- function(times, events, t_query, alpha = 2) {
-  ts <- as.numeric(times); ev <- as.numeric(events)
+  ts <- as.numeric(times)
+  ev <- as.numeric(events)
   if (length(ts) == 0L) stop("times must be non-empty")
   if (length(ev) != length(ts))
     stop("times and events must have the same length")

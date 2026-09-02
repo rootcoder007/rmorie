@@ -39,7 +39,9 @@
 #' set.seed(1)
 #' Caustrnsp(y = rnorm(60), z = rbinom(60, 1, 0.5), s = runif(60, 0.1, 0.9))
 Caustrnsp <- function(y, z, s, mode = "transport", pr_w0 = NULL) {
-  yv <- as.numeric(y); zv <- as.numeric(z); sv <- as.numeric(s)
+  yv <- as.numeric(y)
+  zv <- as.numeric(z)
+  sv <- as.numeric(s)
   n <- length(yv)
   if (length(zv) != n || length(sv) != n) {
     stop("y, z, s must have equal length", call. = FALSE)
@@ -58,7 +60,8 @@ Caustrnsp <- function(y, z, s, mode = "transport", pr_w0 = NULL) {
     if (!cc > 0) stop("pr_w0 must be positive", call. = FALSE)
     w <- (1 - sv) / sv / cc
   }
-  i1 <- which(zv == 1); i0 <- which(zv == 0)
+  i1 <- which(zv == 1)
+  i0 <- which(zv == 0)
   if (length(i1) == 0L || length(i0) == 0L) {
     stop("need both treatment arms in the trial sample", call. = FALSE)
   }

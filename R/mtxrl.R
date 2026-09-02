@@ -25,23 +25,34 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Matgame(V)
 Matgame <- function(A, iters = 2000) {
-  A <- as.matrix(A); m <- nrow(A); n <- ncol(A)
+  A <- as.matrix(A)
+  m <- nrow(A)
+  n <- ncol(A)
   if (m < 1L || n < 1L) stop("the payoff matrix must be non-empty")
-  rowmin <- apply(A, 1, min); colmax <- apply(A, 2, max)
-  maximin <- max(rowmin); minimax <- min(colmax)
+  rowmin <- apply(A, 1, min)
+  colmax <- apply(A, 2, max)
+  maximin <- max(rowmin)
+  minimax <- min(colmax)
   if (abs(maximin - minimax) < 1e-15) {
-    i0 <- which.max(rowmin); j0 <- which.min(colmax)
-    x <- rep(0, m); x[i0] <- 1
-    y <- rep(0, n); y[j0] <- 1
+    i0 <- which.max(rowmin)
+    j0 <- which.min(colmax)
+    x <- rep(0, m)
+    x[i0] <- 1
+    y <- rep(0, n)
+    y[j0] <- 1
     return(.t1_result(value = maximin, lower = maximin, upper = minimax,
                       row_strategy = x, col_strategy = y, maximin = maximin,
                       minimax = minimax, saddle = 1, iterations = 0,
                       m = as.numeric(m), n = as.numeric(n),
                       method = "Matrix game with a pure saddle point"))
   }
-  cr <- integer(m); cc <- integer(n)
-  urow <- numeric(n); ucol <- numeric(m)
-  i <- 1L; cr[i] <- 1L; urow <- urow + A[i, ]
+  cr <- integer(m)
+  cc <- integer(n)
+  urow <- numeric(n)
+  ucol <- numeric(m)
+  i <- 1L
+  cr[i] <- 1L
+  urow <- urow + A[i, ]
   Tn <- as.integer(iters)
   for (t in seq_len(Tn)) {
     j <- which.min(urow)
@@ -51,9 +62,12 @@ Matgame <- function(A, iters = 2000) {
     cr[i] <- cr[i] + 1L
     urow <- urow + A[i, ]
   }
-  x <- cr / sum(cr); y <- cc / sum(cc)
-  Ay <- as.numeric(A %*% y); xA <- as.numeric(t(x) %*% A)
-  lo <- min(xA); hi <- max(Ay)
+  x <- cr / sum(cr)
+  y <- cc / sum(cc)
+  Ay <- as.numeric(A %*% y)
+  xA <- as.numeric(t(x) %*% A)
+  lo <- min(xA)
+  hi <- max(Ay)
   .t1_result(value = 0.5 * (lo + hi), lower = lo, upper = hi,
              row_strategy = x, col_strategy = y, maximin = maximin,
              minimax = minimax, saddle = 0, iterations = as.numeric(Tn),

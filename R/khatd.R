@@ -21,7 +21,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Khatd(V)
 Khatd <- function(log_lik) {
-  L <- as.matrix(log_lik); Sn <- nrow(L); n <- ncol(L)
+  L <- as.matrix(log_lik)
+  Sn <- nrow(L)
+  n <- ncol(L)
   ks <- vapply(seq_len(n), function(i) .s4_psis(-L[, i])$k, 0)
   bad <- sum(ks > 0.7, na.rm = TRUE)
   .t1_result(estimate = if (any(is.nan(ks))) NaN else max(ks), k = ks, n_bad = bad, n_ok = n - bad,

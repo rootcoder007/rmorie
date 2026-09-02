@@ -26,24 +26,30 @@ Bpetrain <- function(corpus, vocab_size = 10, word_counts = NULL) {
   if (!is.null(word_counts)) {
     freq <- as.numeric(word_counts)
   } else {
-    uniq <- character(0); cnt <- numeric(0)
+    uniq <- character(0)
+    cnt <- numeric(0)
     for (w in words) {
       i <- match(w, uniq)
-      if (is.na(i)) { uniq <- c(uniq, w); cnt <- c(cnt, 1) } else cnt[i] <- cnt[i] + 1
+      if (is.na(i)) { uniq <- c(uniq, w)
+      cnt <- c(cnt, 1) } else cnt[i] <- cnt[i] + 1
     }
-    words <- uniq; freq <- cnt
+    words <- uniq
+    freq <- cnt
   }
   eow <- "</w>"
   seqs <- lapply(words, function(w) c(strsplit(w, "")[[1]], eow))
-  merges <- character(0); counts <- numeric(0)
+  merges <- character(0)
+  counts <- numeric(0)
   for (it in seq_len(as.integer(vocab_size))) {
-    pairs <- character(0); pc <- numeric(0)
+    pairs <- character(0)
+    pc <- numeric(0)
     for (wi in seq_along(seqs)) {
       s <- seqs[[wi]]
       if (length(s) > 1L) for (j in seq_len(length(s) - 1L)) {
         p <- paste0(s[j], "\001", s[j + 1L])
         i <- match(p, pairs)
-        if (is.na(i)) { pairs <- c(pairs, p); pc <- c(pc, freq[wi]) } else pc[i] <- pc[i] + freq[wi]
+        if (is.na(i)) { pairs <- c(pairs, p)
+        pc <- c(pc, freq[wi]) } else pc[i] <- pc[i] + freq[wi]
       }
     }
     if (length(pairs) == 0L) break
@@ -51,16 +57,21 @@ Bpetrain <- function(corpus, vocab_size = 10, word_counts = NULL) {
     if (length(pairs) > 1L) for (i in seq(2L, length(pairs))) if (pc[i] > pc[best]) best <- i
     if (pc[best] <= 1) break
     ab <- strsplit(pairs[best], "\001", fixed = TRUE)[[1]]
-    a <- ab[1]; b <- ab[2]
+    a <- ab[1]
+    b <- ab[2]
     merges <- c(merges, paste0(a, "|", b))
     counts <- c(counts, pc[best])
     for (wi in seq_along(seqs)) {
-      s <- seqs[[wi]]; out <- character(0); j <- 1L
+      s <- seqs[[wi]]
+      out <- character(0)
+      j <- 1L
       while (j <= length(s)) {
         if (j + 1L <= length(s) && s[j] == a && s[j + 1L] == b) {
-          out <- c(out, paste0(a, b)); j <- j + 2L
+          out <- c(out, paste0(a, b))
+          j <- j + 2L
         } else {
-          out <- c(out, s[j]); j <- j + 1L
+          out <- c(out, s[j])
+          j <- j + 1L
         }
       }
       seqs[[wi]] <- out

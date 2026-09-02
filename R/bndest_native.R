@@ -77,7 +77,8 @@
 #' morie_bndest(y = rnorm(40), observed = rbinom(40, 1, 0.7), support = c(-3, 3))
 morie_bndest <- function(y, observed, support, treatment = NULL) {
   yv <- as.numeric(y)
-  k0 <- as.numeric(support[1]); k1 <- as.numeric(support[2])
+  k0 <- as.numeric(support[1])
+  k1 <- as.numeric(support[2])
   if (!(k0 < k1))
     stop(sprintf("the support must satisfy K0 < K1, got (%g, %g).", k0, k1))
   n <- length(yv)

@@ -64,7 +64,8 @@ Goenr <- function(hits, list_size, term_size, background_size,
   nt <- length(k)
   pvalue <- numeric(nt)
   for (j in seq_len(nt)) {
-    kj <- as.integer(k[j]); Mj <- as.integer(M[j])
+    kj <- as.integer(k[j])
+    Mj <- as.integer(M[j])
     if (kj > min(n, Mj)) {
       stop("hits cannot exceed min(list_size, term_size)", call. = FALSE)
     }

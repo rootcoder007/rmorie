@@ -51,21 +51,31 @@ session_parallel_batches <- function(sessions, batch_size) {
   nxt <- B
   steps <- list()
   repeat {
-    x <- vector("list", B); y <- vector("list", B)
-    reset <- rep(FALSE, B); alive <- FALSE
+    x <- vector("list", B)
+    y <- vector("list", B)
+    reset <- rep(FALSE, B)
+    alive <- FALSE
     for (b in seq_len(B)) {
-      if (is.na(slot[b])) { x[[b]] <- NA; y[[b]] <- NA; next }
+      if (is.na(slot[b])) { x[[b]] <- NA
+      y[[b]] <- NA
+      next }
       s <- S[[slot[b] + 1L]]
       if (pos[b] + 1L >= length(s)) {
         if (nxt < length(S)) {
-          slot[b] <- nxt; pos[b] <- 0L; nxt <- nxt + 1L
+          slot[b] <- nxt
+          pos[b] <- 0L
+          nxt <- nxt + 1L
           reset[b] <- TRUE
           s <- S[[slot[b] + 1L]]
         } else {
-          slot[b] <- NA; x[[b]] <- NA; y[[b]] <- NA; next
+          slot[b] <- NA
+          x[[b]] <- NA
+          y[[b]] <- NA
+          next
         }
       }
-      x[[b]] <- s[pos[b] + 1L]; y[[b]] <- s[pos[b] + 2L]
+      x[[b]] <- s[pos[b] + 1L]
+      y[[b]] <- s[pos[b] + 2L]
       pos[b] <- pos[b] + 1L
       alive <- TRUE
     }
@@ -120,10 +130,14 @@ top1_loss <- function(r_target, r_negatives, regularize = TRUE) {
 #' @export
 gru_step <- function(x, h, Wz, Uz, Wr, Ur, Wh, Uh) {
   n <- length(h)
-  xv <- as.numeric(x); hv <- as.numeric(h)
-  Wz <- as.matrix(Wz); Uz <- as.matrix(Uz)
-  Wr <- as.matrix(Wr); Ur <- as.matrix(Ur)
-  Wh <- as.matrix(Wh); Uh <- as.matrix(Uh)
+  xv <- as.numeric(x)
+  hv <- as.numeric(h)
+  Wz <- as.matrix(Wz)
+  Uz <- as.matrix(Uz)
+  Wr <- as.matrix(Wr)
+  Ur <- as.matrix(Ur)
+  Wh <- as.matrix(Wh)
+  Uh <- as.matrix(Uh)
   z <- .gh_sig(as.numeric(Wz %*% xv + Uz %*% hv))
   r <- .gh_sig(as.numeric(Wr %*% xv + Ur %*% hv))
   hh <- tanh(as.numeric(Wh %*% xv + Uh %*% (r * hv)))

@@ -39,8 +39,10 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   I <- .s03vec(initial)
   if (length(I) != n) stop("sir_epidemic: initial must have one entry per node")
   if (any(I < 0) || any(I > 1)) stop("sir_epidemic: initial probabilities must lie in [0, 1]")
-  beta <- as.numeric(beta); gamma <- as.numeric(gamma)
-  t_max <- as.numeric(t_max); dt <- as.numeric(dt)
+  beta <- as.numeric(beta)
+  gamma <- as.numeric(gamma)
+  t_max <- as.numeric(t_max)
+  dt <- as.numeric(dt)
   if (beta < 0 || gamma < 0) stop("sir_epidemic: beta and gamma must be non-negative")
   if (dt <= 0 || t_max < 0) stop("sir_epidemic: need dt > 0 and t_max >= 0")
 
@@ -48,7 +50,9 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
   R <- numeric(n)
 
   deriv <- function(s, i, r) {
-    ds <- numeric(n); di <- numeric(n); dr <- numeric(n)
+    ds <- numeric(n)
+    di <- numeric(n)
+    dr <- numeric(n)
     for (a in seq_len(n)) {
       f <- 0
       for (b in seq_len(n)) f <- f + A[a, b] * i[b]
@@ -72,7 +76,8 @@ Siaepi <- function(G, beta, gamma, initial, t_max = 50, dt = 0.01) {
     I <- I + (dt / 6) * (k1[[2]] + 2 * k2[[2]] + 2 * k3[[2]] + k4[[2]])
     R <- R + (dt / 6) * (k1[[3]] + 2 * k2[[3]] + 2 * k3[[3]] + k4[[3]])
     cur <- sum(I) / n
-    if (cur > peak_I) { peak_I <- cur; peak_time <- step * dt }
+    if (cur > peak_I) { peak_I <- cur
+    peak_time <- step * dt }
   }
 
   deg <- numeric(n)

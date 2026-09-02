@@ -17,7 +17,8 @@
 #' Tempdecay(5, 30, c(10, 20, 5))$pi
 #' @export
 Tempdecay <- function(move_count, threshold = 30L, N = NULL) {
-  mc <- as.integer(move_count); th <- as.integer(threshold)
+  mc <- as.integer(move_count)
+  th <- as.integer(threshold)
   greedy <- mc >= th
   tau <- if (greedy) 0 else 1
   pi_ <- numeric(0)
@@ -33,6 +34,8 @@ Tempdecay <- function(move_count, threshold = 30L, N = NULL) {
       pi_ <- if (tot > 0) n / tot else rep(0, length(n))
     }
   }
-  list(estimate = tau, tau = tau, greedy = greedy, pi = pi_, threshold = th,
-       method = "AlphaZero temperature schedule (tau = 1 then greedy)")
+  list(
+    estimate = tau, tau = tau, greedy = greedy, pi = pi_, threshold = th,
+    method = "AlphaZero temperature schedule (tau = 1 then greedy)"
+  )
 }

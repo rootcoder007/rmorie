@@ -35,8 +35,10 @@
 #' Btres(X, y, B = 20)$sigma2_tilde
 #' @export
 Btres <- function(X, y, B = 200, seed = 1, alpha = 0.05, rescale = FALSE) {
-  Xm <- .s03mat(X); yy <- .s03vec(y)
-  n <- nrow(Xm); p <- ncol(Xm)
+  Xm <- .s03mat(X)
+  yy <- .s03vec(y)
+  n <- nrow(Xm)
+  p <- ncol(Xm)
   if (n != length(yy)) stop("boot_residual_regression: X and y have different lengths")
   if (n <= p) stop("boot_residual_regression: need more rows than columns")
   if (as.integer(B) < 2L) stop("boot_residual_regression: need at least two replicates")
@@ -63,7 +65,10 @@ Btres <- function(X, y, B = 200, seed = 1, alpha = 0.05, rescale = FALSE) {
     }
     reps[[b]] <- .s03lstsq(Xm, ys)
   }
-  se <- numeric(p); lo <- numeric(p); hi <- numeric(p); vc <- numeric(p)
+  se <- numeric(p)
+  lo <- numeric(p)
+  hi <- numeric(p)
+  vc <- numeric(p)
   for (j in seq_len(p)) {
     col <- vapply(reps, function(r) r[j], 0)
     se[j] <- .s03sd(col, 1L)
@@ -82,7 +87,8 @@ Btres <- function(X, y, B = 200, seed = 1, alpha = 0.05, rescale = FALSE) {
   A <- .s03crossprod(Xm)
   out <- matrix(0, p, p)
   for (j in seq_len(p)) {
-    e <- numeric(p); e[j] <- 1
+    e <- numeric(p)
+    e[j] <- 1
     out[, j] <- .s03ridgesolve(A, e)
   }
   out

@@ -181,7 +181,8 @@ observed_clint_u <- function(cl_h, fu_blood, species = "human",
 #' @return A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
 #' @export
 prediction_accuracy <- function(predicted, observed, fold = 2.0) {
-  p <- as.numeric(predicted); o <- as.numeric(observed)
+  p <- as.numeric(predicted)
+  o <- as.numeric(observed)
   n <- length(p)
   if (n == 0L || n != length(o))
     stop("clrnt: need one observed value per prediction")
@@ -252,12 +253,15 @@ clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
   if (is.null(clh) && !is.null(clp)) {
     if (is.null(fup))
       stop("clrnt: plasma clearance needs fu_plasma too")
-    clh <- numeric(n); fub <- numeric(n); rb_used <- numeric(n)
+    clh <- numeric(n)
+    fub <- numeric(n)
+    rb_used <- numeric(n)
     for (i in seq_len(n)) {
       a <- blood_from_plasma(clp[i], fup[i],
                              if (is.null(rbs)) NULL else rbs[i],
                              charge)
-      clh[i] <- a$cl_blood; fub[i] <- a$fu_blood
+      clh[i] <- a$cl_blood
+      fub[i] <- a$fu_blood
       rb_used[i] <- a$rb
     }
   }

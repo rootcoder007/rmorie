@@ -28,7 +28,8 @@
   M <- m
   if (is.list(M) && !is.matrix(M)) {
     if (length(M) > 0 && is.list(M[[1]])) {
-      nr <- length(M); nc <- length(M[[1]])
+      nr <- length(M)
+      nc <- length(M[[1]])
       M <- matrix(0, nrow = nr, ncol = nc)
       for (i in 1:nr) for (j in 1:nc) M[i, j] <- M[[i]][[j]]
     } else {
@@ -130,7 +131,8 @@ whole_part_subpart <- function(masks, target_hierarchy = NULL) {
   for (r in 1:2) {
     inner <- which(flat_order[[r + 1]] > 0.5)
     outer <- which(flat_order[[r]] > 0.5)
-    if (!all(inner %in% outer)) { nested <- FALSE; break }
+    if (!all(inner %in% outer)) { nested <- FALSE
+    break }
   }
   list(assignment = named, sizes = sizes, nested = nested,
        note = "nested masks are often at most three deep")

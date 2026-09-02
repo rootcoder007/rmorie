@@ -25,8 +25,13 @@ Mctsnode <- function(p, action_space = NULL) {
   m <- length(pr)
   tot <- 0
   for (x in pr) tot <- tot + x
-  if (tot > 0) { pr <- pr / tot; tot <- 1 }
-  list(estimate = as.numeric(m), p = pr, n = numeric(m), w = numeric(m),
-       q = numeric(m), prior_sum = tot,
-       method = "AlphaZero MCTS node initialisation (N=W=Q=0, P=p)")
+  if (tot > 0) {
+    pr <- pr / tot
+    tot <- 1
+  }
+  list(
+    estimate = as.numeric(m), p = pr, n = numeric(m), w = numeric(m),
+    q = numeric(m), prior_sum = tot,
+    method = "AlphaZero MCTS node initialisation (N=W=Q=0, P=p)"
+  )
 }

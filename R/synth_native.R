@@ -287,7 +287,8 @@ print.morie_synth <- function(x, ...) {
 #'   (2021), American Economic Review 111(12) 4088-4118.
 #' @noRd
 .morie_sdid_native <- function(Y, N_co, T_pre) {
-  N <- nrow(Y); T_all <- ncol(Y)
+  N <- nrow(Y)
+  T_all <- ncol(Y)
   N_tr <- N - N_co
   T_post <- T_all - T_pre
   Y_co <- Y[seq_len(N_co), , drop = FALSE]
@@ -326,7 +327,8 @@ print.morie_synth <- function(x, ...) {
                                   method = "placebo",
                                   n_boot = 200L, seed = 42L) {
   fit <- .morie_sdid_native(Y, N_co, T_pre)
-  N <- nrow(Y); N_tr <- N - N_co
+  N <- nrow(Y)
+  N_tr <- N - N_co
   se <- NA_real_
   placebo_effects <- NULL
   if (identical(method, "placebo")) {

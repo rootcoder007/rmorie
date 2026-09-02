@@ -45,11 +45,14 @@
 #' morie_causrddf(x, y, treat)
 morie_causrddf <- function(x, y, treat, cutoff = 0, h = NULL,
                            h_treat = NULL, kernel = "triangular") {
-  xa <- as.numeric(x); ya <- as.numeric(y); wa <- as.numeric(treat)
+  xa <- as.numeric(x)
+  ya <- as.numeric(y)
+  wa <- as.numeric(treat)
   cc <- as.numeric(cutoff)
   if (is.null(h)) h <- morie_causrddh(xa, ya, cutoff = cc)$estimate
   if (is.null(h_treat)) h_treat <- morie_causrddh(xa, wa, cutoff = cc)$estimate
-  h <- as.numeric(h); h_treat <- as.numeric(h_treat)
+  h <- as.numeric(h)
+  h_treat <- as.numeric(h_treat)
   fy <- morie_causrdd(xa, ya, cutoff = cc, h = h, kernel = kernel)
   fw <- morie_causrdd(xa, wa, cutoff = cc, h = h_treat, kernel = kernel)
   ty <- fy$estimate

@@ -16,7 +16,8 @@
 #' @return list with tokens, grid, patch, latent_size, note.
 #' @export
 patch_grid <- function(latent_size, patch) {
-  I <- as.integer(latent_size); p <- as.integer(patch)
+  I <- as.integer(latent_size)
+  p <- as.integer(patch)
   if (p < 1L || I < 1L)
     stop("dits16: the latent size and patch must be positive")
   if ((I %% p) != 0L)
@@ -40,7 +41,9 @@ patch_grid <- function(latent_size, patch) {
 #' @return list with gflops, tokens, depth, width, attention_share, note.
 #' @export
 gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
-  T <- as.integer(tokens); L <- as.integer(depth); d <- as.integer(width)
+  T <- as.integer(tokens)
+  L <- as.integer(depth)
+  d <- as.integer(width)
   if (min(T, L, d) < 1L)
     stop("dits16: tokens, depth and width must be positive")
   attn <- 4.0 * T * d * d + 2.0 * T * T * d

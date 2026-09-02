@@ -91,11 +91,14 @@ unscale <- function(value, lower, upper) {
 #'   \code{out_of_range}, \code{caveat}.
 #' @export
 linear_fluctuation_unsafe <- function(Q, H, Y) {
-  q <- as.numeric(Q); h <- as.numeric(H); yy <- as.numeric(Y)
+  q <- as.numeric(Q)
+  h <- as.numeric(H)
+  yy <- as.numeric(Y)
   n <- length(q)
   if (!(length(h) == length(yy) && length(yy) == n))
     stop("tmlcou: Q, H, Y must have the same length")
-  num <- sum(h * (yy - q)); den <- sum(h * h)
+  num <- sum(h * (yy - q))
+  den <- sum(h * h)
   e <- if (den > .tmlcou_EPS) num / den else 0
   upd <- q + e * h
   list(epsilon = e, Q_star = upd,
@@ -129,8 +132,10 @@ linear_fluctuation_unsafe <- function(Q, H, Y) {
 morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
                          Q1 = NULL, Q0 = NULL,
                          lower = NULL, upper = NULL, iters = 100) {
-  yv <- as.numeric(y); a <- as.numeric(D)
-  W <- as.matrix(X); storage.mode(W) <- "double"
+  yv <- as.numeric(y)
+  a <- as.numeric(D)
+  W <- as.matrix(X)
+  storage.mode(W) <- "double"
   n <- length(yv)
   if (!(length(a) == nrow(W) && nrow(W) == n))
     stop("tmlcou: the inputs differ in length")
@@ -142,7 +147,8 @@ morie_tmlcou <- function(y, D, X, offset = NULL, g = NULL,
       stop("tmlcou: the offset must be positive and of the same length")
     yv <- yv / t
   }
-  sc <- rescale(yv, lower, upper); ys <- sc$scaled
+  sc <- rescale(yv, lower, upper)
+  ys <- sc$scaled
   if (is.null(g)) {
     des <- cbind(1, W)
     bhat <- as.numeric(coef(glm(a ~ des - 1, family = binomial())))

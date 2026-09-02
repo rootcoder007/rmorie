@@ -70,7 +70,8 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
     L
   }
   ada <- function(M, d) {
-    mm <- length(M); nn <- length(M[[1]])
+    mm <- length(M)
+    nn <- length(M[[1]])
     out <- matrix(0, mm, mm)
     for (i in seq_len(mm)) {
       for (j in seq_len(mm)) {
@@ -127,14 +128,18 @@ morie_linprm <- function(c, A, b, tol = 1e-10, max_iter = 200) {
     }
     xs <- -x * s
     pr1 <- step_fn(xs)
-    dxa <- pr1$dx; dya <- pr1$dy; dsa <- pr1$ds
+    dxa <- pr1$dx
+    dya <- pr1$dy
+    dsa <- pr1$ds
     ap <- min(1.0, alpha_fn(x, dxa))
     ad <- min(1.0, alpha_fn(s, dsa))
     mu_aff <- sum((x + ap * dxa) * (s + ad * dsa)) / n
     sigma <- if (mu > 0) (mu_aff / mu)^3 else 0.0
     r3 <- -x * s - dxa * dsa + sigma * mu
     pr2 <- step_fn(r3)
-    dx <- pr2$dx; dy <- pr2$dy; ds <- pr2$ds
+    dx <- pr2$dx
+    dy <- pr2$dy
+    ds <- pr2$ds
     ap <- min(1.0, 0.99 * alpha_fn(x, dx))
     ad <- min(1.0, 0.99 * alpha_fn(s, ds))
     x <- x + ap * dx

@@ -98,7 +98,8 @@ poltrx_continuity_regime <- function(rule) {
 #' @export
 poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
   m <- as.integer(level)
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   v <- as.numeric(x)
   if (!(a <= v && v <= b))
     stop(sprintf("poltrx: x = %s lies outside the partitioned interval [%s, %s]",
@@ -106,7 +107,9 @@ poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
   bits <- integer(m)
   for (i in seq_len(m)) {
     mid <- 0.5 * (a + b)
-    if (v < mid) { bits[i] <- 0L; b <- mid } else { bits[i] <- 1L; a <- mid }
+    if (v < mid) { bits[i] <- 0L
+    b <- mid } else { bits[i] <- 1L
+    a <- mid }
   }
   list(epsilon = bits, interval = c(a, b), level = m)
 }
@@ -255,7 +258,8 @@ poltrx_set_probability <- function(epsilon, tree) {
 poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
   M <- if (is.null(level)) as.integer(tree$levels) else as.integer(level)
   n <- 2L ^ M
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   width <- (b - a) / n
   probs <- numeric(n)
   dens   <- numeric(n)

@@ -63,7 +63,8 @@
 #' @export
 morie_lyapun_embed <- function(y, m, tau) {
   y <- .lyapun_as_series(y)
-  m <- as.integer(m); tau <- as.integer(tau)
+  m <- as.integer(m)
+  tau <- as.integer(tau)
   if (m < 1L)
     stop("lyapun: the embedding dimension must be >= 1")
   if (tau < 1L)
@@ -155,7 +156,8 @@ mean_period <- function(y, dt = 1.0) {
   nn <- rep(-1L, n_pts)
   d0 <- rep(0.0, n_pts)
   for (j in seq_len(n_pts)) {
-    best <- -1L; best_d <- Inf
+    best <- -1L
+    best_d <- Inf
     pj <- pts[[j]]
     for (jp in seq_len(n_pts)) {
       if (abs(j - jp) <= min_sep) next
@@ -165,9 +167,11 @@ mean_period <- function(y, dt = 1.0) {
       for (k in seq_len(m)) {
         diff <- pj[k] - pk[k]
         s <- s + diff * diff
-        if (s >= best_d) { aborted <- TRUE; break }
+        if (s >= best_d) { aborted <- TRUE
+        break }
       }
-      if (!aborted && s < best_d) { best_d <- s; best <- jp }
+      if (!aborted && s < best_d) { best_d <- s
+      best <- jp }
     }
     nn[j] <- best
     d0[j] <- if (best >= 0L) sqrt(best_d) else NaN
@@ -187,9 +191,11 @@ mean_period <- function(y, dt = 1.0) {
 #' @return A numeric value.
 #' @export
 .lyapun_distance <- function(pts, a, b) {
-  pa <- pts[[a]]; pb <- pts[[b]]
+  pa <- pts[[a]]
+  pb <- pts[[b]]
   s <- 0.0
-  for (k in seq_along(pa)) { diff <- pa[k] - pb[k]; s <- s + diff * diff }
+  for (k in seq_along(pa)) { diff <- pa[k] - pb[k]
+  s <- s + diff * diff }
   sqrt(s)
 }
 
@@ -227,17 +233,22 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
          " samples) leaves no admissible neighbours among ",
          n_pts, " reconstructed points; pass min_sep explicitly")
   nn_d0 <- .lyapun_nearest_neighbours(pts, min_sep)
-  nn <- nn_d0$nn; d0 <- nn_d0$d0
+  nn <- nn_d0$nn
+  d0 <- nn_d0$d0
   usable <- which(nn >= 0L & d0 > 0)
   if (length(usable) < 3L)
     stop("lyapun: fewer than three usable neighbour pairs")
   if (is.null(max_steps)) max_steps <- max(1L, n_pts %/% 4L)
   max_steps <- as.integer(max_steps)
 
-  times <- numeric(0); curve <- numeric(0); counts <- integer(0)
+  times <- numeric(0)
+  curve <- numeric(0)
+  counts <- integer(0)
   ratio <- numeric(0)
   for (i in seq_len(max_steps + 1L) - 1L) {
-    tot <- 0.0; tot_ratio <- 0.0; cnt <- 0L
+    tot <- 0.0
+    tot_ratio <- 0.0
+    cnt <- 0L
     for (j in usable) {
       jp <- nn[j]
       if ((j + i) > n_pts || (jp + i) > n_pts) next
@@ -272,7 +283,8 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 .lyapun_linear_region <- function(curve, lo_frac = 0.1, hi_frac = 0.8) {
   n <- length(curve)
   if (n < 4L) return(list(lo = 0L, hi = n))
-  c_lo <- min(curve); c_hi <- max(curve)
+  c_lo <- min(curve)
+  c_hi <- max(curve)
   span <- c_hi - c_lo
   if (span <= 0) return(list(lo = 0L, hi = n))
   top <- which.max(curve)
@@ -346,30 +358,38 @@ lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
   curve <- dv$log_divergence
   n_steps <- length(curve)
   if (is.null(fit)) {
-    lr <- .lyapun_linear_region(curve); lo <- lr$lo; hi <- lr$hi
+    lr <- .lyapun_linear_region(curve)
+    lo <- lr$lo
+    hi <- lr$hi
   } else {
-    lo <- as.integer(fit[1L]); hi <- as.integer(fit[2L])
+    lo <- as.integer(fit[1L])
+    hi <- as.integer(fit[2L])
     if (lo < 0L || hi > n_steps || hi - lo < 2L)
       stop("lyapun: the fitting window must lie inside 0..", n_steps,
            " and span at least two steps")
   }
   ols <- .lyapun_ols_slope(times[lo:hi], curve[lo:hi])
-  slope <- ols$slope; intercept <- ols$intercept
-  se <- ols$se; r2 <- ols$r2
+  slope <- ols$slope
+  intercept <- ols$intercept
+  se <- ols$se
+  r2 <- ols$r2
 
   i_end <- hi - 1L
   sato <- if (i_end > 0L) dv$log_ratio[i_end] / (i_end * dt) else NaN
 
   if (is.null(k)) k <- max(1L, hi - lo)
   k <- as.integer(k)
-  sato_k <- NaN; sato_k_curve <- numeric(0)
+  sato_k <- NaN
+  sato_k_curve <- numeric(0)
   if (k >= 1L && n_steps > k) {
     pts <- dv$points
-    nn <- dv$neighbour; n_pts <- dv$n_points
+    nn <- dv$neighbour
+    n_pts <- dv$n_points
     d0 <- dv$d0
     usable <- which(nn >= 0L & d0 > 0)
     for (i in seq_len(n_steps - k) - 1L) {
-      tot <- 0.0; cnt <- 0L
+      tot <- 0.0
+      cnt <- 0L
       for (j in usable) {
         jp <- nn[j]
         if (max(j, jp) + i + k > n_pts) next
@@ -386,12 +406,14 @@ lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
       cap <- max(3L, min(hi, length(sato_k_curve)))
       search <- sato_k_curve[seq_len(cap)]
       w <- max(2L, length(search) %/% 4L)
-      best <- 1L; best_var <- Inf
+      best <- 1L
+      best_var <- Inf
       for (s in seq_len(length(search) - w + 1L) - 1L) {
         seg <- search[(s + 1L):(s + w)]
         mu <- sum(seg) / w
         var <- sum((seg - mu)^2) / w
-        if (var < best_var) { best_var <- var; best <- s + 1L }
+        if (var < best_var) { best_var <- var
+        best <- s + 1L }
       }
       seg <- search[best:(best + w - 1L)]
       sato_k <- sum(seg) / length(seg)

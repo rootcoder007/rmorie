@@ -20,14 +20,20 @@
 #' Noisealpha(35)$alpha
 #' @export
 Noisealpha <- function(avg_legal, scale = 10) {
-  b <- as.numeric(avg_legal); s <- as.numeric(scale)
+  b <- as.numeric(avg_legal)
+  s <- as.numeric(scale)
   alpha <- if (b > 0) s / b else NaN
   pub <- NaN
-  bf <- c(35, 250, 92); av <- c(0.3, 0.03, 0.15)  # chess, go, shogi (sorted by name)
+  bf <- c(35, 250, 92)
+  av <- c(0.3, 0.03, 0.15) # chess, go, shogi (sorted by name)
   for (i in seq_along(bf)) if (abs(bf[i] - b) < 1e-9) pub <- av[i]
-  list(estimate = alpha, alpha = alpha, published_alpha = pub, scale = s,
-       avg_legal = b,
-       method = paste0("Dirichlet concentration alpha = scale / avg legal moves; ",
-                       "the inverse-proportionality rule is the paper's, the ",
-                       "scale of 10 is inferred from its three printed values"))
+  list(
+    estimate = alpha, alpha = alpha, published_alpha = pub, scale = s,
+    avg_legal = b,
+    method = paste0(
+      "Dirichlet concentration alpha = scale / avg legal moves; ",
+      "the inverse-proportionality rule is the paper's, the ",
+      "scale of 10 is inferred from its three printed values"
+    )
+  )
 }

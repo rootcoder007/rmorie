@@ -31,9 +31,12 @@
 #'   of Machine Learning Research 48:2664-2672 (ICML).
 #' @export
 Otgws <- function(Cx, Cy, a, b, epsilon, max_iter = 20, inner_iter = 200) {
-  A <- as.matrix(Cx); B <- as.matrix(Cy)
-  aa <- .ot_hist(a); bb <- .ot_hist(b)
-  n <- length(aa); m <- length(bb)
+  A <- as.matrix(Cx)
+  B <- as.matrix(Cy)
+  aa <- .ot_hist(a)
+  bb <- .ot_hist(b)
+  n <- length(aa)
+  m <- length(bb)
   if (nrow(A) != n || ncol(A) != n) stop("Cx must be n by n")
   if (nrow(B) != m || ncol(B) != m) stop("Cy must be m by m")
   eps <- as.numeric(epsilon)

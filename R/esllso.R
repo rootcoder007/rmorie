@@ -32,9 +32,11 @@
 #' @examples
 #' Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 Esllso <- function(X, y, lambda_, max_iter = 10000, tol = 1e-12) {
-  X <- as.matrix(X); y <- as.numeric(y)
+  X <- as.matrix(X)
+  y <- as.numeric(y)
   lam <- as.numeric(lambda_)
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   if (length(y) != n)
     stop(sprintf("X has %d rows but y has %d entries.", n, length(y)))
   if (lam < 0)
@@ -43,8 +45,10 @@ Esllso <- function(X, y, lambda_, max_iter = 10000, tol = 1e-12) {
   if (any(colsq == 0))
     stop("an all-zero column cannot be penalised meaningfully.")
   const <- vapply(seq_len(p), function(j) diff(range(X[, j])) == 0, TRUE)
-  beta <- numeric(p); r <- y
-  converged <- FALSE; it <- 0L
+  beta <- numeric(p)
+  r <- y
+  converged <- FALSE
+  it <- 0L
   for (it in seq_len(as.integer(max_iter))) {
     delta <- 0
     for (j in seq_len(p)) {
@@ -58,7 +62,8 @@ Esllso <- function(X, y, lambda_, max_iter = 10000, tol = 1e-12) {
         delta <- max(delta, abs(new - old))
       }
     }
-    if (delta < tol) { converged <- TRUE; break }
+    if (delta < tol) { converged <- TRUE
+    break }
   }
   active <- which(beta != 0) - 1L
   .t1_result(estimate = beta[1], beta = beta, n_nonzero = length(active),

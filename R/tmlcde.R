@@ -30,10 +30,15 @@
 #' @export
 Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
                     gbound = 0.025, level = 0.95) {
-  Y <- .t1_vec(Y); n <- length(Y)
-  A <- .t1_vec(A); M <- .t1_vec(M); QAM <- .t1_vec(QAM)
-  Q1m <- .t1_vec(Q1m); Q0m <- .t1_vec(Q0m)
-  g1W <- .t1_vec(g1W); hmW <- .t1_vec(hmW)
+  Y <- .t1_vec(Y)
+  n <- length(Y)
+  A <- .t1_vec(A)
+  M <- .t1_vec(M)
+  QAM <- .t1_vec(QAM)
+  Q1m <- .t1_vec(Q1m)
+  Q0m <- .t1_vec(Q0m)
+  g1W <- .t1_vec(g1W)
+  hmW <- .t1_vec(hmW)
   if (any(c(length(A), length(M), length(QAM), length(Q1m), length(Q0m),
             length(g1W), length(hmW)) != n))
     stop("every argument must have one entry per observation")
@@ -41,7 +46,8 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
   if (any(Y < 0 | Y > 1)) stop("Y must lie in [0, 1]")
   if (n < 2L) stop("at least two observations are required")
   m <- as.numeric(m)
-  g1 <- .b1_bound(g1W, gbound, 1 - gbound); g0 <- 1 - g1
+  g1 <- .b1_bound(g1W, gbound, 1 - gbound)
+  g0 <- 1 - g1
   h <- .b1_bound(hmW, gbound, 1)
   at <- as.numeric(M == m)
   H1 <- at * A / (g1 * h)
@@ -50,7 +56,8 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
   e <- c(0, 0)
   for (t in seq_len(100L)) {
     mu <- .b1_expit(off + e[1] * H0 + e[2] * H1)
-    r <- Y - mu; w <- mu * (1 - mu)
+    r <- Y - mu
+    w <- mu * (1 - mu)
     gr <- c(sum(H0 * r), sum(H1 * r))
     Hm <- matrix(c(sum(H0^2 * w) + 1e-10, sum(H0 * H1 * w),
                    sum(H0 * H1 * w), sum(H1^2 * w) + 1e-10), 2, 2)
@@ -61,7 +68,8 @@ Tmlecde <- function(Y, A, M, QAM, Q1m, Q0m, g1W, hmW, m = 1,
   QAs <- .b1_expit(off + e[1] * H0 + e[2] * H1)
   Q1s <- .b1_expit(.b1_logit(Q1m) + e[2] / (g1 * h))
   Q0s <- .b1_expit(.b1_logit(Q0m) + e[1] / (g0 * h))
-  mu1 <- mean(Q1s); mu0 <- mean(Q0s)
+  mu1 <- mean(Q1s)
+  mu0 <- mean(Q0s)
   ic <- H1 * (Y - QAs) + Q1s - mu1 - (H0 * (Y - QAs) + Q0s - mu0)
   psi <- mu1 - mu0
   se <- sqrt(stats::var(ic) / n)

@@ -24,11 +24,13 @@
 #' @examples
 #' Watstro(n = 5L, k = 5L, p = 0.5)
 Watstro <- function(n, k, p, seed = 1) {
-  n <- as.integer(n); k <- as.integer(k)
+  n <- as.integer(n)
+  k <- as.integer(k)
   A <- matrix(0, n, n)
   for (i in seq_len(n)) for (j in seq_len(k %/% 2L)) {
     t_ <- ((i - 1L + j) %% n) + 1L
-    A[i, t_] <- 1; A[t_, i] <- 1
+    A[i, t_] <- 1
+    A[t_, i] <- 1
   }
   g <- .t1_lcg(seed)
   rew <- 0L
@@ -39,8 +41,10 @@ Watstro <- function(n, k, p, seed = 1) {
       cand <- as.integer(g$unif() * n) + 1L
       if (cand > n) cand <- n
       if (cand == i || A[i, cand] != 0) next
-      A[i, t_] <- 0; A[t_, i] <- 0
-      A[i, cand] <- 1; A[cand, i] <- 1
+      A[i, t_] <- 0
+      A[t_, i] <- 0
+      A[i, cand] <- 1
+      A[cand, i] <- 1
       rew <- rew + 1L
     }
   }

@@ -25,8 +25,10 @@
 #' @examples
 #' Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mapeto <- function(a, b, c, d, level = 0.95) {
-  A <- as.numeric(a); B <- as.numeric(b)
-  C <- as.numeric(c); D <- as.numeric(d)
+  A <- as.numeric(a)
+  B <- as.numeric(b)
+  C <- as.numeric(c)
+  D <- as.numeric(d)
   k <- length(A)
   if (k == 0L) stop("no tables")
   if (length(B) != k || length(C) != k || length(D) != k)
@@ -36,10 +38,12 @@ Mapeto <- function(a, b, c, d, level = 0.95) {
   if (any(n <= 1)) stop("each table needs at least two observations")
   e <- (A + B) * (A + C) / n
   v <- (A + B) * (C + D) * (A + C) * (B + D) / (n^2 * (n - 1))
-  oe <- sum(A - e); vv <- sum(v)
+  oe <- sum(A - e)
+  vv <- sum(v)
   if (vv <= 0)
     stop("the pooled variance is zero; no table is informative")
-  lor <- oe / vv; se <- 1 / sqrt(vv)
+  lor <- oe / vv
+  se <- 1 / sqrt(vv)
   z <- .s03qnorm(1 - (1 - as.numeric(level)) / 2)
   .t1_result(OR = exp(lor), log_OR = lor, se_log = se,
              ci = c(exp(lor - z * se), exp(lor + z * se)),

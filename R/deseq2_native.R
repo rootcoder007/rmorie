@@ -204,7 +204,8 @@ cox_reid_loglik <- function(alpha, K, mu, X) {
 #' @export
 nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
                        max_iter = 100L, tol = 1e-8, beta0 = NULL) {
-  m <- length(K); p <- ncol(X)
+  m <- length(K)
+  p <- ncol(X)
   if (is.null(s)) s <- rep(1, m)
   lam <- if (is.null(lam)) rep(0, p) else as.numeric(lam)
   if (is.null(beta0)) {
@@ -212,14 +213,16 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
     beta <- c(log(base), rep(0, p - 1L))
   } else beta <- as.numeric(beta0)
   Sig <- NULL
-  it <- 0L; converged <- FALSE
+  it <- 0L
+  converged <- FALSE
   for (it in seq_len(max_iter)) {
     mu <- numeric(m)
     for (j in seq_len(m)) {
       eta <- sum(X[j, ] * beta)
       mu[j] <- max(s[j] * exp(min(eta, 50)), 1e-10)
     }
-    M <- matrix(0, p, p); v <- rep(0, p)
+    M <- matrix(0, p, p)
+    v <- rep(0, p)
     for (j in seq_len(m)) {
       w <- 1 / (1 / mu[j] + alpha)
       z <- log(mu[j] / s[j]) + (K[j] - mu[j]) / mu[j]
@@ -235,7 +238,8 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
     step <- max(abs(new - beta))
     beta <- new
     Sig <- Mr
-    if (step < tol) { converged <- TRUE; break }
+    if (step < tol) { converged <- TRUE
+    break }
   }
   mu <- numeric(m)
   for (j in seq_len(m)) {
@@ -262,24 +266,35 @@ nb_glm_fit <- function(K, X, alpha, s = NULL, lam = NULL,
 #' @export
 .ghc_deseq2_maximise_log_alpha <- function(obj, lo = -15, hi = 5,
                                            n_grid = 60L, refine = 60L) {
-  best_u <- lo; best_v <- obj(exp(lo))
+  best_u <- lo
+  best_v <- obj(exp(lo))
   step <- (hi - lo) / n_grid
   for (g in seq_len(n_grid)) {
     u <- lo + (hi - lo) * g / n_grid
     val <- obj(exp(u))
-    if (val > best_v) { best_u <- u; best_v <- val }
+    if (val > best_v) { best_u <- u
+    best_v <- val }
   }
-  a <- best_u - step; b <- best_u + step
+  a <- best_u - step
+  b <- best_u + step
   phi <- (sqrt(5) - 1) / 2
-  c <- b - phi * (b - a); d <- a + phi * (b - a)
-  fc <- obj(exp(c)); fd <- obj(exp(d))
+  c <- b - phi * (b - a)
+  d <- a + phi * (b - a)
+  fc <- obj(exp(c))
+  fd <- obj(exp(d))
   for (iter in seq_len(refine)) {
     if (fc > fd) {
-      b <- d; d <- c; fd <- fc
-      c <- b - phi * (b - a); fc <- obj(exp(c))
+      b <- d
+      d <- c
+      fd <- fc
+      c <- b - phi * (b - a)
+      fc <- obj(exp(c))
     } else {
-      a <- c; c <- d; fc <- fd
-      d <- a + phi * (b - a); fd <- obj(exp(d))
+      a <- c
+      c <- d
+      fc <- fd
+      d <- a + phi * (b - a)
+      fd <- obj(exp(d))
     }
   }
   exp(0.5 * (a + b))
@@ -318,7 +333,8 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
   keep <- which(disp > 0 & mu_bar > 0)
   if (length(keep) < 3L)
     stop("deseq2: too few genes with positive dispersion to fit the trend")
-  a1 <- 1; a0 <- max(1e-8, .ghc_deseq2_median(disp[keep]))
+  a1 <- 1
+  a0 <- max(1e-8, .ghc_deseq2_median(disp[keep]))
   for (iter in seq_len(max_iter)) {
     rows <- keep
     sel <- vapply(keep, function(i) {
@@ -327,7 +343,8 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
     }, logical(1))
     rows <- keep[sel]
     if (length(rows) < 3L) rows <- keep
-    M <- matrix(0, 2, 2); v <- rep(0, 2)
+    M <- matrix(0, 2, 2)
+    v <- rep(0, 2)
     for (i in rows) {
       fit <- max(a1 / mu_bar[i] + a0, 1e-12)
       w <- 1 / (fit * fit)
@@ -339,7 +356,8 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
     if (is.null(new)) break
     new <- c(max(new[1L], 0), max(new[2L], 1e-8))
     delta <- (new[1L] - a1)^2 + (new[2L] - a0)^2
-    a1 <- new[1L]; a0 <- new[2L]
+    a1 <- new[1L]
+    a0 <- new[2L]
     if (delta < tol) break
   }
   fitted <- ifelse(mu_bar > 0, a1 / mu_bar + a0, a0)
@@ -354,11 +372,13 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 .deseq2_benjamini_hochberg <- function(p) {
   n <- length(p)
   order_idx <- order(p)
-  adj <- numeric(n); prev <- 1
+  adj <- numeric(n)
+  prev <- 1
   for (rank in n:1L) {
     i <- order_idx[rank]
     val <- min(prev, p[i] * n / rank)
-    adj[i] <- val; prev <- val
+    adj[i] <- val
+    prev <- val
   }
   adj
 }
@@ -384,7 +404,8 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @return A numeric value.
 #' @export
 .ghc_deseq2_norm_ppf <- function(pr) {
-  lo <- -40; hi <- 40
+  lo <- -40
+  hi <- 40
   for (iter in seq_len(200L)) {
     mid <- 0.5 * (lo + hi)
     if (.ghc_deseq2_norm_cdf(mid) < pr) lo <- mid else hi <- mid
@@ -406,7 +427,8 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
   s <- sort(v)
   if (length(s) == 0L) stop("deseq2: empty quantile")
   pos <- pr * (length(s) - 1L)
-  lo <- floor(pos); hi <- min(lo + 1L, length(s) - 1L)
+  lo <- floor(pos)
+  hi <- min(lo + 1L, length(s) - 1L)
   s[lo + 1L] + (pos - lo) * (s[hi + 1L] - s[lo + 1L])
 }
 
@@ -434,7 +456,8 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
   K <- lapply(counts, function(r) as.numeric(r))
   if (length(K) == 0L || length(K[[1L]]) == 0L)
     stop("deseq2: counts must be a non-empty matrix")
-  n_genes <- length(K); m <- length(K[[1L]])
+  n_genes <- length(K)
+  m <- length(K[[1L]])
   first <- design[[1L]]
   if (is.numeric(first)) {
     X <- do.call(rbind, lapply(design, as.numeric))
@@ -459,13 +482,17 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
   base_mean <- vapply(seq_len(n_genes), function(i)
     sum(K[[i]] / s) / m, numeric(1))
   # step 1: gene-wise dispersions
-  gw <- numeric(n_genes); mu0 <- vector("list", n_genes)
+  gw <- numeric(n_genes)
+  mu0 <- vector("list", n_genes)
   for (i in seq_len(n_genes)) {
     if (base_mean[i] <= 0) {
-      gw[i] <- min_disp; mu0[[i]] <- rep(1e-10, m); next
+      gw[i] <- min_disp
+      mu0[[i]] <- rep(1e-10, m)
+      next
     }
     d <- dispersion_gene_wise(K[[i]], X, s, alpha_init)
-    gw[i] <- d$dispersion; mu0[[i]] <- d$mu0
+    gw[i] <- d$dispersion
+    mu0[[i]] <- d$mu0
   }
   # step 2: trend
   usable <- which(base_mean > 0 & gw > 0)
@@ -475,11 +502,15 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
   resid <- log(gw[usable]) - log(fitted[usable])
   s_lr <- if (length(resid) > 1L) .ghc_deseq2_mad(resid) else 0
   sigma_d2 <- max(s_lr^2 - .deseq2_trigamma((m - p) / 2), 0.25)
-  disp <- numeric(n_genes); outlier <- rep(FALSE, n_genes)
+  disp <- numeric(n_genes)
+  outlier <- rep(FALSE, n_genes)
   for (i in seq_len(n_genes)) {
-    if (base_mean[i] <= 0) { disp[i] <- max(fitted[i], min_disp); next }
+    if (base_mean[i] <= 0) { disp[i] <- max(fitted[i], min_disp)
+    next }
     if (log(gw[i]) > log(fitted[i]) + 2 * s_lr) {
-      outlier[i] <- TRUE; disp[i] <- max(gw[i], min_disp); next
+      outlier[i] <- TRUE
+      disp[i] <- max(gw[i], min_disp)
+      next
     }
     lf <- log(fitted[i])
     obj <- function(a) cox_reid_loglik(a, K[[i]], mu0[[i]], X) -
@@ -506,22 +537,27 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
     vals <- abs(vapply(seq_len(n_genes), function(i)
       mle[[i]]$beta[r], numeric(1)))
     vals <- vals[base_mean > 0]
-    if (length(vals) == 0L) { sigma_r[r] <- 1; next }
+    if (length(vals) == 0L) { sigma_r[r] <- 1
+    next }
     emp <- .ghc_deseq2_quantile(vals, 1 - quantile_p)
     theo <- .ghc_deseq2_norm_ppf(1 - quantile_p / 2)
     sigma_r[r] <- max(emp / theo, 1e-6)
   }
   lam <- c(0, 1 / sigma_r[-1L]^2)
-  lfc_mle <- numeric(n_genes); lfc_map <- numeric(n_genes)
-  se_mle <- numeric(n_genes); se_map <- numeric(n_genes)
+  lfc_mle <- numeric(n_genes)
+  lfc_map <- numeric(n_genes)
+  se_mle <- numeric(n_genes)
+  se_map <- numeric(n_genes)
   for (i in seq_len(n_genes)) {
     cm <- contrast_of(mle[[i]])
-    lfc_mle[i] <- cm$val; se_mle[i] <- cm$se
+    lfc_mle[i] <- cm$val
+    se_mle[i] <- cm$se
     fit <- if (isTRUE(beta_prior))
       nb_glm_fit(K[[i]], X, disp[i], s, lam, beta0 = mle[[i]]$beta)
       else mle[[i]]
     cf <- contrast_of(fit)
-    lfc_map[i] <- cf$val; se_map[i] <- cf$se
+    lfc_map[i] <- cf$val
+    se_map[i] <- cf$se
   }
   scale_fac <- if (isTRUE(log2)) 1 / log(2) else 1
   est <- lfc_map * scale_fac

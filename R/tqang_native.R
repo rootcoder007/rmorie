@@ -49,7 +49,8 @@ morie_tqang <- function(theta, bits = 4) {
   n_levels <- bitwShiftL(1L, b)
   delta <- .TWO_PI / n_levels
   th <- as.numeric(theta)
-  idx <- integer(length(th)); val <- numeric(length(th))
+  idx <- integer(length(th))
+  val <- numeric(length(th))
   err <- numeric(length(th))
   for (i in seq_along(th)) {
     w <- wrap_angle(th[i])
@@ -57,7 +58,8 @@ morie_tqang <- function(theta, bits = 4) {
     if (k >= n_levels) k <- n_levels - 1L
     if (k < 0L) k <- 0L
     rec <- -pi + (k + 0.5) * delta
-    idx[i] <- k; val[i] <- rec
+    idx[i] <- k
+    val[i] <- rec
     err[i] <- angular_difference(w, rec)
   }
   mse <- if (length(err) > 0L) mean(err^2) else 0

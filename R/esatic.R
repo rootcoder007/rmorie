@@ -32,7 +32,8 @@
 #' Eapinfo(items, x = c(1, 0, 1))
 Eapinfo <- function(items, x, D = 1, prior_mean = 0, prior_sd = 1,
                     lower = -4, upper = 4, nqp = 33) {
-  It <- as.matrix(items); J <- nrow(It)
+  It <- as.matrix(items)
+  J <- nrow(It)
   if (J < 1L) stop("at least one item is required")
   if (ncol(It) != 4L) stop("item rows must be (a, b, c, d)")
   x <- .t1_vec(x)

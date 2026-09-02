@@ -54,7 +54,8 @@ Freg <- function(y1, y2, max_lag = NULL) {
     lo <- max(0L, -d)
     hi <- min(n, n - d)
     m <- hi - lo
-    if (m <= 0L) { prof[q] <- Inf; next }
+    if (m <= 0L) { prof[q] <- Inf
+    next }
     s <- 0
     for (i in seq(lo, hi - 1L)) {
       r <- a[i + 1L] - b[i + d + 1L]
@@ -66,7 +67,9 @@ Freg <- function(y1, y2, max_lag = NULL) {
   for (q in seq_along(lags)) if (prof[q] < prof[best]) best <- q
   ref <- 0
   if (best > 1L && best < length(lags)) {
-    cm <- prof[best - 1L]; c0 <- prof[best]; cp <- prof[best + 1L]
+    cm <- prof[best - 1L]
+    c0 <- prof[best]
+    cp <- prof[best + 1L]
     den <- cm - 2 * c0 + cp
     if (den > 0) ref <- 0.5 * (cm - cp) / den
   }

@@ -25,7 +25,8 @@
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .rdkfp_subgraphs <- function(B, minpath, maxpath, branched) {
-  a <- B$a; nb <- length(B$i)
+  a <- B$a
+  nb <- length(B$i)
   touch <- vector("list", a)
   for (i in seq_len(a)) touch[[i]] <- integer(0)
   if (nb) for (k in seq_len(nb)) {
@@ -44,16 +45,19 @@
         for (t in ord) out[[length(out) + 1L]] <- sort(as.integer(cur[[t]]))
       }
       if (size == maxpath) break
-      seen <- character(0); nxt <- list()
+      seen <- character(0)
+      nxt <- list()
       for (s in cur) {
         at <- unique(c(B$i[s], B$j[s]))
         for (v in at) for (bi in touch[[v]]) if (!(bi %in% s)) {
           cand <- sort(as.integer(c(s, bi)))
           kk <- key(cand)
-          if (!(kk %in% seen)) { seen <- c(seen, kk); nxt[[length(nxt) + 1L]] <- cand }
+          if (!(kk %in% seen)) { seen <- c(seen, kk)
+          nxt[[length(nxt) + 1L]] <- cand }
         }
       }
-      cur <- nxt; size <- size + 1L
+      cur <- nxt
+      size <- size + 1L
     }
   } else {
     acc <- list()
@@ -67,7 +71,8 @@
           other <- if (B$i[bi] == at) B$j[bi] else B$i[bi]
           used <- unique(c(B$i[path], B$j[path]))
           if (other %in% used) next
-          ne <- ends; ne[k] <- other
+          ne <- ends
+          ne[k] <- other
           walk(c(path, bi), ne)
         }
       }
@@ -77,7 +82,8 @@
     if (length(acc)) {
       ks <- vapply(acc, key, character(1))
       keep <- !duplicated(ks)
-      acc <- acc[keep]; ks <- ks[keep]
+      acc <- acc[keep]
+      ks <- ks[keep]
       ord <- order(vapply(acc, length, integer(1)), ks, method = "radix")
       out <- acc[ord]
     }
@@ -145,30 +151,46 @@ Rdkfp <- function(adjacency, atomnum, aromatic = NULL, nbits = 2048,
     as.numeric(v != 0)
   }
   ainv <- (at %% 128) * 2 + ar
-  minpath <- as.integer(minpath); maxpath <- as.integer(maxpath)
+  minpath <- as.integer(minpath)
+  maxpath <- as.integer(maxpath)
   if (minpath < 1L) stop("minpath must be at least 1", call. = FALSE)
   if (maxpath < minpath) stop("maxpath must be at least minpath", call. = FALSE)
   nbits <- as.integer(nbits)
   if (is.na(nbits) || nbits < 1L) stop("nbits must be positive", call. = FALSE)
 
   subs <- .rdkfp_subgraphs(B, minpath, maxpath, isTRUE(branched))
-  bits <- integer(nbits); cnt <- integer(nbits); feats <- numeric(0)
+  bits <- integer(nbits)
+  cnt <- integer(nbits)
+  feats <- numeric(0)
   for (sub in subs) {
     ats <- unique(c(B$i[sub], B$j[sub]))
     deg <- integer(a)
-    for (bi in sub) { deg[B$i[bi]] <- deg[B$i[bi]] + 1L; deg[B$j[bi]] <- deg[B$j[bi]] + 1L }
+    for (bi in sub) { deg[B$i[bi]] <- deg[B$i[bi]] + 1L
+    deg[B$j[bi]] <- deg[B$j[bi]] + 1L }
     bh <- numeric(length(sub))
     for (k in seq_along(sub)) {
-      bi <- sub[k]; ii <- B$i[bi]; jj <- B$j[bi]
+      bi <- sub[k]
+      ii <- B$i[bi]
+      jj <- B$j[bi]
       nbr <- 0L
       for (m in seq_along(sub)) {
         if (m == k) next
         bj <- sub[m]
         if (B$i[bj] == ii || B$i[bj] == jj || B$j[bj] == ii || B$j[bj] == jj) nbr <- nbr + 1L
       }
-      a1 <- ainv[ii]; a2 <- ainv[jj]; d1 <- deg[ii]; d2 <- deg[jj]
-      if (a1 < a2) { tmp <- a1; a1 <- a2; a2 <- tmp; tmp <- d1; d1 <- d2; d2 <- tmp }
-      else if (a1 == a2 && d1 < d2) { tmp <- d1; d1 <- d2; d2 <- tmp }
+      a1 <- ainv[ii]
+      a2 <- ainv[jj]
+      d1 <- deg[ii]
+      d2 <- deg[jj]
+      if (a1 < a2) { tmp <- a1
+      a1 <- a2
+      a2 <- tmp
+      tmp <- d1
+      d1 <- d2
+      d2 <- tmp }
+      else if (a1 == a2 && d1 < d2) { tmp <- d1
+      d1 <- d2
+      d2 <- tmp }
       bo <- if (isTRUE(use_bond_order)) B$o[bi] else 1
       h <- .ecfp_mix(0, nbr)
       for (v in c(bo, a1, d1, a2, d2)) h <- .ecfp_mix(h, v)
@@ -181,7 +203,8 @@ Rdkfp <- function(adjacency, atomnum, aromatic = NULL, nbits = 2048,
     } else seed <- bh[1]
     feats <- c(feats, seed)
     b <- seed %% nbits
-    bits[b + 1L] <- 1L; cnt[b + 1L] <- cnt[b + 1L] + 1L
+    bits[b + 1L] <- 1L
+    cnt[b + 1L] <- cnt[b + 1L] + 1L
   }
   uniq <- sort(unique(feats))
   .t1_result(bits = bits, count = cnt, nset = sum(bits), features = uniq,

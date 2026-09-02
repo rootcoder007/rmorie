@@ -34,8 +34,12 @@
 #' @examples
 #' Sirstn(S0 = 990, I0 = 10, beta = 0.3, gamma = 0.1, T = 100)
 Sirstn <- function(S0, I0, beta, gamma, T, seed = 1) {
-  S <- as.numeric(S0); I <- as.numeric(I0); R <- 0
-  beta <- as.numeric(beta); gamma <- as.numeric(gamma); T <- as.numeric(T)
+  S <- as.numeric(S0)
+  I <- as.numeric(I0)
+  R <- 0
+  beta <- as.numeric(beta)
+  gamma <- as.numeric(gamma)
+  T <- as.numeric(T)
   if (S < 0 || I < 0) stop("sir_stochastic: S0 and I0 must be non-negative")
   if (beta < 0 || gamma < 0) stop("sir_stochastic: beta and gamma must be non-negative")
   if (T < 0) stop("sir_stochastic: T must be non-negative")
@@ -54,15 +58,18 @@ Sirstn <- function(S0, I0, beta, gamma, T, seed = 1) {
     a1 <- beta * S * I / N
     a2 <- gamma * I
     a0 <- a1 + a2
-    if (a0 <= 0) { extinction_time <- t; break }
+    if (a0 <= 0) { extinction_time <- t
+    break }
     tau <- -log(rng$unif()) / a0
-    if (t + tau > T) { t <- T; break }
+    if (t + tau > T) { t <- T
+    break }
     t <- t + tau
     if (rng$unif() * a0 < a1) {
       S <- S - 1
       I <- I + 1
       n_infections <- n_infections + 1
-      if (I > peak_I) { peak_I <- I; peak_time <- t }
+      if (I > peak_I) { peak_I <- I
+      peak_time <- t }
     } else {
       I <- I - 1
       R <- R + 1

@@ -28,17 +28,22 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Onestep(V, V)
 Onestep <- function(x, theta0, kind = "huber", k = 1.345) {
-  x <- .t1_vec(x); n <- length(x)
+  x <- .t1_vec(x)
+  n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")
-  theta0 <- as.numeric(theta0); kind <- tolower(kind); k <- as.numeric(k)
+  theta0 <- as.numeric(theta0)
+  kind <- tolower(kind)
+  k <- as.numeric(k)
   if (kind == "mean") {
-    psi <- x - theta0; dpsi <- rep(-1, n)
+    psi <- x - theta0
+    dpsi <- rep(-1, n)
   } else if (kind == "huber") {
     if (k <= 0) stop("the Huber constant k must be positive")
     psi <- pmax(-k, pmin(k, x - theta0))
     dpsi <- ifelse(abs(x - theta0) <= k, -1, 0)
   } else stop("kind must be 'mean' or 'huber'")
-  pm <- mean(psi); dm <- mean(dpsi)
+  pm <- mean(psi)
+  dm <- mean(dpsi)
   if (dm == 0)
     stop("the mean derivative is zero; the one-step update is undefined")
   step <- pm / (-dm)

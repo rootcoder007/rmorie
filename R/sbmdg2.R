@@ -17,10 +17,13 @@
 #' sbmdg2(matrix(c(0,1,1,0), 2, 2), c(1, 1))$n_edges
 #' @export
 sbmdg2 <- function(A, blocks) {
-  a <- as.matrix(A); dimnames(a) <- NULL
+  a <- as.matrix(A)
+  dimnames(a) <- NULL
   n <- nrow(a)
   lab <- as.character(blocks)
-  keys <- unique(lab); b <- length(keys); idx <- match(lab, keys)
+  keys <- unique(lab)
+  b <- length(keys)
+  idx <- match(lab, keys)
   m <- matrix(0, b, b)
   for (i in seq_len(n)) for (j in seq_len(n)) m[idx[i], idx[j]] <- m[idx[i], idx[j]] + a[i, j]
   deg <- rowSums(a)

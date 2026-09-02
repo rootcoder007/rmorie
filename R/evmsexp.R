@@ -23,13 +23,16 @@
 #' @examples
 #' Evmsexp(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 Evmsexp <- function(x, y, alpha) {
-  xs <- .s03vec(x); ys <- .s03vec(y); alpha <- as.numeric(alpha)
+  xs <- .s03vec(x)
+  ys <- .s03vec(y)
+  alpha <- as.numeric(alpha)
   if (!length(xs) || !length(ys)) stop("empty input: x and y are required")
   if (length(xs) != length(ys)) stop("x and y must have the same length")
   if (!(alpha > 0 && alpha <= 1)) stop("alpha must lie in (0, 1]")
   if (any(xs <= 0) || any(ys <= 0))
     stop("x and y must be strictly positive on the Frechet scale")
-  V <- numeric(length(xs)); FF <- numeric(length(xs))
+  V <- numeric(length(xs))
+  FF <- numeric(length(xs))
   for (i in seq_along(xs)) {
     # in logs: a small alpha sends x^(-1/alpha) below the smallest
     # double and the exponent collapses to zero, so the perfect

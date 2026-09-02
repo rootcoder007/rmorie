@@ -46,7 +46,8 @@ Clcrp <- function(y, distances, alpha = 1, decay = 1, seed = 42) {
     pick <- n
     for (j in seq_len(n)) {
       acc <- acc + w[j]
-      if (u <= acc) { pick <- j; break }
+      if (u <= acc) { pick <- j
+      break }
     }
     links[i] <- pick
   }
@@ -59,10 +60,12 @@ Clcrp <- function(y, distances, alpha = 1, decay = 1, seed = 42) {
     a
   }
   for (i in seq_len(n)) {
-    ra <- find(i); rb <- find(links[i])
+    ra <- find(i)
+    rb <- find(links[i])
     if (ra != rb) parent[max(ra, rb)] <- min(ra, rb)
   }
-  roots <- c(); z <- integer(n)
+  roots <- c()
+  z <- integer(n)
   for (i in seq_len(n)) {
     r <- find(i)
     if (!(r %in% roots)) roots <- c(roots, r)

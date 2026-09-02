@@ -19,7 +19,8 @@
 #' Spbrown(0.7, 2)$estimate
 #' @export
 Spbrown <- function(r, k, target = NULL) {
-  r <- as.numeric(r); k <- as.numeric(k)
+  r <- as.numeric(r)
+  k <- as.numeric(k)
   den <- 1 + (k - 1) * r
   est <- if (den != 0) (k * r) / den else NaN
   if (is.null(target)) {

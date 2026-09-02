@@ -230,8 +230,11 @@ morie_two_step_additive <- function(x, y, bandwidth = NULL, kappa = NULL,
       if (sw <= 0) next
       if (local_linear) {
         dx <- zj - v
-        s0 <- sw; s1 <- sum(w * dx); s2 <- sum(w * dx^2)
-        t0 <- sum(w * resid); t1 <- sum(w * resid * dx)
+        s0 <- sw
+        s1 <- sum(w * dx)
+        s2 <- sum(w * dx^2)
+        t0 <- sum(w * resid)
+        t1 <- sum(w * resid * dx)
         det <- s0 * s2 - s1 * s1
         m_hat[jj, tt] <- if (det != 0) (s2 * t0 - s1 * t1) / det else t0 / s0
       } else {

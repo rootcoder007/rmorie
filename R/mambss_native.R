@@ -41,10 +41,12 @@ discretize_zoh <- function(delta, A, B, rule = "zoh") {
     stop(sprintf("mambss: rule must be zoh or euler, got %r", rule))
   d <- as.numeric(delta)
   if (d < 0.0) stop(sprintf("mambss: delta must be non-negative, got %r", delta))
-  Av <- as.numeric(A); Bv <- as.numeric(B)
+  Av <- as.numeric(A)
+  Bv <- as.numeric(B)
   if (length(Av) != length(Bv))
     stop(sprintf("mambss: A has %d entries but B has %d", length(Av), length(Bv)))
-  Abar <- numeric(length(Av)); Bbar <- numeric(length(Av))
+  Abar <- numeric(length(Av))
+  Bbar <- numeric(length(Av))
   for (n in seq_along(Av)) {
     da <- d * Av[n]
     ea <- exp(da)
@@ -82,7 +84,8 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
   if (length(C) != N)
     stop(sprintf("mambss: C has %d entries but A has %d", length(C), N))
   Abar_Bbar <- discretize_zoh(delta, A, B, rule = rule)
-  Abar <- Abar_Bbar$Abar; Bbar <- Abar_Bbar$Bbar
+  Abar <- Abar_Bbar$Abar
+  Bbar <- Abar_Bbar$Bbar
   hn <- numeric(N)
   for (n in seq_len(N)) hn[n] <- Abar[n] * h[n] + Bbar[n] * as.numeric(x)
   y <- sum(C * hn)
@@ -151,7 +154,8 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
   if (nrow(Am) != D)
     stop(sprintf("mambss: A has %d rows for %d channels", nrow(Am), D))
   N <- ncol(Am)
-  WB <- as.matrix(W_B); WC <- as.matrix(W_C)
+  WB <- as.matrix(W_B)
+  WC <- as.matrix(W_C)
   if (nrow(WB) != N || nrow(WC) != N)
     stop(sprintf("mambss: W_B and W_C must have N=%d rows, got %d and %d",
                  N, nrow(WB), nrow(WC)))
@@ -201,11 +205,13 @@ selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
 #' @export
 gated_rnn_equivalent <- function(x, w, b = 0.0) {
   h <- 0.0
-  hs <- numeric(length(x)); gs <- numeric(length(x))
+  hs <- numeric(length(x))
+  gs <- numeric(length(x))
   for (i in seq_along(x)) {
     g <- .sigmoid(as.numeric(w) * as.numeric(x[i]) + as.numeric(b))
     h <- (1.0 - g) * h + g * as.numeric(x[i])
-    hs[i] <- h; gs[i] <- g
+    hs[i] <- h
+    gs[i] <- g
   }
   list(h = hs, g = gs)
 }

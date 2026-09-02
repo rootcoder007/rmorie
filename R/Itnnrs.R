@@ -30,7 +30,8 @@
 #' R[c(3, 7, 15)] <- 0
 #' Itnnrs(y = rnorm(20), R = R, X = X)
 Itnnrs <- function(y, R, X, weights = NULL) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("item_nonresponse: y is empty")
   r <- .s03vec(R)
   if (length(r) != n) stop("item_nonresponse: y and R have different lengths")
@@ -51,7 +52,8 @@ Itnnrs <- function(y, R, X, weights = NULL) {
   fac <- tot / resp
   fi <- fac[match(keys, ord)]
   aw <- d * fi
-  num <- sum(aw[r == 1] * yv[r == 1]); den <- sum(aw[r == 1])
+  num <- sum(aw[r == 1] * yv[r == 1])
+  den <- sum(aw[r == 1])
   est <- num / den
   se <- sqrt(sum((aw[r == 1] * (yv[r == 1] - est))^2)) / den
   rates <- resp / tot

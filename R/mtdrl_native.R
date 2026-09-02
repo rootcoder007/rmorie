@@ -131,8 +131,10 @@ morie_mtdrl <- function(tasks, agent, episode_length = 100,
     if (!m %in% names(agent))
       stop(paste0("mtdrl: agent must provide ", m, "()"))
   e <- .ghc_rng(seed)
-  total <- 0; regret <- 0
-  by_step <- rep(0, L); opt_by_step <- rep(0, L)
+  total <- 0
+  regret <- 0
+  by_step <- rep(0, L)
+  opt_by_step <- rep(0, L)
   per_episode <- c()
   for (probs in T) {
     if (isTRUE(reset_between_episodes)) agent$reset()

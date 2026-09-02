@@ -24,12 +24,15 @@
 #' Puctsel(c(0.1, 0.4), c(3, 5), c(0.6, 0.4))$action
 #' @export
 Puctsel <- function(Q, N, P, c = 1.25, rule = "puct", c2 = 19652) {
-  q <- .s03vec(Q); n <- .s03vec(N); p <- .s03vec(P)
+  q <- .s03vec(Q)
+  n <- .s03vec(N)
+  p <- .s03vec(P)
   m <- length(q)
   tot <- 0
   for (v in n) tot <- tot + v
   root <- if (tot > 0) sqrt(tot) else 0
-  u <- numeric(m); scores <- numeric(m)
+  u <- numeric(m)
+  scores <- numeric(m)
   for (a in seq_len(m)) {
     if (identical(rule, "uct")) {
       u[a] <- if (n[a] > 0 && tot > 0) c * sqrt(log(tot) / n[a]) else Inf

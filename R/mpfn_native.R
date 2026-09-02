@@ -49,10 +49,14 @@ morie_mpfn_message <- function(h_v, h_w, e_vw, A = NULL) {
 #' @return The updated state.
 #' @export
 morie_mpfn_update_gru <- function(h, m, Wz, Uz, Wr, Ur, Wh, Uh) {
-  h <- as.numeric(h); m <- as.numeric(m)
-  Wz <- as.matrix(Wz); Uz <- as.matrix(Uz)
-  Wr <- as.matrix(Wr); Ur <- as.matrix(Ur)
-  Wh <- as.matrix(Wh); Uh <- as.matrix(Uh)
+  h <- as.numeric(h)
+  m <- as.numeric(m)
+  Wz <- as.matrix(Wz)
+  Uz <- as.matrix(Uz)
+  Wr <- as.matrix(Wr)
+  Ur <- as.matrix(Ur)
+  Wh <- as.matrix(Wh)
+  Uh <- as.matrix(Uh)
   n <- length(h)
   lin <- function(W, U, a, b) {
     as.numeric(W %*% a + U %*% b)

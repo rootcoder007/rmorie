@@ -19,20 +19,24 @@
 #' @references Yang, Yih, He, Gao & Deng (2015). ICLR 2015, equation (3).
 #' @export
 #' @examples
-#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' DistM(V, V)
+#' triples <- matrix(c(1L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 1L), ncol = 3, byrow = TRUE)
+#' DistM(triples, dim = 4)
 DistM <- function(triples, dim, E = NULL, R = NULL, seed = 1) {
   T_ <- matrix(as.integer(as.matrix(triples)), ncol = 3)
   d <- as.integer(dim)
-  ne <- max(T_[, 1], T_[, 3]) + 1L; nr <- max(T_[, 2]) + 1L
+  ne <- max(T_[, 1], T_[, 3]) + 1L
+  nr <- max(T_[, 2]) + 1L
   g <- .t1_lcg(seed)
   draw <- function(rows) matrix(vapply(seq_len(rows * d), function(i) g$norm(), 0),
                                 rows, d, byrow = TRUE)
   Em <- if (is.null(E)) draw(ne) else as.matrix(E)
   Rm <- if (is.null(R)) draw(nr) else as.matrix(R)
-  sc <- numeric(nrow(T_)); gap <- 0
+  sc <- numeric(nrow(T_))
+  gap <- 0
   for (i in seq_len(nrow(T_))) {
-    h <- T_[i, 1] + 1L; r <- T_[i, 2] + 1L; t <- T_[i, 3] + 1L
+    h <- T_[i, 1] + 1L
+    r <- T_[i, 2] + 1L
+    t <- T_[i, 3] + 1L
     s <- sum(Em[h, ] * Rm[r, ] * Em[t, ])
     rev <- sum(Em[t, ] * Rm[r, ] * Em[h, ])
     sc[i] <- s

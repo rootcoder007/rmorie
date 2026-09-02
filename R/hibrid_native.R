@@ -47,7 +47,8 @@
 #' @return The value of \code{a}, as built in the body.
 #' @export
 .hibrid_gridmax <- function(f, lo, hi, points = 201L, stages = 4L) {
-  a <- as.numeric(lo); b <- as.numeric(hi)
+  a <- as.numeric(lo)
+  b <- as.numeric(hi)
   npt <- as.integer(points)
   nst <- as.integer(stages)
   for (s in seq_len(nst)) {
@@ -169,7 +170,8 @@
 #' @return A list with \code{ll}, \code{beta}, \code{s2e}, \code{L}.
 #' @export
 .hibrid_reml_at <- function(la, ls, Kg, Ks, y, X) {
-  n <- length(y); p <- ncol(X)
+  n <- length(y)
+  p <- ncol(X)
   V <- Kg / la + Ks / ls
   diag(V) <- diag(V) + 1.0
   L <- .hibrid_chol(V)
@@ -210,7 +212,8 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                                            p1_new = NULL, p2_new = NULL,
                                            max_iter = 300L, tol = 1e-10) {
   yv <- as.numeric(y)
-  P1 <- .hibrid_rows(p1_geno); P2 <- .hibrid_rows(p2_geno)
+  P1 <- .hibrid_rows(p1_geno)
+  P2 <- .hibrid_rows(p2_geno)
   n <- length(yv)
   if (n == 0L) stop("hibrid: no crosses")
   if (nrow(P1) != n || nrow(P2) != n)
@@ -243,16 +246,24 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
     la <- exp(.hibrid_gridmax(f1, .hibrid_LO, .hibrid_HI))
     path <- c(path, f1(log(la)))
     fit <- .hibrid_reml_at(la, 1e300, Kg, Kz, yv, Xm)
-    ll <- fit$ll; beta <- fit$beta; s2e <- fit$s2e; L <- fit$L
-    s2a <- s2e / la; s2s <- 0.0
-    it <- 1L; conv <- TRUE
+    ll <- fit$ll
+    beta <- fit$beta
+    s2e <- fit$s2e
+    L <- fit$L
+    s2a <- s2e / la
+    s2s <- 0.0
+    it <- 1L
+    conv <- TRUE
     Ks_used <- Kz
   } else {
     Ks_used <- Ks
-    la <- 1.0; ls <- 1.0
-    it <- 0L; conv <- FALSE
+    la <- 1.0
+    ls <- 1.0
+    it <- 0L
+    conv <- FALSE
     path <- c(path, .hibrid_reml_at(la, ls, Kg, Ks_used, yv, Xm)$ll)
-    prev_la <- NULL; prev_ls <- NULL
+    prev_la <- NULL
+    prev_ls <- NULL
     for (it in seq_len(as.integer(max_iter))) {
       prev <- path[length(path)]
       fa <- function(l) .hibrid_reml_at(exp(l), ls, Kg, Ks_used, yv, Xm)$ll
@@ -270,12 +281,17 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
       # likelihood test trips one iteration apart in the two languages
       # because cur and prev differ in their last bits.
       if (!is.null(prev_la) && la == prev_la && ls == prev_ls) {
-        conv <- TRUE; break
+        conv <- TRUE
+        break
       }
-      prev_la <- la; prev_ls <- ls
+      prev_la <- la
+      prev_ls <- ls
     }
     fit <- .hibrid_reml_at(la, ls, Kg, Ks_used, yv, Xm)
-    ll <- fit$ll; beta <- fit$beta; s2e <- fit$s2e; L <- fit$L
+    ll <- fit$ll
+    beta <- fit$beta
+    s2e <- fit$s2e
+    L <- fit$L
     s2a <- s2e / la
     s2s <- if (fixed_sca) as.numeric(sigma2_sca) else s2e / ls
   }
@@ -289,7 +305,8 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
   tot <- s2a + s2s + s2e
   pred_new <- NULL
   if (!is.null(p1_new) && !is.null(p2_new)) {
-    Q1 <- .hibrid_rows(p1_new); Q2 <- .hibrid_rows(p2_new)
+    Q1 <- .hibrid_rows(p1_new)
+    Q2 <- .hibrid_rows(p2_new)
     if (nrow(Q1) != nrow(Q2))
       stop("hibrid: p1_new and p2_new must describe the same crosses")
     if (ncol(Q1) != m || ncol(Q2) != m)

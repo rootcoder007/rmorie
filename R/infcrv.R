@@ -59,7 +59,8 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
   }
   base <- T(v, rep(1 / n, n))
   quot <- function(h) (T(c(v, x0), c(rep((1 - h) / n, n), h)) - base) / h
-  q1 <- quot(e); q2 <- quot(e / 2)
+  q1 <- quot(e)
+  q2 <- quot(e / 2)
   list(estimate = 2 * q2 - q1, raw = q1, half = q2, tf = base, eps = e,
        n = n, method = "Influence function")
 }

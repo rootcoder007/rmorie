@@ -76,9 +76,11 @@ morie_rnacov_counts <- function(alignment, i, j) {
   joint <- matrix(0L, 4L, 4L)
   n <- 0L
   for (s in alignment) {
-    a <- substr(s, i, i); b <- substr(s, j, j)
+    a <- substr(s, i, i)
+    b <- substr(s, j, j)
     if (a %in% .RNACOV_GAPS || b %in% .RNACOV_GAPS) next
-    ia <- match(a, .RNACOV_ALPHABET); ib <- match(b, .RNACOV_ALPHABET)
+    ia <- match(a, .RNACOV_ALPHABET)
+    ib <- match(b, .RNACOV_ALPHABET)
     if (is.na(ia) || is.na(ib)) next
     joint[ia, ib] <- joint[ia, ib] + 1L
     n <- n + 1L
@@ -118,7 +120,8 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
     # The leading bias term: (cells seen - rows seen - cols seen + 1)
     # over 2 n ln 2. It is subtracted, so a small sample's spurious
     # dependence is charged for rather than reported as signal.
-    rows <- sum(cc$mi > 0L); cols <- sum(cc$mj > 0L)
+    rows <- sum(cc$mi > 0L)
+    cols <- sum(cc$mj > 0L)
     v <- v - (seen - rows - cols + 1) / (2 * n * log(2))
   } else if (correction != "none") {
     stop("correction must be none or miller_madow")
@@ -138,7 +141,8 @@ morie_rnacov_mi <- function(alignment, i, j, correction = "none") {
 morie_rnacov_parse <- function(s) {
   chars <- strsplit(s, "", fixed = TRUE)[[1]]
   stack <- integer(0)
-  pi <- integer(0); pj <- integer(0)
+  pi <- integer(0)
+  pj <- integer(0)
   for (k in seq_along(chars)) {
     ch <- chars[k]
     if (ch %in% c("(", "<", "[", "{")) {
@@ -146,7 +150,8 @@ morie_rnacov_parse <- function(s) {
     } else if (ch %in% c(")", ">", "]", "}")) {
       if (!length(stack))
         stop("closing bracket at ", k - 1L, " has nothing to close")
-      pi <- c(pi, stack[length(stack)]); pj <- c(pj, k - 1L)
+      pi <- c(pi, stack[length(stack)])
+      pj <- c(pj, k - 1L)
       stack <- stack[-length(stack)]
     } else if (!(ch %in% c(".", ":", "_", "-", ","))) {
       stop("character ", ch, " at ", k - 1L, " is not dot-bracket")
@@ -203,11 +208,14 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
       }
       m[i, j] <- best
     }
-  pi <- integer(0); pj <- integer(0)
+  pi <- integer(0)
+  pj <- integer(0)
   stack <- list(c(1L, n))
   while (length(stack)) {
-    cur <- stack[[length(stack)]]; stack <- stack[-length(stack)]
-    i <- cur[1]; j <- cur[2]
+    cur <- stack[[length(stack)]]
+    stack <- stack[-length(stack)]
+    i <- cur[1]
+    j <- cur[2]
     if (j - i <= min_loop) next
     if (m[i, j] == m[i, j - 1L]) {
       stack[[length(stack) + 1L]] <- c(i, j - 1L)
@@ -217,7 +225,8 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
     if (.rnacov_can_pair(ch[i], ch[j])) {
       inner <- if (i + 1L <= j - 1L) m[i + 1L, j - 1L] else 0L
       if (m[i, j] == inner + 1L) {
-        pi <- c(pi, i - 1L); pj <- c(pj, j - 1L)
+        pi <- c(pi, i - 1L)
+        pj <- c(pj, j - 1L)
         stack[[length(stack) + 1L]] <- c(i + 1L, j - 1L)
         done <- TRUE
       }
@@ -230,7 +239,8 @@ morie_rnacov_nussinov <- function(seq, min_loop = 3L) {
       }
   }
   pairs <- if (length(pi)) {
-    ord <- order(pi, pj); cbind(pi[ord], pj[ord])
+    ord <- order(pi, pj)
+    cbind(pi[ord], pj[ord])
   } else matrix(integer(0), 0L, 2L)
   list(pairs = pairs, total = if (n) m[1L, n] else 0L)
 }
@@ -269,7 +279,8 @@ morie_rnacov <- function(alignment, structure = NULL,
     # choice rather than a silent consensus nobody defined.
     base <- gsub("[-.]", "", seqs[1])
     nu <- morie_rnacov_nussinov(base, min_loop)
-    pairs <- nu$pairs; folded <- nu$total
+    pairs <- nu$pairs
+    folded <- nu$total
   }
 
   if (nrow(pairs)) for (k in seq_len(nrow(pairs)))
@@ -278,12 +289,16 @@ morie_rnacov <- function(alignment, structure = NULL,
            ") is outside the alignment")
 
   np <- nrow(pairs)
-  mis <- numeric(np); sup <- integer(np); cells <- integer(np)
+  mis <- numeric(np)
+  sup <- integer(np)
+  cells <- integer(np)
   weak <- 0L
   if (np) for (k in seq_len(np)) {
     r <- morie_rnacov_mi(seqs, pairs[k, 1] + 1L, pairs[k, 2] + 1L,
                          correction)
-    mis[k] <- r$mi; sup[k] <- r$n; cells[k] <- r$seen
+    mis[k] <- r$mi
+    sup[k] <- r$n
+    cells[k] <- r$seen
     if (r$n < as.integer(min_sequences)) weak <- weak + 1L
   }
   total <- if (np) .w3_csum(mis) else 0

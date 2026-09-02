@@ -71,7 +71,8 @@ morie_didfst_panel_differences <- function(Y, event_time) {
 #'   \code{control_mean}, \code{treated_weight}, \code{control_weight}.
 #' @export
 morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
-  d <- as.numeric(delta); Dv <- as.numeric(D)
+  d <- as.numeric(delta)
+  Dv <- as.numeric(D)
   n <- length(d)
   if (length(Dv) != n)
     stop(sprintf("didfst: %d differences but %d adoption indicators",
@@ -83,7 +84,8 @@ morie_didfst_did_estimate <- function(delta, D, weights = NULL) {
   if (length(w) != n)
     stop(sprintf("didfst: %d weights for %d units", length(w), n))
   if (any(w < 0)) stop("didfst: weights must be non-negative")
-  st <- sum(w * Dv); sc <- sum(w * (1 - Dv))
+  st <- sum(w * Dv)
+  sc <- sum(w * (1 - Dv))
   if (st <= 1e-12 || sc <= 1e-12)
     stop(sprintf("didfst: the comparison needs weight on both adopters and non-adopters (treated %.3g, control %.3g)",
                  st, sc))
@@ -131,11 +133,14 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
   trees <- gf$trees
   pts <- if (is.null(x_eval)) Xm else as.matrix(x_eval)
   taus <- numeric(nrow(pts))
-  wt_t <- numeric(nrow(pts)); wt_c <- numeric(nrow(pts))
+  wt_t <- numeric(nrow(pts))
+  wt_c <- numeric(nrow(pts))
   for (i in seq_len(nrow(pts))) {
     w <- forest_weights(trees, Xm, pts[i, ])
     r <- morie_didfst_did_estimate(delta, Dv, weights = w)
-    taus[i] <- r$estimate; wt_t[i] <- r$treated_weight; wt_c[i] <- r$control_weight
+    taus[i] <- r$estimate
+    wt_t[i] <- r$treated_weight
+    wt_c[i] <- r$control_weight
   }
   list(estimate = mean(taus), tau = taus, delta = delta,
        att_uniform = flat$estimate,
@@ -161,7 +166,8 @@ morie_didfst_did_forest <- function(Y, D, X, event_time, x_eval = NULL,
 #' @return A list with \code{estimate} and the change components.
 #' @export
 morie_didfst_placebo_did <- function(Y, D, event_time, split = NULL) {
-  p <- .panel(Y); H <- as.integer(event_time)
+  p <- .panel(Y)
+  H <- as.integer(event_time)
   if (H < 2L)
     stop(sprintf("didfst: a pre-period placebo needs at least 2 pre-periods, event_time is %d",
                  H))
@@ -195,16 +201,19 @@ morie_didfst_group_time_att <- function(Y, first_treated,
   if (!(comparison %in% c("never-treated", "not-yet-treated")))
     stop(sprintf("didfst: comparison must be one of never-treated, not-yet-treated, got %s",
                  comparison))
-  n <- p$n; T <- p$T
+  n <- p$n
+  T <- p$T
   if (length(first_treated) != n)
     stop(sprintf("didfst: %d adoption times for %d units",
                  length(first_treated), n))
   G <- vector("list", n)
   for (i in seq_len(n)) {
     v <- first_treated[[i]]
-    if (is.null(v)) { G[[i]] <- NULL; next }
+    if (is.null(v)) { G[[i]] <- NULL
+    next }
     f <- as.numeric(v)
-    if (is.na(f) || is.infinite(f)) { G[[i]] <- NULL; next }
+    if (is.na(f) || is.infinite(f)) { G[[i]] <- NULL
+    next }
     g <- as.integer(f)
     if (!(g >= 2L && g <= T))
       stop(sprintf("didfst: adoption time %d is outside 2..T = %d (a unit treated in period 1 has no pre-period)",
@@ -224,7 +233,8 @@ morie_didfst_group_time_att <- function(Y, first_treated,
         which(vapply(G, function(v) is.null(v) || v > t, logical(1)))
       }
       if (length(idx_c) == 0L) next
-      a <- t - 1L; b <- g - 2L
+      a <- t - 1L
+      b <- g - 2L
       dg <- mean(p$M[idx_g, a + 1L]) - mean(p$M[idx_g, b + 1L])
       dc <- mean(p$M[idx_c, a + 1L]) - mean(p$M[idx_c, b + 1L])
       out[[paste(g, t, sep = "_")]] <- list(att = dg - dc,
@@ -267,7 +277,8 @@ morie_didfst_aggregate_att <- function(gt, scheme = "simple",
   for (k in names(cells)) {
     v <- cells[[k]]
     parts <- strsplit(k, "_")[[1]]
-    g <- as.integer(parts[1]); t <- as.integer(parts[2])
+    g <- as.integer(parts[1])
+    t <- as.integer(parts[2])
     key <- if (scheme == "event") t - g else g
     if (scheme == "event" && !is.null(horizon) && key > horizon) next
     keyed[[as.character(key)]] <- c(keyed[[as.character(key)]], list(v))

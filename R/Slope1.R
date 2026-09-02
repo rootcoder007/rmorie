@@ -38,12 +38,15 @@
 #' Slope1(R, u = 0, i = 2)
 Slope1 <- function(R, u, i) {
   M <- .s03mat(R)
-  nu <- nrow(M); ni <- ncol(M)
+  nu <- nrow(M)
+  ni <- ncol(M)
   if (nu == 0L) stop("slope_one: R is empty")
-  u <- as.integer(u); i <- as.integer(i)
+  u <- as.integer(u)
+  i <- as.integer(i)
   if (u < 0L || u >= nu) stop("slope_one: u is out of range")
   if (i < 0L || i >= ni) stop("slope_one: i is out of range")
-  ur <- u + 1L; ic <- i + 1L
+  ur <- u + 1L
+  ic <- i + 1L
   rated <- function(a, b) !is.na(M[a, b])
 
   rated_items <- integer(0)
@@ -52,9 +55,14 @@ Slope1 <- function(R, u, i) {
   for (b in seq_len(ni)) if (rated(ur, b)) own <- c(own, M[ur, b])
   user_mean <- if (length(own) > 0L) sum(own) / length(own) else NA_real_
 
-  num_s1 <- 0; cnt_s1 <- 0L; num_w <- 0; den_w <- 0; support <- 0L
+  num_s1 <- 0
+  cnt_s1 <- 0L
+  num_w <- 0
+  den_w <- 0
+  support <- 0L
   for (b in rated_items) {
-    cc <- 0L; s <- 0
+    cc <- 0L
+    s <- 0
     for (a in seq_len(nu)) {
       if (rated(a, ic) && rated(a, b)) {
         s <- s + M[a, ic] - M[a, b]
@@ -73,9 +81,12 @@ Slope1 <- function(R, u, i) {
 
   fallback <- 0
   if (cnt_s1 == 0L || den_w == 0) {
-    p_s1 <- user_mean; p_w <- user_mean; fallback <- 1
+    p_s1 <- user_mean
+    p_w <- user_mean
+    fallback <- 1
   } else {
-    p_s1 <- num_s1 / cnt_s1; p_w <- num_w / den_w
+    p_s1 <- num_s1 / cnt_s1
+    p_w <- num_w / den_w
   }
 
   observed <- if (rated(ur, ic)) M[ur, ic] else NA_real_

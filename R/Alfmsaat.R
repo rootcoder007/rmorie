@@ -21,8 +21,9 @@
 Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
                      mode = "row") {
   if (!mode %in% c("row", "column")) stop("mode must be 'row' or 'column'")
-  if (mode == "row" && (is.null(z) || is.null(wb)))
+  if (mode == "row" && (is.null(z) || is.null(wb))) {
     stop("mode='row' needs the pair representation z and wb")
+  }
   s <- dim(m)[1]
   n <- dim(m)[2]
   nh <- length(wq)
@@ -34,14 +35,18 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
 
   q <- k <- v <- g <- vector("list", nh)
   for (h in seq_len(nh)) {
-    q[[h]] <- array(0, c(s, n, cc)); k[[h]] <- array(0, c(s, n, cc))
-    v[[h]] <- array(0, c(s, n, cc)); g[[h]] <- array(0, c(s, n, cc))
-    for (si in seq_len(s)) for (i in seq_len(n)) {
-      x <- mn[si, i, ]
-      q[[h]][si, i, ] <- alfLin(x, wq[[h]])
-      k[[h]][si, i, ] <- alfLin(x, wk[[h]])
-      v[[h]][si, i, ] <- alfLin(x, wv[[h]])
-      g[[h]][si, i, ] <- alfSigm(alfLin(x, wg[[h]]))
+    q[[h]] <- array(0, c(s, n, cc))
+    k[[h]] <- array(0, c(s, n, cc))
+    v[[h]] <- array(0, c(s, n, cc))
+    g[[h]] <- array(0, c(s, n, cc))
+    for (si in seq_len(s)) {
+      for (i in seq_len(n)) {
+        x <- mn[si, i, ]
+        q[[h]][si, i, ] <- alfLin(x, wq[[h]])
+        k[[h]][si, i, ] <- alfLin(x, wk[[h]])
+        v[[h]][si, i, ] <- alfLin(x, wv[[h]])
+        g[[h]][si, i, ] <- alfSigm(alfLin(x, wg[[h]]))
+      }
     }
   }
 
@@ -50,8 +55,11 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
     bias <- vector("list", nh)
     for (h in seq_len(nh)) {
       bias[[h]] <- matrix(0, n, n)
-      for (i in seq_len(n)) for (j in seq_len(n))
-        bias[[h]][i, j] <- alfVdot(as.numeric(wb[h, ]), alfLnorm(z[i, j, ]))
+      for (i in seq_len(n)) {
+        for (j in seq_len(n)) {
+          bias[[h]][i, j] <- alfVdot(as.numeric(wb[h, ]), alfLnorm(z[i, j, ]))
+        }
+      }
     }
   }
 
@@ -60,39 +68,50 @@ Alfmsaat <- function(m, wq, wk, wv, wg, wo, z = NULL, wb = NULL,
   o <- vector("list", nh)
   for (h in seq_len(nh)) {
     o[[h]] <- array(0, c(s, n, cc))
-    for (si in seq_len(s)) for (i in seq_len(n)) {
-      logits <- numeric(nk)
-      if (mode == "row") {
-        for (j in seq_len(n))
-          logits[j] <- scale * alfVdot(q[[h]][si, i, ], k[[h]][si, j, ]) +
-            bias[[h]][i, j]
-      } else {
-        for (t2 in seq_len(s))
-          logits[t2] <- scale * alfVdot(q[[h]][si, i, ], k[[h]][t2, i, ])
-      }
-      a <- alfSmax(logits)
-      attn[h, si, i, ] <- a
-      ov <- numeric(cc)
-      for (t in seq_len(cc)) {
-        tot <- 0
-        for (u in seq_len(nk)) {
-          tot <- tot + a[u] * (if (mode == "row") v[[h]][si, u, t]
-                               else v[[h]][u, i, t])
+    for (si in seq_len(s)) {
+      for (i in seq_len(n)) {
+        logits <- numeric(nk)
+        if (mode == "row") {
+          for (j in seq_len(n)) {
+            logits[j] <- scale * alfVdot(q[[h]][si, i, ], k[[h]][si, j, ]) +
+              bias[[h]][i, j]
+          }
+        } else {
+          for (t2 in seq_len(s)) {
+            logits[t2] <- scale * alfVdot(q[[h]][si, i, ], k[[h]][t2, i, ])
+          }
         }
-        ov[t] <- tot
+        a <- alfSmax(logits)
+        attn[h, si, i, ] <- a
+        ov <- numeric(cc)
+        for (t in seq_len(cc)) {
+          tot <- 0
+          for (u in seq_len(nk)) {
+            tot <- tot + a[u] * (if (mode == "row") {
+              v[[h]][si, u, t]
+            } else {
+              v[[h]][u, i, t]
+            })
+          }
+          ov[t] <- tot
+        }
+        o[[h]][si, i, ] <- g[[h]][si, i, ] * ov
       }
-      o[[h]][si, i, ] <- g[[h]][si, i, ] * ov
     }
   }
 
   cm <- nrow(wo)
   out <- array(0, c(s, n, cm))
-  for (si in seq_len(s)) for (i in seq_len(n)) {
-    cat_ <- numeric(0)
-    for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]][si, i, ])
-    out[si, i, ] <- alfLin(cat_, wo)
+  for (si in seq_len(s)) {
+    for (i in seq_len(n)) {
+      cat_ <- numeric(0)
+      for (h in seq_len(nh)) cat_ <- c(cat_, o[[h]][si, i, ])
+      out[si, i, ] <- alfLin(cat_, wo)
+    }
   }
 
-  list(m = out, attn = attn, estimate = mean(out), n = n, s = s, mode = mode,
-       method = paste0("AlphaFold MSA gated self-attention (", mode, "-wise)"))
+  list(
+    m = out, attn = attn, estimate = mean(out), n = n, s = s, mode = mode,
+    method = paste0("AlphaFold MSA gated self-attention (", mode, "-wise)")
+  )
 }

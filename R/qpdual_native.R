@@ -81,7 +81,8 @@ morie_qpdual <- function(Q, c, x0 = NULL, domain = "simplex",
   if (dom == "box") {
     if (is.null(lower) || is.null(upper))
       stop("frank_wolfe_qp: domain='box' needs lower and upper")
-    lo <- as.numeric(lower); hi <- as.numeric(upper)
+    lo <- as.numeric(lower)
+    hi <- as.numeric(upper)
     if (length(lo) != n || length(hi) != n)
       stop("frank_wolfe_qp: lower and upper must have length n")
     for (i in seq_len(n))

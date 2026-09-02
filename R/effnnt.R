@@ -28,18 +28,23 @@
 #' @export
 Mbconv <- function(x, expand_ratio = 6, filters = NULL, se_ratio = 0.25,
                    phi = NULL) {
-  alpha <- 1.2; beta <- 1.1; gam <- 1.15
-  v <- .s03vec(x); n <- length(v)
+  alpha <- 1.2
+  beta <- 1.1
+  gam <- 1.15
+  v <- .s03vec(x)
+  n <- length(v)
   m <- as.integer(as.numeric(expand_ratio) * n)
   if (m < 1L) m <- 1L
   e <- numeric(m)
   for (i in seq_len(m)) e[i] <- v[((i - 1L) %% n) + 1L] * (1 / as.numeric(expand_ratio))
   dw <- numeric(m)
   for (i in seq_len(m)) {
-    s <- 0; cnt <- 0
+    s <- 0
+    cnt <- 0
     for (j in c(-1L, 0L, 1L)) {
       t <- i + j
-      if (t >= 1L && t <= m) { s <- s + e[t]; cnt <- cnt + 1 }
+      if (t >= 1L && t <= m) { s <- s + e[t]
+      cnt <- cnt + 1 }
     }
     dw[i] <- s / cnt
   }
@@ -51,15 +56,21 @@ Mbconv <- function(x, expand_ratio = 6, filters = NULL, se_ratio = 0.25,
   f <- if (!is.null(filters)) as.integer(filters) else n
   y <- numeric(f)
   for (j in seq_len(f)) {
-    s <- 0; cnt <- 0
-    for (i in seq_len(m)) if (((i - 1L) %% f) + 1L == j) { s <- s + ex[i]; cnt <- cnt + 1 }
+    s <- 0
+    cnt <- 0
+    for (i in seq_len(m)) if (((i - 1L) %% f) + 1L == j) { s <- s + ex[i]
+    cnt <- cnt + 1 }
     y[j] <- if (cnt > 0) s / cnt else 0
   }
   if (f == n) y <- y + v
   if (is.null(phi)) {
-    d <- NaN; w <- NaN; res <- NaN
+    d <- NaN
+    w <- NaN
+    res <- NaN
   } else {
-    d <- alpha^as.numeric(phi); w <- beta^as.numeric(phi); res <- gam^as.numeric(phi)
+    d <- alpha^as.numeric(phi)
+    w <- beta^as.numeric(phi)
+    res <- gam^as.numeric(phi)
   }
   list(estimate = .s03mean(y), y = y, se = se, depth = d, width = w,
        resolution = res, constraint = alpha * beta^2 * gam^2,

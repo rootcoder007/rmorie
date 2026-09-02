@@ -33,7 +33,9 @@
 #' Agpuct(c(0.5, 0.3, 0.2), c(3, 1, 0), c(0.1, 0.4, 0.0), 1.5)$action
 #' @export
 Agpuct <- function(P, N, Q, c_puct = 1) {
-  p <- as.numeric(.s03vec(P)); n <- as.numeric(.s03vec(N)); q <- as.numeric(.s03vec(Q))
+  p <- as.numeric(.s03vec(P))
+  n <- as.numeric(.s03vec(N))
+  q <- as.numeric(.s03vec(Q))
   k <- length(p)
   if (k == 0L) stop("alphazero_puct: no actions")
   if (length(n) != k || length(q) != k) {
@@ -46,14 +48,17 @@ Agpuct <- function(P, N, Q, c_puct = 1) {
   tot <- 0
   for (v in n) tot <- tot + v
   rt <- sqrt(tot)
-  U <- numeric(k); sc <- numeric(k)
+  U <- numeric(k)
+  sc <- numeric(k)
   for (i in seq_len(k)) {
     U[i] <- c * p[i] * rt / (1 + n[i])
     sc[i] <- q[i] + U[i]
   }
   best <- 1L
   for (i in seq_len(k)) if (sc[i] > sc[best]) best <- i
-  list(score = sc, estimate = sc[best], U = U, action = best - 1L, n_parent = tot,
-       sqrt_n_parent = rt, c_puct = c, k = k,
-       method = "Q + c_puct P sqrt(sum_b N_b)/(1 + N); Rosin (2011), Silver et al. (2017)")
+  list(
+    score = sc, estimate = sc[best], U = U, action = best - 1L, n_parent = tot,
+    sqrt_n_parent = rt, c_puct = c, k = k,
+    method = "Q + c_puct P sqrt(sum_b N_b)/(1 + N); Rosin (2011), Silver et al. (2017)"
+  )
 }

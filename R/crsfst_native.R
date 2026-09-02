@@ -65,7 +65,8 @@ morie_crsfst_rmst <- function(curve, tau) {
   tau <- as.numeric(tau)
   if (tau <= 0) stop("the horizon must be positive")
   area <- numeric(0)
-  prev_t <- 0; prev_s <- 1
+  prev_t <- 0
+  prev_s <- 1
   for (k in seq_along(curve$t)) {
     if (curve$t[k] >= tau) break
     area <- c(area, prev_s * (curve$t[k] - prev_t))
@@ -95,7 +96,9 @@ morie_crsfst_folds <- function(n, k, seed = 0) {
   if (n > 1L) for (i in seq(n, 2L)) {
     j <- floor(.ghc_unif(e, 1L) * i)
     if (j > i - 1L) j <- i - 1L
-    tmp <- idx[i]; idx[i] <- idx[j + 1L]; idx[j + 1L] <- tmp
+    tmp <- idx[i]
+    idx[i] <- idx[j + 1L]
+    idx[j + 1L] <- tmp
   }
   fold <- integer(n)
   for (pos in seq_len(n)) fold[idx[pos]] <- (pos - 1L) %% k
@@ -128,7 +131,8 @@ morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
   t <- as.numeric(time)
   e <- as.integer(ifelse(as.numeric(event) != 0, 1L, 0L))
   d <- as.integer(ifelse(as.numeric(D) != 0, 1L, 0L))
-  xs <- as.matrix(X); storage.mode(xs) <- "double"
+  xs <- as.matrix(X)
+  storage.mode(xs) <- "double"
   n <- length(t)
   if (length(e) != n || length(d) != n || nrow(xs) != n)
     stop("time, event, D and X must agree in length")
@@ -139,23 +143,30 @@ morie_crsfst <- function(time, event, D, X, K = 3L, tau = NULL,
     # The last time either arm can still speak for. Going past it is
     # extrapolation, and picking the overall maximum would quietly do
     # exactly that whenever one arm ends earlier.
-    m1 <- max(t[d == 1L]); m0 <- max(t[d == 0L])
+    m1 <- max(t[d == 1L])
+    m0 <- max(t[d == 0L])
     tau <- if (m1 < m0) m1 else m0
   }
   tau <- as.numeric(tau)
 
   fold <- morie_crsfst_folds(n, K, seed)
-  cate <- rep(NaN, n); r1 <- rep(NaN, n); r0 <- rep(NaN, n)
-  leaked <- 0L; used <- 0L
+  cate <- rep(NaN, n)
+  r1 <- rep(NaN, n)
+  r0 <- rep(NaN, n)
+  leaked <- 0L
+  used <- 0L
   for (f in 0:(as.integer(K) - 1L)) {
-    tr <- which(fold != f); te <- which(fold == f)
+    tr <- which(fold != f)
+    te <- which(fold == f)
     if (!length(te)) next
-    a1 <- tr[d[tr] == 1L]; a0 <- tr[d[tr] == 0L]
+    a1 <- tr[d[tr] == 1L]
+    a0 <- tr[d[tr] == 0L]
     if (length(a1) < 4L || length(a0) < 4L) next
     for (arm in c(1L, 0L)) {
       rows <- if (arm == 1L) a1 else a0
       sx <- xs[rows, , drop = FALSE]
-      st <- t[rows]; se <- e[rows]
+      st <- t[rows]
+      se <- e[rows]
       trees <- morie_qsfrgr_forest(sx, st, se, n_trees, NULL, min_leaf,
                                    max_depth, honest,
                                    seed + 100 * f + arm, rule)

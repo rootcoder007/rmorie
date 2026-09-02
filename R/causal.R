@@ -199,7 +199,8 @@ NULL
 #' @return The value of \code{beta}, as built in the body.
 #' @export
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
-  n <- nrow(X); p <- ncol(X)
+  n <- nrow(X)
+  p <- ncol(X)
   beta <- numeric(p)
   pen <- c(0, rep(as.numeric(lam), p - 1L))
   for (it in seq_len(as.integer(max_iter))) {
@@ -370,7 +371,8 @@ NULL
     stop("weight_trim_side must be 'upper' or 'both'")
   q <- as.numeric(weight_trim)
   if (length(q) == 1L) q <- c(0, q)
-  lo <- q[1]; hi <- q[2]
+  lo <- q[1]
+  hi <- q[2]
   if (!(lo >= 0 && lo < hi && hi <= 1))
     stop("weight_trim must satisfy 0 <= lo < hi <= 1")
   cuts <- stats::quantile(w, c(lo, hi), names = FALSE, type = 7)
@@ -409,7 +411,8 @@ NULL
 .mor_ps_keep <- function(ps, trim = c(0.1, 0.9), trim_type = "value") {
   if (!identical(trim_type, "discard") || is.null(trim))
     return(rep(TRUE, length(ps)))
-  lo <- as.numeric(trim[1]); hi <- as.numeric(trim[2])
+  lo <- as.numeric(trim[1])
+  hi <- as.numeric(trim[2])
   if (!(lo >= 0 && lo < hi && hi <= 1))
     stop("trim must satisfy 0 <= lo < hi <= 1")
   ps >= lo & ps <= hi
@@ -431,12 +434,14 @@ NULL
   if (!(trim_type %in% c("value", "quantile", "discard")))
     stop("trim_type must be 'value', 'quantile' or 'discard'")
   if (!is.null(trim) && trim_type != "discard") {
-    lo <- as.numeric(trim[1]); hi <- as.numeric(trim[2])
+    lo <- as.numeric(trim[1])
+    hi <- as.numeric(trim[2])
     if (!(lo >= 0 && lo < hi && hi <= 1))
       stop("trim must satisfy 0 <= lo < hi <= 1")
     if (trim_type == "quantile") {
       qs <- stats::quantile(ps, c(lo, hi), names = FALSE, type = 7)
-      lo <- qs[1]; hi <- qs[2]
+      lo <- qs[1]
+      hi <- qs[2]
     }
     ps <- pmin(pmax(ps, lo), hi)
   }
@@ -540,7 +545,9 @@ morie_estimate_ate <- function(data, treatment, outcome, covariates,
   n_discarded <- sum(!keep)
   if (n_discarded > 0L) {
     if (sum(keep) < 2L) stop("discard trimming removed almost every unit")
-    t <- t[keep]; y <- y[keep]; ps <- ps[keep]
+    t <- t[keep]
+    y <- y[keep]
+    ps <- ps[keep]
   }
   w <- t / ps + (1 - t) / (1 - ps)
   w <- .mor_trim_weights(w, weight_trim, weight_trim_side)
@@ -801,7 +808,9 @@ morie_estimate_aipw <- function(data, treatment, outcome, covariates,
   n_discarded <- sum(!keep)
   if (n_discarded > 0L) {
     if (sum(keep) < 2L) stop("discard trimming removed almost every unit")
-    t <- t[keep]; y <- y[keep]; ps <- ps[keep]
+    t <- t[keep]
+    y <- y[keep]
+    ps <- ps[keep]
     Xc <- Xc[keep, , drop = FALSE]
   }
   n <- nrow(Xc)
@@ -1683,7 +1692,8 @@ morie_causal_robust_se <- function(model,
 #'   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
 #' @export
 .causal_hajek_weighted_mean <- function(y, weights) {
-  y <- as.numeric(y); w <- as.numeric(weights)
+  y <- as.numeric(y)
+  w <- as.numeric(weights)
   if (length(y) != length(w))
     stop(sprintf("y and weights must have the same length; got %d and %d.",
                  length(y), length(w)))

@@ -24,13 +24,16 @@
 #' Snr2u(1, 0.5, 4, 1, 20)
 #' @export
 Snr2u <- function(sigma2_e1, sigma2_u1, sigma2_e0, sigma2_u0, n = 1) {
-  e1 <- as.numeric(sigma2_e1); u1 <- as.numeric(sigma2_u1)
-  e0 <- as.numeric(sigma2_e0); u0 <- as.numeric(sigma2_u0)
+  e1 <- as.numeric(sigma2_e1)
+  u1 <- as.numeric(sigma2_u1)
+  e0 <- as.numeric(sigma2_e0)
+  u0 <- as.numeric(sigma2_u0)
   nn <- as.numeric(n)
   if (any(c(e1, u1, e0, u0) < 0))
     stop("snijders_bosker_r2_level2: variance components must be non-negative")
   if (nn <= 0) stop("snijders_bosker_r2_level2: n must be positive")
-  t1 <- e1 / nn + u1; t0 <- e0 / nn + u0
+  t1 <- e1 / nn + u1
+  t0 <- e0 / nn + u0
   if (t0 <= 0)
     stop("snijders_bosker_r2_level2: baseline total variance must be positive")
   list(estimate = as.numeric(1 - t1 / t0), total1 = t1, total0 = t0, n = nn,

@@ -96,11 +96,15 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
     stop("smatch: no case contributed an event")
   P <- length(people)
   ncol <- n_risk + (n_age - 1L) + P
-  y <- c(); off <- c(); X <- list()
+  y <- c()
+  off <- c()
+  X <- list()
   for (i in seq_along(people)) {
     cells <- people[[i]]
     for (cell in cells) {
-      j <- cell[[1L]]; r_idx <- cell[[2L]]; e <- cell[[3L]]
+      j <- cell[[1L]]
+      r_idx <- cell[[2L]]
+      e <- cell[[3L]]
       n <- cell[[4L]]
       if (e <= .smatch_EPS) next
       row <- rep(0.0, ncol)
@@ -135,10 +139,13 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
                              iters = 200, tol = 1e-12, ridge = 1e-9) {
   d <- morie_smatch_poisson_design(cases, risk_periods, age_breaks = age_breaks)
-  y <- d$y; off <- d$offset; X <- d$X
+  y <- d$y
+  off <- d$offset
+  X <- d$X
   p <- ncol(X)
   beta <- rep(0.0, p)
-  conv <- FALSE; it <- 0L
+  conv <- FALSE
+  it <- 0L
   for (it in seq_len(as.integer(iters))) {
     eta <- off + as.numeric(X %*% beta)
     eta <- pmin(pmax(eta, -500), 500)
@@ -155,7 +162,8 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
                    })
     mx <- max(abs(nb - beta))
     beta <- nb
-    if (mx < tol) { conv <- TRUE; break }
+    if (mx < tol) { conv <- TRUE
+    break }
   }
   nr <- d$n_risk
   list(estimate = exp(beta[seq_len(nr)]),
@@ -259,7 +267,9 @@ morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power =
 #' @export
 morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
   s <- morie_smatch_sample_size(log_ri, r, p_exposed, alpha = alpha, power = 0.5)
-  A <- s$A; B <- s$B; C <- s$C
+  A <- s$A
+  B <- s$B
+  C <- s$C
   za <- s$z_alpha_2
   root <- sqrt(max(as.numeric(n_events) * A / C, 0.0))
   zg <- if (B > .smatch_EPS) (root - za) / sqrt(B) else Inf
@@ -278,7 +288,8 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
 #' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.
 #' @export
 morie_smatch_relative_efficiency <- function(r, log_ri) {
-  rr <- as.numeric(r); b <- as.numeric(log_ri)
+  rr <- as.numeric(r)
+  b <- as.numeric(log_ri)
   if (!(rr > 0.0 && rr < 1.0))
     stop("smatch: r must lie strictly in (0, 1)")
   eb <- exp(b)

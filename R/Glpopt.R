@@ -27,8 +27,11 @@
 #' Glpopt(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
 #'        b = c(4, 2, 3))
 Glpopt <- function(c, A, b, max_iter = 200) {
-  cv <- .s03vec(c); M <- .s03mat(A); bv <- .s03vec(b)
-  m <- nrow(M); n <- length(cv)
+  cv <- .s03vec(c)
+  M <- .s03mat(A)
+  bv <- .s03vec(b)
+  m <- nrow(M)
+  n <- length(cv)
   if (m == 0L) stop("glpk_lp: A has no rows")
   if (n == 0L) stop("glpk_lp: c is empty")
   if (length(bv) != m) stop("glpk_lp: A and b have different row counts")
@@ -38,19 +41,24 @@ Glpopt <- function(c, A, b, max_iter = 200) {
   T <- cbind(M, diag(1, m), bv)
   z <- c(cv, rep(0, m), 0)
   basis <- n + seq_len(m)
-  it <- 0L; status <- "optimal"
+  it <- 0L
+  status <- "optimal"
   while (it < as.integer(max_iter)) {
     enter <- 0L
-    for (j in seq_len(n + m)) if (z[j] < -eps) { enter <- j; break }
+    for (j in seq_len(n + m)) if (z[j] < -eps) { enter <- j
+    break }
     if (enter == 0L) break
-    leave <- 0L; best <- NA_real_
+    leave <- 0L
+    best <- NA_real_
     for (i in seq_len(m)) if (T[i, enter] > eps) {
       ratio <- T[i, n + m + 1] / T[i, enter]
       if (is.na(best) || ratio < best - eps || (abs(ratio - best) <= eps && basis[i] < basis[leave])) {
-        best <- ratio; leave <- i
+        best <- ratio
+        leave <- i
       }
     }
-    if (leave == 0L) { status <- "unbounded"; break }
+    if (leave == 0L) { status <- "unbounded"
+    break }
     T[leave, ] <- T[leave, ] / T[leave, enter]
     for (i in seq_len(m)) if (i != leave && T[i, enter] != 0)
       T[i, ] <- T[i, ] - T[i, enter] * T[leave, ]

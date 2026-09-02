@@ -21,17 +21,21 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Dinoloss(V, V)
 Dinoloss <- function(s_logits, t_logits, tau_s = 0.1, tau_t = 0.04, center = NULL) {
-  Sm <- as.matrix(s_logits); Tm <- as.matrix(t_logits)
-  B <- nrow(Sm); K <- ncol(Sm)
+  Sm <- as.matrix(s_logits)
+  Tm <- as.matrix(t_logits)
+  B <- nrow(Sm)
+  K <- ncol(Sm)
   if (!all(dim(Tm) == c(B, K)))
     stop("student and teacher logits must have the same shape")
   c0 <- if (is.null(center)) rep(0, K) else .t1_vec(center)
   sm <- function(M, tau, off) {
     Z <- sweep(M, 2, off, "-") / as.numeric(tau)
     Z <- Z - apply(Z, 1, max)
-    E <- exp(Z); E / rowSums(E)
+    E <- exp(Z)
+    E / rowSums(E)
   }
-  Ps <- sm(Sm, tau_s, rep(0, K)); Pt <- sm(Tm, tau_t, c0)
+  Ps <- sm(Sm, tau_s, rep(0, K))
+  Pt <- sm(Tm, tau_t, c0)
   per <- -rowSums(Pt * log(Ps))
   .t1_result(loss = mean(per), per_view = per, p_s = Ps, p_t = Pt,
              B = B, K = K, method = "DINO self-distillation loss")

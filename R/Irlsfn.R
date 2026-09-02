@@ -24,7 +24,8 @@
 #' @examples
 #' Irlsfn(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 Irlsfn <- function(y, X, weights) {
-  yv <- .s03vec(y); n <- length(yv)
+  yv <- .s03vec(y)
+  n <- length(yv)
   if (n == 0L) stop("irls_solver: y is empty")
   Z <- .s03design(X, n)
   if (nrow(Z) != n) stop("irls_solver: X and y have different lengths")
@@ -33,7 +34,8 @@ Irlsfn <- function(y, X, weights) {
   if (any(w < 0)) stop("irls_solver: weights must be non-negative")
   p <- ncol(Z)
   if (n <= p) stop("irls_solver: need more observations than parameters")
-  ZtWZ <- matrix(0, p, p); ZtWy <- numeric(p)
+  ZtWZ <- matrix(0, p, p)
+  ZtWy <- numeric(p)
   for (i in seq_len(n)) {
     for (a in seq_len(p)) {
       ZtWy[a] <- ZtWy[a] + Z[i, a] * w[i] * yv[i]

@@ -33,8 +33,10 @@ Alftriat <- function(z, wq, wk, wv, wb, wg, wo, mode = "starting") {
   q <- k <- v <- g <- vector("list", nh)
   b <- vector("list", nh)
   for (h in seq_len(nh)) {
-    q[[h]] <- array(0, c(n, n, cc)); k[[h]] <- array(0, c(n, n, cc))
-    v[[h]] <- array(0, c(n, n, cc)); g[[h]] <- array(0, c(n, n, cc))
+    q[[h]] <- array(0, c(n, n, cc))
+    k[[h]] <- array(0, c(n, n, cc))
+    v[[h]] <- array(0, c(n, n, cc))
+    g[[h]] <- array(0, c(n, n, cc))
     b[[h]] <- matrix(0, n, n)
     for (i in seq_len(n)) for (j in seq_len(n)) {
       x <- zn[i, j, ]

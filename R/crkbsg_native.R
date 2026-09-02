@@ -94,7 +94,9 @@
                   "sample locations, or a coregionalisation matrix of ",
                   "deficient rank"))
     if (piv != col) {
-      tmp <- M[col, ]; M[col, ] <- M[piv, ]; M[piv, ] <- tmp
+      tmp <- M[col, ]
+      M[col, ] <- M[piv, ]
+      M[piv, ] <- tmp
     }
     d <- M[col, col]
     if (col < n) for (r in seq.int(col + 1L, n)) {
@@ -133,7 +135,8 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
   yv <- as.numeric(y)
   zv <- as.numeric(z)
   C2 <- if (is.null(coords_z)) C1 else .crkbsg_rows(coords_z)
-  n1 <- nrow(C1); n2 <- nrow(C2)
+  n1 <- nrow(C1)
+  n2 <- nrow(C2)
   if (n1 == 0L) stop("crkbsg: no primary observations")
   if (length(yv) != n1)
     stop(sprintf("crkbsg: %d primary locations but %d values", n1, length(yv)))
@@ -154,9 +157,11 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
   }
   model <- as.character(par$model)
   rng <- as.numeric(par$range)
-  b11 <- as.numeric(par$b11); b22 <- as.numeric(par$b22)
+  b11 <- as.numeric(par$b11)
+  b22 <- as.numeric(par$b22)
   b12 <- as.numeric(par$b12)
-  n11 <- as.numeric(par$nugget11); n22 <- as.numeric(par$nugget22)
+  n11 <- as.numeric(par$nugget11)
+  n22 <- as.numeric(par$nugget22)
   n12 <- as.numeric(par$nugget12)
   if (rng <= 0.0) stop("crkbsg: the range must be positive")
   # permissibility: an indefinite B gives negative prediction variances
@@ -201,9 +206,13 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
 
   c11_0 <- b11 + n11
   nt <- nrow(targets)
-  pred <- numeric(nt); vv <- numeric(nt)
-  kpred <- numeric(nt); kvar <- numeric(nt)
-  lam <- NULL; mu <- NULL; lagr <- c(0.0, 0.0)
+  pred <- numeric(nt)
+  vv <- numeric(nt)
+  kpred <- numeric(nt)
+  kvar <- numeric(nt)
+  lam <- NULL
+  mu <- NULL
+  lagr <- c(0.0, 0.0)
   for (ti in seq_len(nt)) {
     t0 <- targets[ti, ]
     rhs <- c(vapply(seq_len(n1), function(i) cov2(C1[i, ], t0, b11, n11), 0),

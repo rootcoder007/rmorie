@@ -23,15 +23,20 @@
 #' Mincutsw(A)$weight
 #' @export
 Mincutsw <- function(A) {
-  W <- .s03mat(A); n <- nrow(W)
+  W <- .s03mat(A)
+  n <- nrow(W)
   w <- W
   groups <- vector("list", n)
   for (i in seq_len(n)) groups[[i]] <- i
   alive <- seq_len(n)
-  best <- Inf; bestset <- integer(0); phases <- numeric(0)
+  best <- Inf
+  bestset <- integer(0)
+  phases <- numeric(0)
   while (length(alive) > 1L) {
     m <- length(alive)
-    inA <- rep(FALSE, m); wsum <- numeric(m); ord <- integer(0)
+    inA <- rep(FALSE, m)
+    wsum <- numeric(m)
+    ord <- integer(0)
     for (step in seq_len(m)) {
       sel <- -1L
       for (t in seq_len(m)) if (!inA[t] && (sel < 0L || wsum[t] > wsum[sel])) sel <- t
@@ -39,12 +44,15 @@ Mincutsw <- function(A) {
       ord <- c(ord, sel)
       for (t in seq_len(m)) if (!inA[t]) wsum[t] <- wsum[t] + w[alive[sel], alive[t]]
     }
-    t_i <- ord[m]; s_i <- ord[m - 1L]
+    t_i <- ord[m]
+    s_i <- ord[m - 1L]
     cut <- 0
     for (t in seq_len(m)) if (t != t_i) cut <- cut + w[alive[t_i], alive[t]]
     phases <- c(phases, cut)
-    if (cut < best) { best <- cut; bestset <- groups[[alive[t_i]]] }
-    s <- alive[s_i]; tt <- alive[t_i]
+    if (cut < best) { best <- cut
+    bestset <- groups[[alive[t_i]]] }
+    s <- alive[s_i]
+    tt <- alive[t_i]
     for (t in seq_len(n)) {
       w[s, t] <- w[s, t] + w[tt, t]
       w[t, s] <- w[s, t]

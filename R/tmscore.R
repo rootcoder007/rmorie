@@ -20,7 +20,9 @@
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Tmscore(V, V)
 Tmscore <- function(coords1, coords2, l_ref = NULL) {
-  A <- as.matrix(coords1); B <- as.matrix(coords2); L <- nrow(A)
+  A <- as.matrix(coords1)
+  B <- as.matrix(coords2)
+  L <- nrow(A)
   Lr <- if (is.null(l_ref)) L else as.numeric(l_ref)
   d0 <- if (Lr > 15) 1.24 * (Lr - 15)^(1 / 3) - 1.8 else 0.5
   d2 <- rowSums((A - B)^2)

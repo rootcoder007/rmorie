@@ -23,7 +23,9 @@
 #' Sparsegp(matrix(c(0, 1, 2, 3), 4, 1), c(0, 1, 0, 1), 2)$pred_fitc
 #' @export
 Sparsegp <- function(X, y, M = 3, X_test = NULL, gamma = 1, sigma2 = 1e-2) {
-  Xm <- .s03mat(X); n <- nrow(Xm); m <- as.integer(M)
+  Xm <- .s03mat(X)
+  n <- nrow(Xm)
+  m <- as.integer(M)
   if (m > n) m <- n
   idx <- integer(m)
   for (t in seq_len(m)) {

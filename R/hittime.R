@@ -21,7 +21,8 @@
 #' @references Lovasz (1996), Random walks on graphs: a survey, in Combinatorics, Paul Erdos is Eighty, vol. 2, pp. 353-398.  The PDF on Lovasz's ELTE page could not be fetched from this host (expired TLS certificate on web.cs.elte.hu), so this is the standard first-step recurrence rather than a quoted equation.  It is anchored in the harness on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with d the cyclic distance holds exactly and is independent of this code.
 #' @export
 Hittime <- function(G, start = NULL, target = 0L) {
-  W <- as.matrix(G); n <- nrow(W)
+  W <- as.matrix(G)
+  n <- nrow(W)
   if (n < 2L || ncol(W) != n) stop("G must be a square weight matrix with n >= 2")
   if (any(W < 0)) stop("weights must be non-negative")
   target0 <- as.integer(target)
@@ -29,21 +30,30 @@ Hittime <- function(G, start = NULL, target = 0L) {
   if (is.null(start)) start <- if (target0 != 0L) 0L else 1L
   start0 <- as.integer(start)
   if (start0 < 0L || start0 >= n) stop("start out of range")
-  target <- target0 + 1L; start <- start0 + 1L
-  reach <- rep(FALSE, n); reach[target] <- TRUE
-  queue <- target; head <- 1L
+  target <- target0 + 1L
+  start <- start0 + 1L
+  reach <- rep(FALSE, n)
+  reach[target] <- TRUE
+  queue <- target
+  head <- 1L
   while (head <= length(queue)) {
-    v <- queue[head]; head <- head + 1L
-    for (u in seq_len(n)) if (!reach[u] && W[u, v] > 0) { reach[u] <- TRUE; queue <- c(queue, u) }
+    v <- queue[head]
+    head <- head + 1L
+    for (u in seq_len(n)) if (!reach[u] && W[u, v] > 0) { reach[u] <- TRUE
+    queue <- c(queue, u) }
   }
   idx <- which(reach & seq_len(n) != target)
-  H <- rep(Inf, n); H[target] <- 0
+  H <- rep(Inf, n)
+  H[target] <- 0
   if (length(idx) > 0L) {
     k <- length(idx)
-    A <- matrix(0, k, k); b <- rep(1, k)
-    pos <- integer(n); pos[idx] <- seq_len(k)
+    A <- matrix(0, k, k)
+    b <- rep(1, k)
+    pos <- integer(n)
+    pos[idx] <- seq_len(k)
     for (r in seq_len(k)) {
-      i <- idx[r]; deg <- sum(W[i, ])
+      i <- idx[r]
+      deg <- sum(W[i, ])
       if (deg <= 0) stop(sprintf("vertex %d reaches the target but has no outgoing weight", i))
       A[r, r] <- 1
       for (j in seq_len(n)) {

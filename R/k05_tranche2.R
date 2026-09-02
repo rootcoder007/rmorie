@@ -51,14 +51,17 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
   if (!variant %in% c("sobel", "aroian", "goodman"))
     stop("variant must be one of sobel, aroian, goodman", call. = FALSE)
   if (se_a < 0 || se_b < 0) stop("standard errors must be non-negative.", call. = FALSE)
-  va <- se_a^2; vb <- se_b^2
+  va <- se_a^2
+  vb <- se_b^2
   vv <- b * b * va + a * a * vb
   if (variant == "aroian") vv <- vv + va * vb
   if (variant == "goodman") vv <- vv - va * vb
   if (vv <= 0)
     stop(sprintf("non-positive variance for the indirect effect (variant=%s); no z statistic exists.",
                  variant), call. = FALSE)
-  se <- sqrt(vv); est <- a * b; z <- est / se
+  se <- sqrt(vv)
+  est <- a * b
+  z <- est / se
   list(statistic = z, pvalue = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
        indirect_effect = est, se = se, variant = variant,
        a = a, b = b, se_a = se_a, se_b = se_b,
@@ -80,7 +83,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 #' @return A list with \code{a}, \code{b}, \code{c}, \code{u}, \code{n}.
 #' @export
 .morie_k05_item_params <- function(a, b, c = NULL, upper = NULL) {
-  bb <- as.numeric(b); n <- length(bb)
+  bb <- as.numeric(b)
+  n <- length(bb)
   if (n == 0L) stop("need at least one item.", call. = FALSE)
   rep_to <- function(x, nm) {
     v <- as.numeric(x)
@@ -229,9 +233,11 @@ morie_test_information <- function(theta, a, b, c = NULL, upper = NULL, D = 1) {
 #' morie_lord_chisq(0.4, 0.1, matrix(0.04), matrix(0.09))$statistic
 #' @export
 morie_lord_chisq <- function(b_R, b_F, V_R, V_F = NULL) {
-  vr <- as.numeric(b_R); vf <- as.numeric(b_F)
+  vr <- as.numeric(b_R)
+  vf <- as.numeric(b_F)
   if (length(vr) != length(vf)) stop("b_R and b_F must have the same length.", call. = FALSE)
-  p <- length(vr); d <- vr - vf
+  p <- length(vr)
+  d <- vr - vf
   S <- matrix(as.numeric(as.matrix(V_R)), nrow = p)
   if (!is.null(V_F)) {
     S2 <- matrix(as.numeric(as.matrix(V_F)), nrow = p)
@@ -296,7 +302,9 @@ morie_cochran_q <- function(yi, vi) morie_ma_cochran_q(yi, vi)
 morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
   if (!weight %in% c("tarone-ware", "logrank", "gehan", "peto"))
     stop("weight must be one of tarone-ware, logrank, gehan, peto", call. = FALSE)
-  t <- as.numeric(time); e <- as.numeric(event); g <- as.vector(group)
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  g <- as.vector(group)
   if (length(t) != length(e) || length(t) != length(g))
     stop("time, event and group must have the same length.", call. = FALSE)
   labs <- unique(g)
@@ -310,8 +318,10 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
   d <- vapply(ut, function(tt) sum(t == tt & e == 1), numeric(1))
   d1 <- vapply(ut, function(tt) sum(t == tt & e == 1 & g == a), numeric(1))
   # Peto weight is the left-continuous modified KM estimate
-  peto <- numeric(length(ut)); s <- 1
-  for (j in seq_along(ut)) { peto[j] <- s; s <- s * (1 - d[j] / (n[j] + 1)) }
+  peto <- numeric(length(ut))
+  s <- 1
+  for (j in seq_along(ut)) { peto[j] <- s
+  s <- s * (1 - d[j] / (n[j] + 1)) }
   w <- switch(weight, "logrank" = rep(1, length(ut)), "gehan" = n,
               "tarone-ware" = sqrt(n), "peto" = peto)
   keep <- n > 1
@@ -341,9 +351,12 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 #' @return A list with \code{times}, \code{res}, \code{var}.
 #' @export
 .morie_k05_schoenfeld <- function(t, e, X, beta) {
-  n <- length(t); p <- ncol(X)
+  n <- length(t)
+  p <- ncol(X)
   idx <- order(t)
-  times <- numeric(0); res <- list(); var <- list()
+  times <- numeric(0)
+  res <- list()
+  var <- list()
   for (i in idx) {
     if (e[i] != 1) next
     risk <- which(t >= t[i])
@@ -376,11 +389,13 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
   if (how == "identity") return(times)
   if (how == "log") return(log(times))
   if (how == "rank") return(as.numeric(rank(times, ties.method = "first")))
-  surv <- 1; out <- numeric(length(times))
+  surv <- 1
+  out <- numeric(length(times))
   for (j in seq_along(times)) {
     tt <- times[j]
     out[j] <- 1 - surv
-    nr <- sum(e_times >= tt); dd <- sum(e_times == tt)
+    nr <- sum(e_times >= tt)
+    dd <- sum(e_times == tt)
     if (nr > 0) surv <- surv * (1 - dd / nr)
   }
   out
@@ -427,7 +442,9 @@ morie_tarone_ware <- function(time, event, group, weight = "tarone-ware") {
 morie_scaled_schoenfeld <- function(time, event, X, transform = "km") {
   if (!transform %in% c("km", "rank", "identity", "log"))
     stop("transform must be one of km, rank, identity, log", call. = FALSE)
-  t <- as.numeric(time); e <- as.numeric(event); X <- as.matrix(X)
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  X <- as.matrix(X)
   if (length(t) != length(e) || length(t) != nrow(X))
     stop("time, event and X must agree in length.", call. = FALSE)
   p <- ncol(X)

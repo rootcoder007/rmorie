@@ -51,7 +51,8 @@ Empbnp <- function(y, prior_family = "poisson") {
   h <- 1.06 * s * n^(-0.2)
   theta <- numeric(n)
   for (i in seq_len(n)) {
-    f <- 0; fp <- 0
+    f <- 0
+    fp <- 0
     for (j in seq_len(n)) {
       u <- (y[i] - y[j]) / h
       k <- exp(-0.5 * u * u)

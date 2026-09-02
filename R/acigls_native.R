@@ -29,60 +29,80 @@ morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {
 
   A <- as.matrix(A)
   if (nrow(A) != n) {
-    stop(sprintf("acigls: A has %d rows but y has %d entries",
-                 nrow(A), n))
+    stop(sprintf(
+      "acigls: A has %d rows but y has %d entries",
+      nrow(A), n
+    ))
   }
   p <- ncol(A)
   if (p < 1L) stop("acigls: A has no columns")
 
   w <- as.numeric(H)
   if (length(w) != n) {
-    stop(sprintf("acigls: %d weights but %d observations",
-                 length(w), n))
+    stop(sprintf(
+      "acigls: %d weights but %d observations",
+      length(w), n
+    ))
   }
   if (any(w <= 0)) {
-    stop(paste0("acigls: every weight must be positive; an ",
-                "inverse-probability weight cannot be zero or ",
-                "negative"))
+    stop(paste0(
+      "acigls: every weight must be positive; an ",
+      "inverse-probability weight cannot be zero or ",
+      "negative"
+    ))
   }
 
   cl <- as.character(cluster)
   if (length(cl) != n) {
-    stop(sprintf("acigls: %d cluster labels but %d observations",
-                 length(cl), n))
+    stop(sprintf(
+      "acigls: %d cluster labels but %d observations",
+      length(cl), n
+    ))
   }
   keys <- unique(cl)
   G <- length(keys)
   if (G < 2L) {
-    stop(paste0("acigls: the cluster-robust variance needs at least ",
-                "two clusters; with one there is no between-cluster ",
-                "information"))
+    stop(paste0(
+      "acigls: the cluster-robust variance needs at least ",
+      "two clusters; with one there is no between-cluster ",
+      "information"
+    ))
   }
   if (n <= p) {
-    stop(sprintf("acigls: %d observations cannot support %d coefficients",
-                 n, p))
+    stop(sprintf(
+      "acigls: %d observations cannot support %d coefficients",
+      n, p
+    ))
   }
 
   XtWX <- crossprod(A, A * w)
   XtWy <- crossprod(A, w * y)
   beta <- tryCatch(as.numeric(solve(XtWX, XtWy)),
-                   error = function(e)
-                     stop(paste0("acigls: A'WA is singular -- the design ",
-                                 "has collinear columns, or a weight has ",
-                                 "removed a column's variation")))
+    error = function(e) {
+      stop(paste0(
+        "acigls: A'WA is singular -- the design ",
+        "has collinear columns, or a weight has ",
+        "removed a column's variation"
+      ))
+    }
+  )
   resid <- as.numeric(y - A %*% beta)
 
   bread <- solve(XtWX)
   meat <- matrix(0, p, p)
   for (k in keys) {
     idx <- which(cl == k)
-    u <- as.numeric(crossprod(A[idx, , drop = FALSE],
-                              w[idx] * resid[idx]))
+    u <- as.numeric(crossprod(
+      A[idx, , drop = FALSE],
+      w[idx] * resid[idx]
+    ))
     meat <- meat + tcrossprod(u)
   }
   corr <- if (isTRUE(small_sample)) {
     (G / (G - 1)) * ((n - 1) / (n - p))
-  } else 1
+  } else {
+    1
+  }
   V <- corr * (bread %*% meat %*% bread)
   dv <- diag(V)
   se <- ifelse(dv > 0, sqrt(dv), NA_real_)
@@ -104,7 +124,9 @@ morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {
     sum_weights = sum(w),
     finite_sample_correction = corr,
     inflation = as.numeric(se / naive),
-    method = paste0("IPW-GLS with a cluster-robust sandwich variance ",
-                    "(Liang & Zeger 1986)")
+    method = paste0(
+      "IPW-GLS with a cluster-robust sandwich variance ",
+      "(Liang & Zeger 1986)"
+    )
   )
 }

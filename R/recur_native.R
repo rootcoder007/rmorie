@@ -26,8 +26,11 @@
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,
                                 max_iter = 50L, tol = 1e-9,
                                 offset = NULL) {
-  s <- as.numeric(start); t <- as.numeric(stop); e <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  s <- as.numeric(start)
+  t <- as.numeric(stop)
+  e <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   n <- length(t)
   if (length(s) != n || length(e) != n || nrow(Xm) != n) {
@@ -49,11 +52,15 @@
   n_events <- sum(e)
   if (n_events == 0) stop("no events in the data", call. = FALSE)
   beta <- rep(0, p)
-  loglik <- 0; info <- matrix(0, p, p); it <- 0L
+  loglik <- 0
+  info <- matrix(0, p, p)
+  it <- 0L
   for (it in seq_len(max_iter)) {
     eta <- pmax(pmin(as.vector(Xm %*% beta) + offs, 500), -500)
     w <- exp(eta)
-    U <- rep(0, p); info <- matrix(0, p, p); loglik <- 0
+    U <- rep(0, p)
+    info <- matrix(0, p, p)
+    loglik <- 0
     for (g in unique(strata)) {
       idx <- which(strata == g)
       ts <- sort(unique(t[idx][e[idx] == 1]))
@@ -179,8 +186,10 @@ Pwpgt <- function(start, stop, event, X, occurrence,
 #' fit <- Wlwmm(time = stop, event, X, occurrence = occ)
 #' is.list(fit)
 Wlwmm <- function(time, event, X, occurrence, max_iter = 50L, tol = 1e-9) {
-  t <- as.numeric(time); e <- as.numeric(event)
-  Xm <- as.matrix(X); storage.mode(Xm) <- "double"
+  t <- as.numeric(time)
+  e <- as.numeric(event)
+  Xm <- as.matrix(X)
+  storage.mode(Xm) <- "double"
   if (nrow(Xm) != length(t)) Xm <- t(Xm)
   per_event <- list()
   for (k in sort(unique(occurrence))) {
@@ -221,13 +230,17 @@ Wlwmm <- function(time, event, X, occurrence, max_iter = 50L, tol = 1e-9) {
 #' @examples
 #' Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 Survtdc <- function(time, event, marker, t) {
-  tt <- as.numeric(time); e <- as.numeric(event); m <- as.numeric(marker)
+  tt <- as.numeric(time)
+  e <- as.numeric(event)
+  m <- as.numeric(marker)
   t <- as.numeric(t)[1]
   n <- length(tt)
   if (length(e) != n || length(m) != n) {
     stop("time, event and marker must have equal length", call. = FALSE)
   }
-  conc <- 0; tied <- 0; comp <- 0L
+  conc <- 0
+  tied <- 0
+  comp <- 0L
   for (i in seq_len(n)) {
     if (e[i] != 1 || tt[i] > t) next
     for (j in seq_len(n)) {

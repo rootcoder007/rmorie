@@ -18,7 +18,9 @@
 #'        c(1.2, 2.3, 2.9, 4.1, 5.2, 5.8, 7.3, 8.1, 8.9, 10.2), 0.5)$intercept
 #' @export
 ridgrg <- function(X, y, lam = 0) {
-  m <- as.matrix(X); yv <- as.numeric(y); n <- length(yv)
+  m <- as.matrix(X)
+  yv <- as.numeric(y)
+  n <- length(yv)
   if (nrow(m) != n) m <- t(m)
   dimnames(m) <- NULL
   q <- ncol(m)
@@ -26,7 +28,8 @@ ridgrg <- function(X, y, lam = 0) {
   xc <- sweep(m, 2, xm, "-")
   xs <- sqrt(colSums(xc^2) / n)
   xsc <- sweep(xc, 2, xs, "/")
-  ym <- mean(yv); yc <- yv - ym
+  ym <- mean(yv)
+  yc <- yv - ym
   a <- crossprod(xsc) + lam * diag(q)
   bs <- as.numeric(solve(a, crossprod(xsc, yc)))
   beta <- bs / xs

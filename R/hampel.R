@@ -30,14 +30,25 @@ Hampel <- function(r, a = 2, b = 4, c = 8) {
   x <- .s03vec(r)
   if (length(x) == 0L) stop("hampel_redescend: r is empty")
   ck <- .hampel_check(a, b, c, "hampel_redescend")
-  a <- ck[1L]; b <- ck[2L]; c <- ck[3L]
-  ps <- numeric(length(x)); dp <- numeric(length(x)); nrej <- 0L
+  a <- ck[1L]
+  b <- ck[2L]
+  c <- ck[3L]
+  ps <- numeric(length(x))
+  dp <- numeric(length(x))
+  nrej <- 0L
   for (i in seq_along(x)) {
-    e <- x[i]; u <- abs(e); sg <- if (e >= 0) 1 else -1
-    if (u <= a) { ps[i] <- e; dp[i] <- 1 }
-    else if (u <= b) { ps[i] <- a * sg; dp[i] <- 0 }
-    else if (u <= c) { ps[i] <- a * (c - u) / (c - b) * sg; dp[i] <- -a / (c - b) }
-    else { ps[i] <- 0; dp[i] <- 0; nrej <- nrej + 1L }
+    e <- x[i]
+    u <- abs(e)
+    sg <- if (e >= 0) 1 else -1
+    if (u <= a) { ps[i] <- e
+    dp[i] <- 1 }
+    else if (u <= b) { ps[i] <- a * sg
+    dp[i] <- 0 }
+    else if (u <= c) { ps[i] <- a * (c - u) / (c - b) * sg
+    dp[i] <- -a / (c - b) }
+    else { ps[i] <- 0
+    dp[i] <- 0
+    nrej <- nrej + 1L }
   }
   list(estimate = sum(ps) / length(x), psi = ps, psi_deriv = dp,
        n_reject = nrej, n = length(x), a = a, b = b, c = c,

@@ -29,7 +29,9 @@
 #' Krreg(V, V)
 Krreg <- function(x, y, x_eval = NULL, bandwidth = NULL, penalty = 1,
                   kernel = "gaussian") {
-  x <- as.numeric(x); y <- as.numeric(y); n <- length(x)
+  x <- as.numeric(x)
+  y <- as.numeric(y)
+  n <- length(x)
   if (length(y) != n) stop("x and y must have same length.")
   if (n < 3L) stop("Need at least 3 observations.")
   if (penalty <= 0) stop("penalty must be > 0.")

@@ -25,7 +25,9 @@
 Compkm <- function(X, k = 2, max_iter = 50) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")
-  n <- nrow(X); D <- ncol(X); k <- as.integer(k)
+  n <- nrow(X)
+  D <- ncol(X)
+  k <- as.integer(k)
   if (k < 2L || k > n) stop("k must satisfy 2 <= k <= n")
   L <- log(X)
   Z <- L - rowSums(L) / D
@@ -37,7 +39,10 @@ Compkm <- function(X, k = 2, max_iter = 50) {
     for (i in seq_len(n)) {
       d <- rowSums((cen - matrix(Z[i, ], k, D, byrow = TRUE))^2)
       best <- which.min(d)
-      if (lab[i] != best) { lab[i] <- best; moved <- TRUE }
+      if (lab[i] != best) {
+        lab[i] <- best
+        moved <- TRUE
+      }
     }
     for (cc in seq_len(k)) {
       mem <- which(lab == cc)
@@ -46,11 +51,14 @@ Compkm <- function(X, k = 2, max_iter = 50) {
     if (!moved) break
   }
   wss <- numeric(k)
-  for (i in seq_len(n))
+  for (i in seq_len(n)) {
     wss[lab[i]] <- wss[lab[i]] + sum((Z[i, ] - cen[lab[i], ])^2)
+  }
   centers <- t(apply(cen, 1, function(z) exp(z) / sum(exp(z))))
-  .t1_result(cluster = lab, centers = centers, clr_centers = cen,
-             withinss = wss, tot_withinss = sum(wss), iterations = it,
-             n = n, D = D, k = k,
-             method = "Lloyd k-means in clr coordinates")
+  .t1_result(
+    cluster = lab, centers = centers, clr_centers = cen,
+    withinss = wss, tot_withinss = sum(wss), iterations = it,
+    n = n, D = D, k = k,
+    method = "Lloyd k-means in clr coordinates"
+  )
 }

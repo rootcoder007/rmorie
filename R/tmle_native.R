@@ -85,8 +85,10 @@
 morie_tmle_ate <- function(y, a, w, trunc = 0.01, g = NULL,
                            scale_outcome = TRUE, max_iter = 50L,
                            tol = 1e-10) {
-  y <- as.numeric(y); a <- as.numeric(a)
-  W <- as.matrix(w); storage.mode(W) <- "double"
+  y <- as.numeric(y)
+  a <- as.numeric(a)
+  W <- as.matrix(w)
+  storage.mode(W) <- "double"
   n <- length(y)
   if (length(a) != n || nrow(W) != n) {
     stop("y, a and w must share their first dimension.", call. = FALSE)
@@ -137,10 +139,15 @@ morie_tmle_ate <- function(y, a, w, trunc = 0.01, g = NULL,
   qas <- .morie_tmle_expit(off + eps * H)
 
   if (scale_outcome) {
-    q1o <- q1s * span + lo; q0o <- q0s * span + lo; qao <- qas * span + lo
+    q1o <- q1s * span + lo
+    q0o <- q0s * span + lo
+    qao <- qas * span + lo
     yo <- y
   } else {
-    q1o <- q1s; q0o <- q0s; qao <- qas; yo <- ys
+    q1o <- q1s
+    q0o <- q0s
+    qao <- qas
+    yo <- ys
   }
 
   psi <- mean(q1o - q0o)
@@ -177,7 +184,8 @@ morie_tmle_ate <- function(y, a, w, trunc = 0.01, g = NULL,
 #' r <- morie_tmle_propensity_only(y, d, X)
 #' str(r, max.level = 1)
 morie_tmle_propensity_only <- function(y, d, x, trunc = 0.01) {
-  X <- as.matrix(x); storage.mode(X) <- "double"
+  X <- as.matrix(x)
+  storage.mode(X) <- "double"
   n <- length(y)
   g <- .morie_logit_fit(X, as.numeric(d))
   null_w <- matrix(0, nrow = n, ncol = 1)
@@ -273,7 +281,8 @@ morie_tmle_sensitivity <- function(y, d, x, gamma_grid = NULL, trunc = 0.01) {
     g_hi <- pmin(pmax((odds * gam) / (1 + odds * gam), trunc), 1 - trunc)
     a <- morie_tmle_ate(y, d, x, trunc = trunc, g = g_lo)$ate
     b <- morie_tmle_ate(y, d, x, trunc = trunc, g = g_hi)$ate
-    lows[i] <- min(a, b); highs[i] <- max(a, b)
+    lows[i] <- min(a, b)
+    highs[i] <- max(a, b)
   }
   crosses <- lows <= 0 & highs >= 0
   list(gamma = grid, lower = lows, upper = highs, ate = base$ate,
@@ -318,12 +327,14 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
       next
     }
     out <- morie_tmle_ate(ind, d, x, trunc = trunc, scale_outcome = FALSE)
-    f1[i] <- out$ey1; f0[i] <- out$ey0
+    f1[i] <- out$ey1
+    f0[i] <- out$ey0
   }
   f1 <- pmin(pmax(cummax(f1), 0), 1)
   f0 <- pmin(pmax(cummax(f0), 0), 1)
   invert <- function(F) grid[min(which(F >= q)[1], k, na.rm = TRUE)]
-  q1 <- invert(f1); q0 <- invert(f0)
+  q1 <- invert(f1)
+  q0 <- invert(f0)
   list(qte = q1 - q0, q1 = q1, q0 = q0, quantile = q, grid = grid,
        f1 = f1, f0 = f0, n = length(y))
 }
@@ -352,7 +363,9 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
 #' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
                                  trunc = 0.01) {
-  y <- as.numeric(y); A <- as.numeric(treatment); M <- as.numeric(mediator)
+  y <- as.numeric(y)
+  A <- as.numeric(treatment)
+  M <- as.numeric(mediator)
   n <- length(y)
   if (length(A) != n || length(M) != n) {
     stop("y, treatment and mediator must have equal length.", call. = FALSE)
@@ -370,7 +383,8 @@ morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
   total <- morie_tmle_ate(y, A, W, trunc = trunc)
 
   Dm <- cbind(1, A, W)
-  bm <- qr.coef(qr(Dm), M); bm[is.na(bm)] <- 0
+  bm <- qr.coef(qr(Dm), M)
+  bm[is.na(bm)] <- 0
   res <- M - as.vector(Dm %*% bm)
   s2 <- mean(res^2)
   if (s2 <= 0) {
@@ -422,7 +436,9 @@ morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
 #' r <- morie_tmle_late(y, d, z, covariates = X)
 #' str(r, max.level = 1)
 morie_tmle_late <- function(y, d, z, covariates = NULL, trunc = 0.01) {
-  y <- as.numeric(y); d <- as.numeric(d); z <- as.numeric(z)
+  y <- as.numeric(y)
+  d <- as.numeric(d)
+  z <- as.numeric(z)
   n <- length(y)
   if (length(d) != n || length(z) != n) {
     stop("y, d and z must have equal length.", call. = FALSE)
@@ -476,9 +492,12 @@ morie_tmle_late <- function(y, d, z, covariates = NULL, trunc = 0.01) {
 #' str(r, max.level = 1)
 morie_tmle_time_varying <- function(y, a, l, regime = 1, trunc = 0.01) {
   y <- as.numeric(y)
-  A <- as.matrix(a); storage.mode(A) <- "double"
-  L <- as.matrix(l); storage.mode(L) <- "double"
-  n <- length(y); T_ <- ncol(A)
+  A <- as.matrix(a)
+  storage.mode(A) <- "double"
+  L <- as.matrix(l)
+  storage.mode(L) <- "double"
+  n <- length(y)
+  T_ <- ncol(A)
   if (nrow(A) != n || !identical(dim(L), dim(A))) {
     stop("y, a and l shapes disagree.", call. = FALSE)
   }
@@ -508,14 +527,17 @@ morie_tmle_time_varying <- function(y, a, l, regime = 1, trunc = 0.01) {
     follows <- matrix(follows, ncol = 1L)
   }
 
-  lo <- min(y); hi <- max(y); span <- hi - lo
+  lo <- min(y)
+  hi <- max(y)
+  span <- hi - lo
   if (span <= 0) stop("outcome has zero range.", call. = FALSE)
   Q <- pmin(pmax((y - lo) / span, 1e-6), 1 - 1e-6)
 
   eps_all <- numeric(T_)
   for (t in seq(T_, 1L)) {
     X <- cbind(1, A[, seq_len(t), drop = FALSE], L[, seq_len(t), drop = FALSE])
-    b <- qr.coef(qr(X), Q); b[is.na(b)] <- 0
+    b <- qr.coef(qr(X), Q)
+    b[is.na(b)] <- 0
     q_obs <- pmin(pmax(as.vector(X %*% b), 1e-6), 1 - 1e-6)
     H <- follows[, t] / cum_g[, t]
     num <- sum(H * (Q - q_obs))
@@ -595,7 +617,8 @@ morie_tmle_longitudinal <- function(y, a, l, trunc = 0.01) {
 #' r <- morie_tmle_rmst(tt, ev, a, W)
 #' str(r, max.level = 1)
 morie_tmle_rmst <- function(time, event, a, w, horizon = NULL, trunc = 0.01) {
-  time <- as.numeric(time); event <- as.numeric(event)
+  time <- as.numeric(time)
+  event <- as.numeric(event)
   if (any(time <= 0)) stop("time must be positive.", call. = FALSE)
   if (!all(event %in% c(0, 1))) {
     stop("event must be binary 0/1.", call. = FALSE)

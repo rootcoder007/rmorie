@@ -31,7 +31,8 @@
 #' IpwSn(Y = rnorm(20), X = matrix(rnorm(40), 20, 2), C = rbinom(20, 1, 0.5),
 #'       lam_grid = c(0, 0.5, 1))
 IpwSn <- function(Y, X, C, lam_grid) {
-  yv <- .s03vec(Y); n <- length(yv)
+  yv <- .s03vec(Y)
+  n <- length(yv)
   if (n == 0L) stop("ipw_sensitivity: Y is empty")
   cc <- .s03vec(C)
   if (length(cc) != n) stop("ipw_sensitivity: Y and C have different lengths")

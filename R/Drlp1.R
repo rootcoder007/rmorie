@@ -26,23 +26,33 @@
 #' @examples
 #' Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 Drlp1 <- function(y, D, unit, time, horizon = 3L, X = NULL) {
-  yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
+  yv <- .s03vec(y)
+  dv <- .s03vec(D)
+  n <- length(yv)
   if (n == 0L) stop("Drlp1: empty input, y has no observations")
-  u <- as.character(unit); tt <- as.numeric(time)
+  u <- as.character(unit)
+  tt <- as.numeric(time)
   if (length(dv) != n || length(u) != n || length(tt) != n)
     stop("Drlp1: y, D, unit and time must have the same length")
   H <- as.integer(horizon)
   if (H < 0L) stop("Drlp1: horizon must be non-negative")
   Xr <- if (is.null(X)) NULL else .s03mat(X)
   key <- paste(u, tt, sep = "\r")
-  units <- unique(u); per <- sort(unique(tt))
+  units <- unique(u)
+  per <- sort(unique(tt))
   hs <- 0L:H
-  beta <- numeric(0); sev <- numeric(0); ncell <- numeric(0)
+  beta <- numeric(0)
+  sev <- numeric(0)
+  ncell <- numeric(0)
   for (h in hs) {
-    dys <- numeric(0); ds <- numeric(0); xs <- list()
+    dys <- numeric(0)
+    ds <- numeric(0)
+    xs <- list()
     for (j in seq_along(per)[-1L]) {
       if (j + h > length(per)) next
-      tc <- per[j]; tp <- per[j - 1L]; th <- per[j + h]
+      tc <- per[j]
+      tp <- per[j - 1L]
+      th <- per[j + h]
       for (z in units) {
         ih <- match(paste(z, th, sep = "\r"), key)
         ip <- match(paste(z, tp, sep = "\r"), key)
@@ -51,17 +61,21 @@ Drlp1 <- function(y, D, unit, time, horizon = 3L, X = NULL) {
         new <- dv[ic] >= 0.5 && dv[ip] < 0.5
         clean <- dv[ih] < 0.5
         if (!(new || clean)) next
-        dys <- c(dys, yv[ih] - yv[ip]); ds <- c(ds, if (new) 1 else 0)
+        dys <- c(dys, yv[ih] - yv[ip])
+        ds <- c(ds, if (new) 1 else 0)
         if (!is.null(Xr)) xs[[length(xs) + 1L]] <- Xr[ic, ]
       }
     }
     ncell <- c(ncell, length(dys))
     if (length(dys) < 3L || sum(ds) <= 0 || sum(ds) >= length(ds)) {
-      beta <- c(beta, NaN); sev <- c(sev, NaN); next
+      beta <- c(beta, NaN)
+      sev <- c(sev, NaN)
+      next
     }
     xm <- if (is.null(Xr)) NULL else do.call(rbind, xs)
     f <- .s03drdid(dys, ds, xm)
-    beta <- c(beta, f$tau); sev <- c(sev, f$se)
+    beta <- c(beta, f$tau)
+    sev <- c(sev, f$se)
   }
   .t1_result(estimate = if (length(beta)) beta[1L] else NaN,
              horizons = hs, beta = beta, se = sev, n_cells = ncell, n = n,

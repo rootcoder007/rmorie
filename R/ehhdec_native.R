@@ -33,7 +33,8 @@
   denom <- n * (n - 1)
   out <- numeric(L)
   for (j in seq_len(L)) {
-    lo <- min(j, core); hi <- max(j, core)
+    lo <- min(j, core)
+    hi <- max(j, core)
     keys <- apply(H[carriers, lo:hi, drop = FALSE], 1, paste, collapse = "")
     cnt <- table(keys)
     out[j] <- sum(cnt * (cnt - 1)) / denom
@@ -62,7 +63,8 @@
 morie_ehhdec <- function(hap, core, positions = NULL) {
   H <- as.matrix(hap)
   storage.mode(H) <- "integer"
-  N <- nrow(H); L <- ncol(H)
+  N <- nrow(H)
+  L <- ncol(H)
   if (N < 2L) stop("need at least 2 chromosomes")
   core <- as.integer(core)
   if (!(core >= 0L && core < L)) stop("core out of range")
@@ -111,12 +113,15 @@ morie_ehhdec <- function(hap, core, positions = NULL) {
     if (cc - 1L >= 1L) seq.int(cc - 1L, 1L) else integer(0)
   }
   area <- 0
-  prev_p <- pos[cc]; prev_e <- ehh[cc]
+  prev_p <- pos[cc]
+  prev_e <- ehh[cc]
   truncated <- TRUE
   for (j in idx) {
     area <- area + abs(pos[j] - prev_p) * 0.5 * (ehh[j] + prev_e)
-    prev_p <- pos[j]; prev_e <- ehh[j]
-    if (ehh[j] < min_ehh) { truncated <- FALSE; break }
+    prev_p <- pos[j]
+    prev_e <- ehh[j]
+    if (ehh[j] < min_ehh) { truncated <- FALSE
+    break }
   }
   list(area = area, truncated = truncated)
 }

@@ -73,7 +73,8 @@ private_release <- function(value, sensitivity, epsilon, seed = 0) {
   if (eps <= 0) stop("tmldyk: epsilon must be positive")
   sens <- as.numeric(sensitivity)
   if (sens <= 0) stop("tmldyk: the sensitivity must be positive")
-  e <- .ghc_rng(seed); b <- sens / eps
+  e <- .ghc_rng(seed)
+  b <- sens / eps
   noise <- laplace_noise(b, e)
   list(released = as.numeric(value) + noise, noise = noise,
        scale = b, epsilon = eps, noise_variance = 2 * b * b,
@@ -145,8 +146,10 @@ composition_budget <- function(epsilons) {
 #' @export
 morie_tmldyk <- function(y, D, X, epsilon = 1, g_min = 0.05,
                          seed = 0, g = NULL, Q1 = NULL, Q0 = NULL) {
-  yv <- as.numeric(y); a <- as.numeric(D)
-  W <- as.matrix(X); storage.mode(W) <- "double"
+  yv <- as.numeric(y)
+  a <- as.numeric(D)
+  W <- as.matrix(X)
+  storage.mode(W) <- "double"
   n <- length(yv)
   if (!(length(a) == nrow(W) && nrow(W) == n))
     stop("tmldyk: the inputs differ in length")
