@@ -7,7 +7,6 @@
 #' so this module aliases it rather than adding a second implementation.
 #'
 #' References
-#' ----------
 #' Dwork, C., McSherry, F., Nissim, K., & Smith, A. (2006). Calibrating
 #'     noise to sensitivity in private data analysis. Theory of
 #'     Cryptography (TCC 2006), LNCS 3876, 265-284.

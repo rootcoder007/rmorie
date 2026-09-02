@@ -19,7 +19,6 @@
 #' covariates)} -- call it directly when needed.
 #'
 #' Year-lock invariant
-#' -------------------
 #' OTIS \code{UniqueIndividual_ID} is randomly reassigned every fiscal
 #' year. All analyses are computed within \code{EndFiscalYear};
 #' cross-year ID joins are forbidden (the

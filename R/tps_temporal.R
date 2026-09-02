@@ -10,7 +10,6 @@
 #' to a notebook.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_year_over_year_trend}}: OLS slope /

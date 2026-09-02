@@ -7,7 +7,6 @@
 #' plus a cross-category comparison driver.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_temporal_summary}}: year / month / dow / hour rollups.

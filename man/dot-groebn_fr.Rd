@@ -15,6 +15,5 @@
 A vector, from \code{c}.
 }
 \description{
-\subsection{Exact rationals (Fraction-equivalent)}{
-}
+Exact rationals (Fraction-equivalent)
 }

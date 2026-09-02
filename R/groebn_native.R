@@ -22,7 +22,6 @@
 #' .groebn_fr
 #'
 #' Exact rationals (Fraction-equivalent)
-#' ---------------------------------------------------------------------------
 #'
 #' @param num Numeric; passed to \code{abs}.
 #' @param den Numeric; combined arithmetically in the body. Defaults to \code{1L}.
@@ -208,7 +207,6 @@
 #' .groebn_parse_key
 #'
 #' Exponent keys
-#' ---------------------------------------------------------------------------
 #'
 #' @param s Character; passed to \code{strsplit}.
 #' @return The value of \code{as.integer}.
@@ -236,7 +234,6 @@
 #' .groebn_poly
 #'
 #' Polynomial constructor
-#' ---------------------------------------------------------------------------
 #'
 #' @param terms A vector; its length is taken and its elements indexed.
 #' @param nvars Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
@@ -349,7 +346,6 @@
 #' .groebn_nvars
 #'
 #' Polynomial queries
-#' ---------------------------------------------------------------------------
 #'
 #' @param F See Usage.
 #' @return A numeric value.
@@ -442,7 +438,6 @@
 #' .groebn_add
 #'
 #' Polynomial arithmetic
-#' ---------------------------------------------------------------------------
 #'
 #' @param f See Usage.
 #' @param g A vector; indexed elementwise.
@@ -563,7 +558,6 @@
 #' .groebn_spoly
 #'
 #' S-polynomial and division
-#' ---------------------------------------------------------------------------
 #'
 #' @param f A vector; its length is taken and its elements indexed.
 #' @param g A vector; its length is taken and its elements indexed.
@@ -654,7 +648,6 @@
 #' .groebn_buchberger
 #'
 #' Buchberger completion and reduce_basis
-#' ---------------------------------------------------------------------------
 #'
 #' @param F Iterated over elementwise, with \code{lapply}.
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
@@ -786,7 +779,6 @@
 #' .groebn_ideal_member
 #'
 #' Ideal membership
-#' ---------------------------------------------------------------------------
 #'
 #' @param f Passed to \code{.groebn_normal_form}.
 #' @param F Passed to \code{.groebn_buchberger}.
@@ -815,7 +807,6 @@
 #' morie_groebn
 #'
 #' Entry point
-#' ---------------------------------------------------------------------------
 #'
 #' @param polys Iterated over elementwise, with \code{lapply}.
 #' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.

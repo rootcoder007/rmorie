@@ -16,7 +16,6 @@
 #' per-neighbourhood CSI aggregates.
 #'
 #' Important caveats
-#' -----------------
 #'
 #' 1. TPS open-data categories aggregate over multiple Criminal Code
 #'    sub-offences.  The weights here are representative blends
@@ -38,7 +37,6 @@
 #'    non-violent categories (B&E, theft) are zeroed.
 #'
 #' References
-#' ----------
 #' Wallace, M., Turner, J., Babyak, C., & Matarazzo, A. (2009).
 #'   Measuring Crime in Canada: Introducing the Crime Severity Index
 #'   and Improvements to the Uniform Crime Reporting Survey.

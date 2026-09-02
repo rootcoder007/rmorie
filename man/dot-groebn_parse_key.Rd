@@ -13,6 +13,5 @@
 The value of \code{as.integer}.
 }
 \description{
-\subsection{Exponent keys}{
-}
+Exponent keys
 }

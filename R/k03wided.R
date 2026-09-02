@@ -5,7 +5,7 @@
 
 ## One MINSTD step. Exact in double precision (a * m < 2^53), so both
 ## language arms produce bit-identical initial weights.
-#' # One MINSTD step. Exact in double precision (a * m < 2^53), so both
+#' One MINSTD step. Exact in double precision (a * m < 2^53), so both
 #'
 #' # language arms produce bit-identical initial weights.
 #'

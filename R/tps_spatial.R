@@ -85,7 +85,6 @@ NULL
 #' setting in tests/cross/.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_morans_i_neighbourhood}}: global

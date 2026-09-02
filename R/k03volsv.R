@@ -8,7 +8,7 @@
 .k03_gold <- 0.3819660112501051   # (3 - sqrt(5)) / 2
 
 ## Gaussian quasi log-likelihood from the Kalman filter.
-#' # Gaussian quasi log-likelihood from the Kalman filter
+#' Gaussian quasi log-likelihood from the Kalman filter
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.
@@ -42,7 +42,7 @@
 }
 
 ## Deterministic golden-section maximisation on [lo, hi].
-#' # Deterministic golden-section maximisation on \[lo, hi\]
+#' Deterministic golden-section maximisation on \[lo, hi\]
 #'
 #' A step of the k03volsv implementation. Called by \code{Volsv}.
 #' See the file header for the source the module follows.

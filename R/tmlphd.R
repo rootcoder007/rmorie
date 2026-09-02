@@ -14,7 +14,7 @@
 ## Cyclic coordinate descent for a weighted lasso; column 1 unpenalised.
 ## Fixed sweep count and fixed cyclic order, so both language arms take
 ## the same path even where the objective has a flat direction.
-#' # Cyclic coordinate descent for a weighted lasso; column 1
+#' Cyclic coordinate descent for a weighted lasso; column 1
 #' unpenalised
 #'
 #' # Fixed sweep count and fixed cyclic order, so both language arms
@@ -48,7 +48,7 @@
 }
 
 ## Proximal-Newton L1 logistic: IRLS outside, weighted lasso inside.
-#' # Proximal-Newton L1 logistic: IRLS outside, weighted lasso inside
+#' Proximal-Newton L1 logistic: IRLS outside, weighted lasso inside
 #'
 #' A step of the tmlphd implementation. Called by \code{Tmlphd}.
 #' See the file header for the source the module follows.

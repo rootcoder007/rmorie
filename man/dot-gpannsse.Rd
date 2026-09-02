@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpannsse}
 \alias{.gpannsse}
-\title{\subsection{Chapter 10: ANN loss, eq (10.5)}{
-}}
+\title{Chapter 10: ANN loss, eq (10.5)}
 \usage{
 .gpannsse(y_hat, y)
 }

@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gpzaplink}
 \alias{.gpzaplink}
-\title{\subsection{Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)}{
-}}
+\title{Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)}
 \usage{
 .gpzaplink(mu_pred, theta_pred)
 }

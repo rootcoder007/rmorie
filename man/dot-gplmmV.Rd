@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gplmmV}
 \alias{.gplmmV}
-\title{\subsection{Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML}{
-}}
+\title{Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML}
 \usage{
 .gplmmV(Z, D, R = NULL)
 }

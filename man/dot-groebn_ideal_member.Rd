@@ -19,6 +19,5 @@
 A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
 }
 \description{
-\subsection{Ideal membership}{
-}
+Ideal membership
 }

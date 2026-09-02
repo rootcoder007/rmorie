@@ -11,7 +11,6 @@
 #' never needs to know which city the data came from.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_fairness_city_profile}}: constructor for a

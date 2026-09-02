@@ -15,7 +15,5 @@ A numeric value.
 \description{
 Half-away-from-zero. Deliberately not round(): both languages round
 }
-\section{half to even but disagree about which values are exactly half.}{
-
-}
+half to even but disagree about which values are exactly half.
 

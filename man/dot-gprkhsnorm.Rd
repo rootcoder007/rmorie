@@ -2,8 +2,7 @@
 % Please edit documentation in R/aaa_helpers_gp_core.R
 \name{.gprkhsnorm}
 \alias{.gprkhsnorm}
-\title{\subsection{Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)}{
-}}
+\title{Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)}
 \usage{
 .gprkhsnorm(beta, K)
 }
