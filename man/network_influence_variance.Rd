@@ -20,5 +20,5 @@ A list with \code{se}, \code{se_independent}, \code{edges_counted}, \code{note}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-network_influence_variance(V, V)
+rmorie:::network_influence_variance(V, V)
 }

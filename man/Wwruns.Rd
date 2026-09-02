@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{p_value}, \code{z}, \code{p_normal}, \code{m
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wwruns(V, V)
+rmorie:::Wwruns(V, V)
 }

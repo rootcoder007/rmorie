@@ -54,5 +54,5 @@ tests in \code{tests/testthat/}.
 set.seed(10)
 tt <- seq(0, 1, length.out = 30)
 Xc <- rbind(sin(2 * pi * tt), cos(2 * pi * tt), sin(4 * pi * tt))
-morie_fda_design(tt, Xc, L1 = 2, L2 = 3)
+rmorie:::morie_fda_design(tt, Xc, L1 = 2, L2 = 3)
 }

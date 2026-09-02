@@ -20,5 +20,5 @@ A list with \code{tau}, \code{statistic}, \code{P}, \code{Q}, \code{z}, \code{p_
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Tautrend(V)
+rmorie:::Tautrend(V)
 }

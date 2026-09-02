@@ -20,5 +20,5 @@ A list with \code{sf}, \code{cdf}, \code{npaths}, \code{inside}, \code{m}, \code
 }
 \keyword{internal}
 \examples{
-Smirnov2(d = 0.4, m = 10, n = 12)
+rmorie:::Smirnov2(d = 0.4, m = 10, n = 12)
 }

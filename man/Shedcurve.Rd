@@ -25,5 +25,5 @@ set.seed(2)
 days <- 0:14
 load <- 10^(c(seq(2, 6, length.out = 5), seq(5.8, 4, length.out = 5),
               rep(3.9, 5)) + rnorm(15, 0, 0.05))
-Shedcurve(days, load, t_peak = 4, t_plateau = 9)
+rmorie:::Shedcurve(days, load, t_peak = 4, t_plateau = 9)
 }

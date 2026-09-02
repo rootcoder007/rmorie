@@ -20,5 +20,5 @@ A numeric value.
 }
 \keyword{internal}
 \examples{
-morie_lmm_v(Z = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+rmorie:::morie_lmm_v(Z = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
 }

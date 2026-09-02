@@ -18,6 +18,6 @@ Angle in [-pi, pi).
 }
 \keyword{internal}
 \examples{
-w <- wrap_angle(2.5 * pi)
+w <- rmorie:::wrap_angle(2.5 * pi)
 abs(w - 0.5 * pi) < 1e-9
 }

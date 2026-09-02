@@ -19,5 +19,5 @@ A list with \code{estimate}, \code{lower}, \code{upper}, \code{se}, \code{se_nul
 }
 \keyword{internal}
 \examples{
-Mcnemarci(rbind(c(20, 5), c(12, 13)))
+rmorie:::Mcnemarci(rbind(c(20, 5), c(12, 13)))
 }

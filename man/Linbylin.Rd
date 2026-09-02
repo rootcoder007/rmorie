@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{mean}, \code{var}, \code{sd}, \code{z}, \cod
 \keyword{internal}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Linbylin(M)
+rmorie:::Linbylin(M)
 }

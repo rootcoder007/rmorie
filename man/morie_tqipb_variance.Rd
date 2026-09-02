@@ -23,5 +23,5 @@ A single numeric variance bound.
 }
 \keyword{internal}
 \examples{
-morie_tqipb_variance(bits = 5L, d = 5L)
+rmorie:::morie_tqipb_variance(bits = 5L, d = 5L)
 }

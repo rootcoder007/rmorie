@@ -22,5 +22,5 @@ A list with \code{power}, \code{pmf}, \code{q}, \code{r}, \code{m}, \code{n}, \c
 }
 \keyword{internal}
 \examples{
-Ctrlmedpow(m = 8, n = 9, d = 2, h = function(v) v^2)
+rmorie:::Ctrlmedpow(m = 8, n = 9, d = 2, h = function(v) v^2)
 }

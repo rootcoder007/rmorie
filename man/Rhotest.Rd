@@ -20,5 +20,5 @@ A list with \code{z}, \code{p_normal}, \code{t}, \code{df}, \code{p_value}, \cod
 }
 \keyword{internal}
 \examples{
-Rhotest(r = 0.45, n = 20)
+rmorie:::Rhotest(r = 0.45, n = 20)
 }

@@ -20,5 +20,5 @@ A list with \code{lower}, \code{upper}, \code{estimate}, \code{k}, \code{m}, \co
 }
 \keyword{internal}
 \examples{
-Rankci(values = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+rmorie:::Rankci(values = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

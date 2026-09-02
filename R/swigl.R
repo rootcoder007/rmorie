@@ -11,7 +11,7 @@
 #' @keywords internal
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' swiglu_activation(V)
+#' rmorie:::swiglu_activation(V)
 swiglu_activation <- function(x, W = NULL, V = NULL, b = NULL, c = NULL) {
   if (is.null(W) && is.null(V)) {
     d_out <- ncol(as.matrix(x))

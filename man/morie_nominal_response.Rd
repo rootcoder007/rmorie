@@ -20,5 +20,5 @@ A list with \code{p}, \code{expected}, \code{info}, \code{test_info}, \code{thet
 }
 \keyword{internal}
 \examples{
-morie_nominal_response(theta = 0.5, a = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), c = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+rmorie:::morie_nominal_response(theta = 0.5, a = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), c = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 }

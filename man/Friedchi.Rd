@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{mean}, \code{var_
 }
 \keyword{internal}
 \examples{
-Friedchi(q = 0.5, k = 5L, n = 5L)
+rmorie:::Friedchi(q = 0.5, k = 5L, n = 5L)
 }

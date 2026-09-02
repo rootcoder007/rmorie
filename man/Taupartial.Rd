@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{x11}, \code{x12}, \code{x21}, \code{x22}, \c
 }
 \keyword{internal}
 \examples{
-Taupartial(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Taupartial(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

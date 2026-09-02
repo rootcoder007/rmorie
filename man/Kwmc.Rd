@@ -21,5 +21,5 @@ A list with \code{bound}, \code{bounds}, \code{diffs}, \code{significant}, \code
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kwmc(V, V)
+rmorie:::Kwmc(V, V)
 }

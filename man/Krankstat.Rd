@@ -20,5 +20,5 @@ A list with \code{q}, \code{statistic}, \code{df}, \code{p_value}, \code{abar}, 
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Krankstat(V)
+rmorie:::Krankstat(V)
 }

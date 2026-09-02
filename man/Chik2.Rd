@@ -19,5 +19,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{phat}, \code{prop
 }
 \keyword{internal}
 \examples{
-Chik2(successes = c(18, 12, 25), ns = c(30, 30, 40))
+rmorie:::Chik2(successes = c(18, 12, 25), ns = c(30, 30, 40))
 }

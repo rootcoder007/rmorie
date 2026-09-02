@@ -21,5 +21,5 @@ A list with \code{x}, \code{mean}, \code{sd}, \code{n_groups}, \code{group_size}
 \keyword{internal}
 \examples{
 set.seed(4)
-Grpnorm(rnorm(12), n_groups = 3)
+rmorie:::Grpnorm(rnorm(12), n_groups = 3)
 }

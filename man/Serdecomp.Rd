@@ -21,5 +21,5 @@ A list with \code{trend}, \code{seasonal}, \code{acf}, \code{kernel}, \code{n}.
 \examples{
 set.seed(5)
 x <- sin(2 * pi * (1:60) / 12) + 0.1 * (1:60) / 10 + rnorm(60, 0, 0.1)
-str(Serdecomp(x, kernel = 5), max.level = 1)
+str(rmorie:::Serdecomp(x, kernel = 5), max.level = 1)
 }

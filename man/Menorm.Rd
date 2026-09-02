@@ -21,5 +21,5 @@ A list with \code{mu}, \code{var}, \code{sd}, \code{n}.
 }
 \keyword{internal}
 \examples{
-Menorm(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8), x_true = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+rmorie:::Menorm(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8), x_true = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 }

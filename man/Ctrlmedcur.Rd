@@ -20,5 +20,5 @@ A list with \code{d}, \code{d_raw}, \code{d_exact}, \code{alpha_exact}, \code{z_
 }
 \keyword{internal}
 \examples{
-Ctrlmedcur(m = 5L, n = 5L)
+rmorie:::Ctrlmedcur(m = 5L, n = 5L)
 }

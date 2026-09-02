@@ -22,5 +22,5 @@ A list with \code{statistic}, \code{zf}, \code{mean_zf}, \code{var_zf}, \code{z}
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Normcorr(V, V)
+rmorie:::Normcorr(V, V)
 }

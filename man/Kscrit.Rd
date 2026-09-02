@@ -20,5 +20,5 @@ A list with \code{dcrit}, \code{dcrit_asymp}, \code{k_alpha}, \code{n}, \code{al
 }
 \keyword{internal}
 \examples{
-Kscrit(n = 5L)
+rmorie:::Kscrit(n = 5L)
 }

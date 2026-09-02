@@ -20,5 +20,5 @@ A list with \code{u_strict}, \code{u_inclusive}, \code{u_split}, \code{t_strict}
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Medties(V, V)
+rmorie:::Medties(V, V)
 }

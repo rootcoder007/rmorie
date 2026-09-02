@@ -21,5 +21,5 @@ A list with \code{are}, \code{check}, \code{efficacy}, \code{efficacy_star}.
 }
 \keyword{internal}
 \examples{
-Arepitman(deriv = 0.399, var = 1, deriv_star = 0.318, var_star = 1.05)
+rmorie:::Arepitman(deriv = 0.399, var = 1, deriv_star = 0.318, var_star = 1.05)
 }

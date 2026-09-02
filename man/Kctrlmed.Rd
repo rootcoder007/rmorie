@@ -20,5 +20,5 @@ A list with \code{counts}, \code{cuts}, \code{r}, \code{pcell}, \code{statistic}
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kctrlmed(V)
+rmorie:::Kctrlmed(V)
 }

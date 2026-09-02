@@ -24,6 +24,6 @@ deterministic, and ties break to the lowest index in both arms.
 }
 \examples{
 set.seed(1)
-r <- .sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
+r <- rmorie:::.sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
 }
 \keyword{internal}

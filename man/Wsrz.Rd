@@ -21,5 +21,5 @@ A list with \code{z}, \code{p_value}, \code{mean}, \code{var}, \code{statistic},
 }
 \keyword{internal}
 \examples{
-Wsrz(tplus = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+rmorie:::Wsrz(tplus = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 }

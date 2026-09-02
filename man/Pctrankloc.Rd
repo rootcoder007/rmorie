@@ -22,5 +22,5 @@ A list with \code{statistic}, \code{tupper}, \code{blower}, \code{var}, \code{va
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Pctrankloc(V, V)
+rmorie:::Pctrankloc(V, V)
 }

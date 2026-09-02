@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{expected}, \code{
 \keyword{internal}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Chiindep(M)
+rmorie:::Chiindep(M)
 }

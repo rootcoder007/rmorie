@@ -21,5 +21,5 @@ A list with \code{power}, \code{power_exact}, \code{k_alpha}, \code{alpha_exact}
 }
 \keyword{internal}
 \examples{
-Signpow(n = 5L, theta = 0.5)
+rmorie:::Signpow(n = 5L, theta = 0.5)
 }

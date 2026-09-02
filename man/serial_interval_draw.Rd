@@ -21,6 +21,6 @@ The value of \code{v}, as built in the body.
 }
 \keyword{internal}
 \examples{
-e <- .ghc_rng(1)
+e <- rmorie:::.ghc_rng(1)
 replicate(3, serial_interval_draw(mean = 5, sd = 1.9, e))
 }

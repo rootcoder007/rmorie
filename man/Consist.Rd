@@ -21,5 +21,5 @@ A list with \code{power}, \code{consistent}, \code{monotone}, \code{limit}, \cod
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Consist(V, V)
+rmorie:::Consist(V, V)
 }

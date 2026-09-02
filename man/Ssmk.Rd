@@ -21,5 +21,5 @@ A list with \code{K}, \code{L}, \code{state_dim}.
 }
 \keyword{internal}
 \examples{
-Ssmk(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L)
+rmorie:::Ssmk(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), L = 5L)
 }

@@ -18,7 +18,7 @@
 #' @keywords internal
 #' @examples
 #' set.seed(1)
-#' r <- .morie_db_index_registry(); TRUE
+#' r <- rmorie:::.morie_db_index_registry(); TRUE
 .morie_db_index_registry <- function() {
   list(
     # ------ SIU (case-level director's reports, 5074 cases x 64 cols) ----

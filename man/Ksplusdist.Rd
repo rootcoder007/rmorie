@@ -19,5 +19,5 @@ A list with \code{sf}, \code{cdf}, \code{terms}, \code{n}, \code{c}.
 }
 \keyword{internal}
 \examples{
-Ksplusdist(c = 0.2, n = 20)
+rmorie:::Ksplusdist(c = 0.2, n = 20)
 }

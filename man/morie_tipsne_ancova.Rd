@@ -40,5 +40,5 @@ MISS <- as.integer((ARM == 1 & ii\%\%7L == 3L) | (ARM == 0 & ii\%\%11L ==
     5L))
 DES <- cbind(1, ARM, COV[, 1], COV[, 2])[MISS == 0L, , drop = FALSE]
 YO <- BASE[MISS == 0L]
-morie_tipsne_ancova(YO, DES)
+rmorie:::morie_tipsne_ancova(YO, DES)
 }

@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' rms_norm(V)
+#' rmorie:::rms_norm(V)
 rms_norm <- function(x, gamma = NULL, eps = 1e-6) {
   xm <- as.matrix(x)
   rms <- sqrt(rowMeans(xm * xm) + eps)

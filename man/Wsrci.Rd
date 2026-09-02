@@ -19,5 +19,5 @@ A list with \code{lower}, \code{upper}, \code{coverage}, \code{tail}, \code{nwal
 }
 \keyword{internal}
 \examples{
-Wsrci(x = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = 5L)
+rmorie:::Wsrci(x = c(1, 2, 3, 4, 5, 6, 7, 8), tcrit = 5L)
 }

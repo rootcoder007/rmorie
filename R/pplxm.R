@@ -8,7 +8,7 @@
 #' @keywords internal
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' perplexity_metric(V)
+#' rmorie:::perplexity_metric(V)
 perplexity_metric <- function(x, base = "e") {
   logp <- as.numeric(x)
   if (!length(logp)) stop("Need at least one token log-prob")

@@ -19,5 +19,5 @@ A list with \code{mean}, \code{mean_pairwise}, \code{var}, \code{sd}, \code{k}, 
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Jtmom(V)
+rmorie:::Jtmom(V)
 }

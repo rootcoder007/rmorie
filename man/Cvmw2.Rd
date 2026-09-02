@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{nw2}, \code{z}, \code{n}.
 \keyword{internal}
 \examples{
 set.seed(2)
-Cvmw2(rnorm(25), cdf = pnorm)
+rmorie:::Cvmw2(rnorm(25), cdf = pnorm)
 }

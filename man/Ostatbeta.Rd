@@ -20,5 +20,5 @@ A list with \code{pdf}, \code{cdf}, \code{mean}, \code{var}, \code{alpha}, \code
 }
 \keyword{internal}
 \examples{
-Ostatbeta(u = 0.3, r = 2, n = 5)
+rmorie:::Ostatbeta(u = 0.3, r = 2, n = 5)
 }

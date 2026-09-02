@@ -23,5 +23,5 @@ A list with \code{S}, \code{S_beta}, \code{nu}, \code{nu_beta}, \code{var_y}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_brr_hyper(V)
+rmorie:::morie_brr_hyper(V)
 }

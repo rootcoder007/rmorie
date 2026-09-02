@@ -20,5 +20,5 @@ A list with \code{n}, \code{n_raw}, \code{root_n}, \code{z_alpha}, \code{z_beta}
 }
 \keyword{internal}
 \examples{
-Signn(theta = 0.05)
+rmorie:::Signn(theta = 0.05)
 }

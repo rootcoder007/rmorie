@@ -21,5 +21,5 @@ A list with \code{variance}, \code{se}, \code{mean}, \code{n_subsets}, \code{n},
 \keyword{internal}
 \examples{
 set.seed(4)
-Jackd(theta = rnorm(10, 2, 0.1), n = 10, d = 1)
+rmorie:::Jackd(theta = rnorm(10, 2, 0.1), n = 10, d = 1)
 }

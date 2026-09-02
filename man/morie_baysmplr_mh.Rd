@@ -50,11 +50,11 @@ lp3 <- function(x) {
     }
     -0.5 * .w3_csum(terms)
 }
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
-e <- .ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
+e <- rmorie:::.ghc_rng(13)
 morie_baysmplr_mh(lp3, c(0, 0, 0), 60L, e)
 }

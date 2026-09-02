@@ -20,5 +20,5 @@ A list with \code{Lplus}, \code{eigenvalues}, \code{rank}, \code{n}.
 \keyword{internal}
 \examples{
 A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
-Lappinv(A)
+rmorie:::Lappinv(A)
 }

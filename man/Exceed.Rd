@@ -21,5 +21,5 @@ A list with \code{pmf}, \code{pmf_j}, \code{cdf_j}, \code{mean}, \code{var}, \co
 }
 \keyword{internal}
 \examples{
-Exceed(i = 5L, m = 5L, n = 5L)
+rmorie:::Exceed(i = 5L, m = 5L, n = 5L)
 }

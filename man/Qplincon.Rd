@@ -20,5 +20,5 @@ A list with \code{x}, \code{alpha}, \code{dual_quadratic}, \code{dual_linear}, \
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Qplincon(V, V)
+rmorie:::Qplincon(V, V)
 }

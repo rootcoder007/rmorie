@@ -21,5 +21,5 @@ A numeric value.
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 S <- c("a", "b", "c")
-morie_mll(V, S)
+rmorie:::morie_mll(V, S)
 }

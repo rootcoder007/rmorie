@@ -20,5 +20,5 @@ A list with \code{edf}, \code{count}, \code{n}, \code{sorted}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Edfstep(V, V)
+rmorie:::Edfstep(V, V)
 }

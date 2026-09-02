@@ -20,5 +20,5 @@ A list with \code{support}, \code{pmf}, \code{cdf}, \code{pmf_r}, \code{cdf_r}, 
 }
 \keyword{internal}
 \examples{
-Runstab(n1 = 5L, n2 = 5L)
+rmorie:::Runstab(n1 = 5L, n2 = 5L)
 }

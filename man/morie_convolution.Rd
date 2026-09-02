@@ -30,5 +30,5 @@ tests in \code{tests/testthat/}.
 \examples{
 img <- matrix(1:16, 4, 4)
 k <- matrix(c(1, 0, 0, -1), 2, 2)
-morie_conv2d(img, k)
+rmorie:::morie_conv2d(img, k)
 }

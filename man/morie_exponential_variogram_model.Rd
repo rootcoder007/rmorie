@@ -22,5 +22,5 @@ A list with \code{gamma}, \code{covariance}, \code{h}, \code{c0}, \code{c}, \cod
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_exponential_variogram_model(V)
+rmorie:::morie_exponential_variogram_model(V)
 }

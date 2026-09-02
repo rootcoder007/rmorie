@@ -19,5 +19,5 @@ A list with \code{efficacy}, \code{deriv}, \code{var}.
 }
 \keyword{internal}
 \examples{
-Efficacy(deriv = c(1, 2, 3, 4, 5, 6, 7, 8), var = 5L)
+rmorie:::Efficacy(deriv = c(1, 2, 3, 4, 5, 6, 7, 8), var = 5L)
 }

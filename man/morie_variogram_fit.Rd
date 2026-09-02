@@ -23,5 +23,5 @@ A list with \code{c0}, \code{c}, \code{a}, \code{sill}, \code{model}, \code{lag}
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_variogram_fit(V, V)
+rmorie:::morie_variogram_fit(V, V)
 }

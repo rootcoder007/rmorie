@@ -20,5 +20,5 @@ A list with \code{estimate}, \code{se}, \code{mean_y10}, \code{mean_y00}, \code{
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ndeff(V, V)
+rmorie:::Ndeff(V, V)
 }

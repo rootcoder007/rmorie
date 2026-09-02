@@ -19,6 +19,6 @@ The value of \code{repeat}.
 }
 \keyword{internal}
 \examples{
-e <- .ghc_rng(1)
+e <- rmorie:::.ghc_rng(1)
 poltrx_gamma(e, shape = 2.5)
 }
