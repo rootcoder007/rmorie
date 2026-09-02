@@ -20,6 +20,8 @@
 #'   Sciences 2(1), 183-202, Section 4.  Standard published form of FISTA;
 #'   the SIAM article itself is paywalled and was not read.
 #' @export
+#' @examples
+#' Fistalasso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Fistalasso <- function(X, y, lam, steps = 100, lipschitz = NULL) {
   Xm <- .t1_mat(X); y <- .t1_vec(y)
   lam <- as.numeric(lam); steps <- as.integer(steps)

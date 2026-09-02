@@ -11,7 +11,7 @@ GcnII(A, H0, alpha = 0.1, beta = 0.5, K = 4)
 
 \item{H0}{Initial node representation, one row per node.}
 
-\item{alpha}{Initial-residual weight in [0, 1].}
+\item{alpha}{Initial-residual weight in \link{0, 1}.}
 
 \item{beta}{Identity-mapping weight, retained for the interface.}
 
@@ -32,13 +32,13 @@ weight is passed -- the second bracket collapses to I for every beta.
 Formula: H <- relu((1 - alpha) Ah H + alpha H0), repeated K times,
 with Ah = Dt^{-1/2}(A + I)Dt^{-1/2}.
 }
-\references{
-Chen, Wei, Huang, Ding and Li (2020), Simple and deep
-graph convolutional networks, ICML 2020, PMLR 119:1725-1735, eq.
-(3). arXiv:2007.02133
-}
 \examples{
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 H0 <- matrix(rnorm(6), 3, 2)
 GcnII(A, H0)
+}
+\references{
+Chen, Wei, Huang, Ding and Li (2020), Simple and deep
+graph convolutional networks, ICML 2020, PMLR 119:1725-1735, eq.
+(3). arXiv:2007.02133
 }

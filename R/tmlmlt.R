@@ -21,6 +21,8 @@
 #' @references Lendle, S. D. et al. (2017). Journal of Statistical
 #'   Software 81(1).
 #' @export
+#' @examples
+#' Tmlmlt(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), arm_set = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmlt <- function(y, D, X, arm_set) {
   yv <- as.numeric(y); Dv <- as.numeric(D); arms <- as.numeric(arm_set)
   n <- length(yv); k <- length(arms)

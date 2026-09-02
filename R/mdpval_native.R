@@ -68,6 +68,8 @@
 #' @references Sutton, R. S. and Barto, A. G. (2018). Reinforcement
 #'   Learning: An Introduction, 2nd ed. MIT Press, Section 4.4.
 #' @export
+#' @examples
+#' morie_mdpval(P = 1, R = 5L, gamma = 0.5)
 morie_mdpval <- function(P, R, gamma, tol = 1e-10, max_iter = 100000,
                          V0 = NULL) {
   z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A

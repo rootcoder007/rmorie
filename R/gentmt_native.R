@@ -133,6 +133,7 @@
 #' @param ridge Ridge added to the information matrix.
 #' @return A list with \code{coef} and \code{fitted}.
 #' @keywords internal
+#' @noRd
 .gentmt_logit_irls <- function(y, Z, max_iter = 60L, ridge = 1e-8) {
   y <- as.numeric(y)
   Z <- as.matrix(Z)

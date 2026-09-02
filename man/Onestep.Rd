@@ -35,6 +35,10 @@ step unstable.
 Formula: theta_1 = theta_0 + (P_n psi_\{theta_0\}) / (-P_n psi'_\{theta_0\}),
 psi'(u) = -1 (mean), -1\{|u| <= k\} (Huber)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Onestep(V, V)
+}
 \references{
 Kosorok (2008), Introduction to Empirical Processes and
 Semiparametric Inference, Section 2.2.5, for the Z-estimator
@@ -46,7 +50,3 @@ Wellner (1993), Efficient and Adaptive Estimation for Semiparametric
 Models, Section 2.5.
 }
 \keyword{internal}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Onestep(V, V)
-}

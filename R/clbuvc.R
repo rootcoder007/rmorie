@@ -19,6 +19,10 @@
 #' @references Cheng, Hao, Dai, Liu, Gan & Carin (2020), CLUB, ICML
 #'   119:1779-1788.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Clbuvc(V, D)
 Clbuvc <- function(x, y, q = NULL) {
   xs <- .s03vec(x); ys <- .s03vec(y)
   n <- length(xs)

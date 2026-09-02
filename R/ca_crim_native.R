@@ -12,6 +12,9 @@
 #' @param y Numeric response vector, same length as x.
 #' @return List with b1, b0, r, se_b1, t, t_from_r, df, n.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ols_simple(V, V)
 morie_ols_simple <- function(x, y) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -39,6 +42,9 @@ morie_ols_simple <- function(x, y) {
 #' @param s_y,s_1,s_2 Standard deviations of y, x1, x2.
 #' @return List with b1 and b2.
 #' @export
+#' @examples
+#' morie_ols_two_iv(r_y1 = 0.5, r_y2 = 0.35, r_12 = 0.3,
+#'                  s_y = 10, s_1 = 2, s_2 = 4)
 morie_ols_two_iv <- function(r_y1, r_y2, r_12, s_y, s_1, s_2) {
   stopifnot(abs(r_12) < 1)
   den <- 1 - r_12^2
@@ -58,6 +64,9 @@ morie_ols_two_iv <- function(r_y1, r_y2, r_12, s_y, s_1, s_2) {
 #' @param k Number of independent variables.
 #' @return List with variances, sums of squares, r2, adj_r2, f_from_r2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_fit_indices(V, V)
 morie_fit_indices <- function(y, yhat, k = 1) {
   y <- as.numeric(y)
   yhat <- as.numeric(yhat)
@@ -89,6 +98,9 @@ morie_fit_indices <- function(y, yhat, k = 1) {
 #' @return List with f_ss (df n - k_full) and f_r2 (df n - k_full - 1);
 #'   either pair of inputs may be NA to skip that form.
 #' @export
+#' @examples
+#' morie_f_change(ss_resid_restricted = 480, ss_resid_full = 400,
+#'                k_full = 5, k_restricted = 3, n = 100)
 morie_f_change <- function(ss_resid_restricted = NA, ss_resid_full = NA,
                            r2_full = NA, r2_restricted = NA,
                            k_full, k_restricted, n) {
@@ -122,6 +134,9 @@ morie_f_change <- function(ss_resid_restricted = NA, ss_resid_full = NA,
 #' @param gelman If TRUE use two times s_x (dummy-variable convention).
 #' @return Numeric Beta.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_std_coef(V, V)
 morie_std_coef <- function(b, s_x, s_y = NULL, gelman = FALSE) {
   stopifnot(s_x > 0)
   if (is.null(s_y)) {
@@ -138,6 +153,8 @@ morie_std_coef <- function(b, s_x, s_y = NULL, gelman = FALSE) {
 #' @param r2_x R squared from regressing the predictor on the others.
 #' @return List with tolerance and vif.
 #' @export
+#' @examples
+#' morie_vif_tolerance(r2_x = 0.65)
 morie_vif_tolerance <- function(r2_x) {
   stopifnot(r2_x >= 0, r2_x < 1)
   tol <- 1 - r2_x
@@ -155,6 +172,8 @@ morie_vif_tolerance <- function(r2_x) {
 #' @param b Logistic regression coefficient.
 #' @return List with logit(p), odds(p), p_from_xb, odds_ratio.
 #' @export
+#' @examples
+#' morie_logit_link()
 morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
   stopifnot(p > 0, p < 1)
   list(
@@ -177,6 +196,10 @@ morie_logit_link <- function(p = 0.5, xb = 0, b = 0) {
 #' @param n Sample size for Cox and Snell.
 #' @return List of the named statistics.
 #' @export
+#' @examples
+#' morie_logistic_effects(ybar = 0.3, b = 0.8, se = 0.25,
+#'                        n_correct = 78, n_total = 100,
+#'                        neg2ll_null = 240, neg2ll_full = 215, n = 100)
 morie_logistic_effects <- function(ybar, b, se, n_correct, n_total,
                                    neg2ll_null, neg2ll_full,
                                    neg2ll_reduced = NA, n = NA) {
@@ -201,6 +224,9 @@ morie_logistic_effects <- function(ybar, b, se, n_correct, n_total,
 #' @return List with probs and a function-free or_matrix of pairwise
 #'   conditional odds ratios.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mlogit_probs(V)
 morie_mlogit_probs <- function(xbs) {
   xbs <- as.numeric(xbs)
   z <- exp(xbs - max(xbs))
@@ -220,6 +246,9 @@ morie_mlogit_probs <- function(xbs) {
 #' @param xb Linear predictor value.
 #' @return List with cum_prob, cum_logit, logit_plus, logit_minus.
 #' @export
+#' @examples
+#' morie_ordinal_logit_ca(probs = c(0.2, 0.5, 0.3), m = 2,
+#'                        tau_m = 1.1, xb = 0.4)
 morie_ordinal_logit_ca <- function(probs, m, tau_m = 0, xb = 0) {
   probs <- as.numeric(probs)
   stopifnot(
@@ -248,6 +277,8 @@ morie_ordinal_logit_ca <- function(probs, m, tau_m = 0, xb = 0) {
 #' @param mu,alpha Negative binomial terms.
 #' @return List of the named quantities.
 #' @export
+#' @examples
+#' morie_count_glm()
 morie_count_glm <- function(b0 = 0, b1 = 0, x1 = 0, exposure = 1,
                             y = NULL, yhat = NULL, k = 1, se = NA,
                             mu = NA, alpha = NA) {
@@ -282,6 +313,9 @@ morie_count_glm <- function(b0 = 0, b1 = 0, x1 = 0, exposure = 1,
 #' @param ll_null,ll_full Log-likelihoods.
 #' @return List with sigma2_u, icc, lr_chi2.
 #' @export
+#' @examples
+#' morie_hlm_components(ms_between = 40, ms_within = 10, n_per_cluster = 12,
+#'                      ll_null = -520, ll_full = -505)
 morie_hlm_components <- function(ms_between, ms_within, n_per_cluster,
                                  ll_null = NA, ll_full = NA) {
   stopifnot(n_per_cluster > 0)
@@ -318,6 +352,8 @@ morie_hlm_components <- function(ms_between, ms_within, n_per_cluster,
 #' @param n Sample size for the r delta.
 #' @return List with delta_d, t_beta, beta, power, lambda, delta_r, r2_f2.
 #' @export
+#' @examples
+#' morie_power_ttest_crim()
 morie_power_ttest_crim <- function(d = NA, n1 = NA, n2 = NA, t_cv = NA,
                                    df = NA, f = NA, n_total = NA,
                                    r = NA, n = NA) {
@@ -356,6 +392,8 @@ morie_power_ttest_crim <- function(d = NA, n1 = NA, n2 = NA, t_cv = NA,
 #' @return List with b_t, b_t_random, t, df, chi2, t_paired, df_paired
 #'   (only the pieces whose inputs were supplied).
 #' @export
+#' @examples
+#' morie_rct_tests()
 morie_rct_tests <- function(r_yt = NA, r_yx = NA, r_tx = NA, s_y = NA,
                             s_t = NA, m1 = NA, m2 = NA, s1 = NA, s2 = NA,
                             n1 = NA, n2 = NA, a = NA, b = NA, c = NA,
@@ -399,6 +437,8 @@ morie_rct_tests <- function(r_yt = NA, r_yx = NA, r_tx = NA, s_y = NA,
 #' @param y,treatment,block Long-format vectors (block form).
 #' @return List with the one-way and, when supplied, block results.
 #' @export
+#' @examples
+#' morie_experiment_anova()
 morie_experiment_anova <- function(groups = NULL, y = NULL,
                                    treatment = NULL, block = NULL) {
   out <- list()
@@ -451,6 +491,8 @@ morie_experiment_anova <- function(groups = NULL, y = NULL,
 #' @param s_t,s_c Group SDs.
 #' @return Numeric bias in percent.
 #' @export
+#' @examples
+#' morie_psm_balance(mean_t = c(1, 2, 3, 4, 5, 6, 7, 8), mean_c = c(1, 2, 3, 4, 5, 6, 7, 8), s_t = c(1, 2, 3, 4, 5, 6, 7, 8), s_c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_psm_balance <- function(mean_t, mean_c, s_t, s_c) {
   stopifnot(s_t >= 0, s_c >= 0, s_t + s_c > 0)
   100 * (mean_t - mean_c) / sqrt((s_t^2 + s_c^2) / 2)
@@ -469,6 +511,8 @@ morie_psm_balance <- function(mean_t, mean_c, s_t, s_c) {
 #' @param r Correlation.
 #' @return List of the named effect sizes and standard errors.
 #' @export
+#' @examples
+#' morie_meta_effect_sizes()
 morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
                                     n1 = NA, n2 = NA, t_value = NA,
                                     a = NA, b = NA, c = NA, d = NA,
@@ -525,6 +569,8 @@ morie_meta_effect_sizes <- function(m1 = NA, m2 = NA, s1 = NA, s2 = NA,
 #'   @param se_r Its standard error.
 #' @return List of every conversion whose inputs were supplied.
 #' @export
+#' @examples
+#' morie_meta_convert()
 morie_meta_convert <- function(ln_or = NA, se_ln_or = NA, p1 = NA,
                                p2 = NA, n1 = NA, n2 = NA, d = NA,
                                se_d = NA, rr = NA, or_value = NA,
@@ -593,6 +639,9 @@ morie_meta_convert <- function(ln_or = NA, se_ln_or = NA, p1 = NA,
 #' @return List with weights, mean, se, z, ci, q, df, i2, tau2,
 #'   weights_random, and q_within / q_between when groups are given.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_meta_pool(V, V)
 morie_meta_pool <- function(ys, ses, z_cv = 1.96, groups = NULL) {
   ys <- as.numeric(ys)
   ses <- as.numeric(ses)
@@ -639,6 +688,11 @@ morie_meta_pool <- function(ys, ses, z_cv = 1.96, groups = NULL) {
 #' @param e Error vector.
 #' @return Numeric y vector satisfying the SAR equation.
 #' @export
+#' @examples
+#' set.seed(5)
+#' W <- matrix(0, 5, 5)
+#' W[abs(row(W) - col(W)) == 1] <- 0.5
+#' morie_sar_lag(rho = 0.3, w = W, xb = rnorm(5), e = rnorm(5, 0, 0.2))
 morie_sar_lag <- function(rho, w, xb, e) {
   w <- as.matrix(w)
   xb <- as.numeric(xb)

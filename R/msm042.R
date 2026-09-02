@@ -17,6 +17,8 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eqs. (6.1)-(6.2) p.172. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' Msm042(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
 Msm042 <- function(X, y, add_intercept = TRUE) {
   f <- .gpolsfit(X, y, add_intercept = add_intercept)
   df <- length(.gpflat(y)) - length(f$beta)

@@ -29,14 +29,14 @@ support, each between the base period \code{g - 1} and period
 \code{g + e}, against the never-treated units.  Pre-treatment cells
 are computed on identical footing and returned rather than suppressed.
 }
+\examples{
+set.seed(1)
+r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+}
 \references{
 Callaway, B. and Sant'Anna, P. H. C. (2021). Journal of
 Econometrics 225(2), 200-230.  Sant'Anna, P. H. C. and Zhao, J.
 (2020). Journal of Econometrics 219(1), 101-122, equation (2.6).
 Roth, J. and Sant'Anna, P. H. C. (2023). Journal of Political
 Economy Microeconomics 1(4), 669-709.
-}
-\examples{
-set.seed(1)
-r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
 }

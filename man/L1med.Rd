@@ -27,11 +27,11 @@ sum of unit vectors to the data points vanishes.
 Formula: \code{min_mu sum_i ||x_i - mu||}, by Weiszfeld iteration for
 a fixed number of steps.
 }
-\references{
-Weiszfeld, E. (1937). Tohoku Math J 43:355-386; Small,
-C. G. (1990) Int Statist Rev 58:263-277.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 L1med(V)
+}
+\references{
+Weiszfeld, E. (1937). Tohoku Math J 43:355-386; Small,
+C. G. (1990) Int Statist Rev 58:263-277.
 }

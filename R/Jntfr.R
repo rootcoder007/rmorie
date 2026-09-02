@@ -33,6 +33,10 @@
 #'   recurrent events and a terminal event, Biometrics 60(3):747-756.
 #'   \doi{10.1111/j.0006-341X.2004.00225.x}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Jntfr(time = rexp(30), event = rbinom(30, 1, 0.7),
+#'       terminal = rbinom(30, 1, 0.3), cluster = rep(1:10, 3))
 Jntfr <- function(time, event, terminal, cluster, sweeps = 4) {
   tv <- .s03vec(time); n <- length(tv)
   if (n == 0L) stop("joint_frailty: time is empty")

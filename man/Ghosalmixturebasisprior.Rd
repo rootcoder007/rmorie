@@ -30,11 +30,11 @@ domain.
 Formula: w ~ Dirichlet(1, ..., 1) by gamma normalisation,
 theta_k ~ U(0, 1), f(x) = sum_k w_k phi((x - theta_k)/h) / h.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.3.3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalmixturebasisprior(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.3.3.
 }

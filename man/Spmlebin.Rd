@@ -36,7 +36,7 @@ morie_horowitz_semipar_mle_binary(
 
 \item{trim}{Numeric density trimming constant defining A_x.}
 
-\item{floor}{Numeric; Ghat is clipped into [floor, 1-floor].}
+\item{floor}{Numeric; Ghat is clipped into \link{floor, 1-floor}.}
 
 \item{niter}{Integer sweeps of the coordinate search.}
 

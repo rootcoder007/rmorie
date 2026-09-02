@@ -9,6 +9,8 @@
 #' @return List with ``capacity_bits``, ``capacity_nats``, ``input_dist``, ``trace`` (nats per iteration), ``iterations``.
 #' @references Blahut (1972), Computation of channel capacity and rate-distortion functions, IEEE Transactions on Information Theory 18:460-473; Arimoto (1972), same volume, 14-20. Neither is held locally; the alternating update is the standard published form of the algorithm.
 #' @export
+#' @examples
+#' Chancap(P = 1)
 Chancap <- function(P, iters = 200) {
   P <- as.matrix(P); m <- nrow(P); n <- ncol(P)
   if (any(P < 0)) stop("channel probabilities must be non-negative")

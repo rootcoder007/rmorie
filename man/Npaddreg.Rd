@@ -39,7 +39,7 @@ h1, h2, d, n, method.
 Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 3.1.1, equations (3.6) to (3.9) (pages 55-57).
 For E(Y|X=x) = mu + m_1(x^1) + ... + m_d(x^d) the decomposition is
-unique only after the location normalisation E[m_j(X^j)] = 0 (3.6);
+unique only after the location normalisation E\link{m_j(X^j)} = 0 (3.6);
 then E(Y) = mu (3.7) and
 }
 \details{

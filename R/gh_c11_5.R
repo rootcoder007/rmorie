@@ -17,6 +17,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Theorems 11.20 and 11.22.
 #' @export
+#' @examples
+#' Ghosalgpbinregcrt()
 Ghosalgpbinregcrt <- function(s = 2, d = 1, ns = c(100, 10000)) {
   s <- as.numeric(s); d <- as.numeric(d); ns <- as.numeric(ns)
   if (s <= 0) stop("s must be positive")

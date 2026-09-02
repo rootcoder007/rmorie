@@ -31,6 +31,11 @@
 #'   (2018), arXiv:1802.09720, Sec 1.5 (local:
 #'   fetched-wave3/sisson-2018-abc-overview.pdf).
 #' @export
+#' @examples
+#' sim <- function(theta, e) theta[1] + 0.1 * .ghc_norm(e, 1L)
+#' r <- Abcrej(sim, obs = 1.5, eps = 0.3, prior = list(c(0, 3)),
+#'             n_draws = 400)
+#' str(r, max.level = 1)
 Abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0L) {
   obs <- as.numeric(obs)
   eps <- as.numeric(eps)[1]
@@ -83,6 +88,13 @@ Abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0L) {
 #'   UP, 395-402; Smith, A. F. M. and Gelfand, A. E. (1992), The
 #'   American Statistician 46(2), 84-88.
 #' @export
+#' @examples
+#' set.seed(1)
+#' xs <- rnorm(500, 0, 2)
+#' r <- Bayisr(xs, log_target = function(x) -0.5 * x^2,
+#'             log_proposal = function(x) -0.5 * (x / 2)^2 - log(2),
+#'             m = 100)
+#' str(r, max.level = 1)
 Bayisr <- function(samples, log_target, log_proposal, m, seed = 0L) {
   xs <- if (is.list(samples)) samples else as.list(as.numeric(samples))
   n <- length(xs)
@@ -127,6 +139,14 @@ Bayisr <- function(samples, log_target, log_proposal, m, seed = 0L) {
 #'   6, 831-860, eq. (3.5), Sec. 4 (local:
 #'   fetched-wave3/meng-wong-1996-bridge-sampling-statsinica.pdf).
 #' @export
+#' @examples
+#' set.seed(2)
+#' d1 <- rnorm(400, 0, 1)
+#' d2 <- rnorm(400, 0.5, 1.2)
+#' r <- Bridgs(d1, d2,
+#'             log_q1 = function(x) -0.5 * x^2,
+#'             log_q2 = function(x) -0.5 * ((x - 0.5) / 1.2)^2)
+#' str(r, max.level = 1)
 Bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
                    max_iter = 1000L) {
   d1 <- if (is.list(draws1)) draws1 else as.list(as.numeric(draws1))
@@ -183,6 +203,10 @@ Bridgs <- function(draws1, draws2, log_q1, log_q2, tol = 1e-12,
 #'   fetched-wave3/hukushima-nemoto-1996-exchange-mc.pdf); Metropolis
 #'   et al. (1953), J. Chem. Phys. 21, 1087-1092.
 #' @export
+#' @examples
+#' r <- Ptmcmc(function(x) -0.5 * ((x - 1)^2) * ((x + 1)^2),
+#'             temperatures = c(1, 2, 4), x0 = 0, n_iter = 400)
+#' str(r, max.level = 1)
 Ptmcmc <- function(log_p, temperatures, x0, n_iter = 1000L, step = 1,
                    seed = 0L, swap_every = 1L) {
   temps <- as.numeric(temperatures)

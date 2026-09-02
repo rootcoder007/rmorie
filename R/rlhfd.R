@@ -7,6 +7,9 @@
 #' @param b Numeric bias (default 0).
 #' @return Named list with value, tensor, w, b, method.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rlhf_reward(V)
 rlhf_reward <- function(x, w = NULL, b = 0) {
   xm <- as.matrix(x)
   d <- ncol(xm)

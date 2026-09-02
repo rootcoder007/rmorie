@@ -20,6 +20,9 @@
 #' @references Pollard, D. (1982). IEEE Transactions on Information Theory
 #'   28(2):199-205. \doi{10.1109/TIT.1982.1056481}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otmqd(V, V)
 Otmqd <- function(X, centroids) {
   A <- as.matrix(X); Cn <- as.matrix(centroids)
   n <- nrow(A); K <- nrow(Cn); d <- ncol(A)

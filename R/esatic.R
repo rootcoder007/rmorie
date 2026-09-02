@@ -26,6 +26,10 @@
 #'   Adaptive Testing (2010), which this row cites; that chapter was NOT
 #'   obtainable, so the package source is used as the reference.
 #' @export
+#' @examples
+#' items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
+#'                 3, 4, byrow = TRUE)
+#' Eapinfo(items, x = c(1, 0, 1))
 Eapinfo <- function(items, x, D = 1, prior_mean = 0, prior_sd = 1,
                     lower = -4, upper = 4, nqp = 33) {
   It <- as.matrix(items); J <- nrow(It)

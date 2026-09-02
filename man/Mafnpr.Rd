@@ -29,11 +29,11 @@ Formula: points \code{(y_i, se_i)}; contour \code{theta_FE +-
 z_{1-alpha/2} se} with \code{theta_FE = sum(y_i/v_i)/sum(1/v_i)} --
 Light and Pillemer (1984), Chapter 3.
 }
-\references{
-Light, R. J. and Pillemer, D. B. (1984). Summing Up: The
-Science of Reviewing Research. Harvard University Press, Chapter 3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Mafnpr(V, V)
+}
+\references{
+Light, R. J. and Pillemer, D. B. (1984). Summing Up: The
+Science of Reviewing Research. Harvard University Press, Chapter 3.
 }

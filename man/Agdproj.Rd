@@ -26,12 +26,12 @@ clamp: x_k = clamp(y_k - grad f(y_k)/L),
 t_{k+1} = (1 + sqrt(1 + 4 t_k^2))/2,
 y_{k+1} = x_k + ((t_k-1)/t_{k+1})(x_k - x_{k-1}).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Agdproj(V, V)
+}
 \references{
 Beck and Teboulle (2009), SIAM J. Imaging Sci. 2(1),
 183-202.  Standard published form; the SIAM article is paywalled and
 was not read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Agdproj(V, V)
 }

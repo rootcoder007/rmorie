@@ -22,6 +22,8 @@
 #'   Computer Science 9(3-4):211-407, Theorem A.1.
 #'   \doi{10.1561/0400000042}
 #' @export
+#' @examples
+#' Gaussm(c(1, 2, 3), l2_sens = 1, epsilon = 0.5, delta = 1e-5)
 Gaussm <- function(f_value, l2_sens, epsilon, delta, draw = 1) {
   fv <- .s03vec(f_value)
   if (length(fv) == 0L) stop("gaussian_mechanism: f_value is empty")

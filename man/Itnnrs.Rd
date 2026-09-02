@@ -34,14 +34,14 @@ of the class respondent means.
 \details{
 Formula: f_c = W_c / W_c(respondents).
 }
-\references{
-Kalton and Flores-Cervantes (2003), Weighting methods,
-Journal of Official Statistics 19(2):81-97.
-}
 \examples{
 set.seed(1)
 X <- matrix(rep(1:2, each = 10), 20, 1)
 R <- rep(1, 20)
 R[c(3, 7, 15)] <- 0
 Itnnrs(y = rnorm(20), R = R, X = X)
+}
+\references{
+Kalton and Flores-Cervantes (2003), Weighting methods,
+Journal of Official Statistics 19(2):81-97.
 }

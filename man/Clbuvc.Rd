@@ -19,7 +19,7 @@ List with \code{estimate}, \code{club}, \code{positive},
 \code{mi_gauss}, \code{n}, \code{method}.
 }
 \description{
-Formula: I_CLUB = E[log q(y|x)] - E_marg[log q(y|x)]
+Formula: I_CLUB = E\link{log q(y|x)} - E_marg\link{log q(y|x)}
 }
 \details{
 The second term averages the SAME conditional density over
@@ -28,12 +28,12 @@ matched and mismatched likelihoods.  It is an upper bound on I(X;Y)
 whenever q equals the true conditional.  With a Gaussian q fitted by
 least squares the value has the closed form b^2 var(x) / sigma2.
 }
-\references{
-Cheng, Hao, Dai, Liu, Gan & Carin (2020), CLUB, ICML
-119:1779-1788.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 Clbuvc(V, D)
+}
+\references{
+Cheng, Hao, Dai, Liu, Gan & Carin (2020), CLUB, ICML
+119:1779-1788.
 }

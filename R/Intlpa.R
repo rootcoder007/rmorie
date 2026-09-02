@@ -22,6 +22,9 @@
 #'   \doi{10.1007/BF02579150}; Boyd and Vandenberghe (2004), Convex
 #'   Optimization, CUP, sect. 11.2.
 #' @export
+#' @examples
+#' Intlpa(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
+#'        b = c(4, 2, 3), x0 = c(0.5, 0.5))
 Intlpa <- function(c, A, b, x0, tau = 0.01, iters = 60) {
   cv <- .s03vec(c); M <- .s03mat(A); bv <- .s03vec(b); x <- .s03vec(x0)
   m <- nrow(M); n <- length(cv)

@@ -28,12 +28,12 @@ the normal-theory interval at level alpha'.  Sec. 2.2:
 z}{1-alpha'} equals the (1-2a)-quantile of |t*|, so the result IS
 the bootstrap-t interval; the identity gap is reported.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_btcalib(V)
+}
 \references{
 Loh, W.-Y. (1991). Bootstrap calibration for
 confidence interval construction and selection. Statistica
 Sinica, 1(2), 477-491.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_btcalib(V)
 }

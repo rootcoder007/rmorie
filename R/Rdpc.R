@@ -20,6 +20,8 @@
 #'   Table II.
 #'   Local source: fetched-wave3/mironov-2017-renyi-differential-privacy-arxiv1702.07476.pdf
 #' @export
+#' @examples
+#' Rdpc(alpha = 2, sigma = 1.0)
 Rdpc <- function(alpha, sigma, sensitivity = 1) {
   alpha <- as.numeric(alpha)
   sigma <- as.numeric(sigma)

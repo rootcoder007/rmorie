@@ -16,6 +16,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalntrdef(V)
 Ghosalntrdef <- function(increments, seed = 42) {
   inc <- as.numeric(increments)
   if (length(inc) == 0L) stop("increments must be non-empty")

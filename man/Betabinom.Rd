@@ -25,11 +25,11 @@ C(n,y) B(alpha+y, beta+n-y)/B(alpha, beta); the posterior predictive
 over m trials has mean m p and variance m p (1-p)(m+s)/(s+1) with
 s the posterior shape total.
 }
+\examples{
+Betabinom(y = 5L, n = 5L)
+}
 \references{
 Gelman et al. (2013), Bayesian Data Analysis, 3rd edn,
 Sects. 2.4-2.5 and Appendix A.  Standard published form; the book is
 not in the local corpus and was not read.
-}
-\examples{
-Betabinom(y = 5L, n = 5L)
 }

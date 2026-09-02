@@ -28,11 +28,11 @@ than dividing by zero.
 \details{
 Formula: h_i' = relu(sum_r sum_{j in N_i^r} W_r h_j / |N_i^r| + W_0 h_i).
 }
+\examples{
+Kgnn(A_r = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, W_r = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Schlichtkrull, Kipf, Bloem, van den Berg, Titov and
 Welling (2018), Modeling relational data with graph convolutional
 networks, ESWC 2018, eq. (2). arXiv:1703.06103
-}
-\examples{
-Kgnn(A_r = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, W_r = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

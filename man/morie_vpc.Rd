@@ -21,11 +21,11 @@ as a thresholded latent variable, the level-1 latent variance is
 pi^2/3 = 3.29 for the logit link (1 for probit), so
 VPC = sigma2_u / (sigma2_u + pi^2/3).
 }
+\examples{
+morie_vpc(sigma2_u = 5L)
+}
 \references{
 Goldstein, H., Browne, W. and Rasbash, J. (2002).
 Partitioning variation in multilevel models. Understanding
 Statistics, 1(4), 223-231.
-}
-\examples{
-morie_vpc(sigma2_u = 5L)
 }

@@ -24,11 +24,11 @@ For \eqn{(\pi_1, \ldots, \pi_k) \sim Dir(\alpha)} with
 computed from the formula for distinct cells; passing
 \code{j == jp} therefore does not reproduce the variance.
 }
+\examples{
+morie_gh_dirichlet_moments(alpha = 0.5, j = c(1, 2, 3, 4, 5, 6, 7, 8), jp = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-morie_gh_dirichlet_moments(alpha = 0.5, j = c(1, 2, 3, 4, 5, 6, 7, 8), jp = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

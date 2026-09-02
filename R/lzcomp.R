@@ -15,6 +15,9 @@
 #' @references Lempel, A. & Ziv, J. (1976). IEEE Trans Inform Theory
 #'   22:75-81.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Lzcomp(V)
 Lzcomp <- function(y) {
   s <- as.character(as.numeric(unlist(y))); n <- length(s)
   i <- 0L; k <- 1L; l <- 1L; c_ <- 1L; kmax <- 1L

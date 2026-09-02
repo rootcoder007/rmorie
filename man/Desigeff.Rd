@@ -29,10 +29,10 @@ correlation and m0 the Kish average cluster size.  The reported DEFF
 is their product.  Equal weights give DEFF_w = 1 exactly, and
 singleton clusters give DEFF_c = 1 exactly.
 }
-\references{
-Kish (1965), Survey Sampling, Wiley, sections 8.2 and 5.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Desigeff(V)
+}
+\references{
+Kish (1965), Survey Sampling, Wiley, sections 8.2 and 5.4.
 }

@@ -17,6 +17,9 @@
 #' @references Zinbarg, Revelle, Yovel & Li (2005) Psychometrika
 #'   70:123-133; McDonald, R. P. (1999), Test Theory, ch 6.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Omegah(V, V)
 Omegah <- function(X, loadings_g, loadings_specific = NULL) {
   lg <- as.numeric(loadings_g); p <- length(lg)
   ls <- if (is.null(loadings_specific)) rep(0, p) else as.numeric(loadings_specific)

@@ -25,6 +25,10 @@
 #'   Gelman, Jones and Meng (eds), Handbook of Markov Chain Monte Carlo,
 #'   CRC Press, ch. 5. \doi{10.1201/b10905}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Hmcsam(function(x) -0.5 * sum(x^2), function(x) -x, x0 = c(0, 0),
+#'        n_iter = 50)
 Hmcsam <- function(log_p, grad_log_p, x0, step_size = 0.1, L = 10, n_iter = 200) {
   x <- .s03vec(x0)
   d <- length(x)

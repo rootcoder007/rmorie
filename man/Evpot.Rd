@@ -27,12 +27,12 @@ sigma(t) = xi(t)/t, leaving a single bounded search.  The exponential
 its likelihood is higher.  The modified scale sigma - xi u is
 reported: it is invariant to the threshold when the GPD model holds.
 }
-\references{
-Davison & Smith (1990), JRSS B 52(3):393-442;
-Grimshaw (1993), Technometrics 35(2):185-191.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Evpot(V, M)
+}
+\references{
+Davison & Smith (1990), JRSS B 52(3):393-442;
+Grimshaw (1993), Technometrics 35(2):185-191.
 }

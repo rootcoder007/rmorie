@@ -20,6 +20,9 @@
 #'   Quarterly Journal of Economics 119(1), 249-275.  Sant'Anna, P. H. C.
 #'   and Zhao, J. (2020). Journal of Econometrics 219(1), 101-122.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Drclt(V, V)
 Drclt <- function(y, D, X = NULL, cluster = NULL) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drclt: empty input, y has no observations")

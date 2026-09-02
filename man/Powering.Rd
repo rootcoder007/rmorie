@@ -19,13 +19,13 @@ List with \code{composition}, \code{a}, \code{total}, \code{D}.
 \description{
 Formula: a (.) x = C( x_1^a, ..., x_D^a )
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Powering(V, V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 2. Verified against the reference implementation in the
 CRAN package compositions 2.0-9, whose power operator on an acomp
 closes the elementwise power.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Powering(V, V)
 }

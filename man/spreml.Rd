@@ -46,10 +46,10 @@ There is no REML estimator of the mean. The text is explicit on this: the
 mean is recovered afterwards by evaluating the generalized least squares
 estimator (4.40) at theta_reml, which is what \code{mean} reports.
 }
-\references{
-Schabenberger Ch 4, Sec 4.5.2
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 spreml(V, V)
+}
+\references{
+Schabenberger Ch 4, Sec 4.5.2
 }

@@ -15,6 +15,19 @@ morie_estimate_cate(
 )
 }
 \arguments{
+\item{data}{A vector; indexed elementwise.}
+
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
+
+\item{outcome}{See Usage.}
+
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
+
+\item{propensity_col}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+
+\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\code{"logistic"}.}
+
 \item{meta_learner}{One of \code{"t_learner"} (default), \code{"s_learner"},
 \code{"x_learner"} (Kuenzel et al. 2019 — two-stage with
 propensity-weighted combination; strong under arm imbalance), or

@@ -44,12 +44,12 @@ routes of (transmission rate) x (probability of entering the route) x
 (mean time spent in it).  Setting \code{p = 1} collapses the A
 compartment and recovers the SEIR value \code{R0 = beta / gamma}.
 }
+\examples{
+Seiarp(S = 990, E = 10, I = 0, A = 0, R = 0,
+       params = c(0.3, 0.2, 0.1, 0.05, 0.1, 0.5))
+}
 \references{
 Anderson, R. M. & May, R. M. (1991). Infectious Diseases of
 Humans: Dynamics and Control. Oxford University Press.
 ISBN 0-19-854040-X.
-}
-\examples{
-Seiarp(S = 990, E = 10, I = 0, A = 0, R = 0,
-       params = c(0.3, 0.2, 0.1, 0.05, 0.1, 0.5))
 }

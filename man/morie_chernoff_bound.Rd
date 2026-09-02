@@ -22,9 +22,9 @@ The exact tail is computed alongside, so the test is that the bound
 HOLDS -- and separately that it is not vacuous, since a bound of 1 is
 always true and never useful.
 }
-\references{
-Chernoff H (1952) \emph{Ann Math Stat} 23(4):493-507.
-}
 \examples{
 morie_chernoff_bound(n = 5L, p = 0.5, t = 5L)
+}
+\references{
+Chernoff H (1952) \emph{Ann Math Stat} 23(4):493-507.
 }

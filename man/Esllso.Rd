@@ -2,7 +2,8 @@
 % Please edit documentation in R/esllso.R
 \name{Esllso}
 \alias{Esllso}
-\title{Lasso by cyclic coordinate descent}
+\title{Hastie, Tibshirani and Friedman, The Elements of Statistical Learning,
+section 3.4.2. The penalty is on the same scale as n times glmnet's.}
 \usage{
 Esllso(X, y, lambda_, max_iter = 10000, tol = 1e-12)
 }
@@ -23,20 +24,13 @@ List with \code{estimate}, \code{beta}, \code{n_nonzero},
 \code{converged}, \code{lambda}, \code{n}, \code{p}.
 }
 \description{
-The L1 penalty is not differentiable at zero, and that is the point:
-the subgradient condition lets a coefficient sit exactly at zero over a
-whole range of correlations, so the fit selects as it shrinks. Cyclic
-coordinate descent exploits the fact that each one-dimensional
-subproblem has the closed-form soft-threshold solution, so no
-quadratic program is needed.
+Hastie, Tibshirani and Friedman, The Elements of Statistical Learning,
+section 3.4.2. The penalty is on the same scale as n times glmnet's.
 }
-\details{
-
+\examples{
+Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 }
 \references{
 Tibshirani, R. (1996). Journal of the Royal Statistical
 Society Series B 58(1):267-288. \doi{10.1111/j.2517-6161.1996.tb02080.x}.
-}
-\examples{
-Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 }

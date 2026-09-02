@@ -21,6 +21,9 @@
 #'   Courty, N. (2020). Proceedings of Machine Learning Research
 #'   108:2131-2141 (AISTATS).
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Otmm(X = rnorm(10), Y = rnorm(10), batch_size = 8L, n_batches = 8L, epsilon = 0.5); TRUE
 Otmm <- function(X, Y, batch_size, n_batches, epsilon) {
   A <- as.matrix(X); B <- as.matrix(Y)
   n <- nrow(A); m <- nrow(B); d <- ncol(A)

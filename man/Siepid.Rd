@@ -11,7 +11,7 @@ Siepid(G, beta, initial, t_max = 20, dt = 0.01)
 
 \item{beta}{Per-edge infection rate.}
 
-\item{initial}{Initial infection probability of each node, in [0, 1].}
+\item{initial}{Initial infection probability of each node, in \link{0, 1}.}
 
 \item{t_max}{Integration horizon. Default 20.}
 
@@ -39,12 +39,12 @@ node i points at an infected node, the right-hand side is
 Integrated with classical fourth-order Runge-Kutta on a fixed step, so the
 result is deterministic and identical in every language arm.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+Siepid(G, beta = 0.3, initial = c(1, 0, 0))
+}
 \references{
 Pastor-Satorras, R. & Vespignani, A. (2001). Epidemic dynamics
 and endemic states in complex networks. Physical Review E 63, 066117,
 eqs. (7)-(10). \doi{10.1103/PhysRevE.63.066117}
-}
-\examples{
-G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
-Siepid(G, beta = 0.3, initial = c(1, 0, 0))
 }

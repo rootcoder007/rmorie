@@ -17,6 +17,9 @@
 #'   Algorithm 2.  Read from the ar5iv rendering; the same paper is in the
 #'   local corpus.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bnrunstat(V)
 Bnrunstat <- function(x, runmean = 0, runvar = 1, momentum = 0.1,
                       eps = 1e-5, gamma = 1, beta = 0) {
   x <- .t1_vec(x); m <- length(x)

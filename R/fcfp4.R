@@ -51,6 +51,8 @@
 #'   revision fetched 2026-08-09.  RDKit: Open-Source Cheminformatics,
 #'   https://www.rdkit.org.
 #' @export
+#' @examples
+#' Fcfp4(adjacency = 5L, features = 5L)
 Fcfp4 <- function(adjacency, features, nbits = 2048, radius = 2) {
   B <- .ecfp_bonds(adjacency)
   if (is.matrix(features) || is.data.frame(features)) {

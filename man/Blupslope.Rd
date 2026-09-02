@@ -27,13 +27,13 @@ List with v, levels, nj, fitted, J, q, n.
 \description{
 vhat_j = D Z_j' (Z_j D Z_j' + s2e I)^{-1} (y_j - X_j beta).
 }
-\references{
-Henderson (1975), Biometrics 31(2), 423-447; Robinson
-(1991), Statistical Science 6(1), 15-32.  Standard published form;
-neither article is in the local corpus and neither was read.
-}
 \examples{
 set.seed(1)
 Blupslope(y = rnorm(30), group = rep(1:5, each = 6), Z = cbind(1, rnorm(30)),
           D = diag(2), s2e = 1)
+}
+\references{
+Henderson (1975), Biometrics 31(2), 423-447; Robinson
+(1991), Statistical Science 6(1), 15-32.  Standard published form;
+neither article is in the local corpus and neither was read.
 }

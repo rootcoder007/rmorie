@@ -21,11 +21,11 @@ and in log(sigma). It is improper because it does not integrate to one, yet
 yields a proper posterior whenever X has full column rank. The density is
 returned up to its (infinite) normalizing constant.
 }
+\examples{
+Msm043(sigma2 = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (6.2) p.172. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm043(sigma2 = 5L)
 }

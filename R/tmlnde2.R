@@ -18,6 +18,8 @@
 #' @references Vansteelandt, S. & Daniel, R. M. (2017). Epidemiology
 #'   28:258-265.
 #' @export
+#' @examples
+#' Tmlnde2(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, M = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlnde2 <- function(y, D, M, X, a_ref = 0) {
   yv <- as.numeric(y); Dv <- as.numeric(D); Mv <- as.numeric(M); n <- length(yv)
   Xm <- cbind(1, as.matrix(X))

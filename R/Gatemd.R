@@ -20,6 +20,10 @@
 #'   (2018), Graph attention networks, ICLR 2018, eqs. (1)-(4) and (6).
 #'   arXiv:1710.10903
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' Gatemd(G, X)
 Gatemd <- function(G, X, heads = 1) {
   M <- .s03mat(G)
   n <- nrow(M)

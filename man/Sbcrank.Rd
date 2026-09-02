@@ -28,13 +28,13 @@ Formula: rank_j = #\{ l : theta^\{(l)\}_j < theta_j^prior \};
 under calibration rank ~ Uniform\{0, ..., L\};
 chi^2 = sum_b (O_b - E_b)^2 / E_b on (bins - 1) df
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sbcrank(V, V)
+}
 \references{
 Talts, Betancourt, Simpson, Vehtari & Gelman (2018),
 arXiv:1804.06788 -- the primary source. Bayesian Data Analysis, 3rd
 edition, was fetched in full and searched; it predates
 simulation-based calibration and does NOT contain it.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Sbcrank(V, V)
 }

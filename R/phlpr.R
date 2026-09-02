@@ -12,4 +12,7 @@
 #' @return As \code{Pptest}.
 #' @references Phillips and Perron (1988), Biometrika 75:335-346; coded form from tseries::pp.test.  See Pptest for the full note.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Ppunit(D)
 Ppunit <- function(y, lags = NULL, kind = "Z(t_alpha)") Pptest(y, lags = lags, kind = kind)

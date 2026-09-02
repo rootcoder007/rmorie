@@ -9,7 +9,7 @@ Erdosg(n, p)
 \arguments{
 \item{n}{Number of vertices (>= 1).}
 
-\item{p}{Edge probability in [0, 1].}
+\item{p}{Edge probability in \link{0, 1}.}
 }
 \value{
 List with \code{estimate}, \code{edges}, \code{density},
@@ -36,11 +36,11 @@ Alongside the realised graph the exact analytic quantities are
 returned: E\link{edges} = C(n,2) p, E\link{degree} = (n-1) p, the connectivity
 threshold log(n)/n and the giant-component threshold 1/n.
 }
+\examples{
+Erdosg(n = 5L, p = 0.5)
+}
 \references{
 Gilbert (1959), Ann. Math. Statist. 30(4):1141-1144,
 doi:10.1214/aoms/1177706098; Erdos & Renyi (1959), Publ. Math.
 Debrecen 6:290-297 (the G(n,M) model).
-}
-\examples{
-Erdosg(n = 5L, p = 0.5)
 }

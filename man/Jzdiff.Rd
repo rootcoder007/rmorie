@@ -30,13 +30,13 @@ Lin's, verified against the DOI.
 \details{
 Formula: JS(P, Q) = H(M) - (H(P) + H(Q))/2 with M = (P + Q)/2.
 }
+\examples{
+Jzdiff(y = 5L, p = 0.5, q = 0.5)
+}
 \references{
 Lin (1991), Divergence measures based on the Shannon
 entropy, IEEE Transactions on Information Theory 37(1):145-151,
 \doi{10.1109/18.61115}; Endres and Schindelin (2003), IEEE
 Transactions on Information Theory 49(7):1858-1860.
 \doi{10.1109/TIT.2003.813506}
-}
-\examples{
-Jzdiff(y = 5L, p = 0.5, q = 0.5)
 }

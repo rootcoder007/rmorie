@@ -17,6 +17,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.4.2.
 #' @export
+#' @examples
+#' Ghosalfrsreg()
 Ghosalfrsreg <- function(n = 600, seed = 42) {
   n <- as.integer(n)
   if (n < 2L) stop("n must be at least 2")

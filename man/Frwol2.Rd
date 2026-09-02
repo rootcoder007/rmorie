@@ -31,13 +31,13 @@ construction and no projection is ever needed.  The duality gap
 Formula: s = argmin_v <grad f(x), v>;
 x <- (1 - gamma) x + gamma s with gamma = 2/(t + 2).
 }
-\references{
-Frank and Wolfe (1956), An algorithm for quadratic
-programming, Naval Research Logistics Quarterly 3(1-2):95-110.
-\doi{10.1002/nav.3800030109}
-}
 \examples{
 V <- rbind(c(0, 0), c(1, 0), c(0, 1))
 Frwol2(function(x) sum((x - 0.3)^2), function(x) 2 * (x - 0.3),
        domain = V, x0 = c(0.3, 0.3))
+}
+\references{
+Frank and Wolfe (1956), An algorithm for quadratic
+programming, Naval Research Logistics Quarterly 3(1-2):95-110.
+\doi{10.1002/nav.3800030109}
 }

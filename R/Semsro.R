@@ -34,6 +34,8 @@
 #'   covariance structure analysis. Structural Equation Modeling 6(1), 1-55.
 #'   \doi{10.1080/10705519909540118}
 #' @export
+#' @examples
+#' Semsro(sample_cov = 5L, fitted_cov = 5L)
 Semsro <- function(sample_cov, fitted_cov) {
   S <- .s03mat(sample_cov)
   G <- .s03mat(fitted_cov)

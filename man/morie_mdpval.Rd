@@ -28,15 +28,15 @@ A list with elements \code{estimate} (V), \code{policy}
 }
 \description{
 Repeats the Bellman optimality sweep
-V(s) <- max_a sum_s2 P(s2|s,a) [ r(s,a) + gamma V(s2) ] until the
+V(s) <- max_a sum_s2 P(s2|s,a) \link{ r(s,a) + gamma V(s2) } until the
 largest change in a sweep falls below \code{tol}, then returns the
 deterministic greedy policy with ties broken to the lowest action
 index (Sutton & Barto 2018, Sec. 4.4 boxed algorithm, p. 83).
 }
+\examples{
+morie_mdpval(P = 1, R = 5L, gamma = 0.5)
+}
 \references{
 Sutton, R. S. and Barto, A. G. (2018). Reinforcement
 Learning: An Introduction, 2nd ed. MIT Press, Section 4.4.
-}
-\examples{
-morie_mdpval(P = 1, R = 5L, gamma = 0.5)
 }

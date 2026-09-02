@@ -25,11 +25,11 @@ Formula: DFBETAS_ij = (beta_j - beta_j(-i)) / (s_(i) sqrt((X'X)^-1_jj))
 The deletion update beta - beta(-i) = (X'X)^-1 x_i e_i / (1 - h_ii)
 avoids refitting n times.  Cut-off 2/sqrt(n).
 }
-\references{
-Belsley, Kuh & Welsch (1980), Regression Diagnostics,
-Wiley, ch. 2.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dfbetb(V, V)
+}
+\references{
+Belsley, Kuh & Welsch (1980), Regression Diagnostics,
+Wiley, ch. 2.
 }

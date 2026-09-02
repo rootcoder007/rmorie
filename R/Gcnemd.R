@@ -17,6 +17,11 @@
 #'   with graph convolutional networks, ICLR 2017, eq. (2).
 #'   arXiv:1609.02907
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' W <- matrix(rnorm(4), 2, 2)
+#' Gcnemd(G, X, W)
 Gcnemd <- function(G, X, W) {
   M <- .s03mat(G)
   n <- nrow(M)

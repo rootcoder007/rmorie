@@ -21,6 +21,9 @@
 #'   16:147-185; Holland, P. W. & Welsch, R. E. (1977). Commun Statist
 #'   6:813-827.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tukrr(V, V)
 Tukrr <- function(X, y, c = 4.685, n_iter = 25) {
   Xm <- as.matrix(X); yv <- as.numeric(y)
   n <- nrow(Xm); p <- ncol(Xm)

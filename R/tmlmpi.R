@@ -65,6 +65,8 @@
 #'   JRSS B 74(4):623-671; van der Laan, M. J. & Rubin, D. (2006). IJB
 #'   2(1):11.
 #' @export
+#' @examples
+#' Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmpi <- function(y, D, X) {
   yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
   if (n == 0L || length(Dv) != n)

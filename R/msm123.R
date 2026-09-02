@@ -18,6 +18,8 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (8.1) p.254. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' Msm123(K = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Msm123 <- function(K, y, beta, eta0 = 0, lam = 1, loss = "squared") {
   f <- .gprkhspredict(K, beta, eta0)
   ys <- .gpflat(y)

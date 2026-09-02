@@ -21,6 +21,9 @@
 #'   Econometrics 219(1), 101-122, equation (2.6).  Athey, S. and
 #'   Imbens, G. (2016). PNAS 113(27), 7353-7360.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Drhtg(V, V)
 Drhtg <- function(y, D, X = NULL, strata = NULL) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drhtg: empty input, y has no observations")

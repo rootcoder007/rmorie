@@ -130,6 +130,8 @@
 #'   196-249, and Code/GraphMol/Fingerprints/FingerprintUtil.cpp lines
 #'   357-444, master revision fetched 2026-08-09.
 #' @export
+#' @examples
+#' Rdkfp(adjacency = 5L, atomnum = 5L)
 Rdkfp <- function(adjacency, atomnum, aromatic = NULL, nbits = 2048,
                   minpath = 1, maxpath = 7, branched = TRUE,
                   use_bond_order = TRUE) {

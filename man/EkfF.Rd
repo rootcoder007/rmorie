@@ -46,14 +46,14 @@ the (possibly nonlinear) transition and observation maps; \code{F} and
 state or as constant matrices, in which case the filter degenerates to
 the plain linear Kalman filter.
 }
-\references{
-Schmidt (1966), in Leondes (ed.), Advances in Control
-Systems 3:293-340; Jazwinski (1970), Stochastic Processes and
-Filtering Theory, Academic Press.
-}
 \examples{
 set.seed(1)
 y <- matrix(cumsum(rnorm(20)), 20, 1)
 EkfF(y, f = function(x) x, h = function(x) x, F = matrix(1), H = matrix(1),
      Q = matrix(0.1), R = matrix(1))
+}
+\references{
+Schmidt (1966), in Leondes (ed.), Advances in Control
+Systems 3:293-340; Jazwinski (1970), Stochastic Processes and
+Filtering Theory, Academic Press.
 }

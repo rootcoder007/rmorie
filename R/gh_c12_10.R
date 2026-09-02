@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.4.2.
 #' @export
+#' @examples
+#' Ghosalwnlinbvm()
 Ghosalwnlinbvm <- function(L_coefs = c(0.6, 0.8), n = 500,
                            prior_var = 50, n_sim = 500, seed = 42) {
   L <- as.numeric(L_coefs)

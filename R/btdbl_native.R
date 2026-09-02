@@ -24,6 +24,9 @@
 #' @references Beran, R. (1987). Prepivoting to reduce level error
 #'   of confidence sets. Biometrika, 74(3), 457-468.
 #' @export
+#' @examples
+#' set.seed(1)
+#' morie_btdbl(rnorm(40), B_outer = 50L, B_inner = 20L)
 morie_btdbl <- function(x, statistic = NULL, alpha = 0.05,
                         B_outer = 400, B_inner = 200, seed = 0) {
   xv <- as.numeric(x)

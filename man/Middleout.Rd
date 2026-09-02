@@ -22,11 +22,11 @@ product \verb{S x} once \code{S} carries 0/1 rows above and proportion rows
 below; rows are classified on that basis and reported separately so
 the reading stays checkable.
 }
-\references{
-Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 S <- c("a", "b", "c")
 Middleout(S, M)
+}
+\references{
+Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 }

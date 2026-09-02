@@ -14,6 +14,9 @@
 #' @return Named list with cleaned \code{record}, \code{n_bad},
 #'   \code{sfreq}, and parameters.
 #' @keywords internal
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' preprocess_eeg(D)
 preprocess_eeg <- function(record,
                            bandpass = c(1, 40),
                            notch = 60,
@@ -67,6 +70,9 @@ preprocess_eeg <- function(record,
 #'   out as a toy AROMA stand-in.  Default 5.
 #' @return Named list with cleaned \code{record}, \code{n_scrubbed}.
 #' @keywords internal
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' preprocess_fmri(D)
 preprocess_fmri <- function(record,
                             motion_threshold_mm = 0.5,
                             n_noise_components = 5L) {

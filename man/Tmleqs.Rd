@@ -7,7 +7,7 @@
 Tmleqs(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025)
 }
 \arguments{
-\item{Y, A}{Outcome in [0, 1] and binary treatment.}
+\item{Y, A}{Outcome in \link{0, 1} and binary treatment.}
 
 \item{QAW, Q1W, Q0W}{Initial outcome predictions.}
 
@@ -32,12 +32,12 @@ Formula: D*(psi)(O) = (A/g1 - (1-A)/g0)(Y - Q(A,W))
 \item Q(1,W) - Q(0,W) - psi; targeting solves the empirical mean to 0
 }
 }
+\examples{
+Tmleqs(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Verified against the CRAN package tmle 2.1.1 (Gruber & van
 der Laan). The score-equation view of the targeting step is van der
 Laan & Rubin (2006), International Journal of Biostatistics 2(1),
 Article 11.
-}
-\examples{
-Tmleqs(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

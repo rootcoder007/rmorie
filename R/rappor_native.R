@@ -33,6 +33,9 @@ morie_rappor_star <- function(f, p, q) {
 #'   \code{q_star}, \code{p_star}.
 #' @references Erlingsson, Pihur & Korolova (2014), ACM CCS.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rappor_epsilon(V, V)
 morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
   h <- as.integer(h)[1]
   if (h < 1) stop("morie_rappor: h must be at least 1")
@@ -95,6 +98,9 @@ morie_rappor_epsilon <- function(h, f, p = NULL, q = NULL) {
 #'   \code{cohort_sizes}.
 #' @references Erlingsson, Pihur & Korolova (2014), ACM CCS, 1054-1067.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rappor(V)
 morie_rappor <- function(values, k = 16, h = 2, f = 0.5, p = 0.5, q = 0.75,
                          cohorts = 1, variant = "full", seed = 0) {
   var <- tolower(as.character(variant)[1])
@@ -177,6 +183,9 @@ morie_rappor <- function(values, k = 16, h = 2, f = 0.5, p = 0.5, q = 0.75,
 #' @param f,p,q RAPPOR parameters.
 #' @return A list whose \code{t} holds the estimated true set-bit counts.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rappor_decode(V, V)
 morie_rappor_decode <- function(counts, sizes, f = 0.5, p = 0.5, q = 0.75) {
   f <- as.numeric(f)[1]; p <- as.numeric(p)[1]; q <- as.numeric(q)[1]
   denom <- (1 - f) * (q - p)

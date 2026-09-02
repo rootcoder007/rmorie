@@ -32,6 +32,12 @@
 #'   patterns relevant to the spread of infectious diseases. PLoS Medicine
 #'   5(3), e74. \doi{10.1371/journal.pmed.0050074}
 #' @export
+#' @examples
+#' S <- c(500, 500)
+#' I <- c(5, 5)
+#' R <- c(0, 0)
+#' contact_matrix <- matrix(c(2, 1, 1, 2), 2, 2)
+#' Sirtdy(S, I, R, contact_matrix, gamma = 0.1)
 Sirtdy <- function(S, I, R, contact_matrix, gamma, t_max = 160, dt = 0.1) {
   s <- .s03vec(S); i0 <- .s03vec(I); r0 <- .s03vec(R)
   m <- length(s)

@@ -43,6 +43,9 @@
 #' @return A list with `hull` (matrix), `n_vertices`, `twice_area`
 #'   (exact integer), `area`.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_lattice_convex_hull(D)
 morie_lattice_convex_hull <- function(points) {
   p <- unique(round(as.matrix(points)))
   if (ncol(p) != 2L) stop("points must be an (n, 2) matrix.", call. = FALSE)
@@ -107,6 +110,9 @@ morie_lattice_convex_hull <- function(points) {
 #'   `interior_enumerated`, `verified`, `pick_holds`, `warnings`.
 #' @references Pick G (1899) \emph{Lotos} 19:311-319.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_pick_theorem(D)
 morie_pick_theorem <- function(vertices, verify_by_enumeration = TRUE,
                                enumeration_cap = 1e6) {
   v <- round(as.matrix(vertices))
@@ -221,6 +227,9 @@ morie_pick_theorem <- function(vertices, verify_by_enumeration = TRUE,
 #' @references Erdos P, Szekeres G (1935) \emph{Compositio Math}
 #'   2:463-470.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_erdos_szekeres_check(V)
 morie_erdos_szekeres_check <- function(sequence, r = NULL, s = NULL) {
   w <- as.numeric(sequence)
   n <- length(w)
@@ -281,6 +290,9 @@ morie_erdos_szekeres_check <- function(sequence, r = NULL, s = NULL) {
 #' @references Erdos P, Szekeres G (1935). A combinatorial problem in
 #'   geometry. \emph{Compositio Mathematica}, 2, 463-470.
 #' @export
+#' @examples
+#' morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 
+#'     1), c(1, 4), c(3, 5)))
 morie_happy_ending_quadrilateral <- function(points) {
   p <- round(as.matrix(points))
   if (ncol(p) != 2L) stop("points must be an (n, 2) matrix.", call. = FALSE)
@@ -366,6 +378,9 @@ morie_happy_ending_quadrilateral <- function(points) {
 #'   `common_point_exists`, `witness`, `helly_holds`.
 #' @references Helly E (1923) \emph{Jahresbericht DMV} 32:175-176.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' morie_helly_intervals(D)
 morie_helly_intervals <- function(intervals) {
   iv <- as.matrix(intervals)
   if (nrow(iv) < 1L) stop("no intervals supplied.", call. = FALSE)

@@ -21,6 +21,9 @@
 #' @references Raudenbush, S. W. and Bryk, A. S. (2002).
 #'   Hierarchical Linear Models, 2nd ed. Sage, Ch. 3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_hlmgr(V)
 morie_hlmgr <- function(betas, V = NULL) {
   B <- as.matrix(betas)
   J <- nrow(B)

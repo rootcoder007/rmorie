@@ -26,14 +26,14 @@ to be zero rather than infinite.
 \details{
 Formula: H' = relu(D^{-1/2} A D^{-1/2} X W), D = diag(rowSums(A)).
 }
-\references{
-Kipf and Welling (2017), Semi-supervised classification
-with graph convolutional networks, ICLR 2017, eq. (2).
-arXiv:1609.02907
-}
 \examples{
 G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 X <- matrix(rnorm(6), 3, 2)
 W <- matrix(rnorm(4), 2, 2)
 Gcnemd(G, X, W)
+}
+\references{
+Kipf and Welling (2017), Semi-supervised classification
+with graph convolutional networks, ICLR 2017, eq. (2).
+arXiv:1609.02907
 }

@@ -22,9 +22,9 @@ of W (eq 6.48): for Q = I - rho W the range is
 (1/theta_min, 1/theta_max); for Q = D - rho W the same condition
 applies to the eigenvalues of D^-1/2 W D^-1/2.
 }
-\references{
-Schabenberger & Gotway (2005), eq (6.48), p. 340.
-}
 \examples{
 car_rho_bounds(W = 5L)
+}
+\references{
+Schabenberger & Gotway (2005), eq (6.48), p. 340.
 }

@@ -27,10 +27,10 @@ Unlike KL it is symmetric, always finite and bounded by \eqn{\log 2}
 with a zero contribute nothing, by \eqn{0\log 0 = 0}.  Its square
 root is a metric.
 }
-\references{
-Lin (1991), IEEE Transactions on Information Theory 37:145-151.  Paywalled at IEEE; the coded form was read from Drost's philentropy, src/distances_internal.h::jensen_shannon_internal (tarball philentropy_0.10.0 from CRAN), with exactly the zero-guards used here.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Jsdiv(V, V)
+}
+\references{
+Lin (1991), IEEE Transactions on Information Theory 37:145-151.  Paywalled at IEEE; the coded form was read from Drost's philentropy, src/distances_internal.h::jensen_shannon_internal (tarball philentropy_0.10.0 from CRAN), with exactly the zero-guards used here.
 }

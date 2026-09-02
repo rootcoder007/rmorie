@@ -27,6 +27,9 @@ Indices are one-based.
 Formula: r ~ Uniform\{1..k\}; sample = \{r, r+k, r+2k, ...\};
 ybar_sy = mean of the sample
 }
+\examples{
+Sysrs(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 8: a unit is chosen at random from the first k, and every k-th unit
@@ -34,7 +37,4 @@ thereafter. Chapter 8 was NOT in the scanned excerpt available to
 this batch, so the standard published form is used. The design
 standard error is the exact one computed by the sibling module
 systmp.
-}
-\examples{
-Sysrs(y = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 3L)
 }

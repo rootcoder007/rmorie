@@ -37,6 +37,8 @@
 #' @references Haarnoja, T., Zhou, A., Abbeel, P. and Levine, S.
 #'   (2018). Soft actor-critic. ICML 2018, PMLR 80, 1861-1870.
 #' @export
+#' @examples
+#' morie_sacc(P = 1, R = 5L, gamma = 0.5)
 morie_sacc <- function(P, R, gamma, temp = 1, tol = 1e-12,
                        max_eval = 100000L, max_improve = 1000L) {
   z <- .mdp_args(P, R); Pm <- z$Pm; R <- z$R; S <- z$S; A <- z$A

@@ -26,12 +26,12 @@ limits are exact and are what the tests check.
 Formula: (I + lambda D'D) tau = y with D the second-difference
 operator.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Hodprc(V)
+}
 \references{
 Hodrick and Prescott (1997), Postwar U.S. business
 cycles: an empirical investigation, Journal of Money, Credit and
 Banking 29(1):1-16. \doi{10.2307/2953682}
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Hodprc(V)
 }

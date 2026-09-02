@@ -29,8 +29,8 @@ singular at the ends because F(t)(1 - F(t)) vanishes there.
 }
 \details{
 Formula: F_n(t) = n^-1 sum_i 1\{x_i <= t\};
-G_n(t) = sqrt(n) [F_n(t) - F(t)];
-cov[G(s), G(t)] = F(s ^ t) - F(s) F(t)
+G_n(t) = sqrt(n) \link{F_n(t) - F(t)};
+cov\link{G(s), G(t)} = F(s ^ t) - F(s) F(t)
 }
 \references{
 Kosorok (2008), Introduction to Empirical Processes and

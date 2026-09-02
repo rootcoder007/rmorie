@@ -17,6 +17,9 @@
 #'   \code{truth_rate}, \code{n}.
 #' @references Warner, S. L. (1965). JASA 60:63-69, equations (1), (3).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Randres(V)
 Randres <- function(y, truth = NULL, p = 0.7) {
   v <- as.numeric(unlist(y)); n <- length(v)
   lam <- sum(v) / n; p <- as.numeric(p); d <- 2 * p - 1

@@ -30,11 +30,11 @@ Formula: F(x_i) = F(x_{i-1})
 \item (exp(W_i) + exp(W_{i-1})) (x_i - x_{i-1}) / 2.
 }
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.2.2.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalgpincreasingprior(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.2.2.
 }

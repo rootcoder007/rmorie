@@ -17,6 +17,8 @@
 #'   proof, which invokes Lemma D.11. Read from the copy of the book held
 #'   in the corpus.
 #' @export
+#' @examples
+#' Exptest(err_null = 0.1, err_alt = 0.2, n = 100)
 Exptest <- function(err_null, err_alt, n) {
   e0 <- as.numeric(err_null); e1 <- as.numeric(err_alt); n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1")

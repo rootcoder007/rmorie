@@ -20,6 +20,8 @@
 #'   response pattern of graded scores, Psychometrika Monograph
 #'   Supplement 34(4, Pt. 2). \doi{10.1007/BF03372160}
 #' @export
+#' @examples
+#' Grmsam(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_k = c(-1, 0, 1))
 Grmsam <- function(y, theta, a, b_k) {
   ys <- as.integer(.s03vec(y))
   th <- .s03vec(theta)

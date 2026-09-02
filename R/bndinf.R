@@ -28,6 +28,10 @@
 #'   equations (4.2) and (4.10) of Molinari, F. (2021), Handbook of
 #'   Econometrics 7A (arXiv:2004.11751 pp. 89, 97).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Bndinf(V, D)
 Bndinf <- function(theta, moments, alpha = 0.05) {
   grid <- as.numeric(unlist(theta))
   if (length(grid) == 0L) stop("Bndinf: theta grid is empty")

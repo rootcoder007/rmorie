@@ -30,15 +30,15 @@ linear fits at the cutoff; IK plug-in bandwidth
 HC0 sandwich per side, sides independent (rdrobust vce = "hc0"
 convention). Exact on side-linear data for any bandwidth.
 }
-\references{
-Imbens, G. and Kalyanaraman, K. (2009), NBER w14726,
-Sections 2-3; White (1980) HC0; Calonico, Cattaneo and Titiunik
-(2014), Econometrica 82(6), 2295-2326 (vce convention).
-}
 \examples{
 set.seed(1)
 x <- runif(300, -1, 1)
 y <- 1 + 2 * x + 0.5 * (x >= 0) + rnorm(300, 0, 0.3)
 r <- Causrdd(x, y, cutoff = 0)
 abs(r$estimate - 0.5) < 0.4
+}
+\references{
+Imbens, G. and Kalyanaraman, K. (2009), NBER w14726,
+Sections 2-3; White (1980) HC0; Calonico, Cattaneo and Titiunik
+(2014), Econometrica 82(6), 2295-2326 (vce convention).
 }

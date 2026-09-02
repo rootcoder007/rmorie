@@ -49,12 +49,12 @@ thing a sparse approximation must satisfy.
 Formula: Q = K_nm K_mm^{-1} K_mn;
 L = log N(y; 0, Q + s2 I) - tr(K_nn - Q) / (2 s2).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpsvi(V, V)
+}
 \references{
 Hensman, Fusi and Lawrence (2013), Gaussian processes for
 big data, UAI 2013, arXiv:1309.6835; Titsias (2009), AISTATS 2009,
 PMLR 5:567-574.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Gpsvi(V, V)
 }

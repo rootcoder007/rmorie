@@ -21,14 +21,14 @@ bandwidth, coefficients, moments, leading_moment, n, method.
 }
 \description{
 Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
-Econometrics, Springer.  Section 5.2.4, page 153 (volume [Pages 135-188],
+Econometrics, Springer.  Section 5.2.4, page 153 (volume \link{Pages 135-188},
 read as a rendered page image) is the bias-reduction section this function
 is filed under; the correction printed there is the explicit smoothing
 correction (5.39), f_hat_n_eps(z) = f_n_eps(z) minus
 (1/2) v_n_eps^2 times the second derivative of f_n_eps times sigma_zeta^2,
 which removes the O(v^2) term by subtracting an estimate of it.  The device
 implemented here is the other one named in the specification and used
-throughout the appendix (Section A.1, p. 236, volume [Pages 233-255]): a
+throughout the appendix (Section A.1, p. 236, volume \link{Pages 233-255}): a
 kernel of order r, that is one with integral K(u) du = 1,
 integral u^j K(u) du = 0 for j = 1, ..., r - 1 and integral u^r K(u) du
 nonzero, which reduces the leading smoothing bias from O(h^2) to O(h^r).

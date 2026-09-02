@@ -20,8 +20,8 @@ Named list with cleaned \code{record}, \code{n_scrubbed}.
 \description{
 R parity of \code{morie.entheo.preprocess_fmri}.
 }
-\keyword{internal}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 preprocess_fmri(D)
 }
+\keyword{internal}

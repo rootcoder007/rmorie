@@ -24,6 +24,9 @@
 #'   Computer Science 9(3-4):211-407, section 3.5, Theorem 3.16.
 #'   \doi{10.1561/0400000042}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Kcompo(V, V)
 Kcompo <- function(y, epsilons, deltas = NULL) {
   eps <- .s03vec(epsilons)
   if (length(eps) == 0L) stop("k_step_dp_composition: epsilons is empty")

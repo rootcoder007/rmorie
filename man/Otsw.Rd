@@ -29,12 +29,12 @@ Formula: \code{SW_p(mu,nu) = (E_theta [W_p(P_theta mu, P_theta
 nu)^p])^(1/p)} -- Bonneel et al. (2015) eq. (5); Peyre and Cuturi
 (2019) eq. (10.13), p. 166.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Otsw(V, V)
+}
 \references{
 Bonneel, N., Rabin, J., Peyre, G. and Pfister, H. (2015).
 Journal of Mathematical Imaging and Vision 51(1):22-45.
 \doi{10.1007/s10851-014-0506-3}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Otsw(V, V)
 }

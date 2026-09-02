@@ -21,12 +21,12 @@ List with Q, N, W, Qclean, k, nvl.
 \description{
 N' = N + nvl * pending; W' = W - nvl * pending; Q' = W'/N'.
 }
+\examples{
+Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8), pending = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Chaslot, Winands and van den Herik (2008), Computers and
 Games 2008, LNCS 5131, 60-71, Sect. 3.3, read from the authors' own
 PDF.  They describe the rule qualitatively; the arithmetic here is
 its counter form and nothing further is claimed.
-}
-\examples{
-Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8), pending = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

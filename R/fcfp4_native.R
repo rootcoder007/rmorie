@@ -40,6 +40,8 @@ MORIE_FCFP_FEATURE_CLASSES <- c("donor", "acceptor", "aromatic",
 #'   fingerprints. Journal of Chemical Information and Modeling,
 #'   50(5), 742-754.
 #' @export
+#' @examples
+#' morie_fcfp4(adjacency = 5L, features = 5L)
 morie_fcfp4 <- function(adjacency, features, nbits = 2048L, radius = 2L) {
   bd <- .mor_fp_bonds(adjacency)
   a <- bd$a

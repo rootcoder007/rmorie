@@ -37,6 +37,9 @@
 #'   documentation, indep-pairwise, cog-genomics.org/plink/1.9/ld
 #'   (fetched 2026-08-09).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ldprun(V)
 Ldprun <- function(G, window = 50L, step = 5L, r2_threshold = 0.5) {
   Gm <- as.matrix(G)
   storage.mode(Gm) <- "double"

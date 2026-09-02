@@ -30,12 +30,6 @@ months-alive-within-horizon, which unlike a hazard ratio is
 collapsible and stays interpretable when proportional hazards fails.
 Mirrors \code{morie.fn.npstm}.
 }
-\references{
-Moore KL, van der Laan MJ (2009). Increasing power in
-randomized trials with right censored outcomes through covariate
-adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
-1099-1131.
-}
 \examples{
 set.seed(4)
 n <- 150
@@ -45,4 +39,10 @@ tt <- rexp(n, rate = exp(-0.5 * a - 0.3 * W[, 1]))
 ev <- rbinom(n, 1, 0.8)
 r <- morie_tmle_rmst(tt, ev, a, W)
 str(r, max.level = 1)
+}
+\references{
+Moore KL, van der Laan MJ (2009). Increasing power in
+randomized trials with right censored outcomes through covariate
+adjustment. \emph{Journal of Biopharmaceutical Statistics} 19(6),
+1099-1131.
 }

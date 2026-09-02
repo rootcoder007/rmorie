@@ -70,6 +70,9 @@
 #'   \code{method}.
 #' @references Heffernan & Tawn (2004), JRSS B 66(3):497-546.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Evhpvr(matrix(rnorm(40), 20, 2), u = 1)
 Evhpvr <- function(X, u) {
   M <- .s03mat(X)
   n <- nrow(M)

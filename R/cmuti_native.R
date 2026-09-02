@@ -25,6 +25,9 @@
 #'   informational measure of correlation. Information and Control,
 #'   1, 85-89.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_cmuti(V, V)
 morie_cmuti <- function(x, y) {
   xv <- as.numeric(x)
   yv <- as.numeric(y)

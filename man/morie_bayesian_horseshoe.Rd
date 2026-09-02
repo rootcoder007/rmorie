@@ -25,14 +25,14 @@ prior \eqn{\beta_j \sim N(0, \lambda_j^2 \tau^2 \sigma^2)}. All
 conditionals follow Makalic & Schmidt (2016), Eqs. (9)-(11); the
 hypervariance conditionals are inverse-gamma.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_bayesian_horseshoe(V, V)
+}
 \references{
 Carvalho, C. M., Polson, N. G. and Scott, J. G. (2010).
 The horseshoe estimator for sparse signals. \emph{Biometrika},
 97(2), 465-480. Makalic, E. and Schmidt, D. F. (2016). A simple
 sampler for the horseshoe estimator. \emph{IEEE Signal Processing
 Letters}, 23(1), 179-182.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_bayesian_horseshoe(V, V)
 }

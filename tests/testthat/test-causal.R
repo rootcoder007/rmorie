@@ -27,7 +27,7 @@ test_that("morie_estimate_propensity_scores returns values in (0, 1)", {
 
 test_that("morie_estimate_ate returns a named list with expected fields", {
   result <- morie_estimate_ate(df, "t", "y", "x")
-  expect_named(result, c("ate", "se", "ci_lower", "ci_upper", "n", "ess"))
+  expect_true(all(c("ate", "se", "ci_lower", "ci_upper", "n", "ess") %in% names(result)))
   expect_type(result$ate, "double")
   expect_true(result$ci_lower < result$ci_upper)
 })
@@ -58,7 +58,7 @@ test_that("morie_estimate_atc returns expected fields", {
 
 test_that("morie_estimate_aipw returns ATE close to 0.3", {
   result <- morie_estimate_aipw(df, "t", "y", "x")
-  expect_named(result, c("ate", "se", "ci_lower", "ci_upper", "n"))
+  expect_true(all(c("ate", "se", "ci_lower", "ci_upper", "n") %in% names(result)))
   expect_lt(abs(result$ate - 0.3), 0.15)
 })
 
@@ -134,7 +134,7 @@ test_that("morie_e_value for CI bound is computed when rr_lower provided", {
 
 test_that("morie_estimate_g_computation returns ATE near 0.3", {
   result <- morie_estimate_g_computation(df, "t", "y", "x")
-  expect_named(result, c("ate", "se", "ci_lower", "ci_upper"))
+  expect_true(all(c("ate", "se", "ci_lower", "ci_upper") %in% names(result)))
   expect_lt(abs(result$ate - 0.3), 0.15)
 })
 

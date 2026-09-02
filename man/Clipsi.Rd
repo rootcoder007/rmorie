@@ -27,11 +27,11 @@ cosine and the logit is bounded by +/- 1/tau.  The diagonal of the
 logit matrix holds the matched pairs; retrieval takes the row argmax,
 and the reported accuracy is how often that argmax is the diagonal.
 }
-\references{
-Radford et al. (2021), Learning Transferable Visual
-Models From Natural Language Supervision, ICML 139:8748-8763.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Clipsi(V, V)
+}
+\references{
+Radford et al. (2021), Learning Transferable Visual
+Models From Natural Language Supervision, ICML 139:8748-8763.
 }

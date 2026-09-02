@@ -23,11 +23,11 @@ length \eqn{s}. The bound is tight: \eqn{s-1} descending blocks of
 \eqn{r-1} ascending values escape at length \eqn{(r-1)(s-1)}, and
 the tests build that sequence.
 }
-\references{
-Erdos P, Szekeres G (1935) \emph{Compositio Math}
-2:463-470.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_erdos_szekeres_check(V)
+}
+\references{
+Erdos P, Szekeres G (1935) \emph{Compositio Math}
+2:463-470.
 }

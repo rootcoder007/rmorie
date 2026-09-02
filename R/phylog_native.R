@@ -27,6 +27,9 @@
 #'   Root-to-tip regression. Local source:
 #'   library/pdf/fetched-wave3/Rambaut-2016-TempEst-VirusEvolution.pdf.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Phylog(V, V)
 Phylog <- function(dates, divergence) {
   t <- as.numeric(dates)
   d <- as.numeric(divergence)

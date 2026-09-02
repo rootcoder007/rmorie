@@ -27,11 +27,11 @@ value at which the UPPER bound is still at or below \code{alpha} --
 the point past which an unmeasured confounder of that strength
 could explain the result away.
 }
-\references{
-Rosenbaum, P. R. (2002). Observational Studies, 2nd
-ed. Springer, Chapter 4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_rosenb(V)
+}
+\references{
+Rosenbaum, P. R. (2002). Observational Studies, 2nd
+ed. Springer, Chapter 4.
 }

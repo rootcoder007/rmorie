@@ -32,12 +32,12 @@ language arms.
 Formula: M(D) = f(D) + N(0, sigma^2) with
 sigma = sqrt(2 log(1.25/delta)) Delta_2 f / epsilon.
 }
+\examples{
+Gaussm(c(1, 2, 3), l2_sens = 1, epsilon = 0.5, delta = 1e-5)
+}
 \references{
 Dwork and Roth (2014), The Algorithmic Foundations of
 Differential Privacy, Foundations and Trends in Theoretical
 Computer Science 9(3-4):211-407, Theorem A.1.
 \doi{10.1561/0400000042}
-}
-\examples{
-Gaussm(c(1, 2, 3), l2_sens = 1, epsilon = 0.5, delta = 1e-5)
 }

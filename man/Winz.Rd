@@ -25,11 +25,11 @@ trimmed mean at the same alpha.
 Formula: replace values below the alpha quantile with it and above the
 \code{1 - alpha} quantile with that, then take the mean.
 }
-\references{
-Dixon, W. J. (1960). Ann Math Statist 31:385-391, where
-Winsor rule is set out and attributed to him.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Winz(V)
+}
+\references{
+Dixon, W. J. (1960). Ann Math Statist 31:385-391, where
+Winsor rule is set out and attributed to him.
 }

@@ -16,6 +16,9 @@
 #' @references Freeman, M. F. & Tukey, J. W. (1950). Ann Math Statist
 #'   21:607-611; Miller, J. J. (1978). Amer Statist 32:138.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mafrt(V, V)
 Mafrt <- function(x, n) {
   xv <- as.numeric(x); nv <- as.numeric(n)
   if (length(nv) == 1L) nv <- rep(nv, length(xv))

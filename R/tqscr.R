@@ -19,6 +19,8 @@
 #'   Fetched from arXiv. The expected_max figure is the standard Gaussian
 #'   maximum approximation and is NOT from the paper.
 #' @export
+#' @examples
+#' Scoredist(b = 5L, d = 5L)
 Scoredist <- function(b, d, query_norm = 1, n_keys = 1) {
   b <- as.numeric(b); d <- as.integer(d)
   qn <- as.numeric(query_norm); nk <- as.integer(n_keys)

@@ -12,6 +12,18 @@ morie_estimate_g_computation(
   outcome_model = c("linear", "logistic")
 )
 }
+\arguments{
+\item{data}{A vector; indexed elementwise.}
+
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
+
+\item{outcome}{See Usage.}
+
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
+
+\item{outcome_model}{Family for the outcome model: \code{"linear"} or
+\code{"logistic"}.}
+}
 \value{
 Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }

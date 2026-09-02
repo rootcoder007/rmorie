@@ -17,7 +17,7 @@ ExpIntP(t, dt, lam)
 list(probability).
 }
 \description{
-P(the next event falls in [t, t + dt]) factorises into surviving to
+P(the next event falls in \link{t, t + dt}) factorises into surviving to
 t and then firing in dt.
 }
 \examples{

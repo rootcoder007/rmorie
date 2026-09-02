@@ -26,11 +26,11 @@ evidence that bias is absent.
 Formula: \code{N_fs = (sum z_i)^2 / z_alpha^2 - k} with \code{z_alpha}
 the one-tailed critical value -- Rosenthal (1979) eq. (2).
 }
-\references{
-Rosenthal, R. (1979). Psychological Bulletin 86(3):638-641.
-\doi{10.1037/0033-2909.86.3.638}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Mafsn(V)
+}
+\references{
+Rosenthal, R. (1979). Psychological Bulletin 86(3):638-641.
+\doi{10.1037/0033-2909.86.3.638}.
 }

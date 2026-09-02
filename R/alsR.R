@@ -19,6 +19,9 @@
 #'   Equations (3), (4) and (5).  Read from the authors' own PDF at
 #'   yifanhu.net/PUB/cf.pdf.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Alsmf(V)
 Alsmf <- function(R, f = 2, lam = 0.1, alpha = 40, steps = 10,
                   X0 = NULL, Y0 = NULL) {
   Rm <- .t1_mat(R); m <- nrow(Rm); n <- ncol(Rm); f <- as.integer(f)

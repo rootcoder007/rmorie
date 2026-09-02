@@ -20,12 +20,12 @@ Formula: log(mu) = f_mu(x) and log(theta/(1-theta)) = f_theta(x)
 response are general nonparametric functions estimated by two random
 forests rather than linear predictors.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm323(V, V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (15.1) p.651. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm323(V, V)
 }

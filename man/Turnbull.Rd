@@ -25,10 +25,10 @@ list with the estimated masses, the intersection intervals, the survival curve a
 Self-consistency (EM) for the nonparametric MLE.
 Mass sits only on the maximal intersections of the observed intervals, so the estimator is a step function that jumps nowhere else.
 }
-\references{
-Turnbull, B. W. (1976). The empirical distribution function with arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Turnbull(V, V)
+}
+\references{
+Turnbull, B. W. (1976). The empirical distribution function with arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
 }

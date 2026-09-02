@@ -19,6 +19,9 @@
 #'   Using R, Wiley. \doi{10.1002/9780470580066}. Standard form; the book
 #'   is not held locally.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Powsrv(V)
 Powsrv <- function(effect_size, alpha = 0.05, DEFF = 1, n = 100) {
   d <- as.numeric(effect_size); alpha <- as.numeric(alpha)
   deff <- as.numeric(DEFF); n <- as.integer(n)

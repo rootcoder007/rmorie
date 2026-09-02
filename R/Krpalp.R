@@ -17,6 +17,9 @@
 #' @references Krippendorff (2004), Content Analysis: An Introduction to
 #'   Its Methodology, 2nd ed., Sage, ch. 11.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Krpalp(V)
 Krpalp <- function(data, level = "nominal") {
   levels_ok <- c("nominal", "ordinal", "interval", "ratio")
   if (!(level %in% levels_ok)) stop("krippendorff_alpha: level must be one of nominal, ordinal, interval, ratio")

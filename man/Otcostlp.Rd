@@ -18,10 +18,10 @@ Named list with \code{estimate}, \code{p}, \code{nrow}, \code{ncol}, \code{total
 \deqn{C_{ij} = \|x_i - y_j\|_p}
 Peyre & Cuturi (2019), Sec. 2.4.  \code{p = Inf} gives the sup norm.
 }
-\references{
-Peyre & Cuturi (2019), Sec. 2.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Otcostlp(V, V)
+}
+\references{
+Peyre & Cuturi (2019), Sec. 2.4.
 }

@@ -29,11 +29,11 @@ ESTIMATE of the largest of n_keys errors, not a bound from the paper.
 Formula: D_prod <= sqrt(3) pi^2 ||q||^2 / d . 4^-b (Theorem 2);
 rms = sqrt(D_prod); expected max ~= rms sqrt(2 log n)
 }
+\examples{
+Scoredist(b = 5L, d = 5L)
+}
 \references{
 Zandieh et al., arXiv:2504.19874, Theorem 2 and Theorem 3.
 Fetched from arXiv. The expected_max figure is the standard Gaussian
 maximum approximation and is NOT from the paper.
-}
-\examples{
-Scoredist(b = 5L, d = 5L)
 }

@@ -33,13 +33,13 @@ FIXED budget of B replicates, so the two language arms agree exactly.
 Formula: Phat_n f = n^-1 sum_i W_i f(X_i),
 (W_1..W_n) ~ Multinomial(n, 1/n); Ghat_n = sqrt(n) (Phat_n - P_n)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bootemp(V)
+}
 \references{
 Kosorok (2008), Introduction to Empirical Processes and
 Semiparametric Inference, Section 2.2.3 and Theorem 2.6. Fetched as
 the full text of the book.
 }
 \keyword{internal}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Bootemp(V)
-}

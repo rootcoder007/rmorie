@@ -23,13 +23,13 @@ to the generation-interval density at the onset-time difference;
 R_j is the total probability received by case j.  sum(R_j) equals
 the number of cases with at least one possible infector, exactly.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_rtwall(V, V)
+}
 \references{
 Wallinga, J. and Teunis, P. (2004). Different epidemic
 curves for severe acute respiratory syndrome reveal similar
 impacts of control measures. American Journal of Epidemiology,
 160(6), 509-516.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_rtwall(V, V)
 }

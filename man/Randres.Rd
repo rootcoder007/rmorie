@@ -28,10 +28,10 @@ where the answer carries no information at all.
 Formula: \code{pi = (lambda - (1 - p))/(2p - 1)},
 \code{Var = lambda(1 - lambda)/(n (2p - 1)^2)}.
 }
-\references{
-Warner, S. L. (1965). JASA 60:63-69, equations (1), (3).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Randres(V)
+}
+\references{
+Warner, S. L. (1965). JASA 60:63-69, equations (1), (3).
 }

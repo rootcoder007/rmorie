@@ -21,11 +21,11 @@ quantizer.
 \details{
 Formula: \code{Q, R = QR(S^T)}; return \code{S_orth = Q^T}.
 }
-\references{
-Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
-section 4.1 (orthogonalized JL transform).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tqorth(V)
+}
+\references{
+Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
+section 4.1 (orthogonalized JL transform).
 }

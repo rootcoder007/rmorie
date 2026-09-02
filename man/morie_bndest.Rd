@@ -35,11 +35,11 @@ With a binary \code{treatment}, bounds the average treatment
 effect by his eq. (7.6), each potential outcome being unobserved
 for those who received the other treatment.
 }
-\references{
-Manski, C. F. (2007). Identification for Prediction and
-Decision. Harvard University Press, Sections 2.1 and 7.1.
-}
 \examples{
 set.seed(1)
 morie_bndest(y = rnorm(40), observed = rbinom(40, 1, 0.7), support = c(-3, 3))
+}
+\references{
+Manski, C. F. (2007). Identification for Prediction and
+Decision. Harvard University Press, Sections 2.1 and 7.1.
 }

@@ -26,7 +26,7 @@ Blahut (1972), IEEE Trans. Inf. Theory 18(4), 460-473, and Arimoto
 (1972), ibid. 18(1), 14-20; the fixed point is reproduced verbatim in
 Tishby, Pereira and Bialek (1999), The information bottleneck method,
 Allerton 37, 368-377 (physics/0004057 -- FETCHED), section 2:
-p(xtilde|x) = p(xtilde)/Z(x, beta) exp[-beta d(x, xtilde)], alternated
+p(xtilde|x) = p(xtilde)/Z(x, beta) exp\link{-beta d(x, xtilde)}, alternated
 with p(xtilde) = sum_x p(x) p(xtilde|x).  The Lagrangian printed there
 is F = I(X; Xtilde) + beta \if{html}{\out{<d>}}, so beta traces out R(D) and -1/beta is
 the slope of R(D).  The 1972 papers are paywalled; the fixed point is

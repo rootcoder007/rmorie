@@ -75,6 +75,9 @@
 #'   Kernel change-point analysis. Advances in Neural Information
 #'   Processing Systems, 21.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kcusum(V)
 morie_kcusum <- function(x, kernel = "gaussian", threshold = NULL,
                          gamma = 0.1, bandwidth = NULL, kmin = 2L,
                          kmax = NULL) {

@@ -27,12 +27,12 @@ base measure has value \code{G_x}. Because \eqn{G(x)} is
 answer is the beta tail probability above \eqn{1/2}, computed here by
 a midpoint rule with \code{n_grid} panels on \eqn{(1/2, 1)}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_dp_median_cdf(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_dp_median_cdf(V, V)
 }

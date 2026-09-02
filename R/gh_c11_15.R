@@ -23,6 +23,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 11.7.4.
 #' @export
+#' @examples
+#' Ghosalepgp()
 Ghosalepgp <- function(x = NULL, y = NULL, length = 0.5) {
   if (is.null(x)) {
     x <- c(0.1, 0.3, 0.7, 0.9)

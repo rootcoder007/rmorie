@@ -26,12 +26,12 @@ nu = nu_old * nu_obs / (nu_old + nu_obs) with
 nu_obs = ((nu_com + 1)/(nu_com + 3)) nu_com (1 - lambda), always
 at most nu_com.
 }
+\examples{
+morie_midegf(b = 5L, t = 5L, m = 5L)
+}
 \references{
 Barnard, J. and Rubin, D. B. (1999). Small-sample
 degrees of freedom with multiple imputation. Biometrika, 86,
 948-955.  van Buuren, S. (2018). Flexible Imputation of Missing
 Data, 2nd ed., Sec. 2.3.6.
-}
-\examples{
-morie_midegf(b = 5L, t = 5L, m = 5L)
 }

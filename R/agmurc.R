@@ -12,6 +12,9 @@
 #' @references Schrittwieser et al. (2020), arXiv:1911.08265, Methods
 #'   (Search) and Equation (1).  Read from the ar5iv rendering.
 #' @export
+#' @examples
+#' dynamics <- function(s, a) list(0.5, s + a)
+#' Mzrecur(state = 0, action = 1, dynamics = dynamics)
 Mzrecur <- function(state, action, dynamics, prediction = NULL) {
   out <- dynamics(state, action)
   r <- out[[1]]; s <- out[[2]]

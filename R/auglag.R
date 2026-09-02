@@ -16,6 +16,10 @@
 #'   Fletcher (ed.), Optimization, 283-298.  Standard published form;
 #'   neither source is in the local corpus and neither was read.
 #' @export
+#' @examples
+#' f <- function(x) sum(x^2)
+#' g <- function(x) sum(x) - 1
+#' Auglag(f, g, x = c(0.5, 0.5))
 Auglag <- function(f, g, x, lam = NULL, mu = 1) {
   x <- .t1_vec(x); gv <- .t1_vec(g(x)); m <- length(gv)
   lm <- if (is.null(lam)) rep(0, m) else .t1_vec(lam)

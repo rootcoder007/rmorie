@@ -24,12 +24,12 @@ The tridiagonal \eqn{W} is inverted -- the un-inverted form
 \eqn{D' W D} agrees only at the two limits and is wrong at every
 intermediate lambda.
 }
+\examples{
+morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
+}
 \references{
 Hastie, Tibshirani and Friedman (2009). \emph{The
 Elements of Statistical Learning} (2nd ed.), Sec. 5.4. Reinsch, C.
 (1967). Smoothing by spline functions. \emph{Numerische
 Mathematik}, 10(3), 177-183.
-}
-\examples{
-morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
 }

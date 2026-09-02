@@ -16,6 +16,9 @@
 #'   quantized JL transform for KV cache quantization with zero
 #'   overhead. arXiv:2406.03482, definition 3.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tqhs(V, V)
 Tqhs <- function(k, S_mat) {
   kv <- as.numeric(k); Sm <- as.matrix(S_mat)
   signs <- .s4_sgn(as.numeric(Sm %*% kv))

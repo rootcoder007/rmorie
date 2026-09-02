@@ -18,11 +18,11 @@ List with lower, upper, width, lowerv, upperv, prob, k.
 LB(t|v) = max_{u <= v} LB(t|u), UB(t|v) = min_{u >= v} UB(t|u), then
 average over P(V = v).
 }
+\examples{
+Mivbound(lower = 5L, upper = 5L, prob = 0.5)
+}
 \references{
 Manski and Pepper (2000), Econometrica 68(4), 997-1010.
 Standard published form; the article could not be obtained (JSTOR
 access stub, NBER t0224 zero-page PDF) and was not read.
-}
-\examples{
-Mivbound(lower = 5L, upper = 5L, prob = 0.5)
 }

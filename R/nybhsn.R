@@ -64,6 +64,10 @@
 #'   \code{individual}, \code{critical}, \code{n}, \code{method}.
 #' @references Nyblom (1989), JASA 84:223-230; Hansen (1992), Journal of Policy Modeling 14:517-533.  Hansen's paper was fetched in full from his own page (users.ssc.wisc.edu/~bhansen/papers/jpm_92.pdf): eqs (3)-(4) give the scores, (9)-(10) give L_c, and Table 1 -- reproduced verbatim above -- is the critical-value table.  No p-value is returned: Table 1 gives six points and interpolating between them would invent precision the published table does not carry.  strucchange's sctest(type="Nyblom-Hansen") averages over the n+1 points of the empirical process including the zero at t=0, so its value is n/(n+1) times the L_c of eq (9) returned here.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Lctest(D, V)
 Lctest <- function(y, X, add_intercept = TRUE, variance = TRUE) {
   y <- .t4_vec(y)
   Xm <- if (is.matrix(X) || is.data.frame(X)) as.matrix(X) else matrix(as.numeric(X), ncol = 1L)

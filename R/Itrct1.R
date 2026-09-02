@@ -22,6 +22,10 @@
 #'   219(1):101-122, \doi{10.1016/j.jeconom.2020.06.003}; Hernan and
 #'   Robins (2020), Causal Inference: What If, chapter 13.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Itrct1(y = rnorm(40), D = rbinom(40, 1, 0.5), V = rbinom(40, 1, 0.5),
+#'        X = matrix(rnorm(80), 40, 2))
 Itrct1 <- function(y, D, V, X) {
   dy <- .s03vec(y); n <- length(dy)
   if (n == 0L) stop("interaction_did: y is empty")

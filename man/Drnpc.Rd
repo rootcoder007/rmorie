@@ -31,13 +31,13 @@ the design is refuted when
 \code{|tau_neg| > qnorm(1 - alpha/2) se_neg}, and
 \code{tau_adj = tau_main - tau_neg} subtracts the estimated bias.
 }
+\examples{
+set.seed(1)
+r <- Drnpc(y_main = rnorm(10), y_neg = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}
 \references{
 Lipsitch, M., Tchetgen Tchetgen, E. and Cohen, T. (2010).
 Negative controls. Epidemiology 21(3), 383-388.  Sant'Anna,
 P. H. C. and Zhao, J. (2020). Journal of Econometrics 219(1),
 101-122.
-}
-\examples{
-set.seed(1)
-r <- Drnpc(y_main = rnorm(10), y_neg = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 }

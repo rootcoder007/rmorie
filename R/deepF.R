@@ -52,6 +52,9 @@
 #'   2017:1725-1731; Rendle (2010), Factorization Machines,
 #'   ICDM 2010:995-1000.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DeepF(V)
 DeepF <- function(X, y = NULL, K = 4, mlp_h = 4, w0 = 0, seed = 42,
                   deep_scale = 1) {
   Xm <- .s03mat(X)

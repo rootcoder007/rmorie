@@ -42,12 +42,12 @@ a within-segment permutation test no longer rejects at level
 \code{sig}.  Detects changes in the full distribution rather than
 only the mean, and needs no parametric model.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_e_div(V)
+}
 \references{
 Matteson, D. S. and James, N. A. (2014). A
 nonparametric approach for multiple change point analysis of
 multivariate data. JASA, 109(505), 334-345.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_e_div(V)
 }

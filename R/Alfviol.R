@@ -24,6 +24,8 @@
 #' @return A list with \code{bondlength}, \code{bondangle}, \code{clash},
 #'   their sum \code{estimate} (equation 47) and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. eq. (44)-(47)
+#' @examples
+#' Alfviol()
 Alfviol <- function(blen = NULL, blen_lit = NULL, blen_sigma = NULL,
                     cosang = NULL, cosang_lit = NULL, cosang_sigma = NULL,
                     dnb = NULL, dnb_lit = NULL, factor = 12, clash_tol = 1.5) {

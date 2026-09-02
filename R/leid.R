@@ -25,6 +25,10 @@
 #'   Scientific Reports 9:5233. \doi{10.1038/s41598-019-41695-z}.
 #' @seealso \code{\link{Leidenclus}}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Leid(V, M)
 Leid <- function(y, A, resolution = 1, quality = "modularity",
                  max_iter = 20) {
   Leidenclus(A, resolution, quality, max_iter)

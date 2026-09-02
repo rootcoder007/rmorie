@@ -29,7 +29,7 @@ Press, Smith and Lewis (2022), "Train short, test long: attention with
 linear biases enables input length extrapolation", ICLR 2022,
 arXiv:2108.12409, read from the fetched PDF.  Page 4 gives the modification
 verbatim, applied after the query-key dot product,
-softmax(q_i K' + m [-(i-1), ..., -2, -1, 0]), and states the slope
+softmax(q_i K' + m \link{-(i-1), ..., -2, -1, 0}), and states the slope
 schedule: "for n heads, our set of slopes is the geometric sequence that
 starts at 2^(-8/n) and uses that same value as its ratio", so head k
 (1-based) gets m_k = 2^(-8k/n).
@@ -40,7 +40,7 @@ module alibi delegates to the bias builder here rather than holding a second
 copy.
 
 The bias used is -m|i - j|, symmetric in the distance.  On the causal lower
-triangle j <= i that is identical to the paper's [-(i-1), ..., -1, 0] row,
+triangle j <= i that is identical to the paper's \link{-(i-1), ..., -1, 0} row,
 because |i - j| = i - j there; the symmetric form simply extends it to the
 non-causal case.  Set causal = TRUE to mask the future out entirely, which
 reproduces the paper exactly.  No position embeddings are added anywhere:

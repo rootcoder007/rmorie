@@ -11,6 +11,9 @@
 #' @return Numeric vector of Gaussian scores.
 #' @references Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_normal_scores(V)
 morie_normal_scores <- function(z) {
   z <- as.numeric(z)
   n <- length(z)
@@ -29,6 +32,9 @@ morie_normal_scores <- function(z) {
 #' @return Numeric vector on the scale of `z`.
 #' @references Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_anamorphosis(V, V)
 morie_anamorphosis <- function(z, y_new) {
   zs <- sort(as.numeric(z))
   n <- length(zs)

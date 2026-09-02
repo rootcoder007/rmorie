@@ -16,6 +16,9 @@
 #' @references Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 #'   lemma 3.5.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tqdist(V, V)
 Tqdist <- function(eps, delta) {
   eps <- as.numeric(eps); delta <- as.numeric(delta)
   m <- (4 / 3) * (1 + eps) / (eps * eps) * log(2 / delta)

@@ -27,10 +27,10 @@ t = 1 fall with n.
 Formula: S(1) = prod over events t_j <= 1 of
 (R_j - 1 + 2 exp(-t_j)) / (R_j + 2 exp(-t_j)); target exp(-1).
 }
+\examples{
+Ghosalntrconsist()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.4.1.
-}
-\examples{
-Ghosalntrconsist()
 }

@@ -33,11 +33,11 @@ becomes visible.
 Formula: \code{PDE = CDE + INTref}, \code{TIE = PIE + INTmed},
 \code{TE = PDE + TIE}.
 }
+\examples{
+Vivkt(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 VanderWeele, T. J. (2014). Epidemiology 25:749-761;
 Robins & Greenland (1992) Epidemiology 3:143-155; Pearl (2001) UAI
 17:411-420.
-}
-\examples{
-Vivkt(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

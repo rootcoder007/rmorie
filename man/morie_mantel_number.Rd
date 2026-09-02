@@ -16,10 +16,10 @@ As \code{\link[=morie_turan_number]{morie_turan_number()}}, with \code{floor_n2_
 \eqn{\lfloor n^2/4 \rfloor} edges, attained by the balanced complete
 bipartite graph. The floor matters at odd \eqn{n}.
 }
+\examples{
+morie_mantel_number(n = 5L)
+}
 \references{
 Mantel W (1907). Problem 28. \emph{Wiskundige Opgaven},
 10, 60-61.
-}
-\examples{
-morie_mantel_number(n = 5L)
 }

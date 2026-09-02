@@ -27,12 +27,12 @@ second copy.
 Formula: \code{[l - c s_l / sqrt(n), u + c s_u / sqrt(n)]} with \code{c}
 solving \code{Phi(c + sqrt(n) Delta / max(s_l, s_u)) - Phi(-c) = 1 - alpha}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bndfre(V, V)
+}
 \references{
 Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
 for partially identified parameters. Econometrica 72(6), 1845-1857,
 equation (6). \doi{10.1111/j.1468-0262.2004.00555.x}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Bndfre(V, V)
 }

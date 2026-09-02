@@ -22,6 +22,9 @@
 #'   arXiv. The paper does not fix the split RULE; magnitude-rank
 #'   selection is used here and documented as such.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Outsplit(V)
 Outsplit <- function(x, b_out = 8, b_in = 2, frac = 0.01) {
   x <- .t1_vec(x); d <- length(x)
   if (d < 1L) stop("the vector must be non-empty")

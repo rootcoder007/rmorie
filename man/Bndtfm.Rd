@@ -35,6 +35,12 @@ equivariance gap of the median bound, exactly zero for increasing
 Formula: worst-case bound of Molinari (2021) equation (2.11) applied to
 \code{t(y)}; gap \code{= |t(r_y) - r_t| + |t(s_y) - s_t|} at the median.
 }
+\examples{
+set.seed(1)
+y <- rnorm(40)
+Bndtfm(y = y, D = rbinom(40, 1, 0.5), X = rbinom(40, 1, 0.5),
+       transform = exp(y))
+}
 \references{
 Chernozhukov, V., Lee, S. and Rosen, A. M. (2013).
 Intersection bounds: estimation and inference. Econometrica 81(2),
@@ -43,10 +49,4 @@ invariance evaluated here is the quantile bound of Manski (2003)
 Section 1.3 as printed on pp. 12-13 of Molinari, F. (2021), Handbook
 of Econometrics 7A (arXiv:2004.11751); the mean bound is equation
 (2.11) of the same.
-}
-\examples{
-set.seed(1)
-y <- rnorm(40)
-Bndtfm(y = y, D = rbinom(40, 1, 0.5), X = rbinom(40, 1, 0.5),
-       transform = exp(y))
 }

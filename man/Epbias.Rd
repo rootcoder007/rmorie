@@ -34,10 +34,10 @@ when Se + Sp = 1 and inadmissible when Se + Sp < 1.
 With exactly two groups -- cases first, then controls -- the corrected
 and uncorrected odds ratios are both reported.
 }
+\examples{
+Epbias(A_obs = c(50, 30), Se = 0.9, Sp = 0.85, N = c(100, 100))
+}
 \references{
 Greenland (1988), Statistics in Medicine 7(7):745-757,
 doi:10.1002/sim.4780070704.
-}
-\examples{
-Epbias(A_obs = c(50, 30), Se = 0.9, Sp = 0.85, N = c(100, 100))
 }

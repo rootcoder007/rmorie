@@ -50,11 +50,11 @@ the underlying object so callers can pipe into
 Hard-errors if \pkg{WeightIt} is not installed -- the multi-method
 weighting machinery has no compact inline equivalent.
 }
-\references{
-Greifer N (2024). WeightIt: Weighting for Covariate Balance in
-Observational Studies. R package version 1.4.0.
-}
 \examples{
 morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4), 
     x = rnorm(20)), treatment = "t", covariates = "x")
+}
+\references{
+Greifer N (2024). WeightIt: Weighting for Covariate Balance in
+Observational Studies. R package version 1.4.0.
 }

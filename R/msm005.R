@@ -10,6 +10,9 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (1.4) p.17. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Msm005(D)
 Msm005 <- function(groups) {
   s <- .gponeway(groups)
   list(estimate = s$grand_mean, beta_bar = s$grand_mean,

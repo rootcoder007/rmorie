@@ -21,11 +21,11 @@ Burnside applied to the cyclic group gives
 and by direct Burnside over the explicit rotations, then compared --
 the closed form is a shortcut, and shortcuts are where errors hide.
 }
+\examples{
+morie_cycle_index_necklaces(n = 5L, k = 5L)
+}
 \references{
 Polya G (1937). Kombinatorische Anzahlbestimmungen fuer
 Gruppen, Graphen und chemische Verbindungen. \emph{Acta
 Mathematica}, 68, 145-254.
-}
-\examples{
-morie_cycle_index_necklaces(n = 5L, k = 5L)
 }

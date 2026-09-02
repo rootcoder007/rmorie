@@ -12,6 +12,8 @@
 #' @return List with ``beta``, ``marker_effects``, ``gebv``, ``n``, ``m``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 2, Eq. (2.4) p. 53: SNP-BLUP replaces Z by the scaled marker matrix M and Sigma by sigma2_M I in Eq. (2.2); the genomic estimated breeding value is M uhat.  Delegates to the chapter routine in morie.fn._gp_core, which was verified against this book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own, re-read against the chapter PDF here.
 #' @export
+#' @examples
+#' Snpblup(X = 5L, y = 5L, M = 5L, sigma2_m = c(1, 2, 3, 4, 5, 6, 7, 8))
 Snpblup <- function(X, y, M, sigma2_m, sigma2_e = 1) {
   out <- morie_snp_blup(X, y, M, as.numeric(sigma2_m), as.numeric(sigma2_e))
   Mm <- .t1_mat(M)

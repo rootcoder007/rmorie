@@ -16,6 +16,9 @@
 #'   Data Analysis with R, 2nd edn, Equation (8.4), p. 218.  Read from
 #'   the corpus PDF.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Svariog(V, V)
 Svariog <- function(coords, z, breaks = NULL, nbins = 10, cutoff = NULL) {
   P <- .t1_mat(coords); z <- .t1_vec(z); n <- nrow(P)
   if (length(z) != n) stop("z must have one value per location")

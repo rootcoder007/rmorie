@@ -40,13 +40,13 @@ informative outcome -- the added predictors cost more degrees of
 freedom than they repaid -- and is reported as it comes out rather
 than clamped.
 }
+\examples{
+Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+}
 \references{
 Raudenbush and Bryk (2002), Hierarchical Linear Models,
 2nd ed., Sage, ch. 4, "proportion reduction in variance" at level 1.
 The book was not in the local corpus and could not be obtained; the
 quantity is implemented exactly as the ratio printed above, its
 standard published form, stated in full so it can be checked.
-}
-\examples{
-Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
 }

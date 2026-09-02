@@ -25,11 +25,11 @@ property: the raw score is a sufficient statistic for ability.
 \details{
 Formula: P(X = 1) = exp(theta - b) / (1 + exp(theta - b)).
 }
-\references{
-Rasch (1960), Probabilistic Models for Some Intelligence
-and Attainment Tests, Danmarks Paedagogiske Institut.
-}
 \examples{
 set.seed(1)
 r <- Irt1pl(y = rnorm(10), theta = rnorm(10), b = matrix(rnorm(20), 5, 4)); TRUE
+}
+\references{
+Rasch (1960), Probabilistic Models for Some Intelligence
+and Attainment Tests, Danmarks Paedagogiske Institut.
 }

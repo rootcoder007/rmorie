@@ -22,10 +22,10 @@ Unlike the SAR case, this estimator is CONSISTENT for a one-parameter
 CAR model, so it is a principled estimate in its own right as well as
 a starting value for maximum likelihood.
 }
+\examples{
+car_rho_ols(Z = 5L, W = 5L)
+}
 \references{
 Schabenberger & Gotway (2005), p. 340, citing
 Haining (1990), p. 130.
-}
-\examples{
-car_rho_ols(Z = 5L, W = 5L)
 }

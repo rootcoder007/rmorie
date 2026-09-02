@@ -31,6 +31,8 @@
 #'   systems: or how to better expect the unexpected. ACM Transactions on
 #'   Intelligent Systems and Technology 5(4), 54. \doi{10.1145/2559952}
 #' @export
+#' @examples
+#' ServR(pred = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8))
 ServR <- function(pred, baseline, relevant) {
   ids <- function(v) unique(as.integer(.s03vec(v)))
   rs <- ids(pred); pm <- ids(baseline); rel <- ids(relevant)

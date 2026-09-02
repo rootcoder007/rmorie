@@ -58,12 +58,12 @@ Knowing the true propensity score does not lower the bound -- Hahn's
 result is that it is the same either way, and that using an estimated
 score can give a smaller variance than plugging in the true one.
 }
+\examples{
+set.seed(1)
+r <- morie_efficiency_bound_ate(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+}
 \references{
 Hahn J (1998) \emph{Econometrica} 66(2):315-331,
 doi:10.2307/2998560. Hirano K, Porter JR (2009)
 \emph{Econometrica} 77(5):1683-1701, doi:10.3982/ECTA6630.
-}
-\examples{
-set.seed(1)
-r <- morie_efficiency_bound_ate(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
 }

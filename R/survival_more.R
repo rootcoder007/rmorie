@@ -119,6 +119,8 @@
 #' @return list with the RMST, its standard error, the confidence interval and the horizon used.
 #' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, eq. (4.5.4).
 #' @export
+#' @examples
+#' Rmst(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 Rmst <- function(time, event, tau = NULL, alpha = 0.05) {
   # RMST(tau) = integral_0^tau S(t) dt, the area under the KM curve, with
   # the variance of Klein and Moeschberger (2003) eq. (4.5.4).  The
@@ -179,6 +181,11 @@ Rmst <- function(time, event, tau = NULL, alpha = 0.05) {
 #' @return list with the difference, its standard error, the confidence interval and each group's RMST.
 #' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 #' @export
+#' @examples
+#' ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+#' SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+#' g <- c(rep(0, 8), rep(1, 8))
+#' Rmstdiff(ST, SE, g)
 Rmstdiff <- function(time, event, group, tau = NULL,
                                      alpha = 0.05) {
   # RMST_1 - RMST_2 with SE = sqrt(V1 + V2), the groups independent.
@@ -231,6 +238,8 @@ Rmstdiff <- function(time, event, group, tau = NULL,
 #' @return list with the residuals, their sum, and the cumulative baseline hazard.
 #' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 #' @export
+#' @examples
+#' Martingale(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Martingale <- function(time, event, X, beta) {
   # M_i = delta_i - H0(t_i) exp(x_i' beta): observed events minus
   # expected.  They sum to zero at the fitted beta, which is returned as
@@ -260,6 +269,8 @@ Martingale <- function(time, event, X, beta) {
 #' @return list with the deviance residuals and the martingale residuals they derive from.
 #' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 #' @export
+#' @examples
+#' Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Devresid <- function(time, event, X, beta) {
   # d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing
   # transform of the martingale residuals: roughly normal when the model
@@ -300,6 +311,8 @@ Devresid <- function(time, event, X, beta) {
 #' @return list with the Cox-Snell residuals and the Nelson-Aalen estimate computed from them.
 #' @references Cox, D. R. and Snell, E. J. (1968). A general definition of residuals. JRSS-B 30(2), 248-275.
 #' @export
+#' @examples
+#' Coxsnell(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Coxsnell <- function(time, event, X, beta) {
   # r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i, the fitted cumulative
   # hazard.  If the model is right these behave like a censored unit
@@ -341,6 +354,11 @@ Coxsnell <- function(time, event, X, beta) {
 #' @return list with the residuals, the event times, and the proportional-hazards test statistic and p-value.
 #' @references Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
 #' @export
+#' @examples
+#' ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+#' SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+#' SX <- matrix((seq_along(ST) - 1)%%2, ncol = 1)
+#' Schoenfeld(ST, SE, SX, 0.3, vcov = matrix(0.25, 1, 1))
 Schoenfeld <- function(time, event, X, beta, vcov = NULL,
                                       scaled = TRUE) {
   # s_i = x_i - weighted risk-set mean at each event time.  Grambsch and
@@ -408,6 +426,9 @@ Schoenfeld <- function(time, event, X, beta, vcov = NULL,
 #' @return list with the hazard ratios, the interval bounds, and the z statistics and p-values.
 #' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Hazratio(V, V)
 Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
   # HR = exp(beta), CI = exp(beta +/- z se).  The interval is formed on
   # the LOG scale and exponentiated, so it is asymmetric about the HR and
@@ -442,6 +463,9 @@ Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
 #' @return list with the cumulative incidence, its standard error, the confidence interval and the event times.
 #' @references Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cif(V, V)
 Cif <- function(time, cause, code = 1, alpha = 0.05) {
   # Aalen-Johansen: CIF_k(t) = sum S(t_{i-1}) d_ki / n_i, with S the
   # ALL-CAUSE Kaplan-Meier.  The S(t_{i-1}) factor is the entire point:
@@ -494,6 +518,8 @@ Cif <- function(time, cause, code = 1, alpha = 0.05) {
 #' @return list with the coefficients, their standard errors, the log-likelihood and the iteration count.
 #' @references Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. JASA 94(446), 496-509.
 #' @export
+#' @examples
+#' Finegray(time = c(1, 2, 3, 4, 5, 6, 7, 8), cause = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Finegray <- function(time, cause, X, code = 1,
                                     max_iter = 50L, tol = 1e-9) {
   # Fine and Gray (1999, JASA 94:496-509).  A Cox model on the
@@ -568,6 +594,11 @@ Finegray <- function(time, cause, X, code = 1,
 #' @return list with the survival estimate, its standard error, the confidence interval and the risk-set sizes.
 #' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, Section 3.4.
 #' @export
+#' @examples
+#' ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
+#' SE <- c(1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 0, 1, 1)
+#' en <- c(0, 0, 0, 0, 1, 1, 1, 1, 0, 0, 0, 0, 2, 2, 2, 2)
+#' Ltkm(en, ST, SE)
 Ltkm <- function(entry, time, event,
                                              alpha = 0.05) {
   # The only change from the ordinary estimator is the risk set:
@@ -620,6 +651,8 @@ Ltkm <- function(entry, time, event,
 #' @return list with the landmark survival estimate, the number retained and dropped, and the group comparison when supplied.
 #' @references Anderson, J. R., Cain, K. C. and Gelber, R. D. (1983). Analysis of survival by tumor response. Journal of Clinical Oncology 1(11), 710-719.
 #' @export
+#' @examples
+#' Landmark(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), landmark_time = 5L)
 Landmark <- function(time, event, landmark_time, X = NULL,
                                     group = NULL, alpha = 0.05) {
   # Drop subjects who fail or are censored before the landmark, reset the
@@ -680,6 +713,9 @@ Landmark <- function(time, event, landmark_time, X = NULL,
 #' @return list with the estimated masses, the intersection intervals, the survival curve and the iteration count.
 #' @references Turnbull, B. W. (1976). The empirical distribution function with arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Turnbull(V, V)
 Turnbull <- function(left, right, max_iter = 1000L,
                                     tol = 1e-10) {
   # Turnbull (1976, JRSS-B 38:290-295).  Mass sits only on the maximal
@@ -832,6 +868,8 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' @return list with the location and scale estimates, the log-likelihood, AIC and BIC.
 #' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 #' @export
+#' @examples
+#' Parasurv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 Parasurv <- function(time, event, dist = "weibull") {
   # ML for a log-location-scale family with right censoring:
   #   prod f(t)^delta S(t)^(1-delta).
@@ -874,6 +912,8 @@ Parasurv <- function(time, event, dist = "weibull") {
 #' @return list with the coefficients, standard errors, time ratios, the scale and the log-likelihood.
 #' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley, Chapter 3.
 #' @export
+#' @examples
+#' Aftfit(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Aftfit <- function(time, event, X, dist = "weibull",
                                alpha = 0.05) {
   # log T = x'beta + sigma W.  Coefficients act MULTIPLICATIVELY ON TIME:
@@ -914,6 +954,8 @@ Aftfit <- function(time, event, X, dist = "weibull",
 #' @return list with one row per family giving the log-likelihood, AIC and BIC, ordered by AIC.
 #' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 #' @export
+#' @examples
+#' Paracompare(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 Paracompare <- function(time, event, X = NULL,
                                               dists = NULL) {
   # Each family fitted by ML and ranked by AIC, with BIC alongside.  The

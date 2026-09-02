@@ -21,7 +21,7 @@ list: estimate, values, centers, window, n, method.
 }
 \description{
 The MAD of each trailing window of length \code{window}; output element j covers
-x[j:(j+window-1)].  Source consulted: Hampel (1974), JASA 69(346), 383-393.
+x\link{j:(j+window-1)}.  Source consulted: Hampel (1974), JASA 69(346), 383-393.
 }
 \examples{
 madMov(c(1, 2, 3, 4, 5, 6), 3)$values

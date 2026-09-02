@@ -15,7 +15,7 @@ Distilkl(teacher, student, temperature = 2, label = NULL, alpha = 0.5)
 
 \item{label}{One-based index of the correct class, or NULL.}
 
-\item{alpha}{Weight on the soft objective, in [0, 1].}
+\item{alpha}{Weight on the soft objective, in \link{0, 1}.}
 }
 \value{
 List with softce, kl, hardce, total, teacherprob, studentprob,
@@ -26,12 +26,12 @@ p_i = exp(z_i/T)/sum_j exp(z_j/T) (eq. 1); the soft cross entropy
 CE(p, q) is multiplied by T^2 and blended with the hard-label cross
 entropy taken at T = 1.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Distilkl(V, V)
+}
 \references{
 Hinton, Vinyals and Dean (2015), arXiv:1503.02531, Sect. 2
 and Equation (1).  Read from the ar5iv rendering; the same paper is
 in the local corpus.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Distilkl(V, V)
 }

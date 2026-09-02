@@ -22,6 +22,9 @@
 #'   based on beta processes in models for life history data. Annals of
 #'   Statistics, 18(3), 1259-1294. doi:10.1214/aos/1176347749
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Npbsr(V)
 Npbsr <- function(time, event = NULL, c = 1.0, lam0 = NULL) {
   morie_ghosal_survival_beta_process(time, event = event, c = c, lam0 = lam0)
 }

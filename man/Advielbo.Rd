@@ -22,13 +22,13 @@ List with elbo, entropy, meanlogjoint, logjoints, K, S.
 L(mu, omega) = mean_s log p(x, mu + exp(omega) eta_s)
 + sum_k omega_k + (K/2)(1 + log 2 pi).
 }
-\references{
-Kucukelbir, Tran, Ranganath, Gelman and Blei (2017), JMLR
-18(14); arXiv:1603.00788, Sects. 2.3-2.5 and Equation (5), read from
-the ar5iv rendering of the arXiv source.
-}
 \examples{
 set.seed(1)
 Advielbo(mu = c(0, 0), omega = c(0, 0), eta = matrix(rnorm(4), 2, 2),
          logjoint = function(x) -0.5 * sum(x^2))
+}
+\references{
+Kucukelbir, Tran, Ranganath, Gelman and Blei (2017), JMLR
+18(14); arXiv:1603.00788, Sects. 2.3-2.5 and Equation (5), read from
+the ar5iv rendering of the arXiv source.
 }

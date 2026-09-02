@@ -36,6 +36,9 @@
 #'   is implemented in its standard published form, exactly as printed
 #'   above.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mlwz(V, V)
 Mlwz <- function(y, cluster, ddof = 1) {
   v <- .t1_vec(y); n <- length(v)
   if (n == 0L) stop("y is empty")

@@ -37,10 +37,10 @@ Formula: score = 1{prior mass ok} - lan_remainder
 \item change_of_measure_gap; holds iff all three checks pass at tol.
 }
 }
+\examples{
+Ghosalstrictsbvm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.2.
-}
-\examples{
-Ghosalstrictsbvm()
 }

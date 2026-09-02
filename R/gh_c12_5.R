@@ -18,6 +18,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.3.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosaleffinflfn(V, V)
 Ghosaleffinflfn <- function(data, t) {
   xs <- as.numeric(data)
   n <- length(xs)

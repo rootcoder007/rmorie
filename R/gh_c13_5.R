@@ -18,6 +18,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.3.2.
 #' @export
+#' @examples
+#' Ghosalbpcont()
 Ghosalbpcont <- function(c = 2, t_max = 1, n_grid = 2000) {
   n_grid <- as.integer(n_grid)
   if (c <= 0) stop("c must be positive")

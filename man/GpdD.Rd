@@ -33,11 +33,11 @@ unimplemented placeholder, so there is nothing to delegate to.
 Formula: F(x) = 1 - (1 + xi x/sigma)^(-1/xi), or 1 - exp(-x/sigma)
 when xi = 0.
 }
+\examples{
+GpdD(sigma = 0.5, xi = 5L)
+}
 \references{
 Pickands (1975), Statistical inference using extreme
 order statistics, Annals of Statistics 3(1):119-131.
 \doi{10.1214/aos/1176343003}
-}
-\examples{
-GpdD(sigma = 0.5, xi = 5L)
 }

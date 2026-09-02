@@ -27,11 +27,11 @@ disagree in the last digits.
 \details{
 Formula: \code{p = (1 - d)/n + d M^T p}, iterated \code{max_iter} times.
 }
-\references{
-Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
-Stanford InfoLab technical report 1999-66.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Sgtpgr(M)
+}
+\references{
+Page, L., Brin, S., Motwani, R. & Winograd, T. (1999).
+Stanford InfoLab technical report 1999-66.
 }

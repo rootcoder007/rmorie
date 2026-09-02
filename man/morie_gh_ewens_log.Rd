@@ -21,12 +21,12 @@ Computes \eqn{\log\{n! / (\alpha)_n \prod_i \alpha^{m_i} /
 blocks of size \code{i} and the sample size \eqn{n = \sum_i i m_i} is
 recovered from the multiplicities.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_ewens_log(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_ewens_log(V, V)
 }

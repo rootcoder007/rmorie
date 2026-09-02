@@ -20,6 +20,9 @@
 #' @references Warner, S. L. (1965). JASA 60:63-69; Dwork & Roth (2014),
 #'   Found Trends Theor Comput Sci 9:211-407, section 3.2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Rrand(V)
 Rrand <- function(bit, epsilon = 1) {
   b <- as.numeric(unlist(bit)); n <- length(b)
   eps <- as.numeric(epsilon)

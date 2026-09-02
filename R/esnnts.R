@@ -30,6 +30,9 @@
 #' @references Jaeger (2001), GMD Report 148; Jaeger & Haas (2004),
 #'   Science 304(5667):78-80, doi:10.1126/science.1091277.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Esnnts(V)
 Esnnts <- function(y, reservoir_size = 20, spectral_radius = 0.9, leak = 1,
                    ridge = 1e-6, washout = NULL) {
   PR <- c(2, 3, 5, 7, 11, 13, 17, 19, 23, 29, 31, 37)

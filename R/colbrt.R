@@ -18,6 +18,9 @@
 #'   \code{method}.
 #' @references Khattab & Zaharia (2020), ColBERT, SIGIR 2020:39-48.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Colbrt(V, V)
 Colbrt <- function(query, docs) {
   Q <- .s03mat(query)
   nq <- nrow(Q)

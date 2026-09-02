@@ -31,14 +31,14 @@ Because the weights are estimated, the robust (sandwich) standard
 error is reported rather than the model-based one.
 }
 \details{
-Formula: E[Y^a|V] = b0 + b1 a + b2 V a + b3 V.
-}
-\references{
-Hernan and Robins (2020), Causal Inference: What If,
-Chapman and Hall/CRC, section 12.5, p. 171.
+Formula: E\link{Y^a|V} = b0 + b1 a + b2 V a + b3 V.
 }
 \examples{
 set.seed(1)
 Intanl(y = rnorm(20), A = rbinom(20, 1, 0.5), V = rbinom(20, 1, 0.5),
        H = runif(20, 0.5, 1.5))
+}
+\references{
+Hernan and Robins (2020), Causal Inference: What If,
+Chapman and Hall/CRC, section 12.5, p. 171.
 }

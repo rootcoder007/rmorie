@@ -17,6 +17,9 @@
 #' @references Weiszfeld, E. (1937). Tohoku Math J 43:355-386; Small,
 #'   C. G. (1990) Int Statist Rev 58:263-277.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' L1med(V)
 L1med <- function(X, tol = NULL, max_iter = 200) {
   A <- as.matrix(X); n <- nrow(A); d <- ncol(A)
   mu <- colSums(A) / n

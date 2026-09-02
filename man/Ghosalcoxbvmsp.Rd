@@ -27,12 +27,12 @@ baseline and a binary covariate here, so the truth is known.
 }
 \details{
 Formula: -log PL(b) = sum over the event ordering of
-[log(sum_{j in risk set] exp(b z_j)) - b z_i}; minimised on a grid.
+\link{log(sum_{j in risk set} exp(b z_j)) - b z_i}; minimised on a grid.
+}
+\examples{
+Ghosalcoxbvmsp()
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.3.3.
-}
-\examples{
-Ghosalcoxbvmsp()
 }

@@ -25,6 +25,9 @@
 #'   method of measurement. \emph{Political Science Quarterly} 40(1),
 #'   60-72.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_party_unity(V, V)
 morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
   V <- as.matrix(vote_matrix)
   storage.mode(V) <- "double"
@@ -91,6 +94,8 @@ morie_party_unity <- function(vote_matrix, party_id, unity_votes_only = FALSE) {
 #' @references Lauderdale BE (2010). Unpredictable voters in ideal
 #'   point estimation. \emph{Political Analysis} 18(2), 151-171.
 #' @export
+#' @examples
+#' morie_heteroskedastic_scales(votes = c("a", "b", "c"), ideal_points = c("a", "b", "c"), alpha = 0.5, beta = 0.5)
 morie_heteroskedastic_scales <- function(votes, ideal_points, alpha, beta) {
   V <- as.matrix(votes)
   storage.mode(V) <- "double"

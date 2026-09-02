@@ -63,6 +63,8 @@
 #'   Foundations of Differential Privacy. Foundations and Trends in
 #'   Theoretical Computer Science, 9(3-4), Claim 3.9.
 #' @export
+#' @examples
+#' morie_reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 morie_reportm <- function(counts, epsilon, sensitivity = 1, seed = 1) {
   x <- as.numeric(counts)
   n <- length(x)

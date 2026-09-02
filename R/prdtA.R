@@ -17,6 +17,8 @@
 #'   dated to his 1924 lectures. The evaluation procedure is the standard
 #'   stack algorithm and is not attributed to that source.
 #' @export
+#' @examples
+#' Prefixev(tokens = 5L)
 Prefixev <- function(tokens) {
   toks <- as.character(tokens)
   if (!length(toks)) stop("the expression is empty")

@@ -28,11 +28,11 @@ Jaccard-Tanimoto, both 0.5 recovers Dice.
 \details{
 Formula: \code{S = |A n B| / (|A n B| + alpha |A \ B| + beta |B \ A|)}.
 }
-\references{
-Tversky, A. (1977). Features of similarity. Psychological
-Review 84:327-352, equation (5).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tvsbn(V, V)
+}
+\references{
+Tversky, A. (1977). Features of similarity. Psychological
+Review 84:327-352, equation (5).
 }

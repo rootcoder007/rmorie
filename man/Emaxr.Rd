@@ -43,12 +43,12 @@ V_j^-1 = (I - sigma2_u J_j / (sigma2_e + n_j sigma2_u)) / sigma2_e,
 or supplied fixed via \code{beta}, in which case sigma2_e = 0 is
 admissible and the update reduces to its exact limit.
 }
+\examples{
+set.seed(1)
+r <- Emaxr(y = rnorm(10), X = rnorm(10), cluster = rnorm(10), sigma2_u = 0.5, sigma2_e = 0.5); TRUE
+}
 \references{
 Dempster, Laird & Rubin (1977), JRSS-B 39(1):1-38;
 Laird & Ware (1982), Biometrics 38(4):963-974,
 doi:10.2307/2529876.
-}
-\examples{
-set.seed(1)
-r <- Emaxr(y = rnorm(10), X = rnorm(10), cluster = rnorm(10), sigma2_u = 0.5, sigma2_e = 0.5); TRUE
 }

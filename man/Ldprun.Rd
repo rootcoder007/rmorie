@@ -40,6 +40,10 @@ offending pair the member with the LOWER minor allele frequency is
 removed (the later variant on ties). Removal is permanent across
 subsequent windows.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ldprun(V)
+}
 \references{
 Purcell, S., Neale, B., et al. (2007). PLINK: a tool
 set for whole-genome association and population-based linkage
@@ -47,8 +51,4 @@ analyses. American Journal of Human Genetics 81(3), 559-575
 (sec. Linkage disequilibrium based SNP pruning). PLINK 1.9 LD
 documentation, indep-pairwise, cog-genomics.org/plink/1.9/ld
 (fetched 2026-08-09).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ldprun(V)
 }

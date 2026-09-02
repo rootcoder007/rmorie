@@ -26,9 +26,9 @@ which needs \eqn{O(\sqrt n)} terms per value rather than \eqn{O(n)}.
 odd parts. Euler's theorem says those two counts are EQUAL at every
 \eqn{n}, which the parity test checks rather than assumes.
 }
-\references{
-Andrews GE (1976), The Theory of Partitions.
-}
 \examples{
 morie_partition_count(n = 5L)
+}
+\references{
+Andrews GE (1976), The Theory of Partitions.
 }

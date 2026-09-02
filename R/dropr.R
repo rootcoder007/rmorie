@@ -10,6 +10,9 @@
 #' @return List with ``activation``, ``kept``, ``dropped``, ``rate``, ``n``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.6 p. 404 describes dropout as setting a random fraction of the weights of the input or hidden neurons to zero, so their contribution is removed on the forward pass and they receive no update on the backward pass; it prints no formula and attributes the method to Srivastava, Hinton, Krizhevsky, Sutskever and Salakhutdinov (2014), Dropout: A Simple Way to Prevent Neural Networks from Overfitting, JMLR 15:1929-1958, which is where the 1/(1 - rate) inverted scaling comes from.  The mask is an argument rather than drawn internally so the function is deterministic.  Chapter read from the PDF; the scaling is from the paper the book names.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Dropmask(x = rnorm(10), mask = rbinom(10, 1, 0.5), rate = 0.5)
 Dropmask <- function(x, mask, rate) {
   x <- .t1_vec(x); m <- .t1_vec(mask); rate <- as.numeric(rate)
   if (length(x) != length(m)) stop("x and mask must have the same length")

@@ -53,10 +53,6 @@ with an ideal-point correlation of 0.47 against the truth, while
 seeding from the leading singular vectors reached -6913 and 0.990 in
 26 sweeps.
 }
-\references{
-Poole KT, Rosenthal H (1985) \emph{AJPS} 29(2):357-384,
-\doi{10.2307/2111172}.
-}
 \examples{
 set.seed(3)
 n_leg <- 20; n_votes <- 15
@@ -67,4 +63,8 @@ votes <- sapply(1:n_votes, function(j) {
 })
 r <- morie_wnominate_fit(votes, n_dims = 1L)
 str(r, max.level = 1)
+}
+\references{
+Poole KT, Rosenthal H (1985) \emph{AJPS} 29(2):357-384,
+\doi{10.2307/2111172}.
 }

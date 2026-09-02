@@ -30,10 +30,10 @@ scaled by six times the median absolute residual,
 delta_i = (1 - (r_i / (6 s))^2)^2 for |r_i| < 6 s (eq. 5-7).  A fixed
 bandwidth in day units replaces Cleveland's nearest-neighbour span.
 }
+\examples{
+Epicur(dates = c(1, 2, 3, 4, 5, 6, 7, 8), cases = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
+}
 \references{
 Cleveland (1979), JASA 74(368):829-836,
 doi:10.1080/01621459.1979.10481038.
-}
-\examples{
-Epicur(dates = c(1, 2, 3, 4, 5, 6, 7, 8), cases = c(1, 2, 3, 4, 5, 6, 7, 8), bandwidth = 0.5)
 }

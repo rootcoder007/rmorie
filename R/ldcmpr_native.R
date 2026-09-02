@@ -36,6 +36,9 @@
 #'   fetched 2026-08-09. EM phase resolution follows CRAN package
 #'   genetics R/LD.R as documented in twoldp.R.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ldcmpr(V, V)
 Ldcmpr <- function(geno1, geno2, phased = FALSE) {
   if (isTRUE(phased)) {
     a <- as.numeric(geno1); b <- as.numeric(geno2)

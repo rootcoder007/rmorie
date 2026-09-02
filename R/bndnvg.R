@@ -21,6 +21,9 @@
 #'   Microeconometrics with partial identification, Handbook of Econometrics
 #'   7A, 355-486 (arXiv:2004.11751 p. 17).
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Bndnvg(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Bndnvg <- function(y, D) {
   z <- .bnd_yd(y, D, "Bndnvg")
   cm <- .bnd_cellmeans(z$y, z$d)

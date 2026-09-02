@@ -35,6 +35,9 @@
 #'   Population structure and eigenanalysis. PLoS Genetics, 2(12),
 #'   e190. doi:10.1371/journal.pgen.0020190
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Pcasnps(M)
 Pcasnps <- function(genotypes, n_components = 2L) {
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"

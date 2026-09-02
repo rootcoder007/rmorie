@@ -238,26 +238,14 @@ test_that("morie_kmeans_clustering coerces a plain vector to a column matrix", {
   expect_length(res$labels, 30L)
 })
 
-test_that("morie_ksr01_kosorok_empirical_process returns the standardised statistic", {
-  set.seed(61)
-  xs <- rnorm(120)
-  res <- morie_ksr01_kosorok_empirical_process(xs)
-  expect_type(res, "list")
-  expect_named(res, c("estimate", "se", "n", "method"))
-  expect_equal(res$n, 120L)
-  expect_true(is.finite(res$estimate))
-  expect_true(is.finite(res$se) && res$se >= 0)
-})
-
-test_that("morie_ksr01_kosorok_empirical_process supports f and mu0 arguments", {
-  set.seed(62)
-  xs <- rnorm(50)
-  res <- morie_ksr01_kosorok_empirical_process(xs, f = function(z) z^2, mu0 = 1)
-  expect_true(is.finite(res$estimate))
-
-  res1 <- morie_ksr01_kosorok_empirical_process(c(3))
-  expect_equal(res1$n, 1L)
-  expect_true(is.na(res1$se))
+test_that("morie_ksr01_kosorok_empirical_process evaluates the empirical process at given points", {
+  set.seed(1); xs <- rnorm(60); t <- seq(-2, 2, by = 0.5); F <- pnorm(t)
+  r <- morie_ksr01_kosorok_empirical_process(xs, t, F)
+  expect_true(all(c("Fn", "Gn", "cov", "sup_abs", "n", "k", "method") %in% names(r)))
+  expect_length(r$Fn, length(t)); expect_length(r$Gn, length(t))
+  # G_n = sqrt(n) (F_n - F) at every t
+  expect_equal(r$Gn, sqrt(60) * (r$Fn - F), tolerance = 1e-12)
+  expect_true(is.finite(r$sup_abs) && r$sup_abs >= 0)
 })
 
 test_that("morie_kosorok_empirical_process alias matches", {
@@ -276,26 +264,12 @@ test_that("morie_ksr02_kosorok_donsker_class returns a finite bracketing integra
   expect_identical(morie_kosorok_donsker_class, morie_ksr02_kosorok_donsker_class)
 })
 
-test_that("morie_ksr03_kosorok_glivenko_cantelli returns a KS statistic", {
-  set.seed(63)
-  xs <- rnorm(150)
-  res <- morie_ksr03_kosorok_glivenko_cantelli(xs)
-  expect_type(res, "list")
-  expect_named(res, c("statistic", "p_value", "n", "method"))
-  expect_equal(res$n, 150L)
-  expect_true(res$statistic >= 0 && res$statistic <= 1)
-  expect_true(res$p_value >= 0 && res$p_value <= 1)
-})
-
-test_that("morie_ksr03_kosorok_glivenko_cantelli accepts an alternate cdf", {
-  set.seed(64)
-  xs <- runif(100)
-  res <- morie_ksr03_kosorok_glivenko_cantelli(xs, cdf = "punif")
-  expect_true(is.finite(res$statistic))
-  expect_identical(
-    morie_kosorok_glivenko_cantelli,
-    morie_ksr03_kosorok_glivenko_cantelli
-  )
+test_that("morie_ksr03_kosorok_glivenko_cantelli returns the KS statistic and DKW bound", {
+  set.seed(2); xs <- sort(rnorm(80)); F <- pnorm(xs)
+  r <- morie_ksr03_kosorok_glivenko_cantelli(xs, F)
+  expect_true(all(c("statistic", "d_plus", "d_minus", "dkw_bound", "n") %in% names(r)))
+  expect_equal(r$statistic, max(r$d_plus, r$d_minus), tolerance = 1e-12)
+  expect_true(r$statistic >= 0 && r$statistic <= 1)
 })
 
 test_that("morie_ksr04_kosorok_vc_dimension returns d+1 for matrices and vectors", {
@@ -343,15 +317,13 @@ test_that("morie_ksr06_kosorok_maximal_inequality returns a finite RHS bound", {
   )
 })
 
-test_that("morie_ksr07_kosorok_bootstrap_empirical returns mean/SD of G_n", {
-  set.seed(66)
-  xs <- rnorm(120)
-  res <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 80, seed = 42)
-  expect_type(res, "list")
-  expect_named(res, c("estimate", "se", "n", "method"))
-  expect_equal(res$n, 120L)
-  expect_true(is.finite(res$estimate))
-  expect_true(is.finite(res$se) && res$se >= 0)
+test_that("morie_ksr07_kosorok_bootstrap_empirical returns the bootstrap summary of G_n", {
+  set.seed(3); xs <- rnorm(50)
+  r <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 100, seed = 1)
+  expect_true(all(c("estimate", "boot_mean", "boot_sd", "ci_lower", "ci_upper", "B", "n") %in% names(r)))
+  expect_true(is.finite(r$boot_sd) && r$boot_sd >= 0)
+  expect_true(r$ci_lower <= r$ci_upper)
+  expect_identical(r$B, 100L)
 })
 
 test_that("morie_ksr07_kosorok_bootstrap_empirical supports deterministic_seed", {
@@ -369,15 +341,12 @@ test_that("morie_ksr07_kosorok_bootstrap_empirical supports deterministic_seed",
   )
 })
 
-test_that("morie_ksr08_kosorok_multiplier_bootstrap returns mean/SD of G_n", {
-  set.seed(67)
-  xs <- rnorm(120)
-  res <- morie_ksr08_kosorok_multiplier_bootstrap(xs, B = 80, seed = 42)
-  expect_type(res, "list")
-  expect_named(res, c("estimate", "se", "n", "method"))
-  expect_equal(res$n, 120L)
-  expect_true(is.finite(res$estimate))
-  expect_true(is.finite(res$se) && res$se >= 0)
+test_that("morie_ksr08_kosorok_multiplier_bootstrap returns the multiplier-bootstrap summary", {
+  set.seed(3); xs <- rnorm(50)
+  r <- morie_ksr08_kosorok_multiplier_bootstrap(xs, B = 100, seed = 1)
+  expect_true(all(c("estimate", "boot_mean", "boot_sd", "ci_lower", "ci_upper", "B", "n") %in% names(r)))
+  expect_true(is.finite(r$boot_sd) && r$boot_sd >= 0)
+  expect_true(r$ci_lower <= r$ci_upper)
 })
 
 test_that("morie_ksr08_kosorok_multiplier_bootstrap supports deterministic_seed", {

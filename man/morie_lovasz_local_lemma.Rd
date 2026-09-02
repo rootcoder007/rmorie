@@ -26,12 +26,12 @@ What makes it remarkable is that the union bound is useless once
 does not care how many events there are at all -- only how entangled
 each one is.
 }
+\examples{
+morie_lovasz_local_lemma(p = 0.5, d = 5L)
+}
 \references{
 Erdos P, Lovasz L (1975). Problems and results on
 3-chromatic hypergraphs and some related questions. In
 \emph{Infinite and Finite Sets} (Colloquia Mathematica Societatis
 Janos Bolyai, Vol. 10), North-Holland.
-}
-\examples{
-morie_lovasz_local_lemma(p = 0.5, d = 5L)
 }

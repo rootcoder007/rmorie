@@ -17,10 +17,10 @@ List with \code{psi}, \code{rho}, \code{psi_deriv}, \code{rejected} (count with 
 \description{
 Formula: rho(r) = c^2(1 - cos(r/c)), psi(r) = c sin(r/c) for |r| <= c pi, and 0 otherwise
 }
-\references{
-Andrews, Bickel, Hampel, Huber, Rogers and Tukey (1972), Robust Estimates of Location, Princeton University Press; Andrews (1974), Technometrics 16:523-531. Not held locally; the form and the tuning constant 1.339 are as implemented by statsmodels' AndrewWave norm, the reference implementation, whose source was read: rho = a^2(1 - cos(z/a)), psi = a sin(z/a), weights = sin(z/a)/(z/a), psi_deriv = cos(z/a), all zero (rho constant) beyond |z| > a pi.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Andrewspsi(V)
+}
+\references{
+Andrews, Bickel, Hampel, Huber, Rogers and Tukey (1972), Robust Estimates of Location, Princeton University Press; Andrews (1974), Technometrics 16:523-531. Not held locally; the form and the tuning constant 1.339 are as implemented by statsmodels' AndrewWave norm, the reference implementation, whose source was read: rho = a^2(1 - cos(z/a)), psi = a sin(z/a), weights = sin(z/a)/(z/a), psi_deriv = cos(z/a), all zero (rho constant) beyond |z| > a pi.
 }

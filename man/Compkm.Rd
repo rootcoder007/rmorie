@@ -27,13 +27,13 @@ cluster index, and iteration stops when no label changes.
 Formula: assign i to argmin_c ||clr(x_i) - m_c||^2; m_c <- mean of the
 clr coordinates assigned to c; centre_c = clr^-1(m_c)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compkm(V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 8 (the log-ratio distance being clustered on); Lloyd
 (1982), Least squares quantization in PCM, IEEE Transactions on
 Information Theory 28(2), 129-137 (the algorithm itself).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Compkm(V)
 }

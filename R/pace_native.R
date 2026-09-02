@@ -9,6 +9,7 @@
 #' @param kernel \code{"epan"} or \code{"gauss"}.
 #' @return A numeric weight.
 #' @keywords internal
+#' @noRd
 .pace_kweight <- function(u, kernel) {
   if (kernel == "gauss") return(exp(-0.5 * u * u))
   a <- 1 - u * u

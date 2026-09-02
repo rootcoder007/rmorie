@@ -17,10 +17,10 @@ The \code{alphabet - 1} standard normal quantiles that cut the
 standard normal into \code{alphabet} equiprobable pieces (Lin et
 al. 2003, Table 3).
 }
+\examples{
+morie_sax_breakpoints(alphabet = 5L)
+}
 \references{
 Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 symbolic representation of time series. DMKD 2003.
-}
-\examples{
-morie_sax_breakpoints(alphabet = 5L)
 }

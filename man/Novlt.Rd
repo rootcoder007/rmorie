@@ -24,10 +24,10 @@ scores 1.
 \details{
 Formula: \code{nov(i) = -log2 P(i)}.
 }
-\references{
-Vargas, S. & Castells, P. (2011). RecSys 2011, 109-116.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Novlt(V, V)
+}
+\references{
+Vargas, S. & Castells, P. (2011). RecSys 2011, 109-116.
 }

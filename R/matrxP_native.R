@@ -31,6 +31,8 @@
 #' @references Yeh, C.-C. M. et al. (2016). Matrix profile I: all
 #'   pairs similarity joins for time series. ICDM 2016, 1317-1322.
 #' @export
+#' @examples
+#' morie_matrxP(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 3L)
 morie_matrxP <- function(x, window) {
   xs <- as.numeric(x)
   nlen <- length(xs)

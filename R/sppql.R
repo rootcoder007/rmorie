@@ -35,6 +35,8 @@
 #'   and `pql_pl_equivalent`.
 #' @references Schabenberger Ch 6, Sec 6.3.5, eqs (6.78)-(6.85)
 #' @export
+#' @examples
+#' sppql(z = 5L, X = 5L, Sigma_S = 5L)
 sppql <- function(z, X, Sigma_S, family = "poisson", link_kind = NULL,
                   sigma2 = 1, R = NULL, max_iter = 100L, tol = 1e-8,
                   check_score = TRUE) {

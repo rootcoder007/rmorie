@@ -30,6 +30,9 @@
 #'   (2021), Handbook of Econometrics 7A (arXiv:2004.11751 p. 19 and
 #'   note 10).
 #' @export
+#' @examples
+#' set.seed(1)
+#' Bndlpm(y = rbinom(40, 1, 0.5), D = rbinom(40, 1, 0.5), Z = rbinom(40, 1, 0.5))
 Bndlpm <- function(y, D, Z, moment_eqs = NULL) {
   yv <- as.numeric(unlist(y))
   dv <- as.numeric(unlist(D))

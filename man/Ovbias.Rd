@@ -35,9 +35,9 @@ List with \code{bias}, \code{adjusted_estimate}, \code{adjusted_se}, \code{adjus
 \description{
 Formula: bias = delta gamma; equivalently |bias| = se(tau_res) sqrt(R2_YZ.DX R2_DZ.X / (1 - R2_DZ.X)) sqrt(df)
 }
-\references{
-Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
-}
 \examples{
 Ovbias()
+}
+\references{
+Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
 }

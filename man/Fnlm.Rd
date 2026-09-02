@@ -15,7 +15,7 @@ Fnlm(X, Y, basis_X, basis_Y, s = NULL, t = NULL)
 
 \item{basis_Y}{nt-by-K2 matrix, the basis eta on the t grid.}
 
-\item{s, t}{the two grids; default to equally spaced on [0, 1].}
+\item{s, t}{the two grids; default to equally spaced on \link{0, 1}.}
 }
 \value{
 list: estimate, B, beta, Z, J, fitted, residual, sse, ssy, r2, n,

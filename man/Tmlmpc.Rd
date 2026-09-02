@@ -35,10 +35,10 @@ gives its influence function directly: the score for \code{h_k(j)} is
 probability the product of surviving every transition and not being
 censored, both from pooled logistic hazards.
 }
+\examples{
+Tmlmpc(time = c(1, 2, 3, 4, 5, 6, 7, 8), state = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Rytgaard, H. C., Gerds, T. A. & van der Laan, M. J.
 (2022). Annals of Statistics 50(5).
-}
-\examples{
-Tmlmpc(time = c(1, 2, 3, 4, 5, 6, 7, 8), state = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

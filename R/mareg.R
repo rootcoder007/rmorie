@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Explain between-study heterogeneity with study-level covariates
-#'
-#' A random-effects pool reports heterogeneity; a meta-regression asks
-#' where it comes from. The residual \eqn{au^2} is the part the
+# Explain between-study heterogeneity with study-level covariates
+#
+# A random-effects pool reports heterogeneity; a meta-regression asks
+# where it comes from. The residual \eqn{au^2} is the part the
 # prime moderators fail to explain, and it belongs in the weights, otherwise
 # prime the standard errors are those of a fixed-effect fit and are too small.
 # prime The moderators are study-level, so this is ecological regression: a
@@ -23,6 +23,8 @@
 #' @references van Houwelingen, H. C., Arends, L. R. and Stijnen, T.
 #'   (2002). Statistics in Medicine 21(4):589-624. \doi{10.1002/sim.1040}.
 #' @export
+#' @examples
+#' Mareg(yi = c(1, 2, 3, 4, 5, 6, 7, 8), vi = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mareg <- function(yi, vi, X) {
   y <- as.numeric(yi); v <- as.numeric(vi); Xm <- as.matrix(X)
   n <- length(y)

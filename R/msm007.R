@@ -13,6 +13,9 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (4.9) p.132. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Msm007(V, V)
 Msm007 <- function(y_true, y_pred, class_index = 0, n_classes = NULL) {
   m <- .gpclassmetrics(.gpconf(y_true, y_pred, n_classes), as.integer(class_index))
   list(estimate = m$precision, TFP = m$TFP, TTP_all = m$TTP_all, pCCC = m$pCCC,

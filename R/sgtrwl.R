@@ -12,6 +12,8 @@
 #'   L_rw = I - D^-1 W and notes it is "closely related to a random walk".
 #'   Fetched from arXiv:0711.0189.
 #' @export
+#' @examples
+#' Rwlap(W = 5L)
 Rwlap <- function(W) {
   W <- as.matrix(W)
   n <- nrow(W)

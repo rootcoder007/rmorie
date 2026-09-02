@@ -23,9 +23,9 @@ to a coefficient-based proportion mediated.
 \details{
 Formula: \code{R2_med = (R2_full - R2_partial) / R2_full}.
 }
-\references{
-de Heus, P. (2012). Behavior Research Methods 44:213-221.
-}
 \examples{
 Vrmed(r2_full = 5L, r2_partial = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+de Heus, P. (2012). Behavior Research Methods 44:213-221.
 }

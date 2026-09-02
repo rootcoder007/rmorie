@@ -34,6 +34,8 @@
 #'   (2012), Joint Models for Longitudinal and Time-to-Event Data,
 #'   Chapman and Hall/CRC, chapter 4. \doi{10.1201/b12208}
 #' @export
+#' @examples
+#' Jntlmm(long_y = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Jntlmm <- function(long_y, time, event, X, Z, cluster) {
   y <- .s03vec(long_y); n <- length(y)
   if (n == 0L) stop("joint_longitudinal_survival: long_y is empty")

@@ -23,9 +23,9 @@ sufficient, which is why a definite answer is possible here.
 When \code{construct} and \eqn{v \equiv 3 \pmod 6}, the Bose construction
 is carried out and checked: every pair covered exactly once.
 }
-\references{
-Kirkman TP (1847); Bose RC (1939).
-}
 \examples{
 morie_steiner_triple_system(v = 5L)
+}
+\references{
+Kirkman TP (1847); Bose RC (1939).
 }

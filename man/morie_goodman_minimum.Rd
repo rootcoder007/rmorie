@@ -18,9 +18,9 @@ Goodman's identity gives
 \deqn{\#mono \ge \binom{n}{3} - \frac{n}{2}
   \left\lfloor \frac{(n-1)^2}{4} \right\rfloor .}
 }
-\references{
-Goodman AW (1959) \emph{Amer Math Monthly} 66(9):778-783.
-}
 \examples{
 morie_goodman_minimum(n = 5L)
+}
+\references{
+Goodman AW (1959) \emph{Amer Math Monthly} 66(9):778-783.
 }

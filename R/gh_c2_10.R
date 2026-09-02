@@ -18,6 +18,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.6.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalnppoissonreg(V, V)
 Ghosalnppoissonreg <- function(x, y, length = 0.7, var = 1) {
   xs <- as.numeric(x); ys <- as.numeric(y)
   n <- base::length(xs)

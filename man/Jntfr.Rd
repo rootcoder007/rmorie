@@ -36,7 +36,7 @@ die later.  Baselines are constant (exponential).  Because w^alpha
 appears in the terminal hazard the frailty cannot be integrated out
 in closed form, so the expectation is taken on a 16-point generalised
 Gauss-Laguerre rule matched to the frailty density (Golub-Welsch), for
-which E\link{w} = 1 and E[w^2] = 1 + theta hold to ten digits;
+which E\link{w} = 1 and E\link{w^2} = 1 + theta hold to ten digits;
 maximisation is a fixed-length coordinate golden-section search with a
 guarded comparison, so a flat optimum cannot send the two language arms
 into different sub-intervals.
@@ -44,13 +44,13 @@ into different sub-intervals.
 \details{
 Formula: lambda_R(t|w) = w lambda_0R, lambda_T(t|w) = w^alpha lambda_0T.
 }
-\references{
-Liu, Wolfe and Huang (2004), Shared frailty models for
-recurrent events and a terminal event, Biometrics 60(3):747-756.
-\doi{10.1111/j.0006-341X.2004.00225.x}
-}
 \examples{
 set.seed(1)
 Jntfr(time = rexp(30), event = rbinom(30, 1, 0.7),
       terminal = rbinom(30, 1, 0.3), cluster = rep(1:10, 3))
+}
+\references{
+Liu, Wolfe and Huang (2004), Shared frailty models for
+recurrent events and a terminal event, Biometrics 60(3):747-756.
+\doi{10.1111/j.0006-341X.2004.00225.x}
 }

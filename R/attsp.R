@@ -15,6 +15,8 @@
 #'   and Cohan (2020), arXiv:2004.05150; scaled dot-product attention is
 #'   Vaswani et al. (2017), Equation (1).
 #' @export
+#' @examples
+#' Sparseattn(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 Sparseattn <- function(Q, K, V, S = NULL) {
   Qm <- .t1_mat(Q); Km <- .t1_mat(K); Vm <- .t1_mat(V)
   nq <- nrow(Qm); d <- ncol(Qm); nk <- nrow(Km)

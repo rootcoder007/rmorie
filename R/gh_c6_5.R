@@ -19,6 +19,8 @@
 #'   together with Theorem 6.16. Read from the copy of the book held in
 #'   the corpus.
 #' @export
+#' @examples
+#' Kldsupp(prior_mass = 0.5, kl_radius = 0.1, test_rate = 0.2, n = 100)
 Kldsupp <- function(prior_mass, kl_radius, test_rate, n) {
   pm <- as.numeric(prior_mass); cc <- as.numeric(kl_radius)
   Cc <- as.numeric(test_rate); n <- as.integer(n)

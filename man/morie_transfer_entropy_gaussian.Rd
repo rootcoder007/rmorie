@@ -21,11 +21,11 @@ List with \code{mi}, \code{statistic}, \code{p_value}, \code{df}, \code{n}.
 transfer entropy exactly for Gaussian processes. Mirrors
 \code{morie.fn.granci} and the Gaussian arm of \code{morie.fn.trnfen}.
 }
-\references{
-Barnett L, Barrett AB, Seth AK (2009). \emph{Physical Review
-Letters} 103(23), 238701.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_transfer_entropy_gaussian(V, V)
+}
+\references{
+Barnett L, Barrett AB, Seth AK (2009). \emph{Physical Review
+Letters} 103(23), 238701.
 }

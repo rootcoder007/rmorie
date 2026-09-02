@@ -16,7 +16,7 @@ Morieclrp(m, qT, L, df2)
 \item{df2}{Denominator degrees of freedom, used only when L = 1.}
 }
 \value{
-Numeric p-value in [0, 1].
+Numeric p-value in \link{0, 1}.
 }
 \description{
 Andrews, Moreira and Stock (2007) conditional p-value

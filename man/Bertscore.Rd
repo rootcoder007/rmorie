@@ -21,11 +21,11 @@ With pre-normalised embeddings, R = mean_i max_j x_i' xhat_j,
 P = mean_j max_i x_i' xhat_j and F = 2PR/(P+R); idf weights re-weight
 the recall sum.
 }
-\references{
-Zhang, Kishore, Wu, Weinberger and Artzi (2020), ICLR;
-arXiv:1904.09675, Sect. 3.  Read from the ar5iv rendering.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Bertscore(V, V)
+}
+\references{
+Zhang, Kishore, Wu, Weinberger and Artzi (2020), ICLR;
+arXiv:1904.09675, Sect. 3.  Read from the ar5iv rendering.
 }

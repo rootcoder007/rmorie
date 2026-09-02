@@ -20,6 +20,9 @@
 #' @return list with `coef`, `se`, `t`, `p_value`, `r_squared`,
 #'   `adj_r_squared`, `sigma`, `f_statistic`, `f_p_value`, `residuals`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ols(V, V)
 morie_ols <- function(y, X, add_intercept = TRUE) {
   # Two definitions of this function existed with OPPOSITE argument
   # orders -- (y, X) here and (X, y) in gp_mvsml.R -- and the second
@@ -80,6 +83,12 @@ morie_ols <- function(y, X, add_intercept = TRUE) {
 #' @param kind one of "HC0", "HC1", "HC2", "HC3"
 #' @return list with `vcov`, `se` and the leverages
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(40), 20, 2)
+#' y <- 1 + X[, 1] + rnorm(20, 0, 0.3)
+#' fit <- morie_ols(y, X)
+#' dim(morie_robust_vcov(fit, kind = "HC1"))
 morie_robust_vcov <- function(fit, kind = "HC1") {
   X <- fit$design; e <- fit$residuals
   Ainv <- fit$XtX_inv; n <- fit$n; k <- fit$k
@@ -117,6 +126,17 @@ morie_robust_se <- function(fit, kind = "HC1") {
 #' @param lags Bartlett bandwidth
 #' @return list with `vcov`, `se` and the `lags` used
 #' @export
+#' @examples
+#' N <- 40
+#' X1 <- sapply(0:(N - 1), function(i) ((i * 7)%%13) + 0.5 * ((i * 
+#'     3)%%5))
+#' X2 <- sapply(0:(N - 1), function(i) ((i * 5)%%11) - 0.25 * ((i * 
+#'     2)%%7))
+#' E <- sapply(0:(N - 1), function(i) ((i * 13)%%17)/17 - 0.5)
+#' Y <- 3 + 1.5 * X1 - 0.8 * X2 + E * (1 + 0.05 * X1)
+#' X <- cbind(X1, X2)
+#' FIT <- morie_ols(Y, X)
+#' morie_newey_west_vcov(FIT, lags = 3)
 morie_newey_west_vcov <- function(fit, lags = NULL) {
   X <- fit$design; e <- fit$residuals
   Ainv <- fit$XtX_inv; n <- fit$n; k <- fit$k
@@ -146,6 +166,17 @@ morie_newey_west_vcov <- function(fit, lags = NULL) {
 #' @param add_intercept include an intercept in the auxiliary fits
 #' @return a list of the statistic and, where exact, its p-value
 #' @export
+#' @examples
+#' N <- 40
+#' X1 <- sapply(0:(N - 1), function(i) ((i * 7)%%13) + 0.5 * ((i * 
+#'     3)%%5))
+#' X2 <- sapply(0:(N - 1), function(i) ((i * 5)%%11) - 0.25 * ((i * 
+#'     2)%%7))
+#' E <- sapply(0:(N - 1), function(i) ((i * 13)%%17)/17 - 0.5)
+#' Y <- 3 + 1.5 * X1 - 0.8 * X2 + E * (1 + 0.05 * X1)
+#' X <- cbind(X1, X2)
+#' FIT <- morie_ols(Y, X)
+#' morie_breusch_pagan(FIT)
 morie_breusch_pagan <- function(fit) {
   X <- fit$design
   e2 <- fit$residuals^2

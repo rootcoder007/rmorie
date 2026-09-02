@@ -24,12 +24,12 @@ xbar_j + sqrt(2 log(n) / n_j) (Auer et al. 2002, Figure 1).  The
 policy is deterministic given the reward table, so no RNG is used.
 Index ties break to the lowest machine.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_ucbb(V)
+}
 \references{
 Auer, P., Cesa-Bianchi, N. and Fischer, P. (2002).
 Finite-time analysis of the multiarmed bandit problem. Machine
 Learning, 47, 235-256.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_ucbb(V)
 }

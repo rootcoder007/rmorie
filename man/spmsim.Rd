@@ -98,6 +98,9 @@ a narrower \code{init_bandwidth}.
 MGWR postdates Schabenberger & Gotway (2005) and is not in that book; it is
 included here because the shelf names it.
 }
+\examples{
+spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Fotheringham, A. S., Yang, W. & Kang, W. (2017), Annals of the
 American Association of Geographers 107(6):1247-1265,
@@ -111,7 +114,4 @@ standardization. Oshan, Li, Kang, Wolf & Fotheringham (2019), the mgwr
 package, mgwr/search.py, function multi_bw -- the authors' own
 implementation. Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317, for the
 single-scale GWR this generalises.
-}
-\examples{
-spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

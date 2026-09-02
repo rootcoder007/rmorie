@@ -19,9 +19,9 @@ Walks the documented cascade.  Returns a normalised absolute path.
 Stops with an informative error if nothing exists and
 \code{require_exists = TRUE}.
 }
-\keyword{internal}
 \examples{
 \donttest{
 .morie_resolve_arsau_dir()
 }
 }
+\keyword{internal}

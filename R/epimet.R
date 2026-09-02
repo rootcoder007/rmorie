@@ -10,6 +10,9 @@
 #' @return List with ``rt``, ``time``, ``infections``, ``shift``, ``mean_rt``, ``n``.
 #' @references Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_{t-tau} and the delay convolution D_t = xi sum_tau xi(tau) I_{t-tau}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Rtrenew(V, V)
 Rtrenew <- function(incidence, gen_int, delays = NULL) {
   y <- .t1_vec(incidence); w <- .t1_vec(gen_int)
   if (sum(w) <= 0) stop("gen_int must have positive mass")

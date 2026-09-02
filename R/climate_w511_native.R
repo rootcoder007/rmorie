@@ -27,6 +27,8 @@
 #'   Example 18. Local: fetched-wave3/fao56-x0490e0{6,7,8}.html,
 #'   zotarelli-2010-fao56-step-by-step-AE459.pdf.
 #' @export
+#' @examples
+#' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   T <- as.numeric(T)[1]; R_n <- as.numeric(R_n)[1]
   u2 <- as.numeric(u2)[1]; VPD <- as.numeric(VPD)[1]
@@ -112,6 +114,8 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #'   (2007) Int J Climatology 27, 1643-1655; Maraun (2013) J Climate
 #'   26, 2137-2143.
 #' @export
+#' @examples
+#' Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
 Qmds <- function(x_mod, obs, mod) {
   xm <- as.numeric(x_mod)
   ob <- sort(as.numeric(obs))
@@ -143,6 +147,9 @@ Qmds <- function(x_mod, obs, mod) {
 #' @references Planck, M. (1900), Verh. Dtsch. Phys. Ges. 2, 237-245;
 #'   BIPM SI (2019) exact constants; CODATA 2018.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Plncf(V, V)
 Plncf <- function(lam, T, h = 6.62607015e-34, c = 299792458,
                   kB = 1.380649e-23) {
   lam <- as.numeric(lam)

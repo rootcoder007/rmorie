@@ -21,6 +21,8 @@
 #'   constant dropped, so the value is comparable across tau but is not an
 #'   absolute density.
 #' @export
+#' @examples
+#' Hiermodel(y = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 Hiermodel <- function(y, sigma, tau) {
   y <- .t1_vec(y); s <- .t1_vec(sigma); J <- length(y)
   if (length(s) != J) stop("y and sigma must have the same length")

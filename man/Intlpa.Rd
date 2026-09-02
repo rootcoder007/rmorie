@@ -31,15 +31,15 @@ c'x(tau) - p* <= (m + n) tau, a bound that does not run through this
 code and is what the tests check against the simplex optimum.
 }
 \details{
-Formula: minimise c'x - tau [sum_i log(b_i - a_i'x) + sum_j log x_j].
+Formula: minimise c'x - tau \link{sum_i log(b_i - a_i'x) + sum_j log x_j}.
+}
+\examples{
+Intlpa(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
+       b = c(4, 2, 3), x0 = c(0.5, 0.5))
 }
 \references{
 Karmarkar (1984), A new polynomial-time algorithm for
 linear programming, Combinatorica 4(4):373-395.
 \doi{10.1007/BF02579150}; Boyd and Vandenberghe (2004), Convex
 Optimization, CUP, sect. 11.2.
-}
-\examples{
-Intlpa(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
-       b = c(4, 2, 3), x0 = c(0.5, 0.5))
 }

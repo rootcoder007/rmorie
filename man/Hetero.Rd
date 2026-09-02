@@ -28,14 +28,14 @@ confusion matrix rather than an average.
 Formula: HTMT = mean heterotrait-heteromethod correlation /
 sqrt(mean within-i correlation * mean within-j correlation).
 }
+\examples{
+set.seed(1)
+X <- matrix(rnorm(80), 20, 4)
+Hetero(X, construct_assignment = c(1, 1, 2, 2))
+}
 \references{
 Henseler, Ringle and Sarstedt (2015), A new criterion for
 assessing discriminant validity in variance-based structural
 equation modeling, Journal of the Academy of Marketing Science
 43(1):115-135, eq. (6). \doi{10.1007/s11747-014-0403-8}
-}
-\examples{
-set.seed(1)
-X <- matrix(rnorm(80), 20, 4)
-Hetero(X, construct_assignment = c(1, 1, 2, 2))
 }

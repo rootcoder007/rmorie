@@ -25,13 +25,13 @@ is why the score test still works when phat is 0 or 1.
 Formula: U = (S - n p0) / sqrt(n p0 (1 - p0));
 U^2 ~ chi^2_1; p = 2(1 - Phi(|U|))
 }
+\examples{
+Scoretest(successes = 5L, n = 5L)
+}
 \references{
 Rao (1948), Mathematical Proceedings of the Cambridge
 Philosophical Society 44(1), 50-57 -- the primary source for the
 score test. Wasserman (2004), All of Statistics, does NOT give the
 score test, so it is not cited for this formula; the full text of
 the book was fetched and searched to establish that.
-}
-\examples{
-Scoretest(successes = 5L, n = 5L)
 }

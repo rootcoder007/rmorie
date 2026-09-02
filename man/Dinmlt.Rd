@@ -42,11 +42,11 @@ different crops.  With V views of which G are global that is G(V-1)
 terms.  Centring plus sharpening is what stops the collapse to a
 constant output.
 }
-\references{
-Caron et al. (2021), Emerging Properties in
-Self-Supervised Vision Transformers, ICCV 2021:9650-9660.
-}
 \examples{
 set.seed(1)
 r <- Dinmlt(image = rnorm(10)); TRUE
+}
+\references{
+Caron et al. (2021), Emerging Properties in
+Self-Supervised Vision Transformers, ICCV 2021:9650-9660.
 }

@@ -17,6 +17,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalntrlevy(V, V)
 Ghosalntrlevy <- function(f_vals, nu_masses) {
   fs <- as.numeric(f_vals); ms <- as.numeric(nu_masses)
   if (length(fs) == 0L) stop("f_vals must be non-empty")

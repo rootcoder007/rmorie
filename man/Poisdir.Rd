@@ -29,7 +29,10 @@ so the result is deterministic in both language arms.
 Formula: V_j ~ Beta(1 - sigma, M + j sigma);
 W_j = V_j prod_\{l<j\}(1 - V_l);
 E\link{V_j} = (1 - sigma)/(M + 1 + (j - 1) sigma);
-V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{[n-1]\}
+V_\{n,k\} = prod_\{i=1\}^\{k-1\}(M + i sigma) / (M + 1)^\{\link{n-1}\}
+}
+\examples{
+Poisdir(sigma = 0.5, M = 5L, k = 5L)
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
@@ -37,7 +40,4 @@ Nonparametric Bayesian Inference, Section 14.4, Definition 14.31,
 equation (14.20). Read from the copy of the book held in the corpus.
 Only the sigma in [0, 1) branch is implemented; the negative-sigma
 branch is a finite-support family and is refused.
-}
-\examples{
-Poisdir(sigma = 0.5, M = 5L, k = 5L)
 }

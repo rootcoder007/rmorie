@@ -21,10 +21,10 @@ List with \code{direct}, \code{via_m1}, \code{via_m2}, \code{serial},
 Four-path decomposition: direct, through M1, through M2, and the
 serial path. Mirrors \code{morie.fn.medstg}.
 }
+\examples{
+morie_serial_mediation(x = c(1, 2, 3, 4, 5, 6, 7, 8), m1 = c(1, 2, 3, 4, 5, 6, 7, 8), m2 = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Hayes AF (2022). \emph{Introduction to Mediation,
 Moderation, and Conditional Process Analysis}, 3rd ed., Ch. 5.
-}
-\examples{
-morie_serial_mediation(x = c(1, 2, 3, 4, 5, 6, 7, 8), m1 = c(1, 2, 3, 4, 5, 6, 7, 8), m2 = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

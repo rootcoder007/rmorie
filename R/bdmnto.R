@@ -15,6 +15,10 @@
 #'   form; neither article is in the local corpus and neither could be
 #'   downloaded, so neither was read.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Mtrbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
+#'          ymin = -3, ymax = 3)
 Mtrbound <- function(y, z, d, ymin, ymax) {
   y <- .t1_vec(y); z <- .t1_vec(z); n <- length(y)
   if (length(z) != n) stop("y and z must have the same length")

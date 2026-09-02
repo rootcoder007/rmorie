@@ -35,12 +35,12 @@ bottom-up max-stability recursion (Algorithm 3, Eqs. 4-5).
 Clusters selected at different density levels separate
 differing-density clusters no single DBSCAN* threshold can.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_hdbsc(V)
+}
 \references{
 Campello, R. J. G. B., Moulavi, D. and Sander, J.
 (2013). Density-based clustering based on hierarchical density
 estimates. PAKDD, LNCS 7819, 160-172.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_hdbsc(V)
 }

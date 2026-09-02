@@ -19,6 +19,9 @@
 #' @references Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 #'   section 4.1 (orthogonalized JL transform).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tqrot(V)
 Tqrot <- function(d, seed = 1) {
   d <- as.integer(d)
   g <- .t1_lcg(seed)

@@ -19,6 +19,9 @@
 #' @param adjacency Symmetric 0/1 matrix.
 #' @return Integer edge count.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_count_edges(V)
 morie_count_edges <- function(adjacency) {
   A <- as.matrix(adjacency)
   sum(A[upper.tri(A)] != 0)
@@ -32,6 +35,8 @@ morie_count_edges <- function(adjacency) {
 #' @param k Clique size.
 #' @return The clique as an integer vector, or NULL.
 #' @export
+#' @examples
+#' morie_has_clique(adjacency = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), k = 5L)
 morie_has_clique <- function(adjacency, k) {
   A <- as.matrix(adjacency)
   n <- nrow(A)
@@ -62,6 +67,8 @@ morie_has_clique <- function(adjacency, k) {
 #' @param r Number of parts.
 #' @return A list with `adjacency`, `parts`, `edges`.
 #' @export
+#' @examples
+#' morie_turan_graph(n = 5L, r = 5L)
 morie_turan_graph <- function(n, r) {
   n <- as.integer(n)
   r <- as.integer(r)
@@ -100,6 +107,8 @@ morie_turan_graph <- function(n, r) {
 #'   `attained`, `formula_is_exact`.
 #' @references Turan P (1941). Bollobas B (2004), Ch VI.
 #' @export
+#' @examples
+#' morie_turan_number(n = 5L, r = 5L)
 morie_turan_number <- function(n, r) {
   n <- as.integer(n)
   r <- as.integer(r)
@@ -128,6 +137,8 @@ morie_turan_number <- function(n, r) {
 #' @references Mantel W (1907). Problem 28. \emph{Wiskundige Opgaven},
 #'   10, 60-61.
 #' @export
+#' @examples
+#' morie_mantel_number(n = 5L)
 morie_mantel_number <- function(n) {
   out <- morie_turan_number(n, 2L)
   out$floor_n2_over_4 <- (as.integer(n)^2) %/% 4L
@@ -147,6 +158,8 @@ morie_mantel_number <- function(n) {
 #' @references Sperner E (1928). Ein Satz ueber Untermengen einer
 #'   endlichen Menge. \emph{Mathematische Zeitschrift}, 27(1), 544-548.
 #' @export
+#' @examples
+#' morie_sperner_width(n = 5L)
 morie_sperner_width <- function(n) {
   n <- as.integer(n)
   if (n < 0L) stop(sprintf("n must be non-negative; got %d", n), call. = FALSE)
@@ -175,6 +188,8 @@ morie_sperner_width <- function(n) {
 #' @references Erdos P, Ko C, Rado R (1961) \emph{Quart J Math}
 #'   12:313-320.
 #' @export
+#' @examples
+#' morie_erdos_ko_rado(n = 5L, k = 5L)
 morie_erdos_ko_rado <- function(n, k) {
   n <- as.integer(n)
   k <- as.integer(k)
@@ -216,6 +231,12 @@ morie_erdos_ko_rado <- function(n, k) {
 #' @references Dilworth RP (1950) \emph{Annals of Mathematics}
 #'   51(1):161-166.
 #' @export
+#' @examples
+#' divisibility_poset <- function(n) {
+#'     outer(seq_len(n), seq_len(n), function(i, j) j%%i == 0)
+#' }
+#' n <- 6L
+#' morie_dilworth_decomposition(divisibility_poset(n))
 morie_dilworth_decomposition <- function(leq) {
   M <- matrix(as.logical(as.matrix(leq)), nrow(leq), ncol(leq))
   n <- nrow(M)
@@ -324,6 +345,8 @@ morie_dilworth_decomposition <- function(leq) {
 #'   `feasible`, `exists`, `warnings`.
 #' @references Fisher RA (1940). Stinson DR (2004).
 #' @export
+#' @examples
+#' morie_bibd_parameters(v = 5L, k = 5L, lam = 5L)
 morie_bibd_parameters <- function(v, k, lam) {
   v <- as.integer(v)
   k <- as.integer(k)
@@ -406,6 +429,8 @@ morie_bibd_parameters <- function(v, k, lam) {
 #' @return A list with `exists`, `n_triples`, `triples`, `verified`.
 #' @references Kirkman TP (1847); Bose RC (1939).
 #' @export
+#' @examples
+#' morie_steiner_triple_system(v = 5L)
 morie_steiner_triple_system <- function(v, construct = TRUE) {
   v <- as.integer(v)
   if (v < 0L) stop(sprintf("v must be non-negative; got %d", v), call. = FALSE)
@@ -471,6 +496,8 @@ morie_steiner_triple_system <- function(v, construct = TRUE) {
 #' @param method "cyclic" or "shifted".
 #' @return A list with `square`, `order`, `valid`.
 #' @export
+#' @examples
+#' morie_latin_square(n = 5L)
 morie_latin_square <- function(n, method = c("cyclic", "shifted")) {
   method <- match.arg(method)
   n <- as.integer(n)
@@ -492,6 +519,8 @@ morie_latin_square <- function(n, method = c("cyclic", "shifted")) {
 #' @param square A square matrix of symbols.
 #' @return A list with `valid`, `rows_ok`, `columns_ok`.
 #' @export
+#' @examples
+#' morie_is_latin_square(square = 5L)
 morie_is_latin_square <- function(square) {
   L <- as.matrix(square)
   n <- nrow(L)
@@ -523,6 +552,8 @@ morie_is_latin_square <- function(square) {
 #' @return A list with `orthogonal`, `pair_condition_holds`,
 #'   `both_are_latin`, `pairs_seen`.
 #' @export
+#' @examples
+#' morie_are_orthogonal(square_a = 5L, square_b = 5L)
 morie_are_orthogonal <- function(square_a, square_b) {
   A <- as.matrix(square_a)
   B <- as.matrix(square_b)
@@ -561,6 +592,8 @@ morie_are_orthogonal <- function(square_a, square_b) {
 #' @return A list with `bound`, `ball_volume`, `is_perfect_possible`.
 #' @references Hamming RW (1950) \emph{Bell Syst Tech J} 29:147-160.
 #' @export
+#' @examples
+#' morie_hamming_bound(n = 5L, d = 5L)
 morie_hamming_bound <- function(n, d, q = 2) {
   n <- as.integer(n)
   d <- as.integer(d)
@@ -601,6 +634,8 @@ morie_hamming_bound <- function(n, d, q = 2) {
 #' @references Singleton RC (1964) \emph{IEEE Trans Inform Theory}
 #'   10(2):116-118.
 #' @export
+#' @examples
+#' morie_singleton_bound(n = 5L, d = 5L)
 morie_singleton_bound <- function(n, d, q = 2) {
   n <- as.integer(n)
   d <- as.integer(d)
@@ -634,6 +669,8 @@ morie_singleton_bound <- function(n, d, q = 2) {
 #' @param v Number of points.
 #' @return A list with `is_bibd`, `k`, `r`, `lambda`, `uncovered_pairs`.
 #' @export
+#' @examples
+#' morie_incidence_check(blocks = 5L, v = 5L)
 morie_incidence_check <- function(blocks, v) {
   v <- as.integer(v)
   if (v < 1L) stop(sprintf("v must be positive; got %d", v), call. = FALSE)

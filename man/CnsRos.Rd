@@ -27,11 +27,11 @@ probability p+ = Gamma/(1+Gamma).  The upper p-value uses the normal
 approximation with mean p+ sum(q) and variance p+(1-p+) sum(q^2).  At
 Gamma = 1 that reduces to the ordinary Wilcoxon signed-rank test.
 }
-\references{
-Rosenbaum (2002), Observational Studies, 2nd ed.,
-Springer, section 4.3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 CnsRos(V)
+}
+\references{
+Rosenbaum (2002), Observational Studies, 2nd ed.,
+Springer, section 4.3.
 }

@@ -24,7 +24,11 @@ ALTERNATIVE, so the null carries 1 - lam.
 }
 \details{
 Formula: B_n = prod_i p*(X_i) / int prod_i p(X_i) dPi_1(p);
-Pi_n(p = p* | X) = (1-lam) L* / [ (1-lam) L* + lam int L dPi_1 ]
+Pi_n(p = p* | X) = (1-lam) L* / \link{ (1-lam) L* + lam int L dPi_1 }
+}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ptnulltst(V, V)
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
@@ -32,8 +36,4 @@ Nonparametric Bayesian Inference, Section 10.5.1 and Theorem 10.24.
 The book's prose calls lambda the weight of the null while its own
 formula gives the null the weight 1 - lambda; the FORMULA is
 followed here. Read from the copy of the book held in the corpus.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ptnulltst(V, V)
 }

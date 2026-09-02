@@ -27,13 +27,13 @@ empty sum = 0 for the lowest category.  a = 1 gives the Masters
 (1982) partial credit model; one step reduces to the dichotomous
 2PL.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_pcm(V, V)
+}
 \references{
 Masters, G. N. (1982). A Rasch model for partial
 credit scoring. Psychometrika, 47, 149-174.  Muraki, E. (1992).
 Applied Psychological Measurement, 16, 159-176.  Weeks, J. P.
 (2010). Journal of Statistical Software, 35(12).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_pcm(V, V)
 }

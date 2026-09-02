@@ -35,10 +35,10 @@ entries of \eqn{R(\theta)} are appreciable, WLS is a poor approximation to
 (4.31), and the efficiency lost by ignoring those correlations exceeds
 anything gained over OLS.
 }
-\references{
-Schabenberger Ch 4, Sec 4.5.1
-}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 spwls(D)
+}
+\references{
+Schabenberger Ch 4, Sec 4.5.1
 }

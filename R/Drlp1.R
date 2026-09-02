@@ -23,6 +23,8 @@
 #'   40(7), 741-758 (2025).  Sant'Anna, P. H. C. and Zhao, J. (2020).
 #'   Journal of Econometrics 219(1), 101-122, equation (2.6).
 #' @export
+#' @examples
+#' Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 Drlp1 <- function(y, D, unit, time, horizon = 3L, X = NULL) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drlp1: empty input, y has no observations")

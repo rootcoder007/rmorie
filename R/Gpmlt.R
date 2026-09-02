@@ -20,6 +20,8 @@
 #' @references Bonilla, Chai and Williams (2008), Multi-task Gaussian
 #'   process prediction, NIPS 20, eqs. (1)-(2).
 #' @export
+#' @examples
+#' Gpmlt(X = 5L, y_tasks = c(1, 2, 3, 4, 5, 6, 7, 8))
 Gpmlt <- function(X, y_tasks, X_test = NULL, task_cov = NULL, lengthscale = 1,
                   variance = 1, noise = 0.01) {
   A <- .s03mat(X)

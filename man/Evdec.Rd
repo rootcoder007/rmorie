@@ -28,9 +28,9 @@ is what makes a GPD fit to them legitimate; the extremal index is
 estimated by the runs estimator, number of clusters over number of
 exceedances.
 }
-\references{
-Smith (1989), Statistical Science 4(4):367-377.
-}
 \examples{
 Evdec(x = c(1, 2, 3, 4, 5, 6, 7, 8), u = 5L, r = 5L)
+}
+\references{
+Smith (1989), Statistical Science 4(4):367-377.
 }

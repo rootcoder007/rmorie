@@ -16,6 +16,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.3.
 #' @export
+#' @examples
+#' Ghosalsemiparaeff(grad_psi = 5L, info_matrix = 5L)
 Ghosalsemiparaeff <- function(grad_psi, info_matrix) {
   g <- as.numeric(grad_psi)
   I <- as.matrix(info_matrix)

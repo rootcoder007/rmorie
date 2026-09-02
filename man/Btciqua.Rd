@@ -9,7 +9,7 @@ Btciqua(x, tau = 0.5, B = 999, alpha = 0.05, seed = 1)
 \arguments{
 \item{x}{the sample.}
 
-\item{tau}{the quantile level in [0, 1].}
+\item{tau}{the quantile level in \link{0, 1}.}
 
 \item{B}{number of resamples.}
 

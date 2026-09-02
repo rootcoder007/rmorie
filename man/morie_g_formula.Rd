@@ -20,9 +20,6 @@ List with \code{EY1}, \code{EY0}, \code{ate}, \code{n}.
 \verb{E\[Y(a)\] = E\[E\[Y | A = a, L\]\]}, with an OLS outcome model including
 treatment-covariate interactions. Mirrors \code{morie.fn.causmrop}.
 }
-\references{
-Robins JM (1986). \emph{Mathematical Modelling} 7, 1393-1512.
-}
 \examples{
 n <- 3000
 x <- stats::rnorm(n)
@@ -32,4 +29,7 @@ y <- x + stats::rnorm(n) + 3 * tr
 L <- stats::rnorm(n)
 a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
 morie_g_formula(y, a, L)
+}
+\references{
+Robins JM (1986). \emph{Mathematical Modelling} 7, 1393-1512.
 }

@@ -22,12 +22,12 @@ List with out, weight, score, nq, nk, d, dv, density.
 softmax(mask_S(Q K' / sqrt(d))) V, with the score set to -Inf wherever
 the connectivity matrix S is zero.
 }
+\examples{
+Sparseattn(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Child, Gray, Radford and Sutskever (2019),
 arXiv:1904.10509, Sects. 3-4 (in the local corpus); Beltagy, Peters
 and Cohan (2020), arXiv:2004.05150; scaled dot-product attention is
 Vaswani et al. (2017), Equation (1).
-}
-\examples{
-Sparseattn(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -20,7 +20,7 @@ list: estimate, cv_error, mse_fold, rmse, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume [Pages 109-139], Chapter 4, Section 4.3.2 and equation (4.1),
+volume \link{Pages 109-139}, Chapter 4, Section 4.3.2 and equation (4.1),
 p. 129, read as a rendered page.  The data are split into K complementary
 folds, the model is fitted K times holding one fold out, the testing mean
 square error of a fold is MSE = (1/T) sum (y_i - fhat(x_i))^2 (4.1), and

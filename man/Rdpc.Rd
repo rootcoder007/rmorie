@@ -27,12 +27,12 @@ equals a single mechanism with scale \eqn{\sigma / \sqrt{n}} (remark
 after Corollary 3). Conversion to (epsilon, delta)-DP is Proposition 3
 and ships separately in \code{morie_renyi_dp_composition}.
 }
+\examples{
+Rdpc(alpha = 2, sigma = 1.0)
+}
 \references{
 Mironov, I. (2017). Renyi differential privacy. IEEE CSF
 2017, 263-275. arXiv:1702.07476. Proposition 7, Corollary 3,
 Table II.
 Local source: fetched-wave3/mironov-2017-renyi-differential-privacy-arxiv1702.07476.pdf
-}
-\examples{
-Rdpc(alpha = 2, sigma = 1.0)
 }

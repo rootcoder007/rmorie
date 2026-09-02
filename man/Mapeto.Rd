@@ -31,10 +31,10 @@ Formula: \code{ln OR = sum(O_i - E_i)/sum(V_i)} with \code{O = a},
 \code{V = (a+b)(c+d)(a+c)(b+d)/(N^2 (N-1))};
 \code{se = 1/sqrt(sum V)} -- Peto et al. (1977), Appendix.
 }
+\examples{
+Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Peto, R. et al. (1977). British Journal of Cancer
 35(1):1-39. \doi{10.1038/bjc.1977.1}.
-}
-\examples{
-Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

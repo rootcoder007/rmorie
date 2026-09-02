@@ -19,6 +19,8 @@
 #' @references Sarndal, Swensson & Wretman (1992), Model Assisted Survey
 #'   Sampling, Springer, section 7.6.
 #' @export
+#' @examples
+#' Covpop(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), target_totals = 5L)
 Covpop <- function(y, weights, target_totals, strata = NULL) {
   y <- .s03vec(y)
   w <- .s03vec(weights)

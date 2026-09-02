@@ -16,6 +16,8 @@
 #'   paywalled and was not read.  The folding hash is this
 #'   implementation's own choice, stated rather than attributed.
 #' @export
+#' @examples
+#' Atompairfp(adjacency = 5L, atomtype = 5L)
 Atompairfp <- function(adjacency, atomtype, nbits = 2048, maxdist = 30) {
   A <- .t1_mat(adjacency); a <- nrow(A)
   if (ncol(A) != a) stop("adjacency must be square")

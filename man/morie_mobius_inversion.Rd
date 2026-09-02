@@ -22,10 +22,10 @@ The check that matters is the defining property of \eqn{\mu}:
 \eqn{\sum_{d | n} \mu(d)} is 1 at \eqn{n = 1} and 0 everywhere else.
 That is an identity, and the residual is returned rather than assumed.
 }
-\references{
-Stanley RP (2011) vol. 1, Sec 3.7.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_mobius_inversion(V)
+}
+\references{
+Stanley RP (2011) vol. 1, Sec 3.7.
 }

@@ -158,6 +158,10 @@
 #'   procedure based on loess. Journal of Official Statistics, 6(1),
 #'   3-73.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * (1:60) / 12) + 0.02 * (1:60) + rnorm(60) * 0.1
+#' morie_stl_decompose(x, period = 12)
 morie_stl_decompose <- function(x, period, s_window = 7L, t_window = NULL,
                                 l_window = NULL, s_degree = 1L,
                                 t_degree = 1L, l_degree = 1L,
@@ -238,6 +242,10 @@ morie_stl_decompose <- function(x, period, s_window = 7L, t_window = NULL,
 #' @references Cleveland, R. B. et al. (1990). STL. Journal of
 #'   Official Statistics, 6(1), 3-73.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * (1:60) / 12) + 0.02 * (1:60) + rnorm(60) * 0.1
+#' morie_stlAn(x, period = 12)
 morie_stlAn <- function(x, period, s_window = 7L, k = 3, inner = 2L,
                         outer = 0L, t_window = NULL, l_window = NULL) {
   fit <- morie_stl_decompose(x, period, s_window = s_window,

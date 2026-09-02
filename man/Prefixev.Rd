@@ -23,12 +23,12 @@ malformed expression is an error, not a plausible wrong number.
 Formula: scan right to left; operand -> push;
 binary operator -> pop a, pop b, push (a op b)
 }
+\examples{
+Prefixev(tokens = 5L)
+}
 \references{
 Lukasiewicz, J. (1929/1963), Elements of Mathematical
 Logic, in which the parenthesis-free notation is introduced; usually
 dated to his 1924 lectures. The evaluation procedure is the standard
 stack algorithm and is not attributed to that source.
-}
-\examples{
-Prefixev(tokens = 5L)
 }

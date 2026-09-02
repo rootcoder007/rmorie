@@ -27,11 +27,11 @@ Formula: l_p(beta; y) = l(beta; y) - lambda sum_c beta_c'beta_c (eq. 7.7),
 the quadratic-regularized multinomial likelihood, which removes the need for
 the identifiability constraint on the slopes. Intercepts are never penalized.
 }
+\examples{
+Msm109(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (7.7) p.226. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm109(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L, beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 }

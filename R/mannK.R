@@ -13,6 +13,9 @@
 #'   \code{varS}, \code{tau}, \code{n}, \code{method}.
 #' @references Mann (1945), Econometrica 13:245-259; Kendall (1975), Rank Correlation Methods.  Both paywalled; the coded form was read from Pohlert's CRAN package trend (R/mk.test.R, R/utilfn.R), whose .varmk and .Dfn give the tie corrections verbatim.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mktest(V)
 Mktest <- function(x, continuity = TRUE) {
   x <- .t4_vec(x); n <- length(x)
   if (n < 3) stop("need at least 3 observations")

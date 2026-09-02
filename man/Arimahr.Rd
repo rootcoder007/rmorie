@@ -25,13 +25,13 @@ Stage one fits a long AR(m) by OLS and keeps its residuals as
 innovation proxies; stage two regresses w_t on p own lags and q lagged
 proxies.  Two OLS solves, no iteration.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Arimahr(V)
+}
 \references{
 Hannan and Rissanen (1982), Biometrika 69(1), 81-94; the
 ARIMA model is Box, Jenkins and Reinsel (1994), Chapter 4.  Standard
 published form; neither source is in the local corpus and neither
 was read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Arimahr(V)
 }

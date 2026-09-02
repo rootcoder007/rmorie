@@ -16,10 +16,10 @@ Named list with \code{estimate}, \code{nrow}, \code{ncol}, \code{total}, \code{m
 \deqn{C_{ij} = \|x_i - y_j\|^2}
 Peyre & Cuturi (2019), Sec. 2.4.
 }
-\references{
-Peyre & Cuturi (2019), Sec. 2.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Otcostsq(V, V)
+}
+\references{
+Peyre & Cuturi (2019), Sec. 2.4.
 }

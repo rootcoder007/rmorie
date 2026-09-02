@@ -16,10 +16,10 @@ morie_horowitz_npiv_model(x, y, w, bandwidth = NULL, grid = 25L, tol = 1e-05)
 
 \item{w}{Numeric vector, the instrument.}
 
-\item{bandwidth}{Numeric or NULL; kernel bandwidth on the [0, 1]
+\item{bandwidth}{Numeric or NULL; kernel bandwidth on the \link{0, 1}
 scale, default \verb{1.06 n^(-1/6)/sqrt(12)}.}
 
-\item{grid}{Integer, number of quadrature points on [0, 1].}
+\item{grid}{Integer, number of quadrature points on \link{0, 1}.}
 
 \item{tol}{Numeric, relative eigenvalue cutoff for the truncated
 inverse.  This bounds the amplification factor lambda_1/lambda_j
@@ -38,7 +38,7 @@ method.
 \description{
 Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 5.3, pages 156-159.  For Y = g(X) + U with
-E(U | W = w) = 0 and the support of (X, W) mapped into [0, 1]^2,
+E(U | W = w) = 0 and the support of (X, W) mapped into \link{0, 1}^2,
 }
 \details{
 E(Y | W = w) f_W(w) = int_0^1 f_XW(x, w) g(x) dx           (5.40)

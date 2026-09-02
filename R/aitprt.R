@@ -11,6 +11,9 @@
 #'   CRAN package compositions 2.0-9, whose perturbe is acomp(x * y) --
 #'   the elementwise product, then closed.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Perturb(V, V)
 Perturb <- function(x, y, total = 1) {
   x <- .t1_vec(x); y <- .t1_vec(y)
   if (length(x) != length(y)) stop("x and y must have the same number of parts")

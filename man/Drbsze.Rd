@@ -30,14 +30,14 @@ Student-t critical value on \code{min(n1, n0) - 1} degrees of
 freedom in place of the normal quantile.  Both are conservative and
 both tend to their asymptotic limits as \code{n} grows.
 }
+\examples{
+set.seed(1)
+r <- Drbsze(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
+}
 \references{
 Sant'Anna, P. H. C. and Zhao, J. (2020). Journal of
 Econometrics 219(1), 101-122, equation (2.6).  MacKinnon, J. G. and
 White, H. (1985). Journal of Econometrics 29(3), 305-325.  Bell,
 R. M. and McCaffrey, D. F. (2002). Survey Methodology 28(2),
 169-181.
-}
-\examples{
-set.seed(1)
-r <- Drbsze(y = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 }

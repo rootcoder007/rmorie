@@ -22,12 +22,12 @@ List with target, T, n, gamma, mean.
 z_t = sum_{j=0}^{n-1} gamma^j u_{t+j} + gamma^n nu_{t+n}, with the
 bootstrap term dropped past the end of the trajectory.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mznstep(V, V)
+}
 \references{
 Schrittwieser et al. (2020), Nature 588, 604-609;
 arXiv:1911.08265, Methods (training targets) and Equation (3).  Read
 from the ar5iv rendering of the arXiv source.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Mznstep(V, V)
 }

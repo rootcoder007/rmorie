@@ -14,6 +14,9 @@
 #' @references Huber (1964), Annals of Mathematical Statistics
 #'   35(1):73-101. \doi{10.1214/aoms/1177703732}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Hubrho(V)
 Hubrho <- function(r, k = 1.345) {
   v <- .s03vec(r)
   if (length(v) == 0L) stop("huber_loss: r is empty")

@@ -31,16 +31,16 @@ the Euclidean distance to the observed summaries is <= eps
 (Pritchard et al. 1999; algorithm as stated in Sisson-Fan-Beaumont
 2018, Sec 1.5).
 }
+\examples{
+sim <- function(theta, e) theta[1] + 0.1 * .ghc_norm(e, 1L)
+r <- Abcrej(sim, obs = 1.5, eps = 0.3, prior = list(c(0, 3)),
+            n_draws = 400)
+str(r, max.level = 1)
+}
 \references{
 Pritchard, J. K., Seielstad, M. T., Perez-Lezaun, A.
 and Feldman, M. W. (1999), Molecular Biology and Evolution
 16(12), 1791-1798; Sisson, S. A., Fan, Y. and Beaumont, M. A.
 (2018), arXiv:1802.09720, Sec 1.5 (local:
 fetched-wave3/sisson-2018-abc-overview.pdf).
-}
-\examples{
-sim <- function(theta, e) theta[1] + 0.1 * .ghc_norm(e, 1L)
-r <- Abcrej(sim, obs = 1.5, eps = 0.3, prior = list(c(0, 3)),
-            n_draws = 400)
-str(r, max.level = 1)
 }

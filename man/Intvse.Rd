@@ -34,11 +34,11 @@ no longer decomposing an individual effect.
 Formula: \eqn{IDE = (th1 + th3(b0 + b1 a* + b2 primec))(a - a*)},
 \code{IIE = (th2 + th3 a) b1 (a - a*)}, summing to the total effect.
 }
+\examples{
+Intvse(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
+}
 \references{
 VanderWeele, T. J., Vansteelandt, S. & Robins, J. M.
 (2014). Epidemiology 25:300-306; VanderWeele (2014) Epidemiology
 25:749-761.
-}
-\examples{
-Intvse(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
 }

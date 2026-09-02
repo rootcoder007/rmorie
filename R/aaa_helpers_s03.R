@@ -891,9 +891,16 @@
 #' @return The value of \code{morie_jsonlt_to_json}.
 #' @export
 .s03json_toJSON <- function(x, auto_unbox = TRUE, digits = NULL,
-                            pretty = FALSE, ...)
-  morie_jsonlt_to_json(x, pretty = pretty, auto_unbox = auto_unbox,
-                       digits = digits, na = "null", null = "null", ...)
+                            pretty = FALSE, ...) {
+  # Defaults for na/null only when the caller did not set them -- passing
+  # both here and in `...` made .jsonlt_opts() see the argument twice.
+  dots <- list(...)
+  if (is.null(dots$na)) dots$na <- "null"
+  if (is.null(dots$null)) dots$null <- "null"
+  do.call(morie_jsonlt_to_json,
+          c(list(x, pretty = pretty, auto_unbox = auto_unbox,
+                 digits = digits), dots))
+}
 
 #' .s03json_pretty
 #'
@@ -918,9 +925,13 @@
 #' @param ... Passed through.
 #' @return The value of \code{morie_jsonlt_from_json}.
 #' @export
-.s03json_fromJSON <- function(txt, ...)
-  morie_jsonlt_from_json(txt, simplifyDataFrame = FALSE,
-                         simplifyMatrix = FALSE)
+.s03json_fromJSON <- function(txt, ...) {
+  # jsonlite-compatible defaults (simplifyVector/DataFrame/Matrix = TRUE)
+  # and every caller-supplied option honoured. The previous shim dropped
+  # `...` and forced simplifyDataFrame = FALSE, so every reader that
+  # expected a data.frame back (CKAN, ArcGIS, dataset fixtures) got a list.
+  morie_jsonlt_from_json(txt, ...)
+}
 
 #' .s03json_write
 #'

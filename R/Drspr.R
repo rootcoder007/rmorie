@@ -22,6 +22,9 @@
 #'   Statistics 11(4), 1912-1947.  Sant'Anna, P. H. C. and Zhao, J.
 #'   (2020). Journal of Econometrics 219(1), 101-122.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Drspr(V, V)
 Drspr <- function(y, D, X = NULL, exposure = NULL) {
   yv <- .s03vec(y); dv <- .s03vec(D); n <- length(yv)
   if (n == 0L) stop("Drspr: empty input, y has no observations")

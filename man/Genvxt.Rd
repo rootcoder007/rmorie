@@ -28,12 +28,12 @@ Formula: var_p = (MS_p - MS_pi)/n_i, var_i = (MS_i - MS_pi)/n_p,
 var_pi = MS_pi; E rho^2 = var_p / (var_p + var_pi/n_i);
 Phi = var_p / (var_p + (var_i + var_pi)/n_i).
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Genvxt(M)
+}
 \references{
 Cronbach, Gleser, Nanda and Rajaratnam (1972), The
 Dependability of Behavioral Measurements, Wiley; Brennan (2001),
 Generalizability Theory, Springer, ch. 2.
-}
-\examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Genvxt(M)
 }

@@ -29,13 +29,13 @@ right one.
 }
 \details{
 Formula: K(h) = (2 sqrt(pi))^(-1) int cos(h lambda) exp(-lambda^2/4)
-dlambda, by midpoint rule over [-lam_max, lam_max].
+dlambda, by midpoint rule over \link{-lam_max, lam_max}.
+}
+\examples{
+Ghosalstatgpspec()
 }
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.8,
 eqs. (11.3)-(11.4).
-}
-\examples{
-Ghosalstatgpspec()
 }

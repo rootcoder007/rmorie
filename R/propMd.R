@@ -14,6 +14,8 @@
 #' @references VanderWeele, T. J. (2013). Epidemiology 24:175-176;
 #'   VanderWeele (2015), Explanation in Causal Inference, section 2.7.
 #' @export
+#' @examples
+#' PropMd(NIE = 5L, NDE = 5L)
 PropMd <- function(NIE, NDE) {
   nie <- as.numeric(NIE); nde <- as.numeric(NDE)
   te <- nie + nde

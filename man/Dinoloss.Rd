@@ -23,10 +23,10 @@ List with \code{loss}, \code{per_view}, \code{p_s}, \code{p_t}, \code{B}, \code{
 \description{
 Formula: P_s = softmax(s/tau_s), P_t = softmax((t - C)/tau_t), loss = -(1/B) sum_i sum_k P_t(i,k) log P_s(i,k)
 }
-\references{
-Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021), Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294. Verified against the paper: equation (1) for the temperature softmax, equation (4) for the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dinoloss(V, V)
+}
+\references{
+Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021), Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294. Verified against the paper: equation (1) for the temperature softmax, equation (4) for the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
 }

@@ -16,6 +16,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.3.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalexplink(V)
 Ghosalexplink <- function(x, psi = NULL) {
   xs <- sort(as.numeric(x))
   n <- length(xs)

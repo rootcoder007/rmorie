@@ -62,6 +62,9 @@ without 32-bit unsigned arithmetic.  Bit indices are therefore this
 implementation's own; the identifier partition is the published ECFP
 one.
 }
+\examples{
+Ecfp4(adjacency = 5L, atomnum = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010), "Extended-connectivity
 fingerprints", Journal of Chemical Information and Modeling 50(5),
@@ -72,7 +75,4 @@ MorganGenerator.cpp lines 395-495 and Code/GraphMol/Fingerprints/
 FingerprintUtil.cpp lines 242-265, master revision fetched
 2026-08-09.  RDKit: Open-Source Cheminformatics,
 https://www.rdkit.org.
-}
-\examples{
-Ecfp4(adjacency = 5L, atomnum = 5L)
 }

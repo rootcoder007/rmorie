@@ -21,7 +21,7 @@ Davison and Hinkley (1997), Bootstrap Methods and their Application,
 Cambridge University Press, Section 5.2.  The bootstrap supplies a bias
 estimate and a standard error and the interval is the ordinary normal one
 built from them: bias* = mean(t*) - t, se* = sd(t*), and
-[t - bias* - z_(1-alpha/2) se*, t - bias* + z_(1-alpha/2) se*].
+\link{t - bias* - z_(1-alpha/2) se*, t - bias* + z_(1-alpha/2) se*}.
 }
 \details{
 The bias is subtracted, not added: mean(t*) - t estimates E(T) - theta, so

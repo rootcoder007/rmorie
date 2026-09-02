@@ -33,6 +33,9 @@
 #'   Finite-time analysis of the multiarmed bandit problem. Machine
 #'   Learning, 47, 235-256.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ucbb(V)
 morie_ucbb <- function(x, T = NULL) {
   x <- as.matrix(x)
   rows <- nrow(x); K <- ncol(x)

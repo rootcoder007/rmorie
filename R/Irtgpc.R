@@ -11,4 +11,6 @@
 #'   Applied Psychological Measurement 16(2):159-176.
 #'   \doi{10.1177/014662169201600206}
 #' @export
+#' @examples
+#' Irtgpc(c(0, 1, 2), theta = c(0, 0.5, -0.5), a = 1, b_j = c(-1, 0, 1))
 Irtgpc <- function(y, theta, a, b_j) Gpcm(y, theta, a, b_j)

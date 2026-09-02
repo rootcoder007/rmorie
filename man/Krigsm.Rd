@@ -35,11 +35,11 @@ spherical variogram.  Kept as a separate exported name because the
 method is catalogued under both spellings; it delegates rather than
 carrying a second copy of the solver.
 }
+\examples{
+Krigsm(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Matheron (1963), Principles of geostatistics, Economic
 Geology 58(8):1246-1266, \doi{10.2113/gsecongeo.58.8.1246};
 Cressie (1993), Statistics for Spatial Data, rev. ed., Wiley.
-}
-\examples{
-Krigsm(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -29,6 +29,8 @@
 #' @references Rybicki, G. B. and Lightman, A. P. (1979). Radiative
 #'   Processes in Astrophysics. Wiley, Sections 1.5-1.6.
 #' @export
+#' @examples
+#' morie_plncF(lam = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
 morie_plncF <- function(lam, T, h = 6.62607015e-34, c = 299792458,
                         kB = 1.380649e-23) {
   la <- as.numeric(lam)

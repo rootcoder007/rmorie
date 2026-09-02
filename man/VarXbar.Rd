@@ -15,7 +15,7 @@ VarXbar(sigma, N)
 list(var_mean).
 }
 \description{
-E[(xbar - mu)^2] = sigma^2 / N.
+E\link{(xbar - mu)^2} = sigma^2 / N.
 }
 \examples{
 VarXbar(3, 9)$var_mean

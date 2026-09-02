@@ -17,6 +17,9 @@
 #' @references Rosenthal, R. (1979). Psychological Bulletin 86(3):638-641.
 #'   \doi{10.1037/0033-2909.86.3.638}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mafsn(V)
 Mafsn <- function(z_scores, alpha = 0.05) {
   z <- as.numeric(z_scores); k <- length(z)
   if (k == 0L) stop("no studies")

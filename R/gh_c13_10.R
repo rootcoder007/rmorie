@@ -18,6 +18,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.4.1.
 #' @export
+#' @examples
+#' Ghosalntrconsist()
 Ghosalntrconsist <- function(ns = c(100, 800, 6400), seed = 42) {
   ns <- as.integer(ns)
   if (length(ns) < 2L) stop("ns must have at least two sample sizes")

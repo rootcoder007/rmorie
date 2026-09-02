@@ -22,9 +22,9 @@ nothing beyond the step size, which is why it applies to processes
 with no independence at all -- and why it is conservative for those
 that do.
 }
-\references{
-Azuma K (1967) \emph{Tohoku Math J} 19(3):357-367.
-}
 \examples{
 morie_azuma_bound(100, 1, 30)
+}
+\references{
+Azuma K (1967) \emph{Tohoku Math J} 19(3):357-367.
 }

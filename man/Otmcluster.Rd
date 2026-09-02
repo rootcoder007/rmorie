@@ -30,12 +30,12 @@ Formula: alternate \code{label(i) = argmin_c W_2(mu_i, nu_c)} and
 \code{nu_c = argmin sum W_2^2(mu_i, nu)}; the barycentre step is Cuturi
 and Doucet's free-support update.
 }
+\examples{
+Otmcluster(X_list = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+}
 \references{
 del Barrio, E., Cuesta-Albertos, J. A. and Matran, C.
 (2019). Annals of Probability 47(2):926-951. \doi{10.1214/18-AOP1275}.
 Cuturi, M. and Doucet, A. (2014). Proceedings of Machine Learning
 Research 32:685-693 (ICML).
-}
-\examples{
-Otmcluster(X_list = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

@@ -18,10 +18,10 @@ No family of subsets in which none contains another exceeds
 family is unique; at odd \eqn{n} the two central layers both attain
 it.
 }
+\examples{
+morie_sperner_width(n = 5L)
+}
 \references{
 Sperner E (1928). Ein Satz ueber Untermengen einer
 endlichen Menge. \emph{Mathematische Zeitschrift}, 27(1), 544-548.
-}
-\examples{
-morie_sperner_width(n = 5L)
 }

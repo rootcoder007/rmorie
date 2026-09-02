@@ -18,6 +18,9 @@
 #' @references Belsley, Kuh & Welsch (1980), Regression Diagnostics,
 #'   Wiley, ch. 2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Covrat(V, V)
 Covrat <- function(y, X, intercept = TRUE) {
   f <- .bkw_influence(y, X, intercept)
   n <- f$n; p <- f$p

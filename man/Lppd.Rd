@@ -23,12 +23,12 @@ Formula: lppd = sum_i log( (1/S) sum_s p(y_i | theta^s) );
 p_waic = sum_i var_s( log p(y_i | theta^s) );
 elpd_waic = lppd - p_waic; WAIC = -2 elpd_waic
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Lppd(V)
+}
 \references{
 Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
 Bayesian Data Analysis, 3rd edition, Section 7.2, equation (7.5).
 Fetched as the full text of the book from the author's own copy.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Lppd(V)
 }

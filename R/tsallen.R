@@ -15,6 +15,8 @@
 #' @references Tsallis, C. (1988). Possible generalization of
 #'   Boltzmann-Gibbs statistics. J Stat Phys 52:479-487, equation (1).
 #' @export
+#' @examples
+#' Tsallen(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
 Tsallen <- function(y, q) {
   v <- as.numeric(unlist(y)); n <- length(v)
   tb <- table(v)

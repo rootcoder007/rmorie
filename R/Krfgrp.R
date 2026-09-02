@@ -23,6 +23,8 @@
 #'   Ghahramani (2010), Kronecker graphs: an approach to modeling
 #'   networks, Journal of Machine Learning Research 11:985-1042.
 #' @export
+#' @examples
+#' Krfgrp(seed = 1, k = 5L)
 Krfgrp <- function(seed, k) {
   T <- .s03mat(seed); n0 <- nrow(T)
   if (n0 == 0L) stop("kronecker_graph: seed is empty")

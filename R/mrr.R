@@ -14,6 +14,9 @@
 #' @references Voorhees, E. M. (1999). TREC-8 question answering track
 #'   report, 77-82.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mrr(V, V)
 Mrr <- function(pred_rank, relevant) {
   P_ <- as.matrix(pred_rank); R_ <- as.matrix(relevant)
   Q <- nrow(P_)

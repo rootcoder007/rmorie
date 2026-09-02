@@ -119,6 +119,12 @@
 #'   Revisiting event study designs. Review of Economic Studies,
 #'   91(6), 3253-3285.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Y <- matrix(rnorm(20), 10, 2)
+#' treated <- matrix(FALSE, 10, 2)
+#' treated[8:10, 2] <- TRUE
+#' morie_impute_untreated(Y, treated)
 morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
                                    tol = 1e-13) {
   Y <- as.matrix(Y)
@@ -192,6 +198,15 @@ morie_impute_untreated <- function(Y, treated, X = NULL, max_iter = 2000L,
 #'   Revisiting event study designs: robust and efficient estimation.
 #'   Review of Economic Studies, 91(6), 3253-3285.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nu <- 6; T <- 5
+#' unit <- rep(1:nu, each = T)
+#' time <- rep(1:T, nu)
+#' ft <- rep(c(Inf, Inf, Inf, 4, 4, 3), each = T)
+#' D <- as.integer(time >= ft)
+#' y <- rnorm(nu * T) + D * 1.5
+#' morie_boryis(y, D, unit, time)
 morie_boryis <- function(y, D, unit, time, X = NULL, weights = NULL) {
   p <- .mor_did_panel(y, unit, time)
   Y <- p$Y; units <- p$units; periods <- p$periods

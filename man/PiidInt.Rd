@@ -7,7 +7,7 @@
 PiidInt(p, k = 2)
 }
 \arguments{
-\item{p}{common event probability, in [0, 1].}
+\item{p}{common event probability, in \link{0, 1}.}
 
 \item{k}{number of events, >= 0.}
 }

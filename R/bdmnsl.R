@@ -16,6 +16,10 @@
 #'   returned an access stub and NBER t0224 a zero-page PDF), so it was
 #'   not read; only the bound stated here is claimed.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Mtsbound(y = rnorm(50), z = rbinom(50, 1, 0.5), d = rbinom(50, 1, 0.5),
+#'          ymin = -3, ymax = 3)
 Mtsbound <- function(y, z, d, ymin, ymax) {
   y <- .t1_vec(y); z <- .t1_vec(z); n <- length(y)
   if (length(z) != n) stop("y and z must have the same length")

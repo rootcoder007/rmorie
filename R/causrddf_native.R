@@ -37,6 +37,12 @@
 #'   discontinuity designs: a guide to practice. Journal of
 #'   Econometrics, 142(2), 615-635.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(200, -1, 1)
+#' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+#' treat <- as.integer((x >= 0) & (runif(200) < 0.85))
+#' morie_causrddf(x, y, treat)
 morie_causrddf <- function(x, y, treat, cutoff = 0, h = NULL,
                            h_treat = NULL, kernel = "triangular") {
   xa <- as.numeric(x); ya <- as.numeric(y); wa <- as.numeric(treat)

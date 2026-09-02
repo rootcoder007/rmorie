@@ -20,6 +20,9 @@
 #' @references Tukey, J. W. (1977). Exploratory Data Analysis; Box,
 #'   G. E. P. & Cox, D. R. (1964). JRSS B 26:211-252, equation (9).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Pheno2(V)
 Pheno2 <- function(y, k = 1.5, lambdas = NULL) {
   v <- as.numeric(unlist(y)); n <- length(v)
   if (min(v) <= 0) stop("phenotype values must be strictly positive")

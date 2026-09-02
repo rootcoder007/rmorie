@@ -369,6 +369,9 @@
 #' @param M Named label -> answer-word map.
 #' @return List with `estimate`, `label_probs`, `label_mass`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_prompt_label_mapping(c(great = 0.7, terrible = 0.3), 
+#'     "positive", list(positive = "great", negative = "terrible"))
 morie_kamath_ch3_prompt_label_mapping <- function(x, y, M) {
   .morie_km2_dist(x, "x")
   if (length(M) == 0L) stop("M must be a non-empty label map.", call. = FALSE)
@@ -393,6 +396,9 @@ morie_kamath_ch3_prompt_label_mapping <- function(x, y, M) {
 #' @param M Named label -> answer-word map.
 #' @return List with `estimate`, `label`, `label_probs`, `logits`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_prompt_softmax_label(list(great = c(1, 0), terrible = c(0, 
+#'     1)), c(1, 0), list(pos = "great", neg = "terrible"))
 morie_kamath_ch3_prompt_softmax_label <- function(w, h_z, M) {
   if (length(M) == 0L) stop("M is empty.", call. = FALSE)
   if (length(w) == 0L) stop("w is empty.", call. = FALSE)
@@ -427,6 +433,9 @@ morie_kamath_ch3_prompt_softmax_label <- function(w, h_z, M) {
 #' @param f_fill Optional filler; default substitutes `\[z\]`, else appends.
 #' @return List with `estimate`, `z_hat`, `filled_prompt`, `scores`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_prompt_search_argmax("Paris is [z].", c("great", 
+#'     "terrible"), function(s) nchar(s))
 morie_kamath_ch3_prompt_search_argmax <- function(x, z, theta, f_fill = NULL) {
   if (!is.character(x) || !nzchar(x)) stop("x must be a non-empty prompt.",
                                            call. = FALSE)
@@ -460,6 +469,8 @@ morie_kamath_ch3_prompt_search_argmax <- function(x, z, theta, f_fill = NULL) {
 #' @param mask Mask token.
 #' @return List with `mask_index` (0-based), `tokens`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_dante_cloze()
 morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
                                          mask = "[MASK]") {
   if (!is.character(prompt) || !nzchar(trimws(prompt))) {
@@ -537,6 +548,8 @@ morie_kamath_ch3_dante_cloze <- function(prompt = "Dante was born in [MASK]",
 #' @param template Template string.
 #' @return List with `prompt`, `slot_filled`, `tokens`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_prefix_prompt_template("Loved it.", "great")
 morie_kamath_ch3_prefix_prompt_template <- function(
     x, z = NULL, template = "[x] This movie is [z]") {
   r <- .morie_km2_fill_template(template, x, z)
@@ -570,6 +583,9 @@ morie_kamath_ch3_cloze_prompt_template <- function(
 #' @param P_LM Function (x, t) -> named probability vector.
 #' @return List with `estimate`, `n_correct`, `correct`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_top1_prompt_metric(list(list("a", "pos"), list("b", 
+#'     "neg")), "T1", function(x, t) c(pos = 0.9, neg = 0.1))
 morie_kamath_ch3_top1_prompt_metric <- function(R, t, P_LM) {
   if (length(R) == 0L) stop("R is empty.", call. = FALSE)
   if (!is.function(P_LM)) stop("P_LM must be a function.", call. = FALSE)
@@ -595,6 +611,9 @@ morie_kamath_ch3_top1_prompt_metric <- function(R, t, P_LM) {
 #' @param p_forward,p_backward Leg probabilities in \[0, 1\].
 #' @return List with `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_back_translation_prob("a", "b", p_forward = 0.5, 
+#'     p_backward = 0.25)
 morie_kamath_ch3_back_translation_prob <- function(t, thatt, p_forward = NULL,
                                                    p_backward = NULL) {
   if (is.null(p_forward) || is.null(p_backward)) {
@@ -618,6 +637,9 @@ morie_kamath_ch3_back_translation_prob <- function(t, thatt, p_forward = NULL,
 #' @param n_triggers Repeats (3 in the book).
 #' @return List with `prompt`, `tokens`, `n_triggers`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_qa_trigger_template("Where?", "Paris.", "the", 
+#'     "Rome")
 morie_kamath_ch3_qa_trigger_template <- function(x, y, T, z_adv,
                                                  n_triggers = 3) {
   for (v in list(x, y, T, z_adv)) {
@@ -648,6 +670,9 @@ morie_kamath_ch3_qa_trigger_template <- function(x, y, T, z_adv,
 #' @param T5 Function (T, filled) -> probability in (0, 1\].
 #' @return List with `estimate`, `per_example`, `filled_inputs`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_t5_template_obj(list(list("g m", "pos"), list("a m", 
+#'     "neg")), "{x} It was {y}", function(T, s) 0.5)
 morie_kamath_ch3_t5_template_obj <- function(D_train, T, T5) {
   if (length(D_train) == 0L) stop("D_train is empty.", call. = FALSE)
   if (!is.function(T5)) stop("T5 must be a function.", call. = FALSE)
@@ -678,6 +703,9 @@ morie_kamath_ch3_t5_template_obj <- function(D_train, T, T5) {
 #' @param Y_idx Optional 0-based positions.
 #' @return List with `estimate`, `per_position`, `positions_scored`.
 #' @export
+#' @examples
+#' morie_kamath_ch3_prefix_tuning_obj(function(z, hp) 0.5, "s:", 
+#'     list("a", "b"), list(0, 1))
 morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
   if (!is.function(phi)) stop("phi must be a function.", call. = FALSE)
   toks <- as.list(y); states <- as.list(h)
@@ -745,6 +773,9 @@ morie_kamath_ch3_prefix_tuning_obj <- function(phi, x, y, h, Y_idx = NULL) {
 #' @param f Activation; default ReLU.
 #' @return List with `output`, `delta`, `bottleneck_rank`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_series_adapter(matrix(c(1, 2), 1), matrix(c(1, 
+#'     0), 2), matrix(c(1, 1), 1))
 morie_kamath_ch4_series_adapter <- function(H_o, W_down, W_up, f = NULL) {
   r <- .morie_km2_adapter_core(H_o, H_o, W_down, W_up,
                                if (is.null(f)) function(a) pmax(a, 0) else f)
@@ -812,6 +843,9 @@ morie_kamath_ch4_parallel_adapter <- function(H_o, H_i, W_down, W_up,
 #' @param y Target sequences.
 #' @return List with `estimate`, `per_pair`, `n_tokens`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_full_finetune_obj(function(xi, p, t) 0.5, list("doc"), 
+#'     list(list("a", "b")))
 morie_kamath_ch4_full_finetune_obj <- function(Phi, x, y) {
   r <- .morie_km2_seq_obj(Phi, x, y)
   list(estimate = r[[1]], per_pair = r[[2]],
@@ -843,6 +877,9 @@ morie_kamath_ch4_lora_obj <- function(Theta, Phi_0, x, y) {
 #' @param x Input vector of length k.
 #' @return List with `h`, `base`, `delta_h`, `r`, `delta_W_rank`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_lora_forward(diag(2), matrix(c(1, 0), 2), matrix(c(1, 
+#'     0), 1), c(1, 2))
 morie_kamath_ch4_lora_forward <- function(W_0, B, A, x) {
   W0 <- as.matrix(W_0); Bm <- as.matrix(B); Am <- as.matrix(A)
   xv <- as.numeric(x)
@@ -868,6 +905,9 @@ morie_kamath_ch4_lora_forward <- function(W_0, B, A, x) {
 #' @param A,B Matrices.
 #' @return List with `W`, `shape`, `rank`, `n_params`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch4_kronecker_product(V, V)
 morie_kamath_ch4_kronecker_product <- function(A, B) {
   Am <- as.matrix(A); Bm <- as.matrix(B)
   if (length(Am) == 0L || length(Bm) == 0L) {
@@ -888,6 +928,8 @@ morie_kamath_ch4_kronecker_product <- function(A, B) {
 #' @param x Vector of length ncol(A) * ncol(B).
 #' @return List with `y`, `folded_shape`, `products_avoided`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_krona_efficient(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L, x = 5L)
 morie_kamath_ch4_krona_efficient <- function(A, B, x) {
   Am <- as.matrix(A); Bm <- as.matrix(B); xv <- as.numeric(x)
   a1 <- nrow(Am); a2 <- ncol(Am); b1 <- nrow(Bm); b2 <- ncol(Bm)
@@ -934,6 +976,9 @@ morie_kamath_ch4_krona_efficient <- function(A, B, x) {
 #' @param s Scale.
 #' @return List with `W_tuned`, `delta`, `shape`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_krona_tuned_weights(matrix(1, 2, 2), diag(2), 
+#'     matrix(1, 1, 1), 2)
 morie_kamath_ch4_krona_tuned_weights <- function(W, A_k, B_k, s) {
   r <- .morie_km2_tuned(W, A_k, B_k, s)
   list(W_tuned = r[[1]], delta = r[[4]] * r[[3]], s = r[[4]],
@@ -989,6 +1034,9 @@ morie_kamath_ch4_krona_output <- function(X, W, A_k, B_k, s) {
 #' @param x Input.
 #' @return List with `h`, `delta_h`, `r`, `n_trainable`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_vera_forward(diag(2), c(2, 3), c(5), matrix(c(1, 
+#'     1), 1), matrix(c(1, 2), 2), c(1, 2))
 morie_kamath_ch4_vera_forward <- function(W_0, Lambda_b, Lambda_d, A, B, x) {
   W0 <- as.matrix(W_0); Am <- as.matrix(A); Bm <- as.matrix(B)
   xv <- as.numeric(x)
@@ -1017,6 +1065,8 @@ morie_kamath_ch4_vera_forward <- function(W_0, Lambda_b, Lambda_d, A, B, x) {
 #' @param A,B Factors.
 #' @return List with `estimate`, `residual`, `quantisation_error`, `r`.
 #' @export
+#' @examples
+#' morie_kamath_ch4_loftq_objective(W = c(1, 2, 3, 4, 5, 6, 7, 8), Q = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L)
 morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
   Wm <- as.matrix(W); Qm <- as.matrix(Q)
   Am <- as.matrix(A); Bm <- as.matrix(B)
@@ -1066,6 +1116,14 @@ morie_kamath_ch4_loftq_objective <- function(W, Q, A, B) {
 #' @param i Choice, 0 or 1 per pair.
 #' @return List with `estimate`, `margins`, `per_pair`.
 #' @export
+#' @examples
+#' A <- matrix(c(1, 0, 2, 1), 2)
+#' B <- diag(2)
+#' x <- c(1, 2, 3, 4)
+#' y <- morie_kamath_ch4_krona_efficient(A, B, x)$y
+#' morie_kamath_ch5_reward_loss_pairwise(function(x, y) c(a = 2, 
+#'     b = 0.5)[[y]], list("p1", "p2"), list("a", "b"), list("b", 
+#'     "a"), c(0, 1))
 morie_kamath_ch5_reward_loss_pairwise <- function(r_theta, x, y_0, y_1, i) {
   if (!is.function(r_theta)) stop("r_theta must be a function.", call. = FALSE)
   xs <- as.list(x); a <- as.list(y_0); b <- as.list(y_1)
@@ -1108,6 +1166,9 @@ morie_kamath_ch5_rm_bradley_terry <- function(x, y_w, y_l, r_theta) {
 #' @param r_theta Reward or function (x, y).
 #' @return List with `estimate`, `penalised_reward`, `penalty`.
 #' @export
+#' @examples
+#' morie_kamath_ch5_reward_kl_penalty("x", "y", c(0.5, 0.25), c(0.25, 
+#'     0.5), 0.2, r_theta = 1)
 morie_kamath_ch5_reward_kl_penalty <- function(x, y, pi_RL, pi_SFT, beta,
                                                r_theta = NULL) {
   if (is.null(r_theta)) stop("r_theta is required.", call. = FALSE)
@@ -1145,6 +1206,9 @@ morie_kamath_ch5_reward_kl_penalty <- function(x, y, pi_RL, pi_SFT, beta,
 #' @param beta KL weight.
 #' @return List with `estimate`, `expected_reward`, `kl`, `penalty`.
 #' @export
+#' @examples
+#' morie_kamath_ch5_rlhf_objective(c(y1 = 0.6, y2 = 0.4), c(y1 = 0.5, 
+#'     y2 = 0.5), c(1, 0), 0.1)
 morie_kamath_ch5_rlhf_objective <- function(pi_theta, pi_ref, r_phi, beta) {
   p <- .morie_km2_dist(pi_theta, "pi_theta")
   q <- .morie_km2_dist(pi_ref, "pi_ref")
@@ -1214,6 +1278,8 @@ morie_kamath_ch5_ppo_loss <- function(phi, x, y, r_theta, beta,
 #' @param Z Optional partition function.
 #' @return List with `pi`, `Z`, `argmax` (0-based).
 #' @export
+#' @examples
+#' morie_kamath_ch5_rlhf_optimal_policy(c(0.5, 0.5), c(1, 0), 0.5)
 morie_kamath_ch5_rlhf_optimal_policy <- function(pi_ref, r, beta, Z = NULL) {
   q <- as.numeric(pi_ref); rv <- as.numeric(r)
   if (length(q) == 0L) stop("pi_ref is empty.", call. = FALSE)
@@ -1244,6 +1310,9 @@ morie_kamath_ch5_rlhf_optimal_policy <- function(pi_ref, r, beta, Z = NULL) {
 #' @param Z Partition function; default 1.
 #' @return List with `r`, `log_ratio`, `offset`.
 #' @export
+#' @examples
+#' morie_kamath_ch5_dpo_reward_optimal(c(0.6, 0.4), c(0.5, 0.5), 
+#'     0.2, Z = 2)
 morie_kamath_ch5_dpo_reward_optimal <- function(pi_star, pi_ref, beta,
                                                 Z = NULL) {
   beta <- as.numeric(beta)
@@ -1273,6 +1342,8 @@ morie_kamath_ch5_dpo_reward_optimal <- function(pi_star, pi_ref, beta,
 #' @param y_w,y_l Responses.
 #' @return List with `estimate`, `margin`, `r_w`, `r_l`.
 #' @export
+#' @examples
+#' morie_kamath_ch5_bradley_terry_pref(c(a = 2, b = 0.5), "a", "b")
 morie_kamath_ch5_bradley_terry_pref <- function(r_star, y_w, y_l) {
   if (is.function(r_star)) {
     rw <- as.numeric(r_star(y_w)); rl <- as.numeric(r_star(y_l))
@@ -1341,6 +1412,9 @@ morie_kamath_ch5_pref_sigmoid_form <- function(r_star) {
 #' @param beta Positive.
 #' @return List with `estimate`, `margin`, implicit rewards.
 #' @export
+#' @examples
+#' morie_kamath_ch5_dpo_pref_simplified(c(0.6, 0.4), c(0.5, 0.5), 
+#'     0.2)
 morie_kamath_ch5_dpo_pref_simplified <- function(pi_star, pi_ref, beta) {
   r <- .morie_km2_implicit_rewards(pi_star, pi_ref, beta)
   inner <- morie_kamath_ch5_pref_sigmoid_form(c(r[1], r[2]))
@@ -1376,6 +1450,9 @@ morie_kamath_ch5_dpo_pref_substituted <- function(pi_star, pi_ref, beta,
 #' @param beta Positive.
 #' @return List with `estimate`, `margins`, implicit rewards.
 #' @export
+#' @examples
+#' morie_kamath_ch5_dpo_loss(list(c(0.6, 0.4), c(0.7, 0.3)), list(c(0.5, 
+#'     0.5), c(0.5, 0.5)), 0.2)
 morie_kamath_ch5_dpo_loss <- function(pi_theta, pi_ref, beta) {
   pt <- as.list(pi_theta); pr <- as.list(pi_ref)
   if (length(pt) == 0L) stop("no preference pairs.", call. = FALSE)
@@ -1405,6 +1482,10 @@ morie_kamath_ch5_dpo_loss <- function(pi_theta, pi_ref, beta) {
 #' @param C Support predicate or a vector of supported facts.
 #' @return List with `estimate`, `per_prompt`, `response_rate`.
 #' @export
+#' @examples
+#' x <- c(1, 2, 3, 4)
+#' morie_kamath_ch6_factscore(function(x) if (x == "p2") NULL else paste0("r", 
+#'     x), list("p1", "p2", "p3"), function(r) c("f1", "f2"), c("f1"))
 morie_kamath_ch6_factscore <- function(M, X, A_y, C) {
   prompts <- as.list(X)
   if (length(prompts) == 0L) stop("X is empty.", call. = FALSE)
@@ -1438,6 +1519,9 @@ morie_kamath_ch6_factscore <- function(M, X, A_y, C) {
 #' @param f Head.
 #' @return List with `estimate`, `label`, `space`, `labels`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_alignment_function("a", "b", "3way", function(a, 
+#'     b) "CONTRADICT")
 morie_kamath_ch6_alignment_function <- function(a, b, y, f = NULL) {
   SPACES <- list(bin = c("ALIGNED", "NOT ALIGNED"),
                  `3way` = c("ALIGNED", "CONTRADICT", "NEUTRAL"))
@@ -1471,6 +1555,9 @@ morie_kamath_ch6_alignment_function <- function(a, b, y, f = NULL) {
 #' @param lambdas Three weights.
 #' @return List with `estimate`, `contributions`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_alignscore_total_loss(1, 2, 3, c(0.5, 0.25, 
+#'     0.25))
 morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
                                                    lambdas) {
   lam <- as.numeric(lambdas)
@@ -1557,6 +1644,10 @@ morie_kamath_ch6_alignscore_total_loss <- function(L_3way, L_bin, L_reg,
 #' @param W_1,W_2 Target word matrices.
 #' @return List with `estimate`, `mean_cos_W1`, `mean_cos_W2`.
 #' @export
+#' @examples
+#' W1 <- diag(2)
+#' W2 <- -diag(2)
+#' morie_kamath_ch6_weat_similarity(c(1, 0), W1, W2)
 morie_kamath_ch6_weat_similarity <- function(a, W_1, W_2) {
   av <- as.numeric(a)
   m1 <- .morie_km2_cos_mean(av, W_1, "W_1")
@@ -1574,6 +1665,8 @@ morie_kamath_ch6_weat_similarity <- function(a, W_1, W_2) {
 #' @param W_1,W_2 Target matrices.
 #' @return List with `estimate`, `s_A1`, `s_A2`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_weat_function(A_1 = c(1, 2, 3, 4, 5, 6, 7, 8), A_2 = c(1, 2, 3, 4, 5, 6, 7, 8), W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), W_2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_ch6_weat_function <- function(A_1, A_2, W_1, W_2) {
   s <- .morie_km2_weat_sums(A_1, A_2, W_1, W_2)
   list(estimate = sum(s[[1]]) - sum(s[[2]]), s_A1 = s[[1]], s_A2 = s[[2]],
@@ -1591,6 +1684,12 @@ morie_kamath_ch6_weat_function <- function(A_1, A_2, W_1, W_2) {
 #' @param ddof Degrees of freedom subtracted; 0 = population.
 #' @return List with `estimate`, `numerator`, `std`.
 #' @export
+#' @examples
+#' W1 <- diag(2)
+#' W2 <- -diag(2)
+#' A1 <- diag(2)
+#' A2 <- matrix(c(1, 2, 1, 0), 2)
+#' morie_kamath_ch6_weat_effect_size(A1, A2, W1, W2)
 morie_kamath_ch6_weat_effect_size <- function(A_1, A_2, W_1, W_2, ddof = 0) {
   s <- .morie_km2_weat_sums(A_1, A_2, W_1, W_2)
   union <- c(s[[1]], s[[2]])
@@ -1615,6 +1714,13 @@ morie_kamath_ch6_weat_effect_size <- function(A_1, A_2, W_1, W_2, ddof = 0) {
 #' @param ddof Passed to the effect size.
 #' @return List with `estimate`, `weat`, `weights`.
 #' @export
+#' @examples
+#' W1 <- diag(2)
+#' W2 <- -diag(2)
+#' A1 <- diag(2)
+#' A2 <- matrix(c(1, 2, 1, 0), 2)
+#' morie_kamath_ch6_ceat_random_effects(list(A1, A1), list(A2, A2), 
+#'     list(W1, W1), list(W2, W2), c(1, 3))
 morie_kamath_ch6_ceat_random_effects <- function(S_A1, S_A2, S_W1, S_W2, v,
                                                  ddof = 0) {
   N <- length(S_A1)
@@ -1644,6 +1750,8 @@ morie_kamath_ch6_ceat_random_effects <- function(S_A1, S_A2, S_W1, S_W2, v,
 #' @param p_a,p_prior Two-entry probability vectors in (0, 1\].
 #' @return List with `estimate`, `normalised_log_i`, `normalised_log_j`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_lpbs_bias(c(0.6, 0.4), c(0.5, 0.5))
 morie_kamath_ch6_lpbs_bias <- function(p_a, p_prior) {
   pair <- function(p, nm) {
     v <- as.numeric(p)
@@ -1670,6 +1778,9 @@ morie_kamath_ch6_lpbs_bias <- function(p_a, p_prior) {
 #' @param ddof Default 0.
 #' @return List with `estimate`, `per_word`, `log_ratios`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_cbs_variance(c("w1", "w2"), c("g1", "g2"), matrix(c(0.6, 
+#'     0.3, 0.4, 0.7), 2), matrix(0.5, 2, 2))
 morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
   words <- as.list(W); attrs <- as.list(A)
   if (length(words) == 0L) stop("W is empty.", call. = FALSE)
@@ -1728,6 +1839,8 @@ morie_kamath_ch6_cbs_variance <- function(W, A, p_a, p_prior, ddof = 0) {
 #' @param theta Optional function of a 0-based index.
 #' @return List with `estimate`, `per_token`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_pll(c(0.5, 0.25, 0.5))
 morie_kamath_ch6_pll <- function(S, theta = NULL) {
   if (!is.null(theta) && !is.function(theta)) {
     stop("theta must be a function.", call. = FALSE)
@@ -1764,6 +1877,8 @@ morie_kamath_ch6_cps_metric <- function(U, M, theta = NULL) {
 #' @param theta Optional function (M, U, i) with i 0-BASED.
 #' @return List with `estimate`, `per_token`, `n_context`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_cat_metric(c(0.5, 0.25), c("u1", "u2"))
 morie_kamath_ch6_cat_metric <- function(M, U, theta = NULL) {
   ctx <- as.list(U)
   if (length(ctx) == 0L) stop("U is empty.", call. = FALSE)
@@ -1786,6 +1901,9 @@ morie_kamath_ch6_cat_metric <- function(M, U, theta = NULL) {
 #' @param psi Optional comparator.
 #' @return List with `estimate`, `per_pair`, `n_invariant`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch6_sgs_invariance(V, V)
 morie_kamath_ch6_sgs_invariance <- function(Yhat_i, Yhat_j, psi = NULL) {
   match_fn <- if (is.null(psi)) function(u, v) as.numeric(identical(u, v)) else psi
   if (!is.function(match_fn)) stop("psi must be a function.", call. = FALSE)
@@ -1817,6 +1935,8 @@ morie_kamath_ch6_sgs_invariance <- function(Yhat_i, Yhat_j, psi = NULL) {
 #' @param A_i,A_j Named count vectors or token corpora.
 #' @return List with `estimate`, `p_given_Ai`, `p_given_Aj`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_co_occurrence_bias(w = 5L, A_i = c(1, 2, 3, 4, 5, 6, 7, 8), A_j = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
   cond <- function(A, name) {
     counts <- if (!is.null(names(A))) {
@@ -1883,6 +2003,8 @@ morie_kamath_ch6_co_occurrence_bias <- function(w, A_i, A_j) {
 #' @param Yhat Outputs.
 #' @return List with `estimate`, `per_word`, `share_of_tokens`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_demographic_representation(G_i = c(1, 2, 3, 4, 5, 6, 7, 8), A_i = c(1, 2, 3, 4, 5, 6, 7, 8), Yhat = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_ch6_demographic_representation <- function(G_i, A_i, Yhat) {
   words <- as.character(A_i); outs <- as.list(Yhat)
   if (length(words) == 0L) stop("A_i is empty.", call. = FALSE)
@@ -1921,6 +2043,9 @@ morie_kamath_ch6_stereotypical_assoc <- function(w, A_i, Yhat) {
 #' @param hurtlex Predicate or a vector of hurtful strings.
 #' @return List with `estimate`, `n_hurtful`, `per_prompt`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_honest_score(list(c("a", "b"), c("c", "d")), 
+#'     2, hurtlex = c("b", "d"))
 morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
   if (is.null(hurtlex)) stop("hurtlex is required.", call. = FALSE)
   hurt <- if (is.function(hurtlex)) hurtlex else function(y) y %in% hurtlex
@@ -1987,6 +2112,11 @@ morie_kamath_ch6_honest_score <- function(Yhat, k, hurtlex = NULL) {
 #' @param lam Non-negative weight.
 #' @return List with `estimate`, `per_pair`.
 #' @export
+#' @examples
+#' E <- list(m1 = c(1, 0), f1 = c(0, 1), m2 = c(2, 0), f2 = c(0, 
+#'     2))
+#' P <- list(c("m1", "f1"), c("m2", "f2"))
+#' morie_kamath_ch6_debias_regularizer(P, E, 0.5)
 morie_kamath_ch6_debias_regularizer <- function(A, E, lam) {
   lam <- as.numeric(lam)
   if (lam < 0 || !is.finite(lam)) stop("lam must be finite, non-negative.",
@@ -2019,6 +2149,9 @@ morie_kamath_ch6_gender_direction <- function(A, E) {
 #' @param g Gender direction.
 #' @return List with `estimate`, `projections`, `sum_abs`, `g_norm`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_gender_projection_reg(matrix(c(1, 2, 1, 0), 
+#'     2), c(0, 3))
 morie_kamath_ch6_gender_projection_reg <- function(W_stereo, g) {
   gv <- as.numeric(g); W <- as.matrix(W_stereo)
   if (nrow(W) == 0L) stop("W_stereo is empty.", call. = FALSE)
@@ -2042,6 +2175,9 @@ morie_kamath_ch6_gender_projection_reg <- function(W_stereo, g) {
 #' @param lam Non-negative weight.
 #' @return List with `estimate`, `per_layer_entropy`, `total_entropy`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_ear_entropy_reg(list(matrix(c(0.5, 1, 0.5, 0), 
+#'     2)), lam = 2)
 morie_kamath_ch6_ear_entropy_reg <- function(A, L = NULL, lam = 1) {
   layers <- if (is.matrix(A)) list(A) else as.list(A)
   if (length(layers) == 0L) stop("A is empty.", call. = FALSE)
@@ -2076,6 +2212,9 @@ morie_kamath_ch6_ear_entropy_reg <- function(A, L = NULL, lam = 1) {
 #' @param lam Finite weight.
 #' @return List with `estimate`, `unweighted`, `per_pair`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_log_prob_ratio_attr(c(0.6, 0.4), c(0.4, 0.6), 
+#'     lam = 2)
 morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
   pi_ <- as.numeric(a_i); pj <- as.numeric(a_j)
   if (length(pi_) == 0L) stop("a_i is empty.", call. = FALSE)
@@ -2135,6 +2274,8 @@ morie_kamath_ch6_log_prob_ratio_attr <- function(a_i, a_j, K = NULL, lam = 1) {
 #' @param c Classifier or score vector.
 #' @return List with `estimate`, `scores`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_emt_metric(c("a", "b", "c"), c(0.1, 0.9, 0.4))
 morie_kamath_ch6_emt_metric <- function(Yhat, c) {
   r <- .morie_km2_tox_scores(Yhat, c)
   k <- which.max(r[[1]])
@@ -2182,6 +2323,8 @@ morie_kamath_ch6_toxicity_probability <- function(Yhat, c, threshold = 0.5) {
 #' @param w_1_w_M Per-step conditional probabilities in (0, 1\].
 #' @return List with `estimate` (the product), `log_prob`, `per_step`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_lstm_chain_rule(c(0.5, 0.25, 0.5))
 morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
   p <- as.numeric(w_1_w_M)
   if (length(p) == 0L) stop("the sequence is empty.", call. = FALSE)
@@ -2225,6 +2368,8 @@ morie_kamath_ch6_lstm_chain_rule <- function(w_1_w_M) {
 #' @param b Bias.
 #' @return List with `p`, `logits`, `argmax`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_lstm_softmax_word(U = 5L, f = 5L, c_t_1 = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 morie_kamath_ch6_lstm_softmax_word <- function(U, f, c_t_1, b) {
   Um <- as.matrix(U)
   h <- .morie_km2_hidden(f, c_t_1, "f")
@@ -2275,6 +2420,8 @@ morie_kamath_ch6_affect_lm <- function(U, V, f, g, c, e, beta, b) {
 #' @param lam Mixing weight in \[0, 1\].
 #' @return List with `estimate`, `contributions`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_gedi_combined_loss(2, 4, 0.25)
 morie_kamath_ch6_gedi_combined_loss <- function(L_g, L_d, lam) {
   lam <- as.numeric(lam)
   if (lam < 0 || lam > 1) stop("lam lies outside [0, 1].", call. = FALSE)
@@ -2297,6 +2444,9 @@ morie_kamath_ch6_gedi_combined_loss <- function(L_g, L_d, lam) {
 #' @param sdg Optional prompt builder.
 #' @return List with `estimate`, `p_yes`, `p_no`, `prompt`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_self_diagnosis_prob("t", "tox", function(p) c(Yes = 0.3, 
+#'     No = 0.5))
 morie_kamath_ch6_self_diagnosis_prob <- function(x, y, M, sdg = NULL) {
   if (!is.function(M)) stop("M must be a function.", call. = FALSE)
   template <- if (is.null(sdg)) function(a, b)
@@ -2329,6 +2479,9 @@ morie_kamath_ch6_self_diagnosis_prob <- function(x, y, M, sdg = NULL) {
 #' @param L_q,L_r Query and answer lengths.
 #' @return List with `estimate`, `log_likelihood`, `context_lengths`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_pii_likelihood(c(0.5, 0.25), c("a"), c("q"), 
+#'     1, 2)
 morie_kamath_ch6_pii_likelihood <- function(a_m, A, x, L_q, L_r) {
   p <- as.numeric(a_m); q <- as.list(x)
   Lq <- as.integer(L_q); Lr <- as.integer(L_r)
@@ -2355,6 +2508,10 @@ morie_kamath_ch6_pii_likelihood <- function(a_m, A, x, L_q, L_r) {
 #' @param epsilon Budget.
 #' @return List with `estimate`, `satisfied`, `p_A`, `p_B`, `bound`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_differential_privacy(function(D) if (D == "A") c(s1 = 0.6, 
+#'     s2 = 0.4) else c(s1 = 0.4, s2 = 0.6), "A", "B", c("s1"), 
+#'     0.5)
 morie_kamath_ch6_differential_privacy <- function(M, A, B, S, epsilon) {
   if (!is.function(M)) stop("M must be a function.", call. = FALSE)
   outs <- as.character(S)
@@ -2386,6 +2543,9 @@ morie_kamath_ch6_differential_privacy <- function(M, A, B, S, epsilon) {
 #' @param PP_public,PP_lm Named vectors or functions.
 #' @return List with `estimate`, `argmax`, `per_sequence`, `n_leaking`.
 #' @export
+#' @examples
+#' morie_kamath_ch6_perplexity_leakage(c("s1", "s2"), c(s1 = 10, 
+#'     s2 = 5), c(s1 = 2, s2 = 4))
 morie_kamath_ch6_perplexity_leakage <- function(S_uniq, PP_public, PP_lm) {
   seqs <- as.character(S_uniq)
   if (length(seqs) == 0L) stop("S_uniq is empty.", call. = FALSE)
@@ -2417,6 +2577,8 @@ morie_kamath_ch6_perplexity_leakage <- function(S_uniq, PP_public, PP_lm) {
 #' @param facts Support indicators.
 #' @return List with `estimate`, `n_supported`, `n_facts`.
 #' @export
+#' @examples
+#' morie_kamath_ch7_faithfulness_metric(c(1, 0, 1, 1))
 morie_kamath_ch7_faithfulness_metric <- function(facts) {
   v <- if (is.logical(facts)) as.numeric(facts) else as.numeric(facts)
   if (length(v) == 0L) stop("the answer contains no facts.", call. = FALSE)
@@ -2437,6 +2599,8 @@ morie_kamath_ch7_faithfulness_metric <- function(facts) {
 #' @param N Optional question count.
 #' @return List with `estimate`, `similarities`.
 #' @export
+#' @examples
+#' morie_kamath_ch7_answer_relevance(E_g = c(1, 2, 3, 4, 5, 6, 7, 8), E_o = 5L)
 morie_kamath_ch7_answer_relevance <- function(E_g, E_o, N = NULL) {
   G <- as.matrix(E_g); o <- as.numeric(E_o)
   if (length(G) == 0L) stop("no reverse-generated questions.", call. = FALSE)
@@ -2462,6 +2626,8 @@ morie_kamath_ch7_answer_relevance <- function(E_g, E_o, N = NULL) {
 #' @param p_theta Probability vector or function (token, prefix).
 #' @return List with `estimate`, `mean_nll`, `log_probs`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_perplexity(c("a", "b"), p_theta = c(0.5, 0.25))
 morie_kamath_ch8_perplexity <- function(X, N = NULL, p_theta = NULL) {
   toks <- as.list(X)
   if (length(toks) == 0L) stop("an empty sequence has no perplexity.",
@@ -2494,6 +2660,9 @@ morie_kamath_ch8_perplexity <- function(X, N = NULL, p_theta = NULL) {
 #' @param n_grams Matrix or vector of \[clipped_matches, total_generated\].
 #' @return List with `estimate`, `p_n`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch8_bleu_precision(V)
 morie_kamath_ch8_bleu_precision <- function(n_grams) {
   A <- if (is.matrix(n_grams)) n_grams else
     matrix(as.numeric(unlist(n_grams)), ncol = 2L, byrow = TRUE)
@@ -2520,6 +2689,8 @@ morie_kamath_ch8_bleu_precision <- function(n_grams) {
 #' @param N Optional order count.
 #' @return List with `estimate`, `log_mean`, `p_n`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_bleu_n_geom_mean(c(0.5, 0.25))
 morie_kamath_ch8_bleu_n_geom_mean <- function(p_n, N = NULL) {
   p <- as.numeric(p_n)
   if (length(p) == 0L) stop("no precisions given.", call. = FALSE)
@@ -2557,6 +2728,8 @@ morie_kamath_ch8_bleu_final <- function(BP, p_n, N = NULL) {
 #' @param r Reference length.
 #' @return List with `estimate`, `penalized`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_brevity_penalty(5, 7)
 morie_kamath_ch8_brevity_penalty <- function(c, r) {
   c <- as.numeric(c); r <- as.numeric(r)
   if (c <= 0) stop("the candidate length must be positive.", call. = FALSE)
@@ -2575,6 +2748,9 @@ morie_kamath_ch8_brevity_penalty <- function(c, r) {
 #' @param candidate Generated token sequence.
 #' @return List with `estimate`, `matched`, `total_reference_ngrams`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_rouge_n(list(c("a", "b", "c"), c("a", "b", "d")), 
+#'     2, candidate = c("a", "b", "c", "a"))
 morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
   n <- as.integer(gram_n)
   if (n < 1L) stop("the n-gram order must be >= 1.", call. = FALSE)
@@ -2638,6 +2814,9 @@ morie_kamath_ch8_rouge_n <- function(S, gram_n, candidate = NULL) {
 #' @param normalize Cosine instead of raw dot products.
 #' @return List with `estimate`, `per_token`, `greedy_match`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch8_bertscore_recall(V, V)
 morie_kamath_ch8_bertscore_recall <- function(x, xhat, normalize = FALSE) {
   r <- .morie_km2_sim_matrix(x, xhat, normalize)
   S <- r[[3]]
@@ -2678,6 +2857,9 @@ morie_kamath_ch8_bertscore_f1 <- function(P_BERT, R_BERT) {
 #' @param F Optional transport plan.
 #' @return List with `estimate`, `flow`, `dual_objective`, `optimal`.
 #' @export
+#' @examples
+#' C <- matrix(c(0, 3, 2, 1, 1, 4), 2, 3)
+#' morie_kamath_ch8_wmd(c(0.5, 0.5), c(0.2, 0.5, 0.3), C)
 morie_kamath_ch8_wmd <- function(x_n, y_n, C, F = NULL) {
   a <- as.numeric(x_n); b <- as.numeric(y_n); Cm <- as.matrix(C)
   if (length(a) == 0L || length(b) == 0L) stop("empty weight vector.",
@@ -2723,6 +2905,9 @@ morie_kamath_ch8_wmd <- function(x_n, y_n, C, F = NULL) {
 #' @param E Optional embedder.
 #' @return List with `estimate`, `difference`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch8_moverscore_distance(V, V)
 morie_kamath_ch8_moverscore_distance <- function(x_i, y_j, E = NULL) {
   if (!is.null(E)) {
     if (!is.function(E)) stop("E must be a function or NULL.", call. = FALSE)
@@ -2760,6 +2945,8 @@ morie_kamath_ch8_smd <- function(x, y, E = NULL) {
 #' @param n Window length.
 #' @return List with `estimate`, `embedding`, `window`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_ngram_embedding(x = c(1, 2, 3, 4, 5, 6, 7, 8), i = 5L, n = 3L)
 morie_kamath_ch8_ngram_embedding <- function(x, i, n) {
   A <- if (is.matrix(x)) x else as.numeric(x)
   i <- as.integer(i); n <- as.integer(n)
@@ -2783,6 +2970,9 @@ morie_kamath_ch8_ngram_embedding <- function(x, i, n) {
 #' @param Z Optional normaliser; default the grand sum.
 #' @return List with `estimate`, `weights`, `Z`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_ch8_ngram_weight(V)
 morie_kamath_ch8_ngram_weight <- function(x, Z = NULL) {
   A <- if (is.matrix(x)) x else matrix(as.numeric(x), nrow = 1L)
   if (length(A) == 0L) stop("no idf values given.", call. = FALSE)
@@ -2808,6 +2998,8 @@ morie_kamath_ch8_ngram_weight <- function(x, Z = NULL) {
 #' @param p Their probabilities.
 #' @return List with `estimate`, `scores`, `probabilities`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_geval_score(s_i = 5L, p = 1)
 morie_kamath_ch8_geval_score <- function(s_i, p) {
   s <- as.numeric(s_i); q <- as.numeric(p)
   if (length(s) == 0L) stop("no candidate scores.", call. = FALSE)
@@ -2835,6 +3027,8 @@ morie_kamath_ch8_geval_score <- function(s_i, p) {
 #' @param k Budget.
 #' @return List with `estimate`, `fail_probability`.
 #' @export
+#' @examples
+#' morie_kamath_ch8_pass_at_k(10, 3, 2)
 morie_kamath_ch8_pass_at_k <- function(n, c, k) {
   n_i <- as.integer(n); c_i <- as.integer(c); k_i <- as.integer(k)
   if (n_i != n || c_i != c || k_i != k) stop("n, c and k must be integers.",
@@ -2879,6 +3073,9 @@ morie_kamath_pass_at_k <- function(n, c, k) {
 #' @param ME_X Encoder function.
 #' @return List with `estimate` (Frobenius norm), `features`, `shape`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_modality_encoder("img", function(i) matrix(c(3, 
+#'     4), 1))
 morie_kamath_ch9_modality_encoder <- function(I_X, ME_X) {
   if (!is.function(ME_X)) stop("ME_X must be a function.", call. = FALSE)
   F <- ME_X(I_X)
@@ -2904,6 +3101,10 @@ morie_kamath_ch9_modality_encoder <- function(I_X, ME_X) {
 #' @param loss_fn Loss function.
 #' @return List with `estimate`, `argmin`, `losses`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_input_alignment_loss(list(matrix(c(1, 2), 1), 
+#'     matrix(0, 1, 2)), "ft", "t", llm = function(p, f) sum(p), 
+#'     loss_fn = function(pr, t) abs(pr - 1))
 morie_kamath_ch9_input_alignment_loss <- function(P_X, F_T, t, llm = NULL,
                                                   loss_fn = NULL) {
   if (!is.function(llm)) stop("llm= must be a function.", call. = FALSE)
@@ -2933,6 +3134,9 @@ morie_kamath_ch9_input_alignment_loss <- function(P_X, F_T, t, llm = NULL,
 #' @param in_align Matrix or function.
 #' @return List with `estimate`, `prompts`, `shape`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_input_projector(matrix(c(1, 2), 1), in_align = diag(c(1, 
+#'     2)))
 morie_kamath_ch9_input_projector <- function(F_X, in_align = NULL) {
   if (is.null(in_align)) stop("in_align= is required.", call. = FALSE)
   Fm <- as.matrix(F_X)
@@ -2979,6 +3183,9 @@ morie_kamath_ch9_output_alignment <- function(S_X, out_align = NULL) {
 #' @param llm Model.
 #' @return List with `estimate` (signal-token count), `text`, `signal_tokens`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_llm_signal_tokens("p", "f", llm = function(p, 
+#'     f) list("hello", c(1, 2, 3)))
 morie_kamath_ch9_llm_signal_tokens <- function(P_X, F_T, llm = NULL) {
   if (!is.function(llm)) stop("llm= must be a function.", call. = FALSE)
   got <- llm(P_X, F_T)
@@ -3005,6 +3212,8 @@ morie_kamath_ch9_llm_signal_tokens <- function(P_X, F_T, llm = NULL) {
 #' @param N Optional batch size.
 #' @return List with `estimate`, `per_pair`, `logits`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_clip_image_to_text(V = c(1, 2, 3, 4, 5, 6, 7, 8), L = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 morie_kamath_ch9_clip_image_to_text <- function(V, L, sigma, N = NULL) {
   Vm <- as.matrix(V); Lm <- as.matrix(L)
   s <- as.numeric(sigma)
@@ -3054,6 +3263,8 @@ morie_kamath_ch9_clip_contrastive_total <- function(L_i2t, L_t2i) {
 #' @param Pos,Neg Probabilities of the correct label in \[0, 1\].
 #' @return List with `estimate`, `positive_loss`, `negative_loss`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_mml_vlm_loss(c(0.5, 0.25), c(0.5))
 morie_kamath_ch9_mml_vlm_loss <- function(Pos, Neg) {
   chk <- function(p, nm) {
     q <- as.numeric(p)
@@ -3092,6 +3303,9 @@ morie_kamath_ch9_itm_hard_negative <- function(Pos, HardNeg) {
 #' @param x_m 0-based masked positions.
 #' @return List with `estimate`, `per_position`, `n_image_regions`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_simvlm_mlm(NULL, c(0.5, 0.25, 0.5), matrix(c(1, 
+#'     2), 1), c(0, 2))
 morie_kamath_ch9_simvlm_mlm <- function(theta, x, v, x_m) {
   if (is.null(v)) stop("v (the image regions) is required.", call. = FALSE)
   V <- as.matrix(v)
@@ -3119,6 +3333,9 @@ morie_kamath_ch9_simvlm_mlm <- function(theta, x, v, x_m) {
 #' @param T_p Prefix length.
 #' @return List with `estimate`, `per_sequence`, `n_suffix_tokens`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_simvlm_prefixlm(NULL, matrix(c(0.5, 0.5, 0.5, 
+#'     0.25, 0.25, 0.5), 2), 1)
 morie_kamath_ch9_simvlm_prefixlm <- function(theta, x, T_p) {
   if (!is.null(theta)) {
     if (!is.function(theta)) stop("theta must be a function or NULL.",
@@ -3151,6 +3368,9 @@ morie_kamath_ch9_simvlm_prefixlm <- function(theta, x, T_p) {
 #' @param labels Truth.
 #' @return List with `estimate`, `per_region`, `true_class_probability`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_moc_loss(NULL, NULL, NULL, matrix(c(0.7, 0.2, 
+#'     0.3, 0.8), 2), labels = c(0, 1))
 morie_kamath_ch9_moc_loss <- function(theta, w, v, g_theta, labels = NULL) {
   if (!is.null(theta) && !is.function(theta)) {
     stop("theta must be a function or NULL.", call. = FALSE)
@@ -3196,6 +3416,8 @@ morie_kamath_ch9_moc_loss <- function(theta, w, v, g_theta, labels = NULL) {
 #' @param y 0/1 match labels.
 #' @return List with `estimate`, `per_pair`, `scores`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_itm_loss(c(0.9, 0.2), NULL, NULL, c(1, 0))
 morie_kamath_ch9_itm_loss <- function(theta, v, t, y) {
   s <- if (is.function(theta)) theta(v, t) else theta
   s <- as.numeric(s); lab <- as.numeric(y)
@@ -3224,6 +3446,8 @@ morie_kamath_ch9_itm_loss <- function(theta, v, t, y) {
 #' @param theta Optional model.
 #' @return List with `estimate`, `mean_nll`, `per_token`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_mmllm_autoregressive(c(0.5, 0.25), NULL)
 morie_kamath_ch9_mmllm_autoregressive <- function(R, I, theta = NULL) {
   if (!is.null(theta)) {
     if (!is.function(theta)) stop("theta must be a function or NULL.",
@@ -3267,6 +3491,9 @@ morie_kamath_ch9_itg_loss <- function(x, y) {
 #' @param P Frame-by-timestamp probability matrix.
 #' @return List with `estimate`, `per_frame`, `n_reordered`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_fom_loss(c(0, 1), c(1, 0), P = matrix(c(0.2, 
+#'     0.6, 0.8, 0.4), 2))
 morie_kamath_ch9_fom_loss <- function(r_i, t_i, R = NULL, P = NULL) {
   if (is.null(P)) stop("P= is required.", call. = FALSE)
   Pm <- as.matrix(P)
@@ -3298,6 +3525,8 @@ morie_kamath_ch9_fom_loss <- function(r_i, t_i, R = NULL, P = NULL) {
 #' @param f Optional override f(I, M, theta).
 #' @return List with `estimate`, `answer`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_mm_instr_predict("I", "M", function(I, M) "ans")
 morie_kamath_ch9_mm_instr_predict <- function(I, M, theta, f = NULL) {
   A <- if (!is.null(f)) {
     if (!is.function(f)) stop("f must be a function.", call. = FALSE)
@@ -3321,6 +3550,8 @@ morie_kamath_ch9_mm_instr_predict <- function(I, M, theta, f = NULL) {
 #' @param t Target text.
 #' @return List with `estimate`, `argmin`, `losses`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_output_projector_mse(H_X = c(1, 2, 3, 4, 5, 6, 7, 8), tau_X = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_ch9_output_projector_mse <- function(H_X, tau_X, t) {
   target <- if (is.function(tau_X)) tau_X(t) else tau_X
   target <- as.numeric(target)
@@ -3350,6 +3581,9 @@ morie_kamath_ch9_output_projector_mse <- function(H_X, tau_X, t) {
 #' @param t Timestep.
 #' @return List with `estimate`, `per_sample`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_ldm_loss(matrix(c(1, 0, 2, 1), 2), NULL, NULL, 
+#'     eps_net = matrix(c(1, 0, 1, 0), 2))
 morie_kamath_ch9_ldm_loss <- function(epsilon, z_t, H_X, eps_net = NULL,
                                       t = NULL) {
   if (is.null(eps_net)) stop("eps_net= is required.", call. = FALSE)
@@ -3384,6 +3618,8 @@ morie_kamath_ch9_ldm_loss <- function(epsilon, z_t, H_X, eps_net = NULL,
 #' @param model Optional model (y, x).
 #' @return List with `estimate` (the product), `log_prob`, `nll`.
 #' @export
+#' @examples
+#' morie_kamath_ch9_flamingo_factorized(c(0.5, 0.25))
 morie_kamath_ch9_flamingo_factorized <- function(y, x = NULL, L = NULL,
                                                  model = NULL) {
   if (!is.null(model)) {
@@ -3438,6 +3674,8 @@ morie_kamath_ch9_flamingo_dataset_mix <- function(D_m, lambda_m, x = NULL,
 #' @param weights Optional three weights.
 #' @return List with `estimate`, `score`, `weights`.
 #' @export
+#' @examples
+#' morie_kamath_3h_alignment(helpful_score = c(1, 2, 3, 4, 5, 6, 7, 8), harmless_score = c(1, 2, 3, 4, 5, 6, 7, 8), honest_score = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_3h_alignment <- function(helpful_score, harmless_score,
                                       honest_score, weights = NULL) {
   h <- as.numeric(helpful_score); a <- as.numeric(harmless_score)
@@ -3468,6 +3706,8 @@ morie_kamath_3h_alignment <- function(helpful_score, harmless_score,
 #' @param target_rank How many triplets to keep.
 #' @return List with `estimate`, `Delta_W`, `s_pruned`, `kept`.
 #' @export
+#' @examples
+#' morie_kamath_adalora_rank_allocation(P = 0.5, s = 5L, Q = 0.5)
 morie_kamath_adalora_rank_allocation <- function(P, s, Q, importance = NULL,
                                                  target_rank = NULL) {
   Pm <- as.matrix(P); Qm <- as.matrix(Q); sv <- as.numeric(s)
@@ -3504,6 +3744,9 @@ morie_kamath_adalora_rank_allocation <- function(P, s, Q, importance = NULL,
 #' @param approximate "none" or "tanh".
 #' @return List with `estimate`, `h_adapted`, `bottleneck`.
 #' @export
+#' @examples
+#' morie_kamath_houlsby_adapter(matrix(c(1, 2, 3), 1), matrix(c(1, 
+#'     0, 0), 1), matrix(c(1, 0, 0), 3))
 morie_kamath_houlsby_adapter <- function(h, W_down, W_up,
                                          approximate = "none") {
   H <- as.matrix(h); Wd <- as.matrix(W_down); Wu <- as.matrix(W_up)
@@ -3535,6 +3778,8 @@ morie_kamath_houlsby_adapter <- function(h, W_down, W_up,
 #' @param causal Mask the future when TRUE.
 #' @return List with `output`, `attention`, `bias`, `slopes`.
 #' @export
+#' @examples
+#' morie_kamath_alibi_bias(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), slopes = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_alibi_bias <- function(Q, K, V, slopes, causal = FALSE) {
   Qm <- as.matrix(Q); Km <- as.matrix(K)
   m <- as.numeric(slopes)
@@ -3569,6 +3814,10 @@ morie_kamath_alibi_bias <- function(Q, K, V, slopes, causal = FALSE) {
 #' @param passes Sweeps over the slots.
 #' @return List with `estimate`, `trigger_tokens`, `prompt`, `positions`.
 #' @export
+#' @examples
+#' morie_kamath_autoprompt_gradient_search(list(NULL, "x", NULL), 
+#'     "D", function(t, d) sum(nchar(unlist(t))), vocab = list("aa", 
+#'         "b"))
 morie_kamath_autoprompt_gradient_search <- function(template, dataset, model,
                                                     vocab = NULL,
                                                     grad_fn = NULL,
@@ -3625,6 +3874,9 @@ morie_kamath_autoprompt_gradient_search <- function(template, dataset, model,
 #' @param embed Optional.
 #' @return List with `estimate`, `score`, `similarities`.
 #' @export
+#' @examples
+#' morie_kamath_ragas_answer_relevance("ans", c(1, 1), function(a) list(c(1, 
+#'     0), c(0, 1)))
 morie_kamath_ragas_answer_relevance <- function(answer, original_question,
                                                 model, embed = NULL) {
   if (!is.function(model)) stop("model must be a function.", call. = FALSE)
@@ -3658,6 +3910,9 @@ morie_kamath_ragas_answer_relevance <- function(answer, original_question,
 #' @param relevance_labels 0/1.
 #' @return List with `estimate`, `score`, `n_relevant`.
 #' @export
+#' @examples
+#' morie_kamath_ragas_context_relevance(c("s1", "s2", "s3"), c(1, 
+#'     0, 1))
 morie_kamath_ragas_context_relevance <- function(context_sentences,
                                                  relevance_labels) {
   sents <- as.list(context_sentences); labs <- as.numeric(relevance_labels)
@@ -3682,6 +3937,9 @@ morie_kamath_ragas_context_relevance <- function(context_sentences,
 #' @param max_n Highest order.
 #' @return List with `estimate`, `p_n`, `brevity_penalty`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_bleu_score(V, V)
 morie_kamath_bleu_score <- function(hypothesis, references, max_n = 4) {
   hyp <- as.character(hypothesis)
   refs <- lapply(references, as.character)
@@ -3734,6 +3992,9 @@ morie_kamath_bleu_score <- function(hypothesis, references, max_n = 4) {
 #' @param k1,b BM25 parameters.
 #' @return List with `estimate`, `per_term`, `term_frequencies`.
 #' @export
+#' @examples
+#' morie_kamath_bm25_score(c("cat", "dog"), c("cat", "cat", "fish"), 
+#'     c(cat = 1.5, dog = 2), 3)
 morie_kamath_bm25_score <- function(q_terms, doc_terms, idf, avgdl,
                                     k1 = 1.5, b = 0.75) {
   q <- as.character(q_terms); d <- as.character(doc_terms)
@@ -3774,6 +4035,9 @@ morie_kamath_bm25_score <- function(q_terms, doc_terms, idf, avgdl,
 #' @param x Prompt.
 #' @return List with `estimate`, `best`, `best_index`, `reward_spread`.
 #' @export
+#' @examples
+#' morie_kamath_best_of_n_sampling(list("a", "b", "c"), rewards = c(0.1, 
+#'     0.9, 0.4))
 morie_kamath_best_of_n_sampling <- function(samples, rewards = NULL,
                                             reward_fn = NULL, x = NULL) {
   ys <- as.list(samples)
@@ -3803,6 +4067,9 @@ morie_kamath_best_of_n_sampling <- function(samples, rewards = NULL,
 #' @param r_w,r_l Winner and loser scores.
 #' @return List with `estimate`, `p_pref`, `reward_difference`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_bradley_terry_preference(V, V)
 morie_kamath_bradley_terry_preference <- function(r_w, r_l) {
   w <- as.numeric(r_w); l <- as.numeric(r_l)
   if (length(w) != length(l)) stop("winner and loser scores differ.",
@@ -3826,6 +4093,9 @@ morie_kamath_bradley_terry_preference <- function(r_w, r_l) {
 #' @param embed_fn Function or named list token -> vector.
 #' @return List with `estimate`, `f1`, `precision`, `recall`.
 #' @export
+#' @examples
+#' morie_kamath_bertscore(c("a", "b"), c("a", "c"), list(a = c(1, 
+#'     0), b = c(0, 1), c = c(1, 1)))
 morie_kamath_bertscore <- function(hypothesis_tokens, reference_tokens,
                                    embed_fn) {
   hyp <- as.character(hypothesis_tokens)
@@ -3863,6 +4133,13 @@ morie_kamath_bertscore <- function(hypothesis_tokens, reference_tokens,
 #' @param model Function (stage, principle, response, critique).
 #' @return List with `estimate`, `revised_response`, `history`.
 #' @export
+#' @examples
+#' A <- matrix(c(1, 0, 2, 1), 2)
+#' B <- diag(2)
+#' x <- c(1, 2, 3, 4)
+#' y <- morie_kamath_ch4_krona_efficient(A, B, x)$y
+#' morie_kamath_constitutional_ai_loop("r0", list("p1", "p2"), function(st, 
+#'     p, y, cr) paste(st, p, y, sep = ":"))
 morie_kamath_constitutional_ai_loop <- function(initial_response,
                                                 constitution, model) {
   if (!is.function(model)) stop("model must be a function.", call. = FALSE)
@@ -3896,6 +4173,8 @@ morie_kamath_constitutional_ai_loop <- function(initial_response,
 #' @param C Capacity factor.
 #' @return List with `estimate`, `slots`, `total_slots`, `min_dropped`.
 #' @export
+#' @examples
+#' morie_kamath_expert_capacity_factor(100, 8, 1.25)
 morie_kamath_expert_capacity_factor <- function(tokens_per_batch, num_experts,
                                                 C) {
   t <- as.numeric(tokens_per_batch); e <- as.integer(num_experts)
@@ -3922,6 +4201,9 @@ morie_kamath_expert_capacity_factor <- function(tokens_per_batch, num_experts,
 #' @param r_phi Return function.
 #' @return List with `estimate` (summed loss), `mean_loss`, `pair_accuracy`.
 #' @export
+#' @examples
+#' morie_kamath_christiano_deep_rl_feedback(list(c("w1", "l1"), 
+#'     c("w2", "l2")), function(s) if (startsWith(s, "w")) 2 else 0.5)
 morie_kamath_christiano_deep_rl_feedback <- function(trajectory_pairs, r_phi) {
   if (!is.function(r_phi)) stop("r_phi must be a function.", call. = FALSE)
   pairs <- as.list(trajectory_pairs)
@@ -3952,6 +4234,8 @@ morie_kamath_christiano_deep_rl_feedback <- function(trajectory_pairs, r_phi) {
 #'   FLOPs constant.
 #' @return List with `estimate`, `N_opt`, `D_opt`, `compute_check`.
 #' @export
+#' @examples
+#' morie_kamath_chinchilla_compute_optimal(compute_budget = 5L)
 morie_kamath_chinchilla_compute_optimal <- function(
     compute_budget, alpha = 0.5, beta = 0.5, tokens_per_param = 20,
     flops_per_token_param = 6) {
@@ -3983,6 +4267,8 @@ morie_kamath_chinchilla_compute_optimal <- function(
 #' @param parser Optional function text -> list(reasoning, answer).
 #' @return List with `estimate`, `answer`, `reasoning`, `generation`.
 #' @export
+#' @examples
+#' morie_kamath_chain_of_thought("Q", function(p) "step one. Answer: 42")
 morie_kamath_chain_of_thought <- function(
     prompt, model, trigger = "Let's think step by step.",
     answer_marker = "Answer:", parser = NULL) {
@@ -4024,6 +4310,9 @@ morie_kamath_chain_of_thought <- function(
 #' @param tau_hi,tau_lo Upper and lower thresholds.
 #' @return List with `estimate`, `action`, `ctx`, `scores`.
 #' @export
+#' @examples
+#' morie_kamath_corrective_rag("q", list("d1", "d2", "d3"), function(q, 
+#'     d) c(d1 = 0.9, d2 = 0.5, d3 = 0.1)[[d]], 0.8, 0.2)
 morie_kamath_corrective_rag <- function(query, docs, clf, tau_hi, tau_lo) {
   if (!is.function(clf)) stop("clf must be a function.", call. = FALSE)
   D <- as.list(docs)
@@ -4054,6 +4343,9 @@ morie_kamath_corrective_rag <- function(query, docs, clf, tau_hi, tau_lo) {
 #' @param top_k Optional cut-off.
 #' @return List with `estimate`, `scores`, `ranking`, `reranked`.
 #' @export
+#' @examples
+#' morie_kamath_cross_encoder_rerank("q", list("a", "b", "c"), function(q, 
+#'     d) c(a = 0.1, b = 0.9, c = 0.9)[[d]])
 morie_kamath_cross_encoder_rerank <- function(q, docs, model, top_k = NULL) {
   if (!is.function(model)) stop("model must be a function.", call. = FALSE)
   D <- as.list(docs)
@@ -4079,6 +4371,8 @@ morie_kamath_cross_encoder_rerank <- function(q, docs, model, top_k = NULL) {
 #' @param stereo_pll,anti_pll Pseudo-log-likelihoods (must be <= 0).
 #' @return List with `estimate`, `score`, `bias_gap`, `n_ties`.
 #' @export
+#' @examples
+#' morie_kamath_crowspairs_bias(c(-1, -3, -2), c(-2, -1, -2))
 morie_kamath_crowspairs_bias <- function(stereo_pll, anti_pll) {
   s <- as.numeric(stereo_pll); a <- as.numeric(anti_pll)
   if (length(s) != length(a)) stop("CrowS-Pairs is over MINIMAL PAIRS.",
@@ -4106,6 +4400,9 @@ morie_kamath_crowspairs_bias <- function(stereo_pll, anti_pll) {
 #' @param bits Code width in \[2, 16\].
 #' @return List with `estimate` (max error), `scales_int8`, `shared_const`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_double_quantization(V)
 morie_kamath_double_quantization <- function(scales_fp32, bits = 8) {
   s <- as.numeric(scales_fp32)
   if (length(s) == 0L) stop("no quantization constants.", call. = FALSE)
@@ -4134,6 +4431,8 @@ morie_kamath_double_quantization <- function(scales_fp32, bits = 8) {
 #' @param p_D,p_Dp Event probabilities on the neighbouring datasets.
 #' @return List with `estimate`, `guarantee`, `slack`, `worst_event`.
 #' @export
+#' @examples
+#' morie_kamath_differential_privacy(eps = 0.5, delta = 0.5)
 morie_kamath_differential_privacy <- function(eps, delta, p_D = NULL,
                                               p_Dp = NULL) {
   e <- as.numeric(eps); d <- as.numeric(delta)
@@ -4170,6 +4469,8 @@ morie_kamath_differential_privacy <- function(eps, delta, p_D = NULL,
 #' @param beta Positive scale.
 #' @return List with `estimate`, `per_pair`, implicit rewards.
 #' @export
+#' @examples
+#' morie_kamath_dpo_loss(-0.5, -1.5, -1, -1, 0.5)
 morie_kamath_dpo_loss <- function(logp_w, logp_l, logp_ref_w, logp_ref_l,
                                   beta) {
   arrays <- lapply(list(logp_w, logp_l, logp_ref_w, logp_ref_l), as.numeric)
@@ -4201,6 +4502,8 @@ morie_kamath_dpo_loss <- function(logp_w, logp_l, logp_ref_w, logp_ref_l,
 #' @param k Depth.
 #' @return List with `estimate`, `top_k_indices`, `top_k_scores`, `scores`.
 #' @export
+#' @examples
+#' morie_kamath_dense_passage_retrieval(q_embed = 5L, p_embeds = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_kamath_dense_passage_retrieval <- function(q_embed, p_embeds, k) {
   q <- as.numeric(q_embed); P <- as.matrix(p_embeds)
   if (length(P) == 0L) stop("the passage index is empty.", call. = FALSE)
@@ -4226,6 +4529,9 @@ morie_kamath_dense_passage_retrieval <- function(q_embed, p_embeds, k) {
 #' @param threshold Scale threshold.
 #' @return List with `estimate` (the jump), `emergent_score`, `n_above`.
 #' @export
+#' @examples
+#' morie_kamath_emergent_abilities(c(1, 10, 100), c(0.1, 0.2, 0.9), 
+#'     50)
 morie_kamath_emergent_abilities <- function(scales, scores, threshold) {
   N <- as.numeric(scales); f <- as.numeric(scores)
   if (length(N) != length(f)) stop("scales and scores differ.", call. = FALSE)
@@ -4250,6 +4556,8 @@ morie_kamath_emergent_abilities <- function(scales, scores, threshold) {
 #' @param candidate_lls Competitors.
 #' @return List with `estimate`, `rank`, `max_exposure`.
 #' @export
+#' @examples
+#' morie_kamath_memorization_exposure(canary_ll = 5L, candidate_lls = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_memorization_exposure <- function(canary_ll, candidate_lls) {
   cc <- as.numeric(canary_ll); others <- as.numeric(candidate_lls)
   if (length(others) == 0L) stop("no competing candidates.", call. = FALSE)
@@ -4273,6 +4581,9 @@ morie_kamath_memorization_exposure <- function(canary_ll, candidate_lls) {
 #' @param knowledge_base Predicate or vector.
 #' @return List with `estimate`, `supported`, `unsupported`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_factscore(V, V)
 morie_kamath_factscore <- function(atomic_claims, knowledge_base) {
   claims <- as.list(atomic_claims)
   if (length(claims) == 0L) stop("no atomic claims.", call. = FALSE)
@@ -4300,6 +4611,8 @@ morie_kamath_factscore <- function(atomic_claims, knowledge_base) {
 #' @param metric "cosine" or "dot".
 #' @return List with `selected`, `similarities`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_few_shot_exemplar_selection(D = c(1, 2, 3, 4, 5, 6, 7, 8), query_embed = 5L, K = 5L)
 morie_kamath_few_shot_exemplar_selection <- function(D, query_embed, K,
                                                      metric = "cosine") {
   Dm <- as.matrix(D); q <- as.numeric(query_embed)
@@ -4333,6 +4646,9 @@ morie_kamath_few_shot_exemplar_selection <- function(D, query_embed, K,
 #' @param n_min,n_max Gram length range.
 #' @return List with `vector`, `ngrams`, `n_known`, `missing`.
 #' @export
+#' @examples
+#' morie_kamath_fasttext_subword("ab", list(`<a` = 1, ab = 2, `b>` = 3, 
+#'     `<ab>` = 4), 2, 2)
 morie_kamath_fasttext_subword <- function(word, ngram_embeddings, n_min,
                                           n_max) {
   grams <- morie_kamath_word_ngrams(word, n_min, n_max)
@@ -4390,6 +4706,9 @@ morie_kamath_word_ngrams <- function(word, n_min, n_max, boundary = "<>") {
 #' @param model Judge returning one logit per point.
 #' @return List with `estimate`, `probabilities`, `score_points`.
 #' @export
+#' @examples
+#' morie_kamath_g_eval("x", "y", c(1, 2, 3), function(x, y, r) c(0, 
+#'     1, 0))
 morie_kamath_g_eval <- function(x, y, rubric, model) {
   scores <- if (is.list(rubric) && !is.null(rubric$scores)) rubric$scores
   else if (is.list(rubric)) stop("a list rubric must carry a 'scores' entry.",
@@ -4421,6 +4740,10 @@ morie_kamath_g_eval <- function(x, y, rubric, model) {
 #' @param x_max,alpha Weighting parameters.
 #' @return List with `estimate`, `weights`, `residuals`, `n_nonzero`.
 #' @export
+#' @examples
+#' morie_kamath_glove_cost(matrix(c(2, 1, 0, 3), 2), matrix(c(1, 
+#'     0), 2), matrix(c(1, 1), 2), c(0, 0), c(0, 0), x_max = 2, 
+#'     alpha = 0.5)
 morie_kamath_glove_cost <- function(X, W, W_tilde, b, b_tilde, x_max = 100,
                                     alpha = 0.75) {
   X <- as.matrix(X); Wm <- as.matrix(W); Wt <- as.matrix(W_tilde)
@@ -4467,6 +4790,9 @@ morie_kamath_glove_weight <- function(x, x_max, alpha) {
 #' @param lowercase Case-fold before matching.
 #' @return List with `estimate`, `n_grounded`, `ungrounded`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_groundedness_reward(V, V)
 morie_kamath_groundedness_reward <- function(y_tokens, ctx_tokens,
                                              lowercase = TRUE) {
   y <- as.character(y_tokens); ctx <- as.character(ctx_tokens)
@@ -4489,6 +4815,9 @@ morie_kamath_groundedness_reward <- function(y_tokens, ctx_tokens,
 #' @param normalize Min-max the arms first.
 #' @return List with `scores`, `ranking`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_hybrid_retrieval_fusion(c(0.1, 0.9), c(0.8, 0.2), 
+#'     0.25)
 morie_kamath_hybrid_retrieval_fusion <- function(s_dense, s_sparse, lam,
                                                  normalize = FALSE) {
   d <- as.numeric(s_dense); s <- as.numeric(s_sparse); lam <- as.numeric(lam)
@@ -4523,6 +4852,9 @@ morie_kamath_hybrid_retrieval_fusion <- function(s_dense, s_sparse, lam,
 #' @param k Depth.
 #' @return List with `retrieved`, `similarities`, `hypothetical`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_hyde_hypothetical_doc("q", function(q) c(1, 0), 
+#'     list(d1 = c(1, 0), d2 = c(0, 1)), k = 1)
 morie_kamath_hyde_hypothetical_doc <- function(query, model, embeddings,
                                                embed = NULL, k = 3) {
   if (!is.function(model)) stop("model must be a function.", call. = FALSE)
@@ -4568,6 +4900,9 @@ morie_kamath_hyde_hypothetical_doc <- function(query, model, embeddings,
 #' @param sep Separator.
 #' @return List with `estimate`, `log_prob`, `prompt`, `K`.
 #' @export
+#' @examples
+#' morie_kamath_in_context_learning_prob(c("e1", "e2"), "q", function(p, 
+#'     a) 0.25)
 morie_kamath_in_context_learning_prob <- function(demonstrations, query,
                                                   model, answer = NULL,
                                                   sep = "\n") {
@@ -4593,6 +4928,9 @@ morie_kamath_in_context_learning_prob <- function(demonstrations, query,
 #' @param targets Token ids (0-BASED).
 #' @return List with `estimate`, `perplexity`, `n_response_tokens`.
 #' @export
+#' @examples
+#' morie_kamath_instruction_tuning_loss(matrix(c(1, 0, 2, 0, 1, 
+#'     0), 3), c(0, 1, 1), c(0, 1, 0))
 morie_kamath_instruction_tuning_loss <- function(logits, response_mask,
                                                  targets) {
   logits <- as.matrix(logits)
@@ -4623,6 +4961,8 @@ morie_kamath_instruction_tuning_loss <- function(logits, response_mask,
 #' @param tau Temperature.
 #' @return List with `estimate`, `loss_i2t`, `loss_t2i`, `similarity`.
 #' @export
+#' @examples
+#' morie_kamath_image_text_contrastive(I_emb = c(1, 2, 3, 4, 5, 6, 7, 8), T_emb = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 morie_kamath_image_text_contrastive <- function(I_emb, T_emb, tau) {
   I <- as.matrix(I_emb); Tm <- as.matrix(T_emb)
   tau <- as.numeric(tau)
@@ -4653,6 +4993,8 @@ morie_kamath_image_text_contrastive <- function(I_emb, T_emb, tau) {
 #' @param fuse Optional fusion function.
 #' @return List with `estimate`, `logit`, `match`, `fused`.
 #' @export
+#' @examples
+#' morie_kamath_image_text_matching(image_emb = list(a = 1, b = 2), text_emb = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), W = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 morie_kamath_image_text_matching <- function(image_emb, text_emb, W, b,
                                              fuse = NULL) {
   I <- as.numeric(image_emb); Tv <- as.numeric(text_emb)
@@ -4682,6 +5024,8 @@ morie_kamath_image_text_matching <- function(image_emb, text_emb, W, b,
 #' @param beta Non-negative weight.
 #' @return List with `shaped`, `estimate`, `mean_kl`, `penalty`.
 #' @export
+#' @examples
+#' morie_kamath_kl_reward_shaping(r_phi = c(1, 2, 3, 4, 5, 6, 7, 8), kl_divergence = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 morie_kamath_kl_reward_shaping <- function(r_phi, kl_divergence, beta) {
   r <- as.numeric(r_phi); kl <- as.numeric(kl_divergence)
   beta <- as.numeric(beta)
@@ -4709,6 +5053,9 @@ morie_kamath_kl_reward_shaping <- function(r_phi, kl_divergence, beta) {
 #' @param tol Sum tolerance.
 #' @return List with `estimate`, `per_expert`, `imbalance_ratio`.
 #' @export
+#' @examples
+#' morie_kamath_moe_load_balance_loss(c(0.7, 0.3), c(0.6, 0.4), 
+#'     2, 0.01)
 morie_kamath_moe_load_balance_loss <- function(fractions, gate_means, N,
                                                alpha, tol = 1e-6) {
   f <- as.numeric(fractions); P <- as.numeric(gate_means)
@@ -4744,6 +5091,9 @@ morie_kamath_moe_load_balance_loss <- function(fractions, gate_means, N,
 #' @param x Input.
 #' @return List with `h`, `base`, `delta`, `scaling`, `n_trainable`.
 #' @export
+#' @examples
+#' morie_kamath_lora_weight_update(diag(2), matrix(c(1, 1), 1), 
+#'     matrix(c(2, 0), 2), 4, 1, c(1, 3))
 morie_kamath_lora_weight_update <- function(W0, A, B, alpha, r, x) {
   W0 <- as.matrix(W0); A <- as.matrix(A); B <- as.matrix(B)
   x <- as.numeric(x); r <- as.integer(r); alpha <- as.numeric(alpha)
@@ -4776,6 +5126,9 @@ morie_kamath_lora_weight_update <- function(W0, A, B, alpha, r, x) {
 #' @param ignore_index Ignored id.
 #' @return List with `visual_tokens`, `inputs`, optionally `loss`.
 #' @export
+#' @examples
+#' morie_kamath_llava_visual_instruction("im", diag(2), function(i) matrix(c(1, 
+#'     2), 1), matrix(c(3, 4), 1))
 morie_kamath_llava_visual_instruction <- function(image, W, visual_encoder,
                                                   text_tokens, lm_head = NULL,
                                                   targets = NULL,
@@ -4825,6 +5178,10 @@ morie_kamath_llava_visual_instruction <- function(image, W, visual_encoder,
 #'   (a bare object is treated as the single modality "default").
 #' @return List with `estimate`, `per_modality`, `n_masked`.
 #' @export
+#' @examples
+#' morie_kamath_multimodal_mae(list(v = 0), list(v = c(1, 2)), list(v = c(TRUE, 
+#'     FALSE, TRUE)), decoders = list(v = function(x, m) c(0.5, 
+#'     1)))
 morie_kamath_multimodal_mae <- function(x_visible, x_masked_true, masks,
                                         decoders = NULL) {
   if (is.null(decoders)) stop("decoders is required.", call. = FALSE)
@@ -4876,6 +5233,8 @@ morie_kamath_multimodal_mae <- function(x_visible, x_masked_true, masks,
 #' @param delta Step sizes.
 #' @return List with `y`, `states`, `A_bar`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_mamba_ssm(x = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), delta = 0.5)
 morie_kamath_mamba_ssm <- function(x, A, B, C, delta) {
   x <- as.numeric(x)
   if (is.matrix(A)) stop("A must be the diagonal of the state matrix.",
@@ -4922,6 +5281,9 @@ morie_kamath_mamba_ssm <- function(x, A, B, C, delta) {
 #' @param labels Optional 0/1 membership truth.
 #' @return List with `predictions`, `member_rate`, optionally `accuracy`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_membership_inference(V, V)
 morie_kamath_membership_inference <- function(losses, threshold,
                                               labels = NULL) {
   L <- as.numeric(losses); tau <- as.numeric(threshold)
@@ -4960,6 +5322,9 @@ morie_kamath_membership_inference <- function(losses, threshold,
 #' @param verify Optional (position, token) -> logical.
 #' @return List with `tokens`, `probabilities`, `accepted`.
 #' @export
+#' @examples
+#' morie_kamath_medusa_heads(c(1, 2), list(diag(2), matrix(c(0, 
+#'     1, 1, 0), 2)), 2)
 morie_kamath_medusa_heads <- function(hidden_state, medusa_heads, k,
                                       verify = NULL) {
   h <- as.numeric(hidden_state); k <- as.integer(k)
@@ -5012,6 +5377,11 @@ morie_kamath_medusa_heads <- function(hidden_state, medusa_heads, k,
 #' @param k Experts kept.
 #' @return List with `output`, `gate_weights`, `selected_experts` (0-based).
 #' @export
+#' @examples
+#' x <- c(1, 2, 3, 4)
+#' morie_kamath_moe_router_softmax(c(1, 0), matrix(c(1, 0, 0, 1, 
+#'     2, 0), 2), list(function(x) x * 1, function(x) x * 2, function(x) x * 
+#'     3), 2)
 morie_kamath_moe_router_softmax <- function(x, Wr, experts, k) {
   x <- as.numeric(x); W <- as.matrix(Wr); experts <- as.list(experts)
   if (ncol(W) != length(experts)) stop("the router and experts disagree.",
@@ -5036,6 +5406,9 @@ morie_kamath_moe_router_softmax <- function(x, Wr, experts, k) {
 #' @param normalizer Optional divisor.
 #' @return List with `estimate`, `wmd`, `normalizer`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_moverscore(V, V)
 morie_kamath_moverscore <- function(hypothesis_embeddings,
                                     reference_embeddings, weights_h = NULL,
                                     weights_r = NULL, metric = "euclidean",
@@ -5095,6 +5468,8 @@ morie_kamath_word_movers_distance <- function(cost, p, q, max_iter = 10000) {
 #' @param n_bins Levels; 16 gives NF4.
 #' @return List with `levels`, `normalized`, `bin_widths`, `n_bits`.
 #' @export
+#' @examples
+#' morie_kamath_nf4_datatype()
 morie_kamath_nf4_datatype <- function(n_bins = 16) {
   n <- as.integer(n_bins)
   if (n < 2L) stop("a data type needs at least 2 levels.", call. = FALSE)
@@ -5125,6 +5500,8 @@ morie_kamath_normal_quantile <- function(u) {
 #' @param counts_ngram,counts_prefix Counts.
 #' @return List with `estimate`, `count_ngram`, `count_prefix`.
 #' @export
+#' @examples
+#' morie_kamath_ngram_language_model(counts_ngram = 5L, counts_prefix = 5L)
 morie_kamath_ngram_language_model <- function(counts_ngram, counts_prefix) {
   base <- morie_burkov_ngram_mle(counts_ngram, counts_prefix)
   list(estimate = base$estimate, probability = base$estimate,
@@ -5143,6 +5520,8 @@ morie_kamath_ngram_language_model <- function(counts_ngram, counts_prefix) {
 #' @param T Temperature.
 #' @return List with `probabilities`, `kept`, `n_kept`, `kept_mass`.
 #' @export
+#' @examples
+#' morie_kamath_nucleus_sampling(logits = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
 morie_kamath_nucleus_sampling <- function(logits, p, T = 1) {
   z <- as.numeric(logits)
   if (length(z) == 0L) stop("no logits supplied.", call. = FALSE)
@@ -5173,6 +5552,12 @@ morie_kamath_nucleus_sampling <- function(logits, p, T = 1) {
 #' @param output_modalities Optional subset.
 #' @return List with `outputs`, `features`, `llm_state`.
 #' @export
+#' @examples
+#' f <- morie_kamath_ragas_faithfulness(c("the sky is blue", "the sky is green", 
+#'     "grass grows"), "the sky is blue today and grass grows")
+#' morie_kamath_nextgpt_any2any(list(img = 1, txt = 2), list(img = function(v) v * 
+#'     10, txt = function(v) v * 100), function(f) sum(unlist(f)), 
+#'     list(aud = function(s) s + 1))
 morie_kamath_nextgpt_any2any <- function(inputs_by_modality, encoders, llm,
                                          decoders, output_modalities = NULL) {
   if (!is.list(inputs_by_modality) || length(inputs_by_modality) == 0L) {
@@ -5223,6 +5608,9 @@ morie_kamath_nextgpt_any2any <- function(inputs_by_modality, encoders, llm,
 #' @param inputs_by_layer List of list(K, V) per layer.
 #' @return List with `K`, `V`, `prefix_len`, `n_trainable`.
 #' @export
+#' @examples
+#' morie_kamath_p_tuning_v2(list(list(matrix(c(1, 1), 1), matrix(c(2, 
+#'     2), 1))), list(list(matrix(c(3, 3), 1), matrix(c(4, 4), 1))))
 morie_kamath_p_tuning_v2 <- function(prefixes_by_layer, inputs_by_layer) {
   pre <- as.list(prefixes_by_layer); inp <- as.list(inputs_by_layer)
   if (length(pre) == 0L) stop("no prefixes supplied.", call. = FALSE)
@@ -5259,6 +5647,8 @@ morie_kamath_p_tuning_v2 <- function(prefixes_by_layer, inputs_by_layer) {
 #' @param base "e" or "2".
 #' @return List with `estimate`, `mean_nll`, `bits_per_token`.
 #' @export
+#' @examples
+#' morie_kamath_perplexity(c(-1, -2))
 morie_kamath_perplexity <- function(log_probs, base = "e") {
   lp <- as.numeric(log_probs)
   if (length(lp) == 0L) stop("no tokens scored.", call. = FALSE)
@@ -5286,6 +5676,9 @@ morie_kamath_perplexity <- function(log_probs, base = "e") {
 #' @param ignore_index Ignored id.
 #' @return List with `estimate`, `loss_ce`, `loss_mlm`, `n_masked`.
 #' @export
+#' @examples
+#' morie_kamath_pet_loss(c(1, 0), 0, matrix(c(1, 0, 0, 2), 2), c(0, 
+#'     -100), 0.5)
 morie_kamath_pet_loss <- function(verbalizer_logits, y_true, mlm_logits,
                                   mlm_targets, alpha, ignore_index = -100L) {
   vz <- as.numeric(verbalizer_logits); alpha <- as.numeric(alpha)
@@ -5329,6 +5722,11 @@ morie_kamath_pet_loss <- function(verbalizer_logits, y_true, mlm_logits,
 #' @param eps LayerNorm epsilon.
 #' @return List with `output`, `after_attention`, `placement`.
 #' @export
+#' @examples
+#' att <- function(v) v * 0.5
+#' ffn <- function(v) v * 0.25
+#' morie_kamath_post_ln_transformer(matrix(c(1, 2, 3), 1), att, 
+#'     ffn)
 morie_kamath_post_ln_transformer <- function(x, attn_fn, ffn_fn, eps = 1e-5) {
   x <- as.matrix(x)
   if (!is.function(attn_fn) || !is.function(ffn_fn)) {
@@ -5384,6 +5782,9 @@ morie_kamath_layer_norm_rows <- function(x, eps = 1e-5) {
 #' @param beta Non-negative weight.
 #' @return List with `estimate`, `mean_reward`, `kl_estimate`, `per_sample`.
 #' @export
+#' @examples
+#' morie_kamath_ppo_rlhf_objective(c(1, 2), c(-1, -2), c(-1.5, -1.5), 
+#'     0.5)
 morie_kamath_ppo_rlhf_objective <- function(rewards, logp_theta, logp_ref,
                                             beta) {
   r <- as.numeric(rewards); lt <- as.numeric(logp_theta)
@@ -5413,6 +5814,8 @@ morie_kamath_ppo_rlhf_objective <- function(rewards, logp_theta, logp_ref,
 #' @param Q Optional queries.
 #' @return List with `K`, `V`, `prefix_len`, `n_trainable`.
 #' @export
+#' @examples
+#' morie_kamath_prefix_tuning(prefix_K = c(1, 2, 3, 4, 5, 6, 7, 8), prefix_V = c(1, 2, 3, 4, 5, 6, 7, 8), K_input = c(1, 2, 3, 4, 5, 6, 7, 8), V_input = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_prefix_tuning <- function(prefix_K, prefix_V, K_input, V_input,
                                        Q = NULL) {
   PK <- as.matrix(prefix_K); PV <- as.matrix(prefix_V)
@@ -5449,6 +5852,9 @@ morie_kamath_prefix_tuning <- function(prefix_K, prefix_V, K_input, V_input,
 #' @param X Input embedding rows.
 #' @return List with `X_aug`, `prompt_len`, `n_trainable`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_prompt_tuning(V, V)
 morie_kamath_prompt_tuning <- function(P, X) {
   P <- as.matrix(P); X <- as.matrix(X)
   if (nrow(P) == 0L) stop("a zero-length soft prompt tunes nothing.",
@@ -5472,6 +5878,9 @@ morie_kamath_prompt_tuning <- function(P, X) {
 #' @param W_out Optional projection.
 #' @return List with `Z`, `attention`, `compression`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_q_former(V, V)
 morie_kamath_q_former <- function(queries, visual_features, W_out = NULL) {
   Q <- as.matrix(queries); F <- as.matrix(visual_features)
   if (nrow(Q) == 0L) stop("a Q-Former with no queries outputs nothing.",
@@ -5504,6 +5913,10 @@ morie_kamath_q_former <- function(queries, visual_features, W_out = NULL) {
 #' @param n_bins Grid size.
 #' @return List with `h`, `W0_dequantized`, `n_frozen_4bit`.
 #' @export
+#' @examples
+#' morie_kamath_qlora_4bit(list(codes = matrix(c(0, 1, 3, 2), 2), 
+#'     absmax = 2), matrix(c(1, 0), 1), matrix(c(1, 0), 2), 2, 1, 
+#'     c(1, 1))
 morie_kamath_qlora_4bit <- function(W0_nf4, A, B, alpha, r, x, n_bins = 16) {
   if (!is.list(W0_nf4) || is.null(W0_nf4$codes) || is.null(W0_nf4$absmax)) {
     stop("W0_nf4 must carry 'codes' and 'absmax'.", call. = FALSE)
@@ -5552,6 +5965,8 @@ morie_kamath_dequantize_nf4 <- function(codes, absmax, n_bins = 16) {
 #' @param gamma Decay in (0, 1\].
 #' @return List with `output`, `decay`, `recurrent_output`.
 #' @export
+#' @examples
+#' morie_kamath_retnet_retention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
 morie_kamath_retnet_retention <- function(Q, K, V, gamma) {
   Q <- as.matrix(Q); K <- as.matrix(K); V <- as.matrix(V)
   gamma <- as.numeric(gamma)
@@ -5587,6 +6002,10 @@ morie_kamath_retnet_retention <- function(Q, K, V, gamma) {
 #' @param sft,train_rm,ppo Stage functions.
 #' @return List with `policy`, `policy_sft`, `reward_model`, `stages`.
 #' @export
+#' @examples
+#' morie_kamath_rlhf_pipeline(list("d"), list(c("a", "b")), "pi0", 
+#'     sft = function(p, d) "sft", train_rm = function(p) function(y) 1, 
+#'     ppo = function(p, r, ref) "rlhf")
 morie_kamath_rlhf_pipeline <- function(demos, preferences, pi0, sft = NULL,
                                        train_rm = NULL, ppo = NULL) {
   for (f in list(sft, train_rm, ppo)) {
@@ -5623,6 +6042,9 @@ morie_kamath_rlhf_pipeline <- function(demos, preferences, pi0, sft = NULL,
 #' @param max_iter,tol Iteration controls.
 #' @return List with `items`, `strengths`, `scores`, `loss`, `accuracy`.
 #' @export
+#' @examples
+#' morie_kamath_rlaif_objective(list(c("a", "b"), c("b", "c"), c("c", 
+#'     "a"), c("a", "c")))
 morie_kamath_rlaif_objective <- function(ai_preferences, max_iter = 1000,
                                          tol = 1e-12) {
   prefs <- lapply(ai_preferences, function(p) {
@@ -5692,6 +6114,9 @@ morie_kamath_rlaif_objective <- function(ai_preferences, max_iter = 1000,
 #' @param scores_w,scores_l Chosen and rejected scores.
 #' @return List with `estimate`, `per_pair`, `margins`, `accuracy`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_reward_model_training_loss(V, V)
 morie_kamath_reward_model_training_loss <- function(scores_w, scores_l) {
   w <- as.numeric(scores_w); l <- as.numeric(scores_l)
   if (length(w) != length(l)) stop("the loss is over PAIRS.", call. = FALSE)
@@ -5715,6 +6140,9 @@ morie_kamath_reward_model_training_loss <- function(scores_w, scores_l) {
 #' @param eps Epsilon.
 #' @return List with `y`, `tensor`, `rms`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_rms_norm(V)
 morie_kamath_rms_norm <- function(x, g = NULL, eps = 1e-6) {
   X <- x
   if (length(as.numeric(X)) == 0L) stop("nothing to normalise.",
@@ -5745,6 +6173,9 @@ morie_kamath_rms_norm <- function(x, g = NULL, eps = 1e-6) {
 #' @param base RoPE base.
 #' @return List with `y`, `angles`, `theta`, `positions`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_rotary_positional_embedding(V)
 morie_kamath_rotary_positional_embedding <- function(q, positions = NULL,
                                                      base = 10000) {
   x <- if (is.matrix(q)) q else matrix(as.numeric(q), nrow = 1L)
@@ -5779,6 +6210,9 @@ morie_kamath_rotary_positional_embedding <- function(q, positions = NULL,
 #' @param n Order.
 #' @return List with `estimate` (recall), `precision`, `f1`, `n_matched`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_rouge_n(V, V)
 morie_kamath_rouge_n <- function(hypothesis, reference, n = 1) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
@@ -5817,6 +6251,9 @@ morie_kamath_rouge_n <- function(hypothesis, reference, n = 1) {
 #' @param k Damping constant.
 #' @return List with `ranking`, `scores`, `appearances`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_reciprocal_rank_fusion(V)
 morie_kamath_reciprocal_rank_fusion <- function(rankings, k = 60) {
   lists <- lapply(rankings, function(r) as.character(unlist(r)))
   k <- as.numeric(k)
@@ -5855,6 +6292,8 @@ morie_kamath_reciprocal_rank_fusion <- function(rankings, k = 60) {
 #' @param sft Optional trainer over the retained pairs.
 #' @return List with `retained`, `retained_rewards`, `n_dropped`.
 #' @export
+#' @examples
+#' morie_kamath_rejection_sampling_finetune(prompts = c(1, 2, 3, 4, 5, 6, 7, 8), samples = c(1, 2, 3, 4, 5, 6, 7, 8), rewards = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_kamath_rejection_sampling_finetune <- function(prompts, samples,
                                                      rewards, k, sft = NULL) {
   prompts <- as.list(prompts)
@@ -5903,6 +6342,8 @@ morie_kamath_rejection_sampling_finetune <- function(prompts, samples,
 #' @param u Current-token bonus.
 #' @return List with `wkv`, `estimate`.
 #' @export
+#' @examples
+#' morie_kamath_rwkv_time_mix(k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), w = 5L)
 morie_kamath_rwkv_time_mix <- function(k, v, w, u = 0) {
   kv <- as.numeric(k); vv <- as.numeric(v)
   w <- as.numeric(w); u <- as.numeric(u)
@@ -5941,6 +6382,9 @@ morie_kamath_rwkv_time_mix <- function(k, v, w, u = 0) {
 #' @param parse Optional answer extractor.
 #' @return List with `answer`, `votes`, `agreement`, `tie`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_self_consistency(V)
 morie_kamath_self_consistency <- function(samples, parse = NULL) {
   traces <- as.list(samples)
   if (length(traces) == 0L) stop("no samples.", call. = FALSE)
@@ -5977,6 +6421,8 @@ morie_kamath_self_consistency <- function(samples, parse = NULL) {
 #' @param L_inf Irreducible loss.
 #' @return List with `estimate`, `reducible`, `irreducible`.
 #' @export
+#' @examples
+#' morie_kamath_scaling_laws(c(1e+06, 1e+08), 1e+10, 0.5, 0.1)
 morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
   n <- as.numeric(N); N_c <- as.numeric(N_c)
   alpha <- as.numeric(alpha_N); L_inf <- as.numeric(L_inf)
@@ -6083,6 +6529,9 @@ morie_kamath_scaling_laws <- function(N, N_c, alpha_N, L_inf = 0) {
 #' @param max_iter,tol EM controls.
 #' @return List with `probs`, `log_likelihood`, `segmentations`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_unigram_lm_tokenizer(V, V)
 morie_kamath_unigram_lm_tokenizer <- function(corpus, vocab, max_iter = 100,
                                               tol = 1e-12) {
   corpus <- corpus[nzchar(corpus)]
@@ -6188,6 +6637,8 @@ morie_kamath_viterbi_segment <- function(text, probs) {
 #' @param max_iter EM cap.
 #' @return List with `vocab`, `probs`, `log_likelihood`, `n_prune_rounds`.
 #' @export
+#' @examples
+#' morie_kamath_sentencepiece_tokenizer(corpus = c("a", "b", "c"), vocab_size = 5L)
 morie_kamath_sentencepiece_tokenizer <- function(corpus, vocab_size,
                                                  max_piece_len = 8,
                                                  seed_multiplier = 4,
@@ -6270,6 +6721,9 @@ morie_kamath_sentencepiece_tokenizer <- function(corpus, vocab_size,
 #' @param u Optional uniform draw.
 #' @return List with `estimate`, `accept_prob`, `residual`, `rejection_rate`.
 #' @export
+#' @examples
+#' morie_kamath_speculative_decoding(c(0.6, 0.3, 0.1), c(0.3, 0.5, 
+#'     0.2), proposed = 0)
 morie_kamath_speculative_decoding <- function(draft_probs, target_probs,
                                               proposed = NULL, u = NULL) {
   chk <- function(p, nm) {
@@ -6324,6 +6778,9 @@ morie_kamath_speculative_decoding <- function(draft_probs, target_probs,
 #' @param sentinel Sentinel template containing `%d`-style `{}`.
 #' @return List with `input`, `target`, `spans`, `n_masked`, `n_spans`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_t5_span_corruption(V)
 morie_kamath_t5_span_corruption <- function(tokens, mean_span_len = 3,
                                             corruption_rate = 0.15, seed = 0,
                                             sentinel = "<extra_id_{}>") {
@@ -6392,6 +6849,8 @@ morie_kamath_t5_span_corruption <- function(tokens, mean_span_len = 3,
 #' @param question Optional question.
 #' @return List with `tokens`, `by_group`, `retrieve`, `utility`.
 #' @export
+#' @examples
+#' morie_kamath_self_rag("ctx", function(c, q) "[Retrieve] [Relevant] [Utility:4]")
 morie_kamath_self_rag <- function(context, reflection_model, question = NULL) {
   if (!is.function(reflection_model)) stop("reflection_model must be a function.",
                                            call. = FALSE)
@@ -6447,6 +6906,10 @@ morie_kamath_self_rag <- function(context, reflection_model, question = NULL) {
 #' @param answer Optional answerer.
 #' @return List with `step_back_query`, `context`, `stepped_back`.
 #' @export
+#' @examples
+#' morie_kamath_step_back_prompting("what year did X happen", function(q) "history of X", 
+#'     retrieve = function(q) if (q == "history of X") list("d1", 
+#'         "d2") else list("d2", "d3"))
 morie_kamath_step_back_prompting <- function(query, model, retrieve = NULL,
                                              answer = NULL) {
   if (!is.function(model)) stop("model must be a function.", call. = FALSE)
@@ -6494,6 +6957,9 @@ morie_kamath_step_back_prompting <- function(query, model, retrieve = NULL,
 #' @param beta KL weight.
 #' @return List with `loss_rm`, `rm_accuracy`, `objective`, `kl_estimate`.
 #' @export
+#' @examples
+#' morie_kamath_summarize_from_feedback(list(c(2, 1), c(1, 2)), 
+#'     c(1, 2), c(-1, -2), c(-1.5, -1.5), 0.5)
 morie_kamath_summarize_from_feedback <- function(preferences, rewards,
                                                  pi_logprobs, ref_logprobs,
                                                  beta) {
@@ -6524,6 +6990,9 @@ morie_kamath_summarize_from_feedback <- function(preferences, rewards,
 #' @param stereo_probs,anti_probs Paired probabilities.
 #' @return List with `estimate`, `ss_score`, `bias_magnitude`, `n_ties`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_kamath_stereoset_bias(V, V)
 morie_kamath_stereoset_bias <- function(stereo_probs, anti_probs) {
   s <- as.numeric(stereo_probs); a <- as.numeric(anti_probs)
   if (length(s) != length(a)) stop("StereoSet compares PAIRS.", call. = FALSE)
@@ -6553,6 +7022,8 @@ morie_kamath_stereoset_bias <- function(stereo_probs, anti_probs) {
 #' @param b,c Biases.
 #' @return List with `output`, `gate`, `linear`.
 #' @export
+#' @examples
+#' morie_kamath_swiglu_activation(x = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kamath_swiglu_activation <- function(x, W, V, b = NULL, c = NULL) {
   x <- as.numeric(x); W <- as.matrix(W); V <- as.matrix(V)
   if (!all(dim(W) == dim(V))) stop("W and V must match.", call. = FALSE)
@@ -6596,6 +7067,8 @@ morie_kamath_swish <- function(z, beta = 1) {
 #' @param T Temperature.
 #' @return List with `probabilities`, `entropy`, `max_entropy`, `argmax`.
 #' @export
+#' @examples
+#' morie_kamath_temperature_sampling(logits = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
 morie_kamath_temperature_sampling <- function(logits, T) {
   z <- as.numeric(logits); T <- as.numeric(T)
   if (length(z) == 0L) stop("no logits supplied.", call. = FALSE)
@@ -6618,6 +7091,8 @@ morie_kamath_temperature_sampling <- function(logits, T) {
 #' @param k Experts kept.
 #' @return List with `weights`, `selected_experts`, `kept_mass`.
 #' @export
+#' @examples
+#' morie_kamath_moe_top_k_gating(gates = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 morie_kamath_moe_top_k_gating <- function(gates, k) {
   g <- as.numeric(gates); k <- as.integer(k); n <- length(g)
   if (n == 0L) stop("no gate scores supplied.", call. = FALSE)
@@ -6648,6 +7123,9 @@ morie_kamath_moe_top_k_gating <- function(gates, k) {
 #' @param beam Beam width.
 #' @return List with `best_state`, `best_path`, `best_score`, `frontier`.
 #' @export
+#' @examples
+#' morie_kamath_tree_of_thoughts("root", 2, 2, function(s, b) list(list(paste0(s, 
+#'     "a"), 1), list(paste0(s, "b"), 2)), beam = 1)
 morie_kamath_tree_of_thoughts <- function(problem, branch_factor, max_depth,
                                           model, beam = 1) {
   b <- as.integer(branch_factor); depth <- as.integer(max_depth)
@@ -6702,6 +7180,8 @@ morie_kamath_tree_of_thoughts <- function(problem, branch_factor, max_depth,
 #' @param threshold Cut-off.
 #' @return List with `estimate`, `toxic`, `threshold`.
 #' @export
+#' @examples
+#' morie_kamath_toxigen_score("t", function(t) c(0.3, 0.7))
 morie_kamath_toxigen_score <- function(text, classifier, threshold = 0.5) {
   if (!is.function(classifier)) stop("classifier must be a function.",
                                      call. = FALSE)
@@ -6736,6 +7216,9 @@ morie_kamath_toxigen_score <- function(text, classifier, threshold = 0.5) {
 #' @param x Input.
 #' @return List with `h`, `delta`, `rank`, `n_trainable`.
 #' @export
+#' @examples
+#' morie_kamath_vera_adapter(diag(2), matrix(c(1, 1), 1), matrix(c(1, 
+#'     2), 2), c(2, 3), c(5), c(1, 2))
 morie_kamath_vera_adapter <- function(W0, A_frozen, B_frozen, lam_b, lam_d,
                                       x) {
   W0 <- as.matrix(W0); A <- as.matrix(A_frozen); B <- as.matrix(B_frozen)
@@ -6766,6 +7249,9 @@ morie_kamath_vera_adapter <- function(W0, A_frozen, B_frozen, lam_b, lam_d,
 #' @param verbalizer_map Named list class -> answer tokens.
 #' @return List with `probabilities`, `normalized`, `prediction`.
 #' @export
+#' @examples
+#' morie_kamath_verbalizer_mapping(c(1, 0, 2), c("gr", "te", "ok"), 
+#'     list(pos = c("gr", "ok"), neg = c("te")))
 morie_kamath_verbalizer_mapping <- function(logits, vocab, verbalizer_map) {
   z <- as.numeric(logits); vocab <- as.character(vocab)
   if (length(z) != length(vocab)) stop("logits and vocabulary differ.",
@@ -6814,6 +7300,8 @@ morie_kamath_verbalizer_mapping <- function(logits, vocab, verbalizer_map) {
 #' @param V,U Input and output embedding matrices.
 #' @return List with `log_likelihood`, `per_pair`, `probabilities`.
 #' @export
+#' @examples
+#' morie_kamath_word2vec_skipgram(c(0, 1), c(1, 0), diag(2), diag(2))
 morie_kamath_word2vec_skipgram <- function(center_indices, context_indices,
                                            V, U) {
   cc <- as.integer(center_indices); oo <- as.integer(context_indices)
@@ -6848,6 +7336,8 @@ morie_kamath_word2vec_skipgram <- function(center_indices, context_indices,
 #' @param ramp Optional (lo, hi) blend band.
 #' @return List with `theta`, `theta_new`, `scale_factors`.
 #' @export
+#' @examples
+#' morie_kamath_yarn_context_extrapolation(10000, 4, 8)
 morie_kamath_yarn_context_extrapolation <- function(theta, scale, d,
                                                     ramp = NULL) {
   d <- as.integer(d); s <- as.numeric(scale)

@@ -26,6 +26,10 @@
 #'   Robins (1999), JASA 94(448):1096-1120.
 #'   \doi{10.1080/01621459.1999.10473862}
 #' @export
+#' @examples
+#' set.seed(1)
+#' IpwSn(Y = rnorm(20), X = matrix(rnorm(40), 20, 2), C = rbinom(20, 1, 0.5),
+#'       lam_grid = c(0, 0.5, 1))
 IpwSn <- function(Y, X, C, lam_grid) {
   yv <- .s03vec(Y); n <- length(yv)
   if (n == 0L) stop("ipw_sensitivity: Y is empty")

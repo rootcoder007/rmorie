@@ -24,6 +24,8 @@
 #' @references Greenland (1988), Statistics in Medicine 7(7):745-757,
 #'   doi:10.1002/sim.4780070704.
 #' @export
+#' @examples
+#' Epbias(A_obs = c(50, 30), Se = 0.9, Sp = 0.85, N = c(100, 100))
 Epbias <- function(A_obs, Se, Sp, N = NULL) {
   a <- as.numeric(A_obs)
   if (is.null(N)) {

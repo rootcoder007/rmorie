@@ -17,6 +17,8 @@
 #' @references Katz (1953), Psychometrika 18(1):39-43.
 #'   \doi{10.1007/BF02289026}
 #' @export
+#' @examples
+#' Katzc(y = c(1, 1, 1), A = matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
 Katzc <- function(y, A, alpha = 0.1, beta = 0) {
   M <- .s03mat(A)
   n <- nrow(M)

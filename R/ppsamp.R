@@ -25,6 +25,8 @@
 #'   sampling from finite populations. Annals of Mathematical Statistics
 #'   14(4):333-362. \doi{10.1214/aoms/1177731356}.
 #' @export
+#' @examples
+#' Ppsamp(y = c(1, 2, 3, 4, 5, 6, 7, 8), size = c(1, 2, 3, 4, 5, 6, 7, 8), n = 3L)
 Ppsamp <- function(y, size, n) {
   y <- as.numeric(unlist(y)); x <- as.numeric(unlist(size))
   if (length(y) == 0L) stop("Ppsamp: y is empty")

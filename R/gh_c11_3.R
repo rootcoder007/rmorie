@@ -18,6 +18,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Theorem 11.20, eq. (11.12).
 #' @export
+#' @examples
+#' Ghosalgpcrtthm()
 Ghosalgpcrtthm <- function(phi_exponent = 2, n = 10000) {
   a <- as.numeric(phi_exponent)
   n <- as.numeric(n)

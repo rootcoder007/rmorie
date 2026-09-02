@@ -46,11 +46,11 @@ for the infinitely many empty tables.  That makes the sampler valid
 for non-conjugate base measures, unlike the collapsed algorithm 3;
 here the conjugate normal case is used so the two can be compared.
 }
-\references{
-Neal (2000), J. Comput. Graph. Statist. 9(2):249-265,
-algorithm 8.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Crpgib(V)
+}
+\references{
+Neal (2000), J. Comput. Graph. Statist. 9(2):249-265,
+algorithm 8.
 }

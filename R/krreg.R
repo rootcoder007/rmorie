@@ -24,6 +24,9 @@
 #'   regression learning algorithm in dual variables. Proceedings of the
 #'   15th International Conference on Machine Learning, 515-521.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Krreg(V, V)
 Krreg <- function(x, y, x_eval = NULL, bandwidth = NULL, penalty = 1,
                   kernel = "gaussian") {
   x <- as.numeric(x); y <- as.numeric(y); n <- length(x)

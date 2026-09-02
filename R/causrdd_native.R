@@ -79,6 +79,11 @@
 #'   Identification and estimation of treatment effects with a
 #'   regression-discontinuity design. Econometrica, 69(1), 201-209.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(200, -1, 1)
+#' y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
+#' morie_causrdd(x, y)
 morie_causrdd <- function(x, y, cutoff = 0, h = NULL,
                           kernel = "triangular") {
   xa <- as.numeric(x); ya <- as.numeric(y)

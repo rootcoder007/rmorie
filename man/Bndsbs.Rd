@@ -28,6 +28,9 @@ per-coordinate widths make that visible.
 Formula: \code{proj_k(H) = [min h_k, max h_k]} over the points of
 \code{H}, for each selected coordinate \code{k}.
 }
+\examples{
+Bndsbs(theta_full = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), subset_idx = list(a = 1, b = 2))
+}
 \references{
 Romano, J. P. and Shaikh, A. M. (2008). Inference for
 identifiable parameters in partially identified econometric models.
@@ -35,7 +38,4 @@ Journal of Statistical Planning and Inference 138(9), 2786-2807.
 \doi{10.1016/j.jspi.2008.03.015}. The coverage-of-a-component
 distinction is Section 4.3.3 of Molinari, F. (2021), Handbook of
 Econometrics 7A (arXiv:2004.11751 p. 101).
-}
-\examples{
-Bndsbs(theta_full = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), subset_idx = list(a = 1, b = 2))
 }

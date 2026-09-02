@@ -12,6 +12,9 @@
 #' @return List with \code{W1}, \code{estimate}, \code{n}.
 #' @references Vallender, S. S. (1973). Theory Probab Appl 18:784-786.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otws(V, V)
 Otws <- function(x, y) {
   xs <- sort(as.numeric(x)); ys <- sort(as.numeric(y)); n <- length(xs)
   w <- sum(abs(xs - ys)) / n

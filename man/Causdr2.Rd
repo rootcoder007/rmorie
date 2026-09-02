@@ -34,6 +34,9 @@ The variance is the Theorem 3.2 plug-in, se = sqrt(sigma2 / n) with
 sigma2 = mean(psi^2) / mean(Vhat^2)^2. The K folds come from a
 seeded R sample.int shuffle, positions assigned round-robin.
 }
+\examples{
+Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+}
 \references{
 Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo,
 E., Hansen, C., Newey, W. and Robins, J. (2018), Double/debiased
@@ -41,7 +44,4 @@ machine learning for treatment and structural parameters, The
 Econometrics Journal 21(1), C1-C68, doi:10.1111/ectj.12097,
 Eq. 4.4, Definition 3.2, Theorem 3.2; local copy
 fetched-wave3/chernozhukov-etal-2018-double-debiased-machine-learning-EJ21.pdf.
-}
-\examples{
-Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 }

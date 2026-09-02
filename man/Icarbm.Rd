@@ -29,13 +29,13 @@ being exactly zero is the check the tests apply.
 \details{
 Formula: u_i | u_-i ~ N(mean of the n_i neighbours, tau^2 / n_i).
 }
+\examples{
+Icarbm(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
+}
 \references{
 Besag (1974), Spatial interaction and the statistical
 analysis of lattice systems, JRSS B 36(2):192-236,
 \doi{10.1111/j.2517-6161.1974.tb00999.x}; Besag, York and Mollie
 (1991), Annals of the Institute of Statistical Mathematics
 43(1):1-20. \doi{10.1007/BF00116466}
-}
-\examples{
-Icarbm(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
 }

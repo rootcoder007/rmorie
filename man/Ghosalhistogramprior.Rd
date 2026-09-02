@@ -28,13 +28,13 @@ Proposition G.2 licenses.
 }
 \details{
 Formula: g_k ~ Gamma(alpha, 1), p = g / sum(g),
-f(x) = p_{b(x)} K on [0, 1] with K equal-width bins.
-}
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.3.2.
+f(x) = p_{b(x)} K on \link{0, 1} with K equal-width bins.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalhistogramprior(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.3.2.
 }

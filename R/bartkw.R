@@ -14,6 +14,9 @@
 #' @references Newey, W. K. & West, K. D. (1987). Econometrica
 #'   55:703-708; Bartlett, M. S. (1950) Biometrika 37:1-16.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bartkw(V)
 Bartkw <- function(lags, M = NULL) {
   ks <- if (length(lags) == 1L) as.numeric(0:as.integer(lags)) else as.numeric(lags)
   Mv <- if (is.null(M)) max(ks) else as.numeric(M)

@@ -24,6 +24,9 @@
 #' @references Neal (2000), J. Comput. Graph. Statist. 9(2):249-265,
 #'   algorithm 8.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Crpgib(V)
 Crpgib <- function(y, alpha = 1, n_iter = 50, m = 3, mu0 = 0, tau2 = 10,
                    sigma2 = 1, seed = 42) {
   y <- .s03vec(y)

@@ -22,6 +22,8 @@
 #' @param event_probability Probability of each.
 #' @return A list with `expected`, `exists`.
 #' @export
+#' @examples
+#' morie_union_bound_exists(1e+05, 0.01)
 morie_union_bound_exists <- function(n_events, event_probability) {
   m <- as.integer(n_events)
   p <- as.numeric(event_probability)
@@ -53,6 +55,8 @@ morie_union_bound_exists <- function(n_events, event_probability) {
 #'   `search_capped`, `warnings`.
 #' @references Erdos P (1947) \emph{Bull AMS} 53:292-294.
 #' @export
+#' @examples
+#' morie_first_moment_ramsey(k = 5L)
 morie_first_moment_ramsey <- function(k) {
   k <- as.integer(k)
   if (is.na(k) || k < 2L) {
@@ -102,6 +106,8 @@ morie_first_moment_ramsey <- function(k) {
 #'   `best_bound`, `optimal_n`, `search_capped`.
 #' @references Alon N, Spencer JH (2016), Ch 3.
 #' @export
+#' @examples
+#' morie_alteration_ramsey(k = 5L)
 morie_alteration_ramsey <- function(k) {
   k <- as.integer(k)
   if (is.na(k) || k < 2L) {
@@ -150,6 +156,8 @@ morie_alteration_ramsey <- function(k) {
 #'   \emph{Infinite and Finite Sets} (Colloquia Mathematica Societatis
 #'   Janos Bolyai, Vol. 10), North-Holland.
 #' @export
+#' @examples
+#' morie_lovasz_local_lemma(p = 0.5, d = 5L)
 morie_lovasz_local_lemma <- function(p, d) {
   p <- as.numeric(p); d <- as.integer(d)
   if (p < 0 || p > 1) {
@@ -179,6 +187,8 @@ morie_lovasz_local_lemma <- function(p, d) {
 #'   `warnings`.
 #' @references Chernoff H (1952) \emph{Ann Math Stat} 23(4):493-507.
 #' @export
+#' @examples
+#' morie_chernoff_bound(n = 5L, p = 0.5, t = 5L)
 morie_chernoff_bound <- function(n, p, t, tail = c("upper", "lower")) {
   tail <- match.arg(tail)
   n <- as.integer(n); p <- as.numeric(p); t <- as.numeric(t)
@@ -236,6 +246,8 @@ morie_chernoff_bound <- function(n, p, t, tail = c("upper", "lower")) {
 #' @return A list with `bound`, `typical_deviation`, `deviations_out`.
 #' @references Azuma K (1967) \emph{Tohoku Math J} 19(3):357-367.
 #' @export
+#' @examples
+#' morie_azuma_bound(100, 1, 30)
 morie_azuma_bound <- function(n, c, t) {
   n <- as.integer(n); c <- as.numeric(c); t <- as.numeric(t)
   if (is.na(n) || n < 1L) {
@@ -259,6 +271,8 @@ morie_azuma_bound <- function(n, c, t) {
 #' @param expectation,variance Moments of the count.
 #' @return A list with `p_zero_bound`, `variance_ratio`, `positive_whp`.
 #' @export
+#' @examples
+#' morie_second_moment_threshold(expectation = 5L, variance = 5L)
 morie_second_moment_threshold <- function(expectation, variance) {
   e <- as.numeric(expectation); v <- as.numeric(variance)
   if (v < 0) {

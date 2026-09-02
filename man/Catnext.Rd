@@ -13,7 +13,7 @@ Catnext(items, theta, administered = NULL, exposure = NULL, D = 1)
 
 \item{administered}{One-based indices already administered.}
 
-\item{exposure}{Per-item multiplier in [0, 1].}
+\item{exposure}{Per-item multiplier in \link{0, 1}.}
 
 \item{D}{Scaling constant.}
 }
@@ -34,6 +34,11 @@ Formula: I_j(theta) = dP^2 / (P (1 - P)) with
 P = c + (d - c) e/(1 + e), dP = D a e (d - c)/(1 + e)^2;
 choose argmax_j exposure_j I_j(theta) over unused j
 }
+\examples{
+items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
+                3, 4, byrow = TRUE)
+Catnext(items, theta = 0.5)
+}
 \references{
 Verified against the reference implementation in the CRAN
 package catR 3.17 (Magis & Raiche), functions Pi and Ii. catR
@@ -43,9 +48,4 @@ obtainable, so the package source is used as the reference.
 Maximum-information selection is Birnbaum (1968); the exposure-control
 multiplier is the idea of Sympson & Hetter (1985), applied here in its
 simplest multiplicative form.
-}
-\examples{
-items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
-                3, 4, byrow = TRUE)
-Catnext(items, theta = 0.5)
 }

@@ -30,6 +30,8 @@
 #'   coefficient, Sociological Methods and Research 29(2):147-194.
 #'   \doi{10.1177/0049124100029002001}
 #' @export
+#' @examples
+#' Konfound(est = 5L, se = 5L, n = 5L, threshold = 0.5)
 Konfound <- function(est, se, n, threshold, n_covariates = 0) {
   est <- as.numeric(est); se <- as.numeric(se)
   n <- as.integer(n); alpha <- as.numeric(threshold); k <- as.integer(n_covariates)

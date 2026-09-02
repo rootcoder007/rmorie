@@ -20,6 +20,8 @@
 #'   Convolutional neural networks on graphs with fast localized
 #'   spectral filtering, NIPS 29, eqs. (4)-(5). arXiv:1606.09375
 #' @export
+#' @examples
+#' Gcnchb(L = 5L, X = 5L)
 Gcnchb <- function(L, X, K = 3, theta = NULL) {
   M <- .s03mat(L)
   n <- nrow(M)

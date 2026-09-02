@@ -35,11 +35,11 @@ logit scale along
 pooled score for a single \code{eps} by fixed-iteration Newton, and
 \code{psi_a = mean_i S*_a(t0|W_i)}.
 }
+\examples{
+Tmlhrz(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Moore, K. L. & van der Laan, M. J. (2009). Statistics in
 Medicine 28(1):39-64; van der Laan, M. J. & Rubin, D. (2006). IJB
 2(1):11.
-}
-\examples{
-Tmlhrz(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

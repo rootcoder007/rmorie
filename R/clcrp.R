@@ -23,6 +23,8 @@
 #' @references Blei & Frazier (2011), J. Machine Learning Research
 #'   12:2461-2488.
 #' @export
+#' @examples
+#' Clcrp(y = 5L, distances = 5L)
 Clcrp <- function(y, distances, alpha = 1, decay = 1, seed = 42) {
   y <- .s03vec(y)
   n <- length(y)

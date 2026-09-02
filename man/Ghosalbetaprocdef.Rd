@@ -31,11 +31,11 @@ unit-exponential cumulative hazard.
 Formula: H(t_k) = sum_{j <= k} dH_j,
 dH_j ~ Be(c dH0_j, c(1 - dH0_j)).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 13.3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalbetaprocdef(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 13.3.
 }

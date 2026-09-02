@@ -104,6 +104,9 @@
 #' @references Schabenberger O, Gotway CA (2005), Sec 4.4.2, eq (4.26),
 #'   pp. 159-161. Cressie N, Hawkins DM (1980).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_cressie_hawkins(V, V)
 morie_cressie_hawkins <- function(coords, z, bins = NULL, cutoff = NULL,
                                   exact = FALSE, full_correction = FALSE) {
   pr <- .morie_sb_pairs(coords, z)
@@ -138,6 +141,9 @@ morie_cressie_hawkins <- function(coords, z, bins = NULL, cutoff = NULL,
 #' @references Schabenberger O, Gotway CA (2005), Sec 4.4.1, eq (4.24)
 #'   and (4.25), pp. 153-158.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_matheron_estimator(V, V)
 morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
                                      exact = FALSE) {
   pr <- .morie_sb_pairs(coords, z)
@@ -206,6 +212,9 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 #' @references Schabenberger O, Gotway CA (2005), Sec 4.5.3, eq (4.43)
 #'   and (4.44), pp. 169-172. Lindsay BG (1988).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_variogram_composite_likelihood(V, V)
 morie_variogram_composite_likelihood <- function(coords, z,
                                                  model = "exponential",
                                                  max_iter = 60L,
@@ -275,6 +284,8 @@ morie_variogram_composite_likelihood <- function(coords, z,
 #'   (5.51)-(5.53), pp. 263-266. Kackar RN, Harville DA (1984).
 #'   Prasad NGN, Rao JNK (1990).
 #' @export
+#' @examples
+#' morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kriging_pred_error <- function(coords, z, target,
                                      model = "exponential",
                                      nugget = NULL, psill = NULL,

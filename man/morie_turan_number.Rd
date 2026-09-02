@@ -26,9 +26,9 @@ The familiar \eqn{(1 - 1/r)n^2/2} is exact ONLY when \eqn{r} divides
 gives 33.33 against an exact 33. Both are returned so the looseness
 is visible.
 }
-\references{
-Turan P (1941). Bollobas B (2004), Ch VI.
-}
 \examples{
 morie_turan_number(n = 5L, r = 5L)
+}
+\references{
+Turan P (1941). Bollobas B (2004), Ch VI.
 }

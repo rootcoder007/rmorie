@@ -29,10 +29,10 @@ labelling is a named list keyed \code{"i,j"} and is validated against
 admissibility rather than trusted -- an improper labelling is
 exactly the case where the lemma is false, so it is refused loudly.
 }
+\examples{
+morie_sperner_lemma_triangle(subdivisions = 5L)
+}
 \references{
 Sperner E (1928) \emph{Abh Math Sem Univ Hamburg}
 6:265-272.
-}
-\examples{
-morie_sperner_lemma_triangle(subdivisions = 5L)
 }

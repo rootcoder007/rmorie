@@ -51,15 +51,15 @@ Gaussian or logistic one (Section 2.2): pi(z_u) = softmax(f(z_u)) and
 log p(x_u|z_u) = sum_i x_ui log pi_i(z_u), which spends a fixed
 probability budget on the items the model believes will be clicked.
 The objective is the beta-annealed bound of Eq. (5),
-L_beta = E_q[log p(x_u|z)] - beta KL(q(z|x_u) || p(z)), with beta < 1
+L_beta = E_q\link{log p(x_u|z)} - beta KL(q(z|x_u) || p(z)), with beta < 1
 the partial regularisation of Section 2.2.2.
 
 The encoder input is the L2-normalised log(1 + x_u) transform of
 Section 2.2, not the raw counts.
 
 RANKING. Recall@K and truncated NDCG@K are the Section 4.1
-definitions: Recall@K = sum_{r<=K} I[w(r) in I_u] / min(K, |I_u|) and
-DCG@K = sum_{r<=K} (2^{I[w(r) in I_u]} - 1)/log2(r+1). Ties are broken
+definitions: Recall@K = sum_{r<=K} I\link{w(r) in I_u} / min(K, |I_u|) and
+DCG@K = sum_{r<=K} (2^{I\link{w(r) in I_u}} - 1)/log2(r+1). Ties are broken
 by ascending item index in both language arms -- R scans a matrix
 column-major and Python row-major, so an unpinned tie rule is a real
 parity hazard.

@@ -25,11 +25,11 @@ sigma2 | y ~ IG((n-p-1)/2, (n-p-1) s2 / 2) and
 beta | sigma2, y ~ N(beta-hat, sigma2 (X'X)^-1), with beta-hat the OLS
 estimator and s2 = y'(I - H)y/(n - p - 1).
 }
+\examples{
+Msm042(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eqs. (6.1)-(6.2) p.172. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm042(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = 5L)
 }

@@ -21,7 +21,7 @@ List with \code{estimate}, \code{brier_score},
 \code{method}.
 }
 \description{
-E[(I(T > t) - S(t|X))^2] with inverse-probability-of-censoring
+E\link{(I(T > t) - S(t|X))^2} with inverse-probability-of-censoring
 weights.  A thin alias for \code{Brier}; the estimator already exists
 and is not duplicated here.
 }

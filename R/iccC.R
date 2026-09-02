@@ -16,6 +16,8 @@
 #' @references Shrout & Fleiss (1979) Psychol Bull 86:420-428; McGraw &
 #'   Wong (1996) Psychol Methods 1:30-46.
 #' @export
+#' @examples
+#' IccC(y = c(1, 2, 3, 4, 5, 6, 7, 8), subject = c(1, 2, 3, 4, 5, 6, 7, 8), rater = c(1, 2, 3, 4, 5, 6, 7, 8))
 IccC <- function(y, subject, rater) {
   ms <- .s4_icc_ms(y, subject, rater)
   den <- ms$ms_r + (ms$k - 1) * ms$ms_e

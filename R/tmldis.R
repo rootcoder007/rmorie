@@ -16,6 +16,8 @@
 #' @references VanderWeele, T. J. & Robinson, W. R. (2014). Epidemiology
 #'   25:473-484.
 #' @export
+#' @examples
+#' Tmldis(y = c(1, 2, 3, 4, 5, 6, 7, 8), S_grp = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmldis <- function(y, S_grp, X, X_target = NULL) {
   yv <- as.numeric(y); Sv <- as.numeric(S_grp); n <- length(yv)
   W <- cbind(1, as.matrix(X))

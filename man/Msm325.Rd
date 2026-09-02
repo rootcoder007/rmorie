@@ -25,12 +25,12 @@ used as the splitting criterion in the truncated part of the forest. With
 LL+(left) + LL+(right).
 }
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm325(V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (15.2) p.651 and p.652. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm325(V)
 }

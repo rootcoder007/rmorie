@@ -28,14 +28,14 @@ Optimisation is Frank-Wolfe with a FIXED step schedule 2/(t + 2).
 Formula: Psi_SL(W) = sum_k alpha_k Psi_k(W),
 alphahat = argmin over the simplex of sum_i (Y_i - (Z alpha)_i)^2
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Superlrn(V, V)
+}
 \references{
 van der Laan, Polley & Hubbard (2007), Super Learner, UC
 Berkeley Division of Biostatistics Working Paper 222. That PDF could
 not be downloaded (the bepress endpoint returned an empty body); the
 construction is taken from Polley's dissertation, Super Learner, UC
 Berkeley (escholarship qt4qn0067v), fetched in full.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Superlrn(V, V)
 }

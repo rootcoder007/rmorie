@@ -30,12 +30,12 @@ slipping; c = 0 and d = 1 recovers the two-parameter logistic exactly.
 \details{
 Formula: P = c + (d - c) / (1 + exp(-a(theta - b))).
 }
+\examples{
+Irt4pl(y = c(1, 0, 1), theta = c(0.5, -0.5, 1), a = 1, b = 0, c = 0.1, d = 0.95)
+}
 \references{
 Lord (1980), Applications of Item Response Theory to
 Practical Testing Problems, Lawrence Erlbaum, ch. 2; Barton and
 Lord (1981), ETS Research Report RR-81-20.
 \doi{10.1002/j.2333-8504.1981.tb01255.x}
-}
-\examples{
-Irt4pl(y = c(1, 0, 1), theta = c(0.5, -0.5, 1), a = 1, b = 0, c = 0.1, d = 0.95)
 }

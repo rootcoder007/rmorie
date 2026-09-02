@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Examples 11.4 and 11.16.
 #' @export
+#' @examples
+#' Ghosalseriesgp()
 Ghosalseriesgp <- function(x = 0.3, y = 0.7, n_terms = 60) {
   n_terms <- as.integer(n_terms)
   if (n_terms < 3L) stop("n_terms must be at least 3")

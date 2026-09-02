@@ -16,6 +16,9 @@
 #'   \code{S}, \code{n}.
 #' @references Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Loopr(V)
 Loopr <- function(log_lik) {
   L <- as.matrix(log_lik); Sn <- nrow(L); n <- ncol(L)
   W <- matrix(0, Sn, n); ks <- numeric(n)

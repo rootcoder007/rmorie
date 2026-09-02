@@ -21,6 +21,9 @@
 #'   contain the rank-sum test; the full text of the book was fetched and
 #'   searched to establish that.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ranksum(V, V)
 Ranksum <- function(x, y, correct = TRUE) {
   x <- .t1_vec(x); y <- .t1_vec(y)
   n1 <- length(x); n2 <- length(y)

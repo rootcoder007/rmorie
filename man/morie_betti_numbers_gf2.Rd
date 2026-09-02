@@ -23,10 +23,10 @@ rank exact by mod-2 elimination. Before any rank is trusted,
 the Euler-Poincare identity is computed from both sides
 independently and compared.
 }
-\references{
-Munkres JR (1984) \emph{Elements of Algebraic Topology}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_betti_numbers_gf2(V)
+}
+\references{
+Munkres JR (1984) \emph{Elements of Algebraic Topology}.
 }

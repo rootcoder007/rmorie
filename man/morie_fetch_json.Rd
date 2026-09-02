@@ -10,7 +10,7 @@ morie_fetch_json(txt, simplify = TRUE)
 \item{txt}{A single JSON string (or raw vector).}
 
 \item{simplify}{Simplify arrays to vectors / data frames
-(default TRUE, mirroring \code{jsonlite::fromJSON}).}
+(default TRUE, mirroring \code{.s03json_fromJSON}).}
 }
 \value{
 The parsed R object.

@@ -22,6 +22,8 @@
 #' @references Peto, R. et al. (1977). British Journal of Cancer
 #'   35(1):1-39. \doi{10.1038/bjc.1977.1}.
 #' @export
+#' @examples
+#' Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mapeto <- function(a, b, c, d, level = 0.95) {
   A <- as.numeric(a); B <- as.numeric(b)
   C <- as.numeric(c); D <- as.numeric(d)

@@ -36,12 +36,12 @@ repeats until the residual has fewer than three extrema or
 \code{max_imf} IMFs have been taken.  Endpoints are appended to both
 extremum sets so the envelopes span the record.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Emdtsm(V)
+}
 \references{
 Huang, Shen, Long, Wu, Shih, Zheng, Yen, Tung & Liu
 (1998), Proc. R. Soc. Lond. A 454(1971):903-995,
 doi:10.1098/rspa.1998.0193.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Emdtsm(V)
 }

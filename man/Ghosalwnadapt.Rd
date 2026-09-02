@@ -33,10 +33,10 @@ Formula: p_k = 1 / (1 + exp(l_0 - l_1)) with
 l_1 = log(pi) + log phi(y_k; 0, 1/n + tau2),
 l_0 = log(1 - pi) + log phi(y_k; 0, 1/n).
 }
+\examples{
+Ghosalwnadapt()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.3.2.
-}
-\examples{
-Ghosalwnadapt()
 }

@@ -21,6 +21,8 @@
 #' @references Genevay, A., Cuturi, M., Peyre, G. and Bach, F. (2016).
 #'   Advances in Neural Information Processing Systems 29:3440-3448.
 #' @export
+#' @examples
+#' Otreg(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Otreg <- function(a, b, C, epsilon, max_iter = 200) {
   aa <- .ot_hist(a); bb <- .ot_hist(b)
   Cm <- as.matrix(C)

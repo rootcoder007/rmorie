@@ -33,13 +33,13 @@ standard AIPW contrast and the estimator is
 makes every \code{h_t} equal and the estimator collapses to the
 unweighted AIPW mean.
 }
+\examples{
+set.seed(1)
+r <- Drbnk(y = rnorm(10), D_t = rnorm(10)); TRUE
+}
 \references{
 Hadad, V., Hirshberg, D. A., Zhan, R., Wager, S. and
 Athey, S. (2021). Confidence intervals for policy evaluation in
 adaptive experiments. PNAS 118(15), e2014602118; arXiv:1911.02768
 equation (12).
-}
-\examples{
-set.seed(1)
-r <- Drbnk(y = rnorm(10), D_t = rnorm(10)); TRUE
 }

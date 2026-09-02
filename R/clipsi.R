@@ -33,6 +33,9 @@
 #' @references Radford et al. (2021), Learning Transferable Visual
 #'   Models From Natural Language Supervision, ICML 139:8748-8763.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Clipsi(V, V)
 Clipsi <- function(I_emb, T_emb, tau = 0.01) {
   I <- .s03mat(I_emb); TT <- .s03mat(T_emb)
   n <- nrow(I)

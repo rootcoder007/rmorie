@@ -23,6 +23,8 @@
 #'   (2014). Epidemiology 25:300-306; VanderWeele (2014) Epidemiology
 #'   25:749-761.
 #' @export
+#' @examples
+#' Intvse(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
 Intvse <- function(Y, X, M, Cc = NULL, a = 1, astar = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- a - astar

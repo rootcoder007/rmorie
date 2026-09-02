@@ -25,12 +25,12 @@ e_t = (w_t - mu) - sum_i phi_i (w_{t-i} - mu) - sum_j theta_j e_{t-j}
 on w = (1-B)^d y with zero presample innovations; CSS = sum e_t^2 and
 logLik = -(m/2)(1 + log(2 pi) + log(CSS/m)).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Arimacss(V)
+}
 \references{
 Box and Jenkins (1970), Time Series Analysis: Forecasting
 and Control, Chapters 4 and 7.  Standard published form; the
 monograph is not in the local corpus and was not read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Arimacss(V)
 }

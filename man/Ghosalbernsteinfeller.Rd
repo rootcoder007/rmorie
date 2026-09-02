@@ -7,9 +7,9 @@
 Ghosalbernsteinfeller(x, F = NULL, K = 30)
 }
 \arguments{
-\item{x}{Evaluation points; clipped to [0, 1].}
+\item{x}{Evaluation points; clipped to \link{0, 1}.}
 
-\item{F}{A CDF on [0, 1]; t^2 when NULL.}
+\item{F}{A CDF on \link{0, 1}; t^2 when NULL.}
 
 \item{K}{Bernstein degree, at least 1.}
 }
@@ -27,11 +27,11 @@ CDFs, which is why it turns a prior on the finite vector
 Formula: as displayed; the reported error is the sup over the supplied
 points of |F_K(x) - F(x)|.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.3.4.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalbernsteinfeller(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.3.4.
 }

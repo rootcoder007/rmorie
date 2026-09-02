@@ -34,13 +34,13 @@ As \code{eps} tends to zero the accepted draws tend to the exact
 posterior and the acceptance rate tends to zero, which is the
 trade-off the method is built around.
 }
-\references{
-Pritchard, J. K. et al. (1999). Population growth of
-human Y chromosomes. Molecular Biology and Evolution, 16(12),
-1791-1798.
-}
 \examples{
 prior <- list(c(-2, 2))
 sim <- function(theta, rng) theta[1]
 morie_abcrej(sim, obs = 0.5, eps = 0.5, prior, n_draws = 200)
+}
+\references{
+Pritchard, J. K. et al. (1999). Population growth of
+human Y chromosomes. Molecular Biology and Evolution, 16(12),
+1791-1798.
 }

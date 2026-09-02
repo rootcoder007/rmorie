@@ -29,17 +29,17 @@ compared across loci, whereas D' reaches 1 exactly when one
 haplotype is absent.  Note the sign convention, which is the one
 genetics::LD uses and is easy to misread: \eqn{D_{min}} is negative,
 so dividing a negative D by it gives a positive D'.  \code{estimate}
-is therefore the normalised magnitude in [0, 1] and the direction is
-carried by the sign of \code{D}; sources that put D' on [-1, 1] mean
+is therefore the normalised magnitude in \link{0, 1} and the direction is
+carried by the sign of \code{D}; sources that put D' on \link{-1, 1} mean
 \code{sign(D) * estimate}.  Genotypes are
 unphased, so only the double heterozygote is ambiguous; it is
 resolved by EM run for a fixed 500 iterations with no convergence
 test, so the answer is deterministic and identical in both arms.
 }
-\references{
-Lewontin (1964), Genetics 49:49-67.  The Genetics PDF at PMC could not be retrieved from this host (the fetch returned a 1.8 kB error page), so the coded form was read from Warnes and Leisch's CRAN package genetics, R/LD.R, which gives Dmin, Dmax and estDp verbatim.  genetics maximises the same likelihood with optimize(); a fixed-iteration EM is used here because a golden-section search is not reproducible across language arms.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Dprime(V, V)
+}
+\references{
+Lewontin (1964), Genetics 49:49-67.  The Genetics PDF at PMC could not be retrieved from this host (the fetch returned a 1.8 kB error page), so the coded form was read from Warnes and Leisch's CRAN package genetics, R/LD.R, which gives Dmin, Dmax and estDp verbatim.  genetics maximises the same likelihood with optimize(); a fixed-iteration EM is used here because a golden-section search is not reproducible across language arms.
 }

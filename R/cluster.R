@@ -20,6 +20,9 @@
 #'   so the standard published form is used; the finite-population factor
 #'   (M - m)/M matches the convention of the sibling Cochran modules.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Clus1(V)
 Clus1 <- function(Y, M = Inf, level = 0.95) {
   Y <- as.matrix(Y)
   m <- nrow(Y); k <- ncol(Y)

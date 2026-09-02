@@ -23,6 +23,8 @@
 #'   Heesterbeek and Metz (1990), Journal of Mathematical Biology
 #'   28(4):365-382. \doi{10.1007/BF00178324}
 #' @export
+#' @examples
+#' Hetmix(contact_matrix = 5L, gamma = 0.5)
 Hetmix <- function(contact_matrix, gamma, iters = 2000, tol = 1e-14) {
   C <- .s03mat(contact_matrix)
   n <- nrow(C)

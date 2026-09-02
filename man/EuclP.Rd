@@ -26,11 +26,11 @@ exact zero testing.
 Coefficients are ASCENDING: \code{c(c0, c1, c2)} means
 c0 + c1 x + c2 x^2.
 }
-\references{
-Knuth (1997), The Art of Computer Programming, Vol. 2:
-Seminumerical Algorithms, 3rd ed., sec. 4.6.1, Addison-Wesley.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 EuclP(V, V)
+}
+\references{
+Knuth (1997), The Art of Computer Programming, Vol. 2:
+Seminumerical Algorithms, 3rd ed., sec. 4.6.1, Addison-Wesley.
 }

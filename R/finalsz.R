@@ -26,6 +26,8 @@
 #'   115(772):700-721, doi:10.1098/rspa.1927.0118; Ma & Earn (2006),
 #'   Bull. Math. Biol. 68(3):679-702, doi:10.1007/s11538-005-9047-7.
 #' @export
+#' @examples
+#' Finalsz(R0 = 5L)
 Finalsz <- function(R0, s0 = 1, i0 = NULL, tol = 1e-14, max_iter = 200) {
   R0 <- as.numeric(R0); s0 <- as.numeric(s0)
   if (R0 < 0) stop("R0 must be non-negative")

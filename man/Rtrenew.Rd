@@ -19,10 +19,10 @@ List with \code{rt}, \code{time}, \code{infections}, \code{shift}, \code{mean_rt
 \description{
 Formula: I_t = R_t sum_{tau=1}^{gmax} g(tau) I_{t-tau}, so R_t = I_t / sum_tau g(tau) I_{t-tau}
 }
-\references{
-Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_{t-tau} and the delay convolution D_t = xi sum_tau xi(tau) I_{t-tau}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Rtrenew(V, V)
+}
+\references{
+Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_{t-tau} and the delay convolution D_t = xi sum_tau xi(tau) I_{t-tau}.
 }

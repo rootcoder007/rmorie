@@ -21,6 +21,9 @@
 #'   form as equation (2.13) and the paragraph beneath it in Molinari, F.
 #'   (2021), Handbook of Econometrics 7A (arXiv:2004.11751 pp. 18-19).
 #' @export
+#' @examples
+#' set.seed(1)
+#' Bndpos(y = rnorm(40), D = rbinom(40, 1, 0.5), y_max = 3)
 Bndpos <- function(y, D, y_max) {
   z <- .bnd_yd(y, D, "Bndpos")
   ymax <- as.numeric(y_max)[1]

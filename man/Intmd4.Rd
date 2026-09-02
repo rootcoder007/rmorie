@@ -37,10 +37,10 @@ Formula: \code{TE = CDE + INTref + INTmed + PIE} from
 \code{Y = th0 + th1 a + th2 m + th3 a m + th4'c} and
 \code{M = b0 + b1 a + b2'c}.
 }
+\examples{
+Intmd4(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 VanderWeele, T. J. (2014). A unification of mediation and
 interaction: a 4-way decomposition. Epidemiology 25:749-761.
-}
-\examples{
-Intmd4(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

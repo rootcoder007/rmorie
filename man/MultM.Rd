@@ -36,13 +36,13 @@ products are no longer the natural indirect effects and the sum no
 longer decomposes the total effect. This routine computes the
 parallel-model quantities; it does not test the assumption.
 }
+\examples{
+MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Daniel, De Stavola, Cousens and Vansteelandt (2015),
 Biometrics 71(1), 1-14, \doi{10.1111/biom.12248}, verified against
 Crossref; VanderWeele (2015), Explanation in Causal Inference, OUP,
 ch. 5. Neither source was in the local corpus; the
 parallel-mediator products above are the standard published form.
-}
-\examples{
-MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

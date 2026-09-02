@@ -28,11 +28,11 @@ Determinism: fixed number of reweighting sweeps, no tolerance.
 Formula: \code{w(r) = (1 - (r/c)^2)^2} for \code{|r| <= c}, else 0,
 with \code{r = (y - mu)/s} and s the consistency-scaled MAD.
 }
-\references{
-Beaton, A. E. & Tukey, J. W. (1974). Technometrics
-16:147-185.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Tukeyw(V)
+}
+\references{
+Beaton, A. E. & Tukey, J. W. (1974). Technometrics
+16:147-185.
 }

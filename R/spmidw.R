@@ -28,6 +28,16 @@
 #' @references Bivand, R. S., Pebesma, E., and Gomez-Rubio, V. (2013)
 #'   Applied Spatial Data Analysis with R, 2nd ed., Springer, Sec. 8.3.1.
 #' @export
+#' @examples
+#' g <- 0:4
+#' C <- as.matrix(expand.grid(x = g, y = g))
+#' idw_fixture <- function() {
+#'     g <- 0:4
+#'     C <- as.matrix(expand.grid(x = g, y = g))
+#'     list(C = C, z = exp(sin(C[, 1] * 0.6) + cos(C[, 2] * 0.4)))
+#' }
+#' f <- idw_fixture()
+#' spmidw(f$C, f$z, f$C[4, ])
 spmidw <- function(coords, z, target, power = 2) {
   coords <- as.matrix(coords)
   z <- as.numeric(z)

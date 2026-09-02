@@ -32,12 +32,12 @@ shuffled.  The objective is the binary cross-entropy of that
 discriminator, so at M = 0 every score is 1/2 and the loss is exactly
 log 2 -- the value that pins the sign convention.
 }
-\references{
-Velickovic et al. (2019), Deep Graph Infomax, ICLR 2019.
-}
 \examples{
 set.seed(1)
 G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 X <- matrix(rnorm(6), 3, 2)
 Dgi(G, X)
+}
+\references{
+Velickovic et al. (2019), Deep Graph Infomax, ICLR 2019.
 }

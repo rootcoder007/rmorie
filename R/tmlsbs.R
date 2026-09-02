@@ -25,6 +25,8 @@
 #' @references Hubbard, A. E., Kherad-Pajouh, S. & van der Laan, M. J.
 #'   (2016). International Journal of Biostatistics 12(1):3-19.
 #' @export
+#' @examples
+#' Tmlsbs(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlsbs <- function(y, D, X) {
   yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
   if (n < 8L || length(Dv) != n)

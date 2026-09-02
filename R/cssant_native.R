@@ -110,6 +110,10 @@
 #'   Difference-in-differences with multiple time periods. Journal of
 #'   Econometrics, 225(2), 200-230.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' S <- c("a", "b", "c")
+#' morie_grouptimeatt(V, S)
 morie_grouptimeatt <- function(Y, g, control = "notyet") {
   n <- nrow(Y); T <- ncol(Y)
   out <- list()
@@ -220,6 +224,15 @@ morie_aggregateatt <- function(gt, g, n_units, weights_by = "cohort_size") {
 #'   Difference-in-differences with multiple time periods. Journal of
 #'   Econometrics, 225(2), 200-230.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nu <- 6; T <- 5
+#' unit <- rep(1:nu, each = T)
+#' time <- rep(1:T, nu)
+#' ft <- rep(c(Inf, Inf, Inf, 4, 4, 3), each = T)
+#' D <- as.integer(time >= ft)
+#' y <- rnorm(nu * T) + D * 1.5
+#' morie_cssant(y, D, unit, time)
 morie_cssant <- function(y, D, unit, time, cohort = NULL,
                          control = "notyet") {
   if (!(control %in% c("notyet", "never")))

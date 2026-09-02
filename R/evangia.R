@@ -18,6 +18,9 @@
 #' @references Einmahl, de Haan & Sinha (1997), Stoch. Proc. Appl.
 #'   70(2):143-171.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Evangia(matrix(rnorm(40), 20, 2), k = 2)
 Evangia <- function(X, k) {
   M <- .s03mat(X)
   n <- nrow(M)

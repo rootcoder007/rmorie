@@ -23,6 +23,10 @@
 #'   Point Patterns, 2nd edition, Arnold; section 2.3 defines G and
 #'   section 4.3 the border correction.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Nndist(M, V)
 Nndist <- function(coords, r_grid, window = NULL) {
   p <- as.matrix(coords)
   n <- nrow(p)

@@ -19,12 +19,12 @@ Returns \eqn{\alpha H_n = \alpha \sum_{i=1}^{n} 1 / i}, the expected
 number of distinct features ("dishes") sampled by \code{n} customers
 in a one-parameter Indian buffet process.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_ibp_expected_dishes(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_ibp_expected_dishes(V, V)
 }

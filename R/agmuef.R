@@ -17,6 +17,8 @@
 #'   arXiv:1911.08265, Equation (2) and the paragraph after Equation (4).
 #'   Read from the ar5iv rendering of the arXiv source.
 #' @export
+#' @examples
+#' Mzpuct(Q = 0.5, N = 5L, P = 0.5)
 Mzpuct <- function(Q, N, P, c1 = 1.25, c2 = 19652, qmin = NULL,
                    qmax = NULL) {
   Q <- .t1_vec(Q); N <- .t1_vec(N); P <- .t1_vec(P)

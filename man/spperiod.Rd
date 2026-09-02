@@ -42,10 +42,10 @@ the largest discrepancy returned; it should sit at machine precision.
 That check pins the \eqn{(2\pi)^2} normalisation, which the placeholder
 this replaces had dropped in favour of \eqn{1/n}.
 }
-\references{
-Schabenberger Ch 4, Sec 4.7.1, eqs (4.56)-(4.59), pp. 190-192
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 spperiod(M)
+}
+\references{
+Schabenberger Ch 4, Sec 4.7.1, eqs (4.56)-(4.59), pp. 190-192
 }

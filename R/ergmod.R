@@ -30,6 +30,9 @@
 #'   Computational and Graphical Statistics 15(3):565-583,
 #'   doi:10.1198/106186006X133069.
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' Ergmod(G, statistics = "edges", iters = 20)
 Ergmod <- function(G, statistics = "edges", theta_init = NULL, iters = 100,
                    tol = 1e-11) {
   SUP <- c("edges", "twostar", "triangle")

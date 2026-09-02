@@ -21,6 +21,8 @@
 #' @return The RDP epsilon at \code{alpha}.
 #' @references Mironov, Talwar & Zhang (2019), arXiv:1908.10530.
 #' @export
+#' @examples
+#' morie_rdp_sampled_gaussian(2, 0.01, 1.0)
 morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
   a <- as.numeric(alpha)[1]
   if (a != floor(a))
@@ -65,6 +67,8 @@ morie_rdp_sampled_gaussian <- function(alpha, q, sigma) {
 #' @param steps Number of composed steps.
 #' @return The composed RDP epsilon.
 #' @export
+#' @examples
+#' morie_rdp_compose(2, 0.01, 1.0, steps = 100)
 morie_rdp_compose <- function(alpha, q, sigma, steps = 1) {
   t <- as.integer(steps)[1]
   if (t < 1) stop("morie_rdp_compose: steps must be at least 1")
@@ -85,6 +89,9 @@ morie_rdp_compose <- function(alpha, q, sigma, steps = 1) {
 #'   converted \code{epsilon} and the \code{best_alpha}.
 #' @references Mironov, Talwar & Zhang (2019), arXiv:1908.10530.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rdpcomp(V, V)
 morie_rdpcomp <- function(q, sigma, alpha = NULL, steps = 1, delta = NULL) {
   orders <- if (is.null(alpha)) 2:64 else as.integer(as.numeric(alpha))
   if (length(orders) < 1)

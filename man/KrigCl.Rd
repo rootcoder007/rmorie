@@ -33,10 +33,10 @@ As \code{\link{Krig}}.
 The same estimator as \code{\link{Krig}} and \code{\link{Krigsm}};
 delegates rather than carrying a second copy of the solver.
 }
+\examples{
+KrigCl(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Matheron (1963), Principles of geostatistics, Economic
 Geology 58(8):1246-1266, \doi{10.2113/gsecongeo.58.8.1246}.
-}
-\examples{
-KrigCl(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -16,6 +16,9 @@
 #' @references Zhang, Y. & Skolnick, J. (2004). Proteins 57:702-710,
 #'   equations (2) and (3).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tmscore(V, V)
 Tmscore <- function(coords1, coords2, l_ref = NULL) {
   A <- as.matrix(coords1); B <- as.matrix(coords2); L <- nrow(A)
   Lr <- if (is.null(l_ref)) L else as.numeric(l_ref)

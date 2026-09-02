@@ -25,11 +25,11 @@ Formula: generalised Pareto fitted to the largest
 \code{M = min(0.2 S, 3 sqrt(S))} weights by the Zhang-Stephens rule;
 k is its shape.
 }
-\references{
-Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58;
-Zhang & Stephens (2009) Technometrics 51:316-325.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Khatd(V)
+}
+\references{
+Vehtari, Simpson, Gelman, Yao & Gabry (2024) JMLR 25:1-58;
+Zhang & Stephens (2009) Technometrics 51:316-325.
 }

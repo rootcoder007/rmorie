@@ -20,12 +20,12 @@ probability of stopping at index \code{j} given survival past
 \code{j - 1}. When the remaining mass has underflowed (below
 \code{1e-300}) the hazard is set to 1 rather than dividing by zero.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_discrete_hazard(V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_discrete_hazard(V)
 }

@@ -18,6 +18,8 @@
 #' @references Hernan MA, Robins JM (2020). *Causal Inference: What
 #'   If*. Chapman & Hall/CRC, Ch. 15.
 #' @export
+#' @examples
+#' morie_att_weights(c(1, 0, 0), c(0.5, 0.25, 0.5))
 morie_att_weights <- function(treat, ps) {
   treat <- as.numeric(treat)
   ps <- as.numeric(ps)
@@ -50,6 +52,13 @@ morie_att_weights <- function(treat, ps) {
 #' @references Firpo S (2007). Efficient semiparametric estimation of
 #'   quantile treatment effects. *Econometrica* 75(1), 259-276.
 #' @export
+#' @examples
+#' n <- 3000
+#' x <- stats::rnorm(n)
+#' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
+#' tr <- as.numeric(stats::runif(n) < e)
+#' y <- x + stats::rnorm(n) + 3 * tr
+#' morie_qte_firpo(y, tr, e, tau = c(0.25, 0.5, 0.75))
 morie_qte_firpo <- function(y, treat, ps, tau = 0.5) {
   y <- as.numeric(y)
   treat <- as.numeric(treat)
@@ -86,6 +95,15 @@ morie_qte_firpo <- function(y, treat, ps, tau = 0.5) {
 #' @return List with `EY1`, `EY0`, `ate`, `n`.
 #' @references Robins JM (1986). *Mathematical Modelling* 7, 1393-1512.
 #' @export
+#' @examples
+#' n <- 3000
+#' x <- stats::rnorm(n)
+#' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
+#' tr <- as.numeric(stats::runif(n) < e)
+#' y <- x + stats::rnorm(n) + 3 * tr
+#' L <- stats::rnorm(n)
+#' a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
+#' morie_g_formula(y, a, L)
 morie_g_formula <- function(y, a, l) {
   y <- as.numeric(y)
   a <- as.numeric(a)
@@ -118,6 +136,9 @@ morie_g_formula <- function(y, a, l) {
 #' @return List with `statistic`, `p_value`, `df`, `n`.
 #' @references Granger CWJ (1969). *Econometrica* 37(3), 424-438.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_granger_test(V, V)
 morie_granger_test <- function(x, y, p = 1L) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -162,6 +183,9 @@ morie_granger_test <- function(x, y, p = 1L) {
 #' @references Barnett L, Barrett AB, Seth AK (2009). *Physical Review
 #'   Letters* 103(23), 238701.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_transfer_entropy_gaussian(V, V)
 morie_transfer_entropy_gaussian <- function(x, y, lag = 1L) {
   g <- morie_granger_test(x, y, p = lag)
   n <- length(y)
@@ -198,6 +222,8 @@ morie_transfer_entropy_gaussian <- function(x, y, lag = 1L) {
 #' @references Hayes AF (2022). *Introduction to Mediation,
 #'   Moderation, and Conditional Process Analysis*, 3rd ed., Ch. 5.
 #' @export
+#' @examples
+#' morie_serial_mediation(x = c(1, 2, 3, 4, 5, 6, 7, 8), m1 = c(1, 2, 3, 4, 5, 6, 7, 8), m2 = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_serial_mediation <- function(x, m1, m2, y) {
   x <- as.numeric(x)
   m1 <- as.numeric(m1)
@@ -237,6 +263,16 @@ morie_serial_mediation <- function(x, m1, m2, y) {
 #' @references Cameron AC, Miller DL (2015). *Journal of Human
 #'   Resources* 50(2), 317-372.
 #' @export
+#' @examples
+#' n <- 3000
+#' x <- stats::rnorm(n)
+#' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
+#' tr <- as.numeric(stats::runif(n) < e)
+#' y <- x + stats::rnorm(n) + 3 * tr
+#' L <- stats::rnorm(n)
+#' a <- as.numeric(stats::runif(n) < 1/(1 + exp(-1.5 * L)))
+#' morie_g_formula(y, a, L)
+#' morie_cluster_robust_effect(y = y, d = a, cluster = e)
 morie_cluster_robust_effect <- function(y, d, cluster) {
   y <- as.numeric(y)
   d <- as.numeric(d)
@@ -282,6 +318,8 @@ morie_cluster_robust_effect <- function(y, d, cluster) {
 #' @references Gibbons JD, Chakraborti S (2011). *Nonparametric
 #'   Statistical Inference*, 5th ed., Sec. 12.5.
 #' @export
+#' @examples
+#' morie_partial_tau(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), z = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_partial_tau <- function(x, y, z) {
   x <- as.numeric(x)
   y <- as.numeric(y)

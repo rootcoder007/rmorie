@@ -88,7 +88,7 @@ test_that("morie_fetch_tps errors on an unknown category", {
 
 test_that("morie_fetch_tps writes a CSV from a mocked ArcGIS layer", {
   testthat::local_mocked_bindings(
-    fromJSON = function(txt, ...) {
+    .morie_from_json = function(txt, ...) {
       list(
         features = list(
           list(
@@ -108,8 +108,7 @@ test_that("morie_fetch_tps writes a CSV from a mocked ArcGIS layer", {
         ),
         exceededTransferLimit = FALSE
       )
-    },
-    .package = "jsonlite"
+    }
   )
   cdir <- tempfile("tps-")
   out <- morie_fetch_tps("Assault", cache_dir = cdir, overwrite = TRUE)

@@ -22,6 +22,8 @@
 #'   Nonparametric Bayesian Inference, CUP, Example 11.8,
 #'   eqs. (11.3)-(11.4).
 #' @export
+#' @examples
+#' Ghosalstatgpspec()
 Ghosalstatgpspec <- function(h = 0.6, n_grid = 4000, lam_max = 30) {
   n_grid <- as.integer(n_grid)
   if (n_grid < 1L) stop("n_grid must be positive")

@@ -46,11 +46,11 @@ whatever the user has rated, and rank by similarity to users with
 matching metadata.  The cold/warm decision is reported so it can be
 audited separately from the ranking.
 }
-\references{
-Schein, Popescul, Ungar & Pennock (2002), Methods and
-Metrics for Cold-Start Recommendations, SIGIR 2002:253-260.
-}
 \examples{
 R <- matrix(c(5, 3, 0, 4, 0, 2, 0, 5, 3, 4, 4, 5), 4, 3, byrow = TRUE)
 ColE(user = 1, mode = "popular", R = R, min_ratings = 1)
+}
+\references{
+Schein, Popescul, Ungar & Pennock (2002), Methods and
+Metrics for Cold-Start Recommendations, SIGIR 2002:253-260.
 }

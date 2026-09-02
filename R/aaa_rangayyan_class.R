@@ -135,6 +135,7 @@
 #' @param ... Passed through.
 #' @return A numeric value.
 #' @export
+#' @method as.double morie_frac
 as.double.morie_frac <- function(x, ...) x$n / x$d
 #' as.numeric.morie_frac
 #'
@@ -169,6 +170,11 @@ format.morie_frac <- function(x, ...) paste0(x$n, "/", x$d)
 #' @return The value of \code{cat}.
 #' @export
 print.morie_frac <- function(x, ...) cat(format(x), "\n")
+#' Equality of exact rationals
+#' @param e1,e2 rationals (or numbers coerced with \code{.morie_rg_asfrac}).
+#' @return A logical scalar.
+#' @export
+#' @method == morie_frac
 "==.morie_frac" <- function(e1, e2) {
   a <- .morie_rg_asfrac(e1)
   b <- .morie_rg_asfrac(e2)

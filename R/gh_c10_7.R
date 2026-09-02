@@ -26,6 +26,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, sections 10.4 and 10.4.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalfrsdensity(V)
 Ghosalfrsdensity <- function(x, grid = NULL, K = NULL, s = NULL,
                              seed = 0, n_draws = 150) {
   xv <- as.numeric(x)

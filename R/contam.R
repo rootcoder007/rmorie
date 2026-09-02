@@ -43,6 +43,9 @@
 #'   \code{mean}, \code{var}, \code{eps}, \code{n_H}, \code{method}.
 #' @references Huber (1964), Ann. Math. Statist. 35(1):73-101.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Contam(epsilon = 0.5, H = rnorm(10)); TRUE
 Contam <- function(epsilon, H, x = NULL) {
   eps <- as.numeric(epsilon)
   if (!(eps >= 0 && eps < 1)) stop("epsilon must lie in [0, 1)")

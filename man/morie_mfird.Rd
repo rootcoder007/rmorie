@@ -27,11 +27,11 @@ reduces to the inverse of Reckase Eq. 2.28 for m = 1), thresholds
 tau_i = -d_i / sqrt(1 + a_i P a_i') per Eq. 6.12; the inverse map
 is a_il = lambda_il / sqrt(1 - lambda_i R lambda_i').
 }
-\references{
-Reckase, M. D. (2009). Multidimensional Item Response
-Theory. Springer.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_mfird(V)
+}
+\references{
+Reckase, M. D. (2009). Multidimensional Item Response
+Theory. Springer.
 }

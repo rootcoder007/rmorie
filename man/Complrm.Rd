@@ -18,12 +18,12 @@ List with \code{clr_mean}, \code{center}, \code{sum_clr_mean},
 \description{
 Formula: mean clr = (1/n) sum_k clr(x_k); centre = clr^-1(mean clr)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Complrm(V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4. Consistent with the sibling module aitcen in this
 package, whose centre is the closed vector of column geometric means.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Complrm(V)
 }

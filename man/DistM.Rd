@@ -31,10 +31,10 @@ relation is unrepresentable. That is what ComplEx was written to fix.
 \details{
 Formula: \code{score = <h, r, t> = sum_k h_k r_k t_k}.
 }
-\references{
-Yang, Yih, He, Gao & Deng (2015). ICLR 2015, equation (3).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 DistM(V, V)
+}
+\references{
+Yang, Yih, He, Gao & Deng (2015). ICLR 2015, equation (3).
 }

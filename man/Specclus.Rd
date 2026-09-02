@@ -33,16 +33,16 @@ Formula: L = T - W (or L_sym = T^-1/2 L T^-1/2); U = the k eigenvectors
 of smallest eigenvalue; normalized: rows of U scaled to unit norm;
 cluster the rows of U by k-means
 }
-\references{
-von Luxburg (2007), A Tutorial on Spectral Clustering,
-Statistics and Computing 17(4), 395-416. Fetched from
-arXiv:0711.0189. Lloyd (1982), IEEE Transactions on Information
-Theory 28(2), 129-137, for the k-means step.
-}
 \examples{
 set.seed(1)
 W <- matrix(runif(36), 6, 6)
 W <- (W + t(W)) / 2
 diag(W) <- 0
 Specclus(W, k = 2)
+}
+\references{
+von Luxburg (2007), A Tutorial on Spectral Clustering,
+Statistics and Computing 17(4), 395-416. Fetched from
+arXiv:0711.0189. Lloyd (1982), IEEE Transactions on Information
+Theory 28(2), 129-137, for the k-means step.
 }

@@ -20,6 +20,9 @@
 #'   Prediction, Springer, eq. (14.2) p.579,
 #'   \doi{10.1007/978-3-030-89010-0}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Msm262(V, V)
 Msm262 <- function(t, beta_coef, kind = "fourier", period = NULL) {
   Basexp(t, beta_coef, kind, period)
 }

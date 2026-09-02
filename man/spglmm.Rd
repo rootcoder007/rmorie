@@ -54,9 +54,9 @@ returned, and for the log link, where Example 6.6 gives the correction in
 closed form, so is the ratio between them -- \eqn{\exp(\sigma_S^2/2)},
 which grows with the variance of the latent field.
 }
-\references{
-Schabenberger Ch 6, Sec 6.3.4, eqs (6.73)-(6.74), Example 6.6
-}
 \examples{
 spglmm(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, S = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+Schabenberger Ch 6, Sec 6.3.4, eqs (6.73)-(6.74), Example 6.6
 }

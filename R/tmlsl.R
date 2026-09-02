@@ -21,6 +21,9 @@
 #'   construction is taken from Polley's dissertation, Super Learner, UC
 #'   Berkeley (escholarship qt4qn0067v), fetched in full.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Superlrn(V, V)
 Superlrn <- function(Z, Y, iters = 500) {
   Z <- as.matrix(Z); n <- nrow(Z); K <- ncol(Z)
   Y <- .t1_vec(Y)

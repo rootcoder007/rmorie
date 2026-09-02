@@ -91,6 +91,10 @@
 #' @param noisevar the irreducible error
 #' @return list(bias2, variance, noise, total, mse, residual, b, n)
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' S <- c("a", "b", "c")
+#' morie_bvdecomp(M, S)
 morie_bvdecomp <- function(preds, truth, noisevar = 0) {
   p <- as.matrix(preds)
   storage.mode(p) <- "double"
@@ -126,6 +130,11 @@ morie_bvdecomp <- function(preds, truth, noisevar = 0) {
 #' @return list(probs, sds, pred, meanmaxprob, meanmaxsd, meanentropy,
 #'   n, t, k)
 #' @export
+#' @examples
+#' set.seed(1)
+#' logits <- array(rnorm(2 * 5 * 3), dim = c(2, 5, 3))
+#' r <- morie_mcdrop(logits)
+#' c(length(r$pred), r$k)
 morie_mcdrop <- function(logits) {
   a <- as.array(logits)
   d <- dim(a)
@@ -168,6 +177,9 @@ morie_mcdrop <- function(logits) {
 #' @param testratio share of instances to hold out
 #' @return list(test, train, ntest, ntrain, ratio, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ttsplit(V)
 morie_ttsplit <- function(ids, testratio = 0.2) {
   ids <- as.numeric(ids)
   if (length(ids) == 0L) stop("ids must be non-empty.", call. = FALSE)
@@ -196,6 +208,9 @@ morie_ttsplit <- function(ids, testratio = 0.2) {
 #' @param testratio share held out for test
 #' @return list(train, val, test, ntrain, nval, ntest, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tvtsplit(V)
 morie_tvtsplit <- function(ids, valratio = 0.2, testratio = 0.2) {
   ids <- as.numeric(ids)
   if (length(ids) == 0L) stop("ids must be non-empty.", call. = FALSE)
@@ -225,6 +240,9 @@ morie_tvtsplit <- function(ids, valratio = 0.2, testratio = 0.2) {
 #' @param testratio share of instances to hold out
 #' @return list(test, train, ntest, ntrain, maxdev, nstrata, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_stratsplt(V)
 morie_stratsplt <- function(strata, testratio = 0.2) {
   strata <- as.character(strata)
   n <- length(strata)
@@ -268,6 +286,12 @@ morie_stratsplt <- function(strata, testratio = 0.2) {
 #' @param padding c(ph, pw) zero padding
 #' @return list(z, height, width, channels, total, maxz, nparams)
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- array(rnorm(5 * 5 * 2), dim = c(5, 5, 2))
+#' kernel <- array(rnorm(3 * 3 * 2 * 4), dim = c(3, 3, 2, 4))
+#' z <- morie_convlayer(x, kernel)
+#' dim(z)
 morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
                             padding = c(0, 0)) {
   xs <- as.array(x); ks <- as.array(kernel)
@@ -380,6 +404,9 @@ morie_convlayer <- function(x, kernel, bias = NULL, stride = c(1, 1),
 #' @return list(cost, assignment, nmatched, nunmatchedtracks,
 #'   nunmatcheddets, meancost)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_trkassign(V)
 morie_trkassign <- function(posdist, appdist = NULL, weight = 0.5, maxn = 8L) {
   pos <- as.matrix(posdist)
   storage.mode(pos) <- "double"
@@ -436,6 +463,12 @@ morie_trkassign <- function(posdist, appdist = NULL, weight = 0.5, maxn = 8L) {
 #' @return list(pixels, size, channels, cropside, pixelmean, pixelmax,
 #'   and pred/topk/topprob when logits are supplied)
 #' @export
+#' @examples
+#' set.seed(1)
+#' img <- array(runif(8 * 8 * 3), dim = c(8, 8, 3))
+#' out <- morie_pretprep(img, size = 4, mean = c(0.5, 0.5, 0.5),
+#'                       sd = c(0.25, 0.25, 0.25))
+#' dim(out$image)
 morie_pretprep <- function(image, size, mean, sd, logits = NULL, topk = 1L) {
   img <- as.array(image)
   d <- dim(img)

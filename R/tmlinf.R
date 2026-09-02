@@ -19,6 +19,9 @@
 #'   der Laan), whose calcParameters computes var.psi <- var(IC)/n, the
 #'   qnorm-based interval and pvalue <- 2*pnorm(-abs(psi/sqrt(var.psi))).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tmleinf(V, V)
 Tmleinf <- function(psi, ic, level = 0.95, null_value = 0) {
   ic <- .t1_vec(ic); n <- length(ic)
   if (n < 2L) stop("at least two influence-curve values are required")

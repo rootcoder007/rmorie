@@ -18,6 +18,8 @@
 #'   Bayesian Data Analysis, 3rd edition, Sections 2.6 and 2.7. Fetched as
 #'   the full text of the book from the author's own copy.
 #' @export
+#' @examples
+#' Poispred(y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, beta = 0.5)
 Poispred <- function(y, alpha, beta, exposure = NULL) {
   y <- .t1_vec(y); n <- length(y)
   if (n < 1L) stop("at least one observation is required")

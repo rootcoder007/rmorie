@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 12.1.
 #' @export
+#' @examples
+#' Ghosalinfdimbvm()
 Ghosalinfdimbvm <- function(theta0 = 0.4, n = 2000, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")

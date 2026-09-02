@@ -30,11 +30,11 @@ used.
 Formula: sum_{k=0}^{K-1} theta_k T_k(Lt) X, Lt = 2 L / lambda_max - I,
 T_k = 2 Lt T_{k-1} - T_{k-2}, T_0 = I, T_1 = Lt.
 }
+\examples{
+Gcnchb(L = 5L, X = 5L)
+}
 \references{
 Defferrard, Bresson and Vandergheynst (2016),
 Convolutional neural networks on graphs with fast localized
 spectral filtering, NIPS 29, eqs. (4)-(5). arXiv:1606.09375
-}
-\examples{
-Gcnchb(L = 5L, X = 5L)
 }

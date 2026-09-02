@@ -19,6 +19,9 @@
 #' @references Light, R. J. and Pillemer, D. B. (1984). Summing Up: The
 #'   Science of Reviewing Research. Harvard University Press, Chapter 3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mafnpr(V, V)
 Mafnpr <- function(yi, se_i, level = 0.95) {
   y <- as.numeric(yi); s <- as.numeric(se_i); k <- length(y)
   if (k == 0L) stop("no studies")

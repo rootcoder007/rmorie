@@ -17,6 +17,7 @@
 
 # Private helper: sample n values from Laplace(0, scale) via inverse CDF.
 #' @keywords internal
+#' @noRd
 .laplc_sample_laplace <- function(scale, n = 1L) {
   u <- runif(n)
   # Inverse CDF of Laplace(0, scale):
@@ -37,6 +38,8 @@
 #' @param epsilon Numeric scalar. The privacy budget (must be > 0).
 #' @param seed Integer or NULL. Optional seed for reproducibility.
 #' @return A named list (RichResult) with the noisy value and metadata.
+#' @examples
+#' morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8), sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
   if (!is.null(seed)) {
     set.seed(as.integer(seed))
@@ -58,6 +61,7 @@ morie_laplc <- function(value, sensitivity, epsilon, seed = NULL) {
 }
 
 #' Legacy stub name, kept for compatibility.
+#' @noRd
 morie_laplace_mechanism <- morie_laplc
 
 #' Cheatsheet.

@@ -81,6 +81,9 @@ diagonal itself, which is the interval \code{spgwr::gwr.sel} uses. With \code{ad
 instead a neighbour count and the criterion is evaluated at every integer
 from 2 up to \code{n}.
 }
+\examples{
+spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317 -- the model, the
 hat matrix and Cressie's residual variance. The book gives no
@@ -96,7 +99,4 @@ parameters, eq (2.16) the inference variance, eqs (2.14)-(2.15) the
 parameter variance, eq (2.20) the hat-matrix row, and golden section as
 the book's own named search method (p. 60, after Greig 1980).
 Independently checked against spgwr's published NY8 output.
-}
-\examples{
-spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -20,6 +20,9 @@
 #'   Journal of Mathematical Imaging and Vision 51(1):22-45.
 #'   \doi{10.1007/s10851-014-0506-3}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otsw(V, V)
 Otsw <- function(X, Y, p = 2, n_proj = 32) {
   A <- as.matrix(X); B <- as.matrix(Y)
   if (nrow(A) != nrow(B))

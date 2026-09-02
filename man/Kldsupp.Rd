@@ -28,12 +28,12 @@ C - c governs the bound.
 Formula: Pi(P_0) > 0 and K(p_0; P_0) <= c and C > c imply consistency;
 the working bound is e^\{-(C - c) n\} / Pi(P_0)
 }
+\examples{
+Kldsupp(prior_mass = 0.5, kl_radius = 0.1, test_rate = 0.2, n = 100)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, Theorem 6.17 (Extended Schwartz)
 together with Theorem 6.16. Read from the copy of the book held in
 the corpus.
-}
-\examples{
-Kldsupp(prior_mass = 0.5, kl_radius = 0.1, test_rate = 0.2, n = 100)
 }

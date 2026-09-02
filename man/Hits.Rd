@@ -7,7 +7,7 @@
 Hits(A, iters = 50)
 }
 \arguments{
-\item{A}{Square adjacency matrix, A[i, j] > 0 for a link i -> j.}
+\item{A}{Square adjacency matrix, A\link{i, j} > 0 for a link i -> j.}
 
 \item{iters}{Number of I/O sweeps, at least one.}
 }
@@ -25,11 +25,11 @@ principal eigenvector of A'A and the hub vector to that of A A'.
 \details{
 Formula: a <- A' h; h <- A a; both rescaled to unit L2 norm.
 }
+\examples{
+Hits(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
+}
 \references{
 Kleinberg (1999), Authoritative sources in a hyperlinked
 environment, Journal of the ACM 46(5):604-632.
 \doi{10.1145/324133.324140}
-}
-\examples{
-Hits(matrix(c(0, 1, 1, 0, 0, 1, 1, 0, 0), 3, 3, byrow = TRUE))
 }

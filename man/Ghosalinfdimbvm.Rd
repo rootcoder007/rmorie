@@ -29,10 +29,10 @@ integrated rather than argued.
 Formula: TV = (1/2) int |Beta(t; 1+S, 1+n-S) - phi(t; S/n, I^(-1)/n)| dt
 over theta-hat +/- 6 sd, by midpoint rule.
 }
+\examples{
+Ghosalinfdimbvm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.1.
-}
-\examples{
-Ghosalinfdimbvm()
 }

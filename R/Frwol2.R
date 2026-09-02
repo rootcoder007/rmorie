@@ -20,6 +20,10 @@
 #'   programming, Naval Research Logistics Quarterly 3(1-2):95-110.
 #'   \doi{10.1002/nav.3800030109}
 #' @export
+#' @examples
+#' V <- rbind(c(0, 0), c(1, 0), c(0, 1))
+#' Frwol2(function(x) sum((x - 0.3)^2), function(x) 2 * (x - 0.3),
+#'        domain = V, x0 = c(0.3, 0.3))
 Frwol2 <- function(f, grad_f, domain, x0, steps = 50) {
   V <- .s03mat(domain)
   if (nrow(V) == 0L) stop("frank_wolfe: domain has no vertices")

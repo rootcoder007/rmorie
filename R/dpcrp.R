@@ -11,6 +11,8 @@
 #' @return List with ``table`` (assignment per customer), ``counts``, ``n_tables``, ``expected_tables``, ``alpha``, ``n``.
 #' @references Aldous (1985), Exchangeability and related topics, Ecole d'Ete de Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes. Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1) identity are the standard published forms.
 #' @export
+#' @examples
+#' Crp(n = 5L)
 Crp <- function(n, alpha = 1, u = NULL, seed = 1) {
   n <- as.integer(n); a <- as.numeric(alpha)
   if (a <= 0) stop("alpha must be positive")
