@@ -27,5 +27,5 @@ A list with \code{L}, \code{stationarity}, \code{max_stationarity}, \code{alpha_
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wolfedual(V, V)
+rmorie:::Wolfedual(V, V)
 }

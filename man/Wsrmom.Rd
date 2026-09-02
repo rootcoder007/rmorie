@@ -18,5 +18,5 @@ A list with \code{mean}, \code{var}, \code{sd}, \code{total}, \code{skew}, \code
 }
 \keyword{internal}
 \examples{
-Wsrmom(n = 5L)
+rmorie:::Wsrmom(n = 5L)
 }

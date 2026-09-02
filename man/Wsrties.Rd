@@ -20,5 +20,5 @@ A list with \code{var}, \code{var_uncorrected}, \code{correction}, \code{n}, \co
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wsrties(V)
+rmorie:::Wsrties(V)
 }

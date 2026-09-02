@@ -21,5 +21,5 @@ The value of \code{morie_unclr_lr_impute}.
 }
 \keyword{internal}
 \examples{
-Lrda(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, draw = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Lrda(X = c(1, 2, 3, 4, 5, 6, 7, 8), dl = 5L, draw = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

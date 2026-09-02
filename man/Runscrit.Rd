@@ -21,5 +21,5 @@ A list with \code{lower}, \code{upper}, \code{alpha_lower}, \code{alpha_upper}, 
 }
 \keyword{internal}
 \examples{
-Runscrit(n1 = 5L, n2 = 5L)
+rmorie:::Runscrit(n1 = 5L, n2 = 5L)
 }

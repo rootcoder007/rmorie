@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{h_computing}, \code{resid}, \code{df}, \code
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kwalt(V, V)
+rmorie:::Kwalt(V, V)
 }

@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{mean}, \code{var}, \code{var_general}, \code
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Moodscale(V, V)
+rmorie:::Moodscale(V, V)
 }

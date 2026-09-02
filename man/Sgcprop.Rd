@@ -22,5 +22,5 @@ A list with \code{X}, \code{K}, \code{n_nodes}, \code{dim}.
 \examples{
 A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
 X <- matrix(1:6, 3, 2)
-Sgcprop(A, X, K = 2)
+rmorie:::Sgcprop(A, X, K = 2)
 }

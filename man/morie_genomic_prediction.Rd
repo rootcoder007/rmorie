@@ -56,5 +56,5 @@ tests in \code{tests/testthat/}.
 \examples{
 set.seed(1)
 M <- matrix(rbinom(60, 2, 0.4), 10, 6)
-morie_grm(M)
+rmorie:::morie_grm(M)
 }

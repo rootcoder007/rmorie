@@ -21,5 +21,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{k}, \code{n}, \co
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Chigof(V, V)
+rmorie:::Chigof(V, V)
 }

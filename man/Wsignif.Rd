@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{w}, \code{df}, \code{p_value}, \code{s}, \co
 }
 \keyword{internal}
 \examples{
-Wsignif(w = 0.6, k = 3, n = 10)
+rmorie:::Wsignif(w = 0.6, k = 3, n = 10)
 }

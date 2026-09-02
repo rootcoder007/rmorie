@@ -23,5 +23,5 @@ A list with \code{lower}, \code{upper}, \code{coverage}, \code{alpha}, \code{r},
 \examples{
 set.seed(1)
 x <- rnorm(20)
-Quantci(x, p = 0.5, r = 6, s = 15)
+rmorie:::Quantci(x, p = 0.5, r = 6, s = 15)
 }

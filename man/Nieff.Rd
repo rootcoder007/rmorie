@@ -20,5 +20,5 @@ A list with \code{estimate}, \code{se}, \code{mean_y11}, \code{mean_y10}, \code{
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Nieff(V, V)
+rmorie:::Nieff(V, V)
 }

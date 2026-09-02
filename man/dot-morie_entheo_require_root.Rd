@@ -13,6 +13,6 @@ A character scalar: the DMT-data root directory (errors if it cannot be resolved
 Require the dataset root or stop with a curated error
 }
 \examples{
-.morie_entheo_require_root()
+rmorie:::.morie_entheo_require_root()
 }
 \keyword{internal}

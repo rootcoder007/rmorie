@@ -21,5 +21,5 @@ A list with \code{tau}, \code{ate}, \code{se}, \code{n}.
 \keyword{internal}
 \examples{
 set.seed(3)
-Xlearn(tau1 = rnorm(20, 1), tau0 = rnorm(20, 0.8), g = runif(20, 0.3, 0.7))
+rmorie:::Xlearn(tau1 = rnorm(20, 1), tau0 = rnorm(20, 0.8), g = runif(20, 0.3, 0.7))
 }

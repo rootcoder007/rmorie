@@ -32,11 +32,11 @@ The next value.
 }
 \keyword{internal}
 \examples{
-e <- .ghc_rng(11)
+e <- rmorie:::.ghc_rng(11)
 xs <- 3
-e <- .ghc_rng(11)
+e <- rmorie:::.ghc_rng(11)
 xs <- 3
-e <- .ghc_rng(11)
+e <- rmorie:::.ghc_rng(11)
 v <- 0
 morie_hyper2_slice(function(v) -0.5 * v * v, xs, e, 1, 10L)
 }

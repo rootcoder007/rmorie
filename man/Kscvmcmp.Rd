@@ -20,5 +20,5 @@ A list with \code{d}, \code{w2}, \code{argmax}, \code{share}, \code{n}.
 \keyword{internal}
 \examples{
 set.seed(2)
-Kscvmcmp(rnorm(30), cdf = pnorm)
+rmorie:::Kscvmcmp(rnorm(30), cdf = pnorm)
 }

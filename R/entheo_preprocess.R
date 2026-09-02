@@ -16,7 +16,7 @@
 #' @keywords internal
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' preprocess_eeg(D)
+#' rmorie:::preprocess_eeg(D)
 preprocess_eeg <- function(record,
                            bandpass = c(1, 40),
                            notch = 60,
@@ -72,7 +72,7 @@ preprocess_eeg <- function(record,
 #' @keywords internal
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-#' preprocess_fmri(D)
+#' rmorie:::preprocess_fmri(D)
 preprocess_fmri <- function(record,
                             motion_threshold_mm = 0.5,
                             n_noise_components = 5L) {

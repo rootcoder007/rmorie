@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{p_value}, \code{dplus}, \code{dminus}, \code
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ks2(V, V)
+rmorie:::Ks2(V, V)
 }

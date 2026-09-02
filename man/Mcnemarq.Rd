@@ -19,5 +19,5 @@ A list with \code{statistic}, \code{df}, \code{p_value}, \code{p_exact}, \code{x
 }
 \keyword{internal}
 \examples{
-Mcnemarq(rbind(c(20, 5), c(12, 13)))
+rmorie:::Mcnemarq(rbind(c(20, 5), c(12, 13)))
 }

@@ -20,5 +20,5 @@ A list with \code{frequency}, \code{period}, \code{amplitude}, \code{spectrum}, 
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Fftperiod(V)
+rmorie:::Fftperiod(V)
 }

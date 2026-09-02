@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{p_value}, \code{pmf}, \code{q1}, \code{q3}, 
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wstnbrg(V, V)
+rmorie:::Wstnbrg(V, V)
 }

@@ -21,5 +21,5 @@ A list with \code{statistic}, \code{p_value}, \code{p_left}, \code{p_right}, \co
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Wwexact(V, V)
+rmorie:::Wwexact(V, V)
 }

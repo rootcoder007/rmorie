@@ -32,7 +32,7 @@ average.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Alfrcyl(V)
+rmorie:::Alfrcyl(V)
 }
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 31,

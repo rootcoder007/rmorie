@@ -20,5 +20,5 @@ A list with \code{C}, \code{R}, \code{two_m}, \code{n}.
 \keyword{internal}
 \examples{
 A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
-Commdist(A)
+rmorie:::Commdist(A)
 }

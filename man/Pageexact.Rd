@@ -20,5 +20,5 @@ A list with \code{support}, \code{pmf}, \code{pmf_l}, \code{sf_l}, \code{mean}, 
 }
 \keyword{internal}
 \examples{
-Pageexact(k = 5L, n = 5L)
+rmorie:::Pageexact(k = 5L, n = 5L)
 }

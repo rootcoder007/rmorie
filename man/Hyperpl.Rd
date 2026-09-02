@@ -20,5 +20,5 @@ A list with \code{value}, \code{side}, \code{below}, \code{above}, \code{on_plan
 }
 \keyword{internal}
 \examples{
-Hyperpl(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+rmorie:::Hyperpl(X = c(1, 2, 3, 4, 5, 6, 7, 8), beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 }

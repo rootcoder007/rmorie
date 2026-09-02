@@ -19,5 +19,5 @@ A list with \code{likelihood}, \code{loglik}, \code{n}.
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Likprod(V)
+rmorie:::Likprod(V)
 }

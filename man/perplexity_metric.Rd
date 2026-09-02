@@ -19,6 +19,6 @@ Perplexity (Jelinek 1977)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-perplexity_metric(V)
+rmorie:::perplexity_metric(V)
 }
 \keyword{internal}

@@ -102,5 +102,5 @@ tests in \code{tests/testthat/}.
 \examples{
 set.seed(1)
 X <- matrix(rnorm(20), 10, 2)
-morie_kernel_matrix(X, kernel = "gaussian", gamma = 0.5)
+rmorie:::morie_kernel_matrix(X, kernel = "gaussian", gamma = 0.5)
 }

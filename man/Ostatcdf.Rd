@@ -21,5 +21,5 @@ A list with \code{cdf}, \code{sf}, \code{fx}, \code{r}, \code{n}, \code{t}.
 }
 \keyword{internal}
 \examples{
-Ostatcdf(t = 0.5, r = 2, n = 5, cdf = pnorm)
+rmorie:::Ostatcdf(t = 0.5, r = 2, n = 5, cdf = pnorm)
 }

@@ -40,6 +40,6 @@ tests in \code{tests/testthat/}.
 set.seed(1)
 X <- matrix(rnorm(20), 10, 2)
 W <- list(matrix(rnorm(6, 0, 0.4), 3, 2), matrix(rnorm(3, 0, 0.4), 1, 3))
-r <- morie_ann_forward(X, W)
+r <- rmorie:::morie_ann_forward(X, W)
 str(r, max.level = 1)
 }

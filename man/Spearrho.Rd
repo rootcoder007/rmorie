@@ -20,5 +20,5 @@ A list with \code{statistic}, \code{r_shortcut}, \code{sumd2}, \code{tied}, \cod
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Spearrho(V, V)
+rmorie:::Spearrho(V, V)
 }

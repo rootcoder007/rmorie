@@ -21,5 +21,5 @@ A list with \code{gamma}, \code{t2}, \code{t1}, \code{size_hard}, \code{size}, \
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Randtest(V)
+rmorie:::Randtest(V)
 }

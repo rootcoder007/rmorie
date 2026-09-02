@@ -22,5 +22,5 @@ A list with \code{r}, \code{f}, \code{f_csr}, \code{empty_space_distances}, \cod
 \keyword{internal}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-morie_empty_space_function(M)
+rmorie:::morie_empty_space_function(M)
 }

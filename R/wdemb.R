@@ -11,7 +11,7 @@
 #' @keywords internal
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-#' word_embedding(V)
+#' rmorie:::word_embedding(V)
 word_embedding <- function(x, E = NULL, vocab_size = 100L,
                            d_model = 16L, seed = 0L) {
   ids <- as.integer(x)

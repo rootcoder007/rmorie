@@ -20,5 +20,5 @@ A list with \code{bound}, \code{zstar}, \code{diffs}, \code{significant}, \code{
 }
 \keyword{internal}
 \examples{
-Friedmc(rank_sums = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+rmorie:::Friedmc(rank_sums = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

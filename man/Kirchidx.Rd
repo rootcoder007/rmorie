@@ -20,5 +20,5 @@ A list with \code{Kf}, \code{Kf_spectral}, \code{n}, \code{rank}.
 \keyword{internal}
 \examples{
 A <- rbind(c(0, 1, 1, 0), c(1, 0, 1, 0), c(1, 1, 0, 1), c(0, 0, 1, 0))
-Kirchidx(A)
+rmorie:::Kirchidx(A)
 }

@@ -17,6 +17,6 @@ Recommended indexes per known morie cache table
 }
 \examples{
 set.seed(1)
-r <- .morie_db_index_registry(); TRUE
+r <- rmorie:::.morie_db_index_registry(); TRUE
 }
 \keyword{internal}

@@ -18,5 +18,5 @@ A list with \code{mean}, \code{var}, \code{var_approx}, \code{sd}, \code{denom},
 }
 \keyword{internal}
 \examples{
-Rvnmom(n = 5L)
+rmorie:::Rvnmom(n = 5L)
 }

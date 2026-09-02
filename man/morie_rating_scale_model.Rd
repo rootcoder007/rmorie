@@ -20,5 +20,5 @@ A list with \code{p}, \code{expected}, \code{info}, \code{test_expected}, \code{
 }
 \keyword{internal}
 \examples{
-morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
+rmorie:::morie_rating_scale_model(theta = 0.5, b = 5L, tau = 0.5)
 }

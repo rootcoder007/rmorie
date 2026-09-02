@@ -19,6 +19,6 @@ Global-norm gradient clip (Pascanu 2013)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-gradient_clipping(V)
+rmorie:::gradient_clipping(V)
 }
 \keyword{internal}

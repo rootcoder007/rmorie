@@ -39,5 +39,5 @@ tests in \code{tests/testthat/}.
 set.seed(6)
 X <- matrix(rnorm(60), 20, 3)
 y <- X \%*\% c(0.5, -0.3, 0.2) + rnorm(20, 0, 0.3)
-morie_brr_gibbs(as.numeric(y), X, n_iter = 200L, burn_in = 50L, seed = 1L)
+rmorie:::morie_brr_gibbs(as.numeric(y), X, n_iter = 200L, burn_in = 50L, seed = 1L)
 }

@@ -20,5 +20,5 @@ A list with \code{mean}, \code{var}, \code{sd}, \code{z_left}, \code{z_right}, \
 }
 \keyword{internal}
 \examples{
-Runsudvar(n = 5L)
+rmorie:::Runsudvar(n = 5L)
 }

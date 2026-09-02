@@ -20,6 +20,6 @@ A matrix, from \code{t}.
 \examples{
 n <- 12
 A <- matrix(rnorm(n * 6), nrow = n)
-G <- morie_grm(A) + diag(0.3, n)
-morie_chol_lower(G)
+G <- rmorie:::morie_grm(A) + diag(0.3, n)
+rmorie:::morie_chol_lower(G)
 }

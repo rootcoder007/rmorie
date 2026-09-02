@@ -22,5 +22,5 @@ A list with \code{beta}, \code{shrinkage}, \code{n}, \code{sigma2}, \code{n_snp}
 }
 \keyword{internal}
 \examples{
-Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
+rmorie:::Csshrink(beta_hat = 5L, D = 5L, psi = 5L, n = 5L)
 }

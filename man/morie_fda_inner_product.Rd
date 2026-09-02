@@ -21,5 +21,5 @@ an L1 x L2 numeric matrix
 }
 \keyword{internal}
 \examples{
-morie_fda_inner_product(t = seq(0, 1, length.out = 50), L1 = 2, L2 = 3)
+rmorie:::morie_fda_inner_product(t = seq(0, 1, length.out = 50), L1 = 2, L2 = 3)
 }

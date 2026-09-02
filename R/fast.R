@@ -54,7 +54,7 @@ morie_mean <- function(x) {
 #' @keywords internal
 #' @return A numeric scalar: the variance of \code{x}.
 #' @examples
-#' abs(morie_var(c(1, 2, 3, 4, 5), ddof = 1) - 2.5) < 1e-9
+#' abs(rmorie:::morie_var(c(1, 2, 3, 4, 5), ddof = 1) - 2.5) < 1e-9
 morie_var <- function(x, ddof = 1) {
   if (.cpp_available()) {
     morie_var_cpp(as.numeric(x), as.integer(ddof))

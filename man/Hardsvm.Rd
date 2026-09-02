@@ -20,5 +20,5 @@ A list with \code{beta}, \code{beta0}, \code{norm_beta}, \code{margin}, \code{st
 \keyword{internal}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Hardsvm(V, V)
+rmorie:::Hardsvm(V, V)
 }

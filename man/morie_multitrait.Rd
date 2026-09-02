@@ -83,7 +83,7 @@ tests in \code{tests/testthat/}.
 \examples{
 n <- 12
 A <- matrix(rnorm(n * 6), nrow = n)
-G <- morie_grm(A) + diag(0.3, n)
-morie_chol_lower(G)
-morie_multitrait(Y = G, Z = G, G = G, Sigma_T = G, R_T = G)
+G <- rmorie:::morie_grm(A) + diag(0.3, n)
+rmorie:::morie_chol_lower(G)
+rmorie:::morie_multitrait(Y = G, Z = G, G = G, Sigma_T = G, R_T = G)
 }

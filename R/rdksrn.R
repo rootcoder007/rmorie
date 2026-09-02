@@ -13,7 +13,7 @@
 #' @keywords internal
 #' @examples
 #' set.seed(1)
-#' r <- .rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
+#' r <- rmorie:::.rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
 .rd_wls <- function(r, y, w) {
   S0 <- sum(w); S1 <- sum(w * r); S2 <- sum(w * r * r)
   Sy <- sum(w * y); Sry <- sum(w * r * y)

@@ -19,6 +19,6 @@ Trapezoidal integration on a 1-D grid
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-.morie_entheo_trapz(V, V)
+rmorie:::.morie_entheo_trapz(V, V)
 }
 \keyword{internal}

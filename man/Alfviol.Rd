@@ -54,7 +54,7 @@ over non-bonded pairs; that asymmetry is in the published text and is
 reproduced rather than tidied away.
 }
 \examples{
-Alfviol()
+rmorie:::Alfviol()
 }
 \references{
 Jumper et al (2021) Nature 596:583-589, Suppl. eq. (44)-(47)

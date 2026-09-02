@@ -20,5 +20,5 @@ A list with \code{p_value}, \code{p_lower}, \code{p_upper}, \code{statistic}, \c
 }
 \keyword{internal}
 \examples{
-Signp(k = 5L, n = 5L)
+rmorie:::Signp(k = 5L, n = 5L)
 }
