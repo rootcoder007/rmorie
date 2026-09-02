@@ -18,6 +18,9 @@
 #'   Semiparametric Inference, Section 2.2.3 and Theorem 2.6. Fetched as
 #'   the full text of the book.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bootemp(V)
 Bootemp <- function(x, B = 200, seed = 1) {
   x <- .t1_vec(x); n <- length(x); B <- as.integer(B)
   if (n < 2L) stop("the sample must have at least two observations")
@@ -40,7 +43,7 @@ Bootemp <- function(x, B = 200, seed = 1) {
   hi <- q[min(B, ceiling(0.975 * (B - 1)) + 1L)]
   .t1_result(estimate = Pn, boot_mean = bm, boot_sd = bsd,
              process_sd = sqrt(n) * bsd, ci_lower = lo, ci_upper = hi,
-             B = as.numeric(B), n = as.numeric(n),
+             B = B, n = n,
              method = "Nonparametric bootstrap, Kosorok Section 2.2.3")
 }
 

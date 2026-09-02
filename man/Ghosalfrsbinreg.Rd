@@ -30,10 +30,10 @@ Formula: f(x) = sum_k beta_k phi_k(x), phi_0 = 1,
 phi_k(x) = sqrt(2) cos(k pi x); beta <- beta + step grad - decay beta,
 grad_k = sum_i (y_i - p_i) phi_k(x_i).
 }
+\examples{
+Ghosalfrsbinreg()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.3.
-}
-\examples{
-Ghosalfrsbinreg()
 }

@@ -26,10 +26,10 @@ is the point.
 \details{
 Formula: \code{ICC(C,1) = (MS_R - MS_E)/(MS_R + (k-1) MS_E)}.
 }
+\examples{
+IccC(y = c(1, 2, 3, 4, 5, 6, 7, 8), subject = c(1, 2, 3, 4, 5, 6, 7, 8), rater = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Shrout & Fleiss (1979) Psychol Bull 86:420-428; McGraw &
 Wong (1996) Psychol Methods 1:30-46.
-}
-\examples{
-IccC(y = c(1, 2, 3, 4, 5, 6, 7, 8), subject = c(1, 2, 3, 4, 5, 6, 7, 8), rater = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -9,6 +9,8 @@
 #' @return List with ``gcd``, ``x``, ``y``, ``check`` (a x + b y), ``a``, ``b``.
 #' @references Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
 #' @export
+#' @examples
+#' Bezout(240, 46)
 Bezout <- function(a, b) {
   a0 <- as.numeric(a); b0 <- as.numeric(b)
   old_r <- a0; r <- b0; old_s <- 1; s <- 0; old_t <- 0; t <- 1

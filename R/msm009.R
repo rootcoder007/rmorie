@@ -14,6 +14,8 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (4.14) p.136. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' Msm009(probs = c(1, 2, 3, 4, 5, 6, 7, 8), y_true = 5L)
 Msm009 <- function(probs, y_true, n_classes = NULL, halved = FALSE) {
   bs <- .gpbrier(probs, y_true, n_classes, halved = halved)
   list(estimate = bs, brier = bs, mean_log_loss = .gpmll(probs, y_true, n_classes),

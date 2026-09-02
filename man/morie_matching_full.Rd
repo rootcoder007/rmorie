@@ -13,7 +13,8 @@ morie_matching_full(data, treatment, covariates, ps = NULL, n_subclasses = 10L)
 
 \item{covariates}{Character vector of covariates.}
 
-\item{ps}{Optional pre-computed propensity scores (ignored; retained for back-compat).}
+\item{ps}{Optional pre-computed propensity scores (ignored; retained
+for back-compat).}
 
 \item{n_subclasses}{Carried for back-compat (ignored under MatchIt).}
 }

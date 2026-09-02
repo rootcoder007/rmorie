@@ -14,6 +14,8 @@
 #' @return List with ``bias``, ``adjusted_estimate``, ``adjusted_se``, ``adjusted_t``, ``relative_bias``, ``bias_factor``.
 #' @references Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
 #' @export
+#' @examples
+#' Ovbias()
 Ovbias <- function(delta = NULL, gamma = NULL, estimate = NULL, se = NULL, df = NULL, r2_yz = NULL, r2_dz = NULL) {
   bias <- NA_real_
   if (!is.null(delta) && !is.null(gamma)) bias <- as.numeric(delta) * as.numeric(gamma)

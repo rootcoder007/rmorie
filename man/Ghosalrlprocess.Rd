@@ -9,7 +9,7 @@ Ghosalrlprocess(alpha = 0.75, n_grid = 200, n_sim = 300, seed = 42)
 \arguments{
 \item{alpha}{Self-similarity index, positive.}
 
-\item{n_grid}{Discretisation of [0, 1].}
+\item{n_grid}{Discretisation of \link{0, 1}.}
 
 \item{n_sim}{Number of simulated paths.}
 
@@ -32,10 +32,10 @@ integral.
 Formula: growth = log(var(R_1) / var(R_{1/4})) / log 4, which equals
 2 alpha exactly for the continuum process.
 }
+\examples{
+Ghosalrlprocess()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Example 11.6, eq. (11.2).
-}
-\examples{
-Ghosalrlprocess()
 }

@@ -521,6 +521,9 @@ print.morie_stat_command <- function(x, ...) {
 #' @return Integer count of newly registered commands, invisibly.
 #' @keywords internal
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- .morie_auto_register_stat_commands(); TRUE
 .morie_auto_register_stat_commands <- function() {
   exports <- tryCatch(getNamespaceExports("rmorie"),
                       error = function(e) character(0))

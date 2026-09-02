@@ -28,6 +28,9 @@
 #'   Neither paper was in the local corpus; the estimator is ordinary
 #'   least squares and the test is the standard Wald one.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Negctc(V, V)
 Negctc <- function(y_neg, D, X = NULL, alpha = 0.05) {
   y <- .t1_vec(y_neg); d <- .t1_vec(D); n <- length(y)
   if (n == 0L) stop("y_neg is empty")

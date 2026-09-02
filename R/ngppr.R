@@ -25,6 +25,9 @@
 #'   University Press. Ferguson, T. S. (1973). A Bayesian analysis of
 #'   some nonparametric problems. Annals of Statistics, 1(2), 209-230.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ngppr(V)
 Ngppr <- function(y, alpha = 1, tau = 1) {
   a <- as.numeric(alpha); tt <- as.numeric(tau)
   if (a <= 0) stop("Ngppr: alpha must be positive")

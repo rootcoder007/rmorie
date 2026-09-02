@@ -22,10 +22,10 @@ A disconnected graph has no spanning TREE, so \code{connected} is reported
 and the result is a spanning forest. Returning its weight as though
 it were a tree's would be quietly wrong.
 }
-\references{
-Kruskal JB (1956) \emph{Proc AMS} 7(1):48-50.
-}
 \examples{
 K4E <- list(c(1, 2), c(2, 3), c(3, 4), c(4, 1), c(1, 3))
 morie_minimum_spanning_tree(K4E, 4, c(4, 1, 3, 2, 5))
+}
+\references{
+Kruskal JB (1956) \emph{Proc AMS} 7(1):48-50.
 }

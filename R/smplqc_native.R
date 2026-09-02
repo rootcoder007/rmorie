@@ -40,6 +40,9 @@
 #'   (cog-genomics.org/plink/1.9/basic_stats, fetched 2026-08-09).
 #'   Nei, M. (1978). Genetics 89(3), 583-590.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Smplqc(V)
 Smplqc <- function(G, callrate_min = 0.98, het_sd = 3.0,
                    small_sample = FALSE) {
   Gm <- as.matrix(G)

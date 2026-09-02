@@ -25,13 +25,13 @@ rounding for a correct update.
 B <- B - B s s'B/(s'B s) + y y'/(y's), or in inverse form
 H <- (I - rho s y') H (I - rho y s') + rho s s' with rho = 1/(y's).
 }
+\examples{
+Bfgsupd(H = 0.5, s = 5L, y = 5L)
+}
 \references{
 Broyden (1970), Fletcher (1970), Goldfarb (1970), Shanno
 (1970); stated identically in Nocedal and Wright, Numerical
 Optimization, 2nd edn, Eqs. (6.17) and (6.19).  Standard published
 form; none of the 1970 papers is in the local corpus and none was
 read.
-}
-\examples{
-Bfgsupd(H = 0.5, s = 5L, y = 5L)
 }

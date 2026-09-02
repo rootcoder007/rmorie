@@ -27,10 +27,10 @@ iteration count is what makes the arms agree.
 Formula: \code{mu = (sum w_i x_i)/(sum w_i)},
 \code{w_i = 1/||x_i - mu||}.
 }
-\references{
-Weiszfeld, E. (1937). Tohoku Math J 43:355-386.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Weisz(V)
+}
+\references{
+Weiszfeld, E. (1937). Tohoku Math J 43:355-386.
 }

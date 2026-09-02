@@ -12,6 +12,9 @@
 #' @return List with ``loss``, ``per_view``, ``p_s``, ``p_t``, ``B``, ``K``.
 #' @references Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021), Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294. Verified against the paper: equation (1) for the temperature softmax, equation (4) for the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Dinoloss(V, V)
 Dinoloss <- function(s_logits, t_logits, tau_s = 0.1, tau_t = 0.04, center = NULL) {
   Sm <- as.matrix(s_logits); Tm <- as.matrix(t_logits)
   B <- nrow(Sm); K <- ncol(Sm)

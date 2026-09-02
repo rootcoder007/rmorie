@@ -15,6 +15,9 @@
 #' @references Villani, C. (2009). Optimal Transport: Old and New,
 #'   Springer Grundlehren 338, ch 6; Kuhn, H. W. (1955) NRLQ 2:83-97.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Wsdt2d(V, V)
 Wsdt2d <- function(X_samples, Y_samples, p = 2) {
   A <- as.matrix(X_samples); B <- as.matrix(Y_samples); n <- nrow(A)
   Cst <- matrix(0, n, n)

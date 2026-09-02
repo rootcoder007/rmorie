@@ -164,6 +164,14 @@
 #'   Athey S, Imbens G (2016). Recursive partitioning for heterogeneous
 #'   causal effects. \emph{PNAS} 113(27), 7353-7360.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+#' fit <- morie_causal_forest(y, d, X, n_trees = 30L, min_leaf = 10L)
+#' mean(fit$cate)
 morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
                                 max_depth = 6L, mtry = NULL,
                                 subsample = 0.5, imbalance_penalty = 0,
@@ -230,6 +238,14 @@ morie_causal_forest <- function(y, d, x, n_trees = 200L, min_leaf = 10L,
 #'   heterogeneous treatment effects using random forests.
 #'   \emph{JASA} 113(523), 1228-1242.
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+#' fit <- morie_causal_forest(y, d, X, n_trees = 30L, min_leaf = 10L)
+#' morie_causal_forest_predict(fit$forest, X[1:5, , drop = FALSE])
 morie_causal_forest_predict <- function(forest, newx) {
   Xq <- as.matrix(newx)
   storage.mode(Xq) <- "double"
@@ -260,6 +276,14 @@ morie_causal_forest_predict <- function(forest, newx) {
 #'   heterogeneous treatment effects using random forests.
 #'   \emph{JASA} 113(523), 1228-1242.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 100
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * 0.8 + rnorm(n, 0, 0.3)
+#' r <- morie_causal_forest_bootstrap(y, d, X, B = 8L, n_trees = 15L)
+#' str(r, max.level = 1)
 morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
                                           min_leaf = 10L, seed = 0L,
                                           alpha = 0.05) {
@@ -312,6 +336,14 @@ morie_causal_forest_bootstrap <- function(y, d, x, B = 40L, n_trees = 60L,
 #'   (2018). Generic machine learning inference on heterogenous
 #'   treatment effects in randomized experiments. arXiv:1712.04802.
 #' @export
+#' @examples
+#' set.seed(2)
+#' n <- 100
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+#' tau <- 0.5 + X[, 2] + rnorm(n, 0, 0.2)
+#' morie_hte_blp_test(y, d, tau)
 morie_hte_blp_test <- function(y, d, cate_predictions, propensity = NULL) {
   y <- as.numeric(y)
   d <- as.numeric(d)
@@ -363,6 +395,16 @@ morie_hte_blp_test <- function(y, d, cate_predictions, propensity = NULL) {
 #'   Estimating heterogeneous treatment effects with right-censored data
 #'   via causal survival forests. \emph{JRSS-B} 85(2), 179-211.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 150
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' tt <- rexp(n, rate = exp(-0.5 * d - 0.3 * X[, 1]))
+#' ev <- as.numeric(tt < quantile(tt, 0.8))
+#' tt <- pmin(tt, quantile(tt, 0.8))
+#' r <- morie_causal_survival_forest(tt, ev, d, X, n_trees = 20L)
+#' str(r, max.level = 1)
 morie_causal_survival_forest <- function(time, event, d, x, horizon = NULL,
                                          n_trees = 200L, min_leaf = 15L,
                                          seed = 0L) {
@@ -410,6 +452,16 @@ morie_causal_survival_forest <- function(time, event, d, x, horizon = NULL,
 #'   heterogeneous treatment effects in randomized experiments, with an
 #'   application to immunization in India. arXiv:1712.04802.
 #' @export
+#' @examples
+#' set.seed(3)
+#' n <- 150
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' tt <- rexp(n, rate = exp(-0.5 * d - 0.3 * X[, 1]))
+#' ev <- as.numeric(tt < quantile(tt, 0.8))
+#' tt <- pmin(tt, quantile(tt, 0.8))
+#' r <- morie_causal_survival_blp(tt, ev, d, X, n_trees = 20L)
+#' str(r, max.level = 1)
 morie_causal_survival_blp <- function(time, event, d, x, horizon = NULL,
                                       n_trees = 200L, min_leaf = 15L,
                                       seed = 0L) {
@@ -442,6 +494,14 @@ morie_causal_survival_blp <- function(time, event, d, x, horizon = NULL,
 #' @references Athey S, Tibshirani J, Wager S (2019). Generalized random
 #'   forests. \emph{The Annals of Statistics} 47(2), 1148-1178.
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * 0.8 + rnorm(n, 0, 0.3)
+#' r <- morie_quantile_causal_forest(y, d, X, quantile = 0.5, n_trees = 20L)
+#' str(r, max.level = 1)
 morie_quantile_causal_forest <- function(y, d, x, quantile = 0.5,
                                          n_trees = 200L, min_leaf = 15L,
                                          seed = 0L) {
@@ -479,6 +539,15 @@ morie_quantile_causal_forest <- function(y, d, x, quantile = 0.5,
 #' @references Robertson T, Wright FT, Dykstra RL (1988). \emph{Order
 #'   Restricted Statistical Inference}. Wiley.
 #' @export
+#' @examples
+#' set.seed(4)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' d <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + d * (0.5 + 0.5 * X[, 1]) + rnorm(n, 0, 0.3)
+#' r <- morie_monotone_causal_forest(y, d, X, monotone_feature = 1L,
+#'                                   n_trees = 20L)
+#' str(r, max.level = 1)
 morie_monotone_causal_forest <- function(y, d, x, monotone_feature = NULL,
                                          direction = 1L, n_trees = 200L,
                                          min_leaf = 10L, seed = 0L) {
@@ -540,6 +609,14 @@ morie_monotone_causal_forest <- function(y, d, x, monotone_feature = NULL,
 #'   estimation of heterogeneous causal effects. \emph{Electronic Journal
 #'   of Statistics} 17(2), 3008-3049.
 #' @export
+#' @examples
+#' set.seed(5)
+#' n <- 120
+#' X <- matrix(rnorm(n * 2), n, 2)
+#' t <- rbinom(n, 1, 0.5)
+#' y <- 1 + X[, 1] + t * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
+#' r <- morie_dr_learner(y, t, X, n_folds = 4L)
+#' str(r, max.level = 1)
 morie_dr_learner <- function(y, t, x, n_folds = 5L, seed = 0L, trunc = 0.01) {
   y <- as.numeric(y)
   t <- as.numeric(t)
@@ -607,6 +684,14 @@ morie_dr_learner <- function(y, t, x, n_folds = 5L, seed = 0L, trunc = 0.01) {
 #'   decomposition in the presence of an exposure-induced
 #'   mediator-outcome confounder. \emph{Epidemiology} 25(2), 300-306.
 #' @export
+#' @examples
+#' set.seed(5)
+#' n <- 150
+#' x <- rbinom(n, 1, 0.5)
+#' m <- 0.5 * x + rnorm(n, 0, 0.5)
+#' y <- 1 + 0.4 * x + 0.6 * m + rnorm(n, 0, 0.4)
+#' r <- morie_interventional_effects(y, x, m, n_draws = 400L)
+#' str(r, max.level = 1)
 morie_interventional_effects <- function(y, x, m, c = NULL, n_draws = 2000L,
                                          seed = 0L) {
   y <- as.numeric(y)

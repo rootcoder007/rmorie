@@ -19,6 +19,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.3.2.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalhistogramprior(V)
 Ghosalhistogramprior <- function(x, K = 8, alpha = 1, seed = 42) {
   xs <- as.numeric(x)
   K <- as.integer(K)

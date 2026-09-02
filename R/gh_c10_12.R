@@ -16,6 +16,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.5.
 #' @export
+#' @examples
+#' Ghosalmodselbic()
 Ghosalmodselbic <- function(truth_in_H1 = TRUE, n = 2000, seed = 42) {
   if (n <= 0) stop("n must be positive")
   e <- .ghc_rng(seed)

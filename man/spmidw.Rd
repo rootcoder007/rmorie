@@ -38,10 +38,6 @@ one-nearest-neighbour interpolation; and "inverse distance does not
 provide prediction error variances", so \code{variance} is NULL rather than a
 fabricated number.
 }
-\references{
-Bivand, R. S., Pebesma, E., and Gomez-Rubio, V. (2013)
-Applied Spatial Data Analysis with R, 2nd ed., Springer, Sec. 8.3.1.
-}
 \examples{
 g <- 0:4
 C <- as.matrix(expand.grid(x = g, y = g))
@@ -52,4 +48,8 @@ idw_fixture <- function() {
 }
 f <- idw_fixture()
 spmidw(f$C, f$z, f$C[4, ])
+}
+\references{
+Bivand, R. S., Pebesma, E., and Gomez-Rubio, V. (2013)
+Applied Spatial Data Analysis with R, 2nd ed., Springer, Sec. 8.3.1.
 }

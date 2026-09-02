@@ -21,6 +21,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.1.
 #' @export
+#' @examples
+#' Ghosaladaptthm()
 Ghosaladaptthm <- function(y = NULL, n = 200, K_true = 3, lam = 1,
                            K_max = 12, seed = 42) {
   if (K_max < 1) stop("K_max must be at least 1")

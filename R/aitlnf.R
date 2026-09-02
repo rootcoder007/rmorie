@@ -17,6 +17,9 @@
 #' @references Aitchison (1986), The Statistical Analysis of
 #'   Compositional Data, Chapter 7.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Lgtnfit(D)
 Lgtnfit <- function(X, ddof = 1) {
   X <- as.matrix(X); n <- nrow(X); D <- ncol(X)
   if (n < 2L) stop("at least two compositions are required")

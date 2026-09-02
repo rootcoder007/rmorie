@@ -21,6 +21,9 @@
 #'   cost. Journal of the American Statistical Association, 107(500),
 #'   1590-1598.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_chgseg(V)
 morie_chgseg <- function(y, penalty = NULL) {
   out <- morie_pelt(y, cost = "mean", penalty = penalty)
   out$method <- paste("PELT mean-change segmentation",

@@ -39,6 +39,9 @@ Both matrices must be square, of the same order, and symmetric to within
 1e-8; a non-symmetric input is an error, not something to silently
 symmetrise.
 }
+\examples{
+Semsro(sample_cov = 5L, fitted_cov = 5L)
+}
 \references{
 Bentler, P. M. & Yuan, K.-H. (1999). Structural equation
 modeling with small samples: test statistics. Multivariate Behavioral
@@ -46,7 +49,4 @@ Research 34(2), 181-197. \doi{10.1207/s15327906mb340203};
 Hu, L. & Bentler, P. M. (1999). Cutoff criteria for fit indexes in
 covariance structure analysis. Structural Equation Modeling 6(1), 1-55.
 \doi{10.1080/10705519909540118}
-}
-\examples{
-Semsro(sample_cov = 5L, fitted_cov = 5L)
 }

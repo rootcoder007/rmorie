@@ -30,11 +30,11 @@ Formula:
 \code{L = -(1/|B|) sum_ij log sigmoid(z_ij (t x_i . y_j + b))},
 \code{z_ij = 1} on the diagonal, \code{-1} elsewhere.
 }
-\references{
-Zhai, Mustafa, Kolesnikov & Beyer (2023). ICCV 2023,
-equation (3).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Siglip(V, V)
+}
+\references{
+Zhai, Mustafa, Kolesnikov & Beyer (2023). ICCV 2023,
+equation (3).
 }

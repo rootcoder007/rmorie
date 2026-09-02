@@ -18,6 +18,8 @@
 #'   copy of the book held in the corpus. NOTE: the worklist filed this
 #'   under "Appendix D"; in the book it is Lemma 6.46 in Section 6.8.2.
 #' @export
+#' @examples
+#' Lecam(dtv = 0.3, p0_phi = 0.4, prior_mass = 0.5, integral = 0.2)
 Lecam <- function(dtv, p0_phi, prior_mass, integral) {
   dtv <- as.numeric(dtv); p0 <- as.numeric(p0_phi)
   pm <- as.numeric(prior_mass); it <- as.numeric(integral)

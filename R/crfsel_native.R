@@ -19,22 +19,22 @@
 # shuffling permutations from the shared generator so the same seed
 # reproduces the same ordering.
 
-#' Cross-fitted local centering
-#'
-#' Cross-fitted m(X) and e(X), as in the partial-linear forest. The
-#' Python arm leaves the helper as private; exposing it here so the
-#' centering step is auditable.
-#'
-#' @param y Numeric outcome vector.
-#' @param W Numeric treatment vector.
-#' @param X Numeric covariate matrix.
-#' @param n_folds Integer number of folds.
-#' @param n_trees Integer number of trees per forest.
-#' @param min_leaf Integer minimum leaf size.
-#' @param seed Integer seed for the shared generator.
-#' @return A list with \code{m_hat} and \code{e_hat}.
-#' @keywords internal
-#' @noRd
+# Cross-fitted local centering
+#
+# Cross-fitted m(X) and e(X), as in the partial-linear forest. The
+# Python arm leaves the helper as private; exposing it here so the
+# centering step is auditable.
+#
+# @param y Numeric outcome vector.
+# @param W Numeric treatment vector.
+# @param X Numeric covariate matrix.
+# @param n_folds Integer number of folds.
+# @param n_trees Integer number of trees per forest.
+# @param min_leaf Integer minimum leaf size.
+# @param seed Integer seed for the shared generator.
+# @return A list with \code{m_hat} and \code{e_hat}.
+# @keywords internal
+# @noRd
 
 # Split counts by (depth, feature), depth 1 at the root. Mirrors
 # morie.fn.crfsel._depth_counts; element [[depth]] holds the counts at
@@ -61,21 +61,22 @@
   counts
 }
 
-#' .center_cate
+#' Cross-fitted local centering
 #'
-#' A step of the crfsel_native implementation. Called by \code{morie_crfsel}.
-#' See the file header for the source the module follows.
-#' source it follows.
+#' Cross-fitted m(X) and e(X), as in the partial-linear forest. The
+#' Python arm leaves the helper as private; exposing it here so the
+#' centering step is auditable.
 #'
-#' @param y A vector; its length is taken and its elements indexed.
-#' @param W A vector; indexed elementwise.
-#' @param X A matrix; indexed by row and column.
-#' @param n_folds A count; the body uses it as \code{seq_len(...)}.
-#' @param n_trees Passed to \code{grow_forest}.
-#' @param min_leaf Passed to \code{grow_forest}.
-#' @param seed Numeric; combined arithmetically in the body.
-#' @return A list with \code{m_hat}, \code{e_hat}.
-#' @export
+#' @param y Numeric outcome vector.
+#' @param W Numeric treatment vector.
+#' @param X Numeric covariate matrix.
+#' @param n_folds Integer number of folds.
+#' @param n_trees Integer number of trees per forest.
+#' @param min_leaf Integer minimum leaf size.
+#' @param seed Integer seed for the shared generator.
+#' @return A list with \code{m_hat} and \code{e_hat}.
+#' @keywords internal
+#' @noRd
 .center_cate <- function(y, W, X, n_folds, n_trees, min_leaf, seed) {
   n <- length(y)
   if (n_folds < 2L) n_folds <- 2L

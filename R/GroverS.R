@@ -17,6 +17,10 @@
 #' @references Grover (1996), A fast quantum mechanical algorithm for
 #'   database search, STOC '96, pp. 212-219. \doi{10.1145/237814.237866}
 #' @export
+#' @examples
+#' oracle <- rep(0, 8)
+#' oracle[4] <- 1
+#' GroverS(oracle, N = 8)
 GroverS <- function(oracle, N) {
   mark <- as.integer(.s03vec(oracle))
   n <- as.integer(N)

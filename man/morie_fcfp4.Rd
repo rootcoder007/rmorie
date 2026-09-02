@@ -29,11 +29,11 @@ and Hahn 2010).  Two molecules that place the same roles in the
 same topology therefore share features even when the elements
 differ, which is what makes FCFP the scaffold-hopping variant.
 }
+\examples{
+morie_fcfp4(adjacency = 5L, features = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010). Extended-connectivity
 fingerprints. Journal of Chemical Information and Modeling,
 50(5), 742-754.
-}
-\examples{
-morie_fcfp4(adjacency = 5L, features = 5L)
 }

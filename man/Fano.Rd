@@ -23,6 +23,9 @@ The bound is informative only once log M exceeds I + log 2.
 \details{
 Formula: P_err >= 1 - (I(theta; X) + log 2) / log M
 }
+\examples{
+Fano(M = 5L, mutual_info = 5L)
+}
 \references{
 Fano (1961), Transmission of Information, MIT Press, and
 Cover & Thomas (2006), Elements of Information Theory, 2nd edition,
@@ -30,7 +33,4 @@ Theorem 2.10.1. The worklist filed this under "Ghosal Appendix K";
 the copy of Ghosal & van der Vaart (2017) held in the corpus was
 searched in full and the word "Fano" does NOT occur in it, so the
 attribution could not be confirmed and the primary sources are cited.
-}
-\examples{
-Fano(M = 5L, mutual_info = 5L)
 }

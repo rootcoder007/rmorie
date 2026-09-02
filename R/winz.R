@@ -16,6 +16,9 @@
 #' @references Dixon, W. J. (1960). Ann Math Statist 31:385-391, where
 #'   Winsor rule is set out and attributed to him.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Winz(V)
 Winz <- function(x, alpha = 0.1) {
   v <- as.numeric(unlist(x)); n <- length(v)
   lo <- .s4_quantile7(v, alpha); hi <- .s4_quantile7(v, 1 - alpha)

@@ -20,6 +20,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.6.1.
 #' @export
+#' @examples
+#' Ghosalcoxpost()
 Ghosalcoxpost <- function(beta0 = 0.6, n = 400, prior_sd = 2, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")

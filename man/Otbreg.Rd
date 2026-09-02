@@ -31,11 +31,11 @@ Formula: \code{T <- diag(a / (T 1)) T} then
 \eqn{T <- T diag(b / (T prime 1))}, repeated -- Benamou et al. (2015)
 eq. (5)-(6); Peyre and Cuturi (2019) eq. (4.6)-(4.7).
 }
+\examples{
+Otbreg(K = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}
 \references{
 Benamou, J.-D., Carlier, G., Cuturi, M., Nenna, L. and
 Peyre, G. (2015). SIAM Journal on Scientific Computing
 37(2):A1111-A1138. \doi{10.1137/141000439}.
-}
-\examples{
-Otbreg(K = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 }

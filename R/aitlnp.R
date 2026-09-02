@@ -19,6 +19,8 @@
 #'   Compositional Data, Chapter 6. The reference part is the LAST,
 #'   matching the sibling module aitalr.
 #' @export
+#' @examples
+#' Lgtnpdf(c(0.3, 0.3, 0.4), mu = c(0, 0), Sigma = diag(2))
 Lgtnpdf <- function(x, mu, Sigma) {
   x <- .t1_vec(x); D <- length(x)
   if (D < 2L) stop("a composition needs at least two parts")

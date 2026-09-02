@@ -34,6 +34,8 @@
 #' @references Purcell, S. et al. (2007). PLINK. American Journal of
 #'   Human Genetics, 81(3), 559-575, Table 1.
 #' @export
+#' @examples
+#' morie_p_ibs_given_ibd(X = 2, Y = 2, T = 4)
 morie_p_ibs_given_ibd <- function(X, Y, T) {
   X <- as.numeric(X); Y <- as.numeric(Y); T <- as.numeric(T)
   if (T < 4 || X + Y != T) stop("need T = X + Y >= 4")
@@ -75,6 +77,10 @@ morie_p_ibs_given_ibd <- function(X, Y, T) {
 #' @references Purcell, S. et al. (2007). PLINK. American Journal of
 #'   Human Genetics, 81(3), 559-575.
 #' @export
+#' @examples
+#' set.seed(1)
+#' G <- matrix(sample(0:2, 30 * 12, replace = TRUE), 30, 12)
+#' dim(morie_ibdmtx(G))
 morie_ibdmtx <- function(G) {
   rows <- as.matrix(G)
   storage.mode(rows) <- "double"

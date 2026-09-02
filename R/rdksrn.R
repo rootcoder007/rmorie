@@ -11,6 +11,9 @@
 #' @param w Kernel weights on that side.
 #' @return List with \code{a}, \code{b}, \code{var_a}, \code{var_b}, \code{n}.
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' r <- .rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
 .rd_wls <- function(r, y, w) {
   S0 <- sum(w); S1 <- sum(w * r); S2 <- sum(w * r * r)
   Sy <- sum(w * y); Sry <- sum(w * r * y)
@@ -72,6 +75,9 @@
 #'   regression-discontinuity design. Econometrica 69(1):201-209.
 #'   \doi{10.1111/1468-0262.00183}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Rdksrn(y = rnorm(10), x = rnorm(10)); TRUE
 Rdksrn <- function(y, x, cutoff = 0, bandwidth = 1) {
   y <- as.numeric(unlist(y)); x <- as.numeric(unlist(x))
   if (length(y) == 0L) stop("Rdksrn: y is empty")

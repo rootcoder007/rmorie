@@ -21,6 +21,8 @@
 #'   Compositional Data, Chapter 6. The reference part is the LAST,
 #'   matching aitalr and aitalri.
 #' @export
+#' @examples
+#' Lgtnsim(mu = 5L, Sigma = 0.5, n = 5L)
 Lgtnsim <- function(mu, Sigma, n, seed = 1, total = 1) {
   mu <- .t1_vec(mu); p <- length(mu)
   if (p < 1L) stop("mu must have at least one entry")

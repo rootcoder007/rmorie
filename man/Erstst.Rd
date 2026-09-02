@@ -31,11 +31,11 @@ regression without deterministic terms,
 dy^d_t = rho y^d_{t-1} + sum_j c_j dy^d_{t-j} + e_t.  The DF-GLS
 statistic is the t-ratio on rho.
 }
-\references{
-Elliott, Rothenberg & Stock (1996), Econometrica
-64(4):813-836, doi:10.2307/2171846.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Erstst(V)
+}
+\references{
+Elliott, Rothenberg & Stock (1996), Econometrica
+64(4):813-836, doi:10.2307/2171846.
 }

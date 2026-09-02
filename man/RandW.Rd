@@ -26,12 +26,12 @@ constraint than the single-graph case.
 \details{
 Formula: \code{k(G1, G2) = sum_ij [(I - lam (A1 (x) A2))^{-1}]_ij}.
 }
+\examples{
+RandW(G1 = 5L, G2 = 5L)
+}
 \references{
 Gaertner, T., Flach, P. & Wrobel, S. (2003). On graph
 kernels: hardness results and efficient alternatives. Learning
 Theory and Kernel Machines, LNCS 2777, pages 129-143.
 \doi{10.1007/978-3-540-45167-9_11}.
-}
-\examples{
-RandW(G1 = 5L, G2 = 5L)
 }

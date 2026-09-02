@@ -25,10 +25,10 @@ List with \code{cp_prob} (P(r_t = 1) at each t), \code{reset_prob}, \code{run_le
 \description{
 Formula: P(r_t=r_{t-1}+1, x_1:t) = P(r_{t-1},x_1:t-1) pi_t^(r) (1-H); P(r_t=0, x_1:t) = sum_r P(r_{t-1},x_1:t-1) pi_t^(r) H
 }
-\references{
-Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Bocpd(V)
+}
+\references{
+Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
 }

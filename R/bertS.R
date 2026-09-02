@@ -13,6 +13,9 @@
 #' @references Zhang, Kishore, Wu, Weinberger and Artzi (2020), ICLR;
 #'   arXiv:1904.09675, Sect. 3.  Read from the ar5iv rendering.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bertscore(V, V)
 Bertscore <- function(reference, candidate, idf = NULL) {
   X <- .t1_mat(reference); Y <- .t1_mat(candidate)
   k <- nrow(X); d <- ncol(X); l <- nrow(Y)

@@ -84,6 +84,9 @@
 #' @references Han, I., Kacham, P., Karbasi, A., Mirrokni, V. and
 #'   Zandieh, A. (2025). PolarQuant. arXiv:2502.02617.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_polqnt(V)
 morie_polqnt <- function(x, bits_first = 4L, bits_rest = 2L,
                          quantize = TRUE) {
   v <- as.numeric(x)

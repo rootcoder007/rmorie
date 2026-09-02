@@ -44,6 +44,8 @@
 #' @references Blondel, Guillaume, Lambiotte & Lefebvre (2008),
 #'   J. Stat. Mech. 2008(10):P10008.
 #' @export
+#' @examples
+#' Comlou(matrix(c(0, 1, 1, 0, 1, 0, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0), 4, 4, byrow = TRUE))
 Comlou <- function(G, resolution = 1, max_pass = 20) {
   A0 <- .s03mat(G)
   n0 <- nrow(A0)

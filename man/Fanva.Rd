@@ -12,7 +12,7 @@ Fanva(functions, groups, t = NULL)
 \item{groups}{N group labels.}
 
 \item{t}{the argument grid of length T; defaults to equally spaced on
-[0, 1] and is ignored when T == 1.}
+\link{0, 1} and is ignored when T == 1.}
 }
 \value{
 list: estimate, grand, effects, ssb, ssw, ssb_int, ssw_int, F,

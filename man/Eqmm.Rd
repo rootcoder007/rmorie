@@ -32,10 +32,10 @@ characteristic curve by the same factor -- so the ratio must be a_F
 over a_R.  The stub's B was already correct and the two are mutually
 consistent only with A as written here.
 }
+\examples{
+Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Loyd & Hoover (1980), Journal of Educational Measurement
 17(3):179-193, doi:10.1111/j.1745-3984.1980.tb00825.x.
-}
-\examples{
-Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

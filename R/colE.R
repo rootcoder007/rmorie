@@ -25,6 +25,9 @@
 #' @references Schein, Popescul, Ungar & Pennock (2002), Methods and
 #'   Metrics for Cold-Start Recommendations, SIGIR 2002:253-260.
 #' @export
+#' @examples
+#' R <- matrix(c(5, 3, 0, 4, 0, 2, 0, 5, 3, 4, 4, 5), 4, 3, byrow = TRUE)
+#' ColE(user = 1, mode = "popular", R = R, min_ratings = 1)
 ColE <- function(user, mode = "popular", R = NULL, item_features = NULL,
                  user_features = NULL, min_ratings = 3, topn = 3) {
   if (is.null(R)) stop("R is required")

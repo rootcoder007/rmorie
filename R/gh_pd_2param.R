@@ -23,6 +23,8 @@
 #'   Only the sigma in [0, 1) branch is implemented; the negative-sigma
 #'   branch is a finite-support family and is refused.
 #' @export
+#' @examples
+#' Poisdir(sigma = 0.5, M = 5L, k = 5L)
 Poisdir <- function(sigma, M, k, n = NULL) {
   sigma <- as.numeric(sigma); M <- as.numeric(M); k <- as.integer(k)
   if (sigma < 0 || sigma >= 1)

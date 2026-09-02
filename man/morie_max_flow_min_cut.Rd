@@ -22,12 +22,12 @@ from the residual graph and its capacity RECOMPUTED from the original
 matrix rather than assumed equal, so the theorem is a check rather
 than a restatement.
 }
-\references{
-Ford LR, Fulkerson DR (1956) \emph{Canad J Math}
-8:399-404.
-}
 \examples{
 C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0), 
     4, 4, byrow = TRUE)
 morie_max_flow_min_cut(C, 1, 4)
+}
+\references{
+Ford LR, Fulkerson DR (1956) \emph{Canad J Math}
+8:399-404.
 }

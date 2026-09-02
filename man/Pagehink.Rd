@@ -29,9 +29,9 @@ mirrored form detects a decrease.  \eqn{\delta} is the magnitude
 below which a deviation is treated as noise; \code{threshold} trades
 detection delay against false alarms.
 }
-\references{
-Page (1954), Biometrika 41:100-115; Hinkley (1971), Biometrika 58:509-523.  Both paywalled at JSTOR (HTTP 403); the running-mean form used here is the one standardised in Gama, Zliobaite, Bifet, Pechenizkiy and Bouchachia (2014), A survey on concept drift adaptation, ACM Computing Surveys 46(4):44, sec. 4.2.
-}
 \examples{
 Pagehink(x = c(1, 2, 3, 4, 5, 6, 7, 8), threshold = 0.5)
+}
+\references{
+Page (1954), Biometrika 41:100-115; Hinkley (1971), Biometrika 58:509-523.  Both paywalled at JSTOR (HTTP 403); the running-mean form used here is the one standardised in Gama, Zliobaite, Bifet, Pechenizkiy and Bouchachia (2014), A survey on concept drift adaptation, ACM Computing Surveys 46(4):44, sec. 4.2.
 }

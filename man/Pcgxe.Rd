@@ -20,7 +20,7 @@ center, scale, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume [Pages 35-70], Chapter 2, Section 2.8, pp. 63-68.  The section
+volume \link{Pages 35-70}, Chapter 2, Section 2.8, pp. 63-68.  The section
 gives PC = XW, "where W is a p-by-p matrix of weights whose columns are
 the eigenvectors of Q = X'X, that is, we first need to calculate the
 eigenvalue decomposition of Q, which is equal to Q = W Lambda W'"; the

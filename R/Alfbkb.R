@@ -17,6 +17,9 @@
 #' @return A list with \code{frames}, the normalised \code{quat},
 #'   \code{estimate}, \code{n} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. Algorithm 23
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Alfbkb(M, M)
 Alfbkb <- function(s, w, b = NULL, frames = NULL) {
   n <- nrow(s)
   out <- vector("list", n)

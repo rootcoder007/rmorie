@@ -9,6 +9,9 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (1.3) p.16. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Msm003(D)
 Msm003 <- function(groups) {
   s <- .gponeway(groups)
   list(estimate = s$group_means[1L], beta = s$group_means,

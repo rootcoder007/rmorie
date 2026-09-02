@@ -29,10 +29,10 @@ Prentice-Gloeckler grouped proportional-hazards model, logit gives
 Cox's discrete proportional-odds model. Klein & Moeschberger (2003),
 Survival Analysis 2nd ed., Section 8.4.
 }
+\examples{
+Survlnk(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Klein, J. P. and Moeschberger, M. L. (2003), Survival
 Analysis, 2nd ed., Springer, Section 8.4.
-}
-\examples{
-Survlnk(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

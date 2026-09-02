@@ -19,6 +19,9 @@
 #' @references Galbraith, R. F. (1988). Statistics in Medicine
 #'   7(8):889-894. \doi{10.1002/sim.4780070807}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Magal(V, V)
 Magal <- function(yi, se_i) {
   y <- as.numeric(yi); s <- as.numeric(se_i); k <- length(y)
   if (k == 0L) stop("no studies")

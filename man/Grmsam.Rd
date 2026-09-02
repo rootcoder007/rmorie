@@ -30,11 +30,11 @@ The constraint is checked rather than assumed.
 Formula: P*_k = 1/(1 + exp(-a(theta - b_k))), P*\emph{0 = 1, P*}{m+1} = 0,
 P_k = P*\emph{k - P*}{k+1}.
 }
+\examples{
+Grmsam(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_k = c(-1, 0, 1))
+}
 \references{
 Samejima (1969), Estimation of latent ability using a
 response pattern of graded scores, Psychometrika Monograph
 Supplement 34(4, Pt. 2). \doi{10.1007/BF03372160}
-}
-\examples{
-Grmsam(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_k = c(-1, 0, 1))
 }

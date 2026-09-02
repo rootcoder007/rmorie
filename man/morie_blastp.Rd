@@ -33,12 +33,12 @@ MSP = highest-scoring ungapped local segment pair (Altschul et
 al. 1990 Sec. 2a); E = K m n exp(-lambda S) (Karlin-Altschul
 extreme-value statistics); p = 1 - exp(-E).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_blastp(V, V)
+}
 \references{
 Altschul, S. F., Gish, W., Miller, W., Myers, E. W.
 and Lipman, D. J. (1990). Basic local alignment search tool.
 Journal of Molecular Biology, 215(3), 403-410.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_blastp(V, V)
 }

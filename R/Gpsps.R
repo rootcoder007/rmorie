@@ -23,6 +23,9 @@
 #'   pattern discovery and extrapolation, ICML 2013, PMLR
 #'   28(3):1067-1075. arXiv:1302.4245
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gpsps(V, V)
 Gpsps <- function(X, y, X_test = NULL, Q = 1, weights = NULL, variances = NULL,
                   means = NULL, noise = 0.01) {
   xs <- .s03vec(X); yv <- .s03vec(y)

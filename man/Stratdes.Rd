@@ -27,6 +27,9 @@ Formula: proportional n_h prop. N_h; Neyman n_h prop. N_h S_h;
 cost-optimal n_h prop. N_h S_h / sqrt(C_h);
 V(ybar_st) = sum_h W_h^2 (1 - f_h) S_h^2 / n_h
 }
+\examples{
+Stratdes(Nh = 5L, Sh = 5L, n = 5L)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Sections
 5.3-5.5: Theorem 5.3 for the variance, Corollary 2 for proportional
@@ -35,7 +38,4 @@ n_h prop. N_h S_h/sqrt(c_h) under the linear cost function (5.17).
 Chapter 5 read from the scanned original. Cross-checked against the
 CRAN package samplingbook 1.2.4, whose stratasamp uses exactly these
 three weight rules.
-}
-\examples{
-Stratdes(Nh = 5L, Sh = 5L, n = 5L)
 }

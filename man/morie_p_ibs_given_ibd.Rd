@@ -20,10 +20,10 @@ z)} for a SNP with \code{X} copies of one allele and \code{Y} of
 the other among \code{T} nonmissing alleles, including the
 ascertainment correction of Purcell et al. (2007), Table 1.
 }
+\examples{
+morie_p_ibs_given_ibd(X = 2, Y = 2, T = 4)
+}
 \references{
 Purcell, S. et al. (2007). PLINK. American Journal of
 Human Genetics, 81(3), 559-575, Table 1.
-}
-\examples{
-morie_p_ibs_given_ibd(X = 2, Y = 2, T = 4)
 }

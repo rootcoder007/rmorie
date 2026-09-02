@@ -34,11 +34,11 @@ Formula: \code{L0 = (4 T_n - n(n+1))/(2n - 1)} with \code{T_n} the
 rank sum on the suppressed-opposite side; filled values are
 \code{2 theta - y_i}.
 }
-\references{
-Duval, S. & Tweedie, R. (2000). Trim and fill. Biometrics
-56:455-463, equation (2) and section 3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Matrim(V, V)
+}
+\references{
+Duval, S. & Tweedie, R. (2000). Trim and fill. Biometrics
+56:455-463, equation (2) and section 3.
 }

@@ -82,6 +82,9 @@
 #' @references Black D (1948) \emph{Journal of Political Economy}
 #'   56(1):23-34, \doi{10.1086/256633}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_median_voter_ci(V)
 morie_median_voter_ci <- function(x, alpha = 0.05) {
   x <- as.numeric(x)
   x <- x[is.finite(x)]
@@ -160,6 +163,8 @@ morie_median_voter_ci <- function(x, alpha = 0.05) {
 #' @references Hartley HO (1962). Lohr SL, Rao JNK (2000) \emph{JASA}
 #'   95(449):271-280, \doi{10.1080/01621459.2000.10473920}.
 #' @export
+#' @examples
+#' morie_optimal_overlap_weight(var_a = 5L, var_b = 5L)
 morie_optimal_overlap_weight <- function(var_a, var_b) {
   va <- as.numeric(var_a); vb <- as.numeric(var_b)
   if (va < 0 || vb < 0) stop("variances must be non-negative.", call. = FALSE)
@@ -436,6 +441,8 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
 #'   `heterogeneity_p`, `warnings`.
 #' @references Finney DJ (1971) \emph{Probit Analysis}, 3rd ed., Ch 3-4.
 #' @export
+#' @examples
+#' morie_ld50(dose = c(1, 2, 3, 4, 5, 6, 7, 8), n_dead = c(1, 2, 3, 4, 5, 6, 7, 8), n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
                        level = 0.5, alpha = 0.05, log_dose = TRUE) {
   link <- match.arg(link)

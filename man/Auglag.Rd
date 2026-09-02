@@ -25,13 +25,13 @@ lambda, mu, m.
 L_A = f(x) + sum_i lambda_i g_i(x) + (mu/2) sum_i g_i(x)^2, with the
 first-order multiplier update lambda <- lambda + mu g(x).
 }
-\references{
-Hestenes (1969), JOTA 4(5), 303-320; Powell (1969), in
-Fletcher (ed.), Optimization, 283-298.  Standard published form;
-neither source is in the local corpus and neither was read.
-}
 \examples{
 f <- function(x) sum(x^2)
 g <- function(x) sum(x) - 1
 Auglag(f, g, x = c(0.5, 0.5))
+}
+\references{
+Hestenes (1969), JOTA 4(5), 303-320; Powell (1969), in
+Fletcher (ed.), Optimization, 283-298.  Standard published form;
+neither source is in the local corpus and neither was read.
 }

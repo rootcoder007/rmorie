@@ -42,12 +42,12 @@ i.e. y_t = w' x_{t-1} + e_t, x_t = F x_{t-1} + g e_t.  Smoothing
 parameters are chosen on a deterministic 0.1-step grid minimising the
 one-step sum of squared errors, or may be fixed directly.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Etsmod(V)
+}
 \references{
 Hyndman, Koehler, Snyder & Grose (2002), International
 Journal of Forecasting 18(3):439-454,
 doi:10.1016/S0169-2070(01)00110-8.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Etsmod(V)
 }

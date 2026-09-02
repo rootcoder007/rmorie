@@ -23,6 +23,9 @@
 #'   Bland (1977), Mathematics of Operations Research 2(2):103-107.
 #'   \doi{10.1287/moor.2.2.103}
 #' @export
+#' @examples
+#' Glpopt(c = c(-1, -2), A = matrix(c(1, 1, 1, 0, 0, 1), 3, 2, byrow = TRUE),
+#'        b = c(4, 2, 3))
 Glpopt <- function(c, A, b, max_iter = 200) {
   cv <- .s03vec(c); M <- .s03mat(A); bv <- .s03vec(b)
   m <- nrow(M); n <- length(cv)

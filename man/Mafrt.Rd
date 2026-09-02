@@ -25,11 +25,11 @@ rather than estimated.
 Formula: \code{FT = asin sqrt(x/(n+1)) + asin sqrt((x+1)/(n+1))},
 \code{Var(FT) = 1/(n + 1/2)}.
 }
-\references{
-Freeman, M. F. & Tukey, J. W. (1950). Ann Math Statist
-21:607-611; Miller, J. J. (1978). Amer Statist 32:138.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Mafrt(V, V)
+}
+\references{
+Freeman, M. F. & Tukey, J. W. (1950). Ann Math Statist
+21:607-611; Miller, J. J. (1978). Amer Statist 32:138.
 }

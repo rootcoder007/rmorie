@@ -36,12 +36,12 @@ itself given a prior.  That contrast is returned rather than buried.
 Formula: minimax = n^(-s/(2s+1)); rescaled SE picks up
 (log n)^((s+1)/(2s+1)); plain SE gives (log n)^(-s).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalgpdenscrt(V)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.3.1 and ch. 11;
 van der Vaart & van Zanten.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ghosalgpdenscrt(V)
 }

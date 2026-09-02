@@ -6,6 +6,9 @@
 #' @param max_norm Numeric clipping threshold (default 1).
 #' @return Named list with tensor (clipped), clip_coef, total_norm, max_norm, method.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' gradient_clipping(V)
 gradient_clipping <- function(x, max_norm = 1) {
   is_list <- is.list(x)
   cat_vec <- if (is_list) {

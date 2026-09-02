@@ -50,9 +50,9 @@ of them. The tail test is conservative on assays with saturated dose
 groups, since a group fitted within 1e-5 of 0 or 1 contributes no
 deviance while still spending a degree of freedom.
 }
-\references{
-Finney DJ (1971) \emph{Probit Analysis}, 3rd ed., Ch 3-4.
-}
 \examples{
 morie_ld50(dose = c(1, 2, 3, 4, 5, 6, 7, 8), n_dead = c(1, 2, 3, 4, 5, 6, 7, 8), n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+Finney DJ (1971) \emph{Probit Analysis}, 3rd ed., Ch 3-4.
 }

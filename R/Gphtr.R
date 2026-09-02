@@ -24,6 +24,9 @@
 #' @references Goldberg, Williams and Bishop (1998), Regression with
 #'   input-dependent noise: a Gaussian process treatment, NIPS 10.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gphtr(V, V)
 Gphtr <- function(X, y, X_test = NULL, lengthscale = 1, variance = 1,
                   noise0 = 0.1, noise_lengthscale = 1, iters = 3, floor = 1e-6) {
   A <- .s03mat(X)

@@ -20,6 +20,9 @@
 #'   transform are NOT in that section; they are the standard published
 #'   forms (Fisher, 1915, Biometrika 10(4), 507-521).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Pearsonr(V, V)
 Pearsonr <- function(x, y, level = 0.95) {
   x <- .t1_vec(x); y <- .t1_vec(y); n <- length(x)
   if (length(y) != n) stop("x and y must have the same length")

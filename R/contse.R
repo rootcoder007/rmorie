@@ -19,6 +19,9 @@
 #'   \code{method}.
 #' @references Gao, Yao & Chen (2021), SimCSE, EMNLP 2021:6894-6910.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Contse(M)
 Contse <- function(sentences, tau = 0.05, dropout = 0.1, seed = 42) {
   H <- .s03mat(sentences)
   n <- nrow(H)

@@ -17,6 +17,8 @@
 #' @return List with \code{estimate}, \code{nie}, \code{total}, \code{se}, \code{eps}, \code{n}.
 #' @references Zheng, W. & van der Laan, M. J. (2012). IJB 8(1):1-40.
 #' @export
+#' @examples
+#' TmlMd(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = 5L, Cc = c(1, 2, 3, 4, 5, 6, 7, 8))
 TmlMd <- function(Y, X, M, Cc) {
   yv <- as.numeric(Y); Dv <- as.numeric(X); Mv <- as.numeric(M); n <- length(yv)
   W <- cbind(1, as.matrix(Cc))

@@ -21,6 +21,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 1.3.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalabsolutecontinuity(V)
 Ghosalabsolutecontinuity <- function(x, log_lik = NULL, log_prior = NULL) {
   th <- as.numeric(x)
   if (length(th) == 0L) stop("x must be non-empty")

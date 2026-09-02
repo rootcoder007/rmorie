@@ -26,13 +26,13 @@ p, q, d, r, nobs.
 of the differenced response on the differenced covariates; stage two
 is the Hannan-Rissanen two-stage regression on the residual series.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Arimaxhr(V, V)
+}
 \references{
 Box and Jenkins (1976), Chapters 10-11 (transfer-function
 models); disturbance estimation by Hannan and Rissanen (1982),
 Biometrika 69(1), 81-94.  Standard published form; neither source is
 in the local corpus and neither was read.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Arimaxhr(V, V)
 }

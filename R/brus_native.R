@@ -12,6 +12,8 @@
 #' @param n_population Population size N.
 #' @return List with total, mean, weights.
 #' @export
+#' @examples
+#' morie_ht_estimators(z = c(10, 20, 15), pi = c(0.1, 0.2, 0.15), n_population = 100)
 morie_ht_estimators <- function(z, pi, n_population) {
   z <- as.numeric(z)
   pi <- as.numeric(pi)
@@ -34,6 +36,8 @@ morie_ht_estimators <- function(z, pi, n_population) {
 #' @return List with p_hat, var_p, ci, total_inf, var_total_inf (pieces
 #'   whose inputs were supplied).
 #' @export
+#' @examples
+#' morie_si_estimators()
 morie_si_estimators <- function(y = NULL, n = NA, n_population = NA,
                                 estimate = NA, variance = NA, u_crit = NA,
                                 zbar_hat = NA, area = NA, sample_area = NA,
@@ -71,6 +75,8 @@ morie_si_estimators <- function(y = NULL, n = NA, n_population = NA,
 #' @param c0,stratum_costs,stratum_sizes Cost model pieces.
 #' @return List with mean, variance, cost (as supplied).
 #' @export
+#' @examples
+#' morie_stsi_estimators()
 morie_stsi_estimators <- function(stratum_means = NULL,
                                   stratum_weights = NULL,
                                   stratum_variances = NULL, c0 = NA,
@@ -104,6 +110,8 @@ morie_stsi_estimators <- function(stratum_means = NULL,
 #' @return List with total_pps, total_si, mean_from_total, ts_mean,
 #'   ts_variance, s2_psu, true_variance (as supplied).
 #' @export
+#' @examples
+#' morie_cluster_twostage()
 morie_cluster_twostage <- function(cluster_totals = NULL,
                                    cluster_sizes = NULL,
                                    m_population = NA,
@@ -148,6 +156,8 @@ morie_cluster_twostage <- function(cluster_totals = NULL,
 #' @param c_max Budget.
 #' @return List with m_opt, n_for_variance, n_for_budget.
 #' @export
+#' @examples
+#' morie_twostage_design(s_w = c(1, 2, 3, 4, 5, 6, 7, 8), s_b = c(1, 2, 3, 4, 5, 6, 7, 8), c1 = c(1, 2, 3, 4, 5, 6, 7, 8), c2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
                                   c_max = NA) {
   stopifnot(s_w > 0, s_b > 0, c1 > 0, c2 > 0)
@@ -169,6 +179,8 @@ morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
 #'   Estimated total.
 #' @return Numeric variance estimate.
 #' @export
+#' @examples
+#' morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), t_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_pps_variance <- function(z, p, t_hat) {
   z <- as.numeric(z)
   p <- as.numeric(p)
@@ -194,6 +206,8 @@ morie_pps_variance <- function(z, p, t_hat) {
 #' @return List with difference, gls_b, regr_general, regr_slopes, ratio,
 #'   ratio_g (as supplied).
 #' @export
+#' @examples
+#' morie_model_assisted()
 morie_model_assisted <- function(m_all = NULL, z_sample = NULL,
                                  m_sample = NULL, pi_sample = NULL,
                                  n_population = NA, x = NULL, z = NULL,
@@ -255,6 +269,8 @@ morie_model_assisted <- function(m_all = NULL, z_sample = NULL,
 #' @return List with s2_e, variance, g_weight, g_variance, ratio_variance,
 #'   mc_variance (as supplied).
 #' @export
+#' @examples
+#' morie_greg_variance()
 morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
                                 x_k = NA, xbar_true = NA, xbar_sample = NA,
                                 s2_x = NA, g = NULL, pi = NULL,
@@ -299,6 +315,8 @@ morie_greg_variance <- function(e = NULL, n = NA, n_population = NA,
 #' @param z_sample,b_si,m_sample_mean SI shortcut pieces.
 #' @return List with poststratified, calibrated, intercept, si_shortcut.
 #' @export
+#' @examples
+#' morie_calibration()
 morie_calibration <- function(group_means_sample = NULL,
                               group_weights = NULL, zbar_pi = NA,
                               a_hat = NA, pi_sample = NULL,
@@ -343,6 +361,8 @@ morie_calibration <- function(group_means_sample = NULL,
 #' @return List with regression_total, balanced_variance,
 #'   local_mean_variance, twophase_strat, twophase_regr, s2_resid.
 #' @export
+#' @examples
+#' morie_balanced_twophase()
 morie_balanced_twophase <- function(t_pi_z = NA, t_x_true = NA,
                                     t_pi_x = NA, b_hat = NA, e = NULL,
                                     pi = NULL, c_k = NULL,
@@ -398,6 +418,8 @@ morie_balanced_twophase <- function(t_pi_z = NA, t_x_true = NA,
 #' @param lengths,probs,coverages,alpha ALC/ACC pieces.
 #' @return List with the requested sample sizes and criteria.
 #' @export
+#' @examples
+#' morie_sample_size()
 morie_sample_size <- function(p_star = NA, se_max = NA, u_crit = NA,
                               s_star = NA, l_max = NA, cv_star = NA,
                               r_max = NA, design_effect = NA, n_si = NA,
@@ -457,6 +479,8 @@ morie_sample_size <- function(p_star = NA, se_max = NA, u_crit = NA,
 #' @return List with stsi_variance, equal_area_variance, alloc_variance,
 #'   objective_o, d2, stratum_variance, ospats_objective (as supplied).
 #' @export
+#' @examples
+#' morie_ospats()
 morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
                          n = NA, s_h = NULL, c_h = NULL, zhat_i = NA,
                          zhat_j = NA, r2 = NA, s2_i = NA, s2_j = NA,
@@ -507,6 +531,8 @@ morie_ospats <- function(gamma_bar_h = NULL, weights = NULL, n_h = NULL,
 #' @param h,c0,c1,phi Semivariogram pieces. @param z,mu,cov Likelihood.
 #' @return List with lam, nu, v_ok_cov, v_ok_gamma, gamma_h, loglik.
 #' @export
+#' @examples
+#' morie_kriging()
 morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
                           lam = NULL, nu = NA, gamma_s0 = NULL, h = NULL,
                           c0 = NA, c1 = NA, phi = NA, z = NULL,
@@ -559,6 +585,8 @@ morie_kriging <- function(cov_ss = NULL, cov_s0 = NULL, sigma2 = NA,
 #'   pieces. @param dlam_dtheta,a_mat Tau2 pieces. @param akv,vkv EAC.
 #' @return List with nested, fisher_info, vkv, akv, e_tau2, eac.
 #' @export
+#' @examples
+#' morie_variogram_design()
 morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
                                    c_ijk = NA, eps = NA, a = NULL,
                                    da_list = NULL, cov_theta = NULL,
@@ -620,6 +648,8 @@ morie_variogram_design <- function(mu = NA, a_i = NA, b_ij = NA,
 #' @param c_hat,c_true,u Classification pieces.
 #' @return List of the requested quantities.
 #' @export
+#' @examples
+#' morie_survey_variances()
 morie_survey_variances <- function(sigma2 = NA, n = NA, rho_bar = NA,
                                    s2 = NA, n_population = NA,
                                    xbar_d = NULL, beta_hat = NULL,

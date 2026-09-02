@@ -21,11 +21,11 @@ quantity as \code{morie_effective_sample_size} in R/sampling.R, which is
 Kish's weights-based design effect; this one is about serial
 dependence in an ordered stream.
 }
-\references{
-Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483,
-\doi{10.1214/ss/1177011137}.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_ess_autocorrelation(V)
+}
+\references{
+Geyer CJ (1992) \emph{Statistical Science} 7(4):473-483,
+\doi{10.1214/ss/1177011137}.
 }

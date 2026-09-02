@@ -19,12 +19,12 @@ always in the kernel.
 \details{
 Formula: L(u, v) = d_v - w(v, v) if u = v, -w(u, v) if u ~ v, else 0
 }
+\examples{
+Graphlap(W = 5L)
+}
 \references{
 Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4,
 which generalises the Section 1.2 definition to weighted graphs with
 loops exactly as written above. Fetched from the author's own copy of
 the chapter.
-}
-\examples{
-Graphlap(W = 5L)
 }

@@ -17,6 +17,8 @@
 #'   p. 354, after Kulldorff and Nagarwalla (1995).  Read from the corpus
 #'   PDF.
 #' @export
+#' @examples
+#' Scanstat(O = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), zones = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 Scanstat <- function(O, E, zones, highonly = TRUE) {
   O <- .t1_vec(O); E <- .t1_vec(E); n <- length(O)
   if (length(E) != n) stop("O and E must have the same length")

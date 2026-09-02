@@ -40,7 +40,7 @@ rss, bandwidth, K, d, n, method.
 \description{
 Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 3.2, equation (3.19) (pages 70-71):
-E(Y|X=x) = G[mu + m_1(x^1) + ... + m_d(x^d)] with G KNOWN.  The
+E(Y|X=x) = G\link{mu + m_1(x^1) + ... + m_d(x^d)} with G KNOWN.  The
 book's recipe is a series approximation fitted by nonlinear least
 squares -- which is what imposes additivity and avoids the curse of
 dimensionality -- followed by ONE Newton step toward a local-linear

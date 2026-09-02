@@ -18,6 +18,8 @@
 #'   Welling (2018), Modeling relational data with graph convolutional
 #'   networks, ESWC 2018, eq. (2). arXiv:1703.06103
 #' @export
+#' @examples
+#' Kgnn(A_r = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, W_r = c(1, 2, 3, 4, 5, 6, 7, 8))
 Kgnn <- function(A_r, X, W_r, W0 = NULL) {
   if (length(A_r) == 0L) stop("r_gcn: no relations supplied")
   if (length(A_r) != length(W_r)) stop("r_gcn: A_r and W_r have different lengths")

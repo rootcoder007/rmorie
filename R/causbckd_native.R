@@ -26,6 +26,10 @@
 #'   Eq. 25, Section 3.3.1; local copy
 #'   fetched-wave3/pearl-2009-causal-inference-statistics-overview-StatSurveys3.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Causbckd(y = rnorm(50), x = rbinom(50, 1, 0.5),
+#'          z = sample(c("a", "b"), 50, replace = TRUE))
 Causbckd <- function(y, x, z) {
   y <- as.numeric(y); xv <- as.numeric(x)
   zl <- as.character(z)

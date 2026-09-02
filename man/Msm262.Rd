@@ -29,13 +29,13 @@ This is the named R arm of module \code{msm262}. The expansion itself
 is implemented once, in \code{Basexp} of \code{gp_mvsml_ch9_14.R}; this
 entry point only exports it under the module's own name.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm262(V, V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic
 Prediction, Springer, eq. (14.2) p.579,
 \doi{10.1007/978-3-030-89010-0}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm262(V, V)
 }

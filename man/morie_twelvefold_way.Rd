@@ -28,9 +28,9 @@ combination of labelling and restriction. Stanley's point in
 tabulating the twelve together is that they are one problem, not
 twelve.
 }
-\references{
-Stanley RP (2011) vol. 1, Sec 1.9.
-}
 \examples{
 morie_twelvefold_way(n = 5L, k = 5L)
+}
+\references{
+Stanley RP (2011) vol. 1, Sec 1.9.
 }

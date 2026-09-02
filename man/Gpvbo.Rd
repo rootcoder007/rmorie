@@ -35,12 +35,12 @@ point it already knows.
 Formula: EI(x) = (f_min - mu(x)) Phi(z) + sigma(x) phi(z),
 z = (f_min - mu(x)) / sigma(x); EI = 0 when sigma(x) = 0.
 }
+\examples{
+Gpvbo(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Jones, Schonlau and Welch (1998), Efficient global
 optimization of expensive black-box functions, Journal of Global
 Optimization 13(4):455-492, eq. (15).
 \doi{10.1023/A:1008306431147}
-}
-\examples{
-Gpvbo(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

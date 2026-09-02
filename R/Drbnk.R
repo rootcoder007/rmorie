@@ -25,6 +25,9 @@
 #'   adaptive experiments. PNAS 118(15), e2014602118; arXiv:1911.02768
 #'   equation (12).
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drbnk(y = rnorm(10), D_t = rnorm(10)); TRUE
 Drbnk <- function(y, D_t, X = NULL, pi_t = NULL) {
   yv <- .s03vec(y); dv <- .s03vec(D_t); n <- length(yv)
   if (n == 0L) stop("Drbnk: empty input, y has no observations")

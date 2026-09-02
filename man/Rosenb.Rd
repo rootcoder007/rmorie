@@ -34,12 +34,12 @@ presents the analysis. \code{gamma_critical} is the largest grid
 value whose upper p-value still falls below \code{alpha} (NULL if
 already insensitive at the smallest Gamma).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Rosenb(V)
+}
 \references{
 Rosenbaum, P. R. (2002), Observational Studies, 2nd ed.,
 Springer, Section 4.3 and the Gamma-table presentation of Chapter
 4. Single-Gamma engine: \code{\link{CnsRos}}.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Rosenb(V)
 }

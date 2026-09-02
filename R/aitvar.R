@@ -13,6 +13,9 @@
 #'   Data, Chapter 4. The relation totvar = (1/D) sum_{i<j} tau_ij is the
 #'   one already used by the sibling module aittvr in this package.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compvar(V)
 Compvar <- function(X) {
   X <- as.matrix(X)
   if (any(X <= 0)) stop("compositions must be strictly positive")

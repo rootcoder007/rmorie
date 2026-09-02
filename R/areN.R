@@ -13,6 +13,8 @@
 #'   Statistics 27(2), 324-335.  Standard published form; the article is
 #'   not in the local corpus and was not read.
 #' @export
+#' @examples
+#' Areratio(var1 = 5L, var2 = 5L)
 Areratio <- function(var1, var2, n1 = 1, n2 = 1) {
   v1 <- as.numeric(var1); v2 <- as.numeric(var2)
   m1 <- as.numeric(n1); m2 <- as.numeric(n2)

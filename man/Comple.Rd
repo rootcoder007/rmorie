@@ -38,11 +38,11 @@ the tail breaks the symmetry while the parameter count stays linear.
 Formula: \code{Re(<e_h, w_r, conj(e_t))>} =
 \code{sum_k [Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt]}.
 }
-\references{
-Trouillon, T. et al. (2016). Complex embeddings for
-simple link prediction. ICML 33, 2071-2080, equation (11).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Comple(V, V)
+}
+\references{
+Trouillon, T. et al. (2016). Complex embeddings for
+simple link prediction. ICML 33, 2071-2080, equation (11).
 }

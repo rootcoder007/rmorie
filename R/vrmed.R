@@ -13,6 +13,8 @@
 #' @return List with \code{estimate}, \code{delta_r2}, \code{r2_full}, \code{r2_partial}.
 #' @references de Heus, P. (2012). Behavior Research Methods 44:213-221.
 #' @export
+#' @examples
+#' Vrmed(r2_full = 5L, r2_partial = c(1, 2, 3, 4, 5, 6, 7, 8))
 Vrmed <- function(r2_full, r2_partial) {
   rf <- as.numeric(r2_full); rp <- as.numeric(r2_partial)
   .t1_result(estimate = if (rf != 0) (rf - rp) / rf else NaN,

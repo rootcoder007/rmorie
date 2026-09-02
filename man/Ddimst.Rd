@@ -21,7 +21,7 @@ Ddimst(
 
 \item{eps_theta}{Predicted noise, same length as x_t.}
 
-\item{eta}{Stochasticity in [0, 1].}
+\item{eta}{Stochasticity in \link{0, 1}.}
 
 \item{T}{Total number of steps for the cosine schedule.}
 
@@ -45,10 +45,10 @@ it reproduces the DDPM ancestral step.  The noise z is taken as zero
 so the map is a function of its arguments alone.
 }
 }
+\examples{
+Ddimst(x_t = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, eps_theta = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Song, Meng & Ermon (2021), Denoising Diffusion Implicit
 Models, ICLR 2021.
-}
-\examples{
-Ddimst(x_t = c(1, 2, 3, 4, 5, 6, 7, 8), t = 5L, eps_theta = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

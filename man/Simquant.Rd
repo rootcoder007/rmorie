@@ -55,9 +55,9 @@ Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 2.9, equations (2.56)-(2.57) (pages 48-49):
 Q_alpha(Y|X=x) = G(x'beta), identified under the assumptions of
 Theorem 2.1.  beta is proportional to dQ_alpha(Y|X=x)/dx, so with a
-weight W, delta = E[W(x) dQ_alpha(Y|X=x)/dx] equals beta up to
+weight W, delta = E\link{W(x) dQ_alpha(Y|X=x)/dx} equals beta up to
 scale and the average-derivative estimator is
-deltahat_AD = (1/n) sum_i [dQhat_alpha(Y|X_i)/dx] W(X_i).
+deltahat_AD = (1/n) sum_i \link{dQhat_alpha(Y|X_i)/dx} W(X_i).
 Chaudhuri, Doksum and Samarov (1997) derive its asymptotics.
 }
 \details{

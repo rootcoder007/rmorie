@@ -25,7 +25,7 @@ Shervashidze et al. (2011), JMLR 12, 2539-2561 (FETCHED), for the WL
 subtree kernel and its survey of alternatives; Gaertner, Flach and
 Wrobel (2003), On graph kernels: hardness results and efficient
 alternatives, COLT/Kernel 2777, 129-143, for the geometric random-walk
-kernel k_RW = sum_ij [(I - lambda A_x)^-1]_ij on the direct product
+kernel k_RW = sum_ij \link{(I - lambda A_x)^-1}_ij on the direct product
 graph, which converges for lambda below the reciprocal of the largest
 eigenvalue of A_x.  The 2003 COLT paper is paywalled; the closed form
 is quoted in its standard published form and restated in section 2 of

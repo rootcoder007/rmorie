@@ -22,8 +22,8 @@ make the two language arms disagree. Seeding from row 1 and then
 repeatedly taking the row furthest from every chosen centre is
 deterministic, and ties break to the lowest index in both arms.
 }
-\keyword{internal}
 \examples{
 set.seed(1)
 r <- .sgt_kmeans_det(rows = rnorm(10), k = 8L); TRUE
 }
+\keyword{internal}

@@ -25,6 +25,9 @@
 #'   Journal of Forecasting 18(3):439-454,
 #'   doi:10.1016/S0169-2070(01)00110-8.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Etsmod(V)
 Etsmod <- function(y, error = "A", trend = FALSE, season = 0,
                    alpha = NULL, beta = NULL, gamma = NULL) {
   y <- as.numeric(y)

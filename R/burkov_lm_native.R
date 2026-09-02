@@ -13,6 +13,8 @@
 #' @param b Bias.
 #' @return List with `predictions`.
 #' @export
+#' @examples
+#' morie_burkov_linear_function(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 morie_burkov_linear_function <- function(x, w, b) {
   x <- as.numeric(x)
   list(
@@ -25,6 +27,9 @@ morie_burkov_linear_function <- function(x, w, b) {
 #' @param y_hat,y Predictions and targets.
 #' @return List with `errors`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_burkov_squared_error(V, V)
 morie_burkov_squared_error <- function(y_hat, y) {
   y_hat <- as.numeric(y_hat)
   y <- as.numeric(y)
@@ -44,6 +49,8 @@ morie_burkov_squared_error <- function(y_hat, y) {
 #' @param N Optional size check.
 #' @return List with `cost`, `residuals`.
 #' @export
+#' @examples
+#' morie_burkov_mse_cost(w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
   x <- as.numeric(x)
   y <- as.numeric(y)

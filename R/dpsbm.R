@@ -34,6 +34,8 @@
 #' @references Kemp, Tenenbaum, Griffiths, Yamada & Ueda (2006),
 #'   AAAI-06:381-388.
 #' @export
+#' @examples
+#' Dpsbm(adjacency = 5L)
 Dpsbm <- function(adjacency, alpha = 1, n_iter = 30, seed = 42) {
   A <- .s03mat(adjacency)
   n <- nrow(A)

@@ -23,12 +23,12 @@ the diagonal of L (the d_v - w(v, v) term). Vertex labels are one-based.
 Formula: w(u, v) = sum of the weights on \{u, v\};
 L(u, v) = d_v - w(v, v) if u = v, -w(u, v) otherwise
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Wgtlap(M)
+}
 \references{
 Chung (1997), Spectral Graph Theory, CBMS 92, Section 1.4,
 for the weighted definition with loops. Fetched from the author's own
 copy of the chapter.
-}
-\examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Wgtlap(M)
 }

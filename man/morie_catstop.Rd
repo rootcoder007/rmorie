@@ -29,15 +29,15 @@ from the administered 4PL items (catR Eqs. 1, 3, 4, 6) and reports
 whether the precision criterion se <= se_target is met, i.e. the
 standard-error stopping rule of computerized adaptive testing.
 }
+\examples{
+items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
+                3, 4, byrow = TRUE)
+morie_catstop(items, theta = 0.5, se_target = 0.5)
+}
 \references{
 Magis, D. and Raiche, G. (2012). Random generation of
 response patterns under computerized adaptive testing with the R
 package catR. Journal of Statistical Software, 48(8).  Wainer, H.
 and Mislevy, R. J. (2000). In Wainer (ed.), Computerized Adaptive
 Testing: A Primer, 2nd ed.
-}
-\examples{
-items <- matrix(c(1, 0, 0.2, 0.95, 1.2, -0.5, 0.1, 0.98, 0.8, 1, 0.15, 0.9),
-                3, 4, byrow = TRUE)
-morie_catstop(items, theta = 0.5, se_target = 0.5)
 }

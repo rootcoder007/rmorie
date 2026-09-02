@@ -26,10 +26,10 @@ query able to see its own token would make predicting that token
 trivial, while a content stream unable to see it could not encode it
 for later positions.
 }
+\examples{
+morie_permutation_attention_masks(c(2L, 0L, 3L, 1L))
+}
 \references{
 Yang Z, Dai Z, Yang Y, Carbonell J, Salakhutdinov R,
 Le QV (2019) XLNet. arXiv:1906.08237, eq (3).
-}
-\examples{
-morie_permutation_attention_masks(c(2L, 0L, 3L, 1L))
 }

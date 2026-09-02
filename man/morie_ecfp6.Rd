@@ -44,11 +44,11 @@ to \code{\link{morie_ecfp4}} except for the extra iteration, so
 every ECFP4 feature also appears here and the extra features
 describe the third shell around each atom.
 }
+\examples{
+morie_ecfp6(adjacency = 5L, atomnum = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010). Extended-connectivity
 fingerprints. Journal of Chemical Information and Modeling,
 50(5), 742-754.
-}
-\examples{
-morie_ecfp6(adjacency = 5L, atomnum = 5L)
 }

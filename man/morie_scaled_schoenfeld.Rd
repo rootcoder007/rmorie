@@ -23,7 +23,7 @@ pvalue, global_statistic, global_pvalue, df, n_events, transform, method.
 The raw Schoenfeld residual is the failing subject's covariate minus
 the hazard-weighted risk-set mean. Rescaling by the information
 turns it into an estimate of the coefficient AT THAT TIME:
-s* = beta + d Var(beta) s, with E[s*_j] ~ beta(t_j), so plotting s*
+s* = beta + d Var(beta) s, with E\link{s*_j} ~ beta(t_j), so plotting s*
 against g(t) shows the coefficient's trajectory and proportional
 hazards is the hypothesis that it is flat.
 }

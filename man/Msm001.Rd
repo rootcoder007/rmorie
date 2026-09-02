@@ -20,12 +20,12 @@ List with estimate, y, systematic, mean_error, method.
 Formula: y_i = f(x_i) + eps_i, i = 1..n (eq. 1.1). The systematic part f is
 determined by the predictors; eps has mean zero.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Msm001(V)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (1.1) p.8. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Msm001(V)
 }

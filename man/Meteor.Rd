@@ -30,6 +30,10 @@ contiguous reference positions, giving
 \eqn{Penalty = 0.5 (chunks/m)^3} and
 \eqn{Score = Fmean (1 - Penalty)}. No matches gives score 0.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Meteor(V, V)
+}
 \references{
 Banerjee, S. and Lavie, A. (2005), METEOR: An
 automatic metric for MT evaluation with improved correlation
@@ -39,8 +43,4 @@ Translation and/or Summarization, Ann Arbor, 65-72. Fmean,
 penalty and score formulas with the worked example, Section
 2.1, p. 68. Local source:
 library/pdf/fetched-wave3/Banerjee-Lavie-2005-METEOR-ACL.pdf.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Meteor(V, V)
 }

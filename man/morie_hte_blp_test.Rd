@@ -27,11 +27,6 @@ heterogeneity coefficient, and \code{beta = 0} means the predicted
 variation carries no signal. Pass out-of-bag predictions -- in-bag
 ones inflate \code{beta} mechanically. Mirrors \code{morie.fn.crfhte}.
 }
-\references{
-Chernozhukov V, Demirer M, Duflo E, Fernandez-Val I
-(2018). Generic machine learning inference on heterogenous
-treatment effects in randomized experiments. arXiv:1712.04802.
-}
 \examples{
 set.seed(2)
 n <- 100
@@ -40,4 +35,9 @@ d <- rbinom(n, 1, 0.5)
 y <- 1 + X[, 1] + d * (0.5 + X[, 2]) + rnorm(n, 0, 0.3)
 tau <- 0.5 + X[, 2] + rnorm(n, 0, 0.2)
 morie_hte_blp_test(y, d, tau)
+}
+\references{
+Chernozhukov V, Demirer M, Duflo E, Fernandez-Val I
+(2018). Generic machine learning inference on heterogenous
+treatment effects in randomized experiments. arXiv:1712.04802.
 }

@@ -65,6 +65,7 @@ morie_mtdrl_history_features <- function(history, n_arms) {
 #' @field n_arms,epsilon,optimistic Configuration.
 #' @field counts,means Within-episode statistics.
 #' @export
+#' @noRd
 morie_mtdrl_TabularHistoryAgent <- setRefClass(
   "morie_mtdrl_TabularHistoryAgent",
   fields = list(

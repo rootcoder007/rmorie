@@ -27,10 +27,10 @@ Kolmogorov-Smirnov scale, which is what is computed here.
 Formula: KS = sqrt(n) sup_i max(|i/n - X_(i)|, |(i-1)/n - X_(i)|)
 for the uniform truth.
 }
+\examples{
+Ghosalstrongapxdp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.2.1.
-}
-\examples{
-Ghosalstrongapxdp()
 }

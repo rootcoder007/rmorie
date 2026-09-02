@@ -21,6 +21,8 @@
 #' @return list with `time`, `surv`, `se`, `se_cumhaz`, `lower`,
 #'   `upper`, `n_risk`, `n_event`
 #' @export
+#' @examples
+#' morie_kaplan_meier(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 morie_kaplan_meier <- function(time, event, alpha = 0.05) {
   if (length(time) != length(event))
     stop("time and event must have the same length")
@@ -55,6 +57,9 @@ morie_kaplan_meier <- function(time, event, alpha = 0.05) {
 #' @inheritParams morie_kaplan_meier
 #' @return list with `time`, `cumhaz`, `se` and `surv = exp(-H)`
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_nelson_aalen(V, V)
 morie_nelson_aalen <- function(time, event) {
   ut <- sort(unique(time[event == 1]))
   H <- 0; V <- 0
@@ -77,6 +82,8 @@ morie_nelson_aalen <- function(time, event) {
 #' @param group grouping vector
 #' @return list with `statistic`, `df`, `p_value`, `observed`, `expected`
 #' @export
+#' @examples
+#' morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), group = c("a", "b", "c"))
 morie_logrank_test <- function(time, event, group) {
   lev <- sort(unique(group)); k <- length(lev)
   if (k < 2) stop("need at least 2 groups")
@@ -118,6 +125,8 @@ morie_logrank_test <- function(time, event, group) {
 #' @return list with `coef`, `se`, `z`, `p_value`, `hazard_ratio`,
 #'   `loglik` and the likelihood-ratio test
 #' @export
+#' @examples
+#' morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_cox_ph <- function(time, event, X, ties = "efron",
                          max_iter = 50, tol = 1e-9) {
   X <- as.matrix(X); n <- length(time); p <- ncol(X)
@@ -192,6 +201,8 @@ morie_cox_partial_loglik <- function(time, event, X, beta,
 #' @param predicted_risk predicted risk score, higher meaning sooner
 #' @return list with `c_index` and the pair counts
 #' @export
+#' @examples
+#' morie_concordance_index(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), predicted_risk = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_concordance_index <- function(time, event, predicted_risk) {
   n <- length(time)
   conc <- disc <- tied <- 0

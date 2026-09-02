@@ -30,12 +30,12 @@ exp(-1/2 (y - X beta)' V^-1 (y - X beta)) with V = Z D Z' + R (eq. 5.2);
 the log is returned. With restricted = TRUE the REML objective of p.146 is
 returned instead, adding the -1/2 log|X'V^-1X| term that removes the ML bias.
 }
+\examples{
+Msm011(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (5.2) p.142 and sec. 5.2.1.2 p.146.
 DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm011(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
 }

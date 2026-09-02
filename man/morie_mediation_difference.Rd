@@ -29,10 +29,10 @@ reason: those coefficients are identified only up to scale, and
 conditioning on the mediator changes the residual variance and hence
 the scale. That is non-collapsibility, not sampling error.
 }
+\examples{
+morie_mediation_difference(c = 0.5, c_prime = 0.3)
+}
 \references{
 Judd CM, Kenny DA (1981) \emph{Evaluation Review} 5:602-619.
 MacKinnon DP (2008), Ch 3.
-}
-\examples{
-morie_mediation_difference(c = 0.5, c_prime = 0.3)
 }

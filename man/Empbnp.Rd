@@ -17,20 +17,20 @@ List with \code{estimate}, \code{theta_hat}, \code{support},
 \code{counts}, \code{n}, \code{method}.
 }
 \description{
-Formula: E[theta | y = k] = (k + 1) f(k + 1) / f(k)
+Formula: E\link{theta | y = k} = (k + 1) f(k + 1) / f(k)
 }
 \details{
 For Poisson observations the posterior mean of the rate needs no
 parametric prior at all: it is recovered from the marginal counts
 alone.  The gaussian branch is Tweedie's formula
-E[theta | y] = y + d/dy log f(y), estimated from a kernel-smoothed
+E\link{theta | y} = y + d/dy log f(y), estimated from a kernel-smoothed
 marginal.
-}
-\references{
-Robbins (1956), Proc. 3rd Berkeley Symp. 1:157-163;
-Efron (2011), JASA 106(496):1602-1614.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Empbnp(V)
+}
+\references{
+Robbins (1956), Proc. 3rd Berkeley Symp. 1:157-163;
+Efron (2011), JASA 106(496):1602-1614.
 }

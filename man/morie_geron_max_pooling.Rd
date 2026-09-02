@@ -11,7 +11,7 @@ morie_geron_max_pooling(X, k = 2, stride = NULL)
 
 \item{k}{Window side.}
 
-\item{stride}{Defaults to `k`.}
+\item{stride}{Defaults to \code{k}.}
 }
 \value{
 List with \code{output}, \code{output_shape}, \code{argmax_indices},

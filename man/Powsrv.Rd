@@ -29,12 +29,12 @@ Formula: \code{n_eff = n / DEFF};
 \code{power = Phi(d sqrt(n_eff) - z) + Phi(-d sqrt(n_eff) - z)} with
 \code{z = Phi^-1(1 - alpha/2)}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Powsrv(V)
+}
 \references{
 Lumley, T. (2010). Complex Surveys: A Guide to Analysis
 Using R, Wiley. \doi{10.1002/9780470580066}. Standard form; the book
 is not held locally.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Powsrv(V)
 }

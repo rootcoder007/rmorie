@@ -47,10 +47,10 @@ is set to the softmax \eqn{\pi(\cdot|s) \propto \exp(Q(s,\cdot)/
 that paper gives convergence to the optimal maximum-entropy policy
 in the tabular case computed here.
 }
+\examples{
+morie_sacc(P = 1, R = 5L, gamma = 0.5)
+}
 \references{
 Haarnoja, T., Zhou, A., Abbeel, P. and Levine, S.
 (2018). Soft actor-critic. ICML 2018, PMLR 80, 1861-1870.
-}
-\examples{
-morie_sacc(P = 1, R = 5L, gamma = 0.5)
 }

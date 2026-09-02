@@ -59,11 +59,11 @@ local fit converges. The book's cautions are returned rather than hidden:
 the local predictor "is no longer best", and changing neighbourhoods can
 introduce "spurious discontinuities".
 }
-\references{
-Schabenberger Ch 8, Sec 8.3.1, pp. 425-426. Haas (1990),
-JASA 85:950-963; Haas (1995), JASA 90:1189-1199.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 spmwst(V, V)
+}
+\references{
+Schabenberger Ch 8, Sec 8.3.1, pp. 425-426. Haas (1990),
+JASA 85:950-963; Haas (1995), JASA 90:1189-1199.
 }

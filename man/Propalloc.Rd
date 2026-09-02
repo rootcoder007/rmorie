@@ -24,6 +24,9 @@ agree exactly.
 \details{
 Formula: n_h = n W_h = n N_h / N, apportioned by largest remainder
 }
+\examples{
+Propalloc(Nh = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Section
 5.3, Corollary 2, "stratification with proportional allocation of
@@ -31,7 +34,4 @@ the n_h", n_h/n = N_h/N. Chapter 5 read from the scanned original.
 Cross-checked against the reference implementation in the CRAN
 package samplingbook 1.2.4, whose stratasamp(type = "prop") sets
 wh <- Nh/N.
-}
-\examples{
-Propalloc(Nh = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 }

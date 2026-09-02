@@ -17,6 +17,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.5.
 #' @export
+#' @examples
+#' Ghosalsmhazgp()
 Ghosalsmhazgp <- function(n = 500, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be positive")

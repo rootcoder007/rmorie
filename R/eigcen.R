@@ -8,6 +8,8 @@
 #' @return List with ``centrality`` (max-scaled), ``unit``, ``eigenvalue``, ``n``.
 #' @references Bonacich (1972), Factoring and weighting approaches to status scores and clique identification, Journal of Mathematical Sociology 2:113-120. Paywalled; the measure is the principal eigenvector of the adjacency matrix, as it is universally described in the centrality literature (e.g. Bonacich 2000, Social Networks 22:357-365, which restates his own definition).
 #' @export
+#' @examples
+#' Eigcent(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
 Eigcent <- function(A) {
   A <- as.matrix(A); n <- nrow(A)
   e <- .t1_eigsym(A)

@@ -32,10 +32,10 @@ Logistic classification here, with W = diag(p(1 - p)).
 Formula: f <- f + 0.3 (K (y - p) - f) to the mode;
 Var(f_1) = ((K^(-1) + W)^(-1))_{11}.
 }
+\examples{
+Ghosalgplaplace()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.7.5.
-}
-\examples{
-Ghosalgplaplace()
 }

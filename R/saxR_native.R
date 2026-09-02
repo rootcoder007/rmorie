@@ -24,6 +24,8 @@
 #' @references Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 #'   symbolic representation of time series. DMKD 2003.
 #' @export
+#' @examples
+#' morie_sax_breakpoints(alphabet = 5L)
 morie_sax_breakpoints <- function(alphabet) {
   a <- as.integer(alphabet)
   if (a < 2L) stop("alphabet size must be >= 2")
@@ -68,6 +70,8 @@ morie_sax_breakpoints <- function(alphabet) {
 #' @references Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 #'   symbolic representation of time series. DMKD 2003.
 #' @export
+#' @examples
+#' morie_saxR(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), window = 3L, alphabet = 5L)
 morie_saxR <- function(x, window, alphabet, eps = 1e-8) {
   xv <- as.numeric(x)
   n <- length(xv)

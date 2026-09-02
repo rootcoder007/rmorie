@@ -19,11 +19,11 @@ Named list with \code{estimate} (\verb{n x d} image points), \code{mass},
 \deqn{\bar{T}(x_i) = \frac{1}{a_i}\sum_j P_{ij} y_j}
 Peyre & Cuturi (2019), Remark 4.11, eq. (4.19).
 }
-\references{
-Peyre & Cuturi (2019), eq. (4.19).
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 S <- c("a", "b", "c")
 Otbarmap(M, S)
+}
+\references{
+Peyre & Cuturi (2019), eq. (4.19).
 }

@@ -36,6 +36,12 @@ with \code{pi_c = P(D = 1 | Z = 1) - P(D = 1 | Z = 0)}. Their difference
 is the Wald ratio. The ATE bound is
 \code{pi_c LATE + (1 - pi_c) [y_0 - y_1, y_1 - y_0]}.
 }
+\examples{
+set.seed(1)
+Z <- rbinom(40, 1, 0.5)
+D <- rbinom(40, 1, 0.2 + 0.6 * Z)
+Bnscom(y = rbinom(40, 1, 0.4), D = D, Z = Z)
+}
 \references{
 Imbens, G. W. and Rubin, D. B. (1997). Estimating outcome
 distributions for compliers in instrumental variables models. Review
@@ -44,10 +50,4 @@ J. D., Imbens, G. W. and Rubin, D. B. (1996). Identification of causal
 effects using instrumental variables. Journal of the American
 Statistical Association 91(434), 444-455.
 \doi{10.1080/01621459.1996.10476902}.
-}
-\examples{
-set.seed(1)
-Z <- rbinom(40, 1, 0.5)
-D <- rbinom(40, 1, 0.2 + 0.6 * Z)
-Bnscom(y = rbinom(40, 1, 0.4), D = D, Z = Z)
 }

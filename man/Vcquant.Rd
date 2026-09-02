@@ -26,11 +26,11 @@ Formula: idx <- Quant_mse(x) at b - 1 bits; r <- x - DeQuant_mse(idx);
 qjl <- sign(S . r);
 xtilde <- DeQuant_mse(idx) + (sqrt(pi/2)/d) ||r|| S' qjl
 }
-\references{
-Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
-Fetched from arXiv.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Vcquant(V)
+}
+\references{
+Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
+Fetched from arXiv.
 }

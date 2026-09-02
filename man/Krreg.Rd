@@ -35,12 +35,12 @@ Formula: \code{alpha = (K + lambda I)^{-1} y} with
 \code{K_ij = K_h(x_i - x_j)}; prediction
 \code{m(x0) = sum_i alpha_i K_h(x0 - x_i)}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Krreg(V, V)
+}
 \references{
 Saunders, C., Gammerman, A. and Vovk, V. (1998). Ridge
 regression learning algorithm in dual variables. Proceedings of the
 15th International Conference on Machine Learning, 515-521.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Krreg(V, V)
 }

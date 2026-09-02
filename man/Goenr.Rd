@@ -37,6 +37,10 @@ probability of k or more annotated genes by chance (one-tailed
 Fisher exact test). Optional Bonferroni correction multiplies each
 p-value by the number of terms and caps at 1.
 }
+\examples{
+set.seed(1)
+r <- Goenr(hits = rnorm(10), list_size = 8L, term_size = 8L, background_size = 8L); TRUE
+}
 \references{
 Boyle, E. I., Weng, S., Gollub, J., Jin, H., Botstein,
 D., Cherry, J. M. and Sherlock, G. (2004),
@@ -46,8 +50,4 @@ terms associated with a list of genes, Bioinformatics 20(18),
 3710-3715. Hypergeometric formula and Bonferroni correction,
 Algorithm section, p. 3711. Source: PMC3037731 (saved as
 library/pdf/fetched-wave3/Boyle-2004-GO-TermFinder-Bioinformatics.html).
-}
-\examples{
-set.seed(1)
-r <- Goenr(hits = rnorm(10), list_size = 8L, term_size = 8L, background_size = 8L); TRUE
 }

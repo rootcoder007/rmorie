@@ -16,6 +16,11 @@
 #' @references Kipf and Welling (2017), ICLR 2017, eqs. (2) and (8).
 #'   arXiv:1609.02907
 #' @export
+#' @examples
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' W <- matrix(rnorm(4), 2, 2)
+#' GcnL(A, X, W)
 GcnL <- function(A, X, W) {
   M <- .s03mat(A)
   n <- nrow(M)

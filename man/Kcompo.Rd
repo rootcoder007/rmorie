@@ -32,13 +32,13 @@ query can afford at step i is 1/eps_i.
 \details{
 Formula: eps_total = sum_i eps_i, delta_total = sum_i delta_i.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kcompo(V, V)
+}
 \references{
 Dwork and Roth (2014), The Algorithmic Foundations of
 Differential Privacy, Foundations and Trends in Theoretical
 Computer Science 9(3-4):211-407, section 3.5, Theorem 3.16.
 \doi{10.1561/0400000042}
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kcompo(V, V)
 }

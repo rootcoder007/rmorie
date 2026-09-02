@@ -35,6 +35,8 @@
 #' @references Kaplan EL, Meier P (1958) \emph{JASA} 53:457-481.
 #'   Greenwood M (1926). Kalbfleisch & Prentice (2002), Sec 1.4.
 #' @export
+#' @examples
+#' morie_km_native(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
 morie_km_native <- function(time, event, alpha = 0.05,
                             conf_type = c("log-log", "plain")) {
   conf_type <- match.arg(conf_type)
@@ -116,6 +118,8 @@ morie_km_native <- function(time, event, alpha = 0.05,
 #' @references Judd CM, Kenny DA (1981) \emph{Evaluation Review} 5:602-619.
 #'   MacKinnon DP (2008), Ch 3.
 #' @export
+#' @examples
+#' morie_mediation_difference(c = 0.5, c_prime = 0.3)
 morie_mediation_difference <- function(c, c_prime, a = NULL, b = NULL) {
   cv <- as.numeric(c)
   cp <- as.numeric(c_prime)
@@ -149,6 +153,9 @@ morie_mediation_difference <- function(c, c_prime, a = NULL, b = NULL) {
 #' @references MacKinnon DP (2008), Ch 3-4. Sobel ME (1982)
 #'   \emph{Sociological Methodology} 13:290-312.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mediation_product(V, V)
 morie_mediation_product <- function(a, b, se_a = NULL, se_b = NULL,
                                     alpha = 0.05) {
   av <- as.numeric(a)
@@ -188,6 +195,9 @@ morie_mediation_product <- function(a, b, se_a = NULL, se_b = NULL,
 #' @references Kozachenko LF, Leonenko NN (1987). Kraskov A, Stogbauer H,
 #'   Grassberger P (2004) \emph{Phys Rev E} 69:066138.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_knn_entropy(V)
 morie_knn_entropy <- function(x, k = 3L) {
   X <- as.matrix(x)
   if (ncol(X) > 1L && nrow(X) == 1L) X <- t(X)

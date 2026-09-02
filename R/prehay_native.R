@@ -35,6 +35,8 @@
 #'   Rank rule: Preacher and Hayes (2004), Behavior Research Methods,
 #'   Instruments, and Computers 36(4), 717-731, p. 722.
 #' @export
+#' @examples
+#' Prehay(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), M = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Prehay <- function(x, M, y, B = 1000L, alpha = 0.05, seed = 1L) {
   x <- as.numeric(x); y <- as.numeric(y)
   M <- as.matrix(M); storage.mode(M) <- "double"

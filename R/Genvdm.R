@@ -16,6 +16,8 @@
 #'   \code{meets_target}, \code{n_required}, \code{n}, \code{method}.
 #' @references Brennan (2001), Generalizability Theory, Springer, ch. 3.
 #' @export
+#' @examples
+#' Genvdm(c(0.5, 0.2, 0.3), n_proposed = 20)
 Genvdm <- function(G_components, n_proposed, target = 0.8) {
   g <- .s03vec(G_components)
   if (length(g) != 3L) stop("d_study_decision: G_components must hold three variances")

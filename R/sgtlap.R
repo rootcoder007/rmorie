@@ -13,6 +13,8 @@
 #'   loops exactly as written above. Fetched from the author's own copy of
 #'   the chapter.
 #' @export
+#' @examples
+#' Graphlap(W = 5L)
 Graphlap <- function(W) {
   W <- as.matrix(W)
   n <- nrow(W)

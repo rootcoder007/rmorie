@@ -26,6 +26,9 @@ normsens, z, c.
 gamma = c s / ||s||, and the conservative interval is
 estimate +/- (c ||s|| + z}{1-alpha/2} se).
 }
+\examples{
+Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)
+}
 \references{
 Bias bound by Cauchy-Schwarz; the bias-aware interval is
 Armstrong and Kolesar (2021), Quantitative Economics 12(1), 77-108,
@@ -33,7 +36,4 @@ Sect. 2.  The worklist attributed this row to Andrews and Kasy
 (2019), which is about publication bias and is therefore not cited
 as the source.  The Quantitative Economics article is not in the
 local corpus and was not read.
-}
-\examples{
-Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)
 }

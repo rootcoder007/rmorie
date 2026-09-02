@@ -67,6 +67,8 @@
 #' @param mask Optional matrix.
 #' @return List with `output`, `attention`.
 #' @export
+#' @examples
+#' morie_alammar_sdp_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)

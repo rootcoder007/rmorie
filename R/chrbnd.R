@@ -24,6 +24,9 @@
 #' @references Chernozhukov, Lee & Rosen (2013), Intersection Bounds,
 #'   Econometrica 81(2):667-737.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Chrbnd(V)
 Chrbnd <- function(y, X = NULL, instrument = NULL, alpha = 0.05,
                    gamma = NULL, beta = 0.1) {
   yv <- .s03vec(y)

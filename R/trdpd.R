@@ -17,6 +17,9 @@
 #'   Bayesian Data Analysis, 3rd edition, was fetched in full and
 #'   searched; it describes HMC but not the tree-depth diagnostic.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Treedepth(V)
 Treedepth <- function(depths, max_depth = 10) {
   d <- .t1_vec(depths); n <- length(d)
   if (n < 1L) stop("at least one iteration is required")

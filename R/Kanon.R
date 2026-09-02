@@ -24,6 +24,8 @@
 #'   Knowledge-Based Systems 10(5):557-570.
 #'   \doi{10.1142/S0218488502001648}
 #' @export
+#' @examples
+#' Kanon(y = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 Kanon <- function(y, quasi_ids, k) {
   yv <- .s03vec(y); n <- length(yv)
   if (n == 0L) stop("k_anonymity_check: y is empty")

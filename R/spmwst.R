@@ -34,6 +34,9 @@
 #' @references Schabenberger Ch 8, Sec 8.3.1, pp. 425-426. Haas (1990),
 #'   JASA 85:950-963; Haas (1995), JASA 90:1189-1199.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spmwst(V, V)
 spmwst <- function(coords, z, window_size = NULL, targets = NULL,
                    min_sites = 35L, step = 5L, n_lags = 10L,
                    local_variogram = TRUE, local_mean = FALSE) {

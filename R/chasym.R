@@ -43,6 +43,9 @@
 #' @references van der Laan & Rose (2011), Targeted Learning, Springer,
 #'   ch. 5; Funk et al. (2011), Am. J. Epidemiology 173(7):761-767.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Chasym(V)
 Chasym <- function(y, A = NULL, H = NULL, B = 200, seed = 42) {
   yv <- .s03vec(y)
   n <- length(yv)

@@ -19,7 +19,7 @@ test_that("optional-package guards stop() when the package is absent", {
   )
   x <- matrix(rnorm(40), 20, 2)
   y <- rbinom(20, 1, 0.5)
-  expect_error(morie_dbscan_clustering(x))
+  expect_no_error(morie_dbscan_clustering(x))  # native since the ML wave
   expect_error(morie_decision_tree_split(x, y))
   expect_error(morie_grid_search_cv(x, y))
   # Tree ensembles are native now (ESL Alg. 15.1 / 10.3 + compiled
@@ -56,7 +56,7 @@ test_that("jsonlite-dependent entrypoints stop without jsonlite", {
     requireNamespace = function(package, ...) !identical(package, "jsonlite"),
     .package = "base"
   )
-  expect_error(morie_fetch_tps(category = "Assault"), "jsonlite")
+  # morie_fetch_tps() parses with the native JSON codec since 1.1.7; no jsonlite guard.
   mf <- tempfile(fileext = ".json")
   writeLines("{}", mf)
   expect_error(mrm_tps_load_hawkes_refit(mf), "jsonlite")

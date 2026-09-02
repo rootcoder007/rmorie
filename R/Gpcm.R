@@ -20,6 +20,8 @@
 #'   Applied Psychological Measurement 16(2):159-176.
 #'   \doi{10.1177/014662169201600206}
 #' @export
+#' @examples
+#' Gpcm(y = c(0, 1, 2, 1), theta = c(0, 0.5, -0.5, 1), a = 1.2, b_j = c(-1, 0, 1))
 Gpcm <- function(y, theta, a, b_j) {
   ys <- as.integer(.s03vec(y))
   th <- .s03vec(theta)

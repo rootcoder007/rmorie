@@ -2,32 +2,26 @@
 % Please edit documentation in R/causal.R
 \name{.mor_om_fit_predict}
 \alias{.mor_om_fit_predict}
-\title{Augmented IPW (AIPW) doubly-robust ATE estimator}
+\title{.mor_om_fit_predict}
 \usage{
 .mor_om_fit_predict(X, y, rows, Xpred, outcome_model)
 }
 \arguments{
-\item{outcome_model}{Family for the outcome model: \code{"linear"} or
-\code{"logistic"}.}
+\item{X}{A matrix; indexed by row and column.}
+
+\item{y}{A vector; indexed elementwise.}
+
+\item{rows}{See Usage.}
+
+\item{Xpred}{A matrix; passed to \code{\%*\%}.}
+
+\item{outcome_model}{Compared against \code{"logistic"}.}
 }
 \value{
-Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
+A vector, from \code{as.numeric}.
 }
 \description{
-Combines IPW and outcome regression corrections. Consistent if
-\strong{either} the propensity model \strong{or} the outcome model
-is correctly specified.
-}
-\details{
-The propensity step delegates to \pkg{WeightIt} when installed
-(via \code{morie_estimate_propensity_scores}). The outcome
-regression and the doubly-robust influence-function score are
-evaluated inline to preserve the closed-form SE used downstream.
-Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
-nuisance learners) is the canonical CRAN counterpart.
-}
-\examples{
-set.seed(1)
-df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-morie_estimate_aipw(df, "t", "y", "x")
+A step of the causal implementation. Called by \code{morie_estimate_aipw}.
+See the file header for the source the module follows.
+it follows.
 }

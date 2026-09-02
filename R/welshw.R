@@ -15,6 +15,9 @@
 #' @references Dennis, J. E. & Welsch, R. E. (1978). Commun Statist B
 #'   7:345-359.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Welshw(V)
 Welshw <- function(y, c = 2.9846) {
   v <- as.numeric(unlist(y)); c <- as.numeric(c)
   w <- exp(-((v / c)^2))

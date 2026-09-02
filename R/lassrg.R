@@ -26,6 +26,8 @@
 #'   \doi{10.1111/j.2517-6161.1996.tb02080.x}.
 #' @seealso \code{\link{Esllso}}
 #' @export
+#' @examples
+#' Lassrg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Lassrg <- function(y, X, lam, max_iter = 10000, tol = 1e-12) {
   Esllso(X, y, lam, max_iter, tol)
 }

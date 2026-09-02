@@ -39,11 +39,6 @@ pseudo outcome whose expectation is the RMST at \code{horizon}. The
 resulting CATE is a difference in restricted mean survival time, not
 a hazard ratio. Mirrors \code{morie.fn.csfgrf} (and \code{morie.fn.survcfg}).
 }
-\references{
-Cui Y, Kosorok MR, Sverdrup E, Wager S, Zhu R (2023).
-Estimating heterogeneous treatment effects with right-censored data
-via causal survival forests. \emph{JRSS-B} 85(2), 179-211.
-}
 \examples{
 set.seed(3)
 n <- 150
@@ -54,4 +49,9 @@ ev <- as.numeric(tt < quantile(tt, 0.8))
 tt <- pmin(tt, quantile(tt, 0.8))
 r <- morie_causal_survival_forest(tt, ev, d, X, n_trees = 20L)
 str(r, max.level = 1)
+}
+\references{
+Cui Y, Kosorok MR, Sverdrup E, Wager S, Zhu R (2023).
+Estimating heterogeneous treatment effects with right-censored data
+via causal survival forests. \emph{JRSS-B} 85(2), 179-211.
 }

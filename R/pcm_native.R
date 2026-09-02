@@ -24,6 +24,9 @@
 #'   Applied Psychological Measurement, 16, 159-176.  Weeks, J. P.
 #'   (2010). Journal of Statistical Software, 35(12).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_pcm(V, V)
 morie_pcm <- function(theta, steps, a = 1, D = 1) {
   th <- as.numeric(theta)
   b <- as.numeric(steps)

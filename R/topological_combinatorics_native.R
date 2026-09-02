@@ -32,6 +32,9 @@
 #' @return A list keyed by dimension as character ("0", "1", ...), each
 #'   a list of sorted integer vectors in lexicographic order.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_simplicial_complex_faces(V)
 morie_simplicial_complex_faces <- function(maximal_simplices) {
   if (length(maximal_simplices) == 0L) {
     stop("no simplices supplied.", call. = FALSE)
@@ -69,6 +72,9 @@ morie_simplicial_complex_faces <- function(maximal_simplices) {
 #' @param maximal_simplices A list of integer vectors.
 #' @return A list with `chi`, `f_vector`, `dimension`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_euler_characteristic(V)
 morie_euler_characteristic <- function(maximal_simplices) {
   by_dim <- morie_simplicial_complex_faces(maximal_simplices)
   dims <- as.integer(names(by_dim))
@@ -125,6 +131,9 @@ morie_euler_characteristic <- function(maximal_simplices) {
 #'   `boundary_squared_zero`, `warnings`.
 #' @references Munkres JR (1984) \emph{Elements of Algebraic Topology}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_betti_numbers_gf2(V)
 morie_betti_numbers_gf2 <- function(maximal_simplices,
                                     check_boundary_squared = TRUE) {
   by_dim <- morie_simplicial_complex_faces(maximal_simplices)
@@ -213,6 +222,8 @@ morie_betti_numbers_gf2 <- function(maximal_simplices,
 #' @references Sperner E (1928) \emph{Abh Math Sem Univ Hamburg}
 #'   6:265-272.
 #' @export
+#' @examples
+#' morie_sperner_lemma_triangle(subdivisions = 5L)
 morie_sperner_lemma_triangle <- function(subdivisions, labels = NULL) {
   k <- as.integer(subdivisions)
   if (is.na(k) || k < 1L) {

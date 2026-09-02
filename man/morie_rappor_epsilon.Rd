@@ -21,10 +21,10 @@ List with \code{eps_infinity} and optionally \code{eps_1},
 \description{
 RAPPOR privacy parameters (Theorems 1 and 2)
 }
-\references{
-Erlingsson, Pihur & Korolova (2014), ACM CCS.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_rappor_epsilon(V, V)
+}
+\references{
+Erlingsson, Pihur & Korolova (2014), ACM CCS.
 }

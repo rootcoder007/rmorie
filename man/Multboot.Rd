@@ -34,13 +34,13 @@ any other weight distribution.
 Formula: Ptilde_n f = n^-1 sum_i (xi_i / xibar_n) f(X_i);
 Gtilde_n = sqrt(n) (mu/tau) (Ptilde_n - P_n), xi ~ Exp(1)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Multboot(V)
+}
 \references{
 Kosorok (2008), Introduction to Empirical Processes and
 Semiparametric Inference, Section 2.2.3. Fetched as the full text of
 the book.
 }
 \keyword{internal}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Multboot(V)
-}

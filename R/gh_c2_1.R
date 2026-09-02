@@ -18,6 +18,9 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 2.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalrandombasisexpansion(V)
 Ghosalrandombasisexpansion <- function(x, n_terms = 12, seed = 42,
                                        decay = 1.5) {
   xs <- as.numeric(x)

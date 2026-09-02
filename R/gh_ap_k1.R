@@ -17,6 +17,8 @@
 #'   searched in full and the word "Fano" does NOT occur in it, so the
 #'   attribution could not be confirmed and the primary sources are cited.
 #' @export
+#' @examples
+#' Fano(M = 5L, mutual_info = 5L)
 Fano <- function(M, mutual_info, base_e = TRUE) {
   M <- as.integer(M); I <- as.numeric(mutual_info)
   if (M < 2L) stop("M must be at least 2")

@@ -19,6 +19,9 @@
 #'   formula gives the null the weight 1 - lambda; the FORMULA is
 #'   followed here. Read from the copy of the book held in the corpus.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ptnulltst(V, V)
 Ptnulltst <- function(loglik_null, log_marginal_alt, lam = 0.5) {
   ln <- as.numeric(loglik_null); la <- as.numeric(log_marginal_alt)
   lam <- as.numeric(lam)

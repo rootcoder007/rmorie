@@ -11,6 +11,9 @@
 #'   Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 #'   Springer, eq. (10.5) p.409. DOI 10.1007/978-3-030-89010-0.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Msm249(V, V)
 Msm249 <- function(y_hat, y) {
   v <- .gpannsse(y_hat, y)
   list(estimate = v, sse = v, method = "SSE loss (MVSML 2022 eq. 10.5)")

@@ -18,6 +18,15 @@
 #'   Revisiting event study designs: robust and efficient estimation.
 #'   Review of Economic Studies, 91(6), 3253-3285.
 #' @export
+#' @examples
+#' set.seed(1)
+#' nu <- 6; T <- 5
+#' unit <- rep(1:nu, each = T)
+#' time <- rep(1:T, nu)
+#' ft <- rep(c(Inf, Inf, Inf, 4, 4, 3), each = T)
+#' D <- as.integer(time >= ft)
+#' y <- rnorm(nu * T) + D * 1.5
+#' morie_causdidev(y, D, unit, time)
 morie_causdidev <- function(y, D, unit, time, X = NULL, weights = NULL) {
   morie_boryis(y, D, unit, time, X = X, weights = weights)
 }

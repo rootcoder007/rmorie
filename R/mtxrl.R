@@ -21,6 +21,9 @@
 #'   Mathematics 54(2), 296-301; neither is von Neumann's and both are
 #'   cited to their own sources.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Matgame(V)
 Matgame <- function(A, iters = 2000) {
   A <- as.matrix(A); m <- nrow(A); n <- ncol(A)
   if (m < 1L || n < 1L) stop("the payoff matrix must be non-empty")

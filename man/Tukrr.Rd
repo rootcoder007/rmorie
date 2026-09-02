@@ -31,12 +31,12 @@ Determinism: fixed sweeps, ordinary least squares start, no tolerance.
 Formula: iterate \eqn{beta = argmin sum w_i (y_i - x_i primebeta)^2} with
 \eqn{w_i = \[1 - (r_i/(c s))^2\]^2} inside and 0 outside.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Tukrr(V, V)
+}
 \references{
 Beaton, A. E. & Tukey, J. W. (1974). Technometrics
 16:147-185; Holland, P. W. & Welsch, R. E. (1977). Commun Statist
 6:813-827.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Tukrr(V, V)
 }

@@ -23,7 +23,7 @@ list: estimate, a, v, sign, update, update_b, n, method.
 \description{
 Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
 Statistical Machine Learning Methods for Genomic Prediction, Springer,
-volume [Pages 379-425], Chapter 10, Section 10.2, pp. 382-383.  The net
+volume \link{Pages 379-425}, Chapter 10, Section 10.2, pp. 382-383.  The net
 input of a neuron is v_j = sum_j omega_ij x_j and its output is
 y_j = g(v_j); "if we define this function as a unit step (also called
 threshold), the output will be 1 if the net input is greater than zero;

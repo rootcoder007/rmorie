@@ -56,6 +56,10 @@
 #' @param seed LCG seed.
 #' @return Array of `shape` with row-major (Python) fill order.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_lcg_normal(M, V)
 morie_lcg_normal <- function(shape, seed) {
   n <- prod(shape)
   m <- n + (n %% 2)
@@ -79,6 +83,9 @@ morie_lcg_normal <- function(shape, seed) {
 #' @param beta_start,beta_end Linear-schedule endpoints.
 #' @return Numeric vector of length T.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_beta_schedule_values(V)
 morie_beta_schedule_values <- function(T, beta_schedule = "linear", beta_start = 1e-4, beta_end = 0.02) {
   if (is.character(beta_schedule)) {
     if (beta_schedule == "linear") {
@@ -109,6 +116,8 @@ morie_beta_schedule_values <- function(T, beta_schedule = "linear", beta_start =
 #' @return List with `x_t`, `x_chain`, `betas`, `alphas`, `alpha_bar`,
 #'   `signal_scale`, `noise_scale`, `noise`, `snr`, `variance_check`.
 #' @export
+#' @examples
+#' morie_geron_diffusion_forward(x0 = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L)
 morie_geron_diffusion_forward <- function(x0, T, beta_schedule = "linear", t = NULL, seed = 0) {
   x <- as.numeric(x0)
   .w4a_need(length(x) > 0 && all(is.finite(x)), "x0 must be non-empty and finite.")
@@ -169,6 +178,9 @@ morie_geron_diffusion_forward <- function(x0, T, beta_schedule = "linear", t = N
 #' @return List with `loss`, `per_anchor_loss`, `pos_sim`, `neg_sim`,
 #'   `hardest_negative`, `accuracy`, `chance_loss`, `n_negatives`.
 #' @export
+#' @examples
+#' morie_geron_contrastive_learning(matrix(c(1, 0, 1, 0, 0, 1), 
+#'     3, 2, byrow = TRUE), c(1, 0, 0), tau = 1)
 morie_geron_contrastive_learning <- function(embeddings, positives, tau = 0.1, normalize = TRUE) {
   E <- .morie_gr_mat(embeddings, "embeddings")
   B <- nrow(E)
@@ -210,6 +222,8 @@ morie_geron_contrastive_learning <- function(embeddings, positives, tau = 0.1, n
 #' @return List with `loss_history`, `final_loss`, `encoder`, `decoder`,
 #'   `reconstruction`, `denoising_gain`, `snr_db`, `passthrough_loss`.
 #' @export
+#' @examples
+#' morie_geron_denoising_autoencoder_train(X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 morie_geron_denoising_autoencoder_train <- function(X, noise_std = 0.3, epochs = 300, lr = 0.05,
                                                     hidden = NULL, seed = 0) {
   A <- .morie_gr_mat(X, "X")
@@ -271,6 +285,9 @@ morie_geron_denoising_autoencoder_train <- function(X, noise_std = 0.3, epochs =
 #' @return List with `scores`, `signed_distance`, `labels`,
 #'   `probabilities`, `on_boundary`, `normal`, `margin`, `line`.
 #' @export
+#' @examples
+#' morie_geron_decision_boundary(c(-1, 1, 1), matrix(c(0, 0, 1, 
+#'     1, 0.5, 0.5), 3, 2, byrow = TRUE))
 morie_geron_decision_boundary <- function(theta, X_grid, fit_intercept = TRUE) {
   th <- as.numeric(theta)
   G <- .morie_gr_mat(X_grid, "X_grid")
@@ -315,6 +332,9 @@ morie_geron_decision_boundary <- function(theta, X_grid, fit_intercept = TRUE) {
 #' @return List with `loss`, `loss_ce`, `loss_mlm`, `loss_cos`,
 #'   `teacher_params`, `student_params`, `param_reduction`, `agreement`.
 #' @export
+#' @examples
+#' morie_geron_distilbert(matrix(c(2, 0), 1, 2), matrix(c(2, 0), 
+#'     1, 2), c(1, 2, 3), alpha_mlm = 0, alpha_ce = 1)
 morie_geron_distilbert <- function(teacher, student, X, temperature = 2.0,
                                    alpha_ce = 0.5, alpha_mlm = 0.5, alpha_cos = 0.0,
                                    mlm_labels = NULL) {
@@ -395,6 +415,8 @@ morie_geron_distilbert <- function(teacher, student, X, temperature = 2.0,
 #' @return List with `labels`, `n_clusters`, `n_noise`, `n_core`,
 #'   `n_border`, `core_indices`, `cluster_sizes`.
 #' @export
+#' @examples
+#' morie_geron_dbscan(X = c(1, 2, 3, 4, 5, 6, 7, 8), eps = 0.5, min_samples = 5L)
 morie_geron_dbscan <- function(X, eps, min_samples, metric = "euclidean") {
   base <- morie_geron_dbscan_core_point(X, eps = eps, min_samples = min_samples, metric = metric)
   is_core <- base$is_core
@@ -443,6 +465,8 @@ morie_geron_dbscan <- function(X, eps, min_samples, metric = "euclidean") {
 #' @return List with `generator_layers`, `discriminator_layers`,
 #'   `generator_params`, `discriminator_params`, `total_params`, `n_layers`.
 #' @export
+#' @examples
+#' morie_geron_dcgan(array(0, dim = c(3, 16, 16)), z_dim = 8, filters = 4)
 morie_geron_dcgan <- function(X, z_dim = 100, filters = 64, epochs = 50, lr = 0.0002,
                               seed_shape = c(4, 4), stride = 2) {
   A <- if (length(dim(X)) == 2) array(as.numeric(X), dim = c(1, dim(X))) else array(as.numeric(X), dim = dim(X))
@@ -523,6 +547,8 @@ morie_geron_dcgan <- function(X, z_dim = 100, filters = 64, epochs = 50, lr = 0.
 #' @return List with `self_attention`, `ffn`, `layer_norms`,
 #'   (`cross_attention`), `total`.
 #' @export
+#' @examples
+#' morie_geron_block_params(d_model = 5L)
 morie_geron_block_params <- function(d_model, d_ff = NULL, cross_attention = FALSE) {
   d <- as.integer(d_model)
   .w4a_need(d >= 1L, "d_model must be >= 1.")
@@ -544,6 +570,8 @@ morie_geron_block_params <- function(d_model, d_ff = NULL, cross_attention = FAL
 #' @param n Sequence length.
 #' @return n x n logical matrix, upper-triangular (excl. diagonal) TRUE.
 #' @export
+#' @examples
+#' morie_geron_causal_mask(n = 5L)
 morie_geron_causal_mask <- function(n) {
   n <- as.integer(n)
   .w4a_need(n >= 1L, "n must be >= 1.")
@@ -561,6 +589,9 @@ morie_geron_causal_mask <- function(n) {
 #' @return List with `total_params`, `block_params`, `per_block`,
 #'   `embedding_params`, `d_head`, `mask`, `seq_len`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_decoder_only(V)
 morie_geron_decoder_only <- function(X, n_layers = 12, n_heads = 12, d_model = 768,
                                      vocab_size = 50257, max_len = 1024, d_ff = NULL,
                                      tie_embeddings = TRUE) {
@@ -598,6 +629,9 @@ morie_geron_decoder_only <- function(X, n_layers = 12, n_heads = 12, d_model = 7
 #' @return List with `total_params`, `block_params`, `embedding_params`,
 #'   `head_params`, `attention_mask`, `seq_len`, `cls_index`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_encoder_only(V)
 morie_geron_encoder_only <- function(X, n_layers = 12, n_heads = 12, d_model = 768,
                                      vocab_size = 30522, max_len = 512, d_ff = NULL,
                                      n_segments = 2, n_classes = NULL) {
@@ -646,6 +680,9 @@ morie_geron_encoder_only <- function(X, n_layers = 12, n_heads = 12, d_model = 7
 #' @return List with `image_tokens`, `token_grid`, `log_likelihood`,
 #'   `perplexity`, `n_steps`.
 #' @export
+#' @examples
+#' skewed <- function(ctx) c(0, 5)
+#' morie_geron_dalle(0, skewed, n_image_tokens = 4)
 morie_geron_dalle <- function(text, model, n_image_tokens = 4, temperature = 1.0,
                               top_k = NULL, image_vocab = NULL, grid = NULL) {
   .w4a_need(is.function(model), "model must be callable(context) -> logits.")
@@ -706,6 +743,10 @@ morie_geron_dalle <- function(text, model, n_image_tokens = 4, temperature = 1.0
 #' @param clip_x0 c(lo, hi).
 #' @return List with `x_0`, `trajectory`, `timesteps`, `model_calls`, `speedup`.
 #' @export
+#' @examples
+#' zero <- function(x, t) rep(0, length(x))
+#' morie_geron_ddim(1, zero, T = 4, n_steps = 2, beta_schedule = rep(0.5, 
+#'     4))
 morie_geron_ddim <- function(x_T, model, T, n_steps, beta_schedule = "linear", clip_x0 = NULL) {
   x <- as.numeric(x_T)
   .w4a_need(length(x) > 0L, "x_T is empty.")
@@ -748,6 +789,9 @@ morie_geron_ddim <- function(x_T, model, T, n_steps, beta_schedule = "linear", c
 #' @param name Caller name for error messages.
 #' @return List with `s`,`a`,`r`,`s2`,`done` (0-based indices as given).
 #' @export
+#' @examples
+#' buf <- list(c(0L, 1L, 1.0, 2L, FALSE), c(2L, 0L, 0.5, 1L, TRUE))
+#' morie_check_buffer(buf, n_states = 3L, n_actions = 2L, name = "demo")
 morie_check_buffer <- function(buffer, n_states, n_actions, name) {
   .w4a_need(length(buffer) > 0L, paste0(name, ": buffer is empty."))
   s <- integer(0)
@@ -775,6 +819,9 @@ morie_check_buffer <- function(buffer, n_states, n_actions, name) {
 #' @param epochs,lr,gamma,target_sync,batch_size Config.
 #' @return List with `Q`, `Q_target`, `loss_history`, `greedy_policy`, `sync_epochs`.
 #' @export
+#' @examples
+#' morie_geron_dqn(NULL, matrix(c(0, 0), 1, 2), matrix(c(0, 0), 
+#'     1, 2), list(list(0, 0, 1, 0, TRUE)), epochs = 1, lr = 0.5)
 morie_geron_dqn <- function(env, Q, Q_target, buffer, epochs = 10, lr = 0.1, gamma = 0.95,
                             target_sync = 5, batch_size = NULL) {
   Qa <- .morie_gr_mat(Q, "Q")
@@ -832,6 +879,10 @@ morie_geron_dqn <- function(env, Q, Q_target, buffer, epochs = 10, lr = 0.1, gam
 #' @param Sigma Covariance (d, d).
 #' @return Numeric vector length m.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- matrix(rnorm(20), 10, 2)
+#' morie_gmm_log_pdf(X, mu = c(0, 0), Sigma = diag(2))
 morie_gmm_log_pdf <- function(X, mu, Sigma) {
   d <- ncol(X)
   ch <- chol(Sigma) # errors if not PD, matching Python's slogdet sign check
@@ -850,6 +901,9 @@ morie_gmm_log_pdf <- function(X, mu, Sigma) {
 #' @return List with `weights`, `means`, `covariances`, `responsibilities`,
 #'   `labels`, `log_likelihood`, `ll_history`, `n_iter`, `converged`, `monotone`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gaussian_mixture(V)
 morie_geron_gaussian_mixture <- function(X, n_components = 2, seed = 0, max_iter = 100,
                                          tol = 1e-6, reg = 1e-6) {
   A <- .morie_gr_mat(X, "X")
@@ -926,6 +980,8 @@ morie_geron_gaussian_mixture <- function(X, n_components = 2, seed = 0, max_iter
 #' @param seed LCG seed.
 #' @return List with `y`, `mask`, `scale`, `n_dropped`, `drop_fraction`.
 #' @export
+#' @examples
+#' morie_geron_dropout_alt(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = 0.5)
 morie_geron_dropout_alt <- function(x, p, training = TRUE, seed = 0) {
   a <- as.numeric(x)
   .w4a_need(length(a) > 0L, "x is empty.")
@@ -956,6 +1012,8 @@ morie_geron_dropout_alt <- function(x, p, training = TRUE, seed = 0) {
 #' @param causal Mask future keys.
 #' @return List with `output`, `direct_output`, `max_abs_error`, `n_blocks`, `peak_score_memory`.
 #' @export
+#' @examples
+#' morie_geron_flash_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_flash_attention <- function(Q, K, V, block_size = 2, causal = FALSE) {
   Qa <- .morie_gr_mat(Q, "Q")
   Ka <- .morie_gr_mat(K, "K")
@@ -1034,6 +1092,12 @@ morie_geron_flash_attention <- function(Q, K, V, block_size = 2, causal = FALSE)
 #' @return List with `actor`, `critic`, `actor_target`, `critic_target`,
 #'   `critic_losses`, `rewards`, `actions`, `ou_noise`, `q_values`.
 #' @export
+#' @examples
+#' a <- morie_geron_distilbert(matrix(c(10, 0), 1, 2), matrix(c(0, 
+#'     0), 1, 2), c(1), alpha_mlm = 0, alpha_ce = 1, temperature = 1)
+#' env <- function(s, a) list(s, -((a - 1)^2), FALSE)
+#' morie_geron_ddpg(env, 0.5, c(0, 0), epochs = 1, lr = 0, ou_sigma = 0, 
+#'     s0 = 2)
 morie_geron_ddpg <- function(env, actor, critic, epochs = 20, lr = 0.01, gamma = 0.95,
                              tau = 0.01, ou_theta = 0.15, ou_sigma = 0.2, seed = 0, s0 = NULL,
                              actor_target = NULL, critic_target = NULL) {
@@ -1102,6 +1166,9 @@ morie_geron_ddpg <- function(env, actor, critic, epochs = 20, lr = 0.01, gamma =
 #' @param epochs,lr,seed Training config.
 #' @return List with `loss_history`, `final_loss`, `loss_by_t`, `A`, `b`, `alpha_bar`, `sample`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_ddpm(V)
 morie_geron_ddpm <- function(X, T = 10, beta_schedule = "linear", epochs = 200, lr = 0.05, seed = 0) {
   A0 <- .morie_gr_mat(X, "X")
   m <- nrow(A0)
@@ -1169,6 +1236,10 @@ morie_geron_ddpm <- function(X, T = 10, beta_schedule = "linear", epochs = 200, 
 #' @param epochs,lr,gamma,target_sync,batch_size Config.
 #' @return List with `Q`, `Q_target`, `loss_history`, `overestimation_gap`.
 #' @export
+#' @examples
+#' morie_geron_double_dqn(NULL, matrix(c(0, 1), 1, 2), matrix(c(10, 
+#'     -10), 1, 2), list(list(0, 0, 0, 0, FALSE)), epochs = 1, lr = 1, 
+#'     gamma = 1)
 morie_geron_double_dqn <- function(env, Q, Q_target, buffer, epochs = 10, lr = 0.1, gamma = 0.95,
                                    target_sync = 5, batch_size = NULL) {
   Qa <- .morie_gr_mat(Q, "Q")
@@ -1230,6 +1301,10 @@ morie_geron_double_dqn <- function(env, Q, Q_target, buffer, epochs = 10, lr = 0
 #' @return List with `n_patches`, `n_tokens`, `total_params`,
 #'   `distillation_overhead`, `loss`, `teacher_agreement`.
 #' @export
+#' @examples
+#' img <- array(0, dim = c(3, 32, 32))
+#' morie_geron_deit(img, patch_size = 16, n_layers = 1, d_model = 8, 
+#'     n_heads = 2, n_classes = 4)
 morie_geron_deit <- function(image, patch_size = 16, n_layers = 12, teacher = NULL,
                              d_model = 384, n_heads = 6, n_classes = 1000, in_channels = 3,
                              logits_cls = NULL, logits_dist = NULL, y = NULL, alpha = 0.5) {
@@ -1289,6 +1364,9 @@ morie_geron_deit <- function(image, patch_size = 16, n_layers = 12, teacher = NU
 #' @return List with `feature_shape`, `n_tokens`, `total_params`,
 #'   `matching`, `loss`, `max_detections`.
 #' @export
+#' @examples
+#' morie_geron_detr(array(0, dim = c(3, 224, 224)), n_queries = 10, 
+#'     n_layers = 1, d_model = 8, n_heads = 2, n_classes = 3)
 morie_geron_detr <- function(image, n_queries = 100, n_layers = 6, d_model = 256, n_heads = 8,
                              n_classes = 91, backbone_stride = 32, pred_boxes = NULL,
                              pred_classes = NULL, gt_boxes = NULL, gt_classes = NULL) {
@@ -1348,6 +1426,8 @@ morie_geron_detr <- function(image, n_queries = 100, n_layers = 6, d_model = 256
 #' @param momentum,center_momentum EMA coefficients in \[0, 1).
 #' @return List with `loss`, `teacher_probs`, `student_probs`, `teacher_entropy`, `teacher_next`.
 #' @export
+#' @examples
+#' morie_geron_dino(images = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_dino <- function(images, student, teacher, center = NULL, tau_s = 0.1, tau_t = 0.04,
                              momentum = 0.996, center_momentum = 0.9) {
   S <- .morie_gr_mat(if (is.function(student)) student(images) else student, "student")
@@ -1397,6 +1477,8 @@ morie_geron_dino <- function(images, student, teacher, center = NULL, tau_s = 0.
 #' @param num_workers Non-negative int, only affects `worker_assignment`.
 #' @return List with `batches` (0-based indices), `order`, `n_batches`, `dropped`.
 #' @export
+#' @examples
+#' morie_geron_dataloader(dataset = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), batch_size = 5L)
 morie_geron_dataloader <- function(dataset, batch_size, shuffle = FALSE, drop_last = FALSE,
                                    seed = 0, num_workers = 0) {
   bs <- as.integer(batch_size)
@@ -1449,6 +1531,9 @@ morie_geron_dataloader <- function(dataset, batch_size, shuffle = FALSE, drop_la
 #' @param Adv Advantages (S, nA).
 #' @return Matrix (S, nA).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dueling_q(V, V)
 morie_dueling_q <- function(V, Adv) {
   Vv <- as.numeric(V)
   Av <- .morie_gr_mat(Adv, "Adv")
@@ -1462,6 +1547,9 @@ morie_dueling_q <- function(V, Adv) {
 #' @param beta Inverse temperature (>0).
 #' @return List with `loss`, `per_pair_loss`, `margin`, `reward_chosen`, `reward_rejected`, `accuracy`.
 #' @export
+#' @examples
+#' morie_geron_dpo(matrix(c(-1, -2), 1, 2), matrix(c(-1, -2), 1, 
+#'     2))
 morie_geron_dpo <- function(pi, pi_ref, preferences = NULL, beta = 0.1) {
   lp <- .morie_gr_mat(pi, "pi")
   lr <- .morie_gr_mat(pi_ref, "pi_ref")
@@ -1493,6 +1581,9 @@ morie_geron_dpo <- function(pi, pi_ref, preferences = NULL, beta = 0.1) {
 #' @param activations Optional batch to quantize dynamically.
 #' @return List with `quantized`, `scales`, `zero_points`, `dequantized`, `max_abs_error`, `compression`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_dynamic_quantization_alt(V)
 morie_geron_dynamic_quantization_alt <- function(model, dtype = "int8", activations = NULL) {
   ranges <- list(int8 = c(-128, 127, TRUE), uint8 = c(0, 255, FALSE), int16 = c(-32768, 32767, TRUE))
   .w4a_need(dtype %in% names(ranges), "dtype must be int8, uint8 or int16.")
@@ -1556,6 +1647,9 @@ morie_geron_dynamic_quantization_alt <- function(model, dtype = "int8", activati
 #' @param activation "tanh"/"relu".
 #' @return List with `outputs`, `states`, `final_states`, `layer_sizes`, `n_params`, `state_norms`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_deep_rnn(V)
 morie_geron_deep_rnn <- function(X, hidden_sizes = 4, n_layers = NULL, weights = NULL, seed = 0, activation = "tanh") {
   Xa <- .morie_gr_mat(X, "X")
   Tn <- nrow(Xa)
@@ -1634,6 +1728,9 @@ morie_geron_deep_rnn <- function(X, hidden_sizes = 4, n_layers = NULL, weights =
 #' @param clip_x0 Optional c(lo, hi).
 #' @return List with `x_0`, `trajectory`, `means`, `betas`, `alpha_bar`, `model_calls`.
 #' @export
+#' @examples
+#' zero <- function(x, t) rep(0, length(x))
+#' morie_geron_diffusion_reverse(1, zero, T = 1, beta_schedule = 0.75)
 morie_geron_diffusion_reverse <- function(x_T, model, T, beta_schedule = "linear", seed = 0, clip_x0 = NULL) {
   x <- as.numeric(x_T)
   Ti <- as.integer(T)
@@ -1686,6 +1783,9 @@ morie_geron_diffusion_reverse <- function(x_T, model, T, beta_schedule = "linear
 #' @param criterion,max_depth CART controls.
 #' @return List with `variance`, `bias2`, `root_splits`, `structural_instability`, `ensemble_prediction`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_tree_high_variance(V, V)
 morie_geron_tree_high_variance <- function(X, y, n_resamples = 20, seed = 0, criterion = "gini", max_depth = NULL) {
   Xa <- .morie_gr_mat(X, "X")
   ya <- as.vector(y)
@@ -1751,6 +1851,9 @@ morie_geron_tree_high_variance <- function(X, y, n_resamples = 20, seed = 0, cri
 #' @param max_depth,min_samples_leaf,min_samples_split,criterion CART controls.
 #' @return List with `tree`, `n_leaves`, `baseline_leaves`, `leaves_saved`, `train_score`, `train_score_cost`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_tree_regularization(V, V)
 morie_geron_tree_regularization <- function(X, y, max_depth = NULL, min_samples_leaf = 1,
                                             min_samples_split = 2, criterion = "gini") {
   constrained <- morie_geron_cart_algorithm(X, y,
@@ -1783,6 +1886,9 @@ morie_geron_tree_regularization <- function(X, y, max_depth = NULL, min_samples_
 #' @param criterion,max_depth CART controls.
 #' @return List with `predictions_match`, `thresholds`, `scaled_thresholds`, `thresholds_match`, `knn_match`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_tree_sensitivity_scale(V, V)
 morie_geron_tree_sensitivity_scale <- function(X, y, a = 100.0, b = -7.0, feature = NULL,
                                                criterion = "gini", max_depth = NULL) {
   Xa <- .morie_gr_mat(X, "X")
@@ -1845,6 +1951,8 @@ morie_geron_tree_sensitivity_scale <- function(X, y, a = 100.0, b = -7.0, featur
 #' @param top_k Confusions to list.
 #' @return List with `normalized`, `error_matrix`, `top_confusions`, `worst_class`, `error_rate`.
 #' @export
+#' @examples
+#' morie_geron_error_analysis(c(0, 0, 1, 1), c(0, 1, 1, 1))
 morie_geron_error_analysis <- function(y_true, y_pred, top_k = 5) {
   k <- as.integer(top_k)
   base <- morie_geron_confusion_matrix(y_true, y_pred)
@@ -1888,6 +1996,8 @@ morie_geron_error_analysis <- function(y_true, y_pred, top_k = 5) {
 #' @param patience Optional online stopping patience.
 #' @return List with `theta`, `best_iter`, `best_val_rmse`, `stopped_iter`, `is_u_shaped`.
 #' @export
+#' @examples
+#' morie_geron_early_stopping_alt(X_train = c(1, 2, 3, 4, 5, 6, 7, 8), y_train = c(1, 2, 3, 4, 5, 6, 7, 8), X_val = c(1, 2, 3, 4, 5, 6, 7, 8), y_val = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_iter = 100, eta = 0.01,
                                            patience = NULL, fit_intercept = TRUE) {
   Xt <- .morie_gr_mat(X_train, "X_train")
@@ -1938,6 +2048,9 @@ morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_ite
 #' @param seed LCG seed.
 #' @return List with `action`, `probabilities`, `greedy_action`, `greedy_actions`, `is_exploratory`.
 #' @export
+#' @examples
+#' morie_geron_epsilon_greedy_alt(matrix(c(1, 5, 2), 1, 3), s = 0, 
+#'     epsilon = 0.3)
 morie_geron_epsilon_greedy_alt <- function(Q, s, epsilon, seed = 0) {
   Qa <- if (is.matrix(Q)) Q else matrix(as.numeric(Q), nrow = 1)
   si <- as.integer(s) + 1L
@@ -1965,6 +2078,8 @@ morie_geron_epsilon_greedy_alt <- function(Q, s, epsilon, seed = 0) {
 #' @param sigma_x Fixed decoder sd for the Gaussian likelihood.
 #' @return List with `elbo`, `loss`, `kl`, `reconstruction_log_lik`, `per_sample_kl`.
 #' @export
+#' @examples
+#' morie_geron_elbo(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), log_sigma = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_elbo <- function(x, mu, log_sigma, x_recon = NULL, likelihood = "gaussian", sigma_x = 1.0) {
   X <- .morie_gr_mat(x, "x")
   M <- .morie_gr_mat(mu, "mu")
@@ -1999,6 +2114,9 @@ morie_geron_elbo <- function(x, mu, log_sigma, x_recon = NULL, likelihood = "gau
 #' @param share_embeddings Share one embedding matrix between the stacks.
 #' @return List with `total_params`, `encoder_params`, `decoder_params`, `src_mask`, `tgt_mask`, `cross_mask`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_encoder_decoder_transformer(V, V)
 morie_geron_encoder_decoder_transformer <- function(src, tgt, n_layers = 6, n_heads = 8, d_model = 512,
                                                     vocab_size = 37000, max_len = 512, d_ff = 2048,
                                                     share_embeddings = TRUE) {
@@ -2036,6 +2154,9 @@ morie_geron_encoder_decoder_transformer <- function(src, tgt, n_layers = 6, n_he
 #' @param fit_intercept Logical.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l2_penalty`, `gradient`.
 #' @export
+#' @examples
+#' morie_geron_elastic_net(matrix(c(1, 2), 2, 1), c(2, 4), c(0, 
+#'     2), alpha = 1, r = 0.5)
 morie_geron_elastic_net <- function(X, y, theta, alpha, r, fit_intercept = TRUE) {
   Xm <- .morie_gr_mat(X, "X")
   yv <- as.numeric(y)
@@ -2065,6 +2186,9 @@ morie_geron_elastic_net <- function(X, y, theta, alpha, r, fit_intercept = TRUE)
 #' @param center Subtract column means.
 #' @return List with `explained_variance_ratio`, `explained_variance`, `singular_values`, `cumulative`, `n_for_95`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_explained_variance_ratio_alt(V)
 morie_geron_explained_variance_ratio_alt <- function(X, n_components = NULL, center = TRUE) {
   A <- .morie_gr_mat(X, "X")
   m <- nrow(A)
@@ -2092,6 +2216,9 @@ morie_geron_explained_variance_ratio_alt <- function(X, n_components = NULL, cen
 #' @param n_estimators,max_features,seed,criterion,max_depth,min_samples_leaf Config.
 #' @return List with `predictions`, `tree_predictions`, `train_score`, `single_tree_score`, `disagreement`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_extra_trees(V, V)
 morie_geron_extra_trees <- function(X, y, n_estimators = 10, max_features = NULL, seed = 0,
                                     criterion = "gini", max_depth = NULL, min_samples_leaf = 1) {
   Xa <- .morie_gr_mat(X, "X")
@@ -2198,6 +2325,8 @@ morie_geron_extra_trees <- function(X, y, n_estimators = 10, max_features = NULL
 #' @param average "binary"/"macro"/"micro"/NULL.
 #' @return List with `f1`, `precision`, `recall`, `tp`, `fp`, `fn`, `per_class_f1`.
 #' @export
+#' @examples
+#' morie_geron_f1_score_alt(c(0, 0, 1, 1), c(0, 1, 1, 1))
 morie_geron_f1_score_alt <- function(y_true, y_pred, pos_label = 1, average = "binary") {
   cm_res <- morie_geron_confusion_matrix(y_true, y_pred)
   cm <- cm_res$matrix
@@ -2253,6 +2382,14 @@ morie_geron_f1_score_alt <- function(y_true, y_pred, pos_label = 1, average = "b
 #' @param x Point(s) at which to differentiate.
 #' @return List with `value`, `grad`, `n_passes`, `fd_check`, `max_fd_gap`.
 #' @export
+#' @examples
+#' f <- function(d) {
+#'   x <- d[[1]]; y <- d[[2]]
+#'   v <- x$value * y$value + x$value^2
+#'   g <- x$deriv * y$value + x$value * y$deriv + 2 * x$value * x$deriv
+#'   list(value = v, deriv = g)
+#' }
+#' morie_geron_forward_autodiff(f, c(1.5, -0.5))
 morie_geron_forward_autodiff <- function(f, x) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -2290,6 +2427,12 @@ morie_geron_forward_autodiff <- function(f, x) {
 #' @param activation "relu"/"identity".
 #' @return List with `class_map`, `scores`, `segmentation`, `out_shape`, `n_classes`.
 #' @export
+#' @examples
+#' set.seed(2)
+#' img <- array(rnorm(1 * 6 * 6), c(1, 6, 6))
+#' K <- array(rnorm(2 * 1 * 3 * 3, 0, 0.3), c(2, 1, 3, 3))
+#' r <- morie_geron_fcn(img, list(list(K, 0, 1L)))
+#' str(r, max.level = 1)
 morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
   dims <- if (length(dim(image)) == 2) c(1, dim(image)) else dim(image)
   cur <- array(as.numeric(image), dim = dims)
@@ -2354,6 +2497,9 @@ morie_geron_fcn <- function(image, model, upsample = 1, activation = "relu") {
 #' @param image_index Optional per-position image index (0 or -1).
 #' @return List with `output`, `visual_tokens`, `cross_attention`, `gate_value`, `is_identity_at_init`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_flamingo(V, V)
 morie_geron_flamingo <- function(images, text, latents = NULL, W_Q = NULL, W_K = NULL, W_V = NULL,
                                  gate = 0.0, image_index = NULL) {
   V <- .morie_gr_mat(images, "images")
@@ -2396,6 +2542,9 @@ morie_geron_flamingo <- function(images, text, latents = NULL, W_Q = NULL, W_K =
 #' @param stride,padding Conv controls.
 #' @return List with `feature_map`, `pre_activation`, `out_shape`, `n_filters`, `sparsity`.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_geron_feature_map(M, M)
 morie_geron_feature_map <- function(x, K, b = 0.0, activation = "relu", stride = 1, padding = 0) {
   acts <- list(
     relu = function(z) pmax(z, 0), identity = function(z) z, tanh = tanh,
@@ -2436,6 +2585,8 @@ morie_geron_feature_map <- function(x, K, b = 0.0, activation = "relu", stride =
 #' @param filters Channels per conv block.
 #' @return List with `layers`, `total_params`, `flatten_dim`, `fc_share`, `class_names`.
 #' @export
+#' @examples
+#' morie_geron_fashion_mnist()
 morie_geron_fashion_mnist <- function(epochs = 10, lr = 0.001, batch_size = 32, n_classes = 10,
                                       input_size = 28, filters = c(32, 64)) {
   classes_ <- c(
@@ -2487,6 +2638,9 @@ morie_geron_fashion_mnist <- function(epochs = 10, lr = 0.001, batch_size = 32, 
 #' @param x Values to cast.
 #' @return List with `value`, `sign`, `exponent`, `mantissa_field`, `rel_error`, `overflowed`, `underflowed`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_fp16_quant(V)
 morie_geron_fp16_quant <- function(x) {
   a <- as.numeric(x)
   n <- length(a)
@@ -2583,6 +2737,9 @@ morie_geron_fp16_quant <- function(x) {
 #' @param x Values to encode.
 #' @return List with `value`, `sign`, `exponent`, `mantissa`, `reconstructed`, `rel_error`, `kind`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_fp32(V)
 morie_geron_fp32 <- function(x) {
   a <- as.numeric(x)
   n <- length(a)
@@ -2683,6 +2840,11 @@ morie_geron_fp32 <- function(x) {
 #' @param max_context Optional cap.
 #' @return List with `prediction`, `zero_shot_prediction`, `prompt`, `changed_by_context`, `k`.
 #' @export
+#' @examples
+#' model <- function(prompt) if (grepl("2 -> 4", prompt, fixed = TRUE)) "6" else "?"
+#' ex <- list(list("1", "2"), list("2", "4"))
+#' r <- morie_geron_few_shot(model, ex, query = "3")
+#' r$prediction
 morie_geron_few_shot <- function(model, examples, query, k = NULL, separator = "\n",
                                  template = "{x} -> {y}", max_context = NULL) {
   n_avail <- length(examples)
@@ -2717,6 +2879,11 @@ morie_geron_few_shot <- function(model, examples, query, k = NULL, separator = "
 #' @param epochs,lr,theta,freeze,batch_size,weight_decay,warmup Config.
 #' @return List with `theta`, `theta_init`, `loss_history`, `drift`, `lr_schedule`, `frozen`.
 #' @export
+#' @examples
+#' task <- function(th, batch) list((th[1] - 3)^2, 2 * (th[1] - 
+#'     3))
+#' morie_geron_finetune_lm(task, list(1), epochs = 1, lr = 0.1, 
+#'     theta = 0)
 morie_geron_finetune_lm <- function(model, dataset, epochs = 10, lr = 0.01, theta = NULL, freeze = NULL,
                                     batch_size = NULL, weight_decay = 0.0, warmup = 0) {
   th <- if (is.null(theta)) 0.0 else as.numeric(theta)
@@ -2763,6 +2930,9 @@ morie_geron_finetune_lm <- function(model, dataset, epochs = 10, lr = 0.01, thet
 #' @param z_dim,epochs,lr,seed,non_saturating Config.
 #' @return List with `G`, `D`, `value_history`, `samples`, `equilibrium_value`, `mean_gap`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gan(V)
 morie_geron_gan <- function(X, G = NULL, D = NULL, z_dim = 1, epochs = 200, lr = 0.05, seed = 0, non_saturating = TRUE) {
   A <- .morie_gr_mat(X, "X")
   m <- nrow(A)
@@ -2832,6 +3002,9 @@ morie_geron_gan <- function(X, G = NULL, D = NULL, z_dim = 1, epochs = 200, lr =
 #' @param n_components,threshold,contamination,seed,X_new Config.
 #' @return List with `is_anomaly`, `density`, `log_density`, `threshold`, `n_anomalies`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_anomaly_gmm(V)
 morie_geron_anomaly_gmm <- function(X, n_components = 2, threshold = NULL, contamination = 0.05, seed = 0, X_new = NULL) {
   A <- .morie_gr_mat(X, "X")
   c_ <- as.numeric(contamination)
@@ -2877,6 +3050,9 @@ morie_geron_anomaly_gmm <- function(X, n_components = 2, threshold = NULL, conta
 #' @param n_estimators,learning_rate,max_depth,loss Config.
 #' @return List with `predictions`, `init`, `trees`, `loss_history`, `train_mse`, `monotone`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gradient_boosting(V, V)
 morie_geron_gradient_boosting <- function(X, y, n_estimators = 10, learning_rate = 0.1, max_depth = 2,
                                           loss = "squared_error") {
   Xa <- .morie_gr_mat(X, "X")
@@ -2918,6 +3094,9 @@ morie_geron_gradient_boosting <- function(X, y, n_estimators = 10, learning_rate
 #' @param o1,r3,o3,r5,o5,pp Branch widths.
 #' @return List with `branch_1x1`, `branch_3x3`, `branch_5x5`, `branch_pool`, `out_channels`, `params`.
 #' @export
+#' @examples
+#' morie_inception_module(in_ch = 192, o1 = 64, r3 = 96, o3 = 128,
+#'                        r5 = 16, o5 = 32, pp = 32)
 morie_inception_module <- function(in_ch, o1, r3, o3, r5, o5, pp) {
   b1 <- in_ch * o1 + o1
   b3 <- (in_ch * r3 + r3) + (9 * r3 * o3 + o3)
@@ -2934,6 +3113,8 @@ morie_inception_module <- function(in_ch, o1, r3, o3, r5, o5, pp) {
 #' @param n_classes,input_size,in_channels,dropout Config.
 #' @return List with `layers`, `modules`, `total_params`, `final_feature_map`, `total_reduction_saving`.
 #' @export
+#' @examples
+#' morie_geron_googlenet()
 morie_geron_googlenet <- function(n_classes = 1000, input_size = 224, in_channels = 3, dropout = 0.4) {
   incep <- list(
     c(64, 96, 128, 16, 32, 32), c(128, 128, 192, 32, 96, 64), c(192, 96, 208, 16, 48, 64),
@@ -3005,6 +3186,9 @@ morie_geron_googlenet <- function(n_classes = 1000, input_size = 224, in_channel
 #' @param ... Other decoder_only args.
 #' @return List with `total_params`, `config`, `loss`, `perplexity`, `n_predicted`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gpt1(V)
 morie_geron_gpt1 <- function(X, n_layers = NULL, n_heads = NULL, logits = NULL, targets = NULL, ...) {
   cfg <- list(n_layers = 12L, n_heads = 12L, d_model = 768L, vocab_size = 40478L, max_len = 512L, d_ff = 3072L)
   extra <- list(...)
@@ -3042,6 +3226,9 @@ morie_geron_gpt1 <- function(X, n_layers = NULL, n_heads = NULL, logits = NULL, 
 #' @param ... Other decoder_only args.
 #' @return List with `total_params`, `non_embedding_params`, `config`, `params_vs_small`, `all_sizes`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gpt2(V)
 morie_geron_gpt2 <- function(X, n_layers = NULL, n_heads = NULL, size = "small", ...) {
   sizes <- list(
     small = list(n_layers = 12L, n_heads = 12L, d_model = 768L),
@@ -3078,6 +3265,8 @@ morie_geron_gpt2 <- function(X, n_layers = NULL, n_heads = NULL, size = "small",
 #' @param n_layers,d_model,n_heads,d_ff,vocab_size,n_ctx,dtype_bytes Config.
 #' @return List with `total_parameters`, `parameters_per_layer`, `breakdown`, `shape_trace`, `kv_cache_bytes`.
 #' @export
+#' @examples
+#' morie_geron_gpt3(prompt = c(1, 2, 3, 4, 5, 6, 7, 8), n_tokens = 5L)
 morie_geron_gpt3 <- function(prompt, n_tokens, n_layers = 96, d_model = 12288, n_heads = 96, d_ff = NULL,
                              vocab_size = 50257, n_ctx = 2048, dtype_bytes = 2) {
   ids <- as.integer(round(as.numeric(prompt)))
@@ -3134,6 +3323,9 @@ morie_geron_gpt3 <- function(prompt, n_tokens, n_layers = 96, d_model = 12288, n
 #' @param seed RNG seed.
 #' @return List with `X_projected`, `R`, `d_in`, `d_out`, `max_distortion`, `mean_distortion`.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_geron_gaussian_rand_projection(V, V)
 morie_geron_gaussian_rand_projection <- function(X, d_out, seed = 0) {
   A <- if (is.matrix(X)) X else matrix(as.numeric(X), nrow = 1)
   m <- nrow(A)
@@ -3168,6 +3360,9 @@ morie_geron_gaussian_rand_projection <- function(X, d_out, seed = 0) {
 #' @param alpha Ridge penalty (>=0).
 #' @return function(X_new) -> predictions.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_ridge_estimator(V, V)
 morie_ridge_estimator <- function(X_train, y_train, alpha = 0.0) {
   X <- .morie_gr_mat(X_train, "X_train")
   y <- as.numeric(y_train)
@@ -3184,6 +3379,12 @@ morie_ridge_estimator <- function(X_train, y_train, alpha = 0.0) {
 #' @param score Optional function(y_true, y_pred) -> score.
 #' @return List with `best_params`, `best_score`, `results`, `n_candidates`, `n_fits`.
 #' @export
+#' @examples
+#' set.seed(3)
+#' X <- matrix(rnorm(60), 30, 2)
+#' y <- 1 + X[, 1] + rnorm(30, 0, 0.2)
+#' r <- morie_geron_grid_search(list(alpha = c(0.1, 1)), X, y, K = 3)
+#' r$best_params
 morie_geron_grid_search <- function(param_grid, X, y, estimator = NULL, K = 3, score = NULL) {
   names_ <- names(param_grid)
   .w4a_need(length(names_) > 0L, "param_grid is empty.")
@@ -3215,6 +3416,9 @@ morie_geron_grid_search <- function(param_grid, X, y, estimator = NULL, K = 3, s
 #' @param epochs,lr,gamma,target_sync Config.
 #' @return List with `Q`, `V`, `A`, `loss_history`, `advantage_mean`, `value_share`.
 #' @export
+#' @examples
+#' morie_geron_dueling_dqn_alt(NULL, 0, matrix(c(0, 0), 1, 2), list(list(0, 
+#'     0, 1, 0, TRUE)), epochs = 1, lr = 1)
 morie_geron_dueling_dqn_alt <- function(env, V, A, buffer, epochs = 10, lr = 0.1, gamma = 0.95, target_sync = 5) {
   Vv <- as.numeric(V)
   Av <- .morie_gr_mat(A, "A")

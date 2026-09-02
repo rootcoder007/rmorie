@@ -22,12 +22,12 @@ minimal choice.
 \details{
 Formula: Bernoulli T = sum_i x_i; Normal T = (xbar, s)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Suffstat(V)
+}
 \references{
 Wasserman (2004), All of Statistics, Section 9.13.2,
 Definition 9.32 and Examples 9.33 and 9.34. Fetched as the full text
 of the book.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Suffstat(V)
 }

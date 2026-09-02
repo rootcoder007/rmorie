@@ -29,11 +29,11 @@ SAMPLING ODDS,
 [D/g(X) - (1 - D)/(1 - g(X))]} with \code{p(X) = P(S = 1 | X)}.
 Target-population outcomes are never used; only its covariates enter.
 }
-\references{
-Rudolph, K. E. & van der Laan, M. J. (2017). JRSS B
-79(5):1509-1525.
-}
 \examples{
 set.seed(1)
 r <- Tmltrn(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), S = rnorm(10)); TRUE
+}
+\references{
+Rudolph, K. E. & van der Laan, M. J. (2017). JRSS B
+79(5):1509-1525.
 }

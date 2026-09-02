@@ -26,10 +26,10 @@ empirical Fourier coefficient and no matrix has to be formed.
 Formula: beta_k-hat = (n/(n+1)) mean_i y_i phi_k(x_i);
 evidence(K) = -n log(RSS/n)/2 - K log(n)/2.
 }
+\examples{
+Ghosalfrsreg()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.2.
-}
-\examples{
-Ghosalfrsreg()
 }

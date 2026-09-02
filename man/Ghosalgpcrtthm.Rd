@@ -27,10 +27,10 @@ chapter.
 \details{
 Formula: eps_n = n^(-1/(2 + a)), the point where eps^(-a) = n eps^2.
 }
+\examples{
+Ghosalgpcrtthm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Theorem 11.20, eq. (11.12).
-}
-\examples{
-Ghosalgpcrtthm()
 }

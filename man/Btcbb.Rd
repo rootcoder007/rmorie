@@ -39,7 +39,7 @@ series appear in fewer blocks than those in the middle, so the resample
 mean is a WEIGHTED mean of the data and the bootstrap is biased.  Wrapping
 the series into a circle gives all n starting positions equal footing,
 every observation appears in exactly ell blocks, and that bias vanishes:
-E*[xbar*] = xbar exactly.  That exactness is the anchor and it is a genuine
+E*\link{xbar*} = xbar exactly.  That exactness is the anchor and it is a genuine
 discriminator -- the same check applied to the moving-block bootstrap
 fails, which is the entire reason this variant exists.  ebar_star reports
 the exact conditional mean, computed combinatorially rather than by

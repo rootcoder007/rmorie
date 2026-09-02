@@ -36,6 +36,9 @@
 #' @references Elamir & Seheult (2003), Comput. Statist. Data Anal.
 #'   43(3):299-314.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Evtlmom(V)
 Evtlmom <- function(x, s = 0, t = 0, order = 2) {
   xs <- sort(.s03vec(x))
   n <- length(xs)

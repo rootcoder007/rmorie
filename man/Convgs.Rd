@@ -26,10 +26,10 @@ is not supplied.  Composite reliability follows the same algebra,
 CR = (sum lambda_i)^2 / ((sum lambda_i)^2 + sum theta_i).  Fornell
 and Larcker's rule is AVE >= 0.5 with CR >= 0.7.
 }
+\examples{
+Convgs(loadings = c(0.7, 0.8, 0.75, 0.6))
+}
 \references{
 Fornell & Larcker (1981), J. Marketing Research
 18(1):39-50.
-}
-\examples{
-Convgs(loadings = c(0.7, 0.8, 0.75, 0.6))
 }

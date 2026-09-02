@@ -24,13 +24,13 @@ misapplied.
 Formula: f = n/N; fpc = (N - n)/N = 1 - f;
 V(ybar) = (1 - f) S^2 / n, se scales by sqrt(1 - f)
 }
+\examples{
+Fpc(N = 5L, n = 5L)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 2, where V(ybar) = (S^2/n)(N - n)/N for simple random sampling
 without replacement. Cross-checked against the reference
 implementation in the CRAN package samplingbook 1.2.4, whose Smean
 uses the variance (N - n)/N * (1/(n(n-1))) sum (y - ybar)^2.
-}
-\examples{
-Fpc(N = 5L, n = 5L)
 }

@@ -39,6 +39,9 @@
 #'   Garthwaite, Andrews & Charlett (2013), Statistics in Medicine
 #'   32(7):1206-1222, doi:10.1002/sim.5595.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Farsig(rpois(300, 10))
 Farsig <- function(counts, baseline_years = 5, reference_window = 3,
                    period = 52, alpha = 0.005, reweight = TRUE, trend = TRUE) {
   .irls <- function(X, y, w, iters = 60L, tol = 1e-12) {

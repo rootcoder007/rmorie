@@ -24,6 +24,8 @@
 #'   \code{target}, \code{pair} and \code{msa}, \code{startmax},
 #'   \code{estimate} and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. section 1.2.8
+#' @examples
+#' Alfcrop(seqlen = 5L, cropsize = 5L)
 Alfcrop <- function(seqlen, cropsize, start = 1, target = NULL, pair = NULL,
                     msa = NULL, mode = "clamped") {
   if (!mode %in% c("clamped", "unclamped"))

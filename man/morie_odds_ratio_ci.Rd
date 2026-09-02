@@ -9,10 +9,13 @@ morie_odds_ratio_ci(table_2x2, alpha = 0.05)
 \arguments{
 \item{table_2x2}{A 2x2 matrix: rows are treatment, columns are outcome.}
 
-\item{alpha}{Significance level; sets the width of the interval, which is Woolf's on the log scale (Haldane-Anscombe corrected when a cell is empty).}
+\item{alpha}{Significance level; sets the width of the interval,
+which is Woolf's on the log scale (Haldane-Anscombe corrected when
+a cell is empty).}
 }
 \value{
-Named list: `odds_ratio` (the sample odds ratio), `ci_lower`, `ci_upper` at the requested level, and the exact `p_value`.
+Named list: \code{odds_ratio} (the sample odds ratio), \code{ci_lower},
+\code{ci_upper} at the requested level, and the exact \code{p_value}.
 }
 \description{
 Odds ratio and confidence interval from a 2x2 contingency table

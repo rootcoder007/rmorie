@@ -28,9 +28,9 @@ a stratifying label. Only the exposure need be unconfounded.
 Formula: fit \code{Y = g0 + g1 X + g2 V + g3 X V}; g3 is the additive
 modification and \code{g1 + g3 v} the stratum-specific effect.
 }
-\references{
-VanderWeele, T. J. (2009). Epidemiology 20:863-871.
-}
 \examples{
 Fxidf(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), C_mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
+\references{
+VanderWeele, T. J. (2009). Epidemiology 20:863-871.
 }

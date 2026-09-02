@@ -16,6 +16,9 @@
 #' @references Tukey, J. W. (1977). Exploratory Data Analysis.
 #'   Addison-Wesley, chapters 2 and 3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' IqrA(V)
 IqrA <- function(x, k = 1.5) {
   v <- as.numeric(unlist(x)); n <- length(v)
   s <- sort(v)

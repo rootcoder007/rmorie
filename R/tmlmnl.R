@@ -23,6 +23,8 @@
 #' @references Chernozhukov, V. et al. (2018). Econometrics Journal
 #'   21(1):C1-C68; van der Laan, M. J. & Rubin, D. (2006). IJB 2(1):11.
 #' @export
+#' @examples
+#' Tmlmnl(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmnl <- function(y, D, X, ml_q = NULL, ml_g = NULL) {
   yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
   if (n == 0L || length(Dv) != n)

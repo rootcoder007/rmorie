@@ -21,11 +21,11 @@ Z(s) = sum_{j=0}^p X_j(s) beta_j + e(s) = X beta + e(s), fitted by
 ordinary least squares; the residuals are what a variogram estimator
 should be given.
 }
-\references{
-Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5),
-p. 218.  Read from the corpus PDF.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Spatrend(V, V)
+}
+\references{
+Bivand, Pebesma and Gomez-Rubio (2013), Equation (8.5),
+p. 218.  Read from the corpus PDF.
 }

@@ -18,10 +18,10 @@ The quantile.
 Inverse of the Student-t CDF, used by \code{\link{morie_ttsAn}} for
 the generalised ESD critical values.
 }
+\examples{
+morie_t_quantile(p = 0.5, v = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Rosner, B. (1983). Percentage points for a generalized
 ESD many-outlier procedure. Technometrics, 25(2), 165-172.
-}
-\examples{
-morie_t_quantile(p = 0.5, v = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

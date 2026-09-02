@@ -21,13 +21,13 @@ Exact minimisation of eq (3) of Killick et al. (2012) with the
 Normal change-in-mean cost, i.e. \code{\link{morie_pelt}} with
 \code{cost = "mean"}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_chgseg(V)
+}
 \references{
 Killick, R., Fearnhead, P. and Eckley, I. A. (2012).
 Optimal detection of changepoints with a linear computational
 cost. Journal of the American Statistical Association, 107(500),
 1590-1598.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_chgseg(V)
 }

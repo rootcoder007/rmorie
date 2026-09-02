@@ -46,13 +46,13 @@ Formula: mu* = k*'(K + s2 I)^{-1} y;
 var* = k** - k*'(K + s2 I)^{-1} k*;
 log p(y) = -0.5 y'(K + s2 I)^{-1} y - 0.5 log|K + s2 I| - (n/2) log 2 pi.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpregb(V, V)
+}
 \references{
 Rasmussen and Williams (2006), Gaussian Processes for
 Machine Learning, MIT Press, eqs. (2.23)-(2.26) and (5.8); Murray
 and Adams (2010), Slice sampling covariance hyperparameters of
 latent Gaussian models, NIPS 23, arXiv:1006.0868.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Gpregb(V, V)
 }

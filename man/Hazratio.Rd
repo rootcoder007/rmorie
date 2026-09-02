@@ -24,10 +24,10 @@ list with the hazard ratios, the interval bounds, and the z statistics and p-val
 \description{
 HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is asymmetric about the hazard ratio and never crosses zero.
 }
-\references{
-Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Hazratio(V, V)
+}
+\references{
+Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 }

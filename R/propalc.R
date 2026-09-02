@@ -19,6 +19,8 @@
 #'   package samplingbook 1.2.4, whose stratasamp(type = "prop") sets
 #'   wh <- Nh/N.
 #' @export
+#' @examples
+#' Propalloc(Nh = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 Propalloc <- function(Nh, n) {
   Nh <- .t1_vec(Nh); n <- as.integer(n)
   L <- length(Nh)

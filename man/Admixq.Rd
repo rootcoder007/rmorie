@@ -25,15 +25,15 @@ L(Q,P) = sum_ij [ g_ij log(sum_k q_ik p_kj)
 + (2-g_ij) log(sum_k q_ik (1-p_kj)) ], maximised by the
 EM updates on allele responsibilities a_ijk and b_ijk.
 }
+\examples{
+set.seed(1)
+G <- matrix(rbinom(50, 2, 0.3), 10, 5)
+Admixq(G, K = 2, steps = 20)
+}
 \references{
 Alexander, Novembre and Lange (2009), Genome Research
 19(9), 1655-1664, Equation (2), read from the open-access PMC
 rendering.  ADMIXTURE maximises that likelihood by block relaxation;
 this routine uses the EM algorithm for the same likelihood (FRAPPE,
 Tang et al. 2005).
-}
-\examples{
-set.seed(1)
-G <- matrix(rbinom(50, 2, 0.3), 10, 5)
-Admixq(G, K = 2, steps = 20)
 }

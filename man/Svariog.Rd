@@ -25,12 +25,12 @@ List with gamma, np, dist, breaks, cutoff, n, npair.
 gammahat(h_j) = (1/(2 N_h)) sum_i (Z(s_i) - Z(s_i + h))^2 over the
 pairs whose separation falls in distance class j.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Svariog(V, V)
+}
 \references{
 Bivand, Pebesma and Gomez-Rubio (2013), Applied Spatial
 Data Analysis with R, 2nd edn, Equation (8.4), p. 218.  Read from
 the corpus PDF.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Svariog(V, V)
 }

@@ -21,13 +21,13 @@ List with S, t, xi, retained, nretained, kappa, n, J.
 \description{
 t_j = sqrt(n) mbar_j / sigma_j; xi_j = t_j / kappa_n with
 kappa_n = sqrt(log n); moment j is retained when xi_j > -1, and
-S = sum over retained of [max(t_j, 0)]^2.
+S = sum over retained of \link{max(t_j, 0)}^2.
+}
+\examples{
+Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
 }
 \references{
 Andrews and Soares (2010), Econometrica 78(1), 119-157,
 Sects. 3-4.  Standard published form; the article is not in the
 local corpus and was not read.
-}
-\examples{
-Gmsbound(mbar = 5L, sigma = 0.5, n = 5L)
 }

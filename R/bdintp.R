@@ -15,6 +15,9 @@
 #'   1243-1284, Sect. 2.  Standard published form; the article is not in
 #'   the local corpus and was not read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Qcritset(V)
 Qcritset <- function(mbar, se = NULL, n = 1, cutoff = NULL) {
   M <- .t1_mat(mbar); g <- nrow(M); J <- ncol(M)
   if (is.null(se)) {

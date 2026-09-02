@@ -9,7 +9,7 @@ Mvedet(X, h = NULL, n_starts = 100000L)
 \arguments{
 \item{X}{n-by-p data matrix.}
 
-\item{h}{coverage; defaults to [(n + p + 1)/2].}
+\item{h}{coverage; defaults to \link{(n + p + 1)/2}.}
 
 \item{n_starts}{cap on the number of (p+1)-subsets enumerated.}
 }
@@ -23,7 +23,7 @@ point", in Mathematical Statistics and Applications, Vol. B, Reidel,
 283-297.  The MVE is the ellipsoid of smallest volume covering at least h of
 the n observations; its centre estimates location and its shape, suitably
 scaled, estimates scatter.  Like the MCD it attains the maximal breakdown
-point at h = [(n + p + 1)/2].
+point at h = \link{(n + p + 1)/2}.
 }
 \details{
 Computation follows the standard resampling scheme: for each (p+1)-subset J

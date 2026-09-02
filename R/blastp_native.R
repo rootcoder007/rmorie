@@ -56,6 +56,9 @@
 #'   and Lipman, D. J. (1990). Basic local alignment search tool.
 #'   Journal of Molecular Biology, 215(3), 403-410.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_blastp(V, V)
 morie_blastp <- function(query, subject, match = 1, mismatch = -1,
                          K = 0.1, lam = 1, score_matrix = NULL) {
   q <- strsplit(as.character(query), "")[[1]]

@@ -27,11 +27,11 @@ second moment.
 Formula: var = (1/n) sum_i (1{x_i <= t} - F_n(t))^2, which equals
 F_n(t)(1 - F_n(t)) identically.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 12.3.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosaleffinflfn(V, V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 12.3.1.
 }

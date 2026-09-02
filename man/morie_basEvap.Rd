@@ -37,11 +37,11 @@ eq. (8).  The two terms are returned separately: the first is the
 radiative (energy) contribution, the second the aerodynamic
 (vapour-transport) contribution.
 }
+\examples{
+morie_basEvap(T = 25, R_n = 15, u2 = 2, VPD = 1.5)
+}
 \references{
 Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.
 (1998). Crop evapotranspiration. FAO Irrigation and Drainage
 Paper 56.
-}
-\examples{
-morie_basEvap(T = 25, R_n = 15, u2 = 2, VPD = 1.5)
 }

@@ -40,9 +40,9 @@ with the experimentally-resolved and violation terms added only during
 fine-tuning.  The coefficients are the published ones, not free
 parameters.
 }
-\references{
-Jumper et al (2021) Nature 596:583-589, Suppl. equation (7)
-}
 \examples{
 Alfloss(fape = c(1, 2, 3, 4, 5, 6, 7, 8), aux = c(1, 2, 3, 4, 5, 6, 7, 8), dist = c(1, 2, 3, 4, 5, 6, 7, 8), msa = c(1, 2, 3, 4, 5, 6, 7, 8), conf = 0.5)
+}
+\references{
+Jumper et al (2021) Nature 596:583-589, Suppl. equation (7)
 }

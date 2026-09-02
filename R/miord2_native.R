@@ -64,6 +64,9 @@
 #'   Groothuis-Oudshoorn, K. (2011). JSS, 45(3).  Rubin, D. B.
 #'   (1987). Multiple Imputation for Nonresponse in Surveys. Wiley.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_miord2(V)
 morie_miord2 <- function(data, m = 5, maxit = 5, seed = 0,
                          kappa = 1e-4) {
   X <- as.matrix(data)

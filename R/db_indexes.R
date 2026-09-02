@@ -16,6 +16,9 @@
 #'   Specs whose `cols` aren't all present in the actual table are
 #'   silently skipped at create time.
 #' @keywords internal
+#' @examples
+#' set.seed(1)
+#' r <- .morie_db_index_registry(); TRUE
 .morie_db_index_registry <- function() {
   list(
     # ------ SIU (case-level director's reports, 5074 cases x 64 cols) ----

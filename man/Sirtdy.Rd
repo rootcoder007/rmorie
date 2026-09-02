@@ -43,15 +43,15 @@ by power iteration from a uniform start vector, which is deterministic and
 so identical across language arms.  With one age group this collapses to
 the scalar \code{R0 = C S0 / (gamma N)}.
 }
-\references{
-Mossong, J. et al. (2008). Social contacts and mixing
-patterns relevant to the spread of infectious diseases. PLoS Medicine
-5(3), e74. \doi{10.1371/journal.pmed.0050074}
-}
 \examples{
 S <- c(500, 500)
 I <- c(5, 5)
 R <- c(0, 0)
 contact_matrix <- matrix(c(2, 1, 1, 2), 2, 2)
 Sirtdy(S, I, R, contact_matrix, gamma = 0.1)
+}
+\references{
+Mossong, J. et al. (2008). Social contacts and mixing
+patterns relevant to the spread of infectious diseases. PLoS Medicine
+5(3), e74. \doi{10.1371/journal.pmed.0050074}
 }

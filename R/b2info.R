@@ -137,6 +137,9 @@ Difent <- function(density, x = NULL, base = 2) {
 #' @return Named list with `estimate`, `hxz`, `hyz`, `hxyz`, `hz`, `n`, `method`.
 #' @references Cover & Thomas (2006), eq. (2.60).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cndmi(V)
 Cndmi <- function(pxyz, base = 2) {
   a <- .b2as3d(pxyz)
   a <- a / sum(a)
@@ -230,6 +233,9 @@ Cndent <- function(pxy, base = 2) {
 #' @return Named list with `estimate`, `hx`, `hy`, `n`, `method`.
 #' @references Cover & Thomas (2006), eq. (2.15).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Jntent(V)
 Jntent <- function(pxy, base = 2) {
   m <- .b2as2d(pxy)
   m <- m / sum(m)
@@ -250,6 +256,9 @@ Jntent <- function(pxy, base = 2) {
 #'   `residual`, `n`, `method`.  `residual` is zero up to rounding.
 #' @references Cover & Thomas (2006), eq. (2.65), (2.67).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Klchain(V, V)
 Klchain <- function(pxy, qxy, base = 2) {
   p <- .b2as2d(pxy)
   q <- .b2as2d(qxy)
@@ -290,6 +299,10 @@ Klchain <- function(pxy, qxy, base = 2) {
 #' @return Named list with `estimate`, `entropy`, `kl`, `upper`, `n`, `method`.
 #' @references Cover & Thomas (2006), Theorem 5.4.3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Predcomp(V, M)
 Predcomp <- function(model, data, base = 2) {
   q <- .b2pnorm(model)
   k <- length(q)
@@ -321,6 +334,9 @@ Predcomp <- function(model, data, base = 2) {
 #'   `markov_gap`, `holds`, `n`, `method`.
 #' @references Cover & Thomas (2006), Theorem 2.8.1.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Dpineq(V)
 Dpineq <- function(pxyz, cdf = NULL, base = 2) {
   a <- .b2as3d(pxyz)
   a <- a / sum(a)
@@ -351,6 +367,9 @@ Dpineq <- function(pxyz, cdf = NULL, base = 2) {
 #' @return Named list with `estimate`, `closure`, `evenness`, `n`, `method`.
 #' @references Shannon (1948), Sections 6-7.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Compshan(V)
 Compshan <- function(x, base = 2) {
   v <- as.numeric(x)
   n <- length(v)
@@ -374,6 +393,9 @@ Compshan <- function(x, base = 2) {
 #' @return Named list with `estimate`, `entropy`, `kl`, `n`, `method`.
 #' @references Cover & Thomas (2006), eq. (2.26).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Crsent(V, V)
 Crsent <- function(p, q, base = 2) {
   pv <- .b2pnorm(p)
   qv <- .b2pnorm(q)
@@ -400,6 +422,9 @@ Crsent <- function(p, q, base = 2) {
 #' @return Named list with `estimate`, `hx`, `hy`, `hxy`, `n`, `method`.
 #' @references Cover & Thomas (2006), eq. (2.28).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Mutinf(V)
 Mutinf <- function(pxy, base = 2) {
   m <- .b2as2d(pxy)
   m <- m / sum(m)
@@ -474,6 +499,10 @@ Shanent <- function(y, base = 2) {
 #'   `entropy`, `n`, `method`.
 #' @references Shannon (1948), Section 6.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Surpris(V, M)
 Surpris <- function(p, x, base = 2) {
   v <- .b2pnorm(p)
   k <- length(v)

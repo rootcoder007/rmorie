@@ -13,6 +13,8 @@
 #'   available.
 #' @return The module's cheat sheet as a string, or the available module
 #'   names when \code{module} is missing.
+#' @examples
+#' cheatsheet()
 #' @export
 cheatsheet <- function(module = NULL) {
   # topenv resolves to this package namespace once installed and to the

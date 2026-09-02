@@ -17,6 +17,8 @@
 #'   Sects. 2.4-2.5 and Appendix A.  Standard published form; the book is
 #'   not in the local corpus and was not read.
 #' @export
+#' @examples
+#' Betabinom(y = 5L, n = 5L)
 Betabinom <- function(y, n, alpha = 1, beta = 1, m = NULL) {
   y <- as.integer(y); n <- as.integer(n)
   if (n < 0L || y < 0L || y > n) stop("need 0 <= y <= n")

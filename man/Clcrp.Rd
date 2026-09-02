@@ -34,10 +34,10 @@ large decay makes every link equally likely and collapses the
 partition.  Unlike the ordinary CRP the induced partition is not
 exchangeable, which is the point: distance carries information.
 }
+\examples{
+Clcrp(y = 5L, distances = 5L)
+}
 \references{
 Blei & Frazier (2011), J. Machine Learning Research
 12:2461-2488.
-}
-\examples{
-Clcrp(y = 5L, distances = 5L)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/mareg.R
 \name{Mareg}
 \alias{Mareg}
-\title{Explain between-study heterogeneity with study-level covariates}
+\title{(2002) Section 4.}
 \usage{
 Mareg(yi, vi, X)
 }
@@ -18,14 +18,12 @@ List with \code{beta}, \code{se}, \code{tau2}, \code{R2},
 \code{ll}, \code{QE}, \code{QM}, \code{n}, \code{p}.
 }
 \description{
-A random-effects pool reports heterogeneity; a meta-regression asks
-where it comes from. The residual \eqn{au^2} is the part the
 (2002) Section 4.
+}
+\examples{
+Mareg(yi = c(1, 2, 3, 4, 5, 6, 7, 8), vi = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 van Houwelingen, H. C., Arends, L. R. and Stijnen, T.
 (2002). Statistics in Medicine 21(4):589-624. \doi{10.1002/sim.1040}.
-}
-\examples{
-Mareg(yi = c(1, 2, 3, 4, 5, 6, 7, 8), vi = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -29,10 +29,10 @@ only where the confirmatory model allows them.  Factors are
 standardised and orthogonal (Phi = I), the identification the EM
 E-step assumes.
 }
+\examples{
+Cfafm2(X = c(1, 2, 3, 4, 5, 6, 7, 8), factor_pattern = 5L)
+}
 \references{
 Joreskog (1969), Psychometrika 34(2):183-202;
 Rubin & Thayer (1982), Psychometrika 47(1):69-76.
-}
-\examples{
-Cfafm2(X = c(1, 2, 3, 4, 5, 6, 7, 8), factor_pattern = 5L)
 }

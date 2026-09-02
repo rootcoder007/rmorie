@@ -21,6 +21,9 @@
 #'   Roth, J. and Sant'Anna, P. H. C. (2023). Journal of Political
 #'   Economy Microeconomics 1(4), 669-709.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
 Drsta <- function(y, D, unit, time, cohort, X = NULL) {
   yv <- .s03vec(y); n <- length(yv)
   if (n == 0L) stop("Drsta: empty input, y has no observations")

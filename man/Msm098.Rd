@@ -24,12 +24,12 @@ genetic effects without the line-by-environment interaction. With \code{L_g}
 the Cholesky factor of G, the genetic block enters as Z_L L_g, the design
 used in Table 7.6.
 }
+\examples{
+Msm098(n = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8), Z_L = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (7.5) p.220 and Table 7.6 p.233.
 DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm098(n = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8), Z_L = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -47,6 +47,9 @@
 #'   pp. 6-7. Fotheringham, Brunsdon & Charlton (2002), pp. 56-57, as cited by
 #'   the GWmodel package, which is the source consulted for the boxcar.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spgwrk(V, V)
 spgwrk <- function(distance, bandwidth, kernel_type = "gaussian",
                    adaptive = FALSE, normalized = FALSE) {
   h <- if (adaptive) {

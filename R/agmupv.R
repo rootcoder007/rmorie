@@ -13,6 +13,8 @@
 #' @references Schrittwieser et al. (2020), arXiv:1911.08265, Appendix F.
 #'   Read from the ar5iv rendering of the arXiv source.
 #' @export
+#' @examples
+#' Mzvalue(c(0, 1, 0), support = 1)
 Mzvalue <- function(logits, support = 300, epsilon = 0.001) {
   z <- .t1_vec(logits); s <- as.integer(support)
   if (length(z) != 2L * s + 1L) stop("logits must have length 2*support + 1")

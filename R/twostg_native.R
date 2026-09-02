@@ -122,6 +122,8 @@
 #' @references Cheng, S. C., Wei, L. J. and Ying, Z. (1995), Biometrika
 #'   82(4), 835-845.
 #' @export
+#' @examples
+#' Twostg(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Twostg <- function(time, event, X, Z = NULL, error = "ph",
                    max_iter = 50L, tol = 1e-10) {
   t <- as.numeric(time); d <- as.numeric(event)

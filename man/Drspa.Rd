@@ -30,13 +30,13 @@ propensity score and the outcome regression condition on how treated
 a unit's neighbourhood is.  A \code{W} with no off-diagonal mass
 makes the lag constant and the two estimates coincide.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Drspa(V, V)
+}
 \references{
 Anselin, L. (2003). Spatial externalities, spatial
 multipliers, and spatial econometrics. International Regional
 Science Review 26(2), 153-166.  Sant'Anna, P. H. C. and Zhao, J.
 (2020). Journal of Econometrics 219(1), 101-122.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Drspa(V, V)
 }

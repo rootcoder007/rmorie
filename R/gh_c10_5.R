@@ -21,6 +21,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 10.3.2.
 #' @export
+#' @examples
+#' Ghosalwnadapt()
 Ghosalwnadapt <- function(y = NULL, n = 400, pi_incl = 0.2, tau2 = 1,
                           seed = 42) {
   if (pi_incl <= 0 || pi_incl >= 1)

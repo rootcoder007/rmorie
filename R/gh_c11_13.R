@@ -21,6 +21,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 11.6.
 #' @export
+#' @examples
+#' Ghosalgpadaptthm()
 Ghosalgpadaptthm <- function(n = 60, l_true = 0.2,
                              l_grid = c(0.05, 0.2, 0.8), noise = 0.1,
                              seed = 42) {

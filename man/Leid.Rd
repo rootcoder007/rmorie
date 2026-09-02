@@ -36,15 +36,15 @@ function, so only the calling convention differs here.
 Formula: local move, refinement, then aggregation, repeated -- Traag,
 Waltman and van Eck (2019).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Leid(V, M)
+}
 \references{
 Traag, V. A., Waltman, L. and van Eck, N. J. (2019).
 Scientific Reports 9:5233. \doi{10.1038/s41598-019-41695-z}.
 }
 \seealso{
 \code{\link{Leidenclus}}
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Leid(V, M)
 }

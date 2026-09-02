@@ -23,10 +23,10 @@ intersecting and the answer is the trivial \eqn{\binom{n}{k}};
 quoting the star bound there gives an answer that is too small and
 looks reasonable. \code{ekr_regime} reports which case applies.
 }
+\examples{
+morie_erdos_ko_rado(n = 5L, k = 5L)
+}
 \references{
 Erdos P, Ko C, Rado R (1961) \emph{Quart J Math}
 12:313-320.
-}
-\examples{
-morie_erdos_ko_rado(n = 5L, k = 5L)
 }

@@ -15,6 +15,9 @@
 #'   for the weighted definition with loops. Fetched from the author's own
 #'   copy of the chapter.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Wgtlap(M)
 Wgtlap <- function(edges, n = NULL) {
   E <- as.matrix(edges)
   if (ncol(E) != 3L) stop("edges rows must be (u, v, weight)")

@@ -24,6 +24,10 @@
 #'   estimates of linear dynamic systems, AIAA Journal 3(8):1445-1450.
 #'   \doi{10.2514/3.3166}
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
+#' KalmS(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
 KalmS <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL, ridge = 1e-12) {
   Y <- .s03mat(y)
   n <- nrow(Y); m <- ncol(Y)

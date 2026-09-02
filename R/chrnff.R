@@ -10,6 +10,8 @@
 #' @return List with ``bound``, ``s``, ``log_bound``, ``at_boundary``.
 #' @references Chernoff (1952), A measure of asymptotic efficiency for tests of a hypothesis based on the sum of observations, Annals of Mathematical Statistics 23:493-507. Not held locally; the exponential Markov bound is stated in this exact form in every standard reference.
 #' @export
+#' @examples
+#' Chernbnd(mgf = function(s) exp(0.5 * s^2), a = 2)
 Chernbnd <- function(mgf, a, s_grid = NULL) {
   a <- as.numeric(a)
   grid <- if (is.null(s_grid)) 0.01 * 1.05^(0:140) else .t1_vec(s_grid)

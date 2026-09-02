@@ -19,10 +19,10 @@ Numeric vector on the scale of \code{z}.
 eq (5.60). Values outside the observed range are clamped to it, since an
 empirical CDF carries no information beyond its support.
 }
-\references{
-Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_anamorphosis(V, V)
+}
+\references{
+Schabenberger Ch 5, Sec 5.6.2, eq (5.60)
 }

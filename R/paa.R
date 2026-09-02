@@ -20,6 +20,8 @@
 #'   large time series databases. Knowledge and Information Systems,
 #'   3(3), 263-286. doi:10.1007/PL00011669
 #' @export
+#' @examples
+#' Paa(x = c(1, 2, 3, 4, 5, 6, 7, 8), N = 5L)
 Paa <- function(x, N) {
   v <- as.numeric(x)
   n <- length(v)

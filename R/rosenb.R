@@ -27,6 +27,9 @@
 #'   Springer, Section 4.3 and the Gamma-table presentation of Chapter
 #'   4. Single-Gamma engine: \code{\link{CnsRos}}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Rosenb(V)
 Rosenb <- function(matched_pairs, Gamma_grid = c(1, 1.5, 2, 3),
                    alpha = 0.05) {
   gs <- as.numeric(Gamma_grid)

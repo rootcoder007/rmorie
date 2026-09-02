@@ -14,6 +14,8 @@
 #'   PDF.  They describe the rule qualitatively; the arithmetic here is
 #'   its counter form and nothing further is claimed.
 #' @export
+#' @examples
+#' Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8), pending = c(1, 2, 3, 4, 5, 6, 7, 8))
 Virtloss <- function(W, N, pending, nvl = 1) {
   W <- .t1_vec(W); N <- .t1_vec(N); P <- .t1_vec(pending)
   k <- length(W)

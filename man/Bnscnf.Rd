@@ -22,6 +22,11 @@ parameters" name the same test inversion: the set of parameter values a
 moment-inequality test fails to reject. This name forwards to
 \code{Bndinf} rather than repeating the construction.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Bnscnf(V, D)
+}
 \references{
 Imbens, G. W. and Manski, C. F. (2004). Confidence intervals
 for partially identified parameters. Econometrica 72(6), 1845-1857 --
@@ -29,9 +34,4 @@ the stub's attribution; the set reported is the criterion level set of
 Chernozhukov, Hong and Tamer (2007) as given in equation (4.10) of
 Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751
 p. 97).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-Bnscnf(V, D)
 }

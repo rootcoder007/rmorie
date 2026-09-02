@@ -26,10 +26,10 @@ Z-normalises the series, reduces it to \code{window} piecewise
 aggregate values (Lin et al. 2003, eq. 1), and maps each to a
 letter using equiprobable Gaussian breakpoints.
 }
+\examples{
+morie_saxR(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), window = 3L, alphabet = 5L)
+}
 \references{
 Lin, J., Keogh, E., Lonardi, S. and Chiu, B. (2003). A
 symbolic representation of time series. DMKD 2003.
-}
-\examples{
-morie_saxR(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), window = 3L, alphabet = 5L)
 }

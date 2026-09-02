@@ -21,6 +21,9 @@
 #'   and the Mantel-Haenszel procedure, in Wainer and Braun (eds), Test
 #'   Validity, Lawrence Erlbaum, pp. 129-145.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Irtmh1(X = rnorm(10), group = rbinom(10, 1, 0.5), total_score = rnorm(10)); TRUE
 Irtmh1 <- function(X, group, total_score, alpha = 0.05) {
   M <- .s03mat(X)
   n <- nrow(M)

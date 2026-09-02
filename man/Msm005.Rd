@@ -16,12 +16,12 @@ List with estimate, beta_bar, deviations, deviations_sum, method.
 Formula: GY_ij = beta-bar + (beta_i - beta-bar) + e_ij (eq. 1.4), the
 fixed-effects fit rewritten around the average level.
 }
+\examples{
+D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+Msm005(D)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (1.4) p.17. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-Msm005(D)
 }

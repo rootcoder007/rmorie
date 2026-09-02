@@ -20,7 +20,7 @@ tau, n, method.
 }
 \description{
 Horowitz, J. L. (2009), Semiparametric and Nonparametric Methods in
-Econometrics, Springer, Section 5.1, page 137 (volume [Pages 135-188], read
+Econometrics, Springer, Section 5.1, page 137 (volume \link{Pages 135-188}, read
 as a rendered page image).  In the measurement-error model W = U + epsilon
 of equation (5.6), the inversion formula (5.7) is
 f_U(u) = (1 / 2 pi) integral exp(-i tau u) psi_W(tau) / psi_eps(tau) d tau,

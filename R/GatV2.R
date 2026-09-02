@@ -19,6 +19,10 @@
 #' @references Brody, Alon and Yahav (2022), How attentive are graph
 #'   attention networks?, ICLR 2022, eq. (7). arXiv:2105.14491
 #' @export
+#' @examples
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' GatV2(A, X)
 GatV2 <- function(A, X) {
   M <- .s03mat(A)
   n <- nrow(M)

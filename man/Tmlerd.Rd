@@ -7,7 +7,7 @@
 Tmlerd(Y, A, QAW, Q1W, Q0W, g1W, gbound = 0.025, level = 0.95)
 }
 \arguments{
-\item{Y}{Outcome in [0, 1].}
+\item{Y}{Outcome in \link{0, 1}.}
 
 \item{A}{Binary treatment.}
 

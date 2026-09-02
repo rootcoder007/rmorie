@@ -27,10 +27,10 @@ committing to a strength.  The simulated means recover h_k.
 \details{
 Formula: E Be(c h, c(1 - h)) = h.
 }
+\examples{
+Ghosalbpdiscrete()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.1.
-}
-\examples{
-Ghosalbpdiscrete()
 }

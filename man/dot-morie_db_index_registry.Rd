@@ -15,8 +15,8 @@ silently skipped at create time.
 \description{
 Recommended indexes per known morie cache table
 }
-\keyword{internal}
 \examples{
 set.seed(1)
 r <- .morie_db_index_registry(); TRUE
 }
+\keyword{internal}

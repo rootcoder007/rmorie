@@ -50,11 +50,11 @@ an atom together with its neighbours' identifiers, entered as
 independent of atom numbering; features whose bond sets coincide
 are removed, keeping the first in canonical order.
 }
+\examples{
+morie_ecfp4(adjacency = 5L, atomnum = 5L)
+}
 \references{
 Rogers, D. and Hahn, M. (2010). Extended-connectivity
 fingerprints. Journal of Chemical Information and Modeling,
 50(5), 742-754.
-}
-\examples{
-morie_ecfp4(adjacency = 5L, atomnum = 5L)
 }

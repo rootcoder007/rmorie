@@ -29,11 +29,11 @@ rule is a plain normalisation, computed in logs.
 \details{
 Formula: pi_i proportional to exp(log p(X | theta_i) + log pi(theta_i)).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 1.3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalbayesruleinfinite(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 1.3.
 }

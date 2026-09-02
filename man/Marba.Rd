@@ -11,7 +11,7 @@ Marba(g, n, rho)
 
 \item{n}{Number of subjects; \code{n >= 2}.}
 
-\item{rho}{Correlation between the paired measurements, in [-1, 1].}
+\item{rho}{Correlation between the paired measurements, in \link{-1, 1}.}
 }
 \value{
 List with \code{var_g}, \code{se}, \code{J}, \code{n},
@@ -30,10 +30,10 @@ Formula: \code{V_g = J^2 (2(1 - rho)/n + g^2/(2(n-1)))} with the
 small-sample correction \code{J = 1 - 3/(4(n-1) - 1)} -- Morris (2008)
 eq. (7)-(8); Morris and DeShon (2002).
 }
+\examples{
+Marba(g = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, rho = 0.5)
+}
 \references{
 Morris, S. B. (2008). Organizational Research Methods
 11(2):364-386. \doi{10.1177/1094428106291059}.
-}
-\examples{
-Marba(g = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, rho = 0.5)
 }

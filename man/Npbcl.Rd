@@ -41,12 +41,12 @@ Determinism: no sampling. The allocation depends on the order of
 \code{y}, which is a property of the greedy rule; \code{log_score}
 lets a caller compare orderings.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Npbcl(V)
+}
 \references{
 Quintana, F. A. (2006). A predictive view of Bayesian
 clustering. Journal of Statistical Planning and Inference, 136(8),
 2407-2429. doi:10.1016/j.jspi.2004.09.015
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Npbcl(V)
 }

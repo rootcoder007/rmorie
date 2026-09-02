@@ -24,7 +24,7 @@ Supported formats: \code{.json} (via \code{jsonlite}), \code{.csv} (via base
 \examples{
 tmp <- tempfile(fileext = ".json")
 if (requireNamespace("jsonlite", quietly = TRUE)) {
-  jsonlite::write_json(list(estimate = 0.123, se = 0.045), tmp)
+  .s03json_write(list(estimate = 0.123, se = 0.045), tmp)
   morie_inspect_output(tmp)
   unlink(tmp)
 }

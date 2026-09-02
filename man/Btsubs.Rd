@@ -35,7 +35,7 @@ bootstrap and the m-out-of-n bootstrap fail.  Draw subsets of size m
 without replacement, form the roots tau_m (theta_hat_m,b - theta_hat) with
 tau_m = sqrt(m), and read the interval off their quantiles rescaled by
 tau_n = sqrt(n):
-[ theta_hat - q_(1-alpha/2)/tau_n , theta_hat - q_(alpha/2)/tau_n ].
+\link{ theta_hat - q_(1-alpha/2)/tau_n , theta_hat - q_(alpha/2)/tau_n }.
 Note the inversion: the UPPER quantile of the root sets the LOWER endpoint.
 Getting this backwards is the classical sign error here and it is invisible
 on a symmetric fixture, so the module is anchored on an asymmetric one.

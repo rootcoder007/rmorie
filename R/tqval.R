@@ -16,6 +16,9 @@
 #' @references Zandieh et al., arXiv:2504.19874, Algorithm 2 lines 2-12.
 #'   Fetched from arXiv.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Vcquant(V)
 Vcquant <- function(V, b = 3, seed = 1) {
   V <- as.matrix(V); n <- nrow(V); d <- ncol(V); b <- as.integer(b)
   if (n < 1L) stop("the cache must hold at least one value vector")

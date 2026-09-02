@@ -7,7 +7,7 @@
 Adcore(u)
 }
 \arguments{
-\item{u}{Numeric vector of probability-integral transforms in [0, 1].}
+\item{u}{Numeric vector of probability-integral transforms in \link{0, 1}.}
 }
 \value{
 Numeric A^2; \code{Inf} if any value is 0 or 1.

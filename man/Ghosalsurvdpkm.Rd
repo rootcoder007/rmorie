@@ -34,12 +34,12 @@ computed rather than asserted, so shrinking alpha must shrink it.
 Formula: S_KM(t) = prod_{t_j <= t} (1 - d_j / R_j);
 S_DP = w S_KM + (1 - w) exp(-rate t), w = n / (alpha + n).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ghosalsurvdpkm(V)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.2; Susarla &
 Van Ryzin (1976); Kaplan & Meier (1958).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ghosalsurvdpkm(V)
 }

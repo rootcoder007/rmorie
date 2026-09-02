@@ -68,6 +68,8 @@
 #' @references Yang Z, Dai Z, Yang Y, Carbonell J, Salakhutdinov R,
 #'   Le QV (2019) XLNet. arXiv:1906.08237, eq (3).
 #' @export
+#' @examples
+#' morie_permutation_attention_masks(c(2L, 0L, 3L, 1L))
 morie_permutation_attention_masks <- function(permutation) {
   z <- as.integer(permutation)
   T_ <- length(z)
@@ -205,6 +207,9 @@ morie_permutation_lm_loss <- function(logits, targets, permutation,
 #'   Sci} 9(3-4):211-487, Sec 3.3 and Thm A.1. Karwa V, Vadhan S (2017)
 #'   arXiv:1711.03908.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dp_mean(V)
 morie_dp_mean <- function(y, C = NULL, epsilon = 1, n = NULL,
                           mechanism = c("laplace", "gaussian"),
                           delta = 1e-6, alpha = 0.05, lower = NULL,
@@ -336,6 +341,8 @@ morie_dp_mean <- function(y, C = NULL, epsilon = 1, n = NULL,
 #' @references Hirano K, Porter JR (2009) \emph{Econometrica}
 #'   77(5):1683-1701, doi:10.3982/ECTA6630.
 #' @export
+#' @examples
+#' morie_minimax_regret_constant()
 morie_minimax_regret_constant <- function(tol = 1e-14) {
   lo <- 0
   hi <- 5
@@ -395,6 +402,9 @@ morie_minimax_regret_constant <- function(tol = 1e-14) {
 #'   doi:10.2307/2998560. Hirano K, Porter JR (2009)
 #'   \emph{Econometrica} 77(5):1683-1701, doi:10.3982/ECTA6630.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- morie_efficiency_bound_ate(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
 morie_efficiency_bound_ate <- function(y, D, X, family = c(
                                          "gaussian",
                                          "binomial"

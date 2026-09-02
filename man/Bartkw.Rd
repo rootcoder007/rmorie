@@ -23,11 +23,11 @@ kernel, so the estimator is positive semi-definite by construction.
 \details{
 Formula: \code{w_k = 1 - k/(M + 1)} for \code{k <= M}, else 0.
 }
-\references{
-Newey, W. K. & West, K. D. (1987). Econometrica
-55:703-708; Bartlett, M. S. (1950) Biometrika 37:1-16.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Bartkw(V)
+}
+\references{
+Newey, W. K. & West, K. D. (1987). Econometrica
+55:703-708; Bartlett, M. S. (1950) Biometrika 37:1-16.
 }

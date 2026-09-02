@@ -21,11 +21,11 @@ Formula: Lcal = T^-1/2 L T^-1/2, i.e.
 Lcal(u, v) = 1 - w(v, v)/d_v if u = v and d_v != 0,
 = -w(u, v)/sqrt(d_u d_v) if u ~ v, else 0
 }
+\examples{
+Normlap(W = 5L)
+}
 \references{
 Chung (1997), Spectral Graph Theory, CBMS 92, Sections 1.2
 and 1.4: "L = T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for
 d_v = 0". Fetched from the author's own copy of the chapter.
-}
-\examples{
-Normlap(W = 5L)
 }

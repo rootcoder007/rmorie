@@ -18,10 +18,10 @@ Named list with \code{estimate}, \code{hx}, \code{hy}, \code{n}, \code{method}.
 \deqn{H(X,Y) = -\sum p(x,y)\log p(x,y)}{H(X,Y) = -sum p log p}
 Cover & Thomas (2006), eq. (2.15), p. 17.
 }
-\references{
-Cover & Thomas (2006), eq. (2.15).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Jntent(V)
+}
+\references{
+Cover & Thomas (2006), eq. (2.15).
 }

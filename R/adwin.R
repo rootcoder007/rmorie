@@ -15,6 +15,9 @@
 #'   Section 3 and Figure 1.  Read from the authors' own PDF at
 #'   www.cs.upc.edu/~gavalda.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Adwin(V)
 Adwin <- function(x, delta = 0.05) {
   x <- .t1_vec(x); delta <- as.numeric(delta)
   if (!(delta > 0 && delta < 1)) stop("delta must lie in (0, 1)")

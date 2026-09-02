@@ -25,11 +25,11 @@ because the hinges are what Tukey defined and what a boxplot draws.
 Formula: flag \code{x < H_L - k (H_U - H_L)} or
 \code{x > H_U + k (H_U - H_L)}.
 }
-\references{
-Tukey, J. W. (1977). Exploratory Data Analysis.
-Addison-Wesley, chapters 2 and 3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 IqrA(V)
+}
+\references{
+Tukey, J. W. (1977). Exploratory Data Analysis.
+Addison-Wesley, chapters 2 and 3.
 }

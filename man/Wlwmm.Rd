@@ -27,10 +27,6 @@ Per-occurrence marginal Cox models on the total-time scale plus the
 common-effect summary: the stratified fit with a single beta across
 occurrence strata (WLW Section 3).
 }
-\references{
-Wei, L. J., Lin, D. Y. and Weissfeld, L. (1989), JASA
-84(408), 1065-1073.
-}
 \examples{
 set.seed(1)
 occ <- rep(1:3, times = 20)
@@ -39,4 +35,8 @@ event <- rbinom(60, 1, 0.6)
 X <- matrix(rnorm(60 * 2), 60, 2)
 fit <- Wlwmm(time = stop, event, X, occurrence = occ)
 is.list(fit)
+}
+\references{
+Wei, L. J., Lin, D. Y. and Weissfeld, L. (1989), JASA
+84(408), 1065-1073.
 }

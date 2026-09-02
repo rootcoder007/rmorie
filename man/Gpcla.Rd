@@ -43,15 +43,15 @@ differentiating Psi numerically rather than trusting the iteration.
 Formula: f <- (I + K W)^{-1} K (W f + grad log p(y|f));
 p* = Phi(mu* / sqrt(1 + var*)).
 }
-\references{
-Williams and Barber (1998), Bayesian classification with
-Gaussian processes, IEEE TPAMI 20(12):1342-1351,
-\doi{10.1109/34.735807}; Rasmussen and Williams (2006), ch. 3,
-Algorithm 3.1 and eq. (3.82).
-}
 \examples{
 set.seed(1)
 X <- matrix(rnorm(20), 10, 2)
 y <- rbinom(10, 1, 0.5)
 Gpcla(X, y)
+}
+\references{
+Williams and Barber (1998), Bayesian classification with
+Gaussian processes, IEEE TPAMI 20(12):1342-1351,
+\doi{10.1109/34.735807}; Rasmussen and Williams (2006), ch. 3,
+Algorithm 3.1 and eq. (3.82).
 }

@@ -32,10 +32,10 @@ exact and are what the tests check.
 Formula: G_mu(alpha) = Phi(Phi^{-1}(1 - alpha) - mu);
 delta(eps) = Phi(-eps/mu + mu/2) - exp(eps) Phi(-eps/mu - mu/2).
 }
+\examples{
+Gdpf(mech = c(1, 2, 3, 4, 5, 6, 7, 8), mu = 5L)
+}
 \references{
 Dong, Roth and Su (2022), Gaussian differential privacy,
 JRSS B 84(1):3-37, Corollary 2.13. \doi{10.1111/rssb.12454}
-}
-\examples{
-Gdpf(mech = c(1, 2, 3, 4, 5, 6, 7, 8), mu = 5L)
 }

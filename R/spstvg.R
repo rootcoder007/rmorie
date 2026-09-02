@@ -40,6 +40,8 @@
 #'   `wls_objective` and `fitted`.
 #' @references Schabenberger Ch 9, Sec 9.4, eqs (9.18)-(9.19)
 #' @export
+#' @examples
+#' spstvg(coords = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
 spstvg <- function(coords, times, z, n_space_bins = 10L, n_time_bins = 5L,
                    max_dist = NULL, max_time = NULL, at_time = NULL,
                    model_fn = NULL) {

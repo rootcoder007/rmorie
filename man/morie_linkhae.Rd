@@ -13,7 +13,7 @@ parameters (a, b, c) on each scale; use c = 0 for 2PL.}
 \item{symmetric}{Minimize Q1 + Q2 instead of Q1 only.}
 
 \item{theta_points}{Optional evaluation grid (default 41 points on
-[-4, 4]).}
+\link{-4, 4}).}
 }
 \value{
 A list with elements \code{A}, \code{B}, \code{criterion},
@@ -27,12 +27,12 @@ parameters a* = a_F/A, b* = A b_F + B, c* = c_F.  The symmetric
 variant adds the reverse-direction term (a# = A a_T,
 b# = (b_T - B)/A).
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+morie_linkhae(M, M)
+}
 \references{
 Haebara, T. (1980). Equating logistic ability scales
 by a weighted least squares method. Japanese Psychological
 Research, 22, 144-149.  Weeks, J. P. (2010). JSS, 35(12).
-}
-\examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-morie_linkhae(M, M)
 }

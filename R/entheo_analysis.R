@@ -63,6 +63,9 @@ beautiful_loop_metric <- function(eeg, fmri = NULL) {
 #' @return Named list with \code{score_dmt}, \code{score_pcb},
 #'   \code{contrast}, per-frame vectors.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' san_score(V)
 san_score <- function(eeg, fmri = NULL) {
   pair <- .entheo_extract_pair(eeg, fmri)
   if (is.null(pair$e_dmt) || is.null(pair$f_dmt)) {

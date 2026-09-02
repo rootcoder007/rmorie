@@ -110,6 +110,7 @@
 #' @param max_iter Iteration cap.
 #' @return The coefficient vector.
 #' @keywords internal
+#' @noRd
 .tmldyn_logit_irls <- function(X, y, penalty = 0, max_iter = 60L) {
   X <- as.matrix(X); y <- as.numeric(y)
   b <- rep(0, ncol(X))

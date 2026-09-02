@@ -30,6 +30,9 @@
 #'   clustering. Journal of Statistical Planning and Inference, 136(8),
 #'   2407-2429. doi:10.1016/j.jspi.2004.09.015
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Npbcl(V)
 Npbcl <- function(y, alpha = 1, sigma = 1, m0 = NULL, tau0 = 10) {
   v <- as.numeric(y)
   n <- length(v)

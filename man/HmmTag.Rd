@@ -33,11 +33,6 @@ are right.
 \details{
 Formula: argmax_y prod_t P(y_t | y_{t-1}) P(x_t | y_t).
 }
-\references{
-Charniak (1993), Statistical Language Learning, MIT
-Press, ch. 3; Viterbi (1967), IEEE Transactions on Information
-Theory 13(2):260-269. \doi{10.1109/TIT.1967.1054010}
-}
 \examples{
 X <- c(0, 1, 2, 1, 0)
 tagset <- c("N", "V")
@@ -45,4 +40,9 @@ start <- c(0.5, 0.5)
 trans <- matrix(c(0.7, 0.3, 0.4, 0.6), 2, 2, byrow = TRUE)
 emit <- matrix(c(0.3, 0.4, 0.3, 0.2, 0.3, 0.5), 2, 3, byrow = TRUE)
 HmmTag(X, tagset, start, trans, emit)
+}
+\references{
+Charniak (1993), Statistical Language Learning, MIT
+Press, ch. 3; Viterbi (1967), IEEE Transactions on Information
+Theory 13(2):260-269. \doi{10.1109/TIT.1967.1054010}
 }

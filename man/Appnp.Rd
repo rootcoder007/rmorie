@@ -28,12 +28,12 @@ Z = alpha (I - (1-alpha) Ahat)^{-1} H (PPNP), or K steps of
 Z <- (1-alpha) Ahat Z + alpha H from Z = H (APPNP), with a row-wise
 softmax on the last step.
 }
-\references{
-Klicpera, Bojchevski and Guennemann (2019), ICLR;
-arXiv:1810.05997, Sect. 3.  Read from the ar5iv rendering.
-}
 \examples{
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 H <- matrix(rnorm(6), 3, 2)
 Appnp(A, H)
+}
+\references{
+Klicpera, Bojchevski and Guennemann (2019), ICLR;
+arXiv:1810.05997, Sect. 3.  Read from the ar5iv rendering.
 }

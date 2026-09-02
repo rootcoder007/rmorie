@@ -7,7 +7,7 @@
 StripMean(r, sigma_x, sigma_y, y0)
 }
 \arguments{
-\item{r}{correlation, in [-1, 1].}
+\item{r}{correlation, in \link{-1, 1}.}
 
 \item{sigma_x}{spread of X, >= 0.}
 

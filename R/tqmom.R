@@ -14,6 +14,9 @@
 #' @references Zandieh, A., Daliri, M. & Han, I. (2024). arXiv:2406.03482,
 #'   fact 3.4.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Tqmom(V, V)
 Tqmom <- function(sigma, l) {
   sigma <- as.numeric(sigma); l <- as.numeric(l)
   val <- sigma^l * 2^(l / 2) * gamma((l + 1) / 2) / sqrt(pi)

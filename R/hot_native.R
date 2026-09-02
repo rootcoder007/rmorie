@@ -49,6 +49,8 @@
 #'   efficiently finding the most unusual time series subsequence.
 #'   ICDM 2005, 226-233.
 #' @export
+#' @examples
+#' morie_hot(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 3L)
 morie_hot <- function(x, window, alphabet = 3L, word_length = NULL) {
   xs <- as.numeric(x)
   m <- length(xs)

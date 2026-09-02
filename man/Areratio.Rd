@@ -19,11 +19,11 @@ ARE(T2, T1) = (var1/n1) / (var2/n2); the normal benchmarks 2/pi
 (median vs mean) and 3/pi (Hodges-Lehmann vs mean) are returned as
 closed forms.
 }
+\examples{
+Areratio(var1 = 5L, var2 = 5L)
+}
 \references{
 Hodges and Lehmann (1956), Annals of Mathematical
 Statistics 27(2), 324-335.  Standard published form; the article is
 not in the local corpus and was not read.
-}
-\examples{
-Areratio(var1 = 5L, var2 = 5L)
 }

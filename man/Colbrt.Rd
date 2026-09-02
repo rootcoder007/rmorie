@@ -27,10 +27,10 @@ document vectors can be indexed offline -- that is the "late" in late
 interaction.  With unit-normalised vectors a document containing the
 query exactly scores n_q, the largest value possible.
 }
-\references{
-Khattab & Zaharia (2020), ColBERT, SIGIR 2020:39-48.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Colbrt(V, V)
+}
+\references{
+Khattab & Zaharia (2020), ColBERT, SIGIR 2020:39-48.
 }

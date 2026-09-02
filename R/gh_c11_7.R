@@ -21,6 +21,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, Example 11.6, eq. (11.2).
 #' @export
+#' @examples
+#' Ghosalrlprocess()
 Ghosalrlprocess <- function(alpha = 0.75, n_grid = 200, n_sim = 300,
                             seed = 42) {
   alpha <- as.numeric(alpha)

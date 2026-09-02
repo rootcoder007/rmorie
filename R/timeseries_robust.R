@@ -17,6 +17,8 @@
 #' @param kind "none", "drift" or "trend"
 #' @return list with `statistic`, `critical_values` and `reject_5pct`
 #' @export
+#' @examples
+#' morie_adf_test(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 morie_adf_test <- function(y, lags = 1, kind = "drift") {
   if (!kind %in% c("none", "drift", "trend"))
     stop('kind must be "none", "drift" or "trend"')

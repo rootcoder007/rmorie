@@ -29,6 +29,58 @@
 # The function is fully deterministic: it draws no random numbers,
 # so the shared RNG helpers are not consumed.
 
+# Inverse-variance weighted Mendelian randomization
+#
+# Combines per-variant ratio estimates of a causal effect into a
+# single inverse-variance weighted estimate under one of three
+# meta-analysis models, using either first- or second-order
+# delta-method weights on the ratio variance (Burgess & Bowden
+# 2015).
+#
+# @param beta_x Numeric vector of variant--exposure associations.
+# @param se_x Numeric vector of standard errors of \code{beta_x}.
+# @param beta_y Numeric vector of variant--outcome associations.
+# @param se_y Numeric vector of standard errors of \code{beta_y}.
+# @param model One of \code{"multiplicative"} (default),
+#   \code{"fixed"} or \code{"additive"}.
+# @param weights One of \code{"first_order"} (default) or
+#   \code{"second_order"}.
+# @param theta Correlation between the two association estimates,
+#   used only when \code{weights = "second_order"}; zero in a
+#   genuine two-sample design.
+# @return A named list with elements \code{estimate}, \code{se},
+#   \code{z}, \code{p_value}, \code{ci} (length-2 numeric),
+#   \code{ratio_estimates}, \code{variances}, \code{weights_used},
+#   \code{model}, \code{phi_multiplicative}, \code{tau2},
+#   \code{Q}, \code{df}, \code{I2}, \code{se_fixed},
+#   \code{regression_estimate}, \code{regression_se_fixed},
+#   \code{n_variants} and \code{method}.
+# @references Burgess, S. & Bowden, J. (2015). Integrating
+#   summarized data from multiple genetic variants in Mendelian
+#   randomization. arXiv:1512.04486 [stat.AP].
+# @export
+
+# Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+# the arm stays base-R only, as the package requires.
+#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
+#'
+#' the arm stays base-R only, as the package requires.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+.mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
+#' .mtr2sx_erfc
+#'
+#' A step of the mtr2sx_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+.mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
+
 #' Inverse-variance weighted Mendelian randomization
 #'
 #' Combines per-variant ratio estimates of a causal effect into a
@@ -58,43 +110,6 @@
 #' @references Burgess, S. & Bowden, J. (2015). Integrating
 #'   summarized data from multiple genetic variants in Mendelian
 #'   randomization. arXiv:1512.04486 [stat.AP].
-#' @export
-
-# Base R has no erf/erfc; both are pnorm in disguise. Defined here so
-# the arm stays base-R only, as the package requires.
-#' Base R has no erf/erfc; both are pnorm in disguise. Defined here so
-#'
-#' the arm stays base-R only, as the package requires.
-#'
-#' @param x Numeric; combined arithmetically in the body.
-#' @return A numeric value.
-#' @export
-.mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
-#' .mtr2sx_erfc
-#'
-#' A step of the mtr2sx_native implementation. No other function in the package calls it.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param x Numeric; combined arithmetically in the body.
-#' @return A numeric value.
-#' @export
-.mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
-
-#' morie_mtr2sx
-#'
-#' A step of the mtr2sx_native implementation. No other function in the package calls it.
-#' See the file header for the source the module follows.
-#' source it follows.
-#'
-#' @param beta_x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param se_x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param beta_y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param se_y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param model One of \code{"fixed"}, \code{"multiplicative"}. Defaults to \code{"multiplicative"}.
-#' @param weights Compared against \code{"second_order"}. Defaults to \code{"first_order"}.
-#' @param theta Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{ci}, \code{ratio_estimates}, \code{variances}, \code{weights_used}, \code{model}, \code{phi_multiplicative}, \code{tau2}, \code{Q}, \code{df}, \code{I2}, \code{se_fixed}, \code{regression_estimate}, \code{regression_se_fixed}, \code{n_variants}, \code{method}.
 #' @export
 morie_mtr2sx <- function(beta_x, se_x, beta_y, se_y,
                         model = "multiplicative",

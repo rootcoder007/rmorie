@@ -33,6 +33,10 @@ a tolerance, so the two language arms land on bit-identical iterates.
 Formula: Psi_n(theta) = n^-1 sum_i psi(x_i - theta) = 0, with
 psi(u) = u (mean), sign(u) (median), max(-k, min(k, u)) (Huber)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Zestim(V)
+}
 \references{
 Kosorok (2008), Introduction to Empirical Processes and
 Semiparametric Inference, Section 2.2.5 and Theorem 10.16. Fetched as
@@ -40,7 +44,3 @@ the full text of the book. The Huber psi is Huber (1964), Annals of
 Mathematical Statistics 35(1), 73-101.
 }
 \keyword{internal}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Zestim(V)
-}

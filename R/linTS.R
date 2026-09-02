@@ -14,6 +14,8 @@
 #' @return List with ``arm``, ``scores``, ``mu_hat``, ``mu_tilde``, ``v``, ``d``.
 #' @references Agrawal and Goyal (2013), Thompson Sampling for Contextual Bandits with Linear Payoffs, ICML/arXiv:1209.3352. Algorithm 1 and the definition v = R sqrt(9 d ln(T/delta)). Verified against the paper.
 #' @export
+#' @examples
+#' Lints(contexts = c(1, 2, 3, 4, 5, 6, 7, 8), played = c(1, 2, 3, 4, 5, 6, 7, 8), rewards = c(1, 2, 3, 4, 5, 6, 7, 8))
 Lints <- function(contexts, played, rewards, R = 0.5, delta = 0.1, horizon = NULL, z = NULL) {
   X <- as.matrix(contexts); P <- as.matrix(played); r <- .t1_vec(rewards)
   d <- ncol(X)

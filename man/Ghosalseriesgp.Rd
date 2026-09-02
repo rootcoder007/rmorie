@@ -29,10 +29,10 @@ lambda_k = k^(-2) here; the partial sums converge.
 Formula: K(x, y) = sum_k k^(-2) phi_k(x) phi_k(y),
 phi_k(t) = sqrt(2) cos(k pi t).
 }
+\examples{
+Ghosalseriesgp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Examples 11.4 and 11.16.
-}
-\examples{
-Ghosalseriesgp()
 }

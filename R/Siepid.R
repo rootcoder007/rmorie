@@ -28,6 +28,9 @@
 #'   and endemic states in complex networks. Physical Review E 63, 066117,
 #'   eqs. (7)-(10). \doi{10.1103/PhysRevE.63.066117}
 #' @export
+#' @examples
+#' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' Siepid(G, beta = 0.3, initial = c(1, 0, 0))
 Siepid <- function(G, beta, initial, t_max = 20, dt = 0.01) {
   A <- .s03mat(G)
   n <- nrow(A)

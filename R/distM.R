@@ -18,6 +18,9 @@
 #'   \code{symmetric_gap}, \code{m}, \code{dim}.
 #' @references Yang, Yih, He, Gao & Deng (2015). ICLR 2015, equation (3).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DistM(V, V)
 DistM <- function(triples, dim, E = NULL, R = NULL, seed = 1) {
   T_ <- matrix(as.integer(as.matrix(triples)), ncol = 3)
   d <- as.integer(dim)

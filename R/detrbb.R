@@ -71,6 +71,9 @@
 #' @references Carion et al. (2020), End-to-End Object Detection with
 #'   Transformers, ECCV 2020:213-229.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Detrbb(D, D)
 Detrbb <- function(image, queries, n_objects = NULL, targets = NULL) {
   P <- .s03mat(image); TT <- .s03mat(queries)
   Q <- nrow(P); G <- nrow(TT)

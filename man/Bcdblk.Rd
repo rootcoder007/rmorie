@@ -34,10 +34,10 @@ the quadratic case is what is provided.
 Formula: minimise \code{f(x) = 0.5 x'Qx - b'x}; exact block minimiser
 \code{x_B = Q_BB^{-1} (b_B - Q_{B,Bc} x_{Bc})}.
 }
+\examples{
+Bcdblk(Q = 0.5, b = 5L, blocks = c("a", "b", "c"))
+}
 \references{
 Tseng, P. (2001). Convergence of a block coordinate
 descent method for nondifferentiable minimization. JOTA 109:475-494.
-}
-\examples{
-Bcdblk(Q = 0.5, b = 5L, blocks = c("a", "b", "c"))
 }

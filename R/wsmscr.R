@@ -18,6 +18,8 @@
 #'   score test, so it is not cited for this formula; the full text of
 #'   the book was fetched and searched to establish that.
 #' @export
+#' @examples
+#' Scoretest(successes = 5L, n = 5L)
 Scoretest <- function(successes, n, p0 = 0.5) {
   n <- as.integer(n); S <- as.numeric(successes); p0 <- as.numeric(p0)
   if (n < 1L) stop("n must be at least 1")

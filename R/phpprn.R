@@ -14,6 +14,9 @@
 #' @return As \code{Pptest}.
 #' @references Phillips and Perron (1988), Biometrika 75:335-346; coded form from tseries::pp.test.  See Pptest for the full note.
 #' @export
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Pptrend(D)
 Pptrend <- function(y, trend = TRUE, lags = NULL, kind = "Z(t_alpha)") {
   if (!isTRUE(trend))
     stop("the tabulated critical values carried here are for the trend-included regression; trend = FALSE is not available")

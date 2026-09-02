@@ -23,11 +23,11 @@ semidefinite; per-group multivariate reliability
 Lambda_j = T (T + V_j)^{-1} and empirical Bayes composites
 beta*_j = Lambda_j beta_hat_j + (I - Lambda_j) gamma_hat.
 }
-\references{
-Raudenbush, S. W. and Bryk, A. S. (2002).
-Hierarchical Linear Models, 2nd ed. Sage, Ch. 3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 morie_hlmgr(V)
+}
+\references{
+Raudenbush, S. W. and Bryk, A. S. (2002).
+Hierarchical Linear Models, 2nd ed. Sage, Ch. 3.
 }

@@ -18,6 +18,9 @@
 #' @references Trouillon, T. et al. (2016). Complex embeddings for
 #'   simple link prediction. ICML 33, 2071-2080, equation (11).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Comple(V, V)
 Comple <- function(triples, dim, re_e = NULL, im_e = NULL, re_r = NULL, im_r = NULL, seed = 1) {
   T_ <- matrix(as.integer(as.matrix(triples)), ncol = 3)
   d <- as.integer(dim)

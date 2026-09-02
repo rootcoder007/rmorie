@@ -23,6 +23,9 @@
 #'   equation (2.11) of Molinari, F. (2021), Handbook of Econometrics 7A
 #'   (arXiv:2004.11751 p. 17), applied at each \code{x}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Bndnpr(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), bw = 0.5); TRUE
 Bndnpr <- function(y, D, X, bw) {
   z <- .bnd_yd(y, D, "Bndnpr")
   xv <- as.numeric(unlist(X))

@@ -22,7 +22,7 @@ List with \code{estimate} (S at the last time), \code{time},
 \description{
 Greenwood's variance of the product-limit estimator, with n_j at risk
 and d_j events at t_j.  The plain (linear) pointwise interval is
-S(t) +/- z sqrt(Var), truncated to [0, 1] because the linear scale can
+S(t) +/- z sqrt(Var), truncated to \link{0, 1} because the linear scale can
 leave the unit interval near the tails.  The curve is rebuilt from the
 risk table so the same fit object can be reused by the simultaneous
 band.

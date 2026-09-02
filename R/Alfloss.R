@@ -19,6 +19,8 @@
 #'   \code{estimate}, the \code{unscaled} total, \code{phase}, \code{scale}
 #'   and \code{method}.
 #' @references Jumper et al (2021) Nature 596:583-589, Suppl. equation (7)
+#' @examples
+#' Alfloss(fape = c(1, 2, 3, 4, 5, 6, 7, 8), aux = c(1, 2, 3, 4, 5, 6, 7, 8), dist = c(1, 2, 3, 4, 5, 6, 7, 8), msa = c(1, 2, 3, 4, 5, 6, 7, 8), conf = 0.5)
 Alfloss <- function(fape, aux, dist, msa, conf, expres = 0, viol = 0,
                     phase = "training", ncrop = NULL) {
   if (!phase %in% c("training", "finetuning"))

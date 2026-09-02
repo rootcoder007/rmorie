@@ -18,6 +18,8 @@
 #'   \code{p}, \code{method}.
 #' @references McNeil & Frey (2000), J. Empirical Finance 7(3-4):271-300.
 #' @export
+#' @examples
+#' Evvarpot(u = 1, sigma = 0.5, xi = 0.1, zeta_u = 0.1, p = 0.99)
 Evvarpot <- function(u, sigma, xi, zeta_u, p) {
   u <- as.numeric(u); sigma <- as.numeric(sigma); xi <- as.numeric(xi)
   zeta_u <- as.numeric(zeta_u); p <- as.numeric(p)

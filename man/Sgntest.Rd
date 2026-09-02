@@ -24,13 +24,13 @@ Formula: S = #\{x_i > md\}, m = #\{x_i != md\};
 S ~ Binomial(m, 1/2) under H0;
 two-sided p = 2 P(Bin(m, 1/2) >= max(S, m - S)), capped at 1
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Sgntest(V)
+}
 \references{
 Dixon & Mood (1946), Journal of the American Statistical
 Association 41(236), 557-566 -- the primary source. Wasserman (2004),
 All of Statistics, does NOT contain the sign test; the full text of
 the book was fetched and searched to establish that.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Sgntest(V)
 }

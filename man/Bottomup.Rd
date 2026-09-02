@@ -18,11 +18,11 @@ Named list with \code{estimate}, \code{total}, \code{bottom}, \code{n}, \code{me
 \deqn{\tilde{y} = S\hat{y}_{\mathrm{bottom}}}
 Hyndman & Athanasopoulos, FPP 3rd ed., Sec. 11.3.
 }
-\references{
-Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 S <- c("a", "b", "c")
 Bottomup(S, M)
+}
+\references{
+Hyndman & Athanasopoulos, FPP3, Sec. 11.3.
 }

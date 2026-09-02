@@ -43,13 +43,13 @@ quantile regression model, a different object. The bound evaluated
 here is Manski's and is cited as such.
 }
 
+\examples{
+set.seed(1)
+Bndmoq(y = rnorm(40), D = rbinom(40, 1, 0.5), X = rnorm(40), quantile = 0.5)
+}
 \references{
 Manski, C. F. (2003). Partial Identification of Probability
 Distributions. Springer, Section 1.3. The two expressions are
 \code{r(alpha, x)} and \code{s(alpha, x)} on pp. 12-13 of Molinari, F.
 (2021), Handbook of Econometrics 7A (arXiv:2004.11751).
-}
-\examples{
-set.seed(1)
-Bndmoq(y = rnorm(40), D = rbinom(40, 1, 0.5), X = rnorm(40), quantile = 0.5)
 }

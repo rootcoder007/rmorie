@@ -7,7 +7,7 @@
 Frdbnd(F_0, F_1, joint = NULL)
 }
 \arguments{
-\item{F_0, F_1}{Marginal CDF values in [0, 1], of equal length.}
+\item{F_0, F_1}{Marginal CDF values in \link{0, 1}, of equal length.}
 
 \item{joint}{Optional candidate joint CDF at the same points.}
 }
@@ -27,12 +27,12 @@ bracketing of the independence copula uv.
 \details{
 Formula: max(u + v - 1, 0) <= C(u, v) <= min(u, v).
 }
+\examples{
+Frdbnd(F_0 = c(0.2, 0.5, 0.8), F_1 = c(0.3, 0.6, 0.9))
+}
 \references{
 Frechet (1951), Sur les tableaux de correlation dont les
 marges sont donnees, Annales de l'Universite de Lyon A 14:53-77;
 Hoeffding (1940), Masstabinvariante Korrelationstheorie, Schriften
 des Mathematischen Instituts der Universitat Berlin 5:181-233.
-}
-\examples{
-Frdbnd(F_0 = c(0.2, 0.5, 0.8), F_1 = c(0.3, 0.6, 0.9))
 }

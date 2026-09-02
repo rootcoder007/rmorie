@@ -21,13 +21,13 @@ List with states, rewards, root, K.
 \description{
 s^0 = h(o_1..o_t); r^k, s^k = g(s^{k-1}, a^k) for k = 1..K.
 }
-\references{
-Schrittwieser et al. (2020), arXiv:1911.08265, Equation
-(1).  Read from the ar5iv rendering of the arXiv source.
-}
 \examples{
 representation <- function(o) o
 dynamics <- function(s, a) list(0.1, s + a)
 Mzworld(observation = 0, actions = c(1, 2), representation = representation,
         dynamics = dynamics)
+}
+\references{
+Schrittwieser et al. (2020), arXiv:1911.08265, Equation
+(1).  Read from the ar5iv rendering of the arXiv source.
 }

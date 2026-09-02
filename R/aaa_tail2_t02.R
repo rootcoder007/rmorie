@@ -31,6 +31,8 @@
 #' @return list(estimate, log_estimate, se_log, ci_lower, ci_upper, z,
 #'   p_value, n)
 #' @export
+#' @examples
+#' OddsRat(10, 20, 15, 25)
 OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
   if (!(conf_level > 0 && conf_level < 1))
     stop("conf_level must lie strictly between 0 and 1")
@@ -109,6 +111,9 @@ OddsRat <- function(a, b, c, d, conf_level = 0.95, correction = 0) {
 #' @return list(alpha, estimate, item_var, sum_item_var, total_var,
 #'   n_items, n)
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' CttAlpha(M)
 CttAlpha <- function(X) {
   X <- .t2_table(X)
   n <- nrow(X); k <- ncol(X)
@@ -135,6 +140,9 @@ CttAlpha <- function(X) {
 #' @return list(alpha_full, alpha_dropped, delta, max_alpha, argmax_alpha,
 #'   estimate, n_items, n)
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' CttAlphaMax(M)
 CttAlphaMax <- function(X) {
   X <- .t2_table(X)
   n <- nrow(X); k <- ncol(X)
@@ -179,6 +187,9 @@ CttAlphaMax <- function(X) {
 #' @param finite_corr apply the robustbase finite-sample bias correction
 #' @return list(estimate, raw, k, h, n_pairs, correction, constant, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' QnScale(V)
 QnScale <- function(y, constant = 2.21914, finite_corr = TRUE) {
   x <- as.numeric(y)
   n <- length(x)
@@ -208,6 +219,9 @@ QnScale <- function(y, constant = 2.21914, finite_corr = TRUE) {
 #' @param finite_corr apply the robustbase finite-sample bias correction
 #' @return list(estimate, raw, inner, correction, constant, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' SnScale(V)
 SnScale <- function(y, constant = 1.1926, finite_corr = TRUE) {
   x <- as.numeric(y)
   n <- length(x)
@@ -235,6 +249,9 @@ SnScale <- function(y, constant = 1.1926, finite_corr = TRUE) {
 #' @param close divide each vector by its own total first
 #' @return list(bc, estimate, numerator, denominator, similarity, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' BrayCurt(V, V)
 BrayCurt <- function(x, y, close = TRUE) {
   a <- as.numeric(x); b <- as.numeric(y)
   n <- length(a)
@@ -301,6 +318,9 @@ BrayCurt <- function(x, y, close = TRUE) {
 #' @param normalise divide p and q by their totals first
 #' @return list(divergence, estimate, terms, support, generator, f_inf, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' FDiverg(V, V)
 FDiverg <- function(p, q, f = "kl", f_inf = NULL, normalise = TRUE) {
   a <- as.numeric(p); b <- as.numeric(q)
   n <- length(a)
@@ -344,6 +364,9 @@ FDiverg <- function(p, q, f = "kl", f_inf = NULL, normalise = TRUE) {
 #' @param conf_level level for the pointwise normal limits
 #' @return list(u, e, se, sd_excess, ci_lower, ci_upper, n_exceed, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' MeanExc(V)
 MeanExc <- function(x, u_grid = NULL, conf_level = 0.95) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -394,6 +417,9 @@ MeanExc <- function(x, u_grid = NULL, conf_level = 0.95) {
 #' @return list(statistic, p_value, critical_value, reject, outlier,
 #'   index, side, mean, sd, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' GrubbsT(V)
 GrubbsT <- function(x, alpha = 0.05, opposite = FALSE) {
   xs <- as.numeric(x)
   n <- length(xs)
@@ -451,6 +477,9 @@ GrubbsT <- function(x, alpha = 0.05, opposite = FALSE) {
 #' @param opposite test the end NOT selected by the larger deviation
 #' @return list(statistic, type, outlier, side, numerator, denominator, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' DixonQ(V)
 DixonQ <- function(x, type = 10, opposite = FALSE) {
   key <- as.character(as.integer(type))
   if (!(key %in% names(.T2_DIX_NUM)))

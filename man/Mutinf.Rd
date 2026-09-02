@@ -19,10 +19,10 @@ Named list with \code{estimate}, \code{hx}, \code{hy}, \code{hxy}, \code{n}, \co
 Cover & Thomas (2006), eq. (2.28)-(2.30), p. 20; Shannon (1948),
 Section 12.
 }
-\references{
-Cover & Thomas (2006), eq. (2.28).
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Mutinf(V)
+}
+\references{
+Cover & Thomas (2006), eq. (2.28).
 }

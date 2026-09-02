@@ -33,6 +33,9 @@
 #'   NBER TWP 330 (2006) version; local copy
 #'   fetched-wave3/crump-hotz-imbens-mitnik-2009-limited-overlap-biometrika.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' Causipw(treat = rbinom(50, 1, 0.5), y = rnorm(50), ps = runif(50, 0.2, 0.8))
 Causipw <- function(treat, y, ps, alpha = 0.1) {
   t <- as.numeric(treat); yv <- as.numeric(y); e <- as.numeric(ps)
   n <- length(t)

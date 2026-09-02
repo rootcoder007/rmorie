@@ -109,8 +109,8 @@ NULL
     requireNamespace("AER",          quietly = TRUE)
 }
 
-#' Internal helper: Fit Propensity
-#' @noRd
+# Internal helper: Fit Propensity
+# @noRd
 # Two propensity ESTIMATORS, both available, matching Python
 # morie.fn.ps_fit._ps_irls exactly so the arms cannot drift apart by
 # inheriting whatever each ecosystem's logistic regression defaults to:
@@ -218,19 +218,13 @@ NULL
 }
 
 
-#' .fit_propensity
-#'
-#' A step of the causal implementation. Called by \code{.fit_propensity_weightit}, \code{morie_estimate_propensity_scores}, \code{morie_weight_ow} and 1 others in the module.
-#' See the file header for the source the module follows.
-#' it follows.
-#'
+#' Internal helper: Fit Propensity
 #' @param data A vector; indexed elementwise.
 #' @param treatment See Usage.
 #' @param covariates Passed to \code{.mor_ps_design}.
 #' @param ps_model One of \code{"mle"}, \code{"ridge"}. Defaults to \code{"mle"}.
 #' @param ridge_lambda Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return One of two values, depending on the branch taken.
-#' @export
+#' @noRd
 .fit_propensity <- function(data, treatment, covariates,
                             ps_model = "mle", ridge_lambda = 1) {
   if (!(ps_model %in% c("mle", "ridge")))
@@ -681,28 +675,28 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 # AIPW -- Doubly Robust ATE
 # ---------------------------------------------------------------------------
 
-#' Augmented IPW (AIPW) doubly-robust ATE estimator
-#'
-#' Combines IPW and outcome regression corrections. Consistent if
-#' \strong{either} the propensity model \strong{or} the outcome model
-#' is correctly specified.
-#'
-#' The propensity step delegates to \pkg{WeightIt} when installed
-#' (via \code{morie_estimate_propensity_scores}). The outcome
-#' regression and the doubly-robust influence-function score are
-#' evaluated inline to preserve the closed-form SE used downstream.
-#' Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
-#' nuisance learners) is the canonical CRAN counterpart.
-#'
-#' @inheritParams morie_estimate_ate
-#' @param outcome_model Family for the outcome model: `"linear"` or
-#'   `"logistic"`.
-#' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`, `n`.
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-#' morie_estimate_aipw(df, "t", "y", "x")
-#' @export
+# Augmented IPW (AIPW) doubly-robust ATE estimator
+#
+# Combines IPW and outcome regression corrections. Consistent if
+# \strong{either} the propensity model \strong{or} the outcome model
+# is correctly specified.
+#
+# The propensity step delegates to \pkg{WeightIt} when installed
+# (via \code{morie_estimate_propensity_scores}). The outcome
+# regression and the doubly-robust influence-function score are
+# evaluated inline to preserve the closed-form SE used downstream.
+# Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
+# nuisance learners) is the canonical CRAN counterpart.
+#
+# @inheritParams morie_estimate_ate
+# @param outcome_model Family for the outcome model: `"linear"` or
+#   `"logistic"`.
+# @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`, `n`.
+# @examples
+# set.seed(1)
+# df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+# morie_estimate_aipw(df, "t", "y", "x")
+# @export
 # Outcome-model routes for AIPW, matching Python
 # morie.fn.aipw._om_fit_predict exactly.
 #   outcome_fit = "separate" (default) fits E[Y | X, T = t] on each arm,
@@ -740,24 +734,37 @@ morie_estimate_atc <- function(data, treatment, outcome, covariates,
 }
 
 
-#' morie_estimate_aipw
+#' Augmented IPW (AIPW) doubly-robust ATE estimator
 #'
-#' A step of the causal implementation. Called by \code{morie_dag_estimate}, \code{morie_estimate_gate}, \code{morie_gate} and 1 others in the module.
-#' See the file header for the source the module follows.
-#' it follows.
+#' Combines IPW and outcome regression corrections. Consistent if
+#' \strong{either} the propensity model \strong{or} the outcome model
+#' is correctly specified.
 #'
+#' The propensity step delegates to \pkg{WeightIt} when installed
+#' (via \code{morie_estimate_propensity_scores}). The outcome
+#' regression and the doubly-robust influence-function score are
+#' evaluated inline to preserve the closed-form SE used downstream.
+#' Where richer outputs are desired, \code{AIPW::AIPW} (with SuperLearner
+#' nuisance learners) is the canonical CRAN counterpart.
+#'
+#' @inheritParams morie_estimate_ate
+#' @param outcome_model Family for the outcome model: `"linear"` or
+#'   `"logistic"`.
 #' @param data A vector; indexed elementwise.
 #' @param treatment Passed to \code{morie_estimate_propensity_scores}.
 #' @param outcome See Usage.
 #' @param covariates Passed to \code{morie_estimate_propensity_scores}.
 #' @param propensity_col Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param outcome_model Passed to \code{.mor_om_fit_predict}. Defaults to \code{c("linear", "logistic")}.
 #' @param trim Passed to \code{.mor_trim_ps}. Defaults to \code{c(0.01, 0.99)}.
 #' @param trim_type Passed to \code{.mor_trim_ps}. Defaults to \code{"value"}.
 #' @param ps_model Passed to \code{morie_estimate_propensity_scores}. Defaults to \code{"mle"}.
 #' @param ridge_lambda Passed to \code{morie_estimate_propensity_scores}. Defaults to \code{1}.
 #' @param outcome_fit One of \code{"pooled"}, \code{"separate"}. Defaults to \code{"separate"}.
-#' @return A list with \code{n_used}, \code{n_discarded}, \code{estimand}, \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}.
+#' @return Named list: `ate`, `se`, `ci_lower`, `ci_upper`, `n`.
+#' @examples
+#' set.seed(1)
+#' df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+#' morie_estimate_aipw(df, "t", "y", "x")
 #' @export
 morie_estimate_aipw <- function(data, treatment, outcome, covariates,
                                 propensity_col = NULL,
@@ -1450,6 +1457,9 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).
 #'   Inferring causal impact using Bayesian structural time-series
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
+#' @examples
+#' morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)), 
+#'     pre_period = c(1, 5), post_period = c(6, 10))
 morie_causal_impact <- function(data, pre_period, post_period,
                                 model_args = NULL, alpha = 0.05) {
   if (!.causal_have_causalimpact()) {
@@ -1514,6 +1524,9 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #' @references
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
 #'   Observational Studies. R package version 1.4.0.
+#' @examples
+#' morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4), 
+#'     x = rnorm(20)), treatment = "t", covariates = "x")
 morie_causal_weighting <- function(data, treatment, covariates,
                                    method = "glm",
                                    estimand = c("ATE", "ATT", "ATC"),
@@ -1582,6 +1595,13 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #'   Zeileis A, Koll S, Graham N (2020). Various Versatile Variances:
 #'   An Object-Oriented Implementation of Clustered Covariances in R.
 #'   \emph{Journal of Statistical Software}, 95(1), 1-36.
+#' @examples
+#' d <- data.frame(x = rnorm(30), y = rnorm(30))
+#' m <- stats::lm(y ~ x, data = d)
+#' n <- 80L
+#' x <- arima.sim(model = list(ar = 0.6), n = n)
+#' y <- as.numeric(x) + rnorm(n, sd = 0.2)
+#' morie_causal_robust_se(m, type = "HC3")
 morie_causal_robust_se <- function(model,
                                    type = "HC3",
                                    cluster = NULL,
@@ -1605,6 +1625,35 @@ morie_causal_robust_se <- function(model,
 # git history (commit 4d78188).
 
 
+# Hajek estimator for a population mean
+#
+# The ratio (Hajek) estimator
+# \eqn{\bar{y}_H = \sum_i w_i y_i / \sum_i w_i}, which normalises
+# the Horvitz-Thompson estimator by the ESTIMATED population size and
+# is therefore insensitive to the overall scale of the weights.  The
+# standard error uses Taylor (delta-method) linearisation under the
+# with-replacement approximation.
+#
+# Mirrors Python \code{morie.survey.hajek_mean}; this is the SURVEY
+# Hajek mean, a different estimator from the Hajek IPW average
+# treatment effect in \code{\link{morie_estimate_ate}}, which is a
+# DIFFERENCE of two such weighted means.
+#
+# @param y Response values.
+# @param weights Survey weights \eqn{w_i = 1/\pi_i}, all positive.
+# @return A list with \code{mean}, \code{se}, \code{ci_lower},
+#   \code{ci_upper}.
+# @references Hajek, J. (1971). Comment in Godambe and Sprott (Eds.),
+#   Foundations of Statistical Inference. Holt, Rinehart and Winston;
+#   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
+# @export
+# NOTE: this takes sampling WEIGHTS. The exported
+# morie_hajek_mean takes inclusion PROBABILITIES pi, matching
+# the Python arm hjkest.hajek_estimator(y, pi) -- and weights
+# are the reciprocals of those, so the two are not
+# interchangeable. Both were defined as morie_hajek_mean and
+# survey_native.R sorts later, so this one never ran; it is
+# scoped rather than left as a name that silently loses.
 #' Hajek estimator for a population mean
 #'
 #' The ratio (Hajek) estimator
@@ -1626,22 +1675,6 @@ morie_causal_robust_se <- function(model,
 #' @references Hajek, J. (1971). Comment in Godambe and Sprott (Eds.),
 #'   Foundations of Statistical Inference. Holt, Rinehart and Winston;
 #'   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
-#' @export
-# NOTE: this takes sampling WEIGHTS. The exported
-# morie_hajek_mean takes inclusion PROBABILITIES pi, matching
-# the Python arm hjkest.hajek_estimator(y, pi) -- and weights
-# are the reciprocals of those, so the two are not
-# interchangeable. Both were defined as morie_hajek_mean and
-# survey_native.R sorts later, so this one never ran; it is
-# scoped rather than left as a name that silently loses.
-#' .causal_hajek_weighted_mean
-#'
-#' Internal helper in causal.R; see the file header for
-#' the source the module follows.
-#'
-#' @param y A vector; its length is taken.
-#' @param weights The body requires: All weights must be > 0.
-#' @return A list with \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 #' @export
 .causal_hajek_weighted_mean <- function(y, weights) {
   y <- as.numeric(y); w <- as.numeric(weights)

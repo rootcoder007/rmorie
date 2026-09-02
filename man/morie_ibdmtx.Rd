@@ -25,12 +25,12 @@ IBD.  Expected values for a full sib pair are
 parent-offspring pair \eqn{(0, 1, 0)}, also \eqn{\hat\pi = 0.5};
 for unrelated individuals \eqn{(1, 0, 0)} with \eqn{\hat\pi = 0}.
 }
-\references{
-Purcell, S. et al. (2007). PLINK. American Journal of
-Human Genetics, 81(3), 559-575.
-}
 \examples{
 set.seed(1)
 G <- matrix(sample(0:2, 30 * 12, replace = TRUE), 30, 12)
 dim(morie_ibdmtx(G))
+}
+\references{
+Purcell, S. et al. (2007). PLINK. American Journal of
+Human Genetics, 81(3), 559-575.
 }

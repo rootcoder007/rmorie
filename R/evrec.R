@@ -8,6 +8,9 @@
 #' @return List with ``count``, ``times`` (indices of records), ``values``, ``expected``, ``variance``, ``z``, ``n``.
 #' @references Arnold, Balakrishnan and Nagaraja (1998), Records, Wiley. Not held locally; the indicator representation and the resulting harmonic mean and variance are standard published results for iid continuous data.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Evtrecords(V)
 Evtrecords <- function(x) {
   x <- .t1_vec(x); n <- length(x)
   if (n < 1) stop("need at least one observation")

@@ -38,6 +38,10 @@
 #'   human Y chromosomes. Molecular Biology and Evolution, 16(12),
 #'   1791-1798.
 #' @export
+#' @examples
+#' prior <- list(c(-2, 2))
+#' sim <- function(theta, rng) theta[1]
+#' morie_abcrej(sim, obs = 0.5, eps = 0.5, prior, n_draws = 200)
 morie_abcrej <- function(sim, obs, eps, prior, n_draws = 1000L, seed = 0) {
   obs <- as.numeric(obs)
   eps <- as.numeric(eps)

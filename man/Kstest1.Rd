@@ -24,12 +24,12 @@ caller can see whether that applies.
 Formula: D = sup_x |F1(x) - F2(x)|; t = sqrt(n1 n2/(n1 + n2)) D;
 p = 1 - H(t) = 2 sum_\{j>=1\} (-1)^\{j-1\} exp(-2 j^2 t^2)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kstest1(V, V)
+}
 \references{
 Wasserman (2004), All of Statistics, Section 15.4 and
 Theorem 15.12, equation (15.14). Fetched as the full text of the
 book.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kstest1(V, V)
 }

@@ -32,10 +32,10 @@ likelihood.  A node is then reassigned by the CRP prior times the
 change in that likelihood, with the number of blocks learned rather
 than fixed.
 }
+\examples{
+Dpsbm(adjacency = 5L)
+}
 \references{
 Kemp, Tenenbaum, Griffiths, Yamada & Ueda (2006),
 AAAI-06:381-388.
-}
-\examples{
-Dpsbm(adjacency = 5L)
 }

@@ -17,6 +17,8 @@
 #'   \code{xi}, \code{method}.
 #' @references McNeil & Frey (2000), J. Empirical Finance 7(3-4):271-300.
 #' @export
+#' @examples
+#' Evespot(u = 1, sigma = 0.5, xi = 0.1, VaR = 2)
 Evespot <- function(u, sigma, xi, VaR) {
   u <- as.numeric(u); sigma <- as.numeric(sigma)
   xi <- as.numeric(xi); VaR <- as.numeric(VaR)

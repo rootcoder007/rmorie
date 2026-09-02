@@ -22,6 +22,8 @@
 #'   (1991), Annals of the Institute of Statistical Mathematics
 #'   43(1):1-20. \doi{10.1007/BF00116466}
 #' @export
+#' @examples
+#' Icarbm(matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE))
 Icarbm <- function(adjacency, tau = 1, u = NULL) {
   W <- .s03mat(adjacency)
   n <- nrow(W)

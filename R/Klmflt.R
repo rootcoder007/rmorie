@@ -19,6 +19,12 @@
 #' @references Kalman (1960), Transactions of the ASME, Journal of Basic
 #'   Engineering 82(1):35-45. \doi{10.1115/1.3662552}
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
+#' model <- list(F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1),
+#'               x0 = 0, P0 = matrix(1))
+#' Klmflt(y, model)
 Klmflt <- function(y, model) {
   Y <- .s03mat(y)
   if (nrow(Y) == 0L) stop("kalman_filter: y is empty")

@@ -16,6 +16,9 @@
 #' @references Bobkov, S. and Ledoux, M. (2019). Memoirs of the American
 #'   Mathematical Society 261(1259). \doi{10.1090/memo/1259}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otws2(V, V)
 Otws2 <- function(x, y, p = 2) {
   w <- .ot_wp1d(x, y, as.numeric(p))
   .t1_result(Wp = w, Wp_p = w^as.numeric(p), n = length(as.numeric(x)),

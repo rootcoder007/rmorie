@@ -19,6 +19,8 @@
 #' @references van der Laan, M. J. & Petersen, M. L. (2007). IJB 3(1):3;
 #'   van der Laan, Petersen & Joffe (2005) IJB 1(1):4.
 #' @export
+#' @examples
+#' Hmstrn(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8), covariate_history = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), regime = c(1, 2, 3, 4, 5, 6, 7, 8))
 Hmstrn <- function(y, treatment_history, covariate_history, time, regime) {
   yv <- as.numeric(y); A <- as.matrix(treatment_history)
   L <- as.matrix(covariate_history)

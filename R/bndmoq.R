@@ -31,6 +31,9 @@
 #'   \code{r(alpha, x)} and \code{s(alpha, x)} on pp. 12-13 of Molinari, F.
 #'   (2021), Handbook of Econometrics 7A (arXiv:2004.11751).
 #' @export
+#' @examples
+#' set.seed(1)
+#' Bndmoq(y = rnorm(40), D = rbinom(40, 1, 0.5), X = rnorm(40), quantile = 0.5)
 Bndmoq <- function(y, D, X, quantile) {
   z <- .bnd_yd(y, D, "Bndmoq")
   xv <- unlist(X)

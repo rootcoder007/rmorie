@@ -20,12 +20,12 @@ List with total, cell, bysector, byfuel, s, f.
 Emissions = AD * EF, summed over the cells of a sector-by-fuel table
 and optionally weighted by per-gas global warming potentials.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Emisinv(V, V)
+}
 \references{
 IPCC (2006), 2006 IPCC Guidelines for National Greenhouse
 Gas Inventories, Volume 1, Chapter 1, Sect. 1.2.  Read from the
 official PDF at www.ipcc-nggip.iges.or.jp.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Emisinv(V, V)
 }

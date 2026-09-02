@@ -22,9 +22,9 @@ list with the location and scale estimates, the log-likelihood, AIC and BIC.
 \description{
 ML for a log-location-scale family with right censoring, maximising prod f(t)^delta S(t)^(1-delta).
 }
-\references{
-Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
-}
 \examples{
 Parasurv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+}
+\references{
+Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
 }

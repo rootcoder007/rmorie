@@ -25,6 +25,8 @@
 #'   Section 3.3, Report Noisy Max and Claim 3.9.
 #'   Local source: fetched-wave3/dwork-roth-2014-algorithmic-foundations-differential-privacy.pdf
 #' @export
+#' @examples
+#' Reportm(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
 Reportm <- function(counts, epsilon, sensitivity = 1, seed = 1) {
   x <- as.numeric(unlist(counts))
   n <- length(x)

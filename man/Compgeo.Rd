@@ -15,12 +15,12 @@ List with \code{geomean}, \code{log_geomean}, \code{D}.
 \description{
 Formula: g(x) = (x_1 x_2 ... x_D)^(1/D) = exp( (1/D) sum_j log x_j )
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Compgeo(V)
+}
 \references{
 Aitchison (1986), The Statistical Analysis of Compositional
 Data, Chapter 4, where g(x) is the normalising constant of the
 centred log-ratio transform.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Compgeo(V)
 }

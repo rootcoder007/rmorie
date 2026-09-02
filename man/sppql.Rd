@@ -62,9 +62,9 @@ There is a choice about where the spatial dependence lives. A marginal
 model puts it in \code{R} and sets the latent field to zero; a conditional
 model puts it in \code{Sigma_S} and takes \code{R} to be the identity.
 }
-\references{
-Schabenberger Ch 6, Sec 6.3.5, eqs (6.78)-(6.85)
-}
 \examples{
 sppql(z = 5L, X = 5L, Sigma_S = 5L)
+}
+\references{
+Schabenberger Ch 6, Sec 6.3.5, eqs (6.78)-(6.85)
 }

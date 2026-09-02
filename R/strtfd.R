@@ -21,6 +21,8 @@
 #'   CRAN package samplingbook 1.2.4, whose stratasamp uses exactly these
 #'   three weight rules.
 #' @export
+#' @examples
+#' Stratdes(Nh = 5L, Sh = 5L, n = 5L)
 Stratdes <- function(Nh, Sh, n, Ch = NULL, kind = "neyman") {
   Nh <- .t1_vec(Nh); Sh <- .t1_vec(Sh); n <- as.integer(n)
   L <- length(Nh)

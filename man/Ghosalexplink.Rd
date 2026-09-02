@@ -25,11 +25,11 @@ by the link, so the prior on psi can be completely unconstrained.
 Formula: Z = int exp(psi) by the trapezoid rule on the sorted grid;
 density = exp(psi) / Z.
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.3.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalexplink(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.3.1.
 }

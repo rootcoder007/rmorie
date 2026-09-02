@@ -23,6 +23,8 @@
 #'   Section 3.2. Local source:
 #'   fetched-wave3/liu-etal-2022-swin-v2-arxiv2111.09883.pdf.
 #' @export
+#' @examples
+#' Vitscn(q = 0.5, k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 Vitscn <- function(q, k, v, tau = 0.1, B = NULL) {
   Qa <- as.matrix(q); Ka <- as.matrix(k); Va <- as.matrix(v)
   storage.mode(Qa) <- "double"; storage.mode(Ka) <- "double"

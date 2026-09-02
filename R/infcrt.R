@@ -16,6 +16,9 @@
 #' @references Watanabe, S. (2013). JMLR 14:867-897; Vehtari, Gelman &
 #'   Gabry (2017) Statist Comput 27:1413-1432.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Infcrt(V)
 Infcrt <- function(log_lik_samples) {
   L <- as.matrix(log_lik_samples); Sn <- nrow(L); n <- ncol(L)
   lppd <- 0; pw <- 0; elpd_loo <- 0; ks <- numeric(n)

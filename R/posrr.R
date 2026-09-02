@@ -15,6 +15,9 @@
 #'   Bayesian Data Analysis, 3rd edition, Section 6.3. Fetched as the full
 #'   text of the book from the author's own copy.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ppcrep(V, V)
 Ppcrep <- function(t_obs, t_rep) {
   tr <- .t1_vec(t_rep); S <- length(tr)
   if (S < 2L) stop("at least two replicates are required")

@@ -77,6 +77,8 @@
 #'   Journal of Combinatorics, Dynamic Survey DS1, revision 17 (2024),
 #'   \doi{10.37236/21}, Tables Ia and Ib.
 #' @export
+#' @examples
+#' morie_ramsey_number(k = 5L)
 morie_ramsey_number <- function(k, l = NULL) {
   if (is.null(l)) l <- k
   k <- as.integer(k); l <- as.integer(l)
@@ -147,6 +149,8 @@ morie_ramsey_number <- function(k, l = NULL) {
 #'   Mathematics} 7:1-7. Erdos P, Szekeres G (1935)
 #'   \emph{Compositio Mathematica} 2:463-470.
 #' @export
+#' @examples
+#' morie_ramsey_upper_bound(k = 5L, l = 5L)
 morie_ramsey_upper_bound <- function(k, l, use_known = TRUE) {
   k <- as.integer(k); l <- as.integer(l)
   if (k < 1L || l < 1L) {
@@ -193,6 +197,8 @@ morie_ramsey_upper_bound <- function(k, l, use_known = TRUE) {
 #'   `asymptotic_2_to_k_over_2`.
 #' @references Erdos P (1947) \emph{Bulletin of the AMS} 53:292-294.
 #' @export
+#' @examples
+#' morie_ramsey_lower_bound_probabilistic(k = 5L)
 morie_ramsey_lower_bound_probabilistic <- function(k) {
   k <- as.integer(k)
   if (is.na(k) || k < 2L) {
@@ -305,6 +311,8 @@ morie_goodman_triangles <- function(colouring, brute_force = FALSE) {
 #' @return A list with `minimum`, `total_triangles`, `max_bichromatic`.
 #' @references Goodman AW (1959) \emph{Amer Math Monthly} 66(9):778-783.
 #' @export
+#' @examples
+#' morie_goodman_minimum(n = 5L)
 morie_goodman_minimum <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 3L) {
@@ -327,6 +335,8 @@ morie_goodman_minimum <- function(n) {
 #' @param k,l Clique sizes to rule out.
 #' @return A list with `valid`, `red_clique`, `blue_clique`, `certifies`.
 #' @export
+#' @examples
+#' morie_ramsey_witness(colouring = 5L, k = 5L, l = 5L)
 morie_ramsey_witness <- function(colouring, k, l) {
   A <- as.matrix(colouring)
   if (nrow(A) != ncol(A)) stop("colouring must be square.", call. = FALSE)
@@ -374,6 +384,8 @@ morie_ramsey_witness <- function(colouring, k, l) {
 #'   `witness_valid`, `ramsey_number`.
 #' @references Goodman AW (1959); Greenwood RE, Gleason AM (1955).
 #' @export
+#' @examples
+#' morie_party_problem()
 morie_party_problem <- function(n_people = 6L) {
   n <- as.integer(n_people)
   if (is.na(n) || n < 3L) {

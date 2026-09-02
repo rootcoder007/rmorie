@@ -19,6 +19,8 @@
 #' @references Imai, K., Keele, L. & Yamamoto, T. (2010). Statistical
 #'   Science 25:51-71, equations (7) and (8).
 #' @export
+#' @examples
+#' Imai(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Imai <- function(X, M, Y, Cc = NULL) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   bc0 <- mm$beta[1]

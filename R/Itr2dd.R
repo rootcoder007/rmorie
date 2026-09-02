@@ -26,6 +26,9 @@
 #'   \doi{10.1257/jep.31.2.3}; Sant'Anna and Zhao (2020), Journal of
 #'   Econometrics 219(1):101-122. \doi{10.1016/j.jeconom.2020.06.003}
 #' @export
+#' @examples
+#' set.seed(1)
+#' Itr2dd(y = rnorm(40), D = rbinom(40, 1, 0.5), W = matrix(rnorm(80), 40, 2))
 Itr2dd <- function(y, D, W, min_frac = 0.25) {
   dy <- .s03vec(y); n <- length(dy)
   if (n == 0L) stop("itr_optimal_did: y is empty")

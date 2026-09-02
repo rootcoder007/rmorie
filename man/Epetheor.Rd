@@ -19,7 +19,7 @@ Hastie, Tibshirani and Friedman (2009), The Elements of Statistical
 Learning, 2nd ed., Springer, Section 2.4, book pp. 18-19 (PDF pp. 37-38).
 }
 \details{
-EPE(f) = E(Y - f(X))^2 (2.9) and beta = [E(XX')]^-1 E(XY) (2.16), the
+EPE(f) = E(Y - f(X))^2 (2.9) and beta = \link{E(XX')}^-1 E(XY) (2.16), the
 latter obtained by plugging the linear model (2.15) into (2.9) and
 differentiating.  (2.16) is a population statement; the sample moment
 matrices (1/N) X'X and (1/N) X'y are substituted here, which is exactly

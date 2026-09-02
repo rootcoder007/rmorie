@@ -135,6 +135,9 @@
 #' @param yhat forecasts
 #' @return list(rmse, mse, mae, bias, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rmse(V, V)
 morie_rmse <- function(y, yhat) {
   p <- .morie_jo_pair(y, yhat)
   e <- p$a - p$b
@@ -152,6 +155,9 @@ morie_rmse <- function(y, yhat) {
 #' @param yhat forecasts
 #' @return list(mape, mdape, maxape, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mapets(V, V)
 morie_mapets <- function(y, yhat) {
   p <- .morie_jo_pair(y, yhat)
   if (any(p$a == 0)) {
@@ -171,6 +177,9 @@ morie_mapets <- function(y, yhat) {
 #' @param yhat forecasts
 #' @return list(smape, smdape, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_smape(V, V)
 morie_smape <- function(y, yhat) {
   p <- .morie_jo_pair(y, yhat)
   den <- abs(p$a) + abs(p$b)
@@ -192,6 +201,8 @@ morie_smape <- function(y, yhat) {
 #' @param season naive lag; 1 reproduces the printed formula
 #' @return list(rmsse, scale, mase, n)
 #' @export
+#' @examples
+#' morie_rmsse(y = c(1, 2, 3, 4, 5, 6, 7, 8), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), insample = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rmsse <- function(y, yhat, insample, season = 1L) {
   p <- .morie_jo_pair(y, yhat)
   ins <- .morie_jo_vec(insample, "insample")
@@ -214,6 +225,8 @@ morie_rmsse <- function(y, yhat, insample, season = 1L) {
 #' @param benchmark benchmark forecasts
 #' @return list(relmae, mae, benchmae, better, n)
 #' @export
+#' @examples
+#' morie_relmae(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), benchmark = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_relmae <- function(y, yhat, benchmark) {
   p <- .morie_jo_pair(y, yhat)
   cb <- .morie_jo_vec(benchmark, "benchmark")
@@ -238,6 +251,8 @@ morie_relmae <- function(y, yhat, benchmark) {
 #' @param q the quantile level, in (0, 1)
 #' @return list(loss, total, coverage, q, n)
 #' @export
+#' @examples
+#' morie_pinball(y = c(1, 2, 3, 4, 5, 6, 7, 8), qhat = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
 morie_pinball <- function(y, qhat, q) {
   p <- .morie_jo_pair(y, qhat)
   q <- as.numeric(q)
@@ -261,6 +276,8 @@ morie_pinball <- function(y, qhat, q) {
 #' @param alpha nominal miscoverage
 #' @return list(score, total, coverage, meanwidth, n)
 #' @export
+#' @examples
+#' morie_winkler(y = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_winkler <- function(y, lower, upper, alpha = 0.1) {
   a <- .morie_jo_vec(y, "y")
   lo <- .morie_jo_vec(lower, "lower")
@@ -292,6 +309,8 @@ morie_winkler <- function(y, lower, upper, alpha = 0.1) {
 #' @param lam the Box-Cox parameter
 #' @return list(w, lam, mean, var, n)
 #' @export
+#' @examples
+#' morie_boxcox(x = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 morie_boxcox <- function(x, lam) {
   v <- .morie_jo_vec(x)
   lam <- as.numeric(lam)
@@ -306,6 +325,9 @@ morie_boxcox <- function(x, lam) {
 #' @param offset added before taking logs, the book's remedy for zeros
 #' @return list(w, mean, sd, cvbefore, cvafter, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_logtrans(V)
 morie_logtrans <- function(x, offset = 0) {
   v <- .morie_jo_vec(x)
   offset <- as.numeric(offset)
@@ -327,6 +349,9 @@ morie_logtrans <- function(x, offset = 0) {
 #' @param season the differencing lag; use the period for seasonal
 #' @return list(w, mean, var, dropped, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_diffser(V)
 morie_diffser <- function(x, order = 1L, season = 1L) {
   v <- .morie_jo_vec(x)
   order <- as.integer(order); season <- as.integer(season)
@@ -354,6 +379,10 @@ morie_diffser <- function(x, order = 1L, season = 1L) {
 #' @param lags positive integer lags
 #' @return list(rows, target, lags, nrows, ncols, mean)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_lagfeat(V, M)
 morie_lagfeat <- function(x, lags) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
@@ -377,6 +406,8 @@ morie_lagfeat <- function(x, lags) {
 #' @param minperiods smallest usable window; defaults to the full window
 #' @return list(mean, sd, min, max, nrows, lastmean, meanofmeans)
 #' @export
+#' @examples
+#' morie_rollfeat(x = c(1, 2, 3, 4, 5, 6, 7, 8), window = 5L)
 morie_rollfeat <- function(x, window, minperiods = NULL) {
   v <- .morie_jo_vec(x)
   window <- as.integer(window)
@@ -411,6 +442,8 @@ morie_rollfeat <- function(x, window, minperiods = NULL) {
 #' @param start first time index
 #' @return list(rows, nrows, ncols, k, period, mean, sumsq)
 #' @export
+#' @examples
+#' morie_fourfeat(n = 24, period = 12, k = 2)
 morie_fourfeat <- function(n, period, k, start = 0) {
   n <- as.integer(n); period <- as.numeric(period); k <- as.integer(k)
   if (n < 1L || period <= 0 || k < 1L) {
@@ -482,6 +515,9 @@ morie_fourfeat <- function(n, period, k, start = 0) {
 #' @param dates matrix or list of c(year, month, day)
 #' @return list(rows, n, nweekend, meandoy, meanmonthsin)
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_calfeat(M)
 morie_calfeat <- function(dates) {
   dm <- if (is.matrix(dates)) dates else do.call(rbind, dates)
   storage.mode(dm) <- "integer"
@@ -522,6 +558,9 @@ morie_calfeat <- function(dates) {
 #' @param season the seasonal period, for method = "seasonal"
 #' @return list(x, nmissing, n, mean, method, imputedmean)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_tsimpute(V)
 morie_tsimpute <- function(x, method = "linear", season = 1L) {
   raw <- as.numeric(x)
   if (length(raw) == 0L) stop("x must be non-empty.", call. = FALSE)
@@ -575,6 +614,9 @@ morie_tsimpute <- function(x, method = "linear", season = 1L) {
 #' @param maxlag largest lag
 #' @return list(acf, ci, maxlag, n, r1, nsignif)
 #' @export
+#' @examples
+#' set.seed(2)
+#' morie_autocorf(as.numeric(arima.sim(list(ar = 0.6), 100)), maxlag = 10L)
 morie_autocorf <- function(x, maxlag = 20L) {
   v <- .morie_jo_vec(x)
   n <- length(v)
@@ -603,6 +645,9 @@ morie_autocorf <- function(x, maxlag = 20L) {
 #' @param maxlag largest lag
 #' @return list(pacf, ci, maxlag, n, p1, nsignif)
 #' @export
+#' @examples
+#' set.seed(2)
+#' morie_pacfts(as.numeric(arima.sim(list(ar = 0.6), 100)), maxlag = 10L)
 morie_pacfts <- function(x, maxlag = 20L) {
   v <- .morie_jo_vec(x)
   n <- length(v)
@@ -652,6 +697,9 @@ morie_pacfts <- function(x, maxlag = 20L) {
 #' @return list(stat, gamma, se, lags, n, crit1, crit5, crit10,
 #'   stationary5)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_adfur(V)
 morie_adfur <- function(x, lags = 1L) {
   v <- .morie_jo_vec(x)
   lags <- as.integer(lags)
@@ -709,6 +757,9 @@ morie_adfur <- function(x, lags = 1L) {
 #' @return list(trend, seasonal, remainder, period, n, seasonalstrength,
 #'   remaindervar, seasonalrange)
 #' @export
+#' @examples
+#' x <- as.numeric(log(AirPassengers))
+#' morie_stldecomp(x, period = 12)
 morie_stldecomp <- function(x, period, robust = FALSE, iters = 2L) {
   v <- .morie_jo_vec(x)
   period <- as.integer(period); iters <- as.integer(iters)
@@ -754,6 +805,10 @@ morie_stldecomp <- function(x, period, robust = FALSE, iters = 2L) {
 #' @param horizon steps ahead the target sits
 #' @return list(rows, y, lags, horizon, nrows, ncols, ymean, xmean)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' morie_tsregmat(V, M)
 morie_tsregmat <- function(x, lags, horizon = 1L) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
@@ -803,6 +858,8 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
 #' @param horizon steps to forecast
 #' @return list(forecast, horizon, nmodels, ntrain, first, last, mean)
 #' @export
+#' @examples
+#' morie_recmulti(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 5L, horizon = 5L)
 morie_recmulti <- function(x, lags, horizon) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
@@ -831,6 +888,8 @@ morie_recmulti <- function(x, lags, horizon) {
 #' @param horizon steps to forecast
 #' @return list(forecast, horizon, nmodels, first, last, mean)
 #' @export
+#' @examples
+#' morie_dirmulti(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 3L, horizon = 5L)
 morie_dirmulti <- function(x, lags, horizon) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
@@ -858,6 +917,8 @@ morie_dirmulti <- function(x, lags, horizon) {
 #' @return list(forecast, horizon, nmodels, ncolsfirst, ncolslast,
 #'   first, last, mean)
 #' @export
+#' @examples
+#' morie_dirrec(x = c(1, 2, 3, 4, 5, 6, 7, 8), lags = 3L, horizon = 5L)
 morie_dirrec <- function(x, lags, horizon) {
   v <- .morie_jo_vec(x)
   lags <- sort(unique(as.integer(lags)))
@@ -905,6 +966,9 @@ morie_dirrec <- function(x, lags, horizon) {
 #' @param horizon steps to forecast
 #' @return list(forecast, season, horizon, first, last, mean)
 #' @export
+#' @examples
+#' x <- as.numeric(AirPassengers)
+#' morie_seasnaive(x, season = 12, horizon = 6)
 morie_seasnaive <- function(x, season, horizon) {
   v <- .morie_jo_vec(x)
   season <- as.integer(season); horizon <- as.integer(horizon)
@@ -935,6 +999,8 @@ morie_seasnaive <- function(x, season, horizon) {
 #' @return list(folds, nfolds, trainsize, testsize, step, firsttest,
 #'   lasttest)
 #' @export
+#' @examples
+#' morie_slidecv(n = 50, trainsize = 30, testsize = 5)
 morie_slidecv <- function(n, trainsize, testsize, step = NULL) {
   n <- as.integer(n); trainsize <- as.integer(trainsize)
   testsize <- as.integer(testsize)
@@ -966,6 +1032,8 @@ morie_slidecv <- function(n, trainsize, testsize, step = NULL) {
 #' @return list(folds, nfolds, initial, testsize, step, firsttrainend,
 #'   lasttrainend)
 #' @export
+#' @examples
+#' morie_expandcv(n = 50, initial = 30, testsize = 5)
 morie_expandcv <- function(n, initial, testsize, step = NULL) {
   n <- as.integer(n); initial <- as.integer(initial)
   testsize <- as.integer(testsize)
@@ -997,6 +1065,11 @@ morie_expandcv <- function(n, initial, testsize, step = NULL) {
 #' @param step how far the training end advances
 #' @return list(scores, nfolds, rmse, sd, best, worst)
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- as.numeric(arima.sim(list(ar = 0.6), 60))
+#' yhat <- y + rnorm(60, 0, 0.3)
+#' morie_walkfwd(y, yhat, initial = 30, testsize = 5)
 morie_walkfwd <- function(y, yhat, initial, testsize, step = NULL) {
   p <- .morie_jo_pair(y, yhat)
   lay <- morie_expandcv(length(p$a), initial, testsize, step)
@@ -1026,6 +1099,8 @@ morie_walkfwd <- function(y, yhat, initial, testsize, step = NULL) {
 #' @param iters number of IRLS sweeps
 #' @return list(beta, fitted, loss, q, intercept, n, p)
 #' @export
+#' @examples
+#' morie_quantreg(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
 morie_quantreg <- function(x, y, q, iters = 25L) {
   xm <- cbind(rep(1, nrow(as.matrix(x))), as.matrix(x))
   storage.mode(xm) <- "double"
@@ -1072,6 +1147,8 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
 #' @param alpha nominal miscoverage
 #' @return list(qhat, lower, upper, k, n, meanwidth, widening)
 #' @export
+#' @examples
+#' morie_cqr(callo = c(1, 2, 3, 4, 5, 6, 7, 8), calhi = c(1, 2, 3, 4, 5, 6, 7, 8), caly = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
   cl <- .morie_jo_vec(callo, "callo")
   ch <- .morie_jo_vec(calhi, "calhi")
@@ -1112,6 +1189,9 @@ morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
 #' @return list(alpha, final, empirical, target, gamma, n, minalpha,
 #'   maxalpha)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_aci(V)
 morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
   seqv <- as.logical(inside)
   if (length(seqv) == 0L) stop("inside must be non-empty.", call. = FALSE)
@@ -1268,6 +1348,10 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @return list(trend, seasonal, kernel, n, trendmean, seasmean,
 #'   seasrange)
 #' @export
+#' @examples
+#' set.seed(3)
+#' x <- sin(2 * pi * (1:60) / 12) + rnorm(60, 0, 0.2)
+#' morie_seriesdecomp(x, kernel = 5L)
 morie_seriesdecomp <- function(x, kernel) {
   v <- .morie_jo_vec(x)
   kernel <- as.integer(kernel)
@@ -1297,6 +1381,8 @@ morie_seriesdecomp <- function(x, kernel) {
 #' @return list(out, taus, weights, k, L, r1, outmean, outmax,
 #'   trendmean, seasrange)
 #' @export
+#' @examples
+#' morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_autoform <- function(q, k, v, kernel = 3L, c = 1) {
   qv <- .morie_jo_vec(q, "q"); kv <- .morie_jo_vec(k, "k")
   vv <- .morie_jo_vec(v, "v")
@@ -1342,6 +1428,10 @@ morie_autoform <- function(q, k, v, kernel = 3L, c = 1) {
 #' @return list(patches, npatches, n, patchlen, stride, nchannels,
 #'   mean, sd, patchmean, patchsumsq)
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- sin(2 * pi * (1:48) / 12) + rnorm(48, 0, 0.1)
+#' str(morie_patchts(x, patchlen = 8, stride = 4), max.level = 1)
 morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
   chans <- if (is.list(x)) lapply(x, .morie_jo_vec) else list(.morie_jo_vec(x))
   P <- as.integer(patchlen); S <- as.integer(stride)
@@ -1398,6 +1488,14 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
 #' @return list(forecast, residual, nblocks, sizes, first, last, mean,
 #'   residnorm)
 #' @export
+#' @examples
+#' set.seed(2)
+#' y <- sin(2 * pi * (1:16) / 8)
+#' wf <- list(matrix(rnorm(2 * 8, 0, 0.3), 2, 8))
+#' wb <- list(matrix(rnorm(16 * 8, 0, 0.3), 16, 8))
+#' r <- morie_nhitsnet(y, horizon = 2, kernels = 2L, ratios = 1,
+#'                     wf = wf, wb = wb)
+#' str(r, max.level = 1)
 morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
   v <- .morie_jo_vec(y, "y")
   H <- as.integer(horizon)
@@ -1470,6 +1568,17 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
 #' @return list(grn, gate, weights, yhat, topvar, maxweight, entropy,
 #'   grnnorm, yhatmean, and ql when y is supplied)
 #' @export
+#' @examples
+#' set.seed(3)
+#' a <- rnorm(4)
+#' r <- morie_tftnet(a,
+#'                   w1 = matrix(rnorm(16, 0, 0.4), 4, 4), b1 = rep(0, 4),
+#'                   w2 = matrix(rnorm(16, 0, 0.4), 4, 4), b2 = rep(0, 4),
+#'                   w4 = matrix(rnorm(16, 0, 0.4), 4, 4), b4 = rep(0, 4),
+#'                   w5 = matrix(rnorm(16, 0, 0.4), 4, 4), b5 = rep(0, 4),
+#'                   wsel = matrix(rnorm(12, 0, 0.4), 3, 4), bsel = rep(0, 3),
+#'                   wq = matrix(rnorm(8, 0, 0.4), 2, 4), bq = rep(0, 2))
+#' str(r, max.level = 1)
 morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
                          wq, bq, c = NULL, wc = NULL, y = NULL, q = 0.5) {
   av <- .morie_jo_vec(a, "a")
@@ -1532,6 +1641,22 @@ morie_tftnet <- function(a, w1, b1, w2, b2, w4, b4, w5, b5, wsel, bsel,
 #' @return list(forecast, temporal, global, horizon, p, encdim, nfeat,
 #'   first, last, mean)
 #' @export
+#' @examples
+#' set.seed(4)
+#' y <- rnorm(6)
+#' enc <- list(w1 = matrix(rnorm(36, 0, 0.3), 6, 6), b1 = rep(0, 6),
+#'             w2 = matrix(rnorm(36, 0, 0.3), 6, 6), b2 = rep(0, 6),
+#'             wskip = diag(6))
+#' dec <- list(w1 = matrix(rnorm(36, 0, 0.3), 6, 6), b1 = rep(0, 6),
+#'             w2 = matrix(rnorm(24, 0, 0.3), 4, 6), b2 = rep(0, 4),
+#'             wskip = matrix(rnorm(24, 0, 0.3), 4, 6))
+#' tdec <- list(w1 = matrix(rnorm(4, 0, 0.3), 2, 2), b1 = rep(0, 2),
+#'              w2 = matrix(rnorm(2, 0, 0.3), 1, 2), b2 = 0,
+#'              wskip = matrix(rnorm(2, 0, 0.3), 1, 2))
+#' r <- morie_tide(y, feats = NULL, fproj = NULL, enc = enc, dec = dec,
+#'                 tdec = tdec,
+#'                 wglobal = matrix(rnorm(12, 0, 0.3), 2, 6), horizon = 2)
+#' str(r, max.level = 1)
 morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
   v <- .morie_jo_vec(y, "y")
   H <- as.integer(horizon)
@@ -1581,6 +1706,15 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
 #' @return list(forecast, mixed, nchannels, L, horizon, mean, first,
 #'   last, sumsq)
 #' @export
+#' @examples
+#' set.seed(5)
+#' x <- list(rnorm(8), rnorm(8))
+#' r <- morie_tsmixer(x,
+#'                    wtime = matrix(rnorm(64, 0, 0.3), 8, 8), btime = rep(0, 8),
+#'                    wfeat = matrix(rnorm(4, 0, 0.3), 2, 2), bfeat = rep(0, 2),
+#'                    wproj = matrix(rnorm(24, 0, 0.3), 3, 8), bproj = rep(0, 3),
+#'                    horizon = 3)
+#' str(r, max.level = 1)
 morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) {
   chans <- lapply(x, .morie_jo_vec)
   C <- length(chans)
@@ -1629,6 +1763,18 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
 #' @return list(forecast, attn, tokens, nvariates, T, D, horizon,
 #'   attndiag, mean, first, sumsq)
 #' @export
+#' @examples
+#' set.seed(6)
+#' x <- list(rnorm(8), rnorm(8))
+#' r <- morie_itrans(x,
+#'                   wembed = matrix(rnorm(32, 0, 0.3), 4, 8), bembed = rep(0, 4),
+#'                   wq = matrix(rnorm(8, 0, 0.4), 2, 4),
+#'                   wk = matrix(rnorm(8, 0, 0.4), 2, 4),
+#'                   wv = matrix(rnorm(16, 0, 0.4), 4, 4),
+#'                   wffn1 = matrix(rnorm(16, 0, 0.4), 4, 4), bffn1 = rep(0, 4),
+#'                   wffn2 = matrix(rnorm(16, 0, 0.4), 4, 4), bffn2 = rep(0, 4),
+#'                   wproj = matrix(rnorm(8, 0, 0.4), 2, 4), bproj = rep(0, 2))
+#' str(r, max.level = 1)
 morie_itrans <- function(x, wembed, bembed, wq, wk, wv, wffn1, bffn1,
                          wffn2, bffn2, wproj, bproj) {
   chans <- lapply(x, .morie_jo_vec)

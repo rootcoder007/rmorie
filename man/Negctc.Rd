@@ -35,6 +35,10 @@ The estimate is the OLS coefficient on \code{D} in
 standard error \eqn{sqrt(s^2 (X primeX)^-1_DD)}, \code{s^2 = RSS/(n - p)},
 and the test is the Wald z-test of \code{b_D = 0}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Negctc(V, V)
+}
 \references{
 Lipsitch, Tchetgen Tchetgen and Cohen (2010), Epidemiology
 21(3), 383-388, \doi{10.1097/EDE.0b013e3181d61eeb}, verified against
@@ -42,8 +46,4 @@ Crossref; Shi, Miao and Tchetgen Tchetgen (2020), Current
 Epidemiology Reports 7, 190-202, \doi{10.1007/s40471-020-00243-4}.
 Neither paper was in the local corpus; the estimator is ordinary
 least squares and the test is the standard Wald one.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Negctc(V, V)
 }

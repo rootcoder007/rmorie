@@ -26,6 +26,8 @@
 #' @references Robins, J., Li, L., Mukherjee, R., Tchetgen Tchetgen, E.
 #'   & van der Vaart, A. (2017). Annals of Statistics 45(5).
 #' @export
+#' @examples
+#' Tmlres(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlres <- function(y, D, X) {
   yv <- as.numeric(y); Dv <- as.numeric(D); n <- length(yv)
   if (n < 3L || length(Dv) != n)

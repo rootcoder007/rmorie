@@ -30,11 +30,11 @@ normal vector.
 Formula: f = L Z with L L' = K, K_ij = var exp(-(x_i - x_j)^2 /
 (2 length^2)), Z iid N(0, 1).
 }
-\references{
-Ghosal & van der Vaart (2017), Fundamentals of
-Nonparametric Bayesian Inference, CUP, section 2.2.1.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ghosalgppriordef(V)
+}
+\references{
+Ghosal & van der Vaart (2017), Fundamentals of
+Nonparametric Bayesian Inference, CUP, section 2.2.1.
 }

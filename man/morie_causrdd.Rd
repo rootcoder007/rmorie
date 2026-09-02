@@ -35,14 +35,14 @@ Lemieux 2008, Sec. 4).  Local LINEAR rather than local constant
 fitting is what removes the first-order boundary bias (Fan and
 Gijbels 1996, Ch. 3).
 }
-\references{
-Hahn, J., Todd, P. and van der Klaauw, W. (2001).
-Identification and estimation of treatment effects with a
-regression-discontinuity design. Econometrica, 69(1), 201-209.
-}
 \examples{
 set.seed(1)
 x <- runif(200, -1, 1)
 y <- 0.5 * x + (x >= 0) * 0.3 + rnorm(200) * 0.1
 morie_causrdd(x, y)
+}
+\references{
+Hahn, J., Todd, P. and van der Klaauw, W. (2001).
+Identification and estimation of treatment effects with a
+regression-discontinuity design. Econometrica, 69(1), 201-209.
 }

@@ -26,6 +26,9 @@
 #'   and Adams (2010), Slice sampling covariance hyperparameters of
 #'   latent Gaussian models, NIPS 23, arXiv:1006.0868.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gpregb(V, V)
 Gpregb <- function(X, y, kernel = NULL, X_test = NULL, lengthscales = NULL,
                    noises = NULL, variance = 1) {
   A <- .s03mat(X); yv <- .s03vec(y)

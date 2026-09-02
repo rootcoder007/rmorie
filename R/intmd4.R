@@ -24,6 +24,8 @@
 #' @references VanderWeele, T. J. (2014). A unification of mediation and
 #'   interaction: a 4-way decomposition. Epidemiology 25:749-761.
 #' @export
+#' @examples
+#' Intmd4(X = 5L, M = 5L, Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 Intmd4 <- function(X, M, Y, Cc = NULL, a = 1, astar = 0, m = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- .s4_fourway(mm$theta, mm$beta, mm$cbar, a, astar, m)

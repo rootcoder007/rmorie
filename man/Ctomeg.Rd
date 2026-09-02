@@ -28,12 +28,12 @@ theta_i = S_ii - lambda_i^2 the unique variances.  Under
 tau-equivalence (all loadings equal) omega coincides with Cronbach's
 alpha; otherwise omega is the larger of the two.
 }
-\references{
-McDonald (1999), Test Theory: A Unified Treatment,
-Erlbaum, ch. 6.
-}
 \examples{
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 S <- c("a", "b", "c")
 Ctomeg(M, S)
+}
+\references{
+McDonald (1999), Test Theory: A Unified Treatment,
+Erlbaum, ch. 6.
 }

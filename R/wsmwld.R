@@ -15,6 +15,8 @@
 #'   equation (10.5), with Theorem 10.4 giving the asymptotic size.
 #'   Fetched as the full text of the book.
 #' @export
+#' @examples
+#' Waldstat(theta_hat = c(1, 2, 3, 4, 5, 6, 7, 8), se = 5L)
 Waldstat <- function(theta_hat, se, theta0 = 0, level = 0.95) {
   se <- as.numeric(se)
   if (se <= 0) stop("the standard error must be positive")

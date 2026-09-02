@@ -26,11 +26,6 @@ resampled draws with replacement, P(i) proportional to w_i, via
 one uniform per draw and inverse-CDF on the unnormalized cumulative
 weights (bit-identical to the Python arm).
 }
-\references{
-Rubin, D. B. (1988), in Bayesian Statistics 3, Oxford
-UP, 395-402; Smith, A. F. M. and Gelfand, A. E. (1992), The
-American Statistician 46(2), 84-88.
-}
 \examples{
 set.seed(1)
 xs <- rnorm(500, 0, 2)
@@ -38,4 +33,9 @@ r <- Bayisr(xs, log_target = function(x) -0.5 * x^2,
             log_proposal = function(x) -0.5 * (x / 2)^2 - log(2),
             m = 100)
 str(r, max.level = 1)
+}
+\references{
+Rubin, D. B. (1988), in Bayesian Statistics 3, Oxford
+UP, 395-402; Smith, A. F. M. and Gelfand, A. E. (1992), The
+American Statistician 46(2), 84-88.
 }

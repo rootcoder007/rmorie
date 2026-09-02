@@ -38,6 +38,9 @@
 #'   proportion of the heritability for human height. Nature
 #'   Genetics, 42, 565-569.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_yangr(V)
 morie_yangr <- function(marker_matrix, freq = NULL, yang_diagonal = FALSE) {
   M <- as.matrix(marker_matrix)
   storage.mode(M) <- "double"

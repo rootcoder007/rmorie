@@ -21,6 +21,9 @@
 #'   Lecture Notes in Computer Science 6667:435-446.
 #'   \doi{10.1007/978-3-642-24785-9_37}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otsd(V, V)
 Otsd <- function(X, Y, p = 2, n_proj = 32) {
   A <- as.matrix(X); B <- as.matrix(Y)
   if (ncol(A) != ncol(B)) stop("point clouds must share a dimension")

@@ -23,6 +23,9 @@
 #'   experimental selection correction estimator. arXiv:2006.09676,
 #'   equations (2.3) and (2.4), page 10.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drrct(y_obs = rnorm(10), y_rct = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drrct <- function(y_obs, y_rct, D, X = NULL, G = NULL) {
   yp <- .s03vec(y_obs); ys <- .s03vec(y_rct); dv <- .s03vec(D)
   n <- length(yp)

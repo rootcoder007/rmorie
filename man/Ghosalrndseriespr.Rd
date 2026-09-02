@@ -32,10 +32,10 @@ evidence for each K is conjugate, so the whole posterior on K is exact.
 Formula: pi(K | y) propto exp(log m_K(y) - lam K log n); the reported
 estimate is the posterior mean sum_K K pi(K | y).
 }
+\examples{
+Ghosalrndseriespr()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.
-}
-\examples{
-Ghosalrndseriespr()
 }

@@ -20,6 +20,11 @@
 #'   Bayesian Data Analysis, 3rd edition, Section 4.1 and Chapter 16.
 #'   Fetched as the full text of the book from the author's own copy.
 #' @export
+#' @examples
+#' set.seed(1)
+#' X <- cbind(1, matrix(rnorm(40), 20, 2))
+#' y <- rbinom(20, 1, 0.5)
+#' Bayeslogit(X, y)
 Bayeslogit <- function(X, y, prior_sd = 10, iters = 50, tol = 1e-12) {
   X <- as.matrix(X); y <- .t1_vec(y); n <- nrow(X)
   if (length(y) != n) stop("X and y must have the same number of rows")

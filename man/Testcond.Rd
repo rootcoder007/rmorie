@@ -11,7 +11,7 @@ Testcond(prior_ball, log_entropy, sieve_mass, eps_bar, eps, n, Cconst)
 
 \item{log_entropy}{log N(xi eps_n, P_\{n,1\}, d), non-negative.}
 
-\item{sieve_mass}{Pi_n(P_\{n,2\}), in [0, 1].}
+\item{sieve_mass}{Pi_n(P_\{n,2\}), in \link{0, 1}.}
 
 \item{eps_bar}{ebar_n, positive.}
 
@@ -36,13 +36,13 @@ Formula: (i) Pi_n(B_2(p_0, ebar_n)) >= e^\{-C n ebar_n^2\};
 (ii) log N(xi eps_n, P_\{n,1\}, d) <= n eps_n^2;
 (iii) Pi_n(P_\{n,2\}) <= e^\{-(C + 4) n ebar_n^2\}
 }
+\examples{
+Testcond(prior_ball = 0.5, log_entropy = 10, sieve_mass = 0.1,
+         eps_bar = 0.1, eps = 0.2, n = 100, Cconst = 1)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, Theorem 8.9, Section 8.2,
 conditions (8.4), (8.5) and (8.6). Read from the copy of the book
 held in the corpus.
-}
-\examples{
-Testcond(prior_ball = 0.5, log_entropy = 10, sieve_mass = 0.1,
-         eps_bar = 0.1, eps = 0.2, n = 100, Cconst = 1)
 }

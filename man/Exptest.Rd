@@ -25,12 +25,12 @@ not a proof of a rate.
 Formula: C_0 = -log(P_0^n phi_n)/n, C_1 = -log(sup P^n(1 - phi_n))/n,
 C = min(C_0, C_1)
 }
+\examples{
+Exptest(err_null = 0.1, err_alt = 0.2, n = 100)
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, Theorem 6.16 (Schwartz) and its
 proof, which invokes Lemma D.11. Read from the copy of the book held
 in the corpus.
-}
-\examples{
-Exptest(err_null = 0.1, err_alt = 0.2, n = 100)
 }

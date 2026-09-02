@@ -31,13 +31,13 @@ removes the negative weights that make dynamic two-way fixed effects
 uninterpretable under heterogeneous effects.  Each horizon is
 estimated by the doubly robust moment of Sant'Anna and Zhao (2020).
 }
+\examples{
+Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Dube, A., Girardi, D., Jorda, O. and Taylor, A. M. (2023).
 A local projections approach to difference-in-differences. NBER
 Working Paper 31184, equation (8); Journal of Applied Econometrics
 40(7), 741-758 (2025).  Sant'Anna, P. H. C. and Zhao, J. (2020).
 Journal of Econometrics 219(1), 101-122, equation (2.6).
-}
-\examples{
-Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

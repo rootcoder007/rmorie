@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.3.4.
 #' @export
+#' @examples
+#' Ghosalmixbp()
 Ghosalmixbp <- function(lambdas = c(0.5, 1, 2), weights = NULL, c = 3,
                         t = 1) {
   ls <- as.numeric(lambdas)

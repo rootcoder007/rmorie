@@ -20,12 +20,12 @@ Returns \eqn{a \log(1 + f)}, the Laplace exponent of a gamma process
 with unit rate evaluated at the test function value \code{f}; the
 Laplace transform itself is \eqn{\exp(-a \log(1 + f))}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_gh_crm_laplace_gamma(V, V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_gh_crm_laplace_gamma(V, V)
 }

@@ -20,6 +20,8 @@
 #'   Nonparametric Bayesian Inference, CUP, Example 11.11 and
 #'   section 11.5.
 #' @export
+#' @examples
+#' Ghosalrescalgp()
 Ghosalrescalgp <- function(lengths = c(2, 1, 0.25), h = 0.3) {
   lengths <- as.numeric(lengths)
   if (length(lengths) == 0L) stop("lengths must be non-empty")

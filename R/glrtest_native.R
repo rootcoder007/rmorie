@@ -69,6 +69,9 @@
 #'   quality control and dynamical systems. Journal of the Royal
 #'   Statistical Society B, 57(4), 613-658.
 #' @export
+#' @examples
+#' set.seed(1)
+#' morie_glrtest(x = rbinom(50, 1, 0.5), p0 = 0.3, p1 = 0.6)
 morie_glrtest <- function(x, p0, p1, threshold = NULL, family = "bernoulli",
                       sd = 1) {
   x <- as.numeric(x)

@@ -26,6 +26,9 @@
 #'   big data, UAI 2013, arXiv:1309.6835; Titsias (2009), AISTATS 2009,
 #'   PMLR 5:567-574.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Gpsvi(V, V)
 Gpsvi <- function(X, y, X_test = NULL, inducing = NULL, batch_size = NULL,
                   lengthscale = 1, variance = 1, noise = 0.1, jitter = 1e-9) {
   A <- .s03mat(X); yv <- .s03vec(y)

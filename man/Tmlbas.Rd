@@ -29,10 +29,10 @@ Formula: \code{H = D/g - (1 - D)/(1 - g)},
 \code{eps = sum H (y - Q) / sum H^2}, \code{Q* = Q + eps H},
 \code{psi = mean[Q*(1, W) - Q*(0, W)]}.
 }
+\examples{
+Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Tsiatis, A. A. et al. (2008). Statistics in Medicine
 27:4658-4677; van der Laan, M. J. & Rubin, D. (2006). IJB 2(1):11.
-}
-\examples{
-Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

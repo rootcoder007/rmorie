@@ -20,6 +20,9 @@
 #'   edition, was fetched in full and searched; it predates
 #'   simulation-based calibration and does NOT contain it.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Sbcrank(V, V)
 Sbcrank <- function(prior_draw, post_draws, bins = NULL) {
   pd <- .t1_vec(prior_draw); P <- as.matrix(post_draws)
   J <- length(pd)

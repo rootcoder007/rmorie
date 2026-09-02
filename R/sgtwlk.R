@@ -19,6 +19,9 @@
 #' @references Weisfeiler & Leman (1968) Nauchno-Tekh Inform 2(9):12-16;
 #'   Xu, Hu, Leskovec & Jegelka (2019) ICLR.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Sgtwlk(V)
 Sgtwlk <- function(A, labels0 = NULL, max_iter = 3) {
   Am <- as.matrix(A); n <- nrow(Am)
   lab <- if (is.null(labels0)) rep(0L, n) else as.integer(round(as.numeric(labels0)))

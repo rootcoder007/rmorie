@@ -22,8 +22,8 @@ solver: two arms calling two different least-squares routines is the
 easiest way to lose the last digits, and the 2-by-2 normal equations
 have an exact solution.
 }
-\keyword{internal}
 \examples{
 set.seed(1)
 r <- .rd_wls(r = rnorm(10), y = rnorm(10), w = matrix(rnorm(20), 5, 4)); TRUE
 }
+\keyword{internal}

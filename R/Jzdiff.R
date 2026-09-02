@@ -23,6 +23,8 @@
 #'   Transactions on Information Theory 49(7):1858-1860.
 #'   \doi{10.1109/TIT.2003.813506}
 #' @export
+#' @examples
+#' Jzdiff(y = 5L, p = 0.5, q = 0.5)
 Jzdiff <- function(y, p, q) {
   pv <- .s03vec(p); qv <- .s03vec(q)
   if (length(pv) == 0L) stop("jenson_zhang_disparity: p is empty")

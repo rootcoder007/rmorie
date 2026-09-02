@@ -1,19 +1,19 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Lasso by cyclic coordinate descent
-#'
-#' The L1 penalty is not differentiable at zero, and that is the point:
-#' the subgradient condition lets a coefficient sit exactly at zero over a
-#' whole range of correlations, so the fit selects as it shrinks. Cyclic
-#' coordinate descent exploits the fact that each one-dimensional
-#' subproblem has the closed-form soft-threshold solution, so no
-#' quadratic program is needed.
-#'
-#' Columns with no variation are left unpenalised: shrinking an intercept
-#' towards zero is a statement about the origin of the response scale, not
-#' about model complexity.
-#'
-#' Formula: \code{min_beta 0.5 ||y - X beta||^2 + lambda ||beta||_1},
-#' cycled as \eqn{beta_j <- S(x_j primer + ||x_j||^2 beta_j, lambda) /
+# Lasso by cyclic coordinate descent
+#
+# The L1 penalty is not differentiable at zero, and that is the point:
+# the subgradient condition lets a coefficient sit exactly at zero over a
+# whole range of correlations, so the fit selects as it shrinks. Cyclic
+# coordinate descent exploits the fact that each one-dimensional
+# subproblem has the closed-form soft-threshold solution, so no
+# quadratic program is needed.
+#
+# Columns with no variation are left unpenalised: shrinking an intercept
+# towards zero is a statement about the origin of the response scale, not
+# about model complexity.
+#
+# Formula: \code{min_beta 0.5 ||y - X beta||^2 + lambda ||beta||_1},
+# cycled as \eqn{beta_j <- S(x_j primer + ||x_j||^2 beta_j, lambda) /
 # prime ||x_j||^2} with \code{S} the soft-threshold -- Tibshirani (1996);
 #' Hastie, Tibshirani and Friedman, The Elements of Statistical Learning,
 #' section 3.4.2. The penalty is on the same scale as n times glmnet's.
@@ -29,6 +29,8 @@
 #' @references Tibshirani, R. (1996). Journal of the Royal Statistical
 #'   Society Series B 58(1):267-288. \doi{10.1111/j.2517-6161.1996.tb02080.x}.
 #' @export
+#' @examples
+#' Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 Esllso <- function(X, y, lambda_, max_iter = 10000, tol = 1e-12) {
   X <- as.matrix(X); y <- as.numeric(y)
   lam <- as.numeric(lambda_)

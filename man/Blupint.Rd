@@ -25,12 +25,12 @@ List with u, shrink, nj, groupmean, levels, vpc, J, n.
 \description{
 uhat_j = (s2u / (s2u + s2e/n_j)) * mean_j(y - X beta).
 }
+\examples{
+set.seed(1)
+Blupint(y = rnorm(30), group = rep(1:5, each = 6), s2u = 1, s2e = 1)
+}
 \references{
 Henderson (1975), Biometrics 31(2), 423-447; Robinson
 (1991), Statistical Science 6(1), 15-32.  Standard published form;
 neither article is in the local corpus and neither was read.
-}
-\examples{
-set.seed(1)
-Blupint(y = rnorm(30), group = rep(1:5, each = 6), s2u = 1, s2e = 1)
 }

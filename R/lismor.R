@@ -10,6 +10,9 @@
 #' @return List with ``local``, ``global_i``, ``m2``, ``z``, ``lag``, ``n``.
 #' @references Anselin (1995), Local Indicators of Spatial Association -- LISA, Geographical Analysis 27(2):93-115, formula (12) p.99. The article is paywalled; the formula and the divide-by-n variance convention were taken from spdep::localmoran, the reference implementation, which cites that equation explicitly.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Localmoran(V, V)
 Localmoran <- function(x, W, mlvar = TRUE) {
   x <- .t1_vec(x); W <- as.matrix(W); n <- length(x)
   z <- x - mean(x)

@@ -12,6 +12,8 @@
 #' @return List with \code{estimate}, \code{k}, \code{q}.
 #' @references Tsallis, C. (1988). J Stat Phys 52:479-487, equation (1).
 #' @export
+#' @examples
+#' Tsalls(p = 0.5, q = 0.5)
 Tsalls <- function(p, q) {
   v <- as.numeric(unlist(p))
   pp <- v / sum(v)

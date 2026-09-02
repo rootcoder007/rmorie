@@ -22,9 +22,9 @@ exactly \eqn{k} cycles, by
 \eqn{c(n,k) = (n-1) c(n-1,k) + c(n-1,k-1)}. With \code{signed} the result
 is \eqn{s(n,k) = (-1)^{n-k} c(n,k)}.
 }
-\references{
-Stanley RP (2011) vol. 1, Sec 1.3.
-}
 \examples{
 morie_stirling_first(n = 5L)
+}
+\references{
+Stanley RP (2011) vol. 1, Sec 1.3.
 }

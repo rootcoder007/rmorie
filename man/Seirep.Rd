@@ -42,11 +42,11 @@ infectious.  Population \code{N = S + E + I + R} is conserved.
 Integrated with classical fourth-order Runge-Kutta at a fixed step, so the
 result is deterministic and identical in every language arm.
 }
+\examples{
+Seirep(S = 990, E = 10, I = 0, R = 0, beta = 0.3, sigma = 0.2, gamma = 0.1)
+}
 \references{
 Hethcote, H. W. (2000). The mathematics of infectious
 diseases. SIAM Review 42(4), 599-653.
 \doi{10.1137/S0036144500371907}
-}
-\examples{
-Seirep(S = 990, E = 10, I = 0, R = 0, beta = 0.3, sigma = 0.2, gamma = 0.1)
 }

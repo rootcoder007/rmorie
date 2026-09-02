@@ -32,10 +32,10 @@ can only raise the cost, so \code{MW_2 >= W_2} always.
 Formula: \code{MW_2^2 = min_{w in Pi(p,q)} sum_kl w_kl W_2^2(N(m_k,S_k),
 N(m'_l,S'_l))} -- Delon and Desolneux (2020) Definition 4.1.
 }
+\examples{
+Otmxh(mus1 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas1 = c(1, 2, 3, 4, 5, 6, 7, 8), w1 = c(1, 2, 3, 4, 5, 6, 7, 8), mus2 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas2 = c(1, 2, 3, 4, 5, 6, 7, 8), w2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Delon, J. and Desolneux, A. (2020). SIAM Journal on Imaging
 Sciences 13(2):936-970. \doi{10.1137/19M1301047}.
-}
-\examples{
-Otmxh(mus1 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas1 = c(1, 2, 3, 4, 5, 6, 7, 8), w1 = c(1, 2, 3, 4, 5, 6, 7, 8), mus2 = c(1, 2, 3, 4, 5, 6, 7, 8), Sigmas2 = c(1, 2, 3, 4, 5, 6, 7, 8), w2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

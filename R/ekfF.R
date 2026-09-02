@@ -32,6 +32,11 @@
 #'   Systems 3:293-340; Jazwinski (1970), Stochastic Processes and
 #'   Filtering Theory, Academic Press.
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- matrix(cumsum(rnorm(20)), 20, 1)
+#' EkfF(y, f = function(x) x, h = function(x) x, F = matrix(1), H = matrix(1),
+#'      Q = matrix(0.1), R = matrix(1))
 EkfF <- function(y, f, h, F, H, Q, R, x0 = NULL, P0 = NULL) {
   .ekf_mat <- function(A) {
     if (is.matrix(A)) return(matrix(as.numeric(A), nrow(A), ncol(A)))

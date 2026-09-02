@@ -29,16 +29,16 @@ functions are computed on disjoint subsamples, so the variance of the
 contrast is the sum of the level variances.
 }
 \details{
-Formula: tau = E[(w1(D) - w0(D, X; pi)) (dY - mu_0(X))] within levels.
+Formula: tau = E\link{(w1(D) - w0(D, X; pi)) (dY - mu_0(X))} within levels.
+}
+\examples{
+set.seed(1)
+Itrct1(y = rnorm(40), D = rbinom(40, 1, 0.5), V = rbinom(40, 1, 0.5),
+       X = matrix(rnorm(80), 40, 2))
 }
 \references{
 Sant'Anna and Zhao (2020), Doubly robust
 difference-in-differences estimators, Journal of Econometrics
 219(1):101-122, \doi{10.1016/j.jeconom.2020.06.003}; Hernan and
 Robins (2020), Causal Inference: What If, chapter 13.
-}
-\examples{
-set.seed(1)
-Itrct1(y = rnorm(40), D = rbinom(40, 1, 0.5), V = rbinom(40, 1, 0.5),
-       X = matrix(rnorm(80), 40, 2))
 }

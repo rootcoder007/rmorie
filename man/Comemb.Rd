@@ -46,10 +46,10 @@ straight back, the in-out parameter q penalises leaving the
 neighbourhood of the previous node.  At p = q = 1 all weights are
 equal and the walk degenerates to DeepWalk.
 }
-\references{
-Grover & Leskovec (2016), node2vec, KDD 2016:855-864.
-}
 \examples{
 G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
 Comemb(G, dim = 4, walk_len = 5, n_walks = 2)
+}
+\references{
+Grover & Leskovec (2016), node2vec, KDD 2016:855-864.
 }

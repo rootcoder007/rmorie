@@ -32,12 +32,12 @@ tests check.
 \details{
 Formula: R0 = rho(C diag(1/gamma)).
 }
+\examples{
+Hetmix(contact_matrix = 5L, gamma = 0.5)
+}
 \references{
 Diekmann and Heesterbeek (2000), Mathematical
 Epidemiology of Infectious Diseases, Wiley, ch. 5; Diekmann,
 Heesterbeek and Metz (1990), Journal of Mathematical Biology
 28(4):365-382. \doi{10.1007/BF00178324}
-}
-\examples{
-Hetmix(contact_matrix = 5L, gamma = 0.5)
 }

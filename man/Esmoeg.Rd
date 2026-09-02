@@ -37,11 +37,11 @@ the standard alternating scheme: free positions of H are refilled from
 the current rotated solution, then the Procrustes step repeats, until
 T stops moving.  Free positions are marked NA.
 }
-\references{
-Asparouhov & Muthen (2009), Structural Equation Modeling
-16(3):397-438, doi:10.1080/10705510903008204.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Esmoeg(V, V)
+}
+\references{
+Asparouhov & Muthen (2009), Structural Equation Modeling
+16(3):397-438, doi:10.1080/10705510903008204.
 }

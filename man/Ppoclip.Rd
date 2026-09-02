@@ -43,7 +43,7 @@ n, method.
 \description{
 Schulman, Wolski, Dhariwal, Radford and Klimov (2017), Proximal policy
 optimization algorithms, arXiv:1707.06347 (FETCHED as PDF), equation
-(7): L^CLIP = E_t[min(r_t A_t, clip(r_t, 1 - eps, 1 + eps) A_t)] with
+(7): L^CLIP = E_t\link{min(r_t A_t, clip(r_t, 1 - eps, 1 + eps) A_t)} with
 r_t = pi_theta(a_t|s_t) / pi_old(a_t|s_t), the paper taking the minimum
 so the objective is a lower bound on the unclipped one.  Equation (9)
 adds the value and entropy terms, L^(CLIP+VF+S) = E_t[L^CLIP - c1 L^VF

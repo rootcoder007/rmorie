@@ -25,6 +25,9 @@
 #'   Imputation of Missing Data, 2nd ed., Chapman & Hall/CRC.
 #'   Barnard, J. and Rubin, D. B. (1999). Biometrika, 86, 948-955.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_miefcl(V, V)
 morie_miefcl <- function(estimates, variances, nu_com = NULL) {
   q <- as.numeric(estimates)
   u <- as.numeric(variances)

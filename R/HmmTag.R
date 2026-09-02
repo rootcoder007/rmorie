@@ -22,6 +22,13 @@
 #'   Press, ch. 3; Viterbi (1967), IEEE Transactions on Information
 #'   Theory 13(2):260-269. \doi{10.1109/TIT.1967.1054010}
 #' @export
+#' @examples
+#' X <- c(0, 1, 2, 1, 0)
+#' tagset <- c("N", "V")
+#' start <- c(0.5, 0.5)
+#' trans <- matrix(c(0.7, 0.3, 0.4, 0.6), 2, 2, byrow = TRUE)
+#' emit <- matrix(c(0.3, 0.4, 0.3, 0.2, 0.3, 0.5), 2, 3, byrow = TRUE)
+#' HmmTag(X, tagset, start, trans, emit)
 HmmTag <- function(X, tagset, start = NULL, trans = NULL, emit = NULL) {
   xs <- as.integer(.s03vec(X))
   T <- length(xs)

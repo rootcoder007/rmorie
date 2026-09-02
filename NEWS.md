@@ -1,3 +1,69 @@
+# rmorie 1.1.7 (development, feat/native-specializations)
+
+## Wave 3: every ledger module implemented three-way
+
+* The 567-module wave-3 ledger reports zero template stubs: each module
+  has a Python arm, a morie R arm and an rmorie R arm, executed on
+  identical inputs and compared key by key at twelve digits, with
+  falsifiable anchors checked in every arm. 49 suites, 23,270 quantities,
+  0 differing (2026-08-16).
+* Nineteen modules are deliberately held with a written reason each
+  (architecture-with-trained-weights, fabricated-by-construction, or a
+  primary source that does not state the rule); none is shipped as a stub.
+
+## Documentation reconciliation (2026-09-01)
+
+* `man/` and `NAMESPACE` are generated from the `R/` roxygen again. The
+  docs marathon had written about 1,950 `\examples{}` blocks straight into
+  `.Rd` files and hand-appended exports to `NAMESPACE`; both were lifted
+  back into the sources (`@examples` on the function's block, exports
+  only from `@export`), so `roxygenise()` reproduces the tree exactly.
+* 25 human-written roxygen blocks had been orphaned above helper
+  functions and were silently merged into the next helper's page (roxygen
+  joins every `#'` line between two expressions). They are re-attached to
+  the functions they document (`morie_estimate_aipw()`, `morie_mtr2sx()`,
+  `morie_haldane()`, `.fit_propensity()` and others); the stray export
+  names that the merge produced are gone.
+* Documentation for the compiled entry points lives in `R/rcpp_docs.R`
+  (documentation-only stubs); `R/RcppExports.R` is pure generated glue
+  again, so `Rcpp::compileAttributes()` no longer deletes any docs.
+* `rmorie` no longer pulls in 'jsonlite' or 'digest' through
+  rmoriebricklayer: rmoriebricklayer 0.3.8 hashes with its compiled
+  SHA-256 core and reads/writes JSON with a native codec. The stale
+  `requireNamespace("jsonlite")` guard in `morie_fetch_tps()` is removed.
+
+## Documentation marathon
+
+* Every function definition in `R/` now has roxygen, an `.Rd` page and a
+  `\value`; 0 unparseable pages, 0 `checkRd` findings. `@param` text is
+  derived from the body and quotes its evidence. Executable `\examples`
+  were added in execution-gated batches; network loaders use
+  `\donttest{}` with real arguments. Gaps that remain are counted, not
+  hidden.
+
+## Fixed (found by executing paths that had never run)
+
+* `changepoint_rjmcmc()`: the uniform stream returned the same number
+  forever (rmorie), the birth/death slices used descending colons at
+  k = 0, the interval search stopped one edge short, and the reverse-move
+  probability indexed one entry low (log 0, births never accepted). The
+  sampler is now byte-identical across the two R arms and mirrors the
+  Python arm: same stream, same k posterior.
+* `morie_survnnr_fit()`: backprop took an outer product against a nested
+  list; the input activation was stored as `list(list(a))`.
+* `mqtmpl` `method = "em"`: was a Haley-Knott regression on a genotype
+  probability that ignored each individual's flanking markers (every row
+  identical, LOD all NA). Now the Lander-Botstein EM the Python arm
+  implements, per-individual backcross probabilities, cM positions;
+  the three arms agree to 1e-10 on a shared anchor.
+* Native Parquet reader: an OPTIONAL BYTE_ARRAY column read its own
+  definition levels as its first string (`"d\001"`) and dropped its last
+  row; the schema's repetition type now decides and 1-bit RLE/bit-packed
+  levels are decoded and spliced (nulls become `NA`).
+* `VERSION_INVENTORY.csv` regenerated (the drift check would have failed).
+
+* `morie_estimate_plr()` reported its method as "(morie native)" inside rmorie; it is "(rmorie native)".
+
 # rmorie 1.1.6 - 2026-07-22
 
 ## Patch release: 07-22 hardening + CRAN prep (lockstep with morie 1.1.6)

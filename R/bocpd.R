@@ -13,6 +13,9 @@
 #' @return List with ``cp_prob`` (P(r_t = 1) at each t), ``reset_prob``, ``run_length`` (posterior mode), ``max_cp_prob``, ``hazard``, ``n``.
 #' @references Adams and MacKay (2007), Bayesian Online Changepoint Detection, arXiv:0710.3742. Equations (2)-(5) for the recursion and the changepoint prior, Section 2.3 and Algorithm 1 for the conjugate-exponential update of the run-specific sufficient statistics. Verified against the paper.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bocpd(V)
 Bocpd <- function(x, hazard = 0.004, mu0 = 0, kappa0 = 1, alpha0 = 1, beta0 = 1) {
   x <- .t1_vec(x); n <- length(x); H <- as.numeric(hazard)
   mu <- mu0; kap <- kappa0; al <- alpha0; be <- beta0; R <- 1

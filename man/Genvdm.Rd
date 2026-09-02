@@ -27,9 +27,9 @@ makes the D study a decision tool.
 Formula: E rho^2(n) = var_p / (var_p + var_pi/n);
 Phi(n) = var_p / (var_p + (var_i + var_pi)/n).
 }
-\references{
-Brennan (2001), Generalizability Theory, Springer, ch. 3.
-}
 \examples{
 Genvdm(c(0.5, 0.2, 0.3), n_proposed = 20)
+}
+\references{
+Brennan (2001), Generalizability Theory, Springer, ch. 3.
 }

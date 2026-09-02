@@ -116,6 +116,9 @@
 #'   Source: fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
 #'   changepoint-linear-cost.pdf
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Pelt(V)
 Pelt <- function(x, cost = "mean", penalty = NULL, min_seglen = 1L) {
   x <- as.numeric(x)
   n <- length(x)
@@ -159,6 +162,9 @@ Pelt <- function(x, cost = "mean", penalty = NULL, min_seglen = 1L) {
 #'   fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
 #'   changepoint-linear-cost.pdf
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Chgseg(V)
 Chgseg <- function(y, penalty = NULL) {
   out <- Pelt(y, cost = "mean", penalty = penalty)
   out$method <- "PELT mean-change segmentation (Killick et al. 2012, eq 3)"
@@ -189,6 +195,8 @@ Chgseg <- function(y, penalty = NULL) {
 #'   fetched-wave3/killick-fearnhead-eckley-2012-pelt-optimal-
 #'   changepoint-linear-cost.pdf
 #' @export
+#' @examples
+#' Binseg(x = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
 Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
   x <- as.numeric(x)
   n <- length(x)
@@ -404,6 +412,9 @@ Binseg <- function(x, K, cost = "mean", penalty = 0, min_seglen = 1L) {
 #'   Sections 2.1-2.4. Source: fetched-wave3/matteson-james-2014-
 #'   edivisive-nonparametric-changepoint.pdf
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' EDivisive(V)
 EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
                       max_cp = NULL, seed = 20260809) {
   Z <- if (is.matrix(x)) x else matrix(as.numeric(x), ncol = 1)
@@ -496,6 +507,9 @@ EDivisive <- function(x, sig = 0.05, R = 199L, alpha = 1, min_size = 2L,
 #'   Corollary 2. Source: fetched-wave3/harchaoui-moulines-bach-2008-
 #'   kernel-changepoint-analysis-nips.pdf
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' KernelCusum(V)
 KernelCusum <- function(x, kernel = "gaussian", threshold = NULL,
                         gamma = 0.1, bandwidth = NULL, kmin = 2L,
                         kmax = NULL) {

@@ -1,67 +1,67 @@
 # morie.fn -- function file (rootcoder007/morie)
-#' LTMLE: targeting the sequential regressions.
-#' 
-#' The g-computation estimand can be written as iterated conditional
-#' expectations: regress the outcome on the history at the last time
-#' point, evaluate that fit under the intervention rule, treat the result
-#' as the outcome one step earlier, and repeat. Estimating those
-#' regressions with machine learning gives a substitution estimator that
-#' is *not* asymptotically linear -- the bias of a data-adaptive fit does
-#' not vanish fast enough. Targeting fixes precisely that.
-#' 
-#' **Each step is a one-dimensional fluctuation.** Since the outcome
-#' regressions are bounded in :math:`[0,1]` (after scaling), the loss is
-#' the Bernoulli log-likelihood and the submodel is logistic with the
-#' initial fit as **offset**:
-#' 
-#' .. math:: \mathrm{logit}\,\bar Q_t(\epsilon) =
-#'           \mathrm{logit}\,\bar Q_t^0 + \epsilon\, H_t,
-#' 
-#' where the **clever covariate** :math:`H_t` is the inverse cumulative
-#' probability of following the rule through time :math:`t`,
-#' 
-#' .. math:: H_t = \frac{\prod_{s \le t}
-#'           I(A_s = d_s)}{\prod_{s \le t} g_s}.
-#' 
-#' Fitting :math:`\epsilon` by maximum likelihood makes the updated fit
-#' solve the efficient influence curve equation for that component; doing
-#' it at every time point, backwards, makes the whole estimator solve
-#' :math:`P_n D^* = 0`.
-#' 
-#' **Double robustness, stated exactly.** The estimator is consistent if
-#' *either* the sequential outcome regressions *or* the treatment
-#' mechanism are consistently estimated -- not both. The anchor exploits
-#' that: it breaks each arm separately and requires the estimate to
-#' survive, then breaks both and requires it to fail. Two wrong arms are
-#' the case that must not silently pass.
-#' 
-#' **Positivity is the binding constraint.** The clever covariate is an
-#' inverse probability; as the cumulative probability of the rule
-#' approaches zero it explodes, and the second-order remainder is bounded
-#' only when :math:`g_{0} > \delta > 0`. That is why the module reports
-#' the largest clever covariate rather than hiding it.
-#' 
-#' References
-#' ----------
-#' van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
-#' Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 4 (the
-#' g-computation formula as iterated conditional expectations; the
-#' efficient influence curve of the longitudinal parameter; the
-#' Bernoulli log-likelihood loss and the logistic submodel through the
-#' initial estimator with the clever covariate; the sequential definition
-#' of loss and submodel for each Q_t; the second-order remainder and the
-#' positivity condition g > delta > 0 that bounds it; and the use of a
-#' super learner containing the highly adaptive lasso as the initial
-#' estimator). Chap. 3 (the sequential regressions being targeted).
-#' 
-#' van der Laan, M. J. & Gruber, S. (2012) "Targeted minimum loss based
-#' estimation of causal effects of multiple time point interventions",
-#' *International Journal of Biostatistics* 8(1), Article 9,
-#' doi:10.1515/1557-4679.1370.
-#' 
-#' Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
-#' data and causal inference models", *Biometrics* 61(4), 962-973,
-#' doi:10.1111/j.1541-0420.2005.00377.x.
+# LTMLE: targeting the sequential regressions.
+# 
+# The g-computation estimand can be written as iterated conditional
+# expectations: regress the outcome on the history at the last time
+# point, evaluate that fit under the intervention rule, treat the result
+# as the outcome one step earlier, and repeat. Estimating those
+# regressions with machine learning gives a substitution estimator that
+# is *not* asymptotically linear -- the bias of a data-adaptive fit does
+# not vanish fast enough. Targeting fixes precisely that.
+# 
+# **Each step is a one-dimensional fluctuation.** Since the outcome
+# regressions are bounded in :math:`[0,1]` (after scaling), the loss is
+# the Bernoulli log-likelihood and the submodel is logistic with the
+# initial fit as **offset**:
+# 
+# .. math:: \mathrm{logit}\,\bar Q_t(\epsilon) =
+#           \mathrm{logit}\,\bar Q_t^0 + \epsilon\, H_t,
+# 
+# where the **clever covariate** :math:`H_t` is the inverse cumulative
+# probability of following the rule through time :math:`t`,
+# 
+# .. math:: H_t = \frac{\prod_{s \le t}
+#           I(A_s = d_s)}{\prod_{s \le t} g_s}.
+# 
+# Fitting :math:`\epsilon` by maximum likelihood makes the updated fit
+# solve the efficient influence curve equation for that component; doing
+# it at every time point, backwards, makes the whole estimator solve
+# :math:`P_n D^* = 0`.
+# 
+# **Double robustness, stated exactly.** The estimator is consistent if
+# *either* the sequential outcome regressions *or* the treatment
+# mechanism are consistently estimated -- not both. The anchor exploits
+# that: it breaks each arm separately and requires the estimate to
+# survive, then breaks both and requires it to fail. Two wrong arms are
+# the case that must not silently pass.
+# 
+# **Positivity is the binding constraint.** The clever covariate is an
+# inverse probability; as the cumulative probability of the rule
+# approaches zero it explodes, and the second-order remainder is bounded
+# only when :math:`g_{0} > \delta > 0`. That is why the module reports
+# the largest clever covariate rather than hiding it.
+# 
+# References
+# ----------
+# van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
+# Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 4 (the
+# g-computation formula as iterated conditional expectations; the
+# efficient influence curve of the longitudinal parameter; the
+# Bernoulli log-likelihood loss and the logistic submodel through the
+# initial estimator with the clever covariate; the sequential definition
+# of loss and submodel for each Q_t; the second-order remainder and the
+# positivity condition g > delta > 0 that bounds it; and the use of a
+# super learner containing the highly adaptive lasso as the initial
+# estimator). Chap. 3 (the sequential regressions being targeted).
+# 
+# van der Laan, M. J. & Gruber, S. (2012) "Targeted minimum loss based
+# estimation of causal effects of multiple time point interventions",
+# *International Journal of Biostatistics* 8(1), Article 9,
+# doi:10.1515/1557-4679.1370.
+# 
+# Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
+# data and causal inference models", *Biometrics* 61(4), 962-973,
+# doi:10.1111/j.1541-0420.2005.00377.x.
 
 #' .tlltmle_logit
 #'

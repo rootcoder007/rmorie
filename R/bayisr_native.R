@@ -34,6 +34,10 @@
 #'   statistics without tears. The American Statistician, 46(2),
 #'   84-88.
 #' @export
+#' @examples
+#' set.seed(1)
+#' morie_bayisr(samples = as.list(rnorm(100)), log_target = function(x) -0.5 * x^2,
+#'              log_proposal = function(x) -0.5 * x^2, m = 20)
 morie_bayisr <- function(samples, log_target, log_proposal, m, seed = 0) {
   xs <- as.list(samples)
   n <- length(xs)

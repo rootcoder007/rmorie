@@ -25,10 +25,10 @@ specification and the one the tabulated critical values belong to.
 \code{trend = FALSE} is refused rather than silently answered with
 trend-case critical values.
 }
-\references{
-Phillips and Perron (1988), Biometrika 75:335-346; coded form from tseries::pp.test.  See Pptest for the full note.
-}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 Pptrend(D)
+}
+\references{
+Phillips and Perron (1988), Biometrika 75:335-346; coded form from tseries::pp.test.  See Pptest for the full note.
 }

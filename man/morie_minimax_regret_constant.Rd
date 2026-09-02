@@ -26,10 +26,10 @@ The constant is solved rather than quoted. The two-figure 0.17 that
 appears in the literature is not precise enough to check an
 attainment claim against simulation.
 }
+\examples{
+morie_minimax_regret_constant()
+}
 \references{
 Hirano K, Porter JR (2009) \emph{Econometrica}
 77(5):1683-1701, doi:10.3982/ECTA6630.
-}
-\examples{
-morie_minimax_regret_constant()
 }

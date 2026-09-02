@@ -11,6 +11,8 @@
 #' @return List with ``degree``, ``mean_degree``, ``max_degree``, ``edges``, ``n``, ``m``.
 #' @references Barabasi and Albert (1999), Emergence of scaling in random networks, Science 286:509-512, arXiv:cond-mat/9910332. Verified against the paper for Pi(k_i) = k_i / sum_j k_j and the growth rule.
 #' @export
+#' @examples
+#' Bamodel(n = 5L)
 Bamodel <- function(n, m = 2, m0 = NULL, seed = 1) {
   n <- as.integer(n); m <- as.integer(m)
   m0 <- if (is.null(m0)) m + 1L else as.integer(m0)

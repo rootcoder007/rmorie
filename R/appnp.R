@@ -17,6 +17,10 @@
 #' @references Klicpera, Bojchevski and Guennemann (2019), ICLR;
 #'   arXiv:1810.05997, Sect. 3.  Read from the ar5iv rendering.
 #' @export
+#' @examples
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' H <- matrix(rnorm(6), 3, 2)
+#' Appnp(A, H)
 Appnp <- function(A, H, alpha = 0.1, K = 10, exact = FALSE,
                   softmax = TRUE) {
   Am <- .t1_mat(A); n <- nrow(Am)

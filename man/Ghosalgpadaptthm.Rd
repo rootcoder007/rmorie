@@ -41,10 +41,10 @@ Formula: log p(y | l) = -y' (K_l + sigma^2 I)^(-1) y / 2
 \item log det(K_l + sigma^2 I) / 2, up to the constant.
 }
 }
+\examples{
+Ghosalgpadaptthm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 11.6.
-}
-\examples{
-Ghosalgpadaptthm()
 }

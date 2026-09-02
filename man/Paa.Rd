@@ -27,12 +27,12 @@ splitting is the usual implementation error and it breaks the one
 property the representation is supposed to have -- that the segment
 means average back to the mean of the series.
 }
+\examples{
+Paa(x = c(1, 2, 3, 4, 5, 6, 7, 8), N = 5L)
+}
 \references{
 Keogh, E., Chakrabarti, K., Pazzani, M. & Mehrotra, S.
 (2001). Dimensionality reduction for fast similarity search in
 large time series databases. Knowledge and Information Systems,
 3(3), 263-286. doi:10.1007/PL00011669
-}
-\examples{
-Paa(x = c(1, 2, 3, 4, 5, 6, 7, 8), N = 5L)
 }

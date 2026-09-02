@@ -35,6 +35,12 @@
 #'   \doi{10.1093/restud/rdr043}. Local source:
 #'   fetched-wave3/imbens-kalyanaraman-2009-w14726-optimal-bandwidth-rdd.pdf.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(200, -1, 1)
+#' y <- 1 + 2 * x + 0.5 * (x >= 0) + rnorm(200, 0, 0.3)
+#' h <- Causrddh(x, y, cutoff = 0)
+#' is.numeric(h$estimate)
 Causrddh <- function(x, y, cutoff = 0) {
   xa <- as.numeric(x); ya <- as.numeric(y)
   n <- length(xa)
@@ -138,6 +144,12 @@ Causrddh <- function(x, y, cutoff = 0) {
 #'   Sections 2-3; White (1980) HC0; Calonico, Cattaneo and Titiunik
 #'   (2014), Econometrica 82(6), 2295-2326 (vce convention).
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(300, -1, 1)
+#' y <- 1 + 2 * x + 0.5 * (x >= 0) + rnorm(300, 0, 0.3)
+#' r <- Causrdd(x, y, cutoff = 0)
+#' abs(r$estimate - 0.5) < 0.4
 Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
   xa <- as.numeric(x); ya <- as.numeric(y)
   c0 <- as.numeric(cutoff)[1]
@@ -195,6 +207,13 @@ Causrdd <- function(x, y, cutoff = 0, h = NULL, kernel = "triangular") {
 #'   registry); Imbens and Lemieux (2008), J Econometrics 142(2),
 #'   615-635.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- runif(300, -1, 1)
+#' treat <- rbinom(300, 1, ifelse(x >= 0, 0.85, 0.15))
+#' y <- 1 + 2 * x + 0.6 * treat + rnorm(300, 0, 0.3)
+#' r <- Causrddf(x, y, treat, cutoff = 0)
+#' is.list(r)
 Causrddf <- function(x, y, treat, cutoff = 0, h = NULL, h_treat = NULL,
                      kernel = "triangular") {
   xa <- as.numeric(x); ya <- as.numeric(y); wa <- as.numeric(treat)

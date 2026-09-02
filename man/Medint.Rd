@@ -30,10 +30,10 @@ a sharp diagnostic rather than a residual catch-all.
 \details{
 Formula: \code{INTmed = th3 b1 (a - a*)^2}.
 }
+\examples{
+Medint(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
+}
 \references{
 VanderWeele, T. J. (2014). Epidemiology 25:749-761,
 table 1.
-}
-\examples{
-Medint(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
 }

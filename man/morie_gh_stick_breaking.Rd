@@ -21,12 +21,12 @@ Converts stick fractions \code{V} into the weights
 \eqn{\prod_j (1 - V_j)} is not appended, so the result sums to one
 only in the limit.
 }
+\examples{
+V <- c(1/2, 1/3, 1/4, 1/5)
+morie_gh_stick_breaking(V)
+}
 \references{
 Ghosal, S. and van der Vaart, A. (2017).
 \emph{Fundamentals of Nonparametric Bayesian Inference}.
 Cambridge University Press.
-}
-\examples{
-V <- c(1/2, 1/3, 1/4, 1/5)
-morie_gh_stick_breaking(V)
 }

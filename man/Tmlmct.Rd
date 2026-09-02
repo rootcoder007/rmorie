@@ -34,11 +34,11 @@ indicator on the whole vector:
 \code{psi = mean[Q*(1, X) - Q*(0, X)]}.  With one component this is
 exactly the binary point-treatment TMLE.
 }
+\examples{
+Tmlmct(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Lendle, S. D. et al. (2017). Journal of Statistical
 Software 81(1); Robins, J. M. (1986). Mathematical Modelling
 7:1393-1512.
-}
-\examples{
-Tmlmct(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

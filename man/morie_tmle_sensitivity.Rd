@@ -24,14 +24,6 @@ gives an interval containing the estimate for every admissible
 confounder of that strength; \code{gamma_critical} is the smallest Gamma at
 which the interval first covers zero. Mirrors \code{morie.fn.tmlsen}.
 }
-\references{
-Tan Z (2006). A distributional approach for causal
-inference using propensity scores. \emph{JASA} 101(476), 1619-1637.
-
-Zhao Q, Small DS, Bhattacharya BB (2019). Sensitivity analysis for
-inverse probability weighting estimators via the percentile
-bootstrap. \emph{JRSS-B} 81(4), 735-761.
-}
 \examples{
 set.seed(2)
 n <- 120
@@ -40,4 +32,12 @@ d <- rbinom(n, 1, plogis(0.5 * X[, 1]))
 y <- 1 + X[, 1] + 0.8 * d + rnorm(n, 0, 0.5)
 r <- morie_tmle_sensitivity(y, d, X)
 str(r, max.level = 1)
+}
+\references{
+Tan Z (2006). A distributional approach for causal
+inference using propensity scores. \emph{JASA} 101(476), 1619-1637.
+
+Zhao Q, Small DS, Bhattacharya BB (2019). Sensitivity analysis for
+inverse probability weighting estimators via the percentile
+bootstrap. \emph{JRSS-B} 81(4), 735-761.
 }

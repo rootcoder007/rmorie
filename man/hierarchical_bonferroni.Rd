@@ -15,10 +15,17 @@ hierarchical_bonferroni(
 
 \item{alpha}{Overall FWER level.}
 
-\item{propagate_alpha}{Not implemented. Alpha recycling between families would need a named procedure; what runs instead is that every family is tested at the full alpha and the gate closes on the first family with no rejection. Passing this argument explicitly warns, and \code{alpha_propagated} in the result is \code{FALSE}. Ignored; kept so the signature is stable across families (mirrors the Python reference).}
+\item{propagate_alpha}{Not implemented. Alpha recycling between
+families would need a named procedure; what runs instead is that
+every family is tested at the full alpha and the gate closes on
+the first family with no rejection. Passing this argument
+explicitly warns, and \code{alpha_propagated} in the result is
+\code{FALSE}. Ignored; kept so the signature is stable
+across families (mirrors the Python reference).}
 }
 \value{
-A \code{morie_rich_result} list with one stage entry per family and an \code{overall_rejected} logical vector.
+A \code{morie_rich_result} list with one stage entry per
+family and an \code{overall_rejected} logical vector.
 }
 \description{
 Families are tested in order; if a family produces no rejections,

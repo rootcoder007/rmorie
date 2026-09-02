@@ -13,6 +13,9 @@
 #' @return List with ``beta``, ``fitted``, ``loglik``, ``n``, ``p``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 7, Sect. 7.5 p. 232.  The book fits this by the second-order approximation of the log-likelihood solved as a weighted least squares problem; the intercept is unpenalized.  Delegates to the chapter routine in morie.fn._gp_core, which was verified against this book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own, re-read against the chapter PDF here.  A FIXED iteration count is used rather than a tolerance stop, so both language arms perform identically many updates.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Poispen(V, V)
 Poispen <- function(X, y, lam = 1, penalty = "ridge", n_iter = 100L, add_intercept = TRUE) {
   out <- morie_penalized_poisson(X, as.numeric(y), lambda = as.numeric(lam),
                                  penalty = penalty, n_iter = as.integer(n_iter),

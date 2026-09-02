@@ -17,6 +17,10 @@
 #'   Molinari, F. (2021), Handbook of Econometrics 7A (arXiv:2004.11751
 #'   p. 97).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' Bnscnf(V, D)
 Bnscnf <- function(theta_grid, moments, alpha = 0.05) {
   r <- Bndinf(theta_grid, moments, alpha)
   r$method <- "Confidence set for partial ID"

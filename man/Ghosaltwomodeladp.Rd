@@ -30,10 +30,10 @@ log-ratio: the small model keeps one coordinate, the large model six.
 Formula: w_0 = 1 / (1 + exp(l_1 - l_0)),
 l_j = log m_{K_j}(y) + log prior weight of model j.
 }
+\examples{
+Ghosaltwomodeladp()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.2.3.
-}
-\examples{
-Ghosaltwomodeladp()
 }

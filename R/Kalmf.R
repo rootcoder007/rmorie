@@ -25,6 +25,10 @@
 #'   prediction problems, Transactions of the ASME, Journal of Basic
 #'   Engineering 82(1):35-45. \doi{10.1115/1.3662552}
 #' @export
+#' @examples
+#' set.seed(1)
+#' y <- matrix(cumsum(rnorm(20)) + rnorm(20), 20, 1)
+#' Kalmf(y, F = matrix(1), H = matrix(1), Q = matrix(0.1), R = matrix(1))
 Kalmf <- function(y, F, H, Q, R, x0 = NULL, P0 = NULL) {
   Y <- .s03mat(y)
   n <- nrow(Y); m <- ncol(Y)

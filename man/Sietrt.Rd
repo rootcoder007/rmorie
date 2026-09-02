@@ -13,7 +13,7 @@ Sietrt(G, beta, gamma, initial, t_max = 50, dt = 0.01)
 
 \item{gamma}{Recovery rate back to susceptible.}
 
-\item{initial}{Initial infection probability of each node, in [0, 1].}
+\item{initial}{Initial infection probability of each node, in \link{0, 1}.}
 
 \item{t_max}{Integration horizon. Default 50.}
 
@@ -41,12 +41,12 @@ verbatim; PSV set gamma = 1 so that only lambda = beta / gamma matters.
 the endemic phase is lambda > lambda_c.  For a k-regular graph this is
 \code{1 / k}, and PSV's homogeneous result \code{<k> lambda_c = 1} follows.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+Sietrt(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
+}
 \references{
 Pastor-Satorras, R. & Vespignani, A. (2001). Epidemic dynamics
 and endemic states in complex networks. Physical Review E 63, 066117,
 eqs. (7)-(10). \doi{10.1103/PhysRevE.63.066117}
-}
-\examples{
-G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
-Sietrt(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
 }

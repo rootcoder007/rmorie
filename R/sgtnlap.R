@@ -14,6 +14,8 @@
 #'   and 1.4: "L = T^-1/2 L T^-1/2 with the convention T^-1(v, v) = 0 for
 #'   d_v = 0". Fetched from the author's own copy of the chapter.
 #' @export
+#' @examples
+#' Normlap(W = 5L)
 Normlap <- function(W) {
   W <- as.matrix(W)
   n <- nrow(W)

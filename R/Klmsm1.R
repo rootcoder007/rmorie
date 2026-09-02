@@ -25,6 +25,8 @@
 #'   Meeting of the ACL, pp. 310-318, section 2.1.
 #'   \doi{10.3115/981863.981904}
 #' @export
+#' @examples
+#' Klmsm1(p = 0.5, q = 0.5, eps = 0.5)
 Klmsm1 <- function(p, q, eps) {
   pv <- .s03vec(p); qv <- .s03vec(q); V <- length(pv)
   if (V == 0L) stop("kl_molecular_smooth: p is empty")

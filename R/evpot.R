@@ -69,6 +69,10 @@
 #' @references Davison & Smith (1990), JRSS B 52(3):393-442;
 #'   Grimshaw (1993), Technometrics 35(2):185-191.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Evpot(V, M)
 Evpot <- function(x, u) {
   x <- .s03vec(x)
   n <- length(x)

@@ -46,11 +46,11 @@ trying not to create, so this function forwards to \code{Deepw}
 rather than repeating it -- a second copy would agree with the first
 at 1e-9 forever and tell nobody anything.
 }
-\references{
-Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
-2014:701-710.
-}
 \examples{
 G <- matrix(c(0, 1, 0, 1, 1, 0, 1, 0, 0, 1, 0, 1, 1, 0, 1, 0), 4, 4, byrow = TRUE)
 Deepwk(G, dim = 4, walk_len = 5, n_walks = 2)
+}
+\references{
+Perozzi, Al-Rfou & Skiena (2014), DeepWalk, KDD
+2014:701-710.
 }

@@ -21,11 +21,11 @@ Formula: EPE(x_o) = sigma2 (1 + sum_j (x*_oj)^2 / lambda_j) with
 x* = Gamma'x_o and lambda_j the eigenvalues of X'X (p.80): nearly dependent
 features drive some lambda_j toward zero and blow the prediction error up.
 }
+\examples{
+Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8), eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, sec. 3.5 p.80. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8), eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

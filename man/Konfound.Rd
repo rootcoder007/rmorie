@@ -38,6 +38,9 @@ reference implementation of these indices,
 Formula: pct = 100 (1 - delta#/|est|); RIR = n (1 - delta#/|est|);
 ITCV = (|r_xy| - r#)/(1 - r#) with r# = t_crit/sqrt(t_crit^2 + df).
 }
+\examples{
+Konfound(est = 5L, se = 5L, n = 5L, threshold = 0.5)
+}
 \references{
 Frank, Maroulis, Duong and Kelcey (2013), What would it
 take to change an inference?, Educational Evaluation and Policy
@@ -45,7 +48,4 @@ Analysis 35(4):437-460, \doi{10.3102/0162373713493129}; Frank
 (2000), Impact of a confounding variable on a regression
 coefficient, Sociological Methods and Research 29(2):147-194.
 \doi{10.1177/0049124100029002001}
-}
-\examples{
-Konfound(est = 5L, se = 5L, n = 5L, threshold = 0.5)
 }

@@ -20,6 +20,9 @@
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1/2, 1/3, 1/4, 1/5)
+#' morie_gh_stick_breaking(V)
 morie_gh_stick_breaking <- function(V) {
   stopifnot(all(V >= 0 & V <= 1))
   out <- numeric(length(V))
@@ -46,6 +49,9 @@ morie_gh_stick_breaking <- function(V) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_discrete_hazard(V)
 morie_gh_discrete_hazard <- function(p) {
   out <- numeric(length(p))
   cum <- 0
@@ -79,6 +85,8 @@ morie_gh_discrete_hazard <- function(p) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' morie_gh_dp_posterior(G0_A = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, n_in_A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
   pn <- if (n > 0) n_in_A / n else 0
   m <- alpha / (alpha + n) * G0_A + n / (alpha + n) * pn
@@ -101,6 +109,9 @@ morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_dp_ndistinct(V, V)
 morie_gh_dp_ndistinct <- function(n, alpha) {
   i <- seq_len(n)
   list(
@@ -122,6 +133,9 @@ morie_gh_dp_ndistinct <- function(n, alpha) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_eps_dp_size(V, V)
 morie_gh_eps_dp_size <- function(eps, alpha) {
   2 + alpha * (-log(eps))
 }
@@ -146,6 +160,9 @@ morie_gh_eps_dp_size <- function(eps, alpha) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_dp_median_cdf(V, V)
 morie_gh_dp_median_cdf <- function(G_x, alpha, n_grid = 4000L) {
   a <- alpha * G_x
   b <- alpha * (1 - G_x)
@@ -171,6 +188,9 @@ morie_gh_dp_median_cdf <- function(G_x, alpha, n_grid = 4000L) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_ewens_log(V, V)
 morie_gh_ewens_log <- function(multiplicities, alpha) {
   m <- as.numeric(multiplicities)
   n <- sum(seq_along(m) * m)
@@ -197,6 +217,8 @@ morie_gh_ewens_log <- function(multiplicities, alpha) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' morie_gh_py_eppf_log(sizes = c(1, 2, 3, 4, 5, 6, 7, 8), d = 5L, theta = 0.5)
 morie_gh_py_eppf_log <- function(sizes, d, theta) {
   n <- sum(sizes)
   k <- length(sizes)
@@ -227,6 +249,8 @@ morie_gh_py_eppf_log <- function(sizes, d, theta) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' morie_gh_wn_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, prior_var = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_gh_wn_posterior <- function(X, n, prior_var) {
   lam <- prior_var
   list(mean = n * X / (n + 1 / lam), var = 1 / (n + 1 / lam))
@@ -245,6 +269,8 @@ morie_gh_wn_posterior <- function(X, n, prior_var) {
 #' @return integer vector of length \code{depth} of 0/1 bits, most
 #'   significant first
 #' @export
+#' @examples
+#' morie_gh_pt_bits(x = c(1, 2, 3, 4, 5, 6, 7, 8), depth = 5L)
 morie_gh_pt_bits <- function(x, depth) {
   out <- integer(depth)
   v <- min(max(x, 0), 1 - 1e-15)
@@ -274,6 +300,9 @@ morie_gh_pt_bits <- function(x, depth) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_pt_posterior_density(V, V)
 morie_gh_pt_posterior_density <- function(x, data, depth = 4L) {
   bx <- morie_gh_pt_bits(x, depth)
   n <- length(data)
@@ -310,6 +339,9 @@ morie_gh_pt_posterior_density <- function(x, data, depth = 4L) {
 #'   renormalised internally
 #' @return numeric scalar in \eqn{[0, 1]}
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_hellinger2(V, V)
 morie_gh_hellinger2 <- function(p, q) {
   p <- p / sum(p)
   q <- q / sum(q)
@@ -329,6 +361,9 @@ morie_gh_hellinger2 <- function(p, q) {
 #'   renormalised internally
 #' @return numeric scalar divergence in nats
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_kl(V, V)
 morie_gh_kl <- function(p, q) {
   p <- p / sum(p)
   q <- q / sum(q)
@@ -349,6 +384,9 @@ morie_gh_kl <- function(p, q) {
 #' @param alpha order of the divergence, not equal to 1; defaults to 0.5
 #' @return numeric scalar divergence in nats
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_renyi(V, V)
 morie_gh_renyi <- function(p, q, alpha = 0.5) {
   p <- p / sum(p)
   q <- q / sum(q)
@@ -372,6 +410,8 @@ morie_gh_renyi <- function(p, q, alpha = 0.5) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' morie_gh_dirichlet_moments(alpha = 0.5, j = c(1, 2, 3, 4, 5, 6, 7, 8), jp = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_gh_dirichlet_moments <- function(alpha, j, jp) {
   A <- sum(alpha)
   vr <- alpha[j] * (A - alpha[j]) / (A^2 * (A + 1))
@@ -401,6 +441,9 @@ morie_gh_dirichlet_moments <- function(alpha, j, jp) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_crm_laplace_gamma(V, V)
 morie_gh_crm_laplace_gamma <- function(f, a) {
   a * log(1 + f)
 }
@@ -421,6 +464,8 @@ morie_gh_crm_laplace_gamma <- function(f, a) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' morie_gh_ncrm_laplace(f = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L, u = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_gh_ncrm_laplace <- function(f, m, u) {
   exp(-sum(m * (1 - exp(-f * u))))
 }
@@ -438,6 +483,9 @@ morie_gh_ncrm_laplace <- function(f, m, u) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_ibp_expected_dishes(V, V)
 morie_gh_ibp_expected_dishes <- function(n, alpha) {
   alpha * sum(1 / seq_len(n))
 }
@@ -457,6 +505,9 @@ morie_gh_ibp_expected_dishes <- function(n, alpha) {
 #'   \emph{Fundamentals of Nonparametric Bayesian Inference}.
 #'   Cambridge University Press.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_gh_dp_predictive(V, V)
 morie_gh_dp_predictive <- function(alpha, n) {
   list(
     weight_fresh = alpha / (alpha + n),

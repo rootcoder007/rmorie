@@ -28,13 +28,13 @@ Formula: \code{lower = [E(y | D = 1) P(D = 1) + y_min P(D = 0)] -
 [E(y | D = 0) P(D = 0) + y_max P(D = 1)]}, \code{upper = 0}, with
 \code{y_max = max(y)}.
 }
+\examples{
+set.seed(1)
+Bndngt(y = rnorm(40), D = rbinom(40, 1, 0.5), y_min = -3)
+}
 \references{
 Manski, C. F. (1997). Monotone treatment response.
 Econometrica 65(6), 1311-1334. \doi{10.2307/2171738}. Equation (2.13)
 of Molinari, F. (2021), Handbook of Econometrics 7A
 (arXiv:2004.11751 pp. 18-19), read with the treatment order reversed.
-}
-\examples{
-set.seed(1)
-Bndngt(y = rnorm(40), D = rbinom(40, 1, 0.5), y_min = -3)
 }

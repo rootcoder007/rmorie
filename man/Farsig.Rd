@@ -58,13 +58,13 @@ a_i = 1.5 (y^(2/3) mu^(-1/6) - mu^(1/2)) / sqrt(phi (1 - h_i)),
 down-weighting past outbreaks by a_i^-2.  Following Noufaily et al
 (2013) the trend term is retained whether or not it is significant.
 }
+\examples{
+set.seed(1)
+Farsig(rpois(300, 10))
+}
 \references{
 Farrington, Andrews, Beale & Catchpole (1996), JRSS-A
 159(3):547-563, doi:10.2307/2983331; Noufaily, Enki, Farrington,
 Garthwaite, Andrews & Charlett (2013), Statistics in Medicine
 32(7):1206-1222, doi:10.1002/sim.5595.
-}
-\examples{
-set.seed(1)
-Farsig(rpois(300, 10))
 }

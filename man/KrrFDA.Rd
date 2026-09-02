@@ -38,6 +38,10 @@ and the penalty's name differ here.
 
 Formula: \code{alpha = (K + lambda I)^{-1} y}.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+KrrFDA(V, V)
+}
 \references{
 Saunders, C., Gammerman, A. and Vovk, V. (1998).
 Proceedings of the 15th International Conference on Machine
@@ -45,8 +49,4 @@ Learning, 515-521.
 }
 \seealso{
 \code{\link{Krreg}}
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-KrrFDA(V, V)
 }

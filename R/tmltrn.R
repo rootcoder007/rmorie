@@ -19,6 +19,9 @@
 #' @references Rudolph, K. E. & van der Laan, M. J. (2017). JRSS B
 #'   79(5):1509-1525.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Tmltrn(y = rnorm(10), D = rbinom(10, 1, 0.5), X = rnorm(10), S = rnorm(10)); TRUE
 Tmltrn <- function(y, D, X, S) {
   yv <- as.numeric(y); Dv <- as.numeric(D); Sv <- as.numeric(S)
   n <- length(yv)

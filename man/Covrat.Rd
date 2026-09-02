@@ -27,11 +27,11 @@ det(s_(i)^2 (X_(i)'X_(i))^-1) / det(s^2 (X'X)^-1).  Values far from 1
 mark observations that change the precision; the Belsley-Kuh-Welsch
 cut-off is |COVRATIO - 1| > 3p/n.
 }
-\references{
-Belsley, Kuh & Welsch (1980), Regression Diagnostics,
-Wiley, ch. 2.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Covrat(V, V)
+}
+\references{
+Belsley, Kuh & Welsch (1980), Regression Diagnostics,
+Wiley, ch. 2.
 }

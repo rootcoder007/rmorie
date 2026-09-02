@@ -27,11 +27,11 @@ mid-point weight is the half-credit-for-ties convention.  Because
 \code{Y(1)} and \code{Y(0)} enter only through their marginals this is
 the MARGINAL probabilistic index, not the within-pair one.
 }
+\examples{
+Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Thas, O., De Neve, J., Clement, L. & Ottoy, J. P. (2012).
 JRSS B 74(4):623-671; van der Laan, M. J. & Rubin, D. (2006). IJB
 2(1):11.
-}
-\examples{
-Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

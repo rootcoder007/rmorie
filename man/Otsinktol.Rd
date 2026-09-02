@@ -19,9 +19,9 @@ Named list with \code{estimate}, \code{row_error}, \code{col_error},
 \deqn{\max(\|T1 - a\|_\infty, \|T^\top 1 - b\|_\infty)}
 Peyre & Cuturi (2019), Sec. 4.2 -- Sinkhorn's stopping criterion.
 }
-\references{
-Peyre & Cuturi (2019), Sec. 4.2.
-}
 \examples{
 Otsinktol(T = c(1, 2, 3, 4, 5, 6, 7, 8), a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+}
+\references{
+Peyre & Cuturi (2019), Sec. 4.2.
 }

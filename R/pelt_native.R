@@ -157,6 +157,9 @@
 #'   cost. Journal of the American Statistical Association, 107(500),
 #'   1590-1598.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_pelt(V)
 morie_pelt <- function(x, cost = "mean", penalty = NULL, min_seglen = 1L) {
   xs <- as.numeric(x)
   n <- length(xs)

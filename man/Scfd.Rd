@@ -13,7 +13,7 @@ Scfd(X, Y, basis, t = NULL)
 
 \item{basis}{T-by-K matrix of basis functions on the grid.}
 
-\item{t}{the grid of length T; defaults to equally spaced on [0, 1].}
+\item{t}{the grid of length T; defaults to equally spaced on \link{0, 1}.}
 }
 \value{
 list: estimate, alpha, coef, beta, J, fitted, residual, sse, r2,
@@ -27,8 +27,8 @@ y_i = alpha + integral beta(t) x_i(t) dt + eps_i.
 }
 \details{
 Expanding beta(t) = sum_k b_k phi_k(t) makes the integral linear in b,
-integral beta x_i = sum_k b_k J[i, k] with J[i, k] = integral phi_k x_i, so
-the model is the ordinary linear regression of y on the design [1, J].
+integral beta x_i = sum_k b_k J\link{i, k} with J\link{i, k} = integral phi_k x_i, so
+the model is the ordinary linear regression of y on the design \link{1, J}.
 That basis-expansion reduction is what makes the problem finite
 dimensional, and is the same device Reiss and Ogden use before choosing the
 basis by principal components.

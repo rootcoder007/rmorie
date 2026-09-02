@@ -26,12 +26,12 @@ studentized statistic (null resampling from x - xbar + mu0);
 p_B1 is the fraction of outer resamples whose inner-prepivoted
 statistic H*_b(T*_b) is at least H_n(T_n) (double prepivoting).
 }
+\examples{
+set.seed(1)
+r <- morie_btiseq(x = rnorm(10)); TRUE
+}
 \references{
 Beran, R. (1988). Prepivoting test statistics: a
 bootstrap view of asymptotic refinements. JASA, 83(403),
 687-697.
-}
-\examples{
-set.seed(1)
-r <- morie_btiseq(x = rnorm(10)); TRUE
 }

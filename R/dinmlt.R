@@ -45,6 +45,9 @@
 #' @references Caron et al. (2021), Emerging Properties in
 #'   Self-Supervised Vision Transformers, ICCV 2021:9650-9660.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Dinmlt(image = rnorm(10)); TRUE
 Dinmlt <- function(image, global_size = 2, local_size = 8, tau_s = 0.1,
                    tau_t = 0.04, center = NULL) {
   M <- .s03mat(image)

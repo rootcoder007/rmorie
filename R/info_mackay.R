@@ -39,6 +39,8 @@
 #' @param f binary-symmetric-channel flip probability, in (0, 1)
 #' @return list(p0, p1, decoded, gamma, evidence)
 #' @export
+#' @examples
+#' morie_r3post(r = c(1L, 1L, 0L), f = 0.1)
 morie_r3post <- function(r, f) {
   r <- as.integer(r)
   if (length(r) != 3L || any(!(r %in% c(0L, 1L)))) {
@@ -57,6 +59,8 @@ morie_r3post <- function(r, f) {
 #' @param n blocklength
 #' @return list(approx, exact, relerr, logapprox)
 #' @export
+#' @examples
+#' morie_cbcapx(n = 5L)
 morie_cbcapx <- function(n) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
@@ -77,6 +81,8 @@ morie_cbcapx <- function(n) {
 #' @param n blocklength
 #' @return list(var, sd, gsum, total, cbcapprox)
 #' @export
+#' @examples
+#' morie_binsumga(n = 5L)
 morie_binsumga <- function(n) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1.", call. = FALSE)
@@ -92,6 +98,8 @@ morie_binsumga <- function(n) {
 #' @param f channel flip probability, in (0, 1)
 #' @return list(leading, approx1, approx2, logapprox2)
 #' @export
+#' @examples
+#' morie_repcpb(n = 61, f = 0.1)
 morie_repcpb <- function(n, f) {
   n <- as.integer(n)
   f <- as.numeric(f)
@@ -116,6 +124,8 @@ morie_repcpb <- function(n, f) {
 #' @param iters number of sweeps
 #' @return list(n, half, denom, iters)
 #' @export
+#' @examples
+#' morie_repcn(pb = 1e-15, f = 0.1)
 morie_repcn <- function(pb, f, n0 = 68, iters = 3L) {
   pb <- as.numeric(pb)
   f <- as.numeric(f)
@@ -139,6 +149,8 @@ morie_repcn <- function(pb, f, n0 = 68, iters = 3L) {
 #' @param nurns number of urns minus one; urn u holds u black in nurns
 #' @return list(posterior, evidence, map, prior)
 #' @export
+#' @examples
+#' morie_urnpost(nb = 5L, ntot = 5L)
 morie_urnpost <- function(nb, ntot, nurns = 10L) {
   nb <- as.integer(nb); ntot <- as.integer(ntot); nurns <- as.integer(nurns)
   if (nurns < 1L || ntot < 0L || nb < 0L || nb > ntot) {
@@ -158,6 +170,8 @@ morie_urnpost <- function(nb, ntot, nurns = 10L) {
 #' @inheritParams morie_urnpost
 #' @return list(p, pnot, pmap)
 #' @export
+#' @examples
+#' morie_urnpred(nb = 5L, ntot = 5L)
 morie_urnpred <- function(nb, ntot, nurns = 10L) {
   nurns <- as.integer(nurns)
   post <- morie_urnpost(nb, ntot, nurns)$posterior
@@ -173,6 +187,8 @@ morie_urnpred <- function(nb, ntot, nurns = 10L) {
 #' @param fa,fb counts of outcomes a and b
 #' @return list(likelihood, loglik, fa, fb)
 #' @export
+#' @examples
+#' morie_bcoinlik(pa = 0.3, fa = 3, fb = 7)
 morie_bcoinlik <- function(pa, fa, fb) {
   pa <- as.numeric(pa); fa <- as.integer(fa); fb <- as.integer(fb)
   if (pa < 0 || pa > 1 || fa < 0L || fb < 0L) {
@@ -188,6 +204,8 @@ morie_bcoinlik <- function(pa, fa, fb) {
 #' @param pa candidate bias
 #' @return list(density, inside, logdensity)
 #' @export
+#' @examples
+#' morie_bcoinpri(pa = 5L)
 morie_bcoinpri <- function(pa) {
   pa <- as.numeric(pa)
   inside <- pa >= 0 && pa <= 1
@@ -199,6 +217,8 @@ morie_bcoinpri <- function(pa) {
 #' @param fa,fb counts of outcomes a and b
 #' @return list(p, pnot, mle)
 #' @export
+#' @examples
+#' morie_sucrule(fa = 5L, fb = 5L)
 morie_sucrule <- function(fa, fb) {
   fa <- as.integer(fa); fb <- as.integer(fb)
   if (fa < 0L || fb < 0L) stop("counts must be non-negative.", call. = FALSE)
@@ -212,6 +232,9 @@ morie_sucrule <- function(fa, fb) {
 #' @param priors per-model prior probabilities
 #' @return list(evidence, terms, posterior)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_evidmix(V, V)
 morie_evidmix <- function(evidences, priors) {
   ev <- as.numeric(evidences); pr <- as.numeric(priors)
   if (length(ev) != length(pr) || length(ev) == 0L) {
@@ -227,6 +250,9 @@ morie_evidmix <- function(evidences, priors) {
 #' @param prior1,prior0 prior probabilities of the two models
 #' @return list(odds, logodds, p1, bayesfactor)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_postodds(V, V)
 morie_postodds <- function(lik1, lik0, prior1 = 0.5, prior0 = 0.5) {
   lik1 <- as.numeric(lik1); lik0 <- as.numeric(lik0)
   odds <- (lik1 * as.numeric(prior1)) / (lik0 * as.numeric(prior0))
@@ -239,6 +265,8 @@ morie_postodds <- function(lik1, lik0, prior1 = 0.5, prior0 = 0.5) {
 #' @param p0 the fixed bias asserted by the simpler model
 #' @return list(evidence1, evidence0, ratio, logratio)
 #' @export
+#' @examples
+#' morie_bcoinbf(fa = 5L, fb = 5L)
 morie_bcoinbf <- function(fa, fb, p0 = 1 / 6) {
   fa <- as.integer(fa); fb <- as.integer(fb)
   if (fa < 0L || fb < 0L) stop("counts must be non-negative.", call. = FALSE)
@@ -254,6 +282,9 @@ morie_bcoinbf <- function(fa, fb, p0 = 1 / 6) {
 #' @param num,den per-observation probabilities under the two hypotheses
 #' @return list(ratio, p1, logratio, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_lrprod(V, V)
 morie_lrprod <- function(num, den) {
   num <- as.numeric(num); den <- as.numeric(den)
   if (length(num) != length(den) || length(num) == 0L) {
@@ -274,6 +305,8 @@ morie_lrprod <- function(num, den) {
 #' @param beta typicality tolerance
 #' @return list(info, rate, deviation, member)
 #' @export
+#' @examples
+#' morie_typset(p = 0.5, n = 5L, h = 0.5, beta = 0.5)
 morie_typset <- function(p, n, h, beta) {
   p <- as.numeric(p); n <- as.integer(n)
   if (!(p > 0 && p <= 1) || n < 1L) {
@@ -294,6 +327,8 @@ morie_typset <- function(p, n, h, beta) {
 #' @param s2 channel noise variance
 #' @return list(mean, var, sd, wdata, marginalvar)
 #' @export
+#' @examples
+#' morie_gchpost(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = 5L, s2 = 5L)
 morie_gchpost <- function(y, v, s2) {
   y <- as.numeric(y); v <- as.numeric(v); s2 <- as.numeric(s2)
   if (v <= 0 || s2 <= 0) stop("v and s2 must be positive.", call. = FALSE)
@@ -310,6 +345,8 @@ morie_gchpost <- function(y, v, s2) {
 #' @param gamma variance-reduction factor of selection, in [0, 1)
 #' @return list(onepbeta, beta, gamma)
 #' @export
+#' @examples
+#' morie_sexbeta(gamma = 0.5)
 morie_sexbeta <- function(gamma) {
   gamma <- as.numeric(gamma)
   if (!(gamma >= 0 && gamma < 1)) stop("gamma must lie in [0, 1).", call. = FALSE)
@@ -323,6 +360,8 @@ morie_sexbeta <- function(gamma) {
 #' @param eta rate constant; default sqrt(2/(pi + 2)) as in the book
 #' @return list(dfbardt, eta, g)
 #' @export
+#' @examples
+#' morie_sexdfdt(f = 0.6, g = 1000)
 morie_sexdfdt <- function(f, g, eta = NULL) {
   f <- as.numeric(f); g <- as.numeric(g)
   if (f < 0 || f > 1 || g <= 0) stop("need f in [0, 1] and G > 0.", call. = FALSE)
@@ -343,6 +382,8 @@ morie_sexdfdt <- function(f, g, eta = NULL) {
 #' @param c integration constant; default the self-consistent one
 #' @return list(f, c, cbook, tperfect)
 #' @export
+#' @examples
+#' morie_sexfsol(t = 10, g = 1000, f0 = 0.5)
 morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
   t <- as.numeric(t); g <- as.numeric(g); f0 <- as.numeric(f0)
   if (g <= 0 || f0 < 0 || f0 > 1) stop("need G > 0 and f0 in [0, 1].", call. = FALSE)
@@ -363,6 +404,8 @@ morie_sexfsol <- function(t, g, f0, eta = NULL, c = NULL) {
 #' @param sigma candidate noise level
 #' @return list(loglik, n, s, sigman)
 #' @export
+#' @examples
+#' morie_gllsuff(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, mu = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 morie_gllsuff <- function(xbar, s, n, mu, sigma) {
   n <- as.integer(n); sigma <- as.numeric(sigma); s <- as.numeric(s)
   if (n < 1L || sigma <= 0) stop("need n >= 1 and sigma > 0.", call. = FALSE)
@@ -377,6 +420,8 @@ morie_gllsuff <- function(xbar, s, n, mu, sigma) {
 #' @param sigma known noise level
 #' @return list(mean, var, se, n)
 #' @export
+#' @examples
+#' morie_mupostsg(xbar = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
 morie_mupostsg <- function(xbar, n, sigma) {
   n <- as.integer(n); sigma <- as.numeric(sigma)
   if (n < 1L || sigma <= 0) stop("need n >= 1 and sigma > 0.", call. = FALSE)
@@ -391,6 +436,8 @@ morie_mupostsg <- function(xbar, n, sigma) {
 #' @param sigmamu width of the top-hat prior on the mean
 #' @return list(logevidence, bestfit, logoccam)
 #' @export
+#' @examples
+#' morie_sigevid(s = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, sigma = 0.5)
 morie_sigevid <- function(s, n, sigma, sigmamu = 1) {
   n <- as.integer(n); sigma <- as.numeric(sigma); sigmamu <- as.numeric(sigmamu)
   if (n < 1L || sigma <= 0 || sigmamu <= 0) {
@@ -409,6 +456,9 @@ morie_sigevid <- function(s, n, sigma, sigmamu = 1) {
 #' @param a Hessian of the negative log posterior at the mode
 #' @return list(quadform, logratio, ratio, errorbars)
 #' @export
+#' @examples
+#' A <- rbind(c(2, 0.3), c(0.3, 1.5))
+#' morie_postgapx(dw = c(0.2, -0.1), a = A)
 morie_postgapx <- function(dw, a) {
   dw <- as.numeric(dw)
   a <- as.matrix(a)
@@ -426,6 +476,9 @@ morie_postgapx <- function(dw, a) {
 #' @param factors the per-parameter penalty factors of the richer model
 #' @return list(ratio, product, logratio, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_evratio(V)
 morie_evratio <- function(factors) {
   factors <- as.numeric(factors)
   if (length(factors) == 0L || any(factors <= 0)) {
@@ -442,6 +495,8 @@ morie_evratio <- function(factors) {
 #' @param length message length in bits
 #' @return list(length, p, nats)
 #' @export
+#' @examples
+#' morie_msglen(p = 1 / 8)
 morie_msglen <- function(p = NULL, length = NULL) {
   if (is.null(p) == is.null(length)) {
     stop("give exactly one of p or length.", call. = FALSE)
@@ -463,6 +518,8 @@ morie_msglen <- function(p = NULL, length = NULL) {
 #' @param deltad the pre-arranged precision to which the data are sent
 #' @return list(total, model, data)
 #' @export
+#' @examples
+#' morie_mdlpost(ph = 0.25, pdh = 0.05, deltad = 0.01)
 morie_mdlpost <- function(ph, pdh, deltad = 1) {
   ph <- as.numeric(ph); pdh <- as.numeric(pdh); deltad <- as.numeric(deltad)
   if (!(ph > 0 && ph <= 1) || pdh <= 0 || deltad <= 0) {
@@ -485,6 +542,9 @@ morie_mdlpost <- function(ph, pdh, deltad = 1) {
 #' @param priorsd prior standard deviation on each weight
 #' @return list(logevidence, evidence, quadform, logdet, k)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_linevid(V, V)
 morie_linevid <- function(x, t, sigma = 1, slope = TRUE, priorsd = 1) {
   x <- as.numeric(x); t <- as.numeric(t)
   n <- length(x)
@@ -511,6 +571,8 @@ morie_linevid <- function(x, t, sigma = 1, slope = TRUE, priorsd = 1) {
 #' @param h entropy of the target distribution, in bits
 #' @return list(log2rmin, log10rmin, rmin)
 #' @export
+#' @examples
+#' morie_rminsamp(n = 5L, h = 0.5)
 morie_rminsamp <- function(n, h) {
   n <- as.numeric(n); h <- as.numeric(h)
   if (n <= 0 || h < 0 || h > n) stop("need 0 < n and 0 <= h <= n.", call. = FALSE)

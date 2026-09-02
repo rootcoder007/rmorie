@@ -23,6 +23,8 @@
 #'   identification region is stated in Molinari, F. (2021), Handbook of
 #'   Econometrics 7A (arXiv:2004.11751 p. 20).
 #' @export
+#' @examples
+#' Bndvld(lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8), theta_0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 Bndvld <- function(lower, upper, theta_0, H0 = 1) {
   lo <- as.numeric(unlist(lower))
   hi <- as.numeric(unlist(upper))

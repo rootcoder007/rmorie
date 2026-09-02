@@ -26,11 +26,11 @@ Polya distribution
 n! Gamma(A)/Gamma(n+A) prod Gamma(y_j+a_j)/(y_j! Gamma(a_j)).  With
 two categories this is exactly the beta-binomial.
 }
-\references{
-Gelman et al. (2013), Bayesian Data Analysis, 3rd ed.,
-CRC, ch. 3.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Diripr(V)
+}
+\references{
+Gelman et al. (2013), Bayesian Data Analysis, 3rd ed.,
+CRC, ch. 3.
 }

@@ -30,10 +30,10 @@ no continuous part at all.
 Formula: tau_k ~ U(0, t_max), J_k ~ Be(1, c) c 5 / n_jumps, and the
 path is the running total of the jumps in time order.
 }
+\examples{
+Ghosalbppathgen()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 13.3.3.
-}
-\examples{
-Ghosalbppathgen()
 }

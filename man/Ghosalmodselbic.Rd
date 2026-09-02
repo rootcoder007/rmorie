@@ -26,10 +26,10 @@ arithmetic rather than simulation: only the data are random.
 \details{
 Formula: log BF = log m_2(y) - log m_0(y).
 }
+\examples{
+Ghosalmodselbic()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.5.
-}
-\examples{
-Ghosalmodselbic()
 }

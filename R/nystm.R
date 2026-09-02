@@ -11,6 +11,9 @@
 #' @return List with ``Q``, ``m``, ``n``.
 #' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8: the Nystrom method for compressing a kernel matrix onto a retained subset of records; the implementation delegates to the chapter-8 Nystrom routine already verified against the book for this shelf.  Read from the chapter PDF, not recalled.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Nystromap(V, V)
 Nystromap <- function(X, m_index, kernel = "linear", gamma = NULL) {
   idx <- as.integer(m_index)
   if (any(idx < 1L)) stop("m_index is 1-based")

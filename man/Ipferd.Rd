@@ -34,6 +34,11 @@ used in place of the JK1 default.
 \details{
 Formula: v(theta) = ((B - 1)/B) sum_b (theta_b - theta)^2.
 }
+\examples{
+set.seed(1)
+Ipferd(y = rnorm(20), D = rbinom(20, 1, 0.5), w = runif(20, 1, 2),
+       replicate_weights = matrix(runif(200, 0.5, 1.5), 20, 10))
+}
 \references{
 Rust and Rao (1996), Variance estimation for complex
 surveys using replication techniques, Statistical Methods in
@@ -41,9 +46,4 @@ Medical Research 5(3):283-310. \doi{10.1177/096228029600500305}
 Lumley (2010), Complex Surveys, Wiley, \doi{10.1002/9780470580066};
 Lumley and Scott (2017), Statistical Science 32(2):265-278.
 \doi{10.1214/16-STS605}
-}
-\examples{
-set.seed(1)
-Ipferd(y = rnorm(20), D = rbinom(20, 1, 0.5), w = runif(20, 1, 2),
-       replicate_weights = matrix(runif(200, 0.5, 1.5), 20, 10))
 }

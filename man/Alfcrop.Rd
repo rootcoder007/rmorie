@@ -47,9 +47,9 @@ The crop start is an argument, not sampled here, so the function is
 deterministic.  The valid range the spec would sample from is returned
 alongside the crop.
 }
-\references{
-Jumper et al (2021) Nature 596:583-589, Suppl. section 1.2.8
-}
 \examples{
 Alfcrop(seqlen = 5L, cropsize = 5L)
+}
+\references{
+Jumper et al (2021) Nature 596:583-589, Suppl. section 1.2.8
 }

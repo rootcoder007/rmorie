@@ -16,6 +16,9 @@
 #'   Weiszfeld's (1937).  The article is paywalled and was not read; only
 #'   the stated construction is claimed.
 #' @export
+#' @examples
+#' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+#' Clrmedian(M)
 Clrmedian <- function(X, steps = 100, eps = 1e-12) {
   M <- .t1_mat(X); n <- nrow(M); D <- ncol(M)
   if (n == 0 || D < 2)

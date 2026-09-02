@@ -38,10 +38,10 @@ distinction section 12.4 is drawing.
 Formula: theta_post = Y prior_var / (prior_var + 1/n);
 Var(sqrt(n) L(theta_post - theta0)) -> sum_k L_k^2.
 }
+\examples{
+Ghosalwnlinbvm()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 12.4.2.
-}
-\examples{
-Ghosalwnlinbvm()
 }

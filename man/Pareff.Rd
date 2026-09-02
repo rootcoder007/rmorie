@@ -7,7 +7,7 @@
 Pareff(pe, RR, se_RR = NULL, alpha = 0.05)
 }
 \arguments{
-\item{pe}{Prevalence of exposure in the population, in [0, 1].}
+\item{pe}{Prevalence of exposure in the population, in \link{0, 1}.}
 
 \item{RR}{Relative risk, strictly positive.}
 

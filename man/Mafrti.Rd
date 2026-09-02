@@ -28,10 +28,10 @@ Formula: \code{p = 0.5 (1 - sgn(cos t) sqrt(1 - (sin t + (sin t - 1/sin
 t)/n)^2))} for \code{t} the double-arcsine value and \code{n} the
 harmonic mean sample size -- Miller (1978).
 }
+\examples{
+Mafrti(ft = c(1, 2, 3, 4, 5, 6, 7, 8), n_harmonic = 5L)
+}
 \references{
 Miller, J. J. (1978). The American Statistician 32(4):138.
 \doi{10.1080/00031305.1978.10479283}.
-}
-\examples{
-Mafrti(ft = c(1, 2, 3, 4, 5, 6, 7, 8), n_harmonic = 5L)
 }

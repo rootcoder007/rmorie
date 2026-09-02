@@ -18,6 +18,8 @@
 #' @references VanderWeele, T. J. (2014). Epidemiology 25:749-761,
 #'   table 1.
 #' @export
+#' @examples
+#' Medint(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = 5L, M = 5L)
 Medint <- function(Y, X, M, Cc = NULL, a = 1, astar = 0) {
   mm <- .s4_medmodels(Y, X, M, Cc)
   d <- a - astar

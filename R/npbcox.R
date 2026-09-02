@@ -1,13 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Cox regression with a gamma-process baseline hazard
-#'
-#' Kalbfleisch put a gamma process \eqn{ ~ GP(c, H_0)} on the
+# Cox regression with a gamma-process baseline hazard
+#
+# Kalbfleisch put a gamma process \eqn{ ~ GP(c, H_0)} on the
 # prime baseline cumulative hazard and left the regression coefficient
 # prime unconstrained. The posterior-mean increment at an observed event
 # prime time pools the prior increment and the observed count by their
 # prime weights,
 # prime \code{dH(t_k) = (c dH_0(t_k) + dN_k) / (c + sum_{j in R_k} exp(x_j'b))},
-#' with \eqn{_k} the risk set. As \code{c -> 0} this is exactly the
+# with \eqn{_k} the risk set. As \code{c -> 0} this is exactly the
 # prime Breslow estimator; with \code{b = 0} as well it is Nelson-Aalen.
 # prime
 # prime \code{b} maximises the Breslow partial log-likelihood
@@ -32,6 +32,8 @@
 #'   Society Series B, 40(2), 214-221. Cox, D. R. (1972). Regression
 #'   models and life-tables. JRSS B, 34(2), 187-220.
 #' @export
+#' @examples
+#' Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Npbcox <- function(time, event, X, c = 1.0, lam0 = NULL, n_iter = 50L,
                    tol = 1e-12) {
   t <- as.numeric(time)

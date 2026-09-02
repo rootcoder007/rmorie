@@ -32,6 +32,8 @@
 #'   and Poisson p-value, Methods, Peak detection. Local source:
 #'   library/pdf/fetched-wave3/Zhang-2008-MACS-GenomeBiology.pdf.
 #' @export
+#' @examples
+#' Chipsq(count = c(1, 2, 3, 4, 5, 6, 7, 8), width = 5L, lambda_bg = 5L)
 Chipsq <- function(count, width, lambda_bg, count_1k = NULL,
                    count_5k = NULL, count_10k = NULL, use_1k = TRUE) {
   k <- as.numeric(count)

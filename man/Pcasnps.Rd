@@ -43,12 +43,12 @@ using \code{m} overstates significance.
 Monomorphic markers carry no information and would divide by zero;
 they are dropped and counted rather than left to produce Inf.
 }
+\examples{
+M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
+Pcasnps(M)
+}
 \references{
 Patterson, N., Price, A. L. & Reich, D. (2006).
 Population structure and eigenanalysis. PLoS Genetics, 2(12),
 e190. doi:10.1371/journal.pgen.0020190
-}
-\examples{
-M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
-Pcasnps(M)
 }

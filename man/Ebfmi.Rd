@@ -15,10 +15,10 @@ List with \code{ebfmi} (per chain), \code{min_ebfmi}, \code{n_chains}, \code{n}.
 \description{
 Formula: EBFMI = sum_{n=1}^{N} (E_n - E_{n-1})^2 / sum_{n=0}^{N} (E_n - Ebar)^2
 }
-\references{
-Betancourt (2016), Diagnosing Suboptimal Cotangent Disintegrations in Hamiltonian Monte Carlo, arXiv:1604.00695. Verified against the paper: the estimator is the displayed equation for BFMI-hat.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Ebfmi(V)
+}
+\references{
+Betancourt (2016), Diagnosing Suboptimal Cotangent Disintegrations in Hamiltonian Monte Carlo, arXiv:1604.00695. Verified against the paper: the estimator is the displayed equation for BFMI-hat.
 }

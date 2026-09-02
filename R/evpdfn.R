@@ -17,6 +17,9 @@
 #'   \code{chi}, \code{convex_ok}, \code{n}, \code{method}.
 #' @references Pickands (1981), Bull. Int. Statist. Inst. 49:859-878.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Evpdfn(V, V)
 Evpdfn <- function(x, y, t_grid = NULL, u = NULL) {
   xs <- .s03vec(x); ys <- .s03vec(y)
   n <- length(xs)

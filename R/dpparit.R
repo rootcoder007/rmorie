@@ -17,6 +17,8 @@
 #'   \code{counts}, \code{p_new}, \code{n}, \code{method}.
 #' @references Pitman & Yor (1997), Ann. Probab. 25(2):855-900.
 #' @export
+#' @examples
+#' Dpparit()
 Dpparit <- function(n = 100, alpha = 1, sigma = 0.5, seed = 42) {
   n <- as.integer(n)
   if (n < 1L) stop("n must be at least 1")

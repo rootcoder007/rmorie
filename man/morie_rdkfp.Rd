@@ -49,10 +49,10 @@ invariants and degrees of their end atoms, and folds the hashes
 into a bit vector -- the Daylight-style path fingerprint that
 RDKit's \code{RDKFingerprint} computes.
 }
+\examples{
+morie_rdkfp(adjacency = 5L, atomnum = 5L)
+}
 \references{
 Daylight Chemical Information Systems (2019). Daylight
 Theory Manual, Chapter 6: Fingerprints.
-}
-\examples{
-morie_rdkfp(adjacency = 5L, atomnum = 5L)
 }

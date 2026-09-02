@@ -35,6 +35,9 @@
 #'   Lotwick and Silverman (1982), JRSS B 44:406-413. Diggle (1983). Diggle
 #'   and Chetwynd (1991), Biometrics 47:1155-1163.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' spkcrs(V, V)
 spkcrs <- function(points1, points2, lambda1 = NULL, lambda2 = NULL,
                    r = NULL, region = NULL, correction = "ripley",
                    hypothesis = "independence") {

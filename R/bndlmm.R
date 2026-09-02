@@ -29,6 +29,9 @@
 #'   used here is Bonferroni rather than the paper's bootstrap, and is
 #'   labelled as such.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Bndlmm(V, V)
 Bndlmm <- function(theta, moments) {
   L <- as.matrix(theta)
   U <- as.matrix(moments)

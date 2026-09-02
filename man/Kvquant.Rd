@@ -28,13 +28,13 @@ codebook is Lloyd-Max for a standard normal, rescaled by
 Formula: y <- Pi . x; idx_j <- argmin_k |y_j - c_k|;
 ytilde_j <- c_\{idx_j\}; xtilde <- Pi' . ytilde
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Kvquant(V)
+}
 \references{
 Zandieh et al., arXiv:2504.19874, Algorithm 1 lines 2-11
 and Theorem 1. Fetched from arXiv. The paper specifies the codebook
 only as the MSE-minimising centroids; the Lloyd-Max construction is
-documented in the batch helper .b1_codebook.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Kvquant(V)
+documented in the batch helper .kvmse_codebook.
 }

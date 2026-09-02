@@ -19,6 +19,8 @@
 #' @references Ghosal & van der Vaart (2017), Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 13.3.3.
 #' @export
+#' @examples
+#' Ghosalbppathgen()
 Ghosalbppathgen <- function(c = 1.5, t_max = 1, n_jumps = 300,
                             seed = 42) {
   n_jumps <- as.integer(n_jumps)

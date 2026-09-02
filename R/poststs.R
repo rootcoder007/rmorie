@@ -49,6 +49,8 @@
 #'   \doi{10.2307/2344652}. Standard form; the paper is paywalled and not
 #'   held locally.
 #' @export
+#' @examples
+#' Poststs(y = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), Nh = c(1, 2, 3, 4, 5, 6, 7, 8))
 Poststs <- function(y, stratum, Nh) {
   d <- .ps_strata(y, stratum, Nh, "Poststs")
   N <- sum(d$sizes[d$order])

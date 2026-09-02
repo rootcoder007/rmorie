@@ -6,6 +6,9 @@
 #' @param temperature Numeric softmax temperature > 0 (default 1).
 #' @return Named list with tensor, entropy, temperature, method.
 #' @keywords internal
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' temperature_scaling(V)
 temperature_scaling <- function(x, temperature = 1) {
   if (temperature <= 0) stop("Temperature must be > 0")
   z <- as.numeric(x) / temperature

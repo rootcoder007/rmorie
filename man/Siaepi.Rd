@@ -13,7 +13,7 @@ Siaepi(G, beta, gamma, initial, t_max = 50, dt = 0.01)
 
 \item{gamma}{Recovery rate into the absorbing R compartment.}
 
-\item{initial}{Initial infection probability of each node, in [0, 1].}
+\item{initial}{Initial infection probability of each node, in \link{0, 1}.}
 
 \item{t_max}{Integration horizon. Default 50.}
 
@@ -41,12 +41,12 @@ exactly the SI model of \code{\link{Siepid}}.  The per-node total
 \code{S_i + I_i + R_i} is conserved by construction and is reported as
 \code{conservation_error} so the integration can be checked.
 }
+\examples{
+G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+Siaepi(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
+}
 \references{
 Pastor-Satorras, R. & Vespignani, A. (2001). Epidemic dynamics
 and endemic states in complex networks. Physical Review E 63, 066117,
 eq. (7). \doi{10.1103/PhysRevE.63.066117}
-}
-\examples{
-G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
-Siaepi(G, beta = 0.3, gamma = 0.1, initial = c(1, 0, 0))
 }

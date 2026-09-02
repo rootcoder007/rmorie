@@ -10,6 +10,10 @@
 #' @return List with ``p``, ``aic``, ``aic_unnormalised``, ``sigma2``, ``pacf``, ``n``.
 #' @references Akaike (1973), Information theory and an extension of the maximum likelihood principle, in Petrov and Csaki (eds), 2nd International Symposium on Information Theory. Not held locally; AIC = -2 log L + 2k and its AR(p) specialisation via the Levinson-Durbin innovation variance are the standard published forms.
 #' @export
+#' @examples
+#' set.seed(1)
+#' x <- as.numeric(filter(rnorm(100), 0.5, method = "recursive"))
+#' Aicar(x, max_p = 5)
 Aicar <- function(x, max_p = 10, demean = TRUE) {
   x <- .t1_vec(x); T <- length(x); P <- as.integer(max_p)
   if (T < P + 2) stop("series too short for max_p")

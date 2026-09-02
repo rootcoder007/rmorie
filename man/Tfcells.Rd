@@ -31,7 +31,7 @@ Nothing is estimated here; this is a count.
 }
 \details{
 The pasted stub previously returned a Kolmogorov-Smirnov statistic
-against a fitted normal -- a number in [0, 1] where an integer count
+against a fitted normal -- a number in \link{0, 1} where an integer count
 was expected, with no relationship to a partition cell.
 }
 \examples{

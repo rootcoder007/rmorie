@@ -26,14 +26,14 @@ Formula: rhat = Sxy / sqrt(Sxx Syy);
 t = rhat sqrt(n - 2)/sqrt(1 - rhat^2) on n - 2 df;
 z = atanh(rhat), se_z = 1/sqrt(n - 3)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Pearsonr(V, V)
+}
 \references{
 Wasserman (2004), All of Statistics, Example 7.13, which
 derives the plug-in sample correlation. Fetched as the full text of
 the book. The t test on n - 2 degrees of freedom and Fisher's z
 transform are NOT in that section; they are the standard published
 forms (Fisher, 1915, Biometrika 10(4), 507-521).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Pearsonr(V, V)
 }

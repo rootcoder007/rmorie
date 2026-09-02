@@ -27,11 +27,11 @@ one another, mapping the calibration sample onto itself returns it
 unchanged and a constant offset between model and observations is
 removed exactly.
 }
+\examples{
+morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Gudmundsson, L. et al. (2012). Technical note:
 downscaling RCM precipitation to the station scale. Hydrology and
 Earth System Sciences, 16, 3383-3390.
-}
-\examples{
-morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -26,7 +26,7 @@ effect transmitted along a chosen subgraph g of edges with all
 other edges turned off; in linear systems these path-restricted
 effects are sums of products of path coefficients along the
 retained paths (Pearl 2001, Section 2). For an acyclic coefficient
-matrix B with B[i, j] the coefficient on the edge from i to j, the
+matrix B with B\link{i, j} the coefficient on the edge from i to j, the
 unit-change effect along g is entry (x, y) of
 \eqn{(I - B_g)^{-1} = I + B_g + B_g^2 + \dots}
 where B_g zeroes every edge outside g. The full graph gives the

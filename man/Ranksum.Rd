@@ -27,14 +27,14 @@ E\link[dlm:W]{W} = n1(n1 + n2 + 1)/2;
 Var\link[dlm:W]{W} = n1 n2 (N + 1)/12 - n1 n2 sum(t^3 - t)/(12 N (N - 1));
 z = (W - E\link[dlm:W]{W} -+ 1/2) / sd
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ranksum(V, V)
+}
 \references{
 Wilcoxon (1945), Biometrics Bulletin 1(6), 80-83, and Mann
 & Whitney (1947), Annals of Mathematical Statistics 18(1), 50-60 --
 the primary sources. Wasserman (2004), All of Statistics, does NOT
 contain the rank-sum test; the full text of the book was fetched and
 searched to establish that.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ranksum(V, V)
 }

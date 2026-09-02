@@ -20,6 +20,8 @@
 #' @param mu,sigma,xi GEV location, scale (> 0), shape
 #' @return numeric vector of probabilities
 #' @export
+#' @examples
+#' morie_evt_gev_cdf(6, 5, 1.5, 0.1)
 morie_evt_gev_cdf <- function(x, mu, sigma, xi) {
   t <- (x - mu) / sigma
   if (abs(xi) < .evt_xi_tiny) {
@@ -36,6 +38,8 @@ morie_evt_gev_cdf <- function(x, mu, sigma, xi) {
 #' @inheritParams morie_evt_gev_cdf
 #' @return numeric vector of log-densities (-Inf off support, eq. 3.8)
 #' @export
+#' @examples
+#' morie_evt_gev_logpdf(x = c(1, 2, 3), mu = 0, sigma = 1, xi = 0.1)
 morie_evt_gev_logpdf <- function(x, mu, sigma, xi) {
   if (sigma <= 0) {
     return(rep(-Inf, length(x)))
@@ -57,6 +61,10 @@ morie_evt_gev_logpdf <- function(x, mu, sigma, xi) {
 #' @inheritParams morie_evt_gev_cdf
 #' @return scalar log-likelihood
 #' @export
+#' @examples
+#' x20 <- c(4.1, 5.3, 3.9, 6.8, 5, 4.4, 7.2, 5.9, 4.7, 6.1, 5.5, 
+#'     4, 8.3, 5.2, 4.9, 6.5, 5.7, 4.3, 7, 5.1)
+#' morie_evt_gev_loglik(x20, 5, 1.5, 0.1)
 morie_evt_gev_loglik <- function(x, mu, sigma, xi) {
   sum(morie_evt_gev_logpdf(x, mu, sigma, xi))
 }
@@ -78,6 +86,9 @@ morie_evt_gev_quantile <- function(p, mu, sigma, xi) {
 #' @param x block maxima
 #' @return list(mu, sigma, xi, loglik, cov, n, converged)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_evt_gev_mle(V)
 morie_evt_gev_mle <- function(x) {
   x <- as.numeric(x)
   n <- length(x)

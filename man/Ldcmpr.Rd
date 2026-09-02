@@ -36,6 +36,10 @@ also reported as \code{r2_genotypic}; this is what PLINK 1.9
 computes for its r-squared reports (genotype allele counts, phase
 not considered).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ldcmpr(V, V)
+}
 \references{
 Hill, W. G. and Robertson, A. (1968). Linkage
 disequilibrium in finite populations. Theoretical and Applied
@@ -44,8 +48,4 @@ Lewontin, R. C. (1964). Genetics 49(1), 49-67 (D, D-prime).
 PLINK 1.9 LD documentation (genotype-allele-count correlation),
 fetched 2026-08-09. EM phase resolution follows CRAN package
 genetics R/LD.R as documented in twoldp.R.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ldcmpr(V, V)
 }

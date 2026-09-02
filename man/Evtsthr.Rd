@@ -30,10 +30,10 @@ once the model holds.  The threshold chosen is the one whose forward
 window of fits has the smallest combined variance of log sigma* and
 xi -- the first place the parameters stop drifting.
 }
-\references{
-Northrop & Coleman (2014), Extremes 17(2):289-303.
-}
 \examples{
 set.seed(1)
 Evtsthr(rexp(200))
+}
+\references{
+Northrop & Coleman (2014), Extremes 17(2):289-303.
 }

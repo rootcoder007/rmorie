@@ -25,13 +25,13 @@ in variance, the proportion of variance attributable to missing
 data lambda, the fraction of missing information, and the degrees
 of freedom (Barnard-Rubin adjusted when \code{nu_com} is given).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_miefcl(V, V)
+}
 \references{
 Rubin, D. B. (1987). Multiple Imputation for
 Nonresponse in Surveys. Wiley.  van Buuren, S. (2018). Flexible
 Imputation of Missing Data, 2nd ed., Chapman & Hall/CRC.
 Barnard, J. and Rubin, D. B. (1999). Biometrika, 86, 948-955.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_miefcl(V, V)
 }

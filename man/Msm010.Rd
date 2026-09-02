@@ -25,11 +25,11 @@ Formula: Y = X beta + Z b + eps (eq. 5.1) with b ~ N(0, D), eps ~ N(0, R)
 and Cov(eps, b) = 0, so E(Y) = X beta and Var(Y) = Z D Z' + R. Returns the
 GLS/BLUE of beta, the BLUP of b and the marginal variance.
 }
+\examples{
+Msm010(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
+}
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),
 Multivariate Statistical Machine Learning Methods for Genomic Prediction,
 Springer, eq. (5.1) p.141. DOI 10.1007/978-3-030-89010-0.
-}
-\examples{
-Msm010(X = 5L, Z = 5L, y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L)
 }

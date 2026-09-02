@@ -15,6 +15,9 @@
 #' @param sensitivity Query sensitivity.
 #' @return The RDP epsilon at \code{alpha}.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_rdp_gaussian(V, V)
 morie_rdp_gaussian <- function(alpha, sigma, sensitivity = 1) {
   a <- as.numeric(alpha)[1]
   s <- as.numeric(sigma)[1]
@@ -35,6 +38,8 @@ morie_rdp_gaussian <- function(alpha, sigma, sensitivity = 1) {
 #' @param sensitivity Query sensitivity.
 #' @return The RDP epsilon at \code{alpha}.
 #' @export
+#' @examples
+#' morie_rdp_laplace(2, 1.0)
 morie_rdp_laplace <- function(alpha, lam, sensitivity = 1) {
   a <- as.numeric(alpha)[1]
   sens <- as.numeric(sensitivity)[1]

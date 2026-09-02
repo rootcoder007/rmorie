@@ -22,6 +22,9 @@
 #'   P. H. C. and Zhao, J. (2020). Journal of Econometrics 219(1),
 #'   101-122.
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- Drnpc(y_main = rnorm(10), y_neg = rnorm(10), D = rbinom(10, 1, 0.5)); TRUE
 Drnpc <- function(y_main, y_neg, D, X = NULL, alpha = 0.05) {
   ym <- .s03vec(y_main); yn <- .s03vec(y_neg); dv <- .s03vec(D)
   n <- length(ym)

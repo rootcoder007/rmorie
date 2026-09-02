@@ -17,6 +17,8 @@
 #'   Lemma 6.44 and Theorem 6.45. Read from the copy of the book held in
 #'   the corpus.
 #' @export
+#' @examples
+#' Sepcons(delta = 0.5, k = 5L, n = 5L)
 Sepcons <- function(delta, k, n) {
   d <- as.numeric(delta); k <- as.integer(k); n <- as.integer(n)
   if (d <= 0 || d >= 1)

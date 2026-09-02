@@ -16,6 +16,8 @@
 #'   of 0 equals the number of connected components. Fetched from the
 #'   author's own copy of the chapter.
 #' @export
+#' @examples
+#' Lapspec(W = 5L)
 Lapspec <- function(W, tol = 1e-10) {
   W <- as.matrix(W)
   n <- nrow(W)

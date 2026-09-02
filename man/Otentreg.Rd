@@ -20,9 +20,9 @@ Peyre & Cuturi (2019), eq. (4.1)-(4.2); Cuturi (2013), eq. (2).  The
 regularised problem is \verb{min <P,C> - eps H(P)}, so this is the term
 that gets subtracted.
 }
-\references{
-Peyre & Cuturi (2019), eq. (4.2).
-}
 \examples{
 Otentreg(T = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)
+}
+\references{
+Peyre & Cuturi (2019), eq. (4.2).
 }

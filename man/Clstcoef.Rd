@@ -24,9 +24,9 @@ with every leaf added.
 Formula: \code{C_v = 2 e(N_v) / (k_v (k_v - 1))}; the graph average is
 the mean over nodes with \code{k_v >= 2}.
 }
-\references{
-Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
-}
 \examples{
 Clstcoef(matrix(c(0, 1, 1, 1, 0, 1, 1, 1, 0), 3, 3))
+}
+\references{
+Watts, D. J. & Strogatz, S. H. (1998). Nature 393:440-442.
 }

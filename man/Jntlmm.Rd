@@ -44,13 +44,13 @@ a documented property of the method, not an artefact here.
 Formula: y_ij = x_ij' beta + b_i + e_ij;
 lambda_i(t) = lambda_0(t) exp(gamma' W_i + eta b_i).
 }
+\examples{
+Jntlmm(long_y = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+}
 \references{
 Henderson, Diggle and Dobson (2000), Joint modelling of
 longitudinal measurements and event time data, Biostatistics
 1(4):465-480, \doi{10.1093/biostatistics/1.4.465}; Rizopoulos
 (2012), Joint Models for Longitudinal and Time-to-Event Data,
 Chapman and Hall/CRC, chapter 4. \doi{10.1201/b12208}
-}
-\examples{
-Jntlmm(long_y = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), Z = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

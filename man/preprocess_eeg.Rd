@@ -26,8 +26,8 @@ R parity of \code{morie.entheo.preprocess_eeg}.  Uses
 \pkg{signal} when available for Butterworth filtering; falls back
 to an FFT-mask when not.
 }
-\keyword{internal}
 \examples{
 D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
 preprocess_eeg(D)
 }
+\keyword{internal}

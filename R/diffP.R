@@ -21,6 +21,11 @@
 #' @references Ying et al. (2018), Hierarchical Graph Representation
 #'   Learning with Differentiable Pooling, NeurIPS 31:4800-4810.
 #' @export
+#' @examples
+#' set.seed(1)
+#' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
+#' X <- matrix(rnorm(6), 3, 2)
+#' DiffP(A, X, K_clusters = 2)
 DiffP <- function(A, X, K_clusters = 2, S = NULL, seed = 42) {
   Am <- .s03mat(A)
   n <- nrow(Am)

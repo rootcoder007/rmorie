@@ -40,11 +40,11 @@ Durbin), centre the residuals, and regenerate B series by the
 fitted recursion driven by iid draws from the centred residuals
 (with burn-in), plus the mean.  p defaults to AIC selection.
 }
-\references{
-Buhlmann, P. (1997). Sieve bootstrap for time series.
-Bernoulli, 3(2), 123-148.
-}
 \examples{
 set.seed(1)
 morie_btarsv(rnorm(60), B = 50, burn = 20)
+}
+\references{
+Buhlmann, P. (1997). Sieve bootstrap for time series.
+Bernoulli, 3(2), 123-148.
 }

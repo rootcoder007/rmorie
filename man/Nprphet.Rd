@@ -32,11 +32,11 @@ Formula: \code{y(t) = T(t) + S(t) + A(t)},
 \code{S_p(t) = sum_j a_j cos(2 pi j t / p) + b_j sin(2 pi j t / p)},
 linear AR \code{A(t) = sum_i w_i y(t - i)}.
 }
-\references{
-Triebe, O. et al. (2021). NeuralProphet: explainable
-forecasting at scale. arXiv:2111.15397.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Nprphet(V, V)
+}
+\references{
+Triebe, O. et al. (2021). NeuralProphet: explainable
+forecasting at scale. arXiv:2111.15397.
 }

@@ -17,6 +17,11 @@
 #'   without replacement from a finite universe, JASA 47(260):663-685.
 #'   \doi{10.1080/01621459.1952.10483446}
 #' @export
+#' @examples
+#' y <- c(10, 20, 15)
+#' pi <- c(0.5, 0.4, 0.6)
+#' pi_ij <- matrix(c(0.5, 0.2, 0.3, 0.2, 0.4, 0.25, 0.3, 0.25, 0.6), 3, 3)
+#' Htvar1(y, pi, pi_ij)
 Htvar1 <- function(y, pi, pi_ij) {
   v <- .s03vec(y); p <- .s03vec(pi); P <- .s03mat(pi_ij)
   n <- length(v)

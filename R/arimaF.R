@@ -16,6 +16,9 @@
 #'   and Control, Chapters 4 and 7.  Standard published form; the
 #'   monograph is not in the local corpus and was not read.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Arimacss(V)
 Arimacss <- function(y, phi = numeric(0), theta = numeric(0), d = 0,
                      mu = 0) {
   y <- .t1_vec(y); n <- length(y)

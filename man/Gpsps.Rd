@@ -44,12 +44,12 @@ tests use.
 \details{
 Formula: k(tau) = sum_q w_q exp(-2 pi^2 tau^2 v_q) cos(2 pi tau mu_q).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Gpsps(V, V)
+}
 \references{
 Wilson and Adams (2013), Gaussian process kernels for
 pattern discovery and extrapolation, ICML 2013, PMLR
 28(3):1067-1075. arXiv:1302.4245
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Gpsps(V, V)
 }

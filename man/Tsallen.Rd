@@ -24,10 +24,10 @@ returned exactly at \code{q = 1} rather than dividing by zero.
 \details{
 Formula: \code{S_q = (1 / (q - 1)) (1 - sum_x p(x)^q)}.
 }
+\examples{
+Tsallen(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
+}
 \references{
 Tsallis, C. (1988). Possible generalization of
 Boltzmann-Gibbs statistics. J Stat Phys 52:479-487, equation (1).
-}
-\examples{
-Tsallen(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5)
 }

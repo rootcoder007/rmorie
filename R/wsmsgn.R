@@ -17,6 +17,9 @@
 #'   All of Statistics, does NOT contain the sign test; the full text of
 #'   the book was fetched and searched to establish that.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Sgntest(V)
 Sgntest <- function(x, md = 0) {
   x <- .t1_vec(x); n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")

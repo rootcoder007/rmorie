@@ -19,6 +19,9 @@
 #' @references Cinelli & Hazlett (2020), Making Sense of Sensitivity,
 #'   JRSS B 82(1):39-67.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cnffvw(V, V)
 Cnffvw <- function(y, D, X = NULL, R2_Y = 0, R2_D = 0, q = 1) {
   Chzlt(y, D, X, R2_Y, R2_D, q)
 }

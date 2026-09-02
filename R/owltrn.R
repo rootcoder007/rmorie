@@ -1,14 +1,14 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Outcome-weighted learning for an optimal treatment regime
-#'
-#' Zhao et al.'s reformulation is that maximizing the value
-#' \eqn{(d) = E\[Y 1{A = d(X)} / pi(A | X)\]} is the same problem as
-#' MINIMIZING the weighted misclassification risk
-#' \eqn{\[(Y / pi(A | X)) 1{A != d(X)}\]}, a classification problem in
-#' which the outcome is the weight and the observed treatment is the
-#' label. The surrogate is theirs -- the weighted HINGE loss with a
-#' ridge penalty, a linear-kernel weighted SVM,
-#' \eqn{in_b (1/n) sum w_i max(0, 1 - A_i x_i primeb) + lam ||b_slope||^2},
+# Outcome-weighted learning for an optimal treatment regime
+#
+# Zhao et al.'s reformulation is that maximizing the value
+# \eqn{(d) = E\[Y 1{A = d(X)} / pi(A | X)\]} is the same problem as
+# MINIMIZING the weighted misclassification risk
+# \eqn{\[(Y / pi(A | X)) 1{A != d(X)}\]}, a classification problem in
+# which the outcome is the weight and the observed treatment is the
+# label. The surrogate is theirs -- the weighted HINGE loss with a
+# ridge penalty, a linear-kernel weighted SVM,
+# \eqn{in_b (1/n) sum w_i max(0, 1 - A_i x_i primeb) + lam ||b_slope||^2},
 # prime minimized by full-batch subgradient descent on the Pegasos step
 # prime schedule \code{eta_t = 1 / (lam t)}: a fixed iteration count, no
 # prime sampling and no tolerance test. The intercept is not penalized.

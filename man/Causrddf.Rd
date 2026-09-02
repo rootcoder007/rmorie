@@ -43,13 +43,6 @@ method se with independent jumps (covariance term omitted and
 documented). Reduces exactly to the sharp estimate when the first
 stage jumps 0 to 1.
 }
-\references{
-Hahn, J., Todd, P. and van der Klaauw, W. (2001),
-Econometrica 69(1), 201-209 (estimand); Imbens and Kalyanaraman
-(2009), NBER w14726, Section 5.1 (implemented text, in the local
-registry); Imbens and Lemieux (2008), J Econometrics 142(2),
-615-635.
-}
 \examples{
 set.seed(1)
 x <- runif(300, -1, 1)
@@ -57,4 +50,11 @@ treat <- rbinom(300, 1, ifelse(x >= 0, 0.85, 0.15))
 y <- 1 + 2 * x + 0.6 * treat + rnorm(300, 0, 0.3)
 r <- Causrddf(x, y, treat, cutoff = 0)
 is.list(r)
+}
+\references{
+Hahn, J., Todd, P. and van der Klaauw, W. (2001),
+Econometrica 69(1), 201-209 (estimand); Imbens and Kalyanaraman
+(2009), NBER w14726, Section 5.1 (implemented text, in the local
+registry); Imbens and Lemieux (2008), J Econometrics 142(2),
+615-635.
 }

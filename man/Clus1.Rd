@@ -28,13 +28,13 @@ Formula: ybar_c = (1/m) sum_i ybar_i;
 v(ybar_c) = (1 - m/M) s_b^2 / m,
 s_b^2 = sum (ybar_i - ybar_c)^2 / (m - 1)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Clus1(V)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 9. Chapter 9 was NOT in the scanned excerpt available to this batch,
 so the standard published form is used; the finite-population factor
 (M - m)/M matches the convention of the sibling Cochran modules.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Clus1(V)
 }

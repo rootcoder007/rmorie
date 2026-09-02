@@ -42,6 +42,10 @@ A cluster with a single member, or with no variation, has
 as \code{NaN}, not 0: a unit that cannot be placed relative to its
 cluster is not average, it is unmeasured.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Mlwz(V, V)
+}
 \references{
 Raudenbush and Bryk (2002), Hierarchical Linear Models,
 2nd ed., Sage, ch. 5; Enders and Tofighi (2007), Psychological
@@ -49,8 +53,4 @@ Methods 12(2), 121-138, \doi{10.1037/1082-989X.12.2.121}. Neither
 source was in the local corpus; the transformation is arithmetic and
 is implemented in its standard published form, exactly as printed
 above.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Mlwz(V, V)
 }

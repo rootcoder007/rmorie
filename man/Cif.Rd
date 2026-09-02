@@ -25,10 +25,10 @@ list with the cumulative incidence, its standard error, the confidence interval 
 Aalen-Johansen: CIF_k(t) = sum S(t_{i-1}) d_ki / n_i, where S is the ALL-CAUSE Kaplan-Meier.
 That factor is the point: treating competing events as censored overstates the incidence.
 }
-\references{
-Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Cif(V, V)
+}
+\references{
+Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
 }

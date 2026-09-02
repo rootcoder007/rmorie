@@ -17,10 +17,10 @@ List with \code{betweenness}, \code{normalised}, \code{n}.
 \description{
 Formula: c_B(v) = sum_{s != v != t} sigma_st(v) / sigma_st, accumulated by dependency delta_s(v) = sum_w (sigma_sv/sigma_sw)(1 + delta_s(w))
 }
-\references{
-Brandes (2001), A faster algorithm for betweenness centrality, Journal of Mathematical Sociology 25:163-177. Paywalled and not held locally; the dependency recursion implemented here is the standard published form of the algorithm. Its output is checked in the batch's anchor file against brute-force enumeration of all shortest paths on a small graph.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Btwcent(V)
+}
+\references{
+Brandes (2001), A faster algorithm for betweenness centrality, Journal of Mathematical Sociology 25:163-177. Paywalled and not held locally; the dependency recursion implemented here is the standard published form of the algorithm. Its output is checked in the batch's anchor file against brute-force enumeration of all shortest paths on a small graph.
 }

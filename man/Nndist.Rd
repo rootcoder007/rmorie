@@ -31,13 +31,13 @@ complete spatial randomness benchmark is
 \code{G_csr(r) = 1 - exp(-lambda pi r^2)}, so \code{G_hat} above it
 indicates clustering and below it regularity.
 }
-\references{
-Diggle, P. J. (2003). Statistical Analysis of Spatial
-Point Patterns, 2nd edition, Arnold; section 2.3 defines G and
-section 4.3 the border correction.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)
 Nndist(M, V)
+}
+\references{
+Diggle, P. J. (2003). Statistical Analysis of Spatial
+Point Patterns, 2nd edition, Arnold; section 2.3 defines G and
+section 4.3 the border correction.
 }

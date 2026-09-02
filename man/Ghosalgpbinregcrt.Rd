@@ -27,10 +27,10 @@ nothing new to the machinery -- that is the point of Theorem 11.22.
 \details{
 Formula: eps_n = n^(-s/(2s+d)).
 }
+\examples{
+Ghosalgpbinregcrt()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, Theorems 11.20 and 11.22.
-}
-\examples{
-Ghosalgpbinregcrt()
 }

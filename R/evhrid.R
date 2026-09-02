@@ -17,6 +17,8 @@
 #' @references Husler & Reiss (1989), Statist. Probab. Letters
 #'   7(4):283-286.
 #' @export
+#' @examples
+#' Evhrid(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lam = 5L)
 Evhrid <- function(x, y, lam) {
   xs <- .s03vec(x); ys <- .s03vec(y); lam <- as.numeric(lam)
   if (!length(xs) || !length(ys)) stop("empty input: x and y are required")

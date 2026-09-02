@@ -29,12 +29,12 @@ Indices are one-based.
 Formula: p_i = z_i / sum_j z_j; Yhat = (1/n) sum_i y_i / p_i;
 v(Yhat) = sum_i (y_i/p_i - Yhat)^2 / (n (n - 1))
 }
+\examples{
+Ppssamp(z = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+}
 \references{
 Cochran (1977), Sampling Techniques, 3rd edition, Chapter
 9A. Chapter 9A was NOT in the scanned excerpt available to this
 batch, so the standard published form (Hansen & Hurwitz 1943, Annals
 of Mathematical Statistics 14(4), 333-362) is used.
-}
-\examples{
-Ppssamp(z = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
 }

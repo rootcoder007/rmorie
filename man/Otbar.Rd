@@ -2,7 +2,8 @@
 % Please edit documentation in R/otbar.R
 \name{Otbar}
 \alias{Otbar}
-\title{Average measures the way transport says they should be averaged}
+\title{\eqn{v_k = mu_k/(K_k prime u_k)} -- Benamou et al. (2015) Section 3.2;
+Peyre and Cuturi (2019) eq. (9.11), (9.15).}
 \usage{
 Otbar(A, C_list, weights, epsilon, max_iter = 200)
 }
@@ -22,14 +23,6 @@ List with \code{bary}, \code{mass}, \code{n}, \code{K},
 \code{iters}.
 }
 \description{
-The Euclidean average of two shifted bumps is two bumps; the
-Wasserstein average is one bump in between. The barycentre respects the
-geometry of the ground space rather than the vector-space structure of
-the histograms. Fixing the support turns the problem into a coupled set
-of Sinkhorn problems sharing a common row scaling.
-}
-\details{
-Formula: \eqn{rgmin_nu sum_k w_k OT_eps(mu_k, nu)}, solved by
 \eqn{v_k = mu_k/(K_k prime u_k)} -- Benamou et al. (2015) Section 3.2;
 Peyre and Cuturi (2019) eq. (9.11), (9.15).
 }

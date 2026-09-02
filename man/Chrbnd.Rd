@@ -36,11 +36,11 @@ contact set -- and takes the minimum over that set of m_v - k se_v.
 With one cell it reduces to the ordinary one-sided interval, and with
 zero sampling noise to the plain minimum.
 }
-\references{
-Chernozhukov, Lee & Rosen (2013), Intersection Bounds,
-Econometrica 81(2):667-737.
-}
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 Chrbnd(V)
+}
+\references{
+Chernozhukov, Lee & Rosen (2013), Intersection Bounds,
+Econometrica 81(2):667-737.
 }

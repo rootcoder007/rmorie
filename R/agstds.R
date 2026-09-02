@@ -10,6 +10,9 @@
 #' @return List with ``asr``, ``variance``, ``se``, ``ci_lower``, ``ci_upper``, ``weights``, ``k``.
 #' @references Boyle and Parkin (1991), Statistical methods for registries, in Jensen et al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications 95. Not held locally; the direct standardisation estimator and its Poisson variance are the standard published forms.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Agestd(V, V)
 Agestd <- function(rates, standard_pop, person_time = NULL) {
   r <- .t1_vec(rates); w <- .t1_vec(standard_pop); k <- length(r)
   if (k != length(w)) stop("rates and standard_pop must be the same length")

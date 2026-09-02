@@ -30,12 +30,12 @@ therefore reproduces the pooled estimator exactly.  The reported
 heterogeneity statistic is the size-weighted variance of \code{CATT}
 across strata, exactly zero when all strata share an effect.
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Drhtg(V, V)
+}
 \references{
 Sant'Anna, P. H. C. and Zhao, J. (2020). Journal of
 Econometrics 219(1), 101-122, equation (2.6).  Athey, S. and
 Imbens, G. (2016). PNAS 113(27), 7353-7360.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Drhtg(V, V)
 }

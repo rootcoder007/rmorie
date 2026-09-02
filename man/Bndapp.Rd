@@ -35,6 +35,10 @@ For a contrast \eqn{t_1 > t_0} the upper bound is
 implies \eqn{y(t_1) \ge y(t_0)} unit by unit (Manski 1997,
 Proposition M2).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Bndapp(V, V)
+}
 \references{
 Manski, C. F. and Pepper, J. V. (2000), Monotone
 Instrumental Variables: With an Application to the Returns to
@@ -43,8 +47,4 @@ Corollary 2) and eq. (34). Manski, C. F. (1997), Monotone Treatment
 Response, Econometrica 65(6):1311-1334, Proposition M2, as printed
 in Molinari, F. (2021), Handbook of Econometrics 7A, eq. (2.13)
 (arXiv:2004.11751).
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Bndapp(V, V)
 }

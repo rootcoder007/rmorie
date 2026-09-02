@@ -271,6 +271,41 @@ morie_lmm_v <- function(Z, D, R = NULL) {
 }
 
 #' @noRd
+#' REML log-likelihood of a linear mixed model (MVSML eq. 5.2)
+#'
+#' Restricted log-likelihood for y = X b + Z u + e with u ~ N(0, D) and
+#' e ~ N(0, R): the profile over b is taken at its GLS estimate and the
+#' log-determinant of X' V^-1 X is subtracted (Searle, Casella &
+#' McCulloch 1992, ch. 6; MVSML ch. 5). Companion of [morie_lmm_loglik()].
+#' The one-way random-effects REML fit lives in [morie_remlfn()].
+#'
+#' @param X Fixed-effects design matrix (n x p).
+#' @param Z Random-effects design matrix (n x q).
+#' @param y Numeric response of length n.
+#' @param D Covariance of the random effects (q x q).
+#' @param R Residual covariance (n x n); identity when `NULL`.
+#' @return A list with `loglik` (the REML log-likelihood) and `beta`
+#'   (the GLS fixed-effect estimate).
+#' @examples
+#' X <- matrix(1, 6, 1)
+#' Z <- matrix(c(1,0, 1,0, 1,0, 0,1, 0,1, 0,1), 6, byrow = TRUE)
+#' y <- c(5.0, 5.2, 4.8, 6.4, 6.6, 6.2)
+#' morie_reml_loglik(X, Z, y, diag(0.5, 2))$loglik
+#' @export
+morie_reml_loglik <- function(X, Z, y, D, R = NULL) {
+  X <- as.matrix(X)
+  y <- as.numeric(y)
+  V <- morie_lmm_v(Z, D, R)
+  Vi <- morie_solve(V)
+  A <- t(X) %*% Vi %*% X
+  beta <- morie_solve(A, t(X) %*% Vi %*% y)
+  r <- y - X %*% beta
+  ll <- -0.5 * determinant(A, logarithm = TRUE)$modulus[1] -
+    0.5 * determinant(V, logarithm = TRUE)$modulus[1] -
+    0.5 * as.numeric(t(r) %*% Vi %*% r)
+  list(loglik = ll, beta = as.numeric(beta))
+}
+
 morie_lmm_loglik <- function(X, Z, y, D, R = NULL, beta = NULL) {
   X <- as.matrix(X)
   y <- as.numeric(y)

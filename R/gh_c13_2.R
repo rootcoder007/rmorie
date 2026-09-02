@@ -24,6 +24,9 @@
 #'   Nonparametric Bayesian Inference, CUP, section 13.2; Susarla &
 #'   Van Ryzin (1976); Kaplan & Meier (1958).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Ghosalsurvdpkm(V)
 Ghosalsurvdpkm <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {
   xv <- as.numeric(x)
   n <- length(xv)

@@ -19,6 +19,9 @@
 #' @references Rosenbaum (2002), Observational Studies, 2nd ed.,
 #'   Springer, section 4.3.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' CnsRos(V)
 CnsRos <- function(pairs, Gamma = 1) {
   d <- .s03vec(pairs)
   d <- d[d != 0]

@@ -34,13 +34,8 @@ inversion because VanRaden's G is singular whenever markers
 outnumber individuals.
 }
 \details{
-Formula: [X'X, X'Z; Z'X, Z'Z + G^{-1] k} [beta; u] = [X'y; Z'y],
+Formula: \link{X'X, X'Z; Z'X, Z'Z + G^{-1} k} \link{beta; u} = \link{X'y; Z'y},
 k = sigma_e^2 / sigma_u^2.
-}
-\references{
-VanRaden (2008), Efficient methods to compute genomic
-predictions, Journal of Dairy Science 91(11):4414-4423.
-\doi{10.3168/jds.2007-0980}
 }
 \examples{
 set.seed(1)
@@ -51,4 +46,9 @@ G <- diag(q)
 u <- rnorm(q)
 y <- X \%*\% c(1, 0.5) + Z \%*\% u + rnorm(n)
 Gblupr(y, X, Z, G)
+}
+\references{
+VanRaden (2008), Efficient methods to compute genomic
+predictions, Journal of Dairy Science 91(11):4414-4423.
+\doi{10.3168/jds.2007-0980}
 }

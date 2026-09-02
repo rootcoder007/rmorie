@@ -29,10 +29,10 @@ normal equations being diagonally dominant after the unit ridge.
 Formula: beta_k <- sum_i (y_i - sum_{j != k} beta_j s_ij) s_ik
 / (sum_i s_ik^2 + 1).
 }
+\examples{
+Ghosalfuncreg()
+}
 \references{
 Ghosal & van der Vaart (2017), Fundamentals of
 Nonparametric Bayesian Inference, CUP, section 10.4.5.
-}
-\examples{
-Ghosalfuncreg()
 }

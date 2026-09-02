@@ -370,6 +370,15 @@
 #' @param names column names matching the DAG node labels
 #' @return list(score, loglik, k, penalty, n)
 #' @export
+#' @examples
+#' set.seed(1)
+#' n <- 60
+#' x <- rnorm(n)
+#' y <- 0.8 * x + rnorm(n, 0, 0.5)
+#' d <- cbind(x, y)
+#' dag <- rbind(c("x", "y"))
+#' r <- morie_bicdag(d, dag, names = c("x", "y"))
+#' str(r, max.level = 1)
 morie_bicdag <- function(data, dag, names = NULL) {
   d <- as.matrix(data)
   storage.mode(d) <- "double"
@@ -427,6 +436,8 @@ morie_bicdag <- function(data, dag, names = NULL) {
 #' @return list(isbow, direct, confounded, nbows, bowfree, acyclic,
 #'   identified, bows)
 #' @export
+#' @examples
+#' morie_bowarc(dag = c(1, 2, 3, 4, 5, 6, 7, 8), bidirected = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_bowarc <- function(dag, bidirected, x, y) {
   edges <- .morie_ml_edges(dag)
   bid <- as.matrix(bidirected)
@@ -460,6 +471,9 @@ morie_bowarc <- function(dag, bidirected, x, y) {
 #' @param triple optional c(a, c, b) to test as a collider at c
 #' @return list(ncolliders, colliders, iscollider, shielded, nedges)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_collider(V)
 morie_collider <- function(dag, triple = NULL) {
   edges <- .morie_ml_edges(dag)
   cols <- .morie_ml_colliders(edges)
@@ -484,6 +498,9 @@ morie_collider <- function(dag, triple = NULL) {
 #' @return list(equivalent, sameskeleton, samecolliders, nskeleton,
 #'   ncolliders1, ncolliders2)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_mectest(V, V)
 morie_mectest <- function(dag1, dag2) {
   e1 <- .morie_ml_edges(dag1); e2 <- .morie_ml_edges(dag2)
   s1 <- .morie_ml_skeleton(e1); s2 <- .morie_ml_skeleton(e2)
@@ -511,6 +528,10 @@ morie_mectest <- function(dag1, dag2) {
 #' @param w further conditioning nodes
 #' @return list(rule1, rule2, rule3, nrules, zwsize)
 #' @export
+#' @examples
+#' dag <- rbind(c("x", "z"), c("z", "y"), c("u", "x"), c("u", "y"))
+#' r <- morie_docalc(dag, y = "y", z = "z", x = "x")
+#' str(r, max.level = 1)
 morie_docalc <- function(dag, y, z, x = character(0), w = character(0)) {
   edges <- .morie_ml_edges(dag)
   x <- as.character(x); w <- as.character(w); zs <- as.character(z)
@@ -548,6 +569,9 @@ morie_docalc <- function(dag, y, z, x = character(0), w = character(0)) {
 #' @param x intervened node(s)
 #' @return list(edges, removed, nremoved, nkept, nnodes)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_dointerv(V, V)
 morie_dointerv <- function(dag, x) {
   edges <- .morie_ml_edges(dag)
   xs <- as.character(x)
@@ -569,6 +593,9 @@ morie_dointerv <- function(dag, x) {
 #' @param z conditioning set
 #' @return list(dseparated, npaths, nnodes, ncond)
 #' @export
+#' @examples
+#' dag <- rbind(c("x", "z"), c("z", "y"))
+#' morie_dseptest(dag, "x", "y", "z")
 morie_dseptest <- function(dag, x, y, z = character(0)) {
   edges <- .morie_ml_edges(dag)
   nodes <- .morie_ml_nodes(edges, c(x, y, z))
@@ -592,6 +619,9 @@ morie_dseptest <- function(dag, x, y, z = character(0)) {
 #' @param indep the observed distributional independence
 #' @return list(dseparated, indep, faithful, markov, violation)
 #' @export
+#' @examples
+#' dag <- rbind(c("x", "z"), c("z", "y"))
+#' morie_faithchk(dag, "x", "y", "z", indep = TRUE)
 morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
   sep <- .morie_ml_dsep(.morie_ml_edges(dag), x, y, as.character(z))
   indep <- isTRUE(indep)
@@ -636,6 +666,9 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 #' @param threshold cutoff below which the samples are called independent
 #' @return list(hsic, nhsic, independent, n)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_hsicstat(V, V)
 morie_hsicstat <- function(a, b, sigma_a = NULL, sigma_b = NULL,
                            threshold = 0.01) {
   a <- as.numeric(a); b <- as.numeric(b)
@@ -661,6 +694,8 @@ morie_hsicstat <- function(a, b, sigma_a = NULL, sigma_b = NULL,
 #' @param rung 1, 2, or 3
 #' @return list(level, name, action, question, needsgraph, needsscm)
 #' @export
+#' @examples
+#' morie_causrung(2)
 morie_causrung <- function(rung) {
   rung <- as.integer(rung)
   tab <- list(
@@ -687,6 +722,9 @@ morie_causrung <- function(rung) {
 #' @param tol the threshold a cell probability must exceed
 #' @return list(minprob, holds, ncells, nstrata, nlevels)
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' morie_poschk(V, V)
 morie_poschk <- function(treat, stratum, tol = 0) {
   treat <- as.character(treat); stratum <- as.character(stratum)
   if (length(treat) != length(stratum) || length(treat) == 0L) {
@@ -729,6 +767,8 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' @param x optional basis matrix for a linear tau(X)
 #' @return list(tau, ate, loss, n, k)
 #' @export
+#' @examples
+#' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rlearn <- function(y, t, m, e, x = NULL) {
   y <- as.numeric(y); t <- as.numeric(t)
   m <- as.numeric(m); e <- as.numeric(e)
@@ -793,6 +833,8 @@ morie_rlearn <- function(y, t, m, e, x = NULL) {
 #' @param maxsize largest candidate set considered
 #' @return list(found, size, sepset, ntested, nnodes)
 #' @export
+#' @examples
+#' morie_sepset(dag = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_sepset <- function(dag, x, y, maxsize = 3L) {
   edges <- .morie_ml_edges(dag)
   nodes <- .morie_ml_nodes(edges, c(x, y))
@@ -833,6 +875,8 @@ morie_sepset <- function(dag, x, y, maxsize = 3L) {
 #' @param tol largest tolerated off-diagonal magnitude
 #' @return list(maxinterference, nointerference, consistent, holds, n)
 #' @export
+#' @examples
+#' morie_sutvachk(interference = 5L)
 morie_sutvachk <- function(interference, versions = 1L, tol = 0) {
   mat <- as.matrix(interference)
   storage.mode(mat) <- "double"

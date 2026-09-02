@@ -26,6 +26,10 @@ min_j (x'A)_j and max_i (Ay)_i.
 \details{
 Formula: v = max_x min_y x' A y = min_y max_x x' A y
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Matgame(V)
+}
 \references{
 von Neumann, J. (1928), Zur Theorie der
 Gesellschaftsspiele, Mathematische Annalen 100, 295-320 -- the
@@ -33,8 +37,4 @@ minimax theorem. The fictitious-play iteration is Brown (1951) and
 its convergence for zero-sum games is Robinson (1951), Annals of
 Mathematics 54(2), 296-301; neither is von Neumann's and both are
 cited to their own sources.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Matgame(V)
 }

@@ -22,6 +22,9 @@
 #' @references Zhang, Rao & Agrawala (2023), Adding Conditional Control
 #'   to Text-to-Image Diffusion Models, ICCV 2023:3836-3847.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Cncpat(V, V)
 Cncpat <- function(base, condition, zero_conv_weight = 0, seed = 42) {
   B <- .s03mat(base); Cm <- .s03mat(condition)
   H <- nrow(B)

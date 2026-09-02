@@ -19,20 +19,20 @@ List with \code{estimate}, \code{H}, \code{preactivation},
 }
 \description{
 Adding the self-loop before normalising keeps the eigenvalues of the
-propagation operator inside [-1, 1], which is what stops repeated
+propagation operator inside \link{-1, 1}, which is what stops repeated
 application from exploding.
 }
 \details{
 Formula: H' = relu(Dt^{-1/2} (A + I) Dt^{-1/2} X W),
 Dt = diag(rowSums(A + I)).
 }
-\references{
-Kipf and Welling (2017), ICLR 2017, eqs. (2) and (8).
-arXiv:1609.02907
-}
 \examples{
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 X <- matrix(rnorm(6), 3, 2)
 W <- matrix(rnorm(4), 2, 2)
 GcnL(A, X, W)
+}
+\references{
+Kipf and Welling (2017), ICLR 2017, eqs. (2) and (8).
+arXiv:1609.02907
 }

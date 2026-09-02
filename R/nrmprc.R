@@ -23,6 +23,9 @@
 #'   1278-1291. Ghosal, S. & van der Vaart, A. (2017). Fundamentals of
 #'   Nonparametric Bayesian Inference, CUP, section 14.6.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Nrmprc(V)
 Nrmprc <- function(y, alpha = 1, tau = 1, u_max = 10, n_grid = 6000) {
   v <- as.numeric(y)
   tt <- as.numeric(tau)

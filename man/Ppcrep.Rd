@@ -23,12 +23,12 @@ BDA3 flags values below 0.01 or above 0.99 as major failures.
 \details{
 Formula: p_B ~= (1/S) sum_s 1\{ T(y_rep^s, theta^s) >= T(y, theta^s) \}
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+Ppcrep(V, V)
+}
 \references{
 Gelman, Carlin, Stern, Dunson, Vehtari & Rubin (2013),
 Bayesian Data Analysis, 3rd edition, Section 6.3. Fetched as the full
 text of the book from the author's own copy.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-Ppcrep(V, V)
 }

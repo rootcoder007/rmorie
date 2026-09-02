@@ -20,6 +20,9 @@
 #' @references Triebe, O. et al. (2021). NeuralProphet: explainable
 #'   forecasting at scale. arXiv:2111.15397.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Nprphet(V, V)
 Nprphet <- function(ds, y, ar_layers = 0, n_changepoints = 3, seasonality = c(365.25, 3)) {
   t <- as.numeric(ds); yv <- as.numeric(y); n <- length(yv)
   p <- as.integer(ar_layers)

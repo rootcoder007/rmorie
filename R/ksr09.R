@@ -18,6 +18,9 @@
 #'   the full text of the book. The Huber psi is Huber (1964), Annals of
 #'   Mathematical Statistics 35(1), 73-101.
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Zestim(V)
 Zestim <- function(x, kind = "huber", k = 1.345, iters = 200) {
   x <- .t1_vec(x); n <- length(x)
   if (n < 1L) stop("the sample must be non-empty")

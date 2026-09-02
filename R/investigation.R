@@ -141,6 +141,9 @@ morie_compare_nested_logistic_models <- function(data, outcome,
 #' @return list(ate, y1, y0).
 #' @keywords internal
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- .morie_hajek_ate(ps = rnorm(10), t = rnorm(10), y = rnorm(10)); TRUE
 .morie_hajek_ate <- function(ps, t, y) {
   treated <- t == 1
   control <- t == 0

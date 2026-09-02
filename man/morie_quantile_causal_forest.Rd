@@ -35,10 +35,6 @@ forest runs on \verb{1\{Y <= q_tau\}}. A negative CDF contrast means
 treatment pushes mass above the threshold, so \code{shift_effect} is its
 negation. Mirrors \code{morie.fn.qbcfgr}.
 }
-\references{
-Athey S, Tibshirani J, Wager S (2019). Generalized random
-forests. \emph{The Annals of Statistics} 47(2), 1148-1178.
-}
 \examples{
 set.seed(4)
 n <- 120
@@ -47,4 +43,8 @@ d <- rbinom(n, 1, 0.5)
 y <- 1 + X[, 1] + d * 0.8 + rnorm(n, 0, 0.3)
 r <- morie_quantile_causal_forest(y, d, X, quantile = 0.5, n_trees = 20L)
 str(r, max.level = 1)
+}
+\references{
+Athey S, Tibshirani J, Wager S (2019). Generalized random
+forests. \emph{The Annals of Statistics} 47(2), 1148-1178.
 }

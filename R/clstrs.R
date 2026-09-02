@@ -21,6 +21,8 @@
 #'   the scanned excerpt available to this batch, so the standard
 #'   published form is used.
 #' @export
+#' @examples
+#' Clusdes(rho = 0.05, S2 = 1, c1 = 10, c2 = 1, budget = 1000)
 Clusdes <- function(rho, S2, c1, c2, budget) {
   rho <- as.numeric(rho); S2 <- as.numeric(S2)
   c1 <- as.numeric(c1); c2 <- as.numeric(c2); budget <- as.numeric(budget)

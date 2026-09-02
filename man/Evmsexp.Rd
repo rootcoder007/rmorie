@@ -28,11 +28,11 @@ perfectly dependent.  The Pickands function of this family is
 A(t) = (t^(1/alpha) + (1-t)^(1/alpha))^alpha and the coefficient of
 upper tail dependence is 2 - 2^alpha.
 }
+\examples{
+Evmsexp(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
+}
 \references{
 Tawn (1988), Biometrika 75(3):397-415; Coles (2001), An
 Introduction to Statistical Modeling of Extreme Values, Springer,
 eq. (8.10) p. 146.
-}
-\examples{
-Evmsexp(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5)
 }

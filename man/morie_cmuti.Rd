@@ -21,14 +21,14 @@ rank-based, the estimate is exactly invariant under strictly
 increasing marginal transformations.  Also returns Linfoot's
 informational coefficient of correlation sqrt(1 - exp(-2 I)).
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_cmuti(V, V)
+}
 \references{
 Calsaverini, R. S. and Vicente, R. (2009). An
 information-theoretic approach to statistical dependence: Copula
 information. EPL, 88, 68003.  Linfoot, E. H. (1957). An
 informational measure of correlation. Information and Control,
 1, 85-89.
-}
-\examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_cmuti(V, V)
 }

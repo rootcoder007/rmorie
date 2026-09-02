@@ -23,6 +23,9 @@
 #' @references Genevay, A., Peyre, G. and Cuturi, M. (2018). Proceedings
 #'   of Machine Learning Research 84:1608-1617 (AISTATS).
 #' @export
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Otker(V, V)
 Otker <- function(X, Y, kernel = "gaussian", epsilon = 0.1, gamma = 1,
                   max_iter = 200) {
   A <- as.matrix(X); B <- as.matrix(Y)

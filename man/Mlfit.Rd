@@ -2,7 +2,10 @@
 % Please edit documentation in R/mlfit.R
 \name{Mlfit}
 \alias{Mlfit}
-\title{Gaussian ML log-likelihood of a linear mixed model at a given V}
+\title{GLS value \eqn{(X prime V^-1 X)^-1 X prime V^-1 y}, which is the maximiser for
+any fixed \code{V}; what is returned is therefore the profile
+log-likelihood in \code{V}. \code{V} must be positive definite -- an
+inadmissible set of variance components is refused, not returned.}
 \usage{
 Mlfit(y, X, V)
 }
@@ -18,17 +21,14 @@ List with estimate (log-likelihood), loglik, neg2loglik,
 logdet_V, quadratic_form, aic, bic, n, p.
 }
 \description{
-
-}
-\details{
 The Cholesky route is used for both the determinant and the quadratic
 form, so a non-positive-definite \code{V} fails at the factorisation
 rather than producing a finite nonsense value.
 }
+\examples{
+Mlfit(y = 5L, X = 5L, V = 5L)
+}
 \references{
 Hartley and Rao (1967), Biometrika 54(1-2), 93-108,
 \doi{10.1093/biomet/54.1-2.93}.
-}
-\examples{
-Mlfit(y = 5L, X = 5L, V = 5L)
 }

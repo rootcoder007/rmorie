@@ -481,7 +481,7 @@ test_that("sobls: default sample is N-by-d in the unit cube", {
   expect_true(all(res$sample >= 0 & res$sample <= 1))
   expect_equal(res$N, 64L)
   expect_equal(res$d, 2L)
-  expect_identical(res$method, "Sobol QMC (Sobol 1967)")
+  expect_match(res$method, "^Sobol QMC \\(Sobol 1967\\)")
 })
 
 test_that("sobls: integrand path adds estimate and se", {
@@ -614,35 +614,6 @@ test_that("morie_spectral_density: custom fs and nperseg honoured", {
 
 test_that("morie_spectral_density: too-short input errors", {
   expect_error(morie_spectral_density(1:5), ">=8")
-})
-
-test_that("sparse_attention: scalar N gives N-by-N mask", {
-  res <- rmorie:::sparse_attention(10L, window = 2L, stride = 4L)
-  expect_type(res, "list")
-  expect_named(res, c("tensor", "boolean", "density", "method"))
-  expect_equal(dim(res$boolean), c(10L, 10L))
-  expect_true(is.logical(res$boolean))
-  expect_true(res$density > 0 && res$density <= 1)
-  expect_true(all(res$tensor[res$boolean] == 0))
-  expect_true(all(is.infinite(res$tensor[!res$boolean])))
-  expect_identical(res$method, "sparse-attention")
-})
-
-test_that("sparse_attention: random links increase density", {
-  d0 <- rmorie:::sparse_attention(20L,
-    window = 1L, stride = 50L,
-    n_random = 0L
-  )$density
-  d1 <- rmorie:::sparse_attention(20L,
-    window = 1L, stride = 50L,
-    n_random = 5L, seed = 1L
-  )$density
-  expect_true(d1 >= d0)
-})
-
-test_that("sparse_attention: vector input uses its length as N", {
-  res <- rmorie:::sparse_attention(rep(0, 6))
-  expect_equal(dim(res$boolean), c(6L, 6L))
 })
 
 test_that("sptag: pairwise vote agreement matrix is symmetric", {

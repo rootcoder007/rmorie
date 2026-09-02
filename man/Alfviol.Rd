@@ -48,9 +48,9 @@ Equations (44) and (45) average over bonds and angles while (46) sums
 over non-bonded pairs; that asymmetry is in the published text and is
 reproduced rather than tidied away.
 }
-\references{
-Jumper et al (2021) Nature 596:583-589, Suppl. eq. (44)-(47)
-}
 \examples{
 Alfviol()
+}
+\references{
+Jumper et al (2021) Nature 596:583-589, Suppl. eq. (44)-(47)
 }

@@ -20,10 +20,10 @@ Treated units keep weight 1; controls are reweighted by
 \code{e / (1 - e)} so the control arm matches the treated covariate
 distribution. Mirrors \code{morie.fn.causipsw}.
 }
+\examples{
+morie_att_weights(c(1, 0, 0), c(0.5, 0.25, 0.5))
+}
 \references{
 Hernan MA, Robins JM (2020). \emph{Causal Inference: What
 If}. Chapman & Hall/CRC, Ch. 15.
-}
-\examples{
-morie_att_weights(c(1, 0, 0), c(0.5, 0.25, 0.5))
 }
