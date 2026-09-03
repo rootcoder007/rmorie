@@ -194,7 +194,7 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
 #' @export
 Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
   ys <- as.numeric(y)
-  tt <- as.numeric(TRUE)
+  tt <- as.numeric(T)
   g <- as.numeric(ps)
   q1 <- as.numeric(Q1)
   q0 <- as.numeric(Q0)

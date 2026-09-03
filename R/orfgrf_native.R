@@ -359,9 +359,9 @@ orf_estimate <- function(Y, T, X, W, x, trees,
   if (identical(residualize, "global")) {
     flat <- rep(1 / n, n)
     qh <- local_nuisance(Y, W, flat, ridge = ridge)$fit
-    gh <- local_nuisance(TRUE, W, flat, ridge = ridge)$fit
+    gh <- local_nuisance(T, W, flat, ridge = ridge)$fit
     yr <- Y - qh
-    tr <- TRUE - gh
+    tr <- T - gh
   } else if (isTRUE(leave_one_out)) {
     yr <- numeric(n)
     tr <- numeric(n)
@@ -370,15 +370,15 @@ orf_estimate <- function(Y, T, X, W, x, trees,
       tr[i] <- 0
       next }
       qh <- local_nuisance(Y, W, w, exclude = i - 1L, ridge = ridge)$fit
-      gh <- local_nuisance(TRUE, W, w, exclude = i - 1L, ridge = ridge)$fit
+      gh <- local_nuisance(T, W, w, exclude = i - 1L, ridge = ridge)$fit
       yr[i] <- Y[i] - qh[i]
-      tr[i] <- TRUE[i] - gh[i]
+      tr[i] <- T[i] - gh[i]
     }
   } else {
     qh <- local_nuisance(Y, W, w, ridge = ridge)$fit
-    gh <- local_nuisance(TRUE, W, w, ridge = ridge)$fit
+    gh <- local_nuisance(T, W, w, ridge = ridge)$fit
     yr <- Y - qh
-    tr <- TRUE - gh
+    tr <- T - gh
   }
   om <- orthogonal_moment(yr, tr, w)
   list(theta = om$theta, den = om$den, w = w)
@@ -417,7 +417,7 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      kind = "double-sample",
                                      leave_one_out = TRUE) {
   y <- as.numeric(Y)
-  t <- as.numeric(TRUE)
+  t <- as.numeric(T)
   n <- length(y)
   if (length(t) != n)
     stop("orfgrf: ", length(t), " treatments for ", n, " outcomes")
