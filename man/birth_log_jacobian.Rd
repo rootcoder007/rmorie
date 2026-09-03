@@ -20,5 +20,6 @@ A numeric value.
 }
 \keyword{internal}
 \examples{
-birth_log_jacobian(h_j = c(1, 2, 3, 4, 5, 6, 7, 8), h_new_left = c(1, 2, 3, 4, 5, 6, 7, 8), h_new_right = c(1, 2, 3, 4, 5, 6, 7, 8))
+birth_log_jacobian(h_j = c(1, 2, 3, 4, 5, 6, 7, 8), h_new_left = c(1, 2, 3, 4, 5, 6, 7, 8),
+  h_new_right = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

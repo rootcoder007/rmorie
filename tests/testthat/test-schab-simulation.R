@@ -74,7 +74,8 @@ test_that("conditional simulation satisfies the 2 sigma_sk^2 identity", {
   # BOTH the field and the simulation, so the truth is redrawn every
   # replicate; holding it fixed measures something else.
   S <- sim_cov(sim_grid(4))
-  n <- nrow(S); m <- 6L
+  n <- nrow(S)
+  m <- 6L
   sk <- .schab_simple_kriging_variance(S, m)[(m + 1L):n]
   reps <- 4000L
   acc <- numeric(n - m)

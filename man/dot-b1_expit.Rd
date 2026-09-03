@@ -17,3 +17,8 @@ A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .b1_expit(x = x)
+res
+}

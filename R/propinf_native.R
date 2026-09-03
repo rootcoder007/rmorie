@@ -384,13 +384,17 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_rng
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}, \code{morie_propinf_train_fcnn}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta},
+#' \code{.propinf_train_vector_meta}, \code{morie_propinf_train_fcnn}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .propinf_rng(seed = 1L)
+#' res
 .propinf_rng <- function(seed) {
   st <- as.integer(seed)
   # 2^31 exceeds .Machine$integer.max, so it cannot be an integer
@@ -440,7 +444,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_lcg_draw
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_normal_lcg}, \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_normal_lcg},
+#' \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -454,7 +459,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_normal_lcg
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_init_net}, \code{.propinf_mlp_init}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_init_net},
+#' \code{.propinf_mlp_init}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -495,7 +501,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_forward
 #'
-#' A step of the propinf_native implementation. Called by \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
+#' A step of the propinf_native implementation. Called by
+#' \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -522,13 +529,18 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_rows
 #'
-#' A step of the propinf_native implementation. Called by \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
+#' A step of the propinf_native implementation. Called by
+#' \code{morie_propinf_fcnn_predict}, \code{morie_propinf_train_fcnn}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .propinf_rows(X = x)
+#' res
 .propinf_rows <- function(X) {
   if (!is.matrix(X)) X <- as.matrix(X)
   out <- lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -561,7 +573,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_permute_hidden_layer_internal
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_sorted_representation_internal}, \code{morie_propinf_sorted_representation}.
+#' A step of the propinf_native implementation. Called by
+#' \code{.propinf_sorted_representation_internal},
+#' \code{morie_propinf_sorted_representation}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -580,7 +594,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_flat_representation_internal
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_sorted_representation_internal}, \code{morie_propinf_sorted_representation}.
+#' A step of the propinf_native implementation. Called by
+#' \code{.propinf_sorted_representation_internal},
+#' \code{morie_propinf_sorted_representation}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -637,7 +653,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_mlp_init
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_deepsets_init}, \code{.propinf_train_vector_meta}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_deepsets_init},
+#' \code{.propinf_train_vector_meta}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -660,7 +677,9 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_mlp_forward
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_deepsets_forward}, \code{.propinf_train_vector_meta}, \code{.propinf_vector_meta_predict}.
+#' A step of the propinf_native implementation. Called by
+#' \code{.propinf_deepsets_forward}, \code{.propinf_train_vector_meta},
+#' \code{.propinf_vector_meta_predict}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -696,7 +715,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_mlp_backward
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}.
+#' A step of the propinf_native implementation. Called by
+#' \code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -736,7 +756,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_zero_like
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}.
+#' A step of the propinf_native implementation. Called by
+#' \code{.propinf_train_vector_meta}, \code{.propinf_zero_grads}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -751,7 +772,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_sgd_step
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}, \code{.propinf_train_vector_meta}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta},
+#' \code{.propinf_train_vector_meta}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -864,8 +886,10 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' @param rho_hidden Coerced to integer by the body, with \code{as.integer}.
 #' @param rnd Passed to \code{.propinf_mlp_init}.
 #' @param context One of \code{"none"}, \code{"paired"}. Defaults to \code{"paired"}.
-#' @param edge_hidden Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim}, \code{shapes}, \code{context}, \code{scalers}.
+#' @param edge_hidden Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{phis}, \code{psis}, \code{rho}, \code{repr_dim},
+#' \code{shapes}, \code{context}, \code{scalers}.
 #' @export
 .propinf_deepsets_init <- function(shapes, phi_hidden, repr_dim, rho_hidden,
                                    rnd, context = "paired",
@@ -904,11 +928,13 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 
 #' .propinf_deepsets_forward
 #'
-#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}, \code{morie_propinf_property_inference}.
+#' A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta},
+#' \code{morie_propinf_property_inference}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param model A list; the body reads \code{$context}, \code{$phis}, \code{$psis}, \code{$repr_dim}, \code{$rho}, \code{$scalers} from it.
+#' @param model A list; the body reads \code{$context}, \code{$phis}, \code{$psis},
+#' \code{$repr_dim}, \code{$rho}, \code{$scalers} from it.
 #' @param sets A vector; its length is taken and its elements indexed.
 #' @return The value of \code{list}.
 #' @export
@@ -984,7 +1010,8 @@ morie_propinf_property_inference <- function(shadow_models, shadow_labels,
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param model A list; the body reads \code{$context}, \code{$phis}, \code{$psis}, \code{$repr_dim}, \code{$rho} from it.
+#' @param model A list; the body reads \code{$context}, \code{$phis}, \code{$psis},
+#' \code{$repr_dim}, \code{$rho} from it.
 #' @param sets A vector; its length is taken.
 #' @param cache A list; the body reads \code{$caches}, \code{$racts}, \code{$rpre} from it.
 #' @param dout Passed to \code{.propinf_mlp_backward}.

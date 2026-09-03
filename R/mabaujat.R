@@ -8,8 +8,13 @@
 
 #' @param yi See Usage.
 #' @param vi See Usage.
-#' @return List with ``x`` (contribution to Q), ``y`` (influence on the pooled estimate), ``theta_fe``, ``theta_loo``, ``k``.
-#' @references Baujat, Mahe, Pignon and Hill (2002), A graphical method for exploring heterogeneity in meta-analyses, Statistics in Medicine 21:2641-2652. Paywalled; the two axes are as documented by metafor::baujat, the reference implementation -- the x-axis is each study's contribution to the Q statistic and the y-axis the standardised squared difference between the overall estimate with and without that study.
+#' @return List with ``x`` (contribution to Q), ``y`` (influence on the pooled estimate),
+#' ``theta_fe``, ``theta_loo``, ``k``.
+#' @references Baujat, Mahe, Pignon and Hill (2002), A graphical method for exploring
+#' heterogeneity in meta-analyses, Statistics in Medicine 21:2641-2652. Paywalled; the
+#' two axes are as documented by metafor::baujat, the reference implementation -- the
+#' x-axis is each study's contribution to the Q statistic and the y-axis the standardised
+#' squared difference between the overall estimate with and without that study.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

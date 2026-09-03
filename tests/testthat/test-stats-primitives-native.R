@@ -3,31 +3,38 @@
 # package needed; ppcor/randtests/EValue parity lives in tests/cross/.
 
 test_that("morie_partial_cor equals the precision-matrix formula", {
-  set.seed(1); X <- matrix(rnorm(200 * 4), 200, 4)
+  set.seed(1)
+  X <- matrix(rnorm(200 * 4), 200, 4)
   X[, 2] <- X[, 2] + 0.6 * X[, 1]
   pc <- morie_partial_cor(X)$estimate
   P <- solve(stats::cor(X))
-  ref <- -stats::cov2cor(P); diag(ref) <- 1
+  ref <- -stats::cov2cor(P)
+  diag(ref) <- 1
   expect_equal(unname(pc), unname(ref), tolerance = 1e-8)
 })
 
 test_that("morie_partial_cor_test returns a correlation in [-1,1] and valid p", {
-  set.seed(2); n <- 100
-  z <- rnorm(n); x <- z + rnorm(n); y <- z + rnorm(n)
+  set.seed(2)
+  n <- 100
+  z <- rnorm(n)
+  x <- z + rnorm(n)
+  y <- z + rnorm(n)
   r <- morie_partial_cor_test(x, y, z)
   expect_true(r$estimate >= -1 && r$estimate <= 1)
   expect_true(r$p.value >= 0 && r$p.value <= 1)
 })
 
 test_that("morie_semipartial_cor has unit diagonal and right shape", {
-  set.seed(3); X <- matrix(rnorm(150 * 3), 150, 3)
+  set.seed(3)
+  X <- matrix(rnorm(150 * 3), 150, 3)
   sp <- morie_semipartial_cor(X)$estimate
   expect_equal(dim(sp), c(3L, 3L))
   expect_equal(diag(sp), rep(1, 3), tolerance = 1e-8)
 })
 
 test_that("randomness tests return p-values in [0,1]", {
-  set.seed(4); x <- rnorm(80)
+  set.seed(4)
+  x <- rnorm(80)
   for (res in list(morie_runs_test(x), morie_turning_point_test(x),
                    morie_difference_sign_test(x),
                    morie_bartels_rank_test(x))) {

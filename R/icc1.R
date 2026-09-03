@@ -12,8 +12,10 @@
 #' Precision of Measurements", pp. 427-428, whose worked R function is
 #' labelled "ANOVA according to Shrout-Fleiss" and gives
 #'
-#' \deqn{SS_t = \sum x^2 - T^2/(nk), \quad SS_a = \sum(\mathrm{row\ totals})^2/k - T^2/(nk),}{SS_t = sum x^2 - T^2/(nk),  SS_a = sum(row totals^2)/k - T^2/(nk),}
-#' \deqn{BMS = SS_a/(n-1), \quad WMS = (SS_t - SS_a)/(n(k-1)),}{BMS = SS_a/(n-1),  WMS = (SS_t - SS_a)/(n(k-1)),}
+#' \deqn{SS_t = \sum x^2 - T^2/(nk), \quad SS_a = \sum(\mathrm{row\ totals})^2/k -
+#' T^2/(nk),}{SS_t = sum x^2 - T^2/(nk),  SS_a = sum(row totals^2)/k - T^2/(nk),}
+#' \deqn{BMS = SS_a/(n-1), \quad WMS = (SS_t - SS_a)/(n(k-1)),}{BMS = SS_a/(n-1),  WMS =
+#' (SS_t - SS_a)/(n(k-1)),}
 #' \deqn{ICC(1,1) = (BMS - WMS)/(BMS + (k-1)WMS),}{ICC(1,1) = (BMS - WMS)/(BMS + (k-1) WMS),}
 #'
 #' with T the grand total, n subjects and k ratings each.  BMS and WMS agree

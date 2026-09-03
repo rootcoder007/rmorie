@@ -492,7 +492,8 @@ morie_experiment_anova <- function(groups = NULL, y = NULL,
 #' @return Numeric bias in percent.
 #' @export
 #' @examples
-#' morie_psm_balance(mean_t = c(1, 2, 3, 4, 5, 6, 7, 8), mean_c = c(1, 2, 3, 4, 5, 6, 7, 8), s_t = c(1, 2, 3, 4, 5, 6, 7, 8), s_c = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_psm_balance(mean_t = c(1, 2, 3, 4, 5, 6, 7, 8), mean_c = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), s_t = c(1, 2, 3, 4, 5, 6, 7, 8), s_c = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_psm_balance <- function(mean_t, mean_c, s_t, s_c) {
   stopifnot(s_t >= 0, s_c >= 0, s_t + s_c > 0)
   100 * (mean_t - mean_c) / sqrt((s_t^2 + s_c^2) / 2)

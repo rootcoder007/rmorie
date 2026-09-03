@@ -15,3 +15,8 @@ A numeric value.
 \description{
 input (no inequality defined), matching the Python helper.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_fairness_gini_core(x = x)
+res
+}

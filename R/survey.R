@@ -176,7 +176,8 @@ morie_survey_mean <- function(design, variable) {
 
 #' Ratio estimator of a population total using known X_pop
 #' @inheritParams morie_survey_params
-#' @return A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
+#' @return A named list with elements \code{ratio}, \code{total_estimate}, \code{se},
+#' \code{ci_lower}, \code{ci_upper}.
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
 #' set.seed(1)
 #' x <- runif(30, 1, 3); y <- 2 * x + rnorm(30, 0, 0.2)
@@ -292,7 +293,8 @@ morie_survey_calibrate <- function(df, aux_vars, population_totals,
 
 #' Subpopulation (domain) mean with Woodruff linearised SE
 #' @inheritParams morie_survey_params
-#' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_domain}.
+#' @return A named list with elements \code{mean}, \code{se}, \code{ci_lower},
+#' \code{ci_upper}, \code{n_domain}.
 #' @examplesIf requireNamespace("survey", quietly = TRUE)
 #' set.seed(1)
 #' df <- data.frame(y = rnorm(40), g = rep(c("a", "b"), 20),

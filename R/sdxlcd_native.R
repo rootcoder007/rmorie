@@ -35,7 +35,8 @@
 
 #' morie_sdxlcd_fourier_embedding
 #'
-#' A step of the sdxlcd_native implementation. Called by \code{morie_sdxlcd_crop_conditioning}, \code{morie_sdxlcd_size_conditioning}.
+#' A step of the sdxlcd_native implementation. Called by
+#' \code{morie_sdxlcd_crop_conditioning}, \code{morie_sdxlcd_size_conditioning}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -142,7 +143,8 @@ morie_sdxlcd_sample_crop <- function(height, width, target_h, target_w, rng) {
 #'
 #' @param sizes A matrix; indexed by row and column.
 #' @param minimum Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{256}.
-#' @return A list with \code{discarded}, \code{total}, \code{fraction}, \code{kept_with_conditioning}, \code{minimum}, \code{note}.
+#' @return A list with \code{discarded}, \code{total}, \code{fraction},
+#' \code{kept_with_conditioning}, \code{minimum}, \code{note}.
 #' @export
 morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
   if (is.matrix(sizes)) {
@@ -179,7 +181,8 @@ morie_sdxlcd_discarded_fraction <- function(sizes, minimum = 256) {
 #' source it follows.
 #'
 #' @param ratios See Usage.
-#' @param pixels Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1024 * 1024}.
+#' @param pixels Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{1024 * 1024}.
 #' @param multiple Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @return A list with \code{buckets}, \code{max_pixel_error}, \code{note}.
 #' @export
@@ -216,9 +219,11 @@ morie_sdxlcd_aspect_ratio_buckets <- function(ratios, pixels = 1024 * 1024, mult
 #' @param w_original Passed to \code{morie_sdxlcd_size_conditioning}.
 #' @param c_top Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.
 #' @param c_left Passed to \code{morie_sdxlcd_crop_conditioning}. Defaults to \code{0}.
-#' @param timestep_embedding Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param timestep_embedding Optional; may be \code{NULL}. Coerced to numeric by the
+#' body, with \code{as.numeric}.
 #' @param dim Passed to \code{morie_sdxlcd_size_conditioning}. Defaults to \code{8}.
-#' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size}, \code{c_crop}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{vector}, \code{width}, \code{c_size},
+#' \code{c_crop}, \code{method}, \code{note}.
 #' @export
 morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_left = 0,
                                           timestep_embedding = NULL, dim = 8) {
@@ -262,16 +267,3 @@ morie_sdxlcd_sdxlunet <- morie_sdxlcd_condition_vector
 
 # main entry point
 morie_sdxlcd <- morie_sdxlcd_condition_vector
-
-
-
-
-
-
-
-
-
-
-
-
-

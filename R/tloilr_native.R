@@ -81,7 +81,8 @@
 #'
 #' @param B Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding}, \code{fraction_positive_blip}, \code{note}.
+#' @return A list with \code{tau}, \code{quantile}, \code{kappa}, \code{binding},
+#' \code{fraction_positive_blip}, \code{note}.
 #' @export
 .tloilr_resource_threshold <- function(B, kappa) {
   b <- sort(as.numeric(B))
@@ -133,7 +134,9 @@
 #' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Passed to \code{.tloilr_constrained_rule}.
-#' @return A list with \code{estimate}, \code{value}, \code{unconstrained_value}, \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa}, \code{binding}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{value}, \code{unconstrained_value},
+#' \code{cost_of_constraint}, \code{tau}, \code{treated_fraction}, \code{kappa},
+#' \code{binding}, \code{method}, \code{note}.
 #' @export
 .tloilr_constrained_value <- function(Q1, Q0, kappa) {
   q1 <- as.numeric(Q1)
@@ -165,6 +168,9 @@
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-09}.
 #' @return A list with \code{mass_at_zero}, \code{exceptional}, \code{n_at_zero}, \code{note}.
 #' @export
+#' @examples
+#' res <- .tloilr_exceptional_law(B = 3L)
+#' res
 .tloilr_exceptional_law <- function(B, tol = 1e-9) {
   b <- as.numeric(B)
   n <- length(b)
@@ -183,6 +189,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tloilr_cheatsheet()
+#' res
 .tloilr_cheatsheet <- function() {
   paste0("tloilr: at most a proportion kappa can be treated, so the ",
          "rule is a THRESHOLD on the blip B(W) = Q(1,W) - Q(0,W): ",

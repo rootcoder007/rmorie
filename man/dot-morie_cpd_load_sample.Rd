@@ -17,3 +17,7 @@ A step of the cpd_analyze implementation. Called by \code{morie_cpd_all_analyses
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_cpd_load_sample()
+res
+}

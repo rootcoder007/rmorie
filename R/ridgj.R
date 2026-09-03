@@ -7,10 +7,15 @@
 #' @param y Response vector of length n.
 #' @param beta Coefficient vector.
 #' @param lam Regularization parameter lambda; must be non-negative.
-#' @param add_intercept Treat the first entry of beta as an unpenalized intercept and prepend a column of ones to X.
+#' @param add_intercept Treat the first entry of beta as an unpenalized intercept and
+#' prepend a column of ones to X.
 #'
 #' @return List with ``prss``, ``rss``, ``penalty``, ``lambda``, ``n``, ``p``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 81: PRSS_lambda(beta) = RSS(beta) + lambda beta'D beta with D = diag(0, 1, ..., 1), so the intercept is not penalized.  Read from the chapter PDF, not recalled.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.6.1 p. 81: PRSS_lambda(beta) =
+#' RSS(beta) + lambda beta'D beta with D = diag(0, 1, ..., 1), so the intercept is not
+#' penalized.  Read from the chapter PDF, not recalled.
 #' @export
 Ridgeobj <- function(X, y, beta, lam, add_intercept = TRUE) {
   Xm <- .t1_mat(X)

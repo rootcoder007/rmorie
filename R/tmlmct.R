@@ -26,7 +26,8 @@
 #'   7:1393-1512.
 #' @export
 #' @examples
-#' Tmlmct(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlmct(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 Tmlmct <- function(y, A, X) {
   yv <- as.numeric(y)
   n <- length(yv)

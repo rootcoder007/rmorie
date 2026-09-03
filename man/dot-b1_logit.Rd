@@ -17,3 +17,7 @@ A step of the b1_tmle implementation. Called by \code{.b1_target}, \code{Tmlecat
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .b1_logit(p = 0.5)
+res
+}

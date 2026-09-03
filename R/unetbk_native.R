@@ -62,13 +62,18 @@
 
 #' .unetbk_as_matrix
 #'
-#' A step of the unetbk_native implementation. Called by \code{mirror_pad}, \code{separation_weight_map}, \code{skip_concat}.
+#' A step of the unetbk_native implementation. Called by \code{mirror_pad},
+#' \code{separation_weight_map}, \code{skip_concat}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .unetbk_as_matrix(x = x)
+#' res
 .unetbk_as_matrix <- function(x) {
   if (is.matrix(x)) return(x)
   if (is.list(x)) {
@@ -85,9 +90,11 @@
 #'
 #' @param input_size Coerced to integer by the body, with \code{as.integer}.
 #' @param depth A count; the body uses it as \code{seq_len(...)}. Defaults to \code{4L}.
-#' @param convs_per_block Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
+#' @param convs_per_block Coerced to integer by the body, with \code{as.integer}.
+#' Defaults to \code{2L}.
 #' @param kernel Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
-#' @return A list with \code{output}, \code{input}, \code{border_lost}, \code{skip_sizes}, \code{note}.
+#' @return A list with \code{output}, \code{input}, \code{border_lost},
+#' \code{skip_sizes}, \code{note}.
 #' @export
 valid_output_size <- function(input_size, depth = 4L, convs_per_block = 2L, kernel = 3L) {
   s <- as.integer(input_size)
@@ -150,7 +157,7 @@ mirror_pad <- function(image, pad) {
   if (p >= h || p >= w) {
     stop(sprintf("unetbk: the mirror pad (%d) must be smaller than the image (%dx%d)", p, h, w))
   }
-  
+
   out <- matrix(0, nrow = h + 2L * p, ncol = w + 2L * p)
   for (i in (-p):(h + p - 1L)) {
     ii <- if (i < 0L) -i else if (i >= h) 2L * h - 2L - i else i
@@ -184,7 +191,7 @@ overlap_tiles <- function(height, width, tile, border) {
   if (out < 1L) {
     stop("unetbk: the border consumes the whole tile")
   }
-  
+
   tiles <- list()
   h_total <- as.integer(height)
   w_total <- as.integer(width)
@@ -198,7 +205,7 @@ overlap_tiles <- function(height, width, tile, border) {
       )
     }
   }
-  
+
   list(
     tiles = tiles,
     n_tiles = length(tiles),
@@ -229,13 +236,13 @@ skip_concat <- function(upsampled, contracting) {
   }
   oi <- (hc - hu) %/% 2L
   oj <- (wc - wu) %/% 2L
-  
+
   crop_rows <- (oi + 1L):(oi + hu)
   crop_cols <- (oj + 1L):(oj + wu)
   crop <- co[crop_rows, crop_cols, drop = FALSE]
-  
+
   concatenated <- cbind(up, crop)
-  
+
   list(
     concatenated = concatenated,
     crop_offset = c(oi, oj),
@@ -260,9 +267,9 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
   h <- nrow(lab)
   w <- ncol(lab)
   ids <- sort(unique(as.vector(lab[lab > 0])))
-  
+
   out <- matrix(1.0, nrow = h, ncol = w)
-  
+
   for (i in seq_len(h)) {
     for (j in seq_len(w)) {
       if (lab[i, j] > 0) {
@@ -285,7 +292,7 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
       }
     }
   }
-  
+
   list(
     weights = out,
     n_instances = length(ids),
@@ -302,6 +309,9 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .unetbk_cheatsheet()
+#' res
 .unetbk_cheatsheet <- function() {
   "unetbk: built for the case where annotated IMAGES are scarce though pixels are plentiful. Contracting path for context, symmetric expanding path for localisation, and SKIP CONNECTIONS carrying high-resolution detail that pooling destroyed -- context alone cannot localise. Only VALID convolutions and no fully connected layers, so the output is smaller than the input and covers only pixels with full context; hence the OVERLAP-TILE strategy with missing border data MIRRORED. A weight map raises the loss on the thin background between touching objects."
 }

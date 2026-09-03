@@ -71,7 +71,8 @@
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
-#' @return A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations}, \code{log_norm}, \code{note}.
+#' @return A list with \code{mode}, \code{precision}, \code{sd}, \code{iterations},
+#' \code{log_norm}, \code{note}.
 #' @export
 gaussian_approximation <- function(log_lik, log_lik_d1, log_lik_d2,
                                     prior_mean, prior_precision,
@@ -228,7 +229,8 @@ hyperparameter_design <- function(mode, curvature, step = 1.0, dim = NULL) {
 #' @param conditional_marginals Iterated over elementwise, with \code{lapply}.
 #' @param log_weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x_grid Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x}, \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x},
+#' \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
 #' @export
 integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
   M <- lapply(conditional_marginals, function(row) as.numeric(row))
@@ -287,6 +289,9 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .inlasm_cheatsheet()
+#' res
 .inlasm_cheatsheet <- function() {
   "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta, non-Gaussian response -- so the posterior marginals have no closed form. MCMC works in principle but has convergence AND time problems, sometimes badly enough that it is not appropriate for routine analysis. INLA is deterministic: p(x_i|y) = INTEGRAL p(x_i|theta,y) p(theta|y) dtheta, where the inner term is a LAPLACE approximation and the outer integral is a finite weighted SUM over a small design of theta -- which is exactly why dim(theta) must stay low. The Gaussian inner step is EXACT for a Gaussian likelihood; the simplified Laplace adds the skewness it cannot represent. Seconds or minutes against hours or days."
 }
@@ -308,25 +313,3 @@ morie_inlasm <- list(
   inla_spatial = inla_spatial,
   inlaspatial = inlaspatial
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -72,6 +72,10 @@
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A list with \code{z}, \code{i}, \code{j}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .copynm_cbs_stat(v = x)
+#' res
 .copynm_cbs_stat <- function(v) {
   n <- length(v)
   if (n < 3L) stop("copynm: need at least 3 points to test for a change")
@@ -102,7 +106,8 @@
 # In-place Fisher-Yates shuffle with one .ghc_unif draw per swap.
 #' In-place Fisher-Yates shuffle with one .ghc_unif draw per swap
 #'
-#' A step of the copynm_native implementation. Called by \code{.copynm_binary_supported}, \code{copynm}.
+#' A step of the copynm_native implementation. Called by \code{.copynm_binary_supported},
+#' \code{copynm}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

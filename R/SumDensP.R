@@ -11,7 +11,8 @@
 #' @references Morin, D. J. (2016). Probability: For the Enthusiastic
 #'   Beginner. Createspace. Eq (6.66).
 #' @examples
-#' g <- seq(-8, 8, length.out = 1601); SumDensP(g, stats::dnorm(g), g, stats::dnorm(g), 1, 0.01)$probability
+#' g <- seq(-8, 8, length.out = 1601); SumDensP(g, stats::dnorm(g), g, stats::dnorm(g),
+#' 1, 0.01)$probability
 #' @export
 SumDensP <- function(grid_x, density_x, grid_y, density_y, z, dz) {
   rho <- SumDens(grid_x, density_x, grid_y, density_y, z)$density

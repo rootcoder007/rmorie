@@ -21,6 +21,10 @@
 #' @param x See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_fsum(x = x)
+#' res
 .morie_fsum <- function(x) {
   # Neumaier compensated summation: the R-side counterpart of Python's
   # math.fsum (Shewchuk).  On ARM64 R's long double IS double, so base
@@ -82,6 +86,10 @@
 #' @param x Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_erfc(x = x)
+#' res
 .morie_erfc <- function(x) {
   # exact identity erfc(v) = Q(1/2, v^2): no transcribed continued
   # fraction of its own, and the tail comes straight from the CF branch
@@ -104,6 +112,10 @@
 #' @param x Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_erf(x = x)
+#' res
 .morie_erf <- function(x) {
   vapply(x, function(v) {
     if (v < 0) {
@@ -205,7 +217,8 @@
 
 #' Regularized incomplete beta I_x(a, b)
 #'
-#' A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom}, \code{Pf} and 1 others in the module.
+#' A step of the dist_native implementation. Called by \code{Pbeta}, \code{Pbinom},
+#' \code{Pf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -234,7 +247,8 @@
 
 #' .morie_bisect_q
 #'
-#' A step of the dist_native implementation. Called by \code{Qbeta}, \code{Qf}, \code{Qgamma} and 1 others in the module.
+#' A step of the dist_native implementation. Called by \code{Qbeta}, \code{Qf},
+#' \code{Qgamma} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

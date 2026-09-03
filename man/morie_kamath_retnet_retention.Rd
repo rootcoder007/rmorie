@@ -21,5 +21,6 @@ List with \code{output}, \code{decay}, \code{recurrent_output}.
 alongside as the equality check the parallel form must satisfy.
 }
 \examples{
-morie_kamath_retnet_retention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
+morie_kamath_retnet_retention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8),
+  V = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5)
 }

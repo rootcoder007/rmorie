@@ -19,3 +19,9 @@ A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .prsLL_setdiff(a = A, b = b)
+res
+}

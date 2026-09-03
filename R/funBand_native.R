@@ -31,6 +31,10 @@
 #' @param x A vector; its length is taken.
 #' @return A list with \code{Q}, \code{R}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .funBand_qr_bands(x = x)
+#' res
 .funBand_qr_bands <- function(x) {
   n <- length(x)
   if (n < 4L) {
@@ -67,6 +71,10 @@
 #' @param x Passed to \code{.funBand_qr_bands}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .funBand_roughness(x = x)
+#' res
 .funBand_roughness <- function(x) {
   qr <- .funBand_qr_bands(x)
   Z <- t(solve(qr$R, t(qr$Q)))          # Z = Q R^-1

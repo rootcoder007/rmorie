@@ -99,6 +99,10 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bandwidth_nrd(x = x)
+#' res
 .morie_bandwidth_nrd <- function(x) {
   r <- stats::quantile(x, c(0.25, 0.75))
   h <- (r[2L] - r[1L]) / 1.34
@@ -151,6 +155,10 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 #' @param link Carried through into a list the body builds. Defaults to \code{"log"}.
 #' @return The value of \code{structure}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_negbin_family(theta = x)
+#' res
 .morie_negbin_family <- function(theta, link = "log") {
   lk <- stats::make.link(link)
   variance <- function(mu) mu + mu^2 / theta

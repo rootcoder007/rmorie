@@ -261,7 +261,8 @@ test_that("hmpttn: tensor construction matches Python", {
 })
 
 test_that("hmpvt: PVT patch embedding matches Python", {
-  img <- array(0:47, dim = c(3, 4, 4)); img <- aperm(img, c(3, 2, 1))  # numpy arange(48).reshape(4,4,3), row-major
+  img <- array(0:47, dim = c(3, 4, 4))
+  img <- aperm(img, c(3, 2, 1))  # numpy arange(48).reshape(4,4,3), row-major
   Wm <- matrix(1 / 12, 12, 1)
   r <- morie_geron_pvt(img, list(list(patch_size = 2, dim = 1, W = Wm)))
   expect_equal(r$output_shape, A4c$hmpvt$output_shape)
@@ -322,9 +323,12 @@ test_that("hmrgpt: nn.Sequential architecture matches Python", {
 })
 
 test_that("hmrl: RL rollout return matches Python", {
-  clock <- new.env(); clock$t <- 0
-  reset <- function() { clock$t <- 0; 0 }
-  step <- function(a) { clock$t <- clock$t + 1; list(clock$t, 1.0, clock$t >= 3) }
+  clock <- new.env()
+  clock$t <- 0
+  reset <- function() { clock$t <- 0
+  0 }
+  step <- function(a) { clock$t <- clock$t + 1
+  list(clock$t, 1.0, clock$t >= 3) }
   r <- morie_geron_reinforcement_learning(list(reset = reset, step = step), function(s) 0, gamma = 0.5)
   expect_equal(r$mean_return, A4c$hmrl$mean_return)
   expect_equal(r$lengths, A4c$hmrl$lengths)

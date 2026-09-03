@@ -12,7 +12,7 @@ morie_boot_basic_ci(
 }
 \arguments{
 \item{boot_obj}{A \code{boot} object as returned by
-\code{\link[=morie_boot_run]{morie_boot_run()}} or \code{boot::boot}.}
+\code{morie_boot_run()} or \code{boot::boot}.}
 
 \item{type}{Character vector of CI types; any of \code{"perc"},
 \code{"bca"}, \code{"basic"}, \code{"norm"}, \code{"stud"}.}

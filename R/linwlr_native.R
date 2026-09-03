@@ -11,13 +11,18 @@
 
 #' .linwlr_vec
 #'
-#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}.
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr},
+#' \code{morie_linwlr_blip}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .linwlr_vec(x = x)
+#' res
 .linwlr_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -25,13 +30,18 @@
 
 #' .linwlr_mat
 #'
-#' A step of the linwlr_native implementation. Called by \code{morie_linwlr}, \code{morie_linwlr_blip}.
+#' A step of the linwlr_native implementation. Called by \code{morie_linwlr},
+#' \code{morie_linwlr_blip}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .linwlr_mat(x = x)
+#' res
 .linwlr_mat <- function(x) {
   if (is.null(x)) return(matrix(0, nrow = 0, ncol = 0))
   as.matrix(x)
@@ -56,13 +66,18 @@
 
 #' .linwlr_sigmoid
 #'
-#' A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls}, \code{morie_linwlr}.
+#' A step of the linwlr_native implementation. Called by \code{.linwlr_logit_irls},
+#' \code{morie_linwlr}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .linwlr_sigmoid(v = x)
+#' res
 .linwlr_sigmoid <- function(v) {
   1 / (1 + exp(-v))
 }
@@ -146,6 +161,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{resid}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .linwlr_wls(X = x, y = y, w = x)
+#' res
 .linwlr_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- nrow(X)
@@ -215,7 +235,8 @@ morie_linwlr_blip <- function(a, w, psi) {
 #' @param y Passed to \code{.linwlr_vec}.
 #' @param A Passed to \code{.linwlr_vec}.
 #' @param W Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
-#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param method One of \code{"gest"}, \code{"wls"}. Defaults to \code{"gest"}.
 #' @param baseline Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.
 #' @param pi_covariates Optional; may be \code{NULL}. Passed to \code{.linwlr_mat}.

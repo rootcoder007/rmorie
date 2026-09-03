@@ -20,3 +20,7 @@ A numeric value.
 normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches
 neither endpoint.
 }
+\examples{
+res <- .morie_random_uniform(n = 3L)
+res
+}

@@ -54,4 +54,3 @@ morie_adf_test <- function(y, lags = 1, kind = "drift") {
                            `10pct` = crit[3]),
        reject_5pct = stat < crit[2])
 }
-

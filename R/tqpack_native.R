@@ -1,9 +1,9 @@
 #' Bit-packing of quantiser indices
-#' 
+#'
 #' Packs an array of `b`-bit codebook indices into a dense byte string,
 #' and unpacks it again. This is the storage half of a quantiser: choosing
 #' 4-bit codewords saves nothing if each is then stored in a 64-bit float.
-#' 
+#'
 #' The layout is **big-endian bit order within a big-endian byte stream**:
 #' index 0 occupies the most significant `b` bits of byte 0, the next
 #' index continues immediately after it, crossing byte boundaries without
@@ -11,7 +11,7 @@
 #' convention explicitly matters -- a reader that assumes the opposite bit
 #' order recovers plausible-looking indices that are silently wrong, and
 #' no checksum in the format would catch it.
-#' 
+#'
 #' Round-tripping is exact by construction, for every width and every
 #' length, and that is the property the anchors check exhaustively rather
 #' than on a sample.
@@ -185,6 +185,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tqpack_cheatsheet()
+#' res
 .tqpack_cheatsheet <- function() {
   return("tqpack: pack b-bit indices big-endian, index 0 in the top b bits of byte 0, crossing byte boundaries; tail padded on the right; n_bytes = ceil(n*b/8); round-trip is exact.")
 }

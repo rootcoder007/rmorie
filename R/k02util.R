@@ -4,7 +4,8 @@
 
 #' k02fe
 #'
-#' A step of the k02util implementation. Called by \code{k02dl}, \code{mafix}, \code{mai2} and 2 others in the module.
+#' A step of the k02util implementation. Called by \code{k02dl}, \code{mafix},
+#' \code{mai2} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -24,7 +25,8 @@ k02fe <- function(y, v) {
 
 #' k02dl
 #'
-#' A step of the k02util implementation. Called by \code{mabay}, \code{mac3}, \code{macum} and 7 others in the module.
+#' A step of the k02util implementation. Called by \code{mabay}, \code{mac3},
+#' \code{macum} and 7 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -69,7 +71,8 @@ k02mm <- function(y, v, tau0) {
 
 #' k02z
 #'
-#' A step of the k02util implementation. Called by \code{mabay}, \code{macum}, \code{mafix} and 9 others in the module.
+#' A step of the k02util implementation. Called by \code{mabay}, \code{macum},
+#' \code{mafix} and 9 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,7 +114,8 @@ k02p2z <- function(z) 2 * stats::pnorm(abs(z), lower.tail = FALSE)
 k02p2t <- function(tv, df) 2 * stats::pt(abs(tv), df, lower.tail = FALSE)
 #' k02pchi
 #'
-#' A step of the k02util implementation. Called by \code{mafix}, \code{mai2}, \code{marndm} and 1 others in the module.
+#' A step of the k02util implementation. Called by \code{mafix}, \code{mai2},
+#' \code{marndm} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

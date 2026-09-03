@@ -3,7 +3,9 @@
 #' Boundary-free kernel density estimator (Eq. 5.9)
 #'
 #' Eq. (5.9):
-#' \deqn{\tilde f_X(x) = \frac{1}{nhg'(g^{-1}(x))}\sum_i K\Big(\frac{g^{-1}(x)-g^{-1}(X_i)}{h}\Big),\quad x\in\Omega.}{ftilde(x) = 1/(n h g'(g^-1(x))) sum_i K((g^-1(x) - g^-1(X_i))/h), x in Omega.}
+#' \deqn{\tilde f_X(x) = \frac{1}{nhg'(g^{-1}(x))}\sum_i
+#' K\Big(\frac{g^{-1}(x)-g^{-1}(X_i)}{h}\Big),\quad x\in\Omega.}{ftilde(x) = 1/(n h
+#' g'(g^-1(x))) sum_i K((g^-1(x) - g^-1(X_i))/h), x in Omega.}
 #'
 #' The `1/g'(g^-1(x))` factor is the Jacobian, and it is exactly what the
 #' distribution-function estimator (5.5) does NOT need. A density is a

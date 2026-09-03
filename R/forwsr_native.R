@@ -21,7 +21,9 @@
 
 #' .forwsr_prep
 #'
-#' A step of the forwsr_native implementation. Called by \code{morie_forwsr}, \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the module.
+#' A step of the forwsr_native implementation. Called by \code{morie_forwsr},
+#' \code{morie_forwsr_forward_search}, \code{morie_forwsr_lms_start} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -29,6 +31,11 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{M}, \code{y}, \code{n}, \code{p}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .forwsr_prep(X = x, y = y)
+#' res
 .forwsr_prep <- function(X, y) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -56,6 +63,10 @@
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .forwsr_dsum(v = x)
+#' res
 .forwsr_dsum <- function(v) {
   # CPython's builtin sum() switched to Neumaier compensated summation
   # for floats in 3.12. R's sum() accumulates in long double, and a
@@ -85,6 +96,11 @@
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .forwsr_solve(A = A, b = b)
+#' res
 .forwsr_solve <- function(A, b) {
   p <- length(b)
   Ab <- cbind(A, b)
@@ -116,6 +132,9 @@
 #' @param p Passed to \code{>}.
 #' @return The value of \code{qnorm}.
 #' @export
+#' @examples
+#' res <- .forwsr_norm_ppf(p = 0.5)
+#' res
 .forwsr_norm_ppf <- function(p) {
   # R's qnorm IS Wichura AS 241 (PPND16); the Python arm implements the
   # same rational approximation with the same coefficients, and the two

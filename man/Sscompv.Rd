@@ -24,7 +24,8 @@ concordant when the predicted cause-1 risk of i exceeds that of j,
 ties one half.
 }
 \examples{
-Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8),
+  predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Wolbers, M., Blanche, P., Koller, M. T., Witteman,

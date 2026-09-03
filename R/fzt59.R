@@ -5,8 +5,12 @@
 #' Theorem 5.9. Under the conditions of Theorem 5.8, with a symmetric kernel,
 #' `|f''(x)| <= M`, `int |u^4 k(u)| du < Inf` and `h = c n^(-d)`,
 #' `1/4 < d < 1/2`:
-#' \deqn{P_0\Big(\frac{\tilde S - E_0(\tilde S)}{\sqrt{V_0(\tilde S)}}\le y\Big) = \Phi(y) - \frac{1}{24n}(y^3-3y)\phi(y) + o(n^{-1}),}{P((Stilde - E Stilde)/sqrt(V Stilde) <= y) = Phi(y) - (1/(24n))(y^3 - 3y) phi(y) + o(1/n),}
-#' \deqn{P_0\Big(\frac{\tilde W - E_0(\tilde W)}{\sqrt{V_0(\tilde W)}}\le y\Big) = \Phi(y) - \frac{1}{20n}(y^3-3y)\phi(y) + o(n^{-1}).}{P((Wtilde - E Wtilde)/sqrt(V Wtilde) <= y) = Phi(y) - (1/(20n))(y^3 - 3y) phi(y) + o(1/n).}
+#' \deqn{P_0\Big(\frac{\tilde S - E_0(\tilde S)}{\sqrt{V_0(\tilde S)}}\le y\Big) =
+#' \Phi(y) - \frac{1}{24n}(y^3-3y)\phi(y) + o(n^{-1}),}{P((Stilde - E Stilde)/sqrt(V
+#' Stilde) <= y) = Phi(y) - (1/(24n))(y^3 - 3y) phi(y) + o(1/n),}
+#' \deqn{P_0\Big(\frac{\tilde W - E_0(\tilde W)}{\sqrt{V_0(\tilde W)}}\le y\Big) =
+#' \Phi(y) - \frac{1}{20n}(y^3-3y)\phi(y) + o(n^{-1}).}{P((Wtilde - E Wtilde)/sqrt(V
+#' Wtilde) <= y) = Phi(y) - (1/(20n))(y^3 - 3y) phi(y) + o(1/n).}
 #'
 #' Both corrections are the same Hermite polynomial `H3(y) = y^3 - 3y`; only
 #' the constant differs, 1/24 against 1/20. Neither depends on `F` -- the payoff
@@ -28,8 +32,10 @@
 #' @param book Logical; reproduce the book's printed Wilcoxon coefficients
 #'   `7/20` and `21/20` with no `n`. No effect for the sign test, where the
 #'   book and the primary source agree.
-#' @return Named list with ``estimate``, ``normal``, ``correction``, ``coef``, ``which``, ``book``, ``method``.
-#' @references Fauzi and Maesono (2023), Theorem 5.9; Maesono, Moriyama and Lu (2018), AISM 70:969-982, Theorems 3 and 5.
+#' @return Named list with ``estimate``, ``normal``, ``correction``, ``coef``, ``which``,
+#' ``book``, ``method``.
+#' @references Fauzi and Maesono (2023), Theorem 5.9; Maesono, Moriyama and Lu (2018),
+#' AISM 70:969-982, Theorems 3 and 5.
 #' @examples
 #' Smthedge(y = 0, n = 100, which = "wilcoxon")
 #' @export

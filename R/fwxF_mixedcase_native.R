@@ -274,6 +274,9 @@ fire_weather_index <- morie_fwxF
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .fwxF_cheatsheet()
+#' res
 .fwxF_cheatsheet <- function() {
   "fwxF: Canadian FWI System daily FFMC/DMC/DC/ISI/BUI/FWI/DSR (FTR-33)"
 }

@@ -17,3 +17,8 @@ A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .schab_logistic(u = x)
+res
+}

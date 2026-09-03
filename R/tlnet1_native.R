@@ -1,12 +1,12 @@
 # morie.fn -- function file (rootcoder007/morie)
 #' Single time point interventions in network-dependent data
-#' 
+#'
 #' \eqn{N} units connected by a social network. For each we record
 #' baseline covariates \eqn{W_i}, exposure \eqn{A_i} and outcome
 #' \eqn{Y_i}, and we observe \eqn{F_i} -- the units that could
 #' influence \eqn{i}, "i's friends". The number of friends varies with
 #' \eqn{i} and is assumed to vanish relative to \eqn{N}.
-#' 
+#'
 #' **Two dependencies are allowed, and naming them is the modelling
 #' step.** A unit's *exposure* may depend on its own baseline covariates
 #' and on those of its friends; a unit's *outcome* may depend on its own
@@ -16,7 +16,7 @@
 #' problem tractable, and it is also the one most likely to be wrong --
 #' an unobserved edge is indistinguishable from unmeasured confounding
 #' between the two units it should have joined.
-#' 
+#'
 #' **Interference means the estimand must be a policy, not a value.**
 #' Under interference \eqn{Y_i} depends on the treatments of others, so
 #' "the effect of treatment" is not defined until the whole assignment is
@@ -26,12 +26,12 @@
 #' unit's own; the **spillover** effect fixes the unit's own and varies
 #' the neighbourhood's. ``decompose_effects`` computes both, since
 #' reporting only the total hides which mechanism produced it.
-#' 
+#'
 #' **Inference is in \eqn{N} with dependence.** The influence curve
 #' terms are correlated exactly along network edges, so the variance adds
 #' those covariances; with \eqn{\max_i|F_i|/N \to 0} the sum is still
 #' \eqn{O(N)} and a central limit theorem applies.
-#' 
+#'
 #' References
 #' van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
 #' Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 21 (Sofrygin,
@@ -45,12 +45,12 @@
 #' ANY dependence among units is fully described by the known network,
 #' with i's exposure and outcome depending on others only through i's
 #' friends.
-#' 
+#'
 #' Sofrygin, O. & van der Laan, M. J. (2017) "Semi-Parametric Estimation
 #' and Inference for the Mean Outcome of the Single Time-Point
 #' Intervention in a Causally Connected Population", *Journal of Causal
 #' Inference* 5(1), 20160003, doi:10.1515/jci-2016-0003.
-#' 
+#'
 #' Hudgens, M. G. & Halloran, M. E. (2008) "Toward Causal Inference With
 #' Interference", *Journal of the American Statistical Association*
 #' 103(482), 832-842, doi:10.1198/016214508000000292. Direct and
@@ -62,13 +62,18 @@
 # Private helper: coerce to a flat numeric vector (equivalent of k.vec)
 #' Private helper: coerce to a flat numeric vector (equivalent of k.vec)
 #'
-#' A step of the tlnet1_native implementation. Called by \code{friend_summary}, \code{network_influence_variance}.
+#' A step of the tlnet1_native implementation. Called by \code{friend_summary},
+#' \code{network_influence_variance}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlnet1_vec(values = x)
+#' res
 .tlnet1_vec <- function(values) {
   if (is.matrix(values)) {
     as.numeric(values)
@@ -83,13 +88,18 @@
 #' Private helper: coerce to a list of numeric row-vectors (equivalent
 #' of k.mat)
 #'
-#' A step of the tlnet1_native implementation. Called by \code{decompose_effects}, \code{policy_mean}.
+#' A step of the tlnet1_native implementation. Called by \code{decompose_effects},
+#' \code{policy_mean}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param W A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlnet1_mat(W = x)
+#' res
 .tlnet1_mat <- function(W) {
   if (is.matrix(W) || is.data.frame(W)) {
     n <- nrow(W)
@@ -104,7 +114,8 @@
 # Private helper: friend set for unit i (1-based, excluding self)
 #' Private helper: friend set for unit i (1-based, excluding self)
 #'
-#' A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges}, \code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
+#' A step of the tlnet1_native implementation. Called by \code{.tlnet1_count_edges},
+#' \code{check_network_assumption}, \code{friend_summary} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -164,7 +175,7 @@ friend_summary <- function(values, friends, kind = "fraction") {
 }
 
 #' The conditions the identification rests on
-#' 
+#'
 #' Degrees must vanish relative to \eqn{N}, and the network must be
 #' symmetric -- an asymmetric "friend" relation means influence
 #' flows somewhere the model does not represent.
@@ -197,7 +208,7 @@ check_network_assumption <- function(friends, N = NULL) {
 }
 
 #' Mean outcome under a stochastic network-wide policy
-#' 
+#'
 #' Treatments are drawn independently with probability
 #' ``own_prob``, then the neighbourhood summary follows -- so the
 #' estimand is a property of the POLICY, which is the only thing
@@ -233,7 +244,7 @@ policy_mean <- function(Q_fn, W, friends, own_prob, seed = 0, draws = 200) {
 }
 
 #' Direct and spillover effects, separately
-#' 
+#'
 #' Direct: own exposure varies with the neighbourhood held at
 #' ``p_low``. Spillover: own held at ``p_low`` while the
 #' neighbourhood varies. Reporting only the total hides which

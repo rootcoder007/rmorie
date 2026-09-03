@@ -14,6 +14,6 @@ A numeric value.
 }
 \description{
 One MINSTD step. Exact in double precision (a * m < 2^53), so both
-}
 language arms produce bit-identical initial weights.
+}
 

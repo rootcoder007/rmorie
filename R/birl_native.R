@@ -7,7 +7,8 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 
 #' .mdp
 #'
-#' A step of the birl_native implementation. Called by \code{birl}, \code{policy_iteration}, \code{policy_values} and 2 others in the module.
+#' A step of the birl_native implementation. Called by \code{birl},
+#' \code{policy_iteration}, \code{policy_values} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -16,15 +17,15 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @return A list with \code{nS}, \code{nA}.
 #' @export
 .mdp <- function(T, gamma) {
-  if (length(T) == 0) stop("birl: the transition model is empty")
-  nS <- length(T)
-  nA <- length(T[[1]])
+  if (length(TRUE) == 0) stop("birl: the transition model is empty")
+  nS <- length(TRUE)
+  nA <- length(TRUE[[1]])
   if (nA == 0) stop("birl: there are no actions")
   for (s in 1:nS) {
-    if (length(T[[s]]) != nA)
+    if (length(TRUE[[s]]) != nA)
       stop("birl: every state needs the same actions")
     for (a in 1:nA) {
-      row <- T[[s]][[a]]
+      row <- TRUE[[s]][[a]]
       if (length(row) != nS)
         stop("birl: a transition row has the wrong length")
       tot <- sum(row)
@@ -46,6 +47,11 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @param b Passed to \code{cbind}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .solve(A = A, b = b)
+#' res
 .solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -86,13 +92,13 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @return The value of \code{.solve}.
 #' @export
 policy_values <- function(T, R, gamma, policy) {
-  m <- .mdp(T, gamma)
+  m <- .mdp(TRUE, gamma)
   nS <- m$nS
   if (length(policy) != nS || length(R) != nS)
     stop("birl: policy and reward need one entry per state")
   A <- matrix(0, nS, nS)
   for (i in 1:nS) for (j in 1:nS)
-    A[i, j] <- (if (i == j) 1 else 0) - gamma * T[[i]][[policy[i]]][j]
+    A[i, j] <- (if (i == j) 1 else 0) - gamma * TRUE[[i]][[policy[i]]][j]
   .solve(A, as.numeric(R))
 }
 
@@ -109,12 +115,12 @@ policy_values <- function(T, R, gamma, policy) {
 #' @return The value of \code{Q}, as built in the body.
 #' @export
 q_values <- function(T, R, gamma, V) {
-  m <- .mdp(T, gamma)
+  m <- .mdp(TRUE, gamma)
   nS <- m$nS
   nA <- m$nA
   Q <- matrix(0, nS, nA)
   for (s in 1:nS) for (a in 1:nA) {
-    Q[s, a] <- R[s] + gamma * sum(T[[s]][[a]] * V)
+    Q[s, a] <- R[s] + gamma * sum(TRUE[[s]][[a]] * V)
   }
   Q
 }
@@ -128,12 +134,13 @@ q_values <- function(T, R, gamma, V) {
 #' @param T Passed to \code{.mdp}.
 #' @param R A vector; its length is taken.
 #' @param gamma Passed to \code{.mdp}.
-#' @param policy Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param policy Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
-  m <- .mdp(T, gamma)
+  m <- .mdp(TRUE, gamma)
   nS <- m$nS
   nA <- m$nA
   if (length(R) != nS) stop("birl: one reward per state is required")
@@ -141,8 +148,8 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   if (length(pi) != nS) stop("birl: the starting policy has the wrong length")
   sweeps <- 0
   for (it in seq_len(max_iter)) {
-    V <- policy_values(T, R, gamma, pi)
-    Q <- q_values(T, R, gamma, V)
+    V <- policy_values(TRUE, R, gamma, pi)
+    Q <- q_values(TRUE, R, gamma, V)
     new <- apply(Q, 1, which.max)
     sweeps <- sweeps + 1
     if (identical(new, pi)) {
@@ -150,8 +157,8 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
     }
     pi <- new
   }
-  V <- policy_values(T, R, gamma, pi)
-  list(policy = pi, V = V, Q = q_values(T, R, gamma, V), sweeps = sweeps)
+  V <- policy_values(TRUE, R, gamma, pi)
+  list(policy = pi, V = V, Q = q_values(TRUE, R, gamma, V), sweeps = sweeps)
 }
 
 #' .birl_log_likelihood
@@ -183,12 +190,14 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
 
 #' log_prior
 #'
-#' A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms}, \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module.
+#' A step of the birl_native implementation. Called by \code{.abcgp.alpha_terms},
+#' \code{.abcgp.mw_sampler}, \code{abcnnt} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param R A vector; its length is taken and its elements indexed.
-#' @param prior One of \code{"gaussian"}, \code{"laplacian"}, \code{"uniform"}. Defaults to \code{"uniform"}.
+#' @param prior One of \code{"gaussian"}, \code{"laplacian"}, \code{"uniform"}. Defaults
+#' to \code{"uniform"}.
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param J Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
@@ -222,6 +231,9 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @param seed Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{f}, as built in the body.
 #' @export
+#' @examples
+#' res <- .rng(seed = 1L)
+#' res
 .rng <- function(seed) {
   st <- as.integer(seed)
   if (st <= 0) st <- 1L
@@ -246,18 +258,20 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 #' @param alpha Passed to \code{.birl_log_likelihood}. Defaults to \code{1}.
 #' @param prior Passed to \code{log_prior}. Defaults to \code{"uniform"}.
 #' @param scale Passed to \code{log_prior}. Defaults to \code{1}.
-#' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @param r_max Optional; may be \code{NULL}. Numeric; combined arithmetically in the
+#' body. Defaults to \code{1}.
 #' @param J Passed to \code{log_prior}. Defaults to \code{0.1}.
 #' @param H Passed to \code{log_prior}. Defaults to \code{0}.
 #' @param burn Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param R0 Optional; may be \code{NULL}. Iterated over elementwise, with \code{vapply}.
-#' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{final_policy}.
+#' @return A list with \code{samples}, \code{acceptance}, \code{policy_iterations},
+#' \code{n_proposals}, \code{final_policy}.
 #' @export
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
-  m <- .mdp(T, gamma)
+  m <- .mdp(TRUE, gamma)
   nS <- m$nS
   nA <- m$nA
   if (delta <= 0) stop("birl: delta must be positive")
@@ -268,7 +282,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
   grid <- function(v) round(v / delta) * delta
   R <- if (is.null(R0)) vapply(1:nS, function(i)
     grid((2 * rnd() - 1) * r_max), numeric(1)) else vapply(R0, grid, numeric(1))
-  got <- policy_iteration(T, R, gamma)
+  got <- policy_iteration(TRUE, R, gamma)
   pi <- got$policy
   Q <- got$Q
   score <- function(Qm, Rv) {
@@ -290,8 +304,8 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
       samples[it, ] <- R
       next
     }
-    Vp <- policy_values(T, cand, gamma, pi)
-    Qp <- q_values(T, cand, gamma, Vp)
+    Vp <- policy_values(TRUE, cand, gamma, pi)
+    Qp <- q_values(TRUE, cand, gamma, Vp)
     changed <- FALSE
     for (st_ in 1:nS) {
       if (Qp[st_, pi[st_]] < max(Qp[st_, ]) - 1e-12) {
@@ -301,7 +315,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
     }
     if (changed) {
       repolicy <- repolicy + 1L
-      got2 <- policy_iteration(T, cand, gamma, pi)
+      got2 <- policy_iteration(TRUE, cand, gamma, pi)
       newpi <- got2$policy
       newQ <- got2$Q
     } else {
@@ -345,21 +359,24 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 #' @param burn Passed to \code{policy_walk}.
 #' @param seed Passed to \code{policy_walk}. Defaults to \code{0}.
 #' @param R0 Passed to \code{policy_walk}.
-#' @return A list with \code{estimate}, \code{reward_mean}, \code{reward_sd}, \code{policy}, \code{V}, \code{Q}, \code{samples}, \code{acceptance}, \code{policy_iterations}, \code{n_proposals}, \code{n_samples}, \code{prior}, \code{alpha}, \code{delta}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{reward_mean}, \code{reward_sd},
+#' \code{policy}, \code{V}, \code{Q}, \code{samples}, \code{acceptance},
+#' \code{policy_iterations}, \code{n_proposals}, \code{n_samples}, \code{prior},
+#' \code{alpha}, \code{delta}, \code{method}, \code{note}.
 #' @export
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
-  .mdp(T, gamma)
+  .mdp(TRUE, gamma)
   obs <- lapply(observations, function(sa) c(as.integer(sa[1]),
                                               as.integer(sa[2])))
-  walk <- policy_walk(T, obs, gamma, n_iter, delta, alpha, prior, scale,
+  walk <- policy_walk(TRUE, obs, gamma, n_iter, delta, alpha, prior, scale,
                       r_max, J, H, burn, seed, R0)
   S <- walk$samples
   n <- nrow(S)
   mean_r <- colMeans(S)
   var_r <- apply(S, 2, function(c) sum((c - mean(c))^2) / max(n - 1, 1))
-  got <- policy_iteration(T, mean_r, gamma)
+  got <- policy_iteration(TRUE, mean_r, gamma)
   list(estimate = mean_r, reward_mean = mean_r,
        reward_sd = sqrt(var_r), policy = got$policy, V = got$V, Q = got$Q,
        samples = S, acceptance = walk$acceptance,

@@ -21,5 +21,6 @@ The value of \code{.dot}.
 }
 \keyword{internal}
 \examples{
-kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8), omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+kernel_estimate(x = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  omegas = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 }

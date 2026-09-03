@@ -30,7 +30,8 @@
 
 #' .lyapun_as_series
 #'
-#' A step of the lyapun_native implementation. Called by \code{autocorrelation_lag}, \code{divergence_curve}, \code{mean_period} and 1 others in the module.
+#' A step of the lyapun_native implementation. Called by \code{autocorrelation_lag},
+#' \code{divergence_curve}, \code{mean_period} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -52,7 +53,8 @@
 
 #' morie_lyapun_embed
 #'
-#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve},
+#' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -84,7 +86,8 @@ morie_lyapun_embed <- function(y, m, tau) {
 
 #' autocorrelation_lag
 #'
-#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve},
+#' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,7 +114,8 @@ autocorrelation_lag <- function(y, threshold = NULL) {
 
 #' mean_period
 #'
-#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{morie_lyapun}.
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve},
+#' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -181,7 +185,8 @@ mean_period <- function(y, dt = 1.0) {
 
 #' .lyapun_distance
 #'
-#' A step of the lyapun_native implementation. Called by \code{divergence_curve}, \code{lyapunov_exponent}.
+#' A step of the lyapun_native implementation. Called by \code{divergence_curve},
+#' \code{lyapunov_exponent}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -201,7 +206,8 @@ mean_period <- function(y, dt = 1.0) {
 
 #' divergence_curve
 #'
-#' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent}, \code{morie_lyapun}.
+#' A step of the lyapun_native implementation. Called by \code{lyapunov_exponent},
+#' \code{morie_lyapun}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -211,7 +217,9 @@ mean_period <- function(y, dt = 1.0) {
 #' @param dt Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param min_sep Optional; may be \code{NULL}. Passed to \code{.lyapun_nearest_neighbours}.
 #' @param max_steps Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @return A list with \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n_obs}.
+#' @return A list with \code{time}, \code{log_divergence}, \code{log_ratio},
+#' \code{n_pairs}, \code{neighbour}, \code{d0}, \code{points}, \code{m}, \code{tau},
+#' \code{min_sep}, \code{n_points}, \code{n_obs}.
 #' @export
 divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
                              min_sep = NULL, max_steps = NULL) {
@@ -342,9 +350,14 @@ divergence_curve <- function(y, m = NULL, tau = NULL, dt = 1.0,
 #' @param fit Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param min_sep Passed to \code{divergence_curve}.
 #' @param max_steps Passed to \code{divergence_curve}.
-#' @param method One of \code{"rosenstein"}, \code{"sato"}, \code{"sato_k"}. Defaults to \code{"rosenstein"}.
+#' @param method One of \code{"rosenstein"}, \code{"sato"}, \code{"sato_k"}. Defaults to
+#' \code{"rosenstein"}.
 #' @param k Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @return A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato}, \code{sato_k}, \code{sato_k_curve}, \code{se}, \code{r_squared}, \code{intercept}, \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs}, \code{fit_range}, \code{k}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points}, \code{n}, \code{dt}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{lambda1}, \code{rosenstein}, \code{sato},
+#' \code{sato_k}, \code{sato_k_curve}, \code{se}, \code{r_squared}, \code{intercept},
+#' \code{time}, \code{log_divergence}, \code{log_ratio}, \code{n_pairs},
+#' \code{fit_range}, \code{k}, \code{m}, \code{tau}, \code{min_sep}, \code{n_points},
+#' \code{n}, \code{dt}, \code{method}, \code{note}.
 #' @export
 lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
                               fit = NULL, min_sep = NULL,
@@ -447,6 +460,9 @@ largest_lyapunov <- lyapunov_exponent
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .lyapun_cheatsheet()
+#' res
 .lyapun_cheatsheet <- function() {
   paste("lyapun: largest Lyapunov exponent (Rosenstein, Collins & De ",
         "Luca 1993). Embed with delay J and dimension m, find each ",

@@ -20,7 +20,8 @@
 #' }
 #'
 #' The count model is
-#' \deqn{y_{vti} \sim \mathrm{NegBin}(n_{vti} \exp(\mu + \alpha_v + \delta_t + \beta_i), \phi)}{y_vti ~ NegBin(n_vti exp(mu + alpha_v + delta_t + beta_i), phi)}
+#' \deqn{y_{vti} \sim \mathrm{NegBin}(n_{vti} \exp(\mu + \alpha_v + \delta_t + \beta_i),
+#' \phi)}{y_vti ~ NegBin(n_vti exp(mu + alpha_v + delta_t + beta_i), phi)}
 #' with \eqn{v} = PwSMI vs non-SMI, \eqn{t} = year, \eqn{i} = area.
 #' The headline coefficient \eqn{\alpha_v}{alpha_v} is the log relative-risk of
 #' police use of force against PwSMI vs non-SMI.

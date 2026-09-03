@@ -17,7 +17,7 @@
 #' Stefanbz(300)$estimate
 #' @export
 Stefanbz <- function(T, emissivity = 1) {
-  tv <- .s03vec(T)
+  tv <- .s03vec(TRUE)
   eps <- as.numeric(emissivity)
   k_b <- 1.380649e-23
   h <- 6.62607015e-34

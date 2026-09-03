@@ -18,8 +18,11 @@
 #' not trusted.
 #'
 #' @param acf Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{a}, \code{reflection}, \code{error}, \code{errors}, \code{gain}, \code{order}, \code{stable}, \code{monotone}, \code{normalized_error}, \code{sign_convention}, \code{method}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{a}, \code{reflection}, \code{error}, \code{errors},
+#' \code{gain}, \code{order}, \code{stable}, \code{monotone}, \code{normalized_error},
+#' \code{sign_convention}, \code{method}.
 #' @export
 Levinson <- function(acf, order = NULL) {
   # eqs (7.37)-(7.39).  Init eps_0 = phi(0); for i = 1..P:
@@ -72,7 +75,9 @@ Levinson <- function(acf, order = NULL) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @param method Compared against \code{"autocorrelation"}. Defaults to \code{"autocorrelation"}.
-#' @return A list with \code{a}, \code{gain}, \code{error}, \code{reflection}, \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable}, \code{normalized_error}, \code{sign_convention}, \code{method}.
+#' @return A list with \code{a}, \code{gain}, \code{error}, \code{reflection},
+#' \code{acf}, \code{order}, \code{residual}, \code{residual_energy}, \code{stable},
+#' \code{normalized_error}, \code{sign_convention}, \code{method}.
 #' @export
 Lpc <- function(x, order, method = "autocorrelation") {
   # eqs (7.17)-(7.18), (7.25), (7.35).  The ACF is the BIASED estimator
@@ -119,8 +124,10 @@ Lpc <- function(x, order, method = "autocorrelation") {
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param excitation Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged}, \code{sign_convention}, \code{method}.
+#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{y}, \code{n}, \code{order}, \code{gain}, \code{diverged},
+#' \code{sign_convention}, \code{method}.
 #' @export
 LpcSynth <- function(a, excitation, gain = 1, initial = NULL) {
   # Inverting eq (7.18): y(n) = G e(n) - sum a_k y(n-k).  The minus
@@ -235,7 +242,9 @@ FpeOrder <- function(errors, n_samples) {
 #'
 #' @param errors Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_samples Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{order}, \code{criterion}, \code{aic}, \code{aic_order}, \code{n}, \code{start_order}, \code{penalty_per_parameter}, \code{stricter_than_aic}, \code{method}.
+#' @return A list with \code{order}, \code{criterion}, \code{aic}, \code{aic_order},
+#' \code{n}, \code{start_order}, \code{penalty_per_parameter}, \code{stricter_than_aic},
+#' \code{method}.
 #' @export
 MdlOrder <- function(errors, n_samples) {
   # Rissanen (1978): MDL(p) = N log(sigma_p^2) + p log(N).  The penalty
@@ -374,7 +383,8 @@ PzFormZ <- function(zeros, poles, z = NULL, gain = 1) {
 #' @param poles Coerced to complex by the body, with \code{as.complex}.
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Numeric; passed to \code{abs}. Defaults to \code{1}.
-#' @return A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances}, \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
+#' @return A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances},
+#' \code{pole_distances}, \code{omega}, \code{magnitude_matches_product}, \code{method}.
 #' @export
 PzResp <- function(zeros, poles, omega, gain = 1) {
   # eqs (3.71)-(3.73): on the unit circle the magnitude is the product
@@ -429,7 +439,8 @@ PzResp <- function(zeros, poles, omega, gain = 1) {
 #'
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param a Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{zeros}, \code{poles}, \code{n_zeros}, \code{n_poles}, \code{stable}, \code{minimum_phase}, \code{zeros_on_unit_circle}, \code{method}.
+#' @return A list with \code{zeros}, \code{poles}, \code{n_zeros}, \code{n_poles},
+#' \code{stable}, \code{minimum_phase}, \code{zeros_on_unit_circle}, \code{method}.
 #' @export
 PoleZero <- function(b, a = NULL) {
   # eqs (3.67), (3.69): zeros are the roots of the numerator, poles the
@@ -471,7 +482,8 @@ PoleZero <- function(b, a = NULL) {
 #' @param p Coerced to integer by the body, with \code{as.integer}.
 #' @param q Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
-#' @return A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles}, \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
+#' @return A list with \code{a}, \code{b}, \code{p}, \code{q}, \code{gain}, \code{poles},
+#' \code{zeros}, \code{stable}, \code{ar_error}, \code{two_stage}, \code{method}.
 #' @export
 ArmaFit <- function(x, p, q, fs = 1) {
   # Section 7.7: H(z) = B(z)/A(z), needed when the signal has spectral
@@ -528,7 +540,8 @@ ArmaFit <- function(x, p, q, fs = 1) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param segment Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{fit}, as built in the body.
 #' @export
@@ -672,7 +685,9 @@ stats_free_interp <- function(beats, values, grid) {
 #' @param rr Passed to \code{HrvAr}.
 #' @param order Passed to \code{HrvAr}. Defaults to \code{16}.
 #' @param fs Passed to \code{HrvAr}. Defaults to \code{4}.
-#' @return A list with \code{lf_hf_ratio}, \code{lf}, \code{hf}, \code{vlf}, \code{total_power}, \code{lf_nu}, \code{hf_nu}, \code{order}, \code{bands}, \code{interpretation_caveat}, \code{method}.
+#' @return A list with \code{lf_hf_ratio}, \code{lf}, \code{hf}, \code{vlf},
+#' \code{total_power}, \code{lf_nu}, \code{hf_nu}, \code{order}, \code{bands},
+#' \code{interpretation_caveat}, \code{method}.
 #' @export
 HrvRatio <- function(rr, order = 16, fs = 4) {
   # LF/HF from the AR model PSD.  Often called a sympathovagal balance;

@@ -7,7 +7,7 @@
 morie_tmle_longitudinal(y, a, l, trunc = 0.01)
 }
 \arguments{
-\item{y, a, l}{As in \code{\link[=morie_tmle_time_varying]{morie_tmle_time_varying()}}.}
+\item{y, a, l}{As in \code{morie_tmle_time_varying()}.}
 
 \item{trunc}{Treatment-probability truncation.}
 
@@ -18,7 +18,7 @@ List with \code{estimate}, \code{ey_always}, \code{ey_never}, \code{n_periods},
 \code{n}.
 }
 \description{
-Runs \code{\link[=morie_tmle_time_varying]{morie_tmle_time_varying()}} under the two static regimes and
+Runs \code{morie_tmle_time_varying()} under the two static regimes and
 differences them -- the longitudinal analogue of the g-formula
 contrast, but with a targeting step at every time point rather than
 plain substitution. Mirrors \code{morie.fn.tmllng}.

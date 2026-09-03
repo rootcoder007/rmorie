@@ -16,8 +16,10 @@ ports_fixture <- function(seed = 20260731) {
   }
   x <- numeric(200L)
   for (i in seq_len(200L)) x[i] <- 4 * nxt() - 2
-  ya <- numeric(40L); for (i in seq_len(40L)) ya[i] <- 2 * nxt()
-  yb <- numeric(30L); for (i in seq_len(30L)) yb[i] <- 2 * nxt()
+  ya <- numeric(40L)
+  for (i in seq_len(40L)) ya[i] <- 2 * nxt()
+  yb <- numeric(30L)
+  for (i in seq_len(30L)) yb[i] <- 2 * nxt()
   list(x = x, ya = ya, yb = yb,
        da = as.numeric(seq_len(40L) > 20L),
        db = as.numeric(seq_len(30L) <= 15L))
@@ -198,7 +200,8 @@ test_that("the inflation matches the AR(1) theoretical factor", {
   for (rho in c(0.5, 0.8)) {
     n <- 20000L
     e <- stats::rnorm(n)
-    x <- numeric(n); x[1] <- e[1] / sqrt(1 - rho^2)
+    x <- numeric(n)
+    x[1] <- e[1] / sqrt(1 - rho^2)
     for (i in 2:n) x[i] <- rho * x[i - 1] + e[i]
     got <- morie_loss_stream_variance(x)$se_inflation
     expect_equal(got, sqrt((1 + rho) / (1 - rho)), tolerance = 0.25)
@@ -350,7 +353,8 @@ test_that("a supplied embedding is used instead of the bag of words", {
 
 test_that("ideal points are recovered in one dimension", {
   set.seed(51)
-  n <- 120L; m <- 220L
+  n <- 120L
+  m <- 220L
   truth <- stats::rnorm(n)
   zy <- stats::rnorm(m) * 0.8
   zn <- stats::rnorm(m) * 0.8
@@ -367,9 +371,11 @@ test_that("ideal points are recovered in one dimension", {
 
 test_that("the configuration is normalised and polarity fixes the sign", {
   set.seed(52)
-  n <- 80L; m <- 150L
+  n <- 80L
+  m <- 150L
   truth <- stats::rnorm(n)
-  zy <- stats::rnorm(m) * 0.8; zn <- stats::rnorm(m) * 0.8
+  zy <- stats::rnorm(m) * 0.8
+  zn <- stats::rnorm(m) * 0.8
   eta <- 2 * (outer(truth, zn, function(a, b) (a - b)^2) -
                 outer(truth, zy, function(a, b) (a - b)^2))
   V <- (matrix(stats::runif(n * m), n, m) < stats::pnorm(eta)) * 1
@@ -382,9 +388,11 @@ test_that("the configuration is normalised and polarity fixes the sign", {
 
 test_that("unanimous roll calls are dropped and reported", {
   set.seed(53)
-  n <- 60L; m <- 100L
+  n <- 60L
+  m <- 100L
   truth <- stats::rnorm(n)
-  zy <- stats::rnorm(m) * 0.8; zn <- stats::rnorm(m) * 0.8
+  zy <- stats::rnorm(m) * 0.8
+  zn <- stats::rnorm(m) * 0.8
   eta <- 2 * (outer(truth, zn, function(a, b) (a - b)^2) -
                 outer(truth, zy, function(a, b) (a - b)^2))
   V <- (matrix(stats::runif(n * m), n, m) < stats::pnorm(eta)) * 1
@@ -396,7 +404,8 @@ test_that("unanimous roll calls are dropped and reported", {
 
 test_that("without polarity the sign is reported as arbitrary", {
   set.seed(54)
-  n <- 50L; m <- 90L
+  n <- 50L
+  m <- 90L
   V <- (matrix(stats::runif(n * m), n, m) < 0.5) * 1
   out <- morie_wnominate_fit(V, n_dims = 1L)
   expect_true(any(grepl("identified only up to", out$warnings)))

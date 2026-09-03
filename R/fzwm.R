@@ -3,7 +3,10 @@
 #' Mean and variance of the smoothed Wilcoxon signed rank statistic
 #'
 #' Sec. 5.3.1. With `Wtilde = n(n+1)/2 - sum_{i<=j} K(-(X_i+X_j)/(2h))`,
-#' \deqn{E_\theta(\tilde W) = \frac{n(n+1)}{2}\{G(\theta) + O(h^2)\},\quad V_\theta(\tilde W) = n(n+1)^2\Big\{\int F^2(u+2\theta)f(u)du - G^2(\theta) + O(h^2)\Big\},}{E(Wtilde) = n(n+1)/2 {G(theta) + O(h^2)}, V(Wtilde) = n(n+1)^2 {int F^2(u + 2 theta) f(u) du - G(theta)^2 + O(h^2)},}
+#' \deqn{E_\theta(\tilde W) = \frac{n(n+1)}{2}\{G(\theta) + O(h^2)\},\quad
+#' V_\theta(\tilde W) = n(n+1)^2\Big\{\int F^2(u+2\theta)f(u)du - G^2(\theta) +
+#' O(h^2)\Big\},}{E(Wtilde) = n(n+1)/2 {G(theta) + O(h^2)}, V(Wtilde) = n(n+1)^2 {int
+#' F^2(u + 2 theta) f(u) du - G(theta)^2 + O(h^2)},}
 #' with `G` the half-sum distribution function.
 #'
 #' `Wtilde` is a U-statistic, which is why its variance has the `n(n+1)^2`
@@ -28,7 +31,8 @@
 #' @param gtheta `G(theta)`; 1/2 under the null.
 #' @param projint `int F^2(u + 2 theta) f(u) du`; 1/3 under the null.
 #' @return Named list with ``mean``, ``variance``, ``se``, ``projvar``, ``n``, ``method``.
-#' @references Fauzi and Maesono (2023), Sec. 5.3.1; Maesono, Moriyama and Lu (2018), AISM 70:969-982.
+#' @references Fauzi and Maesono (2023), Sec. 5.3.1; Maesono, Moriyama and Lu (2018),
+#' AISM 70:969-982.
 #' @examples
 #' Swilmom(n = 10)
 #' @export

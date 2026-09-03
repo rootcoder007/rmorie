@@ -2,12 +2,14 @@
 # Anchors come from spatialreg::lagsarlm / errorsarlm.
 
 W25 <- local({
-  k <- 5; n <- k * k
+  k <- 5
+  n <- k * k
   idx <- function(r, c) (r - 1) * k + c
   W <- matrix(0, n, n)
   for (r in 1:k) for (cc in 1:k)
     for (d in list(c(1, 0), c(-1, 0), c(0, 1), c(0, -1))) {
-      rr <- r + d[1]; c2 <- cc + d[2]
+      rr <- r + d[1]
+      c2 <- cc + d[2]
       if (rr >= 1 && rr <= k && c2 >= 1 && c2 <= k)
         W[idx(r, cc), idx(rr, c2)] <- 1
     }

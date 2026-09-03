@@ -13,11 +13,13 @@ test_that("party unity flags the defector and supports the CQ variant", {
 
 test_that("heteroskedastic scales single out the noisy voter", {
   set.seed(42)
-  n <- 25; q <- 70
+  n <- 25
+  q <- 70
   x <- seq(-2, 2, length.out = n)
   beta <- stats::rnorm(q, sd = 1.2)
   alpha <- stats::rnorm(q, sd = 0.5)
-  psi_true <- rep(1, n); psi_true[1] <- 4
+  psi_true <- rep(1, n)
+  psi_true[1] <- 4
   P <- stats::pnorm(sweep(outer(x, beta), 2, alpha) / psi_true)
   V <- matrix(as.numeric(stats::runif(n * q) < P), n, q)
   out <- morie_heteroskedastic_scales(V, x, alpha, beta)

@@ -61,6 +61,10 @@
 #' @param x A matrix; passed to \code{dim}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vqgdec_to_matrix(x = x)
+#' res
 .vqgdec_to_matrix <- function(x) {
     if (is.matrix(x)) {
         return(`storage.mode<-`(x, "double"))
@@ -208,8 +212,10 @@ morie_vqgdec_patch_discriminator <- function(image, patch = 4,
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.
 #' @param window Coerced to integer by the body, with \code{as.integer}.
-#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything}, \code{context}, \code{note}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{windows}, \code{n_windows}, \code{covers_everything},
+#' \code{context}, \code{note}.
 #' @export
 morie_vqgdec_sliding_windows <- function(height, width, window,
                                           stride = NULL) {
@@ -293,7 +299,8 @@ morie_vqgdec_sliding_windows <- function(height, width, window,
 #' @param generator Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param grad_rec Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
 #' @param grad_gan Optional; may be \code{NULL}. Passed to \code{morie_vqgdec_adaptive_weight}.
-#' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens}, \code{adaptive_lambda}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{image}, \code{codes}, \code{n_tokens},
+#' \code{adaptive_lambda}, \code{method}, \code{note}.
 #' @export
 morie_vqgdec_decode <- function(indices, codebook, generator = NULL,
                                  grad_rec = NULL, grad_gan = NULL) {

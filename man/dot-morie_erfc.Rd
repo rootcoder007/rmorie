@@ -16,3 +16,8 @@ A vector, from \code{vapply}.
 fraction of its own, and the tail comes straight from the CF branch
 of the incomplete gamma, which computes Q without forming 1 - P.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_erfc(x = x)
+res
+}

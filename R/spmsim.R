@@ -78,7 +78,8 @@
 #'   single-scale GWR this generalises.
 #' @export
 #' @examples
-#' spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 spmsim <- function(x, y, coords, kernel = "gaussian", criterion = "aicc",
                    adaptive = FALSE, tol = 1e-5, max_iter = 200L,
                    rss_score = FALSE, bws_same_times = 5L,

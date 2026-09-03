@@ -17,3 +17,7 @@ A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_tmle_logit(p = 0.5)
+res
+}

@@ -9,7 +9,8 @@
 # Newton-Raphson logistic regression; returns fitted probabilities.
 #' Newton-Raphson logistic regression; returns fitted probabilities
 #'
-#' A step of the causal_shared_native implementation. Called by \code{morie_dr_learner}, \code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module.
+#' A step of the causal_shared_native implementation. Called by \code{morie_dr_learner},
+#' \code{morie_regime_value}, \code{morie_tmle_ate} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -19,6 +20,11 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return The value of \code{as.vector}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_logit_fit(X = x, y = y)
+#' res
 .morie_logit_fit <- function(X, y, max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
   beta <- rep(0, ncol(D))
@@ -68,6 +74,11 @@
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.001}.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_ridge_fit(X = x, y = y)
+#' res
 .morie_ridge_fit <- function(X, y, lam = 1e-3) {
   D <- cbind(1, X)
   A <- crossprod(D) + lam * diag(ncol(D))

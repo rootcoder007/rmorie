@@ -67,7 +67,8 @@
 #'   2(1):11.
 #' @export
 #' @examples
-#' Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlmpi(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 Tmlmpi <- function(y, D, X) {
   yv <- as.numeric(y)
   Dv <- as.numeric(D)

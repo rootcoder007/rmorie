@@ -15,7 +15,7 @@ morie_median_voter(x, alpha = 0.05)
 \item{alpha}{Two-sided level for the intervals.}
 }
 \value{
-Everything \code{\link[=morie_median_voter_ci]{morie_median_voter_ci()}} returns: \code{estimate},
+Everything \code{morie_median_voter_ci()} returns: \code{estimate},
 \code{se}, \code{se_normal}, \code{ci_lower}, \code{ci_upper}, the distribution-free
 \code{ci_exact_lower} / \code{ci_exact_upper}, \code{median_interval},
 \code{unique_winner}, \code{n}, \code{warnings}, \code{method}.
@@ -26,7 +26,7 @@ is the median ideal point.
 }
 \details{
 This is the compact front-end. It delegates to
-\code{\link[=morie_median_voter_ci]{morie_median_voter_ci()}} and therefore reports the general
+\code{morie_median_voter_ci()} and therefore reports the general
 density-based standard error \eqn{1/(2 f(m)\sqrt{n})}, NOT the
 familiar \eqn{1.2533\,s/\sqrt{n}}, which is
 \eqn{\sqrt{\pi/2}\,\sigma/\sqrt{n}} and holds only under normality.

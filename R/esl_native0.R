@@ -25,6 +25,10 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .esl_K(u = x)
+#' res
 .esl_K <- function(u) exp(-0.5 * u^2) / sqrt(2 * pi)
 
 # (7.55): Pr{i in bootstrap sample b} = 1 - (1 - 1/n)^n -> 1 - e^-1.
@@ -38,6 +42,9 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .esl_inclusion(n = 3L)
+#' res
 .esl_inclusion <- function(n) {
   n <- as.integer(n)
   if (is.na(n) || n < 1L) {
@@ -59,7 +66,8 @@
 #' parameters, not laws.
 #'
 #' @param p Numeric; passed to \code{sqrt}.
-#' @param task The body requires: task must be 'regression' or 'classification'. Defaults to \code{"regression"}.
+#' @param task The body requires: task must be 'regression' or 'classification'. Defaults
+#' to \code{"regression"}.
 #' @return Nothing; this branch always raises.
 #' @export
 .esl_mtry <- function(p, task = "regression") {
@@ -157,6 +165,10 @@
 #' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .esl_var_p(y = y)
+#' res
 .esl_var_p <- function(y) {
   n <- length(y)
   if (n < 1L) {
@@ -187,7 +199,8 @@
 
 #' .esl_matrix
 #'
-#' A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err}, \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}.
+#' A step of the esl_native0 implementation. Called by \code{morie_esl_bootstrap_err},
+#' \code{morie_esl_random_forest}, \code{morie_esl_residual_variance}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -196,6 +209,11 @@
 #' @param what Passed to \code{sprintf}. Defaults to \code{"X"}.
 #' @return A list with \code{X}, \code{y}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .esl_matrix(X = x, y = y)
+#' res
 .esl_matrix <- function(X, y, what = "X") {
   A <- as.matrix(X)
   storage.mode(A) <- "double"

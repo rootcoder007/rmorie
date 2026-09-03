@@ -9,7 +9,9 @@
 #' @param a See Usage.
 #' @param b See Usage.
 #' @return List with ``gcd``, ``x``, ``y``, ``check`` (a x + b y), ``a``, ``b``.
-#' @references Bezout (1779), Theorie generale des equations algebriques. Not held locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are standard published results.
+#' @references Bezout (1779), Theorie generale des equations algebriques. Not held
+#' locally; the extended Euclidean algorithm and the identity a x + b y = gcd(a, b) are
+#' standard published results.
 #' @export
 #' @examples
 #' Bezout(240, 46)

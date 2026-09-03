@@ -12,7 +12,8 @@ FAIL <- NA_integer_
 
 #' .probe
 #'
-#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_}, \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module.
+#' A step of the prsPEG_native implementation. Called by \code{morie_prsPEG_and_},
+#' \code{morie_prsPEG_choice}, \code{morie_prsPEG_not_} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -182,7 +183,8 @@ morie_prsPEG_not_ <- function(e) {
 #' @param expr Accepted by the signature and not used anywhere in the body.
 #' @param text A vector; its length is taken.
 #' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed}, \code{steps}, \code{memoised}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{consumed},
+#' \code{steps}, \code{memoised}, \code{method}, \code{note}.
 #' @export
 morie_prsPEG_parse <- function(expr, text, full = TRUE) {
   ctx <- list(steps = 0L, memo = NULL)
@@ -204,7 +206,8 @@ morie_prsPEG_parse <- function(expr, text, full = TRUE) {
 #' @param expr Passed to \code{attr}.
 #' @param text A vector; its length is taken.
 #' @param full A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps}, \code{memo.entries}, \code{memoised}, \code{method}.
+#' @return A list with \code{estimate}, \code{matched}, \code{end}, \code{steps},
+#' \code{memo.entries}, \code{memoised}, \code{method}.
 #' @export
 morie_prsPEG_packrat_parse <- function(expr, text, full = TRUE) {
   memo <- new.env(parent = emptyenv())

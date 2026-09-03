@@ -16,3 +16,8 @@ A character value.
 Part of the matroid_optimisation_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .morie_key(s = txt)
+res
+}

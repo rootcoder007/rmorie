@@ -3,7 +3,8 @@
 #' Berry-Esseen bound for the kernel quantile estimator
 #'
 #' Eq. (3.5) and Remark 3.1:
-#' \deqn{P(\sqrt{n}|\hat Q_{p,h} - Q(p)| \le x\sigma_n) = 2\Phi(x) - 1 + O(n^{-r}).}{P(sqrt(n)|Qhat - Q(p)| <= x sigma_n) = 2 Phi(x) - 1 + O(n^-r).}
+#' \deqn{P(\sqrt{n}|\hat Q_{p,h} - Q(p)| \le x\sigma_n) = 2\Phi(x) - 1 +
+#' O(n^{-r}).}{P(sqrt(n)|Qhat - Q(p)| <= x sigma_n) = 2 Phi(x) - 1 + O(n^-r).}
 #'
 #' The rate `r` depends on the ORDER of the kernel, not on the sample:
 #' `m = 2` gives `r = 1/3`; `m = 3` gives `5/13`; `m = 4` gives `7/17` by the

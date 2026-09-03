@@ -14,3 +14,7 @@ A step of the node2v_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .node2v_cheatsheet()
+res
+}

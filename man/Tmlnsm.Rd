@@ -31,7 +31,8 @@ increments at bandwidth \code{bw}.  A bandwidth much below the grid
 spacing collapses \code{f_a} and inflates the SE.
 }
 \examples{
-Tmlnsm(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), bw = 0.5)
+Tmlnsm(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), bw = 0.5)
 }
 \references{
 Diaz, I. (2017). Journal of Statistical Planning and

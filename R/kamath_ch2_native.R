@@ -9,13 +9,18 @@
 
 #' .morie_km_softmax
 #'
-#' A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}.
+#' A step of the kamath_ch2_native implementation. Called by
+#' \code{morie_kamath_attention_softmax}, \code{morie_kamath_decoder_token_distribution}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param a Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_km_softmax(a = A)
+#' res
 .morie_km_softmax <- function(a) {
   z <- a - max(a)
   exp(z) / sum(exp(z))
@@ -23,7 +28,9 @@
 
 #' .morie_km_probs
 #'
-#' A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_clm_loss}, \code{morie_kamath_gpt_unsupervised}, \code{morie_kamath_mlm_loss} and 1 others in the module.
+#' A step of the kamath_ch2_native implementation. Called by
+#' \code{morie_kamath_clm_loss}, \code{morie_kamath_gpt_unsupervised},
+#' \code{morie_kamath_mlm_loss} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -31,6 +38,10 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_km_probs(p = 0.5, name = txt)
+#' res
 .morie_km_probs <- function(p, name) {
   p <- as.numeric(p)
   if (length(p) == 0L) stop(sprintf("%s is empty.", name), call. = FALSE)

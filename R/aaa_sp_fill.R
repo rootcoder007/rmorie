@@ -14,7 +14,8 @@
 
 #' .morie_spx_dot
 #'
-#' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs}, \code{SpecRad} and 1 others in the module.
+#' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
+#' \code{.morie_spx_topeigs}, \code{SpecRad} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -22,11 +23,17 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_spx_dot(a = A, b = b)
+#' res
 .morie_spx_dot <- function(a, b) .morie_fsum(a * b)
 
 #' .morie_spx_matvec
 #'
-#' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq}, \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs} and 4 others in the module.
+#' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq},
+#' \code{.morie_spx_sarneg2}, \code{.morie_spx_topeigs} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -34,13 +41,19 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_spx_matvec(A = A, b = b)
+#' res
 .morie_spx_matvec <- function(A, b) {
   vapply(seq_len(nrow(A)), function(i) .morie_fsum(A[i, ] * b), numeric(1))
 }
 
 #' .morie_spx_matmul
 #'
-#' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq}, \code{.morie_spx_sarneg2}, \code{MantelZ} and 2 others in the module.
+#' A step of the sp_fill implementation. Called by \code{.morie_spx_lstsq},
+#' \code{.morie_spx_sarneg2}, \code{MantelZ} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -67,6 +80,10 @@
 #' @param A A matrix; passed to \code{diag}.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_spx_trace(A = A)
+#' res
 .morie_spx_trace <- function(A) .morie_fsum(diag(A))
 
 #' Gauss-Jordan with partial pivoting; raises rather than returning
@@ -77,6 +94,11 @@
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_spx_solve(A = A, b = b)
+#' res
 .morie_spx_solve <- function(A, b) {
   # Gauss-Jordan with partial pivoting; raises rather than returning
   # garbage on a singular system.
@@ -114,6 +136,10 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_spx_logabsdet(A = A)
+#' res
 .morie_spx_logabsdet <- function(A) {
   # (sign, log|det|) by LU with partial pivoting.
   n <- nrow(A)
@@ -148,7 +174,8 @@
 
 #' .morie_spx_lstsq
 #'
-#' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2}, \code{ShiftInt}, \code{SpErrMod}.
+#' A step of the sp_fill implementation. Called by \code{.morie_spx_sarneg2},
+#' \code{ShiftInt}, \code{SpErrMod}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -157,6 +184,11 @@
 #' @param ridge A flag; the body branches on it. Defaults to \code{0}.
 #' @return The value of \code{.morie_spx_solve}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_spx_lstsq(A = A, y = b)
+#' res
 .morie_spx_lstsq <- function(A, y, ridge = 0) {
   G <- .morie_spx_matmul(t(A), A)
   if (ridge) diag(G) <- diag(G) + ridge
@@ -172,6 +204,10 @@
 #' @param v A vector; indexed elementwise.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_spx_fixsign(v = x)
+#' res
 .morie_spx_fixsign <- function(v) {
   j <- which.max(abs(v))
   if (v[j] < 0) -v else v
@@ -225,6 +261,10 @@
 #' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_spx_dft(x = x)
+#' res
 .morie_spx_dft <- function(x) {
   # X_k = sum_u x_u exp(-i w_k u), u and k running from 0.
   n <- length(x)
@@ -266,6 +306,10 @@
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_spx_median(v = x)
+#' res
 .morie_spx_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -276,7 +320,8 @@
 
 #' .morie_spx_dist
 #'
-#' A step of the sp_fill implementation. Called by \code{MantelM2}, \code{Pcf}, \code{SpAcf} and 1 others in the module.
+#' A step of the sp_fill implementation. Called by \code{MantelM2}, \code{Pcf},
+#' \code{SpAcf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -284,22 +329,33 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_spx_dist(a = A, b = b)
+#' res
 .morie_spx_dist <- function(a, b) sqrt(.morie_fsum((a - b)^2))
 
 #' .morie_spx_p2
 #'
-#' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ}, \code{MoranRes}.
+#' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ},
+#' \code{MoranRes}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_spx_p2(z = y)
+#' res
 .morie_spx_p2 <- function(z) 2 * (1 - pnorm(abs(z)))
 
 #' .morie_spx_chkw
 #'
-#' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI}, \code{MantelM2} and 7 others in the module.
+#' A step of the sp_fill implementation. Called by \code{LisaClust}, \code{LisaI},
+#' \code{MantelM2} and 7 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -323,7 +379,8 @@
 
 #' .morie_spx_chkv
 #'
-#' A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust}, \code{LisaI} and 16 others in the module.
+#' A step of the sp_fill implementation. Called by \code{CrossSpec}, \code{LisaClust},
+#' \code{LisaI} and 16 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -331,6 +388,10 @@
 #' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_spx_chkv(x = x)
+#' res
 .morie_spx_chkv <- function(x, name = "x") {
   v <- as.numeric(x)
   if (!length(v)) stop(sprintf("`%s` must contain at least one value", name))
@@ -347,8 +408,11 @@
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @param z Passed to \code{.morie_spx_chkv}.
 #' @param bins Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{lags}, \code{centres}, \code{cov}, \code{acf}, \code{c0}, \code{npairs}, \code{n}, \code{incomplete_description_of_second_order_structure}, \code{method}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{lags}, \code{centres}, \code{cov}, \code{acf}, \code{c0},
+#' \code{npairs}, \code{n}, \code{incomplete_description_of_second_order_structure},
+#' \code{method}.
 #' @export
 SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
   # Empirical correlogram R(h) = C(h)/C(0), Schabenberger & Gotway (2005)
@@ -423,7 +487,8 @@ SpAcf <- function(coords, z, bins = NULL, cutoff = NULL) {
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
-#' @return A list with \code{local}, \code{expectation}, \code{lagged}, \code{global_i}, \code{s0}, \code{sum_identity_gap}, \code{n}, \code{method}.
+#' @return A list with \code{local}, \code{expectation}, \code{lagged}, \code{global_i},
+#' \code{s0}, \code{sum_identity_gap}, \code{n}, \code{method}.
 #' @export
 LisaI <- function(x, w) {
   # eq (1.17), Sec. 1.3.3.  sum_i I(s_i) = w.. I is checked, not assumed:
@@ -464,7 +529,8 @@ LisaI <- function(x, w) {
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param w Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.
 #' @param u Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.
-#' @return A list with \code{m1}, \code{m2}, \code{beta}, \code{sw2}, \code{s0}, \code{mean_attribute}, \code{n}, \code{method}.
+#' @return A list with \code{m1}, \code{m2}, \code{beta}, \code{sw2}, \code{s0},
+#' \code{mean_attribute}, \code{n}, \code{method}.
 #' @export
 MantelM2 <- function(coords, x, w = NULL, u = NULL) {
   # eqs (1.4) and (1.5) with the book's own default choices,
@@ -518,7 +584,8 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param u Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkw}.
-#' @return A list with \code{m2}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{sigma2}, \code{n}, \code{gaussian_moments_apply}, \code{method}.
+#' @return A list with \code{m2}, \code{expectation}, \code{variance}, \code{z},
+#' \code{p_value}, \code{sigma2}, \code{n}, \code{gaussian_moments_apply}, \code{method}.
 #' @export
 MantelZ <- function(coords, x, w, u = NULL) {
   # Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
@@ -585,7 +652,9 @@ MantelZ <- function(coords, x, w, u = NULL) {
 #' @param residuals Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @return A list with \code{i}, \code{expectation}, \code{variance}, \code{z}, \code{p_value}, \code{s0}, \code{tr_mw}, \code{k}, \code{n}, \code{not_minus_one_over_n_minus_one}, \code{method}.
+#' @return A list with \code{i}, \code{expectation}, \code{variance}, \code{z},
+#' \code{p_value}, \code{s0}, \code{tr_mw}, \code{k}, \code{n},
+#' \code{not_minus_one_over_n_minus_one}, \code{method}.
 #' @export
 MoranRes <- function(residuals, w, x = NULL) {
   # eq (1.16).  Eg[Ires] = n tr[MW] / {(n-k) w..} is the book's own
@@ -657,8 +726,10 @@ MoranRes <- function(residuals, w, x = NULL) {
 #' @param points A matrix; passed to \code{as.matrix}.
 #' @param region Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param r Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param correction The body requires: `correction` must be "border" or "none". Defaults to \code{"border"}.
-#' @return A list with \code{r}, \code{k}, \code{pcf}, \code{lambda}, \code{area}, \code{csr_k}, \code{csr_pcf_is_one}, \code{correction}, \code{n}, \code{method}.
+#' @param correction The body requires: `correction` must be "border" or "none". Defaults
+#' to \code{"border"}.
+#' @return A list with \code{r}, \code{k}, \code{pcf}, \code{lambda}, \code{area},
+#' \code{csr_k}, \code{csr_pcf_is_one}, \code{correction}, \code{n}, \code{method}.
 #' @export
 Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
   # R(h) = K'(h) / (2 h pi), Sec. 3.4.1, with Khat of Sec. 3.4.2 and the
@@ -767,7 +838,8 @@ Pcf <- function(points, region = NULL, r = NULL, correction = "border") {
 #' @param c0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param c Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param a Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{h}, \code{gamma}, \code{cov}, \code{nugget}, \code{psill}, \code{sill}, \code{range}, \code{true_range}, \code{n}, \code{method}.
+#' @return A list with \code{h}, \code{gamma}, \code{cov}, \code{nugget}, \code{psill},
+#' \code{sill}, \code{range}, \code{true_range}, \code{n}, \code{method}.
 #' @export
 SphVario <- function(h, c0 = 0, c = 1, a = 1) {
   # gamma(h) = c0 + c{3h/(2a) - (1/2)(h/a)^3} on 0 < h <= a, eq (4.15)
@@ -817,7 +889,9 @@ SphVario <- function(h, c0 = 0, c = 1, a = 1) {
 #' Fourier frequency EXCEPT w = 0.
 #'
 #' @param y Passed to \code{.morie_spx_chkv}.
-#' @return A list with \code{omega}, \code{periodogram}, \code{from_covariance}, \code{max_difference}, \code{acov}, \code{zero_frequency_excluded}, \code{n}, \code{method}.
+#' @return A list with \code{omega}, \code{periodogram}, \code{from_covariance},
+#' \code{max_difference}, \code{acov}, \code{zero_frequency_excluded}, \code{n},
+#' \code{method}.
 #' @export
 Pgram <- function(y) {
   # eq (4.57) specialised to R^1 in Sec. 4.7.1.1, checked against the
@@ -875,7 +949,8 @@ Pgram <- function(y) {
 #'
 #' @param y Passed to \code{Pgram}.
 #' @param span Numeric; combined arithmetically in the body. Defaults to \code{3L}.
-#' @return A list with \code{omega}, \code{smoothed}, \code{raw}, \code{span}, \code{equivalent_df}, \code{circular_window}, \code{n}, \code{method}.
+#' @return A list with \code{omega}, \code{smoothed}, \code{raw}, \code{span},
+#' \code{equivalent_df}, \code{circular_window}, \code{n}, \code{method}.
 #' @export
 SmPgram <- function(y, span = 3L) {
   # Daniell (equal-weight) smoothing of the eq (4.57) periodogram.  NOT in
@@ -925,7 +1000,8 @@ SmPgram <- function(y, span = 3L) {
 #'
 #' @param g Passed to \code{.morie_spx_chkw}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{400L}.
-#' @return A list with \code{rho}, \code{dominant_eigenvalue}, \code{eigenvector}, \code{sar_rho_bound}, \code{symmetric}, \code{iterations}, \code{n}, \code{method}.
+#' @return A list with \code{rho}, \code{dominant_eigenvalue}, \code{eigenvector},
+#' \code{sar_rho_bound}, \code{symmetric}, \code{iterations}, \code{n}, \code{method}.
 #' @export
 SpecRad <- function(g, iters = 400L) {
   # The SAR bound |rho| < 1/rho(W) comes from the non-singularity
@@ -1016,7 +1092,9 @@ SpecRad <- function(g, iters = 400L) {
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param n_grid A count; the body uses it as \code{seq_len(...)}. Defaults to \code{201L}.
 #' @param refine Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60L}.
-#' @return A list with \code{rho}, \code{beta}, \code{sigma2}, \code{neg2loglik}, \code{rho_bounds}, \code{ols_beta}, \code{spectral_radius}, \code{is_error_model_not_lag_model}, \code{k}, \code{n}, \code{method}.
+#' @return A list with \code{rho}, \code{beta}, \code{sigma2}, \code{neg2loglik},
+#' \code{rho_bounds}, \code{ols_beta}, \code{spectral_radius},
+#' \code{is_error_model_not_lag_model}, \code{k}, \code{n}, \code{method}.
 #' @export
 SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
   # SAR ERROR model, eqs (6.35)-(6.37) of Sec. 6.2.2.1 -- NOT the spatially
@@ -1116,7 +1194,9 @@ SpErrMod <- function(x, y, w, n_grid = 201L, refine = 60L) {
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param y Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
-#' @return A list with \code{kappa}, \code{p_observed}, \code{p_expected}, \code{categories}, \code{s0}, \code{compares_neighbours_not_same_site}, \code{n}, \code{method}.
+#' @return A list with \code{kappa}, \code{p_observed}, \code{p_expected},
+#' \code{categories}, \code{s0}, \code{compares_neighbours_not_same_site}, \code{n},
+#' \code{method}.
 #' @export
 SpKappa <- function(x, y, w) {
   # Cohen's kappa (Cohen 1960) scored over NEIGHBOUR pairs rather than
@@ -1177,7 +1257,9 @@ SpKappa <- function(x, y, w) {
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{labels}, \code{local}, \code{z}, \code{p_value}, \code{lagged_mean}, \code{counts}, \code{alpha}, \code{conditional_randomization}, \code{hl_and_lh_are_outliers_not_clusters}, \code{n}, \code{method}.
+#' @return A list with \code{labels}, \code{local}, \code{z}, \code{p_value},
+#' \code{lagged_mean}, \code{counts}, \code{alpha}, \code{conditional_randomization},
+#' \code{hl_and_lh_are_outliers_not_clusters}, \code{n}, \code{method}.
 #' @export
 LisaClust <- function(x, w, alpha = 0.05) {
   # Local Moran eq (1.17) with EXACT conditional-randomization moments
@@ -1263,7 +1345,9 @@ LisaClust <- function(x, w, alpha = 0.05) {
 #' @param values A matrix; passed to \code{as.matrix}.
 #' @param grid Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
-#' @return A list with \code{overall}, \code{row}, \code{col}, \code{residuals}, \code{fitted}, \code{abs_residual_sum}, \code{sweeps}, \code{resistant_to_outliers}, \code{nrow}, \code{ncol}, \code{n}, \code{method}.
+#' @return A list with \code{overall}, \code{row}, \code{col}, \code{residuals},
+#' \code{fitted}, \code{abs_residual_sum}, \code{sweeps}, \code{resistant_to_outliers},
+#' \code{nrow}, \code{ncol}, \code{n}, \code{method}.
 #' @export
 MedPolish <- function(values, grid = NULL, iters = 10L) {
   # Tukey (1977), Exploratory Data Analysis.  NOT in Schabenberger &
@@ -1343,7 +1427,9 @@ MedPolish <- function(values, grid = NULL, iters = 10L) {
 #' @param cluster Passed to \code{.morie_spx_chkv}.
 #' @param sigma2_u Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sigma2_e Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{clusters}, \code{shrunk}, \code{raw}, \code{lambda}, \code{sizes}, \code{grand_mean}, \code{sigma2_u}, \code{sigma2_e}, \code{shrinkage_depends_on_cluster_size}, \code{n}, \code{method}.
+#' @return A list with \code{clusters}, \code{shrunk}, \code{raw}, \code{lambda},
+#' \code{sizes}, \code{grand_mean}, \code{sigma2_u}, \code{sigma2_e},
+#' \code{shrinkage_depends_on_cluster_size}, \code{n}, \code{method}.
 #' @export
 ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
   # thetahat_j = ybar.. + (1 - lambda_j)(ybar_j - ybar..),
@@ -1403,9 +1489,13 @@ ShrinkPred <- function(y, cluster, sigma2_u, sigma2_e) {
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}.
 #' @param c Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param threshold_noise Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @param threshold_noise Coerced to numeric by the body, with \code{as.numeric}.
+#' Defaults to \code{0}.
 #' @param query_noise Optional; may be \code{NULL}. Passed to \code{.morie_spx_chkv}.
-#' @return A list with \code{above}, \code{released}, \code{halted_at}, \code{n_above}, \code{noisy_threshold}, \code{noise_scales}, \code{epsilon_split}, \code{epsilon}, \code{c}, \code{cost_scales_with_c_not_with_m}, \code{answered}, \code{n}, \code{method}.
+#' @return A list with \code{above}, \code{released}, \code{halted_at}, \code{n_above},
+#' \code{noisy_threshold}, \code{noise_scales}, \code{epsilon_split}, \code{epsilon},
+#' \code{c}, \code{cost_scales_with_c_not_with_m}, \code{answered}, \code{n},
+#' \code{method}.
 #' @export
 SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
                          threshold_noise = 0, query_noise = NULL) {
@@ -1475,7 +1565,9 @@ SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
 #' @param draft Passed to \code{.morie_spx_chkv}.
 #' @param target Passed to \code{.morie_spx_chkv}.
 #' @param gamma Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
-#' @return A list with \code{alpha}, \code{tv_distance}, \code{expected_tokens}, \code{gamma}, \code{max_tokens}, \code{deterministic_expectation_not_a_sampled_run}, \code{n}, \code{method}.
+#' @return A list with \code{alpha}, \code{tv_distance}, \code{expected_tokens},
+#' \code{gamma}, \code{max_tokens}, \code{deterministic_expectation_not_a_sampled_run},
+#' \code{n}, \code{method}.
 #' @export
 SpecDec <- function(draft, target, gamma = 4L) {
   # alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
@@ -1526,7 +1618,9 @@ SpecDec <- function(draft, target, gamma = 4L) {
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param y Passed to \code{.morie_spx_chkv}.
-#' @return A list with \code{omega}, \code{cospectrum}, \code{quadrature}, \code{amplitude}, \code{phase}, \code{means_removed}, \code{raw_not_consistent}, \code{n}, \code{method}.
+#' @return A list with \code{omega}, \code{cospectrum}, \code{quadrature},
+#' \code{amplitude}, \code{phase}, \code{means_removed}, \code{raw_not_consistent},
+#' \code{n}, \code{method}.
 #' @export
 CrossSpec <- function(x, y) {
   # Raw cross-periodogram S_xy(w) = X(w) conj(Y(w)) / (2 pi n) on
@@ -1572,9 +1666,12 @@ CrossSpec <- function(x, y) {
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param y Passed to \code{.morie_spx_chkv}.
-#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param overlap Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @return A list with \code{omega}, \code{coherence}, \code{sxx}, \code{syy}, \code{n_segments}, \code{nperseg}, \code{step}, \code{single_segment_coherence_is_identically_one}, \code{n}, \code{method}.
+#' @return A list with \code{omega}, \code{coherence}, \code{sxx}, \code{syy},
+#' \code{n_segments}, \code{nperseg}, \code{step},
+#' \code{single_segment_coherence_is_identically_one}, \code{n}, \code{method}.
 #' @export
 MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
   # C_xy = |S_xy|^2 / (S_xx S_yy) by Welch averaging (Bendat & Piersol
@@ -1649,7 +1746,9 @@ MsCoh <- function(x, y, nperseg = NULL, overlap = 0.5) {
 #'
 #' @param x Passed to \code{.morie_spx_chkv}.
 #' @param q Numeric; combined arithmetically in the body. Defaults to \code{3L}.
-#' @return A list with \code{saliency}, \code{peak}, \code{peak_index}, \code{residual}, \code{log_amplitude}, \code{floored}, \code{phase_is_preserved}, \code{q}, \code{n}, \code{method}.
+#' @return A list with \code{saliency}, \code{peak}, \code{peak_index}, \code{residual},
+#' \code{log_amplitude}, \code{floored}, \code{phase_is_preserved}, \code{q}, \code{n},
+#' \code{method}.
 #' @export
 SpecAnom <- function(x, q = 3L) {
   # Spectral residual saliency (Hou & Zhang 2007).  NOT in Schabenberger &
@@ -1699,7 +1798,9 @@ SpecAnom <- function(x, q = 3L) {
 #'
 #' @param a Passed to \code{.morie_spx_chkw}.
 #' @param k A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.
-#' @return A list with \code{labels}, \code{sizes}, \code{eigenvalues}, \code{fiedler}, \code{degree}, \code{smallest_eigenvalues_not_largest}, \code{k}, \code{n}, \code{method}.
+#' @return A list with \code{labels}, \code{sizes}, \code{eigenvalues}, \code{fiedler},
+#' \code{degree}, \code{smallest_eigenvalues_not_largest}, \code{k}, \code{n},
+#' \code{method}.
 #' @export
 SpecClust <- function(a, k = 2L) {
   # L_sym = I - D^-1/2 A D^-1/2.  The clustering lives in the SMALLEST
@@ -1775,7 +1876,9 @@ SpecClust <- function(a, k = 2L) {
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param w Passed to \code{.morie_spx_chkw}.
 #' @param naxes A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.
-#' @return A list with \code{eigenvalues}, \code{loadings}, \code{scores}, \code{lagged_scores}, \code{total_variance}, \code{eigenvalues_may_be_negative}, \code{weights_symmetrised}, \code{naxes}, \code{n}, \code{method}.
+#' @return A list with \code{eigenvalues}, \code{loadings}, \code{scores},
+#' \code{lagged_scores}, \code{total_variance}, \code{eigenvalues_may_be_negative},
+#' \code{weights_symmetrised}, \code{naxes}, \code{n}, \code{method}.
 #' @export
 SpatialPca <- function(x, w, naxes = 2L) {
   # MULTISPATI: diagonalise H = (1/n) X' ((W + W')/2) X on the centred,
@@ -1839,7 +1942,9 @@ SpatialPca <- function(x, w, naxes = 2L) {
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param coords A matrix; passed to \code{as.matrix}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @return A list with \code{fitted}, \code{residuals}, \code{coef}, \code{spline_weights}, \code{rss}, \code{penalty}, \code{lam}, \code{null_space_is_unpenalised}, \code{n}, \code{method}.
+#' @return A list with \code{fitted}, \code{residuals}, \code{coef},
+#' \code{spline_weights}, \code{rss}, \code{penalty}, \code{lam},
+#' \code{null_space_is_unpenalised}, \code{n}, \code{method}.
 #' @export
 SpGam <- function(y, x, coords, lam = 0) {
   # Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved as
@@ -1917,7 +2022,9 @@ SpGam <- function(y, x, coords, lam = 0) {
 #' @param spike Passed to \code{.morie_spx_chkv}.
 #' @param stim Passed to \code{.morie_spx_chkv}.
 #' @param nbins A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2L}.
-#' @return A list with \code{information}, \code{h_total}, \code{h_noise}, \code{n_stimuli}, \code{nbins}, \code{n_per_cell}, \code{bits}, \code{biased_upward_at_small_n}, \code{equal_count_bins}, \code{n}, \code{method}.
+#' @return A list with \code{information}, \code{h_total}, \code{h_noise},
+#' \code{n_stimuli}, \code{nbins}, \code{n_per_cell}, \code{bits},
+#' \code{biased_upward_at_small_n}, \code{equal_count_bins}, \code{n}, \code{method}.
 #' @export
 SpikeInfo <- function(spike, stim, nbins = 2L) {
   # I = H(R) - H(R|S), bits.  H_noise is the STIMULUS-WEIGHTED average of
@@ -1997,7 +2104,10 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
 #' @param h Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight}, \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta}, \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n}, \code{method}.
+#' @return A list with \code{psi}, \code{naive_mean}, \code{weights}, \code{max_weight},
+#' \code{mean_weight}, \code{tau2}, \code{gamma}, \code{delta},
+#' \code{weight_uses_back_shifted_density}, \code{gaussian_working_model}, \code{n},
+#' \code{method}.
 #' @export
 ShiftInt <- function(y, a, h, delta = 1, trim = NULL) {
   # psi = E[ {g(A - delta | H) / g(A | H)} Y ] -- the density ratio at the

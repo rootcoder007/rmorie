@@ -7,7 +7,7 @@
 morie_big_add(a, b)
 }
 \arguments{
-\item{a, b}{Values coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+\item{a, b}{Values coercible by \code{morie_bigint()}.}
 
 }
 \value{

@@ -20,6 +20,8 @@ List with \code{hash} and \code{keyed} (and \code{note}   when keyed).
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_sechsh_chain_entry(V, V)
+if (morie_crypto_sodium_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_sechsh_chain_entry(V, V)
+}
 }

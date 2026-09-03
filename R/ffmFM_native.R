@@ -46,7 +46,8 @@ n_parameters <- function(n_features, n_fields, k_dim,
 
 #' phi
 #'
-#' A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ffm}, \code{gated_update} and 15 others in the module.
+#' A step of the ffmFM_native implementation. Called by \code{explor}, \code{fit_ffm},
+#' \code{gated_update} and 15 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -101,7 +102,8 @@ logistic_loss <- function(y, phi_val) {
 
 #' fit_ffm
 #'
-#' A step of the ffmFM_native implementation. Called by \code{field_aware_fm}, \code{fieldawarefm}, \code{morie_ffmFM}.
+#' A step of the ffmFM_native implementation. Called by \code{field_aware_fm},
+#' \code{fieldawarefm}, \code{morie_ffmFM}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -115,7 +117,8 @@ logistic_loss <- function(y, phi_val) {
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{2e-05}.
 #' @param epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss}, \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{W}, \code{loss_history}, \code{final_loss},
+#' \code{k}, \code{n_parameters}, \code{n_parameters_fm}, \code{method}, \code{caveat}.
 #' @export
 fit_ffm <- function(rows, labels, fields, n_features, n_fields,
                     k_dim = 4, eta = 0.1, lam = 2e-5, epochs = 10,
@@ -203,6 +206,9 @@ fit_ffm <- function(rows, labels, fields, n_features, n_fields,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ffmFM_cheatsheet()
+#' res
 .ffmFM_cheatsheet <- function() {
   paste("ffmFM: one latent vector per feature PER FIELD, because a",
         "feature interacts differently with an advertiser than",

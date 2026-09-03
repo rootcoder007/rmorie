@@ -25,7 +25,7 @@ scale. \code{c = 1.345} solves the 95\%-efficiency equation at the
 normal. Huber's psi bounds the influence of a RESIDUAL, not of a
 design row: its regression breakdown point is 0, a bad-leverage
 cluster still ruins it, and that documented failure is a test.
-The S/MM estimators (\code{\link[=morie_rob_mm]{morie_rob_mm()}}) are the fix.
+The S/MM estimators (\code{morie_rob_mm()}) are the fix.
 }
 \examples{
 x <- stats::rnorm(50)

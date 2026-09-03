@@ -39,5 +39,6 @@ R", R News 7(2), 25-31.
 }
 \keyword{internal}
 \examples{
-morie_survrsf_ensemble_chf(fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), X = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_survrsf_ensemble_chf(fit = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

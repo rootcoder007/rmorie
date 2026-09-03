@@ -20,7 +20,7 @@ morie_datasets_nyc_nypd_resolved(
 }
 \arguments{
 \item{dataset_key}{One of the keys in
-\code{\link[=morie_datasets_nyc_nypd_layers]{morie_datasets_nyc_nypd_layers()}}.}
+\code{morie_datasets_nyc_nypd_layers()}.}
 
 \item{year}{Optional year filter (server-side SoQL).}
 
@@ -57,10 +57,10 @@ resolver columns.
 }
 \description{
 Phase 3AAA. Pulls a slice of any
-\code{\link[=morie_datasets_nyc_nypd_by_key]{morie_datasets_nyc_nypd_by_key()}}-resolvable dataset and
+\code{morie_datasets_nyc_nypd_by_key()}-resolvable dataset and
 left-joins its borough + precinct foreign keys against the
-included resolvers (\code{\link[=morie_datasets_nyc_boroughs]{morie_datasets_nyc_boroughs()}} +
-\code{\link[=morie_datasets_nyc_police_precincts]{morie_datasets_nyc_police_precincts()}}).
+included resolvers (\code{morie_datasets_nyc_boroughs()} +
+\code{morie_datasets_nyc_police_precincts()}).
 }
 \details{
 Auto-detects the borough + precinct columns per dataset:

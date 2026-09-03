@@ -17,6 +17,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .lcwphr_rows(x = x)
+#' res
 .lcwphr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -41,6 +45,11 @@
 #' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .lcwphr_cholsolve(A = A, b = b)
+#' res
 .lcwphr_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -60,6 +69,12 @@
 #' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{fitted}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .lcwphr_logit_irls(X = X, y = y)
+#' res
 .lcwphr_logit_irls <- function(X, y, max_iter = 100L, tol = 1e-11,
                                ridge_rel = 1e-8) {
   n <- nrow(X)
@@ -97,7 +112,15 @@
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
-#' @return A list with \code{estimate}, \code{class_ate}, \code{class_mean_treated}, \code{class_mean_control}, \code{naive_class_ate}, \code{naive_class_mean_treated}, \code{naive_class_mean_control}, \code{ate}, \code{naive_ate}, \code{marginal_ate}, \code{unweighted_ate}, \code{class_prevalence}, \code{item_probabilities}, \code{posterior}, \code{labels}, \code{propensity}, \code{propensity_coefficients}, \code{weights}, \code{effective_sample_size}, \code{weight_max}, \code{weight_mean}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized}, \code{trim}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{class_ate}, \code{class_mean_treated},
+#' \code{class_mean_control}, \code{naive_class_ate}, \code{naive_class_mean_treated},
+#' \code{naive_class_mean_control}, \code{ate}, \code{naive_ate}, \code{marginal_ate},
+#' \code{unweighted_ate}, \code{class_prevalence}, \code{item_probabilities},
+#' \code{posterior}, \code{labels}, \code{propensity}, \code{propensity_coefficients},
+#' \code{weights}, \code{effective_sample_size}, \code{weight_max}, \code{weight_mean},
+#' \code{loglik}, \code{loglik_path}, \code{bic}, \code{entropy}, \code{n_parameters},
+#' \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{Q}, \code{stabilized},
+#' \code{trim}, \code{method}, \code{note}.
 #' @export
 morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
                                                stabilize = TRUE,
@@ -279,6 +302,9 @@ morie_lcwphr_latent_class_weighted <- function(y, A, H, K, trim = 0.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .lcwphr_cheatsheet()
+#' res
 .lcwphr_cheatsheet <- function() {
   paste0("lcwphr: morie_lcwphr_latent_class_weighted(y, A, H, K) -> latent ",
          "classes plus IPW class-specific treatment effects (Lanza, Coffman ",

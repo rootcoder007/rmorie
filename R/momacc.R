@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Moments accountant for DP-SGD
 #'
-#' Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam exp(alpha(lam) - lam eps)
+#' Formula: alpha(lam) <= T q^2 lam(lam+1)/((1-q) sigma^2); delta = min_lam
+#' exp(alpha(lam) - lam eps)
 #'
 #' @param sigma Noise multiplier (noise sd over clipping norm).
 #' @param sample_rate Lot sampling probability q in (0, 1).
@@ -14,8 +15,12 @@
 #' @param steps See Usage.
 #' @param delta See Usage.
 #' @param max_order See Usage.
-#' @return List with ``epsilon``, ``order``, ``logmgf``, ``delta``, ``sigma``, ``sample_rate``, ``steps``.
-#' @references Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified against the paper.
+#' @return List with ``epsilon``, ``order``, ``logmgf``, ``delta``, ``sigma``,
+#' ``sample_rate``, ``steps``.
+#' @references Abadi, Chu, Goodfellow, McMahan, Mironov, Talwar and Zhang (2016), Deep
+#' Learning with Differential Privacy, CCS'16, arXiv:1607.00133. Lemma 3 for the
+#' sampled-Gaussian log moment, Theorem 2 for composability and the tail bound. Verified
+#' against the paper.
 #' @export
 Dpacct <- function(sigma, sample_rate, steps, delta = 1e-05, max_order = 64) {
   sigma <- as.numeric(sigma)

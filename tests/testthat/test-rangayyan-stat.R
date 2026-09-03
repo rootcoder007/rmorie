@@ -51,7 +51,8 @@ test_that("TurnsCount implements Willison's rule (Section 5.6.3)", {
 })
 
 test_that("Snr keeps the power and peak definitions apart", {
-  x <- sine(1000, 5); e <- 0.1 * sine(1000, 97)
+  x <- sine(1000, 5)
+  e <- 0.1 * sine(1000, 97)
   r <- Snr(x, e)
   expect_equal(r$snr_db, r$snr_power_db)
   expect_equal(r$snr_peak_db, 20 * log10(2 / (0.1 / sqrt(2))),
@@ -78,7 +79,10 @@ test_that("SyncAvg implements eqs (3.95)-(3.96) with a sqrt(M) gain", {
   expect_equal(r$snr_gain, 2)
   expect_equal(r$snr_gain_db, 10 * log10(4))
   expect_error(SyncAvg(list(c(1, 2), 1)), "same length")
-  n <- 64; m <- 100; base <- sine(n, 3); step <- 0.37
+  n <- 64
+  m <- 100
+  base <- sine(n, 3)
+  step <- 0.37
   recs <- lapply(0:(m - 1), function(k)
     base + 0.5 * sin(step * (k * n + (0:(n - 1)))))
   avg <- SyncAvg(recs)$average
@@ -114,7 +118,8 @@ test_that("FdPsd implements eqs (6.50)-(6.52)", {
 })
 
 test_that("FdVag fits inside the requested band", {
-  fs <- 2000; n <- 1024
+  fs <- 2000
+  n <- 1024
   x <- sin(2 * pi * 150 * (0:(n - 1)) / fs) +
     0.5 * sin(2 * pi * 320 * (0:(n - 1)) / fs)
   r <- FdVag(x, fs = fs, fmin = 100, fmax = 500)
@@ -162,7 +167,9 @@ test_that("SigFeatures agrees with the individual measures", {
   expect_equal(r$rms, Rms(x)$rms)
   expect_equal(r$form_factor, FormFactor(x)$form_factor)
   expect_equal(r$turns, TurnsCount(x, threshold = 0)$turns)
-  fs <- 256; n <- 512; f0 <- 16
+  fs <- 256
+  n <- 512
+  f0 <- 16
   tone <- sin(2 * pi * f0 * (0:(n - 1)) / fs)
   expect_equal(SigFeatures(tone, fs = fs)$spectral_centroid, f0,
                tolerance = 0.5)

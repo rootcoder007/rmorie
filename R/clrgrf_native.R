@@ -99,12 +99,16 @@ clrgrf_cluster_jackknife <- function(preds, bags, groups,
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param n_trees Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
-#' @param subsample_frac Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param subsample_frac Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.5}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param unit One of \code{"cluster"}, \code{"row"}. Defaults to \code{"cluster"}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param cluster_sampling A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{n_clusters}, \code{clusters_per_tree}, \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit}, \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci},
+#' \code{variance}, \code{n}, \code{n_clusters}, \code{clusters_per_tree},
+#' \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit},
+#' \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
 #' @export
 morie_clrgrf <- function(y, X, clusters, at = NULL, n_trees = 200L,
                           min_leaf = 5L, subsample_frac = 0.5, seed = 0L,

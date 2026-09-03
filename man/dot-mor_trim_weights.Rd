@@ -27,3 +27,8 @@ Contrast .mor_trim_ps, which caps the SCORES. See also Cole, S. R.
 and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),
 656-664.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .mor_trim_weights(w = x)
+res
+}

@@ -52,5 +52,7 @@ Scandinavian Journal of Statistics 5(3), 141-150.
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- morie_tmlcmp(time = sort(runif(10)), event_type = rbinom(10, 1, 0.5), D = rbinom(10, 1, 0.5), X = rnorm(10)); TRUE
+r <- morie_tmlcmp(time = sort(runif(10)), event_type = rbinom(10, 1, 0.5),
+  D = rbinom(10, 1, 0.5), X = rnorm(10))
+TRUE
 }

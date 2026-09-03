@@ -3,7 +3,8 @@
 test_that("ARCH-LM detects GARCH and keeps nominal size", {
   garch <- function(seed, n = 1200, omega = 0.1, alpha = 0.3, beta = 0.6) {
     set.seed(seed)
-    s2 <- omega / (1 - alpha - beta); y <- numeric(n)
+    s2 <- omega / (1 - alpha - beta)
+    y <- numeric(n)
     for (t in seq_len(n)) {
       y[t] <- sqrt(s2) * rnorm(1)
       s2 <- omega + alpha * y[t]^2 + beta * s2
@@ -103,7 +104,8 @@ test_that("adjacency matrix matches the hand-built path graph", {
   expect_equal(r$m, 2L)
 
   d <- morie_adjacency_matrix(rbind(c(0, 1), c(1, 2)), n = 3, directed = TRUE)
-  expect_equal(d$A[1, 2], 1); expect_equal(d$A[2, 1], 0)
+  expect_equal(d$A[1, 2], 1)
+  expect_equal(d$A[2, 1], 0)
 
   u <- morie_adjacency_matrix(rbind(c(0, 1), c(1, 0), c(0, 1)), n = 4)
   expect_equal(unname(u$A), t(unname(u$A)))
@@ -158,7 +160,8 @@ test_that("dcc front-end delegates bit-for-bit", {
 test_that("ARCH-M recovers parameters after the recursion guard", {
   dgp <- function(seed, n = 2000, omega = 0.2, alpha = 0.4, delta = 0.8, mu = 0.1) {
     set.seed(seed)
-    ep <- 0; y <- numeric(n)
+    ep <- 0
+    y <- numeric(n)
     for (t in seq_len(n)) {
       s2 <- omega + alpha * ep^2
       e <- sqrt(s2) * rnorm(1)
@@ -170,7 +173,8 @@ test_that("ARCH-M recovers parameters after the recursion guard", {
   al <- dl <- numeric(0)
   for (s in 1:3) {
     r <- morie_arch_in_mean(dgp(s))
-    al <- c(al, r$alpha); dl <- c(dl, r$delta)
+    al <- c(al, r$alpha)
+    dl <- c(dl, r$delta)
   }
   # nlminb does move (unlike the Python arm's L-BFGS-B, which returned
   # its starting values); assert recovery on the mean over 3 seeds.

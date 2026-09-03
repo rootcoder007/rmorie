@@ -25,5 +25,7 @@ A list with the updated messages, the count and the   triplets.
 }
 \keyword{internal}
 \examples{
-morie_dimNet_directional_message_pass(messages = c(1, 2, 3, 4, 5, 6, 7, 8), adj = c(1, 2, 3, 4, 5, 6, 7, 8), R = c(1, 2, 3, 4, 5, 6, 7, 8), interact = c(1, 2, 3, 4, 5, 6, 7, 8), update = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_dimNet_directional_message_pass(messages = c(1, 2, 3, 4, 5, 6, 7, 8),
+  adj = c(1, 2, 3, 4, 5, 6, 7, 8), R = c(1, 2, 3, 4, 5, 6, 7, 8),
+  interact = c(1, 2, 3, 4, 5, 6, 7, 8), update = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

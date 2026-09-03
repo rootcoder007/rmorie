@@ -99,7 +99,8 @@ MGWR postdates Schabenberger & Gotway (2005) and is not in that book; it is
 included here because the shelf names it.
 }
 \examples{
-spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+spmsim(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Fotheringham, A. S., Yang, W. & Kang, W. (2017), Annals of the

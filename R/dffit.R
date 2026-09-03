@@ -14,6 +14,11 @@
 #' @param intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{n}, \code{p}, \code{e}, \code{h}, \code{sse}, \code{inv}, \code{D}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bkw_influence(y = y, X = x)
+#' res
 .bkw_influence <- function(y, X, intercept = TRUE) {
   y <- .s03vec(y)
   Xm <- .s03mat(X)

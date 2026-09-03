@@ -73,7 +73,8 @@ test_that("morie_estimate_late covariate path uses the native engine", {
 
 test_that("morie_its recovers level and slope changes with HAC SEs", {
   set.seed(56)
-  n <- 120; t0 <- 80
+  n <- 120
+  t0 <- 80
   t <- seq_len(n)
   e <- as.numeric(stats::arima.sim(list(ar = 0.4), n = n, sd = 0.8))
   y <- 10 + 0.2 * t + ifelse(t >= t0, 4, 0) +

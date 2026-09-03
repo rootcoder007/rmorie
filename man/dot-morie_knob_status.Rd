@@ -12,3 +12,7 @@ A data frame.
 \description{
 diagnostics so the active posture is visible).
 }
+\examples{
+res <- .morie_knob_status()
+res
+}

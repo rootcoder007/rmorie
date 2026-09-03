@@ -19,7 +19,7 @@ morie_psy_theta_eap(X, items, prior = c(0, 1), n_nodes = 61L)
 list: theta, se, n_examinees, n_items, alias_of, method.
 }
 \description{
-One implementation: each row goes to \code{\link[=morie_psy_eap_theta]{morie_psy_eap_theta()}}.
+One implementation: each row goes to \code{morie_psy_eap_theta()}.
 \code{items} has columns a, b and optionally c, one row per item.
 }
 \examples{

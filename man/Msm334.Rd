@@ -22,7 +22,8 @@ x* = Gamma'x_o and lambda_j the eigenvalues of X'X (p.80): nearly dependent
 features drive some lambda_j toward zero and blow the prediction error up.
 }
 \examples{
-Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8), eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
+Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8),
+  eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Montesinos Lopez, Montesinos Lopez & Crossa (2022),

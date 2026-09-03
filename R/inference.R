@@ -581,7 +581,8 @@ morie_power_prop_test <- function(n = NULL, p1 = NULL, p2 = NULL,
 #' Sample size for logistic regression detecting a target odds ratio
 #'
 #' Uses the formula from Hsieh et al. (1998):
-#' \deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) \[\log(OR)\]^2}}{n = frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) \[log(OR)\]^2}}
+#' \deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) \[\log(OR)\]^2}}{n =
+#' frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) \[log(OR)\]^2}}
 #'
 #' @param p0 Prevalence under control.
 #' @param or Target odds ratio.

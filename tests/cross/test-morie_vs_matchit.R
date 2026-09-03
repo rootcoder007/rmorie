@@ -8,7 +8,8 @@ test_that("native matcher agrees with MatchIt on matched-set size and ATE", {
   skip_if_not_installed("MatchIt")
   set.seed(101)
   n <- 500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(0.6 * x1 - 0.5 * x2))
   y <- 0.7 * d + x1 + rnorm(n)
   df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
@@ -55,7 +56,8 @@ test_that("large-n ATE agreement within 1e-2", {
   skip_on_cran()
   set.seed(303)
   n <- 50000L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(0.4 * x1 + 0.3 * x2 - 0.5))
   y <- 0.5 * d + 0.6 * x1 + rnorm(n)
   df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
@@ -74,7 +76,8 @@ test_that("native mahalanobis agrees with MatchIt on set size and ATE", {
   # then has negligible effect, so both matchers find near-identical
   # sets and the estimate comparison is sharp
   n <- 1500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-2.2 + 0.5 * x1 - 0.4 * x2))
   y <- 0.6 * d + 0.8 * x1 + rnorm(n)
   df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
@@ -122,7 +125,8 @@ test_that("cross: native CEM tracks MatchIt cem on weighted ATT", {
   skip_if_not_installed("cem")
   set.seed(12)
   n <- 1500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-1.2 + 0.5 * x1 - 0.4 * x2))
   y <- 2 * d + x1 + 0.5 * x2 + rnorm(n)
   df <- data.frame(x1, x2, d, y)
@@ -150,7 +154,8 @@ test_that("cross: native optimal total distance <= MatchIt optimal", {
   skip_if_not_installed("optmatch")
   set.seed(41)
   n <- 800L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-1.5 + 0.5 * x1 - 0.4 * x2))
   y <- 2 * d + x1 + 0.5 * x2 + rnorm(n)
   df <- data.frame(x1, x2, d, y)
@@ -183,7 +188,8 @@ test_that("cross: DP solver reaches optmatch's exact global minimum", {
   skip_if_not_installed("optmatch")
   set.seed(43)
   n <- 600L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-1.5 + 0.5 * x1 - 0.4 * x2))
   df <- data.frame(x1, x2, d)
   mi <- MatchIt::matchit(d ~ x1 + x2, data = df, method = "optimal",
@@ -192,7 +198,8 @@ test_that("cross: DP solver reaches optmatch's exact global minimum", {
   # DP the SAME values -> the minimal total must agree exactly even if
   # the matched sets differ under ties
   ps <- mi$distance
-  it <- which(df$d == 1); ic <- which(df$d == 0)
+  it <- which(df$d == 1)
+  ic <- which(df$d == 0)
   mm <- rmorie:::.morie_match_optimal_1d_cpp(ps[it], ps[ic])
   ours_total <- sum(abs(ps[it] - ps[ic[mm]]))
   m <- mi$match.matrix
@@ -212,13 +219,15 @@ test_that("cross: native genetic balance comparable to GenMatch", {
   skip_if_not_installed("rgenoud")
   set.seed(61)
   n <- 500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(-1.3 + 0.6 * x1 - 0.3 * x2))
   df <- data.frame(x1, x2, d)
 
   ours <- morie_matching_genetic(df, "d", c("x1", "x2"),
                                  pop_size = 20L, n_generations = 8L)
-  Tr <- df$d; X <- as.matrix(df[, c("x1", "x2")])
+  Tr <- df$d
+  X <- as.matrix(df[, c("x1", "x2")])
   invisible(utils::capture.output(gen <- Matching::GenMatch(
     Tr = Tr, X = X, pop.size = 20, max.generations = 8,
     M = 1, print.level = 0, replace = FALSE, ties = FALSE)))

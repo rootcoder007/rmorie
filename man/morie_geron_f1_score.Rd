@@ -17,7 +17,7 @@ List with \code{f1}, \code{precision}, \code{recall}, \code{macro_f1},
 \code{per_class_f1}, \code{confusion_matrix}.
 }
 \description{
-Counts delegated to \code{\link[=morie_geron_confusion_matrix]{morie_geron_confusion_matrix()}}.
+Counts delegated to \code{morie_geron_confusion_matrix()}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

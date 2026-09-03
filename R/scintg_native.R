@@ -77,13 +77,19 @@
 
 #' .scintg_matrix
 #'
-#' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch}, \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}.
+#' A step of the scintg_native implementation. Called by \code{.scintg_correct_batch},
+#' \code{.scintg_maximum_diversity_clustering}, \code{morie_scintg}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Z A matrix; passed to \code{nrow}.
 #' @return The value of \code{Z}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .scintg_matrix(Z = X)
+#' res
 .scintg_matrix <- function(Z) {
   if (is.data.frame(Z)) Z <- as.matrix(Z)
   if (!is.matrix(Z)) {
@@ -98,7 +104,7 @@
           if (!is.finite(v)) stop("scintg: Z contains a non-finite value")
         }
       }
-      Z <- matrix(unlist(Z), nrow=n, ncol=d, byrow=TRUE)
+      Z <- matrix(unlist(Z), nrow = n, ncol = d, byrow = TRUE)
     } else {
       stop("scintg: Z must be a matrix or list of vectors")
     }
@@ -113,13 +119,19 @@
 
 #' .scintg_l2_normalise
 #'
-#' A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init}, \code{.scintg_maximum_diversity_clustering}.
+#' A step of the scintg_native implementation. Called by \code{.scintg_kmeans_init},
+#' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param Z Numeric; combined arithmetically in the body.
 #' @return The value of \code{sweep}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .scintg_l2_normalise(Z = X)
+#' res
 .scintg_l2_normalise <- function(Z) {
   n <- sqrt(rowSums(Z * Z))
   n[n <= 0] <- 1
@@ -139,47 +151,50 @@
   names <- sort(unique(as.character(batches)))
   B <- length(names)
   N <- length(batches)
-  phi <- matrix(0, nrow=N, ncol=B + 1)
+  phi <- matrix(0, nrow = N, ncol = B + 1)
   phi[, 1] <- 1
   idx <- match(as.character(batches), names)
   for (i in seq_len(N)) {
     phi[i, 1 + idx[i]] <- 1
   }
-  list(phi=phi, names=names)
+  list(phi = phi, names = names)
 }
 
 #' .scintg_cluster_batch_counts
 #'
-#' A step of the scintg_native implementation. Called by \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
+#' A step of the scintg_native implementation. Called by
+#' \code{.scintg_harmony_objective}, \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param R A matrix; indexed by row and column.
 #' @param batches A vector; its length is taken.
-#' @param names Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param names Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @return A list with \code{O}, \code{E}, \code{batches}.
 #' @export
-.scintg_cluster_batch_counts <- function(R, batches, names=NULL) {
+.scintg_cluster_batch_counts <- function(R, batches, names = NULL) {
   K <- nrow(R)
   N <- ncol(R)
   if (length(batches) != N) stop("scintg: one batch label per cell is required")
   if (is.null(names)) names <- sort(unique(as.character(batches)))
   B <- length(names)
-  O <- matrix(0, nrow=K, ncol=B)
-  E <- matrix(0, nrow=K, ncol=B)
+  O <- matrix(0, nrow = K, ncol = B)
+  E <- matrix(0, nrow = K, ncol = B)
   batches_chr <- as.character(batches)
   for (bi in seq_len(B)) {
     members <- which(batches_chr == names[bi])
     Nb <- length(members)
-    O[, bi] <- rowSums(R[, members, drop=FALSE])
+    O[, bi] <- rowSums(R[, members, drop = FALSE])
     E[, bi] <- (Nb / N) * rowSums(R)
   }
-  list(O=O, E=E, batches=names)
+  list(O = O, E = E, batches = names)
 }
 
 #' .scintg_harmony_objective
 #'
-#' A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}.
+#' A step of the scintg_native implementation. Called by
+#' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -191,7 +206,7 @@
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A list with \code{total}, \code{fit}, \code{entropy}, \code{kl}.
 #' @export
-.scintg_harmony_objective <- function(Z, R, Y, batches, sigma=0.1, theta=2.0) {
+.scintg_harmony_objective <- function(Z, R, Y, batches, sigma = 0.1, theta = 2.0) {
   K <- nrow(R)
   N <- ncol(R)
   cos_sim <- Y %*% t(Z)
@@ -203,13 +218,16 @@
   E <- c$E
   mask <- (O > 0) & (E > 0)
   kl <- sum(O[mask] * log(O[mask] / E[mask]))
-  list(total=fit + sigma * ent + sigma * theta * kl,
-       fit=fit, entropy=ent, kl=kl)
+  list(
+    total = fit + sigma * ent + sigma * theta * kl,
+    fit = fit, entropy = ent, kl = kl
+  )
 }
 
 #' .scintg_kmeans_init
 #'
-#' A step of the scintg_native implementation. Called by \code{.scintg_maximum_diversity_clustering}.
+#' A step of the scintg_native implementation. Called by
+#' \code{.scintg_maximum_diversity_clustering}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -228,7 +246,7 @@
   st <- .ghc_lcg31(st)
   r <- st / 2^31
   idx <- as.integer(r * N) + 1L
-  centres <- matrix(Zn[idx, ], nrow=1)
+  centres <- matrix(Zn[idx, ], nrow = 1)
 
   while (nrow(centres) < K) {
     # k-means++ style probability is the squared cosine distance to the
@@ -267,7 +285,7 @@
     for (k in seq_len(K)) {
       members <- which(groups == k)
       if (length(members) > 0) {
-        new_centres[k, ] <- colSums(Zn[members, , drop=FALSE]) / length(members)
+        new_centres[k, ] <- colSums(Zn[members, , drop = FALSE]) / length(members)
       }
     }
     centres <- .scintg_l2_normalise(new_centres)
@@ -305,11 +323,11 @@
     for (r in seq_len(n)) {
       if (r == c) next
       f <- M[r, c] / M[c, c]
-      M[r, c:(n+m)] <- M[r, c:(n+m)] - f * M[c, c:(n+m)]
+      M[r, c:(n + m)] <- M[r, c:(n + m)] - f * M[c, c:(n + m)]
     }
   }
-  X <- M[, (n+1):(n+m), drop=FALSE]
-  diag_vals <- diag(M[, seq_len(n), drop=FALSE])
+  X <- M[, (n + 1):(n + m), drop = FALSE]
+  diag_vals <- diag(M[, seq_len(n), drop = FALSE])
   X <- X / diag_vals
   X
 }
@@ -324,10 +342,11 @@
 #' @param R A matrix; indexed by row and column.
 #' @param batches A vector; its length is taken.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param reference Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param reference Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @return A list with \code{Z}, \code{W}, \code{batches}.
 #' @export
-.scintg_correct_batch <- function(Z, R, batches, lam=1.0, reference=NULL) {
+.scintg_correct_batch <- function(Z, R, batches, lam = 1.0, reference = NULL) {
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
   d <- ncol(rows)
@@ -356,7 +375,7 @@
     # lambda_0 = 0, lambda_b = lam
     if (B + 1 >= 2) {
       diag_A <- diag(A)
-      diag_A[2:(B+1)] <- diag_A[2:(B+1)] + lam
+      diag_A[2:(B + 1)] <- diag_A[2:(B + 1)] + lam
       diag(A) <- diag_A
     }
     # rhs[a, j] = sum_i phi[i, a] * Rk[i] * rows[i, j]
@@ -368,7 +387,7 @@
     correction <- phi %*% W
     out <- out - Rk * correction
   }
-  list(Z=out, W=Ws, batches=names)
+  list(Z = out, W = Ws, batches = names)
 }
 
 #' .scintg_maximum_diversity_clustering
@@ -389,13 +408,15 @@
 #' @param diversity Compared against \code{"as_printed"}. Defaults to \code{"penalise"}.
 #' @return A list with \code{R}, \code{Y}, \code{K}, \code{objective}.
 #' @export
-.scintg_maximum_diversity_clustering <- function(Z, batches, K=NULL, sigma=0.1,
-                                                 theta=2.0, max_iter=25,
-                                                 tol=1e-5, seed=0, Y=NULL,
-                                                 diversity="penalise") {
+.scintg_maximum_diversity_clustering <- function(Z, batches, K = NULL, sigma = 0.1,
+                                                 theta = 2.0, max_iter = 25,
+                                                 tol = 1e-5, seed = 0, Y = NULL,
+                                                 diversity = "penalise") {
   if (!(diversity %in% .scintg_signs)) {
-    stop(sprintf("scintg: diversity must be one of %s",
-                 paste(.scintg_signs, collapse=", ")))
+    stop(sprintf(
+      "scintg: diversity must be one of %s",
+      paste(.scintg_signs, collapse = ", ")
+    ))
   }
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
@@ -420,13 +441,13 @@
   }
   names <- sort(unique(as.character(batches)))
   bidx <- match(as.character(batches), names)
-  R <- matrix(1.0 / K, nrow=K, ncol=N)
+  R <- matrix(1.0 / K, nrow = K, ncol = N)
   prev <- NULL
   for (iter in seq_len(as.integer(max_iter))) {
     counts <- .scintg_cluster_batch_counts(R, batches, names)
     O <- counts$O
     E <- counts$E
-    newR <- matrix(0, nrow=K, ncol=N)
+    newR <- matrix(0, nrow = K, ncol = N)
     for (i in seq_len(N)) {
       bi <- bidx[i]
       col <- numeric(K)
@@ -464,8 +485,10 @@
     }
     prev <- obj$total
   }
-  list(R=R, Y=centres, K=K,
-       objective=.scintg_harmony_objective(Zn, R, centres, batches, sigma, theta))
+  list(
+    R = R, Y = centres, K = K,
+    objective = .scintg_harmony_objective(Zn, R, centres, batches, sigma, theta)
+  )
 }
 
 #' morie_scintg
@@ -485,12 +508,15 @@
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-04}.
 #' @param seed Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{0}.
 #' @param reference Passed to \code{.scintg_correct_batch}.
-#' @param diversity Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to \code{"penalise"}.
-#' @return A list with \code{estimate}, \code{embedding}, \code{R}, \code{Y}, \code{K}, \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma}, \code{lam}, \code{diversity}, \code{method}, \code{note}.
+#' @param diversity Passed to \code{.scintg_maximum_diversity_clustering}. Defaults to
+#' \code{"penalise"}.
+#' @return A list with \code{estimate}, \code{embedding}, \code{R}, \code{Y}, \code{K},
+#' \code{objective}, \code{history}, \code{n_rounds}, \code{theta}, \code{sigma},
+#' \code{lam}, \code{diversity}, \code{method}, \code{note}.
 #' @export
-morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
-                          max_iter=10, cluster_iter=25, tol=1e-4, seed=0,
-                          reference=NULL, diversity="penalise") {
+morie_scintg <- function(Z, batches, K = NULL, sigma = 0.1, theta = 2.0, lam = 1.0,
+                         max_iter = 10, cluster_iter = 25, tol = 1e-4, seed = 0,
+                         reference = NULL, diversity = "penalise") {
   rows <- .scintg_matrix(Z)
   N <- nrow(rows)
   d <- ncol(rows)
@@ -502,8 +528,10 @@ morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
   hist <- numeric(0)
   for (round in seq_len(as.integer(max_iter))) {
     cl <- .scintg_maximum_diversity_clustering(cur, batches, K, sigma, theta,
-                                                cluster_iter, seed=seed, Y=Y,
-                                                diversity=diversity)
+      cluster_iter,
+      seed = seed, Y = Y,
+      diversity = diversity
+    )
     Y <- cl$Y
     got <- .scintg_correct_batch(cur, cl$R, batches, lam, reference)
     shift <- max(abs(got$Z - cur))
@@ -512,32 +540,38 @@ morie_scintg <- function(Z, batches, K=NULL, sigma=0.1, theta=2.0, lam=1.0,
     if (shift <= tol) break
   }
   final <- .scintg_maximum_diversity_clustering(cur, batches, K, sigma, theta,
-                                                cluster_iter, seed=seed, Y=Y,
-                                                diversity=diversity)
+    cluster_iter,
+    seed = seed, Y = Y,
+    diversity = diversity
+  )
   list(
-    estimate=cur,
-    embedding=cur,
-    R=final$R,
-    Y=final$Y,
-    K=final$K,
-    objective=final$objective,
-    history=hist,
-    n_rounds=length(hist),
-    theta=as.numeric(theta),
-    sigma=as.numeric(sigma),
-    lam=as.numeric(lam),
-    diversity=diversity,
-    method=paste("Harmony (Korsunsky et al. 2019): maximum diversity",
-                 "clustering (eq. 8) alternated with mixture-of-experts",
-                 "ridge correction (eq. 14)"),
-    note=paste("theta=0 reduces the cluster step to ordinary soft",
-               "spherical k-means; the intercept row of W_k is zeroed",
-               "so batch-independent variation is kept, which is why a",
-               "reference cell (design row [1, 0, ...]) never moves.",
-               "Equation 8 is printed with (O/E)^+theta, which raises",
-               "cluster/batch dependence rather than lowering it;",
-               "diversity='penalise' uses the -theta the stated",
-               "objective implies, 'as_printed' the literal form")
+    estimate = cur,
+    embedding = cur,
+    R = final$R,
+    Y = final$Y,
+    K = final$K,
+    objective = final$objective,
+    history = hist,
+    n_rounds = length(hist),
+    theta = as.numeric(theta),
+    sigma = as.numeric(sigma),
+    lam = as.numeric(lam),
+    diversity = diversity,
+    method = paste(
+      "Harmony (Korsunsky et al. 2019): maximum diversity",
+      "clustering (eq. 8) alternated with mixture-of-experts",
+      "ridge correction (eq. 14)"
+    ),
+    note = paste(
+      "theta=0 reduces the cluster step to ordinary soft",
+      "spherical k-means; the intercept row of W_k is zeroed",
+      "so batch-independent variation is kept, which is why a",
+      "reference cell (design row [1, 0, ...]) never moves.",
+      "Equation 8 is printed with (O/E)^+theta, which raises",
+      "cluster/batch dependence rather than lowering it;",
+      "diversity='penalise' uses the -theta the stated",
+      "objective implies, 'as_printed' the literal form"
+    )
   )
 }
 
@@ -552,13 +586,18 @@ singlecell_integration <- morie_scintg
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .scintg_cheatsheet()
+#' res
 .scintg_cheatsheet <- function() {
-  paste("scintg: Harmony (Korsunsky et al. 2019). Alternates maximum",
-        "diversity clustering -- soft spherical k-means whose",
-        "assignment R_ki is proportional to (O_ki/E_ki)^theta",
-        "exp(-2(1 - Y_k'Z_i)/sigma), with O the observed and E the",
-        "independence-expected cluster/batch mass -- with a",
-        "mixture-of-experts ridge correction W_k = (phi* diag(R_k)",
-        "phi*' + lambda I)^-1 phi* diag(R_k) Z' whose intercept row",
-        "is zeroed, so batch goes and cell type stays.")
+  paste(
+    "scintg: Harmony (Korsunsky et al. 2019). Alternates maximum",
+    "diversity clustering -- soft spherical k-means whose",
+    "assignment R_ki is proportional to (O_ki/E_ki)^theta",
+    "exp(-2(1 - Y_k'Z_i)/sigma), with O the observed and E the",
+    "independence-expected cluster/batch mass -- with a",
+    "mixture-of-experts ridge correction W_k = (phi* diag(R_k)",
+    "phi*' + lambda I)^-1 phi* diag(R_k) Z' whose intercept row",
+    "is zeroed, so batch goes and cell type stays."
+  )
 }

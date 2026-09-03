@@ -47,6 +47,10 @@
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .caltbR_norm(v = x)
+#' res
 .caltbR_norm <- function(v) {
   vv <- as.numeric(v)
   s  <- sum(vv)
@@ -354,6 +358,9 @@ calibratedrec <- calibrated_rerank
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .caltbR_cheatsheet()
+#' res
 .caltbR_cheatsheet <- function() {
   paste0(
     "caltbR: ranking by accuracy CROWDS OUT the user's minority ",
@@ -372,25 +379,3 @@ calibratedrec <- calibrated_rerank
 #' @rdname genre_distribution
 #' @export
 morie_caltbR <- genre_distribution
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

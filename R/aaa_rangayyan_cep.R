@@ -10,13 +10,18 @@
 
 #' .morie_rg_dft
 #'
-#' A step of the rangayyan_cep implementation. Called by \code{CardioResp}, \code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
+#' A step of the rangayyan_cep implementation. Called by \code{CardioResp},
+#' \code{CCepstrum}, \code{Cepstrum} and 11 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_rg_dft(x = x)
+#' res
 .morie_rg_dft <- function(x) {
   n <- length(x)
   idx <- seq_len(n) - 1L
@@ -33,7 +38,8 @@
 
 #' .morie_rg_idft_re
 #'
-#' A step of the rangayyan_cep implementation. Called by \code{CCepstrum}, \code{Cepstrum}, \code{HomDeconv} and 4 others in the module.
+#' A step of the rangayyan_cep implementation. Called by \code{CCepstrum},
+#' \code{Cepstrum}, \code{HomDeconv} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -88,7 +94,8 @@
 #' the echo impulses of eq (4.80), which is what it is used for.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{n}, \code{zero_bins}, \code{invertible}, \code{method}.
+#' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{n}, \code{zero_bins},
+#' \code{invertible}, \code{method}.
 #' @export
 Cepstrum <- function(x) {
   # real cepstrum: c(n) = IDFT(log|DFT(x)|).  Keeps only the magnitude,
@@ -117,7 +124,9 @@ Cepstrum <- function(x) {
 #' round(phase(pi)/pi).
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{phase}, \code{detrended_phase}, \code{linear_phase_removed}, \code{delay_removed}, \code{n}, \code{method}.
+#' @return A list with \code{cepstrum}, \code{log_magnitude}, \code{phase},
+#' \code{detrended_phase}, \code{linear_phase_removed}, \code{delay_removed}, \code{n},
+#' \code{method}.
 #' @export
 CCepstrum <- function(x) {
   # eqs (4.63)-(4.64): the inverse transform of log|X| + j angle(X).
@@ -181,7 +190,8 @@ CCepX <- function(x) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{y}, \code{x}, \code{p}, \code{n}, \code{separable_by_log}, \code{method}.
+#' @return A list with \code{y}, \code{x}, \code{p}, \code{n}, \code{separable_by_log},
+#' \code{method}.
 #' @export
 MultModel <- function(x, p) {
   # eq (4.58): y(t) = x(t) p(t), the model a multiplicative homomorphic
@@ -204,7 +214,8 @@ MultModel <- function(x, p) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{log_y}, \code{log_x}, \code{log_p}, \code{sum}, \code{max_difference}, \code{additive}, \code{method}.
+#' @return A list with \code{log_y}, \code{log_x}, \code{log_p}, \code{sum},
+#' \code{max_difference}, \code{additive}, \code{method}.
 #' @export
 LogSep <- function(x, p) {
   # eq (4.59): log[y] = log[x] + log[p], for x != 0 and p != 0.  The
@@ -260,7 +271,9 @@ ConvModel <- function(x, h) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{truncation_note}, \code{method}.
+#' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h},
+#' \code{residual}, \code{max_residual}, \code{relative_residual},
+#' \code{truncation_note}, \code{method}.
 #' @export
 CCepSum <- function(x, h) {
   # eq (4.66): y_hat = x_hat + h_hat.  The residual is not exactly zero
@@ -372,7 +385,9 @@ RatZ <- function(gain, r, zeros_in, zeros_out, poles_in, poles_out,
 #' @param poles_in Coerced to complex by the body, with \code{as.complex}.
 #' @param poles_out Coerced to complex by the body, with \code{as.complex}.
 #' @param nmax Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
-#' @return A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive}, \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration}, \code{nmax}, \code{method}.
+#' @return A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive},
+#' \code{negative}, \code{causal}, \code{anticausal}, \code{infinite_duration},
+#' \code{nmax}, \code{method}.
 #' @export
 CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
                        nmax = 32) {
@@ -418,8 +433,10 @@ CCepClosed <- function(gain, zeros_in, zeros_out, poles_in, poles_out,
 #' @param poles_in Coerced to complex by the body, with \code{as.complex}.
 #' @param poles_out Coerced to complex by the body, with \code{as.complex}.
 #' @param nmax Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
-#' @param constant Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{alpha}, \code{K}, \code{bound}, \code{quefrency}, \code{decays_at_least_as_one_over_n}, \code{near_unit_circle}, \code{method}.
+#' @param constant Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{alpha}, \code{K}, \code{bound}, \code{quefrency},
+#' \code{decays_at_least_as_one_over_n}, \code{near_unit_circle}, \code{method}.
 #' @export
 CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
                       constant = NULL) {
@@ -454,7 +471,8 @@ CCepDecay <- function(zeros_in, zeros_out, poles_in, poles_out, nmax = 32,
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n0 Coerced to integer by the body, with \code{as.integer}.
 #' @param terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
-#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
@@ -506,7 +524,9 @@ EchoSeries <- function(a, n0, terms = 10, omega = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param square A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{cepstrum}, \code{unsquared}, \code{log_power}, \code{n}, \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact}, \code{method}.
+#' @return A list with \code{cepstrum}, \code{unsquared}, \code{log_power}, \code{n},
+#' \code{squared}, \code{zero_bins}, \code{retains_phase}, \code{additivity_exact},
+#' \code{method}.
 #' @export
 PCepstrum <- function(x, square = TRUE) {
   # eq (4.81).  The book notes the final squaring is omitted in some
@@ -539,7 +559,9 @@ PCepstrum <- function(x, square = TRUE) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param square A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared}, \code{exact}, \code{method}.
+#' @return A list with \code{y}, \code{cepstrum_y}, \code{cepstrum_x}, \code{cepstrum_h},
+#' \code{residual}, \code{max_residual}, \code{relative_residual}, \code{squared},
+#' \code{exact}, \code{method}.
 #' @export
 PCepSum <- function(x, h, square = FALSE) {
   # eq (4.82): the power cepstra of a convolution add, exactly when the
@@ -575,7 +597,9 @@ PCepSum <- function(x, h, square = FALSE) {
 #' cepstrum loses the phase.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{from_complex}, \code{direct}, \code{residual}, \code{max_residual}, \code{relative_residual}, \code{phase_lost}, \code{n}, \code{method}.
+#' @return A list with \code{from_complex}, \code{direct}, \code{residual},
+#' \code{max_residual}, \code{relative_residual}, \code{phase_lost}, \code{n},
+#' \code{method}.
 #' @export
 PCepRel <- function(x) {
   # eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even
@@ -612,7 +636,8 @@ PCepRel <- function(x) {
 #' @param low Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param high Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param keep One of \code{"band"}, \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
-#' @return A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep}, \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
+#' @return A list with \code{liftered}, \code{n}, \code{low}, \code{high}, \code{keep},
+#' \code{symmetric}, \code{n_kept}, \code{energy_kept}, \code{method}.
 #' @export
 Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
   # Section 4.7.3: the vocal tract lives at LOW quefrency, the glottal
@@ -656,7 +681,8 @@ Lifter <- function(cepstrum_values, low = NULL, high = NULL, keep = "low") {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cutoff Coerced to integer by the body, with \code{as.integer}.
 #' @param keep One of \code{"high"}, \code{"low"}. Defaults to \code{"low"}.
-#' @return A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff}, \code{keep}, \code{n}, \code{stages}, \code{method}.
+#' @return A list with \code{y}, \code{log_domain}, \code{log_input}, \code{cutoff},
+#' \code{keep}, \code{n}, \code{stages}, \code{method}.
 #' @export
 HomoFilt <- function(y, cutoff, keep = "low") {
   # Section 4.7.1, Figure 4.23: log -> linear filter -> exp.  The signal
@@ -696,7 +722,9 @@ HomoFilt <- function(y, cutoff, keep = "low") {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cutoff Coerced to integer by the body, with \code{as.integer}.
 #' @param keep Carried through into a list the body builds. Defaults to \code{"low"}.
-#' @return A list with \code{y}, \code{cepstrum}, \code{liftered}, \code{cutoff}, \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy}, \code{stages}, \code{method}.
+#' @return A list with \code{y}, \code{cepstrum}, \code{liftered}, \code{cutoff},
+#' \code{keep}, \code{n}, \code{linear_phase_removed}, \code{imaginary_energy},
+#' \code{stages}, \code{method}.
 #' @export
 HomDeconv <- function(y, cutoff, keep = "low") {
   # Section 4.7.2: DFT -> complex log -> IDFT -> lifter -> DFT -> exp ->
@@ -734,7 +762,9 @@ HomDeconv <- function(y, cutoff, keep = "low") {
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cutoff Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{low_time}, \code{high_time}, \code{cutoff}, \code{n}, \code{reconstruction}, \code{reconstruction_error}, \code{relative_error}, \code{separation_premise}, \code{method}.
+#' @return A list with \code{low_time}, \code{high_time}, \code{cutoff}, \code{n},
+#' \code{reconstruction}, \code{reconstruction_error}, \code{relative_error},
+#' \code{separation_premise}, \code{method}.
 #' @export
 HomPred <- function(y, cutoff) {
   # Section 4.7.3.  The two lifters must PARTITION the quefrency axis
@@ -777,10 +807,14 @@ HomPred <- function(y, cutoff) {
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param pitch_period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param cutoff Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param pitch_period Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param pitch_range A vector; indexed elementwise. Defaults to \code{c(0.002, 0.02)}.
-#' @return A list with \code{response}, \code{cepstrum}, \code{cutoff}, \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n}, \code{method}.
+#' @return A list with \code{response}, \code{cepstrum}, \code{cutoff},
+#' \code{pitch_period}, \code{pitch_hz}, \code{peak_quefrency}, \code{fs}, \code{n},
+#' \code{method}.
 #' @export
 VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
                        pitch_range = c(0.002, 0.020)) {
@@ -834,7 +868,8 @@ VocalTract <- function(y, fs, pitch_period = NULL, cutoff = NULL,
 #' "correspondent" means, and is the check returned.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{y}, \code{cepstrum}, \code{n}, \code{magnitude_error}, \code{magnitude_preserved}, \code{energy_front_loaded}, \code{method}.
+#' @return A list with \code{y}, \code{cepstrum}, \code{n}, \code{magnitude_error},
+#' \code{magnitude_preserved}, \code{energy_front_loaded}, \code{method}.
 #' @export
 MinPhase <- function(x) {
   # Section 4.7.2, after eq (4.73): a minimum-phase signal has a CAUSAL
@@ -887,7 +922,9 @@ MinPhase <- function(x) {
 #' @param n_coeffs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{13}.
 #' @param fmin The body requires: need 0 <= fmin < fmax <= fs/2. Defaults to \code{0}.
 #' @param fmax Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{mfcc}, \code{filterbank_energies}, \code{log_energies}, \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters}, \code{c0_is_energy}, \code{method}.
+#' @return A list with \code{mfcc}, \code{filterbank_energies}, \code{log_energies},
+#' \code{edges}, \code{n_filters}, \code{n_coeffs}, \code{fs}, \code{empty_filters},
+#' \code{c0_is_energy}, \code{method}.
 #' @export
 Mfcc <- function(x, fs, n_filters = 26, n_coeffs = 13, fmin = 0,
                  fmax = NULL) {

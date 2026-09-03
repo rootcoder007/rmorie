@@ -23,7 +23,7 @@ Rousseeuw and Yohai (1984): minimise the residual M-scale, biweight
 at \code{c = 1.5476} with \code{b = 1/2} -- the calibration that makes the
 breakdown point 50\%. The price is 28.7\% normal efficiency, which
 is why the S-estimate is a STARTING POINT: its scale and
-coefficients seed \code{\link[=morie_rob_mm]{morie_rob_mm()}}, which recovers 95\% efficiency
+coefficients seed \code{morie_rob_mm()}, which recovers 95\% efficiency
 without giving the breakdown back. Computation is random p-subsets
 plus local IRLS refinement, reproducible via \code{seed}.
 }

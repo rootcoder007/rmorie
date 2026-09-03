@@ -17,3 +17,7 @@ A step of the b2info implementation. Called by \code{Cndmi}, \code{Dpineq}.
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .b2as3d(p = 0.5)
+res
+}

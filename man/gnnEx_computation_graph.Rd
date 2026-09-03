@@ -34,5 +34,6 @@ class being explained.
 }
 \keyword{internal}
 \examples{
-gnnEx_computation_graph(adj = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), L = c(1, 2, 3, 4, 5, 6, 7, 8))
+gnnEx_computation_graph(adj = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
+  L = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

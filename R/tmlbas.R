@@ -19,7 +19,8 @@
 #'   27:4658-4677; van der Laan, M. J. & Rubin, D. (2006). IJB 2(1):11.
 #' @export
 #' @examples
-#' Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline
+#' = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlbas <- function(y, D, X, baseline) {
   yv <- as.numeric(y)
   Dv <- as.numeric(D)

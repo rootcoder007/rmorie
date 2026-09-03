@@ -20,3 +20,7 @@ so this arm runs the same arithmetic as the Python one -- both need
 only a symmetric eigensolver. The weights sum to 1, so sum(w * g(x))
 is E[g(X)] for X ~ N(0, 1).
 }
+\examples{
+res <- .schab_gauss_hermite(n = 3L)
+res
+}

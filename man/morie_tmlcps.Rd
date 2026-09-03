@@ -27,5 +27,6 @@ A list with \code{estimate}, \code{se}, \code{curve},   \code{grid}, \code{slope
 }
 \keyword{internal}
 \examples{
-morie_tmlcps(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_tmlcps(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

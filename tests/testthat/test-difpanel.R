@@ -37,7 +37,8 @@ test_that("B is beta over its standard error", {
 
 .dp_panel <- function(seed, N = 12, Tn = 100, coint = TRUE, m = 2) {
   set.seed(seed)
-  rows <- list(); grp <- c()
+  rows <- list()
+  grp <- c()
   for (i in seq_len(N)) {
     xs <- lapply(seq_len(m), function(k) cumsum(rnorm(Tn)))
     y <- if (coint) Reduce(`+`, xs) + rnorm(Tn) else cumsum(rnorm(Tn))

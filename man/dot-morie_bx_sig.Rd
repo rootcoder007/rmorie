@@ -17,3 +17,7 @@ A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{L
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_bx_sig(b = 3L)
+res
+}

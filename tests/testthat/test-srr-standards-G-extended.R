@@ -26,7 +26,9 @@ NULL
 
 test_that("G1.5/G1.6 ML pipeline reproduces + matches base glm coefficients", {
   set.seed(1)
-  n <- 400L; x1 <- rnorm(n); x2 <- rnorm(n)
+  n <- 400L
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   y <- rbinom(n, 1, 1 / (1 + exp(-(0.5 + 1.5 * x1 - x2))))
   d <- data.frame(x1 = x1, x2 = x2, y = y)
   # reference implementation: base glm
@@ -71,13 +73,15 @@ test_that("G5.7 algorithm scales deterministically with data size", {
   # For SGD the number of gradient steps per epoch = ceil(n / batch_size),
   # so total steps scale with n -- a deterministic scaling relationship
   # (wall-clock timing is too noisy to assert at these sizes).
-  mk <- function(n) { set.seed(n); data.frame(x = rnorm(n), y = rnorm(n)) }
+  mk <- function(n) { set.seed(n)
+  data.frame(x = rnorm(n), y = rnorm(n)) }
   steps <- function(n) {
     length(morie_ml_train(
       morie_ml_model("linear", "sgd", epochs = 3, batch_size = 32),
       mk(n)["x"], mk(n)$y)$grad_norm)
   }
-  s_small <- steps(200L); s_big <- steps(4000L)
+  s_small <- steps(200L)
+  s_big <- steps(4000L)
   expect_gt(s_big, s_small)                          # steps grow with n
   expect_equal(s_big / s_small, 4000 / 200, tolerance = 0.15)  # ~linear in n
 })

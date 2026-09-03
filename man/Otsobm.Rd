@@ -18,7 +18,7 @@ List with \code{W1_sob}, \code{quad_form}, \code{mass_gap},
 \code{n}.
 }
 \description{
-
+Replace W_1 by a Hilbert norm on the difference of the measures
 }
 \references{
 Peyre, G. (2018). ESAIM: Control, Optimisation and Calculus

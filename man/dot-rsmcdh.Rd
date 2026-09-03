@@ -19,3 +19,7 @@ A step of the helpers_rouss implementation. Called by \code{Fastm}, \code{Mcdcv}
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .rsmcdh(n = 3L, p = 0.5)
+res
+}

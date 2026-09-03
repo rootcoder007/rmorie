@@ -21,6 +21,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .mor_lcg_new()
+#' res
 .mor_lcg_new <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   e <- new.env(parent = emptyenv())

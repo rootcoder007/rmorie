@@ -17,3 +17,7 @@ A step of the pratt_native implementation. Called by \code{.pratt_attention}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .pratt_mat(H = 0.5)
+res
+}

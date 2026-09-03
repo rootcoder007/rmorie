@@ -19,3 +19,9 @@ A numeric value.
 line. On R the p = 1 transport cost is integral |F - G|, so sorting
 solves the problem and no linear program is needed.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .w1_distance(a = A, b = b)
+res
+}

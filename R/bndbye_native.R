@@ -53,7 +53,8 @@ morie_conditional_prior_uniform <- function(theta_set, n_grid = 401L) {
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param conditional_prior Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_grid Passed to \code{morie_conditional_prior_uniform}. Defaults to \code{401L}.
-#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level}, \code{covered}, \code{n_grid_points}, \code{method}.
+#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{level},
+#' \code{covered}, \code{n_grid_points}, \code{method}.
 #' @export
 morie_posterior_hpd <- function(theta_set, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {
@@ -97,7 +98,8 @@ morie_posterior_hpd <- function(theta_set, level = 0.95,
 #' @param se_phi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param target One of \code{"parameter"}, \code{"set"}. Defaults to \code{"parameter"}.
-#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \code{target}, \code{level}, \code{note}.
+#' @return A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value},
+#' \code{target}, \code{level}, \code{note}.
 #' @export
 morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
                                             target = "parameter") {
@@ -126,7 +128,10 @@ morie_frequentist_confidence_set <- function(theta_set, se_phi, level = 0.95,
 #' @param level Passed to \code{morie_posterior_hpd}. Defaults to \code{0.95}.
 #' @param conditional_prior Optional; may be \code{NULL}. Passed to \code{morie_posterior_hpd}.
 #' @param n_grid Passed to \code{morie_posterior_hpd}. Defaults to \code{401L}.
-#' @return A list with \code{estimate}, \code{identified_set}, \code{credible_hpd}, \code{confidence_set}, \code{hpd_inside_identified_set}, \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs}, \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
+#' @return A list with \code{estimate}, \code{identified_set}, \code{credible_hpd},
+#' \code{confidence_set}, \code{hpd_inside_identified_set},
+#' \code{cs_contains_identified_set}, \code{width_ratio_hpd_over_cs},
+#' \code{conditional_prior_reported}, \code{method}, \code{recommendation}.
 #' @export
 morie_compare_sets <- function(phi_hat, half_width, se_phi, level = 0.95,
                                conditional_prior = NULL, n_grid = 401L) {

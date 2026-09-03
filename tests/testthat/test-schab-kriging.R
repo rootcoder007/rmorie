@@ -69,7 +69,8 @@ test_that("simple kriging weights solve Sigma lambda = sigma", {
 })
 
 test_that("the sill is a pure variance factor (Sec 5.2.3)", {
-  a <- spnsr(0, 1, 1); b <- spnsr(0, 7, 1)
+  a <- spnsr(0, 1, 1)
+  b <- spnsr(0, 7, 1)
   expect_equal(b$prediction, a$prediction, tolerance = 1e-12)
   expect_equal(b$variance / a$variance, 7, tolerance = 1e-10)
   expect_equal(b$weights, a$weights, tolerance = 1e-12)

@@ -40,6 +40,9 @@
 #' @param which Passed to \code{match.arg}.
 #' @return The value of \code{utils::read.csv}.
 #' @export
+#' @examples
+#' res <- .morie_nypd_load_sample()
+#' res
 .morie_nypd_load_sample <- function(which = c("arrests", "complaint")) {
   which <- match.arg(which)
   file <- switch(which,

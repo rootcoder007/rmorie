@@ -35,5 +35,6 @@ List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, m
 MDP validation plus value iteration (Geron Ch 19, morie.fn hmmdp)
 }
 \examples{
-morie_geron_mdp(states = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), actions = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_mdp(states = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  actions = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, R = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

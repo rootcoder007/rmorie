@@ -7,7 +7,12 @@
 #' @param yhat Predicted values, same length as y.
 #'
 #' @return List with ``rmse``, ``mse``, ``n``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.5.1, Eq. (4.1) p. 129 (MSE), Eq. (4.2) p. 129 (Pearson accuracy) and Eq. (4.3) p. 131 (MAE).  Read from the chapter PDF, not recalled.  The RMSE is named in the paragraph under Eq. (4.1) as the square root of MSE_TST.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.5.1, Eq. (4.1) p. 129 (MSE), Eq.
+#' (4.2) p. 129 (Pearson accuracy) and Eq. (4.3) p. 131 (MAE).  Read from the chapter
+#' PDF, not recalled.  The RMSE is named in the paragraph under Eq. (4.1) as the square
+#' root of MSE_TST.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

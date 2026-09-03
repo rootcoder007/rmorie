@@ -14,3 +14,7 @@ A step of the memb_native implementation. Called by \code{morie_memb}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .memb_cheatsheet()
+res
+}

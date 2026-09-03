@@ -28,13 +28,18 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 
 #' .stahdo_median
 #'
-#' A step of the stahdo_native implementation. Called by \code{.stahdo_mad}, \code{.stahdo_outlyingness}.
+#' A step of the stahdo_native implementation. Called by \code{.stahdo_mad},
+#' \code{.stahdo_outlyingness}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .stahdo_median(v = x)
+#' res
 .stahdo_median <- function(v) {
   v <- as.numeric(v)
   s <- sort(v)
@@ -58,6 +63,10 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param consistent A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .stahdo_mad(v = x)
+#' res
 .stahdo_mad <- function(v, consistent = TRUE) {
   v <- as.numeric(v)
   m <- .stahdo_median(v)
@@ -71,13 +80,19 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 
 #' .stahdo_prep
 #'
-#' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness}, \code{.stahdo_stahel_donoho}.
+#' A step of the stahdo_native implementation. Called by \code{.stahdo_outlyingness},
+#' \code{.stahdo_stahel_donoho}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{M}, \code{n}, \code{p}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .stahdo_prep(X = X)
+#' res
 .stahdo_prep <- function(X) {
   if (is.data.frame(X)) {
     M <- as.matrix(X)
@@ -110,6 +125,9 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param p A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' res <- .stahdo_combn(n = 3L, p = 0.5)
+#' res
 .stahdo_combn <- function(n, p) {
   if (p == 0L) return(list(integer(0L)))
   if (p > n) return(list())
@@ -287,7 +305,8 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param directions Compared against \code{"subsample"}. Defaults to \code{"subsample"}.
 #' @param n_directions Passed to \code{.stahdo_subsample_dirs}. Defaults to \code{500}.
 #' @param seed Passed to \code{.stahdo_subsample_dirs}. Defaults to \code{1}.
-#' @return A list with \code{outlyingness}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}.
+#' @return A list with \code{outlyingness}, \code{n_directions}, \code{n_used},
+#' \code{exhaustive}, \code{directions}.
 #' @export
 .stahdo_outlyingness <- function(X, directions = "subsample",
                                  n_directions = 500, seed = 1) {
@@ -399,6 +418,9 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .stahdo_chi2_median(p = 0.5)
+#' res
 .stahdo_chi2_median <- function(p) {
   lo <- 0.0
   hi <- 100.0 + 10.0 * p
@@ -423,8 +445,12 @@ morie_stahdo_DIRECTIONS <- c("subsample", "random")
 #' @param directions Passed to \code{.stahdo_outlyingness}. Defaults to \code{"subsample"}.
 #' @param n_directions Passed to \code{.stahdo_outlyingness}. Defaults to \code{500}.
 #' @param seed Passed to \code{.stahdo_outlyingness}. Defaults to \code{1}.
-#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{location}, \code{scatter}, \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions}, \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n}, \code{p}, \code{method}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{estimate}, \code{location}, \code{scatter},
+#' \code{outlyingness}, \code{weights}, \code{cutoff}, \code{n_directions},
+#' \code{n_used}, \code{exhaustive}, \code{directions}, \code{n_downweighted}, \code{n},
+#' \code{p}, \code{method}.
 #' @export
 .stahdo_stahel_donoho <- function(X, directions = "subsample",
                                   n_directions = 500, seed = 1,

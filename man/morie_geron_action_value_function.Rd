@@ -28,7 +28,7 @@ List with \code{q_value}, \code{q_values}, \code{values}, \code{advantage},
 }
 \description{
 Q = r_sa + gamma sum_s' P V^pi(s'); V from
-\code{\link[=morie_geron_state_value_function]{morie_geron_state_value_function()}}'s evaluation. Indices 0-based.
+\code{morie_geron_state_value_function()}'s evaluation. Indices 0-based.
 }
 \examples{
 P <- array(0, c(2, 2, 2))

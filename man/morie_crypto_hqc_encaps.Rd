@@ -16,11 +16,13 @@ List with \code{ct} and \code{shared_secret} (raw, 64 B).
 HQC-128 encapsulation
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-  if (!inherits(kp, "try-error")) {
-    enc <- morie_crypto_hqc_encaps(kp$pk)
-    str(enc)
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+    if (!inherits(kp, "try-error")) {
+      enc <- morie_crypto_hqc_encaps(kp$pk)
+      str(enc)
+    }
   }
 }
 }

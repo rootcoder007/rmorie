@@ -73,13 +73,18 @@
 
 #' .strec_sigmoid
 #'
-#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}.
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights},
+#' \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; passed to \code{min}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .strec_sigmoid(x = x)
+#' res
 .strec_sigmoid <- function(x) {
   x <- max(-60.0, min(60.0, x))
   1.0 / (1.0 + exp(-x))
@@ -87,13 +92,18 @@
 
 #' .strec_as_rows
 #'
-#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_session_average}, \code{strec_stamp_scores}.
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights},
+#' \code{strec_session_average}, \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .strec_as_rows(x = x)
+#' res
 .strec_as_rows <- function(x) {
   if (is.list(x) && !is.data.frame(x)) {
     return(lapply(x, as.numeric))
@@ -128,7 +138,8 @@ strec_trilinear <- function(a, b, c) {
 
 #' strec_session_average
 #'
-#' A step of the strec_native implementation. Called by \code{strec_attention_weights}, \code{strec_stamp_scores}.
+#' A step of the strec_native implementation. Called by \code{strec_attention_weights},
+#' \code{strec_stamp_scores}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -268,7 +279,9 @@ strec_attention_weights <- function(embeddings, W1, W2, W3, W0, b_a = NULL) {
 #' @param bs Passed to \code{strec_mlp_cell}.
 #' @param bt Passed to \code{strec_mlp_cell}.
 #' @param attention Optional; may be \code{NULL}. A list; the body reads \code{$m_a} from it.
-#' @return A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score}, \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{ranking}, \code{probability}, \code{score},
+#' \code{h_s}, \code{h_t}, \code{attention_used}, \code{model}, \code{method},
+#' \code{note}.
 #' @export
 strec_stamp_scores <- function(embeddings, item_table, Ws, Wt, bs = NULL, bt = NULL,
                                 attention = NULL) {
@@ -352,15 +365,3 @@ strec_stamp <- strec_stamp_scores
 
 # Entry point
 morie_strec <- strec_stamp_scores
-
-
-
-
-
-
-
-
-
-
-
-

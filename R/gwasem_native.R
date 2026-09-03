@@ -79,6 +79,10 @@ morie_gwasem_gower <- function(S) {
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gwasem_eigh(M = A)
+#' res
 .gwasem_eigh <- function(M) {
   ee <- eigen(as.matrix(M), symmetric = TRUE)
   list(values = ee$values, vectors = ee$vectors)
@@ -86,7 +90,8 @@ morie_gwasem_gower <- function(S) {
 
 #' .gwasem_solve
 #'
-#' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
+#' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
+#' \code{.gwasem_reml_delta}, \code{morie_gwasem} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -94,6 +99,11 @@ morie_gwasem_gower <- function(S) {
 #' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gwasem_solve(A = A, b = b)
+#' res
 .gwasem_solve <- function(A, b) {
   as.numeric(solve(A, b))
 }
@@ -107,17 +117,27 @@ morie_gwasem_gower <- function(S) {
 #' @param A A matrix; passed to \code{solve}.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gwasem_inv(A = A)
+#' res
 .gwasem_inv <- function(A) solve(A)
 
 #' .gwasem_slogdet
 #'
-#' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik}, \code{morie_gwasem_reml}.
+#' A step of the gwasem_native implementation. Called by \code{.gwasem_loglik},
+#' \code{morie_gwasem_reml}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M Passed to \code{svd}.
 #' @return A list with \code{sign}, \code{logdet}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .gwasem_slogdet(M = X)
+#' res
 .gwasem_slogdet <- function(M) {
   v <- svd(M)
   prod(v$d)
@@ -333,6 +353,10 @@ morie_gwasem_reml <- function(y, kinship, covariates = NULL, ml = FALSE) {
 #' @param z Numeric; passed to \code{abs}.
 #' @return The value of \code{pnorm}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .gwasem_norm_sf(z = y)
+#' res
 .gwasem_norm_sf <- function(z) pnorm(abs(z), lower.tail = FALSE)
 
 #' Genomic-control inflation factor

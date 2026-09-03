@@ -21,5 +21,6 @@ A list with \code{w_next}, \code{mu}, \code{e}, \code{order}, \code{factor_of_tw
 }
 \keyword{internal}
 \examples{
-WidrowHoff(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
+WidrowHoff(w = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8),
+  rvec = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -7,7 +7,7 @@
 morie_big_divmod_small(a, d)
 }
 \arguments{
-\item{a}{Value coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+\item{a}{Value coercible by \code{morie_bigint()}.}
 
 \item{d}{A positive whole number below 2^31.}
 }

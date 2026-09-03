@@ -24,7 +24,8 @@
 #'   Analysis, 2nd ed., Springer, Section 8.4.
 #' @export
 #' @examples
-#' Survlnk(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Survlnk(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 Survlnk <- function(time, event, X, link = "cloglog",
                     max_iter = 100L, tol = 1e-10) {
   tt <- as.numeric(time)
@@ -115,7 +116,8 @@ Survlnk <- function(time, event, X, link = "cloglog",
 #'   J. C. M. and Gerds, T. A. (2014), Biostatistics 15(3), 526-539.
 #' @export
 #' @examples
-#' Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8), predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Sscompv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event_type = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' predicted_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 Sscompv <- function(time, event_type, predicted_F) {
   t <- as.numeric(time)
   d <- as.numeric(event_type)

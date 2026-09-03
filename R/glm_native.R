@@ -121,8 +121,10 @@
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param p0 A vector; its length is taken.
 #' @param p1 A vector; its length is taken.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param family Coerced to character by the body, with \code{as.character}. Defaults to \code{"bernoulli"}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param family Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"bernoulli"}.
 #' @param sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
@@ -255,6 +257,9 @@ glrtest <- function(x, p0, p1, threshold = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .glm_cheatsheet()
+#' res
 .glm_cheatsheet <- function() {
   paste0("glm: Page likelihood-ratio CUSUM, max_k sum_{i=k}^{n} ",
          "log(f1/f0) (Lai 1995 eq. 2.3); families bernoulli/normal/",

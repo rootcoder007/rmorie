@@ -16,13 +16,18 @@
 
 #' .chronos_vec
 #'
-#' A step of the chronos_native implementation. Called by \code{forecast_summary}, \code{mean_scale}, \code{quantile_bins} and 1 others in the module.
+#' A step of the chronos_native implementation. Called by \code{forecast_summary},
+#' \code{mean_scale}, \code{quantile_bins} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .chronos_vec(x = x)
+#' res
 .chronos_vec <- function(x) as.numeric(x)
 
 #' mean_scale
@@ -32,8 +37,10 @@
 #' the source it follows.
 #'
 #' @param x Passed to \code{.chronos_vec}.
-#' @param context Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context}, \code{preserves_zero}.
+#' @param context Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{scaled}, \code{scale}, \code{degenerate}, \code{context},
+#' \code{preserves_zero}.
 #' @export
 mean_scale <- function(x, context = NULL) {
   v <- .chronos_vec(x)
@@ -90,7 +97,8 @@ uniform_bins <- function(lo = -15.0, hi = 15.0, n_bins = 4096L) {
 #'
 #' @param samples Passed to \code{.chronos_vec}.
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4096L}.
-#' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme}, \code{range}, \code{caveat}.
+#' @return A list with \code{centers}, \code{edges}, \code{n_bins}, \code{scheme},
+#' \code{range}, \code{caveat}.
 #' @export
 quantile_bins <- function(samples, n_bins = 4096L) {
   v <- sort(.chronos_vec(samples))
@@ -118,7 +126,8 @@ quantile_bins <- function(samples, n_bins = 4096L) {
 #'
 #' @param x Passed to \code{.chronos_vec}.
 #' @param bins A list; the body reads \code{$centers}, \code{$edges} from it.
-#' @return A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction}, \code{in_range}, \code{note}.
+#' @return A list with \code{tokens}, \code{n_clipped}, \code{clipped_fraction},
+#' \code{in_range}, \code{note}.
 #' @export
 quantize <- function(x, bins) {
   v <- .chronos_vec(x)
@@ -180,8 +189,10 @@ dequantize <- function(tokens, bins) {
 #' @param bins A list; the body reads \code{$n_bins} from it.
 #' @param context Passed to \code{mean_scale}.
 #' @param add_eos A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param pad_to Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped}, \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
+#' @param pad_to Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{estimate}, \code{tokens}, \code{scale}, \code{n_clipped},
+#' \code{clipped_fraction}, \code{vocab_size}, \code{method}, \code{ignores}.
 #' @export
 tokenize <- function(x, bins, context = NULL, add_eos = TRUE, pad_to = NULL) {
   sc <- mean_scale(x, context = context)

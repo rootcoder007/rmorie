@@ -18,3 +18,9 @@ A logical value.
 all match (R\'s == coerces); int vs str does not (mirrors Python: 1
 == "1" is False, and isTRUE(1 == "1") is FALSE in R).
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .attrInf_eq(a = A, b = b)
+res
+}

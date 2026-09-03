@@ -49,7 +49,11 @@
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{posterior_sd}, \code{std_error}, \code{ci_lower}, \code{ci_upper}, \code{fitted}, \code{linear_predictor}, \code{loglik}, \code{log_prior}, \code{log_marginal}, \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family}, \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{posterior_sd},
+#' \code{std_error}, \code{ci_lower}, \code{ci_upper}, \code{fitted},
+#' \code{linear_predictor}, \code{loglik}, \code{log_prior}, \code{log_marginal},
+#' \code{log_det_hessian}, \code{iterations}, \code{converged}, \code{family},
+#' \code{prior_sd}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
                                       prior_sd = 2.5, add_intercept = TRUE,
@@ -132,6 +136,9 @@ morie_glmbay_bayesian_glm <- function(X, y, family = "binomial",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .glmbay_cheatsheet()
+#' res
 .glmbay_cheatsheet <- function() {
   paste0("glmbay: morie_glmbay_bayesian_glm(X, y, family, prior_sd) -> ",
          "posterior mode, Laplace covariance and log marginal likelihood ",

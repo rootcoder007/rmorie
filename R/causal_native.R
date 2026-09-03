@@ -176,7 +176,8 @@ morie_backdoor_adjustment <- function(x, y, z, at = NULL) {
 
 #' .bd_desc
 #'
-#' A step of the causal_native implementation. Called by \code{.bd_blocked}, \code{morie_backdoor_criterion}.
+#' A step of the causal_native implementation. Called by \code{.bd_blocked},
+#' \code{morie_backdoor_criterion}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -701,6 +702,11 @@ morie_hsic <- function(a, b) {
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .anm_resid(x = x, y = y)
+#' res
 .anm_resid <- function(x, y) {
   d2 <- outer(x, x, "-")^2
   h <- sqrt(max(stats::median(d2[upper.tri(d2)]), 1e-12)) * 0.5

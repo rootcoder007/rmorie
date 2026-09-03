@@ -15,7 +15,8 @@ test_that("eq (7.6) probabilities normalize and use the baseline", {
 test_that("eq (7.8) log-likelihood matches the probabilities", {
   X <- matrix(c(1,0, 0,1, 1,1), nrow = 3, byrow = TRUE)
   y <- c(0, 1, 2)
-  b0 <- c(0.5, -0.5); B <- matrix(c(1,0, 0,1), 2, byrow = TRUE)
+  b0 <- c(0.5, -0.5)
+  B <- matrix(c(1,0, 0,1), 2, byrow = TRUE)
   P <- morie_multinomial_probs(X, b0, B)
   hand <- sum(log(P[cbind(1:3, y + 1)]))
   expect_equal(morie_multinomial_loglik(X, y, b0, B), hand,
@@ -25,7 +26,8 @@ test_that("eq (7.8) log-likelihood matches the probabilities", {
 test_that("eq (7.7) and (7.10) penalties are quadratic and L1", {
   X <- matrix(c(1,0, 0,1, 1,1), nrow = 3, byrow = TRUE)
   y <- c(0, 1, 2)
-  b0 <- c(0.5, -0.5); B <- matrix(c(1,-2, 0,1), 2, byrow = TRUE)
+  b0 <- c(0.5, -0.5)
+  B <- matrix(c(1,-2, 0,1), 2, byrow = TRUE)
   ridge <- morie_penalized_multinomial(X, y, b0, B, 2)
   lasso <- morie_penalized_multinomial(X, y, b0, B, 2,
                                              penalty = "lasso")
@@ -39,7 +41,8 @@ test_that("eq (7.9) block update improves the objective", {
   n <- 60
   X <- matrix(rnorm(n), ncol = 1)
   y <- ifelse(X[, 1] < -0.3, 0L, ifelse(X[, 1] < 0.4, 1L, 2L))
-  b0 <- c(0, 0); B <- matrix(0, 2, 1)
+  b0 <- c(0, 0)
+  B <- matrix(0, 2, 1)
   before <- morie_penalized_multinomial(X, y, b0, B, 0.1)
   u <- morie_multinomial_block(X, y, b0, B, 0.1, 0L)
   after <- morie_penalized_multinomial(

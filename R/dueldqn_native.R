@@ -122,6 +122,10 @@ duelingdqn <- dueling_q
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dueldqn_argmax(x = x)
+#' res
 .dueldqn_argmax <- function(x) {
   b <- 1L
   if (length(x) > 1L) {
@@ -237,25 +241,3 @@ dueling_step <- function(value, advantage, action, reward, gamma,
 #' @rdname dueling_aggregate
 #' @export
 morie_dueldqn <- dueling_aggregate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

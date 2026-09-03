@@ -20,5 +20,6 @@ A list with \code{features}, \code{dim}, \code{hyp_ref_diff}, \code{hyp_src_diff
 }
 \keyword{internal}
 \examples{
-pooled_features(hyp = c(1, 2, 3, 4, 5, 6, 7, 8), src = c(1, 2, 3, 4, 5, 6, 7, 8), ref = c(1, 2, 3, 4, 5, 6, 7, 8))
+pooled_features(hyp = c(1, 2, 3, 4, 5, 6, 7, 8), src = c(1, 2, 3, 4, 5, 6, 7, 8),
+  ref = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

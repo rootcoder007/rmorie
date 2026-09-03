@@ -17,3 +17,8 @@ A step of the airl_native implementation. Called by \code{morie_soft_value_itera
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .state_key(s = txt)
+res
+}

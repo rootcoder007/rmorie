@@ -17,3 +17,8 @@ A step of the schab_rest_shared implementation. Called by \code{.schab_moran_mom
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .schab_kurtosis_b(z = y)
+res
+}

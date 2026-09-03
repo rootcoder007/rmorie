@@ -20,5 +20,6 @@ A list with \code{estimate}, \code{hits}, \code{n_relevant}, \code{k}, \code{n},
 }
 \keyword{internal}
 \examples{
-morie_alammar_recall_at_k(retrieved = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+morie_alammar_recall_at_k(retrieved = c(1, 2, 3, 4, 5, 6, 7, 8),
+  relevant = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

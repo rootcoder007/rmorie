@@ -19,3 +19,9 @@ A step of the rangayyan_class implementation. Called by \code{FishLda}, \code{Qd
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .morie_rg_groups(X = X, y = y)
+res
+}

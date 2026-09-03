@@ -110,6 +110,10 @@
 #' @param v Passed to \code{unique}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .avalon_sortkeys(v = x)
+#' res
 .avalon_sortkeys <- function(v) sort(unique(v), method = "radix")
 
 #' FNV-1a over the bytes of a feature key
@@ -315,7 +319,8 @@ morie_avalon_parse <- function(smiles) {
 
 #' .avalon_adj
 #'
-#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}, \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features},
+#' \code{morie_avalon_rings}, \code{morie_cypin_descriptors} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -505,7 +510,8 @@ morie_avalon_rings <- function(n, bonds, closures) {
 
 #' .avalon_dist
 #'
-#' A step of the avalon_native implementation. Called by \code{morie_avalon_features}, \code{morie_scfhop_cats}.
+#' A step of the avalon_native implementation. Called by \code{morie_avalon_features},
+#' \code{morie_scfhop_cats}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

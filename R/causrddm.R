@@ -59,7 +59,11 @@
 #'   \code{statistic}, \code{p_value}, \code{fhat_left},
 #'   \code{fhat_right}, \code{bw}, \code{binsize}, \code{n},
 #'   \code{method}.
-#' @references McCrary (2008), Journal of Econometrics 142:698-714.  Paywalled at Elsevier; the coded form was read from McCrary's own implementation as distributed in Dimmery's rdd package, R/DCdensity.R (fetched from the CRAN GitHub mirror), which gives the binning, the 3.348 pilot bandwidth rule, the zero padding, the triangular weights and sethetahat verbatim.
+#' @references McCrary (2008), Journal of Econometrics 142:698-714.  Paywalled at
+#' Elsevier; the coded form was read from McCrary's own implementation as distributed in
+#' Dimmery's rdd package, R/DCdensity.R (fetched from the CRAN GitHub mirror), which
+#' gives the binning, the 3.348 pilot bandwidth rule, the zero padding, the triangular
+#' weights and sethetahat verbatim.
 #' @export
 #' @examples
 #' set.seed(1)

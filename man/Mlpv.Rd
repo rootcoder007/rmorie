@@ -41,7 +41,8 @@ freedom than they repaid -- and is reported as it comes out rather
 than clamped.
 }
 \examples{
-Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
 }
 \references{
 Raudenbush and Bryk (2002), Hierarchical Linear Models,

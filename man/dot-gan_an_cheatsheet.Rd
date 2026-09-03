@@ -14,3 +14,7 @@ A step of the gan_an_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .gan_an_cheatsheet()
+res
+}

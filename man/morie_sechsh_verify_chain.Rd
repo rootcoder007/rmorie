@@ -21,6 +21,8 @@ List with \code{intact} (==\code{estimate}),   \code{first_bad}, \code{verified_
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_sechsh_verify_chain(V, V)
+if (morie_crypto_sodium_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_sechsh_verify_chain(V, V)
+}
 }

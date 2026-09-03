@@ -16,3 +16,8 @@ A numeric value.
 accumulates in long double, CPython\'s compensates, and neither is
 the plain loop the other one is.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .karpv_csum(v = x)
+res
+}

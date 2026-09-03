@@ -13,6 +13,10 @@
 #' @param X Passed to \code{.s03mat}.
 #' @return The value of \code{S}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .cfa_cov(X = x)
+#' res
 .cfa_cov <- function(X) {
   M <- .s03mat(X)
   if (!nrow(M)) stop("empty input: X has no rows")
@@ -37,6 +41,10 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .cfa_inv(A = A)
+#' res
 .cfa_inv <- function(A) {
   m <- nrow(A)
   cols <- lapply(seq_len(m), function(k) {
@@ -58,6 +66,10 @@
 #' @param A Passed to \code{.s03chol}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .cfa_logdet(A = A)
+#' res
 .cfa_logdet <- function(A) {
   L <- .s03chol(A)
   2 * sum(log(diag(L)))

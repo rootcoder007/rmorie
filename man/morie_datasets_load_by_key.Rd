@@ -15,7 +15,7 @@ morie_datasets_load_by_key(
 }
 \arguments{
 \item{dataset_key}{A \code{dataset_key} from
-\code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_catalog()}}.}
+\code{morie_dataset_portal_catalog()}.}
 
 \item{offline}{If \code{TRUE} (default), prefer included fixtures.
 \code{FALSE} forces live mode for loaders that support it.}
@@ -44,7 +44,7 @@ A \code{data.frame} (or, for StatCan, the WDS metadata list).
 \description{
 Phase 3EEE4. Single entry point that dispatches to the right
 loader function for any of the ~550 datasets in
-\code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_catalog()}}. Lets callers say
+\code{morie_dataset_portal_catalog()}. Lets callers say
 \code{morie_datasets_load_by_key("vpd_crime")} or
 \code{morie_datasets_load_by_key("hub:b4d0...assault")} without
 remembering whether the relevant loader is
@@ -66,12 +66,12 @@ package_name slug) is resolved to a primary resource via
 \code{package_show} + first CSV resource, then fetched.}
 \item{Generic ArcGIS Hub dispatcher}{For TPS Hub entries
 (\code{source == "tps_arcgis_hub"}), the bare \code{hub_id} is passed
-to \code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}}.}
+to \code{morie_datasets_tps_arcgis_hub_by_id()}.}
 \item{StatCan WDS}{For statcan_ccjs entries, returns the cube
-metadata via \code{\link[=morie_datasets_statcan_cube_metadata]{morie_datasets_statcan_cube_metadata()}}.}
+metadata via \code{morie_datasets_statcan_cube_metadata()}.}
 \item{Vancouver Opendatasoft}{For vancouver_opendata entries
 beyond the 9 included fixtures, dispatches to
-\code{\link[=morie_datasets_vancouver_opendata_by_id]{morie_datasets_vancouver_opendata_by_id()}}.}
+\code{morie_datasets_vancouver_opendata_by_id()}.}
 }
 
 For datasets where the catalog only knows a key + portal

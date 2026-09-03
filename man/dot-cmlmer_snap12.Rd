@@ -18,3 +18,8 @@ give different groups and therefore a different model. The grid is
 far finer than any distance the caller can distinguish and far
 coarser than the last-bit noise that would otherwise decide a tie.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .cmlmer_snap12(x = x)
+res
+}

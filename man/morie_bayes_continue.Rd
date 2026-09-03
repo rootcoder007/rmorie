@@ -11,7 +11,7 @@ morie_bayes_continue(fit, iter = 1000L, ...)
 
 \item{iter}{Additional iterations.}
 
-\item{...}{Passed to \code{\link[=morie_bayes_lm]{morie_bayes_lm()}}.}
+\item{...}{Passed to \code{morie_bayes_lm()}.}
 }
 \value{
 A new \code{morie_bayes_fit} started from \code{fit}'s last draws.

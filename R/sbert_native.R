@@ -30,6 +30,10 @@
 #' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sbert_mat(x = x)
+#' res
 .sbert_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
   if (is.matrix(x)) { storage.mode(x) <- "double"
@@ -40,13 +44,18 @@
 
 #' .sbert_vec
 #'
-#' A step of the sbert_native implementation. Called by \code{classification_features}, \code{cosine_similarity}.
+#' A step of the sbert_native implementation. Called by \code{classification_features},
+#' \code{cosine_similarity}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sbert_vec(x = x)
+#' res
 .sbert_vec <- function(x) {
   if (is.list(x)) return(as.numeric(unlist(x)))
   as.numeric(x)
@@ -116,7 +125,8 @@ cosine_similarity <- function(u, v) {
 #'
 #' @param u Passed to \code{.sbert_vec}.
 #' @param v Passed to \code{.sbert_vec}.
-#' @return A list with \code{features}, \code{u}, \code{v}, \code{abs_diff}, \code{dim}, \code{note}.
+#' @return A list with \code{features}, \code{u}, \code{v}, \code{abs_diff}, \code{dim},
+#' \code{note}.
 #' @export
 classification_features <- function(u, v) {
   a <- .sbert_vec(u)
@@ -136,8 +146,10 @@ classification_features <- function(u, v) {
 #' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
-#' @param mode One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to \code{"cross-encoder"}.
-#' @return A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder}, \code{speedup}, \code{n}, \code{note}.
+#' @param mode One of \code{"bi-encoder"}, \code{"cross-encoder"}. Defaults to
+#' \code{"cross-encoder"}.
+#' @return A list with \code{forward_passes}, \code{cross_encoder}, \code{bi_encoder},
+#' \code{speedup}, \code{n}, \code{note}.
 #' @export
 pair_cost <- function(n, mode = "cross-encoder") {
   N <- as.integer(n)
@@ -183,7 +195,8 @@ rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
 #'
 #' @param pairs A vector; its length is taken and its elements indexed.
 #' @param embed Accepted by the signature and not used anywhere in the body.
-#' @return A list with \code{estimate}, \code{scores}, \code{embed_calls}, \code{n_pairs}, \code{cross_encoder_calls}, \code{method}.
+#' @return A list with \code{estimate}, \code{scores}, \code{embed_calls},
+#' \code{n_pairs}, \code{cross_encoder_calls}, \code{method}.
 #' @export
 sts_score <- function(pairs, embed) {
   cache <- new.env(hash = TRUE)
@@ -216,6 +229,9 @@ sts_score <- function(pairs, embed) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sbert_cheatsheet()
+#' res
 .sbert_cheatsheet <- function() {
   paste("sbert: BERT scores a PAIR, so comparing n sentences needs ",
         "C(n,2) forward passes -- 10k sentences is ~50M. A SIAMESE ",

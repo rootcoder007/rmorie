@@ -30,3 +30,8 @@ A list with the iterate, objective value and convergence trace.
 Minimise \code{f} over a convex set by gradient steps followed by projection.
 \code{morie_pgdsdg} is the module alias of \code{projected_gradient_descent}.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- morie_pgdsdg(x = x)
+res
+}

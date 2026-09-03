@@ -149,7 +149,8 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 
 #' .chemsc_B
 #'
-#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic}, \code{morie_chemsc_metal}.
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_hbond},
+#' \code{morie_chemsc_lipophilic}, \code{morie_chemsc_metal}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -170,7 +171,8 @@ morie_chemsc_smooth_block <- function(d, d_ideal, d_max, sigma) {
 
 #' .chemsc_par
 #'
-#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash}, \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module.
+#' A step of the chemsc_native implementation. Called by \code{morie_chemsc_clash},
+#' \code{morie_chemsc_hbond}, \code{morie_chemsc_lipophilic} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -420,6 +422,11 @@ morie_chemsc_score <- function(hbonds = list(), metals = numeric(0),
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .chemsc_dist(a = A, b = b)
+#' res
 .chemsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 # The angle at b, in degrees, formed by a-b-c.

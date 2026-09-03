@@ -13,13 +13,18 @@ NULL
 
 #' .s4_expit
 #'
-#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlphd_lasso_logit} and 23 others in the module.
+#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
+#' \code{.tmlphd_lasso_logit} and 23 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .s4_expit(z = y)
+#' res
 .s4_expit <- function(z) ifelse(z >= 0, 1 / (1 + exp(-z)), exp(z) / (1 + exp(z)))
 
 #' .s4_logit
@@ -31,11 +36,15 @@ NULL
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .s4_logit(p = 0.5)
+#' res
 .s4_logit <- function(p) log(p / (1 - p))
 
 #' .s4_clip
 #'
-#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle}, \code{.tmlmpi_cdf_bank} and 25 others in the module.
+#' A step of the s04core implementation. Called by \code{.s4_glmbin}, \code{.s4_tmle},
+#' \code{.tmlmpi_cdf_bank} and 25 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -55,6 +64,10 @@ NULL
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_median(x = x)
+#' res
 .s4_median <- function(x) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -76,6 +89,10 @@ NULL
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_quantile7(x = x, p = 0.5)
+#' res
 .s4_quantile7 <- function(x, p) {
   x <- sort(as.numeric(unlist(x)))
   n <- length(x)
@@ -101,6 +118,10 @@ NULL
 #' @param x Passed to \code{unlist}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_order(x = x)
+#' res
 .s4_order <- function(x) order(as.numeric(unlist(x)), seq_along(unlist(x))) - 1L
 
 #' .s4_rank_avg
@@ -112,6 +133,10 @@ NULL
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_rank_avg(x = x)
+#' res
 .s4_rank_avg <- function(x) as.numeric(rank(as.numeric(unlist(x)), ties.method = "average"))
 
 #' .s4_softmax
@@ -123,6 +148,10 @@ NULL
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_softmax(v = x)
+#' res
 .s4_softmax <- function(v) {
   e <- exp(v - max(v))
   e / sum(e)
@@ -130,7 +159,8 @@ NULL
 
 #' .s4_glmbin
 #'
-#' A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn}, \code{Medmsm} and 19 others in the module.
+#' A step of the s04core implementation. Called by \code{.s4_tmle}, \code{Hmstrn},
+#' \code{Medmsm} and 19 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -140,6 +170,11 @@ NULL
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .s4_glmbin(X = x, y = y)
+#' res
 .s4_glmbin <- function(X, y, iters = 25L, ridge = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -169,6 +204,11 @@ NULL
 #' @param ell Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .s4_rbf(X = x, Z = y)
+#' res
 .s4_rbf <- function(X, Z, ell = 1) {
   X <- as.matrix(X)
   Z <- as.matrix(Z)
@@ -215,6 +255,10 @@ NULL
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_colstd(X = x)
+#' res
 .s4_colstd <- function(X) {
   X <- as.matrix(X)
   n <- nrow(X)
@@ -238,6 +282,11 @@ NULL
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .s4_euclid(a = A, b = b)
+#' res
 .s4_euclid <- function(a, b) sqrt(sum((as.numeric(a) - as.numeric(b))^2))
 
 #' .s4_sgn
@@ -249,6 +298,10 @@ NULL
 #' @param v Passed to \code{>=}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_sgn(v = x)
+#' res
 .s4_sgn <- function(v) ifelse(v >= 0, 1, -1)
 
 ## Half-away-from-zero. Deliberately not round(): both languages round
@@ -260,6 +313,10 @@ NULL
 #' @param v Numeric; passed to \code{abs}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_rnd(v = x)
+#' res
 .s4_rnd <- function(v) .s4_sgn(v) * floor(abs(v) + 0.5)
 
 ## Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
@@ -274,6 +331,10 @@ NULL
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{Q}, \code{R}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .s4_qr_mgs(A = A)
+#' res
 .s4_qr_mgs <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -303,6 +364,10 @@ NULL
 #' @param x A vector; its length is taken.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_rank_first(x = x)
+#' res
 .s4_rank_first <- function(x) {
   x <- as.numeric(unlist(x))
   o <- order(x, seq_along(x))
@@ -342,7 +407,8 @@ NULL
 ## VanderWeele four-way decomposition from fitted coefficients.
 #' VanderWeele four-way decomposition from fitted coefficients
 #'
-#' A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4}, \code{Intvse} and 2 others in the module.
+#' A step of the s04core implementation. Called by \code{Causmnde}, \code{Intmd4},
+#' \code{Intvse} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -371,7 +437,8 @@ NULL
 ## One TMLE pass for a binary point treatment. W carries its intercept.
 #' One TMLE pass for a binary point treatment. W carries its intercept
 #'
-#' A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte}, \code{Tmlper} and 2 others in the module.
+#' A step of the s04core implementation. Called by \code{Tmlfed}, \code{Tmlnte},
+#' \code{Tmlper} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -379,8 +446,15 @@ NULL
 #' @param D Numeric; combined arithmetically in the body.
 #' @param W A matrix; passed to \code{\%*\%}.
 #' @param gbound Numeric; combined arithmetically in the body. Defaults to \code{0.025}.
-#' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1}, \code{Q0}, \code{ic}, \code{n}.
+#' @return A list with \code{psi}, \code{se}, \code{eps}, \code{g}, \code{H}, \code{Q1},
+#' \code{Q0}, \code{ic}, \code{n}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_tmle(y = y, D = g, W = x)
+#' res
 .s4_tmle <- function(y, D, W, gbound = 0.025) {
   y <- as.numeric(y)
   D <- as.numeric(D)
@@ -422,6 +496,11 @@ NULL
 #' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .s4_ols(X = x, y = y)
+#' res
 .s4_ols <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -584,6 +663,10 @@ NULL
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{k}, \code{sigma}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .s4_gpdfit(x = x)
+#' res
 .s4_gpdfit <- function(x) {
   N <- length(x)
   if (N < 5L) {

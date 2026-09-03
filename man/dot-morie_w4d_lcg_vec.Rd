@@ -21,3 +21,7 @@ A step of the geron_w4d_native implementation. Called by \code{morie_geron_senet
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_w4d_lcg_vec(n = 3L, seed = 1L)
+res
+}

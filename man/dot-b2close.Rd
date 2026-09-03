@@ -17,3 +17,7 @@ A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen}
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .b2close(p = 0.5)
+res
+}

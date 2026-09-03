@@ -23,3 +23,8 @@ least one over twice the cell count while still starting the chain
 where the data are, which is worth a great many sweeps of a
 single-site sampler.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .bnppvl_empirical_start(u = x, k = 3L)
+res
+}

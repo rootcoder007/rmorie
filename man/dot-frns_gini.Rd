@@ -15,3 +15,8 @@ A numeric value.
 \description{
 (2 n sum x). Returns 0 for all-zero or single-element input.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .frns_gini(x = x)
+res
+}

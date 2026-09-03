@@ -18,3 +18,8 @@ uniform density with itself, whose characteristic function is sinc^4.
 Compact support in tau is the point: it stops the integrand being
 evaluated where the denominator has died.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_hrz_smoothing_cf(u = x)
+res
+}

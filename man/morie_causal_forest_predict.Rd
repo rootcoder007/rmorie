@@ -7,7 +7,7 @@
 morie_causal_forest_predict(forest, newx)
 }
 \arguments{
-\item{forest}{The \code{forest} element of a \code{\link[=morie_causal_forest]{morie_causal_forest()}} fit.}
+\item{forest}{The \code{forest} element of a \code{morie_causal_forest()} fit.}
 
 \item{newx}{Covariate matrix with the same columns as the training X.}
 }

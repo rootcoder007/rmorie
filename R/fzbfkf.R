@@ -3,7 +3,9 @@
 #' Boundary-free kernel distribution function estimator (Eq. 5.5)
 #'
 #' Eq. (5.5):
-#' \deqn{\tilde F_X(x) = \frac{1}{n}\sum_i W\Big(\frac{g^{-1}(x) - g^{-1}(X_i)}{h}\Big),\quad x\in\Omega.}{Ftilde(x) = (1/n) sum_i W((g^-1(x) - g^-1(X_i))/h), x in Omega.}
+#' \deqn{\tilde F_X(x) = \frac{1}{n}\sum_i W\Big(\frac{g^{-1}(x) -
+#' g^{-1}(X_i)}{h}\Big),\quad x\in\Omega.}{Ftilde(x) = (1/n) sum_i W((g^-1(x) -
+#' g^-1(X_i))/h), x in Omega.}
 #'
 #' It looks like nothing more than substituting `g^-1` into the naive
 #' estimator, and that is what it is. The reason it WORKS is the

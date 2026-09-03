@@ -32,7 +32,8 @@ transported mass \code{sum(a')}, the partial-transport problem of
 Caffarelli and McCann (2010).
 }
 \examples{
-Otmarsh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), delta = c(1, 2, 3, 4, 5, 6, 7, 8))
+Otmarsh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8),
+  delta = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Caffarelli, L. A. and McCann, R. J. (2010). Annals of

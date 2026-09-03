@@ -23,13 +23,17 @@
 
 #' .le32
 #'
-#' A step of the secarg_native implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}.
+#' A step of the secarg_native implementation. Called by \code{morie_secarg_prehash},
+#' \code{morie_secarg_variable_hash}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{writeBin}.
 #' @export
+#' @examples
+#' res <- .le32(n = 3L)
+#' res
 .le32 <- function(n) {
   n <- as.integer(n)
   writeBin(n, raw(), size = 4L, endian = "little")
@@ -44,6 +48,9 @@
 #' @param n Passed to \code{bitwAnd}.
 #' @return The value of \code{writeBin}.
 #' @export
+#' @examples
+#' res <- .le64(n = 3L)
+#' res
 .le64 <- function(n) {
   n <- bitwAnd(n, .MASK64)
   writeBin(n, raw(), size = 8L, endian = "little")

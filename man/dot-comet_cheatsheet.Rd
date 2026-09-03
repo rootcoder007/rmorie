@@ -14,3 +14,7 @@ A step of the comet_native implementation. No other function in the package call
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .comet_cheatsheet()
+res
+}

@@ -19,6 +19,10 @@
 #' @param data A matrix; passed to \code{nrow}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .boot_n(data = x)
+#' res
 .boot_n <- function(data) if (is.null(dim(data))) length(data) else nrow(data)
 
 # boot:::ordinary.array -- single- or multi-stratum R x n index matrix.
@@ -115,7 +119,8 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #' source it follows.
 #'
 #' @param boot_obj A list; the body reads \code{$data}, \code{$strata} from it.
-#' @param t A vector; its length is taken and its elements indexed. Defaults to \code{boot_obj$t\[, 1L\]}.
+#' @param t A vector; its length is taken and its elements indexed. Defaults to
+#' \code{boot_obj$t\[, 1L\]}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_empinf_reg <- function(boot_obj, t = boot_obj$t[, 1L]) {
@@ -334,6 +339,10 @@ morie_boot_ci <- function(boot_obj, conf = 0.95,
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_make_ends(a = A, n = 3L)
+#' res
 .morie_make_ends <- function(a, n) {
   if (a[2L] == 0) {
     return(numeric())

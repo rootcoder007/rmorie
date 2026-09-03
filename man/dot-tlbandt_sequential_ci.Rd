@@ -19,3 +19,8 @@ A step of the tlbandt_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .tlbandt_sequential_ci(D = g)
+res
+}

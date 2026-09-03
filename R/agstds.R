@@ -11,7 +11,10 @@
 #' @param standard_pop See Usage.
 #' @param person_time See Usage.
 #' @return List with ``asr``, ``variance``, ``se``, ``ci_lower``, ``ci_upper``, ``weights``, ``k``.
-#' @references Boyle and Parkin (1991), Statistical methods for registries, in Jensen et al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications 95. Not held locally; the direct standardisation estimator and its Poisson variance are the standard published forms.
+#' @references Boyle and Parkin (1991), Statistical methods for registries, in Jensen et
+#' al (eds), Cancer Registration: Principles and Methods, IARC Scientific Publications
+#' 95. Not held locally; the direct standardisation estimator and its Poisson variance
+#' are the standard published forms.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -36,16 +36,21 @@
 
 #' .rmrl_key
 #'
-#' A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}.
+#' A step of the rmrl_native implementation. Called by \code{morie_rmrl},
+#' \code{morie_rmrl_qlearn_flat}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .rmrl_key()
+#' res
 .rmrl_key <- function(...) {
   paste(vapply(list(...), function(x) as.character(x), character(1)),
-        collapse="\r")
+    collapse = "\r"
+  )
 }
 
 #' .rmrl_compile
@@ -59,7 +64,7 @@
 #' @export
 .rmrl_compile <- function(phi) {
   if (is.null(phi) ||
-      (is.character(phi) && length(phi) == 1L && tolower(phi) == "true")) {
+    (is.character(phi) && length(phi) == 1L && tolower(phi) == "true")) {
     return(function(sigma) TRUE)
   }
   if (is.character(phi) && length(phi) == 1L) {
@@ -69,9 +74,11 @@
     pos <- as.character(unlist(phi[[1L]]))
     neg <- as.character(unlist(phi[[2L]]))
   } else {
-    stop(sprintf(paste0("reward_machine: formula must be 'true', a ",
-                        "proposition name, or list(positive, negative), ",
-                        "got %s"), paste(deparse(phi), collapse=" ")))
+    stop(sprintf(paste0(
+      "reward_machine: formula must be 'true', a ",
+      "proposition name, or list(positive, negative), ",
+      "got %s"
+    ), paste(deparse(phi), collapse = " ")))
   }
   function(sigma) {
     sg <- as.character(sigma)
@@ -88,17 +95,20 @@
 #'
 #' @param edges See Usage.
 #' @param u0 Coerced to character by the body, with \code{as.character}. Defaults to \code{0}.
-#' @param terminal Coerced to character by the body, with \code{as.character}. Defaults to \code{c()}.
+#' @param terminal Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{c()}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
-morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
+morie_rmrl_reward_machine <- function(edges, u0 = 0, terminal = c()) {
   # A simple reward machine <U, u0, delta_u, delta_r> (Defs 3.1-3.2).
   # Edges are list(u, formula, u_next, reward). formula is either the
   # string "true" or list(positive, negative) of proposition names.
   # Edges are tested in the order given and the first match wins; if
   # none matches, the machine stays in u and pays 0.
-  m <- list(u0=u0, terminal=as.character(terminal), edges=list(),
-            states=unique(c(as.character(u0), as.character(terminal))))
+  m <- list(
+    u0 = u0, terminal = as.character(terminal), edges = list(),
+    states = unique(c(as.character(u0), as.character(terminal)))
+  )
   for (e in edges) {
     if (length(e) != 4L) {
       stop("reward_machine: each edge must be (u, formula, u_next, reward)")
@@ -108,9 +118,13 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
     u2 <- e[[3L]]
     cc <- e[[4L]]
     ku <- as.character(u)
-    m$edges[[ku]] <- c(m$edges[[ku]],
-                       list(list(test=.rmrl_compile(phi), u2=u2,
-                                 c=as.numeric(cc))))
+    m$edges[[ku]] <- c(
+      m$edges[[ku]],
+      list(list(
+        test = .rmrl_compile(phi), u2 = u2,
+        c = as.numeric(cc)
+      ))
+    )
     m$states <- unique(c(m$states, ku, as.character(u2)))
   }
   class(m) <- "morie_reward_machine"
@@ -119,7 +133,8 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
 
 #' (delta_u(u, sigma), delta_r(u, delta_u(u, sigma)))
 #'
-#' A step of the rmrl_native implementation. Called by \code{morie_rmrl}, \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}.
+#' A step of the rmrl_native implementation. Called by \code{morie_rmrl},
+#' \code{morie_rmrl_qlearn_flat}, \code{morie_rmrl_reward_machine_run}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -131,14 +146,14 @@ morie_rmrl_reward_machine <- function(edges, u0=0, terminal=c()) {
 morie_rmrl_machine_step <- function(machine, u, sigma) {
   # (delta_u(u, sigma), delta_r(u, delta_u(u, sigma))).
   if (as.character(u) %in% machine$terminal) {
-    return(list(u=u, reward=0.0))
+    return(list(u = u, reward = 0.0))
   }
   for (edge in machine$edges[[as.character(u)]]) {
     if (edge$test(sigma)) {
-      return(list(u=edge$u2, reward=edge$c))
+      return(list(u = edge$u2, reward = edge$c))
     }
   }
-  list(u=u, reward=0.0)
+  list(u = u, reward = 0.0)
 }
 
 #' Drive a machine over a sequence of truth assignments. labels is
@@ -148,7 +163,8 @@ morie_rmrl_machine_step <- function(machine, u, sigma) {
 #'
 #' @param machine A list; the body reads \code{$terminal}, \code{$u0} from it.
 #' @param labels See Usage.
-#' @return A list with \code{estimate}, \code{states}, \code{rewards}, \code{total_reward}, \code{final_state}, \code{accepted}, \code{method}.
+#' @return A list with \code{estimate}, \code{states}, \code{rewards},
+#' \code{total_reward}, \code{final_state}, \code{accepted}, \code{method}.
 #' @export
 morie_rmrl_reward_machine_run <- function(machine, labels) {
   # Drive a machine over a sequence of truth assignments. labels is
@@ -164,13 +180,13 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
     rs <- c(rs, st$reward)
   }
   list(
-    estimate=us,
-    states=us,
-    rewards=rs,
-    total_reward=sum(rs),
-    final_state=u,
-    accepted=as.character(u) %in% machine$terminal,
-    method="reward machine run (Icarte et al. 2018 Def. 3.1)"
+    estimate = us,
+    states = us,
+    rewards = rs,
+    total_reward = sum(rs),
+    final_state = u,
+    accepted = as.character(u) %in% machine$terminal,
+    method = "reward machine run (Icarte et al. 2018 Def. 3.1)"
   )
 }
 
@@ -232,13 +248,16 @@ morie_rmrl_reward_machine_run <- function(machine, labels) {
 #' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @param dead_end A function; the body checks with \code{is.function}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param task_order Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{n_qfunctions}, \code{episodes}, \code{method}.
+#' @param task_order Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{returns},
+#' \code{mean_return_last}, \code{mean_return_first}, \code{n_qfunctions},
+#' \code{episodes}, \code{method}.
 #' @export
-morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
-                       alpha=0.5, epsilon=0.1, episodes=500, horizon=100,
-                       start=NULL, dead_end=NULL, seed=0,
-                       task_order=NULL) {
+morie_rmrl <- function(machines, states, actions, step, label, gamma = 0.9,
+                       alpha = 0.5, epsilon = 0.1, episodes = 500, horizon = 100,
+                       start = NULL, dead_end = NULL, seed = 0,
+                       task_order = NULL) {
   # Q-Learning for Reward Machines (Algorithm 1), tabular.
   # machines: one machine (from morie_rmrl_reward_machine) or a list
   # of them (the paper's multi-task setting). step(s, a) returns
@@ -291,8 +310,10 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
     for (u in mm$states) {
       tab <- list()
       for (s in S) {
-        tab[[as.character(s)]] <- stats::setNames(rep(0.0, length(A)),
-                                                  akeys)
+        tab[[as.character(s)]] <- stats::setNames(
+          rep(0.0, length(A)),
+          akeys
+        )
       }
       q[[.rmrl_key(i - 1L, u)]] <- tab
     }
@@ -308,8 +329,10 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
       if (isTRUE(de(s)) || as.character(u) %in% mm$terminal) {
         break
       }
-      a <- .rmrl_eps_greedy(q[[.rmrl_key(i - 1L, u)]][[as.character(s)]],
-                            A, epsilon, rng)
+      a <- .rmrl_eps_greedy(
+        q[[.rmrl_key(i - 1L, u)]][[as.character(s)]],
+        A, epsilon, rng
+      )
       out <- step(s, a)
       done <- FALSE
       if (is.list(out) && length(out) == 2L) {
@@ -355,21 +378,21 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
     tab <- q[[key]]
     for (s in S) {
       row <- tab[[as.character(s)]]
-      policy[[paste(key, as.character(s), sep="\r")]] <-
+      policy[[paste(key, as.character(s), sep = "\r")]] <-
         A[[which.max(row)]]
     }
   }
   tenth <- max(1L, episodes %/% 10L)
   list(
-    estimate=q,
-    q=q,
-    policy=policy,
-    returns=returns,
-    mean_return_last=sum(utils::tail(returns, tenth)) / tenth,
-    mean_return_first=sum(returns[seq_len(tenth)]) / tenth,
-    n_qfunctions=length(q),
-    episodes=episodes,
-    method="QRM (Icarte et al. 2018, Algorithm 1)"
+    estimate = q,
+    q = q,
+    policy = policy,
+    returns = returns,
+    mean_return_last = sum(utils::tail(returns, tenth)) / tenth,
+    mean_return_first = sum(returns[seq_len(tenth)]) / tenth,
+    n_qfunctions = length(q),
+    episodes = episodes,
+    method = "QRM (Icarte et al. 2018, Algorithm 1)"
   )
 }
 
@@ -392,12 +415,13 @@ morie_rmrl <- function(machines, states, actions, step, label, gamma=0.9,
 #' @param start Optional; may be \code{NULL}. A function; the body checks with \code{is.function}.
 #' @param dead_end A function; the body checks with \code{is.function}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{q}, \code{returns}, \code{mean_return_last}, \code{mean_return_first}, \code{method}.
+#' @return A list with \code{estimate}, \code{q}, \code{returns},
+#' \code{mean_return_last}, \code{mean_return_first}, \code{method}.
 #' @export
 morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
-                                   gamma=0.9, alpha=0.5, epsilon=0.1,
-                                   episodes=500, horizon=100, start=NULL,
-                                   dead_end=NULL, seed=0) {
+                                   gamma = 0.9, alpha = 0.5, epsilon = 0.1,
+                                   episodes = 500, horizon = 100, start = NULL,
+                                   dead_end = NULL, seed = 0) {
   # Tabular q-learning on the product state (s, u): the same
   # information as QRM but only the experienced (s, u) pair is
   # updated per step, with no counterfactual sweep. This is the
@@ -440,8 +464,10 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
       } else {
         s1 <- out
       }
-      st <- morie_rmrl_machine_step(machine, u,
-                                    as.character(unlist(label(s1))))
+      st <- morie_rmrl_machine_step(
+        machine, u,
+        as.character(unlist(label(s1)))
+      )
       u1 <- st$u
       r <- st$reward
       if (isTRUE(de(s1)) || as.character(u1) %in% machine$terminal) {
@@ -463,12 +489,12 @@ morie_rmrl_qlearn_flat <- function(machine, states, actions, step, label,
   }
   tenth <- max(1L, episodes %/% 10L)
   list(
-    estimate=q,
-    q=q,
-    returns=returns,
-    mean_return_last=sum(utils::tail(returns, tenth)) / tenth,
-    mean_return_first=sum(returns[seq_len(tenth)]) / tenth,
-    method="tabular q-learning on (s, u)"
+    estimate = q,
+    q = q,
+    returns = returns,
+    mean_return_last = sum(utils::tail(returns, tenth)) / tenth,
+    mean_return_first = sum(returns[seq_len(tenth)]) / tenth,
+    method = "tabular q-learning on (s, u)"
   )
 }
 

@@ -71,4 +71,3 @@ spkcrs <- function(points1, points2, lambda1 = NULL, lambda2 = NULL,
   }
   res
 }
-

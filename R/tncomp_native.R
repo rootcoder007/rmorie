@@ -50,6 +50,10 @@ OBJECTIVES <- c("maxmin", "maxsum")
 #' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tncomp_fingerprint(x = x)
+#' res
 .tncomp_fingerprint <- function(x) {
   if (is.character(x)) {
     chars <- strsplit(x, "")[[1]]
@@ -136,7 +140,8 @@ distance_matrix <- function(fps) {
 
 #' .tncomp_select
 #'
-#' A step of the tncomp_native implementation. Called by \code{maxmin_selection}, \code{maxsum_selection}, \code{morie_tncomp}.
+#' A step of the tncomp_native implementation. Called by \code{maxmin_selection},
+#' \code{maxsum_selection}, \code{morie_tncomp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -214,7 +219,8 @@ maxsum_selection <- function(fps, k, seed = NULL) {
 #' @param fps Passed to \code{distance_matrix}.
 #' @param subset Coerced to integer by the body, with \code{as.integer}.
 #' @param D Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance}, \code{n_pairs}.
+#' @return A list with \code{min_distance}, \code{mean_distance}, \code{max_distance},
+#' \code{n_pairs}.
 #' @export
 diversity <- function(fps, subset, D = NULL) {
   M <- if (is.null(D)) distance_matrix(fps) else D

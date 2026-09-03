@@ -21,5 +21,6 @@ A list with \code{grad_w}, \code{grad_b}, \code{estimate}, \code{n}, \code{metho
 }
 \keyword{internal}
 \examples{
-morie_burkov_bce_gradients(y_hat = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_burkov_bce_gradients(y_hat = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  x = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

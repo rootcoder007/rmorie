@@ -20,14 +20,16 @@ A list with \code{final_output}, \code{steps}, \code{estimate}, \code{n}, \code{
 }
 \keyword{internal}
 \examples{
-img <- matrix(0:15, 4, 4, byrow = TRUE)
-v <- morie_alammar_vit_patch_embedding(img, 2, diag(4))
-y <- c(0, 0, 0, 1, 1, 1)
-morie_alammar_chain_prompting("3", list(function(y, x) paste("double", 
-    x), function(y, x) paste("add one to", y)), function(p) {
-    v <- as.integer(sub(".* ", "", p))
-    if (grepl("double", p)) 
-        as.character(v * 2)
-    else as.character(v + 1)
-})
+if (morie_crypto_sodium_available()) {
+  img <- matrix(0:15, 4, 4, byrow = TRUE)
+  v <- morie_alammar_vit_patch_embedding(img, 2, diag(4))
+  y <- c(0, 0, 0, 1, 1, 1)
+  morie_alammar_chain_prompting("3", list(function(y, x) paste("double", 
+      x), function(y, x) paste("add one to", y)), function(p) {
+      v <- as.integer(sub(".* ", "", p))
+      if (grepl("double", p)) 
+          as.character(v * 2)
+      else as.character(v + 1)
+  })
+}
 }

@@ -59,13 +59,18 @@
 
 #' .ncfRS_sig
 #'
-#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf}, \code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
+#' A step of the ncfRS_native implementation. Called by \code{morie_ncfRS_fit_gmf},
+#' \code{morie_ncfRS_gmf}, \code{morie_ncfRS_neumf}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ncfRS_sig(x = x)
+#' res
 .ncfRS_sig <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -191,7 +196,8 @@ morie_ncfRS_log_loss <- function(y, y_hat) {
 #' @param n_neg Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param learn_h A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h}, \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
+#' @return A list with \code{estimate}, \code{P}, \code{Q}, \code{h},
+#' \code{loss_history}, \code{final_loss}, \code{k}, \code{learned_h}, \code{method}.
 #' @export
 morie_ncfRS_fit_gmf <- function(pos, n_users, n_items, k_dim = 8, alpha = 0.05,
                                 iters = 2000, n_neg = 4, seed = 0, learn_h = TRUE) {
@@ -320,22 +326,3 @@ morie_ncfRS_ncf <- morie_ncfRS_fit_gmf
 
 # main entry point
 morie_ncfRS <- morie_ncfRS_fit_gmf
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

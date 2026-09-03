@@ -16,3 +16,7 @@ The value of \code{stats::qnorm}.
 Part of the median_frames_dose_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+res <- .morie_z(p = 0.5)
+res
+}

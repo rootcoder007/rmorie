@@ -91,13 +91,18 @@
 
 #' .saigeg_sigmoid
 #'
-#' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null}, \code{.saigeg_logit_irls}.
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_fit_null},
+#' \code{.saigeg_logit_irls}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .saigeg_sigmoid(x = x)
+#' res
 .saigeg_sigmoid <- function(x) {
   x <- as.numeric(x)
   out <- numeric(length(x))
@@ -110,13 +115,18 @@
 
 #' .saigeg_pnorm
 #'
-#' A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue}, \code{.saigeg_saddlepoint_pvalue}.
+#' A step of the saigeg_native implementation. Called by \code{.saigeg_normal_pvalue},
+#' \code{.saigeg_saddlepoint_pvalue}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .saigeg_pnorm(x = x)
+#' res
 .saigeg_pnorm <- function(x) {
   pnorm(x)
 }
@@ -130,10 +140,16 @@
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .saigeg_variance(x = x)
+#' res
 .saigeg_variance <- function(x) {
   x <- as.numeric(x)
   n <- length(x)
-  if (n < 2) return(NA_real_)
+  if (n < 2) {
+    return(NA_real_)
+  }
   m <- mean(x)
   sum((x - m)^2) / (n - 1)
 }
@@ -148,16 +164,20 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .saigeg_design(X = b, n = 3L)
+#' res
 .saigeg_design <- function(X, n) {
   if (is.null(X)) {
-    return(matrix(1, nrow=n, ncol=1))
+    return(matrix(1, nrow = n, ncol = 1))
   }
   if (is.list(X)) {
     if (length(X) == 0) {
-      return(matrix(1, nrow=n, ncol=1))
+      return(matrix(1, nrow = n, ncol = 1))
     }
     if (all(lengths(X) == 0)) {
-      return(matrix(1, nrow=n, ncol=1))
+      return(matrix(1, nrow = n, ncol = 1))
     }
     Xmat <- do.call(rbind, X)
     if (nrow(Xmat) != n) {
@@ -170,7 +190,7 @@
       stop(sprintf("saigeg: design rows %d != n %d", nrow(X), n))
     }
     if (ncol(X) == 0) {
-      return(matrix(1, nrow=n, ncol=1))
+      return(matrix(1, nrow = n, ncol = 1))
     }
     return(cbind(1, X))
   }
@@ -191,7 +211,7 @@
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
-.saigeg_logit_irls <- function(D, y, ridge=1e-8) {
+.saigeg_logit_irls <- function(D, y, ridge = 1e-8) {
   n <- nrow(D)
   p <- ncol(D)
   beta <- rep(0, p)
@@ -225,12 +245,17 @@
 #' @param ridge Passed to \code{.saigeg_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{mu}, \code{beta}.
 #' @export
-.saigeg_fit_null <- function(y, X, ridge=1e-8) {
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .saigeg_fit_null(y = y, X = x)
+#' res
+.saigeg_fit_null <- function(y, X, ridge = 1e-8) {
   D <- .saigeg_design(X, length(y))
-  beta <- .saigeg_logit_irls(D, y, ridge=ridge)
+  beta <- .saigeg_logit_irls(D, y, ridge = ridge)
   eta <- as.numeric(D %*% beta)
   mu <- .saigeg_sigmoid(eta)
-  list(mu=mu, beta=beta)
+  list(mu = mu, beta = beta)
 }
 
 #' .saigeg_score_statistic
@@ -250,8 +275,10 @@
   mv <- as.numeric(mu)
   n <- length(yv)
   if (!(length(gv) == n && length(mv) == n)) {
-    stop(sprintf("saigeg: y, G and mu must agree in length (%d, %d, %d)",
-                 n, length(gv), length(mv)))
+    stop(sprintf(
+      "saigeg: y, G and mu must agree in length (%d, %d, %d)",
+      n, length(gv), length(mv)
+    ))
   }
   if (any(mv <= 0 | mv >= 1)) {
     stop("saigeg: fitted means must lie strictly in (0, 1)")
@@ -261,12 +288,13 @@
   if (v <= .saigeg_EPS) {
     stop("saigeg: the score has zero variance -- the variant is monomorphic or every fitted mean is degenerate")
   }
-  list(score=s, variance=v, n=n)
+  list(score = s, variance = v, n = n)
 }
 
 #' .saigeg_cgf
 #'
-#' A step of the saigeg_native implementation. Called by \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
+#' A step of the saigeg_native implementation. Called by
+#' \code{.saigeg_saddlepoint_pvalue}, \code{.saigeg_solve_saddle}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -276,7 +304,7 @@
 #' @param order The body requires: saigeg: order must be 0, 1 or 2. Defaults to \code{0}.
 #' @return One of two values, depending on the branch taken.
 #' @export
-.saigeg_cgf <- function(t, G, mu, order=0) {
+.saigeg_cgf <- function(t, G, mu, order = 0) {
   gv <- as.numeric(G)
   mv <- as.numeric(mu)
   t_val <- as.numeric(t)
@@ -313,7 +341,7 @@
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @return A numeric value.
 #' @export
-.saigeg_solve_saddle <- function(s, G, mu, lo=-50, hi=50, tol=1e-11, iters=200) {
+.saigeg_solve_saddle <- function(s, G, mu, lo = -50, hi = 50, tol = 1e-11, iters = 200) {
   fl <- .saigeg_cgf(lo, G, mu, 1) - s
   fh <- .saigeg_cgf(hi, G, mu, 1) - s
   if (fl > 0 || fh < 0) {
@@ -344,9 +372,10 @@
 #' @param G Passed to \code{.saigeg_cgf}.
 #' @param mu Passed to \code{.saigeg_cgf}.
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K}, \code{K2}, \code{method}.
+#' @return A list with \code{p_value}, \code{t_hat}, \code{w}, \code{v}, \code{K},
+#' \code{K2}, \code{method}.
 #' @export
-.saigeg_saddlepoint_pvalue <- function(s, G, mu, two_sided=TRUE) {
+.saigeg_saddlepoint_pvalue <- function(s, G, mu, two_sided = TRUE) {
   sv <- as.numeric(s)
   var0 <- .saigeg_cgf(0, G, mu, 2)
   if (var0 <= .saigeg_EPS) {
@@ -355,9 +384,9 @@
   if (abs(sv) < 1e-6 * sqrt(var0)) {
     p <- 2 * (1 - .saigeg_pnorm(abs(sv) / sqrt(var0)))
     return(list(
-      p_value=min(1, p),
-      method="normal (at the mean, where the saddlepoint is unstable and the two agree)",
-      t_hat=0
+      p_value = min(1, p),
+      method = "normal (at the mean, where the saddlepoint is unstable and the two agree)",
+      t_hat = 0
     ))
   }
   that <- .saigeg_solve_saddle(sv, G, mu)
@@ -373,18 +402,18 @@
     p1 <- 1 - .saigeg_pnorm(abs(sv) / sqrt(var0))
   } else {
     phi <- exp(-0.5 * w * w) / sqrt(2 * pi)
-    p1 <- 1 - .saigeg_pnorm(w) + phi * (1/v - 1/w)
+    p1 <- 1 - .saigeg_pnorm(w) + phi * (1 / v - 1 / w)
   }
   p1 <- min(max(p1, 0), 1)
   p <- if (two_sided) 2 * min(p1, 1 - p1) else p1
   list(
-    p_value=min(1, max(p, 0)),
-    t_hat=that,
-    w=w,
-    v=v,
-    K=kt,
-    K2=k2,
-    method="saddlepoint (Lugannani-Rice), all cumulants"
+    p_value = min(1, max(p, 0)),
+    t_hat = that,
+    w = w,
+    v = v,
+    K = kt,
+    K2 = k2,
+    method = "saddlepoint (Lugannani-Rice), all cumulants"
   )
 }
 
@@ -399,7 +428,7 @@
 #' @param two_sided A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{p_value}, \code{z}, \code{method}.
 #' @export
-.saigeg_normal_pvalue <- function(s, variance, two_sided=TRUE) {
+.saigeg_normal_pvalue <- function(s, variance, two_sided = TRUE) {
   if (as.numeric(variance) <= 0) {
     stop("saigeg: the variance must be positive")
   }
@@ -410,9 +439,9 @@
     1 - .saigeg_pnorm(z)
   }
   list(
-    p_value=min(1, max(p, 0)),
-    z=z,
-    method="normal approximation, first two moments"
+    p_value = min(1, max(p, 0)),
+    z = z,
+    method = "normal approximation, first two moments"
   )
 }
 
@@ -438,10 +467,10 @@
     stop("saigeg: the naive scores have zero variance")
   }
   list(
-    ratio=va / vb,
-    var_full=va,
-    var_naive=vb,
-    n_variants=length(a)
+    ratio = va / vb,
+    var_full = va,
+    var_naive = vb,
+    n_variants = length(a)
   )
 }
 
@@ -453,6 +482,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .saigeg_cheatsheet()
+#' res
 .saigeg_cheatsheet <- function() {
   "saigeg: SAIGE. Score S = sum G_i (Y_i - mu_i) from a logistic mixed model. Under 1:100 case-control imbalance S is right-skewed and the GAUSSIAN tail is far too thin, so p-values come out much too small. The saddlepoint approximation uses the whole CGF -- all cumulants -- via Lugannani-Rice, and stays calibrated in the tail. The variance ratio is estimated once and reused so the cost is not O(MN^2)."
 }
@@ -471,19 +503,26 @@
 #' @param mu Optional; may be \code{NULL}. Passed to \code{.saigeg_score_statistic}.
 #' @param ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param two_sided Passed to \code{.saigeg_normal_pvalue}. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{p_value}, \code{p_normal}, \code{score}, \code{variance}, \code{z}, \code{case_control_ratio}, \code{n_cases}, \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method}, \code{why}.
+#' @return A list with \code{estimate}, \code{p_value}, \code{p_normal}, \code{score},
+#' \code{variance}, \code{z}, \code{case_control_ratio}, \code{n_cases},
+#' \code{n_controls}, \code{variance_ratio}, \code{saddlepoint}, \code{method},
+#' \code{why}.
 #' @export
-morie_saigeg <- function(y, G, X=NULL, mu=NULL, ratio=1.0, two_sided=TRUE) {
+morie_saigeg <- function(y, G, X = NULL, mu = NULL, ratio = 1.0, two_sided = TRUE) {
   yv <- as.numeric(y)
   bad <- which(yv != 0 & yv != 1)
   if (length(bad) > 0) {
-    stop(sprintf("saigeg: the phenotype must be 0/1, got %g at index %d",
-                 yv[bad[1]], bad[1]))
+    stop(sprintf(
+      "saigeg: the phenotype must be 0/1, got %g at index %d",
+      yv[bad[1]], bad[1]
+    ))
   }
   n_case <- as.integer(sum(yv))
   if (n_case == 0 || n_case == length(yv)) {
-    stop(sprintf("saigeg: the phenotype has only one class (%d cases of %d)",
-                 n_case, length(yv)))
+    stop(sprintf(
+      "saigeg: the phenotype has only one class (%d cases of %d)",
+      n_case, length(yv)
+    ))
   }
   if (is.null(mu)) {
     null_fit <- .saigeg_fit_null(yv, X)
@@ -491,21 +530,21 @@ morie_saigeg <- function(y, G, X=NULL, mu=NULL, ratio=1.0, two_sided=TRUE) {
   }
   st <- .saigeg_score_statistic(yv, G, mu)
   var <- st$variance * as.numeric(ratio)
-  nrm <- .saigeg_normal_pvalue(st$score, var, two_sided=two_sided)
-  spa <- .saigeg_saddlepoint_pvalue(st$score, G, mu, two_sided=two_sided)
+  nrm <- .saigeg_normal_pvalue(st$score, var, two_sided = two_sided)
+  spa <- .saigeg_saddlepoint_pvalue(st$score, G, mu, two_sided = two_sided)
   list(
-    estimate=spa$p_value,
-    p_value=spa$p_value,
-    p_normal=nrm$p_value,
-    score=st$score,
-    variance=var,
-    z=nrm$z,
-    case_control_ratio=n_case / (length(yv) - n_case),
-    n_cases=n_case,
-    n_controls=length(yv) - n_case,
-    variance_ratio=as.numeric(ratio),
-    saddlepoint=spa,
-    method="logistic mixed-model score test with saddlepoint calibration; Zhou et al. (2018)",
-    why="the Gaussian approximation keeps two moments and is anti-conservative under case-control imbalance; the saddlepoint keeps all of them"
+    estimate = spa$p_value,
+    p_value = spa$p_value,
+    p_normal = nrm$p_value,
+    score = st$score,
+    variance = var,
+    z = nrm$z,
+    case_control_ratio = n_case / (length(yv) - n_case),
+    n_cases = n_case,
+    n_controls = length(yv) - n_case,
+    variance_ratio = as.numeric(ratio),
+    saddlepoint = spa,
+    method = "logistic mixed-model score test with saddlepoint calibration; Zhou et al. (2018)",
+    why = "the Gaussian approximation keeps two moments and is anti-conservative under case-control imbalance; the saddlepoint keeps all of them"
   )
 }

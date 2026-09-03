@@ -21,5 +21,6 @@ A list with \code{xi} and \code{info} (marginal_density,   standardized_mu, trea
 }
 \keyword{internal}
 \examples{
-pseudo_outcome(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+pseudo_outcome(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

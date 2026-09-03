@@ -21,7 +21,7 @@ spgwr(x, y, coords, bandwidth = NULL, kernel = "gaussian")
 The result of \code{gwreg()}.
 }
 \description{
-Same estimator as \code{\link[=gwreg]{gwreg()}}; this delegates rather than carrying a
+Same estimator as \code{gwreg()}; this delegates rather than carrying a
 second implementation. The model is fitted locally in the spatial
 sense while allowing general covariates -- the weights determine how
 far each observation influences the coefficients estimated at a given

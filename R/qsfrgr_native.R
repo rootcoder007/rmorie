@@ -106,7 +106,8 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 
 #' .qsfrgr_events_in
 #'
-#' A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_best_split}, \code{.qsfrgr_grow}.
+#' A step of the qsfrgr_native implementation. Called by \code{.qsfrgr_best_split},
+#' \code{.qsfrgr_grow}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -221,7 +222,8 @@ morie_qsfrgr_logrank <- function(time, event, left, right) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r}, \code{$rows}, \code{$thr} from it.
+#' @param node A list; the body reads \code{$f}, \code{$l}, \code{$leaf}, \code{$r},
+#' \code{$rows}, \code{$thr} from it.
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export

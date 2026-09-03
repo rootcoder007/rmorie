@@ -21,5 +21,6 @@ A logical value.
 }
 \keyword{internal}
 \examples{
-no_u_turn(theta_minus = c(1, 2, 3, 4, 5, 6, 7, 8), theta_plus = c(1, 2, 3, 4, 5, 6, 7, 8), r_minus = c(1, 2, 3, 4, 5, 6, 7, 8), r_plus = c(1, 2, 3, 4, 5, 6, 7, 8))
+no_u_turn(theta_minus = c(1, 2, 3, 4, 5, 6, 7, 8), theta_plus = c(1, 2, 3, 4, 5, 6, 7, 8),
+  r_minus = c(1, 2, 3, 4, 5, 6, 7, 8), r_plus = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

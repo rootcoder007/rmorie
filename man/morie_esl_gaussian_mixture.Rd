@@ -13,14 +13,14 @@ morie_esl_gaussian_mixture(X, k = 2, newdata = NULL, ...)
 
 \item{newdata}{Points at which to evaluate; defaults to \code{X}.}
 
-\item{...}{Passed to \code{\link[=morie_esl_em_gmm]{morie_esl_em_gmm()}}.}
+\item{...}{Passed to \code{morie_esl_em_gmm()}.}
 }
 \value{
 List with \code{density}, \code{log_density}, \code{pi}, \code{mu}, \code{sigma}, \code{loglik},
 \code{aic}, \code{bic}.
 }
 \description{
-Fits a mixture with \code{\link[=morie_esl_em_gmm]{morie_esl_em_gmm()}} and evaluates the resulting
+Fits a mixture with \code{morie_esl_em_gmm()} and evaluates the resulting
 density. ESL Sec 6.8 presents the mixture as a density estimate -- a
 smoother with a data-driven bandwidth -- rather than as a clustering
 device, and the density is the object that view needs.

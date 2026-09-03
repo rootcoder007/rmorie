@@ -23,5 +23,6 @@ A list with \code{sse}, \code{penalty}, \code{lambda}, \code{objective}, \code{f
 }
 \keyword{internal}
 \examples{
-rmorie:::Pensse(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5)
+rmorie:::Pensse(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5,
+  lam = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5)
 }

@@ -19,4 +19,8 @@ Thin QR by modified Gram-Schmidt. R diagonal is non-negative by
 for # the two arms to disagree about (LAPACK and LINPACK differ
 here).
 }
-
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .s4_qr_mgs(A = A)
+res
+}

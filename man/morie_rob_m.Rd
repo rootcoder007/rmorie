@@ -28,7 +28,7 @@ default \code{c = 1.345}) or \code{"bisquare"} (redescending, default
 every observation a non-zero vote; a redescending psi zeroes gross
 outliers but its objective is non-convex, so IRLS from least
 squares finds a LOCAL solution -- for high-breakdown behaviour use
-\code{\link[=morie_rob_mm]{morie_rob_mm()}}, and the output says so.
+\code{morie_rob_mm()}, and the output says so.
 }
 \examples{
 x <- stats::rnorm(50)

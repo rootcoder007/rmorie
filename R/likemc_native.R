@@ -106,7 +106,10 @@
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.15}.
 #' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{beta_mean}, \code{gamma_mean}, \code{chain}, \code{n_draws}, \code{n_iter}, \code{acceptance_rate}, \code{R0_mean}, \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed}, \code{step}, \code{method}.
+#' @return A list with \code{estimate}, \code{beta_mean}, \code{gamma_mean},
+#' \code{chain}, \code{n_draws}, \code{n_iter}, \code{acceptance_rate}, \code{R0_mean},
+#' \code{R0_q025}, \code{R0_median}, \code{R0_q975}, \code{logpost_final}, \code{seed},
+#' \code{step}, \code{method}.
 #' @export
 morie_likemc <- function(model, data, priors, n_iter, seed = 1,
                          step = 0.15, burn = 0) {

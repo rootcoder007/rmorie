@@ -4,7 +4,8 @@
 #'
 #' R parity for \code{morie.fn.drpfw.dropout_forward}.
 #'
-#' \deqn{y = x \odot m / (1-p), \quad m \sim \mathrm{Bernoulli}(1-p)}{y = x odot m / (1-p), m ~ Bernoulli(1-p)}
+#' \deqn{y = x \odot m / (1-p), \quad m \sim \mathrm{Bernoulli}(1-p)}{y = x odot m /
+#' (1-p), m ~ Bernoulli(1-p)}
 #'
 #' @param x Numeric array.
 #' @param p Drop probability in \code{\[0, 1)}.

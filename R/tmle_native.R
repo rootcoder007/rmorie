@@ -6,23 +6,32 @@
 
 #' .morie_tmle_logit
 #'
-#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}.
+#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate},
+#' \code{morie_tmle_time_varying}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_tmle_logit(p = 0.5)
+#' res
 .morie_tmle_logit <- function(p) log(p / (1 - p))
 #' .morie_tmle_expit
 #'
-#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate}, \code{morie_tmle_time_varying}.
+#' A step of the tmle_native implementation. Called by \code{morie_tmle_ate},
+#' \code{morie_tmle_time_varying}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{pmax}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_tmle_expit(x = x)
+#' res
 .morie_tmle_expit <- function(x) 1 / (1 + exp(-pmin(pmax(x, -35), 35)))
 
 # OLS fitted on `fit_rows` only, predicted for everyone.
@@ -332,7 +341,7 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
   }
   f1 <- pmin(pmax(cummax(f1), 0), 1)
   f0 <- pmin(pmax(cummax(f0), 0), 1)
-  invert <- function(F) grid[min(which(F >= q)[1], k, na.rm = TRUE)]
+  invert <- function(F) grid[min(which(FALSE >= q)[1], k, na.rm = TRUE)]
   q1 <- invert(f1)
   q0 <- invert(f0)
   list(qte = q1 - q0, q1 = q1, q0 = q0, quantile = q, grid = grid,
@@ -360,7 +369,8 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
 #'   International Journal of Biostatistics} 8(1), Article 3.
 #' @export
 #' @examples
-#' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1,
+#' 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tmle_mediation <- function(y, treatment, mediator, covariates = NULL,
                                  trunc = 0.01) {
   y <- as.numeric(y)

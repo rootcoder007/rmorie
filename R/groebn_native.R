@@ -59,7 +59,8 @@
 
 #' .groebn_fr_add
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_add},
+#' \code{.groebn_mul}, \code{.groebn_poly}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -67,6 +68,10 @@
 #' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .groebn_fr_add(p = A, q = A)
+#' res
 .groebn_fr_add <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] + q[1L] * p[2L], p[2L] * q[2L])
 }
@@ -81,6 +86,10 @@
 #' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .groebn_fr_sub(p = A, q = A)
+#' res
 .groebn_fr_sub <- function(p, q) {
   .groebn_fr(p[1L] * q[2L] - q[1L] * p[2L], p[2L] * q[2L])
 }
@@ -94,6 +103,9 @@
 #' @param p A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' res <- .groebn_fr_neg(p = 0.5)
+#' res
 .groebn_fr_neg <- function(p) c(-p[1L], p[2L])
 
 #' .groebn_fr_mul
@@ -106,13 +118,18 @@
 #' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .groebn_fr_mul(p = A, q = A)
+#' res
 .groebn_fr_mul <- function(p, q) {
   .groebn_fr(p[1L] * q[1L], p[2L] * q[2L])
 }
 
 #' .groebn_fr_div
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}, \code{.groebn_spoly}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide},
+#' \code{.groebn_reduce_basis}, \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -120,6 +137,10 @@
 #' @param q A vector; indexed elementwise.
 #' @return The value of \code{.groebn_fr}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .groebn_fr_div(p = A, q = A)
+#' res
 .groebn_fr_div <- function(p, q) {
   if (q[1L] == 0L) stop("groebn: division by zero rational")
   .groebn_fr(p[1L] * q[2L], p[2L] * q[1L])
@@ -127,13 +148,17 @@
 
 #' .groebn_fr_is_zero
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
+#' A step of the groebn_native implementation. Called by \code{.groebn_add},
+#' \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
+#' @examples
+#' res <- .groebn_fr_is_zero(p = 0.5)
+#' res
 .groebn_fr_is_zero <- function(p) p[1L] == 0L
 
 #' .groebn_fr_eq
@@ -146,6 +171,9 @@
 #' @param q A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
+#' @examples
+#' res <- .groebn_fr_eq(p = 0.5, q = 0.5)
+#' res
 .groebn_fr_eq <- function(p, q) p[1L] == q[1L] && p[2L] == q[2L]
 
 #' .groebn_as_fr
@@ -184,7 +212,8 @@
 
 #' .groebn_key
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_monomials}, \code{.groebn_reduce_basis}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
+#' \code{.groebn_monomials}, \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -221,13 +250,18 @@
 
 #' .groebn_format_key
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide},
+#' \code{.groebn_mul}, \code{.groebn_poly} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param e Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .groebn_format_key(e = x)
+#' res
 .groebn_format_key <- function(e) {
   paste(as.integer(e), collapse = "_")
 }
@@ -240,7 +274,8 @@
 #' Polynomial constructor
 #'
 #' @param terms A vector; its length is taken and its elements indexed.
-#' @param nvars Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param nvars Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 .groebn_poly <- function(terms, nvars = NULL) {
@@ -360,7 +395,7 @@
 #' @return A numeric value.
 #' @export
 .groebn_nvars <- function(F) {
-  for (f in F) {
+  for (f in FALSE) {
     if (length(f) > 0L) {
       nms <- names(f)
       if (length(nms) > 0L)
@@ -393,7 +428,8 @@
 
 #' .groebn_leading_monomial
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_divide}, \code{.groebn_leading_coeff} and 3 others in the module.
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
+#' \code{.groebn_divide}, \code{.groebn_leading_coeff} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -417,6 +453,10 @@
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{[[}.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' res <- .groebn_leading_coeff(f = fn)
+#' res
 .groebn_leading_coeff <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(.groebn_fr(0L))
@@ -433,6 +473,10 @@
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' res <- .groebn_leading_term(f = fn)
+#' res
 .groebn_leading_term <- function(f, order = "lex") {
   lm <- .groebn_leading_monomial(f, order)
   if (is.null(lm)) return(list())
@@ -452,6 +496,11 @@
 #' @param g A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .groebn_add(f = fn, g = g)
+#' res
 .groebn_add <- function(f, g) {
   out <- f
   for (k in names(g)) {
@@ -469,7 +518,8 @@
 
 #' .groebn_sub
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide},
+#' \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -477,6 +527,11 @@
 #' @param g Iterated over elementwise, with \code{lapply}.
 #' @return The value of \code{.groebn_add}.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .groebn_sub(f = fn, g = g)
+#' res
 .groebn_sub <- function(f, g) {
   neg_g <- lapply(g, .groebn_fr_neg)
   .groebn_add(f, neg_g)
@@ -484,7 +539,8 @@
 
 #' .groebn_mul
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_spoly}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide},
+#' \code{.groebn_spoly}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -492,6 +548,11 @@
 #' @param g A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .groebn_mul(f = fn, g = g)
+#' res
 .groebn_mul <- function(f, g) {
   if (length(f) == 0L || length(g) == 0L) return(list())
   out <- list()
@@ -535,7 +596,8 @@
 
 #' .groebn_divides
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_divide}, \code{.groebn_reduce_basis}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_divide},
+#' \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -543,6 +605,11 @@
 #' @param b Passed to \code{<=}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .groebn_divides(a = A, b = b)
+#' res
 .groebn_divides <- function(a, b) {
   all(a <= b)
 }
@@ -557,6 +624,11 @@
 #' @param b Passed to \code{pmax}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .groebn_lcm(a = A, b = b)
+#' res
 .groebn_lcm <- function(a, b) {
   pmax(a, b)
 }
@@ -638,7 +710,8 @@
 
 #' .groebn_normal_form
 #'
-#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger}, \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}.
+#' A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
+#' \code{.groebn_ideal_member}, \code{.groebn_reduce_basis}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -662,11 +735,13 @@
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
 #' @param prune A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param reduced A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{basis}, \code{order}, \code{size}, \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned}, \code{method}.
+#' @return A list with \code{estimate}, \code{basis}, \code{order}, \code{size},
+#' \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned},
+#' \code{method}.
 #' @export
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
   .groebn_key(order)  # validate
-  G <- lapply(F, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
+  G <- lapply(FALSE, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
   G <- Filter(Negate(is.null), G)
   if (length(G) == 0L)
     stop("groebn: no non-zero generators given")
@@ -795,11 +870,12 @@
 #' @param F Passed to \code{.groebn_buchberger}.
 #' @param order Passed to \code{.groebn_buchberger}. Defaults to \code{"lex"}.
 #' @param basis Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \code{basis}, \code{method}.
+#' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order},
+#' \code{basis}, \code{method}.
 #' @export
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {
   G <- if (!is.null(basis)) basis
-       else .groebn_buchberger(F, order)$basis
+       else .groebn_buchberger(FALSE, order)$basis
   r <- .groebn_normal_form(f, G, order)
   list(
     estimate = length(r) == 0L,

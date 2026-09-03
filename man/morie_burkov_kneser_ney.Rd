@@ -20,5 +20,6 @@ A list with \code{estimate}, \code{discounted_mle}, \code{lambda}, \code{p_conti
 }
 \keyword{internal}
 \examples{
-morie_burkov_kneser_ney(counts_ngram = 5L, counts_prefix = 5L, continuation_counts = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_burkov_kneser_ney(counts_ngram = 5L, counts_prefix = 5L,
+  continuation_counts = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

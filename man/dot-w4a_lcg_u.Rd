@@ -19,3 +19,7 @@ A step of the geron_w4a_native implementation. Called by \code{morie_geron_datal
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .w4a_lcg_u(n = 3L, seed = 1L)
+res
+}

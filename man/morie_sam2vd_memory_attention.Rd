@@ -47,5 +47,7 @@ Kirillov, A. et al. (2023) "Segment Anything", ICCV 2023,
 }
 \keyword{internal}
 \examples{
-morie_sam2vd_memory_attention(frame_features = c(1, 2, 3, 4, 5, 6, 7, 8), bank = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), current_frame = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_sam2vd_memory_attention(frame_features = c(1, 2, 3, 4, 5, 6, 7, 8),
+  bank = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  current_frame = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

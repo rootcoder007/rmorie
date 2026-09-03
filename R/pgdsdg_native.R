@@ -59,6 +59,10 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pgdsdg_norm(v = x)
+#' res
 .pgdsdg_norm <- function(v) {
   sqrt(sum(v * v))
 }
@@ -70,8 +74,10 @@ STEP_RULES <- c("fixed", "backtracking", "fista")
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param lower Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param lower Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @return The value of \code{pmin}.
 #' @export
 project_box <- function(x, lower = NULL, upper = NULL) {
@@ -123,7 +129,8 @@ project_nonneg <- function(x) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param radius Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param centre Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param centre Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 project_ball <- function(x, radius = 1.0, centre = NULL) {
@@ -155,6 +162,10 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' @param total Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pgdsdg_project_simplex(x = x)
+#' res
 .pgdsdg_project_simplex <- function(x, total = 1.0) {
   s <- as.numeric(total)
   if (s <= 0) {
@@ -194,7 +205,9 @@ project_ball <- function(x, radius = 1.0, centre = NULL) {
 #' @param rule One of \code{"fista"}, \code{"fixed"}. Defaults to \code{"backtracking"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations}, \code{history}, \code{step}, \code{rule}, \code{n_backtracks}, \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
+#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{iterations},
+#' \code{history}, \code{step}, \code{rule}, \code{n_backtracks},
+#' \code{fixed_point_residual}, \code{converged}, \code{monotone}, \code{method}.
 #' @export
 projected_gradient <- function(f, grad, x0, project, step = NULL,
                                 rule = "backtracking", max_iter = 2000,
@@ -299,20 +312,3 @@ morie_pgdsdg <- projected_gradient_descent <- function(f, grad, x0, project, ...
 #' @rdname project_box
 #' @export
 morie_pgdsdg <- project_box
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

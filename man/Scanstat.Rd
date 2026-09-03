@@ -26,7 +26,8 @@ on the log scale and restricted by default to windows whose internal
 risk exceeds the overall risk.
 }
 \examples{
-Scanstat(O = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), zones = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+Scanstat(O = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8),
+  zones = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 }
 \references{
 Bivand, Pebesma and Gomez-Rubio (2013), Equation (10.3),

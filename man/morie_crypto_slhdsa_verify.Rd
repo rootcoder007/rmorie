@@ -20,12 +20,14 @@ TRUE if the signature verifies.
 SLH-DSA-SHA2-128s verification
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
-  if (!inherits(kp, "try-error")) {
-    sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
-    print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
-    print(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+    if (!inherits(kp, "try-error")) {
+      sig <- morie_crypto_slhdsa_sign(kp$sk, "post-quantum")
+      print(morie_crypto_slhdsa_verify(kp$pk, "post-quantum", sig))
+      print(morie_crypto_slhdsa_verify(kp$pk, "tampered", sig))
+    }
   }
 }
 }

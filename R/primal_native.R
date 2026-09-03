@@ -212,6 +212,9 @@ morie_tv_denoise_1d <- function(signal, lam = 1.0, max_iter = 1000,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .primal_morie_cheatsheet()
+#' res
 .primal_morie_cheatsheet <- function() {
   return(paste("primal: Chambolle-Pock, y = prox_{s F*}(y + s K xbar),",
                "x = prox_{t G}(x - t K* y), xbar = x + theta (x - x_prev);",

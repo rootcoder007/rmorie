@@ -210,7 +210,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 # Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package.
 #' Pure base-R SHA-256 (FIPS 180-4). Slow but exact, no package
 #'
-#' A step of the sechsh_native implementation. Called by \code{.kdf_hmac}, \code{.sech_hmac}, \code{morie_sechsh_chain_entry} and 2 others in the module.
+#' A step of the sechsh_native implementation. Called by \code{.kdf_hmac},
+#' \code{.sech_hmac}, \code{morie_sechsh_chain_entry} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -324,7 +325,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 #' .sech_hexlify
 #'
-#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain}, \code{morie_sechsh_verify_inclusion}.
+#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_build_chain},
+#' \code{morie_sechsh_verify_inclusion}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -337,7 +339,8 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 
 #' .sech_cteq
 #'
-#' A step of the sechsh_native implementation. Called by \code{morie_sechsh_verify_chain}, \code{morie_sechsh_verify_inclusion}.
+#' A step of the sechsh_native implementation. Called by
+#' \code{morie_sechsh_verify_chain}, \code{morie_sechsh_verify_inclusion}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -345,6 +348,11 @@ morie_sechsh_verify_inclusion <- function(leaf, index, size, path, root) {
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .sech_cteq(a = A, b = b)
+#' res
 .sech_cteq <- function(a, b) {
   a <- as.raw(a)
   b <- as.raw(b)

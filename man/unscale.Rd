@@ -20,5 +20,6 @@ The value on the original scale.
 }
 \keyword{internal}
 \examples{
-unscale(value = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+unscale(value = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8),
+  upper = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

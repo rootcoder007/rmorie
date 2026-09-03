@@ -12,3 +12,7 @@ Character string summarising the method.
 \description{
 One-line cheatsheet
 }
+\examples{
+res <- .barerp_cheatsheet()
+res
+}

@@ -17,7 +17,8 @@
 #' Private: frozen random target net x -> tanh(W1 x + b1) W2, W fixed at
 #' init
 #'
-#' A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_new}, \code{morie_rndnet}.
+#' A step of the rndnet_native implementation. Called by \code{.rndnet_predictor_new},
+#' \code{morie_rndnet}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -28,7 +29,7 @@
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
-.rndnet_random_features_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
+.rndnet_random_features_new <- function(n_in, n_hidden, n_out, rng, scale = 1.0) {
   s1 <- scale / sqrt(max(1, n_in))
   s2 <- scale / sqrt(max(1, n_hidden))
 
@@ -40,13 +41,13 @@
   # W1 : n_in x n_hidden, filled row-by-row to match the Python iteration
   # (outer j, inner i) so the random-number stream is consumed identically.
   u <- .ghc_unif(rng, n_in * n_hidden)
-  e$W1 <- matrix(u * 2.0 - 1.0, nrow=n_in, ncol=n_hidden, byrow=TRUE) * s1
+  e$W1 <- matrix(u * 2.0 - 1.0, nrow = n_in, ncol = n_hidden, byrow = TRUE) * s1
 
   u <- .ghc_unif(rng, n_hidden)
   e$b1 <- (u * 2.0 - 1.0) * s1
 
   u <- .ghc_unif(rng, n_hidden * n_out)
-  e$W2 <- matrix(u * 2.0 - 1.0, nrow=n_hidden, ncol=n_out, byrow=TRUE) * s2
+  e$W2 <- matrix(u * 2.0 - 1.0, nrow = n_hidden, ncol = n_out, byrow = TRUE) * s2
 
   e$hidden <- function(x) {
     h <- e$b1
@@ -89,14 +90,14 @@
 #' @param scale Passed to \code{.rndnet_random_features_new}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
-.rndnet_predictor_new <- function(n_in, n_hidden, n_out, rng, scale=1.0) {
+.rndnet_predictor_new <- function(n_in, n_hidden, n_out, rng, scale = 1.0) {
   e <- new.env()
   e$n_in <- n_in
   e$n_hidden <- n_hidden
   e$n_out <- n_out
 
   e$feat <- .rndnet_random_features_new(n_in, n_hidden, n_out, rng, scale)
-  e$W <- matrix(0.0, nrow=n_hidden, ncol=n_out)
+  e$W <- matrix(0.0, nrow = n_hidden, ncol = n_out)
 
   e$call <- function(x) {
     h <- e$feat$hidden(x)
@@ -108,7 +109,7 @@
         out[o] <- out[o] + e$W[i, o] * hi
       }
     }
-    list(output=out, features=h)
+    list(output = out, features = h)
   }
 
   e$update <- function(h, err, lr) {
@@ -134,6 +135,9 @@
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .rndnet_running_stats_new(n = 3L)
+#' res
 .rndnet_running_stats_new <- function(n) {
   e <- new.env()
   e$n <- 0
@@ -149,7 +153,7 @@
     }
   }
 
-  e$std <- function(eps=1e-8) {
+  e$std <- function(eps = 1e-8) {
     if (e$n < 2) {
       return(rep(1.0, length(e$mean)))
     }
@@ -178,12 +182,14 @@
 #' @param target Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param predictor Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param update A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error}, \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n}, \code{target}, \code{predictor}, \code{method}.
+#' @return A list with \code{estimate}, \code{intrinsic_reward}, \code{raw_error},
+#' \code{returns}, \code{mse}, \code{mean_first}, \code{mean_last}, \code{n},
+#' \code{target}, \code{predictor}, \code{method}.
 #' @export
-morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
-                         normalize_obs=TRUE, normalize_reward=TRUE,
-                         init_steps=0, gamma_int=0.99, seed=0,
-                         target=NULL, predictor=NULL, update=TRUE) {
+morie_rndnet <- function(observations, n_hidden = 64, n_out = 8, lr = 0.05, clip = 5.0,
+                         normalize_obs = TRUE, normalize_reward = TRUE,
+                         init_steps = 0, gamma_int = 0.99, seed = 0,
+                         target = NULL, predictor = NULL, update = TRUE) {
   # Coerce observations to a (T, d) numeric matrix, accepting the common
   # R idioms (matrix, data.frame, list-of-vectors, numeric vector).
   if (is.matrix(observations)) {
@@ -202,7 +208,7 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
     }
     X <- do.call(rbind, lapply(observations, as.numeric))
   } else if (is.numeric(observations)) {
-    X <- matrix(as.numeric(observations), nrow=1L)
+    X <- matrix(as.numeric(observations), nrow = 1L)
   } else {
     stop("rndnet: observations must be a matrix, data.frame, list, or numeric vector")
   }
@@ -233,7 +239,7 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
 
   obs_stats <- .rndnet_running_stats_new(d)
   for (t in seq_len(init_steps)) {
-    obs_stats$update(X[t, , drop=FALSE])
+    obs_stats$update(X[t, , drop = FALSE])
   }
 
   ret_stats <- .rndnet_running_stats_new(1L)
@@ -243,7 +249,7 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
   returns <- numeric(0L)
 
   for (t in (init_steps + 1L):nrow(X)) {
-    x <- X[t, , drop=FALSE]
+    x <- X[t, , drop = FALSE]
 
     if (normalize_obs) {
       obs_stats$update(x)
@@ -266,10 +272,10 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
       pr <- prd(z)
     }
     fh <- pr$output
-    h  <- pr$features
+    h <- pr$features
 
     err <- fh - ft
-    e2  <- sum(err * err)
+    e2 <- sum(err * err)
     raw <- c(raw, e2)
     running_return <- gamma_int * running_return + e2
     returns <- c(returns, running_return)
@@ -287,17 +293,17 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
   n <- length(rewards)
   tenth <- max(1L, n %/% 10L)
   list(
-    estimate=rewards,
-    intrinsic_reward=rewards,
-    raw_error=raw,
-    returns=returns,
-    mse=sum(raw) / n,
-    mean_first=sum(rewards[1L:tenth]) / tenth,
-    mean_last=sum(rewards[(n - tenth + 1L):n]) / tenth,
-    n=n,
-    target=tgt,
-    predictor=prd,
-    method="RND (Burda et al. 2019)"
+    estimate = rewards,
+    intrinsic_reward = rewards,
+    raw_error = raw,
+    returns = returns,
+    mse = sum(raw) / n,
+    mean_first = sum(rewards[1L:tenth]) / tenth,
+    mean_last = sum(rewards[(n - tenth + 1L):n]) / tenth,
+    n = n,
+    target = tgt,
+    predictor = prd,
+    method = "RND (Burda et al. 2019)"
   )
 }
 
@@ -314,11 +320,12 @@ morie_rndnet <- function(observations, n_hidden=64, n_out=8, lr=0.05, clip=5.0,
 #' @param gamma_ext Numeric; combined arithmetically in the body. Defaults to \code{0.999}.
 #' @param gamma_int Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param done Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.
-#' @return A list with \code{estimate}, \code{return_ext}, \code{return_int}, \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
+#' @return A list with \code{estimate}, \code{return_ext}, \code{return_int},
+#' \code{return_total}, \code{gamma_ext}, \code{gamma_int}, \code{method}.
 #' @export
 morie_rndnet_combine_returns <- function(reward_ext, reward_int,
-                                         gamma_ext=0.999, gamma_int=0.99,
-                                         done=NULL) {
+                                         gamma_ext = 0.999, gamma_int = 0.99,
+                                         done = NULL) {
   re <- as.numeric(reward_ext)
   ri <- as.numeric(reward_int)
   if (length(re) != length(ri)) {
@@ -346,13 +353,13 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
     return_int[t] <- acc_i
   }
   list(
-    estimate=return_ext + return_int,
-    return_ext=return_ext,
-    return_int=return_int,
-    return_total=return_ext + return_int,
-    gamma_ext=gamma_ext,
-    gamma_int=gamma_int,
-    method="RND two value heads (Burda et al. 2019 sec. 2.3)"
+    estimate = return_ext + return_int,
+    return_ext = return_ext,
+    return_int = return_int,
+    return_total = return_ext + return_int,
+    gamma_ext = gamma_ext,
+    gamma_int = gamma_int,
+    method = "RND two value heads (Burda et al. 2019 sec. 2.3)"
   )
 }
 
@@ -365,13 +372,18 @@ morie_rndnet_combine_returns <- function(reward_ext, reward_int,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .rndnet_cheatsheet()
+#' res
 .rndnet_cheatsheet <- function() {
-  paste("rndnet: RND bonus r^i = ||fhat(x) - f(x)||^2 with f a",
-        "FROZEN random net (Burda 2019). Random deterministic",
-        "target kills the noisy-TV problem. Obs whitened and",
-        "clipped to +-5, r^i divided by the running std of",
-        "intrinsic RETURNS (sec 2.4). combine_returns is V = V_E +",
-        "V_I with the intrinsic stream non-episodic (sec 2.3).")
+  paste(
+    "rndnet: RND bonus r^i = ||fhat(x) - f(x)||^2 with f a",
+    "FROZEN random net (Burda 2019). Random deterministic",
+    "target kills the noisy-TV problem. Obs whitened and",
+    "clipped to +-5, r^i divided by the running std of",
+    "intrinsic RETURNS (sec 2.4). combine_returns is V = V_E +",
+    "V_I with the intrinsic stream non-episodic (sec 2.3)."
+  )
 }
 
 # Compact alias mirroring `random_network_distillation = rndnet`.

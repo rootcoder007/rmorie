@@ -20,3 +20,7 @@ The value of \code{idx}, as built in the body.
 downward from n-1 and consuming one uniform per step, so the Python
 mirror reproduces it exactly.
 }
+\examples{
+res <- .morie_k05_permutation(n = 3L)
+res
+}

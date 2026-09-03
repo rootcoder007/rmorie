@@ -146,7 +146,8 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 
 #' Fetch a Chicago Open Data Socrata dataset by ID
 #' @rdname morie_datasets_nyc_socrata_by_id
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+#' data is unavailable offline).
 #' @examples
 #' \donttest{
 #' # Chicago crimes dataset (SODA id verified live 2026-07)

@@ -13,7 +13,8 @@
 
 #' .sschin_cholsolve
 #'
-#' A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow}, \code{.sschin_ols}.
+#' A step of the sschin_native implementation. Called by \code{.sschin_cox_breslow},
+#' \code{.sschin_ols}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -21,6 +22,11 @@
 #' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .sschin_cholsolve(A = A, b = b)
+#' res
 .sschin_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -38,6 +44,12 @@
 #' @param ridge_rel Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{sigma}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .sschin_ols(X = X, y = y)
+#' res
 .sschin_ols <- function(X, y, ridge_rel = 1e-8) {
   n <- nrow(X)
   p <- ncol(X)
@@ -160,7 +172,14 @@
 #' @param mi_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param ties Compared against \code{"breslow"}. Defaults to \code{"breslow"}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std_error}, \code{total_variance}, \code{within_variance}, \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile}, \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info}, \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se}, \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles}, \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio},
+#' \code{std_error}, \code{total_variance}, \code{within_variance},
+#' \code{between_variance}, \code{ci_lower}, \code{ci_upper}, \code{t_quantile},
+#' \code{df}, \code{relative_increase_variance}, \code{fraction_missing_info},
+#' \code{per_imputation}, \code{complete_case_coefficients}, \code{complete_case_se},
+#' \code{n_complete_cases}, \code{n}, \code{p}, \code{m}, \code{cycles},
+#' \code{n_missing}, \code{columns_imputed}, \code{n_events}, \code{df_complete},
+#' \code{method}, \code{note}.
 #' @export
 morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
                                             cycles = 10L, ties = "breslow") {
@@ -326,6 +345,9 @@ morie_sschin_chained_imputation <- function(time, event, X, mi_iter = 5L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sschin_cheatsheet()
+#' res
 .sschin_cheatsheet <- function() {
   paste0("sschin: morie_sschin_chained_imputation(time, event, X, mi_iter) ",
          "-> MICE imputation, per-imputation Cox fits and Rubin-pooled ",

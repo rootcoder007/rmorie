@@ -20,6 +20,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .deseq2_erf(x = x)
+#' res
 .deseq2_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .deseq2_erfc
 #'
@@ -30,6 +34,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .deseq2_erfc(x = x)
+#' res
 .deseq2_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .ghc_DESEQ2_EPS <- 1e-12
@@ -59,13 +67,18 @@
 
 #' .ghc_deseq2_median
 #'
-#' A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad}, \code{dispersion_trend}.
+#' A step of the deseq2_native implementation. Called by \code{.ghc_deseq2_mad},
+#' \code{dispersion_trend}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ghc_deseq2_median(v = x)
+#' res
 .ghc_deseq2_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -82,6 +95,10 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ghc_deseq2_mad(v = x)
+#' res
 .ghc_deseq2_mad <- function(v) {
   m <- .ghc_deseq2_median(v)
   .ghc_deseq2_median(abs(v - m)) / 0.6744897501960817
@@ -369,6 +386,9 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @param p Numeric vector of raw p-values.
 #' @return Numeric vector of adjusted p-values.
 #' @export
+#' @examples
+#' res <- .deseq2_benjamini_hochberg(p = 0.5)
+#' res
 .deseq2_benjamini_hochberg <- function(p) {
   n <- length(p)
   order_idx <- order(p)
@@ -392,6 +412,10 @@ dispersion_trend <- function(mu_bar, disp, max_iter = 10L, tol = 1e-6) {
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ghc_deseq2_norm_cdf(z = y)
+#' res
 .ghc_deseq2_norm_cdf <- function(z) 0.5 * (1 + .deseq2_erf(z / sqrt(2)))
 
 #' .ghc_deseq2_norm_ppf
@@ -590,6 +614,9 @@ deseq2 <- function(counts, design, contrast = NULL, size = NULL,
 #'
 #' @return The cheat sheet text, invisibly.
 #' @export
+#' @examples
+#' res <- .deseq2_cheatsheet()
+#' res
 .deseq2_cheatsheet <- function() {
   paste("deseq2: RNA-seq differential expression (Love, Huber & Anders",
         "2014). NB GLM with log link, Var = mu + alpha mu^2. Size",

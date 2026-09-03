@@ -18,6 +18,10 @@
 #' @param w Numeric; passed to \code{sum}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .smd_moments(x = x, w = x)
+#' res
 .smd_moments <- function(x, w) {
   sw <- sum(w)
   m <- sum(w * x) / sw

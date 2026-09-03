@@ -114,6 +114,9 @@ Rfkrn <- function(X, D = 256L, kernel = "rbf", gamma = 0.5) {
 #' @param k Passed to \code{<}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .rfkprimes(k = 3L)
+#' res
 .rfkprimes <- function(k) {
   out <- integer(0)
   c <- 2L

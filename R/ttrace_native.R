@@ -135,7 +135,8 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #' @param dispersion Passed to \code{negbinom_offspring}. Defaults to \code{0.16}.
 #' @param n_initial Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @param trace_prob Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
-#' @param delay_mean Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3.83}.
+#' @param delay_mean Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{3.83}.
 #' @param delay_sd Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2.4}.
 #' @param si_mean Passed to \code{serial_interval_draw}. Defaults to \code{4.7}.
 #' @param si_sd Passed to \code{serial_interval_draw}. Defaults to \code{2.9}.
@@ -144,7 +145,8 @@ serial_interval_draw <- function(mean, sd, e, allow_presymptomatic = TRUE) {
 #' @param max_weeks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param allow_presymptomatic Passed to \code{serial_interval_draw}. Defaults to \code{TRUE}.
-#' @return A list with \code{controlled}, \code{total_cases}, \code{weekly}, \code{hit_cap}, \code{extinct}.
+#' @return A list with \code{controlled}, \code{total_cases}, \code{weekly},
+#' \code{hit_cap}, \code{extinct}.
 #' @export
 simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
                               n_initial = 20, trace_prob = 0.8,
@@ -233,7 +235,9 @@ simulate_outbreak <- function(R0 = 2.5, dispersion = 0.16,
 #' @param reps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{200}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param ... Passed through.
-#' @return A list with \code{estimate}, \code{probability_of_control}, \code{se}, \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks}, \code{definition}, \code{method}.
+#' @return A list with \code{estimate}, \code{probability_of_control}, \code{se},
+#' \code{reps}, \code{median_size}, \code{max_size}, \code{max_cases}, \code{max_weeks},
+#' \code{definition}, \code{method}.
 #' @export
 probability_of_control <- function(reps = 200, seed = 0, ...) {
   ok <- 0L
@@ -277,7 +281,8 @@ probability_of_control <- function(reps = 200, seed = 0, ...) {
 #' @param subclinical Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param draws Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20000}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation}, \code{controlled_in_expectation}, \code{note}.
+#' @return A list with \code{R_eff}, \code{R0}, \code{fraction_before_isolation},
+#' \code{controlled_in_expectation}, \code{note}.
 #' @export
 effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
                                           delay_sd, trace_prob,
@@ -314,6 +319,9 @@ effective_reproduction_number <- function(R0, si_mean, si_sd, delay_mean,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ttrace_cheatsheet()
+#' res
 .ttrace_cheatsheet <- function() {
   paste0("ttrace: branching process. Offspring ~ NegBinom(mean R0, ",
          "dispersion k), variance R0(1 + R0/k) -- overdispersion ",

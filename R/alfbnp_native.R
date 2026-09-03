@@ -15,7 +15,8 @@
 
 #' .alfbnp_atoms
 #'
-#' A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list}, \code{morie_alfbnp_af3_sample}.
+#' A step of the alfbnp_native implementation. Called by \code{.alfbnp_clean_list},
+#' \code{morie_alfbnp_af3_sample}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -73,6 +74,11 @@
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .alfbnp_centre(X = X)
+#' res
 .alfbnp_centre <- function(X) {
   cen <- colSums(X) / nrow(X)
   for (a in 1:3) X[, a] <- X[, a] - cen[a]
@@ -152,7 +158,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param n_atoms Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_atoms Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param denoiser Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param clean Optional; may be \code{NULL}. Passed to \code{.alfbnp_clean_list}.
 #' @param steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
@@ -162,13 +169,17 @@
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{7}.
 #' @param gamma_0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @param gamma_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param noise_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.003}.
+#' @param noise_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{1.003}.
 #' @param step_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
-#' @param noise Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
 #' @param x_init Optional; may be \code{NULL}. Passed to \code{.alfbnp_atoms}.
 #' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace}, \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference}, \code{n_atoms}, \code{route}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coords}, \code{sigmas}, \code{trace},
+#' \code{denoiser_coefs}, \code{sigma_data}, \code{steps}, \code{rmsd_to_reference},
+#' \code{n_atoms}, \code{route}, \code{method}, \code{note}.
 #' @export
 morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
                                     clean = NULL, steps = 20L,
@@ -355,6 +366,9 @@ morie_alfbnp_af3_sample <- function(n_atoms = NULL, denoiser = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .alfbnp_cheatsheet()
+#' res
 .alfbnp_cheatsheet <- function() {
   paste0(
     "alfbnp: morie_alfbnp_af3_sample(n_atoms, denoiser=) or (clean=) ",

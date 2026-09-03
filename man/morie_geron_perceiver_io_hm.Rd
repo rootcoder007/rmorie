@@ -19,5 +19,6 @@ A list with \code{outputs}, \code{decoder_attention}, \code{latents}, \code{enco
 }
 \keyword{internal}
 \examples{
-morie_geron_perceiver_io_hm(x = c(1, 2, 3, 4, 5, 6, 7, 8), latents = c(1, 2, 3, 4, 5, 6, 7, 8), queries = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_perceiver_io_hm(x = c(1, 2, 3, 4, 5, 6, 7, 8), latents = c(1, 2, 3, 4, 5, 6, 7, 8),
+  queries = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

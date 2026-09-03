@@ -7,7 +7,9 @@
 
 #' @param energy See Usage.
 #' @return List with ``ebfmi`` (per chain), ``min_ebfmi``, ``n_chains``, ``n``.
-#' @references Betancourt (2016), Diagnosing Suboptimal Cotangent Disintegrations in Hamiltonian Monte Carlo, arXiv:1604.00695. Verified against the paper: the estimator is the displayed equation for BFMI-hat.
+#' @references Betancourt (2016), Diagnosing Suboptimal Cotangent Disintegrations in
+#' Hamiltonian Monte Carlo, arXiv:1604.00695. Verified against the paper: the estimator
+#' is the displayed equation for BFMI-hat.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

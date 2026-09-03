@@ -21,3 +21,7 @@ location log(L) + 0.874367040387922 and scale pi/2; the combined
 p-value is the Landau upper tail at t. The Landau density has no
 closed form; integrate its standard integral representation.
 }
+\examples{
+res <- .morie_hmp(p = 0.5)
+res
+}

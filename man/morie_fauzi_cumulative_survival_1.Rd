@@ -25,7 +25,7 @@ mirror_note, n, method.
 built so that \code{d/dt} of the cumulative survival is exactly minus
 the survival estimator -- the structural identity of the
 population quantities is preserved by the estimators.
-\code{\link[=morie_fauzi_cumulative_survival_2]{morie_fauzi_cumulative_survival_2()}} is the mirror construction
+\code{morie_fauzi_cumulative_survival_2()} is the mirror construction
 and does not preserve it; the two differ in bias coefficient
 (\code{b_2} here, \code{b_3} there) and share the same covariance.
 }

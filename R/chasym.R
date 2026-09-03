@@ -11,6 +11,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @examples
+#' res <- .msm_lcg(seed = 1L)
+#' res
 .msm_lcg <- function(seed) {
   st <- as.numeric(seed) %% 2147483647
   if (st == 0) st <- 1

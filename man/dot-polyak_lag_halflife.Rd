@@ -17,3 +17,7 @@ A step of the polyak_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .polyak_lag_halflife(tau = 0.5)
+res
+}

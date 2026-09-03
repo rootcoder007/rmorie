@@ -20,5 +20,6 @@ A list with \code{alpha}, \code{prediction}, \code{order}, \code{uses_previous_w
 }
 \keyword{internal}
 \examples{
-RlsApriori(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), w_prev = c(1, 2, 3, 4, 5, 6, 7, 8))
+RlsApriori(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8),
+  w_prev = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

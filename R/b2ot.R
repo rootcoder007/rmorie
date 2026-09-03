@@ -22,13 +22,18 @@
 
 #' .b2mat
 #'
-#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}, \code{Gppost} and 13 others in the module.
+#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup},
+#' \code{Gppost} and 13 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param a A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .b2mat(a = A)
+#' res
 .b2mat <- function(a) {
   m <- if (is.matrix(a)) a else do.call(rbind, lapply(a, as.numeric))
   storage.mode(m) <- "double"
@@ -38,13 +43,17 @@
 
 #' .b2close
 #'
-#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen}, \code{Otsinktol}.
+#' A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Otfreeen},
+#' \code{Otsinktol}.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param p Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .b2close(p = 0.5)
+#' res
 .b2close <- function(p) {
   p <- as.numeric(p)
   if (any(p < 0)) stop("probabilities must be non-negative", call. = FALSE)
@@ -207,7 +216,8 @@ Otsinkh <- function(a, b, C, epsilon, max_iter = 200L) {
 #' @references Cuturi (2013), Sec. 4.1.
 #' @export
 #' @examples
-#' Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L, tol = 0.5)
+#' Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon
+#' = 5L, tol = 0.5)
 Otsinkit <- function(a, b, C, epsilon, tol, max_iter = 200L) {
   tol <- as.numeric(tol)
   if (!(tol > 0)) stop("tol must be positive", call. = FALSE)
@@ -482,7 +492,8 @@ Otlogpot <- function(u, v, epsilon) {
 #' @references Peyre & Cuturi (2019), eq. (2.8).
 #' @export
 #' @examples
-#' Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8), T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' T_inv_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 Otpushfw <- function(mu_grid, T_jac, T_inv_grid) {
   mu <- as.numeric(mu_grid)
   jac <- as.numeric(T_jac)

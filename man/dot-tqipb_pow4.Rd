@@ -16,3 +16,7 @@ The value of \code{p}, as built in the body.
 integer exponent is repeated squaring while Python\'s \verb{**} calls libm
 pow(); the module does not rely on the two agreeing.
 }
+\examples{
+res <- .tqipb_pow4(b = 3L)
+res
+}

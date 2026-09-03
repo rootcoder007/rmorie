@@ -12,13 +12,19 @@
 
 #' .gentmt_vec
 #'
-#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_treatment_density} and 1 others in the module.
+#' A step of the gentmt_native implementation. Called by
+#' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+#' \code{.gentmt_treatment_density} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gentmt_vec(x = x)
+#' res
 .gentmt_vec <- function(x) {
   as.numeric(x)
 }
@@ -31,8 +37,14 @@
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y A matrix; passed to \code{crossprod}.
-#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted},
+#' \code{residuals}, \code{sigma2}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .gentmt_ols_core(X = x, y = y)
+#' res
 .gentmt_ols_core <- function(X, y) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -51,15 +63,23 @@
 
 #' .gentmt_wls
 #'
-#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{morie_gentmt}.
+#' A step of the gentmt_native implementation. Called by
+#' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+#' \code{morie_gentmt}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param w Numeric; passed to \code{sqrt}.
-#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted}, \code{residuals}, \code{sigma2}.
+#' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{fitted},
+#' \code{residuals}, \code{sigma2}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .gentmt_wls(X = x, y = y, w = x)
+#' res
 .gentmt_wls <- function(X, y, w) {
   n <- nrow(X)
   X_full <- cbind(1, X)
@@ -82,13 +102,16 @@
 
 #' .gentmt_treatment_density
 #'
-#' A step of the gentmt_native implementation. Called by \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify}, \code{.gentmt_ip_weights}.
+#' A step of the gentmt_native implementation. Called by
+#' \code{.gentmt_dose_response_curve}, \code{.gentmt_gps_subclassify},
+#' \code{.gentmt_ip_weights}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H A matrix; passed to \code{as.matrix}.
-#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"normal"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to
+#' \code{"normal"}.
 #' @return A list with \code{dens}, \code{info}.
 #' @export
 .gentmt_treatment_density <- function(A, H, kind = "normal") {
@@ -210,7 +233,9 @@
 #' @param H Passed to \code{.gentmt_treatment_density}.
 #' @param n_strata Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{se}, \code{stratum_slopes}, \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n}, \code{degree}.
+#' @return A list with \code{estimate}, \code{se}, \code{stratum_slopes},
+#' \code{stratum_sizes}, \code{stratum_se}, \code{gps_mean}, \code{n_strata}, \code{n},
+#' \code{degree}.
 #' @export
 .gentmt_gps_subclassify <- function(y, A, H, n_strata = 5, degree = 1) {
   yv <- .gentmt_vec(y)
@@ -275,9 +300,11 @@
 #' @param y Passed to \code{.gentmt_vec}.
 #' @param A Passed to \code{.gentmt_vec}.
 #' @param H Passed to \code{.gentmt_treatment_density}.
-#' @param doses Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param doses Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve}, \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
+#' @return A list with \code{estimate}, \code{se}, \code{doses}, \code{curve},
+#' \code{slopes}, \code{coef}, \code{gps}, \code{n}, \code{degree}.
 #' @export
 .gentmt_dose_response_curve <- function(y, A, H, doses = NULL, degree = 1) {
   yv <- .gentmt_vec(y)
@@ -430,6 +457,9 @@ morie_gentmt <- function(y, A, H, method = "weight", degree = 1,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .gentmt_cheatsheet()
+#' res
 .gentmt_cheatsheet <- function() {
   paste0("gentmt: continuous-dose MSM. weight = SW = f(A)/f(A|L) ",
          "(Robins-Hernan-Brumback 2000, default); subclassify = GPS ",

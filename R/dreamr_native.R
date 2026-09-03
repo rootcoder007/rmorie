@@ -77,7 +77,8 @@
 
 #' .dreamr_vec
 #'
-#' A step of the dreamr_native implementation. Called by \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
+#' A step of the dreamr_native implementation. Called by
+#' \code{morie_dreamr_lambda_return}, \code{morie_dreamr_value_update}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -85,6 +86,11 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .dreamr_vec(x = x, name = txt)
+#' res
 .dreamr_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("dreamr: %s must be non-empty", name))
@@ -122,7 +128,8 @@
 #' @param reward_model Passed to \code{c}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param value_model Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{method}.
+#' @return A list with \code{estimate}, \code{states}, \code{actions}, \code{rewards},
+#' \code{values}, \code{horizon}, \code{method}.
 #' @export
 morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
                                   horizon, value_model = NULL) {
@@ -174,7 +181,8 @@ morie_dreamr_imagine <- function(state, action_model, transition, reward_model,
 #' @param values Passed to \code{.dreamr_vec}.
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0.99}.
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @param estimator One of \code{"k-step"}, \code{"lambda"}, \code{"reward"}. Defaults to \code{"lambda"}.
+#' @param estimator One of \code{"k-step"}, \code{"lambda"}, \code{"reward"}. Defaults to
+#' \code{"lambda"}.
 #' @param k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{.dreamr_pack}.
 #' @export
@@ -289,7 +297,10 @@ morie_dreamr_value_update <- function(values, targets) {
 #' @param lam Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{0.95}.
 #' @param estimator Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{"lambda"}.
 #' @param k Passed to \code{morie_dreamr_lambda_return}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{returns}, \code{objective}, \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards}, \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator}, \code{method}.
+#' @return A list with \code{estimate}, \code{returns}, \code{objective},
+#' \code{value_loss}, \code{residual}, \code{states}, \code{actions}, \code{rewards},
+#' \code{values}, \code{horizon}, \code{gamma}, \code{lam}, \code{estimator},
+#' \code{method}.
 #' @export
 morie_dreamr <- function(state, action_model, transition, reward_model, value_model,
                           horizon = 15, gamma = 0.99, lam = 0.95,

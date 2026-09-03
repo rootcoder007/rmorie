@@ -17,7 +17,9 @@ test_that("eq. 13.1 convolution matches Python", {
 test_that("eq. 14.3/14.9 design and 14.4 fit match Python", {
   tg <- (0:20) / 20
   curves <- t(vapply(0:9, function(k) {
-    a <- 1 + 0.3 * k; b <- -0.5 + 0.2 * k^2; cc <- 0.4 - 0.02 * k^3
+    a <- 1 + 0.3 * k
+    b <- -0.5 + 0.2 * k^2
+    cc <- 0.4 - 0.02 * k^3
     a + b * sin(2 * pi * tg) + cc * cos(2 * pi * tg)
   }, numeric(21)))
   d <- morie_fda_design(tg, curves, L1 = 3, L2 = 5)
@@ -58,7 +60,8 @@ test_that("the eq. 15.3 erratum is corrected in R too", {
   # mu; the only quantity consistent with its own pmf on p.651 is the
   # sum of y P(Y = y), which is what we return
   for (par in list(c(0.2, 1.5), c(0.6, 3.0), c(0.05, 0.4))) {
-    th <- par[1]; mu <- par[2]
+    th <- par[1]
+    mu <- par[2]
     yy <- 1:300
     direct <- sum(yy * (1 - th) * dpois(yy, mu) / (1 - exp(-mu)))
     expect_equal(morie_zap_predict(th, mu)$prediction, direct,
@@ -105,6 +108,7 @@ test_that("the MSM weights change the estimate they are meant to", {
   expect_equal(morie_msm_linear(y, A, rep(2, 6))$beta,
                morie_msm_linear(y, A)$beta, tolerance = 1e-9)
   # the Cox MSM agrees with a weighted Newton step on the same data
-  tt <- c(1, 2, 3, 4, 5, 6); ev <- c(1, 1, 1, 0, 1, 1)
+  tt <- c(1, 2, 3, 4, 5, 6)
+  ev <- c(1, 1, 1, 0, 1, 1)
   expect_true(is.finite(morie_msm_cox_marginal(tt, ev, A)$hazard_ratio))
 })

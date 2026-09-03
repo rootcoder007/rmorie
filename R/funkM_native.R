@@ -77,7 +77,8 @@
 #' @param reg Passed to \code{.funkM_sgd_epoch}. Defaults to \code{0.02}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param incremental A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @param epochs_per_factor Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param epochs_per_factor Coerced to integer by the body, with \code{as.integer}.
+#' Defaults to \code{20}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
 morie_funkM <- function(ratings, n_users, n_items, factors = 8,
@@ -193,7 +194,8 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # mu over the OBSERVED entries only.
 #' Mu over the OBSERVED entries only
 #'
-#' A step of the funkM_native implementation. Called by \code{morie_funkM}, \code{morie_funkM_imputed_svd_error}.
+#' A step of the funkM_native implementation. Called by \code{morie_funkM},
+#' \code{morie_funkM_imputed_svd_error}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -208,7 +210,8 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 # r_hat = mu + b_u + b_i + q_i^T p_u.
 #' R_hat = mu + b_u + b_i + q_i^T p_u
 #'
-#' A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch}, \code{morie_funkM_rmse}.
+#' A step of the funkM_native implementation. Called by \code{.funkM_sgd_epoch},
+#' \code{morie_funkM_rmse}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -243,7 +246,8 @@ morie_funkM <- function(ratings, n_users, n_items, factors = 8,
 #' @param Q A matrix; indexed by row and column.
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param reg Numeric; combined arithmetically in the body.
-#' @param factor Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param factor Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A numeric value.
 #' @export
 .funkM_sgd_epoch <- function(R, mu, bu, bi, P, Q, lr, reg, factor = NULL) {
@@ -374,6 +378,9 @@ morie_funkM_imputed_svd_error <- function(ratings, n_users, n_items,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .funkM_cheatsheet()
+#' res
 .funkM_cheatsheet <- function() {
   paste("funkM: a true SVD needs a COMPLETE matrix and a ratings",
         "matrix is >99% missing -- filling the holes with zeros or",

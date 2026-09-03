@@ -30,7 +30,9 @@
 #' @param holidays Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param holiday_window A vector; indexed elementwise. Defaults to \code{c(0, 0)}.
 #' @param ... Passed through.
-#' @return A list with \code{estimate}, \code{components}, \code{total}, \code{fitted}, \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef}, \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
+#' @return A list with \code{estimate}, \code{components}, \code{total}, \code{fitted},
+#' \code{residual}, \code{reconstruction_error}, \code{reconstructs}, \code{coef},
+#' \code{changepoints}, \code{sigma}, \code{n}, \code{component_names}, \code{method}.
 #' @export
 prophe_additive_components <- function(t, y, seasonalities = NULL,
                                        holidays = NULL,

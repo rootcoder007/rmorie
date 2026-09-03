@@ -39,5 +39,7 @@ A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{re
 }
 \keyword{internal}
 \examples{
-morie_snpqc1(genotypes = list(a = 1, b = 2))
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1(genotypes = list(a = 1, b = 2))
+}
 }

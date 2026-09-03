@@ -22,3 +22,8 @@ integrated square error across every t-distribution considered,
 log-normals with skewness up to about 1.8, and normal mixtures
 separated by up to 3 standard deviations.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .wsm_bandwidth(x = x)
+res
+}

@@ -22,7 +22,8 @@
 #'   \doi{10.1080/03610927708827533}
 #' @export
 #' @examples
-#' Irlsfn(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Irlsfn(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 Irlsfn <- function(y, X, weights) {
   yv <- .s03vec(y)
   n <- length(yv)

@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' DINO self-distillation cross-entropy
 #'
-#' Formula: P_s = softmax(s/tau_s), P_t = softmax((t - C)/tau_t), loss = -(1/B) sum_i sum_k P_t(i,k) log P_s(i,k)
+#' Formula: P_s = softmax(s/tau_s), P_t = softmax((t - C)/tau_t), loss = -(1/B) sum_i
+#' sum_k P_t(i,k) log P_s(i,k)
 #'
 #' @param s_logits Student logits.
 #' @param t_logits Teacher logits.
@@ -15,7 +16,10 @@
 #' @param tau_t See Usage.
 #' @param center See Usage.
 #' @return List with ``loss``, ``per_view``, ``p_s``, ``p_t``, ``B``, ``K``.
-#' @references Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021), Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294. Verified against the paper: equation (1) for the temperature softmax, equation (4) for the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
+#' @references Caron, Touvron, Misra, Jegou, Mairal, Bojanowski and Joulin (2021),
+#' Emerging Properties in Self-Supervised Vision Transformers, ICCV/arXiv:2104.14294.
+#' Verified against the paper: equation (1) for the temperature softmax, equation (4) for
+#' the centre update, and Algorithm 1's pseudocode for the order of centre-then-sharpen.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

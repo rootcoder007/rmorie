@@ -16,3 +16,7 @@ A step of the RcppExports implementation. Called by \code{.morie_sobol}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_sobol_cpp(n = 3L, d = 3L)
+res
+}

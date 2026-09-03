@@ -18,7 +18,7 @@ List with estimate (log-likelihood), loglik, neg2loglik,
 logdet_V, quadratic_form, aic, bic, n, p.
 }
 \description{
-
+Gaussian ML log-likelihood of a linear mixed model at a given V
 }
 \details{
 The Cholesky route is used for both the determinant and the quadratic

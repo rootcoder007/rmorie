@@ -36,6 +36,11 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{x_mat}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .reinfc_as_matrix(x = x, name = txt)
+#' res
 .reinfc_as_matrix <- function(x, name) {
   if (is.null(x)) {
     stop(sprintf("reinfc: %s must be non-empty", name))
@@ -91,7 +96,8 @@
 
 #' .reinfc_finish
 #'
-#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
+#' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -99,7 +105,9 @@
 #' @param rewards A vector; its length is taken and its elements indexed.
 #' @param bs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param traj Carried through into a list the body builds.
-#' @return A list with \code{estimate}, \code{rewards}, \code{baseline}, \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last}, \code{method}.
+#' @return A list with \code{estimate}, \code{rewards}, \code{baseline},
+#' \code{trajectory}, \code{n_trials}, \code{mean_reward_first}, \code{mean_reward_last},
+#' \code{method}.
 #' @export
 .reinfc_finish <- function(param, rewards, bs, traj) {
   n <- length(rewards)
@@ -120,7 +128,8 @@
 
 #' .reinfc_running_baseline
 #'
-#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
+#' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -144,7 +153,8 @@
 
 #' .reinfc_advance_baseline
 #'
-#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli}, \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
+#' A step of the reinfc_native implementation. Called by \code{.reinfc_run_bernoulli},
+#' \code{.reinfc_run_gaussian}, \code{.reinfc_run_logistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -371,13 +381,15 @@
 #' @param p Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param sigma Passed to \code{.reinfc_run_gaussian}. Defaults to \code{1}.
-#' @param unit One of \code{"bernoulli"}, \code{"gaussian"}. Defaults to \code{"bernoulli-logistic"}.
+#' @param unit One of \code{"bernoulli"}, \code{"gaussian"}. Defaults to
+#' \code{"bernoulli-logistic"}.
 #' @param baseline Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"comparison"}.
 #' @param mode Compared against \code{"immediate"}. Defaults to \code{"immediate"}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.9}.
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
-#' @param episode_length Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
+#' @param episode_length Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{1}.
 #' @param trials Passed to \code{.reinfc_run_gaussian}. Defaults to \code{100}.
 #' @param eligibility One of \code{"p"}, \code{"ybar"}. Defaults to \code{"p"}.
 #' @param rate_scaling Passed to \code{.reinfc_run_gaussian}. Defaults to \code{"sigma2"}.

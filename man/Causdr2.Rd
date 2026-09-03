@@ -35,7 +35,8 @@ sigma2 = mean(psi^2) / mean(Vhat^2)^2. The K folds come from a
 seeded R sample.int shuffle, positions assigned round-robin.
 }
 \examples{
-Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
+Causdr2(y = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5))
 }
 \references{
 Chernozhukov, V., Chetverikov, D., Demirer, M., Duflo,

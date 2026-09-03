@@ -16,3 +16,8 @@ A vector, from \code{as.numeric}.
 or anything that as.numeric() can flatten. Mirrors k.vec() on the
 Python side which is forgiving about list/array inputs.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .dssm_to_vec(x = x)
+res
+}

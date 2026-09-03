@@ -18,3 +18,8 @@ A vector, from \code{c}.
 The sw - sum(w^2)/sw denominator reduces to n - 1 at equal weights,
 so the weighted and unweighted diagnostics agree there.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .smd_moments(x = x, w = x)
+res
+}

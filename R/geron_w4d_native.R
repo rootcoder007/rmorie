@@ -33,6 +33,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4d_lcg_u(n = 3L, seed = 1L)
+#' res
 .morie_w4d_lcg_u <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -154,7 +157,7 @@ morie_geron_self_attention_modules <- function(X, W_Q, W_K, W_V, mask = NULL) {
 #' @return list with policy, Q, V, entropy, returns, estimate, n, method.
 #' @export
 #' @examples
-#' bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L, 
+#' bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L,
 #'     step = function(a) list(0L, as.numeric(a), FALSE))
 #' morie_geron_sac(bandit, epochs = 30, lr = 0.5, alpha = 0.05)
 morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr = 0.5,
@@ -248,7 +251,8 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 
 #' .morie_w4d_sae_train_layer
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}.
+#' A step of the geron_w4d_native implementation. Called by
+#' \code{morie_geron_stacked_autoencoder_modules}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -286,7 +290,8 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 
 #' .morie_w4d_sae_forward
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}.
+#' A step of the geron_w4d_native implementation. Called by
+#' \code{morie_geron_stacked_autoencoder_modules}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -316,7 +321,8 @@ morie_geron_sac <- function(env, policy = NULL, critic = NULL, epochs = 20, lr =
 
 #' .morie_w4d_sae_backward
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_stacked_autoencoder_modules}.
+#' A step of the geron_w4d_native implementation. Called by
+#' \code{morie_geron_stacked_autoencoder_modules}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -538,7 +544,8 @@ morie_geron_self_supervised <- function(X, pretext = "mask", noise = 0.1, seed =
 #'   objective, laplacian, affinity, alpha, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8), X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6,
+#' 7, 8), X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
                                        fit_intercept = TRUE) {
   L1 <- as.matrix(X_l)
@@ -581,7 +588,8 @@ morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
 
 #' .morie_w4d_lcg_vec
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_senet}, \code{morie_geron_swin}, \code{morie_geron_transformer} and 5 others in the module.
+#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_senet},
+#' \code{morie_geron_swin}, \code{morie_geron_transformer} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -590,6 +598,9 @@ morie_geron_semisupervised <- function(X_l, y_l, X_u, alpha = 1.0, gamma = 1.0,
 #' @param scale Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4d_lcg_vec(n = 3L, seed = 1L)
+#' res
 .morie_w4d_lcg_vec <- function(n, seed, scale = 0.5) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -1010,7 +1021,8 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 
 #' .morie_w4d_lloyd
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_semisupervised_cluster}, \code{morie_geron_spectral_clustering}.
+#' A step of the geron_w4d_native implementation. Called by
+#' \code{morie_geron_semisupervised_cluster}, \code{morie_geron_spectral_clustering}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -1020,6 +1032,11 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @return A list with \code{labels}, \code{centers}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_w4d_lloyd(Z = X, k = 3L)
+#' res
 .morie_w4d_lloyd <- function(Z, k, seed = 0, iters = 100) {
   n <- nrow(Z)
   s <- as.numeric(seed) %% 2^32
@@ -1066,7 +1083,8 @@ morie_geron_silhouette <- function(X, labels, metric = "euclidean") {
 #'   accuracy, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8), X_labeled = c(1, 2, 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8), X_labeled = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_semisupervised_cluster <- function(X, X_labeled, y_labeled, n_clusters = 2,
                                                seed = 0, y_true = NULL) {
   A <- as.matrix(X)
@@ -1268,7 +1286,8 @@ morie_geron_stratified_sampling <- function(X, y = NULL, stratum = NULL, n_total
 #' @param k Kernel size.
 #' @param p Padding each side.
 #' @param s Stride.
-#' @return list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s, estimate, n, method.
+#' @return list with output_dim, dropped, same_padding, padded_dim, in_dim, k, p, s,
+#' estimate, n, method.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -1390,7 +1409,8 @@ morie_geron_svd_pseudoinverse <- function(X, y, rcond = NULL, fit_intercept = FA
 #' @param model Named list of arrays (state dict), or an unnamed list (named param_0, param_1, ...).
 #' @param path Destination file (\code{.rds}); its directory must already exist.
 #' @param verify Reload and compare after writing.
-#' @return list with path, keys, shapes, n_params, bytes, loaded, exact, max_diff, estimate, n, method.
+#' @return list with path, keys, shapes, n_params, bytes, loaded, exact, max_diff,
+#' estimate, n, method.
 #' @export
 #' @examples
 #' morie_geron_save_load_pytorch(model = c(1, 2, 3, 4, 5, 6, 7, 8), path = 5L)
@@ -1691,13 +1711,18 @@ morie_geron_symd_parse <- function(src) {
 
 #' .morie_w4d_symd_num
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_diff}, \code{.morie_w4d_symd_simplify}.
+#' A step of the geron_w4d_native implementation. Called by \code{.morie_w4d_symd_diff},
+#' \code{.morie_w4d_symd_simplify}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_w4d_symd_num(v = x)
+#' res
 .morie_w4d_symd_num <- function(v) list("num", as.numeric(v))
 #' .morie_w4d_symd_eqnum
 #'
@@ -2028,6 +2053,10 @@ morie_geron_symbolic_diff <- function(expr, var = "x", at = NULL) {
 #' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_w4d_tokens(x = x)
+#' res
 .morie_w4d_tokens <- function(x) {
   if (is.character(x) && length(x) == 1) strsplit(x, "\\s+")[[1]] else as.character(x)
 }
@@ -2037,7 +2066,8 @@ morie_geron_symbolic_diff <- function(expr, var = "x", at = NULL) {
 #' @param noise_density Fraction of tokens to mask, in (0,1).
 #' @param mean_span Mean span length (>=1).
 #' @param seed LCG seed for span placement.
-#' @return list(inputs, target, spans) where spans is a list of c(start0, length) pairs (0-based start).
+#' @return list(inputs, target, spans) where spans is a list of c(start0, length) pairs
+#' (0-based start).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -2176,7 +2206,7 @@ morie_geron_t5 <- function(src, tgt = NULL, noise_density = 0.15, mean_span = 3,
 #'   overestimation_gap, policy_updates, estimate, n, method.
 #' @export
 #' @examples
-#' bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L, 
+#' bandit <- list(n_states = 1L, n_actions = 2L, reset = function() 0L,
 #'     step = function(a) list(0L, as.numeric(a), FALSE))
 #' morie_geron_td3(bandit, epochs = 40)
 morie_geron_td3 <- function(env, policy = NULL, Q1 = NULL, Q2 = NULL, epochs = 30, lr = 0.5,
@@ -2274,7 +2304,8 @@ morie_geron_td3 <- function(env, policy = NULL, Q1 = NULL, Q2 = NULL, epochs = 3
 #'   trainable_params, total_params, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, epochs = 200, lr = 0.05) {
   Ws <- lapply(pretrained_model, as.matrix)
   A <- as.matrix(X)
@@ -2329,7 +2360,8 @@ morie_geron_transfer_learning <- function(pretrained_model, X, y, n_frozen = 1, 
 
 #' .morie_w4d_apply_op
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_run_graph}, \code{morie_geron_trace}.
+#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_run_graph},
+#' \code{morie_geron_trace}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2401,8 +2433,8 @@ morie_geron_trace <- function(model, example_inputs) {
 #' @return Matrix output.
 #' @export
 #' @examples
-#' r <- morie_geron_scaled_dot_product(matrix(c(0, 0), 1), matrix(c(1, 
-#'     0, 0, 1), 2, 2, byrow = TRUE), matrix(c(1, 0, 0, 10), 2, 
+#' r <- morie_geron_scaled_dot_product(matrix(c(0, 0), 1), matrix(c(1,
+#'     0, 0, 1), 2, 2, byrow = TRUE), matrix(c(1, 0, 0, 10), 2,
 #'     2, byrow = TRUE))
 #' morie_geron_run_graph(r$graph, matrix(c(1, 2, 3), 1, 3))
 morie_geron_run_graph <- function(graph, x) {
@@ -2425,7 +2457,7 @@ morie_geron_run_graph <- function(graph, x) {
 #' @export
 #' @examples
 #' W <- diag(2)
-#' morie_geron_torchscript(list(list(kind = "linear", param = W), 
+#' morie_geron_torchscript(list(list(kind = "linear", param = W),
 #'     list(kind = "relu")), matrix(c(1, -1), 1, 2))
 morie_geron_torchscript <- function(model, example_inputs) {
   tr <- morie_geron_trace(model, example_inputs)
@@ -2456,6 +2488,11 @@ morie_geron_torchscript <- function(model, example_inputs) {
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_w4d_layernorm(x = X)
+#' res
 .morie_w4d_layernorm <- function(x, eps = 1e-5) {
   mu <- rowMeans(x)
   sd <- sqrt(apply(x, 1, .morie_gr_pvar) + eps)
@@ -2467,7 +2504,8 @@ morie_geron_torchscript <- function(model, example_inputs) {
 #' @return Integer parameter count.
 #' @export
 #' @examples
-#' morie_geron_encoder_params(d_model = c(1, 2, 3, 4, 5, 6, 7, 8), d_ff = c(1, 2, 3, 4, 5, 6, 7, 8), n_layers = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_encoder_params(d_model = c(1, 2, 3, 4, 5, 6, 7, 8), d_ff = c(1, 2, 3, 4,
+#' 5, 6, 7, 8), n_layers = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_encoder_params <- function(d_model, d_ff, n_layers) {
   per <- 4 * d_model * d_model + d_model * d_ff + d_ff + d_ff * d_model + d_model + 4 * d_model
   as.integer(per * n_layers)
@@ -2613,6 +2651,10 @@ morie_geron_tensor_parallelism <- function(model, n_devices = 2, x = NULL, schem
 #' @param z A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_w4d_sigmoid_stable(z = y)
+#' res
 .morie_w4d_sigmoid_stable <- function(z) {
   out <- numeric(length(z))
   pos <- z >= 0
@@ -2762,8 +2804,8 @@ morie_geron_matmul_order <- function(dims) {
 #' A2 <- diag(2) * 2
 #' B2 <- diag(2) * 3
 #' C2 <- diag(2) * 5
-#' morie_geron_torch_compile(list(list(kind = "linear", param = A2), 
-#'     list(kind = "linear", param = B2), list(kind = "linear", 
+#' morie_geron_torch_compile(list(list(kind = "linear", param = A2),
+#'     list(kind = "linear", param = B2), list(kind = "linear",
 #'         param = C2)), example_inputs = matrix(c(1, 1), 1, 2))
 morie_geron_torch_compile <- function(model, mode = "default", example_inputs) {
   m <- tolower(mode)
@@ -2877,7 +2919,8 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 
 #' .morie_w4d_loo_mse
 #'
-#' A step of the geron_w4d_native implementation. Called by \code{morie_geron_unsupervised_pretraining}.
+#' A step of the geron_w4d_native implementation. Called by
+#' \code{morie_geron_unsupervised_pretraining}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2912,7 +2955,8 @@ morie_geron_unsupervised_learning <- function(X, n_clusters = 2, bottleneck = 1,
 #'   explained_variance_ratio, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_unsupervised_pretraining(X_unlab = c(1, 2, 3, 4, 5, 6, 7, 8), X_lab = c(1, 2, 3, 4, 5, 6, 7, 8), y_lab = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_unsupervised_pretraining(X_unlab = c(1, 2, 3, 4, 5, 6, 7, 8), X_lab = c(1,
+#' 2, 3, 4, 5, 6, 7, 8), y_lab = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_geron_unsupervised_pretraining <- function(X_unlab, X_lab, y_lab, bottleneck = 1) {
   U <- as.matrix(X_unlab)
   L <- as.matrix(X_lab)
@@ -2993,6 +3037,9 @@ morie_geron_vanishing_gradients <- function(grads, tol = 0.5) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' res <- .morie_w4d_lcg_normal(n = 3L, seed = 1L)
+#' res
 .morie_w4d_lcg_normal <- function(n, seed) {
   m <- n + (n %% 2)
   s <- as.numeric(seed) %% 2^32
@@ -3376,7 +3423,7 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 #' @export
 #' @examples
 #' img <- matrix(0:15, 4, 4, byrow = TRUE)
-#' morie_geron_vision_transformer(img, patch_size = 2, n_layers = 1, 
+#' morie_geron_vision_transformer(img, patch_size = 2, n_layers = 1,
 #'     d_model = 4, n_heads = 2, n_classes = 3)
 morie_geron_vision_transformer <- function(image, patch_size, n_layers = 2, d_model = 8, n_heads = 2,
                                            n_classes = 2, seed = 0) {
@@ -3808,7 +3855,8 @@ morie_geron_warm_restarts <- function(t, T0 = 10, factor = 2.0, eta_max = 0.1, e
 #' @return Integer parameter count k*k*c_in + c_in*c_out.
 #' @export
 #' @examples
-#' morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8), c_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_geron_separable_params(k = 5L, c_in = c(1, 2, 3, 4, 5, 6, 7, 8), c_out = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 morie_geron_separable_params <- function(k, c_in, c_out) {
   as.integer(k * k * c_in + c_in * c_out)
 }
@@ -4012,7 +4060,9 @@ morie_geron_xception <- function(n_classes = 1000, in_channels = 3, input_size =
 #'
 #' @param X Design matrix (n, d).
 #' @param y Targets `({0,1}` for logistic).
-#' @param n_estimators,learning_rate,max_depth,reg_lambda,gamma,min_child_weight,objective As in Python original.
+#' @param
+#' n_estimators,learning_rate,max_depth,reg_lambda,gamma,min_child_weight,objective As in
+#' Python original.
 #' @return list with predicted, raw_score, trees, base_score, loss_curve,
 #'   feature_importance, objective, estimate, n, method.
 #' @export
@@ -4464,7 +4514,7 @@ morie_geron_spectral_clustering <- function(X, n_clusters = 2, affinity = "rbf",
 #' @return list with H, h_T, grads, jacobian_gain, n_units, estimate, n, method.
 #' @export
 #' @examples
-#' morie_geron_simple_rnn(matrix(c(1, 0), 2, 1), matrix(1, 1, 1), 
+#' morie_geron_simple_rnn(matrix(c(1, 0), 2, 1), matrix(1, 1, 1),
 #'     matrix(1, 1, 1))
 morie_geron_simple_rnn <- function(X, Wx, Wh, b = NULL, h0 = NULL) {
   Xa <- as.matrix(X)

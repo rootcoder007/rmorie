@@ -33,7 +33,8 @@ S_m(t|x) = (1 + theta Lambda_0(t) e^(beta x))^(-1/theta) is reported
 at the baseline (x = 0).
 }
 \examples{
-Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Vaupel, Manton and Stallard (1979), Demography 16(3),

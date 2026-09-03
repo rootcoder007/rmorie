@@ -14,3 +14,7 @@ A step of the samdec_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .samdec_cheatsheet()
+res
+}

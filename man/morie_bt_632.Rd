@@ -14,11 +14,11 @@ morie_bt_632(err_app, err_oob, gamma = NULL)
 \item{gamma}{optional no-information rate for .632+.}
 }
 \value{
-the \code{\link[=morie_esl_oob_632]{morie_esl_oob_632()}} list plus alias_of.
+the \code{morie_esl_oob_632()} list plus alias_of.
 }
 \description{
 One .632 implementation across the library: the computation is
-\code{\link[=morie_esl_oob_632]{morie_esl_oob_632()}}, which carries the full derivation and the
+\code{morie_esl_oob_632()}, which carries the full derivation and the
 reason the second argument must be the OUT-OF-BAG error.
 }
 \examples{

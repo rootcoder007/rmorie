@@ -23,7 +23,8 @@ list(probability, rho_z).
 The convolution density at z, times the strip width dz.
 }
 \examples{
-g <- seq(-8, 8, length.out = 1601); SumDensP(g, stats::dnorm(g), g, stats::dnorm(g), 1, 0.01)$probability
+g <- seq(-8, 8, length.out = 1601)
+SumDensP(g, stats::dnorm(g), g, stats::dnorm(g), 1, 0.01)$probability
 }
 \references{
 Morin, D. J. (2016). Probability: For the Enthusiastic

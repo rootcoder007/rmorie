@@ -45,5 +45,6 @@ unpersonalised model being extended; implemented in :mod:`sasRec`.
 }
 \keyword{internal}
 \examples{
-morie_sse4r(sequence = c(1, 2, 3, 4, 5, 6, 7, 8), user_embedding = TRUE, item_table = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_sse4r(sequence = c(1, 2, 3, 4, 5, 6, 7, 8), user_embedding = TRUE,
+  item_table = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

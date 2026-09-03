@@ -29,5 +29,6 @@ the Topk are broken by the smaller lag, so selection is
 deterministic.
 }
 \examples{
-morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8),
+  v = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

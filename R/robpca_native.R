@@ -16,6 +16,11 @@
 #' @param name Passed to \code{sprintf}. Defaults to \code{"X"}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .robpca_matrix(X = X)
+#' res
 .robpca_matrix <- function(X, name = "X") {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (!is.numeric(X)) {
@@ -55,7 +60,8 @@
 
 #' .robpca_det_from_chol
 #'
-#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}.
+#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps},
+#' \code{.robpca_fast_mcd}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -70,7 +76,8 @@
 
 #' .robpca_mahalanobis
 #'
-#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps}, \code{.robpca_fast_mcd}, \code{morie_robpca}.
+#' A step of the robpca_native implementation. Called by \code{.robpca_c_steps},
+#' \code{.robpca_fast_mcd}, \code{morie_robpca}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -90,7 +97,8 @@
 
 #' univariate_mcd
 #'
-#' A step of the robpca_native implementation. Called by \code{.robpca_od_cutoff}, \code{outlyingness}.
+#' A step of the robpca_native implementation. Called by \code{.robpca_od_cutoff},
+#' \code{outlyingness}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -209,7 +217,8 @@ outlyingness <- function(X, h = NULL, n_dirs = 250L, seed = 17L) {
 
 #' .robpca_c_steps
 #'
-#' A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd}, \code{morie_robpca}.
+#' A step of the robpca_native implementation. Called by \code{.robpca_fast_mcd},
+#' \code{morie_robpca}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -447,6 +456,9 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .robpca_reweight_factor(q = 0.5, k = 3L)
+#' res
 .robpca_reweight_factor <- function(q, k) {
   denom <- pchisq(qchisq(q, k), k + 2)
   if (denom > 0) q / denom else 1.0
@@ -486,7 +498,12 @@ classify_outliers <- function(sd, od, sd_cut, od_cut) {
 #' @param n_start Passed to \code{.robpca_fast_mcd}. Defaults to \code{250L}.
 #' @param seed Passed to \code{.robpca_fast_mcd}. Defaults to \code{17L}.
 #' @param reweight A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{loadings}, \code{eigenvalues}, \code{center}, \code{scores}, \code{k}, \code{k0}, \code{h}, \code{alpha}, \code{rank}, \code{subspace_rank}, \code{outlyingness}, \code{h_subset}, \code{reweighted_kept}, \code{consistency_factor}, \code{score_distance}, \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification}, \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{loadings}, \code{eigenvalues},
+#' \code{center}, \code{scores}, \code{k}, \code{k0}, \code{h}, \code{alpha},
+#' \code{rank}, \code{subspace_rank}, \code{outlyingness}, \code{h_subset},
+#' \code{reweighted_kept}, \code{consistency_factor}, \code{score_distance},
+#' \code{orthogonal_distance}, \code{sd_cutoff}, \code{od_cutoff}, \code{classification},
+#' \code{n_outliers}, \code{n}, \code{p}, \code{reweighted}, \code{method}, \code{note}.
 #' @export
 morie_robpca <- function(X, k = NULL, alpha = 0.75, kmax = 10L,
                          n_dirs = 250L, n_start = 250L,

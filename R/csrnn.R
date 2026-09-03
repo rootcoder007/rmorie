@@ -11,6 +11,10 @@
 #' @param P See Usage.
 #' @return The value of \code{apply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .csrnn_distances(P = A)
+#' res
 .csrnn_distances <- function(P) {
   d <- as.matrix(stats::dist(P))
   diag(d) <- Inf
@@ -35,7 +39,8 @@
 # Internal: normalise `window` to a d x 2 matrix of (min, max) rows.
 #' Internal: normalise `window` to a d x 2 matrix of (min, max) rows
 #'
-#' A step of the csrnn implementation. Called by \code{morie_csr_nn_test}, \code{morie_ripley_csr_test}.
+#' A step of the csrnn implementation. Called by \code{morie_csr_nn_test},
+#' \code{morie_ripley_csr_test}.
 #' See the file header for the source the module follows.
 #' it follows.
 #'

@@ -50,11 +50,15 @@
 #' @export
 .sa_opt_temperature <- function(schedule, T0, k, n_iter, alpha) {
   if (schedule == "geometric") {
-    return(T0 * (alpha ^ k))
+    return(T0 * (alpha^k))
   }
   if (schedule == "linear") {
     frac <- 1.0 - (k / as.numeric(n_iter))
-    if (frac > 0.0) return(T0 * frac) else return(0.0)
+    if (frac > 0.0) {
+      return(T0 * frac)
+    } else {
+      return(0.0)
+    }
   }
   return(T0 / log(k + exp(1)))
 }
@@ -70,16 +74,19 @@
 #' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param T0 Passed to \code{.sa_opt_temperature}. Defaults to \code{1}.
 #' @param n_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
-#' @param schedule Coerced to character by the body, with \code{as.character}. Defaults to \code{"geometric"}.
+#' @param schedule Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{"geometric"}.
 #' @param alpha Passed to \code{.sa_opt_temperature}. Defaults to \code{0.99}.
-#' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param upper Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lower Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param upper Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
-morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
-                         schedule="geometric", alpha=0.99, lower=NULL,
-                         upper=NULL, seed=0) {
+morie_sa_opt <- function(fun, x0, step = 1.0, T0 = 1.0, n_iter = 1000,
+                         schedule = "geometric", alpha = 0.99, lower = NULL,
+                         upper = NULL, seed = 0) {
   x <- as.numeric(x0)
   if (length(x) == 0L) {
     stop("simulated_annealing: x0 must be non-empty")
@@ -88,8 +95,10 @@ morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
 
   sched <- tolower(as.character(schedule))
   if (!(sched %in% .sa_opt_schedules)) {
-    stop(sprintf("simulated_annealing: schedule must be one of %s, got %s",
-                 paste(.sa_opt_schedules, collapse=", "), schedule))
+    stop(sprintf(
+      "simulated_annealing: schedule must be one of %s, got %s",
+      paste(.sa_opt_schedules, collapse = ", "), schedule
+    ))
   }
 
   T0 <- as.numeric(T0)
@@ -187,8 +196,13 @@ morie_sa_opt <- function(fun, x0, step=1.0, T0=1.0, n_iter=1000,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sa_opt_cheatsheet()
+#' res
 .sa_opt_cheatsheet <- function() {
-  paste("sa_opt: Metropolis accept exp(-dE/T) for dE>0, always for dE<=0;",
-        "schedules geometric T0 a^k, linear, logarithmic T0/ln(k+e);",
-        "returns the BEST point visited, not the last.")
+  paste(
+    "sa_opt: Metropolis accept exp(-dE/T) for dE>0, always for dE<=0;",
+    "schedules geometric T0 a^k, linear, logarithmic T0/ln(k+e);",
+    "returns the BEST point visited, not the last."
+  )
 }

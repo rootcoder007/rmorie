@@ -87,7 +87,8 @@ test_that("CcfCont overlap shrinks as the delay grows", {
 })
 
 test_that("CcfProc with the mean removed is the cross-covariance", {
-  x <- c(1, 2, 3, 4); y <- c(2, 4, 6, 8)
+  x <- c(1, 2, 3, 4)
+  y <- c(2, 4, 6, 8)
   r <- XCorrProc(x, y, lags = 0, remove_mean = TRUE)
   expect_true(r$is_cross_covariance_when_mean_removed)
   want <- sum((x - 2.5) * (y - 5)) / 4
@@ -176,7 +177,8 @@ test_that("CorrCoef is 1 on a positive scaling and -1 on negation", {
 test_that("CorrCoef is the zero-lag normalized XCorr of the centred signals", {
   x <- sine(120, 3)
   y <- sine(120, 3, phase = 0.7)
-  cx <- x - mean(x); cy <- y - mean(y)
+  cx <- x - mean(x)
+  cy <- y - mean(y)
   lag0 <- XCorr(cx, cy, maxlag = 0, normalize = TRUE)$ccf[[1L]]
   expect_close(CorrCoef(x, y)$r, lag0, tol = 1e-9)
 })

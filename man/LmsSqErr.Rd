@@ -20,5 +20,6 @@ A list with \code{e}, \code{e_squared}, \code{expanded}, \code{max_difference}, 
 }
 \keyword{internal}
 \examples{
-LmsSqErr(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8))
+LmsSqErr(x = c(1, 2, 3, 4, 5, 6, 7, 8), rvec = c(1, 2, 3, 4, 5, 6, 7, 8),
+  w = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

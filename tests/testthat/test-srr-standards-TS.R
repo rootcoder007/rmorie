@@ -3,10 +3,13 @@
 # srr "TS" standards: one test per checklist item, run against the
 # rmorie time-series forecasting surface (R/ts_forecast.R).
 
-.ts_rw    <- function(n = 120L, s = 1L) { set.seed(s); cumsum(rnorm(n)) }
-.ts_wn    <- function(n = 120L, s = 2L) { set.seed(s); rnorm(n) }
+.ts_rw    <- function(n = 120L, s = 1L) { set.seed(s)
+cumsum(rnorm(n)) }
+.ts_wn    <- function(n = 120L, s = 2L) { set.seed(s)
+rnorm(n) }
 .ts_seas  <- function(n = 96L, s = 3L) {
-  set.seed(s); as.numeric(10 + sin(2 * pi * (1:n) / 12) * 3 + cumsum(rnorm(n, 0, .2)))
+  set.seed(s)
+  as.numeric(10 + sin(2 * pi * (1:n) / 12) * 3 + cumsum(rnorm(n, 0, .2)))
 }
 
 # ======================= TS1: input class =============================
@@ -244,8 +247,10 @@ test_that("TS5.0 a default plot method exists for the forecast class", {
 test_that("TS5.1/TS5.3 the time axis is labelled (with units where known)", {
   fc <- morie_ts_forecast(
     morie_ts_arima(morie_ts(.ts_rw(), units = "days"), c(0, 1, 0)), 5)
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  plot(fc); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  plot(fc)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))                          # renders without error
 })
 

@@ -15,6 +15,10 @@
 #' @param a A matrix; indexed by row and column.
 #' @return The value of \code{l}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .ukfF_chol(a = A)
+#' res
 .ukfF_chol <- function(a) {
   k <- nrow(a)
   l <- matrix(0, k, k)
@@ -152,7 +156,8 @@
 #' @param P0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param measurements See Usage.
 #' @param kappa Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @return A list with \code{states}, \code{covariances}, \code{innovations}, \code{kappa}, \code{method}.
+#' @return A list with \code{states}, \code{covariances}, \code{innovations},
+#' \code{kappa}, \code{method}.
 #' @export
 morie_ukfF <- function(f, h, Q, R, x0, P0, measurements, kappa = NULL) {
   x <- as.numeric(x0)

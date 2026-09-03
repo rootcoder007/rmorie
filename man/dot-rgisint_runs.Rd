@@ -17,3 +17,8 @@ A step of the rgisint implementation. Called by \code{rgemgfd}, \code{rgisint}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+fml <- y ~ x
+res <- .rgisint_runs(f = fml)
+res
+}

@@ -40,7 +40,8 @@ test_that("Euler implements eq (3.74)", {
 })
 
 test_that("Ctft implements eqs (3.75)-(3.76) in either variable", {
-  x <- rep(1, 201); t <- seq(0, 2, length.out = 201)
+  x <- rep(1, 201)
+  t <- seq(0, 2, length.out = 201)
   expect_equal(Re(Ctft(x, t = t, omega = 0)$X), 2, tolerance = 1e-12)
   xs <- c(1, 0.5, -0.25, 0.75, 0)
   ts <- c(0, 0.25, 0.5, 0.75, 1)

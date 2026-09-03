@@ -24,7 +24,8 @@ test_that("log-likelihood is finite and peaks near the true parameters", {
   ll_true <- morie_hawkes_st_loglik(ev, .pars(), end_time = 40, area = 100)
   expect_true(is.finite(ll_true))
   # A badly wrong alpha should not fit better than the truth.
-  bad <- .pars(); bad$alpha <- 0.95
+  bad <- .pars()
+  bad$alpha <- 0.95
   ll_bad <- morie_hawkes_st_loglik(ev, bad, end_time = 40, area = 100)
   expect_gt(ll_true, ll_bad)
 })
@@ -61,7 +62,8 @@ test_that("MLE returns a stable fit that maximises the in-sample likelihood", {
   # in-sample (spatiotemporal Hawkes MLE is weakly identified, so we assert
   # likelihood maximisation + stability rather than tight parameter recovery).
   expect_gte(fit$loglik, ll_truth - 1e-6)
-  expect_gt(fit$params$alpha, 0); expect_lt(fit$params$alpha, 1)
+  expect_gt(fit$params$alpha, 0)
+  expect_lt(fit$params$alpha, 1)
   expect_gt(fit$params$mu, 0)
   expect_gt(fit$params$beta, 0)
   expect_gt(fit$params$sigma, 0)

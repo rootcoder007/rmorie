@@ -27,7 +27,9 @@
 #' @param huber_c Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param behavior Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
-#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed}, \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau}, \code{gamma}, \code{n_transitions}, \code{method}.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{allowed},
+#' \code{behavior}, \code{value}, \code{n_eliminated}, \code{bellman_error}, \code{tau},
+#' \code{gamma}, \code{n_transitions}, \code{method}.
 #' @export
 bcq <- function(dataset, states = NULL, actions = NULL, tau = 0.3,
                 gamma = 0.99, lr = 0.5, iters = 2000, loss = "huber",

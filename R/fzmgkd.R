@@ -2,7 +2,8 @@
 
 #' Modified gamma kernel density estimator (Eq. 1.14)
 #'
-#' Eq. (1.14): \eqn{\tilde f_X(x) = \[A_h(x)\]^2 \[A_{4h}(x)\]^{-1}}{ftilde(x) = A_h(x)^2 / A_4h(x)},
+#' Eq. (1.14): \eqn{\tilde f_X(x) = \[A_h(x)\]^2 \[A_{4h}(x)\]^{-1}}{ftilde(x) = A_h(x)^2
+#' / A_4h(x)},
 #' with `A_h` the raw gamma-kernel function (1.9) -- a sample mean of
 #' Gamma(`h^(-1/2)`, `x sqrt(h) + h`) densities.
 #'

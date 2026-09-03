@@ -108,8 +108,10 @@ test_that("heads, lookups and pooling match Python", {
 
 test_that("contextual extraction and ViT patches match Python", {
   L <- array(0, dim = c(2, 2, 2))
-  L[1, 1, ] <- c(1, 0); L[1, 2, ] <- c(1, 0)
-  L[2, 1, ] <- c(1, 1); L[2, 2, ] <- c(2, 2)
+  L[1, 1, ] <- c(1, 0)
+  L[1, 2, ] <- c(1, 0)
+  L[2, 1, ] <- c(1, 1)
+  L[2, 2, ] <- c(2, 2)
   o <- morie_alammar_contextualized_embedding(L, -1, 1)
   expect_equal(o$embedding, c(2, 2))
   img <- matrix(0:15, 4, 4, byrow = TRUE)

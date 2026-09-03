@@ -14,7 +14,8 @@
 #'   Springer, sec. 3.5 p.80. DOI 10.1007/978-3-030-89010-0.
 #' @export
 #' @examples
-#' Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8), eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Msm334(sigma2 = c(1, 2, 3, 4, 5, 6, 7, 8), x_star = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' eigenvalues = c(1, 2, 3, 4, 5, 6, 7, 8))
 Msm334 <- function(sigma2, x_star, eigenvalues) {
   v <- .gpepe(sigma2, x_star, eigenvalues)
   list(estimate = v, irreducible = as.numeric(sigma2),

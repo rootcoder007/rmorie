@@ -32,5 +32,6 @@ km092 -> \code{morie_kamath_ch6_stereotypical_assoc} (counts only in outputs
 that mention w).
 }
 \examples{
-morie_kamath_ch6_demographic_representation(G_i = c(1, 2, 3, 4, 5, 6, 7, 8), A_i = c(1, 2, 3, 4, 5, 6, 7, 8), Yhat = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kamath_ch6_demographic_representation(G_i = c(1, 2, 3, 4, 5, 6, 7, 8),
+  A_i = c(1, 2, 3, 4, 5, 6, 7, 8), Yhat = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

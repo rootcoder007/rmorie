@@ -25,5 +25,6 @@ A named list mirroring the RichResult payload: \code{estimate},   \code{att} (na
 }
 \keyword{internal}
 \examples{
-morie_etwfe(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8), first_treated = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_etwfe(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+  period = c(1, 2, 3, 4, 5, 6, 7, 8), first_treated = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -17,3 +17,7 @@ A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_k05_lr_ind(h = 0.5)
+res
+}

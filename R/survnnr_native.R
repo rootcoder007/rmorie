@@ -108,7 +108,8 @@ ACTIVATIONS <- c("tanh", "relu", "identity")
 
 #' morie_survnnr_forward
 #'
-#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit}, \code{morie_survnnr_risk_score}.
+#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_fit},
+#' \code{morie_survnnr_risk_score}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -211,7 +212,10 @@ morie_survnnr_partial_loglik <- function(times, events, risk) {
 #' @param n_epochs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{400}.
 #' @param seed Passed to \code{.survnnr_init}. Defaults to \code{0}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation}, \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk}, \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties}, \code{scale_note}, \code{method}.
+#' @return A list with \code{estimate}, \code{W}, \code{b}, \code{activation},
+#' \code{hidden}, \code{l2}, \code{loss_history}, \code{risk}, \code{centred_risk},
+#' \code{coefficients}, \code{times}, \code{events}, \code{epochs}, \code{ties},
+#' \code{scale_note}, \code{method}.
 #' @export
 morie_survnnr_fit <- function(X, times, events, hidden = c(),
                               activation = "tanh", l2 = 0.0, lr = 0.1,
@@ -287,7 +291,8 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
 
 #' morie_survnnr_risk_score
 #'
-#' A step of the survnnr_native implementation. Called by \code{morie_survnnr_concordance}, \code{morie_survnnr_survival_function}.
+#' A step of the survnnr_native implementation. Called by
+#' \code{morie_survnnr_concordance}, \code{morie_survnnr_survival_function}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -338,7 +343,8 @@ morie_survnnr_baseline_hazard <- function(fit_result) {
 #'
 #' @param fit_result Passed to \code{morie_survnnr_baseline_hazard}.
 #' @param x Carried through into a list the body builds.
-#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{time}, \code{survival}.
 #' @export
 morie_survnnr_survival_function <- function(fit_result, x, times = NULL) {
@@ -433,16 +439,3 @@ morie_survnnr_deep_surv <- morie_survnnr_fit
 
 # entry point
 morie_survnnr <- morie_survnnr_fit
-
-
-
-
-
-
-
-
-
-
-
-
-

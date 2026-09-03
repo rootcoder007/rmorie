@@ -69,13 +69,15 @@
 
 #' .timeRS_deviation
 #'
-#' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias}, \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
+#' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
+#' \code{.timeRS_user_bias}, \code{morie_timeRS_deviation}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t_user Coerced to numeric by the body, with \code{as.numeric}.
-#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{.timeRS_BETA}.
+#' @param beta Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{.timeRS_BETA}.
 #' @return A numeric value.
 #' @export
 .timeRS_deviation <- function(t, t_user, beta = .timeRS_BETA) {
@@ -90,7 +92,8 @@
 
 #' .timeRS_time_bin
 #'
-#' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias}, \code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
+#' A step of the timeRS_native implementation. Called by \code{.timeRS_fit_time_bias},
+#' \code{.timeRS_item_bias}, \code{morie_timeRS_time_bin}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,7 +114,8 @@
 
 #' .timeRS_user_bias
 #'
-#' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time}, \code{morie_timeRS_user_bias}.
+#' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time},
+#' \code{morie_timeRS_user_bias}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -146,7 +150,8 @@
 
 #' .timeRS_item_bias
 #'
-#' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time}, \code{morie_timeRS_item_bias}.
+#' A step of the timeRS_native implementation. Called by \code{.timeRS_predict_time},
+#' \code{morie_timeRS_item_bias}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -186,7 +191,8 @@
 #' @param per_day Passed to \code{.timeRS_user_bias}.
 #' @param bin_days Passed to \code{.timeRS_item_bias}. Defaults to \code{70}.
 #' @param beta Passed to \code{.timeRS_user_bias}. Defaults to \code{.timeRS_BETA}.
-#' @return A list with \code{prediction}, \code{user_bias}, \code{item_bias}, \code{deviation}, \code{bin}.
+#' @return A list with \code{prediction}, \code{user_bias}, \code{item_bias},
+#' \code{deviation}, \code{bin}.
 #' @export
 .timeRS_predict_time <- function(mu, b_u, alpha_u, t_user, b_i, item_bins, t,
                                  p_u = NULL, q_i = NULL, per_day = NULL,
@@ -213,7 +219,9 @@
 
 #' .timeRS_fit_time_bias
 #'
-#' A step of the timeRS_native implementation. Called by \code{morie_timeRS}, \code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the module.
+#' A step of the timeRS_native implementation. Called by \code{morie_timeRS},
+#' \code{morie_timeRS_fit_time_bias}, \code{morie_timeRS_timesvd} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -226,7 +234,9 @@
 #' @param lr Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @param reg Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @param beta Passed to \code{.timeRS_deviation}. Defaults to \code{.timeRS_BETA}.
-#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user}, \code{beta}, \code{n_instances}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu},
+#' \code{b_user}, \code{alpha_user}, \code{b_item}, \code{item_bins}, \code{t_user},
+#' \code{beta}, \code{n_instances}, \code{method}, \code{note}.
 #' @export
 .timeRS_fit_time_bias <- function(ratings, n_users, n_items, bin_days = 70,
                                   n_bins = 30, epochs = 40, lr = 0.005,

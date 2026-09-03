@@ -14,3 +14,7 @@ A step of the schab_glmm_shared implementation. Called by \code{spbym}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .schab_bym_identifiability_note()
+res
+}

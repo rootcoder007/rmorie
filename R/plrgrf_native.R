@@ -57,6 +57,10 @@
 #' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .plrgrf_folds(n = 3L, V = x)
+#' res
 .plrgrf_folds <- function(n, V) {
   V <- max(2, min(as.integer(V), n))
   lapply(0:(V - 1), function(v) which((seq_len(n) - 1) %% V == v))
@@ -185,7 +189,9 @@ residual_forest <- function(y_res, w_res, X, at = NULL, n_trees = 200,
 #' @param seed Passed to \code{local_centering}. Defaults to \code{0}.
 #' @param center A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @return A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat}, \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n}, \code{n_trees}, \code{ate}, \code{level}, \code{method}.
+#' @return A list with \code{estimate}, \code{tau}, \code{se}, \code{ci}, \code{m_hat},
+#' \code{e_hat}, \code{y_residual}, \code{w_residual}, \code{centered}, \code{n},
+#' \code{n_trees}, \code{ate}, \code{level}, \code{method}.
 #' @export
 morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
                          n_folds = 5, min_leaf = 5, seed = 0,
@@ -247,6 +253,9 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .plrgrf_cheatsheet()
+#' res
 .plrgrf_cheatsheet <- function() {
   "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W - e(X), both cross-fitted -- then solve eq. (2) in the forest neighbourhood: tau(x) = sum a_i Wtilde Ytilde / sum a_i Wtilde^2. Skip the centering and the forest splits on m(X), the confounding surface, not on tau."
 }

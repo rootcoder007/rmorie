@@ -31,7 +31,8 @@ make_dml_dgp <- function(n = 2500L, tau = 2.5, seed = 123L) {
   Y <- tau * D + as.numeric(X %*% gamma) + rnorm(n)
   df <- as.data.frame(X)
   names(df) <- paste0("x", 1:p)
-  df$y <- Y; df$d <- D
+  df$y <- Y
+  df$d <- D
   df
 }
 
@@ -434,7 +435,8 @@ test_that("morie_did_aggregate_gt_att SE formula: SE = sqrt(mean(se^2)/k)", {
 test_that("morie_did_event_study returns event-time coefficient frame", {
   # Make staggered panel: unit cohort = 3 or never
   set.seed(24L)
-  units <- 200L; periods <- 5L
+  units <- 200L
+  periods <- 5L
   cohort <- sample(c(3L, Inf), units, replace = TRUE, prob = c(0.5, 0.5))
   rows <- list()
   for (u in seq_len(units)) {

@@ -12,6 +12,11 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_svdd_mat(X = x, name = txt)
+#' res
 .morie_svdd_mat <- function(X, name) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -35,6 +40,11 @@
 #' @param coef0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{K}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_svdd_kernel_matrix(X = X)
+#' res
 .morie_svdd_kernel_matrix <- function(X, Y = NULL, kernel = "rbf",
                                        gamma = NULL, degree = 3,
                                        coef0 = 1.0) {
@@ -171,7 +181,11 @@
 #' @param coef0 Passed to \code{.morie_svdd_kernel_matrix}. Defaults to \code{1}.
 #' @param tol Passed to \code{.morie_svdd_solve_dual}. Defaults to \code{1e-10}.
 #' @param max_iter Passed to \code{.morie_svdd_solve_dual}. Defaults to \code{20000}.
-#' @return A list with \code{estimate}, \code{alpha}, \code{R2}, \code{radius}, \code{center}, \code{support_}, \code{boundary_}, \code{bounded_}, \code{n_support}, \code{degenerate}, \code{distance2}, \code{outlier_fraction}, \code{outlier_bound}, \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n}, \code{method}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{R2}, \code{radius},
+#' \code{center}, \code{support_}, \code{boundary_}, \code{bounded_}, \code{n_support},
+#' \code{degenerate}, \code{distance2}, \code{outlier_fraction}, \code{outlier_bound},
+#' \code{decision}, \code{predict}, \code{C}, \code{kernel}, \code{gamma}, \code{n},
+#' \code{method}.
 #' @export
 morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
                         gamma = NULL, degree = 3, coef0 = 1.0,
@@ -322,6 +336,9 @@ morie_svdd <- function(X, C = NULL, nu = NULL, kernel = "rbf",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .morie_svdd_cheatsheet()
+#' res
 .morie_svdd_cheatsheet <- function() {
   paste0("svdd: smallest enclosing sphere, min R^2 + C sum xi ",
          "(Tax & Duin 2004 eqs. 3-4). Dual: max sum a_i K_ii - ",

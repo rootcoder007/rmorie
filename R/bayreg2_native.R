@@ -17,7 +17,10 @@
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations}, \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error},
+#' \code{weights}, \code{residuals}, \code{scale2}, \code{fitted}, \code{iterations},
+#' \code{converged}, \code{nu}, \code{loglik}, \code{n}, \code{p}, \code{method},
+#' \code{note}.
 #' @export
 morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
                                                max_iter = 200, tol = 1e-10,
@@ -101,6 +104,9 @@ morie_bayreg2_student_t_regression <- function(X, y, nu = 4.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .bayreg2_cheatsheet()
+#' res
 .bayreg2_cheatsheet <- function() {
   paste0("bayreg2: morie_bayreg2_student_t_regression(X, y, nu) -> robust ",
          "regression by EM on the Student-t scale mixture (West 1984)")

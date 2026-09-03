@@ -14,3 +14,7 @@ single-marker threshold, ELOD and the 0.22 approximation.
 One-line description of the method, in the same spirit as the
 Python \code{cheatsheet} helper.
 }
+\examples{
+res <- .rqtmpl_morie_cheatsheet()
+res
+}

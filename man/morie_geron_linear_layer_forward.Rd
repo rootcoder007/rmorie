@@ -21,5 +21,6 @@ List with \code{output}, \code{preactivation_norm}, \code{in_features},
 Y = X W^T + b with W stored (out, in) as in nn.Linear.
 }
 \examples{
-morie_geron_linear_layer_forward(X = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+morie_geron_linear_layer_forward(X = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b = 5L)
 }

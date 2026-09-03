@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Error and attack tolerance of a network
 #'
-#' Formula: remove f N nodes, then report S = |largest cluster| / N, <s> = mean size of the remaining fragments, and d = mean shortest path
+#' Formula: remove f N nodes, then report S = |largest cluster| / N, <s> = mean size of
+#' the remaining fragments, and d = mean shortest path
 #'
 #' @param A Symmetric 0/1 adjacency matrix.
 #' @param strategy Targeted (highest degree first) or random removal.
@@ -12,8 +13,11 @@
 #' @param strategy See Usage.
 #' @param k See Usage.
 #' @param seed See Usage.
-#' @return List with ``s_giant``, ``mean_fragment``, ``diameter``, ``removed``, ``n_components``, ``n``.
-#' @references Albert, Jeong and Barabasi (2000), Error and attack tolerance of complex networks, Nature 406:378-382, arXiv:cond-mat/0008064. Verified against the paper for the definitions of d, S and <s>.
+#' @return List with ``s_giant``, ``mean_fragment``, ``diameter``, ``removed``,
+#' ``n_components``, ``n``.
+#' @references Albert, Jeong and Barabasi (2000), Error and attack tolerance of complex
+#' networks, Nature 406:378-382, arXiv:cond-mat/0008064. Verified against the paper for
+#' the definitions of d, S and <s>.
 #' @export
 #' @examples
 #' M <- matrix(c(1, 2, 3, 4, 5, 6), nrow = 2)

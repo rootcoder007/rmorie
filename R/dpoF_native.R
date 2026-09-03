@@ -52,7 +52,8 @@
 
 #' .dpoF_logsumexp
 #'
-#' A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce}, \code{optimal_policy}.
+#' A step of the dpoF_native implementation. Called by \code{.dpoF_plackett_luce},
+#' \code{optimal_policy}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -80,6 +81,11 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .dpoF_vec(x = x, name = txt)
+#' res
 .dpoF_vec <- function(x, name) {
   v <- as.numeric(x)
   if (length(v) == 0L) {
@@ -102,8 +108,11 @@
 #' @param model Compared against \code{"plackett-luce"}. Defaults to \code{"bradley-terry"}.
 #' @param logp Passed to \code{.dpoF_plackett_luce}.
 #' @param logp_ref Passed to \code{.dpoF_plackett_luce}.
-#' @param label_smoothing Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w}, \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta}, \code{n}, \code{model}, \code{method}.
+#' @param label_smoothing Coerced to numeric by the body, with \code{as.numeric}.
+#' Defaults to \code{0}.
+#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{reward_w},
+#' \code{reward_l}, \code{margin}, \code{grad_weight}, \code{accuracy}, \code{beta},
+#' \code{n}, \code{model}, \code{method}.
 #' @export
 morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
                        logp_ref_w = NULL, logp_ref_l = NULL,
@@ -181,7 +190,8 @@ morie_dpoF <- function(logp_w = NULL, logp_l = NULL,
 #' @param logp Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param logp_ref Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @param beta Numeric; combined arithmetically in the body.
-#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards}, \code{beta}, \code{n}, \code{model}, \code{method}.
+#' @return A list with \code{estimate}, \code{loss}, \code{losses}, \code{rewards},
+#' \code{beta}, \code{n}, \code{model}, \code{method}.
 #' @export
 .dpoF_plackett_luce <- function(logp, logp_ref, beta) {
   if (is.null(logp) || is.null(logp_ref)) {
@@ -277,6 +287,9 @@ optimal_policy <- function(logp_ref, reward, beta) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .dpoF_cheatsheet()
+#' res
 .dpoF_cheatsheet <- function() {
   return("dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_l/ref_l) (Rafailov 2023 eq. 7); implicit reward rhat = beta log pi/pi_ref; grad weight sigma(rhat_l - rhat_w); model='plackett-luce' is eq. 20 and reduces to eq. 7 at K=2. optimal_policy() is eq. 4.")
 }

@@ -49,7 +49,8 @@
   "upstream_gene_variant", "downstream_gene_variant", "TFBS_ablation",
   "TFBS_amplification", "TF_binding_site_variant",
   "regulatory_region_ablation", "regulatory_region_amplification",
-  "regulatory_region_variant", "intergenic_variant", "sequence_variant")
+  "regulatory_region_variant", "intergenic_variant", "sequence_variant"
+)
 
 .vepan_IMPACTS <- c(
   "HIGH", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH", "HIGH",
@@ -57,7 +58,8 @@
   "LOW", "LOW", "LOW", "LOW", "LOW", "LOW", "MODIFIER", "MODIFIER",
   "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER",
   "MODIFIER", "MODIFIER", "MODIFIER", "MODERATE", "MODIFIER", "MODIFIER",
-  "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER")
+  "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER", "MODIFIER"
+)
 
 .vepan_SO <- c(
   "SO:0001893", "SO:0001574", "SO:0001575", "SO:0001587", "SO:0001589",
@@ -68,27 +70,37 @@
   "SO:0001624", "SO:0001792", "SO:0001627", "SO:0001621", "SO:0001619",
   "SO:0001968", "SO:0001631", "SO:0001632", "SO:0001895", "SO:0001892",
   "SO:0001782", "SO:0001894", "SO:0001891", "SO:0001566", "SO:0001628",
-  "SO:0001060")
+  "SO:0001060"
+)
 
-morie_vepan_CONSEQUENCE_RANK <- stats::setNames(seq_along(.vepan_TERMS),
-                                                .vepan_TERMS)
-morie_vepan_CONSEQUENCE_IMPACT <- stats::setNames(.vepan_IMPACTS,
-                                                  .vepan_TERMS)
+morie_vepan_CONSEQUENCE_RANK <- stats::setNames(
+  seq_along(.vepan_TERMS),
+  .vepan_TERMS
+)
+morie_vepan_CONSEQUENCE_IMPACT <- stats::setNames(
+  .vepan_IMPACTS,
+  .vepan_TERMS
+)
 morie_vepan_CONSEQUENCE_SO <- stats::setNames(.vepan_SO, .vepan_TERMS)
 
 # Table 7's --pick order, applied in sequence. Canonical first.
-morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
-                            "consequence_rank", "transcript_id")
+morie_vepan_PICK_ORDER <- c(
+  "canonical", "protein_coding",
+  "consequence_rank", "transcript_id"
+)
 
-.vepan_COMPLEMENT <- c(A="T", C="G", G="C", T="A", N="N")
-.vepan_AA3 <- c(A="Ala", R="Arg", N="Asn", D="Asp", C="Cys", Q="Gln",
-                E="Glu", G="Gly", H="His", I="Ile", L="Leu", K="Lys",
-                M="Met", F="Phe", P="Pro", S="Ser", T="Thr", W="Trp",
-                Y="Tyr", V="Val", "*"="Ter", X="Xaa")
+.vepan_COMPLEMENT <- c(A = "T", C = "G", G = "C", T = "A", N = "N")
+.vepan_AA3 <- c(
+  A = "Ala", R = "Arg", N = "Asn", D = "Asp", C = "Cys", Q = "Gln",
+  E = "Glu", G = "Gly", H = "His", I = "Ile", L = "Leu", K = "Lys",
+  M = "Met", F = "Phe", P = "Pro", S = "Ser", T = "Thr", W = "Trp",
+  Y = "Tyr", V = "Val", "*" = "Ter", X = "Xaa"
+)
 
 #' Python range(lo, hi+1); empty when hi < lo
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{.vepan_splice_terms} and 1 others in the module.
+#' A step of the vepan_native implementation. Called by \code{.vepan_apply},
+#' \code{.vepan_hgvs_c}, \code{.vepan_splice_terms} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -113,13 +125,14 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 #' @export
 .vepan_find <- function(s, ch) {
   # 0-based index of ch in s, or -1 (like Python str.find).
-  p <- regexpr(ch, s, fixed=TRUE)
+  p <- regexpr(ch, s, fixed = TRUE)
   if (p < 0) -1L else as.integer(p - 1L)
 }
 
 #' 0-based character access
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_cds_frame}, \code{.vepan_coding_terms}, \code{.vepan_hgvs_c}.
+#' A step of the vepan_native implementation. Called by \code{.vepan_cds_frame},
+#' \code{.vepan_coding_terms}, \code{.vepan_hgvs_c}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -127,6 +140,10 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{substr}.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .vepan_char(s = txt, k = 3L)
+#' res
 .vepan_char <- function(s, k) {
   # 0-based character access.
   substr(s, k + 1L, k + 1L)
@@ -134,7 +151,8 @@ morie_vepan_PICK_ORDER <- c("canonical", "protein_coding",
 
 #' Severity rank of an SO term; 1 is worst. Unknown terms sort last
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_pick_key}, \code{morie_vepan_annotate}.
+#' A step of the vepan_native implementation. Called by \code{.vepan_pick_key},
+#' \code{morie_vepan_annotate}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -184,18 +202,24 @@ morie_vepan_most_severe_consequence <- function(terms) {
 
 #' .vepan_revcomp
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}.
+#' A step of the vepan_native implementation. Called by \code{.vepan_apply},
+#' \code{.vepan_hgvs_c}, \code{morie_vepan_transcript_sequence}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param s Character; passed to \code{toupper}.
 #' @return A character value.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .vepan_revcomp(s = txt)
+#' res
 .vepan_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.vepan_COMPLEMENT),
-                 .vepan_COMPLEMENT[chars], "N")
-  paste(comp, collapse="")
+    .vepan_COMPLEMENT[chars], "N"
+  )
+  paste(comp, collapse = "")
 }
 
 # ------------------------------------------------------ transcript model
@@ -216,7 +240,7 @@ morie_vepan_most_severe_consequence <- function(terms) {
     m <- do.call(rbind, lapply(ex, function(p) as.integer(unlist(p))))
   }
   storage.mode(m) <- "integer"
-  m[order(m[, 1L]), , drop=FALSE]
+  m[order(m[, 1L]), , drop = FALSE]
 }
 
 #' .vepan_transcript
@@ -225,8 +249,12 @@ morie_vepan_most_severe_consequence <- function(terms) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tr A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end}, \code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id}, \code{$strand} from it.
-#' @return A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons}, \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start}, \code{end}.
+#' @param tr A list; the body reads \code{$biotype}, \code{$canonical}, \code{$cds_end},
+#' \code{$cds_start}, \code{$chrom}, \code{$exons}, \code{$gene}, \code{$id},
+#' \code{$strand} from it.
+#' @return A list with \code{id}, \code{gene}, \code{chrom}, \code{strand}, \code{exons},
+#' \code{cds_start}, \code{cds_end}, \code{biotype}, \code{canonical}, \code{start},
+#' \code{end}.
 #' @export
 .vepan_transcript <- function(tr) {
   if (is.null(tr[["exons"]])) {
@@ -262,21 +290,25 @@ morie_vepan_most_severe_consequence <- function(terms) {
     "lncRNA"
   }
   if (biotype == "protein_coding" && (is.null(cs) || is.null(ce))) {
-    stop(paste0("vepan: a protein_coding transcript needs cds_start and ",
-                "cds_end"))
+    stop(paste0(
+      "vepan: a protein_coding transcript needs cds_start and ",
+      "cds_end"
+    ))
   }
   if (!is.null(cs) && !is.null(ce) && as.integer(cs) > as.integer(ce)) {
     stop("vepan: cds_start must not exceed cds_end")
   }
-  list(id=if (is.null(tr[["id"]])) "TR" else tr[["id"]],
-       gene=if (is.null(tr[["gene"]])) "GENE" else tr[["gene"]],
-       chrom=if (is.null(tr[["chrom"]])) "chr1" else tr[["chrom"]],
-       strand=strand, exons=exons,
-       cds_start=if (is.null(cs)) NULL else as.integer(cs),
-       cds_end=if (is.null(ce)) NULL else as.integer(ce),
-       biotype=biotype,
-       canonical=isTRUE(tr[["canonical"]]),
-       start=exons[1L, 1L], end=exons[nrow(exons), 2L])
+  list(
+    id = if (is.null(tr[["id"]])) "TR" else tr[["id"]],
+    gene = if (is.null(tr[["gene"]])) "GENE" else tr[["gene"]],
+    chrom = if (is.null(tr[["chrom"]])) "chr1" else tr[["chrom"]],
+    strand = strand, exons = exons,
+    cds_start = if (is.null(cs)) NULL else as.integer(cs),
+    cds_end = if (is.null(ce)) NULL else as.integer(ce),
+    biotype = biotype,
+    canonical = isTRUE(tr[["canonical"]]),
+    start = exons[1L, 1L], end = exons[nrow(exons), 2L]
+  )
 }
 
 #' The spliced transcript, 5\' to 3\', and the genomic position of each
@@ -300,12 +332,12 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
     seq_parts <- c(seq_parts, substr(g, a, b))
     gpos <- c(gpos, a:b)
   }
-  s <- toupper(paste(seq_parts, collapse=""))
+  s <- toupper(paste(seq_parts, collapse = ""))
   if (t$strand == "-") {
     s <- .vepan_revcomp(s)
     gpos <- rev(gpos)
   }
-  list(seq=s, gpos=gpos)
+  list(seq = s, gpos = gpos)
 }
 
 #' CDNA index (0-based) of each coding base, and the coding sequence
@@ -321,23 +353,25 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 .vepan_cds_frame <- function(t, genome) {
   # cDNA index (0-based) of each coding base, and the coding sequence.
   if (is.null(t$cds_start)) {
-    return(list(cds=NULL, coding=NULL, sg=NULL))
+    return(list(cds = NULL, coding = NULL, sg = NULL))
   }
   sg <- morie_vepan_transcript_sequence(t, genome)
   seq <- sg$seq
   gpos <- sg$gpos
-  coding <- which(gpos >= t$cds_start & gpos <= t$cds_end) - 1L  # 0-based
+  coding <- which(gpos >= t$cds_start & gpos <= t$cds_end) - 1L # 0-based
   if (length(coding) == 0L) {
     stop("vepan: the CDS does not overlap any exon")
   }
   cds <- paste(vapply(coding, function(k) .vepan_char(seq, k), character(1)),
-               collapse="")
-  list(cds=cds, coding=coding, sg=sg)
+    collapse = ""
+  )
+  list(cds = cds, coding = coding, sg = sg)
 }
 
 #' .vepan_introns
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_splice_terms}, \code{morie_vepan_annotate}.
+#' A step of the vepan_native implementation. Called by \code{.vepan_splice_terms},
+#' \code{morie_vepan_annotate}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -363,7 +397,8 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param v A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos}, \code{$ref} from it.
+#' @param v A list; the body reads \code{$alt}, \code{$chrom}, \code{$id}, \code{$pos},
+#' \code{$ref} from it.
 #' @return A list with \code{chrom}, \code{pos}, \code{ref}, \code{alt}, \code{id}.
 #' @export
 .vepan_variant <- function(v) {
@@ -386,13 +421,16 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   if (nchar(ref) > 1L && nchar(alt) > 1L) {
     stop("vepan: only SNVs and anchored indels are handled")
   }
-  list(chrom=if (is.null(v[["chrom"]])) "chr1" else v[["chrom"]],
-       pos=pos, ref=ref, alt=alt, id=v[["id"]])
+  list(
+    chrom = if (is.null(v[["chrom"]])) "chr1" else v[["chrom"]],
+    pos = pos, ref = ref, alt = alt, id = v[["id"]]
+  )
 }
 
 #' .vepan_kind
 #'
-#' A step of the vepan_native implementation. Called by \code{.vepan_affected}, \code{.vepan_apply}, \code{.vepan_coding_terms} and 2 others in the module.
+#' A step of the vepan_native implementation. Called by \code{.vepan_affected},
+#' \code{.vepan_apply}, \code{.vepan_coding_terms} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -434,7 +472,8 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param t A list; the body reads \code{$end}, \code{$exons}, \code{$start}, \code{$strand} from it.
+#' @param t A list; the body reads \code{$end}, \code{$exons}, \code{$start},
+#' \code{$strand} from it.
 #' @param v Accepted by the signature and not used anywhere in the body.
 #' @param lo Passed to \code{.vepan_seqrange}.
 #' @param hi Passed to \code{.vepan_seqrange}.
@@ -487,7 +526,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
       if (a <= p && p <= b) {
         near <- min(p - a + 1L, b - p + 1L)
         touches <- ((a != t$start && p - a + 1L <= 3L) ||
-                    (b != t$end && b - p + 1L <= 3L))
+          (b != t$end && b - p + 1L <= 3L))
         if (near <= 3L && touches) {
           terms <- c(terms, "splice_region_variant")
         }
@@ -519,7 +558,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   if (kind == "insertion") {
     anchor <- pos_map[[as.character(v$pos)]]
     if (is.null(anchor)) {
-      return(list(alt_cds=NULL, off=NULL))
+      return(list(alt_cds = NULL, off = NULL))
     }
     ins <- substr(v$alt, 2L, nchar(v$alt))
     if (strand == "-") {
@@ -528,26 +567,30 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
     } else {
       cut <- anchor + 1L
     }
-    alt <- paste0(substr(cds, 1L, cut), ins,
-                  substr(cds, cut + 1L, nchar(cds)))
-    return(list(alt_cds=alt, off=cut))
+    alt <- paste0(
+      substr(cds, 1L, cut), ins,
+      substr(cds, cut + 1L, nchar(cds))
+    )
+    return(list(alt_cds = alt, off = cut))
   }
   offs <- sort(unlist(lapply(.vepan_seqrange(lo, hi), function(p) {
     val <- pos_map[[as.character(p)]]
     if (is.null(val)) NULL else val
   })))
   if (length(offs) == 0L) {
-    return(list(alt_cds=NULL, off=NULL))
+    return(list(alt_cds = NULL, off = NULL))
   }
   if (kind == "deletion") {
     chars <- strsplit(cds, "")[[1L]]
     keep <- chars[-(offs + 1L)]
-    return(list(alt_cds=paste(keep, collapse=""), off=offs[1L]))
+    return(list(alt_cds = paste(keep, collapse = ""), off = offs[1L]))
   }
   base <- if (strand == "+") v$alt else .vepan_COMPLEMENT[[v$alt]]
   o <- offs[1L]
-  list(alt_cds=paste0(substr(cds, 1L, o), base,
-                      substr(cds, o + 2L, nchar(cds))), off=o)
+  list(alt_cds = paste0(
+    substr(cds, 1L, o), base,
+    substr(cds, o + 2L, nchar(cds))
+  ), off = o)
 }
 
 #' Everything that depends on the protein: the predicate set. Returns
@@ -567,7 +610,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   terms <- character(0)
   ap <- .vepan_apply(cds, v, coding, gpos, t$strand)
   if (is.null(ap$alt_cds)) {
-    return(list(terms=terms, info=list()))
+    return(list(terms = terms, info = list()))
   }
   alt_cds <- ap$alt_cds
   off <- ap$off
@@ -576,25 +619,27 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   kind <- .vepan_kind(v)
   delta <- nchar(alt_cds) - nchar(cds)
   codon <- off %/% 3L
-  info <- list(cds_position=off + 1L, protein_position=codon + 1L,
-               ref_codon=substr(cds, codon * 3L + 1L, codon * 3L + 3L),
-               ref_aa=if (codon < nchar(ref_prot)) {
-                 .vepan_char(ref_prot, codon)
-               } else {
-                 ""
-               },
-               alt_aa=if (codon < nchar(alt_prot)) {
-                 .vepan_char(alt_prot, codon)
-               } else {
-                 ""
-               },
-               cds_length=nchar(cds), alt_cds_length=nchar(alt_cds))
+  info <- list(
+    cds_position = off + 1L, protein_position = codon + 1L,
+    ref_codon = substr(cds, codon * 3L + 1L, codon * 3L + 3L),
+    ref_aa = if (codon < nchar(ref_prot)) {
+      .vepan_char(ref_prot, codon)
+    } else {
+      ""
+    },
+    alt_aa = if (codon < nchar(alt_prot)) {
+      .vepan_char(alt_prot, codon)
+    } else {
+      ""
+    },
+    cds_length = nchar(cds), alt_cds_length = nchar(alt_cds)
+  )
   if (kind != "SNV" && (delta %% 3L) != 0L) {
     terms <- c(terms, "frameshift_variant")
-    if (grepl("*", substr(alt_prot, 1L, codon + 1L), fixed=TRUE)) {
+    if (grepl("*", substr(alt_prot, 1L, codon + 1L), fixed = TRUE)) {
       terms <- c(terms, "stop_gained")
     }
-    return(list(terms=unique(terms), info=info))
+    return(list(terms = unique(terms), info = info))
   }
   if (kind == "insertion") {
     terms <- c(terms, "inframe_insertion")
@@ -619,8 +664,8 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   }
   expected_stop <- if (ref_stop >= 0L) ref_stop + delta %/% 3L else -1L
   if (alt_stop >= 0L &&
-      (expected_stop < 0L || alt_stop < expected_stop) &&
-      !("stop_lost" %in% terms)) {
+    (expected_stop < 0L || alt_stop < expected_stop) &&
+    !("stop_lost" %in% terms)) {
     terms <- c(terms, "stop_gained")
   }
   if (kind == "SNV" && length(terms) == 0L) {
@@ -633,7 +678,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   if (length(terms) == 0L) {
     terms <- c(terms, "coding_sequence_variant")
   }
-  list(terms=unique(terms), info=info)
+  list(terms = unique(terms), info = info)
 }
 
 #' C. notation, with an indel shifted to its most 3\' position
@@ -692,7 +737,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   b <- ks[length(ks)]
   n <- b - a + 1L
   while (b + n < nchar(seq) &&
-         substr(seq, a + 1L, b + 1L) == substr(seq, a + n + 1L, b + n + 1L)) {
+    substr(seq, a + 1L, b + 1L) == substr(seq, a + n + 1L, b + n + 1L)) {
     a <- a + n
     b <- b + n
   }
@@ -709,8 +754,10 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param info A list; the body reads \code{$alt_aa}, \code{$protein_position}, \code{$ref_aa} from it.
-#' @param terms One of \code{"frameshift_variant"}, \code{"start_retained_variant"}, \code{"stop_retained_variant"}, \code{"synonymous_variant"}.
+#' @param info A list; the body reads \code{$alt_aa}, \code{$protein_position},
+#' \code{$ref_aa} from it.
+#' @param terms One of \code{"frameshift_variant"}, \code{"start_retained_variant"},
+#' \code{"stop_retained_variant"}, \code{"synonymous_variant"}.
 #' @return A character value.
 #' @export
 .vepan_hgvs_p <- function(info, terms) {
@@ -720,10 +767,12 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   ref <- info$ref_aa
   alt <- info$alt_aa
   pos <- info$protein_position
-  aa3 <- function(x) if (!is.null(x) && x %in% names(.vepan_AA3)) {
-    .vepan_AA3[[x]]
-  } else {
-    "Xaa"
+  aa3 <- function(x) {
+    if (!is.null(x) && x %in% names(.vepan_AA3)) {
+      .vepan_AA3[[x]]
+    } else {
+      "Xaa"
+    }
   }
   if ("frameshift_variant" %in% terms) {
     return(sprintf("p.%s%dfs", aa3(ref), pos))
@@ -731,8 +780,10 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
   if (is.null(ref) || ref == "") {
     return(NULL)
   }
-  if (any(c("synonymous_variant", "stop_retained_variant",
-            "start_retained_variant") %in% terms)) {
+  if (any(c(
+    "synonymous_variant", "stop_retained_variant",
+    "start_retained_variant"
+  ) %in% terms)) {
     return(sprintf("p.%s%d=", aa3(ref), pos))
   }
   if (is.null(alt) || alt == "") {
@@ -757,7 +808,7 @@ morie_vepan_transcript_sequence <- function(tr, genome) {
 #' @return The value of \code{[}.
 #' @export
 morie_vepan_annotate <- function(variant, transcripts, genome,
-                                 upstream=5000, downstream=5000) {
+                                 upstream = 5000, downstream = 5000) {
   # One record per (variant, transcript) overlap, as the VEP emits. A
   # variant beyond every transcript's flank gets a single
   # intergenic_variant record with no transcript attached.
@@ -794,11 +845,17 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
     }
     terms <- character(0)
     if (span_hi < t$start) {
-      terms <- c(terms, if (t$strand == "+") "upstream_gene_variant"
-                        else "downstream_gene_variant")
+      terms <- c(terms, if (t$strand == "+") {
+        "upstream_gene_variant"
+      } else {
+        "downstream_gene_variant"
+      })
     } else if (span_lo > t$end) {
-      terms <- c(terms, if (t$strand == "+") "downstream_gene_variant"
-                        else "upstream_gene_variant")
+      terms <- c(terms, if (t$strand == "+") {
+        "downstream_gene_variant"
+      } else {
+        "upstream_gene_variant"
+      })
     }
     info <- list()
     hgvs_c <- NULL
@@ -830,9 +887,13 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
           }
         }
       }
-      terms <- unique(c(terms,
-                        .vepan_splice_terms(t, v, min(lo, v$pos),
-                                            max(hi, v$pos))))
+      terms <- unique(c(
+        terms,
+        .vepan_splice_terms(
+          t, v, min(lo, v$pos),
+          max(hi, v$pos)
+        )
+      ))
       if (in_intron) {
         terms <- c(terms, "intron_variant")
       }
@@ -852,15 +913,18 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
           all_in_cds <- all(rng >= t$cds_start & rng <= t$cds_end)
         }
         ins_in_cds <- (.vepan_kind(v) == "insertion" &&
-                       t$cds_start <= v$pos && v$pos <= t$cds_end)
+          t$cds_start <= v$pos && v$pos <= t$cds_end)
         if ((length(rng) > 0L && all_in_cds) || ins_in_cds) {
           ct <- .vepan_coding_terms(t, v, cds, coding, gpos)
           terms <- unique(c(terms, ct$terms))
           info <- ct$info
         } else {
           utr5 <- (v$pos < t$cds_start) == (t$strand == "+")
-          terms <- c(terms, if (utr5) "5_prime_UTR_variant"
-                            else "3_prime_UTR_variant")
+          terms <- c(terms, if (utr5) {
+            "5_prime_UTR_variant"
+          } else {
+            "3_prime_UTR_variant"
+          })
         }
         hgvs_c <- .vepan_hgvs_c(t, v, seq, gpos, cds_first)
         hgvs_p <- .vepan_hgvs_p(info, terms)
@@ -873,12 +937,13 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
     ms <- morie_vepan_most_severe_consequence(terms)
     ranks <- vapply(terms, morie_vepan_consequence_rank, integer(1))
     record <- list(
-      variant=vlabel, transcript=t$id, gene=t$gene, biotype=t$biotype,
-      canonical=t$canonical, strand=t$strand,
-      consequences=terms[order(ranks)],
-      most_severe=ms,
-      impact=morie_vepan_consequence_impact(ms),
-      hgvs_c=hgvs_c, hgvs_p=hgvs_p)
+      variant = vlabel, transcript = t$id, gene = t$gene, biotype = t$biotype,
+      canonical = t$canonical, strand = t$strand,
+      consequences = terms[order(ranks)],
+      most_severe = ms,
+      impact = morie_vepan_consequence_impact(ms),
+      hgvs_c = hgvs_c, hgvs_p = hgvs_p
+    )
     for (nm in names(info)) {
       record[[nm]] <- info[[nm]]
     }
@@ -886,18 +951,23 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
   }
   if (length(out) == 0L) {
     out <- list(list(
-      variant=vlabel, transcript=NULL, gene=NULL, biotype=NULL,
-      canonical=FALSE, strand=NULL,
-      consequences=c("intergenic_variant"),
-      most_severe="intergenic_variant", impact="MODIFIER",
-      hgvs_c=NULL, hgvs_p=NULL))
+      variant = vlabel, transcript = NULL, gene = NULL, biotype = NULL,
+      canonical = FALSE, strand = NULL,
+      consequences = c("intergenic_variant"),
+      most_severe = "intergenic_variant", impact = "MODIFIER",
+      hgvs_c = NULL, hgvs_p = NULL
+    ))
   }
-  keys_rank <- vapply(out,
-                      function(r) morie_vepan_consequence_rank(r$most_severe),
-                      integer(1))
-  keys_tr <- vapply(out,
-                    function(r) if (is.null(r$transcript)) "" else r$transcript,
-                    character(1))
+  keys_rank <- vapply(
+    out,
+    function(r) morie_vepan_consequence_rank(r$most_severe),
+    integer(1)
+  )
+  keys_tr <- vapply(
+    out,
+    function(r) if (is.null(r$transcript)) "" else r$transcript,
+    character(1)
+  )
   out[order(keys_rank, keys_tr)]
 }
 
@@ -907,15 +977,18 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param r A list; the body reads \code{$biotype}, \code{$canonical}, \code{$most_severe}, \code{$transcript} from it.
+#' @param r A list; the body reads \code{$biotype}, \code{$canonical},
+#' \code{$most_severe}, \code{$transcript} from it.
 #' @return The value of \code{list}.
 #' @export
 .vepan_pick_key <- function(r) {
   # Table 7's order: canonical, then protein coding, then severity.
-  list(if (isTRUE(r$canonical)) 0L else 1L,
-       if (!is.null(r$biotype) && r$biotype == "protein_coding") 0L else 1L,
-       morie_vepan_consequence_rank(r$most_severe),
-       if (is.null(r$transcript)) "" else r$transcript)
+  list(
+    if (isTRUE(r$canonical)) 0L else 1L,
+    if (!is.null(r$biotype) && r$biotype == "protein_coding") 0L else 1L,
+    morie_vepan_consequence_rank(r$most_severe),
+    if (is.null(r$transcript)) "" else r$transcript
+  )
 }
 
 #' Lexicographic comparison of two pick keys
@@ -952,7 +1025,7 @@ morie_vepan_annotate <- function(variant, transcripts, genome,
 #' @param per_gene A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{unname}.
 #' @export
-morie_vepan_pick <- function(records, per_gene=FALSE) {
+morie_vepan_pick <- function(records, per_gene = FALSE) {
   # --pick (one record) or --per_gene (one per gene).
   rs <- records
   if (length(rs) == 0L) {
@@ -997,11 +1070,13 @@ morie_vepan_pick <- function(records, per_gene=FALSE) {
 #' @param downstream Passed to \code{morie_vepan_annotate}. Defaults to \code{5000}.
 #' @param mode One of \code{"all"}, \code{"per_gene"}, \code{"pick"}. Defaults to \code{"all"}.
 #' @param no_intergenic A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{annotations}, \code{n_variants}, \code{n_annotations}, \code{consequence_counts}, \code{mode}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{n_variants},
+#' \code{n_annotations}, \code{consequence_counts}, \code{mode}, \code{method},
+#' \code{note}.
 #' @export
 morie_vepan_vep_annotation <- function(variants, transcripts, genome,
-                                       upstream=5000, downstream=5000,
-                                       mode="all", no_intergenic=FALSE) {
+                                       upstream = 5000, downstream = 5000,
+                                       mode = "all", no_intergenic = FALSE) {
   # Annotate every variant against every transcript. mode is "all"
   # (every overlap), "pick" (Table 7's one line per variant) or
   # "per_gene".
@@ -1025,7 +1100,7 @@ morie_vepan_vep_annotation <- function(variants, transcripts, genome,
     if (mode == "pick") {
       recs <- morie_vepan_pick(recs)
     } else if (mode == "per_gene") {
-      recs <- morie_vepan_pick(recs, per_gene=TRUE)
+      recs <- morie_vepan_pick(recs, per_gene = TRUE)
     }
     rows <- c(rows, recs)
   }
@@ -1036,17 +1111,22 @@ morie_vepan_vep_annotation <- function(variants, transcripts, genome,
     }
   }
   list(
-    estimate=rows, annotations=rows, n_variants=length(vs),
-    n_annotations=length(rows), consequence_counts=by_term, mode=mode,
-    method=paste0("Ensembl Variant Effect Predictor (McLaren et al. ",
-                  "2016): per-transcript consequence predicates with ",
-                  "Sequence Ontology terms, severity from Ensembl's ",
-                  "published consequence table"),
-    note=paste0("regulatory, TFBS, NMD, miRNA and structural-variant ",
-                "terms are in the rank table for severity comparison ",
-                "but are not predicted here, since they need a ",
-                "regulatory build or transcript flags a gene model ",
-                "does not carry"))
+    estimate = rows, annotations = rows, n_variants = length(vs),
+    n_annotations = length(rows), consequence_counts = by_term, mode = mode,
+    method = paste0(
+      "Ensembl Variant Effect Predictor (McLaren et al. ",
+      "2016): per-transcript consequence predicates with ",
+      "Sequence Ontology terms, severity from Ensembl's ",
+      "published consequence table"
+    ),
+    note = paste0(
+      "regulatory, TFBS, NMD, miRNA and structural-variant ",
+      "terms are in the rank table for severity comparison ",
+      "but are not predicted here, since they need a ",
+      "regulatory build or transcript flags a gene model ",
+      "does not carry"
+    )
+  )
 }
 
 #' morie_vepan_cheatsheet

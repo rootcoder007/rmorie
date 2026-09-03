@@ -81,8 +81,10 @@ test_that("native ordinary kriging tracks gstat::krige", {
                   range = 0.3)
   mine <- morie_spatial_krige(as.matrix(xy), v, as.matrix(new_xy),
                               vgm = vgm_fit)
-  df <- cbind(xy, z = v); sp::coordinates(df) <- ~ x + y
-  nd <- new_xy; sp::coordinates(nd) <- ~ x + y
+  df <- cbind(xy, z = v)
+  sp::coordinates(df) <- ~ x + y
+  nd <- new_xy
+  sp::coordinates(nd) <- ~ x + y
   gmod <- gstat::vgm(psill = 1, model = "Exp", range = 0.3,
                      nugget = 0.05)
   ref <- suppressWarnings(

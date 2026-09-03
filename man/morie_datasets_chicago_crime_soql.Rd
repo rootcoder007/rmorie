@@ -29,7 +29,7 @@ morie_datasets_chicago_crime_soql(
 
 \item{offline}{Logical; if \code{TRUE} (default), read the 22-col
 \code{chicago_crime_synthetic.csv} fixture (same one
-\code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}} uses).}
+\code{morie_datasets_chicago_crime()} uses).}
 
 \item{resource_id}{Optional view id override (default
 \code{"ijzp-q8t2"}; pass \code{"crimes"} for the publisher alias path).}
@@ -46,7 +46,7 @@ morie_datasets_chicago_crime_soql(
 A \code{data.frame}.
 }
 \description{
-Sibling to \code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}} but hits the
+Sibling to \code{morie_datasets_chicago_crime()} but hits the
 \strong{SODA3} \verb{/api/v3/views/crimes/query.json} endpoint instead of
 SODA2's \verb{/resource/ijzp-q8t2.json}. The 8.56M-row scale of the
 base feed makes SODA2's URL-param \verb{$where} clumsy for non-trivial

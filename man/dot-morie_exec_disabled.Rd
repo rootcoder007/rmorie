@@ -14,3 +14,7 @@ A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allo
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_exec_disabled()
+res
+}

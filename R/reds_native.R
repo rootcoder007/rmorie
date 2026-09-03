@@ -58,7 +58,8 @@ morie_arch_lm_test <- function(r, q = 1L, demean = TRUE) {
 # Internal: KS statistic for a sorted sample against CDF values.
 #' Internal: KS statistic for a sorted sample against CDF values
 #'
-#' A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted}, \code{morie_multi_horizon_ks}.
+#' A step of the reds_native implementation. Called by \code{.rn_mc_p_fitted},
+#' \code{morie_multi_horizon_ks}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

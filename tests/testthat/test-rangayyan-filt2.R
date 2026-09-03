@@ -288,7 +288,8 @@ test_that("Notch60 puts conjugate zeros on the interference", {
 })
 
 test_that("poles narrow the notch", {
-  fs <- 1000; f0 <- 60
+  fs <- 1000
+  f0 <- 60
   wide <- Notch60(fs, f0)
   gw <- function(f) {
     w <- 2 * pi * f / fs
@@ -301,7 +302,8 @@ test_that("poles narrow the notch", {
               z = complex(real = cos(w), imaginary = sin(w)))$H)
   }
   bw <- function(g) {
-    lo <- f0; hi <- f0
+    lo <- f0
+    hi <- f0
     while (lo > 0.05 && g(lo) < 1 / sqrt(2)) lo <- lo - 0.05
     while (hi < fs / 2 - 0.05 && g(hi) < 1 / sqrt(2)) hi <- hi + 0.05
     hi - lo

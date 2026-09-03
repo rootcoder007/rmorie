@@ -28,5 +28,6 @@ Cressie (1993) sec. 3.4.5; Schabenberger & Gotway (2005) ch. 5.
 }
 \keyword{internal}
 \examples{
-rmorie:::morie_krigun(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), s_predict = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::morie_krigun(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
+  s_predict = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

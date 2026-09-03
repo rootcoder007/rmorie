@@ -7,7 +7,7 @@
 morie_tmle_quantile(y, d, x, quantile = 0.5, n_grid = 60L, trunc = 0.01)
 }
 \arguments{
-\item{y, d, x}{As in \code{\link[=morie_tmle_propensity_only]{morie_tmle_propensity_only()}}.}
+\item{y, d, x}{As in \code{morie_tmle_propensity_only()}.}
 
 \item{quantile}{Quantile level in (0, 1).}
 

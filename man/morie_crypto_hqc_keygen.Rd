@@ -16,11 +16,13 @@ standardized as the backup to ML-KEM precisely so that a lattice
 break does not strand deployments. Requires liboqs with HQC.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
-  if (!inherits(kp, "try-error")) {
-    length(kp$pk)
-    length(kp$sk)
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- try(morie_crypto_hqc_keygen(), silent = TRUE)
+    if (!inherits(kp, "try-error")) {
+      length(kp$pk)
+      length(kp$sk)
+    }
   }
 }
 }

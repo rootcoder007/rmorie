@@ -15,7 +15,10 @@
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_components Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{intercept}, \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings}, \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components}, \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{intercept},
+#' \code{fitted}, \code{residuals}, \code{scores}, \code{weights}, \code{loadings},
+#' \code{y_loadings}, \code{explained_x}, \code{explained_y}, \code{n_components},
+#' \code{r_squared}, \code{n}, \code{p}, \code{method}, \code{note}.
 #' @export
 morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
   Xm <- as.matrix(X)
@@ -105,6 +108,9 @@ morie_plsqs_pls_regression <- function(X, Y, n_components = 2) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .plsqs_cheatsheet()
+#' res
 .plsqs_cheatsheet <- function() {
   paste0("plsqs: morie_plsqs_pls_regression(X, Y, n_components) -> NIPALS ",
          "PLS1 (Wold, Sjostrom & Eriksson 2001)")

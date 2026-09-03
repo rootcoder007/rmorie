@@ -10,7 +10,8 @@
 
 #' .morie_qrs_pad
 #'
-#' A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv}, \code{QrsDeriv1}, \code{QrsDeriv2} and 1 others in the module.
+#' A step of the rangayyan_qrs implementation. Called by \code{QrsDeriv},
+#' \code{QrsDeriv1}, \code{QrsDeriv2} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -18,6 +19,10 @@
 #' @param k A count; the body uses it as \code{rep(...)}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_pad(v = x, k = 3L)
+#' res
 .morie_qrs_pad <- function(v, k) c(rep(0, k), v)
 
 #' Causal m-point moving average; the first m-1 outputs use a short
@@ -55,6 +60,10 @@
 #' @param x A vector; its length is taken.
 #' @return A list with \code{re}, \code{im}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_dft(x = x)
+#' res
 .morie_qrs_dft <- function(x) {
   # Plain O(n^2) DFT.  The angle is formed as w * j with w = -2 pi k / n,
   # NOT as -2 pi k j / n: the two differ in the last bits and the Python arm
@@ -74,7 +83,8 @@
 
 #' One-sided periodogram; power in units^2/Hz
 #'
-#' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl}, \code{EdrSignal}, \code{HrvFreq} and 1 others in the module.
+#' A step of the rangayyan_qrs implementation. Called by \code{EcgEmgCpl},
+#' \code{EdrSignal}, \code{HrvFreq} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -135,6 +145,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_ptbp(x = x)
+#' res
 .morie_qrs_ptbp <- function(x) {
   # Pan-Tompkins bandpass: eq (4.8) lowpass then eq (4.13) highpass.  The
   # coefficients are integers tied to fs = 200 Hz (book, Section 4.3.2) and
@@ -168,6 +182,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_ptderiv(x = x)
+#' res
 .morie_qrs_ptderiv <- function(x) {
   # Pan-Tompkins derivative, eq (4.14).
   n <- length(x)
@@ -226,7 +244,8 @@
 
 #' .morie_qrs_check
 #'
-#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 29 others in the module.
+#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
+#' \code{CPulseFeat}, \code{DicNotch} and 29 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -235,6 +254,10 @@
 #' @param what Passed to \code{sprintf}. Defaults to \code{"signal"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_check(x = x)
+#' res
 .morie_qrs_check <- function(x, least = 1L, what = "signal") {
   v <- if (is.null(x)) numeric(0) else as.numeric(x)
   if (length(v) < least) {
@@ -245,7 +268,8 @@
 
 #' .morie_qrs_fs
 #'
-#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr}, \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
+#' A step of the rangayyan_qrs implementation. Called by \code{ApneaEdr},
+#' \code{CPulseFeat}, \code{DicNotch} and 20 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -267,6 +291,10 @@
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_median(v = x)
+#' res
 .morie_qrs_median <- function(v) {
   s <- sort(v)
   m <- length(s)
@@ -282,6 +310,10 @@
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_qrs_mean(v = x)
+#' res
 .morie_qrs_mean <- function(v) if (length(v)) .morie_fsum(v) / length(v) else NULL
 
 #' 0-based argmax over the half-open range [lo, hi); first max on ties,
@@ -301,7 +333,8 @@
 
 #' .morie_qrs_argmin
 #'
-#' A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat}, \code{PpgFeat}.
+#' A step of the rangayyan_qrs implementation. Called by \code{DicNotch}, \code{EcgFeat},
+#' \code{PpgFeat}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -326,7 +359,11 @@
 #' @param ecg Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param pole Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.995}.
-#' @return A list with \code{ecg_detrended}, \code{n}, \code{fs}, \code{pole}, \code{gain_dc}, \code{gain_at_half_hz}, \code{gain_at_nyquist}, \code{gain_relative_at_half_hz}, \code{dc_is_rejected}, \code{zero_at_z_equals_one}, \code{pole_restores_gain_above_the_wander_band}, \code{differentiates_by_the_one_over_T_factor}, \code{method}.
+#' @return A list with \code{ecg_detrended}, \code{n}, \code{fs}, \code{pole},
+#' \code{gain_dc}, \code{gain_at_half_hz}, \code{gain_at_nyquist},
+#' \code{gain_relative_at_half_hz}, \code{dc_is_rejected}, \code{zero_at_z_equals_one},
+#' \code{pole_restores_gain_above_the_wander_band},
+#' \code{differentiates_by_the_one_over_T_factor}, \code{method}.
 #' @export
 BlWander <- function(ecg, fs, pole = 0.995) {
   # eqs (3.132)-(3.133): H(z) = (1/T)(1 - z^-1)/(1 - 0.995 z^-1).  The zero at
@@ -388,7 +425,8 @@ BlWander <- function(ecg, fs, pole = 0.995) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param qrs Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param mwin Numeric; combined arithmetically in the body. Defaults to \code{16}.
-#' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin}, \code{fs}, \code{tolerancems}, \code{method}.
+#' @return A list with \code{notch}, \code{upstroke}, \code{s}, \code{p}, \code{mwin},
+#' \code{fs}, \code{tolerancems}, \code{method}.
 #' @export
 DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
   # Lehner and Rangayyan, Section 4.3.5.  The noncausal least-squares second
@@ -467,7 +505,10 @@ DicNotch <- function(cp, fs, qrs = NULL, mwin = 16) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param hr Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @return A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave}, \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean}, \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc}, \code{normetcmale}, \code{normetcfemale}, \code{method}.
+#' @return A list with \code{upstroke}, \code{percussion}, \code{notch}, \code{dicwave},
+#' \code{pep}, \code{et}, \code{pepc}, \code{etc}, \code{peppmean}, \code{etmean},
+#' \code{pepcmean}, \code{etcmean}, \code{hr}, \code{fs}, \code{normpepc},
+#' \code{normetcmale}, \code{normetcfemale}, \code{method}.
 #' @export
 CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
   # Carotid pulse landmarks (Section 1.2.10) and the systolic time intervals
@@ -537,7 +578,8 @@ CPulseFeat <- function(cp, fs, qrs, hr = NULL) {
 #' @param x Numeric; passed to \code{abs}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param thresh Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3}, \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
+#' @return A list with \code{qrs}, \code{y0}, \code{y1}, \code{y2}, \code{y3},
+#' \code{mask}, \code{thresh}, \code{fs}, \code{hr}, \code{method}.
 #' @export
 QrsDeriv <- function(x, fs, thresh = 1) {
   # Balda et al., Section 4.3.1: y0 by eq (4.1), y1 by eq (4.2), combined as
@@ -608,7 +650,8 @@ QrsDeriv <- function(x, fs, thresh = 1) {
 #' @param emg A vector; its length is taken and its elements indexed.
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf}, \code{nbeats}, \code{fs}, \code{method}.
+#' @return A list with \code{hr}, \code{rms}, \code{meanfreq}, \code{rrms}, \code{rmnf},
+#' \code{nbeats}, \code{fs}, \code{method}.
 #' @export
 EcgEmgCpl <- function(ecg, emg, qrs, fs) {
   # Section 2.2.6 (EMG RMS and mean frequency rise with contraction) meets
@@ -668,7 +711,10 @@ EcgEmgCpl <- function(ecg, emg, qrs, fs) {
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @return A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp}, \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur}, \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats}, \code{fs}, \code{method}.
+#' @return A list with \code{pamp}, \code{qamp}, \code{ramp}, \code{samp}, \code{tamp},
+#' \code{qrsdur}, \code{pdur}, \code{tdur}, \code{prdur}, \code{qtdur},
+#' \code{qrsdurmean}, \code{prdurmean}, \code{qtdurmean}, \code{rampmean}, \code{nbeats},
+#' \code{fs}, \code{method}.
 #' @export
 EcgFeat <- function(x, qrs, fs) {
   # Section 1.2.4 waves and intervals.  Amplitudes are measured against the
@@ -772,8 +818,11 @@ EcgFeat <- function(x, qrs, fs) {
 #' @param stdev Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rdur Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sdur Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param qpresent Optional; may be \code{NULL}. Coerced to logical by the body, with \code{as.logical}.
-#' @return A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur}, \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding}, \code{required}, \code{method}.
+#' @param qpresent Optional; may be \code{NULL}. Coerced to logical by the body, with
+#' \code{as.logical}.
+#' @return A list with \code{qrsdurms}, \code{qrswide}, \code{lbbbdur}, \code{rbbbdur},
+#' \code{sdurok}, \code{rdurok}, \code{qabsent}, \code{stdev}, \code{stfinding},
+#' \code{required}, \code{method}.
 #' @export
 EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
                        qpresent = NULL) {
@@ -832,7 +881,9 @@ EcgWaveShp <- function(qrsdur, stdev, rdur = NULL, sdur = NULL,
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param jofs Numeric; combined arithmetically in the body. Defaults to \code{0.06}.
 #' @param thresh Carried through into a list the body builds. Defaults to \code{0.1}.
-#' @return A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean}, \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs}, \code{fs}, \code{method}.
+#' @return A list with \code{stdev}, \code{stslope}, \code{pattern}, \code{stdevmean},
+#' \code{stslopemean}, \code{flagged}, \code{thresh}, \code{threshnote}, \code{jofs},
+#' \code{fs}, \code{method}.
 #' @export
 ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
   # ST level at J + jofs relative to the PQ isoelectric level, and the slope
@@ -899,8 +950,11 @@ ExerEcgSt <- function(x, qrs, fs, jofs = 0.060, thresh = 0.1) {
 #'
 #' @param rr A vector; its length is taken and its elements indexed.
 #' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @param bands The body requires: bands must be 'taskforce' or 'bianchi'. Defaults to \code{"taskforce"}.
-#' @return A list with \code{vlf}, \code{lf}, \code{hf}, \code{total}, \code{vlfpct}, \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr}, \code{n}, \code{method}.
+#' @param bands The body requires: bands must be 'taskforce' or 'bianchi'. Defaults to
+#' \code{"taskforce"}.
+#' @return A list with \code{vlf}, \code{lf}, \code{hf}, \code{total}, \code{vlfpct},
+#' \code{lfpct}, \code{hfpct}, \code{lfhf}, \code{bands}, \code{limits}, \code{fsr},
+#' \code{n}, \code{method}.
 #' @export
 HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12.  Task Force bands by default; Bianchi et al. bands on
@@ -970,7 +1024,8 @@ HrvFreq <- function(rr, fsr = 4, bands = "taskforce") {
 #' 93(5):1043- 1065, 1996, reference \[84\] of the book\'s Chapter 8.
 #'
 #' @param rr Numeric; combined arithmetically in the body.
-#' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50}, \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
+#' @return A list with \code{sdnn}, \code{rmssd}, \code{nn50}, \code{pnn50},
+#' \code{meannn}, \code{meanhr}, \code{n}, \code{units}, \code{method}.
 #' @export
 HrvTime <- function(rr) {
   # SDNN, RMSSD and pNN50.  Section 2.2.5 motivates these but does not define
@@ -1010,7 +1065,8 @@ HrvTime <- function(rr) {
 #' @param ecg A vector; its length is taken.
 #' @param cp A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @return A list with \code{s1}, \code{s2}, \code{notch}, \code{qrs}, \code{s2delayms}, \code{s2delaymeasured}, \code{searchwindowms}, \code{fs}, \code{method}.
+#' @return A list with \code{s1}, \code{s2}, \code{notch}, \code{qrs}, \code{s2delayms},
+#' \code{s2delaymeasured}, \code{searchwindowms}, \code{fs}, \code{method}.
 #' @export
 HSoundId <- function(ecg, cp, fs) {
   # Section 4.9.  S1 at the QRS onset; S2 from the dicrotic notch minus the
@@ -1052,7 +1108,8 @@ HSoundId <- function(ecg, cp, fs) {
 #' @param thor A vector; its length is taken and its elements indexed.
 #' @param order A count; the body uses it as \code{seq_len(...)}. Defaults to \code{16}.
 #' @param mu Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
-#' @return A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order}, \code{mu}, \code{n}, \code{method}.
+#' @return A list with \code{fetal}, \code{maternal}, \code{weights}, \code{order},
+#' \code{mu}, \code{n}, \code{method}.
 #' @export
 MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
   # Sections 3.3.5 and 9.7.2: the thoracic lead is the reference input of an
@@ -1111,7 +1168,8 @@ MEcgFilt <- function(abd, thor, order = 16, mu = 0.01) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param win Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param factor Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @return A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction}, \code{win}, \code{factor}, \code{fs}, \code{method}.
+#' @return A list with \code{clean}, \code{artifact}, \code{nsegments}, \code{fraction},
+#' \code{win}, \code{factor}, \code{fs}, \code{method}.
 #' @export
 MotionArt <- function(x, fs, win = 1, factor = 4) {
   # Section 1.2.11 characterises motion artifact but gives no detection
@@ -1195,7 +1253,9 @@ MotionArt <- function(x, fs, win = 1, factor = 4) {
 #'
 #' @param x A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
-#' @return A list with \code{qrs}, \code{rr}, \code{hr}, \code{integrated}, \code{bandpass}, \code{delay}, \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{searchback}, \code{fs}, \code{fsnote}, \code{method}.
+#' @return A list with \code{qrs}, \code{rr}, \code{hr}, \code{integrated},
+#' \code{bandpass}, \code{delay}, \code{spki}, \code{npki}, \code{thresh1},
+#' \code{thresh2}, \code{searchback}, \code{fs}, \code{fsnote}, \code{method}.
 #' @export
 QrsDetect <- function(x, fs = 200) {
   # Pan-Tompkins, Section 4.3.2, eqs (4.8)-(4.18) plus search-back.  The
@@ -1313,7 +1373,8 @@ QrsDetect <- function(x, fs = 200) {
 #' @param ecg A vector; its length is taken.
 #' @param cp A vector; its length is taken.
 #' @param fs Passed to \code{.morie_qrs_fs}.
-#' @return A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole}, \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
+#' @return A list with \code{s1}, \code{s2}, \code{systole}, \code{diastole},
+#' \code{systolerms}, \code{diastolerms}, \code{fs}, \code{method}.
 #' @export
 PcgParts <- function(pcg, ecg, cp, fs) {
   # The six-step procedure of Section 4.9.  Timing is imported from the ECG
@@ -1372,7 +1433,8 @@ PcgParts <- function(pcg, ecg, cp, fs) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param f0 Numeric; combined arithmetically in the body. Defaults to \code{60}.
 #' @param harmonics A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs}, \code{n}, \code{method}.
+#' @return A list with \code{y}, \code{coeffs}, \code{notched}, \code{f0}, \code{fs},
+#' \code{n}, \code{method}.
 #' @export
 PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
   # eq (3.150): H(z) = 1 - 2 cos(wo) z^-1 + z^-2, divided by its DC gain
@@ -1401,7 +1463,7 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
     coeffs[[length(coeffs) + 1L]] <- b
     notched <- c(notched, f)
     z <- numeric(length(y))
-    for (i in seq_len(length(y)) - 1L) {
+    for (i in seq_along(y) - 1L) {
       z[i + 1L] <- b[1L] * y[i + 1L] +
         b[2L] * (if (i >= 1L) y[i] else 0) +
         b[3L] * (if (i >= 2L) y[i - 1L] else 0)
@@ -1430,7 +1492,9 @@ PLineNotch <- function(x, fs, f0 = 60, harmonics = 1) {
 #' @param ppg A vector; its length is taken and its elements indexed.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param mwin Passed to \code{DicNotch}. Defaults to \code{16}.
-#' @return A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset}, \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs}, \code{method}.
+#' @return A list with \code{systolic}, \code{notch}, \code{diastolic}, \code{onset},
+#' \code{amplitude}, \code{ac}, \code{dc}, \code{pi}, \code{rate}, \code{fs},
+#' \code{method}.
 #' @export
 PpgFeat <- function(ppg, fs, mwin = 16) {
   # Section 1.2.11.  The notch is located with the SAME machinery the book
@@ -1491,7 +1555,8 @@ PpgFeat <- function(ppg, fs, mwin = 16) {
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param template Optional; may be \code{NULL}. A vector; its length is taken.
-#' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass}, \code{fs}, \code{method}.
+#' @return A list with \code{p}, \code{template}, \code{windows}, \code{bandpass},
+#' \code{fs}, \code{method}.
 #' @export
 PWaveDet <- function(x, qrs, fs, template = NULL) {
   # Hengeveld and van Bemmel, Section 4.3.3.  The P wave is never searched for
@@ -1601,7 +1666,8 @@ PWaveDet <- function(x, qrs, fs, template = NULL) {
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param fsr Numeric; combined arithmetically in the body. Defaults to \code{4}.
-#' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr}, \code{nbeats}, \code{method}.
+#' @return A list with \code{edr}, \code{amp}, \code{times}, \code{resprate}, \code{fsr},
+#' \code{nbeats}, \code{method}.
 #' @export
 EdrSignal <- function(x, qrs, fs, fsr = 4) {
   # Section 2.2.4 for the physiology; the estimator is Arunachalam and Brown,
@@ -1674,7 +1740,8 @@ EdrSignal <- function(x, qrs, fs, fsr = 4) {
 #' @param hours Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param mindur Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @param desat Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
-#' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth}, \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
+#' @return A list with \code{events}, \code{nevents}, \code{ahi}, \code{desatdepth},
+#' \code{hours}, \code{mindur}, \code{desat}, \code{fs}, \code{method}.
 #' @export
 ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
   # Section 10.2.5 frames the problem and the AHI but gives NO detection
@@ -1746,7 +1813,8 @@ ApneaEdr <- function(edr, spo2, fs, hours = NULL, mindur = 10, desat = 3) {
 #' @param rr Passed to \code{.morie_qrs_check}.
 #' @param fsr Passed to \code{HrvFreq}. Defaults to \code{4}.
 #' @param bands Carried through into a list the body builds. Defaults to \code{"taskforce"}.
-#' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct}, \code{rrvar}, \code{bands}, \code{n}, \code{method}.
+#' @return A list with \code{lfhf}, \code{lf}, \code{hf}, \code{lfpct}, \code{hfpct},
+#' \code{rrvar}, \code{bands}, \code{n}, \code{method}.
 #' @export
 LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
   # Section 8.12 and Figure 8.38.  The ratio alone, with the band powers and
@@ -1775,9 +1843,13 @@ LfHfRatio <- function(rr, fsr = 4, bands = "taskforce") {
 #' spectrum. An EVEN beat count is required or that is not an exact bin.
 #'
 #' @param twaves A vector; its length is taken.
-#' @param noiselo The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.33}.
-#' @param noisehi The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5. Defaults to \code{0.45}.
-#' @return A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean}, \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present}, \code{method}.
+#' @param noiselo The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5.
+#' Defaults to \code{0.33}.
+#' @param noisehi The body requires: noise band must satisfy 0 < noiselo < noisehi < 0.5.
+#' Defaults to \code{0.45}.
+#' @return A list with \code{valt}, \code{kscore}, \code{altpower}, \code{noisemean},
+#' \code{noisesd}, \code{nbeats}, \code{npoints}, \code{cyclesperbeat}, \code{present},
+#' \code{method}.
 #' @export
 TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
   # Section 9.10 citing Smith et al., Circulation 77(1):110-121, 1988.
@@ -1849,7 +1921,8 @@ TwaSpectr <- function(twaves, noiselo = 0.33, noisehi = 0.45) {
 #' @param qrs Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param tdur Numeric; combined arithmetically in the body. Defaults to \code{0.16}.
-#' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur}, \code{nchan}, \code{fs}, \code{method}.
+#' @return A list with \code{t}, \code{onset}, \code{offset}, \code{length}, \code{tdur},
+#' \code{nchan}, \code{fs}, \code{method}.
 #' @export
 TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
   # Gritzali et al., Section 4.3.4.  The QRS is detected first, blanked to the
@@ -1932,7 +2005,9 @@ TWaveDet <- function(chans, qrs, fs, tdur = 0.160) {
 #' @param win Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param conc Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.6}.
 #' @param crest Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
-#' @return A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest}, \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win}, \code{fs}, \code{method}.
+#' @return A list with \code{flag}, \code{domfreq}, \code{concentration}, \code{crest},
+#' \code{rate}, \code{conc}, \code{crestmax}, \code{nwin}, \code{fraction}, \code{win},
+#' \code{fs}, \code{method}.
 #' @export
 VfDetect <- function(x, fs, win = 4, conc = 0.60, crest = 4) {
   # Sections 1.2.4 and 8.11 describe VF but give NO detector and NO
@@ -2143,7 +2218,8 @@ QrsDrvSmth <- function(g1, mwin = 8) {
 #'
 #' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
-#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a}, \code{fs}, \code{fsnote}, \code{method}.
+#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{b}, \code{a},
+#' \code{fs}, \code{fsnote}, \code{method}.
 #' @export
 QrsLPassTf <- function(freq, fs = 200) {
   # eq (4.7): H(z) = (1/32)(1 - z^-6)^2 / (1 - z^-1)^2, evaluated in its
@@ -2280,7 +2356,8 @@ QrsHpLpDf <- function(x) {
 #'
 #' @param freq Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{200}.
-#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote}, \code{method}.
+#' @return A list with \code{freq}, \code{mag}, \code{phase}, \code{fs}, \code{fsnote},
+#' \code{method}.
 #' @export
 QrsHPassTf <- function(freq, fs = 200) {
   # eq (4.11): Hhp(z) = z^-16 - (1/32) Hlp(z).  An allpass (a pure 16-sample
@@ -2445,7 +2522,8 @@ QrsMwInt <- function(x, nwin = 30, fs = NULL) {
 #' @param spki Numeric; combined arithmetically in the body.
 #' @param npki Numeric; combined arithmetically in the body.
 #' @param issignal Coerced to logical by the body, with \code{as.logical}.
-#' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2}, \code{peaki}, \code{issignal}, \code{method}.
+#' @return A list with \code{spki}, \code{npki}, \code{thresh1}, \code{thresh2},
+#' \code{peaki}, \code{issignal}, \code{method}.
 #' @export
 QrsThresh <- function(peaki, spki, npki, issignal) {
   # eqs (4.16) and (4.17).  The 0.125/0.875 split is a long-memory recursive
@@ -2538,7 +2616,8 @@ HrFromCnt <- function(nbeats, duration) {
 #' @param chans A vector; its length is taken.
 #' @param wwin Numeric; combined arithmetically in the body.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @return A list with \code{length}, \code{nchan}, \code{wsamp}, \code{wsec}, \code{fs}, \code{n}, \code{method}.
+#' @return A list with \code{length}, \code{nchan}, \code{wsamp}, \code{wsec}, \code{fs},
+#' \code{n}, \code{method}.
 #' @export
 LengthXfm <- function(chans, wwin, fs) {
   # eq (4.21) (Gritzali et al.).  Since (dx/dt) dt = dx, the transform is the

@@ -65,6 +65,10 @@ gflops <- function(tokens, depth, width, mlp_ratio = 4.0) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dits16_vec(x = x)
+#' res
 .dits16_vec <- function(x) {
   as.numeric(x)
 }
@@ -176,25 +180,3 @@ scaling_comparison <- function(configs) {
 #' @rdname patch_grid
 #' @export
 morie_dits16 <- patch_grid
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

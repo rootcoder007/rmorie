@@ -40,6 +40,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gnnEx_sig(x = x)
+#' res
 .gnnEx_sig <- function(x) {
   # Vectorised sigmoid with overflow protection (matches Python _sig).
   out <- numeric(length(x))
@@ -154,7 +158,8 @@ gnnEx_conditional_entropy <- function(probs) {
 #' @param y Coerced to integer by the body, with \code{as.integer}.
 #' @param size_coef Numeric; combined arithmetically in the body. Defaults to \code{0.005}.
 #' @param entropy_coef Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy}, \code{edge_mask}, \code{feature_mask}, \code{prediction}.
+#' @return A list with \code{loss}, \code{fit}, \code{size}, \code{entropy},
+#' \code{edge_mask}, \code{feature_mask}, \code{prediction}.
 #' @export
 gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
                                  size_coef = 0.005, entropy_coef = 1.0) {
@@ -198,7 +203,9 @@ gnnEx_mask_objective <- function(predict, edges, edge_logits, feature_logits, y,
 #' @param entropy_coef Defaults to \code{1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param penalize A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask}, \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph}, \code{penalized}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{edges_ranked}, \code{edge_mask},
+#' \code{feature_mask}, \code{loss_history}, \code{final}, \code{computation_graph},
+#' \code{penalized}, \code{method}, \code{note}.
 #' @export
 gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
                                iters = 300, lr = 0.1, size_coef = 0.005,
@@ -213,7 +220,7 @@ gnnEx_explain_node <- function(predict, adj, v, y, n_features, L = 2,
   st <- .ghc_rng(seed)
   n_total <- length(edges) + as.integer(n_features)
   all_u <- .ghc_unif(st, n_total)
-  el <- (all_u[1:length(edges)] - 0.5) * 0.1
+  el <- (all_u[seq_along(edges)] - 0.5) * 0.1
   fl <- (all_u[(length(edges) + 1L):n_total] - 0.5) * 0.1
   sc <- if (isTRUE(penalize)) size_coef else 0.0
   ec <- if (isTRUE(penalize)) entropy_coef else 0.0
@@ -292,26 +299,3 @@ morie_gnnEx <- gnnEx_explain_node
 # Compact aliases per ledger/NAMING.md
 gnnexplainer <- gnnEx_explain_node
 gnn_explainer <- gnnEx_explain_node
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

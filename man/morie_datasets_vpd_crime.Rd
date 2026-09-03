@@ -54,7 +54,7 @@ VPD's terms + conditions there).}
 The included sample is open-licensed under VPD's GeoDASH terms;
 the full feed requires manual T&C acceptance per VPD policy and
 there is no automation-friendly API. See
-\code{\link[=morie_datasets_vpd_legal_disclaimer]{morie_datasets_vpd_legal_disclaimer()}} for the full text.
+\code{morie_datasets_vpd_legal_disclaimer()} for the full text.
 
 Columns (10): \code{TYPE}, \code{YEAR}, \code{MONTH}, \code{DAY}, \code{HOUR}, \code{MINUTE},
 \code{HUNDRED_BLOCK}, \code{NEIGHBOURHOOD}, \code{X}, \code{Y}. Coordinates are UTM

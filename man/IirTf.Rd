@@ -22,5 +22,6 @@ A list with \code{H}, \code{z}, \code{numerator}, \code{denominator}, \code{N}, 
 }
 \keyword{internal}
 \examples{
-IirTf(b_k = c(1, 2, 3, 4, 5, 6, 7, 8), a_k = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+IirTf(b_k = c(1, 2, 3, 4, 5, 6, 7, 8), a_k = c(1, 2, 3, 4, 5, 6, 7, 8),
+  z = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

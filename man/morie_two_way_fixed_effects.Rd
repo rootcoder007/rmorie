@@ -20,5 +20,6 @@ A list with \code{coef} (length-p numeric, no intercept),   \code{full} (numeric
 }
 \keyword{internal}
 \examples{
-morie_two_way_fixed_effects(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_two_way_fixed_effects(Y = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8),
+  period = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

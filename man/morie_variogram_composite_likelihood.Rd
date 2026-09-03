@@ -13,7 +13,7 @@ morie_variogram_composite_likelihood(
 )
 }
 \arguments{
-\item{coords, z}{As in \code{\link[=morie_cressie_hawkins]{morie_cressie_hawkins()}}.}
+\item{coords, z}{As in \code{morie_cressie_hawkins()}.}
 
 \item{model}{One of "exponential", "spherical", "gaussian", "linear".}
 

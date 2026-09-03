@@ -8,8 +8,14 @@
 
 #' @param r See Usage.
 #' @param c See Usage.
-#' @return List with ``psi``, ``rho``, ``psi_deriv``, ``rejected`` (count with |r| > c pi), ``c``, ``n``.
-#' @references Andrews, Bickel, Hampel, Huber, Rogers and Tukey (1972), Robust Estimates of Location, Princeton University Press; Andrews (1974), Technometrics 16:523-531. Not held locally; the form and the tuning constant 1.339 are as implemented by statsmodels' AndrewWave norm, the reference implementation, whose source was read: rho = a^2(1 - cos(z/a)), psi = a sin(z/a), weights = sin(z/a)/(z/a), psi_deriv = cos(z/a), all zero (rho constant) beyond |z| > a pi.
+#' @return List with ``psi``, ``rho``, ``psi_deriv``, ``rejected`` (count with |r| > c
+#' pi), ``c``, ``n``.
+#' @references Andrews, Bickel, Hampel, Huber, Rogers and Tukey (1972), Robust Estimates
+#' of Location, Princeton University Press; Andrews (1974), Technometrics 16:523-531. Not
+#' held locally; the form and the tuning constant 1.339 are as implemented by
+#' statsmodels' AndrewWave norm, the reference implementation, whose source was read: rho
+#' = a^2(1 - cos(z/a)), psi = a sin(z/a), weights = sin(z/a)/(z/a), psi_deriv = cos(z/a),
+#' all zero (rho constant) beyond |z| > a pi.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

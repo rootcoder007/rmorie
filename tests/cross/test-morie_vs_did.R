@@ -17,7 +17,9 @@ library(rmorie)
   set.seed(seed)
   g_onset <- sample(c(0, 4, 5, 6), n_units, replace = TRUE,
                     prob = c(0.4, 0.2, 0.2, 0.2))
-  x1 <- rnorm(n_units); x2 <- runif(n_units); u <- rnorm(n_units)
+  x1 <- rnorm(n_units)
+  x2 <- runif(n_units)
+  u <- rnorm(n_units)
   do.call(rbind, lapply(seq_len(n_units), function(i) {
     t <- seq_len(n_t)
     d <- as.integer(g_onset[i] > 0 & t >= g_onset[i])
@@ -42,7 +44,8 @@ test_that("native TWFE reproduces fixest::feols to machine precision", {
                tolerance = 1e-10)
   # Covariates + non-unit cluster
   pan2 <- pan
-  set.seed(1); pan2$xv <- rnorm(nrow(pan2))
+  set.seed(1)
+  pan2$xv <- rnorm(nrow(pan2))
   pan2$cl2 <- pan2$id %% 37
   ref2 <- fixest::feols(y ~ d + xv | id + tt, data = pan2,
                         cluster = ~cl2)

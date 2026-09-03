@@ -20,7 +20,7 @@
 #' giss(c(1, 2, 3))
 #' @export
 giss <- function(T, years = NULL, base = c(1951, 1980), dist = NULL, radius = 1200) {
-  arr <- if (is.matrix(T)) T else matrix(as.numeric(T), nrow = 1)
+  arr <- if (is.matrix(TRUE)) TRUE else matrix(as.numeric(TRUE), nrow = 1)
   nst <- nrow(arr)
   m <- ncol(arr)
   if (is.null(years)) { yr <- seq_len(m) - 1

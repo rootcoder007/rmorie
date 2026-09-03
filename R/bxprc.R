@@ -11,7 +11,8 @@
 #' @param fitdf Parameters fitted to obtain \code{x}.
 #' @return List with \code{statistic}, \code{p_value}, \code{df},
 #'   \code{acf}, \code{n}, \code{method}.
-#' @references Box and Pierce (1970), JASA 65:1509-1526.  Paywalled; the statistic was taken from R's stats::Box.test, which codes the Box-Pierce branch as n*sum(obs^2).
+#' @references Box and Pierce (1970), JASA 65:1509-1526.  Paywalled; the statistic was
+#' taken from R's stats::Box.test, which codes the Box-Pierce branch as n*sum(obs^2).
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

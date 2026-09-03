@@ -28,6 +28,10 @@
 #' @param jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A matrix, from \code{t}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .schab_cholesky_root(cov = A)
+#' res
 .schab_cholesky_root <- function(cov, jitter = 1e-10) {
   # Lower-triangular L with L L' = Sigma. The book writes the root as an
   # upper triangular U with Sigma = U'U; L is that U'.
@@ -49,6 +53,10 @@
 #' @param tol Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .schab_spectral_root(cov = A)
+#' res
 .schab_spectral_root <- function(cov, tol = NULL) {
   # Symmetric square root P Delta^(1/2) P'. Negative eigenvalues can only
   # come from rounding on a matrix positive semi-definite in exact
@@ -72,7 +80,8 @@
 #'
 #' @param mean A vector; its length is taken.
 #' @param cov A matrix; passed to \code{dim}.
-#' @param method The body requires: `method` must be 'cholesky' or 'spectral'. Defaults to \code{"cholesky"}.
+#' @param method The body requires: `method` must be 'cholesky' or 'spectral'. Defaults
+#' to \code{"cholesky"}.
 #' @param seed Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @param stream Passed to \code{.morie_random_normal}. Defaults to \code{0}.
 #' @return A vector, from \code{as.numeric}.

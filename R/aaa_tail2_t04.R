@@ -57,6 +57,10 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_t2_neigh(A = A, n = 3L)
+#' res
 .morie_t2_neigh <- function(A, n) {
   lapply(seq_len(n), function(i) {
     v <- which(A[i, ] != 0)
@@ -86,7 +90,9 @@
 #' zero_eigenvalue_multiplicity, method) \' @export
 #'
 #' @param A A matrix; indexed by row and column.
-#' @return A list with \code{Q}, \code{degree}, \code{n}, \code{m}, \code{trace}, \code{n_components}, \code{bipartite_components}, \code{zero_eigenvalue_multiplicity}, \code{method}.
+#' @return A list with \code{Q}, \code{degree}, \code{n}, \code{m}, \code{trace},
+#' \code{n_components}, \code{bipartite_components}, \code{zero_eigenvalue_multiplicity},
+#' \code{method}.
 #' @export
 SignlessL <- function(A) {
   A <- .morie_t2_checkadj(A)
@@ -153,7 +159,9 @@ SignlessL <- function(A) {
 #' colouring, \' part_sizes, n_components, n, m, method) \' @export
 #'
 #' @param A A matrix; passed to \code{nrow}.
-#' @return A list with \code{bipartite}, \code{evidence}, \code{max_odd_trace}, \code{colouring}, \code{part_sizes}, \code{n_components}, \code{n}, \code{m}, \code{method}.
+#' @return A list with \code{bipartite}, \code{evidence}, \code{max_odd_trace},
+#' \code{colouring}, \code{part_sizes}, \code{n_components}, \code{n}, \code{m},
+#' \code{method}.
 #' @export
 BipartSpec <- function(A) {
   A <- .morie_t2_checkadj(A)
@@ -264,7 +272,9 @@ BipartSpec <- function(A) {
 #' @export
 #'
 #' @param cnf Iterated over elementwise, with \code{lapply}.
-#' @return A list with \code{satisfiable}, \code{assignment}, \code{model}, \code{n_vars}, \code{n_clauses}, \code{decisions}, \code{propagations}, \code{pure_literals}, \code{method}.
+#' @return A list with \code{satisfiable}, \code{assignment}, \code{model},
+#' \code{n_vars}, \code{n_clauses}, \code{decisions}, \code{propagations},
+#' \code{pure_literals}, \code{method}.
 #' @export
 Dpll <- function(cnf) {
   clauses <- lapply(cnf, function(cl) {
@@ -395,7 +405,8 @@ Dpll <- function(cnf) {
 #' @param Q Accepted by the signature and not used anywhere in the body.
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param steps A count; the body uses it as \code{seq_len(...)}.
-#' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments}, \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
+#' @return A list with \code{theta}, \code{loglik}, \code{trace}, \code{increments},
+#' \code{min_increment}, \code{monotone}, \code{steps}, \code{method}.
 #' @export
 EmAlgo <- function(log_lik, Q, x0, steps) {
   theta <- as.numeric(x0)
@@ -466,7 +477,9 @@ EmAlgo <- function(log_lik, Q, x0, steps) {
 #' @param b A vector; its length is taken.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
-#' @return A list with \code{status}, \code{x}, \code{objective}, \code{slack}, \code{basis}, \code{dual}, \code{iterations}, \code{n_var}, \code{n_con}, \code{method}.
+#' @return A list with \code{status}, \code{x}, \code{objective}, \code{slack},
+#' \code{basis}, \code{dual}, \code{iterations}, \code{n_var}, \code{n_con},
+#' \code{method}.
 #' @export
 SimplexLP <- function(c, A, b, max_iter = 1000L, tol = 1e-12) {
   c <- as.numeric(c)

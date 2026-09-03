@@ -72,13 +72,18 @@
 
 #' .vdcal_phys
 #'
-#' A step of the vdcal_native implementation. Called by \code{morie_vdcal}, \code{morie_vdcal_fut}, \code{morie_vdcal_oie_tozer}.
+#' A step of the vdcal_native implementation. Called by \code{morie_vdcal},
+#' \code{morie_vdcal_fut}, \code{morie_vdcal_oie_tozer}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param par Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vdcal_phys(par = x)
+#' res
 .vdcal_phys <- function(par) {
   p <- .VDCAL_HUMAN
   if (!is.null(par)) for (nm in names(par)) p[[nm]] <- par[[nm]]
@@ -158,7 +163,8 @@ morie_vdcal_fut <- function(vss, fu, par = NULL) {
 #' @param elogd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fi Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu Numeric; combined arithmetically in the body.
-#' @param coefficients Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param coefficients Optional; may be \code{NULL}. A vector; its length is taken and
+#' its elements indexed.
 #' @return The value of \code{fut}, as built in the body.
 #' @export
 .vdcal_fut_descriptors <- function(elogd, fi, fu, coefficients) {

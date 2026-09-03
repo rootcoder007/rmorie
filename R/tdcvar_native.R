@@ -44,39 +44,53 @@
 
 #' .tdcvar_vec
 #'
-#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+#' A step of the tdcvar_native implementation. Called by
+#' \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tdcvar_vec(x = x)
+#' res
 .tdcvar_vec <- function(x) {
   as.numeric(x)
 }
 
 #' .tdcvar_mat
 #'
-#' A step of the tdcvar_native implementation. Called by \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
+#' A step of the tdcvar_native implementation. Called by
+#' \code{.tdcvar_ip_weights_history}, \code{morie_tdcvar}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tdcvar_mat(X = x)
+#' res
 .tdcvar_mat <- function(X) {
-  if (is.null(X)) return(matrix(0, nrow=0, ncol=0))
+  if (is.null(X)) {
+    return(matrix(0, nrow = 0, ncol = 0))
+  }
   if (is.matrix(X)) {
     storage.mode(X) <- "double"
     return(X)
   }
   if (is.numeric(X)) {
-    return(matrix(X, ncol=1L))
+    return(matrix(X, ncol = 1L))
   }
   n <- length(X)
-  if (n == 0L) return(matrix(0, nrow=0, ncol=0))
+  if (n == 0L) {
+    return(matrix(0, nrow = 0, ncol = 0))
+  }
   p <- length(X[[1]])
-  M <- matrix(0, nrow=n, ncol=p)
+  M <- matrix(0, nrow = n, ncol = p)
   for (i in seq_len(n)) {
     M[i, ] <- as.numeric(X[[i]])
   }
@@ -94,6 +108,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tdcvar_wls(X = x, y = y, w = x)
+#' res
 .tdcvar_wls <- function(X, y, w) {
   n <- nrow(X)
   p <- ncol(X)
@@ -105,7 +124,7 @@
   sigma2 <- sum(w * resid^2) / (n - p)
   vcov <- sigma2 * solve(XtWX)
   se <- sqrt(diag(vcov))
-  list(coef=as.numeric(beta), se=as.numeric(se), vcov=vcov)
+  list(coef = as.numeric(beta), se = as.numeric(se), vcov = vcov)
 }
 
 #' .tdcvar_logreg
@@ -120,7 +139,13 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
-.tdcvar_logreg <- function(X, y, max_iter=25L, tol=1e-8) {
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tdcvar_logreg(X = X, y = y)
+#' res
+.tdcvar_logreg <- function(X, y, max_iter = 25L, tol = 1e-8) {
   n <- nrow(X)
   p <- ncol(X)
   beta <- rep(0, p)
@@ -168,17 +193,18 @@
 #'
 #' @param A_hist A vector; its length is taken and its elements indexed.
 #' @param L_hist A vector; indexed elementwise.
-#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to
+#' \code{"binary"}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param trim Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return A list with \code{weights}, \code{per_time}.
 #' @export
-.tdcvar_ip_weights_history <- function(A_hist, L_hist, kind="binary",
-                                        stabilize=TRUE, trim=NULL) {
+.tdcvar_ip_weights_history <- function(A_hist, L_hist, kind = "binary",
+                                       stabilize = TRUE, trim = NULL) {
   K <- length(A_hist)
   n <- length(A_hist[[1]])
 
-  A_mat <- matrix(0, nrow=n, ncol=K)
+  A_mat <- matrix(0, nrow = n, ncol = K)
   for (k in seq_len(K)) {
     A_mat[, k] <- .tdcvar_vec(A_hist[[k]])
   }
@@ -190,9 +216,9 @@
     a_k <- A_mat[, k]
 
     if (k == 1L) {
-      X_num <- matrix(1, nrow=n, ncol=1L)
+      X_num <- matrix(1, nrow = n, ncol = 1L)
     } else {
-      X_num <- cbind(1, A_mat[, seq_len(k - 1L), drop=FALSE])
+      X_num <- cbind(1, A_mat[, seq_len(k - 1L), drop = FALSE])
     }
 
     L_parts <- list()
@@ -224,17 +250,17 @@
 
     cum_w <- cum_w * w_k
 
-    per_time[[k]] <- list(time=(k - 1L), weight=w_k)
+    per_time[[k]] <- list(time = (k - 1L), weight = w_k)
   }
 
   if (!is.null(trim) && is.numeric(trim) && length(trim) > 0L &&
-      trim > 0 && trim < 0.5) {
-    q_low <- as.numeric(quantile(cum_w, probs=trim, na.rm=TRUE))
-    q_high <- as.numeric(quantile(cum_w, probs=1 - trim, na.rm=TRUE))
+    trim > 0 && trim < 0.5) {
+    q_low <- as.numeric(quantile(cum_w, probs = trim, na.rm = TRUE))
+    q_high <- as.numeric(quantile(cum_w, probs = 1 - trim, na.rm = TRUE))
     cum_w <- pmin(pmax(cum_w, q_low), q_high)
   }
 
-  list(weights=cum_w, per_time=per_time)
+  list(weights = cum_w, per_time = per_time)
 }
 
 #' morie_tdcvar
@@ -247,17 +273,20 @@
 #' @param A A list; the body checks with \code{is.list}.
 #' @param L_t A list; the body checks with \code{is.list}.
 #' @param time Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}.
+#' Defaults to \code{"cumulative"}.
 #' @param kind Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{"binary"}.
 #' @param stabilize Passed to \code{.tdcvar_ip_weights_history}. Defaults to \code{TRUE}.
 #' @param trim Passed to \code{.tdcvar_ip_weights_history}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
-morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
-                          kind="binary", stabilize=TRUE, trim=NULL) {
+morie_tdcvar <- function(y, A, L_t, time = NULL, contrast = "cumulative",
+                         kind = "binary", stabilize = TRUE, trim = NULL) {
   if (!contrast %in% c("cumulative", "final", "everexposed")) {
-    stop("time_dep_covariate: contrast must be one of c('cumulative', 'final', 'everexposed'), got ",
-         contrast)
+    stop(
+      "time_dep_covariate: contrast must be one of c('cumulative', 'final', 'everexposed'), got ",
+      contrast
+    )
   }
 
   if (is.list(A)) {
@@ -277,8 +306,10 @@ morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
     stop("time_dep_covariate: need at least one time point")
   }
   if (length(L_hist) != K) {
-    stop("time_dep_covariate: ", K, " treatment times but ",
-         length(L_hist), " covariate blocks; Sec. 21.2 needs L-bar_k at every k")
+    stop(
+      "time_dep_covariate: ", K, " treatment times but ",
+      length(L_hist), " covariate blocks; Sec. 21.2 needs L-bar_k at every k"
+    )
   }
 
   yv <- .tdcvar_vec(y)
@@ -286,13 +317,17 @@ morie_tdcvar <- function(y, A, L_t, time=NULL, contrast="cumulative",
 
   for (kk in seq_len(K)) {
     if (length(.tdcvar_vec(A_hist[[kk]])) != n) {
-      stop("time_dep_covariate: outcome has ", n, " rows but treatment at time ",
-           kk, " has ", length(.tdcvar_vec(A_hist[[kk]])))
+      stop(
+        "time_dep_covariate: outcome has ", n, " rows but treatment at time ",
+        kk, " has ", length(.tdcvar_vec(A_hist[[kk]]))
+      )
     }
   }
 
-  ipw <- .tdcvar_ip_weights_history(A_hist, L_hist, kind=kind,
-                                      stabilize=stabilize, trim=trim)
+  ipw <- .tdcvar_ip_weights_history(A_hist, L_hist,
+    kind = kind,
+    stabilize = stabilize, trim = trim
+  )
   w <- ipw$weights
   per_time <- ipw$per_time
 

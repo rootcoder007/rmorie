@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Bootstrap variance of the sample mean
 #'
-#' \deqn{\mathrm{Var}^* = \frac{1}{B}\sum_b (\bar{x}^*_b - \overline{\bar{x}^*})^2.}{Var* = (1/B) sum_b (xbar*_b - mean of them)^2.}
+#' \deqn{\mathrm{Var}^* = \frac{1}{B}\sum_b (\bar{x}^*_b - \overline{\bar{x}^*})^2.}{Var*
+#' = (1/B) sum_b (xbar*_b - mean of them)^2.}
 #'
 #' Efron, B. (1979), "Bootstrap methods: another look at the jackknife",
 #' \emph{The Annals of Statistics} 7(1), 1-26, doi:10.1214/aos/1176344552,

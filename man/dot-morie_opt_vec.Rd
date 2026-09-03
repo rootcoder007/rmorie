@@ -19,3 +19,8 @@ A step of the optim_native implementation. Called by \code{morie_adagrad}, \code
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .morie_opt_vec(g = g)
+res
+}

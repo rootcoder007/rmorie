@@ -361,9 +361,11 @@ morie_tps_load_tps <- function(name, format = "geojson",
 #' Short-D'Orsogna-Brantingham 2008 hot-spot PDE
 #'
 #' Solves the coupled reaction-diffusion system
-#' \deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta grad^2 A - omega A + theta rho,}
+#' \deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta
+#' grad^2 A - omega A + theta rho,}
 #' \deqn{\partial_t \rho = \nabla \cdot (D \nabla \rho - 2 \rho \nabla
-#'   \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) - rho A + gamma,}
+#'   \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) -
+#' rho A + gamma,}
 #' on a cosine-corrected Toronto grid seeded by the observed incident
 #' histogram. Localised attractiveness spikes emerge whenever
 #' \eqn{(\eta, \omega, \theta, D, \gamma)}{(eta, omega, theta, D, gamma)} place the system in the
@@ -541,7 +543,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 #' chronologically consecutive incidents, following Brockmann,
 #' Hufnagel & Geisel (2006). For a power-law tail \eqn{p(\ell) \propto
 #' \ell^{-\alpha}}{p(l) prop l^-alpha} on \eqn{\ell \ge \ell_{\min}}{l >= ell_min} the Hill MLE is
-#' \deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n / sum_i log(ell_i / ell_min).}
+#' \deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n /
+#' sum_i log(ell_i / ell_min).}
 #' Standard error is obtained by 200 nonparametric bootstrap resamples.
 #'
 #' @param category TPS category name.
@@ -671,7 +674,8 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #' Bettencourt urban-scaling exponent across the 158 Toronto wards
 #'
 #' Performs the standard log-log OLS scaling fit
-#' \deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta log p_i + varepsilon_i,}
+#' \deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta
+#' log p_i + varepsilon_i,}
 #' where \eqn{y_i} is the crime count and \eqn{p_i} is the population
 #' of ward \code{i}. \eqn{\beta > 1}{beta > 1} indicates super-linear (crime
 #' grows faster than population), \eqn{\beta = 1}{beta = 1} linear, and
@@ -806,9 +810,11 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
 #' rolling mean as a placeholder predator \eqn{y(t)} (TPS does not yet
 #' expose a public mass-stop / use-of-force time series). Under the
 #' classical Lotka-Volterra system,
-#' \deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x = alpha x - beta x y, dot y = delta x y - gamma y,}
+#' \deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x =
+#' alpha x - beta x y, dot y = delta x y - gamma y,}
 #' the small-amplitude oscillation around the equilibrium has period
-#' \eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate \eqn{\alpha}{alpha} is
+#' \eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate
+#' \eqn{\alpha}{alpha} is
 #' estimated from log-differences of \code{x}; \eqn{\gamma}{gamma} symmetrically
 #' from \code{y}; the interaction rates \eqn{\beta, \delta}{beta, delta} follow by
 #' the equilibrium relations.

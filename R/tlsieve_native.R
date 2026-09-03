@@ -81,7 +81,8 @@
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event_type Coerced to integer by the body, with \code{as.integer}.
 #' @param times A vector; its length is taken and its elements indexed.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{hazards}, \code{types}, \code{times}.
 #' @export
 .tlsieve_cause_specific_hazard <- function(time, event_type, times, weights = NULL) {
@@ -120,7 +121,8 @@
 #'
 #' @param hazards A vector; indexed elementwise.
 #' @param times A vector; its length is taken.
-#' @return A list with \code{F}, \code{survival}, \code{times}, \code{types}, \code{closure}, \code{note}.
+#' @return A list with \code{F}, \code{survival}, \code{times}, \code{types},
+#' \code{closure}, \code{note}.
 #' @export
 .tlsieve_cumulative_incidence <- function(hazards, times) {
   type_names <- names(hazards)
@@ -168,7 +170,8 @@
 #' @param event_type Passed to \code{.tlsieve_cause_specific_hazard}.
 #' @param times Passed to \code{.tlsieve_cause_specific_hazard}.
 #' @param weights Passed to \code{.tlsieve_cause_specific_hazard}.
-#' @return A list with \code{estimate}, \code{F}, \code{survival}, \code{types}, \code{times}, \code{closure}, \code{method}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{F}, \code{survival}, \code{types},
+#' \code{times}, \code{closure}, \code{method}, \code{caveat}.
 #' @export
 .tlsieve_aalen_johansen <- function(time, event_type, times, weights = NULL) {
   h <- .tlsieve_cause_specific_hazard(time, event_type, times, weights)
@@ -215,7 +218,8 @@
 #' @param F_pla_matched Passed to \code{.tlsieve_vaccine_efficacy}.
 #' @param F_vac_mismatched Passed to \code{.tlsieve_vaccine_efficacy}.
 #' @param F_pla_mismatched Passed to \code{.tlsieve_vaccine_efficacy}.
-#' @return A list with \code{estimate}, \code{sieve_effect}, \code{ve_matched}, \code{ve_mismatched}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{sieve_effect}, \code{ve_matched},
+#' \code{ve_mismatched}, \code{method}, \code{note}.
 #' @export
 morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
                           F_pla_mismatched) {
@@ -240,6 +244,9 @@ morie_tlsieve <- function(F_vac_matched, F_pla_matched, F_vac_mismatched,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlsieve_cheatsheet()
+#' res
 .tlsieve_cheatsheet <- function() {
   paste("tlsieve: an HIV vaccine built from a few antigens protects",
         "unevenly across strains, so SIEVE ANALYSIS asks how efficacy",

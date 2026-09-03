@@ -29,6 +29,10 @@
 #' @param x Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .log(x = x)
+#' res
 .log <- function(x) log(max(x, 1e-300))
 
 #' .state_key
@@ -40,6 +44,10 @@
 #' @param s A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .state_key(s = txt)
+#' res
 .state_key <- function(s) {
   if (is.character(s)) {
     return(s)
@@ -61,6 +69,10 @@
 #' @param a A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .action_key(a = A)
+#' res
 .action_key <- function(a) {
   if (is.character(a)) {
     return(a)

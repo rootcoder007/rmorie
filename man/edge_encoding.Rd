@@ -20,5 +20,6 @@ List with edge_bias and note.
 }
 \keyword{internal}
 \examples{
-edge_encoding(paths = c(1, 2, 3, 4, 5, 6, 7, 8), edge_features = c(1, 2, 3, 4, 5, 6, 7, 8), w_table = c(1, 2, 3, 4, 5, 6, 7, 8))
+edge_encoding(paths = c(1, 2, 3, 4, 5, 6, 7, 8), edge_features = c(1, 2, 3, 4, 5, 6, 7, 8),
+  w_table = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

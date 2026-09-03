@@ -7,7 +7,7 @@
 morie_big_ndigits(a)
 }
 \arguments{
-\item{a}{Value coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+\item{a}{Value coercible by \code{morie_bigint()}.}
 }
 \value{
 Integer digit count; 1 for zero.

@@ -33,7 +33,8 @@ test_that("cross: native PLR agrees with DoubleML on a linear DGP", {
                                    n_folds = 5L)
   set.seed(42)
   plr$fit()
-  ref <- as.numeric(plr$coef[1]); ref_se <- as.numeric(plr$se[1])
+  ref <- as.numeric(plr$coef[1])
+  ref_se <- as.numeric(plr$se[1])
 
   # both estimators target theta = 0.5; agreement within joint 95% margin
   expect_lt(abs(ours$ate - ref), 1.96 * sqrt(ours$se^2 + ref_se^2))
@@ -67,7 +68,8 @@ test_that("cross: native IRM agrees with DoubleML IRM on a linear DGP", {
                                    n_folds = 5L)
   set.seed(42)
   irm$fit()
-  ref <- as.numeric(irm$coef[1]); ref_se <- as.numeric(irm$se[1])
+  ref <- as.numeric(irm$coef[1])
+  ref_se <- as.numeric(irm$se[1])
 
   expect_lt(abs(ours$ate - ref), 1.96 * sqrt(ours$se^2 + ref_se^2))
   expect_lt(abs(ours$ate - 0.5), 3 * ours$se)

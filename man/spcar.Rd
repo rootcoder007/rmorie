@@ -15,7 +15,7 @@ spcar(z, w, covariates = NULL, parameterization = "weighted")
 
 \item{parameterization}{"weighted" (conditional variance sigma^2/d_i)
 or "identity" (constant). These are different models; forwarded to
-\code{\link[=sgcar]{sgcar()}}.}
+\code{sgcar()}.}
 }
 \value{
 The result of \code{sgcar()}.
@@ -27,7 +27,7 @@ Hammersley-Clifford these generate a valid joint Gaussian with
 Sigma_CAR = (I - C)^-1 Sigma_c.
 }
 \details{
-Same estimator as \code{\link[=sgcar]{sgcar()}}; this delegates rather than carrying a
+Same estimator as \code{sgcar()}; this delegates rather than carrying a
 second implementation.
 }
 \examples{

@@ -48,5 +48,7 @@ from.
 }
 \keyword{internal}
 \examples{
-morie_tmle_censoring(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 2, 3, 4, 5, 6, 7, 8), censor = c(0, 1, 0, 1, 1, 0, 1, 0), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), covariates = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_tmle_censoring(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 2, 3, 4, 5, 6, 7, 8),
+  censor = c(0, 1, 0, 1, 1, 0, 1, 0), treatment = c(0, 1, 0, 1, 1, 0, 1, 0),
+  covariates = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

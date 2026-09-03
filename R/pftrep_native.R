@@ -72,7 +72,9 @@ particle_filter_simple <- function(y, n_particles, init, step, loglik,
 #' @param loglik Passed to \code{particle_filter_simple}.
 #' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp}, \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps}, \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
+#' @return A list with \code{estimate}, \code{loglik}, \code{logmeanexp},
+#' \code{mean_loglik}, \code{jensen_gap}, \code{se}, \code{replicates}, \code{n_reps},
+#' \code{n_particles}, \code{min_ess}, \code{mean_min_ess}, \code{method}.
 #' @export
 replicated_pfilter <- function(y, n_particles, init, step, loglik,
                                n_reps = 10L, seed = 0L) {
@@ -106,10 +108,12 @@ replicated_pfilter <- function(y, n_particles, init, step, loglik,
 #' @param y Passed to \code{replicated_pfilter}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
 #' @param make_model Accepted by the signature and not used anywhere in the body.
-#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{200L}.
 #' @param n_reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik}, \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
+#' @return A list with \code{estimate}, \code{mle}, \code{grid}, \code{loglik},
+#' \code{se}, \code{max_loglik}, \code{n_particles}, \code{n_reps}, \code{method}.
 #' @export
 loglik_profile <- function(y, grid, make_model, n_particles = 200L,
                            n_reps = 5L, seed = 0L) {

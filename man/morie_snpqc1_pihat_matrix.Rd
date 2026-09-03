@@ -19,5 +19,7 @@ The value of \code{$}.
 }
 \keyword{internal}
 \examples{
-morie_snpqc1_pihat_matrix(genotypes = list(a = 1, b = 2))
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1_pihat_matrix(genotypes = list(a = 1, b = 2))
+}
 }

@@ -48,7 +48,8 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 
 #' .surxgb_check_dist
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss}, \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
+#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_loss},
+#' \code{morie_surxgb_boost}, \code{morie_surxgb_cdf} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -57,14 +58,18 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' @export
 .surxgb_check_dist <- function(dist) {
   if (!(dist %in% morie_surxgb_DISTRIBUTIONS)) {
-    stop(sprintf("surxgb: distribution must be one of %s, got %s",
-                 paste(morie_surxgb_DISTRIBUTIONS, collapse=", "), dist))
+    stop(sprintf(
+      "surxgb: distribution must be one of %s, got %s",
+      paste(morie_surxgb_DISTRIBUTIONS, collapse = ", "), dist
+    ))
   }
 }
 
 #' Table 2: the density of Z
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}, \code{morie_surxgb_ddpdf} and 1 others in the module.
+#' A step of the surxgb_native implementation. Called by
+#' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss},
+#' \code{morie_surxgb_ddpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -72,7 +77,7 @@ morie_surxgb_DISTRIBUTIONS <- c("normal", "logistic", "extreme")
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
-morie_surxgb_pdf <- function(z, dist="normal") {
+morie_surxgb_pdf <- function(z, dist = "normal") {
   # Table 2: the density of Z.
   .surxgb_check_dist(dist)
   z <- max(-.surxgb_CLAMP, min(.surxgb_CLAMP, as.numeric(z)))
@@ -81,14 +86,16 @@ morie_surxgb_pdf <- function(z, dist="normal") {
   }
   if (dist == "logistic") {
     e <- exp(-abs(z))
-    return(e / ((1.0 + e) ^ 2))
+    return(e / ((1.0 + e)^2))
   }
   if (z < .surxgb_CLAMP) exp(z - exp(z)) else 0.0
 }
 
 #' Table 2: the distribution function of Z
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}, \code{morie_surxgb_ddpdf} and 1 others in the module.
+#' A step of the surxgb_native implementation. Called by
+#' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss},
+#' \code{morie_surxgb_ddpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -96,7 +103,7 @@ morie_surxgb_pdf <- function(z, dist="normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_cdf <- function(z, dist="normal") {
+morie_surxgb_cdf <- function(z, dist = "normal") {
   # Table 2: the distribution function of Z.
   .surxgb_check_dist(dist)
   zf <- as.numeric(z)
@@ -126,7 +133,7 @@ morie_surxgb_cdf <- function(z, dist="normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_dpdf <- function(z, dist="normal") {
+morie_surxgb_dpdf <- function(z, dist = "normal") {
   # Table 2: f_Z'(z).
   .surxgb_check_dist(dist)
   f <- morie_surxgb_pdf(z, dist)
@@ -150,7 +157,7 @@ morie_surxgb_dpdf <- function(z, dist="normal") {
 #' @param dist One of \code{"logistic"}, \code{"normal"}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_ddpdf <- function(z, dist="normal") {
+morie_surxgb_ddpdf <- function(z, dist = "normal") {
   # Table 2: f_Z''(z).
   .surxgb_check_dist(dist)
   f <- morie_surxgb_pdf(z, dist)
@@ -160,15 +167,16 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
   }
   if (dist == "logistic") {
     F <- morie_surxgb_cdf(zc, dist)
-    return(f * ((1.0 - 2.0 * F) ^ 2 - 2.0 * f))
+    return(f * ((1.0 - 2.0 * F)^2 - 2.0 * f))
   }
   e <- exp(zc)
-  f * ((1.0 - e) ^ 2 - e)
+  f * ((1.0 - e)^2 - e)
 }
 
 #' .surxgb_s
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}.
+#' A step of the surxgb_native implementation. Called by
+#' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_aft_loss}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -189,7 +197,8 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
 
 #' morie_surxgb_aft_loss
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_boost}.
+#' A step of the surxgb_native implementation. Called by
+#' \code{morie_surxgb_aft_gradient_hessian}, \code{morie_surxgb_boost}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -200,8 +209,8 @@ morie_surxgb_ddpdf <- function(z, dist="normal") {
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
-                                  dist="normal") {
+morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma = 1.0,
+                                  dist = "normal") {
   # Definition 2, covering all four label types of Table 1.
   # y_lower == y_upper is an observed event; y_upper = Inf is
   # right-censored; y_lower = 0 is left-censored; otherwise interval.
@@ -212,8 +221,10 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
   lo <- as.numeric(y_lower)
   hi <- as.numeric(y_upper)
   if (hi < lo) {
-    stop(sprintf("surxgb: the upper bound %g is below the lower bound %g",
-                 hi, lo))
+    stop(sprintf(
+      "surxgb: the upper bound %g is below the lower bound %g",
+      hi, lo
+    ))
   }
   if (lo < 0.0) {
     stop("surxgb: a survival time cannot be negative")
@@ -226,7 +237,7 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
     return(-log(max(d, .surxgb_FLOOR) / (sigma * lo)))
   }
   p <- (morie_surxgb_cdf(.surxgb_s(hi, u, sigma), dist) -
-        morie_surxgb_cdf(.surxgb_s(lo, u, sigma), dist))
+    morie_surxgb_cdf(.surxgb_s(lo, u, sigma), dist))
   -log(max(p, .surxgb_FLOOR))
 }
 
@@ -243,18 +254,21 @@ morie_surxgb_aft_loss <- function(y_lower, y_upper, u, sigma=1.0,
 #' @param dist Passed to \code{morie_surxgb_aft_loss}. Defaults to \code{"normal"}.
 #' @param method One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
-#' @return A list with \code{gradient}, \code{hessian}, \code{loss}, \code{hessian_floored}, \code{derivative_method}.
+#' @return A list with \code{gradient}, \code{hessian}, \code{loss},
+#' \code{hessian_floored}, \code{derivative_method}.
 #' @export
 morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
-                                              sigma=1.0, dist="normal",
-                                              method="analytic",
-                                              eps=1e-5) {
+                                              sigma = 1.0, dist = "normal",
+                                              method = "analytic",
+                                              eps = 1e-5) {
   # Gradient and hessian of the loss in u. "analytic" differentiates
   # Definition 2 in closed form; "numeric" central-differences the
   # loss. The hessian is floored at a small positive value.
   if (!(method %in% c("analytic", "numeric"))) {
-    stop(sprintf("surxgb: method must be 'analytic' or 'numeric', got %s",
-                 method))
+    stop(sprintf(
+      "surxgb: method must be 'analytic' or 'numeric', got %s",
+      method
+    ))
   }
   f0 <- morie_surxgb_aft_loss(y_lower, y_upper, u, sigma, dist)
   if (method == "numeric") {
@@ -279,15 +293,19 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
       f_lo <- if (!is.infinite(s_lo)) morie_surxgb_pdf(s_lo, dist) else 0.0
       d_hi <- if (!is.infinite(s_hi)) morie_surxgb_dpdf(s_hi, dist) else 0.0
       d_lo <- if (!is.infinite(s_lo)) morie_surxgb_dpdf(s_lo, dist) else 0.0
-      D <- max(morie_surxgb_cdf(s_hi, dist) - morie_surxgb_cdf(s_lo, dist),
-               .surxgb_FLOOR)
+      D <- max(
+        morie_surxgb_cdf(s_hi, dist) - morie_surxgb_cdf(s_lo, dist),
+        .surxgb_FLOOR
+      )
       A <- f_hi - f_lo
       g <- A / (sigma * D)
       h <- (A * A - (d_hi - d_lo) * D) / (sigma * sigma * D * D)
     }
   }
-  list(gradient=g, hessian=if (h > 1e-8) h else 1e-8, loss=f0,
-       hessian_floored=(h <= 1e-8), derivative_method=method)
+  list(
+    gradient = g, hessian = if (h > 1e-8) h else 1e-8, loss = f0,
+    hessian_floored = (h <= 1e-8), derivative_method = method
+  )
 }
 
 #' Equation (5): w* = -G/(H+lambda)
@@ -301,7 +319,7 @@ morie_surxgb_aft_gradient_hessian <- function(y_lower, y_upper, u,
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_leaf_weight <- function(G, H, lam=1.0) {
+morie_surxgb_leaf_weight <- function(G, H, lam = 1.0) {
   # Equation (5): w* = -G/(H+lambda).
   if (H + lam <= 0.0) {
     stop("surxgb: H + lambda must be positive")
@@ -323,7 +341,7 @@ morie_surxgb_leaf_weight <- function(G, H, lam=1.0) {
 #' @param gamma Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
-morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
+morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam = 1.0, gamma = 0.0) {
   # Equation (7): the loss reduction, net of the leaf price.
   term <- function(g, h) g * g / (h + lam)
   0.5 * (term(GL, HL) + term(GR, HR) - term(GL + GR, HL + HR)) - gamma
@@ -344,14 +362,17 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
 #' @param lam Passed to \code{morie_surxgb_leaf_weight}.
 #' @param gamma Passed to \code{morie_surxgb_split_gain}.
 #' @param min_child Numeric; combined arithmetically in the body.
-#' @return A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain}, \code{left}, \code{right}.
+#' @return A list with \code{leaf}, \code{variable}, \code{cut}, \code{gain},
+#' \code{left}, \code{right}.
 #' @export
 .surxgb_build <- function(X, g, h, idx, depth, max_depth, lam, gamma,
                           min_child) {
   G <- sum(g[idx])
   H <- sum(h[idx])
-  leaf <- list(leaf=TRUE, weight=morie_surxgb_leaf_weight(G, H, lam),
-               n=length(idx))
+  leaf <- list(
+    leaf = TRUE, weight = morie_surxgb_leaf_weight(G, H, lam),
+    n = length(idx)
+  )
   if (depth >= max_depth || length(idx) < 2L * min_child) {
     return(leaf)
   }
@@ -373,30 +394,40 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
       }
       gain <- morie_surxgb_split_gain(GL, HL, G - GL, H - HL, lam, gamma)
       if (gain > 0.0 && (is.null(best) || gain > best$gain)) {
-        best <- list(gain=gain, variable=j,
-                     cut=(X[order_[k], j] + X[order_[k + 1L], j]) / 2.0,
-                     left=order_[seq_len(k)],
-                     right=order_[seq.int(k + 1L, no)])
+        best <- list(
+          gain = gain, variable = j,
+          cut = (X[order_[k], j] + X[order_[k + 1L], j]) / 2.0,
+          left = order_[seq_len(k)],
+          right = order_[seq.int(k + 1L, no)]
+        )
       }
     }
   }
   if (is.null(best)) {
     return(leaf)
   }
-  list(leaf=FALSE, variable=best$variable, cut=best$cut, gain=best$gain,
-       left=.surxgb_build(X, g, h, best$left, depth + 1L, max_depth,
-                          lam, gamma, min_child),
-       right=.surxgb_build(X, g, h, best$right, depth + 1L, max_depth,
-                           lam, gamma, min_child))
+  list(
+    leaf = FALSE, variable = best$variable, cut = best$cut, gain = best$gain,
+    left = .surxgb_build(
+      X, g, h, best$left, depth + 1L, max_depth,
+      lam, gamma, min_child
+    ),
+    right = .surxgb_build(
+      X, g, h, best$right, depth + 1L, max_depth,
+      lam, gamma, min_child
+    )
+  )
 }
 
 #' .surxgb_eval_tree
 #'
-#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost}, \code{morie_surxgb_predict}.
+#' A step of the surxgb_native implementation. Called by \code{morie_surxgb_boost},
+#' \code{morie_surxgb_predict}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node A list; the body reads \code{$cut}, \code{$leaf}, \code{$left}, \code{$right}, \code{$variable}, \code{$weight} from it.
+#' @param node A list; the body reads \code{$cut}, \code{$leaf}, \code{$left},
+#' \code{$right}, \code{$variable}, \code{$weight} from it.
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export
@@ -424,14 +455,19 @@ morie_surxgb_split_gain <- function(GL, HL, GR, HR, lam=1.0, gamma=0.0) {
 #' @param min_child Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param sigma Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{1}.
 #' @param dist Passed to \code{.surxgb_check_dist}. Defaults to \code{"normal"}.
-#' @param base_score Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param derivatives Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to \code{"analytic"}.
-#' @return A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam}, \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives}, \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth}, \code{method}.
+#' @param base_score Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param derivatives Passed to \code{morie_surxgb_aft_gradient_hessian}. Defaults to
+#' \code{"analytic"}.
+#' @return A list with \code{estimate}, \code{trees}, \code{eta}, \code{lam},
+#' \code{gamma}, \code{sigma}, \code{dist}, \code{base_score}, \code{derivatives},
+#' \code{loss_history}, \code{prediction}, \code{n_rounds}, \code{max_depth},
+#' \code{method}.
 #' @export
-morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds=50, eta=0.1,
-                               max_depth=3, lam=1.0, gamma=0.0,
-                               min_child=5, sigma=1.0, dist="normal",
-                               base_score=NULL, derivatives="analytic") {
+morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds = 50, eta = 0.1,
+                               max_depth = 3, lam = 1.0, gamma = 0.0,
+                               min_child = 5, sigma = 1.0, dist = "normal",
+                               base_score = NULL, derivatives = "analytic") {
   # Fit the AFT model by second-order gradient boosting.
   .surxgb_check_dist(dist)
   X <- as.matrix(X)
@@ -456,36 +492,44 @@ morie_surxgb_boost <- function(X, y_lower, y_upper, n_rounds=50, eta=0.1,
     g <- numeric(n)
     h <- numeric(n)
     for (i in seq_len(n)) {
-      d <- morie_surxgb_aft_gradient_hessian(yl[i], yu[i], pred[i],
-                                             sigma, dist, derivatives)
+      d <- morie_surxgb_aft_gradient_hessian(
+        yl[i], yu[i], pred[i],
+        sigma, dist, derivatives
+      )
       g[i] <- d$gradient
       h[i] <- d$hessian
     }
-    tree <- .surxgb_build(X, g, h, seq_len(n), 0L, as.integer(max_depth),
-                          as.numeric(lam), as.numeric(gamma),
-                          as.integer(min_child))
+    tree <- .surxgb_build(
+      X, g, h, seq_len(n), 0L, as.integer(max_depth),
+      as.numeric(lam), as.numeric(gamma),
+      as.integer(min_child)
+    )
     for (i in seq_len(n)) {
       pred[i] <- pred[i] + eta * .surxgb_eval_tree(tree, X[i, ])
     }
     trees[[length(trees) + 1L]] <- tree
     loss <- 0.0
     for (i in seq_len(n)) {
-      loss <- loss + morie_surxgb_aft_loss(yl[i], yu[i], pred[i], sigma,
-                                           dist)
+      loss <- loss + morie_surxgb_aft_loss(
+        yl[i], yu[i], pred[i], sigma,
+        dist
+      )
     }
     history <- c(history, loss / n)
   }
   list(
-    estimate=if (length(history) > 0L) history[length(history)] else NaN,
-    trees=trees, eta=as.numeric(eta), lam=as.numeric(lam),
-    gamma=as.numeric(gamma), sigma=as.numeric(sigma),
-    dist=dist, base_score=as.numeric(base_score),
-    derivatives=derivatives,
-    loss_history=history, prediction=pred,
-    n_rounds=length(trees), max_depth=as.integer(max_depth),
-    method=paste0("AFT survival regression by second-order gradient ",
-                  "boosting; Chen & Guestrin (2016) eqs (5)-(7), ",
-                  "Barnwal et al. (2022) Definition 2")
+    estimate = if (length(history) > 0L) history[length(history)] else NaN,
+    trees = trees, eta = as.numeric(eta), lam = as.numeric(lam),
+    gamma = as.numeric(gamma), sigma = as.numeric(sigma),
+    dist = dist, base_score = as.numeric(base_score),
+    derivatives = derivatives,
+    loss_history = history, prediction = pred,
+    n_rounds = length(trees), max_depth = as.integer(max_depth),
+    method = paste0(
+      "AFT survival regression by second-order gradient ",
+      "boosting; Chen & Guestrin (2016) eqs (5)-(7), ",
+      "Barnwal et al. (2022) Definition 2"
+    )
   )
 }
 

@@ -25,7 +25,8 @@ Named list with \code{estimate}, \code{weights}, \code{n}, \code{method}.
 Rasmussen & Williams (2006), eq. (2.23), (2.25).
 }
 \examples{
-Gppost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_star = c(1, 2, 3, 4, 5, 6, 7, 8))
+Gppost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X_star = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Rasmussen & Williams (2006), eq. (2.25).

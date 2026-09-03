@@ -17,3 +17,7 @@ A step of the snpqc1_native implementation. Called by \code{morie_snpqc1_hwe_pva
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .snpqc1_log_fact(n = 3L)
+res
+}

@@ -29,6 +29,10 @@
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .metabd_mat(X = x)
+#' res
 .metabd_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -40,13 +44,18 @@
 }
 #' .metabd_vec
 #'
-#' A step of the metabd_native implementation. Called by \code{abundance_correlation}, \code{bin_contigs}, \code{composite_distance}.
+#' A step of the metabd_native implementation. Called by \code{abundance_correlation},
+#' \code{bin_contigs}, \code{composite_distance}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .metabd_vec(v = x)
+#' res
 .metabd_vec <- function(v) as.numeric(unlist(v))
 
 #' tetranucleotide_frequency
@@ -58,7 +67,8 @@
 #' @param seq Coerced to character by the body, with \code{as.character}.
 #' @param kk Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @param canonical A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers}, \code{canonical}.
+#' @return A list with \code{frequency}, \code{vector}, \code{kmers}, \code{n_kmers},
+#' \code{canonical}.
 #' @export
 tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
   s <- toupper(as.character(seq))
@@ -91,7 +101,8 @@ tetranucleotide_frequency <- function(seq, kk = 4L, canonical = TRUE) {
 
 #' abundance_correlation
 #'
-#' A step of the metabd_native implementation. Called by \code{composite_distance}, \code{morie_metabd}.
+#' A step of the metabd_native implementation. Called by \code{composite_distance},
+#' \code{morie_metabd}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -116,7 +127,8 @@ abundance_correlation <- function(cov_a, cov_b) {
 
 #' length_weight
 #'
-#' A step of the metabd_native implementation. Called by \code{composite_distance}, \code{morie_metabd}.
+#' A step of the metabd_native implementation. Called by \code{composite_distance},
+#' \code{morie_metabd}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -147,8 +159,10 @@ length_weight <- function(length, l_min = 2500.0, l_ref = 100000.0) {
 #' @param cov_b Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param len_a Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param len_b Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param w_abundance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
-#' @return A list with \code{distance}, \code{composition}, \code{abundance}, \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
+#' @param w_abundance Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.5}.
+#' @return A list with \code{distance}, \code{composition}, \code{abundance},
+#' \code{abundance_usable}, \code{confidence}, \code{effective_weight}, \code{note}.
 #' @export
 composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
                                len_a = NULL, len_b = NULL,
@@ -188,8 +202,10 @@ composite_distance <- function(tnf_a, tnf_b, cov_a = NULL, cov_b = NULL,
 #' @param coverages Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param lengths Optional; may be \code{NULL}. Passed to \code{.metabd_vec}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
-#' @param min_bin_size Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2e+05}.
-#' @return A list with \code{estimate}, \code{bins}, \code{unbinned}, \code{n_bins}, \code{n_unbinned}, \code{method}, \code{note}.
+#' @param min_bin_size Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{2e+05}.
+#' @return A list with \code{estimate}, \code{bins}, \code{unbinned}, \code{n_bins},
+#' \code{n_unbinned}, \code{method}, \code{note}.
 #' @export
 bin_contigs <- function(tnfs, coverages = NULL, lengths = NULL,
                         threshold = 0.15, min_bin_size = 200000.0) {
@@ -270,6 +286,9 @@ metagenome_binning <- bin_contigs
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .metabd_cheatsheet()
+#' res
 .metabd_cheatsheet <- function() {
   paste("metabd: bin contigs into draft genomes from TWO signals ",
         "-- tetranucleotide composition (available always, noisy ",

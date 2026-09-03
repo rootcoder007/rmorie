@@ -35,5 +35,6 @@ the cross-fitted nuisances supplied BY THE CALLER, so the fold
 assignment -- the only random ingredient -- lives outside.
 }
 \examples{
-morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5),
+  m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

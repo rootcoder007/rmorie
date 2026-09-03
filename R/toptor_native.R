@@ -138,7 +138,8 @@ torsion_similarity <- function(t1, t2) {
 #' @param activities Coerced to numeric by the body, with \code{as.numeric}.
 #' @param permutations A count; the body uses it as \code{seq_len(...)}.
 #' @param seed Passed to \code{.ghc_rng}.
-#' @return A list with \code{vector}, \code{descriptors}, \code{length}, \code{null_mean}, \code{null_sd}, \code{z}.
+#' @return A list with \code{vector}, \code{descriptors}, \code{length},
+#' \code{null_mean}, \code{null_sd}, \code{z}.
 #' @export
 .trend_vector <- function(torsion_sets, activities, permutations, seed) {
   sets <- lapply(torsion_sets, function(t) {

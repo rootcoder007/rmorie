@@ -3,10 +3,12 @@
 #' Fauzi: KDFE bias and variance properties (Ch 2)
 #'
 #' Kernel distribution-function estimator (KDFE)
-#' \eqn{\hat F_h(t) = n^{-1} \sum_i \Phi((t-X_i)/h)}{hat F_h(t) = n^-1 sum_i Phi((t-X_i)/h)} and its asymptotic
+#' \eqn{\hat F_h(t) = n^{-1} \sum_i \Phi((t-X_i)/h)}{hat F_h(t) = n^-1 sum_i
+#' Phi((t-X_i)/h)} and its asymptotic
 #' bias and variance:
 #' \deqn{\mathrm{Bias} = (h^2/2)\mu_2(K) f'(t),
-#'       \quad \mathrm{Var}=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}{Bias = (h^2/2)mu_2(K) f'(t), Var=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}
+#'       \quad \mathrm{Var}=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}{Bias = (h^2/2)mu_2(K)
+#' f'(t), Var=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}
 #' For the Gaussian kernel \eqn{\mu_2=1, r(K)=1/(2\sqrt\pi)}{mu_2=1, r(K)=1/(2sqrtpi)}.
 #'
 #' @param x Numeric vector.

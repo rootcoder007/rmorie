@@ -22,5 +22,7 @@ A list with \code{logf}, \code{f}, \code{total_lag}, \code{n}.
 }
 \keyword{internal}
 \examples{
-rmorie:::Epiarnb(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8), i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), nb_lag = c(1, 2, 3, 4, 5, 6, 7, 8), b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Epiarnb(beta0 = c(1, 2, 3, 4, 5, 6, 7, 8), beta1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  i_lag = c(1, 2, 3, 4, 5, 6, 7, 8), nb_lag = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b1 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

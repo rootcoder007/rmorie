@@ -1,6 +1,6 @@
 # morie.fn -- function file (rootcoder007/morie)
 #' LTMLE: targeting the sequential regressions
-#' 
+#'
 #' The g-computation estimand can be written as iterated conditional
 #' expectations: regress the outcome on the history at the last time
 #' point, evaluate that fit under the intervention rule, treat the result
@@ -8,37 +8,37 @@
 #' regressions with machine learning gives a substitution estimator that
 #' is *not* asymptotically linear -- the bias of a data-adaptive fit does
 #' not vanish fast enough. Targeting fixes precisely that.
-#' 
+#'
 #' **Each step is a one-dimensional fluctuation.** Since the outcome
 #' regressions are bounded in \eqn{[0,1]} (after scaling), the loss is
 #' the Bernoulli log-likelihood and the submodel is logistic with the
 #' initial fit as **offset**:
-#' 
+#'
 #' \deqn{\mathrm{logit}\,\bar Q_t(\epsilon) = \mathrm{logit}\,\bar Q_t^0 + \epsilon\, H_t,}
-#' 
+#'
 #' where the **clever covariate** \eqn{H_t} is the inverse cumulative
 #' probability of following the rule through time \eqn{t},
-#' 
+#'
 #' \deqn{H_t = \frac{\prod_{s \le t} I(A_s = d_s)}{\prod_{s \le t} g_s}.}
-#' 
+#'
 #' Fitting \eqn{\epsilon} by maximum likelihood makes the updated fit
 #' solve the efficient influence curve equation for that component; doing
 #' it at every time point, backwards, makes the whole estimator solve
 #' \eqn{P_n D^* = 0}.
-#' 
+#'
 #' **Double robustness, stated exactly.** The estimator is consistent if
 #' *either* the sequential outcome regressions *or* the treatment
 #' mechanism are consistently estimated -- not both. The anchor exploits
 #' that: it breaks each arm separately and requires the estimate to
 #' survive, then breaks both and requires it to fail. Two wrong arms are
 #' the case that must not silently pass.
-#' 
+#'
 #' **Positivity is the binding constraint.** The clever covariate is an
 #' inverse probability; as the cumulative probability of the rule
 #' approaches zero it explodes, and the second-order remainder is bounded
 #' only when \eqn{g_{0} > \delta > 0}. That is why the module reports
 #' the largest clever covariate rather than hiding it.
-#' 
+#'
 #' References
 #' van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
 #' Science*, Springer, doi:10.1007/978-3-319-65304-4. Chap. 4 (the
@@ -50,25 +50,29 @@
 #' positivity condition g > delta > 0 that bounds it; and the use of a
 #' super learner containing the highly adaptive lasso as the initial
 #' estimator). Chap. 3 (the sequential regressions being targeted).
-#' 
+#'
 #' van der Laan, M. J. & Gruber, S. (2012) "Targeted minimum loss based
 #' estimation of causal effects of multiple time point interventions",
 #' *International Journal of Biostatistics* 8(1), Article 9,
 #' doi:10.1515/1557-4679.1370.
-#' 
+#'
 #' Bang, H. & Robins, J. M. (2005) "Doubly robust estimation in missing
 #' data and causal inference models", *Biometrics* 61(4), 962-973,
 #' doi:10.1111/j.1541-0420.2005.00377.x.
 
 #' .tlltmle_logit
 #'
-#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate}, \code{tlltmle_tmle_point}.
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate},
+#' \code{tlltmle_tmle_point}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tlltmle_logit(p = 0.5)
+#' res
 .tlltmle_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-9), 1 - 1e-9)
   return(log(q / (1.0 - q)))
@@ -76,13 +80,18 @@
 
 #' .tlltmle_expit
 #'
-#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate}, \code{tlltmle_tmle_point}.
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_fluctuate},
+#' \code{tlltmle_tmle_point}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlltmle_expit(x = x)
+#' res
 .tlltmle_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }
@@ -116,7 +125,8 @@ tlltmle_clever_covariate <- function(A, g, rule = 1.0) {
 
 #' tlltmle_fluctuate
 #'
-#' A step of the tlltmle_native implementation. Called by \code{tlltmle_ltmle}, \code{tlltmle_tmle_point}.
+#' A step of the tlltmle_native implementation. Called by \code{tlltmle_ltmle},
+#' \code{tlltmle_tmle_point}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -162,7 +172,9 @@ tlltmle_fluctuate <- function(Q, H, Y, iters = 100, tol = 1e-10) {
 #' @param Q1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Q0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{initial_plugin}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci},
+#' \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate},
+#' \code{initial_plugin}, \code{method}, \code{note}.
 #' @export
 tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
   a <- as.numeric(A)
@@ -200,7 +212,8 @@ tlltmle_tmle_point <- function(A, Y, Q1, Q0, g) {
 #' @param Q_seq A vector; its length is taken and its elements indexed.
 #' @param H_seq A vector; its length is taken and its elements indexed.
 #' @param Y_seq A vector; indexed elementwise.
-#' @return A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star}, \code{T}, \code{method}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilons}, \code{Q_star},
+#' \code{T}, \code{method}.
 #' @export
 tlltmle_ltmle <- function(Q_seq, H_seq, Y_seq) {
   T_ <- length(Q_seq)

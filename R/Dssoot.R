@@ -44,7 +44,8 @@
 #'   879-891.
 #' @export
 #' @examples
-#' Dssoot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Dssoot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 Dssoot <- function(Y, X, M, n_boot = 1000L, alpha = 0.05, seed = 42L) {
   yv <- .s03vec(Y)
   xv <- .s03vec(X)

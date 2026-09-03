@@ -13,7 +13,8 @@
 #' short-time RMS the book uses for EMG activity (Section 5.6).
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 Rms <- function(x, window = NULL) {
@@ -46,7 +47,8 @@ Rms <- function(x, window = NULL) {
 #' Ratios are dimensionless, so no fs.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{form_factor}, \code{complexity}, \code{mobility}, \code{activity}, \code{mobility_of_derivative}, \code{n}, \code{method}.
+#' @return A list with \code{form_factor}, \code{complexity}, \code{mobility},
+#' \code{activity}, \code{mobility_of_derivative}, \code{n}, \code{method}.
 #' @export
 FormFactor <- function(x) {
   # eqs (5.25)-(5.26): activity = var(x); mobility = sd(x')/sd(x);
@@ -128,7 +130,8 @@ FormFactor <- function(x) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param threshold Passed to \code{.morie_rg_turns}. Defaults to \code{100}.
-#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 TurnsCount <- function(x, threshold = 100, window = NULL) {
@@ -170,7 +173,9 @@ TurnsCount <- function(x, threshold = 100, window = NULL) {
 #' @param signal Coerced to numeric by the body, with \code{as.numeric}.
 #' @param noise Coerced to numeric by the body, with \code{as.numeric}.
 #' @param definition One of \code{"peak"}, \code{"power"}. Defaults to \code{"power"}.
-#' @return A list with \code{snr_db}, \code{snr_power_db}, \code{snr_peak_db}, \code{signal_power}, \code{noise_power}, \code{noise_rms}, \code{definition}, \code{method}.
+#' @return A list with \code{snr_db}, \code{snr_power_db}, \code{snr_peak_db},
+#' \code{signal_power}, \code{noise_power}, \code{noise_rms}, \code{definition},
+#' \code{method}.
 #' @export
 Snr <- function(signal, noise, definition = "power") {
   # Section 3.2.1 gives two definitions in one sentence, and they are not
@@ -211,7 +216,8 @@ Snr <- function(signal, noise, definition = "power") {
 #'
 #' @param clean Coerced to numeric by the body, with \code{as.numeric}.
 #' @param filtered Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{snr_db}, \code{residual_power}, \code{signal_power}, \code{residual}, \code{n}, \code{method}.
+#' @return A list with \code{snr_db}, \code{residual_power}, \code{signal_power},
+#' \code{residual}, \code{n}, \code{method}.
 #' @export
 SnrFilt <- function(clean, filtered) {
   # The power form of Section 3.2.1 applied to the residual against a
@@ -241,7 +247,8 @@ SnrFilt <- function(clean, filtered) {
 #' by 1/sqrt(M): an SNR gain of sqrt(M), or 10 log10(M) dB.
 #'
 #' @param observations Iterated over elementwise, with \code{lapply}.
-#' @return A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se}, \code{snr_gain}, \code{snr_gain_db}, \code{alignment_note}, \code{method}.
+#' @return A list with \code{average}, \code{sd}, \code{m}, \code{n}, \code{se},
+#' \code{snr_gain}, \code{snr_gain_db}, \code{alignment_note}, \code{method}.
 #' @export
 SyncAvg <- function(observations) {
   # eqs (3.95)-(3.96): y_k = x_k + eta_k, and the sum over k separates
@@ -334,7 +341,9 @@ ObsReal <- function(x, eta) {
 #' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fmin Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param fmax Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{fd}, \code{beta}, \code{hurst}, \code{slope}, \code{intercept}, \code{n_bins}, \code{r_squared}, \code{in_range}, \code{band}, \code{method}.
+#' @return A list with \code{fd}, \code{beta}, \code{hurst}, \code{slope},
+#' \code{intercept}, \code{n_bins}, \code{r_squared}, \code{in_range}, \code{band},
+#' \code{method}.
 #' @export
 FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
   # eqs (6.50)-(6.52): an fBm signal has PSD ~ 1/f^beta, and for a 1-D
@@ -374,7 +383,8 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 
 #' .morie_rg_periodogram
 #'
-#' A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag}, \code{SigFeatures}.
+#' A step of the rangayyan_stat implementation. Called by \code{EmgFreq}, \code{FdVag},
+#' \code{SigFeatures}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -407,7 +417,8 @@ FdPsd <- function(psd, freqs, fmin = NULL, fmax = NULL) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fmin Passed to \code{FdPsd}. Defaults to \code{100}.
 #' @param fmax Passed to \code{FdPsd}. Defaults to \code{500}.
-#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{r}, as built in the body.
 #' @export
 FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
@@ -437,7 +448,8 @@ FdVag <- function(x, fs, fmin = 100, fmax = 500, nperseg = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{fd}, \code{total_length}, \code{max_distance}, \code{mean_step}, \code{n_steps}, \code{n}, \code{scale_sensitive}, \code{method}.
+#' @return A list with \code{fd}, \code{total_length}, \code{max_distance},
+#' \code{mean_step}, \code{n_steps}, \code{n}, \code{scale_sensitive}, \code{method}.
 #' @export
 KatzFd <- function(x, dt = 1) {
   # Katz (1988): FD = log10(n) / (log10(n) + log10(d/L)), with L the path
@@ -476,10 +488,12 @@ KatzFd <- function(x, dt = 1) {
 #' the PSD rather than quoted from the book.
 #'
 #' @param psd Coerced to numeric by the body, with \code{as.numeric}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param fmin Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param fmax Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{entropy}, \code{units}, \code{max_entropy}, \code{normalized}, \code{n_bins}, \code{probabilities}, \code{method}.
+#' @return A list with \code{entropy}, \code{units}, \code{max_entropy},
+#' \code{normalized}, \code{n_bins}, \code{probabilities}, \code{method}.
 #' @export
 SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
   # eq (3.11) applied to the PSD normalized to unit mass.  Rangayyan
@@ -523,7 +537,9 @@ SpecEntropy <- function(psd, freqs = NULL, fmin = NULL, fmax = NULL) {
 #'
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{mfr}, \code{mean_idi}, \code{sd_idi}, \code{cv_idi}, \code{idi}, \code{n_discharges}, \code{mean_instantaneous_rate}, \code{duration}, \code{method}.
+#' @return A list with \code{mfr}, \code{mean_idi}, \code{sd_idi}, \code{cv_idi},
+#' \code{idi}, \code{n_discharges}, \code{mean_instantaneous_rate}, \code{duration},
+#' \code{method}.
 #' @export
 FiringRate <- function(times, fs = NULL) {
   # MFR = 1/mean(IDI), CV = SD(IDI)/mean(IDI).  MFR is the RECIPROCAL OF
@@ -563,7 +579,10 @@ FiringRate <- function(times, fs = NULL) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param threshold Passed to \code{TurnsCount}. Defaults to \code{0}.
-#' @return A list with \code{mean}, \code{sd}, \code{rms}, \code{zero_crossings}, \code{zcr}, \code{turns}, \code{activity}, \code{mobility}, \code{form_factor}, \code{spectral_centroid}, \code{spectral_bandwidth}, \code{spectral_entropy}, \code{n}, \code{fs}, \code{method}.
+#' @return A list with \code{mean}, \code{sd}, \code{rms}, \code{zero_crossings},
+#' \code{zcr}, \code{turns}, \code{activity}, \code{mobility}, \code{form_factor},
+#' \code{spectral_centroid}, \code{spectral_bandwidth}, \code{spectral_entropy},
+#' \code{n}, \code{fs}, \code{method}.
 #' @export
 SigFeatures <- function(x, fs = 1, threshold = 0) {
   # The descriptors Rangayyan uses across Chapters 3, 5 and 6, each

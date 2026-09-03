@@ -15,7 +15,10 @@
 #' @param n_unexposed See Usage.
 #' @param alpha See Usage.
 #' @return List with ``pr``, ``log_pr``, ``se_log``, ``ci_lower``, ``ci_upper``.
-#' @references Barros and Hirakata (2003), Alternatives for logistic regression in cross-sectional studies: an empirical comparison of models that directly estimate the prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method standard error for log PR used here is the standard binomial one.
+#' @references Barros and Hirakata (2003), Alternatives for logistic regression in
+#' cross-sectional studies: an empirical comparison of models that directly estimate the
+#' prevalence ratio, BMC Medical Research Methodology 3:21. Open access; the delta-method
+#' standard error for log PR used here is the standard binomial one.
 #' @export
 Prevratio <- function(prev_exposed, prev_unexposed, n_exposed = NULL, n_unexposed = NULL, alpha = 0.05) {
   pe <- as.numeric(prev_exposed)

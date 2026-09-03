@@ -19,3 +19,9 @@ A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadra
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .cgnonl_dot(a = A, b = b)
+res
+}

@@ -40,7 +40,8 @@ per-class distances and sizes, and whether \code{t} is met.
 Mirrors Python \code{morie.fn.tcls}.
 }
 \examples{
-morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8),
+  sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Li, N., Li, T., & Venkatasubramanian, S. (2007).

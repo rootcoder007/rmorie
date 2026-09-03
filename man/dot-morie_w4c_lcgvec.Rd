@@ -19,3 +19,7 @@ A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_lcg_un
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_w4c_lcgvec(n = 3L, seed = 1L)
+res
+}

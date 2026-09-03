@@ -6,7 +6,8 @@
 
 #' .dot
 #'
-#' A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_attention}, \code{kernel_estimate}.
+#' A step of the perfat_native implementation. Called by \code{draw_projections},
+#' \code{favor_attention}, \code{kernel_estimate}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -14,16 +15,26 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .dot(a = A, b = b)
+#' res
 .dot <- function(a, b) sum(a * b)
 #' .norm2
 #'
-#' A step of the perfat_native implementation. Called by \code{draw_projections}, \code{favor_features}.
+#' A step of the perfat_native implementation. Called by \code{draw_projections},
+#' \code{favor_features}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .norm2(a = A)
+#' res
 .norm2 <- function(a) sum(a * a)
 
 #' draw_projections
@@ -80,7 +91,8 @@ draw_projections <- function(m, d, seed = 0L, orthogonal = TRUE) {
 
 #' favor_features
 #'
-#' A step of the perfat_native implementation. Called by \code{favor_attention}, \code{kernel_estimate}.
+#' A step of the perfat_native implementation. Called by \code{favor_attention},
+#' \code{kernel_estimate}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -169,12 +181,14 @@ softmax_attention <- function(Q, K, V, causal = FALSE) {
 #' @param Q A matrix; passed to \code{as.matrix}.
 #' @param K A matrix; passed to \code{as.matrix}.
 #' @param V A matrix; passed to \code{as.matrix}.
-#' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to \code{128L}.
+#' @param n_features Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{128L}.
 #' @param seed Passed to \code{draw_projections}. Defaults to \code{0L}.
 #' @param kind Carried through into a list the body builds. Defaults to \code{"positive"}.
 #' @param orthogonal A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param causal A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind}, \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.
+#' @return A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind},
+#' \code{orthogonal}, \code{causal}, \code{L}, \code{d}, \code{d_v}, \code{method}.
 #' @export
 favor_attention <- function(Q, K, V, n_features = 128L, seed = 0L,
                             kind = "positive", orthogonal = TRUE,

@@ -19,6 +19,10 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_hits_unit(v = x)
+#' res
 .mor_hits_unit <- function(v) {
   s <- sqrt(sum(v * v))
   if (s == 0) v else v / s
@@ -42,6 +46,10 @@
 #' @references Kleinberg, J. M. (1999). Authoritative sources in a
 #'   hyperlinked environment. Journal of the ACM, 46(5), 604-632.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- morie_hits(A = A)
+#' res
 morie_hits <- function(A, iters = 50L) {
   M <- as.matrix(A)
   n <- nrow(M)

@@ -36,5 +36,6 @@ The value of \code{out}, as built in the body.
 }
 \keyword{internal}
 \examples{
-morie_gentmt(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_gentmt(y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8),
+  H = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

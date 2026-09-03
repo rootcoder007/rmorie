@@ -35,5 +35,6 @@ theta = (X_l'X_l + alpha X_u'LX_u)^-1 X_l'y_l, with L = D - W the
 graph Laplacian of the RBF affinity on the unlabeled pool.
 }
 \examples{
-morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8), X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_semisupervised(X_l = c(1, 2, 3, 4, 5, 6, 7, 8), y_l = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X_u = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

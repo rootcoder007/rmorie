@@ -5,7 +5,8 @@
 
 #' .causscd_grid
 #'
-#' A step of the causscd_native implementation. Called by \code{sdid}, \code{time_weights}, \code{unit_weights}.
+#' A step of the causscd_native implementation. Called by \code{sdid},
+#' \code{time_weights}, \code{unit_weights}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -42,6 +43,10 @@
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .causscd_project_simplex(v = x)
+#' res
 .causscd_project_simplex <- function(v) {
   m <- length(v)
   u <- sort(v, decreasing = TRUE)
@@ -210,7 +215,10 @@ time_weights <- function(Y, treated, t_post) {
 #' @param t_post A count; the body uses it as \code{seq_len(...)}.
 #' @param method One of \code{"did"}, \code{"sc"}, \code{"sdid"}. Defaults to \code{"sdid"}.
 #' @param zeta Passed to \code{unit_weights}.
-#' @return A list with \code{estimate}, \code{tau}, \code{unit_weights}, \code{time_weights}, \code{zeta}, \code{delta_treated}, \code{delta_control}, \code{method_name}, \code{n_treated}, \code{n_control}, \code{t_pre}, \code{t_post}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{tau}, \code{unit_weights},
+#' \code{time_weights}, \code{zeta}, \code{delta_treated}, \code{delta_control},
+#' \code{method_name}, \code{n_treated}, \code{n_control}, \code{t_pre}, \code{t_post},
+#' \code{method}, \code{note}.
 #' @export
 sdid <- function(Y, treated, t_post, method = "sdid", zeta = NULL) {
   g <- .causscd_grid(Y, treated, t_post)

@@ -7,7 +7,8 @@
 #' access, no open copy in any repository per Unpaywall), evaluated at finite
 #' eps at each observed point rather than in the limit:
 #'
-#' \deqn{U_i = \[T((1-\epsilon) F_n + \epsilon \delta_{x_i}) - T(F_n)\]/\epsilon.}{U_i = \[T((1-eps) F_n + eps delta_{x_i}) - T(F_n)\]/eps.}
+#' \deqn{U_i = \[T((1-\epsilon) F_n + \epsilon \delta_{x_i}) - T(F_n)\]/\epsilon.}{U_i =
+#' \[T((1-eps) F_n + eps delta_{x_i}) - T(F_n)\]/eps.}
 #'
 #' These U_i are the empirical influence values the nonparametric delta method
 #' uses; estimate is that variance estimate, sum U_i^2 / n^2, which for the

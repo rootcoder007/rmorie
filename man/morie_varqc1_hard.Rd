@@ -32,5 +32,7 @@ A list with one FILTER string per record and the counts.
 }
 \keyword{internal}
 \examples{
-morie_varqc1_hard(records = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), fields = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), thresholds = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_varqc1_hard(records = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+  fields = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  thresholds = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

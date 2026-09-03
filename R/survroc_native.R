@@ -59,13 +59,15 @@ ROUTES <- c("km", "empirical")
 
 #' .survroc_clean
 #'
-#' A step of the survroc_native implementation. Called by \code{.survroc_pair}, \code{morie_survroc}, \code{morie_survroc_kaplan_meier} and 1 others in the module.
+#' A step of the survroc_native implementation. Called by \code{.survroc_pair},
+#' \code{morie_survroc}, \code{morie_survroc_kaplan_meier} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param events Coerced to integer by the body, with \code{as.integer}.
-#' @param marker Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param marker Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{T}, \code{E}, \code{M}.
 #' @export
 .survroc_clean <- function(times, events, marker = NULL) {
@@ -97,7 +99,8 @@ ROUTES <- c("km", "empirical")
 
 #' morie_survroc_kaplan_meier
 #'
-#' A step of the survroc_native implementation. Called by \code{.survroc_km_pair}, \code{morie_survroc}.
+#' A step of the survroc_native implementation. Called by \code{.survroc_km_pair},
+#' \code{morie_survroc}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -217,7 +220,8 @@ morie_survroc_kaplan_meier <- function(times, events, at = NULL) {
 
 #' .survroc_pair
 #'
-#' A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at}, \code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}.
+#' A step of the survroc_native implementation. Called by \code{morie_survroc_roc_at},
+#' \code{morie_survroc_sensitivity}, \code{morie_survroc_specificity}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -291,7 +295,8 @@ morie_survroc_specificity <- function(times, events, marker, threshold, t,
 
 #' morie_survroc_roc_at
 #'
-#' A step of the survroc_native implementation. Called by \code{morie_survroc}, \code{morie_survroc_auc_at}.
+#' A step of the survroc_native implementation. Called by \code{morie_survroc},
+#' \code{morie_survroc_auc_at}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -360,7 +365,9 @@ morie_survroc_auc_at <- function(times, events, marker, t, route = "km") {
 #' @param marker Passed to \code{.survroc_clean}.
 #' @param t Passed to \code{morie_survroc_roc_at}.
 #' @param route Passed to \code{morie_survroc_roc_at}. Defaults to \code{"km"}.
-#' @return A list with \code{estimate}, \code{auc}, \code{roc}, \code{horizon}, \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t}, \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.
+#' @return A list with \code{estimate}, \code{auc}, \code{roc}, \code{horizon},
+#' \code{route}, \code{n}, \code{n_events_by_t}, \code{n_at_risk_after_t},
+#' \code{n_censored_before_t}, \code{survival_at_t}, \code{out_of_range}, \code{method}.
 #' @export
 morie_survroc <- function(times, events, marker, t, route = "km") {
   cln <- .survroc_clean(times, events, marker)

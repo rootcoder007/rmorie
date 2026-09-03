@@ -152,7 +152,9 @@ variation_norm <- function(beta) {
 #' @param max_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param knots Passed to \code{indicator_basis}.
 #' @param intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns}, \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history}, \code{max_order}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{beta}, \code{intercept}, \code{columns},
+#' \code{n_basis}, \code{variation_norm}, \code{lambda}, \code{mse}, \code{mse_history},
+#' \code{max_order}, \code{method}, \code{note}.
 #' @export
 hal_fit <- function(X, y, lam = 1.0, iters = 2000L, step = 0.05,
                     max_order = 2L, knots = NULL, intercept = TRUE) {
@@ -316,6 +318,9 @@ cv_select_lambda <- function(X, y, lambdas, V = 5L, seed = 0L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlhal_cheatsheet()
+#' res
 .tlhal_cheatsheet <- function() {
   paste("tlhal: replace SMOOTHNESS with a VARIATION NORM bound. ",
         "Any cadlag function of finite variation is a sum over ",

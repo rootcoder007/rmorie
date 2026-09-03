@@ -2,7 +2,8 @@
 # and against portes::Hosking where that package is available.
 
 .whtnse_white <- function(n = 400, k = 3, seed = 0) {
-  set.seed(seed); matrix(rnorm(n * k), n, k)
+  set.seed(seed)
+  matrix(rnorm(n * k), n, k)
 }
 
 .whtnse_var1 <- function(n = 400, k = 3, seed = 0, a = 0.6) {

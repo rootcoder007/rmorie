@@ -187,7 +187,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param node A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.
+#' @param node A list; the body reads \code{$cut}, \code{$feature}, \code{$leaf},
+#' \code{$left}, \code{$right}, \code{$value} from it.
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{$}.
 #' @export

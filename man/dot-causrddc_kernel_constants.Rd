@@ -23,3 +23,7 @@ A step of the causrddc_native implementation. Called by \code{morie_causrddc_rd_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .causrddc_kernel_constants(p = 0.5, q = 0.5)
+res
+}

@@ -56,7 +56,8 @@ test_that("eq (5.5) reduces to univariate GBLUP when diagonal", {
   r <- morie_multitrait(Y, Z, G, diag(c(0.4, 0.9)),
                               diag(c(1, 2)))
   for (t in 1:2) {
-    s2g <- c(0.4, 0.9)[t]; s2e <- c(1, 2)[t]
+    s2g <- c(0.4, 0.9)[t]
+    s2e <- c(1, 2)[t]
     uni <- morie_gblup_model(Y[, t], Z, G, s2g, s2e)
     expect_equal(r$mu[t], uni$mu, tolerance = 1e-8)      # p.153
     got <- vapply(r$b_by_line, function(v) v[t], 0)
@@ -74,7 +75,8 @@ test_that("eq (5.6) reduces to univariate G x E when all diagonal", {
                                   diag(c(0.4, 0.9)), diag(2),
                                   diag(c(0.2, 0.5)), diag(c(1, 2)))
   for (t in 1:2) {
-    s2g <- c(0.4, 0.9)[t]; s2ge <- c(0.2, 0.5)[t]
+    s2g <- c(0.4, 0.9)[t]
+    s2ge <- c(0.2, 0.5)[t]
     s2e <- c(1, 2)[t]
     uni <- morie_gxe_blup(Y[, t], NULL, Z_L, Z_EL, G, s2g,
                                 diag(s2ge, 2), s2e)

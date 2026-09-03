@@ -2,7 +2,8 @@
 
 #' The b_4 bias coefficient of the kernel distribution function estimator
 #'
-#' Eq. (2.8): \deqn{b_4(x) = \frac{f_X^{(3)}(x)}{24}\int w^4 K(w)\,dw.}{b4(x) = (f3(x)/24) int w^4 K(w) dw.}
+#' Eq. (2.8): \deqn{b_4(x) = \frac{f_X^{(3)}(x)}{24}\int w^4 K(w)\,dw.}{b4(x) =
+#' (f3(x)/24) int w^4 K(w) dw.}
 #'
 #' The second bias coefficient in
 #' `J_h(x) = F(x)(1 + h^2 b2/F + h^4 b4/F) + o(h^4)`. It only matters once

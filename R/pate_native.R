@@ -195,9 +195,11 @@ theorem3_moment <- function(q, gamma, l) {
 #' @param vote_counts A vector; its length is taken.
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @param delta Numeric; combined arithmetically in the body.
-#' @param lambdas Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param lambdas Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param data_dependent A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta}, \code{queries}, \code{used}.
+#' @return A list with \code{epsilon}, \code{lambda}, \code{alpha}, \code{delta},
+#' \code{queries}, \code{used}.
 #' @export
 moments_accountant <- function(vote_counts, gamma, delta,
                                lambdas = NULL,
@@ -260,10 +262,14 @@ moments_accountant <- function(vote_counts, gamma, delta,
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @param n_classes Passed to \code{teacher_votes}.
 #' @param student_train_fn Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param student_features Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param student_features Optional; may be \code{NULL}. Coerced to list by the body,
+#' with \code{as.list}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param lambdas Passed to \code{moments_accountant}.
-#' @return A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes}, \code{agreement}, \code{epsilon}, \code{epsilon_accountant}, \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma}, \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{labels}, \code{clean_labels}, \code{votes},
+#' \code{agreement}, \code{epsilon}, \code{epsilon_accountant},
+#' \code{epsilon_data_independent}, \code{accountant}, \code{delta}, \code{gamma},
+#' \code{n_teachers}, \code{n_queries}, \code{student}, \code{note}, \code{method}.
 #' @export
 pate <- function(teacher_predicts, queries, gamma = 0.05,
                  delta = 1e-5, n_classes = NULL,
@@ -332,6 +338,9 @@ pate <- function(teacher_predicts, queries, gamma = 0.05,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .pate_cheatsheet()
+#' res
 .pate_cheatsheet <- function() {
   paste("pate: private aggregation of teacher ensembles (Papernot et ",
         "al. 2017). Teachers trained on disjoint partitions vote; the ",

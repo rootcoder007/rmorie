@@ -21,3 +21,7 @@ A step of the regmlm_native implementation. Called by \code{level0_predictors}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .regmlm_lambda_grid(p = 0.5, n = 3L)
+res
+}

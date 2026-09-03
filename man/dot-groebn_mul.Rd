@@ -19,3 +19,9 @@ A step of the groebn_native implementation. Called by \code{.groebn_divide}, \co
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+fn <- function(v) sum(v^2)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .groebn_mul(f = fn, g = g)
+res
+}

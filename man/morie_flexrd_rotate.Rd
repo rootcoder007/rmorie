@@ -34,5 +34,6 @@ The rotated point.
 }
 \keyword{internal}
 \examples{
-morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_flexrd_rotate(p = 0.5, a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L,
+  degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

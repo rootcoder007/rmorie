@@ -77,6 +77,10 @@ rgisint <- function(emg, force, fs, rest_level = 0) {
 #' @param f A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fml <- y ~ x
+#' res <- .rgisint_runs(f = fml)
+#' res
 .rgisint_runs <- function(f) {
   out <- list()
   i <- 1L

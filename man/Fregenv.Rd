@@ -23,5 +23,6 @@ A list with \code{coef}, \code{mu}, \code{beta_E}, \code{beta}, \code{beta_EF}, 
 }
 \keyword{internal}
 \examples{
-rmorie:::Fregenv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Fregenv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X_E = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

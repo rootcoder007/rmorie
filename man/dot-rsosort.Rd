@@ -18,3 +18,8 @@ rather than delegated to order() because the C-step selects "the h
 smallest distances": which of two tied points is taken changes the
 subset.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .rsosort(v = x)
+res
+}

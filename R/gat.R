@@ -20,7 +20,8 @@
 #'   2018, equations (1)-(4).
 #' @export
 #' @examples
-#' Gat(A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L, a = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Gat(A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L, a = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 Gat <- function(A, X, W, a, alpha_leaky = 0.2) {
   Am <- as.matrix(A)
   Xm <- as.matrix(X)

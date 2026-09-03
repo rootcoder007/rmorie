@@ -8,7 +8,8 @@
 
 #' S_function
 #'
-#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}.
+#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic},
+#' \code{ks_critical_value}, \code{ks_statistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -34,7 +35,8 @@ S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 
 #' weighted_moments
 #'
-#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic}, \code{ks_critical_value}, \code{ks_statistic}.
+#' A step of the bnskmt_native implementation. Called by \code{cvm_statistic},
+#' \code{ks_critical_value}, \code{ks_statistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,7 +113,8 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 
 #' ks_statistic
 #'
-#' A step of the bnskmt_native implementation. Called by \code{compare_forms}, \code{ks_confidence_set}.
+#' A step of the bnskmt_native implementation. Called by \code{compare_forms},
+#' \code{ks_confidence_set}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -119,7 +122,8 @@ hypercube_instruments <- function(X, n_levels = 3L) {
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{S_function}. Defaults to \code{0L}.
-#' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @return A list with \code{statistic}, \code{argmax}, \code{per_instrument},
+#' \code{form}, \code{n_instruments}, \code{method}.
 #' @export
 ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
   G <- if (is.list(instruments) && !is.null(instruments$instruments))
@@ -156,7 +160,8 @@ ks_statistic <- function(m, instruments, form = "sum", n_equality = 0L) {
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
-#' @param kappa Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param kappa Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}.
 #' @export
 ks_critical_value <- function(m, instruments, form = "sum",
@@ -210,7 +215,8 @@ ks_critical_value <- function(m, instruments, form = "sum",
 #' @param n_levels Passed to \code{hypercube_instruments}. Defaults to \code{2L}.
 #' @param reps Passed to \code{ks_critical_value}. Defaults to \code{100L}.
 #' @param seed Passed to \code{ks_critical_value}. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds},
+#' \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
 ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                               n_equality = 0L, level = 0.95,
@@ -243,8 +249,10 @@ ks_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Carried through into a list the body builds. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{S_function}. Defaults to \code{0L}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{statistic}, \code{per_instrument}, \code{form},
+#' \code{n_instruments}, \code{method}.
 #' @export
 cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
                           weights = NULL) {
@@ -282,7 +290,8 @@ cvm_statistic <- function(m, instruments, form = "sum", n_equality = 0L,
 #' @param instruments Passed to \code{cvm_statistic}.
 #' @param form Passed to \code{cvm_statistic}. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{cvm_statistic}. Defaults to \code{0L}.
-#' @return A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm}, \code{argmax_instrument}, \code{note}.
+#' @return A list with \code{cvm}, \code{ks}, \code{ratio_ks_over_cvm},
+#' \code{argmax_instrument}, \code{note}.
 #' @export
 compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
   cv <- cvm_statistic(m, instruments, form = form, n_equality = n_equality)
@@ -301,6 +310,9 @@ compare_forms <- function(m, instruments, form = "sum", n_equality = 0L) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .bnskmt_cheatsheet()
+#' res
 .bnskmt_cheatsheet <- function() {
   paste0(
     "bnskmt: conditional moment inequalities, KS form. Same ",

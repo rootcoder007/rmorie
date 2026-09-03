@@ -28,7 +28,8 @@
 #'   zotarelli-2010-fao56-step-by-step-AE459.pdf.
 #' @export
 #' @examples
-#' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
   T <- as.numeric(T)[1]
   R_n <- as.numeric(R_n)[1]
@@ -119,7 +120,8 @@ Basevap <- function(T, R_n, u2, VPD, G = 0, P = 101.3) {
 #'   26, 2137-2143.
 #' @export
 #' @examples
-#' Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 Qmds <- function(x_mod, obs, mod) {
   xm <- as.numeric(x_mod)
   ob <- sort(as.numeric(obs))

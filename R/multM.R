@@ -29,7 +29,8 @@
 #'   parallel-mediator products above are the standard published form.
 #' @export
 #' @examples
-#' MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 MultM <- function(Y, X, M_list, C = NULL) {
   y <- .t1_vec(Y)
   x <- .t1_vec(X)

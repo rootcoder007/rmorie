@@ -22,13 +22,18 @@
 
 #' .comet_vec
 #'
-#' A step of the comet_native implementation. Called by \code{.comet_dist}, \code{kendall_tau}, \code{pooled_features} and 1 others in the module.
+#' A step of the comet_native implementation. Called by \code{.comet_dist},
+#' \code{kendall_tau}, \code{pooled_features} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .comet_vec(x = x)
+#' res
 .comet_vec <- function(x) as.numeric(x)
 
 #' pooled_features
@@ -40,7 +45,8 @@
 #' @param hyp Passed to \code{.comet_vec}.
 #' @param src Passed to \code{.comet_vec}.
 #' @param ref Passed to \code{.comet_vec}.
-#' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff}, \code{hyp_src_diff}, \code{note}.
+#' @return A list with \code{features}, \code{dim}, \code{hyp_ref_diff},
+#' \code{hyp_src_diff}, \code{note}.
 #' @export
 pooled_features <- function(hyp, src, ref) {
   h <- .comet_vec(hyp)
@@ -118,7 +124,8 @@ estimator_score <- function(hyp, src, ref, W, b = NULL) {
 #' @param src Passed to \code{.comet_dist}.
 #' @param ref Passed to \code{.comet_dist}.
 #' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{loss}, \code{source_term}, \code{reference_term}, \code{satisfied}, \code{note}.
+#' @return A list with \code{loss}, \code{source_term}, \code{reference_term},
+#' \code{satisfied}, \code{note}.
 #' @export
 triplet_loss <- function(better, worse, src, ref, margin = 1.0) {
   m <- as.numeric(margin)
@@ -224,6 +231,9 @@ morie_comet <- function(hyp, src, ref, W, b = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .comet_cheatsheet()
+#' res
 .comet_cheatsheet <- function() {
   paste("comet: replace n-gram overlap with a LEARNED metric",
         "trained on human judgements, embedding hypothesis,",

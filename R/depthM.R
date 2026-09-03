@@ -15,7 +15,12 @@
 #' @return List with \code{depth}, \code{estimate} (maximum depth),
 #'   \code{deepest} (0-based row index), \code{d2}, \code{n}, \code{p},
 #'   \code{method}.
-#' @references Liu (1990), Annals of Statistics 18:405-414, introduces data depth as a centre-outward ordering; the Mahalanobis form 1/(1+d^2) is that of Liu and Singh (1993), JASA 88:252-260, using Mahalanobis (1936).  The Project Euclid PDF for Liu (1990) could not be retrieved from this host (the fetch returned a 1.2 kB error page), so this is the standard published form, anchored in the harness on depth(mu) = 1 exactly and on affine invariance -- neither of which depends on this code.
+#' @references Liu (1990), Annals of Statistics 18:405-414, introduces data depth as a
+#' centre-outward ordering; the Mahalanobis form 1/(1+d^2) is that of Liu and Singh
+#' (1993), JASA 88:252-260, using Mahalanobis (1936).  The Project Euclid PDF for Liu
+#' (1990) could not be retrieved from this host (the fetch returned a 1.2 kB error page),
+#' so this is the standard published form, anchored in the harness on depth(mu) = 1
+#' exactly and on affine invariance -- neither of which depends on this code.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

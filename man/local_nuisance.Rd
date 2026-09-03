@@ -22,5 +22,6 @@ A list with \code{fit}, \code{coef}.
 }
 \keyword{internal}
 \examples{
-local_nuisance(target = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+local_nuisance(target = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8),
+  weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

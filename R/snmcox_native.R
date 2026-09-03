@@ -66,7 +66,8 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @param A A matrix; passed to \code{crossprod}.
 #' @param L Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
-#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{e}, \code{b}, \code{kind}.
+#' @return A list, whose contents depend on the branch taken; across the branches its
+#' names are \code{e}, \code{b}, \code{kind}.
 #' @export
 .snmcox_treat_model <- function(A, L, ridge = 1e-8) {
   n <- length(A)
@@ -95,6 +96,12 @@ morie_snmcox_blip_down <- function(time, treat_times, psi) {
 #' @param tol Passed to \code{<}. Defaults to \code{1e-13}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .snmcox_logit_irls(X = X, y = y)
+#' res
 .snmcox_logit_irls <- function(X, y, iters = 60L, ridge = 1e-8, tol = 1e-13) {
   p <- ncol(X)
   beta <- numeric(p)

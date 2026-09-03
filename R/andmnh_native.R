@@ -52,9 +52,11 @@ parzen_kernel <- function(x) {
 #' @export
 quadratic_spectral_kernel <- function(x) {
   x <- as.numeric(x)
-  if (x == 0) return(1)
+  if (x == 0) {
+    return(1)
+  }
   z <- 6 * pi * x / 5
-  (25 / (12 * pi^2 * x^2)) * (sin(z)/z - cos(z))
+  (25 / (12 * pi^2 * x^2)) * (sin(z) / z - cos(z))
 }
 
 #' tukey_hanning_kernel
@@ -73,22 +75,23 @@ tukey_hanning_kernel <- function(x) {
 
 # name -> (q, k_q, integral of k^2, has bounded support)
 .KERNEL_CONSTANTS <- list(
-  bartlett      = c(1, 1, 2/3, TRUE),
-  parzen        = c(2, 6, 0.539285, TRUE),
-  qs            = c(2, 1.421223, 1, FALSE),
-  `tukey-hanning` = c(2, pi^2/4, 0.75, TRUE)
+  bartlett = c(1, 1, 2 / 3, TRUE),
+  parzen = c(2, 6, 0.539285, TRUE),
+  qs = c(2, 1.421223, 1, FALSE),
+  `tukey-hanning` = c(2, pi^2 / 4, 0.75, TRUE)
 )
 
 .KERNELS <- list(
-  bartlett      = bartlett_kernel,
-  parzen        = parzen_kernel,
-  qs            = quadratic_spectral_kernel,
+  bartlett = bartlett_kernel,
+  parzen = parzen_kernel,
+  qs = quadratic_spectral_kernel,
   `tukey-hanning` = tukey_hanning_kernel
 )
 
 #' .check_kernel
 #'
-#' A step of the andmnh_native implementation. Called by \code{automatic_bandwidth}, \code{kernel_hac}.
+#' A step of the andmnh_native implementation. Called by \code{automatic_bandwidth},
+#' \code{kernel_hac}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -97,11 +100,15 @@ tukey_hanning_kernel <- function(x) {
 #' @export
 .check_kernel <- function(kernel) {
   if (!(kernel %in% names(.KERNELS))) {
-    stop(sprintf("andmnh: kernel must be one of %s, got %s",
-                 paste(names(.KERNELS), collapse=", "), kernel))
+    stop(sprintf(
+      "andmnh: kernel must be one of %s, got %s",
+      paste(names(.KERNELS), collapse = ", "), kernel
+    ))
   }
-  list(fun = .KERNELS[[kernel]], const = .KERNEL_CONSTANTS[[kernel]],
-       name = kernel)
+  list(
+    fun = .KERNELS[[kernel]], const = .KERNEL_CONSTANTS[[kernel]],
+    name = kernel
+  )
 }
 
 # --------------------------------------------------------------------------
@@ -123,8 +130,10 @@ moment_vectors <- function(e, X) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
   if (nrow(X) != length(e)) {
-    stop(sprintf("andmnh: %d residuals but %d regressor rows",
-                 length(e), nrow(X)))
+    stop(sprintf(
+      "andmnh: %d residuals but %d regressor rows",
+      length(e), nrow(X)
+    ))
   }
   if (nrow(X) == 0) stop("andmnh: no observations")
   V <- X * e
@@ -145,6 +154,10 @@ moment_vectors <- function(e, X) {
 #' @param a A matrix; passed to \code{as.matrix}.
 #' @return A list with \code{u}, \code{s}, \code{v}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .svd_r(a = A)
+#' res
 .svd_r <- function(a) {
   # returns U, s, V (V transposed, like np.linalg.svd with full matrices)
   a <- as.matrix(a)
@@ -163,13 +176,17 @@ moment_vectors <- function(e, X) {
 #' @param cap Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.97}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .singular_value_adjust(a = A)
+#' res
 .singular_value_adjust <- function(a, cap = 0.97) {
   cap <- as.numeric(cap)
   if (!(cap > 0 && cap < 1)) {
     stop("andmnh: cap must lie strictly between 0 and 1")
   }
   sv <- .svd_r(a)
-  s2 <- pmin(pmax(sv$s, 0), cap)   # singular values are >= 0
+  s2 <- pmin(pmax(sv$s, 0), cap) # singular values are >= 0
   # build diag
   p <- length(s2)
   Smat <- matrix(0, p, p)
@@ -188,6 +205,11 @@ moment_vectors <- function(e, X) {
 #' @param b A matrix; passed to \code{solve}.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .solve_safe(A = A, b = b)
+#' res
 .solve_safe <- function(A, b) {
   A <- as.matrix(A)
   storage.mode(A) <- "double"
@@ -224,8 +246,10 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
     return(list(A = list(), residuals = rows, D = diag(p)))
   }
   if (n <= order * p + 1) {
-    stop(sprintf("andmnh: %d observations cannot fit a VAR(%d) in %d variables",
-                 n, order, p))
+    stop(sprintf(
+      "andmnh: %d observations cannot fit a VAR(%d) in %d variables",
+      n, order, p
+    ))
   }
 
   # Y: rows t = order,...,n-1; Z: rows t = order,...,n-1, columns
@@ -242,14 +266,15 @@ prewhiten_var <- function(v, order = 1, cap = 0.97, adjust = TRUE) {
   storage.mode(Z) <- "double"
   storage.mode(Y) <- "double"
 
-  coef <- .solve_safe(crossprod(Z), crossprod(Z, Y))   # (order*p) x p
+  coef <- .solve_safe(crossprod(Z), crossprod(Z, Y)) # (order*p) x p
   rownames(coef) <- NULL
   colnames(coef) <- NULL
 
   a_list <- vector("list", order)
   for (r in 1:order) {
     block <- matrix(coef[((r - 1) * p + 1):(r * p), , drop = FALSE],
-                    nrow = p, ncol = p)
+      nrow = p, ncol = p
+    )
     # coef currently has rows indexed by [var][lag]; we want A[i,j] such
     # that pred_i += A[i,j] * v_{t-r-1}[j].  Build a_list[[r]] with the
     # entry [i, j] = coef[r*p_block + j, i] of the LS coefficient matrix.
@@ -322,7 +347,7 @@ ar1_fit <- function(x) {
   if (n < 3) stop("andmnh: an AR(1) needs at least 3 observations")
   num <- sum(x[2:n] * x[1:(n - 1)])
   den <- sum(x[1:(n - 1)]^2)
-  rho <- if (den > 0) num/den else 0
+  rho <- if (den > 0) num / den else 0
   s2 <- sum((x[2:n] - rho * x[1:(n - 1)])^2) / (n - 1)
   c(rho = rho, sigma2 = s2)
 }
@@ -346,7 +371,7 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
   if (is.null(weights)) {
     w <- rep(1, p)
   } else if (is.character(weights) && length(weights) == 1 &&
-             weights == "drop_first") {
+    weights == "drop_first") {
     w <- c(0, rep(1, p - 1))
   } else {
     w <- as.numeric(weights)
@@ -374,12 +399,12 @@ alpha_ar1 <- function(v, q = 2, weights = NULL) {
       num <- num + w[a] * 4 * rho^2 * s4 / (1 - rho)^8
     } else {
       num <- num + w[a] * 4 * rho^2 * s4 /
-                   ((1 - rho)^6 * (1 + rho)^2)
+        ((1 - rho)^6 * (1 + rho)^2)
     }
     den <- den + w[a] * s4 / (1 - rho)^4
   }
   if (den <= 0) stop("andmnh: the alpha(q) denominator vanished")
-  list(alpha = num/den, fits = fits)
+  list(alpha = num / den, fits = fits)
 }
 
 #' automatic_bandwidth
@@ -403,7 +428,7 @@ automatic_bandwidth <- function(v, kernel = "qs", weights = NULL, n = NULL) {
   storage.mode(rows) <- "double"
   Tn <- if (is.null(n)) nrow(rows) else as.integer(n)
   aout <- alpha_ar1(rows, q = q, weights = weights)
-  s <- (q * kq^2 * aout$alpha * Tn / ik2)^(1/(2*q + 1))
+  s <- (q * kq^2 * aout$alpha * Tn / ik2)^(1 / (2 * q + 1))
   list(bandwidth = s, alpha = aout$alpha, fits = aout$fits)
 }
 
@@ -435,8 +460,10 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
   p <- ncol(rows)
   Tn <- if (is.null(n)) m else as.integer(n)
   if (Tn <= n_params) {
-    stop(sprintf("andmnh: T = %d is not larger than the %d estimated parameters",
-                 Tn, n_params))
+    stop(sprintf(
+      "andmnh: T = %d is not larger than the %d estimated parameters",
+      Tn, n_params
+    ))
   }
   s <- as.numeric(bandwidth)
   if (s <= 0) stop("andmnh: bandwidth must be positive")
@@ -446,7 +473,7 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 
   out <- matrix(0, p, p)
   for (j in 0:jmax) {
-    kj <- kfun(j/s)
+    kj <- kfun(j / s)
     if (kj == 0) next
     gam <- matrix(0, p, p)
     for (tt in (j + 1):m) {
@@ -487,9 +514,11 @@ kernel_hac <- function(v, bandwidth, kernel = "qs", n_params = 0, n = NULL) {
 #' @param prewhiten A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param var_order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param kernel Carried through into a list the body builds. Defaults to \code{"qs"}.
-#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param weights Passed to \code{automatic_bandwidth}.
-#' @param n_params Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_params Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param cap Numeric; combined arithmetically in the body. Defaults to \code{0.97}.
 #' @param adjust Passed to \code{prewhiten_var}. Defaults to \code{TRUE}.
 #' @return The value of \code{structure}.
@@ -515,8 +544,10 @@ andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
   pw <- prewhiten_var(V, order = order, cap = cap, adjust = adjust)
 
   if (is.null(bandwidth)) {
-    ab <- automatic_bandwidth(pw$residuals, kernel = kernel,
-                              weights = weights, n = n)
+    ab <- automatic_bandwidth(pw$residuals,
+      kernel = kernel,
+      weights = weights, n = n
+    )
     s <- ab$bandwidth
     alpha <- ab$alpha
     fits <- ab$fits
@@ -528,8 +559,10 @@ andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
     auto <- FALSE
   }
 
-  Jstar <- kernel_hac(pw$residuals, bandwidth = s, kernel = kernel,
-                      n_params = n_params, n = n)
+  Jstar <- kernel_hac(pw$residuals,
+    bandwidth = s, kernel = kernel,
+    n_params = n_params, n = n
+  )
   J <- pw$D %*% Jstar %*% t(pw$D)
 
   structure(
@@ -548,14 +581,20 @@ andrews_monahan_hac <- function(e, X = NULL, prewhiten = TRUE,
       p = p,
       n_params = as.integer(n_params),
       prewhitened = as.logical(order > 0),
-      method = paste("Andrews & Monahan (1992) VAR prewhitened kernel HAC,",
-                     "eq. 2.2-2.4, with the Andrews (1991) eq. 6.1",
-                     "automatic bandwidth"),
-      note = sprintf(paste("the VAR is a filter, not a model; its",
-                           "coefficients are capped through their SVD at",
-                           "%.2f so that I - sum(A_r) stays %.2f away from",
-                           "singular (footnote 4)"),
-                     cap, 1 - cap)
+      method = paste(
+        "Andrews & Monahan (1992) VAR prewhitened kernel HAC,",
+        "eq. 2.2-2.4, with the Andrews (1991) eq. 6.1",
+        "automatic bandwidth"
+      ),
+      note = sprintf(
+        paste(
+          "the VAR is a filter, not a model; its",
+          "coefficients are capped through their SVD at",
+          "%.2f so that I - sum(A_r) stays %.2f away from",
+          "singular (footnote 4)"
+        ),
+        cap, 1 - cap
+      )
     ),
     class = "andmnh"
   )
@@ -569,20 +608,27 @@ andmnh <- andrews_monahan_hac
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param x A list; the body reads \code{$alpha}, \code{$bandwidth}, \code{$bandwidth_automatic}, \code{$J}, \code{$kernel}, \code{$n}, \code{$n_params}, \code{$p}, \code{$prewhitened}, \code{$var_order} from it.
+#' @param x A list; the body reads \code{$alpha}, \code{$bandwidth},
+#' \code{$bandwidth_automatic}, \code{$J}, \code{$kernel}, \code{$n}, \code{$n_params},
+#' \code{$p}, \code{$prewhitened}, \code{$var_order} from it.
 #' @param ... Passed through.
 #' @return Invisibly,the value of \code{x}, as built in the body.
 #' @export
 print.andmnh <- function(x, ...) {
   cat(sprintf("Andrews-Monahan VAR prewhitened kernel HAC\n"))
   cat(sprintf("  kernel        : %s\n", x$kernel))
-  cat(sprintf("  bandwidth     : %.6f (automatic = %s)\n",
-              x$bandwidth, x$bandwidth_automatic))
-  cat(sprintf("  var_order     : %d (prewhitened = %s)\n",
-              x$var_order, x$prewhitened))
+  cat(sprintf(
+    "  bandwidth     : %.6f (automatic = %s)\n",
+    x$bandwidth, x$bandwidth_automatic
+  ))
+  cat(sprintf(
+    "  var_order     : %d (prewhitened = %s)\n",
+    x$var_order, x$prewhitened
+  ))
   cat(sprintf("  n / p / l     : %d / %d / %d\n", x$n, x$p, x$n_params))
-  if (!is.null(x$alpha))
+  if (!is.null(x$alpha)) {
     cat(sprintf("  alpha(2)      : %.6f\n", x$alpha))
+  }
   cat("\nJ (recoloured):\n")
   print(x$J)
   invisible(x)

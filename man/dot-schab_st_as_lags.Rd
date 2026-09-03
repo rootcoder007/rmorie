@@ -19,3 +19,7 @@ A step of the schab_st_shared implementation. Called by \code{.schab_st_anisotro
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .schab_st_as_lags(h = 0.5, k = 3L)
+res
+}

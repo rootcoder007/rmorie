@@ -23,5 +23,6 @@ A list with \code{estimate}, \code{coefficients}, \code{hazard_ratio}, \code{std
 }
 \keyword{internal}
 \examples{
-morie_sschin_chained_imputation(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_sschin_chained_imputation(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+  event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

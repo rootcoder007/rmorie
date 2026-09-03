@@ -18,3 +18,9 @@ The value of \code{x}, as built in the body.
 symmetric but NOT positive definite -- the Lagrange rows see to that
 -- so a Cholesky solve is not available.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .crkbsg_solve(A = A, b = b)
+res
+}

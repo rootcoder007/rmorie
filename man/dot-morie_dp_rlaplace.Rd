@@ -19,3 +19,7 @@ A step of the dp_native implementation. Called by \code{morie_dp_count}, \code{m
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_dp_rlaplace(n = 3L, scale = TRUE)
+res
+}

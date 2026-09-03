@@ -14,3 +14,7 @@ A step of the causdidwd_native implementation. No other function in the package 
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .causdidwd_morie_cheatsheet()
+res
+}

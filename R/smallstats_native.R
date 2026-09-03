@@ -42,6 +42,11 @@ NULL
 #' @param d Passed to \code{divisors}. Defaults to \code{50L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_hurst_rs(x = X)
+#' res
 .morie_hurst_rs <- function(x, d = 50L) {
   x <- as.numeric(x)
   x <- x[is.finite(x)]
@@ -271,6 +276,11 @@ NULL
 #' @param warm Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{beta}, \code{beta_std}, \code{intercept}, \code{n_iter}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_coord_descent(X = x, y = y, alpha = 0.5, lambda = 0.5)
+#' res
 .morie_coord_descent <- function(X, y, alpha, lambda,
                                  max_iter = 1000L, tol = 1e-6,
                                  warm = NULL) {
@@ -312,7 +322,8 @@ NULL
 #' @param z_train Numeric; passed to \code{mean}.
 #' @param x_test A matrix; passed to \code{as.matrix}.
 #' @param n_folds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5L}.
-#' @param lambdas Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param lambdas Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @return A numeric value.
 #' @export
 .morie_cv_ridge_predict <- function(x_train, z_train, x_test,
@@ -372,6 +383,9 @@ NULL
 #' @param d Passed to \code{.morie_sobol_cpp}.
 #' @return The value of \code{.morie_sobol_cpp}.
 #' @export
+#' @examples
+#' res <- .morie_sobol(n = 3L, d = 3L)
+#' res
 .morie_sobol <- function(n, d) {
   n <- as.integer(n)
   d <- as.integer(d)
@@ -398,7 +412,8 @@ NULL
 #' @param id Passed to \code{factor}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
-#' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi}, \code{n_iter}, \code{converged}.
+#' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi},
+#' \code{n_iter}, \code{converged}.
 #' @export
 .morie_gee_poisson_exch <- function(X, y, id, max_iter = 50L, tol = 1e-8) {
   X <- as.matrix(X)
@@ -473,6 +488,9 @@ NULL
 #' @param L Numeric; passed to \code{log}. Defaults to \code{length(p)}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_hmp(p = 0.5)
+#' res
 .morie_hmp <- function(p, L = length(p)) {
   p <- pmax(as.numeric(p), 1e-300)
   t_stat <- mean(1 / p)

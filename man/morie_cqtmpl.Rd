@@ -28,5 +28,7 @@ A list with the LOD score, fitted coefficients, the   posterior probabilities, t
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- morie_cqtmpl(y = rnorm(10), left = rnorm(10), right = rnorm(10), r_left = rnorm(10), r_right = rnorm(10)); TRUE
+r <- morie_cqtmpl(y = rnorm(10), left = rnorm(10), right = rnorm(10), r_left = rnorm(10),
+  r_right = rnorm(10))
+TRUE
 }

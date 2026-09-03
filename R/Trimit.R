@@ -69,6 +69,10 @@ Trimit <- function(y, weights, threshold) {
 #' @param w A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .trimit_deff(w = x)
+#' res
 .trimit_deff <- function(w) {
   s <- sum(w)
   if (s <= 0) return(NaN)

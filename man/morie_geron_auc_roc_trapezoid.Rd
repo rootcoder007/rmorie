@@ -19,7 +19,7 @@ List with \code{auc}, \code{fpr}, \code{tpr}, \code{thresholds}, \code{n_pos}, \
 \description{
 Only the last index of each run of tied scores becomes a vertex, so
 the trapezoid sum equals the Mann-Whitney statistic. Same numbers as
-\code{\link[=morie_geron_auc_roc]{morie_geron_auc_roc()}}, different construction -- the two are each
+\code{morie_geron_auc_roc()}, different construction -- the two are each
 other's independent check.
 }
 \examples{

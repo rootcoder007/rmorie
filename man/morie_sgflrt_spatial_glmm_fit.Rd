@@ -32,5 +32,6 @@ A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \c
 }
 \keyword{internal}
 \examples{
-morie_sgflrt_spatial_glmm_fit(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_sgflrt_spatial_glmm_fit(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

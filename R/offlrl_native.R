@@ -24,6 +24,10 @@
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .offlrl_logsumexp(v = x)
+#' res
 .offlrl_logsumexp <- function(v) {
   m <- max(v)
   m + log(sum(exp(v - m)))
@@ -38,6 +42,10 @@
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .offlrl_softmax(v = x)
+#' res
 .offlrl_softmax <- function(v) {
   m <- max(v)
   e <- exp(v - m)
@@ -115,7 +123,10 @@
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
-#' @return A list with \code{estimate}, \code{q}, \code{value}, \code{greedy}, \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error}, \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions}, \code{method}.
+#' @return A list with \code{estimate}, \code{q}, \code{value}, \code{greedy},
+#' \code{behavior}, \code{counts}, \code{penalty}, \code{bellman_error},
+#' \code{objective}, \code{alpha}, \code{variant}, \code{backup}, \code{n_transitions},
+#' \code{method}.
 #' @export
 offlrl <- function(dataset, states = NULL, actions = NULL, alpha = 1.0,
                    gamma = 0.99, variant = "H", backup = "max",
@@ -360,6 +371,9 @@ conservative_q_learning <- offlrl
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .offlrl_cheatsheet()
+#' res
 .offlrl_cheatsheet <- function() {
   paste("offlrl: CQL (Kumar 2020). Fitted Q plus alpha*(push DOWN ",
         "E_mu[Q] - push UP E_pi_beta[Q]) so the Q-function LOWER ",

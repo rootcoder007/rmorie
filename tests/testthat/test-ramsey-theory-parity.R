@@ -12,7 +12,8 @@ cycle_colouring <- function(n) {
   C <- matrix(0L, n, n)
   for (i in seq_len(n)) {
     j <- if (i == n) 1L else i + 1L
-    C[i, j] <- 1L; C[j, i] <- 1L
+    C[i, j] <- 1L
+    C[j, i] <- 1L
   }
   C
 }
@@ -98,7 +99,8 @@ test_that("monochromatic plus bichromatic is every triangle", {
     up <- utils::combn(n, 2)
     for (b in seq_len(ncol(up))) {
       v <- as.integer(stats::runif(1) < 0.5)
-      C[up[1, b], up[2, b]] <- v; C[up[2, b], up[1, b]] <- v
+      C[up[1, b], up[2, b]] <- v
+      C[up[2, b], up[1, b]] <- v
     }
     out <- morie_goodman_triangles(C)
     expect_equal(out$monochromatic + out$bichromatic, choose(n, 3))
@@ -107,7 +109,8 @@ test_that("monochromatic plus bichromatic is every triangle", {
 
 test_that("an all-red graph is entirely monochromatic", {
   n <- 7L
-  C <- matrix(1L, n, n); diag(C) <- 0L
+  C <- matrix(1L, n, n)
+  diag(C) <- 0L
   expect_equal(morie_goodman_triangles(C)$monochromatic, choose(n, 3))
 })
 
@@ -149,7 +152,8 @@ test_that("the five-cycle witness certifies the lower bound", {
 })
 
 test_that("a bad witness is rejected with the offending clique", {
-  C <- matrix(1L, 6, 6); diag(C) <- 0L
+  C <- matrix(1L, 6, 6)
+  diag(C) <- 0L
   w <- morie_ramsey_witness(C, 3, 3)
   expect_false(w$valid)
   expect_equal(length(w$red_clique), 3L)
@@ -233,6 +237,7 @@ test_that("Ramsey theory input validation", {
   expect_error(morie_goodman_triangles(matrix(0L, 3, 4)), "must be square")
   expect_error(morie_goodman_minimum(2), "at least 3")
   expect_error(morie_ramsey_lower_bound_probabilistic(1), "at least 2")
-  C <- matrix(0L, 4, 4); C[1, 2] <- 1L
+  C <- matrix(0L, 4, 4)
+  C[1, 2] <- 1L
   expect_error(morie_goodman_triangles(C), "symmetric")
 })

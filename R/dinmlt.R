@@ -11,6 +11,10 @@
 #' @param center Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dino_softmax(v = x, tau = 0.5)
+#' res
 .dino_softmax <- function(v, tau, center = NULL) {
   n <- length(v)
   cc <- if (is.null(center)) numeric(n) else center

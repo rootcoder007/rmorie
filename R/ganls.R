@@ -4,7 +4,8 @@
 #'
 #' R parity for \code{morie.fn.ganls.gan_loss}.
 #'
-#' \deqn{V(D) = \mathbb{E}_x\[\log D(x)\] + \mathbb{E}_z\[\log(1 - D(G(z)))\]}{V(D) = E_x\[log D(x)\] + E_z\[log(1 - D(G(z)))\]}
+#' \deqn{V(D) = \mathbb{E}_x\[\log D(x)\] + \mathbb{E}_z\[\log(1 - D(G(z)))\]}{V(D) =
+#' E_x\[log D(x)\] + E_z\[log(1 - D(G(z)))\]}
 #'
 #' so \code{D_loss = -V(D)}.  Two generator objectives are supported:
 #' \code{kind="minimax"} (\code{G_loss = E\[log(1 - D(G(z)))\]}) and

@@ -16,3 +16,8 @@ The value of \code{out}, as built in the body.
 Part of the matroid_optimisation_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .morie_subsets(g = g)
+res
+}

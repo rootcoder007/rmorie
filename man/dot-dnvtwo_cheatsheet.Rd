@@ -12,3 +12,7 @@ Character string.
 \description{
 One-paragraph summary of the DINOv2 recipe
 }
+\examples{
+res <- .dnvtwo_cheatsheet()
+res
+}

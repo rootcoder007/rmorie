@@ -19,3 +19,8 @@ K explicitly for the intercept-only case and notes, citing Harville
 the orthogonal complement of the column space of X gives one such K
 for any linear mean structure.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .schab_error_contrasts(X = x)
+res
+}

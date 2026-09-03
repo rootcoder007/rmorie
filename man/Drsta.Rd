@@ -32,7 +32,9 @@ are computed on identical footing and returned rather than suppressed.
 }
 \examples{
 set.seed(1)
-r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+r <- Drsta(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)),
+  cohort = rnorm(10))
+TRUE
 }
 \references{
 Callaway, B. and Sant'Anna, P. H. C. (2021). Journal of

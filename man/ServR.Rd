@@ -37,7 +37,8 @@ serendipity is that quantity restricted to items the user valued, so
 Sets are compared by identity, not by position: repeated ids collapse.
 }
 \examples{
-ServR(pred = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8), relevant = c(1, 2, 3, 4, 5, 6, 7, 8))
+ServR(pred = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8),
+  relevant = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Ge, M., Delgado-Battenfeld, C. & Jannach, D. (2010). Beyond

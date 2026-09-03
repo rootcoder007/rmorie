@@ -158,6 +158,10 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_logistic(u = x)
+#' res
 .schab_logistic <- function(u) 1 / (1 + exp(-u))
 #' .schab_logit
 #'
@@ -168,6 +172,9 @@
 #' @param p Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .schab_logit(p = 0.5)
+#' res
 .schab_logit <- function(p) {
   p <- min(max(p, 1e-12), 1 - 1e-12)
   log(p / (1 - p))
@@ -187,7 +194,8 @@
 #' @param start_range Optional; may be \code{NULL}. Numeric; passed to \code{log}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
-#' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget}, \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
+#' @return A list with \code{nugget_ratio}, \code{range}, \code{sigma2}, \code{nugget},
+#' \code{partial_sill}, \code{beta}, \code{neg2_restricted_loglik}, \code{converged}.
 #' @export
 .schab_fit_reml <- function(coords, z, X, model = "exponential",
                             start_ratio = 0.1, start_range = NULL,

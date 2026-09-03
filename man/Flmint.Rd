@@ -21,5 +21,6 @@ A list with \code{integral}, \code{fitted}, \code{mu}, \code{n_points}.
 }
 \keyword{internal}
 \examples{
-rmorie:::Flmint(t = c(1, 2, 3, 4, 5, 6, 7, 8), x_values = c(1, 2, 3, 4, 5, 6, 7, 8), beta_values = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Flmint(t = c(1, 2, 3, 4, 5, 6, 7, 8), x_values = c(1, 2, 3, 4, 5, 6, 7, 8),
+  beta_values = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

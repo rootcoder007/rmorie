@@ -39,3 +39,9 @@ morie_regularization_path() (replacing their glmnet delegation).
 Returns coefficients on the ORIGINAL scale plus intercept. \code{warm}
 optionally seeds beta (standardized scale) for path fits.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .morie_coord_descent(X = x, y = y, alpha = 0.5, lambda = 0.5)
+res
+}

@@ -23,3 +23,9 @@ convergent for the convex NNLS objective and immune to the singular
 normal-equation solves that break active-set methods when learner
 predictions are collinear.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_nnls(A = A, b = b)
+res
+}

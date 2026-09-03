@@ -10,7 +10,8 @@
 
 #' .ot_hist
 #'
-#' A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree}, \code{Otbreg} and 9 others in the module.
+#' A step of the helpers_ot implementation. Called by \code{Otbar}, \code{Otbarfree},
+#' \code{Otbreg} and 9 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -18,6 +19,10 @@
 #' @param normalise A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .ot_hist(a = A)
+#' res
 .ot_hist <- function(a, normalise = FALSE) {
   v <- as.numeric(a)
   if (any(v < 0)) stop("weights must be non-negative")
@@ -31,7 +36,8 @@
 
 #' .ot_costmat
 #'
-#' A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker}, \code{Otmcluster} and 2 others in the module.
+#' A step of the helpers_ot implementation. Called by \code{Otbarfree}, \code{Otker},
+#' \code{Otmcluster} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -40,6 +46,11 @@
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ot_costmat(X = x, Y = y)
+#' res
 .ot_costmat <- function(X, Y, p = 2) {
   A <- as.matrix(X)
   B <- as.matrix(Y)
@@ -90,6 +101,10 @@
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ot_lse(v = x)
+#' res
 .ot_lse <- function(v) {
   mx <- max(v)
   if (!is.finite(mx)) {
@@ -100,7 +115,8 @@
 
 #' .ot_sinkhorn
 #'
-#' A step of the helpers_ot implementation. Called by \code{Otdiv}, \code{Otgws}, \code{Otker} and 2 others in the module.
+#' A step of the helpers_ot implementation. Called by \code{Otdiv}, \code{Otgws},
+#' \code{Otker} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -188,6 +204,11 @@
 #' @param b A vector; its length is taken.
 #' @return A list with \code{T}, \code{basis}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .ot_nwcorner(a = A, b = b)
+#' res
 .ot_nwcorner <- function(a, b) {
   n <- length(a)
   m <- length(b)
@@ -372,14 +393,16 @@
 
 #' .ot_emd
 #'
-#' A step of the helpers_ot implementation. Called by \code{.ot_partial_plan}, \code{Otbarfree}, \code{Otemd} and 6 others in the module.
+#' A step of the helpers_ot implementation. Called by \code{.ot_partial_plan},
+#' \code{Otbarfree}, \code{Otemd} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a A vector; its length is taken.
 #' @param b A vector; its length is taken.
 #' @param C A matrix; passed to \code{nrow}.
-#' @param max_pivots Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000L}.
+#' @param max_pivots Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{20000L}.
 #' @return A list with \code{T}, \code{cost}.
 #' @export
 .ot_emd <- function(a, b, C, max_pivots = 20000L) {
@@ -522,6 +545,11 @@
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ot_wp1d(x = x, y = y)
+#' res
 .ot_wp1d <- function(x, y, p = 2) {
   xs <- sort(as.numeric(x))
   ys <- sort(as.numeric(y))
@@ -579,4 +607,8 @@
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ot_project(X = x, theta = x)
+#' res
 .ot_project <- function(X, theta) as.numeric(as.matrix(X) %*% as.numeric(theta))

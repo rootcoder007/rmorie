@@ -30,7 +30,8 @@
 
 #' .side_fit
 #'
-#' A step of the bnskt2_native implementation. Called by \code{covariate_kink_test}, \code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module.
+#' A step of the bnskt2_native implementation. Called by \code{covariate_kink_test},
+#' \code{density_kink_test}, \code{local_polynomial_slope} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -107,10 +108,14 @@ local_polynomial_slope <- function(v, y, kink, bandwidth, order = 2L,
 #' @param bandwidth Passed to \code{.side_fit}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param kernel Passed to \code{.side_fit}. Defaults to \code{"triangular"}.
-#' @param policy_slope_change Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param policy_slope_change Optional; may be \code{NULL}. Coerced to numeric by the
+#' body, with \code{as.numeric}.
 #' @param B Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fuzzy A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{tau}, \code{outcome_kink}, \code{policy_kink}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{bandwidth}, \code{order}, \code{kernel}, \code{fuzzy}, \code{denominator_source}, \code{method}, \code{requires}.
+#' @return A list with \code{estimate}, \code{tau}, \code{outcome_kink},
+#' \code{policy_kink}, \code{slope_right}, \code{slope_left}, \code{n_right},
+#' \code{n_left}, \code{bandwidth}, \code{order}, \code{kernel}, \code{fuzzy},
+#' \code{denominator_source}, \code{method}, \code{requires}.
 #' @export
 rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
                          kernel = "triangular",
@@ -162,7 +167,9 @@ rkd_estimate <- function(V, Y, kink, bandwidth, order = 2L,
 #' @param bandwidth Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
-#' @return A list with \code{slope_change}, \code{relative}, \code{slope_right}, \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth}, \code{interpretation}.
+#' @return A list with \code{slope_change}, \code{relative}, \code{slope_right},
+#' \code{slope_left}, \code{n_inside}, \code{n_bins}, \code{smooth},
+#' \code{interpretation}.
 #' @export
 density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
   v <- as.numeric(V)
@@ -201,7 +208,8 @@ density_kink_test <- function(V, kink, bandwidth, n_bins = 20L, order = 1L) {
 #' @param bandwidth Passed to \code{.side_fit}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param kernel Passed to \code{.side_fit}. Defaults to \code{"triangular"}.
-#' @return A list with \code{slope_change}, \code{slope_right}, \code{slope_left}, \code{n_right}, \code{n_left}, \code{interpretation}.
+#' @return A list with \code{slope_change}, \code{slope_right}, \code{slope_left},
+#' \code{n_right}, \code{n_left}, \code{interpretation}.
 #' @export
 covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
                                 kernel = "triangular") {
@@ -221,6 +229,9 @@ covariate_kink_test <- function(V, Z, kink, bandwidth, order = 2L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .bnskt2_cheatsheet()
+#' res
 .bnskt2_cheatsheet <- function() {
   paste0(
     "bnskt2: regression KINK design. RD uses a JUMP in treatment; ",

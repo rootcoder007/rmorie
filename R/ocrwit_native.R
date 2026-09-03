@@ -37,7 +37,8 @@
 
 #' normalise_bbox
 #'
-#' A step of the ocrwit_native implementation. Called by \code{patch_of_box}, \code{segment_layout_boxes}.
+#' A step of the ocrwit_native implementation. Called by \code{patch_of_box},
+#' \code{segment_layout_boxes}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -195,7 +196,8 @@ patch_of_box <- function(box, width, height, patch_grid = 14) {
 #' @param height Passed to \code{patch_of_box}.
 #' @param patch_grid Passed to \code{patch_of_box}. Defaults to \code{14}.
 #' @param masked_text Passed to \code{unlist}. Defaults to \code{list()}.
-#' @return A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples}, \code{positive_rate}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{labels}, \code{patches}, \code{n_examples},
+#' \code{positive_rate}, \code{method}, \code{note}.
 #' @export
 word_patch_alignment <- function(text_boxes, masked_patches, width,
                                  height, patch_grid = 14,
@@ -235,6 +237,9 @@ word_patch_alignment <- function(text_boxes, masked_patches, width,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ocrwit_cheatsheet()
+#' res
 .ocrwit_cheatsheet <- function() {
   paste("ocrwit: document models pre-trained text and image with ",
         "DIFFERENT objectives, giving two spaces and a bridge. ",

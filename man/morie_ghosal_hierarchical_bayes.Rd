@@ -25,7 +25,7 @@ morie_ghosal_hierarchical_bayes(
 \item{seed}{Integer RNG seed (default 0).}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghhbp", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghhbp", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }

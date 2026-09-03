@@ -33,3 +33,8 @@ sampling without replacement. Cross-checked against the CRAN package
 samplingbook 1.2.4, whose Smean uses the same finite-population-
 corrected variance for the mean.
 }
+\examples{
+b <- c(1.5, 2.5, 3.5)
+res <- Srstotal(y = b, N = 3L)
+res
+}

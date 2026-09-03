@@ -75,6 +75,10 @@
 #'   clustering: analysis and an algorithm. Advances in Neural
 #'   Information Processing Systems 14, pages 849-856, MIT Press.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- Sgtsck(A = A)
+#' res
 Sgtsck <- function(A, k = 2) {
   s <- .sgt_lapsym(A, "Sgtsck")
   n <- s$n

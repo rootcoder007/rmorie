@@ -15,7 +15,7 @@ List with \code{bf16}, \code{abs_error}, \code{rel_error}, \code{max_rel_error},
 \code{n_underflow}, \code{exact}.
 }
 \description{
-Same ties-to-even rounding as \code{\link[=morie_geron_bf16]{morie_geron_bf16()}}, with grbf16's
+Same ties-to-even rounding as \code{morie_geron_bf16()}, with grbf16's
 range diagnostics: bf16 shares fp32's exponent range, so overflow is
 rare and the cost is precision (machine epsilon 2^-7). NaN input is
 rejected here, unlike hmbf16.

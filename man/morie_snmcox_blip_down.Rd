@@ -33,5 +33,7 @@ with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 }
 \keyword{internal}
 \examples{
-morie_snmcox_blip_down(time = 5L, treat_times = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), psi = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_snmcox_blip_down(time = 5L,
+  treat_times = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  psi = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

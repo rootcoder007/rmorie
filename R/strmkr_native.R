@@ -15,6 +15,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .strmkr_rows(x = x)
+#' res
 .strmkr_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -37,8 +41,10 @@
 #'
 #' @param coords Passed to \code{.strmkr_rows}.
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
-#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param window Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param window Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param nx A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param ny A count; the body uses it as \code{seq_len(...)}. Defaults to \code{12L}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
@@ -203,6 +209,9 @@ morie_strmkr_strauss_process <- function(coords, r, gamma = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .strmkr_cheatsheet()
+#' res
 .strmkr_cheatsheet <- function() {
   paste0("strmkr: morie_strmkr_strauss_process(coords, r, gamma) -> ",
          "pseudolikelihood beta and gamma for the Strauss inhibition model ",

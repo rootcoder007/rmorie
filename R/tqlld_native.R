@@ -24,6 +24,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tqlld_phi(x = x)
+#' res
 .tqlld_phi <- function(x) exp(-0.5 * x * x) / sqrt(2 * pi)
 
 #' .gaussian_cells

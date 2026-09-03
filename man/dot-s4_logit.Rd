@@ -17,3 +17,7 @@ A step of the s04core implementation. Called by \code{Tmlhrz}, \code{Tmlmpc}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .s4_logit(p = 0.5)
+res
+}

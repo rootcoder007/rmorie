@@ -16,7 +16,10 @@
 #' @param W Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param m0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param C0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e+06}.
-#' @return A list with \code{estimate}, \code{smoothed}, \code{smoothed_var}, \code{filtered}, \code{filtered_var}, \code{forecast}, \code{forecast_var}, \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik}, \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{smoothed}, \code{smoothed_var},
+#' \code{filtered}, \code{filtered_var}, \code{forecast}, \code{forecast_var},
+#' \code{adaptive_coefficient}, \code{forecast_error}, \code{loglik},
+#' \code{signal_to_noise}, \code{n}, \code{V}, \code{W}, \code{method}, \code{note}.
 #' @export
 morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,
                                          C0 = 1e6) {
@@ -89,6 +92,9 @@ morie_baytsm_dlm_local_level <- function(y, V = 1.0, W = 0.1, m0 = 0.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .baytsm_cheatsheet()
+#' res
 .baytsm_cheatsheet <- function() {
   paste0("baytsm: morie_baytsm_dlm_local_level(y, V, W, m0, C0) -> filtered ",
          "and smoothed states of the first-order DLM (West & Harrison 1997)")

@@ -12,7 +12,9 @@
   set.seed(seed)
   g_onset <- sample(c(0, 4, 5, 6), n_units, replace = TRUE,
                     prob = c(0.4, 0.2, 0.2, 0.2))
-  x1 <- rnorm(n_units); x2 <- runif(n_units); u <- rnorm(n_units)
+  x1 <- rnorm(n_units)
+  x2 <- runif(n_units)
+  u <- rnorm(n_units)
   do.call(rbind, lapply(seq_len(n_units), function(i) {
     t <- seq_len(n_t)
     d <- as.integer(g_onset[i] > 0 & t >= g_onset[i])
@@ -249,7 +251,8 @@ test_that("simplex projection and simplex LS behave", {
 
 test_that("morie_synth_control recovers a known treatment effect", {
   set.seed(31)
-  n_t <- 14; onset <- 10
+  n_t <- 14
+  onset <- 10
   # Treated unit is an exact convex combo of donors 1-3 + effect 2 post.
   donors <- matrix(rnorm(8 * n_t, sd = 0.3), 8, n_t) +
     outer(runif(8, -1, 1), seq_len(n_t) * 0.2)
@@ -292,9 +295,13 @@ test_that("morie_synth_control validates input", {
 
 test_that("native SDID recovers tau; all three inference methods run", {
   set.seed(32)
-  N_co <- 25; N_tr <- 5; T_pre <- 8; T_post <- 4
+  N_co <- 25
+  N_tr <- 5
+  T_pre <- 8
+  T_post <- 4
   n_t <- T_pre + T_post
-  u <- rnorm(N_co + N_tr); tfx <- cumsum(rnorm(n_t, 0.2, 0.1))
+  u <- rnorm(N_co + N_tr)
+  tfx <- cumsum(rnorm(n_t, 0.2, 0.1))
   Y <- outer(u, rep(1, n_t)) + outer(rep(1, N_co + N_tr), tfx) +
     matrix(rnorm((N_co + N_tr) * n_t, 0, 0.3), N_co + N_tr)
   Y[N_co + seq_len(N_tr), T_pre + seq_len(T_post)] <-
@@ -312,7 +319,9 @@ test_that("native SDID recovers tau; all three inference methods run", {
 
 test_that("morie_did_synthetic + synthdid_estimate use the native engine", {
   set.seed(33)
-  n_units <- 20; n_t <- 10; onset <- 7
+  n_units <- 20
+  n_t <- 10
+  onset <- 7
   treated <- c("u1", "u2")
   pan <- do.call(rbind, lapply(seq_len(n_units), function(i) {
     id <- paste0("u", i)

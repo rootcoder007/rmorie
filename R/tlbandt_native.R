@@ -92,7 +92,8 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param greedy A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20L}.
-#' @return A list with \code{A}, \code{Y}, \code{g}, \code{history}, \code{greedy}, \code{min_g}, \code{max_g}, \code{note}.
+#' @return A list with \code{A}, \code{Y}, \code{g}, \code{history}, \code{greedy},
+#' \code{min_g}, \code{max_g}, \code{note}.
 #' @export
 morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
                           greedy = FALSE, burn_in = 20L) {
@@ -181,6 +182,10 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.96}.
 #' @return A list with \code{se}, \code{half_width}, \code{T}, \code{note}.
 #' @export
+#' @examples
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .tlbandt_sequential_ci(D = g)
+#' res
 .tlbandt_sequential_ci <- function(D, level = 1.96) {
   v <- as.numeric(D)
   Tlen <- length(v)
@@ -224,6 +229,9 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlbandt_cheatsheet()
+#' res
 .tlbandt_cheatsheet <- function() {
   "tlbandt: contexts arrive, we choose a RANDOMISED action with a probability we design from the past, and only the reward of the action taken is revealed. The goal is INFERENCE, not cumulative reward -- and those pull apart, because an algorithm that converges to one arm stops generating data about the other. So keep g in [delta, 1-delta]: it costs regret and buys positivity. The data are dependent, but the influence terms are a MARTINGALE difference sequence precisely because the randomisation probability is known and past-measurable."
 }

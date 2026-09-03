@@ -64,6 +64,9 @@
 #' @param pi Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .frfgrf_beta_min(d = 3L)
+#' res
 .frfgrf_beta_min <- function(d, alpha = 0.05, pi = 0.5) {
   if (alpha <= 0.0 || alpha >= 0.5) {
     stop(sprintf("frfgrf: alpha must be in (0, 0.5), got %s",
@@ -85,7 +88,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right}, \code{$threshold} from it.
+#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
+#' \code{$right}, \code{$threshold} from it.
 #' @return A vector, from \code{c}.
 #' @export
 .frfgrf_structure <- function(tree) {
@@ -110,8 +114,10 @@
 #' @param kind Compared against \code{"propensity"}. Defaults to \code{"double-sample"}.
 #' @param min_leaf Passed to \code{honest_tree}. Defaults to \code{5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{11}.
-#' @param n_permutations Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{honest}, \code{splits_stable_under_I_permutation}, \code{splits_move_under_J_permutation}, \code{n_splits}.
+#' @param n_permutations Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{3}.
+#' @return A list with \code{honest}, \code{splits_stable_under_I_permutation},
+#' \code{splits_move_under_J_permutation}, \code{n_splits}.
 #' @export
 .frfgrf_honesty_test <- function(X, y, kind = "double-sample", min_leaf = 5,
                                  seed = 11, n_permutations = 3) {
@@ -186,7 +192,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nd A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$right} from it.
+#' @param nd A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
+#' \code{$right} from it.
 #' @param counts A vector; indexed elementwise.
 #' @return The value of \code{counts}, as built in the body.
 #' @export
@@ -293,7 +300,11 @@
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param kind Passed to \code{.frfgrf_honesty_test}. Defaults to \code{"double-sample"}.
 #' @param sizes Accepted by the signature and not used anywhere in the body.
-#' @return A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty}, \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share}, \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity}, \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d}, \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
+#' @return A list with \code{estimate}, \code{passes}, \code{checks}, \code{honesty},
+#' \code{subsample_rate_ok}, \code{subsample_rate_note}, \code{split_share},
+#' \code{split_counts}, \code{random_split_floor}, \code{min_share}, \code{regularity},
+#' \code{alpha}, \code{pi}, \code{beta}, \code{beta_min}, \code{s}, \code{n}, \code{d},
+#' \code{n_trees}, \code{kind}, \code{failed}, \code{method}.
 #' @export
 .frfgrf_forest_fit_check <- function(y, X, n_trees = 100, min_leaf = 5,
                                       subsample_frac = 0.5, alpha = 0.05,
@@ -388,6 +399,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .frfgrf_cheatsheet()
+#' res
 .frfgrf_cheatsheet <- function() {
   return(paste0(
     "frfgrf: audit the conditions the theory needs -- honesty ",

@@ -14,3 +14,7 @@ there. The dynamical model is the answer to the two assumptions the
 steady-state model makes and that transient or heterogeneous
 populations break.
 }
+\examples{
+res <- .scvelo_morie_cheatsheet()
+res
+}

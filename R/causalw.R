@@ -30,7 +30,8 @@
 
 #' Stabilized inverse-probability-of-treatment weights
 #'
-#' \deqn{sw_i = \prod_t f(A_{it}|A_{i,t-1}) / f(A_{it}|H_{it})}{sw = prod_t f(A_t|A_(t-1)) / f(A_t|H_t)}
+#' \deqn{sw_i = \prod_t f(A_{it}|A_{i,t-1}) / f(A_{it}|H_{it})}{sw = prod_t
+#' f(A_t|A_(t-1)) / f(A_t|H_t)}
 #' The marginal numerator keeps the weights centred near one instead of
 #' letting one small conditional probability blow the weight up.
 #' Correctly specified stabilized weights have mean close to 1, so
@@ -119,7 +120,9 @@ Stbciw <- function(C, H = NULL, numerator = NULL) {
 #' Augmented IPW estimator of the ATE
 #'
 #' Handbook eq. (23.4) p.512:
-#' \deqn{\frac{1}{n}\sum_i \left\{ \frac{W_i(Y_i-m_{1i})}{p_{1i}} + m_{1i} - \frac{(1-W_i)(Y_i-m_{0i})}{p_{0i}} - m_{0i} \right\}}{mean( W(Y-m1)/p1 + m1 - (1-W)(Y-m0)/p0 - m0 )}
+#' \deqn{\frac{1}{n}\sum_i \left\{ \frac{W_i(Y_i-m_{1i})}{p_{1i}} + m_{1i} -
+#' \frac{(1-W_i)(Y_i-m_{0i})}{p_{0i}} - m_{0i} \right\}}{mean( W(Y-m1)/p1 + m1 -
+#' (1-W)(Y-m0)/p0 - m0 )}
 #' Consistent if either the outcome model or the propensity model is
 #' correct.  With `m1 = m0 = 0` it collapses to the Horvitz-Thompson
 #' IPW difference, which is a useful check on a call.
@@ -191,7 +194,7 @@ Eaiprl <- function(y, D, X = NULL, ml_outcome = NULL,
 #' @export
 Caustmle <- function(y, T, ps, Q1, Q0, n_iter = 100L) {
   ys <- as.numeric(y)
-  tt <- as.numeric(T)
+  tt <- as.numeric(TRUE)
   g <- as.numeric(ps)
   q1 <- as.numeric(Q1)
   q0 <- as.numeric(Q0)
@@ -289,7 +292,8 @@ Cde <- function(Y, X, M, m) {
 #'
 #' The blipped-down outcome \eqn{Y - \psi \sum_t A_t} must be
 #' conditionally independent of treatment given history, giving
-#' \deqn{\psi = \frac{\sum_i (A_i - \bar A_i) Y_i}{\sum_i (A_i - \bar A_i) A_i}}{psi = sum (A-Abar)Y / sum (A-Abar)A}
+#' \deqn{\psi = \frac{\sum_i (A_i - \bar A_i) Y_i}{\sum_i (A_i - \bar A_i) A_i}}{psi =
+#' sum (A-Abar)Y / sum (A-Abar)A}
 #' Solved in one step -- the linear case needs no grid search over psi.
 #' Under randomization with the sample mean as the propensity, psi
 #' equals the OLS slope of Y on cumulative treatment exactly, which is

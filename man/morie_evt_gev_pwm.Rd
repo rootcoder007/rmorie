@@ -10,7 +10,7 @@ morie_evt_gev_pwm(block_maxima)
 \item{block_maxima}{one maximum per block.}
 }
 \value{
-the \code{\link[=morie_evt_gev_lmoments]{morie_evt_gev_lmoments()}} list plus b0, b1, b2,
+the \code{morie_evt_gev_lmoments()} list plus b0, b1, b2,
 alias_of.
 }
 \description{

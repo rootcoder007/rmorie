@@ -9,7 +9,9 @@
 #' @param R0 See Usage.
 #' @param efficacy See Usage.
 #' @return List with ``threshold``, ``coverage``, ``feasible``, ``R0``, ``efficacy``.
-#' @references Anderson and May (1991), Infectious Diseases of Humans: Dynamics and Control, Oxford University Press. Not held locally; p_c = 1 - 1/R0 is the standard published result and is stated in the same form in every open source consulted.
+#' @references Anderson and May (1991), Infectious Diseases of Humans: Dynamics and
+#' Control, Oxford University Press. Not held locally; p_c = 1 - 1/R0 is the standard
+#' published result and is stated in the same form in every open source consulted.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

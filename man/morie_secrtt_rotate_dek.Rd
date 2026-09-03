@@ -21,11 +21,13 @@ List with \code{sealed}, \code{records_reencrypted},   \code{note}.
 }
 \keyword{internal}
 \examples{
-seed <- as.raw(1:32)
-dek1 <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
-dek2 <- morie_secrtt_generate_dek(seed, record_id = 8L)$dek
-s <- morie_secrtt_seal_record(charToRaw("hello"), dek1,
-                              nonce = as.raw(13:24))
-r <- morie_secrtt_rotate_dek(s, dek1, dek2, new_nonce = as.raw(25:36))
-rawToChar(morie_secrtt_open_record(r$sealed, dek2))
+if (morie_crypto_sodium_available()) {
+  seed <- as.raw(1:32)
+  dek1 <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+  dek2 <- morie_secrtt_generate_dek(seed, record_id = 8L)$dek
+  s <- morie_secrtt_seal_record(charToRaw("hello"), dek1,
+                                nonce = as.raw(13:24))
+  r <- morie_secrtt_rotate_dek(s, dek1, dek2, new_nonce = as.raw(25:36))
+  rawToChar(morie_secrtt_open_record(r$sealed, dek2))
+}
 }

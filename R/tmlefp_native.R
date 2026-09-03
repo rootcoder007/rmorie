@@ -168,6 +168,11 @@ owate_weights <- function(pscore, sigma2_treated = NULL,
 #' @param weights Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{est}, \code{n_kept}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ipw(y = y, w = x, e = x)
+#' res
 .ipw <- function(y, w, e, keep = NULL, weights = NULL) {
   n <- length(y)
   sel <- if (is.null(keep)) seq_len(n) else which(keep)

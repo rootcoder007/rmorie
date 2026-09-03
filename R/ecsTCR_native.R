@@ -66,6 +66,10 @@
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ecstcr_csum(v = x)
+#' res
 .ecstcr_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -87,6 +91,10 @@
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ecstcr_mean(v = x)
+#' res
 .ecstcr_mean <- function(v)
   if (length(v)) .ecstcr_csum(v) / length(v) else NA_real_
 
@@ -301,6 +309,11 @@ morie_ecsTCR_co2_forcing <- function(ratio, f2x = .ECSTCR_F2X)
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ecstcr_ols(x = x, y = y)
+#' res
 .ecstcr_ols <- function(x, y) {
   mx <- .ecstcr_mean(x)
   my <- .ecstcr_mean(y)

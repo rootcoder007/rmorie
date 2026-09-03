@@ -10,7 +10,8 @@
 #'   Geology 58(8):1246-1266, \doi{10.2113/gsecongeo.58.8.1246}.
 #' @export
 #' @examples
-#' KrigCl(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' KrigCl(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 KrigCl <- function(known_coords, known_values, predict_coords,
                    nugget = 0, sill = 1, range_ = 1) {
   Krig(known_coords, known_values, predict_coords, nugget, sill, range_)

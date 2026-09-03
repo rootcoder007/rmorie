@@ -21,9 +21,11 @@ List with \code{ciphertext}, \code{tag}, \code{nonce},   \code{aad}.
 }
 \keyword{internal}
 \examples{
-seed <- as.raw(1:32)
-dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
-s <- morie_secrtt_seal_record(charToRaw("hello"), dek,
-                              nonce = as.raw(13:24))
-s$tag
+if (morie_crypto_sodium_available()) {
+  seed <- as.raw(1:32)
+  dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+  s <- morie_secrtt_seal_record(charToRaw("hello"), dek,
+                                nonce = as.raw(13:24))
+  s$tag
+}
 }

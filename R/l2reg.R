@@ -8,7 +8,11 @@
 #' @param lam Penalty strength lambda; must be non-negative.
 #'
 #' @return List with ``penalized_loss``, ``penalty``, ``ep``, ``lambda``, ``p``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7.3 p. 403: L(w, lambda) = L(w) + 0.5 * lambda * E_P, with E_P = w'w for the ridge (weight decay, L2) penalty.  Read from the chapter PDF, not recalled.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7.3 p. 403: L(w, lambda) = L(w) +
+#' 0.5 * lambda * E_P, with E_P = w'w for the ridge (weight decay, L2) penalty.  Read
+#' from the chapter PDF, not recalled.
 #' @export
 L2pen <- function(loss, w, lam) {
   w <- .t1_vec(w)

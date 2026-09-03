@@ -100,7 +100,8 @@
 #' @param D1 Passed to \code{.tlhoest_first_order_expansion}.
 #' @param D2_kernel Passed to \code{.tlhoest_second_order_term}.
 #' @param O Passed to \code{.tlhoest_second_order_term}.
-#' @return A list with \code{estimate}, \code{psi}, \code{first_order}, \code{second_order_correction}, \code{n_pairs}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{first_order},
+#' \code{second_order_correction}, \code{n_pairs}, \code{method}, \code{note}.
 #' @export
 morie_tlhoest <- function(psi_plugin, D1, D2_kernel, O) {
   fo <- .tlhoest_first_order_expansion(D1, psi_plugin)
@@ -128,7 +129,8 @@ morie_tlhoest_second_order_term <- .tlhoest_second_order_term
 #'
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @param n Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
-#' @return A list with \code{order}, \code{required_rate_per_nuisance}, \code{example_n}, \code{error_at_that_rate}, \code{note}.
+#' @return A list with \code{order}, \code{required_rate_per_nuisance}, \code{example_n},
+#' \code{error_at_that_rate}, \code{note}.
 #' @export
 morie_tlhoest_rate_requirement <- function(order, n = 1000L) {
   o <- as.integer(order)

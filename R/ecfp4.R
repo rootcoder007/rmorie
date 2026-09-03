@@ -15,7 +15,8 @@
 
 #' .ecfp_mix
 #'
-#' A step of the ecfp4 implementation. Called by \code{.ecfp_conninv}, \code{.ecfp_morgan}, \code{Rdkfp}.
+#' A step of the ecfp4 implementation. Called by \code{.ecfp_conninv},
+#' \code{.ecfp_morgan}, \code{Rdkfp}.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -23,11 +24,16 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ecfp_mix(h = 0.5, v = x)
+#' res
 .ecfp_mix <- function(h, v) (h * .ecfp_mul + (v %% .ecfp_mod)) %% .ecfp_mod
 
 #' .ecfp_bonds
 #'
-#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4} and 1 others in the module.
+#' A step of the ecfp4 implementation. Called by \code{Ecfp4}, \code{Ecfp6}, \code{Fcfp4}
+#' and 1 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -91,6 +97,10 @@
 #' @param v A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ecfp_envkey(v = x)
+#' res
 .ecfp_envkey <- function(v) {
   if (!length(v)) return("")
   paste0(sprintf("%04d", sort(as.integer(v), method = "radix")), collapse = "")

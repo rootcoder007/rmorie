@@ -42,6 +42,10 @@
 #' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ipwgrf_folds(n = 3L, V = x)
+#' res
 .ipwgrf_folds <- function(n, V) {
   V <- as.integer(max(2, min(as.integer(V), n)))
   lapply(0:(V - 1), function(v) which(((seq_len(n) - 1) %% V) == v))
@@ -167,7 +171,10 @@
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param break_outcome A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param break_propensity A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores}, \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level}, \code{broken_outcome}, \code{broken_propensity}, \code{method}.
+#' @return A list with \code{estimate}, \code{ate}, \code{se}, \code{ci}, \code{scores},
+#' \code{mu1}, \code{mu0}, \code{propensity}, \code{plug_in}, \code{max_weight},
+#' \code{min_propensity}, \code{max_propensity}, \code{trim}, \code{n}, \code{level},
+#' \code{broken_outcome}, \code{broken_propensity}, \code{method}.
 #' @export
 morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
                          trim = 0.02, seed = 0, level = 0.95,
@@ -253,6 +260,9 @@ morie_ipwgrf <- function(y, W, X, n_folds = 5, n_trees = 120, min_leaf = 5,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ipwgrf_cheatsheet()
+#' res
 .ipwgrf_cheatsheet <- function() {
   paste("ipwgrf: Gamma = mu1 - mu0 + W(Y-mu1)/e - (1-W)(Y-mu0)/(1-e),",
         "mean is the ATE. Right outcome model OR right propensity",

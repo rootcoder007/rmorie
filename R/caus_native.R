@@ -16,13 +16,18 @@
 
 #' .caus_intercept
 #'
-#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
+#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
+#' \code{morie_caus_iv_2sls}, \code{morie_caus_iv_liml}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .caus_intercept(X = x)
+#' res
 .caus_intercept <- function(X) {
   A <- as.matrix(X)
   storage.mode(A) <- "double"
@@ -45,6 +50,11 @@
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .caus_project(Z = X, M = X)
+#' res
 .caus_project <- function(Z, M) {
   Z <- as.matrix(Z)
   M <- as.matrix(M)
@@ -53,7 +63,8 @@
 
 #' .caus_annihilate
 #'
-#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f}, \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
+#' A step of the caus_native implementation. Called by \code{.caus_first_stage_f},
+#' \code{.caus_k_class}, \code{morie_caus_iv_2sls} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -61,6 +72,11 @@
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .caus_annihilate(Z = X, M = X)
+#' res
 .caus_annihilate <- function(Z, M) as.matrix(M) - .caus_project(Z, M)
 
 # The k-class family. k = 0 is least squares, k = 1 is two-stage
@@ -77,6 +93,11 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .caus_k_class(y = y, X = x, Z = y, k = 3L)
+#' res
 .caus_k_class <- function(y, X, Z, k) {
   y <- as.numeric(y)
   X <- as.matrix(X)
@@ -97,6 +118,11 @@
 #' @param Z Passed to \code{.caus_intercept}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .caus_first_stage_f(D = g, Z = y)
+#' res
 .caus_first_stage_f <- function(D, Z) {
   D <- as.numeric(D)
   Zf <- .caus_intercept(Z)

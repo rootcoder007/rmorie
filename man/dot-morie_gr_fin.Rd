@@ -19,3 +19,9 @@ A step of the geron_train_native implementation. Called by \code{.morie_gr_atten
 See the file header for the source the module follows.
 for the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .morie_gr_fin(x = x, name = txt)
+res
+}

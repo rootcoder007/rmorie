@@ -158,14 +158,16 @@ test_that(".morie_fairness_resolve_privileged picks highest-rate group", {
 
 test_that(".morie_fairness_resolve_privileged passes explicit privileged", {
   rates <- list(A = list(g = "A", n = 3L, rate = 0.6))
-  w_env <- new.env(); w_env$w <- character(0)
+  w_env <- new.env()
+  w_env$w <- character(0)
   out <- rmorie:::.morie_fairness_resolve_privileged("A", rates, w_env)
   expect_equal(unname(out), "A")
 })
 
 test_that(".morie_fairness_resolve_privileged errors on unknown group", {
   rates <- list(A = list(g = "A", n = 3L, rate = 0.6))
-  w_env <- new.env(); w_env$w <- character(0)
+  w_env <- new.env()
+  w_env$w <- character(0)
   expect_error(
     rmorie:::.morie_fairness_resolve_privileged("Z", rates, w_env),
     regexp = "not found")

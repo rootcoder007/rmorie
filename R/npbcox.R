@@ -33,7 +33,8 @@
 #'   models and life-tables. JRSS B, 34(2), 187-220.
 #' @export
 #' @examples
-#' Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 Npbcox <- function(time, event, X, c = 1.0, lam0 = NULL, n_iter = 50L,
                    tol = 1e-12) {
   t <- as.numeric(time)

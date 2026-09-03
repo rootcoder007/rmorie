@@ -17,3 +17,7 @@ A step of the phylby_native implementation. Called by \code{morie_phylby}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .phylby_rng(seed = 1L)
+res
+}

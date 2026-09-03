@@ -92,8 +92,10 @@ self_attention <- function(E, WQ, WK, WV, mask = NULL) {
 #' source it follows.
 #'
 #' @param weights See Usage.
-#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{mean_lookback}, \code{mass_on_last}, \code{effective_order}, \code{note}.
+#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{mean_lookback}, \code{mass_on_last}, \code{effective_order},
+#' \code{note}.
 #' @export
 attention_span <- function(weights, position = NULL) {
   W <- weights
@@ -147,7 +149,8 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param d Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{attention_ops}, \code{rnn_ops}, \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
+#' @return A list with \code{attention_ops}, \code{rnn_ops},
+#' \code{attention_sequential_steps}, \code{rnn_sequential_steps}, \code{note}.
 #' @export
 complexity <- function(n, d) {
   nn <- as.integer(n)
@@ -166,6 +169,9 @@ complexity <- function(n, d) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sasRec_cheatsheet()
+#' res
 .sasRec_cheatsheet <- function() {
   paste("sasRec: Markov chains win where data are SPARSE (parsimony ",
         "is critical), RNNs where they are DENSE (complexity is ",

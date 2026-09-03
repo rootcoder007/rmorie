@@ -20,5 +20,6 @@ A list with \code{u}, \code{total}.
 }
 \keyword{internal}
 \examples{
-flow_forward(flow = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+flow_forward(flow = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

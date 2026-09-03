@@ -29,7 +29,8 @@ B = mu(b_T) - A mu(b_F).  The transformed from-scale parameters
 a* = a_F/A, b* = A b_F + B are also returned.
 }
 \examples{
-morie_linkmm(a_from = c(1, 2, 3, 4, 5, 6, 7, 8), b_from = c(1, 2, 3, 4, 5, 6, 7, 8), a_to = c(1, 2, 3, 4, 5, 6, 7, 8), b_to = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_linkmm(a_from = c(1, 2, 3, 4, 5, 6, 7, 8), b_from = c(1, 2, 3, 4, 5, 6, 7, 8),
+  a_to = c(1, 2, 3, 4, 5, 6, 7, 8), b_to = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Weeks, J. P. (2010). plink: An R package for linking

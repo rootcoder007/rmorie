@@ -14,3 +14,7 @@ A step of the ngnest_native implementation. Called by \code{.ngnest_ensemble_mem
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .ngnest_default_block_sets()
+res
+}

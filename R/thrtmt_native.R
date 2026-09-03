@@ -15,8 +15,14 @@
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .thrtmt_vec(x = x)
+#' res
 .thrtmt_vec <- function(x) {
-  if (is.null(x)) return(numeric(0))
+  if (is.null(x)) {
+    return(numeric(0))
+  }
   as.numeric(x)
 }
 
@@ -29,10 +35,18 @@
 #' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .thrtmt_mat(W = x)
+#' res
 .thrtmt_mat <- function(W) {
-  if (is.null(W)) return(matrix(0, nrow=0, ncol=0))
+  if (is.null(W)) {
+    return(matrix(0, nrow = 0, ncol = 0))
+  }
   m <- as.matrix(W)
-  if (ncol(m) == 0 && nrow(m) == 0) return(matrix(0, nrow=0, ncol=0))
+  if (ncol(m) == 0 && nrow(m) == 0) {
+    return(matrix(0, nrow = 0, ncol = 0))
+  }
   m
 }
 
@@ -48,12 +62,12 @@
 #' @export
 .thrtmt_design <- function(rows, n) {
   if (length(rows) == 0 || n == 0) {
-    return(matrix(0, nrow=n, ncol=0))
+    return(matrix(0, nrow = n, ncol = 0))
   }
   # rows is a list of numeric vectors
   nr <- length(rows)
   nc <- max(sapply(rows, length))
-  Z <- matrix(0, nrow=nr, ncol=nc)
+  Z <- matrix(0, nrow = nr, ncol = nc)
   for (i in seq_len(nr)) {
     r <- rows[[i]]
     if (length(r) > 0) Z[i, seq_along(r)] <- r
@@ -84,7 +98,7 @@
     # Fallback for singular
     sv <- svd(G)
     d <- sv$d
-    d_inv <- ifelse(d > 1e-12, 1/d, 0)
+    d_inv <- ifelse(d > 1e-12, 1 / d, 0)
     sv$v %*% (d_inv * crossprod(sv$u, rhs))
   })
   as.numeric(b)
@@ -130,7 +144,7 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
   if (any(!(av %in% c(0.0, 1.0)))) {
     stop("blip_function: treatment must be binary 0/1")
   }
-  
+
   if (!is.null(W)) {
     Wm <- .thrtmt_mat(W)
     if (nrow(Wm) != n) {
@@ -139,10 +153,10 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
     }
     p <- ncol(Wm)
   } else {
-    Wm <- matrix(0, nrow=n, ncol=0)
+    Wm <- matrix(0, nrow = n, ncol = 0)
     p <- 0
   }
-  
+
   # Build design matrix: [1, a, W[1], ..., W[p], a*W[1], ..., a*W[p]]
   rows <- vector("list", n)
   for (i in seq_len(n)) {
@@ -155,7 +169,7 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
   }
   Z <- .thrtmt_design(rows, n)
   b <- .thrtmt_lstsq(Z, yv, ridge)
-  
+
   q1 <- numeric(n)
   q0 <- numeric(n)
   blip_w <- numeric(n)
@@ -171,12 +185,14 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
     q0[i] <- sum(b * r0)
     blip_w[i] <- q1[i] - q0[i]
   }
-  
+
   if (is.null(V)) {
-    return(list(blip = blip_w, 
-                info = list(coef = b, q1 = q1, q0 = q0)))
+    return(list(
+      blip = blip_w,
+      info = list(coef = b, q1 = q1, q0 = q0)
+    ))
   }
-  
+
   # E[blip | V]: regress the blip on the summary V
   Vm <- .thrtmt_mat(V)
   if (nrow(Vm) != n) {
@@ -194,10 +210,14 @@ thrtmt_blip_function <- function(y, A, W, V = NULL, ridge = 1e-8) {
   Zv <- .thrtmt_design(v_rows, n)
   bv <- .thrtmt_lstsq(Zv, blip_w, ridge)
   proj <- .thrtmt_matvec(Zv, bv)
-  
-  return(list(blip = as.numeric(proj),
-              info = list(coef = b, v_coef = bv, blip_w = blip_w,
-                          q1 = q1, q0 = q0)))
+
+  return(list(
+    blip = as.numeric(proj),
+    info = list(
+      coef = b, v_coef = bv, blip_w = blip_w,
+      q1 = q1, q0 = q0
+    )
+  ))
 }
 
 #' @rdname thrtmt_blip_function

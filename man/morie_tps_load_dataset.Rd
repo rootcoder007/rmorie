@@ -29,7 +29,7 @@ while developing against the largest tables.
 }
 \details{
 For non-CSV sibling formats (Excel, GeoJSON, KML, GeoPackage,
-Shapefile, etc.), use \code{\link[=morie_tps_load]{morie_tps_load()}} from \code{tps_io.R} instead.
+Shapefile, etc.), use \code{morie_tps_load()} from \code{tps_io.R} instead.
 }
 \examples{
 \donttest{

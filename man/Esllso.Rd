@@ -30,9 +30,6 @@ coordinate descent exploits the fact that each one-dimensional
 subproblem has the closed-form soft-threshold solution, so no
 quadratic program is needed.
 }
-\details{
-
-}
 \examples{
 Esllso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda_ = 5L)
 }

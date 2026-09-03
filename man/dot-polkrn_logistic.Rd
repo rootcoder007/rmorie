@@ -17,3 +17,9 @@ A list with \code{beta}, \code{mu}.
 \description{
 X: design matrix (with intercept), y: 0/1 vector.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .polkrn_logistic(X = x, y = y)
+res
+}

@@ -22,7 +22,8 @@
 #' @param period Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param lengthscale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param variance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale}, \code{variance}, \code{diag_is_variance}, \code{method}.
+#' @return A list with \code{K}, \code{shape}, \code{period}, \code{lengthscale},
+#' \code{variance}, \code{diag_is_variance}, \code{method}.
 #' @export
 morie_perK <- function(x1, x2 = NULL, period = 1, lengthscale = 1,
                        variance = 1) {

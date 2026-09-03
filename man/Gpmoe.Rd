@@ -38,7 +38,8 @@ Formula: \code{mu(x) = sum_k pi_k(x) mu_k(x)},
 \code{var(x) = sum_k pi_k(x) \[s_k^2(x) + mu_k(x)^2\] - mu(x)^2}.
 }
 \examples{
-Gpmoe(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_test = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
+Gpmoe(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X_test = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)
 }
 \references{
 Tresp, V. (2001). Mixtures of Gaussian processes. NIPS

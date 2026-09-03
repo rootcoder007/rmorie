@@ -23,14 +23,16 @@ test_that("morie_tps_morans_i_neighbourhood: synthetic incident data", {
 })
 
 test_that("morie_tps_morans_i_neighbourhood warns on missing hood_col", {
-  df <- .mk_tps_inc(); df$HOOD_158 <- NULL
+  df <- .mk_tps_inc()
+  df$HOOD_158 <- NULL
   rr <- morie_tps_morans_i_neighbourhood(df)
   expect_true(any(grepl("missing", rr$warnings)))
 })
 
 test_that("morie_tps_morans_i_neighbourhood warns when no lat/lon", {
   df <- .mk_tps_inc()
-  df$LAT_WGS84 <- NULL; df$LONG_WGS84 <- NULL
+  df$LAT_WGS84 <- NULL
+  df$LONG_WGS84 <- NULL
   rr <- morie_tps_morans_i_neighbourhood(df)
   expect_true(any(grepl("missing", rr$warnings)))
 })
@@ -55,14 +57,16 @@ test_that("morie_tps_local_morans_i returns per-hood table", {
 })
 
 test_that("morie_tps_local_morans_i warns on missing hood_col", {
-  df <- .mk_tps_inc(); df$HOOD_158 <- NULL
+  df <- .mk_tps_inc()
+  df$HOOD_158 <- NULL
   rr <- morie_tps_local_morans_i(df)
   expect_true(any(grepl("missing", rr$warnings)))
 })
 
 test_that("morie_tps_local_morans_i warns when lat/lon missing", {
   df <- .mk_tps_inc()
-  df$LAT_WGS84 <- NULL; df$LONG_WGS84 <- NULL
+  df$LAT_WGS84 <- NULL
+  df$LONG_WGS84 <- NULL
   rr <- morie_tps_local_morans_i(df)
   expect_true(any(grepl("missing", rr$warnings)))
 })

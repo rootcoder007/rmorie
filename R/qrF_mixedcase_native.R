@@ -21,7 +21,8 @@
 #' @param y_true Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y_pred Coerced to numeric by the body, with \code{as.numeric}.
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
-#' @return A list with \code{estimate}, \code{total}, \code{losses}, \code{theta}, \code{n}, \code{method}.
+#' @return A list with \code{estimate}, \code{total}, \code{losses}, \code{theta},
+#' \code{n}, \code{method}.
 #' @export
 morie_qrF <- function(y_true, y_pred, theta = 0.5) {
   yt <- as.numeric(y_true)

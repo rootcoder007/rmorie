@@ -16,7 +16,7 @@ List with \code{estimate} (log-likelihood), \code{weights}, \code{means},
 \code{sds}, \code{iterations}, \code{converged}, \code{n}, \code{k}, \code{method}.
 }
 \description{
-Delegates the optimisation to \code{\link[=morie_wasserman_em_algorithm]{morie_wasserman_em_algorithm()}} after
+Delegates the optimisation to \code{morie_wasserman_em_algorithm()} after
 a deterministic quartile-and-pooled-sd initialisation. Only k = 2 is
 implemented; a larger k raises rather than fitting something else.
 }

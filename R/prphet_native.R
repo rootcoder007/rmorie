@@ -34,7 +34,8 @@
 
 #' morie_prphet_piecewise_trend
 #'
-#' A step of the prphet_native implementation. Called by \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
+#' A step of the prphet_native implementation. Called by
+#' \code{.prnFil_simulate_future_trend}, \code{morie_prphet_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -81,7 +82,8 @@ morie_prphet_trend_matrix <- function(t, cps) {
 
 #' morie_prphet_fourier_terms
 #'
-#' A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}.
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
+#' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -107,7 +109,8 @@ morie_prphet_fourier_terms <- function(t, period, order) {
 
 #' morie_prphet_holiday_matrix
 #'
-#' A step of the prphet_native implementation. Called by \code{morie_prphet_design}, \code{prophe_additive_components}.
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_design},
+#' \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -133,7 +136,8 @@ morie_prphet_holiday_matrix <- function(t, holidays, lower = 0, upper = 0) {
 
 #' morie_prphet_design
 #'
-#' A step of the prphet_native implementation. Called by \code{morie_prphet_fit}, \code{morie_prphet_predict}.
+#' A step of the prphet_native implementation. Called by \code{morie_prphet_fit},
+#' \code{morie_prphet_predict}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -173,7 +177,8 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 
 #' morie_prphet_fit
 #'
-#' A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path}, \code{.prnFil_select_changepoints}, \code{prophe_additive_components}.
+#' A step of the prphet_native implementation. Called by \code{.prnFil_changepoint_path},
+#' \code{.prnFil_select_changepoints}, \code{prophe_additive_components}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -185,9 +190,13 @@ morie_prphet_design <- function(t, cps, seasonalities = NULL, holidays = NULL,
 #' @param seasonalities Optional; may be \code{NULL}. Passed to \code{morie_prphet_design}.
 #' @param holidays Passed to \code{morie_prphet_design}.
 #' @param holiday_window Passed to \code{morie_prphet_design}. Defaults to \code{c(0, 0)}.
-#' @param changepoint_prior Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param changepoint_prior Coerced to numeric by the body, with \code{as.numeric}.
+#' Defaults to \code{0.05}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
-#' @return A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef}, \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m}, \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior}, \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{residual}, \code{coef},
+#' \code{beta}, \code{columns}, \code{changepoints}, \code{deltas}, \code{k}, \code{m},
+#' \code{trend}, \code{holiday.names}, \code{t}, \code{n}, \code{changepoint_prior},
+#' \code{n.active.changepoints}, \code{sigma}, \code{seasonalities}, \code{method}.
 #' @export
 morie_prphet_fit <- function(t, y, n_changepoints = 10L, changepoint_range = 0.8,
                              changepoints = NULL, seasonalities = NULL,

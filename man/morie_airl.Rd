@@ -29,5 +29,8 @@ A named list with \code{estimate}, \code{reward}, \code{g},   \code{h}, \code{f_
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- morie_airl(expert_states = rnorm(10), expert_actions = rnorm(10), expert_next = rnorm(10), expert_log_policy = rnorm(10), policy_states = rnorm(10), policy_actions = rnorm(10), policy_next = rnorm(10), policy_log_policy = rnorm(10)); TRUE
+r <- morie_airl(expert_states = rnorm(10), expert_actions = rnorm(10), expert_next = rnorm(10),
+  expert_log_policy = rnorm(10), policy_states = rnorm(10), policy_actions = rnorm(10),
+  policy_next = rnorm(10), policy_log_policy = rnorm(10))
+TRUE
 }

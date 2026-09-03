@@ -19,3 +19,7 @@ A step of the groebn_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .groebn_fr_eq(p = 0.5, q = 0.5)
+res
+}

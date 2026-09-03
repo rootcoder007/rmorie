@@ -3,7 +3,9 @@
 #' The c_2 bias coefficient of the boundary-free KDE (Theorem 5.5)
 #'
 #' From Theorem 5.5:
-#' \deqn{c_2(x) = g^{(3)}(g^{-1}(x))f_X(x) + 3g''(g^{-1}(x))g'(g^{-1}(x))f_X'(x) + \[g'(g^{-1}(x))\]^3 f_X''(x).}{c2(x) = g3(g^-1(x)) f(x) + 3 g''(g^-1(x)) g'(g^-1(x)) f'(x) + \[g'(g^-1(x))\]^3 f''(x).}
+#' \deqn{c_2(x) = g^{(3)}(g^{-1}(x))f_X(x) + 3g''(g^{-1}(x))g'(g^{-1}(x))f_X'(x) +
+#' \[g'(g^{-1}(x))\]^3 f_X''(x).}{c2(x) = g3(g^-1(x)) f(x) + 3 g''(g^-1(x)) g'(g^-1(x))
+#' f'(x) + \[g'(g^-1(x))\]^3 f''(x).}
 #'
 #' The coefficients 1, 3, 1 and the derivative orders are the Faa di Bruno
 #' pattern for the second derivative of a composition -- which is what this is,

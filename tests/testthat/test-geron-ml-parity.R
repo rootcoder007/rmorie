@@ -140,7 +140,8 @@ test_that("AIC / BIC families match Python", {
 })
 
 test_that("both AUC routes agree with Python and with pair counting", {
-  yt <- c(0, 0, 1, 1, 0, 1); sc <- c(0.1, 0.4, 0.35, 0.8, 0.4, 0.4)
+  yt <- c(0, 0, 1, 1, 0, 1)
+  sc <- c(0.1, 0.4, 0.35, 0.8, 0.4, 0.4)
   m <- morie_geron_auc_roc(yt, sc)
   expect_equal(m$auc, 0.6666666666666666, tolerance = tol)
   expect_equal(m$fpr, c(0, 0, 0.6666666666666666, 0.6666666666666666, 1),
@@ -148,7 +149,8 @@ test_that("both AUC routes agree with Python and with pair counting", {
   expect_equal(m$tpr, c(0, 0.3333333333333333, 0.6666666666666666, 1, 1),
                tolerance = tol)
   expect_equal(m$thresholds[-1], c(0.8, 0.4, 0.35, 0.1), tolerance = tol)
-  expect_equal(m$n_pos, 3L); expect_equal(m$n_neg, 3L)
+  expect_equal(m$n_pos, 3L)
+  expect_equal(m$n_neg, 3L)
 
   t_ <- morie_geron_auc_roc_trapezoid(yt, sc)
   expect_equal(t_$auc, 0.6666666666666667, tolerance = tol)
@@ -156,7 +158,8 @@ test_that("both AUC routes agree with Python and with pair counting", {
   expect_equal(t_$tpr, m$tpr, tolerance = tol)
 
   # independent route: brute-force pair counting, ties credited 0.5.
-  pos <- sc[yt == 1]; neg <- sc[yt == 0]
+  pos <- sc[yt == 1]
+  neg <- sc[yt == 0]
   wins <- 0
   for (p in pos) for (q in neg) wins <- wins + (p > q) + 0.5 * (p == q)
   expect_equal(m$auc, wins / (length(pos) * length(neg)), tolerance = tol)
@@ -352,7 +355,8 @@ test_that("McCulloch-Pitts neuron and batch norms match Python", {
 })
 
 test_that("backpropagation routes match Python", {
-  W1 <- matrix(c(1, -1), 1, 2); W2 <- matrix(c(2, 3), 2, 1)
+  W1 <- matrix(c(1, -1), 1, 2)
+  W2 <- matrix(c(2, 3), 2, 1)
   r <- morie_geron_backpropagation(matrix(c(1, 2), ncol = 1),
                                    matrix(c(0, 1), ncol = 1),
                                    list(W1, W2), c("relu", "identity"))
@@ -556,10 +560,12 @@ test_that("DeiT, DALL-E and DETR match Python", {
   # ground-truth boxes into the three queries must find the same optimum
   # as the Jonker-Volgenant assignment.
   C <- r$cost_matrix
-  best <- Inf; bestpair <- NULL
+  best <- Inf
+  bestpair <- NULL
   for (i in 1:3) for (j in 1:3) if (i != j) {
     tot <- C[i, 1] + C[j, 2]
-    if (tot < best) { best <- tot; bestpair <- c(i - 1L, j - 1L) }
+    if (tot < best) { best <- tot
+    bestpair <- c(i - 1L, j - 1L) }
   }
   expect_equal(best, r$total_cost, tolerance = tol)
   expect_equal(bestpair, c(r$matching[[1]][1], r$matching[[2]][1]))
@@ -588,8 +594,10 @@ test_that("advantage, Double DQN and value iteration match Python", {
   expect_equal(dq$overestimation_gap, c(18, 1.8000000000000003, 0), tolerance = tol)
 
   P <- array(0, dim = c(2, 2, 2))
-  P[1, 1, ] <- c(0.7, 0.3); P[1, 2, ] <- c(0.2, 0.8)
-  P[2, 1, ] <- c(0.5, 0.5); P[2, 2, ] <- c(0.1, 0.9)
+  P[1, 1, ] <- c(0.7, 0.3)
+  P[1, 2, ] <- c(0.2, 0.8)
+  P[2, 1, ] <- c(0.5, 0.5)
+  P[2, 2, ] <- c(0.1, 0.9)
   R <- matrix(c(1, 0, 0, 2), 2, 2, byrow = TRUE)
   vi <- morie_geron_value_iteration(c(0, 0), P, R, 0.9)
   expect_equal(vi$V, c(15.869565216504963, 18.043478259983228), tolerance = 1e-8)

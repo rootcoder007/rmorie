@@ -20,5 +20,6 @@ Symmetric InfoNCE over cosine(I, T) / tau; the batch must hold at least
 two pairs.
 }
 \examples{
-morie_kamath_image_text_contrastive(I_emb = c(1, 2, 3, 4, 5, 6, 7, 8), T_emb = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
+morie_kamath_image_text_contrastive(I_emb = c(1, 2, 3, 4, 5, 6, 7, 8),
+  T_emb = c(1, 2, 3, 4, 5, 6, 7, 8), tau = 0.5)
 }

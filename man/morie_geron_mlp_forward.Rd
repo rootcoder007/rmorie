@@ -28,9 +28,10 @@ List with \code{output}, \code{activations}, \code{layer_sizes}, \code{n_layers}
 }
 \description{
 a_l = phi(W_l \verb{a_\{l-1\}} + b_l), stacked
-\code{\link[=morie_geron_linear_layer_forward]{morie_geron_linear_layer_forward()}} calls; the last layer uses
+\code{morie_geron_linear_layer_forward()} calls; the last layer uses
 \code{output_activation}.
 }
 \examples{
-morie_geron_mlp_forward(x = 5L, weights = c(1, 2, 3, 4, 5, 6, 7, 8), biases = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_mlp_forward(x = 5L, weights = c(1, 2, 3, 4, 5, 6, 7, 8),
+  biases = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

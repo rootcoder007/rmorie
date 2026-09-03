@@ -8,7 +8,8 @@
 
 #' .morie_rg_polyz
 #'
-#' A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp}, \code{Comb} and 6 others in the module.
+#' A step of the rangayyan_filt implementation. Called by \code{BwDigital}, \code{BwHp},
+#' \code{Comb} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -34,7 +35,8 @@
 #' @param h_1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h_2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index}, \code{commutes}, \code{longer_than_either_input}, \code{method}.
+#' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index},
+#' \code{commutes}, \code{longer_than_either_input}, \code{method}.
 #' @export
 LsiSerH <- function(h_1, h_2, n = NULL) {
   # eq (3.45): cascading two LSI systems convolves their impulse
@@ -71,7 +73,8 @@ LsiSerH <- function(h_1, h_2, n = NULL) {
 #' @param h_1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h_2 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index}, \code{length_is_the_longer_branch}, \code{method}.
+#' @return A list with \code{h}, \code{n_taps}, \code{value}, \code{index},
+#' \code{length_is_the_longer_branch}, \code{method}.
 #' @export
 LsiParH <- function(h_1, h_2, n = NULL) {
   # eq (3.49): parallel branches add their impulse responses, and the
@@ -106,7 +109,8 @@ LsiParH <- function(h_1, h_2, n = NULL) {
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s Coerced to complex by the body, with \code{as.complex}.
-#' @return A list with \code{H}, \code{s}, \code{t_min}, \code{t_max}, \code{n}, \code{trapezoidal}, \code{over_the_sampled_interval_only}, \code{method}.
+#' @return A list with \code{H}, \code{s}, \code{t_min}, \code{t_max}, \code{n},
+#' \code{trapezoidal}, \code{over_the_sampled_interval_only}, \code{method}.
 #' @export
 Laplace <- function(h, t, s) {
   # eq (3.50), by the trapezoidal rule over the samples supplied.  What
@@ -141,7 +145,8 @@ Laplace <- function(h, t, s) {
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param T Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{phase}, \code{t_min}, \code{t_max}, \code{valid_only_inside_the_roc}, \code{method}.
+#' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{phase},
+#' \code{t_min}, \code{t_max}, \code{valid_only_inside_the_roc}, \code{method}.
 #' @export
 LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
   # eq (3.52): H(omega) = H(s) at s = j omega.  Legitimate only when the
@@ -187,7 +192,8 @@ LaplaceFr <- function(h, omega, t = NULL, T = NULL) {
 #' @param z Passed to \code{.morie_rg_polyz}.
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{H}, \code{z}, \code{numerator}, \code{denominator}, \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
+#' @return A list with \code{H}, \code{z}, \code{numerator}, \code{denominator},
+#' \code{N}, \code{M}, \code{leading_one_is_implicit}, \code{method}.
 #' @export
 IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
   # eq (3.67).  The leading 1 of the denominator is part of the equation,
@@ -231,7 +237,8 @@ IirTf <- function(b_k, a_k, z, N = NULL, M = NULL) {
 #' @param N Accepted by the signature and not used anywhere in the body.
 #' @param M Accepted by the signature and not used anywhere in the body.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M}, \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
+#' @return A list with \code{y}, \code{value}, \code{index}, \code{N}, \code{M},
+#' \code{recursive}, \code{feedback_is_subtracted}, \code{method}.
 #' @export
 IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
                     n = NULL) {
@@ -279,7 +286,8 @@ IirDiff <- function(x, b_k, a_k = NULL, y = NULL, N = NULL, M = NULL,
 #' @param r_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{magnitude}, \code{zero_product}, \code{pole_product}, \code{n_zeros}, \code{n_poles}, \code{on_a_zero}, \code{method}.
+#' @return A list with \code{magnitude}, \code{zero_product}, \code{pole_product},
+#' \code{n_zeros}, \code{n_poles}, \code{on_a_zero}, \code{method}.
 #' @export
 PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
   # eq (3.72): the geometric reading of a filter.  Approaching a zero
@@ -318,11 +326,15 @@ PzMag <- function(l_k, r_k, N = NULL, M = NULL) {
 #' multiple of angle(z_0) whenever they differ.
 #'
 #' @param z_0 Coerced to complex by the body, with \code{as.complex}.
-#' @param alpha_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param beta_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha_k Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param beta_k Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param M Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{phase}, \code{wrapped}, \code{origin_term}, \code{zero_angle_sum}, \code{pole_angle_sum}, \code{z_0_angle}, \code{n_zeros}, \code{n_poles}, \code{origin_term_vanishes_when_orders_match}, \code{method}.
+#' @return A list with \code{phase}, \code{wrapped}, \code{origin_term},
+#' \code{zero_angle_sum}, \code{pole_angle_sum}, \code{z_0_angle}, \code{n_zeros},
+#' \code{n_poles}, \code{origin_term_vanishes_when_orders_match}, \code{method}.
 #' @export
 PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
   # eq (3.73).  The (M - N) angle(z_0) term accounts for the zeros or
@@ -361,7 +373,9 @@ PzPhase <- function(z_0, alpha_k, beta_k, N = NULL, M = NULL) {
 #' @param b_k Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{y}, \code{value}, \code{index}, \code{b}, \code{N}, \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples}, \code{method}.
+#' @return A list with \code{y}, \code{value}, \code{index}, \code{b}, \code{N},
+#' \code{settled_from}, \code{dc_gain}, \code{equal_weights}, \code{delay_samples},
+#' \code{method}.
 #' @export
 MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
   # eqs (3.97)-(3.99).  With no coefficients the equal-weight boxcar is
@@ -408,7 +422,8 @@ MaFir <- function(x, b_k = NULL, N = NULL, n = NULL) {
 #' @param b_k Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Passed to \code{.morie_rg_polyz}.
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain}, \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
+#' @return A list with \code{H}, \code{z}, \code{b}, \code{N}, \code{dc_gain},
+#' \code{always_stable}, \code{poles_only_at_the_origin}, \code{method}.
 #' @export
 MaTf <- function(b_k, z, N = NULL) {
   # eq (3.99): a polynomial in z^-1 with no poles away from the origin,
@@ -434,7 +449,8 @@ MaTf <- function(b_k, z, N = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{y}, \code{value}, \code{index}, \code{n}, \code{taps}, \code{delay_samples}, \code{settled_from}, \code{dc_gain}, \code{method}.
+#' @return A list with \code{y}, \code{value}, \code{index}, \code{n}, \code{taps},
+#' \code{delay_samples}, \code{settled_from}, \code{dc_gain}, \code{method}.
 #' @export
 HannFilt <- function(x, n = NULL) {
   # eq (3.100): y(n) = (1/4)[x(n) + 2x(n-1) + x(n-2)].  Three taps in the
@@ -467,7 +483,8 @@ HannFilt <- function(x, n = NULL) {
 #' passes through unchanged.
 #'
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum}, \code{finite}, \code{symmetric}, \code{method}.
+#' @return A list with \code{h}, \code{value}, \code{index}, \code{n_taps}, \code{sum},
+#' \code{finite}, \code{symmetric}, \code{method}.
 #' @export
 HannImp <- function(n = NULL) {
   # eq (3.101): three nonzero taps and nothing else.  The response is
@@ -494,7 +511,8 @@ HannImp <- function(n = NULL) {
 #'
 #' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @param z Coerced to complex by the body, with \code{as.complex}.
-#' @return A list with \code{Y}, \code{H}, \code{X}, \code{z}, \code{transfer_function_is_input_independent}, \code{method}.
+#' @return A list with \code{Y}, \code{H}, \code{X}, \code{z},
+#' \code{transfer_function_is_input_independent}, \code{method}.
 #' @export
 HannZ <- function(X, z) {
   # eq (3.102): convolution in time is multiplication in z, so the whole
@@ -517,7 +535,8 @@ HannZ <- function(X, z) {
 #' smoothly and why the attenuation nearby is second order.
 #'
 #' @param z Coerced to complex by the body, with \code{as.complex}.
-#' @return A list with \code{H}, \code{z}, \code{zeros}, \code{zero_multiplicity}, \code{zeros_at_nyquist}, \code{dc_gain}, \code{method}.
+#' @return A list with \code{H}, \code{z}, \code{zeros}, \code{zero_multiplicity},
+#' \code{zeros_at_nyquist}, \code{dc_gain}, \code{method}.
 #' @export
 HannTf <- function(z) {
   # eq (3.103): (1/4)(1 + z^-1)^2, a DOUBLE zero at z = -1, that is at
@@ -543,7 +562,8 @@ HannTf <- function(z) {
 #' the source it follows.
 #'
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{H}, \code{omega}, \code{magnitude}, \code{on_the_unit_circle}, \code{method}.
+#' @return A list with \code{H}, \code{omega}, \code{magnitude},
+#' \code{on_the_unit_circle}, \code{method}.
 #' @export
 HannFr <- function(omega) {
   # eq (3.104): the transfer function on the unit circle, raw form.
@@ -565,7 +585,9 @@ HannFr <- function(omega) {
 #' linear phase, so the waveform is shifted, not distorted.
 #'
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{H}, \code{omega}, \code{envelope}, \code{max_difference_from_eq_3_104}, \code{agrees_with_raw_form}, \code{real_factor_times_a_pure_delay}, \code{linear_phase}, \code{method}.
+#' @return A list with \code{H}, \code{omega}, \code{envelope},
+#' \code{max_difference_from_eq_3_104}, \code{agrees_with_raw_form},
+#' \code{real_factor_times_a_pure_delay}, \code{linear_phase}, \code{method}.
 #' @export
 HannFrs <- function(omega) {
   # eq (3.105): a REAL nonnegative factor times a pure one-sample delay.
@@ -593,7 +615,9 @@ HannFrs <- function(omega) {
 #' negative -- and is kept only because the book writes it.
 #'
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{magnitude}, \code{omega}, \code{dc_gain}, \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant}, \code{method}.
+#' @return A list with \code{magnitude}, \code{omega}, \code{dc_gain},
+#' \code{nyquist_gain}, \code{lowpass}, \code{absolute_value_is_redundant},
+#' \code{method}.
 #' @export
 HannMag <- function(omega) {
   # eq (3.106): unity at DC, exactly nought at omega = pi, monotone
@@ -615,7 +639,8 @@ HannMag <- function(omega) {
 #' distortion" means.
 #'
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope}, \code{linear_phase}, \code{constant_group_delay}, \code{method}.
+#' @return A list with \code{phase}, \code{omega}, \code{group_delay}, \code{slope},
+#' \code{linear_phase}, \code{constant_group_delay}, \code{method}.
 #' @export
 HannPh <- function(omega) {
   # eq (3.107): exactly -omega, slope -1, a constant group delay of one
@@ -641,9 +666,13 @@ HannPh <- function(omega) {
 #' @param window Coerced to integer by the body, with \code{as.integer}.
 #' @param kind One of \code{"l"}, \code{"order"}, \code{"trimmed"}. Defaults to \code{"median"}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{y}, \code{n}, \code{window}, \code{kind}, \code{alpha}, \code{trimmed_each_end}, \code{order}, \code{nonlinear}, \code{no_frequency_response}, \code{edges}, \code{method}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{y}, \code{n}, \code{window}, \code{kind}, \code{alpha},
+#' \code{trimmed_each_end}, \code{order}, \code{nonlinear}, \code{no_frequency_response},
+#' \code{edges}, \code{method}.
 #' @export
 OsFilt <- function(x, window, kind = "median", alpha = 0, weights = NULL,
                    order = NULL) {

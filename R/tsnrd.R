@@ -71,6 +71,11 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
 #' @param eta Passed to \code{.morie_tsne_descent_cpp}. Defaults to \code{"auto"}.
 #' @return A list with \code{Y}, \code{kl}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_tsne(x = X)
+#' res
 .morie_tsne <- function(x, dims = 2L, perplexity = 30, n_iter = 1000L,
                         eta = "auto") {
   n <- nrow(x)

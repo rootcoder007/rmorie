@@ -1,37 +1,37 @@
 # morie.fn -- function file (rootcoder007/morie)
 # AnoGAN: anomaly detection by inverting a generator.
-# 
+#
 # Anomalies are, by construction, what the training data does not
 # contain. So train a GAN on **normal** data only, and it learns a
 # manifold of normal appearance. A new image is then scored by how well
 # it can be *reproduced* from that manifold.
-# 
+#
 # **The inversion is the method.** A GAN maps :math:`z \to G(z)` but
 # provides no inverse, so the latent code for a query image is found by
 # optimisation: fix the trained generator and descend on :math:`z` to
 # minimise a loss against the query. Nothing about the network changes;
 # the search is over the latent space alone, which is why an anomalous
 # image cannot simply be memorised.
-# 
+#
 # **Two loss terms doing different work.**
-# 
+#
 # * **Residual loss** :math:`\sum |x - G(z)|` -- pixel disagreement.
 # * **Discrimination loss** :math:`\sum |f(x) - f(G(z))|`, comparing
 #   *intermediate discriminator features* rather than its output.
 #   Comparing the discriminator's scalar verdict instead would give
 #   almost no gradient; the feature layer is what makes the term
 #   informative.
-# 
+#
 # The score is :math:`(1-\lambda)L_R + \lambda L_D`, and the **residual
 # map** :math:`|x - G(z)|` localises the anomaly rather than only
 # flagging the image -- which is the clinically useful part.
-# 
+#
 # **The failure mode is a generator that is too good.** If :math:`G`
 # can reproduce anything, every image scores zero and nothing is
 # anomalous. Restricted capacity is therefore load-bearing, not an
 # implementation compromise, and ``score_separation`` measures whether
 # normal and anomalous scores actually separate rather than assuming it.
-# 
+#
 # References
 # ----------
 # Schlegl, T., Seebock, P., Waldstein, S. M., Schmidt-Erfurth, U. &
@@ -45,12 +45,12 @@
 # combining a residual loss on pixel differences with a discrimination
 # loss on intermediate discriminator features; and the residual image
 # localising anomalies.
-# 
+#
 # Goodfellow, I. J., Pouget-Abadie, J., Mirza, M., Xu, B.,
 # Warde-Farley, D., Ozair, S., Courville, A. & Bengio, Y. (2014)
 # "Generative Adversarial Nets", *NIPS 2014*, 2672-2680,
 # arXiv:1406.2661.
-# 
+#
 # Radford, A., Metz, L. & Chintala, S. (2016) "Unsupervised
 # Representation Learning with Deep Convolutional Generative Adversarial
 # Networks", *ICLR 2016*, arXiv:1511.06434. The DCGAN architecture used.
@@ -58,20 +58,27 @@
 # Private helpers for the gan_an module
 #' Private helpers for the gan_an module
 #'
-#' A step of the gan_an_native implementation. Called by \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl}, \code{morie_gan_an} and 2 others in the module.
+#' A step of the gan_an_native implementation. Called by
+#' \code{.gan_an_discrimination_loss_impl}, \code{.gan_an_residual_loss_impl},
+#' \code{morie_gan_an} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gan_an_as_num(x = x)
+#' res
 .gan_an_as_num <- function(x) {
   as.numeric(x)
 }
 
 #' .gan_an_residual_loss_impl
 #'
-#' A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{residual_loss}.
+#' A step of the gan_an_native implementation. Called by
+#' \code{.gan_an_anomaly_score_impl}, \code{residual_loss}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -91,7 +98,8 @@
 
 #' .gan_an_discrimination_loss_impl
 #'
-#' A step of the gan_an_native implementation. Called by \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}.
+#' A step of the gan_an_native implementation. Called by
+#' \code{.gan_an_anomaly_score_impl}, \code{discrimination_loss}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -155,8 +163,11 @@
 #' @param lam Passed to \code{.gan_an_anomaly_score_impl}. Defaults to \code{0.1}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
-#' @param step_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction}, \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step}, \code{method}, \code{note}.
+#' @param step_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.05}.
+#' @return A list with \code{estimate}, \code{score}, \code{z}, \code{reconstruction},
+#' \code{loss_history}, \code{residual}, \code{discrimination}, \code{final_step},
+#' \code{method}, \code{note}.
 #' @export
 morie_gan_an <- function(x, generator, feature_fn, z_dim, steps = 200,
                          lr = 0.05, lam = 0.1, seed = 0, h = 1e-4,
@@ -307,7 +318,8 @@ residual_map <- function(x, g_z, shape = NULL) {
 #'
 #' @param normal_scores Passed to \code{.gan_an_as_num}.
 #' @param anomalous_scores Passed to \code{.gan_an_as_num}.
-#' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous}, \code{separated}, \code{note}.
+#' @return A list with \code{auc}, \code{mean_normal}, \code{mean_anomalous},
+#' \code{separated}, \code{note}.
 #' @export
 score_separation <- function(normal_scores, anomalous_scores) {
   a <- .gan_an_as_num(normal_scores)
@@ -339,6 +351,9 @@ score_separation <- function(normal_scores, anomalous_scores) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .gan_an_cheatsheet()
+#' res
 .gan_an_cheatsheet <- function() {
   "gan_an: train a GAN on NORMAL data only, then score a query by how well it can be reproduced from that manifold. A GAN has no inverse, so find z by OPTIMISATION with the generator FIXED -- nothing adapts, so an off-manifold image stays badly reconstructed. Two losses: pixel residual, and a discrimination loss on INTERMEDIATE discriminator features (the scalar verdict would give no gradient). The residual map LOCALISES the anomaly. A generator that can reproduce anything scores everything zero -- limited capacity is load-bearing."
 }

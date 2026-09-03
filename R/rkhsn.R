@@ -7,7 +7,11 @@
 #' @param K Gram matrix.
 #'
 #' @return List with ``norm2``, ``norm``, ``n``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Eq. (8.2) p. 254: the squared norm of f in the reproducing kernel Hilbert space is beta'K beta.  Read from the chapter PDF, not recalled.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 8, Eq. (8.2) p. 254: the squared norm of f in
+#' the reproducing kernel Hilbert space is beta'K beta.  Read from the chapter PDF, not
+#' recalled.
 #' @export
 #' @examples
 #' Rkhsnorm(beta = 0.5, K = 5L)

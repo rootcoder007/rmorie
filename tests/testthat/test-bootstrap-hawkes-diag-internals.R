@@ -115,7 +115,8 @@ test_that(".hawkes_loglik_poisson matches the closed-form", {
 })
 
 test_that(".hawkes_start returns the right-length init for each kernel", {
-  set.seed(1L); t <- sort(stats::runif(50L, 0, 100))
+  set.seed(1L)
+  t <- sort(stats::runif(50L, 0, 100))
   expect_length(rmorie:::.hawkes_start("exponential", t, 100), 3L)
   expect_length(rmorie:::.hawkes_start("weibull", t, 100), 4L)
   expect_length(rmorie:::.hawkes_start("lomax", t, 100), 4L)

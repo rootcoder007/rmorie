@@ -278,7 +278,8 @@ morie_brr_variance <- function(estimates, full_estimate = NULL, fay_k = 0) {
 #' @param n_quad Coerced to integer by the body, with \code{as.integer}.
 #' @param theta_range Numeric; combined arithmetically in the body.
 #' @param aggregate_first A flag; the body branches on it.
-#' @return A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed}, \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
+#' @return A list with \code{A}, \code{B}, \code{criterion}, \code{a_transformed},
+#' \code{b_transformed}, \code{n_items}, \code{converged}, \code{warnings}.
 #' @export
 .morie_irt_link <- function(a_ref, b_ref, a_focal, b_focal, n_quad,
                             theta_range, aggregate_first) {

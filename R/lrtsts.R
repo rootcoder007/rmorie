@@ -13,11 +13,14 @@
 #' @param group Two distinct labels; the lower sorts to group 1.
 #' @return List with \code{statistic}, \code{p_value}, \code{observed},
 #'   \code{expected}, \code{var}, \code{n}, \code{method}.
-#' @references Mantel (1966), Cancer Chemotherapy Reports 50:163-170; Peto and Peto (1972), JRSS A 135:185-207.  The coded form was read from Therneau's survival package, src/survdiff2.c, rho = 0 branch of the G-rho family.
+#' @references Mantel (1966), Cancer Chemotherapy Reports 50:163-170; Peto and Peto
+#' (1972), JRSS A 135:185-207.  The coded form was read from Therneau's survival package,
+#' src/survdiff2.c, rho = 0 branch of the G-rho family.
 #' @export
 #' @examples
 #' set.seed(1)
-#' r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1, 0.5)); TRUE
+#' r <- Logrank(time = sort(runif(10)), event = rbinom(10, 1, 0.5), group = rbinom(10, 1,
+#' 0.5)); TRUE
 Logrank <- function(time, event, group) {
   time <- .t4_vec(time)
   event <- .t4_vec(event)

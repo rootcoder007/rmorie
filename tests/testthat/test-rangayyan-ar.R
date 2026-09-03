@@ -3,7 +3,9 @@
 # synthetic AR process.
 
 ar1 <- function(n, a1 = 0.8, seed = 7) {
-  x <- 0; s <- seed; out <- numeric(n)
+  x <- 0
+  s <- seed
+  out <- numeric(n)
   for (i in seq_len(n)) {
     s <- (1103515245 * s + 12345) %% 2147483648
     e <- s / 2147483648 - 0.5
@@ -53,7 +55,8 @@ test_that("Lpc gain squared is the prediction error of eq (7.35)", {
 test_that("the Lpc residual whitens a known AR process", {
   r <- Lpc(ar1(4000, 0.85), 2)
   resid <- r$residual[-(1:2)]
-  n <- length(resid); mu <- mean(resid)
+  n <- length(resid)
+  mu <- mean(resid)
   lag1 <- sum((resid[-n] - mu) * (resid[-1] - mu)) / n
   expect_lt(abs(lag1 / (sum((resid - mu)^2) / n)), 0.1)
 })
@@ -83,14 +86,20 @@ test_that("flipping the sign convention moves the poles", {
 })
 
 test_that("ArFit's PSD peaks at the AR resonance", {
-  fs <- 1000; r0 <- 0.95; w0 <- 2 * pi * 100 / fs
-  a1 <- -2 * r0 * cos(w0); a2 <- r0^2
-  s <- 3; h <- c(0, 0); x <- numeric(4000)
+  fs <- 1000
+  r0 <- 0.95
+  w0 <- 2 * pi * 100 / fs
+  a1 <- -2 * r0 * cos(w0)
+  a2 <- r0^2
+  s <- 3
+  h <- c(0, 0)
+  x <- numeric(4000)
   for (i in seq_len(4000)) {
     s <- (1103515245 * s + 12345) %% 2147483648
     e <- s / 2147483648 - 0.5
     v <- e - a1 * h[1] - a2 * h[2]
-    h <- c(v, h[1]); x[i] <- v
+    h <- c(v, h[1])
+    x[i] <- v
   }
   r <- ArFit(x, 6, fs = fs, nfreq = 512)
   expect_equal(r$freqs[which.max(r$psd)], 100, tolerance = 8)
@@ -164,7 +173,9 @@ test_that("ArmaFit returns both polynomials", {
 })
 
 test_that("PcgAr reports one resonance per conjugate pair", {
-  fs <- 1000; n <- 2000; t <- 0:(n - 1)
+  fs <- 1000
+  n <- 2000
+  t <- 0:(n - 1)
   x <- sin(2 * pi * 60 * t / fs) + 0.4 * sin(2 * pi * 180 * t / fs)
   r <- PcgAr(x, fs = fs, order = 8)
   freqs <- vapply(r$resonances, function(d) d$frequency, numeric(1))
@@ -177,10 +188,12 @@ test_that("PcgAr reports one resonance per conjugate pair", {
 
 rr_series <- function(n = 300, mean_rr = 0.8, lf = 0.10, hf = 0.25,
                       amp = 0.02) {
-  rr <- numeric(n); t <- 0
+  rr <- numeric(n)
+  t <- 0
   for (i in seq_len(n)) {
     v <- mean_rr + amp * sin(2 * pi * lf * t) + amp * sin(2 * pi * hf * t)
-    rr[i] <- v; t <- t + v
+    rr[i] <- v
+    t <- t + v
   }
   rr
 }

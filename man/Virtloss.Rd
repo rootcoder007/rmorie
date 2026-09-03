@@ -22,7 +22,8 @@ List with Q, N, W, Qclean, k, nvl.
 N' = N + nvl * pending; W' = W - nvl * pending; Q' = W'/N'.
 }
 \examples{
-Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8), pending = c(1, 2, 3, 4, 5, 6, 7, 8))
+Virtloss(W = c(1, 2, 3, 4, 5, 6, 7, 8), N = c(1, 2, 3, 4, 5, 6, 7, 8),
+  pending = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Chaslot, Winands and van den Herik (2008), Computers and

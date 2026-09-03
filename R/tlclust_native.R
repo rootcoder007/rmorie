@@ -36,7 +36,10 @@
 #' @param Y Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param cluster Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ic Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{estimate}, \code{psi}, \code{se_clustered}, \code{se_naive}, \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note}, \code{naive}, \code{pooled}, \code{sequential}.
+#' @return A list, whose contents depend on the branch taken; across the branches its
+#' names are \code{estimate}, \code{psi}, \code{se_clustered}, \code{se_naive},
+#' \code{ci}, \code{n_clusters}, \code{design_effect}, \code{method}, \code{note},
+#' \code{naive}, \code{pooled}, \code{sequential}.
 #' @export
 morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
   # the LTMLE-with-clustering entry point
@@ -65,7 +68,8 @@ morie_tlclust <- function(Q_seq, H_seq, Y, cluster, ic = NULL) {
 
 #' naive_variance
 #'
-#' A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}.
+#' A step of the tlclust_native implementation. Called by \code{design_effect},
+#' \code{morie_tlclust}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -83,7 +87,8 @@ naive_variance <- function(ic) {
 
 #' cluster_variance
 #'
-#' A step of the tlclust_native implementation. Called by \code{design_effect}, \code{morie_tlclust}.
+#' A step of the tlclust_native implementation. Called by \code{design_effect},
+#' \code{morie_tlclust}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -134,7 +139,8 @@ design_effect <- function(ic, cluster) {
 #' the source it follows.
 #'
 #' @param Q_final Coerced to numeric by the body, with \code{as.numeric}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{parametrization}, \code{note}.
 #' @export
 g_formula_pooled <- function(Q_final, weights = NULL) {
@@ -182,6 +188,9 @@ g_formula_sequential <- function(Q_seq) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlclust_cheatsheet()
+#' res
 .tlclust_cheatsheet <- function() {
   paste("tlclust: PROBIT randomised HOSPITALS because breastfeeding ",
         "cannot be allocated. Hospitalisation is both part of the ",

@@ -34,5 +34,6 @@ Cambridge University Press, ISBN 978-0-521-77920-3. Chs. 2, 5, 7.
 }
 \keyword{internal}
 \examples{
-morie_trmRew_lpo_greater(s = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8), precedence = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_trmRew_lpo_greater(s = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8),
+  precedence = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

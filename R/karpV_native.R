@@ -60,6 +60,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .karpv_xor32(a = A, b = b)
+#' res
 .karpv_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -78,6 +83,10 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .karpv_shl(a = A, k = A)
+#' res
 .karpv_shl <- function(a, k) (a * 2^k) %% .KARPV_2_32
 #' .karpv_shr
 #'
@@ -89,6 +98,10 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .karpv_shr(a = A, k = A)
+#' res
 .karpv_shr <- function(a, k) a %/% 2^k
 
 #' .karpv_rng
@@ -100,6 +113,9 @@
 #' @param seed Numeric; combined arithmetically in the body.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .karpv_rng(seed = 1L)
+#' res
 .karpv_rng <- function(seed) {
   s <- seed %% .KARPV_2_32
   if (s == 0) s <- 2463534242
@@ -163,7 +179,8 @@
 
 #' .karpv_fnode
 #'
-#' A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_grow}, \code{.karpv_replace}.
+#' A step of the karpV_native implementation. Called by \code{.karpv_copy},
+#' \code{.karpv_grow}, \code{.karpv_replace}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -174,7 +191,8 @@
 .karpv_fnode <- function(op, args) list(op = op, args = args)
 #' .karpv_tnode
 #'
-#' A step of the karpV_native implementation. Called by \code{.karpv_copy}, \code{.karpv_random_terminal}.
+#' A step of the karpV_native implementation. Called by \code{.karpv_copy},
+#' \code{.karpv_random_terminal}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -184,7 +202,8 @@
 .karpv_tnode <- function(term) list(term = term)
 #' .karpv_is_term
 #'
-#' A step of the karpV_native implementation. Called by \code{.karpv_collect}, \code{.karpv_copy}, \code{.karpv_pick_point} and 4 others in the module.
+#' A step of the karpV_native implementation. Called by \code{.karpv_collect},
+#' \code{.karpv_copy}, \code{.karpv_pick_point} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -296,7 +315,8 @@ morie_karpV_to_string <- function(node) {
 
 #' .karpv_grow
 #'
-#' A step of the karpV_native implementation. Called by \code{morie_karpV}, \code{morie_karpV_ramped}.
+#' A step of the karpV_native implementation. Called by \code{morie_karpV},
+#' \code{morie_karpV_ramped}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -441,6 +461,10 @@ morie_karpV_ramped <- function(e, n, functions, terminals, erc, max_depth) {
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .karpv_csum(v = x)
+#' res
 .karpv_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -600,7 +624,7 @@ morie_karpV <- function(fitness = NULL, ops = NULL, gens = 20L,
           .karpv_copy(pop[[.karpv_roulette(e, adj, total) + 1L]])
       }
     }
-    pop <- nxt[seq_len(length(pop))]
+    pop <- nxt[seq_along(pop)]
   }
 
   list(best = best,

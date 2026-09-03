@@ -52,5 +52,6 @@ A list with the conditional quantile at each query point, the   survival curve o
 }
 \keyword{internal}
 \examples{
-morie_qsfrgr(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_qsfrgr(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

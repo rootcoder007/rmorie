@@ -6,13 +6,18 @@
 
 #' .morie_rg_aslist
 #'
-#' A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY}, \code{DeltaDecomp} and 10 others in the module.
+#' A step of the rangayyan_ch3 implementation. Called by \code{ContConv}, \code{CovXY},
+#' \code{DeltaDecomp} and 10 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_rg_aslist(x = x)
+#' res
 .morie_rg_aslist <- function(x) {
   if (is.null(x)) {
     return(numeric(0))
@@ -29,6 +34,10 @@
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_rg_gridint(y = y)
+#' res
 .morie_rg_gridint <- function(y, x = NULL) {
   # Composite Simpson on a uniform grid with an even panel count (error
   # O(h^4)); trapezoid otherwise, which is what a non-uniform grid admits
@@ -93,7 +102,8 @@
 
 #' .morie_rg_pdfint
 #'
-#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module.
+#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt},
+#' \code{PdfMean} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -133,7 +143,8 @@
 
 #' .morie_rg_checkpdf
 #'
-#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt}, \code{PdfMean} and 3 others in the module.
+#' A step of the rangayyan_ch3 implementation. Called by \code{DiffEnt}, \code{PdfKurt},
+#' \code{PdfMean} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -358,7 +369,8 @@ Smean <- function(x) {
 #' (3.10) is the population SD, not the N-1 unbiased one.
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
-#' @return A list with \code{rms}, \code{ms}, \code{sd}, \code{mean}, \code{n}, \code{ddof}, \code{method}.
+#' @return A list with \code{rms}, \code{ms}, \code{sd}, \code{mean}, \code{n},
+#' \code{ddof}, \code{method}.
 #' @export
 Srms <- function(x) {
   # eqs (3.8)-(3.10): MS, RMS, SD.  The divisor is N in all three; eq
@@ -382,8 +394,10 @@ Srms <- function(x) {
 #' source it follows.
 #'
 #' @param p Passed to \code{.morie_rg_aslist}.
-#' @param levels Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{entropy}, \code{units}, \code{levels}, \code{max_entropy}, \code{probabilities}, \code{method}.
+#' @param levels Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{entropy}, \code{units}, \code{levels}, \code{max_entropy},
+#' \code{probabilities}, \code{method}.
 #' @export
 Shannon <- function(p, levels = NULL) {
   # eq (3.11): H = - sum p(eta_l) log2 p(eta_l), over L quantized values
@@ -426,7 +440,10 @@ Shannon <- function(p, levels = NULL) {
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param eta Passed to \code{.morie_rg_aslist}.
-#' @return A list with \code{y}, \code{mean_signal}, \code{mean_noise}, \code{mean_observed}, \code{mean_additive}, \code{variance_observed}, \code{variance_additive}, \code{covariance}, \code{correlation}, \code{n}, \code{method}.
+#' @return A list with \code{y}, \code{mean_signal}, \code{mean_noise},
+#' \code{mean_observed}, \code{mean_additive}, \code{variance_observed},
+#' \code{variance_additive}, \code{covariance}, \code{correlation}, \code{n},
+#' \code{method}.
 #' @export
 NoiseModel <- function(x, eta) {
   # eqs (3.12)-(3.14).  Eq (3.14) holds only if x and eta are
@@ -486,7 +503,8 @@ MeanSum <- function(...) {
 #' source it follows.
 #'
 #' @param observations Passed to \code{.morie_rg_aslist}.
-#' @param index Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param index Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{mean}, \code{m}, \code{sd}, \code{se}, \code{method}.
 #' @export
 EnsMean <- function(observations, index = NULL) {
@@ -553,7 +571,8 @@ EnsAvg <- function(observations) {
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param y Passed to \code{.morie_rg_aslist}.
 #' @param ddof Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
-#' @return A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y}, \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
+#' @return A list with \code{covariance}, \code{correlation}, \code{sd_x}, \code{sd_y},
+#' \code{mean_x}, \code{mean_y}, \code{n}, \code{ddof}, \code{method}.
 #' @export
 CovXY <- function(x, y, ddof = 0) {
   # eqs (3.21)-(3.22): C_xy and rho = C_xy / (sigma_x sigma_y)
@@ -585,8 +604,10 @@ CovXY <- function(x, y, ddof = 0) {
 #' is returned instead -- the approximating family, not the delta.
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.
-#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{delta}, \code{t}, \code{width}, \code{height}, \code{undefined_at_zero}, \code{method}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{delta}, \code{t}, \code{width}, \code{height},
+#' \code{undefined_at_zero}, \code{method}.
 #' @export
 DiracDelta <- function(t, width = NULL) {
   # eq (3.24): delta(t) is undefined at t = 0 and 0 elsewhere.  A
@@ -617,7 +638,8 @@ DiracDelta <- function(t, width = NULL) {
 #'
 #' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
 #' @param values Optional; may be \code{NULL}. Passed to \code{.morie_rg_gridint}.
-#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{area}, \code{unit_area}, \code{method}.
 #' @export
 DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
@@ -660,7 +682,8 @@ DeltaArea <- function(t = NULL, values = NULL, width = NULL) {
 #'
 #' @param t Passed to \code{.morie_rg_aslist}.
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric}, \code{half_width}, \code{method}.
+#' @return A list with \code{values}, \code{t}, \code{a}, \code{area_symmetric},
+#' \code{half_width}, \code{method}.
 #' @export
 DeltaLim <- function(t, a) {
   # eq (3.26): delta(t) = 0.5 lim_{a->0} a |t|^(a-1).  The exponent is
@@ -709,7 +732,8 @@ Ustep <- function(t, shift = 0) {
 #' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lower Coerced to numeric by the body, with \code{as.numeric}.
 #' @param upper Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{value}, \code{inside}, \code{t0}, \code{lower}, \code{upper}, \code{method}.
+#' @return A list with \code{value}, \code{inside}, \code{t0}, \code{lower},
+#' \code{upper}, \code{method}.
 #' @export
 Sifting <- function(x, t0, lower, upper) {
   # eq (3.28): integral_{T1}^{T2} x(t) delta(t - to) dt = x(to) if
@@ -735,7 +759,8 @@ Sifting <- function(x, t0, lower, upper) {
 #'
 #' @param x Passed to \code{.morie_rg_aslist}.
 #' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
-#' @return A list with \code{locations}, \code{weights}, \code{amplitudes}, \code{total_weight}, \code{integral}, \code{reconstruction_error}, \code{method}.
+#' @return A list with \code{locations}, \code{weights}, \code{amplitudes},
+#' \code{total_weight}, \code{integral}, \code{reconstruction_error}, \code{method}.
 #' @export
 DeltaDecomp <- function(x, t = NULL) {
   # eq (3.29): x(t) = integral x(alpha) delta(t - alpha) d alpha.  The
@@ -776,7 +801,8 @@ DeltaDecomp <- function(x, t = NULL) {
 #' @param h Passed to \code{.morie_rg_aslist}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param t Optional; may be \code{NULL}. Passed to \code{.morie_rg_aslist}.
-#' @return A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m}, \code{integral}, \code{method}.
+#' @return A list with \code{y}, \code{t}, \code{dt}, \code{n}, \code{m},
+#' \code{integral}, \code{method}.
 #' @export
 ContConv <- function(x, h, dt = 1, t = NULL) {
   # eq (3.30): y(t) = integral x(tau) h(t - tau) d tau.  Tabulated on a
@@ -869,7 +895,8 @@ KDelta <- function(n, shift = 0, amplitude = 1) {
 #'
 #' @param n A vector; its length is taken.
 #' @param shift Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
-#' @return A list with \code{u}, \code{n}, \code{shift}, \code{first_difference}, \code{value_at_origin}, \code{method}.
+#' @return A list with \code{u}, \code{n}, \code{shift}, \code{first_difference},
+#' \code{value_at_origin}, \code{method}.
 #' @export
 StepSeq <- function(n, shift = 0) {
   # eq (3.35): u(n) = 1 for n >= 0, 0 otherwise.  Non-strict, so

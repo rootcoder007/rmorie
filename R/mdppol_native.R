@@ -57,7 +57,8 @@
 #' @param max_eval A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1e+05}.
 #' @param max_improve A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1000}.
 #' @param pi0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve}, \code{n_eval}, \code{policy_stable}, \code{method}.
+#' @return A list with \code{estimate}, \code{policy}, \code{q}, \code{n_improve},
+#' \code{n_eval}, \code{policy_stable}, \code{method}.
 #' @export
 morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
                          max_improve = 1000, pi0 = NULL) {
@@ -70,7 +71,7 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
   tol <- as.numeric(tol)
   max_eval <- as.integer(max_eval)
   max_improve <- as.integer(max_improve)
-  
+
   pol <- rep(1L, S)
   if (!is.null(pi0)) {
     pi0v <- as.numeric(pi0)
@@ -84,7 +85,7 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
   n_eval <- 0L
   stable <- FALSE
   rounds <- 0L
-  
+
   for (rounds in seq_len(max_improve)) {
     # 2. iterative policy evaluation (sweep order s = 1..S)
     for (i in seq_len(max_eval)) {
@@ -123,14 +124,14 @@ morie_mdppol <- function(P, R, gamma, tol = 1e-12, max_eval = 100000,
     }
     if (stable) break
   }
-  
+
   Q <- matrix(0, S, A)
   for (s in seq_len(S)) {
     for (a in seq_len(A)) {
       Q[s, a] <- R[s, a] + gamma * sum(Pm[[a]][s, ] * V)
     }
   }
-  
+
   list(
     estimate = V,
     policy = as.numeric(pol - 1L),
@@ -152,6 +153,9 @@ mdppol <- morie_mdppol
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .mdppol_cheatsheet()
+#' res
 .mdppol_cheatsheet <- function() {
   "mdppol(P, R, gamma) -> optimal policy/V by Howard policy iteration (Sutton-Barto 2018 Sec 4.3)."
 }

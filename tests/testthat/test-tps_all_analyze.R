@@ -149,7 +149,8 @@ test_that("morie_tps_analyze_all returns per-dataset + cross-compare", {
 
 test_that("morie_tps_analyze_all writes per-dataset text dumps", {
   set.seed(1L)
-  td <- tempfile("tps-dump-"); dir.create(td)
+  td <- tempfile("tps-dump-")
+  dir.create(td)
   dfs <- list(Assault = .mk_tps_full(20L, seed = 2L))
   rr <- morie_tps_analyze_all(dfs, out_dir = td)
   expect_true(file.exists(file.path(td, "tps_Assault.txt")))

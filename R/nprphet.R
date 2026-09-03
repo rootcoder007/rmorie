@@ -16,7 +16,8 @@
 #' @param ar_layers Number of autoregressive lags p.
 #' @param n_changepoints Interior trend changepoints at equally spaced quantiles of ds.
 #' @param seasonality Length-2 vector: period and number of Fourier terms.
-#' @return List with \code{estimate}, \code{coef}, \code{fitted}, \code{resid}, \code{rmse}, \code{n}.
+#' @return List with \code{estimate}, \code{coef}, \code{fitted}, \code{resid},
+#' \code{rmse}, \code{n}.
 #' @references Triebe, O. et al. (2021). NeuralProphet: explainable
 #'   forecasting at scale. arXiv:2111.15397.
 #' @export

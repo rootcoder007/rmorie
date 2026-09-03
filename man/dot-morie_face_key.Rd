@@ -16,3 +16,8 @@ A character value.
 Part of the topological_combinatorics_native implementation; see the
 file header for the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_face_key(v = x)
+res
+}

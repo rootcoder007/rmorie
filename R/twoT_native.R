@@ -63,13 +63,19 @@
 
 #' .twoT_as_vec
 #'
-#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits}, \code{morie_twoT_retrieve} and 1 others in the module.
+#' A step of the twoT_native implementation. Called by
+#' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_corrected_logits},
+#' \code{morie_twoT_retrieve} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .twoT_as_vec(v = x)
+#' res
 .twoT_as_vec <- function(v) {
   if (is.null(v)) return(numeric(0))
   if (is.matrix(v)) as.numeric(v)
@@ -78,13 +84,20 @@
 
 #' .twoT_as_mat
 #'
-#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}, \code{morie_twoT_tower_embedding}.
+#' A step of the twoT_native implementation. Called by
+#' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve},
+#' \code{morie_twoT_tower_embedding}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .twoT_as_mat(m = X)
+#' res
 .twoT_as_mat <- function(m) {
   if (is.null(m)) return(matrix(numeric(0), nrow = 0L, ncol = 0L))
   if (is.list(m)) {
@@ -133,7 +146,8 @@ morie_twoT_tower_embedding <- function(features, W, b = NULL, normalise = TRUE) 
 
 #' morie_twoT_corrected_logits
 #'
-#' A step of the twoT_native implementation. Called by \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}.
+#' A step of the twoT_native implementation. Called by
+#' \code{morie_twoT_batch_softmax_loss}, \code{morie_twoT_retrieve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -235,7 +249,8 @@ morie_twoT_streaming_frequency <- function(hits, n_steps, alpha = 0.05,
 #' @param query_embeddings Passed to \code{.twoT_as_mat}.
 #' @param item_embeddings Passed to \code{.twoT_as_mat}.
 #' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
-#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.05}.
 #' @return A list with \code{loss}, \code{per_example}, \code{corrected}.
 #' @export
 morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
@@ -283,7 +298,8 @@ morie_twoT_batch_softmax_loss <- function(query_embeddings, item_embeddings,
 #' @param probabilities Optional; may be \code{NULL}. Passed to \code{.twoT_as_vec}.
 #' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @param temperature Passed to \code{morie_twoT_corrected_logits}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k}, \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{top_k}, \code{uncorrected_top_k},
+#' \code{scores}, \code{corrected_scores}, \code{changed}, \code{method}, \code{note}.
 #' @export
 morie_twoT_retrieve <- function(query_embedding, item_embeddings,
                                 probabilities = NULL, top_k = 5,

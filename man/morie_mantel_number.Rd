@@ -10,7 +10,7 @@ morie_mantel_number(n)
 \item{n}{Vertices.}
 }
 \value{
-As \code{\link[=morie_turan_number]{morie_turan_number()}}, with \code{floor_n2_over_4}.
+As \code{morie_turan_number()}, with \code{floor_n2_over_4}.
 }
 \description{
 \eqn{\lfloor n^2/4 \rfloor} edges, attained by the balanced complete
