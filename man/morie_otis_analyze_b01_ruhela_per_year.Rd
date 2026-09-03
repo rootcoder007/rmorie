@@ -21,5 +21,7 @@ morie_otis_analyze_b01_mrm_per_year(data = NULL, out_dir = NULL)
 Per-year full-DLRM on b01 canonical formulation
 }
 \examples{
-\donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+if (requireNamespace("MASS", quietly = TRUE)) {
+  \donttest{ morie_otis_analyze_b01_ruhela_per_year() }
+}
 }

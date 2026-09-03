@@ -45,8 +45,10 @@ doi:10.1145/192844.192905. The collaborative half; implemented in
 }
 \keyword{internal}
 \examples{
-base <- function(data) rowMeans(data)
-consumer <- function(feat) list(score = mean(feat))
-r <- feature_augmentation(base(matrix(1:6, 3, 2)), consumer)
-str(r, max.level = 1)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  base <- function(data) rowMeans(data)
+  consumer <- function(feat) list(score = mean(feat))
+  r <- feature_augmentation(base(matrix(1:6, 3, 2)), consumer)
+  str(r, max.level = 1)
+}
 }

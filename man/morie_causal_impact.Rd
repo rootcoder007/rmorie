@@ -53,8 +53,10 @@ downstream rmorie callers have a stable \code{morie_*} entry point
 to the package.
 }
 \examples{
-morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)), 
-    pre_period = c(1, 5), post_period = c(6, 10))
+if (requireNamespace("CausalImpact", quietly = TRUE) && requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("cobalt", quietly = TRUE) && requireNamespace("survey", quietly = TRUE)) {
+  morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)), 
+      pre_period = c(1, 5), post_period = c(6, 10))
+}
 }
 \references{
 Brodersen KH, Gallusser F, Koehler J, Remy N, Scott SL (2015).

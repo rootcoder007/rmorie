@@ -41,13 +41,15 @@ A result list; see \code{\link{morie_did_2x2}}.
 Adds a third differencing dimension to the standard DiD specification.
 }
 \examples{
-set.seed(1)
-n <- 400
-d <- rbinom(n, 1, 0.5)
-p <- rbinom(n, 1, 0.5)
-s <- rbinom(n, 1, 0.5)
-y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
-df <- data.frame(y = y, d = d, post = p, group = s)
-res <- morie_did_triple_difference(df, "y", "d", "post", "group")
-res$estimate
+if (requireNamespace("bacondecomp", quietly = TRUE)) {
+  set.seed(1)
+  n <- 400
+  d <- rbinom(n, 1, 0.5)
+  p <- rbinom(n, 1, 0.5)
+  s <- rbinom(n, 1, 0.5)
+  y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
+  df <- data.frame(y = y, d = d, post = p, group = s)
+  res <- morie_did_triple_difference(df, "y", "d", "post", "group")
+  res$estimate
+}
 }

@@ -33,9 +33,11 @@ and not comparable across cohorts; supply \code{freq} from a
 reference panel when comparability matters.
 }
 \examples{
-set.seed(1)
-M <- matrix(rbinom(200, 2, 0.3), nrow = 20)
-round(mean(diag(morie_astle_balding_grm(M)$G)), 3)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  M <- matrix(rbinom(200, 2, 0.3), nrow = 20)
+  round(mean(diag(morie_astle_balding_grm(M)$G)), 3)
+}
 }
 \references{
 Astle, W. and Balding, D. J. (2009). Population structure

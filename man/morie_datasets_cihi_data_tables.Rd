@@ -21,7 +21,9 @@ installed this returns a small built-in subset so the function still
 works. Pass any \code{url} to \code{\link{morie_ingest_cihi_xlsx}}.
 }
 \examples{
-cat <- morie_datasets_cihi_data_tables()
-nrow(cat)
-cat$title[1]
+if (requireNamespace("readxl", quietly = TRUE)) {
+  cat <- morie_datasets_cihi_data_tables()
+  nrow(cat)
+  cat$title[1]
+}
 }

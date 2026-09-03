@@ -59,8 +59,10 @@ directly.  Pairs with \code{\link{e_value_rr}} /
 wrappers around the same backend.
 }
 \examples{
-str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
-                             ci_upper = 2.7), max.level = 1)
+if (requireNamespace("tipr", quietly = TRUE)) {
+  str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+                               ci_upper = 2.7), max.level = 1)
+}
 }
 \references{
 VanderWeele, T. J., & Ding, P. (2017). Sensitivity

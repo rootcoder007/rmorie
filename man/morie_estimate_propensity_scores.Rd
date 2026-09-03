@@ -25,6 +25,8 @@ The value of \code{.mor_trim_ps}.
 }
 \keyword{internal}
 \examples{
-df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
-morie_estimate_propensity_scores(df, "t", "x")
+if (requireNamespace("WeightIt", quietly = TRUE)) {
+  df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
+  morie_estimate_propensity_scores(df, "t", "x")
+}
 }

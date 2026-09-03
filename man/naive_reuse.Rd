@@ -20,6 +20,8 @@ A list with \code{estimate}, \code{warning}.
 }
 \keyword{internal}
 \examples{
-r <- naive_reuse(function(idx) list(estimate = mean(idx)), n = 50)
-str(r, max.level = 1)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  r <- naive_reuse(function(idx) list(estimate = mean(idx)), n = 50)
+  str(r, max.level = 1)
+}
 }

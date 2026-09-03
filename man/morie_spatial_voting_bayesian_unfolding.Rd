@@ -29,11 +29,13 @@ Metropolis sampler when smacof is absent).
 Bayesian unfolding (stub) -- Bakker & Poole sampler
 }
 \examples{
-\donttest{
-# Random positive respondent-stimulus dissimilarities; an all-zero
-# matrix is degenerate for the unfolding transform.
-set.seed(1)
-morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+if (requireNamespace("smacof", quietly = TRUE)) {
+  \donttest{
+  # Random positive respondent-stimulus dissimilarities; an all-zero
+  # matrix is degenerate for the unfolding transform.
+  set.seed(1)
+  morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+  }
 }
 }
 \references{

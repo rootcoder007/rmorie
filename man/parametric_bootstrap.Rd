@@ -41,11 +41,13 @@ rather than from the empirical sample. Delegates to
 otherwise uses an inline \code{rnorm/rpois/rbinom/rexp/rgamma} loop.
 }
 \examples{
-set.seed(1)
-str(parametric_bootstrap(rnorm(40),
-  statistic = mean,
-  n_boot = 200L
-), max.level = 1)
+if (requireNamespace("boot", quietly = TRUE)) {
+  set.seed(1)
+  str(parametric_bootstrap(rnorm(40),
+    statistic = mean,
+    n_boot = 200L
+  ), max.level = 1)
+}
 }
 \seealso{
 \code{boot::boot}.

@@ -54,12 +54,14 @@ no-op on another with larger effects or more data. Sweep it and watch
 the leaf count.
 }
 \examples{
-set.seed(1)
-X <- matrix(rnorm(1200), ncol = 4)
-D <- rbinom(300, 1, 0.5)
-y <- X[, 2] + ifelse(X[, 1] > 0, 2, -2) * D + rnorm(300, 0, 0.5)
-r <- morie_egregious_loss_forest(y, D, X, n_trees = 40)
-round(mean(r$cate[X[, 1] > 0], na.rm = TRUE), 2)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  X <- matrix(rnorm(1200), ncol = 4)
+  D <- rbinom(300, 1, 0.5)
+  y <- X[, 2] + ifelse(X[, 1] > 0, 2, -2) * D + rnorm(300, 0, 0.5)
+  r <- morie_egregious_loss_forest(y, D, X, n_trees = 40)
+  round(mean(r$cate[X[, 1] > 0], na.rm = TRUE), 2)
+}
 }
 \references{
 Athey, S., Tibshirani, J. and Wager, S. (2019).

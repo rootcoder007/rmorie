@@ -15,6 +15,8 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-res <- .rmorie_random_bytes_impl(n = 3L)
-res
+if (morie_crypto_sodium_available()) {
+  res <- .rmorie_random_bytes_impl(n = 3L)
+  res
+}
 }

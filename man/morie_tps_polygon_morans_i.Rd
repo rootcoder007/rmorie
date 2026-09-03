@@ -40,13 +40,15 @@ standardised weights matrix on those centroids. Falls back to a
 \pkg{sf} is unavailable.
 }
 \examples{
-set.seed(2026)
-polys <- data.frame(
-  HOOD_ID = letters[1:16],
-  lat = rep(43.6 + (0:3) * 0.02, 4),
-  lon = rep(-79.4 + (0:3) * 0.02, each = 4),
-  ASSAULT_RATE_2024 = rpois(16, 30)
-)
-morie_tps_polygon_morans_i(polys, value_col = "ASSAULT_RATE_2024",
-  centroid_lat_col = "lat", centroid_lon_col = "lon")
+if (requireNamespace("sf", quietly = TRUE)) {
+  set.seed(2026)
+  polys <- data.frame(
+    HOOD_ID = letters[1:16],
+    lat = rep(43.6 + (0:3) * 0.02, 4),
+    lon = rep(-79.4 + (0:3) * 0.02, each = 4),
+    ASSAULT_RATE_2024 = rpois(16, 30)
+  )
+  morie_tps_polygon_morans_i(polys, value_col = "ASSAULT_RATE_2024",
+    centroid_lat_col = "lat", centroid_lon_col = "lon")
+}
 }

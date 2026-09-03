@@ -26,12 +26,14 @@ same glm-based start), so the fitted log-likelihood matches
 \code{MASS::polr} to optimiser tolerance.
 }
 \examples{
-set.seed(4)
-n <- 250; x <- rnorm(n)
-yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
-yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
-fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
-fit$zeta
+if (requireNamespace("MASS", quietly = TRUE)) {
+  set.seed(4)
+  n <- 250; x <- rnorm(n)
+  yc <- 1 + (runif(n) > plogis(-0.5 - x)) + (runif(n) > plogis(1 - x))
+  yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
+  fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
+  fit$zeta
+}
 }
 \references{
 Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
