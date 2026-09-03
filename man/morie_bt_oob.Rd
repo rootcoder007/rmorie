@@ -33,11 +33,13 @@ complement, which the tests assert. Points in every bag are
 dropped and counted; a large count means B is too small.
 }
 \examples{
-x <- matrix(stats::rnorm(60), 30)
-y <- x[, 1] + stats::rnorm(30)
-fit <- function(Xa, ya) qr.coef(qr(cbind(1, Xa)), ya)
-prd <- function(b, Xn) as.numeric(cbind(1, Xn) \%*\% b)
-morie_bt_oob(x, y, fit, prd, B = 20)$err_oob
+if (morie_crypto_liboqs_available()) {
+  x <- matrix(stats::rnorm(60), 30)
+  y <- x[, 1] + stats::rnorm(30)
+  fit <- function(Xa, ya) qr.coef(qr(cbind(1, Xa)), ya)
+  prd <- function(b, Xn) as.numeric(cbind(1, Xn) \%*\% b)
+  morie_bt_oob(x, y, fit, prd, B = 20)$err_oob
+}
 }
 \references{
 Efron and Tibshirani (1997), \emph{JASA} 92:548-560;

@@ -49,8 +49,10 @@ are dropped, as the book allows; \code{n_dropped} reports how many,
 since a large count means \code{B} is too small.
 }
 \examples{
-X <- matrix(stats::rnorm(150), 50)
-morie_esl_bootstrap_err(X, stats::rnorm(50), B = 20)$err_loo_boot
+if (morie_crypto_liboqs_available()) {
+  X <- matrix(stats::rnorm(150), 50)
+  morie_esl_bootstrap_err(X, stats::rnorm(50), B = 20)$err_loo_boot
+}
 }
 \references{
 Hastie, Tibshirani and Friedman (2009), Sec. 7.11,

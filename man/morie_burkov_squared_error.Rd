@@ -17,6 +17,8 @@ List with \code{errors}.
 Squared error (Burkov Eq 1.2)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_burkov_squared_error(V, V)
+if (morie_crypto_liboqs_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_burkov_squared_error(V, V)
+}
 }
