@@ -18,6 +18,8 @@ list(rmse, mse, mae, bias, n)
 Root mean squared error (ch. 19 p. 566)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_rmse(V, V)
+if (morie_crypto_liboqs_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_rmse(V, V)
+}
 }

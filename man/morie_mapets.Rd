@@ -20,6 +20,8 @@ observation is zero, so zero actuals raise rather than silently
 returning infinity.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_mapets(V, V)
+if (morie_crypto_liboqs_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_mapets(V, V)
+}
 }

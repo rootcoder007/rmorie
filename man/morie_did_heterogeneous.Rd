@@ -45,14 +45,16 @@ Splits the sample by quantiles (or categories) of a moderator and
 estimates separate 2x2 DiDs.
 }
 \examples{
-set.seed(1)
-n <- 600
-d <- rbinom(n, 1, 0.5)
-p <- rbinom(n, 1, 0.5)
-y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-df <- data.frame(y = y, d = d, post = p, mod = rnorm(n))
-out <- morie_did_heterogeneous(df, "y", "d", "post",
-  moderator = "mod", n_quantiles = 3L
-)
-out
+if (morie_crypto_liboqs_available()) {
+  set.seed(1)
+  n <- 600
+  d <- rbinom(n, 1, 0.5)
+  p <- rbinom(n, 1, 0.5)
+  y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
+  df <- data.frame(y = y, d = d, post = p, mod = rnorm(n))
+  out <- morie_did_heterogeneous(df, "y", "d", "post",
+    moderator = "mod", n_quantiles = 3L
+  )
+  out
+}
 }
