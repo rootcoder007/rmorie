@@ -54,16 +54,9 @@ morie_estimate_irm <- function(...) {
 }
 }
 \examples{
-# \dontrun (not \donttest) deliberately: this is an interactive installer
-# prompt -- it errors by design wherever the packages are absent and
-# ask = TRUE cannot prompt (CI, R CMD check), so it is env-dependent.
-\dontrun{
-  # Interactive (RStudio / R console): prompts to install if needed
-  morie_ensure_extras(c("DoubleML", "ranger"))
-
-  # CI / Rscript: errors with install-hint instead of installing
-  morie_ensure_extras(c("DoubleML"), ask = FALSE)
-}
+# Optional extras only; the DML and survey routes are native.
+# Returns invisibly when the package is already present.
+morie_ensure_extras("Rcpp")
 }
 \seealso{
 \code{morie_install_extras()} for the user-facing bulk installer.
