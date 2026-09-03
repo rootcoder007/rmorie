@@ -23,5 +23,7 @@ variables partialled out of \eqn{x_j} only:
 Reproduces \code{ppcor::spcor}.
 }
 \examples{
-morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+if (requireNamespace("randtests", quietly = TRUE)) {
+  morie_semipartial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+}
 }

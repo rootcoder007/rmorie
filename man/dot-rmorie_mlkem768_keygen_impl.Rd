@@ -12,6 +12,8 @@ See the file header for the source the module follows.
 source it follows.
 }
 \examples{
-res <- .rmorie_mlkem768_keygen_impl()
-res
+if (morie_crypto_liboqs_available()) {
+  res <- .rmorie_mlkem768_keygen_impl()
+  res
+}
 }

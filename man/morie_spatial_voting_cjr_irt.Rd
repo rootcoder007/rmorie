@@ -28,11 +28,13 @@ List: \code{ideal_points}, \code{ideal_sd}, \code{discrimination},
 Clinton-Jackman-Rivers Bayesian IRT (stub)
 }
 \examples{
-set.seed(1)
-votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
-fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
-                                    burn_in = 50L)
-head(fit$ideal_points)
+if (requireNamespace("pscl", quietly = TRUE)) {
+  set.seed(1)
+  votes <- matrix(rbinom(200, 1, 0.5), 20, 10)
+  fit <- morie_spatial_voting_cjr_irt(votes, n_samples = 100L,
+                                      burn_in = 50L)
+  head(fit$ideal_points)
+}
 }
 \references{
 Clinton J, Jackman S & Rivers D (2004). The statistical

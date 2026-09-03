@@ -25,6 +25,8 @@ a common hazard, standardised by the hypergeometric variance.
 Equivalent to \code{survival::survdiff} with \code{rho = 0}.
 }
 \examples{
-morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
-  group = c("a", "b", "c"))
+if (requireNamespace("survival", quietly = TRUE)) {
+  morie_logrank_test(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+    group = c("a", "b", "c"))
+}
 }

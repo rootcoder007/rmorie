@@ -35,10 +35,12 @@ Delegates to \code{basicspace::aldmck} when the \code{basicspace} package is
 installed; otherwise a hand-rolled EM/least-squares fallback is used.
 }
 \examples{
-set.seed(1)
-Z <- matrix(rnorm(20 * 5), 20, 5)
-fit <- morie_spatial_voting_aldrich_mckelvey(Z)
-fit$zhat
+if (requireNamespace("basicspace", quietly = TRUE)) {
+  set.seed(1)
+  Z <- matrix(rnorm(20 * 5), 20, 5)
+  fit <- morie_spatial_voting_aldrich_mckelvey(Z)
+  fit$zhat
+}
 }
 \references{
 Aldrich, J. H. and McKelvey, R. D. (1977). "A Method of Scaling with

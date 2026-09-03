@@ -36,9 +36,11 @@ grid, via the normal approximation to the Wilcoxon signed-rank
 statistic.
 }
 \examples{
-set.seed(1)
-df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
-df$y <- df$d * 0.5 + df$x1 + rnorm(60)
-res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
-if (!inherits(res, "try-error")) str(res, max.level = 1)
+if (requireNamespace("EValue", quietly = TRUE) && requireNamespace("rbounds", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
+  df$y <- df$d * 0.5 + df$x1 + rnorm(60)
+  res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
 }

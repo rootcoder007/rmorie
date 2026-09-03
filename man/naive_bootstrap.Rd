@@ -21,8 +21,10 @@ The value of \code{morie_tlboot}.
 }
 \keyword{internal}
 \examples{
-set.seed(1)
-d <- rnorm(50, 1)
-r <- naive_bootstrap(d, estimator = function(s) mean(unlist(s)), B = 200L)
-str(r, max.level = 1)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  d <- rnorm(50, 1)
+  r <- naive_bootstrap(d, estimator = function(s) mean(unlist(s)), B = 200L)
+  str(r, max.level = 1)
+}
 }

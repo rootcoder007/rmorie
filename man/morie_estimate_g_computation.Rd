@@ -38,7 +38,9 @@ from a single \code{stats::glm()} fit with treatment-flipped
 counterfactual datasets.
 }
 \examples{
-set.seed(1)
-df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-morie_estimate_g_computation(df, "t", "y", "x")
+if (requireNamespace("stdReg", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+  morie_estimate_g_computation(df, "t", "y", "x")
+}
 }

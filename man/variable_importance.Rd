@@ -23,11 +23,13 @@ A list with \code{estimate}, \code{importance}, \code{V}, \code{method}.
 }
 \keyword{internal}
 \examples{
-set.seed(3)
-X <- matrix(rnorm(100), 50, 2)
-scr <- function(train) 1:2
-eff <- function(j, hold) list(estimate = mean(X[hold, j]),
-                              ic = X[hold, j] - mean(X[hold, j]))
-r <- variable_importance(X, NULL, scr, eff, V = 5)
-str(r, max.level = 1)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(3)
+  X <- matrix(rnorm(100), 50, 2)
+  scr <- function(train) 1:2
+  eff <- function(j, hold) list(estimate = mean(X[hold, j]),
+                                ic = X[hold, j] - mean(X[hold, j]))
+  r <- variable_importance(X, NULL, scr, eff, V = 5)
+  str(r, max.level = 1)
+}
 }

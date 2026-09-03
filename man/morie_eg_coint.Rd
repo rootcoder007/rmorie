@@ -20,5 +20,7 @@ Named list with \code{adf_statistic, p_value, beta, n, method}.
 Engle-Granger two-step cointegration test
 }
 \examples{
-morie_eg_coint(y1 = rnorm(100), y2 = rnorm(100))
+if (requireNamespace("urca", quietly = TRUE)) {
+  morie_eg_coint(y1 = rnorm(100), y2 = rnorm(100))
+}
 }

@@ -30,9 +30,11 @@ the raw \code{boot} object. Useful when the caller wants to use
 \code{boot::tilt.boot}, \code{boot::jack.after.boot}) directly.
 }
 \examples{
-set.seed(1)
-b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
-str(b, max.level = 1)
+if (requireNamespace("boot", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+  str(b, max.level = 1)
+}
 }
 \seealso{
 \code{morie_boot()}, \code{morie_boot_basic_ci()}.

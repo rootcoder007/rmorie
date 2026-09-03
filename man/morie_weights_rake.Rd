@@ -37,9 +37,11 @@ variable name; each entry is a named numeric vector mapping category values
 (as strings) to target totals.
 }
 \examples{
-set.seed(1)
-df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
-res <- morie_weights_rake(rep(1, 30), df,
-                          list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
-res$converged
+if (requireNamespace("survey", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(g = rep(c("m", "f"), 15), r = rep(c("x", "y", "z"), 10))
+  res <- morie_weights_rake(rep(1, 30), df,
+                            list(g = c(m = 50, f = 50), r = c(x = 30, y = 40, z = 30)))
+  res$converged
+}
 }

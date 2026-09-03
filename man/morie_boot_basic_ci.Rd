@@ -29,9 +29,11 @@ from a \code{boot} object via \code{boot::boot.ci}, returning a
 tidy named list with \verb{(ci_lower, ci_upper)} per requested type.
 }
 \examples{
-set.seed(1)
-b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
-morie_boot_basic_ci(b)
+if (requireNamespace("boot", quietly = TRUE) && requireNamespace("rsample", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+  morie_boot_basic_ci(b)
+}
 }
 \seealso{
 \code{boot::boot.ci}.

@@ -26,11 +26,13 @@ inverse-correlation \code{P0 = delta * I}. Faster convergence than LMS
 at the cost of O(order^2) per sample.
 }
 \examples{
-set.seed(1L)
-x <- rnorm(1000)
-d <- x + 0.01 * rnorm(1000)
-out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
-mean(out$e[200:400]^2)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1L)
+  x <- rnorm(1000)
+  d <- x + 0.01 * rnorm(1000)
+  out <- morie_dsp_rls(x, d, order = 8L, lam = 0.99)
+  mean(out$e[200:400]^2)
+}
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;

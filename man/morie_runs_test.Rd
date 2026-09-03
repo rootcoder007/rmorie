@@ -25,7 +25,9 @@ threshold and counting runs, with the exact normal approximation.
 Reproduces \code{randtests::runs.test}.
 }
 \examples{
-set.seed(1); morie_runs_test(rnorm(50))$p.value
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(1); morie_runs_test(rnorm(50))$p.value
+}
 }
 \references{
 Wald, A., & Wolfowitz, J. (1940). On a test whether two

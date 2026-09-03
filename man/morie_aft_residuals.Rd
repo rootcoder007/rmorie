@@ -26,11 +26,13 @@ against themselves checks Weibull, log-logistic and log-normal with
 the same picture. Departure from the 45-degree line is misfit.
 }
 \examples{
-set.seed(2)
-X <- matrix(rnorm(200), ncol = 2)
-tt <- exp(0.5 + X \%*\% c(0.8, -0.4) - 0.7 * log(rexp(100)))
-f <- morie_aft_weibull(tt, rep(1, 100), X)
-round(mean(morie_aft_residuals(f)$cox_snell), 2)
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(2)
+  X <- matrix(rnorm(200), ncol = 2)
+  tt <- exp(0.5 + X \%*\% c(0.8, -0.4) - 0.7 * log(rexp(100)))
+  f <- morie_aft_weibull(tt, rep(1, 100), X)
+  round(mean(morie_aft_residuals(f)$cox_snell), 2)
+}
 }
 \references{
 Cox, D. R. and Snell, E. J. (1968). A general definition

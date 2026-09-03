@@ -30,5 +30,7 @@ hex digest, or raw with \code{raw = TRUE}.
 HMAC (digest's hmac, natively)
 }
 \examples{
-morie_hmac("key", "The quick brown fox jumps over the lazy dog", algo = "sha256")
+if (requireNamespace("digest", quietly = TRUE)) {
+  morie_hmac("key", "The quick brown fox jumps over the lazy dog", algo = "sha256")
+}
 }

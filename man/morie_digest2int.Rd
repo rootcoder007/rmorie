@@ -18,5 +18,7 @@ an integer vector.
 Bob Jenkins' one-at-a-time hash of strings to integers (digest's digest2int)
 }
 \examples{
-morie_digest2int(c("abc", "def"))
+if (requireNamespace("digest", quietly = TRUE)) {
+  morie_digest2int(c("abc", "def"))
+}
 }

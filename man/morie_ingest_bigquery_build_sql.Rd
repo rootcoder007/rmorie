@@ -39,11 +39,13 @@ clauses (same contract as
 \code{\link{morie_ingest_bigquery_query}}).
 }
 \examples{
-morie_ingest_bigquery_build_sql(
-  project = "bigquery-public-data",
-  dataset = "chicago_crime",
-  table   = "crime",
-  where   = "year = 2024",
-  limit   = 10000L
-)
+if (requireNamespace("bigrquery", quietly = TRUE)) {
+  morie_ingest_bigquery_build_sql(
+    project = "bigquery-public-data",
+    dataset = "chicago_crime",
+    table   = "crime",
+    where   = "year = 2024",
+    limit   = 10000L
+  )
+}
 }

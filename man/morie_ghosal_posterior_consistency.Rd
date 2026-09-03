@@ -33,5 +33,7 @@ Named list with estimate, ks_mean, ks_se, schwartz_bound, n, eps, method.
 Schwartz posterior-consistency diagnostic (Bayesian bootstrap)
 }
 \examples{
-morie_ghosal_posterior_consistency(x = rnorm(50))
+if (requireNamespace("MCMCpack", quietly = TRUE)) {
+  morie_ghosal_posterior_consistency(x = rnorm(50))
+}
 }

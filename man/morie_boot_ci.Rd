@@ -31,9 +31,11 @@ Reproduces \code{boot::boot.ci} for the \code{"norm"},
 \code{boot}'s default).
 }
 \examples{
-set.seed(1)
-b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
-morie_boot_ci(b)
+if (requireNamespace("boot", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+  morie_boot_ci(b)
+}
 }
 \references{
 DiCiccio, T. J., & Efron, B. (1996). Bootstrap

@@ -18,8 +18,10 @@ Counts positive first differences and compares to \eqn{(n-1)/2}.
 Reproduces \code{randtests::difference.sign.test}.
 }
 \examples{
-set.seed(4)
-x <- rnorm(80)
-res <- morie_difference_sign_test(x)
-res$p.value
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(4)
+  x <- rnorm(80)
+  res <- morie_difference_sign_test(x)
+  res$p.value
+}
 }

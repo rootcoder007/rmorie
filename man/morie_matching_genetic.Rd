@@ -43,12 +43,14 @@ Mahalanobis weight matrix maximizing worst-case covariate balance
 \code{details$best_weights}.
 }
 \examples{
-\donttest{
-set.seed(1)
-df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-                 x1 = rnorm(200), x2 = rnorm(200))
-morie_matching_genetic(df, "d", c("x1", "x2"),
-                       pop_size = 50, n_generations = 20)
+if (requireNamespace("MatchIt", quietly = TRUE)) {
+  \donttest{
+  set.seed(1)
+  df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                   x1 = rnorm(200), x2 = rnorm(200))
+  morie_matching_genetic(df, "d", c("x1", "x2"),
+                         pop_size = 50, n_generations = 20)
+  }
 }
 }
 \references{

@@ -17,14 +17,16 @@ Delegates to \code{poolr::tippett} when installed; otherwise
 computes the closed form inline.
 }
 \examples{
-p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
+if (requireNamespace("poolr", quietly = TRUE)) {
+  p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
 
-res <- tippett_combined(p)
-res$statistic                # the minimum p-value
-res$p_value                  # 1 - (1 - min p)^m
+  res <- tippett_combined(p)
+  res$statistic                # the minimum p-value
+  res$p_value                  # 1 - (1 - min p)^m
 
-# Tippett is powerful when a single strong signal is enough (min-p);
-# contrast with Fisher, which aggregates evidence across all tests.
-c(tippett = tippett_combined(p)$p_value,
-  fisher  = fisher_combined(p)$p_value)
+  # Tippett is powerful when a single strong signal is enough (min-p);
+  # contrast with Fisher, which aggregates evidence across all tests.
+  c(tippett = tippett_combined(p)$p_value,
+    fisher  = fisher_combined(p)$p_value)
+}
 }

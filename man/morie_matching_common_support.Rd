@@ -30,12 +30,14 @@ Drops units whose propensity score falls outside the overlap region
 of treated and control units.
 }
 \examples{
-\donttest{
-set.seed(1)
-df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-                 x1 = rnorm(200), x2 = rnorm(200))
-df$propensity_score <- morie_matching_estimate_propensity(df, "d",
-                                                          c("x1", "x2"))
-morie_matching_common_support(df, "d")
+if (requireNamespace("gbm", quietly = TRUE)) {
+  \donttest{
+  set.seed(1)
+  df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                   x1 = rnorm(200), x2 = rnorm(200))
+  df$propensity_score <- morie_matching_estimate_propensity(df, "d",
+                                                            c("x1", "x2"))
+  morie_matching_common_support(df, "d")
+  }
 }
 }

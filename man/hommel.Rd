@@ -20,16 +20,18 @@ An object of class \code{"morie_multiple_testing_result"}.
 Thin wrapper over \code{stats::p.adjust(method = "hommel")}.
 }
 \examples{
-set.seed(1)
-p <- c(runif(30), runif(5, 0, 0.005))
+if (requireNamespace("mutoss", quietly = TRUE)) {
+  set.seed(1)
+  p <- c(runif(30), runif(5, 0, 0.005))
 
-res <- hommel(p)
-res$n_rejected
-head(res$adjusted)
+  res <- hommel(p)
+  res$n_rejected
+  head(res$adjusted)
 
-# Hommel is the most powerful of the stats::p.adjust FWER methods
-# (>= Hochberg), at higher computational cost.
-c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
+  # Hommel is the most powerful of the stats::p.adjust FWER methods
+  # (>= Hochberg), at higher computational cost.
+  c(hommel = hommel(p)$n_rejected, hochberg = hochberg(p)$n_rejected)
 
-hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
+  hommel(c(0.001, 0.01, 0.04), labels = c("A", "B", "C"))$rejected
+}
 }

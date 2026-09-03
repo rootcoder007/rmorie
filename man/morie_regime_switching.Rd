@@ -20,5 +20,7 @@ Fit a constant-mean, switching-variance K-regime Markov-switching
 model by EM (Hamilton filter).
 }
 \examples{
-morie_regime_switching(x = rnorm(50))
+if (requireNamespace("MSwM", quietly = TRUE)) {
+  morie_regime_switching(x = rnorm(50))
+}
 }
