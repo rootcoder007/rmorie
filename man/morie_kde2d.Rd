@@ -26,8 +26,10 @@ Gaussian-kernel 2-D density on a regular grid, matching
 scaling MASS applies).
 }
 \examples{
-set.seed(2)
-x <- rnorm(80); y <- rnorm(80)
-k <- morie_kde2d(x, y, n = 20)
-dim(k$z)
+if (requireNamespace("MASS", quietly = TRUE)) {
+  set.seed(2)
+  x <- rnorm(80); y <- rnorm(80)
+  k <- morie_kde2d(x, y, n = 20)
+  dim(k$z)
+}
 }

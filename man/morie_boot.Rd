@@ -30,9 +30,11 @@ replicate matrix \code{t} matches \code{boot::boot} to the RNG
 stream.
 }
 \examples{
-set.seed(1)
-b <- morie_boot(mtcars$mpg, function(d, i) mean(d[i]), R = 200)
-morie_boot_ci(b, type = "perc")
+if (requireNamespace("boot", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_boot(mtcars$mpg, function(d, i) mean(d[i]), R = 200)
+  morie_boot_ci(b, type = "perc")
+}
 }
 \references{
 Davison, A. C., & Hinkley, D. V. (1997).

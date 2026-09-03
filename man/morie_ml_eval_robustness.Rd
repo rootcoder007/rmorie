@@ -37,12 +37,14 @@ classification report (precision / recall / F1 / support per class)
 on the held-out test set. Mirrors \code{morie.ml.eval_robustness}.
 }
 \examples{
-set.seed(1)
-n <- 80
-X <- data.frame(x1 = rnorm(n), x2 = rnorm(n))
-y <- factor(ifelse(X$x1 + X$x2 + rnorm(n, 0, 0.3) > 0, "yes", "no"))
-idx <- sample.int(n, floor(n * 0.7))
-r <- morie_ml_eval_robustness(X[idx, ], y[idx], X[-idx, ], y[-idx],
-                              n_estimators = 20L)
-r$accuracy
+if (requireNamespace("smotefamily", quietly = TRUE)) {
+  set.seed(1)
+  n <- 80
+  X <- data.frame(x1 = rnorm(n), x2 = rnorm(n))
+  y <- factor(ifelse(X$x1 + X$x2 + rnorm(n, 0, 0.3) > 0, "yes", "no"))
+  idx <- sample.int(n, floor(n * 0.7))
+  r <- morie_ml_eval_robustness(X[idx, ], y[idx], X[-idx, ], y[-idx],
+                                n_estimators = 20L)
+  r$accuracy
+}
 }

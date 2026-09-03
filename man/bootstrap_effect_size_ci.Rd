@@ -31,12 +31,14 @@ A \code{morie_effect_size}.
 Generic bootstrap CI wrapper for any effect-size function
 }
 \examples{
-set.seed(1)
-x <- rnorm(30)
-y <- rnorm(30, mean = 0.6)
-r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
-  x, y,
-  n_boot = 50L
-)
-r$estimate
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  x <- rnorm(30)
+  y <- rnorm(30, mean = 0.6)
+  r <- bootstrap_effect_size_ci(function(a, b) mean(a) - mean(b),
+    x, y,
+    n_boot = 50L
+  )
+  r$estimate
+}
 }

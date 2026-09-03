@@ -38,11 +38,13 @@ weights for the control group so that the weighted moments of the
 covariates match those of the treated group.
 }
 \examples{
-\donttest{
-set.seed(1)
-df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
-                 x1 = rnorm(200), x2 = rnorm(200))
-w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
+if (requireNamespace("ebal", quietly = TRUE)) {
+  \donttest{
+  set.seed(1)
+  df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+                   x1 = rnorm(200), x2 = rnorm(200))
+  w <- morie_matching_entropy_balance(df, "d", c("x1", "x2"))
+  }
 }
 }
 \references{

@@ -18,7 +18,9 @@ Convenience wrapper that returns both formulations side-by-side for
 RDF (Ruhela Dual Formulation) robustness analyses.
 }
 \examples{
-\donttest{
-morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
+if (requireNamespace("readr", quietly = TRUE)) {
+  \donttest{
+  morie_otis_make_pair_alert_to_volatility_all(morie_otis_load())
+  }
 }
 }

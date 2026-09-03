@@ -26,23 +26,25 @@ with \code{n_folds = length(y)}. \code{rsample::loo_cv} is the
 tidymodels equivalent (cross-referenced).
 }
 \examples{
-set.seed(1)
-X <- matrix(rnorm(40), ncol = 2)
-y <- rnorm(20)
-model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
-score_fn <- function(yt, yp) mean((yt - yp)^2)
-predict.lm_lite2 <- function(object, newdata, ...) {
-  drop(cbind(1, newdata) \%*\% object$coef)
+if (requireNamespace("boot", quietly = TRUE) && requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(1)
+  X <- matrix(rnorm(40), ncol = 2)
+  y <- rnorm(20)
+  model_fn <- function(Xt, yt) stats::lm.fit(cbind(1, Xt), yt)
+  score_fn <- function(yt, yp) mean((yt - yp)^2)
+  predict.lm_lite2 <- function(object, newdata, ...) {
+    drop(cbind(1, newdata) \%*\% object$coef)
+  }
+  registerS3method("predict", "lm_lite2", predict.lm_lite2)
+  res <- leave_one_out_cv(X, y,
+    model_fn = function(Xt, yt) {
+      fit <- stats::lm.fit(cbind(1, Xt), yt)
+      structure(list(coef = fit$coefficients), class = "lm_lite2")
+    },
+    score_fn = score_fn
+  )
+  str(res, max.level = 1)
 }
-registerS3method("predict", "lm_lite2", predict.lm_lite2)
-res <- leave_one_out_cv(X, y,
-  model_fn = function(Xt, yt) {
-    fit <- stats::lm.fit(cbind(1, Xt), yt)
-    structure(list(coef = fit$coefficients), class = "lm_lite2")
-  },
-  score_fn = score_fn
-)
-str(res, max.level = 1)
 }
 \seealso{
 \code{rsample::loo_cv}, \code{caret::trainControl}.

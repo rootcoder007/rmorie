@@ -23,18 +23,20 @@ An object of class \code{"morie_multiple_testing_result"}.
 Thin wrapper over \code{stats::p.adjust(method = "BY")}.
 }
 \examples{
-set.seed(1)
-p <- c(runif(80), runif(20, 0, 0.005))
+if (requireNamespace("qvalue", quietly = TRUE)) {
+  set.seed(1)
+  p <- c(runif(80), runif(20, 0, 0.005))
 
-res <- benjamini_yekutieli(p)
-res$n_rejected
-head(res$adjusted)
+  res <- benjamini_yekutieli(p)
+  res$n_rejected
+  head(res$adjusted)
 
-# BY controls FDR under ARBITRARY dependence, so it is more conservative
-# than BH (which assumes independence / positive dependence):
-c(BY = benjamini_yekutieli(p)$n_rejected,
-  BH = benjamini_hochberg(p)$n_rejected)
+  # BY controls FDR under ARBITRARY dependence, so it is more conservative
+  # than BH (which assumes independence / positive dependence):
+  c(BY = benjamini_yekutieli(p)$n_rejected,
+    BH = benjamini_hochberg(p)$n_rejected)
 
-benjamini_yekutieli(p, alpha = 0.10,
-                    labels = paste0("t", seq_along(p)))$n_rejected
+  benjamini_yekutieli(p, alpha = 0.10,
+                      labels = paste0("t", seq_along(p)))$n_rejected
+}
 }

@@ -33,8 +33,10 @@ To refresh the cache from the canonical
 repository script \code{scripts/export_otis_csv.R}.
 }
 \examples{
-\donttest{
-df <- morie_otis_load()
+if (requireNamespace("readr", quietly = TRUE)) {
+  \donttest{
+  df <- morie_otis_load()
+  }
 }
 }
 \seealso{

@@ -23,5 +23,7 @@ A one-row data frame: \code{estimate}, \code{p.value},
 freedom. Reproduces \code{ppcor::pcor.test}.
 }
 \examples{
-morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+if (requireNamespace("ppcor", quietly = TRUE)) {
+  morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+}
 }

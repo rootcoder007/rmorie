@@ -24,7 +24,9 @@ partialled out, computed from the precision matrix
 -P_{ij} / \sqrt{P_{ii} P_{jj}}}. Reproduces \code{ppcor::pcor}.
 }
 \examples{
-morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+if (requireNamespace("ppcor", quietly = TRUE)) {
+  morie_partial_cor(mtcars[, c("mpg", "wt", "disp")])$estimate
+}
 }
 \references{
 Kim, S. (2015). ppcor: An R package for a fast

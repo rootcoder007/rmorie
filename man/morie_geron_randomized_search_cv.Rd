@@ -39,14 +39,16 @@ argsorted stably) and then one draw PER PARAMETER per configuration,
 in the order of \code{param_dist}. \code{std_score} is the ddof = 0 deviation.
 }
 \examples{
-set.seed(3)
-X <- matrix(rnorm(60), 30, 2)
-y <- as.numeric(X[, 1] > 0)
-fs <- function(Xtr, ytr, Xte, yte, params) {
-  b <- qr.solve(cbind(1, as.matrix(Xtr)), as.numeric(ytr))
-  pred <- as.numeric(cbind(1, as.matrix(Xte)) \%*\% b)
-  -mean((pred - yte)^2) * params$w
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(3)
+  X <- matrix(rnorm(60), 30, 2)
+  y <- as.numeric(X[, 1] > 0)
+  fs <- function(Xtr, ytr, Xte, yte, params) {
+    b <- qr.solve(cbind(1, as.matrix(Xtr)), as.numeric(ytr))
+    pred <- as.numeric(cbind(1, as.matrix(Xte)) \%*\% b)
+    -mean((pred - yte)^2) * params$w
+  }
+  morie_geron_randomized_search_cv(X, y, param_dist = list(w = c(0.5, 2)),
+                                   n_iter = 3, K = 3, fit_score = fs)
 }
-morie_geron_randomized_search_cv(X, y, param_dist = list(w = c(0.5, 2)),
-                                 n_iter = 3, K = 3, fit_score = fs)
 }
