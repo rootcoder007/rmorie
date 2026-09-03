@@ -1450,7 +1450,7 @@ Medtestpow <- function(m, n, r, wcrit, g, nodes = 2001) {
     }
     choose(n, i) * .gbSimpson(f, nodes) / beta
   }, 0)
-  power <- if (wcrit > 0L) sum(pmf[1:min(wcrit, n + 1L)]) else 0
+  power <- if (wcrit > 0L) sum(pmf[seq_len(min(wcrit, n + 1L))]) else 0
   list(power = power, pmf = pmf, m = m, n = n, r = r, wcrit = wcrit)
 }
 
@@ -1592,7 +1592,7 @@ Ctrlmedpow <- function(m, n, d, h, nodes = 2001) {
     }
     choose(m, j) * coef * .gbSimpson(f, nodes)
   }, 0)
-  power <- if (d >= 0L) sum(pmf[1:min(d + 1L, m + 1L)]) else 0
+  power <- if (d >= 0L) sum(pmf[seq_len(min(d + 1L, m + 1L))]) else 0
   list(power = power, pmf = pmf, q = as.numeric(h(0.5)), r = r,
        m = m, n = n, d = d)
 }

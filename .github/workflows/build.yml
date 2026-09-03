@@ -32,10 +32,10 @@ name: build
 
 on:
   push:
-    branches: ["main", "release/**"]
+    branches: ["main", "release/**", "feat/native-specializations"]
     tags: ["v*.*.*"]
   pull_request:
-    branches: ["main", "release/**"]
+    branches: ["main", "release/**", "feat/native-specializations"]
   workflow_dispatch:
     inputs:
       publish_container:

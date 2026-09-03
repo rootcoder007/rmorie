@@ -180,7 +180,7 @@ rank_by_similarity <- function(query, corpus_embeddings, top_k = 5) {
   scores <- numeric(nrow(E))
   for (i in seq_len(nrow(E))) scores[i] <- cosine_similarity(query, E[i, ])
   ord <- order(-scores)
-  keep <- ord[1:min(top_k, length(ord))]
+  keep <- ord[seq_len(min(top_k, length(ord)))]
   rk <- cbind(keep, scores[keep])
   colnames(rk) <- c("index", "score")
   list(ranking = rk, n_corpus = nrow(E), forward_passes = 0,

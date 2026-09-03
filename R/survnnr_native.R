@@ -253,7 +253,7 @@ morie_survnnr_fit <- function(X, times, events, hidden = c(),
     gb <- lapply(W, function(M) rep(0.0, nrow(M)))
     for (i in seq_len(n)) {
       delta <- c(gr[i])
-      for (k in length(W):1) {
+      for (k in rev(seq_along(W))) {
         acts_k <- fwd[[i]]$acts[[k]]
         gb[[k]] <- gb[[k]] + delta
         gW[[k]] <- gW[[k]] + delta %o% acts_k

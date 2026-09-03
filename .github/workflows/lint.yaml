@@ -93,13 +93,23 @@ jobs:
       - name: Pre-install r-universe-only dependencies
         run: install.packages(c("rmoriebricklayer", "rmoriedata", "cmdstanr"), repos = c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org"))
         shell: Rscript {0}
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        with:
-          extra-packages: local::.
-          # The Rd checks only load the namespace, so hard dependencies are
-          # enough. Installing Suggests pulled RSQLite, which P3M served as a
-          # source package and pak then refused to build.
-          dependencies: '"hard"'
+      # pak cannot solve the r-universe-only dependencies when restricted to
+      # hard deps, and installing Suggests pulls RSQLite, which P3M serves as
+      # source. The Rd checks run against the SOURCE directory, so install the
+      # hard dependencies directly and skip the solver entirely.
+      - name: Install hard dependencies
+        shell: Rscript {0}
+        run: |
+          d <- read.dcf("DESCRIPTION")
+          fld <- function(f) if (f %in% colnames(d))
+            trimws(sub("\\(.*", "", unlist(strsplit(d[1, f], ",")))) else character(0)
+          hard <- setdiff(c(fld("Depends"), fld("Imports"), fld("LinkingTo")), c("R", ""))
+          have <- rownames(installed.packages())
+          need <- setdiff(c(hard, "pkgload"), have)
+          if (length(need)) install.packages(need)
+          missing <- setdiff(c(hard, "pkgload"), rownames(installed.packages()))
+          if (length(missing)) stop("could not install: ", paste(missing, collapse = ", "))
+          cat("hard dependencies ready:", length(hard), "\n")
 
       - name: Rd consistency (codoc + usage + undocumented args)
         run: |
