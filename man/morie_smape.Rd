@@ -20,6 +20,8 @@ Quoted from p. 569: sMAPE = (1/H) sum_t 200 |e_t| / (|y_t| +
 the magnitudes, not their average.
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_smape(V, V)
+if (morie_crypto_liboqs_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_smape(V, V)
+}
 }

@@ -17,5 +17,7 @@ List with \code{estimate} (final running mean), \code{running_means},
 Law of large numbers: running means (Ch 5, wsmlln)
 }
 \examples{
-morie_wasserman_lln(c(2, 4, 6))$running_means
+if (morie_crypto_liboqs_available()) {
+  morie_wasserman_lln(c(2, 4, 6))$running_means
+}
 }

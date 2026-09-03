@@ -21,5 +21,7 @@ List with \code{estimate} (classical BIC), \code{bic_wasserman},
 BIC of a fitted model (Ch 13.6, wsmbic)
 }
 \examples{
-round(morie_wasserman_bic(-100, 3, 50)$estimate, 6)
+if (morie_crypto_liboqs_available()) {
+  round(morie_wasserman_bic(-100, 3, 50)$estimate, 6)
+}
 }

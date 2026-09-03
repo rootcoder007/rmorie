@@ -17,6 +17,8 @@ List with \code{rmse}, \code{mse}, \code{mae}, \code{residuals}, \code{estimate}
 Root mean squared error (Geron Ch 2, morie.fn hmrms)
 }
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-morie_geron_rmse(V, V)
+if (morie_crypto_liboqs_available()) {
+  V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+  morie_geron_rmse(V, V)
+}
 }
