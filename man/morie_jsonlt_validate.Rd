@@ -15,3 +15,8 @@ morie_jsonlt_validate(txt)
 \description{
 Validate JSON text
 }
+\examples{
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- morie_jsonlt_validate(txt = txt)
+res
+}

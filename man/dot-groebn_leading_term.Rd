@@ -19,3 +19,8 @@ A step of the groebn_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+fn <- function(v) sum(v^2)
+res <- .groebn_leading_term(f = fn)
+res
+}

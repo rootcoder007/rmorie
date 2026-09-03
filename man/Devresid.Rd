@@ -25,7 +25,8 @@ list with the deviance residuals and the martingale residuals they derive from.
 d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
 }
 \examples{
-Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 }
 \references{
 Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.

@@ -8,7 +8,15 @@
 #' @param sigma2_u Variance component of the line effects.
 #'
 #' @return List with ``K_star``, ``n``, ``J``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Eq. (8.9) p. 282: with replicated individuals the model is Y = 1 mu + Z u + e; BGLR cannot take that predictor directly, so the covariance of the predictor, Z K Z', is precomputed and used as the kernel.  Delegates to the chapter routine in morie.fn._gp_core, which was verified against this book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own, re-read against the chapter PDF here.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 8, Eq. (8.9) p. 282: with replicated
+#' individuals the model is Y = 1 mu + Z u + e; BGLR cannot take that predictor directly,
+#' so the covariance of the predictor, Z K Z', is precomputed and used as the kernel.
+#' Delegates to the chapter routine in morie.fn._gp_core, which was verified against this
+#' book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the
+#' page and equation number above are that routine's own, re-read against the chapter PDF
+#' here.
 #' @export
 #' @examples
 #' Kernblup(Z = c(1, 2, 3, 4, 5, 6, 7, 8), K = 5L)

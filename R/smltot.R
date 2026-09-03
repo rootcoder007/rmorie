@@ -19,6 +19,10 @@
 #'   samplingbook 1.2.4, whose Smean uses the same finite-population-
 #'   corrected variance for the mean.
 #' @export
+#' @examples
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- Srstotal(y = b, N = 3L)
+#' res
 Srstotal <- function(y, N, level = 0.95) {
   y <- .t1_vec(y)
   n <- length(y)

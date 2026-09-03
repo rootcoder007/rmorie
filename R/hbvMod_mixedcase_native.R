@@ -59,8 +59,11 @@
 #' @param precip Coerced to numeric by the body, with \code{as.numeric}.
 #' @param temp Coerced to numeric by the body, with \code{as.numeric}.
 #' @param epot Coerced to numeric by the body, with \code{as.numeric}.
-#' @param params A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr}, \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas}, \code{$perc}, \code{$tt}, \code{$uzl} from it.
-#' @param init Optional; may be \code{NULL}. A list; the body reads \code{$slz}, \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
+#' @param params A list; the body reads \code{$beta}, \code{$cfmax}, \code{$cfr},
+#' \code{$fc}, \code{$k0}, \code{$k1}, \code{$k2}, \code{$lp}, \code{$maxbas},
+#' \code{$perc}, \code{$tt}, \code{$uzl} from it.
+#' @param init Optional; may be \code{NULL}. A list; the body reads \code{$slz},
+#' \code{$snow}, \code{$soil}, \code{$suz}, \code{$swater} from it.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_hbvMod <- function(precip, temp, epot, params, init = NULL) {
@@ -195,6 +198,9 @@ hbv_hydrology <- morie_hbvMod
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hbvMod_cheatsheet()
+#' res
 .hbvMod_cheatsheet <- function() {
   "hbvMod: HBV rainfall-runoff (snow/soil/2 GW boxes/MAXBAS routing)"
 }

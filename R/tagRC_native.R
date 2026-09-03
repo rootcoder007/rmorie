@@ -19,7 +19,8 @@
 #' source it follows.
 #'
 #' @param triples A vector; its length is taken.
-#' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples}, \code{note}.
+#' @return A list with \code{adjacency}, \code{nodes}, \code{n_nodes}, \code{n_triples},
+#' \code{note}.
 #' @export
 tripartite_graph <- function(triples) {
   nodes <- character(0)
@@ -183,7 +184,9 @@ adapted_pagerank <- function(adjacency, nodes, p = NULL, d = 0.7,
 #' @param d Passed to \code{adapted_pagerank}. Defaults to \code{0.7}.
 #' @param weight Passed to \code{preference_vector}. Defaults to \code{0.9}.
 #' @param iters Passed to \code{adapted_pagerank}. Defaults to \code{200}.
-#' @return A list with \code{estimate}, \code{ranking}, \code{difference}, \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking}, \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{ranking}, \code{difference},
+#' \code{with_preference}, \code{without_preference}, \code{undifferenced_ranking},
+#' \code{baseline_ranking}, \code{focus}, \code{n_nodes}, \code{method}, \code{note}.
 #' @export
 folkrank <- function(triples, focus, d = 0.7, weight = 0.9, iters = 200) {
   g <- tripartite_graph(triples)
@@ -220,6 +223,9 @@ tagawarerec <- folkrank
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tagRC_cheatsheet()
+#' res
 .tagRC_cheatsheet <- function() {
   paste("tagRC: a folksonomy is (user, tag, resource) TRIPLES, so",
         "the structure is an undirected triadic HYPEREDGE, not a",

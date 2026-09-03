@@ -17,3 +17,7 @@ A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .tl1step_logit(p = 0.5)
+res
+}

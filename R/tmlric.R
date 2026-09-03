@@ -23,7 +23,8 @@
 #'   Laan (2008), IJB 4(1):17.
 #' @export
 #' @examples
-#' Tmlric(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), prevalence = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlric(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' prevalence = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlric <- function(y, D, X, prevalence) {
   y <- as.numeric(y)
   D <- as.numeric(D)

@@ -128,7 +128,8 @@ morie_hadcrut_weights <- function(land_fraction, sea_ice = 0,
 # Area weight of a latitude band: the cosine of its centre.
 #' Area weight of a latitude band: the cosine of its centre
 #'
-#' A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mean}, \code{morie_hadcrut}.
+#' A step of the hadcrut_native implementation. Called by \code{.hadcrut_region_mean},
+#' \code{morie_hadcrut}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

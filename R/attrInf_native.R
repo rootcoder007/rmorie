@@ -98,6 +98,11 @@
 #' @param b Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .attrInf_eq(a = A, b = b)
+#' res
 .attrInf_eq <- function(a, b) {
   if (is.null(a) || is.null(b)) return(is.null(a) && is.null(b))
   isTRUE(a == b)
@@ -388,7 +393,8 @@ confusion_error <- function(C, labels = NULL) {
 #' @param candidates A vector; its length is taken.
 #' @param err Accepted by the signature and not used anywhere in the body.
 #' @param priors A vector; indexed elementwise.
-#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.
+#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{0L}.
 #' @return A list with \code{estimate}, \code{scores}.
 #' @export
 map_invert <- function(model, y, known, candidates, err, priors,
@@ -425,8 +431,10 @@ map_invert <- function(model, y, known, candidates, err, priors,
 #' @param known See Usage.
 #' @param candidates A vector; its length is taken.
 #' @param priors A vector; indexed elementwise.
-#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults to \code{0L}.
-#' @param unknown Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param sensitive Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{0L}.
+#' @param unknown Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{estimate}, \code{scores}, \code{n_paths}, \code{N}.
 #' @export
 wbwc_invert <- function(tree, known, candidates, priors,

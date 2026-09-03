@@ -17,3 +17,7 @@ A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Begg
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .t4_result()
+res
+}

@@ -23,3 +23,9 @@ without optimising over it.  The leave-one-out form is used: the
 own-observation term of a kernel density derivative is identically
 zero only in the limit, and keeping it biases delta toward zero.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .hrz3_ade(X = x, y = y, h = 0.5)
+res
+}

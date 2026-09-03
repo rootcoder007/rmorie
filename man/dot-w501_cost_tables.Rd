@@ -16,3 +16,8 @@ A list with \code{cs}, \code{css}.
 Part of the w501_changepoint_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .w501_cost_tables(x = x)
+res
+}

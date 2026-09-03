@@ -55,7 +55,7 @@ Dgi <- function(G, X, encoder = NULL, seed = 42) {
       agg <- numeric(f)
       for (t in seq_len(f)) {
         s <- 0
-        for (j in seq_len(n)) s <- s + A[i, j] * F[j, t]
+        for (j in seq_len(n)) s <- s + A[i, j] * FALSE[j, t]
         agg[t] <- s / deg
       }
       for (c in seq_len(d)) {

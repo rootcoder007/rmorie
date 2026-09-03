@@ -3,7 +3,9 @@
 # srr BS standards completed by the base-R MCMC engine (R/bayes_mcmc.R).
 
 .bayes_data <- function(n = 120L, b0 = 1, b1 = 2, s = 8L) {
-  set.seed(s); x <- rnorm(n); data.frame(x = x, y = b0 + b1 * x + rnorm(n))
+  set.seed(s)
+  x <- rnorm(n)
+  data.frame(x = x, y = b0 + b1 * x + rnorm(n))
 }
 .bfit <- function(iter = 800L, warmup = 400L, chains = 3L, ...) {
   fit <- morie_bayes_lm(y ~ x, .bayes_data(), chains = chains, iter = iter,
@@ -85,7 +87,8 @@ test_that("BS2.14 warnings can be suppressed with quiet=", {
 })
 
 test_that("BS2.15 sampler errors are caught + returned, not thrown", {
-  d <- .bayes_data(); d$y[1] <- Inf                # makes the log-posterior NaN
+  d <- .bayes_data()
+  d$y[1] <- Inf                # makes the log-posterior NaN
   fit <- morie_bayes_lm(y ~ x, d, chains = 1L, iter = 50L, warmup = 10L,
                         quiet = TRUE)
   expect_false(is.null(fit$error))                 # captured in the result
@@ -93,7 +96,8 @@ test_that("BS2.15 sampler errors are caught + returned, not thrown", {
 })
 
 test_that("BS3.2 perfectly collinear predictors are detected", {
-  d <- .bayes_data(); d$x2 <- d$x                  # duplicate column
+  d <- .bayes_data()
+  d$x2 <- d$x                  # duplicate column
   expect_error(morie_bayes_lm(y ~ x + x2, d, chains = 1L, iter = 50L,
                               warmup = 10L), "collinear|rank")
 })
@@ -141,30 +145,38 @@ test_that("BS5.4 diagnostics report the details of each checker", {
 test_that("BS6.0/BS6.1 default plot method exists + dispatches", {
   expect_true(exists("plot.morie_bayes_fit"))
   f <- .bfit(iter = 200L, warmup = 100L)
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  plot(f); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  plot(f)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 
 test_that("BS6.2 posterior sample sequences (trace) can be plotted", {
   f <- .bfit(iter = 200L, warmup = 100L)
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  morie_bayes_plot(f, type = "trace"); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  morie_bayes_plot(f, type = "trace")
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 
 test_that("BS6.3 posterior densities can be plotted", {
   f <- .bfit(iter = 200L, warmup = 100L)
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  morie_bayes_density(f); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  morie_bayes_density(f)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 
 test_that("BS6.4/BS6.5 plot type selects trace, density, or both", {
   f <- .bfit(iter = 200L, warmup = 100L)
   expect_true("type" %in% names(formals(morie_bayes_plot)))
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  morie_bayes_plot(f, type = "both"); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  morie_bayes_plot(f, type = "both")
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 
@@ -176,7 +188,9 @@ test_that("BS7.0 the generating parameters are recovered", {
 })
 
 test_that("BS7.1 a tight prior with little data recovers the prior", {
-  set.seed(1); d <- data.frame(x = rnorm(6)); d$y <- rnorm(6)  # weak data
+  set.seed(1)
+  d <- data.frame(x = rnorm(6))
+  d$y <- rnorm(6)  # weak data
   f <- morie_bayes_lm(y ~ x, d, prior_sd = 0.05, chains = 2L, iter = 1500L,
                       warmup = 700L, step = 0.05, quiet = TRUE)
   # slope prior is N(0, 0.05); posterior slope is pulled near 0

@@ -126,7 +126,9 @@
 #' @param do A vector; indexed elementwise.
 #' @param query Carried through into a list the body builds.
 #' @param u_support The body requires: candidates is too large; pass a smaller u_support.
-#' @return A list with \code{counterfactual}, \code{factual}, \code{abducted}, \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do}, \code{query}, \code{method}.
+#' @return A list with \code{counterfactual}, \code{factual}, \code{abducted},
+#' \code{n_compatible_u}, \code{counterfactual_unique}, \code{residual}, \code{do},
+#' \code{query}, \code{method}.
 #' @export
 Counterfactual <- function(evidence, equations, exogenous, do, query,
                            u_support = NULL) {

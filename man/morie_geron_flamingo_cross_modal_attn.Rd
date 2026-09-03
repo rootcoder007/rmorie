@@ -29,7 +29,7 @@ List with \code{h_new}, \code{gate}, \code{attention_output},
 }
 \description{
 h_new = h + tanh(alpha) * crossattn(h, visual), the cross-attention
-coming from \code{\link[=morie_geron_cross_attention]{morie_geron_cross_attention()}}.
+coming from \code{morie_geron_cross_attention()}.
 }
 \examples{
 set.seed(1)

@@ -17,3 +17,7 @@ A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tmlcic_logit(p = 0.5)
+res
+}

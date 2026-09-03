@@ -90,8 +90,10 @@ test_that("morie_psymet_omega(nf=1) is silent and bounded (native)", {
   # the psych one-factor warning no longer applies.
   X <- .make_items(n = 60, k = 5, rho = 0.55)
   expect_silent(res <- morie_psymet_omega(X, nf = 1))
-  expect_gte(res$hier, 0); expect_lte(res$hier, 1)
-  expect_gte(res$total, 0); expect_lte(res$total, 1)
+  expect_gte(res$hier, 0)
+  expect_lte(res$hier, 1)
+  expect_gte(res$total, 0)
+  expect_lte(res$total, 1)
 })
 
 # ---------------------------------------------------------------------------

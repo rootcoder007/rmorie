@@ -20,7 +20,8 @@
 
 #' .mor_fp_mix
 #'
-#' A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants}, \code{.mor_fp_morgan}, \code{morie_rdkfp}.
+#' A step of the ecfp4_native implementation. Called by \code{.mor_fp_invariants},
+#' \code{.mor_fp_morgan}, \code{morie_rdkfp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -28,6 +29,10 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_fp_mix(h = 0.5, v = x)
+#' res
 .mor_fp_mix <- function(h, v) (h * .MOR_FP_MUL + (v %% .MOR_FP_MOD)) %% .MOR_FP_MOD
 
 # bond list: 0-based (i, j, order) triples in the Python enumeration
@@ -108,7 +113,8 @@
 
 #' .mor_fp_morgan
 #'
-#' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4}, \code{morie_ecfp6}, \code{morie_fcfp4}.
+#' A step of the ecfp4_native implementation. Called by \code{morie_ecfp4},
+#' \code{morie_ecfp6}, \code{morie_fcfp4}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

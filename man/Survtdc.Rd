@@ -25,7 +25,8 @@ marker ties counting one half -- Antolini, Boracchi and Biganzoli
 (2005) with a scalar marker, equal to Harrell's C truncated at t.
 }
 \examples{
-Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Antolini, L., Boracchi, P. and Biganzoli, E. (2005),

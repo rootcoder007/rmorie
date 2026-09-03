@@ -33,4 +33,3 @@ spmenv <- function(x, w) {
                    "variance_randomization")]
   m
 }
-

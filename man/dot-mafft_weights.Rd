@@ -17,3 +17,7 @@ A step of the mafft_native implementation. Called by \code{iterative_refine}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .mafft_weights(k = 3L)
+res
+}

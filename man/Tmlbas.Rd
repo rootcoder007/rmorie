@@ -30,7 +30,8 @@ Formula: \code{H = D/g - (1 - D)/(1 - g)},
 \code{psi = mean\[Q*(1, W) - Q*(0, W)\]}.
 }
 \examples{
-Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlbas(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  baseline = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Tsiatis, A. A. et al. (2008). Statistics in Medicine

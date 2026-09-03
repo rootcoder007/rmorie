@@ -12,7 +12,9 @@
 
 #' .cgnonl_dot
 #'
-#' A step of the cgnonl_native implementation. Called by \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves}, \code{beta_polak_ribiere} and 2 others in the module.
+#' A step of the cgnonl_native implementation. Called by
+#' \code{.cgnonl_exact_quadratic_step}, \code{beta_fletcher_reeves},
+#' \code{beta_polak_ribiere} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -20,6 +22,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .cgnonl_dot(a = A, b = b)
+#' res
 .cgnonl_dot <- function(a, b) sum(a * b)
 
 #' beta_fletcher_reeves
@@ -241,13 +248,18 @@ line_search_fr <- function(f, grad, x, p, f0, g0, est = NULL,
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param beta Passed to \code{.cgnonl_beta}. Defaults to \code{"fletcher-reeves"}.
 #' @param restart Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @param max_iter Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param max_iter Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param est Passed to \code{line_search_fr}.
-#' @param line_search Compared against \code{"exact-quadratic"}. Defaults to \code{"fletcher-reeves"}.
+#' @param line_search Compared against \code{"exact-quadratic"}. Defaults to
+#' \code{"fletcher-reeves"}.
 #' @param hess_vec Optional; may be \code{NULL}. Passed to \code{.cgnonl_exact_quadratic_step}.
 #' @param keep_path A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter}, \code{n_restart}, \code{n_feval}, \code{converged}, \code{betas}, \code{path}, \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method}, \code{note}.
+#' @return A list with \code{x}, \code{fun}, \code{grad}, \code{gnorm}, \code{n_iter},
+#' \code{n_restart}, \code{n_feval}, \code{converged}, \code{betas}, \code{path},
+#' \code{beta_rule}, \code{line_search}, \code{restart_every}, \code{method},
+#' \code{note}.
 #' @export
 nonlinear_cg <- function(f, grad, x0, beta = "fletcher-reeves",
                          restart = NULL, max_iter = NULL, tol = 1e-10,

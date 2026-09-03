@@ -38,7 +38,8 @@ from consecutive entries, so the input must be one trajectory in time
 order.
 }
 \examples{
-Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8),
+  reward = c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Murphy, S. A. (2003). JRSS B 65(2):331-355; van der Laan,

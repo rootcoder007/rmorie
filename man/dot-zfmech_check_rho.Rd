@@ -17,3 +17,7 @@ A step of the zfmech_native implementation. Called by \code{group_privacy}, \cod
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .zfmech_check_rho(rho = 0.5)
+res
+}

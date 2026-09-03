@@ -25,7 +25,8 @@
 #'   et al. (2014). Journal of Causal Inference 2(2):147-185.
 #' @export
 #' @examples
-#' Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward =
+#' c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlqlc <- function(state, action, reward, time) {
   sv <- as.numeric(state)
   av <- as.numeric(action)

@@ -26,3 +26,9 @@ A step of the cmlmer_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+b <- c(1.5, 2.5, 3.5)
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- morie_cmlmer_compressed_lmm(y = b, M = A, K = A)
+res
+}

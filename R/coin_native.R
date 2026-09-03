@@ -139,7 +139,8 @@
 
 #' .morie_coin_parse
 #'
-#' A step of the coin_native implementation. Called by \code{morie_indep_test}, \code{morie_oneway_test}, \code{morie_wilcox_test}.
+#' A step of the coin_native implementation. Called by \code{morie_indep_test},
+#' \code{morie_oneway_test}, \code{morie_wilcox_test}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -147,6 +148,13 @@
 #' @param data See Usage.
 #' @return A list with \code{y}, \code{x}.
 #' @export
+#' @examples
+#' fml <- y ~ x
+#' df <- data.frame(x = c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), y = c(2.9, 5.1, 6.8,
+#' 9.4, 11.2, 13.1, 15.0, 17.6), g = c('a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'),
+#' stringsAsFactors = FALSE)
+#' res <- .morie_coin_parse(formula = fml, data = df)
+#' res
 .morie_coin_parse <- function(formula, data) {
   mf <- stats::model.frame(formula, data = data)
   y <- mf[[1L]]

@@ -16,7 +16,8 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param causal A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions}, \code{commutes}, \code{causal}, \code{method}.
+#' @return A list with \code{y}, \code{n}, \code{n_x}, \code{n_h}, \code{contributions},
+#' \code{commutes}, \code{causal}, \code{method}.
 #' @export
 LinConv <- function(x, h, causal = TRUE) {
   # eqs (3.36)-(3.37): y(n) = sum_k x(k) h(n-k) = sum_k h(k) x(n-k),
@@ -52,7 +53,8 @@ LinConv <- function(x, h, causal = TRUE) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_difference}, \code{equivalent}, \code{method}.
+#' @return A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined},
+#' \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
 LsiSer <- function(x, h1, h2) {
   # eqs (3.43)-(3.45): s = x*h1, y = s*h2 = x*h, h = h1*h2.  One method,
@@ -84,7 +86,8 @@ LsiSer <- function(x, h1, h2) {
 #' @param x Passed to \code{LsiSer}.
 #' @param h1 Passed to \code{LsiSer}.
 #' @param h2 Passed to \code{LsiSer}.
-#' @return A list with \code{y}, \code{h}, \code{s}, \code{equivalent}, \code{max_difference}, \code{method}.
+#' @return A list with \code{y}, \code{h}, \code{s}, \code{equivalent},
+#' \code{max_difference}, \code{method}.
 #' @export
 LsiSerY <- function(x, h1, h2) {
   # eq (3.44): the cascade output, read off LsiSer rather than convolved
@@ -106,7 +109,8 @@ LsiSerY <- function(x, h1, h2) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h1 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h2 Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{s1}, \code{s2}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_difference}, \code{equivalent}, \code{method}.
+#' @return A list with \code{s1}, \code{s2}, \code{y}, \code{h}, \code{y_via_combined},
+#' \code{max_difference}, \code{equivalent}, \code{method}.
 #' @export
 LsiPar <- function(x, h1, h2) {
   # eqs (3.46)-(3.49): s1 = x*h1, s2 = x*h2, y = s1 + s2 = x*(h1+h2).
@@ -160,7 +164,8 @@ LsiPar2 <- function(x, h2) {
 #' @param x Passed to \code{LsiPar}.
 #' @param h1 Passed to \code{LsiPar}.
 #' @param h2 Passed to \code{LsiPar}.
-#' @return A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent}, \code{max_difference}, \code{method}.
+#' @return A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent},
+#' \code{max_difference}, \code{method}.
 #' @export
 LsiParY <- function(x, h1, h2) {
   # eqs (3.48)-(3.49): the parallel counterpart of eq (3.44) -- here the
@@ -181,9 +186,11 @@ LsiParY <- function(x, h1, h2) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
-#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s}, \code{max_difference}, \code{holds}, \code{method}.
+#' @return A list with \code{y}, \code{Y}, \code{X}, \code{H}, \code{XH}, \code{s},
+#' \code{max_difference}, \code{holds}, \code{method}.
 #' @export
 LtiProd <- function(x, h, s = NULL, omega = NULL, dt = 1) {
   # eqs (3.50), (3.53): convolution in time is multiplication in the s
@@ -255,7 +262,9 @@ PerConv <- function(x, h, npoints = NULL) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param conventional A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param depth Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{carrier}, \code{demodulated}, \code{fc}, \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency}, \code{method}.
+#' @return A list with \code{y}, \code{carrier}, \code{demodulated}, \code{fc},
+#' \code{fs}, \code{suppressed_carrier}, \code{baseband_gain}, \code{image_frequency},
+#' \code{method}.
 #' @export
 AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
   # Section 5.5.1: y(t) = x(t) cos(wc t) -- double-sideband SUPPRESSED
@@ -297,7 +306,9 @@ AmSig <- function(x, fc, fs, conventional = FALSE, depth = 1) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kf Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param amplitude Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{phase}, \code{instantaneous_frequency}, \code{fc}, \code{fs}, \code{kf}, \code{max_instantaneous_frequency}, \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
+#' @return A list with \code{y}, \code{phase}, \code{instantaneous_frequency}, \code{fc},
+#' \code{fs}, \code{kf}, \code{max_instantaneous_frequency},
+#' \code{min_instantaneous_frequency}, \code{aliases}, \code{method}.
 #' @export
 FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
   # Rangayyan names FM as a signal model but prints no equation for it,
@@ -340,7 +351,8 @@ FmSig <- function(m, fc, fs, kf = 1, amplitude = 1) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h A list; the body checks with \code{is.list}.
-#' @return A list with \code{y}, \code{n}, \code{kernel_lengths}, \code{shift_invariant}, \code{method}.
+#' @return A list with \code{y}, \code{n}, \code{kernel_lengths}, \code{shift_invariant},
+#' \code{method}.
 #' @export
 TvLsi <- function(x, h) {
   # A time-variant system needs h(n, m), one response per output instant:

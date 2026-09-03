@@ -45,10 +45,13 @@
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .wrd2v_rng(seed = 1L)
+#' res
 .wrd2v_rng <- function(seed) {
   # SplitMix64 via .ghc_rng: the Python arm is np.random.default_rng(seed)
   # (_array_core _SplitMix64), so the draws here are bit-identical to it
-  e <- new.env(parent=emptyenv())
+  e <- new.env(parent = emptyenv())
   e$state <- .ghc_rng(seed)
   e$random <- function() {
     .ghc_unif(e$state, 1L)
@@ -58,13 +61,18 @@
 
 #' .wrd2v_softmax
 #'
-#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}.
+#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step},
+#' \code{.wrd2v_sg_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .wrd2v_softmax(v = x)
+#' res
 .wrd2v_softmax <- function(v) {
   m <- max(v)
   ex <- exp(v - m)
@@ -91,7 +99,8 @@
 
 #' .wrd2v_cos
 #'
-#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy}, \code{morie_wrd2v_wrd2v}.
+#' A step of the wrd2v_native implementation. Called by \code{morie_wrd2v_analogy},
+#' \code{morie_wrd2v_wrd2v}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -99,6 +108,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .wrd2v_cos(a = A, b = b)
+#' res
 .wrd2v_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -122,12 +136,14 @@
 #' @param hierarchical A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A numeric value.
 #' @export
-morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
-                                            C=NULL, hierarchical=TRUE) {
+morie_wrd2v_training_complexity <- function(architecture, D, V, N = NULL,
+                                            C = NULL, hierarchical = TRUE) {
   # The paper's Q for one training example (eqs. 4-5).
   if (!(architecture %in% .wrd2v_ARCH)) {
-    stop(sprintf("wrd2v: architecture must be one of %s, got %s",
-                 paste(.wrd2v_ARCH, collapse=", "), architecture))
+    stop(sprintf(
+      "wrd2v: architecture must be one of %s, got %s",
+      paste(.wrd2v_ARCH, collapse = ", "), architecture
+    ))
   }
   out <- if (hierarchical) log2(V) else as.numeric(V)
   if (architecture == "cbow") {
@@ -152,11 +168,13 @@ morie_wrd2v_training_complexity <- function(architecture, D, V, N=NULL,
 #' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.75}.
 #' @return The value of \code{stats::setNames}.
 #' @export
-morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
+morie_wrd2v_noise_distribution <- function(counts, power = 0.75) {
   # Pn(w) = U(w)^{3/4} / Z of Mikolov et al. (2013b) 2.2.
   ws <- sort(names(counts))
-  raw <- vapply(ws, function(w) as.numeric(counts[[w]]) ^ as.numeric(power),
-                numeric(1))
+  raw <- vapply(
+    ws, function(w) as.numeric(counts[[w]])^as.numeric(power),
+    numeric(1)
+  )
   z <- sum(raw)
   if (z <= 0.0) {
     stop("wrd2v: noise distribution has no mass")
@@ -174,7 +192,7 @@ morie_wrd2v_noise_distribution <- function(counts, power=0.75) {
 #' @param t Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
+morie_wrd2v_subsample_probability <- function(counts, t = 1e-5) {
   # Discard probability 1 - sqrt(t / f(w)) (2013b eq. 5). Clamped at 0.
   total <- sum(unlist(counts))
   if (total <= 0.0) {
@@ -194,7 +212,8 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 
 #' .wrd2v_scores
 #'
-#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step}, \code{.wrd2v_sg_step}.
+#' A step of the wrd2v_native implementation. Called by \code{.wrd2v_cbow_step},
+#' \code{.wrd2v_sg_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -287,7 +306,7 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 .wrd2v_cbow_step <- function(st, ctx, c, size, V, lr) {
   # CBOW: the projection is the MEAN of the context vectors.
   n <- length(ctx)
-  h <- colSums(st$W[ctx, , drop=FALSE]) / n
+  h <- colSums(st$W[ctx, , drop = FALSE]) / n
   p <- .wrd2v_softmax(.wrd2v_scores(st$O, h))
   loss <- -log(max(p[c], 1e-300))
   e <- p
@@ -295,8 +314,8 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
   gh <- as.numeric(crossprod(st$O, e))
   st$O <- st$O - lr * outer(e, h)
   # the averaging shares the gradient equally across the context
-  st$W[ctx, ] <- st$W[ctx, , drop=FALSE] -
-    matrix(lr * gh / n, n, size, byrow=TRUE)
+  st$W[ctx, ] <- st$W[ctx, , drop = FALSE] -
+    matrix(lr * gh / n, n, size, byrow = TRUE)
   loss
 }
 
@@ -317,28 +336,36 @@ morie_wrd2v_subsample_probability <- function(counts, t=1e-5) {
 #' @param loss One of \code{"neg"}, \code{"softmax"}. Defaults to \code{"softmax"}.
 #' @param negative Passed to \code{.wrd2v_neg_step}. Defaults to \code{5}.
 #' @param noise_power Passed to \code{morie_wrd2v_noise_distribution}. Defaults to \code{0.75}.
-#' @param subsample Optional; may be \code{NULL}. Passed to \code{morie_wrd2v_subsample_probability}.
+#' @param subsample Optional; may be \code{NULL}. Passed to
+#' \code{morie_wrd2v_subsample_probability}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{vectors}, \code{output_vectors}, \code{vocab}, \code{loss_curve}, \code{final_loss}, \code{similarity}, \code{most_similar}, \code{size}, \code{window}, \code{architecture}, \code{loss}, \code{negative}, \code{noise}, \code{method}.
+#' @return A list with \code{estimate}, \code{vectors}, \code{output_vectors},
+#' \code{vocab}, \code{loss_curve}, \code{final_loss}, \code{similarity},
+#' \code{most_similar}, \code{size}, \code{window}, \code{architecture}, \code{loss},
+#' \code{negative}, \code{noise}, \code{method}.
 #' @export
-morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
-                              architecture="skip-gram", lr=0.05, epochs=20,
-                              min_count=1, dynamic_window=TRUE,
-                              loss="softmax", negative=5, noise_power=0.75,
-                              subsample=NULL, seed=0) {
+morie_wrd2v_wrd2v <- function(corpus, size = 16, window = 5,
+                              architecture = "skip-gram", lr = 0.05, epochs = 20,
+                              min_count = 1, dynamic_window = TRUE,
+                              loss = "softmax", negative = 5, noise_power = 0.75,
+                              subsample = NULL, seed = 0) {
   # Train word vectors with CBOW or continuous skip-gram.
   if (!(architecture %in% .wrd2v_ARCH)) {
-    stop(sprintf("wrd2v: architecture must be one of %s, got %s",
-                 paste(.wrd2v_ARCH, collapse=", "), architecture))
+    stop(sprintf(
+      "wrd2v: architecture must be one of %s, got %s",
+      paste(.wrd2v_ARCH, collapse = ", "), architecture
+    ))
   }
   if (!(loss %in% c("softmax", "neg"))) {
     stop(sprintf("wrd2v: loss must be 'softmax' or 'neg', got %s", loss))
   }
   if (loss == "neg" && architecture != "skip-gram") {
-    stop(paste0("wrd2v: negative sampling is defined in Mikolov et al. ",
-                "(2013b) eq. 4 as a replacement for the terms of the ",
-                "SKIP-GRAM objective; use architecture='skip-gram' or ",
-                "loss='softmax'"))
+    stop(paste0(
+      "wrd2v: negative sampling is defined in Mikolov et al. ",
+      "(2013b) eq. 4 as a replacement for the terms of the ",
+      "SKIP-GRAM objective; use architecture='skip-gram' or ",
+      "loss='softmax'"
+    ))
   }
   negative <- as.integer(negative)
   if (loss == "neg" && negative < 1L) {
@@ -364,8 +391,10 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
   }
   vocab <- sort(names(counts)[unlist(counts) >= as.integer(min_count)])
   if (length(vocab) == 0L) {
-    stop(sprintf("wrd2v: min_count = %s discarded every word",
-                 as.character(min_count)))
+    stop(sprintf(
+      "wrd2v: min_count = %s discarded every word",
+      as.character(min_count)
+    ))
   }
   idx <- stats::setNames(seq_along(vocab), vocab)
   V <- length(vocab)
@@ -373,16 +402,20 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
   sents <- lapply(sents, function(s) s[s %in% invocab])
   if (!is.null(subsample)) {
     keep_drop <- morie_wrd2v_subsample_probability(
-      stats::setNames(counts[vocab], vocab), subsample)
+      stats::setNames(counts[vocab], vocab), subsample
+    )
     srng <- .wrd2v_rng(seed + 7)
     sents <- lapply(sents, function(s) {
-      if (length(s) == 0L) return(s)
+      if (length(s) == 0L) {
+        return(s)
+      }
       s[vapply(s, function(w) srng$random() >= keep_drop[[w]], logical(1))]
     })
   }
   rng <- .wrd2v_rng(seed)
   noise <- morie_wrd2v_noise_distribution(
-    stats::setNames(counts[vocab], vocab), noise_power)
+    stats::setNames(counts[vocab], vocab), noise_power
+  )
   cum <- cumsum(vapply(vocab, function(w) noise[[w]], numeric(1)))
   draw_noise <- function() {
     u <- rng$random() * cum[length(cum)]
@@ -399,10 +432,12 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
     lo
   }
   scale <- 0.5 / size
-  st <- new.env(parent=emptyenv())
-  Wvals <- vapply(seq_len(V * size),
-                  function(z) (rng$random() * 2.0 - 1.0) * scale, numeric(1))
-  st$W <- matrix(Wvals, V, size, byrow=TRUE)
+  st <- new.env(parent = emptyenv())
+  Wvals <- vapply(
+    seq_len(V * size),
+    function(z) (rng$random() * 2.0 - 1.0) * scale, numeric(1)
+  )
+  st$W <- matrix(Wvals, V, size, byrow = TRUE)
   st$O <- matrix(0.0, V, size)
   curve <- numeric(0)
   for (ep in seq_len(max(1L, as.integer(epochs)))) {
@@ -432,8 +467,10 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
           n_ex <- n_ex + 1L
         } else if (loss == "neg") {
           for (j in ctx) {
-            total <- total + .wrd2v_neg_step(st, c, j, size, lr, negative,
-                                             draw_noise)
+            total <- total + .wrd2v_neg_step(
+              st, c, j, size, lr, negative,
+              draw_noise
+            )
             n_ex <- n_ex + 1L
           }
         } else {
@@ -447,32 +484,44 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
     curve <- c(curve, if (n_ex > 0L) total / n_ex else 0.0)
   }
   vectors <- stats::setNames(
-    lapply(seq_len(V), function(i) st$W[i, ]), vocab)
+    lapply(seq_len(V), function(i) st$W[i, ]), vocab
+  )
   outv <- stats::setNames(
-    lapply(seq_len(V), function(i) st$O[i, ]), vocab)
+    lapply(seq_len(V), function(i) st$O[i, ]), vocab
+  )
   similarity <- function(a, b) .wrd2v_cos(vectors[[a]], vectors[[b]])
-  most_similar <- function(word, topn=5) {
+  most_similar <- function(word, topn = 5) {
     if (is.null(vectors[[word]])) {
       stop(sprintf("wrd2v: %s is not in the vocabulary", word))
     }
     others <- setdiff(vocab, word)
-    sims <- vapply(others,
-                   function(w) .wrd2v_cos(vectors[[word]], vectors[[w]]),
-                   numeric(1))
+    sims <- vapply(
+      others,
+      function(w) .wrd2v_cos(vectors[[word]], vectors[[w]]),
+      numeric(1)
+    )
     ord <- order(-sims)
-    lapply(ord[seq_len(min(topn, length(ord)))],
-           function(i) list(others[i], sims[i]))
+    lapply(
+      ord[seq_len(min(topn, length(ord)))],
+      function(i) list(others[i], sims[i])
+    )
   }
   list(
-    estimate=vectors, vectors=vectors, output_vectors=outv,
-    vocab=stats::setNames(counts[vocab], vocab), loss_curve=curve,
-    final_loss=if (length(curve) > 0L) curve[length(curve)] else NaN,
-    similarity=similarity, most_similar=most_similar,
-    size=size, window=window, architecture=architecture, loss=loss,
-    negative=if (loss == "neg") negative else 0L, noise=noise,
-    method=paste0("word2vec (Mikolov et al. 2013a secs 3.1-3.2",
-                  if (loss == "neg") "; 2013b eq. 4 negative sampling)"
-                  else ")"))
+    estimate = vectors, vectors = vectors, output_vectors = outv,
+    vocab = stats::setNames(counts[vocab], vocab), loss_curve = curve,
+    final_loss = if (length(curve) > 0L) curve[length(curve)] else NaN,
+    similarity = similarity, most_similar = most_similar,
+    size = size, window = window, architecture = architecture, loss = loss,
+    negative = if (loss == "neg") negative else 0L, noise = noise,
+    method = paste0(
+      "word2vec (Mikolov et al. 2013a secs 3.1-3.2",
+      if (loss == "neg") {
+        "; 2013b eq. 4 negative sampling)"
+      } else {
+        ")"
+      }
+    )
+  )
 }
 
 #' Section 4\'s offset query: b - a + c. The three question words are
@@ -486,7 +535,7 @@ morie_wrd2v_wrd2v <- function(corpus, size=16, window=5,
 #' @param topn Numeric; passed to \code{min}. Defaults to \code{1}.
 #' @return The value of \code{lapply}.
 #' @export
-morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
+morie_wrd2v_analogy <- function(vectors, a, b, c, topn = 1) {
   # Section 4's offset query: b - a + c. The three question words are
   # excluded from the answer.
   for (w in c(a, b, c)) {
@@ -496,11 +545,15 @@ morie_wrd2v_analogy <- function(vectors, a, b, c, topn=1) {
   }
   target <- vectors[[b]] - vectors[[a]] + vectors[[c]]
   words <- setdiff(names(vectors), c(a, b, c))
-  sims <- vapply(words, function(w) .wrd2v_cos(target, vectors[[w]]),
-                 numeric(1))
+  sims <- vapply(
+    words, function(w) .wrd2v_cos(target, vectors[[w]]),
+    numeric(1)
+  )
   ord <- order(-sims)
-  lapply(ord[seq_len(min(topn, length(ord)))],
-         function(i) list(words[i], sims[i]))
+  lapply(
+    ord[seq_len(min(topn, length(ord)))],
+    function(i) list(words[i], sims[i])
+  )
 }
 
 #' morie_wrd2v_cheatsheet

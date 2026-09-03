@@ -48,5 +48,6 @@ with time-varying treatments", Pharmacoepidemiology and Drug Safety 14(7),
 }
 \keyword{internal}
 \examples{
-morie_snmcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_snmcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  treatment_history = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

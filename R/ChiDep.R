@@ -43,6 +43,10 @@ ChiDep <- function(x, y, u = 0.95) {
 #' @param v A vector; its length is taken.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .chidep_ranks01(v = x)
+#' res
 .chidep_ranks01 <- function(v) {
   ord <- order(v)
   r <- numeric(length(v))

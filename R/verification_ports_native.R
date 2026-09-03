@@ -26,7 +26,8 @@
 #'   Mathematik}, 10(3), 177-183.
 #' @export
 #' @examples
-#' morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
+#' morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), lambda = 0.5)
 morie_esl_smoothing_spline <- function(x, y, lambda) {
   x <- as.numeric(x)
   y <- as.numeric(y)

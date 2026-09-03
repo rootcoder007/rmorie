@@ -16,6 +16,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .funmix_rows(x = x)
+#' res
 .funmix_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -131,6 +135,11 @@
 #' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .funmix_cholsolve(A = A, b = b)
+#' res
 .funmix_cholsolve <- function(A, b) {
   Lc <- chol(A)
   as.numeric(backsolve(Lc, forwardsolve(t(Lc), b)))
@@ -150,7 +159,12 @@
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param var_floor Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
-#' @return A list with \code{estimate}, \code{labels}, \code{posterior}, \code{proportions}, \code{coefficients}, \code{variances}, \code{mean_curves}, \code{basis}, \code{knots}, \code{curve_coefficients}, \code{grid}, \code{loglik}, \code{loglik_path}, \code{bic}, \code{aic}, \code{entropy}, \code{n_parameters}, \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{n_basis}, \code{degree}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{labels}, \code{posterior},
+#' \code{proportions}, \code{coefficients}, \code{variances}, \code{mean_curves},
+#' \code{basis}, \code{knots}, \code{curve_coefficients}, \code{grid}, \code{loglik},
+#' \code{loglik_path}, \code{bic}, \code{aic}, \code{entropy}, \code{n_parameters},
+#' \code{iterations}, \code{converged}, \code{K}, \code{n}, \code{n_basis},
+#' \code{degree}, \code{method}, \code{note}.
 #' @export
 morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
                                             degree = 3L, max_iter = 300L,
@@ -309,6 +323,9 @@ morie_funmix_functional_mixture <- function(Y, K, t = NULL, n_basis = 5L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .funmix_cheatsheet()
+#' res
 .funmix_cheatsheet <- function() {
   paste0("funmix: morie_funmix_functional_mixture(Y, K) -> EM clustering of ",
          "curves through a spline basis, canonically ordered components ",

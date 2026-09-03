@@ -295,7 +295,8 @@ leapfrog <- function(theta, r, eps, grad) {
 #' @param grad Passed to \code{leapfrog}.
 #' @param rnd Accepted by the signature and not used anywhere in the body.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param max_doublings Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
+#' @param max_doublings Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{100}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
 find_reasonable_epsilon <- function(theta, logp, grad, rnd,
@@ -391,7 +392,9 @@ no_u_turn <- function(theta_minus, theta_plus, r_minus, r_plus) {
 #' @param grad Passed to \code{leapfrog}.
 #' @param rnd Passed to \code{build_tree}.
 #' @param joint0 Numeric; combined arithmetically in the body.
-#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s}, \code{alpha}, \code{na}.
+#' @return A list, whose contents depend on the branch taken; across the branches its
+#' names are \code{tm}, \code{rm}, \code{tp}, \code{rp}, \code{t_p}, \code{n}, \code{s},
+#' \code{alpha}, \code{na}.
 #' @export
 build_tree <- function(theta, r, logu, v, j, eps, logp, grad, rnd,
                        joint0) {

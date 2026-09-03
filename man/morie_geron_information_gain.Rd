@@ -20,7 +20,7 @@ List with \code{information_gain}, \code{parent_impurity},
 }
 \description{
 IG = H(parent) - (mL/m) H(L) - (mR/m) H(R), impurity via
-\code{\link[=morie_geron_shannon_entropy]{morie_geron_shannon_entropy()}} or \code{\link[=morie_geron_gini_impurity_grgin]{morie_geron_gini_impurity_grgin()}}.
+\code{morie_geron_shannon_entropy()} or \code{morie_geron_gini_impurity_grgin()}.
 }
 \examples{
 y <- c(1, 1, 0, 0, 1, 0, 1, 1)

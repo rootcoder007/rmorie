@@ -33,6 +33,9 @@
 #' @param p A vector; its length is taken.
 #' @return The value of \code{kl}, as built in the body.
 #' @export
+#' @examples
+#' res <- .infmer_kl_from_uniform(p = 0.5)
+#' res
 .infmer_kl_from_uniform <- function(p) {
   n <- length(p)
   if (n == 0L) return(0)
@@ -46,7 +49,8 @@
 
 #' .infmer_sparsity_measure
 #'
-#' A step of the infmer_native implementation. Called by \code{.infmer_select_queries}, \code{morie_infmer}.
+#' A step of the infmer_native implementation. Called by \code{.infmer_select_queries},
+#' \code{morie_infmer}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -54,6 +58,9 @@
 #' @param k A matrix; passed to \code{ncol}.
 #' @return The value of \code{m_scores}, as built in the body.
 #' @export
+#' @examples
+#' res <- .infmer_sparsity_measure(q = 0.5, k = 3L)
+#' res
 .infmer_sparsity_measure <- function(q, k) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -76,6 +83,9 @@
 #' @param c Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' res <- .infmer_select_queries(q = 0.5, k = 3L)
+#' res
 .infmer_select_queries <- function(q, k, c = 5) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   L_Q <- nrow(q)
@@ -98,6 +108,10 @@
 #' @param v A matrix; passed to \code{dim}.
 #' @return A list with \code{output}, \code{attention}, \code{scores}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .infmer_full_attention(q = 0.5, k = 3L, v = x)
+#' res
 .infmer_full_attention <- function(q, k, v) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)
   if (is.null(dim(k))) k <- matrix(k, nrow = 1L)
@@ -163,7 +177,8 @@
 #' @param k A matrix; passed to \code{nrow}.
 #' @param v A matrix; passed to \code{ncol}.
 #' @param c Passed to \code{.infmer_complexity}. Defaults to \code{5}.
-#' @return A list with \code{output}, \code{selected_queries}, \code{n_selected}, \code{sparsity_scores}, \code{complexity}.
+#' @return A list with \code{output}, \code{selected_queries}, \code{n_selected},
+#' \code{sparsity_scores}, \code{complexity}.
 #' @export
 morie_infmer <- function(q, k, v, c = 5) {
   if (is.null(dim(q))) q <- matrix(q, nrow = 1L)

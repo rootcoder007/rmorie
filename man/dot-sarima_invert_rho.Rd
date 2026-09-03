@@ -17,3 +17,7 @@ A step of the sarima_native implementation. Called by \code{moment_estimate}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .sarima_invert_rho(rho = 0.5)
+res
+}

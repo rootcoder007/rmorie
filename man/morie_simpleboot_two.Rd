@@ -24,7 +24,7 @@ A \code{morie_boot} object for the difference statistic.
 Thin pass-through to \code{simpleboot::two.boot} for the
 common two-sample bootstrap-of-a-statistic case (e.g. difference
 of means, ratio of medians). Returns a \code{boot} object the
-user can hand to \code{boot::boot.ci} or \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
+user can hand to \code{boot::boot.ci} or \code{morie_boot_basic_ci()}.
 }
 \examples{
 if (requireNamespace("simpleboot", quietly = TRUE)) {

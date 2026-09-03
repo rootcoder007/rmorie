@@ -15,5 +15,7 @@ A character value.
 }
 \keyword{internal}
 \examples{
-morie_snpqc1_cheatsheet()
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1_cheatsheet()
+}
 }

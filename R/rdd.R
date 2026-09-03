@@ -14,7 +14,8 @@
 #
 # Public R names mirror the Python module under the `morie_rdd_*` prefix.
 
-#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var model.matrix predict quantile complete.cases approx
+#' @importFrom stats lm coef vcov pnorm pt pf pchisq qnorm qt sd var model.matrix predict
+#' quantile complete.cases approx
 NULL
 
 
@@ -103,9 +104,11 @@ NULL
 #'
 #' \itemize{
 #'   \item \code{morie_rdd_kernel_triangular}: \eqn{K(u) = \max(1 - |u|, 0)}{K(u) = max(1 - |u|, 0)}
-#'   \item \code{morie_rdd_kernel_epanechnikov}: \eqn{K(u) = (3/4)(1 - u^2)}{K(u) = 0.75 (1 - u^2)} on |u| <= 1
+#'   \item \code{morie_rdd_kernel_epanechnikov}: \eqn{K(u) = (3/4)(1 - u^2)}{K(u) = 0.75
+#' (1 - u^2)} on |u| <= 1
 #'   \item \code{morie_rdd_kernel_uniform}: \eqn{K(u) = 1/2}{K(u) = 0.5} on |u| <= 1
-#'   \item \code{morie_rdd_kernel_gaussian}: \eqn{K(u) = \phi(u)}{K(u) = phi(u)}, the standard normal density
+#'   \item \code{morie_rdd_kernel_gaussian}: \eqn{K(u) = \phi(u)}{K(u) = phi(u)}, the
+#' standard normal density
 #' }
 #'
 #' @param u Numeric vector of standardised distances from the cutoff
@@ -434,7 +437,9 @@ morie_rdd_bandwidth_cct <- function(x, y, cutoff = 0,
 #' @param cluster Optional cluster column.
 #' @param covariates Optional character vector of covariate names.
 #' @param alpha Significance level.
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(33)
 #' n <- 1500
@@ -468,7 +473,9 @@ morie_rdd_sharp <- function(data, outcome, running, cutoff = 0,
 
 #' Fuzzy RDD treatment effect via instrumented Wald ratio
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(34)
 #' n <- 1000
@@ -639,7 +646,9 @@ morie_rdd_placebo_cutoff <- function(data, outcome, running, true_cutoff,
 
 #' Donut-hole RDD
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(1)
 #' x <- runif(800, -1, 1)
@@ -662,7 +671,9 @@ morie_rdd_donut <- function(data, outcome, running, cutoff = 0, donut = 0,
 
 #' RDD with discrete running variable
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(1)
 #' x <- runif(400, -1, 1)
@@ -746,7 +757,9 @@ morie_rdd_bandwidth_sensitivity <- function(data, outcome, running,
 
 #' Regression kink design -- slope discontinuity at the cutoff
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(45)
 #' n <- 2000
@@ -775,7 +788,8 @@ morie_rdd_kink <- function(data, outcome, running, cutoff = 0,
 
 #' Local-randomisation RDD via permutation in a fixed window
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{p_value},
+#' \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1)
 #' x <- runif(400, -1, 1)
@@ -811,7 +825,9 @@ morie_rdd_local_randomisation <- function(data, outcome, running, cutoff = 0,
 
 #' Geographic / boundary RDD on a signed distance
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat}, \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{estimate}, \code{std_error}, \code{t_stat},
+#' \code{p_value}, \code{ci_lower}, \code{ci_upper}, \code{n_obs}, \code{method},
+#' \code{details}.
 #' @examples
 #' set.seed(1)
 #' n <- 400
@@ -842,7 +858,8 @@ morie_rdd_geographic <- function(data, outcome, distance_to_boundary, side,
 
 #' RDD power calculation
 #' @inheritParams morie_rdd_params
-#' @return A named list with elements \code{power}, \code{std_error}, \code{effective_n}, \code{tau}, \code{sigma}, \code{alpha}.
+#' @return A named list with elements \code{power}, \code{std_error}, \code{effective_n},
+#' \code{tau}, \code{sigma}, \code{alpha}.
 #' @examples
 #' res <- morie_rdd_power(n = 500, tau = 0.5, sigma = 1, kernel = "triangular")
 #' res$power

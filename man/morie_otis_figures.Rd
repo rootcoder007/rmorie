@@ -15,7 +15,7 @@ morie_otis_figures(
 missing). Required; nothing is written anywhere else.}
 
 \item{df}{A b01-schema data.frame. Default loads the shipped
-sample via \code{\link[=morie_sample]{morie_sample()}} (data.ontario.ca, OGL-Ontario).}
+sample via \code{morie_sample()} (data.ontario.ca, OGL-Ontario).}
 
 \item{which}{Figure families: any of \code{"powerlaw"}, \code{"alert_trend"},
 \code{"mortification"}, \code{"age_year"}, \code{"pareto_region"}.}

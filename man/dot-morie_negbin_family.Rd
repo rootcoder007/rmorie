@@ -17,3 +17,8 @@ The value of \code{structure}.
 \description{
 MASS::negative.binomial for the log link path used by glm.nb).
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_negbin_family(theta = x)
+res
+}

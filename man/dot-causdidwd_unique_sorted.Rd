@@ -17,3 +17,8 @@ A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \co
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .causdidwd_unique_sorted(v = x)
+res
+}

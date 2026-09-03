@@ -11,7 +11,8 @@
 
 chain <- function(n = 24) {
   W <- matrix(0, n, n)
-  for (i in 1:(n - 1)) { W[i, i + 1] <- 1; W[i + 1, i] <- 1 }
+  for (i in 1:(n - 1)) { W[i, i + 1] <- 1
+  W[i + 1, i] <- 1 }
   W
 }
 zz <- function(n = 24) sapply(0:(n - 1), function(i) sin(0.7 * i) + 0.3 * cos(0.31 * i))
@@ -60,14 +61,16 @@ test_that("recovers a known rho from simulated CAR data", {
 })
 
 test_that("the two parameterizations are different models", {
-  W <- chain(); z <- zz()
+  W <- chain()
+  z <- zz()
   expect_false(isTRUE(all.equal(sgcar(z, W, NULL, "weighted")$statistic,
                                 sgcar(z, W, NULL, "identity")$statistic)))
   expect_lt(car_rho_bounds(W, "identity")[2], car_rho_bounds(W, "weighted")[2])
 })
 
 test_that("Haining rho_ols matches its closed form", {
-  W <- chain(); z <- zz()
+  W <- chain()
+  z <- zz()
   X <- matrix(1, length(z), 1)
   e <- as.numeric(z - X %*% qr.solve(X, z))
   expect_equal(car_rho_ols(z, W),
@@ -88,14 +91,16 @@ test_that("asymmetric weights are rejected", {
 })
 
 test_that("input validation", {
-  W <- chain(); z <- zz()
+  W <- chain()
+  z <- zz()
   expect_error(sgcar(z[-1], W), "to match")
   expect_error(sgcar(z, W, matrix(1, 5, 1)), "one row per element")
   expect_error(sgcar(z, W, NULL, "nope"), "parameterization")
 })
 
 test_that("spcar delegates and forwards every argument", {
-  W <- chain(); z <- zz()
+  W <- chain()
+  z <- zz()
   X <- cbind(1, seq_along(z) / length(z))
   expect_equal(spcar(z, W)$statistic, sgcar(z, W)$statistic, tolerance = 1e-15)
   expect_equal(spcar(z, W, X)$statistic, sgcar(z, W, X)$statistic, tolerance = 1e-15)

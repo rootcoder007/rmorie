@@ -106,7 +106,8 @@ morie_drift_forecast <- function(y, h = 1) {
 
 #' .morie_ses_run
 #'
-#' A step of the forecast_native implementation. Called by \code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}.
+#' A step of the forecast_native implementation. Called by
+#' \code{morie_joseph_simple_exponential_smoothing}, \code{morie_theta_method}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -182,7 +183,8 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 # One Holt-Winters recursion, additive or multiplicative.
 #' One Holt-Winters recursion, additive or multiplicative
 #'
-#' A step of the forecast_native implementation. Called by \code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}.
+#' A step of the forecast_native implementation. Called by
+#' \code{morie_holt_winters_additive}, \code{morie_holt_winters_mult}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -193,7 +195,9 @@ morie_joseph_simple_exponential_smoothing <- function(y, alpha = NULL,
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @param horizon Optional; may be \code{NULL}. A count; the body uses it as \code{seq_len(...)}.
 #' @param mult A flag; the body branches on it.
-#' @return A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal}, \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma}, \code{period}, \code{horizon}.
+#' @return A list with \code{forecast}, \code{level}, \code{trend}, \code{seasonal},
+#' \code{fitted}, \code{residuals}, \code{sse}, \code{alpha}, \code{beta}, \code{gamma},
+#' \code{period}, \code{horizon}.
 #' @export
 .morie_holt_winters <- function(y, period, alpha, beta, gamma, horizon,
                                 mult) {

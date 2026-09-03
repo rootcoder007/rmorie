@@ -104,6 +104,10 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_stl_ma(v = x, k = 3L)
+#' res
 .mor_stl_ma <- function(v, k) {
   cs <- cumsum(c(0, v))
   (cs[(k + 1L):length(cs)] - cs[seq_len(length(v) - k + 1L)]) / k
@@ -125,13 +129,18 @@
 
 #' .mor_stl_median
 #'
-#' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose}, \code{morie_stlAn}.
+#' A step of the stlAn_native implementation. Called by \code{morie_stl_decompose},
+#' \code{morie_stlAn}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_stl_median(v = x)
+#' res
 .mor_stl_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -210,7 +219,7 @@ morie_stl_decompose <- function(x, period, s_window = 7L, t_window = NULL,
       L1 <- .mor_stl_ma(C, np_)
       L2 <- .mor_stl_ma(L1, np_)
       L3 <- .mor_stl_ma(L2, 3L)
-      lxs <- as.numeric(seq_len(length(L3)))
+      lxs <- as.numeric(seq_along(L3))
       L <- vapply(seq_len(N), function(v)
         .mor_stl_loess_at(lxs, L3, v, n_l, l_degree), numeric(1))
       S <- C[np_ + seq_len(N)] - L

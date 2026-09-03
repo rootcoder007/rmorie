@@ -21,3 +21,8 @@ The value of \code{self}, as built in the body.
 \description{
 the Python _Fun class field-for-field.
 }
+\examples{
+fn <- function(v) sum(v^2)
+res <- .Fun(f = fn)
+res
+}

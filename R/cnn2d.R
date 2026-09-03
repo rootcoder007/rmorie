@@ -4,7 +4,8 @@
 #'
 #' R parity for \code{morie.fn.cnn2d.conv2d_forward}.
 #'
-#' \deqn{y\[i,j\] = \sum_{m,n} w\[m,n\] x\[i s + m, j s + n\] + b}{y\[i,j\] = sum_m,n w\[m,n\] x\[i s + m, j s + n\] + b}
+#' \deqn{y\[i,j\] = \sum_{m,n} w\[m,n\] x\[i s + m, j s + n\] + b}{y\[i,j\] = sum_m,n
+#' w\[m,n\] x\[i s + m, j s + n\] + b}
 #'
 #' @param x Numeric matrix \code{(H, W)}.
 #' @param w Numeric matrix \code{(K_h, K_w)}.

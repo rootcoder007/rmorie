@@ -23,5 +23,6 @@ List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 Lasso cost = MSE + alpha * L1 penalty (Geron Ch 4, morie.fn hmlaso)
 }
 \examples{
-morie_geron_lasso_cost_hmlaso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5, alpha = 0.5)
+morie_geron_lasso_cost_hmlaso(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  theta = 0.5, alpha = 0.5)
 }

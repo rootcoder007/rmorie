@@ -20,5 +20,6 @@ A list with \code{indices}, \code{kind}, \code{n_non_bound}, \code{note}.
 }
 \keyword{internal}
 \examples{
-outer_loop_schedule(alpha = 0.5, C = c(1, 2, 3, 4, 5, 6, 7, 8), examine_all = c(1, 2, 3, 4, 5, 6, 7, 8))
+outer_loop_schedule(alpha = 0.5, C = c(1, 2, 3, 4, 5, 6, 7, 8),
+  examine_all = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -21,5 +21,6 @@ One of two values, depending on the branch taken.
 }
 \keyword{internal}
 \examples{
-n_parameters(n_features = c(1, 2, 3, 4, 5, 6, 7, 8), n_fields = c(1, 2, 3, 4, 5, 6, 7, 8), k_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
+n_parameters(n_features = c(1, 2, 3, 4, 5, 6, 7, 8), n_fields = c(1, 2, 3, 4, 5, 6, 7, 8),
+  k_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

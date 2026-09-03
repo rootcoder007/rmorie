@@ -34,13 +34,18 @@
 
 #' .sctraj_matrix
 #'
-#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_cluster_distances}, \code{morie_sctraj_principal_curve}.
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj},
+#' \code{morie_sctraj_cluster_distances}, \code{morie_sctraj_principal_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sctraj_matrix(X = x)
+#' res
 .sctraj_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -66,6 +71,11 @@
 #' @param b Passed to \code{cbind}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .sctraj_solve(A = A, b = b)
+#' res
 .sctraj_solve <- function(A, b) {
   # Solve A x = b; singular pooled covariance gets the paper's advice.
   n <- nrow(A)
@@ -73,9 +83,11 @@
   for (cc in seq_len(n)) {
     piv <- which.max(abs(M[cc:n, cc])) + cc - 1L
     if (abs(M[piv, cc]) < 1e-12) {
-      stop(paste0("sctraj: the pooled covariance is singular; use ",
-                  "cov='diagonal' as the paper suggests for small ",
-                  "clusters"))
+      stop(paste0(
+        "sctraj: the pooled covariance is singular; use ",
+        "cov='diagonal' as the paper suggests for small ",
+        "clusters"
+      ))
     }
     tmp <- M[cc, ]
     M[cc, ] <- M[piv, ]
@@ -100,18 +112,21 @@
 #' @param X Passed to \code{.sctraj_matrix}.
 #' @param labels Coerced to character by the body, with \code{as.character}.
 #' @param cov One of \code{"diagonal"}, \code{"euclidean"}. Defaults to \code{"full"}.
-#' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param weights Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @return A list with \code{distances}, \code{clusters}, \code{centers}, \code{covariances}.
 #' @export
-morie_sctraj_cluster_distances <- function(X, labels, cov="full",
-                                           weights=NULL) {
+morie_sctraj_cluster_distances <- function(X, labels, cov = "full",
+                                           weights = NULL) {
   # Equation 1: the covariance-scaled distance between clusters.
   # cov="full" uses each cluster's full empirical covariance,
   # "diagonal" its diagonal, "euclidean" drops the scaling. weights
   # accepts cluster membership probabilities.
   if (!(cov %in% .sctraj_COV)) {
-    stop(sprintf("sctraj: cov must be one of %s",
-                 paste(.sctraj_COV, collapse=", ")))
+    stop(sprintf(
+      "sctraj: cov must be one of %s",
+      paste(.sctraj_COV, collapse = ", ")
+    ))
   }
   M <- .sctraj_matrix(X)
   n <- nrow(M)
@@ -140,11 +155,11 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
       stop(sprintf("sctraj: cluster %s has no weight", cl))
     }
     w <- weights[idx]
-    Xi <- M[idx, , drop=FALSE]
+    Xi <- M[idx, , drop = FALSE]
     mu <- as.numeric(crossprod(Xi, w)) / wsum
     S <- matrix(0.0, p, p)
     if (cov != "euclidean" && length(idx) > 1L) {
-      denom <- wsum - sum(w ^ 2) / wsum
+      denom <- wsum - sum(w^2) / wsum
       if (denom <= 1e-12) {
         denom <- 1.0
       }
@@ -157,7 +172,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
     centers[[cl]] <- mu
     covs[[cl]] <- S
   }
-  D <- matrix(0.0, length(nms), length(nms), dimnames=list(nms, nms))
+  D <- matrix(0.0, length(nms), length(nms), dimnames = list(nms, nms))
   for (a in nms) {
     for (b in nms) {
       if (a == b) {
@@ -179,7 +194,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
       D[a, b] <- sqrt(max(d2, 0.0))
     }
   }
-  list(distances=D, clusters=nms, centers=centers, covariances=covs)
+  list(distances = D, clusters = nms, centers = centers, covariances = covs)
 }
 
 #' Prim\'s MST, with the paper\'s optional terminal-state constraint
@@ -192,7 +207,7 @@ morie_sctraj_cluster_distances <- function(X, labels, cov="full",
 #' @param ends Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{edges}, \code{adjacency}, \code{nodes}.
 #' @export
-morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
+morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends = NULL) {
   # Prim's MST, with the paper's optional terminal-state constraint.
   # With ends given, the tree is built on the non-terminal clusters
   # and each terminal is attached to its nearest non-terminal
@@ -222,23 +237,23 @@ morie_sctraj_minimum_spanning_tree <- function(D, clusters, ends=NULL) {
         }
         w <- D[a, b]
         if (is.null(best) || w < best$w) {
-          best <- list(w=w, a=a, b=b)
+          best <- list(w = w, a = a, b = b)
         }
       }
     }
-    edges <- c(edges, list(list(from=best$a, to=best$b, weight=best$w)))
+    edges <- c(edges, list(list(from = best$a, to = best$b, weight = best$w)))
     seen <- c(seen, best$b)
   }
   for (e in ends) {
     near <- inner[which.min(D[e, inner])]
-    edges <- c(edges, list(list(from=near, to=e, weight=D[e, near])))
+    edges <- c(edges, list(list(from = near, to = e, weight = D[e, near])))
   }
   adj <- stats::setNames(vector("list", length(nodes)), nodes)
   for (edge in edges) {
     adj[[edge$from]] <- c(adj[[edge$from]], edge$to)
     adj[[edge$to]] <- c(adj[[edge$to]], edge$from)
   }
-  list(edges=edges, adjacency=adj, nodes=nodes)
+  list(edges = edges, adjacency = adj, nodes = nodes)
 }
 
 #' Every path from root to a leaf, in order
@@ -259,7 +274,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
     stop("sctraj: the root is not a cluster")
   }
   out <- list()
-  stack <- list(list(node=root, path=root))
+  stack <- list(list(node = root, path = root))
   while (length(stack) > 0L) {
     top <- stack[[length(stack)]]
     stack[[length(stack)]] <- NULL
@@ -270,11 +285,13 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
       next
     }
     for (v in kids) {
-      stack <- c(stack, list(list(node=v, path=c(top$path, v))))
+      stack <- c(stack, list(list(node = v, path = c(top$path, v))))
     }
   }
-  keys <- vapply(out, function(pth) paste(pth, collapse="\r"),
-                 character(1))
+  keys <- vapply(
+    out, function(pth) paste(pth, collapse = "\r"),
+    character(1)
+  )
   out[order(keys)]
 }
 
@@ -282,7 +299,8 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 #' .sctraj_arc_length
 #'
-#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_principal_curve}.
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj},
+#' \code{morie_sctraj_principal_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -293,8 +311,8 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
   m <- nrow(curve)
   s <- numeric(m)
   if (m > 1L) {
-    d <- sqrt(rowSums((curve[-1L, , drop=FALSE] -
-                       curve[-m, , drop=FALSE]) ^ 2))
+    d <- sqrt(rowSums((curve[-1L, , drop = FALSE] -
+      curve[-m, , drop = FALSE])^2))
     s[-1L] <- cumsum(d)
   }
   s
@@ -302,7 +320,8 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 
 #' Nearest point on the polyline, and its arc length
 #'
-#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_principal_curve}.
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj},
+#' \code{morie_sctraj_principal_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -326,10 +345,10 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
       t <- min(max(t, 0.0), 1.0)
     }
     proj <- a + t * seg
-    d2 <- sum((point - proj) ^ 2)
+    d2 <- sum((point - proj)^2)
     lam <- s[kk] + t * sqrt(L2)
     if (is.null(best) || d2 < best$d2) {
-      best <- list(d2=d2, lam=lam, proj=proj)
+      best <- list(d2 = d2, lam = lam, proj = proj)
     }
   }
   best
@@ -345,7 +364,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.4}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-.sctraj_smooth <- function(t, y, w, span=0.4) {
+.sctraj_smooth <- function(t, y, w, span = 0.4) {
   # Local linear smoother of y on t -- the "smoothing spline" step,
   # kept simple and weight-aware.
   n <- length(t)
@@ -365,7 +384,7 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
     tm <- sum(w[idx] * t[idx]) / sw
     ym <- sum(w[idx] * y[idx]) / sw
     num <- sum(w[idx] * (t[idx] - tm) * (y[idx] - ym))
-    den <- sum(w[idx] * (t[idx] - tm) ^ 2)
+    den <- sum(w[idx] * (t[idx] - tm)^2)
     slope <- if (den > 1e-12) num / den else 0.0
     out[i] <- ym + slope * (t[i] - tm)
   }
@@ -387,9 +406,9 @@ morie_sctraj_lineages_from_tree <- function(tree, root) {
 #' @param n_knots Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{pseudotime}, \code{curve}, \code{distance}, \code{sse}.
 #' @export
-morie_sctraj_principal_curve <- function(X, init, weights=NULL,
-                                         max_iter=15, tol=1e-3, span=0.4,
-                                         n_knots=NULL) {
+morie_sctraj_principal_curve <- function(X, init, weights = NULL,
+                                         max_iter = 15, tol = 1e-3, span = 0.4,
+                                         n_knots = NULL) {
   # The Hastie-Stuetzle iteration, initialised from a given path.
   # Returns pseudotimes (arc length along the curve, lowest set to
   # zero), the fitted curve as an ordered polyline (matrix), and the
@@ -423,7 +442,7 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
       dist[i] <- sqrt(pr$d2)
     }
     lam <- lam - min(lam)
-    sse <- sum(weights * dist ^ 2)
+    sse <- sum(weights * dist^2)
     if (!is.null(prev) && abs(prev - sse) <= tol * max(prev, 1e-12)) {
       break
     }
@@ -440,7 +459,7 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
       stop("sctraj: a lineage has fewer than two weighted cells")
     }
     ord <- live[order(lam[live])]
-    curve <- fitted[ord, , drop=FALSE]
+    curve <- fitted[ord, , drop = FALSE]
     # collapse duplicate points so the polyline stays well defined
     keep <- 1L
     for (q in seq.int(2L, nrow(curve))) {
@@ -451,15 +470,18 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
     if (length(keep) < 2L) {
       break
     }
-    curve <- curve[keep, , drop=FALSE]
+    curve <- curve[keep, , drop = FALSE]
   }
-  list(pseudotime=lam, curve=curve, distance=dist,
-       sse=sum(weights * dist ^ 2))
+  list(
+    pseudotime = lam, curve = curve, distance = dist,
+    sse = sum(weights * dist^2)
+  )
 }
 
 #' .sctraj_interp
 #'
-#' A step of the sctraj_native implementation. Called by \code{morie_sctraj}, \code{morie_sctraj_average_curve}.
+#' A step of the sctraj_native implementation. Called by \code{morie_sctraj},
+#' \code{morie_sctraj_average_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -497,8 +519,8 @@ morie_sctraj_principal_curve <- function(X, init, weights=NULL,
 #' @param return_grid A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-morie_sctraj_average_curve <- function(curves, n_points=100,
-                                       return_grid=FALSE) {
+morie_sctraj_average_curve <- function(curves, n_points = 100,
+                                       return_grid = FALSE) {
   # Equation 2: c_avg(t) = (1/M) sum_m c_m(t). The common domain is
   # [0, min_m len(c_m)] -- arc lengths, not fractions of a length.
   if (length(curves) == 0L) {
@@ -524,7 +546,7 @@ morie_sctraj_average_curve <- function(curves, n_points=100,
     out[gi, ] <- acc / length(curves)
   }
   if (return_grid) {
-    return(list(curve=out, grid=grid))
+    return(list(curve = out, grid = grid))
   }
   out
 }
@@ -561,7 +583,7 @@ morie_sctraj_cosine_cdf <- function(u) {
 #' @return A numeric value.
 #' @export
 morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
-                                          arg="shifted") {
+                                          arg = "shifted") {
   # Equation 4's weighting function. arg="shifted" (default) puts
   # t - t_min in the numerator, which is what makes the function
   # continuous and non-increasing; "as_printed" uses the literal t.
@@ -632,11 +654,14 @@ morie_sctraj_shrinkage_weight <- function(t, t_min, t_max,
 #' @param weight_arg Passed to \code{morie_sctraj_shrinkage_weight}. Defaults to \code{"shifted"}.
 #' @param span Passed to \code{morie_sctraj_principal_curve}. Defaults to \code{0.4}.
 #' @param n_points Passed to \code{morie_sctraj_average_curve}. Defaults to \code{100}.
-#' @return A list with \code{estimate}, \code{pseudotime}, \code{weights}, \code{lineages}, \code{curves}, \code{tree}, \code{distance}, \code{clusters}, \code{centers}, \code{n_lineages}, \code{root}, \code{cov}, \code{shrink}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{pseudotime}, \code{weights},
+#' \code{lineages}, \code{curves}, \code{tree}, \code{distance}, \code{clusters},
+#' \code{centers}, \code{n_lineages}, \code{root}, \code{cov}, \code{shrink},
+#' \code{method}, \code{note}.
 #' @export
-morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
-                         max_iter=15, shrink=TRUE, weight_arg="shifted",
-                         span=0.4, n_points=100) {
+morie_sctraj <- function(X, labels, root, ends = NULL, cov = "full",
+                         max_iter = 15, shrink = TRUE, weight_arg = "shifted",
+                         span = 0.4, n_points = 100) {
   # Infer lineages and pseudotime (Street et al. 2018). Returns one
   # pseudotime vector and one cell-weight vector per lineage; a
   # cell's weight is its assignment to that lineage, from its
@@ -649,8 +674,10 @@ morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
     stop("sctraj: one label per cell is required")
   }
   info <- morie_sctraj_cluster_distances(M, lab, cov)
-  tree <- morie_sctraj_minimum_spanning_tree(info$distances,
-                                             info$clusters, ends)
+  tree <- morie_sctraj_minimum_spanning_tree(
+    info$distances,
+    info$clusters, ends
+  )
   lins <- morie_sctraj_lineages_from_tree(tree, root)
   if (length(lins) == 0L) {
     stop("sctraj: no lineage runs from the root")
@@ -668,14 +695,15 @@ morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
       stop("sctraj: a lineage has too few cells")
     }
     fit <- morie_sctraj_principal_curve(M, init, member, max_iter,
-                                        span=span)
+      span = span
+    )
     curves[[m]] <- fit$curve
     pts[[m]] <- fit$pseudotime
     dists[[m]] <- fit$distance
   }
   shrunk <- curves
   if (isTRUE(shrink) && length(lins) > 1L) {
-    av <- morie_sctraj_average_curve(curves, n_points, return_grid=TRUE)
+    av <- morie_sctraj_average_curve(curves, n_points, return_grid = TRUE)
     avg <- av$curve
     avg_grid <- av$grid
     for (m in seq_along(lins)) {
@@ -725,8 +753,10 @@ morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
   for (m in seq_along(lins)) {
     col <- numeric(n)
     for (i in seq_len(n)) {
-      best <- min(vapply(seq_along(lins),
-                         function(k) dists[[k]][i], numeric(1)))
+      best <- min(vapply(
+        seq_along(lins),
+        function(k) dists[[k]][i], numeric(1)
+      ))
       if (dists[[m]][i] <= best + 1e-12) {
         col[i] <- 1.0
       } else if (dists[[m]][i] > 0) {
@@ -738,28 +768,32 @@ morie_sctraj <- function(X, labels, root, ends=NULL, cov="full",
     W[[m]] <- col
   }
   list(
-    estimate=pts,
-    pseudotime=pts,
-    weights=W,
-    lineages=lins,
-    curves=shrunk,
-    tree=tree$edges,
-    distance=dists,
-    clusters=info$clusters,
-    centers=info$centers,
-    n_lineages=length(lins),
-    root=root,
-    cov=cov,
-    shrink=isTRUE(shrink),
-    method=paste0("Slingshot (Street et al. 2018): covariance-scaled ",
-                  "MST over cluster centres, then simultaneous ",
-                  "principal curves with recursive averaging and ",
-                  "shrinkage"),
-    note=paste0("Equation 4 is typeset with t, not t - t_min, in the ",
-                "numerator; the default 'shifted' reading is the one ",
-                "that is continuous and non-increasing as the paper ",
-                "states, and weight_arg='as_printed' gives the literal ",
-                "form")
+    estimate = pts,
+    pseudotime = pts,
+    weights = W,
+    lineages = lins,
+    curves = shrunk,
+    tree = tree$edges,
+    distance = dists,
+    clusters = info$clusters,
+    centers = info$centers,
+    n_lineages = length(lins),
+    root = root,
+    cov = cov,
+    shrink = isTRUE(shrink),
+    method = paste0(
+      "Slingshot (Street et al. 2018): covariance-scaled ",
+      "MST over cluster centres, then simultaneous ",
+      "principal curves with recursive averaging and ",
+      "shrinkage"
+    ),
+    note = paste0(
+      "Equation 4 is typeset with t, not t - t_min, in the ",
+      "numerator; the default 'shifted' reading is the one ",
+      "that is continuous and non-increasing as the paper ",
+      "states, and weight_arg='as_printed' gives the literal ",
+      "form"
+    )
   )
 }
 

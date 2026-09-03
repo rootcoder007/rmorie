@@ -105,6 +105,11 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .flxipt_logit_irls(X = x, y = y)
+#' res
 .flxipt_logit_irls <- function(X, y, ridge = 1e-10, penalty = 0,
                                max_iter = 200, tol = 1e-8) {
   X <- as.matrix(X)
@@ -142,6 +147,11 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .flxipt_lstsq(X = x, y = y)
+#' res
 .flxipt_lstsq <- function(X, y, ridge = 1e-10) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -160,6 +170,10 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .flxipt_sigmoid(v = x)
+#' res
 .flxipt_sigmoid <- function(v) {
   v <- pmin(pmax(v, -30), 30)
   1 / (1 + exp(-v))
@@ -208,6 +222,10 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param V Numeric; combined arithmetically in the body.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .flxipt_folds(n = 3L, V = x)
+#' res
 .flxipt_folds <- function(n, V) {
   V <- max(2L, min(as.integer(V), n))
   lapply(0:(V - 1L), function(v) which(seq_len(n) %% V == v))
@@ -223,6 +241,10 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .flxipt_project_simplex(v = x)
+#' res
 .flxipt_project_simplex <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -253,6 +275,12 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 #' @param tol Passed to \code{<}. Defaults to \code{1e-14}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .flxipt_nnls_simplex(Z = X, y = y)
+#' res
 .flxipt_nnls_simplex <- function(Z, y, iters = 8000, tol = 1e-14) {
   n <- nrow(Z)
   J <- ncol(Z)
@@ -301,7 +329,8 @@ default_learners <- function(p, ridge_penalties = c(0, 1, 10)) {
 # --- cross-validated risk per column of Z ---------------------------
 #' Cross-validated risk per column of Z ---------------------------
 #'
-#' A step of the flxipt_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{super_learner}.
+#' A step of the flxipt_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}, \code{super_learner}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -344,7 +373,11 @@ cv_risk <- function(y, Z, loss = "l2") {
 #' @param loss Compared against \code{"nll"}. Defaults to \code{"l2"}.
 #' @param ridge Numeric; passed to \code{max}. Defaults to \code{1e-08}.
 #' @param honest_level_one A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{fitted}, \code{estimate}, \code{weights}, \code{weight_vector}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{best_candidate_risk}, \code{discrete_choice}, \code{level_one}, \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta}, \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
+#' @return A list with \code{fitted}, \code{estimate}, \code{weights},
+#' \code{weight_vector}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate},
+#' \code{best_candidate_risk}, \code{discrete_choice}, \code{level_one},
+#' \code{candidate_fits}, \code{library}, \code{n}, \code{n_folds}, \code{meta},
+#' \code{loss}, \code{binary}, \code{honest_level_one}, \code{method}.
 #' @export
 super_learner <- function(y, X, library = NULL, n_folds = 10,
                           meta = "nnls", binary = NULL, loss = "l2",
@@ -441,7 +474,10 @@ super_learner <- function(y, X, library = NULL, n_folds = 10,
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param ridge Passed to \code{super_learner}. Defaults to \code{1e-08}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{propensity}, \code{weights}, \code{estimate}, \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n}, \code{trim}, \code{stabilized}, \code{library}, \code{method}.
+#' @return A list with \code{propensity}, \code{weights}, \code{estimate},
+#' \code{sl_weights}, \code{cv_risk}, \code{cv_risk_ensemble}, \code{best_candidate},
+#' \code{max_weight}, \code{min_propensity}, \code{max_propensity}, \code{n},
+#' \code{trim}, \code{stabilized}, \code{library}, \code{method}.
 #' @export
 flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
                           meta = "nnls", trim = 0.01, ridge = 1e-8,
@@ -498,7 +534,10 @@ flexible_iptw <- function(A, H, library = NULL, n_folds = 10,
 #' @param trim Passed to \code{flexible_iptw}. Defaults to \code{0.01}.
 #' @param ridge Passed to \code{flexible_iptw}. Defaults to \code{1e-08}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
-#' @return A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated}, \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights}, \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity}, \code{n}, \code{level}, \code{method}.
+#' @return A list with \code{estimate}, \code{se}, \code{ci}, \code{mean_treated},
+#' \code{mean_control}, \code{propensity}, \code{weights}, \code{sl_weights},
+#' \code{cv_risk}, \code{best_candidate}, \code{max_weight}, \code{min_propensity},
+#' \code{n}, \code{level}, \code{method}.
 #' @export
 iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
                      meta = "nnls", trim = 0.01, ridge = 1e-8,
@@ -544,6 +583,9 @@ iptw_ate <- function(y, A, H, library = NULL, n_folds = 10,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .flxipt_cheatsheet()
+#' res
 .flxipt_cheatsheet <- function() {
   paste0("flxipt: Super Learner. Z[i,j] = candidate j's HELD-OUT ",
          "prediction for i; fit the meta-learner of y on Z (nnls ",

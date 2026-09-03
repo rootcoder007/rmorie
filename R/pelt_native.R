@@ -27,6 +27,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{cs}, \code{css}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_cp_tables(x = x)
+#' res
 .mor_cp_tables <- function(x) {
   n <- length(x)
   cs <- numeric(n + 1L)

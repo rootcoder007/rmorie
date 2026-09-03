@@ -36,7 +36,8 @@ pooled score for a single \code{eps} by fixed-iteration Newton, and
 \code{psi_a = mean_i S*_a(t0|W_i)}.
 }
 \examples{
-Tmlhrz(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlhrz(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Moore, K. L. & van der Laan, M. J. (2009). Statistics in

@@ -17,3 +17,7 @@ A step of the gibbons_native implementation. Called by \code{morie_rank_exact_nu
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_permutations(n = 3L)
+res
+}

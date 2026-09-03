@@ -14,7 +14,8 @@
 
 #' .ms_check
 #'
-#' A step of the survival_more implementation. Called by \code{.ms_baseline}, \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
+#' A step of the survival_more implementation. Called by \code{.ms_baseline},
+#' \code{.ms_fit_lls}, \code{.ms_km} and 8 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -35,7 +36,8 @@
 
 #' .ms_km
 #'
-#' A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray}, \code{Landmark} and 2 others in the module.
+#' A step of the survival_more implementation. Called by \code{Cif}, \code{Finegray},
+#' \code{Landmark} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -121,7 +123,8 @@
 
 #' Restricted mean survival time
 #'
-#' Area under the Kaplan-Meier curve up to \code{tau}, RMST(tau) = integral_0^tau S(t) dt, with the variance of Klein and Moeschberger (2003) eq.
+#' Area under the Kaplan-Meier curve up to \code{tau}, RMST(tau) = integral_0^tau S(t)
+#' dt, with the variance of Klein and Moeschberger (2003) eq.
 #' (4.5.4).
 #'
 #' @param time observed follow-up times.
@@ -129,7 +132,8 @@
 #' @param tau restriction horizon; defaults to the largest observed event time.
 #' @param alpha significance level for the interval.
 #' @return list with the RMST, its standard error, the confidence interval and the horizon used.
-#' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, eq. (4.5.4).
+#' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed.,
+#' Springer, eq. (4.5.4).
 #' @export
 #' @examples
 #' Rmst(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
@@ -201,7 +205,8 @@ Rmst <- function(time, event, tau = NULL, alpha = 0.05) {
 #' @param group two-level grouping vector.
 #' @param tau restriction horizon; defaults to the largest event time common to both groups.
 #' @param alpha significance level for the interval.
-#' @return list with the difference, its standard error, the confidence interval and each group's RMST.
+#' @return list with the difference, its standard error, the confidence interval and each
+#' group's RMST.
 #' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer.
 #' @export
 #' @examples
@@ -261,10 +266,12 @@ Rmstdiff <- function(time, event, group, tau = NULL,
 #' @param X covariate matrix, one row per subject.
 #' @param beta fitted coefficient vector.
 #' @return list with the residuals, their sum, and the cumulative baseline hazard.
-#' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
+#' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990).
+#' Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 #' @export
 #' @examples
-#' Martingale(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' Martingale(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X =
+#' c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Martingale <- function(time, event, X, beta) {
   # M_i = delta_i - H0(t_i) exp(x_i' beta): observed events minus
   # expected.  They sum to zero at the fitted beta, which is returned as
@@ -287,17 +294,20 @@ Martingale <- function(time, event, X, beta) {
 
 #' Deviance residuals from a fitted Cox model
 #'
-#' d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\]), a symmetrizing transform of the martingale residuals: roughly normal when the model holds.
+#' d_i = sign(M) sqrt(-2\[M + delta log(delta - M)\]), a symmetrizing transform of the
+#' martingale residuals: roughly normal when the model holds.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
 #' @param X covariate matrix, one row per subject.
 #' @param beta fitted coefficient vector.
 #' @return list with the deviance residuals and the martingale residuals they derive from.
-#' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990). Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
+#' @references Therneau, T. M., Grambsch, P. M. and Fleming, T. R. (1990).
+#' Martingale-based residuals for survival models. Biometrika 77(1), 147-160.
 #' @export
 #' @examples
-#' Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' Devresid(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Devresid <- function(time, event, X, beta) {
   # d_i = sign(M) sqrt(-2[M + delta log(delta - M)]), a symmetrizing
   # transform of the martingale residuals: roughly normal when the model
@@ -338,10 +348,12 @@ Devresid <- function(time, event, X, beta) {
 #' @param X covariate matrix, one row per subject.
 #' @param beta fitted coefficient vector.
 #' @return list with the Cox-Snell residuals and the Nelson-Aalen estimate computed from them.
-#' @references Cox, D. R. and Snell, E. J. (1968). A general definition of residuals. JRSS-B 30(2), 248-275.
+#' @references Cox, D. R. and Snell, E. J. (1968). A general definition of residuals.
+#' JRSS-B 30(2), 248-275.
 #' @export
 #' @examples
-#' Coxsnell(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
+#' Coxsnell(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8), beta = 0.5)
 Coxsnell <- function(time, event, X, beta) {
   # r_i = H0(t_i) exp(x_i' beta) = delta_i - M_i, the fitted cumulative
   # hazard.  If the model is right these behave like a censored unit
@@ -378,7 +390,8 @@ Coxsnell <- function(time, event, X, beta) {
 #' Schoenfeld residuals and the proportional-hazards test
 #'
 #' s_i = x_i minus the weighted risk-set mean at each event time.
-#' Grambsch and Therneau's scaled version tests proportional hazards by regressing the residuals on time.
+#' Grambsch and Therneau's scaled version tests proportional hazards by regressing the
+#' residuals on time.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
@@ -386,8 +399,10 @@ Coxsnell <- function(time, event, X, beta) {
 #' @param beta fitted coefficient vector.
 #' @param vcov covariance matrix of beta, used to scale the residuals.
 #' @param scaled whether to return the scaled residuals.
-#' @return list with the residuals, the event times, and the proportional-hazards test statistic and p-value.
-#' @references Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
+#' @return list with the residuals, the event times, and the proportional-hazards test
+#' statistic and p-value.
+#' @references Grambsch, P. M. and Therneau, T. M. (1994). Proportional hazards tests and
+#' diagnostics based on weighted residuals. Biometrika 81(3), 515-526.
 #' @export
 #' @examples
 #' ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
@@ -460,7 +475,8 @@ Schoenfeld <- function(time, event, X, beta, vcov = NULL,
 
 #' Hazard ratios with confidence intervals
 #'
-#' HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is asymmetric about the hazard ratio and never crosses zero.
+#' HR = exp(beta) with the interval formed on the LOG scale and exponentiated, so it is
+#' asymmetric about the hazard ratio and never crosses zero.
 #'
 #' @param beta coefficient vector on the log-hazard scale.
 #' @param se standard errors of \code{beta}.
@@ -504,8 +520,11 @@ Hazratio <- function(beta, se, alpha = 0.05, names = NULL) {
 #' @param cause cause of failure, 0 for censored.
 #' @param code the cause whose incidence is wanted.
 #' @param alpha significance level for the interval.
-#' @return list with the cumulative incidence, its standard error, the confidence interval and the event times.
-#' @references Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for non-homogeneous Markov chains based on censored observations. Scandinavian Journal of Statistics 5(3), 141-150.
+#' @return list with the cumulative incidence, its standard error, the confidence
+#' interval and the event times.
+#' @references Aalen, O. O. and Johansen, S. (1978). An empirical transition matrix for
+#' non-homogeneous Markov chains based on censored observations. Scandinavian Journal of
+#' Statistics 5(3), 141-150.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -558,7 +577,9 @@ Cif <- function(time, cause, code = 1, alpha = 0.05) {
 
 #' Fine-Gray subdistribution hazard model
 #'
-#' A Cox model on the subdistribution hazard, in which subjects failing from a competing cause remain in the risk set with a decreasing weight, so the coefficients act directly on the cumulative incidence.
+#' A Cox model on the subdistribution hazard, in which subjects failing from a competing
+#' cause remain in the risk set with a decreasing weight, so the coefficients act
+#' directly on the cumulative incidence.
 #'
 #' @param time observed follow-up times.
 #' @param cause cause of failure, 0 for censored.
@@ -566,11 +587,14 @@ Cif <- function(time, cause, code = 1, alpha = 0.05) {
 #' @param code the cause of interest.
 #' @param max_iter maximum Newton-Raphson iterations.
 #' @param tol convergence tolerance.
-#' @return list with the coefficients, their standard errors, the log-likelihood and the iteration count.
-#' @references Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. JASA 94(446), 496-509.
+#' @return list with the coefficients, their standard errors, the log-likelihood and the
+#' iteration count.
+#' @references Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the
+#' subdistribution of a competing risk. JASA 94(446), 496-509.
 #' @export
 #' @examples
-#' Finegray(time = c(1, 2, 3, 4, 5, 6, 7, 8), cause = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Finegray(time = c(1, 2, 3, 4, 5, 6, 7, 8), cause = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 Finegray <- function(time, cause, X, code = 1,
                                     max_iter = 50L, tol = 1e-9) {
   # Fine and Gray (1999, JASA 94:496-509).  A Cox model on the
@@ -646,14 +670,17 @@ Finegray <- function(time, cause, X, code = 1,
 
 #' Kaplan-Meier estimator under left truncation
 #'
-#' The only change from the ordinary estimator is the risk set: a subject enters at \code{entry} rather than at time zero, so it is at risk only over (entry, time].
+#' The only change from the ordinary estimator is the risk set: a subject enters at
+#' \code{entry} rather than at time zero, so it is at risk only over (entry, time].
 #'
 #' @param entry entry (truncation) times.
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
 #' @param alpha significance level for the interval.
-#' @return list with the survival estimate, its standard error, the confidence interval and the risk-set sizes.
-#' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed., Springer, Section 3.4.
+#' @return list with the survival estimate, its standard error, the confidence interval
+#' and the risk-set sizes.
+#' @references Klein, J. P. and Moeschberger, M. L. (2003). Survival Analysis, 2nd ed.,
+#' Springer, Section 3.4.
 #' @export
 #' @examples
 #' ST <- c(5, 6, 6, 2.5, 4, 4, 3, 3, 1, 2, 2, 3, 7, 8, 9, 10)
@@ -712,7 +739,9 @@ Ltkm <- function(entry, time, event,
 
 #' Landmark analysis of survival
 #'
-#' Subjects failing or censored before the landmark are dropped and the clock is reset there, which removes the immortal-time bias that arises from conditioning on a post-baseline event.
+#' Subjects failing or censored before the landmark are dropped and the clock is reset
+#' there, which removes the immortal-time bias that arises from conditioning on a
+#' post-baseline event.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
@@ -720,8 +749,10 @@ Ltkm <- function(entry, time, event,
 #' @param X optional covariate matrix.
 #' @param group optional grouping vector.
 #' @param alpha significance level for the interval.
-#' @return list with the landmark survival estimate, the number retained and dropped, and the group comparison when supplied.
-#' @references Anderson, J. R., Cain, K. C. and Gelber, R. D. (1983). Analysis of survival by tumor response. Journal of Clinical Oncology 1(11), 710-719.
+#' @return list with the landmark survival estimate, the number retained and dropped, and
+#' the group comparison when supplied.
+#' @references Anderson, J. R., Cain, K. C. and Gelber, R. D. (1983). Analysis of
+#' survival by tumor response. Journal of Clinical Oncology 1(11), 710-719.
 #' @export
 #' @examples
 #' Landmark(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), landmark_time = 5L)
@@ -779,14 +810,17 @@ Landmark <- function(time, event, landmark_time, X = NULL,
 #' Turnbull estimator for interval-censored data
 #'
 #' Self-consistency (EM) for the nonparametric MLE.
-#' Mass sits only on the maximal intersections of the observed intervals, so the estimator is a step function that jumps nowhere else.
+#' Mass sits only on the maximal intersections of the observed intervals, so the
+#' estimator is a step function that jumps nowhere else.
 #'
 #' @param left left endpoints of the censoring intervals.
 #' @param right right endpoints; use \code{Inf} for right-censored observations.
 #' @param max_iter maximum EM iterations.
 #' @param tol convergence tolerance.
-#' @return list with the estimated masses, the intersection intervals, the survival curve and the iteration count.
-#' @references Turnbull, B. W. (1976). The empirical distribution function with arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
+#' @return list with the estimated masses, the intersection intervals, the survival curve
+#' and the iteration count.
+#' @references Turnbull, B. W. (1976). The empirical distribution function with
+#' arbitrarily grouped, censored and truncated data. JRSS-B 38(3), 290-295.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
@@ -860,7 +894,8 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param dist One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"}, \code{"weibull"}.
+#' @param dist One of \code{"exponential"}, \code{"loglogistic"}, \code{"lognormal"},
+#' \code{"weibull"}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param mu Numeric; combined arithmetically in the body.
 #' @param logsig Numeric; passed to \code{exp}.
@@ -896,7 +931,9 @@ Turnbull <- function(left, right, max_iter = 1000L,
 #' @param time Passed to \code{.ms_check}.
 #' @param event Passed to \code{.ms_check}.
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @return A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale}, \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic}, \code{fixed_scale}, \code{convergence}.
+#' @return A list with \code{dist}, \code{coef}, \code{log_scale}, \code{scale},
+#' \code{loglik}, \code{n_par}, \code{n}, \code{n_events}, \code{aic}, \code{bic},
+#' \code{fixed_scale}, \code{convergence}.
 #' @export
 .ms_fit_lls <- function(dist, time, event, X = NULL) {
   z <- .ms_check(time, event)
@@ -946,13 +983,15 @@ Turnbull <- function(left, right, max_iter = 1000L,
 
 #' Parametric survival fit by maximum likelihood
 #'
-#' ML for a log-location-scale family with right censoring, maximising prod f(t)^delta S(t)^(1-delta).
+#' ML for a log-location-scale family with right censoring, maximising prod f(t)^delta
+#' S(t)^(1-delta).
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
 #' @param dist distribution: one of weibull, exponential, lognormal or loglogistic.
 #' @return list with the location and scale estimates, the log-likelihood, AIC and BIC.
-#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
+#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of
+#' Failure Time Data, 2nd ed., Wiley.
 #' @export
 #' @examples
 #' Parasurv(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
@@ -988,18 +1027,22 @@ Parasurv <- function(time, event, dist = "weibull") {
 #' Accelerated failure time regression
 #'
 #' log T = x'beta + sigma W.
-#' Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta) is a time ratio and not a hazard ratio.
+#' Coefficients act MULTIPLICATIVELY ON TIME rather than on the hazard, so exp(beta) is a
+#' time ratio and not a hazard ratio.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
 #' @param X covariate matrix, one row per subject.
 #' @param dist distribution of the error term.
 #' @param alpha significance level for the intervals.
-#' @return list with the coefficients, standard errors, time ratios, the scale and the log-likelihood.
-#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley, Chapter 3.
+#' @return list with the coefficients, standard errors, time ratios, the scale and the
+#' log-likelihood.
+#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of
+#' Failure Time Data, 2nd ed., Wiley, Chapter 3.
 #' @export
 #' @examples
-#' Aftfit(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Aftfit(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 Aftfit <- function(time, event, X, dist = "weibull",
                                alpha = 0.05) {
   # log T = x'beta + sigma W.  Coefficients act MULTIPLICATIVELY ON TIME:
@@ -1031,14 +1074,16 @@ Aftfit <- function(time, event, X, dist = "weibull",
 
 #' Compare parametric survival families by information criterion
 #'
-#' Each family is fitted by maximum likelihood and ranked by AIC, with BIC reported alongside so a disagreement between the two is visible rather than hidden.
+#' Each family is fitted by maximum likelihood and ranked by AIC, with BIC reported
+#' alongside so a disagreement between the two is visible rather than hidden.
 #'
 #' @param time observed follow-up times.
 #' @param event event indicator, 1 = event, 0 = censored.
 #' @param X optional covariate matrix.
 #' @param dists families to compare; defaults to all supported.
 #' @return list with one row per family giving the log-likelihood, AIC and BIC, ordered by AIC.
-#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of Failure Time Data, 2nd ed., Wiley.
+#' @references Kalbfleisch, J. D. and Prentice, R. L. (2002). The Statistical Analysis of
+#' Failure Time Data, 2nd ed., Wiley.
 #' @export
 #' @examples
 #' Paracompare(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))

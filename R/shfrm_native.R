@@ -31,7 +31,8 @@
 #'   (2019), frailtyEM, Journal of Statistical Software 90(7).
 #' @export
 #' @examples
-#' Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 Shfrm <- function(time, event, X, cluster, theta = NULL) {
   t <- as.numeric(time)
   e <- as.numeric(event)

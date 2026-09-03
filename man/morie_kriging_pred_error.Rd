@@ -18,7 +18,7 @@ morie_kriging_pred_error(
 )
 }
 \arguments{
-\item{coords, z}{As in \code{\link[=morie_cressie_hawkins]{morie_cressie_hawkins()}}.}
+\item{coords, z}{As in \code{morie_cressie_hawkins()}.}
 
 \item{target}{Matrix of prediction locations.}
 
@@ -54,7 +54,8 @@ Kackar & Harville (1984) supply the missing term
 approximately unbiased form, equation (5.53), doubles the correction.
 }
 \examples{
-morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8),
+  target = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Schabenberger O, Gotway CA (2005), Sec 5.5.4, eq

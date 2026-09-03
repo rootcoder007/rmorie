@@ -20,5 +20,6 @@ list(relmae, mae, benchmae, better, n)
 Relative mean absolute error against a benchmark (ch. 19 p. 571)
 }
 \examples{
-morie_relmae(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), benchmark = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_relmae(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), yhat = c(1, 2, 3, 4, 5, 6, 7, 8),
+  benchmark = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

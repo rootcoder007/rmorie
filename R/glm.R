@@ -6,12 +6,16 @@
 
 #' .morie_glm_families
 #'
-#' A step of the glm implementation. Called by \code{morie_deviance_residuals}, \code{morie_glm}, \code{morie_glm_predict}.
+#' A step of the glm implementation. Called by \code{morie_deviance_residuals},
+#' \code{morie_glm}, \code{morie_glm_predict}.
 #' See the file header for the source the module follows.
 #' follows.
 #'
 #' @return A list with \code{binomial}, \code{poisson}, \code{gaussian}, \code{gamma}.
 #' @export
+#' @examples
+#' res <- .morie_glm_families()
+#' res
 .morie_glm_families <- function() {
   eps <- 1e-10
   clip01 <- function(p) pmin(pmax(p, eps), 1 - eps)
@@ -76,6 +80,11 @@
 #' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_glm_solve(A = A, b = b)
+#' res
 .morie_glm_solve <- function(A, b) {
   r <- tryCatch(solve(A, b), error = function(e) NULL)
   if (is.null(r) || any(!is.finite(r))) {
@@ -92,13 +101,20 @@
 #'
 #' @param y A vector; its length is taken.
 #' @param X A matrix; passed to \code{nrow}.
-#' @param family Coerced to character by the body, with \code{as.character}. Defaults to \code{"binomial"}.
+#' @param family Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"binomial"}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
-#' @return A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name}, \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals}, \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null}, \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged}, \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
+#' @return A list with \code{coef}, \code{se}, \code{statistic}, \code{statistic_name},
+#' \code{p_value}, \code{fitted}, \code{linear_predictor}, \code{residuals},
+#' \code{deviance}, \code{null_deviance}, \code{df_residual}, \code{df_null},
+#' \code{dispersion}, \code{pearson_chi2}, \code{aic}, \code{loglik}, \code{converged},
+#' \code{family}, \code{n}, \code{k}, \code{vcov}, \code{method}.
 #' @export
 morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
                       weights = NULL, offset = NULL, max_iter = 25L,
@@ -220,7 +236,8 @@ morie_glm <- function(y, X, family = "binomial", add_intercept = TRUE,
 #' @param X A matrix; passed to \code{nrow}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param type Compared against \code{"link"}. Defaults to \code{c("response", "link")}.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{.morie_glm_families()[[fit$family]]$linkinv}.
 #' @export
 morie_glm_predict <- function(fit, X, add_intercept = TRUE,

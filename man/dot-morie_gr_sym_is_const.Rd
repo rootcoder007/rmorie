@@ -17,3 +17,8 @@ A step of the geron_train_native implementation. Called by \code{.morie_gr_sym_d
 See the file header for the source the module follows.
 for the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_gr_sym_is_const(e = x)
+res
+}

@@ -72,7 +72,8 @@ morie_sobel_test <- function(a, b, se_a, se_b, variant = "sobel") {
 
 #' .morie_k05_item_params
 #'
-#' A step of the k05_tranche2 implementation. Called by \code{morie_tcc}, \code{morie_test_information}.
+#' A step of the k05_tranche2 implementation. Called by \code{morie_tcc},
+#' \code{morie_test_information}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

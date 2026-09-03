@@ -35,7 +35,8 @@ Formula: \code{ln OR = sum(O_i - E_i)/sum(V_i)} with \code{O = a},
 \code{se = 1/sqrt(sum V)} -- Peto et al. (1977), Appendix.
 }
 \examples{
-Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
+Mapeto(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
+  c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Peto, R. et al. (1977). British Journal of Cancer

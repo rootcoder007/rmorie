@@ -7,8 +7,15 @@
 #' @param y Response vector of length n.
 #' @param add_intercept Prepend a column of ones to X.
 #'
-#' @return List with ``beta``, ``fitted``, ``resid``, ``rss``, ``sigma2``, ``se``, ``leverage``, ``n``, ``p``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.2 pp. 72-73: setting the gradient of the residual sum of squares to zero gives the normal equations (X'X)beta = X'Y with unique solution beta = (X'X)^-1 X'y, variance sigma2 (X'X)^-1, and hat matrix H = X(X'X)^-1 X'.  sigma2 is the unbiased residual variance RSS/(n - p).  Read from the chapter PDF, not recalled.
+#' @return List with ``beta``, ``fitted``, ``resid``, ``rss``, ``sigma2``, ``se``,
+#' ``leverage``, ``n``, ``p``.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 3, Sect. 3.2 pp. 72-73: setting the gradient
+#' of the residual sum of squares to zero gives the normal equations (X'X)beta = X'Y with
+#' unique solution beta = (X'X)^-1 X'y, variance sigma2 (X'X)^-1, and hat matrix H =
+#' X(X'X)^-1 X'.  sigma2 is the unbiased residual variance RSS/(n - p).  Read from the
+#' chapter PDF, not recalled.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

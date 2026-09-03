@@ -161,6 +161,10 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' @param x Passed to \code{>=}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rgemgf_zcr(x = x)
+#' res
 .rgemgf_zcr <- function(x) {
   s <- ifelse(x >= 0, 1, -1)
   sum(s[-1] != s[-length(s)])
@@ -176,6 +180,11 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' @param y Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .rgemgf_r2(x = x, y = y)
+#' res
 .rgemgf_r2 <- function(x, y) {
   # equation (5.28), p. 292, written exactly as the book prints it
   n <- length(x)
@@ -189,7 +198,8 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 
 #' .rgemgf_linfit
 #'
-#' A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf}, \code{rgemgfd} and 1 others in the module.
+#' A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgemgf},
+#' \code{rgemgfd} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -197,6 +207,11 @@ rgemgf <- function(emg, force, fs, window = NULL, turn_threshold = 100) {
 #' @param y Numeric; passed to \code{sum}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .rgemgf_linfit(x = x, y = y)
+#' res
 .rgemgf_linfit <- function(x, y) {
   n <- length(x)
   den <- n * sum(x * x) - sum(x)^2

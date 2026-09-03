@@ -49,13 +49,18 @@
 
 #' .masrcn_mat
 #'
-#' A step of the masrcn_native implementation. Called by \code{mask_loss}, \code{roi_align}, \code{roi_pool}.
+#' A step of the masrcn_native implementation. Called by \code{mask_loss},
+#' \code{roi_align}, \code{roi_pool}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .masrcn_mat(X = x)
+#' res
 .masrcn_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -68,7 +73,8 @@
 
 #' roi_pool
 #'
-#' A step of the masrcn_native implementation. Called by \code{alignment_error}, \code{morie_masrcn}.
+#' A step of the masrcn_native implementation. Called by \code{alignment_error},
+#' \code{morie_masrcn}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -76,7 +82,8 @@
 #' @param box A vector; indexed elementwise.
 #' @param out_size Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @param stride Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift}, \code{caveat}.
+#' @return A list with \code{pooled}, \code{quantised_box}, \code{quantisation_shift},
+#' \code{caveat}.
 #' @export
 roi_pool <- function(features, box, out_size = 2L, stride = 1.0) {
   F <- .masrcn_mat(features)
@@ -262,6 +269,9 @@ mask_rcnn_segmentation <- roi_align
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .masrcn_cheatsheet()
+#' res
 .masrcn_cheatsheet <- function() {
   paste("masrcn: Faster R-CNN plus a THIRD branch predicting a ",
         "binary mask per RoI. Two details carry it. RoIPool ",

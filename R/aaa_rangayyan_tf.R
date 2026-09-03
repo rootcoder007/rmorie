@@ -19,7 +19,8 @@
 
 #' .tf_need
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt}, \code{CDemod} and 28 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{AtomTfd}, \code{BiorDwt},
+#' \code{CDemod} and 28 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -28,6 +29,10 @@
 #' @param minlen Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2L}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_need(x = x)
+#' res
 .tf_need <- function(x, name = "x", minlen = 2L) {
   v <- as.numeric(x)
   if (length(v) < minlen) {
@@ -46,13 +51,18 @@
 
 #' .tf_dft
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic},
+#' \code{CDemod}, \code{CprWt} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to complex by the body, with \code{as.complex}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_dft(x = x)
+#' res
 .tf_dft <- function(x) {
   z <- as.complex(x)
   n <- length(z)
@@ -72,13 +82,18 @@
 
 #' .tf_idft
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic}, \code{CDemod}, \code{CprWt} and 2 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_analytic},
+#' \code{CDemod}, \code{CprWt} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_idft(X = x)
+#' res
 .tf_idft <- function(X) {
   z <- as.complex(X)
   n <- length(z)
@@ -135,13 +150,18 @@
 
 #' .tf_analytic
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd}, \code{EmdSpec} and 4 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_wvd}, \code{AtomTfd},
+#' \code{EmdSpec} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{.tf_idft}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_analytic(x = x)
+#' res
 .tf_analytic <- function(x) {
   v <- as.numeric(x)
   n <- length(v)
@@ -255,7 +275,8 @@
 
 #' .tf_filters
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt}, \code{.tf_swt} and 3 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{.tf_dwt}, \code{.tf_idwt},
+#' \code{.tf_swt} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -343,7 +364,8 @@
 
 #' .tf_dwt
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{Dwt}, \code{Dwt2Tap}, \code{Mra} and 6 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{Dwt}, \code{Dwt2Tap},
+#' \code{Mra} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -506,6 +528,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A list with \code{mx}, \code{mn}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_extrema(x = x)
+#' res
 .tf_extrema <- function(x) {
   n <- length(x)
   mx <- integer(0)
@@ -540,6 +566,10 @@
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_zerox(x = x)
+#' res
 .tf_zerox <- function(x) {
   n <- length(x)
   if (n < 2L) {
@@ -563,6 +593,10 @@
 #' @param tol Passed to \code{<}. Defaults to \code{0.05}.
 #' @return A list with \code{imf}, \code{iterations}, \code{converged}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_sift(x = x)
+#' res
 .tf_sift <- function(x, maxiter = 50L, tol = 0.05) {
   h <- as.numeric(x)
   n <- length(h)
@@ -589,7 +623,8 @@
 
 #' .tf_emd
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec}, \code{Sift} and 2 others in the module.
+#' A step of the rangayyan_tf implementation. Called by \code{EmdEns}, \code{EmdSpec},
+#' \code{Sift} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -598,6 +633,10 @@
 #' @param tol Passed to \code{.tf_sift}. Defaults to \code{0.05}.
 #' @return A list with \code{imfs}, \code{residual}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_emd(x = x)
+#' res
 .tf_emd <- function(x, maxmodes = 10L, tol = 0.05) {
   res <- as.numeric(x)
   imfs <- list()
@@ -775,6 +814,10 @@
 #' @param v Passed to \code{Mod}.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tf_energy(v = x)
+#' res
 .tf_energy <- function(v) .morie_fsum(Mod(v)^2)
 
 # --- deterministic 64-bit LCG for the EEMD noise ---------------------------
@@ -836,6 +879,9 @@
 #' @param seed Passed to \code{.tf_seed_limbs}.
 #' @return The value of \code{.tf_lcg_step}.
 #' @export
+#' @examples
+#' res <- .tf_lcg_seed(seed = 1L)
+#' res
 .tf_lcg_seed <- function(seed) .tf_lcg_step(c(0, 0, 0, 0) + .tf_seed_limbs(seed))
 
 #' .tf_seed_limbs
@@ -847,6 +893,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' res <- .tf_seed_limbs(seed = 1L)
+#' res
 .tf_seed_limbs <- function(seed) {
   s <- as.numeric(seed)
   if (s < 0) stop("seed must be non-negative")
@@ -870,8 +919,10 @@
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param f0 Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0}, \code{bandwidth}, \code{mean_amplitude}, \code{method}.
+#' @param bandwidth Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{amplitude}, \code{phase}, \code{demodulated}, \code{f0},
+#' \code{bandwidth}, \code{mean_amplitude}, \code{method}.
 #' @export
 CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -941,9 +992,12 @@ CDemod <- function(x, fs = 1, f0 = NULL, bandwidth = NULL) {
 #' source it follows.
 #'
 #' @param x Passed to \code{.tf_need}.
-#' @param wavelet Coerced to character by the body, with \code{as.character}. Defaults to \code{"bior2.2"}.
+#' @param wavelet Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"bior2.2"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{reconstructed}, \code{max_reconstruction_error}, \code{symmetric}, \code{wavelet}, \code{method}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths},
+#' \code{levels}, \code{reconstructed}, \code{max_reconstruction_error},
+#' \code{symmetric}, \code{wavelet}, \code{method}.
 #' @export
 BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
   v <- .tf_need(x, "x", 4L)
@@ -1023,8 +1077,10 @@ BiorDwt <- function(x, wavelet = "bior2.2", levels = 3) {
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param sigma Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma}, \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
+#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{sigma},
+#' \code{maxlag}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
 #' @export
 ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
   v <- .tf_need(x, "x", 8L)
@@ -1095,10 +1151,12 @@ ExpKerTfd <- function(x, fs = 1, sigma = 1, nfreq = NULL, maxlag = NULL) {
 #'
 #' @param ecg Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
-#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param w0 Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(3, 21)}.
-#' @return A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs}, \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
+#' @return A list with \code{sdw}, \code{scale_energy}, \code{scales}, \code{freqs},
+#' \code{peak_scale}, \code{peak_freq}, \code{organised}, \code{band}, \code{method}.
 #' @export
 CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
   v <- .tf_need(ecg, "ecg", 16L)
@@ -1176,9 +1234,11 @@ CprWt <- function(ecg, fs = 250, scales = NULL, w0 = 5, band = c(3, 21)) {
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param wavelet Passed to \code{.tf_cwt}. Defaults to \code{"morlet"}.
-#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param w0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
-#' @return A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.
+#' @return A list with \code{coeffs}, \code{scales}, \code{freqs}, \code{times},
+#' \code{energy_per_scale}, \code{peak_scale}, \code{wavelet}, \code{method}.
 #' @export
 Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
   v <- .tf_need(x, "x", 4L)
@@ -1229,11 +1289,16 @@ Cwt <- function(x, fs = 1, wavelet = "morlet", scales = NULL, w0 = 5) {
 #'
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param kernel Coerced to character by the body, with \code{as.character}. Defaults to \code{"spwvd"}.
+#' @param kernel Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"spwvd"}.
 #' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param tsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param fsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{kernel}, \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio}, \code{method}.
+#' @param tsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param fsmooth Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{kernel},
+#' \code{tsmooth}, \code{fsmooth}, \code{peak_freq}, \code{crossterm_ratio},
+#' \code{method}.
 #' @export
 Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
                  tsmooth = NULL, fsmooth = NULL) {
@@ -1284,7 +1349,9 @@ Gtfd <- function(x, fs = 1, kernel = "spwvd", nfreq = NULL,
 #' source it follows.
 #'
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
-#' @return A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi}, \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo}, \code{max_shift_inner_product}, \code{method}.
+#' @return A list with \code{dec_lo}, \code{dec_hi}, \code{rec_lo}, \code{rec_hi},
+#' \code{order}, \code{length}, \code{vanishing_moments}, \code{sum_lo}, \code{norm_lo},
+#' \code{max_shift_inner_product}, \code{method}.
 #' @export
 OrthFilt <- function(order = 4) {
   k <- as.integer(order)
@@ -1324,11 +1391,15 @@ OrthFilt <- function(order = 4) {
 #'
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param dictionary Coerced to character by the body, with \code{as.character}. Defaults to \code{"gabor"}.
+#' @param dictionary Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{"gabor"}.
 #' @param max_atoms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param nfreq Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param min_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
-#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{atoms}, \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained}, \code{peak_freq}, \code{method}.
+#' @param min_decay Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.001}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{atoms},
+#' \code{n_atoms}, \code{decay}, \code{residual_energy}, \code{explained},
+#' \code{peak_freq}, \code{method}.
 #' @export
 AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
                     nfreq = NULL, min_decay = 1e-3) {
@@ -1437,7 +1508,8 @@ AtomTfd <- function(x, fs = 1, dictionary = "gabor", max_atoms = 8,
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths},
+#' \code{levels}, \code{wavelet}, \code{energy}, \code{method}.
 #' @export
 Dwt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
@@ -1471,7 +1543,9 @@ Dwt <- function(x, wavelet = "db4", levels = 3) {
 #' @param noise_std Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.2}.
 #' @param max_imfs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param seed Passed to \code{.tf_lcg_seed}. Defaults to \code{0}.
-#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{n_ensembles}, \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf}, \code{method}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{n_ensembles},
+#' \code{noise_std}, \code{seed}, \code{reconstruction_error}, \code{energy_per_imf},
+#' \code{method}.
 #' @export
 EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0) {
   v <- .tf_need(x, "x", 8L)
@@ -1544,7 +1618,8 @@ EmdEns <- function(x, n_ensembles = 20, noise_std = 0.2, max_imfs = 8, seed = 0)
 #' @param x Passed to \code{.tf_need}.
 #' @param max_imfs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs},
+#' \code{reconstruction_error}, \code{energy_per_imf}, \code{tol}, \code{method}.
 #' @export
 Sift <- function(x, max_imfs = 10, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
@@ -1583,7 +1658,10 @@ Sift <- function(x, max_imfs = 10, tol = 0.05) {
 #' @param x Passed to \code{.tf_need}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{imf}, \code{residual}, \code{n_extrema}, \code{n_zero_crossings}, \code{extrema_zerox_ok}, \code{mean_envelope}, \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations}, \code{converged}, \code{amplitude}, \code{phase}, \code{method}.
+#' @return A list with \code{imf}, \code{residual}, \code{n_extrema},
+#' \code{n_zero_crossings}, \code{extrema_zerox_ok}, \code{mean_envelope},
+#' \code{max_envelope_mean}, \code{envelope_mean_ok}, \code{is_imf}, \code{iterations},
+#' \code{converged}, \code{amplitude}, \code{phase}, \code{method}.
 #' @export
 Imf <- function(x, max_iter = 50, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
@@ -1642,10 +1720,13 @@ Imf <- function(x, max_iter = 50, tol = 0.05) {
 #'
 #' @param ecg Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
-#' @param r_peaks Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param r_peaks Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param twa_window A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
 #' @param max_imfs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.
-#' @return A list with \code{twa_amplitude}, \code{twa_rms}, \code{odd_mean}, \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even}, \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
+#' @return A list with \code{twa_amplitude}, \code{twa_rms}, \code{odd_mean},
+#' \code{even_mean}, \code{difference}, \code{n_beats}, \code{n_odd}, \code{n_even},
+#' \code{r_peaks}, \code{rpeaks_supplied}, \code{method}.
 #' @export
 TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
                    max_imfs = 6) {
@@ -1744,7 +1825,8 @@ TwaEmd <- function(ecg, fs = 250, r_peaks = NULL, twa_window = c(0.15, 0.40),
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{250}.
 #' @param n_imfs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{6}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features}, \code{dominant_imf}, \code{dominant_freq}, \code{method}.
+#' @return A list with \code{imfs}, \code{residual}, \code{n_imfs}, \code{features},
+#' \code{dominant_imf}, \code{dominant_freq}, \code{method}.
 #' @export
 VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
   v <- .tf_need(ecg, "ecg", 16L)
@@ -1805,10 +1887,13 @@ VfEmd <- function(ecg, fs = 250, n_imfs = 6, tol = 0.05) {
 #' source it follows.
 #'
 #' @param x Passed to \code{WtEnergy}.
-#' @param wavelet Coerced to character by the body, with \code{as.character}. Defaults to \code{"db4"}.
+#' @param wavelet Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param base Coerced to character by the body, with \code{as.character}. Defaults to \code{"e"}.
-#' @return A list with \code{entropy}, \code{max_entropy}, \code{normalized_entropy}, \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet}, \code{method}.
+#' @return A list with \code{entropy}, \code{max_entropy}, \code{normalized_entropy},
+#' \code{relative_energy}, \code{labels}, \code{levels}, \code{base}, \code{wavelet},
+#' \code{method}.
 #' @export
 WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
   b <- tolower(trimws(as.character(base)))
@@ -1846,7 +1931,8 @@ WtEntropy <- function(x, wavelet = "db4", levels = 3, base = "e") {
 #'
 #' @param x Passed to \code{.tf_need}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths}, \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
+#' @return A list with \code{approx}, \code{details}, \code{coeffs}, \code{lengths},
+#' \code{levels}, \code{energy}, \code{input_energy}, \code{method}.
 #' @export
 Dwt2Tap <- function(x, levels = 3) {
   v <- .tf_need(x, "x", 2L)
@@ -1881,7 +1967,9 @@ Dwt2Tap <- function(x, levels = 3) {
 #' @param max_imfs Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param nfreq Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
-#' @return A list with \code{spectrum}, \code{times}, \code{freqs}, \code{imfs}, \code{amplitude}, \code{inst_freq}, \code{marginal}, \code{n_imfs}, \code{peak_freq}, \code{method}.
+#' @return A list with \code{spectrum}, \code{times}, \code{freqs}, \code{imfs},
+#' \code{amplitude}, \code{inst_freq}, \code{marginal}, \code{n_imfs}, \code{peak_freq},
+#' \code{method}.
 #' @export
 EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
   v <- .tf_need(x, "x", 8L)
@@ -1951,8 +2039,12 @@ EmdSpec <- function(x, fs = 1, max_imfs = 8, nfreq = 32, tol = 0.05) {
 #' @param fs_resamp Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
 #' @param window_len Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
 #' @param noverlap Passed to \code{Spectrogram}.
-#' @param standard Coerced to character by the body, with \code{as.character}. Defaults to \code{"taskforce"}.
-#' @return A list with \code{times}, \code{vlf}, \code{lf}, \code{hf}, \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent}, \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled}, \code{fs_resamp}, \code{method}.
+#' @param standard Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{"taskforce"}.
+#' @return A list with \code{times}, \code{vlf}, \code{lf}, \code{hf},
+#' \code{total_power}, \code{lf_hf_ratio}, \code{lf_percent}, \code{hf_percent},
+#' \code{bands}, \code{standard}, \code{mean_rr}, \code{mean_hr}, \code{resampled},
+#' \code{fs_resamp}, \code{method}.
 #' @export
 HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
                   noverlap = NULL, standard = "taskforce") {
@@ -2054,7 +2146,8 @@ HrvTv <- function(rr_intervals, fs_resamp = 4, window_len = 64,
 #' @param stft A matrix; indexed by row and column.
 #' @param window Passed to \code{.tf_win}. Defaults to \code{"hann"}.
 #' @param hop Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start}, \code{valid_end}, \code{n_frames}, \code{method}.
+#' @return A list with \code{signal}, \code{n}, \code{hop}, \code{valid_start},
+#' \code{valid_end}, \code{n_frames}, \code{method}.
 #' @export
 IStft <- function(stft, window = "hann", hop = NULL) {
   frames <- if (is.matrix(stft)) {
@@ -2125,7 +2218,9 @@ IStft <- function(stft, window = "hann", hop = NULL) {
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{approximation}, \code{details}, \code{bands}, \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet}, \code{method}.
+#' @return A list with \code{approximation}, \code{details}, \code{bands},
+#' \code{reconstruction_error}, \code{energy_per_band}, \code{levels}, \code{wavelet},
+#' \code{method}.
 #' @export
 Mra <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
@@ -2170,9 +2265,14 @@ Mra <- function(x, wavelet = "db4", levels = 3) {
 #' @param pcg Passed to \code{.tf_need}.
 #' @param ecg Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1000}.
-#' @param cycle_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param envelope_smoothing Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len}, \code{triggers}, \code{s1_index}, \code{s1_time}, \code{s1_amplitude}, \code{s2_index}, \code{s2_time}, \code{s2_amplitude}, \code{s2_s1_ratio}, \code{snr_gain_db}, \code{method}.
+#' @param cycle_len Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param envelope_smoothing Optional; may be \code{NULL}. Coerced to integer by the
+#' body, with \code{as.integer}.
+#' @return A list with \code{average_envelope}, \code{n_cycles}, \code{cycle_len},
+#' \code{triggers}, \code{s1_index}, \code{s1_time}, \code{s1_amplitude},
+#' \code{s2_index}, \code{s2_time}, \code{s2_amplitude}, \code{s2_s1_ratio},
+#' \code{snr_gain_db}, \code{method}.
 #' @export
 PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
                       envelope_smoothing = NULL) {
@@ -2271,7 +2371,9 @@ PcgEnvAvg <- function(pcg, ecg, fs = 1000, cycle_len = NULL,
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
 #' @param threshold_type Passed to \code{WtThresh}. Defaults to \code{"soft"}.
-#' @return A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma}, \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy}, \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
+#' @return A list with \code{denoised}, \code{artifact}, \code{threshold}, \code{sigma},
+#' \code{artifact_energy}, \code{snr_improvement_db}, \code{approx_energy},
+#' \code{levels}, \code{wavelet}, \code{fs}, \code{method}.
 #' @export
 PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
                      threshold_type = "soft") {
@@ -2313,7 +2415,8 @@ PpgWtDen <- function(ppg, fs = 100, wavelet = "db4", levels = 4,
 #' @param scales Passed to \code{Cwt}.
 #' @param wavelet Passed to \code{Cwt}. Defaults to \code{"morlet"}.
 #' @param w0 Passed to \code{Cwt}. Defaults to \code{5}.
-#' @return A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times}, \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.
+#' @return A list with \code{scalogram}, \code{scales}, \code{freqs}, \code{times},
+#' \code{energy_per_scale}, \code{total_energy}, \code{ridge}, \code{method}.
 #' @export
 Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
   r <- Cwt(x, fs = fs, wavelet = wavelet, scales = scales, w0 = w0)
@@ -2350,9 +2453,13 @@ Scalogram <- function(x, fs = 1, scales = NULL, wavelet = "morlet", w0 = 5) {
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
-#' @param scales Coerced to integer by the body, with \code{as.integer}. Defaults to \code{c(3, 4, 5)}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{fi}, \code{fi_total}, \code{scales}, \code{bands}, \code{energies}, \code{seizure_detected}, \code{threshold}, \code{wavelet}, \code{levels}, \code{method}.
+#' @param scales Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{c(3, 4, 5)}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{fi}, \code{fi_total}, \code{scales}, \code{bands},
+#' \code{energies}, \code{seizure_detected}, \code{threshold}, \code{wavelet},
+#' \code{levels}, \code{method}.
 #' @export
 SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
                    scales = c(3, 4, 5), threshold = NULL) {
@@ -2406,7 +2513,9 @@ SeizWt <- function(eeg, fs = 1, wavelet = "db4", levels = 5,
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param desired_t_res Coerced to numeric by the body, with \code{as.numeric}.
 #' @param desired_f_res Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg}, \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product}, \code{heisenberg_bound}, \code{feasible}, \code{method}.
+#' @return A list with \code{nperseg_time}, \code{nperseg_freq}, \code{nperseg},
+#' \code{achieved_t_res}, \code{achieved_f_res}, \code{tf_product},
+#' \code{heisenberg_bound}, \code{feasible}, \code{method}.
 #' @export
 StftParam <- function(fs, desired_t_res, desired_f_res) {
   fs <- as.numeric(fs)
@@ -2440,9 +2549,12 @@ StftParam <- function(fs, desired_t_res, desired_f_res) {
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nperseg Coerced to integer by the body, with \code{as.integer}. Defaults to \code{64}.
-#' @param noverlap Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param noverlap Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param window Passed to \code{.tf_win}. Defaults to \code{"hann"}.
-#' @return A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs}, \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy}, \code{peak_freq}, \code{method}.
+#' @return A list with \code{spectrogram}, \code{stft}, \code{times}, \code{freqs},
+#' \code{nperseg}, \code{hop}, \code{window}, \code{n_frames}, \code{total_energy},
+#' \code{peak_freq}, \code{method}.
 #' @export
 Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
                         window = "hann") {
@@ -2499,7 +2611,8 @@ Spectrogram <- function(x, fs = 1, nperseg = 64, noverlap = NULL,
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_swt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet}, \code{redundancy}, \code{energy_per_level}, \code{method}.
+#' @return A list with \code{approx}, \code{details}, \code{levels}, \code{wavelet},
+#' \code{redundancy}, \code{energy_per_level}, \code{method}.
 #' @export
 Swt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
@@ -2539,9 +2652,13 @@ Swt <- function(x, wavelet = "db4", levels = 3) {
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param threshold_type Coerced to character by the body, with \code{as.character}. Defaults to \code{"soft"}.
-#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{n_shifts}, \code{residual_energy}, \code{levels}, \code{wavelet}, \code{threshold_type}, \code{method}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param threshold_type Coerced to character by the body, with \code{as.character}.
+#' Defaults to \code{"soft"}.
+#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed},
+#' \code{n_coeffs}, \code{n_shifts}, \code{residual_energy}, \code{levels},
+#' \code{wavelet}, \code{threshold_type}, \code{method}.
 #' @export
 SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
                    threshold_type = "soft") {
@@ -2613,10 +2730,13 @@ SwtDen <- function(x, wavelet = "db4", levels = 3, threshold = NULL,
 #' @param K Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2000}.
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param init Coerced to character by the body, with \code{as.character}. Defaults to \code{"uniform"}.
+#' @param init Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"uniform"}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-07}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300}.
-#' @return A list with \code{modes}, \code{center_freqs}, \code{K}, \code{alpha}, \code{tau}, \code{iterations}, \code{converged}, \code{reconstruction_error}, \code{residual_energy}, \code{method}.
+#' @return A list with \code{modes}, \code{center_freqs}, \code{K}, \code{alpha},
+#' \code{tau}, \code{iterations}, \code{converged}, \code{reconstruction_error},
+#' \code{residual_energy}, \code{method}.
 #' @export
 VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
                    tol = 1e-7, max_iter = 300) {
@@ -2708,10 +2828,13 @@ VModes <- function(x, K = 3, alpha = 2000, tau = 0, init = "uniform",
 #' @param x Passed to \code{Scalogram}.
 #' @param fs Passed to \code{Scalogram}. Defaults to \code{1}.
 #' @param scales Passed to \code{Scalogram}.
-#' @param wavelet The body requires: the signal has no wavelet energy at any scale. Defaults to \code{"mexh"}.
+#' @param wavelet The body requires: the signal has no wavelet energy at any scale.
+#' Defaults to \code{"mexh"}.
 #' @param w0 Passed to \code{Scalogram}. Defaults to \code{5}.
-#' @param min_prominence Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
-#' @return A list with \code{structures}, \code{n_structures}, \code{scalogram}, \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
+#' @param min_prominence Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.1}.
+#' @return A list with \code{structures}, \code{n_structures}, \code{scalogram},
+#' \code{scales}, \code{times}, \code{min_prominence}, \code{method}.
 #' @export
 CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
                      min_prominence = 0.1) {
@@ -2767,7 +2890,9 @@ CwtRidge <- function(x, fs = 1, scales = NULL, wavelet = "mexh", w0 = 5,
 #' @param wavelet Passed to \code{.tf_swt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param max_lag Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
-#' @return A list with \code{correlations}, \code{best_lags}, \code{covariances}, \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag}, \code{wavelet}, \code{method}.
+#' @return A list with \code{correlations}, \code{best_lags}, \code{covariances},
+#' \code{scales}, \code{overall_correlation}, \code{levels}, \code{max_lag},
+#' \code{wavelet}, \code{method}.
 #' @export
 WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
   a <- .tf_need(x, "x", 4L)
@@ -2857,7 +2982,8 @@ WtXcor <- function(x, y, wavelet = "db4", levels = 3, max_lag = 0) {
 #' @param x Passed to \code{.tf_need}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param nfreq The body requires: nfreq must be >= 2.
-#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq}, \code{total_energy}, \code{method}.
+#' @return A list with \code{tfd}, \code{times}, \code{freqs}, \code{peak_freq},
+#' \code{total_energy}, \code{method}.
 #' @export
 WvDist <- function(x, fs = 1, nfreq = NULL) {
   v <- .tf_need(x, "x", 4L)
@@ -2892,7 +3018,9 @@ WvDist <- function(x, fs = 1, nfreq = NULL) {
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{energies}, \code{relative}, \code{labels}, \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band}, \code{levels}, \code{wavelet}, \code{method}.
+#' @return A list with \code{energies}, \code{relative}, \code{labels},
+#' \code{total_energy}, \code{input_energy}, \code{energy_balance}, \code{dominant_band},
+#' \code{levels}, \code{wavelet}, \code{method}.
 #' @export
 WtEnergy <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 2L)
@@ -2974,7 +3102,9 @@ WtMoment <- function(x, wavelet = "db4", levels = 3) {
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_filters}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{nodes}, \code{leaves}, \code{n_leaves}, \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels}, \code{wavelet}, \code{method}.
+#' @return A list with \code{nodes}, \code{leaves}, \code{n_leaves},
+#' \code{energy_per_leaf}, \code{dominant_leaf}, \code{entropy}, \code{levels},
+#' \code{wavelet}, \code{method}.
 #' @export
 Wpt <- function(x, wavelet = "db4", levels = 3) {
   v <- .tf_need(x, "x", 4L)
@@ -3028,9 +3158,13 @@ Wpt <- function(x, wavelet = "db4", levels = 3) {
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_dwt}. Defaults to \code{"db4"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @param threshold_type Coerced to character by the body, with \code{as.character}. Defaults to \code{"soft"}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed}, \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type}, \code{wavelet}, \code{method}.
+#' @param threshold_type Coerced to character by the body, with \code{as.character}.
+#' Defaults to \code{"soft"}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{denoised}, \code{threshold}, \code{sigma}, \code{n_zeroed},
+#' \code{n_coeffs}, \code{sparsity}, \code{noise_removed}, \code{threshold_type},
+#' \code{wavelet}, \code{method}.
 #' @export
 WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
                      threshold = NULL) {
@@ -3083,7 +3217,9 @@ WtThresh <- function(x, wavelet = "db4", levels = 3, threshold_type = "soft",
 #' @param x Passed to \code{.tf_need}.
 #' @param wavelet Passed to \code{.tf_filters}. Defaults to \code{"db1"}.
 #' @param levels Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{variances}, \code{scales}, \code{n_used}, \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan}, \code{wavelet}, \code{method}.
+#' @return A list with \code{variances}, \code{scales}, \code{n_used},
+#' \code{total_variance}, \code{sample_variance}, \code{dominant_scale}, \code{is_allan},
+#' \code{wavelet}, \code{method}.
 #' @export
 WtVar <- function(x, wavelet = "db1", levels = 3) {
   v <- .tf_need(x, "x", 4L)
@@ -3135,7 +3271,8 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 
 #' .tf_echo_idx
 #'
-#' A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp}, \code{EchoSig}.
+#' A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoImp},
+#' \code{EchoSig}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -3143,6 +3280,9 @@ WtVar <- function(x, wavelet = "db1", levels = 3) {
 #' @param default Passed to \code{return}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
+#' @examples
+#' res <- .tf_echo_idx(n = 3L)
+#' res
 .tf_echo_idx <- function(n, default = NULL) {
   if (is.null(n)) {
     return(default)
@@ -3200,7 +3340,8 @@ EchoImp <- function(a, n_0, n) {
 #' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param n Passed to \code{.tf_echo_idx}.
-#' @return A list with \code{y}, \code{n}, \code{h}, \code{a}, \code{n_0}, \code{echo_visible}, \code{method}.
+#' @return A list with \code{y}, \code{n}, \code{h}, \code{a}, \code{n_0},
+#' \code{echo_visible}, \code{method}.
 #' @export
 EchoSig <- function(h, a, n_0, n = NULL) {
   hh <- as.numeric(h)
@@ -3237,7 +3378,8 @@ EchoSig <- function(h, a, n_0, n = NULL) {
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param z Coerced to complex by the body, with \code{as.complex}.
 #' @param H Optional; may be \code{NULL}. A vector; its length is taken.
-#' @return A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a}, \code{n_0}, \code{method}.
+#' @return A list with \code{Y}, \code{echo_factor}, \code{z}, \code{H}, \code{a},
+#' \code{n_0}, \code{method}.
 #' @export
 EchoZ <- function(a, n_0, z, H = NULL) {
   a <- as.numeric(a)
@@ -3284,7 +3426,8 @@ EchoZ <- function(a, n_0, z, H = NULL) {
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Optional; may be \code{NULL}. A vector; its length is taken.
-#' @return A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase}, \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
+#' @return A list with \code{Y}, \code{echo_factor}, \code{magnitude}, \code{phase},
+#' \code{omega}, \code{ripple_period}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoSpec <- function(a, n_0, omega, H = NULL) {
   a <- as.numeric(a)
@@ -3334,8 +3477,11 @@ EchoSpec <- function(a, n_0, omega, H = NULL) {
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H_hat Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param n_terms Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid}, \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms}, \code{method}.
+#' @param n_terms Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{Y_hat}, \code{echo_log}, \code{series}, \code{series_valid},
+#' \code{series_error}, \code{omega}, \code{a}, \code{n_0}, \code{n_terms},
+#' \code{method}.
 #' @export
 EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
   a <- as.numeric(a)
@@ -3412,8 +3558,10 @@ EchoLogSp <- function(a, n_0, omega, H_hat = NULL, n_terms = NULL) {
 #' @param a Numeric; passed to \code{abs}.
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param n Optional; may be \code{NULL}. Passed to \code{.tf_echo_idx}.
-#' @param n_terms Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses}, \code{echo_delay}, \code{a}, \code{method}.
+#' @param n_terms Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{y_hat}, \code{n}, \code{impulses}, \code{n_impulses},
+#' \code{echo_delay}, \code{a}, \code{method}.
 #' @export
 EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
   hh <- as.numeric(h_hat)
@@ -3470,7 +3618,8 @@ EchoCep <- function(h_hat, a, n_0, n = NULL, n_terms = NULL) {
 #' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param z Coerced to complex by the body, with \code{as.complex}.
-#' @return A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z}, \code{a}, \code{n_0}, \code{method}.
+#' @return A list with \code{power}, \code{wavelet_power}, \code{echo_power}, \code{z},
+#' \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoPsd <- function(H, a, n_0, z) {
   a <- as.numeric(a)
@@ -3513,7 +3662,9 @@ EchoPsd <- function(H, a, n_0, z) {
 #' @param a Numeric; combined arithmetically in the body.
 #' @param n_0 Coerced to integer by the body, with \code{as.integer}.
 #' @param omega Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{log_power}, \code{wavelet_log_power}, \code{echo_log_power}, \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period}, \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.
+#' @return A list with \code{log_power}, \code{wavelet_log_power}, \code{echo_log_power},
+#' \code{dc_term}, \code{ripple}, \code{modulation_index}, \code{ripple_period},
+#' \code{decomposition_error}, \code{omega}, \code{a}, \code{n_0}, \code{method}.
 #' @export
 EchoLogPsd <- function(H, a, n_0, omega) {
   a <- as.numeric(a)

@@ -20,5 +20,6 @@ A list with \code{output}, \code{gate_weights}, \code{experts_evaluated}, \code{
 }
 \keyword{internal}
 \examples{
-morie_kamath_moe_output(x = c(1, 2, 3, 4, 5, 6, 7, 8), G = c(1, 2, 3, 4, 5, 6, 7, 8), E_i = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kamath_moe_output(x = c(1, 2, 3, 4, 5, 6, 7, 8), G = c(1, 2, 3, 4, 5, 6, 7, 8),
+  E_i = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

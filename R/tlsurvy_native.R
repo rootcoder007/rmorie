@@ -71,16 +71,20 @@
 #' @param V Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param design One of \code{"proportional"}, \code{"uniform"}. Defaults to \code{"adaptive"}.
-#' @param influence Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param influence Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
-#' @return A list with \code{pi}, \code{design}, \code{n_expected}, \code{N}, \code{min_pi}, \code{note}.
+#' @return A list with \code{pi}, \code{design}, \code{n_expected}, \code{N},
+#' \code{min_pi}, \code{note}.
 #' @export
-morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
-                                                  influence=NULL,
-                                                  floor=0.01) {
+morie_tlsurvy_inclusion_probabilities <- function(V, n, design = "adaptive",
+                                                  influence = NULL,
+                                                  floor = 0.01) {
   if (!(design %in% .tlsurvy_designs)) {
-    stop(sprintf("tlsurvy: design must be one of %s, got %s",
-                 paste(.tlsurvy_designs, collapse=", "), design))
+    stop(sprintf(
+      "tlsurvy: design must be one of %s, got %s",
+      paste(.tlsurvy_designs, collapse = ", "), design
+    ))
   }
   v <- as.numeric(V)
   N <- length(v)
@@ -98,8 +102,10 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
     }
     base <- abs(as.numeric(influence)) + .tlsurvy_eps
     if (length(base) != N) {
-      stop(sprintf("tlsurvy: %d influence values for %d units",
-                   length(base), N))
+      stop(sprintf(
+        "tlsurvy: %d influence values for %d units",
+        length(base), N
+      ))
     }
   }
   # Rescale to sum exactly to n, iterating because capping at 1 and
@@ -149,7 +155,8 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
 # draw_sample: Poisson sampling: include unit i with probability pi_i.
 #' Draw_sample: Poisson sampling: include unit i with probability pi_i
 #'
-#' A step of the tlsurvy_native implementation. Called by \code{morie_tlsurvy_adaptive_survey_tmle}, \code{morie_tlsurvy_design_efficiency}.
+#' A step of the tlsurvy_native implementation. Called by
+#' \code{morie_tlsurvy_adaptive_survey_tmle}, \code{morie_tlsurvy_design_efficiency}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -157,7 +164,7 @@ morie_tlsurvy_inclusion_probabilities <- function(V, n, design="adaptive",
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{n}, \code{fraction}.
 #' @export
-morie_tlsurvy_draw_sample <- function(pi, seed=0) {
+morie_tlsurvy_draw_sample <- function(pi, seed = 0) {
   p <- as.numeric(pi)
   e <- .ghc_rng(seed)
   u <- .ghc_unif(e, length(p))
@@ -187,7 +194,7 @@ morie_tlsurvy_draw_sample <- function(pi, seed=0) {
 #' @param N Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return A list with \code{estimate}, \code{se}, \code{n_used}, \code{N}.
 #' @export
-morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
+morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N = NULL) {
   y <- as.numeric(values)
   p <- as.numeric(pi)
   idx <- as.integer(selected)
@@ -221,7 +228,7 @@ morie_tlsurvy_horvitz_thompson <- function(values, pi, selected, N=NULL) {
 #' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.
 #' @return A list with \code{uniform_se}, \code{adaptive_se}, \code{ratio}, \code{note}.
 #' @export
-morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
+morie_tlsurvy_design_efficiency <- function(values, influence, n, seed = 0) {
   y <- as.numeric(values)
   out <- list()
   for (d in c("uniform", "adaptive")) {
@@ -259,13 +266,17 @@ morie_tlsurvy_design_efficiency <- function(values, influence, n, seed=0) {
 #' @param full_estimator Accepted by the signature and not used anywhere in the body.
 #' @param n Passed to \code{morie_tlsurvy_inclusion_probabilities}.
 #' @param seed Passed to \code{morie_tlsurvy_draw_sample}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used}, \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{se_estimator}, \code{n_used},
+#' \code{N}, \code{sampling_fraction}, \code{inclusion_probabilities}, \code{method},
+#' \code{note}.
 #' @export
 morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
-                                                full_estimator, n,
-                                                seed=0) {
-  pi_res <- morie_tlsurvy_inclusion_probabilities(V, n, "adaptive",
-                                                   influence_proxy)
+                                               full_estimator, n,
+                                               seed = 0) {
+  pi_res <- morie_tlsurvy_inclusion_probabilities(
+    V, n, "adaptive",
+    influence_proxy
+  )
   s <- morie_tlsurvy_draw_sample(pi_res$pi, seed)
   r <- full_estimator(s$selected, 1.0 / pi_res$pi[s$selected])
   se_val <- if (!is.null(r$se)) as.numeric(r$se) else NaN

@@ -26,7 +26,8 @@ vector is normalised to geometric mean 1 for identification.
 Mirrors \code{morie.fn.hsirt} (with fixed items).
 }
 \examples{
-morie_heteroskedastic_scales(votes = c("a", "b", "c"), ideal_points = c("a", "b", "c"), alpha = 0.5, beta = 0.5)
+morie_heteroskedastic_scales(votes = c("a", "b", "c"), ideal_points = c("a", "b", "c"),
+  alpha = 0.5, beta = 0.5)
 }
 \references{
 Lauderdale BE (2010). Unpredictable voters in ideal

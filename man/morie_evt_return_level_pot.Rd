@@ -26,5 +26,6 @@ A numeric value.
 }
 \keyword{internal}
 \examples{
-morie_evt_return_level_pot(u = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L, zeta_u = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
+morie_evt_return_level_pot(u = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5, xi = 5L,
+  zeta_u = c(1, 2, 3, 4, 5, 6, 7, 8), m = 5L)
 }

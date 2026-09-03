@@ -24,10 +24,12 @@
 #' @param statistic Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param B Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
-#' @param metric Coerced to character by the body, with \code{as.character}. Defaults to \code{"l2"}.
+#' @param metric Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"l2"}.
 #' @param smooth Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{center}, \code{radius}, \code{estimate}, \code{distances}, \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
+#' @return A list with \code{center}, \code{radius}, \code{estimate}, \code{distances},
+#' \code{n_within}, \code{metric}, \code{alpha}, \code{B}, \code{seed}, \code{method}.
 #' @export
 morie_funBoot <- function(curves, statistic = NULL, alpha = 0.05, B = 500L,
                           metric = "l2", smooth = 0.0, seed = 0) {
@@ -101,6 +103,9 @@ functional_bootstrap <- morie_funBoot
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .funBoot_cheatsheet()
+#' res
 .funBoot_cheatsheet <- function() {
   "funBoot: D = q_{1-a}(dist(T*_b, mean T*)); band = ball(center, D)"
 }

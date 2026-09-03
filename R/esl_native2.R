@@ -11,18 +11,24 @@
 
 #' .morie_kernel_matrix
 #'
-#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
+#' \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{ncol}.
 #' @param Z Optional; may be \code{NULL}. A matrix; passed to \code{ncol}.
-#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}. Defaults to \code{"rbf"}.
+#' @param kernel One of \code{"linear"}, \code{"poly"}, \code{"rbf"}, \code{"sigmoid"}.
+#' Defaults to \code{"rbf"}.
 #' @param gamma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param degree Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param coef0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_kernel_matrix(X = x)
+#' res
 .morie_kernel_matrix <- function(X, Z = NULL, kernel = "rbf", gamma = NULL,
                                  degree = 3, coef0 = 1) {
   X <- as.matrix(X)
@@ -50,7 +56,8 @@
 
 #' .morie_smo
 #'
-#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc}, \code{morie_esl_svm_kernel}.
+#' A step of the esl_native2 implementation. Called by \code{morie_esl_svc},
+#' \code{morie_esl_svm_kernel}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -63,6 +70,11 @@
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0L}.
 #' @return A list with \code{alpha}, \code{b}, \code{n_iter}, \code{converged}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_smo(K = A, y = b)
+#' res
 .morie_smo <- function(K, y, C = 1, tol = 1e-3, max_passes = 50L,
                        max_iter = 10000L, seed = 0L) {
   y <- as.numeric(y)

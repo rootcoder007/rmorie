@@ -19,3 +19,9 @@ A step of the rgemgf implementation. Called by \code{.rg_higuchi_fd}, \code{rgem
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .rgemgf_linfit(x = x, y = y)
+res
+}

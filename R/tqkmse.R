@@ -29,6 +29,9 @@
 #' @param seed Passed to \code{.t1_lcg}.
 #' @return The value of \code{Q}, as built in the body.
 #' @export
+#' @examples
+#' res <- .kvmse_rotation(d = 3L, seed = 1L)
+#' res
 .kvmse_rotation <- function(d, seed) {
   g <- .t1_lcg(seed)
   A <- matrix(0, d, d)
@@ -58,6 +61,9 @@
 #' @param hi Numeric; combined arithmetically in the body. Defaults to \code{6}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' res <- .kvmse_codebook(b = 3L)
+#' res
 .kvmse_codebook <- function(b, iters = 200, grid = 2001, lo = -6, hi = 6) {
   K <- 2^as.integer(b)
   n <- as.integer(grid)

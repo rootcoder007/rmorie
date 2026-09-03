@@ -36,7 +36,8 @@ point estimate is the mean of the resampled products; the
 sample-data product is reported alongside.
 }
 \examples{
-Bsmed(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+Bsmed(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8),
+  y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Preacher, K. J. and Hayes, A. F. (2004), SPSS and SAS

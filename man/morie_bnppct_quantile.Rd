@@ -32,5 +32,6 @@ The quantile.
 }
 \keyword{internal}
 \examples{
-morie_bnppct_quantile(q = 0.5, w = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), s2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_bnppct_quantile(q = 0.5, w = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
+  s2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

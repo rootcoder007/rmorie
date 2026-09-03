@@ -21,7 +21,7 @@ relevance_t, relevance_p, assumptions, testable, untestable, n,
 method.
 }
 \description{
-Arithmetically identical to \code{\link[=morie_caus_iv_late]{morie_caus_iv_late()}} -- the two
+Arithmetically identical to \code{morie_caus_iv_late()} -- the two
 agree to machine precision, and a discrepancy would mean one is
 wrong. What differs is the assumption set and therefore what the
 number is ABOUT: \code{Z -> D -> Y} with no \code{Z -> Y} arrow (exclusion),

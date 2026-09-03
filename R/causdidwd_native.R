@@ -30,7 +30,9 @@
 
 #' .causdidwd_panel
 #'
-#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the module.
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+#' \code{morie_imputation}, \code{morie_two_way_fixed_effects} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -55,13 +57,18 @@
 
 #' .causdidwd_unique_sorted
 #'
-#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}, \code{morie_two_way_fixed_effects}.
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+#' \code{morie_imputation}, \code{morie_two_way_fixed_effects}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .causdidwd_unique_sorted(v = x)
+#' res
 .causdidwd_unique_sorted <- function(v) {
   out <- character(0)
   seen <- character(0)
@@ -76,7 +83,8 @@
 
 #' .causdidwd_with_intercept
 #'
-#' A step of the causdidwd_native implementation. Called by \code{morie_two_way_fixed_effects}, \code{morie_two_way_mundlak}.
+#' A step of the causdidwd_native implementation. Called by
+#' \code{morie_two_way_fixed_effects}, \code{morie_two_way_mundlak}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -89,7 +97,8 @@
 
 #' .causdidwd_cohorts
 #'
-#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe}, \code{morie_imputation}.
+#' A step of the causdidwd_native implementation. Called by \code{morie_etwfe},
+#' \code{morie_imputation}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -474,6 +483,9 @@ morie_aggregate <- function(result, scheme = "simple", weights = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .causdidwd_morie_cheatsheet()
+#' res
 .causdidwd_morie_cheatsheet <- function() {
   paste("causdidwd: ETWFE. TWFE == two-way MUNDLAK -- pooled OLS ",
         "with unit-specific time averages AND period-specific ",
@@ -494,9 +506,3 @@ morie_causal_did_wooldridge_eta <- morie_etwfe
 
 # Module entry point
 morie_causdidwd <- morie_etwfe
-
-
-
-
-
-

@@ -19,3 +19,9 @@ A step of the secaead_native implementation. Called by \code{morie_secaead_poly1
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .secaead_p_add(a = A, b = b)
+res
+}

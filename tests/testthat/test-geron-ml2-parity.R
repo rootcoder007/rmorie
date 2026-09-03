@@ -145,7 +145,8 @@ test_that("Gini and entropy match Python and the hand formula", {
 })
 
 test_that("RMSE and MAE match Python and their own definitions", {
-  yt <- c(1, 2, 3, 4); yp <- c(1.5, 1, 3.2, 7)
+  yt <- c(1, 2, 3, 4)
+  yp <- c(1.5, 1, 3.2, 7)
   r <- morie_geron_rmse(yt, yp)
   expect_close(r$rmse, A[["rms.rmse"]])
   expect_close(r$mse, A[["rms.mse"]])
@@ -253,7 +254,10 @@ test_that("capacity heuristics match Python and layer algebra", {
   expect_close(r$n_parameters, A[["npl.params"]])
   expect_close(r$parameters_per_layer, A[["npl.per"]])
   # INDEPENDENT ROUTE: count the parameters layer by layer by hand.
-  d <- 5; w <- 10; L <- 3; k <- 2
+  d <- 5
+  w <- 10
+  L <- 3
+  k <- 2
   by_hand <- (d * w + w) + 2 * (w * w + w) + (w * k + k)
   expect_close(r$n_parameters, by_hand)
 
@@ -413,7 +417,10 @@ test_that("logistic probability, cost and gradient match Python", {
   # INDEPENDENT ROUTE: finite differences on the cost.
   h <- 1e-6
   fd <- vapply(seq_along(th), function(j) {
-    up <- th; dn <- th; up[j] <- up[j] + h; dn[j] <- dn[j] - h
+    up <- th
+    dn <- th
+    up[j] <- up[j] + h
+    dn[j] <- dn[j] - h
     (morie_geron_logistic_cost(X, y, up)$cost -
        morie_geron_logistic_cost(X, y, dn)$cost) / (2 * h)
   }, numeric(1))
@@ -489,7 +496,9 @@ test_that("tabular RL replays draw for draw", {
   expect_close(r$td_error, A[["td.err"]])
   expect_close(r$target, A[["td.target"]])
   # INDEPENDENT ROUTE: replay the four transitions by hand, in order.
-  V <- c(0, 0, 0); a <- 0.5; g <- 0.9
+  V <- c(0, 0, 0)
+  a <- 0.5
+  g <- 0.9
   V[1] <- V[1] + a * (1 + g * V[2] - V[1])
   V[2] <- V[2] + a * (0 + g * V[3] - V[2])
   V[1] <- V[1] + a * (2 + g * V[2] - V[1])
@@ -595,8 +604,10 @@ test_that("softmax cross-entropy, its gradient and the MLP match Python", {
   h <- 1e-6
   fd <- THE * 0
   for (i in seq_len(2)) for (j in seq_len(3)) {
-    up <- THE; dn <- THE
-    up[i, j] <- up[i, j] + h; dn[i, j] <- dn[i, j] - h
+    up <- THE
+    dn <- THE
+    up[i, j] <- up[i, j] + h
+    dn[i, j] <- dn[i, j] - h
     fd[i, j] <- (morie_geron_cross_entropy_cost(XE, YE, up)$cost -
                    morie_geron_cross_entropy_cost(XE, YE, dn)$cost) / (2 * h)
   }

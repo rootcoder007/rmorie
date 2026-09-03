@@ -18,6 +18,8 @@ The value of \code{out}, as built in the body.
 }
 \keyword{internal}
 \examples{
-S <- c("a", "b", "c")
-morie_snpqc1_maf(S)
+if (morie_crypto_sodium_available()) {
+  S <- c("a", "b", "c")
+  morie_snpqc1_maf(S)
+}
 }

@@ -14,7 +14,8 @@
 
 #' .morie_aft_log_dens_surv
 #'
-#' A step of the aft_native implementation. Called by \code{.morie_aft_fit}, \code{morie_aft_residuals}.
+#' A step of the aft_native implementation. Called by \code{.morie_aft_fit},
+#' \code{morie_aft_residuals}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -57,6 +58,11 @@
 #' @param rel Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return The value of \code{tryCatch}.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_numeric_cov(fn = fn, theta = x)
+#' res
 .morie_numeric_cov <- function(fn, theta, rel = 1e-5) {
   k <- length(theta)
   h <- rel * pmax(abs(theta), 1)
@@ -95,7 +101,8 @@
 #' @param max_iter Carried through into a list the body builds. Defaults to \code{500L}.
 #' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-06}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov}, \code{n_iter}, \code{converged}.
+#' @return A list with \code{beta}, \code{log_sigma}, \code{loglik}, \code{cov},
+#' \code{n_iter}, \code{converged}.
 #' @export
 .morie_aft_fit <- function(t, e, X, family = "weibull", max_iter = 500L,
                            tol = 1e-14, add_intercept = TRUE) {
@@ -150,11 +157,15 @@
 #' @param t A vector; its length is taken.
 #' @param e Numeric; passed to \code{sum}.
 #' @param X Carried through into a list the body builds.
-#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$cov}, \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.
+#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$cov},
+#' \code{$log_sigma}, \code{$loglik}, \code{$n_iter} from it.
 #' @param family Carried through into a list the body builds.
 #' @param title Accepted by the signature and not used anywhere in the body.
 #' @param method Carried through into a list the body builds.
-#' @return A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma}, \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events}, \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X}, \code{method}.
+#' @return A list with \code{beta}, \code{se}, \code{time_ratio}, \code{sigma},
+#' \code{log_sigma}, \code{loglik}, \code{aic}, \code{family}, \code{n}, \code{n_events},
+#' \code{n_iter}, \code{converged}, \code{cov}, \code{time}, \code{event}, \code{X},
+#' \code{method}.
 #' @export
 .morie_aft_result <- function(t, e, X, fit, family, title, method) {
   p <- length(fit$beta)
@@ -175,7 +186,8 @@
 
 #' .morie_aft_common
 #'
-#' A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma}, \code{morie_aft_log_logistic}, \code{morie_aft_weibull}.
+#' A step of the aft_native implementation. Called by \code{morie_aft_generalized_gamma},
+#' \code{morie_aft_log_logistic}, \code{morie_aft_weibull}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

@@ -18,6 +18,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .prsclm_rows(x = x)
+#' res
 .prsclm_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -33,14 +37,21 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param sumstats A list; the body reads \code{$beta}, \code{$p}, \code{$position}, \code{$snp} from it.
+#' @param sumstats A list; the body reads \code{$beta}, \code{$p}, \code{$position},
+#' \code{$snp} from it.
 #' @param ld_ref Passed to \code{.prsclm_rows}.
-#' @param p_threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param p_threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param r2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param window Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{250000}.
 #' @param genotypes Optional; may be \code{NULL}. Passed to \code{.prsclm_rows}.
 #' @param standardize A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{n_retained}, \code{thresholds}, \code{retained}, \code{score}, \code{score_threshold}, \code{scores_by_threshold}, \code{index_variants}, \code{index_variant_names}, \code{clump_of}, \code{clump_members}, \code{clump_sizes}, \code{index_is_most_significant}, \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window}, \code{standardized}, \code{weights}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{n_retained}, \code{thresholds},
+#' \code{retained}, \code{score}, \code{score_threshold}, \code{scores_by_threshold},
+#' \code{index_variants}, \code{index_variant_names}, \code{clump_of},
+#' \code{clump_members}, \code{clump_sizes}, \code{index_is_most_significant},
+#' \code{n_clumps}, \code{n_variants}, \code{n_individuals}, \code{r2}, \code{window},
+#' \code{standardized}, \code{weights}, \code{method}, \code{note}.
 #' @export
 morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
                                       r2 = 0.1, window = 250000.0,
@@ -189,6 +200,9 @@ morie_prsclm_prs_cs_clump <- function(sumstats, ld_ref, p_threshold = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .prsclm_cheatsheet()
+#' res
 .prsclm_cheatsheet <- function() {
   paste0("prsclm: morie_prsclm_prs_cs_clump(sumstats, ld_ref, p_threshold) ",
          "-> LD clumping plus thresholded polygenic scores (Purcell et al. ",

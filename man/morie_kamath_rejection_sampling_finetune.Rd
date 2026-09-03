@@ -30,5 +30,6 @@ List with \code{retained}, \code{retained_rewards}, \code{n_dropped}.
 Per-prompt top-k by reward (STABLE ties), retained in original order.
 }
 \examples{
-morie_kamath_rejection_sampling_finetune(prompts = c(1, 2, 3, 4, 5, 6, 7, 8), samples = c(1, 2, 3, 4, 5, 6, 7, 8), rewards = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
+morie_kamath_rejection_sampling_finetune(prompts = c(1, 2, 3, 4, 5, 6, 7, 8),
+  samples = c(1, 2, 3, 4, 5, 6, 7, 8), rewards = c(1, 2, 3, 4, 5, 6, 7, 8), k = 5L)
 }

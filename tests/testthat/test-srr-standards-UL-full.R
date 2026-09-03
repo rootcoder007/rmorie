@@ -1,10 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # srr UL standards completed by the morie_cluster object (R/cluster_model.R).
 
-.uln <- function() { d <- iris[1:4]; rownames(d) <- paste0("s", 1:150); d }
+.uln <- function() { d <- iris[1:4]
+rownames(d) <- paste0("s", 1:150)
+d }
 
 test_that("UL1.2 missing row names trigger a warning", {
-  m <- as.matrix(iris[1:4]); rownames(m) <- NULL
+  m <- as.matrix(iris[1:4])
+  rownames(m) <- NULL
   expect_warning(morie_cluster(m, k = 3), "row names")
 })
 
@@ -14,19 +17,22 @@ test_that("UL1.3/UL7.3 input row names are propagated to output", {
 })
 
 test_that("UL1.4b scaling changes the clustering (documented consequence)", {
-  d <- .uln(); d$Sepal.Length <- d$Sepal.Length * 100   # inflate one column
+  d <- .uln()
+  d$Sepal.Length <- d$Sepal.Length * 100   # inflate one column
   a <- morie_cluster(d, k = 3, scale = FALSE, seed = 1)
   b <- morie_cluster(d, k = 3, scale = TRUE, seed = 1)
   expect_false(identical(unname(a$assignments), unname(b$assignments)))
 })
 
 test_that("UL2.0 markedly different scales are diagnosed", {
-  d <- .uln(); d$Sepal.Length <- d$Sepal.Length * 1e4
+  d <- .uln()
+  d$Sepal.Length <- d$Sepal.Length * 1e4
   expect_warning(morie_cluster(d, k = 2, scale = FALSE), "scale")
 })
 
 test_that("UL2.2 missing-value handling is explicit", {
-  d <- .uln(); d[1, 1] <- NA
+  d <- .uln()
+  d[1, 1] <- NA
   expect_error(morie_cluster(d, k = 3, na_action = "fail"), "missing")
   cl <- morie_cluster(d, k = 3, na_action = "omit")
   expect_lt(cl$n_obs, 150L)
@@ -38,7 +44,8 @@ test_that("UL3.0/UL7.2 cluster labels are ordered by decreasing size", {
 })
 
 test_that("UL3.2 cases can be labelled when row names are absent", {
-  m <- as.matrix(iris[1:4]); rownames(m) <- NULL
+  m <- as.matrix(iris[1:4])
+  rownames(m) <- NULL
   cl <- suppressWarnings(morie_cluster(m, k = 3,
                                        case_labels = paste0("c", 1:150)))
   expect_equal(names(cl$assignments)[1], "c1")
@@ -70,8 +77,10 @@ test_that("UL4.4 summary reports sizes + within-cluster dispersion", {
 test_that("UL6.0/UL6.1/UL6.2 default plot method exists + renders", {
   expect_true(exists("plot.morie_cluster"))
   cl <- morie_cluster(.uln(), k = 3)
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  plot(cl); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  plot(cl)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 

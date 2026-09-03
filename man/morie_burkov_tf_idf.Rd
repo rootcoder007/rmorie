@@ -22,5 +22,6 @@ A list with \code{estimate}, \code{tf}, \code{df}, \code{idf}, \code{n_documents
 }
 \keyword{internal}
 \examples{
-morie_burkov_tf_idf(term = 5L, document = c(1, 2, 3, 4, 5, 6, 7, 8), corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_burkov_tf_idf(term = 5L, document = c(1, 2, 3, 4, 5, 6, 7, 8),
+  corpus = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -9,7 +9,10 @@
 #' @param c See Usage.
 #' @param t See Usage.
 #' @return List with ``bound`` (one-sided), ``bound_two_sided``, ``sum_c2``, ``t``, ``n``.
-#' @references Azuma (1967), Weighted sums of certain dependent random variables, Tohoku Mathematical Journal 19:357-367; Hoeffding (1963), JASA 58:13-30. Neither is held locally; the inequality is stated in this exact form in every standard reference consulted.
+#' @references Azuma (1967), Weighted sums of certain dependent random variables, Tohoku
+#' Mathematical Journal 19:357-367; Hoeffding (1963), JASA 58:13-30. Neither is held
+#' locally; the inequality is stated in this exact form in every standard reference
+#' consulted.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

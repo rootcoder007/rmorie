@@ -4,9 +4,11 @@
 #'
 #' R parity for \code{morie.fn.xavir.xavier_init}.
 #'
-#' \deqn{W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in} + n_{out}}\right)}{W ~ N(0, tfrac{2}{n_in + n_out})}
+#' \deqn{W \sim \mathcal{N}\!\left(0, \tfrac{2}{n_{in} + n_{out}}\right)}{W ~ N(0,
+#' tfrac{2}{n_in + n_out})}
 #' (normal) or
-#' \eqn{W \sim U\[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}\]}{W ~ U\[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}\]}
+#' \eqn{W \sim U\[-\sqrt{6/(n_{in}+n_{out})}, +\sqrt{6/(n_{in}+n_{out})}\]}{W ~
+#' U\[-sqrt{6/(n_in+n_out)}, +sqrt{6/(n_in+n_out)}\]}
 #' (uniform).
 #'
 #' @param fan_in Number of input units.

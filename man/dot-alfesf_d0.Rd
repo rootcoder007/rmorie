@@ -18,3 +18,7 @@ negative and the published clamp at 0.5 applies -- which is why pTM
 on a very short chain saturates well below 1 however confident the
 model is.
 }
+\examples{
+res <- .alfesf_d0(n = 3L)
+res
+}

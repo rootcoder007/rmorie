@@ -1266,7 +1266,8 @@ morie_datasets_tps_motorcylist_ksi <- function(format = "json",
 #'
 #'   Neighbourhood crime rates per 100,000.
 #'
-#' Tags: Neighbourhood; Crime; Rate; Crime Rates; Community Safety Indicators; CSI; Toronto; TPS; Toronto Police
+#' Tags: Neighbourhood; Crime; Rate; Crime Rates; Community Safety Indicators; CSI;
+#' Toronto; TPS; Toronto Police
 #'
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
@@ -1515,7 +1516,8 @@ morie_datasets_tps_personnel_by_rank_by_division <- function(format = "json",
 #'
 #'   Persons in crisis calls for service attended.
 #'
-#' Tags: Persons in Crisis; PIC; Crisis; Apprehensions; MHA; Calls; Calls for Service; Toronto; TPS; Toronto Police
+#' Tags: Persons in Crisis; PIC; Crisis; Apprehensions; MHA; Calls; Calls for Service;
+#' Toronto; TPS; Toronto Police
 #'
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see
@@ -1808,7 +1810,8 @@ morie_datasets_tps_total_public_complaints <- function(format = "json",
 #'
 #'   Collision occurrences by occurrence date.
 #'
-#' Tags: Traffic; Collision; Traffic Collisions; Motor Vehicle Collisions; Toronto; TPS; Toronto Police
+#' Tags: Traffic; Collision; Traffic Collisions; Motor Vehicle Collisions; Toronto; TPS;
+#' Toronto Police
 #'
 #' @inheritParams morie_datasets_tps_arcgis_hub_by_id
 #' @return A data.frame / GeoJSON list / file path; see

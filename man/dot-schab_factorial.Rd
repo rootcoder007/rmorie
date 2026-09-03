@@ -17,3 +17,7 @@ A step of the schab_hermite_shared implementation. Called by \code{.schab_indica
 See the file header for the source the module follows.
 for the source it follows.
 }
+\examples{
+res <- .schab_factorial(p = 0.5)
+res
+}

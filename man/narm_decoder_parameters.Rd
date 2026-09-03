@@ -20,5 +20,6 @@ A list with \code{fully_connected}, \code{bilinear}, \code{ratio}, \code{note}.
 }
 \keyword{internal}
 \examples{
-narm_decoder_parameters(n_items = c(1, 2, 3, 4, 5, 6, 7, 8), hidden = c(1, 2, 3, 4, 5, 6, 7, 8), emb_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
+narm_decoder_parameters(n_items = c(1, 2, 3, 4, 5, 6, 7, 8),
+  hidden = c(1, 2, 3, 4, 5, 6, 7, 8), emb_dim = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

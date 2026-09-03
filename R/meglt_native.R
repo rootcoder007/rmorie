@@ -22,13 +22,18 @@
 
 #' .meglt_mat
 #'
-#' A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{relative_error} and 1 others in the module.
+#' A step of the meglt_native implementation. Called by \code{coherence},
+#' \code{nuclear_norm}, \code{relative_error} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .meglt_mat(X = x)
+#' res
 .meglt_mat <- function(X) {
   if (is.matrix(X)) {
     out <- vector("list", nrow(X))
@@ -41,13 +46,19 @@
 
 #' .meglt_svd
 #'
-#' A step of the meglt_native implementation. Called by \code{coherence}, \code{nuclear_norm}, \code{svt}.
+#' A step of the meglt_native implementation. Called by \code{coherence},
+#' \code{nuclear_norm}, \code{svt}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M A matrix; passed to \code{nrow}.
 #' @return A list with \code{U}, \code{s}, \code{Vt}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .meglt_svd(M = X)
+#' res
 .meglt_svd <- function(M) {
   # .meglt_mat hands rows back as a LIST; svd() needs the matrix
   if (is.list(M)) M <- do.call(rbind, lapply(M, as.numeric))
@@ -146,7 +157,9 @@ sample_bound <- function(n, r, C = 1.0, exponent = 1.2) {
 #' @param step Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.9}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{X}, \code{residual_history}, \code{final_residual}, \code{tau}, \code{n_observed}, \code{fraction_observed}, \code{nuclear_norm}, \code{method}.
+#' @return A list with \code{estimate}, \code{X}, \code{residual_history},
+#' \code{final_residual}, \code{tau}, \code{n_observed}, \code{fraction_observed},
+#' \code{nuclear_norm}, \code{method}.
 #' @export
 svt <- function(M, observed, tau = NULL, step = 1.9, iters = 200L,
                 tol = 1e-6) {
@@ -231,6 +244,9 @@ matrix_completion_low_rank <- svt
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .meglt_cheatsheet()
+#' res
 .meglt_cheatsheet <- function() {
   paste("meglt: most low-rank matrices are recovered EXACTLY from ",
         "m >= C n^1.2 r log n sampled entries -- 1.25 covers all ",

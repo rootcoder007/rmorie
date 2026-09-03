@@ -15,3 +15,7 @@ The value of \code{function}.
 \description{
 product exceeds 2^53.
 }
+\examples{
+res <- .scumap_rng(seed = 1L)
+res
+}

@@ -25,6 +25,10 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .kern(u = x)
+#' res
 .kern <- function(u) exp(-0.5 * u * u)
 
 #' .smooth_at

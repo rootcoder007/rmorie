@@ -17,3 +17,7 @@ A step of the schab_reml_shared implementation. Called by \code{.schab_fit_reml}
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .schab_logit(p = 0.5)
+res
+}

@@ -55,7 +55,9 @@ test_that("morie_did staggered overall ATT matches did::att_gt aggregation", {
 test_that("morie_iv_2sls matches AER::ivreg on strong instruments", {
   set.seed(11)
   n <- 400
-  z <- rnorm(n); u <- rnorm(n); x1 <- rnorm(n)
+  z <- rnorm(n)
+  u <- rnorm(n)
+  x1 <- rnorm(n)
   d <- 1.2 * z + 0.5 * u + 0.3 * x1 + rnorm(n)
   y <- 2 * d + u + 0.7 * x1 + rnorm(n)
   df <- data.frame(y, d, z, x1)
@@ -74,7 +76,8 @@ test_that("morie_iv_2sls matches AER::ivreg on strong instruments", {
 test_that("morie_iv_2sls refuses the point estimate on weak instruments", {
   set.seed(12)
   n <- 300
-  z <- rnorm(n); u <- rnorm(n)
+  z <- rnorm(n)
+  u <- rnorm(n)
   d <- 0.05 * z + u + rnorm(n) # weak first stage
   y <- 2 * d + u + rnorm(n)
   df <- data.frame(y, d, z)

@@ -16,7 +16,7 @@ spthom(r, rho = 10, mu = 5, sigma = 0.1)
 \item{sigma}{Displacement standard deviation, positive.}
 }
 \value{
-As \code{\link[=spnscl]{spnscl()}}, plus \code{k_function} as an alias of \code{k}.
+As \code{spnscl()}, plus \code{k_function} as an alias of \code{k}.
 }
 \description{
 Poisson(mu) offspring per parent displaced by an isotropic Gaussian of
@@ -26,7 +26,7 @@ standard deviation sigma, parents Poisson(rho), giving
 K(r) = pi r^2 + (1 - exp(-r^2 / (4 sigma^2))) / rho
 
 This is the Gaussian special case of the general Neyman-Scott form, so
-it delegates to \code{\link[=spnscl]{spnscl()}} rather than restating the algebra.
+it delegates to \code{spnscl()} rather than restating the algebra.
 
 Note this is the theoretical K-function, not a simulator.
 }

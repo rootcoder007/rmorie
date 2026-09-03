@@ -84,6 +84,10 @@
 #' @param v Numeric; passed to \code{.w3_dot}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vit2lf_norm(v = x)
+#' res
 .vit2lf_norm <- function(v) sqrt(.w3_dot(v, v))
 
 #' The pre-softmax attention scores, one row per query

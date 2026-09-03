@@ -17,3 +17,7 @@ A step of the secaead_native implementation. Called by \code{.secaead_mac_data}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .secaead_pad16(b = 3L)
+res
+}

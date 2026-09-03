@@ -23,7 +23,8 @@
 #'
 #' @param pairs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus}, \code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.
+#' @return A list with \code{p_upper}, \code{p_lower}, \code{W}, \code{mu_plus},
+#' \code{sigma_plus}, \code{z_upper}, \code{n_pairs}, \code{Gamma}.
 #' @export
 .mor_ros_signed <- function(pairs, Gamma = 1) {
   d <- as.numeric(pairs)

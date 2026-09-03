@@ -4,7 +4,8 @@
 #' zero-phase via the native filtfilt (or single-pass native filter
 #' when the signal is too short to allow forward-backward padding).
 #'
-#' \deqn{h\[n\] = w\[n\] \, 2 f_c \, \mathrm{sinc}(2 f_c (n - M/2))}{h\[n\] = w\[n\] 2 f_c sinc(2 f_c (n - M/2))}
+#' \deqn{h\[n\] = w\[n\] \, 2 f_c \, \mathrm{sinc}(2 f_c (n - M/2))}{h\[n\] = w\[n\] 2
+#' f_c sinc(2 f_c (n - M/2))}
 #'
 #' @param x Numeric vector. Input signal.
 #' @param cutoff Cutoff frequency in Hz (if `fs` given) or normalised to

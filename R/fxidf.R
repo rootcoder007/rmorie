@@ -18,7 +18,8 @@
 #' @references VanderWeele, T. J. (2009). Epidemiology 20:863-871.
 #' @export
 #' @examples
-#' Fxidf(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), C_mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Fxidf(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), C_mod = c(1, 2, 3,
+#' 4, 5, 6, 7, 8))
 Fxidf <- function(Y, X, C_mod) {
   y <- as.numeric(Y)
   x <- as.numeric(X)

@@ -11,7 +11,9 @@
 #' @param epsilon See Usage.
 #' @param n See Usage.
 #' @return List with ``p``, ``p_set`` (the empirical p(C_x)), ``scale``, ``epsilon``, ``n``, ``k``.
-#' @references Acharya, Sun and Zhang (2019), Hadamard Response: Estimating Distributions Privately, Efficiently, and with Little Communication, AISTATS, PMLR 89. Equations (8), (9) and (10). Verified against the paper.
+#' @references Acharya, Sun and Zhang (2019), Hadamard Response: Estimating Distributions
+#' Privately, Efficiently, and with Little Communication, AISTATS, PMLR 89. Equations
+#' (8), (9) and (10). Verified against the paper.
 #' @export
 #' @examples
 #' Ldphr(counts = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L)

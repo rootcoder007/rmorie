@@ -19,5 +19,6 @@ A list with \code{memory}, \code{turns_forgotten}, \code{estimate}, \code{n}, \c
 }
 \keyword{internal}
 \examples{
-morie_alammar_conversation_buffer_memory(conversation = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), N = 5L)
+morie_alammar_conversation_buffer_memory(
+  conversation = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), N = 5L)
 }

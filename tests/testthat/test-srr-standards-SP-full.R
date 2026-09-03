@@ -82,8 +82,10 @@ test_that("SP4.1 coordinate units are carried + updated by reprojection", {
 test_that("SP5.0/SP5.1/SP5.2 default map plot exists with unit labels", {
   expect_true(exists("plot.morie_spatial"))
   s <- morie_spatial(.sp_grid())
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  plot(s); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  plot(s)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))
 })
 
@@ -116,7 +118,8 @@ test_that("SP6.1a great-circle distance differs from planar distance", {
 })
 
 test_that("SP6.1b Moran's I sign is stable across coordinate systems", {
-  set.seed(1); g <- .sp_grid()
+  set.seed(1)
+  g <- .sp_grid()
   i_geo <- morie_spatial_moran(morie_spatial(g, crs = 4326), "v")$I
   i_cart <- morie_spatial_moran(morie_spatial(g, crs = 3857), "v")$I
   expect_equal(sign(i_geo), sign(i_cart))

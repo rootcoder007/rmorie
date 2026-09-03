@@ -19,3 +19,7 @@ components, with mu_0 the ZEROTH MOMENT of the weight function -- 2
 for Legendre on [-1, 1]. The Hermite rule elsewhere carries no such
 factor because there the Gaussian weight integrates to 1.
 }
+\examples{
+res <- .schab_gauss_legendre(n = 3L)
+res
+}

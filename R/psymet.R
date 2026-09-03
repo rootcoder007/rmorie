@@ -329,7 +329,8 @@ morie_psymet_splithalf <- function(data, method = c("first_last", "odd_even")) {
 #' Upper/lower groups by total score (default 27% per Kelley).
 #' @return data.frame with `item`, `d`.
 #' @param data Numeric matrix or data.frame of items.
-#' @param pct Numeric in (0, 0.5); proportion for the upper/lower group split (default 0.27, the Kelley-Cureton rule).
+#' @param pct Numeric in (0, 0.5); proportion for the upper/lower group split (default
+#' 0.27, the Kelley-Cureton rule).
 #' @examples
 #' set.seed(1)
 #' f <- rnorm(50)

@@ -22,5 +22,6 @@ A list with \code{pdf}, \code{coef}, \code{fx}, \code{dx}, \code{r}, \code{n}.
 }
 \keyword{internal}
 \examples{
-rmorie:::Ostatpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L, n = 5L, cdf = c(1, 2, 3, 4, 5, 6, 7, 8), pdf = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Ostatpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), r = 5L, n = 5L,
+  cdf = c(1, 2, 3, 4, 5, 6, 7, 8), pdf = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

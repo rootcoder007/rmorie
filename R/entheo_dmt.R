@@ -83,7 +83,8 @@
 #' Lightweight .mat loader (delegates to R.matlab)
 #' @param path See Usage.
 #' @keywords internal
-#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
+#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file
+#' at \code{path}.
 .morie_entheo_loadmat <- function(path) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {
     stop(

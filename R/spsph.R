@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Spherical semivariogram model
 #'
-#' gamma(h) = c0 + sigma0^2 (3h/(2 alpha) - (h/alpha)^3 / 2) for 0 < h <= alpha; the sill is reached exactly at alpha (a TRUE range).
+#' gamma(h) = c0 + sigma0^2 (3h/(2 alpha) - (h/alpha)^3 / 2) for 0 < h <= alpha; the sill
+#' is reached exactly at alpha (a TRUE range).
 #'
 #' `range` is the PRACTICAL range in the book's parameterisation: the lag
 #' at which correlation has fallen to exp(-3) = 0.049787.

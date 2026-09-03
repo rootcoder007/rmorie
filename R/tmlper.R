@@ -20,7 +20,8 @@
 #'   171:674-677; van der Laan & Rubin (2006) IJB 2(1):11.
 #' @export
 #' @examples
-#' Tmlper(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), period = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlper(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), period =
+#' c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlper <- function(y, D, X, period, n_fourier = 2) {
   yv <- as.numeric(y)
   Dv <- as.numeric(D)

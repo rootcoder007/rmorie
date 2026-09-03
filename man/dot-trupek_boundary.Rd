@@ -21,3 +21,9 @@ One of two values, depending on the branch taken.
 recovering the other from the product keeps precision when the two
 roots differ wildly.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .trupek_boundary(z = y, d = g, delta = 0.5)
+res
+}

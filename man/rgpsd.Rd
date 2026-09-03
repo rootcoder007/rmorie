@@ -23,7 +23,7 @@ Named list \code{freqs}, \code{psd}, \code{fs}, \code{nperseg}, \code{peak_freq}
 \code{total_power}.
 }
 \description{
-Welch-averaged one-sided PSD via \code{\link[stats:spec.pgram]{stats::spec.pgram()}} on overlapping
+Welch-averaged one-sided PSD via \code{stats::spec.pgram()} on overlapping
 detrended segments. Same algorithm as SciPy's \code{welch} so band powers
 agree to ~1e-3 for typical EEG/ECG inputs.
 }

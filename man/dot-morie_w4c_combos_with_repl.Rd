@@ -20,3 +20,7 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_polyn
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_w4c_combos_with_repl(n = 3L, k = 3L)
+res
+}

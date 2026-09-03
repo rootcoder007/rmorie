@@ -23,5 +23,6 @@ A list with \code{beta}, \code{beta_star}, \code{Gamma}, \code{eigenvalues}, \co
 }
 \keyword{internal}
 \examples{
-rmorie:::Penfreg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5, lam = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Penfreg(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), P = 0.5,
+  lam = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

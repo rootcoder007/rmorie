@@ -74,6 +74,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rrblpr_rows(x = x)
+#' res
 .rrblpr_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -86,13 +90,18 @@
 # Cholesky factor, lower triangular, with a scaled jitter.
 #' Cholesky factor, lower triangular, with a scaled jitter
 #'
-#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}.
+#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
+#' \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .rrblpr_chol(A = A)
+#' res
 .rrblpr_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -116,7 +125,8 @@
 
 #' .rrblpr_chol_solve
 #'
-#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at}, \code{morie_rrblpr_rr_blup}.
+#' A step of the rrblpr_native implementation. Called by \code{.rrblpr_reml_at},
+#' \code{morie_rrblpr_rr_blup}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -202,9 +212,15 @@
 #' @param M_new Optional; may be \code{NULL}. Passed to \code{.rrblpr_rows}.
 #' @param log_lam_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-12}.
 #' @param log_lam_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{12}.
-#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.
+#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults
+#' to \code{200L}.
 #' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{marker_effects}, \code{coefficients}, \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap}, \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated}, \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{marker_effects}, \code{coefficients},
+#' \code{breeding_values}, \code{breeding_values_kernel}, \code{kernel_identity_gap},
+#' \code{fitted}, \code{residuals}, \code{lambda}, \code{lambda_estimated},
+#' \code{sigma2_e}, \code{sigma2_u}, \code{sigma2_g}, \code{h2}, \code{reml_loglik},
+#' \code{reml_profile}, \code{prediction_new}, \code{n}, \code{m}, \code{p},
+#' \code{method}, \code{note}.
 #' @export
 morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
                                  log_lam_lo = -12.0, log_lam_hi = 12.0,
@@ -335,6 +351,9 @@ morie_rrblpr_rr_blup <- function(y, M, lam = NULL, X = NULL, M_new = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .rrblpr_cheatsheet()
+#' res
 .rrblpr_cheatsheet <- function() {
   paste0("rrblpr: morie_rrblpr_rr_blup(y, M, lam) -> marker effects and ",
          "breeding values from the mixed model equations, lambda by REML ",

@@ -15,7 +15,7 @@ morie_esl_logistic_reg(X, y, newdata = NULL, threshold = 0.5, ...)
 
 \item{threshold}{Probability cut-off in (0, 1).}
 
-\item{...}{Passed to \code{\link[=morie_esl_iwls]{morie_esl_iwls()}}.}
+\item{...}{Passed to \code{morie_esl_iwls()}.}
 }
 \value{
 List with \code{beta}, \code{se}, \code{p_value}, \code{odds_ratio}, \code{prob}, \code{class},

@@ -3,7 +3,9 @@
 #' Mean and variance of the smoothed sign test statistic
 #'
 #' Sec. 5.3.1. With `Stilde = n - sum_i K(-X_i/h)`,
-#' \deqn{E_\theta(\tilde S) = n\{F(\theta) + O(h^2)\},\quad V_\theta(\tilde S) = n\[\{1-F(\theta)\}F(\theta) + O(h)\].}{E(Stilde) = n{F(theta) + O(h^2)}, V(Stilde) = n\[{1 - F(theta)} F(theta) + O(h)\].}
+#' \deqn{E_\theta(\tilde S) = n\{F(\theta) + O(h^2)\},\quad V_\theta(\tilde S) =
+#' n\[\{1-F(\theta)\}F(\theta) + O(h)\].}{E(Stilde) = n{F(theta) + O(h^2)}, V(Stilde) =
+#' n\[{1 - F(theta)} F(theta) + O(h)\].}
 #'
 #' Under `H0` these reduce to `n/2` and `n/4`, and Theorem 5.10 refines the
 #' variance to `n/4 - 2 n h f(0) A11 - (n h^3 / 3) f''(0) A13 + o(1)` with
@@ -30,7 +32,8 @@
 #' @param f0,fpp0 `f(0)` and `f''(0)`.
 #' @param a11,a13 `A_{1,1}` and `A_{1,3}`.
 #' @return Named list with ``mean``, ``variance``, ``se``, ``refined``, ``n``, ``method``.
-#' @references Fauzi and Maesono (2023), Sec. 5.3.1 and Theorem 5.10; Maesono, Moriyama and Lu (2018), AISM 70:969-982.
+#' @references Fauzi and Maesono (2023), Sec. 5.3.1 and Theorem 5.10; Maesono, Moriyama
+#' and Lu (2018), AISM 70:969-982.
 #' @examples
 #' Ssgnmom(n = 100)
 #' @export

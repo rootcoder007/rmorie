@@ -17,7 +17,8 @@ all_graphs <- function(n) {
     A <- matrix(0L, n, n)
     for (b in seq_len(m)) {
       if (bitwAnd(bitwShiftR(mask, b - 1L), 1L) == 1L) {
-        A[e[1, b], e[2, b]] <- 1L; A[e[2, b], e[1, b]] <- 1L
+        A[e[1, b], e[2, b]] <- 1L
+        A[e[2, b], e[1, b]] <- 1L
       }
     }
     A
@@ -124,7 +125,8 @@ test_that("EKR matches exhaustive search on small cases", {
         pr <- utils::combn(idx, 2)
         for (c in seq_len(ncol(pr))) {
           if (length(intersect(sets[[pr[1, c]]], sets[[pr[2, c]]])) == 0L) {
-            ok <- FALSE; break
+            ok <- FALSE
+            break
           }
         }
       }

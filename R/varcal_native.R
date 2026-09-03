@@ -70,6 +70,9 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @param b One of \code{"A"}, \code{"C"}, \code{"G"}, \code{"T"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .varcal_base_code(b = 3L)
+#' res
 .varcal_base_code <- function(b) {
   b <- toupper(as.character(b))
   if (b == "A") return(0.25)
@@ -88,6 +91,9 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .varcal_phred(p = 0.5)
+#' res
 .varcal_phred <- function(p) {
   p <- max(min(as.numeric(p), 1.0), 1e-12)
   return(-10.0 * log10(p))
@@ -95,20 +101,26 @@ varcal_CHANNEL_SETS <- c("base_quality_strand")
 
 #' .varcal_chars
 #'
-#' A step of the varcal_native implementation. Called by \code{.varcal_norm_reads}, \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module.
+#' A step of the varcal_native implementation. Called by \code{.varcal_norm_reads},
+#' \code{morie_varcal}, \code{varcal_encode_pileup} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .varcal_chars(x = x)
+#' res
 .varcal_chars <- function(x) {
   if (is.character(x) && length(x) == 1L) strsplit(x, "")[[1]] else x
 }
 
 #' .varcal_norm_reads
 #'
-#' A step of the varcal_native implementation. Called by \code{morie_varcal}, \code{varcal_encode_pileup}, \code{varcal_find_candidates} and 1 others in the module.
+#' A step of the varcal_native implementation. Called by \code{morie_varcal},
+#' \code{varcal_encode_pileup}, \code{varcal_find_candidates} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -164,8 +176,10 @@ varcal_pileup_column <- function(reads, position, reference) {
 #'
 #' @param reads Passed to \code{.varcal_norm_reads}.
 #' @param reference A vector; its length is taken.
-#' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1. Defaults to \code{2}.
-#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in \[0, 1\]. Defaults to \code{0.05}.
+#' @param min_alt_count The body requires: varcal: min_alt_count must be at least 1.
+#' Defaults to \code{2}.
+#' @param min_alt_fraction The body requires: varcal: min_alt_fraction must lie in \[0,
+#' 1\]. Defaults to \code{0.05}.
 #' @param min_bq Passed to \code{>=}. Defaults to \code{10}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -231,8 +245,10 @@ varcal_find_candidates <- function(reads, reference, min_alt_count = 2,
 #' @param candidate A list; the body reads \code{$position} from it.
 #' @param width Numeric; combined arithmetically in the body. Defaults to \code{21}.
 #' @param height Passed to \code{>=}. Defaults to \code{100}.
-#' @param channels Coerced to character by the body, with \code{as.character}. Defaults to \code{"base_quality_strand"}.
-#' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads}, \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
+#' @param channels Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{"base_quality_strand"}.
+#' @return A list with \code{reference_row}, \code{read_rows}, \code{n_reads},
+#' \code{width}, \code{centre}, \code{channels}, \code{channel_set}, \code{note}.
 #' @export
 varcal_encode_pileup <- function(reads, reference, candidate, width = 21,
                                  height = 100,
@@ -374,7 +390,8 @@ varcal_genotype_posterior <- function(image, scorer = NULL, prior = NULL) {
 #' @param scorer Passed to \code{varcal_genotype_posterior}.
 #' @param min_quality Passed to \code{>=}. Defaults to \code{10}.
 #' @param ... Passed through.
-#' @return A list with \code{estimate}, \code{candidates}, \code{n_candidates}, \code{calls}, \code{n_called}, \code{method}.
+#' @return A list with \code{estimate}, \code{candidates}, \code{n_candidates},
+#' \code{calls}, \code{n_called}, \code{method}.
 #' @export
 morie_varcal <- function(reads, reference, scorer = NULL, min_quality = 10.0,
                          ...) {

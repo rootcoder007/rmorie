@@ -27,5 +27,6 @@ ELBO = E_q[log p(x|z)] - beta KL, both terms divided by the batch
 size; the KL is the closed form.
 }
 \examples{
-morie_geron_vae_elbo(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), logvar = c(1, 2, 3, 4, 5, 6, 7, 8), recon = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_vae_elbo(x = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
+  logvar = c(1, 2, 3, 4, 5, 6, 7, 8), recon = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

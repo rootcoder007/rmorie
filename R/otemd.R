@@ -22,7 +22,8 @@
 #'   Computational Optimal Transport, eq. (2.11).
 #' @export
 #' @examples
-#' Otemd(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Otemd(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 Otemd <- function(a, b, C) {
   aa <- .ot_hist(a)
   bb <- .ot_hist(b)

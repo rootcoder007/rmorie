@@ -17,3 +17,7 @@ A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent}, \
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .b2pnorm(p = 0.5)
+res
+}

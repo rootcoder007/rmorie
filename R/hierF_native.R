@@ -108,6 +108,11 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- ._cholsolve(A = A, b = b)
+#' res
 ._cholsolve <- function(A, b) {
   A <- as.matrix(A)
   # chol() returns the UPPER factor U with A = t(U) %*% U, so the
@@ -129,7 +134,8 @@ shrink_covariance <- function(residuals, lam = NULL) {
 #'
 #' @param S A matrix; indexed by row and column.
 #' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param method One of \code{"custom"}, \code{"ols"}, \code{"shrink"}, \code{"wls"}. Defaults to \code{"shrink"}.
+#' @param method One of \code{"custom"}, \code{"ols"}, \code{"shrink"}, \code{"wls"}.
+#' Defaults to \code{"shrink"}.
 #' @param residuals Optional; may be \code{NULL}. A matrix; passed to \code{nrow}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
 #' @return A list with \code{P}, \code{lambda}.
@@ -190,7 +196,10 @@ mint_P <- function(S, W = NULL, method = "shrink", residuals = NULL,
 #' @param residuals Passed to \code{mint_P}.
 #' @param W Passed to \code{mint_P}.
 #' @param ridge Passed to \code{mint_P}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base}, \code{P}, \code{S}, \code{method}, \code{shrinkage}, \code{n_series}, \code{n_bottom}, \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite}, \code{method_detail}.
+#' @return A list with \code{estimate}, \code{reconciled}, \code{bottom}, \code{base},
+#' \code{P}, \code{S}, \code{method}, \code{shrinkage}, \code{n_series}, \code{n_bottom},
+#' \code{coherent}, \code{ps_identity_error}, \code{adjustment}, \code{cite},
+#' \code{method_detail}.
 #' @export
 mint_reconcile <- function(base, S, method = "shrink", residuals = NULL,
                            W = NULL, ridge = 1e-10) {
@@ -249,6 +258,9 @@ morie_hierF <- function(base, S, method = "shrink", residuals = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hierF_cheatsheet()
+#' res
 .hierF_cheatsheet <- function() {
   paste("hierF: y = S b, reconcile with ytilde = S P yhat where P = (S'W^-1 S)^-1 S'W^-1 minimises tr(P W P') subject to PS = I (MinT). PS = I makes SP a PROJECTION -- an already coherent forecast is left alone. Wrong P still adds up, because S forces that; it is just the wrong coherent point. W: ols=I, wls=diag, shrink=the paper's default because the full covariance is singular when m > T.")
 }

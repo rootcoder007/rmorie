@@ -19,3 +19,7 @@ A step of the over_native implementation. Called by \code{.mor_ks_2samp}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .mor_ks_sf(d = 3L, n = 3L)
+res
+}

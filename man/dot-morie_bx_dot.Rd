@@ -19,3 +19,9 @@ A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_bx_dot(a = A, b = b)
+res
+}

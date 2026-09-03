@@ -23,7 +23,8 @@
 
 #' .causdiddc_panel
 #'
-#' A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m}, \code{.causdiddc_twfe}.
+#' A step of the causdiddc_native implementation. Called by \code{.causdiddc_did_m},
+#' \code{.causdiddc_twfe}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -172,7 +173,8 @@
 # The two-way fixed effects coefficient and its decomposition.
 #' The two-way fixed effects coefficient and its decomposition
 #'
-#' A step of the causdiddc_native implementation. Called by \code{morie_causdiddc}, \code{morie_causdiddc_twfe}.
+#' A step of the causdiddc_native implementation. Called by \code{morie_causdiddc},
+#' \code{morie_causdiddc_twfe}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -180,7 +182,9 @@
 #' @param D Passed to \code{.causdiddc_panel}.
 #' @param group Passed to \code{.causdiddc_panel}.
 #' @param period Passed to \code{.causdiddc_panel}.
-#' @return A list with \code{estimate}, \code{beta_fe}, \code{weights}, \code{n_negative}, \code{negative_mass}, \code{weight_sum}, \code{n_treated_cells}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{beta_fe}, \code{weights},
+#' \code{n_negative}, \code{negative_mass}, \code{weight_sum}, \code{n_treated_cells},
+#' \code{n}, \code{method}, \code{note}.
 #' @export
 .causdiddc_twfe <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)
@@ -213,7 +217,8 @@
 # The paper's DID_M estimator: switchers vs stayers, period by period.
 #' The paper\'s DID_M estimator: switchers vs stayers, period by period
 #'
-#' A step of the causdiddc_native implementation. Called by \code{morie_causdiddc}, \code{morie_causdiddc_did_m}.
+#' A step of the causdiddc_native implementation. Called by \code{morie_causdiddc},
+#' \code{morie_causdiddc_did_m}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -221,7 +226,8 @@
 #' @param D Passed to \code{.causdiddc_panel}.
 #' @param group Passed to \code{.causdiddc_panel}.
 #' @param period Passed to \code{.causdiddc_panel}.
-#' @return A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches}, \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{did_m}, \code{switches}, \code{n_switches},
+#' \code{n_switching_obs}, \code{n}, \code{method}, \code{note}.
 #' @export
 .causdiddc_did_m <- function(Y, D, group, period) {
   p <- .causdiddc_panel(Y, D, group, period)

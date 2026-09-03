@@ -21,5 +21,6 @@ A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude}, \c
 }
 \keyword{internal}
 \examples{
-MfTf(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8), t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+MfTf(X = c(1, 2, 3, 4, 5, 6, 7, 8), freqs = c(1, 2, 3, 4, 5, 6, 7, 8),
+  t0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

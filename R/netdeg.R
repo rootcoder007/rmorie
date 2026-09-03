@@ -13,6 +13,10 @@
 #' @references Freeman (1979), Social Networks 1(3), 215-239,
 #'   \doi{10.1016/0378-8733(78)90021-7}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- Netdeg(A = A)
+#' res
 Netdeg <- function(A, node = 0) {
   M <- .t1_mat(A)
   n <- nrow(M)

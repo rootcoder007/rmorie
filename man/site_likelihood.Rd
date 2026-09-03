@@ -22,5 +22,6 @@ A numeric value.
 }
 \keyword{internal}
 \examples{
-site_likelihood(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"), site = c(1, 2, 3, 4, 5, 6, 7, 8))
+site_likelihood(tree = list(a = 1, b = 2), seqs = c("a", "b", "c"),
+  site = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

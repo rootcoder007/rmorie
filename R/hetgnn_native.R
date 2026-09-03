@@ -150,7 +150,8 @@ semantic_attention <- function(Z_per_metapath, W, b, q) {
 #' @param b_sem Passed to \code{semantic_attention}.
 #' @param q_sem Passed to \code{semantic_attention}.
 #' @param slope Passed to \code{node_attention}. Defaults to \code{0.2}.
-#' @return A list with \code{estimate}, \code{embeddings}, \code{semantic_weights}, \code{per_metapath}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{embeddings}, \code{semantic_weights},
+#' \code{per_metapath}, \code{method}, \code{note}.
 #' @export
 han_forward <- function(H, edges, types, metapaths, a_vec, W_node,
                         W_sem, b_sem, q_sem, slope = 0.2) {
@@ -231,6 +232,9 @@ morie_hetgnn <- function(H, edges, types, metapaths, a_vec, W_node,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hetgnn_cheatsheet()
+#' res
 .hetgnn_cheatsheet <- function() {
   paste("hetgnn: in a heterogeneous graph the relation between two nodes depends on the META-PATH -- Movie-Actor-Movie is co-actor, Movie-Director-Movie is shared-director, and a homogeneous GNN cannot say which it followed. TWO attentions in a hierarchy: NODE-level picks which meta-path neighbours matter, SEMANTIC-level picks which meta-paths matter, averaged OVER NODES so the weight describes the relation rather than a node. Collapsing them loses the distinction; keeping them makes both readable, which is the paper's interpretability claim.")
 }

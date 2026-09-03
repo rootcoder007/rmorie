@@ -17,6 +17,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sgflrt_rows(x = x)
+#' res
 .sgflrt_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -28,7 +32,8 @@
 
 #' .sgflrt_chol
 #'
-#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
+#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_laplace},
+#' \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -36,6 +41,10 @@
 #' @param rel_jitter Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .sgflrt_chol(A = A)
+#' res
 .sgflrt_chol <- function(A, rel_jitter = 1e-10) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -58,7 +67,8 @@
 
 #' .sgflrt_solve
 #'
-#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_inv}, \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
+#' A step of the sgflrt_native implementation. Called by \code{.sgflrt_inv},
+#' \code{.sgflrt_laplace}, \code{morie_sgflrt_spatial_glmm_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -218,7 +228,8 @@
 #' @param inner_iter Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Passed to \code{<}.
 #' @param disp Passed to \code{.sgflrt_family}. Defaults to \code{1}.
-#' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta}, \code{loglik}, \code{w}, \code{L}, \code{v}.
+#' @return A list with \code{lap}, \code{beta}, \code{u}, \code{mu}, \code{eta},
+#' \code{loglik}, \code{w}, \code{L}, \code{v}.
 #' @export
 .sgflrt_laplace <- function(y, X, Sig, family, inner_iter, tol, disp = 1.0) {
   n <- length(y)
@@ -315,17 +326,27 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param X Passed to \code{.sgflrt_rows}.
 #' @param coords Passed to \code{.sgflrt_rows}.
-#' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}. Defaults to \code{"poisson"}.
+#' @param family One of \code{"binomial"}, \code{"gaussian"}, \code{"poisson"}. Defaults
+#' to \code{"poisson"}.
 #' @param model Passed to \code{.sgflrt_corr}. Defaults to \code{"exponential"}.
-#' @param sigma2 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma2 Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param phi Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kappa Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1.5}.
 #' @param nugget Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param dispersion Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param dispersion Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param inner_iter Passed to \code{.sgflrt_laplace}. Defaults to \code{50L}.
-#' @param outer_cycles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param outer_cycles Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{3L}.
 #' @param tol Passed to \code{.sgflrt_laplace}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z}, \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2}, \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal}, \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik}, \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n}, \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_error}, \code{z},
+#' \code{spatial_effect}, \code{fitted}, \code{linear_predictor}, \code{sigma2},
+#' \code{phi}, \code{dispersion}, \code{sigma2_at_lower_bound}, \code{spatial_signal},
+#' \code{kappa}, \code{nugget}, \code{loglik}, \code{laplace_loglik},
+#' \code{gls_identity_gap}, \code{covariance}, \code{family}, \code{model}, \code{n},
+#' \code{p}, \code{d}, \code{min_distance}, \code{max_distance}, \code{method},
+#' \code{note}.
 #' @export
 morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
                                           model = "exponential",
@@ -524,6 +545,9 @@ morie_sgflrt_spatial_glmm_fit <- function(y, X, coords, family = "poisson",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sgflrt_cheatsheet()
+#' res
 .sgflrt_cheatsheet <- function() {
   paste0("sgflrt: morie_sgflrt_spatial_glmm_fit(y, X, coords, family) -> ",
          "spatial GLMM by Laplace, with the spatial random effect returned ",

@@ -23,7 +23,8 @@
 
 #' morie_tlboot
 #'
-#' A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap}, \code{naive_bootstrap}, \code{targeted_bootstrap}.
+#' A step of the tlboot_native implementation. Called by \code{multiplier_bootstrap},
+#' \code{naive_bootstrap}, \code{targeted_bootstrap}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -33,7 +34,8 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param method One of \code{"naive"}, \code{"targeted"}.
 #' @param ic Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{replicates}, \code{mean}, \code{se}, \code{influence_curve_se}, \code{ratio}, \code{note}.
+#' @return A list with \code{replicates}, \code{mean}, \code{se},
+#' \code{influence_curve_se}, \code{ratio}, \code{note}.
 #' @export
 morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
                          method = c("naive", "targeted",
@@ -203,7 +205,8 @@ multiplier_bootstrap <- function(ic, B = 1000L, seed = 0L) {
 #' @param target_mean Coerced to numeric by the body, with \code{as.numeric}.
 #' @param target_se Coerced to numeric by the body, with \code{as.numeric}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.15}.
-#' @return A list with \code{mean}, \code{se}, \code{mean_error}, \code{se_ratio}, \code{first_two_moments_ok}, \code{note}.
+#' @return A list with \code{mean}, \code{se}, \code{mean_error}, \code{se_ratio},
+#' \code{first_two_moments_ok}, \code{note}.
 #' @export
 moment_check <- function(replicates, target_mean, target_se,
                          tol = 0.15) {
@@ -230,6 +233,9 @@ moment_check <- function(replicates, target_mean, target_se,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlboot_cheatsheet()
+#' res
 .tlboot_cheatsheet <- function() {
   paste("tlboot: the ordinary bootstrap FAILS for TMLE. Refitting ",
         "a super learner on every resample makes the nuisance fits ",

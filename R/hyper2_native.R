@@ -77,6 +77,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .hyper2_dist(a = A, b = b)
+#' res
 .hyper2_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Covariance between two sets of inputs
@@ -114,7 +119,8 @@ morie_hyper2_kernel <- function(X, Z, log_ls, log_sf,
 
 #' .hyper2_jit
 #'
-#' A step of the hyper2_native implementation. Called by \code{morie_hyper2}, \code{morie_hyper2_logml}.
+#' A step of the hyper2_native implementation. Called by \code{morie_hyper2},
+#' \code{morie_hyper2_logml}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -168,6 +174,10 @@ morie_hyper2_logml <- function(y, X, log_ls, log_sf, log_sn, kind) {
 #' @param theta Numeric; combined arithmetically in the body.
 #' @return The value of \code{.w3_csum}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hyper2_logprior(theta = x)
+#' res
 .hyper2_logprior <- function(theta)
   .w3_csum(-0.5 * theta * theta - 0.5 * log(2 * pi))
 

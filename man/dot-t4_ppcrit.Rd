@@ -19,3 +19,7 @@ A step of the pptest implementation. Called by \code{Pptest}.
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .t4_ppcrit(n = 3L)
+res
+}

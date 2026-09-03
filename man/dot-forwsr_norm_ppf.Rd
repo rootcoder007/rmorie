@@ -18,3 +18,7 @@ agree bit for bit. Bisecting on erf/pnorm instead lands on different
 sides of the root in the last ulp, which is enough to move the
 consistency factor and, through it, the deletion residual.
 }
+\examples{
+res <- .forwsr_norm_ppf(p = 0.5)
+res
+}

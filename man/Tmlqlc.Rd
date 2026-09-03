@@ -36,7 +36,8 @@ Rows must be grouped by stage, with the subjects in the same order
 within each stage and equal counts per stage.
 }
 \examples{
-Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlqlc(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8),
+  reward = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Murphy, S. A. (2003). JRSS B 65(2):331-355; Petersen, M.

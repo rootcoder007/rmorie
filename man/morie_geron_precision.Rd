@@ -18,7 +18,7 @@ morie_geron_precision(y_true, y_pred, positive = 1, average = NULL)
 List with \code{precision}, \code{tp}, \code{fp}, \code{per_class}.
 }
 \description{
-Counts delegated to \code{\link[=morie_geron_confusion_matrix]{morie_geron_confusion_matrix()}}; macro averaging
+Counts delegated to \code{morie_geron_confusion_matrix()}; macro averaging
 skips classes that were never predicted.
 }
 \examples{

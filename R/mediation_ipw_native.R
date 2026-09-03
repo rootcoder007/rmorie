@@ -25,6 +25,11 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_binchoice_fit(X = x, y = y)
+#' res
 .morie_binchoice_fit <- function(X, y, link = "probit",
                                  max_iter = 100L, tol = 1e-9) {
   D <- cbind(1, X)
@@ -67,6 +72,11 @@
 #' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_wmean(y = y, w = x)
+#' res
 .morie_wmean <- function(y, w) sum(y * w) / sum(w)
 
 #' The four normalised means, exactly as written in Huber (2014)

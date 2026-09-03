@@ -70,6 +70,10 @@
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .infmax_softplus(z = y)
+#' res
 .infmax_softplus <- function(z) {
   # sp(z) = log(1 + exp(z)), branch-stable so neither branch overflows.
   v <- as.numeric(z)
@@ -88,7 +92,8 @@
 #'
 #' @param joint_scores Passed to \code{unlist}.
 #' @param marginal_scores Passed to \code{unlist}.
-#' @return A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded}, \code{note}.
+#' @return A list with \code{estimate}, \code{positive}, \code{negative}, \code{bounded},
+#' \code{note}.
 #' @export
 .infmax_jsd_estimator <- function(joint_scores, marginal_scores) {
   # I_JSD = E_P[-sp(-T)] - E_{PxP~}[sp(T)].
@@ -114,7 +119,8 @@
 #'
 #' @param joint_scores Passed to \code{unlist}.
 #' @param marginal_scores Passed to \code{unlist}.
-#' @return A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance}, \code{bounded}, \code{note}.
+#' @return A list with \code{estimate}, \code{log_sum_exp}, \code{negative_variance},
+#' \code{bounded}, \code{note}.
 #' @export
 .infmax_dv_estimator <- function(joint_scores, marginal_scores) {
   # I_DV = E_P[T] - log E_{PxP~}[exp(T)].
@@ -144,7 +150,8 @@
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
 #' @param critic Accepted by the signature and not used anywhere in the body.
 #' @param estimator Carried through into a list the body builds. Defaults to \code{"jsd"}.
-#' @return A list with \code{objective}, \code{estimator}, \code{n_positive}, \code{n_negative}, \code{note}.
+#' @return A list with \code{objective}, \code{estimator}, \code{n_positive},
+#' \code{n_negative}, \code{note}.
 #' @export
 .infmax_global_objective <- function(global_features, feature_maps, critic,
                                      estimator = "jsd") {
@@ -193,7 +200,8 @@
 #' @param feature_maps Iterated over elementwise, with \code{lapply}.
 #' @param critic Accepted by the signature and not used anywhere in the body.
 #' @param estimator Carried through into a list the body builds. Defaults to \code{"jsd"}.
-#' @return A list with \code{estimate}, \code{objective}, \code{estimator}, \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{objective}, \code{estimator},
+#' \code{n_locations}, \code{n_positive}, \code{n_negative}, \code{method}, \code{note}.
 #' @export
 .infmax_local_objective <- function(global_features, feature_maps, critic,
                                     estimator = "jsd") {
@@ -252,6 +260,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .infmax_cheatsheet()
+#' res
 .infmax_cheatsheet <- function() {
   paste0("infmax: maximising MI between input and representation is ",
          "a bad objective alone -- MI is invariant to invertible ",

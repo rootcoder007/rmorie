@@ -259,6 +259,9 @@ morie_standard_tableaux_count <- function(shape) {
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{which}.
 #' @export
+#' @examples
+#' res <- .morie_primes_upto(n = 3L)
+#' res
 .morie_primes_upto <- function(n) {
   n <- as.integer(n)
   if (n < 2L) {

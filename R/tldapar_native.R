@@ -61,7 +61,8 @@ morie_tldapar <- function(n, V = 10L, seed = 0L,
 
 #' split_sample
 #'
-#' A step of the tldapar_native implementation. Called by \code{data_adaptive_parameter}, \code{morie_tldapar}, \code{variable_importance}.
+#' A step of the tldapar_native implementation. Called by \code{data_adaptive_parameter},
+#' \code{morie_tldapar}, \code{variable_importance}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -104,7 +105,8 @@ split_sample <- function(n, V = 10L, seed = 0L) {
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @param V A count; the body uses it as \code{seq_len(...)}. Defaults to \code{10L}.
 #' @param seed Passed to \code{split_sample}. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{psi}, \code{fold_estimates}, \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{fold_estimates},
+#' \code{fold_parameters}, \code{se}, \code{ci}, \code{V}, \code{method}, \code{note}.
 #' @export
 data_adaptive_parameter <- function(define_on_training,
                                    estimate_on_holdout,
@@ -233,6 +235,9 @@ naive_reuse <- function(define_and_estimate, n, seed = 0L) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tldapar_cheatsheet()
+#' res
 .tldapar_cheatsheet <- function() {
   paste("tldapar: when the QUESTION depends on the data -- which ",
         "levels to contrast, which variable to report -- defining ",

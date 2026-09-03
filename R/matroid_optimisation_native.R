@@ -27,6 +27,10 @@
 #' @param g A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .morie_subsets(g = g)
+#' res
 .morie_subsets <- function(g) {
   n <- length(g)
   out <- list(integer(0))
@@ -47,6 +51,10 @@
 #' @param s Coerced to integer by the body, with \code{as.integer}.
 #' @return A character value.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_key(s = txt)
+#' res
 .morie_key <- function(s) paste(sort(as.integer(s)), collapse = ",")
 
 #' Check the two matroid axioms directly
@@ -286,7 +294,8 @@ morie_graphic_matroid <- function(edges, n_vertices) {
 #' @references Edmonds J (1971) \emph{Math Prog} 1:127-136.
 #' @export
 #' @examples
-#' morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_greedy_independent_set(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_greedy_independent_set <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
@@ -308,7 +317,8 @@ morie_greedy_independent_set <- function(ground, independent, weights) {
 #' @return A list with `set` and `weight`.
 #' @export
 #' @examples
-#' morie_brute_force_max_weight(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_brute_force_max_weight(ground = c(1, 2, 3, 4, 5, 6, 7, 8), independent = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_brute_force_max_weight <- function(ground, independent, weights) {
   g <- as.integer(ground)
   w <- stats::setNames(as.numeric(weights), as.character(g))
@@ -587,7 +597,7 @@ morie_hall_condition <- function(left_n, right_n, edges) {
 #'   8:399-404.
 #' @export
 #' @examples
-#' C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0), 
+#' C <- matrix(c(0, 3, 2, 0, 0, 0, 5, 2, 0, 0, 0, 3, 0, 0, 0, 0),
 #'     4, 4, byrow = TRUE)
 #' morie_max_flow_min_cut(C, 1, 4)
 morie_max_flow_min_cut <- function(capacity, source = 1L, sink = NULL) {

@@ -19,3 +19,8 @@ pays for it by taking NEGATIVE values, so the density estimate can go
 negative and the distribution estimate non-monotone. That is the
 trade the book makes explicit.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .fz_muller(u = x)
+res
+}

@@ -113,7 +113,9 @@ morie_prtcl_systematic_resample <- function(weights, u = NULL, e = NULL) {
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @param resample.threshold Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param systematic A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess}, \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic}, \code{particles}, \code{method}.
+#' @return A list with \code{estimate}, \code{filtered.mean}, \code{loglik}, \code{ess},
+#' \code{min.ess}, \code{resampled}, \code{n.particles}, \code{n.obs}, \code{systematic},
+#' \code{particles}, \code{method}.
 #' @export
 morie_prtcl_particle_filter <- function(y, n.particles, init, step, loglik,
                                        seed = 0L, resample.threshold = 1.0,

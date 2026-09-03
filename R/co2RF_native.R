@@ -22,9 +22,12 @@
 #' @param C Numeric; combined arithmetically in the body.
 #' @param C0 Numeric; combined arithmetically in the body. Defaults to \code{.C0_FIT}.
 #' @param N Numeric; passed to \code{sqrt}. Defaults to \code{273.87}.
-#' @param method The body requires: co2RF: method must be 'ar6' or 'myhre1998'. Defaults to \code{"ar6"}.
+#' @param method The body requires: co2RF: method must be 'ar6' or 'myhre1998'. Defaults
+#' to \code{"ar6"}.
 #' @param erf_adjustment A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{sarf}, \code{alpha_prime}, \code{method_used}, \code{C}, \code{C0}, \code{N}, \code{erf_adjustment}, \code{method}.
+#' @return A list with \code{estimate}, \code{sarf}, \code{alpha_prime},
+#' \code{method_used}, \code{C}, \code{C0}, \code{N}, \code{erf_adjustment},
+#' \code{method}.
 #' @export
 radiative_forcing_co2 <- function(C, C0 = .C0_FIT, N = 273.87,
                                   method = "ar6",

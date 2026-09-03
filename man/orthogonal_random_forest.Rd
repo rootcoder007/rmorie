@@ -33,5 +33,7 @@ A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n
 }
 \keyword{internal}
 \examples{
-orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8), T = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8))
+orthogonal_random_forest(Y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  T = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  W = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

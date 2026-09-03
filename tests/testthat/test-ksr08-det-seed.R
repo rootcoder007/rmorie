@@ -20,7 +20,8 @@ xs_fixture <- function() {
 }
 
 test_that("ksr08 seed is reproducible", {
-  set.seed(1); xs <- rnorm(40)
+  set.seed(1)
+  xs <- rnorm(40)
   a <- morie_ksr08_kosorok_multiplier_bootstrap(xs, B = 100, seed = 42L)
   b <- morie_ksr08_kosorok_multiplier_bootstrap(xs, B = 100, seed = 42L)
   expect_identical(a$boot_sd, b$boot_sd)

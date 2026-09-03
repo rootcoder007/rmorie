@@ -19,3 +19,9 @@ A list with \code{hi}, \code{lo}.
 full product can reach 2^64, past the 2^53 where doubles stop being
 exact integers, so it is assembled from 16-bit partial products.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_mulhilo32(a = A, b = b)
+res
+}

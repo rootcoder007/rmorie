@@ -19,3 +19,7 @@ A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi}, \cod
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .b2ent(p = 0.5)
+res
+}

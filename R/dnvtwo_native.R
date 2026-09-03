@@ -40,6 +40,10 @@
 #' @param v Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dnvtwo_norm_vec(v = x)
+#' res
 .dnvtwo_norm_vec <- function(v) {
   v <- as.numeric(v)
   s2 <- sum(v * v)
@@ -49,7 +53,8 @@
 # Cosine similarity between two numeric vectors.
 #' Cosine similarity between two numeric vectors
 #'
-#' A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{retrieve_augment}.
+#' A step of the dnvtwo_native implementation. Called by \code{deduplicate},
+#' \code{retrieve_augment}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -57,6 +62,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .dnvtwo_cos_raw(a = A, b = b)
+#' res
 .dnvtwo_cos_raw <- function(a, b) {
   a <- .dnvtwo_norm_vec(a)
   b <- .dnvtwo_norm_vec(b)
@@ -66,13 +76,18 @@
 # Coerce to list-of-rows of doubles (mirrors k.mat).
 #' Coerce to list-of-rows of doubles (mirrors k.mat)
 #'
-#' A step of the dnvtwo_native implementation. Called by \code{deduplicate}, \code{koleo}, \code{retrieve_augment} and 1 others in the module.
+#' A step of the dnvtwo_native implementation. Called by \code{deduplicate},
+#' \code{koleo}, \code{retrieve_augment} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dnvtwo_mat(x = x)
+#' res
 .dnvtwo_mat <- function(x) {
   if (is.null(x)) return(list())
   if (is.matrix(x)) {
@@ -94,6 +109,10 @@
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dnvtwo_vec(x = x)
+#' res
 .dnvtwo_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -317,6 +336,9 @@ self_distillation_loss <- function(student, teacher, temperature_s = 0.1,
 #'
 #' @return Character string.
 #' @export
+#' @examples
+#' res <- .dnvtwo_cheatsheet()
+#' res
 .dnvtwo_cheatsheet <- function() {
   paste0("dnvtwo: self-supervision lost feature quality when scaled ",
          "to UNCURATED data -- the cause is data quality and ",
@@ -351,26 +373,3 @@ morie_dnvtwo <- list(
   dinov2_repr = self_distillation_loss,
   cheatsheet = .dnvtwo_cheatsheet
 )
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -52,13 +52,18 @@
 
 #' .polkrn_vec
 #'
-#' A step of the polkrn_native implementation. Called by \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
+#' A step of the polkrn_native implementation. Called by
+#' \code{.polkrn_ip_weights_history}, \code{morie_polkrn}, \code{rbf_basis}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .polkrn_vec(x = x)
+#' res
 .polkrn_vec <- function(x) {
   as.numeric(x)
 }
@@ -73,9 +78,13 @@
 #' @param q Passed to \code{quantile}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .polkrn_quantile7(x = x, q = 0.5)
+#' res
 .polkrn_quantile7 <- function(x, q) {
   # type 7 quantile: linear interpolation, the R default
-  as.numeric(quantile(x, probs=q, type=7, names=FALSE))
+  as.numeric(quantile(x, probs = q, type = 7, names = FALSE))
 }
 
 #' Weighted least squares with an intercept added automatically
@@ -87,6 +96,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .polkrn_wls(X = x, y = y, w = x)
+#' res
 .polkrn_wls <- function(X, y, w) {
   # Weighted least squares with an intercept added automatically.
   # Returns a list with coef, se, vcov.
@@ -104,7 +118,7 @@
   sigma2 <- wrss / (n - p)
   vcov <- sigma2 * solve(XtWX)
   se <- sqrt(diag(vcov))
-  list(coef=as.numeric(beta), se=se, vcov=vcov)
+  list(coef = as.numeric(beta), se = se, vcov = vcov)
 }
 
 #' Iteratively reweighted least squares for logistic regression
@@ -115,6 +129,11 @@
 #' @param y Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{mu}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .polkrn_logistic(X = x, y = y)
+#' res
 .polkrn_logistic <- function(X, y) {
   # Iteratively reweighted least squares for logistic regression.
   # X: design matrix (with intercept), y: 0/1 vector.
@@ -140,7 +159,7 @@
   }
   eta <- as.numeric(X %*% beta)
   mu <- 1 / (1 + exp(-eta))
-  list(beta=as.numeric(beta), mu=mu)
+  list(beta = as.numeric(beta), mu = mu)
 }
 
 #' Compute inverse-probability weights for a treatment history
@@ -168,8 +187,8 @@
 
     if (t == 1L) {
       # First time: no past, intercept only for both.
-      X_num <- matrix(1, nrow=n, ncol=1L)
-      X_den <- matrix(1, nrow=n, ncol=1L)
+      X_num <- matrix(1, nrow = n, ncol = 1L)
+      X_den <- matrix(1, nrow = n, ncol = 1L)
     } else {
       A_prev <- .polkrn_vec(A_hist[[t - 1L]])
       if (is.null(L_hist[[t - 1L]])) {
@@ -199,10 +218,10 @@
     }
 
     w <- w * w_t
-    per_time[[t]] <- list(weight=w_t)
+    per_time[[t]] <- list(weight = w_t)
   }
 
-  list(w=w, per_time=per_time)
+  list(w = w, per_time = per_time)
 }
 
 # ---- public API ----
@@ -214,21 +233,26 @@
 #' source it follows.
 #'
 #' @param A_history Iterated over elementwise, with \code{lapply}.
-#' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to \code{"cumulative"}.
+#' @param how One of \code{"cumulative"}, \code{"duration"}, \code{"final"}. Defaults to
+#' \code{"cumulative"}.
 #' @return The value of \code{rowSums}.
 #' @export
-exposure_summary <- function(A_history, how="cumulative") {
+exposure_summary <- function(A_history, how = "cumulative") {
   if (!how %in% c("cumulative", "final", "duration")) {
-    stop(sprintf("exposure_summary: how must be one of %s, got %s",
-                 paste(c("cumulative", "final", "duration"), collapse=", "),
-                 how))
+    stop(sprintf(
+      "exposure_summary: how must be one of %s, got %s",
+      paste(c("cumulative", "final", "duration"), collapse = ", "),
+      how
+    ))
   }
   cols <- lapply(A_history, .polkrn_vec)
   n <- length(cols[[1]])
   for (j in seq_along(cols)) {
     if (length(cols[[j]]) != n) {
-      stop(sprintf("exposure_summary: time 0 has %d rows but time %d has %d",
-                   n, j - 1L, length(cols[[j]])))
+      stop(sprintf(
+        "exposure_summary: time 0 has %d rows but time %d has %d",
+        n, j - 1L, length(cols[[j]])
+      ))
     }
   }
   if (how == "cumulative") {
@@ -249,10 +273,11 @@ exposure_summary <- function(A_history, how="cumulative") {
 #'
 #' @param x Passed to \code{.polkrn_vec}.
 #' @param n_centres Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
-#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param width Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{X}, \code{centres}, \code{width}.
 #' @export
-rbf_basis <- function(x, n_centres=5, width=NULL) {
+rbf_basis <- function(x, n_centres = 5, width = NULL) {
   xs <- .polkrn_vec(x)
   m <- as.integer(n_centres)
   if (m < 1L) {
@@ -276,11 +301,11 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
     stop(sprintf("rbf_basis: width must be positive, got %s", width))
   }
   n <- length(xs)
-  X <- matrix(NA_real_, nrow=n, ncol=m)
+  X <- matrix(NA_real_, nrow = n, ncol = m)
   for (j in seq_len(m)) {
     X[, j] <- exp(-0.5 * ((xs - centres[j]) / h)^2)
   }
-  list(X=X, centres=centres, width=h)
+  list(X = X, centres = centres, width = h)
 }
 
 #' morie_polkrn
@@ -293,7 +318,8 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 #' @param A_history Coerced to list by the body, with \code{as.list}.
 #' @param H_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
 #' @param degree Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to \code{"both"}.
+#' @param basis One of \code{"both"}, \code{"kernel"}, \code{"polynomial"}. Defaults to
+#' \code{"both"}.
 #' @param summary Carried through into a list the body builds. Defaults to \code{"cumulative"}.
 #' @param n_centres Passed to \code{rbf_basis}. Defaults to \code{5}.
 #' @param width Passed to \code{rbf_basis}.
@@ -303,19 +329,23 @@ rbf_basis <- function(x, n_centres=5, width=NULL) {
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-morie_polkrn <- function(y, A_history, H_history, degree=2,
-                          basis="both", summary="cumulative",
-                          n_centres=5, width=NULL, kind="binary",
-                          stabilize=TRUE, trim=NULL, grid=NULL) {
+morie_polkrn <- function(y, A_history, H_history, degree = 2,
+                         basis = "both", summary = "cumulative",
+                         n_centres = 5, width = NULL, kind = "binary",
+                         stabilize = TRUE, trim = NULL, grid = NULL) {
   if (!basis %in% c("polynomial", "kernel", "both")) {
-    stop(sprintf("polynomial_kernel_msm: basis must be one of %s, got %s",
-                 paste(c("polynomial", "kernel", "both"), collapse=", "),
-                 basis))
+    stop(sprintf(
+      "polynomial_kernel_msm: basis must be one of %s, got %s",
+      paste(c("polynomial", "kernel", "both"), collapse = ", "),
+      basis
+    ))
   }
   deg <- as.integer(degree)
   if (deg < 1L) {
-    stop(sprintf("polynomial_kernel_msm: degree must be at least 1, got %s",
-                 degree))
+    stop(sprintf(
+      "polynomial_kernel_msm: degree must be at least 1, got %s",
+      degree
+    ))
   }
   A_hist <- as.list(A_history)
   if (is.null(H_history)) {
@@ -324,15 +354,19 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
     L_hist <- as.list(H_history)
   }
   if (length(L_hist) != length(A_hist)) {
-    stop(sprintf("polynomial_kernel_msm: %d treatment times but %d covariate blocks",
-                 length(A_hist), length(L_hist)))
+    stop(sprintf(
+      "polynomial_kernel_msm: %d treatment times but %d covariate blocks",
+      length(A_hist), length(L_hist)
+    ))
   }
 
   yv <- .polkrn_vec(y)
   n <- length(yv)
 
-  ipw <- .polkrn_ip_weights_history(A_hist, L_hist, kind=kind,
-                                     stabilize=stabilize, trim=trim)
+  ipw <- .polkrn_ip_weights_history(A_hist, L_hist,
+    kind = kind,
+    stabilize = stabilize, trim = trim
+  )
   w <- ipw$w
   per_time <- ipw$per_time
 
@@ -360,9 +394,11 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
     basis = basis,
     mean_weight = sum(w) / n,
     max_weight = max(w),
-    per_time_mean_weight = vapply(per_time,
-                                   function(p) sum(p$weight) / n,
-                                   numeric(1))
+    per_time_mean_weight = vapply(
+      per_time,
+      function(p) sum(p$weight) / n,
+      numeric(1)
+    )
   )
 
   if (basis %in% c("polynomial", "both")) {
@@ -380,7 +416,7 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
   }
 
   if (basis %in% c("kernel", "both")) {
-    rbf <- rbf_basis(e, n_centres=n_centres, width=width)
+    rbf <- rbf_basis(e, n_centres = n_centres, width = width)
     Xk <- rbf$X
     centres <- rbf$centres
     h <- rbf$width
@@ -393,7 +429,7 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
     n_c <- length(centres)
     out$curve_kernel <- vapply(grid, function(g) {
       bk[1] + sum(bk[1 + seq_len(n_c)] *
-                  exp(-0.5 * ((g - centres) / h)^2))
+        exp(-0.5 * ((g - centres) / h)^2))
     }, numeric(1))
     if (basis == "kernel") {
       slopes <- numeric(length(grid) - 1L)
@@ -402,8 +438,8 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
         if (grid[tt + 1L] != grid[tt]) {
           count <- count + 1L
           slopes[count] <- (out$curve_kernel[tt + 1L] -
-                            out$curve_kernel[tt]) /
-                           (grid[tt + 1L] - grid[tt])
+            out$curve_kernel[tt]) /
+            (grid[tt + 1L] - grid[tt])
         }
       }
       if (count > 0L) {
@@ -427,6 +463,9 @@ morie_polkrn <- function(y, A_history, H_history, degree=2,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .polkrn_cheatsheet()
+#' res
 .polkrn_cheatsheet <- function() {
   "polkrn: MSM on a flexible function of cumulative exposure (Hernan-Brumback-Robins 2002). polynomial degree D or RBF with quantile centres; weights are the Sec.21.2 product. summary = cumulative | final | duration."
 }

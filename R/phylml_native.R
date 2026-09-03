@@ -64,7 +64,8 @@
 
 #' .phylml_pi
 #'
-#' A step of the phylml_native implementation. Called by \code{morie_phylml}, \code{site_likelihood}, \code{substitution_matrix}.
+#' A step of the phylml_native implementation. Called by \code{morie_phylml},
+#' \code{site_likelihood}, \code{substitution_matrix}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -193,7 +194,8 @@ site_likelihood <- function(tree, seqs, site, pi = NULL, u = 1.0) {
 
 #' morie_phylml
 #'
-#' A step of the phylml_native implementation. Called by \code{.phylby_log_posterior}, \code{optimise_branch}.
+#' A step of the phylml_native implementation. Called by \code{.phylby_log_posterior},
+#' \code{optimise_branch}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -326,6 +328,9 @@ optimise_branch <- function(make_tree, seqs, pi = NULL, u = 1.0, lo = 1e-6, hi =
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .phylml_cheatsheet()
+#' res
 .phylml_cheatsheet <- function() {
   return("phylml: Felsenstein (1981) pruning. L_s(k) = prod over children of sum_x P_sx(v) L_x(child); tips are 0/1 indicators; L = sum_s pi_s L_s(root) (eq. 5). Turns a 2^(2n-2)-term sum into a linear traversal. F81 model P_ij(t) = e^-ut delta_ij + (1-e^-ut) pi_j (eq. 7), reversible, and the PULLEY PRINCIPLE means the two root branches matter only through their sum.")
 }

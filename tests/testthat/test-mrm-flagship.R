@@ -4,7 +4,8 @@
 
 .mk_mrm_df <- function(n = 500, tau = 0.8, seed = 90) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- runif(n)
+  x1 <- rnorm(n)
+  x2 <- runif(n)
   t <- rbinom(n, 1, plogis(0.6 * x1 - 0.4 * x2))
   y <- 1 + tau * t + 0.5 * x1 + 0.3 * x2 + rnorm(n)
   data.frame(y = y, t = t, x1 = x1, x2 = x2)
@@ -72,7 +73,9 @@ test_that("full MRM pipeline composes across modules (phase 17)", {
   # every step a module of this branch.
   set.seed(93)
   n <- 600
-  age <- rnorm(n); educ <- rnorm(n); re74 <- rnorm(n)
+  age <- rnorm(n)
+  educ <- rnorm(n)
+  re74 <- rnorm(n)
   treat <- rbinom(n, 1, plogis(0.4 * age + 0.3 * educ + 0.3 * re74))
   re78 <- 1 + 0.9 * treat + 0.5 * age + 0.4 * educ + 0.6 * re74 +
     rnorm(n)

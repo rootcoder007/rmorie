@@ -45,6 +45,10 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .wsm_spread(x = x)
+#' res
 .wsm_spread <- function(x) {
   xv <- as.numeric(x)
   if (length(xv) < 2L) {
@@ -76,6 +80,10 @@
 #' @param rule The body requires: rule must be '3.28', '3.29' or '3.31'. Defaults to \code{"3.31"}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .wsm_bandwidth(x = x)
+#' res
 .wsm_bandwidth <- function(x, rule = "3.31") {
   xv <- as.numeric(x)
   n <- length(xv)
@@ -99,7 +107,8 @@
 
 #' .wsm_boot_reps
 #'
-#' A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap}, \code{morie_wsm_plug_in}.
+#' A step of the wsm_native implementation. Called by \code{morie_wsm_bootstrap},
+#' \code{morie_wsm_plug_in}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -297,14 +306,14 @@ morie_wsm_importance_sampling <- function(f, p, q, samples,
 #' morie_wsm_plug_in(stats::rnorm(100), mean, B = 50)$se
 #' @export
 morie_wsm_plug_in <- function(data, T, B = 1000, seed = 0, se = TRUE) {
-  if (!is.function(T)) stop("T must be a function.", call. = FALSE)
+  if (!is.function(TRUE)) stop("T must be a function.", call. = FALSE)
   d <- as.numeric(data)
   est <- as.numeric(T(d))
   if (!se) {
     return(list(estimate = est, se = NULL, n = length(d), B = 0L,
                 method = "Plug-in estimator T(F_n), no standard error"))
   }
-  reps <- .wsm_boot_reps(d, T, B, seed)
+  reps <- .wsm_boot_reps(d, TRUE, B, seed)
   ci <- unname(stats::quantile(reps, c(0.025, 0.975), type = 7L))
   list(estimate = est, se = stats::sd(reps),
        bootstrap_bias = mean(reps) - est, replicates = reps,
@@ -346,13 +355,13 @@ morie_wsm_plug_in <- function(data, T, B = 1000, seed = 0, se = TRUE) {
 #' morie_wsm_bootstrap(stats::rnorm(100), mean, B = 100)$se
 #' @export
 morie_wsm_bootstrap <- function(data, T, B = 1000, seed = 0, ddof = 1L) {
-  if (!is.function(T)) stop("T must be a function.", call. = FALSE)
+  if (!is.function(TRUE)) stop("T must be a function.", call. = FALSE)
   dd <- as.integer(ddof)
   if (is.na(dd) || !dd %in% c(0L, 1L)) {
     stop(sprintf("ddof must be 0 or 1, got %s.", format(ddof)), call. = FALSE)
   }
   d <- as.numeric(data)
-  reps <- .wsm_boot_reps(d, T, B, seed)
+  reps <- .wsm_boot_reps(d, TRUE, B, seed)
   Bn <- length(reps)
   v1 <- stats::var(reps)
   v0 <- v1 * (Bn - 1) / Bn

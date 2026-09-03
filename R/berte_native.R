@@ -7,7 +7,8 @@
 
 #' GELU exact using erf; avoid pnorm dependency for portability
 #'
-#' A step of the berte_native implementation. Called by \code{encoder_block}, \code{morie_kamath_houlsby_adapter}.
+#' A step of the berte_native implementation. Called by \code{encoder_block},
+#' \code{morie_kamath_houlsby_adapter}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -230,7 +231,9 @@ encoder_block <- function(X, Wq, Wk, Wv, Wo, W1, b1, W2, b2, n_heads,
 #' @param n_heads Carried through into a list the body builds.
 #' @param pad_mask Passed to \code{encoder_block}.
 #' @param pre_norm Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled}, \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm}, \code{bidirectional}, \code{method}.
+#' @return A list with \code{estimate}, \code{output}, \code{attention}, \code{pooled},
+#' \code{L}, \code{d}, \code{n_layers}, \code{n_heads}, \code{pre_norm},
+#' \code{bidirectional}, \code{method}.
 #' @export
 bert_encoder <- function(X, blocks, n_heads, pad_mask = NULL,
                          pre_norm = FALSE) {

@@ -21,6 +21,10 @@
 #' @param max_lag Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_mcmc_autocov(x = x)
+#' res
 .morie_mcmc_autocov <- function(x, max_lag = NULL) {
   x <- as.numeric(x)
   n <- length(x)
@@ -35,7 +39,9 @@
 
 #' .morie_ess_from_chains
 #'
-#' A step of the mcmc_native implementation. Called by \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk}, \code{morie_effective_sample_size_tail}.
+#' A step of the mcmc_native implementation. Called by
+#' \code{morie_effective_sample_size_bayes}, \code{morie_effective_sample_size_bulk},
+#' \code{morie_effective_sample_size_tail}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -76,7 +82,8 @@
 
 #' .morie_rank_normalize
 #'
-#' A step of the mcmc_native implementation. Called by \code{.morie_split_rhat}, \code{morie_effective_sample_size_bulk}.
+#' A step of the mcmc_native implementation. Called by \code{.morie_split_rhat},
+#' \code{morie_effective_sample_size_bulk}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

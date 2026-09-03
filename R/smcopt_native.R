@@ -51,7 +51,8 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #'
 #' @param objective The body requires: smcopt: the objective was never evaluated.
 #' @param initial See Usage.
-#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{200}.
 #' @param n_steps Passed to \code{annealing_ladder}. Defaults to \code{30}.
 #' @param phi_max Passed to \code{annealing_ladder}. Defaults to \code{50}.
 #' @param phi_min Passed to \code{annealing_ladder}. Defaults to \code{0.1}.
@@ -61,7 +62,10 @@ annealing_ladder <- function(n_steps, phi_max = 50.0, phi_min = 0.1,
 #' @param scheme Defaults to \code{"systematic"}.
 #' @param seed Defaults to \code{0}.
 #' @param maximise A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{best_x}, \code{best_value}, \code{particles}, \code{weights}, \code{particle_mean}, \code{ladder}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{n_particles}, \code{maximise}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{best_x}, \code{best_value},
+#' \code{particles}, \code{weights}, \code{particle_mean}, \code{ladder},
+#' \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{n_particles},
+#' \code{maximise}, \code{note}, \code{method}.
 #' @export
 smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
                    phi_max = 50.0, phi_min = 0.1, kind = "geometric",
@@ -115,6 +119,9 @@ smcopt <- function(objective, initial, n_particles = 200, n_steps = 30,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .smcopt_cheatsheet()
+#' res
 .smcopt_cheatsheet <- function() {
   paste0("smcopt: SMC as a global optimiser (Del Moral, Doucet & Jasra ",
          "2006, sec 2.3.1c). Anneal pi_n = pi^phi_n with phi rising, so ",

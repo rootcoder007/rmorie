@@ -60,7 +60,8 @@
 #'
 #' @param item_embeddings A matrix; passed to \code{as.matrix}.
 #' @param user_embedding Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width}, \code{length}, \code{note}.
+#' @return A list with \code{sequence}, \code{item_dim}, \code{user_dim}, \code{width},
+#' \code{length}, \code{note}.
 #' @export
 .sse4r_personalise <- function(item_embeddings, user_embedding) {
   I <- as.matrix(item_embeddings)
@@ -185,7 +186,8 @@
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.
 #' @param user_dim Coerced to integer by the body, with \code{as.integer}.
 #' @param item_dim Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{user_params}, \code{item_params}, \code{total}, \code{user_share}, \code{note}.
+#' @return A list with \code{user_params}, \code{item_params}, \code{total},
+#' \code{user_share}, \code{note}.
 #' @export
 .sse4r_parameter_count <- function(n_users, n_items, user_dim, item_dim) {
   nu <- as.integer(n_users)
@@ -217,7 +219,8 @@
 #' @param item_table A matrix; passed to \code{as.matrix}.
 #' @param attend Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param top_k Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{top_k}, \code{scores}, \code{context},
+#' \code{method}, \code{note}.
 #' @export
 morie_sse4r <- function(sequence, user_embedding, item_table,
                        attend = NULL, top_k = 3) {

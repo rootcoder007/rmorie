@@ -36,5 +36,6 @@ List with \code{loss}, \code{teacher_probs}, \code{student_probs}, \code{teacher
 DINO cross-view self-distillation with centering, sharpening, momentum teacher (hmdino)
 }
 \examples{
-morie_geron_dino(images = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_dino(images = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8),
+  teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -80,7 +80,8 @@
 #'
 #' @param chain A list; the body reads \code{$species} from it.
 #' @param idx Passed to \code{sprintf}.
-#' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps}, \code{coverage}, \code{n}.
+#' @return A list with \code{species}, \code{evalue}, \code{identity}, \code{gaps},
+#' \code{coverage}, \code{n}.
 #' @export
 .alfmpv_chain_table <- function(chain, idx) {
   if (is.list(chain) && !is.null(chain$species)) {

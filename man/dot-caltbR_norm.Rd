@@ -16,3 +16,8 @@ A numeric value.
 \description{
 mass -- mirrors _norm in the Python arm.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .caltbR_norm(v = x)
+res
+}

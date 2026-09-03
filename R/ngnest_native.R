@@ -77,6 +77,9 @@
 #'
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' res <- .ngnest_default_block_sets()
+#' res
 .ngnest_default_block_sets <- function() {
   list(
     list(list("trend", 2L, 3L), list("seasonality", 2L, 3L)),
@@ -181,7 +184,8 @@
 #'
 #' @param y Passed to \code{.ngnest_ensemble_members}.
 #' @param horizon Passed to \code{.ngnest_ensemble_members}.
-#' @param lookback_multiples Passed to \code{.ngnest_ensemble_members}. Defaults to \code{c(2, 3, 4, 5, 6, 7)}.
+#' @param lookback_multiples Passed to \code{.ngnest_ensemble_members}. Defaults to
+#' \code{c(2, 3, 4, 5, 6, 7)}.
 #' @param block_sets Passed to \code{.ngnest_ensemble_members}.
 #' @param how Passed to \code{.ngnest_aggregate_forecasts}. Defaults to \code{"median"}.
 #' @param ridge Passed to \code{.ngnest_ensemble_members}. Defaults to \code{1e-08}.
@@ -248,6 +252,9 @@ morie_ngnest <- function(y, horizon,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ngnest_cheatsheet()
+#' res
 .ngnest_cheatsheet <- function() {
   paste("ngnest: same source as nbeats -- this is the ENSEMBLE, ",
         "which is what the paper's numbers actually are (180 models ",

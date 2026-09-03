@@ -51,7 +51,8 @@
 #' source it follows.
 #'
 #' @param post A vector; its length is taken.
-#' @param l_vec Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param l_vec Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{lv}, as built in the body.
 #' @export
 .snmtst_target <- function(post, l_vec) {
@@ -67,7 +68,8 @@
 
 #' identified_set
 #'
-#' A step of the snmtst_native implementation. Called by \code{breakdown_value}, \code{fixed_length_ci}, \code{sensitivity_curve}.
+#' A step of the snmtst_native implementation. Called by \code{breakdown_value},
+#' \code{fixed_length_ci}, \code{sensitivity_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -78,7 +80,9 @@
 #' @param family Compared against \code{"SD"}. Defaults to \code{"SD"}.
 #' @param l_vec Passed to \code{.snmtst_target}.
 #' @param grid Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{lower}, \code{upper}, \code{estimate}, \code{pre_max_change}, \code{bound}, \code{M}, \code{family}, \code{width}, \code{note}.
+#' @return A list with \code{lower}, \code{upper}, \code{estimate},
+#' \code{pre_max_change}, \code{bound}, \code{M}, \code{family}, \code{width},
+#' \code{note}.
 #' @export
 identified_set <- function(beta, n_pre, n_post, M = 0.0, family = "SD",
                            l_vec = NULL, grid = NULL) {
@@ -283,7 +287,9 @@ breakdown_value <- function(beta, n_pre, n_post, family = "SD",
 #' @param family Carried through into a list the body builds. Defaults to \code{"SD"}.
 #' @param l_vec Passed to \code{identified_set}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
-#' @return A list with \code{estimate}, \code{lower}, \code{upper}, \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family}, \code{level}, \code{conservative}, \code{method}.
+#' @return A list with \code{estimate}, \code{lower}, \code{upper},
+#' \code{identified_lower}, \code{identified_upper}, \code{M}, \code{family},
+#' \code{level}, \code{conservative}, \code{method}.
 #' @export
 fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
                             family = "SD", l_vec = NULL, level = 0.95) {
@@ -314,6 +320,9 @@ fixed_length_ci <- function(beta, sigma, n_pre, n_post, M = 0.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .snmtst_cheatsheet()
+#' res
 .snmtst_cheatsheet <- function() {
   paste0("snmtst: honest DiD. beta = tau + delta with tau_pre = 0, ",
          "so the PRE coefficients estimate the violation. Instead ",

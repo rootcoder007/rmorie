@@ -133,6 +133,9 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @param h A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .dbmirror(h = 0.5)
+#' res
 .dbmirror <- function(h) {
   L <- length(h)
   out <- numeric(L)
@@ -205,6 +208,9 @@ Wave <- function(y, wavelet = "db2", level = NULL) {
 #' @param n Passed to \code{>=}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .dbpow2(n = 3L)
+#' res
 .dbpow2 <- function(n) {
   k <- 0L
   m <- n

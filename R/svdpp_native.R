@@ -103,7 +103,8 @@
 #' @param rated_items Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param y Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param exponent Passed to \code{.svdpp_implicit_term}. Defaults to \code{-0.5}.
-#' @return A list with \code{prediction}, \code{effective_user_factor}, \code{implicit}, \code{n_rated}, \code{note}.
+#' @return A list with \code{prediction}, \code{effective_user_factor}, \code{implicit},
+#' \code{n_rated}, \code{note}.
 #' @export
 .svdpp_predict <- function(mu, b_user, b_item, p_u, q_i,
                           rated_items = NULL, y = NULL,
@@ -152,7 +153,8 @@
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.007}.
 #' @param reg Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.015}.
 #' @param exponent Passed to \code{.svdpp_predict}. Defaults to \code{-0.5}.
-#' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u}, \code{q_i}, \code{y}, \code{note}.
+#' @return A list with \code{error}, \code{b_user}, \code{b_item}, \code{p_u},
+#' \code{q_i}, \code{y}, \code{note}.
 #' @export
 .svdpp_sgd_step <- function(rating, mu, b_user, b_item, p_u, q_i,
                            rated_items, y,
@@ -203,7 +205,9 @@
 #' @param exponent Passed to \code{.svdpp_sgd_step}. Defaults to \code{-0.5}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param implicit A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu}, \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{rmse}, \code{rmse_history}, \code{mu},
+#' \code{b_user}, \code{b_item}, \code{P}, \code{Q}, \code{Y}, \code{implicit},
+#' \code{method}, \code{note}.
 #' @export
 .svdpp_fit <- function(ratings, n_users, n_items,
                       factors = 4, epochs = 30,
@@ -315,6 +319,9 @@ morie_svdpp <- function(ratings, n_users, n_items,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .svdpp_cheatsheet()
+#' res
 .svdpp_cheatsheet <- function() {
   return(paste0(
     "svdpp: a rating dataset carries a SECOND signal for free -- ",

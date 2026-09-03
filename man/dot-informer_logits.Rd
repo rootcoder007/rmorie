@@ -21,3 +21,7 @@ A step of the informer_native implementation. Called by \code{morie_informer_ful
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .informer_logits(q = 0.5, K = 3L, scale = TRUE)
+res
+}

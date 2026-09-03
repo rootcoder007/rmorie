@@ -18,7 +18,12 @@
 #' @param target Vertex to be hit, 0-based.
 #' @return List with \code{estimate}, \code{hitting}, \code{target},
 #'   \code{start}, \code{n}, \code{method}.
-#' @references Lovasz (1996), Random walks on graphs: a survey, in Combinatorics, Paul Erdos is Eighty, vol. 2, pp. 353-398.  The PDF on Lovasz's ELTE page could not be fetched from this host (expired TLS certificate on web.cs.elte.hu), so this is the standard first-step recurrence rather than a quoted equation.  It is anchored in the harness on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with d the cyclic distance holds exactly and is independent of this code.
+#' @references Lovasz (1996), Random walks on graphs: a survey, in Combinatorics, Paul
+#' Erdos is Eighty, vol. 2, pp. 353-398.  The PDF on Lovasz's ELTE page could not be
+#' fetched from this host (expired TLS certificate on web.cs.elte.hu), so this is the
+#' standard first-step recurrence rather than a quoted equation.  It is anchored in the
+#' harness on the cycle C_n, where the classical closed form H(i,j) = d(n-d) with d the
+#' cyclic distance holds exactly and is independent of this code.
 #' @export
 Hittime <- function(G, start = NULL, target = 0L) {
   W <- as.matrix(G)

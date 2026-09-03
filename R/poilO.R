@@ -7,7 +7,11 @@
 #' @param Yhat Predicted Poisson means, strictly positive.
 #'
 #' @return List with ``loss``, ``mean_loss``, ``n``, ``L``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7, pp. 400-403.  Read from the chapter PDF, not recalled.  The Poisson display carries its sign correctly and is implemented exactly as printed.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 10, Sect. 10.7, pp. 400-403.  Read from the
+#' chapter PDF, not recalled.  The Poisson display carries its sign correctly and is
+#' implemented exactly as printed.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

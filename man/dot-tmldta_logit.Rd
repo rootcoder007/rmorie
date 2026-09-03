@@ -17,3 +17,7 @@ A step of the tmldta_native implementation. Called by \code{split_specific_tmle}
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tmldta_logit(p = 0.5)
+res
+}

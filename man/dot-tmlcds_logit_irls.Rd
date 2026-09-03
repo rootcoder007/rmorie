@@ -28,3 +28,9 @@ The value of \code{beta}, as built in the body.
 unpenalized), \code{ridge} stabilises the Newton solve without changing
 the fitted coefficients
 }
+\examples{
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .tmlcds_logit_irls(X = X, y = y)
+res
+}

@@ -60,8 +60,10 @@ clpopt_pivots <- c("bland", "dantzig")
 #' @param b_ub Coerced to numeric by the body, with \code{as.numeric}.
 #' @param A_eq Optional; may be \code{NULL}. Passed to \code{.clpopt_mat}.
 #' @param b_eq Coerced to numeric by the body, with \code{as.numeric}.
-#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @return A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack}, \code{row_kinds}.
+#' @param upper Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @return A list with \code{A}, \code{b}, \code{c}, \code{n_original}, \code{n_slack},
+#' \code{row_kinds}.
 #' @export
 standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
                           b_eq = NULL, upper = NULL) {
@@ -215,7 +217,9 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param m A count; the body uses it as \code{seq_len(...)}.
 #' @param total Accepted by the signature and not used anywhere in the body.
 #' @param rule Compared against \code{"bland"}.
-#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate}, \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
+#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun},
+#' \code{duals}, \code{basis}, \code{reduced_costs}, \code{degenerate},
+#' \code{multiple_optima}, \code{alternate_entering}, \code{rule}, \code{method}.
 #' @export
 .clpopt_report <- function(T, basis, cv, n, m, total, rule) {
   x <- rep(0.0, n)
@@ -256,7 +260,8 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param st Compared against \code{"cycling"}.
 #' @param rule Compared against \code{"dantzig"}.
 #' @param phase Passed to \code{sprintf}.
-#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule}, \code{message}, \code{method}.
+#' @return A list with \code{estimate}, \code{status}, \code{x}, \code{fun}, \code{rule},
+#' \code{message}, \code{method}.
 #' @export
 .clpopt_fail <- function(st, rule, phase) {
   why <- if (st == "cycling")
@@ -287,7 +292,8 @@ standard_form <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rule Passed to \code{.clpopt_run}. Defaults to \code{"bland"}.
 #' @param max_iter Passed to \code{.clpopt_run}. Defaults to \code{10000}.
-#' @param initial_basis Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param initial_basis Optional; may be \code{NULL}. Coerced to integer by the body,
+#' with \code{as.integer}.
 #' @return The value of \code{.clpopt_report}.
 #' @export
 simplex <- function(c, A, b, rule = "bland", max_iter = 10000,

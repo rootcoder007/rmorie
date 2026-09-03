@@ -14,7 +14,9 @@
 
 #' morie_qrntcq_gamma_generation_time
 #'
-#' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module.
+#' A step of the qrntcq_native implementation. Called by
+#' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
+#' \code{morie_qrntcq_quarantine_efficacy} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -79,7 +81,9 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 
 #' morie_qrntcq_quarantine_efficacy
 #'
-#' A step of the qrntcq_native implementation. Called by \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration}, \code{morie_qrntcq_relative_utility}.
+#' A step of the qrntcq_native implementation. Called by
+#' \code{morie_qrntcq_efficacy_test_and_release}, \code{morie_qrntcq_optimal_duration},
+#' \code{morie_qrntcq_relative_utility}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -87,7 +91,8 @@ morie_qrntcq_gamma_generation_time <- function(shape = 2.83, scale = 1.86,
 #' @param t.R Coerced to numeric by the body, with \code{as.numeric}.
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param t.E Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass}, \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
+#' @return A list with \code{efficacy}, \code{prevented.mass}, \code{remaining.mass},
+#' \code{t.Q}, \code{t.R}, \code{max.attainable}, \code{pre.quarantine.mass}.
 #' @export
 morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
                                               generation.time = NULL,
@@ -126,7 +131,9 @@ morie_qrntcq_quarantine_efficacy <- function(t.Q, t.R,
 #' @param false.negative Coerced to numeric by the body, with \code{as.numeric}.
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param t.R.positive Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{efficacy}, \code{efficacy.detained}, \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound}, \code{note}.
+#' @return A list with \code{efficacy}, \code{efficacy.detained},
+#' \code{efficacy.released}, \code{false.negative}, \code{t.T}, \code{t.R}, \code{bound},
+#' \code{note}.
 #' @export
 morie_qrntcq_efficacy_test_and_release <- function(t.Q, t.T, t.R,
                                                    false.negative,
@@ -179,7 +186,9 @@ morie_qrntcq_utility <- function(efficacy, days.in.quarantine) {
 #' @param t.Q Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param infected.fraction Accepted by the signature and not used anywhere in the body.
-#' @return A list with \code{relative.utility}, \code{utility.a}, \code{utility.b}, \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction}, \code{note}.
+#' @return A list with \code{relative.utility}, \code{utility.a}, \code{utility.b},
+#' \code{efficacy.a}, \code{efficacy.b}, \code{independent.of.infected.fraction},
+#' \code{note}.
 #' @export
 morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
                                           generation.time = NULL,
@@ -209,7 +218,8 @@ morie_qrntcq_relative_utility <- function(t.R.a, t.R.b, t.Q = 3,
 #' @param generation.time Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param t.max Numeric; combined arithmetically in the body. Defaults to \code{20}.
 #' @param step Numeric; combined arithmetically in the body. Defaults to \code{0.25}.
-#' @return A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum}, \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.
+#' @return A list with \code{estimate}, \code{optimal.t.R}, \code{efficacy.at.optimum},
+#' \code{utility.at.optimum}, \code{curve}, \code{t.Q}, \code{method}.
 #' @export
 morie_qrntcq_optimal_duration <- function(t.Q = 3, generation.time = NULL,
                                           t.max = 20, step = 0.25) {

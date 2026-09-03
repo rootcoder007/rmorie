@@ -32,6 +32,9 @@
 #' @param stream Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_k05_permutation(n = 3L)
+#' res
 .morie_k05_permutation <- function(n, seed = 0, stream = 0) {
   # Fisher-Yates driven by the package's Philox stream, swapping
   # downward from n-1 and consuming one uniform per step, so the
@@ -53,7 +56,8 @@
 
 #' .morie_k05_hits
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
+#' \code{morie_kupiec_var_test}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -69,7 +73,8 @@
 
 #' .morie_k05_lr_uc
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc}, \code{morie_kupiec_var_test}.
+#' A step of the k05_tranche1 implementation. Called by \code{morie_christoffersen_cc},
+#' \code{morie_kupiec_var_test}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -122,8 +127,12 @@ morie_kupiec_var_test <- function(hits, alpha = 0.05) {
 #' source it follows.
 #'
 #' @param h A vector; its length is taken and its elements indexed.
-#' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11}, \code{pi01}, \code{pi11}, \code{pi}.
+#' @return A list with \code{stat}, \code{n00}, \code{n01}, \code{n10}, \code{n11},
+#' \code{pi01}, \code{pi11}, \code{pi}.
 #' @export
+#' @examples
+#' res <- .morie_k05_lr_ind(h = 0.5)
+#' res
 .morie_k05_lr_ind <- function(h) {
   a <- h[-length(h)]
   b <- h[-1]
@@ -346,7 +355,8 @@ morie_snht <- function(x, n_mc = 1999, seed = 0) {
 
 #' .morie_k05_acvf
 #'
-#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf}, \code{morie_sample_pacf}.
+#' A step of the k05_tranche1 implementation. Called by \code{morie_sample_acf},
+#' \code{morie_sample_pacf}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

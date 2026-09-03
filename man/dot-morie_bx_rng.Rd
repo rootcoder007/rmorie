@@ -17,3 +17,7 @@ The value of \code{function}.
 2^53, so the double arithmetic here is exact and matches the Python
 arm\'s 32-bit masked integer step for step.
 }
+\examples{
+res <- .morie_bx_rng(seed = 1L)
+res
+}

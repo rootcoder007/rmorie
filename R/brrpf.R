@@ -9,7 +9,14 @@
 #' @param nu_beta Degrees of freedom of the prior on the marker-effect variance.
 #'
 #' @return List with ``S``, ``S_beta``, ``nu``, ``nu_beta``, ``var_y``, ``n``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 6, the BGLR default rules quoted on pp. 175 and 184: the scale of the residual prior is Var(Y)(1 - R2)(nu + 2) and, for the BRR, the scale of the marker-effect prior is Var(Y) R2 (nu_beta + 2).  Delegates to the chapter routine in morie.fn._gp_core, which was verified against this book in the earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and equation number above are that routine's own, re-read against the chapter PDF here.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 6, the BGLR default rules quoted on pp. 175
+#' and 184: the scale of the residual prior is Var(Y)(1 - R2)(nu + 2) and, for the BRR,
+#' the scale of the marker-effect prior is Var(Y) R2 (nu_beta + 2).  Delegates to the
+#' chapter routine in morie.fn._gp_core, which was verified against this book in the
+#' earlier tranches of this shelf recorded in ledger/SHELF_LEDGER.txt; the page and
+#' equation number above are that routine's own, re-read against the chapter PDF here.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

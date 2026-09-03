@@ -22,13 +22,18 @@
 # S3 helper: ensure a numeric vector (k.vec).
 #' S3 helper: ensure a numeric vector (k.vec)
 #'
-#' A step of the nrfrad_native implementation. Called by \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and 2 others in the module.
+#' A step of the nrfrad_native implementation. Called by
+#' \code{density_is_view_independent}, \code{positional_encoding}, \code{ray_points} and
+#' 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p Numeric; the body checks with \code{is.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .nrfrad_vec(p = 0.5)
+#' res
 .nrfrad_vec <- function(p) {
   if (is.numeric(p) && !is.list(p)) {
     as.numeric(p)
@@ -137,7 +142,8 @@ ray_points <- function(origin, direction, t_near, t_far, n_samples,
 #' @param sigma Passed to \code{.nrfrad_vec}.
 #' @param colour Passed to \code{.nrfrad_mat}.
 #' @param t Passed to \code{.nrfrad_vec}.
-#' @return A list with \code{colour}, \code{weights}, \code{accumulated_alpha}, \code{transmittance_final}, \code{note}.
+#' @return A list with \code{colour}, \code{weights}, \code{accumulated_alpha},
+#' \code{transmittance_final}, \code{note}.
 #' @export
 volume_render <- function(sigma, colour, t) {
   s <- .nrfrad_vec(sigma)
@@ -248,6 +254,9 @@ density_is_view_independent <- function(model, point, directions,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .nrfrad_cheatsheet()
+#' res
 .nrfrad_cheatsheet <- function() {
   paste("nrfrad: a scene IS a continuous 5D function -- position plus ",
         "viewing direction to density and radiance -- stored in a ",

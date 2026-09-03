@@ -2,7 +2,7 @@
 % Please edit documentation in R/poissp_native.R
 \name{.poissp_joint_hessian}
 \alias{.poissp_joint_hessian}
-\title{Negative joint Hessian [\link[=X\\\\'MX, X\\\\'M]{X\'MX, X\'M}, [MX, M + Q]] (+ constraint
+\title{Negative joint Hessian [X\'MX, X\'M, [MX, M + Q]] (+ constraint
 block)}
 \usage{
 .poissp_joint_hessian(X, m, Q, constrain)

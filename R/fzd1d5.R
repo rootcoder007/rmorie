@@ -28,7 +28,8 @@
 #' @param smooth The caller's assertion of D5.
 #' @param tol Tolerance for the D1/D2 checks.
 #' @param lo,hi,ngrid Fixed quadrature window and node count.
-#' @return Named list with ``d1``, ``d2``, ``d3``, ``d4``, ``d5``, ``mass``, ``mu2``, ``monotone``, ``method``.
+#' @return Named list with ``d1``, ``d2``, ``d3``, ``d4``, ``d5``, ``mass``, ``mu2``,
+#' ``monotone``, ``method``.
 #' @references Fauzi and Maesono (2023), conditions D1-D5 of Sec. 5.2.
 #' @examples
 #' Bfassum(h = 0.1, n = 100, g = exp)

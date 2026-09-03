@@ -22,5 +22,7 @@ loss is the mean squared L2 norm PER SAMPLE, \code{mse_per_element} the
 plain elementwise mean; compression_ratio = input_dim / code_dim.
 }
 \examples{
-morie_geron_autoencoder_reconstruction_loss(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), encoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), decoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
+morie_geron_autoencoder_reconstruction_loss(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+  encoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+  decoded = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2))
 }

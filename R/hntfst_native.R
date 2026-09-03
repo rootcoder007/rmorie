@@ -18,13 +18,18 @@
 
 #' ._mean
 #'
-#' A step of the hntfst_native implementation. Called by \code{._best_split}, \code{honest_forest}, \code{honest_tree} and 1 others in the module.
+#' A step of the hntfst_native implementation. Called by \code{._best_split},
+#' \code{honest_forest}, \code{honest_tree} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- ._mean(v = x)
+#' res
 ._mean <- function(v) if (length(v) == 0L) 0.0 else mean(v)
 
 #' ._best_split
@@ -81,14 +86,16 @@
 
 #' honest_tree
 #'
-#' A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test}, \code{grow_forest}, \code{honest_forest}.
+#' A step of the hntfst_native implementation. Called by \code{.frfgrf_honesty_test},
+#' \code{grow_forest}, \code{honest_forest}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; indexed by row and column.
 #' @param y A vector; its length is taken and its elements indexed.
 #' @param W Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param kind One of \code{"double-sample"}, \code{"propensity"}. Defaults to \code{"double-sample"}.
+#' @param kind One of \code{"double-sample"}, \code{"propensity"}. Defaults to
+#' \code{"double-sample"}.
 #' @param min_leaf Numeric; combined arithmetically in the body. Defaults to \code{5L}.
 #' @param alpha Passed to \code{._best_split}. Defaults to \code{0.05}.
 #' @param pi Numeric; passed to \code{max}. Defaults to \code{0.5}.
@@ -173,7 +180,8 @@ honest_tree <- function(X, y, W = NULL, kind = "double-sample",
 
 #' leaf_of
 #'
-#' A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict}, \code{forest_weights}, \code{morie_clrgrf}.
+#' A step of the hntfst_native implementation. Called by \code{.hntfst_tree_predict},
+#' \code{forest_weights}, \code{morie_clrgrf}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -266,7 +274,10 @@ infinitesimal_jackknife <- function(preds, in_bag, n, s,
 #' @param at Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts}, \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction}, \code{level}, \code{method}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci},
+#' \code{variance}, \code{n}, \code{s}, \code{n_trees}, \code{split_counts},
+#' \code{split_share}, \code{mean_depth}, \code{kind}, \code{honest}, \code{correction},
+#' \code{level}, \code{method}.
 #' @export
 honest_forest <- function(X, y, W = NULL, kind = "double-sample",
                           n_trees = 200L, subsample_frac = 0.5,
@@ -349,7 +360,9 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 
 #' grow_forest
 #'
-#' A step of the hntfst_native implementation. Called by \code{.center_cate}, \code{.frfgrf_forest_fit_check}, \code{.ipwgrf_forest_nuisances} and 6 others in the module.
+#' A step of the hntfst_native implementation. Called by \code{.center_cate},
+#' \code{.frfgrf_forest_fit_check}, \code{.ipwgrf_forest_nuisances} and 6 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -364,7 +377,8 @@ honest_forest <- function(X, y, W = NULL, kind = "double-sample",
 #' @param pi Passed to \code{honest_tree}. Defaults to \code{0.5}.
 #' @param max_depth Passed to \code{honest_tree}. Defaults to \code{12L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
-#' @param clusters Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param clusters Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
 #' @export
 grow_forest <- function(X, y, W = NULL, kind = "double-sample",
@@ -411,7 +425,8 @@ grow_forest <- function(X, y, W = NULL, kind = "double-sample",
 
 #' forest_weights
 #'
-#' A step of the hntfst_native implementation. Called by \code{.center_cate}, \code{.ipwgrf_forest_nuisances}, \code{.itrgrf_fit_arm} and 5 others in the module.
+#' A step of the hntfst_native implementation. Called by \code{.center_cate},
+#' \code{.ipwgrf_forest_nuisances}, \code{.itrgrf_fit_arm} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -483,6 +498,9 @@ morie_hntfst <- function(X, y, W = NULL, kind = "double-sample",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hntfst_cheatsheet()
+#' res
 .hntfst_cheatsheet <- function() {
   paste("hntfst: honest forest. Procedure 1 splits the subsample into I and J, places splits with J's responses and I's features but NEVER I's responses, and estimates leaves from I alone (Def. 2). Procedure 2 splits on W instead of Y. Def. 3: each feature has prob >= pi/d of being split on. Variance is the IJ, eq. (8), with the n(n-1)/(n-s)^2 correction for subsampling without replacement.")
 }

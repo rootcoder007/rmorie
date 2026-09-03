@@ -56,13 +56,18 @@
 
 #' .vqgenc_as_matrix
 #'
-#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode}, \code{.vqgenc_quantize}.
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_encode},
+#' \code{.vqgenc_quantize}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vqgenc_as_matrix(x = x)
+#' res
 .vqgenc_as_matrix <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -95,13 +100,18 @@
 
 #' .vqgenc_as_vector
 #'
-#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss}, \code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
+#' A step of the vqgenc_native implementation. Called by \code{.vqgenc_codebook_loss},
+#' \code{.vqgenc_commitment_loss}, \code{.vqgenc_straight_through}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{nrow}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vqgenc_as_vector(x = x)
+#' res
 .vqgenc_as_vector <- function(x) {
   if (is.matrix(x)) {
     if (nrow(x) == 1L) {
@@ -132,7 +142,8 @@
 #'
 #' @param vectors Passed to \code{.vqgenc_as_matrix}.
 #' @param codebook Passed to \code{.vqgenc_as_matrix}.
-#' @return A list with \code{indices}, \code{codes}, \code{distance}, \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
+#' @return A list with \code{indices}, \code{codes}, \code{distance},
+#' \code{codebook_size}, \code{used}, \code{usage_fraction}, \code{note}.
 #' @export
 .vqgenc_quantize <- function(vectors, codebook) {
   Z <- .vqgenc_as_matrix(codebook)
@@ -277,7 +288,9 @@
 #' @param height Coerced to integer by the body, with \code{as.integer}.
 #' @param width Coerced to integer by the body, with \code{as.integer}.
 #' @param downsample Coerced to integer by the body, with \code{as.integer}. Defaults to \code{16L}.
-#' @return A list with \code{tokens}, \code{pixels}, \code{compression}, \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup}, \code{note}.
+#' @return A list with \code{tokens}, \code{pixels}, \code{compression},
+#' \code{attention_cost_pixels}, \code{attention_cost_tokens}, \code{speedup},
+#' \code{note}.
 #' @export
 .vqgenc_sequence_length <- function(height, width, downsample = 16L) {
   H <- as.integer(height)
@@ -311,7 +324,9 @@
 #' @param codebook Passed to \code{.vqgenc_quantize}.
 #' @param beta Passed to \code{.vqgenc_commitment_loss}. Defaults to \code{0.25}.
 #' @param target Optional; may be \code{NULL}. Passed to \code{.vqgenc_as_matrix}.
-#' @return A list with \code{estimate}, \code{indices}, \code{codes}, \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss}, \code{usage_fraction}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{indices}, \code{codes},
+#' \code{codebook_loss}, \code{commitment_loss}, \code{reconstruction}, \code{loss},
+#' \code{usage_fraction}, \code{method}, \code{note}.
 #' @export
 .vqgenc_encode <- function(vectors, codebook, beta = 0.25, target = NULL) {
   q <- .vqgenc_quantize(vectors, codebook)
@@ -357,6 +372,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .vqgenc_cheatsheet()
+#' res
 .vqgenc_cheatsheet <- function() {
   paste("vqgenc: transformers have no locality prior and cost O(n^2),",
         "so shorten the SEQUENCE rather than cheapen the attention --",

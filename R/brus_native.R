@@ -157,7 +157,8 @@ morie_cluster_twostage <- function(cluster_totals = NULL,
 #' @return List with m_opt, n_for_variance, n_for_budget.
 #' @export
 #' @examples
-#' morie_twostage_design(s_w = c(1, 2, 3, 4, 5, 6, 7, 8), s_b = c(1, 2, 3, 4, 5, 6, 7, 8), c1 = c(1, 2, 3, 4, 5, 6, 7, 8), c2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_twostage_design(s_w = c(1, 2, 3, 4, 5, 6, 7, 8), s_b = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), c1 = c(1, 2, 3, 4, 5, 6, 7, 8), c2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
                                   c_max = NA) {
   stopifnot(s_w > 0, s_b > 0, c1 > 0, c2 > 0)
@@ -182,7 +183,8 @@ morie_twostage_design <- function(s_w, s_b, c1, c2, v_max = NA,
 #' @return Numeric variance estimate.
 #' @export
 #' @examples
-#' morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), t_hat = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_pps_variance(z = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), t_hat
+#' = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_pps_variance <- function(z, p, t_hat) {
   z <- as.numeric(z)
   p <- as.numeric(p)

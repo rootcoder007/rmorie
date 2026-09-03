@@ -21,13 +21,19 @@
 
 #' .schn_mat
 #'
-#' A step of the schN_native implementation. Called by \code{cfconv}, \code{forces_from_energy}, \code{invariance_error}.
+#' A step of the schN_native implementation. Called by \code{cfconv},
+#' \code{forces_from_energy}, \code{invariance_error}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .schn_mat(x = X)
+#' res
 .schn_mat <- function(x) {
   if (is.list(x) && !is.matrix(x)) return(do.call(rbind, x))
   if (is.matrix(x)) { storage.mode(x) <- "double"
@@ -44,6 +50,10 @@
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schn_vec(x = x)
+#' res
 .schn_vec <- function(x) {
   if (is.list(x)) return(as.numeric(unlist(x)))
   as.numeric(x)
@@ -59,7 +69,8 @@
 #' @param mu_min Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param mu_max Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{6}.
 #' @param n_gaussians Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
-#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param gamma Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 gaussian_expansion <- function(r, mu_min = 0.0, mu_max = 6.0, n_gaussians = 25,
@@ -169,7 +180,8 @@ forces_from_energy <- function(energy_fn, R, h = 1e-5) {
 #' @param R Passed to \code{.schn_mat}.
 #' @param Q Passed to \code{.schn_mat}.
 #' @param g Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{energy_error}, \code{force_error}, \code{energy_invariant}, \code{forces_equivariant}, \code{note}.
+#' @return A list with \code{energy_error}, \code{force_error}, \code{energy_invariant},
+#' \code{forces_equivariant}, \code{note}.
 #' @export
 invariance_error <- function(energy_fn, R, Q, g = NULL) {
   pos <- .schn_mat(R)
@@ -197,6 +209,9 @@ invariance_error <- function(energy_fn, R, Q, g = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .schN_cheatsheet()
+#' res
 .schN_cheatsheet <- function() {
   paste("schn: a convolution needs a grid and atoms have none, so ",
         "make the filter a FUNCTION of interatomic distance -- a ",

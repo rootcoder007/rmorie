@@ -40,26 +40,32 @@
 # Bernstein, D. J. (2005) "The Poly1305-AES message-authentication
 # code", FSE 2005, LNCS 3557, 32-49, doi:10.1007/11502760_3.
 
-.secaead_MASK32 <- 4294967296          # 2^32
+.secaead_MASK32 <- 4294967296 # 2^32
 .secaead_CONST <- c(0x61707865, 0x3320646e, 0x79622d32, 0x6b206574)
-.secaead_B26 <- 67108864               # 2^26
+.secaead_B26 <- 67108864 # 2^26
 
 #' Return an integer vector of byte values (0..255)
 #'
-#' A step of the secaead_native implementation. Called by \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data} and 4 others in the module.
+#' A step of the secaead_native implementation. Called by
+#' \code{.secaead_constant_time_equal}, \code{.secaead_hexlify}, \code{.secaead_mac_data}
+#' and 4 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Character; the body checks with \code{is.character}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .secaead_as_bytes(x = x)
+#' res
 .secaead_as_bytes <- function(x) {
   # Return an integer vector of byte values (0..255).
   if (is.raw(x)) {
     return(as.integer(x))
   }
   if (is.character(x)) {
-    return(as.integer(charToRaw(paste(x, collapse=""))))
+    return(as.integer(charToRaw(paste(x, collapse = ""))))
   }
   if (is.null(x)) {
     return(integer(0))
@@ -77,7 +83,7 @@
 #' @return A character value.
 #' @export
 .secaead_hexlify <- function(bs) {
-  paste(sprintf("%02x", .secaead_as_bytes(bs)), collapse="")
+  paste(sprintf("%02x", .secaead_as_bytes(bs)), collapse = "")
 }
 
 #' .secaead_constant_time_equal
@@ -90,6 +96,11 @@
 #' @param b Passed to \code{.secaead_as_bytes}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .secaead_constant_time_equal(a = A, b = b)
+#' res
 .secaead_constant_time_equal <- function(a, b) {
   x <- .secaead_as_bytes(a)
   y <- .secaead_as_bytes(b)
@@ -126,6 +137,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .secaead_xor32(a = A, b = b)
+#' res
 .secaead_xor32 <- function(a, b) {
   ah <- a %/% 65536
   al <- a %% 65536
@@ -142,10 +158,14 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .secaead_rotl(x = x, n = 3L)
+#' res
 .secaead_rotl <- function(x, n) {
   # left-rotate a 32-bit word by n (n in {7, 8, 12, 16}); x*2^n stays
   # below 2^48 for these n, well within double precision
-  ((x * (2 ^ n)) %% .secaead_MASK32) + (x %/% (2 ^ (32 - n)))
+  ((x * (2^n)) %% .secaead_MASK32) + (x %/% (2^(32 - n)))
 }
 
 #' .secaead_qr
@@ -226,7 +246,7 @@
 #' @param rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
 #' @return The value of \code{.secaead_le_bytes}.
 #' @export
-morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
+morie_secaead_chacha20_block <- function(key, counter, nonce, rounds = 20) {
   # One 64-byte keystream block. The permuted state is ADDED to the
   # original, which is what stops the block function being invertible.
   k <- .secaead_as_bytes(key)
@@ -237,9 +257,11 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
   if (length(n) != 12L) {
     stop(sprintf("secaead: the nonce must be 12 bytes, got %d", length(n)))
   }
-  state <- c(.secaead_CONST, .secaead_words_le(k),
-             as.numeric(counter) %% .secaead_MASK32,
-             .secaead_words_le(n))
+  state <- c(
+    .secaead_CONST, .secaead_words_le(k),
+    as.numeric(counter) %% .secaead_MASK32,
+    .secaead_words_le(n)
+  )
   work <- state
   for (r in seq_len(as.integer(rounds) %/% 2L)) {
     work <- .secaead_qr(work, 1, 5, 9, 13)
@@ -256,7 +278,8 @@ morie_secaead_chacha20_block <- function(key, counter, nonce, rounds=20) {
 
 #' XOR the data with the keystream from counter onward
 #'
-#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' A step of the secaead_native implementation. Called by
+#' \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -272,9 +295,11 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   out <- integer(length(d))
   nblk <- (length(d) + 63L) %/% 64L
   for (bi in seq_len(nblk)) {
-    ks <- morie_secaead_chacha20_block(key,
-                                       as.numeric(counter) + (bi - 1L),
-                                       nonce)
+    ks <- morie_secaead_chacha20_block(
+      key,
+      as.numeric(counter) + (bi - 1L),
+      nonce
+    )
     lo <- (bi - 1L) * 64L + 1L
     hi <- min(bi * 64L, length(d))
     idx <- lo:hi
@@ -303,7 +328,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   cur <- 0
   bits <- 0
   for (byte in bs) {
-    cur <- cur + byte * (2 ^ bits)
+    cur <- cur + byte * (2^bits)
     bits <- bits + 8
     while (bits >= 26) {
       limbs <- c(limbs, cur %% .secaead_B26)
@@ -335,7 +360,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
   li <- 1L
   while (pos <= nbytes) {
     if (bits < 8 && li <= length(limbs)) {
-      cur <- cur + limbs[li] * (2 ^ bits)
+      cur <- cur + limbs[li] * (2^bits)
       bits <- bits + 26
       li <- li + 1L
     }
@@ -389,6 +414,11 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param b A vector; its length is taken.
 #' @return The value of \code{.secaead_p_carry}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .secaead_p_add(a = A, b = b)
+#' res
 .secaead_p_add <- function(a, b) {
   n <- max(length(a), length(b))
   a <- c(a, rep(0, n - length(a)))
@@ -447,7 +477,7 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
     }
     g[i] <- v
   }
-  if (borrow == 0) acc <- g  # acc >= P, so use acc - P
+  if (borrow == 0) acc <- g # acc >= P, so use acc - P
   acc
 }
 
@@ -461,6 +491,11 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.secaead_p_reduce}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .secaead_p_mulmod(a = A, b = b)
+#' res
 .secaead_p_mulmod <- function(a, b) {
   la <- length(a)
   lb <- length(b)
@@ -490,6 +525,9 @@ morie_secaead_chacha20 <- function(key, counter, nonce, data) {
 #' @param k A vector; indexed elementwise.
 #' @return The value of \code{r}, as built in the body.
 #' @export
+#' @examples
+#' res <- .secaead_clamp_key(k = 3L)
+#' res
 .secaead_clamp_key <- function(k) {
   # k: 32 integer bytes; clamp the low 16 (r) per RFC 8439 Sec 2.5
   r <- k[1:16]
@@ -516,8 +554,10 @@ morie_secaead_poly1305_mac <- function(message, key) {
   # low 16 become r (clamped) and the high 16 become s.
   k <- .secaead_as_bytes(key)
   if (length(k) != 32L) {
-    stop(sprintf("secaead: the Poly1305 key must be 32 bytes, got %d",
-                 length(k)))
+    stop(sprintf(
+      "secaead: the Poly1305 key must be 32 bytes, got %d",
+      length(k)
+    ))
   }
   r_bytes <- .secaead_clamp_key(k)
   r <- .secaead_limbs_from_bytes(r_bytes)
@@ -527,9 +567,11 @@ morie_secaead_poly1305_mac <- function(message, key) {
   i <- 1L
   while (i <= length(m)) {
     blk <- m[i:min(i + 15L, length(m))]
-    n <- .secaead_limbs_from_bytes(c(blk, 1L))  # append the high bit
-    acc <- .secaead_p_add(if (length(acc) == 1L && acc[1] == 0) 0 else acc,
-                          n)
+    n <- .secaead_limbs_from_bytes(c(blk, 1L)) # append the high bit
+    acc <- .secaead_p_add(
+      if (length(acc) == 1L && acc[1] == 0) 0 else acc,
+      n
+    )
     acc <- .secaead_p_mulmod(acc, r)
     i <- i + 16L
   }
@@ -541,7 +583,8 @@ morie_secaead_poly1305_mac <- function(message, key) {
 
 #' Block 0 gives the one-time key; the message starts at 1
 #'
-#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' A step of the secaead_native implementation. Called by
+#' \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -563,6 +606,9 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @param b A vector; its length is taken.
 #' @return The value of \code{rep}.
 #' @export
+#' @examples
+#' res <- .secaead_pad16(b = 3L)
+#' res
 .secaead_pad16 <- function(b) {
   rep(0L, (16L - length(b) %% 16L) %% 16L)
 }
@@ -576,6 +622,9 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @param n See Usage.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .secaead_len8(n = 3L)
+#' res
 .secaead_len8 <- function(n) {
   out <- integer(8)
   v <- n
@@ -588,7 +637,8 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 
 #' .secaead_mac_data
 #'
-#' A step of the secaead_native implementation. Called by \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
+#' A step of the secaead_native implementation. Called by
+#' \code{morie_secaead_aead_decrypt}, \code{morie_secaead_aead_encrypt}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -599,13 +649,16 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 .secaead_mac_data <- function(aad, ciphertext) {
   a <- .secaead_as_bytes(aad)
   c <- .secaead_as_bytes(ciphertext)
-  c(a, .secaead_pad16(a), c, .secaead_pad16(c),
-    .secaead_len8(length(a)), .secaead_len8(length(c)))
+  c(
+    a, .secaead_pad16(a), c, .secaead_pad16(c),
+    .secaead_len8(length(a)), .secaead_len8(length(c))
+  )
 }
 
 #' Encrypt from counter 1, then authenticate AAD and ciphertext
 #'
-#' A step of the secaead_native implementation. Called by \code{morie_secrtt_seal_record}, \code{morie_secrtt_wrap_dek}.
+#' A step of the secaead_native implementation. Called by
+#' \code{morie_secrtt_seal_record}, \code{morie_secrtt_wrap_dek}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -613,28 +666,35 @@ morie_secaead_poly1305_key_gen <- function(key, nonce) {
 #' @param nonce Passed to \code{morie_secaead_poly1305_key_gen}.
 #' @param plaintext Passed to \code{morie_secaead_chacha20}.
 #' @param aad Passed to \code{.secaead_mac_data}.
-#' @return A list with \code{estimate}, \code{ciphertext}, \code{ciphertext_hex}, \code{tag}, \code{tag_hex}, \code{onetime_key}, \code{aad_len}, \code{ct_len}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{ciphertext}, \code{ciphertext_hex},
+#' \code{tag}, \code{tag_hex}, \code{onetime_key}, \code{aad_len}, \code{ct_len},
+#' \code{method}, \code{note}.
 #' @export
-morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
+morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad = NULL) {
   # Encrypt from counter 1, then authenticate AAD and ciphertext.
   otk <- morie_secaead_poly1305_key_gen(key, nonce)
   ct <- morie_secaead_chacha20(key, 1, nonce, plaintext)
   tag <- morie_secaead_poly1305_mac(.secaead_mac_data(aad, ct), otk)
   list(
-    estimate=.secaead_hexlify(ct), ciphertext=ct,
-    ciphertext_hex=.secaead_hexlify(ct), tag=tag,
-    tag_hex=.secaead_hexlify(tag), onetime_key=otk,
-    aad_len=length(.secaead_as_bytes(aad)), ct_len=length(ct),
-    method=paste0("AEAD_CHACHA20_POLY1305; Nir & Langley (2018) ",
-                  "RFC 8439"),
-    note=paste0("the length block is what keeps the AAD and ",
-                "ciphertext boundary unambiguous")
+    estimate = .secaead_hexlify(ct), ciphertext = ct,
+    ciphertext_hex = .secaead_hexlify(ct), tag = tag,
+    tag_hex = .secaead_hexlify(tag), onetime_key = otk,
+    aad_len = length(.secaead_as_bytes(aad)), ct_len = length(ct),
+    method = paste0(
+      "AEAD_CHACHA20_POLY1305; Nir & Langley (2018) ",
+      "RFC 8439"
+    ),
+    note = paste0(
+      "the length block is what keeps the AAD and ",
+      "ciphertext boundary unambiguous"
+    )
   )
 }
 
 #' morie_secaead_aead_decrypt
 #'
-#' A step of the secaead_native implementation. Called by \code{morie_secrtt_open_record}, \code{morie_secrtt_unwrap_dek}.
+#' A step of the secaead_native implementation. Called by
+#' \code{morie_secrtt_open_record}, \code{morie_secrtt_unwrap_dek}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -646,19 +706,25 @@ morie_secaead_aead_encrypt <- function(key, nonce, plaintext, aad=NULL) {
 #' @return A list with \code{valid}, \code{plaintext}, \code{expected_tag}.
 #' @export
 morie_secaead_aead_decrypt <- function(key, nonce, ciphertext, tag,
-                                       aad=NULL) {
+                                       aad = NULL) {
   # Verify FIRST, in constant time, and return nothing on failure.
   otk <- morie_secaead_poly1305_key_gen(key, nonce)
-  want <- morie_secaead_poly1305_mac(.secaead_mac_data(aad, ciphertext),
-                                     otk)
+  want <- morie_secaead_poly1305_mac(
+    .secaead_mac_data(aad, ciphertext),
+    otk
+  )
   if (!.secaead_constant_time_equal(want, tag)) {
-    return(list(valid=FALSE, plaintext=NULL,
-                note=paste0("tag mismatch: nothing is returned, because ",
-                            "a caller given the plaintext anyway will ",
-                            "use it")))
+    return(list(
+      valid = FALSE, plaintext = NULL,
+      note = paste0(
+        "tag mismatch: nothing is returned, because ",
+        "a caller given the plaintext anyway will ",
+        "use it"
+      )
+    ))
   }
   pt <- morie_secaead_chacha20(key, 1, nonce, ciphertext)
-  list(valid=TRUE, plaintext=pt, expected_tag=want)
+  list(valid = TRUE, plaintext = pt, expected_tag = want)
 }
 
 #' morie_secaead_cheatsheet

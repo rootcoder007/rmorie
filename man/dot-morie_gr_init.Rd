@@ -21,3 +21,7 @@ A matrix, from \code{matrix}.
 \description{
 stream, so byrow = TRUE.
 }
+\examples{
+res <- .morie_gr_init(nrow = 3L, ncol = 3L, seed = 1L)
+res
+}

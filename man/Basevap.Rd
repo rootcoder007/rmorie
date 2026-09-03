@@ -32,7 +32,8 @@ per Eq. 8, G = 0 daily per Eq. 42. Reproduces the printed Example
 VPD 0.589, P 100.1.
 }
 \examples{
-Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8), u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
+Basevap(T = c(1, 2, 3, 4, 5, 6, 7, 8), R_n = c(1, 2, 3, 4, 5, 6, 7, 8),
+  u2 = c(1, 2, 3, 4, 5, 6, 7, 8), VPD = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Allen, R. G., Pereira, L. S., Raes, D. and Smith, M.

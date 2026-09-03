@@ -18,3 +18,8 @@ values it. Using one net for both over-estimates because the max of a
 noisy estimate is biased upward and the same noise supplies the
 value.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .dueldqn_argmax(x = x)
+res
+}

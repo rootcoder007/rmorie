@@ -26,7 +26,8 @@
 #'   \doi{10.1023/A:1008306431147}
 #' @export
 #' @examples
-#' Gpvbo(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Gpvbo(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), X_grid = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 Gpvbo <- function(X, y, X_grid, lengthscale = 1, variance = 1, noise = 1e-6, xi = 0) {
   A <- .s03mat(X)
   n <- nrow(A)

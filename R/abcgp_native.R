@@ -29,13 +29,18 @@
 
 #' .abcgp.lse
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
+#' A step of the abcgp_native implementation. Called by
+#' \code{.abcgp.gabc_log_likelihood}, \code{morie_abcgp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param values A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .abcgp.lse(values = x)
+#' res
 .abcgp.lse <- function(values) {
   vals <- values[!is.na(values)]
   if (length(vals) == 0L) {
@@ -94,6 +99,9 @@
 #' @param skip Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .abcgp.sobol_sequence(n = 3L, dim = 3L)
+#' res
 .abcgp.sobol_sequence <- function(n, dim, skip = 0) {
   n <- as.integer(n)
   dim <- as.integer(dim)
@@ -121,7 +129,9 @@
 
 #' .abcgp.summarise
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}.
+#' A step of the abcgp_native implementation. Called by
+#' \code{.abcgp.gabc_log_likelihood}, \code{.abcgp.mw_sampler},
+#' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -136,7 +146,8 @@
 
 #' .abcgp.chol
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean}, \code{.abcgp.gp_fit}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.draw_mean},
+#' \code{.abcgp.gp_fit}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -163,7 +174,8 @@
 
 #' .abcgp.chol_solve
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
+#' \code{.abcgp.gp_predict}, \code{.abcgp.mvn_logpdf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -186,7 +198,8 @@
 
 #' .abcgp.mvn_logpdf
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler}, \code{.abcgp.synthetic_log_likelihood}.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.mw_sampler},
+#' \code{.abcgp.synthetic_log_likelihood}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -207,7 +220,8 @@
 
 #' .abcgp.corr
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
+#' \code{.abcgp.gp_predict}, \code{.abcgp.profile_nll}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -240,17 +254,23 @@
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .abcgp.basis(theta = x)
+#' res
 .abcgp.basis <- function(theta) {
   c(1, as.numeric(theta), as.numeric(theta)^2)
 }
 
 #' .abcgp.as_nugget
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit}, \code{.abcgp.mle_lengthscale}.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gp_fit},
+#' \code{.abcgp.mle_lengthscale}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param nugget Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param n A count; the body uses it as \code{rep(...)}.
 #' @return The value of \code{pmax}.
 #' @export
@@ -364,10 +384,13 @@
 #' @param design A matrix; passed to \code{as.matrix}.
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nugget Passed to \code{.abcgp.mle_lengthscale}.
-#' @param lengthscale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param lengthscale Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param kernel Passed to \code{.abcgp.mle_lengthscale}. Defaults to \code{"sqexp"}.
 #' @param tau2 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{design}, \code{values}, \code{beta}, \code{tau2}, \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r}, \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
+#' @return A list with \code{design}, \code{values}, \code{beta}, \code{tau2},
+#' \code{lengthscale}, \code{kernel}, \code{nugget}, \code{chol}, \code{Ainv_r},
+#' \code{Ainv_H}, \code{H}, \code{HtAinvH_chol}, \code{n}, \code{q}, \code{dim}.
 #' @export
 .abcgp.gp_fit <- function(design, values, nugget = NULL, lengthscale = NULL,
                           kernel = "sqexp", tau2 = NULL) {
@@ -417,11 +440,14 @@
 
 #' .abcgp.gp_predict
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.implausible}, \code{morie_abcgp}.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.implausible},
+#' \code{morie_abcgp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol}, \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel}, \code{$lengthscale}, \code{$n}, \code{$tau2} from it.
+#' @param fit A list; the body reads \code{$Ainv_r}, \code{$beta}, \code{$chol},
+#' \code{$design}, \code{$dim}, \code{$H}, \code{$HtAinvH_chol}, \code{$kernel},
+#' \code{$lengthscale}, \code{$n}, \code{$tau2} from it.
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
@@ -719,6 +745,10 @@
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .abcgp.median(v = x)
+#' res
 .abcgp.median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -807,7 +837,8 @@
 
 #' .abcgp.mw_sampler
 #'
-#' A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc}, \code{.abcgp.synthetic_abc}.
+#' A step of the abcgp_native implementation. Called by \code{.abcgp.gps_abc},
+#' \code{.abcgp.synthetic_abc}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -825,8 +856,10 @@
 #' @param xi Passed to \code{<}.
 #' @param delta_s Coerced to integer by the body, with \code{as.integer}.
 #' @param n_alpha Coerced to integer by the body, with \code{as.integer}.
-#' @param max_sim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations}, \code{unresolved_steps}.
+#' @param max_sim Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{chain}, \code{acceptance_rate}, \code{n_simulations},
+#' \code{unresolved_steps}.
 #' @export
 .abcgp.mw_sampler <- function(sim, obs, log_prior, theta0, n_iter, n_sim,
                               epsilon, proposal_sd, summary, seed,

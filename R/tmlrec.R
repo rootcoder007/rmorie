@@ -23,7 +23,8 @@
 #'   2(1):11.
 #' @export
 #' @examples
-#' Tmlrec(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlrec(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), D = c(1,
+#' 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlrec <- function(time, event, D, X) {
   tv <- as.numeric(time)
   ev <- as.numeric(event)

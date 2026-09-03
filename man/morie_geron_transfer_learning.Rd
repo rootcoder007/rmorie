@@ -35,5 +35,6 @@ updated; the trainable tail is optimised by backprop through a tanh
 stack (final layer linear).
 }
 \examples{
-morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_transfer_learning(pretrained_model = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

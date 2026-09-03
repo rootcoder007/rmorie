@@ -202,7 +202,8 @@ morie_weights_rake <- function(weights, df, margins,
 #' When `survey` is installed, defers to `survey::calibrate()` for a fully
 #' design-aware result; otherwise computes the linear adjustment in base R.
 #' @inheritParams morie_weights_params
-#' @return A named list with elements \code{weights}, \code{converged}, \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
+#' @return A named list with elements \code{weights}, \code{converged},
+#' \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
 #' @examples
 #' set.seed(1)
 #' X <- cbind(intercept = 1, x = runif(30))
@@ -239,7 +240,8 @@ morie_weights_greg <- function(weights, X, population_totals,
 
 #' Dispatch helper -- calibrate to totals via "raking" or "greg"
 #' @inheritParams morie_weights_params
-#' @return A named list with elements \code{weights}, \code{converged}, \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
+#' @return A named list with elements \code{weights}, \code{converged},
+#' \code{iterations}, \code{max_adjustment}, \code{diagnostics}.
 #' @examples
 #' set.seed(1)
 #' df <- data.frame(g = rep(c("m", "f"), 15))
@@ -504,7 +506,9 @@ morie_weights_deff <- function(weights) {
 
 #' Detect extreme weights at +/- k * IQR or by absolute percentile
 #' @inheritParams morie_weights_params
-#' @return A named list with elements \code{n_extreme}, \code{threshold_lower}, \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values}, \code{pct_extreme}.
+#' @return A named list with elements \code{n_extreme}, \code{threshold_lower},
+#' \code{threshold_upper}, \code{extreme_indices}, \code{extreme_values},
+#' \code{pct_extreme}.
 #' @examples
 #' set.seed(1)
 #' w <- c(runif(28, 0.5, 2), 25, 30)

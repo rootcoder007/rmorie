@@ -13,7 +13,10 @@
 #' @param col_target See Usage.
 #' @param max_iter See Usage.
 #' @return List with ``M``, ``u``, ``v``, ``row_error``, ``col_error``, ``iterations``.
-#' @references Bregman (1967), The relaxation method of finding the common point of convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is the standard published form of the method.
+#' @references Bregman (1967), The relaxation method of finding the common point of
+#' convex sets, USSR Computational Mathematics and Mathematical Physics 7:200-217. Not
+#' held locally; alternating diagonal scaling to fixed margins (RAS, Sinkhorn-Knopp) is
+#' the standard published form of the method.
 #' @export
 Rasscale <- function(K, row_target, col_target, max_iter = 200) {
   K <- as.matrix(K)

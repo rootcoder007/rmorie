@@ -62,7 +62,8 @@ morie_tlhaltm <- function(rate_Q = NULL, rate_g = NULL, n = NULL,
 #' @param rate_Q Coerced to numeric by the body, with \code{as.numeric}.
 #' @param rate_g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{sum}, \code{required}, \code{satisfied}, \code{product_order}, \code{root_n_order}, \code{note}.
+#' @return A list with \code{sum}, \code{required}, \code{satisfied},
+#' \code{product_order}, \code{root_n_order}, \code{note}.
 #' @export
 rate_condition <- function(rate_Q, rate_g, n) {
   a <- as.numeric(rate_Q)
@@ -77,7 +78,8 @@ rate_condition <- function(rate_Q, rate_g, n) {
 
 #' remainder_bound
 #'
-#' A step of the tlhaltm_native implementation. Called by \code{efficiency_check}, \code{morie_tlhaltm}.
+#' A step of the tlhaltm_native implementation. Called by \code{efficiency_check},
+#' \code{morie_tlhaltm}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -108,7 +110,9 @@ remainder_bound <- function(err_Q, err_g, delta) {
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param donsker A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{remainder_bound}, \code{root_n},
+#' \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient},
+#' \code{positivity_delta}, \code{method}, \code{note}.
 #' @export
 efficiency_check <- function(err_Q, err_g, delta, n, donsker = TRUE) {
   r <- remainder_bound(err_Q, err_g, delta)
@@ -166,6 +170,9 @@ cv_tmle_split <- function(n, V = 10L, seed = 0L) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlhaltm_cheatsheet()
+#' res
 .tlhaltm_cheatsheet <- function() {
   paste("tlhaltm: TMLE is efficient when (a) the second-order ",
         "remainder -- a PRODUCT of the two nuisance errors -- is ",

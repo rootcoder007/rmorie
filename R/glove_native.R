@@ -224,8 +224,13 @@ glove_loss <- function(X, W, Wt, b, bt, x_max = 100.0, alpha = 0.75) {
 #' @param harmonic Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @param min_count Passed to \code{cooccurrence}. Defaults to \code{1}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
-#' @param combine One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}. Defaults to \code{"sum"}.
-#' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index}, \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence}, \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab}, \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max}, \code{alpha}, \code{combine}, \code{method}.
+#' @param combine One of \code{"concat"}, \code{"sum"}, \code{"w"}, \code{"wtilde"}.
+#' Defaults to \code{"sum"}.
+#' @return A list with \code{estimate}, \code{vectors}, \code{vocab}, \code{index},
+#' \code{W}, \code{W_tilde}, \code{b}, \code{b_tilde}, \code{cooccurrence},
+#' \code{loss_history}, \code{running_loss}, \code{final_loss}, \code{n_vocab},
+#' \code{n_pairs}, \code{dim}, \code{window}, \code{harmonic}, \code{x_max},
+#' \code{alpha}, \code{combine}, \code{method}.
 #' @export
 morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
                         x_max = 100.0, alpha = 0.75, harmonic = TRUE,
@@ -360,6 +365,9 @@ morie_glove <- function(corpus, dim = 50, window = 10, epochs = 25, lr = 0.05,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .glove_cheatsheet()
+#' res
 .glove_cheatsheet <- function() {
   paste0("glove: J = sum f(X_ij)(w_i.wt_j + b_i + bt_j - log X_ij)^2 ",
          "with f(x) = (x/xmax)^alpha capped at 1, xmax=100, ",

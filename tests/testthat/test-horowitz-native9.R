@@ -71,8 +71,10 @@ test_that("the two-step estimator's claims are kept as checkable keys", {
   expect_false(o$curse_of_dimensionality)
   # both components recovered from one fit
   g <- o$grid
-  t1 <- sin(pi * g); t1 <- t1 - mean(t1)
-  t2 <- g^2 - 1 / 3; t2 <- t2 - mean(t2)
+  t1 <- sin(pi * g)
+  t1 <- t1 - mean(t1)
+  t2 <- g^2 - 1 / 3
+  t2 <- t2 - mean(t2)
   expect_gt(stats::cor(o$m_hat[1, ], t1), 0.9)
   expect_gt(stats::cor(o$m_hat[2, ], t2), 0.9)
   expect_error(morie_two_step_additive(f$x, f$y, kappa = 1L), "at least 2")
@@ -87,6 +89,7 @@ test_that("the Fourier basis spans odd functions, unlike cosines alone", {
   f <- hrz9_fix()
   o <- morie_two_step_additive(f$x, f$y, kappa = 6L)
   g <- o$grid
-  t2 <- g^2 - 1 / 3; t2 <- t2 - mean(t2)
+  t2 <- g^2 - 1 / 3
+  t2 <- t2 - mean(t2)
   expect_gt(stats::cor(o$m_hat[2, ], t2), 0.95)
 })

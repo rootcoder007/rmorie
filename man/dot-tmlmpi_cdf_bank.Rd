@@ -21,9 +21,8 @@
 A list with \code{F}, \code{IC}.
 }
 \description{
-SPDX-License-Identifier: AGPL-3.0-or-later
-}
 Targeted counterfactual CDFs and their influence curves on a grid.
+}
 
 \section{One point-treatment TMLE per threshold on the binary outcome # I(Y}{
 <= t), with an arm-specific clever covariate H_a = I(D = a)/g_a so #

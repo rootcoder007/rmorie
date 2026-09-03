@@ -19,3 +19,8 @@ A step of the s04core implementation. Called by \code{Nprphet}, \code{Winz}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .s4_quantile7(x = x, p = 0.5)
+res
+}

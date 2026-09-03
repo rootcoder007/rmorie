@@ -33,7 +33,7 @@ API path for live mode:
 via \code{.morie_dataset_soda3_query()} (full SoQL passthrough).
 Both modes return the same 22-column schema; SODA3 is required
 when a derived/map view is involved (none here, but available
-for parity with \code{\link[=morie_datasets_chicago_crime_map]{morie_datasets_chicago_crime_map()}}) and for
+for parity with \code{morie_datasets_chicago_crime_map()}) and for
 the canonical "single SoQL string" experience.
 }}
 
@@ -59,18 +59,18 @@ A wide \code{data.frame}: crime columns first, then the
 joined resolver columns with their canonical prefixes.
 }
 \description{
-Phase 3VV+. Pulls a slice of \code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}}
+Phase 3VV+. Pulls a slice of \code{morie_datasets_chicago_crime()}
 and left-joins each of its five canonical foreign keys against
 the matching resolver dataset shipped in morie:
 }
 \details{
 \tabular{lll}{
 \strong{crime field}     \tab \strong{resolver}                       \tab \strong{join key}        \cr
-\code{beat}                   \tab \code{\link[=morie_datasets_chicago_police_beats]{morie_datasets_chicago_police_beats()}} \tab \code{beat == beat_num}       \cr
-\code{district}               \tab \code{\link[=morie_datasets_chicago_police_districts]{morie_datasets_chicago_police_districts()}} \tab \code{district == dist_num} \cr
-\code{ward}                   \tab \code{\link[=morie_datasets_chicago_wards]{morie_datasets_chicago_wards()}}        \tab \code{ward == ward}           \cr
-\code{community_area}         \tab \code{\link[=morie_datasets_chicago_community_areas]{morie_datasets_chicago_community_areas()}} \tab \code{community_area == area_numbe} \cr
-\code{iucr}                   \tab \code{\link[=morie_datasets_chicago_iucr_codes]{morie_datasets_chicago_iucr_codes()}}   \tab \code{iucr == iucr}           \cr
+\code{beat}                   \tab \code{morie_datasets_chicago_police_beats()} \tab \code{beat == beat_num}       \cr
+\code{district}               \tab \code{morie_datasets_chicago_police_districts()} \tab \code{district == dist_num} \cr
+\code{ward}                   \tab \code{morie_datasets_chicago_wards()}        \tab \code{ward == ward}           \cr
+\code{community_area}         \tab \code{morie_datasets_chicago_community_areas()} \tab \code{community_area == area_numbe} \cr
+\code{iucr}                   \tab \code{morie_datasets_chicago_iucr_codes()}   \tab \code{iucr == iucr}           \cr
 }
 
 The resolvers are loaded in offline mode (they're all included +

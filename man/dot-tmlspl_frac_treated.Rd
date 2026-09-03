@@ -15,7 +15,10 @@
 The value of \code{out}, as built in the body.
 }
 \description{
-SPDX-License-Identifier: AGPL-3.0-or-later
-}
 Default exposure summary: fraction of neighbours treated.
-
+}
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .tmlspl_frac_treated(D = 3L, A = A)
+res
+}

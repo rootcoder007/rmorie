@@ -21,5 +21,6 @@ A list with \code{H}, \code{magnitude}, \code{phase}, \code{zero_distances}, \co
 }
 \keyword{internal}
 \examples{
-PzResp(zeros = c(1, 2, 3, 4, 5, 6, 7, 8), poles = c(1, 2, 3, 4, 5, 6, 7, 8), omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+PzResp(zeros = c(1, 2, 3, 4, 5, 6, 7, 8), poles = c(1, 2, 3, 4, 5, 6, 7, 8),
+  omega = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

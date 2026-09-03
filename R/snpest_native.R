@@ -167,6 +167,10 @@ morie_snpest_predictive <- function(x, n, s, ss, m0, kappa0, a0, b0) {
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .snpest_ess(w = x)
+#' res
 .snpest_ess <- function(w) 1 / .w3_csum(w * w)
 
 #' On-line DP-mixture filter over a stream of observations

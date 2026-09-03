@@ -12,3 +12,7 @@ The cheat sheet text, invisibly.
 \description{
 One-screen reminder of the module's entry points, printed to the console.
 }
+\examples{
+res <- .deseq2_cheatsheet()
+res
+}

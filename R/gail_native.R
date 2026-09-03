@@ -33,16 +33,24 @@
 #' @noRd
 .gail_pairs <- function(states, actions, name) {
   S <- lapply(states, function(s) {
-    if (is.numeric(s) && length(s) == 1L) return(s)
-    if (is.character(s) && length(s) == 1L) return(s)
+    if (is.numeric(s) && length(s) == 1L) {
+      return(s)
+    }
+    if (is.character(s) && length(s) == 1L) {
+      return(s)
+    }
     as.numeric(s)
   })
   A <- as.list(actions)
-  if (length(S) != length(A))
-    stop(sprintf("gail: %s states and actions must have the same length (%d vs %d)",
-                 name, length(S), length(A)))
-  if (length(S) == 0L)
+  if (length(S) != length(A)) {
+    stop(sprintf(
+      "gail: %s states and actions must have the same length (%d vs %d)",
+      name, length(S), length(A)
+    ))
+  }
+  if (length(S) == 0L) {
     stop(sprintf("gail: %s must be non-empty", name))
+  }
   lapply(seq_along(S), function(i) list(S[[i]], A[[i]]))
 }
 
@@ -63,10 +71,15 @@ gail_occupancy_measure <- function(states, actions) {
   pr <- .gail_pairs(states, actions, "occupancy")
   counts <- list()
   for (p in pr) {
-    key <- paste0("(", paste(p[[1]], collapse = ","), ")",
-                  "x", "(", paste(p[[2]], collapse = ","), ")")
-    counts[[key]] <- if (is.null(counts[[key]])) 1L
-                     else counts[[key]] + 1L
+    key <- paste0(
+      "(", paste(p[[1]], collapse = ","), ")",
+      "x", "(", paste(p[[2]], collapse = ","), ")"
+    )
+    counts[[key]] <- if (is.null(counts[[key]])) {
+      1L
+    } else {
+      counts[[key]] + 1L
+    }
   }
   n <- length(pr)
   v <- vapply(counts, function(v) v / n, numeric(1))
@@ -121,26 +134,39 @@ gail <- function(expert_states, expert_actions,
   if (is.null(features)) {
     # sort by repr() of each pair, just like the Python arm
     keys <- unique(c(E, P))
-    ord <- order(vapply(keys, function(k) paste0("(", paste(k[[1]], collapse=","), ")",
-                                                  "x", "(", paste(k[[2]], collapse=","), ")"),
-                        character(1)))
+    ord <- order(vapply(
+      keys, function(k) {
+        paste0(
+          "(", paste(k[[1]], collapse = ","), ")",
+          "x", "(", paste(k[[2]], collapse = ","), ")"
+        )
+      },
+      character(1)
+    ))
     keys <- keys[ord]
     index <- list()
-    for (i in seq_along(keys)) index[[paste0("(", paste(keys[[i]][[1]], collapse=","), ")",
-                                             "x", "(", paste(keys[[i]][[2]], collapse=","), ")")]] <- i
+    for (i in seq_along(keys)) {
+      index[[paste0(
+        "(", paste(keys[[i]][[1]], collapse = ","), ")",
+        "x", "(", paste(keys[[i]][[2]], collapse = ","), ")"
+      )]] <- i
+    }
     nf <- length(keys) + 1L
 
     feat <- function(p) {
       v <- rep(0.0, nf)
-      key <- paste0("(", paste(p[[1]], collapse=","), ")",
-                    "x", "(", paste(p[[2]], collapse=","), ")")
+      key <- paste0(
+        "(", paste(p[[1]], collapse = ","), ")",
+        "x", "(", paste(p[[2]], collapse = ","), ")"
+      )
       v[index[[key]]] <- 1.0
       v[nf] <- 1.0
       v
     }
   } else {
-    if (!is.function(features))
+    if (!is.function(features)) {
       stop("gail: features must be callable")
+    }
     feat <- function(p) {
       as.numeric(features(p[[1]], p[[2]]))
     }
@@ -195,20 +221,22 @@ gail <- function(expert_states, expert_actions,
   de <- vapply(XE, Df, numeric(1))
 
   obj <- (sum(log(dp)) / length(dp)
-          + sum(log(1.0 - de)) / length(de)
-          - as.numeric(lam) * as.numeric(policy_entropy))
+    + sum(log(1.0 - de)) / length(de)
+    - as.numeric(lam) * as.numeric(policy_entropy))
   cost <- log(dp)
 
   acc <- (sum(dp > 0.5) + sum(de <= 0.5)) /
-         (length(dp) + length(de))
+    (length(dp) + length(de))
 
   # eq. 18's Q(s, a) = E_tau[log D | s_0 = s, a_0 = a], estimated by
   # averaging the cost over every occurrence of the pair in the
   # policy rollout
   q <- list()
   for (i in seq_along(P)) {
-    key <- paste0("(", paste(P[[i]][[1]], collapse=","), ")",
-                  "x", "(", paste(P[[i]][[2]], collapse=","), ")")
+    key <- paste0(
+      "(", paste(P[[i]][[1]], collapse = ","), ")",
+      "x", "(", paste(P[[i]][[2]], collapse = ","), ")"
+    )
     if (is.null(q[[key]])) q[[key]] <- numeric(0)
     q[[key]] <- c(q[[key]], cost[i])
   }

@@ -22,3 +22,7 @@ Hubert, Debruyne and Rousseeuw (2018), arXiv 1709.07045,
 "Definition". Pchisq and Qchisq are the package\'s own native
 mirrors, not stats::.
 }
+\examples{
+res <- .rsconsistency(h = 0.5, n = 3L, p = 0.5)
+res
+}

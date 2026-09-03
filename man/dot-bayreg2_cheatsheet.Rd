@@ -14,3 +14,7 @@ A step of the bayreg2_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .bayreg2_cheatsheet()
+res
+}

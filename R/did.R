@@ -126,7 +126,9 @@ NULL
 # `morie_did_diagnostics`) are kept verbatim -- their output shapes
 # are part of the rmorie API.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict ave sd var aggregate na.omit reshape lsfit setNames
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix
+#' model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
+#' ave sd var aggregate na.omit reshape lsfit setNames
 #' @importFrom utils combn head
 NULL
 
@@ -334,9 +336,11 @@ NULL
 #'
 #' Estimates the canonical two-group / two-period DiD treatment effect
 #' \deqn{\hat\tau = (\bar Y_{1,\text{post}} - \bar Y_{1,\text{pre}})
-#'                 - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
+#'                 - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar
+#' Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
 #' With covariates, fits the regression
-#' \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y = alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
+#' \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y =
+#' alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
 #' and reports \eqn{\hat\tau}{hattau}.
 #'
 #' For multi-period staggered designs prefer

@@ -17,3 +17,7 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_doubl
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_gr_w4b_double_center(D = 3L)
+res
+}

@@ -18,3 +18,8 @@ Formula: h(G) = min_S |boundary(S)| / min(vol S, vol S^c); lambda_2/2 <= h(G) <=
 \references{
 Sgtcheegerconstant (1970), A lower bound for the smallest eigenvalue of the Laplacian, in Problems in Analysis; Chung (1997), Spectral Graph Theory, AMS. Neither is held locally; the conductance definition and the sweep-cut construction are standard published results. The sweep value is checked against exhaustive enumeration over all subsets in the batch's anchor file.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- Sgtcheegerconstant(A = A)
+res
+}

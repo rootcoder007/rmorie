@@ -30,7 +30,8 @@
 
 #' .rkmeans_dist
 #'
-#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate},
+#' \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -38,6 +39,11 @@
 #' @param m Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .rkmeans_dist(x = X, m = X)
+#' res
 .rkmeans_dist <- function(x, m) {
   d <- x - m
   sqrt(sum(d * d))
@@ -45,7 +51,8 @@
 
 #' .rkmeans_mean
 #'
-#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate}, \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
+#' A step of the rkmeans_native implementation. Called by \code{.rkmeans_concentrate},
+#' \code{.rkmeans_huber_centre}, \code{.rkmeans_spatial_median}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -228,7 +235,9 @@
 #' @param huber_c Passed to \code{.rkmeans_concentrate}. Defaults to \code{1.345}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param centers Optional; may be \code{NULL}. A matrix; indexed by row and column.
-#' @return A list with \code{estimate}, \code{centers}, \code{labels}, \code{kept}, \code{outliers}, \code{criterion}, \code{distances}, \code{sizes}, \code{n_trimmed}, \code{n_kept}, \code{alpha}, \code{k}, \code{penalty}, \code{method}.
+#' @return A list with \code{estimate}, \code{centers}, \code{labels}, \code{kept},
+#' \code{outliers}, \code{criterion}, \code{distances}, \code{sizes}, \code{n_trimmed},
+#' \code{n_kept}, \code{alpha}, \code{k}, \code{penalty}, \code{method}.
 #' @export
 morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
                           n_start = 20, max_iter = 100,
@@ -330,6 +339,9 @@ morie_rkmeans <- function(X, k = 2, alpha = 0.1, penalty = "square",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .rkmeans_cheatsheet()
+#' res
 .rkmeans_cheatsheet <- function() {
   paste0("rkmeans: impartially alpha-trimmed k-Phi-means ",
          "(Cuesta-Albertos, Gordaliza & Matran 1997). Minimises ",

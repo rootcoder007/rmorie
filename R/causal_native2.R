@@ -223,7 +223,8 @@ morie_transfer_entropy_gaussian <- function(x, y, lag = 1L) {
 #'   Moderation, and Conditional Process Analysis*, 3rd ed., Ch. 5.
 #' @export
 #' @examples
-#' morie_serial_mediation(x = c(1, 2, 3, 4, 5, 6, 7, 8), m1 = c(1, 2, 3, 4, 5, 6, 7, 8), m2 = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_serial_mediation(x = c(1, 2, 3, 4, 5, 6, 7, 8), m1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' m2 = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_serial_mediation <- function(x, m1, m2, y) {
   x <- as.numeric(x)
   m1 <- as.numeric(m1)
@@ -319,7 +320,8 @@ morie_cluster_robust_effect <- function(y, d, cluster) {
 #'   Statistical Inference*, 5th ed., Sec. 12.5.
 #' @export
 #' @examples
-#' morie_partial_tau(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_partial_tau(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), y = c(2.5, 1.0, 3.5,
+#' 4.0, 2.0, 5.5, 3.0, 6.5), z = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_partial_tau <- function(x, y, z) {
   x <- as.numeric(x)
   y <- as.numeric(y)

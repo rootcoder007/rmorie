@@ -58,6 +58,9 @@
 #' @param cost Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' res <- .itrgrf_policy_from_tau(tau = 0.5)
+#' res
 .itrgrf_policy_from_tau <- function(tau, cost = 0.0) {
   ifelse(as.numeric(tau) > as.numeric(cost), 1.0, 0.0)
 }
@@ -170,9 +173,14 @@
 #' @param min_leaf Passed to \code{.itrgrf_fit_arm}. Defaults to \code{5}.
 #' @param seed Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param evaluate One of \code{"in-sample"}, \code{"split"}. Defaults to \code{"split"}.
-#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param propensity Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @return A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule}, \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all}, \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none}, \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level}, \code{method}.
+#' @return A list with \code{estimate}, \code{value}, \code{se}, \code{ci}, \code{rule},
+#' \code{tau}, \code{mu1}, \code{mu0}, \code{treated_fraction}, \code{value_treat_all},
+#' \code{value_treat_none}, \code{gain_over_treat_all}, \code{gain_over_treat_none},
+#' \code{scores}, \code{cost}, \code{evaluate}, \code{n}, \code{n_scored}, \code{level},
+#' \code{method}.
 #' @export
 morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
                          min_leaf = 5, seed = 0, evaluate = "split",
@@ -281,6 +289,9 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .itrgrf_cheatsheet()
+#' res
 .itrgrf_cheatsheet <- function() {
   "itrgrf: d(x) = 1{tau(x) > cost}; value it with the doubly robust score mu_d(X) + 1{W=d}/e_W (Y - mu_W). Learn the rule and score it on DIFFERENT halves -- the rule is an argmax, so scoring it in sample inherits the winner's curse and a rule fitted to noise looks profitable."
 }

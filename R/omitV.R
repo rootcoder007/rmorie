@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Omitted variable bias, classical and partial-R2 form
 #'
-#' Formula: bias = delta gamma; equivalently |bias| = se(tau_res) sqrt(R2_YZ.DX R2_DZ.X / (1 - R2_DZ.X)) sqrt(df)
+#' Formula: bias = delta gamma; equivalently |bias| = se(tau_res) sqrt(R2_YZ.DX R2_DZ.X /
+#' (1 - R2_DZ.X)) sqrt(df)
 #'
 #' @param delta Coefficient of the confounder in the treatment regression.
 #' @param gamma Coefficient of the confounder in the outcome regression.
@@ -18,8 +19,12 @@
 #' @param df See Usage.
 #' @param r2_yz See Usage.
 #' @param r2_dz See Usage.
-#' @return List with ``bias``, ``adjusted_estimate``, ``adjusted_se``, ``adjusted_t``, ``relative_bias``, ``bias_factor``.
-#' @references Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation (13) for the bias in partial-R2 form, equation (14) for the relative bias.
+#' @return List with ``bias``, ``adjusted_estimate``, ``adjusted_se``, ``adjusted_t``,
+#' ``relative_bias``, ``bias_factor``.
+#' @references Cinelli and Hazlett (2020), Making Sense of Sensitivity: Extending Omitted
+#' Variable Bias, JRSS-B 82:39-67. Verified against the author's copy of the paper: bias
+#' = delta gamma (Section 4.1), equation (12) for the adjusted standard error, equation
+#' (13) for the bias in partial-R2 form, equation (14) for the relative bias.
 #' @export
 #' @examples
 #' Ovbias()

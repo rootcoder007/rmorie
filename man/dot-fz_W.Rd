@@ -17,3 +17,8 @@ distribution-function estimator smooths with the kernel\'s integral,
 not the kernel, which is what makes it continuous where the empirical
 df jumps and why its bias carries f\' rather than f\'\'.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .fz_W(u = x)
+res
+}

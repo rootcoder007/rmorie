@@ -11,7 +11,9 @@
 
 #' .morie_cox_prepare
 #'
-#' A step of the cox_native implementation. Called by \code{.morie_aft_common}, \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others in the module.
+#' A step of the cox_native implementation. Called by \code{.morie_aft_common},
+#' \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard} and 8 others
+#' in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -110,7 +112,9 @@
 
 #' .morie_cox_fit
 #'
-#' A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard}, \code{morie_cox_breslow_step} and 4 others in the module.
+#' A step of the cox_native implementation. Called by
+#' \code{morie_breslow_tie_correction}, \code{morie_cause_specific_hazard},
+#' \code{morie_cox_breslow_step} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -120,8 +124,10 @@
 #' @param ties Passed to \code{.morie_cox_score}. Defaults to \code{"efron"}.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter}, \code{converged}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{beta}, \code{loglik}, \code{I}, \code{U}, \code{n_iter},
+#' \code{converged}.
 #' @export
 .morie_cox_fit <- function(t, e, X, ties = "efron", max_iter = 50L,
                            tol = 1e-9, offset = NULL) {
@@ -161,7 +167,9 @@
 
 #' .morie_cox_baseline
 #'
-#' A step of the cox_native implementation. Called by \code{morie_cox_breslow_step}, \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the module.
+#' A step of the cox_native implementation. Called by \code{morie_cox_breslow_step},
+#' \code{morie_cox_frailty}, \code{morie_cox_martingale_residuals} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -169,7 +177,8 @@
 #' @param e Passed to \code{==}.
 #' @param X A matrix; passed to \code{\%*\%}.
 #' @param beta A matrix; passed to \code{\%*\%}.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{times}, \code{hazard}, \code{cumhazard}.
 #' @export
 .morie_cox_baseline <- function(t, e, X, beta, offset = NULL) {
@@ -187,7 +196,9 @@
 
 #' .morie_km_estimate
 #'
-#' A step of the cox_native implementation. Called by \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg}, \code{morie_cox_schoenfeld_residuals}.
+#' A step of the cox_native implementation. Called by
+#' \code{morie_censoring_at_risk_weight}, \code{morie_competing_risks_fg},
+#' \code{morie_cox_schoenfeld_residuals}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -211,17 +222,22 @@
 
 #' .morie_cox_result
 #'
-#' A step of the cox_native implementation. Called by \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
+#' A step of the cox_native implementation. Called by
+#' \code{morie_breslow_tie_correction}, \code{morie_efron_tie_correction}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param t A vector; its length is taken and its elements indexed.
 #' @param e Numeric; passed to \code{sum}.
 #' @param X Carried through into a list the body builds.
-#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$I}, \code{$loglik}, \code{$n_iter} from it.
+#' @param fit A list; the body reads \code{$beta}, \code{$converged}, \code{$I},
+#' \code{$loglik}, \code{$n_iter} from it.
 #' @param label Character; passed to \code{tolower}.
 #' @param method Carried through into a list the body builds.
-#' @return A list with \code{beta}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio}, \code{loglik}, \code{cov}, \code{information}, \code{n_ties}, \code{n_events}, \code{n}, \code{n_iter}, \code{converged}, \code{ties}, \code{time}, \code{event}, \code{X}, \code{method}.
+#' @return A list with \code{beta}, \code{se}, \code{z}, \code{p_value},
+#' \code{hazard_ratio}, \code{loglik}, \code{cov}, \code{information}, \code{n_ties},
+#' \code{n_events}, \code{n}, \code{n_iter}, \code{converged}, \code{ties}, \code{time},
+#' \code{event}, \code{X}, \code{method}.
 #' @export
 .morie_cox_result <- function(t, e, X, fit, label, method) {
   I <- fit$I

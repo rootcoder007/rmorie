@@ -24,5 +24,6 @@ A list with \code{estimate}, \code{lower}, \code{upper},   \code{level}, \code{d
 }
 \keyword{internal}
 \examples{
-morie_rapaf_ar_confidence_interval(case_counts = c(1, 2, 3, 4, 5, 6, 7, 8), rate_ratios = c(1, 2, 3, 4, 5, 6, 7, 8), log_rr_se = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_rapaf_ar_confidence_interval(case_counts = c(1, 2, 3, 4, 5, 6, 7, 8),
+  rate_ratios = c(1, 2, 3, 4, 5, 6, 7, 8), log_rr_se = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -12,7 +12,7 @@ morie_crypto_mldsa65_verify(pk, message, signature)
 \item{message}{Raw vector that was signed.}
 
 \item{signature}{Raw vector signature returned by
-\code{\link[=morie_crypto_mldsa65_sign]{morie_crypto_mldsa65_sign()}}.}
+\code{morie_crypto_mldsa65_sign()}.}
 }
 \value{
 Single logical: \code{TRUE} if signature is valid.
@@ -21,10 +21,12 @@ Single logical: \code{TRUE} if signature is valid.
 ML-DSA-65 signature verification
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- morie_crypto_mldsa65_keygen()
-  msg <- charToRaw("signed payload v1")
-  sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
-  print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- morie_crypto_mldsa65_keygen()
+    msg <- charToRaw("signed payload v1")
+    sig <- morie_crypto_mldsa65_sign(kp$sk, msg)
+    print(morie_crypto_mldsa65_verify(kp$pk, msg, sig))
+  }
 }
 }

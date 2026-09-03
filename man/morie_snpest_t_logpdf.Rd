@@ -35,5 +35,7 @@ The log density.
 }
 \keyword{internal}
 \examples{
-morie_snpest_t_logpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8), df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), loc = c(1, 2, 3, 4, 5, 6, 7, 8), scale2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_snpest_t_logpdf(x = c(1, 2, 3, 4, 5, 6, 7, 8),
+  df = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), loc = c(1, 2, 3, 4, 5, 6, 7, 8),
+  scale2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

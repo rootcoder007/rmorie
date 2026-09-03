@@ -7,7 +7,7 @@
 morie_summarize_output_audit(audit_tbl)
 }
 \arguments{
-\item{audit_tbl}{Result from \code{\link[=morie_audit_public_outputs]{morie_audit_public_outputs()}}.}
+\item{audit_tbl}{Result from \code{morie_audit_public_outputs()}.}
 }
 \value{
 Named list with high-level diagnostics.

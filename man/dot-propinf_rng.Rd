@@ -17,3 +17,7 @@ A step of the propinf_native implementation. Called by \code{.propinf_train_set_
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .propinf_rng(seed = 1L)
+res
+}

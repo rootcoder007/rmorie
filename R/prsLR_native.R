@@ -70,7 +70,9 @@
 
 #' .prsLR_nonterminals
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_augment}, \code{.prsLR_canonical_collection}, \code{.prsLR_first_sets} and 2 others in the module.
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_augment},
+#' \code{.prsLR_canonical_collection}, \code{.prsLR_first_sets} and 2 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -98,7 +100,8 @@
 
 #' .prsLR_first_seq
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_closure}, \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}.
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_closure},
+#' \code{.prsLR_first_sets}, \code{.prsLR_follow_sets}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -213,7 +216,8 @@
 
 #' .prsLR_augment
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}, \code{morie_augment}.
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables},
+#' \code{morie_augment}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -231,7 +235,8 @@
 
 #' .prsLR_closure
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}.
+#' A step of the prsLR_native implementation. Called by
+#' \code{.prsLR_canonical_collection}, \code{.prsLR_goto}, \code{morie_closure}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -290,7 +295,8 @@
 
 #' .prsLR_goto
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_canonical_collection}, \code{morie_goto}.
+#' A step of the prsLR_native implementation. Called by
+#' \code{.prsLR_canonical_collection}, \code{morie_goto}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -342,13 +348,15 @@
 
 #' .prsLR_canonical_collection
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables}, \code{morie_canonical_collection}.
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_build_tables},
+#' \code{morie_canonical_collection}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ag A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param k Passed to \code{.prsLR_closure}.
-#' @return A list with \code{states}, \code{index}, \code{transitions}, \code{first}, \code{nonterminals}.
+#' @return A list with \code{states}, \code{index}, \code{transitions}, \code{first},
+#' \code{nonterminals}.
 #' @export
 .prsLR_canonical_collection <- function(ag, k) {
   g0 <- list(rules = ag$rules, start = ag$start)
@@ -385,13 +393,15 @@
 
 #' .prsLR_build_tables
 #'
-#' A step of the prsLR_native implementation. Called by \code{.prsLR_parse}, \code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
+#' A step of the prsLR_native implementation. Called by \code{.prsLR_parse},
+#' \code{morie_build_tables}, \code{morie_conflicts} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param g Passed to \code{.prsLR_augment}.
 #' @param method One of \code{"lalr1"}, \code{"slr1"}.
-#' @return A list with \code{action}, \code{goto}, \code{states}, \code{n_states}, \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
+#' @return A list with \code{action}, \code{goto}, \code{states}, \code{n_states},
+#' \code{conflicts}, \code{rules}, \code{augmented}, \code{method}.
 #' @export
 .prsLR_build_tables <- function(g, method) {
   if (!(method %in% .prsLR_METHODS)) {
@@ -680,7 +690,8 @@ morie_build_tables <- function(g, method = "lr1") {
 #'
 #' @param g Passed to \code{.prsLR_build_tables}.
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
-#' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts}, \code{method}, \code{n_states}, \code{ok}.
+#' @return A list with \code{estimate}, \code{conflicts}, \code{n_conflicts},
+#' \code{method}, \code{n_states}, \code{ok}.
 #' @export
 morie_conflicts <- function(g, method = "lr1") {
   t <- .prsLR_build_tables(g, method)
@@ -719,7 +730,8 @@ morie_parse <- function(g, tokens, method = "lr1", tables = NULL) {
 #' @param grammar_ Passed to \code{.prsLR_grammar}.
 #' @param tokens Passed to \code{.prsLR_parse}.
 #' @param method Passed to \code{.prsLR_build_tables}. Defaults to \code{"lr1"}.
-#' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states}, \code{conflicts}, \code{tokens}, \code{yield}.
+#' @return A list with \code{estimate}, \code{tree}, \code{method}, \code{n_states},
+#' \code{conflicts}, \code{tokens}, \code{yield}.
 #' @export
 morie_prsLR <- function(grammar_, tokens, method = "lr1") {
   g <- .prsLR_grammar(grammar_)

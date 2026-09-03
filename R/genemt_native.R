@@ -62,13 +62,18 @@
 
 #' .genemt_norm_cdf
 #'
-#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
+#' A step of the genemt_native implementation. Called by
+#' \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .genemt_norm_cdf(x = x)
+#' res
 .genemt_norm_cdf <- function(x) {
   pnorm(x)
 }
@@ -82,6 +87,9 @@
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{qnorm}.
 #' @export
+#' @examples
+#' res <- .genemt_norm_ppf(p = 0.5)
+#' res
 .genemt_norm_ppf <- function(p) {
   q <- pmin(pmax(as.numeric(p), 1e-12), 1.0 - 1e-12)
   qnorm(q)
@@ -89,7 +97,8 @@
 
 #' .genemt_wls
 #'
-#' A step of the genemt_native implementation. Called by \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
+#' A step of the genemt_native implementation. Called by
+#' \code{morie_genemt_gene_set_regression}, \code{morie_genemt_gene_statistic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -128,7 +137,8 @@
 #'
 #' @param G A matrix; passed to \code{as.matrix}.
 #' @param keep Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.999}.
-#' @return A list with \code{components}, \code{n_components}, \code{n_markers}, \code{variance_explained}, \code{note}.
+#' @return A list with \code{components}, \code{n_components}, \code{n_markers},
+#' \code{variance_explained}, \code{note}.
 #' @export
 morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
   M <- as.matrix(G)
@@ -186,7 +196,8 @@ morie_genemt_ld_principal_components <- function(G, keep = 0.999) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param G Passed to \code{morie_genemt_ld_principal_components}.
 #' @param keep Passed to \code{morie_genemt_ld_principal_components}. Defaults to \code{0.999}.
-#' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z}, \code{n_markers}, \code{note}.
+#' @return A list with \code{F}, \code{df1}, \code{df2}, \code{p}, \code{z},
+#' \code{n_markers}, \code{note}.
 #' @export
 morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
   yv <- as.numeric(y)
@@ -228,7 +239,8 @@ morie_genemt_gene_statistic <- function(y, G, keep = 0.999) {
 #'
 #' @param n_markers Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gene_length Coerced to numeric by the body, with \code{as.numeric}.
-#' @param ld_scores Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param ld_scores Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{covariates}, \code{names}, \code{note}.
 #' @export
 morie_genemt_gene_covariates <- function(n_markers, gene_length,
@@ -265,7 +277,8 @@ morie_genemt_gene_covariates <- function(n_markers, gene_length,
 #' @param z_scores Coerced to numeric by the body, with \code{as.numeric}.
 #' @param membership Coerced to numeric by the body, with \code{as.numeric}.
 #' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p}, \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p},
+#' \code{n_genes}, \code{covariates_used}, \code{method}, \code{note}.
 #' @export
 morie_genemt_gene_set_regression <- function(z_scores, membership,
                                              covariates = NULL) {
@@ -315,7 +328,8 @@ morie_genemt_gene_set_regression <- function(z_scores, membership,
 #' @param set_a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param set_b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param covariates Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta}, \code{conditional_p}, \code{attenuation}, \code{note}.
+#' @return A list with \code{marginal_beta}, \code{marginal_p}, \code{conditional_beta},
+#' \code{conditional_p}, \code{attenuation}, \code{note}.
 #' @export
 morie_genemt_conditional_set_test <- function(z_scores, set_a, set_b,
                                              covariates = NULL) {
@@ -380,8 +394,3 @@ morie_genemt_gene_meta_analysis <- morie_genemt_gene_set_regression
 #' @rdname morie_genemt_ld_principal_components
 #' @export
 morie_genemt <- morie_genemt_ld_principal_components
-
-
-
-
-

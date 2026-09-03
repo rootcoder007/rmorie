@@ -31,20 +31,26 @@
 
 #' .resnxt_vec
 #'
-#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
+#' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .resnxt_vec(x = x)
+#' res
 .resnxt_vec <- function(x) {
   as.numeric(x)
 }
 
 #' .resnxt_lin
 #'
-#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
+#' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -52,19 +58,28 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .resnxt_lin(W = x, x = x)
+#' res
 .resnxt_lin <- function(W, x) {
   vapply(seq_along(W), function(o) sum(W[[o]] * x), numeric(1))
 }
 
 #' .resnxt_relu
 #'
-#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block}, \code{.resnxt_grouped_block}.
+#' A step of the resnxt_native implementation. Called by \code{.resnxt_aggregated_block},
+#' \code{.resnxt_grouped_block}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Passed to \code{pmax}.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .resnxt_relu(v = x)
+#' res
 .resnxt_relu <- function(v) {
   pmax(0, v)
 }
@@ -128,7 +143,8 @@
 #' @param Wmids Passed to \code{.resnxt_aggregated_block}.
 #' @param Wouts A vector; indexed elementwise.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
-#' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated}, \code{grouped}, \code{note}.
+#' @return A list with \code{equivalent}, \code{max_deviation}, \code{aggregated},
+#' \code{grouped}, \code{note}.
 #' @export
 .resnxt_block_equivalence <- function(x, Wins, Wmids, Wouts, tol = 1e-9) {
   a <- .resnxt_aggregated_block(x, Wins, Wmids, Wouts)
@@ -179,7 +195,8 @@
 #' @param width Coerced to integer by the body, with \code{as.integer}.
 #' @param cardinality Coerced to integer by the body, with \code{as.integer}.
 #' @param target_parameters Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{bottleneck}, \code{rounded}, \code{parameters}, \code{target}, \code{cardinality}.
+#' @return A list with \code{bottleneck}, \code{rounded}, \code{parameters},
+#' \code{target}, \code{cardinality}.
 #' @export
 .resnxt_match_complexity <- function(width, cardinality, target_parameters) {
   W <- as.integer(width)
@@ -205,6 +222,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .resnxt_cheatsheet()
+#' res
 .resnxt_cheatsheet <- function() {
   "resnxt: y = x + sum_{i=1..C} T_i(x), every T_i with the SAME TOPOLOGY -- Inception's split-transform-merge without its per-stage hand design. C is CARDINALITY, a design dimension beside depth and width, and raising it beats going deeper or wider AT FIXED COMPLEXITY. Three equivalent block forms: C separate paths, concatenate-then-project, or one GROUPED CONVOLUTION -- same function, and the third is what runs fast."
 }

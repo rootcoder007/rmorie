@@ -15,7 +15,9 @@ reset_fixture <- function(n = 200L, seed = 20260730) {
     s <<- (1664525 * s + 1013904223) %% 4294967296
     (s + 0.5) / 4294967296
   }
-  x1 <- numeric(n); x2 <- numeric(n); e <- numeric(n)
+  x1 <- numeric(n)
+  x2 <- numeric(n)
+  e <- numeric(n)
   for (i in seq_len(n)) x1[i] <- 2 * nxt() - 1
   for (i in seq_len(n)) x2[i] <- 2 * nxt() - 1
   for (i in seq_len(n)) e[i] <- 2 * nxt() - 1

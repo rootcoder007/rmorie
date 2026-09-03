@@ -17,3 +17,8 @@ Without this a column read as TIMESTAMP_MICROS was written back as a
 bare DOUBLE of seconds: readable, but no longer a timestamp to any
 other engine, and off by a factor of 1e6 from where it started.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .pq_infer(v = x)
+res
+}

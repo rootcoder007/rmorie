@@ -72,6 +72,10 @@
 #' @param x Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .dssm_to_vec(x = x)
+#' res
 .dssm_to_vec <- function(x) {
   if (is.null(x)) return(numeric(0L))
   if (is.numeric(x)) return(as.numeric(x))
@@ -310,25 +314,3 @@ morie_dssm_click_posterior <- function(query_vector, clicked_vector,
 #' @rdname morie_dssm_letter_ngrams
 #' @export
 morie_dssm <- morie_dssm_letter_ngrams
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

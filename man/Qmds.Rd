@@ -26,7 +26,8 @@ the extreme trained quantile). Mapping a sample onto itself is the
 identity; a pure shift is recovered exactly (test anchors).
 }
 \examples{
-Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+Qmds(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8),
+  mod = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Gudmundsson, L., Bremnes, J. B., Haugen, J. E. and

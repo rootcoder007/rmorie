@@ -9,7 +9,10 @@
 #' @param log_probs See Usage.
 #' @param N See Usage.
 #' @return List with ``perplexity``, ``cross_entropy_nats``, ``cross_entropy_bits``, ``N``.
-#' @references Brown, Della Pietra, Mercer, Della Pietra and Lai (1992), An estimate of an upper bound for the entropy of English, Computational Linguistics 18:31-40. Not held locally; perplexity as the exponentiated per-token cross-entropy is the standard published definition.
+#' @references Brown, Della Pietra, Mercer, Della Pietra and Lai (1992), An estimate of
+#' an upper bound for the entropy of English, Computational Linguistics 18:31-40. Not
+#' held locally; perplexity as the exponentiated per-token cross-entropy is the standard
+#' published definition.
 #' @export
 Perplex <- function(log_probs, N = NULL) {
   lp <- .t1_vec(log_probs)

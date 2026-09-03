@@ -15,7 +15,8 @@
 #' WLS weights degenerate to 1/(2 gamma^2), the right limiting form
 #' rather than a silent failure.
 #'
-#' @param ev A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag}, \code{$lags}, \code{$n_pairs} from it.
+#' @param ev A list; the body reads \code{$counts}, \code{$gamma}, \code{$lag},
+#' \code{$lags}, \code{$n_pairs} from it.
 #' @return A list with \code{lags}, \code{gamma}, \code{counts}.
 #' @export
 .schab_as_empirical_variogram <- function(ev) {
@@ -136,7 +137,8 @@
 #' @param counts Passed to \code{.schab_gauss_newton}.
 #' @param model Passed to \code{.schab_gauss_newton}. Defaults to \code{"exponential"}.
 #' @param kind One of \code{"ols"}, \code{"wls"}. Defaults to \code{"wls"}.
-#' @return A list with \code{nugget}, \code{partial_sill}, \code{range}, \code{objective}, \code{converged}.
+#' @return A list with \code{nugget}, \code{partial_sill}, \code{range},
+#' \code{objective}, \code{converged}.
 #' @export
 .schab_fit_semivariogram <- function(lags, ghat, counts, model = "exponential",
                                      kind = "wls") {
@@ -202,6 +204,10 @@
 #' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{t}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_error_contrasts(X = x)
+#' res
 .schab_error_contrasts <- function(X) {
   # A matrix K of error contrasts: full row rank, K X = 0. Sec. 4.5.2 builds
   # K explicitly for the intercept-only case and notes, citing Harville

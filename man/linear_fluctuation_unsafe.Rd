@@ -20,5 +20,6 @@ A list with \code{epsilon}, \code{Q_star},   \code{out_of_range}, \code{caveat}.
 }
 \keyword{internal}
 \examples{
-linear_fluctuation_unsafe(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+linear_fluctuation_unsafe(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
+  Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

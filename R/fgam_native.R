@@ -98,6 +98,9 @@
 #' @param order Numeric; combined arithmetically in the body. Defaults to \code{2L}.
 #' @return A matrix, from \code{crossprod}.
 #' @export
+#' @examples
+#' res <- .fgam_diff_penalty(n = 3L)
+#' res
 .fgam_diff_penalty <- function(n, order = 2L) {
   rows <- n - order
   D <- matrix(0.0, max(rows, 0L), n)
@@ -122,12 +125,16 @@
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param basis Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param basis Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param n_x A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
 #' @param n_t A count; the body uses it as \code{seq_len(...)}. Defaults to \code{6}.
 #' @param lam_x Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param lam_t Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{fitted}, \code{residuals}, \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf}, \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t}, \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{residuals},
+#' \code{coefficients}, \code{intercept}, \code{surface}, \code{surface_x}, \code{edf},
+#' \code{r_squared}, \code{n_x}, \code{n_t}, \code{lam_x}, \code{lam_t},
+#' \code{linear_deviation}, \code{n}, \code{method}, \code{note}.
 #' @export
 morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
                                       lam_x = 1.0, lam_t = 1.0) {
@@ -258,6 +265,9 @@ morie_fgam_functional_gam <- function(X, Y, basis = NULL, n_x = 6, n_t = 6,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .fgam_cheatsheet()
+#' res
 .fgam_cheatsheet <- function() {
   paste0("fgam: morie_fgam_functional_gam(X, Y, n_x, n_t, lam_x, lam_t) -> ",
          "E[Y|X] = theta0 + int F(X(t), t) dt by tensor-product penalised ",

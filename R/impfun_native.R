@@ -68,6 +68,10 @@
 #' @param x A vector; its length is taken.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .impfun_as_double_matrix(x = x)
+#' res
 .impfun_as_double_matrix <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -89,6 +93,10 @@
 #' @param x A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .impfun_as_double_vec(x = x)
+#' res
 .impfun_as_double_vec <- function(x) {
   if (is.list(x)) return(unlist(lapply(x, as.numeric)))
   as.numeric(x)
@@ -103,6 +111,10 @@
 #' @param x A matrix; indexed by row and column.
 #' @return The value of \code{list}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .impfun_as_int_list(x = x)
+#' res
 .impfun_as_int_list <- function(x) {
   if (is.list(x)) return(lapply(x, as.integer))
   if (is.matrix(x)) {
@@ -119,7 +131,9 @@
 #'
 #' @param panels A vector; its length is taken and its elements indexed.
 #' @param study_snps Passed to \code{unique}.
-#' @return A list with \code{scaffold}, \code{targets}, \code{union}, \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain}, \code{note}.
+#' @return A list with \code{scaffold}, \code{targets}, \code{union},
+#' \code{intersection}, \code{kept_by_union}, \code{kept_by_intersection}, \code{gain},
+#' \code{note}.
 #' @export
 merge_panels <- function(panels, study_snps) {
   if (length(panels) == 0L) {
@@ -295,7 +309,8 @@ info_score <- function(dosages) {
 #'
 #' @param imputed Passed to \code{.impfun_as_double_vec}.
 #' @param truth Passed to \code{.impfun_as_double_vec}.
-#' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error}, \code{n}, \code{method}.
+#' @return A list with \code{estimate}, \code{concordance}, \code{mean_absolute_error},
+#' \code{n}, \code{method}.
 #' @export
 concordance <- function(imputed, truth) {
   a <- .impfun_as_double_vec(imputed)
@@ -321,6 +336,9 @@ concordance <- function(imputed, truth) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .impfun_cheatsheet()
+#' res
 .impfun_cheatsheet <- function() {
   "impfun: imputation is bounded by the REFERENCE PANEL, and panels disagree about which SNPs they carry -- merging by INTERSECTION discards the coverage that motivated merging. IMPUTE2 merges by ROLE: SNPs typed in the study align the haplotypes, the rest are targets. Underneath is Li-Stephens copying, the study haplotype as a MOSAIC of references switching at the recombination rate. Dosages carry uncertainty, and accuracy is measured on MASKED truth, because a confident model can be confidently wrong."
 }
@@ -333,26 +351,3 @@ genotype_imputation <- copying_model
 
 # Main entry point for the impfun module (Li-Stephens copying model)
 morie_impfun <- copying_model
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

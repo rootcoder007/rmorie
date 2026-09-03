@@ -23,3 +23,8 @@ A step of the tlstoch_native implementation. No other function in the package ca
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .tlstoch_positivity_shift(A = A, delta = 0.5)
+res
+}

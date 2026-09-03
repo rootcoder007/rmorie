@@ -7,7 +7,7 @@
 morie_big_fits_double(a)
 }
 \arguments{
-\item{a}{Value coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+\item{a}{Value coercible by \code{morie_bigint()}.}
 }
 \value{
 TRUE or FALSE.

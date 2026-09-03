@@ -19,3 +19,7 @@ A step of the evtlmom implementation. Called by \code{Evtlmom}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tl_lchoose(n = 3L, k = 3L)
+res
+}

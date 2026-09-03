@@ -124,7 +124,8 @@ design_mf <- function(u, i, n_users, n_items) {
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param seed Passed to \code{set.seed}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V}, \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
+#' @return A list with \code{estimate}, \code{w0}, \code{w}, \code{V},
+#' \code{mse_history}, \code{final_mse}, \code{k}, \code{n_features}, \code{method}.
 #' @export
 fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
                    lam = 0.01, seed = 0) {
@@ -180,6 +181,9 @@ fit_fm <- function(X, y, k_dim = 4, iters = 300, alpha = 0.02,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .fmFM_cheatsheet()
+#' res
 .fmFM_cheatsheet <- function() {
   paste0("fmFM: y = w0 + sum w_i x_i + sum_{i<j} <v_i,v_j> x_i x_j. ",
          "Factorising the interaction parameter COUPLES pairs that ",

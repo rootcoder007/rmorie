@@ -47,7 +47,8 @@ morie_prxgms_soft_threshold <- function(v, tau) {
 #' @param backtrack A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param g.fun Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{objective}, \code{iterations}, \code{L}, \code{accelerated}, \code{converged}, \code{method}.
+#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{objective},
+#' \code{iterations}, \code{L}, \code{accelerated}, \code{converged}, \code{method}.
 #' @export
 morie_prxgms_prox_gradient <- function(fun, grad, prox, x0, L = 1,
                                         max.iter = 500L, tol = 1e-10,

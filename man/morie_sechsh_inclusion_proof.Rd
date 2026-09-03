@@ -19,5 +19,7 @@ List with \code{path}, \code{path_hex}, \code{length},   \code{index}, \code{siz
 }
 \keyword{internal}
 \examples{
-morie_sechsh_inclusion_proof(leaves = c(1, 2, 3, 4, 5, 6, 7, 8), index = 5L)
+if (morie_crypto_sodium_available()) {
+  morie_sechsh_inclusion_proof(leaves = c(1, 2, 3, 4, 5, 6, 7, 8), index = 5L)
+}
 }

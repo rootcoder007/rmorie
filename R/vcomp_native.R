@@ -65,7 +65,9 @@
 #' @param group Passed to \code{morie_ranova}.
 #' @param method One of \code{"anova"}, \code{"reml"}. Defaults to \code{"reml"}.
 #' @param conf_level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{icc}, \code{icc_lower}, \code{icc_upper}, \code{method_used}, \code{balanced}, \code{a}, \code{N}, \code{fit}, \code{method}.
+#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{icc}, \code{icc_lower},
+#' \code{icc_upper}, \code{method_used}, \code{balanced}, \code{a}, \code{N}, \code{fit},
+#' \code{method}.
 #' @export
 morie_vcomp <- function(y, group, method = "reml", conf_level = 0.95) {
   if (!(method %in% c("reml", "anova"))) {
@@ -122,6 +124,9 @@ variance_components <- morie_vcomp
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .vcomp_cheatsheet()
+#' res
 .vcomp_cheatsheet <- function() {
   return("vcomp: ANOVA or REML variance components + exact ICC F interval on balanced data (Searle Sec. 3.5)")
 }

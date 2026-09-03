@@ -10,7 +10,8 @@
 
 #' .morie_datasette_base
 #'
-#' A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' A step of the ingest_datasette implementation. Called by
+#' \code{morie_datasette_databases}, \code{morie_datasette_read}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -35,12 +36,14 @@
 
 #' .morie_datasette_get_json
 #'
-#' A step of the ingest_datasette implementation. Called by \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' A step of the ingest_datasette implementation. Called by
+#' \code{morie_datasette_databases}, \code{morie_datasette_read}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param url Passed to \code{url}.
-#' @param timeout Accepted by the signature and not used anywhere in the body. Defaults to \code{60}.
+#' @param timeout Accepted by the signature and not used anywhere in the body. Defaults
+#' to \code{60}.
 #' @return The value of \code{.s03json_fromJSON}.
 #' @export
 .morie_datasette_get_json <- function(url, timeout = 60) {

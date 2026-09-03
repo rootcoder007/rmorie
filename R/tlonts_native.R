@@ -1,6 +1,6 @@
 # morie.fn -- function file (rootcoder007/morie)
 # Online targeted learning for a single time series.
-# 
+#
 # At each time we observe, in order, a covariate vector, a treatment and
 # an outcome. The conditional law of that triple given the past depends
 # on the past only through a fixed-dimensional summary measure, and
@@ -9,7 +9,7 @@
 # measure gives ordinary i.i.d. targeted learning; a parametric
 # conditional density gives a classical time series model; a
 # data-dependent randomisation gives a group sequential adaptive design.
-# 
+#
 # Effects are defined by stochastic interventions on future treatment
 # nodes. With a single time series there is no population to average
 # over, so a static "set A_t = 1 for everyone" has no referent.
@@ -17,7 +17,7 @@
 # stochastic intervention on a subset of the treatment nodes, and the
 # chapter establishes that these are identifiable from the observed data
 # distribution.
-# 
+#
 # Where the sample size comes from. Not from independent units --
 # there is one series. It comes from time: the fixed-dimensional
 # summary and the time-invariant mechanism mean each new time point is
@@ -26,14 +26,14 @@
 # than an i.i.d. sum. Its variance is estimated by the sum of
 # conditional variances, and the martingale central limit theorem
 # supplies the normal limit.
-# 
+#
 # Which makes one check essential. If the summary measure is too
 # small, the "past" left out is still influencing the present, the
 # martingale property fails, and the reported interval is wrong for
 # reasons no amount of data fixes. martingale_check regresses the
 # influence terms on the past and reports the dependence that should
 # not be there.
-# 
+#
 # References
 # ----------
 # van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
@@ -50,12 +50,12 @@
 # i.i.d. targeted learning, parametric conditional densities recover
 # classical time series models, and group sequential adaptive designs
 # are included.
-# 
+#
 # Chambaz, A., Zheng, W. & van der Laan, M. J. (2017) "Targeted
 # sequential design for targeted learning inference of the optimal
 # treatment rule and its mean reward", Annals of Statistics 45(6),
 # 2537-2564, doi:10.1214/16-AOS1534.
-# 
+#
 # van der Laan, M. J., Rose, S. & Lendle, S. (2018) "Online Targeted
 # Learning for Time Series", in Targeted Learning in Data Science,
 # Springer, doi:10.1007/978-3-319-65304-4_19.
@@ -103,7 +103,8 @@ lag_summary <- function(series, t, lags = 2) {
 #'
 #' @param A Coerced to numeric by the body, with \code{as.numeric}.
 #' @param nodes Coerced to integer by the body, with \code{as.integer}.
-#' @param shift Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param shift Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param prob Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{intervened}, \code{nodes}, \code{n_intervened}, \code{kind}.
 #' @export
@@ -203,7 +204,8 @@ martingale_check <- function(D, past, tol = 0.2) {
 #' @param g_fn Accepted by the signature and not used anywhere in the body.
 #' @param target_prob Coerced to numeric by the body, with \code{as.numeric}.
 #' @param burn_in Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
-#' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci}, \code{T_scored}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{se}, \code{ci},
+#' \code{T_scored}, \code{method}, \code{note}.
 #' @export
 online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
   y <- as.numeric(Y)
@@ -263,6 +265,9 @@ online_tmle_series <- function(Y, A, Z, Q_fn, g_fn, target_prob, burn_in = 10) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlonts_cheatsheet()
+#' res
 .tlonts_cheatsheet <- function() {
   "tlonts: ONE time series -- covariate, treatment, outcome at each step -- with the conditional law depending on the past only through a FIXED-DIMENSIONAL summary and a time-invariant mechanism. Effects are defined by STOCHASTIC interventions on a SUBSET of future treatment nodes, since with a single series there is no population to set treatment for. Sample size comes from TIME: the influence terms are a MARTINGALE difference sequence, so variance is the sum of squares and the CLT is the martingale one. If the summary is too small the martingale property fails and the interval is simply wrong."
 }

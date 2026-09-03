@@ -20,14 +20,20 @@
 
 #' .b2logb
 #'
-#' A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx}, \code{Compshan} and 5 others in the module.
+#' A step of the b2info implementation. Called by \code{.b2kl}, \code{.b2xlogx},
+#' \code{Compshan} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
-#' @param base Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
+#' @param base Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .b2logb(v = x)
+#' res
 .b2logb <- function(v, base = 2) {
   out <- log(as.numeric(v))
   if (is.null(base)) return(out)
@@ -38,13 +44,17 @@
 
 #' .b2pnorm
 #'
-#' A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent}, \code{Predcomp} and 3 others in the module.
+#' A step of the b2info implementation. Called by \code{Compshan}, \code{Crsent},
+#' \code{Predcomp} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param p Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .b2pnorm(p = 0.5)
+#' res
 .b2pnorm <- function(p) {
   p <- as.numeric(p)
   if (any(p < 0)) stop("probabilities must be non-negative", call. = FALSE)
@@ -63,6 +73,9 @@
 #' @param base Passed to \code{.b2logb}. Defaults to \code{2}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' res <- .b2xlogx(p = 0.5)
+#' res
 .b2xlogx <- function(p, base = 2) {
   p <- as.numeric(p)
   ifelse(p > 0, p * .b2logb(ifelse(p > 0, p, 1), base), 0)
@@ -70,7 +83,8 @@
 
 #' .b2ent
 #'
-#' A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi}, \code{Compshan} and 8 others in the module.
+#' A step of the b2info implementation. Called by \code{Cndent}, \code{Cndmi},
+#' \code{Compshan} and 8 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -78,6 +92,9 @@
 #' @param base Passed to \code{.b2xlogx}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .b2ent(p = 0.5)
+#' res
 .b2ent <- function(p, base = 2) -sum(.b2xlogx(p, base))
 
 #' .b2kl
@@ -91,6 +108,9 @@
 #' @param base Passed to \code{.b2logb}. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .b2kl(p = 0.5, q = 0.5)
+#' res
 .b2kl <- function(p, q, base = 2) {
   p <- as.numeric(p)
   q <- as.numeric(q)
@@ -161,6 +181,9 @@ Cndmi <- function(pxyz, base = 2) {
 #' @param p A matrix; passed to \code{dim}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .b2as3d(p = 0.5)
+#' res
 .b2as3d <- function(p) {
   if (is.array(p) && length(dim(p)) == 3L) {
     storage.mode(p) <- "double"
@@ -186,13 +209,17 @@ Cndmi <- function(pxyz, base = 2) {
 
 #' .b2as2d
 #'
-#' A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent}, \code{Klchain} and 1 others in the module.
+#' A step of the b2info implementation. Called by \code{Cndent}, \code{Jntent},
+#' \code{Klchain} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param p A matrix; the body checks with \code{is.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' res <- .b2as2d(p = 0.5)
+#' res
 .b2as2d <- function(p) {
   m <- if (is.matrix(p)) p else do.call(rbind, lapply(p, as.numeric))
   storage.mode(m) <- "double"

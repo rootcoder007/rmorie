@@ -22,7 +22,7 @@ List with \code{g}, \code{r}, \code{K}, \code{h},
 \code{estimate}, \code{lambda_hat}, \code{n}.
 }
 \description{
-
+Pair correlation function g(r) from the derivative of Ripley's K
 }
 \references{
 Stoyan, D. & Stoyan, H. (1994). Fractals, Random Shapes

@@ -17,3 +17,7 @@ A step of the rfkrn implementation. Called by \code{Rfkrn}.
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .rfkprimes(k = 3L)
+res
+}

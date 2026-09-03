@@ -45,7 +45,9 @@
 
 #' .trnsfr_cohort
 #'
-#' A step of the trnsfr_native implementation. Called by \code{morie_trnsfr_balancing_weights}, \code{morie_trnsfr_transport_ate}, \code{morie_trnsfr_transport_weights}.
+#' A step of the trnsfr_native implementation. Called by
+#' \code{morie_trnsfr_balancing_weights}, \code{morie_trnsfr_transport_ate},
+#' \code{morie_trnsfr_transport_weights}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -58,9 +60,13 @@
     stop("trnsfr: the cohort indicator must be 0/1 (1 = source)")
   }
   if (sum(s) < 2 || length(s) - sum(s) < 2) {
-    stop(sprintf(paste0("trnsfr: both cohorts need at least 2 units ",
-                        "(source %d, target %d)"),
-                 as.integer(sum(s)), as.integer(length(s) - sum(s))))
+    stop(sprintf(
+      paste0(
+        "trnsfr: both cohorts need at least 2 units ",
+        "(source %d, target %d)"
+      ),
+      as.integer(sum(s)), as.integer(length(s) - sum(s))
+    ))
   }
   s
 }
@@ -89,7 +95,7 @@
     XtWX <- XtWX + w[i] * outer(xi, xi)
     XtWy <- XtWy + w[i] * y[i] * xi
   }
-  list(coef=.s03ridgesolve(XtWX, XtWy, 1e-10))
+  list(coef = .s03ridgesolve(XtWX, XtWy, 1e-10))
 }
 
 #' Odds-of-membership weights for the source cohort. Fits pi(x) by
@@ -101,9 +107,10 @@
 #' @param S Passed to \code{.trnsfr_cohort}.
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
 #' @param ridge Passed to \code{.s03logit}. Defaults to \code{1e-06}.
-#' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess}, \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
+#' @return A list with \code{weights}, \code{pi}, \code{max_weight}, \code{ess},
+#' \code{ess_fraction}, \code{n_source}, \code{coef}, \code{method}.
 #' @export
-morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
+morie_trnsfr_transport_weights <- function(X, S, trim = 1e-3, ridge = 1e-6) {
   # Odds-of-membership weights for the source cohort. Fits pi(x) by
   # logistic regression on the pooled data and returns, for each
   # source unit, (1-pi)/pi, normalised to mean 1. Target units get 0.
@@ -114,17 +121,21 @@ morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
     stop(sprintf("trnsfr: %d cohort labels for %d rows", length(s), n))
   }
   D <- .s03design(Xm, n)
-  beta <- .s03logit(D, s, ridge=ridge)
-  pi <- vapply(seq_len(n),
-               function(i) .s03sigmoid(sum(D[i, ] * beta)), numeric(1))
+  beta <- .s03logit(D, s, ridge = ridge)
+  pi <- vapply(
+    seq_len(n),
+    function(i) .s03sigmoid(sum(D[i, ] * beta)), numeric(1)
+  )
   lo <- as.numeric(trim)
   hi <- 1.0 - as.numeric(trim)
   bad <- which(!(pi >= lo & pi <= hi))
   if (length(bad) > 0L) {
-    stop(sprintf(paste0("trnsfr: %d unit(s) have a cohort-membership ",
-                        "probability outside [%g, %g] -- there is no ",
-                        "overlap there and the transported effect is ",
-                        "not identified for them"), length(bad), lo, hi))
+    stop(sprintf(paste0(
+      "trnsfr: %d unit(s) have a cohort-membership ",
+      "probability outside [%g, %g] -- there is no ",
+      "overlap there and the transported effect is ",
+      "not identified for them"
+    ), length(bad), lo, hi))
   }
   raw <- ifelse(s == 1.0, (1.0 - pi) / pi, 0.0)
   tot <- sum(raw)
@@ -133,11 +144,15 @@ morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
   }
   ns <- as.integer(sum(s))
   w <- raw * ns / tot
-  ess <- (sum(w) ^ 2) / sum(w * w)
-  list(weights=w, pi=pi, max_weight=max(w), ess=ess,
-       ess_fraction=ess / ns, n_source=ns, coef=beta,
-       method=paste0("odds of cohort membership; Wager (2025) Sec. ",
-                     "2.2 applied to S rather than W"))
+  ess <- (sum(w)^2) / sum(w * w)
+  list(
+    weights = w, pi = pi, max_weight = max(w), ess = ess,
+    ess_fraction = ess / ns, n_source = ns, coef = beta,
+    method = paste0(
+      "odds of cohort membership; Wager (2025) Sec. ",
+      "2.2 applied to S rather than W"
+    )
+  )
 }
 
 #' Minimum-variance weights that match the target\'s X means: solve
@@ -149,9 +164,10 @@ morie_trnsfr_transport_weights <- function(X, S, trim=1e-3, ridge=1e-6) {
 #' @param X Passed to \code{.s03mat}.
 #' @param S Passed to \code{.trnsfr_cohort}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
-#' @return A list with \code{weights}, \code{target_moments}, \code{achieved}, \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
+#' @return A list with \code{weights}, \code{target_moments}, \code{achieved},
+#' \code{max_imbalance}, \code{n_negative}, \code{positive_mass}, \code{method}.
 #' @export
-morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
+morie_trnsfr_balancing_weights <- function(X, S, ridge = 1e-8) {
   # Minimum-variance weights that match the target's X means: solve
   # min sum w_i^2 over source units subject to sum w_i Xtilde_i =
   # Xbar_target with Xtilde = (1, X). Weights may go negative, which
@@ -167,11 +183,13 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
   src <- which(s == 1.0)
   tgt <- which(s == 0.0)
   if (length(src) < p) {
-    stop(sprintf("trnsfr: %d source units cannot balance %d moments",
-                 length(src), p))
+    stop(sprintf(
+      "trnsfr: %d source units cannot balance %d moments",
+      length(src), p
+    ))
   }
-  b <- colSums(D[tgt, , drop=FALSE]) / length(tgt)
-  Ds <- D[src, , drop=FALSE]
+  b <- colSums(D[tgt, , drop = FALSE]) / length(tgt)
+  Ds <- D[src, , drop = FALSE]
   G <- crossprod(Ds) + diag(ridge, p)
   lam <- .s03cholsolve(G, b)
   w <- numeric(n)
@@ -179,11 +197,15 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
   achieved <- as.numeric(crossprod(Ds, w[src]))
   err <- max(abs(achieved - b))
   pos <- sum(w[src][w[src] > 0.0])
-  list(weights=w, target_moments=b, achieved=achieved,
-       max_imbalance=err, n_negative=sum(w[src] < 0.0),
-       positive_mass=pos,
-       method=paste0("minimum-variance covariate balancing weights; ",
-                     "Wager (2025) Sec. 7.1"))
+  list(
+    weights = w, target_moments = b, achieved = achieved,
+    max_imbalance = err, n_negative = sum(w[src] < 0.0),
+    positive_mass = pos,
+    method = paste0(
+      "minimum-variance covariate balancing weights; ",
+      "Wager (2025) Sec. 7.1"
+    )
+  )
 }
 
 #' morie_trnsfr_transport_ate
@@ -200,14 +222,18 @@ morie_trnsfr_balancing_weights <- function(X, S, ridge=1e-8) {
 #' @param e Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param trim Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.
 #' @param ridge Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{source_ate}, \code{outcome_route}, \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics}, \code{assumption}.
+#' @return A list with \code{estimate}, \code{source_ate}, \code{outcome_route},
+#' \code{n_source}, \code{n_target}, \code{method}, \code{diagnostics},
+#' \code{assumption}.
 #' @export
-morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
-                                       trim=1e-3, ridge=1e-6) {
+morie_trnsfr_transport_ate <- function(Y, W, X, S, method = "dr", e = NULL,
+                                       trim = 1e-3, ridge = 1e-6) {
   # The source-cohort effect, transported to the target cohort.
   if (!(method %in% .trnsfr_METHODS)) {
-    stop(sprintf("trnsfr: method must be one of %s, got %s",
-                 paste(.trnsfr_METHODS, collapse=", "), method))
+    stop(sprintf(
+      "trnsfr: method must be one of %s, got %s",
+      paste(.trnsfr_METHODS, collapse = ", "), method
+    ))
   }
   y <- .s03vec(Y)
   w <- .s03vec(W)
@@ -223,8 +249,10 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
   src <- which(s == 1.0)
   tgt <- which(s == 0.0)
   if (!any(w[src] == 1.0) || !any(w[src] == 0.0)) {
-    stop(paste0("trnsfr: the source cohort must contain both treated ",
-                "and control units"))
+    stop(paste0(
+      "trnsfr: the source cohort must contain both treated ",
+      "and control units"
+    ))
   }
   ps <- if (is.null(e)) {
     rep(0.5, n)
@@ -239,7 +267,7 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
   # tau(x) fitted in the source by an interacted linear model
   Dx <- .s03design(Xm, n)
   p <- ncol(Dx)
-  rows <- cbind(Dx[src, , drop=FALSE], w[src] * Dx[src, , drop=FALSE])
+  rows <- cbind(Dx[src, , drop = FALSE], w[src] * Dx[src, , drop = FALSE])
   beta <- .s03lstsq(rows, y[src], 1e-8)
   tau_hat <- function(i) sum(Dx[i, ] * beta[p + seq_len(p)])
   mu <- function(i, wv) {
@@ -251,9 +279,9 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
     diag_ <- list()
   } else {
     if (method == "balance") {
-      wd <- morie_trnsfr_balancing_weights(Xm, s, ridge=1e-8)
+      wd <- morie_trnsfr_balancing_weights(Xm, s, ridge = 1e-8)
     } else {
-      wd <- morie_trnsfr_transport_weights(Xm, s, trim=trim, ridge=ridge)
+      wd <- morie_trnsfr_transport_weights(Xm, s, trim = trim, ridge = ridge)
     }
     tw <- wd$weights
     norm_ <- sum(tw[src])
@@ -266,31 +294,39 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
       n1 <- sum(tw[src] * w[src] / ps[src])
       n0 <- sum(tw[src] * (1.0 - w[src]) / (1.0 - ps[src]))
       if (abs(n1) <= .trnsfr_EPS || abs(n0) <= .trnsfr_EPS) {
-        stop(sprintf(paste0("trnsfr: one treatment arm carries no ",
-                            "transport weight (treated %.3g, control ",
-                            "%.3g)"), n1, n0))
+        stop(sprintf(paste0(
+          "trnsfr: one treatment arm carries no ",
+          "transport weight (treated %.3g, control ",
+          "%.3g)"
+        ), n1, n0))
       }
       est <- (sum(tw[src] * w[src] * y[src] / ps[src]) / n1 -
-              sum(tw[src] * (1.0 - w[src]) * y[src] / (1.0 - ps[src])) / n0)
-    } else {  # dr
+        sum(tw[src] * (1.0 - w[src]) * y[src] / (1.0 - ps[src])) / n0)
+    } else { # dr
       num <- sum(vapply(src, function(i) {
         tw[i] * (mu(i, 1.0) - mu(i, 0.0) +
-                 w[i] * (y[i] - mu(i, 1.0)) / ps[i] -
-                 (1.0 - w[i]) * (y[i] - mu(i, 0.0)) / (1.0 - ps[i]))
+          w[i] * (y[i] - mu(i, 1.0)) / ps[i] -
+          (1.0 - w[i]) * (y[i] - mu(i, 0.0)) / (1.0 - ps[i]))
       }, numeric(1)))
       est <- num / norm_
     }
     diag_ <- wd[setdiff(names(wd), "weights")]
   }
   naive <- (sum(y[src] * w[src]) / max(sum(w[src]), .trnsfr_EPS) -
-            sum(y[src] * (1.0 - w[src])) / max(sum(1.0 - w[src]),
-                                               .trnsfr_EPS))
-  list(estimate=est, source_ate=naive, outcome_route=out_part,
-       n_source=length(src), n_target=length(tgt), method=method,
-       diagnostics=diag_,
-       assumption=paste0("the conditional effect function is shared ",
-                         "across cohorts and the target's covariate ",
-                         "support lies inside the source's"))
+    sum(y[src] * (1.0 - w[src])) / max(
+      sum(1.0 - w[src]),
+      .trnsfr_EPS
+    ))
+  list(
+    estimate = est, source_ate = naive, outcome_route = out_part,
+    n_source = length(src), n_target = length(tgt), method = method,
+    diagnostics = diag_,
+    assumption = paste0(
+      "the conditional effect function is shared ",
+      "across cohorts and the target's covariate ",
+      "support lies inside the source's"
+    )
+  )
 }
 
 #' morie_trnsfr_transfer_msm
@@ -307,10 +343,12 @@ morie_trnsfr_transport_ate <- function(Y, W, X, S, method="dr", e=NULL,
 #' @param e Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param trim Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{0.001}.
 #' @param ridge Passed to \code{morie_trnsfr_transport_weights}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights}, \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n}, \code{method}.
+#' @return A list with \code{estimate}, \code{intercept}, \code{coef}, \code{weights},
+#' \code{transport_weights}, \code{msm_weights}, \code{target}, \code{cohorts}, \code{n},
+#' \code{method}.
 #' @export
-morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
-                                      trim=1e-3, ridge=1e-6) {
+morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target = 0, e = NULL,
+                                      trim = 1e-3, ridge = 1e-6) {
   # A marginal structural model fitted with transported weights. Every
   # unit contributes w_transport_i * w_MSM_i, so the MSM coefficient
   # is the one that would have been obtained had the source cohort had
@@ -325,16 +363,20 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
   }
   tgt <- as.character(target)
   if (!(tgt %in% lab)) {
-    stop(sprintf("trnsfr: target cohort %s is not present; cohorts are %s",
-                 tgt, paste(sort(unique(lab)), collapse=", ")))
+    stop(sprintf(
+      "trnsfr: target cohort %s is not present; cohorts are %s",
+      tgt, paste(sort(unique(lab)), collapse = ", ")
+    ))
   }
   S <- ifelse(lab == tgt, 0.0, 1.0)
-  tw <- morie_trnsfr_transport_weights(Hm, S, trim=trim, ridge=ridge)$weights
+  tw <- morie_trnsfr_transport_weights(Hm, S, trim = trim, ridge = ridge)$weights
   if (is.null(e)) {
     Dh <- .s03design(Hm, n)
-    bh <- .s03logit(Dh, as.numeric(a > 0.0), ridge=ridge)
-    ps <- vapply(seq_len(n),
-                 function(i) .s03sigmoid(sum(Dh[i, ] * bh)), numeric(1))
+    bh <- .s03logit(Dh, as.numeric(a > 0.0), ridge = ridge)
+    ps <- vapply(
+      seq_len(n),
+      function(i) .s03sigmoid(sum(Dh[i, ] * bh)), numeric(1)
+    )
   } else if (length(e) == 1L) {
     ps <- rep(as.numeric(e), n)
   } else {
@@ -348,20 +390,26 @@ morie_trnsfr_transfer_msm <- function(Y, A, H, cohort, target=0, e=NULL,
   # Fit on the SOURCE cohort only: the target supplies covariates, not
   # outcomes.
   src <- which(S == 1.0)
-  rows <- matrix(a[src], ncol=1L)
+  rows <- matrix(a[src], ncol = 1L)
   ys <- y[src]
   ws <- tot[src]
   if (length(unique(rows[, 1L])) < 2L) {
-    stop(paste0("trnsfr: the source cohort has no exposure variation, ",
-                "so no MSM coefficient is identified"))
+    stop(paste0(
+      "trnsfr: the source cohort has no exposure variation, ",
+      "so no MSM coefficient is identified"
+    ))
   }
   fit <- .trnsfr_wls(rows, ys, ws)
-  list(estimate=fit$coef[2], intercept=fit$coef[1], coef=fit$coef,
-       weights=tot, transport_weights=tw, msm_weights=msm_w,
-       target=tgt, cohorts=sort(unique(lab)), n=n,
-       method=paste0("MSM fitted under IPW weights multiplied by ",
-                     "cohort-transport weights; Wager (2025) Secs. 2.2 ",
-                     "and 7.1"))
+  list(
+    estimate = fit$coef[2], intercept = fit$coef[1], coef = fit$coef,
+    weights = tot, transport_weights = tw, msm_weights = msm_w,
+    target = tgt, cohorts = sort(unique(lab)), n = n,
+    method = paste0(
+      "MSM fitted under IPW weights multiplied by ",
+      "cohort-transport weights; Wager (2025) Secs. 2.2 ",
+      "and 7.1"
+    )
+  )
 }
 
 #' morie_trnsfr_cheatsheet

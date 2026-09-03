@@ -20,3 +20,7 @@ Joe-Kuo direction numbers (dims 1-10) -- replaces randtoolbox::sobol
 for the QMC helper. Unscrambled; matches randtoolbox\'s unscrambled
 output (same standard direction numbers), cross-validated in tests.
 }
+\examples{
+res <- .morie_sobol(n = 3L, d = 3L)
+res
+}

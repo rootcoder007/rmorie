@@ -66,7 +66,8 @@
 
 #' .grace_drop_edges
 #'
-#' A step of the grace_native implementation. Called by \code{.grace_generate_view}, \code{morie_drop_edges}.
+#' A step of the grace_native implementation. Called by \code{.grace_generate_view},
+#' \code{morie_drop_edges}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -88,7 +89,8 @@
 
 #' .grace_mask_features
 #'
-#' A step of the grace_native implementation. Called by \code{.grace_generate_view}, \code{morie_mask_features}.
+#' A step of the grace_native implementation. Called by \code{.grace_generate_view},
+#' \code{morie_mask_features}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -148,6 +150,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .grace_cos(a = A, b = b)
+#' res
 .grace_cos <- function(a, b) {
   na <- sqrt(sum(a * a))
   nb <- sqrt(sum(b * b))
@@ -159,7 +166,8 @@
 
 #' .grace_pair_loss
 #'
-#' A step of the grace_native implementation. Called by \code{.grace_objective}, \code{morie_pair_loss}.
+#' A step of the grace_native implementation. Called by \code{.grace_objective},
+#' \code{morie_pair_loss}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -193,7 +201,8 @@
 
 #' .grace_objective
 #'
-#' A step of the grace_native implementation. Called by \code{morie_grace}, \code{morie_graphcontrastive}.
+#' A step of the grace_native implementation. Called by \code{morie_grace},
+#' \code{morie_graphcontrastive}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -201,8 +210,13 @@
 #' @param V A matrix; passed to \code{nrow}.
 #' @param tau Passed to \code{.grace_pair_loss}. Defaults to \code{0.5}.
 #' @param intra Passed to \code{.grace_pair_loss}. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{loss}, \code{tau}, \code{intra_view_negatives}, \code{n_nodes}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{loss}, \code{tau},
+#' \code{intra_view_negatives}, \code{n_nodes}, \code{method}, \code{note}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .grace_objective(U = x, V = x)
+#' res
 .grace_objective <- function(U, V, tau = 0.5, intra = TRUE) {
   U <- as.matrix(U)
   V <- as.matrix(V)
@@ -237,6 +251,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .grace_cheatsheet()
+#' res
 .grace_cheatsheet <- function() {
   paste("grace: contrast NODE AGAINST NODE, not node against a ",
         "global summary -- DGI's local-global objective leans on ",
@@ -355,6 +372,9 @@ morie_graphcontrastive <- function(U, V, tau = 0.5, intra = TRUE) {
 #'
 #' @return The value of \code{.grace_cheatsheet}.
 #' @export
+#' @examples
+#' res <- .grace_morie_cheatsheet()
+#' res
 .grace_morie_cheatsheet <- function() {
   .grace_cheatsheet()
 }

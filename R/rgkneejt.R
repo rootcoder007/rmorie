@@ -111,6 +111,10 @@ rgkneejt <- function(vag, fs, force = 1.5, window = NULL) {
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rgkneejt_median(v = x)
+#' res
 .rgkneejt_median <- function(v) {
   s <- sort(v)
   m <- length(s)

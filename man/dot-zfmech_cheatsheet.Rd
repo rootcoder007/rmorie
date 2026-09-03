@@ -17,3 +17,7 @@ One-line summary of zCDP for the cheatsheet
 \references{
 Bun, M. & Steinke, T. (2016).
 }
+\examples{
+res <- .zfmech_cheatsheet()
+res
+}

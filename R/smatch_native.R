@@ -29,6 +29,11 @@
 #' @param b Passed to \code{forwardsolve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .smatch_cholsolve(M = A, b = b)
+#' res
 .smatch_cholsolve <- function(M, b) {
   # Symmetric positive-definite solve via base R's chol.
   L <- chol(M)
@@ -75,8 +80,10 @@
 #'
 #' @param cases See Usage.
 #' @param risk_periods Iterated over elementwise, with \code{lapply}.
-#' @param age_breaks Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
-#' @return A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age}, \code{n_people}, \code{n_rows}.
+#' @param age_breaks Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{numeric(0)}.
+#' @return A list with \code{y}, \code{offset}, \code{X}, \code{n_risk}, \code{n_age},
+#' \code{n_people}, \code{n_rows}.
 #' @export
 morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeric(0)) {
   rp <- lapply(risk_periods, function(r) c(as.numeric(r[1]), as.numeric(r[2])))
@@ -134,7 +141,9 @@ morie_smatch_poisson_design <- function(cases, risk_periods, age_breaks = numeri
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged}, \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
+#' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri},
+#' \code{age_effects}, \code{individual_effects}, \code{coef}, \code{converged},
+#' \code{iterations}, \code{n_rows}, \code{n_people}, \code{method}, \code{identical_to}.
 #' @export
 morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = numeric(0),
                              iters = 200, tol = 1e-12, ridge = 1e-9) {
@@ -189,6 +198,9 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' @param p Passed to \code{qnorm}.
 #' @return The value of \code{qnorm}.
 #' @export
+#' @examples
+#' res <- .smatch_qnorm(p = 0.5)
+#' res
 .smatch_qnorm <- function(p) qnorm(p)
 
 #' .smatch_pnorm
@@ -200,6 +212,10 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .smatch_pnorm(z = y)
+#' res
 .smatch_pnorm <- function(z) pnorm(z)
 
 #' morie_smatch_sample_size
@@ -213,7 +229,9 @@ morie_smatch_sccs_poisson_fit <- function(cases, risk_periods, age_breaks = nume
 #' @param p_exposed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
-#' @return A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A}, \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r}, \code{p_exposed}, \code{assumes}, \code{method}.
+#' @return A list with \code{n_events}, \code{n_events_ceiling}, \code{rho}, \code{A},
+#' \code{B}, \code{C}, \code{z_alpha_2}, \code{z_power}, \code{log_ri}, \code{r},
+#' \code{p_exposed}, \code{assumes}, \code{method}.
 #' @export
 morie_smatch_sample_size <- function(log_ri, r, p_exposed, alpha = 0.05, power = 0.8) {
   b <- as.numeric(log_ri)
@@ -285,7 +303,8 @@ morie_smatch_power <- function(n_events, log_ri, r, p_exposed, alpha = 0.05) {
 #'
 #' @param r Coerced to numeric by the body, with \code{as.numeric}.
 #' @param log_ri Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri}, \code{interpretation}.
+#' @return A list with \code{rho}, \code{efficiency}, \code{r}, \code{log_ri},
+#' \code{interpretation}.
 #' @export
 morie_smatch_relative_efficiency <- function(r, log_ri) {
   rr <- as.numeric(r)
@@ -312,6 +331,9 @@ morie_smatch_relative_efficiency <- function(r, log_ri) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .smatch_cheatsheet()
+#' res
 .smatch_cheatsheet <- function() {
   paste0("smatch: the case series fitted as a POISSON model -- ",
          "counts n_ijk, offset log(e_ijk), factors for age, ",

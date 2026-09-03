@@ -20,7 +20,9 @@ List with \code{dek}, \code{dek_hex}, \code{record_id},   \code{note}.
 }
 \keyword{internal}
 \examples{
-seed <- as.raw(1:32)
-r <- morie_secrtt_generate_dek(seed, record_id = 7L)
-r$dek_hex
+if (morie_crypto_sodium_available()) {
+  seed <- as.raw(1:32)
+  r <- morie_secrtt_generate_dek(seed, record_id = 7L)
+  r$dek_hex
+}
 }

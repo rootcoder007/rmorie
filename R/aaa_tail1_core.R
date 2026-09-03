@@ -29,7 +29,8 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 
 #' .morie_pinv
 #'
-#' A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging}, \code{t3ols}.
+#' A step of the tail1_core implementation. Called by \code{.schab_disjunctive_kriging},
+#' \code{t3ols}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -37,6 +38,11 @@ MASS_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
 #' @param rcond Numeric; combined arithmetically in the body. Defaults to \code{1e-15}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_pinv(M = X)
+#' res
 .morie_pinv <- function(M, rcond = 1e-15) {
   s <- svd(M)
   cutoff <- rcond * max(s$d)
@@ -60,24 +66,34 @@ NULL
 
 #' .t1_vec
 #'
-#' A step of the tail1_core implementation. Called by \code{.ecfp_percol}, \code{Admmlasso}, \code{Advielbo} and 154 others in the module.
+#' A step of the tail1_core implementation. Called by \code{.ecfp_percol},
+#' \code{Admmlasso}, \code{Advielbo} and 154 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t1_vec(x = x)
+#' res
 .t1_vec <- function(x) as.numeric(unlist(x))
 
 #' .t1_mat
 #'
-#' A step of the tail1_core implementation. Called by \code{.ecfp_bonds}, \code{Admmlasso}, \code{Advielbo} and 45 others in the module.
+#' A step of the tail1_core implementation. Called by \code{.ecfp_bonds},
+#' \code{Admmlasso}, \code{Advielbo} and 45 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t1_mat(X = x)
+#' res
 .t1_mat <- function(X) {
   if (is.matrix(X)) {
     return(matrix(as.numeric(X), nrow = nrow(X)))
@@ -90,13 +106,18 @@ NULL
 
 #' .t1_eigsym
 #'
-#' A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent}, \code{Lapeig} and 4 others in the module.
+#' A step of the tail1_core implementation. Called by \code{Clrpca}, \code{Eigcent},
+#' \code{Lapeig} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A A matrix; passed to \code{t}.
 #' @return A list with \code{values}, \code{vectors}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .t1_eigsym(A = A)
+#' res
 .t1_eigsym <- function(A) {
   e <- eigen((A + t(A)) / 2, symmetric = TRUE)
   V <- e$vectors
@@ -115,6 +136,11 @@ NULL
 #' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .t1_lstsq(X = x, y = y)
+#' res
 .t1_lstsq <- function(X, y) {
   # Minimum-norm least squares via the SVD, matching numpy.linalg.lstsq
   # and so the Python arm's _lstsq.
@@ -150,7 +176,8 @@ NULL
 
 #' .t1_hatdiag
 #'
-#' A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols}, \code{Olsnormeq}.
+#' A step of the tail1_core implementation. Called by \code{Dfbetas}, \code{Dffitsols},
+#' \code{Olsnormeq}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -165,13 +192,18 @@ NULL
 
 #' .t1_cbind1
 #'
-#' A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas}, \code{Dffitsols} and 9 others in the module.
+#' A step of the tail1_core implementation. Called by \code{Bayeslogit}, \code{Dfbetas},
+#' \code{Dffitsols} and 9 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{cbind}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t1_cbind1(X = x)
+#' res
 .t1_cbind1 <- function(X) cbind(1, as.matrix(X))
 
 #' .t1_sd
@@ -183,18 +215,26 @@ NULL
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{stats::sd}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t1_sd(x = x)
+#' res
 .t1_sd <- function(x) stats::sd(as.numeric(x))
 
 # Lehmer minstd -- identical stream to the Python arm.
 #' Lehmer minstd -- identical stream to the Python arm
 #'
-#' A step of the tail1_core implementation. Called by \code{.btdir_rows}, \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module.
+#' A step of the tail1_core implementation. Called by \code{.btdir_rows},
+#' \code{.btmbb_reps}, \code{.kvmse_rotation} and 32 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .t1_lcg()
+#' res
 .t1_lcg <- function(seed = 1) {
   s <- as.numeric(seed) %% 2147483647
   if (s <= 0) s <- 1
@@ -211,13 +251,17 @@ NULL
 
 #' .t1_result
 #'
-#' A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso}, \code{Advielbo} and 735 others in the module.
+#' A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlasso},
+#' \code{Advielbo} and 735 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .t1_result()
+#' res
 .t1_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

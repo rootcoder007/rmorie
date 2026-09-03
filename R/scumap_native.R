@@ -37,13 +37,18 @@
 
 #' .scumap_matrix
 #'
-#' A step of the scumap_native implementation. Called by \code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}.
+#' A step of the scumap_native implementation. Called by
+#' \code{morie_scumap_fuzzy_simplicial_set}, \code{morie_scumap_umap_singlecell}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .scumap_matrix(X = x)
+#' res
 .scumap_matrix <- function(X) {
   M <- as.matrix(X)
   storage.mode(M) <- "double"
@@ -69,8 +74,13 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .scumap_dist(a = A, b = b)
+#' res
 .scumap_dist <- function(a, b) {
-  sqrt(sum((a - b) ^ 2))
+  sqrt(sum((a - b)^2))
 }
 
 #' morie_scumap_smooth_knn_dist
@@ -88,8 +98,8 @@
 #' @return A list with \code{sigma}, \code{rho}.
 #' @export
 morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
-                                         rho=NULL, tol=1e-5, max_iter=64,
-                                         min_scale=1e-3) {
+                                         rho = NULL, tol = 1e-5, max_iter = 64,
+                                         min_scale = 1e-3) {
   # Algorithm 3: the sigma that fixes the fuzzy cardinality. Binary
   # search for sigma with sum_j exp(-(d_j - rho)/sigma) = log2(n).
   # Returns list(sigma, rho).
@@ -130,7 +140,7 @@ morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
   } else if (mean_d > 0.0) {
     mid <- max(mid, min_scale * mean_d)
   }
-  list(sigma=mid, rho=rho)
+  list(sigma = mid, rho = rho)
 }
 
 #' morie_scumap_fuzzy_simplicial_set
@@ -144,8 +154,8 @@ morie_scumap_smooth_knn_dist <- function(distances, n_neighbors,
 #' @param symmetrize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{A}, \code{B}, \code{rho}, \code{sigma}, \code{neighbours}, \code{n}.
 #' @export
-morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors=15,
-                                              symmetrize=TRUE) {
+morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors = 15,
+                                              symmetrize = TRUE) {
   # Algorithms 2 and 3 plus the t-conorm: the weighted UMAP graph.
   # Returns a list with the directed memberships A, the symmetrised
   # B (A + A' - A o A'), and the per-point rho and sigma. Neighbour
@@ -157,15 +167,17 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors=15,
     stop("scumap: n_neighbors must be at least 2")
   }
   if (k >= n) {
-    stop(sprintf(paste0("scumap: n_neighbors (%d) must be smaller than ",
-                        "the number of points (%d)"), k, n))
+    stop(sprintf(paste0(
+      "scumap: n_neighbors (%d) must be smaller than ",
+      "the number of points (%d)"
+    ), k, n))
   }
   A <- matrix(0.0, n, n)
   rhos <- numeric(n)
   sigmas <- numeric(n)
   neighbours <- list()
   for (i in seq_len(n)) {
-    dd <- sqrt(rowSums(sweep(M, 2L, M[i, ]) ^ 2))
+    dd <- sqrt(rowSums(sweep(M, 2L, M[i, ])^2))
     others <- setdiff(seq_len(n), i)
     ord <- others[order(dd[others])][seq_len(k)]
     dists <- dd[ord]
@@ -176,11 +188,13 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors=15,
     A[i, ord] <- exp(-pmax(0.0, dists - sk$rho) / sk$sigma)
   }
   if (!isTRUE(symmetrize)) {
-    return(list(A=A, B=A, rho=rhos, sigma=sigmas,
-                neighbours=neighbours, n=n))
+    return(list(
+      A = A, B = A, rho = rhos, sigma = sigmas,
+      neighbours = neighbours, n = n
+    ))
   }
   B <- A + t(A) - A * t(A)
-  list(A=A, B=B, rho=rhos, sigma=sigmas, neighbours=neighbours, n=n)
+  list(A = A, B = B, rho = rhos, sigma = sigmas, neighbours = neighbours, n = n)
 }
 
 #' morie_scumap_spectral_layout
@@ -191,11 +205,12 @@ morie_scumap_fuzzy_simplicial_set <- function(X, n_neighbors=15,
 #'
 #' @param B A matrix; indexed by row and column.
 #' @param n_components Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @param laplacian One of \code{"as_printed"}, \code{"normalised"}. Defaults to \code{"normalised"}.
+#' @param laplacian One of \code{"as_printed"}, \code{"normalised"}. Defaults to
+#' \code{"normalised"}.
 #' @return The value of \code{Y}, as built in the body.
 #' @export
-morie_scumap_spectral_layout <- function(B, n_components=2,
-                                         laplacian="normalised") {
+morie_scumap_spectral_layout <- function(B, n_components = 2,
+                                         laplacian = "normalised") {
   # Algorithm 4: initialise from the graph Laplacian's eigenvectors.
   # laplacian="normalised" uses D^(-1/2)(D-A)D^(-1/2); "as_printed"
   # uses the paper's literal D^(1/2)(D-A)D^(1/2), a misprint.
@@ -217,16 +232,16 @@ morie_scumap_spectral_layout <- function(B, n_components=2,
       }
     }
   }
-  eg <- eigen(L, symmetric=TRUE)
+  eg <- eigen(L, symmetric = TRUE)
   # eigen() returns eigenvalues in decreasing order; ascend them and
   # skip the trivial first eigenvector
   asc <- rev(seq_len(n))
-  vecs <- eg$vectors[, asc, drop=FALSE]
+  vecs <- eg$vectors[, asc, drop = FALSE]
   nc <- as.integer(n_components)
   Y <- matrix(0.0, n, nc)
   avail <- min(nc, n - 1L)
   if (avail > 0L) {
-    Y[, seq_len(avail)] <- vecs[, 1L + seq_len(avail), drop=FALSE]
+    Y[, seq_len(avail)] <- vecs[, 1L + seq_len(avail), drop = FALSE]
   }
   # scale to a sensible starting spread, as the reference does
   span <- 0.0
@@ -251,8 +266,8 @@ morie_scumap_spectral_layout <- function(B, n_components=2,
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @return A list with \code{a}, \code{b}.
 #' @export
-morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
-                                iters=200) {
+morie_scumap_fit_ab <- function(min_dist = 0.1, spread = 1.0, n_grid = 300,
+                                iters = 200) {
   # Fit a, b so that (1 + a d^(2b))^-1 matches the target curve
   # (1 inside min_dist, exponential decay outside).
   if (min_dist < 0) {
@@ -266,14 +281,14 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
   ys <- ifelse(xs < min_dist, 1.0, exp(-(xs - min_dist) / spread))
   pos <- xs > 0
   loss <- function(a, b) {
-    sum((1.0 / (1.0 + a * xs[pos] ^ (2 * b)) - ys[pos]) ^ 2)
+    sum((1.0 / (1.0 + a * xs[pos]^(2 * b)) - ys[pos])^2)
   }
   a <- 1.0
   b <- 1.0
   step <- 0.5
   moves <- list(c(1, 0), c(-1, 0), c(0, 1), c(0, -1), c(1, 1), c(-1, -1))
   for (it in seq_len(as.integer(iters))) {
-    best <- list(v=loss(a, b), a=a, b=b)
+    best <- list(v = loss(a, b), a = a, b = b)
     for (mv in moves) {
       na <- a + mv[1L] * step
       nb <- b + mv[2L] * step
@@ -282,7 +297,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
       }
       v <- loss(na, nb)
       if (v < best$v) {
-        best <- list(v=v, a=na, b=nb)
+        best <- list(v = v, a = na, b = nb)
       }
     }
     if (best$a == a && best$b == b) {
@@ -295,7 +310,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
       b <- best$b
     }
   }
-  list(a=a, b=b)
+  list(a = a, b = b)
 }
 
 #' Exact 31-bit LCG in doubles: split the state so no intermediate
@@ -305,6 +320,9 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @examples
+#' res <- .scumap_rng(seed = 1L)
+#' res
 .scumap_rng <- function(seed) {
   # Exact 31-bit LCG in doubles: split the state so no intermediate
   # product exceeds 2^53.
@@ -316,7 +334,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
     hi <- st %/% 65536
     lo <- st %% 65536
     st <<- ((((1103515245 * hi) %% 2147483648) * 65536) %% 2147483648 +
-            1103515245 * lo + 12345) %% 2147483648
+      1103515245 * lo + 12345) %% 2147483648
     st / 2147483648
   }
 }
@@ -331,7 +349,7 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #' @param lim Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
-.scumap_clip <- function(v, lim=4.0) {
+.scumap_clip <- function(v, lim = 4.0) {
   # The reference implementation clips gradients to +/- 4.
   if (v > lim) {
     return(lim)
@@ -355,21 +373,25 @@ morie_scumap_fit_ab <- function(min_dist=0.1, spread=1.0, n_grid=300,
 #' @param n_epochs A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param learning_rate Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param spread Passed to \code{morie_scumap_fit_ab}. Defaults to \code{1}.
-#' @param negative_sample_rate Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
+#' @param negative_sample_rate Coerced to integer by the body, with \code{as.integer}.
+#' Defaults to \code{5}.
 #' @param init One of \code{"random"}, \code{"spectral"}. Defaults to \code{"spectral"}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param laplacian Passed to \code{morie_scumap_spectral_layout}. Defaults to \code{"normalised"}.
 #' @param a Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @param b Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
-#' @return A list with \code{estimate}, \code{embedding}, \code{graph}, \code{directed_graph}, \code{rho}, \code{sigma}, \code{neighbours}, \code{a}, \code{b}, \code{n_neighbors}, \code{min_dist}, \code{n_components}, \code{n_epochs}, \code{init}, \code{laplacian}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{embedding}, \code{graph},
+#' \code{directed_graph}, \code{rho}, \code{sigma}, \code{neighbours}, \code{a},
+#' \code{b}, \code{n_neighbors}, \code{min_dist}, \code{n_components}, \code{n_epochs},
+#' \code{init}, \code{laplacian}, \code{n}, \code{method}, \code{note}.
 #' @export
-morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
-                                         n_components=2, n_epochs=200,
-                                         learning_rate=1.0, spread=1.0,
-                                         negative_sample_rate=5,
-                                         init="spectral", seed=0,
-                                         laplacian="normalised",
-                                         a=NULL, b=NULL) {
+morie_scumap_umap_singlecell <- function(X, n_neighbors = 15, min_dist = 0.1,
+                                         n_components = 2, n_epochs = 200,
+                                         learning_rate = 1.0, spread = 1.0,
+                                         negative_sample_rate = 5,
+                                         init = "spectral", seed = 0,
+                                         laplacian = "normalised",
+                                         a = NULL, b = NULL) {
   # UMAP embedding of X (McInnes, Healy & Melville 2018). init is
   # "spectral" (Algorithm 4, the paper's recommendation) or "random".
   # a and b default to the fit against min_dist and spread.
@@ -410,7 +432,7 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
   ej <- integer(0)
   ew <- numeric(0)
   for (i in seq_len(n)) {
-    for (j in seq.int(i + 1L, length.out=max(0L, n - i))) {
+    for (j in seq.int(i + 1L, length.out = max(0L, n - i))) {
       if (B[i, j] > 0.0) {
         ei <- c(ei, i)
         ej <- c(ej, j)
@@ -426,7 +448,7 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
   for (epoch in seq_len(n_epochs) - 1L) {
     alpha <- learning_rate * (1.0 - epoch / n_epochs)
     for (e in seq_along(ew)) {
-      if (rnd() > ew[e] / w_max) {  # sample edges by membership
+      if (rnd() > ew[e] / w_max) { # sample edges by membership
         next
       }
       i <- ei[e]
@@ -434,8 +456,8 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
       diff <- Y[i, ] - Y[j, ]
       dist2 <- sum(diff * diff)
       if (dist2 > 0.0) {
-        coeff <- (-2.0 * a * b * dist2 ^ (b - 1.0)) /
-          (1.0 + a * dist2 ^ b)
+        coeff <- (-2.0 * a * b * dist2^(b - 1.0)) /
+          (1.0 + a * dist2^b)
       } else {
         coeff <- 0.0
       }
@@ -454,7 +476,7 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
         dist2 <- sum(diff * diff)
         if (dist2 > 0.0) {
           coeff <- (2.0 * b) /
-            ((.scumap_EPS + dist2) * (1.0 + a * dist2 ^ b))
+            ((.scumap_EPS + dist2) * (1.0 + a * dist2^b))
         } else if (i != kk) {
           coeff <- 0.0
         } else {
@@ -468,30 +490,34 @@ morie_scumap_umap_singlecell <- function(X, n_neighbors=15, min_dist=0.1,
     }
   }
   list(
-    estimate=Y,
-    embedding=Y,
-    graph=B,
-    directed_graph=graph$A,
-    rho=graph$rho,
-    sigma=graph$sigma,
-    neighbours=graph$neighbours,
-    a=a,
-    b=b,
-    n_neighbors=as.integer(n_neighbors),
-    min_dist=as.numeric(min_dist),
-    n_components=d,
-    n_epochs=n_epochs,
-    init=init,
-    laplacian=laplacian,
-    n=n,
-    method=sprintf(paste0("UMAP (McInnes, Healy & Melville 2018): fuzzy ",
-                          "simplicial sets, t-conorm symmetrisation, %s ",
-                          "initialisation, cross-entropy SGD"), init),
-    note=paste0("distances are Euclidean and neighbours are found ",
-                "exactly, not approximately, so this is O(n^2) and ",
-                "meant for the sample sizes an anchor can check; the ",
-                "paper's Algorithm 4 misprints the normalised ",
-                "Laplacian, see laplacian=")
+    estimate = Y,
+    embedding = Y,
+    graph = B,
+    directed_graph = graph$A,
+    rho = graph$rho,
+    sigma = graph$sigma,
+    neighbours = graph$neighbours,
+    a = a,
+    b = b,
+    n_neighbors = as.integer(n_neighbors),
+    min_dist = as.numeric(min_dist),
+    n_components = d,
+    n_epochs = n_epochs,
+    init = init,
+    laplacian = laplacian,
+    n = n,
+    method = sprintf(paste0(
+      "UMAP (McInnes, Healy & Melville 2018): fuzzy ",
+      "simplicial sets, t-conorm symmetrisation, %s ",
+      "initialisation, cross-entropy SGD"
+    ), init),
+    note = paste0(
+      "distances are Euclidean and neighbours are found ",
+      "exactly, not approximately, so this is O(n^2) and ",
+      "meant for the sample sizes an anchor can check; the ",
+      "paper's Algorithm 4 misprints the normalised ",
+      "Laplacian, see laplacian="
+    )
   )
 }
 

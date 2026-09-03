@@ -33,5 +33,6 @@ A list with R, the observed and expected means, the standard   error, z and p.
 }
 \keyword{internal}
 \examples{
-morie_lcfsdq_clark_evans(dists = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, area = 5L, perimeter = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_lcfsdq_clark_evans(dists = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, area = 5L,
+  perimeter = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

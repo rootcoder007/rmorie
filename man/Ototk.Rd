@@ -26,7 +26,8 @@ are. Feasibility against a cost matrix is not checked.
 Formula: \code{<a, f> + <b, g>}.
 }
 \examples{
-Ototk(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8))
+Ototk(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8),
+  g = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Villani, C. (2003). Topics in Optimal Transportation, AMS

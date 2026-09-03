@@ -18,3 +18,7 @@ formulas are routinely evaluated at hypothetical sample sizes like
 Python\'s int has no such limit, so coercing here would break parity
 exactly where the asymptotics become interesting.
 }
+\examples{
+res <- .morie_gh_n(n = 3L)
+res
+}

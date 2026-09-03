@@ -10,6 +10,9 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tl_lchoose(n = 3L, k = 3L)
+#' res
 .tl_lchoose <- function(n, k) {
   if (k < 0 || k > n) return(-Inf)
   lgamma(n + 1) - lgamma(k + 1) - lgamma(n - k + 1)

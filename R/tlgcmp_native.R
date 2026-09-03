@@ -74,7 +74,8 @@ morie_tlgcmp <- function(strata = NULL, outcome_means = NULL,
 #'
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
-#' @return A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied}, \code{delta}, \code{note}.
+#' @return A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied},
+#' \code{delta}, \code{note}.
 #' @export
 positivity_check <- function(g, delta = 0.01) {
   gg <- as.numeric(g)
@@ -120,7 +121,8 @@ g_computation <- function(strata, outcome_means, covariate_probs) {
 #' @param L_supports A vector; its length is taken and its elements indexed.
 #' @param L_probs A vector; its length is taken and its elements indexed.
 #' @param rule Accepted by the signature and not used anywhere in the body.
-#' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method}, \code{note}, \code{assumptions}.
+#' @return A list with \code{estimate}, \code{psi}, \code{horizon}, \code{method},
+#' \code{note}, \code{assumptions}.
 #' @export
 sequential_g_formula <- function(Q_functions, L_supports, L_probs,
                                  rule) {
@@ -199,6 +201,9 @@ counterfactual_mean <- function(Y, A, L, a_star, strata_probs = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlgcmp_cheatsheet()
+#' res
 .tlgcmp_cheatsheet <- function() {
   paste("tlgcmp: the causal parameter lives on the FULL data ",
         "(U, X); identification maps it to a functional of the ",

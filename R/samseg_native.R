@@ -23,7 +23,8 @@
 
 #' .samseg_pos_enc
 #'
-#' A step of the samseg_native implementation. Called by \code{encode_box_prompt}, \code{encode_point_prompt}.
+#' A step of the samseg_native implementation. Called by \code{encode_box_prompt},
+#' \code{encode_point_prompt}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -33,6 +34,11 @@
 #' @param scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .samseg_pos_enc(x = x, y = y)
+#' res
 .samseg_pos_enc <- function(x, y, dim = 8, scale = 1.0) {
   out <- numeric(0)
   for (j in 0:(as.integer(dim) %/% 2L - 1L)) {
@@ -140,7 +146,8 @@ encode_mask_prompt <- function(mask, image_embedding, weight = 1.0) {
 #' @param encoder_ms Coerced to numeric by the body, with \code{as.numeric}.
 #' @param decoder_ms Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_prompts Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms}, \code{speedup}, \code{interactive}, \code{note}.
+#' @return A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms},
+#' \code{speedup}, \code{interactive}, \code{note}.
 #' @export
 amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
   e <- as.numeric(encoder_ms)
@@ -163,9 +170,11 @@ amortised_cost <- function(encoder_ms, decoder_ms, n_prompts) {
 #'
 #' @param image_embedding Passed to \code{decoder}.
 #' @param prompt_tokens Passed to \code{decoder}.
-#' @param decoder The body requires: samseg: the decoder returned no mask; the task requires a valid mask for ANY prompt.
+#' @param decoder The body requires: samseg: the decoder returned no mask; the task
+#' requires a valid mask for ANY prompt.
 #' @param multimask Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask},
+#' \code{method}, \code{note}.
 #' @export
 promptable_segment <- function(image_embedding, prompt_tokens, decoder,
                                multimask = TRUE) {
@@ -188,6 +197,9 @@ promptable_segment <- function(image_embedding, prompt_tokens, decoder,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .samseg_cheatsheet()
+#' res
 .samseg_cheatsheet <- function() {
   paste("samseg: the task is 'return a VALID mask for any prompt, ",
         "and for an AMBIGUOUS prompt a valid mask for at least one ",

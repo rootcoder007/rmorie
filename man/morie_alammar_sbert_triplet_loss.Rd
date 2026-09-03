@@ -19,5 +19,6 @@ A list with \code{estimate}, \code{losses}, \code{active}, \code{d_positive}, \c
 }
 \keyword{internal}
 \examples{
-morie_alammar_sbert_triplet_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8), positive = c(1, 2, 3, 4, 5, 6, 7, 8), negative = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_alammar_sbert_triplet_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8),
+  positive = c(1, 2, 3, 4, 5, 6, 7, 8), negative = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

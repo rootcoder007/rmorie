@@ -20,6 +20,10 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A list with \code{T}, \code{S}, \code{Dt}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .ghc_svd(A = A)
+#' res
 .ghc_svd <- function(A) {
   A <- as.matrix(A)
   s <- svd(A, nu = nrow(A), nv = ncol(A))
@@ -76,9 +80,11 @@ term_weighting <- function(X, how = "log_entropy") {
 #' source it follows.
 #'
 #' @param X Passed to \code{term_weighting}.
-#' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param k_dim Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param how Carried through into a list the body builds. Defaults to \code{"log_entropy"}.
-#' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k}, \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{T}, \code{S}, \code{D}, \code{k},
+#' \code{full_rank}, \code{weighting}, \code{method}, \code{note}.
 #' @export
 lsa_decompose <- function(X, k_dim = NULL, how = "log_entropy") {
   A <- term_weighting(X, how = how)
@@ -199,6 +205,9 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .lsa_cheatsheet()
+#' res
 .lsa_cheatsheet <- function() {
   "lsa: literal term matching fails through SYNONYMY (the right document uses other words) and POLYSEMY (the wrong one shares a word). Take the SVD of the term-document matrix and keep ~100 factors: the TRUNCATION is the method, since k = full rank reproduces X exactly and generalises nothing. Queries are FOLDED IN as pseudo-documents, q' T S^-1, then ranked by cosine -- no re-decomposition, but new documents do not reshape the space. Weight the counts first; log-entropy is standard."
 }

@@ -62,44 +62,60 @@
 # Helper: coerce input to a numeric vector
 #' Helper: coerce input to a numeric vector
 #'
-#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel}, \code{morie_se3T_rotation_matrix} and 1 others in the module.
+#' A step of the se3T_native implementation. Called by
+#' \code{morie_se3T_check_equivariance}, \code{morie_se3T_radial_kernel},
+#' \code{morie_se3T_rotation_matrix} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .se3T_vec(x = x)
+#' res
 .se3T_vec <- function(x) {
-  if (is.null(x)) return(numeric(0))
+  if (is.null(x)) {
+    return(numeric(0))
+  }
   as.numeric(unlist(x))
 }
 
 # Helper: coerce input to a numeric matrix
 #' Helper: coerce input to a numeric matrix
 #'
-#' A step of the se3T_native implementation. Called by \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features}, \code{morie_se3T_se3_attention}.
+#' A step of the se3T_native implementation. Called by
+#' \code{morie_se3T_check_equivariance}, \code{morie_se3T_invariant_features},
+#' \code{morie_se3T_se3_attention}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .se3T_mat(x = x)
+#' res
 .se3T_mat <- function(x) {
   if (is.matrix(x)) {
-    return(matrix(as.numeric(x), nrow=nrow(x), ncol=ncol(x)))
+    return(matrix(as.numeric(x), nrow = nrow(x), ncol = ncol(x)))
   }
   if (is.list(x)) {
     n <- length(x)
-    if (n == 0) return(matrix(numeric(0), nrow=0, ncol=3))
+    if (n == 0) {
+      return(matrix(numeric(0), nrow = 0, ncol = 3))
+    }
     m <- length(x[[1]])
-    result <- matrix(0, nrow=n, ncol=m)
+    result <- matrix(0, nrow = n, ncol = m)
     for (i in seq_len(n)) {
       result[i, ] <- as.numeric(x[[i]])
     }
     return(result)
   }
   mat <- as.matrix(x)
-  matrix(as.numeric(mat), nrow=nrow(mat), ncol=ncol(mat))
+  matrix(as.numeric(mat), nrow = nrow(mat), ncol = ncol(mat))
 }
 
 # Apply 3x3 rotation matrix R to a 3-vector v
@@ -115,9 +131,11 @@
 #' @export
 .se3T_apply <- function(R, v) {
   v <- as.numeric(v)
-  c(R[1,1]*v[1] + R[1,2]*v[2] + R[1,3]*v[3],
-    R[2,1]*v[1] + R[2,2]*v[2] + R[2,3]*v[3],
-    R[3,1]*v[1] + R[3,2]*v[2] + R[3,3]*v[3])
+  c(
+    R[1, 1] * v[1] + R[1, 2] * v[2] + R[1, 3] * v[3],
+    R[2, 1] * v[1] + R[2, 2] * v[2] + R[2, 3] * v[3],
+    R[3, 1] * v[1] + R[3, 2] * v[2] + R[3, 3] * v[3]
+  )
 }
 
 # Rodrigues' formula -- a genuine element of SO(3)
@@ -142,10 +160,10 @@ morie_se3T_rotation_matrix <- function(axis, angle) {
   ss <- sin(as.numeric(angle))
   C <- 1.0 - cc
   matrix(c(
-    cc + x*x*C,       x*y*C - z*ss,   x*z*C + y*ss,
-    y*x*C + z*ss,     cc + y*y*C,     y*z*C - x*ss,
-    z*x*C - y*ss,     z*y*C + x*ss,   cc + z*z*C
-  ), nrow=3, ncol=3, byrow=TRUE)
+    cc + x * x * C,       x * y * C - z * ss,   x * z * C + y * ss,
+    y * x * C + z * ss,     cc + y * y * C,     y * z * C - x * ss,
+    z * x * C - y * ss,     z * y * C + x * ss,   cc + z * z * C
+  ), nrow = 3, ncol = 3, byrow = TRUE)
 }
 
 # Invariant features: the distance is invariant, the direction is equivariant
@@ -184,7 +202,7 @@ morie_se3T_invariant_features <- function(positions, i, j) {
 #' @param sigma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
-morie_se3T_radial_kernel <- function(distance, weights=NULL, sigma=1.0) {
+morie_se3T_radial_kernel <- function(distance, weights = NULL, sigma = 1.0) {
   r <- as.numeric(distance)
   if (r < 0.0) stop("se3T: a distance cannot be negative")
   if (is.null(weights)) {
@@ -213,30 +231,32 @@ morie_se3T_radial_kernel <- function(distance, weights=NULL, sigma=1.0) {
 #' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A list with \code{type1}, \code{type0}, \code{weights}, \code{note}.
 #' @export
-morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
-                                    sigma=1.0, temperature=1.0) {
+morie_se3T_se3_attention <- function(positions, type0, type1, weights = NULL,
+                                     sigma = 1.0, temperature = 1.0) {
   P <- .se3T_mat(positions)
   S <- .se3T_vec(type0)
   V <- .se3T_mat(type1)
   n <- nrow(P)
   if (length(S) != n || nrow(V) != n) {
-    stop(sprintf("se3T: %d positions, %d scalars, %d vectors",
-                 n, length(S), nrow(V)))
+    stop(sprintf(
+      "se3T: %d positions, %d scalars, %d vectors",
+      n, length(S), nrow(V)
+    ))
   }
   if (ncol(V) != 3) stop("se3T: type-1 features must be 3-vectors")
   t <- as.numeric(temperature)
   if (t <= 0.0) stop("se3T: the temperature must be positive")
 
-  out_v <- matrix(0, nrow=n, ncol=3)
+  out_v <- matrix(0, nrow = n, ncol = 3)
   out_s <- numeric(n)
-  W <- matrix(0, nrow=n, ncol=n)
+  W <- matrix(0, nrow = n, ncol = n)
 
   for (i in seq_len(n)) {
     logits <- numeric(n)
     for (j in seq_len(n)) {
       g <- morie_se3T_invariant_features(P, i, j)
       logits[j] <- (S[i] * S[j] +
-                    morie_se3T_radial_kernel(g$distance, weights, sigma)) / t
+        morie_se3T_radial_kernel(g$distance, weights, sigma)) / t
     }
     m <- max(logits)
     e <- exp(logits - m)
@@ -273,12 +293,14 @@ morie_se3T_se3_attention <- function(positions, type0, type1, weights=NULL,
 #' @param angle Passed to \code{morie_se3T_rotation_matrix}. Defaults to \code{1.1}.
 #' @param translation Passed to \code{.se3T_vec}. Defaults to \code{c(2, -1, 0.5)}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation}, \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{type1_deviation}, \code{type0_deviation},
+#' \code{weight_deviation}, \code{equivariant}, \code{weights_invariant}, \code{method},
+#' \code{note}.
 #' @export
-morie_se3T_check_equivariance <- function(positions, type0, type1, layer=NULL,
-                                          axis=c(0.3, -0.7, 0.4), angle=1.1,
-                                          translation=c(2.0, -1.0, 0.5),
-                                          tol=1e-9) {
+morie_se3T_check_equivariance <- function(positions, type0, type1, layer = NULL,
+                                          axis = c(0.3, -0.7, 0.4), angle = 1.1,
+                                          translation = c(2.0, -1.0, 0.5),
+                                          tol = 1e-9) {
   f <- if (is.null(layer)) morie_se3T_se3_attention else layer
   P <- .se3T_mat(positions)
   R <- morie_se3T_rotation_matrix(axis, angle)
@@ -287,14 +309,14 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer=NULL,
   base <- f(P, type0, type1)
 
   # Transform positions: R*p + t
-  P_moved <- matrix(0, nrow=nrow(P), ncol=3)
+  P_moved <- matrix(0, nrow = nrow(P), ncol = 3)
   for (i in seq_len(nrow(P))) {
     P_moved[i, ] <- .se3T_apply(R, P[i, ]) + tv
   }
 
   # Transform type1: R*v
   V <- .se3T_mat(type1)
-  V_moved <- matrix(0, nrow=nrow(V), ncol=3)
+  V_moved <- matrix(0, nrow = nrow(V), ncol = 3)
   for (i in seq_len(nrow(V))) {
     V_moved[i, ] <- .se3T_apply(R, V[i, ])
   }
@@ -333,17 +355,19 @@ morie_se3T_check_equivariance <- function(positions, type0, type1, layer=NULL,
 #' @return A character value.
 #' @export
 morie_se3T_cheatsheet <- function() {
-  paste0("se3T: a point cloud has no canonical orientation, so ",
-         "without a symmetry constraint the model must LEARN that a ",
-         "rotated molecule is the same molecule -- imperfectly, with ",
-         "no test-time guarantee. Equivariance builds it in: ",
-         "f(Rx+t) = R f(x) for type-1 outputs, f(x) for type-0. ",
-         "Mechanism: attention WEIGHTS are built only from ",
-         "INVARIANT quantities (distances, scalars), while the ",
-         "VALUES aggregated are equivariant -- an invariant convex ",
-         "combination of equivariant vectors is equivariant. The ",
-         "radial kernel sees the DISTANCE alone. Check it by ",
-         "rotating the input and comparing to machine precision.")
+  paste0(
+    "se3T: a point cloud has no canonical orientation, so ",
+    "without a symmetry constraint the model must LEARN that a ",
+    "rotated molecule is the same molecule -- imperfectly, with ",
+    "no test-time guarantee. Equivariance builds it in: ",
+    "f(Rx+t) = R f(x) for type-1 outputs, f(x) for type-0. ",
+    "Mechanism: attention WEIGHTS are built only from ",
+    "INVARIANT quantities (distances, scalars), while the ",
+    "VALUES aggregated are equivariant -- an invariant convex ",
+    "combination of equivariant vectors is equivariant. The ",
+    "radial kernel sees the DISTANCE alone. Check it by ",
+    "rotating the input and comparing to machine precision."
+  )
 }
 
 # compact alias per ledger/NAMING.md
@@ -355,17 +379,3 @@ morie_se3T_se3_transformer <- morie_se3T_se3_attention
 #' @rdname morie_se3T_rotation_matrix
 #' @export
 morie_se3T <- morie_se3T_rotation_matrix
-
-
-
-
-
-
-
-
-
-
-
-
-
-

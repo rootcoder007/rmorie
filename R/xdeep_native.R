@@ -52,13 +52,18 @@
 
 #' .xdeep_to_vec
 #'
-#' A step of the xdeep_native implementation. Called by \code{xdeep_hadamard}, \code{xdeep_xdeepfm_score}.
+#' A step of the xdeep_native implementation. Called by \code{xdeep_hadamard},
+#' \code{xdeep_xdeepfm_score}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .xdeep_to_vec(a = A)
+#' res
 .xdeep_to_vec <- function(a) {
   as.numeric(a)
 }
@@ -72,6 +77,11 @@
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .xdeep_to_mat(M = X)
+#' res
 .xdeep_to_mat <- function(M) {
   m <- as.matrix(M)
   storage.mode(m) <- "double"
@@ -143,7 +153,8 @@ xdeep_cin_layer <- function(X_prev, X0, W) {
 #'
 #' @param X0 Passed to \code{.xdeep_to_mat}.
 #' @param Ws A vector; its length is taken.
-#' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees}, \code{n_layers}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{pooled}, \code{layers}, \code{degrees},
+#' \code{n_layers}, \code{method}, \code{note}.
 #' @export
 xdeep_cin <- function(X0, Ws) {
   Z <- .xdeep_to_mat(X0)
@@ -205,7 +216,8 @@ xdeep_interaction_degree <- function(layer_index) {
 #' @param dnn_output Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param w_dnn Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param bias Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{logit}, \code{probability}, \code{linear}, \code{cin}, \code{dnn}, \code{note}.
+#' @return A list with \code{logit}, \code{probability}, \code{linear}, \code{cin},
+#' \code{dnn}, \code{note}.
 #' @export
 xdeep_xdeepfm_score <- function(x_linear, w_linear, X0, Ws, w_cin,
                                 dnn_output = 0.0, w_dnn = 1.0,

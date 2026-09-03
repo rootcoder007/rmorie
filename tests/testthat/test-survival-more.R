@@ -14,11 +14,14 @@ test_that("RMST is the area under the KM curve", {
   r <- Rmst(ST, SE, tau = 8)
   # recompute the area independently from the KM steps
   km <- .ms_km(ST, SE)
-  area <- 0; pt <- 0; ps <- 1
+  area <- 0
+  pt <- 0
+  ps <- 1
   for (i in seq_along(km$time)) {
     if (km$time[i] >= 8) break
     area <- area + ps * (km$time[i] - pt)
-    pt <- km$time[i]; ps <- km$surv[i]
+    pt <- km$time[i]
+    ps <- km$surv[i]
   }
   area <- area + ps * (8 - pt)
   expect_equal(r$rmst, area)
@@ -34,7 +37,8 @@ test_that("RMST flags a horizon past the data", {
 })
 
 test_that("RMST of a censoring-free sample is the mean up to tau", {
-  t <- c(1, 2, 3, 4); e <- c(1, 1, 1, 1)
+  t <- c(1, 2, 3, 4)
+  e <- c(1, 1, 1, 1)
   # S steps 0.75, 0.5, 0.25, 0; area to tau = 4 is 1 + .75 + .5 + .25
   expect_equal(Rmst(t, e, tau = 4)$rmst, 2.5)
 })

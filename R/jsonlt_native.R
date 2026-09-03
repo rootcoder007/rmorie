@@ -574,7 +574,9 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' `time_format`, `UTC`, `no_dots`, `hms`.
 #'
 #' @param x the object to encode.
-#' @param dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,pretty,force,... as in jsonlite.
+#' @param
+#' dataframe,matrix,Date,POSIXt,factor,complex,raw,null,na,auto_unbox,digits,pretty,force,...
+#' as in jsonlite.
 #' @return a length-one character vector of class `json`.
 #' @examples
 #' morie_jsonlt_to_json(list(a = 1:3, b = "x"), auto_unbox = TRUE)
@@ -1059,6 +1061,10 @@ morie_jsonlt_write_json <- function(x, path, ...) {
 #' @param txt character; lines are joined with newlines.
 #' @return `TRUE`, or `FALSE` with attributes `err` and `offset`.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- morie_jsonlt_validate(txt = txt)
+#' res
 morie_jsonlt_validate <- function(txt) {
   stopifnot(is.character(txt))
   txt <- paste(txt, collapse = "\n")

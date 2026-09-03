@@ -17,7 +17,8 @@
 #' @param unit Passed to \code{c}.
 #' @param time Passed to \code{c}.
 #' @param treatment_time Passed to \code{c}.
-#' @return A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel}, \code{treated_post}.
+#' @return A list with \code{y}, \code{unit}, \code{time}, \code{g}, \code{rel},
+#' \code{treated_post}.
 #' @export
 .morie_did_modern_frame <- function(data, outcome, unit, time,
                                     treatment_time) {

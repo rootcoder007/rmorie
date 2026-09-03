@@ -115,7 +115,8 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 
 #' .pmfsc_key
 #'
-#' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive}, \code{morie_pmfsc_score}.
+#' A step of the pmfsc_native implementation. Called by \code{morie_pmfsc_derive},
+#' \code{morie_pmfsc_score}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -123,6 +124,11 @@ morie_pmfsc_bin <- function(r, r_max, n_bins) {
 #' @param b Passed to \code{paste0}.
 #' @return A character value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .pmfsc_key(a = A, b = b)
+#' res
 .pmfsc_key <- function(a, b) paste0(a, "|", b)
 
 #' Turn observed contacts into a potential, one curve per type pair
@@ -267,6 +273,11 @@ morie_pmfsc_score <- function(pairs, potential,
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .pmfsc_dist(a = A, b = b)
+#' res
 .pmfsc_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Derive a potential if needed, then score the pose

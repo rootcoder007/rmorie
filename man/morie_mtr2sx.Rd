@@ -25,5 +25,6 @@ A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{ci}, \co
 }
 \keyword{internal}
 \examples{
-morie_mtr2sx(beta_x = c(1, 2, 3, 4, 5, 6, 7, 8), se_x = c(1, 2, 3, 4, 5, 6, 7, 8), beta_y = c(1, 2, 3, 4, 5, 6, 7, 8), se_y = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_mtr2sx(beta_x = c(1, 2, 3, 4, 5, 6, 7, 8), se_x = c(1, 2, 3, 4, 5, 6, 7, 8),
+  beta_y = c(1, 2, 3, 4, 5, 6, 7, 8), se_y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

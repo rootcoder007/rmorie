@@ -63,7 +63,8 @@
 # F(x) = F0 + sum x_i F_i (the LMI)
 #' F(x) = F0 + sum x_i F_i (the LMI)
 #'
-#' A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier}, \code{sdpwts_solve_sdp}.
+#' A step of the sdpwts_native implementation. Called by \code{sdpwts_barrier},
+#' \code{sdpwts_solve_sdp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -100,7 +101,8 @@ sdpwts_lmi <- function(x, F0, Fs) {
 #'
 #' @param M A matrix; passed to \code{as.matrix}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1e-10}.
-#' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd}, \code{strictly_feasible}.
+#' @return A list with \code{eigenvalues}, \code{min_eigenvalue}, \code{psd},
+#' \code{strictly_feasible}.
 #' @export
 sdpwts_is_psd <- function(M, tol = -1e-10) {
   A <- as.matrix(M)
@@ -257,7 +259,9 @@ sdpwts_central_path_gap <- function(t, m) {
 #' @param mu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @param max_outer Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
-#' @return A list with \code{estimate}, \code{x}, \code{objective}, \code{gap}, \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{x}, \code{objective}, \code{gap},
+#' \code{outer_iterations}, \code{path}, \code{m}, \code{min_eigenvalue}, \code{method},
+#' \code{note}.
 #' @export
 sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
                              tol = 1e-8, max_outer = 60) {
@@ -309,7 +313,8 @@ sdpwts_solve_sdp <- function(c, F0, Fs, x0, t0 = 1.0, mu = 10.0,
 #' @param t0 Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1}.
 #' @param mu Passed to \code{sdpwts_solve_sdp}. Defaults to \code{10}.
 #' @param tol Passed to \code{sdpwts_solve_sdp}. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error}, \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{t}, \code{lambda_min}, \code{error},
+#' \code{outer_iterations}, \code{gap}, \code{method}, \code{note}.
 #' @export
 sdpwts_min_eigenvalue_sdp <- function(A, t0 = 1.0, mu = 10.0,
                                       tol = 1e-9) {
@@ -356,17 +361,3 @@ sdpwts_cheatsheet <- function() {
          "known, not inferred. Check against max t s.t. A - tI >= ",
          "0, whose answer is lambda_min(A).")
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-

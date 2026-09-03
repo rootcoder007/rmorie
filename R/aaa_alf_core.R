@@ -14,7 +14,8 @@
 
 #' alfSigm
 #'
-#' A step of the alf_core implementation. Called by \code{Alfmsaat}, \code{Alftriat}, \code{Alftrimu}.
+#' A step of the alf_core implementation. Called by \code{Alfmsaat}, \code{Alftriat},
+#' \code{Alftrimu}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -51,7 +52,8 @@ alfSmax <- function(v) {
 
 #' alfVdot
 #'
-#' A step of the alf_core implementation. Called by \code{Alfipa}, \code{Alfmsaat}, \code{Alftmpl} and 1 others in the module.
+#' A step of the alf_core implementation. Called by \code{Alfipa}, \code{Alfmsaat},
+#' \code{Alftmpl} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -75,7 +77,8 @@ alfVn2 <- function(a) sum(a * a)
 # Dense projection of a vector; W is (n_out x n_in).
 #' Dense projection of a vector; W is (n_out x n_in)
 #'
-#' A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram}, \code{Alfembed} and 11 others in the module.
+#' A step of the alf_core implementation. Called by \code{Alfbkb}, \code{Alfdgram},
+#' \code{Alfembed} and 11 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

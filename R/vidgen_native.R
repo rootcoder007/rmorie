@@ -57,13 +57,18 @@
 
 #' .vidgen_mat
 #'
-#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
+#' A step of the vidgen_native implementation. Called by
+#' \code{morie_vidgen_space_only_conv}, \code{morie_vidgen_spatial_attention}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{do.call}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vidgen_mat(x = x)
+#' res
 .vidgen_mat <- function(x) {
   if (is.matrix(x)) return(x * 1.0)
   rows <- lapply(x, function(r) as.numeric(unlist(r)))
@@ -72,20 +77,26 @@
 
 #' .vidgen_vec
 #'
-#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_reconstruction_guidance}.
+#' A step of the vidgen_native implementation. Called by
+#' \code{morie_vidgen_reconstruction_guidance}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vidgen_vec(x = x)
+#' res
 .vidgen_vec <- function(x) {
   as.numeric(unlist(x))
 }
 
 #' .vidgen_softmax_attend
 #'
-#' A step of the vidgen_native implementation. Called by \code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
+#' A step of the vidgen_native implementation. Called by
+#' \code{morie_vidgen_spatial_attention}, \code{morie_vidgen_temporal_attention}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -93,6 +104,11 @@
 #' @param mask Optional; may be \code{NULL}. A matrix; indexed by row and column.
 #' @return A list with \code{out}, \code{W}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .vidgen_softmax_attend(X = X)
+#' res
 .vidgen_softmax_attend <- function(X, mask = NULL) {
   n <- nrow(X)
   d <- ncol(X)
@@ -299,7 +315,8 @@ morie_vidgen_attention_cost <- function(frames, spatial_positions) {
 #' @param index Coerced to integer by the body, with \code{as.integer}.
 #' @param weight Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
 #' @param downsample Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight}, \code{guided_frames}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{gradient}, \code{error}, \code{weight},
+#' \code{guided_frames}, \code{method}, \code{note}.
 #' @export
 morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
                                                   weight = 2.0,

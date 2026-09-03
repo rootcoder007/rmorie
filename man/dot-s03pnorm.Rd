@@ -17,3 +17,8 @@ A step of the helpers_s03 implementation. Called by \code{.huber_k}, \code{Augmn
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .s03pnorm(z = y)
+res
+}

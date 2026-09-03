@@ -12,7 +12,8 @@
 #' the source it follows.
 #'
 #' @param histories A vector; its length is taken and its elements indexed.
-#' @param states Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.
+#' @param states Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{.STATES}.
 #' @return A list with \code{cumulative}, \code{states}, \code{periods}, \code{note}.
 #' @export
 cumulative_episodes <- function(histories, states = .STATES) {
@@ -44,6 +45,10 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .quantile7(x = x, q = 0.5)
+#' res
 .quantile7 <- function(x, q) {
   # Linear interpolation, type 7 (R default)
   x <- sort(as.numeric(x))
@@ -66,8 +71,10 @@ cumulative_episodes <- function(histories, states = .STATES) {
 #' @param propensities A vector; indexed elementwise.
 #' @param stabilise A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param marginal Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param truncate Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated}, \code{n_truncated}, \code{note}.
+#' @param truncate Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{weights}, \code{raw}, \code{stabilised}, \code{truncated},
+#' \code{n_truncated}, \code{note}.
 #' @export
 treatment_weights <- function(histories, propensities, stabilise = TRUE,
                               marginal = NULL, truncate = NULL) {
@@ -119,7 +126,8 @@ treatment_weights <- function(histories, propensities, stabilise = TRUE,
 #' the source it follows.
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n}, \code{efficiency}, \code{mean_near_one}, \code{note}.
+#' @return A list with \code{mean}, \code{max}, \code{min}, \code{effective_n}, \code{n},
+#' \code{efficiency}, \code{mean_near_one}, \code{note}.
 #' @export
 weight_diagnostics <- function(weights) {
   w <- as.numeric(weights)
@@ -144,6 +152,11 @@ weight_diagnostics <- function(weights) {
 #' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .corr_r(x = x, y = y)
+#' res
 .corr_r <- function(x, y) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -165,7 +178,8 @@ weight_diagnostics <- function(weights) {
 #'
 #' @param covariate_history A matrix; passed to \code{as.matrix}.
 #' @param treatment_history A matrix; passed to \code{as.matrix}.
-#' @param outcome Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param outcome Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 confounding_check <- function(covariate_history, treatment_history,
@@ -206,6 +220,11 @@ confounding_check <- function(covariate_history, treatment_history,
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A matrix, from \code{solve}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .wls_r(X = x, y = y, w = x)
+#' res
 .wls_r <- function(X, y, w) {
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -227,9 +246,12 @@ confounding_check <- function(covariate_history, treatment_history,
 #'
 #' @param outcome Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cumulative A matrix; passed to \code{as.matrix}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param states Coerced to character by the body, with \code{as.character}. Defaults to \code{.STATES}.
-#' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se}, \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param states Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{.STATES}.
+#' @return A list with \code{estimate}, \code{intercept}, \code{coefficients}, \code{se},
+#' \code{per_episode}, \code{weighted}, \code{effective_n}, \code{method}, \code{note}.
 #' @export
 fit_msm <- function(outcome, cumulative, weights = NULL, states = .STATES) {
   y <- as.numeric(outcome)

@@ -3,7 +3,9 @@
 #' Variance of the modified gamma kernel density estimator (Theorem 1.5)
 #'
 #' Theorem 1.5:
-#' \deqn{\mathrm{Var}\[\tilde f_X(x)\] = 4\mathrm{Var}\[A_h\] + \mathrm{Var}\[A_{4h}\] - 4\mathrm{Cov}\[A_h,A_{4h}\] + o(n^{-1}h^{-1/4}).}{Var\[ftilde(x)\] = 4 Var\[A_h\] + Var\[A_4h\] - 4 Cov\[A_h, A_4h\] + o(n^-1 h^-1/4).}
+#' \deqn{\mathrm{Var}\[\tilde f_X(x)\] = 4\mathrm{Var}\[A_h\] + \mathrm{Var}\[A_{4h}\] -
+#' 4\mathrm{Cov}\[A_h,A_{4h}\] + o(n^{-1}h^{-1/4}).}{Var\[ftilde(x)\] = 4 Var\[A_h\] +
+#' Var\[A_4h\] - 4 Cov\[A_h, A_4h\] + o(n^-1 h^-1/4).}
 #'
 #' Not a new calculation -- it is the variance of the linear combination
 #' `2 A_h - A_4h`, which the proof reaches by showing

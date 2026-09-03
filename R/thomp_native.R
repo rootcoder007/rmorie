@@ -20,10 +20,13 @@
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @param T A count; the body uses it as \code{seq_len(...)}.
-#' @param alpha0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param beta0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha0 Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param beta0 Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha}, \code{beta}, \code{post_mean}, \code{counts}, \code{total_reward}, \code{method}.
+#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{alpha},
+#' \code{beta}, \code{post_mean}, \code{counts}, \code{total_reward}, \code{method}.
 #' @export
 morie_thomp <- function(p, T, alpha0 = NULL, beta0 = NULL, seed = 0) {
   p <- as.numeric(p)

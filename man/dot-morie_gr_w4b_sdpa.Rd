@@ -23,3 +23,9 @@ A step of the geron_w4b_native implementation. Called by \code{morie_geron_multi
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_gr_w4b_sdpa(Q = A, K = A, V = b)
+res
+}

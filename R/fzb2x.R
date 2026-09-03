@@ -2,7 +2,8 @@
 
 #' The b_2 bias coefficient of the kernel distribution function estimator
 #'
-#' Eq. (2.7): \deqn{b_2(x) = \frac{f_X'(x)}{2}\int w^2 K(w)\,dw.}{b2(x) = (f'(x)/2) int w^2 K(w) dw.}
+#' Eq. (2.7): \deqn{b_2(x) = \frac{f_X'(x)}{2}\int w^2 K(w)\,dw.}{b2(x) = (f'(x)/2) int
+#' w^2 K(w) dw.}
 #'
 #' The leading bias coefficient of the KDFE:
 #' `Bias\[Fhat_h(x)\] = h^2 b2(x) + o(h^2)`.

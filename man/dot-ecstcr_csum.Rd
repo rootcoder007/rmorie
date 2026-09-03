@@ -17,3 +17,8 @@ Neither language\'s sum() is a plain double loop -- R accumulates in
 long double, CPython 3.12 and later compensate -- and they are not
 unfaithful in the same way.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .ecstcr_csum(v = x)
+res
+}

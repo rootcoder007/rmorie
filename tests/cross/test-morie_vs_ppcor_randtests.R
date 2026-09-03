@@ -37,7 +37,8 @@ test_that("native semi-partial correlation matches ppcor::spcor", {
 
 test_that("native runs test matches randtests::runs.test", {
   skip_if_not_installed("randtests")
-  set.seed(261); x <- rnorm(80)
+  set.seed(261)
+  x <- rnorm(80)
   ref <- randtests::runs.test(x)
   mine <- morie_runs_test(x)
   expect_equal(unname(mine$statistic), unname(ref$statistic),
@@ -47,7 +48,8 @@ test_that("native runs test matches randtests::runs.test", {
 
 test_that("native turning-point test matches randtests", {
   skip_if_not_installed("randtests")
-  set.seed(262); x <- rnorm(100)
+  set.seed(262)
+  x <- rnorm(100)
   ref <- randtests::turning.point.test(x)
   mine <- morie_turning_point_test(x)
   expect_equal(unname(mine$statistic), unname(ref$statistic),
@@ -57,7 +59,8 @@ test_that("native turning-point test matches randtests", {
 
 test_that("native Bartels + difference-sign match randtests", {
   skip_if_not_installed("randtests")
-  set.seed(263); x <- rnorm(120)
+  set.seed(263)
+  x <- rnorm(120)
   rb <- randtests::bartels.rank.test(x)
   mb <- morie_bartels_rank_test(x)
   expect_equal(unname(mb$statistic), unname(rb$statistic),

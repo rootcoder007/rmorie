@@ -61,7 +61,7 @@ The drawback Sec. 9.2 identifies is reported rather than hidden: under
 product separability the spatial covariances at different time lags are
 proportional, so the spatial dependence has the same shape at every time
 lag and the two components "do not act upon each other". If that matters,
-use \code{\link[=spstcn]{spstcn()}}.
+use \code{spstcn()}.
 }
 \references{
 Schabenberger Ch 9, Sec 9.2, eqs (9.5)-(9.6)

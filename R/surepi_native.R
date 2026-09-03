@@ -143,7 +143,8 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 
 #' surepi_ears_detect
 #'
-#' A step of the surepi_native implementation. Called by \code{surepi_c1_mild}, \code{surepi_c2_medium}, \code{surepi_c3_ultra}.
+#' A step of the surepi_native implementation. Called by \code{surepi_c1_mild},
+#' \code{surepi_c2_medium}, \code{surepi_c3_ultra}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -151,7 +152,9 @@ surepi_c3_ultra <- function(counts, threshold = 2.0, sigma_floor = 1.0) {
 #' @param method Compared against \code{"C3"}. Defaults to \code{"C2"}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param sigma_floor Passed to \code{.surepi_stat}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged}, \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width}, \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{statistic}, \code{flag}, \code{n_flagged},
+#' \code{method}, \code{threshold}, \code{baseline_lag}, \code{baseline_width},
+#' \code{sigma_floor}, \code{n}, \code{n_evaluable}, \code{reference}, \code{caveat}.
 #' @export
 surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
                                sigma_floor = 1.0) {
@@ -222,7 +225,8 @@ surepi_ears_detect <- function(counts, method = "C2", threshold = 3.0,
 #' @param k_shift Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param decision Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
 #' @param min_count Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
-#' @return A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged}, \code{decision}, \code{k}, \code{min_count}, \code{method}.
+#' @return A list with \code{cusum}, \code{flag}, \code{estimate}, \code{n_flagged},
+#' \code{decision}, \code{k}, \code{min_count}, \code{method}.
 #' @export
 surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
                                     decision = 0.5, min_count = 5) {
@@ -280,7 +284,8 @@ surepi_salmonella_cusum <- function(counts, mu0, sigma, k_shift = 1.0,
 #' @param current Coerced to numeric by the body, with \code{as.numeric}.
 #' @param passes Numeric; passed to \code{max}. Defaults to \code{c(4, 2, 5, 3)}.
 #' @param multiplier Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{2}.
-#' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold}, \code{flag}, \code{current}, \code{method}.
+#' @return A list with \code{smoothed}, \code{baseline}, \code{sigma}, \code{threshold},
+#' \code{flag}, \code{current}, \code{method}.
 #' @export
 surepi_compound_smoothing <- function(values, current,
                                       passes = c(4, 2, 5, 3),
@@ -381,16 +386,3 @@ surepi_surveillance_signal <- surepi_ears_detect
 
 # entry point
 morie_surepi <- surepi_ears_detect
-
-
-
-
-
-
-
-
-
-
-
-
-

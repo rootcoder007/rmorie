@@ -11,7 +11,8 @@
 
 #' .morie_weight_result
 #'
-#' A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module.
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
+#' \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -56,7 +57,8 @@ print.morie_weight <- function(x, ...) {
 
 #' .morie_weight_from_ps
 #'
-#' A step of the weight_native implementation. Called by \code{morie_weight_cbps}, \code{morie_weight_ps}, \code{morie_weight_super}.
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
+#' \code{morie_weight_ps}, \code{morie_weight_super}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -352,6 +354,11 @@ morie_weight_super <- function(data, treatment, covariates,
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000L}.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_nnls(A = A, b = b)
+#' res
 .morie_nnls <- function(A, b, tol = 1e-10, max_iter = 2000L) {
   p <- ncol(A)
   x <- rep(0, p)

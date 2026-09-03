@@ -136,7 +136,8 @@ test_that("doubly robust DiD stays consistent when either model is misspecified"
   expect_equal(mean(vapply(1:6, run, numeric(1), FALSE, FALSE)), att_true, tolerance = 0.15)
 
   set.seed(99)
-  n <- 800; xx <- rnorm(n)
+  n <- 800
+  xx <- rnorm(n)
   d <- rbinom(n, 1, stats::plogis(0.8 * xx))
   r <- morie_dr_did(rnorm(n), 1.5 * xx + 2 * d + rnorm(n), d, xx)
   expect_equal(r$att, 2, tolerance = 0.35)

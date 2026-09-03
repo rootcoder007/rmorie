@@ -21,5 +21,6 @@ A list with \code{lower}, \code{upper}, \code{width}, \code{critical_value}, \co
 }
 \keyword{internal}
 \examples{
-morie_frequentist_confidence_set(theta_set = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), se_phi = 5L)
+morie_frequentist_confidence_set(theta_set = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  se_phi = 5L)
 }

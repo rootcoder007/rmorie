@@ -42,6 +42,9 @@
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .rfboot(b = 3L, n = 3L)
+#' res
 .rfboot <- function(b, n) {
   x <- ((b + 1) * 2654435761) %% .rfLCGM
   rows <- numeric(n)
@@ -79,6 +82,9 @@
 #' @param kind Passed to \code{identical}. Defaults to \code{"regression"}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .rfmtry(p = 0.5)
+#' res
 .rfmtry <- function(p, kind = "regression") {
   m <- if (identical(kind, "regression")) ceiling(p / 3) else ceiling(sqrt(p))
   max(1L, min(as.integer(p), as.integer(m)))

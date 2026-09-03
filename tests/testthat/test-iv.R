@@ -240,7 +240,9 @@ test_that("morie_iv_probit requires one endogenous and binary y", {
 
 test_that("morie_iv_panel runs (native within + 2sls)", {
   set.seed(1)
-  n_unit <- 30; n_time <- 5; n <- n_unit * n_time
+  n_unit <- 30
+  n_time <- 5
+  n <- n_unit * n_time
   df <- data.frame(
     unit = rep(seq_len(n_unit), each = n_time),
     t    = rep(seq_len(n_time), n_unit),

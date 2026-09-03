@@ -28,7 +28,8 @@ unchanged and a constant offset between model and observations is
 removed exactly.
 }
 \examples{
-morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8),
+  mod = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Gudmundsson, L. et al. (2012). Technical note:

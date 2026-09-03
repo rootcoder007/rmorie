@@ -34,5 +34,6 @@ The receptor with that side chain moved.
 }
 \keyword{internal}
 \examples{
-morie_flexrd_chi(coords = c(1, 2, 3, 4, 5, 6, 7, 8), chi = list(a = 1, b = 2), degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_flexrd_chi(coords = c(1, 2, 3, 4, 5, 6, 7, 8), chi = list(a = 1, b = 2),
+  degrees = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

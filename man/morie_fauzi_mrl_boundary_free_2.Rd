@@ -27,7 +27,7 @@ including the boundary, with the Theorem 4.3 constant
 }
 \details{
 Prefer the variant built on
-\code{\link[=morie_fauzi_cumulative_survival_1]{morie_fauzi_cumulative_survival_1()}} when the analytic relation
+\code{morie_fauzi_cumulative_survival_1()} when the analytic relation
 between \code{S} and the cumulative survival must be preserved
 (Remark 4.2).
 }

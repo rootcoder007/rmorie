@@ -13,8 +13,13 @@
 #' @param precip Coerced to numeric by the body, with \code{as.numeric}.
 #' @param pet Coerced to numeric by the body, with \code{as.numeric}.
 #' @param awc Numeric; passed to \code{min}. Defaults to \code{100}.
-#' @param month Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{pdsi}, \code{z_index}, \code{departure}, \code{cafec_precip}, \code{alpha}, \code{beta}, \code{gamma}, \code{delta}, \code{K}, \code{K_month}, \code{mean_abs_departure}, \code{evapotranspiration}, \code{recharge}, \code{runoff}, \code{loss}, \code{soil_surface_capacity}, \code{soil_under_capacity}, \code{n}, \code{duration_factor}, \code{duration_divisor}, \code{method}, \code{note}.
+#' @param month Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{estimate}, \code{pdsi}, \code{z_index}, \code{departure},
+#' \code{cafec_precip}, \code{alpha}, \code{beta}, \code{gamma}, \code{delta}, \code{K},
+#' \code{K_month}, \code{mean_abs_departure}, \code{evapotranspiration}, \code{recharge},
+#' \code{runoff}, \code{loss}, \code{soil_surface_capacity}, \code{soil_under_capacity},
+#' \code{n}, \code{duration_factor}, \code{duration_divisor}, \code{method}, \code{note}.
 #' @export
 morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
                                       month = NULL) {
@@ -148,6 +153,9 @@ morie_droPDSI_palmer_pdsi <- function(precip, pet, awc = 100.0,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .droPDSI_cheatsheet()
+#' res
 .droPDSI_cheatsheet <- function() {
   paste0("droPDSI: morie_droPDSI_palmer_pdsi(precip, pet, awc) -> PDSI, Z ",
          "index and the CAFEC water balance (Palmer 1965)")

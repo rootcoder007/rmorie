@@ -1691,10 +1691,14 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
 #'
 #' \tabular{lll}{
 #'   \strong{Mode}      \tab \strong{morie wrapper}                       \tab \strong{best for} \cr
-#'   SODA2              \tab [morie_datasets_chicago_crime()]            \tab base-feed pulls + `$where` filtering \cr
-#'   SODA3 (SoQL)       \tab [morie_datasets_chicago_crime_soql()]       \tab arbitrary `SELECT ... WHERE` \cr
-#'   SODA3 (map view)   \tab [morie_datasets_chicago_crime_map()]        \tab derived/filtered views (ahwe-kpsy) \cr
-#'   OData v4           \tab `morie_datasets_chicago_crime_odata()`      \tab third-party tool ingestion \cr
+#'   SODA2              \tab [morie_datasets_chicago_crime()]            \tab base-feed
+#' pulls + `$where` filtering \cr
+#'   SODA3 (SoQL)       \tab [morie_datasets_chicago_crime_soql()]       \tab arbitrary
+#' `SELECT ... WHERE` \cr
+#'   SODA3 (map view)   \tab [morie_datasets_chicago_crime_map()]        \tab
+#' derived/filtered views (ahwe-kpsy) \cr
+#'   OData v4           \tab `morie_datasets_chicago_crime_odata()`      \tab third-party
+#' tool ingestion \cr
 #' }
 #'
 #' **Known Socrata limitation.** `$filter` is unreliable on Socrata's
@@ -1719,7 +1723,7 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
 #' @param app_token Optional Socrata app token (sent as `X-App-Token`).
 #' @return A `data.frame`.
 #' @references Socrata OData docs:
-#'   \url{https://support.socrata.com/hc/en-us/articles/115005364207-Access-Data-Insights-Data-using-OData}
+#'   \url{https://dev.socrata.com/docs/endpoints}
 #' @examples
 #' df <- morie_datasets_chicago_crime_odata(offline = TRUE)
 #' nrow(df)
@@ -2190,12 +2194,18 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #' the matching resolver dataset shipped in morie:
 #'
 #' \tabular{lll}{
-#'   \strong{crime field}     \tab \strong{resolver}                       \tab \strong{join key}        \cr
-#'   `beat`                   \tab [morie_datasets_chicago_police_beats()] \tab `beat == beat_num`       \cr
-#'   `district`               \tab [morie_datasets_chicago_police_districts()] \tab `district == dist_num` \cr
-#'   `ward`                   \tab [morie_datasets_chicago_wards()]        \tab `ward == ward`           \cr
-#'   `community_area`         \tab [morie_datasets_chicago_community_areas()] \tab `community_area == area_numbe` \cr
-#'   `iucr`                   \tab [morie_datasets_chicago_iucr_codes()]   \tab `iucr == iucr`           \cr
+#'   \strong{crime field}     \tab \strong{resolver}                       \tab
+#' \strong{join key}        \cr
+#'   `beat`                   \tab [morie_datasets_chicago_police_beats()] \tab `beat ==
+#' beat_num`       \cr
+#'   `district`               \tab [morie_datasets_chicago_police_districts()] \tab
+#' `district == dist_num` \cr
+#'   `ward`                   \tab [morie_datasets_chicago_wards()]        \tab `ward ==
+#' ward`           \cr
+#'   `community_area`         \tab [morie_datasets_chicago_community_areas()] \tab
+#' `community_area == area_numbe` \cr
+#'   `iucr`                   \tab [morie_datasets_chicago_iucr_codes()]   \tab `iucr ==
+#' iucr`           \cr
 #' }
 #'
 #' The resolvers are loaded in offline mode (they're all included +
@@ -2757,7 +2767,7 @@ morie_datasets_chicago_arrests <- function(year = NULL,
 #'
 #' Wraps the static historical arrests CSV published by the Chicago
 #' Police Department at
-#' \url{https://www.chicagopolice.org/statistics-data/public-arrest-data/}
+#' \url{https://data.cityofchicago.org/Public-Safety/Arrests/dpt3-jri9}
 #' covering adult and juvenile arrests from 01 JAN 2014 through 31
 #' DEC 2017, with all personally identifying information removed.
 #' Ten upper-case-coded columns matching the CPD data dictionary:
@@ -2828,7 +2838,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
         "the chicagopolice.org Public Arrest Data file's direct-CSV ",
         "URL (lookup pending) is not stable across quarterly ",
         "republications. Visit ",
-        "https://www.chicagopolice.org/statistics-data/public-arrest-data/",
+        "https://data.cityofchicago.org/Public-Safety/Arrests/dpt3-jri9",
         " to find the current direct-CSV URL and pass it via `url = ...`."
       ),
       call. = FALSE

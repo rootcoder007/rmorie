@@ -12,7 +12,8 @@
 
 #' .labels
 #'
-#' A step of the randIE_native implementation. Called by \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}.
+#' A step of the randIE_native implementation. Called by
+#' \code{morie_randIE_interventional_mean}, \code{morie_randIE_mediator_distribution}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -20,6 +21,11 @@
 #' @param name Passed to \code{paste0}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .labels(v = x, name = txt)
+#' res
 .labels <- function(v, name) {
   out <- as.character(v)
   if (length(out) == 0L) stop(paste0("randIE: ", name, " is empty"))
@@ -79,7 +85,8 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 
 #' morie_randIE_interventional_mean
 #'
-#' A step of the randIE_native implementation. Called by \code{morie_randIE_randomized_interventional_effect}.
+#' A step of the randIE_native implementation. Called by
+#' \code{morie_randIE_randomized_interventional_effect}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -91,7 +98,8 @@ morie_randIE_mediator_distribution <- function(A, M, C = NULL, laplace = 0) {
 #' @param a.star Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.
 #' @param route Compared against \code{"weighting"}. Defaults to \code{"gformula"}.
 #' @param laplace Passed to \code{morie_randIE_mediator_distribution}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
+#' @return A list with \code{estimate}, \code{a}, \code{a.star}, \code{route},
+#' \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
 #' @export
 morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
                                              a.star = "0",
@@ -197,11 +205,15 @@ morie_randIE_interventional_mean <- function(Y, A, M, C = NULL, a = "1",
 #' @param A Passed to \code{morie_randIE_interventional_mean}.
 #' @param M Passed to \code{morie_randIE_interventional_mean}.
 #' @param C Passed to \code{morie_randIE_interventional_mean}.
-#' @param treated Coerced to character by the body, with \code{as.character}. Defaults to \code{"1"}.
-#' @param control Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.
+#' @param treated Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"1"}.
+#' @param control Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"0"}.
 #' @param route Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{"gformula"}.
 #' @param laplace Passed to \code{morie_randIE_interventional_mean}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{total}, \code{direct}, \code{indirect}, \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control}, \code{identity}, \code{method}.
+#' @return A list with \code{estimate}, \code{total}, \code{direct}, \code{indirect},
+#' \code{direct.control.arm}, \code{psi}, \code{route}, \code{treated}, \code{control},
+#' \code{identity}, \code{method}.
 #' @export
 morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
                                                          treated = "1",
@@ -235,7 +247,8 @@ morie_randIE_randomized_interventional_effect <- function(Y, A, M, C = NULL,
 #' source it follows.
 #'
 #' @param result A list; the body reads \code{$direct}, \code{$indirect}, \code{$total} from it.
-#' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual}, \code{proportion.mediated}.
+#' @return A list with \code{total}, \code{direct}, \code{indirect}, \code{residual},
+#' \code{proportion.mediated}.
 #' @export
 morie_randIE_decompose <- function(result) {
   tot <- result$total

@@ -11,7 +11,9 @@
 #' @param continuity Apply the \eqn{|S|-1} continuity correction.
 #' @return List with \code{statistic} (z), \code{p_value}, \code{S},
 #'   \code{varS}, \code{tau}, \code{n}, \code{method}.
-#' @references Mann (1945), Econometrica 13:245-259; Kendall (1975), Rank Correlation Methods.  Both paywalled; the coded form was read from Pohlert's CRAN package trend (R/mk.test.R, R/utilfn.R), whose .varmk and .Dfn give the tie corrections verbatim.
+#' @references Mann (1945), Econometrica 13:245-259; Kendall (1975), Rank Correlation
+#' Methods.  Both paywalled; the coded form was read from Pohlert's CRAN package trend
+#' (R/mk.test.R, R/utilfn.R), whose .varmk and .Dfn give the tie corrections verbatim.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

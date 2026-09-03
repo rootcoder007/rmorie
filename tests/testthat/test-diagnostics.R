@@ -18,7 +18,8 @@ make_diag_data <- function(n = 100, p = 3, seed = 1) {
 # ---------------------------------------------------------------------------
 
 test_that("compute_residuals returns expected structure", {
-  set.seed(1); d <- make_diag_data()
+  set.seed(1)
+  d <- make_diag_data()
   r <- compute_residuals(d$y, d$y_hat, d$X)
   expect_s3_class(r, "morie_residual_diagnostics")
   expect_length(r$raw_residuals, length(d$y))
@@ -30,7 +31,8 @@ test_that("compute_residuals returns expected structure", {
 })
 
 test_that("compute_residuals supports logistic", {
-  set.seed(2); n <- 80L
+  set.seed(2)
+  n <- 80L
   X <- cbind(1, rnorm(n))
   y <- rbinom(n, 1, plogis(X %*% c(0, 1)))
   y_hat <- plogis(drop(X %*% c(0, 1)))
@@ -40,7 +42,8 @@ test_that("compute_residuals supports logistic", {
 })
 
 test_that("compute_residuals supports poisson", {
-  set.seed(3); n <- 80L
+  set.seed(3)
+  n <- 80L
   X <- cbind(1, rnorm(n))
   y <- rpois(n, exp(X %*% c(0.5, 0.3)))
   y_hat <- exp(drop(X %*% c(0.5, 0.3)))
@@ -53,7 +56,8 @@ test_that("compute_residuals supports poisson", {
 # ---------------------------------------------------------------------------
 
 test_that("compute_influence returns hat / cooks / dffits / dfbetas", {
-  set.seed(4); d <- make_diag_data(n = 40L)
+  set.seed(4)
+  d <- make_diag_data(n = 40L)
   r <- compute_influence(d$y, d$X)
   expect_s3_class(r, "morie_influence_diagnostics")
   expect_length(r$hat_values, 40L)
@@ -99,7 +103,8 @@ test_that("collinearity_diagnostics returns full structure", {
 # ---------------------------------------------------------------------------
 
 test_that("ramsey_reset_test returns spec test object", {
-  set.seed(8); d <- make_diag_data()
+  set.seed(8)
+  d <- make_diag_data()
   r <- ramsey_reset_test(d$y, d$X)
   expect_s3_class(r, "morie_specification_test")
   expect_equal(r$name, "RESET")
@@ -107,14 +112,16 @@ test_that("ramsey_reset_test returns spec test object", {
 })
 
 test_that("link_test returns spec test", {
-  set.seed(9); d <- make_diag_data()
+  set.seed(9)
+  d <- make_diag_data()
   r <- link_test(d$y, d$X)
   expect_s3_class(r, "morie_specification_test")
   expect_equal(r$name, "link_test")
 })
 
 test_that("hosmer_lemeshow_test returns spec test", {
-  set.seed(10); n <- 200L
+  set.seed(10)
+  n <- 200L
   X <- cbind(1, rnorm(n))
   y_prob <- plogis(drop(X %*% c(0, 1)))
   y <- rbinom(n, 1, y_prob)
@@ -129,7 +136,8 @@ test_that("hosmer_lemeshow_test returns spec test", {
 # ---------------------------------------------------------------------------
 
 test_that("compute_goodness_of_fit linear returns R^2 + F", {
-  set.seed(11); d <- make_diag_data()
+  set.seed(11)
+  d <- make_diag_data()
   g <- compute_goodness_of_fit(d$y, d$y_hat, d$X)
   expect_s3_class(g, "morie_goodness_of_fit")
   expect_true(is.finite(g$r_squared))
@@ -138,7 +146,8 @@ test_that("compute_goodness_of_fit linear returns R^2 + F", {
 })
 
 test_that("compute_goodness_of_fit logistic returns pseudo-R^2", {
-  set.seed(12); n <- 80L
+  set.seed(12)
+  n <- 80L
   X <- cbind(1, rnorm(n))
   y <- rbinom(n, 1, plogis(X %*% c(0, 1)))
   y_hat <- plogis(drop(X %*% c(0, 1)))
@@ -148,7 +157,8 @@ test_that("compute_goodness_of_fit logistic returns pseudo-R^2", {
 })
 
 test_that("compute_goodness_of_fit poisson works", {
-  set.seed(13); n <- 80L
+  set.seed(13)
+  n <- 80L
   X <- cbind(1, rnorm(n))
   y_hat <- exp(drop(X %*% c(0.5, 0.3)))
   y <- rpois(n, y_hat)
@@ -161,7 +171,8 @@ test_that("compute_goodness_of_fit poisson works", {
 # ---------------------------------------------------------------------------
 
 test_that("ph_assumption_test returns list per covariate", {
-  set.seed(14); n <- 50L
+  set.seed(14)
+  n <- 50L
   times <- rexp(n)
   events <- rbinom(n, 1, 0.7)
   X <- matrix(rnorm(n * 2L), n, 2L)
@@ -210,7 +221,8 @@ test_that("score_test runs", {
 # ---------------------------------------------------------------------------
 
 test_that("full_diagnostics linear runs end-to-end", {
-  set.seed(15); d <- make_diag_data()
+  set.seed(15)
+  d <- make_diag_data()
   r <- full_diagnostics(d$y, d$X)
   expect_s3_class(r, "morie_diagnostic_report")
   expect_s3_class(r$residuals, "morie_residual_diagnostics")
@@ -221,7 +233,8 @@ test_that("full_diagnostics linear runs end-to-end", {
 })
 
 test_that("full_diagnostics logistic runs and includes hosmer-lemeshow", {
-  set.seed(16); n <- 80L
+  set.seed(16)
+  n <- 80L
   X <- cbind(1, rnorm(n))
   y <- rbinom(n, 1, plogis(X %*% c(0, 1)))
   y_hat <- plogis(drop(X %*% c(0, 1)))

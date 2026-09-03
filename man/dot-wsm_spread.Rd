@@ -19,3 +19,8 @@ is what makes the rule oversmooth skewed and long-tailed data -- one
 outlier moves the standard deviation a long way and the interquartile
 range hardly at all.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .wsm_spread(x = x)
+res
+}

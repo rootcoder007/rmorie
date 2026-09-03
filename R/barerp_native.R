@@ -161,6 +161,11 @@ centering_steps <- function(m, eps, t0, mu) {
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-06}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .barerp_num_grad(f = fn, x = x)
+#' res
 .barerp_num_grad <- function(f, x, h = 1e-6) {
   x <- as.numeric(x)
   n <- length(x)
@@ -187,6 +192,11 @@ centering_steps <- function(m, eps, t0, mu) {
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .num_hess(f = fn, x = x)
+#' res
 .num_hess <- function(f, x, h = 1e-4) {
   x <- as.numeric(x)
   n <- length(x)
@@ -232,6 +242,10 @@ centering_steps <- function(m, eps, t0, mu) {
 #' @param affine A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return The value of \code{self}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' res <- .Fun(f = fn)
+#' res
 .Fun <- function(f, grad = NULL, hess = NULL, affine = FALSE) {
   self <- list(f = f, .g = grad, .h = hess, affine = isTRUE(affine))
   class(self) <- "Fun"
@@ -287,7 +301,8 @@ hess.Fun <- function(self, x) {
 
 #' .as_fun
 #'
-#' A step of the barerp_native implementation. Called by \code{barrier_method}, \code{central_point}.
+#' A step of the barerp_native implementation. Called by \code{barrier_method},
+#' \code{central_point}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -711,6 +726,9 @@ barriermethod <- barrier_method
 #'
 #' @return Character string summarising the method.
 #' @export
+#' @examples
+#' res <- .barerp_cheatsheet()
+#' res
 .barerp_cheatsheet <- function() {
   paste0("barerp: the logarithmic barrier method. Frisch (1956) ",
          "eq. 5.1 defines the potential as the sum of the logs of ",

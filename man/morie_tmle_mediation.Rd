@@ -30,7 +30,8 @@ the price of putting all the modelling error in that piece. Mirrors
 \code{morie.fn.tmlmed}.
 }
 \examples{
-morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0), mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_tmle_mediation(y = c(1, 2, 3, 4, 5, 6, 7, 8), treatment = c(0, 1, 0, 1, 1, 0, 1, 0),
+  mediator = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Zheng W, van der Laan MJ (2012). Targeted maximum

@@ -14,7 +14,8 @@
 #' @return List with `predictions`.
 #' @export
 #' @examples
-#' morie_burkov_linear_function(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+#' morie_burkov_linear_function(x = c(1, 2, 3, 4, 5, 6, 7, 8), w = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), b = 5L)
 morie_burkov_linear_function <- function(x, w, b) {
   x <- as.numeric(x)
   list(
@@ -50,7 +51,8 @@ morie_burkov_squared_error <- function(y_hat, y) {
 #' @return List with `cost`, `residuals`.
 #' @export
 #' @examples
-#' morie_burkov_mse_cost(w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_burkov_mse_cost(w = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, x = c(1, 2, 3, 4, 5, 6,
+#' 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_burkov_mse_cost <- function(w, b, x, y, N = NULL) {
   x <- as.numeric(x)
   y <- as.numeric(y)
@@ -112,7 +114,8 @@ morie_burkov_cosine_similarity <- function(x, y) {
 
 #' .morie_burkov_phi
 #'
-#' A step of the burkov_lm_native implementation. Called by \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}.
+#' A step of the burkov_lm_native implementation. Called by
+#' \code{morie_burkov_layer1_output}, \code{morie_burkov_layer2_output}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

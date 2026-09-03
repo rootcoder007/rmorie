@@ -17,3 +17,8 @@ A step of the bayrjmcmc_native implementation. Called by \code{numeric_log_jacob
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .logabsdet(a = A)
+res
+}

@@ -24,5 +24,7 @@ A list with \code{index}, \code{level}, \code{note}.
 }
 \keyword{internal}
 \examples{
-second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5, y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8), rng = c(1, 2, 3, 4, 5, 6, 7, 8))
+second_choice(i1 = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), alpha = 0.5,
+  y = c(1, 2, 3, 4, 5, 6, 7, 8), E = c(1, 2, 3, 4, 5, 6, 7, 8), C = c(1, 2, 3, 4, 5, 6, 7, 8),
+  rng = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -252,7 +252,8 @@ morie_pcg_filter <- function(x, fs = 2000, low = 25, high = 400) {
 
 #' Real cepstrum
 #'
-#' Real cepstrum \eqn{c\[n\] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c\[n\] = IFFT(log |FFT(x)|)}. Useful
+#' Real cepstrum \eqn{c\[n\] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c\[n\] = IFFT(log
+#' |FFT(x)|)}. Useful
 #' for pitch-period estimation and any analysis where the multiplicative
 #' magnitude structure of the spectrum is best handled additively in the
 #' quefrency domain.
@@ -395,7 +396,8 @@ hdecon <- function(x, cutoff, n_fft = NULL) {
 #' Detrended fluctuation analysis (DFA)
 #'
 #' Estimates the DFA scaling exponent \eqn{\alpha}{alpha}. White noise gives
-#' \eqn{\alpha \approx 0.5}{alpha \~= 0.5}; pink (1/f) noise \eqn{\alpha \approx 1.0}{alpha \~= 1.0};
+#' \eqn{\alpha \approx 0.5}{alpha \~= 0.5}; pink (1/f) noise \eqn{\alpha \approx
+#' 1.0}{alpha \~= 1.0};
 #' Brownian motion \eqn{\alpha \approx 1.5}{alpha \~= 1.5}.
 #'
 #' Reference: Peng, C.-K., Havlin, S., Stanley, H.E. & Goldberger, A.L. (1995)
@@ -688,7 +690,8 @@ hrvnl <- function(rr) {
 #' Katz fractal dimension
 #'
 #' Katz fractal dimension \eqn{D = \\log_{10}(n - 1) / (\\log_{10}(n - 1) +
-#' \\log_{10}(d / L))}{D = log_10(n - 1) / ( log_10(n - 1) + log_10(d / L))} of a 1-D signal. \eqn{L} is total path length and
+#' \\log_{10}(d / L))}{D = log_10(n - 1) / ( log_10(n - 1) + log_10(d / L))} of a 1-D
+#' signal. \eqn{L} is total path length and
 #' \eqn{d} is the diameter (max distance from the first sample).
 #'
 #' Reference: Katz, M.J. (1988) "Fractals and the analysis of waveforms",
@@ -721,7 +724,8 @@ kfd <- function(x) {
 #' Petrosian fractal dimension
 #'
 #' Petrosian fractal dimension \eqn{D = \\log_{10}(N) / (\\log_{10}(N) +
-#' \\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4 N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
+#' \\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4
+#' N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
 #' changes of the first difference. A fast complexity proxy for EEG/ECG.
 #'
 #' Reference: Petrosian, A. (1995) "Kolmogorov complexity of finite

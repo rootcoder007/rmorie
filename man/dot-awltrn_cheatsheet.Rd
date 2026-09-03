@@ -12,3 +12,7 @@ A character string.
 \description{
 One-paragraph summary of the AOL vs OWL trade-off
 }
+\examples{
+res <- .awltrn_cheatsheet()
+res
+}

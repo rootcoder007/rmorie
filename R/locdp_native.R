@@ -29,6 +29,9 @@
 #' @param epsilon Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .locdp_flip_prob(epsilon = 0.5)
+#' res
 .locdp_flip_prob <- function(epsilon) {
   1.0 / (1.0 + exp(epsilon))
 }

@@ -24,7 +24,8 @@
 #'   Journal of Econometrics 219(1), 101-122, equation (2.6).
 #' @export
 #' @examples
-#' Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Drlp1(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), unit = c(1, 2, 3,
+#' 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8))
 Drlp1 <- function(y, D, unit, time, horizon = 3L, X = NULL) {
   yv <- .s03vec(y)
   dv <- .s03vec(D)

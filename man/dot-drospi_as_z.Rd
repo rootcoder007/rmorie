@@ -16,3 +16,7 @@ A numeric value.
 Part of the droSPI_mixedcase_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+res <- .drospi_as_z(h = 0.5)
+res
+}

@@ -17,6 +17,11 @@
 #' @param group A vector; its length is taken and its elements indexed.
 #' @return A list with \code{keys}, \code{gs}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .remlfn_groups(y = y, group = g)
+#' res
 .remlfn_groups <- function(y, group) {
   # Group y values by group label, preserving first-appearance order.
   if (length(y) != length(group)) {
@@ -43,8 +48,14 @@
 #'
 #' @param y Numeric; passed to \code{mean}.
 #' @param group Passed to \code{.remlfn_groups}.
-#' @return A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a}, \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
+#' @return A list with \code{msa}, \code{mse}, \code{sigma2_a_raw}, \code{sigma2_a},
+#' \code{balanced}, \code{dfa}, \code{dfe}, \code{ssa}, \code{sse}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .remlfn_ranova(y = y, group = g)
+#' res
 .remlfn_ranova <- function(y, group) {
   grp <- .remlfn_groups(y, group)
   keys <- grp$keys
@@ -243,7 +254,9 @@
 #' @param tol Passed to \code{.remlfn_nelder_mead}. Defaults to \code{1e-10}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5000}.
 #' @param solver One of \code{"auto"}, \code{"closed"}, \code{"optim"}. Defaults to \code{"auto"}.
-#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik}, \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form}, \code{solver}, \code{method}.
+#' @return A list with \code{sigma2_a}, \code{sigma2_e}, \code{mu}, \code{loglik},
+#' \code{n_iter}, \code{converged}, \code{icc}, \code{a}, \code{N}, \code{closed_form},
+#' \code{solver}, \code{method}.
 #' @export
 morie_remlfn <- function(y, group, tol = 1e-10, max_iter = 5000, solver = "auto") {
   y <- as.numeric(y)
@@ -406,6 +419,9 @@ morie_reml_variance_components <- morie_remlfn
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .remlfn_cheatsheet()
+#' res
 .remlfn_cheatsheet <- function() {
   return("remlfn: REML for the one-way random model; balanced data REML solutions = ANOVA estimators (Searle Sec. 4.8)")
 }

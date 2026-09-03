@@ -20,5 +20,6 @@ A list with \code{weights}, \code{quantized_weights}, \code{scale}, \code{loss},
 }
 \keyword{internal}
 \examples{
-morie_geron_quantization_aware_training_hm(model = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_quantization_aware_training_hm(model = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

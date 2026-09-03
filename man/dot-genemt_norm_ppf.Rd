@@ -17,3 +17,7 @@ A step of the genemt_native implementation. Called by \code{morie_genemt_gene_st
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .genemt_norm_ppf(p = 0.5)
+res
+}

@@ -62,15 +62,22 @@
 
 #' .tmlcmp_vec
 #'
-#' A step of the tmlcmp_native implementation. Called by \code{cause_specific_hazards}, \code{morie_tmlcmp}.
+#' A step of the tmlcmp_native implementation. Called by \code{cause_specific_hazards},
+#' \code{morie_tmlcmp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcmp_vec(x = x)
+#' res
 .tmlcmp_vec <- function(x) {
-  if (is.null(x)) return(numeric(0))
+  if (is.null(x)) {
+    return(numeric(0))
+  }
   as.numeric(unlist(x))
 }
 
@@ -83,8 +90,14 @@
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcmp_mat(x = x)
+#' res
 .tmlcmp_mat <- function(x) {
-  if (is.null(x)) return(matrix(0, nrow=0, ncol=0))
+  if (is.null(x)) {
+    return(matrix(0, nrow = 0, ncol = 0))
+  }
   if (is.vector(x) && !is.list(x)) x <- as.matrix(x)
   m <- as.matrix(x)
   storage.mode(m) <- "double"
@@ -102,7 +115,9 @@
 #' @return The value of \code{cbind}.
 #' @export
 .tmlcmp_design <- function(W, n) {
-  if (nrow(W) == 0) return(matrix(1, nrow=n, ncol=1))
+  if (nrow(W) == 0) {
+    return(matrix(1, nrow = n, ncol = 1))
+  }
   cbind(rep(1, n), W)
 }
 
@@ -118,7 +133,7 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return The value of \code{b}, as built in the body.
 #' @export
-.tmlcmp_logit_irls <- function(des, a, max_iter=25, tol=1e-8) {
+.tmlcmp_logit_irls <- function(des, a, max_iter = 25, tol = 1e-8) {
   n <- nrow(des)
   p <- ncol(des)
   b <- rep(0, p)
@@ -157,7 +172,7 @@
 #' @return A list with \code{hazards}, \code{types}, \code{times}, \code{n}.
 #' @export
 cause_specific_hazards <- function(time, event_type, times,
-                                   A=NULL, arm=NULL, weights=NULL) {
+                                   A = NULL, arm = NULL, weights = NULL) {
   t <- .tmlcmp_vec(time)
   e <- as.integer(.tmlcmp_vec(event_type))
   n <- length(t)
@@ -201,7 +216,7 @@ cause_specific_hazards <- function(time, event_type, times,
     }
     out_haz[[j_str]] <- h
   }
-  list(hazards=out_haz, types=types, times=as.numeric(times), n=length(keep))
+  list(hazards = out_haz, types = types, times = as.numeric(times), n = length(keep))
 }
 
 #' cumulative_incidence
@@ -247,7 +262,7 @@ cumulative_incidence <- function(hazards, times) {
     }
     closure[u_idx] <- s + surv[u_idx]
   }
-  list(F=F, survival=surv, types=types, closure=closure)
+  list(F = F, survival = surv, types = types, closure = closure)
 }
 
 #' one_minus_km
@@ -273,9 +288,13 @@ one_minus_km <- function(hazards, times, cause) {
     S <- S * (1.0 - hazards[[j_str]][u_idx])
     out[u_idx] <- 1.0 - S
   }
-  list(estimate=out,
-       caveat=paste("competing events treated as censoring, which",
-                    "answers a different question and overstates F_j"))
+  list(
+    estimate = out,
+    caveat = paste(
+      "competing events treated as censoring, which",
+      "answers a different question and overstates F_j"
+    )
+  )
 }
 
 #' morie_tmlcmp
@@ -288,15 +307,19 @@ one_minus_km <- function(hazards, times, cause) {
 #' @param event_type Passed to \code{.tmlcmp_vec}.
 #' @param D Passed to \code{.tmlcmp_vec}.
 #' @param X Passed to \code{.tmlcmp_mat}.
-#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param times Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param cause Coerced to character by the body, with \code{as.character}. Defaults to \code{1}.
-#' @param horizon Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param horizon Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param iters Accepted by the signature and not used anywhere in the body. Defaults to \code{50}.
-#' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control}, \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon}, \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{F_treated}, \code{F_control},
+#' \code{curve_treated}, \code{curve_control}, \code{se}, \code{ci}, \code{horizon},
+#' \code{cause}, \code{times}, \code{closure_treated}, \code{method}, \code{note}.
 #' @export
-morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
-                         cause=1, horizon=NULL, g=NULL, iters=50) {
+morie_tmlcmp <- function(time, event_type, D, X, times = NULL,
+                         cause = 1, horizon = NULL, g = NULL, iters = 50) {
   t <- .tmlcmp_vec(time)
   e <- as.integer(.tmlcmp_vec(event_type))
   a <- .tmlcmp_vec(D)
@@ -331,10 +354,10 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
     }
     idx <- max(idx_cand)
     out[[as.character(arm)]] <- list(
-      F=ci$F[[as.character(cause)]][idx],
-      curve=ci$F[[as.character(cause)]],
-      survival=ci$survival,
-      closure=ci$closure
+      F = ci$F[[as.character(cause)]][idx],
+      curve = ci$F[[as.character(cause)]],
+      survival = ci$survival,
+      closure = ci$closure
     )
   }
   psi <- out[["1"]]$F - out[["0"]]$F
@@ -342,24 +365,28 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
   for (i in seq_len(n)) {
     hit <- if (t[i] <= hz && e[i] == cause) 1.0 else 0.0
     d[i] <- (a[i] / gg[i]) * (hit - out[["1"]]$F) -
-            ((1.0 - a[i]) / (1.0 - gg[i])) * (hit - out[["0"]]$F)
+      ((1.0 - a[i]) / (1.0 - gg[i])) * (hit - out[["0"]]$F)
   }
   m <- sum(d) / n
   se <- sqrt(sum((d - m)^2) / n^2)
   list(
-    estimate=psi, psi=psi,
-    F_treated=out[["1"]]$F, F_control=out[["0"]]$F,
-    curve_treated=out[["1"]]$curve,
-    curve_control=out[["0"]]$curve,
-    se=se, ci=c(psi - 1.96 * se, psi + 1.96 * se),
-    horizon=hz, cause=cause, times=grid,
-    closure_treated=out[["1"]]$closure,
-    method=paste("targeted cumulative incidence under competing",
-                 "risks; Rytgaard, Gerds & van der Laan (2022), van",
-                 "der Laan & Rose (2018) Chap. 11"),
-    note=paste("a cause-specific HAZARD contrast is not an incidence",
-               "contrast: raising a competing hazard lowers F_j",
-               "without touching lambda_j")
+    estimate = psi, psi = psi,
+    F_treated = out[["1"]]$F, F_control = out[["0"]]$F,
+    curve_treated = out[["1"]]$curve,
+    curve_control = out[["0"]]$curve,
+    se = se, ci = c(psi - 1.96 * se, psi + 1.96 * se),
+    horizon = hz, cause = cause, times = grid,
+    closure_treated = out[["1"]]$closure,
+    method = paste(
+      "targeted cumulative incidence under competing",
+      "risks; Rytgaard, Gerds & van der Laan (2022), van",
+      "der Laan & Rose (2018) Chap. 11"
+    ),
+    note = paste(
+      "a cause-specific HAZARD contrast is not an incidence",
+      "contrast: raising a competing hazard lowers F_j",
+      "without touching lambda_j"
+    )
   )
 }
 
@@ -371,17 +398,22 @@ morie_tmlcmp <- function(time, event_type, D, X, times=NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tmlcmp_cheatsheet()
+#' res
 .tmlcmp_cheatsheet <- function() {
-  paste("tmlcmp: with competing risks the estimand is CUMULATIVE",
-        "INCIDENCE, F_j = integral S(u-) lambda_j(u) du, not a",
-        "cause-specific hazard -- raising a COMPETING hazard",
-        "lowers F_j while leaving lambda_j untouched, because",
-        "fewer subjects survive to be at risk. One-minus-",
-        "Kaplan-Meier treats competing events as censoring, which",
-        "answers a different question and overstates F_j. Target",
-        "each cause-specific hazard with the inverse-treatment",
-        "clever covariate; the plug-in incidence then solves the",
-        "score equation, since hazards map smoothly to incidence.")
+  paste(
+    "tmlcmp: with competing risks the estimand is CUMULATIVE",
+    "INCIDENCE, F_j = integral S(u-) lambda_j(u) du, not a",
+    "cause-specific hazard -- raising a COMPETING hazard",
+    "lowers F_j while leaving lambda_j untouched, because",
+    "fewer subjects survive to be at risk. One-minus-",
+    "Kaplan-Meier treats competing events as censoring, which",
+    "answers a different question and overstates F_j. Target",
+    "each cause-specific hazard with the inverse-treatment",
+    "clever covariate; the plug-in incidence then solves the",
+    "score equation, since hazards map smoothly to incidence."
+  )
 }
 
 # compact alias per ledger/NAMING.md

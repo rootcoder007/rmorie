@@ -24,5 +24,6 @@ mean squared naive error. This is the scaled error used in the M5
 Forecasting Competition in 2020.
 }
 \examples{
-morie_rmsse(y = c(1, 2, 3, 4, 5, 6, 7, 8), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), insample = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_rmsse(y = c(1, 2, 3, 4, 5, 6, 7, 8), yhat = c(1, 2, 3, 4, 5, 6, 7, 8),
+  insample = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

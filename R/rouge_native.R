@@ -34,13 +34,18 @@
 
 #' .rouge_toks
 #'
-#' A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex}, \code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module.
+#' A step of the rouge_native implementation. Called by \code{.rouge_get_refs_complex},
+#' \code{morie_rouge_l}, \code{morie_rouge_n} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @return A character value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rouge_toks(x = x)
+#' res
 .rouge_toks <- function(x) {
   if (is.character(x) && length(x) == 1L) {
     if (nchar(x) == 0L) return(character(0))
@@ -171,7 +176,8 @@
 
 #' .rouge_lcs_length
 #'
-#' A step of the rouge_native implementation. Called by \code{morie_lcs_length}, \code{morie_rouge_l}.
+#' A step of the rouge_native implementation. Called by \code{morie_lcs_length},
+#' \code{morie_rouge_l}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -179,6 +185,11 @@
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .rouge_lcs_length(a = A, b = b)
+#' res
 .rouge_lcs_length <- function(a, b) {
   m <- length(a)
   n <- length(b)
@@ -210,6 +221,11 @@
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .rouge_wlcs(a = A, b = b, alpha = 0.5)
+#' res
 .rouge_wlcs <- function(a, b, alpha) {
   m <- length(a)
   n <- length(b)
@@ -405,7 +421,8 @@ morie_rouge_w <- function(candidate, reference, alpha = 1.2, beta = 1.0) {
 #'
 #' @param candidate Passed to \code{morie_rouge_l}.
 #' @param reference Passed to \code{morie_rouge_l}.
-#' @param variant Coerced to character by the body, with \code{as.character}. Defaults to \code{"L"}.
+#' @param variant Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{"L"}.
 #' @param n Passed to \code{morie_rouge_n}. Defaults to \code{1}.
 #' @param alpha Passed to \code{morie_rouge_w}. Defaults to \code{1.2}.
 #' @param beta Passed to \code{morie_rouge_l}. Defaults to \code{1}.

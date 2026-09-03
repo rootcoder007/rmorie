@@ -33,7 +33,8 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param subject Coerced to vector by the body, with \code{as.vector}.
 #' @param rater Coerced to vector by the body, with \code{as.vector}.
-#' @return A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n}, \code{k}, \code{matrix}.
+#' @return A list with \code{MSR}, \code{MSC}, \code{MSE}, \code{MSW}, \code{n},
+#' \code{k}, \code{matrix}.
 #' @export
 .psy_anova2 <- function(y, subject, rater) {
   yv <- as.numeric(y)
@@ -129,7 +130,8 @@
 
 #' .psy_items
 #'
-#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
+#' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -155,7 +157,8 @@
 
 #' .psy_check_y
 #'
-#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
+#' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -172,7 +175,8 @@
 
 #' .psy_ll
 #'
-#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta}, \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
+#' A step of the psycho_native implementation. Called by \code{morie_psy_eap_theta},
+#' \code{morie_psy_map_theta}, \code{morie_psy_mle_theta} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -188,7 +192,8 @@
 
 #' .psy_info
 #'
-#' A step of the psycho_native implementation. Called by \code{morie_psy_map_theta}, \code{morie_psy_mle_theta}, \code{morie_psy_wle_theta}.
+#' A step of the psycho_native implementation. Called by \code{morie_psy_map_theta},
+#' \code{morie_psy_mle_theta}, \code{morie_psy_wle_theta}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -204,7 +209,8 @@
 
 #' .psy_fixed_pool
 #'
-#' A step of the psycho_native implementation. Called by \code{.psy_dl}, \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}.
+#' A step of the psycho_native implementation. Called by \code{.psy_dl},
+#' \code{morie_psy_ma_paule_mandel}, \code{morie_psy_ma_reml}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

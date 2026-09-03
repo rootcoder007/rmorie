@@ -23,3 +23,8 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_princ
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
+res <- .morie_w4c_pca_svd(X = X, k = 3L)
+res
+}

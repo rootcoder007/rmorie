@@ -76,7 +76,8 @@ test_that("EA5.4 values are rounded sensibly", {
 
 test_that("EA5.5 axis units are placed on the axis labels", {
   drawn <- NULL
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
   drawn <- morie_eda_plot(mtcars, "wt", "mpg",
                           units = c(wt = "1000lb", mpg = "mpg"))
   grDevices::dev.off()
@@ -90,7 +91,8 @@ test_that("EA5.6 no dynamic-visualisation library is bundled (base graphics)", {
 })
 
 test_that("EA6.0/EA6.1 graphical output properties are testable without vdiffr", {
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
   drawn <- morie_eda_plot(mtcars, "hp", "mpg")
   grDevices::dev.off()
   expect_equal(drawn$x, mtcars$hp)                     # drawn coords verifiable

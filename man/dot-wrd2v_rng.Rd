@@ -16,3 +16,7 @@ The value of \code{e}, as built in the body.
 \description{
 (_array_core _SplitMix64), so the draws here are bit-identical to it
 }
+\examples{
+res <- .wrd2v_rng(seed = 1L)
+res
+}

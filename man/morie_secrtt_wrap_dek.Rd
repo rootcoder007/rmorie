@@ -22,9 +22,11 @@ List with \code{wrapped}, \code{tag}, \code{nonce},   \code{kek_id}, \code{wrapp
 }
 \keyword{internal}
 \examples{
-seed <- as.raw(1:32)
-dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
-kek <- as.raw(rev(1:32))
-w <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12))
-w$kek_id
+if (morie_crypto_sodium_available()) {
+  seed <- as.raw(1:32)
+  dek <- morie_secrtt_generate_dek(seed, record_id = 7L)$dek
+  kek <- as.raw(rev(1:32))
+  w <- morie_secrtt_wrap_dek(dek, kek, nonce = as.raw(1:12))
+  w$kek_id
+}
 }

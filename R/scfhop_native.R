@@ -134,6 +134,9 @@ morie_scfhop_types <- function(smiles) {
 #'
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .scfhop_pairs()
+#' res
 .scfhop_pairs <- function() {
   out <- list()
   for (a in seq_along(.scfhop_types))

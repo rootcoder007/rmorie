@@ -35,6 +35,10 @@
 #'   dimensionality reduction and data representation. Neural
 #'   Computation 15(6):1373-1396. \doi{10.1162/089976603321780317}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- Sgtlap2(A = A)
+#' res
 Sgtlap2 <- function(A, k = 2) {
   s <- .sgt_lapsym(A, "Sgtlap2")
   n <- s$n

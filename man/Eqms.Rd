@@ -33,7 +33,8 @@ direction from its own sibling module eqmm.  Marco's method places the
 NEW form on the REFERENCE metric, the orientation implemented here.
 }
 \examples{
-Eqms(y = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+Eqms(y = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Marco (1977), Journal of Educational Measurement

@@ -76,7 +76,8 @@ e_gcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @param phi_h Passed to \code{run_egnn}.
 #' @param A Passed to \code{run_egnn}.
 #' @param C Passed to \code{run_egnn}.
-#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
+#' \code{note}.
 #' @export
 morie_egcn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                        C = NULL) {

@@ -19,3 +19,7 @@ A step of the rangayyan_class implementation. Called by \code{.morie_rg_asfrac},
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_rg_frac(n = 3L, d = 3L)
+res
+}

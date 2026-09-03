@@ -124,7 +124,8 @@ dual_objective <- function(alpha, y, K) {
 #' @param K A matrix; indexed by row and column.
 #' @param grad A vector; indexed elementwise.
 #' @param C Passed to \code{.svmopt_bounds}.
-#' @return A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H}, \code{eta}, \code{step}.
+#' @return A list with \code{alpha}, \code{moved}, \code{clipped}, \code{L}, \code{H},
+#' \code{eta}, \code{step}.
 #' @export
 solve_pair <- function(i, j, alpha, y, K, grad, C) {
   a <- as.numeric(alpha)
@@ -225,7 +226,9 @@ recover_bias <- function(alpha, y, grad, C) {
 #' @param C Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20000}.
-#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{gap}, \code{iterations}, \code{converged}, \code{support_vectors}, \code{n_sv}, \code{n_free}, \code{equality_residual}, \code{objective}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{gap},
+#' \code{iterations}, \code{converged}, \code{support_vectors}, \code{n_sv},
+#' \code{n_free}, \code{equality_residual}, \code{objective}, \code{method}, \code{note}.
 #' @export
 smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
   yy <- as.numeric(y)
@@ -277,6 +280,9 @@ smo <- function(y, K, C = 1.0, tol = 1e-8, max_iter = 20000) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .svmopt_cheatsheet()
+#' res
 .svmopt_cheatsheet <- function() {
   paste0("svmopt: the SVM DUAL is where the kernel enters and where ",
          "the structure is exploitable -- max sum(a) - 0.5 a'Qa ",

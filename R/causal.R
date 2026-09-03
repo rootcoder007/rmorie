@@ -128,7 +128,8 @@ NULL
 
 #' .mor_ps_design
 #'
-#' A step of the causal implementation. Called by \code{.fit_propensity}, \code{morie_estimate_aipw}.
+#' A step of the causal implementation. Called by \code{.fit_propensity},
+#' \code{morie_estimate_aipw}.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -155,6 +156,11 @@ NULL
 #' @param X A matrix; indexed by row and column.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .mor_ps_standardize(X = X)
+#' res
 .mor_ps_standardize <- function(X) {
   n <- nrow(X)
   for (j in seq.int(2L, ncol(X))) {
@@ -179,6 +185,12 @@ NULL
 #' @param tol Passed to \code{.mor_ps_irls_beta}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .mor_ps_irls(X = X, y = y)
+#' res
 .mor_ps_irls <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   beta <- .mor_ps_irls_beta(X, y, lam = lam, max_iter = max_iter, tol = tol)
   eta <- pmin(pmax(as.numeric(X %*% beta), -30), 30)
@@ -198,6 +210,12 @@ NULL
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .mor_ps_irls_beta(X = X, y = y)
+#' res
 .mor_ps_irls_beta <- function(X, y, lam = 0, max_iter = 200L, tol = 1e-12) {
   n <- nrow(X)
   p <- ncol(X)
@@ -361,10 +379,15 @@ NULL
 #' 656-664.
 #'
 #' @param w Passed to \code{return}.
-#' @param weight_trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weight_trim Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param side One of \code{"both"}, \code{"upper"}. Defaults to \code{"upper"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_trim_weights(w = x)
+#' res
 .mor_trim_weights <- function(w, weight_trim = NULL, side = "upper") {
   if (is.null(weight_trim)) return(w)
   if (!(side %in% c("upper", "both")))
@@ -404,7 +427,8 @@ NULL
 #' estimand note whenever this route is taken.
 #'
 #' @param ps A vector; its length is taken.
-#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.1, 0.9)}.
+#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to
+#' \code{c(0.1, 0.9)}.
 #' @param trim_type Passed to \code{identical}. Defaults to \code{"value"}.
 #' @return A logical value.
 #' @export
@@ -420,13 +444,16 @@ NULL
 
 #' .mor_trim_ps
 #'
-#' A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_ate}, \code{morie_estimate_propensity_scores}.
+#' A step of the causal implementation. Called by \code{morie_estimate_aipw},
+#' \code{morie_estimate_ate}, \code{morie_estimate_propensity_scores}.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param ps Coerced to numeric by the body, with \code{as.numeric}.
-#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to \code{c(0.01, 0.99)}.
-#' @param trim_type One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults to \code{"value"}.
+#' @param trim Optional; may be \code{NULL}. A vector; indexed elementwise. Defaults to
+#' \code{c(0.01, 0.99)}.
+#' @param trim_type One of \code{"discard"}, \code{"quantile"}, \code{"value"}. Defaults
+#' to \code{"value"}.
 #' @return The value of \code{pmin}.
 #' @export
 .mor_trim_ps <- function(ps, trim = c(0.01, 0.99), trim_type = "value") {
@@ -451,7 +478,8 @@ NULL
 
 #' morie_estimate_propensity_scores
 #'
-#' A step of the causal implementation. Called by \code{morie_estimate_aipw}, \code{morie_estimate_atc}, \code{morie_estimate_ate} and 1 others in the module.
+#' A step of the causal implementation. Called by \code{morie_estimate_aipw},
+#' \code{morie_estimate_atc}, \code{morie_estimate_ate} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
@@ -487,8 +515,10 @@ morie_estimate_propensity_scores <- function(data, treatment, covariates,
 #'
 #' The Hajek estimator uses stabilised IPW weights:
 #' \deqn{\widehat{ATE} = \bar{y}_1^{w} - \bar{y}_0^{w}}{ATE_hat = y_bar_1^w - y_bar_0^w}
-#' where \eqn{\bar{y}_t^{w} = \sum_{T_i=t} w_i Y_i / \sum_{T_i=t} w_i}{y_bar_t^w = sum_T_i=t w_i Y_i / sum_T_i=t w_i}
-#' and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i) + (1-T_i)/(1-e_hat(X_i))}.
+#' where \eqn{\bar{y}_t^{w} = \sum_{T_i=t} w_i Y_i / \sum_{T_i=t} w_i}{y_bar_t^w =
+#' sum_T_i=t w_i Y_i / sum_T_i=t w_i}
+#' and \eqn{w_i = T_i/\hat{e}(X_i) + (1-T_i)/(1-\hat{e}(X_i))}{w_i = T_i/e_hat(X_i) +
+#' (1-T_i)/(1-e_hat(X_i))}.
 #'
 #' When \pkg{WeightIt} is installed the propensity step delegates to
 #' \code{WeightIt::weightit()}; otherwise the inline logistic
@@ -953,7 +983,8 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 #'
 #' The \strong{T-learner} fits separate outcome models on treated and
 #' control units, then predicts the counterfactual for each unit:
-#' \eqn{\widehat{CATE}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)}{CATE_hat_i = mu_hat_1(X_i) - mu_hat_0(X_i)}.
+#' \eqn{\widehat{CATE}_i = \hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)}{CATE_hat_i =
+#' mu_hat_1(X_i) - mu_hat_0(X_i)}.
 #'
 #' The \strong{S-learner} fits one model with treatment as a feature.
 #'
@@ -1237,7 +1268,9 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' G-computation (outcome regression) ATE estimator
 #'
 #' Estimates the ATE by:
-#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) - mu_hat_0(X_i)bigr\]}
+#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) -
+#' \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) -
+#' mu_hat_0(X_i)bigr\]}
 #'
 #' Delegates the standardisation step to \code{stdReg::stdGlm()} when
 #' \pkg{stdReg} is installed; otherwise computes the contrast inline
@@ -1473,7 +1506,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   Inferring causal impact using Bayesian structural time-series
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
 #' @examples
-#' morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)), 
+#' morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
 #'     pre_period = c(1, 5), post_period = c(6, 10))
 morie_causal_impact <- function(data, pre_period, post_period,
                                 model_args = NULL, alpha = 0.05) {
@@ -1540,7 +1573,7 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
 #'   Observational Studies. R package version 1.4.0.
 #' @examples
-#' morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4), 
+#' morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
 #'     x = rnorm(20)), treatment = "t", covariates = "x")
 morie_causal_weighting <- function(data, treatment, covariates,
                                    method = "glm",
@@ -1691,6 +1724,11 @@ morie_causal_robust_se <- function(model,
 #'   Foundations of Statistical Inference. Holt, Rinehart and Winston;
 #'   Cochran, W. G. (1977). Sampling Techniques, 3rd ed., Sec. 6.13.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .causal_hajek_weighted_mean(y = y, weights = x)
+#' res
 .causal_hajek_weighted_mean <- function(y, weights) {
   y <- as.numeric(y)
   w <- as.numeric(weights)

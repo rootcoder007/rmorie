@@ -17,7 +17,10 @@
 #' @return List with \code{estimate} (G), \code{statistic},
 #'   \code{p_value}, \code{expected}, \code{var}, \code{S0}, \code{S1},
 #'   \code{S2}, \code{n}, \code{method}.
-#' @references Getis and Ord (1992), Geographical Analysis 24:189-206.  Paywalled; the coded moments were read from Bivand and Ono's spdep, R/globalG.R and spweights.constants in R/utils.R.  B1 uses spdep's B1correct = TRUE default (6 S0^2, not the 3 S0^2 of CrimeStat IV).
+#' @references Getis and Ord (1992), Geographical Analysis 24:189-206.  Paywalled; the
+#' coded moments were read from Bivand and Ono's spdep, R/globalG.R and
+#' spweights.constants in R/utils.R.  B1 uses spdep's B1correct = TRUE default (6 S0^2,
+#' not the 3 S0^2 of CrimeStat IV).
 #' @export
 #' @examples
 #' set.seed(1)

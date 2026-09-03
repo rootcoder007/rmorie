@@ -65,13 +65,18 @@
 # Private helpers (prefixed with .tlnetlg_ to avoid name collisions)
 #' Private helpers (prefixed with .tlnetlg_ to avoid name collisions)
 #'
-#' A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_exposure_summary}, \code{morie_tlnetlg_network_variance}.
+#' A step of the tlnetlg_native implementation. Called by
+#' \code{morie_tlnetlg_exposure_summary}, \code{morie_tlnetlg_network_variance}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlnetlg_vec(x = x)
+#' res
 .tlnetlg_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -83,13 +88,19 @@
 
 #' .tlnetlg_mat
 #'
-#' A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_community_estimand}, \code{morie_tlnetlg_longitudinal_network_gcomp}.
+#' A step of the tlnetlg_native implementation. Called by
+#' \code{morie_tlnetlg_community_estimand},
+#' \code{morie_tlnetlg_longitudinal_network_gcomp}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{do.call}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlnetlg_mat(W = x)
+#' res
 .tlnetlg_mat <- function(W) {
   if (is.matrix(W)) {
     storage.mode(W) <- "double"
@@ -104,12 +115,14 @@
 
 #' morie_tlnetlg_network_summary
 #'
-#' A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_longitudinal_network_gcomp}.
+#' A step of the tlnetlg_native implementation. Called by
+#' \code{morie_tlnetlg_longitudinal_network_gcomp}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param friends A vector; its length is taken and its elements indexed.
-#' @return A list with \code{N}, \code{degrees}, \code{max_degree}, \code{mean_degree}, \code{max_share}, \code{sparse}, \code{note}.
+#' @return A list with \code{N}, \code{degrees}, \code{max_degree}, \code{mean_degree},
+#' \code{max_share}, \code{sparse}, \code{note}.
 #' @export
 morie_tlnetlg_network_summary <- function(friends) {
   N <- length(friends)
@@ -143,7 +156,8 @@ morie_tlnetlg_network_summary <- function(friends) {
 #'
 #' @param A Passed to \code{.tlnetlg_vec}.
 #' @param friends A vector; its length is taken and its elements indexed.
-#' @param kind One of \code{"any"}, \code{"count"}, \code{"fraction"}. Defaults to \code{"fraction"}.
+#' @param kind One of \code{"any"}, \code{"count"}, \code{"fraction"}. Defaults to
+#' \code{"fraction"}.
 #' @return A list with \code{summary}, \code{kind}, \code{note}.
 #' @export
 morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
@@ -184,7 +198,8 @@ morie_tlnetlg_exposure_summary <- function(A, friends, kind = "fraction") {
 
 #' morie_tlnetlg_community_estimand
 #'
-#' A step of the tlnetlg_native implementation. Called by \code{morie_tlnetlg_longitudinal_network_gcomp}.
+#' A step of the tlnetlg_native implementation. Called by
+#' \code{morie_tlnetlg_longitudinal_network_gcomp}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -232,7 +247,8 @@ morie_tlnetlg_community_estimand <- function(Q_fn, friends, W, policy) {
 #'
 #' @param ic Passed to \code{.tlnetlg_vec}.
 #' @param friends A vector; its length is taken and its elements indexed.
-#' @return A list with \code{se}, \code{se_naive}, \code{n_dependent_pairs}, \code{ratio}, \code{note}.
+#' @return A list with \code{se}, \code{se_naive}, \code{n_dependent_pairs},
+#' \code{ratio}, \code{note}.
 #' @export
 morie_tlnetlg_network_variance <- function(ic, friends) {
   v <- .tlnetlg_vec(ic)
@@ -284,7 +300,8 @@ morie_tlnetlg_network_variance <- function(ic, friends) {
 #' @param W Passed to \code{.tlnetlg_mat}.
 #' @param policy Passed to \code{morie_tlnetlg_community_estimand}.
 #' @param T Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{T}, \code{network}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{path}, \code{T},
+#' \code{network}, \code{method}, \code{note}.
 #' @export
 morie_tlnetlg_longitudinal_network_gcomp <- function(Q_seq, friends, W, policy, T) {
   T_int <- as.integer(T)

@@ -1,38 +1,38 @@
 # morie.fn -- function file (rootcoder007/morie)
 # The sample average treatment effect.
-# 
+#
 # In a cluster randomized trial the units are almost never a simple
 # random sample from a defined population: the target population is
 # hypothetical or ill-defined, and units are chosen for logistical
 # reasons. The **population** average treatment effect is then a
 # parameter of a superpopulation nobody sampled from -- neither well
 # defined nor easily interpretable.
-# 
+#
 # The **sample** effect is the mean difference in counterfactual
 # outcomes for *the study units themselves*,
-# 
+#
 # .. math:: \mathrm{SATE} = \frac{1}{n}\sum_{i=1}^{n}
 #           \big(Y_i(1) - Y_i(0)\big),
-# 
+#
 # which is interpretable without inventing a superpopulation, and is
 # arguably the more relevant quantity when the units were not sampled
 # from one.
-# 
+#
 # **It is not identifiable in finite samples**, and the chapter says so
 # plainly: the counterfactuals are not both observed for any unit. What
 # rescues it is that the TMLE for the *population* effect is consistent
 # and asymptotically linear for the sample effect too -- the same point
 # estimate serves both, and only the inference changes.
-# 
+#
 # **The inference changes in one specific way.** The influence curve for
 # the population effect carries two pieces: the weighted residual term
 # and the term :math:`\bar Q_1 - \bar Q_0 - \psi`, which is the
 # variability of the *individual* effects across units. The sample
 # effect conditions on those units, so that second piece drops:
-# 
+#
 # .. math:: IC^{S} \approx \Big(\frac{I(A=1)}{g}
 #           - \frac{I(A=0)}{1-g}\Big)(Y - \bar Q_A).
-# 
+#
 # The resulting variance is therefore **smaller by the variance of the
 # conditional effect**, exactly, and the estimator is asymptotically
 # conservative for the sample effect. Where effect modification is
@@ -41,10 +41,10 @@
 # power come from. The anchor computes both influence curves on the
 # same data and requires the difference to equal
 # :math:`\mathrm{var}(\bar Q_1 - \bar Q_0)`.
-# 
+#
 # **Pair-matched trials** are handled by the same argument with the
 # matched-pair structure entering the variance estimate.
-# 
+#
 # References
 # ----------
 # van der Laan, M. J. & Rose, S. (2018) *Targeted Learning in Data
@@ -60,12 +60,12 @@
 # extension to pair-matched trials; and the finding that with effect
 # modification, targeting the sample effect yields the most precision
 # and power).
-# 
+#
 # Balzer, L. B., Petersen, M. L. & van der Laan, M. J. (2016) "Targeted
 # estimation and inference for the sample average treatment effect in
 # trials with and without pair-matching", *Statistics in Medicine*
 # 35(21), 3717-3732, doi:10.1002/sim.6965.
-# 
+#
 # Imbens, G. W. (2004) "Nonparametric estimation of average treatment
 # effects under exogeneity: a review", *Review of Economics and
 # Statistics* 86(1), 4-29, doi:10.1162/003465304323023651. The
@@ -73,7 +73,9 @@
 
 #' .tlsate_check
 #'
-#' A step of the tlsate_native implementation. Called by \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve}, \code{.tlsate_sate_tmle} and 1 others in the module.
+#' A step of the tlsate_native implementation. Called by
+#' \code{.tlsate_pate_influence_curve}, \code{.tlsate_sate_influence_curve},
+#' \code{.tlsate_sate_tmle} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -92,13 +94,13 @@
   gg <- as.numeric(g)
   n <- length(a)
   if (!(length(y) == length(q1) && length(q1) == length(q0) &&
-        length(q0) == length(gg) && length(gg) == n)) {
+    length(q0) == length(gg) && length(gg) == n)) {
     stop("tlsate: the inputs differ in length")
   }
   if (any(gg <= 0.0 | gg >= 1.0)) {
     stop("tlsate: the treatment probability must lie strictly inside (0,1)")
   }
-  list(a=a, y=y, q1=q1, q0=q0, gg=gg, n=n)
+  list(a = a, y = y, q1 = q1, q0 = q0, gg = gg, n = n)
 }
 
 #' .tlsate_logit
@@ -110,6 +112,9 @@
 #' @param p Passed to \code{pmax}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tlsate_logit(p = 0.5)
+#' res
 .tlsate_logit <- function(p) {
   q <- pmin(pmax(p, 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -124,6 +129,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlsate_expit(x = x)
+#' res
 .tlsate_expit <- function(x) {
   ifelse(x > -700, 1.0 / (1.0 + exp(-x)), 0.0)
 }
@@ -137,6 +146,10 @@
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlsate_var(v = x)
+#' res
 .tlsate_var <- function(v) {
   m <- sum(v) / length(v)
   sum((v - m)^2) / (length(v) - 1)
@@ -151,6 +164,10 @@
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tlsate_se(v = x)
+#' res
 .tlsate_se <- function(v) {
   m <- sum(v) / length(v)
   sqrt(sum((v - m)^2) / (length(v) - 1) / length(v))
@@ -158,7 +175,8 @@
 
 #' .tlsate_pate_influence_curve
 #'
-#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}, \code{.tlsate_variance_gap}.
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle},
+#' \code{.tlsate_variance_gap}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -186,7 +204,8 @@
 
 #' .tlsate_sate_influence_curve
 #'
-#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle}, \code{.tlsate_variance_gap}.
+#' A step of the tlsate_native implementation. Called by \code{.tlsate_sate_tmle},
+#' \code{.tlsate_variance_gap}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -222,7 +241,8 @@
 #' @param Q0 Passed to \code{.tlsate_check}.
 #' @param g Passed to \code{.tlsate_check}.
 #' @param psi Passed to \code{.tlsate_pate_influence_curve}.
-#' @return A list with \code{var_pate}, \code{var_sate}, \code{gap}, \code{var_conditional_effect}, \code{note}.
+#' @return A list with \code{var_pate}, \code{var_sate}, \code{gap},
+#' \code{var_conditional_effect}, \code{note}.
 #' @export
 .tlsate_variance_gap <- function(A, Y, Q1, Q0, g, psi) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
@@ -250,7 +270,9 @@
 #' @param Q1 Passed to \code{.tlsate_check}.
 #' @param Q0 Passed to \code{.tlsate_check}.
 #' @param g Passed to \code{.tlsate_check}.
-#' @return A list with \code{estimate}, \code{psi}, \code{se_population}, \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{se_population},
+#' \code{se_sample}, \code{ci_population}, \code{ci_sample}, \code{width_ratio},
+#' \code{method}, \code{note}.
 #' @export
 .tlsate_sate_tmle <- function(A, Y, Q1, Q0, g) {
   d <- .tlsate_check(A, Y, Q1, Q0, g)
@@ -311,8 +333,10 @@
   p <- as.character(pair_ids)
   v <- as.numeric(ic)
   if (length(p) != length(v)) {
-    stop(sprintf("tlsate: %d pair labels for %d influence values",
-                 length(p), length(v)))
+    stop(sprintf(
+      "tlsate: %d pair labels for %d influence values",
+      length(p), length(v)
+    ))
   }
 
   agg <- split(v, p)
@@ -340,6 +364,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlsate_cheatsheet()
+#' res
 .tlsate_cheatsheet <- function() {
   "tlsate: in a cluster randomized trial the units are not sampled from any defined population, so the PATE is a parameter of a superpopulation nobody drew from. The SATE -- the mean counterfactual difference for THESE units -- is interpretable without inventing one. It is not identifiable in finite samples, but the SAME TMLE is consistent and asymptotically linear for it; only the influence curve changes, dropping Q1 - Q0 - psi. The variance falls by EXACTLY the variance of the conditional effect, so effect modification is where the power gain comes from."
 }

@@ -29,7 +29,8 @@
 
 #' .morie_big_trim
 #'
-#' A step of the bigint_native implementation. Called by \code{.morie_big_add_abs}, \code{.morie_big_new}, \code{.morie_big_sub_abs}.
+#' A step of the bigint_native implementation. Called by \code{.morie_big_add_abs},
+#' \code{.morie_big_new}, \code{.morie_big_sub_abs}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -44,7 +45,9 @@
 
 #' .morie_big_new
 #'
-#' A step of the bigint_native implementation. Called by \code{morie_big_add}, \code{morie_big_divmod_small}, \code{morie_big_fits_double} and 3 others in the module.
+#' A step of the bigint_native implementation. Called by \code{morie_big_add},
+#' \code{morie_big_divmod_small}, \code{morie_big_fits_double} and 3 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -154,6 +157,11 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_big_cmp_abs(a = A, b = b)
+#' res
 .morie_big_cmp_abs <- function(a, b) {
   la <- length(a)
   lb <- length(b)
@@ -178,6 +186,11 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.morie_big_trim}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_big_add_abs(a = A, b = b)
+#' res
 .morie_big_add_abs <- function(a, b) {
   n <- max(length(a), length(b))
   a <- c(a, numeric(n - length(a)))
@@ -209,6 +222,11 @@ format.morie_bigint <- function(x, ...) as.character(x)
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{.morie_big_trim}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_big_sub_abs(a = A, b = b)
+#' res
 .morie_big_sub_abs <- function(a, b) {
   n <- length(a)
   b <- c(b, numeric(n - length(b)))

@@ -8,7 +8,7 @@ morie_wasserman_credible_interval(posterior, alpha)
 }
 \arguments{
 \item{posterior}{List/pair (theta_grid, density) as from
-\code{\link[=morie_wasserman_posterior]{morie_wasserman_posterior()}}.}
+\code{morie_wasserman_posterior()}.}
 
 \item{alpha}{Level in (0, 1).}
 }

@@ -30,6 +30,6 @@ morie_vpd_download_instructions()
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=morie_datasets_vpd_crime]{morie_datasets_vpd_crime()}} for the loader that
+\code{morie_datasets_vpd_crime()} for the loader that
 accepts the downloaded file.
 }

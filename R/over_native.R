@@ -55,6 +55,9 @@
 #' @param n Numeric; passed to \code{sqrt}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .mor_ks_sf(d = 3L, n = 3L)
+#' res
 .mor_ks_sf <- function(d, n) {
   lam <- d * (sqrt(n) + 0.12 + 0.11 / sqrt(n))
   if (lam < 0.04) {
@@ -83,8 +86,14 @@
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus}, \code{d_minus}, \code{n_ties}.
+#' @return A list with \code{stat}, \code{p}, \code{n1}, \code{n2}, \code{d_plus},
+#' \code{d_minus}, \code{n_ties}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .mor_ks_2samp(a = A, b = b)
+#' res
 .mor_ks_2samp <- function(a, b) {
   x <- sort(as.numeric(a))
   y <- sort(as.numeric(b))

@@ -57,7 +57,8 @@ morie_hypercube_instruments <- function(X, n_levels = 3L) {
 
 #' morie_weighted_moments
 #'
-#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}.
+#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic},
+#' \code{morie_gms_critical_value}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -90,7 +91,8 @@ morie_weighted_moments <- function(m, g) {
 
 #' morie_S_function
 #'
-#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic}, \code{morie_gms_critical_value}.
+#' A step of the bndsmw_native implementation. Called by \code{morie_cvm_statistic},
+#' \code{morie_gms_critical_value}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -123,8 +125,10 @@ morie_S_function <- function(std_moments, form = "sum", n_equality = 0L) {
 #' @param instruments A list; the body reads \code{$instruments} from it.
 #' @param form Passed to \code{morie_S_function}. Defaults to \code{"sum"}.
 #' @param n_equality Passed to \code{morie_S_function}. Defaults to \code{0L}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{statistic}, \code{per_instrument}, \code{form}, \code{n_instruments}, \code{method}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{statistic}, \code{per_instrument}, \code{form},
+#' \code{n_instruments}, \code{method}.
 #' @export
 morie_cvm_statistic <- function(m, instruments, form = "sum",
                                 n_equality = 0L, weights = NULL) {
@@ -166,8 +170,10 @@ morie_cvm_statistic <- function(m, instruments, form = "sum",
 #' @param level Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
 #' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @param kappa Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level}, \code{method}.
+#' @param kappa Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{critical_value}, \code{kappa}, \code{reps}, \code{level},
+#' \code{method}.
 #' @export
 morie_gms_critical_value <- function(m, instruments, form = "sum",
                                      n_equality = 0L, level = 0.95,
@@ -224,7 +230,8 @@ morie_gms_critical_value <- function(m, instruments, form = "sum",
 #' @param n_levels Passed to \code{morie_hypercube_instruments}. Defaults to \code{2L}.
 #' @param reps Passed to \code{morie_gms_critical_value}. Defaults to \code{100L}.
 #' @param seed Passed to \code{morie_gms_critical_value}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds}, \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_in_set}, \code{bounds},
+#' \code{statistics}, \code{form}, \code{level}, \code{n_instruments}, \code{method}.
 #' @export
 morie_confidence_set <- function(moment_fn, theta_grid, X, form = "sum",
                                  n_equality = 0L, level = 0.95,

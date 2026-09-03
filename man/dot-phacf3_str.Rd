@@ -16,3 +16,7 @@ A character value.
 Only used to index the lookup table; the ORDERING of the bit space is
 done on the numbers themselves.
 }
+\examples{
+res <- .phacf3_str(k = 3L)
+res
+}

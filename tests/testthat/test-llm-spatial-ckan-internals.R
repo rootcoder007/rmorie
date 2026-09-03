@@ -72,7 +72,8 @@ test_that(".sv_nanmean_col returns column-wise means ignoring NA", {
 })
 
 test_that(".sv_pairwise_dist returns a symmetric distance matrix", {
-  set.seed(1L); X <- matrix(stats::rnorm(20), 10L, 2L)
+  set.seed(1L)
+  X <- matrix(stats::rnorm(20), 10L, 2L)
   D <- rmorie:::.sv_pairwise_dist(X)
   expect_true(is.matrix(D))
   expect_equal(dim(D), c(10L, 10L))
@@ -82,7 +83,8 @@ test_that(".sv_pairwise_dist returns a symmetric distance matrix", {
 
 test_that(".sv_double_centering returns an n x n matrix", {
   D <- matrix(stats::runif(25), 5L, 5L)
-  D <- (D + t(D)) / 2; diag(D) <- 0
+  D <- (D + t(D)) / 2
+  diag(D) <- 0
   out <- rmorie:::.sv_double_centering(D)
   expect_true(is.matrix(out))
   expect_equal(dim(out), c(5L, 5L))
@@ -235,7 +237,8 @@ test_that(".morie_arsau_wrap aggregates sub-results into a wrapped list", {
 # ========================================================== mrm_diagnostics.R
 
 test_that(".morie_logistic_propensity returns ps in (0,1)", {
-  set.seed(4L); n <- 100L
+  set.seed(4L)
+  n <- 100L
   D <- stats::rbinom(n, 1L, 0.5)
   X <- data.frame(x1 = stats::rnorm(n), x2 = stats::rnorm(n))
   e <- rmorie:::.morie_logistic_propensity(D, X)

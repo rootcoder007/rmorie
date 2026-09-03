@@ -207,7 +207,8 @@ phmmsr_gumbel_pvalue <- function(score, mu, lam) {
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @param floor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-30}.
 #' @param target Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset}, \code{note}.
+#' @return A list with \code{values}, \code{rescaled}, \code{factor}, \code{log_offset},
+#' \code{note}.
 #' @export
 phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
   v <- as.numeric(values)
@@ -235,11 +236,14 @@ phmmsr_sparse_rescale <- function(values, floor = 1e-30, target = 1.0) {
 #'
 #' @param sequences A vector; its length is taken and its elements indexed.
 #' @param profile Passed to \code{phmmsr_msv_score}.
-#' @param msv_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.02}.
+#' @param msv_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.02}.
 #' @param mu Passed to \code{phmmsr_gumbel_pvalue}. Defaults to \code{10}.
 #' @param lam Passed to \code{phmmsr_msv_score}. Defaults to \code{0.7}.
 #' @param full_score Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{passed}, \code{msv_scores}, \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{passed}, \code{msv_scores},
+#' \code{discarded}, \code{survivor_fraction}, \code{full_scores}, \code{method},
+#' \code{note}.
 #' @export
 phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
                                   mu = 10.0, lam = 0.7, full_score = NULL) {
@@ -297,23 +301,3 @@ profile_hmm_search <- phmmsr_search_pipeline
 
 # entry point
 morie_phmmsr <- phmmsr_search_pipeline
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

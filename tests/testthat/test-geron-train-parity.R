@@ -1261,7 +1261,8 @@ eqd <- function(actual, expected)
 test_that("distillation and diffusion losses match Python", {
   p <- PY$grdino
   r <- morie_geron_dino_self_distillation(p$in_S, p$in_Tl, 1, 0.5)
-  eqn(r$loss, p$loss); eqn(r$teacher_probs, p$teacher_probs)
+  eqn(r$loss, p$loss)
+  eqn(r$teacher_probs, p$teacher_probs)
   eqd(r$teacher_probs, p$teacher_probs)
   eqn(r$student_probs, p$student_probs)
   eqn(r$teacher_entropy, p$teacher_entropy)
@@ -1272,27 +1273,36 @@ test_that("distillation and diffusion losses match Python", {
   p <- PY$grdpmf
   r <- morie_geron_ddpm_forward_process(matrix(c(1, -2, 0.5, 3), 2, byrow = TRUE),
                                         2, p$in_alpha_bar, seed = 5)
-  eqn(r$x_t, p$x_t); eqn(r$noise, p$noise)
-  eqn(r$signal_coef, p$signal_coef); eqn(r$noise_coef, p$noise_coef)
+  eqn(r$x_t, p$x_t)
+  eqn(r$noise, p$noise)
+  eqn(r$signal_coef, p$signal_coef)
+  eqn(r$noise_coef, p$noise_coef)
   eqn(r$snr, p$snr)
 
   p <- PY$grdpml
   r <- morie_geron_ddpm_simple_loss(matrix(c(1, 2, 3, -1), 2, byrow = TRUE),
                                     matrix(c(0.5, 2.5, 2, -1.5), 2, byrow = TRUE))
-  eqn(r$loss, p$loss); eqn(r$sum_squared_error, p$sum_squared_error)
-  eqn(r$per_sample, p$per_sample); eqn(r$rmse, p$rmse)
+  eqn(r$loss, p$loss)
+  eqn(r$sum_squared_error, p$sum_squared_error)
+  eqn(r$per_sample, p$per_sample)
+  eqn(r$rmse, p$rmse)
 
   p <- PY$grdpmr
   r <- morie_geron_ddpm_reverse_step(matrix(c(1, -1, 2, 0.5), 2, byrow = TRUE), 2,
                                      matrix(c(0.2, 0.1, -0.3, 0.4), 2, byrow = TRUE),
                                      p$in_alpha, p$in_alpha_bar, 0.3, seed = 11)
-  eqn(r$x_prev, p$x_prev); eqn(r$mean, p$mean); eqn(r$eps_coef, p$eps_coef)
-  eqn(r$x0_estimate, p$x0_estimate); eqn(r$noise_term, p$noise_term)
+  eqn(r$x_prev, p$x_prev)
+  eqn(r$mean, p$mean)
+  eqn(r$eps_coef, p$eps_coef)
+  eqn(r$x0_estimate, p$x0_estimate)
+  eqn(r$noise_term, p$noise_term)
 
   p <- PY$grscm
   r <- morie_geron_score_matching_loss(p$in_x0, c(0.5, 1.5), p$in_eps, p$in_sp)
-  eqn(r$loss, p$loss); eqn(r$per_sample, p$per)
-  eqn(r$target, p$tgt); eqn(r$x_noisy, p$xn)
+  eqn(r$loss, p$loss)
+  eqn(r$per_sample, p$per)
+  eqn(r$target, p$tgt)
+  eqn(r$x_noisy, p$xn)
   eqn(morie_geron_score_matching_loss(p$in_x0, c(0.5, 1.5), p$in_eps, p$in_sp,
                                       weight = "sigma2")$loss, p$w2)
 })
@@ -1300,7 +1310,9 @@ test_that("distillation and diffusion losses match Python", {
 test_that("preference and RL objectives match Python", {
   p <- PY$grdpo
   r <- morie_geron_dpo_loss(p$in_lw, p$in_ll, p$in_rw, p$in_rl, beta = 0.3)
-  eqn(r$loss, p$loss); eqn(r$margin, p$margin); eqn(r$accuracy, p$accuracy)
+  eqn(r$loss, p$loss)
+  eqn(r$margin, p$margin)
+  eqn(r$accuracy, p$accuracy)
   eqn(r$per_pair_loss, p$per_pair_loss)
   eqn(r$implicit_reward_chosen, p$implicit_reward_chosen)
   # independent route: central difference of the loss in beta
@@ -1312,57 +1324,79 @@ test_that("preference and RL objectives match Python", {
   p <- PY$grdqnl
   batch <- list(c(0, 1, 1, 2), c(2, 0, -0.5, 1, 1), c(1, 1, 0.25, 0))
   r <- morie_geron_dqn_loss(p$in_Q, p$in_Qt, batch, gamma = 0.9)
-  eqn(r$loss, p$loss); eqn(r$targets, p$targets)
-  eqn(r$predictions, p$predictions); eqn(r$td_errors, p$td_errors)
+  eqn(r$loss, p$loss)
+  eqn(r$targets, p$targets)
+  eqn(r$predictions, p$predictions)
+  eqn(r$td_errors, p$td_errors)
   eqi(r$n_terminal, p$n_terminal)
 
   p <- PY$grduel
   r <- morie_geron_dueling_dqn(c(1, -2),
                                matrix(c(1, 2, 0, -1, 0.5, 2.5), 2, byrow = TRUE))
-  eqn(r$Q, p$Q); eqd(r$Q, p$Q); eqn(r$centered_advantage, p$centered_advantage)
+  eqn(r$Q, p$Q)
+  eqd(r$Q, p$Q)
+  eqn(r$centered_advantage, p$centered_advantage)
   eqi(r$best_action, p$best_action)
   testthat::expect_true(r$advantage_sums_to_zero)
 
   p <- PY$grql
   r <- morie_geron_q_learning_update(PY$grdqnl$in_Q, 0, 1, 1, 2, 0.5, 0.9)
-  eqn(r$Q, p$Q); eqn(r$new_value, p$new); eqn(r$target, p$tgt)
-  eqn(r$td_error, p$td); eqn(r$max_next, p$mx)
+  eqn(r$Q, p$Q)
+  eqn(r$new_value, p$new)
+  eqn(r$target, p$tgt)
+  eqn(r$td_error, p$td)
+  eqn(r$max_next, p$mx)
 
   p <- PY$grtd0
   r <- morie_geron_td_zero_update(c(0, 1, -1), 0, 2, 0.5, 0.3, 0.9)
-  eqn(r$V, p$V); eqn(r$new_value, p$new); eqn(r$td_error, p$td)
+  eqn(r$V, p$V)
+  eqn(r$new_value, p$new)
+  eqn(r$td_error, p$td)
 
   p <- PY$grppo
   r <- morie_geron_ppo_clipped_objective(p$in_r, p$in_A, 0.2)
-  eqn(r$objective, p$obj); eqn(r$per_step, p$per)
-  eqn(r$unclipped, p$un); eqn(r$clipped, p$cl)
+  eqn(r$objective, p$obj)
+  eqn(r$per_step, p$per)
+  eqn(r$unclipped, p$un)
+  eqn(r$clipped, p$cl)
   eqn(r$clipped_fraction, p$frac)
 
   p <- PY$grpex
   r <- morie_geron_prioritized_experience_weight(p$in_pr, N = 100)
-  eqn(r$weights, p$w); eqn(r$probabilities, p$P); eqn(r$priorities, p$p)
+  eqn(r$weights, p$w)
+  eqn(r$probabilities, p$P)
+  eqn(r$priorities, p$p)
   eqi(r$max_weight_index, p$mi)
   testthat::expect_equal(max(r$weights), 1)
 
   p <- PY$grrein
   r <- morie_geron_reinforce_policy_gradient(c(0.1, -0.2), p$in_lp, p$in_G, 0.05,
                                              baseline = "mean")
-  eqn(r$theta_new, p$theta); eqn(r$gradient, p$grad)
-  eqn(r$advantages, p$adv); eqn(r$baseline, p$b); eqn(r$step_norm, p$sn)
+  eqn(r$theta_new, p$theta)
+  eqn(r$gradient, p$grad)
+  eqn(r$advantages, p$adv)
+  eqn(r$baseline, p$b)
+  eqn(r$step_norm, p$sn)
 
   p <- PY$grret
   r <- morie_geron_discounted_return(c(1, 0, -1, 2), 0.95)
-  eqn(r$returns, p$G); eqn(r$G0, p$G0); eqn(r$effective_horizon, p$h)
+  eqn(r$returns, p$G)
+  eqn(r$G0, p$G0)
+  eqn(r$effective_horizon, p$h)
 
   p <- PY$grrlhf
   r <- morie_geron_rlhf_reward_kl_objective(c(1, 0.5, -0.2), c(-0.5, -1, -0.3),
                                             c(-0.8, -0.9, -0.5), 0.2)
-  eqn(r$objective, p$obj); eqn(r$mean_reward, p$mr); eqn(r$kl, p$kl)
-  eqn(r$kl_terms, p$kt); eqn(r$per_sample, p$ps)
+  eqn(r$objective, p$obj)
+  eqn(r$mean_reward, p$mr)
+  eqn(r$kl, p$kl)
+  eqn(r$kl_terms, p$kt)
+  eqn(r$per_sample, p$ps)
 
   p <- PY$grepl
   r <- morie_geron_epsilon_greedy(c(1, 3, 2), 0.5, seed = 9)
-  eqi(r$action, p$action); eqi(r$greedy_action, p$greedy_action)
+  eqi(r$action, p$action)
+  eqi(r$greedy_action, p$greedy_action)
   testthat::expect_identical(r$explored, p$explored)
   eqn(r$action_probabilities, p$action_probabilities)
 })
@@ -1370,47 +1404,65 @@ test_that("preference and RL objectives match Python", {
 test_that("MDP value functions match Python", {
   p <- PY$grvpi
   r <- morie_geron_state_value_function(1, p$in_pol, p$in_P, p$in_R, 0.9)
-  eqn(r$value, p$v); eqn(r$values, p$V)
+  eqn(r$value, p$v)
+  eqn(r$values, p$V)
   q <- PY$grqpi
   rq <- morie_geron_action_value_function(1, 1, p$in_pol, p$in_P, p$in_R, 0.9)
-  eqn(rq$q_value, q$q); eqn(rq$q_values, q$Q); eqd(rq$q_values, q$Q)
-  eqn(rq$advantage, q$adv); eqi(rq$greedy_action, q$ga)
+  eqn(rq$q_value, q$q)
+  eqn(rq$q_values, q$Q)
+  eqd(rq$q_values, q$Q)
+  eqn(rq$advantage, q$adv)
+  eqi(rq$greedy_action, q$ga)
 })
 
 test_that("regularised regression costs share the MSE core", {
   X <- matrix(c(1, 2, 1, 3, 1, 5, 1, 7), 4, byrow = TRUE)
-  y <- c(2, 3, 6, 9); th <- c(0.5, 1.1)
+  y <- c(2, 3, 6, 9)
+  th <- c(0.5, 1.1)
   p <- PY$grmse
   r <- morie_geron_linreg_mse_cost_grmse(X, y, th)
-  eqn(r$cost, p$cost); eqn(r$rmse, p$rmse)
-  eqn(r$residuals, p$res); eqn(r$predictions, p$pred)
+  eqn(r$cost, p$cost)
+  eqn(r$rmse, p$rmse)
+  eqn(r$residuals, p$res)
+  eqn(r$predictions, p$pred)
 
   p <- PY$grlaso
   r <- morie_geron_lasso_cost(X, y, th, 0.4)
-  eqn(r$cost, p$cost); eqn(r$mse, p$mse); eqn(r$l1_norm, p$l1_norm)
+  eqn(r$cost, p$cost)
+  eqn(r$mse, p$mse)
+  eqn(r$l1_norm, p$l1_norm)
   eqi(r$n_zero, p$n_zero)
 
   p <- PY$grelas
   r <- morie_geron_elastic_net_cost(X, y, th, 0.4, 0.6)
-  eqn(r$cost, p$cost); eqn(r$l1_penalty, p$l1_penalty)
-  eqn(r$l2_penalty, p$l2_penalty); eqn(r$l2_norm_sq, p$l2_norm_sq)
+  eqn(r$cost, p$cost)
+  eqn(r$l1_penalty, p$l1_penalty)
+  eqn(r$l2_penalty, p$l2_penalty)
+  eqn(r$l2_norm_sq, p$l2_norm_sq)
 
   p <- PY$grn011
   r <- morie_geron_ch4_lasso_regression_cost_function(X, y, th, 0.4)
-  eqn(r$cost, p$cost); eqn(r$l1_penalty, p$l1_penalty)
+  eqn(r$cost, p$cost)
+  eqn(r$l1_penalty, p$l1_penalty)
   eqn(r$effective_alpha, p$effective_alpha)
 
   p <- PY$grn013
   r <- morie_geron_ch4_elastic_net_cost_function(X, y, th, 0.4, 0.6)
-  eqn(r$cost, p$cost); eqn(r$l2_penalty, p$l2_penalty)
+  eqn(r$cost, p$cost)
+  eqn(r$l2_penalty, p$l2_penalty)
 
   p <- PY$grridg
   r <- morie_geron_ridge_cost_grridg(X, y, th, 0.5)
-  eqn(r$cost, p$cost); eqn(r$mse, p$mse); eqn(r$penalty, p$pen)
+  eqn(r$cost, p$cost)
+  eqn(r$mse, p$mse)
+  eqn(r$penalty, p$pen)
   eqn(r$gradient, p$grad)
   # independent route: central differences reproduce the ridge gradient
   fd <- vapply(1:2, function(j) {
-    tp <- th; tm <- th; tp[j] <- tp[j] + 1e-6; tm[j] <- tm[j] - 1e-6
+    tp <- th
+    tm <- th
+    tp[j] <- tp[j] + 1e-6
+    tm[j] <- tm[j] - 1e-6
     (morie_geron_ridge_cost_grridg(X, y, tp, 0.5)$cost -
        morie_geron_ridge_cost_grridg(X, y, tm, 0.5)$cost) / 2e-6
   }, numeric(1))
@@ -1419,25 +1471,35 @@ test_that("regularised regression costs share the MSE core", {
 
   p <- PY$grridn
   r <- morie_geron_ridge_normal_equation(X, y, 0.5)
-  eqn(r$theta, p$theta); eqn(r$rss, p$rss); eqn(r$penalty, p$pen)
+  eqn(r$theta, p$theta)
+  eqn(r$rss, p$rss)
+  eqn(r$penalty, p$pen)
   eqn(r$fitted, p$fitted)
 
   p <- PY$grn005
   r <- morie_geron_ch4_normal_equation(X, y)
-  eqn(r$theta, p$theta); eqn(r$cost, p$cost); eqi(r$rank, p$rank)
+  eqn(r$theta, p$theta)
+  eqn(r$cost, p$cost)
+  eqi(r$rank, p$rank)
   eqn(r$condition_number, p$cond, tol = 1e-6)
 
   p <- PY$grnorm
   r <- morie_geron_normal_equation_grnorm(X, y)
-  eqn(r$theta, p$theta); eqn(r$rss, p$rss); eqn(r$fitted, p$fitted)
+  eqn(r$theta, p$theta)
+  eqn(r$rss, p$rss)
+  eqn(r$fitted, p$fitted)
   eqn(morie_geron_normal_equation_grnorm(X[, 2, drop = FALSE], y,
                                   add_intercept = TRUE)$theta, p$theta_i)
 
   p <- PY$grn007
   r <- morie_geron_ch4_mse_gradient_vector(X, y, th)
-  eqn(r$gradient, p$grad); eqn(r$grad_norm, p$norm)
+  eqn(r$gradient, p$grad)
+  eqn(r$grad_norm, p$norm)
   fd <- vapply(1:2, function(j) {
-    tp <- th; tm <- th; tp[j] <- tp[j] + 1e-6; tm[j] <- tm[j] - 1e-6
+    tp <- th
+    tm <- th
+    tp[j] <- tp[j] + 1e-6
+    tm[j] <- tm[j] - 1e-6
     (morie_geron_linreg_mse_cost_grmse(X, y, tp)$cost -
        morie_geron_linreg_mse_cost_grmse(X, y, tm)$cost) / 2e-6
   }, numeric(1))
@@ -1446,7 +1508,8 @@ test_that("regularised regression costs share the MSE core", {
 
   p <- PY$greast
   r <- morie_geron_early_stopping(p$in_Xtr, p$in_ytr, p$in_Xva, p$in_yva, 12, 0.02)
-  eqn(r$theta, p$theta); eqi(r$best_iteration, p$best_iteration)
+  eqn(r$theta, p$theta)
+  eqi(r$best_iteration, p$best_iteration)
   eqn(r$best_val_rmse, p$best_val_rmse)
   eqn(r$final_val_rmse, p$final_val_rmse)
   eqn(r$val_rmse_history, p$val_rmse_history)
@@ -1454,22 +1517,29 @@ test_that("regularised regression costs share the MSE core", {
 
   p <- PY$grmgd
   r <- morie_geron_minibatch_gradient_descent(X, y, c(0, 0), 0.02, 2, 5, seed = 3)
-  eqn(r$theta, p$theta); eqn(r$cost_history, p$costs)
+  eqn(r$theta, p$theta)
+  eqn(r$cost_history, p$costs)
   eqn(r$final_cost, p$final)
 
   p <- PY$grsgd
   r <- morie_geron_stochastic_gradient_descent(X, y, c(0, 0), 0.01, 6, seed = 23)
-  eqn(r$theta, p$theta); eqn(r$cost_path, p$cost)
-  eqi(r$sample_order, p$order); eqn(r$learning_rates, p$rates)
+  eqn(r$theta, p$theta)
+  eqn(r$cost_path, p$cost)
+  eqi(r$sample_order, p$order)
+  eqn(r$learning_rates, p$rates)
   rs <- morie_geron_stochastic_gradient_descent(X, y, c(0, 0), 0.01, 6, seed = 23,
                                                 t0 = 1, t1 = 10)
-  eqn(rs$theta, p$theta_s); eqn(rs$learning_rates, p$rates_s)
+  eqn(rs$theta, p$theta_s)
+  eqn(rs$learning_rates, p$rates_s)
 
   p <- PY$grlrnc
   r <- morie_geron_learning_curves(p$in_X, p$in_y, n_splits = 5,
                                    val_fraction = 0.25)
-  eqi(r$train_sizes, p$sizes); eqn(r$train_rmse, p$tr)
-  eqn(r$val_rmse, p$va); eqn(r$final_gap, p$gap); eqi(r$val_size, p$val_size)
+  eqi(r$train_sizes, p$sizes)
+  eqn(r$train_rmse, p$tr)
+  eqn(r$val_rmse, p$va)
+  eqn(r$final_gap, p$gap)
+  eqi(r$val_size, p$val_size)
 })
 
 test_that("linear and logistic prediction heads match Python", {
@@ -1477,7 +1547,8 @@ test_that("linear and logistic prediction heads match Python", {
   eqn(morie_geron_ch4_linear_regression_prediction(
     c(1, 2, -0.5), matrix(c(1, 4, 2, 0), 2, byrow = TRUE))$prediction, p$batch)
   s <- morie_geron_ch4_linear_regression_prediction(c(1, 2, -0.5), c(1, 4))
-  eqn(s$prediction, p$single); eqn(s$contributions, p$contrib)
+  eqn(s$prediction, p$single)
+  eqn(s$contributions, p$contrib)
 
   p <- PY$grn001
   eqn(morie_geron_ch4_simple_linear_life_satisfaction(4.85, 4.91e-05,
@@ -1487,25 +1558,34 @@ test_that("linear and logistic prediction heads match Python", {
 
   p <- PY$grsig
   r <- morie_geron_sigmoid_grsig(c(-2, 0, 3))
-  eqn(r$sigma, p$sigma); eqn(r$derivative, p$deriv)
+  eqn(r$sigma, p$sigma)
+  eqn(r$derivative, p$deriv)
 
   p <- PY$grlogp
   r <- morie_geron_logistic_regression_probability(p$in_X, p$in_th)
-  eqn(r$probability, p$p); eqn(r$logit, p$logit); eqi(r$prediction, p$pred)
+  eqn(r$probability, p$p)
+  eqn(r$logit, p$logit)
+  eqi(r$prediction, p$pred)
 
   p <- PY$grlogc
   r <- morie_geron_logistic_cross_entropy_cost(PY$grlogp$in_X, p$in_y,
                                                PY$grlogp$in_th)
-  eqn(r$cost, p$cost); eqn(r$per_instance_loss, p$per)
-  eqn(r$accuracy, p$acc); eqi(r$n_clipped, p$nclip)
+  eqn(r$cost, p$cost)
+  eqn(r$per_instance_loss, p$per)
+  eqn(r$accuracy, p$acc)
+  eqi(r$n_clipped, p$nclip)
 
   p <- PY$grlogg
   r <- morie_geron_logistic_cost_gradient(PY$grlogp$in_X, PY$grlogc$in_y,
                                           PY$grlogp$in_th)
-  eqn(r$gradient, p$grad); eqn(r$grad_norm, p$norm); eqn(r$errors, p$err)
+  eqn(r$gradient, p$grad)
+  eqn(r$grad_norm, p$norm)
+  eqn(r$errors, p$err)
   fd <- vapply(1:2, function(j) {
-    tp <- PY$grlogp$in_th; tm <- tp
-    tp[j] <- tp[j] + 1e-6; tm[j] <- tm[j] - 1e-6
+    tp <- PY$grlogp$in_th
+    tm <- tp
+    tp[j] <- tp[j] + 1e-6
+    tm[j] <- tm[j] - 1e-6
     (morie_geron_logistic_cross_entropy_cost(PY$grlogp$in_X, PY$grlogc$in_y, tp)$cost -
        morie_geron_logistic_cross_entropy_cost(PY$grlogp$in_X, PY$grlogc$in_y, tm)$cost) / 2e-6
   }, numeric(1))
@@ -1514,56 +1594,74 @@ test_that("linear and logistic prediction heads match Python", {
 
   p <- PY$grn016
   r <- morie_geron_ch4_logistic_regression_prediction(c(0.2, 0.5, 0.9), 0.5)
-  eqi(r$y_hat, p$yhat); eqn(r$positive_rate, p$rate); eqn(r$margin, p$margin)
+  eqi(r$y_hat, p$yhat)
+  eqn(r$positive_rate, p$rate)
+  eqn(r$margin, p$margin)
 
   p <- PY$grtlu
   r <- morie_geron_threshold_logic_unit(matrix(c(1, -2, 0.5, 0.5), 2, byrow = TRUE),
                                         c(1, 1), 0.25)
-  eqi(r$output, p$out); eqn(r$margin, p$margin)
+  eqi(r$output, p$out)
+  eqn(r$margin, p$margin)
   r1 <- morie_geron_threshold_logic_unit(c(1, -2), c(1, 1), 0.25)
-  eqi(r1$output, p$out1); eqn(r1$margin, p$m1)
+  eqi(r1$output, p$out1)
+  eqn(r1$margin, p$m1)
 
   p <- PY$grhev
   r <- morie_geron_heaviside_step(c(-1, 0, 2), 0)
-  eqn(r$output, p$output); eqn(r$fraction_active, p$frac)
+  eqn(r$output, p$output)
+  eqn(r$fraction_active, p$frac)
 
   p <- PY$grtnh
   r <- morie_geron_tanh_activation(c(-3, 0, 0.5))
-  eqn(r$activation, p$a); eqn(r$derivative, p$d); eqn(r$saturated, p$s)
+  eqn(r$activation, p$a)
+  eqn(r$derivative, p$d)
+  eqn(r$saturated, p$s)
 })
 
 test_that("softmax chain matches Python end to end", {
   p <- PY$grn021
   r <- morie_geron_ch4_softmax_function(c(2, 1, 0.1), 1)
-  eqn(r$probability, p$p); eqn(r$probabilities, p$ps); eqi(r$argmax, p$am)
+  eqn(r$probability, p$p)
+  eqn(r$probabilities, p$ps)
+  eqi(r$argmax, p$am)
   testthat::expect_equal(sum(r$probabilities), 1)
 
   p <- PY$grsmxs
   r <- morie_geron_softmax_score_grsmxs(p$in_X, p$in_Th)
-  eqn(r$scores, p$scores); eqd(r$scores, p$scores); eqi(r$argmax, p$am)
+  eqn(r$scores, p$scores)
+  eqd(r$scores, p$scores)
+  eqi(r$argmax, p$am)
 
   p <- PY$grsmxp
   r <- morie_geron_softmax_probability(PY$grsmxs$in_X, PY$grsmxs$in_Th)
-  eqn(r$probabilities, p$P); eqd(r$probabilities, p$P)
+  eqn(r$probabilities, p$P)
+  eqd(r$probabilities, p$P)
   eqi(r$predictions, p$pred)
 
   p <- PY$grxent
   r <- morie_geron_softmax_cross_entropy_cost(PY$grsmxs$in_X, p$in_Y,
                                               PY$grsmxs$in_Th)
-  eqn(r$cost, p$cost); eqn(r$per_instance, p$per); eqn(r$accuracy, p$acc)
+  eqn(r$cost, p$cost)
+  eqn(r$per_instance, p$per)
+  eqn(r$accuracy, p$acc)
 
   p <- PY$grxeng
   r <- morie_geron_softmax_cost_gradient(PY$grsmxs$in_X, PY$grxent$in_Y,
                                          PY$grsmxs$in_Th)
-  eqn(r$gradient, p$G); eqd(r$gradient, p$G); eqn(r$gradient_norm, p$norm)
+  eqn(r$gradient, p$G)
+  eqd(r$gradient, p$G)
+  eqn(r$gradient_norm, p$norm)
   # rows of P - Y sum to zero, so every ROW of the gradient does too
   testthat::expect_true(all(abs(rowSums(r$gradient)) < 1e-12))
   # independent route: finite differences of the cross-entropy cost
   Th <- PY$grsmxs$in_Th
   Gfd <- matrix(0, nrow(Th), ncol(Th))
   for (a in seq_len(nrow(Th))) for (b in seq_len(ncol(Th))) {
-    tp <- Th; tm <- Th
-    tp[a, b] <- tp[a, b] + 1e-6; tm[a, b] <- tm[a, b] - 1e-6
+    tp <- Th
+    tm <- Th
+    tp[a, b] <- tp[a, b] + 1e-6
+    tm[a, b] <- tm[a, b] - 1e-6
     Gfd[a, b] <- (morie_geron_softmax_cross_entropy_cost(PY$grsmxs$in_X,
                                                          PY$grxent$in_Y, tp)$cost -
                     morie_geron_softmax_cross_entropy_cost(PY$grsmxs$in_X,
@@ -1576,22 +1674,29 @@ test_that("softmax chain matches Python end to end", {
   r <- morie_geron_ch4_cross_entropy_gradient_vector(PY$grsmxs$in_X,
                                                      PY$grxent$in_Y,
                                                      PY$grsmxs$in_Th, 2)
-  eqn(r$gradient, p$g); eqn(r$gradient_norm, p$norm); eqn(r$mean_error, p$me)
+  eqn(r$gradient, p$g)
+  eqn(r$gradient_norm, p$norm)
+  eqn(r$mean_error, p$me)
 
   p <- PY$grtmp
   r <- morie_geron_temperature_sampling(p$in_lg, 0.5)
-  eqn(r$probabilities, p$p); eqn(r$entropy, p$ent)
-  eqn(r$perplexity, p$ppl); eqi(r$argmax, p$am)
+  eqn(r$probabilities, p$p)
+  eqn(r$entropy, p$ent)
+  eqn(r$perplexity, p$ppl)
+  eqi(r$argmax, p$am)
   r2 <- morie_geron_temperature_sampling(p$in_lg, 5)
-  eqn(r2$probabilities, p$p2); eqn(r2$entropy, p$ent2)
+  eqn(r2$probabilities, p$p2)
+  eqn(r2$entropy, p$ent2)
   # independent route: temperature never reorders the ranking
   testthat::expect_equal(order(r$probabilities), order(r2$probabilities))
   testthat::expect_true(r2$entropy > r$entropy)
 
   p <- PY$grtop
   r <- morie_geron_topk_sampling(PY$grtmp$in_lg, 2)
-  eqn(r$probabilities, p$p); eqi(r$kept_indices, p$ki)
-  eqn(r$kept_mass, p$km); eqn(r$entropy, p$ent)
+  eqn(r$probabilities, p$p)
+  eqi(r$kept_indices, p$ki)
+  eqn(r$kept_mass, p$km)
+  eqn(r$entropy, p$ent)
   eqn(r$full_probabilities, p$full)
   testthat::expect_equal(sum(r$probabilities), 1)
 })
@@ -1599,93 +1704,132 @@ test_that("softmax chain matches Python end to end", {
 test_that("classification metrics match Python and brute force", {
   p <- PY$grf1
   r <- morie_geron_f1_score(p$in_yt, p$in_yp, positive_class = 1)
-  eqn(r$f1, p$f1); eqn(r$precision, p$precision); eqn(r$recall, p$recall)
-  eqn(r$macro_f1, p$macro_f1); eqn(r$per_class_f1, p$per_class_f1)
+  eqn(r$f1, p$f1)
+  eqn(r$precision, p$precision)
+  eqn(r$recall, p$recall)
+  eqn(r$macro_f1, p$macro_f1)
+  eqn(r$per_class_f1, p$per_class_f1)
 
   p <- PY$grpre
   r <- morie_geron_precision(PY$grf1$in_yt, PY$grf1$in_yp, positive = 1)
-  eqn(r$precision, p$p); eqi(r$tp, p$tp); eqi(r$fp, p$fp)
+  eqn(r$precision, p$p)
+  eqi(r$tp, p$tp)
+  eqi(r$fp, p$fp)
   eqn(r$per_class, p$per)
   eqn(morie_geron_precision(PY$grf1$in_yt, PY$grf1$in_yp,
                             average = "macro")$precision, p$macro)
 
   p <- PY$grrec
   r <- morie_geron_recall(PY$grf1$in_yt, PY$grf1$in_yp, positive = 1)
-  eqn(r$recall, p$r); eqi(r$tp, p$tp); eqi(r$fn, p$fn); eqn(r$per_class, p$per)
+  eqn(r$recall, p$r)
+  eqi(r$tp, p$tp)
+  eqi(r$fn, p$fn)
+  eqn(r$per_class, p$per)
   eqn(morie_geron_recall(PY$grf1$in_yt, PY$grf1$in_yp,
                          average = "macro")$recall, p$macro)
 
   p <- PY$grroc
   r <- morie_geron_roc_curve(p$in_y, p$in_s)
-  eqn(r$fpr, p$fpr); eqn(r$tpr, p$tpr); eqn(r$auc, p$auc)
+  eqn(r$fpr, p$fpr)
+  eqn(r$tpr, p$tpr)
+  eqn(r$auc, p$auc)
   testthat::expect_true(is.infinite(r$thresholds[1]))
   eqn(r$thresholds[-1], p$thr[-1])
   # independent route: AUC equals the Mann-Whitney pair statistic
-  ya <- p$in_y; sa <- p$in_s
-  pos <- sa[ya == 1]; neg <- sa[ya == 0]
+  ya <- p$in_y
+  sa <- p$in_s
+  pos <- sa[ya == 1]
+  neg <- sa[ya == 0]
   brute <- mean(outer(pos, neg, function(a, b)
     ifelse(a > b, 1, ifelse(a == b, 0.5, 0))))
-  eqn(r$auc, brute); eqn(r$auc, p$brute_auc)
+  eqn(r$auc, brute)
+  eqn(r$auc, p$brute_auc)
 
   p <- PY$grprc
   r <- morie_geron_precision_recall_curve(PY$grroc$in_y, PY$grroc$in_s)
-  eqn(r$precision, p$prec); eqn(r$recall, p$rec); eqn(r$thresholds, p$thr)
-  eqn(r$average_precision, p$ap); eqn(r$best_f1, p$bf1)
+  eqn(r$precision, p$prec)
+  eqn(r$recall, p$rec)
+  eqn(r$thresholds, p$thr)
+  eqn(r$average_precision, p$ap)
+  eqn(r$best_f1, p$bf1)
   eqn(r$best_threshold, p$bt)
   # independent route: brute-force precision/recall at each distinct score
-  ya <- PY$grroc$in_y; sa <- PY$grroc$in_s
+  ya <- PY$grroc$in_y
+  sa <- PY$grroc$in_s
   uq <- sort(unique(sa), decreasing = TRUE)
   bp <- vapply(uq, function(t) {
-    pr <- sa >= t; sum(pr & ya == 1) / sum(pr) }, numeric(1))
+    pr <- sa >= t
+    sum(pr & ya == 1) / sum(pr) }, numeric(1))
   br <- vapply(uq, function(t) {
-    pr <- sa >= t; sum(pr & ya == 1) / sum(ya == 1) }, numeric(1))
-  eqn(r$precision, bp); eqn(r$recall, br)
-  eqn(bp, p$brute_p); eqn(br, p$brute_r)
+    pr <- sa >= t
+    sum(pr & ya == 1) / sum(ya == 1) }, numeric(1))
+  eqn(r$precision, bp)
+  eqn(r$recall, br)
+  eqn(bp, p$brute_p)
+  eqn(br, p$brute_r)
 
   p <- PY$grmlb
   r <- morie_geron_multilabel_classification(p$in_S, p$in_Y, 0.5)
-  eqi(r$predictions, p$P); eqn(r$per_label_f1, p$f1)
-  eqn(r$macro_f1, p$macro); eqn(r$micro_f1, p$micro)
-  eqn(r$exact_match_ratio, p$exact); eqn(r$hamming_loss, p$ham)
+  eqi(r$predictions, p$P)
+  eqn(r$per_label_f1, p$f1)
+  eqn(r$macro_f1, p$macro)
+  eqn(r$micro_f1, p$micro)
+  eqn(r$exact_match_ratio, p$exact)
+  eqn(r$hamming_loss, p$ham)
 
   p <- PY$grvoth
   r <- morie_geron_hard_voting(p$in_P)
-  eqi(r$y_hat, p$y); eqi(r$vote_counts, p$c)
-  eqn(r$agreement, p$a); eqi(r$ties, p$t)
+  eqi(r$y_hat, p$y)
+  eqi(r$vote_counts, p$c)
+  eqn(r$agreement, p$a)
+  eqi(r$ties, p$t)
 
   p <- PY$grvots
   r <- morie_geron_soft_voting(p$in_P, c(2, 1))
-  eqi(r$y_hat, p$y); eqn(r$mean_probabilities, p$M)
-  eqn(r$confidence, p$conf); eqn(r$margin, p$marg)
+  eqi(r$y_hat, p$y)
+  eqn(r$mean_probabilities, p$M)
+  eqn(r$confidence, p$conf)
+  eqn(r$margin, p$marg)
 
   p <- PY$grovr
   r <- morie_geron_one_vs_rest(p$in_X, p$in_y, eta = 0.5, n_iter = 200)
-  eqi(r$predictions, p$pred); eqn(r$scores, p$S); eqn(r$accuracy, p$acc)
-  eqn(r$coefficients[[1]], p$c0); eqn(r$coefficients[[3]], p$c2)
+  eqi(r$predictions, p$pred)
+  eqn(r$scores, p$S)
+  eqn(r$accuracy, p$acc)
+  eqn(r$coefficients[[1]], p$c0)
+  eqn(r$coefficients[[3]], p$c2)
 
   p <- PY$grovo
   r <- morie_geron_one_vs_one(PY$grovr$in_X, PY$grovr$in_y, eta = 0.5,
                               n_iter = 200)
-  eqi(r$predictions, p$pred); eqi(r$votes, p$votes)
-  eqn(r$accuracy, p$acc); eqi(r$ties, p$ties)
+  eqi(r$predictions, p$pred)
+  eqi(r$votes, p$votes)
+  eqn(r$accuracy, p$acc)
+  eqi(r$ties, p$ties)
   eqi(r$n_classifiers, p$npairs)
 })
 
 test_that("tree, forest and boosting routines match Python", {
   p <- PY$grent
   r <- morie_geron_shannon_entropy(c(0, 0, 1, 1, 1, 2))
-  eqn(r$entropy, p$entropy); eqn(r$proportions, p$proportions)
-  eqi(r$counts, p$counts); eqn(r$max_possible, p$max_possible)
+  eqn(r$entropy, p$entropy)
+  eqn(r$proportions, p$proportions)
+  eqi(r$counts, p$counts)
+  eqn(r$max_possible, p$max_possible)
 
   p <- PY$grgin
   r <- morie_geron_gini_impurity_grgin(c(0, 0, 1, 1, 1, 2))
-  eqn(r$gini, p$gini); eqn(r$proportions, p$proportions)
-  eqn(r$max_possible, p$max_possible); eqi(r$majority_class, p$majority_class)
+  eqn(r$gini, p$gini)
+  eqn(r$proportions, p$proportions)
+  eqn(r$max_possible, p$max_possible)
+  eqi(r$majority_class, p$majority_class)
 
   p <- PY$grig
   r <- morie_geron_information_gain(p$in_y, p$in_mask, "entropy")
-  eqn(r$information_gain, p$ig); eqn(r$parent_impurity, p$parent)
-  eqn(r$left_impurity, p$left); eqn(r$right_impurity, p$right)
+  eqn(r$information_gain, p$ig)
+  eqn(r$parent_impurity, p$parent)
+  eqn(r$left_impurity, p$left)
+  eqn(r$right_impurity, p$right)
   eqn(r$weighted_child_impurity, p$child)
   eqn(morie_geron_information_gain(p$in_y, p$in_mask, "gini")$information_gain,
       p$gini_ig)
@@ -1693,18 +1837,25 @@ test_that("tree, forest and boosting routines match Python", {
   p <- PY$grtrc
   r <- morie_geron_tree_classification_leaf(
     c(0, 1, 1, 2, 1, 0), c(TRUE, TRUE, FALSE, TRUE, TRUE, FALSE))
-  eqi(r$prediction, p$pred); eqn(r$proportions, p$p); eqi(r$counts, p$c)
-  eqn(r$gini, p$g); eqn(r$entropy, p$e); eqi(r$n_leaf, p$nl)
+  eqi(r$prediction, p$pred)
+  eqn(r$proportions, p$p)
+  eqi(r$counts, p$c)
+  eqn(r$gini, p$g)
+  eqn(r$entropy, p$e)
+  eqi(r$n_leaf, p$nl)
 
   p <- PY$grtrv
   r <- morie_geron_tree_regression_leaf(c(1, 3, 5, 2),
                                         c(TRUE, FALSE, TRUE, TRUE))
-  eqn(r$prediction, p$pred); eqn(r$mse, p$mse); eqn(r$std, p$sd)
+  eqn(r$prediction, p$pred)
+  eqn(r$mse, p$mse)
+  eqn(r$std, p$sd)
   eqi(r$n_leaf, p$nl)
 
   p <- PY$grfim
   r <- morie_geron_feature_importance_mdi(p$in_TI)
-  eqn(r$importance, p$importance); eqn(r$spread, p$spread)
+  eqn(r$importance, p$importance)
+  eqn(r$spread, p$spread)
   eqi(r$ranking, p$ranking)
   eqn(r$per_tree_normalized, p$per_tree_normalized)
   testthat::expect_equal(sum(r$importance), 1)
@@ -1712,81 +1863,109 @@ test_that("tree, forest and boosting routines match Python", {
   p <- PY$grgbm
   r <- morie_geron_gradient_boosting_residual(p$in_X, p$in_y, 2,
                                               learning_rate = 0.5)
-  eqn(r$residuals, p$residuals); eqn(r$h_prediction, p$h)
-  eqn(r$F_new, p$F_new); eqn(r$mse_before, p$mse_before)
+  eqn(r$residuals, p$residuals)
+  eqn(r$h_prediction, p$h)
+  eqn(r$F_new, p$F_new)
+  eqn(r$mse_before, p$mse_before)
   eqn(r$mse_after, p$mse_after)
-  eqi(r$stump$feature, p$feature); eqn(r$stump$threshold, p$threshold)
-  eqn(r$stump$left_value, p$left_value); eqn(r$stump$sse, p$sse)
+  eqi(r$stump$feature, p$feature)
+  eqn(r$stump$threshold, p$threshold)
+  eqn(r$stump$left_value, p$left_value)
+  eqn(r$stump$sse, p$sse)
 
   p <- PY$grxgbg
   r <- morie_geron_xgboost_gain(3, 2, -1, 1.5, lam = 1, gamma = 0.2)
-  eqn(r$gain, p$g); eqn(r$left_score, p$l); eqn(r$right_score, p$rr)
-  eqn(r$parent_score, p$p); eqn(r$left_weight, p$lw)
+  eqn(r$gain, p$g)
+  eqn(r$left_score, p$l)
+  eqn(r$right_score, p$rr)
+  eqn(r$parent_score, p$p)
+  eqn(r$left_weight, p$lw)
   eqn(r$right_weight, p$rw)
   testthat::expect_identical(r$should_split, p$ss)
 
   p <- PY$grstk
   r <- morie_geron_stacking_predictor(p$in_P, p$in_y)
-  eqn(r$predictions, p$pred); eqn(r$weights, p$w); eqn(r$rmse, p$rmse)
-  eqn(r$base_rmse, p$br); eqn(r$improvement, p$imp)
+  eqn(r$predictions, p$pred)
+  eqn(r$weights, p$w)
+  eqn(r$rmse, p$rmse)
+  eqn(r$base_rmse, p$br)
+  eqn(r$improvement, p$imp)
 })
 
 test_that("preprocessing and encoders match Python", {
   p <- PY$grimp
   Xi <- matrix(c(1, NA, 3, 2, NA, 2, 5, 8), 4, byrow = TRUE)
   r <- morie_geron_simple_imputer(Xi, "mean")
-  eqn(r$imputed, p$mean); eqn(r$statistics, p$stats)
-  eqi(r$n_missing, p$n_missing); eqi(r$missing_by_column, p$by_col)
+  eqn(r$imputed, p$mean)
+  eqn(r$statistics, p$stats)
+  eqi(r$n_missing, p$n_missing)
+  eqi(r$missing_by_column, p$by_col)
   eqn(morie_geron_simple_imputer(Xi, "median")$imputed, p$median)
   eqn(morie_geron_simple_imputer(Xi, "most_frequent")$imputed, p$mode)
 
   p <- PY$grmms
   r <- morie_geron_minmax_scaler(p$in_X, c(-1, 1))
-  eqn(r$scaled, p$scaled); eqn(r$data_min, p$min)
-  eqn(r$data_max, p$max); eqn(r$scale, p$scale)
+  eqn(r$scaled, p$scaled)
+  eqn(r$data_min, p$min)
+  eqn(r$data_max, p$max)
+  eqn(r$scale, p$scale)
 
   p <- PY$grstd
   r <- morie_geron_standardization_grstd(PY$grmms$in_X)
-  eqn(r$scaled, p$Z); eqn(r$mean, p$mu); eqn(r$scale, p$sd)
+  eqn(r$scaled, p$Z)
+  eqn(r$mean, p$mu)
+  eqn(r$scale, p$sd)
   r1 <- morie_geron_standardization_grstd(PY$grmms$in_X, ddof = 1)
-  eqn(r1$scaled, p$Z1); eqn(r1$scale, p$sd1)
+  eqn(r1$scaled, p$Z1)
+  eqn(r1$scale, p$sd1)
 
   p <- PY$grohe
   r <- morie_geron_one_hot_encoding_grohe(c("b", "a", "c", "a"))
-  eqn(r$encoded, p$M); testthat::expect_identical(r$levels, p$levels)
+  eqn(r$encoded, p$M)
+  testthat::expect_identical(r$levels, p$levels)
   r2 <- morie_geron_one_hot_encoding_grohe(c("b", "a", "c", "a"), drop_first = TRUE)
-  eqn(r2$encoded, p$M2); testthat::expect_identical(r2$columns, p$cols2)
+  eqn(r2$encoded, p$M2)
+  testthat::expect_identical(r2$columns, p$cols2)
 
   p <- PY$grord
   r <- morie_geron_ordinal_encoding_grord(c("b", "a", "c", "a"))
-  eqi(r$encoded, p$enc); testthat::expect_identical(r$levels, p$levels)
+  eqi(r$encoded, p$enc)
+  testthat::expect_identical(r$levels, p$levels)
 
   p <- PY$grpoly
   r <- morie_geron_polynomial_features(matrix(c(1, 2, 3, 0.5), 2, byrow = TRUE), 3)
-  eqn(r$features, p$F); eqd(r$features, p$F); eqi(r$n_features, p$nf)
+  eqn(r$features, p$F)
+  eqd(r$features, p$F)
+  eqi(r$n_features, p$nf)
 
   p <- PY$gremb
   r <- morie_geron_embedding_lookup(c(0, 3, 1, 1), p$in_E)
-  eqn(r$embeddings, p$embeddings); eqi(r$n_unique, p$n_unique)
+  eqn(r$embeddings, p$embeddings)
+  eqi(r$n_unique, p$n_unique)
   eqi(r$n_parameters, p$n_parameters)
 })
 
 test_that("unsupervised routines match Python", {
   p <- PY$grevr
   r <- morie_geron_explained_variance_ratio(p$in_sv, 0.95)
-  eqn(r$explained_variance_ratio, p$evr); eqn(r$cumulative, p$cumulative)
+  eqn(r$explained_variance_ratio, p$evr)
+  eqn(r$cumulative, p$cumulative)
   eqi(r$n_components_for_threshold, p$k)
 
   p <- PY$grpcap
   r <- morie_geron_pca_projection(p$in_X, 2)
-  eqn(r$projection, p$Z); eqd(r$projection, p$Z)
-  eqn(r$components, p$V); eqn(r$explained_variance, p$var)
+  eqn(r$projection, p$Z)
+  eqd(r$projection, p$Z)
+  eqn(r$components, p$V)
+  eqn(r$explained_variance, p$var)
   eqn(r$explained_variance_ratio, p$ratio)
-  eqn(r$singular_values, p$sv); eqn(r$mean, p$mu)
+  eqn(r$singular_values, p$sv)
+  eqn(r$mean, p$mu)
 
   p <- PY$grkpc
   r <- morie_geron_kernel_pca_rbf(PY$grkmpp$in_X, gamma = 0.05, d = 2)
-  eqn(r$eigenvalues, p$eig); eqn(r$kernel, p$K)
+  eqn(r$eigenvalues, p$eig)
+  eqn(r$kernel, p$K)
   eqn(r$kernel_centered, p$Kc)
   eqn(r$explained_variance_ratio, p$evr)
   # eigenvector signs are not pinned in the Python (numpy eigh), so the
@@ -1795,61 +1974,80 @@ test_that("unsupervised routines match Python", {
 
   p <- PY$grgrp
   r <- morie_geron_gaussian_random_projection(p$in_X, 2, seed = 13)
-  eqn(r$R, p$R); eqd(r$R, p$R); eqn(r$projected, p$Z)
+  eqn(r$R, p$R)
+  eqd(r$R, p$R)
+  eqn(r$projected, p$Z)
   eqn(r$achieved_variance, p$achieved)
   eqn(r$mean_distance_ratio, p$mean_ratio)
 
   p <- PY$grjll
   r <- morie_geron_johnson_lindenstrauss_bound(1000, 0.2)
-  eqi(r$min_dimension, p$d); eqn(r$exact, p$exact)
+  eqi(r$min_dimension, p$d)
+  eqn(r$exact, p$exact)
   eqn(r$denominator, p$denom)
   eqi(morie_geron_johnson_lindenstrauss_bound(1000, c(0.1, 0.3))$min_dimension,
       p$vec)
 
   p <- PY$grkmo
   r <- morie_geron_kmeans_objective(p$in_X, p$in_C, c(0, 0, 1, 1))
-  eqn(r$inertia, p$inertia); eqn(r$per_cluster_inertia, p$per)
-  eqi(r$cluster_sizes, p$sizes); eqn(r$distances, p$distances)
+  eqn(r$inertia, p$inertia)
+  eqn(r$per_cluster_inertia, p$per)
+  eqi(r$cluster_sizes, p$sizes)
+  eqn(r$distances, p$distances)
   testthat::expect_identical(r$centroids_are_means, p$is_mean)
 
   p <- PY$grkmpp
   r <- morie_geron_kmeans_pp_seeding(p$in_X, 3, seed = 6)
-  eqi(r$indices, p$indices); eqn(r$centroids, p$centroids)
+  eqi(r$indices, p$indices)
+  eqn(r$centroids, p$centroids)
   eqn(r$min_pairwise_distance, p$mind)
 
   p <- PY$grsil
   r <- morie_geron_silhouette_score(PY$grkmo$in_X, c(0, 0, 1, 1))
-  eqn(r$silhouette, p$s); eqn(r$per_sample, p$per)
-  eqn(r$a, p$a); eqn(r$b, p$b)
+  eqn(r$silhouette, p$s)
+  eqn(r$per_sample, p$per)
+  eqn(r$a, p$a)
+  eqn(r$b, p$b)
 
   p <- PY$grlof
   r <- morie_geron_local_outlier_factor(p$in_X, k = 2)
-  eqn(r$lof, p$lof); eqn(r$lrd, p$lrd); eqn(r$k_distance, p$kdist)
-  eqi(r$neighbors, p$nbrs); eqi(r$most_outlying, p$most)
+  eqn(r$lof, p$lof)
+  eqn(r$lrd, p$lrd)
+  eqn(r$k_distance, p$kdist)
+  eqi(r$neighbors, p$nbrs)
+  eqi(r$most_outlying, p$most)
 
   p <- PY$grnmfo
   r <- morie_geron_nmf_objective(p$in_X, p$in_W, p$in_H)
-  eqn(r$objective, p$obj); eqn(r$reconstruction, p$R)
+  eqn(r$objective, p$obj)
+  eqn(r$reconstruction, p$R)
   eqn(r$relative_error, p$rel)
 
   p <- PY$grgmll
   r <- morie_geron_gmm_log_likelihood(p$in_X, p$in_pi, p$in_mu, p$in_cv)
-  eqn(r$log_likelihood, p$ll); eqn(r$per_sample, p$per_sample)
+  eqn(r$log_likelihood, p$ll)
+  eqn(r$per_sample, p$per_sample)
   eqn(r$component_log_densities, p$logp)
 
   p <- PY$grgmem
   r <- morie_geron_gmm_em_step(PY$grgmll$in_X, PY$grgmll$in_pi,
                                PY$grgmll$in_mu, PY$grgmll$in_cv)
-  eqn(r$responsibilities, p$R); eqn(r$pi_new, p$pi_new)
-  eqn(r$means_new, p$means_new); eqn(r$Nk, p$Nk)
-  eqn(r$covars_new[[1]], p$cov0); eqn(r$improvement, p$improvement)
+  eqn(r$responsibilities, p$R)
+  eqn(r$pi_new, p$pi_new)
+  eqn(r$means_new, p$means_new)
+  eqn(r$Nk, p$Nk)
+  eqn(r$covars_new[[1]], p$cov0)
+  eqn(r$improvement, p$improvement)
   testthat::expect_true(r$improvement >= 0)
 
   p <- PY$grmcol
   r <- morie_geron_gan_mode_collapse_metric(p$in_S, p$in_M)
-  eqn(r$coverage, p$cov); eqn(r$mode_collapse_rate, p$rate)
-  eqi(r$modes_hit, p$hit); eqi(r$modes_missed, p$miss)
-  eqi(r$samples_per_mode, p$per); eqn(r$tol, p$tol)
+  eqn(r$coverage, p$cov)
+  eqn(r$mode_collapse_rate, p$rate)
+  eqi(r$modes_hit, p$hit)
+  eqi(r$modes_missed, p$miss)
+  eqi(r$samples_per_mode, p$per)
+  eqn(r$tol, p$tol)
   eqi(r$n_off_distribution, p$off)
 })
 
@@ -1857,115 +2055,154 @@ test_that("neural layers, cells and blocks match Python", {
   p <- PY$grlinf
   r <- morie_geron_linear_layer_forward(matrix(c(1, 2, 3, 0, 1, -1), 2, byrow = TRUE),
                                         p$in_W, c(0.5, -0.5))
-  eqn(r$output, p$output); eqn(r$preactivation_norm, p$norm)
+  eqn(r$output, p$output)
+  eqn(r$preactivation_norm, p$norm)
   eqi(r$n_parameters, p$n_parameters)
 
   p <- PY$grffn
   r <- morie_geron_transformer_feedforward(matrix(c(1, 2, -1, 0.5), 2, byrow = TRUE),
                                            p$in_W1, c(0.1, 0.2, 0.3, 0.4),
                                            p$in_W2, c(0.5, -0.5))
-  eqn(r$output, p$output); eqn(r$hidden, p$hidden)
-  eqn(r$sparsity, p$sparsity); eqn(r$expansion_ratio, p$expansion)
+  eqn(r$output, p$output)
+  eqn(r$hidden, p$hidden)
+  eqn(r$sparsity, p$sparsity)
+  eqn(r$expansion_ratio, p$expansion)
   eqi(r$n_parameters, p$n_parameters)
 
   p <- PY$grmlpf
   r <- morie_geron_mlp_forward(matrix(c(1, 2, -1, 0.5), 2, byrow = TRUE),
                                list(p$in_Wa, p$in_Wb),
                                list(c(0.1, 0.2, 0.3), c(0, -0.5)))
-  eqn(r$output, p$out); eqi(r$layer_sizes, p$sizes)
-  eqi(r$n_parameters, p$npar); eqi(r$dead_units, p$dead)
+  eqn(r$output, p$out)
+  eqi(r$layer_sizes, p$sizes)
+  eqi(r$n_parameters, p$npar)
+  eqi(r$dead_units, p$dead)
   eqn(r$activations[[2]], p$a1)
 
   p <- PY$grmlc
   r <- morie_geron_classification_mlp_output(
     matrix(c(1, 2, 0.5, -1), 2, byrow = TRUE),
     matrix(c(1, -1, 0.5, 2, 0, 1), 3, byrow = TRUE), c(0.1, 0.2, -0.1))
-  eqn(r$probabilities, p$P); eqn(r$logits, p$logits)
-  eqi(r$predicted_class, p$pred); eqn(r$max_probability, p$maxp)
+  eqn(r$probabilities, p$P)
+  eqn(r$logits, p$logits)
+  eqi(r$predicted_class, p$pred)
+  eqn(r$max_probability, p$maxp)
 
   p <- PY$grmlr
   r <- morie_geron_regression_mlp_output(matrix(c(1, 2, -1, 0.5), 2, byrow = TRUE),
                                          matrix(c(1, -1, 0.5, 2), 2, byrow = TRUE),
                                          c(0.1, 0.2), activation = "softplus")
-  eqn(r$prediction, p$pred); eqn(r$preactivation, p$pre)
+  eqn(r$prediction, p$pred)
+  eqn(r$preactivation, p$pre)
 
   p <- PY$grln
   r <- morie_geron_layer_normalization(p$in_X, c(1, 2, 0.5), c(0, 1, -1))
-  eqn(r$output, p$output); eqn(r$normalized, p$normalized)
-  eqn(r$mean, p$mean); eqn(r$variance, p$variance)
+  eqn(r$output, p$output)
+  eqn(r$normalized, p$normalized)
+  eqn(r$mean, p$mean)
+  eqn(r$variance, p$variance)
 
   p <- PY$grrnnc
   r <- morie_geron_simple_rnn_cell(1.2, c(0.3, -0.4), p$in_Whh, p$in_Wxh,
                                    c(0.1, -0.1))
-  eqn(r$h, p$h); eqn(r$pre_activation, p$z); eqn(r$derivative, p$d)
-  eqn(r$spectral_norm_Whh, p$sn); eqn(r$saturated, p$sat)
+  eqn(r$h, p$h)
+  eqn(r$pre_activation, p$z)
+  eqn(r$derivative, p$d)
+  eqn(r$spectral_norm_Whh, p$sn)
+  eqn(r$saturated, p$sat)
 
   p <- PY$grlstc
   r <- morie_geron_lstm_cell(1.5, c(0.3, -0.7), c(0.2, 0.1), p$in_W, p$in_W,
                              p$in_W, p$in_W, 0.1, c(0, 0.2), 0, c(-0.1, 0.1))
-  eqn(r$h, p$h); eqn(r$c, p$c); eqn(r$f, p$f); eqn(r$i, p$i)
-  eqn(r$g, p$g); eqn(r$o, p$o)
+  eqn(r$h, p$h)
+  eqn(r$c, p$c)
+  eqn(r$f, p$f)
+  eqn(r$i, p$i)
+  eqn(r$g, p$g)
+  eqn(r$o, p$o)
 
   p <- PY$grpels
   W <- PY$grlstc$in_W
   r <- morie_geron_peephole_lstm_cell(1.5, c(0.3, -0.7), c(0.2, 0.1), W, W, W, W,
                                       c(0.1, 0.2), c(0, -0.1), c(0.3, 0.3),
                                       c(0.1, 0.1), c(0, 0.2), c(0, 0), c(-0.1, 0.1))
-  eqn(r$h, p$h); eqn(r$c, p$c); eqn(r$f, p$f); eqn(r$i, p$i)
-  eqn(r$g, p$g); eqn(r$o, p$o)
+  eqn(r$h, p$h)
+  eqn(r$c, p$c)
+  eqn(r$f, p$f)
+  eqn(r$i, p$i)
+  eqn(r$g, p$g)
+  eqn(r$o, p$o)
 
   p <- PY$grgruc
   r <- morie_geron_gru_cell(1.5, c(0.3, -0.7), p$in_Wz, p$in_Wr, p$in_W)
-  eqn(r$h, p$h); eqn(r$z, p$z); eqn(r$r, p$r); eqn(r$h_tilde, p$h_tilde)
+  eqn(r$h, p$h)
+  eqn(r$z, p$z)
+  eqn(r$r, p$r)
+  eqn(r$h_tilde, p$h_tilde)
 
   p <- PY$grrsk
   r <- morie_geron_resnet_skip(matrix(c(1, 2, 3, 4), 2, byrow = TRUE),
                                matrix(c(0.5, -1, 1, 0), 2, byrow = TRUE))
-  eqn(r$output, p$out); eqn(r$residual_norm, p$rn)
-  eqn(r$shortcut_norm, p$sn); eqn(r$residual_fraction, p$rf)
+  eqn(r$output, p$out)
+  eqn(r$residual_norm, p$rn)
+  eqn(r$shortcut_norm, p$sn)
+  eqn(r$residual_fraction, p$rf)
   r2 <- morie_geron_resnet_skip(matrix(c(1, 2), 1), matrix(c(0.5, -1, 0.25), 1),
                                 projection = p$in_P)
-  eqn(r2$output, p$out2); eqn(r2$shortcut, p$short2)
+  eqn(r2$output, p$out2)
+  eqn(r2$shortcut, p$short2)
 
   p <- PY$grfcn
   r <- morie_geron_fcn_upsample(matrix(c(1, 2, 3, 4), 2, byrow = TRUE),
                                 matrix(c(1, 0.5, 0.25, 2), 2, byrow = TRUE),
                                 stride = 2)
-  eqn(r$output, p$output); eqd(r$output, p$output)
+  eqn(r$output, p$output)
+  eqd(r$output, p$output)
   eqi(r$contribution_counts, p$counts)
   testthat::expect_identical(r$uniform_coverage, p$uniform)
   eqn(r$upsample_factor, p$factor)
 
   p <- PY$grmpl
   r <- morie_geron_max_pooling(p$in_X, 2)
-  eqn(r$output, p$out); eqi(r$argmax_indices, p$arg)
+  eqn(r$output, p$out)
+  eqi(r$argmax_indices, p$arg)
   eqn(r$reduction_factor, p$red)
   r2 <- morie_geron_max_pooling(p$in_X, 2, stride = 1)
-  eqn(r2$output, p$out1); eqi(r2$argmax_indices, p$arg1)
+  eqn(r2$output, p$out1)
+  eqi(r2$argmax_indices, p$arg1)
 
   p <- PY$grsen
   r <- morie_geron_senet_squeeze_excite(p$in_X, p$in_W1, p$in_W2)
-  eqn(r$output, p$out); eqn(r$scale, p$s); eqn(r$squeeze, p$z)
-  eqn(r$hidden, p$h); eqn(r$reduction_ratio, p$rr)
+  eqn(r$output, p$out)
+  eqn(r$scale, p$s)
+  eqn(r$squeeze, p$z)
+  eqn(r$hidden, p$h)
+  eqn(r$reduction_ratio, p$rr)
 
   p <- PY$grfmp
   r <- morie_geron_feature_map_dim(28, 28, 64, bytes_per_value = 4,
                                    batch_size = 32)
-  eqn(r$dim, p$dim); eqn(r$bytes, p$bytes); eqn(r$megabytes, p$mb)
+  eqn(r$dim, p$dim)
+  eqn(r$bytes, p$bytes)
+  eqn(r$megabytes, p$mb)
   eqn(r$batch_megabytes, p$batch_mb)
 
   p <- PY$grhbb
   r <- morie_geron_hebb_rule_grhbb(c(1, 2), c(1, 0), c(0, 1),
                              matrix(c(0.5, 0.5, 1, -1), 2, byrow = TRUE), 0.1)
-  eqn(r$w_new, p$w_new); eqn(r$delta_w, p$delta_w); eqn(r$error, p$error)
+  eqn(r$w_new, p$w_new)
+  eqn(r$delta_w, p$delta_w)
+  eqn(r$error, p$error)
   testthat::expect_identical(r$converged, p$converged)
 })
 
 test_that("attention family matches Python and FlashAttention is exact", {
   p <- PY$grsdpa
   r <- morie_geron_scaled_dot_product_attention(p$in_Q, p$in_K, p$in_V)
-  eqn(r$output, p$output); eqd(r$output, p$output)
-  eqn(r$weights, p$weights); eqn(r$scores, p$scores)
+  eqn(r$output, p$output)
+  eqd(r$output, p$output)
+  eqn(r$weights, p$weights)
+  eqn(r$scores, p$scores)
   testthat::expect_true(all(abs(rowSums(r$weights) - 1) < 1e-12))
 
   fp <- PY$grflash
@@ -1985,36 +2222,47 @@ test_that("attention family matches Python and FlashAttention is exact", {
                                   matrix(c(0.5, 1, 1, 0, -1, 0.5), 3, byrow = TRUE),
                                   matrix(c(1, 0, 1, 0, 1, 0, 0.5, 0.5, 0.5), 3,
                                          byrow = TRUE))
-  eqn(r$output, p$out); eqn(r$weights, p$W)
-  eqn(r$Q, p$Q); eqn(r$K, p$K); eqn(r$V, p$V)
+  eqn(r$output, p$out)
+  eqn(r$weights, p$W)
+  eqn(r$Q, p$Q)
+  eqn(r$K, p$K)
+  eqn(r$V, p$V)
 
   p <- PY$grmha
   r <- morie_geron_multi_head_attention(p$in_X, p$in_X, p$in_X, p$in_Wp,
                                         p$in_Wp * 0.5, p$in_Wp * 2, p$in_Wp, 2)
-  eqn(r$output, p$output); eqn(r$concat, p$concat)
-  eqi(r$d_head, p$d_head); eqn(r$head_outputs[[1]], p$h0)
+  eqn(r$output, p$output)
+  eqn(r$concat, p$concat)
+  eqi(r$d_head, p$d_head)
+  eqn(r$head_outputs[[1]], p$h0)
   eqn(r$attention_weights[[1]], p$w0)
 
   p <- PY$grflam
   r <- morie_geron_flamingo_cross_modal_attn(
     p$in_H, p$in_V, 0.4, list(WQ = p$in_Wq, WK = p$in_Wk, WV = p$in_Wv))
-  eqn(r$h_new, p$h); eqn(r$gate, p$gate); eqn(r$delta_norm, p$dn)
+  eqn(r$h_new, p$h)
+  eqn(r$gate, p$gate)
+  eqn(r$delta_norm, p$dn)
   r0 <- morie_geron_flamingo_cross_modal_attn(
     p$in_H, p$in_V, 0, list(WQ = p$in_Wq, WK = p$in_Wk, WV = p$in_Wv))
-  eqn(r0$h_new, p$h0); testthat::expect_true(r0$is_identity)
+  eqn(r0$h_new, p$h0)
+  testthat::expect_true(r0$is_identity)
   eqn(r0$h_new, p$in_H)
 
   p <- PY$grpio
   r <- morie_geron_perceiver_io(p$in_X, p$in_Z, p$in_O, n_iter = 2)
-  eqn(r$output, p$out); eqn(r$latent, p$lat)
+  eqn(r$output, p$out)
+  eqn(r$latent, p$lat)
   eqn(r$cross_weights[[1]], p$cw1)
   eqn(r$latent_self_weights[[2]], p$sw2)
-  eqn(r$output_weights, p$ow); eqn(r$complexity_ratio, p$cr)
+  eqn(r$output_weights, p$ow)
+  eqn(r$complexity_ratio, p$cr)
 
   p <- PY$grswin
   r <- morie_geron_swin_window_attention(p$in_X, 2, PY$grpvt$in_W,
                                          PY$grpvt$in_W * 0.5, PY$grpvt$in_W * 2)
-  eqn(r$output, p$out); eqi(r$n_windows, p$nw)
+  eqn(r$output, p$out)
+  eqi(r$n_windows, p$nw)
   eqn(r$window_weights[[1]], p$w0)
   r1 <- morie_geron_swin_window_attention(p$in_X, 2, PY$grpvt$in_W,
                                           PY$grpvt$in_W * 0.5, PY$grpvt$in_W * 2,
@@ -2024,8 +2272,10 @@ test_that("attention family matches Python and FlashAttention is exact", {
   p <- PY$grpvt
   r <- morie_geron_pyramid_vit_stage(p$in_X, p$in_W, p$in_W * 0.5, p$in_W * 2,
                                      reduction_ratio = 2)
-  eqn(r$output, p$out); eqn(r$weights, p$w)
-  eqi(r$reduced_tokens, p$rt); eqn(r$reduced_map, p$SR)
+  eqn(r$output, p$out)
+  eqn(r$weights, p$w)
+  eqi(r$reduced_tokens, p$rt)
+  eqn(r$reduced_map, p$SR)
   eqn(r$compression, p$comp)
 
   p <- PY$grteb
@@ -2033,14 +2283,18 @@ test_that("attention family matches Python and FlashAttention is exact", {
               WV = list(p$in_Wh1, p$in_Wh2), WO = p$in_WO)
   ffn <- list(W1 = p$in_Wf1, W2 = p$in_Wf2)
   r <- morie_geron_transformer_encoder_block(p$in_X, mha, ffn)
-  eqn(r$output, p$out); eqn(r$attention_output, p$att)
-  eqn(r$hidden, p$h); eqn(r$ffn_output, p$f)
+  eqn(r$output, p$out)
+  eqn(r$attention_output, p$att)
+  eqn(r$hidden, p$h)
+  eqn(r$ffn_output, p$f)
   eqn(r$attention_weights[[1]], p$w0)
 
   q <- PY$grtdb
   rd <- morie_geron_transformer_decoder_block(
     p$in_X, q$in_Enc, list(self = mha, cross = mha, ffn = ffn))
-  eqn(rd$output, q$out); eqn(rd$h1, q$h1); eqn(rd$h2, q$h2)
+  eqn(rd$output, q$out)
+  eqn(rd$h1, q$h1)
+  eqn(rd$h2, q$h2)
   eqn(rd$self_attention_weights[[1]], q$sw0)
   eqn(rd$cross_attention_weights[[1]], q$cw0)
   # causal mask: the first query attends to itself only
@@ -2048,53 +2302,72 @@ test_that("attention family matches Python and FlashAttention is exact", {
 
   p <- PY$grpe
   r <- morie_geron_sinusoidal_positional_encoding(5, 6)
-  eqn(r$encoding, p$PE); eqd(r$encoding, p$PE)
+  eqn(r$encoding, p$PE)
+  eqd(r$encoding, p$PE)
   eqn(r$wavelengths, p$wl)
   # independent route: every row has norm sqrt(d/2)
   testthat::expect_true(all(abs(sqrt(rowSums(r$encoding^2)) - sqrt(3)) < 1e-12))
 
   p <- PY$grvit
   r <- morie_geron_vit_patch_embedding(p$in_img, 2, p$in_E)
-  eqn(r$embeddings, p$Z); eqn(r$patches, p$P); eqi(r$n_patches, p$np)
+  eqn(r$embeddings, p$Z)
+  eqn(r$patches, p$P)
+  eqi(r$n_patches, p$np)
 })
 
 test_that("language-model losses and tokenizer scores match Python", {
   p <- PY$grgptl
   r <- morie_geron_gpt_autoregressive_loss(p$in_Z, c(0, 2, 1))
-  eqn(r$loss, p$loss); eqn(r$mean_loss, p$mean_loss)
-  eqn(r$perplexity, p$ppl); eqn(r$per_token_loss, p$per)
+  eqn(r$loss, p$loss)
+  eqn(r$mean_loss, p$mean_loss)
+  eqn(r$perplexity, p$ppl)
+  eqn(r$per_token_loss, p$per)
 
   p <- PY$grmlm
   r <- morie_geron_bert_mlm_loss(PY$grgptl$in_Z, c(0, 2, 1), c(TRUE, FALSE, TRUE))
-  eqn(r$loss, p$loss); eqn(r$mean_loss, p$mean); eqn(r$perplexity, p$ppl)
-  eqi(r$masked_positions, p$pos); eqn(r$mask_rate, p$rate)
+  eqn(r$loss, p$loss)
+  eqn(r$mean_loss, p$mean)
+  eqn(r$perplexity, p$ppl)
+  eqi(r$masked_positions, p$pos)
+  eqn(r$mask_rate, p$rate)
 
   p <- PY$grsft
   r <- morie_geron_sft_objective(PY$grgptl$in_Z, c(FALSE, TRUE, TRUE), c(0, 2, 1))
-  eqn(r$loss, p$loss); eqn(r$per_token, p$per); eqn(r$perplexity, p$ppl)
-  eqi(r$n_response_tokens, p$nrt); eqn(r$token_logprobs, p$tl)
+  eqn(r$loss, p$loss)
+  eqn(r$per_token, p$per)
+  eqn(r$perplexity, p$ppl)
+  eqi(r$n_response_tokens, p$nrt)
+  eqn(r$token_logprobs, p$tl)
 
   p <- PY$grnsp
   r <- morie_geron_bert_nsp_loss(matrix(c(1, 2, 0.5, -1, 0, 0), 3, byrow = TRUE),
                                  c(1, 0, 1))
-  eqn(r$loss, p$loss); eqn(r$per_pair, p$per); eqn(r$probabilities, p$p)
+  eqn(r$loss, p$loss)
+  eqn(r$per_pair, p$per)
+  eqn(r$probabilities, p$p)
   eqn(r$accuracy, p$acc)
   eqn(morie_geron_bert_nsp_loss(c(1.5, -0.5), c(1, 0))$loss, p$loss1d)
 
   p <- PY$grkdl
   r <- morie_geron_knowledge_distillation_loss(p$in_S, p$in_Tl, c(0, 2), 0.7, 2)
-  eqn(r$loss, p$loss); eqn(r$ce_hard, p$ce); eqn(r$kl_soft, p$soft)
+  eqn(r$loss, p$loss)
+  eqn(r$ce_hard, p$ce)
+  eqn(r$kl_soft, p$soft)
   eqn(r$kl_student_teacher, p$kl_st)
   eqn(r$kl_teacher_student, p$kl_ts)
-  eqn(r$teacher_entropy, p$ent); eqn(r$soft_targets, p$soft_targets)
+  eqn(r$teacher_entropy, p$ent)
+  eqn(r$soft_targets, p$soft_targets)
   # the two KL directions genuinely differ: the module uses the literal
   # student-first form and that is what enters the loss.
   testthat::expect_false(isTRUE(all.equal(p$kl_st, p$kl_ts)))
 
   p <- PY$grsnt
   r <- morie_geron_sentiment_binary(c(0, 2, 3, 1), p$in_E, c(1, 0.5), 0.1)
-  eqn(r$probability, p$p); eqi(r$label, p$lab); eqn(r$logit, p$logit)
-  eqn(r$pooled, p$pool); eqn(r$token_contributions, p$tc)
+  eqn(r$probability, p$p)
+  eqi(r$label, p$lab)
+  eqn(r$logit, p$logit)
+  eqn(r$pooled, p$pool)
+  eqn(r$token_contributions, p$tc)
   eqn(morie_geron_sentiment_binary(c(0, 2, 3, 1), p$in_E, c(1, 0.5), 0.1,
                                    pooling = "max")$probability, p$pmax)
 
@@ -2111,7 +2384,8 @@ test_that("language-model losses and tokenizer scores match Python", {
   p <- PY$grinc
   r <- morie_geron_in_context_learning(list(list("a", "1"), list("bb", "2")), "cc")
   testthat::expect_identical(r$prompt, p$prompt)
-  eqi(r$k_shot, p$k); eqi(r$prompt_chars, p$chars)
+  eqi(r$k_shot, p$k)
+  eqi(r$prompt_chars, p$chars)
   eqi(r$prompt_words, p$words)
 
   p <- PY$gredsq
@@ -2119,43 +2393,59 @@ test_that("language-model losses and tokenizer scores match Python", {
     function(x) c(sum(x), 1),
     function(yp, cc, t) as.numeric(yp) * 0.5 + cc[1] / t,
     c(1, 2, 3), 4)
-  eqn(r$outputs[[1]], p$o1); eqn(r$outputs[[4]], p$o4)
-  eqn(r$context, p$ctx); eqi(r$n_steps, p$ns)
+  eqn(r$outputs[[1]], p$o1)
+  eqn(r$outputs[[4]], p$o4)
+  eqn(r$context, p$ctx)
+  eqi(r$n_steps, p$ns)
 })
 
 test_that("optimizers, schedules and initializers match Python", {
   p <- PY$grmom
   r <- morie_geron_momentum_update(c(1, -2), c(0.5, 0.25), c(0.1, -0.1), 0.05, 0.8)
-  eqn(r$theta_new, p$theta); eqn(r$v_new, p$v); eqn(r$step, p$step)
+  eqn(r$theta_new, p$theta)
+  eqn(r$v_new, p$v)
+  eqn(r$step, p$step)
   eqn(r$terminal_speedup, p$speed)
 
   p <- PY$grnag
   r <- morie_geron_nesterov_accelerated_gradient(c(1, -1), function(t) 2 * t,
                                                  c(0, 0), 0.1, 0.9, n_steps = 3)
-  eqn(r$theta_new, p$theta); eqn(r$v_new, p$v); eqn(r$lookahead, p$look)
-  eqn(r$gradient, p$grad); eqn(r$path[[1]], p$p1); eqn(r$path[[3]], p$p3)
+  eqn(r$theta_new, p$theta)
+  eqn(r$v_new, p$v)
+  eqn(r$lookahead, p$look)
+  eqn(r$gradient, p$grad)
+  eqn(r$path[[1]], p$p1)
+  eqn(r$path[[3]], p$p3)
 
   p <- PY$grwdc
   r <- morie_geron_adamw_decoupled_weight_decay(c(1, -2), c(0.5, 0.25), c(0, 0),
                                                 c(0, 0), 3, 0.01, lam = 0.05)
-  eqn(r$theta_new, p$theta); eqn(r$m_new, p$m); eqn(r$s_new, p$s)
-  eqn(r$adam_step, p$ad); eqn(r$decay_step, p$dc); eqn(r$step, p$st)
+  eqn(r$theta_new, p$theta)
+  eqn(r$m_new, p$m)
+  eqn(r$s_new, p$s)
+  eqn(r$adam_step, p$ad)
+  eqn(r$decay_step, p$dc)
+  eqn(r$step, p$st)
 
   p <- PY$grlrco
   r <- morie_geron_lr_cosine_annealing(0.001, 0.1, 3, 10)
-  eqn(r$eta, p$eta); eqn(r$schedule, p$schedule)
+  eqn(r$eta, p$eta)
+  eqn(r$schedule, p$schedule)
   eqn(r$halfway_value, p$half)
   testthat::expect_true(r$is_monotone_decreasing)
   # independent route: the closed form, the endpoints and the midpoint
   steps <- 0:10
   eqn(r$schedule, 0.001 + 0.5 * (0.1 - 0.001) * (1 + cos(pi * steps / 10)))
-  eqn(r$schedule[1], 0.1); eqn(r$schedule[11], 0.001)
+  eqn(r$schedule[1], 0.1)
+  eqn(r$schedule[11], 0.001)
   eqn(r$schedule[6], r$halfway_value)
   testthat::expect_true(all(diff(r$schedule) <= 0))
 
   p <- PY$grlrex
   r <- morie_geron_lr_exponential_schedule(0.1, 0.9, 8)
-  eqn(r$eta, p$eta); eqn(r$schedule, p$schedule); eqn(r$half_life, p$half)
+  eqn(r$eta, p$eta)
+  eqn(r$schedule, p$schedule)
+  eqn(r$half_life, p$half)
   eqn(r$fraction_remaining, p$frac)
   testthat::expect_true(r$is_monotone_decreasing)
   eqn(r$schedule, 0.1 * 0.9^(0:8))
@@ -2167,8 +2457,11 @@ test_that("optimizers, schedules and initializers match Python", {
 
   p <- PY$grhei
   r <- morie_geron_he_init(4, 6, seed = 17)
-  eqn(r$W, p$W); eqd(r$W, p$W); eqn(r$target_variance, p$target)
-  eqn(r$achieved_variance, p$achieved); eqn(r$std, p$std)
+  eqn(r$W, p$W)
+  eqd(r$W, p$W)
+  eqn(r$target_variance, p$target)
+  eqn(r$achieved_variance, p$achieved)
+  eqn(r$std, p$std)
   big <- morie_geron_he_init(60, 60, seed = 2)
   eqn(big$achieved_variance, p$big_achieved)
   eqn(big$achieved_mean, p$big_mean)
@@ -2180,11 +2473,14 @@ test_that("optimizers, schedules and initializers match Python", {
 
   p <- PY$grxvi
   r <- morie_geron_glorot_xavier_init(3, 5, "normal", seed = 19)
-  eqn(r$weights, p$W); eqd(r$weights, p$W)
-  eqn(r$target_variance, p$t); eqn(r$achieved_variance, p$a)
+  eqn(r$weights, p$W)
+  eqd(r$weights, p$W)
+  eqn(r$target_variance, p$t)
+  eqn(r$achieved_variance, p$a)
   eqn(r$scale, p$sc)
   ru <- morie_geron_glorot_xavier_init(3, 5, "uniform", seed = 19)
-  eqn(ru$weights, p$Wu); eqn(ru$scale, p$scu)
+  eqn(ru$weights, p$Wu)
+  eqn(ru$scale, p$scu)
   testthat::expect_true(all(abs(ru$weights) <= p$scu))
   bign <- morie_geron_glorot_xavier_init(50, 50, "normal", seed = 8)
   eqn(bign$achieved_variance, p$ba)
@@ -2193,8 +2489,10 @@ test_that("optimizers, schedules and initializers match Python", {
 
   p <- PY$grgcl
   r <- morie_geron_gradient_clipping_grgcl(p$in_g, 5)
-  eqn(r$clipped, p$clipped); eqn(r$total_norm, p$total_norm)
-  eqn(r$clipped_norm, p$clipped_norm); eqn(r$clip_coef, p$clip_coef)
+  eqn(r$clipped, p$clipped)
+  eqn(r$total_norm, p$total_norm)
+  eqn(r$clipped_norm, p$clipped_norm)
+  eqn(r$clip_coef, p$clip_coef)
   eqn(r$cosine_with_original, p$cos)
   testthat::expect_identical(r$was_clipped, p$was)
   # independent route: norm capped and direction untouched
@@ -2206,41 +2504,53 @@ test_that("optimizers, schedules and initializers match Python", {
 
   p <- PY$grmnr
   r <- morie_geron_max_norm_regularization(p$in_W, 2, axis = 1)
-  eqn(r$W_new, p$W1); eqn(r$norms_before, p$before)
-  eqn(r$norms_after, p$after); eqi(r$rows_projected, p$rows)
+  eqn(r$W_new, p$W1)
+  eqn(r$norms_before, p$before)
+  eqn(r$norms_after, p$after)
+  eqi(r$rows_projected, p$rows)
   testthat::expect_true(all(r$norms_after <= 2 * (1 + 1e-9)))
   r0 <- morie_geron_max_norm_regularization(p$in_W, 2, axis = 0)
-  eqn(r0$W_new, p$W0); eqn(r0$norms_after, p$after0)
+  eqn(r0$W_new, p$W0)
+  eqn(r0$norms_after, p$after0)
 
   p <- PY$grdro
   r <- morie_geron_dropout(matrix(c(1, 2, 3, 4, 5, 6), 2, byrow = TRUE), 0.4,
                            seed = 3)
-  eqn(r$output, p$output); eqn(r$mask, p$mask)
+  eqn(r$output, p$output)
+  eqn(r$mask, p$mask)
   eqn(r$fraction_dropped, p$fraction_dropped)
   eqn(r$expectation_ratio, p$expectation_ratio)
 
   p <- PY$grdlm
   r <- morie_geron_dataloader_minibatch(10, 3, shuffle = TRUE, seed = 7)
-  eqi(r$permutation, p$permutation); eqi(r$batch_sizes, p$batch_sizes)
-  eqi(r$batches[[1]], p$b1); eqi(r$batches[[4]], p$b4)
+  eqi(r$permutation, p$permutation)
+  eqi(r$batch_sizes, p$batch_sizes)
+  eqi(r$batches[[1]], p$b1)
+  eqi(r$batches[[4]], p$b4)
   testthat::expect_true(r$covers_all)
 
   p <- PY$grkfd
   r <- morie_geron_kfold_cv(11, 4)
-  eqi(r$fold_sizes, p$sizes); eqi(r$val_folds[[1]], p$f1)
-  eqi(r$val_folds[[4]], p$f4); eqi(r$splits[[1]]$train, p$tr1)
+  eqi(r$fold_sizes, p$sizes)
+  eqi(r$val_folds[[1]], p$f1)
+  eqi(r$val_folds[[4]], p$f4)
+  eqi(r$splits[[1]]$train, p$tr1)
   testthat::expect_true(r$each_used_once)
   rs <- morie_geron_kfold_cv(11, 4, shuffle = TRUE, seed = 4)
-  eqi(rs$val_folds[[1]], p$sh_f1); eqi(rs$val_folds[[4]], p$sh_f4)
+  eqi(rs$val_folds[[1]], p$sh_f1)
+  eqi(rs$val_folds[[4]], p$sh_f4)
 
   p <- PY$grgs
   fs2 <- function(Xtr, ytr, Xva, yva, params)
     -mean((params$a * Xva[, 1] + params$c - yva)^2)
   r <- morie_geron_grid_search_cv(p$in_X, p$in_y,
                                   list(a = c(1, 3), c = c(0, 1)), 3, fs2)
-  eqn(r$best_params$a, p$ba); eqn(r$best_params$c, p$bc)
-  eqn(r$best_score, p$bs); eqi(r$best_index, p$bi)
-  eqn(r$mean_scores, p$mean); eqn(r$std_scores, p$sd)
+  eqn(r$best_params$a, p$ba)
+  eqn(r$best_params$c, p$bc)
+  eqn(r$best_score, p$bs)
+  eqi(r$best_index, p$bi)
+  eqn(r$mean_scores, p$mean)
+  eqn(r$std_scores, p$sd)
   eqi(r$n_fits, p$nf)
 
   p <- PY$grrnd
@@ -2253,7 +2563,8 @@ test_that("optimizers, schedules and initializers match Python", {
                                         4, 3, fit_score = fs, seed = 31)
   eqn(r$best_params$a, p$best_a)
   testthat::expect_identical(r$best_params$b, p$best_b)
-  eqn(r$best_score, p$best); eqi(r$fold_sizes, p$folds)
+  eqn(r$best_score, p$best)
+  eqi(r$fold_sizes, p$folds)
   eqn(r$results[[1]]$params$a, p$m0a)
   testthat::expect_identical(r$results[[1]]$params$b, p$m0b)
   eqn(r$results[[1]]$mean_score, p$m0)
@@ -2264,7 +2575,8 @@ test_that("optimizers, schedules and initializers match Python", {
 test_that("autodiff routines match Python", {
   p <- PY$grfad
   r <- morie_geron_forward_mode_autodiff(1.3, 1, function(z) (z * z + 3) / (z + 1))
-  eqn(r$value, p$value); eqn(r$derivative, p$derivative)
+  eqn(r$value, p$value)
+  eqn(r$derivative, p$derivative)
   eqn(r$finite_difference_check, p$fd, tol = 1e-6)
   testthat::expect_lt(r$check_abs_error, 1e-5)
   # independent route: exp/log/sqrt/trig on the dual class
@@ -2276,8 +2588,10 @@ test_that("autodiff routines match Python", {
   p <- PY$grrad
   g <- list(L = list(a = 2, b = -1), a = list(x = 3), b = list(x = 0.5, y = 1))
   r <- morie_geron_reverse_mode_autodiff(g, 1)
-  eqn(r$gradients$x, p$gx); eqn(r$gradients$y, p$gy)
-  eqn(r$gradients$a, p$ga); eqn(r$gradients$b, p$gb)
+  eqn(r$gradients$x, p$gx)
+  eqn(r$gradients$y, p$gy)
+  eqn(r$gradients$a, p$ga)
+  eqn(r$gradients$b, p$gb)
   eqn(r$gradients$L, p$gL)
   testthat::expect_identical(r$output, p$out)
   # fan-out accumulates: dL/dx = 2*3 + (-1)*0.5
@@ -2285,8 +2599,10 @@ test_that("autodiff routines match Python", {
 
   p <- PY$grnud
   r <- morie_geron_numerical_differentiation(function(t) sin(t)^2, 0.7)
-  eqn(r$derivative, p$d); eqn(r$derivative_2h, p$d2)
-  eqn(r$richardson, p$rich); eqn(r$step_error, p$err)
+  eqn(r$derivative, p$d)
+  eqn(r$derivative_2h, p$d2)
+  eqn(r$richardson, p$rich)
+  eqn(r$step_error, p$err)
   eqn(r$derivative, sin(2 * 0.7), tol = 1e-8)
   eqn(morie_geron_numerical_differentiation(function(v) sum(v^3),
                                             c(1, -2))$derivative, p$vec)
@@ -2303,8 +2619,10 @@ test_that("autodiff routines match Python", {
 test_that("autoencoder, VAE and GAN objectives match Python", {
   p <- PY$grkldg
   r <- morie_geron_kl_divergence_gaussian(p$in_mu, p$in_lv)
-  eqn(r$kl, p$kl); eqn(r$per_dimension, p$per_dim)
-  eqn(r$per_sample, p$per_sample); eqi(r$n_active_dims, p$active)
+  eqn(r$kl, p$kl)
+  eqn(r$per_dimension, p$per_dim)
+  eqn(r$per_sample, p$per_sample)
+  eqi(r$n_active_dims, p$active)
   eqn(morie_geron_kl_divergence_gaussian(matrix(0, 1, 2), matrix(0, 1, 2))$kl,
       p$prior_kl)
   eqn(morie_geron_kl_divergence_gaussian(matrix(0, 1, 2), matrix(0, 1, 2))$kl, 0)
@@ -2313,8 +2631,11 @@ test_that("autoencoder, VAE and GAN objectives match Python", {
   r <- morie_geron_reparameterization_trick(matrix(c(0.5, -1, 2, 0), 2, byrow = TRUE),
                                             matrix(c(0.2, -0.4, 0, 0.1), 2,
                                                    byrow = TRUE), seed = 21)
-  eqn(r$z, p$z); eqn(r$sigma, p$sigma); eqn(r$eps, p$eps)
-  eqn(r$dz_dlogvar, p$dzdlv); eqn(r$sample_mean, p$sm)
+  eqn(r$z, p$z)
+  eqn(r$sigma, p$sigma)
+  eqn(r$eps, p$eps)
+  eqn(r$dz_dlogvar, p$dzdlv)
+  eqn(r$sample_mean, p$sm)
   eqn(r$sample_variance, p$sv)
 
   p <- PY$grvae
@@ -2323,10 +2644,13 @@ test_that("autoencoder, VAE and GAN objectives match Python", {
   lv <- matrix(c(0.1, 0, -0.2, 0.1), 2, byrow = TRUE)
   rc <- matrix(c(0.9, 0.1, 0.4, 0.8), 2, byrow = TRUE)
   r <- morie_geron_vae_elbo(x, mu, lv, rc)
-  eqn(r$elbo, p$elbo); eqn(r$reconstruction_term, p$rec); eqn(r$kl, p$kl)
+  eqn(r$elbo, p$elbo)
+  eqn(r$reconstruction_term, p$rec)
+  eqn(r$kl, p$kl)
   eqn(r$kl_per_dim, p$kd)
   rb <- morie_geron_vae_elbo(x, mu, lv, rc, likelihood = "bernoulli", beta = 0.5)
-  eqn(rb$elbo, p$belbo); eqn(rb$reconstruction_term, p$brec)
+  eqn(rb$elbo, p$belbo)
+  eqn(rb$reconstruction_term, p$brec)
 
   p <- PY$grsae
   r <- morie_geron_sparse_autoencoder(matrix(c(1, 2, 3, 4), 2, byrow = TRUE),
@@ -2334,22 +2658,28 @@ test_that("autoencoder, VAE and GAN objectives match Python", {
                                              byrow = TRUE),
                                       matrix(c(1.1, 1.8, 2.9, 4.2), 2, byrow = TRUE),
                                       lam = 0.01)
-  eqn(r$loss, p$loss); eqn(r$reconstruction_loss, p$rec)
-  eqn(r$l1_penalty, p$l1); eqn(r$sparsity, p$sp)
+  eqn(r$loss, p$loss)
+  eqn(r$reconstruction_loss, p$rec)
+  eqn(r$l1_penalty, p$l1)
+  eqn(r$sparsity, p$sp)
   eqn(r$mean_activation, p$ma)
 
   p <- PY$grstae
   r <- morie_geron_stacked_autoencoder(
     matrix(c(1, 2, 3, 4, 0, -1, 1, 0.5), 2, byrow = TRUE), list(p$in_W),
     activation = "tanh")
-  eqn(r$reconstruction, p$rec); eqn(r$code, p$code)
-  eqn(r$reconstruction_error, p$err); eqn(r$compression, p$comp)
+  eqn(r$reconstruction, p$rec)
+  eqn(r$code, p$code)
+  eqn(r$reconstruction_error, p$err)
+  eqn(r$compression, p$comp)
 
   p <- PY$grgan
   r <- morie_geron_gan_minimax(NULL, NULL, p$in_dr, p$in_df)
-  eqn(r$value, p$value); eqn(r$d_loss, p$d_loss)
+  eqn(r$value, p$value)
+  eqn(r$d_loss, p$d_loss)
   eqn(r$g_loss_nonsaturating, p$g_nonsat)
-  eqn(r$g_loss_saturating, p$g_sat); eqn(r$d_accuracy, p$d_acc)
+  eqn(r$g_loss_saturating, p$g_sat)
+  eqn(r$d_accuracy, p$d_acc)
   # equilibrium route: D == 0.5 everywhere gives V = -2 log 2
   eq <- morie_geron_gan_minimax(NULL, NULL, rep(0.5, 4), rep(0.5, 4))
   eqn(eq$value, -2 * log(2))
@@ -2359,31 +2689,45 @@ test_that("autoencoder, VAE and GAN objectives match Python", {
 test_that("quantization, pruning and precision routines match Python", {
   p <- PY$grq8
   r <- morie_geron_int8_quantization(p$in_x)
-  eqn(r$q, p$q); eqn(r$scale, p$scale); eqn(r$dequantized, p$deq)
-  eqn(r$max_abs_error, p$err); eqn(r$snr_db, p$snr)
+  eqn(r$q, p$q)
+  eqn(r$scale, p$scale)
+  eqn(r$dequantized, p$deq)
+  eqn(r$max_abs_error, p$err)
+  eqn(r$snr_db, p$snr)
   testthat::expect_equal(r$dequantized[4], 0)
 
   p <- PY$grqat
   r <- morie_geron_quantization_aware_training(c(0.5, -1.25, 40), 0.25, bits = 8)
-  eqn(r$y, p$y); eqn(r$q, p$q); eqn(r$ste_mask, p$mask)
-  eqn(r$grad_x, p$grad); eqn(r$clipped_fraction, p$cf)
+  eqn(r$y, p$y)
+  eqn(r$q, p$q)
+  eqn(r$ste_mask, p$mask)
+  eqn(r$grad_x, p$grad)
+  eqn(r$clipped_fraction, p$cf)
 
   p <- PY$grdyq
   r <- morie_geron_dynamic_quantization(p$in_x, p$in_w)
-  eqn(r$output, p$output); eqn(r$reference, p$reference)
-  eqn(r$scale_x, p$scale_x); eqn(r$scale_w, p$scale_w)
-  eqn(r$x_quantized, p$x_quantized); eqn(r$max_abs_error, p$max_abs_error)
+  eqn(r$output, p$output)
+  eqn(r$reference, p$reference)
+  eqn(r$scale_x, p$scale_x)
+  eqn(r$scale_w, p$scale_w)
+  eqn(r$x_quantized, p$x_quantized)
+  eqn(r$max_abs_error, p$max_abs_error)
 
   p <- PY$grptq
   layers <- list(function(a) a * 2, function(a) pmax(a, 0))
   r <- morie_geron_static_ptq(layers, p$in_cal, bits = 8)
-  eqn(r$scales, p$scales); eqn(r$activation_ranges, p$ranges)
-  eqn(r$quantized_output, p$q); eqn(r$max_abs_error, p$err)
+  eqn(r$scales, p$scales)
+  eqn(r$activation_ranges, p$ranges)
+  eqn(r$quantized_output, p$q)
+  eqn(r$max_abs_error, p$err)
 
   p <- PY$grprn
   r <- morie_geron_weight_pruning(p$in_W, 0.5)
-  eqn(r$W_pruned, p$P); eqn(r$mask, p$mask); eqn(r$threshold, p$thr)
-  eqn(r$achieved_sparsity, p$ach); eqi(r$n_pruned, p$np)
+  eqn(r$W_pruned, p$P)
+  eqn(r$mask, p$mask)
+  eqn(r$threshold, p$thr)
+  eqn(r$achieved_sparsity, p$ach)
+  eqi(r$n_pruned, p$np)
   eqn(r$norm_retained, p$nr)
 
   p <- PY$grfp6
@@ -2391,38 +2735,53 @@ test_that("quantization, pruning and precision routines match Python", {
   eqn(r$loss_scaled, p$loss_scaled)
   testthat::expect_identical(r$overflow, p$overflow)
   eqn(r$scaled_gradients, p$scaled)
-  eqi(r$n_underflow_before, p$nb); eqi(r$n_underflow_after, p$na)
+  eqi(r$n_underflow_before, p$nb)
+  eqi(r$n_underflow_after, p$na)
 
   p <- PY$grkvc
   r <- morie_geron_kv_cache_compression(2048, 32, 32, 128, bits = 8,
                                         batch_size = 2)
-  eqn(r$cache_bytes, p$bytes); eqn(r$megabytes, p$mb)
-  eqn(r$baseline_bytes, p$base); eqn(r$compression_ratio, p$ratio)
-  eqn(r$bytes_per_token, p$bpt); eqn(r$n_values, p$nv)
+  eqn(r$cache_bytes, p$bytes)
+  eqn(r$megabytes, p$mb)
+  eqn(r$baseline_bytes, p$base)
+  eqn(r$compression_ratio, p$ratio)
+  eqn(r$bytes_per_token, p$bpt)
+  eqn(r$n_values, p$nv)
 })
 
 test_that("detection, overfitting and misc routines match Python", {
   p <- PY$gryol
   r <- morie_geron_yolo_grid_loss(p$in_P, p$in_T)
-  eqn(r$loss, p$loss); eqn(r$loss_coord, p$lc); eqn(r$loss_obj, p$lo)
-  eqn(r$loss_noobj, p$ln); eqn(r$loss_class, p$lk)
+  eqn(r$loss, p$loss)
+  eqn(r$loss_coord, p$lc)
+  eqn(r$loss_obj, p$lo)
+  eqn(r$loss_noobj, p$ln)
+  eqn(r$loss_class, p$lk)
   eqi(r$n_objects, p$no)
   eqn(r$loss, r$loss_coord + r$loss_obj + r$loss_noobj + r$loss_class)
 
   p <- PY$groft
   r <- morie_geron_overfitting_gap(c(0.5, 0.7, 0.9, 0.95),
                                    c(0.5, 0.72, 0.8, 0.75))
-  eqn(r$gap, p$gap); eqn(r$final_gap, p$final); eqn(r$max_gap, p$max)
-  eqi(r$max_gap_epoch, p$mge); eqi(r$best_val_epoch, p$bve)
+  eqn(r$gap, p$gap)
+  eqn(r$final_gap, p$final)
+  eqn(r$max_gap, p$max)
+  eqi(r$max_gap_epoch, p$mge)
+  eqi(r$best_val_epoch, p$bve)
   eqi(r$overfitting_epochs, p$oe)
 
   p <- PY$grmae
   r <- morie_geron_mae_grmae(c(1, 2, 3, 4), c(1.5, 1, 3.5, 2))
-  eqn(r$mae, p$mae); eqn(r$rmse, p$rmse); eqn(r$max_error, p$max)
-  eqn(r$median_absolute_error, p$med); eqn(r$residuals, p$res)
+  eqn(r$mae, p$mae)
+  eqn(r$rmse, p$rmse)
+  eqn(r$max_error, p$max)
+  eqn(r$median_absolute_error, p$med)
+  eqn(r$residuals, p$res)
 
   p <- PY$grrmse
   r <- morie_geron_rmse_grrmse(c(1, 2, 3), c(1.5, 1, 3.5))
-  eqn(r$rmse, p$rmse); eqn(r$mse, p$mse); eqn(r$mae, p$mae)
+  eqn(r$rmse, p$rmse)
+  eqn(r$mse, p$mse)
+  eqn(r$mae, p$mae)
   eqn(r$max_error, p$max)
 })

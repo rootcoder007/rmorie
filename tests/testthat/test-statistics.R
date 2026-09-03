@@ -38,14 +38,16 @@ test_that("one_sample_ttest CI brackets the mean", {
 })
 
 test_that("two_sample_ttest detects mean shift", {
-  set.seed(1); s <- make_two_samples(200)
+  set.seed(1)
+  s <- make_two_samples(200)
   res <- two_sample_ttest(s$x, s$y, equal_var = TRUE)
   expect_s3_class(res, "morie_test_result")
   expect_lt(res$p_value, 0.05)
 })
 
 test_that("welch_ttest agrees roughly with two_sample equal_var=FALSE", {
-  set.seed(1); s <- make_two_samples(80)
+  set.seed(1)
+  s <- make_two_samples(80)
   a <- welch_ttest(s$x, s$y)
   b <- two_sample_ttest(s$x, s$y, equal_var = FALSE)
   expect_equal(a$test_statistic, b$test_statistic, tolerance = 1e-6)
@@ -58,7 +60,8 @@ test_that("paired_ttest requires equal-length input", {
 
 test_that("paired_ttest returns finite p", {
   set.seed(1)
-  x <- rnorm(40); y <- x + rnorm(40, sd = 0.5)
+  x <- rnorm(40)
+  y <- x + rnorm(40, sd = 0.5)
   res <- paired_ttest(x, y)
   expect_true(is.finite(res$p_value))
 })
@@ -151,7 +154,9 @@ test_that("mcnemar_test exact branch works", {
 
 test_that("cochrans_q runs on 3 binary vectors", {
   set.seed(1)
-  v1 <- rbinom(30, 1, 0.4); v2 <- rbinom(30, 1, 0.5); v3 <- rbinom(30, 1, 0.6)
+  v1 <- rbinom(30, 1, 0.4)
+  v2 <- rbinom(30, 1, 0.5)
+  v3 <- rbinom(30, 1, 0.6)
   res <- cochrans_q(v1, v2, v3)
   expect_s3_class(res, "morie_test_result")
   expect_equal(res$df, 2)
@@ -167,7 +172,8 @@ test_that("cochrans_q rejects unequal lengths", {
 
 test_that("pearson_correlation recovers strong r ~ 0.9", {
   set.seed(1)
-  x <- rnorm(200); y <- 0.9 * x + 0.3 * rnorm(200)
+  x <- rnorm(200)
+  y <- 0.9 * x + 0.3 * rnorm(200)
   res <- pearson_correlation(x, y)
   expect_gt(res$estimate, 0.8)
   expect_lt(res$ci_lower, res$ci_upper)
@@ -175,7 +181,8 @@ test_that("pearson_correlation recovers strong r ~ 0.9", {
 
 test_that("spearman_correlation runs and returns rho", {
   set.seed(1)
-  x <- runif(80); y <- x + runif(80, -0.1, 0.1)
+  x <- runif(80)
+  y <- x + runif(80, -0.1, 0.1)
   res <- spearman_correlation(x, y)
   expect_gt(res$estimate, 0.5)
 })
@@ -192,21 +199,26 @@ test_that("point_biserial_correlation rejects non-binary", {
 
 test_that("point_biserial_correlation runs on synthetic binary/continuous", {
   set.seed(1)
-  b <- rbinom(60, 1, 0.5); c <- rnorm(60) + b
+  b <- rbinom(60, 1, 0.5)
+  c <- rnorm(60) + b
   res <- point_biserial_correlation(b, c)
   expect_true(is.finite(res$estimate))
 })
 
 test_that("partial_correlation handles single covariate vector", {
   set.seed(1)
-  x <- rnorm(80); y <- 0.5 * x + rnorm(80); z <- rnorm(80)
+  x <- rnorm(80)
+  y <- 0.5 * x + rnorm(80)
+  z <- rnorm(80)
   res <- partial_correlation(x, y, z)
   expect_true(is.finite(res$estimate))
 })
 
 test_that("semi_partial_correlation runs", {
   set.seed(1)
-  x <- rnorm(60); y <- rnorm(60); z <- rnorm(60)
+  x <- rnorm(60)
+  y <- rnorm(60)
+  z <- rnorm(60)
   res <- semi_partial_correlation(x, y, z)
   expect_s3_class(res, "morie_test_result")
 })
@@ -216,7 +228,8 @@ test_that("semi_partial_correlation runs", {
 # ---------------------------------------------------------------------------
 
 test_that("mann_whitney_u runs and reports rank biserial", {
-  set.seed(1); s <- make_two_samples(60)
+  set.seed(1)
+  s <- make_two_samples(60)
   res <- mann_whitney_u(s$x, s$y)
   expect_true("rank_biserial" %in% names(res$extra))
 })
@@ -389,13 +402,15 @@ test_that("auto_test paired requires equal-length input", {
 
 test_that("auto_test paired routes to a paired test", {
   set.seed(1)
-  x <- rnorm(40); y <- x + rnorm(40, sd = 0.5)
+  x <- rnorm(40)
+  y <- x + rnorm(40, sd = 0.5)
   res <- rmorie::auto_test(x, y, paired = TRUE)
   expect_true(grepl("Paired|Wilcoxon", res$method))
 })
 
 test_that("auto_test unpaired routes to either t-test or Mann-Whitney", {
-  set.seed(1); s <- make_two_samples(80)
+  set.seed(1)
+  s <- make_two_samples(80)
   res <- rmorie::auto_test(s$x, s$y)
   expect_true(is.finite(res$p_value))
 })

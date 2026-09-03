@@ -17,7 +17,7 @@ List with \code{merges}, \code{vocab}, \code{splits}, \code{merge_counts},
 }
 \description{
 Ties are broken by the LEXICOGRAPHICALLY SMALLEST pair -- note this is
-a different rule from \code{\link[=morie_geron_bpe_tokenizer]{morie_geron_bpe_tokenizer()}}, which uses first
+a different rule from \code{morie_geron_bpe_tokenizer()}, which uses first
 appearance; both are deterministic, and they can disagree. Merging
 stops early when no adjacent pair occurs more than once.
 }

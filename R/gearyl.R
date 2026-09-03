@@ -11,7 +11,10 @@
 #' @param W See Usage.
 #' @param scale See Usage.
 #' @return List with ``local``, ``global_c``, ``z``, ``n``.
-#' @references Anselin (2019), A Local Indicator of Multivariate Spatial Association: Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented by spdep::localC, the reference implementation.
+#' @references Anselin (2019), A Local Indicator of Multivariate Spatial Association:
+#' Extending Geary's c, Geographical Analysis 51:133-150. Paywalled; the univariate form
+#' c_i = sum_j w_ij (x_i - x_j)^2 and the standardise-first convention are as documented
+#' by spdep::localC, the reference implementation.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

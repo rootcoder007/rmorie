@@ -50,6 +50,10 @@ Trmwgt <- function(weights, quantile = 0.99) {
 #' @param w A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .trmwgt_cv(w = x)
+#' res
 .trmwgt_cv <- function(w) {
   n <- length(w)
   m <- sum(w) / n

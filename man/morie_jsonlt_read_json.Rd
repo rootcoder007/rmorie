@@ -14,7 +14,7 @@ morie_jsonlt_write_json(x, path, ...)
 
 \item{simplifyVector}{as in jsonlite (\code{FALSE} by default for files).}
 
-\item{...}{options of \code{\link[=morie_jsonlt_from_json]{morie_jsonlt_from_json()}} / \code{\link[=morie_jsonlt_to_json]{morie_jsonlt_to_json()}}.}
+\item{...}{options of \code{morie_jsonlt_from_json()} / \code{morie_jsonlt_to_json()}.}
 
 \item{x}{object to write.}
 }

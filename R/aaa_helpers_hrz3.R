@@ -30,6 +30,10 @@ NULL
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hrz3_u01(v = x)
+#' res
 .hrz3_u01 <- function(v) {
   v <- as.numeric(v)
   n <- length(v)
@@ -61,7 +65,8 @@ NULL
 # Gaussian kernel matrix K((a_i - b_j)/h).
 #' Gaussian kernel matrix K((a_i - b_j)/h)
 #'
-#' A step of the helpers_hrz3 implementation. Called by \code{.hrz3_fxw_grid}, \code{Hrznpiv}, \code{Hrzplrq} and 1 others in the module.
+#' A step of the helpers_hrz3 implementation. Called by \code{.hrz3_fxw_grid},
+#' \code{Hrznpiv}, \code{Hrzplrq} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -136,6 +141,10 @@ NULL
 #' @param tau Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hrz3_wquant(v = x, w = x, tau = 0.5)
+#' res
 .hrz3_wquant <- function(v, w, tau) {
   v <- as.numeric(v)
   w <- as.numeric(w)
@@ -176,6 +185,11 @@ NULL
 #' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{delta}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .hrz3_ade(X = x, y = y, h = 0.5)
+#' res
 .hrz3_ade <- function(X, y, h) {
   X <- if (is.null(dim(X))) matrix(as.numeric(X), ncol = 1L) else as.matrix(X)
   y <- as.numeric(y)
@@ -213,6 +227,11 @@ NULL
 #' @param h Passed to \code{.hrz3_ade}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .hrz3_index_dir(X = x, y = y, h = 0.5)
+#' res
 .hrz3_index_dir <- function(X, y, h) {
   d <- .hrz3_ade(X, y, h)
   lead <- d[1L]
@@ -241,6 +260,9 @@ NULL
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .hrz3_bw01(n = 3L)
+#' res
 .hrz3_bw01 <- function(n) {
   n <- as.integer(n)
   if (n < 2L) stop(sprintf("need at least 2 observations, got %d.", n))

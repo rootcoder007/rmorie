@@ -19,7 +19,10 @@ lcg_fixture <- function(n = 300L, seed = 20260728) {
     s <<- (1664525 * s + 1013904223) %% 4294967296
     (s + 0.5) / 4294967296
   }
-  w1 <- numeric(n); w2 <- numeric(n); a <- numeric(n); y <- numeric(n)
+  w1 <- numeric(n)
+  w2 <- numeric(n)
+  a <- numeric(n)
+  y <- numeric(n)
   for (i in seq_len(n)) {
     w1[i] <- 2 * nxt() - 1
     w2[i] <- 2 * nxt() - 1

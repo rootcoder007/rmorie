@@ -13,7 +13,8 @@
 # argmax with the lowest index winning ties (Python _greedy)
 #' Argmax with the lowest index winning ties (Python _greedy)
 #'
-#' A step of the qlearn_native implementation. Called by \code{.mor_rl_eps}, \code{.mor_rl_out}, \code{morie_ddqn} and 1 others in the module.
+#' A step of the qlearn_native implementation. Called by \code{.mor_rl_eps},
+#' \code{.mor_rl_out}, \code{morie_ddqn} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -72,7 +73,8 @@
 
 #' .mor_rl_terminal
 #'
-#' A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}.
+#' A step of the qlearn_native implementation. Called by \code{morie_ddqn},
+#' \code{morie_qlearn}, \code{morie_sarsa}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -83,7 +85,8 @@
 
 #' .mor_rl_out
 #'
-#' A step of the qlearn_native implementation. Called by \code{morie_ddqn}, \code{morie_qlearn}, \code{morie_sarsa}.
+#' A step of the qlearn_native implementation. Called by \code{morie_ddqn},
+#' \code{morie_qlearn}, \code{morie_sarsa}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

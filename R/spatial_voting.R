@@ -1876,7 +1876,8 @@ morie_spatial_voting_ordinal_irt <- function(Y, n_dims = 1L,
 #'   Estimation via Markov Chain Monte Carlo for the U.S. Supreme Court,
 #'   1953-1999." *Political Analysis*, 10(2).
 #' @examples \donttest{morie_spatial_voting_dynamic_irt(matrix(0, 4, 4), 1:4)}
-#' @param time_periods Integer vector of period indices (one per roll call) for the dynamic-IRT random-walk prior on ideal points.
+#' @param time_periods Integer vector of period indices (one per roll call) for the
+#' dynamic-IRT random-walk prior on ideal points.
 #' @param burn_in Integer; MCMC burn-in iterations.
 #' @export
 morie_spatial_voting_dynamic_irt <- function(votes, time_periods,

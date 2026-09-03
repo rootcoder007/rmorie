@@ -88,7 +88,8 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #'
 #' @param compounds Iterated over elementwise, with \code{lapply}.
 #' @param constraint Compared against \code{"reference"}. Defaults to \code{"reference"}.
-#' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns}, \code{constraint}, \code{n_positions}, \code{reference}.
+#' @return A list with \code{matrix}, \code{names}, \code{groups}, \code{columns},
+#' \code{constraint}, \code{n_positions}, \code{reference}.
 #' @export
 .frwil_design_matrix <- function(compounds, constraint = "reference") {
   if (!(constraint %in% CONSTRAINTS)) {
@@ -156,6 +157,12 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' @param ridge Defaults to \code{0}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .frwil_lstsq(M = X, y = y)
+#' res
 .frwil_lstsq <- function(M, y, ridge = 0.0) {
   n <- nrow(M)
   p <- ncol(M)
@@ -218,7 +225,10 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' @param compounds Passed to \code{.frwil_prep}.
 #' @param activity Passed to \code{.frwil_prep}.
 #' @param constraint Compared against \code{"sum_zero"}. Defaults to \code{"reference"}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared}, \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences}, \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{names}, \code{beta},
+#' \code{fitted}, \code{residuals}, \code{rss}, \code{tss}, \code{r_squared},
+#' \code{sigma}, \code{df_residual}, \code{n_parameters}, \code{occurrences},
+#' \code{groups}, \code{reference}, \code{constraint}, \code{n_positions}, \code{method}.
 #' @export
 .frwil_free_wilson <- function(compounds, activity, constraint = "reference") {
   prep <- .frwil_prep(compounds, activity)
@@ -288,7 +298,8 @@ CONSTRAINTS <- c("reference", "sum_zero")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit A list; the body reads \code{$coefficients}, \code{$groups}, \code{$n_positions} from it.
+#' @param fit A list; the body reads \code{$coefficients}, \code{$groups},
+#' \code{$n_positions} from it.
 #' @param compound Passed to \code{unlist}.
 #' @return The value of \code{total}, as built in the body.
 #' @export

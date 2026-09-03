@@ -77,7 +77,7 @@
 #' @param slope Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @return One of two values, depending on the branch taken.
 #' @export
-.ngcf_leaky <- function(x, slope=0.2) {
+.ngcf_leaky <- function(x, slope = 0.2) {
   if (x >= 0.0) x else slope * x
 }
 
@@ -114,7 +114,7 @@ ngcf_laplacian_coefficient <- function(n_u, n_i) {
 #' @param affinity A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
+ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity = TRUE) {
   ei <- as.numeric(e_i)
   eu <- as.numeric(e_u)
   d <- nrow(W1)
@@ -143,23 +143,27 @@ ngcf_message <- function(e_i, e_u, W1, W2, p_ui, affinity=TRUE) {
 #' @param slope Passed to \code{.ngcf_leaky}. Defaults to \code{0.2}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
+ngcf_propagate <- function(E, adjacency, W1, W2, affinity = TRUE, slope = 0.2) {
   n <- nrow(E)
   d <- ncol(E)
   deg <- sapply(seq_len(n), function(v) length(adjacency[[v]]))
-  out <- matrix(0, nrow=n, ncol=d)
+  out <- matrix(0, nrow = n, ncol = d)
   for (v in seq_len(n)) {
     nb <- adjacency[[v]]
     if (length(nb) == 0L) {
       stop(sprintf("ngcf: node %d has no neighbours", v))
     }
-    acc <- ngcf_message(E[v, , drop=FALSE], E[v, , drop=FALSE], W1, W2,
-                        ngcf_laplacian_coefficient(deg[v], deg[v]),
-                        affinity)
+    acc <- ngcf_message(
+      E[v, , drop = FALSE], E[v, , drop = FALSE], W1, W2,
+      ngcf_laplacian_coefficient(deg[v], deg[v]),
+      affinity
+    )
     for (w in nb) {
-      m <- ngcf_message(E[w, , drop=FALSE], E[v, , drop=FALSE], W1, W2,
-                        ngcf_laplacian_coefficient(deg[v], deg[w]),
-                        affinity)
+      m <- ngcf_message(
+        E[w, , drop = FALSE], E[v, , drop = FALSE], W1, W2,
+        ngcf_laplacian_coefficient(deg[v], deg[w]),
+        affinity
+      )
       acc <- acc + m
     }
     out[v, ] <- vapply(seq_along(acc), function(i) .ngcf_leaky(acc[i], slope), numeric(1))
@@ -178,9 +182,10 @@ ngcf_propagate <- function(E, adjacency, W1, W2, affinity=TRUE, slope=0.2) {
 #' @param Ws A vector; its length is taken.
 #' @param affinity Coerced to logical by the body, with \code{as.logical}. Defaults to \code{TRUE}.
 #' @param slope Passed to \code{ngcf_propagate}. Defaults to \code{0.2}.
-#' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers}, \code{affinity}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{final}, \code{layers}, \code{n_layers},
+#' \code{affinity}, \code{method}, \code{note}.
 #' @export
-ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
+ngcf_stack_layers <- function(E0, adjacency, Ws, affinity = TRUE, slope = 0.2) {
   E <- as.matrix(E0)
   storage.mode(E) <- "double"
   n <- nrow(E)
@@ -193,7 +198,7 @@ ngcf_stack_layers <- function(E0, adjacency, Ws, affinity=TRUE, slope=0.2) {
   }
   L_total <- length(layers)
   d_emb <- ncol(layers[[1]])
-  final <- matrix(0, nrow=n, ncol=d_emb * L_total)
+  final <- matrix(0, nrow = n, ncol = d_emb * L_total)
   for (v in seq_len(n)) {
     final[v, ] <- unlist(lapply(layers, function(layer) layer[v, ]))
   }
@@ -237,15 +242,17 @@ ngcf_score <- function(final, u, i) {
 #' @return A character value.
 #' @export
 ngcf_cheatsheet <- function() {
-  paste0("ngcf: conventional CF never puts the COLLABORATIVE ",
-         "SIGNAL into the embedding -- only into the objective. ",
-         "NGCF propagates over the user-item graph: ",
-         "m_{u<-i} = p_ui (W1 e_i + W2 (e_i * e_u)), where the ",
-         "elementwise AFFINITY term is NGCF's addition and dropping ",
-         "it leaves a plain GCN. p_ui = 1/sqrt(|N_u||N_i|) doubles ",
-         "as a path-length discount. Two layers reach user-user ",
-         "similarity, three reach a recommendation path; all ",
-         "layers are concatenated.")
+  paste0(
+    "ngcf: conventional CF never puts the COLLABORATIVE ",
+    "SIGNAL into the embedding -- only into the objective. ",
+    "NGCF propagates over the user-item graph: ",
+    "m_{u<-i} = p_ui (W1 e_i + W2 (e_i * e_u)), where the ",
+    "elementwise AFFINITY term is NGCF's addition and dropping ",
+    "it leaves a plain GCN. p_ui = 1/sqrt(|N_u||N_i|) doubles ",
+    "as a path-length discount. Two layers reach user-user ",
+    "similarity, three reach a recommendation path; all ",
+    "layers are concatenated."
+  )
 }
 
 # compact alias per ledger/NAMING.md
@@ -254,20 +261,3 @@ neuralgraphcf <- ngcf_stack_layers
 # public names resolved by fn/_lazy_map.json
 # Main entry point
 morie_ngcf <- ngcf_stack_layers
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

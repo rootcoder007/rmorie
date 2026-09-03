@@ -48,7 +48,9 @@
 #' @param nugget Passed to \code{.krpkrg_gamma}. Defaults to \code{0}.
 #' @param sill Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.
 #' @param rng Passed to \code{.krpkrg_gamma}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model}, \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{variance},
+#' \code{std_error}, \code{weights}, \code{n}, \code{n_targets}, \code{model},
+#' \code{nugget}, \code{sill}, \code{range}, \code{method}, \code{note}.
 #' @export
 morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
                                           model = "spherical", nugget = 0.0,
@@ -116,6 +118,9 @@ morie_krpkrg_ordinary_kriging <- function(coords, values, targets,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .krpkrg_cheatsheet()
+#' res
 .krpkrg_cheatsheet <- function() {
   paste0("krpkrg: morie_krpkrg_ordinary_kriging(coords, values, targets, ",
          "model, nugget, sill, range) -> BLUP and kriging variance ",

@@ -21,5 +21,6 @@ List with \code{estimate}, \code{residual}, \code{quantisation_error}, \code{r}.
 ||W - Q - A B^T||_F; smaller is better.
 }
 \examples{
-morie_kamath_ch4_loftq_objective(W = c(1, 2, 3, 4, 5, 6, 7, 8), Q = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L)
+morie_kamath_ch4_loftq_objective(W = c(1, 2, 3, 4, 5, 6, 7, 8), Q = c(1, 2, 3, 4, 5, 6, 7, 8),
+  A = c(1, 2, 3, 4, 5, 6, 7, 8), B = 5L)
 }

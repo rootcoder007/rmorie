@@ -19,7 +19,8 @@
 #'   and Methods (training).  Read from the ar5iv rendering.
 #' @export
 #' @examples
-#' Mzreanal(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), freshvalues = c(1, 2, 3, 4, 5, 6, 7, 8), visits = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Mzreanal(rewards = c(1, 2, 3, 4, 5, 6, 7, 8), freshvalues = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' visits = c(1, 2, 3, 4, 5, 6, 7, 8))
 Mzreanal <- function(rewards, freshvalues, visits, n = 5, gamma = 0.997,
                      alpha = 1, beta = 1, oldvalues = NULL) {
   u <- .t1_vec(rewards)

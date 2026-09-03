@@ -23,3 +23,8 @@ same conclusion in words, citing Azzalini (1981). Identical to
 .morie_kdfe_h in aaa_helpers_fauzi.R; kept local so this file stands
 alone.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .fz_kdfe_h(x = x)
+res
+}

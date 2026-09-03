@@ -15,3 +15,8 @@ One of two values, depending on the branch taken.
 \description{
 log|pivot| and so discards the sign).
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .gplogdet(A = A)
+res
+}

@@ -31,3 +31,8 @@ kernels: hardness results and efficient alternatives. Learning
 Theory and Kernel Machines, LNCS 2777, pages 129-143.
 \doi{10.1007/978-3-540-45167-9_11}.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- Sgtrwk(A = A)
+res
+}

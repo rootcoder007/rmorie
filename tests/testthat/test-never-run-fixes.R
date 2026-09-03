@@ -4,8 +4,11 @@
 # below fails on the pre-fix code.
 
 test_that("survnnr fits from a list of rows (backprop no longer sees a nested list)", {
-  set.seed(1); n <- 40
-  X <- lapply(seq_len(n), function(i) rnorm(3)); tm <- rexp(n); ev <- rbinom(n, 1, .7)
+  set.seed(1)
+  n <- 40
+  X <- lapply(seq_len(n), function(i) rnorm(3))
+  tm <- rexp(n)
+  ev <- rbinom(n, 1, .7)
   fit <- morie_survnnr_fit(X, tm, ev, hidden = c(4L), n_epochs = 20)
   expect_length(fit$risk, n)
   expect_true(all(is.finite(fit$loss_history)))
@@ -15,7 +18,8 @@ test_that("survnnr fits from a list of rows (backprop no longer sees a nested li
 test_that("rjmcmc: the uniform stream advances and births are accepted from k = 0", {
   u <- .unif_stream(1L)
   expect_length(unique(c(u(), u(), u(), u())), 4L)
-  set.seed(2); y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
+  set.seed(2)
+  y <- sort(c(runif(30, 0, .4), runif(60, .4, 1)))
   r <- changepoint_rjmcmc(y = y, L = 1, n_iter = 4000L, burn_in = 1000L, seed = 1L)
   # a clear step in intensity must pull mass off k = 0
   expect_gt(r$k_mean, 0.5)

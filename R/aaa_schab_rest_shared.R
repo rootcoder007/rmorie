@@ -33,7 +33,8 @@
 
 #' .schab_moran_check_w
 #'
-#' A step of the schab_rest_shared implementation. Called by \code{.schab_geary_c}, \code{.schab_moran_i}, \code{.schab_weight_sums}.
+#' A step of the schab_rest_shared implementation. Called by \code{.schab_geary_c},
+#' \code{.schab_moran_i}, \code{.schab_weight_sums}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -123,6 +124,10 @@
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .schab_kurtosis_b(z = y)
+#' res
 .schab_kurtosis_b <- function(z) {
   d <- as.numeric(z) - mean(as.numeric(z))
   s2 <- sum(d * d)
@@ -138,7 +143,10 @@
 #'
 #' @param z A vector; its length is taken.
 #' @param w Passed to \code{.schab_weight_sums}.
-#' @return A list with \code{I}, \code{expectation}, \code{variance_normal}, \code{variance_randomization}, \code{sd_normal}, \code{sd_randomization}, \code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1}, \code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
+#' @return A list with \code{I}, \code{expectation}, \code{variance_normal},
+#' \code{variance_randomization}, \code{sd_normal}, \code{sd_randomization},
+#' \code{z_normal}, \code{z_randomization}, \code{kurtosis_b}, \code{S0}, \code{S1},
+#' \code{S2}, \code{n}, \code{geary_c}, \code{geary_expectation}.
 #' @export
 .schab_moran_moments <- function(z, w) {
   z <- as.numeric(z)
@@ -278,7 +286,8 @@
 #' @param region A vector; indexed elementwise.
 #' @param r Numeric; combined arithmetically in the body.
 #' @param correction Passed to \code{.schab_cross_k}. Defaults to \code{"ripley"}.
-#' @return A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star}, \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
+#' @return A list with \code{K_star}, \code{K_12}, \code{K_21}, \code{L_star},
+#' \code{L_minus_h}, \code{K_independence}, \code{r}, \code{lambda_1}, \code{lambda_2}.
 #' @export
 .schab_cross_k_combined <- function(p1, p2, region, r, correction = "ripley") {
   p1 <- matrix(as.numeric(p1), ncol = 2)
@@ -352,13 +361,19 @@
 
 #' .schab_lattice_check
 #'
-#' A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram}, \code{.schab_periodogram_from_cov}, \code{.schab_sample_cov2d}.
+#' A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram},
+#' \code{.schab_periodogram_from_cov}, \code{.schab_sample_cov2d}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param z A matrix; passed to \code{nrow}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .schab_lattice_check(z = X)
+#' res
 .schab_lattice_check <- function(z) {
   z <- as.matrix(z)
   if (nrow(z) < 2L || ncol(z) < 2L) stop("lattice must be at least 2x2")
@@ -368,7 +383,8 @@
 
 #' .schab_fourier_freq
 #'
-#' A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram}, \code{.schab_periodogram_from_cov}.
+#' A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram},
+#' \code{.schab_periodogram_from_cov}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -384,13 +400,19 @@
 
 #' .schab_sample_cov2d
 #'
-#' A step of the schab_rest_shared implementation. Called by \code{.schab_periodogram_from_cov}, \code{spperiod}.
+#' A step of the schab_rest_shared implementation. Called by
+#' \code{.schab_periodogram_from_cov}, \code{spperiod}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param z A matrix; passed to \code{nrow}.
 #' @return A list with \code{cov}, \code{lags_j}, \code{lags_k}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .schab_sample_cov2d(z = X)
+#' res
 .schab_sample_cov2d <- function(z) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -426,8 +448,15 @@
 #'
 #' @param z A matrix; passed to \code{nrow}.
 #' @param omit_zero_frequency A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j}, \code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r}, \code{c}.
+#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{j},
+#' \code{k}, \code{zero_index}, \code{nonzero_mask}, \code{mean_invariant}, \code{r},
+#' \code{c}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .schab_periodogram(z = X)
+#' res
 .schab_periodogram <- function(z, omit_zero_frequency = TRUE) {
   z <- .schab_lattice_check(z)
   r <- nrow(z)
@@ -464,8 +493,14 @@
 #' the source it follows.
 #'
 #' @param z A matrix; passed to \code{nrow}.
-#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2}, \code{covariance}, \code{lags_j}, \code{lags_k}.
+#' @return A list with \code{periodogram}, \code{omega1}, \code{omega2},
+#' \code{covariance}, \code{lags_j}, \code{lags_k}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .schab_periodogram_from_cov(z = X)
+#' res
 .schab_periodogram_from_cov <- function(z) {
   z <- .schab_lattice_check(z)
   f <- .schab_fourier_freq(nrow(z), ncol(z))
@@ -577,8 +612,10 @@
 #' @param target Coerced to numeric by the body, with \code{as.numeric}.
 #' @param min_sites Coerced to integer by the body, with \code{as.integer}. Defaults to \code{35L}.
 #' @param step Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
-#' @param lag_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param max_sites Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param lag_classes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param max_sites Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{repeat}.
 #' @export
 .schab_haas_window <- function(coords, target, min_sites = 35L, step = 5L,
@@ -744,7 +781,9 @@
 #' @param n_lags Passed to \code{.schab_empirical_variogram}. Defaults to \code{10L}.
 #' @param local_mean A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param local_variogram A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{prediction}, \code{local_sill}, \code{local_range}, \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill}, \code{global_range}, \code{caveats}.
+#' @return A list with \code{prediction}, \code{local_sill}, \code{local_range},
+#' \code{window_sizes}, \code{converged}, \code{theta_is_global}, \code{global_sill},
+#' \code{global_range}, \code{caveats}.
 #' @export
 .schab_moving_window_krige <- function(coords, z, targets, min_sites = 35L,
                                        step = 5L, n_lags = 10L,

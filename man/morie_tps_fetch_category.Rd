@@ -13,7 +13,7 @@ morie_tps_fetch_category(
 )
 }
 \arguments{
-\item{category}{One of \code{\link[=morie_tps_list_categories]{morie_tps_list_categories()}}.}
+\item{category}{One of \code{morie_tps_list_categories()}.}
 
 \item{cache_dir}{Directory to write the CSV into. Defaults to
 \code{tempdir()} (CRAN-safe; the Python default of

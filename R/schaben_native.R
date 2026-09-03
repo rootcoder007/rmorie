@@ -12,7 +12,8 @@
 
 #' .morie_sb_pairs
 #'
-#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}, \code{morie_variogram_composite_likelihood}.
+#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins},
+#' \code{morie_matheron_estimator}, \code{morie_variogram_composite_likelihood}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -39,13 +40,15 @@
 
 #' .morie_sb_groups
 #'
-#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins}, \code{morie_matheron_estimator}.
+#' A step of the schaben_native implementation. Called by \code{morie_cressie_hawkins},
+#' \code{morie_matheron_estimator}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param h A vector; indexed elementwise.
 #' @param bins Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param exact A flag; the body branches on it.
 #' @return A list with \code{centres}, \code{idx}.
 #' @export
@@ -161,7 +164,8 @@ morie_matheron_estimator <- function(coords, z, bins = NULL, cutoff = NULL,
 
 #' .morie_sb_vgm
 #'
-#' A step of the schaben_native implementation. Called by \code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}.
+#' A step of the schaben_native implementation. Called by
+#' \code{morie_kriging_pred_error}, \code{morie_variogram_composite_likelihood}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -290,7 +294,8 @@ morie_variogram_composite_likelihood <- function(coords, z,
 #'   Prasad NGN, Rao JNK (1990).
 #' @export
 #' @examples
-#' morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_kriging_pred_error(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6,
+#' 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_kriging_pred_error <- function(coords, z, target,
                                      model = "exponential",
                                      nugget = NULL, psill = NULL,

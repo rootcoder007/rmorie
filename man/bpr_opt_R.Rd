@@ -49,5 +49,6 @@ rejection guard, exactly as the Python arm does.
 }
 \keyword{internal}
 \examples{
-bpr_opt_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, pos = c(1, 2, 3, 4, 5, 6, 7, 8), n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
+bpr_opt_R(W = c(1, 2, 3, 4, 5, 6, 7, 8), H = 0.5, pos = c(1, 2, 3, 4, 5, 6, 7, 8),
+  n_items = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

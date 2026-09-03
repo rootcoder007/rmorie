@@ -116,7 +116,8 @@ test_that("morie_tps_csi_per_neighbourhood works with long data.frame", {
 test_that("morie_tps_csi_per_neighbourhood handles nested list", {
   cats <- MORIE_TPS_CSI_CATEGORIES()
   nested <- list(a = list(), b = list())
-  for (c in cats[1:2]) { nested$a[[c]] <- 4L; nested$b[[c]] <- 7L }
+  for (c in cats[1:2]) { nested$a[[c]] <- 4L
+  nested$b[[c]] <- 7L }
   out <- morie_tps_csi_per_neighbourhood(nested)
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 2L)

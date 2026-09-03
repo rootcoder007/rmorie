@@ -35,5 +35,6 @@ The bound.
 }
 \keyword{internal}
 \examples{
-morie_genmol_elbo(reconstruction = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), logvar = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_genmol_elbo(reconstruction = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8),
+  logvar = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

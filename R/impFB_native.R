@@ -59,7 +59,8 @@
 
 #' .impFB_solve
 #'
-#' A step of the impFB_native implementation. Called by \code{.impFB_als_step}, \code{.impFB_explain}.
+#' A step of the impFB_native implementation. Called by \code{.impFB_als_step},
+#' \code{.impFB_explain}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -67,6 +68,11 @@
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .impFB_solve(A = A, b = b)
+#' res
 .impFB_solve <- function(A, b) {
   n <- length(b)
   M <- matrix(0, nrow = n, ncol = n + 1)
@@ -287,6 +293,9 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .impFB_cheatsheet()
+#' res
 .impFB_cheatsheet <- function() {
   return("impFB: implicit feedback measures CONFIDENCE, not preference -- the favourite film is watched once, the merely-liked series weekly. Split into binary p_ui and c_ui = 1 + alpha r_ui (alpha = 40). The cost sums over ALL m*n pairs, because zeros are missing evidence rather than negatives, which rules out SGD and forces ALS. Y'C^u Y = Y'Y + Y'(C^u - I)Y makes each update O(f^2 n_u + f^3), linear in the input. Substituting the update into the prediction yields per-item explanations.")
 }

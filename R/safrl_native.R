@@ -118,6 +118,11 @@
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .safrl_vec(v = x, name = txt)
+#' res
 .safrl_vec <- function(v, name) {
   out <- NULL
   if (is.list(v)) {
@@ -279,7 +284,9 @@
 #' @param nu Coerced to numeric by the body, with \code{as.numeric}.
 #' @param feasible Coerced to logical by the body, with \code{as.logical}.
 #' @param recovery Coerced to logical by the body, with \code{as.logical}.
-#' @return A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu}, \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation}, \code{kl}, \code{delta}, \code{method}.
+#' @return A list with \code{estimate}, \code{step}, \code{lambda_}, \code{nu},
+#' \code{feasible}, \code{recovery}, \code{predicted_gain}, \code{predicted_violation},
+#' \code{kl}, \code{delta}, \code{method}.
 #' @export
 .safrl_finish <- function(step, g, cols, cv, H, delta, lam, nu,
                            feasible, recovery) {

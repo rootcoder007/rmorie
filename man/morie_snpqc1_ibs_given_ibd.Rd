@@ -20,5 +20,7 @@ The value of \code{rbind}.
 }
 \keyword{internal}
 \examples{
-morie_snpqc1_ibs_given_ibd(x_count = 5L, y_count = 5L)
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1_ibs_given_ibd(x_count = 5L, y_count = 5L)
+}
 }

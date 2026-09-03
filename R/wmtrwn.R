@@ -7,7 +7,9 @@
 
 #' @param W See Usage.
 #' @return List with ``W`` (normalised), ``row_sums``, ``islands``, ``n``.
-#' @references Anselin (1988), Spatial Econometrics: Methods and Models, Kluwer. Not held locally; row standardisation w_ij / sum_j w_ij is the standard published convention and is what spdep's style = 'W' computes.
+#' @references Anselin (1988), Spatial Econometrics: Methods and Models, Kluwer. Not held
+#' locally; row standardisation w_ij / sum_j w_ij is the standard published convention
+#' and is what spdep's style = 'W' computes.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

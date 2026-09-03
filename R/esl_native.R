@@ -6,7 +6,8 @@
 
 #' .morie_esl_logmvn
 #'
-#' A step of the esl_native implementation. Called by \code{morie_esl_em_gmm}, \code{morie_esl_gaussian_mixture}.
+#' A step of the esl_native implementation. Called by \code{morie_esl_em_gmm},
+#' \code{morie_esl_gaussian_mixture}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

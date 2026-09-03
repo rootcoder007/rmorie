@@ -19,5 +19,6 @@ Numeric feature vector of length n_arms + 2: one-hot   previous action, previous
 }
 \keyword{internal}
 \examples{
-morie_mtdrl_history_features(history = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)), n_arms = 5L)
+morie_mtdrl_history_features(history = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
+  n_arms = 5L)
 }

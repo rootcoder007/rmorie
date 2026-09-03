@@ -28,7 +28,7 @@ morie_ghosal_stick_breaking_trunc(
 \item{base_sd}{Optional base-measure sd.}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghstk", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghstk", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }

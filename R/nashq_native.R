@@ -15,7 +15,8 @@
 
 #' .nashq_mat
 #'
-#' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix}, \code{stage_game_type}.
+#' A step of the nashq_native implementation. Called by \code{nash_equilibria_bimatrix},
+#' \code{stage_game_type}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -45,6 +46,11 @@
 #' @param b Passed to \code{cbind}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .nashq_solve(A = A, b = b)
+#' res
 .nashq_solve <- function(A, b) {
   n <- nrow(A)
   M <- cbind(A, b)
@@ -96,7 +102,8 @@
 
 #' .nashq_payoff
 #'
-#' A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium}, \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
+#' A step of the nashq_native implementation. Called by \code{.nashq_is_equilibrium},
+#' \code{.nashq_is_saddle}, \code{.nashq_select} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -105,6 +112,11 @@
 #' @param q A vector; its length is taken and its elements indexed.
 #' @return The value of \code{tot}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .nashq_payoff(M = X, p = 0.5, q = 0.5)
+#' res
 .nashq_payoff <- function(M, p, q) {
   tot <- 0
   for (i in seq_along(p)) {
@@ -145,7 +157,8 @@
 
 #' nash_equilibria_bimatrix
 #'
-#' A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}.
+#' A step of the nashq_native implementation. Called by \code{.nashq_select},
+#' \code{stage_game_type}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -200,7 +213,8 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 
 #' Definition 13: each agent gains when the OTHER deviates
 #'
-#' A step of the nashq_native implementation. Called by \code{.nashq_select}, \code{stage_game_type}.
+#' A step of the nashq_native implementation. Called by \code{.nashq_select},
+#' \code{stage_game_type}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -239,7 +253,9 @@ nash_equilibria_bimatrix <- function(A, B, tol = 1e-9) {
 #' @param A Numeric; passed to \code{max}.
 #' @param B Numeric; passed to \code{max}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{equilibria}, \code{n_equilibria}, \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle}, \code{method}.
+#' @return A list with \code{estimate}, \code{equilibria}, \code{n_equilibria},
+#' \code{has_global_optimal}, \code{has_saddle}, \code{global_optimal}, \code{saddle},
+#' \code{method}.
 #' @export
 stage_game_type <- function(A, B, tol = 1e-9) {
   A <- .nashq_mat(A, "A")
@@ -374,7 +390,9 @@ stage_game_type <- function(A, B, tol = 1e-9) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param agent Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
 #' @param tol Passed to \code{.nashq_select}. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{nash_values}, \code{stage_game_types}, \code{returns}, \code{mean_return_last}, \code{selection}, \code{method}.
+#' @return A list with \code{estimate}, \code{q}, \code{policy}, \code{nash_values},
+#' \code{stage_game_types}, \code{returns}, \code{mean_return_last}, \code{selection},
+#' \code{method}.
 #' @export
 morie_nashq <- function(states, actions, step, rewards,
                         gamma = 0.9, alpha = 0.5, epsilon = 0.1,
@@ -514,6 +532,9 @@ nashqlearning <- morie_nashq
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .nashq_cheatsheet()
+#' res
 .nashq_cheatsheet <- function() {
   paste0("nashq: Q^i over JOINT actions; update with the stage-game ",
          "Nash payoff instead of a max -- Q^i <- (1-a)Q^i + ",
@@ -523,4 +544,3 @@ nashqlearning <- morie_nashq
          "for global optimal (Def 12) or saddle (Def 13) stage ",
          "games. stage_game_type() reports which you have.")
 }
-

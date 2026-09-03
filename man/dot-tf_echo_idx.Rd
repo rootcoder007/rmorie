@@ -19,3 +19,7 @@ A step of the rangayyan_tf implementation. Called by \code{EchoCep}, \code{EchoI
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tf_echo_idx(n = 3L)
+res
+}

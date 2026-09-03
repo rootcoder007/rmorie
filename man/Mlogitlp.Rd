@@ -20,5 +20,6 @@ A list with \code{eta}, \code{p}, \code{n}.
 }
 \keyword{internal}
 \examples{
-rmorie:::Mlogitlp(f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8), R = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::Mlogitlp(f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8),
+  R = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

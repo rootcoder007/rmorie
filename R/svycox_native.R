@@ -71,17 +71,22 @@
 
 #' .svycox_prep
 #'
-#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
+#' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param time Coerced to numeric by the body, with \code{as.numeric}.
 #' @param event Coerced to integer by the body, with \code{as.integer}.
 #' @param X A matrix; indexed by row and column.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @return A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c}, \code{n}, \code{p}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @return A list with \code{T}, \code{E}, \code{M}, \code{w}, \code{h}, \code{c},
+#' \code{n}, \code{p}.
 #' @export
 .svycox_prep <- function(time, event, X, weights, strata, cluster) {
     T <- as.numeric(time)
@@ -153,7 +158,8 @@
 
 #' .svycox_score_and_info
 #'
-#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals}, \code{.svycox_svycoxph}.
+#' A step of the svycox_native implementation. Called by \code{.svycox_score_residuals},
+#' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -221,7 +227,8 @@
 
 #' .svycox_solve
 #'
-#' A step of the svycox_native implementation. Called by \code{.svycox_inverse}, \code{.svycox_svycoxph}.
+#' A step of the svycox_native implementation. Called by \code{.svycox_inverse},
+#' \code{.svycox_svycoxph}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -229,6 +236,11 @@
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{sapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .svycox_solve(A = A, b = b)
+#' res
 .svycox_solve <- function(A, b) {
     p <- length(b)
     Ab <- cbind(A, b)
@@ -270,6 +282,10 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .svycox_inverse(A = A)
+#' res
 .svycox_inverse <- function(A) {
     p <- nrow(A)
     out <- matrix(0.0, p, p)
@@ -373,7 +389,10 @@
 #' @param cluster Passed to \code{.svycox_prep}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios}, \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information}, \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events}, \code{n_iterations}, \code{ties}, \code{method}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{hazard_ratios},
+#' \code{std_errors}, \code{model_std_errors}, \code{vcov}, \code{information},
+#' \code{score}, \code{design_effect}, \code{z}, \code{n}, \code{n_events},
+#' \code{n_iterations}, \code{ties}, \code{method}.
 #' @export
 .svycox_svycoxph <- function(time, event, X, weights = NULL, strata = NULL,
                              cluster = NULL, max_iter = 100, tol = 1e-9) {

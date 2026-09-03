@@ -46,7 +46,7 @@ morie_rmsdtr <- function(P, Q, weights = NULL) {
   RtR <- t(Rm) %*% Rm
   ee <- eigen((RtR + t(RtR)) / 2, symmetric = TRUE)
   mu <- pmax(ee$values, 0)
-  A <- ee$vectors                       # descending eigenvalues
+  A <- ee$vectors # descending eigenvalues
   B <- matrix(0, d, d)
   for (k in seq_len(d)) {
     if (mu[k] > 1e-24) {
@@ -57,8 +57,10 @@ morie_rmsdtr <- function(P, Q, weights = NULL) {
     if (d == 3) {
       u <- B[, 1]
       v <- B[, 2]
-      B[, 3] <- c(u[2]*v[3]-u[3]*v[2], u[3]*v[1]-u[1]*v[3],
-                  u[1]*v[2]-u[2]*v[1])
+      B[, 3] <- c(
+        u[2] * v[3] - u[3] * v[2], u[3] * v[1] - u[1] * v[3],
+        u[1] * v[2] - u[2] * v[1]
+      )
     } else if (d == 2) {
       B[, 2] <- c(-B[2, 1], B[1, 1])
     }
@@ -70,7 +72,9 @@ morie_rmsdtr <- function(P, Q, weights = NULL) {
   }
   fitted <- X %*% t(U)
   rmsd <- sqrt(sum(w * rowSums((fitted - Y)^2)) / sw)
-  list(estimate = rmsd, rotation = U, det = det(U),
-       centroids = list(P = cp, Q = cq), n = n,
-       method = "Kabsch (1976) optimal superposition RMSD")
+  list(
+    estimate = rmsd, rotation = U, det = det(U),
+    centroids = list(P = cp, Q = cq), n = n,
+    method = "Kabsch (1976) optimal superposition RMSD"
+  )
 }

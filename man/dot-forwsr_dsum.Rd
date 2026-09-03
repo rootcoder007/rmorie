@@ -19,3 +19,8 @@ search orders residuals that differ in their last digits, so the
 summation algorithm decides which row enters next and the two arms
 part company about a dozen steps in. Do what CPython does.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .forwsr_dsum(v = x)
+res
+}

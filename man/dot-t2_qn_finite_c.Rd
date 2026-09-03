@@ -17,3 +17,7 @@ A step of the tail2_t02 implementation. Called by \code{QnScale}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .t2_qn_finite_c(n = 3L)
+res
+}

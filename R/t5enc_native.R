@@ -88,7 +88,9 @@ t5enc_task_prefix <- function(task, text) {
 #' @param mean_span Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{3}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param sentinel Passed to \code{sprintf}. Defaults to \code{"<extra_id_%d>"}.
-#' @return A list with \code{input}, \code{target}, \code{n_spans}, \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by}, \code{note}.
+#' @return A list with \code{input}, \code{target}, \code{n_spans},
+#' \code{corrupted_tokens}, \code{corruption_rate}, \code{target_shorter_by},
+#' \code{note}.
 #' @export
 t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
                                    seed = 0,
@@ -174,8 +176,10 @@ t5enc_span_corruption <- function(tokens, rate = 0.15, mean_span = 3.0,
 #'
 #' @param relative_position Coerced to integer by the body, with \code{as.integer}.
 #' @param bidirectional A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param num_buckets Coerced to integer by the body, with \code{as.integer}. Defaults to \code{32L}.
-#' @param max_distance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{128}.
+#' @param num_buckets Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{32L}.
+#' @param max_distance Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{128}.
 #' @return A numeric value.
 #' @export
 t5enc_relative_bucket <- function(relative_position, bidirectional = TRUE,
@@ -231,7 +235,8 @@ t5enc_format_regression <- function(value, increment = 0.2, lo = 1.0, hi = 5.0) 
 #' source it follows.
 #'
 #' @param text Coerced to character by the body, with \code{as.character}.
-#' @param labels Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param labels Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @return A list with \code{label}, \code{valid}, \code{note}.
 #' @export
 t5enc_parse_prediction <- function(text, labels = NULL) {

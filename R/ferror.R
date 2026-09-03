@@ -21,7 +21,8 @@
 #'   doi:10.1371/journal.pone.0000758.
 #' @export
 #' @examples
-#' Ferror(incidence = c(1, 2, 3, 4, 5, 6, 7, 8), Rt = c(1, 2, 3, 4, 5, 6, 7, 8), gen_int = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Ferror(incidence = c(1, 2, 3, 4, 5, 6, 7, 8), Rt = c(1, 2, 3, 4, 5, 6, 7, 8), gen_int
+#' = c(1, 2, 3, 4, 5, 6, 7, 8))
 Ferror <- function(incidence, Rt, gen_int) {
   inc <- as.numeric(incidence)
   n <- length(inc)

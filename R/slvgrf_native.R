@@ -24,7 +24,8 @@
 
 #' .slvgrf_check
 #'
-#' A step of the slvgrf_native implementation. Called by \code{qini_curve}, \code{rate_test}, \code{toc_curve}.
+#' A step of the slvgrf_native implementation. Called by \code{qini_curve},
+#' \code{rate_test}, \code{toc_curve}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -120,7 +121,8 @@ toc_curve <- function(scores, priority) {
 
 #' rate
 #'
-#' A step of the slvgrf_native implementation. Called by \code{autoc}, \code{qini_coefficient}, \code{rate_test}.
+#' A step of the slvgrf_native implementation. Called by \code{autoc},
+#' \code{qini_coefficient}, \code{rate_test}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -225,7 +227,8 @@ qini_curve <- function(scores, priority, cost = NULL) {
 #' @param weight Carried through into a list the body builds. Defaults to \code{"autoc"}.
 #' @param reps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value}, \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.
+#' @return A list with \code{estimate}, \code{se}, \code{z}, \code{p_value},
+#' \code{weight}, \code{reps}, \code{n}, \code{null}, \code{method}.
 #' @export
 rate_test <- function(scores, priority, weight = "autoc", reps = 500,
                       seed = 0) {
@@ -267,6 +270,9 @@ rate_test <- function(scores, priority, weight = "autoc", reps = 500,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .slvgrf_cheatsheet()
+#' res
 .slvgrf_cheatsheet <- function() {
   paste0("slvgrf: score a PRIORITIZATION RULE, not a CATE fit. ",
          "TOC(u) = mean effect in the top u minus the ATE, so ",

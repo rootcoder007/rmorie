@@ -14,7 +14,8 @@ audit_fixture <- function(n = 200L, seed = 20260728) {
     s <<- (1664525 * s + 1013904223) %% 4294967296
     (s + 0.5) / 4294967296
   }
-  T <- numeric(n); C <- numeric(n)
+  T <- numeric(n)
+  C <- numeric(n)
   for (i in seq_len(n)) {
     T[i] <- 1 + floor(20 * nxt())
     C[i] <- 1 + floor(25 * nxt())
@@ -93,7 +94,8 @@ test_that("c - c' equals ab exactly for a continuous OLS outcome", {
   Y <- 0.3 * X + 0.5 * M + stats::rnorm(n)
   a <- stats::coef(stats::lm(M ~ X))[["X"]]
   fit <- stats::coef(stats::lm(Y ~ X + M))
-  cprime <- fit[["X"]]; b <- fit[["M"]]
+  cprime <- fit[["X"]]
+  b <- fit[["M"]]
   cc <- stats::coef(stats::lm(Y ~ X))[["X"]]
   out <- morie_mediation_difference(cc, cprime, a = a, b = b)
   # an algebraic identity in every sample, not merely in expectation
@@ -160,7 +162,8 @@ test_that("the Wald standard error keeps the covariance term", {
 
   num <- mean(y[z == 1]) - mean(y[z == 0])
   den <- mean(d[z == 1]) - mean(d[z == 0])
-  n1 <- sum(z == 1); n0 <- sum(z == 0)
+  n1 <- sum(z == 1)
+  n0 <- sum(z == 0)
   v_y <- stats::var(y[z == 1]) / n1 + stats::var(y[z == 0]) / n0
   v_d <- stats::var(d[z == 1]) / n1 + stats::var(d[z == 0]) / n0
   naive <- sqrt(v_y / den^2 + (num^2 / den^4) * v_d)

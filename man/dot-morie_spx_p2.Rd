@@ -17,3 +17,8 @@ A step of the sp_fill implementation. Called by \code{LisaClust}, \code{MantelZ}
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+res <- .morie_spx_p2(z = y)
+res
+}

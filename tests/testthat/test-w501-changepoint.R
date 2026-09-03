@@ -45,8 +45,10 @@ test_that("Chgseg is the mean-cost PELT", {
 
 test_that("EDivisive Qhat matches an independent double-loop route", {
   qdirect <- function(x, a, tau, kappa, alpha = 1) {
-    X <- x[(a + 1):tau]; Y <- x[(tau + 1):kappa]
-    n <- length(X); m <- length(Y)
+    X <- x[(a + 1):tau]
+    Y <- x[(tau + 1):kappa]
+    n <- length(X)
+    m <- length(Y)
     between <- sum(outer(X, Y, function(u, v) abs(u - v)^alpha))
     dX <- abs(outer(X, X, "-"))^alpha
     dY <- abs(outer(Y, Y, "-"))^alpha
@@ -75,9 +77,13 @@ test_that("EDivisive locates the two obvious changes (ecp anchor)", {
 test_that("KernelCusum linear kernel equals the closed form", {
   r <- KernelCusum(x1, kernel = "linear", gamma = 0.1,
                    kmin = 2L, kmax = 13L)
-  n <- 15; k <- 5; g <- 0.1
-  mu1 <- mean(x1[1:k]); mu2 <- mean(x1[(k + 1):n])
-  v1 <- mean((x1[1:k] - mu1)^2); v2 <- mean((x1[(k + 1):n] - mu2)^2)
+  n <- 15
+  k <- 5
+  g <- 0.1
+  mu1 <- mean(x1[1:k])
+  mu2 <- mean(x1[(k + 1):n])
+  v1 <- mean((x1[1:k] - mu1)^2)
+  v2 <- mean((x1[(k + 1):n] - mu2)^2)
   sw <- (k * v1 + (n - k) * v2) / n
   kfdr <- (k * (n - k) / n) * (mu2 - mu1)^2 / (sw + g)
   d1 <- sw / (sw + g)

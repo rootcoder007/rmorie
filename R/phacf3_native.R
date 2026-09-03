@@ -97,6 +97,11 @@ morie_phacf3_bin <- function(d, edges) {
 #' @param b A vector; indexed elementwise.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .phacf3_less(a = A, b = b)
+#' res
 .phacf3_less <- function(a, b) {
   for (i in seq_len(6L)) {
     if (a[i] < b[i]) return(TRUE)
@@ -156,6 +161,9 @@ morie_phacf3_canonical <- function(t1, t2, t3, d12, d13, d23) {
 #' @param k A vector; indexed elementwise.
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .phacf3_str(k = 3L)
+#' res
 .phacf3_str <- function(k)
   sprintf("%02d,%02d,%02d,%02d,%02d,%02d", k[1], k[2], k[3], k[4], k[5],
           k[6])
@@ -210,6 +218,11 @@ morie_phacf3_space <- function(features = .PHACF3_FEATURES,
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .phacf3_dist(a = A, b = b)
+#' res
 .phacf3_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Tanimoto coefficient of two equal-length fingerprints

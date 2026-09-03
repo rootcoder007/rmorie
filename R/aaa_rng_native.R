@@ -49,6 +49,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_xor32(a = A, b = b)
+#' res
 .morie_xor32 <- function(a, b) {
   # XOR of two 32-bit words held as doubles. bitwXor() only accepts values
   # inside the signed 32-bit range, so split into 16-bit halves first.
@@ -69,6 +74,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_mulhilo32(a = A, b = b)
+#' res
 .morie_mulhilo32 <- function(a, b) {
   # Exact 32x32 -> 64 bit product, returned as (hi, lo) 32-bit halves. The
   # full product can reach 2^64, past the 2^53 where doubles stop being exact
@@ -96,7 +106,8 @@
 #'
 #' @param counter Coerced to numeric by the body, with \code{as.numeric}.
 #' @param key A vector; indexed elementwise.
-#' @param rounds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{.MORIE_PHILOX_ROUNDS}.
+#' @param rounds A count; the body uses it as \code{seq_len(...)}. Defaults to
+#' \code{.MORIE_PHILOX_ROUNDS}.
 #' @return The value of \code{ctr}, as built in the body.
 #' @export
 .morie_philox4x32 <- function(counter, key, rounds = .MORIE_PHILOX_ROUNDS) {
@@ -131,6 +142,9 @@
 #' @param stream Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_random_uniform(n = 3L)
+#' res
 .morie_random_uniform <- function(n, seed = 0, stream = 0) {
   # n uniforms in the OPEN interval (0, 1). The open interval matters: a
   # normal quantile at 0 or 1 is infinite, and (w + 0.5)/2^32 reaches
@@ -210,13 +224,17 @@
 #' Wichura\'s AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <=
 #' 5
 #'
-#' A step of the rng_native implementation. Called by \code{.morie_random_normal}, \code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
+#' A step of the rng_native implementation. Called by \code{.morie_random_normal},
+#' \code{morie_anamorphosis}, \code{morie_normal_scores} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_normal_quantile(p = 0.5)
+#' res
 .morie_normal_quantile <- function(p) {
   # Wichura's AS 241 (PPND16): split at |p - 1/2| <= 0.425, then at r <= 5.
   p <- as.numeric(p)
@@ -249,7 +267,8 @@
 
 #' .morie_random_normal
 #'
-#' A step of the rng_native implementation. Called by \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
+#' A step of the rng_native implementation. Called by
+#' \code{.morie_random_multivariate_normal}, \code{.schab_simulate_unconditional}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -258,6 +277,9 @@
 #' @param stream Passed to \code{.morie_random_uniform}. Defaults to \code{0}.
 #' @return The value of \code{.morie_normal_quantile}.
 #' @export
+#' @examples
+#' res <- .morie_random_normal(n = 3L)
+#' res
 .morie_random_normal <- function(n, seed = 0, stream = 0) {
   .morie_normal_quantile(.morie_random_uniform(n, seed = seed, stream = stream))
 }

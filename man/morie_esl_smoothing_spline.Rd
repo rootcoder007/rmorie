@@ -25,7 +25,8 @@ The tridiagonal \eqn{W} is inverted -- the un-inverted form
 intermediate lambda.
 }
 \examples{
-morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), lambda = 0.5)
+morie_esl_smoothing_spline(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  lambda = 0.5)
 }
 \references{
 Hastie, Tibshirani and Friedman (2009). \emph{The

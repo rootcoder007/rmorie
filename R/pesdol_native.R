@@ -15,6 +15,12 @@
 #' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fit}, \code{res}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .pesdol_ols(X = X, y = y)
+#' res
 .pesdol_ols <- function(X, y) {
   n <- nrow(X)
   p <- ncol(X)
@@ -40,7 +46,11 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @param p Numeric; passed to \code{max}. Defaults to \code{1}.
 #' @param q Numeric; passed to \code{max}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{long_run}, \code{coefficients}, \code{residuals}, \code{fitted}, \code{speed_of_adjustment}, \code{f_statistic}, \code{bound_lower}, \code{bound_upper}, \code{verdict}, \code{n_used}, \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q}, \code{n_regressors}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{long_run}, \code{coefficients},
+#' \code{residuals}, \code{fitted}, \code{speed_of_adjustment}, \code{f_statistic},
+#' \code{bound_lower}, \code{bound_upper}, \code{verdict}, \code{n_used},
+#' \code{n_params}, \code{rss_unrestricted}, \code{rss_restricted}, \code{p}, \code{q},
+#' \code{n_regressors}, \code{method}, \code{note}.
 #' @export
 morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
   yv <- as.numeric(y)
@@ -121,6 +131,9 @@ morie_pesdol_ardl_bounds <- function(y, x, p = 1, q = 1) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .pesdol_cheatsheet()
+#' res
 .pesdol_cheatsheet <- function() {
   paste0("pesdol: morie_pesdol_ardl_bounds(y, x, p, q) -> ARDL long-run ",
          "coefficients and the bounds test (Pesaran, Shin & Smith 2001)")

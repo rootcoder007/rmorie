@@ -16,6 +16,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{beta}, \code{cov}, \code{A}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ma_wls(X = x, y = y, w = x)
+#' res
 .ma_wls <- function(X, y, w) {
   X <- as.matrix(X)
   p <- ncol(X)

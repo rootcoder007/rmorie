@@ -19,3 +19,8 @@ A step of the infcrv implementation. Called by \code{.if_wvar}.
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .if_wmean(v = x, w = x)
+res
+}

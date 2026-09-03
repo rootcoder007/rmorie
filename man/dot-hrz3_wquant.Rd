@@ -21,3 +21,8 @@ cumulative normalised weight reaches tau.  With equal weights this is
 the usual empirical quantile, so it agrees with a plain sort on a
 degenerate kernel -- the anchor used by Hrzplrq.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .hrz3_wquant(v = x, w = x, tau = 0.5)
+res
+}

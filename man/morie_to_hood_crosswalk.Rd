@@ -26,13 +26,13 @@ areas). Seven columns:
 \item{name_158}{current neighbourhood name}
 \item{pct_140_in_158}{FORWARD: percent of the 140's area inside this
 158. Per-140 rows sum to 100. Used by
-\code{\link[=morie_tps_disaggregate_140_to_158]{morie_tps_disaggregate_140_to_158()}} as the cake-cutting
+\code{morie_tps_disaggregate_140_to_158()} as the cake-cutting
 weight under a uniform-density assumption.}
 \item{pct_158_in_140}{REVERSE: percent of the 158's area inside this
 140. Per-158 rows sum to 100. For pure cake-cuts every split
 child has \code{pct_158_in_140 == 100} (each 158 is entirely
 inside its parent 140), so
-\code{\link[=morie_tps_aggregate_158_to_140]{morie_tps_aggregate_158_to_140()}} is mathematically EXACT
+\code{morie_tps_aggregate_158_to_140()} is mathematically EXACT
 (lossless sum) for the 1:1 + split cohort. Only the one
 split+merge sliver in the included OT data has a non-100
 reverse percent.}

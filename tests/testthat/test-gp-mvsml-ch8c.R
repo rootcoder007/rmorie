@@ -5,8 +5,10 @@ test_that("eq (8.8) conditional mode equals Henderson's BLUP", {
   n <- 8
   M <- matrix(sample(0:2, n * 20, TRUE), nrow = n)
   G <- morie_grm(M) + diag(0.4, n)
-  set.seed(4); y <- rnorm(n, 5, 1)
-  s2u <- 0.7; s2e <- 1.3
+  set.seed(4)
+  y <- rnorm(n, 5, 1)
+  s2u <- 0.7
+  s2e <- 1.3
   fit <- morie_blue_blup_v(matrix(1, n, 1), diag(n), y,
                                  s2u * G, diag(s2e, n))
   r <- morie_bayesian_kernel_blup(y, G, s2u, s2e,
@@ -39,6 +41,7 @@ test_that("eq (8.10) interaction kernel is a Hadamard product", {
 })
 
 test_that("the Hadamard product matches its definition", {
-  A <- matrix(c(1, 3, 2, 4), 2); B <- matrix(c(5, 7, 6, 8), 2)
+  A <- matrix(c(1, 3, 2, 4), 2)
+  B <- matrix(c(5, 7, 6, 8), 2)
   expect_equal(morie_hadamard(A, B), A * B)
 })

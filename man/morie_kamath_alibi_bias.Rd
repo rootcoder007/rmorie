@@ -23,5 +23,6 @@ Adds the -m (i - j) distance bias to the scores and hands the softmax to
 \code{morie_alammar_sdp_attention} -- one attention core, reused.
 }
 \examples{
-morie_kamath_alibi_bias(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8), slopes = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kamath_alibi_bias(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8),
+  slopes = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

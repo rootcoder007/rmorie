@@ -11,7 +11,7 @@ morie_cluster_batch(datasets, k = 2L, ...)
 
 \item{k}{Number of clusters (applied to each).}
 
-\item{...}{Passed to \code{\link[=morie_cluster]{morie_cluster()}}.}
+\item{...}{Passed to \code{morie_cluster()}.}
 }
 \value{
 A named list of \code{morie_cluster} objects.

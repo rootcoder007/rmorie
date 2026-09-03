@@ -53,4 +53,3 @@ spperiod <- function(z_lattice, coords = NULL, omit_zero_frequency = TRUE,
   }
   out
 }
-

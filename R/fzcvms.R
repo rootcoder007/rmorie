@@ -6,7 +6,8 @@
 #'
 #' Evaluated by its exact closed form, not by quadrature: substituting the
 #' empirical df and integrating gives
-#' \deqn{CvM_n = \frac{1}{12n} + \sum_i\Big(\frac{2i-1}{2n} - F(X_{(i)})\Big)^2,}{CvM_n = 1/(12n) + sum_i ((2i-1)/(2n) - F(X_(i)))^2,}
+#' \deqn{CvM_n = \frac{1}{12n} + \sum_i\Big(\frac{2i-1}{2n} - F(X_{(i)})\Big)^2,}{CvM_n =
+#' 1/(12n) + sum_i ((2i-1)/(2n) - F(X_(i)))^2,}
 #' a finite sum with no discretisation error at all.
 #'
 #' This module previously carried a Kolmogorov-Smirnov body under the

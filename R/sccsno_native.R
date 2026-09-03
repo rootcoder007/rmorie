@@ -46,7 +46,8 @@
 #'
 #' @param start Coerced to numeric by the body, with \code{as.numeric}.
 #' @param end Coerced to numeric by the body, with \code{as.numeric}.
-#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param risk_periods A matrix; indexed by row and column.
 #' @param age_breaks See Usage.
 #' @return A vector, from \code{sort}.
@@ -56,14 +57,16 @@
   pts <- c(as.numeric(start), as.numeric(end))
   for (b in age_breaks) {
     if (as.numeric(start) < as.numeric(b) &&
-        as.numeric(b) < as.numeric(end)) {
+      as.numeric(b) < as.numeric(end)) {
       pts <- c(pts, as.numeric(b))
     }
   }
   if (!is.null(exposure)) {
     for (i in seq_len(nrow(risk_periods))) {
-      for (p in c(as.numeric(exposure) + risk_periods[i, 1L],
-                  as.numeric(exposure) + risk_periods[i, 2L])) {
+      for (p in c(
+        as.numeric(exposure) + risk_periods[i, 1L],
+        as.numeric(exposure) + risk_periods[i, 2L]
+      )) {
         if (as.numeric(start) < p && p < as.numeric(end)) {
           pts <- c(pts, p)
         }
@@ -103,7 +106,8 @@
 #' source it follows.
 #'
 #' @param t Passed to \code{<}.
-#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param exposure Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param risk_periods A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
@@ -114,7 +118,7 @@
   }
   for (r in seq_len(nrow(risk_periods))) {
     if (as.numeric(exposure) + risk_periods[r, 1L] < t &&
-        t <= as.numeric(exposure) + risk_periods[r, 2L]) {
+      t <= as.numeric(exposure) + risk_periods[r, 2L]) {
       return(r)
     }
   }
@@ -123,7 +127,8 @@
 
 #' morie_sccsno_build_intervals
 #'
-#' A step of the sccsno_native implementation. Called by \code{.smatch_build_intervals}, \code{morie_sccsno_fit}.
+#' A step of the sccsno_native implementation. Called by \code{.smatch_build_intervals},
+#' \code{morie_sccsno_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -145,24 +150,32 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
   s <- as.numeric(start)
   e <- as.numeric(end)
   if (!(e > s)) {
-    stop(sprintf(paste0("sccsno: the observation period must have ",
-                        "positive length, got [%g, %g]"), s, e))
+    stop(sprintf(paste0(
+      "sccsno: the observation period must have ",
+      "positive length, got [%g, %g]"
+    ), s, e))
   }
   for (i in seq_len(nrow(rp))) {
     if (!(rp[i, 2L] > rp[i, 1L])) {
-      stop(sprintf("sccsno: a risk period must satisfy b > a, got (%g, %g]",
-                   rp[i, 1L], rp[i, 2L]))
+      stop(sprintf(
+        "sccsno: a risk period must satisfy b > a, got (%g, %g]",
+        rp[i, 1L], rp[i, 2L]
+      ))
     }
   }
   if (!is.null(exposure) &&
-      !(s <= as.numeric(exposure) && as.numeric(exposure) <= e)) {
-    stop(sprintf(paste0("sccsno: the exposure at %g lies outside the ",
-                        "observation period [%g, %g]"),
-                 as.numeric(exposure), s, e))
+    !(s <= as.numeric(exposure) && as.numeric(exposure) <= e)) {
+    stop(sprintf(
+      paste0(
+        "sccsno: the exposure at %g lies outside the ",
+        "observation period [%g, %g]"
+      ),
+      as.numeric(exposure), s, e
+    ))
   }
   cuts <- .sccsno_cuts(s, e, exposure, rp, age_breaks)
   m <- length(cuts) - 1L
-  cells <- matrix(0.0, nrow=m, ncol=4L)
+  cells <- matrix(0.0, nrow = m, ncol = 4L)
   colnames(cells) <- c("age_band", "risk_period", "e", "n")
   for (q in seq_len(m)) {
     lo <- cuts[q]
@@ -175,13 +188,15 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
   for (t in event_times) {
     tv <- as.numeric(t)
     if (!(s <= tv && tv <= e)) {
-      stop(sprintf(paste0("sccsno: an event at %g lies outside the ",
-                          "observation period [%g, %g]"), tv, s, e))
+      stop(sprintf(paste0(
+        "sccsno: an event at %g lies outside the ",
+        "observation period [%g, %g]"
+      ), tv, s, e))
     }
     placed <- FALSE
     for (q in seq_len(m)) {
       if ((cuts[q] < tv && tv <= cuts[q + 1L]) ||
-          (q == 1L && tv == cuts[1L])) {
+        (q == 1L && tv == cuts[1L])) {
         cells[q, 4L] <- cells[q, 4L] + 1
         placed <- TRUE
         break
@@ -196,7 +211,8 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
 
 #' .sccsno_rp
 #'
-#' A step of the sccsno_native implementation. Called by \code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}.
+#' A step of the sccsno_native implementation. Called by
+#' \code{morie_sccsno_build_intervals}, \code{morie_sccsno_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -207,8 +223,10 @@ morie_sccsno_build_intervals <- function(start, end, exposure, event_times,
   if (is.matrix(risk_periods)) {
     rp <- risk_periods
   } else {
-    rp <- do.call(rbind, lapply(risk_periods,
-                                function(p) as.numeric(unlist(p))))
+    rp <- do.call(rbind, lapply(
+      risk_periods,
+      function(p) as.numeric(unlist(p))
+    ))
   }
   storage.mode(rp) <- "double"
   rp
@@ -325,7 +343,7 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
     sec <- crossprod(rows, rows * pr)
     H <- H - tot * (sec - outer(mean_, mean_))
   }
-  list(g=g, H=H)
+  list(g = g, H = H)
 }
 
 #' morie_sccsno_fit
@@ -340,16 +358,19 @@ morie_sccsno_loglik <- function(params, cells_by_person, n_risk, n_age) {
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri}, \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se}, \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations}, \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
+#' @return A list with \code{estimate}, \code{relative_incidence}, \code{log_ri},
+#' \code{se_log_ri}, \code{age_effects}, \code{se_age}, \code{coef}, \code{se},
+#' \code{loglik}, \code{n_cases}, \code{converged}, \code{iterations},
+#' \code{n_risk_periods}, \code{n_age_bands}, \code{method}, \code{conditions_out}.
 #' @export
-morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
-                             iters=100, tol=1e-10, ridge=1e-10) {
+morie_sccsno_fit <- function(cases, risk_periods, age_breaks = c(),
+                             iters = 100, tol = 1e-10, ridge = 1e-10) {
   # Maximise the conditional likelihood by Newton-Raphson. cases is a
   # list of lists with names start, end, exposure (or NULL) and
   # events. Only individuals with at least one event contribute.
   rp <- .sccsno_rp(risk_periods)
   ab <- as.numeric(age_breaks)
-  if (is.unsorted(ab, strictly=FALSE)) {
+  if (is.unsorted(ab, strictly = FALSE)) {
     stop("sccsno: age_breaks must be increasing")
   }
   n_risk <- nrow(rp)
@@ -364,8 +385,10 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
     if (is.null(ev) || length(ev) == 0L) {
       next
     }
-    cells <- morie_sccsno_build_intervals(cse[["start"]], cse[["end"]],
-                                          cse[["exposure"]], ev, rp, ab)
+    cells <- morie_sccsno_build_intervals(
+      cse[["start"]], cse[["end"]],
+      cse[["exposure"]], ev, rp, ab
+    )
     cells_by_person[[used + 1L]] <- cells
     used <- used + 1L
   }
@@ -381,10 +404,13 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
     A <- -gh$H + diag(ridge, p)
     step <- tryCatch(
       backsolve(chol(A), forwardsolve(t(chol(A)), gh$g)),
-      error=function(e) NULL)
+      error = function(e) NULL
+    )
     if (is.null(step)) {
-      stop(paste0("sccsno: the information matrix is singular -- some ",
-                  "interval carries no events or no exposure time"))
+      stop(paste0(
+        "sccsno: the information matrix is singular -- some ",
+        "interval carries no events or no exposure time"
+      ))
     }
     # step-halving safeguard: the undamped update oscillates and
     # overflows on strong-effect fixtures (H -> 0, par -> Inf)
@@ -404,23 +430,27 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
   }
   gh <- .sccsno_grad_hess(par, cells_by_person, n_risk, n_age)
   A <- -gh$H + diag(ridge, p)
-  cov_ <- tryCatch(chol2inv(chol(A)), error=function(e) solve(A))
+  cov_ <- tryCatch(chol2inv(chol(A)), error = function(e) solve(A))
   se <- ifelse(diag(cov_) > 0, sqrt(diag(cov_)), NaN)
   beta <- par[seq_len(n_risk)]
   age_idx <- if (p > n_risk) seq.int(n_risk + 1L, p) else integer(0)
   list(
-    estimate=exp(beta),
-    relative_incidence=exp(beta),
-    log_ri=beta, se_log_ri=se[seq_len(n_risk)],
-    age_effects=par[age_idx], se_age=se[age_idx],
-    coef=par, se=se,
-    loglik=morie_sccsno_loglik(par, cells_by_person, n_risk, n_age),
-    n_cases=used, converged=conv, iterations=it,
-    n_risk_periods=n_risk, n_age_bands=n_age,
-    method=paste0("self-controlled case series, conditional ",
-                  "likelihood of Farrington (1995) Sec. 3"),
-    conditions_out=paste0("individual frailty and every ",
-                          "time-invariant covariate")
+    estimate = exp(beta),
+    relative_incidence = exp(beta),
+    log_ri = beta, se_log_ri = se[seq_len(n_risk)],
+    age_effects = par[age_idx], se_age = se[age_idx],
+    coef = par, se = se,
+    loglik = morie_sccsno_loglik(par, cells_by_person, n_risk, n_age),
+    n_cases = used, converged = conv, iterations = it,
+    n_risk_periods = n_risk, n_age_bands = n_age,
+    method = paste0(
+      "self-controlled case series, conditional ",
+      "likelihood of Farrington (1995) Sec. 3"
+    ),
+    conditions_out = paste0(
+      "individual frailty and every ",
+      "time-invariant covariate"
+    )
   )
 }
 
@@ -434,17 +464,19 @@ morie_sccsno_fit <- function(cases, risk_periods, age_breaks=c(),
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return A list with \code{intervals}, \code{level}.
 #' @export
-morie_sccsno_relative_incidence <- function(fit, level=0.95) {
+morie_sccsno_relative_incidence <- function(fit, level = 0.95) {
   # Point estimates and Wald intervals on the incidence scale.
   z <- stats::qnorm(0.5 + as.numeric(level) / 2.0)
   out <- list()
   for (i in seq_along(fit[["log_ri"]])) {
     b <- fit[["log_ri"]][i]
     s <- fit[["se_log_ri"]][i]
-    out[[i]] <- list(ri=exp(b), lower=exp(b - z * s),
-                     upper=exp(b + z * s), log_ri=b, se=s)
+    out[[i]] <- list(
+      ri = exp(b), lower = exp(b - z * s),
+      upper = exp(b + z * s), log_ri = b, se = s
+    )
   }
-  list(intervals=out, level=as.numeric(level))
+  list(intervals = out, level = as.numeric(level))
 }
 
 #' morie_sccsno_check_assumptions
@@ -456,23 +488,27 @@ morie_sccsno_relative_incidence <- function(fit, level=0.95) {
 #' @param fit_with_pre A list; the body reads \code{$relative_incidence} from it.
 #' @param pre_index Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
-#' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design}, \code{tolerance_log}, \code{interpretation}.
+#' @return A list with \code{pre_exposure_ri}, \code{consistent_with_design},
+#' \code{tolerance_log}, \code{interpretation}.
 #' @export
-morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index=0,
-                                           tol=0.25) {
+morie_sccsno_check_assumptions <- function(fit_with_pre, pre_index = 0,
+                                           tol = 0.25) {
   # Read the pre-exposure window as a design diagnostic. A relative
   # incidence far from 1 in a window BEFORE exposure means the event
   # influenced whether or when exposure happened; that breaks the
   # derivation itself.
   ri <- fit_with_pre[["relative_incidence"]][as.integer(pre_index) + 1L]
   ok <- abs(log(ri)) <= as.numeric(tol)
-  list(pre_exposure_ri=ri, consistent_with_design=ok,
-       tolerance_log=as.numeric(tol),
-       interpretation=paste0(
-         "a pre-exposure RI near 1 is consistent with ",
-         "event-independent exposure; far from 1 indicates the ",
-         "event affected exposure, which invalidates the ",
-         "design rather than biasing it"))
+  list(
+    pre_exposure_ri = ri, consistent_with_design = ok,
+    tolerance_log = as.numeric(tol),
+    interpretation = paste0(
+      "a pre-exposure RI near 1 is consistent with ",
+      "event-independent exposure; far from 1 indicates the ",
+      "event affected exposure, which invalidates the ",
+      "design rather than biasing it"
+    )
+  )
 }
 
 #' morie_sccsno_cheatsheet

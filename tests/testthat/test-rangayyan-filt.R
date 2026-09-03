@@ -129,7 +129,8 @@ test_that("HannImp eq (3.101) is finite and sums to one", {
 })
 
 test_that("HannZ eq (3.102) factors the input out", {
-  a <- HannZ(2, 1); b <- HannZ(5, 1)
+  a <- HannZ(2, 1)
+  b <- HannZ(5, 1)
   expect_equal(a$H, b$H)
   expect_equal(Re(a$Y), 2 * Re(a$H))
   expect_true(a$transfer_function_is_input_independent)

@@ -23,5 +23,6 @@ Implements M(D) = f(D) + Lap(sensitivity / epsilon), Dwork-Roth
 Definition 3.3.
 }
 \examples{
-rmorie:::morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8), sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::morie_laplc(value = c(1, 2, 3, 4, 5, 6, 7, 8),
+  sensitivity = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

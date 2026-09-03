@@ -16,3 +16,7 @@ The value of \code{which}.
 Part of the algebraic_combinatorics_native implementation; see the
 file header for the source it follows.
 }
+\examples{
+res <- .morie_primes_upto(n = 3L)
+res
+}

@@ -31,3 +31,10 @@ morie_tmlcountoutcome(y, D, X, offset = NULL, g = NULL, Q1 = NULL, Q0 = NULL, lo
 A \code{RichResult}-style list with \code{estimate},   \code{psi}, \code{epsilon}, \code{se}, \code{ci},   \code{mean_eic}, \code{solves_eic}, \code{scale},   \code{mean_treated}, \code{mean_control}, \code{in_range},   \code{rate_scale}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- morie_tmlcou(y = y, D = g, X = x)
+res
+}

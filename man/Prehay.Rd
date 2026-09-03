@@ -38,7 +38,8 @@ all mediators. Percentile intervals use the (B alpha/2)-th and
 estimates.
 }
 \examples{
-Prehay(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), M = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+Prehay(x = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), M = c(1, 2, 3, 4, 5, 6, 7, 8),
+  y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Preacher, K. J. and Hayes, A. F. (2008), Asymptotic and

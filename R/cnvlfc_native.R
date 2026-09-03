@@ -15,7 +15,8 @@
 
 #' .cnvlfc_embed
 #'
-#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}.
+#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm},
+#' \code{.cnvlfc_cross_map}, \code{cnvlfc_embed}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -24,6 +25,10 @@
 #' @param tau Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return A list with \code{points}, \code{index}, \code{E}, \code{tau}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .cnvlfc_embed(series = x)
+#' res
 .cnvlfc_embed <- function(series, E = 2, tau = 1) {
     v <- as.numeric(series)
     e <- as.integer(E)
@@ -60,6 +65,11 @@
 #' @param b Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .cnvlfc_corr(a = A, b = b)
+#' res
 .cnvlfc_corr <- function(a, b) {
     n <- length(a)
     if (n < 2L) return(NaN)
@@ -106,7 +116,8 @@
 
 #' .cnvlfc_cross_map
 #'
-#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm}, \code{cnvlfc_cross_map}.
+#' A step of the cnvlfc_native implementation. Called by \code{.cnvlfc_ccm},
+#' \code{cnvlfc_cross_map}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -114,10 +125,12 @@
 #' @param response Coerced to numeric by the body, with \code{as.numeric}.
 #' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
 #' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
-#' @param library Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param library Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @param exclude Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
-#' @return A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted}, \code{library}, \code{E}, \code{tau}.
+#' @return A list with \code{rho}, \code{observed}, \code{predicted}, \code{n_predicted},
+#' \code{library}, \code{E}, \code{tau}.
 #' @export
 .cnvlfc_cross_map <- function(driver, response, E = 2L, tau = 1L,
                               library = NULL, seed = 1L, exclude = 0L) {
@@ -202,11 +215,19 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param E Passed to \code{.cnvlfc_embed}. Defaults to \code{2L}.
 #' @param tau Passed to \code{.cnvlfc_embed}. Defaults to \code{1L}.
-#' @param lib_sizes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param lib_sizes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param seed Passed to \code{.cnvlfc_cross_map}. Defaults to \code{1L}.
 #' @param exclude Passed to \code{.cnvlfc_cross_map}. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x}, \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict}, \code{method}.
+#' @return A list with \code{estimate}, \code{x_causes_y}, \code{y_causes_x},
+#' \code{lib_sizes}, \code{E}, \code{tau}, \code{n_embeddable}, \code{verdict},
+#' \code{method}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .cnvlfc_ccm(x = x, y = y)
+#' res
 .cnvlfc_ccm <- function(x, y, E = 2L, tau = 1L, lib_sizes = NULL,
                         seed = 1L, exclude = 0L) {
     X <- as.numeric(x)
@@ -282,6 +303,9 @@
 #' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @return A list with \code{x}, \code{y}, \code{bxy}, \code{byx}.
 #' @export
+#' @examples
+#' res <- .cnvlfc_coupled_logistic(n = 3L)
+#' res
 .cnvlfc_coupled_logistic <- function(n, rx = 3.8, ry = 3.5, bxy = 0.0,
                                      byx = 0.1, x0 = 0.4, y0 = 0.2,
                                      burn = 300L) {
@@ -412,25 +436,3 @@ cnvlfc_convergent_cross_mapping <- function(x, y, E = 2L, tau = 1L, ...) {
 #' @rdname cnvlfc_embed
 #' @export
 morie_cnvlfc <- cnvlfc_embed
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

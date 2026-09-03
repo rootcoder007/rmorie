@@ -162,7 +162,8 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @param online Coerced to numeric by the body, with \code{as.numeric}.
 #' @param step Coerced to integer by the body, with \code{as.integer}.
 #' @param C Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10000}.
-#' @return A list, whose contents depend on the branch taken; across the branches its names are \code{target}, \code{copied}.
+#' @return A list, whose contents depend on the branch taken; across the branches its
+#' names are \code{target}, \code{copied}.
 #' @export
 .polyak_hard_update <- function(target, online, step, C = 10000) {
   # step %% C == 0 : a copy is taken at multiples of C
@@ -188,6 +189,9 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' @param tau Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{halflife}, \code{approx}, \code{tau}, \code{note}.
 #' @export
+#' @examples
+#' res <- .polyak_lag_halflife(tau = 0.5)
+#' res
 .polyak_lag_halflife <- function(tau) {
   t <- as.numeric(tau)
   if (t <= 0 || t >= 1) {
@@ -210,6 +214,9 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .polyak_cheatsheet()
+#' res
 .polyak_cheatsheet <- function() {
   "polyak: (1) averaging the iterates of a SLOWLY decaying stochastic approximation is asymptotically optimal -- the second-order rate without second derivatives, provided the step decays slower than 1/t. (2) Q-learning diverges because the network computes its own target; DQN copies the weights every C steps, DDPG instead TRACKS them, theta' <- tau theta + (1-tau) theta' with tau = 1e-3, so targets move slowly and the problem resembles supervised learning. The lag, about 0.69/tau steps, is the price."
 }

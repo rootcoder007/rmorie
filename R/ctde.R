@@ -103,7 +103,8 @@ Ctde <- function(X, M, Y, m, C = NULL, a = 1, astar = 0) {
 #' @param cbar Numeric; combined arithmetically in the body.
 #' @param a Numeric; combined arithmetically in the body.
 #' @param astar Numeric; combined arithmetically in the body.
-#' @return A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te}, \code{mediated_interaction}, \code{beta}, \code{theta}.
+#' @return A list with \code{pnde}, \code{tnde}, \code{tnie}, \code{pnie}, \code{te},
+#' \code{mediated_interaction}, \code{beta}, \code{theta}.
 #' @export
 .med_effects <- function(beta, theta, cbar, a, astar) {
   d <- a - astar

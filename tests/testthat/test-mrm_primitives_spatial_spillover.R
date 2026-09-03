@@ -105,8 +105,10 @@ test_that("mrm_spatial_spillover_decomposition warns on |rho| >= 1", {
 test_that("mrm_spatial_spillover_decomposition singular invert errors", {
   N <- 5
   W <- matrix(0, N, N)
-  W[1, 2] <- 1; W[2, 1] <- 1
-  W[3, 4] <- 1; W[4, 3] <- 1
+  W[1, 2] <- 1
+  W[2, 1] <- 1
+  W[3, 4] <- 1
+  W[4, 3] <- 1
   # rho = 1 with W not row-standardised triggers near-singular (I - W)
   expect_error(
     mrm_spatial_spillover_decomposition(

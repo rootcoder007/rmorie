@@ -14,8 +14,10 @@ Phase 3JJJ2. Generates a post-quantum key encapsulation keypair.
 Sizes: \code{pk} = 1184 bytes, \code{sk} = 2400 bytes.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- morie_crypto_mlkem768_keygen()
-  c(pk = length(kp$pk), sk = length(kp$sk))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- morie_crypto_mlkem768_keygen()
+    c(pk = length(kp$pk), sk = length(kp$sk))
+  }
 }
 }

@@ -56,10 +56,17 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' source it follows.
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
-#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @param psu Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @return A list with \code{weights}, \code{strata}, \code{psu}, \code{n}, \code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
+#' @param strata Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @param psu Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @return A list with \code{weights}, \code{strata}, \code{psu}, \code{n},
+#' \code{psu_order}, \code{psu_units}, \code{stratum_psus}, \code{stratum_order}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .replwt_design(weights = x)
+#' res
 .replwt_design <- function(weights, strata = NULL, psu = NULL) {
   w <- as.numeric(weights)
   n <- length(w)
@@ -179,7 +186,8 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
+#' @param d A list; the body reads \code{$n}, \code{$psu_order}, \code{$psu_units},
+#' \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
 #' @param method One of \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.
 #' @return A list with \code{weights}, \code{dropped}, \code{scale}, \code{method}.
 #' @export
@@ -243,9 +251,11 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
+#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order},
+#' \code{$stratum_psus}, \code{$weights} from it.
 #' @param fay Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{hadamard_order}, \code{fay}, \code{method}.
+#' @return A list with \code{weights}, \code{scale}, \code{n_replicates},
+#' \code{hadamard_order}, \code{fay}, \code{method}.
 #' @export
 .replwt_brr_weights <- function(d, fay = 0.0) {
   rho <- as.numeric(fay)
@@ -306,10 +316,12 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order}, \code{$stratum_psus}, \code{$weights} from it.
+#' @param d A list; the body reads \code{$psu_units}, \code{$stratum_order},
+#' \code{$stratum_psus}, \code{$weights} from it.
 #' @param R A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
-#' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed}, \code{method}.
+#' @return A list with \code{weights}, \code{scale}, \code{n_replicates}, \code{seed},
+#' \code{method}.
 #' @export
 .replwt_bootstrap_weights <- function(d, R = 200, seed = 1) {
   R <- as.integer(R)
@@ -359,7 +371,8 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' @param d A list; the body reads \code{$weights} from it.
 #' @param rep A list; the body reads \code{$method}, \code{$scale}, \code{$weights} from it.
 #' @param values Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error}, \code{replicates}, \code{n_replicates}, \code{method}.
+#' @return A list with \code{estimate}, \code{theta}, \code{variance}, \code{std_error},
+#' \code{replicates}, \code{n_replicates}, \code{method}.
 #' @export
 .replwt_replicate_variance <- function(estimator, d, rep, values = NULL) {
   call_est <- function(w) {
@@ -392,11 +405,14 @@ METHODS <- c("jk1", "jkn", "brr", "fay", "bootstrap")
 #' source it follows.
 #'
 #' @param d Passed to \code{.replwt_jackknife_weights}.
-#' @param method One of \code{"brr"}, \code{"fay"}, \code{"jk1"}, \code{"jkn"}. Defaults to \code{"jkn"}.
+#' @param method One of \code{"brr"}, \code{"fay"}, \code{"jk1"}, \code{"jkn"}. Defaults
+#' to \code{"jkn"}.
 #' @param R Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{200}.
 #' @param fay A flag; the body branches on it. Defaults to \code{0}.
 #' @param seed Passed to \code{.replwt_bootstrap_weights}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{weights}, \code{scale}, \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay}, \code{seed}.
+#' @return A list with \code{estimate}, \code{weights}, \code{scale},
+#' \code{n_replicates}, \code{method}, \code{dropped}, \code{hadamard_order}, \code{fay},
+#' \code{seed}.
 #' @export
 morie_replwt <- function(d, method = "jkn", R = 200, fay = 0.0, seed = 1) {
   if (!method %in% METHODS) {

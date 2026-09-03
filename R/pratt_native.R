@@ -1,22 +1,22 @@
 # morie.fn -- function file (rootcoder007/morie)
 # Hierarchical attention for document classification.
-# 
+#
 # A document has structure -- words make sentences, sentences make
 # documents -- and the model mirrors it: a word-level encoder with
 # attention produces a sentence vector, and a sentence-level encoder with
 # attention produces the document vector. Two levels of encoding, two
 # levels of attention.
-# 
+#
 # References
 # ----------
 # Yang, Z., Yang, D., Dyer, C., He, X., Smola, A. & Hovy, E. (2016)
 # "Hierarchical Attention Networks for Document Classification",
 # NAACL-HLT 2016, 1480-1489, doi:10.18653/v1/N16-1174.
-# 
+#
 # Bahdanau, D., Cho, K. & Bengio, Y. (2015) "Neural Machine Translation
 # by Jointly Learning to Align and Translate", ICLR 2015,
 # arXiv:1409.0473.
-# 
+#
 # Sukhbaatar, S., Szlam, A., Weston, J. & Fergus, R. (2015)
 # "End-To-End Memory Networks", NIPS 2015, 2440-2448, arXiv:1503.08895.
 
@@ -24,13 +24,17 @@
 
 #' .pratt_mat
 #'
-#' A step of the pratt_native implementation. Called by \code{.pratt_attention}, \code{.pratt_document_vector}, \code{.pratt_sentence_vector}.
+#' A step of the pratt_native implementation. Called by \code{.pratt_attention},
+#' \code{.pratt_document_vector}, \code{.pratt_sentence_vector}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param H A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .pratt_mat(H = 0.5)
+#' res
 .pratt_mat <- function(H) {
   if (is.list(H) && !is.matrix(H)) {
     if (length(H) == 0L) {
@@ -45,20 +49,26 @@
 
 #' .pratt_vec
 #'
-#' A step of the pratt_native implementation. Called by \code{.pratt_attention}, \code{morie_pratt}, \code{morie_pratt_attention_entropy}.
+#' A step of the pratt_native implementation. Called by \code{.pratt_attention},
+#' \code{morie_pratt}, \code{morie_pratt_attention_entropy}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pratt_vec(v = x)
+#' res
 .pratt_vec <- function(v) {
   as.numeric(v)
 }
 
 #' .pratt_attention
 #'
-#' A step of the pratt_native implementation. Called by \code{.pratt_document_vector}, \code{.pratt_sentence_vector}.
+#' A step of the pratt_native implementation. Called by \code{.pratt_document_vector},
+#' \code{.pratt_sentence_vector}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -146,7 +156,9 @@
 #' @param u_s Passed to \code{.pratt_document_vector}.
 #' @param Wc A matrix; passed to \code{\%*\%}.
 #' @param bc Numeric; combined arithmetically in the body.
-#' @return A list with \code{estimate}, \code{probabilities}, \code{document_vector}, \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{probabilities}, \code{document_vector},
+#' \code{sentence_attention}, \code{word_attention}, \code{n_sentences}, \code{method},
+#' \code{note}.
 #' @export
 morie_pratt <- function(word_states, Ww, bw, u_w, Ws, bs, u_s, Wc, bc) {
   S <- list()

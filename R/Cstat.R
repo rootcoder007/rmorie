@@ -77,7 +77,8 @@ Cstat <- function(time, event, risk_score, method = "harrell") {
 #' @param time A vector; its length is taken and its elements indexed.
 #' @param event A vector; indexed elementwise.
 #' @param risk_score A vector; indexed elementwise.
-#' @return A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
+#' @return A list with \code{c_statistic}, \code{se}, \code{ci_lower}, \code{ci_upper},
+#' \code{concordant}, \code{discordant}, \code{tied}, \code{comparable}.
 #' @export
 .cstat_uno <- function(time, event, risk_score) {
   n <- length(time)

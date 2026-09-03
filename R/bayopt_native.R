@@ -9,29 +9,40 @@
 
 #' .bayopt_phi
 #'
-#' A step of the bayopt_native implementation. Called by \code{acquisition_gradient}, \code{expected_improvement}.
+#' A step of the bayopt_native implementation. Called by \code{acquisition_gradient},
+#' \code{expected_improvement}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .bayopt_phi(z = y)
+#' res
 .bayopt_phi <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 #' .Phi
 #'
-#' A step of the bayopt_native implementation. Called by \code{acquisition_gradient}, \code{expected_improvement}, \code{probability_of_improvement}.
+#' A step of the bayopt_native implementation. Called by \code{acquisition_gradient},
+#' \code{expected_improvement}, \code{probability_of_improvement}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Passed to \code{pnorm}.
 #' @return The value of \code{pnorm}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .Phi(z = y)
+#' res
 .Phi <- function(z) pnorm(z)
 
 #' .lengths
 #'
-#' A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}, \code{matern52}, \code{squared_exponential}.
+#' A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient},
+#' \code{matern52}, \code{squared_exponential}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -54,7 +65,8 @@
 
 #' .r2
 #'
-#' A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient}, \code{matern52}, \code{squared_exponential}.
+#' A step of the bayopt_native implementation. Called by \code{gp_posterior_gradient},
+#' \code{matern52}, \code{squared_exponential}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -91,7 +103,7 @@ matern52 <- function(a, b, amplitude = 1, length_scale = 1) {
   ls <- .lengths(length_scale, d)
   r2 <- .r2(a, b, ls)
   s <- sqrt(5 * r2)
-  amplitude * (1 + s + (5/3) * r2) * exp(-s)
+  amplitude * (1 + s + (5 / 3) * r2) * exp(-s)
 }
 
 #' squared_exponential
@@ -124,14 +136,17 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @return A numeric value.
 #' @export
 .dkernel_dr2 <- function(name, amplitude, r2) {
-  if (name == "se") return(-0.5 * amplitude * exp(-0.5 * r2))
+  if (name == "se") {
+    return(-0.5 * amplitude * exp(-0.5 * r2))
+  }
   s <- sqrt(5 * r2)
-  -(5/6) * amplitude * (1 + s) * exp(-s)
+  -(5 / 6) * amplitude * (1 + s) * exp(-s)
 }
 
 #' .kernel
 #'
-#' A step of the bayopt_native implementation. Called by \code{gp_posterior}, \code{gp_posterior_gradient}.
+#' A step of the bayopt_native implementation. Called by \code{gp_posterior},
+#' \code{gp_posterior_gradient}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -139,8 +154,9 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 #' @return One of two values, depending on the branch taken.
 #' @export
 .kernel <- function(name) {
-  if (!(name %in% c("matern52", "se")))
+  if (!(name %in% c("matern52", "se"))) {
     stop("bayopt: kernel must be one of matern52, se")
+  }
   if (name == "matern52") matern52 else squared_exponential
 }
 
@@ -150,13 +166,18 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 
 #' .chol_r
 #'
-#' A step of the bayopt_native implementation. Called by \code{gp_posterior}, \code{gp_posterior_gradient}.
+#' A step of the bayopt_native implementation. Called by \code{gp_posterior},
+#' \code{gp_posterior_gradient}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .chol_r(A = A)
+#' res
 .chol_r <- function(A) {
   A <- as.matrix(A)
   n <- nrow(A)
@@ -166,8 +187,10 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
       s <- A[i, j] - sum(L[i, 1:(j - 1)] * L[j, 1:(j - 1)])
       if (i == j) {
         if (s <= 0) {
-          stop(paste("bayopt: the covariance matrix is not positive",
-                     "definite; add noise or spread the design points"))
+          stop(paste(
+            "bayopt: the covariance matrix is not positive",
+            "definite; add noise or spread the design points"
+          ))
         }
         L[i, j] <- sqrt(s)
       } else {
@@ -180,7 +203,8 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
 
 #' .chol_solve
 #'
-#' A step of the bayopt_native implementation. Called by \code{gp_posterior}, \code{gp_posterior_gradient}.
+#' A step of the bayopt_native implementation. Called by \code{gp_posterior},
+#' \code{gp_posterior_gradient}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -194,8 +218,9 @@ squared_exponential <- function(a, b, amplitude = 1, length_scale = 1) {
   # seq_len, and a guard on the back-substitution: 1:(i - 1) is c(1, 0)
   # at i = 1, and (i + 1):n counts DOWN at i = n, so both ends of this
   # solve read the wrong entries.
-  for (i in seq_len(n))
+  for (i in seq_len(n)) {
     y[i] <- (b[i] - sum(L[i, seq_len(i - 1L)] * y[seq_len(i - 1L)])) / L[i, i]
+  }
   x <- numeric(n)
   for (i in n:1L) {
     s <- 0.0
@@ -232,23 +257,27 @@ gp_posterior <- function(X, y, Xs, kernel = "matern52", amplitude = 1,
   if (nrow(rows) == 0) stop("bayopt: no observations")
   d <- ncol(rows)
   ys <- as.numeric(y)
-  if (length(ys) != nrow(rows))
+  if (length(ys) != nrow(rows)) {
     stop("bayopt: one observation per design point")
+  }
   if (noise < 0) stop("bayopt: noise must be non-negative")
   k <- .kernel(kernel)
   m <- if (is.null(mean)) mean(ys) else as.numeric(mean)
   n <- nrow(rows)
   K <- matrix(0, n, n)
-  for (i in 1:n) for (j in 1:n) {
-    K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
-      (if (i == j) noise else 0)
+  for (i in 1:n) {
+    for (j in 1:n) {
+      K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
+        (if (i == j) noise else 0)
+    }
   }
   L <- .chol_r(K)
   alpha <- .chol_solve(L, ys - m)
   Xsm <- as.matrix(Xs)
   storage.mode(Xsm) <- "double"
-  if (ncol(Xsm) != d)
+  if (ncol(Xsm) != d) {
     stop("bayopt: a query point has the wrong dimension")
+  }
   ns <- nrow(Xsm)
   out_m <- numeric(ns)
   out_v <- numeric(ns)
@@ -297,18 +326,22 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
   q <- as.numeric(xs)
   if (nrow(rows) == 0) stop("bayopt: no observations")
   d <- ncol(rows)
-  if (length(q) != d)
+  if (length(q) != d) {
     stop("bayopt: the query point has the wrong dimension")
-  if (length(ys) != nrow(rows))
+  }
+  if (length(ys) != nrow(rows)) {
     stop("bayopt: one observation per design point")
+  }
   k <- .kernel(kernel)
   ls <- .lengths(length_scale, d)
   m <- if (is.null(mean)) mean(ys) else as.numeric(mean)
   n <- nrow(rows)
   K <- matrix(0, n, n)
-  for (i in 1:n) for (j in 1:n) {
-    K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
-      (if (i == j) noise else 0)
+  for (i in 1:n) {
+    for (j in 1:n) {
+      K[i, j] <- k(rows[i, ], rows[j, ], amplitude, length_scale) +
+        (if (i == j) noise else 0)
+    }
   }
   L <- .chol_r(K)
   alpha <- .chol_solve(L, ys - m)
@@ -351,7 +384,9 @@ gp_posterior_gradient <- function(X, y, xs, kernel = "matern52",
 #' @return The value of \code{.Phi}.
 #' @export
 probability_of_improvement <- function(mu, sd, best, xi = 0) {
-  if (sd <= 0) return(0)
+  if (sd <= 0) {
+    return(0)
+  }
   .Phi((best - xi - mu) / sd)
 }
 
@@ -368,7 +403,9 @@ probability_of_improvement <- function(mu, sd, best, xi = 0) {
 #' @return A numeric value.
 #' @export
 expected_improvement <- function(mu, sd, best, xi = 0) {
-  if (sd <= 0) return(0)
+  if (sd <= 0) {
+    return(0)
+  }
   g <- (best - xi - mu) / sd
   sd * (g * .Phi(g) + .bayopt_phi(g))
 }
@@ -403,10 +440,15 @@ lower_confidence_bound <- function(mu, sd, kappa = 2) {
 #' @return A numeric value.
 #' @export
 acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
-  if (!(acq %in% c("ei", "pi", "lcb")))
+  if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
-  if (acq == "ei") return(expected_improvement(mu, sd, best, xi))
-  if (acq == "pi") return(probability_of_improvement(mu, sd, best, xi))
+  }
+  if (acq == "ei") {
+    return(expected_improvement(mu, sd, best, xi))
+  }
+  if (acq == "pi") {
+    return(probability_of_improvement(mu, sd, best, xi))
+  }
   -lower_confidence_bound(mu, sd, kappa)
 }
 
@@ -428,13 +470,20 @@ acquire <- function(mu, sd, best, acq = "ei", kappa = 2, xi = 0) {
 #' @export
 acquisition_gradient <- function(gmu, gsd, mu, sd, best, acq = "ei",
                                  kappa = 2, xi = 0) {
-  if (!(acq %in% c("ei", "pi", "lcb")))
+  if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
+  }
   d <- length(gmu)
-  if (acq == "lcb") return(-gmu + kappa * gsd)
-  if (sd <= 1e-12) return(rep(0, d))
+  if (acq == "lcb") {
+    return(-gmu + kappa * gsd)
+  }
+  if (sd <= 1e-12) {
+    return(rep(0, d))
+  }
   g <- (best - xi - mu) / sd
-  if (acq == "ei") return(.bayopt_phi(g) * gsd - .Phi(g) * gmu)
+  if (acq == "ei") {
+    return(.bayopt_phi(g) * gsd - .Phi(g) * gmu)
+  }
   dg <- (-gmu - g * gsd) / sd
   .bayopt_phi(g) * dg
 }
@@ -483,20 +532,26 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 
   if (is.null(starts)) {
     starts <- lapply(seq_len(as.integer(n_starts)), function(i) {
-      vapply(1:d, function(j) box[[j]][1] + rnd() * (box[[j]][2] - box[[j]][1]),
-             numeric(1))
+      vapply(
+        1:d, function(j) box[[j]][1] + rnd() * (box[[j]][2] - box[[j]][1]),
+        numeric(1)
+      )
     })
   }
   if (length(starts) == 0) stop("bayopt: no starting points")
 
   score_pt <- function(pt) {
-    p <- gp_posterior(X, y, rbind(pt), kernel, amplitude, length_scale,
-                      noise)
+    p <- gp_posterior(
+      X, y, rbind(pt), kernel, amplitude, length_scale,
+      noise
+    )
     acquire(p$mean[1], p$sd[1], best, acq, kappa, xi)
   }
   clip <- function(pt) {
-    vapply(1:d, function(i) min(max(pt[i], box[[i]][1]), box[[i]][2]),
-           numeric(1))
+    vapply(
+      1:d, function(i) min(max(pt[i], box[[i]][1]), box[[i]][2]),
+      numeric(1)
+    )
   }
 
   best_pt <- NULL
@@ -509,10 +564,14 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
     val <- score_pt(pt)
     evals <- evals + 1
     for (it in seq_len(as.integer(max_iter))) {
-      g <- gp_posterior_gradient(X, y, pt, kernel, amplitude, length_scale,
-                                 noise)
-      g_ <- acquisition_gradient(g$grad_mu, g$grad_sd, g$mu, g$sd,
-                                 best, acq, kappa, xi)
+      g <- gp_posterior_gradient(
+        X, y, pt, kernel, amplitude, length_scale,
+        noise
+      )
+      g_ <- acquisition_gradient(
+        g$grad_mu, g$grad_sd, g$mu, g$sd,
+        best, acq, kappa, xi
+      )
       gn <- sqrt(sum(g_^2))
       if (gn < tol) break
       moved <- FALSE
@@ -537,8 +596,10 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
       best_val <- val
     }
   }
-  list(x = best_pt, acq = best_val, n_starts = length(starts),
-       evaluations = evals)
+  list(
+    x = best_pt, acq = best_val, n_starts = length(starts),
+    evaluations = evals
+  )
 }
 
 # --------------------------------------------------------------------------
@@ -562,32 +623,40 @@ maximise_acquisition <- function(X, y, best, box, acq = "ei",
 #' @param noise Passed to \code{maximise_acquisition}. Defaults to \code{1e-08}.
 #' @param kappa Passed to \code{maximise_acquisition}. Defaults to \code{2}.
 #' @param xi Passed to \code{maximise_acquisition}. Defaults to \code{0}.
-#' @param n_candidates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @param n_candidates Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{200}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0}.
 #' @param X0 Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @param y0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param inner One of \code{"gradient"}, \code{"random"}. Defaults to \code{"gradient"}.
 #' @param n_starts The body requires: bayopt: n_starts must be positive. Defaults to \code{8}.
-#' @return A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y}, \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{x_best}, \code{y_best}, \code{X}, \code{y},
+#' \code{trace}, \code{acq}, \code{kernel}, \code{inner}, \code{n_eval}, \code{method},
+#' \code{note}.
 #' @export
 bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
                    kernel = "matern52", amplitude = 1, length_scale = 1,
                    noise = 1e-8, kappa = 2, xi = 0, n_candidates = 200,
                    seed = 0, X0 = NULL, y0 = NULL, inner = "gradient",
                    n_starts = 8) {
-  if (!(inner %in% c("gradient", "random")))
+  if (!(inner %in% c("gradient", "random"))) {
     stop("bayopt: inner must be 'gradient' or 'random'")
+  }
   if (n_starts < 1) stop("bayopt: n_starts must be positive")
-  if (!(acq %in% c("ei", "pi", "lcb")))
+  if (!(acq %in% c("ei", "pi", "lcb"))) {
     stop("bayopt: acq must be one of ei, pi, lcb")
+  }
   box <- lapply(bounds, function(b) c(as.numeric(b[1]), as.numeric(b[2])))
   if (length(box) == 0) stop("bayopt: bounds are empty")
-  if (any(vapply(box, function(b) b[1] >= b[2], logical(1))))
+  if (any(vapply(box, function(b) b[1] >= b[2], logical(1)))) {
     stop("bayopt: each bound must have lo < hi")
-  if (n_iter < 1 || n_candidates < 1)
+  }
+  if (n_iter < 1 || n_candidates < 1) {
     stop("bayopt: n_iter and n_candidates must be positive")
-  if (is.null(X0) && n_init < 2)
+  }
+  if (is.null(X0) && n_init < 2) {
     stop("bayopt: at least two initial points are needed")
+  }
   d <- length(box)
   st <- as.integer(seed)
   if (st <= 0) st <- 1L
@@ -596,29 +665,40 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
     st / 2147483648
   }
   draw <- function() {
-    vapply(1:d, function(i) box[[i]][1] + rnd() * (box[[i]][2] - box[[i]][1]),
-           numeric(1))
+    vapply(
+      1:d, function(i) box[[i]][1] + rnd() * (box[[i]][2] - box[[i]][1]),
+      numeric(1)
+    )
   }
 
   if (!is.null(X0)) {
     X <- as.matrix(X0)
     storage.mode(X) <- "double"
     if (is.null(y0)) {
-      Y <- vapply(seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
-                  numeric(1))
+      Y <- vapply(
+        seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
+        numeric(1)
+      )
     } else {
       Y <- as.numeric(y0)
     }
-    if (length(Y) != nrow(X))
+    if (length(Y) != nrow(X)) {
       stop("bayopt: X0 and y0 have different lengths")
+    }
   } else {
     # t(sapply(...)) collapses to a 1 x n matrix when d == 1, i.e. the
     # transpose of the design, so ncol was read as the sample size.
-    X <- matrix(unlist(lapply(seq_len(as.integer(n_init)),
-                              function(i) draw())),
-                ncol = d, byrow = TRUE)
-    Y <- vapply(seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
-                numeric(1))
+    X <- matrix(
+      unlist(lapply(
+        seq_len(as.integer(n_init)),
+        function(i) draw()
+      )),
+      ncol = d, byrow = TRUE
+    )
+    Y <- vapply(
+      seq_len(nrow(X)), function(i) as.numeric(f(X[i, ])),
+      numeric(1)
+    )
   }
   if (is.null(rownames(X))) rownames(X) <- NULL
 
@@ -627,38 +707,54 @@ bayopt <- function(f, bounds, n_iter = 20, n_init = 5, acq = "ei",
     best <- min(Y)
     if (inner == "gradient") {
       got <- maximise_acquisition(X, Y, best, box, acq, kernel,
-                                  amplitude, length_scale, noise, kappa,
-                                  xi, n_starts = n_starts, seed = st)
+        amplitude, length_scale, noise, kappa,
+        xi,
+        n_starts = n_starts, seed = st
+      )
       x_new <- got$x
       a_val <- got$acq
     } else {
       cand <- t(sapply(seq_len(as.integer(n_candidates)), function(i) draw()))
-      post <- gp_posterior(X, Y, cand, kernel, amplitude, length_scale,
-                           noise)
-      scores <- vapply(seq_len(nrow(cand)),
-                       function(i) acquire(post$mean[i], post$sd[i], best,
-                                           acq, kappa, xi),
-                       numeric(1))
+      post <- gp_posterior(
+        X, Y, cand, kernel, amplitude, length_scale,
+        noise
+      )
+      scores <- vapply(
+        seq_len(nrow(cand)),
+        function(i) {
+          acquire(
+            post$mean[i], post$sd[i], best,
+            acq, kappa, xi
+          )
+        },
+        numeric(1)
+      )
       k <- which.max(scores)
       x_new <- cand[k, ]
       a_val <- scores[k]
     }
     X <- rbind(X, x_new)
     Y <- c(Y, as.numeric(f(x_new)))
-    trace[[it]] <- list(x = x_new, y = Y[length(Y)], acq = a_val,
-                        best = min(Y))
+    trace[[it]] <- list(
+      x = x_new, y = Y[length(Y)], acq = a_val,
+      best = min(Y)
+    )
   }
   best_idx <- which.min(Y)
-  list(estimate = X[best_idx, ], x_best = X[best_idx, ], y_best = Y[best_idx],
-       X = X, y = Y, trace = trace, acq = acq, kernel = kernel,
-       inner = inner, n_eval = length(Y),
-       method = sprintf("Bayesian optimisation (Mockus 1975; Snoek, %s
+  list(
+    estimate = X[best_idx, ], x_best = X[best_idx, ], y_best = Y[best_idx],
+    X = X, y = Y, trace = trace, acq = acq, kernel = kernel,
+    inner = inner, n_eval = length(Y),
+    method = sprintf("Bayesian optimisation (Mockus 1975; Snoek, %s
                         Larochelle & Adams 2012) with a %s kernel and the
                         %s acquisition", " ", kernel, acq),
-       note = paste("minimisation throughout; acquisition is maximised by",
-                    "multi-start projected gradient ascent on the",
-                    "closed-form gradients; inner='random' is the",
-                    "gradient-free baseline"))
+    note = paste(
+      "minimisation throughout; acquisition is maximised by",
+      "multi-start projected gradient ascent on the",
+      "closed-form gradients; inner='random' is the",
+      "gradient-free baseline"
+    )
+  )
 }
 
 bayesian_optimization <- bayopt

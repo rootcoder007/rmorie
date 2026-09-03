@@ -9,7 +9,8 @@
 
 #' .morie_cox_counting
 #'
-#' A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt}, \code{Shfrm} and 1 others in the module.
+#' A step of the recur_native implementation. Called by \code{Agrec}, \code{Pwpgt},
+#' \code{Shfrm} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -20,8 +21,10 @@
 #' @param strata Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-09}.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter}, \code{n_events}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{beta}, \code{se}, \code{cov}, \code{loglik}, \code{n_iter},
+#' \code{n_events}.
 #' @export
 .morie_cox_counting <- function(start, stop, event, X, strata = NULL,
                                 max_iter = 50L, tol = 1e-9,
@@ -228,7 +231,8 @@ Wlwmm <- function(time, event, X, occurrence, max_iter = 50L, tol = 1e-9) {
 #'   Statistics in Medicine 24(24), 3927-3944.
 #' @export
 #' @examples
-#' Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Survtdc(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0,
+#' 1, 0), marker = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 Survtdc <- function(time, event, marker, t) {
   tt <- as.numeric(time)
   e <- as.numeric(event)

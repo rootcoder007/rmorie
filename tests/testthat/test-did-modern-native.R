@@ -78,7 +78,8 @@ test_that("cross-validation vs didimputation package", {
 
 test_that("degenerate inputs error cleanly", {
   df <- .dm_panel()
-  df_none <- df; df_none$g <- NA
+  df_none <- df
+  df_none$g <- NA
   expect_error(morie_did_sun_abraham(df_none, "y", "id", "t", "g"),
                "No treated units")
   expect_error(morie_did_borusyak(df, "y", "id", "t", "missing_col"),

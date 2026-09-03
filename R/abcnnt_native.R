@@ -31,7 +31,8 @@
 #' @param hidden A count; the body uses it as \code{seq_len(...)}.
 #' @param e Passed to \code{.ghc_norm}.
 #' @param reverse A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba}, \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
+#' @return A list with \code{W1}, \code{b1}, \code{Wm}, \code{bm}, \code{Wa}, \code{ba},
+#' \code{M1}, \code{M2}, \code{dim_x}, \code{dim_t}, \code{hidden}, \code{order}.
 #' @export
 .abcnnt_made_layer <- function(dim_x, dim_t, hidden, e, reverse = FALSE) {
   order <- seq_len(dim_x)
@@ -74,7 +75,9 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t}, \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa}, \code{$Wm} from it.
+#' @param layer A list; the body reads \code{$b1}, \code{$ba}, \code{$bm}, \code{$dim_t},
+#' \code{$dim_x}, \code{$hidden}, \code{$M1}, \code{$M2}, \code{$W1}, \code{$Wa},
+#' \code{$Wm} from it.
 #' @param x Passed to \code{c}.
 #' @param t Passed to \code{c}.
 #' @return A list with \code{mu}, \code{al}, \code{h}.

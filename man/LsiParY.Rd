@@ -20,5 +20,6 @@ A list with \code{y}, \code{h}, \code{s1}, \code{s2}, \code{equivalent}, \code{m
 }
 \keyword{internal}
 \examples{
-LsiParY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8), h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+LsiParY(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

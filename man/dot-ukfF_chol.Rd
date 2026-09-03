@@ -17,3 +17,8 @@ A step of the ukfF_mixedcase_native implementation. Called by \code{.ukfF_sigma_
 See the file header for the source the module follows.
 for the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .ukfF_chol(a = A)
+res
+}

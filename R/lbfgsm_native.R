@@ -38,6 +38,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .lbfgsm_dot(a = A, b = b)
+#' res
 .lbfgsm_dot <- function(a, b) {
   sum(a * b)
 }
@@ -57,7 +62,9 @@
 #' @param c1 Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @param c2 Numeric; combined arithmetically in the body. Defaults to \code{0.9}.
 #' @param max_ls Coerced to integer by the body, with \code{as.integer}. Defaults to \code{60}.
-#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{grad}, \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged}, \code{history}, \code{method}.
+#' @return A list with \code{estimate}, \code{x}, \code{fun}, \code{grad},
+#' \code{grad_norm}, \code{iterations}, \code{n_fun}, \code{memory}, \code{converged},
+#' \code{history}, \code{method}.
 #' @export
 morie_lbfgsm <- function(fun, x0, grad, m = 10, max_iter = 200, tol = 1e-8,
                          c1 = 1e-4, c2 = 0.9, max_ls = 60) {
@@ -205,6 +212,9 @@ lbfgsm <- morie_lbfgsm
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .lbfgsm_cheatsheet()
+#' res
 .lbfgsm_cheatsheet <- function() {
   "lbfgsm: L-BFGS two-loop recursion, H0 = (s'y/y'y) I, curvature pairs with y's <= 0 skipped, Armijo backtracking."
 }

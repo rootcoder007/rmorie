@@ -43,3 +43,8 @@ doi:10.1137/1.9781611970791. Self-concordance, which is what makes
 the barrier method\'s complexity claim hold.
 }
 \keyword{internal}
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- sdpwts_min_eigenvalue_sdp(A = A)
+res
+}

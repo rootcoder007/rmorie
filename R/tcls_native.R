@@ -49,6 +49,9 @@
 #' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_tcls_equal(p = 0.5, q = 0.5)
+#' res
 .morie_tcls_equal <- function(p, q) 0.5 * sum(abs(p - q))
 
 #' .morie_tcls_ordered
@@ -61,6 +64,9 @@
 #' @param q A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_tcls_ordered(p = 0.5, q = 0.5)
+#' res
 .morie_tcls_ordered <- function(p, q) {
   m <- length(p)
   if (m < 2) return(0)
@@ -185,7 +191,8 @@ morie_emd <- function(p, q, ground = "ordered", hierarchy = NULL,
 #'   106-115.
 #' @export
 #' @examples
-#' morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8), sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_tcls(X = c(1, 2, 3, 4, 5, 6, 7, 8), quasi_ids = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' sensitive = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_tcls <- function(X, quasi_ids, sensitive, t, ground = "ordered",
                        hierarchy = NULL, domain = NULL) {
   n <- length(X)

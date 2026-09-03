@@ -15,7 +15,7 @@ morie_anamorphosis(z, y_new)
 Numeric vector on the scale of \code{z}.
 }
 \description{
-\eqn{\phi(y) = F^{-1}(\Phi(y))}, the inverse of \code{\link[=morie_normal_scores]{morie_normal_scores()}},
+\eqn{\phi(y) = F^{-1}(\Phi(y))}, the inverse of \code{morie_normal_scores()},
 eq (5.60). Values outside the observed range are clamped to it, since an
 empirical CDF carries no information beyond its support.
 }

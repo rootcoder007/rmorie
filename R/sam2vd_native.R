@@ -63,13 +63,19 @@
 
 #' .sam2vd_to_num
 #'
-#' A step of the sam2vd_native implementation. Called by \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate}, \code{morie_sam2vd_push_memory}.
+#' A step of the sam2vd_native implementation. Called by
+#' \code{morie_sam2vd_memory_attention}, \code{morie_sam2vd_propagate},
+#' \code{morie_sam2vd_push_memory}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sam2vd_to_num(x = x)
+#' res
 .sam2vd_to_num <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) return(as.numeric(unlist(x)))
@@ -86,7 +92,8 @@
 #'
 #' @param n_recent Coerced to integer by the body, with \code{as.integer}. Defaults to \code{7}.
 #' @param m_prompted Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
-#' @return A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent}, \code{m_prompted}, \code{note}.
+#' @return A list with \code{recent}, \code{prompted}, \code{pointers}, \code{n_recent},
+#' \code{m_prompted}, \code{note}.
 #' @export
 morie_sam2vd_memory_bank <- function(n_recent = 7, m_prompted = 1) {
   N <- as.integer(n_recent)
@@ -207,7 +214,8 @@ morie_sam2vd_temporal_embedding <- function(entry, current_frame,
 #' @param current_frame Passed to \code{morie_sam2vd_temporal_embedding}.
 #' @param n_blocks Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @param include_pointers A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{features}, \code{attended}, \code{n_memories}, \code{weights}, \code{note}.
+#' @return A list with \code{features}, \code{attended}, \code{n_memories},
+#' \code{weights}, \code{note}.
 #' @export
 morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
                                           n_blocks = 1, include_pointers = TRUE) {
@@ -280,7 +288,8 @@ morie_sam2vd_memory_attention <- function(frame_features, bank, current_frame,
 #' @param prompts Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_recent Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{7}.
 #' @param m_prompted Passed to \code{morie_sam2vd_memory_bank}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{masks}, \code{conditioned}, \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{masks}, \code{conditioned},
+#' \code{n_frames}, \code{first_frame_is_sam}, \code{method}, \code{note}.
 #' @export
 morie_sam2vd_propagate <- function(frames, encoder, decoder, prompts = NULL,
                                    n_recent = 7, m_prompted = 1) {
@@ -356,20 +365,3 @@ morie_sam2vd_sam2video <- morie_sam2vd_propagate
 
 # Public names resolved by fn/_lazy_map.json
 morie_sam2vd_sam2_video_propagation <- morie_sam2vd_propagate
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

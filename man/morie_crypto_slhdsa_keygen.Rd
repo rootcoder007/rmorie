@@ -15,7 +15,9 @@ hash function -- the most conservative post-quantum assumption.
 Requires a liboqs build that includes SLH-DSA / SPHINCS+.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+  }
 }
 }

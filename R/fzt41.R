@@ -3,9 +3,15 @@
 #' Bias and variance of the boundary-free survival and cumulative-survival estimators (Theorem 4.1)
 #'
 #' Theorem 4.1, Eqs. (4.10)-(4.16):
-#' \deqn{\mathrm{Bias}\[\tilde S_X(t)\] = -\tfrac{h^2}{2}b_1(t)\mu_2(K) + o(h^2),}{Bias\[Stilde(t)\] = -(h^2/2) b1(t) mu2(K) + o(h^2),}
-#' \deqn{\mathrm{Var}\[\tilde S_X(t)\] = \tfrac{1}{n}\tilde S_X(t)F_X(t) - \tfrac{h}{n}g'(g^{-1}(t))f_X(t)\int V(y)W(y)dy + o(h/n),}{Var\[Stilde(t)\] = (1/n) Stilde(t) F(t) - (h/n) g'(g^-1(t)) f(t) int V(y)W(y)dy + o(h/n),}
-#' \deqn{\mathrm{Bias}\[S_{X,1}(t)\] = \tfrac{h^2}{2}b_2(t)\mu_2(K) + o(h^2),\quad \mathrm{Var}\[S_{X,1}(t)\] = \tfrac{1}{n}\[2\bar S_X(t) - S_X^2(t)\] + o(h/n),}{Bias\[S_X1(t)\] = (h^2/2) b2(t) mu2(K), Var\[S_X1(t)\] = (1/n)\[2 Sbar(t) - S(t)^2\],}
+#' \deqn{\mathrm{Bias}\[\tilde S_X(t)\] = -\tfrac{h^2}{2}b_1(t)\mu_2(K) +
+#' o(h^2),}{Bias\[Stilde(t)\] = -(h^2/2) b1(t) mu2(K) + o(h^2),}
+#' \deqn{\mathrm{Var}\[\tilde S_X(t)\] = \tfrac{1}{n}\tilde S_X(t)F_X(t) -
+#' \tfrac{h}{n}g'(g^{-1}(t))f_X(t)\int V(y)W(y)dy + o(h/n),}{Var\[Stilde(t)\] = (1/n)
+#' Stilde(t) F(t) - (h/n) g'(g^-1(t)) f(t) int V(y)W(y)dy + o(h/n),}
+#' \deqn{\mathrm{Bias}\[S_{X,1}(t)\] = \tfrac{h^2}{2}b_2(t)\mu_2(K) + o(h^2),\quad
+#' \mathrm{Var}\[S_{X,1}(t)\] = \tfrac{1}{n}\[2\bar S_X(t) - S_X^2(t)\] +
+#' o(h/n),}{Bias\[S_X1(t)\] = (h^2/2) b2(t) mu2(K), Var\[S_X1(t)\] = (1/n)\[2 Sbar(t) -
+#' S(t)^2\],}
 #' with `b1(t) = g''(g^-1(t)) f(t) + \[g'(g^-1(t))\]^2 f'(t)` from (4.14) and
 #' `b2` from (4.15).
 #'
@@ -28,7 +34,8 @@
 #' @param density `f_X(t)`.
 #' @param mu2 `int y^2 K(y) dy`.
 #' @param vw `int V(y)W(y)dy`; defaults to the Gaussian `1/sqrt(pi)`.
-#' @return Named list with ``biassurv``, ``varsurv``, ``biascum``, ``varcum``, ``vw``, ``h``, ``n``, ``method``.
+#' @return Named list with ``biassurv``, ``varsurv``, ``biascum``, ``varcum``, ``vw``,
+#' ``h``, ``n``, ``method``.
 #' @references Fauzi and Maesono (2023), Theorem 4.1, Eqs. (4.10)-(4.15).
 #' @examples
 #' Srvbv1(t = 1, n = 100, h = 0.1, surv = 0.4, cdf = 0.6, cumsurv = 0.5,

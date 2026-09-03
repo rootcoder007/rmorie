@@ -3,7 +3,10 @@
 #' MISE of the standard kernel distribution function estimator
 #'
 #' The MISE display of Sec. 2.1, assembled from (2.3) and (2.4):
-#' \deqn{\mathrm{MISE}(\hat F_h) = \frac{h^4}{4}\Big\[\int z^2K(z)dz\Big\]^2\int \[f'(x)\]^2dx + \frac1n\int F(1-F)dx - \frac{2h}{n}r_1 + o(h^4 + h/n).}{MISE(Fhat_h) = (h^4/4)\[int z^2 K dz\]^2 int \[f'(x)\]^2 dx + (1/n) int F(1-F) dx - (2h/n) r1 + o(h^4 + h/n).}
+#' \deqn{\mathrm{MISE}(\hat F_h) = \frac{h^4}{4}\Big\[\int z^2K(z)dz\Big\]^2\int
+#' \[f'(x)\]^2dx + \frac1n\int F(1-F)dx - \frac{2h}{n}r_1 + o(h^4 + h/n).}{MISE(Fhat_h) =
+#' (h^4/4)\[int z^2 K dz\]^2 int \[f'(x)\]^2 dx + (1/n) int F(1-F) dx - (2h/n) r1 + o(h^4
+#' + h/n).}
 #'
 #' Differentiating in `h` and setting to zero gives
 #' `hopt = (2 r1 / (n mu2^2 R(f')))^(1/3)` -- a CUBE root, the reason this
@@ -22,7 +25,8 @@
 #' @param varint `int F(x)(1 - F(x)) dx`.
 #' @param mu2 `int z^2 K(z) dz`.
 #' @param r1 Kernel constant (2.9); defaults to the Gaussian value.
-#' @return Named list with ``mise``, ``biasterm``, ``varterm``, ``smoothgain``, ``hopt``, ``r1``, ``method``.
+#' @return Named list with ``mise``, ``biasterm``, ``varterm``, ``smoothgain``, ``hopt``,
+#' ``r1``, ``method``.
 #' @references Fauzi and Maesono (2023), Sec. 2.1, Eqs. (2.3)-(2.4) and the MISE display.
 #' @examples
 #' Kdfmise(n = 100, h = 0.3, rfp = 0.2, varint = 0.5)

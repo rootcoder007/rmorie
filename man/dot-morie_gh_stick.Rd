@@ -17,3 +17,7 @@ A numeric value.
 \description{
 with the last stick closing so the weights sum to one exactly.
 }
+\examples{
+res <- .morie_gh_stick(alpha = 0.5, K = 3L)
+res
+}

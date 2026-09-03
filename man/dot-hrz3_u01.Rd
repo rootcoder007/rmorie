@@ -19,3 +19,8 @@ carrying out a monotone increasing transformation of (X, W)".  The
 mid-rank map is such a transformation and is exactly reproducible in
 both language arms, unlike a fitted CDF.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .hrz3_u01(v = x)
+res
+}

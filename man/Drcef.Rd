@@ -34,7 +34,9 @@ period \code{g - 1} and period \code{g + e}, against the never-treated.
 }
 \examples{
 set.seed(1)
-r <- Drcef(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)), cohort = rnorm(10)); TRUE
+r <- Drcef(y = rnorm(10), D = rbinom(10, 1, 0.5), unit = rnorm(10), time = sort(runif(10)),
+  cohort = rnorm(10))
+TRUE
 }
 \references{
 Callaway, B. and Sant'Anna, P. H. C. (2021).

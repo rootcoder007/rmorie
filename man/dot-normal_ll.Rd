@@ -17,3 +17,8 @@ A numeric value.
 \description{
 Internal helper mirroring _normal_ll.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .normal_ll(resid = x, sigma2 = 0.5)
+res
+}
