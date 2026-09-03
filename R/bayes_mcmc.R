@@ -247,7 +247,7 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 morie_bayes_rhat <- function(chains) {
   m <- length(chains)
   n <- nrow(chains[[1]])
-  vapply(seq_len(ncol(chains[[1]])), function(j) {
+  r <- vapply(seq_len(ncol(chains[[1]])), function(j) {
     xs <- vapply(chains, function(c) c[, j], numeric(n))
     chain_means <- colMeans(xs)
     grand <- mean(chain_means)
@@ -257,7 +257,7 @@ morie_bayes_rhat <- function(chains) {
       return(1)
     }
     sqrt(((n - 1) / n * W + B / n) / W)
-  }, numeric(1)) -> r
+  }, numeric(1))
   stats::setNames(r, colnames(chains[[1]]))
 }
 
@@ -270,11 +270,11 @@ morie_bayes_rhat <- function(chains) {
 morie_bayes_ess <- function(chains) {
   post <- do.call(rbind, chains)
   n <- nrow(post)
-  vapply(seq_len(ncol(post)), function(j) {
+  e <- vapply(seq_len(ncol(post)), function(j) {
     a <- stats::acf(post[, j], plot = FALSE, lag.max = min(50L, n - 1L))$acf[-1]
     a <- a[seq_len(which(c(a, -1) < 0)[1] - 1)] # sum positive autocorr
     n / (1 + 2 * sum(a, na.rm = TRUE))
-  }, numeric(1)) -> e
+  }, numeric(1))
   stats::setNames(pmax(e, 1), colnames(post))
 }
 
@@ -289,12 +289,12 @@ morie_bayes_geweke <- function(chains) {
   n <- nrow(post)
   a <- seq_len(floor(0.1 * n))
   b <- (ceiling(0.5 * n) + 1):n
-  vapply(seq_len(ncol(post)), function(j) {
+  z <- vapply(seq_len(ncol(post)), function(j) {
     xa <- post[a, j]
     xb <- post[b, j]
     (mean(xa) - mean(xb)) /
       sqrt(stats::var(xa) / length(xa) + stats::var(xb) / length(xb))
-  }, numeric(1)) -> z
+  }, numeric(1))
   stats::setNames(z, colnames(post))
 }
 
