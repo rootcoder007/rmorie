@@ -65,7 +65,7 @@ NULL
 
 #' Construct a survey design object
 #'
-#' Returns a `survey::svydesign` object when `survey` is available; otherwise
+#' Returns a `survey::svydesign` object when `survey` is installed; otherwise
 #' returns a lightweight list with the same fields the morie helpers consume.
 #'
 #' @param data data.frame.
@@ -340,6 +340,20 @@ morie_survey_subpop <- function(df, domain_col, domain_value,
 morie_survey_glm <- function(design, formula,
                              family = c("gaussian", "binomial", "poisson",
                                         "gamma", "negativebinomial")) {
+  # No optional package required: a fallback design (built when survey is
+  # not installed) is fitted with the native design-based estimator, which
+  # carries the same sandwich variance.
+  if (inherits(design, "morie_survey_design_fallback")) {
+    fam_chr <- if (is.character(family)) match.arg(family) else "gaussian"
+    fam <- switch(fam_chr,
+                  gaussian = stats::gaussian(),
+                  binomial = stats::binomial(),
+                  poisson  = stats::poisson(),
+                  gamma    = stats::Gamma(),
+                  negativebinomial = .morie_negbin_family(1))
+    return(.morie_svyglm_native(formula, data = design$data,
+                                weights = design$weights, family = fam))
+  }
   .req_survey()
   if (is.character(family)) {
     family <- match.arg(family)
