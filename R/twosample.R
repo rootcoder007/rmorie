@@ -13,6 +13,11 @@
 #' @param b Numeric; passed to \code{sort}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .w1_distance(a = A, b = b)
+#' res
 .w1_distance <- function(a, b) {
   xs <- sort(a)
   ys <- sort(b)
@@ -115,6 +120,11 @@ morie_wasserstein_test <- function(x, y, B = 999L, cdf = NULL) {
 #' @param gamma Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .mmd_gram(Z = y, kernel = txt, gamma = 0.5)
+#' res
 .mmd_gram <- function(Z, kernel, gamma) {
   if (identical(kernel, "linear")) return(tcrossprod(Z))
   d2 <- as.matrix(stats::dist(Z))^2

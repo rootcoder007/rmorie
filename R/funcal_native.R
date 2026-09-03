@@ -63,6 +63,10 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .funcal_first(x = x)
+#' res
 .funcal_first <- function(x) {
   if (is.null(x) || length(x) == 0) return(NULL)
   if (is.list(x)) return(x[[1]])
@@ -71,12 +75,16 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 
 #' .funcal_hit
 #'
-#' A step of the funcal_native implementation. Called by \code{morie_funcal}, \code{morie_funcal_seed_orthologs}.
+#' A step of the funcal_native implementation. Called by \code{morie_funcal},
+#' \code{morie_funcal_seed_orthologs}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param h Optional; may be \code{NULL}. A list; the body reads \code{$evalue}, \code{$query}, \code{$query_cov}, \code{$score}, \code{$target}, \code{$target_cov} from it.
-#' @return A list with \code{query}, \code{target}, \code{evalue}, \code{score}, \code{query_cov}, \code{target_cov}.
+#' @param h Optional; may be \code{NULL}. A list; the body reads \code{$evalue},
+#' \code{$query}, \code{$query_cov}, \code{$score}, \code{$target}, \code{$target_cov}
+#' from it.
+#' @return A list with \code{query}, \code{target}, \code{evalue}, \code{score},
+#' \code{query_cov}, \code{target_cov}.
 #' @export
 .funcal_hit <- function(h) {
   if (is.null(h) || is.null(h[["query"]]) || is.null(h[["target"]])) {
@@ -108,8 +116,10 @@ ANNOTATION_SOURCES <- c("name", "kegg_pathway", "kegg_module", "go", "ec",
 #' source it follows.
 #'
 #' @param hits See Usage.
-#' @param evalue The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{0.001}.
-#' @param score The body requires: funcal: evalue must be positive and score non-negative. Defaults to \code{60}.
+#' @param evalue The body requires: funcal: evalue must be positive and score
+#' non-negative. Defaults to \code{0.001}.
+#' @param score The body requires: funcal: evalue must be positive and score
+#' non-negative. Defaults to \code{60}.
 #' @param query_cov Passed to \code{<}. Defaults to \code{0.2}.
 #' @param target_cov Passed to \code{<}. Defaults to \code{0.2}.
 #' @param searcher Passed to \code{\%in\%}. Defaults to \code{"diamond"}.
@@ -270,8 +280,10 @@ morie_funcal_assign_orthologs <- function(seeds, groups, taxa = NULL,
 #'
 #' @param assignments A vector; indexed elementwise.
 #' @param annotations A vector; indexed elementwise.
-#' @param sources Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
-#' @param min_support The body requires: funcal: min_support must be at least 1. Defaults to \code{1}.
+#' @param sources Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @param min_support The body requires: funcal: min_support must be at least 1. Defaults
+#' to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL,
@@ -345,7 +357,10 @@ morie_funcal_transfer_terms <- function(assignments, annotations, sources = NULL
 #' @param target_cov Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{0.2}.
 #' @param min_support Passed to \code{morie_funcal_transfer_terms}. Defaults to \code{1}.
 #' @param searcher Passed to \code{morie_funcal_seed_orthologs}. Defaults to \code{"diamond"}.
-#' @return A list with \code{estimate}, \code{annotations}, \code{seeds}, \code{orthologs}, \code{n_queries}, \code{n_with_seed}, \code{n_annotated}, \code{searcher}, \code{target_taxa}, \code{target_types}, \code{min_support}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{seeds},
+#' \code{orthologs}, \code{n_queries}, \code{n_with_seed}, \code{n_annotated},
+#' \code{searcher}, \code{target_taxa}, \code{target_types}, \code{min_support},
+#' \code{method}, \code{note}.
 #' @export
 morie_funcal <- function(hits, groups, annotations, taxa = NULL,
                         target_taxa = NULL, target_types = NULL,

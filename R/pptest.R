@@ -29,6 +29,9 @@
 #' @param kind Compared against \code{"Z(alpha)"}. Defaults to \code{"Z(t_alpha)"}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' res <- .t4_ppcrit(n = 3L)
+#' res
 .t4_ppcrit <- function(n, kind = "Z(t_alpha)") {
   tab <- if (kind == "Z(alpha)") .t4_PP_ALPHA else .t4_PP_TALPHA
   vapply(seq_along(.t4_PP_P),
@@ -55,7 +58,10 @@
 #' @param kind "Z(t_alpha)" or "Z(alpha)".
 #' @return List with \code{statistic}, \code{p_value}, \code{rho},
 #'   \code{lags}, \code{s2}, \code{lambda2}, \code{n}, \code{method}.
-#' @references Phillips and Perron (1988), Biometrika 75:335-346.  Paywalled; the coded form, the pp_sum Bartlett kernel and the Dickey-Fuller tables were read from Trapletti and Hornik's tseries (R/test.R, src/ppsum.c), tarball tseries_0.10-62 from CRAN.  The p-value is interpolated in those tables, flat outside 1%-99%.
+#' @references Phillips and Perron (1988), Biometrika 75:335-346.  Paywalled; the coded
+#' form, the pp_sum Bartlett kernel and the Dickey-Fuller tables were read from Trapletti
+#' and Hornik's tseries (R/test.R, src/ppsum.c), tarball tseries_0.10-62 from CRAN.  The
+#' p-value is interpolated in those tables, flat outside 1%-99%.
 #' @export
 #' @examples
 #' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))

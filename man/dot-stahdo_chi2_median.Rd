@@ -17,3 +17,7 @@ A step of the stahdo_native implementation. Called by \code{.stahdo_stahel_donoh
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .stahdo_chi2_median(p = 0.5)
+res
+}

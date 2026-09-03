@@ -127,4 +127,3 @@ t3ols <- function(X, y) {
   if (inherits(b, "try-error")) b <- .morie_pinv(xtx) %*% xty
   as.numeric(b)
 }
-

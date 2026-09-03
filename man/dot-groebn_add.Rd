@@ -17,3 +17,9 @@ The value of \code{out}, as built in the body.
 \description{
 Polynomial arithmetic
 }
+\examples{
+fn <- function(v) sum(v^2)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .groebn_add(f = fn, g = g)
+res
+}

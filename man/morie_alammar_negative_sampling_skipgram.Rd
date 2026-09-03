@@ -18,5 +18,6 @@ A list with \code{estimate}, \code{positive_logsig}, \code{negative_logsigs}, \c
 }
 \keyword{internal}
 \examples{
-morie_alammar_negative_sampling_skipgram(center_vec = 5L, context_vec = 5L, negative_vecs = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_alammar_negative_sampling_skipgram(center_vec = 5L, context_vec = 5L,
+  negative_vecs = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

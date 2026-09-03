@@ -23,7 +23,8 @@ bounds_fixture <- function(n = 200L, seed = 20260729) {
   for (i in seq_len(n)) D[i] <- as.numeric(nxt() < 0.5 + 0.3 * X[i, 1] / 2)
   y <- 1 + X[, 1] - 0.5 * X[, 2] + D
   for (i in seq_len(n)) y[i] <- y[i] + 2 * nxt() - 1
-  V <- 4L; T_ <- 6L
+  V <- 4L
+  T_ <- 6L
   lg <- matrix(0, T_, V)
   for (i in seq_len(T_)) for (j in seq_len(V)) lg[i, j] <- 4 * nxt() - 2
   tg <- integer(T_)
@@ -287,7 +288,8 @@ test_that("AIPW recovers the effect and sits at the bound; IPW does not", {
 })
 
 test_that("worse overlap raises the bound", {
-  a <- ate_design(2L, conf = 0.2); b <- ate_design(2L, conf = 2.5)
+  a <- ate_design(2L, conf = 0.2)
+  b <- ate_design(2L, conf = 2.5)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
   ob <- morie_efficiency_bound_ate(b$y, b$D, b$X)
   expect_gt(ob$efficiency_bound, oa$efficiency_bound)
@@ -295,7 +297,8 @@ test_that("worse overlap raises the bound", {
 })
 
 test_that("heterogeneity adds to the bound and is isolated from overlap", {
-  a <- ate_design(3L, het = 0); b <- ate_design(3L, het = 1.5)
+  a <- ate_design(3L, het = 0)
+  b <- ate_design(3L, het = 1.5)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
   ob <- morie_efficiency_bound_ate(b$y, b$D, b$X)
   expect_lt(oa$heterogeneity_term, 0.05)
@@ -304,7 +307,8 @@ test_that("heterogeneity adds to the bound and is isolated from overlap", {
 })
 
 test_that("a noisier outcome raises only the overlap term", {
-  a <- ate_design(4L, sd = 0.5); b <- ate_design(4L, sd = 2)
+  a <- ate_design(4L, sd = 0.5)
+  b <- ate_design(4L, sd = 2)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
   ob <- morie_efficiency_bound_ate(b$y, b$D, b$X)
   expect_gt(ob$overlap_term, 3 * oa$overlap_term)
@@ -312,7 +316,8 @@ test_that("a noisier outcome raises only the overlap term", {
 })
 
 test_that("the bound on the standard error scales as one over root n", {
-  a <- ate_design(5L, n = 1000L); b <- ate_design(5L, n = 16000L)
+  a <- ate_design(5L, n = 1000L)
+  b <- ate_design(5L, n = 16000L)
   oa <- morie_efficiency_bound_ate(a$y, a$D, a$X)
   ob <- morie_efficiency_bound_ate(b$y, b$D, b$X)
   expect_equal(oa$se_bound / ob$se_bound, 4, tolerance = 0.2)
@@ -322,7 +327,8 @@ test_that("the plug-in rule does not beat the minimax regret bound", {
   # simulate the local experiment the bound is stated for
   set.seed(6)
   mc <- morie_minimax_regret_constant()
-  V <- 4; n <- 2000L
+  V <- 4
+  n <- 2000L
   worst <- 0
   for (h in seq(0, 6, length.out = 61L)) {
     tau <- h / sqrt(n)

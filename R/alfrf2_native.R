@@ -112,6 +112,10 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' @param P A matrix; indexed by row and column.
 #' @return A list with \code{P}, \code{c}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .alfrf2_centre(P = A)
+#' res
 .alfrf2_centre <- function(P) {
   n <- nrow(P)
   cc <- vapply(1:3, function(d) .w3_csum(P[, d]) / n, numeric(1))
@@ -127,6 +131,11 @@ morie_alfrf2_noise <- function(x0, abar_t, eps) {
 #' @param M A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .alfrf2_det3(M = X)
+#' res
 .alfrf2_det3 <- function(M) {
   M[1, 1] * (M[2, 2] * M[3, 3] - M[2, 3] * M[3, 2]) -
     M[1, 2] * (M[2, 1] * M[3, 3] - M[2, 3] * M[3, 1]) +

@@ -18,3 +18,9 @@ A numeric value.
 normalises so the weights within each treatment state add to unity,
 following Imbens (2004) and Busso, DiNardo and McCrary (2009).
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_wmean(y = y, w = x)
+res
+}

@@ -2,7 +2,8 @@
 #' Empirical spatiotemporal autocovariance
 #'
 #' \deqn{\hat C(h, u) = \frac{1}{|N(h, u)|}
-#'       \sum_{(i,j) \in N(h,u)} (Z_i - \bar Z)(Z_j - \bar Z)}{hat C(h, u) = (1)/(|N(h, u)|) sum_(i,j) in N(h,u) (Z_i - bar Z)(Z_j - bar Z)}.
+#'       \sum_{(i,j) \in N(h,u)} (Z_i - \bar Z)(Z_j - \bar Z)}{hat C(h, u) = (1)/(|N(h,
+#' u)|) sum_(i,j) in N(h,u) (Z_i - bar Z)(Z_j - bar Z)}.
 #'
 #' @param x Numeric vector.
 #' @param coords Coord matrix (n by d_s).

@@ -17,3 +17,8 @@ A step of the b2ot implementation. Called by \code{.b2sinkhorn}, \code{Bottomup}
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .b2mat(a = A)
+res
+}

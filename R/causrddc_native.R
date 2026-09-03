@@ -17,7 +17,8 @@
 
 #' .causrddc_kern
 #'
-#' A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2}, \code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}.
+#' A step of the causrddc_native implementation. Called by \code{.causrddc_hc_sigma2},
+#' \code{.causrddc_kernel_constants}, \code{.causrddc_local_poly_weights}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -35,7 +36,9 @@
 
 #' .causrddc_solve
 #'
-#' A step of the causrddc_native implementation. Called by \code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2}, \code{.causrddc_local_poly_weights} and 1 others in the module.
+#' A step of the causrddc_native implementation. Called by
+#' \code{.causrddc_global_derivative}, \code{.causrddc_hc_sigma2},
+#' \code{.causrddc_local_poly_weights} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -43,6 +46,11 @@
 #' @param b A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .causrddc_solve(M = A, b = b)
+#' res
 .causrddc_solve <- function(M, b) {
   as.numeric(solve(M, b))
 }
@@ -99,6 +107,9 @@
 #' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2001}.
 #' @return A list with \code{G}, \code{th}, \code{P}.
 #' @export
+#' @examples
+#' res <- .causrddc_kernel_constants(p = 0.5, q = 0.5)
+#' res
 .causrddc_kernel_constants <- function(p, q, kernel = "triangular", n_grid = 2001) {
   d <- p + 1
   G <- matrix(0.0, d, d)
@@ -221,6 +232,10 @@
 #' @param h Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .causrddc_density_at_zero(x = x)
+#' res
 .causrddc_density_at_zero <- function(x, h = NULL) {
   n <- length(x)
   xs <- sort(x)
@@ -254,8 +269,10 @@
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param kernel Passed to \code{.causrddc_kernel_constants}. Defaults to \code{"triangular"}.
 #' @param s Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param prelim_order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B}, \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
+#' @param prelim_order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{h}, \code{h_unclamped}, \code{at_bound}, \code{C}, \code{B},
+#' \code{V}, \code{f}, \code{mu_plus}, \code{mu_minus}.
 #' @export
 morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangular", s = 0, prelim_order = NULL) {
   x <- as.numeric(x)
@@ -346,7 +363,8 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #'
 #' @param y A vector; its length is taken.
 #' @param x A vector; its length is taken and its elements indexed.
-#' @param treatment Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param treatment Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param cutoff Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param nu Passed to \code{morie_causrddc_rd_bandwidth}. Defaults to \code{0}.
 #' @param p Numeric; combined arithmetically in the body. Defaults to \code{1}.
@@ -357,7 +375,12 @@ morie_causrddc_rd_bandwidth <- function(x, y, nu = 0, p = 1, kernel = "triangula
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param vce One of \code{"hc"}, \code{"nn"}. Defaults to \code{"nn"}.
 #' @param J Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional}, \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust}, \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu}, \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right}, \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy}, \code{method}.
+#' @return A list with \code{estimate}, \code{bias_corrected}, \code{se_conventional},
+#' \code{se_robust}, \code{ci_conventional}, \code{ci_bias_corrected}, \code{ci_robust},
+#' \code{pvalue_robust}, \code{h}, \code{b}, \code{rho}, \code{p}, \code{q}, \code{nu},
+#' \code{kernel}, \code{vce}, \code{alpha}, \code{n}, \code{n_left}, \code{n_right},
+#' \code{weights_conventional}, \code{weights_bias_corrected}, \code{fuzzy},
+#' \code{method}.
 #' @export
 morie_causrddc <- function(y, x, treatment = NULL, cutoff = 0.0, nu = 0, p = 1, q = NULL, h = NULL, b = NULL, kernel = "triangular", alpha = 0.05, vce = "nn", J = 3) {
   y <- as.numeric(y)

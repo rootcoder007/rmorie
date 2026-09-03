@@ -20,7 +20,8 @@
 #' @param adj A vector; indexed elementwise.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @param rounds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param initial Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{c}, as built in the body.
 #' @export
 wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
@@ -52,8 +53,10 @@ wl_colours <- function(adj, n, rounds = 2, initial = NULL) {
 #'
 #' @param features A matrix; the body checks with \code{is.matrix}.
 #' @param k_keep Coerced to integer by the body, with \code{as.integer}.
-#' @param sort_channel Coerced to integer by the body, with \code{as.integer}. Defaults to \code{-1}.
-#' @return A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded}, \code{k}, \code{sort_channel}, \code{note}.
+#' @param sort_channel Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{-1}.
+#' @return A list with \code{pooled}, \code{order}, \code{n_truncated}, \code{n_padded},
+#' \code{k}, \code{sort_channel}, \code{note}.
 #' @export
 sort_pooling <- function(features, k_keep, sort_channel = -1) {
   X <- if (is.matrix(features)) features else
@@ -138,6 +141,9 @@ order_is_graph_determined <- function(features, adj, perm, k_keep,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sortP_cheatsheet()
+#' res
 .sortP_cheatsheet <- function() {
   paste("sortP: the under-stated problem in graph classification is",
         "how to read vertices in a MEANINGFUL AND CONSISTENT",

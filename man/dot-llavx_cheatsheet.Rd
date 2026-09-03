@@ -14,3 +14,7 @@ A step of the llavx_native implementation. Called by \code{morie_llavx}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .llavx_cheatsheet()
+res
+}

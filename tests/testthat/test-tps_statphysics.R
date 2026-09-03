@@ -133,14 +133,17 @@ test_that("OLS log-log slope recovers Bettencourt beta on synthetic data", {
   beta_true <- 1.16
   Y0_true <- 0.02
   y <- Y0_true * pop^beta_true * exp(stats::rnorm(158, sd = 0.1))
-  lx <- log(pop); ly <- log(y)
-  sx <- mean(lx); sy <- mean(ly)
+  lx <- log(pop)
+  ly <- log(y)
+  sx <- mean(lx)
+  sy <- mean(ly)
   beta_hat <- sum((lx - sx) * (ly - sy)) / sum((lx - sx)^2)
   expect_equal(beta_hat, beta_true, tolerance = 0.05)
 })
 
 test_that("Lotka-Volterra small-amplitude period equals 2 pi / sqrt(alpha gamma)", {
-  alpha <- 0.4; gamma <- 0.6
+  alpha <- 0.4
+  gamma <- 0.6
   T_period <- 2 * pi / sqrt(alpha * gamma)
   expect_equal(T_period, 12.825, tolerance = 1e-3)
 })

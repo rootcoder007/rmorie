@@ -22,7 +22,7 @@ A list with \code{lag}, \code{gamma}, \code{n_pairs}, \code{variance},
 \code{sparse_lags}.
 }
 \description{
-Equation (4.24). Provided alongside \code{\link[=morie_cressie_hawkins]{morie_cressie_hawkins()}} so the
+Equation (4.24). Provided alongside \code{morie_cressie_hawkins()} so the
 two can be read on identical lag classes; \code{morie_spatial_variogram}
 bins differently and is kept for backwards compatibility.
 }

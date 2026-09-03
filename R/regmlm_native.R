@@ -48,6 +48,9 @@ CV_SCHEMES <- c("kfold", "loo")
 #' @param n_ridge Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .regmlm_lambda_grid(p = 0.5, n = 3L)
+#' res
 .regmlm_lambda_grid <- function(p, n, n_ridge = 5) {
   j <- as.integer(n_ridge)
   if (j < 1) stop("regmlm: need at least one ridge predictor")
@@ -101,8 +104,10 @@ CV_SCHEMES <- c("kfold", "loo")
 #' source it follows.
 #'
 #' @param n_markers Coerced to integer by the body, with \code{as.integer}.
-#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param block_size Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
+#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param block_size Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{1000}.
 #' @return The value of \code{blocks}, as built in the body.
 #' @export
 make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
@@ -141,7 +146,8 @@ make_blocks <- function(n_markers, chromosomes = NULL, block_size = 1000) {
 
 #' ridge_fit
 #'
-#' A step of the regmlm_native implementation. Called by \code{level0_predictors}, \code{level1_stack}.
+#' A step of the regmlm_native implementation. Called by \code{level0_predictors},
+#' \code{level1_stack}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -228,7 +234,8 @@ level0_predictors <- function(G, y, blocks, n_ridge = 5) {
 #' @param cv Passed to \code{.regmlm_folds}. Defaults to \code{"kfold"}.
 #' @param k Passed to \code{.regmlm_folds}. Defaults to \code{5}.
 #' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv}, \code{lam}, \code{n_predictors}.
+#' @return A list with \code{weights}, \code{prediction}, \code{out_of_fold}, \code{cv},
+#' \code{lam}, \code{n_predictors}.
 #' @export
 level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
   if (!cv %in% CV_SCHEMES) {
@@ -275,7 +282,8 @@ level1_stack <- function(preds, y, cv = "kfold", k = 5, lam = NULL) {
 #' @param preds A vector; indexed elementwise.
 #' @param meta Iterated over elementwise, with \code{sapply}.
 #' @param weights A vector; indexed elementwise.
-#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param chromosomes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{loco}, \code{chromosomes}, \code{note}.
 #' @export
 loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
@@ -312,7 +320,8 @@ loco_predictions <- function(preds, meta, weights, chromosomes = NULL) {
 #'
 #' @param g A vector; its length is taken.
 #' @param y A vector; its length is taken.
-#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param offset Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param covariates A vector; its length is taken. Defaults to \code{list()}.
 #' @return A list with \code{beta}, \code{se}, \code{chisq}, \code{p_value}, \code{n}.
 #' @export
@@ -369,7 +378,9 @@ test_variant <- function(g, y, offset = NULL, covariates = list()) {
 #' @param n_ridge Passed to \code{level0_predictors}. Defaults to \code{5}.
 #' @param cv Passed to \code{level1_stack}. Defaults to \code{"kfold"}.
 #' @param k Passed to \code{level1_stack}. Defaults to \code{5}.
-#' @return A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0}, \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction}, \code{method}.
+#' @return A list with \code{estimate}, \code{blocks}, \code{n_blocks}, \code{level0},
+#' \code{level1}, \code{loco}, \code{chromosomes}, \code{n_predictors}, \code{reduction},
+#' \code{method}.
 #' @export
 morie_regmlm <- function(G, y, chromosomes = NULL, block_size = 1000, n_ridge = 5,
                         cv = "kfold", k = 5) {
@@ -407,6 +418,9 @@ whole_genome_regression <- morie_regmlm
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .regmlm_cheatsheet()
+#' res
 .regmlm_cheatsheet <- function() {
   "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges per block of B markers at DIFFERENT shrinkages (MAP under a Gaussian prior), turning 500k markers into 2.5k local polygenic scores at B=1000, J=5. Level 1 combines them under cross-validation -- in-sample would be circular. The combined predictor is split by chromosome, each background EXCLUDING its own chromosome, because testing a variant against a background containing it is proximal contamination. Step 2 tests each variant with that background as an offset."
 }

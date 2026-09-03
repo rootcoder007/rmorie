@@ -43,6 +43,10 @@ LOG10E <- log10(exp(1))
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rqtmpl_erf(x = x)
+#' res
 .rqtmpl_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .rqtmpl_erfc
 #'
@@ -53,6 +57,10 @@ LOG10E <- log10(exp(1))
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .rqtmpl_erfc(x = x)
+#' res
 .rqtmpl_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' Haldane's map function
@@ -127,6 +135,10 @@ morie_genotype_probabilities <- function(left, right, r_left, r_right) {
 #' @param sigma2 Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .normal_ll(resid = x, sigma2 = 0.5)
+#' res
 .normal_ll <- function(resid, sigma2) {
   n <- length(resid)
   -0.5 * n * log(2 * pi * sigma2) - sum(resid * resid) / (2 * sigma2)
@@ -386,6 +398,9 @@ morie_progeny_required <- function(var_qtl, var_residual, alpha = 0.05) {
 #' @return Character string summarising interval mapping, LOD, the
 #'   single-marker threshold, ELOD and the 0.22 approximation.
 #' @export
+#' @examples
+#' res <- .rqtmpl_morie_cheatsheet()
+#' res
 .rqtmpl_morie_cheatsheet <- function() {
   paste("rqtmpl: interval mapping walks a QTL along an interval",
         "and maximises the MIXTURE likelihood (7) by EM, because",

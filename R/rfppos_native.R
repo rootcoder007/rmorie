@@ -71,19 +71,29 @@
 #' @param b A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .rfppos_cross(a = A, b = b)
+#' res
 .rfppos_cross <- function(a, b)
   c(a[2] * b[3] - a[3] * b[2], a[3] * b[1] - a[1] * b[3],
     a[1] * b[2] - a[2] * b[1])
 
 #' .rfppos_norm
 #'
-#' A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle}, \code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
+#' A step of the rfppos_native implementation. Called by \code{morie_rfppos_angle},
+#' \code{morie_rfppos_dihedral}, \code{morie_rfppos_distance}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .rfppos_norm(a = A)
+#' res
 .rfppos_norm <- function(a) sqrt(.w3_csum(a * a))
 
 #' The straight-line distance between two points

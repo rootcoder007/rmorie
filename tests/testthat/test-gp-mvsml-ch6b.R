@@ -12,7 +12,8 @@ test_that("eq (6.10) ridge form reproduces G (p.194)", {
 
 test_that("the inverse-Wishart draw has mean S/(nu-p-1)", {
   set.seed(3)
-  nu <- 30; S <- diag(c(4, 9))
+  nu <- 30
+  S <- diag(c(4, 9))
   d <- replicate(600, morie_inv_wishart(nu, S),
                  simplify = FALSE)
   m00 <- mean(vapply(d, function(m) m[1, 1], 0))
@@ -26,9 +27,12 @@ test_that("BMTME conditionals follow the p.196 Gibbs steps", {
   set.seed(5)
   A <- matrix(rnorm(6 * 8), nrow = 6)
   G <- morie_grm(A) + diag(0.4, 6)
-  J <- 6L; I <- 2L; nT <- 2L
+  J <- 6L
+  I <- 2L
+  nT <- 2L
   Y <- matrix(rnorm(J * nT, 4, 1), nrow = J)
-  Z2 <- matrix(0, J, I * J); Z2[cbind(1:J, 1:J)] <- 1
+  Z2 <- matrix(0, J, I * J)
+  Z2[cbind(1:J, 1:J)] <- 1
   b1 <- cbind(0.1 * (1:J), -0.05 * (1:J))
   b2 <- cbind(0.02 * (1:(I * J)), 0.01 * (1:(I * J)))
   r <- morie_bmtme_conditionals(Y, diag(J), Z2, G,

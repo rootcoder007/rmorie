@@ -2,7 +2,8 @@
 #' Geographically weighted regression (GWR)
 #'
 #' Local WLS at each site i:
-#' \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i) X)^-1 X^top W(s_i) y}.
+#' \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i)
+#' X)^-1 X^top W(s_i) y}.
 #'
 #' @param x Design matrix (n by k).
 #' @param y Response, length n.

@@ -47,13 +47,17 @@
 
 #' .tmlcic_logit
 #'
-#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_hier_cluster_arm},
+#' \code{.tmlcic_hier_individual_arm}, \code{morie_tmlcic_candidate_tmle}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tmlcic_logit(p = 0.5)
+#' res
 .tmlcic_logit <- function(p) {
   q <- min(max(as.numeric(p), .tmlcic_EPS), 1.0 - .tmlcic_EPS)
   log(q / (1.0 - q))
@@ -61,13 +65,19 @@
 
 #' Vectorised sigmoid (.s03sigmoid is scalar-only)
 #'
-#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fluct}, \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in the module.
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fluct},
+#' \code{.tmlcic_hier_cluster_arm}, \code{.tmlcic_hier_individual_arm} and 1 others in
+#' the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Iterated over elementwise, with \code{vapply}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcic_sig(z = y)
+#' res
 .tmlcic_sig <- function(z) {
   # vectorised sigmoid (.s03sigmoid is scalar-only)
   vapply(z, .s03sigmoid, numeric(1))
@@ -75,17 +85,25 @@
 
 #' Weighted logistic IRLS with a ridge penalty
 #'
-#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g}, \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the module.
+#' A step of the tmlcic_native implementation. Called by \code{.tmlcic_fit_g},
+#' \code{.tmlcic_fit_working_model}, \code{.tmlcic_hier_cluster_arm} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @param y Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}. Defaults to \code{1e-10}.
-#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
-.tmlcic_wlogit <- function(X, y, ridge=1e-10, obs_weights=NULL) {
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcic_wlogit(X = x, y = y)
+#' res
+.tmlcic_wlogit <- function(X, y, ridge = 1e-10, obs_weights = NULL) {
   # Weighted logistic IRLS with a ridge penalty.
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -99,7 +117,7 @@
     Wt <- w * mu * (1 - mu)
     XtWX <- crossprod(X, X * Wt) + diag(max(ridge, 1e-10), p)
     Xtr <- as.numeric(crossprod(X, w * (y - mu)))
-    step <- tryCatch(solve(XtWX, Xtr), error=function(e) rep(0.0, p))
+    step <- tryCatch(solve(XtWX, Xtr), error = function(e) rep(0.0, p))
     beta <- beta + step
     if (max(abs(step)) < 1e-13) {
       break
@@ -116,10 +134,11 @@
 #' @param off A vector; indexed elementwise.
 #' @param H A vector; indexed elementwise.
 #' @param rows Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param obs_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{eps}, as built in the body.
 #' @export
-.tmlcic_fluct <- function(y, off, H, rows=NULL, obs_weights=NULL) {
+.tmlcic_fluct <- function(y, off, H, rows = NULL, obs_weights = NULL) {
   # One-parameter logistic fluctuation: solve
   # sum w H (y - sigmoid(off + eps H)) = 0 for eps on the given rows.
   idx <- if (is.null(rows)) seq_along(y) else rows
@@ -128,7 +147,7 @@
   for (it in seq_len(100L)) {
     p <- .tmlcic_sig(off[idx] + eps * H[idx])
     grad <- sum(w[idx] * H[idx] * (y[idx] - p))
-    hess <- -sum(w[idx] * H[idx] ^ 2 * p * (1 - p))
+    hess <- -sum(w[idx] * H[idx]^2 * p * (1 - p))
     if (abs(hess) < 1e-12) {
       break
     }
@@ -150,19 +169,23 @@
 #' @param interactions A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{lib}, as built in the body.
 #' @export
-morie_tmlcic_default_library <- function(p, interactions=TRUE) {
+morie_tmlcic_default_library <- function(p, interactions = TRUE) {
   # The chapter's example library: the unadjusted model, one main term
   # per covariate, and optionally one treatment interaction each. cols
   # are 0-based covariate indices.
-  lib <- list(list(name="unadjusted", cols=integer(0), interact=FALSE))
+  lib <- list(list(name = "unadjusted", cols = integer(0), interact = FALSE))
   for (j in seq_len(p)) {
-    lib <- c(lib, list(list(name=sprintf("W%d", j), cols=(j - 1L),
-                            interact=FALSE)))
+    lib <- c(lib, list(list(
+      name = sprintf("W%d", j), cols = (j - 1L),
+      interact = FALSE
+    )))
   }
   if (interactions) {
     for (j in seq_len(p)) {
-      lib <- c(lib, list(list(name=sprintf("W%d x A", j), cols=(j - 1L),
-                              interact=TRUE)))
+      lib <- c(lib, list(list(
+        name = sprintf("W%d x A", j), cols = (j - 1L),
+        interact = TRUE
+      )))
     }
   }
   lib
@@ -208,14 +231,15 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   # logit[Qbar(A,W)] on the candidate's terms, fitted on rows.
   rowf <- .tmlcic_row_fun(W, cand)
   X <- do.call(rbind, lapply(rows, function(i) rowf(A[i], i)))
-  b <- .tmlcic_wlogit(X, y[rows], ridge=max(ridge, 1e-10))
+  b <- .tmlcic_wlogit(X, y[rows], ridge = max(ridge, 1e-10))
   q <- function(a, i) .s03sigmoid(sum(b * rowf(a, i)))
-  list(q=q, b=b)
+  list(q = q, b = b)
 }
 
 #' A candidate for the exposure mechanism, P(A = 1 | W)
 #'
-#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' A step of the tmlcic_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -230,14 +254,15 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
   # A candidate for the exposure mechanism, P(A = 1 | W).
   cols1 <- cand$cols + 1L
   X <- do.call(rbind, lapply(rows, function(i) c(1.0, W[i, cols1])))
-  b <- .tmlcic_wlogit(X, A[rows], ridge=max(ridge, 1e-10))
+  b <- .tmlcic_wlogit(X, A[rows], ridge = max(ridge, 1e-10))
   g1 <- function(i) .s03sigmoid(sum(b * c(1.0, W[i, cols1])))
-  list(g1=g1, b=b)
+  list(g1 = g1, b = b)
 }
 
 #' morie_tmlcic_candidate_tmle
 #'
-#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
+#' A step of the tmlcic_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -252,9 +277,9 @@ morie_tmlcic_default_library <- function(p, interactions=TRUE) {
 #' @param target_step A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{q1}, \code{q0}, \code{qa}, \code{info}.
 #' @export
-morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
-                                        eval_rows=NULL, ridge=1e-8,
-                                        target_step=TRUE) {
+morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows = NULL,
+                                        eval_rows = NULL, ridge = 1e-8,
+                                        target_step = TRUE) {
   # One candidate TMLE: initial fit, targeting, predictions. Returns
   # list(q1, q0, qa, info) with the targeted predictions under
   # treatment and control and at the observed exposure.
@@ -272,8 +297,10 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
   }
   eps <- 0.0
   if (target_step) {
-    off <- vapply(seq_len(n), function(i) .tmlcic_logit(q(A[i], i)),
-                  numeric(1))
+    off <- vapply(
+      seq_len(n), function(i) .tmlcic_logit(q(A[i], i)),
+      numeric(1)
+    )
     eps <- .tmlcic_fluct(y, off, H, rows)
   }
   q1 <- rep(NA_real_, n)
@@ -285,12 +312,13 @@ morie_tmlcic_candidate_tmle <- function(y, A, W, cand, g1, rows=NULL,
     q0[i] <- .s03sigmoid(.tmlcic_logit(q(0.0, i)) - eps / (1.0 - p1))
     qa[i] <- if (A[i] == 1.0) q1[i] else q0[i]
   }
-  list(q1=q1, q0=q0, qa=qa, info=list(eps=eps, gA=gA, H=H))
+  list(q1 = q1, q0 = q0, qa = qa, info = list(eps = eps, gA = gA, H = H))
 }
 
 #' morie_tmlcic_influence_curve
 #'
-#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
+#' A step of the tmlcic_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}, \code{morie_tmlcic_tmle_cluster_ic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -330,7 +358,8 @@ morie_tmlcic_influence_curve <- function(y, A, q1, q0, qa, gA, rows, psi,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param cluster Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{lapply}.
 #' @export
@@ -375,8 +404,8 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
                                            target) {
   # The design's variance estimator. Returns list(var, info).
   if (design == "unmatched") {
-    v <- sum(D[seq_len(n)] ^ 2) / n
-    return(list(var=v / n, info=list(unit="observation", m=n)))
+    v <- sum(D[seq_len(n)]^2) / n
+    return(list(var = v / n, info = list(unit = "observation", m = n)))
   }
   if (target == "PATE") {
     res <- y[seq_len(n)] - qa[seq_len(n)]
@@ -391,19 +420,22 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
       }
     }
     rho <- rho / length(groups)
-    v <- sum(D[seq_len(n)] ^ 2) / n - 2.0 * rho
-    return(list(var=max(v, 0.0) / n,
-                info=list(unit="pair", m=length(groups), rho=rho)))
+    v <- sum(D[seq_len(n)]^2) / n - 2.0 * rho
+    return(list(
+      var = max(v, 0.0) / n,
+      info = list(unit = "pair", m = length(groups), rho = rho)
+    ))
   }
   dbar <- vapply(groups, function(grp) sum(D[grp]) / length(grp), numeric(1))
   m <- length(groups)
-  v <- sum(dbar ^ 2) / m
-  list(var=v / m, info=list(unit="pair", m=m))
+  v <- sum(dbar^2) / m
+  list(var = v / m, info = list(unit = "pair", m = m))
 }
 
 #' Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched
 #'
-#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' A step of the tmlcic_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -419,7 +451,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 .tmlcic_loss <- function(D, y, qa, groups, design, target, rows) {
   # Eq. (13.5)/(13.6) unmatched, (13.8)/(13.9) matched.
   if (design == "unmatched") {
-    return(sum(D[rows] ^ 2) / length(rows))
+    return(sum(D[rows]^2) / length(rows))
   }
   tot <- 0.0
   m <- 0L
@@ -430,7 +462,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
     }
     m <- m + 1L
     if (target == "PATE") {
-      val <- sum(D[g] ^ 2) / length(g)
+      val <- sum(D[g]^2) / length(g)
       if (length(g) > 1L) {
         for (a in seq_len(length(g) - 1L)) {
           for (b in seq.int(a + 1L, length(g))) {
@@ -449,12 +481,14 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 
 #' Folds that respect the pairing: a pair is never split
 #'
-#' A step of the tmlcic_native implementation. Called by \code{morie_tmlcic_adaptive_prespecification}.
+#' A step of the tmlcic_native implementation. Called by
+#' \code{morie_tmlcic_adaptive_prespecification}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param groups See Usage.
-#' @param n_folds Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_folds Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param design Compared against \code{"unmatched"}.
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{Filter}.
@@ -467,7 +501,7 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
     units <- groups
   }
   V <- if (is.null(n_folds) || identical(n_folds, 0) ||
-           identical(n_folds, "loo")) {
+    identical(n_folds, "loo")) {
     length(units)
   } else {
     max(2L, min(as.integer(n_folds), length(units)))
@@ -496,12 +530,13 @@ morie_tmlcic_variance_estimate <- function(D, y, qa, groups, n, design,
 #' @param g_library Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param n_folds Passed to \code{.tmlcic_cv_folds}.
 #' @param ridge Passed to \code{morie_tmlcic_candidate_tmle}. Defaults to \code{1e-08}.
-#' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names}, \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
+#' @return A list with \code{q_candidate}, \code{q_risks}, \code{q_names},
+#' \code{g_candidate}, \code{g_risks}, \code{g_names}, \code{gfit}, \code{n_folds}.
 #' @export
 morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
-                                                   target, library=NULL,
-                                                   g_library=NULL,
-                                                   n_folds=NULL, ridge=1e-8) {
+                                                   target, library = NULL,
+                                                   g_library = NULL,
+                                                   n_folds = NULL, ridge = 1e-8) {
   # Sec. 13.2-13.4: choose the working model, then choose g.
   n <- length(y)
   p <- ncol(W)
@@ -516,24 +551,32 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
         next
       }
       g1 <- gfit(train)
-      ct <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1, rows=train,
-                                        ridge=ridge)
+      ct <- morie_tmlcic_candidate_tmle(y, A, W, cand, g1,
+        rows = train,
+        ridge = ridge
+      )
       psi <- sum(ct$q1[val] - ct$q0[val]) / length(val)
-      D <- morie_tmlcic_influence_curve(y, A, ct$q1, ct$q0, ct$qa,
-                                        ct$info$gA, val, psi, target)
+      D <- morie_tmlcic_influence_curve(
+        y, A, ct$q1, ct$q0, ct$qa,
+        ct$info$gA, val, psi, target
+      )
       tot <- tot + .tmlcic_loss(D, y, ct$qa, groups, design, target, val)
     }
     tot / length(folds)
   }
-  q_risks <- vapply(lib, function(c) cv_risk(c, function(t) known_g),
-                    numeric(1))
+  q_risks <- vapply(
+    lib, function(c) cv_risk(c, function(t) known_g),
+    numeric(1)
+  )
   best_q <- which.min(q_risks)
   chosen <- lib[[best_q]]
   glib <- if (is.null(g_library)) {
-    g <- list(list(name="known (0.5)", cols=integer(0), interact=FALSE))
+    g <- list(list(name = "known (0.5)", cols = integer(0), interact = FALSE))
     for (j in seq_len(p)) {
-      g <- c(g, list(list(name=sprintf("W%d", j), cols=(j - 1L),
-                          interact=FALSE)))
+      g <- c(g, list(list(
+        name = sprintf("W%d", j), cols = (j - 1L),
+        interact = FALSE
+      )))
     }
     g
   } else {
@@ -546,14 +589,18 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
       function(train) .tmlcic_fit_g(A, W, cand_g, train, ridge)$g1
     }
   }
-  g_risks <- vapply(glib, function(cg) cv_risk(chosen, gfit_for(cg)),
-                    numeric(1))
+  g_risks <- vapply(
+    glib, function(cg) cv_risk(chosen, gfit_for(cg)),
+    numeric(1)
+  )
   best_g <- which.min(g_risks)
-  list(q_candidate=chosen, q_risks=q_risks,
-       q_names=vapply(lib, function(c) c$name, character(1)),
-       g_candidate=glib[[best_g]], g_risks=g_risks,
-       g_names=vapply(glib, function(c) c$name, character(1)),
-       gfit=gfit_for(glib[[best_g]]), n_folds=length(folds))
+  list(
+    q_candidate = chosen, q_risks = q_risks,
+    q_names = vapply(lib, function(c) c$name, character(1)),
+    g_candidate = glib[[best_g]], g_risks = g_risks,
+    g_names = vapply(glib, function(c) c$name, character(1)),
+    gfit = gfit_for(glib[[best_g]]), n_folds = length(folds)
+  )
 }
 
 #' morie_tmlcic_tmle_cluster_ic
@@ -574,13 +621,18 @@ morie_tmlcic_adaptive_prespecification <- function(y, A, W, groups, design,
 #' @param adapt A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{morie_tmlcic_adaptive_prespecification}. Defaults to \code{1e-08}.
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
-#' @return A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level}, \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected}, \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon}, \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units}, \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt}, \code{method}.
+#' @return A list with \code{estimate}, \code{se}, \code{n}, \code{ci}, \code{level},
+#' \code{unadjusted}, \code{se_unadjusted}, \code{variance_ratio}, \code{q_selected},
+#' \code{q_risks}, \code{g_selected}, \code{g_risks}, \code{epsilon},
+#' \code{influence_curve}, \code{eic_mean}, \code{rho}, \code{independent_units},
+#' \code{unit}, \code{design}, \code{target}, \code{n_folds}, \code{adapt},
+#' \code{method}.
 #' @export
-morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
-                                         target="SATE", design=NULL,
-                                         library=NULL, g_library=NULL,
-                                         n_folds=NULL, adapt=TRUE,
-                                         ridge=1e-8, level=0.95) {
+morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster = NULL,
+                                         target = "SATE", design = NULL,
+                                         library = NULL, g_library = NULL,
+                                         n_folds = NULL, adapt = TRUE,
+                                         ridge = 1e-8, level = 0.95) {
   # TMLE for a cluster randomized trial, with adaptive
   # pre-specification of the adjustment set.
   if (!(target %in% .tmlcic_TARGETS)) {
@@ -606,8 +658,10 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
     design <- if (is.null(cluster)) "unmatched" else "matched"
   }
   if (!(design %in% .tmlcic_DESIGNS)) {
-    stop(sprintf("tmlcic: design must be one of %s, got %s",
-                 paste(.tmlcic_DESIGNS, collapse=", "), design))
+    stop(sprintf(
+      "tmlcic: design must be one of %s, got %s",
+      paste(.tmlcic_DESIGNS, collapse = ", "), design
+    ))
   }
   groups <- if (design != "unmatched") {
     .tmlcic_pairs_from(cluster, n)
@@ -615,8 +669,10 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
     lapply(seq_len(n), function(i) i)
   }
   if (design == "matched" && any(vapply(groups, length, integer(1)) != 2L)) {
-    stop(paste0("tmlcic: design='matched' needs pairs; use ",
-                "design='clustered' for other sizes"))
+    stop(paste0(
+      "tmlcic: design='matched' needs pairs; use ",
+      "design='clustered' for other sizes"
+    ))
   }
   if (n < 4L) {
     stop(sprintf("tmlcic: need at least 4 units, got %d", n))
@@ -628,61 +684,74 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
     stop("tmlcic: the outcome is constant")
   }
   ys <- (yv - ymin) / rng
-  unadj <- list(name="unadjusted", cols=integer(0), interact=FALSE)
+  unadj <- list(name = "unadjusted", cols = integer(0), interact = FALSE)
   known_g <- function(i) 0.5
   if (adapt) {
     sel <- morie_tmlcic_adaptive_prespecification(ys, Av, Wm, groups,
-                                                  design, target,
-                                                  library=library,
-                                                  g_library=g_library,
-                                                  n_folds=n_folds,
-                                                  ridge=ridge)
+      design, target,
+      library = library,
+      g_library = g_library,
+      n_folds = n_folds,
+      ridge = ridge
+    )
     cand <- sel$q_candidate
     gfit <- sel$gfit
     g1 <- gfit(seq_len(n))
   } else {
-    sel <- list(q_candidate=unadj, q_risks=numeric(0), q_names=character(0),
-                g_candidate=list(name="known (0.5)"), g_risks=numeric(0),
-                g_names=character(0), n_folds=0L)
+    sel <- list(
+      q_candidate = unadj, q_risks = numeric(0), q_names = character(0),
+      g_candidate = list(name = "known (0.5)"), g_risks = numeric(0),
+      g_names = character(0), n_folds = 0L
+    )
     cand <- unadj
     g1 <- known_g
   }
-  ct <- morie_tmlcic_candidate_tmle(ys, Av, Wm, cand, g1, ridge=ridge)
+  ct <- morie_tmlcic_candidate_tmle(ys, Av, Wm, cand, g1, ridge = ridge)
   rows <- seq_len(n)
   psi_s <- sum(ct$q1 - ct$q0) / n
-  Dic <- morie_tmlcic_influence_curve(ys, Av, ct$q1, ct$q0, ct$qa,
-                                      ct$info$gA, rows, psi_s, target)
-  ve <- morie_tmlcic_variance_estimate(Dic, ys, ct$qa, groups, n, design,
-                                       target)
+  Dic <- morie_tmlcic_influence_curve(
+    ys, Av, ct$q1, ct$q0, ct$qa,
+    ct$info$gA, rows, psi_s, target
+  )
+  ve <- morie_tmlcic_variance_estimate(
+    Dic, ys, ct$qa, groups, n, design,
+    target
+  )
   var_s <- ve$var
   vinfo <- ve$info
-  cu <- morie_tmlcic_candidate_tmle(ys, Av, Wm, unadj, known_g, ridge=ridge)
+  cu <- morie_tmlcic_candidate_tmle(ys, Av, Wm, unadj, known_g, ridge = ridge)
   psi_u <- sum(cu$q1 - cu$q0) / n
-  Du <- morie_tmlcic_influence_curve(ys, Av, cu$q1, cu$q0, cu$qa,
-                                     cu$info$gA, rows, psi_u, target)
-  var_u <- morie_tmlcic_variance_estimate(Du, ys, cu$qa, groups, n, design,
-                                          target)$var
+  Du <- morie_tmlcic_influence_curve(
+    ys, Av, cu$q1, cu$q0, cu$qa,
+    cu$info$gA, rows, psi_u, target
+  )
+  var_u <- morie_tmlcic_variance_estimate(
+    Du, ys, cu$qa, groups, n, design,
+    target
+  )$var
   psi <- rng * psi_s
   se <- rng * sqrt(var_s)
   se_u <- rng * sqrt(var_u)
   z <- .s03qnorm(0.5 + 0.5 * as.numeric(level))
   list(
-    estimate=psi, se=se, n=n,
-    ci=c(psi - z * se, psi + z * se), level=as.numeric(level),
-    unadjusted=rng * psi_u, se_unadjusted=se_u,
-    variance_ratio=if (var_u > 0.0) var_s / var_u else NaN,
-    q_selected=sel$q_candidate$name,
-    q_risks=stats::setNames(as.list(sel$q_risks), sel$q_names),
-    g_selected=sel$g_candidate$name,
-    g_risks=stats::setNames(as.list(sel$g_risks), sel$g_names),
-    epsilon=ct$info$eps,
-    influence_curve=Dic[rows] * rng,
-    eic_mean=sum(Dic[rows]) / n,
-    rho=if (!is.null(vinfo$rho)) vinfo$rho else NaN,
-    independent_units=vinfo$m, unit=vinfo$unit,
-    design=design, target=target, n_folds=sel$n_folds, adapt=isTRUE(adapt),
-    method=paste0("adaptive pre-specification TMLE, Balzer, van der ",
-                  "Laan & Petersen (2018) Ch. 13")
+    estimate = psi, se = se, n = n,
+    ci = c(psi - z * se, psi + z * se), level = as.numeric(level),
+    unadjusted = rng * psi_u, se_unadjusted = se_u,
+    variance_ratio = if (var_u > 0.0) var_s / var_u else NaN,
+    q_selected = sel$q_candidate$name,
+    q_risks = stats::setNames(as.list(sel$q_risks), sel$q_names),
+    g_selected = sel$g_candidate$name,
+    g_risks = stats::setNames(as.list(sel$g_risks), sel$g_names),
+    epsilon = ct$info$eps,
+    influence_curve = Dic[rows] * rng,
+    eic_mean = sum(Dic[rows]) / n,
+    rho = if (!is.null(vinfo$rho)) vinfo$rho else NaN,
+    independent_units = vinfo$m, unit = vinfo$unit,
+    design = design, target = target, n_folds = sel$n_folds, adapt = isTRUE(adapt),
+    method = paste0(
+      "adaptive pre-specification TMLE, Balzer, van der ",
+      "Laan & Petersen (2018) Ch. 13"
+    )
   )
 }
 
@@ -696,10 +765,11 @@ morie_tmlcic_tmle_cluster_ic <- function(y, D, X, cluster=NULL,
 #' default alpha_ij = 1/N_j is their stated choice.
 #'
 #' @param cluster Coerced to character by the body, with \code{as.character}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{alpha}, \code{groups}.
 #' @export
-morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
+morie_tmlcic_cluster_weights <- function(cluster, weights = NULL) {
   # The per-individual weights alpha_ij and the cluster groups. Balzer
   # et al. (2019) require sum_i alpha_ij = 1 within each cluster. The
   # default alpha_ij = 1/N_j is their stated choice.
@@ -721,7 +791,7 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
     for (g in grp) {
       alpha[g] <- 1.0 / length(g)
     }
-    return(list(alpha=alpha, groups=grp))
+    return(list(alpha = alpha, groups = grp))
   }
   alpha <- as.numeric(weights)
   if (length(alpha) != n) {
@@ -733,11 +803,13 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   for (g in grp) {
     tot <- sum(alpha[g])
     if (abs(tot - 1.0) > 1e-8) {
-      stop(sprintf("cluster_weights: weights in a cluster sum to %.6f, not 1",
-                   tot))
+      stop(sprintf(
+        "cluster_weights: weights in a cluster sum to %.6f, not 1",
+        tot
+      ))
     }
   }
-  list(alpha=alpha, groups=grp)
+  list(alpha = alpha, groups = grp)
 }
 
 #' Pull a cluster-level variable out of per-individual rows
@@ -758,8 +830,10 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
     g <- groups[[t]]
     first <- v[g[1]]
     if (any(v[g] != first)) {
-      stop(sprintf("tmlcic: %s varies within a cluster; it is a %s", name,
-                   "cluster-level variable"))
+      stop(sprintf(
+        "tmlcic: %s varies within a cluster; it is a %s", name,
+        "cluster-level variable"
+      ))
     }
     out[t] <- first
   }
@@ -779,7 +853,8 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param a Passed to \code{==}.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
-#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
 .tmlcic_hier_cluster_arm <- function(yc, Aj, Zj, groups, a, trim, ridge,
@@ -790,28 +865,36 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   if (!is.null(known_g)) {
     p1 <- pmin(pmax(as.numeric(known_g), trim), 1.0 - trim)
   } else {
-    b <- .tmlcic_wlogit(Xg, Aj, ridge=max(ridge, 1e-10))
+    b <- .tmlcic_wlogit(Xg, Aj, ridge = max(ridge, 1e-10))
     p1 <- pmin(pmax(.tmlcic_sig(as.numeric(Xg %*% b)), trim), 1.0 - trim)
   }
-  ga <- vapply(seq_len(J), function(j) if (a == 1.0) p1[j] else 1.0 - p1[j],
-               numeric(1))
+  ga <- vapply(
+    seq_len(J), function(j) if (a == 1.0) p1[j] else 1.0 - p1[j],
+    numeric(1)
+  )
   Zjm <- as.matrix(Zj)
   rowf <- function(av, j) c(1.0, av, Zjm[j, ])
   Xq <- do.call(rbind, lapply(seq_len(J), function(j) rowf(Aj[j], j)))
-  bq <- .tmlcic_wlogit(Xq, yc, ridge=max(ridge, 1e-10))
+  bq <- .tmlcic_wlogit(Xq, yc, ridge = max(ridge, 1e-10))
   q <- function(av, j) .s03sigmoid(sum(bq * rowf(av, j)))
-  H <- vapply(seq_len(J), function(j) if (Aj[j] == a) 1.0 / ga[j] else 0.0,
-              numeric(1))
+  H <- vapply(
+    seq_len(J), function(j) if (Aj[j] == a) 1.0 / ga[j] else 0.0,
+    numeric(1)
+  )
   off <- vapply(seq_len(J), function(j) .tmlcic_logit(q(Aj[j], j)), numeric(1))
   eps <- .tmlcic_fluct(yc, off, H)
   qs_obs <- .tmlcic_sig(off + eps * H)
-  qs_a <- vapply(seq_len(J),
-                 function(j) .s03sigmoid(.tmlcic_logit(q(a, j)) + eps / ga[j]),
-                 numeric(1))
+  qs_a <- vapply(
+    seq_len(J),
+    function(j) .s03sigmoid(.tmlcic_logit(q(a, j)) + eps / ga[j]),
+    numeric(1)
+  )
   psi <- sum(qs_a) / J
   D <- H * (yc - qs_obs) + qs_a - psi
-  list(psi=psi, D=D, info=list(eps=eps, max_weight=max(1.0 / ga),
-                               min_g=min(ga)))
+  list(psi = psi, D = D, info = list(
+    eps = eps, max_weight = max(1.0 / ga),
+    min_g = min(ga)
+  ))
 }
 
 #' .tmlcic_hier_individual_arm
@@ -828,7 +911,8 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param a Passed to \code{==}.
 #' @param trim Numeric; combined arithmetically in the body.
 #' @param ridge Numeric; passed to \code{max}.
-#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param known_g Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{psi}, \code{D}, \code{info}.
 #' @export
 .tmlcic_hier_individual_arm <- function(y, Ai, Zi, alpha, groups, a, trim,
@@ -841,31 +925,41 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
   if (!is.null(known_g)) {
     p1 <- pmin(pmax(as.numeric(known_g), trim), 1.0 - trim)
   } else {
-    b <- .tmlcic_wlogit(Xg, Ai, ridge=max(ridge, 1e-10), obs_weights=alpha)
+    b <- .tmlcic_wlogit(Xg, Ai, ridge = max(ridge, 1e-10), obs_weights = alpha)
     p1 <- pmin(pmax(.tmlcic_sig(as.numeric(Xg %*% b)), trim), 1.0 - trim)
   }
-  ga <- vapply(seq_len(n), function(i) if (a == 1.0) p1[i] else 1.0 - p1[i],
-               numeric(1))
+  ga <- vapply(
+    seq_len(n), function(i) if (a == 1.0) p1[i] else 1.0 - p1[i],
+    numeric(1)
+  )
   Zim <- as.matrix(Zi)
   rowf <- function(av, i) c(1.0, av, Zim[i, ])
   Xq <- do.call(rbind, lapply(seq_len(n), function(i) rowf(Ai[i], i)))
-  bq <- .tmlcic_wlogit(Xq, y, ridge=max(ridge, 1e-10), obs_weights=alpha)
+  bq <- .tmlcic_wlogit(Xq, y, ridge = max(ridge, 1e-10), obs_weights = alpha)
   q <- function(av, i) .s03sigmoid(sum(bq * rowf(av, i)))
-  H <- vapply(seq_len(n), function(i) if (Ai[i] == a) 1.0 / ga[i] else 0.0,
-              numeric(1))
+  H <- vapply(
+    seq_len(n), function(i) if (Ai[i] == a) 1.0 / ga[i] else 0.0,
+    numeric(1)
+  )
   off <- vapply(seq_len(n), function(i) .tmlcic_logit(q(Ai[i], i)), numeric(1))
-  eps <- .tmlcic_fluct(y, off, H, obs_weights=alpha)
+  eps <- .tmlcic_fluct(y, off, H, obs_weights = alpha)
   qs_obs <- .tmlcic_sig(off + eps * H)
-  qs_a <- vapply(seq_len(n),
-                 function(i) .s03sigmoid(.tmlcic_logit(q(a, i)) + eps / ga[i]),
-                 numeric(1))
+  qs_a <- vapply(
+    seq_len(n),
+    function(i) .s03sigmoid(.tmlcic_logit(q(a, i)) + eps / ga[i]),
+    numeric(1)
+  )
   qc_a <- vapply(groups, function(g) sum(alpha[g] * qs_a[g]), numeric(1))
   psi <- sum(qc_a) / J
-  D <- vapply(groups,
-              function(g) sum(alpha[g] * (H[g] * (y[g] - qs_obs[g]) + qs_a[g])),
-              numeric(1)) - psi
-  list(psi=psi, D=D, info=list(eps=eps, max_weight=max(1.0 / ga),
-                               min_g=min(ga), qc=qc_a))
+  D <- vapply(
+    groups,
+    function(g) sum(alpha[g] * (H[g] * (y[g] - qs_obs[g]) + qs_a[g])),
+    numeric(1)
+  ) - psi
+  list(psi = psi, D = D, info = list(
+    eps = eps, max_weight = max(1.0 / ga),
+    min_g = min(ga), qc = qc_a
+  ))
 }
 
 #' morie_tmlcic_tmle_hierarchical
@@ -879,7 +973,8 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param E Optional; may be \code{NULL}. Passed to \code{.s03mat}.
 #' @param W Optional; may be \code{NULL}. Passed to \code{.s03mat}.
 #' @param cluster Passed to \code{morie_tmlcic_cluster_weights}.
-#' @param arm One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to \code{"both"}.
+#' @param arm One of \code{"both"}, \code{"cluster"}, \code{"individual"}. Defaults to
+#' \code{"both"}.
 #' @param weights Passed to \code{morie_tmlcic_cluster_weights}.
 #' @param known_g Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param trim Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
@@ -887,16 +982,18 @@ morie_tmlcic_cluster_weights <- function(cluster, weights=NULL) {
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
 #' @return The value of \code{payload}, as built in the body.
 #' @export
-morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
-                                           weights=NULL, known_g=NULL,
-                                           trim=0.01, ridge=1e-8,
-                                           level=0.95) {
+morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm = "both",
+                                           weights = NULL, known_g = NULL,
+                                           trim = 0.01, ridge = 1e-8,
+                                           level = 0.95) {
   # Causal effect of a CLUSTER-level exposure on hierarchical data: two
   # estimators of E[Yc(1)] - E[Yc(0)], TMLE I (cluster) and TMLE II
   # (individual). Both are returned.
   if (!(arm %in% c("both", "cluster", "individual"))) {
-    stop(sprintf("tmlcic: arm must be both, cluster or individual, got %s",
-                 arm))
+    stop(sprintf(
+      "tmlcic: arm must be both, cluster or individual, got %s",
+      arm
+    ))
   }
   yv <- .s03vec(y)
   Av <- .s03vec(A)
@@ -908,14 +1005,18 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
     stop("tmlcic: the exposure must be binary 0/1")
   }
   if (any(yv < 0.0 | yv > 1.0)) {
-    stop(paste0("tmlcic: individual outcomes must lie in [0, 1]; rescale ",
-                "them first"))
+    stop(paste0(
+      "tmlcic: individual outcomes must lie in [0, 1]; rescale ",
+      "them first"
+    ))
   }
   Em <- if (!is.null(E)) .s03mat(E) else matrix(numeric(0), n, 0)
   Wm <- if (!is.null(W)) .s03mat(W) else matrix(numeric(0), n, 0)
   if (nrow(Em) != n || nrow(Wm) != n) {
-    stop(sprintf("tmlcic: covariate blocks have %d and %d rows for %d %s",
-                 nrow(Em), nrow(Wm), n, "individuals"))
+    stop(sprintf(
+      "tmlcic: covariate blocks have %d and %d rows for %d %s",
+      nrow(Em), nrow(Wm), n, "individuals"
+    ))
   }
   t <- as.numeric(trim)
   if (!(t > 0.0 && t < 0.5)) {
@@ -938,7 +1039,7 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
     }
   }
   yc <- vapply(groups, function(g) sum(alpha[g] * yv[g]), numeric(1))
-  Ej <- do.call(rbind, lapply(groups, function(g) Em[g[1], , drop=FALSE]))
+  Ej <- do.call(rbind, lapply(groups, function(g) Em[g[1], , drop = FALSE]))
   nWc <- ncol(Wm)
   Wbar <- do.call(rbind, lapply(groups, function(g) {
     if (nWc > 0L) {
@@ -953,8 +1054,10 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
   kg_i <- if (!is.null(known_g)) known_g[[2]] else NULL
   out <- list()
   z <- .s03qnorm(0.5 + 0.5 * as.numeric(level))
-  runs <- list(cluster=(arm %in% c("both", "cluster")),
-               individual=(arm %in% c("both", "individual")))
+  runs <- list(
+    cluster = (arm %in% c("both", "cluster")),
+    individual = (arm %in% c("both", "individual"))
+  )
   for (nm in names(runs)) {
     if (!runs[[nm]]) {
       next
@@ -967,8 +1070,10 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
       if (nm == "cluster") {
         r <- .tmlcic_hier_cluster_arm(yc, Aj, Zj, groups, a, t, ridge, kg_c)
       } else {
-        r <- .tmlcic_hier_individual_arm(yv, Av, Zi, alpha, groups, a, t,
-                                         ridge, kg_i)
+        r <- .tmlcic_hier_individual_arm(
+          yv, Av, Zi, alpha, groups, a, t,
+          ridge, kg_i
+        )
       }
       psi[[ak]] <- r$psi
       D[[ak]] <- r$D
@@ -977,23 +1082,30 @@ morie_tmlcic_tmle_hierarchical <- function(y, A, E, W, cluster, arm="both",
     contrast <- psi[["1"]] - psi[["0"]]
     Dc <- D[["1"]] - D[["0"]]
     se <- if (J > 1L) .s03sd(Dc) / sqrt(J) else NaN
-    out[[nm]] <- list(estimate=contrast, se=se,
-                      ci=c(contrast - z * se, contrast + z * se),
-                      mean_1=psi[["1"]], mean_0=psi[["0"]],
-                      influence_curve=Dc, eic_mean=sum(Dc) / J,
-                      epsilon=c(info[["0"]]$eps, info[["1"]]$eps),
-                      max_weight=max(info[["0"]]$max_weight,
-                                     info[["1"]]$max_weight))
+    out[[nm]] <- list(
+      estimate = contrast, se = se,
+      ci = c(contrast - z * se, contrast + z * se),
+      mean_1 = psi[["1"]], mean_0 = psi[["0"]],
+      influence_curve = Dc, eic_mean = sum(Dc) / J,
+      epsilon = c(info[["0"]]$eps, info[["1"]]$eps),
+      max_weight = max(
+        info[["0"]]$max_weight,
+        info[["1"]]$max_weight
+      )
+    )
   }
   main <- if (!is.null(out[["individual"]])) "individual" else "cluster"
   payload <- list(
-    estimate=out[[main]]$estimate, se=out[[main]]$se, ci=out[[main]]$ci,
-    arm_reported=main, arm=arm, n=n, n_clusters=J,
-    cluster_sizes=vapply(groups, length, integer(1)),
-    cluster_outcome=yc, alpha=alpha, level=as.numeric(level),
-    known_g=!is.null(known_g),
-    method=paste0("hierarchical TMLE for a cluster-level exposure, ",
-                  "Balzer, Zheng, van der Laan & Petersen (2019)"))
+    estimate = out[[main]]$estimate, se = out[[main]]$se, ci = out[[main]]$ci,
+    arm_reported = main, arm = arm, n = n, n_clusters = J,
+    cluster_sizes = vapply(groups, length, integer(1)),
+    cluster_outcome = yc, alpha = alpha, level = as.numeric(level),
+    known_g = !is.null(known_g),
+    method = paste0(
+      "hierarchical TMLE for a cluster-level exposure, ",
+      "Balzer, Zheng, van der Laan & Petersen (2019)"
+    )
+  )
   for (nm in names(out)) {
     for (key in names(out[[nm]])) {
       payload[[sprintf("%s_%s", key, nm)]] <- out[[nm]][[key]]

@@ -16,7 +16,7 @@ morie_causal_forest_bootstrap(
 )
 }
 \arguments{
-\item{y, d, x}{As in \code{\link[=morie_causal_forest]{morie_causal_forest()}}.}
+\item{y, d, x}{As in \code{morie_causal_forest()}.}
 
 \item{B}{Bootstrap replicates.}
 

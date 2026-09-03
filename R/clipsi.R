@@ -2,13 +2,18 @@
 
 #' .clip_l2norm
 #'
-#' A step of the clipsi implementation. Called by \code{Clipxi}, \code{Colbrt}, \code{Contse} and 1 others in the module.
+#' A step of the clipsi implementation. Called by \code{Clipxi}, \code{Colbrt},
+#' \code{Contse} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' it follows.
 #'
 #' @param v Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .clip_l2norm(v = x)
+#' res
 .clip_l2norm <- function(v) {
   n <- sqrt(sum(v * v))
   if (n <= 0) stop("cannot normalise a zero-norm embedding")

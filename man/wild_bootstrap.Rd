@@ -51,5 +51,5 @@ str(wild_bootstrap(y, X, n_boot = 199L), max.level = 1)
 }
 \seealso{
 \code{sandwich::vcovBS}, \code{fwildclusterboot::boottest},
-\code{\link[=morie_did_wild_cluster_bootstrap]{morie_did_wild_cluster_bootstrap()}}.
+\code{morie_did_wild_cluster_bootstrap()}.
 }

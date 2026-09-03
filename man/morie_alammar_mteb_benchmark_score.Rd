@@ -19,5 +19,6 @@ A list with \code{estimate}, \code{category_means}, \code{flat_task_mean}, \code
 }
 \keyword{internal}
 \examples{
-morie_alammar_mteb_benchmark_score(task_scores = list(a = 1, b = 2), category_map = list(a = 1, b = 2))
+morie_alammar_mteb_benchmark_score(task_scores = list(a = 1, b = 2),
+  category_map = list(a = 1, b = 2))
 }

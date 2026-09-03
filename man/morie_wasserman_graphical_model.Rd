@@ -7,7 +7,7 @@
 morie_wasserman_graphical_model(graph, psi)
 }
 \arguments{
-\item{graph, psi}{As in \code{\link[=morie_wasserman_undirected_graph]{morie_wasserman_undirected_graph()}}.}
+\item{graph, psi}{As in \code{morie_wasserman_undirected_graph()}.}
 
 }
 \value{

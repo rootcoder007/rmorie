@@ -16,7 +16,7 @@ morie_monotone_causal_forest(
 )
 }
 \arguments{
-\item{y, d, x}{As in \code{\link[=morie_causal_forest]{morie_causal_forest()}}.}
+\item{y, d, x}{As in \code{morie_causal_forest()}.}
 
 \item{monotone_feature}{Column index the effect must be monotone in;
 \code{NULL} returns the unconstrained forest.}

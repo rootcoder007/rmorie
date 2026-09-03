@@ -19,3 +19,8 @@ A step of the kamath_ch2_native implementation. Called by \code{morie_kamath_clm
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .morie_km_probs(p = 0.5, name = txt)
+res
+}

@@ -93,7 +93,8 @@ test_that(".hawkes_restarts trims offsets to phi length", {
 # ================================================================ tables_pub.R
 
 test_that(".tbl_extract_model returns params/se/p/ci/nobs/aic/bic/llf on an lm", {
-  set.seed(1L); n <- 80L
+  set.seed(1L)
+  n <- 80L
   x <- stats::rnorm(n)
   y <- 1 + 2 * x + stats::rnorm(n, sd = 0.3)
   fit <- stats::lm(y ~ x)
@@ -107,8 +108,10 @@ test_that(".tbl_extract_model returns params/se/p/ci/nobs/aic/bic/llf on an lm",
 })
 
 test_that(".tbl_extract_model handles a glm fit (no r-squared)", {
-  set.seed(2L); n <- 100L
-  y <- stats::rbinom(n, 1L, 0.5); x <- stats::rnorm(n)
+  set.seed(2L)
+  n <- 100L
+  y <- stats::rbinom(n, 1L, 0.5)
+  x <- stats::rnorm(n)
   fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
   out <- rmorie:::.tbl_extract_model(fit)
   expect_true(is.na(out$rsquared))

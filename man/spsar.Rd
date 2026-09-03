@@ -17,7 +17,7 @@ spsar(x, y, w)
 The result of \code{sarla()}.
 }
 \description{
-Same estimator as \code{\link[=sarla]{sarla()}}, which fits the concentrated
+Same estimator as \code{sarla()}, which fits the concentrated
 log-likelihood in rho; this delegates rather than carrying a second
 implementation.
 }

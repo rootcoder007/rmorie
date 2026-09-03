@@ -5,7 +5,8 @@
 
 #' .bnd_yd
 #'
-#' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt}, \code{Bndnpr} and 6 others in the module.
+#' A step of the helpers_bnd implementation. Called by \code{Bndmoq}, \code{Bndngt},
+#' \code{Bndnpr} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -14,6 +15,12 @@
 #' @param name Passed to \code{paste0}.
 #' @return A list with \code{y}, \code{d}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .bnd_yd(y = y, D = g, name = txt)
+#' res
 .bnd_yd <- function(y, D, name) {
   yv <- as.numeric(unlist(y))
   dv <- as.numeric(unlist(D))
@@ -27,7 +34,8 @@
 
 #' .bnd_cellmeans
 #'
-#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt}, \code{Bndnvg} and 2 others in the module.
+#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndngt},
+#' \code{Bndnvg} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -46,7 +54,8 @@
 
 #' .bnd_wc_arm
 #'
-#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr}, \code{Bnssel} and 1 others in the module.
+#' A step of the helpers_bnd implementation. Called by \code{.bnd_wc_ate}, \code{Bndnpr},
+#' \code{Bnssel} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -89,6 +98,10 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bnd_q1(v = x, p = 0.5)
+#' res
 .bnd_q1 <- function(v, p) {
   s <- sort(v)
   m <- length(s)
@@ -149,7 +162,8 @@
 #' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
-#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.
+#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL},
+#' \code{$sU} from it.
 #' @return A numeric value.
 #' @export
 .bnd_crit <- function(theta, st) {
@@ -166,7 +180,8 @@
 #' source it follows.
 #'
 #' @param theta Numeric; combined arithmetically in the body.
-#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL}, \code{$sU} from it.
+#' @param st A list; the body reads \code{$mL}, \code{$mU}, \code{$n}, \code{$sL},
+#' \code{$sU} from it.
 #' @return A numeric value.
 #' @export
 .bnd_critmax <- function(theta, st) {

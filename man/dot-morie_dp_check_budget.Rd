@@ -19,3 +19,7 @@ A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_dp_check_budget(epsilon = 0.5)
+res
+}

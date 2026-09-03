@@ -173,7 +173,8 @@ test_that("the Azuma bound matches Python", {
 
 test_that("Azuma bounds a simulated random walk", {
   set.seed(23)
-  n <- 100L; reps <- 4000L
+  n <- 100L
+  reps <- 4000L
   walks <- vapply(seq_len(reps), function(i) {
     sum(sample(c(-1, 1), n, replace = TRUE))
   }, numeric(1))
@@ -185,7 +186,9 @@ test_that("Azuma bounds a simulated random walk", {
 
 test_that("Azuma is conservative, as a step-size-only bound must be", {
   set.seed(24)
-  n <- 100L; reps <- 4000L; t <- 30
+  n <- 100L
+  reps <- 4000L
+  t <- 30
   walks <- vapply(seq_len(reps), function(i) {
     sum(sample(c(-1, 1), n, replace = TRUE))
   }, numeric(1))

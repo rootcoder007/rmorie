@@ -1,7 +1,8 @@
 # MVSML chapter 6: R tests mirroring the Python checks.
 
 test_that("BRR hyperparameters match the BGLR defaults (p.175)", {
-  set.seed(1); y <- rnorm(40, 5, 2)
+  set.seed(1)
+  y <- rnorm(40, 5, 2)
   hp <- morie_brr_hyper(y, R2 = 0.5, nu = 5, nu_beta = 5)
   expect_equal(hp$S, var(y) * 0.5 * 7, tolerance = 1e-12)
   expect_equal(hp$S_beta, var(y) * 0.5 * 7, tolerance = 1e-12)

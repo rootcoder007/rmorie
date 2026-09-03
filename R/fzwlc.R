@@ -2,7 +2,8 @@
 
 #' Fauzi: Smoothed Wilcoxon signed-rank test (Ch 5)
 #'
-#' \eqn{W_n=\sum_i \mathrm{sign}(D_i) R_{\mathrm{smooth}}(|D_i|)}{W_n=sum_i sign(D_i) R_smooth(|D_i|)},
+#' \eqn{W_n=\sum_i \mathrm{sign}(D_i) R_{\mathrm{smooth}}(|D_i|)}{W_n=sum_i sign(D_i)
+#' R_smooth(|D_i|)},
 #' z = W_n / sqrt(n(n+1)(2n+1)/6) ~ N(0,1).
 #'
 #' @param x Numeric vector.

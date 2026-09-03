@@ -57,7 +57,8 @@ test_that("hmsenet: SE gate matches sigmoid(z) under identity weights", {
 })
 
 test_that("hmsent: sentiment analysis predicts correctly and softmaxes", {
-  pos <- c("good", "great"); neg <- c("bad", "awful")
+  pos <- c("good", "great")
+  neg <- c("bad", "awful")
   model <- function(toks) {
     s <- sum(toks %in% pos) - sum(toks %in% neg)
     c(-s, s)
@@ -102,10 +103,12 @@ test_that("hmsslc: semisupervised cluster label propagation matches anchor", {
 })
 
 test_that("hmstk: stacking blender beats the mean model out-of-fold", {
-  X <- matrix(1:6, 6, 1); y <- c(2, 4, 6, 8, 10, 12)
+  X <- matrix(1:6, 6, 1)
+  y <- c(2, 4, 6, 8, 10, 12)
   mean_model <- function(Xtr, ytr, Xte) rep(mean(ytr), nrow(as.matrix(Xte)))
   ols_model <- function(Xtr, ytr, Xte) {
-    P <- cbind(1, as.matrix(Xtr)); Q <- cbind(1, as.matrix(Xte))
+    P <- cbind(1, as.matrix(Xtr))
+    Q <- cbind(1, as.matrix(Xte))
     theta <- .morie_gr_lstsq(P, as.numeric(ytr))
     as.numeric(Q %*% theta)
   }
@@ -140,7 +143,8 @@ test_that("hmsvdp: SVD pseudoinverse OLS matches anchor", {
 })
 
 test_that("hmsvm2: state-dict round trip is exact", {
-  d <- tempfile("state_"); dir.create(d)
+  d <- tempfile("state_")
+  dir.create(d)
   sd <- list(w1 = matrix(c(1, 2, 3, 4), 2, 2, byrow = TRUE), b1 = c(0.5, -0.5))
   r <- morie_geron_save_load_pytorch(sd, file.path(d, "state"))
   expect_true(r$exact)
@@ -227,7 +231,9 @@ test_that("hmtrlf: DPO loss starts at log(2) and margin grows", {
 })
 
 test_that("hmtcmp: torch.compile fuses linear chains and preserves output", {
-  A2 <- diag(2) * 2; B2 <- diag(2) * 3; C2 <- diag(2) * 5
+  A2 <- diag(2) * 2
+  B2 <- diag(2) * 3
+  C2 <- diag(2) * 5
   r <- morie_geron_torch_compile(
     list(list(kind = "linear", param = A2), list(kind = "linear", param = B2), list(kind = "linear", param = C2)),
     example_inputs = matrix(c(1, 1), 1, 2)

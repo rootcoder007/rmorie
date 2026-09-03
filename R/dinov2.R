@@ -25,7 +25,8 @@
 #'   (2022), iBOT, ICLR 2022; Sablayrolles et al. (2019), ICLR 2019.
 #' @export
 #' @examples
-#' Dinov2(x = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Dinov2(x = c(1, 2, 3, 4, 5, 6, 7, 8), student = c(1, 2, 3, 4, 5, 6, 7, 8), teacher =
+#' c(1, 2, 3, 4, 5, 6, 7, 8))
 Dinov2 <- function(x, student, teacher, tau = 0.1, tau_t = 0.04,
                    mask = NULL, w_ibot = 1, w_koleo = 0.1) {
   S <- .s03mat(student)

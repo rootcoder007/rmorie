@@ -19,3 +19,7 @@ rate.  n^(-1/6) alone is a rate and on the unit interval is far too
 wide: at n = 40 it puts two thirds of the kernel mass outside
 support.
 }
+\examples{
+res <- .hrz3_bw01(n = 3L)
+res
+}

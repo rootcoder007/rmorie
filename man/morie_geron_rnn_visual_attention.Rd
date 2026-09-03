@@ -20,5 +20,6 @@ A list with \code{context}, \code{alpha}, \code{alpha_map}, \code{scores}, \code
 }
 \keyword{internal}
 \examples{
-morie_geron_rnn_visual_attention(features = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5, W = c(1, 2, 3, 4, 5, 6, 7, 8), U = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_rnn_visual_attention(features = c(1, 2, 3, 4, 5, 6, 7, 8), h = 0.5,
+  W = c(1, 2, 3, 4, 5, 6, 7, 8), U = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

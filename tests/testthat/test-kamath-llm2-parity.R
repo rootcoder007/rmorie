@@ -110,7 +110,8 @@ test_that("Ch 4 adapters and low-rank updates match Python", {
   expect_equal(o$n_params, 6L)
 
   # Kronecker reshape identity: the matrix-free route equals (A kron B) x
-  A <- matrix(c(1, 0, 2, 1), 2); B <- diag(2)
+  A <- matrix(c(1, 0, 2, 1), 2)
+  B <- diag(2)
   x <- c(1, 2, 3, 4)
   y <- morie_kamath_ch4_krona_efficient(A, B, x)$y
   expect_equal(y, c(7, 10, 3, 4))
@@ -236,8 +237,10 @@ test_that("Ch 6 bias and toxicity metrics match Python", {
   expect_equal(morie_kamath_ch6_alignscore_total_loss(
     1, 2, 3, c(0.5, 0.25, 0.25))$estimate, 1.75)
 
-  W1 <- diag(2); W2 <- -diag(2)
-  A1 <- diag(2); A2 <- matrix(c(1, 2, 1, 0), 2)
+  W1 <- diag(2)
+  W2 <- -diag(2)
+  A1 <- diag(2)
+  A2 <- matrix(c(1, 2, 1, 0), 2)
   expect_equal(morie_kamath_ch6_weat_similarity(c(1, 0), W1, W2)$estimate, 1)
   o <- morie_kamath_ch6_weat_function(A1, A2, W1, W2)
   expect_equal(o$estimate, -0.4142135623730949, tolerance = TOL)
@@ -383,7 +386,8 @@ test_that("Ch 7 RAG and Ch 8 generation metrics match Python", {
     list(c("a", "b", "c"), c("a", "b", "d")), 2,
     candidate = c("a", "b", "c", "a"))$estimate, 0.75)
 
-  X <- diag(2); Y <- matrix(c(1, 2, 1, 0), 2)
+  X <- diag(2)
+  Y <- matrix(c(1, 2, 1, 0), 2)
   o <- morie_kamath_ch8_bertscore_recall(X, Y)
   expect_equal(o$estimate, 1.5)
   expect_equal(o$greedy_match, c(1L, 0L))     # 0-based
@@ -428,10 +432,12 @@ test_that("the WMD optimum equals a Birkhoff brute-force search", {
   # permutation matrix, so enumerate them all.
   set.seed(11)
   Cp <- matrix(round(runif(16, 0, 9), 3), 4, 4)
-  a <- rep(0.25, 4); b <- rep(0.25, 4)
+  a <- rep(0.25, 4)
+  b <- rep(0.25, 4)
   perms <- list()
   gen <- function(prefix, left) {
-    if (!length(left)) { perms[[length(perms) + 1L]] <<- prefix; return(NULL) }
+    if (!length(left)) { perms[[length(perms) + 1L]] <<- prefix
+    return(NULL) }
     for (v in left) gen(c(prefix, v), setdiff(left, v))
   }
   gen(integer(0), 1:4)
@@ -441,7 +447,8 @@ test_that("the WMD optimum equals a Birkhoff brute-force search", {
                tolerance = 1e-9)
 
   # the same LP drives MoverScore, so the two agree on the transport cost
-  H <- matrix(c(0, 1, 0, 0), 2); R <- matrix(c(0, 1, 1, 1), 2)
+  H <- matrix(c(0, 1, 0, 0), 2)
+  R <- matrix(c(0, 1, 1, 1), 2)
   ms <- morie_kamath_moverscore(H, R)
   expect_equal(ms$wmd, 1, tolerance = TOL)
   expect_equal(ms$estimate, 0.29289321881345254, tolerance = TOL)
@@ -825,7 +832,8 @@ test_that("named architecture, decoding and tokenizer modules match Python", {
   expect_equal(o$loss_ce, 0.3132616875182228, tolerance = TOL)
   expect_equal(o$loss_mlm, 0.3132616875182228, tolerance = TOL)
 
-  att <- function(v) v * 0.5; ffn <- function(v) v * 0.25
+  att <- function(v) v * 0.5
+  ffn <- function(v) v * 0.25
   o <- morie_kamath_post_ln_transformer(matrix(c(1, 2, 3), 1), att, ffn)
   expect_equal(as.numeric(o$output),
                c(-1.224740952200685, 0, 1.224740952200685), tolerance = TOL)

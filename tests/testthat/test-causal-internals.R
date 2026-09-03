@@ -27,17 +27,21 @@ test_that(".hajek_diff computes weighted-mean difference", {
 })
 
 test_that(".influence_score_aipw returns finite scores", {
-  set.seed(2L); n <- 50L
-  y <- stats::rnorm(n); t <- stats::rbinom(n, 1, 0.5)
+  set.seed(2L)
+  n <- 50L
+  y <- stats::rnorm(n)
+  t <- stats::rbinom(n, 1, 0.5)
   ps <- pmin(pmax(stats::runif(n, 0.1, 0.9), 0.05), 0.95)
-  mu1 <- stats::rnorm(n); mu0 <- stats::rnorm(n)
+  mu1 <- stats::rnorm(n)
+  mu0 <- stats::rnorm(n)
   out <- rmorie:::.influence_score_aipw(y, t, ps, mu1, mu0)
   expect_true(is.numeric(out) && length(out) == n)
   expect_true(all(is.finite(out)))
 })
 
 test_that(".dml_prepare_xy splits data into X, y, treatment matrix", {
-  set.seed(3L); n <- 80L
+  set.seed(3L)
+  n <- 80L
   df <- data.frame(y = stats::rnorm(n), d = stats::rbinom(n, 1, 0.5),
                    x1 = stats::rnorm(n), x2 = stats::rnorm(n))
   out <- rmorie:::.dml_prepare_xy(df, "d", "y", c("x1", "x2"))
@@ -45,7 +49,8 @@ test_that(".dml_prepare_xy splits data into X, y, treatment matrix", {
 })
 
 test_that(".dml_xfit_ridge runs ridge cross-fitting on synthetic data", {
-  set.seed(4L); n <- 80L
+  set.seed(4L)
+  n <- 80L
   X <- cbind(1, matrix(stats::rnorm(n * 3), n, 3))
   y <- X %*% c(0.1, 0.5, 0.3, -0.2) + stats::rnorm(n, sd = 0.3)
   out <- tryCatch(
@@ -142,7 +147,8 @@ test_that(".morie_rdd_have_* returns logical", {
 })
 
 test_that(".morie_rdd_local_poly_fit fits a local polynomial near cutoff", {
-  set.seed(5L); n <- 100L
+  set.seed(5L)
+  n <- 100L
   x <- stats::runif(n, -5, 5)
   y <- 0.3 * x + ifelse(x >= 0, 1.5, 0) + stats::rnorm(n, sd = 0.3)
   out <- tryCatch(

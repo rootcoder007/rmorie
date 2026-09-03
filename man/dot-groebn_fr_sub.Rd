@@ -19,3 +19,8 @@ A step of the groebn_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .groebn_fr_sub(p = A, q = A)
+res
+}

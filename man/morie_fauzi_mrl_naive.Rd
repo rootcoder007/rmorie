@@ -22,7 +22,7 @@ boundary_bias_order, boundary_safe (\code{FALSE}), n, method.
 \description{
 The baseline whose boundary failure Ch. 4 exists to fix: bias is
 \code{O(h)} near the edge of the support and can degrade to \code{O(1)}.
-Compare with \code{\link[=morie_fauzi_mrl_boundary_free_2]{morie_fauzi_mrl_boundary_free_2()}} on the same data.
+Compare with \code{morie_fauzi_mrl_boundary_free_2()} on the same data.
 }
 \examples{
 morie_fauzi_mrl_naive(stats::rexp(200), c(0.5, 1))$mrl

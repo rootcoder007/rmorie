@@ -26,7 +26,8 @@ weights sum to \eqn{_h} within every stratum exactly, which is the
 weighted mean
 }
 \examples{
-Postrt(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8), stratum = c(1, 2, 3, 4, 5, 6, 7, 8), N_h = c(1, 2, 3, 4, 5, 6, 7, 8))
+Postrt(y = c(1, 2, 3, 4, 5, 6, 7, 8), weights = c(1, 2, 3, 4, 5, 6, 7, 8),
+  stratum = c(1, 2, 3, 4, 5, 6, 7, 8), N_h = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Holt, D. & Smith, T. M. F. (1979). Post stratification.

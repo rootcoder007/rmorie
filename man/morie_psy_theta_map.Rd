@@ -18,8 +18,8 @@ list: theta, se, n_examinees, n_items, mode_not_mean,
 alias_of, method.
 }
 \description{
-One implementation: each row goes to \code{\link[=morie_psy_map_theta]{morie_psy_map_theta()}}.
-This is the MODE where \code{\link[=morie_psy_theta_eap]{morie_psy_theta_eap()}} is the MEAN, and
+One implementation: each row goes to \code{morie_psy_map_theta()}.
+This is the MODE where \code{morie_psy_theta_eap()} is the MEAN, and
 they differ whenever the posterior is skewed -- short tests and
 extreme patterns, which is most of the time.
 }

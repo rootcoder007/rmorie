@@ -21,3 +21,9 @@ A step of the barerp_native implementation. Called by \code{hess.Fun}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+fn <- function(v) sum(v^2)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .num_hess(f = fn, x = x)
+res
+}

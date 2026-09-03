@@ -51,6 +51,10 @@
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .lggvls_vec(x = x)
+#' res
 .lggvls_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -65,6 +69,10 @@
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return A matrix, from \code{as.matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .lggvls_mat(x = x)
+#' res
 .lggvls_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   as.matrix(x)
@@ -81,6 +89,10 @@
 #' @param q See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .lggvls_quantile7(x = x, q = 0.5)
+#' res
 .lggvls_quantile7 <- function(x, q) {
   as.numeric(stats::quantile(x, probs = q, type = 7, names = FALSE))
 }
@@ -98,6 +110,11 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{beta}, \code{p_hat}, \code{converged}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .lggvls_logistic_fit(X = x, y = y)
+#' res
 .lggvls_logistic_fit <- function(X, y, max_iter = 25L, tol = 1e-8) {
   n <- nrow(X)
   Xa <- cbind(1, X)
@@ -201,6 +218,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}, \code{sigma2}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .lggvls_wls(X = x, y = y, w = x)
+#' res
 .lggvls_wls <- function(X, y, w) {
   n <- length(y)
   if (is.null(X) || length(X) == 0L) {
@@ -273,8 +295,10 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param L_hist Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param Y_hist Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param L_hist Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @param Y_hist Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @param k_time Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param lag Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{cols}, as built in the body.
@@ -346,8 +370,12 @@ lagged_design <- function(L_hist, Y_hist = NULL, k_time = 0, lag = 1) {
 #' @param stabilize Passed to \code{.lggvls_ip_weights}. Defaults to \code{TRUE}.
 #' @param kind Passed to \code{.lggvls_ip_weights}. Defaults to \code{"binary"}.
 #' @param trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
-#' @return A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time}, \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}.
+#' Defaults to \code{"cumulative"}.
+#' @return A list with \code{estimate}, \code{se}, \code{intercept}, \code{coef},
+#' \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight},
+#' \code{effective_sample_size}, \code{cumulative_exposure}, \code{per_time},
+#' \code{n_times}, \code{lag}, \code{n}, \code{contrast}, \code{method}.
 #' @export
 morie_lggvls <- function(y, A, H, lag = 1, Y_hist = NULL, stabilize = TRUE,
                         kind = "binary", trim = NULL,
@@ -461,6 +489,9 @@ laggedvaliptw  <- morie_lggvls
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .lggvls_cheatsheet()
+#' res
 .lggvls_cheatsheet <- function() {
   paste("lggvls: sustained-exposure IPTW (Robins 1986). Weight =",
         "prod_k f(A_k|Abar_{k-1}) / f(A_k|Abar_{k-1}, Lbar_k,",

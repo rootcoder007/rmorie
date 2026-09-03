@@ -38,6 +38,9 @@
 #' @param h Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .drospi_as_z(h = 0.5)
+#' res
 .drospi_as_z <- function(h) {
   if (h <= 0.0 || h >= 1.0)
     stop("cumulative probability out of (0, 1)")
@@ -85,7 +88,8 @@
 #' @param precip Coerced to numeric by the body, with \code{as.numeric}.
 #' @param scale Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
 #' @param by_month A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale}, \code{by_month}, \code{method}.
+#' @return A list with \code{spi}, \code{totals}, \code{params}, \code{scale},
+#' \code{by_month}, \code{method}.
 #' @export
 morie_droSPI <- function(precip, scale = 3L, by_month = TRUE) {
   x <- as.numeric(precip)
@@ -151,6 +155,9 @@ spi <- morie_droSPI
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .droSPI_cheatsheet()
+#' res
 .droSPI_cheatsheet <- function() {
   "droSPI: gamma-fit totals (Thom MLE), H=q+(1-q)G, A-S normal transform"
 }

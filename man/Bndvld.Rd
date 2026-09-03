@@ -33,7 +33,8 @@ Formula: \code{L = max_i lower_i}, \code{U = min_i upper_i}; refuted iff
 \code{L > U}; covers iff \code{L <= theta_0 <= U}.
 }
 \examples{
-Bndvld(lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8), theta_0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+Bndvld(lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8),
+  theta_0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Manski, C. F. (2003). Partial Identification of Probability

@@ -22,5 +22,6 @@ A list with components \code{prediction}, \code{variance}, \code{lambda}, \code{
 }
 \keyword{internal}
 \examples{
-morie_cokrig(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z1 = c(1, 2, 3, 4, 5, 6, 7, 8), z2 = c(1, 2, 3, 4, 5, 6, 7, 8), s0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_cokrig(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  z2 = c(1, 2, 3, 4, 5, 6, 7, 8), s0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

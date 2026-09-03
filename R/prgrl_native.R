@@ -82,6 +82,10 @@
 #' @param X A matrix; indexed by row and column.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .prgrl_to_rows(X = x)
+#' res
 .prgrl_to_rows <- function(X) {
   if (is.matrix(X)) {
     lapply(seq_len(nrow(X)), function(i) as.numeric(X[i, ]))
@@ -95,13 +99,18 @@
 
 #' .prgrl_to_vec
 #'
-#' A step of the prgrl_native implementation. Called by \code{curriculum_schedule}, \code{easy_only_fit}, \code{prgrl}.
+#' A step of the prgrl_native implementation. Called by \code{curriculum_schedule},
+#' \code{easy_only_fit}, \code{prgrl}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Coerced to vector by the body, with \code{as.vector}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .prgrl_to_vec(x = x)
+#' res
 .prgrl_to_vec <- function(x) {
   as.numeric(as.vector(x))
 }
@@ -115,6 +124,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @examples
+#' res <- .prgrl_rng(seed = 1L)
+#' res
 .prgrl_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0L) st <- 1L
@@ -207,7 +219,9 @@ curriculum_schedule <- function(difficulty, n_steps = 5, hard_first = FALSE) {
 #' @param weights A vector; its length is taken and its elements indexed.
 #' @param p Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.
-#' @return A list with \code{is_curriculum}, \code{entropy_increasing}, \code{strictly_increasing}, \code{weights_monotone}, \code{final_step_is_p}, \code{entropies}.
+#' @return A list with \code{is_curriculum}, \code{entropy_increasing},
+#' \code{strictly_increasing}, \code{weights_monotone}, \code{final_step_is_p},
+#' \code{entropies}.
 #' @export
 is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
   if (length(weights) < 2) stop("prgrl: need at least two steps to check")
@@ -306,6 +320,11 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param w A vector; indexed elementwise.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .prgrl_error(X = x, y = y, w = x)
+#' res
 .prgrl_error <- function(X, y, w) {
   p <- length(X[[1]])
   bad <- 0
@@ -336,7 +355,10 @@ is_curriculum <- function(weights, p = NULL, tol = 1e-12) {
 #' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
 #' @param n_repeats Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
 #' @param order One of \code{"sampled"}, \code{"sorted"}. Defaults to \code{"sampled"}.
-#' @return A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error}, \code{improvement}, \code{curriculum_errors}, \code{baseline_errors}, \code{held_out}, \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights}, \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{curriculum_error}, \code{baseline_error},
+#' \code{improvement}, \code{curriculum_errors}, \code{baseline_errors}, \code{held_out},
+#' \code{updates}, \code{order}, \code{n_repeats}, \code{lambdas}, \code{weights},
+#' \code{entropies}, \code{is_curriculum}, \code{n}, \code{method}, \code{note}.
 #' @export
 prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
                   updates = 200, n_steps = 5, seed = 0, n_repeats = 50,
@@ -461,7 +483,9 @@ prgrl <- function(X, y, difficulty, X_test = NULL, y_test = NULL,
 #' @param updates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.prgrl_rng}. Defaults to \code{0}.
 #' @param n_repeats Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50}.
-#' @return A list with \code{estimate}, \code{easy_only_error}, \code{all_examples_error}, \code{improvement}, \code{n_kept}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{easy_only_error},
+#' \code{all_examples_error}, \code{improvement}, \code{n_kept}, \code{n}, \code{method},
+#' \code{note}.
 #' @export
 easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
                           updates = 200, seed = 0, n_repeats = 50) {
@@ -525,6 +549,9 @@ easy_only_fit <- function(X, y, difficulty, X_test, y_test, quantile = 0.5,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .prgrl_cheatsheet()
+#' res
 .prgrl_cheatsheet <- function() {
   "prgrl: curriculum learning (Bengio et al. 2009). Q_lambda(z) proportional to W_lambda(z) P(z) with W_1 = 1; it is a curriculum only if H(Q_lambda) increases and W_lambda(z) never falls as lambda grows (eqns 3-4), which is checkable and is checked. prgrl trains the same learner on the schedule and on the shuffled data and compares HELD-OUT error under a fixed update budget, which is Section 4.2's experiment; easy_only_fit is Section 4.1's."
 }

@@ -137,13 +137,17 @@ morie_runs_updown <- function(n = NULL, x = NULL) {
 
 #' .morie_permutations
 #'
-#' A step of the gibbons_native implementation. Called by \code{morie_rank_exact_null}, \code{morie_runs_updown}.
+#' A step of the gibbons_native implementation. Called by \code{morie_rank_exact_null},
+#' \code{morie_runs_updown}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param n A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_permutations(n = 3L)
+#' res
 .morie_permutations <- function(n) {
   if (n == 1L) {
     return(matrix(1L, 1L, 1L))

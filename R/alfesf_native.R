@@ -92,6 +92,9 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .alfesf_d0(n = 3L)
+#' res
 .alfesf_d0 <- function(n) {
   if (n <= 15L) {
     return(0.5)
@@ -193,13 +196,16 @@
 #' @param features Optional; may be \code{NULL}. Passed to \code{.alfesf_rows}.
 #' @param weights Optional; may be \code{NULL}. A list; the body reads \code{$b}, \code{$W} from it.
 #' @param lddt Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param chain_id Optional; may be \code{NULL}. Coerced to vector by the body, with \code{as.vector}.
+#' @param chain_id Optional; may be \code{NULL}. Coerced to vector by the body, with
+#' \code{as.vector}.
 #' @param temperature Compared against \code{"fit"}. Defaults to \code{1}.
 #' @param l2 Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.001}.
 #' @param iters Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{300L}.
 #' @param lr Passed to \code{.alfesf_fit_multinomial}. Defaults to \code{0.5}.
 #' @param pae_bin_width Passed to \code{.alfesf_pae_centres}. Defaults to \code{0.5}.
-#' @return A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm}, \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route}, \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm},
+#' \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route},
+#' \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
 #' @export
 morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
                                             pae_logits = NULL,
@@ -407,6 +413,9 @@ morie_alfesf_esmfold_confidence <- function(lddt_logits = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .alfesf_cheatsheet()
+#' res
 .alfesf_cheatsheet <- function() {
   paste0(
     "alfesf: morie_alfesf_esmfold_confidence(lddt_logits, pae_logits) ",

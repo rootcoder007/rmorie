@@ -32,7 +32,8 @@ REML formula (b'b + trace of the frailty block of the inverse
 penalized information) / q, and the steps alternate.
 }
 \examples{
-Lnfrm(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+Lnfrm(time = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 McGilchrist, C. A. (1993), Biometrics 49(1), 221-225;

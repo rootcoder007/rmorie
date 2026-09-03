@@ -14,3 +14,7 @@ A step of the grace_native implementation. Called by \code{.grace_morie_cheatshe
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .grace_cheatsheet()
+res
+}

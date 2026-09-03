@@ -17,3 +17,7 @@ A step of the tail1_core implementation. Called by \code{Admixq}, \code{Admmlass
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .t1_result()
+res
+}

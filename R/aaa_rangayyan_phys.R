@@ -80,7 +80,8 @@
 
 #' Periodogram of x sampled at fs Hz with a Hann window, 0 .. fs/2
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadSpec}, \code{EggFeat} and 7 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{ApneaDet},
+#' \code{CadSpec}, \code{EggFeat} and 7 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -112,7 +113,8 @@
 
 #' Total power in the half-open band [lo, hi) Hz
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{ApneaDet}, \code{CadAcou}, \code{CadSpec} and 7 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{ApneaDet},
+#' \code{CadAcou}, \code{CadSpec} and 7 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -130,7 +132,8 @@
 
 #' Local maxima of power, strongest first, at least minsep Hz apart
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{InfantCry} and 6 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec},
+#' \code{InfantCry} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -167,7 +170,8 @@
 
 #' Biased autocorrelation of the mean-removed x, lags 0..maxlag
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{.bsalpc}, \code{InfantCry}, \code{PdMonitor} and 1 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{.bsalpc},
+#' \code{InfantCry}, \code{PdMonitor} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -193,7 +197,8 @@
 #' Levinson-Durbin linear prediction; returns list(a = a\[1..p\], e =
 #' error)
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{CadAcou},
+#' \code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -201,6 +206,10 @@
 #' @param order A count; the body uses it as \code{seq_len(...)}.
 #' @return A list with \code{a}, \code{e}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bsalpc(x = x, order = 3L)
+#' res
 .bsalpc <- function(x, order) {
   # Levinson-Durbin linear prediction; returns list(a = a[1..p], e = error).
   if (order < 1L) stop("order must be >= 1")
@@ -233,7 +242,8 @@
 
 #' Magnitude-squared response of the all-pole LPC filter, 0..fs/2 Hz
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{CadAcou},
+#' \code{InfantCry}, \code{SpeechFeat} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -260,13 +270,15 @@
 
 #' Moments of a PSD treated as a density, Rangayyan (2024) Section 6.4.1
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec}, \code{EggFeat} and 4 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{CadAcou}, \code{CadSpec},
+#' \code{EggFeat} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param freqs A vector; its length is taken and its elements indexed.
 #' @param power Numeric; passed to \code{cumsum}.
-#' @return A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz}, \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
+#' @return A list with \code{total_power}, \code{mean_freq_hz}, \code{median_freq_hz},
+#' \code{fm2_hz2}, \code{spread_hz}, \code{spectral_skewness}, \code{spectral_kurtosis}.
 #' @export
 .bsapsdmom <- function(freqs, power) {
   # Moments of a PSD treated as a density, Rangayyan (2024) Section 6.4.1.
@@ -291,7 +303,8 @@
 
 #' 3 dB bandwidth and Q = f_peak / bandwidth of the peak at fpeak
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{CadSpec}, \code{SpeechFeat}, \code{ValvePcg}.
+#' A step of the rangayyan_phys implementation. Called by \code{CadSpec},
+#' \code{SpeechFeat}, \code{ValvePcg}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -332,13 +345,18 @@
 #' Hjorth activity, mobility, form factor; Rangayyan (2024) eqs.
 #' (5.25-26)
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{PdMonitor}, \code{SeizDet}, \code{VagFeat}.
+#' A step of the rangayyan_phys implementation. Called by \code{PdMonitor},
+#' \code{SeizDet}, \code{VagFeat}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{activity}, \code{mobility}, \code{form_factor}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bsahjorth(x = x)
+#' res
 .bsahjorth <- function(x) {
   # Hjorth activity, mobility, form factor; Rangayyan (2024) eqs. (5.25-26).
   xs <- as.numeric(x)
@@ -365,13 +383,18 @@
 
 #' .bsarms
 #'
-#' A step of the rangayyan_phys implementation. Called by \code{.bsaenvelope}, \code{ApneaDet}, \code{InfantCry} and 3 others in the module.
+#' A step of the rangayyan_phys implementation. Called by \code{.bsaenvelope},
+#' \code{ApneaDet}, \code{InfantCry} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bsarms(x = x)
+#' res
 .bsarms <- function(x) {
   xs <- as.numeric(x)
   if (!length(xs)) stop("empty signal")
@@ -386,6 +409,10 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bsamoments(x = x)
+#' res
 .bsamoments <- function(x) {
   # (mean, variance, skewness, kurtosis); kurtosis is the raw fourth
   # standardised moment (3.0 for a Gaussian).
@@ -469,9 +496,13 @@
 #' @param t_rise Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param t_fall Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param t_onset Numeric; combined arithmetically in the body. Defaults to \code{0}.
-#' @param v_undershoot Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param t_recover Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{t_ms}, \code{V_mV}, \code{amplitude_mV}, \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms}, \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.
+#' @param v_undershoot Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param t_recover Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{amplitude_mV},
+#' \code{peak_time_ms}, \code{v_rest_mV}, \code{v_peak_mV}, \code{t_rise_ms},
+#' \code{t_fall_ms}, \code{width_half_ms}, \code{units}, \code{method}.
 #' @export
 ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
                    t_onset = 0, v_undershoot = NULL, t_recover = NULL) {
@@ -542,7 +573,9 @@ ApWave <- function(t, v_rest = -70, v_peak = 30, t_rise = 0.5, t_fall = 1,
 #' @param P_Na Numeric; passed to \code{min}. Defaults to \code{0.04}.
 #' @param P_Cl Numeric; passed to \code{min}. Defaults to \code{0.45}.
 #' @param T Numeric; combined arithmetically in the body. Defaults to \code{310.15}.
-#' @return A list with \code{potential_mV}, \code{potential_V}, \code{numerator_mM}, \code{denominator_mM}, \code{slope_mV}, \code{permeabilities}, \code{T_K}, \code{units}, \code{method}.
+#' @return A list with \code{potential_mV}, \code{potential_V}, \code{numerator_mM},
+#' \code{denominator_mM}, \code{slope_mV}, \code{permeabilities}, \code{T_K},
+#' \code{units}, \code{method}.
 #' @export
 Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
   if (!is.list(ion_concs)) {
@@ -602,7 +635,9 @@ Ghk <- function(ion_concs, P_K = 1, P_Na = 0.04, P_Cl = 0.45, T = 310.15) {
 #' @param conc_out Numeric; combined arithmetically in the body. Defaults to \code{5}.
 #' @param conc_in Numeric; combined arithmetically in the body. Defaults to \code{140}.
 #' @param ion Coerced to character by the body, with \code{as.character}. Defaults to \code{"K+"}.
-#' @return A list with \code{ion}, \code{potential_mV}, \code{potential_V}, \code{slope_mV}, \code{ratio}, \code{T_K}, \code{z}, \code{conc_out_mM}, \code{conc_in_mM}, \code{units}, \code{method}.
+#' @return A list with \code{ion}, \code{potential_mV}, \code{potential_V},
+#' \code{slope_mV}, \code{ratio}, \code{T_K}, \code{z}, \code{conc_out_mM},
+#' \code{conc_in_mM}, \code{units}, \code{method}.
 #' @export
 Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
                    ion = "K+") {
@@ -645,7 +680,9 @@ Nernst <- function(T = 310.15, z = 1, conc_out = 5, conc_in = 140,
 #' @param h Carried through into a list the body builds.
 #' @param n Carried through into a list the body builds.
 #' @param steps Numeric; combined arithmetically in the body. Defaults to \code{1L}.
-#' @return A list with \code{V_mV}, \code{dt_ms}, \code{steps}, \code{m}, \code{h}, \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms}, \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
+#' @return A list with \code{V_mV}, \code{dt_ms}, \code{steps}, \code{m}, \code{h},
+#' \code{n}, \code{m_inf}, \code{h_inf}, \code{n_inf}, \code{tau_m_ms}, \code{tau_h_ms},
+#' \code{tau_n_ms}, \code{alpha_per_ms}, \code{beta_per_ms}, \code{units}, \code{method}.
 #' @export
 HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
   V <- as.numeric(V)
@@ -721,7 +758,10 @@ HhGate <- function(V, dt = 0.01, m = NULL, h = NULL, n = NULL, steps = 1L) {
 #' @param E_K Numeric; combined arithmetically in the body. Defaults to \code{-77}.
 #' @param E_L Numeric; combined arithmetically in the body. Defaults to \code{-54.387}.
 #' @param V0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-65}.
-#' @return A list with \code{t_ms}, \code{V_mV}, \code{m}, \code{h}, \code{n}, \code{I_Na_uA_cm2}, \code{I_K_uA_cm2}, \code{I_L_uA_cm2}, \code{peak_mV}, \code{peak_time_ms}, \code{rest_mV}, \code{min_mV}, \code{spiked}, \code{n_spikes}, \code{dt_ms}, \code{I_ext_uA_cm2}, \code{units}, \code{method}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{m}, \code{h}, \code{n},
+#' \code{I_Na_uA_cm2}, \code{I_K_uA_cm2}, \code{I_L_uA_cm2}, \code{peak_mV},
+#' \code{peak_time_ms}, \code{rest_mV}, \code{min_mV}, \code{spiked}, \code{n_spikes},
+#' \code{dt_ms}, \code{I_ext_uA_cm2}, \code{units}, \code{method}.
 #' @export
 HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
                     stim_stop = 6, C_m = 1, g_Na = 120, g_K = 36, g_L = 0.3,
@@ -840,8 +880,11 @@ HhModel <- function(duration = 30, dt = 0.01, I_ext = 10, stim_start = 5,
 #' @param v0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-1.2}.
 #' @param w0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-0.6}.
 #' @param stim_start Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param stim_stop Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{t}, \code{v}, \code{w}, \code{peak}, \code{min}, \code{n_spikes}, \code{spike_times}, \code{period}, \code{a}, \code{b}, \code{eps}, \code{I_ext}, \code{units}, \code{method}.
+#' @param stim_stop Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{t}, \code{v}, \code{w}, \code{peak}, \code{min},
+#' \code{n_spikes}, \code{spike_times}, \code{period}, \code{a}, \code{b}, \code{eps},
+#' \code{I_ext}, \code{units}, \code{method}.
 #' @export
 Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
                 eps = 0.08, v0 = -1.2, w0 = -0.6, stim_start = 0,
@@ -922,7 +965,9 @@ Fhn <- function(duration = 200, dt = 0.01, I_ext = 0.5, a = 0.7, b = 0.8,
 #' @param C_m Numeric; combined arithmetically in the body. Defaults to \code{0.2}.
 #' @param R_m Numeric; combined arithmetically in the body. Defaults to \code{100}.
 #' @param V_rest Numeric; combined arithmetically in the body. Defaults to \code{-65}.
-#' @return A list with \code{t_ms}, \code{V_mV}, \code{tau_ms}, \code{V_steady_mV}, \code{input_resistance_MOhm}, \code{peak_mV}, \code{final_mV}, \code{V_rest_mV}, \code{units}, \code{method}.
+#' @return A list with \code{t_ms}, \code{V_mV}, \code{tau_ms}, \code{V_steady_mV},
+#' \code{input_resistance_MOhm}, \code{peak_mV}, \code{final_mV}, \code{V_rest_mV},
+#' \code{units}, \code{method}.
 #' @export
 RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
   ts <- as.numeric(t)
@@ -990,8 +1035,12 @@ RcMemb <- function(t, I_inj = 0, C_m = 0.2, R_m = 100, V_rest = -65) {
 #' @param v_rest A count; the body uses it as \code{rep(...)}. Defaults to \code{-85}.
 #' @param v_peak Numeric; combined arithmetically in the body. Defaults to \code{20}.
 #' @param I_ion_peak Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
-#' @param threshold_frac Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.25}.
-#' @return A list with \code{x_cm}, \code{Vm_mV}, \code{phi_e_mV}, \code{phi_i_mV}, \code{Im_uA_cm2}, \code{activation_ms}, \code{n_activated}, \code{cv_cm_per_ms}, \code{D_cm2_per_ms}, \code{sigma_bulk_mS_cm}, \code{dt_ms}, \code{dx_cm}, \code{stability_limit_ms}, \code{units}, \code{method}.
+#' @param threshold_frac Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.25}.
+#' @return A list with \code{x_cm}, \code{Vm_mV}, \code{phi_e_mV}, \code{phi_i_mV},
+#' \code{Im_uA_cm2}, \code{activation_ms}, \code{n_activated}, \code{cv_cm_per_ms},
+#' \code{D_cm2_per_ms}, \code{sigma_bulk_mS_cm}, \code{dt_ms}, \code{dx_cm},
+#' \code{stability_limit_ms}, \code{units}, \code{method}.
 #' @export
 BiDomain <- function(n_nodes = 100, dx_cm = 0.02, duration_ms = 60,
                      dt_ms = 0.005, sigma_i = 1, sigma_e = 2, C_m = 1,
@@ -1209,9 +1258,13 @@ CadAcou <- function(coronary_sound, fs, order = 8, hf_band = c(300, 900),
 #' @param flow_velocity Coerced to numeric by the body, with \code{as.numeric}.
 #' @param stenosis_pct Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param p2max Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param nu Numeric; combined arithmetically in the body. Defaults to \code{3.5e-06}.
-#' @return A list with \code{freq_hz}, \code{psd_Pa2_per_Hz}, \code{D_normal_m}, \code{d_stenotic_m}, \code{U_normal_m_s}, \code{u_stenotic_m_s}, \code{stenosis_pct}, \code{corner_freq_hz}, \code{reynolds_param_x}, \code{reynolds_number}, \code{total_power_Pa2}, \code{units}, \code{method}.
+#' @return A list with \code{freq_hz}, \code{psd_Pa2_per_Hz}, \code{D_normal_m},
+#' \code{d_stenotic_m}, \code{U_normal_m_s}, \code{u_stenotic_m_s}, \code{stenosis_pct},
+#' \code{corner_freq_hz}, \code{reynolds_param_x}, \code{reynolds_number},
+#' \code{total_power_Pa2}, \code{units}, \code{method}.
 #' @export
 CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
                      freqs = NULL, nu = 3.5e-6) {
@@ -1270,9 +1323,16 @@ CorSound <- function(diameter, flow_velocity, stenosis_pct = 0, p2max = 1,
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param window_ms Numeric; combined arithmetically in the body. Defaults to \code{40}.
 #' @param f0_range A vector; indexed elementwise. Defaults to \code{c(200, 1000)}.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param flat_tolerance Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.06}.
-#' @return A list with \code{f0_track_hz}, \code{t_track_s}, \code{melody}, \code{melody_units}, \code{mean_f0_hz}, \code{sd_f0_hz}, \code{min_f0_hz}, \code{max_f0_hz}, \code{f0_range_semitones}, \code{voiced_fraction}, \code{in_common_band_fraction}, \code{high_pitched}, \code{formants_hz}, \code{window_ms}, \code{n_windows}, \code{fs_hz}, \code{flat_tolerance}, \code{units}, \code{method}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param flat_tolerance Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.06}.
+#' @return A list with \code{f0_track_hz}, \code{t_track_s}, \code{melody},
+#' \code{melody_units}, \code{mean_f0_hz}, \code{sd_f0_hz}, \code{min_f0_hz},
+#' \code{max_f0_hz}, \code{f0_range_semitones}, \code{voiced_fraction},
+#' \code{in_common_band_fraction}, \code{high_pitched}, \code{formants_hz},
+#' \code{window_ms}, \code{n_windows}, \code{fs_hz}, \code{flat_tolerance}, \code{units},
+#' \code{method}.
 #' @export
 InfantCry <- function(cry, fs, window_ms = 40, f0_range = c(200, 1000),
                       order = NULL, flat_tolerance = 0.06) {
@@ -1466,7 +1526,10 @@ EggFeat <- function(egg, fs, normal_band = c(0.0333, 0.0667)) {
 #' @param cv_range A vector; indexed elementwise. Defaults to \code{c(45, 70)}.
 #' @param amp_range A vector; indexed elementwise. Defaults to \code{c(0.5, 2)}.
 #' @param width_ms Numeric; combined arithmetically in the body. Defaults to \code{0.3}.
-#' @return A list with \code{t_ms}, \code{cap_uV}, \code{peak_uV}, \code{peak_latency_ms}, \code{onset_latency_ms}, \code{cv_from_peak_m_s}, \code{cv_from_onset_m_s}, \code{latencies_ms}, \code{velocities_m_s}, \code{distance_m}, \code{units}, \code{method}.
+#' @return A list with \code{t_ms}, \code{cap_uV}, \code{peak_uV},
+#' \code{peak_latency_ms}, \code{onset_latency_ms}, \code{cv_from_peak_m_s},
+#' \code{cv_from_onset_m_s}, \code{latencies_ms}, \code{velocities_m_s},
+#' \code{distance_m}, \code{units}, \code{method}.
 #' @export
 EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
                    amp_range = c(0.5, 2), width_ms = 0.3) {
@@ -1547,8 +1610,12 @@ EngCap <- function(t, distance_m = 0.1, n_fibers = 40, cv_range = c(45, 70),
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param epoch_s Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param ratio_threshold Numeric; combined arithmetically in the body. Defaults to \code{2}.
-#' @param baseline_epochs Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{epochs}, \code{seizure_detected}, \code{n_flagged}, \code{seizure_intervals_s}, \code{baseline_slow_fraction}, \code{threshold_slow_fraction}, \code{baseline_epochs}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{binnie_bands_hz}, \code{units}, \code{method}.
+#' @param baseline_epochs Optional; may be \code{NULL}. Coerced to integer by the body,
+#' with \code{as.integer}.
+#' @return A list with \code{epochs}, \code{seizure_detected}, \code{n_flagged},
+#' \code{seizure_intervals_s}, \code{baseline_slow_fraction},
+#' \code{threshold_slow_fraction}, \code{baseline_epochs}, \code{n_epochs},
+#' \code{epoch_s}, \code{fs_hz}, \code{binnie_bands_hz}, \code{units}, \code{method}.
 #' @export
 SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
                     baseline_epochs = NULL) {
@@ -1676,7 +1743,8 @@ SeizDet <- function(eeg, fs, epoch_s = 1, ratio_threshold = 2,
 #' @param t0 Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param components Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param baseline_ms A vector; indexed elementwise. Defaults to \code{list(NULL, 0)}.
-#' @return A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV}, \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.
+#' @return A list with \code{components}, \code{peak_to_peak_uV}, \code{baseline_uV},
+#' \code{t_ms}, \code{erp_uV}, \code{fs_hz}, \code{t0_ms}, \code{units}, \code{method}.
 #' @export
 ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
                     baseline_ms = list(NULL, 0)) {
@@ -1685,7 +1753,7 @@ ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
   if (fs <= 0) stop("fs must be positive (Hz)")
   if (length(xs) < 4L) stop("need at least 4 ERP samples")
   t0 <- as.numeric(t0)
-  ts <- 1000 * (seq_len(length(xs)) - 1L) / fs - t0
+  ts <- 1000 * (seq_along(xs) - 1L) / fs - t0
   bstart <- baseline_ms[[1L]]
   bend <- as.numeric(baseline_ms[[2L]])
   sel <- ts < bend & (if (is.null(bstart)) TRUE else ts >= as.numeric(bstart))
@@ -1751,7 +1819,10 @@ ErpFeat <- function(erp, fs, t0 = 0, components = NULL,
 #' @param ref_window A vector; indexed elementwise.
 #' @param active_window A vector; indexed elementwise.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(8, 13)}.
-#' @return A list with \code{erd_percent}, \code{ref_power}, \code{active_power}, \code{power_ratio}, \code{event}, \code{band_hz}, \code{ref_window_s}, \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz}, \code{sign_convention}, \code{units}, \code{method}.
+#' @return A list with \code{erd_percent}, \code{ref_power}, \code{active_power},
+#' \code{power_ratio}, \code{event}, \code{band_hz}, \code{ref_window_s},
+#' \code{active_window_s}, \code{ref_samples}, \code{active_samples}, \code{fs_hz},
+#' \code{sign_convention}, \code{units}, \code{method}.
 #' @export
 ErdErs <- function(eeg, fs, ref_window, active_window, band = c(8, 13)) {
   xs <- as.numeric(eeg)
@@ -1882,7 +1953,10 @@ CadSpec <- function(x, fs, bands = NULL) {
 #' @param mu Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param alpha Numeric; combined arithmetically in the body. Defaults to \code{0.02}.
 #' @param adaptive_mu A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{cleaned}, \code{artifact_estimate}, \code{weights}, \code{rms_before}, \code{rms_after}, \code{artifact_reduction_db}, \code{mu_trace}, \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units}, \code{method}.
+#' @return A list with \code{cleaned}, \code{artifact_estimate}, \code{weights},
+#' \code{rms_before}, \code{rms_after}, \code{artifact_reduction_db}, \code{mu_trace},
+#' \code{n_taps}, \code{alpha}, \code{adaptive_mu}, \code{fs_hz}, \code{units},
+#' \code{method}.
 #' @export
 VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
                      adaptive_mu = TRUE) {
@@ -1984,7 +2058,10 @@ VagClean <- function(vag, emg_ref, fs, n_taps = 8, mu = 0.05, alpha = 0.02,
 #' @param amp_uV Numeric; combined arithmetically in the body. Defaults to \code{8}.
 #' @param width_ms Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param phases Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
-#' @return A list with \code{t_ms}, \code{muap_uV}, \code{peak_to_peak_uV}, \code{peak_uV}, \code{duration_ms}, \code{n_phases_observed}, \code{delays_ms}, \code{n_fibers}, \code{conduction_vel_m_s}, \code{in_normal_duration_band}, \code{units}, \code{method}.
+#' @return A list with \code{t_ms}, \code{muap_uV}, \code{peak_to_peak_uV},
+#' \code{peak_uV}, \code{duration_ms}, \code{n_phases_observed}, \code{delays_ms},
+#' \code{n_fibers}, \code{conduction_vel_m_s}, \code{in_normal_duration_band},
+#' \code{units}, \code{method}.
 #' @export
 MuapModel <- function(t, n_fibers = 25, conduction_vel = 4, spread_mm = 3,
                       amp_uV = 8, width_ms = 1, phases = 3) {
@@ -2110,7 +2187,8 @@ MurmSpec <- function(pcg, fs, f1 = 25, f2 = 75, f3 = 150) {
 #'
 #' @param oae Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param noise_floor Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise_floor Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param bands Optional; may be \code{NULL}. A vector; its length is taken.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -2197,7 +2275,11 @@ OaeFeat <- function(oae, fs, noise_floor = NULL, bands = NULL) {
 #' @param gait Passed to \code{tremor}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param tremor_band A vector; indexed elementwise. Defaults to \code{c(3, 7)}.
-#' @return A list with \code{eeg_bands}, \code{eeg_beta_fraction}, \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction}, \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second}, \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present}, \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
+#' @return A list with \code{eeg_bands}, \code{eeg_beta_fraction},
+#' \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction},
+#' \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second},
+#' \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present},
+#' \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
 PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
   fs <- as.numeric(fs)
@@ -2296,7 +2378,10 @@ PdMonitor <- function(eeg, emg, gait, fs, tremor_band = c(3, 7)) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param n_segments Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(1, 100)}.
-#' @return A list with \code{freq_hz}, \code{coherence}, \code{coherence_sq}, \code{phase_rad}, \code{peak_coherence}, \code{peak_freq_hz}, \code{mean_coherence}, \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments}, \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.
+#' @return A list with \code{freq_hz}, \code{coherence}, \code{coherence_sq},
+#' \code{phase_rad}, \code{peak_coherence}, \code{peak_freq_hz}, \code{mean_coherence},
+#' \code{delay_ms_at_peak}, \code{significance_level}, \code{n_segments},
+#' \code{segment_samples}, \code{band_hz}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
 PcgEeg <- function(pcg, eeg, fs, n_segments = 8, band = c(1, 100)) {
   xs <- as.numeric(pcg)
@@ -2432,7 +2517,10 @@ MurmDet <- function(pcg, fs, threshold = 0.15, hf_band = c(150, 600)) {
 #' @param emg Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param epoch_len Numeric; combined arithmetically in the body. Defaults to \code{30}.
-#' @return A list with \code{epochs}, \code{stage_sequence}, \code{stage_minutes}, \code{total_sleep_time_min}, \code{recording_time_min}, \code{sleep_efficiency}, \code{n_epochs}, \code{epoch_len_s}, \code{fs_hz}, \code{heuristic}, \code{units}, \code{method}.
+#' @return A list with \code{epochs}, \code{stage_sequence}, \code{stage_minutes},
+#' \code{total_sleep_time_min}, \code{recording_time_min}, \code{sleep_efficiency},
+#' \code{n_epochs}, \code{epoch_len_s}, \code{fs_hz}, \code{heuristic}, \code{units},
+#' \code{method}.
 #' @export
 PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
   a <- as.numeric(eeg)
@@ -2533,7 +2621,11 @@ PsgStage <- function(eeg, eog, emg, fs, epoch_len = 30) {
 #' @param event_times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param T Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_bins Numeric; combined arithmetically in the body. Defaults to \code{20}.
-#' @return A list with \code{mean_ipi_s}, \code{sd_ipi_s}, \code{cv_ipi}, \code{mean_rate_pps}, \code{sd_rate_pps}, \code{cv_rate}, \code{event_rate_pps}, \code{min_ipi_s}, \code{max_ipi_s}, \code{median_ipi_s}, \code{fano_factor}, \code{ipi_histogram}, \code{n_events}, \code{n_intervals}, \code{duration_s}, \code{regularity}, \code{units}, \code{method}.
+#' @return A list with \code{mean_ipi_s}, \code{sd_ipi_s}, \code{cv_ipi},
+#' \code{mean_rate_pps}, \code{sd_rate_pps}, \code{cv_rate}, \code{event_rate_pps},
+#' \code{min_ipi_s}, \code{max_ipi_s}, \code{median_ipi_s}, \code{fano_factor},
+#' \code{ipi_histogram}, \code{n_events}, \code{n_intervals}, \code{duration_s},
+#' \code{regularity}, \code{units}, \code{method}.
 #' @export
 IeiStats <- function(event_times, T = NULL, n_bins = 20) {
   ts <- as.numeric(event_times)
@@ -2623,7 +2715,8 @@ IeiStats <- function(event_times, T = NULL, n_bins = 20) {
 #' @param pcg Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param n_peaks Numeric; combined arithmetically in the body. Defaults to \code{3}.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A vector, from \code{c}.
 #' @export
 ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
@@ -2682,7 +2775,10 @@ ValvePcg <- function(pcg, fs, n_peaks = 3, order = NULL) {
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param signal_type One of \code{"flow"}, \code{"volume"}. Defaults to \code{"flow"}.
 #' @param min_breath_s Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{rate_breaths_per_min}, \code{mean_period_s}, \code{sd_period_s}, \code{regularity_cv}, \code{depth}, \code{mean_ti_s}, \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths}, \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.
+#' @return A list with \code{rate_breaths_per_min}, \code{mean_period_s},
+#' \code{sd_period_s}, \code{regularity_cv}, \code{depth}, \code{mean_ti_s},
+#' \code{mean_te_s}, \code{ie_ratio}, \code{breaths}, \code{n_breaths},
+#' \code{signal_type}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
 RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
   xs <- as.numeric(resp)
@@ -2779,7 +2875,8 @@ RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
 #'
 #' @param length_m Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param radius_m Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.009}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param rho Numeric; passed to \code{min}. Defaults to \code{1.2}.
 #' @param c Numeric; passed to \code{min}. Defaults to \code{343}.
 #' @param mu Numeric; passed to \code{min}. Defaults to \code{1.8e-05}.
@@ -2787,7 +2884,10 @@ RespFeat <- function(resp, fs, signal_type = "flow", min_breath_s = 1) {
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{1.4}.
 #' @param lam Numeric; passed to \code{min}. Defaults to \code{0.026}.
 #' @param cp Numeric; passed to \code{min}. Defaults to \code{1005}.
-#' @return A list with \code{freq_hz}, \code{transfer_mag}, \code{transfer_db}, \code{La_kg_per_m4}, \code{Ca_m3_per_Pa}, \code{Ra_Pa_s_per_m3}, \code{Ga_m3_per_Pa_s}, \code{resonance_hz}, \code{area_m2}, \code{circumference_m}, \code{volume_m3}, \code{units}, \code{method}.
+#' @return A list with \code{freq_hz}, \code{transfer_mag}, \code{transfer_db},
+#' \code{La_kg_per_m4}, \code{Ca_m3_per_Pa}, \code{Ra_Pa_s_per_m3},
+#' \code{Ga_m3_per_Pa_s}, \code{resonance_hz}, \code{area_m2}, \code{circumference_m},
+#' \code{volume_m3}, \code{units}, \code{method}.
 #' @export
 RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
                       rho = 1.2, c = 343, mu = 1.8e-5, P0 = 101325,
@@ -2863,7 +2963,10 @@ RespSound <- function(length_m = 0.1, radius_m = 0.009, freqs = NULL,
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param epoch_s Numeric; combined arithmetically in the body. Defaults to \code{60}.
 #' @param desat_pct Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{4}.
-#' @return A list with \code{epochs}, \code{n_flagged}, \code{apnea_suspected}, \code{events_per_hour}, \code{severity}, \code{n_epochs}, \code{epoch_s}, \code{fs_hz}, \code{desat_criterion_pct}, \code{heuristic}, \code{units}, \code{method}.
+#' @return A list with \code{epochs}, \code{n_flagged}, \code{apnea_suspected},
+#' \code{events_per_hour}, \code{severity}, \code{n_epochs}, \code{epoch_s},
+#' \code{fs_hz}, \code{desat_criterion_pct}, \code{heuristic}, \code{units},
+#' \code{method}.
 #' @export
 ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
   e <- as.numeric(ecg)
@@ -2974,10 +3077,15 @@ ApneaDet <- function(ecg, spo2, snore, fs, epoch_s = 60, desat_pct = 4) {
 #'
 #' @param speech Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param order Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param n_formants Passed to \code{.bsapeaks}. Defaults to \code{4}.
 #' @param f0_range A vector; indexed elementwise. Defaults to \code{c(60, 400)}.
-#' @return A list with \code{formants_hz}, \code{formant_bandwidths_hz}, \code{formant_powers}, \code{f0_hz}, \code{pitch_period_ms}, \code{voiced}, \code{voicing_strength}, \code{voicing_threshold}, \code{zero_crossing_rate}, \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz}, \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.
+#' @return A list with \code{formants_hz}, \code{formant_bandwidths_hz},
+#' \code{formant_powers}, \code{f0_hz}, \code{pitch_period_ms}, \code{voiced},
+#' \code{voicing_strength}, \code{voicing_threshold}, \code{zero_crossing_rate},
+#' \code{order}, \code{ar_coeffs}, \code{prediction_error}, \code{freq_hz},
+#' \code{lpc_psd}, \code{fs_hz}, \code{units}, \code{method}.
 #' @export
 SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
                        f0_range = c(60, 400)) {
@@ -3052,7 +3160,12 @@ SpeechFeat <- function(speech, fs, order = NULL, n_formants = 4,
 #' @param vag Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param n_segments Coerced to integer by the body, with \code{as.integer}. Defaults to \code{8}.
-#' @return A list with \code{mean}, \code{variance}, \code{skewness}, \code{kurtosis}, \code{kurtosis_excess}, \code{form_factor}, \code{mobility}, \code{activity}, \code{turns_count}, \code{turns_per_second}, \code{var_of_segment_means}, \code{var_of_segment_ms}, \code{segment_means}, \code{segment_ms}, \code{entropy_bits}, \code{rms}, \code{duration_s}, \code{fs_hz}, \code{n_segments}, \code{units}, \code{method}.
+#' @return A list with \code{mean}, \code{variance}, \code{skewness}, \code{kurtosis},
+#' \code{kurtosis_excess}, \code{form_factor}, \code{mobility}, \code{activity},
+#' \code{turns_count}, \code{turns_per_second}, \code{var_of_segment_means},
+#' \code{var_of_segment_ms}, \code{segment_means}, \code{segment_ms},
+#' \code{entropy_bits}, \code{rms}, \code{duration_s}, \code{fs_hz}, \code{n_segments},
+#' \code{units}, \code{method}.
 #' @export
 VagFeat <- function(vag, fs, n_segments = 8) {
   xs <- as.numeric(vag)
@@ -3127,7 +3240,8 @@ VagFeat <- function(vag, fs, n_segments = 8) {
 #'
 #' @param vag Passed to \code{VagFeat}.
 #' @param fs Passed to \code{VagFeat}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param bias Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_segments Passed to \code{VagFeat}. Defaults to \code{8}.
 #' @return The value of \code{base}, as built in the body.
@@ -3209,8 +3323,11 @@ VagKnee <- function(vag, fs, weights = NULL, bias = NULL, n_segments = 8) {
 #'
 #' @param X Coerced to complex by the body, with \code{as.complex}.
 #' @param H Coerced to complex by the body, with \code{as.complex}.
-#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{omega}, \code{Y_real}, \code{Y_imag}, \code{log_Y_real}, \code{log_Y_imag}, \code{log_X_real}, \code{log_X_imag}, \code{log_H_real}, \code{log_H_imag}, \code{max_abs_error}, \code{units}, \code{method}.
+#' @param omega Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{omega}, \code{Y_real}, \code{Y_imag}, \code{log_Y_real},
+#' \code{log_Y_imag}, \code{log_X_real}, \code{log_X_imag}, \code{log_H_real},
+#' \code{log_H_imag}, \code{max_abs_error}, \code{units}, \code{method}.
 #' @export
 CLogProd <- function(X, H, omega = NULL) {
   xs <- as.complex(X)
@@ -3225,7 +3342,7 @@ CLogProd <- function(X, H, omega = NULL) {
       stop("omega must have the same length as X and H")
     }
   } else {
-    om <- seq_len(length(xs)) - 1L
+    om <- seq_along(xs) - 1L
   }
   if (any(xs == 0)) {
     stop("X(omega) must be non-zero for all omega (eq. 4.63)")
@@ -3282,7 +3399,9 @@ CLogProd <- function(X, H, omega = NULL) {
 #' @param M_O Carried through into a list the body builds.
 #' @param N_I Carried through into a list the body builds.
 #' @param N_O Carried through into a list the body builds.
-#' @return A list with \code{z_real}, \code{z_imag}, \code{xhat_real}, \code{xhat_imag}, \code{X_real}, \code{X_imag}, \code{max_abs_error}, \code{terms}, \code{counts}, \code{units}, \code{method}.
+#' @return A list with \code{z_real}, \code{z_imag}, \code{xhat_real}, \code{xhat_imag},
+#' \code{X_real}, \code{X_imag}, \code{max_abs_error}, \code{terms}, \code{counts},
+#' \code{units}, \code{method}.
 #' @export
 CLogPz <- function(z, A = 1, r = 0, a_k = complex(0), b_k = complex(0),
                    c_k = complex(0), d_k = complex(0),

@@ -27,5 +27,6 @@ A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}
 }
 \keyword{internal}
 \examples{
-morie_hibrid_hibrid_prediction(y = c(1, 2, 3, 4, 5, 6, 7, 8), p1_geno = c(1, 2, 3, 4, 5, 6, 7, 8), p2_geno = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_hibrid_hibrid_prediction(y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  p1_geno = c(1, 2, 3, 4, 5, 6, 7, 8), p2_geno = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

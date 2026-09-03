@@ -31,7 +31,8 @@
 # A deterministic nr-by-nc parameter matrix, row-major off the stream.
 #' A deterministic nr-by-nc parameter matrix, row-major off the stream
 #'
-#' A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber}, \code{Vaecf} and 4 others in the module.
+#' A step of the helpers_vit implementation. Called by \code{Vaean}, \code{Vaeber},
+#' \code{Vaecf} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -64,6 +65,10 @@
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{.vitlneps}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vitln(v = x)
+#' res
 .vitln <- function(v, eps = .vitlneps) {
   n <- length(v)
   if (n == 0L) stop("layernorm: empty vector")
@@ -82,6 +87,10 @@
 #' @param eps Passed to \code{.vitln}. Defaults to \code{.vitlneps}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .vitlnrows(A = A)
+#' res
 .vitlnrows <- function(A, eps = .vitlneps) {
   out <- A
   for (i in seq_len(nrow(A))) out[i, ] <- .vitln(A[i, ], eps)
@@ -120,6 +129,10 @@
 #' @param v A vector; its length is taken.
 #' @return The value of \code{which.max}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .vitargmax(v = x)
+#' res
 .vitargmax <- function(v) {
   if (length(v) == 0L) stop("argmax_first: empty vector")
   which.max(v)

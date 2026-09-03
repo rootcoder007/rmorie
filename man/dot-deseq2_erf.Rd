@@ -15,3 +15,8 @@ A numeric value.
 \description{
 the arm stays base-R only, as the package requires.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .deseq2_erf(x = x)
+res
+}

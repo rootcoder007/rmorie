@@ -20,5 +20,6 @@ A list with \code{best_params}, \code{best_score}, \code{best_index}, \code{cand
 }
 \keyword{internal}
 \examples{
-morie_geron_randomized_search(param_dist = c(1, 2, 3, 4, 5, 6, 7, 8), n_iter = 5L, X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_randomized_search(param_dist = c(1, 2, 3, 4, 5, 6, 7, 8), n_iter = 5L,
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

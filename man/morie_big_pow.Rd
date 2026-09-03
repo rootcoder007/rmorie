@@ -7,7 +7,7 @@
 morie_big_pow(a, k)
 }
 \arguments{
-\item{a}{Base, coercible by \code{\link[=morie_bigint]{morie_bigint()}}.}
+\item{a}{Base, coercible by \code{morie_bigint()}.}
 
 \item{k}{Non-negative whole exponent.}
 }

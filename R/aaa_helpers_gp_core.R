@@ -6,24 +6,34 @@
 
 #' .gpflat
 #'
-#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gpbrier}, \code{.gpconf} and 17 others in the module.
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gpbrier}, \code{.gpconf} and 17 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gpflat(x = x)
+#' res
 .gpflat <- function(x) as.numeric(unlist(x))
 
 #' .gpmat
 #'
-#' A step of the helpers_gp_core implementation. Called by \code{.gpannsse}, \code{.gpblueblup}, \code{.gpbrier} and 18 others in the module.
+#' A step of the helpers_gp_core implementation. Called by \code{.gpannsse},
+#' \code{.gpblueblup}, \code{.gpbrier} and 18 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gpmat(A = A)
+#' res
 .gpmat <- function(A) {
   if (is.matrix(A)) {
     return(matrix(as.numeric(A), nrow(A), ncol(A)))
@@ -44,6 +54,11 @@
 #' @param b A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gpsolve(A = A, b = b)
+#' res
 .gpsolve <- function(A, b) {
   A <- .gpmat(A)
   b <- .gpflat(b)
@@ -63,6 +78,10 @@
 #' @param A A matrix; passed to \code{dim}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gppinv(A = A)
+#' res
 .gppinv <- function(A) {
   s <- svd(.gpmat(A))
   tol <- max(dim(A)) * .Machine$double.eps * max(s$d, 0)
@@ -72,13 +91,18 @@
 
 #' .gpinv
 #'
-#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param A A matrix; passed to \code{solve}.
 #' @return The value of \code{.gppinv}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gpinv(A = A)
+#' res
 .gpinv <- function(A) {
   A <- .gpmat(A)
   out <- tryCatch(solve(A), error = function(e) NULL)
@@ -97,6 +121,10 @@
 #' @param A Passed to \code{.gpmat}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gplogdet(A = A)
+#' res
 .gplogdet <- function(A) {
   A <- .gpmat(A)
   d <- determinant(A, logarithm = TRUE)
@@ -107,12 +135,15 @@
 # --- chapter 1: balanced one-way layout, eqs (1.2)-(1.5) -------------------
 #' Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)
 #'
-#' A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003}, \code{Msm005} and 1 others in the module.
+#' A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003},
+#' \code{Msm005} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param groups Iterated over elementwise, with \code{lapply}.
-#' @return A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means}, \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between}, \code{ms_within}.
+#' @return A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means},
+#' \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between},
+#' \code{ms_within}.
 #' @export
 .gponeway <- function(groups) {
   gs <- lapply(groups, as.numeric)
@@ -151,7 +182,8 @@
 #'
 #' @param y_true Passed to \code{.gpflat}.
 #' @param y_pred Passed to \code{.gpflat}.
-#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
 .gpconf <- function(y_true, y_pred, n_classes = NULL) {
@@ -171,7 +203,8 @@
 #'
 #' @param conf A matrix; indexed by row and column.
 #' @param i Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all}, \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
+#' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all},
+#' \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
 #' @export
 .gpclassmetrics <- function(conf, i) {
   conf <- .gpmat(conf)
@@ -199,7 +232,8 @@
 #'
 #' @param probs Passed to \code{.gpmat}.
 #' @param y_true Passed to \code{.gpflat}.
-#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param halved A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @return One of two values, depending on the branch taken.
 #' @export
@@ -237,7 +271,8 @@
 # --- chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML ---------------
 #' Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML
 #'
-#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup}, \code{.gplmmloglik}, \code{.gpremlloglik} and 1 others in the module.
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gplmmloglik}, \code{.gpremlloglik} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -350,8 +385,15 @@
 #' @param X Passed to \code{.gpmat}.
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @param add_intercept A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss}, \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
+#' @return A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss},
+#' \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .gpolsfit(X = X, y = y)
+#' res
 .gpolsfit <- function(X, y, add_intercept = FALSE) {
   Xm <- .gpmat(X)
   if (add_intercept) Xm <- cbind(1, Xm)
@@ -385,6 +427,11 @@
 #' @param B Passed to \code{.gpmat}.
 #' @return The value of \code{kronecker}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gpkron(A = A, B = b)
+#' res
 .gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
 
 #' .gpmultitrait
@@ -651,6 +698,11 @@
 #' @param candidates Optional; may be \code{NULL}. Passed to \code{.gpflat}.
 #' @return A list with \code{threshold}, \code{loglik}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gpzapbestsplit(y = y, x = x)
+#' res
 .gpzapbestsplit <- function(y, x, candidates = NULL) {
   ys <- .gpflat(y)
   xs <- .gpflat(x)
@@ -749,8 +801,14 @@
 #' @param K Passed to \code{.gpmat}.
 #' @param y Passed to \code{.gpflat}.
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals}, \code{loss}, \code{penalty}, \code{objective}.
+#' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals},
+#' \code{loss}, \code{penalty}, \code{objective}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gprkhsfitsq(K = A, y = b)
+#' res
 .gprkhsfitsq <- function(K, y, lam = 1) {
   Km <- .gpmat(K)
   ys <- .gpflat(y)

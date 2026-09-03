@@ -19,3 +19,7 @@ A step of the helpers_rouss implementation. Called by \code{.rscombosstride}, \c
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .rsnchoosek(n = 3L, k = 3L)
+res
+}

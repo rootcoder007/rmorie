@@ -25,7 +25,7 @@ mean cluster size -- the effective number of independent extremes
 is theta * n, and ignoring it overstates every return level. The
 run length is a genuine tuning parameter (too short splits
 clusters, too long merges them); the intervals estimator
-(\code{\link[=morie_evt_extremal_intervals]{morie_evt_extremal_intervals()}}) has none and is the usual
+(\code{morie_evt_extremal_intervals()}) has none and is the usual
 cross-check.
 }
 \examples{

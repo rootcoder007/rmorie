@@ -30,6 +30,9 @@
 #' @param n Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_gh_n(n = 3L)
+#' res
 .morie_gh_n <- function(n) {
   v <- as.numeric(n)
   if (!is.finite(v) || v < 2) {
@@ -40,7 +43,8 @@
 
 #' .morie_gh_minimax_rate
 #'
-#' A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity}, \code{Ghosalgpdenscrt}, \code{morie_gp_density_rate} and 1 others in the module.
+#' A step of the ghosal_native implementation. Called by \code{Ghosalfrsdensity},
+#' \code{Ghosalgpdenscrt}, \code{morie_gp_density_rate} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -62,7 +66,8 @@
 
 #' .morie_gh_trapz
 #'
-#' A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger}, \code{Ghosalfrsdensity}, \code{morie_polya_tree_density} and 1 others in the module.
+#' A step of the ghosal_native implementation. Called by \code{.morie_gh_hellinger},
+#' \code{Ghosalfrsdensity}, \code{morie_polya_tree_density} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -93,7 +98,8 @@
 
 #' .morie_gh_polya_tree
 #'
-#' A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density}, \code{morie_polya_tree_mixture}.
+#' A step of the ghosal_native implementation. Called by \code{morie_polya_tree_density},
+#' \code{morie_polya_tree_mixture}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -153,6 +159,9 @@
 #' @param K Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_gh_stick(alpha = 0.5, K = 3L)
+#' res
 .morie_gh_stick <- function(alpha, K) {
   v <- stats::rbeta(K, 1, alpha)
   v[K] <- 1

@@ -30,7 +30,8 @@ test_that("hash kernels reproduce the published test vectors", {
   expect_identical(morie_hmac("key", "The quick brown fox jumps over the lazy dog", algo = "sha1"),
                    "de7c9b85b8b78aa6bc8a7a36f70a90701c9db4d9")
   # FIPS-197 C.1: AES-128 on 00112233445566778899aabbccddeeff with key 000102..0f
-  key <- as.raw(0:15); pt <- as.raw(c(0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff))
+  key <- as.raw(0:15)
+  pt <- as.raw(c(0x00, 0x11, 0x22, 0x33, 0x44, 0x55, 0x66, 0x77, 0x88, 0x99, 0xaa, 0xbb, 0xcc, 0xdd, 0xee, 0xff))
   aes <- morie_aes(key, mode = "ECB")
   ct <- aes$encrypt(pt)
   expect_identical(paste(sprintf("%02x", as.integer(ct)), collapse = ""), "69c4e0d86a7b0430d8cdb78070b4c55a")
@@ -66,7 +67,8 @@ test_that("morie_digest matches digest::digest across algorithms and inputs", {
   for (algo in c("xxhash32", "xxhash64", "murmur32")) for (seed in c(1, 42, 2^31 - 1))
     expect_identical(morie_digest("seeded input", algo = algo, serialize = FALSE, seed = seed),
                      digest::digest("seeded input", algo = algo, serialize = FALSE, seed = seed), label = paste(algo, seed))
-  p <- tempfile(); writeBin(as.raw(sample(0:255, 70000, TRUE)), p)
+  p <- tempfile()
+  writeBin(as.raw(sample(0:255, 70000, TRUE)), p)
   for (algo in c("md5", "sha1", "sha256", "sha512", "crc32", "xxhash64"))
     expect_identical(morie_digest(file = p, algo = algo), digest::digest(file = p, algo = algo), label = paste(algo, "file"))
   expect_identical(morie_digest(p, algo = "sha256", file = TRUE, skip = 100, length = 5000),
@@ -94,23 +96,27 @@ test_that("morie_hmac, morie_digest2int, morie_sha1 and morie_aes match digest",
     expect_identical(morie_sha1(x, digits = 6L, zapsmall = 3L, algo = "sha256"), digest::sha1(x, digits = 6L, zapsmall = 3L, algo = "sha256"),
                      label = paste(class(x)[1], "sha256"))
   }
-  key <- as.raw(1:16); iv <- as.raw(17:32)
+  key <- as.raw(1:16)
+  iv <- as.raw(17:32)
   msg <- charToRaw(strrep("The quick brown fox jumps over the lazy dog", 3))
   msg32 <- msg[1:32]
   for (mode in c("ECB", "CBC", "CFB", "CTR")) {
     text <- if (mode %in% c("ECB", "CBC")) msg32 else msg
-    ours <- morie_aes(key, mode = mode, IV = iv); theirs <- digest::AES(key, mode = mode, IV = iv)
+    ours <- morie_aes(key, mode = mode, IV = iv)
+    theirs <- digest::AES(key, mode = mode, IV = iv)
     ct <- ours$encrypt(text)
     expect_identical(ct, theirs$encrypt(text), label = mode)
     ours2 <- morie_aes(key, mode = mode, IV = iv)
     expect_identical(ours2$decrypt(ct, raw = TRUE), text, label = paste(mode, "decrypt"))
   }
-  cbc <- morie_aes(key, mode = "CBC", IV = iv, padding = TRUE); ct <- cbc$encrypt(msg)
+  cbc <- morie_aes(key, mode = "CBC", IV = iv, padding = TRUE)
+  ct <- cbc$encrypt(msg)
   cbc2 <- digest::AES(key, mode = "CBC", IV = iv, padding = TRUE)
   expect_identical(ct, cbc2$encrypt(msg))
   expect_identical(morie_aes(key, mode = "CBC", IV = iv, padding = TRUE)$decrypt(ct, raw = TRUE), msg)
   for (k in list(as.raw(1:24), as.raw(1:32))) {
-    a <- morie_aes(k, "ECB"); b <- digest::AES(k, "ECB")
+    a <- morie_aes(k, "ECB")
+    b <- digest::AES(k, "ECB")
     expect_identical(a$encrypt(msg32), b$encrypt(msg32), label = length(k))
   }
 })

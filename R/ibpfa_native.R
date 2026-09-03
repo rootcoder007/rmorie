@@ -18,7 +18,8 @@
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0L}.
-#' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n}, \code{features_per_object}, \code{note}.
+#' @return A list with \code{Z}, \code{K}, \code{counts}, \code{alpha}, \code{n},
+#' \code{features_per_object}, \code{note}.
 #' @export
 sample_ibp <- function(n, alpha, seed = 0L) {
   N <- as.integer(n)
@@ -78,7 +79,8 @@ sample_ibp <- function(n, alpha, seed = 0L) {
 #'
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{expected_total_features}, \code{harmonic}, \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
+#' @return A list with \code{expected_total_features}, \code{harmonic},
+#' \code{expected_per_object}, \code{expected_nonzeros}, \code{note}.
 #' @export
 expected_features <- function(n, alpha) {
   N <- as.integer(n)
@@ -209,6 +211,9 @@ morie_ibpfa <- function(n, alpha, seed = 0L) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ibpfa_cheatsheet()
+#' res
 .ibpfa_cheatsheet <- function() {
   paste("ibpfa: objects have SEVERAL latent features, and how many exist is unknown -- so use a distribution over binary matrices with unboundedly many columns. Customer i takes an existing dish with probability m_k/i (popularity self-reinforces) and Poisson(alpha/i) NEW dishes (the flow decays as 1/i). Two different numbers: expected TOTAL features alpha*H_n ~ alpha log n, expected features PER OBJECT constant at alpha. The left-ordered form is EXCHANGEABLE, which is what licenses Gibbs sampling by treating any object as the last to arrive.")
 }

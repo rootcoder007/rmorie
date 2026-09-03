@@ -33,7 +33,8 @@ test_that("the analytic Jacobian is the derivative it claims to be", {
     jac <- .schab_semivariogram_jacobian(h, th[1], th[2], th[3], model)
     num <- matrix(0, length(h), 3)
     for (i in 1:3) {
-      e <- c(0, 0, 0); e[i] <- 1e-7
+      e <- c(0, 0, 0)
+      e[i] <- 1e-7
       num[, i] <- (.sp_semivariogram(h, th[1]+e[1], th[2]+e[2], th[3]+e[3], model) -
                    .sp_semivariogram(h, th[1]-e[1], th[2]-e[2], th[3]-e[3], model)) / 2e-7
     }
@@ -134,7 +135,8 @@ test_that("the K-free form differs from the K form by a constant", {
   for (p in list(c(0.10, 5), c(0.35, 9), c(0.02, 14))) {
     res <- .schab_profiled_reml(C, z, X, p[1], p[2], "exponential")
     Sig <- res$sigma2 * .schab_correlation_matrix(C, p[1], p[2], "exponential")$sigma
-    M <- K %*% Sig %*% t(K); KZ <- as.numeric(K %*% z)
+    M <- K %*% Sig %*% t(K)
+    KZ <- as.numeric(K %*% z)
     kform <- 2 * sum(log(diag(chol(M)))) + nrow(K) * log(2 * pi) +
       sum(KZ * solve(M, KZ))
     diffs <- c(diffs, kform - res$value)
@@ -148,11 +150,13 @@ test_that("the REML gradient is the derivative it claims to be", {
   S <- .schab_covariance_matrix(C, 0.3, 2.0, 3.0, "exponential")
   z <- 5 + as.numeric(t(chol(S + 1e-10 * diag(n))) %*% (cos((1:n) * 1.7) * sqrt(2)))
   X <- matrix(1, nrow = n, ncol = 1)
-  xi <- 0.2; a <- 7
+  xi <- 0.2
+  a <- 7
   g <- .schab_profiled_reml(C, z, X, xi, a, "exponential")$gradient
   num <- numeric(2)
   for (j in 1:2) {
-    d <- c(0, 0); d[j] <- 1e-6
+    d <- c(0, 0)
+    d[j] <- 1e-6
     vp <- .schab_profiled_reml(C, z, X, xi + d[1], a + d[2], "exponential")$value
     vm <- .schab_profiled_reml(C, z, X, xi - d[1], a - d[2], "exponential")$value
     num[j] <- (vp - vm) / (2 * sum(d))

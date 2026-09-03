@@ -12,7 +12,8 @@ test_that("the linear model, errors and cost cohere and match Python", {
                c(2, 5))
   expect_equal(morie_burkov_squared_error(3, 1)$estimate, 4)
   expect_equal(morie_burkov_mse_cost(2, 0, c(1, 2), c(2, 4))$cost, 0)
-  x <- c(1, 2, 3); y <- c(1.5, 3, 5)
+  x <- c(1, 2, 3)
+  y <- c(1.5, 3, 5)
   pred <- morie_burkov_linear_function(x, 1.5, 0)$predictions
   errs <- morie_burkov_squared_error(pred, y)$errors
   expect_equal(morie_burkov_mse_cost(1.5, 0, x, y)$cost, mean(errs))
@@ -21,7 +22,8 @@ test_that("the linear model, errors and cost cohere and match Python", {
 })
 
 test_that("the MSE cost is minimised at the least-squares solution", {
-  s <- 1; u <- numeric(40)
+  s <- 1
+  u <- numeric(40)
   for (i in 1:40) {
     s <- (1664525 * s + 1013904223) %% 2^32
     u[i] <- (s + 0.5) / 2^32
@@ -29,7 +31,8 @@ test_that("the MSE cost is minimised at the least-squares solution", {
   x <- u[1:20] * 10
   y <- 2.5 * x - 1 + (u[21:40] - 0.5)
   fit <- stats::lm(y ~ x)
-  b_star <- coef(fit)[1]; w_star <- coef(fit)[2]
+  b_star <- coef(fit)[1]
+  w_star <- coef(fit)[2]
   j_star <- morie_burkov_mse_cost(w_star, b_star, x, y)$cost
   for (d in list(c(0.05, 0), c(-0.05, 0), c(0, 0.05), c(0, -0.05))) {
     expect_gt(morie_burkov_mse_cost(w_star + d[1], b_star + d[2],
@@ -41,7 +44,8 @@ test_that("cosine similarity matches Python and its properties", {
   expect_equal(morie_burkov_cosine_similarity(c(1, 0), c(0, 1))$estimate, 0)
   expect_equal(morie_burkov_cosine_similarity(c(1, 2), c(2, 4))$estimate, 1,
                tolerance = 1e-12)
-  a <- c(1, 2, -1); b <- c(0.5, -1, 2)
+  a <- c(1, 2, -1)
+  b <- c(0.5, -1, 2)
   expect_equal(morie_burkov_cosine_similarity(a, b)$estimate,
                morie_burkov_cosine_similarity(7 * a, 0.1 * b)$estimate,
                tolerance = 1e-12)
@@ -84,7 +88,8 @@ test_that("BCE gradients match Python and finite differences", {
   set.seed(2)
   X <- matrix(stats::runif(40, -2, 2), 20, 2)
   y <- as.numeric(stats::runif(20) > 0.5)
-  w <- c(0.3, -0.7); b <- 0.2
+  w <- c(0.3, -0.7)
+  b <- 0.2
   mean_bce <- function(wv, bv) {
     p <- 1 / (1 + exp(-(X %*% wv + bv)))
     mean(-(y * log(p) + (1 - y) * log(1 - p)))
@@ -93,7 +98,8 @@ test_that("BCE gradients match Python and finite differences", {
   out2 <- morie_burkov_bce_gradients(p, y, X)
   h <- 1e-6
   for (j in 1:2) {
-    e <- c(0, 0); e[j] <- h
+    e <- c(0, 0)
+    e[j] <- h
     num <- (mean_bce(w + e, b) - mean_bce(w - e, b)) / (2 * h)
     expect_equal(out2$grad_w[j], num, tolerance = 1e-5)
   }
@@ -160,10 +166,12 @@ test_that("interpolation and backoff match Python", {
 test_that("Kneser-Ney matches Python and closes over a vocabulary", {
   expect_equal(morie_burkov_kneser_ney(2, 4, c(2, 3, 10), 0.75)$estimate,
                0.425, tolerance = 1e-12)
-  prefix <- 10; d <- 0.75
+  prefix <- 10
+  d <- 0.75
   follows <- c(cat = 6, dog = 3, fish = 1)
   cont <- c(cat = 3, dog = 4, fish = 1)
-  total_types <- 8; n_after <- 3
+  total_types <- 8
+  n_after <- 3
   total_norm <- sum(vapply(names(follows), function(w) {
     morie_burkov_kneser_ney(follows[[w]], prefix,
                             c(n_after,
@@ -181,7 +189,8 @@ test_that("bits per character matches Python", {
 })
 
 test_that("dot, norm, unit and cosine cohere", {
-  a <- c(3, 4); b <- c(4, 3)
+  a <- c(3, 4)
+  b <- c(4, 3)
   dot <- morie_burkov_dot_product(a, b)$estimate
   na <- morie_burkov_vector_norm(a)$estimate
   nb <- morie_burkov_vector_norm(b)$estimate
@@ -253,8 +262,10 @@ test_that("autodiff matches Python and central differences", {
   expect_equal(out$gradients$y, 0.6591976803822628, tolerance = 1e-13)
   h <- 1e-6
   for (k in names(inputs)) {
-    up <- inputs; up[[k]] <- up[[k]] + h
-    dn <- inputs; dn[[k]] <- dn[[k]] - h
+    up <- inputs
+    up[[k]] <- up[[k]] + h
+    dn <- inputs
+    dn[[k]] <- dn[[k]] - h
     num <- (morie_burkov_computational_graph(g, up)$output -
               morie_burkov_computational_graph(g, dn)$output) / (2 * h)
     expect_equal(out$gradients[[k]], num, tolerance = 1e-5)

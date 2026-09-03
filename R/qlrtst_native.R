@@ -49,6 +49,11 @@
 #' @param y A matrix; passed to \code{\%*\%}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .qlr_ssr(X = x, y = y)
+#' res
 .qlr_ssr <- function(X, y) {
   A <- t(X) %*% X
   b <- t(X) %*% y

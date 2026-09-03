@@ -19,3 +19,8 @@ The value of \code{\%*\%}.
 come from rounding on a matrix positive semi-definite in exact
 arithmetic, so they are clipped rather than allowed to make NaNs.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .schab_spectral_root(cov = A)
+res
+}

@@ -75,7 +75,8 @@ test_that("Neyman-Scott K exceeds the Poisson K everywhere", {
 
 test_that("Neyman-Scott excess matches its closed form", {
   r <- c(0, 0.25, 1)
-  rho <- 7; sigma <- 0.2
+  rho <- 7
+  sigma <- 0.2
   out <- spnscl(r, rho = rho, mu = 3, sigma = sigma)
   expect_equal(out$excess, (1 - exp(-(r^2) / (4 * sigma^2))) / rho,
                tolerance = 1e-12)

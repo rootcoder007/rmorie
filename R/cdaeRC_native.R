@@ -106,7 +106,8 @@ encode <- function(y_tilde, W, V_u, b, activation = "sigmoid") {
 #' @param z Numeric; combined arithmetically in the body.
 #' @param Wp A vector; indexed elementwise.
 #' @param bp A vector; its length is taken and its elements indexed.
-#' @param items Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param items Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param activation Passed to \code{.cdae_act}. Defaults to \code{"sigmoid"}.
 #' @return A vector, from \code{sapply}.
 #' @export
@@ -119,7 +120,9 @@ decode <- function(z, Wp, bp, items = NULL, activation = "sigmoid") {
 
 #' loss
 #'
-#' A step of the cdaeRC_native implementation. Called by \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and 2 others in the module.
+#' A step of the cdaeRC_native implementation. Called by
+#' \code{.plcbsc_synthetic_control}, \code{.tlroad_score_spans_eic}, \code{fit_cdae} and
+#' 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -165,7 +168,9 @@ loss <- function(y, y_hat, kind = "square") {
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param activation Passed to \code{.cdae_dact}. Defaults to \code{"sigmoid"}.
 #' @param init_scale Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
-#' @return A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b}, \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q}, \code{n_neg}, \code{activation}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{W}, \code{W_prime}, \code{V}, \code{b},
+#' \code{b_prime}, \code{loss_history}, \code{final_loss}, \code{k}, \code{q},
+#' \code{n_neg}, \code{activation}, \code{method}, \code{note}.
 #' @export
 fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
                      alpha = 0.05, lam = 0.01, iters = 30L,
@@ -256,7 +261,8 @@ fit_cdae <- function(pos, n_users, n_items, k_dim = 8L, q = 0.2,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param model A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W}, \code{$W_prime} from it.
+#' @param model A list; the body reads \code{$b}, \code{$b_prime}, \code{$V}, \code{$W},
+#' \code{$W_prime} from it.
 #' @param pos A vector; indexed elementwise.
 #' @param u Coerced to integer by the body, with \code{as.integer}.
 #' @param n_items Coerced to integer by the body, with \code{as.integer}.

@@ -30,6 +30,10 @@
 #' @param alpha Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .mor_ed_dist(z = y, alpha = 0.5)
+#' res
 .mor_ed_dist <- function(z, alpha) as.matrix(dist(z))^alpha
 
 # P[i + 1, j + 1] = sum of D[1..i, 1..j]

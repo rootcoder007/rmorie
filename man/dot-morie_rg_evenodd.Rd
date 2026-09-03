@@ -19,3 +19,8 @@ A step of the rangayyan_xfrm implementation. Called by \code{EvenOdd}, \code{Eve
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_rg_evenodd(x = b)
+res
+}

@@ -82,7 +82,8 @@ instead a neighbour count and the criterion is evaluated at every integer
 from 2 up to \code{n}.
 }
 \examples{
-spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Schabenberger Ch 6, Sec 6.1.3.1, pp. 316-317 -- the model, the

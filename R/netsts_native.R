@@ -58,13 +58,18 @@
 
 #' .netsts_sigmoid
 #'
-#' A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell}, \code{morie_netsts}.
+#' A step of the netsts_native implementation. Called by \code{.netsts_lstm_cell},
+#' \code{morie_netsts}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .netsts_sigmoid(x = x)
+#' res
 .netsts_sigmoid <- function(x) {
   1 / (1 + exp(-x))
 }
@@ -78,6 +83,10 @@
 #' @param y A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .netsts_sd(y = y)
+#' res
 .netsts_sd <- function(y) {
   n <- length(y)
   if (n < 2) return(0)
@@ -94,6 +103,10 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .netsts_vec(y = y)
+#' res
 .netsts_vec <- function(y) {
   as.numeric(y)
 }
@@ -214,6 +227,10 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{z}, \code{mu}, \code{sd}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .netsts_standardize(y = y)
+#' res
 .netsts_standardize <- function(y) {
   yv <- as.numeric(y)
   mu <- mean(yv)
@@ -259,7 +276,9 @@
 #' @param forget_bias Passed to \code{.netsts_lstm_run}. Defaults to \code{1}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param ridge Passed to \code{.netsts_lstsq}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden}, \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models}, \code{retention_10}, \code{method}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{strategy}, \code{hidden},
+#' \code{n_lags}, \code{forget_bias}, \code{mean}, \code{sd}, \code{n_models},
+#' \code{retention_10}, \code{method}.
 #' @export
 morie_netsts <- function(y, horizon, hidden = 8, n_lags = 4,
                          strategy = "recursive", forget_bias = 1.0,

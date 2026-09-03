@@ -137,7 +137,8 @@ test_that("morie_rdd_cattaneo_density delegates / runs", {
 test_that("morie_rdd_covariate_balance returns one row per covariate", {
   set.seed(1)
   d <- make_rdd_data(n = 400)
-  d$c1 <- rnorm(nrow(d)); d$c2 <- rnorm(nrow(d))
+  d$c1 <- rnorm(nrow(d))
+  d$c2 <- rnorm(nrow(d))
   out <- morie_rdd_covariate_balance(d, "x", c("c1", "c2"))
   expect_s3_class(out, "data.frame")
   expect_equal(nrow(out), 2L)
@@ -222,7 +223,8 @@ test_that("morie_rdd_geographic returns a sharp-RDD result on signed distance", 
 test_that("morie_rdd_power returns power in [0, 1] for each kernel", {
   for (k in c("triangular", "epanechnikov", "uniform", "gaussian")) {
     res <- morie_rdd_power(n = 500, tau = 0.5, sigma = 1, kernel = k)
-    expect_gte(res$power, 0); expect_lte(res$power, 1)
+    expect_gte(res$power, 0)
+    expect_lte(res$power, 1)
   }
 })
 

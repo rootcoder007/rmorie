@@ -24,7 +24,7 @@ g_prime_note, same_covariance_as_first, n, method.
 The mirror of (4.8): \verb{V_\{2,h\}(x, y) = int_\{-Inf\}^y g'(z) V((x - z)/h) dz}.
 Multiplying \code{V} by \verb{g'} is what makes this an estimator of the
 cumulative survival function at all. It does NOT preserve the
-derivative relation that \code{\link[=morie_fauzi_cumulative_survival_1]{morie_fauzi_cumulative_survival_1()}}
+derivative relation that \code{morie_fauzi_cumulative_survival_1()}
 does, and its bias carries \code{b_3} rather than \code{b_2}; the covariance
 is the same.
 }

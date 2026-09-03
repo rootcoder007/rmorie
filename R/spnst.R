@@ -54,4 +54,3 @@ spnst <- function(coords, z = NULL, source = NULL, theta1 = 1, theta2 = 0,
   res$source <- as.numeric(source)
   res
 }
-

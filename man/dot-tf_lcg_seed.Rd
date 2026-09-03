@@ -17,3 +17,7 @@ A step of the rangayyan_tf implementation. Called by \code{EmdEns}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tf_lcg_seed(seed = 1L)
+res
+}

@@ -29,7 +29,8 @@
 #' @references Press, O., Smith, N. A. and Lewis, M. (2022), Train
 #'   Short, Test Long: Attention with Linear Biases Enables Input Length
 #'   Extrapolation, ICLR 2022, arXiv:2108.12409, page 4 and Section 3.
-#'   Source PDF: fetched-wave3/press-smith-lewis-2022-alibi-train-short-test-long-arxiv2108.12409.pdf.
+#'   Source PDF:
+#' fetched-wave3/press-smith-lewis-2022-alibi-train-short-test-long-arxiv2108.12409.pdf.
 #' @examples
 #' Paligi(Q = diag(2), K = diag(2), V = diag(2))$estimate
 #' @export

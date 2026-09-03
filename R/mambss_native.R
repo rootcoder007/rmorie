@@ -10,7 +10,8 @@
 
 #' softplus
 #'
-#' A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc}, \code{selective_scan}.
+#' A step of the mambss_native implementation. Called by \code{morie_geron_blip_itm_itc},
+#' \code{selective_scan}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -122,6 +123,10 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .sigmoid(z = y)
+#' res
 .sigmoid <- function(z) 1.0 / (1.0 + exp(-as.numeric(z)))
 
 #' selective_scan
@@ -135,13 +140,16 @@ selective_ssm_step <- function(x, h, A, B, C, delta, rule = "zoh") {
 #' @param W_B A matrix; passed to \code{as.matrix}.
 #' @param W_C A matrix; passed to \code{as.matrix}.
 #' @param W_delta A matrix; passed to \code{as.matrix}.
-#' @param delta_bias Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta_bias Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param b_B Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_C Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b_delta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param rule Carried through into a list the body builds. Defaults to \code{"zoh"}.
-#' @param D_skip Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L}, \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
+#' @param D_skip Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{y}, \code{estimate}, \code{state}, \code{delta}, \code{L},
+#' \code{D}, \code{N}, \code{rule}, \code{time_invariant}, \code{method}.
 #' @export
 selective_scan <- function(X, A, W_B, W_C, W_delta, delta_bias = NULL,
                            b_B = NULL, b_C = NULL, b_delta = 0.0,
@@ -242,6 +250,9 @@ s6_layer <- function(X, A, W_B, W_C, W_delta, ...) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .mambss_cheatsheet()
+#' res
 .mambss_cheatsheet <- function() {
   "mambss: S6. B, C, Delta are FUNCTIONS of x (Alg. 2), so the model is time-varying and only the scan works -- no convolution. ZOH: Abar = exp(Delta A), Bbar = (exp(Delta A) - 1) B / A. s_Delta projects to ONE dim then broadcasts over D. Theorem 1: N=1, A=-1, B=1, softplus gives exactly g = sigmoid(Linear(x)), h = (1-g)h + g x."
 }

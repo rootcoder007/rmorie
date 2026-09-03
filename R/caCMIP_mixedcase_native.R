@@ -17,6 +17,11 @@
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .ca_rms(a = A, b = b)
+#' res
 .ca_rms <- function(a, b) {
   n <- length(a)
   sqrt(sum((as.numeric(a) - as.numeric(b))^2) / n)
@@ -31,8 +36,10 @@
 #' @param obs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sigma_d Coerced to numeric by the body, with \code{as.numeric}.
 #' @param sigma_s Coerced to numeric by the body, with \code{as.numeric}.
-#' @param projections Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{weights}, \code{unweighted_mean}, \code{d}, \code{n_models}, \code{effective_n}, \code{method}.
+#' @param projections Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{estimate}, \code{weights}, \code{unweighted_mean}, \code{d},
+#' \code{n_models}, \code{effective_n}, \code{method}.
 #' @export
 caCMIP <- function(models, obs, sigma_d, sigma_s, projections = NULL) {
   mods <- lapply(models, function(m) as.numeric(m))

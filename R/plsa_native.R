@@ -70,7 +70,8 @@
 
 #' .plsa_check
 #'
-#' A step of the plsa_native implementation. Called by \code{.plsa_e_step}, \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
+#' A step of the plsa_native implementation. Called by \code{.plsa_e_step},
+#' \code{.plsa_log_likelihood}, \code{.plsa_m_step} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -164,7 +165,8 @@
 
 #' .plsa_joint_probability
 #'
-#' A step of the plsa_native implementation. Called by \code{.plsa_log_likelihood}, \code{joint_probability}.
+#' A step of the plsa_native implementation. Called by \code{.plsa_log_likelihood},
+#' \code{joint_probability}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -217,7 +219,10 @@
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{P_z}, \code{P_d_given_z}, \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations}, \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{P_z}, \code{P_d_given_z},
+#' \code{P_w_given_z}, \code{loglik_history}, \code{final_loglik}, \code{iterations},
+#' \code{K}, \code{n_docs}, \code{vocab}, \code{n_parameters}, \code{method},
+#' \code{caveat}.
 #' @export
 morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
   chk <- .plsa_check(n_dw)
@@ -309,6 +314,9 @@ morie_plsa <- function(n_dw, K, iters = 100, tol = 1e-8, seed = 0) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .plsa_cheatsheet()
+#' res
 .plsa_cheatsheet <- function() {
   paste("plsa: the ASPECT model. P(d,w) = sum_z P(z)P(d|z)P(w|z)",
         "-- d and w independent GIVEN z, with |z| small so z is a",

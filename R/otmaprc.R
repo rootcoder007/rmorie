@@ -10,8 +10,12 @@
 #' @param x See Usage.
 #' @param y See Usage.
 #' @param p See Usage.
-#' @return List with ``map`` (image of each input in its original order), ``cost``, ``order_x``, ``order_y``, ``n``.
-#' @references Brenier (1991), Polar factorization and monotone rearrangement of vector-valued functions, Communications on Pure and Applied Mathematics 44:375-417. Not held locally; the one-dimensional monotone-rearrangement solution is the standard published result.
+#' @return List with ``map`` (image of each input in its original order), ``cost``,
+#' ``order_x``, ``order_y``, ``n``.
+#' @references Brenier (1991), Polar factorization and monotone rearrangement of
+#' vector-valued functions, Communications on Pure and Applied Mathematics 44:375-417.
+#' Not held locally; the one-dimensional monotone-rearrangement solution is the standard
+#' published result.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

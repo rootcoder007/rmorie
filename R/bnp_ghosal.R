@@ -86,7 +86,8 @@ morie_gh_discrete_hazard <- function(p) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' morie_gh_dp_posterior(G0_A = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, n_in_A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L)
+#' morie_gh_dp_posterior(G0_A = c(1, 2, 3, 4, 5, 6, 7, 8), alpha = 0.5, n_in_A = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), n = 5L)
 morie_gh_dp_posterior <- function(G0_A, alpha, n_in_A, n) {
   pn <- if (n > 0) n_in_A / n else 0
   m <- alpha / (alpha + n) * G0_A + n / (alpha + n) * pn
@@ -250,7 +251,8 @@ morie_gh_py_eppf_log <- function(sizes, d, theta) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' morie_gh_wn_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, prior_var = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_gh_wn_posterior(X = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, prior_var = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 morie_gh_wn_posterior <- function(X, n, prior_var) {
   lam <- prior_var
   list(mean = n * X / (n + 1 / lam), var = 1 / (n + 1 / lam))
@@ -411,7 +413,8 @@ morie_gh_renyi <- function(p, q, alpha = 0.5) {
 #'   Cambridge University Press.
 #' @export
 #' @examples
-#' morie_gh_dirichlet_moments(alpha = 0.5, j = c(1, 2, 3, 4, 5, 6, 7, 8), jp = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_gh_dirichlet_moments(alpha = 0.5, j = c(1, 2, 3, 4, 5, 6, 7, 8), jp = c(1, 2, 3,
+#' 4, 5, 6, 7, 8))
 morie_gh_dirichlet_moments <- function(alpha, j, jp) {
   A <- sum(alpha)
   vr <- alpha[j] * (A - alpha[j]) / (A^2 * (A + 1))

@@ -15,3 +15,7 @@ A numeric value.
 \description{
 p = 1 / (1 + exp(epsilon)) -> achieves epsilon-local-DP.
 }
+\examples{
+res <- .locdp_flip_prob(epsilon = 0.5)
+res
+}

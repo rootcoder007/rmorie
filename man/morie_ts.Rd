@@ -39,7 +39,7 @@ propagated to return values.}
 A \code{morie_ts} object (a \code{ts} with validated ordering).
 }
 \description{
-Wraps \code{\link[stats:ts]{stats::ts()}} with explicit validation: the input must be a
+Wraps \code{stats::ts()} with explicit validation: the input must be a
 strictly ordered, regular numeric series with no implicit missing
 periods. This is the single pre-processing routine through which all
 subsequent functions receive their data, so time attributes are

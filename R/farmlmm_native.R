@@ -23,6 +23,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .farmlmm_erf(x = x)
+#' res
 .farmlmm_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .farmlmm_erfc
 #'
@@ -33,6 +37,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .farmlmm_erfc(x = x)
+#' res
 .farmlmm_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 .farmlmm_EPS <- 1e-12
@@ -40,13 +48,18 @@
 # mirror _s03core.mat
 #' Mirror _s03core.mat
 #'
-#' A step of the farmlmm_native implementation. Called by \code{.confounding}, \code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module.
+#' A step of the farmlmm_native implementation. Called by \code{.confounding},
+#' \code{.farmcpu}, \code{.farmlmm_wls} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param X A matrix; passed to \code{nrow}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .farmlmm_to_mat(X = x)
+#' res
 .farmlmm_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   if (is.null(dim(X))) X <- matrix(as.numeric(X), nrow = length(X))
@@ -57,13 +70,18 @@
 # mirror _s03core.vec
 #' Mirror _s03core.vec
 #'
-#' A step of the farmlmm_native implementation. Called by \code{.farmcpu}, \code{.farmlmm_wls}, \code{.fixed_effect_scan} and 1 others in the module.
+#' A step of the farmlmm_native implementation. Called by \code{.farmcpu},
+#' \code{.farmlmm_wls}, \code{.fixed_effect_scan} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param y A matrix; passed to \code{dim}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .to_vec(y = y)
+#' res
 .to_vec <- function(y) {
   if (is.data.frame(y)) y <- as.matrix(y)
   if (!is.null(dim(y))) y <- as.numeric(y)
@@ -79,6 +97,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .norm_cdf(x = x)
+#' res
 .norm_cdf <- function(x) 0.5 * (1 + .farmlmm_erf(x / sqrt(2)))
 
 # mirror _s03core.wls
@@ -115,9 +137,14 @@
 #' the source it follows.
 #'
 #' @param G Passed to \code{.farmlmm_to_mat}.
-#' @param markers Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param markers Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{K}, \code{markers_used}, \code{n_markers}, \code{all_markers}.
 #' @export
+#' @examples
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .kinship_from_markers(G = g)
+#' res
 .kinship_from_markers <- function(G, markers = NULL) {
   M <- .farmlmm_to_mat(G)
   n <- nrow(M)
@@ -171,10 +198,16 @@
 #'
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.farmlmm_to_mat}.
-#' @param covariates Coerced to integer by the body, with \code{as.integer}. Defaults to \code{integer(0)}.
+#' @param covariates Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{integer(0)}.
 #' @param K Accepted by the signature and not used anywhere in the body.
 #' @return A list with \code{p}, \code{beta}, \code{covariates}, \code{note}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .fixed_effect_scan(y = y, G = g)
+#' res
 .fixed_effect_scan <- function(y, G, covariates = integer(0), K = NULL) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)
@@ -248,10 +281,18 @@
 #' @param y Passed to \code{.to_vec}.
 #' @param G Passed to \code{.farmlmm_to_mat}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations}, \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{selected}, \code{p}, \code{iterations},
+#' \code{converged}, \code{oscillating}, \code{threshold}, \code{history}, \code{method},
+#' \code{note}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .farmcpu(y = y, G = g)
+#' res
 .farmcpu <- function(y, G, max_iter = 10L, threshold = NULL, seed = 0L) {
   yv <- .to_vec(y)
   M <- .farmlmm_to_mat(G)

@@ -16,3 +16,8 @@ A numeric value.
 itself, and adding a second leading minus flips the average
 derivative\'s sign (measured -0.548 against a theoretical +0.564).
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .hrz_gauss_kernel_deriv(u = x)
+res
+}

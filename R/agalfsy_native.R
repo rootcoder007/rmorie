@@ -43,13 +43,18 @@
 
 #' .agalfsy_centroid
 #'
-#' A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate}, \code{morie_agalfsy_rl_pose_search}.
+#' A step of the agalfsy_native implementation. Called by \code{.agalfsy_rotate},
+#' \code{morie_agalfsy_rl_pose_search}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param P A matrix; passed to \code{nrow}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .agalfsy_centroid(P = A)
+#' res
 .agalfsy_centroid <- function(P) colSums(P) / nrow(P)
 
 # Same atom order, no superposition: the ligand moves rigidly so the
@@ -198,7 +203,11 @@
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
 #' @param box Numeric; combined arithmetically in the body. Defaults to \code{18}.
 #' @param seed Accepted by the signature and not used anywhere in the body. Defaults to \code{2}.
-#' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start},
+#' \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason},
+#' \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions},
+#' \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method},
+#' \code{note}.
 #' @export
 morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
                                          policy = NULL, critic = NULL,
@@ -347,6 +356,9 @@ morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .agalfsy_cheatsheet()
+#' res
 .agalfsy_cheatsheet <- function() {
   paste0(
     "agalfsy: morie_agalfsy_rl_pose_search(receptor, ligand, site) -> ",

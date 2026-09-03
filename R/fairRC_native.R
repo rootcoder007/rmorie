@@ -223,6 +223,9 @@ rRD <- function(protected, step = 10, normalize = TRUE) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .fairRC_cheatsheet()
+#' res
 .fairRC_cheatsheet <- function() {
   paste0("fairRC: statistical parity for RANKINGS -- did group ",
          "membership influence POSITION. Set-based fairness at ",

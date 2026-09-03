@@ -10,13 +10,20 @@
 
 #' .morie_al_softmax_rows
 #'
-#' A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend}, \code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the module.
+#' A step of the alammar_llm_native implementation. Called by \code{.morie_gr_attend},
+#' \code{.morie_gr_encoder_block}, \code{.morie_gr_softmax_cols} and 13 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param z Numeric; passed to \code{exp}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_al_softmax_rows(z = X)
+#' res
 .morie_al_softmax_rows <- function(z) {
   z <- z - apply(z, 1, max)
   e <- exp(z)
@@ -25,7 +32,9 @@
 
 #' .morie_al_cos
 #'
-#' A step of the alammar_llm_native implementation. Called by \code{morie_alammar_cosine_similarity_loss}, \code{morie_alammar_infonce_loss}, \code{morie_alammar_multiple_negatives_ranking} and 1 others in the module.
+#' A step of the alammar_llm_native implementation. Called by
+#' \code{morie_alammar_cosine_similarity_loss}, \code{morie_alammar_infonce_loss},
+#' \code{morie_alammar_multiple_negatives_ranking} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -33,6 +42,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_al_cos(a = A, b = b)
+#' res
 .morie_al_cos <- function(a, b) {
   na <- sqrt(sum(a^2))
   nb <- sqrt(sum(b^2))
@@ -46,7 +60,9 @@
 
 #' .morie_al_lcg
 #'
-#' A step of the alammar_llm_native implementation. Called by \code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21 others in the module.
+#' A step of the alammar_llm_native implementation. Called by
+#' \code{.morie_gr_lcg_normals}, \code{.morie_gr_lcg_perm}, \code{.morie_gr_lcg_u} and 21
+#' others in the module.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -68,7 +84,8 @@
 #' @return List with `output`, `attention`.
 #' @export
 #' @examples
-#' morie_alammar_sdp_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_alammar_sdp_attention(Q = 0.5, K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4,
+#' 5, 6, 7, 8))
 morie_alammar_sdp_attention <- function(Q, K, V, mask = NULL) {
   Q <- as.matrix(Q)
   K <- as.matrix(K)
@@ -574,7 +591,9 @@ morie_alammar_infonce_loss <- function(anchor, positive, negatives,
 
 #' .morie_al_inbatch_ce
 #'
-#' A step of the alammar_llm_native implementation. Called by \code{morie_alammar_multiple_negatives_ranking}, \code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}.
+#' A step of the alammar_llm_native implementation. Called by
+#' \code{morie_alammar_multiple_negatives_ranking},
+#' \code{morie_alammar_openclip_contrastive}, \code{morie_alammar_simcse_dropout_aug}.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'

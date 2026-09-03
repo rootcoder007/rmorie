@@ -23,7 +23,8 @@
 
 #' .poissp_adjacency
 #'
-#' A step of the poissp_native implementation. Called by \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}.
+#' A step of the poissp_native implementation. Called by
+#' \code{morie_poissp_car_precision}, \code{morie_poissp_rho_bounds}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -88,13 +89,19 @@ morie_poissp_rho_bounds <- function(W) {
 # weight of the sum(u) = 0 penalty
 #' Weight of the sum(u) = 0 penalty
 #'
-#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{.poissp_joint_hessian}.
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
+#' \code{.poissp_joint_hessian}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param m A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .poissp_constraint_weight(m = X)
+#' res
 .poissp_constraint_weight <- function(m) {
   1e8 * max(1.0, if (length(m)) max(m) else 1.0)
 }
@@ -103,7 +110,8 @@ morie_poissp_rho_bounds <- function(W) {
 #' Negative joint Hessian [[X\'MX, X\'M], \[MX, M + Q\]] (+ constraint
 #' block)
 #'
-#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}.
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
+#' \code{morie_poissp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -131,7 +139,8 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_ridgesolve
 #'
-#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode}, \code{morie_poissp}.
+#' A step of the poissp_native implementation. Called by \code{.poissp_fit_mode},
+#' \code{morie_poissp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -140,6 +149,11 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .poissp_ridgesolve(A = A, b = b)
+#' res
 .poissp_ridgesolve <- function(A, b, ridge = 1e-10) {
   as.numeric(solve(A + ridge * diag(nrow(A)), b))
 }
@@ -194,7 +208,8 @@ morie_poissp_rho_bounds <- function(W) {
 
 #' .poissp_loglik
 #'
-#' A step of the poissp_native implementation. Called by \code{.poissp_laplace}, \code{morie_poissp}.
+#' A step of the poissp_native implementation. Called by \code{.poissp_laplace},
+#' \code{morie_poissp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -202,6 +217,12 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param m Numeric; passed to \code{log}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .poissp_loglik(y = y, m = X)
+#' res
 .poissp_loglik <- function(y, m) {
   sum(y * log(m) - m - lgamma(y + 1))
 }
@@ -216,6 +237,10 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .poissp_logdet_pd(A = A)
+#' res
 .poissp_logdet_pd <- function(A, ridge = 0.0) {
   L <- chol(A + ridge * diag(nrow(A)))
   2 * sum(log(diag(L)))
@@ -233,6 +258,10 @@ morie_poissp_rho_bounds <- function(W) {
 #' @param rank_deficit Numeric; combined arithmetically in the body. Defaults to \code{0L}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .poissp_logdet_gen(A = A)
+#' res
 .poissp_logdet_gen <- function(A, rank_deficit = 0L) {
   ev <- sort(abs(eigen(A, symmetric = TRUE)$values), decreasing = TRUE)
   keep <- if (rank_deficit > 0L) ev[seq_len(length(ev) - rank_deficit)] else ev

@@ -19,3 +19,8 @@ A step of the causal_molak implementation. Called by \code{morie_hsicstat}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .morie_ml_gram(a = A)
+res
+}

@@ -2,7 +2,8 @@
 #' Empirical spatiotemporal semivariogram gamma(h, u)
 #'
 #' \deqn{\hat\gamma(h, u) = \frac{1}{2|N(h, u)|}
-#'       \sum_{(i,j)\in N(h,u)} (Z(s_i, t_i) - Z(s_j, t_j))^2}{hatgamma(h, u) = (1)/(2|N(h, u)|) sum_(i,j)in N(h,u) (Z(s_i, t_i) - Z(s_j, t_j))^2}.
+#'       \sum_{(i,j)\in N(h,u)} (Z(s_i, t_i) - Z(s_j, t_j))^2}{hatgamma(h, u) =
+#' (1)/(2|N(h, u)|) sum_(i,j)in N(h,u) (Z(s_i, t_i) - Z(s_j, t_j))^2}.
 #'
 #' @param x Numeric vector.
 #' @param coords Coord matrix.

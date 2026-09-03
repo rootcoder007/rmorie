@@ -69,6 +69,10 @@
 #' @param M Passed to \code{eigen}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .funCA_sym_inv_sqrt(M = A)
+#' res
 .funCA_sym_inv_sqrt <- function(M) {
   ev <- eigen(M, symmetric = TRUE)
   d <- ev$values
@@ -87,7 +91,10 @@
 #' @param Y A matrix; passed to \code{as.matrix}.
 #' @param p Passed to \code{pick}.
 #' @param q Passed to \code{pick}.
-#' @return A list with \code{estimate}, \code{correlations}, \code{weights_x}, \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q}, \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y}, \code{n}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{correlations}, \code{weights_x},
+#' \code{weights_y}, \code{variates_x}, \code{variates_y}, \code{p}, \code{q},
+#' \code{explained_x}, \code{explained_y}, \code{eigenvalues_x}, \code{eigenvalues_y},
+#' \code{n}, \code{method}, \code{note}.
 #' @export
 morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
   Xm <- as.matrix(X)
@@ -212,6 +219,9 @@ morie_funCA_functional_cca <- function(X, Y, p = NULL, q = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .funCA_cheatsheet()
+#' res
 .funCA_cheatsheet <- function() {
   paste0("funCA: morie_funCA_functional_cca(X, Y, p, q) -> canonical ",
          "correlations between two sets of curves, restricted to the ",

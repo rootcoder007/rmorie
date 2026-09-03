@@ -3,7 +3,8 @@
 #' Asymptotic normality of the boundary-free KDFE (Theorem 5.3)
 #'
 #' Theorem 5.3: under D1-D5,
-#' \deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}\[\tilde F_X(x)\]}} \to_D N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var\[Ftilde(x)\]) ->_D N(0,1).}
+#' \deqn{\frac{\tilde F_X(x) - F_X(x)}{\sqrt{\mathrm{Var}\[\tilde F_X(x)\]}} \to_D
+#' N(0,1).}{(Ftilde(x) - F(x)) / sqrt(Var\[Ftilde(x)\]) ->_D N(0,1).}
 #'
 #' The proof is a Lyapunov argument, easy for a reason worth keeping: because
 #' `0 <= W(v) <= 1` for every `v`, the `(2+delta)` moment of each summand is
@@ -24,7 +25,8 @@
 #' @param null The value of `F_X(x)` to test against.
 #' @param bias Bias to subtract before standardising.
 #' @param level Confidence level for the interval.
-#' @return Named list with ``statistic``, ``p_value``, ``lower``, ``upper``, ``se``, ``level``, ``method``.
+#' @return Named list with ``statistic``, ``p_value``, ``lower``, ``upper``, ``se``,
+#' ``level``, ``method``.
 #' @references Fauzi and Maesono (2023), Theorem 5.3.
 #' @examples
 #' Bfkdfnorm(estimate = 0.5, variance = 0.0025, null = 0.5)

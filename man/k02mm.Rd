@@ -20,5 +20,6 @@ One of two values, depending on the branch taken.
 }
 \keyword{internal}
 \examples{
-k02mm(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8), tau0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+k02mm(y = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8),
+  tau0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

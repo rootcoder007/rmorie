@@ -36,5 +36,6 @@ The strain contribution.
 }
 \keyword{internal}
 \examples{
-morie_chemsc_torsion(phi = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L, phi0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_chemsc_torsion(phi = 0.5, A = c(1, 2, 3, 4, 5, 6, 7, 8), n = 5L,
+  phi0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -12,9 +12,15 @@
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @param y A vector; its length is taken and its elements indexed.
-#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{lags}, \code{values}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_rg_xcorr(x = x, y = y)
+#' res
 .morie_rg_xcorr <- function(x, y, maxlag = NULL) {
   n <- length(x)
   m <- length(y)
@@ -39,7 +45,8 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param subtract_mean A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{dot_product}, \code{gamma}, \code{energy_x}, \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
+#' @return A list with \code{dot_product}, \code{gamma}, \code{energy_x},
+#' \code{energy_y}, \code{n}, \code{mean_removed}, \code{method}.
 #' @export
 DotProd <- function(x, y, subtract_mean = FALSE) {
   # eqs (4.24)-(4.25): the inner product and the correlation coefficient
@@ -76,7 +83,8 @@ DotProd <- function(x, y, subtract_mean = FALSE) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{theta}, \code{integrand}, \code{discrete_sum}, \code{duration}, \code{n}, \code{method}.
+#' @return A list with \code{theta}, \code{integrand}, \code{discrete_sum},
+#' \code{duration}, \code{n}, \code{method}.
 #' @export
 ContProj <- function(x, y, t = NULL, dt = 1) {
   # eq (4.26): the continuous counterpart of eq (4.24).  Tabulated it is
@@ -109,7 +117,9 @@ ContProj <- function(x, y, t = NULL, dt = 1) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param order Coerced to integer by the body, with \code{as.integer}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.001}.
-#' @return A list with \code{theta}, \code{order}, \code{n_positions}, \code{toeplitz_deviation}, \code{relative_deviation}, \code{tol}, \code{toeplitz}, \code{method}.
+#' @return A list with \code{theta}, \code{order}, \code{n_positions},
+#' \code{toeplitz_deviation}, \code{relative_deviation}, \code{tol}, \code{toeplitz},
+#' \code{method}.
 #' @export
 CcfOuter <- function(x, y, order, tol = 1e-3) {
   # eq (4.29): Theta_xy = E[x(n) y^T(n)], an N x N matrix carrying all
@@ -158,7 +168,8 @@ CcfOuter <- function(x, y, order, tol = 1e-3) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{csd}, \code{via_ccf}, \code{ccf_circular}, \code{freqs}, \code{max_difference}, \code{agrees}, \code{n}, \code{method}.
+#' @return A list with \code{csd}, \code{via_ccf}, \code{ccf_circular}, \code{freqs},
+#' \code{max_difference}, \code{agrees}, \code{n}, \code{method}.
 #' @export
 Csd <- function(x, y, fs = 1) {
   # eqs (4.30)-(4.31): S_xx = |X|^2 and S_xy = X Y*.  Both routes to the
@@ -201,9 +212,12 @@ Csd <- function(x, y, fs = 1) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param noverlap Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{coherence}, \code{phase}, \code{sxx}, \code{syy}, \code{sxy}, \code{freqs}, \code{n_segments}, \code{nperseg}, \code{method}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param noverlap Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{coherence}, \code{phase}, \code{sxx}, \code{syy},
+#' \code{sxy}, \code{freqs}, \code{n_segments}, \code{nperseg}, \code{method}.
 #' @export
 Cohere <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
   # eq (4.32).  The book is emphatic: computed from two single
@@ -295,7 +309,8 @@ Msc <- function(x, y, fs = 1, nperseg = NULL, noverlap = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param ref Coerced to numeric by the body, with \code{as.numeric}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param subtract_mean A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -394,7 +409,8 @@ MfInput <- function(x, omega, dt = 1) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{t}, \code{peak_index}, \code{peak_time}, \code{peak_magnitude}, \code{dt}, \code{method}.
+#' @return A list with \code{y}, \code{t}, \code{peak_index}, \code{peak_time},
+#' \code{peak_magnitude}, \code{dt}, \code{method}.
 #' @export
 MfOutput <- function(x, h, dt = 1) {
   # eq (4.34), computed as y = x * h: exact for a finite record, where
@@ -448,9 +464,11 @@ MfNoiseIn <- function(power, freqs = NULL) {
 #'
 #' @param power Coerced to numeric by the body, with \code{as.numeric}.
 #' @param H Coerced to complex by the body, with \code{as.complex}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param df Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{psd}, \code{power}, \code{rms}, \code{input_power}, \code{input_density}, \code{method}.
+#' @return A list with \code{psd}, \code{power}, \code{rms}, \code{input_power},
+#' \code{input_density}, \code{method}.
 #' @export
 MfNoiseOut <- function(power, H, freqs = NULL, df = 1) {
   # eqs (4.36)-(4.37): S_eta_o = (P/2)|H|^2 and its integral.  eq (4.36)
@@ -521,7 +539,8 @@ MfPeak <- function(X, H, freqs, t0) {
 #'
 #' @param my Coerced to numeric by the body, with \code{as.numeric}.
 #' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{snr}, \code{snr_db}, \code{amplitude_snr}, \code{my}, \code{noise_power}, \code{peak_to_mean}, \code{method}.
+#' @return A list with \code{snr}, \code{snr_db}, \code{amplitude_snr}, \code{my},
+#' \code{noise_power}, \code{peak_to_mean}, \code{method}.
 #' @export
 MfSnr <- function(my, noise_power) {
   # eq (4.39): a PEAK-to-MEAN ratio, not the mean-to-mean of an ordinary
@@ -548,7 +567,8 @@ MfSnr <- function(my, noise_power) {
 #' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param X Optional; may be \code{NULL}. Coerced to complex by the body, with \code{as.complex}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
@@ -592,7 +612,8 @@ SigEnergy <- function(x = NULL, t = NULL, dt = 1, X = NULL, freqs = NULL) {
 #' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t0 Passed to \code{MfPeak}.
 #' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator}, \code{energy_h}, \code{energy_x}, \code{method}.
+#' @return A list with \code{ratio}, \code{bound}, \code{optimality}, \code{numerator},
+#' \code{energy_h}, \code{energy_x}, \code{method}.
 #' @export
 MfRatio <- function(X, H, freqs, t0, noise_power) {
   # eq (4.41).  Dividing by the constant E_x is what turns eq (4.39) into
@@ -629,7 +650,8 @@ MfRatio <- function(X, H, freqs, t0, noise_power) {
 #' @param A Coerced to complex by the body, with \code{as.complex}.
 #' @param B Coerced to complex by the body, with \code{as.complex}.
 #' @param grid Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
+#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio},
+#' \code{equality}, \code{k}, \code{collinear}, \code{method}.
 #' @export
 SchwarzC <- function(A, B, grid) {
   # eq (4.42), with equality exactly when A = K B* -- which, applied with
@@ -671,7 +693,8 @@ SchwarzC <- function(A, B, grid) {
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
 #' @param grid Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{k}, \code{collinear}, \code{method}.
+#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{k},
+#' \code{collinear}, \code{method}.
 #' @export
 SchwarzR <- function(a, b, grid = NULL, dt = 1) {
   # eq (4.43), the real case of eq (4.42); equality when a = K b, the two
@@ -708,7 +731,8 @@ SchwarzR <- function(a, b, grid = NULL, dt = 1) {
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{cosine}, \code{equality}, \code{norm_a}, \code{norm_b}, \code{method}.
+#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{cosine},
+#' \code{equality}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
 CauchySch <- function(a, b) {
   # eq (4.44): |a.b| <= |a||b|.  The ratio of the two sides is the cosine
@@ -738,7 +762,8 @@ CauchySch <- function(a, b) {
 #'
 #' @param a Coerced to numeric by the body, with \code{as.numeric}.
 #' @param b Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality}, \code{norm_sum}, \code{norm_a}, \code{norm_b}, \code{method}.
+#' @return A list with \code{lhs}, \code{rhs}, \code{holds}, \code{equality},
+#' \code{norm_sum}, \code{norm_a}, \code{norm_b}, \code{method}.
 #' @export
 Triangle <- function(a, b) {
   # eq (4.45): |a+b| <= |a|+|b|, with equality when the vectors align.
@@ -769,7 +794,8 @@ Triangle <- function(a, b) {
 #' @param freqs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude}, \code{conjugate_of_signal}, \code{method}.
+#' @return A list with \code{H}, \code{freqs}, \code{t0}, \code{gain}, \code{magnitude},
+#' \code{conjugate_of_signal}, \code{method}.
 #' @export
 MfTf <- function(X, freqs, t0, gain = 1) {
   # eq (4.48): H(f) = K X*(f) exp(-j 2 pi f t0).  The CONJUGATE is what
@@ -799,7 +825,8 @@ MfTf <- function(X, freqs, t0, gain = 1) {
 #' @param t0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{h}, \code{t0}, \code{shift_samples}, \code{gain}, \code{causal}, \code{reversed}, \code{n_reference}, \code{method}.
+#' @return A list with \code{h}, \code{t0}, \code{shift_samples}, \code{gain},
+#' \code{causal}, \code{reversed}, \code{n_reference}, \code{method}.
 #' @export
 MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
   # eqs (4.49), (4.56): h(t) = K x(t0 - t), reversed and delayed.  The
@@ -837,7 +864,9 @@ MfImpulse <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param dt Passed to \code{MfImpulse}. Defaults to \code{1}.
-#' @return A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index}, \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference}, \code{equals_acf}, \code{method}.
+#' @return A list with \code{y}, \code{acf}, \code{lags}, \code{peak_index},
+#' \code{peak_value}, \code{expected_peak}, \code{energy}, \code{max_difference},
+#' \code{equals_acf}, \code{method}.
 #' @export
 MfAcf <- function(x, gain = 1, dt = 1) {
   # Filtering with h(t) = K x(t0 - t) makes the convolution equivalent to
@@ -878,8 +907,10 @@ MfAcf <- function(x, gain = 1, dt = 1) {
 #' The book notes the output around the peak reproduces the ACF of g,
 #' which is checked here rather than asserted.
 #'
-#' @param amplitudes Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{g}, \code{h}, \code{y}, \code{acf}, \code{delay}, \code{max_difference}, \code{output_is_acf}, \code{method}.
+#' @param amplitudes Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{g}, \code{h}, \code{y}, \code{acf}, \code{delay},
+#' \code{max_difference}, \code{output_is_acf}, \code{method}.
 #' @export
 RefPattern <- function(amplitudes = NULL) {
   # eqs (4.53)-(4.54): g(n) = 3 d(n) + 2 d(n-1) + d(n-2) and its filter
@@ -949,7 +980,8 @@ MfImpEeg <- function(x, t0 = NULL, gain = 1, dt = 1) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Accepted by the signature and not used anywhere in the body. Defaults to \code{1}.
-#' @return A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference}, \code{is_psd}, \code{n}, \code{method}.
+#' @return A list with \code{Y}, \code{psd}, \code{max_imaginary}, \code{max_difference},
+#' \code{is_psd}, \code{n}, \code{method}.
 #' @export
 MfPsd <- function(x, dt = 1) {
   # eq (4.57): Y(f) = X X* = S_x(f).  Because Y is a PSD it is real and
@@ -980,7 +1012,8 @@ MfPsd <- function(x, dt = 1) {
 #' @param noise_power Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power}, \code{n0}, \code{depends_only_on_energy}, \code{method}.
+#' @return A list with \code{snr}, \code{snr_db}, \code{energy}, \code{noise_power},
+#' \code{n0}, \code{depends_only_on_energy}, \code{method}.
 #' @export
 MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
   # eq (4.46) rearranged: M_y^2 / P_eta_o = 2 E_x / P_eta_i, the familiar
@@ -1010,8 +1043,10 @@ MfMaxSnr <- function(x, noise_power, t = NULL, dt = 1) {
 #'
 #' @param ref Coerced to numeric by the body, with \code{as.numeric}.
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param noise_psd Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param noise_psd Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param t0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param gain Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
@@ -1107,7 +1142,8 @@ Idft <- function(X) {
 #' record length.
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{energy_time}, \code{energy_freq}, \code{psd}, \code{max_difference}, \code{holds}, \code{n}, \code{method}.
+#' @return A list with \code{energy_time}, \code{energy_freq}, \code{psd},
+#' \code{max_difference}, \code{holds}, \code{n}, \code{method}.
 #' @export
 Parseval <- function(x) {
   # eq (3.91), discrete form: sum |x(n)|^2 = (1/N) sum |X(k)|^2.  With the
@@ -1135,7 +1171,8 @@ Parseval <- function(x) {
 #' the division by M is explicit.
 #'
 #' @param observations Iterated over elementwise, with \code{lapply}.
-#' @return A list with \code{sum}, \code{average}, \code{m}, \code{n}, \code{signal_growth}, \code{noise_growth}, \code{method}.
+#' @return A list with \code{sum}, \code{average}, \code{m}, \code{n},
+#' \code{signal_growth}, \code{noise_growth}, \code{method}.
 #' @export
 SyncSum <- function(observations) {
   # eq (3.96): the sum separates into a signal sum growing linearly in M
@@ -1167,8 +1204,12 @@ SyncSum <- function(observations) {
 #'
 #' @param psd Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{total_power}, \code{mean_frequency}, \code{median_frequency}, \code{variance}, \code{bandwidth}, \code{skewness}, \code{kurtosis}, \code{fm3}, \code{fm4}, \code{n_bins}, \code{uniformity}, \code{method}.
+#' @param freqs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{total_power}, \code{mean_frequency},
+#' \code{median_frequency}, \code{variance}, \code{bandwidth}, \code{skewness},
+#' \code{kurtosis}, \code{fm3}, \code{fm4}, \code{n_bins}, \code{uniformity},
+#' \code{method}.
 #' @export
 SpecMoments <- function(psd, fs = 1, freqs = NULL) {
   # eqs (6.32)-(6.43).  The sums run over ONE HALF of the periodic PSD:
@@ -1216,8 +1257,11 @@ SpecMoments <- function(psd, fs = 1, freqs = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{mean_frequency}, \code{median_frequency}, \code{difference}, \code{bandwidth}, \code{total_power}, \code{psd}, \code{freqs}, \code{fs}, \code{nperseg}, \code{method}.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{mean_frequency}, \code{median_frequency}, \code{difference},
+#' \code{bandwidth}, \code{total_power}, \code{psd}, \code{freqs}, \code{fs},
+#' \code{nperseg}, \code{method}.
 #' @export
 EmgFreq <- function(x, fs, nperseg = NULL) {
   # eqs (6.34)-(6.35) on the EMG periodogram.  Both fall as a muscle
@@ -1252,7 +1296,9 @@ EmgFreq <- function(x, fs, nperseg = NULL) {
 #' @param n Coerced to integer by the body, with \code{as.integer}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param window Character; passed to \code{tolower}. Defaults to \code{"rectangular"}.
-#' @return A list with \code{delta_f}, \code{resolution}, \code{main_lobe_bins}, \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n}, \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
+#' @return A list with \code{delta_f}, \code{resolution}, \code{main_lobe_bins},
+#' \code{sidelobe_db}, \code{equivalent_noise_bandwidth_bins}, \code{duration}, \code{n},
+#' \code{fs}, \code{window}, \code{zero_padding_helps}, \code{method}.
 #' @export
 SpecRes <- function(n, fs = 1, window = "rectangular") {
   # Rayleigh: delta_f = fs/N, set by the RECORD LENGTH.  Zero-padding
@@ -1313,7 +1359,7 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
   nn <- if (is.null(n)) 2L * (length(p) - 1L) else as.integer(n)
   if (nn < 2L) stop("the DFT length must be at least 2")
   width <- fsv / nn
-  freqs <- (seq_len(length(p)) - 1L) * width
+  freqs <- (seq_along(p) - 1L) * width
   out <- list(
     freqs = freqs, bin_width = width, psd = p, n = nn, fs = fsv,
     total_power = .morie_fsum(p) * width, nyquist = fsv / 2,
@@ -1343,7 +1389,8 @@ PsdHz <- function(psd, fs, n = NULL, bands = NULL) {
 #'
 #' @param cycles Iterated over elementwise, with \code{lapply}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{average_psd}, \code{psd_of_average}, \code{mean_waveform}, \code{freqs}, \code{m}, \code{n}, \code{power_retained}, \code{method}.
+#' @return A list with \code{average_psd}, \code{psd_of_average}, \code{mean_waveform},
+#' \code{freqs}, \code{m}, \code{n}, \code{power_retained}, \code{method}.
 #' @export
 PcgSyncAvg <- function(cycles, fs = 1) {
   # S_avg(f) = (1/M) sum |PCG_k(f)|^2.  The averaging is of POWER
@@ -1396,8 +1443,11 @@ PcgSyncAvg <- function(cycles, fs = 1) {
 #' gain overstates the result by exactly the artifact that survived.
 #'
 #' @param epochs Iterated over elementwise, with \code{lapply}.
-#' @param reject Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{average}, \code{sd}, \code{m}, \code{m_kept}, \code{rejected}, \code{n_rejected}, \code{peaks}, \code{n}, \code{snr_gain}, \code{snr_gain_db}, \code{artifact_factor}, \code{method}.
+#' @param reject Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{average}, \code{sd}, \code{m}, \code{m_kept},
+#' \code{rejected}, \code{n_rejected}, \code{peaks}, \code{n}, \code{snr_gain},
+#' \code{snr_gain_db}, \code{artifact_factor}, \code{method}.
 #' @export
 ErpArtifact <- function(epochs, reject = NULL) {
   # Section 3.5: averaging M aligned epochs raises the SNR by sqrt(M).  A
@@ -1450,9 +1500,13 @@ ErpArtifact <- function(epochs, reject = NULL) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param window Coerced to integer by the body, with \code{as.integer}.
 #' @param step Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{times}, \code{coherence}, \code{bands}, \code{window}, \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels}, \code{sustained_criterion}, \code{method}.
+#' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @param nperseg Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{times}, \code{coherence}, \code{bands}, \code{window},
+#' \code{step}, \code{nperseg}, \code{n_windows}, \code{n_channels},
+#' \code{sustained_criterion}, \code{method}.
 #' @export
 SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
                        nperseg = NULL) {
@@ -1526,7 +1580,9 @@ SeizCohere <- function(channels, fs, window, step = NULL, bands = NULL,
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param band A vector; indexed elementwise. Defaults to \code{c(0.15, 0.4)}.
 #' @param nperseg Passed to \code{Cohere}.
-#' @return A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference}, \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs}, \code{band}, \code{n}, \code{fs}, \code{method}.
+#' @return A list with \code{plv}, \code{mean_phase_difference}, \code{phase_difference},
+#' \code{coherence_peak}, \code{coherence_mean}, \code{coherence}, \code{freqs},
+#' \code{band}, \code{n}, \code{fs}, \code{method}.
 #' @export
 CardioResp <- function(ecg_rate, resp, fs, band = c(0.15, 0.40),
                        nperseg = NULL) {

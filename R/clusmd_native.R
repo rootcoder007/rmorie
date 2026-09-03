@@ -62,7 +62,8 @@
 #' deduped).
 #'
 #' @param bits A matrix; indexed by row and column.
-#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
 .clusmd_fp <- function(bits, n_bits = NULL) {
@@ -259,7 +260,8 @@
 #' m is in cluster k (0-indexed).
 #'
 #' @param clusters A vector; its length is taken and its elements indexed.
-#' @return A list with \code{n_clusters}, \code{n_compounds}, \code{sizes}, \code{n_singletons}, \code{assignment}, \code{centroids}.
+#' @return A list with \code{n_clusters}, \code{n_compounds}, \code{sizes},
+#' \code{n_singletons}, \code{assignment}, \code{centroids}.
 #' @export
 .clusmd_cluster_summary <- function(clusters) {
   n <- sum(vapply(clusters, function(c) c$size, integer(1)))
@@ -300,7 +302,8 @@
 #' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
 #' @param tables Carried through into a list the body builds. Defaults to \code{list()}.
 #' @param interpretation Carried through into a list the body builds. Defaults to \code{""}.
-#' @param warnings Coerced to character by the body, with \code{as.character}. Defaults to \code{character()}.
+#' @param warnings Coerced to character by the body, with \code{as.character}. Defaults
+#' to \code{character()}.
 #' @param payload A vector; its length is taken and its elements indexed. Defaults to \code{list()}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
@@ -438,25 +441,3 @@ morie_clusmd_butina_clustering <- function(fps, threshold = 0.8,
 #' @rdname morie_clusmd_neighbour_lists
 #' @export
 morie_clusmd <- morie_clusmd_neighbour_lists
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -38,7 +38,8 @@
 #' Search is by golden section -- the method the source itself names
 #' (Fotheringham et al. 2002 p. 60, citing Greig 1980) -- over the interval
 #' running from a thousandth of the coordinate bounding-box diagonal up to the
-#' diagonal itself, which is the interval `spgwr::gwr.sel` uses. With `adaptive = TRUE` the bandwidth is
+#' diagonal itself, which is the interval `spgwr::gwr.sel` uses. With `adaptive = TRUE`
+#' the bandwidth is
 #' instead a neighbour count and the criterion is evaluated at every integer
 #' from 2 up to `n`.
 #'
@@ -71,7 +72,8 @@
 #'   Independently checked against spgwr's published NY8 output.
 #' @export
 #' @examples
-#' spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' spgwrb(x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), coords = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 spgwrb <- function(x, y, coords, kernel = "gaussian", criterion = "cv",
                    adaptive = FALSE, bounds = NULL, tol = 1e-4) {
   x <- as.matrix(x)

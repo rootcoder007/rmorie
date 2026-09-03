@@ -15,7 +15,8 @@ test_that("cross: native dr_forest ATE agrees with grf AIPW", {
   ours <- morie_estimate_dr_forest(df, "t", "y", paste0("x", 1:4))
   cf <- grf::causal_forest(X, y, w, seed = 121)
   est <- grf::average_treatment_effect(cf, method = "AIPW")
-  ref <- unname(est[["estimate"]]); ref_se <- unname(est[["std.err"]])
+  ref <- unname(est[["estimate"]])
+  ref_se <- unname(est[["std.err"]])
 
   # true ATE = 1 + 0.5*E[x2] = 1; both must cover, and agree jointly
   expect_lt(abs(ours$ate - ref), 1.96 * sqrt(ours$se^2 + ref_se^2))

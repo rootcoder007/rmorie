@@ -22,5 +22,6 @@ A list with \code{epsilon}, \code{Q_star}, \code{score}.
 }
 \keyword{internal}
 \examples{
-tlltmle_fluctuate(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8), Y = c(1, 2, 3, 4, 5, 6, 7, 8))
+tlltmle_fluctuate(Q = c(1, 2, 3, 4, 5, 6, 7, 8), H = c(1, 2, 3, 4, 5, 6, 7, 8),
+  Y = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

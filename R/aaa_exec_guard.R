@@ -26,6 +26,10 @@
 #' @param name Passed to \code{Sys.getenv}.
 #' @return The value of \code{%in%}.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_env_true(name = txt)
+#' res
 .morie_env_true <- function(name) {
   val <- Sys.getenv(name, unset = "")
   tolower(trimws(val)) %in% c("1", "true", "yes", "on")
@@ -34,12 +38,16 @@
 # TRUE when dynamic execution is disabled via MORIE_NO_EXEC.
 #' TRUE when dynamic execution is disabled via MORIE_NO_EXEC
 #'
-#' A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed}, \code{.morie_safe_readRDS}.
+#' A step of the exec_guard implementation. Called by \code{.morie_ensure_exec_allowed},
+#' \code{.morie_safe_readRDS}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @return The value of \code{.morie_env_true}.
 #' @export
+#' @examples
+#' res <- .morie_exec_disabled()
+#' res
 .morie_exec_disabled <- function() {
   .morie_env_true("MORIE_NO_EXEC")
 }
@@ -54,6 +62,9 @@
 #' @param feature Passed to \code{sprintf}. Defaults to \code{"dynamic execution"}.
 #' @return Invisibly,a logical value.
 #' @export
+#' @examples
+#' res <- .morie_ensure_exec_allowed()
+#' res
 .morie_ensure_exec_allowed <- function(feature = "dynamic execution") {
   if (.morie_exec_disabled()) {
     stop(sprintf(
@@ -122,6 +133,9 @@
 #'
 #' @return A data frame.
 #' @export
+#' @examples
+#' res <- .morie_knob_status()
+#' res
 .morie_knob_status <- function() {
   knobs <- c(
     MORIE_NO_EXEC = paste(

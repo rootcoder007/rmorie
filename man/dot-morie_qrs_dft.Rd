@@ -16,3 +16,8 @@ A list with \code{re}, \code{im}.
 NOT as -2 pi k j / n: the two differ in the last bits and the Python
 arm uses the former.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_qrs_dft(x = x)
+res
+}

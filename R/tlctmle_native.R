@@ -57,6 +57,9 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .ctmle_logit(p = 0.5)
+#' res
 .ctmle_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -71,6 +74,10 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .ctmle_expit(x = x)
+#' res
 .ctmle_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -89,6 +96,10 @@ morie_tlctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L,
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
 #' @return A list with \code{epsilon}, \code{q}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .ctmle_fluct(Q = 0.5, H = 0.5, Y = y)
+#' res
 .ctmle_fluct <- function(Q, H, Y, iters = 60L) {
   q <- as.numeric(Q)
   h <- as.numeric(H)
@@ -218,7 +229,11 @@ instrument_penalty <- function(g_small, g_large) {
 #' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param penalty A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{psi}, \code{selected}, \code{selected_covariates}, \code{cv_risks}, \code{cv_losses}, \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{selected},
+#' \code{selected_covariates}, \code{cv_risks}, \code{cv_losses},
+#' \code{variance_penalties}, \code{penalized}, \code{epsilon}, \code{se}, \code{ci},
+#' \code{mean_eic}, \code{solves_eic}, \code{max_clever_covariate}, \code{method},
+#' \code{note}.
 #' @export
 ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
                   penalty = TRUE) {
@@ -307,6 +322,9 @@ ctmle <- function(A, Y, Q1, Q0, W, g_models, V = 5L, seed = 0L,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlctmle_cheatsheet()
+#' res
 .tlctmle_cheatsheet <- function() {
   paste("tlctmle: fitting g as well as possible ON ITS OWN TERMS ",
         "is the wrong objective -- a covariate that predicts ",

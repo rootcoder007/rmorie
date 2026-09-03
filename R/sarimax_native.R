@@ -77,7 +77,8 @@ ROOT_TOL <- 1.001
 #' @param ar Passed to \code{.col}. Defaults to \code{numeric(0)}.
 #' @param ma Passed to \code{.col}. Defaults to \code{numeric(0)}.
 #' @param filter One of \code{"conditional"}, \code{"exact"}. Defaults to \code{"exact"}.
-#' @return A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information}, \code{sum_log_f}.
+#' @return A list with \code{beta}, \code{ssq}, \code{v}, \code{f}, \code{information},
+#' \code{sum_log_f}.
 #' @export
 profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
                          filter = "exact") {
@@ -135,6 +136,10 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' @param n Passed to \code{!=}.
 #' @return The value of \code{cols}, as built in the body.
 #' @export
+#' @examples
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .columns(X = b, n = 3L)
+#' res
 .columns <- function(X, n) {
   if (is.null(X)) return(list())
   if (is.list(X)) {
@@ -165,7 +170,11 @@ profile_beta <- function(wy, wX, ar = numeric(0), ma = numeric(0),
 #' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
 #' @param include_constant Optional; may be \code{NULL}. A flag; the body branches on it.
 #' @param method One of \code{"css"}, \code{"ml"}, \code{"uls"}. Defaults to \code{"ml"}.
-#' @return A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2}, \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals}, \code{innovation_variance}, \code{include_constant}, \code{order}, \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
+#' @return A list with \code{beta_se}, \code{estimate}, \code{beta}, \code{phi},
+#' \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{sigma2},
+#' \code{loglik}, \code{aic}, \code{n_par}, \code{n_used}, \code{residuals},
+#' \code{innovation_variance}, \code{include_constant}, \code{order},
+#' \code{seasonal_order}, \code{s}, \code{fit_method}, \code{method}.
 #' @export
 .sarimax_fit <- function(y, X = NULL, order = c(0, 1, 1), seasonal_order = c(0, 1, 1),
                 s = 12, include_constant = NULL, method = "ml") {
@@ -404,7 +413,9 @@ neighbours <- function(order, seasonal_order, constant, s) {
 #' @param s Passed to \code{.try_fit}. Defaults to \code{1}.
 #' @param method Passed to \code{.try_fit}. Defaults to \code{"css"}.
 #' @param max_steps Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
-#' @return A list with \code{estimate}, \code{aic}, \code{fit}, \code{order}, \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried}, \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
+#' @return A list with \code{estimate}, \code{aic}, \code{fit}, \code{order},
+#' \code{seasonal_order}, \code{constant}, \code{steps}, \code{n_models_tried},
+#' \code{tried}, \code{s}, \code{search_method}, \code{differencing_note}, \code{method}.
 #' @export
 auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
                        max_steps = 20) {
@@ -484,6 +495,9 @@ auto_order <- function(y, X = NULL, d = 0, D = 0, s = 1, method = "css",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sarimax_cheatsheet()
+#' res
 .sarimax_cheatsheet <- function() {
   paste("sarimax: y = beta'x + n with seasonal ARIMA errors. beta",
         "is profiled out by exact GLS on the Kalman innovations,",

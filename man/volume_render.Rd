@@ -20,5 +20,6 @@ A list with \code{colour}, \code{weights}, \code{accumulated_alpha}, \code{trans
 }
 \keyword{internal}
 \examples{
-volume_render(sigma = c(1, 2, 3, 4, 5, 6, 7, 8), colour = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+volume_render(sigma = c(1, 2, 3, 4, 5, 6, 7, 8), colour = c(1, 2, 3, 4, 5, 6, 7, 8),
+  t = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

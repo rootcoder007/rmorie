@@ -18,3 +18,7 @@ bias coefficients b_1, b_2, b_3 of (4.14), (4.15) and (4.21): the
 transformation does not remove the bias, it makes it computable and
 O(h^2) everywhere including at the edge.
 }
+\examples{
+res <- .fz_transform()
+res
+}

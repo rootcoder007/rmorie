@@ -11,7 +11,10 @@
 #' was printed in this session.  MASS returns the weight psi(u)/u; multiplying
 #' it back by u gives
 #'
-#' \deqn{\psi(r) = r,\ |r| \le a; \quad a\,\mathrm{sign}(r),\ a < |r| \le b; \quad a(c-|r|)\mathrm{sign}(r)/(c-b),\ b < |r| \le c; \quad 0,\ |r| > c,}{psi(r) = r for |r| <= a; a sign(r) for a < |r| <= b; a (c - |r|) sign(r)/(c - b) for b < |r| <= c; 0 for |r| > c,}
+#' \deqn{\psi(r) = r,\ |r| \le a; \quad a\,\mathrm{sign}(r),\ a < |r| \le b; \quad
+#' a(c-|r|)\mathrm{sign}(r)/(c-b),\ b < |r| \le c; \quad 0,\ |r| > c,}{psi(r) = r for |r|
+#' <= a; a sign(r) for a < |r| <= b; a (c - |r|) sign(r)/(c - b) for b < |r| <= c; 0 for
+#' |r| > c,}
 #'
 #' linear, then flat, then descending to zero, then zero.  Its derivative,
 #' which MASS returns for deriv = 1, is 1, 0, -a/(c-b), 0 on the same four

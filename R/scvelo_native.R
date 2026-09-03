@@ -110,7 +110,8 @@ morie_solve_kinetics <- function(tau, alpha, beta, gamma,
 # nu = beta*u - gamma*s, the derivative of spliced abundance.
 #' Nu = beta*u - gamma*s, the derivative of spliced abundance
 #'
-#' A step of the scvelo_native implementation. Called by \code{morie_dynamical_fit}, \code{morie_simulate_gene}.
+#' A step of the scvelo_native implementation. Called by \code{morie_dynamical_fit},
+#' \code{morie_simulate_gene}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -176,7 +177,8 @@ morie_simulate_gene <- function(alpha, beta, gamma, t_switch, times) {
 #' @param u A vector; its length is taken and its elements indexed.
 #' @param s A vector; its length is taken and its elements indexed.
 #' @param quantile Numeric; combined arithmetically in the body. Defaults to \code{0.95}.
-#' @return A list with \code{gamma_over_beta}, \code{velocity}, \code{n_fitted}, \code{assumptions}, \code{method}.
+#' @return A list with \code{gamma_over_beta}, \code{velocity}, \code{n_fitted},
+#' \code{assumptions}, \code{method}.
 #' @export
 morie_steady_state_velocity <- function(u, s, quantile = 0.95) {
   n <- length(u)
@@ -278,13 +280,17 @@ morie_assign_latent_time <- function(u, s, alpha, beta, gamma, t_switch,
 #'
 #' @param u A vector; its length is taken and its elements indexed.
 #' @param s A vector; its length is taken and its elements indexed.
-#' @param alpha0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param alpha0 Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param beta0 Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param gamma0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
-#' @param t_switch0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param t_switch0 Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param grid Passed to \code{.scvelo_residual}. Defaults to \code{120}.
-#' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma}, \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity}, \code{steady_on}, \code{method}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{beta}, \code{gamma},
+#' \code{t_switch}, \code{rss}, \code{rss_history}, \code{latent}, \code{velocity},
+#' \code{steady_on}, \code{method}.
 #' @export
 morie_dynamical_fit <- function(u, s, alpha0 = NULL, beta0 = 1.0,
                                 gamma0 = 0.5, t_switch0 = NULL,
@@ -406,6 +412,9 @@ morie_latent_time <- function(fits) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .scvelo_morie_cheatsheet()
+#' res
 .scvelo_morie_cheatsheet <- function() {
   paste("scvelo: du/dt = alpha - beta u, ds/dt = beta u - gamma s,",
         "and velocity IS ds/dt. The steady-state model reads velocity",
@@ -424,16 +433,3 @@ morie_rna_velocity <- morie_dynamical_fit
 # algorithm the paper introduces and which subsumes the steady-state
 # baseline as a degenerate case.
 morie_scvelo <- morie_dynamical_fit
-
-
-
-
-
-
-
-
-
-
-
-
-

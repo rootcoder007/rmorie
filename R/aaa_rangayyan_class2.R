@@ -18,7 +18,8 @@
 
 #' .morie_bx_vec
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{Ahi}, \code{BPursuit}, \code{CadPipe} and 14 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{Ahi}, \code{BPursuit},
+#' \code{CadPipe} and 14 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -26,6 +27,10 @@
 #' @param name Passed to \code{stop}. Defaults to \code{"x"}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_vec(v = x)
+#' res
 .morie_bx_vec <- function(v, name = "x") {
   out <- as.numeric(v)
   if (length(out) == 0L) {
@@ -39,7 +44,8 @@
 
 #' .morie_bx_mat
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel}, \code{BmiDec}, \code{BPursuit} and 18 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_chsel},
+#' \code{BmiDec}, \code{BPursuit} and 18 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -47,6 +53,11 @@
 #' @param name Passed to \code{stop}. Defaults to \code{"X"}.
 #' @return The value of \code{M}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_bx_mat(M = X)
+#' res
 .morie_bx_mat <- function(M, name = "X") {
   if (is.null(M)) stop(name, " is required")
   if (is.list(M) && !is.data.frame(M)) {
@@ -66,7 +77,8 @@
 
 #' .morie_bx_dot
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \code{IcaFix}, \code{KsvdFit} and 2 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp},
+#' \code{IcaFix}, \code{KsvdFit} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -74,17 +86,27 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_fsum}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_bx_dot(a = A, b = b)
+#' res
 .morie_bx_dot <- function(a, b) .morie_fsum(a * b)
 
 #' .morie_bx_nrm
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_gabor}, \code{.morie_bx_omp}, \code{BPursuit} and 6 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_gabor},
+#' \code{.morie_bx_omp}, \code{BPursuit} and 6 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param a Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_bx_nrm(a = A)
+#' res
 .morie_bx_nrm <- function(a) sqrt(.morie_fsum(a * a))
 
 #' Matrix product with compensated inner sums, not BLAS: the summation
@@ -112,7 +134,8 @@
 
 #' .morie_bx_mv
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_lstsq}, \code{.morie_bx_omp}, \code{BmiDec} and 4 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_lstsq},
+#' \code{.morie_bx_omp}, \code{BmiDec} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -120,6 +143,11 @@
 #' @param v A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_bx_mv(A = A, v = b)
+#' res
 .morie_bx_mv <- function(A, v) {
   if (ncol(A) != length(v)) {
     stop("matrix and vector dimensions do not agree")
@@ -129,18 +157,24 @@
 
 #' .morie_bx_mean
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_kurt}, \code{.morie_bx_sd}, \code{EegBands} and 5 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_kurt},
+#' \code{.morie_bx_sd}, \code{EegBands} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_mean(v = x)
+#' res
 .morie_bx_mean <- function(v) .morie_fsum(v) / length(v)
 
 #' .morie_bx_sd
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{CadPipe}, \code{PvcBayes}, \code{VagClass}.
+#' A step of the rangayyan_class2 implementation. Called by \code{CadPipe},
+#' \code{PvcBayes}, \code{VagClass}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -148,6 +182,10 @@
 #' @param ddof Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_sd(v = x)
+#' res
 .morie_bx_sd <- function(v, ddof = 1) {
   n <- length(v)
   if (n - ddof < 1) {
@@ -165,6 +203,10 @@
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_kurt(v = x)
+#' res
 .morie_bx_kurt <- function(v) {
   # kurtosis EXCESS K' = K - 3, eq (3.5) and the note below it: zero for a
   # Gaussian, positive for a peaked heavy-tailed PDF
@@ -187,6 +229,11 @@
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_bx_solve(A = A, b = b)
+#' res
 .morie_bx_solve <- function(A, b) {
   # Gaussian elimination with partial pivoting; raises rather than
   # returning garbage on a singular system
@@ -217,7 +264,8 @@
 
 #' .morie_bx_lstsq
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp}, \code{Lstm}, \code{Rbfn}.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_omp},
+#' \code{Lstm}, \code{Rbfn}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -226,6 +274,11 @@
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @return The value of \code{.morie_bx_solve}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_bx_lstsq(A = A, y = b)
+#' res
 .morie_bx_lstsq <- function(A, y, ridge = 1e-10) {
   At <- t(A)
   G <- .morie_bx_mm(At, A)
@@ -291,6 +344,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @examples
+#' res <- .morie_bx_rng(seed = 1L)
+#' res
 .morie_bx_rng <- function(seed) {
   # Numerical Recipes ranqd1 LCG on (0, 1).  1664525 * (2^32 - 1) is below
   # 2^53, so the double arithmetic here is exact and matches the Python
@@ -304,7 +360,8 @@
 
 #' Row-major fill, the order the Python list comprehensions draw in
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_nmfmu}, \code{Infomax}, \code{Lstm} and 1 others in the module.
+#' A step of the rangayyan_class2 implementation. Called by \code{.morie_bx_nmfmu},
+#' \code{Infomax}, \code{Lstm} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -330,6 +387,10 @@
 #' @param v See Usage.
 #' @return The value of \code{s}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_nsum(v = x)
+#' res
 .morie_bx_nsum <- function(v) {
   # plain sequential double accumulation, NOT compensated: mirrors the one
   # place the Python arm uses `x += ...` in a loop instead of fsum, so the
@@ -349,6 +410,11 @@
 #' @param unbiased A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{mu}, \code{C}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_bx_cov(X = X)
+#' res
 .morie_bx_cov <- function(X, unbiased = TRUE) {
   n <- nrow(X)
   p <- ncol(X)
@@ -431,13 +497,15 @@
 
 #' Greedy atom picks with a least-squares reprojection on the support
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{DictCode}, \code{KsvdFit}, \code{OmpFit}.
+#' A step of the rangayyan_class2 implementation. Called by \code{DictCode},
+#' \code{KsvdFit}, \code{OmpFit}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x A vector; its length is taken.
 #' @param D A matrix; indexed by row and column.
-#' @param sparsity Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param sparsity Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param tol Passed to \code{<=}.
 #' @return A list with \code{coefficients}, \code{support}, \code{residual}.
 #' @export
@@ -542,6 +610,10 @@
 #' @param x A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bx_dftmag(x = x)
+#' res
 .morie_bx_dftmag <- function(x) {
   n <- length(x)
   tt <- seq_len(n) - 1L
@@ -689,13 +761,17 @@
 
 #' Logistic node function, eq (10.81), saturated rather than overflowing
 #'
-#' A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{Lstm}, \code{MlpBp}.
+#' A step of the rangayyan_class2 implementation. Called by \code{Infomax}, \code{Lstm},
+#' \code{MlpBp}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param b Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' res <- .morie_bx_sig(b = 3L)
+#' res
 .morie_bx_sig <- function(b) {
   # logistic node function, eq (10.81), saturated rather than overflowing
   ifelse(b < -700, 0, ifelse(b > 700, 1, 1 / (1 + exp(-b))))
@@ -717,7 +793,9 @@
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{500}.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-04}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
-#' @return A list with \code{weights}, \code{offsets}, \code{predictions}, \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations}, \code{method}.
+#' @return A list with \code{weights}, \code{offsets}, \code{predictions},
+#' \code{outputs}, \code{classes}, \code{accuracy}, \code{mse}, \code{iterations},
+#' \code{method}.
 #' @export
 MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
                   tol = 1e-4, seed = 1) {
@@ -839,7 +917,8 @@ MlpBp <- function(X, y, hidden = 4, eta = 0.5, alpha = 0.9, maxiter = 500,
 #'
 #' @param qrsdur A vector; its length is taken.
 #' @param criteria Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @return A list with \code{blocktype}, \code{qrsdur}, \code{wide}, \code{left}, \code{right}, \code{satisfied}, \code{method}.
+#' @return A list with \code{blocktype}, \code{qrsdur}, \code{wide}, \code{left},
+#' \code{right}, \code{satisfied}, \code{method}.
 #' @export
 Bbb <- function(qrsdur, criteria = NULL) {
   # Section 10.2.1.  Bundle-branch block desynchronises ventricular
@@ -914,7 +993,9 @@ Bbb <- function(qrsdur, criteria = NULL) {
 #' @param labels Passed to \code{.morie_bx_vec}.
 #' @param priors Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
 #' @param query Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
-#' @return A list with \code{predictions}, \code{queryclass}, \code{posterior}, \code{means}, \code{covariances}, \code{scale}, \code{confusion}, \code{accuracy}, \code{sensitivity}, \code{specificity}, \code{priors}, \code{classes}, \code{method}.
+#' @return A list with \code{predictions}, \code{queryclass}, \code{posterior},
+#' \code{means}, \code{covariances}, \code{scale}, \code{confusion}, \code{accuracy},
+#' \code{sensitivity}, \code{specificity}, \code{priors}, \code{classes}, \code{method}.
 #' @export
 PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
   # Section 10.11.2 with the normal-pattern Bayes classifier of 10.6.2.
@@ -1039,7 +1120,8 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
 #' @param maxiter Passed to \code{.morie_bx_nmfmu}.
 #' @param tol Passed to \code{.morie_bx_nmfmu}.
 #' @param seed Passed to \code{.morie_bx_nmfmu}.
-#' @return A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd}, \code{normalized}, \code{ranking}, \code{selected}.
+#' @return A list with \code{X}, \code{C}, \code{W}, \code{H}, \code{error}, \code{rmsd},
+#' \code{normalized}, \code{ranking}, \code{selected}.
 #' @export
 .morie_bx_chsel <- function(trials, nselect, rank, maxiter, tol, seed) {
   # shared core of BciChSel and NmfChSel: eqs (9.94)-(9.96)
@@ -1095,7 +1177,8 @@ PvcBayes <- function(features, labels, priors = NULL, query = NULL) {
 #' @param maxiter Passed to \code{.morie_bx_chsel}. Defaults to \code{200}.
 #' @param tol Passed to \code{.morie_bx_chsel}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_chsel}. Defaults to \code{1}.
-#' @return A list with \code{selected}, \code{weights}, \code{rmsd}, \code{normalized}, \code{weighted}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
+#' @return A list with \code{selected}, \code{weights}, \code{rmsd}, \code{normalized},
+#' \code{weighted}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
 #' @export
 BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
@@ -1132,7 +1215,8 @@ BciChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @param lam Numeric; combined arithmetically in the body. Defaults to \code{0.01}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000}.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
-#' @return A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
+#' @return A list with \code{alpha}, \code{support}, \code{reconstruction},
+#' \code{residual}, \code{l1norm}, \code{objective}, \code{iterations}, \code{method}.
 #' @export
 BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
   # NOT from Rangayyan: the book covers matching pursuit (9.3) and EMD
@@ -1211,7 +1295,9 @@ BPursuit <- function(x, D, lam = 0.01, maxiter = 2000, tol = 1e-10) {
 #' @param labels Passed to \code{.morie_bx_vec}.
 #' @param k A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5}.
 #' @param standardize A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{accuracy}, \code{sensitivity}, \code{specificity}, \code{weightedaccuracy}, \code{confusion}, \code{predictions}, \code{folds}, \code{prevalence}, \code{method}.
+#' @return A list with \code{accuracy}, \code{sensitivity}, \code{specificity},
+#' \code{weightedaccuracy}, \code{confusion}, \code{predictions}, \code{folds},
+#' \code{prevalence}, \code{method}.
 #' @export
 CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
   # Chapter 10: a CAD system is a chain, not a classifier, and the accuracy
@@ -1304,7 +1390,8 @@ CadPipe <- function(features, labels, k = 5, standardize = TRUE) {
 #' @param bias Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
 #' @param pool Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @param dense Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
-#' @return A list with \code{maps}, \code{pooled}, \code{features}, \code{scores}, \code{predicted}, \code{method}.
+#' @return A list with \code{maps}, \code{pooled}, \code{features}, \code{scores},
+#' \code{predicted}, \code{method}.
 #' @export
 CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
   # Section 10.8.2 names CNNs as the common deep model but gives no layer
@@ -1394,7 +1481,8 @@ CnnSig <- function(x, kernels, bias = NULL, pool = 2, dense = NULL) {
 #' @param taum The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.6}.
 #' @param tauf The body requires: taum and tauf must lie in (0, 1]. Defaults to \code{0.45}.
 #' @param seed Passed to \code{.morie_bx_nmfmu}. Defaults to \code{1}.
-#' @return A list with \code{fetal}, \code{maternal}, \code{fetalrow}, \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
+#' @return A list with \code{fetal}, \code{maternal}, \code{fetalrow},
+#' \code{maternalrow}, \code{peaks}, \code{W}, \code{H}, \code{error}, \code{method}.
 #' @export
 FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
                     maxiter = 150, taum = 0.6, tauf = 0.45, seed = 1) {
@@ -1495,8 +1583,10 @@ FecgNmf <- function(x, fs, nwin = 64, hop = NULL, rank = 4, lam = 0,
 #'
 #' @param rr A vector; its length is taken.
 #' @param ff A vector; its length is taken.
-#' @param train Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @return A list with \code{labels}, \code{discriminant}, \code{coefficients}, \code{prototypes}, \code{source}, \code{method}.
+#' @param train Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @return A list with \code{labels}, \code{discriminant}, \code{coefficients},
+#' \code{prototypes}, \code{source}, \code{method}.
 #' @export
 PvcLinDf <- function(rr, ff, train = NULL) {
   # Section 10.11.1, eq (10.131).  A PVC has both a shorter preceding RR
@@ -1563,8 +1653,10 @@ PvcLinDf <- function(rr, ff, train = NULL) {
 #'
 #' @param x A vector; its length is taken.
 #' @param fs Numeric; combined arithmetically in the body.
-#' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @return A list with \code{power}, \code{fraction}, \code{dominant}, \code{totalpower}, \code{frequencies}, \code{bands}, \code{method}.
+#' @param bands Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @return A list with \code{power}, \code{fraction}, \code{dominant}, \code{totalpower},
+#' \code{frequencies}, \code{bands}, \code{method}.
 #' @export
 EegBands <- function(x, fs, bands = NULL) {
   # Band limits from Section 1.2.6, fractional power by eq (6.44) as used
@@ -1640,7 +1732,9 @@ EegBands <- function(x, fs, bands = NULL) {
 #' @param iterations A count; the body uses it as \code{seq_len(...)}. Defaults to \code{7}.
 #' @param atoms Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
 #' @param test Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
-#' @return A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{predictions}, \code{isseizure}, \code{testclass}, \code{accuracy}, \code{method}.
+#' @return A list with \code{dictionary}, \code{coefficients}, \code{error},
+#' \code{predictions}, \code{isseizure}, \code{testclass}, \code{accuracy},
+#' \code{method}.
 #' @export
 SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
                      test = NULL) {
@@ -1781,11 +1875,13 @@ SeizDict <- function(signals, labels, iterations = 7, atoms = NULL,
 #' that section.
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
-#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{200}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
-#' @return A list with \code{sources}, \code{unmixing}, \code{mixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{method}.
+#' @return A list with \code{sources}, \code{unmixing}, \code{mixing}, \code{whitening},
+#' \code{mean}, \code{iterations}, \code{method}.
 #' @export
 IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
   # Section 9.7.2: model eq (9.43), unmixing eq (9.44).  PCA can only make
@@ -1899,7 +1995,8 @@ IcaFix <- function(X, ncomp = NULL, maxiter = 200, tol = 1e-8, seed = 1) {
 #' @param drop Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param maxiter Passed to \code{IcaFix}. Defaults to \code{200}.
 #' @param seed Passed to \code{IcaFix}. Defaults to \code{1}.
-#' @return A list with \code{clean}, \code{components}, \code{kurtosis}, \code{artifacts}, \code{mixing}, \code{removedpower}, \code{method}.
+#' @return A list with \code{clean}, \code{components}, \code{kurtosis},
+#' \code{artifacts}, \code{mixing}, \code{removedpower}, \code{method}.
 #' @export
 IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
                      maxiter = 200, seed = 1) {
@@ -1959,12 +2056,14 @@ IcaClean <- function(X, ncomp = NULL, kurtosis = 3, drop = NULL,
 #' the source it follows.
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
-#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param eta Numeric; combined arithmetically in the body. Defaults to \code{0.05}.
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{300}.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
-#' @return A list with \code{sources}, \code{unmixing}, \code{whitening}, \code{mean}, \code{iterations}, \code{change}, \code{method}.
+#' @return A list with \code{sources}, \code{unmixing}, \code{whitening}, \code{mean},
+#' \code{iterations}, \code{change}, \code{method}.
 #' @export
 Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
                     seed = 1) {
@@ -2051,7 +2150,9 @@ Infomax <- function(X, ncomp = NULL, eta = 0.05, maxiter = 300, tol = 1e-8,
 #' @param durations Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
 #' @param segclass Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
 #' @param arthro Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
-#' @return A list with \code{varmeans}, \code{segmentmeans}, \code{abnormalfraction}, \code{normalfraction}, \code{decision}, \code{stage}, \code{abnormal}, \code{durations}, \code{method}.
+#' @return A list with \code{varmeans}, \code{segmentmeans}, \code{abnormalfraction},
+#' \code{normalfraction}, \code{decision}, \code{stage}, \code{abnormal},
+#' \code{durations}, \code{method}.
 #' @export
 VagClass <- function(segments, durations = NULL, segclass = NULL,
                      arthro = NULL) {
@@ -2149,7 +2250,8 @@ VagClass <- function(segments, durations = NULL, segclass = NULL,
 #' @param maxiter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{15}.
 #' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-10}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
-#' @return A list with \code{dictionary}, \code{coefficients}, \code{error}, \code{iterations}, \code{method}.
+#' @return A list with \code{dictionary}, \code{coefficients}, \code{error},
+#' \code{iterations}, \code{method}.
 #' @export
 KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
                     seed = 1) {
@@ -2266,7 +2368,8 @@ KsvdFit <- function(Y, natoms, sparsity, maxiter = 15, tol = 1e-10,
 #' @param D Passed to \code{.morie_bx_mat}.
 #' @param sparsity Passed to \code{.morie_bx_omp}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-12}.
-#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{method}.
+#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction},
+#' \code{residual}, \code{error}, \code{method}.
 #' @export
 DictCode <- function(Y, D, sparsity, tol = 1e-12) {
   # Section 9.5 for the greedy stage and 9.8 for the use of the resulting
@@ -2325,7 +2428,8 @@ DictCode <- function(Y, D, sparsity, tol = 1e-12) {
 #' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
 #' @param seed Passed to \code{.morie_bx_rng}. Defaults to \code{1}.
 #' @param weights Optional; may be \code{NULL}. A list; the body reads \code{$bias} from it.
-#' @return A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy}, \code{readout}, \code{classes}, \code{method}.
+#' @return A list with \code{hidden}, \code{cell}, \code{predictions}, \code{accuracy},
+#' \code{readout}, \code{classes}, \code{method}.
 #' @export
 Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
                  seed = 1, weights = NULL) {
@@ -2450,8 +2554,11 @@ Lstm <- function(sequences, labels = NULL, hidden = 8, ridge = 1e-6,
 #' @param dictionary Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
 #' @param natoms Numeric; passed to \code{min}. Defaults to \code{20}.
 #' @param tol Passed to \code{<=}. Defaults to \code{1e-10}.
-#' @param decaystop Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{coefficients}, \code{atoms}, \code{indices}, \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio}, \code{parameters}, \code{method}.
+#' @param decaystop Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{coefficients}, \code{atoms}, \code{indices},
+#' \code{residual}, \code{reconstruction}, \code{decay}, \code{energyratio},
+#' \code{parameters}, \code{method}.
 #' @export
 MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
                      decaystop = NULL) {
@@ -2542,7 +2649,8 @@ MPursuit <- function(x, dictionary = NULL, natoms = 20, tol = 1e-10,
 #' @param procnoise Passed to \code{cov}. Defaults to \code{1e-04}.
 #' @param obsnoise Passed to \code{cov}. Defaults to \code{0.01}.
 #' @param p0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
-#' @return A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted}, \code{method}.
+#' @return A list with \code{states}, \code{innovations}, \code{gain}, \code{predicted},
+#' \code{method}.
 #' @export
 BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
                    p0 = 1e-2) {
@@ -2646,7 +2754,8 @@ BmiDec <- function(y, C, a = NULL, procnoise = 1e-4, obsnoise = 1e-2,
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.
 #' @param cost One of \code{"kld"}, \code{"ls"}. Defaults to \code{"ls"}.
 #' @param seed Passed to \code{.morie_bx_nmfmu}. Defaults to \code{1}.
-#' @return A list with \code{W}, \code{H}, \code{submatrices}, \code{error}, \code{iterations}, \code{cost}, \code{method}.
+#' @return A list with \code{W}, \code{H}, \code{submatrices}, \code{error},
+#' \code{iterations}, \code{cost}, \code{method}.
 #' @export
 NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
   # Section 9.7.3, eqs (9.46), (9.49)-(9.50) and (9.53)-(9.55).  PCA and
@@ -2696,7 +2805,8 @@ NmfMu <- function(V, r, maxiter = 200, tol = 1e-10, cost = "ls", seed = 1) {
 #' @param maxiter Passed to \code{.morie_bx_chsel}. Defaults to \code{200}.
 #' @param tol Passed to \code{.morie_bx_chsel}. Defaults to \code{1e-08}.
 #' @param seed Passed to \code{.morie_bx_chsel}. Defaults to \code{1}.
-#' @return A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized}, \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
+#' @return A list with \code{selected}, \code{rmsd}, \code{ranking}, \code{normalized},
+#' \code{W}, \code{H}, \code{covariance}, \code{error}, \code{method}.
 #' @export
 NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
                      seed = 1) {
@@ -2732,7 +2842,8 @@ NmfChSel <- function(trials, nselect, rank = 4, maxiter = 200, tol = 1e-8,
 #' @param D Passed to \code{.morie_bx_mat}.
 #' @param sparsity Passed to \code{.morie_bx_omp}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.
-#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{method}.
+#' @return A list with \code{coefficients}, \code{support}, \code{reconstruction},
+#' \code{residual}, \code{error}, \code{energyratio}, \code{method}.
 #' @export
 OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
   # NOT from Rangayyan: Section 9.3 gives plain matching pursuit, not the
@@ -2775,8 +2886,10 @@ OmpFit <- function(x, D, sparsity = NULL, tol = 1e-10) {
 #' eigenvalues, which is why decreasing order minimises the MSE.
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
-#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{components}, \code{eigenvalues}, \code{eigenvectors}, \code{mean}, \code{covariance}, \code{varexplained}, \code{mse}, \code{method}.
+#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{components}, \code{eigenvalues}, \code{eigenvectors},
+#' \code{mean}, \code{covariance}, \code{varexplained}, \code{mse}, \code{method}.
 #' @export
 PcaSig <- function(X, ncomp = NULL) {
   # Section 9.7.1, eqs (9.37)-(9.41).  Multichannel recordings pick up the
@@ -2831,7 +2944,8 @@ PcaSig <- function(X, ncomp = NULL) {
 #' runs on the nonnegatively shifted mixture, as eq (9.46) requires.
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
-#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param ncomp Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param maxiter Passed to \code{IcaFix}. Defaults to \code{200}.
 #' @param seed Passed to \code{IcaFix}. Defaults to \code{1}.
 #' @return A list with \code{error}, \code{best}, \code{components}, \code{rank}, \code{method}.
@@ -2890,12 +3004,14 @@ MixCmp <- function(X, ncomp = NULL, maxiter = 200, seed = 1) {
 #'
 #' @param X Passed to \code{.morie_bx_mat}.
 #' @param y Passed to \code{.morie_bx_vec}.
-#' @param ncenters Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param ncenters Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param spread Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @param centers Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
 #' @param ridge Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
 #' @param query Optional; may be \code{NULL}. Passed to \code{.morie_bx_mat}.
-#' @return A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions}, \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.
+#' @return A list with \code{centers}, \code{weights}, \code{bias}, \code{predictions},
+#' \code{queryvalues}, \code{mse}, \code{spread}, \code{method}.
 #' @export
 Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
                  ridge = 1e-8, query = NULL) {
@@ -3012,13 +3128,16 @@ Rbfn <- function(X, y, ncenters = NULL, spread = 1, centers = NULL,
 #' @param airflow Passed to \code{.morie_bx_vec}.
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param spo2 Optional; may be \code{NULL}. Passed to \code{.morie_bx_vec}.
-#' @param hours Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param hours Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param apneafrac Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param hypofrac Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
 #' @param minsec Numeric; combined arithmetically in the body. Defaults to \code{10}.
 #' @param desat Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param envsec Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{ahi}, \code{severity}, \code{apnea}, \code{hypopnea}, \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked}, \code{method}.
+#' @return A list with \code{ahi}, \code{severity}, \code{apnea}, \code{hypopnea},
+#' \code{events}, \code{hours}, \code{baseline}, \code{envsec}, \code{oxygenchecked},
+#' \code{method}.
 #' @export
 Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
                 hypofrac = 0.50, minsec = 10, desat = 0, envsec = 1) {
@@ -3121,11 +3240,13 @@ Ahi <- function(airflow, fs, spo2 = NULL, hours = NULL, apneafrac = 0.10,
 #'
 #' @param x A vector; its length is taken.
 #' @param D Passed to \code{.morie_bx_mat}.
-#' @param sparsity Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param sparsity Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param lam Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param maxiter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-10}.
-#' @return A list with \code{alpha}, \code{support}, \code{reconstruction}, \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.
+#' @return A list with \code{alpha}, \code{support}, \code{reconstruction},
+#' \code{residual}, \code{error}, \code{energyratio}, \code{mode}, \code{method}.
 #' @export
 SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
                        tol = 1e-10) {
@@ -3192,9 +3313,11 @@ SparseCode <- function(x, D, sparsity = NULL, lam = NULL, maxiter = 2000,
 #' @param fs Numeric; combined arithmetically in the body.
 #' @param natoms Passed to \code{MPursuit}. Defaults to \code{12}.
 #' @param nfreq A count; the body uses it as \code{seq_len(...)}. Defaults to \code{32}.
-#' @param ntime Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param ntime Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param lag Numeric; combined arithmetically in the body. Defaults to \code{12}.
-#' @return A list with \code{tfd}, \code{times}, \code{frequencies}, \code{ep}, \code{esp}, \code{fp}, \code{fsp}, \code{coefficients}, \code{method}.
+#' @return A list with \code{tfd}, \code{times}, \code{frequencies}, \code{ep},
+#' \code{esp}, \code{fp}, \code{fsp}, \code{coefficients}, \code{method}.
 #' @export
 VagTfd <- function(x, fs, natoms = 12, nfreq = 32, ntime = NULL, lag = 12) {
   # Section 9.6 applied to VAG in Section 9.9.  Bilinear TFDs buy

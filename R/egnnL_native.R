@@ -36,6 +36,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .sqdist(a = A, b = b)
+#' res
 .sqdist <- function(a, b) {
   a <- as.numeric(a)
   b <- as.numeric(b)
@@ -170,7 +175,8 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 
 #' run_egnn
 #'
-#' A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer}, \code{egnnlayer} and 5 others in the module.
+#' A step of the egnnL_native implementation. Called by \code{e_gcn}, \code{egnn_layer},
+#' \code{egnnlayer} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -182,7 +188,8 @@ egcl <- function(H, X, phi_e, phi_x, phi_h, A = NULL, C = NULL,
 #' @param phi_h Passed to \code{egcl}.
 #' @param A Passed to \code{egcl}.
 #' @param C Passed to \code{egcl}.
-#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{H}, \code{X}, \code{layers}, \code{method},
+#' \code{note}.
 #' @export
 run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
                      C = NULL) {
@@ -215,7 +222,8 @@ run_egnn <- function(H, X, layers, phi_e, phi_x, phi_h, A = NULL,
 #' @param g A vector; indexed elementwise.
 #' @param layers Passed to \code{run_egnn}. Defaults to \code{2}.
 #' @param C Passed to \code{run_egnn}.
-#' @return A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant}, \code{invariant}, \code{note}.
+#' @return A list with \code{coordinate_error}, \code{feature_error}, \code{equivariant},
+#' \code{invariant}, \code{note}.
 #' @export
 morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
                                layers = 2, C = NULL) {
@@ -263,6 +271,9 @@ morie_egnnL_equivariance_error <- function(H, X, phi_e, phi_x, phi_h, Q, g,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .egnnL_cheatsheet()
+#' res
 .egnnL_cheatsheet <- function() {
   paste0("egnnL: equivariance to translation, rotation and reflection ",
          "WITHOUT spherical harmonics. m_ij depends on position only ",

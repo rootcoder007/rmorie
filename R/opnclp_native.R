@@ -27,6 +27,10 @@
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .opnclp_vec(v = x)
+#' res
 .opnclp_vec <- function(v) as.numeric(unlist(v))
 
 #' .opnclp_mat
@@ -38,6 +42,11 @@
 #' @param m A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .opnclp_mat(m = X)
+#' res
 .opnclp_mat <- function(m) {
   if (is.matrix(m)) {
     storage.mode(m) <- "double"
@@ -78,7 +87,8 @@ total_compute <- function(samples_seen, model_params) {
 #'
 #' @param x Passed to \code{.opnclp_vec}.
 #' @param y Passed to \code{.opnclp_vec}.
-#' @return A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared}, \code{range}, \code{n}.
+#' @return A list with \code{alpha}, \code{beta}, \code{slope}, \code{r_squared},
+#' \code{range}, \code{n}.
 #' @export
 fit_power_law <- function(x, y) {
   X <- .opnclp_vec(x)
@@ -185,8 +195,10 @@ compare_scaling <- function(x_a, y_a, x_b, y_b,
 #'
 #' @param image_embeddings Passed to \code{.opnclp_mat}.
 #' @param text_embeddings Passed to \code{.opnclp_mat}.
-#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.07}.
-#' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image}, \code{logits}, \code{note}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.07}.
+#' @return A list with \code{loss}, \code{image_to_text}, \code{text_to_image},
+#' \code{logits}, \code{note}.
 #' @export
 infonce <- function(image_embeddings, text_embeddings,
                     temperature = 0.07) {
@@ -247,6 +259,9 @@ infonce <- function(image_embeddings, text_embeddings,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .opnclp_cheatsheet()
+#' res
 .opnclp_cheatsheet <- function() {
   paste("opnclp: CLIP-scale laws had been measured on PRIVATE data ",
         "and models; re-run on public LAION with an open ",

@@ -58,7 +58,8 @@ test_that("Polya tree posterior density matches anchor (eq 3.23)", {
 })
 
 test_that("divergences match anchors (App B)", {
-  P <- c(0.5, 0.3, 0.2); Q <- c(0.25, 0.5, 0.25)
+  P <- c(0.5, 0.3, 0.2)
+  Q <- c(0.25, 0.5, 0.25)
   expect_equal(morie_gh_hellinger2(P, Q), 0.03554147704,
                tolerance = 1e-9)
   expect_equal(morie_gh_kl(P, Q), 0.1486971929, tolerance = 1e-9)

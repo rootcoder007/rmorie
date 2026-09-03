@@ -18,7 +18,8 @@ ks_fix <- function(n = 150L, seed = 1357) {
 }
 
 test_that("morie_residual_edf matches morie.fn.ksr021", {
-  f <- ks_fix(); n <- f$n
+  f <- ks_fix()
+  n <- f$n
   Z <- cbind(f$z[1:n], f$z[(n + 1):(2 * n)])
   beta <- c(1, -0.5)
   y <- as.numeric(Z %*% beta + f$z[(2 * n + 1):(3 * n)])
@@ -34,7 +35,8 @@ test_that("morie_residual_edf matches morie.fn.ksr021", {
 })
 
 test_that("morie_cox_score_process matches morie.fn.ksr023", {
-  f <- ks_fix(); n <- f$n
+  f <- ks_fix()
+  n <- f$n
   zz <- f$z[1:n]
   tt <- abs(f$z[(n + 1):(2 * n)]) + 0.05
   ev <- ifelse(f$u[(3 * n + 1):(4 * n)] > 0.25, 1, 0)
@@ -51,7 +53,9 @@ test_that("morie_cox_score_process matches morie.fn.ksr023", {
 
 test_that("morie_survival_psi computes the printed functional", {
   g <- seq(0.1, 2, length.out = 20)
-  S0 <- exp(-g); L <- exp(-0.5 * g); G <- 1 - exp(-0.3 * g)
+  S0 <- exp(-g)
+  L <- exp(-0.5 * g)
+  G <- 1 - exp(-0.3 * g)
   o <- morie_survival_psi(S0, g, S0, L, G)
   expect_equal(o$psi[6], -0.051836351564624406, tolerance = 1e-12)
   expect_equal(o$sup_norm, 0.052586474922480586, tolerance = 1e-12)
@@ -63,7 +67,8 @@ test_that("morie_survival_psi computes the printed functional", {
 })
 
 test_that("morie_m_normality is a sandwich, not an inverse Hessian", {
-  f <- ks_fix(); n <- f$n
+  f <- ks_fix()
+  n <- f$n
   S <- cbind(f$z[1:n], f$z[(n + 1):(2 * n)])
   V <- matrix(c(2, 0, 0, 0.5), 2, 2)
   o <- morie_m_normality(S, V = V)
@@ -80,7 +85,8 @@ test_that("morie_m_normality is a sandwich, not an inverse Hessian", {
 })
 
 test_that("morie_semipar_efficiency never exceeds the full information", {
-  f <- ks_fix(); n <- f$n
+  f <- ks_fix()
+  n <- f$n
   S <- cbind(f$z[1:n], f$z[(n + 1):(2 * n)])
   o <- morie_semipar_efficiency(S[, 1, drop = FALSE],
                                 nuisance_scores = S[, 2, drop = FALSE])
@@ -98,7 +104,8 @@ test_that("morie_semipar_efficiency never exceeds the full information", {
 })
 
 test_that("morie_joint_convergence keeps the correlation between blocks", {
-  f <- ks_fix(); n <- f$n
+  f <- ks_fix()
+  n <- f$n
   S <- cbind(f$z[1:n], f$z[(n + 1):(2 * n)])
   D <- matrix(c(1, 0, 0.2, 1), 2, 2)
   o <- morie_joint_convergence(D, S)

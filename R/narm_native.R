@@ -4,7 +4,8 @@
 
 #' narm_softmax
 #'
-#' A step of the narm_native implementation. Called by \code{narm_attention_weights}, \code{narm_bilinear_scores}.
+#' A step of the narm_native implementation. Called by \code{narm_attention_weights},
+#' \code{narm_bilinear_scores}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -89,7 +90,8 @@ narm_session_repr <- function(h_t_global, c_local) {
 #' @param embeddings A matrix; passed to \code{as.matrix}.
 #' @param B A matrix; passed to \code{ncol}.
 #' @param c_t Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{scores}, \code{probabilities}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{scores}, \code{probabilities},
+#' \code{method}, \code{note}.
 #' @export
 narm_bilinear_scores <- function(embeddings, B, c_t) {
   E <- as.matrix(embeddings)

@@ -161,7 +161,8 @@ bilm_forward <- function(X, layers) {
 #' @param reps A vector; its length is taken and its elements indexed.
 #' @param raw_weights A vector; its length is taken.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param position Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
@@ -187,15 +188,18 @@ elmo_mix <- function(reps, raw_weights, gamma = 1, position = NULL) {
 
 #' elmo_representation
 #'
-#' A step of the elmo_native implementation. Called by \code{elmo}, \code{elmorepresentation}, \code{morie_elmo}.
+#' A step of the elmo_native implementation. Called by \code{elmo},
+#' \code{elmorepresentation}, \code{morie_elmo}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X Passed to \code{bilm_forward}.
 #' @param layers Passed to \code{bilm_forward}.
-#' @param raw_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param raw_weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights}, \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
+#' @return A list with \code{estimate}, \code{elmo}, \code{layers}, \code{weights},
+#' \code{gamma}, \code{n_layers}, \code{L}, \code{d}, \code{top_layer}, \code{method}.
 #' @export
 elmo_representation <- function(X, layers, raw_weights = NULL,
                                 gamma = 1) {
@@ -220,6 +224,9 @@ elmo_representation <- function(X, layers, raw_weights = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .elmo_cheatsheet()
+#' res
 .elmo_cheatsheet <- function() {
   paste0("elmo: ELMo_k = gamma * sum_j s_j h_{k,j}, s SOFTMAX-",
          "normalised (eq. 1). The simplex constraint means s chooses ",

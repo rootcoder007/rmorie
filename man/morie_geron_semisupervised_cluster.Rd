@@ -37,5 +37,6 @@ its centroid, labels that representative from the nearest labeled
 point, and propagates the label to every cluster member.
 }
 \examples{
-morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8), X_labeled = c(1, 2, 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_geron_semisupervised_cluster(X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X_labeled = c(1, 2, 3, 4, 5, 6, 7, 8), y_labeled = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

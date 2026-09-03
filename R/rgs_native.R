@@ -39,7 +39,9 @@
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @param Y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param basis Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals}, \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve}, \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{beta}, \code{fitted}, \code{residuals},
+#' \code{k}, \code{eigenvalues}, \code{explained}, \code{scores}, \code{mean_curve},
+#' \code{r_squared}, \code{n}, \code{n_grid}, \code{method}, \code{note}.
 #' @export
 morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
   Xm <- as.matrix(X)
@@ -153,6 +155,9 @@ morie_rgs_functional_regression <- function(X, Y, basis = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .rgs_cheatsheet()
+#' res
 .rgs_cheatsheet <- function() {
   paste0("rgs: morie_rgs_functional_regression(X, Y, basis) -> the ",
          "functional linear model Y = int beta(t) X(t) dt by FPC ",

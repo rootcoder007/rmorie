@@ -13,7 +13,7 @@ A \code{data.frame} with columns \code{dataset_key}, \code{label},
 \description{
 Returns the consolidated registry of every Ontario Open Data feed
 morie ships an offline-mode fixture + mocked live-mode dispatch for.
-Pair with \code{\link[=morie_datasets_ontario_ckan_by_key]{morie_datasets_ontario_ckan_by_key()}} for generic factory
+Pair with \code{morie_datasets_ontario_ckan_by_key()} for generic factory
 access by \code{dataset_key}.
 }
 \details{

@@ -34,6 +34,10 @@
 #' @param x A matrix; passed to \code{dim}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .smoopt_kvec(x = x)
+#' res
 .smoopt_kvec <- function(x) if (is.null(dim(x))) as.numeric(x) else
   as.numeric(x)
 
@@ -46,6 +50,9 @@
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return A list with \code{uniform}.
 #' @export
+#' @examples
+#' res <- .smoopt_make_rng(seed = 1L)
+#' res
 .smoopt_make_rng <- function(seed) {
   e <- .ghc_rng(seed)
   list(uniform = function() .ghc_unif(e, 1L))
@@ -217,7 +224,10 @@ compute_threshold <- function(i1, i2, a1_new, a2_new, alpha, y, E, K, b,
 #' @param eps Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-05}.
 #' @param max_passes Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.smoopt_make_rng}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{passes}, \code{full_passes}, \code{non_bound_passes}, \code{steps}, \code{support_vectors}, \code{n_sv}, \code{equality_residual}, \code{kkt_violations}, \code{objective}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{alpha}, \code{b}, \code{passes},
+#' \code{full_passes}, \code{non_bound_passes}, \code{steps}, \code{support_vectors},
+#' \code{n_sv}, \code{equality_residual}, \code{kkt_violations}, \code{objective},
+#' \code{method}, \code{note}.
 #' @export
 smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
                       max_passes = 200, seed = 0) {
@@ -303,6 +313,9 @@ smo_platt <- function(y, K, C = 1.0, tol = 1e-3, eps = 1e-5,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .smoopt_cheatsheet()
+#' res
 .smoopt_cheatsheet <- function() {
   paste0("smoopt: same SVM dual as svmopt, different CHOICE of ",
          "pair. Two multipliers because the equality constraint ",

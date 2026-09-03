@@ -21,3 +21,7 @@ A step of the rng_native implementation. Called by \code{.morie_random_multivari
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_random_normal(n = 3L)
+res
+}

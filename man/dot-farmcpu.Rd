@@ -25,3 +25,9 @@ A step of the farmlmm_native implementation. Called by \code{morie_farmlmm}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .farmcpu(y = y, G = g)
+res
+}

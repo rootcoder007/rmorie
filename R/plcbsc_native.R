@@ -13,6 +13,10 @@
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .plcbsc_simplex_project(v = x)
+#' res
 .plcbsc_simplex_project <- function(v) {
   n <- length(v)
   if (n == 0L) return(numeric(0))
@@ -117,7 +121,8 @@
 
 #' .plcbsc_gaps
 #'
-#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
+#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_in_time_placebo},
+#' \code{morie_plcbsc}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -133,7 +138,8 @@
 
 #' .plcbsc_rmspe
 #'
-#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_effect}, \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
+#' A step of the plcbsc_native implementation. Called by \code{.plcbsc_effect},
+#' \code{.plcbsc_in_time_placebo}, \code{morie_plcbsc}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -184,7 +190,9 @@
 #' @param v Carried through into a list the body builds.
 #' @param statistic One of \code{"effect"}, \code{"rmspe_ratio"}. Defaults to \code{"effect"}.
 #' @param ... Passed through.
-#' @return A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss}, \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0}, \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{gaps}, \code{weights}, \code{fit_loss},
+#' \code{placebo}, \code{pvalue}, \code{rank}, \code{n_donors}, \code{t0},
+#' \code{statistic}, \code{rmspe_pre}, \code{rmspe_post}, \code{note}, \code{method}.
 #' @export
 morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
                          x_donors = NULL, v = NULL,
@@ -277,7 +285,8 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #' @param fake_t0 A count; the body uses it as \code{seq_len(...)}.
 #' @param v Carried through into a list the body builds.
 #' @param ... Passed through.
-#' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect}, \code{rmspe_pre}, \code{rmspe_placebo}.
+#' @return A list with \code{weights}, \code{gaps}, \code{placebo_effect},
+#' \code{rmspe_pre}, \code{rmspe_placebo}.
 #' @export
 .plcbsc_in_time_placebo <- function(y_treated, y_donors, t0, fake_t0, v = NULL, ...) {
   y1 <- as.numeric(y_treated)
@@ -309,6 +318,9 @@ morie_plcbsc <- function(y_treated, y_donors, t0, x_treated = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .plcbsc_cheatsheet()
+#' res
 .plcbsc_cheatsheet <- function() {
   paste("plcbsc: synthetic control + placebo inference (Abadie, Diamond & Hainmueller 2015).",
         "Weights live on the SIMPLEX -- non-negative, summing to one -- which is what stops the",

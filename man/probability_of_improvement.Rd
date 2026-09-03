@@ -21,5 +21,6 @@ The value of \code{.Phi}.
 }
 \keyword{internal}
 \examples{
-probability_of_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L, best = c(1, 2, 3, 4, 5, 6, 7, 8))
+probability_of_improvement(mu = c(1, 2, 3, 4, 5, 6, 7, 8), sd = 5L,
+  best = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -9,7 +9,7 @@
 \arguments{
 \item{x}{A \code{morie_bayes_fit}.}
 
-\item{...}{Passed to \code{\link[=morie_bayes_plot]{morie_bayes_plot()}}.}
+\item{...}{Passed to \code{morie_bayes_plot()}.}
 }
 \value{
 \code{NULL}, invisibly (default trace plot).

@@ -152,6 +152,10 @@ Rkhsmt <- function(Y, K, n_iter = 200L, X = NULL, Z1 = NULL, v_T = NULL,
 #' @param ridge Passed to \code{.s03ridgesolve}. Defaults to \code{1e-12}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .mvsinv(A = A)
+#' res
 .mvsinv <- function(A, ridge = 1e-12) {
   n <- nrow(A)
   out <- matrix(0, n, n)

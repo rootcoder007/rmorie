@@ -1054,7 +1054,8 @@ estimate_pi0 <- function(p_values,
 #'   \code{"holm_sidak"}, \code{"bh"} / \code{"benjamini_hochberg"} /
 #'   \code{"fdr"}, \code{"by"} / \code{"benjamini_yekutieli"},
 #'   \code{"storey"}, or \code{"fwer"} (alias of holm).
-#' @return A named \code{list} of adjusted p-values with method metadata (as built by the selected adjustment method).
+#' @return A named \code{list} of adjusted p-values with method metadata (as built by the
+#' selected adjustment method).
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(20), runif(5, 0, 0.005))

@@ -20,3 +20,9 @@ The value of \code{tryCatch}.
 inverse-Hessian is a secant approximation accumulated along whatever
 path it walked, so it is not reproducible across solvers; this is.
 }
+\examples{
+fn <- function(v) sum(v^2)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_numeric_cov(fn = fn, theta = x)
+res
+}

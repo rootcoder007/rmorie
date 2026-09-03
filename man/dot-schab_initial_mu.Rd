@@ -19,3 +19,9 @@ A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseud
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .schab_initial_mu(z = y, family = txt)
+res
+}

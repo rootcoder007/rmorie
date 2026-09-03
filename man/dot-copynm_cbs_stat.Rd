@@ -15,3 +15,8 @@ A list with \code{z}, \code{i}, \code{j}.
 \description{
 where indices are 0-based half-open into v (i < j), matching Python.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .copynm_cbs_stat(v = x)
+res
+}

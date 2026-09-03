@@ -26,5 +26,7 @@ A list with \code{L}, \code{stationarity_beta}, \code{balance}, \code{multiplier
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- rmorie:::Svmkkt(X = rnorm(10), y = rnorm(10), beta0 = 0.5, beta = 0.5, alpha = 0.5, delta = rnorm(10), zeta = rnorm(10), T = rnorm(10)); TRUE
+r <- rmorie:::Svmkkt(X = rnorm(10), y = rnorm(10), beta0 = 0.5, beta = 0.5, alpha = 0.5,
+  delta = rnorm(10), zeta = rnorm(10), T = rnorm(10))
+TRUE
 }

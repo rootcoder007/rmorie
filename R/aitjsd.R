@@ -14,7 +14,8 @@
 #' @param p,q Non-negative compositions over the same parts.
 #' @param base Logarithm base; 2 gives bits.
 #' @return As \code{Jsdiv}.
-#' @references Lin (1991), IEEE Transactions on Information Theory 37:145-151; coded form from philentropy.  See Jsdiv for the full note.
+#' @references Lin (1991), IEEE Transactions on Information Theory 37:145-151; coded form
+#' from philentropy.  See Jsdiv for the full note.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

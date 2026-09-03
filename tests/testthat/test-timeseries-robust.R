@@ -3,7 +3,8 @@
 
 N <- 60
 Z <- sapply(0:(N-1), function(i) ((i*13) %% 17)/17 - 0.5)
-Y <- numeric(N); Y[1] <- Z[1]
+Y <- numeric(N)
+Y[1] <- Z[1]
 for (t in 2:N) Y[t] <- 0.85*Y[t-1] + Z[t]
 
 M   <- 30
@@ -11,7 +12,8 @@ RX1 <- sapply(0:(M-1), function(i) ((i*7) %% 13) + 0.5*((i*3) %% 5))
 RX2 <- sapply(0:(M-1), function(i) ((i*5) %% 11) - 0.25*((i*2) %% 7))
 RE  <- sapply(0:(M-1), function(i) ((i*11) %% 19)/19 - 0.5)
 YR  <- 2 + 1.4*RX1 - 0.7*RX2 + RE
-YR[7] <- YR[7] + 25; YR[22] <- YR[22] - 30
+YR[7] <- YR[7] + 25
+YR[22] <- YR[22] - 30
 RX  <- cbind(RX1, RX2)
 
 test_that("ADF matches urca::ur.df", {

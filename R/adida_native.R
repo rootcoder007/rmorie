@@ -286,6 +286,9 @@ temporal_combination <- function(y, levels, horizon = 1L, method = "tsb",
 #'
 #' @return Character string summarising the framework.
 #' @export
+#' @examples
+#' res <- .adida_cheatsheet()
+#' res
 .adida_cheatsheet <- function() {
   paste0(
     "adida: sum into buckets of m, forecast the aggregate, ",

@@ -17,3 +17,8 @@ A matrix, from \code{t}.
 \description{
 upper triangular U with Sigma = U\'U; L is that U\'.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .schab_cholesky_root(cov = A)
+res
+}

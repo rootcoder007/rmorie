@@ -110,7 +110,8 @@
 #' @param ratings_a Passed to \code{.ucfR_co_rated}.
 #' @param ratings_b Passed to \code{.ucfR_co_rated}.
 #' @param min_common Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
-#' @param significance Coerced to logical by the body, with \code{as.logical}. Defaults to \code{FALSE}.
+#' @param significance Coerced to logical by the body, with \code{as.logical}. Defaults
+#' to \code{FALSE}.
 #' @param threshold Passed to \code{.ucfR_significance_weight}. Defaults to \code{50}.
 #' @return A list with \code{w}, \code{n_common}, \code{degenerate}, \code{significance_applied}.
 #' @export
@@ -149,7 +150,8 @@
 #' @param target Passed to \code{.ucfR_pearson}.
 #' @param others A vector; its length is taken and its elements indexed.
 #' @param min_common Passed to \code{.ucfR_pearson}. Defaults to \code{2}.
-#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param significance Passed to \code{.ucfR_pearson}. Defaults to \code{FALSE}.
 #' @return A list with \code{neighbours}, \code{n}, \code{note}.
 #' @export
@@ -194,7 +196,8 @@
 #' @param min_common Passed to \code{.ucfR_neighbours}. Defaults to \code{2}.
 #' @param top_k Passed to \code{.ucfR_neighbours}.
 #' @param significance Passed to \code{.ucfR_neighbours}. Defaults to \code{FALSE}.
-#' @return A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean}, \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{naive_weighted_mean},
+#' \code{user_mean}, \code{n_neighbours}, \code{fell_back}, \code{method}, \code{note}.
 #' @export
 .ucfR_predict_rating <- function(target, others, item, min_common = 2,
                                  top_k = NULL, significance = FALSE) {
@@ -253,6 +256,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ucfR_cheatsheet()
+#' res
 .ucfR_cheatsheet <- function() {
   "ucfR: people who agreed before will probably agree again -- so predict from correlated users, with NO content analysis, which is why it worked on Usenet news. Correlate over CO-RATED items only; unrated is silent, not zero. Predict the user's own mean plus a weighted average of neighbours' DEVIATIONS from their means, since one person's 3 is another's 5 -- averaging raw ratings imports the neighbour's generosity. Normalise by the sum of ABSOLUTE weights, so a reliable disagreer still counts. A correlation of 1.0 from two co-rated items is not evidence: scale by min(n/50, 1)."
 }

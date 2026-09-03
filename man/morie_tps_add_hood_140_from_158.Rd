@@ -25,7 +25,7 @@ morie_tps_add_hood_140_from_158(
 \code{df} with the equivalent-code column appended.
 }
 \description{
-The mirror of \code{\link[=morie_tps_add_hood_158_from_140]{morie_tps_add_hood_158_from_140()}}. For 158-hoods
+The mirror of \code{morie_tps_add_hood_158_from_140()}. For 158-hoods
 that did not exist in the 140-scheme (the newly-split children
 like Etobicoke City Centre / Islington from 14-Islington-City-
 Centre-West) the result is the historical parent 140-hood.

@@ -93,7 +93,8 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 
 #' .counts
 #'
-#' A step of the bigtm_native implementation. Called by \code{.log_evidence}, \code{gibbs_bigram_topic}.
+#' A step of the bigtm_native implementation. Called by \code{.log_evidence},
+#' \code{gibbs_bigram_topic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -139,6 +140,9 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @param n Passed to \code{.ghc_unif}.
 #' @return The value of \code{.ghc_unif}.
 #' @export
+#' @examples
+#' res <- .lcg_uniform(seed = 1L, n = 3L)
+#' res
 .lcg_uniform <- function(seed, n) {
   .ghc_unif(.ghc_rng(as.numeric(seed)), n)
 }
@@ -160,7 +164,9 @@ bigram_topic_predictive <- function(N_ijk, N_jk, beta, m, prior = 1) {
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param seed Passed to \code{.lcg_uniform}. Defaults to \code{0L}.
 #' @param burn Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
-#' @return A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta}, \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations}, \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{z}, \code{topic_posterior}, \code{theta},
+#' \code{N_ijk}, \code{N_jk}, \code{T}, \code{V}, \code{prior}, \code{iterations},
+#' \code{burn_in}, \code{samples_kept}, \code{method}, \code{caveat}.
 #' @export
 gibbs_bigram_topic <- function(docs, T, V, alpha = 0.5, beta = 0.5,
                                m = NULL, n = NULL, prior = 1,

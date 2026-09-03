@@ -27,5 +27,6 @@ Named list with element names matching the Python   payload keys: \code{estimate
 }
 \keyword{internal}
 \examples{
-morie_survvae(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_survvae(X = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
+  events = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -29,7 +29,8 @@ first index below \code{tol} is read off the finished trace.  Cuturi
 (2013), Sec. 4.1; Peyre & Cuturi (2019), Sec. 4.2.
 }
 \examples{
-Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L, tol = 0.5)
+Otsinkit(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, C = c(1, 2, 3, 4, 5, 6, 7, 8), epsilon = 5L,
+  tol = 0.5)
 }
 \references{
 Cuturi (2013), Sec. 4.1.

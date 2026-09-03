@@ -62,7 +62,8 @@ fu_microsomes <- function(log_pd, protein = 1.0) {
 #' source it follows.
 #'
 #' @param log_pd Passed to \code{.clrnt_binding_term}.
-#' @param volume_ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.005}.
+#' @param volume_ratio Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.005}.
 #' @return A numeric value.
 #' @export
 fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
@@ -80,8 +81,10 @@ fu_hepatocytes <- function(log_pd, volume_ratio = 0.005) {
 #'
 #' @param cl_plasma Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_plasma Coerced to numeric by the body, with \code{as.numeric}.
-#' @param blood_plasma_ratio Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param charge One of \code{"acidic"}, \code{"basic"}, \code{"neutral"}. Defaults to \code{"neutral"}.
+#' @param blood_plasma_ratio Optional; may be \code{NULL}. Coerced to numeric by the
+#' body, with \code{as.numeric}.
+#' @param charge One of \code{"acidic"}, \code{"basic"}, \code{"neutral"}. Defaults to
+#' \code{"neutral"}.
 #' @return A list with \code{cl_blood}, \code{fu_blood}, \code{rb}.
 #' @export
 blood_from_plasma <- function(cl_plasma, fu_plasma,
@@ -107,9 +110,11 @@ blood_from_plasma <- function(cl_plasma, fu_plasma,
 #' @param clint_in_vitro Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_incubation Coerced to numeric by the body, with \code{as.numeric}.
 #' @param system One of \code{"hepatocytes"}, \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
-#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to \code{"human"}.
+#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to
+#' \code{"human"}.
 #' @param pbsf Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param liver_weight Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param liver_weight Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 scale_to_liver <- function(clint_in_vitro, fu_incubation,
@@ -141,9 +146,11 @@ scale_to_liver <- function(clint_in_vitro, fu_incubation,
 #'
 #' @param cl_h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fu_blood Coerced to numeric by the body, with \code{as.numeric}.
-#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to \code{"human"}.
+#' @param species The body requires: clrnt: species must be 'human' or 'rat'. Defaults to
+#' \code{"human"}.
 #' @param qh Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @param liver_model One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to \code{"well_stirred"}.
+#' @param liver_model One of \code{"parallel_tube"}, \code{"well_stirred"}. Defaults to
+#' \code{"well_stirred"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
 observed_clint_u <- function(cl_h, fu_blood, species = "human",
@@ -178,7 +185,8 @@ observed_clint_u <- function(cl_h, fu_blood, species = "human",
 #' @param predicted Coerced to numeric by the body, with \code{as.numeric}.
 #' @param observed Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fold Numeric; combined arithmetically in the body. Defaults to \code{2}.
-#' @return A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf}, \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
+#' @return A list with \code{afe}, \code{fold_underprediction}, \code{rmse}, \code{esf},
+#' \code{average_esf}, \code{within_fold}, \code{beyond_fold}, \code{n}, \code{fold}.
 #' @export
 prediction_accuracy <- function(predicted, observed, fold = 2.0) {
   p <- as.numeric(predicted)
@@ -208,11 +216,14 @@ prediction_accuracy <- function(predicted, observed, fold = 2.0) {
 #' @param clint_in_vitro A vector; its length is taken.
 #' @param cl_h Passed to \code{spread}.
 #' @param fu_blood Passed to \code{spread}.
-#' @param log_pd The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
-#' @param fu_incubation The body requires: clrnt: give either fu_incubation or log_pd so equations 1-2 can estimate it.
+#' @param log_pd The body requires: clrnt: give either fu_incubation or log_pd so
+#' equations 1-2 can estimate it.
+#' @param fu_incubation The body requires: clrnt: give either fu_incubation or log_pd so
+#' equations 1-2 can estimate it.
 #' @param system Compared against \code{"microsomes"}. Defaults to \code{"hepatocytes"}.
 #' @param species Carried through into a list the body builds. Defaults to \code{"human"}.
-#' @param liver_model Carried through into a list the body builds. Defaults to \code{"well_stirred"}.
+#' @param liver_model Carried through into a list the body builds. Defaults to
+#' \code{"well_stirred"}.
 #' @param protein Iterated over elementwise, with \code{vapply}. Defaults to \code{1}.
 #' @param volume_ratio Iterated over elementwise, with \code{vapply}. Defaults to \code{0.005}.
 #' @param cl_plasma Passed to \code{spread}.
@@ -358,6 +369,9 @@ morie_clrnt <- function(clint_in_vitro, cl_h = NULL, fu_blood = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .clrnt_cheatsheet()
+#' res
 .clrnt_cheatsheet <- function() {
   paste("clrnt: in vitro to in vivo CLint,u (Wood, Houston & Hallifax",
         "2017). fu in the incubation from eq.1 (microsomes) or eq.2",

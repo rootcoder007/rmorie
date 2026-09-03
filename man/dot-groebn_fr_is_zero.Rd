@@ -17,3 +17,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_add}, \code{
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .groebn_fr_is_zero(p = 0.5)
+res
+}

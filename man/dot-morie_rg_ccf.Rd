@@ -21,3 +21,9 @@ A step of the rangayyan_adapt implementation. Called by \code{Whopf}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .morie_rg_ccf(x = x, d = g, lags = 3L)
+res
+}

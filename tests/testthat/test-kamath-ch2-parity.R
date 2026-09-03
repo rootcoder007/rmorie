@@ -63,7 +63,8 @@ test_that("Eq 2.9 is an element of Eq 2.8 and refuses strangers", {
 })
 
 test_that("scores and delegation refuse contradictory d_k", {
-  q <- c(0.3, -0.7); k <- c(1.1, 0.4)
+  q <- c(0.3, -0.7)
+  k <- c(1.1, 0.4)
   expect_equal(morie_kamath_scaled_dot_score(q, k)$estimate,
                sum(q * k) / sqrt(2), tolerance = 1e-14)
   expect_error(morie_kamath_scaled_dot_score(q, k, d_k = 7),
@@ -169,7 +170,9 @@ test_that("GPT objectives compose and MoE matches Python", {
   expect_equal(g$selected_experts, c(0L, 2L))
   mix <- morie_kamath_mixtral_moe(1, rbind(c(3, 1, 2)))
   expect_equal(mix$output, 1, tolerance = 1e-12)   # identity experts
-  W1 <- rbind(1); W3 <- rbind(1); W2 <- rbind(1)
+  W1 <- rbind(1)
+  W3 <- rbind(1)
+  W2 <- rbind(1)
   sw <- morie_kamath_mixtral_moe(2, rbind(c(3, 1)),
                                  expert_weights = list(
                                    list(W1, W3, W2), list(W1, W3, W2)))

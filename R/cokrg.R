@@ -1,8 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Simple morie_cokriging for co-located bivariate spatial prediction
 #'
-#' \deqn{\hat Z_1(s_0) = \lambda^\top Z_1 + \mu^\top Z_2}{hat Z_1(s_0) = lambda^top Z_1 + mu^top Z_2}, system
-#' \deqn{\[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}\] \[\lambda; \mu\] = \[c_{0p}; c_{0s}\]}{\[C_pp C_ps; C_ps^top C_ss\] \[lambda; mu\] = \[c_0p; c_0s\]}.
+#' \deqn{\hat Z_1(s_0) = \lambda^\top Z_1 + \mu^\top Z_2}{hat Z_1(s_0) = lambda^top Z_1 +
+#' mu^top Z_2}, system
+#' \deqn{\[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}\] \[\lambda; \mu\] = \[c_{0p};
+#' c_{0s}\]}{\[C_pp C_ps; C_ps^top C_ss\] \[lambda; mu\] = \[c_0p; c_0s\]}.
 #'
 #' @param x Primary variable (n,).
 #' @param y Secondary variable (n,).

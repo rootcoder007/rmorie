@@ -9,13 +9,18 @@
 
 #' .pibmd_moments
 #'
-#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
+#' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pibmd_moments(v = x)
+#' res
 .pibmd_moments <- function(v) {
   n <- length(v)
   m <- sum(v) / n
@@ -26,7 +31,8 @@
 # KL(q || p) for two normals -- exact when both are normal.
 #' KL(q || p) for two normals -- exact when both are normal
 #'
-#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' A step of the pibmd_native implementation. Called by
+#' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -45,7 +51,8 @@
 # Type-7 quantile of an already-sorted vector.
 #' Type-7 quantile of an already-sorted vector
 #'
-#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth}, \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' A step of the pibmd_native implementation. Called by \code{.pibmd_bandwidth},
+#' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -72,6 +79,10 @@
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pibmd_bandwidth(v = x)
+#' res
 .pibmd_bandwidth <- function(v) {
   n <- length(v)
   s <- sort(v)
@@ -102,7 +113,8 @@
 # KL(q || p) from Gaussian kernel densities integrated on a grid.
 #' KL(q || p) from Gaussian kernel densities integrated on a grid
 #'
-#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' A step of the pibmd_native implementation. Called by
+#' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -137,7 +149,8 @@
 
 #' .pibmd_ecdf
 #'
-#' A step of the pibmd_native implementation. Called by \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
+#' A step of the pibmd_native implementation. Called by
+#' \code{morie_pibmd_prior_informativeness_bias_diagnostic}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -156,7 +169,14 @@
 #' @param samples Coerced to numeric by the body, with \code{as.numeric}.
 #' @param prior A list; the body reads \code{$mean}, \code{$sd} from it.
 #' @param n_grid Coerced to integer by the body, with \code{as.integer}. Defaults to \code{512L}.
-#' @return A list with \code{estimate}, \code{kl_divergence}, \code{kl_divergence_kde}, \code{kl_divergence_reverse}, \code{kl_symmetric}, \code{shrinkage}, \code{bias_in_prior_sd}, \code{wasserstein_1}, \code{conflict_p_value}, \code{conflict_p_value_gaussian}, \code{conflict_p_value_empirical}, \code{posterior_mean}, \code{posterior_var}, \code{posterior_sd}, \code{prior_mean}, \code{prior_var}, \code{prior_sd}, \code{n_posterior}, \code{n_prior}, \code{moments_only}, \code{verdict}, \code{informativeness}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{kl_divergence}, \code{kl_divergence_kde},
+#' \code{kl_divergence_reverse}, \code{kl_symmetric}, \code{shrinkage},
+#' \code{bias_in_prior_sd}, \code{wasserstein_1}, \code{conflict_p_value},
+#' \code{conflict_p_value_gaussian}, \code{conflict_p_value_empirical},
+#' \code{posterior_mean}, \code{posterior_var}, \code{posterior_sd}, \code{prior_mean},
+#' \code{prior_var}, \code{prior_sd}, \code{n_posterior}, \code{n_prior},
+#' \code{moments_only}, \code{verdict}, \code{informativeness}, \code{method},
+#' \code{note}.
 #' @export
 morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
                                                               n_grid = 512L) {
@@ -270,6 +290,9 @@ morie_pibmd_prior_informativeness_bias_diagnostic <- function(samples, prior,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .pibmd_cheatsheet()
+#' res
 .pibmd_cheatsheet <- function() {
   paste0("pibmd: morie_pibmd_prior_informativeness_bias_diagnostic(samples, ",
          "prior) -> KL(posterior||prior) two ways, shrinkage and a ",

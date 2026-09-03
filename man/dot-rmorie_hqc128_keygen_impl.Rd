@@ -11,3 +11,7 @@ A step of the RcppExports implementation. No other function in the package calls
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .rmorie_hqc128_keygen_impl()
+res
+}

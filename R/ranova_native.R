@@ -19,6 +19,11 @@
 #' @param group Coerced to character by the body, with \code{as.character}.
 #' @return A list with \code{keys}, \code{gs}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .vc_groups(y = y, group = g)
+#' res
 .vc_groups <- function(y, group) {
   k <- as.character(group)
   keys <- sort(unique(k))

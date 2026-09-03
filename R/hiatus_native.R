@@ -9,7 +9,8 @@
 
 #' ._check
 #'
-#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{derivatives}.
+#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
+#' \code{derivatives}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -55,7 +56,8 @@
 
 #' basic_reproduction_numbers
 #'
-#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate}, \code{endemic_equilibrium}.
+#' A step of the hiatus_native implementation. Called by \code{.hiatus_simulate},
+#' \code{endemic_equilibrium}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -162,8 +164,11 @@ derivatives <- function(S, I, beta, nu, mu, sigma) {
 #' @param t_end Numeric; combined arithmetically in the body. Defaults to \code{2000}.
 #' @param dt Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param mutation Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @param record_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
-#' @return A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj}, \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables}, \code{n_variables_history_based}, \code{surviving}, \code{method}.
+#' @param record_every Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{100L}.
+#' @return A list with \code{estimate}, \code{S}, \code{I}, \code{t}, \code{S_traj},
+#' \code{I_traj}, \code{n_strains}, \code{R0}, \code{n_variables},
+#' \code{n_variables_history_based}, \code{surviving}, \code{method}.
 #' @export
 .hiatus_simulate <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
                      t_end = 2000.0, dt = 0.05, mutation = 0.0,
@@ -317,6 +322,9 @@ morie_hiatus <- function(beta, nu, mu, sigma, S0 = NULL, I0 = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hiatus_cheatsheet()
+#' res
 .hiatus_cheatsheet <- function() {
   paste("hiatus: many-strain dynamics in 2n variables, not 2^n. Status-based + reduced transmission + POLARIZED immunity (some hosts fully immune, not all partly) means one variable per host per strain. dI_i = b_i S_i I_i - (v_i + mu) I_i; dS_i = mu - sum_j b_j S_i sigma_ij I_j - mu S_i. sigma_ij = P(infection by j immunises against i). Off-diagonal sigma = 0 decouples the strains exactly; sigma = 1 everywhere gives competitive exclusion.")
 }

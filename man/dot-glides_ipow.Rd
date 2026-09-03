@@ -19,3 +19,8 @@ language\'s power operator: R uses repeated squaring for an integer
 exponent and Python calls the C library\'s pow, and they disagree in
 the last bit.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .glides_ipow(x = x, k = 3L)
+res
+}

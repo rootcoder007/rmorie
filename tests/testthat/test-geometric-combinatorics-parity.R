@@ -43,7 +43,8 @@ test_that("the hull is idempotent and contains every point", {
     again <- morie_lattice_convex_hull(hm)$hull
     expect_equal(hm[order(hm[, 1], hm[, 2]), ],
                  again[order(again[, 1], again[, 2]), ])
-    nh <- nrow(hm); nxt <- c(2:nh, 1L)
+    nh <- nrow(hm)
+    nxt <- c(2:nh, 1L)
     for (i in seq_len(nrow(p))) {
       crosses <- vapply(seq_len(nh), function(k) {
         .morie_cross3(hm[k, ], hm[nxt[k], ], p[i, ])
@@ -97,7 +98,8 @@ test_that("Pick verified by enumeration on star-shaped fuzz polygons", {
                                                                 drop = FALSE]
     raw <- unique(raw)
     if (nrow(raw) < 3L) next
-    cx <- mean(raw[, 1]); cy <- mean(raw[, 2])
+    cx <- mean(raw[, 1])
+    cy <- mean(raw[, 2])
     ang <- atan2(raw[, 2] - cy, raw[, 1] - cx)
     rad <- (raw[, 1] - cx)^2 + (raw[, 2] - cy)^2
     ord <- order(ang, rad)
@@ -172,7 +174,8 @@ test_that("the guarantee holds on every permutation at threshold", {
 
 test_that("the extremal sequence escapes at length below threshold", {
   for (rs in list(c(3, 3), c(4, 4), c(3, 5), c(5, 3))) {
-    r <- rs[1]; s <- rs[2]
+    r <- rs[1]
+    s <- rs[2]
     seq_ <- unlist(lapply(seq.int(s - 1, 1), function(block) {
       block * 100 + seq.int(0, r - 2)
     }))
@@ -187,7 +190,8 @@ test_that("the extremal sequence escapes at length below threshold", {
 test_that("the guarantee holds on random sequences at threshold", {
   set.seed(3)
   for (rep in seq_len(120L)) {
-    r <- sample(2:5, 1); s <- sample(2:5, 1)
+    r <- sample(2:5, 1)
+    s <- sample(2:5, 1)
     n <- (r - 1) * (s - 1) + 1
     expect_true(morie_erdos_szekeres_check(sample(1000, n), r = r,
                                            s = s)$guarantee_met)

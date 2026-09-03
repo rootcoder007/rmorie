@@ -18,5 +18,7 @@ The value of \code{K}, as built in the body.
 }
 \keyword{internal}
 \examples{
-morie_snpqc1_kinship_matrix(genotypes = list(a = 1, b = 2))
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1_kinship_matrix(genotypes = list(a = 1, b = 2))
+}
 }

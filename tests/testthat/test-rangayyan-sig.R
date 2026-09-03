@@ -4,7 +4,8 @@
 
 test_that("AICorder implements eq (7.60)", {
   eps <- c(10, 4, 3.9, 3.85)
-  n <- 100; n_eff <- 40
+  n <- 100
+  n_eff <- 40
   want <- log(eps) + 2 * seq_along(eps) / n_eff
   r <- AICorder(eps, n)
   expect_equal(unname(r$criterion), want, tolerance = 1e-15)
@@ -26,7 +27,9 @@ test_that("AICorder validates its inputs", {
 })
 
 test_that("BartlettPSD locates a pure tone and averages, not sums", {
-  fs <- 64; n <- 256; f0 <- 8
+  fs <- 64
+  n <- 256
+  f0 <- 8
   x <- sin(2 * pi * f0 * (0:(n - 1)) / fs)
   b <- BartlettPSD(x, fs = fs, n_segments = 4)
   expect_equal(b$freqs[which.max(b$psd)], f0)

@@ -19,3 +19,8 @@ A step of the schab_glmm_shared implementation. No other function in the package
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .schab_bym_convolution(u = x, v = x)
+res
+}

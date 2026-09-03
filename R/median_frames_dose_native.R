@@ -21,6 +21,9 @@
 #' @param p See Usage.
 #' @return The value of \code{stats::qnorm}.
 #' @export
+#' @examples
+#' res <- .morie_z(p = 0.5)
+#' res
 .morie_z <- function(p) stats::qnorm(p)
 
 #' .morie_binom_cdf_half
@@ -32,6 +35,9 @@
 #' @param n Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_binom_cdf_half(k = 3L, n = 3L)
+#' res
 .morie_binom_cdf_half <- function(k, n) {
   if (k < 0) return(0)
   if (k >= n) return(1)
@@ -465,7 +471,8 @@ morie_effective_dose <- function(intercept, slope, cov, level = 0.5,
 #' @references Finney DJ (1971) \emph{Probit Analysis}, 3rd ed., Ch 3-4.
 #' @export
 #' @examples
-#' morie_ld50(dose = c(1, 2, 3, 4, 5, 6, 7, 8), n_dead = c(1, 2, 3, 4, 5, 6, 7, 8), n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_ld50(dose = c(1, 2, 3, 4, 5, 6, 7, 8), n_dead = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' n_total = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_ld50 <- function(dose, n_dead, n_total, link = c("probit", "logit"),
                        level = 0.5, alpha = 0.05, log_dose = TRUE) {
   link <- match.arg(link)

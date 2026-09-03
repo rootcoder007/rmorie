@@ -22,7 +22,7 @@ A list with \code{value} and the numeric \code{abs.error}.
 Integrates \code{integrand} (default: the density, giving total mass 1)
 over the distribution's support. Stability conditions -- the integrand
 must be finite and the density non-negative and integrable -- are
-documented and pre-checked before \code{\link[stats:integrate]{stats::integrate()}} is called.
+documented and pre-checked before \code{stats::integrate()} is called.
 }
 \examples{
 morie_dist_integrate(morie_distribution("normal", mean = 0, sd = 1))$value

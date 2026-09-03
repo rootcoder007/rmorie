@@ -18,3 +18,7 @@ A numeric value.
 Part of the median_frames_dose_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+res <- .morie_binom_cdf_half(k = 3L, n = 3L)
+res
+}

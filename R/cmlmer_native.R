@@ -80,6 +80,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .cmlmer_snap12(x = x)
+#' res
 .cmlmer_snap12 <- function(x) floor(x * 1e12 + 0.5) / 1e12
 
 #' .cmlmer_rows
@@ -91,6 +95,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .cmlmer_rows(x = x)
+#' res
 .cmlmer_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -102,13 +110,18 @@
 
 #' .cmlmer_chol
 #'
-#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}.
+#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at},
+#' \code{morie_cmlmer_compressed_lmm}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .cmlmer_chol(A = A)
+#' res
 .cmlmer_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -132,7 +145,8 @@
 
 #' .cmlmer_solve
 #'
-#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at}, \code{morie_cmlmer_compressed_lmm}.
+#' A step of the cmlmer_native implementation. Called by \code{.cmlmer_reml_at},
+#' \code{morie_cmlmer_compressed_lmm}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -267,13 +281,21 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param M Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param K Passed to \code{.cmlmer_rows}.
-#' @param clusters Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param clusters Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.
 #' @param compare_levels Optional; may be \code{NULL}. A vector; its length is taken.
-#' @param log_delta_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.
-#' @param log_delta_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.
-#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.
-#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
+#' @param log_delta_lo Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{-10}.
+#' @param log_delta_hi Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{10}.
+#' @param max_iter Accepted by the signature and not used anywhere in the body. Defaults
+#' to \code{200L}.
+#' @return A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value},
+#' \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship},
+#' \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2},
+#' \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n},
+#' \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
 #' @export
 morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
                                         compare_levels = NULL,
@@ -427,6 +449,9 @@ morie_cmlmer_compressed_lmm <- function(y, M, K, clusters = NULL, X = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .cmlmer_cheatsheet()
+#' res
 .cmlmer_cheatsheet <- function() {
   paste0("cmlmer: morie_cmlmer_compressed_lmm(y, M, K, clusters) -> ",
          "compressed MLM genome scan with REML variance components ",

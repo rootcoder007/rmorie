@@ -25,7 +25,8 @@
 #'   Cressie (1993), Statistics for Spatial Data, rev. ed., Wiley.
 #' @export
 #' @examples
-#' Krig(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7, 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Krig(known_coords = c(1, 2, 3, 4, 5, 6, 7, 8), known_values = c(1, 2, 3, 4, 5, 6, 7,
+#' 8), predict_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 Krig <- function(known_coords, known_values, predict_coords,
                  nugget = 0, sill = 1, range_ = 1) {
   K <- .s03mat(known_coords)

@@ -19,7 +19,8 @@
 #' @param x Sample.
 #' @param p Probabilities in `(0, 1]`.
 #' @return Named list with ``estimate``, ``index``, ``p``, ``n``, ``method``.
-#' @references Fauzi and Maesono (2023), Eq. (3.1) and the display defining the sample quantile in Sec. 3.2.
+#' @references Fauzi and Maesono (2023), Eq. (3.1) and the display defining the sample
+#' quantile in Sec. 3.2.
 #' @examples
 #' Smpqnt(c(1, 2, 3, 4), p = 0.5)
 #' @export

@@ -48,5 +48,6 @@ the barrier method\'s complexity claim hold.
 }
 \keyword{internal}
 \examples{
-sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8), x0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+sdpwts_solve_sdp(c = c(1, 2, 3, 4, 5, 6, 7, 8), F0 = 5L, Fs = c(1, 2, 3, 4, 5, 6, 7, 8),
+  x0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

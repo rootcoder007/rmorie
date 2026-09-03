@@ -19,3 +19,9 @@ The value of \code{H}, as built in the body.
 \description{
 route Coles p. 56 prescribes)
 }
+\examples{
+fn <- function(v) sum(v^2)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .evt_num_hessian(f = fn, theta = x)
+res
+}

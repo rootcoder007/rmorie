@@ -65,6 +65,10 @@
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .warpL_vec(x = x)
+#' res
 .warpL_vec <- function(x) {
   as.numeric(x)
 }
@@ -81,6 +85,9 @@
 #' @param scheme Passed to \code{identical}. Defaults to \code{"reciprocal"}.
 #' @return The value of \code{a}, as built in the body.
 #' @export
+#' @examples
+#' res <- .warpL_alpha_weights(n = 3L)
+#' res
 .warpL_alpha_weights <- function(n, scheme = "reciprocal") {
   N <- as.integer(n)
   if (N < 1) stop("warpL: n must be at least 1")
@@ -105,7 +112,8 @@
 
 #' .warpL_rank_weight
 #'
-#' A step of the warpL_native implementation. Called by \code{.warpL_warp_loss}, \code{morie_warpL_rank_weight}.
+#' A step of the warpL_native implementation. Called by \code{.warpL_warp_loss},
+#' \code{morie_warpL_rank_weight}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -122,7 +130,8 @@
 
 #' .warpL_estimate_rank
 #'
-#' A step of the warpL_native implementation. Called by \code{.warpL_sample_violation}, \code{morie_warpL_estimate_rank}.
+#' A step of the warpL_native implementation. Called by \code{.warpL_sample_violation},
+#' \code{morie_warpL_estimate_rank}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -139,7 +148,8 @@
 
 #' .warpL_sample_violation
 #'
-#' A step of the warpL_native implementation. Called by \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
+#' A step of the warpL_native implementation. Called by
+#' \code{morie_warpL_sample_violation}, \code{morie_warpL_warp_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -148,8 +158,10 @@
 #' @param n_labels Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Passed to \code{.ghc_unif}.
 #' @param margin Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @param max_draws Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{violated}, \code{draws}, \code{negative}, \code{estimated_rank}, \code{capped}, \code{note}.
+#' @param max_draws Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{violated}, \code{draws}, \code{negative},
+#' \code{estimated_rank}, \code{capped}, \code{note}.
 #' @export
 .warpL_sample_violation <- function(score_positive, negative_scorer, n_labels,
                                      rng, margin = 1.0, max_draws = NULL) {
@@ -187,7 +199,8 @@
 
 #' .warpL_warp_loss
 #'
-#' A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss}, \code{morie_warpL_warp_step}.
+#' A step of the warpL_native implementation. Called by \code{morie_warpL_warp_loss},
+#' \code{morie_warpL_warp_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -302,7 +315,9 @@ morie_warpL_warp_loss <- function(score_positive, score_negative, estimated_rank
 #' @param alphas Passed to \code{.warpL_warp_loss}.
 #' @param lr Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.05}.
 #' @param margin Passed to \code{.warpL_sample_violation}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{updated}, \code{loss}, \code{user}, \code{draws}, \code{estimated_rank}, \code{rank_weight}, \code{negative}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{updated}, \code{loss}, \code{user},
+#' \code{draws}, \code{estimated_rank}, \code{rank_weight}, \code{negative},
+#' \code{method}, \code{note}.
 #' @export
 morie_warpL_warp_step <- function(positive, negatives, embed_user, rng, alphas,
                                    lr = 0.05, margin = 1.0) {

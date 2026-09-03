@@ -18,3 +18,8 @@ The value of \code{[}.
 of two at least 2n, divided by n (biased, which is what keeps the
 sequence positive semi-definite).
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_mcmc_autocov(x = x)
+res
+}

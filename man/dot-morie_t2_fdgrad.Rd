@@ -21,3 +21,9 @@ A step of the tail2_t03 implementation. Called by \code{PenaltyMin}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+fn <- function(v) sum(v^2)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_t2_fdgrad(fun = fn, x = x, h = 0.5)
+res
+}

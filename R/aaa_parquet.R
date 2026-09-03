@@ -61,7 +61,8 @@
 
 #' .pq_byte
 #'
-#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_scalar} and 2 others in the module.
+#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
+#' \code{.pq_scalar} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -76,7 +77,8 @@
 
 #' .pq_varint
 #'
-#' A step of the parquet implementation. Called by \code{.pq_binary}, \code{.pq_list}, \code{.pq_map} and 1 others in the module.
+#' A step of the parquet implementation. Called by \code{.pq_binary}, \code{.pq_list},
+#' \code{.pq_map} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -147,7 +149,8 @@
 
 #' .pq_scalar
 #'
-#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map}, \code{.pq_struct}.
+#' A step of the parquet implementation. Called by \code{.pq_list}, \code{.pq_map},
+#' \code{.pq_struct}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -236,7 +239,8 @@
 
 #' .pq_struct
 #'
-#' A step of the parquet implementation. Called by \code{.pq_column_values}, \code{.pq_read_footer}, \code{.pq_scalar}.
+#' A step of the parquet implementation. Called by \code{.pq_column_values},
+#' \code{.pq_read_footer}, \code{.pq_scalar}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -260,7 +264,8 @@
 
 #' .pq_f
 #'
-#' A step of the parquet implementation. Called by \code{.pq_column_values}, \code{morie_read_parquet}.
+#' A step of the parquet implementation. Called by \code{.pq_column_values},
+#' \code{morie_read_parquet}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -282,6 +287,9 @@
 #'
 #' @return The value of \code{e}, as built in the body.
 #' @export
+#' @examples
+#' res <- .pq_writer()
+#' res
 .pq_writer <- function() {
   e <- new.env(parent = emptyenv())
   e$parts <- list()
@@ -291,7 +299,8 @@
 
 #' .pq_emit
 #'
-#' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield}, \code{.pq_wlisthdr} and 4 others in the module.
+#' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wfield},
+#' \code{.pq_wlisthdr} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -307,7 +316,8 @@
 
 #' .pq_wvarint
 #'
-#' A step of the parquet implementation. Called by \code{.pq_wbinary}, \code{.pq_wlisthdr}, \code{.pq_wzigzag}.
+#' A step of the parquet implementation. Called by \code{.pq_wbinary},
+#' \code{.pq_wlisthdr}, \code{.pq_wzigzag}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -330,7 +340,8 @@
 
 #' .pq_wzigzag
 #'
-#' A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32}, \code{.pq_wi64} and 1 others in the module.
+#' A step of the parquet implementation. Called by \code{.pq_wfield}, \code{.pq_wi32},
+#' \code{.pq_wi64} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -360,7 +371,8 @@
 
 #' .pq_wfield
 #'
-#' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32}, \code{.pq_wi64} and 4 others in the module.
+#' A step of the parquet implementation. Called by \code{.pq_wbytes}, \code{.pq_wi32},
+#' \code{.pq_wi64} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -437,7 +449,8 @@
 
 #' .pq_wlisthdr
 #'
-#' A step of the parquet implementation. Called by \code{.pq_wlistbin}, \code{.pq_wlisti32}, \code{.pq_wliststruct}.
+#' A step of the parquet implementation. Called by \code{.pq_wlistbin},
+#' \code{.pq_wlisti32}, \code{.pq_wliststruct}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -631,6 +644,10 @@
 #' @param data A vector; its length is taken and its elements indexed.
 #' @return The value of \code{do.call}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pq_snappy_compress(data = x)
+#' res
 .pq_snappy_compress <- function(data) {
   # Literal-only stream: fully conformant, just does not shrink.
   # ponytail: no match-finder; add one if written size ever matters.
@@ -730,6 +747,9 @@
 #' @param n Passed to \code{>}.
 #' @return The value of \code{w}, as built in the body.
 #' @export
+#' @examples
+#' res <- .pq_bit_width(n = 3L)
+#' res
 .pq_bit_width <- function(n) {
   w <- 0L
   while (n > 0) {
@@ -1240,6 +1260,10 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @param v Numeric; the body checks with \code{is.numeric}.
 #' @return A list with \code{type}, \code{converted}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pq_infer(v = x)
+#' res
 .pq_infer <- function(v) {
   # Date and POSIXct must keep their logical type on the way out.
   # Without this a column read as TIMESTAMP_MICROS was written back as a
@@ -1290,6 +1314,10 @@ morie_read_parquet <- function(path, columns = NULL) {
 #' @param values Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{writeBin}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .pq_encode_i64(values = x)
+#' res
 .pq_encode_i64 <- function(values) {
   # writeBin has no 64-bit integer; emit two 32-bit halves, folding the
   # low half back into signed range because that is all writeBin takes.

@@ -20,7 +20,10 @@
 #' @param H Coerced to numeric by the body, with \code{as.numeric}.
 #' @param cluster Coerced to character by the body, with \code{as.character}.
 #' @param small_sample A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{coefficients}, \code{std_errors}, \code{naive_std_errors}, \code{vcov}, \code{residuals}, \code{n}, \code{n_clusters}, \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction}, \code{inflation}, \code{method}.
+#' @return A list with \code{estimate}, \code{coefficients}, \code{std_errors},
+#' \code{naive_std_errors}, \code{vcov}, \code{residuals}, \code{n}, \code{n_clusters},
+#' \code{n_coefficients}, \code{sum_weights}, \code{finite_sample_correction},
+#' \code{inflation}, \code{method}.
 #' @export
 morie_acigls <- function(y, A, H, cluster, small_sample = TRUE) {
   y <- as.numeric(y)

@@ -27,13 +27,17 @@
 
 #' .zfmech_check_rho
 #'
-#' A step of the zfmech_native implementation. Called by \code{group_privacy}, \code{postprocessing}, \code{sigma_for_rho} and 1 others in the module.
+#' A step of the zfmech_native implementation. Called by \code{group_privacy},
+#' \code{postprocessing}, \code{sigma_for_rho} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{rho}, as built in the body.
 #' @export
+#' @examples
+#' res <- .zfmech_check_rho(rho = 0.5)
+#' res
 .zfmech_check_rho <- function(rho) {
   rho <- as.numeric(rho)
   if (rho <= 0)
@@ -249,6 +253,9 @@ postprocessing <- function(rho) {
 #'   both conversions.
 #' @references Bun, M. & Steinke, T. (2016).
 #' @export
+#' @examples
+#' res <- .zfmech_cheatsheet()
+#' res
 .zfmech_cheatsheet <- function() {
   paste("zfmech: rho-zCDP means D_alpha(M(x)||M(x')) <= rho alpha ",
         "for EVERY alpha > 1. Gaussian mechanism: rho = ",

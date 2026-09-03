@@ -15,3 +15,7 @@ Numeric vector of adjusted p-values.
 \description{
 Benjamini-Hochberg step-up adjusted p-values
 }
+\examples{
+res <- .deseq2_benjamini_hochberg(p = 0.5)
+res
+}

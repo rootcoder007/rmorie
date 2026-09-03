@@ -17,3 +17,8 @@ A step of the helpers_gp_core implementation. Called by \code{.gpinv}, \code{.gp
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .gppinv(A = A)
+res
+}

@@ -6,15 +6,21 @@
 N <- 64
 
 echo_sig <- function(a = 0.5, n0 = 8, n = N) {
-  x <- numeric(n); x[1] <- 1; x[n0 + 1L] <- a; x
+  x <- numeric(n)
+  x[1] <- 1
+  x[n0 + 1L] <- a
+  x
 }
 
 wavelet <- function(n = N) {
-  h <- numeric(n); h[1:4] <- c(1, 0.6, -0.3, 0.1); h
+  h <- numeric(n)
+  h[1:4] <- c(1, 0.6, -0.3, 0.1)
+  h
 }
 
 test_that("the complex cepstrum of an echo is the train of eq (4.80)", {
-  a <- 0.5; n0 <- 8
+  a <- 0.5
+  n0 <- 8
   c0 <- CCepstrum(echo_sig(a, n0))$cepstrum
   for (k in 1:4) {
     expect_equal(c0[k * n0 + 1L], (-1)^(k + 1) * a^k / k, tolerance = 2e-3)
@@ -24,12 +30,15 @@ test_that("the complex cepstrum of an echo is the train of eq (4.80)", {
 })
 
 test_that("a pure delay is removed as the z^r factor of eq (4.68)", {
-  x <- numeric(N); x[6] <- 1
+  x <- numeric(N)
+  x[6] <- 1
   expect_equal(CCepstrum(x)$delay_removed, -5L)
 })
 
 test_that("the complex log needs a nonzero spectrum", {
-  x <- numeric(N); x[1] <- 1; x[2] <- -1
+  x <- numeric(N)
+  x[1] <- 1
+  x[2] <- -1
   expect_error(CCepstrum(x), "nonzero spectrum")
 })
 
@@ -77,7 +86,9 @@ test_that("CCepClosed implements eq (4.72) and its phase properties", {
 })
 
 test_that("CCepClosed agrees with the numerical cepstrum", {
-  x <- numeric(N); x[1] <- 1; x[2] <- -0.5
+  x <- numeric(N)
+  x[1] <- 1
+  x[2] <- -0.5
   num <- CCepstrum(x)$cepstrum
   cl <- CCepClosed(1, 0.5, complex(0), complex(0), complex(0), nmax = 5)
   for (n in seq_along(cl$positive)) {
@@ -94,7 +105,9 @@ test_that("RatZ checks root membership and evaluates the product form", {
 })
 
 test_that("CCepDecay bounds the numerical cepstrum (eq 4.73)", {
-  x <- numeric(N); x[1] <- 1; x[2] <- -0.5
+  x <- numeric(N)
+  x[1] <- 1
+  x[2] <- -0.5
   c0 <- CCepstrum(x)$cepstrum
   b <- CCepDecay(0.5, complex(0), complex(0), complex(0), nmax = 8)
   expect_equal(b$alpha, 0.5)
@@ -144,7 +157,8 @@ test_that("Lifter is symmetric and its halves partition the cepstrum", {
 })
 
 test_that("HomoFilt separates a slow-times-fast product", {
-  n <- 128; i <- 0:(n - 1)
+  n <- 128
+  i <- 0:(n - 1)
   slow <- 2 + sin(2 * pi * i / n)
   fast <- 1 + 0.3 * sin(2 * pi * 20 * i / n)
   low <- HomoFilt(slow * fast, cutoff = 3, keep = "low")$y
@@ -173,7 +187,9 @@ test_that("HomPred components convolve circularly back to the signal", {
 })
 
 test_that("VocalTract finds the pitch inside the plausible range", {
-  fs <- 8000; n <- 512; period <- 64
+  fs <- 8000
+  n <- 512
+  period <- 64
   h <- exp(-(0:47) / 12) * sin(2 * pi * 700 * (0:47) / fs)
   y <- numeric(n)
   for (start in seq(0, n - 48 - 1, by = period)) {
@@ -188,14 +204,18 @@ test_that("VocalTract finds the pitch inside the plausible range", {
 })
 
 test_that("MinPhase preserves the magnitude spectrum", {
-  x <- numeric(32); x[1] <- 1; x[6] <- -1.5; x[12] <- 0.4
+  x <- numeric(32)
+  x[1] <- 1
+  x[6] <- -1.5
+  x[12] <- 0.4
   r <- MinPhase(x)
   expect_true(r$magnitude_preserved)
   expect_true(r$energy_front_loaded)
 })
 
 test_that("Mfcc warps the axis and separates gain from shape", {
-  fs <- 8000; i <- 0:511
+  fs <- 8000
+  i <- 0:511
   x <- sin(2 * pi * 440 * i / fs)
   r <- Mfcc(x, fs = fs, n_filters = 20, n_coeffs = 13)
   expect_equal(length(r$mfcc), 13L)

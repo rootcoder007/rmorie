@@ -17,3 +17,8 @@ A numeric value.
 \description{
 4 (T/100)^(2/9).
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .nw_lrv(u = x)
+res
+}

@@ -18,8 +18,11 @@ A list with \code{k}, \code{sigma}.
 Zhang-Stephens empirical-Bayes generalised Pareto fit. Fixed grid
 
 of
-}
 30 + floor(sqrt(N)) points weighted by the profile likelihood -- no
-
 optimiser, so the arms cannot land on different local optima.
-
+}
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .s4_gpdfit(x = x)
+res
+}

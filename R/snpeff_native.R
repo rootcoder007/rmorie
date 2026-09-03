@@ -49,7 +49,8 @@ codon_table <- function() .SNPEFF_CODONS
 
 #' translate
 #'
-#' A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms}, \code{annotate_variant}, \code{snpeff}.
+#' A step of the snpeff_native implementation. Called by \code{.vepan_coding_terms},
+#' \code{annotate_variant}, \code{snpeff}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,7 +112,9 @@ translate <- function(seq, to_stop = FALSE) {
 #' @param pos Numeric; combined arithmetically in the body.
 #' @param codon_index Carried through into a list the body builds.
 #' @param hgvs_p Carried through into a list the body builds.
-#' @return A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon}, \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c}, \code{pos}, \code{ref}, \code{alt}.
+#' @return A list with \code{effect}, \code{impact}, \code{ref_codon}, \code{alt_codon},
+#' \code{ref_aa}, \code{alt_aa}, \code{codon_index}, \code{hgvs_p}, \code{hgvs_c},
+#' \code{pos}, \code{ref}, \code{alt}.
 #' @export
 .snpeff_pack <- function(effect, ref_codon, alt_codon, ref_aa, alt_aa,
                          ref, alt, pos, codon_index = NULL,
@@ -138,7 +141,8 @@ translate <- function(seq, to_stop = FALSE) {
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Passed to \code{<=}. Defaults to \code{5000}.
 #' @param downstream Passed to \code{<=}. Defaults to \code{5000}.
-#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body,
+#' with \code{as.integer}.
 #' @return The value of \code{.snpeff_pack}.
 #' @export
 annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
@@ -233,8 +237,10 @@ annotate_variant <- function(cds, pos, ref, alt, cds_start = 0,
 #' @param cds_start Numeric; combined arithmetically in the body. Defaults to \code{0}.
 #' @param upstream Passed to \code{annotate_variant}. Defaults to \code{5000}.
 #' @param downstream Passed to \code{annotate_variant}. Defaults to \code{5000}.
-#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts}, \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
+#' @param transcript_len Optional; may be \code{NULL}. Coerced to integer by the body,
+#' with \code{as.integer}.
+#' @return A list with \code{estimate}, \code{annotations}, \code{effect_counts},
+#' \code{impact_counts}, \code{n_variants}, \code{protein}, \code{method}, \code{note}.
 #' @export
 snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
                    downstream = 5000, transcript_len = NULL) {
@@ -294,6 +300,9 @@ snpeff <- function(cds, variants, cds_start = 0, upstream = 5000,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .snpeff_cheatsheet()
+#' res
 .snpeff_cheatsheet <- function() {
   paste0("snpeff: variant annotation (Cingolani et al. 2012). ",
          "Classify by codon change: synonymous, missense, ",

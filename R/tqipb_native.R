@@ -72,6 +72,9 @@
 #'
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tqipb_pd()
+#' res
 .tqipb_pd <- function() sqrt(3) * pi * pi
 
 # 4^b by repeated multiplication. Written out because R's `^` on an
@@ -85,6 +88,9 @@
 #' @param b A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' res <- .tqipb_pow4(b = 3L)
+#' res
 .tqipb_pow4 <- function(b) {
   p <- 1
   b <- as.integer(b)

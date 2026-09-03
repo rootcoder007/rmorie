@@ -73,7 +73,8 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 
 #' smoothed_parameter
 #'
-#' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed}, \code{select_bandwidth}.
+#' A step of the tlcvnp_native implementation. Called by \code{cv_tmle_smoothed},
+#' \code{select_bandwidth}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -81,7 +82,8 @@ kernel_smooth <- function(u, kernel = "epanechnikov") {
 #' @param x0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param h Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Passed to \code{kernel_smooth}. Defaults to \code{"epanechnikov"}.
-#' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n}, \code{influence_curve}, \code{note}.
+#' @return A list with \code{psi_h}, \code{se}, \code{h}, \code{n},
+#' \code{influence_curve}, \code{note}.
 #' @export
 smoothed_parameter <- function(X, x0, h, kernel = "epanechnikov") {
   v <- as.numeric(X)
@@ -187,7 +189,8 @@ select_bandwidth <- function(X, x0, bandwidths,
 #' @param kernel Passed to \code{select_bandwidth}. Defaults to \code{"epanechnikov"}.
 #' @param V Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
-#' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci}, \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{se}, \code{ci},
+#' \code{bandwidths}, \code{fold_estimates}, \code{V}, \code{method}, \code{note}.
 #' @export
 cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
                              V = 5L, seed = 0L) {
@@ -235,6 +238,9 @@ cv_tmle_smoothed <- function(X, x0, bandwidths, kernel = "epanechnikov",
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlcvnp_cheatsheet()
+#' res
 .tlcvnp_cheatsheet <- function() {
   paste("tlcvnp: a density or regression curve AT A POINT is ",
         "NONpathwise differentiable -- no efficient influence ",

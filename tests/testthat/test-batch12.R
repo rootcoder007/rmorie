@@ -2,7 +2,8 @@
 # Batch 12: ksr09-ksr20, ktaup, kvcmp, latnh
 
 test_that("morie_ksr09_kosorok_z_estimator solves the estimating equation", {
-  set.seed(4); x <- rnorm(150)
+  set.seed(4)
+  x <- rnorm(150)
   r <- morie_ksr09_kosorok_z_estimator(x, kind = "mean")
   expect_true(all(c("estimate", "psi_at_estimate", "lower", "upper", "n") %in% names(r)))
   expect_equal(r$estimate, mean(x), tolerance = 1e-6)
@@ -128,7 +129,8 @@ test_that("morie_ksr14_kosorok_profile_likelihood: alias identity", {
 })
 
 test_that("morie_ksr15_kosorok_one_step_estimator takes one Newton step from theta0", {
-  set.seed(5); x <- rnorm(120)
+  set.seed(5)
+  x <- rnorm(120)
   r <- morie_ksr15_kosorok_one_step_estimator(x, theta0 = median(x), kind = "mean")
   expect_true(all(c("estimate", "theta0", "step", "psi_mean", "derivative", "n") %in% names(r)))
   expect_equal(r$estimate, r$theta0 + r$step, tolerance = 1e-12)

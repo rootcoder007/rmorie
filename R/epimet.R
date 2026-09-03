@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Renewal-equation reproduction number with reporting delay
 #'
-#' Formula: I_t = R_t sum_\{tau=1\}^\{gmax\} g(tau) I_\{t-tau\}, so R_t = I_t / sum_tau g(tau) I_\{t-tau\}
+#' Formula: I_t = R_t sum_\{tau=1\}^\{gmax\} g(tau) I_\{t-tau\}, so R_t = I_t / sum_tau
+#' g(tau) I_\{t-tau\}
 #'
 #' @param incidence Reported cases per time step.
 #' @param gen_int Discretised generation-time pmf over lags 1..gmax.
@@ -11,7 +12,10 @@
 #' @param gen_int See Usage.
 #' @param delays See Usage.
 #' @return List with ``rt``, ``time``, ``infections``, ``shift``, ``mean_rt``, ``n``.
-#' @references Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition verified against the package's own estimate_infections() vignette, which states I_t = R_t sum_tau g(tau) I_\{t-tau\} and the delay convolution D_t = xi sum_tau xi(tau) I_\{t-tau\}.
+#' @references Abbott, Hellewell, Sherratt et al (2020), EpiNow2. Model definition
+#' verified against the package's own estimate_infections() vignette, which states I_t =
+#' R_t sum_tau g(tau) I_\{t-tau\} and the delay convolution D_t = xi sum_tau xi(tau)
+#' I_\{t-tau\}.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

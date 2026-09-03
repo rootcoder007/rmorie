@@ -2,12 +2,12 @@
 % Please edit documentation in R/ts_forecast.R
 \name{morie_ts_undifference}
 \alias{morie_ts_undifference}
-\title{Reverse \code{\link[=morie_ts_difference]{morie_ts_difference()}}}
+\title{Reverse \code{morie_ts_difference()}}
 \usage{
 morie_ts_undifference(dx, init = attr(dx, "init"), lag = attr(dx, "lag"))
 }
 \arguments{
-\item{dx}{A differenced series from \code{\link[=morie_ts_difference]{morie_ts_difference()}} (carrying
+\item{dx}{A differenced series from \code{morie_ts_difference()} (carrying
 its \code{init} attribute), or a plain vector plus explicit \code{init}.}
 
 \item{init}{Optional list of leading values (defaults to the attribute).}
@@ -18,7 +18,7 @@ its \code{init} attribute), or a plain vector plus explicit \code{init}.}
 The reconstructed numeric series.
 }
 \description{
-Reverse \code{\link[=morie_ts_difference]{morie_ts_difference()}}
+Reverse \code{morie_ts_difference()}
 }
 \examples{
 x <- cumsum(1:10); dx <- morie_ts_difference(x)

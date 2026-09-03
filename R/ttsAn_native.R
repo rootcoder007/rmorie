@@ -81,6 +81,10 @@ morie_t_quantile <- function(p, v) {
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_tts_median(v = x)
+#' res
 .mor_tts_median <- function(v) {
   s <- sort(v)
   n <- length(s)

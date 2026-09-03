@@ -20,5 +20,6 @@ A list with \code{h}, \code{h_next}, \code{z}, \code{jacobian}, \code{jacobian_n
 }
 \keyword{internal}
 \examples{
-morie_geron_recurrent_neuron(x_t = 5L, h_prev = 5L, Wx = c(1, 2, 3, 4, 5, 6, 7, 8), Wh = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
+morie_geron_recurrent_neuron(x_t = 5L, h_prev = 5L, Wx = c(1, 2, 3, 4, 5, 6, 7, 8),
+  Wh = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L)
 }

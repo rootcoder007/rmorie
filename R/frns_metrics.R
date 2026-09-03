@@ -96,7 +96,8 @@ NULL
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @param rates Iterated over elementwise, with \code{vapply}.
 #' @return A list with \code{privileged}, \code{warning}.
 #' @export
@@ -162,6 +163,10 @@ NULL
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .frns_gini(x = x)
+#' res
 .frns_gini <- function(x) {
   # Gini via the sorted-rank formula; equals sum_i sum_j |x_i-x_j| /
   # (2 n sum x). Returns 0 for all-zero or single-element input.
@@ -184,6 +189,10 @@ NULL
 #' @param values A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .frns_worst_abs(values = x)
+#' res
 .frns_worst_abs <- function(values) {
   # The element with the largest absolute value (finite only); NA if none.
   finite <- values[is.finite(values)]
@@ -214,7 +223,10 @@ NULL
 
 #' .morie_fairness_as_1d
 #'
-#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 3 others in the module.
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -222,6 +234,11 @@ NULL
 #' @param name Passed to \code{sprintf}.
 #' @return The value of \code{arr}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_fairness_as_1d(x = x, name = txt)
+#' res
 .morie_fairness_as_1d <- function(x, name) {
   arr <- as.vector(x)
   if (length(arr) == 0L) {
@@ -232,7 +249,10 @@ NULL
 
 #' .morie_fairness_check_aligned
 #'
-#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 3 others in the module.
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -254,7 +274,9 @@ NULL
 
 #' Python\'s "first-seen" order; unique() in R is already first-seen
 #'
-#' A step of the frns_metrics implementation. Called by \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels}, \code{morie_fairness_gini} and 1 others in the module.
+#' A step of the frns_metrics implementation. Called by
+#' \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels},
+#' \code{morie_fairness_gini} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -268,7 +290,9 @@ NULL
 
 #' .morie_fairness_favorable_rates
 #'
-#' A step of the frns_metrics implementation. Called by \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity}, \code{morie_fairness_disparate_impact}.
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity},
+#' \code{morie_fairness_disparate_impact}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -293,11 +317,15 @@ NULL
 
 #' .morie_fairness_resolve_privileged
 #'
-#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and 2 others in the module.
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @param rates Iterated over elementwise, with \code{vapply}.
 #' @param warnings_env A list; the body reads \code{$w} from it.
 #' @return The value of \code{inferred}, as built in the body.
@@ -324,7 +352,8 @@ NULL
 
 #' .morie_fairness_rates_from_labels
 #'
-#' A step of the frns_metrics implementation. Called by \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -362,6 +391,10 @@ NULL
 #' @param x A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_fairness_gini_core(x = x)
+#' res
 .morie_fairness_gini_core <- function(x) {
   # Sorted-rank formula. Returns 0.0 for an all-zero or single-element
   # input (no inequality defined), matching the Python helper.

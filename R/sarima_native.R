@@ -88,7 +88,8 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 
 #' .sarima_poly_mult
 #'
-#' A step of the sarima_native implementation. Called by \code{.sarima_diff_poly}, \code{expand_polynomials}, \code{forecast}.
+#' A step of the sarima_native implementation. Called by \code{.sarima_diff_poly},
+#' \code{expand_polynomials}, \code{forecast}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -96,6 +97,11 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 #' @param b A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .sarima_poly_mult(a = A, b = b)
+#' res
 .sarima_poly_mult <- function(a, b) {
   out <- rep(0, length(a) + length(b) - 1)
   for (i in seq_along(a)) for (j in seq_along(b)) out[i + j - 1] <- out[i + j - 1] + a[i] * b[j]
@@ -120,13 +126,15 @@ difference <- function(y, d = 0, D = 0, s = 1) {
 
 #' expand_polynomials
 #'
-#' A step of the sarima_native implementation. Called by \code{.sarima_fit}, \code{.sarima_package}, \code{.sarimax_fit}.
+#' A step of the sarima_native implementation. Called by \code{.sarima_fit},
+#' \code{.sarima_package}, \code{.sarimax_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param phi Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
 #' @param Phi A vector; its length is taken. Defaults to \code{numeric(0)}.
-#' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{numeric(0)}.
+#' @param theta Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{numeric(0)}.
 #' @param Theta A vector; its length is taken. Defaults to \code{numeric(0)}.
 #' @param s Passed to \code{.sarima_seasonal_lift}. Defaults to \code{12}.
 #' @return A list with \code{ar}, \code{ma}.
@@ -196,13 +204,17 @@ airline_autocovariances <- function(theta, Theta, sigma2 = 1.0) {
 
 #' .sarima_invert_rho
 #'
-#' A step of the sarima_native implementation. Called by \code{moment_estimate}, \code{preliminary_estimates}.
+#' A step of the sarima_native implementation. Called by \code{moment_estimate},
+#' \code{preliminary_estimates}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rho Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' res <- .sarima_invert_rho(rho = 0.5)
+#' res
 .sarima_invert_rho <- function(rho) {
   r <- as.numeric(rho)
   if (abs(r) > 0.5)
@@ -230,7 +242,8 @@ moment_estimate <- function(rho) .sarima_invert_rho(rho)
 #'
 #' @param w Passed to \code{sample_acf}.
 #' @param s Coerced to integer by the body, with \code{as.integer}. Defaults to \code{12}.
-#' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1}, \code{r_s}, \code{method}.
+#' @return A list with \code{estimate}, \code{theta}, \code{Theta}, \code{r_1},
+#' \code{r_s}, \code{method}.
 #' @export
 preliminary_estimates <- function(w, s = 12) {
   r <- sample_acf(w, c(1, as.integer(s)))
@@ -243,7 +256,8 @@ preliminary_estimates <- function(w, s = 12) {
 
 #' css
 #'
-#' A step of the sarima_native implementation. Called by \code{.residual_column}, \code{.sarima_fit}.
+#' A step of the sarima_native implementation. Called by \code{.residual_column},
+#' \code{.sarima_fit}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -322,7 +336,8 @@ css <- function(w, ar = numeric(0), ma = numeric(0), full = FALSE) {
 
 #' loglik
 #'
-#' A step of the sarima_native implementation. Called by \code{.gwasem_reml_delta}, \code{.sarima_fit}, \code{morie_glm_nb} and 4 others in the module.
+#' A step of the sarima_native implementation. Called by \code{.gwasem_reml_delta},
+#' \code{.sarima_fit}, \code{morie_glm_nb} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -607,7 +622,11 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' @param cs A list; the body reads \code{$residuals}, \code{$sigma2}, \code{$ssq} from it.
 #' @param method One of \code{"ml"}, \code{"uls"}.
 #' @param res Optional; may be \code{NULL}. A list; the body reads \code{$success} from it.
-#' @return A list with \code{estimate}, \code{sigma2}, \code{phi}, \code{theta}, \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{loglik}, \code{aic}, \code{n_used}, \code{n_par}, \code{residuals}, \code{ssq}, \code{order}, \code{seasonal_order}, \code{s}, \code{y}, \code{w}, \code{fit_method}, \code{converged}, \code{method}.
+#' @return A list with \code{estimate}, \code{sigma2}, \code{phi}, \code{theta},
+#' \code{Phi}, \code{Theta}, \code{ar}, \code{ma}, \code{loglik}, \code{aic},
+#' \code{n_used}, \code{n_par}, \code{residuals}, \code{ssq}, \code{order},
+#' \code{seasonal_order}, \code{s}, \code{y}, \code{w}, \code{fit_method},
+#' \code{converged}, \code{method}.
 #' @export
 .sarima_package <- function(y, w, phi, theta, Phi, Theta, s, order, seasonal_order,
                             ll, cs, method, res) {
@@ -674,9 +693,12 @@ loglik <- function(w, ar = numeric(0), ma = numeric(0)) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fitted A list; the body reads \code{$ar}, \code{$ma}, \code{$order}, \code{$residuals}, \code{$s}, \code{$seasonal_order}, \code{$sigma2}, \code{$y} from it.
+#' @param fitted A list; the body reads \code{$ar}, \code{$ma}, \code{$order},
+#' \code{$residuals}, \code{$s}, \code{$seasonal_order}, \code{$sigma2}, \code{$y} from
+#' it.
 #' @param h A count; the body uses it as \code{numeric(...)}. Defaults to \code{12}.
-#' @return A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se}, \code{psi}, \code{method}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{variance}, \code{se},
+#' \code{psi}, \code{method}.
 #' @export
 forecast <- function(fitted, h = 12) {
   h <- as.integer(h)
@@ -724,7 +746,8 @@ forecast <- function(fitted, h = 12) {
 #' @param theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param Theta Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n Numeric; combined arithmetically in the body.
-#' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta}, \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
+#' @return A list with \code{var_theta}, \code{var_Theta}, \code{se_theta},
+#' \code{se_Theta}, \code{cov}, \code{off_diagonal_term}.
 #' @export
 large_sample_se <- function(theta, Theta, n) {
   th <- as.numeric(theta)
@@ -768,8 +791,10 @@ bartlett_se <- function(rho, n) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fitted A list; the body reads \code{$aic}, \code{$loglik}, \code{$phi}, \code{$Phi}, \code{$sigma2}, \code{$theta}, \code{$Theta} from it.
-#' @return A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2}, \code{loglik}, \code{aic}, \code{note}.
+#' @param fitted A list; the body reads \code{$aic}, \code{$loglik}, \code{$phi},
+#' \code{$Phi}, \code{$sigma2}, \code{$theta}, \code{$Theta} from it.
+#' @return A list with \code{ma}, \code{sma}, \code{ar}, \code{sar}, \code{sigma2},
+#' \code{loglik}, \code{aic}, \code{note}.
 #' @export
 r_convention <- function(fitted) {
   list(ma = -as.numeric(fitted$theta), sma = -as.numeric(fitted$Theta),
@@ -786,6 +811,9 @@ r_convention <- function(fitted) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sarima_cheatsheet()
+#' res
 .sarima_cheatsheet <- function() {
   paste("sarima: phi(B)Phi(B^s) nabla^d nabla_s^D z = theta(B)Theta(B^s) a. ",
         "The airline (0,1,1)x(0,1,1)_12 is an MA(13) in w = nabla nabla_12 z ",

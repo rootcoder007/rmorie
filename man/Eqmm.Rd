@@ -35,7 +35,9 @@ over a_R.  The stub's B was already correct and the two are mutually
 consistent only with A as written here.
 }
 \examples{
-Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8), b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8), b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
+Eqmm(y = c(1, 2, 3, 4, 5, 6, 7, 8), a_R = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b_R = c(1, 2, 3, 4, 5, 6, 7, 8), a_F = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b_F = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Loyd & Hoover (1980), Journal of Educational Measurement

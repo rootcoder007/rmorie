@@ -116,7 +116,8 @@ project_patches <- function(patch_features, W, b = NULL) {
 #'
 #' @param visual_tokens Iterated over elementwise, with \code{lapply}.
 #' @param text_embeddings Iterated over elementwise, with \code{lapply}.
-#' @return A list with \code{estimate}, \code{sequence}, \code{n_visual}, \code{n_text}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{sequence}, \code{n_visual}, \code{n_text},
+#' \code{method}, \code{note}.
 #' @export
 build_sequence <- function(visual_tokens, text_embeddings) {
   V <- lapply(visual_tokens, function(r) as.numeric(r))
@@ -167,6 +168,9 @@ training_stage <- function(stage) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .llavx_cheatsheet()
+#' res
 .llavx_cheatsheet <- function() {
   paste("llavx: instruction tuning works in language and lacked ",
         "MULTIMODAL data, so generate it with a LANGUAGE-ONLY ",

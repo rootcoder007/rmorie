@@ -40,5 +40,7 @@ The log predictive density.
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10), m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10)); TRUE
+r <- morie_snpest_predictive(x = rnorm(10), n = 8L, s = rnorm(10), ss = rnorm(10),
+  m0 = rnorm(10), kappa0 = rnorm(10), a0 = rnorm(10), b0 = rnorm(10))
+TRUE
 }

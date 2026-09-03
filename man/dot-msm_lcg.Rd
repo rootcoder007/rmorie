@@ -16,3 +16,7 @@ The value of \code{function}.
 stream, not a low-discrepancy one -- a shared quasi-random sequence
 correlates the resample positions and shrinks the bootstrap spread.
 }
+\examples{
+res <- .msm_lcg(seed = 1L)
+res
+}

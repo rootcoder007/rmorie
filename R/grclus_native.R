@@ -134,6 +134,10 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param A A matrix; the body checks with \code{is.matrix}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .grclus_rows_to_mat(A = A)
+#' res
 .grclus_rows_to_mat <- function(A) {
   if (is.matrix(A)) return(A)
   if (is.list(A)) return(do.call(rbind, lapply(A, as.numeric)))
@@ -149,6 +153,10 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param A Passed to \code{.grclus_rows_to_mat}.
 #' @return The value of \code{adj}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .grclus_as_graph(A = A)
+#' res
 .grclus_as_graph <- function(A) {
   M <- .grclus_rows_to_mat(A)
   if (nrow(M) == 0L) stop("grclus: A is empty")
@@ -185,7 +193,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 
 #' .grclus_edge_cut
 #'
-#' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition}, \code{.grclus_kl}, \code{morie_grclus}.
+#' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition},
+#' \code{.grclus_kl}, \code{morie_grclus}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -253,7 +262,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 # ---- RNG helpers (shared) ----
 #' RNG helpers (shared) ----
 #'
-#' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition}, \code{.grclus_match_vertices}, \code{.grclus_shuffled}.
+#' A step of the grclus_native implementation. Called by \code{.grclus_grow_partition},
+#' \code{.grclus_match_vertices}, \code{.grclus_shuffled}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -278,6 +288,9 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 #' @param seed Passed to \code{.ghc_rng}.
 #' @return The value of \code{idx}, as built in the body.
 #' @export
+#' @examples
+#' res <- .grclus_shuffled(n = 3L, seed = 1L)
+#' res
 .grclus_shuffled <- function(n, seed) {
   e <- .ghc_rng(seed)
   idx <- as.integer(seq_len(n) - 1L)
@@ -392,7 +405,8 @@ morie_grclus <- function(A, k = 2L, weights = NULL, matching = "hem",
 # ---- region growing ----
 #' Region growing ----
 #'
-#' A step of the grclus_native implementation. Called by \code{.grclus_balance_bisection}, \code{.grclus_kl}.
+#' A step of the grclus_native implementation. Called by
+#' \code{.grclus_balance_bisection}, \code{.grclus_kl}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

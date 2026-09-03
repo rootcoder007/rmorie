@@ -27,7 +27,8 @@
 
 #' (A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)
 #'
-#' A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep}, \code{check_associativity}, \code{parallel_scan}.
+#' A step of the ssmpar_native implementation. Called by \code{.ssmpar_upsweep},
+#' \code{check_associativity}, \code{parallel_scan}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -89,6 +90,9 @@ sequential_scan <- function(pairs, x0 = 0.0) {
 #' @param P See Usage.
 #' @return The value of \code{tree}, as built in the body.
 #' @export
+#' @examples
+#' res <- .ssmpar_upsweep(P = 0.5)
+#' res
 .ssmpar_upsweep <- function(P) {
   # Build the tree of partial compositions (private helper).
   tree <- list()
@@ -198,7 +202,8 @@ check_associativity <- function(a, b, c, tol = 1e-12) {
 #' source it follows.
 #'
 #' @param length Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth}, \code{work}, \code{speedup}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{parallel_depth}, \code{sequential_depth},
+#' \code{work}, \code{speedup}, \code{method}, \code{note}.
 #' @export
 scan_depth <- function(length) {
   # Sequential against parallel depth.
@@ -225,6 +230,9 @@ scan_depth <- function(length) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .ssmpar_cheatsheet()
+#' res
 .ssmpar_cheatsheet <- function() {
   paste0(
     "ssmpar: x_t = A_t x_{t-1} + b_t looks sequential, but each step is ",
@@ -247,15 +255,3 @@ ssm_parallel_scan <- parallel_scan
 
 # entry point
 morie_ssmpar <- parallel_scan
-
-
-
-
-
-
-
-
-
-
-
-

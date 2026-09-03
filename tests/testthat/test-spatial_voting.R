@@ -9,7 +9,8 @@
 
 test_that("aldrich_mckelvey returns z-scored stimuli with correct ranks", {
   set.seed(1)
-  n_resp <- 60L; n_stim <- 5L
+  n_resp <- 60L
+  n_stim <- 5L
   true_z <- seq(-2, 2, length.out = n_stim)
   alpha  <- stats::rnorm(n_resp, 0, 0.5)
   beta   <- stats::rnorm(n_resp, 1, 0.3)
@@ -162,7 +163,8 @@ test_that("wordfish separates two clearly-distinct document blocs", {
   # Two blocs of documents. Bloc-1 uses words 1-15 heavily, bloc-2
   # uses words 16-30 heavily; bloc-1 docs should land on one side of
   # zero, bloc-2 on the other.
-  n_docs <- 16L; n_words <- 30L
+  n_docs <- 16L
+  n_words <- 30L
   dtm <- matrix(0L, n_docs, n_words)
   for (i in seq_len(8L)) {
     dtm[i, 1:15]      <- stats::rpois(15, 20)

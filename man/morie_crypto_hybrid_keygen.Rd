@@ -10,13 +10,15 @@ morie_crypto_hybrid_keygen()
 A named list with \code{pk} (raw, 1184 B) and \code{sk} (raw, 2400 B).
 }
 \description{
-Convenience wrapper around \code{\link[=morie_crypto_mlkem768_keygen]{morie_crypto_mlkem768_keygen()}} for the
+Convenience wrapper around \code{morie_crypto_mlkem768_keygen()} for the
 hybrid KEM-DEM scheme. Requires the liboqs backend
-(\code{\link[=morie_crypto_liboqs_available]{morie_crypto_liboqs_available()}}).
+(\code{morie_crypto_liboqs_available()}).
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- morie_crypto_hybrid_keygen()
-  c(pk = length(kp$pk), sk = length(kp$sk))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- morie_crypto_hybrid_keygen()
+    c(pk = length(kp$pk), sk = length(kp$sk))
+  }
 }
 }

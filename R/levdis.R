@@ -13,7 +13,10 @@
 #' @param s1,s2 Sequences to compare (character strings or vectors).
 #' @param insert,delete,substitute Edit costs.
 #' @return The edit distance.
-#' @references Levenshtein (1966), Soviet Physics Doklady 10:707-710 (the metric); Wagner and Fischer (1974), JACM 21:168-173 (the dynamic program).  Neither was fetchable -- Doklady is not online and JACM is paywalled -- so this is the standard published recurrence, anchored in the harness against R's own utils::adist.
+#' @references Levenshtein (1966), Soviet Physics Doklady 10:707-710 (the metric); Wagner
+#' and Fischer (1974), JACM 21:168-173 (the dynamic program).  Neither was fetchable --
+#' Doklady is not online and JACM is paywalled -- so this is the standard published
+#' recurrence, anchored in the harness against R's own utils::adist.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

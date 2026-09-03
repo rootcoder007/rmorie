@@ -31,7 +31,8 @@ Formula: \code{H = {theta : q(theta) = 0}} with \code{q} the sum of
 squared positive parts, Molinari (2021) equations (4.2) and (4.4).
 }
 \examples{
-Bnsiii(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), moments = c(1, 2, 3, 4, 5, 6, 7, 8))
+Bnsiii(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  moments = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Chernozhukov, V., Hong, H. and Tamer, E. (2007). Estimation

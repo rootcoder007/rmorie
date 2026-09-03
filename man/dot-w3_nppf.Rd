@@ -20,3 +20,7 @@ The value of \code{.w3_bisect}.
 rational approximation and exactly as accurate as the CDF it inverts,
 which is the property that matters here.
 }
+\examples{
+res <- .w3_nppf(p = 0.5)
+res
+}

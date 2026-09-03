@@ -17,7 +17,8 @@ morie_default_workflow_map <- function() {
 
 #' validate_workflow_map
 #'
-#' A step of the workflow implementation. Called by \code{morie_run_pipeline}, \code{morie_run_workflow_step}.
+#' A step of the workflow implementation. Called by \code{morie_run_pipeline},
+#' \code{morie_run_workflow_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

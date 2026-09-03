@@ -55,13 +55,17 @@
 
 #' .tl1step_logit
 #'
-#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}.
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm},
+#' \code{.tl1step_is_universal}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tl1step_logit(p = 0.5)
+#' res
 .tl1step_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -69,13 +73,18 @@
 
 #' .tl1step_expit
 #'
-#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}.
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm},
+#' \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tl1step_expit(x = x)
+#' res
 .tl1step_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)
@@ -84,13 +93,19 @@
 
 #' .tl1step_as_numvec
 #'
-#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm}, \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle} and 1 others in the module.
+#' A step of the tl1step_native implementation. Called by \code{.tl1step_build_ulfm},
+#' \code{.tl1step_is_universal}, \code{.tl1step_iterative_tmle} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tl1step_as_numvec(x = x)
+#' res
 .tl1step_as_numvec <- function(x) {
   as.numeric(unlist(x))
 }
@@ -174,7 +189,8 @@
 #' @param H_fn Accepted by the signature and not used anywhere in the body.
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{0.3}.
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
-#' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon}, \code{local_submodel_direction_drift}, \code{note}.
+#' @return A list with \code{max_deviation}, \code{universal}, \code{epsilon},
+#' \code{local_submodel_direction_drift}, \code{note}.
 #' @export
 .tl1step_is_universal <- function(Q, H_fn, eps = 0.3, h = 1e-5) {
   q <- .tl1step_as_numvec(Q)
@@ -231,7 +247,8 @@
 #' @param Y Passed to \code{.tl1step_build_ulfm}.
 #' @param eps_max Passed to \code{.tl1step_build_ulfm}. Defaults to \code{3}.
 #' @param steps Passed to \code{.tl1step_build_ulfm}. Defaults to \code{600}.
-#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star}, \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{Q_star},
+#' \code{abs_score}, \code{iterations}, \code{path_steps}, \code{method}, \code{note}.
 #' @export
 .tl1step_one_step_tmle <- function(Q, H_fn, Y, eps_max = 3.0, steps = 600) {
   b <- .tl1step_build_ulfm(Q, H_fn, Y, eps_max, steps)
@@ -283,7 +300,8 @@
 #' @param Y Passed to \code{.tl1step_as_numvec}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
-#' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star}, \code{abs_score}, \code{method}.
+#' @return A list with \code{estimate}, \code{psi}, \code{iterations}, \code{Q_star},
+#' \code{abs_score}, \code{method}.
 #' @export
 .tl1step_iterative_tmle <- function(Q, H_fn, Y, max_iter = 25, tol = 1e-8) {
   q <- .tl1step_as_numvec(Q)
@@ -331,6 +349,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tl1step_cheatsheet()
+#' res
 .tl1step_cheatsheet <- function() {
   paste0("tl1step: an ordinary TMLE fluctuates along a LOCAL least ",
          "favorable submodel and ITERATES, which is where it becomes ",

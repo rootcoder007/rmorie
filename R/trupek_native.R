@@ -85,6 +85,10 @@
 #' @param v A vector; its length is taken and its elements indexed.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .trupek_csum(v = x)
+#' res
 .trupek_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -100,18 +104,24 @@
 
 #' .trupek_norm
 #'
-#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
+#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy},
+#' \code{.trupek_dogleg}, \code{.trupek_exact} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a Passed to \code{.trupek_dot}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .trupek_norm(a = A)
+#' res
 .trupek_norm <- function(a) sqrt(.trupek_dot(a, a))
 
 #' .trupek_matvec
 #'
-#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy}, \code{.trupek_dogleg}, \code{.trupek_model} and 1 others in the module.
+#' A step of the trupek_native implementation. Called by \code{.trupek_cauchy},
+#' \code{.trupek_dogleg}, \code{.trupek_model} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -119,6 +129,11 @@
 #' @param v Passed to \code{.trupek_dot}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .trupek_matvec(H = A, v = b)
+#' res
 .trupek_matvec <- function(H, v) {
   n <- nrow(H)
   out <- numeric(n)
@@ -154,6 +169,11 @@
 #' @param delta Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+#' res <- .trupek_boundary(z = y, d = g, delta = 0.5)
+#' res
 .trupek_boundary <- function(z, d, delta) {
   dd <- .trupek_dot(d, d)
   zd <- .trupek_dot(z, d)
@@ -198,6 +218,10 @@
 #' @param H A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .trupek_chol(H = A)
+#' res
 .trupek_chol <- function(H) {
   n <- nrow(H)
   L <- matrix(0, n, n)
@@ -215,7 +239,8 @@
 
 #' .trupek_chol_solve
 #'
-#' A step of the trupek_native implementation. Called by \code{.trupek_dogleg}, \code{.trupek_exact}.
+#' A step of the trupek_native implementation. Called by \code{.trupek_dogleg},
+#' \code{.trupek_exact}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

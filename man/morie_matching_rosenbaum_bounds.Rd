@@ -31,7 +31,7 @@ Computes bounds on the p-value for the treatment effect over a grid of
 values of \code{gamma} (the maximum odds ratio of differential treatment
 assignment due to an unobserved confounder).  Uses the Wilcoxon
 signed-rank approach.  For exact bounds, see
-\code{\link[sensitivitymv:senmv]{sensitivitymv::senmv}} or the
+\code{sensitivitymv::senmv} or the
 \pkg{rbounds} package.
 }
 \examples{

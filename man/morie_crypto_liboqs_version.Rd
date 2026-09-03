@@ -13,7 +13,9 @@ Single character (e.g. \code{"0.15.0"}); empty if liboqs absent.
 liboqs runtime version string
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  morie_crypto_liboqs_version()
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    morie_crypto_liboqs_version()
+  }
 }
 }

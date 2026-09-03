@@ -36,9 +36,11 @@ test_that("morie_wilcox_test exact matches full enumeration on a tiny sample", {
   d <- data.frame(y = y, g = g)
   r <- morie_wilcox_test(y ~ g, d, distribution = "exact")
   # brute force the two-sided permutation p for the rank-sum of group a
-  ranks <- rank(y); idx <- utils::combn(6, 3)
+  ranks <- rank(y)
+  idx <- utils::combn(6, 3)
   sums <- apply(idx, 2, function(i) sum(ranks[i]))
-  obs <- sum(ranks[g == "a"]); mu <- mean(sums)
+  obs <- sum(ranks[g == "a"])
+  mu <- mean(sums)
   p <- mean(abs(sums - mu) >= abs(obs - mu) - 1e-9)
   expect_equal(r$p.value, p, tolerance = 1e-8)
 })

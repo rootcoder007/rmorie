@@ -19,7 +19,8 @@
 
 #' .schab_hermite_e
 #'
-#' A step of the schab_hermite_shared implementation. Called by \code{.schab_hermite_orthonormal}, \code{.schab_indicator_coefficients}.
+#' A step of the schab_hermite_shared implementation. Called by
+#' \code{.schab_hermite_orthonormal}, \code{.schab_indicator_coefficients}.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -27,6 +28,10 @@
 #' @param degree Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_hermite_e(x = x, degree = 3L)
+#' res
 .schab_hermite_e <- function(x, degree) {
   x <- as.numeric(x)
   degree <- as.integer(degree)
@@ -44,13 +49,17 @@
 
 #' .schab_factorial
 #'
-#' A step of the schab_hermite_shared implementation. Called by \code{.schab_indicator_coefficients}.
+#' A step of the schab_hermite_shared implementation. Called by
+#' \code{.schab_indicator_coefficients}.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
 #' @param p Passed to \code{<}.
 #' @return The value of \code{prod}.
 #' @export
+#' @examples
+#' res <- .schab_factorial(p = 0.5)
+#' res
 .schab_factorial <- function(p) {
   if (p < 2) {
     return(1)
@@ -60,7 +69,8 @@
 
 #' .schab_hermite_orthonormal
 #'
-#' A step of the schab_hermite_shared implementation. Called by \code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}.
+#' A step of the schab_hermite_shared implementation. Called by
+#' \code{.schab_disjunctive_kriging}, \code{.schab_hermite_coefficients}.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -68,6 +78,10 @@
 #' @param degree Passed to \code{.schab_hermite_e}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_hermite_orthonormal(x = x, degree = 3L)
+#' res
 .schab_hermite_orthonormal <- function(x, degree) {
   h <- .schab_hermite_e(x, degree)
   scale <- sqrt(vapply(0:degree, .schab_factorial, numeric(1)))
@@ -86,6 +100,9 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return A list with \code{nodes}, \code{weights}.
 #' @export
+#' @examples
+#' res <- .schab_gauss_hermite(n = 3L)
+#' res
 .schab_gauss_hermite <- function(n) {
   # Golub-Welsch: nodes are the eigenvalues of the symmetric tridiagonal
   # Jacobi matrix (zero diagonal, sqrt(k) off-diagonal for the probabilists'
@@ -170,7 +187,8 @@
 #' @param correlation_fn Accepted by the signature and not used anywhere in the body.
 #' @param b A vector; indexed elementwise.
 #' @param degree A count; the body uses it as \code{seq_len(...)}.
-#' @return A list with \code{prediction}, \code{variance}, \code{coefficients}, \code{component_variances}.
+#' @return A list with \code{prediction}, \code{variance}, \code{coefficients},
+#' \code{component_variances}.
 #' @export
 .schab_disjunctive_kriging <- function(coords, y, target, correlation_fn,
                                        b, degree) {

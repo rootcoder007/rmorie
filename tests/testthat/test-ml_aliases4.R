@@ -7,7 +7,8 @@
 
 test_that("morie_percentile_modified_rank computes a rank-percentile test", {
   set.seed(1L)
-  x <- stats::rnorm(50, 0); y <- stats::rnorm(50, 0.5)
+  x <- stats::rnorm(50, 0)
+  y <- stats::rnorm(50, 0.5)
   out <- tryCatch(morie_percentile_modified_rank(x, y),
                   error = function(e) e)
   if (inherits(out, "error"))
@@ -17,7 +18,9 @@ test_that("morie_percentile_modified_rank computes a rank-percentile test", {
 
 test_that("morie_kendall_tau_partial returns partial Kendall's tau", {
   set.seed(2L)
-  x <- stats::rnorm(60); y <- stats::rnorm(60); z <- stats::rnorm(60)
+  x <- stats::rnorm(60)
+  y <- stats::rnorm(60)
+  z <- stats::rnorm(60)
   out <- tryCatch(morie_kendall_tau_partial(x, y, z),
                   error = function(e) e)
   if (inherits(out, "error"))
@@ -52,7 +55,8 @@ test_that("morie_confusion_matrix_metrics returns precision/recall/F1", {
 
 test_that("morie_polynomial_regression fits a degree-2 polynomial", {
   set.seed(4L)
-  x <- stats::rnorm(60); y <- x^2 + stats::rnorm(60, sd = 0.3)
+  x <- stats::rnorm(60)
+  y <- x^2 + stats::rnorm(60, sd = 0.3)
   out <- morie_polynomial_regression(x, y, degree = 2L)
   expect_type(out, "list")
 })

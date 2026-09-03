@@ -20,7 +20,8 @@
 
 #' ess
 #'
-#' A step of the smcsam_native implementation. Called by \code{Drvst}, \code{morie_att_weights}, \code{smcsam}.
+#' A step of the smcsam_native implementation. Called by \code{Drvst},
+#' \code{morie_att_weights}, \code{smcsam}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -61,13 +62,15 @@ ess <- function(weights) {
 
 #' resample
 #'
-#' A step of the smcsam_native implementation. Called by \code{morie_btdbl}, \code{morie_btiseq}, \code{smcsam}.
+#' A step of the smcsam_native implementation. Called by \code{morie_btdbl},
+#' \code{morie_btiseq}, \code{smcsam}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param weights Numeric; passed to \code{sum}.
 #' @param rng Passed to \code{.ghc_unif}.
-#' @param scheme One of \code{"multinomial"}, \code{"residual"}, \code{"stratified"}, \code{"systematic"}. Defaults to \code{"systematic"}.
+#' @param scheme One of \code{"multinomial"}, \code{"residual"}, \code{"stratified"},
+#' \code{"systematic"}. Defaults to \code{"systematic"}.
 #' @return Nothing; this branch always raises.
 #' @export
 resample <- function(weights, rng, scheme = "systematic") {
@@ -130,7 +133,8 @@ resample <- function(weights, rng, scheme = "systematic") {
 #' source it follows.
 #'
 #' @param n_steps Coerced to integer by the body, with \code{as.integer}.
-#' @param kind One of \code{"geometric"}, \code{"power"}, \code{"prior"}. Defaults to \code{"geometric"}.
+#' @param kind One of \code{"geometric"}, \code{"power"}, \code{"prior"}. Defaults to
+#' \code{"geometric"}.
 #' @param power Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -207,17 +211,23 @@ random_walk_kernel <- function(scale = 1.0, n_moves = 1L) {
 #'
 #' @param log_gamma Accepted by the signature and not used anywhere in the body.
 #' @param initial Accepted by the signature and not used anywhere in the body.
-#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to \code{500L}.
-#' @param ladder Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param n_particles Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{500L}.
+#' @param ladder Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param n_steps Passed to \code{temperature_ladder}. Defaults to \code{20L}.
 #' @param kernel Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @param ess_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @param ess_threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{0.5}.
 #' @param scheme Passed to \code{resample}. Defaults to \code{"systematic"}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.
 #' @param weight_rule One of \code{"general"}, \code{"mcmc"}. Defaults to \code{"mcmc"}.
 #' @param log_forward Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param log_backward The body requires: log_backward densities (equation 12).
-#' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles}, \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled}, \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule}, \code{method}.
+#' @return A list with \code{estimate}, \code{mean}, \code{variance}, \code{particles},
+#' \code{weights}, \code{log_norm_const}, \code{ess}, \code{ess_trace}, \code{resampled},
+#' \code{accept_trace}, \code{ladder}, \code{n_particles}, \code{weight_rule},
+#' \code{method}.
 #' @export
 smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
                    n_steps = 20L, kernel = NULL, ess_threshold = 0.5,
@@ -332,6 +342,9 @@ smcsam <- function(log_gamma, initial, n_particles = 500L, ladder = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .smcsam_cheatsheet()
+#' res
 .smcsam_cheatsheet <- function() {
   paste("smcsam: SMC samplers (Del Moral, Doucet & Jasra 2006). A ",
         "sequence pi_n on a FIXED space is made sequential by an ",

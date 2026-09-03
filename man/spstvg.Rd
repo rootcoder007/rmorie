@@ -67,7 +67,8 @@ Cells containing no pairs are returned as \code{NA} with a count of zero, never
 filled. An unestimated semivariogram and a zero one are different claims.
 }
 \examples{
-spstvg(coords = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+spstvg(coords = c(1, 2, 3, 4, 5, 6, 7, 8), times = c(1, 2, 3, 4, 5, 6, 7, 8),
+  z = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Schabenberger Ch 9, Sec 9.4, eqs (9.18)-(9.19)

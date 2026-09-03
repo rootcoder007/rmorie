@@ -53,7 +53,8 @@
 
 #' .unifAlg_is_var
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{.unifAlg_check}, \code{morie_unifAlg_disagreement} and 4 others in the module.
+#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once},
+#' \code{.unifAlg_check}, \code{morie_unifAlg_disagreement} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -66,7 +67,9 @@
 
 #' .unifAlg_check
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once}, \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the module.
+#' A step of the unifAlg_native implementation. Called by \code{.unifAlg_apply_once},
+#' \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose} and 5 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -89,7 +92,9 @@
 
 #' .unifAlg_apply_once
 #'
-#' A step of the unifAlg_native implementation. Called by \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose}, \code{morie_unifAlg_substitute}.
+#' A step of the unifAlg_native implementation. Called by
+#' \code{morie_unifAlg_apply_subst}, \code{morie_unifAlg_compose},
+#' \code{morie_unifAlg_substitute}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -118,7 +123,8 @@
 #' @param sub Carried through into a list the body builds.
 #' @param why Carried through into a list the body builds.
 #' @param oc Coerced to logical by the body, with \code{as.logical}.
-#' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason}, \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
+#' @return A list with \code{estimate}, \code{unified}, \code{mgu}, \code{reason},
+#' \code{occurs_check}, \code{partial}, \code{n_bindings}, \code{method}.
 #' @export
 .unifAlg_fail <- function(sub, why, oc) {
   list(
@@ -137,7 +143,8 @@
 
 #' morie_unifAlg_var
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{.trmRew_rename}, \code{morie_unifAlg_factor_through}.
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical},
+#' \code{.trmRew_rename}, \code{morie_unifAlg_factor_through}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -191,7 +198,8 @@ morie_unifAlg_is_var <- function(t) {
 
 #' morie_unifAlg_variables
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_lpo_greater}, \code{morie_trmRew_rule} and 1 others in the module.
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical},
+#' \code{morie_trmRew_lpo_greater}, \code{morie_trmRew_rule} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -238,7 +246,8 @@ morie_unifAlg_occurs <- function(name, t) {
 
 #' morie_unifAlg_apply_subst
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap}, \code{morie_unifAlg_factor_through}, \code{morie_unifAlg_unify}.
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_overlap},
+#' \code{morie_unifAlg_factor_through}, \code{morie_unifAlg_unify}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -261,7 +270,8 @@ morie_unifAlg_apply_subst <- function(t, subst) {
 
 #' morie_unifAlg_substitute
 #'
-#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical}, \code{morie_trmRew_rewrite_step}.
+#' A step of the unifAlg_native implementation. Called by \code{.trmRew_canonical},
+#' \code{morie_trmRew_rewrite_step}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -401,7 +411,8 @@ morie_unifAlg_unify <- function(t1, t2, occurs_check = TRUE) {
 
 #' morie_unifAlg_match
 #'
-#' A step of the unifAlg_native implementation. Called by \code{morie_trmRew_rewrite_step}, \code{morie_unifAlg_factor_through}.
+#' A step of the unifAlg_native implementation. Called by
+#' \code{morie_trmRew_rewrite_step}, \code{morie_unifAlg_factor_through}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

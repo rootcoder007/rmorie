@@ -18,24 +18,35 @@
 
 #' .painn_vec
 #'
-#' A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{scalar_vector_message}.
+#' A step of the painn_native implementation. Called by \code{dipole_moment},
+#' \code{gated_update}, \code{scalar_vector_message}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .painn_vec(v = x)
+#' res
 .painn_vec <- function(v) as.numeric(unlist(v))
 
 #' .painn_mat
 #'
-#' A step of the painn_native implementation. Called by \code{dipole_moment}, \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
+#' A step of the painn_native implementation. Called by \code{dipole_moment},
+#' \code{gated_update}, \code{morie_painn_equivariance_error} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param M A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .painn_mat(M = X)
+#' res
 .painn_mat <- function(M) {
   if (is.matrix(M)) {
     storage.mode(M) <- "double"
@@ -184,7 +195,7 @@ dipole_moment <- function(charges, R, centre = NULL) {
   mu <- numeric(d)
   for (a in seq_len(d)) {
     acc <- 0.0
-    for (i in seq_len(length(q))) acc <- acc + q[i] * (pos[i, a] - c[a])
+    for (i in seq_along(q)) acc <- acc + q[i] * (pos[i, a] - c[a])
     mu[a] <- acc
   }
   list(
@@ -206,7 +217,8 @@ dipole_moment <- function(charges, R, centre = NULL) {
 #' @param R Passed to \code{.painn_mat}.
 #' @param Q Passed to \code{.painn_mat}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-09}.
-#' @return A list with \code{scalar_error}, \code{vector_error}, \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
+#' @return A list with \code{scalar_error}, \code{vector_error},
+#' \code{scalars_invariant}, \code{vectors_equivariant}, \code{note}.
 #' @export
 morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
   pos <- .painn_mat(R)
@@ -256,6 +268,9 @@ morie_painn_equivariance_error <- function(model, s, v, R, Q, tol = 1e-9) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .painn_cheatsheet()
+#' res
 .painn_cheatsheet <- function() {
   paste("painn: message passing was LESS DATA EFFICIENT than kernel ",
         "methods, and the diagnosis is INVARIANT representations -- a ",

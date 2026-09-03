@@ -61,7 +61,8 @@
 
 #' .trclrn_check
 #'
-#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree}, \code{trclrn_rule_value}.
+#' A step of the trclrn_native implementation. Called by \code{trclrn_fit_tree},
+#' \code{trclrn_rule_value}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -222,7 +223,8 @@ trclrn_rule_value <- function(Y, A, X, rule, propensity = NULL,
 #' @param outcome_model Optional; may be \code{NULL}. Passed to \code{.trclrn_best_treatment}.
 #' @param max_depth Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
 #' @param min_leaf Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
-#' @param n_thresholds Coerced to integer by the body, with \code{as.integer}. Defaults to \code{20}.
+#' @param n_thresholds Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{20}.
 #' @param min_propensity Passed to \code{.trclrn_check}. Defaults to \code{0.01}.
 #' @return The value of \code{result}, as built in the body.
 #' @export
@@ -389,7 +391,8 @@ trclrn_predict_rule <- function(tree, X) {
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left}, \code{$n}, \code{$right}, \code{$threshold}, \code{$treatment} from it.
+#' @param tree A list; the body reads \code{$feature}, \code{$leaf}, \code{$left},
+#' \code{$n}, \code{$right}, \code{$threshold}, \code{$treatment} from it.
 #' @param names Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @param indent A count; the body uses it as \code{rep(...)}. Defaults to \code{0}.
 #' @return The value of \code{out}, as built in the body.

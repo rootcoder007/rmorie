@@ -45,7 +45,9 @@
 
 #' .informer_to_rows
 #'
-#' A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_select_queries} and 1 others in the module.
+#' A step of the informer_native implementation. Called by
+#' \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention},
+#' \code{morie_informer_select_queries} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -80,7 +82,9 @@
 
 #' .informer_logits
 #'
-#' A step of the informer_native implementation. Called by \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention}, \code{morie_informer_sparsity_measure}.
+#' A step of the informer_native implementation. Called by
+#' \code{morie_informer_full_attention}, \code{morie_informer_probsparse_attention},
+#' \code{morie_informer_sparsity_measure}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -89,20 +93,25 @@
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{sapply}.
 #' @export
+#' @examples
+#' res <- .informer_logits(q = 0.5, K = 3L, scale = TRUE)
+#' res
 .informer_logits <- function(q, K, scale) {
   sapply(K, function(kj) scale * sum(q * kj))
 }
 
 #' morie_informer_sparsity_measure
 #'
-#' A step of the informer_native implementation. Called by \code{morie_informer_kl_from_uniform}, \code{morie_informer_select_queries}.
+#' A step of the informer_native implementation. Called by
+#' \code{morie_informer_kl_from_uniform}, \code{morie_informer_select_queries}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param q Passed to \code{k.vec}.
 #' @param K Passed to \code{.informer_to_rows}.
 #' @param measure Compared against \code{"maxmean"}. Defaults to \code{"exact"}.
-#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_informer_sparsity_measure <- function(q, K, measure = "exact", scale = NULL) {
@@ -147,7 +156,8 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 
 #' morie_informer_select_queries
 #'
-#' A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}.
+#' A step of the informer_native implementation. Called by
+#' \code{morie_informer_probsparse_attention}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -155,9 +165,11 @@ morie_informer_kl_from_uniform <- function(q, K, scale = NULL) {
 #' @param K Passed to \code{.informer_to_rows}.
 #' @param factor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
 #' @param measure Passed to \code{morie_informer_sparsity_measure}. Defaults to \code{"maxmean"}.
-#' @param n_sample Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_sample Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K}, \code{n_sample}, \code{measure}.
+#' @return A list with \code{top}, \code{u}, \code{scores}, \code{L_Q}, \code{L_K},
+#' \code{n_sample}, \code{measure}.
 #' @export
 morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
                                           n_sample = NULL, seed = 0) {
@@ -202,7 +214,8 @@ morie_informer_select_queries <- function(Q, K, factor = 5, measure = "maxmean",
 #' @param Q Passed to \code{.informer_to_rows}.
 #' @param K Passed to \code{.informer_to_rows}.
 #' @param V Passed to \code{.informer_to_rows}.
-#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
@@ -239,8 +252,10 @@ morie_informer_full_attention <- function(Q, K, V, scale = NULL) {
 #' @param measure Passed to \code{morie_informer_select_queries}. Defaults to \code{"maxmean"}.
 #' @param n_sample Passed to \code{morie_informer_select_queries}.
 #' @param seed Passed to \code{morie_informer_select_queries}. Defaults to \code{0}.
-#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u}, \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
+#' @param scale Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{estimate}, \code{output}, \code{selected}, \code{u},
+#' \code{L_Q}, \code{L_K}, \code{measure}, \code{complexity}, \code{method}, \code{note}.
 #' @export
 morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
                                                 measure = "maxmean",
@@ -285,14 +300,16 @@ morie_informer_probsparse_attention <- function(Q, K, V, factor = 5,
 
 #' morie_informer_complexity
 #'
-#' A step of the informer_native implementation. Called by \code{morie_informer_probsparse_attention}.
+#' A step of the informer_native implementation. Called by
+#' \code{morie_informer_probsparse_attention}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
 #' @param L_Q Coerced to integer by the body, with \code{as.integer}.
 #' @param L_K Coerced to integer by the body, with \code{as.integer}.
 #' @param factor Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{5}.
-#' @return A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio}, \code{memory_full}, \code{memory_probsparse}.
+#' @return A list with \code{full}, \code{probsparse}, \code{u}, \code{ratio},
+#' \code{memory_full}, \code{memory_probsparse}.
 #' @export
 morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
   lq <- as.integer(L_Q)
@@ -329,26 +346,3 @@ morie_informer_informer_long_horizon <- morie_informer_probsparse_attention
 
 # Main entry point
 morie_informer <- morie_informer_probsparse_attention
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

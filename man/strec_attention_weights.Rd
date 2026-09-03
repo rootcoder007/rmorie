@@ -52,5 +52,7 @@ implemented in :mod:`narm`.
 }
 \keyword{internal}
 \examples{
-strec_attention_weights(embeddings = 5L, W1 = c(1, 2, 3, 4, 5, 6, 7, 8), W2 = c(1, 2, 3, 4, 5, 6, 7, 8), W3 = c(1, 2, 3, 4, 5, 6, 7, 8), W0 = c(1, 2, 3, 4, 5, 6, 7, 8))
+strec_attention_weights(embeddings = 5L, W1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  W2 = c(1, 2, 3, 4, 5, 6, 7, 8), W3 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  W0 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

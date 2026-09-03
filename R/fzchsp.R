@@ -3,7 +3,8 @@
 #' Chung-Smirnov statistic for the kernel distribution function estimator
 #'
 #' Sec. 2.1 records the Chung-Smirnov property of the KDFE:
-#' \deqn{\limsup_n \sqrt{\frac{2n}{\log\log n}}\sup_x|\hat F_h(x) - F_X(x)| = 1\ \mathrm{a.s.}}{limsup_n sqrt(2n/log log n) sup_x |Fhat_h(x) - F(x)| = 1 a.s.}
+#' \deqn{\limsup_n \sqrt{\frac{2n}{\log\log n}}\sup_x|\hat F_h(x) - F_X(x)| = 1\
+#' \mathrm{a.s.}}{limsup_n sqrt(2n/log log n) sup_x |Fhat_h(x) - F(x)| = 1 a.s.}
 #'
 #' A law of the iterated logarithm, not a distributional limit: it pins the
 #' ALMOST-SURE fluctuation of the uniform error at exactly

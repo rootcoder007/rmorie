@@ -215,7 +215,7 @@ Svmlagr <- function(X, y, beta0, beta, alpha) {
 #' realized sum of slacks is returned as slack_sum.
 #' @noRd
 Softsvm <- function(X, y, T, ...) {
-  fit <- morie_svm_fit_dual(X, y, C = as.numeric(T), ...)
+  fit <- morie_svm_fit_dual(X, y, C = as.numeric(TRUE), ...)
   X <- as.matrix(X)
   ys <- as.numeric(y)
   nb <- sqrt(sum(fit$beta^2))
@@ -254,7 +254,7 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
   al <- as.numeric(alpha)
   dl <- as.numeric(delta)
   zt <- as.numeric(zeta)
-  Tv <- as.numeric(T)
+  Tv <- as.numeric(TRUE)
   f <- as.numeric(beta0) + as.numeric(X %*% b)
   inner <- ys * f - 1 + zt
   L <- 0.5 * sum(b^2) + Tv * sum(zt) - sum(al * inner) - sum(dl * zt)
@@ -282,7 +282,7 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
 #' margin dual (9.32)-(9.33) only by the upper bound T.
 #' @noRd
 Svmsdual <- function(X, y, T, K = NULL, ...) {
-  Tv <- as.numeric(T)
+  Tv <- as.numeric(TRUE)
   fit <- morie_svm_fit_dual(X, y, C = Tv, K = K, ...)
   ys <- as.numeric(y)
   list(
@@ -312,7 +312,7 @@ Ksvmdual <- function(X, y, T, kernel = "linear", gamma = NULL,
   } else {
     as.matrix(K)
   }
-  out <- Svmsdual(X, y, T, K = Km, ...)
+  out <- Svmsdual(X, y, TRUE, K = Km, ...)
   out$K <- Km
   out$kernel <- if (is.null(K)) kernel else "precomputed"
   out
@@ -392,7 +392,8 @@ Basmat <- function(t, n_basis, kind = "fourier", period = NULL) {
 #' @param n_basis Coerced to integer by the body, with \code{as.integer}.
 #' @param p A count; the body uses it as \code{seq_len(...)}. Defaults to \code{1L}.
 #' @param kind Passed to \code{identical}. Defaults to \code{"fourier"}.
-#' @param period Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param period Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_fda_basis_deriv <- function(t, n_basis, p = 1L, kind = "fourier",
@@ -555,7 +556,8 @@ Penfreg <- function(y, X, P, lam, mu = NULL, tol = 1e-10) {
 #' @param X A matrix; indexed by row and column.
 #' @param env A vector; indexed elementwise.
 #' @param reference A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference}, \code{n_columns}.
+#' @return A list with \code{X_EF}, \code{levels}, \code{kept_levels}, \code{reference},
+#' \code{n_columns}.
 #' @export
 morie_fda_env_interaction <- function(X, env, reference = TRUE) {
   X <- as.matrix(X)

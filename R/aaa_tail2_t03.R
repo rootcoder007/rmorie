@@ -29,6 +29,10 @@
 #' @param A A matrix; passed to \code{nrow}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_t2_inv(A = A)
+#' res
 .morie_t2_inv <- function(A) {
   k <- nrow(A)
   M <- cbind(A, diag(1, k))
@@ -94,7 +98,9 @@
 #' @param s2 Numeric; combined arithmetically in the body.
 #' @param n1 Numeric; combined arithmetically in the body.
 #' @param n2 Numeric; combined arithmetically in the body.
-#' @return A list with \code{d}, \code{s_pooled}, \code{var_d}, \code{se_d}, \code{j}, \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n}, \code{method}.
+#' @return A list with \code{d}, \code{s_pooled}, \code{var_d}, \code{se_d}, \code{j},
+#' \code{j_approx}, \code{hedges_g}, \code{var_g}, \code{se_g}, \code{df}, \code{n},
+#' \code{method}.
 #' @export
 CohensD <- function(m1, m2, s1, s2, n1, n2) {
   n1 <- as.integer(n1)
@@ -153,8 +159,10 @@ CohensD <- function(m1, m2, s1, s2, n1, n2) {
 #' @export
 #'
 #' @param fisher_info A matrix; passed to \code{nrow}.
-#' @param var_estimate Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information}, \code{k}, \code{efficiency}, \code{attained}, \code{method}.
+#' @param var_estimate Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{bound}, \code{variance}, \code{se}, \code{information},
+#' \code{k}, \code{efficiency}, \code{attained}, \code{method}.
 #' @export
 CramerRao <- function(fisher_info, var_estimate = NULL) {
   if (is.matrix(fisher_info)) {
@@ -301,7 +309,9 @@ CramerRao <- function(fisher_info, var_estimate = NULL) {
 #' @param beta Optional; may be \code{NULL}. A vector; its length is taken.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{50L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
-#' @return A list with \code{loglik}, \code{score}, \code{information}, \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event}, \code{iterations}, \code{converged}, \code{method}.
+#' @return A list with \code{loglik}, \code{score}, \code{information},
+#' \code{coefficients}, \code{vcov}, \code{se}, \code{n}, \code{n_event},
+#' \code{iterations}, \code{converged}, \code{method}.
 #' @export
 CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
                   tol = 1e-10) {
@@ -406,6 +416,11 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @param h Numeric; combined arithmetically in the body.
 #' @return The value of \code{g}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_t2_fdgrad(fun = fn, x = x, h = 0.5)
+#' res
 .morie_t2_fdgrad <- function(fun, x, h) {
   g <- numeric(length(x))
   for (k in seq_along(x)) {
@@ -457,8 +472,11 @@ CoxPL <- function(time, event, X, beta = NULL, max_iter = 50L,
 #' @param step0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param h Passed to \code{.morie_t2_fdgrad}. Defaults to \code{1e-06}.
 #' @param armijo Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
-#' @param max_halving Coerced to integer by the body, with \code{as.integer}. Defaults to \code{40L}.
-#' @return A list with \code{x}, \code{f}, \code{penalty}, \code{violation}, \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner}, \code{method}.
+#' @param max_halving Coerced to integer by the body, with \code{as.integer}. Defaults to
+#' \code{40L}.
+#' @return A list with \code{x}, \code{f}, \code{penalty}, \code{violation},
+#' \code{max_violation}, \code{q}, \code{mu}, \code{n_outer}, \code{n_inner},
+#' \code{method}.
 #' @export
 PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
                        growth = 10, n_inner = 200L, step0 = 1,
@@ -543,7 +561,8 @@ PenaltyMin <- function(f, constraints, x0, mu, n_outer = 8L,
 #' @param lr Numeric; combined arithmetically in the body.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param relaxation Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr}, \code{relaxation}, \code{step_norm}, \code{method}.
+#' @return A list with \code{x}, \code{objective}, \code{n_iter}, \code{lr},
+#' \code{relaxation}, \code{step_norm}, \code{method}.
 #' @export
 ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
                      relaxation = 1) {
@@ -608,7 +627,9 @@ ProxGrad <- function(f, grad_f, prox_g, x0, lr, n_iter = 200L,
 #' @param Xt A matrix; indexed by row and column.
 #' @param epsilon Numeric; combined arithmetically in the body.
 #' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
-#' @return A list with \code{Xs_adapted}, \code{gamma}, \code{cost}, \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt}, \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
+#' @return A list with \code{Xs_adapted}, \code{gamma}, \code{cost},
+#' \code{transport_cost}, \code{row_error}, \code{col_error}, \code{ns}, \code{nt},
+#' \code{d}, \code{epsilon}, \code{n_iter}, \code{method}.
 #' @export
 OtAdapt <- function(Xs, Xt, epsilon, n_iter = 1000L) {
   Xs <- as.matrix(Xs)

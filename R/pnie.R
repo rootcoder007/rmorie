@@ -1,7 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Pure natural indirect effect
 #'
-#' \deqn{PNIE = E\[Y(a^*, M(a)) - Y(a^*, M(a^*))\] = (\theta_2\beta_1 + \theta_3\beta_1 a^*)(a - a^*).}{PNIE = E\[Y(a*, M(a)) - Y(a*, M(a*))\] = (theta2 beta1 + theta3 beta1 a*)(a - a*).}
+#' \deqn{PNIE = E\[Y(a^*, M(a)) - Y(a^*, M(a^*))\] = (\theta_2\beta_1 + \theta_3\beta_1
+#' a^*)(a - a^*).}{PNIE = E\[Y(a*, M(a)) - Y(a*, M(a*))\] = (theta2 beta1 + theta3 beta1
+#' a*)(a - a*).}
 #'
 #' Robins, J. M. and Greenland, S. (1992), \emph{Epidemiology} 3(2), 143-155,
 #' doi:10.1097/00001648-199203000-00013, is the shelf citation; it is closed

@@ -13,7 +13,8 @@
 #' @param vi Their sampling variances (not standard errors).
 #' @return List with \code{tau}, \code{statistic} (z), \code{p_value},
 #'   \code{n}, \code{method}.
-#' @references Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
+#' @references Begg and Mazumdar (1994), Biometrics 50:1088-1101.  Paywalled; the coded
+#' form was read from Viechtbauer's metafor, R/ranktest.r, the reference implementation.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

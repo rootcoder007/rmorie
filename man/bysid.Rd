@@ -25,7 +25,7 @@ morie_bayesian_ideal_points(
 \item{seed}{RNG seed.}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("bysid", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("bysid", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }

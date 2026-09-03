@@ -5,7 +5,8 @@
 
 #' .rmorie_sha256_impl
 #'
-#' A step of the RcppExports implementation. Called by \code{.morie_wrapping_key}, \code{morie_crypto_lamport_sign}, \code{morie_crypto_lamport_verify}.
+#' A step of the RcppExports implementation. Called by \code{.morie_wrapping_key},
+#' \code{morie_crypto_lamport_sign}, \code{morie_crypto_lamport_verify}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -18,7 +19,9 @@ NULL
 
 #' .rmorie_sha256_hex_impl
 #'
-#' A step of the RcppExports implementation. Called by \code{.morie_sha256_hex}, \code{create_reproducibility_manifest}, \code{morie_crypto_lamport_keygen} and 4 others in the module.
+#' A step of the RcppExports implementation. Called by \code{.morie_sha256_hex},
+#' \code{create_reproducibility_manifest}, \code{morie_crypto_lamport_keygen} and 4
+#' others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -61,7 +64,8 @@ NULL
 
 #' .morie_blake2b_impl
 #'
-#' A step of the RcppExports implementation. Called by \code{morie_secarg_prehash}, \code{morie_secarg_variable_hash}.
+#' A step of the RcppExports implementation. Called by \code{morie_secarg_prehash},
+#' \code{morie_secarg_variable_hash}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -813,7 +817,8 @@ NULL
 
 #' .morie_match_greedy_kd_cpp
 #'
-#' A step of the RcppExports implementation. Called by \code{.morie_match_genetic_eval}, \code{.morie_match_genetic_native}, \code{.morie_match_mahalanobis_native}.
+#' A step of the RcppExports implementation. Called by \code{.morie_match_genetic_eval},
+#' \code{.morie_match_genetic_native}, \code{.morie_match_mahalanobis_native}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -875,7 +880,8 @@ NULL
 
 #' .morie_rlearner_forest_cpp
 #'
-#' A step of the RcppExports implementation. Called by \code{.morie_cate_dr_learner}, \code{.morie_causal_forest_native}.
+#' A step of the RcppExports implementation. Called by \code{.morie_cate_dr_learner},
+#' \code{.morie_causal_forest_native}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

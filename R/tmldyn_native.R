@@ -32,6 +32,9 @@
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tmldyn_logit(p = 0.5)
+#' res
 .tmldyn_logit <- function(p) {
   q <- pmin(pmax(as.numeric(p), .tmldyn_EPS), 1 - .tmldyn_EPS)
   log(q / (1 - q))
@@ -39,7 +42,8 @@
 
 #' .tmldyn_expit
 #'
-#' A step of the tmldyn_native implementation. Called by \code{.fluctuate}, \code{intervention_mechanism}, \code{morie_tmldyn}.
+#' A step of the tmldyn_native implementation. Called by \code{.fluctuate},
+#' \code{intervention_mechanism}, \code{morie_tmldyn}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -58,7 +62,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param covariate_history Optional; may be \code{NULL}. Coerced to list by the body, with \code{as.list}.
+#' @param covariate_history Optional; may be \code{NULL}. Coerced to list by the body,
+#' with \code{as.list}.
 #' @param n Passed to \code{!=}.
 #' @return A list with \code{L0}, \code{L1}.
 #' @export
@@ -180,7 +185,8 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 
 #' .fit_q2
 #'
-#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}.
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn},
+#' \code{rule_value_seq}, \code{sequential_blips}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -213,7 +219,8 @@ intervention_mechanism <- function(L0, A0, L1, A1, trim = 0.01,
 
 #' .fit_q1
 #'
-#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn}, \code{rule_value_seq}, \code{sequential_blips}.
+#' A step of the tmldyn_native implementation. Called by \code{morie_tmldyn},
+#' \code{rule_value_seq}, \code{sequential_blips}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

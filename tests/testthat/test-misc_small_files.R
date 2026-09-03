@@ -59,7 +59,8 @@ test_that("morie_tps_use_of_force errors when n_encounters is not a positive sca
 
 test_that("morie_dcc_multivariate_garch runs on a multi-series matrix", {
   set.seed(1L)
-  n <- 200L; k <- 3L
+  n <- 200L
+  k <- 3L
   x <- matrix(stats::rnorm(n * k), n, k)
   out <- tryCatch(morie_dcc_multivariate_garch(x),
                   error = function(e) e)

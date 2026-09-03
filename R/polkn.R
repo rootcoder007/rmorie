@@ -10,7 +10,12 @@
 #' @param Z Second set of records; None gives the square Gram matrix of X.
 #'
 #' @return List with ``K``, ``degree``, ``gamma``, ``coef0``, ``n``, ``m``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2 pp. 255-256 and the worked degree-2 example on p. 256, where the polynomial kernel of degree d with constant a is (gamma x_i'x_j + a)^d and the feature-space dimension is discussed on p. 261.  Read from the chapter PDF, not recalled.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 8, Sect. 8.2.2 pp. 255-256 and the worked
+#' degree-2 example on p. 256, where the polynomial kernel of degree d with constant a is
+#' (gamma x_i'x_j + a)^d and the feature-space dimension is discussed on p. 261.  Read
+#' from the chapter PDF, not recalled.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

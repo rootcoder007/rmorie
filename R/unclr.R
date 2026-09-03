@@ -35,6 +35,10 @@ morie_unclr_dft_amp <- function(x) Mod(stats::fft(as.numeric(x)))
 #' @return A numeric value.
 #' @export
 #' @rdname morie_unclr_gaussian
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- morie_unclr_phi(z = y)
+#' res
 morie_unclr_phi <- function(z) exp(-0.5 * z^2) / sqrt(2 * pi)
 
 #' morie_unclr_Phi

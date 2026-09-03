@@ -25,6 +25,10 @@
 #' @param X A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{X}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .flow_an_to_mat(X = x)
+#' res
 .flow_an_to_mat <- function(X) {
   if (is.data.frame(X)) X <- as.matrix(X)
   X <- as.matrix(X)
@@ -75,7 +79,8 @@
 
 #' .st
 #'
-#' A step of the flow_an_native implementation. Called by \code{.coupling_forward}, \code{.coupling_inverse}.
+#' A step of the flow_an_native implementation. Called by \code{.coupling_forward},
+#' \code{.coupling_inverse}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -207,9 +212,12 @@
 #'
 #' @param X Passed to \code{.flow_an_to_mat}.
 #' @param layers Passed to \code{.log_prob}.
-#' @param threshold_quantile Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.
+#' @param threshold_quantile Coerced to numeric by the body, with \code{as.numeric}.
+#' Defaults to \code{0.95}.
 #' @param reference Optional; may be \code{NULL}. Passed to \code{.flow_an_to_mat}.
-#' @return A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag}, \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced}, \code{log_likelihood}, \code{method}.
+#' @return A list with \code{estimate}, \code{score}, \code{threshold}, \code{flag},
+#' \code{n_flagged}, \code{n}, \code{quantile}, \code{self_referenced},
+#' \code{log_likelihood}, \code{method}.
 #' @export
 .anomaly_score <- function(X, layers, threshold_quantile = 0.95, reference = NULL) {
   Xm <- .flow_an_to_mat(X)

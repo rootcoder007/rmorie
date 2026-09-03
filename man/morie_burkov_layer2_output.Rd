@@ -21,5 +21,6 @@ A list with \code{estimate}, \code{preactivation}, \code{n}, \code{method}.
 }
 \keyword{internal}
 \examples{
-morie_burkov_layer2_output(W_2 = c(1, 2, 3, 4, 5, 6, 7, 8), y_1 = c(1, 2, 3, 4, 5, 6, 7, 8), b_2_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_burkov_layer2_output(W_2 = c(1, 2, 3, 4, 5, 6, 7, 8), y_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  b_2_1 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

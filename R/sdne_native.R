@@ -62,13 +62,18 @@
 
 #' .sdne_mat
 #'
-#' A step of the sdne_native implementation. Called by \code{.sdne_first_order_loss}, \code{.sdne_penalty_matrix}, \code{.sdne_proximity_counts} and 2 others in the module.
+#' A step of the sdne_native implementation. Called by \code{.sdne_first_order_loss},
+#' \code{.sdne_penalty_matrix}, \code{.sdne_proximity_counts} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x A vector; its length is taken and its elements indexed.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sdne_mat(x = x)
+#' res
 .sdne_mat <- function(x) {
   if (is.matrix(x)) {
     storage.mode(x) <- "double"
@@ -172,7 +177,8 @@
 #' source it follows.
 #'
 #' @param adjacency Passed to \code{.sdne_mat}.
-#' @return A list with \code{first_order_pairs}, \code{second_order_pairs}, \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
+#' @return A list with \code{first_order_pairs}, \code{second_order_pairs},
+#' \code{total_pairs}, \code{density}, \code{ratio}, \code{note}.
 #' @export
 .sdne_proximity_counts <- function(adjacency) {
   A <- .sdne_mat(adjacency)
@@ -210,7 +216,9 @@
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
 #' @param nu Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param parameters Optional; may be \code{NULL}. Passed to \code{.sdne_mat}.
-#' @return A list with \code{estimate}, \code{loss}, \code{second_order}, \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{loss}, \code{second_order},
+#' \code{first_order}, \code{regulariser}, \code{alpha}, \code{beta}, \code{method},
+#' \code{note}.
 #' @export
 morie_sdne <- function(adjacency, reconstruction, embeddings, beta = 5.0,
                        alpha = 0.1, nu = 0.0, parameters = NULL) {

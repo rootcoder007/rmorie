@@ -176,7 +176,8 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #' @param w Numeric; combined arithmetically in the body. Defaults to \code{11L}.
 #' @param match Passed to \code{morie_word_hits}. Defaults to \code{5}.
 #' @param mismatch Passed to \code{morie_word_hits}. Defaults to \code{-4}.
-#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param cutoff Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param X Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{20}.
 #' @param word_mode Passed to \code{morie_word_hits}. Defaults to \code{"exact"}.
 #' @param threshold Passed to \code{morie_word_hits}.
@@ -184,10 +185,13 @@ extend_one <- function(qchars, schars, qi, si, w, sc, X) {
 #' @param alphabet A vector; its length is taken. Defaults to \code{"ACGT"}.
 #' @param lam Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
 #' @param K Optional; may be \code{NULL}. Passed to \code{morie_blast_pvalue}.
-#' @param max_hsps Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param max_hsps Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param letter_probs Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param pvalues A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps}, \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam}, \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{hsps}, \code{best_score}, \code{n_hsps},
+#' \code{n_hits}, \code{w}, \code{cutoff}, \code{X}, \code{word_mode}, \code{lam},
+#' \code{K}, \code{karlin_altschul}, \code{note}, \code{method}.
 #' @export
 morie_blstn <- function(query, subjects, w = 11L, match = 5, mismatch = -4,
                         cutoff = NULL, X = 20, word_mode = "exact",
@@ -336,7 +340,8 @@ morie_blast_nucleotide <- morie_blstn
 
 #' lattice_check
 #'
-#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul}, \code{morie_score_distribution}.
+#' A step of the blstn_native implementation. Called by \code{morie_karlin_altschul},
+#' \code{morie_score_distribution}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -360,9 +365,11 @@ lattice_check <- function(x) {
 #'
 #' @param match Defaults to \code{5}.
 #' @param mismatch Defaults to \code{-4}.
-#' @param letter_probs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param letter_probs Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param matrix Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @param subject_probs Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param subject_probs Optional; may be \code{NULL}. Coerced to numeric by the body,
+#' with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 morie_score_distribution <- function(match = 5, mismatch = -4,
@@ -463,7 +470,8 @@ gcd_span <- function(scores) {
 #' @param max_terms Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
 #' @param bound One of \code{"lower"}, \code{"mid"}, \code{"upper"}. Defaults to \code{"upper"}.
-#' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C}, \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
+#' @return A list with \code{lam}, \code{K}, \code{K_upper}, \code{K_lower}, \code{C},
+#' \code{delta}, \code{terms}, \code{series}, \code{mean_score}, \code{distribution}.
 #' @export
 morie_karlin_altschul <- function(dist = NULL, match = 5, mismatch = -4,
                                   letter_probs = NULL, matrix = NULL,

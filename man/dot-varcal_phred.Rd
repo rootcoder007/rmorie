@@ -17,3 +17,7 @@ A step of the varcal_native implementation. Called by \code{varcal_genotype_post
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .varcal_phred(p = 0.5)
+res
+}

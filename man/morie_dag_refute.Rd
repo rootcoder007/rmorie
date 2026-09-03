@@ -21,7 +21,7 @@ morie_dag_refute(
 \item{method}{One of \code{"placebo_treatment"},
 \code{"random_common_cause"}, \code{"data_subset"}.}
 
-\item{estimator}{Passed through to \code{\link[=morie_dag_estimate]{morie_dag_estimate()}}.}
+\item{estimator}{Passed through to \code{morie_dag_estimate()}.}
 
 \item{n_reps}{Number of refutation replications (default 20).}
 

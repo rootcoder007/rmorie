@@ -22,5 +22,6 @@ A list with \code{predictive}, \code{prior}, \code{smoothed_by}.
 }
 \keyword{internal}
 \examples{
-bigram_topic_predictive(N_ijk = c(1, 2, 3, 4, 5, 6, 7, 8), N_jk = c(1, 2, 3, 4, 5, 6, 7, 8), beta = 0.5, m = 5L)
+bigram_topic_predictive(N_ijk = c(1, 2, 3, 4, 5, 6, 7, 8), N_jk = c(1, 2, 3, 4, 5, 6, 7, 8),
+  beta = 0.5, m = 5L)
 }

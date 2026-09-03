@@ -96,6 +96,10 @@
 #' @param M A matrix; indexed by row and column.
 #' @return A list with \code{L}, \code{rdef}, \code{piv}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gwr_pivot_chol_rcond(M = A)
+#' res
 .gwr_pivot_chol_rcond <- function(M) {
   # pivoted Cholesky with a small ridge when the smallest pivot is
   # essentially zero; returns a list with the cholesky factor, the
@@ -137,7 +141,8 @@
 #' @param bw Passed to \code{.gwr_kernel}.
 #' @param kernel Passed to \code{.gwr_kernel}.
 #' @param adaptive A flag; the body branches on it.
-#' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid}, \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
+#' @return A list with \code{params}, \code{se_params}, \code{fitted}, \code{resid},
+#' \code{tr_S}, \code{sigma2}, \code{edf_resid}, \code{n_rank_deficient}.
 #' @export
 .gwr_fit <- function(y, X, D, bw, kernel, adaptive) {
   n <- length(y)
@@ -213,7 +218,8 @@
 
 #' .gwr_aicc
 #'
-#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion}, \code{morie_gwrcal}, \code{morie_gwrcal_global_aicc}.
+#' A step of the gwrcal_native implementation. Called by \code{.gwr_criterion},
+#' \code{morie_gwrcal}, \code{morie_gwrcal_global_aicc}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

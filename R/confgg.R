@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Configuration model with a prescribed degree sequence
 #'
-#' Formula: attach half-edges (stubs) uniformly at random in pairs; every vertex ends with its requested degree
+#' Formula: attach half-edges (stubs) uniformly at random in pairs; every vertex ends
+#' with its requested degree
 #'
 #' @param degrees Requested degree for each vertex.
 #' @param seed Seed of the shared minstd stream.
@@ -9,7 +10,11 @@
 #' @param degrees See Usage.
 #' @param seed See Usage.
 #' @return List with ``edges``, ``degree`` (realised), ``self_loops``, ``multi_edges``, ``n``.
-#' @references Bender and Canfield (1978), The asymptotic number of labeled graphs with given degree sequences, JCTA 24:296-307; Molloy and Reed (1995), A critical point for random graphs with a given degree sequence, Random Structures and Algorithms 6:161-180. Neither is held locally; uniform stub pairing is the standard published construction.
+#' @references Bender and Canfield (1978), The asymptotic number of labeled graphs with
+#' given degree sequences, JCTA 24:296-307; Molloy and Reed (1995), A critical point for
+#' random graphs with a given degree sequence, Random Structures and Algorithms
+#' 6:161-180. Neither is held locally; uniform stub pairing is the standard published
+#' construction.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

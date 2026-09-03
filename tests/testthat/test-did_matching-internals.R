@@ -18,7 +18,8 @@ test_that(".morie_did_make_ci honours custom alpha", {
   out_05  <- rmorie:::.morie_did_make_ci(0.5, 0.1, alpha = 0.05)
   out_01  <- rmorie:::.morie_did_make_ci(0.5, 0.1, alpha = 0.01)
   # 99% CI should be wider than 95% CI
-  w_05 <- diff(unlist(out_05)); w_01 <- diff(unlist(out_01))
+  w_05 <- diff(unlist(out_05))
+  w_01 <- diff(unlist(out_01))
   expect_true(abs(w_01) >= abs(w_05))
 })
 
@@ -43,7 +44,8 @@ test_that(".morie_did_pvalue returns 2-sided p from a t stat", {
 
 test_that(".morie_did_ols_robust_se returns robust SE on a small fit", {
   set.seed(1L)
-  n <- 50L; X <- cbind(1, stats::rnorm(n))
+  n <- 50L
+  X <- cbind(1, stats::rnorm(n))
   y <- X %*% c(1, 0.5) + stats::rnorm(n, sd = 0.3)
   out <- tryCatch(
     rmorie:::.morie_did_ols_robust_se(X, y),
@@ -57,7 +59,8 @@ test_that(".morie_did_ols_robust_se returns robust SE on a small fit", {
 
 test_that(".morie_did_ols_robust_se with cluster_ids returns clustered SE", {
   set.seed(2L)
-  n <- 60L; X <- cbind(1, stats::rnorm(n))
+  n <- 60L
+  X <- cbind(1, stats::rnorm(n))
   y <- X %*% c(1, 0.5) + stats::rnorm(n, sd = 0.3)
   clust <- sample.int(10L, n, replace = TRUE)
   out <- tryCatch(
@@ -114,7 +117,8 @@ test_that(".morie_did_ipw_att returns ATT given y/treat/ps", {
 
 test_that(".morie_did_within_transform demean each unit's series", {
   set.seed(5L)
-  n_units <- 20L; n_periods <- 5L
+  n_units <- 20L
+  n_periods <- 5L
   df <- expand.grid(unit = 1:n_units, time = 1:n_periods)
   df$y <- df$unit * 10 + df$time + stats::rnorm(nrow(df))
   out <- tryCatch(

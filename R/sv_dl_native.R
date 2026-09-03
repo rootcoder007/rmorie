@@ -44,7 +44,7 @@
 # list with chrom1/pos1/strand1 and the same for mate 2.
 
 .sv_dl_TYPES <- c("DEL", "DUP", "INV", "TRA")
-.sv_dl_COMPLEMENT <- c(A="T", C="G", G="C", T="A", N="N")
+.sv_dl_COMPLEMENT <- c(A = "T", C = "G", G = "C", T = "A", N = "N")
 
 # ------------------------------------------------------------- helpers
 
@@ -54,15 +54,20 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$id}, \code{$len1}, \code{$len2}, \code{$pos1}, \code{$pos2}, \code{$read_length}, \code{$seq}, \code{$strand1}, \code{$strand2} from it.
-#' @return A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1}, \code{chrom2}, \code{pos2}, \code{strand2}, \code{len2}, \code{seq}, \code{id}.
+#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$id},
+#' \code{$len1}, \code{$len2}, \code{$pos1}, \code{$pos2}, \code{$read_length},
+#' \code{$seq}, \code{$strand1}, \code{$strand2} from it.
+#' @return A list with \code{chrom1}, \code{pos1}, \code{strand1}, \code{len1},
+#' \code{chrom2}, \code{pos2}, \code{strand2}, \code{len2}, \code{seq}, \code{id}.
 #' @export
 .sv_dl_pair <- function(p) {
   # Normalise one read pair; mate 1 is the left-most alignment.
   need <- c("chrom1", "pos1", "strand1", "chrom2", "pos2", "strand2")
   if (any(vapply(need, function(k) is.null(p[[k]]), logical(1)))) {
-    stop(paste0("sv_dl: a pair needs chrom1/pos1/strand1 and ",
-                "chrom2/pos2/strand2"))
+    stop(paste0(
+      "sv_dl: a pair needs chrom1/pos1/strand1 and ",
+      "chrom2/pos2/strand2"
+    ))
   }
   c1 <- as.character(p[["chrom1"]])
   p1 <- as.integer(p[["pos1"]])
@@ -94,9 +99,11 @@
     s2 <- tmp[[3L]]
     l2 <- tmp[[4L]]
   }
-  list(chrom1=c1, pos1=p1, strand1=s1, len1=l1,
-       chrom2=c2, pos2=p2, strand2=s2, len2=l2,
-       seq=p[["seq"]], id=p[["id"]])
+  list(
+    chrom1 = c1, pos1 = p1, strand1 = s1, len1 = l1,
+    chrom2 = c2, pos2 = p2, strand2 = s2, len2 = l2,
+    seq = p[["seq"]], id = p[["id"]]
+  )
 }
 
 #' .sv_dl_median
@@ -108,6 +115,10 @@
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .sv_dl_median(v = x)
+#' res
 .sv_dl_median <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -123,7 +134,8 @@
 
 #' Outer distance: left-most start to right-most end
 #'
-#' A step of the sv_dl_native implementation. Called by \code{.sv_dl_size}, \code{morie_sv_dl_classify_pair}.
+#' A step of the sv_dl_native implementation. Called by \code{.sv_dl_size},
+#' \code{morie_sv_dl_classify_pair}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -137,7 +149,8 @@
 
 #' morie_sv_dl_insert_size_stats
 #'
-#' A step of the sv_dl_native implementation. Called by \code{morie_sv_dl_paired_end_calls}, \code{morie_sv_dl_structural_variant}.
+#' A step of the sv_dl_native implementation. Called by
+#' \code{morie_sv_dl_paired_end_calls}, \code{morie_sv_dl_structural_variant}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -146,8 +159,8 @@
 #' @param spread One of \code{"mad"}, \code{"sd"}. Defaults to \code{"mad"}.
 #' @return A list with \code{median}, \code{sd}, \code{spread}, \code{orientation}, \code{n}.
 #' @export
-morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
-                                          spread="mad") {
+morie_sv_dl_insert_size_stats <- function(pairs, orientation = NULL,
+                                          spread = "mad") {
   # Median and spread of the library insert size, and its orientation.
   # spread="mad" (default) uses 1.4826 * MAD, unmoved by the
   # deletion-spanning outliers; spread="sd" gives the paper's literal
@@ -155,25 +168,32 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
   ps <- lapply(pairs, .sv_dl_pair)
   same <- Filter(function(p) p$chrom1 == p$chrom2, ps)
   if (length(same) == 0L) {
-    stop(paste0("sv_dl: no same-chromosome pairs to estimate the insert ",
-                "size distribution from"))
+    stop(paste0(
+      "sv_dl: no same-chromosome pairs to estimate the insert ",
+      "size distribution from"
+    ))
   }
   if (is.null(orientation)) {
-    keys <- vapply(same, function(p) paste(p$strand1, p$strand2),
-                   character(1))
+    keys <- vapply(
+      same, function(p) paste(p$strand1, p$strand2),
+      character(1)
+    )
     tab <- table(keys)
     best <- names(tab)[order(-as.integer(tab), names(tab))][1L]
     orientation <- strsplit(best, " ")[[1L]]
   }
   orientation <- as.character(orientation)
   if (!(orientation[1L] %in% c("+", "-")) ||
-      !(orientation[2L] %in% c("+", "-"))) {
+    !(orientation[2L] %in% c("+", "-"))) {
     stop("sv_dl: orientation must be a pair of strands")
   }
   concordant <- vapply(
-    Filter(function(p) p$strand1 == orientation[1L] &&
-                       p$strand2 == orientation[2L], same),
-    .sv_dl_insert, numeric(1))
+    Filter(function(p) {
+      p$strand1 == orientation[1L] &&
+        p$strand2 == orientation[2L]
+    }, same),
+    .sv_dl_insert, numeric(1)
+  )
   if (length(concordant) == 0L) {
     stop("sv_dl: no pairs in the default orientation")
   }
@@ -186,13 +206,15 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
       sd_ <- 1.4826 * .sv_dl_median(abs(concordant - med))
     } else {
       mu <- mean(concordant)
-      sd_ <- sqrt(sum((concordant - mu) ^ 2) / (length(concordant) - 1.0))
+      sd_ <- sqrt(sum((concordant - mu)^2) / (length(concordant) - 1.0))
     }
   } else {
     sd_ <- 0.0
   }
-  list(median=as.numeric(med), sd=as.numeric(sd_), spread=spread,
-       orientation=orientation, n=length(concordant))
+  list(
+    median = as.numeric(med), sd = as.numeric(sd_), spread = spread,
+    orientation = orientation, n = length(concordant)
+  )
 }
 
 #' morie_sv_dl_classify_pair
@@ -201,15 +223,16 @@ morie_sv_dl_insert_size_stats <- function(pairs, orientation=NULL,
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1}, \code{$strand2} from it.
+#' @param p A list; the body reads \code{$chrom1}, \code{$chrom2}, \code{$strand1},
+#' \code{$strand2} from it.
 #' @param median Numeric; combined arithmetically in the body.
 #' @param sd Numeric; combined arithmetically in the body.
 #' @param orientation A vector; indexed elementwise. Defaults to \code{c("+", "-")}.
 #' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @return Nothing; the function is called for its effect.
 #' @export
-morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
-                                      n_sd=3.0) {
+morie_sv_dl_classify_pair <- function(p, median, sd, orientation = c("+", "-"),
+                                      n_sd = 3.0) {
   # The signature of one pair (Section 2.1, Figure 2). Returns NULL
   # for a concordant pair, otherwise c(type, subtype).
   p <- .sv_dl_pair(p)
@@ -272,14 +295,15 @@ morie_sv_dl_classify_pair <- function(p, median, sd, orientation=c("+", "-"),
 #' @param median Numeric; combined arithmetically in the body.
 #' @param sd Numeric; combined arithmetically in the body.
 #' @param label A vector; indexed elementwise.
-#' @param orientation Accepted by the signature and not used anywhere in the body. Defaults to \code{c("+", "-")}.
+#' @param orientation Accepted by the signature and not used anywhere in the body.
+#' Defaults to \code{c("+", "-")}.
 #' @param n_sd Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param window Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A list with \code{nodes}, \code{edges}, \code{sizes}, \code{label}.
 #' @export
 morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
-                                       orientation=c("+", "-"), n_sd=3.0,
-                                       window=NULL) {
+                                       orientation = c("+", "-"), n_sd = 3.0,
+                                       window = NULL) {
   # Nodes are pairs of one signature; edges join pairs that agree. An
   # edge requires both left and right ends within the expected insert
   # range; its weight is the disagreement between implied SV sizes.
@@ -312,7 +336,7 @@ morie_sv_dl_build_sv_graph <- function(pairs, median, sd, label,
       edges <- rbind(edges, c(as.numeric(w), i, j))
     }
   }
-  list(nodes=ps, edges=edges, sizes=sizes, label=label)
+  list(nodes = ps, edges = edges, sizes = sizes, label = label)
 }
 
 #' Connected components (union-find); singletons dropped
@@ -367,11 +391,11 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
   # is e_min; then repeatedly the lowest-weight edge with exactly one
   # endpoint inside, whose other endpoint is adjacent to every member.
   keep <- members
-  sel <- edges[edges[, 2L] %in% keep & edges[, 3L] %in% keep, , drop=FALSE]
+  sel <- edges[edges[, 2L] %in% keep & edges[, 3L] %in% keep, , drop = FALSE]
   if (nrow(sel) == 0L) {
     return(integer(0))
   }
-  sel <- sel[order(sel[, 1L], sel[, 2L], sel[, 3L]), , drop=FALSE]
+  sel <- sel[order(sel[, 1L], sel[, 2L], sel[, 3L]), , drop = FALSE]
   adj <- list()
   akey <- function(i, j) paste(i, j)
   for (e in seq_len(nrow(sel))) {
@@ -392,9 +416,11 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
         next
       }
       outside <- if (i %in% clique) j else i
-      ok <- all(vapply(clique,
-                       function(m) !is.null(adj[[akey(outside, m)]]),
-                       logical(1)))
+      ok <- all(vapply(
+        clique,
+        function(m) !is.null(adj[[akey(outside, m)]]),
+        logical(1)
+      ))
       if (ok && (is.null(best_w) || sel[e, 1L] < best_w)) {
         best_w <- sel[e, 1L]
         best_v <- outside
@@ -419,15 +445,16 @@ morie_sv_dl_maximal_clique <- function(members, edges) {
 #' @param sd Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_classify_pair}.
 #' @param orientation Optional; may be \code{NULL}. Passed to \code{morie_sv_dl_insert_size_stats}.
 #' @param n_sd Passed to \code{morie_sv_dl_classify_pair}. Defaults to \code{3}.
-#' @param min_support The body requires: sv_dl: min_support must be at least 1. Defaults to \code{2}.
+#' @param min_support The body requires: sv_dl: min_support must be at least 1. Defaults
+#' to \code{2}.
 #' @param window Passed to \code{morie_sv_dl_build_sv_graph}.
 #' @param spread Passed to \code{morie_sv_dl_insert_size_stats}. Defaults to \code{"mad"}.
 #' @return The value of \code{calls}, as built in the body.
 #' @export
-morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
-                                         orientation=NULL, n_sd=3.0,
-                                         min_support=2, window=NULL,
-                                         spread="mad") {
+morie_sv_dl_paired_end_calls <- function(pairs, median = NULL, sd = NULL,
+                                         orientation = NULL, n_sd = 3.0,
+                                         min_support = 2, window = NULL,
+                                         spread = "mad") {
   # Cluster the discordant pairs into paired-end SV calls.
   ps <- lapply(pairs, .sv_dl_pair)
   if (length(ps) == 0L) {
@@ -450,7 +477,7 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
   for (p in ps) {
     lab <- morie_sv_dl_classify_pair(p, median, sd, orientation, n_sd)
     if (!is.null(lab)) {
-      key <- paste(lab[1L], lab[2L], sep="\r")
+      key <- paste(lab[1L], lab[2L], sep = "\r")
       by_label[[key]] <- c(by_label[[key]], list(p))
     }
   }
@@ -461,8 +488,10 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
       lab <- c(lab, "")
     }
     group <- by_label[[key]]
-    g <- morie_sv_dl_build_sv_graph(group, median, sd, lab, orientation,
-                                    n_sd, window)
+    g <- morie_sv_dl_build_sv_graph(
+      group, median, sd, lab, orientation,
+      n_sd, window
+    )
     for (comp in .sv_dl_components(length(g$nodes), g$edges)) {
       members <- morie_sv_dl_maximal_clique(comp, g$edges)
       if (length(members) < min_support) {
@@ -477,17 +506,24 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
         NULL
       }
       calls <- c(calls, list(list(
-        type=lab[1L], subtype=lab[2L],
-        chrom=sel[[1L]]$chrom1, chrom2=sel[[1L]]$chrom2,
-        start=as.integer(start), end=as.integer(end),
-        size=if (is.null(size)) NULL else as.numeric(size),
-        support=length(members), pairs=sel, precise=FALSE)))
+        type = lab[1L], subtype = lab[2L],
+        chrom = sel[[1L]]$chrom1, chrom2 = sel[[1L]]$chrom2,
+        start = as.integer(start), end = as.integer(end),
+        size = if (is.null(size)) NULL else as.numeric(size),
+        support = length(members), pairs = sel, precise = FALSE
+      )))
     }
   }
   if (length(calls) > 1L) {
-    keys <- vapply(calls, function(c) paste(c$type, c$chrom,
-                                            sprintf("%012d", c$start)),
-                   character(1))
+    keys <- vapply(
+      calls, function(c) {
+        paste(
+          c$type, c$chrom,
+          sprintf("%012d", c$start)
+        )
+      },
+      character(1)
+    )
     calls <- calls[order(keys)]
   }
   calls
@@ -504,11 +540,16 @@ morie_sv_dl_paired_end_calls <- function(pairs, median=NULL, sd=NULL,
 #' @param s Character; passed to \code{toupper}.
 #' @return A character value.
 #' @export
+#' @examples
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .sv_dl_revcomp(s = txt)
+#' res
 .sv_dl_revcomp <- function(s) {
   chars <- rev(strsplit(toupper(s), "")[[1L]])
   comp <- ifelse(chars %in% names(.sv_dl_COMPLEMENT),
-                 .sv_dl_COMPLEMENT[chars], "N")
-  paste(comp, collapse="")
+    .sv_dl_COMPLEMENT[chars], "N"
+  )
+  paste(comp, collapse = "")
 }
 
 #' Rewrite the region so a deletion-type search works (Figure 4): a
@@ -525,8 +566,10 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
   # tandem duplication has its two halves swapped, an inversion has
   # its second half reverse complemented, a translocation gets both.
   if (!(sv_type %in% .sv_dl_TYPES)) {
-    stop(sprintf("sv_dl: sv_type must be one of %s",
-                 paste(.sv_dl_TYPES, collapse=", ")))
+    stop(sprintf(
+      "sv_dl: sv_type must be one of %s",
+      paste(.sv_dl_TYPES, collapse = ", ")
+    ))
   }
   s <- toupper(as.character(ref))
   if (sv_type == "DEL") {
@@ -557,8 +600,8 @@ morie_sv_dl_deletion_type_reference <- function(ref, sv_type) {
 #' @param require_half A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{[}.
 #' @export
-morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
-                                       require_half=TRUE) {
+morie_sv_dl_kmer_diagonals <- function(read, ref, k = 7, k_min = 3,
+                                       require_half = TRUE) {
   # Bin the read's k-mer hits by alignment diagonal (Section 2.2).
   # Diagonals are taken in decreasing hit count and each read k-mer is
   # charged to its best diagonal only; diagonals under k_min hits are
@@ -577,7 +620,7 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
   index <- list()
   for (pos in seq_len(nchar(g) - k + 1L) - 1L) {
     km <- substr(g, pos + 1L, pos + k)
-    if (grepl("N", km, fixed=TRUE)) {
+    if (grepl("N", km, fixed = TRUE)) {
       next
     }
     index[[km]] <- c(index[[km]], pos)
@@ -586,7 +629,7 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
   total <- 0L
   for (off in seq_len(nchar(r) - k + 1L) - 1L) {
     km <- substr(r, off + 1L, off + k)
-    if (grepl("N", km, fixed=TRUE)) {
+    if (grepl("N", km, fixed = TRUE)) {
       next
     }
     total <- total + 1L
@@ -602,7 +645,7 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
   counts <- vapply(per_diag, length, integer(1))
   ord <- order(-counts, diags)
   used <- integer(0)
-  kept <- matrix(numeric(0), 0L, 3L)  # diag, hits, min offset
+  kept <- matrix(numeric(0), 0L, 3L) # diag, hits, min offset
   for (t in ord) {
     offs <- setdiff(per_diag[[t]], used)
     if (length(offs) < as.integer(k_min)) {
@@ -614,12 +657,12 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
   if (nrow(kept) < 2L) {
     return(NULL)
   }
-  top2 <- sum(sort(kept[, 2L], decreasing=TRUE)[1:2])
+  top2 <- sum(sort(kept[, 2L], decreasing = TRUE)[1:2])
   if (require_half && total > 0L && top2 * 2 < total) {
     return(NULL)
   }
-  kept <- kept[order(kept[, 3L]), , drop=FALSE]  # order along the read
-  kept[, 1:2, drop=FALSE]
+  kept <- kept[order(kept[, 3L]), , drop = FALSE] # order along the read
+  kept[, 1:2, drop = FALSE]
 }
 
 #' Gapless majority-vote consensus over the aligned reads. starts
@@ -627,14 +670,17 @@ morie_sv_dl_kmer_diagonals <- function(read, ref, k=7, k_min=3,
 #' places each read in a common frame. Returns list(consensus, start).
 #'
 #' @param reads Coerced to character by the body, with \code{as.character}.
-#' @param starts Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param starts Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{consensus}, \code{start}.
 #' @export
-morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
+morie_sv_dl_split_read_consensus <- function(reads, starts = NULL) {
   # Gapless majority-vote consensus over the aligned reads. starts
   # places each read in a common frame. Returns list(consensus, start).
-  rs <- toupper(as.character(Filter(function(r) nchar(r) > 0L,
-                                    as.character(reads))))
+  rs <- toupper(as.character(Filter(
+    function(r) nchar(r) > 0L,
+    as.character(reads)
+  )))
   if (length(rs) == 0L) {
     stop("sv_dl: no reads to build a consensus from")
   }
@@ -655,18 +701,21 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
       a <- st[z]
       if (a <= col && col < a + nchar(rs[z])) {
         base <- substr(rs[z], col - a + 1L, col - a + 1L)
-        counts[[base]] <- (if (is.null(counts[[base]])) 0L
-                           else counts[[base]]) + 1L
+        counts[[base]] <- (if (is.null(counts[[base]])) {
+          0L
+        } else {
+          counts[[base]]
+        }) + 1L
       }
     }
     if (length(counts) == 0L) {
-      break                    # the consensus stays contiguous
+      break # the consensus stays contiguous
     }
     nm <- sort(names(counts))
     cts <- vapply(nm, function(b) counts[[b]], integer(1))
     out <- c(out, nm[which.max(cts)])
   }
-  list(consensus=paste(out, collapse=""), start=lo)
+  list(consensus = paste(out, collapse = ""), start = lo)
 }
 
 #' .sv_dl_gotoh
@@ -683,8 +732,8 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
 #' @param gap_extend Numeric; combined arithmetically in the body. Defaults to \code{-1}.
 #' @return A list with \code{best}, \code{best_at}.
 #' @export
-.sv_dl_gotoh <- function(query, ref, match=1.0, mismatch=-2.0,
-                         gap_open=-4.0, gap_extend=-1.0) {
+.sv_dl_gotoh <- function(query, ref, match = 1.0, mismatch = -2.0,
+                         gap_open = -4.0, gap_extend = -1.0) {
   # Affine-gap DP; returns, for each query prefix, its best score and
   # where it ended in the reference (0-based). The query is aligned
   # from its start but may end anywhere in the reference.
@@ -695,7 +744,7 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
   neg <- -Inf
   Mrow <- rep(neg, m + 1L)
   Irow <- rep(neg, m + 1L)
-  Drow <- rep(0.0, m + 1L)  # free leading gap in the query
+  Drow <- rep(0.0, m + 1L) # free leading gap in the query
   Mrow[1L] <- 0.0
   best <- numeric(n)
   best_at <- integer(n)
@@ -719,7 +768,7 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
     best[i] <- col[bj]
     best_at[i] <- bj - 1L
   }
-  list(best=best, best_at=best_at)
+  list(best = best, best_at = best_at)
 }
 
 #' morie_sv_dl_gotoh_score_vectors
@@ -736,9 +785,9 @@ morie_sv_dl_split_read_consensus <- function(reads, starts=NULL) {
 #' @param gap_extend Passed to \code{.sv_dl_gotoh}. Defaults to \code{-1}.
 #' @return A list with \code{f}, \code{f_at}, \code{r}, \code{r_at}.
 #' @export
-morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
-                                            mismatch=-2.0, gap_open=-4.0,
-                                            gap_extend=-1.0) {
+morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match = 1.0,
+                                            mismatch = -2.0, gap_open = -4.0,
+                                            gap_extend = -1.0) {
   # The paper's f and r (Section 2.2): f_i the best score for the
   # prefix c_1..c_i, r_j the best for the suffix c_n..c_j. Returns
   # list(f, f_at, r, r_at) with 0-based reference positions.
@@ -748,9 +797,11 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
     stop("sv_dl: consensus and reference must be non-empty")
   }
   fw <- .sv_dl_gotoh(c_, g, match, mismatch, gap_open, gap_extend)
-  revstr <- function(s) paste(rev(strsplit(s, "")[[1L]]), collapse="")
-  bw <- .sv_dl_gotoh(revstr(c_), revstr(g), match, mismatch, gap_open,
-                     gap_extend)
+  revstr <- function(s) paste(rev(strsplit(s, "")[[1L]]), collapse = "")
+  bw <- .sv_dl_gotoh(
+    revstr(c_), revstr(g), match, mismatch, gap_open,
+    gap_extend
+  )
   n <- nchar(c_)
   m <- nchar(g)
   r <- numeric(n)
@@ -760,7 +811,7 @@ morie_sv_dl_gotoh_score_vectors <- function(consensus, ref, match=1.0,
     r[n - t] <- bw$best[t + 1L]
     r_at[n - t] <- m - bw$best_at[t + 1L]
   }
-  list(f=fw$best, f_at=fw$best_at, r=r, r_at=r_at)
+  list(f = fw$best, f_at = fw$best_at, r = r, r_at = r_at)
 }
 
 #' Argmax_\{i<j\} f_i + r_j -- the split with a microinsertion gap
@@ -790,7 +841,7 @@ morie_sv_dl_optimal_split <- function(f, r) {
       }
     }
   }
-  list(i=as.integer(best[2L]), j=as.integer(best[3L]), score=best[1L])
+  list(i = as.integer(best[2L]), j = as.integer(best[3L]), score = best[1L])
 }
 
 #' morie_sv_dl_refine_breakpoint
@@ -804,19 +855,22 @@ morie_sv_dl_optimal_split <- function(f, r) {
 #' @param reads A vector; its length is taken and its elements indexed.
 #' @param k Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{7}.
 #' @param k_min Passed to \code{morie_sv_dl_kmer_diagonals}. Defaults to \code{3}.
-#' @param min_split_support Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2}.
+#' @param min_split_support Coerced to integer by the body, with \code{as.integer}.
+#' Defaults to \code{2}.
 #' @param max_length_diff Numeric; combined arithmetically in the body. Defaults to \code{0.1}.
 #' @param match Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{1}.
 #' @param mismatch Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-2}.
 #' @param gap_open Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-4}.
 #' @param gap_extend Passed to \code{morie_sv_dl_gotoh_score_vectors}. Defaults to \code{-1}.
-#' @return A list with \code{start}, \code{end}, \code{size}, \code{split_support}, \code{consensus}, \code{score}, \code{microinsertion}, \code{microhomology}, \code{kmer_offset}.
+#' @return A list with \code{start}, \code{end}, \code{size}, \code{split_support},
+#' \code{consensus}, \code{score}, \code{microinsertion}, \code{microhomology},
+#' \code{kmer_offset}.
 #' @export
-morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
-                                          k_min=3, min_split_support=2,
-                                          max_length_diff=0.10, match=1.0,
-                                          mismatch=-2.0, gap_open=-4.0,
-                                          gap_extend=-1.0) {
+morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k = 7,
+                                          k_min = 3, min_split_support = 2,
+                                          max_length_diff = 0.10, match = 1.0,
+                                          mismatch = -2.0, gap_open = -4.0,
+                                          gap_extend = -1.0) {
   # Take one paired-end call to single-nucleotide resolution. Returns
   # NULL if the read support or the length check fails -- the call then
   # stays imprecise rather than being invented.
@@ -837,8 +891,11 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
         next
       }
       ok <- as.character(off)
-      offsets[[ok]] <- (if (is.null(offsets[[ok]])) 0L
-                        else offsets[[ok]]) + 1L
+      offsets[[ok]] <- (if (is.null(offsets[[ok]])) {
+        0L
+      } else {
+        offsets[[ok]]
+      }) + 1L
       per_read[[ok]] <- c(per_read[[ok]], idx)
     }
   }
@@ -853,12 +910,16 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
   if (length(support) < as.integer(min_split_support)) {
     return(NULL)
   }
-  starts <- vapply(support, function(i) first_diag[[as.character(i)]],
-                   numeric(1))
+  starts <- vapply(
+    support, function(i) first_diag[[as.character(i)]],
+    numeric(1)
+  )
   cons <- morie_sv_dl_split_read_consensus(reads[support], starts)
   consensus <- cons$consensus
-  gv <- morie_sv_dl_gotoh_score_vectors(consensus, region, match, mismatch,
-                                        gap_open, gap_extend)
+  gv <- morie_sv_dl_gotoh_score_vectors(
+    consensus, region, match, mismatch,
+    gap_open, gap_extend
+  )
   sp <- morie_sv_dl_optimal_split(gv$f, gv$r)
   i <- sp$i
   j <- sp$j
@@ -875,16 +936,18 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
   # room left over runs to the right.
   hom <- 0L
   while (left_ref + hom < nchar(region) && right_ref + hom < nchar(region) &&
-         substr(region, left_ref + hom + 1L, left_ref + hom + 1L) ==
-         substr(region, right_ref + hom + 1L, right_ref + hom + 1L)) {
+    substr(region, left_ref + hom + 1L, left_ref + hom + 1L) ==
+      substr(region, right_ref + hom + 1L, right_ref + hom + 1L)) {
     hom <- hom + 1L
   }
   micro <- if (j - 1L >= i + 1L) substr(consensus, i + 1L, j - 1L) else ""
-  list(start=as.integer(left_ref), end=as.integer(right_ref),
-       size=as.integer(size), split_support=length(support),
-       consensus=consensus, score=as.numeric(sp$score),
-       microinsertion=micro, microhomology=as.integer(hom),
-       kmer_offset=as.integer(best_off))
+  list(
+    start = as.integer(left_ref), end = as.integer(right_ref),
+    size = as.integer(size), split_support = length(support),
+    consensus = consensus, score = as.numeric(sp$score),
+    microinsertion = micro, microhomology = as.integer(hom),
+    kmer_offset = as.integer(best_off)
+  )
 }
 
 # ------------------------------------------------------------- driver
@@ -909,26 +972,30 @@ morie_sv_dl_refine_breakpoint <- function(call, reference, reads, k=7,
 #' @param max_length_diff Passed to \code{morie_sv_dl_refine_breakpoint}. Defaults to \code{0.1}.
 #' @param window Passed to \code{morie_sv_dl_paired_end_calls}.
 #' @param spread Passed to \code{morie_sv_dl_paired_end_calls}. Defaults to \code{"mad"}.
-#' @return A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise}, \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation}, \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{calls}, \code{n_calls}, \code{n_precise},
+#' \code{insert_median}, \code{insert_sd}, \code{spread}, \code{orientation},
+#' \code{n_sd}, \code{min_support}, \code{method}, \code{note}.
 #' @export
-morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
-                                           split_reads=NULL,
-                                           orientation=NULL, median=NULL,
-                                           sd=NULL, n_sd=3.0, min_support=2,
-                                           k=7, k_min=3,
-                                           min_split_support=2,
-                                           max_length_diff=0.10,
-                                           window=NULL, spread="mad") {
+morie_sv_dl_structural_variant <- function(pairs, reference = NULL,
+                                           split_reads = NULL,
+                                           orientation = NULL, median = NULL,
+                                           sd = NULL, n_sd = 3.0, min_support = 2,
+                                           k = 7, k_min = 3,
+                                           min_split_support = 2,
+                                           max_length_diff = 0.10,
+                                           window = NULL, spread = "mad") {
   # Call structural variants from read pairs, refined by split reads.
   # Give reference and split_reads to get single-nucleotide
   # breakpoints; without them the calls come back at paired-end
   # resolution with precise=FALSE.
-  calls <- morie_sv_dl_paired_end_calls(pairs, median, sd, orientation,
-                                        n_sd, min_support, window, spread)
+  calls <- morie_sv_dl_paired_end_calls(
+    pairs, median, sd, orientation,
+    n_sd, min_support, window, spread
+  )
   st <- morie_sv_dl_insert_size_stats(pairs, orientation, spread)
   refined <- 0L
   if (!is.null(reference) && !is.null(split_reads) &&
-      length(split_reads) > 0L) {
+    length(split_reads) > 0L) {
     for (ci in seq_along(calls)) {
       call <- calls[[ci]]
       lo <- max(0L, call$start - as.integer(st$median))
@@ -937,9 +1004,11 @@ morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
       if (nchar(region) == 0L) {
         next
       }
-      got <- morie_sv_dl_refine_breakpoint(call, region, split_reads, k,
-                                           k_min, min_split_support,
-                                           max_length_diff)
+      got <- morie_sv_dl_refine_breakpoint(
+        call, region, split_reads, k,
+        k_min, min_split_support,
+        max_length_diff
+      )
       if (is.null(got)) {
         next
       }
@@ -956,18 +1025,23 @@ morie_sv_dl_structural_variant <- function(pairs, reference=NULL,
     }
   }
   list(
-    estimate=calls, calls=calls, n_calls=length(calls),
-    n_precise=refined, insert_median=st$median, insert_sd=st$sd,
-    spread=spread, orientation=st$orientation, n_sd=as.numeric(n_sd),
-    min_support=as.integer(min_support),
-    method=paste0("DELLY (Rausch et al. 2012): discordant paired-end ",
-                  "clustering by maximal clique, refined by k-mer ",
-                  "split-read search and a double-dynamic-programming ",
-                  "split alignment"),
-    note=paste0("calls are imprecise (paired-end resolution) unless a ",
-                "reference and split reads are supplied and the ",
-                "split-read length agrees with the paired-end estimate ",
-                "to within max_length_diff"))
+    estimate = calls, calls = calls, n_calls = length(calls),
+    n_precise = refined, insert_median = st$median, insert_sd = st$sd,
+    spread = spread, orientation = st$orientation, n_sd = as.numeric(n_sd),
+    min_support = as.integer(min_support),
+    method = paste0(
+      "DELLY (Rausch et al. 2012): discordant paired-end ",
+      "clustering by maximal clique, refined by k-mer ",
+      "split-read search and a double-dynamic-programming ",
+      "split alignment"
+    ),
+    note = paste0(
+      "calls are imprecise (paired-end resolution) unless a ",
+      "reference and split reads are supplied and the ",
+      "split-read length agrees with the paired-end estimate ",
+      "to within max_length_diff"
+    )
+  )
 }
 
 #' morie_sv_dl_cheatsheet

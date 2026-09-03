@@ -17,3 +17,8 @@ A step of the vepan_native implementation. Called by \code{.vepan_apply}, \code{
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .vepan_revcomp(s = txt)
+res
+}

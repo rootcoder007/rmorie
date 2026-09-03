@@ -163,6 +163,11 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return A list with \code{trees}, \code{bags}, \code{s}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .orfgrf_grow_forest(X = x, y = y)
+#' res
 .orfgrf_grow_forest <- function(X, y, W = NULL, kind = "double-sample",
                         n_trees = 100, min_leaf = 5, alpha = 0.05,
                         max_depth = 12, seed = 0) {
@@ -204,7 +209,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param tree A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left}, \code{$right}, \code{$value} from it.
+#' @param tree A list; the body reads \code{$cut}, \code{$j}, \code{$leaf}, \code{$left},
+#' \code{$right}, \code{$value} from it.
 #' @param x A vector; indexed elementwise.
 #' @return The value of \code{.predict_tree}.
 #' @export
@@ -266,7 +272,8 @@
 #' @param target A matrix; passed to \code{crossprod}.
 #' @param W A matrix; passed to \code{as.matrix}.
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
-#' @param exclude Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param exclude Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A list with \code{fit}, \code{coef}.
 #' @export
@@ -335,7 +342,8 @@ orthogonal_moment <- function(y_res, t_res, weights) {
 #' @param W Passed to \code{local_nuisance}.
 #' @param x Passed to \code{.orfgrf_forest_weights}.
 #' @param trees Passed to \code{.orfgrf_forest_weights}.
-#' @param residualize The body requires: orfgrf: residualize must be local or global, got. Defaults to \code{"local"}.
+#' @param residualize The body requires: orfgrf: residualize must be local or global,
+#' got. Defaults to \code{"local"}.
 #' @param ridge Passed to \code{local_nuisance}. Defaults to \code{1e-08}.
 #' @param leave_one_out A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{theta}, \code{den}, \code{w}.
@@ -351,9 +359,9 @@ orf_estimate <- function(Y, T, X, W, x, trees,
   if (identical(residualize, "global")) {
     flat <- rep(1 / n, n)
     qh <- local_nuisance(Y, W, flat, ridge = ridge)$fit
-    gh <- local_nuisance(T, W, flat, ridge = ridge)$fit
+    gh <- local_nuisance(TRUE, W, flat, ridge = ridge)$fit
     yr <- Y - qh
-    tr <- T - gh
+    tr <- TRUE - gh
   } else if (isTRUE(leave_one_out)) {
     yr <- numeric(n)
     tr <- numeric(n)
@@ -362,15 +370,15 @@ orf_estimate <- function(Y, T, X, W, x, trees,
       tr[i] <- 0
       next }
       qh <- local_nuisance(Y, W, w, exclude = i - 1L, ridge = ridge)$fit
-      gh <- local_nuisance(T, W, w, exclude = i - 1L, ridge = ridge)$fit
+      gh <- local_nuisance(TRUE, W, w, exclude = i - 1L, ridge = ridge)$fit
       yr[i] <- Y[i] - qh[i]
-      tr[i] <- T[i] - gh[i]
+      tr[i] <- TRUE[i] - gh[i]
     }
   } else {
     qh <- local_nuisance(Y, W, w, ridge = ridge)$fit
-    gh <- local_nuisance(T, W, w, ridge = ridge)$fit
+    gh <- local_nuisance(TRUE, W, w, ridge = ridge)$fit
     yr <- Y - qh
-    tr <- T - gh
+    tr <- TRUE - gh
   }
   om <- orthogonal_moment(yr, tr, w)
   list(theta = om$theta, den = om$den, w = w)
@@ -397,7 +405,9 @@ orf_estimate <- function(Y, T, X, W, x, trees,
 #' @param ridge Passed to \code{orf_estimate}. Defaults to \code{1e-08}.
 #' @param kind Passed to \code{.orfgrf_grow_forest}. Defaults to \code{"double-sample"}.
 #' @param leave_one_out Passed to \code{orf_estimate}. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n}, \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features}, \code{orthogonal}, \code{method}.
+#' @return A list with \code{estimate}, \code{theta}, \code{denominator}, \code{n},
+#' \code{n_trees}, \code{residualize}, \code{n_controls}, \code{n_features},
+#' \code{orthogonal}, \code{method}.
 #' @export
 orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      n_trees = 100, min_leaf = 5,
@@ -407,7 +417,7 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
                                      kind = "double-sample",
                                      leave_one_out = TRUE) {
   y <- as.numeric(Y)
-  t <- as.numeric(T)
+  t <- as.numeric(TRUE)
   n <- length(y)
   if (length(t) != n)
     stop("orfgrf: ", length(t), " treatments for ", n, " outcomes")
@@ -451,6 +461,9 @@ orthogonal_random_forest <- function(Y, T, X, W, x_eval = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .orfgrf_cheatsheet()
+#' res
 .orfgrf_cheatsheet <- function() {
   paste("orfgrf: ORF. Moment E[Y - theta(x) T - f(x,W) | X=x] = 0. ",
         "Residualize BOTH Y and T on the controls W, then ",

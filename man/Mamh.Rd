@@ -32,7 +32,8 @@ Formula: \code{OR_MH = sum(a_k d_k/n_k) / sum(b_k c_k/n_k)} -- Mantel
 and Haenszel (1959); Robins, Breslow and Greenland (1986).
 }
 \examples{
-Mamh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8), c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
+Mamh(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = c(1, 2, 3, 4, 5, 6, 7, 8),
+  c = c(1, 2, 3, 4, 5, 6, 7, 8), d = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Mantel, N. and Haenszel, W. (1959). Journal of the National

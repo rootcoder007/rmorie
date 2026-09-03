@@ -43,7 +43,8 @@
 #' @param K Coerced to integer by the body, with \code{as.integer}.
 #' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
-#' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass}, \code{K}, \code{alpha}, \code{note}.
+#' @return A list with \code{weights}, \code{V}, \code{remaining}, \code{kept_mass},
+#' \code{K}, \code{alpha}, \code{note}.
 #' @export
 stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
   a <- as.numeric(alpha)
@@ -71,13 +72,15 @@ stick_breaking <- function(alpha, K, rng = NULL, seed = 0) {
 
 #' truncation_error
 #'
-#' A step of the slowdp_native implementation. Called by \code{decay_diagnostics}, \code{sticks_for_tolerance}, \code{truncated_dp}.
+#' A step of the slowdp_native implementation. Called by \code{decay_diagnostics},
+#' \code{sticks_for_tolerance}, \code{truncated_dp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param alpha Coerced to numeric by the body, with \code{as.numeric}.
 #' @param K Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K}, \code{per_stick_factor}, \code{note}.
+#' @return A list with \code{expected_tail}, \code{kept}, \code{alpha}, \code{K},
+#' \code{per_stick_factor}, \code{note}.
 #' @export
 truncation_error <- function(alpha, K) {
   a <- as.numeric(alpha)
@@ -123,7 +126,8 @@ sticks_for_tolerance <- function(alpha, tol = 1e-3) {
 #'
 #' @param weights Coerced to numeric by the body, with \code{as.numeric}.
 #' @param alpha Passed to \code{truncation_error}.
-#' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio}, \code{largest_index}, \code{monotone}, \code{note}.
+#' @return A list with \code{realised_tail}, \code{expected_tail}, \code{ratio},
+#' \code{largest_index}, \code{monotone}, \code{note}.
 #' @export
 decay_diagnostics <- function(weights, alpha) {
   p <- as.numeric(weights)
@@ -159,7 +163,9 @@ decay_diagnostics <- function(weights, alpha) {
 #' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param renormalise A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{weights}, \code{atoms}, \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K}, \code{alpha}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{weights}, \code{atoms},
+#' \code{discarded_mass}, \code{expected_discarded}, \code{renormalised}, \code{K},
+#' \code{alpha}, \code{method}, \code{note}.
 #' @export
 truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
                          seed = 0, renormalise = TRUE) {
@@ -198,6 +204,9 @@ truncated_dp <- function(alpha, K, base_sampler = NULL, rng = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .slowdp_cheatsheet()
+#' res
 .slowdp_cheatsheet <- function() {
   paste0("slowdp: Sethuraman writes the DP as a PROGRAM -- ",
          "p_k = V_k prod(1 - V_l) with V_k ~ Beta(1, alpha) and ",

@@ -30,7 +30,9 @@
 
 #' .phylby_splits_of
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_clade_credibility}, \code{.phylby_topology_key}, \code{morie_phylby_splits_of}.
+#' A step of the phylby_native implementation. Called by
+#' \code{.phylby_clade_credibility}, \code{.phylby_topology_key},
+#' \code{morie_phylby_splits_of}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -75,7 +77,8 @@
 
 #' .phylby_topology_key
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours}, \code{morie_phylby_topology_key}.
+#' A step of the phylby_native implementation. Called by \code{.phylby_nni_neighbours},
+#' \code{morie_phylby_topology_key}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -115,7 +118,8 @@
 
 #' .phylby_branch_paths
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior}, \code{.phylby_step}.
+#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior},
+#' \code{.phylby_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -181,7 +185,8 @@
 
 #' .phylby_get_at
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior}, \code{.phylby_step}.
+#' A step of the phylby_native implementation. Called by \code{.phylby_log_posterior},
+#' \code{.phylby_step}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -198,7 +203,8 @@
 
 #' .phylby_nni_neighbours
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_step}, \code{morie_phylby_nni_neighbours}.
+#' A step of the phylby_native implementation. Called by \code{.phylby_step},
+#' \code{morie_phylby_nni_neighbours}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -245,7 +251,8 @@
 
 #' .phylby_log_posterior
 #'
-#' A step of the phylby_native implementation. Called by \code{.phylby_step}, \code{morie_phylby_log_posterior}.
+#' A step of the phylby_native implementation. Called by \code{.phylby_step},
+#' \code{morie_phylby_log_posterior}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -315,6 +322,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{function}.
 #' @export
+#' @examples
+#' res <- .phylby_rng(seed = 1L)
+#' res
 .phylby_rng <- function(seed) {
   st <- as.numeric(seed) %% 2147483648
   if (st == 0) st <- 1L
@@ -335,6 +345,10 @@
 #' @param samples A vector; its length is taken.
 #' @return The value of \code{result}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .phylby_clade_credibility(samples = x)
+#' res
 .phylby_clade_credibility <- function(samples) {
   if (length(samples) == 0) {
     stop("phylby: no samples to summarise")
@@ -525,11 +539,13 @@ morie_phylby_clade_credibility <- function(samples) {
 #'
 #' @param alignment A vector; indexed elementwise.
 #' @param n_iter Numeric; combined arithmetically in the body. Defaults to \code{2000}.
-#' @param burnin Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param burnin Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param n_chains Numeric; combined arithmetically in the body. Defaults to \code{4}.
 #' @param lam Passed to \code{morie_phylby_chain_temperature}. Defaults to \code{0.2}.
 #' @param swap_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
-#' @param sample_every Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10}.
+#' @param sample_every Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{10}.
 #' @param pi Passed to \code{.phylby_step}.
 #' @param rate Carried through into a list the body builds. Defaults to \code{1}.
 #' @param branch_prior_mean Passed to \code{.phylby_step}. Defaults to \code{0.1}.

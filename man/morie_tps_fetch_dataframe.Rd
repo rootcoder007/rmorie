@@ -7,15 +7,15 @@
 morie_tps_fetch_dataframe(category, ...)
 }
 \arguments{
-\item{category}{One of \code{\link[=morie_tps_list_categories]{morie_tps_list_categories()}}.}
+\item{category}{One of \code{morie_tps_list_categories()}.}
 
-\item{...}{Passed through to \code{\link[=morie_tps_fetch_category]{morie_tps_fetch_category()}}.}
+\item{...}{Passed through to \code{morie_tps_fetch_category()}.}
 }
 \value{
 A \code{data.frame}.
 }
 \description{
-Thin wrapper over \code{\link[=morie_tps_fetch_category]{morie_tps_fetch_category()}}: writes the CSV
+Thin wrapper over \code{morie_tps_fetch_category()}: writes the CSV
 then reads it back. Mirrors the Python \code{fetch_tps_dataframe}
 convenience used as a \code{DATASET_CATALOG} fetcher.
 }

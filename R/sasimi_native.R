@@ -56,12 +56,14 @@ COEFFICIENTS <- c("tanimoto", "dice", "cosine")
 
 #' sasimi_fingerprint
 #'
-#' A step of the sasimi_native implementation. Called by \code{sasimi_counts}, \code{sasimi_nearest_neighbours}.
+#' A step of the sasimi_native implementation. Called by \code{sasimi_counts},
+#' \code{sasimi_nearest_neighbours}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param bits A vector; its length is taken.
-#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param n_bits Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A vector, from \code{sort}.
 #' @export
 sasimi_fingerprint <- function(bits, n_bits = NULL) {
@@ -105,7 +107,8 @@ sasimi_fingerprint <- function(bits, n_bits = NULL) {
 
 #' sasimi_counts
 #'
-#' A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module.
+#' A step of the sasimi_native implementation. Called by \code{morie_sasimi},
+#' \code{sasimi_cosine}, \code{sasimi_dice} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -127,7 +130,8 @@ sasimi_counts <- function(fp_a, fp_b) {
 
 #' .sasimi_guard
 #'
-#' A step of the sasimi_native implementation. Called by \code{sasimi_cosine}, \code{sasimi_dice}, \code{sasimi_tanimoto} and 1 others in the module.
+#' A step of the sasimi_native implementation. Called by \code{sasimi_cosine},
+#' \code{sasimi_dice}, \code{sasimi_tanimoto} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -226,7 +230,8 @@ sasimi_tversky <- function(fp_a, fp_b, alpha = 1.0, beta = 1.0) {
 
 #' .sasimi_coef
 #'
-#' A step of the sasimi_native implementation. Called by \code{morie_sasimi}, \code{sasimi_distance}, \code{sasimi_nearest_neighbours} and 1 others in the module.
+#' A step of the sasimi_native implementation. Called by \code{morie_sasimi},
+#' \code{sasimi_distance}, \code{sasimi_nearest_neighbours} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -335,7 +340,8 @@ sasimi_nearest_neighbours <- function(query, fps, k = 5L, coefficient = "tanimot
 #' @param coefficient Passed to \code{.sasimi_coef}. Defaults to \code{"tanimoto"}.
 #' @param alpha Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param beta Optional; may be \code{NULL}. Passed to \code{is.null}.
-#' @return A list with \code{estimate}, \code{similarity}, \code{distance}, \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
+#' @return A list with \code{estimate}, \code{similarity}, \code{distance},
+#' \code{bits_a}, \code{bits_b}, \code{bits_shared}, \code{coefficient}, \code{method}.
 #' @export
 morie_sasimi <- function(fp_a, fp_b, coefficient = "tanimoto",
                          alpha = NULL, beta = NULL) {

@@ -8,7 +8,8 @@ test_that("hmgru matches Python anchor", {
   r <- morie_geron_gru(c(0, 0), c(4, -2), W)
   expect_equal(r$h_t, A4b$hmgru$h_t)
   expect_equal(r$z_t, A4b$hmgru$z_t)
-  W2 <- W; W2$b_z <- c(-40, -40)
+  W2 <- W
+  W2$b_z <- c(-40, -40)
   r2 <- morie_geron_gru(c(0, 0), c(4, -2), W2)
   expect_equal(round(r2$h_t, 9), c(4, -2))
 })
@@ -32,8 +33,10 @@ test_that("hmhfpi matches Python anchor", {
 })
 
 test_that("hmhftn full-batch matches Python anchor (shuffle-independent)", {
-  X <- matrix(c(1, 2, 3, 4), ncol = 1); y <- c(3, 6, 9, 12)
-  lg <- function(p, Xb, yb) { r <- as.numeric(Xb %*% p) - yb; list(mean(r^2), (2 / length(yb)) * as.numeric(t(Xb) %*% r)) }
+  X <- matrix(c(1, 2, 3, 4), ncol = 1)
+  y <- c(3, 6, 9, 12)
+  lg <- function(p, Xb, yb) { r <- as.numeric(Xb %*% p) - yb
+  list(mean(r^2), (2 / length(yb)) * as.numeric(t(Xb) %*% r)) }
   m0 <- list(params = 0, loss_and_grad = lg)
   r <- morie_geron_hf_trainer(m0, list(epochs = 50, batch_size = 4, learning_rate = 0.05), list(X, y), list(X, y))
   expect_equal(round(r$params[1], 6), A4b$hmhftn$params0)
@@ -41,7 +44,8 @@ test_that("hmhftn full-batch matches Python anchor (shuffle-independent)", {
 })
 
 test_that("hmhgb matches Python anchor", {
-  X <- matrix(c(0, 1, 2, 3, 4, 5), ncol = 1); y <- c(0, 0, 5, 5, 10, 10)
+  X <- matrix(c(0, 1, 2, 3, 4, 5), ncol = 1)
+  y <- c(0, 0, 5, 5, 10, 10)
   r <- morie_geron_histogram_gradient_boosting(X, y, max_iter = 50, learning_rate = 0.3)
   expect_lt(r$train_mse, A4b$hmhgb$train_mse_tol)
   expect_equal(r$baseline, A4b$hmhgb$baseline)
@@ -49,7 +53,8 @@ test_that("hmhgb matches Python anchor", {
 })
 
 test_that("hmhplm matches Python anchor", {
-  X <- matrix(as.numeric(0:19), ncol = 1); y <- as.numeric(0:19)
+  X <- matrix(as.numeric(0:19), ncol = 1)
+  y <- as.numeric(0:19)
   vshape <- function(L, Xt, yt, Xv, yv) abs(L - 3) + 0.5
   r <- morie_geron_hidden_layers_heuristic(vshape, X, y, max_layers = 10, patience = 2)
   expect_equal(r$best_n_layers, A4b$hmhplm$best_n_layers)
@@ -58,7 +63,8 @@ test_that("hmhplm matches Python anchor", {
 })
 
 test_that("hmhpt grid branch matches Python anchor exactly", {
-  X <- matrix(c(1, 1, 1, 2, 1, 3, 1, 4), ncol = 2, byrow = TRUE); y <- c(3, 5, 7, 9)
+  X <- matrix(c(1, 1, 1, 2, 1, 3, 1, 4), ncol = 2, byrow = TRUE)
+  y <- c(3, 5, 7, 9)
   r <- morie_geron_hyperparameter_tuning(list(alpha = c(0, 1, 100)), X, y, K = 2)
   expect_equal(r$best_params$alpha, A4b$hmhpt$best_alpha)
   expect_equal(round(r$best_score, 8), A4b$hmhpt$best_score)
@@ -170,7 +176,8 @@ test_that("hmkrn matches Python anchor", {
 })
 
 test_that("hmkvc matches Python anchor", {
-  loud <- array(1, dim = c(2, 8, 4)); loud[1, , ] <- 1000
+  loud <- array(1, dim = c(2, 8, 4))
+  loud[1, , ] <- 1000
   a <- morie_geron_kv_cache_compress(loud, loud, n_bits = 8, per_head = TRUE)
   b <- morie_geron_kv_cache_compress(loud, loud, n_bits = 8, per_head = FALSE)
   expect_lt(a$max_error, b$max_error)
@@ -252,7 +259,8 @@ test_that("hmlrl matches Python anchor", {
 })
 
 test_that("hmlrpt full-batch matches Python anchor (shuffle-independent)", {
-  X <- matrix(c(0, 1, 2, 3), ncol = 1); y <- c(1, 3, 5, 7)
+  X <- matrix(c(0, 1, 2, 3), ncol = 1)
+  y <- c(1, 3, 5, 7)
   r <- morie_geron_linreg_pytorch(X, y, epochs = 2000, lr = 0.05)
   expect_equal(round(r$w[1], 4), A4b$hmlrpt$w0)
   expect_equal(round(r$b, 4), A4b$hmlrpt$b)
@@ -295,7 +303,8 @@ test_that("hmmcp matches Python anchor", {
   server <- function(req) {
     if (req$method == "tools/list") return(list(jsonrpc = "2.0", id = req$id, result = list(tools = TOOLS)))
     if (req$method == "tools/call") {
-      a <- req$params$arguments$a; b <- req$params$arguments$b
+      a <- req$params$arguments$a
+      b <- req$params$arguments$b
       return(list(jsonrpc = "2.0", id = req$id, result = list(content = a + b)))
     }
     list(jsonrpc = "2.0", id = req$id, error = list(code = -32601L, message = "Method not found"))
@@ -317,7 +326,8 @@ test_that("hmmdc matches Python anchor", {
 })
 
 test_that("hmmdp matches Python anchor", {
-  P <- array(1.0, dim = c(1, 2, 1)); R <- matrix(c(1, 0), nrow = 1)
+  P <- array(1.0, dim = c(1, 2, 1))
+  R <- matrix(c(1, 0), nrow = 1)
   r <- morie_geron_mdp(c("s"), c("good", "bad"), P, R, gamma = 0.9)
   expect_equal(round(r$V[1], 6), A4b$hmmdp$V0)
   expect_equal(r$policy_labels, A4b$hmmdp$policy_labels)
@@ -330,7 +340,9 @@ test_that("hmmds matches Python anchor", {
 })
 
 test_that("hmmha matches Python anchor", {
-  Q <- matrix(c(1, 0), nrow = 1); K <- matrix(c(1, 0, 0, 1), nrow = 2, byrow = TRUE); V <- K
+  Q <- matrix(c(1, 0), nrow = 1)
+  K <- matrix(c(1, 0, 0, 1), nrow = 2, byrow = TRUE)
+  V <- K
   r <- morie_geron_multihead_attention(Q, K, V, n_heads = 2)
   expect_equal(r$d_head, A4b$hmmha$d_head)
   expect_equal(dim(r$output), A4b$hmmha$output_shape)
@@ -365,8 +377,10 @@ test_that("hmmlm matches Python anchor", {
 })
 
 test_that("hmmlpf matches Python anchor", {
-  W1 <- matrix(c(1, 1, 1, 1), nrow = 2, byrow = TRUE); b1 <- c(0, -1)
-  W2 <- matrix(c(1, -2), ncol = 1); b2 <- c(0)
+  W1 <- matrix(c(1, 1, 1, 1), nrow = 2, byrow = TRUE)
+  b1 <- c(0, -1)
+  W2 <- matrix(c(1, -2), ncol = 1)
+  b2 <- c(0)
   X <- matrix(c(0, 0, 0, 1, 1, 0, 1, 1), ncol = 2, byrow = TRUE)
   r <- morie_geron_mlp(X, list(W1, W2), list(b1, b2), list("relu", "identity"))
   expect_equal(as.vector(r$output), A4b$hmmlpf$output)
@@ -394,7 +408,8 @@ test_that("hmmnsh matches Python anchor", {
 })
 
 test_that("hmmod matches Python anchor", {
-  X <- matrix(c(0, 1, 2, 3), ncol = 1); y <- c(3, 5, 7, 9)
+  X <- matrix(c(0, 1, 2, 3), ncol = 1)
+  y <- c(3, 5, 7, 9)
   r <- morie_geron_model_based(X, y)
   expect_equal(round(r$theta, 9), A4b$hmmod$theta)
   expect_equal(round(r$mse, 9), A4b$hmmod$mse)

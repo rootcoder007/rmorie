@@ -4,7 +4,8 @@
 #'
 #' Eq. (3.12): for `q >= 2`, if `E|nu(X_1,...,X_r)|^q < Inf` there is a
 #' constant `C` depending on `nu` and `F` but NOT on `n` with
-#' \deqn{E|A_k|^q \le C n^{qk/2} E|\rho_k(X_{i_1},\dots,X_{i_k})|^q,}{E|A_k|^q <= C n^(qk/2) E|rho_k|^q,}
+#' \deqn{E|A_k|^q \le C n^{qk/2} E|\rho_k(X_{i_1},\dots,X_{i_k})|^q,}{E|A_k|^q <= C
+#' n^(qk/2) E|rho_k|^q,}
 #' where `A_k` is the `k`-th projection of the H-decomposition (3.10)-(3.11).
 #'
 #' The exponent is the useful part. A naive count would put `choose(n, k) ~ n^k`

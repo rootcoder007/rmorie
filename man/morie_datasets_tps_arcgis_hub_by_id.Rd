@@ -16,7 +16,7 @@ morie_datasets_tps_arcgis_hub_by_id(
 }
 \arguments{
 \item{hub_id}{32-char hex GUID. See
-\code{\link[=morie_datasets_tps_arcgis_hub_layers]{morie_datasets_tps_arcgis_hub_layers()}} for the canonical 71.}
+\code{morie_datasets_tps_arcgis_hub_layers()} for the canonical 71.}
 
 \item{format}{One of \code{"json"} (default), \code{"geojson"}, \code{"csv"},
 \code{"shapefile"}, \code{"fgdb"}.}
@@ -46,7 +46,7 @@ file path (binary).
 }
 \description{
 Single entry point for the 71 datasets listed by
-\code{\link[=morie_datasets_tps_arcgis_hub_layers]{morie_datasets_tps_arcgis_hub_layers()}}. Supports five export
+\code{morie_datasets_tps_arcgis_hub_layers()}. Supports five export
 formats:
 }
 \details{

@@ -17,3 +17,8 @@ A step of the vit2lf_native implementation. Called by \code{morie_vit2lf_logits}
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .vit2lf_norm(v = x)
+res
+}

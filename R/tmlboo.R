@@ -27,7 +27,9 @@
 #'   influence-curve interval as the default and the bootstrap as a check.
 #' @export
 #' @examples
-#' Tmleboot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2, 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8), g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmleboot(Y = c(1, 2, 3, 4, 5, 6, 7, 8), A = c(1, 2, 3, 4, 5, 6, 7, 8), QAW = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), Q1W = c(1, 2, 3, 4, 5, 6, 7, 8), Q0W = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' g1W = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmleboot <- function(Y, A, QAW, Q1W, Q0W, g1W, B = 200, seed = 1,
                      gbound = 0.025, level = 0.95) {
   Y <- .t1_vec(Y)

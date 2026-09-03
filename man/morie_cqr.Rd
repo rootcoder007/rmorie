@@ -31,5 +31,7 @@ Conformalized Quantile Regression, NeurIPS 32 (arXiv:1905.03222),
 the book's Reference 11.
 }
 \examples{
-morie_cqr(callo = c(1, 2, 3, 4, 5, 6, 7, 8), calhi = c(1, 2, 3, 4, 5, 6, 7, 8), caly = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_cqr(callo = c(1, 2, 3, 4, 5, 6, 7, 8), calhi = c(1, 2, 3, 4, 5, 6, 7, 8),
+  caly = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8),
+  hi = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

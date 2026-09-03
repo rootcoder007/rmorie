@@ -95,7 +95,8 @@ test_that(".morie_tps_read_geojson reads a GeoJSON via sf", {
 # ====================================================================== study_core.R
 
 test_that(".or_table returns OR/SE/p table on a logistic fit", {
-  set.seed(1L); n <- 100L
+  set.seed(1L)
+  n <- 100L
   y <- stats::rbinom(n, 1L, 0.5)
   x <- stats::rnorm(n)
   fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
@@ -107,8 +108,10 @@ test_that(".or_table returns OR/SE/p table on a logistic fit", {
 })
 
 test_that(".or_table prepends `model` when given a model label", {
-  set.seed(2L); n <- 80L
-  y <- stats::rbinom(n, 1L, 0.5); x <- stats::rnorm(n)
+  set.seed(2L)
+  n <- 80L
+  y <- stats::rbinom(n, 1L, 0.5)
+  x <- stats::rnorm(n)
   fit <- suppressWarnings(stats::glm(y ~ x, family = stats::binomial()))
   out <- rmorie:::.or_table(fit, model = "M1")
   expect_true("model" %in% names(out))
@@ -116,8 +119,10 @@ test_that(".or_table prepends `model` when given a model label", {
 })
 
 test_that(".linear_coef_table returns coef/CI/p on a linear fit", {
-  set.seed(3L); n <- 100L
-  x <- stats::rnorm(n); y <- 1 + 2 * x + stats::rnorm(n, sd = 0.3)
+  set.seed(3L)
+  n <- 100L
+  x <- stats::rnorm(n)
+  y <- 1 + 2 * x + stats::rnorm(n, sd = 0.3)
   fit <- stats::lm(y ~ x)
   out <- rmorie:::.linear_coef_table(fit, model = "demo")
   expect_s3_class(out, "data.frame")

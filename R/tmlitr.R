@@ -22,7 +22,8 @@
 #'   Statistics 44(2):713-742.
 #' @export
 #' @examples
-#' Tmlitr(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlitr(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), W = c(1, 2, 3, 4,
+#' 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlitr <- function(y, D, W, X) {
   yv <- as.numeric(y)
   Dv <- as.numeric(D)

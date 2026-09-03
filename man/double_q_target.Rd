@@ -22,5 +22,6 @@ Scalar target value.
 }
 \keyword{internal}
 \examples{
-double_q_target(reward = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5, q_online_next = c(1, 2, 3, 4, 5, 6, 7, 8), q_target_next = c(1, 2, 3, 4, 5, 6, 7, 8))
+double_q_target(reward = c(1, 2, 3, 4, 5, 6, 7, 8), gamma = 0.5,
+  q_online_next = c(1, 2, 3, 4, 5, 6, 7, 8), q_target_next = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

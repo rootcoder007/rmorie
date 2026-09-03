@@ -50,6 +50,10 @@
 #' @param x Passed to \code{.evt_pwm}.
 #' @return A list with \code{l1}, \code{l2}, \code{l3}, \code{t3}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .evt_lmom(x = x)
+#' res
 .evt_lmom <- function(x) {
   b0 <- .evt_pwm(x, 0L)
   b1 <- .evt_pwm(x, 1L)
@@ -74,6 +78,10 @@
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .evt_top(x = x, k = 3L)
+#' res
 .evt_top <- function(x, k) {
   xs <- sort(as.numeric(x), decreasing = TRUE)
   k <- as.integer(k)

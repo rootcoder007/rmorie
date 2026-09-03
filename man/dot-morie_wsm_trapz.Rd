@@ -19,3 +19,9 @@ A step of the wasserman_native implementation. Called by \code{morie_wasserman_e
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_wsm_trapz(y = y, x = x)
+res
+}

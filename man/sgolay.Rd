@@ -20,7 +20,7 @@ List with \code{filtered}, \code{name}, \code{fs}, \code{n_samples}, \code{extra
 \description{
 Direct short-name export of the Savitzky-Golay smoother (matches the
 Python \code{morie.signal.sgolay} name). For the long-form, see
-\code{\link[=morie_sgolay_smooth]{morie_sgolay_smooth()}}, which this function delegates to.
+\code{morie_sgolay_smooth()}, which this function delegates to.
 }
 \details{
 Reference: Savitzky, A. & Golay, M.J.E. (1964) "Smoothing and

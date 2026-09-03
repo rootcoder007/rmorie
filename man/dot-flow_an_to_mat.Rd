@@ -17,3 +17,8 @@ A step of the flow_an_native implementation. Called by \code{.anomaly_score}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .flow_an_to_mat(X = x)
+res
+}

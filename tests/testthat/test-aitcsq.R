@@ -3,7 +3,8 @@
 # identities the correspondence-analysis construction guarantees.
 
 .aitcsq_table <- function(seed = 0, I = 5, J = 4, lam = 40) {
-  set.seed(seed); matrix(rpois(I * J, lam), I, J)
+  set.seed(seed)
+  matrix(rpois(I * J, lam), I, J)
 }
 
 test_that("morie_table_inertia matches stats::chisq.test", {

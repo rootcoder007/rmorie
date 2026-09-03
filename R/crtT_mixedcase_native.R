@@ -47,7 +47,8 @@
 #'
 #' @param residues Coerced to integer by the body, with \code{as.integer}.
 #' @param moduli Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli}, \code{method}.
+#' @return A list with \code{estimate}, \code{modulus}, \code{residues}, \code{moduli},
+#' \code{method}.
 #' @export
 crtT <- function(residues, moduli) {
   a <- as.integer(residues)

@@ -33,13 +33,18 @@
 
 #' .tmlcds_sigmoid
 #'
-#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate}, \code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
+#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_fluctuate},
+#' \code{.tmlcds_logit_irls}, \code{.tmlcds_propensity} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcds_sigmoid(x = x)
+#' res
 .tmlcds_sigmoid <- function(x) {
   1.0 / (1.0 + exp(-x))
 }
@@ -53,6 +58,9 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tmlcds_logit(p = 0.5)
+#' res
 .tmlcds_logit <- function(p) {
   log(p / (1.0 - p))
 }
@@ -66,6 +74,10 @@
 #' @param x Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcds_vec(x = x)
+#' res
 .tmlcds_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(x)
@@ -80,6 +92,10 @@
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcds_mat(X = x)
+#' res
 .tmlcds_mat <- function(X) {
   if (is.null(X)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.data.frame(X)) X <- as.matrix(X)
@@ -115,6 +131,11 @@
 #' @param v A matrix; passed to \code{\%*\%}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .tmlcds_matvec(M = A, v = b)
+#' res
 .tmlcds_matvec <- function(M, v) {
   as.numeric(M %*% v)
 }
@@ -130,6 +151,12 @@
 #' @param y A matrix; passed to \code{crossprod}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcds_lstsq(Z = X, y = y)
+#' res
 .tmlcds_lstsq <- function(Z, y) {
   as.numeric(solve(crossprod(Z) + 1e-10 * diag(ncol(Z)), crossprod(Z, y)))
 }
@@ -153,6 +180,12 @@
 #' @param penalty Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcds_logit_irls(X = X, y = y)
+#' res
 .tmlcds_logit_irls <- function(X, y, iters = 60L, ridge = 1e-10,
                                tol = 1e-13, penalty = 0.0) {
   n <- nrow(X)
@@ -234,7 +267,8 @@
 # treatment mechanism fit; cols is a list of column vectors
 #' Treatment mechanism fit; cols is a list of column vectors
 #'
-#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on}, \code{ctmle_sequence}.
+#' A step of the tmlcds_native implementation. Called by \code{.tmlcds_refit_on},
+#' \code{ctmle_sequence}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -264,10 +298,12 @@
 #' @param D Passed to \code{.tmlcds_vec}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.tmlcds_mat}.
 #' @param tuning Compared against \code{"discrete"}. Defaults to \code{"discrete"}.
-#' @param penalties Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param penalties Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
 #' @param trim Passed to \code{.tmlcds_propensity}. Defaults to \code{0.005}.
 #' @param scale Optional; may be \code{NULL}. A flag; the body branches on it.
-#' @param q_covariates Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param q_covariates Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{steps}, \code{info}.
 #' @export
 ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
@@ -393,7 +429,8 @@ ctmle_sequence <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #'
 #' tr and fold hold 1-based row indices.
 #'
-#' @param info A list; the body reads \code{$columns}, \code{$q_covariates}, \code{$treatment}, \code{$y_scaled} from it.
+#' @param info A list; the body reads \code{$columns}, \code{$q_covariates},
+#' \code{$treatment}, \code{$y_scaled} from it.
 #' @param steps A vector; indexed elementwise.
 #' @param s See Usage.
 #' @param tr A vector; its length is taken.
@@ -541,6 +578,9 @@ tmle_cdrs <- function(y, D, X, tuning = "discrete", penalties = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tmlcds_cheatsheet()
+#' res
 .tmlcds_cheatsheet <- function() {
   paste0("tmlcds: collaborative TMLE. Build a NESTED sequence of ",
          "treatment mechanisms and select by the cross-validated loss of ",

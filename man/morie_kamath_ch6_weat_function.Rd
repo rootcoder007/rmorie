@@ -20,5 +20,7 @@ List with \code{estimate}, \code{s_A1}, \code{s_A2}.
 sum s over A_1 minus sum s over A_2.
 }
 \examples{
-morie_kamath_ch6_weat_function(A_1 = c(1, 2, 3, 4, 5, 6, 7, 8), A_2 = c(1, 2, 3, 4, 5, 6, 7, 8), W_1 = c(1, 2, 3, 4, 5, 6, 7, 8), W_2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kamath_ch6_weat_function(A_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  A_2 = c(1, 2, 3, 4, 5, 6, 7, 8), W_1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  W_2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

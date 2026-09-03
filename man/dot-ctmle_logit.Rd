@@ -17,3 +17,7 @@ A step of the tlctmle_native implementation. Called by \code{ctmle}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .ctmle_logit(p = 0.5)
+res
+}

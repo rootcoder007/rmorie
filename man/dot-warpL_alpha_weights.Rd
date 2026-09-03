@@ -19,3 +19,7 @@ A step of the warpL_native implementation. Called by \code{morie_warpL_alpha_wei
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .warpL_alpha_weights(n = 3L)
+res
+}

@@ -13,8 +13,10 @@
 #' These RE standards are completed by the morie_lm model object and its
 #' methods (this file) and tested in test-srr-standards-RE-full.R.
 #'
-#' @srrstats {RE2.2} morie_lm(na_predictor=, na_response=) control predictor and response missing values separately.
-#' @srrstats {RE2.3} morie_lm(center=, scale=) center/scale predictors, back-transforming coefficients; effect documented + tested.
+#' @srrstats {RE2.2} morie_lm(na_predictor=, na_response=) control predictor and response
+#' missing values separately.
+#' @srrstats {RE2.3} morie_lm(center=, scale=) center/scale predictors, back-transforming
+#' coefficients; effect documented + tested.
 #' @srrstats {RE2.4b} morie_lm() detects perfect predictor-response collinearity and errors.
 #' @srrstats {RE4.1} morie_lm(nofit=TRUE) returns an unfitted model specification.
 #' @srrstats {RE4.7} morie_lm objects carry convergence status + iteration count for glm fits.
@@ -22,8 +24,10 @@
 #' @srrstats {RE4.9} fitted (modelled) response values are returned via fitted.morie_lm().
 #' @srrstats {RE4.13} predictor names/metadata are returned (predictors).
 #' @srrstats {RE4.14} predict.morie_lm(interval=) returns confidence/prediction interval errors.
-#' @srrstats {RE4.15} prediction intervals are demonstrated wider than confidence intervals (tested).
-#' @srrstats {RE4.16} predict.morie_lm() accepts new data with new predictor values, applying fit-time transforms.
+#' @srrstats {RE4.15} prediction intervals are demonstrated wider than confidence
+#' intervals (tested).
+#' @srrstats {RE4.16} predict.morie_lm() accepts new data with new predictor values,
+#' applying fit-time transforms.
 #' @srrstats {RE4.18} summary.morie_lm() provides a summary method beyond print.
 #' @srrstats {RE5.0} morie_lm_scaling() measures the fit's scaling with data size.
 #' @srrstats {RE6.0} plot.morie_lm() is the default diagnostic plot method.
@@ -32,7 +36,8 @@
 #' @srrstats {RE6.3} forecasts (predictions with intervals) can be generated and visualised.
 #' @srrstats {RE7.2} case/row names are retained on the model object (case_names) and tested.
 #' @srrstats {RE7.4} prediction-interval forecast errors are tested to be finite and positive.
-#' @srrstats {RE7.1a} noiseless-vs-noisy fitting is exercised; the linear-algebra fit completes deterministically.
+#' @srrstats {RE7.1a} noiseless-vs-noisy fitting is exercised; the linear-algebra fit
+#' completes deterministically.
 #' @noRd
 NULL
 

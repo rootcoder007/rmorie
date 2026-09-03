@@ -3,12 +3,20 @@
 #'
 #' Formula: E(y - fhat)^2 = Var(e) + Bias\[fhat\]^2 + Var(fhat)
 #'
-#' @param F One row per replicate fit, one column per evaluation point: the predictions fhat(x_j) from replicate r.
+#' @param F One row per replicate fit, one column per evaluation point: the predictions
+#' fhat(x_j) from replicate r.
 #' @param f The true f(x_j) at the same n evaluation points.
 #' @param sigma2 Irreducible error Var(e); must be non-negative.
 #'
-#' @return List with ``bias2``, ``variance``, ``irreducible``, ``total``, ``bias2_point``, ``variance_point``, ``R``, ``n``.
-#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate Statistical Machine Learning Methods for Genomic Prediction, Springer, doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.2 p. 113, which reproduces the decomposition of Hastie, Tibshirani and Friedman (2008) p. 223: the expected prediction error under quadratic loss splits into Var(e), the squared bias of fhat and the variance of fhat.  Averaged over the evaluation points here.  Read from the chapter PDF, not recalled.
+#' @return List with ``bias2``, ``variance``, ``irreducible``, ``total``,
+#' ``bias2_point``, ``variance_point``, ``R``, ``n``.
+#' @references Montesinos Lopez, Montesinos Lopez and Crossa (2022), Multivariate
+#' Statistical Machine Learning Methods for Genomic Prediction, Springer,
+#' doi:10.1007/978-3-030-89010-0.  Chapter 4, Sect. 4.2 p. 113, which reproduces the
+#' decomposition of Hastie, Tibshirani and Friedman (2008) p. 223: the expected
+#' prediction error under quadratic loss splits into Var(e), the squared bias of fhat and
+#' the variance of fhat.  Averaged over the evaluation points here.  Read from the
+#' chapter PDF, not recalled.
 #' @export
 #' @examples
 #' set.seed(1)

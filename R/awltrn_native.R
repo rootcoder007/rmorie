@@ -372,6 +372,9 @@ fit_stages <- function(stages, propensity = NULL, ridge = 1e-6) {
 #'
 #' @return A character string.
 #' @export
+#' @examples
+#' res <- .awltrn_cheatsheet()
+#' res
 .awltrn_cheatsheet <- function() {
   paste0("awltrn: AOL. OWL weights R/pi and needs R >= 0, so it ",
          "ADDS A CONSTANT -- which changes the relative weights ",

@@ -63,7 +63,8 @@ test_that(".otis_design_matrix returns an intercept + dummy matrix", {
 })
 
 test_that(".otis_logit_fit converges to a non-trivial coef vector", {
-  set.seed(1L); n <- 200L
+  set.seed(1L)
+  n <- 200L
   X <- cbind(1, stats::rnorm(n), stats::rnorm(n))
   beta <- c(-0.5, 1.0, -0.5)
   p <- 1 / (1 + exp(-X %*% beta))
@@ -80,7 +81,8 @@ test_that(".otis_clip_ps clips into [eps, 1-eps]", {
 })
 
 test_that(".otis_predict_ps returns probabilities in (0,1)", {
-  set.seed(2L); n <- 50L
+  set.seed(2L)
+  n <- 50L
   X <- cbind(1, stats::rnorm(n))
   beta <- c(0, 1)
   ps <- rmorie:::.otis_predict_ps(X, beta, eps = 0.02)

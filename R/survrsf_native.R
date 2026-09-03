@@ -44,10 +44,14 @@
 # Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
 # R", R News 7(2), 25-31.
 
-morie_survrsf_SPLIT_RULES <- c("logrank", "logrankrandom", "conserve",
-                               "logrankscore")
-.survrsf_AVAILABLE <- c("logrank", "logrankrandom", "logrankscore",
-                        "conserve")
+morie_survrsf_SPLIT_RULES <- c(
+  "logrank", "logrankrandom", "conserve",
+  "logrankscore"
+)
+.survrsf_AVAILABLE <- c(
+  "logrank", "logrankrandom", "logrankscore",
+  "conserve"
+)
 .survrsf_UNSOURCED <- list()
 
 #' Which of the paper\'s four splitting rules are implemented
@@ -59,25 +63,33 @@ morie_survrsf_SPLIT_RULES <- c("logrank", "logrankrandom", "conserve",
 #' @param rule Optional; may be \code{NULL}. Carried through into a list the body builds.
 #' @return A list with \code{rule}, \code{available}, \code{reason}.
 #' @export
-morie_survrsf_rule_status <- function(rule=NULL) {
+morie_survrsf_rule_status <- function(rule = NULL) {
   # Which of the paper's four splitting rules are implemented.
   if (is.null(rule)) {
-    return(list(rules=morie_survrsf_SPLIT_RULES,
-                available=.survrsf_AVAILABLE,
-                unavailable=.survrsf_UNSOURCED))
+    return(list(
+      rules = morie_survrsf_SPLIT_RULES,
+      available = .survrsf_AVAILABLE,
+      unavailable = .survrsf_UNSOURCED
+    ))
   }
   if (!(rule %in% morie_survrsf_SPLIT_RULES)) {
-    stop(sprintf("survrsf: rule must be one of %s, got %s",
-                 paste(morie_survrsf_SPLIT_RULES, collapse=", "), rule))
+    stop(sprintf(
+      "survrsf: rule must be one of %s, got %s",
+      paste(morie_survrsf_SPLIT_RULES, collapse = ", "), rule
+    ))
   }
   reason <- .survrsf_UNSOURCED[[rule]]
-  list(rule=rule, available=(rule %in% .survrsf_AVAILABLE),
-       reason=if (is.null(reason)) "" else reason)
+  list(
+    rule = rule, available = (rule %in% .survrsf_AVAILABLE),
+    reason = if (is.null(reason)) "" else reason
+  )
 }
 
 #' .survrsf_check_rule
 #'
-#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_best_split}, \code{morie_survrsf_forest}, \code{morie_survrsf_grow_tree}.
+#' A step of the survrsf_native implementation. Called by
+#' \code{morie_survrsf_best_split}, \code{morie_survrsf_forest},
+#' \code{morie_survrsf_grow_tree}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -86,12 +98,16 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 #' @export
 .survrsf_check_rule <- function(rule) {
   if (!(rule %in% morie_survrsf_SPLIT_RULES)) {
-    stop(sprintf("survrsf: rule must be one of %s, got %s",
-                 paste(morie_survrsf_SPLIT_RULES, collapse=", "), rule))
+    stop(sprintf(
+      "survrsf: rule must be one of %s, got %s",
+      paste(morie_survrsf_SPLIT_RULES, collapse = ", "), rule
+    ))
   }
   if (!(rule %in% .survrsf_AVAILABLE)) {
-    stop(sprintf("survrsf: the %s splitting rule is not implemented",
-                 rule))
+    stop(sprintf(
+      "survrsf: the %s splitting rule is not implemented",
+      rule
+    ))
   }
 }
 
@@ -106,8 +122,11 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @return The value of \code{e}, as built in the body.
 #' @export
-.survrsf_rng <- function(seed=0) {
-  e <- new.env(parent=emptyenv())
+#' @examples
+#' res <- .survrsf_rng()
+#' res
+.survrsf_rng <- function(seed = 0) {
+  e <- new.env(parent = emptyenv())
   e$s <- as.numeric(seed) %% 2147483648
   if (e$s == 0) {
     e$s <- 1
@@ -119,8 +138,10 @@ morie_survrsf_rule_status <- function(rule=NULL) {
   A64 <- c(1481765933, 1284865837)
   C64 <- list(hi = 335903614, lo = 4150755663)
   sd0 <- as.numeric(seed)
-  st <- .ghc_add64(.ghc_mul64(list(hi = floor(sd0 / 4294967296),
-                                   lo = sd0 %% 4294967296), A64), C64)
+  st <- .ghc_add64(.ghc_mul64(list(
+    hi = floor(sd0 / 4294967296),
+    lo = sd0 %% 4294967296
+  ), A64), C64)
   e$w <- st
   e$next_ <- function() {
     e$w <- .ghc_add64(.ghc_mul64(e$w, A64), C64)
@@ -144,7 +165,9 @@ morie_survrsf_rule_status <- function(rule=NULL) {
 
 #' The terminal-node estimator of equation (3.1)
 #'
-#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_grow_tree}.
+#' A step of the survrsf_native implementation. Called by
+#' \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals},
+#' \code{morie_survrsf_grow_tree}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -156,8 +179,10 @@ morie_survrsf_nelson_aalen <- function(times, events) {
   # The terminal-node estimator of equation (3.1).
   n <- length(times)
   if (n != length(events)) {
-    stop(sprintf("survrsf: %d times but %d event indicators", n,
-                 length(events)))
+    stop(sprintf(
+      "survrsf: %d times but %d event indicators", n,
+      length(events)
+    ))
   }
   if (n == 0L) {
     stop("survrsf: no observations")
@@ -185,12 +210,14 @@ morie_survrsf_nelson_aalen <- function(times, events) {
     }
     i <- j
   }
-  list(time=ts, chf=ds, n=n, deaths=as.integer(sum(events != 0)))
+  list(time = ts, chf = ds, n = n, deaths = as.integer(sum(events != 0)))
 }
 
 #' .survrsf_chf_at
 #'
-#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals}, \code{morie_survrsf_ensemble_chf} and 1 others in the module.
+#' A step of the survrsf_native implementation. Called by
+#' \code{morie_survrsf_conservation_check}, \code{morie_survrsf_conservation_residuals},
+#' \code{morie_survrsf_ensemble_chf} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -223,11 +250,15 @@ morie_survrsf_conservation_check <- function(times, events) {
   # Lemma 1: the hazard summed over observed times is the deaths.
   # Censored times count too.
   na <- morie_survrsf_nelson_aalen(times, events)
-  total <- sum(vapply(times, function(t) .survrsf_chf_at(na, t),
-                      numeric(1)))
+  total <- sum(vapply(
+    times, function(t) .survrsf_chf_at(na, t),
+    numeric(1)
+  ))
   deaths <- sum(events != 0)
-  list(sum_chf=total, deaths=deaths, difference=total - deaths,
-       conserved=abs(total - deaths) < 1e-9)
+  list(
+    sum_chf = total, deaths = deaths, difference = total - deaths,
+    conserved = abs(total - deaths) < 1e-9
+  )
 }
 
 #' The two-sample log-rank statistic used for splitting
@@ -273,7 +304,7 @@ morie_survrsf_logrank_statistic <- function(times, events, group) {
     if (d > 0L && at_risk > 1L) {
       num <- num + d1 - d * r1 / at_risk
       var_ <- var_ + (d * (r1 / at_risk) * (1.0 - r1 / at_risk) *
-                      (at_risk - d) / (at_risk - 1L))
+        (at_risk - d) / (at_risk - 1L))
     } else if (d > 0L) {
       num <- num + d1 - d * r1 / at_risk
     }
@@ -305,8 +336,10 @@ morie_survrsf_logrank_scores <- function(times, events) {
   if (N == 0L) {
     stop("survrsf: no observations")
   }
-  gamma <- vapply(seq_len(N),
-                  function(j) sum(times <= times[j]), numeric(1))
+  gamma <- vapply(
+    seq_len(N),
+    function(j) sum(times <= times[j]), numeric(1)
+  )
   out <- numeric(N)
   for (i in seq_len(N)) {
     s <- 0.0
@@ -329,11 +362,12 @@ morie_survrsf_logrank_scores <- function(times, events) {
 #' @param times A vector; its length is taken.
 #' @param events Passed to \code{morie_survrsf_logrank_scores}.
 #' @param group A vector; its length is taken.
-#' @param scores Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scores Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 morie_survrsf_logrank_score_statistic <- function(times, events, group,
-                                                  scores=NULL) {
+                                                  scores = NULL) {
   # The standardised statistic of Hothorn & Lausen (2003) eqs (1)-(4),
   # with moments conditional on the scores.
   N <- length(times)
@@ -437,13 +471,14 @@ morie_survrsf_conserve_statistic <- function(times, events, group) {
 #' @param events A vector; indexed elementwise.
 #' @param features See Usage.
 #' @param min_deaths Passed to \code{<}. Defaults to \code{3}.
-#' @param rule One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}. Defaults to \code{"logrank"}.
+#' @param rule One of \code{"conserve"}, \code{"logrankrandom"}, \code{"logrankscore"}.
+#' Defaults to \code{"logrank"}.
 #' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$randint} from it.
 #' @return The value of \code{best}, as built in the body.
 #' @export
 morie_survrsf_best_split <- function(X, times, events, features,
-                                     min_deaths=3, rule="logrank",
-                                     rng=NULL) {
+                                     min_deaths = 3, rule = "logrank",
+                                     rng = NULL) {
   # Search the candidate variables for the best split. features are
   # 0-based column indices; the returned left/right are 1-based row
   # positions into the node's cases.
@@ -473,7 +508,7 @@ morie_survrsf_best_split <- function(X, times, events, features,
       left <- which(grp == 0L)
       right <- which(grp == 1L)
       if (sum(events[left] != 0) < min_deaths ||
-          sum(events[right] != 0) < min_deaths) {
+        sum(events[right] != 0) < min_deaths) {
         next
       }
       stat <- if (rule == "logrankscore") {
@@ -484,8 +519,10 @@ morie_survrsf_best_split <- function(X, times, events, features,
         morie_survrsf_logrank_statistic(times, events, grp)
       }
       if (is.null(best) || stat > best$statistic) {
-        best <- list(variable=j, cut=c, statistic=stat,
-                     left=left, right=right)
+        best <- list(
+          variable = j, cut = c, statistic = stat,
+          left = left, right = right
+        )
       }
     }
   }
@@ -508,9 +545,9 @@ morie_survrsf_best_split <- function(X, times, events, features,
 #' @param rng Optional; may be \code{NULL}. A list; the body reads \code{$sample_} from it.
 #' @return A list with \code{root}, \code{rule}, \code{mtry}, \code{min_deaths}, \code{n}.
 #' @export
-morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
-                                    min_deaths=3, rule="logrank",
-                                    seed=0, rng=NULL) {
+morie_survrsf_grow_tree <- function(X, times, events, mtry = NULL,
+                                    min_deaths = 3, rule = "logrank",
+                                    seed = 0, rng = NULL) {
   # One survival tree, grown to saturation under d0.
   .survrsf_check_rule(rule)
   X <- as.matrix(X)
@@ -532,31 +569,42 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
     t <- times[idx]
     e <- events[idx]
     if (sum(e != 0) < 2L * min_deaths || depth > 40L) {
-      return(list(leaf=TRUE, na=morie_survrsf_nelson_aalen(t, e),
-                  n=length(idx), idx=idx))
+      return(list(
+        leaf = TRUE, na = morie_survrsf_nelson_aalen(t, e),
+        n = length(idx), idx = idx
+      ))
     }
-    feats <- rng$sample_(seq_len(d) - 1L, mtry)  # 0-based features
-    sub <- X[idx, , drop=FALSE]
-    sp <- morie_survrsf_best_split(sub, t, e, feats, min_deaths, rule,
-                                   rng)
+    feats <- rng$sample_(seq_len(d) - 1L, mtry) # 0-based features
+    sub <- X[idx, , drop = FALSE]
+    sp <- morie_survrsf_best_split(
+      sub, t, e, feats, min_deaths, rule,
+      rng
+    )
     if (is.null(sp)) {
-      return(list(leaf=TRUE, na=morie_survrsf_nelson_aalen(t, e),
-                  n=length(idx), idx=idx))
+      return(list(
+        leaf = TRUE, na = morie_survrsf_nelson_aalen(t, e),
+        n = length(idx), idx = idx
+      ))
     }
     left <- idx[sp$left]
     right <- idx[sp$right]
-    list(leaf=FALSE, variable=sp$variable, cut=sp$cut,
-         statistic=sp$statistic,
-         left=build(left, depth + 1L),
-         right=build(right, depth + 1L))
+    list(
+      leaf = FALSE, variable = sp$variable, cut = sp$cut,
+      statistic = sp$statistic,
+      left = build(left, depth + 1L),
+      right = build(right, depth + 1L)
+    )
   }
-  list(root=build(seq_len(n), 0L), rule=rule, mtry=mtry,
-       min_deaths=as.integer(min_deaths), n=n)
+  list(
+    root = build(seq_len(n), 0L), rule = rule, mtry = mtry,
+    min_deaths = as.integer(min_deaths), n = n
+  )
 }
 
 #' morie_survrsf_predict_tree
 #'
-#' A step of the survrsf_native implementation. Called by \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}.
+#' A step of the survrsf_native implementation. Called by
+#' \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -566,8 +614,8 @@ morie_survrsf_grow_tree <- function(X, times, events, mtry=NULL,
 #' @param rng Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return The value of \code{node}, as built in the body.
 #' @export
-morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
-                                       rng=NULL) {
+morie_survrsf_predict_tree <- function(tree, x, random_variable = NULL,
+                                       rng = NULL) {
   # Drop a case down the tree and return its terminal node.
   # random_variable (0-based) implements the Sec. 7 importance device:
   # at any split on that variable, the daughter is chosen at random.
@@ -598,10 +646,11 @@ morie_survrsf_predict_tree <- function(tree, x, random_variable=NULL,
 #' @param min_deaths Numeric; combined arithmetically in the body. Defaults to \code{3}.
 #' @param rule Passed to \code{.survrsf_check_rule}. Defaults to \code{"logrank"}.
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{0}.
-#' @return A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees}, \code{oob_fraction}, \code{times}, \code{events}.
+#' @return A list with \code{trees}, \code{inbag}, \code{n}, \code{rule}, \code{n_trees},
+#' \code{oob_fraction}, \code{times}, \code{events}.
 #' @export
-morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
-                                 min_deaths=3, rule="logrank", seed=0) {
+morie_survrsf_forest <- function(X, times, events, n_trees = 50, mtry = NULL,
+                                 min_deaths = 3, rule = "logrank", seed = 0) {
   # Grow the forest, keeping the out-of-bag membership.
   .survrsf_check_rule(rule)
   X <- as.matrix(X)
@@ -613,25 +662,33 @@ morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
   for (b in seq_len(as.integer(n_trees))) {
     boot <- vapply(seq_len(n), function(z) rng$randint(n) + 1L, integer(1))
     used <- unique(boot)
-    Xb <- X[boot, , drop=FALSE]
+    Xb <- X[boot, , drop = FALSE]
     tb <- times[boot]
     eb <- events[boot]
     if (sum(eb != 0) < 2L * min_deaths) {
       next
     }
     trees[[length(trees) + 1L]] <- morie_survrsf_grow_tree(Xb, tb, eb,
-                                                           mtry, min_deaths,
-                                                           rule, rng=rng)
+      mtry, min_deaths,
+      rule,
+      rng = rng
+    )
     inbag[[length(inbag) + 1L]] <- used
   }
   if (length(trees) == 0L) {
-    stop(sprintf(paste0("survrsf: no tree could be grown; the data hold ",
-                        "too few deaths for min_deaths = %d"), min_deaths))
+    stop(sprintf(paste0(
+      "survrsf: no tree could be grown; the data hold ",
+      "too few deaths for min_deaths = %d"
+    ), min_deaths))
   }
-  oob_fraction <- sum(vapply(inbag, function(u) n - length(u),
-                             numeric(1))) / (length(inbag) * n)
-  list(trees=trees, inbag=inbag, n=n, rule=rule, n_trees=length(trees),
-       oob_fraction=oob_fraction, times=times, events=events)
+  oob_fraction <- sum(vapply(
+    inbag, function(u) n - length(u),
+    numeric(1)
+  )) / (length(inbag) * n)
+  list(
+    trees = trees, inbag = inbag, n = n, rule = rule, n_trees = length(trees),
+    oob_fraction = oob_fraction, times = times, events = events
+  )
 }
 
 #' morie_survrsf_ensemble_chf
@@ -648,8 +705,8 @@ morie_survrsf_forest <- function(X, times, events, n_trees=50, mtry=NULL,
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
-                                       random_variable=NULL, seed=1) {
+morie_survrsf_ensemble_chf <- function(fit, X, t, oob = TRUE,
+                                       random_variable = NULL, seed = 1) {
   # Equations (3.2) and (3.3): the out-of-bag or bootstrap ensemble.
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -662,8 +719,10 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
       if (oob && (i %in% fit$inbag[[b]])) {
         next
       }
-      node <- morie_survrsf_predict_tree(fit$trees[[b]], X[i, ],
-                                         random_variable, rng)
+      node <- morie_survrsf_predict_tree(
+        fit$trees[[b]], X[i, ],
+        random_variable, rng
+      )
       vals <- vals + .survrsf_chf_at(node$na, t)
       count <- count + 1L
     }
@@ -685,8 +744,8 @@ morie_survrsf_ensemble_chf <- function(fit, X, t, oob=TRUE,
 #' @param seed Passed to \code{.survrsf_rng}. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-morie_survrsf_mortality <- function(fit, X, oob=TRUE,
-                                    random_variable=NULL, seed=1) {
+morie_survrsf_mortality <- function(fit, X, oob = TRUE,
+                                    random_variable = NULL, seed = 1) {
   # Sec. 4.1: the hazard summed over every observed time.
   X <- as.matrix(X)
   storage.mode(X) <- "double"
@@ -700,11 +759,15 @@ morie_survrsf_mortality <- function(fit, X, oob=TRUE,
       if (oob && (i %in% fit$inbag[[b]])) {
         next
       }
-      node <- morie_survrsf_predict_tree(fit$trees[[b]], X[i, ],
-                                         random_variable, rng)
-      total <- total + sum(vapply(ts,
-                                  function(t) .survrsf_chf_at(node$na, t),
-                                  numeric(1)))
+      node <- morie_survrsf_predict_tree(
+        fit$trees[[b]], X[i, ],
+        random_variable, rng
+      )
+      total <- total + sum(vapply(
+        ts,
+        function(t) .survrsf_chf_at(node$na, t),
+        numeric(1)
+      ))
       count <- count + 1L
     }
     out[i] <- if (count > 0L) total / count else NaN
@@ -720,7 +783,8 @@ morie_survrsf_mortality <- function(fit, X, oob=TRUE,
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param events A vector; its length is taken and its elements indexed.
 #' @param predicted A vector; its length is taken and its elements indexed.
-#' @return A list with \code{c_index}, \code{concordance}, \code{permissible}, \code{prediction_error}.
+#' @return A list with \code{c_index}, \code{concordance}, \code{permissible},
+#' \code{prediction_error}.
 #' @export
 morie_survrsf_c_index <- function(times, events, predicted) {
   # Harrell's C by the paper's four steps. predicted is a
@@ -728,13 +792,15 @@ morie_survrsf_c_index <- function(times, events, predicted) {
   # sooner.
   n <- length(times)
   if (!(n == length(events) && n == length(predicted))) {
-    stop(paste0("survrsf: times, events and predictions must have the ",
-                "same length"))
+    stop(paste0(
+      "survrsf: times, events and predictions must have the ",
+      "same length"
+    ))
   }
   permissible <- 0.0
   concordance <- 0.0
   for (i in seq_len(n)) {
-    for (j in seq.int(i + 1L, length.out=max(0L, n - i))) {
+    for (j in seq.int(i + 1L, length.out = max(0L, n - i))) {
       ti <- times[i]
       tj <- times[j]
       ei <- events[i]
@@ -778,12 +844,16 @@ morie_survrsf_c_index <- function(times, events, predicted) {
     }
   }
   if (permissible == 0.0) {
-    stop(paste0("survrsf: no permissible pairs -- every pair has its ",
-                "shorter time censored"))
+    stop(paste0(
+      "survrsf: no permissible pairs -- every pair has its ",
+      "shorter time censored"
+    ))
   }
-  list(c_index=concordance / permissible, concordance=concordance,
-       permissible=permissible,
-       prediction_error=1.0 - concordance / permissible)
+  list(
+    c_index = concordance / permissible, concordance = concordance,
+    permissible = permissible,
+    prediction_error = 1.0 - concordance / permissible
+  )
 }
 
 #' Sec. 7: random daughter assignment at splits on x. Keys are
@@ -792,18 +862,22 @@ morie_survrsf_c_index <- function(times, events, predicted) {
 #'
 #' @param fit A list; the body reads \code{$events}, \code{$times} from it.
 #' @param X A matrix; passed to \code{ncol}.
-#' @param variables Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param variables Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param seed Passed to \code{morie_survrsf_mortality}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{vimp}, \code{baseline_error}, \code{note},
+#' \code{method}.
 #' @export
-morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
+morie_survrsf_vimp <- function(fit, X, variables = NULL, seed = 1) {
   # Sec. 7: random daughter assignment at splits on x. Keys are
   # 0-based variable indices to match the Python.
   X <- as.matrix(X)
   storage.mode(X) <- "double"
-  base <- morie_survrsf_mortality(fit, X, oob=TRUE, seed=seed)
-  base_pe <- morie_survrsf_c_index(fit$times, fit$events,
-                                   base)$prediction_error
+  base <- morie_survrsf_mortality(fit, X, oob = TRUE, seed = seed)
+  base_pe <- morie_survrsf_c_index(
+    fit$times, fit$events,
+    base
+  )$prediction_error
   vars <- if (is.null(variables)) {
     seq_len(ncol(X)) - 1L
   } else {
@@ -811,20 +885,28 @@ morie_survrsf_vimp <- function(fit, X, variables=NULL, seed=1) {
   }
   out <- list()
   for (v in vars) {
-    m <- morie_survrsf_mortality(fit, X, oob=TRUE, random_variable=v,
-                                 seed=seed)
-    pe <- morie_survrsf_c_index(fit$times, fit$events,
-                                m)$prediction_error
+    m <- morie_survrsf_mortality(fit, X,
+      oob = TRUE, random_variable = v,
+      seed = seed
+    )
+    pe <- morie_survrsf_c_index(
+      fit$times, fit$events,
+      m
+    )$prediction_error
     out[[as.character(v)]] <- pe - base_pe
   }
   list(
-    estimate=if (length(out) > 0L) max(unlist(out)) else 0.0,
-    vimp=out, baseline_error=base_pe,
-    note=paste0("VIMP is the change in error for a fresh case if x ",
-                "were unavailable, NOT the change from regrowing the ",
-                "forest without x"),
-    method=paste0("variable importance by random daughter assignment; ",
-                  "Ishwaran et al. (2008) Sec. 7")
+    estimate = if (length(out) > 0L) max(unlist(out)) else 0.0,
+    vimp = out, baseline_error = base_pe,
+    note = paste0(
+      "VIMP is the change in error for a fresh case if x ",
+      "were unavailable, NOT the change from regrowing the ",
+      "forest without x"
+    ),
+    method = paste0(
+      "variable importance by random daughter assignment; ",
+      "Ishwaran et al. (2008) Sec. 7"
+    )
   )
 }
 

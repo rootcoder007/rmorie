@@ -3,7 +3,8 @@
 #' 1D heat diffusion solver (explicit finite differences)
 #'
 #' R parity for \code{morie.fn.diffu.heat_diffusion}.  Forward-Euler
-#' update of \eqn{\partial_t T = \alpha \partial_x^2 T}{partial_t T = alpha partial_x^2 T} with Dirichlet
+#' update of \eqn{\partial_t T = \alpha \partial_x^2 T}{partial_t T = alpha partial_x^2
+#' T} with Dirichlet
 #' (fixed-endpoint) boundary conditions.
 #'
 #' @param T0 Initial temperature profile (numeric vector, length >= 3).
@@ -49,7 +50,8 @@ morie_diffu_heat_diffusion <- function(T0, alpha = 0.01, dx = 0.1, dt = 0.01,
 #' R parity for \code{morie.fn.diffu.diffusion_forward}.
 #'
 #' \deqn{x_t = \sqrt{\bar\alpha_t}\, x_0 +
-#'       \sqrt{1 - \bar\alpha_t}\, \varepsilon}{x_t = sqrt(baralpha_t) x_0 + sqrt(1 - baralpha_t) epsilon}
+#'       \sqrt{1 - \bar\alpha_t}\, \varepsilon}{x_t = sqrt(baralpha_t) x_0 + sqrt(1 -
+#' baralpha_t) epsilon}
 #'
 #' with linear \eqn{\beta}{beta} schedule from \code{1e-4} to \code{0.02}.
 #'

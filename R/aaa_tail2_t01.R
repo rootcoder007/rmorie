@@ -23,6 +23,11 @@
 #' @param b Passed to \code{c}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .t2_lvl(a = A, b = b)
+#' res
 .t2_lvl <- function(a, b) sort(unique(c(a, b)))
 
 #' Cohen (1960) kappa for two raters

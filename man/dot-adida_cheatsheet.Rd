@@ -12,3 +12,7 @@ Character string summarising the framework.
 \description{
 One-sentence ADIDA cheatsheet
 }
+\examples{
+res <- .adida_cheatsheet()
+res
+}

@@ -36,7 +36,8 @@ using the latter over-corrects, and by the most where kriging is most
 confident.
 }
 \examples{
-splgk(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8), target = c(1, 2, 3, 4, 5, 6, 7, 8))
+splgk(coords = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8),
+  target = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Schabenberger Ch 5, Sec 5.6.1

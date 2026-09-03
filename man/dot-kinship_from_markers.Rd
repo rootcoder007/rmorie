@@ -19,3 +19,8 @@ A step of the farmlmm_native implementation. Called by \code{.random_effect_step
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+g <- c(0L, 1L, 0L, 1L, 1L, 0L, 1L, 0L)
+res <- .kinship_from_markers(G = g)
+res
+}

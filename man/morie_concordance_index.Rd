@@ -25,5 +25,6 @@ proportion in which the subject failing first carried the higher
 predicted risk, ties counted as a half.  0.5 is chance.
 }
 \examples{
-morie_concordance_index(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), predicted_risk = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_concordance_index(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  predicted_risk = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

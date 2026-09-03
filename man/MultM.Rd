@@ -37,7 +37,8 @@ longer decomposes the total effect. This routine computes the
 parallel-model quantities; it does not test the assumption.
 }
 \examples{
-MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
+MultM(Y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8),
+  M_list = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Daniel, De Stavola, Cousens and Vansteelandt (2015),

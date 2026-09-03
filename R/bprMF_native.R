@@ -85,7 +85,8 @@
 
 #' .bprMF_sigmoid
 #'
-#' A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
+#' A step of the bprMF_native implementation. Called by \code{.bprMF_bpr_opt},
+#' \code{.bprMF_learn_bpr}, \code{bpr_sigmoid}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -101,7 +102,8 @@
 
 #' .bprMF_predict
 #'
-#' A step of the bprMF_native implementation. Called by \code{.bprMF_auc}, \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
+#' A step of the bprMF_native implementation. Called by \code{.bprMF_auc},
+#' \code{.bprMF_bpr_opt}, \code{.bprMF_learn_bpr} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -258,9 +260,12 @@
 #' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{2000L}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
-#' @param regularizer_sign Coerced to character by the body, with \code{as.character}. Defaults to \code{"correct"}.
+#' @param regularizer_sign Coerced to character by the body, with \code{as.character}.
+#' Defaults to \code{"correct"}.
 #' @param init_scale Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.1}.
-#' @return A list with \code{estimate}, \code{W}, \code{H}, \code{k}, \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm}, \code{regularizer_sign}, \code{method}, \code{caveat}.
+#' @return A list with \code{estimate}, \code{W}, \code{H}, \code{k},
+#' \code{bpr_opt_history}, \code{final_bpr_opt}, \code{auc}, \code{param_norm},
+#' \code{regularizer_sign}, \code{method}, \code{caveat}.
 #' @export
 .bprMF_learn_bpr <- function(pos, n_users, n_items, k_dim = 8L,
                              alpha = 0.05, lam = 0.01, iters = 2000L,
@@ -499,6 +504,9 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .bprMF_cheatsheet()
+#' res
 .bprMF_cheatsheet <- function() {
   paste("bprMF: implicit feedback is positive-only, and labelling every",
         "unobserved pair NEGATIVE trains the model to predict 0 on",
@@ -514,25 +522,3 @@ bayesianpersonalizedranking <- bpr_learn_bpr_R
 #' @rdname bpr_sigmoid
 #' @export
 morie_bprMF <- bpr_sigmoid
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

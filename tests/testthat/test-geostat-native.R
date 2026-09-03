@@ -35,7 +35,8 @@ test_that("variogram ML recovers exponential parameters", {
   # Nugget/range are weakly identified at n = 220; assert the fit is
   # in the right regime rather than pinning noisy point estimates.
   expect_true(is.finite(fit$loglik))
-  expect_gt(fit$range, 0.05); expect_lt(fit$range, 1.5)
+  expect_gt(fit$range, 0.05)
+  expect_lt(fit$range, 1.5)
   expect_lt(fit$nugget, 0.7)
   expect_equal(fit$nugget + fit$psill, 1.1, tolerance = 0.5)
   # spatial model beats a pure-nugget (white noise) Gaussian loglik

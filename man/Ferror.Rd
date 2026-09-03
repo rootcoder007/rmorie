@@ -29,7 +29,8 @@ the following step.  Read backwards the same identity gives the
 instantaneous reproduction number, Rhat_t = I_t / Lambda_t.
 }
 \examples{
-Ferror(incidence = c(1, 2, 3, 4, 5, 6, 7, 8), Rt = c(1, 2, 3, 4, 5, 6, 7, 8), gen_int = c(1, 2, 3, 4, 5, 6, 7, 8))
+Ferror(incidence = c(1, 2, 3, 4, 5, 6, 7, 8), Rt = c(1, 2, 3, 4, 5, 6, 7, 8),
+  gen_int = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Fraser (2007), PLoS ONE 2(8):e758,

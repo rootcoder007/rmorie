@@ -4,7 +4,8 @@
 #'
 #' R parity for \code{morie.fn.mxpol.maxpool_forward}.
 #'
-#' \deqn{y\[i,j\] = \max_{0 \le m,n < k} x\[i s + m, j s + n\]}{y\[i,j\] = max_0 <= m,n < k x\[i s + m, j s + n\]}
+#' \deqn{y\[i,j\] = \max_{0 \le m,n < k} x\[i s + m, j s + n\]}{y\[i,j\] = max_0 <= m,n <
+#' k x\[i s + m, j s + n\]}
 #'
 #' @param x Numeric matrix \code{(H, W)}.
 #' @param kernel_size Window size \code{k}.

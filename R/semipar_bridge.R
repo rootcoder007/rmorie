@@ -45,11 +45,13 @@ NULL
 #' constants directly to any C++ kernel routine.
 #'
 #' \itemize{
-#'   \item \code{KERNEL_GAUSSIAN}: \eqn{K(u) = (1/\sqrt{2\pi}) \exp(-u^2/2)}{K(u) = (1/sqrt(2 pi)) exp(-u^2 / 2)}
+#'   \item \code{KERNEL_GAUSSIAN}: \eqn{K(u) = (1/\sqrt{2\pi}) \exp(-u^2/2)}{K(u) =
+#' (1/sqrt(2 pi)) exp(-u^2 / 2)}
 #'   \item \code{KERNEL_EPANECHNIKOV}: \eqn{K(u) = (3/4)(1-u^2)}{K(u) = 0.75 (1 - u^2)} on |u| <= 1
 #'   \item \code{KERNEL_UNIFORM}: \eqn{K(u) = 1/2}{K(u) = 0.5} on |u| <= 1
 #'   \item \code{KERNEL_TRIANGULAR}: \eqn{K(u) = 1 - |u|}{K(u) = 1 - |u|} on |u| <= 1
-#'   \item \code{KERNEL_BIWEIGHT}: \eqn{K(u) = (15/16)(1-u^2)^2}{K(u) = (15/16) (1 - u^2)^2} on |u| <= 1
+#'   \item \code{KERNEL_BIWEIGHT}: \eqn{K(u) = (15/16)(1-u^2)^2}{K(u) = (15/16) (1 -
+#' u^2)^2} on |u| <= 1
 #' }
 #'
 #' @format Integer scalars (0L, 1L, 2L, 3L, 4L).

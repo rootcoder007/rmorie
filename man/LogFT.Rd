@@ -22,5 +22,6 @@ A list with \code{y}, \code{Yl}, \code{Xl}, \code{Pl}, \code{max_difference}, \c
 }
 \keyword{internal}
 \examples{
-LogFT(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8), omega = c(1, 2, 3, 4, 5, 6, 7, 8))
+LogFT(x = c(1, 2, 3, 4, 5, 6, 7, 8), p = c(1, 2, 3, 4, 5, 6, 7, 8),
+  omega = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -46,6 +46,10 @@ Wfrep <- function(y, weights = NULL, cells = NULL) {
 #' @param v Numeric; the body checks with \code{is.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .wfrep_lab(v = x)
+#' res
 .wfrep_lab <- function(v) {
   if (is.numeric(v)) {
     ifelse(v == trunc(v), format(trunc(v), scientific = FALSE, trim = TRUE),

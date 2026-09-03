@@ -19,3 +19,7 @@ A step of the tqkmse implementation. Called by \code{Kvmse}, \code{Kvquant}, \co
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .kvmse_rotation(d = 3L, seed = 1L)
+res
+}

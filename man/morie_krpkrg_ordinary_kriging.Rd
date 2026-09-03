@@ -25,5 +25,6 @@ A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error
 }
 \keyword{internal}
 \examples{
-morie_krpkrg_ordinary_kriging(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), targets = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_krpkrg_ordinary_kriging(coords = c(1, 2, 3, 4, 5, 6, 7, 8),
+  values = c(1, 2, 3, 4, 5, 6, 7, 8), targets = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

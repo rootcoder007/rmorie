@@ -23,7 +23,9 @@
 
 #' .morie_w4c_lcgvec
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{.morie_w4c_lcg_uniform}, \code{.morie_w4c_nmf}, \code{morie_geron_pvt} and 1 others in the module.
+#' A step of the geron_w4c_native implementation. Called by
+#' \code{.morie_w4c_lcg_uniform}, \code{.morie_w4c_nmf}, \code{morie_geron_pvt} and 1
+#' others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -31,6 +33,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4c_lcgvec(n = 3L, seed = 1L)
+#' res
 .morie_w4c_lcgvec <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -52,6 +57,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4c_lcg_normal(n = 3L, seed = 1L)
+#' res
 .morie_w4c_lcg_normal <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- numeric(n)
@@ -90,7 +98,8 @@
 #' Fisher-Yates partial shuffle drawing k of n indices (0-based out),
 #' LCG-seeded
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_pasting}, \code{morie_geron_random_forest}, \code{morie_geron_random_patches}.
+#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_pasting},
+#' \code{morie_geron_random_forest}, \code{morie_geron_random_patches}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -99,6 +108,9 @@
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{sort}.
 #' @export
+#' @examples
+#' res <- .morie_w4c_lcg_sample(n = 3L, k = 3L, seed = 1L)
+#' res
 .morie_w4c_lcg_sample <- function(n, k, seed) {
   s <- as.numeric(seed) %% 2^32
   pool <- 0:(n - 1L)
@@ -167,8 +179,14 @@
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @param center A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param scale A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{components}, \code{scores}, \code{explained_variance}, \code{explained_variance_ratio}, \code{singular_values}, \code{Xc}.
+#' @return A list with \code{components}, \code{scores}, \code{explained_variance},
+#' \code{explained_variance_ratio}, \code{singular_values}, \code{Xc}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_w4c_pca_svd(X = X, k = 3L)
+#' res
 .morie_w4c_pca_svd <- function(X, k, center = TRUE, scale = FALSE) {
   Xc <- if (center) sweep(X, 2, colMeans(X)) else X
   if (scale) {
@@ -577,7 +595,8 @@ morie_geron_novelty_detection <- function(model, X_new, reference = NULL) {
 
 # ============================================================ hmnsp
 
-#' Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)
+#' Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron
+#' Ch 15, hmnsp)
 #' @param sent_A,sent_B Tokenised sentences.
 #' @param encoder Optional `encoder(tokens, segments) -> h`.
 #' @param w,b Head weights/bias.
@@ -1413,6 +1432,10 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_w4c_sigmoid(z = y)
+#' res
 .morie_w4c_sigmoid <- function(z) 1.0 / (1.0 + exp(-z))
 
 #' Peephole LSTM cell forward step: gates also see the cell state (Geron Ch 13, hmphp)
@@ -1494,7 +1517,8 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' 1-based column indices, combinations with replacement, itertools
 #' order
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_polynomial_features_hm}.
+#' A step of the geron_w4c_native implementation. Called by
+#' \code{morie_geron_polynomial_features_hm}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -1502,6 +1526,9 @@ morie_geron_polynomial_features_hm <- function(X, degree, include_bias = TRUE, i
 #' @param k Passed to \code{==}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4c_combos_with_repl(n = 3L, k = 3L)
+#' res
 .morie_w4c_combos_with_repl <- function(n, k) {
   # 1-based column indices, combinations with replacement, itertools order.
   out <- list()
@@ -1603,7 +1630,8 @@ morie_geron_policy <- function(state, pi, seed = 0) {
 
 #' .morie_w4c_bind_env
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_ppo}, \code{morie_geron_reinforcement_learning}.
+#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_ppo},
+#' \code{morie_geron_reinforcement_learning}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2071,7 +2099,8 @@ morie_geron_pytorch_tensor <- function(x, device = "cpu", dtype = NULL) {
 
 #' .morie_w4c_fake_quant
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_quantization_aware_training_hm}.
+#' A step of the geron_w4c_native implementation. Called by
+#' \code{morie_geron_quantization_aware_training_hm}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2194,7 +2223,8 @@ morie_geron_reverse_autodiff <- function(f, x) {
 
 #' .morie_w4c_grow
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
+#' A step of the geron_w4c_native implementation. Called by
+#' \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2205,7 +2235,8 @@ morie_geron_reverse_autodiff <- function(f, x) {
 #' @param min_leaf Numeric; combined arithmetically in the body.
 #' @param criterion Passed to \code{.morie_w4c_leaf_value}.
 #' @param columns_fn Passed to \code{.morie_w4c_grow}.
-#' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n}, \code{left}, \code{right}.
+#' @return A list with \code{leaf}, \code{feature}, \code{threshold}, \code{n},
+#' \code{left}, \code{right}.
 #' @export
 .morie_w4c_grow <- function(X, y, depth, max_depth, min_leaf, criterion, columns_fn) {
   if (depth >= max_depth || length(y) < 2 * min_leaf || length(unique(y)) == 1L) {
@@ -2225,7 +2256,8 @@ morie_geron_reverse_autodiff <- function(f, x) {
 
 #' .morie_w4c_predict_tree
 #'
-#' A step of the geron_w4c_native implementation. Called by \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
+#' A step of the geron_w4c_native implementation. Called by
+#' \code{morie_geron_random_forest}, \code{morie_geron_regression_tree}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -2388,7 +2420,8 @@ morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr 
 
 # ============================================================ hmrelu
 
-#' Rectified linear unit activation, with a leaky negative slope and dead-fraction diagnostic (Geron Ch 9, hmrelu)
+#' Rectified linear unit activation, with a leaky negative slope and dead-fraction
+#' diagnostic (Geron Ch 9, hmrelu)
 #' @param z Pre-activations.
 #' @param leaky Negative slope; 0 is plain ReLU.
 #' @export
@@ -2416,6 +2449,9 @@ morie_geron_relu <- function(z, leaky = 0.0) {
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_w4c_bootstrap(n = 3L, seed = 1L)
+#' res
 .morie_w4c_bootstrap <- function(n, seed) {
   s <- as.numeric(seed) %% 2^32
   out <- integer(n)
@@ -2517,7 +2553,8 @@ morie_geron_random_forest <- function(X, y, n_estimators = 10, max_features = "s
 
 # ============================================================ hmrgpt (wraps hmregn)
 
-#' Regression MLP as an nn.Sequential architecture (numpy/R-trained, no torch call) (Geron Ch 10, hmrgpt)
+#' Regression MLP as an nn.Sequential architecture (numpy/R-trained, no torch call)
+#' (Geron Ch 10, hmrgpt)
 #' @param X,y Data and targets.
 #' @param hidden,epochs,lr,seed Passed to `morie_geron_regression_mlp`.
 #' @export
@@ -2592,7 +2629,8 @@ morie_geron_reinforcement_learning <- function(env, pi, gamma = 0.99, n_episodes
 
 # ============================================================ hmrlhf
 
-#' Reinforcement learning from human feedback: reward maximised under a KL penalty (Geron Ch 15, hmrlhf)
+#' Reinforcement learning from human feedback: reward maximised under a KL penalty (Geron
+#' Ch 15, hmrlhf)
 #' @param policy Initial (n_prompts, n_responses) logits.
 #' @param reward_model Function or matrix.
 #' @param prompts Optional prompt identifiers.
@@ -2639,7 +2677,8 @@ morie_geron_rlhf <- function(policy, reward_model, prompts = NULL, beta = 0.1, l
 
 # ============================================================ hmrnfc (wraps hmpg)
 
-#' REINFORCE ascent step: gradient from morie_geron_policy_gradient, applied to theta (Geron Ch 19, hmrnfc)
+#' REINFORCE ascent step: gradient from morie_geron_policy_gradient, applied to theta
+#' (Geron Ch 19, hmrnfc)
 #' @param episodes List of episodes.
 #' @param policy Function `policy(state, action) -> grad log pi`.
 #' @param gamma,eta,theta,baseline Controls.
@@ -2986,10 +3025,10 @@ morie_geron_revnet <- function(x, F, G) {
     .morie_gr_need(length(out) == length(arg), "geron_revnet: residual function must be shape-preserving")
     out
   }
-  y1 <- x1 + apply_fn(F, x2)
+  y1 <- x1 + apply_fn(FALSE, x2)
   y2 <- x2 + apply_fn(G, y1)
   x2_rec <- y2 - apply_fn(G, y1)
-  x1_rec <- y1 - apply_fn(F, x2_rec)
+  x1_rec <- y1 - apply_fn(FALSE, x2_rec)
   x_rec <- c(x1_rec, x2_rec)
   err <- max(abs(x_rec - X))
   y <- c(y1, y2)
@@ -3002,7 +3041,8 @@ morie_geron_revnet <- function(x, F, G) {
 
 # ============================================================ hmrwd
 
-#' Reward function R(s, a, s'): per-transition rewards and the backward discounted return (Geron Ch 19, hmrwd)
+#' Reward function R(s, a, s'): per-transition rewards and the backward discounted return
+#' (Geron Ch 19, hmrwd)
 #' @param s,a,s_next Transition or trajectory arrays.
 #' @param R Callable `R(s,a,s')` or a 2-D/3-D lookup table.
 #' @param gamma Discount in \[0, 1\].

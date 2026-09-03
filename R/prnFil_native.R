@@ -108,7 +108,10 @@
 #' @param changepoint_range Passed to \code{morie_prphet_fit}. Defaults to \code{0.8}.
 #' @param seasonalities Passed to \code{morie_prphet_fit}.
 #' @param ... Passed through.
-#' @return A list with \code{estimate}, \code{selected}, \code{selected_index}, \code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau}, \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse}, \code{method}.
+#' @return A list with \code{estimate}, \code{selected}, \code{selected_index},
+#' \code{deltas}, \code{candidates}, \code{n_selected}, \code{n_candidates}, \code{tau},
+#' \code{fit}, \code{last_candidate_fraction}, \code{changepoint_range}, \code{rmse},
+#' \code{method}.
 #' @export
 .prnFil_select_changepoints <- function(t, y, tau = 0.05,
                                         n_changepoints = 15,
@@ -145,7 +148,8 @@
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
-#' @param fit A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k}, \code{$m}, \code{$t} from it.
+#' @param fit A list; the body reads \code{$changepoints}, \code{$deltas}, \code{$k},
+#' \code{$m}, \code{$t} from it.
 #' @param t_future Coerced to numeric by the body, with \code{as.numeric}.
 #' @param n_sims Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
@@ -202,7 +206,8 @@
 #' @param level Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.8}.
 #' @param n_sims Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{200}.
 #' @param seed Passed to \code{.prnFil_simulate_future_trend}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper}, \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{median}, \code{lower}, \code{upper},
+#' \code{width}, \code{level}, \code{n_sims}, \code{note}, \code{method}.
 #' @export
 .prnFil_trend_intervals <- function(fit, t_future, level = 0.8,
                                      n_sims = 200, seed = 0) {
@@ -235,6 +240,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .prnFil_cheatsheet()
+#' res
 .prnFil_cheatsheet <- function() {
   paste0("prnFil: lay down many candidate changepoints, let ",
          "delta_j ~ Laplace(0, tau) decide. Small tau = straight ",

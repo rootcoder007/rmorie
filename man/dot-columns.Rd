@@ -19,3 +19,8 @@ A step of the sarimax_native implementation. Called by \code{.sarimax_fit}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+b <- c(1.5, 2.5, 3.5)
+res <- .columns(X = b, n = 3L)
+res
+}

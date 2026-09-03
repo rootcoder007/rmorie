@@ -28,7 +28,7 @@ morie_bayes_cpi_genomic(
 \item{seed}{Seed.}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("bglup", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("bglup", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }

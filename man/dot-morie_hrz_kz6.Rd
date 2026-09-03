@@ -17,3 +17,8 @@ second-order kernel will NOT do: G_nz is a functional of DERIVATIVES
 of K_Z, those converge relatively slowly, and the higher-order kernel
 is what restores fast enough convergence (printed p. 220-221).
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .morie_hrz_kz6(u = x)
+res
+}

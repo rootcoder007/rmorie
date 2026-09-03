@@ -21,7 +21,7 @@ List with \code{responsibilities}, \code{pi_new}, \code{means_new},
 \code{log_likelihood_after}, \code{improvement}.
 }
 \description{
-E-step responsibilities from \code{\link[=morie_geron_gmm_log_likelihood]{morie_geron_gmm_log_likelihood()}}, then
+E-step responsibilities from \code{morie_geron_gmm_log_likelihood()}, then
 the weighted pi / mu / Sigma updates, with the monotonicity of the
 log-likelihood asserted.
 }

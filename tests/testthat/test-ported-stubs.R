@@ -17,7 +17,8 @@ for (.nm in c(".morie_sv_bayes_am", ".morie_sv_bayes_mds",
 
 .ported_df <- function(n = 600L, seed = 1L) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, stats::plogis(0.5 * x1))
   y <- 1 + 2 * d + x1 - 0.5 * x2 + rnorm(n)
   data.frame(y, d, x1, x2)
@@ -103,7 +104,8 @@ test_that("native Bayesian unfolding returns finite configurations", {
 
 test_that("native CJR IRT recovers latent ideal-point ordering", {
   set.seed(6)
-  th <- rnorm(40); b <- stats::runif(12, 0.8, 1.6)
+  th <- rnorm(40)
+  b <- stats::runif(12, 0.8, 1.6)
   a <- rnorm(12, 0, 0.5)
   V <- (matrix(stats::plogis(outer(th, b) -
                                matrix(a, 40, 12, TRUE)), 40, 12) >
@@ -115,7 +117,8 @@ test_that("native CJR IRT recovers latent ideal-point ordering", {
 
 test_that("native ordinal IRT recovers latent ideal-point ordering", {
   set.seed(7)
-  th <- rnorm(40); b <- stats::runif(12, 0.8, 1.6)
+  th <- rnorm(40)
+  b <- stats::runif(12, 0.8, 1.6)
   a <- rnorm(12, 0, 0.5)
   eta <- outer(th, b) - matrix(a, 40, 12, TRUE)
   Y3 <- matrix(cut(eta + rnorm(480), c(-Inf, -0.5, 0.5, Inf),

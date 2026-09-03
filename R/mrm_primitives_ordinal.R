@@ -21,10 +21,12 @@
 #' \code{\link[stats]{glm}} with \code{family = binomial("logit")}.
 #'
 #' Standard threshold (proportional-odds, K levels, p covariates):
-#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta)}{P(Y <= k mid X) = logit^-1(alpha_k - X beta)}
+#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta)}{P(Y <= k mid X) =
+#' logit^-1(alpha_k - X beta)}
 #'
 #' Threshold-specific extension (one coefficient vector per cutpoint):
-#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta_k)}{P(Y <= k mid X) = logit^-1(alpha_k - X beta_k)}
+#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta_k)}{P(Y <= k mid X) =
+#' logit^-1(alpha_k - X beta_k)}
 #'
 #' @references
 #' O'Connell, M. & Laniyonu, A. (2025). Threshold-specific

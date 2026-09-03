@@ -21,3 +21,8 @@ truncate to the length in [0.99*N, N] with the most divisors >= 50
 (pracma\'s block-optimal OptN), then compute the whole-series
 statistic log(R/S) / log(n).
 }
+\examples{
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
+res <- .morie_hurst_rs(x = X)
+res
+}

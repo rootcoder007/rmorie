@@ -29,7 +29,7 @@ installed, returns silently. Otherwise:
 \itemize{
 \item In an \strong{interactive} session, prompts the user once,
 and on consent installs the missing packages via
-\code{\link[utils:install.packages]{utils::install.packages()}}.
+\code{utils::install.packages()}.
 \item In a \strong{non-interactive} session (R CMD check, CI,
 Rscript), throws an informative error with the morie command
 the user should run to fix things:
@@ -66,5 +66,5 @@ morie_estimate_irm <- function(...) {
 }
 }
 \seealso{
-\code{\link[=morie_install_extras]{morie_install_extras()}} for the user-facing bulk installer.
+\code{morie_install_extras()} for the user-facing bulk installer.
 }

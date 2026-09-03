@@ -34,7 +34,7 @@ file path (binary).
 }
 \description{
 Portal-agnostic sibling to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}}. Works for ANY ArcGIS
+\code{morie_datasets_tps_arcgis_hub_by_id()}. Works for ANY ArcGIS
 Online item GUID (not just TPS Hub catalog entries). Same five
 format paths (json / geojson / csv / shapefile / fgdb).
 }

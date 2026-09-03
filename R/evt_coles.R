@@ -62,7 +62,7 @@ morie_evt_gev_logpdf <- function(x, mu, sigma, xi) {
 #' @return scalar log-likelihood
 #' @export
 #' @examples
-#' x20 <- c(4.1, 5.3, 3.9, 6.8, 5, 4.4, 7.2, 5.9, 4.7, 6.1, 5.5, 
+#' x20 <- c(4.1, 5.3, 3.9, 6.8, 5, 4.4, 7.2, 5.9, 4.7, 6.1, 5.5,
 #'     4, 8.3, 5.2, 4.9, 6.5, 5.7, 4.3, 7, 5.1)
 #' morie_evt_gev_loglik(x20, 5, 1.5, 0.1)
 morie_evt_gev_loglik <- function(x, mu, sigma, xi) {
@@ -124,6 +124,11 @@ morie_evt_gev_mle <- function(x) {
 #' @param h Numeric; combined arithmetically in the body. Defaults to \code{1e-04}.
 #' @return The value of \code{H}, as built in the body.
 #' @export
+#' @examples
+#' fn <- function(v) sum(v^2)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .evt_num_hessian(f = fn, theta = x)
+#' res
 .evt_num_hessian <- function(f, theta, h = 1e-4) {
   k <- length(theta)
   H <- matrix(0, k, k)
@@ -150,7 +155,8 @@ morie_evt_gev_mle <- function(x) {
 # pseudo-inverse fallback for a singular observed information
 #' Pseudo-inverse fallback for a singular observed information
 #'
-#' A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle}, \code{morie_evt_gpd_mle}.
+#' A step of the evt_coles implementation. Called by \code{morie_evt_gev_mle},
+#' \code{morie_evt_gpd_mle}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -248,8 +254,8 @@ morie_evt_gpd_mle <- function(y) {
 #' @inheritParams morie_evt_gev_cdf
 #' @export
 morie_evt_return_level <- function(mu, sigma, xi, T) {
-  stopifnot(T > 1)
-  morie_evt_gev_quantile(1 - 1 / T, mu, sigma, xi)
+  stopifnot(TRUE > 1)
+  morie_evt_gev_quantile(1 - 1 / TRUE, mu, sigma, xi)
 }
 
 #' Delta-method CI for a GEV return level (Coles 2001 eq. 3.10-3.11)
@@ -259,8 +265,8 @@ morie_evt_return_level <- function(mu, sigma, xi, T) {
 #' @export
 morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
   f <- morie_evt_gev_mle(x)
-  z <- morie_evt_return_level(f$mu, f$sigma, f$xi, T)
-  yp <- -log(1 - 1 / T)
+  z <- morie_evt_return_level(f$mu, f$sigma, f$xi, TRUE)
+  yp <- -log(1 - 1 / TRUE)
   g <- if (abs(f$xi) < .evt_xi_tiny) {
     c(1, -log(yp), 0)
   } else {

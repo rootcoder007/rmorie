@@ -192,8 +192,10 @@ test_that("the MST equals exhaustive search over spanning trees", {
       }
       ok <- TRUE
       for (i in c) {
-        a <- find(edges[[i]][1]); b <- find(edges[[i]][2])
-        if (a == b) { ok <- FALSE; break }
+        a <- find(edges[[i]][1])
+        b <- find(edges[[i]][2])
+        if (a == b) { ok <- FALSE
+        break }
         uf[a] <- b
       }
       if (ok) best <- min(best, sum(w[c]))
@@ -251,7 +253,8 @@ test_that("Konig matches Python on the reference graph", {
 test_that("Konig holds on random bipartite graphs", {
   set.seed(16)
   for (i in seq_len(80L)) {
-    ln <- sample.int(5, 1); rn <- sample.int(5, 1)
+    ln <- sample.int(5, 1)
+    rn <- sample.int(5, 1)
     E <- list()
     for (a in seq_len(ln)) for (b in seq_len(rn)) {
       if (stats::runif(1) < 0.5) E[[length(E) + 1L]] <- c(a, b)
@@ -282,7 +285,8 @@ test_that("Hall matches Python on the failing example", {
 test_that("Hall agrees with the matching everywhere", {
   set.seed(17)
   for (i in seq_len(100L)) {
-    ln <- sample.int(5, 1); rn <- sample.int(5, 1)
+    ln <- sample.int(5, 1)
+    rn <- sample.int(5, 1)
     E <- list()
     for (a in seq_len(ln)) for (b in seq_len(rn)) {
       if (stats::runif(1) < 0.5) E[[length(E) + 1L]] <- c(a, b)

@@ -34,7 +34,8 @@
 #'   standard published form, stated in full so it can be checked.
 #' @export
 #' @examples
-#' Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
+#' Mlpv(y = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), cluster =
+#' data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)))
 Mlpv <- function(y, X, cluster) {
   v <- .t1_vec(y)
   n <- length(v)

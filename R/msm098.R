@@ -17,7 +17,8 @@
 #'   DOI 10.1007/978-3-030-89010-0.
 #' @export
 #' @examples
-#' Msm098(n = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8), Z_L = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Msm098(n = c(1, 2, 3, 4, 5, 6, 7, 8), X_E = c(1, 2, 3, 4, 5, 6, 7, 8), Z_L = c(1, 2,
+#' 3, 4, 5, 6, 7, 8))
 Msm098 <- function(n, X_E, Z_L, L_g = NULL) {
   f <- .gpordlatent(as.integer(n), X_E = X_E, Z_L = Z_L, L_g = L_g)
   list(estimate = as.numeric(f$n_columns), design = f$design, widths = f$widths,

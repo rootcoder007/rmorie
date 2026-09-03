@@ -29,10 +29,11 @@ List with \code{beta}, \code{se}, \code{estimate},
 \code{n_events}, \code{c}, \code{lam0}.
 }
 \description{
-
+Cox regression with a gamma-process baseline hazard
 }
 \examples{
-Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2, 3, 4, 5, 6, 7, 8))
+Npbcox(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Kalbfleisch, J. D. (1978). Non-parametric Bayesian

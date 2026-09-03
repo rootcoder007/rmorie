@@ -9,7 +9,8 @@
 #' significant) or neither (0).
 #'
 #' The \eqn{G_i^*} z-score is
-#' \eqn{(\sum_j w_{ij} x_j - \bar x \sum_j w_{ij}) / (s \sqrt{(n \sum_j w_{ij}^2 - (\sum_j w_{ij})^2)/(n-1)})}
+#' \eqn{(\sum_j w_{ij} x_j - \bar x \sum_j w_{ij}) / (s \sqrt{(n \sum_j w_{ij}^2 -
+#' (\sum_j w_{ij})^2)/(n-1)})}
 #' with \eqn{s} the population standard deviation of x.
 #'
 #' @param x Observed values, length n.

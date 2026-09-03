@@ -48,5 +48,6 @@ A list of trees.
 }
 \keyword{internal}
 \examples{
-morie_qsfrgr_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0))
+morie_qsfrgr_forest(X = c(1, 2, 3, 4, 5, 6, 7, 8), time = c(1, 2, 3, 4, 5, 6, 7, 8),
+  event = c(0, 1, 0, 1, 1, 0, 1, 0))
 }

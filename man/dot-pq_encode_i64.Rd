@@ -15,3 +15,8 @@ The value of \code{writeBin}.
 \description{
 low half back into signed range because that is all writeBin takes.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .pq_encode_i64(values = x)
+res
+}

@@ -15,3 +15,7 @@ The value of \code{e}, as built in the body.
 \description{
 exactly in a double, which is what makes the streams identical.
 }
+\examples{
+res <- .mor_lcg_new()
+res
+}

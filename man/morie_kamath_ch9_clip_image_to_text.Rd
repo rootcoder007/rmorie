@@ -38,5 +38,6 @@ exactly as km134 calls km133 with the towers swapped: km133 ->
 \code{morie_kamath_ch9_clip_contrastive_total} (their sum).
 }
 \examples{
-morie_kamath_ch9_clip_image_to_text(V = c(1, 2, 3, 4, 5, 6, 7, 8), L = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
+morie_kamath_ch9_clip_image_to_text(V = c(1, 2, 3, 4, 5, 6, 7, 8),
+  L = c(1, 2, 3, 4, 5, 6, 7, 8), sigma = 0.5)
 }

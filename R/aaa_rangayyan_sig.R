@@ -70,9 +70,12 @@ AICorder <- function(prediction_errors, n_samples, window = "hamming") {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Numeric; combined arithmetically in the body. Defaults to \code{1}.
-#' @param n_segments Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @param segment_length Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{psd}, \code{freqs}, \code{n_segments}, \code{segment_length}, \code{method}.
+#' @param n_segments Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param segment_length Optional; may be \code{NULL}. Coerced to integer by the body,
+#' with \code{as.integer}.
+#' @return A list with \code{psd}, \code{freqs}, \code{n_segments},
+#' \code{segment_length}, \code{method}.
 #' @export
 BartlettPSD <- function(x, fs = 1, n_segments = NULL,
                         segment_length = NULL) {

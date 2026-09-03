@@ -33,7 +33,8 @@
 #' @srrstats {ML1.1} morie_ml_split() labels rows train/test/validation.
 #' @srrstats {ML1.1a} the assigned roles are confirmed via the returned `roles` vector.
 #' @srrstats {ML1.1b} .ml_match_role() matches role names case-insensitively and by prefix.
-#' @srrstats {ML1.2} morie_ml_split() takes one tabular object; the `roles` variable distinguishes partitions.
+#' @srrstats {ML1.2} morie_ml_split() takes one tabular object; the `roles` variable
+#' distinguishes partitions.
 #' @srrstats {ML1.3} morie_ml_split() returns train/test as distinct list items.
 #' @srrstats {ML1.4} partitions are distinctly labelled by role.
 #' @srrstats {ML1.5} print.morie_ml_split() summarises per-partition row counts.
@@ -73,7 +74,8 @@
 #' @srrstats {ML3.6} multiple search algorithms and losses are permitted.
 #' @srrstats {ML3.6a} gd/sgd/adam are all available (.ml_optimizers).
 #' @srrstats {ML3.6b} logloss and mse are both available (.ml_loss).
-#' @srrstats {ML3.7} the pipeline is pure R with no C++/GPU code, so CPU/GPU control does not arise (condition not triggered).
+#' @srrstats {ML3.7} the pipeline is pure R with no C++/GPU code, so CPU/GPU control does
+#' not arise (condition not triggered).
 #' @srrstats {ML4.0} morie_ml_train() is the single unified training interface.
 #' @srrstats {ML4.1} the fit retains model-internal parameters and optimisation paths.
 #' @srrstats {ML4.1a} fit$weights holds the model-internal parameters.
@@ -96,7 +98,8 @@
 #' @srrstats {ML5.2b} morie_ml_save()/morie_ml_load() save and reload the trained model.
 #' @srrstats {ML5.2c} serialization uses base saveRDS/readRDS.
 #' @srrstats {ML5.3} morie_ml_assess() implements performance assessment as a distinct function.
-#' @srrstats {ML5.4} morie_ml_assess() supports several metrics (accuracy/roc_auc/brier/rmse/mae/r2).
+#' @srrstats {ML5.4} morie_ml_assess() supports several metrics
+#' (accuracy/roc_auc/brier/rmse/mae/r2).
 #' @srrstats {ML5.4a} metrics are computed consistently through .ml_metric.
 #' @srrstats {ML5.4b} custom metrics can be submitted via the `custom` argument.
 #' @srrstats {ML6.0} the workflow separates training (morie_ml_train) from prediction (predict).
@@ -106,7 +109,8 @@
 #' @srrstats {ML7.1} tests demonstrate the effect of different input scaling on fitted weights.
 #' @srrstats {ML7.2} tests compare internal imputation with an external computation.
 #' @srrstats {ML7.3} tests exercise the morie_ml_fit class accessors.
-#' @srrstats {ML7.3a} tests identify the documented class restriction (class prediction is logistic-only).
+#' @srrstats {ML7.3a} tests identify the documented class restriction (class prediction
+#' is logistic-only).
 #' @srrstats {ML7.3b} tests exercise the class's predict/summary abilities.
 #' @srrstats {ML7.4} tests demonstrate that lower training rates give slower descent.
 #' @srrstats {ML7.5} tests exercise the tuning routine that selects training rates.

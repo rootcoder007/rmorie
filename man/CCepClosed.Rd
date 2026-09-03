@@ -23,5 +23,7 @@ A list with \code{cepstrum}, \code{quefrency}, \code{c0}, \code{positive}, \code
 }
 \keyword{internal}
 \examples{
-CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8), zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8), poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
+CCepClosed(gain = 5L, zeros_in = c(1, 2, 3, 4, 5, 6, 7, 8),
+  zeros_out = c(1, 2, 3, 4, 5, 6, 7, 8), poles_in = c(1, 2, 3, 4, 5, 6, 7, 8),
+  poles_out = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

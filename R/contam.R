@@ -10,6 +10,9 @@
 #' @param eps Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .huber_k(eps = 0.5)
+#' res
 .huber_k <- function(eps) {
   if (eps <= 0) return(Inf)
   if (eps >= 1) return(0)

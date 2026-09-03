@@ -16,3 +16,8 @@ The value of \code{lo}, as built in the body.
 \description{
 chol() so the Python arm can match it element by element.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .tipsne_chol(a = A)
+res
+}

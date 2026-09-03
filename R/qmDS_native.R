@@ -83,7 +83,8 @@
 #'   Earth System Sciences, 16, 3383-3390.
 #' @export
 #' @examples
-#' morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_qmDS(x_mod = c(1, 2, 3, 4, 5, 6, 7, 8), obs = c(1, 2, 3, 4, 5, 6, 7, 8), mod =
+#' c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_qmDS <- function(x_mod, obs, mod) {
   xm <- as.numeric(x_mod)
   ob <- sort(as.numeric(obs))

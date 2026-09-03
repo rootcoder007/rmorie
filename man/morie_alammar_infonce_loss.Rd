@@ -23,5 +23,6 @@ A list with \code{estimate}, \code{positive_similarity}, \code{negative_similari
 }
 \keyword{internal}
 \examples{
-morie_alammar_infonce_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8), positive = c(1, 2, 3, 4, 5, 6, 7, 8), negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_alammar_infonce_loss(anchor = c(1, 2, 3, 4, 5, 6, 7, 8),
+  positive = c(1, 2, 3, 4, 5, 6, 7, 8), negatives = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -38,6 +38,10 @@
 #' @param X A matrix; the body checks with \code{is.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mehtad_mat(X = x)
+#' res
 .mehtad_mat <- function(X) {
   if (is.matrix(X)) X
   else do.call(rbind, lapply(X, function(r) as.numeric(unlist(r))))
@@ -52,6 +56,10 @@
 #' @param v Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mehtad_vec(v = x)
+#' res
 .mehtad_vec <- function(v) as.numeric(unlist(v))
 
 #' .mehtad_cholsolve
@@ -64,6 +72,11 @@
 #' @param rhs A matrix; passed to \code{solve}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .mehtad_cholsolve(M = A, rhs = b)
+#' res
 .mehtad_cholsolve <- function(M, rhs) {
   L <- chol(M)
   as.numeric(solve(t(L), solve(L, rhs)))
@@ -81,7 +94,8 @@
 #' @param x Passed to \code{.mehtad_vec}.
 #' @param y Passed to \code{.mehtad_vec}.
 #' @param s Passed to \code{.mehtad_vec}.
-#' @return A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm}, \code{dual_norm}, \code{note}.
+#' @return A list with \code{primal}, \code{dual}, \code{mu}, \code{primal_norm},
+#' \code{dual_norm}, \code{note}.
 #' @export
 mehtad_residuals <- function(A, b, c, x, y, s) {
   M <- .mehtad_mat(A)
@@ -162,6 +176,11 @@ centering_parameter <- function(mu, mu_affine, nu = 3.0) {
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-11}.
 #' @return The value of \code{backsolve}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .mehtad_solve_normal(A = A, d = 3L, rhs = b)
+#' res
 .mehtad_solve_normal <- function(A, d, rhs, ridge = 1e-11) {
   M <- as.matrix(A)
   storage.mode(M) <- "double"
@@ -221,7 +240,10 @@ newton_direction <- function(A, x, s, rp, rd, rc) {
 #' @param nu Passed to \code{centering_parameter}. Defaults to \code{3}.
 #' @param eta Passed to \code{max_step}. Defaults to \code{0.9995}.
 #' @param corrector A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu}, \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector}, \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{x}, \code{y}, \code{s}, \code{mu},
+#' \code{objective}, \code{dual_objective}, \code{iterations}, \code{corrector},
+#' \code{primal_residual}, \code{dual_residual}, \code{converged}, \code{method},
+#' \code{note}.
 #' @export
 solve_lp <- function(A, b, c, tol = 1e-9, max_iter = 100L, nu = 3.0,
                      eta = 0.9995, corrector = TRUE) {
@@ -286,6 +308,9 @@ mehrotras_predictor <- solve_lp
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .mehtad_cheatsheet()
+#' res
 .mehtad_cheatsheet <- function() {
   paste("mehtad: the expensive part of an interior-point iteration ",
         "is ONE factorisation of A D A'; a second right-hand side ",

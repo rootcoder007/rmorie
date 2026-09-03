@@ -17,7 +17,8 @@ test_that("mrm_anova_bonferroni runs on 3-group synthetic data", {
 
 test_that("mrm_rcbd runs on a randomized complete block design", {
   set.seed(2L)
-  n_trt <- 3L; n_blk <- 5L
+  n_trt <- 3L
+  n_blk <- 5L
   d <- expand.grid(t = letters[1:n_trt], b = sprintf("b%d", 1:n_blk))
   d$y <- stats::rnorm(nrow(d))
   out <- tryCatch(mrm_rcbd(d, "y", "t", "b"), error = function(e) e)

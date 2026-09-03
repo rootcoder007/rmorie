@@ -24,6 +24,10 @@
 #' @param v Coerced to numeric by the body, with \code{as.numeric}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mor_ik_median(v = x)
+#' res
 .mor_ik_median <- function(v) {
   s <- sort(as.numeric(v))
   n <- length(s)
@@ -43,6 +47,11 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .mor_ik_ols(X = x, y = y)
+#' res
 .mor_ik_ols <- function(X, y) as.numeric(.ghc_pinv(X) %*% as.numeric(y))
 
 #' Imbens-Kalyanaraman optimal RDD bandwidth

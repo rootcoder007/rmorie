@@ -15,7 +15,8 @@
 #'   GSM 58, theorem 1.3.
 #' @export
 #' @examples
-#' Ototk(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Ototk(a = c(1, 2, 3, 4, 5, 6, 7, 8), b = 5L, f = c(1, 2, 3, 4, 5, 6, 7, 8), g = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 Ototk <- function(a, b, f, g) {
   val <- sum(as.numeric(a) * as.numeric(f)) + sum(as.numeric(b) * as.numeric(g))
   .t1_result(dual_val = val, estimate = val, n = length(a), m = length(b),

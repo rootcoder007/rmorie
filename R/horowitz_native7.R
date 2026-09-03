@@ -37,6 +37,10 @@
 #' @param u Numeric; passed to \code{abs}.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_hrz_smoothing_cf(u = x)
+#' res
 .morie_hrz_smoothing_cf <- function(u) {
   s <- ifelse(u == 0, 1, (sin(u / 4) / (u / 4))^4)
   ifelse(abs(u) <= 1, s, 0)
@@ -44,7 +48,9 @@
 
 #' .morie_hrz_panel_residuals
 #'
-#' A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}.
+#' A step of the horowitz_native7 implementation. Called by
+#' \code{morie_panel_deconvolution}, \code{morie_panel_densities},
+#' \code{morie_smoothed_fU}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -102,7 +108,9 @@
 
 #' .morie_hrz_deconvolve_pair
 #'
-#' A step of the horowitz_native7 implementation. Called by \code{morie_panel_deconvolution}, \code{morie_panel_densities}, \code{morie_smoothed_fU}.
+#' A step of the horowitz_native7 implementation. Called by
+#' \code{morie_panel_deconvolution}, \code{morie_panel_densities},
+#' \code{morie_smoothed_fU}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

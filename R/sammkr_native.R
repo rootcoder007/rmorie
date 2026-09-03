@@ -24,6 +24,11 @@
 #' @param m See Usage.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .sammkr_flat(m = X)
+#' res
 .sammkr_flat <- function(m) {
   M <- m
   if (is.list(M) && !is.matrix(M)) {
@@ -93,7 +98,8 @@ iou <- function(a, b, threshold = 0.5) {
 #' @param predictions A vector; its length is taken.
 #' @param target Passed to \code{loss_fn}.
 #' @param loss_fn Accepted by the signature and not used anywhere in the body.
-#' @return A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss}, \code{gap}, \code{note}.
+#' @return A list with \code{loss}, \code{index}, \code{losses}, \code{mean_loss},
+#' \code{gap}, \code{note}.
 #' @export
 min_loss_over_masks <- function(predictions, target, loss_fn) {
   if (length(predictions) == 0)
@@ -180,6 +186,9 @@ rank_masks <- function(masks, predicted_iou, target = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .sammkr_cheatsheet()
+#' res
 .sammkr_cheatsheet <- function() {
   paste("sammkr: one output forces the model to AVERAGE the valid ",
         "masks of an ambiguous prompt -- a blur that answers nobody. ",

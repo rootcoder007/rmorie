@@ -17,6 +17,10 @@
 #'   \doi{10.2307/3033543}; Brandes (2001), J. Math. Sociol. 25(2),
 #'   163-177, \doi{10.1080/0022250X.2001.9990249}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- Netbtw(A = A)
+#' res
 Netbtw <- function(A, node = 0) {
   M <- .t1_mat(A)
   n <- nrow(M)

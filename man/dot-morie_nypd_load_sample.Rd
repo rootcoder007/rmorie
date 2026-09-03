@@ -17,3 +17,7 @@ A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analys
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_nypd_load_sample()
+res
+}

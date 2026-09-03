@@ -40,3 +40,7 @@ A step of the cnvlfc_native implementation. Called by \code{cnvlfc_coupled_logis
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .cnvlfc_coupled_logistic(n = 3L)
+res
+}

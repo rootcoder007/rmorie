@@ -1,5 +1,6 @@
 .csrnn_csr <- function(n = 120, seed = 0) {
-  set.seed(seed); matrix(runif(n * 2), n, 2)
+  set.seed(seed)
+  matrix(runif(n * 2), n, 2)
 }
 
 .csrnn_clustered <- function(n = 120, seed = 0, k = 6, sd = 0.02) {
@@ -57,7 +58,8 @@ test_that("window accepts a matrix and a flat vector", {
   P <- .csrnn_csr(seed = 9)
   for (w in list(matrix(c(0, 1, 0, 1), 2, 2, byrow = TRUE), c(0, 1, 0, 1))) {
     p <- morie_csr_nn_test(P, window = w, nsim = 9)$p_value
-    expect_gt(p, 0); expect_lte(p, 1)
+    expect_gt(p, 0)
+    expect_lte(p, 1)
   }
 })
 

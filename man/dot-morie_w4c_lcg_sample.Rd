@@ -22,3 +22,7 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_pasti
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_w4c_lcg_sample(n = 3L, k = 3L, seed = 1L)
+res
+}

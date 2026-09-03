@@ -15,7 +15,7 @@ A tape node.
 }
 \description{
 Group generic supporting \verb{+ - * / ^} and unary minus for
-\code{\link[=morie_geron_autograd]{morie_geron_autograd()}} leaves.
+\code{morie_geron_autograd()} leaves.
 }
 \examples{
 x <- .morie_gvar(2)

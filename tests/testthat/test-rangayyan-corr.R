@@ -53,7 +53,9 @@ test_that("Cohere is 1 for a linearly related pair", {
 })
 
 test_that("Cohere reports the phase difference", {
-  n <- 1024; fs <- 128; cyc <- 16
+  n <- 1024
+  fs <- 128
+  cyc <- 16
   r <- Cohere(sine_c(n, cyc), sine_c(n, cyc, phase = pi / 2), fs = fs,
               nperseg = 256)
   k <- which.min(abs(r$freqs - cyc * fs / n))
@@ -71,13 +73,18 @@ test_that("Msc is the square of the magnitude coherence", {
 
 test_that("Template finds the planted copy and resists a plateau", {
   ref <- c(0, 1, 3, 1, 0)
-  x <- numeric(20); x[9:13] <- ref
+  x <- numeric(20)
+  x[9:13] <- ref
   r <- Template(x, ref)
   expect_equal(r$best_shift, 8L)
   expect_equal(r$best_gamma, 1, tolerance = 1e-9)
-  y <- numeric(30); y[6:10] <- 0.1 * ref; y[16:25] <- 50
+  y <- numeric(30)
+  y[6:10] <- 0.1 * ref
+  y[16:25] <- 50
   expect_equal(Template(y, ref)$best_shift, 5L)
-  z <- numeric(40); z[6:10] <- ref; z[26:30] <- ref
+  z <- numeric(40)
+  z[6:10] <- ref
+  z[26:30] <- ref
   d <- Template(z, ref, threshold = 0.95)
   expect_equal(d$detections, c(5L, 25L))
   expect_error(Template(rep(1, 10), rep(2, 3)), "zero energy")
@@ -217,7 +224,8 @@ test_that("MfMaxSnr is 2E/N0 and depends only on energy (eq 4.46)", {
 
 test_that("MatchedFilt designs, runs and whitens", {
   ref <- c(1, 2, 3)
-  x <- numeric(20); x[8:10] <- ref
+  x <- numeric(20)
+  x[8:10] <- ref
   r <- MatchedFilt(ref, x = x)
   expect_false(r$whitened)
   expect_equal(r$peak_index, 10L)
@@ -240,7 +248,9 @@ test_that("Idft, Parseval and SyncSum, eqs (3.81), (3.91), (3.96)", {
 })
 
 test_that("SpecMoments implements eqs (6.32)-(6.43)", {
-  n <- 512; fs <- 256; cyc <- 32
+  n <- 512
+  fs <- 256
+  cyc <- 32
   x <- sine_c(n, cyc)
   f <- Dft(x - mean(x))
   half <- n %/% 2L + 1L
@@ -257,7 +267,8 @@ test_that("SpecMoments implements eqs (6.32)-(6.43)", {
 })
 
 test_that("EmgFreq separates the mean from the median", {
-  n <- 1024; fs <- 1000
+  n <- 1024
+  fs <- 1000
   x <- sine_c(n, 40) + 0.25 * sine_c(n, 300)
   r <- EmgFreq(x, fs = fs)
   expect_gt(r$mean_frequency, r$median_frequency)
@@ -292,7 +303,8 @@ test_that("PsdHz band powers carry the bin width", {
 })
 
 test_that("PcgSyncAvg keeps murmur power waveform averaging cancels", {
-  n <- 128; m <- 12
+  n <- 128
+  m <- 12
   cycles <- lapply(0:(m - 1), function(k)
     sine_c(n, 3) + 0.8 * sin(2 * pi * 30 * (0:(n - 1)) / n + k * 1.7))
   r <- PcgSyncAvg(cycles)
@@ -315,7 +327,8 @@ test_that("ErpArtifact rejects the contaminated epochs", {
 })
 
 test_that("SeizCohere tracks bands over a moving window", {
-  n <- 2048; fs <- 128
+  n <- 2048
+  fs <- 128
   a <- sine_c(n, 100) + 0.3 * sine_c(n, 13)
   b <- sine_c(n, 100) + 0.3 * sine_c(n, 191)
   r <- SeizCohere(list(a, b), fs = fs, window = 512, step = 256,
@@ -331,7 +344,8 @@ test_that("SeizCohere tracks bands over a moving window", {
 })
 
 test_that("CardioResp separates PLV from coherence", {
-  n <- 512; fs <- 8
+  n <- 512
+  fs <- 8
   resp <- sin(2 * pi * 0.25 * (0:(n - 1)) / fs)
   ecg <- sin(2 * pi * 0.25 * (0:(n - 1)) / fs + 0.7)
   expect_equal(CardioResp(ecg, resp, fs = fs)$plv, 1, tolerance = 0.05)

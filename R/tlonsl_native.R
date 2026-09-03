@@ -42,7 +42,8 @@
 
 #' .tlonsl_loss
 #'
-#' A step of the tlonsl_native implementation. Called by \code{morie_tlonsl_online_super_learner}, \code{morie_tlonsl_sequential_risk}.
+#' A step of the tlonsl_native implementation. Called by
+#' \code{morie_tlonsl_online_super_learner}, \code{morie_tlonsl_sequential_risk}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -53,7 +54,7 @@
 #' @export
 .tlonsl_loss <- function(kind, y, p) {
   if (kind == "squared") {
-    return((y - p) ^ 2)
+    return((y - p)^2)
   }
   q <- min(max(p, .tlonsl_EPS), 1.0 - .tlonsl_EPS)
   -(y * log(q) + (1.0 - y) * log(1.0 - q))
@@ -67,7 +68,7 @@
 #' @param lags Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
-morie_tlonsl_summary_measure <- function(history, lags=1) {
+morie_tlonsl_summary_measure <- function(history, lags = 1) {
   # A fixed-dimensional summary Z of the past. lags=0 gives the empty
   # summary, which is exactly the i.i.d. case.
   L <- as.integer(lags)
@@ -99,20 +100,24 @@ morie_tlonsl_summary_measure <- function(history, lags=1) {
 #' @param lags Passed to \code{morie_tlonsl_summary_measure}. Defaults to \code{1}.
 #' @return A list with \code{risk}, \code{predictions}, \code{losses}, \code{n_scored}, \code{note}.
 #' @export
-morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
-                                         burn_in=5, lags=1) {
+morie_tlonsl_sequential_risk <- function(y, algorithm, loss = "squared",
+                                         burn_in = 5, lags = 1) {
   # Train on the past, score the one-step-ahead prediction. V-fold
   # cross-validation would train on the future; this is the honest
   # analogue for a sequentially generated sample.
   if (!(loss %in% .tlonsl_LOSSES)) {
-    stop(sprintf("tlonsl: loss must be one of %s, got %s",
-                 paste(.tlonsl_LOSSES, collapse=", "), loss))
+    stop(sprintf(
+      "tlonsl: loss must be one of %s, got %s",
+      paste(.tlonsl_LOSSES, collapse = ", "), loss
+    ))
   }
   v <- as.numeric(y)
   b <- as.integer(burn_in)
   if (b < 1L || b >= length(v)) {
-    stop(sprintf("tlonsl: burn_in must lie in 1..%d, got %d",
-                 length(v) - 1L, b))
+    stop(sprintf(
+      "tlonsl: burn_in must lie in 1..%d, got %d",
+      length(v) - 1L, b
+    ))
   }
   tot <- 0.0
   preds <- numeric(0)
@@ -126,10 +131,14 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
     losses <- c(losses, l)
     tot <- tot + l
   }
-  list(risk=tot / length(losses), predictions=preds,
-       losses=losses, n_scored=length(losses),
-       note=paste0("each prediction is scored on a genuinely ",
-                   "held-out FUTURE observation"))
+  list(
+    risk = tot / length(losses), predictions = preds,
+    losses = losses, n_scored = length(losses),
+    note = paste0(
+      "each prediction is scored on a genuinely ",
+      "held-out FUTURE observation"
+    )
+  )
 }
 
 #' Exponentially weighted update from cumulative losses. The
@@ -140,7 +149,7 @@ morie_tlonsl_sequential_risk <- function(y, algorithm, loss="squared",
 #' @param eta Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @return A numeric value.
 #' @export
-morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
+morie_tlonsl_update_weights <- function(cum_losses, eta = 1.0) {
   # Exponentially weighted update from cumulative losses. The
   # cumulative losses are sufficient, so the update is O(1) in memory.
   cl <- as.numeric(cum_losses)
@@ -164,10 +173,12 @@ morie_tlonsl_update_weights <- function(cum_losses, eta=1.0) {
 #' @param burn_in Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{5}.
 #' @param lags Passed to \code{morie_tlonsl_sequential_risk}. Defaults to \code{1}.
 #' @param eta Passed to \code{morie_tlonsl_update_weights}. Defaults to \code{1}.
-#' @return A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks}, \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{weights}, \code{risk}, \code{member_risks},
+#' \code{best_single}, \code{best_member}, \code{weight_path}, \code{n_scored},
+#' \code{method}, \code{note}.
 #' @export
-morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
-                                              burn_in=5, lags=1, eta=1.0) {
+morie_tlonsl_online_super_learner <- function(y, library, loss = "squared",
+                                              burn_in = 5, lags = 1, eta = 1.0) {
   # Sequentially-validated ensemble over a library. Weights are
   # updated as data arrive; the reported risk is the honest
   # one-step-ahead risk of the ensemble.
@@ -178,8 +189,10 @@ morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
   nms <- sort(names(library))
   per <- list()
   for (n in nms) {
-    per[[n]] <- morie_tlonsl_sequential_risk(v, library[[n]], loss,
-                                             burn_in, lags)
+    per[[n]] <- morie_tlonsl_sequential_risk(
+      v, library[[n]], loss,
+      burn_in, lags
+    )
   }
   T_ <- per[[nms[1L]]][["n_scored"]]
   cum <- stats::setNames(rep(0.0, length(nms)), nms)
@@ -198,19 +211,25 @@ morie_tlonsl_online_super_learner <- function(y, library, loss="squared",
       cum[[n]] <- cum[[n]] + per[[n]][["losses"]][s]
     }
   }
-  member_risks <- lapply(stats::setNames(nms, nms),
-                         function(n) per[[n]][["risk"]])
+  member_risks <- lapply(
+    stats::setNames(nms, nms),
+    function(n) per[[n]][["risk"]]
+  )
   best <- nms[which.min(unlist(member_risks))]
   list(
-    estimate=weight_path[[T_]], weights=weight_path[[T_]],
-    risk=ens_loss / T_, member_risks=member_risks,
-    best_single=per[[best]][["risk"]], best_member=best,
-    weight_path=weight_path, n_scored=T_,
-    method=paste0("online super learner with sequential validation; ",
-                  "van der Laan & Rose (2018) Chap. 18"),
-    note=paste0("an EMPTY summary measure recovers the i.i.d. case; ",
-                "a parametric conditional density recovers a ",
-                "classical time series model")
+    estimate = weight_path[[T_]], weights = weight_path[[T_]],
+    risk = ens_loss / T_, member_risks = member_risks,
+    best_single = per[[best]][["risk"]], best_member = best,
+    weight_path = weight_path, n_scored = T_,
+    method = paste0(
+      "online super learner with sequential validation; ",
+      "van der Laan & Rose (2018) Chap. 18"
+    ),
+    note = paste0(
+      "an EMPTY summary measure recovers the i.i.d. case; ",
+      "a parametric conditional density recovers a ",
+      "classical time series model"
+    )
   )
 }
 

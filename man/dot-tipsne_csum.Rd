@@ -17,3 +17,8 @@ CPython 3.12+ compensates a run of floats and R\'s sum() accumulates
 in long double, so the two built-ins are different functions and a
 comparison at the twelfth digit finds the difference.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .tipsne_csum(v = x)
+res
+}

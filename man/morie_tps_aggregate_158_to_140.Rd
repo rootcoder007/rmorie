@@ -35,7 +35,7 @@ For splits the children's counts are summed exactly (each child has
 \code{pct_158_in_140 == 100} for clean cake-cuts).
 }
 \details{
-Unlike \code{\link[=morie_tps_disaggregate_140_to_158]{morie_tps_disaggregate_140_to_158()}}, this requires NO
+Unlike \code{morie_tps_disaggregate_140_to_158()}, this requires NO
 uniform-density assumption when the source is a clean cake-cut --
 the partition is exhaustive and disjoint by construction. The only
 lossy case is the \code{split+merge} edge (one Willowdale East sliver

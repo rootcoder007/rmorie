@@ -28,6 +28,9 @@
 #' @param p Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tmldgp_logit(p = 0.5)
+#' res
 .tmldgp_logit <- function(p) {
   q <- min(max(as.numeric(p), 1e-9), 1 - 1e-9)
   log(q / (1 - q))
@@ -35,13 +38,18 @@
 
 #' .tmldgp_expit
 #'
-#' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp}, \code{shrunk_targeting_unsafe}.
+#' A step of the tmldgp_native implementation. Called by \code{morie_tmldgp},
+#' \code{shrunk_targeting_unsafe}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmldgp_expit(x = x)
+#' res
 .tmldgp_expit <- function(x) {
   # vectorised clamp: the scalar if() errors on any vector input
   xc <- pmax(x, -700)

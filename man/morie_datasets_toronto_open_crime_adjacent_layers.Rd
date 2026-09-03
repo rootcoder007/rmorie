@@ -19,7 +19,7 @@ packages matched on crime-adjacent keywords (311, fire, police,
 ambulance, parking, traffic collision, by-law, emergency, crime,
 wellbeing). Each row identifies a package by its CKAN slug;
 callers fetch records via
-\code{\link[=morie_datasets_toronto_open_ckan_resource]{morie_datasets_toronto_open_ckan_resource()}} or visit the
+\code{morie_datasets_toronto_open_ckan_resource()} or visit the
 open.toronto.ca dataset page.
 }
 \examples{

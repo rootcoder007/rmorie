@@ -39,5 +39,6 @@ A list of trees plus the settings used.
 }
 \keyword{internal}
 \examples{
-morie_sdcfst_forest(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8), rows = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_sdcfst_forest(X = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  rows = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

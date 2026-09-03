@@ -14,3 +14,7 @@ A step of the glm implementation. Called by \code{morie_deviance_residuals}, \co
 See the file header for the source the module follows.
 follows.
 }
+\examples{
+res <- .morie_glm_families()
+res
+}

@@ -18,3 +18,8 @@ improper posterior whenever the data cannot rule out an arbitrarily
 long one, and a sampler will wander off into that region without ever
 saying so.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .hyper2_logprior(theta = x)
+res
+}

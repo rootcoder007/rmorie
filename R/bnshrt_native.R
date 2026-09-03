@@ -16,6 +16,10 @@
 #' @param z Numeric; passed to \code{min}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .bnshrt_logistic(z = y)
+#' res
 .bnshrt_logistic <- function(z) 1 / (1 + exp(-max(-500, min(500, z))))
 
 #' morie_sequence_probabilities
@@ -104,6 +108,10 @@ morie_sequence_frequencies <- function(Y) {
 #' @param v A vector; its length is taken.
 #' @return The value of \code{pmax}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bnshrt_project_simplex(v = x)
+#' res
 .bnshrt_project_simplex <- function(v) {
   n <- length(v)
   u <- sort(v, decreasing = TRUE)
@@ -134,7 +142,8 @@ morie_sequence_frequencies <- function(Y) {
 #' @param link Passed to \code{morie_sequence_probabilities}. Defaults to \code{"logit"}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4000L}.
-#' @return A list with \code{discrepancy}, \code{feasible}, \code{weights}, \code{fitted}, \code{target}.
+#' @return A list with \code{discrepancy}, \code{feasible}, \code{weights},
+#' \code{fitted}, \code{target}.
 #' @export
 morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
                                     y0_values = c(0, 1),
@@ -195,10 +204,13 @@ morie_in_identified_set <- function(freq, beta, gamma, x, alpha_grid,
 #' @param beta_grid See Usage.
 #' @param gamma_grid See Usage.
 #' @param alpha_grid Passed to \code{morie_in_identified_set}.
-#' @param beta_fixed Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param beta_fixed Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param link Passed to \code{morie_in_identified_set}. Defaults to \code{"logit"}.
 #' @param tol Passed to \code{morie_in_identified_set}. Defaults to \code{0.001}.
-#' @return A list with \code{estimate}, \code{set}, \code{n_feasible}, \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width}, \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.
+#' @return A list with \code{estimate}, \code{set}, \code{n_feasible},
+#' \code{beta_bounds}, \code{gamma_bounds}, \code{beta_width}, \code{gamma_width},
+#' \code{point_identified}, \code{discrepancy}, \code{method}, \code{assumes}.
 #' @export
 morie_identified_set <- function(Y, x, beta_grid, gamma_grid, alpha_grid,
                                  beta_fixed = NULL, link = "logit",

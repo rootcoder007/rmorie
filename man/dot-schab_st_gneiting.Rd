@@ -43,3 +43,7 @@ A step of the schab_st_shared implementation. No other function in the package c
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .schab_st_gneiting(h = 0.5, k = 3L)
+res
+}

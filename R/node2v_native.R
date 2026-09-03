@@ -124,7 +124,8 @@ transition_probabilities <- function(adj, t, v, p, q, weights = NULL) {
 
 #' walk
 #'
-#' A step of the node2v_native implementation. Called by \code{.avalon_paths}, \code{.depth_counts}, \code{.dmlqs_count_totters} and 13 others in the module.
+#' A step of the node2v_native implementation. Called by \code{.avalon_paths},
+#' \code{.depth_counts}, \code{.dmlqs_count_totters} and 13 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -177,7 +178,8 @@ walk <- function(adj, start, length, p = 1.0, q = 1.0, seed = 0,
 #' @param q Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
 #' @param weights Passed to \code{walk}.
-#' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks}, \code{length}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{walks}, \code{p}, \code{q}, \code{n_walks},
+#' \code{length}, \code{method}, \code{note}.
 #' @export
 generate_walks <- function(adj, num_walks = 10, length = 10, p = 1.0,
                            q = 1.0, seed = 0, weights = NULL) {
@@ -247,6 +249,9 @@ skipgram_pairs <- function(walks, window = 2) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .node2v_cheatsheet()
+#' res
 .node2v_cheatsheet <- function() {
   paste("node2v: graph as document, walk as sentence, skip-gram on ",
         "top. The point is that NO sampling strategy wins everywhere: ",

@@ -105,7 +105,8 @@
 
 #' .tsbF_init
 #'
-#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
+#' A step of the tsbF_native implementation. Called by
+#' \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -116,6 +117,10 @@
 #' @param p0 Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A list with \code{first}, \code{Z}, \code{X}, \code{P}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tsbF_init(y = y)
+#' res
 .tsbF_init <- function(y, init = "global", z0 = NULL, x0 = NULL, p0 = NULL) {
   yv <- as.numeric(y)
   pos <- yv[yv > 0]
@@ -173,7 +178,8 @@
 
 #' .tsbF_burn
 #'
-#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
+#' A step of the tsbF_native implementation. Called by
+#' \code{morie_tsbF_croston_forecast}, \code{morie_tsbF_tsb_forecast}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -268,7 +274,8 @@ morie_tsbF_tsb_forecast <- function(y, alpha = 0.1, beta = 0.05, horizon = 1,
 
 #' morie_tsbF_croston_forecast
 #'
-#' A step of the tsbF_native implementation. Called by \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}.
+#' A step of the tsbF_native implementation. Called by
+#' \code{morie_tsbF_intermittent_forecast}, \code{morie_tsbF_sba_forecast}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

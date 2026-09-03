@@ -14,3 +14,7 @@ A step of the mehtad_native implementation. Called by \code{morie_mehtad}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .mehtad_cheatsheet()
+res
+}

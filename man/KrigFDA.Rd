@@ -26,5 +26,6 @@ A list with \code{estimate}, \code{se}, \code{beta}, \code{residuals}, \code{wei
 }
 \keyword{internal}
 \examples{
-rmorie:::KrigFDA(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), new_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
+rmorie:::KrigFDA(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
+  new_coords = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

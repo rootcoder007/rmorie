@@ -26,5 +26,6 @@ A list with \code{estimate}, \code{output}, \code{n_features}, \code{kind}, \cod
 }
 \keyword{internal}
 \examples{
-favor_attention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8), V = c(1, 2, 3, 4, 5, 6, 7, 8))
+favor_attention(Q = c(1, 2, 3, 4, 5, 6, 7, 8), K = c(1, 2, 3, 4, 5, 6, 7, 8),
+  V = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

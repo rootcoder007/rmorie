@@ -162,7 +162,8 @@ test_that("benchmark: natives are within sane speed of the packages", {
   x <- cumsum(rnorm(8192))
   coords <- matrix(rnorm(1000 * 2), ncol = 2)
   n <- 500
-  Xb <- cbind(rnorm(n), rexp(n)); tb <- runif(n) < 0.4
+  Xb <- cbind(rnorm(n), rexp(n))
+  tb <- runif(n) < 0.4
   rows <- list(
     c(what = "hurst_native", t = bench(function() .morie_hurst_rs(x))),
     c(what = "knn_native_1k", t = bench(function() .morie_knn_index(coords, 8))),

@@ -38,5 +38,6 @@ baseline cumulative hazard estimator used here.
 }
 \keyword{internal}
 \examples{
-morie_survnnr_partial_loglik(times = c(1, 2, 3, 4, 5, 6, 7, 8), events = c(1, 2, 3, 4, 5, 6, 7, 8), risk = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_survnnr_partial_loglik(times = c(1, 2, 3, 4, 5, 6, 7, 8),
+  events = c(1, 2, 3, 4, 5, 6, 7, 8), risk = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

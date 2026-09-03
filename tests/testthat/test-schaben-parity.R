@@ -64,9 +64,11 @@ schaben_fixture <- function(n = 120L, seed = 20260728) {
     (s + 0.5) / 4294967296
   }
   cell <- vapply(seq_len(25L), function(i) 2 * nxt() - 1, numeric(1))
-  P <- matrix(0, n, 2L); z <- numeric(n)
+  P <- matrix(0, n, 2L)
+  z <- numeric(n)
   for (i in seq_len(n)) {
-    x <- 10 * nxt(); y <- 10 * nxt()
+    x <- 10 * nxt()
+    y <- 10 * nxt()
     P[i, ] <- c(x, y)
     ci <- min(floor(x / 2), 4)
     cj <- min(floor(y / 2), 4)
@@ -128,7 +130,8 @@ test_that("an unbounded variogram is reported, not returned as a sill", {
     (s + 0.5) / 4294967296
   }
   n <- 90L
-  P <- matrix(0, n, 2L); z <- numeric(n)
+  P <- matrix(0, n, 2L)
+  z <- numeric(n)
   for (i in seq_len(n)) P[i, ] <- c(10 * nxt(), 10 * nxt())
   for (i in seq_len(n)) z[i] <- 2 * nxt() - 1 + 0.3 * P[i, 1]
   out <- morie_variogram_composite_likelihood(P, z)

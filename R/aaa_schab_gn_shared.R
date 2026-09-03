@@ -99,6 +99,10 @@
 #' @param theta A vector; indexed elementwise.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_gn_project(theta = x)
+#' res
 .schab_gn_project <- function(theta) {
   # Onto the parameter space of Sec. 4.3: variances >= 0, a range > 0. This is
   # the constraint the model imposes, not a search box.

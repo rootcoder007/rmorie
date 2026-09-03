@@ -26,7 +26,9 @@ test_that("native encoder matches jsonlite::toJSON across the option grid", {
     df_in_list = list(rows = df[1:2, c("id", "v")], k = 3L),
     neg_zero = -0, tiny = 5e-324, big = 1.7976931348623157e308,
     zero_row_df = df[0, ], ts = ts(1:4, start = 2000), int_named = c(a = 1L, b = 2L),
-    df_with_rownames = { d <- df[1:2, 1:2]; rownames(d) <- c("r1", "r2"); d }
+    df_with_rownames = { d <- df[1:2, 1:2]
+    rownames(d) <- c("r1", "r2")
+    d }
   )
   opts <- list(
     list(), list(auto_unbox = TRUE), list(pretty = TRUE), list(digits = NA), list(digits = I(3)),

@@ -82,6 +82,10 @@
 #' @param v See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tipsne_csum(v = x)
+#' res
 .tipsne_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -96,7 +100,8 @@
 # Compensated dot product. Not sum(a * b), same reason.
 #' Compensated dot product. Not sum(a * b), same reason
 #'
-#' A step of the tipsne_native implementation. Called by \code{.tipsne_chol}, \code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_chol},
+#' \code{.tipsne_draw_beta}, \code{.tipsne_solve_chol} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -128,6 +133,10 @@
 #' @param a A matrix; indexed by row and column.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .tipsne_chol(a = A)
+#' res
 .tipsne_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -147,7 +156,8 @@
 # Solve L L' x = b by forward then back substitution.
 #' Solve L L\' x = b by forward then back substitution
 #'
-#' A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol}, \code{morie_tipsne_ancova}.
+#' A step of the tipsne_native implementation. Called by \code{.tipsne_inv_from_chol},
+#' \code{morie_tipsne_ancova}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -222,7 +232,8 @@ morie_tipsne_ancova <- function(y, design) {
 # Intercept, arm indicator, then any covariates.
 #' Intercept, arm indicator, then any covariates
 #'
-#' A step of the tipsne_native implementation. Called by \code{morie_tipsne}, \code{morie_tipsne_impute}.
+#' A step of the tipsne_native implementation. Called by \code{morie_tipsne},
+#' \code{morie_tipsne_impute}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -313,6 +324,10 @@ morie_tipsne_impute <- function(e, y, arm, X, miss, fit, mi) {
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tipsne_lgamma(z = y)
+#' res
 .tipsne_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -456,6 +471,10 @@ morie_tipsne_pool <- function(ests, vars, pooling = "rubin1987",
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tipsne_sd(v = x)
+#' res
 .tipsne_sd <- function(v) {
   n <- length(v)
   mu <- .tipsne_csum(v) / n

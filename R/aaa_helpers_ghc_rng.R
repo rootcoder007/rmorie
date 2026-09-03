@@ -25,6 +25,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .ghc_xor32(a = A, b = b)
+#' res
 .ghc_xor32 <- function(a, b) {
   # bitwXor is signed-32-bit; split into 16-bit halves to stay in range.
   bitwXor(a %/% 65536, b %/% 65536) * 65536 + bitwXor(a %% 65536, b %% 65536)
@@ -46,7 +51,8 @@
 
 #' .ghc_add64
 #'
-#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}.
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int},
+#' \code{.ghc_unif}, \code{.survrsf_rng}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -89,6 +95,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A list with \code{hi}, \code{lo}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .ghc_mul32(a = A, b = b)
+#' res
 .ghc_mul32 <- function(a, b) {
   # exact 32x32 -> 64 via 16-bit limbs; `a` a vector, `b` a scalar
   a0 <- a %% 65536
@@ -105,7 +116,8 @@
 
 #' (a * b) mod 2^64: only the low word of each cross term survives
 #'
-#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int}, \code{.ghc_unif}, \code{.survrsf_rng}.
+#' A step of the helpers_ghc_rng implementation. Called by \code{.ghc_int},
+#' \code{.ghc_unif}, \code{.survrsf_rng}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

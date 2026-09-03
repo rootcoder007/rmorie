@@ -37,7 +37,9 @@
 
 #' .snpqc1_check
 #'
-#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the module.
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
+#' \code{morie_snpqc1_call_rates}, \code{morie_snpqc1_heterozygosity} and 5 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -48,14 +50,16 @@
   G <- as.matrix(genotypes)
   storage.mode(G) <- "double"
   if (nrow(G) == 0L || ncol(G) == 0L) {
-    stop(paste0("snpqc1: genotypes must be a non-empty individual x SNP ",
-                "matrix"))
+    stop(paste0(
+      "snpqc1: genotypes must be a non-empty individual x SNP ",
+      "matrix"
+    ))
   }
   vals <- G[!is.na(G)]
   if (any(!(vals %in% c(0, 1, 2)))) {
     stop("snpqc1: genotypes must be 0, 1, 2 or NA")
   }
-  list(G=G, n=nrow(G), m=ncol(G))
+  list(G = G, n = nrow(G), m = ncol(G))
 }
 
 #' Per-SNP and per-individual call rates
@@ -73,12 +77,13 @@ morie_snpqc1_call_rates <- function(genotypes) {
   G <- ch$G
   per_snp <- colSums(!is.na(G)) / ch$n
   per_ind <- rowSums(!is.na(G)) / ch$m
-  list(per_snp=as.numeric(per_snp), per_ind=as.numeric(per_ind))
+  list(per_snp = as.numeric(per_snp), per_ind = as.numeric(per_ind))
 }
 
 #' Minor allele frequency per SNP, over non-missing calls
 #'
-#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1}, \code{morie_snpqc1_sex_check}.
+#' A step of the snpqc1_native implementation. Called by \code{morie_snpqc1},
+#' \code{morie_snpqc1_sex_check}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -111,6 +116,9 @@ morie_snpqc1_maf <- function(genotypes) {
 #' @param n Numeric; combined arithmetically in the body.
 #' @return The value of \code{lgamma}.
 #' @export
+#' @examples
+#' res <- .snpqc1_log_fact(n = 3L)
+#' res
 .snpqc1_log_fact <- function(n) {
   lgamma(n + 1.0)
 }
@@ -128,7 +136,7 @@ morie_snpqc1_maf <- function(genotypes) {
 #' @return A numeric value.
 #' @export
 morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
-                                    test="exact") {
+                                    test = "exact") {
   # Hardy-Weinberg p-value for one SNP. "exact" is the conditional
   # test summing the probabilities of every table no more probable
   # than the observed one; "chisq" is the goodness-of-fit test.
@@ -148,33 +156,35 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
   n_minor <- 2L * a + h
   if (test == "chisq") {
     p <- n_minor / (2.0 * n)
-    exp_ <- c(n * p * p, 2.0 * n * p * (1 - p), n * (1 - p) ^ 2)
+    exp_ <- c(n * p * p, 2.0 * n * p * (1 - p), n * (1 - p)^2)
     obs <- c(a, h, b)
     if (min(exp_) <= 0) {
       return(1.0)
     }
-    chi <- sum((obs - exp_) ^ 2 / exp_)
+    chi <- sum((obs - exp_)^2 / exp_)
     return(.snpqc1_erfc(sqrt(chi / 2.0)))
   }
   # exact conditional test
   n_major <- 2L * n - n_minor
-  hets <- seq.int(n_minor %% 2L, min(n_minor, n_major), by=2L)
+  hets <- seq.int(n_minor %% 2L, min(n_minor, n_major), by = 2L)
   lp <- numeric(length(hets))
   for (idx in seq_along(hets)) {
     het <- hets[idx]
     hom_a <- (n_minor - het) %/% 2L
     hom_b <- (n_major - het) %/% 2L
     lp[idx] <- (.snpqc1_log_fact(n) - .snpqc1_log_fact(hom_a) -
-                .snpqc1_log_fact(het) - .snpqc1_log_fact(hom_b) +
-                het * log(2.0))
+      .snpqc1_log_fact(het) - .snpqc1_log_fact(hom_b) +
+      het * log(2.0))
   }
   lognorm <- max(lp)
   probs <- exp(lp - lognorm)
   tot <- sum(probs)
   obs_i <- which(hets == h)
   if (length(obs_i) == 0L) {
-    stop(paste0("snpqc1: the observed heterozygote count is impossible ",
-                "given the allele counts"))
+    stop(paste0(
+      "snpqc1: the observed heterozygote count is impossible ",
+      "given the allele counts"
+    ))
   }
   thresh <- probs[obs_i] * (1.0 + 1e-9)
   p <- sum(probs[probs <= thresh]) / tot
@@ -190,6 +200,10 @@ morie_snpqc1_hwe_pvalue <- function(n_hom_minor, n_het, n_hom_major,
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .snpqc1_erfc(x = x)
+#' res
 .snpqc1_erfc <- function(x) {
   # complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)
   2.0 * stats::pnorm(-x * sqrt(2.0))
@@ -227,13 +241,14 @@ morie_snpqc1_heterozygosity <- function(genotypes) {
 #' source it follows.
 #'
 #' @param x_genotypes Passed to \code{.snpqc1_check}.
-#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param male_min Passed to \code{>}. Defaults to \code{0.8}.
 #' @param female_max Passed to \code{<}. Defaults to \code{0.2}.
 #' @return The value of \code{res}, as built in the body.
 #' @export
-morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
-                                   male_min=0.8, female_max=0.2) {
+morie_snpqc1_sex_check <- function(x_genotypes, reported_sex = NULL,
+                                   male_min = 0.8, female_max = 0.2) {
   # X-chromosome homozygosity F = (O - E)/(n - E) with the tutorial's
   # cutoffs. Males exceed male_min (0.8), females fall below
   # female_max (0.2). reported_sex (1 male, 2 female) turns the result
@@ -260,8 +275,9 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
     out[i] <- if (abs(denom) > 1e-12) (obs_hom - exp_hom) / denom else NaN
   }
   called <- ifelse(out > male_min, 1L,
-                   ifelse(out < female_max, 2L, 0L))
-  res <- list(F=out, inferred_sex=called)
+    ifelse(out < female_max, 2L, 0L)
+  )
+  res <- list(F = out, inferred_sex = called)
   if (!is.null(reported_sex)) {
     rep_ <- as.integer(reported_sex)
     if (length(rep_) != n) {
@@ -282,7 +298,7 @@ morie_snpqc1_sex_check <- function(x_genotypes, reported_sex=NULL,
 #' @param correction A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return The value of \code{rbind}.
 #' @export
-morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
+morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction = TRUE) {
   # PLINK's Table 1: P(I | Z) for one SNP. Returns a 3x3 matrix with
   # rows Z=0,1,2 and columns I=0,1,2 (lower triangle zero).
   X <- as.numeric(x_count)
@@ -296,9 +312,11 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
   if (!correction || T < 5 || X < 4 || Y < 4) {
     # textbook forms; also the fallback when the corrected factors
     # would divide by a count too small to support them
-    z0 <- c(2 * p * p * q * q,
-            4 * p ^ 3 * q + 4 * p * q ^ 3,
-            p ^ 4 + q ^ 4 + 4 * p * p * q * q)
+    z0 <- c(
+      2 * p * p * q * q,
+      4 * p^3 * q + 4 * p * q^3,
+      p^4 + q^4 + 4 * p * p * q * q
+    )
     z1 <- c(0.0, 2 * p * q, 1.0 - 2 * p * q)
     return(rbind(z0, z1, c(0.0, 0.0, 1.0)))
   }
@@ -312,14 +330,14 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
   yb <- (Y - 2.0) / Y
   yc <- (Y - 3.0) / Y
   i0z0 <- 2 * p * p * q * q * xa * ya * t1 * t2 * t3
-  i1z0 <- (4 * p ^ 3 * q * xa * xb * t1 * t2 * t3 +
-           4 * p * q ^ 3 * ya * yb * t1 * t2 * t3)
-  i2z0 <- (p ^ 4 * xa * xb * xc * t1 * t2 * t3 +
-           q ^ 4 * ya * yb * yc * t1 * t2 * t3 +
-           4 * p * p * q * q * xa * ya * t1 * t2 * t3)
+  i1z0 <- (4 * p^3 * q * xa * xb * t1 * t2 * t3 +
+    4 * p * q^3 * ya * yb * t1 * t2 * t3)
+  i2z0 <- (p^4 * xa * xb * xc * t1 * t2 * t3 +
+    q^4 * ya * yb * yc * t1 * t2 * t3 +
+    4 * p * p * q * q * xa * ya * t1 * t2 * t3)
   i1z1 <- (2 * p * p * q * xa * t1 * t2 + 2 * p * q * q * ya * t1 * t2)
-  i2z1 <- (p ^ 3 * xa * xb * t1 * t2 + q ^ 3 * ya * yb * t1 * t2 +
-           p * p * q * xa * t1 * t2 + p * q * q * ya * t1 * t2)
+  i2z1 <- (p^3 * xa * xb * t1 * t2 + q^3 * ya * yb * t1 * t2 +
+    p * p * q * xa * t1 * t2 + p * q * q * ya * t1 * t2)
   rbind(c(i0z0, i1z0, i2z0), c(0.0, i1z1, i2z1), c(0.0, 0.0, 1.0))
 }
 
@@ -332,7 +350,7 @@ morie_snpqc1_ibs_given_ibd <- function(x_count, y_count, correction=TRUE) {
 #' @param correction Passed to \code{morie_snpqc1_ibs_given_ibd}. Defaults to \code{TRUE}.
 #' @return A list with \code{Z}, \code{pihat}.
 #' @export
-morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
+morie_snpqc1_ibd_moments <- function(genotypes, correction = TRUE) {
   # PLINK's method-of-moments IBD estimates for every pair. Returns
   # list(Z, pihat) where Z[[i]][[k]] is c(P(Z=0), P(Z=1), P(Z=2))
   # after the paper's bounding rules and pihat[i, k] = P(Z=2) +
@@ -361,7 +379,7 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
   for (i in seq_len(n)) {
     Z[[i, i]] <- c(0.0, 0.0, 1.0)
     P[i, i] <- 1.0
-    for (k in seq.int(i + 1L, length.out=max(0L, n - i))) {
+    for (k in seq.int(i + 1L, length.out = max(0L, n - i))) {
       obs <- c(0.0, 0.0, 0.0)
       exp_ <- matrix(0.0, 3, 3)
       for (j in seq_len(m)) {
@@ -419,7 +437,7 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
       P[k, i] <- z2 + 0.5 * z1
     }
   }
-  list(Z=Z, pihat=P)
+  list(Z = Z, pihat = P)
 }
 
 #' Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix
@@ -432,7 +450,7 @@ morie_snpqc1_ibd_moments <- function(genotypes, correction=TRUE) {
 #' @param correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
 #' @return The value of \code{$}.
 #' @export
-morie_snpqc1_pihat_matrix <- function(genotypes, correction=TRUE) {
+morie_snpqc1_pihat_matrix <- function(genotypes, correction = TRUE) {
   # Just the pi-hat = P(Z=2) + P(Z=1)/2 matrix.
   morie_snpqc1_ibd_moments(genotypes, correction)$pihat
 }
@@ -499,7 +517,7 @@ morie_snpqc1_kinship_matrix <- function(genotypes) {
 #' @param r2 Passed to \code{>}. Defaults to \code{0.2}.
 #' @return The value of \code{keep}, as built in the body.
 #' @export
-morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
+morie_snpqc1_ld_prune <- function(genotypes, window = 50, step = 5, r2 = 0.2) {
   # Window-based pruning: drop one of any pair with r^2 above the
   # threshold. Returns kept SNP indices (1-based).
   ch <- .snpqc1_check(genotypes)
@@ -516,8 +534,8 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
     bk <- G[ok, k]
     mj <- mean(aj)
     mk <- mean(bk)
-    sj <- sum((aj - mj) ^ 2)
-    sk <- sum((bk - mk) ^ 2)
+    sj <- sum((aj - mj)^2)
+    sk <- sum((bk - mk)^2)
     if (sj <= 0 || sk <= 0) {
       return(0.0)
     }
@@ -532,7 +550,7 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
       if (block[a] %in% drop) {
         next
       }
-      for (b in seq.int(a + 1L, length.out=max(0L, length(block) - a))) {
+      for (b in seq.int(a + 1L, length.out = max(0L, length(block) - a))) {
         if (block[b] %in% drop) {
           next
         }
@@ -554,13 +572,15 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' source it follows.
 #'
 #' @param genotypes Passed to \code{.snpqc1_check}.
-#' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param phenotype Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param trait One of \code{"binary"}, \code{"quantitative"}. Defaults to \code{"binary"}.
 #' @param geno_relaxed Carried through into a list the body builds. Defaults to \code{0.2}.
 #' @param mind_relaxed Carried through into a list the body builds. Defaults to \code{0.2}.
 #' @param geno Carried through into a list the body builds. Defaults to \code{0.02}.
 #' @param mind Carried through into a list the body builds. Defaults to \code{0.02}.
-#' @param maf_threshold The body requires: snpqc1: maf_threshold must lie in [0, 0.5). Defaults to \code{0.01}.
+#' @param maf_threshold The body requires: snpqc1: maf_threshold must lie in [0, 0.5).
+#' Defaults to \code{0.01}.
 #' @param hwe_case Carried through into a list the body builds. Defaults to \code{1e-10}.
 #' @param hwe_control Carried through into a list the body builds. Defaults to \code{1e-06}.
 #' @param hwe_quantitative Carried through into a list the body builds. Defaults to \code{1e-06}.
@@ -568,18 +588,24 @@ morie_snpqc1_ld_prune <- function(genotypes, window=50, step=5, r2=0.2) {
 #' @param pihat Carried through into a list the body builds. Defaults to \code{0.2}.
 #' @param hwe_test Passed to \code{morie_snpqc1_hwe_pvalue}. Defaults to \code{"exact"}.
 #' @param x_genotypes Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
-#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param reported_sex Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param relatedness One of \code{"kinship"}, \code{"pihat"}. Defaults to \code{"pihat"}.
 #' @param ibd_correction Passed to \code{morie_snpqc1_ibd_moments}. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals}, \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp}, \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity}, \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness}, \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note}, \code{method}.
+#' @return A list with \code{estimate}, \code{keep_snps}, \code{keep_individuals},
+#' \code{removed}, \code{n_snps_kept}, \code{n_individuals_kept}, \code{call_rate_snp},
+#' \code{call_rate_ind}, \code{maf}, \code{hwe_p}, \code{heterozygosity},
+#' \code{relatedness_matrix}, \code{kinship}, \code{ibd_states}, \code{relatedness},
+#' \code{pruned_snps}, \code{thresholds}, \code{trait}, \code{hwe_test}, \code{note},
+#' \code{method}.
 #' @export
-morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
-                         geno_relaxed=0.2, mind_relaxed=0.2, geno=0.02,
-                         mind=0.02, maf_threshold=0.01, hwe_case=1e-10,
-                         hwe_control=1e-6, hwe_quantitative=1e-6,
-                         het_sd=3.0, pihat=0.2, hwe_test="exact",
-                         x_genotypes=NULL, reported_sex=NULL,
-                         relatedness="pihat", ibd_correction=TRUE) {
+morie_snpqc1 <- function(genotypes, phenotype = NULL, trait = "binary",
+                         geno_relaxed = 0.2, mind_relaxed = 0.2, geno = 0.02,
+                         mind = 0.02, maf_threshold = 0.01, hwe_case = 1e-10,
+                         hwe_control = 1e-6, hwe_quantitative = 1e-6,
+                         het_sd = 3.0, pihat = 0.2, hwe_test = "exact",
+                         x_genotypes = NULL, reported_sex = NULL,
+                         relatedness = "pihat", ibd_correction = TRUE) {
   # Run the tutorial's QC steps and report what each one removes.
   # Defaults are the tutorial's own thresholds. Kept indices are
   # 0-based to match the Python. Returns a named list.
@@ -599,17 +625,21 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
   if (!(maf_threshold >= 0.0 && maf_threshold < 0.5)) {
     stop("snpqc1: maf_threshold must lie in [0, 0.5)")
   }
-  snps <- seq_len(m)       # 1-based column indices into G
-  inds <- seq_len(n)       # 1-based row indices into G
-  removed <- list(geno_relaxed=integer(0), mind_relaxed=integer(0),
-                  geno=integer(0), mind=integer(0), maf=integer(0),
-                  hwe=integer(0), heterozygosity=integer(0),
-                  relatedness=integer(0), sex=integer(0))
-  sub <- function() G[inds, snps, drop=FALSE]
+  snps <- seq_len(m) # 1-based column indices into G
+  inds <- seq_len(n) # 1-based row indices into G
+  removed <- list(
+    geno_relaxed = integer(0), mind_relaxed = integer(0),
+    geno = integer(0), mind = integer(0), maf = integer(0),
+    hwe = integer(0), heterozygosity = integer(0),
+    relatedness = integer(0), sex = integer(0)
+  )
+  sub <- function() G[inds, snps, drop = FALSE]
 
   # step 1, relaxed then stringent, SNPs before individuals each time
-  passes <- list(list(geno_relaxed, mind_relaxed, "geno_relaxed", "mind_relaxed"),
-                 list(geno, mind, "geno", "mind"))
+  passes <- list(
+    list(geno_relaxed, mind_relaxed, "geno_relaxed", "mind_relaxed"),
+    list(geno, mind, "geno", "mind")
+  )
   for (pass in passes) {
     gthr <- pass[[1L]]
     mthr <- pass[[2L]]
@@ -641,7 +671,7 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
     Xg <- as.matrix(x_genotypes)
     storage.mode(Xg) <- "double"
     rs <- if (is.null(reported_sex)) NULL else as.integer(reported_sex)[inds]
-    sx <- morie_snpqc1_sex_check(Xg[inds, , drop=FALSE], rs)
+    sx <- morie_snpqc1_sex_check(Xg[inds, , drop = FALSE], rs)
     if (!is.null(reported_sex)) {
       bad <- inds[sx$discrepant + 1L]
       removed[["sex"]] <- bad - 1L
@@ -719,7 +749,7 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
   # step 5, heterozygosity, +- het_sd SD from the mean
   het <- morie_snpqc1_heterozygosity(sub())
   mean_ <- mean(het)
-  var_ <- sum((het - mean_) ^ 2) / max(1L, length(het) - 1L)
+  var_ <- sum((het - mean_)^2) / max(1L, length(het) - 1L)
   sd_ <- sqrt(var_)
   drop <- inds[sd_ > 0 & abs(het - mean_) > het_sd * sd_]
   removed[["heterozygosity"]] <- drop - 1L
@@ -727,11 +757,13 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
 
   # step 6, relatedness on pruned SNPs
   if (!(relatedness %in% c("pihat", "kinship"))) {
-    stop(paste0("snpqc1: relatedness must be 'pihat' (PLINK's ",
-                "method-of-moments IBD) or 'kinship'"))
+    stop(paste0(
+      "snpqc1: relatedness must be 'pihat' (PLINK's ",
+      "method-of-moments IBD) or 'kinship'"
+    ))
   }
-  pruned <- morie_snpqc1_ld_prune(sub())  # indices into current snps
-  pruned_geno <- G[inds, snps[pruned], drop=FALSE]
+  pruned <- morie_snpqc1_ld_prune(sub()) # indices into current snps
+  pruned_geno <- G[inds, snps[pruned], drop = FALSE]
   if (relatedness == "pihat") {
     im <- morie_snpqc1_ibd_moments(pruned_geno, ibd_correction)
     Zstates <- im$Z
@@ -743,7 +775,7 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
   drop <- integer(0)
   ni <- length(inds)
   for (a in seq_len(ni)) {
-    for (b in seq.int(a + 1L, length.out=max(0L, ni - a))) {
+    for (b in seq.int(a + 1L, length.out = max(0L, ni - a))) {
       if (K[a, b] > pihat && !(inds[b] %in% drop)) {
         drop <- c(drop, inds[b])
       }
@@ -754,39 +786,46 @@ morie_snpqc1 <- function(genotypes, phenotype=NULL, trait="binary",
 
   cr_all <- morie_snpqc1_call_rates(genotypes)
   list(
-    estimate=snps - 1L,
-    keep_snps=snps - 1L,
-    keep_individuals=inds - 1L,
-    removed=removed,
-    n_snps_kept=length(snps),
-    n_individuals_kept=length(inds),
-    call_rate_snp=cr_all$per_snp,
-    call_rate_ind=cr_all$per_ind,
-    maf=freqs,
-    hwe_p=hwe_p,
-    heterozygosity=het,
-    relatedness_matrix=K,
-    kinship=K,
-    ibd_states=Zstates,
-    relatedness=relatedness,
-    pruned_snps=snps[pruned] - 1L,
-    thresholds=list(geno_relaxed=geno_relaxed, mind_relaxed=mind_relaxed,
-                    geno=geno, mind=mind, maf=maf_threshold,
-                    hwe_case=hwe_case, hwe_control=hwe_control,
-                    hwe_quantitative=hwe_quantitative, het_sd=het_sd,
-                    pihat=pihat),
-    trait=trait,
-    hwe_test=hwe_test,
-    note=paste0(
+    estimate = snps - 1L,
+    keep_snps = snps - 1L,
+    keep_individuals = inds - 1L,
+    removed = removed,
+    n_snps_kept = length(snps),
+    n_individuals_kept = length(inds),
+    call_rate_snp = cr_all$per_snp,
+    call_rate_ind = cr_all$per_ind,
+    maf = freqs,
+    hwe_p = hwe_p,
+    heterozygosity = het,
+    relatedness_matrix = K,
+    kinship = K,
+    ibd_states = Zstates,
+    relatedness = relatedness,
+    pruned_snps = snps[pruned] - 1L,
+    thresholds = list(
+      geno_relaxed = geno_relaxed, mind_relaxed = mind_relaxed,
+      geno = geno, mind = mind, maf = maf_threshold,
+      hwe_case = hwe_case, hwe_control = hwe_control,
+      hwe_quantitative = hwe_quantitative, het_sd = het_sd,
+      pihat = pihat
+    ),
+    trait = trait,
+    hwe_test = hwe_test,
+    note = paste0(
       if (relatedness == "pihat") {
-        paste0("relatedness by PLINK's method-of-moments IBD (Purcell ",
-               "et al. 2007), pi-hat = P(Z=2) + P(Z=1)/2")
+        paste0(
+          "relatedness by PLINK's method-of-moments IBD (Purcell ",
+          "et al. 2007), pi-hat = P(Z=2) + P(Z=1)/2"
+        )
       } else {
-        paste0("relatedness by genomic kinship, NOT PLINK's pi-hat; ",
-               "pass relatedness='pihat' for the IBD estimator")
+        paste0(
+          "relatedness by genomic kinship, NOT PLINK's pi-hat; ",
+          "pass relatedness='pihat' for the IBD estimator"
+        )
       },
-      "; the 0.2 cutoff is the tutorial's"),
-    method="GWAS quality control (Marees et al. 2018, Table 1)"
+      "; the 0.2 cutoff is the tutorial's"
+    ),
+    method = "GWAS quality control (Marees et al. 2018, Table 1)"
   )
 }
 

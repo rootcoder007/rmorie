@@ -48,7 +48,8 @@
 
 #' .tlseqsl_loss
 #'
-#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk}, \code{morie_tlseqsl_ensemble_super_learner}.
+#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_cv_risk},
+#' \code{morie_tlseqsl_ensemble_super_learner}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -59,7 +60,7 @@
 #' @export
 .tlseqsl_loss <- function(kind, y, p) {
   if (kind == "squared") {
-    return((y - p) ^ 2)
+    return((y - p)^2)
   }
   q <- min(max(p, .tlseqsl_EPS), 1.0 - .tlseqsl_EPS)
   return(-(y * log(q) + (1.0 - y) * log(1.0 - q)))
@@ -76,7 +77,7 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @return The value of \code{folds}, as built in the body.
 #' @export
-morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
+morie_tlseqsl_cv_folds <- function(n, V = 10, seed = 0) {
   if (V < 2 || V > n) {
     stop(sprintf("tlseqsl: V must lie in 2..%d, got %d", n, V))
   }
@@ -102,7 +103,8 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
 
 #' morie_tlseqsl_cv_risk
 #'
-#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_discrete_super_learner}.
+#' A step of the tlseqsl_native implementation. Called by
+#' \code{morie_tlseqsl_discrete_super_learner}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -114,10 +116,12 @@ morie_tlseqsl_cv_folds <- function(n, V=10, seed=0) {
 #' @param seed Passed to \code{morie_tlseqsl_cv_folds}. Defaults to \code{0}.
 #' @return A list with \code{risk}, \code{cv_predictions}, \code{V}, \code{loss}.
 #' @export
-morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0) {
+morie_tlseqsl_cv_risk <- function(X, y, algorithm, V = 10, loss = "squared", seed = 0) {
   if (!(loss %in% .tlseqsl_LOSSES)) {
-    stop(sprintf("tlseqsl: loss must be one of %s, got %r",
-                 paste(.tlseqsl_LOSSES, collapse = ", "), loss))
+    stop(sprintf(
+      "tlseqsl: loss must be one of %s, got %r",
+      paste(.tlseqsl_LOSSES, collapse = ", "), loss
+    ))
   }
   rows <- as.matrix(X)
   t_vec <- as.numeric(y)
@@ -138,13 +142,17 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0)
       m <- m + 1
     }
   }
-  list(risk = tot / m, cv_predictions = preds,
-       V = as.integer(V), loss = loss)
+  list(
+    risk = tot / m, cv_predictions = preds,
+    V = as.integer(V), loss = loss
+  )
 }
 
 #' morie_tlseqsl_discrete_super_learner
 #'
-#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_ensemble_super_learner}, \code{morie_tlseqsl_sequential_super_learner}.
+#' A step of the tlseqsl_native implementation. Called by
+#' \code{morie_tlseqsl_ensemble_super_learner},
+#' \code{morie_tlseqsl_sequential_super_learner}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -156,8 +164,8 @@ morie_tlseqsl_cv_risk <- function(X, y, algorithm, V=10, loss="squared", seed=0)
 #' @param seed Passed to \code{morie_tlseqsl_cv_risk}. Defaults to \code{0}.
 #' @return A list with \code{selected}, \code{risks}, \code{cv_predictions}, \code{note}.
 #' @export
-morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
-                                                 loss="squared", seed=0) {
+morie_tlseqsl_discrete_super_learner <- function(X, y, library, V = 10,
+                                                 loss = "squared", seed = 0) {
   if (length(library) == 0) {
     stop("tlseqsl: the library is empty")
   }
@@ -177,13 +185,16 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
       best <- name
     }
   }
-  list(selected = best, risks = risks, cv_predictions = cvp,
-       note = "asymptotically as good as the oracle that knows which candidate is best")
+  list(
+    selected = best, risks = risks, cv_predictions = cvp,
+    note = "asymptotically as good as the oracle that knows which candidate is best"
+  )
 }
 
 #' morie_tlseqsl_ensemble_super_learner
 #'
-#' A step of the tlseqsl_native implementation. Called by \code{morie_tlseqsl_sequential_super_learner}.
+#' A step of the tlseqsl_native implementation. Called by
+#' \code{morie_tlseqsl_sequential_super_learner}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -194,11 +205,13 @@ morie_tlseqsl_discrete_super_learner <- function(X, y, library, V=10,
 #' @param loss Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{"squared"}.
 #' @param seed Passed to \code{morie_tlseqsl_discrete_super_learner}. Defaults to \code{0}.
 #' @param grid Numeric; combined arithmetically in the body. Defaults to \code{21}.
-#' @return A list with \code{estimate}, \code{weights}, \code{cv_risk}, \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{weights}, \code{cv_risk},
+#' \code{discrete_risks}, \code{discrete_choice}, \code{best_single}, \code{method},
+#' \code{note}.
 #' @export
-morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
-                                                 loss="squared", seed=0,
-                                                 grid=21) {
+morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V = 10,
+                                                 loss = "squared", seed = 0,
+                                                 grid = 21) {
   d <- morie_tlseqsl_discrete_super_learner(X, y, library, V, loss, seed)
   names_vec <- sort(names(library))
   t_vec <- as.numeric(y)
@@ -216,8 +229,10 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
       a <- gi / (grid - 1)
       r <- 0
       for (i in seq_len(n)) {
-        r <- r + .tlseqsl_loss(loss, t_vec[i],
-                               a * P[[1]][i] + (1 - a) * P[[2]][i])
+        r <- r + .tlseqsl_loss(
+          loss, t_vec[i],
+          a * P[[1]][i] + (1 - a) * P[[2]][i]
+        )
       }
       r <- r / n
       if (is.null(best) || r < best) {
@@ -275,10 +290,11 @@ morie_tlseqsl_ensemble_super_learner <- function(X, y, library, V=10,
 #' @param T Numeric; combined arithmetically in the body.
 #' @param V Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{5}.
 #' @param seed Passed to \code{morie_tlseqsl_ensemble_super_learner}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T}, \code{method}.
+#' @return A list with \code{estimate}, \code{mean}, \code{sequential_fits}, \code{T},
+#' \code{method}.
 #' @export
 morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
-                                                    T, V=5, seed=0) {
+                                                   T, V = 5, seed = 0) {
   if (T < 1) {
     stop("tlseqsl: need at least one time point")
   }
@@ -292,11 +308,15 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
     for (i in seq_len(n)) {
       X[i, ] <- histories[[i]][1:t_len]
     }
-    sl <- morie_tlseqsl_ensemble_super_learner(X, current, library, V,
-                                               "squared", seed)
+    sl <- morie_tlseqsl_ensemble_super_learner(
+      X, current, library, V,
+      "squared", seed
+    )
     names_vec <- sort(names(library))
-    d <- morie_tlseqsl_discrete_super_learner(X, current, library, V,
-                                              "squared", seed)
+    d <- morie_tlseqsl_discrete_super_learner(
+      X, current, library, V,
+      "squared", seed
+    )
     P <- vector("list", length(names_vec))
     for (i in seq_along(names_vec)) {
       P[[i]] <- d$cv_predictions[[names_vec[i]]]
@@ -314,8 +334,10 @@ morie_tlseqsl_sequential_super_learner <- function(histories, outcomes, library,
       new_current[i] <- s
     }
     current <- new_current
-    fits[[length(fits) + 1L]] <- list(t = t, weights = sl$weights,
-                                      cv_risk = sl$cv_risk)
+    fits[[length(fits) + 1L]] <- list(
+      t = t, weights = sl$weights,
+      cv_risk = sl$cv_risk
+    )
   }
   mean_val <- sum(current) / length(current)
   list(

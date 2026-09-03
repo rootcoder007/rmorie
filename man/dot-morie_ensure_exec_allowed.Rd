@@ -16,3 +16,7 @@ Invisibly,a logical value.
 \description{
 every sink that spawns an external process.
 }
+\examples{
+res <- .morie_ensure_exec_allowed()
+res
+}

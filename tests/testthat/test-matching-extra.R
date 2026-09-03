@@ -88,7 +88,8 @@ test_that("morie_matching_multi_treatment handles 3-arm treatment", {
 
 test_that("morie_matching_longitudinal runs on synthetic panel", {
   set.seed(6L)
-  n_units <- 30; n_periods <- 4
+  n_units <- 30
+  n_periods <- 4
   rows <- list()
   for (u in seq_len(n_units)) {
     is_treated <- u <= 15

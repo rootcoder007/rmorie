@@ -46,9 +46,11 @@ poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
   } else if (rule == "linear") {
     cc * m
   } else {
-    stop(sprintf("poltrx: rule must be one of %s, got %s",
-                 paste(.POLTRX_RULES, collapse = ", "),
-                 paste0("'", rule, "'")))
+    stop(sprintf(
+      "poltrx: rule must be one of %s, got %s",
+      paste(.POLTRX_RULES, collapse = ", "),
+      paste0("'", rule, "'")
+    ))
   }
   list(alpha = a, level = m, rule = rule)
 }
@@ -64,21 +66,36 @@ poltrx_level_parameters <- function(level, c = 1.0, rule = "m_squared") {
 #' @export
 poltrx_continuity_regime <- function(rule) {
   rule <- as.character(rule)
-  if (!(rule %in% .POLTRX_RULES))
-    stop(sprintf("poltrx: rule must be one of %s, got %s",
-                 paste(.POLTRX_RULES, collapse = ", "),
-                 paste0("'", rule, "'")))
+  if (!(rule %in% .POLTRX_RULES)) {
+    stop(sprintf(
+      "poltrx: rule must be one of %s, got %s",
+      paste(.POLTRX_RULES, collapse = ", "),
+      paste0("'", rule, "'")
+    ))
+  }
   tab <- list(
-    m_squared = list(draws = "absolutely continuous",
-                     reason = paste("branch probabilities concentrate",
-                                    "near 1/2 fast enough that the",
-                                    "limit has a density")),
-    constant  = list(draws = "discrete, DP-like",
-                     reason = paste("the DP is the special case; draws",
-                                    "are atomic")),
-    linear    = list(draws = "borderline",
-                     reason = paste("between the two; growth is not",
-                                    "fast enough to guarantee a density"))
+    m_squared = list(
+      draws = "absolutely continuous",
+      reason = paste(
+        "branch probabilities concentrate",
+        "near 1/2 fast enough that the",
+        "limit has a density"
+      )
+    ),
+    constant = list(
+      draws = "discrete, DP-like",
+      reason = paste(
+        "the DP is the special case; draws",
+        "are atomic"
+      )
+    ),
+    linear = list(
+      draws = "borderline",
+      reason = paste(
+        "between the two; growth is not",
+        "fast enough to guarantee a density"
+      )
+    )
   )
   entry <- tab[[rule]]
   list(rule = rule, draws = entry$draws, reason = entry$reason)
@@ -101,15 +118,22 @@ poltrx_partition_index <- function(x, level, lo = 0.0, hi = 1.0) {
   a <- as.numeric(lo)
   b <- as.numeric(hi)
   v <- as.numeric(x)
-  if (!(a <= v && v <= b))
-    stop(sprintf("poltrx: x = %s lies outside the partitioned interval [%s, %s]",
-                 format(v), format(a), format(b)))
+  if (!(a <= v && v <= b)) {
+    stop(sprintf(
+      "poltrx: x = %s lies outside the partitioned interval [%s, %s]",
+      format(v), format(a), format(b)
+    ))
+  }
   bits <- integer(m)
   for (i in seq_len(m)) {
     mid <- 0.5 * (a + b)
-    if (v < mid) { bits[i] <- 0L
-    b <- mid } else { bits[i] <- 1L
-    a <- mid }
+    if (v < mid) {
+      bits[i] <- 0L
+      b <- mid
+    } else {
+      bits[i] <- 1L
+      a <- mid
+    }
   }
   list(epsilon = bits, interval = c(a, b), level = m)
 }
@@ -137,15 +161,17 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
   M <- as.integer(levels)
   if (M < 1L) stop("poltrx: at least one level is needed")
   e <- if (!is.null(rng)) rng else .ghc_rng(seed)
-  Y <- vector("list", 2^M - 1L + 1L)  # placeholder; will index by name
+  Y <- vector("list", 2^M - 1L + 1L) # placeholder; will index by name
   # Build keys in the same order as the Python arm: for each m in
   # 1..M, idx in 0..2^(m-1)-1, eps = zfill(bin(idx), m-1) when m>1.
   keys <- character(0)
   for (m in seq_len(M)) {
     a <- poltrx_level_parameters(m, c, rule)$alpha
-    n_at_m <- 2L ^ (m - 1L)
+    n_at_m <- 2L^(m - 1L)
     for (idx in seq_len(n_at_m) - 1L) {
-      eps <- if (m == 1L) integer(0) else {
+      eps <- if (m == 1L) {
+        integer(0)
+      } else {
         bits <- intToBits(idx)[seq_len(m - 1L)]
         as.integer(bits)
       }
@@ -158,10 +184,14 @@ poltrx_finite_tree <- function(levels, c = 1.0, rule = "m_squared",
   }
   Y <- Y[keys]
   names(Y) <- keys
-  list(Y = Y, levels = M, rule = as.character(rule), c = as.numeric(c),
-       n_nodes = length(Y),
-       note = sprintf("truncated at level %d; the partition depth is part of the model, not an approximation to hide",
-                      M))
+  list(
+    Y = Y, levels = M, rule = as.character(rule), c = as.numeric(c),
+    n_nodes = length(Y),
+    note = sprintf(
+      "truncated at level %d; the partition depth is part of the model, not an approximation to hide",
+      M
+    )
+  )
 }
 
 # Marsaglia-Tsang Gamma sampler, shape >= 1, matching the Python arm.
@@ -182,7 +212,7 @@ poltrx_gamma <- function(e, shape) {
     u <- max(.ghc_unif(e, 1L), 1e-15)
     return(poltrx_gamma(e, shape + 1) * u^(1 / shape))
   }
-  d <- shape - 1/3
+  d <- shape - 1 / 3
   cc <- 1 / sqrt(9 * d)
   repeat {
     u1raw <- .ghc_unif(e, 1L)
@@ -193,8 +223,9 @@ poltrx_gamma <- function(e, shape) {
     v <- (1 + cc * z)^3
     if (v <= 0) next
     u <- max(.ghc_unif(e, 1L), 1e-15)
-    if (log(u) < (0.5 * z * z + d - d * v + d * log(v)))
+    if (log(u) < (0.5 * z * z + d - d * v + d * log(v))) {
       return(d * v)
+    }
   }
 }
 
@@ -209,7 +240,9 @@ poltrx_gamma <- function(e, shape) {
 #' @return The value of \code{as.integer}.
 #' @export
 poltrx_eps_from_key <- function(key) {
-  if (key == "()") return(integer(0))
+  if (key == "()") {
+    return(integer(0))
+  }
   as.integer(strsplit(sub("^\\(|\\)$", "", key), ",")[[1]])
 }
 
@@ -226,9 +259,12 @@ poltrx_eps_from_key <- function(key) {
 #' @export
 poltrx_set_probability <- function(epsilon, tree) {
   eps <- as.integer(epsilon)
-  if (length(eps) > tree$levels)
-    stop(sprintf("poltrx: the tree was truncated at level %d, so it says nothing about level %d",
-                 tree$levels, length(eps)))
+  if (length(eps) > tree$levels) {
+    stop(sprintf(
+      "poltrx: the tree was truncated at level %d, so it says nothing about level %d",
+      tree$levels, length(eps)
+    ))
+  }
   p <- 1
   for (m in seq_along(eps)) {
     parent <- eps[seq_len(m - 1L)]
@@ -257,26 +293,28 @@ poltrx_set_probability <- function(epsilon, tree) {
 #' @export
 poltrx_tree_density <- function(tree, level = NULL, lo = 0.0, hi = 1.0) {
   M <- if (is.null(level)) as.integer(tree$levels) else as.integer(level)
-  n <- 2L ^ M
+  n <- 2L^M
   a <- as.numeric(lo)
   b <- as.numeric(hi)
   width <- (b - a) / n
   probs <- numeric(n)
-  dens   <- numeric(n)
-  edges  <- vector("list", n)
+  dens <- numeric(n)
+  edges <- vector("list", n)
   for (idx in seq_len(n) - 1L) {
     bits <- intToBits(idx)[seq_len(M)]
     eps <- as.integer(bits)
     pk <- paste0("(", paste(eps, collapse = ","), ")")
     p <- poltrx_set_probability(eps, tree)$probability
     probs[idx + 1L] <- p
-    dens[idx + 1L]   <- p / width
+    dens[idx + 1L] <- p / width
     edges[[idx + 1L]] <- c(a + idx * width, a + (idx + 1L) * width)
   }
-  list(estimate = dens, density = dens, probabilities = probs,
-       edges = edges, level = M, total = sum(probs),
-       method = "Polya tree; Muller & Quintana (2004) Sec. 2.3, after Lavine (1992, 1994)",
-       note = "the probabilities at a level sum to 1 by construction, whatever the branch draws were")
+  list(
+    estimate = dens, density = dens, probabilities = probs,
+    edges = edges, level = M, total = sum(probs),
+    method = "Polya tree; Muller & Quintana (2004) Sec. 2.3, after Lavine (1992, 1994)",
+    note = "the probabilities at a level sum to 1 by construction, whatever the branch draws were"
+  )
 }
 
 #' Polya tree (morie.fn.poltrx) -- main entry point
@@ -302,9 +340,11 @@ morie_poltrx <- function(levels, c = 1.0, rule = "m_squared", seed = 0) {
   cr <- poltrx_continuity_regime(lp$rule)
   tr <- poltrx_finite_tree(levels, c, rule, seed = as.integer(seed))
   dn <- poltrx_tree_density(tr)
-  list(level_parameters = lp,
-       continuity_regime = cr,
-       tree = tr,
-       density = dn,
-       method = "Polya tree; Muller & Quintana (2004) Sec. 2.3, after Lavine (1992, 1994)")
+  list(
+    level_parameters = lp,
+    continuity_regime = cr,
+    tree = tr,
+    density = dn,
+    method = "Polya tree; Muller & Quintana (2004) Sec. 2.3, after Lavine (1992, 1994)"
+  )
 }

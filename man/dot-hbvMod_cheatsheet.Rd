@@ -13,3 +13,7 @@ A character value.
 Part of the hbvMod_mixedcase_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+res <- .hbvMod_cheatsheet()
+res
+}

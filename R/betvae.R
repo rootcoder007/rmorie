@@ -21,7 +21,8 @@
 #'   in the local corpus and was not read.
 #' @export
 #' @examples
-#' Betavae(x = c(1, 2, 3, 4, 5, 6, 7, 8), xhat = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2, 3, 4, 5, 6, 7, 8), logvar = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Betavae(x = c(1, 2, 3, 4, 5, 6, 7, 8), xhat = c(1, 2, 3, 4, 5, 6, 7, 8), mu = c(1, 2,
+#' 3, 4, 5, 6, 7, 8), logvar = c(1, 2, 3, 4, 5, 6, 7, 8))
 Betavae <- function(x, xhat, mu, logvar, beta = 4, capacity = NULL,
                     gamma = NULL, noisevar = 1) {
   x <- .t1_vec(x)

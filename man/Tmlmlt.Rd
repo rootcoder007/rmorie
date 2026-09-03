@@ -33,7 +33,8 @@ targeting step repairs its bias as long as it or the outcome model is
 right.  \code{psi_a = mean_i \[Q(a, X_i) + eps_a/g_a(X_i)\]}.
 }
 \examples{
-Tmlmlt(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), arm_set = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlmlt(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), arm_set = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Lendle, S. D. et al. (2017). Journal of Statistical

@@ -17,3 +17,7 @@ A step of the tmlcll_native implementation. Called by \code{morie_tmle_cross_lag
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tmlcll_logit(p = 0.5)
+res
+}

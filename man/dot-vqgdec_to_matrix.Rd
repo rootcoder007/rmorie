@@ -16,3 +16,8 @@ A matrix, from \code{as.matrix}.
 \description{
 to a 2-D numeric matrix with one row per entry.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .vqgdec_to_matrix(x = x)
+res
+}

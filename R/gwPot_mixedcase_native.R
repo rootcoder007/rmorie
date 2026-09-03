@@ -45,7 +45,9 @@
 #'
 #' @param gas Coerced to character by the body, with \code{as.character}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100}.
-#' @return A list with \code{estimate}, \code{agwp}, \code{agwp_co2}, \code{gwp_from_agwp}, \code{lifetime}, \code{radiative_efficiency}, \code{gas}, \code{horizon}, \code{method}.
+#' @return A list with \code{estimate}, \code{agwp}, \code{agwp_co2},
+#' \code{gwp_from_agwp}, \code{lifetime}, \code{radiative_efficiency}, \code{gas},
+#' \code{horizon}, \code{method}.
 #' @export
 morie_gwPot <- function(gas, horizon = 100) {
   key <- toupper(gsub("_", "-", trimws(as.character(gas))))

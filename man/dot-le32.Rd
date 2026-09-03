@@ -17,3 +17,7 @@ A step of the secarg_native implementation. Called by \code{morie_secarg_prehash
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .le32(n = 3L)
+res
+}

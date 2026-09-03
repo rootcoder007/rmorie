@@ -22,7 +22,8 @@
 
 #' .morie_hrz_normalize_scale
 #'
-#' A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform}, \code{morie_transform_prediction}, \code{morie_transform_T_F}.
+#' A step of the horowitz_native6 implementation. Called by \code{morie_chen_transform},
+#' \code{morie_transform_prediction}, \code{morie_transform_T_F}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -56,6 +57,10 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_hrz_kz6(u = x)
+#' res
 .morie_hrz_kz6 <- function(u) (15 - 10 * u^2 + u^4) / 16 * stats::dnorm(u)
 
 # K'(u) = phi(u)(-35u + 14u^3 - u^5)/16, by differentiating the above
@@ -67,6 +72,10 @@
 #' @param u Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_hrz_kz6_deriv(u = x)
+#' res
 .morie_hrz_kz6_deriv <- function(u) {
   stats::dnorm(u) * (-35 * u + 14 * u^3 - u^5) / 16
 }

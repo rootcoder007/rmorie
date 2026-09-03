@@ -3,7 +3,8 @@
 #' Equivalence of the naive kernel and empirical goodness-of-fit statistics (Theorem 5.1)
 #'
 #' Theorem 5.1: under `H0: F_X = F`,
-#' \deqn{|KS_n - \widehat{KS}| \to_p 0\quad\text{and}\quad |CvM_n - \widehat{CvM}| \to_p 0,}{|KS_n - KShat| ->_p 0 and |CvM_n - CvMhat| ->_p 0,}
+#' \deqn{|KS_n - \widehat{KS}| \to_p 0\quad\text{and}\quad |CvM_n - \widehat{CvM}| \to_p
+#' 0,}{|KS_n - KShat| ->_p 0 and |CvM_n - CvMhat| ->_p 0,}
 #' where the hatted statistics use the NAIVE kernel distribution function
 #' estimator of (5.3)-(5.4).
 #'

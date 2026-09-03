@@ -41,5 +41,6 @@ A list with the step times, the survival after each step, and   the curve on the
 }
 \keyword{internal}
 \examples{
-morie_qsfrgr_km(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), weights = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_qsfrgr_km(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
+  weights = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

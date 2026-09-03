@@ -1,11 +1,11 @@
 # morie.fn -- function file (rootcoder007/morie)
 # TMLE for cross-lagged panel effects.
-# 
+#
 # A cross-lagged panel model regresses each variable at time t on
 # both variables at time t-1, and reads the cross-coefficients as
 # the reciprocal influences of X and Y on each other. Two objections
 # have to be answered before that reading means anything.
-# 
+#
 # The traditional CLPM conflates within- and between-person variation.
 # Its cross-lagged coefficients mix a person's own change over time
 # with stable differences between people. Adding a random intercept
@@ -15,7 +15,7 @@
 # data with a strong between-person confounder and no within-person
 # effect: the plain CLPM reports a cross-lag, the random-intercept
 # version does not.
-# 
+#
 # A regression coefficient is not a causal effect under time-varying
 # confounding. If Y_{t-1} affects both X_t and Y_t, conditioning on
 # the past in a single regression does not identify the effect of
@@ -23,14 +23,14 @@
 # Chap. 4 estimates it: regress forward, target each step with the
 # clever covariate, and the resulting estimate of E[Y_T^{bar x}] is
 # doubly robust in a way the OLS coefficient is not.
-# 
+#
 # So the module offers both, and names what each is. The CLPM
 # coefficient is a description of the joint distribution; the
 # targeted estimate is an intervention contrast. Where the model is
 # correct and there is no time-varying confounding they agree, and
 # where confounding is present they do not -- which the anchor also
 # checks.
-# 
+#
 # References
 # ----------
 # Hamaker, E. L., Kuiper, R. M. & Grasman, R. P. P. P. (2015) "A
@@ -38,18 +38,18 @@
 # 20(1), 102-116, doi:10.1037/a0038889. The conflation of within- and
 # between-person variance in the traditional CLPM, and the
 # random-intercept parametrization that separates them.
-# 
+#
 # Allison, P. D., Williams, R. & Moral-Benito, E. (2017) "Maximum
 # Likelihood for Cross-Lagged Panel Models with Fixed Effects",
 # Socius 3, 1-17, doi:10.1177/2378023117710578. Maximum likelihood
 # estimation of cross-lagged panel models with unit fixed effects.
-# 
+#
 # van der Laan, M. J. & Rose, S. (2018) Targeted Learning in Data
 # Science, Springer, doi:10.1007/978-3-319-65304-4. Chap. 4: the
 # g-computation formula as iterated conditional expectations and the
 # sequential TMLE with the clever covariate, which is what identifies
 # an intervention contrast under time-varying confounding.
-# 
+#
 # Note on provenance: the ledger previously cited this module to
 # "Allard-Boulet (2024)". No such paper could be located in any
 # database; the citation appears to be fabricated and has been
@@ -61,13 +61,19 @@
 
 #' .tmlcll_mat
 #'
-#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}, \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged} and 1 others in the module.
+#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols},
+#' \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param X Optional; may be \code{NULL}. A matrix; passed to \code{dim}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcll_mat(X = x)
+#' res
 .tmlcll_mat <- function(X) {
   if (is.matrix(X)) return(X)
   if (is.null(X) || (is.numeric(X) && length(X) == 0)) {
@@ -103,13 +109,18 @@
 
 #' .tmlcll_vec
 #'
-#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols}, \code{morie_tmle_cross_lagged}.
+#' A step of the tmlcll_native implementation. Called by \code{.tmlcll_ols},
+#' \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Optional; may be \code{NULL}. Numeric; the body checks with \code{is.numeric}.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcll_vec(x = x)
+#' res
 .tmlcll_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.numeric(x)) return(as.numeric(x))
@@ -196,7 +207,8 @@
 
 #' .tmlcll_ols
 #'
-#' A step of the tmlcll_native implementation. Called by \code{morie_clpm_coefficients}, \code{morie_tmle_cross_lagged}.
+#' A step of the tmlcll_native implementation. Called by \code{morie_clpm_coefficients},
+#' \code{morie_tmle_cross_lagged}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -204,6 +216,11 @@
 #' @param y Passed to \code{.tmlcll_vec}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcll_ols(X = x, y = y)
+#' res
 .tmlcll_ols <- function(X, y) {
   Xm <- .tmlcll_mat(X)
   yv <- .tmlcll_vec(y)
@@ -221,6 +238,9 @@
 #' @param p Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .tmlcll_logit(p = 0.5)
+#' res
 .tmlcll_logit <- function(p) {
   log(p / (1 - p))
 }
@@ -234,6 +254,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return The value of \code{ifelse}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcll_expit(x = x)
+#' res
 .tmlcll_expit <- function(x) {
   ifelse(x > -700, 1 / (1 + exp(-x)), 0)
 }
@@ -248,7 +272,9 @@
 #'
 #' @param X Passed to \code{.tmlcll_mat}.
 #' @param Y Passed to \code{.tmlcll_mat}.
-#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{parametrization}, \code{caveat}.
+#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y},
+#' \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{parametrization},
+#' \code{caveat}.
 #' @export
 morie_clpm_coefficients <- function(X, Y) {
   xs <- .tmlcll_mat(X)
@@ -299,7 +325,8 @@ morie_clpm_coefficients <- function(X, Y) {
 #' source it follows.
 #'
 #' @param P Passed to \code{.tmlcll_mat}.
-#' @return A list with \code{person_means}, \code{within}, \code{between_variance}, \code{within_variance}.
+#' @return A list with \code{person_means}, \code{within}, \code{between_variance},
+#' \code{within_variance}.
 #' @export
 morie_within_between_decomposition <- function(P) {
   rows <- .tmlcll_mat(P)
@@ -324,7 +351,9 @@ morie_within_between_decomposition <- function(P) {
 #'
 #' @param X Passed to \code{morie_within_between_decomposition}.
 #' @param Y Passed to \code{morie_within_between_decomposition}.
-#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y}, \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{between_variance_x}, \code{between_variance_y}, \code{parametrization}, \code{note}.
+#' @return A list with \code{x_on_x}, \code{y_on_x}, \code{x_on_y}, \code{y_on_y},
+#' \code{cross_lag_x_to_y}, \code{cross_lag_y_to_x}, \code{between_variance_x},
+#' \code{between_variance_y}, \code{parametrization}, \code{note}.
 #' @export
 morie_ri_clpm_coefficients <- function(X, Y) {
   dx <- morie_within_between_decomposition(X)
@@ -356,7 +385,8 @@ morie_ri_clpm_coefficients <- function(X, Y) {
 #' @param time Passed to \code{.tmlcll_vec}.
 #' @param g Optional; may be \code{NULL}. Passed to \code{.tmlcll_vec}.
 #' @param bounds Optional; may be \code{NULL}. A vector; indexed elementwise.
-#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci}, \code{mean_eic}, \code{solves_eic}, \code{n_waves}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{psi}, \code{epsilon}, \code{se}, \code{ci},
+#' \code{mean_eic}, \code{solves_eic}, \code{n_waves}, \code{method}, \code{note}.
 #' @export
 morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
   yv <- .tmlcll_vec(y)
@@ -378,7 +408,7 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
     stop("tmlcll: the outcome bounds are degenerate")
   }
   ys <- (yv - lo) / (hi - lo)
-  
+
   if (is.null(g)) {
     des <- .tmlcll_design(W, n)
     b <- .tmlcll_logit_irls(des, a)
@@ -389,25 +419,25 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
     gv <- .tmlcll_vec(g)
     gg <- pmin(pmax(gv, 1e-6), 1 - 1e-6)
   }
-  
+
   Xa <- cbind(1, a, W)
   co <- .tmlcll_ols(Xa, ys)
-  
+
   pred <- function(av, i) {
     row <- c(1, av, W[i, ])
     pmin(pmax(sum(row * co), 1e-6), 1 - 1e-6)
   }
-  
+
   q1 <- numeric(n)
   q0 <- numeric(n)
   for (i in seq_len(n)) {
     q1[i] <- pred(1.0, i)
     q0[i] <- pred(0.0, i)
   }
-  
+
   H <- a / gg - (1 - a) / (1 - gg)
   qa <- ifelse(a == 1.0, q1, q0)
-  
+
   off <- .tmlcll_logit(qa)
   e <- 0.0
   for (iter in seq_len(80)) {
@@ -419,16 +449,16 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
     e <- e + step
     if (abs(step) < .tmlcll_EPS) break
   }
-  
+
   q1s <- .tmlcll_expit(.tmlcll_logit(q1) + e / gg)
   q0s <- .tmlcll_expit(.tmlcll_logit(q0) - e / (1 - gg))
   psi <- mean(q1s - q0s) * (hi - lo)
-  
+
   qas <- ifelse(a == 1.0, q1s, q0s)
   d <- (H * (ys - qas) + q1s - q0s - psi / (hi - lo)) * (hi - lo)
   m <- mean(d)
   se <- sqrt(sum((d - m) ^ 2) / n ^ 2)
-  
+
   list(
     estimate = psi,
     psi = psi,
@@ -451,6 +481,9 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tmlcll_morie_cheatsheet()
+#' res
 .tmlcll_morie_cheatsheet <- function() {
   "tmlcll: the traditional CLPM's cross-lags MIX within-person change with stable between-person differences, so a random intercept is needed before 'X leads to Y' means anything -- with a strong between-person confounder and no within-person effect, the plain CLPM still reports a cross-lag. And a regression coefficient is not a causal effect under TIME-VARYING confounding: the g-formula identifies the intervention contrast and the sequential TMLE estimates it doubly robustly. Both are provided, and each is named for what it is."
 }
@@ -460,13 +493,3 @@ morie_tmlecrosslagged <- morie_tmle_cross_lagged
 #' @rdname morie_clpm_coefficients
 #' @export
 morie_tmlcll <- morie_clpm_coefficients
-
-
-
-
-
-
-
-
-
-

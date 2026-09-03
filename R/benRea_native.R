@@ -235,7 +235,8 @@ extract_spans <- function(path) {
 #'
 #' @param pred Passed to \code{extract_spans}.
 #' @param gold Passed to \code{extract_spans}.
-#' @return A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives}, \code{n_pred}, \code{n_gold}.
+#' @return A list with \code{precision}, \code{recall}, \code{f1}, \code{true_positives},
+#' \code{n_pred}, \code{n_gold}.
 #' @export
 span_f1 <- function(pred, gold) {
   p <- extract_spans(pred)
@@ -260,7 +261,8 @@ span_f1 <- function(pred, gold) {
 #' @param types Passed to \code{bio_labels}.
 #' @param decoder One of \code{"greedy"}, \code{"viterbi"}. Defaults to \code{"viterbi"}.
 #' @param transition_scores Passed to \code{viterbi_decode}.
-#' @param gold Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param gold Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
 ner_decode <- function(emissions, types, decoder = "viterbi",

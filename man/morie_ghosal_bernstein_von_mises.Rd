@@ -22,7 +22,7 @@ morie_ghosal_bernstein_von_mises(
 \item{seed}{Integer RNG seed (default 0).}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghbvm", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghbvm", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }

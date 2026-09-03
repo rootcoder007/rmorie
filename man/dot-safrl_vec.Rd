@@ -19,3 +19,9 @@ A step of the safrl_native implementation. Called by \code{morie_safrl}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+txt <- c('alpha', 'beta', 'gamma', 'delta')
+res <- .safrl_vec(v = x, name = txt)
+res
+}

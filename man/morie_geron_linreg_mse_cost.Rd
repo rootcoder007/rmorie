@@ -22,5 +22,6 @@ If \code{theta} is one longer than the columns of \code{X}, a leading column
 of ones is prepended, matching the Python implicit-bias rule.
 }
 \examples{
-morie_geron_linreg_mse_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8), theta = 0.5)
+morie_geron_linreg_mse_cost(X = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8),
+  theta = 0.5)
 }

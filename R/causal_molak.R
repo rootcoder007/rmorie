@@ -26,6 +26,10 @@
 #' @param a A matrix; passed to \code{dim}.
 #' @return The value of \code{%*%}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_ml_pinv(a = A)
+#' res
 .morie_ml_pinv <- function(a) {
   a <- as.matrix(a)
   s <- svd(a)
@@ -68,12 +72,14 @@
 
 #' .morie_ml_nodes
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic}, \code{.morie_ml_dsep}, \code{morie_docalc} and 3 others in the module.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
+#' \code{.morie_ml_dsep}, \code{morie_docalc} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param edges Coerced to character by the body, with \code{as.character}.
-#' @param extra Coerced to character by the body, with \code{as.character}. Defaults to \code{character(0)}.
+#' @param extra Coerced to character by the body, with \code{as.character}. Defaults to
+#' \code{character(0)}.
 #' @return A vector, from \code{sort}.
 #' @export
 .morie_ml_nodes <- function(edges, extra = character(0)) {
@@ -82,7 +88,8 @@
 
 #' .morie_ml_children
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic}, \code{.morie_ml_dsep}, \code{morie_docalc} and 1 others in the module.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_acyclic},
+#' \code{.morie_ml_dsep}, \code{morie_docalc} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -103,7 +110,8 @@
 
 #' .morie_ml_parents
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}, \code{morie_dseptest}.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep},
+#' \code{morie_dseptest}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -124,7 +132,8 @@
 
 #' .morie_ml_desc
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_blocked}, \code{morie_docalc}.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_blocked},
+#' \code{morie_docalc}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -150,7 +159,8 @@
 
 #' .morie_ml_paths
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep}, \code{morie_dseptest}.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_dsep},
+#' \code{morie_dseptest}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -218,7 +228,8 @@
 
 #' .morie_ml_dsep
 #'
-#' A step of the causal_molak implementation. Called by \code{morie_docalc}, \code{morie_dseptest}, \code{morie_faithchk} and 1 others in the module.
+#' A step of the causal_molak implementation. Called by \code{morie_docalc},
+#' \code{morie_dseptest}, \code{morie_faithchk} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -287,7 +298,8 @@
 
 #' .morie_ml_adj
 #'
-#' A step of the causal_molak implementation. Called by \code{.morie_ml_colliders}, \code{morie_bowarc}, \code{morie_collider} and 1 others in the module.
+#' A step of the causal_molak implementation. Called by \code{.morie_ml_colliders},
+#' \code{morie_bowarc}, \code{morie_collider} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -437,7 +449,8 @@ morie_bicdag <- function(data, dag, names = NULL) {
 #'   identified, bows)
 #' @export
 #' @examples
-#' morie_bowarc(dag = c(1, 2, 3, 4, 5, 6, 7, 8), bidirected = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_bowarc(dag = c(1, 2, 3, 4, 5, 6, 7, 8), bidirected = c(1, 2, 3, 4, 5, 6, 7, 8),
+#' x = c(1, 2, 3, 4, 5, 6, 7, 8), y = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_bowarc <- function(dag, bidirected, x, y) {
   edges <- .morie_ml_edges(dag)
   bid <- as.matrix(bidirected)
@@ -648,6 +661,10 @@ morie_faithchk <- function(dag, x, y, z = character(0), indep = TRUE) {
 #' @param sigma Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .morie_ml_gram(a = A)
+#' res
 .morie_ml_gram <- function(a, sigma = NULL) {
   a <- as.numeric(a)
   d2 <- outer(a, a, function(p, q) (p - q)^2)
@@ -777,7 +794,8 @@ morie_poschk <- function(treat, stratum, tol = 0) {
 #' @return list(tau, ate, loss, n, k)
 #' @export
 #' @examples
-#' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_rlearn(y = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0,
+#' 6.5), m = c(1, 2, 3, 4, 5, 6, 7, 8), e = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rlearn <- function(y, t, m, e, x = NULL) {
   y <- as.numeric(y)
   t <- as.numeric(t)

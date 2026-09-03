@@ -27,7 +27,8 @@
 #'   M. J. & Rubin, D. (2006). IJB 2(1):11.
 #' @export
 #' @examples
-#' Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward = c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' Tmlmrk(state = c(1, 2, 3, 4, 5, 6, 7, 8), action = c(1, 2, 3, 4, 5, 6, 7, 8), reward =
+#' c(1, 2, 3, 4, 5, 6, 7, 8), policy = c(1, 2, 3, 4, 5, 6, 7, 8))
 Tmlmrk <- function(state, action, reward, policy) {
   sv <- as.numeric(state)
   av <- as.numeric(action)

@@ -11,7 +11,8 @@
 
 #' .unif_stream
 #'
-#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc}, \code{reversible_jump_mcmc}.
+#' A step of the bayrjmcmc_native implementation. Called by \code{changepoint_rjmcmc},
+#' \code{reversible_jump_mcmc}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -19,6 +20,9 @@
 #' @param block Defaults to \code{8192L}.
 #' @return The value of \code{uni}, as built in the body.
 #' @export
+#' @examples
+#' res <- .unif_stream(seed = 1L)
+#' res
 .unif_stream <- function(seed, block = 8192L) {
   # Same block-drawn uniform stream as the morie R arm and the Python
   # arm (Philox via .ghc_rng/.ghc_unif). State lives in an environment so
@@ -56,6 +60,10 @@
 #' @param a A matrix; passed to \code{nrow}.
 #' @return The value of \code{total}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .logabsdet(a = A)
+#' res
 .logabsdet <- function(a) {
   n <- nrow(a)
   if (n == 0) return(0)
@@ -258,7 +266,8 @@ rj_log_acceptance <- function(logpost_from, logpost_to, log_j_from,
 #' @param move_weight Defaults to \code{1}.
 #' @param jacobian One of \code{"analytic"}, \code{"numeric"}. Defaults to \code{"analytic"}.
 #' @param keep_chain A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{model_freq}, \code{visits}, \code{n_kept}, \code{accept}, \code{tried}, \code{chain}, \code{jacobian}, \code{method}, \code{note}.
+#' @return A list with \code{model_freq}, \code{visits}, \code{n_kept}, \code{accept},
+#' \code{tried}, \code{chain}, \code{jacobian}, \code{method}, \code{note}.
 #' @export
 reversible_jump_mcmc <- function(models, moves, init_model, init_theta = c(),
                                  n_iter = 10000L, burn_in = 0L, thin = 1L,
@@ -589,7 +598,10 @@ birth_log_jacobian <- function(h_j, h_new_left, h_new_right) {
 #' @param k_init A count; the body uses it as \code{seq_len(...)}. Defaults to \code{0L}.
 #' @param thin Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @param keep_chain A flag; the body branches on it. Defaults to \code{FALSE}.
-#' @return A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s}, \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta}, \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height}, \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
+#' @return A list with \code{k_posterior}, \code{k_counts}, \code{k_mean}, \code{s},
+#' \code{h}, \code{accept}, \code{tried}, \code{c}, \code{b}, \code{d}, \code{eta},
+#' \code{pi}, \code{mean_s1_given_k1}, \code{var_s1_given_k1}, \code{mean_height},
+#' \code{chain}, \code{n_kept}, \code{use_likelihood}, \code{method}, \code{note}.
 #' @export
 changepoint_rjmcmc <- function(y = numeric(0), L = 1.0, n_iter = 40000,
                                burn_in = 4000, lam = 3.0, k_max = 30,

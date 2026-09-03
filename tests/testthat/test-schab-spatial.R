@@ -27,7 +27,8 @@ test_that("the spherical model has a TRUE range (eq 4.13)", {
 })
 
 test_that("spherical matches the printed polynomial (eq 4.15)", {
-  hh <- c(0.5, 1, 1.9); u <- hh / 2
+  hh <- c(0.5, 1, 1.9)
+  u <- hh / 2
   expect_equal(spsph(hh, 0, 1.5, 2)$gamma, 1.5 * (1.5 * u - 0.5 * u^3),
                tolerance = 1e-12)
 })

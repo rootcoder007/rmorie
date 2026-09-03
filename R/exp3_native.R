@@ -25,7 +25,8 @@
 #' @param gamma_ Coerced to numeric by the body, with \code{as.numeric}.
 #' @param T Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param seed Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs}, \code{weights}, \code{total_reward}, \code{method}.
+#' @return A list with \code{estimate}, \code{actions}, \code{rewards}, \code{probs},
+#' \code{weights}, \code{total_reward}, \code{method}.
 #' @export
 morie_exp3 <- function(x, gamma_, T = NULL, seed = 0) {
   x <- as.matrix(x)
@@ -79,6 +80,9 @@ exp3 <- morie_exp3
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .exp3_cheatsheet()
+#' res
 .exp3_cheatsheet <- function() {
   "exp3(x, gamma_) -> Exp3 adversarial bandit on a (T, K) reward table (Auer et al 2002, fig 1)."
 }

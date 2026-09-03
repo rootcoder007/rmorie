@@ -70,7 +70,10 @@
 #' @param m Coerced to integer by the body, with \code{as.integer}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
-#' @return A list with \code{d}, \code{h_pooled}, \code{h_reference}, \code{h_test}, \code{m}, \code{n}, \code{order}, \code{n_reference}, \code{n_test}, \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both}, \code{method}.
+#' @return A list with \code{d}, \code{h_pooled}, \code{h_reference}, \code{h_test},
+#' \code{m}, \code{n}, \code{order}, \code{n_reference}, \code{n_test},
+#' \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both},
+#' \code{method}.
 #' @export
 Glr <- function(x, m, n = NULL, order = 4) {
   # eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window
@@ -116,11 +119,16 @@ Glr <- function(x, m, n = NULL, order = 4) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param window Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param step Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param order Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.
-#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{d}, \code{d_fixed_reference}, \code{times}, \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad}, \code{window}, \code{step}, \code{order}, \code{fs}, \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.
+#' @param threshold Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @return A list with \code{d}, \code{d_fixed_reference}, \code{times},
+#' \code{boundaries}, \code{n_boundaries}, \code{threshold}, \code{median}, \code{mad},
+#' \code{window}, \code{step}, \code{order}, \code{fs},
+#' \code{reference_restarts_at_boundaries}, \code{robust_threshold}, \code{method}.
 #' @export
 EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
                      threshold = NULL) {
@@ -209,10 +217,13 @@ EegAdapt <- function(x, fs, window = NULL, step = NULL, order = 4,
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param normalize A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param biased A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n}, \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x}, \code{biased_keeps_nonnegative_definiteness}, \code{method}.
+#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{n},
+#' \code{biased}, \code{normalized}, \code{positive_lag_means_y_trails_x},
+#' \code{biased_keeps_nonnegative_definiteness}, \code{method}.
 #' @export
 XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
   # R_xy(m) = (1/N) sum_n x(n) y(n + m).  A POSITIVE lag means y trails x.
@@ -257,7 +268,8 @@ XCorr <- function(x, y, maxlag = NULL, normalize = FALSE, biased = TRUE) {
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delays Optional; may be \code{NULL}. A vector; its length is taken.
-#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag}, \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
+#' @return A list with \code{ccf}, \code{lags}, \code{peak}, \code{peak_lag},
+#' \code{normalized}, \code{is_the_matched_filter_output}, \code{method}.
 #' @export
 XCorrDisc <- function(x, y, delays = NULL) {
   # The RAW sum, not divided by N: the matched-filter output AT each
@@ -275,7 +287,7 @@ XCorrDisc <- function(x, y, delays = NULL) {
     as.integer(delays)
   }
   out <- vapply(ks, function(k) {
-    i <- seq_len(length(xs))
+    i <- seq_along(xs)
     j <- i + k
     keep <- j >= 1L & j <= length(ys)
     if (!any(keep)) 0 else .morie_fsum(xs[i[keep]] * ys[j[keep]])
@@ -301,7 +313,9 @@ XCorrDisc <- function(x, y, delays = NULL) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param t Coerced to numeric by the body, with \code{as.numeric}.
 #' @param delays Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{ccf}, \code{delays}, \code{overlap_fraction}, \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data}, \code{method}.
+#' @return A list with \code{ccf}, \code{delays}, \code{overlap_fraction},
+#' \code{interpolated}, \code{trapezoidal}, \code{long_delays_use_less_data},
+#' \code{method}.
 #' @export
 XCorrCont <- function(x, y, t, delays) {
   # The continuous-time form, evaluated by the trapezoidal rule on the
@@ -351,7 +365,10 @@ XCorrCont <- function(x, y, t, delays) {
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param lags Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @param remove_mean A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{ccf}, \code{lags}, \code{means}, \code{mean_product}, \code{mean_removed}, \code{is_cross_covariance_when_mean_removed}, \code{expectation_estimated_by_time_average}, \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
+#' @return A list with \code{ccf}, \code{lags}, \code{means}, \code{mean_product},
+#' \code{mean_removed}, \code{is_cross_covariance_when_mean_removed},
+#' \code{expectation_estimated_by_time_average},
+#' \code{requires_joint_stationarity_and_ergodicity}, \code{method}.
 #' @export
 XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
   # The ensemble expectation is estimated by a TIME average, which is only
@@ -384,7 +401,9 @@ XCorrProc <- function(x, y, lags = NULL, remove_mean = TRUE) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{ccf}, \code{via_convolution}, \code{lags}, \code{max_difference}, \code{identity_holds}, \code{correlation_is_convolution_with_one_reversed}, \code{method}.
+#' @return A list with \code{ccf}, \code{via_convolution}, \code{lags},
+#' \code{max_difference}, \code{identity_holds},
+#' \code{correlation_is_convolution_with_one_reversed}, \code{method}.
 #' @export
 CorrConv <- function(x, y) {
   # Correlation IS convolution with one sequence reversed.
@@ -392,7 +411,7 @@ CorrConv <- function(x, y) {
   ys <- as.numeric(y)
   r <- XCorr(xs, ys, biased = FALSE)
   direct <- vapply(r$lags, function(k) {
-    i <- seq_len(length(xs))
+    i <- seq_along(xs)
     j <- i + k
     keep <- j >= 1L & j <= length(ys)
     if (!any(keep)) 0 else .morie_fsum(xs[i[keep]] * ys[j[keep]])
@@ -430,7 +449,9 @@ CorrConv <- function(x, y) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param template Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{gamma}, \code{shifts}, \code{peak}, \code{peak_shift}, \code{normalized_per_shift}, \code{bounded_in_unit_interval}, \code{loud_beats_matching_without_normalization}, \code{method}.
+#' @return A list with \code{gamma}, \code{shifts}, \code{peak}, \code{peak_shift},
+#' \code{normalized_per_shift}, \code{bounded_in_unit_interval},
+#' \code{loud_beats_matching_without_normalization}, \code{method}.
 #' @export
 NccfTpl <- function(x, template) {
   # Normalized per shift, so a LOUD stretch cannot outscore a matching one
@@ -467,7 +488,9 @@ NccfTpl <- function(x, template) {
 #'
 #' @param x Passed to \code{DotProd}.
 #' @param y Passed to \code{DotProd}.
-#' @return A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson}, \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling}, \code{method}.
+#' @return A list with \code{gamma}, \code{dot_product}, \code{norms}, \code{pearson},
+#' \code{is_a_cosine_not_an_agreement}, \code{unity_for_a_positive_rescaling},
+#' \code{method}.
 #' @export
 CorrDot <- function(x, y) {
   # eq (4.25).  Delegates to DotProd -- one copy of the arithmetic.
@@ -495,8 +518,12 @@ CorrDot <- function(x, y) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
-#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{acf}, \code{normalized}, \code{lags}, \code{fs}, \code{peak_lag}, \code{peak_lag_seconds}, \code{implied_frequency_hz}, \code{peak_value}, \code{a_rhythm_gives_a_periodic_acf}, \code{robust_to_amplitude_variation}, \code{method}.
+#' @param maxlag Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return A list with \code{acf}, \code{normalized}, \code{lags}, \code{fs},
+#' \code{peak_lag}, \code{peak_lag_seconds}, \code{implied_frequency_hz},
+#' \code{peak_value}, \code{a_rhythm_gives_a_periodic_acf},
+#' \code{robust_to_amplitude_variation}, \code{method}.
 #' @export
 EegAcf <- function(x, fs, maxlag = NULL) {
   # phi(m) = (1/N) sum_n x(n) x(n + m).  BOTH the raw phi and the
@@ -550,7 +577,10 @@ EegAcf <- function(x, fs, maxlag = NULL) {
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}.
 #' @param band Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c(8, 13)}.
 #' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.3}.
-#' @return A list with \code{acf}, \code{band}, \code{lag_range}, \code{peak_lag}, \code{peak}, \code{frequency_hz}, \code{threshold}, \code{present}, \code{needs_both_the_band_and_the_amplitude}, \code{same_test_serves_other_bands}, \code{fs}, \code{method}.
+#' @return A list with \code{acf}, \code{band}, \code{lag_range}, \code{peak_lag},
+#' \code{peak}, \code{frequency_hz}, \code{threshold}, \code{present},
+#' \code{needs_both_the_band_and_the_amplitude}, \code{same_test_serves_other_bands},
+#' \code{fs}, \code{method}.
 #' @export
 AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
   # The alpha band by convention; the SAME test serves the other bands,
@@ -596,7 +626,8 @@ AlphaRhy <- function(x, fs, band = c(8, 13), threshold = 0.3) {
 #' @param a2 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
 #' @param fs Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{100}.
 #' @param duration Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
-#' @return A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2}, \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.
+#' @return A list with \code{x}, \code{t}, \code{n}, \code{fs}, \code{f1}, \code{f2},
+#' \code{a1}, \code{a2}, \code{components_are_known_by_construction}, \code{method}.
 #' @export
 SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
                        fs = 100, duration = 1) {
@@ -628,9 +659,13 @@ SinCosTest <- function(n = NULL, f1 = 5, f2 = 20, a1 = 1, a2 = 1,
 #'
 #' @param g Coerced to numeric by the body, with \code{as.numeric}.
 #' @param shifts Coerced to integer by the body, with \code{as.integer}.
-#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param scales Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param n Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{x}, \code{n}, \code{shifts}, \code{scales}, \code{peaks_expected_at}, \code{overlapping_pairs}, \code{pattern}, \code{pattern_length}, \code{n_copies}, \code{copies_add}, \code{overlap_breaks_peak_picking}, \code{method}.
+#' @return A list with \code{x}, \code{n}, \code{shifts}, \code{scales},
+#' \code{peaks_expected_at}, \code{overlapping_pairs}, \code{pattern},
+#' \code{pattern_length}, \code{n_copies}, \code{copies_add},
+#' \code{overlap_breaks_peak_picking}, \code{method}.
 #' @export
 CompSig <- function(g, shifts, scales = NULL, n = NULL) {
   # A composite of shifted, scaled copies of one pattern.  Copies closer
@@ -679,7 +714,10 @@ CompSig <- function(g, shifts, scales = NULL, n = NULL) {
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{r}, \code{r_squared}, \code{n}, \code{means}, \code{cosine_without_removing_means}, \code{means_are_removed}, \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement}, \code{method}.
+#' @return A list with \code{r}, \code{r_squared}, \code{n}, \code{means},
+#' \code{cosine_without_removing_means}, \code{means_are_removed},
+#' \code{invariant_to_positive_affine_change}, \code{says_nothing_about_agreement},
+#' \code{method}.
 #' @export
 CorrCoef <- function(x, y) {
   # Pearson's r.  The MEANS ARE REMOVED, which is what separates it from

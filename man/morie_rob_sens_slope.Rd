@@ -14,14 +14,14 @@ morie_rob_sens_slope(y, t = NULL, alpha = 0.05)
 \item{alpha}{miss probability.}
 }
 \value{
-the \code{\link[=morie_rob_theil_sen]{morie_rob_theil_sen()}} list plus trend, per,
+the \code{morie_rob_theil_sen()} list plus trend, per,
 alias_of.
 }
 \description{
 The Theil-Sen estimator applied to a series against its time
 index, the form in which hydrology and climatology cite Sen
 (1968). One implementation: the computation is
-\code{\link[=morie_rob_theil_sen]{morie_rob_theil_sen()}} on \verb{(t, y)}. The addition is the trend
+\code{morie_rob_theil_sen()} on \verb{(t, y)}. The addition is the trend
 reading, stated only when Sen's interval excludes zero.
 }
 \examples{

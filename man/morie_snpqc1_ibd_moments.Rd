@@ -19,5 +19,7 @@ A list with \code{Z}, \code{pihat}.
 }
 \keyword{internal}
 \examples{
-morie_snpqc1_ibd_moments(genotypes = list(a = 1, b = 2))
+if (morie_crypto_sodium_available()) {
+  morie_snpqc1_ibd_moments(genotypes = list(a = 1, b = 2))
+}
 }

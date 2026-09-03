@@ -23,13 +23,18 @@
 # Neumaier-compensated sum. Not sum(): see the header.
 #' Neumaier-compensated sum. Not sum(): see the header
 #'
-#' A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre}, \code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
+#' A step of the helpers_w3num implementation. Called by \code{.alfrf2_centre},
+#' \code{.baysmplr_build_tree}, \code{.blinkg_corr} and 101 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .w3_csum(v = x)
+#' res
 .w3_csum <- function(v) {
   s <- 0
   cc <- 0
@@ -44,7 +49,8 @@
 # Compensated dot product. Not sum(a * b), same reason.
 #' Compensated dot product. Not sum(a * b), same reason
 #'
-#' A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree}, \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module.
+#' A step of the helpers_w3num implementation. Called by \code{.baysmplr_build_tree},
+#' \code{.chemsc_angle}, \code{.hyper2_elliptical} and 21 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -71,13 +77,18 @@
 # log(sum(exp(v))), shifted by the maximum so it cannot overflow.
 #' Log(sum(exp(v))), shifted by the maximum so it cannot overflow
 #'
-#' A step of the helpers_w3num implementation. Called by \code{morie_snpest}, \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
+#' A step of the helpers_w3num implementation. Called by \code{morie_snpest},
+#' \code{morie_varqc1_logpdf}, \code{morie_varqc1_mixture}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .w3_logsumexp(v = x)
+#' res
 .w3_logsumexp <- function(v) {
   if (length(v) == 0L) {
     return(-Inf)
@@ -92,13 +103,18 @@
 # Lower Cholesky factor L with A = L L'. Explicit, not chol().
 #' Lower Cholesky factor L with A = L L\'. Explicit, not chol()
 #'
-#' A step of the helpers_w3num implementation. Called by \code{.w3_ols}, \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
+#' A step of the helpers_w3num implementation. Called by \code{.w3_ols},
+#' \code{morie_cypin_fit}, \code{morie_hyper2} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param a A matrix; indexed by row and column.
 #' @return The value of \code{lo}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .w3_chol(a = A)
+#' res
 .w3_chol <- function(a) {
   p <- nrow(a)
   lo <- matrix(0, p, p)
@@ -126,7 +142,8 @@
 # Solve L L' x = b by forward then back substitution.
 #' Solve L L\' x = b by forward then back substitution
 #'
-#' A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol}, \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
+#' A step of the helpers_w3num implementation. Called by \code{.w3_inv_from_chol},
+#' \code{.w3_ols}, \code{morie_cypin_fit} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -181,14 +198,22 @@
 # Least squares by the normal equations.
 #' Least squares by the normal equations
 #'
-#' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}, \code{morie_sdcfst}.
+#' A step of the helpers_w3num implementation. Called by \code{morie_blinkg_scan},
+#' \code{morie_blinkg_select}, \code{morie_sdcfst}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param y A vector; its length is taken.
 #' @param design A matrix; indexed by row and column.
-#' @return A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv}, \code{fitted}, \code{chol}.
+#' @return A list with \code{beta}, \code{rss}, \code{df}, \code{sigma2}, \code{xtx_inv},
+#' \code{fitted}, \code{chol}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .w3_ols(y = y, design = X)
+#' res
 .w3_ols <- function(y, design) {
   n <- length(y)
   p <- ncol(design)
@@ -219,13 +244,18 @@
 # Lanczos log-gamma. Not lgamma(): Python's is a different routine.
 #' Lanczos log-gamma. Not lgamma(): Python\'s is a different routine
 #'
-#' A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta}, \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
+#' A step of the helpers_w3num implementation. Called by \code{.bnppvl_log_beta},
+#' \code{.w3_betainc}, \code{.w3_gammcf} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .w3_lgamma(z = y)
+#' res
 .w3_lgamma <- function(z) {
   x <- z
   tmp <- x + 5.5
@@ -357,6 +387,10 @@
 #' @param z Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .w3_npdf(z = y)
+#' res
 .w3_npdf <- function(z) exp(-0.5 * z * z) / sqrt(2 * pi)
 
 # Standard normal quantile by bisection on the CDF: slower than a
@@ -372,6 +406,9 @@
 #' @param hi Passed to \code{.w3_bisect}. Defaults to \code{40}.
 #' @return The value of \code{.w3_bisect}.
 #' @export
+#' @examples
+#' res <- .w3_nppf(p = 0.5)
+#' res
 .w3_nppf <- function(p, lo = -40, hi = 40) {
   if (!(p > 0 && p < 1)) stop("nppf: p must lie strictly inside (0, 1)")
   .w3_bisect(function(z) .w3_ncdf(z) - p, lo, hi)

@@ -291,7 +291,7 @@ morie_erdos_szekeres_check <- function(sequence, r = NULL, s = NULL) {
 #'   geometry. \emph{Compositio Mathematica}, 2, 463-470.
 #' @export
 #' @examples
-#' morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2, 
+#' morie_happy_ending_quadrilateral(rbind(c(0, 0), c(4, 0), c(2,
 #'     1), c(1, 4), c(3, 5)))
 morie_happy_ending_quadrilateral <- function(points) {
   p <- round(as.matrix(points))

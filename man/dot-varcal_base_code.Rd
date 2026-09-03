@@ -17,3 +17,7 @@ A step of the varcal_native implementation. Called by \code{varcal_encode_pileup
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .varcal_base_code(b = 3L)
+res
+}

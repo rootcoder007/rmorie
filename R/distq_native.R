@@ -368,25 +368,3 @@ distributional_rl <- categorical_projection
 #' @rdname atoms
 #' @export
 morie_distq <- atoms
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

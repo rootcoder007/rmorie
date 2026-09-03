@@ -16,13 +16,18 @@ NULL
 
 #' .t4_vec
 #'
-#' A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce}, \code{Dprime} and 11 others in the module.
+#' A step of the tail4_core implementation. Called by \code{Beggtest}, \code{Boxpierce},
+#' \code{Dprime} and 11 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Passed to \code{unlist}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_vec(x = x)
+#' res
 .t4_vec <- function(x) as.numeric(unlist(x))
 
 #' .t4_mat
@@ -34,6 +39,10 @@ NULL
 #' @param X A matrix; passed to \code{nrow}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_mat(X = x)
+#' res
 .t4_mat <- function(X) {
   if (is.matrix(X)) {
     return(matrix(as.numeric(X), nrow = nrow(X)))
@@ -53,6 +62,10 @@ NULL
 #' @param x Passed to \code{rank}.
 #' @return The value of \code{rank}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_ranks(x = x)
+#' res
 .t4_ranks <- function(x) rank(x, ties.method = "average")
 
 #' .t4_tiecounts
@@ -64,6 +77,10 @@ NULL
 #' @param x Passed to \code{table}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_tiecounts(x = x)
+#' res
 .t4_tiecounts <- function(x) as.numeric(table(x))
 
 # Sample autocorrelations with the biased (n in both numerator and
@@ -76,6 +93,10 @@ NULL
 #' @param lag A count; the body uses it as \code{seq_len(...)}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_acfbiased(x = x, lag = 3L)
+#' res
 .t4_acfbiased <- function(x, lag) {
   n <- length(x)
   d <- x - mean(x)
@@ -95,6 +116,10 @@ NULL
 #' @param lag A count; the body uses it as \code{seq_len(...)}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .t4_lrvnw(u = x, lag = 3L)
+#' res
 .t4_lrvnw <- function(u, lag) {
   n <- length(u)
   s <- sum(u * u) / n
@@ -108,7 +133,8 @@ NULL
 
 #' .t4_olsfit
 #'
-#' A step of the tail4_core implementation. Called by \code{.t4_poly4}, \code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
+#' A step of the tail4_core implementation. Called by \code{.t4_poly4},
+#' \code{.t4_wls_int}, \code{Lctest} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -116,6 +142,11 @@ NULL
 #' @param y A matrix; passed to \code{crossprod}.
 #' @return A list with \code{beta}, \code{fitted}, \code{resid}, \code{xtxinv}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .t4_olsfit(X = x, y = y)
+#' res
 .t4_olsfit <- function(X, y) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -136,6 +167,11 @@ NULL
 #' @param y A vector; indexed elementwise.
 #' @return The value of \code{S}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .t4_kendallS(x = x, y = y)
+#' res
 .t4_kendallS <- function(x, y) {
   n <- length(x)
   S <- 0
@@ -157,6 +193,11 @@ NULL
 #' @param y Passed to \code{.t4_kendallS}.
 #' @return A list with \code{tau}, \code{z}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .t4_kendalltaub(x = x, y = y)
+#' res
 .t4_kendalltaub <- function(x, y) {
   n <- length(x)
   S <- .t4_kendallS(x, y)
@@ -179,13 +220,17 @@ NULL
 
 #' .t4_result
 #'
-#' A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest}, \code{Boxpierce} and 13 others in the module.
+#' A step of the tail4_core implementation. Called by \code{Avgpathlen}, \code{Beggtest},
+#' \code{Boxpierce} and 13 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param ... Passed through.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .t4_result()
+#' res
 .t4_result <- function(...) {
   out <- list(...)
   class(out) <- c("morie_rich_result", "list")

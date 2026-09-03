@@ -39,7 +39,8 @@
 #' @param x Passed to \code{unlist}.
 #' @param patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param pad_value Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
-#' @return A list with \code{patches}, \code{n_patches}, \code{patch_len}, \code{n_padded}, \code{L}, \code{note}.
+#' @return A list with \code{patches}, \code{n_patches}, \code{patch_len},
+#' \code{n_padded}, \code{L}, \code{note}.
 #' @export
 morie_timesfm_input_patches <- function(x, patch_len, pad_value = 0) {
   v <- as.numeric(unlist(x))
@@ -82,7 +83,8 @@ morie_timesfm_causal_mask <- function(n_patches) {
 
 #' morie_timesfm_rollout_steps
 #'
-#' A step of the timesfm_native implementation. Called by \code{morie_timesfm}, \code{morie_timesfm_horizon_plan}.
+#' A step of the timesfm_native implementation. Called by \code{morie_timesfm},
+#' \code{morie_timesfm_horizon_plan}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -108,7 +110,9 @@ morie_timesfm_rollout_steps <- function(horizon, output_patch_len) {
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
 #' @param input_patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param output_patch_len Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{steps_asymmetric}, \code{steps_symmetric}, \code{steps_direct}, \code{input_patch_len}, \code{output_patch_len}, \code{horizon}, \code{speedup_vs_symmetric}, \code{note}.
+#' @return A list with \code{steps_asymmetric}, \code{steps_symmetric},
+#' \code{steps_direct}, \code{input_patch_len}, \code{output_patch_len}, \code{horizon},
+#' \code{speedup_vs_symmetric}, \code{note}.
 #' @export
 morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
                                        output_patch_len) {
@@ -136,7 +140,9 @@ morie_timesfm_horizon_plan <- function(horizon, input_patch_len,
 #' @param horizon Passed to \code{morie_timesfm_rollout_steps}.
 #' @param input_patch_len Coerced to integer by the body, with \code{as.integer}.
 #' @param output_patch_len Coerced to integer by the body, with \code{as.integer}.
-#' @return A list with \code{estimate}, \code{forecast}, \code{steps}, \code{horizon}, \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to}, \code{method}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{steps}, \code{horizon},
+#' \code{input_patch_len}, \code{output_patch_len}, \code{context_grew_to},
+#' \code{method}.
 #' @export
 morie_timesfm <- function(history, predictor, horizon, input_patch_len,
                           output_patch_len) {

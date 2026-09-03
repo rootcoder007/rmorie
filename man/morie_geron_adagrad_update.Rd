@@ -19,7 +19,7 @@ morie_geron_adagrad_update(theta, grad, s, eta, eps = 1e-10)
 List with \code{theta_new}, \code{s_new}, \code{effective_lr}, \code{step}, \code{step_norm}.
 }
 \description{
-Same kernel as \code{\link[=morie_geron_adagrad]{morie_geron_adagrad()}}, with grada2's positive-step
+Same kernel as \code{morie_geron_adagrad()}, with grada2's positive-step
 convention: theta_new = theta - step, step = effective_lr * g.
 }
 \examples{

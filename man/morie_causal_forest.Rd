@@ -43,7 +43,7 @@ itself, so it is not scale-free.}
 }
 \value{
 List with \code{cate}, \code{cate_oob}, \code{ate}, \code{cate_sd}, \code{n_trees},
-\code{n}, and \code{forest} (usable with \code{\link[=morie_causal_forest_predict]{morie_causal_forest_predict()}}).
+\code{n}, and \code{forest} (usable with \code{morie_causal_forest_predict()}).
 }
 \description{
 Each tree splits on one half of a subsample by maximising the

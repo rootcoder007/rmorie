@@ -239,10 +239,14 @@ test_that("morie_kmeans_clustering coerces a plain vector to a column matrix", {
 })
 
 test_that("morie_ksr01_kosorok_empirical_process evaluates the empirical process at given points", {
-  set.seed(1); xs <- rnorm(60); t <- seq(-2, 2, by = 0.5); F <- pnorm(t)
+  set.seed(1)
+  xs <- rnorm(60)
+  t <- seq(-2, 2, by = 0.5)
+  F <- pnorm(t)
   r <- morie_ksr01_kosorok_empirical_process(xs, t, F)
   expect_true(all(c("Fn", "Gn", "cov", "sup_abs", "n", "k", "method") %in% names(r)))
-  expect_length(r$Fn, length(t)); expect_length(r$Gn, length(t))
+  expect_length(r$Fn, length(t))
+  expect_length(r$Gn, length(t))
   # G_n = sqrt(n) (F_n - F) at every t
   expect_equal(r$Gn, sqrt(60) * (r$Fn - F), tolerance = 1e-12)
   expect_true(is.finite(r$sup_abs) && r$sup_abs >= 0)
@@ -265,7 +269,9 @@ test_that("morie_ksr02_kosorok_donsker_class returns a finite bracketing integra
 })
 
 test_that("morie_ksr03_kosorok_glivenko_cantelli returns the KS statistic and DKW bound", {
-  set.seed(2); xs <- sort(rnorm(80)); F <- pnorm(xs)
+  set.seed(2)
+  xs <- sort(rnorm(80))
+  F <- pnorm(xs)
   r <- morie_ksr03_kosorok_glivenko_cantelli(xs, F)
   expect_true(all(c("statistic", "d_plus", "d_minus", "dkw_bound", "n") %in% names(r)))
   expect_equal(r$statistic, max(r$d_plus, r$d_minus), tolerance = 1e-12)
@@ -318,7 +324,8 @@ test_that("morie_ksr06_kosorok_maximal_inequality returns a finite RHS bound", {
 })
 
 test_that("morie_ksr07_kosorok_bootstrap_empirical returns the bootstrap summary of G_n", {
-  set.seed(3); xs <- rnorm(50)
+  set.seed(3)
+  xs <- rnorm(50)
   r <- morie_ksr07_kosorok_bootstrap_empirical(xs, B = 100, seed = 1)
   expect_true(all(c("estimate", "boot_mean", "boot_sd", "ci_lower", "ci_upper", "B", "n") %in% names(r)))
   expect_true(is.finite(r$boot_sd) && r$boot_sd >= 0)
@@ -342,7 +349,8 @@ test_that("morie_ksr07_kosorok_bootstrap_empirical supports deterministic_seed",
 })
 
 test_that("morie_ksr08_kosorok_multiplier_bootstrap returns the multiplier-bootstrap summary", {
-  set.seed(3); xs <- rnorm(50)
+  set.seed(3)
+  xs <- rnorm(50)
   r <- morie_ksr08_kosorok_multiplier_bootstrap(xs, B = 100, seed = 1)
   expect_true(all(c("estimate", "boot_mean", "boot_sd", "ci_lower", "ci_upper", "B", "n") %in% names(r)))
   expect_true(is.finite(r$boot_sd) && r$boot_sd >= 0)

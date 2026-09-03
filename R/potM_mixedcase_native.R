@@ -3,7 +3,8 @@
 
 #' .potM_loglik
 #'
-#' A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle}, \code{.potM_neg_loglik}.
+#' A step of the potM_mixedcase_native implementation. Called by \code{.potM_gpd_mle},
+#' \code{.potM_neg_loglik}.
 #' See the file header for the source the module follows.
 #' for the source it follows.
 #'
@@ -14,14 +15,18 @@
 #' @export
 .potM_loglik <- function(z, sigma, xi) {
   k <- length(z)
-  if (sigma <= 0) return(-Inf)
+  if (sigma <= 0) {
+    return(-Inf)
+  }
   if (abs(xi) < 1e-9) {
     # Exponential limit (xi -> 0): Gumbel
     return(-k * log(sigma) - sum(z) / sigma)
   } else {
     # General GPD
-    if (any(1 + xi * z / sigma <= 0)) return(-Inf)
-    return(-k * log(sigma) - (1 + 1/xi) * sum(log(1 + xi * z / sigma)))
+    if (any(1 + xi * z / sigma <= 0)) {
+      return(-Inf)
+    }
+    return(-k * log(sigma) - (1 + 1 / xi) * sum(log(1 + xi * z / sigma)))
   }
 }
 
@@ -35,11 +40,18 @@
 #' @param z Passed to \code{.potM_loglik}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .potM_neg_loglik(par = x, z = y)
+#' res
 .potM_neg_loglik <- function(par, z) {
   sigma <- par[1]
   xi <- par[2]
   ll <- .potM_loglik(z, sigma, xi)
-  if (is.na(ll) || !is.finite(ll)) return(1e10)
+  if (is.na(ll) || !is.finite(ll)) {
+    return(1e10)
+  }
   -ll
 }
 
@@ -130,8 +142,11 @@
 #'
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param u Numeric; combined arithmetically in the body.
-#' @param return_periods Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{c(10, 100)}.
-#' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov}, \code{n_exceedances}, \code{n}, \code{rate}, \code{return_levels}, \code{threshold}, \code{converged}, \code{method}.
+#' @param return_periods Coerced to numeric by the body, with \code{as.numeric}. Defaults
+#' to \code{c(10, 100)}.
+#' @return A list with \code{sigma}, \code{xi}, \code{loglik}, \code{cov},
+#' \code{n_exceedances}, \code{n}, \code{rate}, \code{return_levels}, \code{threshold},
+#' \code{converged}, \code{method}.
 #' @export
 morie_potM <- function(y, u, return_periods = c(10.0, 100.0)) {
   yv <- as.numeric(y)

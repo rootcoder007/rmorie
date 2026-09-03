@@ -81,6 +81,11 @@
 #' @param b Numeric; passed to \code{.w3_csum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .blinkg_corr(a = A, b = b)
+#' res
 .blinkg_corr <- function(a, b) {
   n <- length(a)
   ma <- .w3_csum(a) / n
@@ -95,7 +100,8 @@
 # Intercept, fixed covariates, then the given genotype columns.
 #' Intercept, fixed covariates, then the given genotype columns
 #'
-#' A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan}, \code{morie_blinkg_select}.
+#' A step of the blinkg_native implementation. Called by \code{morie_blinkg_scan},
+#' \code{morie_blinkg_select}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

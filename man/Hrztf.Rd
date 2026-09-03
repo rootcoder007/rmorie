@@ -35,7 +35,7 @@ y_grid, y0, index, F_in_unit, A_le_B, n, method.
 \description{
 Horowitz (2009), Semiparametric and Nonparametric Methods in
 Econometrics, Section 6.3, pages 215-219.  Adds the estimator of F
-to the estimator of T implemented in \code{\link[=Hrztmod]{Hrztmod()}}.  Because U is
+to the estimator of T implemented in \code{Hrztmod()}.  Because U is
 independent of X, P(U <= u | a < Z <= b) = F(u) for any a, b in the
 support of Z, so for any y2 < y1
 }

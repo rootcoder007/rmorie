@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Layer normalisation
 #'
-#' Formula: mu = (1/H) sum_i a_i, sigma = sqrt((1/H) sum_i (a_i - mu)^2), y = gamma (a - mu)/sigma + beta
+#' Formula: mu = (1/H) sum_i a_i, sigma = sqrt((1/H) sum_i (a_i - mu)^2), y = gamma (a -
+#' mu)/sigma + beta
 #'
 #' @param x One sample per row; a flat sequence is treated as one sample.
 #' @param gamma Per-unit gain; ones if omitted.
@@ -11,7 +12,8 @@
 #' @param gamma See Usage.
 #' @param beta See Usage.
 #' @return List with ``y``, ``mu``, ``sigma``, ``n``, ``H``.
-#' @references Ba, Kiros and Hinton (2016), Layer Normalization, arXiv:1607.06450, equation (3). Verified against the paper.
+#' @references Ba, Kiros and Hinton (2016), Layer Normalization, arXiv:1607.06450,
+#' equation (3). Verified against the paper.
 #' @export
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)

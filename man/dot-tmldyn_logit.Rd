@@ -17,3 +17,7 @@ A step of the tmldyn_native implementation. No other function in the package cal
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .tmldyn_logit(p = 0.5)
+res
+}

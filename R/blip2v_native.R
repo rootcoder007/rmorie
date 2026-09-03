@@ -38,7 +38,8 @@ query_tokens <- function(n_queries, dim, seed = 0, scale = 0.02) {
 #' @param WQ A matrix; passed to \code{nrow}.
 #' @param WK Passed to \code{proj}.
 #' @param WV A matrix; passed to \code{ncol}.
-#' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches}, \code{compression}, \code{note}.
+#' @return A list with \code{output}, \code{weights}, \code{n_queries}, \code{n_patches},
+#' \code{compression}, \code{note}.
 #' @export
 qformer_attend <- function(queries, image_features, WQ, WK, WV) {
   Q <- as.matrix(queries)
@@ -80,7 +81,8 @@ qformer_attend <- function(queries, image_features, WQ, WK, WV) {
 #' @param qformer_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @param frozen_vision_params Coerced to numeric by the body, with \code{as.numeric}.
 #' @param frozen_llm_params Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{trainable}, \code{total}, \code{fraction}, \code{frozen_fraction}, \code{note}.
+#' @return A list with \code{trainable}, \code{total}, \code{fraction},
+#' \code{frozen_fraction}, \code{note}.
 #' @export
 trainable_fraction <- function(qformer_params, frozen_vision_params,
                                frozen_llm_params) {
@@ -101,8 +103,10 @@ trainable_fraction <- function(qformer_params, frozen_vision_params,
 #'
 #' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param text_out Coerced to numeric by the body, with \code{as.numeric}.
-#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.07}.
-#' @return A list with \code{per_query_similarity}, \code{image_text_similarity}, \code{best_query}, \code{logit}, \code{note}.
+#' @param temperature Coerced to numeric by the body, with \code{as.numeric}. Defaults to
+#' \code{0.07}.
+#' @return A list with \code{per_query_similarity}, \code{image_text_similarity},
+#' \code{best_query}, \code{logit}, \code{note}.
 #' @export
 stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
   Q <- as.matrix(query_out)
@@ -135,7 +139,8 @@ stage_one_objectives <- function(query_out, text_out, temperature = 0.07) {
 #' @param query_out A matrix; passed to \code{as.matrix}.
 #' @param W A matrix; passed to \code{nrow}.
 #' @param b Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim},
+#' \code{method}, \code{note}.
 #' @export
 project_to_llm <- function(query_out, W, b = NULL) {
   Q <- as.matrix(query_out)

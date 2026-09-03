@@ -119,7 +119,8 @@
 
 #' .bnppvl_ab
 #'
-#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw}, \code{morie_bnppvl_log_prior}.
+#' A step of the bnppvl_native implementation. Called by \code{morie_bnppvl_draw},
+#' \code{morie_bnppvl_log_prior}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -394,6 +395,10 @@ morie_bnppvl_loglik <- function(u, q, kind = "exact") {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return The value of \code{q}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .bnppvl_empirical_start(u = x, k = 3L)
+#' res
 .bnppvl_empirical_start <- function(u, k) {
   n <- length(u)
   su <- sort(u, method = "radix")

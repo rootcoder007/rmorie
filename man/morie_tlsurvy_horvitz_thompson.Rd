@@ -44,5 +44,6 @@ Springer, doi:10.1007/978-3-319-65304-4_29.
 }
 \keyword{internal}
 \examples{
-morie_tlsurvy_horvitz_thompson(values = c(1, 2, 3, 4, 5, 6, 7, 8), pi = c(1, 2, 3, 4, 5, 6, 7, 8), selected = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_tlsurvy_horvitz_thompson(values = c(1, 2, 3, 4, 5, 6, 7, 8),
+  pi = c(1, 2, 3, 4, 5, 6, 7, 8), selected = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

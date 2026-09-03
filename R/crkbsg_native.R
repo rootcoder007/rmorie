@@ -19,6 +19,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .crkbsg_rows(x = x)
+#' res
 .crkbsg_rows <- function(x) {
   if (is.matrix(x)) {
     m <- x
@@ -69,6 +73,11 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .crkbsg_dist(a = A, b = b)
+#' res
 .crkbsg_dist <- function(a, b) sqrt(sum((a - b) ^ 2))
 
 # Gaussian elimination with partial pivoting. The cokriging matrix is
@@ -83,6 +92,11 @@
 #' @param b A vector; its length is taken.
 #' @return The value of \code{x}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .crkbsg_solve(A = A, b = b)
+#' res
 .crkbsg_solve <- function(A, b) {
   n <- length(b)
   M <- cbind(A, b)
@@ -125,9 +139,15 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param z Coerced to numeric by the body, with \code{as.numeric}.
 #' @param s_predict Passed to \code{.crkbsg_rows}.
-#' @param cross_variogram Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param cross_variogram Optional; may be \code{NULL}. A vector; its length is taken and
+#' its elements indexed.
 #' @param coords_z Optional; may be \code{NULL}. Passed to \code{.crkbsg_rows}.
-#' @return A list with \code{estimate}, \code{prediction}, \code{variance}, \code{std_error}, \code{kriging_prediction}, \code{kriging_variance}, \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary}, \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix}, \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{prediction}, \code{variance},
+#' \code{std_error}, \code{kriging_prediction}, \code{kriging_variance},
+#' \code{variance_reduction}, \code{weights_primary}, \code{weights_secondary},
+#' \code{lagrange}, \code{targets}, \code{coregionalisation}, \code{nugget_matrix},
+#' \code{model}, \code{range}, \code{n_primary}, \code{n_secondary}, \code{method},
+#' \code{note}.
 #' @export
 morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
                                    cross_variogram = NULL, coords_z = NULL) {
@@ -264,6 +284,9 @@ morie_crkbsg_cokriging <- function(coords, y, z, s_predict,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .crkbsg_cheatsheet()
+#' res
 .crkbsg_cheatsheet <- function() {
   paste0("crkbsg: morie_crkbsg_cokriging(coords, y, z, s_predict, ",
          "cross_variogram) -> ordinary cokriging prediction and variance ",

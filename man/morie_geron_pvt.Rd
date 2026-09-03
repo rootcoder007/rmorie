@@ -20,7 +20,8 @@ A list with \code{tokens}, \code{stages}, \code{output_shape}, \code{n_parameter
 }
 \keyword{internal}
 \examples{
-img <- array(0:47, dim = c(3, 4, 4)); img <- aperm(img, c(3, 2, 1))  # numpy arange(48).reshape(4,4,3), row-major
+img <- array(0:47, dim = c(3, 4, 4))
+img <- aperm(img, c(3, 2, 1))  # numpy arange(48).reshape(4,4,3), row-major
 Wm <- matrix(1 / 12, 12, 1)
 r <- morie_geron_pvt(img, list(list(patch_size = 2, dim = 1, W = Wm)))
 r$output_shape

@@ -79,6 +79,10 @@
 #' @param x Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hybRC_vec(x = x)
+#' res
 .hybRC_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   as.numeric(unlist(x))
@@ -93,6 +97,10 @@
 #' @param x Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hybRC_mat(x = x)
+#' res
 .hybRC_mat <- function(x) {
   if (is.null(x)) return(matrix(numeric(0), nrow = 0, ncol = 0))
   if (is.list(x) && !is.data.frame(x)) {
@@ -220,7 +228,8 @@ switching <- function(scores, criterion, context = NULL) {
 #' source it follows.
 #'
 #' @param recommendations Iterated over elementwise, with \code{lapply}.
-#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param top_k Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A list with \code{presented}, \code{n_sources}, \code{note}.
 #' @export
 mixed <- function(recommendations, top_k = NULL) {
@@ -302,7 +311,8 @@ feature_combination <- function(content_features, collaborative_features) {
 #' @param primary Coerced to list by the body, with \code{as.list}.
 #' @param secondary Coerced to list by the body, with \code{as.list}.
 #' @param tol Numeric; passed to \code{max}. Defaults to \code{1e-09}.
-#' @return A list with \code{ranking}, \code{tie_groups_broken}, \code{primary_respected}, \code{note}.
+#' @return A list with \code{ranking}, \code{tie_groups_broken},
+#' \code{primary_respected}, \code{note}.
 #' @export
 cascade <- function(primary, secondary, tol = 1e-9) {
   P <- as.list(primary)
@@ -380,6 +390,9 @@ meta_level <- function(model_builder, consumer, data) {
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hybRC_cheatsheet()
+#' res
 .hybRC_cheatsheet <- function() {
   paste("hybRC: collaborative filtering cannot recommend what",
         "nobody rated; content-based filtering cannot surprise",
@@ -403,26 +416,3 @@ hybridrec <- weighted
 
 # Entry point
 morie_hybRC <- weighted
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

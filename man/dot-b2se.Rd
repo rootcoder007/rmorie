@@ -17,3 +17,7 @@ A step of the b2gpts implementation. Called by \code{Gppost}, \code{Gpreg}, \cod
 See the file header for the source the module follows.
 it follows.
 }
+\examples{
+res <- .b2se()
+res
+}

@@ -71,13 +71,17 @@
 
 #' .morie_lda_e_log_theta
 #'
-#' A step of the lda_native implementation. Called by \code{.morie_lda_elbo}, \code{.morie_lda_variational_inference}.
+#' A step of the lda_native implementation. Called by \code{.morie_lda_elbo},
+#' \code{.morie_lda_variational_inference}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param gamma Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_lda_e_log_theta(gamma = 0.5)
+#' res
 .morie_lda_e_log_theta <- function(gamma) {
   g <- as.numeric(gamma)
   if (any(g <= 0.0)) {
@@ -98,9 +102,10 @@
 #' @param beta A matrix; passed to \code{as.matrix}.
 #' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{100}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-08}.
-#' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged}, \code{K}, \code{N}, \code{topic_proportions}.
+#' @return A list with \code{phi}, \code{gamma}, \code{iterations}, \code{converged},
+#' \code{K}, \code{N}, \code{topic_proportions}.
 #' @export
-.morie_lda_variational_inference <- function(doc, alpha, beta, iters=100, tol=1e-8) {
+.morie_lda_variational_inference <- function(doc, alpha, beta, iters = 100, tol = 1e-8) {
   w <- as.integer(doc)
   B <- as.matrix(beta)
   storage.mode(B) <- "double"
@@ -121,14 +126,14 @@
     stop(sprintf("lda: alpha has %d entries for %d topics", length(a), K))
   }
   if (any(a <= 0.0)) stop("lda: alpha must be strictly positive")
-  phi <- matrix(1.0 / K, nrow=N, ncol=K)
+  phi <- matrix(1.0 / K, nrow = N, ncol = K)
   gam <- a + N / as.numeric(K)
   it <- 0
   conv <- FALSE
   for (i in seq_len(iters)) {
     it <- i
     elog <- .morie_lda_e_log_theta(gam)
-    new_phi <- matrix(0, nrow=N, ncol=K)
+    new_phi <- matrix(0, nrow = N, ncol = K)
     for (n in seq_len(N)) {
       row <- B[, w[n]] * exp(elog)
       z <- sum(row)
@@ -146,8 +151,10 @@
       break
     }
   }
-  list(phi=phi, gamma=gam, iterations=it, converged=conv, K=K, N=N,
-       topic_proportions=gam/sum(gam))
+  list(
+    phi = phi, gamma = gam, iterations = it, converged = conv, K = K, N = N,
+    topic_proportions = gam / sum(gam)
+  )
 }
 
 #' .morie_lda_elbo
@@ -206,17 +213,19 @@
 #' @param inner Passed to \code{.morie_lda_variational_inference}. Defaults to \code{50}.
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-06}.
-#' @return A list with \code{estimate}, \code{beta}, \code{elbo_history}, \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations}, \code{method}.
+#' @return A list with \code{estimate}, \code{beta}, \code{elbo_history},
+#' \code{final_elbo}, \code{K}, \code{V}, \code{n_docs}, \code{iterations},
+#' \code{method}.
 #' @export
-.morie_lda_variational_em <- function(docs, K, V, alpha=0.1, iters=30, inner=50,
-                                      seed=0, tol=1e-6) {
+.morie_lda_variational_em <- function(docs, K, V, alpha = 0.1, iters = 30, inner = 50,
+                                      seed = 0, tol = 1e-6) {
   D <- lapply(docs, as.integer)
   if (length(D) == 0) stop("lda: no documents given")
   if (as.integer(K) < 1 || as.integer(V) < 1) stop("lda: K and V must be at least 1")
   rng <- .ghc_rng(seed)
   K <- as.integer(K)
   V <- as.integer(V)
-  B <- matrix(0, nrow=K, ncol=V)
+  B <- matrix(0, nrow = K, ncol = V)
   for (kk in seq_len(K)) {
     u <- .ghc_unif(rng, V)
     row <- 0.1 + u
@@ -226,11 +235,11 @@
   hist <- c()
   prev <- NULL
   for (it in seq_len(iters)) {
-    counts <- matrix(.morie_lda_eps, nrow=K, ncol=V)
+    counts <- matrix(.morie_lda_eps, nrow = K, ncol = V)
     total <- 0.0
     for (d in D) {
       if (length(d) == 0) next
-      r <- .morie_lda_variational_inference(d, alpha, B, iters=inner)
+      r <- .morie_lda_variational_inference(d, alpha, B, iters = inner)
       total <- total + .morie_lda_elbo(d, alpha, B, r$phi, r$gamma)
       for (n in seq_along(d)) {
         wn <- d[n]
@@ -248,11 +257,11 @@
     prev <- total
   }
   list(
-    estimate=B, beta=B, elbo_history=hist,
-    final_elbo=if (length(hist) > 0) hist[length(hist)] else NaN,
-    K=K, V=V, n_docs=length(D),
-    iterations=length(hist),
-    method="variational EM; Blei, Ng & Jordan (2003) Sec. 5.1, eqs. (6)-(8)"
+    estimate = B, beta = B, elbo_history = hist,
+    final_elbo = if (length(hist) > 0) hist[length(hist)] else NaN,
+    K = K, V = V, n_docs = length(D),
+    iterations = length(hist),
+    method = "variational EM; Blei, Ng & Jordan (2003) Sec. 5.1, eqs. (6)-(8)"
   )
 }
 
@@ -267,15 +276,18 @@
 #' @param vocab Optional; may be \code{NULL}. A vector; indexed elementwise.
 #' @return The value of \code{out}, as built in the body.
 #' @export
-.morie_lda_topic_words <- function(beta, n_top=5, vocab=NULL) {
+.morie_lda_topic_words <- function(beta, n_top = 5, vocab = NULL) {
   B <- as.matrix(beta)
   storage.mode(B) <- "double"
   out <- list()
   for (i in seq_len(nrow(B))) {
-    idx <- order(B[i, ], decreasing=TRUE)[seq_len(min(as.integer(n_top), ncol(B)))]
+    idx <- order(B[i, ], decreasing = TRUE)[seq_len(min(as.integer(n_top), ncol(B)))]
     out[[i]] <- lapply(idx, function(j) {
-      if (is.null(vocab)) list(j, B[i, j])
-      else list(vocab[j], B[i, j])
+      if (is.null(vocab)) {
+        list(j, B[i, j])
+      } else {
+        list(vocab[j], B[i, j])
+      }
     })
   }
   return(out)
@@ -289,6 +301,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .morie_lda_cheatsheet()
+#' res
 .morie_lda_cheatsheet <- function() {
   paste(c(
     "lda: theta ~ Dir(alpha), z_n ~ Mult(theta), w_n ~ ",
@@ -300,7 +315,8 @@
     "= Psi(gamma_i) - Psi(sum gamma). Note it is exp(E[log]) ",
     "not E[.] -- smaller by Jensen, which is why variational ",
     "inference under-weights rare topics. The bound only ",
-    "rises."), collapse="")
+    "rises."
+  ), collapse = "")
 }
 
 # public names resolved by fn/_lazy_map.json

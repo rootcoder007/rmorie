@@ -25,5 +25,6 @@ The value of \code{.log_evidence}.
 }
 \keyword{internal}
 \examples{
-log_evidence(docs = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8), z = c(1, 2, 3, 4, 5, 6, 7, 8))
+log_evidence(docs = c(1, 2, 3, 4, 5, 6, 7, 8), T = 5L, V = c(1, 2, 3, 4, 5, 6, 7, 8),
+  z = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -49,7 +49,8 @@
 # ----- Set operations on character vectors -----
 #' Set operations on character vectors -----
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 2 others in the module.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq},
+#' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -57,10 +58,16 @@
 #' @param b Passed to \code{c}.
 #' @return The value of \code{unique}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .prsLL_union(a = A, b = b)
+#' res
 .prsLL_union <- function(a, b) unique(c(a, b))
 #' .prsLL_setdiff
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq}, \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_seq},
+#' \code{.prsLL_follow_sets}, \code{.prsLL_ll1_table}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -68,10 +75,16 @@
 #' @param b Passed to \code{\%in\%}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .prsLL_setdiff(a = A, b = b)
+#' res
 .prsLL_setdiff <- function(a, b) a[!(a %in% b)]
 #' .prsLL_subset
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets}, \code{.prsLL_follow_sets}.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_sets},
+#' \code{.prsLL_follow_sets}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -79,17 +92,24 @@
 #' @param b Passed to \code{\%in\%}.
 #' @return A logical value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .prsLL_subset(a = A, b = b)
+#' res
 .prsLL_subset <- function(a, b) all(a %in% b)
 
 # ----- Grammar construction and validation -----
 #' Grammar construction and validation -----
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}.
+#' A step of the prsLL_native implementation. Called by
+#' \code{.prsLL_remove_left_recursion}, \code{morie_prsLL}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param rules See Usage.
-#' @param start Optional; may be \code{NULL}. Coerced to character by the body, with \code{as.character}.
+#' @param start Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
 #' @return The value of \code{g}, as built in the body.
 #' @export
 .prsLL_grammar <- function(rules, start = NULL) {
@@ -159,7 +179,8 @@
 
 #' .prsLL_nonterminals
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 8 others in the module.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
+#' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 8 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -202,7 +223,8 @@
 # ----- FIRST and FOLLOW sets -----
 #' FIRST and FOLLOW sets -----
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_follow_sets}, \code{.prsLL_left_recursive} and 1 others in the module.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
+#' \code{.prsLL_follow_sets}, \code{.prsLL_left_recursive} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -231,7 +253,8 @@
 
 #' .prsLL_first_seq
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of}, \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_first_of},
+#' \code{.prsLL_first_sets}, \code{.prsLL_follow_sets} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -361,7 +384,8 @@
 #' source it follows.
 #'
 #' @param g Passed to \code{.prsLL_ll1_table}.
-#' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table}, \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
+#' @return A list with \code{estimate}, \code{ll1}, \code{conflicts}, \code{table},
+#' \code{first}, \code{follow}, \code{left_recursive}, \code{method}.
 #' @export
 .prsLL_is_ll1 <- function(g) {
   t <- .prsLL_ll1_table(g)
@@ -484,7 +508,8 @@
 # ----- Parse tree nodes -----
 #' Parse tree nodes -----
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
+#' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -497,7 +522,8 @@
 
 #' .prsLL_node
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
+#' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -512,7 +538,8 @@
 # ----- Parsing -----
 #' Parsing -----
 #'
-#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd}, \code{.prsLL_parse_table}.
+#' A step of the prsLL_native implementation. Called by \code{.prsLL_parse_rd},
+#' \code{.prsLL_parse_table}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -681,7 +708,8 @@
 #' @param grammar_ A list; the body reads \code{$rules}, \code{$start} from it.
 #' @param tokens Passed to \code{.prsLL_parse}.
 #' @param route Passed to \code{.prsLL_parse}. Defaults to \code{"table"}.
-#' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens}, \code{yield}, \code{method}.
+#' @return A list with \code{estimate}, \code{tree}, \code{route}, \code{tokens},
+#' \code{yield}, \code{method}.
 #' @export
 morie_prsLL <- function(grammar_, tokens, route = "table") {
   if (is.list(grammar_) && !is.null(grammar_$rules) && !is.null(grammar_$start)) {

@@ -298,7 +298,8 @@ test_that("hmdthv: tree variance via bootstrap matches Python", {
 })
 
 test_that("hmdtr: tree regularization matches Python", {
-  X <- matrix(c(1, 2, 3, 4), 4, 1); y <- c(0, 0, 1, 1)
+  X <- matrix(c(1, 2, 3, 4), 4, 1)
+  y <- c(0, 0, 1, 1)
   r <- morie_geron_tree_regularization(X, y, max_depth = 0)
   expect_equal(r$n_leaves, A4a$hmdtr$n_leaves)
   expect_equal(r$baseline_leaves, A4a$hmdtr$baseline_leaves)
@@ -311,7 +312,8 @@ test_that("hmdtr: tree regularization matches Python", {
 })
 
 test_that("hmdtst: tree scale invariance matches Python", {
-  X <- matrix(c(1, 5, 2, 4, 3, 9, 4, 1), 4, 2, byrow = TRUE); y <- c(0, 0, 1, 1)
+  X <- matrix(c(1, 5, 2, 4, 3, 9, 4, 1), 4, 2, byrow = TRUE)
+  y <- c(0, 0, 1, 1)
   r <- morie_geron_tree_sensitivity_scale(X, y)
   expect_equal(r$predictions_match, A4a$hmdtst$pred_match)
   expect_equal(r$thresholds_match, A4a$hmdtst$thr_match)
@@ -330,7 +332,8 @@ test_that("hmeaf: error analysis matches Python", {
 })
 
 test_that("hmearl: early stopping keeps the best snapshot, matches Python", {
-  Xt <- matrix(c(0, 1, 2, 3), 4, 1); yt <- c(0, 2, 4, 6)
+  Xt <- matrix(c(0, 1, 2, 3), 4, 1)
+  yt <- c(0, 2, 4, 6)
   r <- morie_geron_early_stopping_alt(Xt, yt, matrix(c(4, 5), 2, 1), c(8, 10), n_iter = 200, eta = 0.05)
   expect_equal(r$best_iter == 200, A4a$hmearl$best_iter_eq_200)
   expect_equal(round(r$theta[2], 2), A4a$hmearl$theta1_round2)
@@ -513,7 +516,8 @@ test_that("hmgand: GMM anomaly detection matches Python", {
 })
 
 test_that("hmgbrt: gradient boosting matches Python", {
-  X <- matrix(c(1, 2, 3, 4), 4, 1); y <- c(0, 0, 10, 10)
+  X <- matrix(c(1, 2, 3, 4), 4, 1)
+  y <- c(0, 0, 10, 10)
   r <- morie_geron_gradient_boosting(X, y, n_estimators = 1, learning_rate = 0.1, max_depth = 1)
   expect_equal(r$init, A4a$hmgbrt$init)
   expect_equal(round(r$predictions, 6), A4a$hmgbrt$predictions)
@@ -572,7 +576,8 @@ test_that("hmgrp: Gaussian random projection matches Python's isometry-in-expect
 })
 
 test_that("hmgrs: grid search selects on cross-validated score, matches Python", {
-  X <- matrix(c(1, 1, 1, 2, 1, 3, 1, 4), 4, 2, byrow = TRUE); y <- c(3, 5, 7, 9)
+  X <- matrix(c(1, 1, 1, 2, 1, 3, 1, 4), 4, 2, byrow = TRUE)
+  y <- c(3, 5, 7, 9)
   r <- morie_geron_grid_search(list(alpha = c(0.0, 1.0, 100.0)), X, y, K = 2)
   expect_equal(r$best_params, A4a$hmgrs$best_params)
   expect_equal(round(r$best_score, 8), A4a$hmgrs$best_score)

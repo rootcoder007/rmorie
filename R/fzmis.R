@@ -2,7 +2,8 @@
 
 #' Fauzi: MISE decomposition for Gaussian KDE (Ch 1)
 #'
-#' \deqn{\mathrm{MISE}(h) = (h^4/4)\mu_2^2 R(f'') + R(K)/(nh).}{MISE(h) = (h^4/4)mu_2^2 R(f'') + R(K)/(nh).}
+#' \deqn{\mathrm{MISE}(h) = (h^4/4)\mu_2^2 R(f'') + R(K)/(nh).}{MISE(h) = (h^4/4)mu_2^2
+#' R(f'') + R(K)/(nh).}
 #' With normal-reference plug-in \eqn{R(f'')=3/(8\sqrt\pi \sigma^5)}{R(f'')=3/(8sqrtpi sigma^5)}.
 #' Returns h_opt minimising MISE.
 #'

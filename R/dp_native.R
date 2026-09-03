@@ -13,14 +13,19 @@
 
 #' .morie_dp_check_budget
 #'
-#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module.
+#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
+#' \code{morie_dp_count}, \code{morie_dp_covariance} and 12 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param epsilon Coerced to numeric by the body, with \code{as.numeric}.
-#' @param delta Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param delta Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A list with \code{epsilon}, \code{delta}.
 #' @export
+#' @examples
+#' res <- .morie_dp_check_budget(epsilon = 0.5)
+#' res
 .morie_dp_check_budget <- function(epsilon, delta = NULL) {
   epsilon <- as.numeric(epsilon)[1L]
   if (!is.finite(epsilon) || epsilon <= 0) {
@@ -37,7 +42,8 @@
 # Laplace(0, b) by inverse transform; R has no rlaplace in base.
 #' Laplace(0, b) by inverse transform; R has no rlaplace in base
 #'
-#' A step of the dp_native implementation. Called by \code{morie_dp_count}, \code{morie_dp_histogram}, \code{morie_dp_kmeans} and 3 others in the module.
+#' A step of the dp_native implementation. Called by \code{morie_dp_count},
+#' \code{morie_dp_histogram}, \code{morie_dp_kmeans} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -45,6 +51,9 @@
 #' @param scale Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .morie_dp_rlaplace(n = 3L, scale = TRUE)
+#' res
 .morie_dp_rlaplace <- function(n, scale) {
   u <- stats::runif(n) - 0.5
   -scale * sign(u) * log1p(-2 * abs(u))
@@ -52,7 +61,8 @@
 
 #' .morie_dp_gaussian_sigma
 #'
-#' A step of the dp_native implementation. Called by \code{morie_dp_covariance}, \code{morie_dp_gaussian_mechanism}.
+#' A step of the dp_native implementation. Called by \code{morie_dp_covariance},
+#' \code{morie_dp_gaussian_mechanism}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -73,7 +83,8 @@
 
 #' .morie_dp_clip
 #'
-#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint}, \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module.
+#' A step of the dp_native implementation. Called by \code{morie_dp_changepoint},
+#' \code{morie_dp_kmeans}, \code{morie_dp_quantile} and 2 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -93,13 +104,18 @@
 
 #' .morie_dp_seed
 #'
-#' A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in the module.
+#' A step of the dp_native implementation. Called by \code{morie_approx_dp},
+#' \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in
+#' the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param seed Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
 #' @return The value of \code{old}, as built in the body.
 #' @export
+#' @examples
+#' res <- .morie_dp_seed(seed = 1L)
+#' res
 .morie_dp_seed <- function(seed) {
   if (is.null(seed)) {
     return(NULL)
@@ -115,7 +131,9 @@
 
 #' .morie_dp_unseed
 #'
-#' A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in the module.
+#' A step of the dp_native implementation. Called by \code{morie_approx_dp},
+#' \code{morie_autoencoder_anomaly}, \code{morie_boot_nonoverlap_block} and 18 others in
+#' the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'

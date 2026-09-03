@@ -258,7 +258,8 @@ test_that("logistic regression separates and reports the fit", {
 })
 
 test_that("k-means finds the two groups and is reproducible", {
-  a <- KMeans(XC, 2); b <- KMeans(XC, 2)
+  a <- KMeans(XC, 2)
+  b <- KMeans(XC, 2)
   expect_equal(a$labels, b$labels)
   expect_equal(sort(a$sizes), c(4, 4))
   expect_true(a$local_minimum_only)
@@ -297,7 +298,8 @@ test_that("cross-validation keeps training and test separate", {
 })
 
 test_that("leave-one-out is deterministic and catches memorization", {
-  a <- LooCv(XC, YC); b <- LooCv(XC, YC)
+  a <- LooCv(XC, YC)
+  b <- LooCv(XC, YC)
   expect_equal(a$error_rate, b$error_rate)
   expect_equal(a$n_fits, 8L)
   expect_true(a$deterministic)
@@ -372,7 +374,8 @@ test_that("exact accuracy is a rational, not a rounded double", {
 })
 
 test_that("the KLD eq (5.33) is weighted by the second PDF", {
-  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  p1 <- c(0.2, 0.3, 0.5)
+  p2 <- c(0.1, 0.4, 0.5)
   r <- Kld(p1, p2)
   expect_close(r$kld, sum(p2 * log(p2 / p1)), tol = 1e-12)
   expect_true(r$weighted_by_the_second_pdf)
@@ -386,7 +389,8 @@ test_that("the KLD eq (5.33) is weighted by the second PDF", {
 })
 
 test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
-  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  p1 <- c(0.2, 0.3, 0.5)
+  p2 <- c(0.1, 0.4, 0.5)
   r <- PdfOverlap(p1, p2)
   expect_true(r$in_unit_interval)
   expect_close(PdfOverlap(p1, p1)$coefficient, 1, tol = 1e-12)
@@ -405,7 +409,8 @@ test_that("the Bhattacharyya coefficient is an overlap in [0, 1]", {
 })
 
 test_that("Chernoff at one half is the Bhattacharyya coefficient", {
-  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  p1 <- c(0.2, 0.3, 0.5)
+  p2 <- c(0.1, 0.4, 0.5)
   bc <- PdfOverlap(p1, p2)$coefficient
   h <- Chernoff(p1, p2, alpha = 0.5)
   expect_close(h$coefficient, bc, tol = 1e-12)
@@ -419,7 +424,8 @@ test_that("Chernoff at one half is the Bhattacharyya coefficient", {
 })
 
 test_that("Hellinger squared is one minus the coefficient", {
-  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  p1 <- c(0.2, 0.3, 0.5)
+  p2 <- c(0.1, 0.4, 0.5)
   h <- Hellinger(p1, p2)
   expect_close(h$squared, 1 - PdfOverlap(p1, p2)$coefficient, tol = 1e-12)
   expect_true(h$identity_h2_equals_one_minus_bc)
@@ -429,7 +435,9 @@ test_that("Hellinger squared is one minus the coefficient", {
 })
 
 test_that("Hellinger is a metric where the Bhattacharyya distance is not", {
-  a <- c(0.2, 0.3, 0.5); b <- c(0.1, 0.4, 0.5); cc <- c(0.5, 0.25, 0.25)
+  a <- c(0.2, 0.3, 0.5)
+  b <- c(0.1, 0.4, 0.5)
+  cc <- c(0.5, 0.25, 0.25)
   hab <- Hellinger(a, b)$hellinger
   hbc <- Hellinger(b, cc)$hellinger
   hac <- Hellinger(a, cc)$hellinger
@@ -440,7 +448,8 @@ test_that("Hellinger is a metric where the Bhattacharyya distance is not", {
 })
 
 test_that("every borrowed measure carries its primary citation", {
-  p1 <- c(0.2, 0.3, 0.5); p2 <- c(0.1, 0.4, 0.5)
+  p1 <- c(0.2, 0.3, 0.5)
+  p2 <- c(0.1, 0.4, 0.5)
   rs <- list(PdfOverlap(p1, p2), Chernoff(p1, p2), Hellinger(p1, p2),
              ErrBound(0.5, 0.5, 1), GaussOverlap(c(0, 1), c(2, -1), CC1, CC2))
   for (r in rs) {

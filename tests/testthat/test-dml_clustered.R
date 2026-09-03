@@ -12,7 +12,9 @@
   z_g <- stats::rnorm(G)                              # corridor covariate
   d_g <- stats::rbinom(G, 1, stats::plogis(0.8 * z_g))  # corridor-level treatment
   u_g <- stats::rnorm(G, 0, 1.0)                      # corridor random effect
-  z <- z_g[g]; d <- d_g[g]; u <- u_g[g]
+  z <- z_g[g]
+  d <- d_g[g]
+  u <- u_g[g]
   x <- stats::rnorm(n)
   y <- 2 * d + 0.5 * z + x + u + stats::rnorm(n, 0, 0.5)   # true ATE = 2
   data.frame(y = y, d = d, x = x, z = z, corridor = g)

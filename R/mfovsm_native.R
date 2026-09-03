@@ -51,6 +51,10 @@
 #' @param x Optional; may be \code{NULL}. A list; the body checks with \code{is.list}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mfovsm_vec(x = x)
+#' res
 .mfovsm_vec <- function(x) {
   if (is.null(x)) return(numeric(0))
   if (is.list(x)) {
@@ -68,6 +72,10 @@
 #' @param x Optional; may be \code{NULL}. A matrix; the body checks with \code{is.matrix}.
 #' @return A matrix, from \code{matrix}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mfovsm_mat(x = x)
+#' res
 .mfovsm_mat <- function(x) {
   if (is.null(x)) return(NULL)
   if (is.matrix(x)) return(x)
@@ -106,6 +114,10 @@
 #' @param q Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mfovsm_quantile7(x = x, q = 0.5)
+#' res
 .mfovsm_quantile7 <- function(x, q) {
   x <- sort(as.numeric(x))
   n <- length(x)
@@ -131,6 +143,12 @@
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
 #' @return A list with \code{coef}, \code{fitted}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .mfovsm_logreg_fit(y = y, X = X)
+#' res
 .mfovsm_logreg_fit <- function(y, X, max_iter = 25, tol = 1e-8) {
   n <- length(y)
   p <- ncol(X)
@@ -168,7 +186,8 @@
 #' @param ak A vector; its length is taken.
 #' @param den Optional; may be \code{NULL}. Passed to \code{dens_of}.
 #' @param num Optional; may be \code{NULL}. Passed to \code{dens_of}.
-#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to \code{"binary"}.
+#' @param kind Accepted by the signature and not used anywhere in the body. Defaults to
+#' \code{"binary"}.
 #' @param stabilize A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @return A list with \code{weights}, \code{fitted}.
 #' @export
@@ -251,6 +270,11 @@
 #' @param w Numeric; combined arithmetically in the body.
 #' @return A list with \code{coef}, \code{se}, \code{vcov}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .mfovsm_wls(X = x, y = y, w = x)
+#' res
 .mfovsm_wls <- function(X, y, w) {
   X <- cbind(1, X)
   n <- length(y)
@@ -288,9 +312,14 @@
 #' @param A Passed to \code{.mfovsm_hist}.
 #' @param H Passed to \code{.mfovsm_hist}.
 #' @param v_in_numerator A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}. Defaults to \code{"cumulative"}.
+#' @param contrast One of \code{"cumulative"}, \code{"everexposed"}, \code{"final"}.
+#' Defaults to \code{"cumulative"}.
 #' @param trim Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{estimate}, \code{se}, \code{main_effect}, \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef}, \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight}, \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n}, \code{n_times}, \code{contrast}, \code{method}.
+#' @return A list with \code{estimate}, \code{se}, \code{main_effect},
+#' \code{main_effect_se}, \code{feature_effect}, \code{intercept}, \code{coef},
+#' \code{vcov}, \code{weights}, \code{mean_weight}, \code{max_weight},
+#' \code{effective_sample_size}, \code{exposure}, \code{v_in_numerator}, \code{n},
+#' \code{n_times}, \code{contrast}, \code{method}.
 #' @export
 morie_mfovsm <- function(y, feature, A, H, v_in_numerator = TRUE,
                           contrast = "cumulative", trim = NULL) {

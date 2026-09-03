@@ -17,3 +17,7 @@ The value of \code{out}, as built in the body.
 \description{
 morie.fn._lcg_normal (hmncsn / hmpemb-style helpers).
 }
+\examples{
+res <- .morie_w4c_lcg_normal(n = 3L, seed = 1L)
+res
+}

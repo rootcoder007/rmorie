@@ -18,6 +18,8 @@ A list with \code{per_snp}, \code{per_ind}.
 }
 \keyword{internal}
 \examples{
-S <- c("a", "b", "c")
-morie_snpqc1_call_rates(S)
+if (morie_crypto_sodium_available()) {
+  S <- c("a", "b", "c")
+  morie_snpqc1_call_rates(S)
+}
 }

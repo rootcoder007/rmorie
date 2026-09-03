@@ -69,6 +69,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mtr2sx_erf(x = x)
+#' res
 .mtr2sx_erf <- function(x) 2 * pnorm(x * sqrt(2)) - 1
 #' .mtr2sx_erfc
 #'
@@ -79,6 +83,10 @@
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .mtr2sx_erfc(x = x)
+#' res
 .mtr2sx_erfc <- function(x) 2 * pnorm(-x * sqrt(2))
 
 #' Inverse-variance weighted Mendelian randomization

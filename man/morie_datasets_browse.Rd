@@ -18,7 +18,7 @@ morie_datasets_browse(
 \code{dataset_key}/\code{id}/\code{loader}. \code{NULL} (default) skips this filter.}
 
 \item{portal}{Optional portal name (see
-\code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_catalog()}} for the canonical list).
+\code{morie_dataset_portal_catalog()} for the canonical list).
 Accepts a character vector for multi-portal queries.}
 
 \item{api_mode}{Optional API mode substring to match against the
@@ -40,7 +40,7 @@ with the same 7-column schema.
 }
 \description{
 Phase 3DDD4. Convenience wrapper over
-\code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_catalog()}} that lets callers filter +
+\code{morie_dataset_portal_catalog()} that lets callers filter +
 search by keyword, portal, api_mode, or loader pattern without
 writing subset expressions by hand.
 }

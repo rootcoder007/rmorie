@@ -12,7 +12,7 @@ morie_datasets_vancouver_opendata_by_id(
 }
 \arguments{
 \item{dataset_id}{Opendatasoft dataset slug (from
-\code{\link[=morie_datasets_vancouver_opendata_layers]{morie_datasets_vancouver_opendata_layers()}}).}
+\code{morie_datasets_vancouver_opendata_layers()}).}
 
 \item{limit}{Page size (max 100 for \verb{/records}).}
 

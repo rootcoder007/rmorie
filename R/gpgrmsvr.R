@@ -35,6 +35,11 @@
 #' @param freq Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .s02freq(M = X)
+#' res
 .s02freq <- function(M, freq = NULL) {
   # Minor allele frequencies for markers coded 0/1/2: MVSML p.51 uses
   # phat = colMeans(X)/2.
@@ -71,7 +76,8 @@ Vanr1 <- function(marker_matrix, freq = NULL) {
 
 #' VanRaden method 2 genomic relationship matrix (marker weighted)
 #'
-#' \deqn{G = \sum_j w_j z_j z_j^T / (2 \sum_j w_j p_j(1-p_j))}{G = sum_j w_j z_j z_j' / (2 sum_j w_j p_j(1-p_j))}
+#' \deqn{G = \sum_j w_j z_j z_j^T / (2 \sum_j w_j p_j(1-p_j))}{G = sum_j w_j z_j z_j' /
+#' (2 sum_j w_j p_j(1-p_j))}
 #' The default weights are VanRaden's reciprocal marker variances,
 #' \eqn{w_j = 1/(2p_j(1-p_j))}, which give rare markers more influence.
 #' Unit weights reproduce method 1 exactly.
@@ -102,7 +108,8 @@ Vanr2 <- function(marker_matrix, weights = NULL, freq = NULL) {
 
 #' Yang et al. realized genomic relationship matrix
 #'
-#' \deqn{A_{jk} = N^{-1} \sum_i (x_{ij}-2p_i)(x_{ik}-2p_i)/(2p_i(1-p_i))}{A_jk = (1/N) sum_i (x_ij-2p_i)(x_ik-2p_i)/(2p_i(1-p_i))}
+#' \deqn{A_{jk} = N^{-1} \sum_i (x_{ij}-2p_i)(x_{ik}-2p_i)/(2p_i(1-p_i))}{A_jk = (1/N)
+#' sum_i (x_ij-2p_i)(x_ik-2p_i)/(2p_i(1-p_i))}
 #' Each locus is standardized by its own Hardy-Weinberg variance.  The
 #' original paper gives the diagonal as
 #' \eqn{1 + N^{-1}\sum_i \[x_{ij}^2 - (1+2p_i)x_{ij} + 2p_i^2\]/(2p_i(1-p_i))};
@@ -189,7 +196,8 @@ Unitl <- function(x) {
 
 #' Variance reduction criterion for regression tree splitting
 #'
-#' \deqn{\Delta = Var(t) - (n_L/n)Var(t_L) - (n_R/n)Var(t_R)}{Delta = Var(t) - (nL/n)Var(tL) - (nR/n)Var(tR)}
+#' \deqn{\Delta = Var(t) - (n_L/n)Var(t_L) - (n_R/n)Var(t_R)}{Delta = Var(t) -
+#' (nL/n)Var(tL) - (nR/n)Var(tR)}
 #' with population variances -- the CART impurity decrease.  MVSML
 #' (2022) sec. 15.4.1 p.642 prints the same criterion in its weighted
 #' sum-of-squares form, \eqn{SSE_L\Omega_L + SSE_R\Omega_R}, which is

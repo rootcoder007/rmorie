@@ -23,7 +23,9 @@
 
 #' .schab_st_as_lags
 #'
-#' A step of the schab_st_shared implementation. Called by \code{.schab_st_anisotropic_correlation}, \code{.schab_st_exponential_separable}, \code{.schab_st_gneiting} and 5 others in the module.
+#' A step of the schab_st_shared implementation. Called by
+#' \code{.schab_st_anisotropic_correlation}, \code{.schab_st_exponential_separable},
+#' \code{.schab_st_gneiting} and 5 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -31,6 +33,9 @@
 #' @param k A vector; its length is taken.
 #' @return A list with \code{h}, \code{k}.
 #' @export
+#' @examples
+#' res <- .schab_st_as_lags(h = 0.5, k = 3L)
+#' res
 .schab_st_as_lags <- function(h, k) {
   h <- as.numeric(h)
   k <- abs(as.numeric(k))
@@ -72,7 +77,8 @@
 #' @param k Passed to \code{.schab_st_as_lags}.
 #' @param cov_spatial Accepted by the signature and not used anywhere in the body.
 #' @param cov_temporal Accepted by the signature and not used anywhere in the body.
-#' @param form The body requires: `form` must be 'product', 'sum' or 'product_sum'. Defaults to \code{"product"}.
+#' @param form The body requires: `form` must be 'product', 'sum' or 'product_sum'.
+#' Defaults to \code{"product"}.
 #' @return The value of \code{switch}.
 #' @export
 .schab_st_separable_covariance <- function(h, k, cov_spatial, cov_temporal,
@@ -169,6 +175,9 @@
 #' @param d Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .schab_st_gneiting(h = 0.5, k = 3L)
+#' res
 .schab_st_gneiting <- function(h, k, sigma2 = 1, a = 1, c = 1, alpha = 1,
                                beta = 1, gamma = 1, d = 2) {
   lg <- .schab_st_as_lags(h, k)
@@ -199,6 +208,9 @@
 #' @param d Numeric; combined arithmetically in the body. Defaults to \code{2}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' res <- .schab_st_gneiting_with_temporal(h = 0.5, k = 3L)
+#' res
 .schab_st_gneiting_with_temporal <- function(h, k, sigma2 = 1, a = 1, c = 1,
                                              alpha = 1, beta = 1, beta_t = 1,
                                              gamma = 1, d = 2) {
@@ -222,7 +234,8 @@
 #'
 #' @param neg2_unrestricted Coerced to numeric by the body, with \code{as.numeric}.
 #' @param neg2_separable Coerced to numeric by the body, with \code{as.numeric}.
-#' @return A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1}, \code{reference}.
+#' @return A list with \code{statistic}, \code{p_value}, \code{p_value_naive_chi2_1},
+#' \code{reference}.
 #' @export
 .schab_st_separability_test <- function(neg2_unrestricted, neg2_separable) {
   # Sec. 6.2.3 states the rule outright: on the boundary of the parameter
@@ -248,7 +261,8 @@
 #'
 #' @param rs Numeric; passed to \code{abs}.
 #' @param rt Numeric; passed to \code{abs}.
-#' @param distribution The body requires: `distribution` must be 'poisson' or 'binomial'. Defaults to \code{"poisson"}.
+#' @param distribution The body requires: `distribution` must be 'poisson' or 'binomial'.
+#' Defaults to \code{"poisson"}.
 #' @param ... Passed through.
 #' @return Nothing; this branch always raises.
 #' @export
@@ -356,6 +370,9 @@
 #' @param n A count; the body uses it as \code{matrix(...)}.
 #' @return A list with \code{nodes}, \code{weights}.
 #' @export
+#' @examples
+#' res <- .schab_gauss_legendre(n = 3L)
+#' res
 .schab_gauss_legendre <- function(n) {
   # Golub and Welsch (1969), Math. Comp. 23(106):221-230 -- NOT a
   # Schabenberger & Gotway result. Nodes are the eigenvalues of the Jacobi
@@ -388,6 +405,10 @@
 #' @param n_quad Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_bessel_j0(x = x)
+#' res
 .schab_bessel_j0 <- function(x, n_quad = 200L) {
   # J_0(x) = (1/pi) integral_0^pi cos(x sin theta) dtheta. The integrand is
   # smooth and periodic so the trapezoid rule converges geometrically; base
@@ -412,6 +433,10 @@
 #' @param n_quad Passed to \code{.schab_gauss_legendre}. Defaults to \code{400L}.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .schab_bessel_k1(z = y)
+#' res
 .schab_bessel_k1 <- function(z, upper = 40, n_quad = 400L) {
   # K_1(z) = integral_0^inf exp{-z cosh u} cosh u du
   gl <- .schab_gauss_legendre(n_quad)
@@ -432,6 +457,9 @@
 #' @param theta Numeric; combined arithmetically in the body. Defaults to \code{1}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' res <- .schab_whittle_covariance(h = 0.5)
+#' res
 .schab_whittle_covariance <- function(h, sigma2 = 1, theta = 1) {
   h <- as.numeric(h) # Whittle (1954)
   if (any(h < 0)) stop("lag `h` must be non-negative", call. = FALSE)
@@ -536,6 +564,9 @@
 #' @param n_quad Passed to \code{.schab_st_hankel_panels}. Defaults to \code{40L}.
 #' @return A list with \code{covariance}, \code{quadrature}.
 #' @export
+#' @examples
+#' res <- .schab_st_jones_zhang(h = 0.5, k = 3L)
+#' res
 .schab_st_jones_zhang <- function(h, k, sigma2 = 1, theta = 1, c = 1, p = 1.5,
                                   d = 2, n_quad = 40L) {
   lg <- .schab_st_as_lags(h, k) # eq (9.17)
@@ -602,7 +633,8 @@
 #' @param times Passed to \code{.schab_st_covariance_matrix}.
 #' @param cov_fn Passed to \code{.schab_st_covariance_matrix}.
 #' @param tol Optional; may be \code{NULL}. Carried through into a list the body builds.
-#' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue}, \code{tolerance}, \code{reason}.
+#' @return A list with \code{valid}, \code{min_eigenvalue}, \code{max_eigenvalue},
+#' \code{tolerance}, \code{reason}.
 #' @export
 .schab_st_is_valid_covariance <- function(coords, times, cov_fn, tol = NULL) {
   # eq (9.5) is positive semi-definiteness. Checked by eigendecomposition,
@@ -657,11 +689,13 @@
 #' @param coords A matrix; indexed by row and column.
 #' @param times A vector; its length is taken and its elements indexed.
 #' @param z A vector; its length is taken and its elements indexed.
-#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{10L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{10L}.
 #' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param max_dist The body requires: `max_dist` and `max_time` must be positive.
 #' @param max_time The body requires: `max_dist` and `max_time` must be positive.
-#' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags}, \code{space_edges}, \code{time_edges}.
+#' @return A list with \code{gamma}, \code{counts}, \code{space_lags}, \code{time_lags},
+#' \code{space_edges}, \code{time_edges}.
 #' @export
 .schab_st_empirical_semivariogram <- function(coords, times, z, n_space_bins = 10L,
                                               n_time_bins = 5L, max_dist = NULL,
@@ -775,7 +809,8 @@
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
-#' @param emp A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags}, \code{$time_lags} from it.
+#' @param emp A list; the body reads \code{$counts}, \code{$gamma}, \code{$space_lags},
+#' \code{$time_lags} from it.
 #' @param model_fn Accepted by the signature and not used anywhere in the body.
 #' @return A numeric value.
 #' @export
@@ -799,7 +834,8 @@
 
 #' .schab_st_region_box
 #'
-#' A step of the schab_st_shared implementation. Called by \code{.schab_cstr_test}, \code{.schab_st_intensity}, \code{.schab_st_marginal_intensities}.
+#' A step of the schab_st_shared implementation. Called by \code{.schab_cstr_test},
+#' \code{.schab_st_intensity}, \code{.schab_st_marginal_intensities}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -853,9 +889,11 @@
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region Passed to \code{.schab_st_region_box}.
 #' @param time_interval A vector; indexed elementwise.
-#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{4L}.
 #' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
-#' @return A list with \code{marginal_spatial}, \code{marginal_temporal}, \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
+#' @return A list with \code{marginal_spatial}, \code{marginal_temporal},
+#' \code{cell_area}, \code{bin_width}, \code{x_edges}, \code{y_edges}, \code{t_edges}.
 #' @export
 .schab_st_marginal_intensities <- function(points, times, region, time_interval,
                                            n_space_bins = 4L, n_time_bins = 4L) {
@@ -897,7 +935,8 @@
 #' @param area Numeric; combined arithmetically in the body.
 #' @param duration Numeric; combined arithmetically in the body.
 #' @param lam Numeric; combined arithmetically in the body.
-#' @return A list with \code{expected_count}, \code{variance}, \code{intensity}, \code{second_order_intensity}, \code{volume}.
+#' @return A list with \code{expected_count}, \code{variance}, \code{intensity},
+#' \code{second_order_intensity}, \code{volume}.
 #' @export
 .schab_cstr_reference <- function(area, duration, lam) {
   area <- as.numeric(area)
@@ -923,9 +962,11 @@
 #' @param times Coerced to numeric by the body, with \code{as.numeric}.
 #' @param region Passed to \code{.schab_st_region_box}.
 #' @param time_interval A vector; indexed elementwise.
-#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
+#' @param n_space_bins Coerced to integer by the body, with \code{as.integer}. Defaults
+#' to \code{3L}.
 #' @param n_time_bins Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3L}.
-#' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value}, \code{counts}, \code{mean_count}, \code{var_count}.
+#' @return A list with \code{index_of_dispersion}, \code{df}, \code{p_value},
+#' \code{counts}, \code{mean_count}, \code{var_count}.
 #' @export
 .schab_cstr_test <- function(points, times, region, time_interval,
                              n_space_bins = 3L, n_time_bins = 3L) {

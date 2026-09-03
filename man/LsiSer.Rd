@@ -20,5 +20,6 @@ A list with \code{s}, \code{y}, \code{h}, \code{y_via_combined}, \code{max_diffe
 }
 \keyword{internal}
 \examples{
-LsiSer(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8), h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
+LsiSer(x = c(1, 2, 3, 4, 5, 6, 7, 8), h1 = c(1, 2, 3, 4, 5, 6, 7, 8),
+  h2 = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

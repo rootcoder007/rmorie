@@ -77,6 +77,10 @@
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .hibrid_rows(x = x)
+#' res
 .hibrid_rows <- function(x) {
   if (is.matrix(x)) m <- x
   else if (is.data.frame(x)) m <- as.matrix(x)
@@ -95,6 +99,10 @@
 #' @param A A matrix; indexed by row and column.
 #' @return The value of \code{L}, as built in the body.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .hibrid_chol(A = A)
+#' res
 .hibrid_chol <- function(A) {
   n <- nrow(A)
   L <- matrix(0.0, n, n)
@@ -118,7 +126,8 @@
 
 #' .hibrid_solve
 #'
-#' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at}, \code{morie_hibrid_hibrid_prediction}.
+#' A step of the hibrid_native implementation. Called by \code{.hibrid_reml_at},
+#' \code{morie_hibrid_hibrid_prediction}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -199,13 +208,19 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @param p1_geno Passed to \code{.hibrid_rows}.
 #' @param p2_geno Passed to \code{.hibrid_rows}.
-#' @param sigma2_sca Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param sigma2_sca Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param X Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param p1_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param p2_new Optional; may be \code{NULL}. Passed to \code{.hibrid_rows}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{300L}.
 #' @param tol Accepted by the signature and not used anywhere in the body. Defaults to \code{1e-10}.
-#' @return A list with \code{estimate}, \code{fitted}, \code{gca_effect}, \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca}, \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel}, \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged}, \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m}, \code{p}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{fitted}, \code{gca_effect},
+#' \code{sca_effect}, \code{coefficients}, \code{sigma2_gca}, \code{sigma2_sca},
+#' \code{sigma2_e}, \code{sca_share}, \code{h2}, \code{gca_kernel}, \code{sca_kernel},
+#' \code{reml_path}, \code{reml_loglik}, \code{iterations}, \code{converged},
+#' \code{sca_fixed}, \code{prediction_new}, \code{residuals}, \code{n}, \code{m},
+#' \code{p}, \code{method}, \code{note}.
 #' @export
 morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
                                            sigma2_sca = NULL, X = NULL,
@@ -362,6 +377,9 @@ morie_hibrid_hibrid_prediction <- function(y, p1_geno, p2_geno,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .hibrid_cheatsheet()
+#' res
 .hibrid_cheatsheet <- function() {
   paste0("hibrid: morie_hibrid_hibrid_prediction(y, p1_geno, p2_geno) -> ",
          "GCA and SCA variance components and hybrid predictions from ",

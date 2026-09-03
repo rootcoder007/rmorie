@@ -19,3 +19,7 @@ A step of the geron_w4c_native implementation. Called by \code{morie_geron_rando
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+res <- .morie_w4c_bootstrap(n = 3L, seed = 1L)
+res
+}

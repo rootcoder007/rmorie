@@ -57,6 +57,10 @@
 #' @param y Coerced to numeric by the body, with \code{as.numeric}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .nhits_vec(y = y)
+#' res
 .nhits_vec <- function(y) {
   as.numeric(y)
 }
@@ -72,6 +76,11 @@
 #' @param ridge Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .nhits_lstsq(X = x, y = y)
+#' res
 .nhits_lstsq <- function(X, y, ridge = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -90,7 +99,8 @@
 #'
 #' @param x Coerced to numeric by the body, with \code{as.numeric}.
 #' @param kernel Coerced to integer by the body, with \code{as.integer}.
-#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param stride Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @return A vector, from \code{vapply}.
 #' @export
 .nhits_max_pool <- function(x, kernel, stride = NULL) {
@@ -241,10 +251,13 @@
 #'
 #' @param y Passed to \code{.nhits_vec}.
 #' @param horizon Coerced to integer by the body, with \code{as.integer}.
-#' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.
+#' @param lookback Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
 #' @param blocks Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param ridge Passed to \code{.nhits_nhits_stack}. Defaults to \code{1e-08}.
-#' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks}, \code{lookback}, \code{horizon}, \code{n}, \code{total_knots}, \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
+#' @return A list with \code{estimate}, \code{forecast}, \code{residual}, \code{blocks},
+#' \code{lookback}, \code{horizon}, \code{n}, \code{total_knots},
+#' \code{dense_parameters}, \code{residual_norm}, \code{n_blocks}, \code{method}.
 #' @export
 morie_nhits <- function(y, horizon, lookback = NULL, blocks = NULL,
                         ridge = 1e-8) {

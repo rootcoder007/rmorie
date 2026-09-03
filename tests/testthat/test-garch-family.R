@@ -11,9 +11,13 @@
 test_that("EGARCH recovers size and sign effects from a simulated series", {
   set.seed(7)
   n <- 1500
-  om <- -0.1; sz <- 0.25; sg <- -0.15; be <- 0.95
+  om <- -0.1
+  sz <- 0.25
+  sg <- -0.15
+  be <- 0.95
   EZ <- sqrt(2 / pi)
-  ls2 <- numeric(n); r <- numeric(n)
+  ls2 <- numeric(n)
+  r <- numeric(n)
   for (t in 2:n) {
     z <- rnorm(1)
     r[t - 1] <- z * sqrt(exp(ls2[t - 1]))
@@ -35,8 +39,12 @@ test_that("EGARCH recovers size and sign effects from a simulated series", {
 test_that("GARCH(1,1) recovers persistence from a simulated series", {
   set.seed(13)
   n <- 3000
-  om <- 0.02; al <- 0.08; be <- 0.88
-  s2 <- numeric(n); e <- numeric(n); s2[1] <- om / (1 - al - be)
+  om <- 0.02
+  al <- 0.08
+  be <- 0.88
+  s2 <- numeric(n)
+  e <- numeric(n)
+  s2[1] <- om / (1 - al - be)
   for (t in 2:n) {
     e[t - 1] <- rnorm(1) * sqrt(s2[t - 1])
     s2[t] <- om + al * e[t - 1]^2 + be * s2[t - 1]
@@ -51,8 +59,12 @@ test_that("GARCH(1,1) recovers persistence from a simulated series", {
 test_that("GJR-GARCH recovers a positive leverage term", {
   set.seed(11)
   n <- 3000
-  om <- 0.02; al <- 0.03; ga <- 0.12; be <- 0.85
-  s2 <- numeric(n); e <- numeric(n)
+  om <- 0.02
+  al <- 0.03
+  ga <- 0.12
+  be <- 0.85
+  s2 <- numeric(n)
+  e <- numeric(n)
   s2[1] <- om / (1 - al - 0.5 * ga - be)
   for (t in 2:n) {
     e[t - 1] <- rnorm(1) * sqrt(s2[t - 1])

@@ -3,7 +3,8 @@
 #' Bandwidth condition for the kernel quantile Edgeworth expansion
 #'
 #' Eq. (3.8): the expansion is proved under
-#' \deqn{h = o(n^{-1/4})\quad\text{and}\quad \lim_n (n^{1/4}h)^{-k}n^{-\beta} = 0}{h = o(n^-1/4) and lim (n^1/4 h)^-k n^-beta = 0}
+#' \deqn{h = o(n^{-1/4})\quad\text{and}\quad \lim_n (n^{1/4}h)^{-k}n^{-\beta} = 0}{h =
+#' o(n^-1/4) and lim (n^1/4 h)^-k n^-beta = 0}
 #' for every `beta > 0` and integer `k`.
 #'
 #' The first half is a rate. The second is not -- it says `h` may not shrink

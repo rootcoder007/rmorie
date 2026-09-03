@@ -19,3 +19,7 @@ A step of the helpers_s03 implementation. Called by \code{.ot_directions}, \code
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .s03normdraws(n = 3L)
+res
+}

@@ -50,5 +50,7 @@ module follows.
 \keyword{internal}
 \examples{
 set.seed(1)
-r <- morie_warpL_warp_loss(score_positive = rnorm(10), score_negative = rnorm(10), estimated_rank = 8L, alphas = 0.5); TRUE
+r <- morie_warpL_warp_loss(score_positive = rnorm(10), score_negative = rnorm(10),
+  estimated_rank = 8L, alphas = 0.5)
+TRUE
 }

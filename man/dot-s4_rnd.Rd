@@ -14,6 +14,10 @@ A numeric value.
 }
 \description{
 Half-away-from-zero. Deliberately not round(): both languages round
-}
 half to even but disagree about which values are exactly half.
-
+}
+\examples{
+x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+res <- .s4_rnd(v = x)
+res
+}

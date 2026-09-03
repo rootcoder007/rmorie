@@ -17,3 +17,9 @@ A vector, from \code{as.numeric}.
 \description{
 which differs from qr.solve on rank-deficient designs.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+b <- c(1.5, 2.5, 3.5)
+res <- .morie_gr_lstsq(A = A, b = b)
+res
+}

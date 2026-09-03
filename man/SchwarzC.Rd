@@ -20,5 +20,6 @@ A list with \code{lhs}, \code{rhs}, \code{holds}, \code{ratio}, \code{equality},
 }
 \keyword{internal}
 \examples{
-SchwarzC(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8), grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+SchwarzC(A = c(1, 2, 3, 4, 5, 6, 7, 8), B = c(1, 2, 3, 4, 5, 6, 7, 8),
+  grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

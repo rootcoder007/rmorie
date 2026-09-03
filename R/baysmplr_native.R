@@ -199,7 +199,8 @@ morie_baysmplr_gibbs <- function(mean, cov_inv, x0, n_iter, e) {
 
 #' .baysmplr_leapfrog
 #'
-#' A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree}, \code{morie_baysmplr_hmc}.
+#' A step of the baysmplr_native implementation. Called by \code{.baysmplr_build_tree},
+#' \code{morie_baysmplr_hmc}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'

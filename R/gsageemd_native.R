@@ -21,6 +21,10 @@
 #' @param x See Usage.
 #' @return Permutation-invariant summary vector.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gsageemd_mat(x = x)
+#' res
 .gsageemd_mat <- function(x) {
   # k.mat's contract: accept a list of vectors OR a matrix, yield a matrix.
   m <- if (is.matrix(x)) x else if (is.data.frame(x)) as.matrix(x) else

@@ -26,7 +26,7 @@ aligned to \code{x}.}
 \code{d == 0}).}
 }
 \value{
-A \code{morie_ts_model} wrapping the fitted \code{\link[stats:arima]{stats::arima()}} object.
+A \code{morie_ts_model} wrapping the fitted \code{stats::arima()} object.
 }
 \description{
 Fit an ARIMA / SARIMA model

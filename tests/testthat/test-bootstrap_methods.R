@@ -120,7 +120,8 @@ test_that("delete_d_jackknife works for small n (exhaustive) and large n", {
 })
 
 test_that("permutation_test covers all statistic types and alternatives", {
-  g1 <- rnorm(15, mean = 0); g2 <- rnorm(15, mean = 0.5)
+  g1 <- rnorm(15, mean = 0)
+  g2 <- rnorm(15, mean = 0.5)
   for (s in c("mean_diff", "median_diff", "t_stat")) {
     res <- permutation_test(g1, g2, statistic = s, n_permutations = 50L)
     expect_s3_class(res, "morie_permutation_test_result")
@@ -143,7 +144,8 @@ test_that("permutation_test covers all statistic types and alternatives", {
 })
 
 test_that("paired_permutation_test mean and median", {
-  x <- rnorm(15); y <- x + rnorm(15, sd = 0.2)
+  x <- rnorm(15)
+  y <- x + rnorm(15, sd = 0.2)
   for (s in c("mean_diff", "median_diff")) {
     res <- paired_permutation_test(x, y, statistic = s, n_permutations = 50L)
     expect_s3_class(res, "morie_permutation_test_result")

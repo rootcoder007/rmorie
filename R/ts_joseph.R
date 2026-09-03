@@ -26,7 +26,8 @@
 
 #' .morie_jo_vec
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_pair}, \code{morie_adfur}, \code{morie_autocorf} and 23 others in the module.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_pair},
+#' \code{morie_adfur}, \code{morie_autocorf} and 23 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -34,6 +35,10 @@
 #' @param name Passed to \code{sprintf}. Defaults to \code{"x"}.
 #' @return The value of \code{v}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_jo_vec(x = x)
+#' res
 .morie_jo_vec <- function(x, name = "x") {
   v <- as.numeric(x)
   if (length(v) == 0L) stop(sprintf("%s must be non-empty.", name), call. = FALSE)
@@ -42,7 +47,8 @@
 
 #' .morie_jo_pair
 #'
-#' A step of the ts_joseph implementation. Called by \code{morie_mapets}, \code{morie_pinball}, \code{morie_relmae} and 4 others in the module.
+#' A step of the ts_joseph implementation. Called by \code{morie_mapets},
+#' \code{morie_pinball}, \code{morie_relmae} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -61,13 +67,18 @@
 
 #' .morie_jo_med
 #'
-#' A step of the ts_joseph implementation. Called by \code{morie_mapets}, \code{morie_smape}, \code{morie_stldecomp}.
+#' A step of the ts_joseph implementation. Called by \code{morie_mapets},
+#' \code{morie_smape}, \code{morie_stldecomp}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{sort}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_jo_med(v = x)
+#' res
 .morie_jo_med <- function(v) {
   s <- sort(v)
   n <- length(s)
@@ -77,7 +88,8 @@
 
 #' .morie_jo_solve
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_ols}, \code{morie_adfur}, \code{morie_quantreg}.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_ols},
+#' \code{morie_adfur}, \code{morie_quantreg}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -85,6 +97,11 @@
 #' @param b A vector; its length is taken.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_jo_solve(a = A, b = b)
+#' res
 .morie_jo_solve <- function(a, b) {
   n <- length(b)
   m <- cbind(matrix(as.numeric(unlist(a)), n, n, byrow = TRUE), as.numeric(b))
@@ -110,7 +127,8 @@
 
 #' .morie_jo_ols
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred}, \code{morie_adfur}, \code{morie_quantreg}.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_fitpred},
+#' \code{morie_adfur}, \code{morie_quantreg}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -118,6 +136,11 @@
 #' @param y Numeric; combined arithmetically in the body.
 #' @return The value of \code{.morie_jo_solve}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_jo_ols(x = x, y = y)
+#' res
 .morie_jo_ols <- function(x, y) {
   x <- as.matrix(x)
   n <- nrow(x)
@@ -205,7 +228,8 @@ morie_smape <- function(y, yhat) {
 #' @return list(rmsse, scale, mase, n)
 #' @export
 #' @examples
-#' morie_rmsse(y = c(1, 2, 3, 4, 5, 6, 7, 8), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), insample = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_rmsse(y = c(1, 2, 3, 4, 5, 6, 7, 8), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), insample
+#' = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_rmsse <- function(y, yhat, insample, season = 1L) {
   p <- .morie_jo_pair(y, yhat)
   ins <- .morie_jo_vec(insample, "insample")
@@ -229,7 +253,8 @@ morie_rmsse <- function(y, yhat, insample, season = 1L) {
 #' @return list(relmae, mae, benchmae, better, n)
 #' @export
 #' @examples
-#' morie_relmae(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), yhat = c(1, 2, 3, 4, 5, 6, 7, 8), benchmark = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_relmae(y = c(2.5, 1.0, 3.5, 4.0, 2.0, 5.5, 3.0, 6.5), yhat = c(1, 2, 3, 4, 5, 6,
+#' 7, 8), benchmark = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_relmae <- function(y, yhat, benchmark) {
   p <- .morie_jo_pair(y, yhat)
   cb <- .morie_jo_vec(benchmark, "benchmark")
@@ -280,7 +305,8 @@ morie_pinball <- function(y, qhat, q) {
 #' @return list(score, total, coverage, meanwidth, n)
 #' @export
 #' @examples
-#' morie_winkler(y = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_winkler(y = c(1, 2, 3, 4, 5, 6, 7, 8), lower = c(1, 2, 3, 4, 5, 6, 7, 8), upper
+#' = c(1, 2, 3, 4, 5, 6, 7, 8))
 morie_winkler <- function(y, lower, upper, alpha = 0.1) {
   a <- .morie_jo_vec(y, "y")
   lo <- .morie_jo_vec(lower, "lower")
@@ -847,7 +873,8 @@ morie_tsregmat <- function(x, lags, horizon = 1L) {
 
 #' .morie_jo_fitpred
 #'
-#' A step of the ts_joseph implementation. Called by \code{morie_dirmulti}, \code{morie_dirrec}, \code{morie_recmulti}.
+#' A step of the ts_joseph implementation. Called by \code{morie_dirmulti},
+#' \code{morie_dirrec}, \code{morie_recmulti}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -1168,7 +1195,9 @@ morie_quantreg <- function(x, y, q, iters = 25L) {
 #' @return list(qhat, lower, upper, k, n, meanwidth, widening)
 #' @export
 #' @examples
-#' morie_cqr(callo = c(1, 2, 3, 4, 5, 6, 7, 8), calhi = c(1, 2, 3, 4, 5, 6, 7, 8), caly = c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_cqr(callo = c(1, 2, 3, 4, 5, 6, 7, 8), calhi = c(1, 2, 3, 4, 5, 6, 7, 8), caly =
+#' c(1, 2, 3, 4, 5, 6, 7, 8), lo = c(1, 2, 3, 4, 5, 6, 7, 8), hi = c(1, 2, 3, 4, 5, 6, 7,
+#' 8))
 morie_cqr <- function(callo, calhi, caly, lo, hi, alpha = 0.1) {
   cl <- .morie_jo_vec(callo, "callo")
   ch <- .morie_jo_vec(calhi, "calhi")
@@ -1241,7 +1270,8 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 
 #' .morie_jo_matvec
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_glu}, \code{.morie_jo_resblock}, \code{morie_itrans} and 4 others in the module.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_glu},
+#' \code{.morie_jo_resblock}, \code{morie_itrans} and 4 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -1259,13 +1289,18 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 
 #' .morie_jo_softmax
 #'
-#' A step of the ts_joseph implementation. Called by \code{morie_autoform}, \code{morie_itrans}, \code{morie_tftnet}.
+#' A step of the ts_joseph implementation. Called by \code{morie_autoform},
+#' \code{morie_itrans}, \code{morie_tftnet}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param v Numeric; passed to \code{max}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_jo_softmax(v = x)
+#' res
 .morie_jo_softmax <- function(v) {
   ex <- exp(v - max(v))
   ex / sum(ex)
@@ -1273,7 +1308,8 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 
 #' .morie_jo_ln
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tftnet} and 1 others in the module.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
+#' \code{morie_itrans}, \code{morie_tftnet} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -1281,6 +1317,10 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param eps Numeric; combined arithmetically in the body. Defaults to \code{1e-05}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_jo_ln(v = x)
+#' res
 .morie_jo_ln <- function(v, eps = 1e-5) {
   m <- mean(v)
   (v - m) / sqrt(sum((v - m)^2) / length(v) + eps)
@@ -1298,7 +1338,8 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 .morie_jo_elu <- function(t) ifelse(t > 0, t, expm1(t))
 #' .morie_jo_relu
 #'
-#' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock}, \code{morie_itrans}, \code{morie_tsmixer}.
+#' A step of the ts_joseph implementation. Called by \code{.morie_jo_resblock},
+#' \code{morie_itrans}, \code{morie_tsmixer}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -1328,6 +1369,10 @@ morie_aci <- function(inside, alpha = 0.1, gamma = 0.01) {
 #' @param k Numeric; combined arithmetically in the body.
 #' @return A vector, from \code{vapply}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_jo_maxpool(v = x, k = 3L)
+#' res
 .morie_jo_maxpool <- function(v, k) {
   k <- as.integer(k)
   if (k < 1L) stop("pool kernel must be at least 1.", call. = FALSE)
@@ -1404,7 +1449,8 @@ morie_seriesdecomp <- function(x, kernel) {
 #'   trendmean, seasrange)
 #' @export
 #' @examples
-#' morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' morie_autoform(q = c(1, 2, 3, 4, 5, 6, 7, 8), k = c(1, 2, 3, 4, 5, 6, 7, 8), v = c(1,
+#' 2, 3, 4, 5, 6, 7, 8))
 morie_autoform <- function(q, k, v, kernel = 3L, c = 1) {
   qv <- .morie_jo_vec(q, "q")
   kv <- .morie_jo_vec(k, "k")

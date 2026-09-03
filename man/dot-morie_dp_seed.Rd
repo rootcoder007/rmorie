@@ -17,3 +17,7 @@ A step of the dp_native implementation. Called by \code{morie_approx_dp}, \code{
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .morie_dp_seed(seed = 1L)
+res
+}

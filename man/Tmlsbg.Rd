@@ -32,7 +32,8 @@ subsetting first -- while the target parameter is the subgroup one.
 With \code{S} all ones this reduces exactly to the full-sample TMLE.
 }
 \examples{
-Tmlsbg(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), subgroup = c(1, 2, 3, 4, 5, 6, 7, 8))
+Tmlsbg(y = c(1, 2, 3, 4, 5, 6, 7, 8), D = c(1, 2, 3, 4, 5, 6, 7, 8),
+  X = c(1, 2, 3, 4, 5, 6, 7, 8), subgroup = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Chernozhukov, V., Demirer, M., Duflo, E. &

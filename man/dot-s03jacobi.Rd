@@ -19,3 +19,8 @@ A list with \code{values}, \code{vectors}.
 sign-fixed so its largest-magnitude entry is positive, because the
 eigenproblem does not determine the sign and the arms must agree.
 }
+\examples{
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- .s03jacobi(A = A)
+res
+}

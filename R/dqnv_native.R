@@ -226,7 +226,9 @@
 #' @param seed Passed to \code{.ghc_rng}. Defaults to \code{0}.
 #' @param use_replay A flag; the body branches on it. Defaults to \code{TRUE}.
 #' @param use_target A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{estimate}, \code{Q}, \code{residual_history}, \code{final_residual}, \code{greedy_policy}, \code{used_replay}, \code{used_target_network}, \code{C}, \code{method}.
+#' @return A list with \code{estimate}, \code{Q}, \code{residual_history},
+#' \code{final_residual}, \code{greedy_policy}, \code{used_replay},
+#' \code{used_target_network}, \code{C}, \code{method}.
 #' @export
 morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
                       steps = 20000, C = 100, buffer_size = 1000, batch = 16,
@@ -333,6 +335,9 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .dqnv_cheatsheet()
+#' res
 .dqnv_cheatsheet <- function() {
   paste("dqnv: the LEARNING RULE is ordinary Q-learning; what",
         "changed is the data and the target. EXPERIENCE REPLAY",

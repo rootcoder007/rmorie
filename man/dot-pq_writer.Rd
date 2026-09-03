@@ -12,3 +12,7 @@ The value of \code{e}, as built in the body.
 \description{
 because growing a raw vector element by element is quadratic.
 }
+\examples{
+res <- .pq_writer()
+res
+}

@@ -7,15 +7,15 @@
 morie_evt_hill_alias(x, k = NULL)
 }
 \arguments{
-\item{x, k}{as in \code{\link[=morie_evt_hill]{morie_evt_hill()}}.}
+\item{x, k}{as in \code{morie_evt_hill()}.}
 
 }
 \value{
-the \code{\link[=morie_evt_hill]{morie_evt_hill()}} list plus \code{alias_of}.
+the \code{morie_evt_hill()} list plus \code{alias_of}.
 }
 \description{
 One estimator, two catalogue entries; the computation is
-\code{\link[=morie_evt_hill]{morie_evt_hill()}}. See it for the xi > 0 restriction and the
+\code{morie_evt_hill()}. See it for the xi > 0 restriction and the
 role of k.
 }
 \examples{

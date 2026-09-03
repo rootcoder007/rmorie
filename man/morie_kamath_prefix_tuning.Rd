@@ -23,5 +23,7 @@ List with \code{K}, \code{V}, \code{prefix_len}, \code{n_trainable}.
 \code{morie_alammar_sdp_attention}.
 }
 \examples{
-morie_kamath_prefix_tuning(prefix_K = c(1, 2, 3, 4, 5, 6, 7, 8), prefix_V = c(1, 2, 3, 4, 5, 6, 7, 8), K_input = c(1, 2, 3, 4, 5, 6, 7, 8), V_input = c(1, 2, 3, 4, 5, 6, 7, 8))
+morie_kamath_prefix_tuning(prefix_K = c(1, 2, 3, 4, 5, 6, 7, 8),
+  prefix_V = c(1, 2, 3, 4, 5, 6, 7, 8), K_input = c(1, 2, 3, 4, 5, 6, 7, 8),
+  V_input = c(1, 2, 3, 4, 5, 6, 7, 8))
 }

@@ -69,7 +69,8 @@
 
 #' .schab_pairwise_distances
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{.schab_select_bandwidth}, \code{spgwrb}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit},
+#' \code{.schab_select_bandwidth}, \code{spgwrb}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -102,7 +103,8 @@
 
 #' .schab_kernel_weights
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weights}, \code{spgwrk}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_local_weights},
+#' \code{spgwrk}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -165,7 +167,8 @@
 
 #' .schab_local_weights
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score}, \code{.schab_gwr_fit}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_cv_score},
+#' \code{.schab_gwr_fit}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -203,6 +206,10 @@
 #' @param w Numeric; passed to \code{sqrt}.
 #' @return The value of \code{op}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_wls_operator(X = x, w = x)
+#' res
 .schab_wls_operator <- function(X, w) {
   sw <- sqrt(w)
   Xw <- X * sw
@@ -223,7 +230,8 @@
 
 #' .schab_gwr_fit
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{.schab_mgwr_backfit}, \code{spgwrb}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion},
+#' \code{.schab_mgwr_backfit}, \code{spgwrb}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -233,7 +241,11 @@
 #' @param bandwidth Passed to \code{.schab_local_weights}.
 #' @param kernel Passed to \code{.schab_local_weights}. Defaults to \code{"gaussian"}.
 #' @param adaptive Passed to \code{.schab_local_weights}. Defaults to \code{FALSE}.
-#' @return A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1}, \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S}, \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2}, \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel}, \code{adaptive}, \code{n_rank_deficient}.
+#' @return A list with \code{se_params}, \code{sigma2_gwr}, \code{edf_resid}, \code{v1},
+#' \code{v2}, \code{params}, \code{fitted}, \code{resid}, \code{S}, \code{tr_S},
+#' \code{tr_STS}, \code{effective_parameters}, \code{rss}, \code{sigma2},
+#' \code{sigma2_cressie}, \code{n}, \code{p}, \code{bandwidth}, \code{kernel},
+#' \code{adaptive}, \code{n_rank_deficient}.
 #' @export
 .schab_gwr_fit <- function(y, X, distances, bandwidth, kernel = "gaussian",
                            adaptive = FALSE) {
@@ -315,7 +327,8 @@
 # Fotheringham et al. (2002) p. 96 eq (4.22).
 #' Fotheringham et al. (2002) p. 96 eq (4.22)
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion},
+#' \code{spgwrb}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -332,7 +345,8 @@
 # spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself.
 #' Spgwr::gwr.cv.f -- leave-one-out; y_i never predicts itself
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion}, \code{spgwrb}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_gwr_criterion},
+#' \code{spgwrb}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -466,7 +480,8 @@
 
 #' .schab_select_bandwidth
 #'
-#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit}, \code{spgwrb}.
+#' A step of the schab_gwr_shared implementation. Called by \code{.schab_mgwr_backfit},
+#' \code{spgwrb}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -478,7 +493,8 @@
 #' @param adaptive A flag; the body branches on it. Defaults to \code{FALSE}.
 #' @param bounds Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param tol Passed to \code{.schab_golden_section}. Defaults to \code{1e-04}.
-#' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds}, \code{adaptive}.
+#' @return A list with \code{bandwidth}, \code{score}, \code{criterion}, \code{bounds},
+#' \code{adaptive}.
 #' @export
 .schab_select_bandwidth <- function(y, X, coords, kernel = "gaussian",
                                     criterion = "cv", adaptive = FALSE,
@@ -567,7 +583,11 @@
 #' @param bws_same_times Passed to \code{>=}. Defaults to \code{5L}.
 #' @param init_bandwidth Optional; may be \code{NULL}. Passed to \code{is.null}.
 #' @param standardize A flag; the body branches on it. Defaults to \code{TRUE}.
-#' @return A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized}, \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params}, \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history}, \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion}, \code{kernel}.
+#' @return A list with \code{bandwidths}, \code{at_search_boundary}, \code{standardized},
+#' \code{y_centre}, \code{y_scale}, \code{x_centre}, \code{x_scale}, \code{params},
+#' \code{fitted}, \code{resid}, \code{bandwidth_gwr}, \code{bandwidth_history},
+#' \code{score_history}, \code{n_iter}, \code{converged}, \code{criterion},
+#' \code{kernel}.
 #' @export
 .schab_mgwr_backfit <- function(y, X, coords, kernel = "gaussian",
                                 criterion = "aicc", adaptive = FALSE,

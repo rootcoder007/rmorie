@@ -5,7 +5,8 @@ sine_a <- function(n, cycles, amp = 1, phase = 0)
   amp * sin(2 * pi * cycles * (0:(n - 1)) / n + phase)
 
 lcg_a <- function(n, seed = 7, lo = -0.5, hi = 0.5) {
-  out <- numeric(n); s <- seed
+  out <- numeric(n)
+  s <- seed
   for (i in seq_len(n)) {
     s <- (1103515245 * s + 12345) %% 2147483648
     out[i] <- lo + (hi - lo) * (s / 2147483648)
@@ -20,7 +21,8 @@ test_that("WienerOut is eq (3.154), a convolution", {
 })
 
 test_that("WienerDot eq (3.155) matches the convolution form", {
-  w <- c(1, 0.5); x <- c(1, 2, 3)
+  w <- c(1, 0.5)
+  x <- c(1, 2, 3)
   conv <- WienerOut(w, x)$d_hat
   # x(n) runs backwards in time
   expect_equal(WienerDot(w, c(x[3], x[2]))$d_hat, conv[3])
@@ -28,7 +30,8 @@ test_that("WienerDot eq (3.155) matches the convolution form", {
 })
 
 test_that("MseGrad eq (3.167) vanishes at the optimum", {
-  Phi <- matrix(c(2, 1, 1, 2), 2, 2); Theta <- c(3, 3)
+  Phi <- matrix(c(2, 1, 1, 2), 2, 2)
+  Theta <- c(3, 3)
   w <- WienerOpt(Phi, Theta)$w_o
   g <- MseGrad(Phi, Theta, w)
   expect_equal(g$gradient, c(0, 0), tolerance = 1e-9)
@@ -50,7 +53,8 @@ test_that("WienerOpt eq (3.169) solves rather than inverting", {
 })
 
 test_that("WienerMin eq (3.172) is the variance less the explained part", {
-  Phi <- matrix(c(2, 1, 1, 2), 2, 2); Theta <- c(3, 3)
+  Phi <- matrix(c(2, 1, 1, 2), 2, 2)
+  Theta <- c(3, 3)
   r <- WienerMin(Phi, Theta, 10)
   expect_equal(r$explained, 6)
   expect_equal(r$j_min, 4)
@@ -62,7 +66,8 @@ test_that("WienerMin eq (3.172) is the variance less the explained part", {
 })
 
 test_that("WienerConv eq (3.174) holds at the solution", {
-  phi <- c(2, 1, 0.5); theta <- c(3, 3)
+  phi <- c(2, 1, 0.5)
+  theta <- c(3, 3)
   Phi <- matrix(c(phi[1], phi[2], phi[2], phi[1]), 2, 2)
   r <- WienerConv(WienerOpt(Phi, theta)$w_o, phi, theta)
   expect_true(r$holds)
@@ -97,7 +102,9 @@ test_that("WienerSnr eq (3.186) has the three stated properties", {
 })
 
 test_that("Whopf builds a Toeplitz system from data", {
-  n <- 400; x <- sine_a(n, 7); d <- 0.5 * x
+  n <- 400
+  x <- sine_a(n, 7)
+  d <- 0.5 * x
   r <- Whopf(x, d, order = 3)
   expect_true(r$toeplitz)
   expect_true(r$acf_biased)
@@ -115,14 +122,18 @@ test_that("WienerFilt needs exactly one route", {
 })
 
 test_that("WienerFilt time route recovers a scaled signal", {
-  n <- 400; x <- sine_a(n, 7); d <- 0.5 * x
+  n <- 400
+  x <- sine_a(n, 7)
+  d <- 0.5 * x
   r <- WienerFilt(x, desired = d, order = 3)
   expect_equal(r$route, "time")
   expect_lt(max(abs(r$y[11:n] - d[11:n])), 0.05)
 })
 
 test_that("WienerFilt frequency route suppresses a noisy band", {
-  n <- 64; x <- sine_a(n, 4); half <- n %/% 2 + 1
+  n <- 64
+  x <- sine_a(n, 4)
+  half <- n %/% 2 + 1
   k <- 0:(half - 1)
   r <- WienerFilt(x, sd = as.numeric(k == 4), seta = as.numeric(k != 4))
   expect_equal(r$route, "frequency")
@@ -130,7 +141,8 @@ test_that("WienerFilt frequency route suppresses a noisy band", {
 })
 
 test_that("AncInput checks the independence premise", {
-  v <- sine_a(256, 3); m <- sine_a(256, 41)
+  v <- sine_a(256, 3)
+  m <- sine_a(256, 41)
   r <- AncInput(v, m)
   expect_equal(r$x, v + m)
   expect_true(r$independent)
@@ -161,7 +173,10 @@ test_that("LmsSqErr eq (3.200) expands the square", {
 })
 
 test_that("LmsDescent eqs (3.201)-(3.202) equal Widrow-Hoff", {
-  w <- c(0.1, -0.2); e <- 0.7; r <- c(1, 2); mu <- 0.05
+  w <- c(0.1, -0.2)
+  e <- 0.7
+  r <- c(1, 2)
+  mu <- 0.05
   expect_equal(LmsDescent(w, e, r, mu)$w_next, WidrowHoff(w, e, r, mu)$w_next)
   expect_equal(LmsDescent(w, e, r, mu)$gradient, -2 * e * r)
 })
@@ -191,7 +206,8 @@ test_that("LmsZhang eq (3.205) normalizes by the running power", {
 
 test_that("LmsFilt cancels a correlated interference", {
   n <- 2000
-  v <- sine_a(n, 5); ref <- sine_a(n, 61)
+  v <- sine_a(n, 5)
+  ref <- sine_a(n, 61)
   x <- v + 0.8 * ref
   r <- LmsFilt(x, ref, order = 4, mu = 0.005)
   tail_i <- (n %/% 2 + 1):n
@@ -210,7 +226,9 @@ test_that("LmsFilt cancels a correlated interference", {
 
 test_that("LMS misadjustment grows with the step size", {
   n <- 2000
-  v <- sine_a(n, 5); ref <- sine_a(n, 61); x <- v + 0.8 * ref
+  v <- sine_a(n, 5)
+  ref <- sine_a(n, 61)
+  x <- v + 0.8 * ref
   tail_i <- (n %/% 2 + 1):n
   resid <- function(mu)
     max(abs(LmsFilt(x, ref, order = 4, mu = mu)$e[tail_i] - v[tail_i]))
@@ -267,7 +285,9 @@ test_that("RlsApriori eq (3.225) uses the previous weights", {
 })
 
 test_that("RlsFilt converges faster than LMS", {
-  n <- 600; ref <- sine_a(n, 31); x <- 0.8 * ref
+  n <- 600
+  ref <- sine_a(n, 31)
+  x <- 0.8 * ref
   early <- 21:60
   expect_lt(max(abs(RlsFilt(x, ref, order = 3, lam = 0.98)$e[early])),
             max(abs(LmsFilt(x, ref, order = 3, mu = 0.01)$e[early])))
@@ -325,7 +345,10 @@ test_that("Kalman covariance shrinks monotonically for a static state", {
 })
 
 test_that("Riccati is the fixed point of the Kalman recursion", {
-  F <- matrix(0.9); H <- matrix(1); Q <- matrix(0.1); R <- matrix(1)
+  F <- matrix(0.9)
+  H <- matrix(1)
+  Q <- matrix(0.1)
+  R <- matrix(1)
   r <- Riccati(F, H, Q, R)
   expect_true(r$converged)
   # the scalar DARE has a closed form here: p^2 + 0.09 p - 0.1 = 0
@@ -405,7 +428,8 @@ test_that("PsdAcf eq (4.30) agrees with the circular ACF", {
 
 test_that("Anc and FetalEcg report reference leakage", {
   n <- 1000
-  v <- sine_a(n, 3); ref <- sine_a(n, 57)
+  v <- sine_a(n, 3)
+  ref <- sine_a(n, 57)
   r <- Anc(v + 0.8 * ref, ref, order = 4, mu = 0.005)
   expect_equal(r$adaptation, "lms")
   expect_true(r$well_separated)

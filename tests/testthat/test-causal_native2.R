@@ -37,8 +37,10 @@ test_that("g-formula removes confounding by L", {
 test_that("Granger test finds the true direction only", {
   set.seed(42)
   n <- 1500
-  x <- numeric(n); y <- numeric(n)
-  ex <- stats::rnorm(n); ey <- stats::rnorm(n)
+  x <- numeric(n)
+  y <- numeric(n)
+  ex <- stats::rnorm(n)
+  ey <- stats::rnorm(n)
   for (t in 2:n) {
     x[t] <- 0.5 * x[t - 1] + ex[t]
     y[t] <- 0.4 * y[t - 1] + 0.6 * x[t - 1] + ey[t]
@@ -51,8 +53,10 @@ test_that("Granger test finds the true direction only", {
 test_that("Gaussian transfer entropy equals half the log RSS ratio", {
   set.seed(42)
   n <- 1500
-  x <- numeric(n); y <- numeric(n)
-  ex <- stats::rnorm(n); ey <- stats::rnorm(n)
+  x <- numeric(n)
+  y <- numeric(n)
+  ex <- stats::rnorm(n)
+  ey <- stats::rnorm(n)
   for (t in 2:n) {
     x[t] <- 0.5 * x[t - 1] + ex[t]
     y[t] <- 0.4 * y[t - 1] + 0.6 * x[t - 1] + ey[t]
@@ -79,7 +83,8 @@ test_that("serial mediation recovers all four paths", {
 
 test_that("cluster-robust SE exceeds the naive SE under strong ICC", {
   set.seed(42)
-  G <- 40; npc <- 50
+  G <- 40
+  npc <- 50
   cl <- rep(seq_len(G), each = npc)
   d <- rep(as.numeric(stats::runif(G) < 0.5), each = npc)
   y <- 1 * d + rep(stats::rnorm(G, sd = 1.5), each = npc) +

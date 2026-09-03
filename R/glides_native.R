@@ -89,6 +89,10 @@
 #' @param k A count; the body uses it as \code{seq_len(...)}.
 #' @return The value of \code{p}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .glides_ipow(x = x, k = 3L)
+#' res
 .glides_ipow <- function(x, k) {
   p <- 1
   k <- as.integer(k)
@@ -98,7 +102,8 @@
 
 #' .glides_merge
 #'
-#' A step of the glides_native implementation. Called by \code{morie_glides_hbond}, \code{morie_glides_score}.
+#' A step of the glides_native implementation. Called by \code{morie_glides_hbond},
+#' \code{morie_glides_score}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -259,6 +264,11 @@ morie_glides_score <- function(vdw = 0, coulomb = 0, lipo = 0, hbond = 0,
 #' @param b Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .glides_dist(a = A, b = b)
+#' res
 .glides_dist <- function(a, b) sqrt(.w3_csum((a - b) * (a - b)))
 
 #' Score a pose in the Glide form

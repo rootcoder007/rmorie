@@ -18,3 +18,8 @@ The value of \code{D}, as built in the body.
 Part of the w501_changepoint_native implementation; see the file
 header for the source it follows.
 }
+\examples{
+X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2, 2.6, 3.4, 3.9))
+res <- .w501_pairwise_alpha(Z = X, alpha = 0.5)
+res
+}

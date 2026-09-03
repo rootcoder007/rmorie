@@ -7,7 +7,7 @@
 morie_ml_load(path)
 }
 \arguments{
-\item{path}{File path written by \code{\link[=morie_ml_save]{morie_ml_save()}}.}
+\item{path}{File path written by \code{morie_ml_save()}.}
 }
 \value{
 The restored \code{morie_ml_fit}.

@@ -60,18 +60,25 @@
 
 #' .tmlcen_sigmoid
 #'
-#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}, \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the module.
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit},
+#' \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the
+#' module.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcen_sigmoid(x = x)
+#' res
 .tmlcen_sigmoid <- function(x) 1 / (1 + exp(-x))
 
 #' .tmlcen_design
 #'
-#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -113,7 +120,8 @@
 
 #' .tmlcen_weighted_logit
 #'
-#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls}, \code{morie_tmle_censoring}.
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls},
+#' \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -144,7 +152,8 @@
 
 #' .tmlcen_logit_irls
 #'
-#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}.
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -154,6 +163,12 @@
 #' @param ridge Passed to \code{.tmlcen_weighted_logit}. Defaults to \code{1e-08}.
 #' @return The value of \code{.tmlcen_weighted_logit}.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcen_logit_irls(Z = X, y = y)
+#' res
 .tmlcen_logit_irls <- function(Z, y, max_iter = 60L, ridge = 1e-8) {
   .tmlcen_weighted_logit(Z, y, rep(1, nrow(Z)), max_iter, ridge)
 }
@@ -203,7 +218,8 @@
 
 #' .tmlcen_W_mat
 #'
-#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival}, \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -241,6 +257,11 @@
 #' @param n Accepted by the signature and not used anywhere in the body.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .tmlcen_coerce_subject_list(x = X, n = 3L)
+#' res
 .tmlcen_coerce_subject_list <- function(x, n) {
   if (is.data.frame(x)) {
     x <- as.matrix(x)
@@ -302,7 +323,8 @@ morie_coarsen_interval <- function(times, deltas) {
 #' @param A Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
 #' @param W Passed to \code{.tmlcen_W_mat}.
 #' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
-#' @param by_covariate Accepted by the signature and not used anywhere in the body. Defaults to \code{TRUE}.
+#' @param by_covariate Accepted by the signature and not used anywhere in the body.
+#' Defaults to \code{TRUE}.
 #' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
 #' @return A list with \code{G}, \code{grid}, \code{b}.
 #' @export
@@ -595,6 +617,9 @@ morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tmlcen_morie_cheatsheet()
+#' res
 .tmlcen_morie_cheatsheet <- function() {
   paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
          "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",
@@ -610,5 +635,3 @@ morie_tmlecensoring <- morie_tmle_censoring
 #' @rdname morie_coarsen_interval
 #' @export
 morie_tmlcen <- morie_coarsen_interval
-
-

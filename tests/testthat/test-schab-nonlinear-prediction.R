@@ -61,7 +61,8 @@ test_that("the lognormal prediction exceeds the naive back-transform", {
 
 test_that("lognormal kriging rejects non-positive data", {
   C <- nlp_sites(3)
-  z <- exp(nlp_y(C)); z[1] <- 0
+  z <- exp(nlp_y(C))
+  z[1] <- 0
   expect_error(splgk(C, z, c(1, 1)))
 })
 
@@ -111,7 +112,8 @@ test_that("normal scores and anamorphosis invert each other", {
 
 test_that("the Sec 5.6 family matches the Python arm", {
   C <- nlp_sites()
-  y <- nlp_y(C); z <- exp(y)
+  y <- nlp_y(C)
+  z <- exp(y)
   r <- splgk(C, z, c(2.3, 1.7))
   t <- sptgk(C, y, c(2.3, 1.7), exp, exp, exp, nlp_gamma)
   expect_equal(r$prediction, 6.70711848875139, tolerance = 1e-11)

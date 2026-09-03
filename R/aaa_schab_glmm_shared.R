@@ -30,7 +30,9 @@
 
 #' .schab_link
 #'
-#' A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_mean}, \code{.schab_fit_pseudo_likelihood}, \code{.schab_naive_marginal_mean} and 3 others in the module.
+#' A step of the schab_glmm_shared implementation. Called by
+#' \code{.schab_conditional_mean}, \code{.schab_fit_pseudo_likelihood},
+#' \code{.schab_naive_marginal_mean} and 3 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -57,7 +59,8 @@
 
 #' .schab_link_derivative
 #'
-#' A step of the schab_glmm_shared implementation. Called by \code{.schab_mu_eta}, \code{.schab_predict_glm}, \code{.schab_pseudo_data} and 1 others in the module.
+#' A step of the schab_glmm_shared implementation. Called by \code{.schab_mu_eta},
+#' \code{.schab_predict_glm}, \code{.schab_pseudo_data} and 1 others in the module.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -96,7 +99,9 @@
 
 #' .schab_variance_function
 #'
-#' A step of the schab_glmm_shared implementation. Called by \code{.schab_conditional_variance}, \code{.schab_data_covariance}, \code{.schab_sigma_mu}.
+#' A step of the schab_glmm_shared implementation. Called by
+#' \code{.schab_conditional_variance}, \code{.schab_data_covariance},
+#' \code{.schab_sigma_mu}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -120,7 +125,8 @@
 
 #' .schab_canonical_link
 #'
-#' A step of the schab_glmm_shared implementation. Called by \code{.schab_fit_pseudo_likelihood}, \code{spglmm}, \code{sppql}.
+#' A step of the schab_glmm_shared implementation. Called by
+#' \code{.schab_fit_pseudo_likelihood}, \code{spglmm}, \code{sppql}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -373,6 +379,11 @@
 #' @param family Passed to \code{identical}.
 #' @return The value of \code{z}, as built in the body.
 #' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .schab_initial_mu(z = y, family = txt)
+#' res
 .schab_initial_mu <- function(z, family) {
   z <- as.numeric(z)
   if (identical(family, "poisson")) {
@@ -399,7 +410,9 @@
 #' @param R Passed to \code{.schab_sigma_mu}.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{100L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
-#' @return A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta}, \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged}, \code{link}, \code{family}.
+#' @return A list with \code{beta}, \code{S}, \code{mu}, \code{sigma2}, \code{cov_beta},
+#' \code{se_beta}, \code{Sigma_nu}, \code{pseudo_data}, \code{n_iter}, \code{converged},
+#' \code{link}, \code{family}.
 #' @export
 .schab_fit_pseudo_likelihood <- function(z, X, Sigma_S, family = "poisson",
                                          link_kind = NULL, sigma2 = 1,
@@ -500,7 +513,9 @@
 #' @param sigma2_nu0 Coerced to numeric by the body, with \code{as.numeric}.
 #' @param mu0_hat Coerced to numeric by the body, with \code{as.numeric}.
 #' @param link_kind Passed to \code{.schab_link_derivative}.
-#' @return A list with \code{prediction}, \code{mspe}, \code{prediction_error}, \code{inverse_link_prediction}, \code{pseudo_scale_prediction}, \code{pseudo_scale_mspe}, \code{mspe_is_for}.
+#' @return A list with \code{prediction}, \code{mspe}, \code{prediction_error},
+#' \code{inverse_link_prediction}, \code{pseudo_scale_prediction},
+#' \code{pseudo_scale_mspe}, \code{mspe_is_for}.
 #' @export
 .schab_predict_glm <- function(nu0_hat, sigma2_nu0, mu0_hat, link_kind) {
   # eq (6.90) with its own MSPE (6.91), kept apart from the inverse-link
@@ -528,7 +543,8 @@
 
 #' .schab_neighbour_structure
 #'
-#' A step of the schab_glmm_shared implementation. Called by \code{.schab_bym_icar_log_prior}, \code{.schab_bym_map}, \code{spbayr}.
+#' A step of the schab_glmm_shared implementation. Called by
+#' \code{.schab_bym_icar_log_prior}, \code{.schab_bym_map}, \code{spbayr}.
 #' See the file header for the source the module follows.
 #' the source it follows.
 #'
@@ -649,6 +665,10 @@
 #' @param v A vector; its length is taken.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .schab_bym_convolution(u = x, v = x)
+#' res
 .schab_bym_convolution <- function(u, v) {
   u <- as.numeric(u)
   v <- as.numeric(v)
@@ -666,6 +686,9 @@
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .schab_bym_identifiability_note()
+#' res
 .schab_bym_identifiability_note <- function() {
   paste(
     "only u + v enters the likelihood, so sigma_u^2 and sigma_v^2 are not",
@@ -806,7 +829,9 @@
 #' @param lam Numeric; combined arithmetically in the body.
 #' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.
 #' @param tol Passed to \code{<}. Defaults to \code{1e-11}.
-#' @return A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted}, \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total}, \code{observed_total}, \code{log_posterior}.
+#' @return A list with \code{u}, \code{v}, \code{x}, \code{relative_risk}, \code{fitted},
+#' \code{n_iter}, \code{converged}, \code{sum_v}, \code{fitted_total},
+#' \code{observed_total}, \code{log_posterior}.
 #' @export
 .schab_bym_map <- function(y, c_exp, adjacency, kappa, lam, max_iter = 200L,
                            tol = 1e-11) {
@@ -905,7 +930,8 @@
 #' @param R_space A matrix; passed to \code{as.matrix}.
 #' @param R_time A matrix; passed to \code{as.matrix}.
 #' @param kind The body requires: `kind` must be one of I, II, III, IV.
-#' @return A list with \code{structure}, \code{kind}, \code{rank}, \code{rank_deficiency}, \code{n_constraints_required}.
+#' @return A list with \code{structure}, \code{kind}, \code{rank},
+#' \code{rank_deficiency}, \code{n_constraints_required}.
 #' @export
 .schab_interaction_structure <- function(R_space, R_time, kind) {
   kinds <- c("I", "II", "III", "IV")

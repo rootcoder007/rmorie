@@ -1,7 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Influence function of an estimator at a point
 #'
-#' \deqn{IF(x; T, F) = \lim_{e \to 0} \[T((1-e)F + e \delta_x) - T(F)\]/e.}{IF(x; T, F) = lim_{e -> 0} \[T((1-e)F + e delta_x) - T(F)\]/e.}
+#' \deqn{IF(x; T, F) = \lim_{e \to 0} \[T((1-e)F + e \delta_x) - T(F)\]/e.}{IF(x; T, F) =
+#' lim_{e -> 0} \[T((1-e)F + e delta_x) - T(F)\]/e.}
 #'
 #' Hampel, F. R. (1974), "The influence curve and its role in robust
 #' estimation", \emph{Journal of the American Statistical Association} 69(346),
@@ -75,6 +76,10 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .if_wmean(v = x, w = x)
+#' res
 .if_wmean <- function(v, w) sum(w * v) / sum(w)
 
 #' .if_wvar
@@ -87,6 +92,10 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' @param w Numeric; passed to \code{sum}.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .if_wvar(v = x, w = x)
+#' res
 .if_wvar <- function(v, w) {
   m <- .if_wmean(v, w)
   sum(w * (v - m)^2) / sum(w)
@@ -103,6 +112,10 @@ Infcrv <- function(estimator, F, x, eps = 1e-3) {
 #' @param w A vector; indexed elementwise.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .if_wmedian(v = x, w = x)
+#' res
 .if_wmedian <- function(v, w) {
   o <- order(v)
   tot <- sum(w)

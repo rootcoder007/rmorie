@@ -30,7 +30,8 @@ as the GP posterior mean, so \code{method} selects the reported label, not
 a different computation.
 }
 \examples{
-Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8), grid = c(1, 2, 3, 4, 5, 6, 7, 8))
+Srfintp(coords = c(1, 2, 3, 4, 5, 6, 7, 8), values = c(1, 2, 3, 4, 5, 6, 7, 8),
+  grid = c(1, 2, 3, 4, 5, 6, 7, 8))
 }
 \references{
 Rasmussen & Williams (2006), eq. (2.23)-(2.24).

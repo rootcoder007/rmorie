@@ -20,5 +20,6 @@ The value of \code{out}, as built in the body.
 }
 \keyword{internal}
 \examples{
-candidate_sequence(A = c(1, 2, 3, 4, 5, 6, 7, 8), W = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2), g_models = list(a = 1, b = 2))
+candidate_sequence(A = c(1, 2, 3, 4, 5, 6, 7, 8), W = matrix(c(1, 2, 3, 4, 5, 6), nrow = 2),
+  g_models = list(a = 1, b = 2))
 }

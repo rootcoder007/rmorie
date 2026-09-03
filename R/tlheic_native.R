@@ -60,7 +60,8 @@ morie_tlheic <- function(psi_of_P = NULL, basis = NULL, D = NULL,
 
 #' numerical_derivative
 #'
-#' A step of the tlheic_native implementation. Called by \code{estimate_eic}, \code{morie_tlheic}, \code{verify_gradient}.
+#' A step of the tlheic_native implementation. Called by \code{estimate_eic},
+#' \code{morie_tlheic}, \code{verify_gradient}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
@@ -89,13 +90,15 @@ numerical_derivative <- function(psi_of_P, weights, score, h = 1e-5) {
 
 #' gradient_inner_product
 #'
-#' A step of the tlheic_native implementation. Called by \code{morie_tlheic}, \code{verify_gradient}.
+#' A step of the tlheic_native implementation. Called by \code{morie_tlheic},
+#' \code{verify_gradient}.
 #' See the file header for the source the module follows.
 #' source it follows.
 #'
 #' @param D Coerced to numeric by the body, with \code{as.numeric}.
 #' @param score Coerced to numeric by the body, with \code{as.numeric}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @return A numeric value.
 #' @export
 gradient_inner_product <- function(D, score, weights = NULL) {
@@ -118,10 +121,12 @@ gradient_inner_product <- function(D, score, weights = NULL) {
 #'
 #' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param basis A matrix; passed to \code{as.matrix}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param h Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.
 #' @param ridge A matrix; passed to \code{diag}. Defaults to \code{1e-08}.
-#' @return A list with \code{estimate}, \code{D}, \code{coefficients}, \code{n_directions}, \code{mean}, \code{method}, \code{note}.
+#' @return A list with \code{estimate}, \code{D}, \code{coefficients},
+#' \code{n_directions}, \code{mean}, \code{method}, \code{note}.
 #' @export
 estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
                          ridge = 1e-8) {
@@ -160,10 +165,12 @@ estimate_eic <- function(psi_of_P, basis, weights = NULL, h = 1e-5,
 #' @param psi_of_P Passed to \code{numerical_derivative}.
 #' @param D A vector; its length is taken.
 #' @param score Passed to \code{numerical_derivative}.
-#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param weights Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
 #' @param h Passed to \code{numerical_derivative}. Defaults to \code{1e-05}.
 #' @param tol Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1e-04}.
-#' @return A list with \code{derivative}, \code{inner_product}, \code{difference}, \code{verified}, \code{note}.
+#' @return A list with \code{derivative}, \code{inner_product}, \code{difference},
+#' \code{verified}, \code{note}.
 #' @export
 verify_gradient <- function(psi_of_P, D, score, weights = NULL,
                             h = 1e-5, tol = 1e-4) {
@@ -186,6 +193,9 @@ verify_gradient <- function(psi_of_P, D, score, weights = NULL,
 #'
 #' @return A character value.
 #' @export
+#' @examples
+#' res <- .tlheic_cheatsheet()
+#' res
 .tlheic_cheatsheet <- function() {
   paste("tlheic: for many parameters the efficient influence curve ",
         "exists only IMPLICITLY and deriving it is what stops the ",

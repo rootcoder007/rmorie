@@ -14,3 +14,7 @@ A step of the exp3_native implementation. No other function in the package calls
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+res <- .exp3_cheatsheet()
+res
+}

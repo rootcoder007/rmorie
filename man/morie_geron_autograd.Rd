@@ -19,7 +19,7 @@ List with \code{grad}, \code{value}, \code{tape_size}, \code{params}.
 returning a plain number means the tape was bypassed and no gradient
 exists, which is an error rather than a silent zero. Leaves support
 \verb{+ - * / ^} plus \verb{exp log sqrt tanh sin cos} and
-\code{\link[=morie_gvar_relu]{morie_gvar_relu()}} / \code{\link[=morie_gvar_sigmoid]{morie_gvar_sigmoid()}}. One backward sweep fills
+\code{morie_gvar_relu()} / \code{morie_gvar_sigmoid()}. One backward sweep fills
 every leaf's gradient at the cost of one forward pass.
 }
 \examples{

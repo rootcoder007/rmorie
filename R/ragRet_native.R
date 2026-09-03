@@ -36,7 +36,8 @@ morie_ragRet_normalise <- function(v) {
 #' @param corpus Iterated over elementwise, with \code{lapply}.
 #' @param k.top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param metric Compared against \code{"cosine"}. Defaults to \code{"inner_product"}.
-#' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric}, \code{comparisons}, \code{note}.
+#' @return A list with \code{indices}, \code{scores}, \code{all_scores}, \code{metric},
+#' \code{comparisons}, \code{note}.
 #' @export
 morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
                                metric = "inner_product") {
@@ -72,7 +73,8 @@ morie_ragRet_top_k <- function(query, corpus, k.top = 5L,
 #' @param n.cells Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4L}.
 #' @param iters Coerced to integer by the body, with \code{as.integer}. Defaults to \code{25L}.
 #' @param seed Coerced to integer by the body, with \code{as.integer}. Defaults to \code{0L}.
-#' @return A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells}, \code{n}, \code{note}.
+#' @return A list with \code{centroids}, \code{lists}, \code{assign}, \code{n.cells},
+#' \code{n}, \code{note}.
 #' @export
 morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
                                    seed = 0L) {
@@ -130,11 +132,13 @@ morie_ragRet_ivf_index <- function(corpus, n.cells = 4L, iters = 25L,
 #'
 #' @param query Coerced to numeric by the body, with \code{as.numeric}.
 #' @param corpus A vector; indexed elementwise.
-#' @param index A list; the body reads \code{$centroids}, \code{$lists}, \code{$n}, \code{$n.cells} from it.
+#' @param index A list; the body reads \code{$centroids}, \code{$lists}, \code{$n},
+#' \code{$n.cells} from it.
 #' @param k.top Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.
 #' @param nprobe Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1L}.
 #' @param metric Passed to \code{morie_ragRet_top_k}. Defaults to \code{"inner_product"}.
-#' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed}, \code{n.cells}, \code{fraction.scanned}, \code{note}.
+#' @return A list with \code{indices}, \code{scores}, \code{comparisons}, \code{probed},
+#' \code{n.cells}, \code{fraction.scanned}, \code{note}.
 #' @export
 morie_ragRet_ivf_search <- function(query, corpus, index, k.top = 5L,
                                     nprobe = 1L, metric = "inner_product") {

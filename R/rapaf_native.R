@@ -233,6 +233,11 @@ morie_rapaf_ar_confidence_interval <- function(case_counts, rate_ratios,
 #' @param obs_weights Optional; may be \code{NULL}. Numeric; combined arithmetically in the body.
 #' @return The value of \code{beta}, as built in the body.
 #' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .rapaf_logit_irls(X = x, y = y)
+#' res
 .rapaf_logit_irls <- function(X, y, ridge = 1e-8, obs_weights = NULL) {
   if (is.null(obs_weights)) obs_weights <- rep(1.0, length(y))
   X <- cbind(0, X)
