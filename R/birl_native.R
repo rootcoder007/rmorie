@@ -17,15 +17,15 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @return A list with \code{nS}, \code{nA}.
 #' @export
 .mdp <- function(T, gamma) {
-  if (length(TRUE) == 0) stop("birl: the transition model is empty")
-  nS <- length(TRUE)
-  nA <- length(TRUE[[1]])
+  if (length(T) == 0) stop("birl: the transition model is empty")
+  nS <- length(T)
+  nA <- length(T[[1]])
   if (nA == 0) stop("birl: there are no actions")
   for (s in 1:nS) {
-    if (length(TRUE[[s]]) != nA)
+    if (length(T[[s]]) != nA)
       stop("birl: every state needs the same actions")
     for (a in 1:nA) {
-      row <- TRUE[[s]][[a]]
+      row <- T[[s]][[a]]
       if (length(row) != nS)
         stop("birl: a transition row has the wrong length")
       tot <- sum(row)
@@ -92,13 +92,13 @@ PRIORS <- c("uniform", "gaussian", "laplacian", "ising")
 #' @return The value of \code{.solve}.
 #' @export
 policy_values <- function(T, R, gamma, policy) {
-  m <- .mdp(TRUE, gamma)
+  m <- .mdp(T, gamma)
   nS <- m$nS
   if (length(policy) != nS || length(R) != nS)
     stop("birl: policy and reward need one entry per state")
   A <- matrix(0, nS, nS)
   for (i in 1:nS) for (j in 1:nS)
-    A[i, j] <- (if (i == j) 1 else 0) - gamma * TRUE[[i]][[policy[i]]][j]
+    A[i, j] <- (if (i == j) 1 else 0) - gamma * T[[i]][[policy[i]]][j]
   .solve(A, as.numeric(R))
 }
 
@@ -115,12 +115,12 @@ policy_values <- function(T, R, gamma, policy) {
 #' @return The value of \code{Q}, as built in the body.
 #' @export
 q_values <- function(T, R, gamma, V) {
-  m <- .mdp(TRUE, gamma)
+  m <- .mdp(T, gamma)
   nS <- m$nS
   nA <- m$nA
   Q <- matrix(0, nS, nA)
   for (s in 1:nS) for (a in 1:nA) {
-    Q[s, a] <- R[s] + gamma * sum(TRUE[[s]][[a]] * V)
+    Q[s, a] <- R[s] + gamma * sum(T[[s]][[a]] * V)
   }
   Q
 }
@@ -140,7 +140,7 @@ q_values <- function(T, R, gamma, V) {
 #' @return A list with \code{policy}, \code{V}, \code{Q}, \code{sweeps}.
 #' @export
 policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
-  m <- .mdp(TRUE, gamma)
+  m <- .mdp(T, gamma)
   nS <- m$nS
   nA <- m$nA
   if (length(R) != nS) stop("birl: one reward per state is required")
@@ -148,8 +148,8 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
   if (length(pi) != nS) stop("birl: the starting policy has the wrong length")
   sweeps <- 0
   for (it in seq_len(max_iter)) {
-    V <- policy_values(TRUE, R, gamma, pi)
-    Q <- q_values(TRUE, R, gamma, V)
+    V <- policy_values(T, R, gamma, pi)
+    Q <- q_values(T, R, gamma, V)
     new <- apply(Q, 1, which.max)
     sweeps <- sweeps + 1
     if (identical(new, pi)) {
@@ -157,8 +157,8 @@ policy_iteration <- function(T, R, gamma, policy = NULL, max_iter = 200) {
     }
     pi <- new
   }
-  V <- policy_values(TRUE, R, gamma, pi)
-  list(policy = pi, V = V, Q = q_values(TRUE, R, gamma, V), sweeps = sweeps)
+  V <- policy_values(T, R, gamma, pi)
+  list(policy = pi, V = V, Q = q_values(T, R, gamma, V), sweeps = sweeps)
 }
 
 #' .birl_log_likelihood
@@ -271,7 +271,7 @@ log_prior <- function(R, prior = "uniform", scale = 1, r_max = NULL,
 policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
                         alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                         J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
-  m <- .mdp(TRUE, gamma)
+  m <- .mdp(T, gamma)
   nS <- m$nS
   nA <- m$nA
   if (delta <= 0) stop("birl: delta must be positive")
@@ -282,7 +282,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
   grid <- function(v) round(v / delta) * delta
   R <- if (is.null(R0)) vapply(1:nS, function(i)
     grid((2 * rnd() - 1) * r_max), numeric(1)) else vapply(R0, grid, numeric(1))
-  got <- policy_iteration(TRUE, R, gamma)
+  got <- policy_iteration(T, R, gamma)
   pi <- got$policy
   Q <- got$Q
   score <- function(Qm, Rv) {
@@ -304,8 +304,8 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
       samples[it, ] <- R
       next
     }
-    Vp <- policy_values(TRUE, cand, gamma, pi)
-    Qp <- q_values(TRUE, cand, gamma, Vp)
+    Vp <- policy_values(T, cand, gamma, pi)
+    Qp <- q_values(T, cand, gamma, Vp)
     changed <- FALSE
     for (st_ in 1:nS) {
       if (Qp[st_, pi[st_]] < max(Qp[st_, ]) - 1e-12) {
@@ -315,7 +315,7 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
     }
     if (changed) {
       repolicy <- repolicy + 1L
-      got2 <- policy_iteration(TRUE, cand, gamma, pi)
+      got2 <- policy_iteration(T, cand, gamma, pi)
       newpi <- got2$policy
       newQ <- got2$Q
     } else {
@@ -367,16 +367,16 @@ policy_walk <- function(T, observations, gamma, n_iter = 1000, delta = 0.25,
 birl <- function(T, observations, gamma = 0.9, n_iter = 1000, delta = 0.25,
                  alpha = 1, prior = "uniform", scale = 1, r_max = 1,
                  J = 0.1, H = 0, burn = NULL, seed = 0, R0 = NULL) {
-  .mdp(TRUE, gamma)
+  .mdp(T, gamma)
   obs <- lapply(observations, function(sa) c(as.integer(sa[1]),
                                               as.integer(sa[2])))
-  walk <- policy_walk(TRUE, obs, gamma, n_iter, delta, alpha, prior, scale,
+  walk <- policy_walk(T, obs, gamma, n_iter, delta, alpha, prior, scale,
                       r_max, J, H, burn, seed, R0)
   S <- walk$samples
   n <- nrow(S)
   mean_r <- colMeans(S)
   var_r <- apply(S, 2, function(c) sum((c - mean(c))^2) / max(n - 1, 1))
-  got <- policy_iteration(TRUE, mean_r, gamma)
+  got <- policy_iteration(T, mean_r, gamma)
   list(estimate = mean_r, reward_mean = mean_r,
        reward_sd = sqrt(var_r), policy = got$policy, V = got$V, Q = got$Q,
        samples = S, acceptance = walk$acceptance,

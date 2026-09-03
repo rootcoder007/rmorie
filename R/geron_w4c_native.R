@@ -3025,10 +3025,10 @@ morie_geron_revnet <- function(x, F, G) {
     .morie_gr_need(length(out) == length(arg), "geron_revnet: residual function must be shape-preserving")
     out
   }
-  y1 <- x1 + apply_fn(FALSE, x2)
+  y1 <- x1 + apply_fn(F, x2)
   y2 <- x2 + apply_fn(G, y1)
   x2_rec <- y2 - apply_fn(G, y1)
-  x1_rec <- y1 - apply_fn(FALSE, x2_rec)
+  x1_rec <- y1 - apply_fn(F, x2_rec)
   x_rec <- c(x1_rec, x2_rec)
   err <- max(abs(x_rec - X))
   y <- c(y1, y2)

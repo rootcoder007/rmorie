@@ -1326,7 +1326,7 @@ Kalman <- function(z, F, H, Q, R, x0 = NULL, P0 = NULL) {
   # and the asymmetry it removed is returned.  The plain covariance update
   # is used rather than the Joseph form, which is recorded because the
   # Joseph form is the numerically safer one when R is small.
-  Fm <- as.matrix(FALSE)
+  Fm <- as.matrix(F)
   Hm <- as.matrix(H)
   Qm <- as.matrix(Q)
   Rm <- as.matrix(R)
@@ -1405,7 +1405,7 @@ Riccati <- function(F, H, Q, R, maxiter = 1000L, tol = 1e-12) {
   #
   # P here is the PREDICTED covariance; the filter stores the UPDATED one,
   # P - K H P.
-  Fm <- as.matrix(FALSE)
+  Fm <- as.matrix(F)
   Hm <- as.matrix(H)
   Qm <- as.matrix(Q)
   Rm <- as.matrix(R)
