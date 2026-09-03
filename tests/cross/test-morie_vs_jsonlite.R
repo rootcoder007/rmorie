@@ -8,7 +8,7 @@ test_that("native JSON parse agrees with jsonlite on nested payloads", {
   payloads <- c(
     '{"result": {"records": [{"id": 1, "name": "a", "v": 1.5},
       {"id": 2, "name": "b", "v": null}], "total": 2}}',
-    '[[1, 2], [3, 4]]',
+    "[[1, 2], [3, 4]]",
     '{"a": {"b": {"c": [true, false, null]}}}',
     '{"s": "\\u00e9\\n\\t\\"q\\""}')
   for (p in payloads) {

@@ -1394,7 +1394,7 @@ morie_geron_policy_gradient <- function(trajectories, policy, gamma = 0.99, base
     .morie_gr_need(length(steps) > 0L, "geron_policy_gradient: an episode has no steps")
     G <- 0.0
     rets <- numeric(length(steps))
-    for (t_ in length(steps):1) {
+    for (t_ in rev(seq_along(steps))) {
       G <- steps[[t_]][[3]] + g * G
       rets[t_] <- G
     }
@@ -1698,7 +1698,7 @@ morie_geron_ppo <- function(env, policy, epochs = 20, lr = 0.1, clip_eps = 0.2, 
       Gc <- 0.0
       gs <- numeric(length(traj_r))
       if (length(traj_r)) {
-        for (k in length(traj_r):1) {
+        for (k in rev(seq_along(traj_r))) {
           Gc <- traj_r[k] + g * Gc
           gs[k] <- Gc
         }
@@ -2392,7 +2392,7 @@ morie_geron_regression_mlp <- function(X, y, hidden_sizes = 8, epochs = 400, lr 
     resid <- pred - Y
     hist <- c(hist, mean(rowSums(resid^2)))
     delta <- (2.0 / m) * resid
-    for (i in length(Ws):1) {
+    for (i in rev(seq_along(Ws))) {
       gW <- t(acts[[i]]) %*% delta
       gb <- colSums(delta)
       if (i > 1L) delta <- (delta %*% t(Ws[[i]])) * (acts[[i]] > 0)
@@ -3065,7 +3065,7 @@ morie_geron_reward_function <- function(s, a, s_next, R = NULL, gamma = 1.0) {
   }
   returns <- numeric(length(rewards))
   acc <- 0.0
-  for (t_ in length(rewards):1) {
+  for (t_ in rev(seq_along(rewards))) {
     acc <- rewards[t_] + g * acc
     returns[t_] <- acc
   }

@@ -77,7 +77,7 @@ Motfom <- function(sequence, pwm, background = NULL, pseudocount = 0,
     dense[as.integer(key) - lo + 1] <- get(key, envir = pdf)
   }
   surv <- numeric(length(dense) + 1)
-  for (s in length(dense):1) surv[s] <- surv[s + 1] + dense[s]
+  for (s in rev(seq_along(dense))) surv[s] <- surv[s + 1] + dense[s]
   chars <- strsplit(seq_, "")[[1]]
   code <- match(chars, c("A", "C", "G", "T"))
   n_win <- length(chars) - w + 1

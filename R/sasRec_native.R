@@ -134,7 +134,7 @@ predict_next <- function(state, item_embeddings, top_k = 5, exclude = numeric(0)
   for (i in seq_len(nrow(E))) sc[i] <- sum(s * E[i, ])
   if (length(ex) > 0) sc[ex + 1L] <- NA
   ord <- order(-sc, na.last = TRUE)
-  keep <- ord[!is.na(sc[ord])][1:min(top_k, length(ord))]
+  keep <- ord[!is.na(sc[ord])][seq_len(min(top_k, length(ord)))]
   rk <- cbind(keep, sc[keep])
   colnames(rk) <- c("index", "score")
   list(estimate = rk, ranking = rk, n_scored = sum(!is.na(sc)),
