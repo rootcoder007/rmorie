@@ -254,8 +254,8 @@ morie_evt_gpd_mle <- function(y) {
 #' @inheritParams morie_evt_gev_cdf
 #' @export
 morie_evt_return_level <- function(mu, sigma, xi, T) {
-  stopifnot(TRUE > 1)
-  morie_evt_gev_quantile(1 - 1 / TRUE, mu, sigma, xi)
+  stopifnot(T > 1)
+  morie_evt_gev_quantile(1 - 1 / T, mu, sigma, xi)
 }
 
 #' Delta-method CI for a GEV return level (Coles 2001 eq. 3.10-3.11)
@@ -265,8 +265,8 @@ morie_evt_return_level <- function(mu, sigma, xi, T) {
 #' @export
 morie_evt_return_level_ci <- function(x, T, alpha = 0.05) {
   f <- morie_evt_gev_mle(x)
-  z <- morie_evt_return_level(f$mu, f$sigma, f$xi, TRUE)
-  yp <- -log(1 - 1 / TRUE)
+  z <- morie_evt_return_level(f$mu, f$sigma, f$xi, T)
+  yp <- -log(1 - 1 / T)
   g <- if (abs(f$xi) < .evt_xi_tiny) {
     c(1, -log(yp), 0)
   } else {

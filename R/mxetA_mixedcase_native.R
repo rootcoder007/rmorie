@@ -31,7 +31,7 @@
 #' \code{frechet_uniform}, \code{seed}, \code{method}.
 #' @export
 morie_mxetA <- function(F, n_sim = 1, seed = 0, max_points = 100000L) {
-  Fm <- as.matrix(FALSE)
+  Fm <- as.matrix(F)
   nt <- nrow(Fm)
   m <- ncol(Fm)
   if (nt < 1L || m < 1L) {

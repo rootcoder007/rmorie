@@ -215,7 +215,7 @@ Svmlagr <- function(X, y, beta0, beta, alpha) {
 #' realized sum of slacks is returned as slack_sum.
 #' @noRd
 Softsvm <- function(X, y, T, ...) {
-  fit <- morie_svm_fit_dual(X, y, C = as.numeric(TRUE), ...)
+  fit <- morie_svm_fit_dual(X, y, C = as.numeric(T), ...)
   X <- as.matrix(X)
   ys <- as.numeric(y)
   nb <- sqrt(sum(fit$beta^2))
@@ -254,7 +254,7 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
   al <- as.numeric(alpha)
   dl <- as.numeric(delta)
   zt <- as.numeric(zeta)
-  Tv <- as.numeric(TRUE)
+  Tv <- as.numeric(T)
   f <- as.numeric(beta0) + as.numeric(X %*% b)
   inner <- ys * f - 1 + zt
   L <- 0.5 * sum(b^2) + Tv * sum(zt) - sum(al * inner) - sum(dl * zt)
@@ -282,7 +282,7 @@ Svmkkt <- function(X, y, beta0, beta, alpha, delta, zeta, T) {
 #' margin dual (9.32)-(9.33) only by the upper bound T.
 #' @noRd
 Svmsdual <- function(X, y, T, K = NULL, ...) {
-  Tv <- as.numeric(TRUE)
+  Tv <- as.numeric(T)
   fit <- morie_svm_fit_dual(X, y, C = Tv, K = K, ...)
   ys <- as.numeric(y)
   list(
@@ -312,7 +312,7 @@ Ksvmdual <- function(X, y, T, kernel = "linear", gamma = NULL,
   } else {
     as.matrix(K)
   }
-  out <- Svmsdual(X, y, TRUE, K = Km, ...)
+  out <- Svmsdual(X, y, T, K = Km, ...)
   out$K <- Km
   out$kernel <- if (is.null(K)) kernel else "precomputed"
   out

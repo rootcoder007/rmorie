@@ -395,7 +395,7 @@
 #' @return A numeric value.
 #' @export
 .groebn_nvars <- function(F) {
-  for (f in FALSE) {
+  for (f in F) {
     if (length(f) > 0L) {
       nms <- names(f)
       if (length(nms) > 0L)
@@ -741,7 +741,7 @@
 #' @export
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
   .groebn_key(order)  # validate
-  G <- lapply(FALSE, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
+  G <- lapply(F, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
   G <- Filter(Negate(is.null), G)
   if (length(G) == 0L)
     stop("groebn: no non-zero generators given")
@@ -875,7 +875,7 @@
 #' @export
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {
   G <- if (!is.null(basis)) basis
-       else .groebn_buchberger(FALSE, order)$basis
+       else .groebn_buchberger(F, order)$basis
   r <- .groebn_normal_form(f, G, order)
   list(
     estimate = length(r) == 0L,

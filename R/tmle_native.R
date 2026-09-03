@@ -341,7 +341,7 @@ morie_tmle_quantile <- function(y, d, x, quantile = 0.5, n_grid = 60L,
   }
   f1 <- pmin(pmax(cummax(f1), 0), 1)
   f0 <- pmin(pmax(cummax(f0), 0), 1)
-  invert <- function(F) grid[min(which(FALSE >= q)[1], k, na.rm = TRUE)]
+  invert <- function(F) grid[min(which(F >= q)[1], k, na.rm = TRUE)]
   q1 <- invert(f1)
   q0 <- invert(f0)
   list(qte = q1 - q0, q1 = q1, q0 = q0, quantile = q, grid = grid,
