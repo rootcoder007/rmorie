@@ -96,7 +96,10 @@ jobs:
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
           extra-packages: local::.
-          needs: check
+          # The Rd checks only load the namespace, so hard dependencies are
+          # enough. Installing Suggests pulled RSQLite, which P3M served as a
+          # source package and pak then refused to build.
+          dependencies: '"hard"'
 
       - name: Rd consistency (codoc + usage + undocumented args)
         run: |
