@@ -287,8 +287,20 @@ jobs:
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes) on Debian
         run: |
+          # No examples on this leg, so it fits in the hour. Measured on
+          # this 2-core container: ~20 min to install and build, ~3 min
+          # for the Rd and code checks, then 37 minutes with no output
+          # at all while R CMD check EXTRACTS rmorie-Ex.R from 11,418 Rd
+          # pages, and ~86 minutes running it. Roughly 2.5 hours, and 60
+          # minutes did not reach the start of examples.
+          #
+          # Examples are checked on five other cells (ubuntu
+          # release/devel/oldrel-1, macOS, Windows). What is unique here
+          # is true Debian bookworm with Suggests absent: installation,
+          # compiled code and the test suite, which is what this runs.
           res <- rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes",
+                     "--no-examples"),
             build_args = c("--no-build-vignettes", "--no-manual"),
             error_on = "error")
           print(res)
