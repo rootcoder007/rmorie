@@ -7,12 +7,12 @@
 #' O(n^{-r}).}{P(sqrt(n)|Qhat - Q(p)| <= x sigma_n) = 2 Phi(x) - 1 + O(n^-r).}
 #'
 #' The rate `r` depends on the ORDER of the kernel, not on the sample:
-#' `m = 2` gives `r = 1/3`; `m = 3` gives `5/13`; `m = 4` gives `7/17` by the
+#' `m = 2` gives \code{r = 1/3}; `m = 3` gives `5/13`; `m = 4` gives `7/17` by the
 #' earlier literature, improved to `1/2` by Remark 3.1 of this book. Those five
 #' numbers are quoted verbatim from the text.
 #'
 #' The book also says plainly that `o(n^-1/2)` is unreachable for ANY kernel
-#' order without adding the next Edgeworth term, so `r = 1/2` is the ceiling of
+#' order without adding the next Edgeworth term, so \code{r = 1/2} is the ceiling of
 #' this approach, not a stepping stone.
 #'
 #' The two-sided normal probability and the bound term `n^(-r)` come back
@@ -22,7 +22,7 @@
 #' @param x Argument, in units of `sigma_n`.
 #' @param n Sample size.
 #' @param m Kernel order; 2, 3 or 4.
-#' @param improved For `m = 4`, use Remark 3.1's `r = 1/2` instead of the
+#' @param improved For `m = 4`, use Remark 3.1's \code{r = 1/2} instead of the
 #'   literature's `7/17`.
 #' @return Named list with ``estimate``, ``bound``, ``rate``, ``m``, ``n``, ``method``.
 #' @references Fauzi and Maesono (2023), Eq. (3.5), Remark 3.1.
