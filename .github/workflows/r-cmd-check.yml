@@ -256,7 +256,12 @@ jobs:
     name: debian-bookworm (r-base 4.5.1, Debian)
     runs-on: ubuntu-latest
     container: r-base:4.5.1
-    timeout-minutes: 120
+    # 120 was not enough: this leg has been cancelled at exactly two
+    # hours on every recent commit. It is the only cell that runs a full
+    # --as-cran check inside a container on a 2-core runner, over 11,418
+    # Rd pages and 7,600 test files, so it legitimately needs longer than
+    # the hosted legs that finish in about 50 minutes.
+    timeout-minutes: 240
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       _R_CHECK_FORCE_SUGGESTS_: false
