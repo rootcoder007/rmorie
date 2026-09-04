@@ -209,6 +209,11 @@ stat_bridge_fn_search <- function(query, max_results = 20L) {
 #' \code{tryCatch}, reporting which entries can be invoked safely.
 #' Intended to be called from CI smoke tests.
 #'
+#' @param execute When TRUE, actually CALL every registered
+#'   handler with no arguments -- a smoke test that reaches the
+#'   network for the data-fetching commands. The default checks
+#'   that each command carries a callable handler and runs none
+#'   of them.
 #' @return A data.frame with columns \code{name}, \code{ok}, \code{message}.
 #' @examplesIf nzchar(Sys.getenv("MORIE_RUN_FULL_SMOKE"))
 #' \donttest{
@@ -227,12 +232,24 @@ stat_bridge_fn_search <- function(query, max_results = 20L) {
 #' }
 #' \dontshow{\}) # examplesIf}
 #' @export
-stat_bridge_verify <- function() {
+stat_bridge_verify <- function(execute = FALSE) {
   reg <- .morie_stat_commands$registry
   rows <- vector("list", length(reg))
   i <- 1L
   for (cmd in reg) {
-    res <- tryCatch({
+    res <- if (!isTRUE(execute)) {
+      # Structural check: the command is sound if it carries a callable
+      # handler. This does NOT run it. Running every handler is not a
+      # cheap verification once .morie_auto_register_stat_commands() has
+      # filled the registry -- that takes it past 4,700 entries, and
+      # some of those handlers fetch live data over the network.
+      h <- cmd$handler_repl
+      if (is.function(h)) {
+        list(ok = TRUE, msg = "")
+      } else {
+        list(ok = FALSE, msg = "handler_repl is not a function")
+      }
+    } else tryCatch({
       cmd$handler_repl()
       list(ok = TRUE, msg = "")
     }, error = function(e) list(ok = FALSE, msg = conditionMessage(e)))
@@ -296,7 +313,7 @@ stat_bridge_main <- function(args = NULL) {
       }
     },
     "verify" = {
-      df <- stat_bridge_verify()
+      df <- stat_bridge_verify(execute = TRUE)
       paste(
         apply(df, 1L, function(r) {
           sprintf("  %s  %s%s",
