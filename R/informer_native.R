@@ -53,6 +53,10 @@
 #'
 #' @param x A matrix; passed to \code{as.matrix}.
 #' @return The value of \code{lapply}.
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .informer_vec(x = x)
+#' res
 #' @export
 # The k.* helper names the port carried never existed in either arm;
 # these are their concrete forms.

@@ -127,6 +127,15 @@
 #'   print(file.exists(path))
 #'   unlink(path)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("open sesame", path = path)
+#'   print(file.exists(path))
+#'   unlink(path)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_keystore_create <- function(password,
                                          path = .morie_keystore_default_path()) {
@@ -159,6 +168,18 @@ morie_crypto_keystore_create <- function(password,
 #'   print(morie_crypto_keystore_list("pw", path = path))
 #'   unlink(path)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   pk <- as.raw(sample(0:255, 32, replace = TRUE))
+#'   sk <- as.raw(sample(0:255, 64, replace = TRUE))
+#'   morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+#'   print(morie_crypto_keystore_list("pw", path = path))
+#'   unlink(path)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_keystore_store <- function(name, pk, sk, password,
                                         path = .morie_keystore_default_path()) {
@@ -200,6 +221,19 @@ morie_crypto_keystore_store <- function(name, pk, sk, password,
 #'   print(identical(out$sk, sk))
 #'   unlink(path)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   pk <- as.raw(sample(0:255, 32, replace = TRUE))
+#'   sk <- as.raw(sample(0:255, 64, replace = TRUE))
+#'   morie_crypto_keystore_store("alice", pk = pk, sk = sk, password = "pw", path = path)
+#'   out <- morie_crypto_keystore_load("alice", password = "pw", path = path)
+#'   print(identical(out$sk, sk))
+#'   unlink(path)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_keystore_load <- function(name, password,
                                        path = .morie_keystore_default_path()) {
@@ -241,6 +275,17 @@ morie_crypto_keystore_load <- function(name, password,
 #'   print(morie_crypto_keystore_list("pw", path = path))
 #'   unlink(path)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("sodium", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (morie_crypto_sodium_available()) {
+#'   path <- tempfile(fileext = ".keystore")
+#'   morie_crypto_keystore_create("pw", path = path)
+#'   morie_crypto_keystore_store("k1", as.raw(1:4), as.raw(5:8), "pw", path = path)
+#'   morie_crypto_keystore_store("k2", as.raw(1:4), as.raw(5:8), "pw", path = path)
+#'   print(morie_crypto_keystore_list("pw", path = path))
+#'   unlink(path)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_keystore_list <- function(password,
                                        path = .morie_keystore_default_path()) {

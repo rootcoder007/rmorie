@@ -246,6 +246,17 @@
 #' ))
 #' head(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # No API key needed: falls back to the bundled synthetic sample.
+#' df <- suppressWarnings(morie_ingest_forensics_nibrs(
+#'   year = 2023, offense = "aggravated-assault", state = "GA",
+#'   max_features = 10L
+#' ))
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_nibrs <- function(year,
                                          offense = NULL,
@@ -406,6 +417,14 @@ morie_ingest_forensics_nibrs <- function(year,
 #'                                            max_features = 1000L)
 #' head(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' df <- morie_ingest_forensics_namus_missing(state = "CA",
+#'                                            max_features = 1000L)
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_namus_missing <- function(
     state = NULL,
@@ -624,6 +643,10 @@ morie_ingest_forensics_namus_missing <- function(
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_nist_rds <- function(
     dataset_id = NULL,

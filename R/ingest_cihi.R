@@ -85,6 +85,14 @@ morie_datasets_cihi_data_tables <- function() {
 #' u <- morie_datasets_cihi_data_tables()$url[1]
 #' df <- morie_ingest_cihi_xlsx(u)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Any table from the catalogue, e.g. the injury/trauma ED table:
+#' u <- morie_datasets_cihi_data_tables()$url[1]
+#' df <- morie_ingest_cihi_xlsx(u)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_cihi_xlsx <- function(url, sheet = NULL, timeout = 120,
                                    user_agent = "morie/r (+https://github.com/rootcoder007/rmorie)",

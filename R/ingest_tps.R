@@ -184,6 +184,19 @@ morie_ingest_tps_layers <- function() {
 #' )
 #' nrow(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' df <- morie_ingest_tps_feature_layer(
+#'   morie_ingest_tps_layers()$url[
+#'     morie_ingest_tps_layers()$name == "major-crime"
+#'   ],
+#'   where = "OCC_YEAR >= 2023",
+#'   max_features = 5000L
+#' )
+#' nrow(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_feature_layer <- function(
     layer_url,
@@ -265,6 +278,10 @@ morie_ingest_tps_feature_layer <- function(
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_fetch <- function(layer,
                                    year = NULL,

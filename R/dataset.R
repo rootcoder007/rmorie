@@ -413,6 +413,14 @@ morie_dataset_profile_summary_table <- function(profile) {
 #' df <- morie_dataset_load(tmp)
 #' head(df)
 #' unlink(tmp)
+#' @examples
+#' \dontshow{if (requireNamespace("readxl", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' tmp <- tempfile(fileext = ".csv")
+#' write.csv(data.frame(a = 1:3, b = c("x", "y", "z")), tmp, row.names = FALSE)
+#' df <- morie_dataset_load(tmp)
+#' head(df)
+#' unlink(tmp)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_load <- function(path, encoding = "UTF-8", ...) {
   if (!file.exists(path)) {

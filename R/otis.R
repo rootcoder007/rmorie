@@ -46,6 +46,37 @@
 #'   `morie_otis_volat`, `morie_otis_rctrnd`, `morie_otis_otdesc`). See
 #'   those functions for full per-primitive argument lists.
 #' @name morie_otis_primitives
+#' @examples
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_regional_placement(b01))
+#' class(res)
+#' }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_alert_state_combo(b01))
+#' class(res)
+#' }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_volatility(b01))
+#' class(res)
+#' }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_rc_trends(b01))
+#' class(res)
+#' }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_descriptives(b01))
+#' class(res)
+#' }
+#' \donttest{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_dml(b01))
+#' class(res)
+#' }
 NULL
 
 

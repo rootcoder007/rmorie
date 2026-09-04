@@ -25,6 +25,11 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_mrm_load_si_dataset("otis_b01")
 #' d$provenance$n_rows
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' d <- morie_mrm_load_si_dataset("otis_b01")
+#' d$provenance$n_rows
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_mrm_load_si_dataset <- function(name = "otis_b01") {
   data <- morie_sample(name)
