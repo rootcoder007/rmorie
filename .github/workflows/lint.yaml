@@ -106,7 +106,18 @@ jobs:
           hard <- setdiff(c(fld("Depends"), fld("Imports"), fld("LinkingTo")), c("R", ""))
           have <- rownames(installed.packages())
           need <- setdiff(c(hard, "pkgload"), have)
-          if (length(need)) install.packages(need)
+          # install.packages() with no repos set fails outright:
+          # "trying to use CRAN without setting a mirror". Name every
+          # source explicitly -- rmoriebricklayer and rmoriedata live on
+          # r-universe, the rest come from P3M with CRAN as the
+          # fallback.
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            stan = "https://stan-dev.r-universe.dev",
+            P3M = Sys.getenv("PKG_CRAN_MIRROR",
+                             "https://packagemanager.posit.co/cran/latest"),
+            CRAN = "https://cloud.r-project.org")
+          if (length(need)) install.packages(need, repos = repos, Ncpus = 2)
           missing <- setdiff(c(hard, "pkgload"), rownames(installed.packages()))
           if (length(missing)) stop("could not install: ", paste(missing, collapse = ", "))
           cat("hard dependencies ready:", length(hard), "\n")
