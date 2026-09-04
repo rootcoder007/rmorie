@@ -62,6 +62,15 @@ morie_vertex_resolve_config <- function() {
 #' # OPTIONAL fallback -- the default LLM path is local Ollama (see
 #' # morie_siu_panel / morie_llm_* helpers).
 #' tok <- morie_vertex_access_token()
+#' @examples
+#' \dontrun{
+#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' # Runs only when a Google Cloud project is configured; Vertex is an
+#' # OPTIONAL fallback -- the default LLM path is local Ollama (see
+#' # morie_siu_panel / morie_llm_* helpers).
+#' tok <- morie_vertex_access_token()
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_vertex_access_token <- function(cfg = NULL) {
   if (is.null(cfg)) cfg <- morie_vertex_resolve_config()
@@ -108,6 +117,14 @@ morie_vertex_access_token <- function(cfg = NULL) {
 #' # Runs only when a Google Cloud project is configured; Vertex is an
 #' # OPTIONAL fallback -- the default LLM path is local Ollama.
 #' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
+#' @examples
+#' \dontrun{
+#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' # Runs only when a Google Cloud project is configured; Vertex is an
+#' # OPTIONAL fallback -- the default LLM path is local Ollama.
+#' morie_vertex_ask_gemini("Summarize the MRM framework in one line.")
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
                                     temperature = 0.1,
@@ -171,6 +188,11 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
 #' @examplesIf nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))
 #' # Runs only when a Google Cloud project is configured.
 #' morie_vertex_health_check()
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
+#' # Runs only when a Google Cloud project is configured.
+#' morie_vertex_health_check()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_vertex_health_check <- function() {
   out <- list(ok = FALSE, error = NULL, model = NULL)

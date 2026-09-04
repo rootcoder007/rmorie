@@ -20,6 +20,11 @@
 #' @examplesIf requireNamespace("caret", quietly = TRUE)
 #' # See the package vignettes for usage examples:
 #' #   vignette(package = "rmorie")
+#' @examples
+#' \dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # See the package vignettes for usage examples:
+#' #   vignette(package = "rmorie")
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_random_search_cv <- function(x, y, method = NULL, n_iter = 20L, cv = 5L,
                              task = "auto", seed = 0L,

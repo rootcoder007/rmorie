@@ -36,6 +36,11 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cubes <- morie_datasets_statcan_ccjs_cubes()
 #' subset(cubes, grepl("homicide", cube_title_en, ignore.case = TRUE))
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cubes <- morie_datasets_statcan_ccjs_cubes()
+#' subset(cubes, grepl("homicide", cube_title_en, ignore.case = TRUE))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_statcan_ccjs_cubes <- function() {
   path <- system.file("extdata", "statcan_ccjs_cubes.csv",
@@ -69,6 +74,15 @@ morie_datasets_statcan_ccjs_cubes <- function() {
 #' meta <- try(morie_datasets_statcan_cube_metadata(35100177))
 #' if (!inherits(meta, "try-error")) meta$object$cubeTitleEn
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Live WDS call; try() keeps checks graceful where StatCan rejects
+#' # cloud IPs.
+#' meta <- try(morie_datasets_statcan_cube_metadata(35100177))
+#' if (!inherits(meta, "try-error")) meta$object$cubeTitleEn
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_statcan_cube_metadata <- function(product_id,
                                                  timeout_s = 60L) {

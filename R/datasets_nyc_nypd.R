@@ -568,6 +568,11 @@ morie_datasets_nyc_nypd_vehicle_stops <- function(year = NULL,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_police_precincts(offline = TRUE)
 #' head(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_police_precincts(offline = TRUE)
+#' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_police_precincts <- function(offline = TRUE,
                                                 geometry = FALSE,
@@ -647,6 +652,11 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_boroughs(offline = TRUE)
 #' df[, c("borocode", "boroname")]
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_boroughs(offline = TRUE)
+#' df[, c("borocode", "boroname")]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_boroughs <- function(offline = TRUE,
                                         geometry = FALSE,
@@ -806,6 +816,11 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_school_districts(offline = TRUE)
 #' nrow(df) # 33
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_school_districts(offline = TRUE)
+#' nrow(df) # 33
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_school_districts <- function(offline = TRUE,
                                                 max_features = NULL) {
@@ -860,6 +875,11 @@ morie_datasets_nyc_council_districts <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_community_districts(offline = TRUE)
 #' head(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_community_districts(offline = TRUE)
+#' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_community_districts <- function(offline = TRUE,
                                                    max_features = NULL) {
@@ -890,6 +910,11 @@ morie_datasets_nyc_community_districts <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
 #' head(df[, c("nta2020", "ntaname", "boroname")])
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_ntas_2020(offline = TRUE)
+#' head(df[, c("nta2020", "ntaname", "boroname")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
                                          max_features = NULL) {
@@ -955,6 +980,11 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nyc_zctas(offline = TRUE)
 #' head(df[, c("zcta5", "centlat", "centlon")])
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_zctas(offline = TRUE)
+#' head(df[, c("zcta5", "centlat", "centlon")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_zctas <- function(offline = TRUE,
                                      max_features = NULL) {
@@ -987,6 +1017,10 @@ morie_datasets_nyc_zctas <- function(offline = TRUE,
 #' @return A `data.frame` with one row per boundary fixture.
 #' @examplesIf nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_datasets_nyc_boundaries_catalog()
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_datasets_nyc_boundaries_catalog()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_boundaries_catalog <- function() {
   data.frame(
@@ -1073,6 +1107,11 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #' @examplesIf nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' codes <- morie_datasets_nyc_nypd_offense_codes()
 #' subset(codes, ky_cd == "104") # all RAPE subcategories
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' codes <- morie_datasets_nyc_nypd_offense_codes()
+#' subset(codes, ky_cd == "104") # all RAPE subcategories
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
   path <- system.file("extdata", "nyc_nypd_offense_codes.csv",
@@ -1116,6 +1155,11 @@ morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' books <- morie_datasets_nyc_nypd_law_books()
 #' subset(books, book == "PL")
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' books <- morie_datasets_nyc_nypd_law_books()
+#' subset(books, book == "PL")
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_nypd_law_books <- function() {
   path <- system.file("extdata", "nyc_nypd_law_books.csv",
@@ -1155,6 +1199,10 @@ morie_datasets_nyc_nypd_law_books <- function() {
 #'   `law_code`. Length-preserving.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_parse_nypd_law_code(c("PL 1601005", "AC 0019190", "ABC0064A00"))
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_parse_nypd_law_code(c("PL 1601005", "AC 0019190", "ABC0064A00"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_parse_nypd_law_code <- function(law_code) {
   law_code <- as.character(law_code)
@@ -1221,6 +1269,13 @@ morie_parse_nypd_law_code <- function(law_code) {
 #'   offline = TRUE
 #' )
 #' names(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_nyc_nypd_resolved("nypd_arrests_ytd",
+#'   offline = TRUE
+#' )
+#' names(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_nypd_resolved <- function(
   dataset_key,

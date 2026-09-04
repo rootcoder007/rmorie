@@ -83,6 +83,12 @@
 #' cat <- morie_datasets_tps_arcgis_hub_layers()
 #' nrow(cat) # 71
 #' head(cat$title)
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat <- morie_datasets_tps_arcgis_hub_layers()
+#' nrow(cat) # 71
+#' head(cat$title)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
@@ -255,6 +261,20 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #' ))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
+#' pic_id <- cat$hub_id[cat$title ==
+#'   "Persons in Crisis Calls for Service Attended Open Data"]
+#' \donttest{
+#' df <- try(morie_datasets_tps_arcgis_hub_by_id(
+#'   pic_id,
+#'   format = "json", where = "OCC_YEAR=2024",
+#'   max_features = 25L, offline = TRUE
+#' ))
+#' if (!inherits(df, "try-error")) head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
                                                 format = "json",
@@ -356,6 +376,17 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' ))
 #' if (!inherits(path, "try-error")) path
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
+#' \donttest{
+#' path <- try(morie_datasets_tps_arcgis_hub_download(
+#'   cat$hub_id[1],
+#'   format = "csv"
+#' ))
+#' if (!inherits(path, "try-error")) path
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_arcgis_hub_download <- function(hub_id,
                                                    format = "csv",
@@ -607,6 +638,11 @@ morie_datasets_arcgis_item_by_id <- function(item_id,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
 #' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_toronto_zoning_per_neighbourhood(offline = TRUE)
+#' head(df[, c("Neighbourhood", "Total_Population", "Seniors65andover")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_toronto_zoning_per_neighbourhood <- function(
   layer = c("neighbourhoods", "zoning_stats"),

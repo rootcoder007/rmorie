@@ -27,6 +27,13 @@
 #'   head(b01)
 #' }
 #' @name mrm_samples
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (FALSE) {
+#'   b01 <- morie_load_dataset("otisb01")
+#'   head(b01)
+#' }
+#' \dontshow{\}) # examplesIf}
 NULL
 
 
@@ -39,6 +46,11 @@ NULL
 #' @param name One of `"otis_b01"`, `"otis_b09"`, `"otis_c11"`,
 #'   `"tps_assault"`.
 #' @return A data.frame.
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' b01 <- morie_sample("otis_b01")
+#' head(b01)
+#' \dontshow{\}) # examplesIf}
 #' @export
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' b01 <- morie_sample("otis_b01")
@@ -132,6 +144,20 @@ morie_tps_layer_urls <- function() {
 #' tps <- utils::read.csv(csv)
 #' nrow(tps)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Network: fetches major-crime indicators from the Toronto Police
+#' # ArcGIS open-data layer.
+#' csv <- morie_fetch_tps(
+#'   category = "Assault",
+#'   cache_dir = tempdir(),
+#'   where = "OCC_YEAR = 2024"
+#' )
+#' tps <- utils::read.csv(csv)
+#' nrow(tps)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_fetch_tps <- function(
   category,

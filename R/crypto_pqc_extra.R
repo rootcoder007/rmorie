@@ -152,6 +152,12 @@ morie_crypto_hqc_decaps <- function(sk, ct) {
 #' kp <- morie_crypto_lamport_keygen()
 #' sig <- morie_crypto_lamport_sign(kp, "hello")
 #' morie_crypto_lamport_verify(kp$pk, "hello", sig)
+#' @examples
+#' \dontshow{if (isTRUE(tryCatch(morie_crypto_sodium_available(), error = function(e) FALSE))) withAutoprint(\{ # examplesIf}
+#' kp <- morie_crypto_lamport_keygen()
+#' sig <- morie_crypto_lamport_sign(kp, "hello")
+#' morie_crypto_lamport_verify(kp$pk, "hello", sig)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_crypto_lamport_keygen <- function() {
   sk <- matrix(vector("list", 512L), nrow = 2L)

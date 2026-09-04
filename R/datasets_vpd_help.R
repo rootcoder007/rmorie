@@ -27,6 +27,10 @@
 #'   accepts the downloaded file.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_vpd_download_instructions()
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_vpd_download_instructions()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_vpd_download_instructions <- function(to = NULL) {
   lines <- c(

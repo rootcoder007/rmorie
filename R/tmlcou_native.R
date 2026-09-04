@@ -43,6 +43,10 @@
 #'
 #' @param x Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcou_expit(x = x)
+#' res
 #' @export
 # vectorised: the scalar if() errors the moment a linear predictor
 # VECTOR arrives, which is every call site

@@ -704,6 +704,14 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #'   print(rr$summary_lines)
 #' }
 #'
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#'   rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
+#'                                       save_fig = FALSE)
+#'   print(rr$summary_lines)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_urban_scaling_beta <- function(category = "Assault",
                                            year = 2024L,
@@ -1293,6 +1301,13 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #'                                              save_fig = FALSE)
 #' }
 #'
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#'   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
+#'                                              save_fig = FALSE)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_statphysics_analyze_all <- function(categories = NULL,
                                                 save_fig = TRUE,
