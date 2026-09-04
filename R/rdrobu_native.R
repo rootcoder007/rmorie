@@ -101,5 +101,11 @@ morie_rd_confidence_intervals <- morie_rdrobu
 #' res <- .rdrobu_cheatsheet()
 #' res
 .rdrobu_cheatsheet <- function() {
-  "rdrobu: the three RD intervals of Calonico, Cattaneo & Titiunik (2014) side by side -- conventional, bias-corrected, and robust (recentred AND rescaled by V + C^bc). Shares its implementation with causrddc; see that module for the estimator, bandwidths and designs."
+  paste0(
+    "rdrobu: the three RD intervals of Calonico, Cattaneo & Titiu",
+    "nik (2014) side by side -- conventional, bias-corrected, and",
+    " robust (recentred AND rescaled by V + C^bc). Shares its imp",
+    "lementation with causrddc; see that module for the estimator",
+    ", bandwidths and designs."
+  )
 }

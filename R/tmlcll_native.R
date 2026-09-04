@@ -485,7 +485,17 @@ morie_tmle_cross_lagged <- function(y, D, X, time, g = NULL, bounds = NULL) {
 #' res <- .tmlcll_morie_cheatsheet()
 #' res
 .tmlcll_morie_cheatsheet <- function() {
-  "tmlcll: the traditional CLPM's cross-lags MIX within-person change with stable between-person differences, so a random intercept is needed before 'X leads to Y' means anything -- with a strong between-person confounder and no within-person effect, the plain CLPM still reports a cross-lag. And a regression coefficient is not a causal effect under TIME-VARYING confounding: the g-formula identifies the intervention contrast and the sequential TMLE estimates it doubly robustly. Both are provided, and each is named for what it is."
+  paste0(
+    "tmlcll: the traditional CLPM's cross-lags MIX within-person ",
+    "change with stable between-person differences, so a random i",
+    "ntercept is needed before 'X leads to Y' means anything -- w",
+    "ith a strong between-person confounder and no within-person ",
+    "effect, the plain CLPM still reports a cross-lag. And a regr",
+    "ession coefficient is not a causal effect under TIME-VARYING",
+    " confounding: the g-formula identifies the intervention cont",
+    "rast and the sequential TMLE estimates it doubly robustly. B",
+    "oth are provided, and each is named for what it is."
+  )
 }
 
 morie_tmlecrosslagged <- morie_tmle_cross_lagged

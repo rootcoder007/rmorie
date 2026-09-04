@@ -313,7 +313,18 @@ separation_weight_map <- function(labels, w0 = 10.0, sigma = 5.0) {
 #' res <- .unetbk_cheatsheet()
 #' res
 .unetbk_cheatsheet <- function() {
-  "unetbk: built for the case where annotated IMAGES are scarce though pixels are plentiful. Contracting path for context, symmetric expanding path for localisation, and SKIP CONNECTIONS carrying high-resolution detail that pooling destroyed -- context alone cannot localise. Only VALID convolutions and no fully connected layers, so the output is smaller than the input and covers only pixels with full context; hence the OVERLAP-TILE strategy with missing border data MIRRORED. A weight map raises the loss on the thin background between touching objects."
+  paste0(
+    "unetbk: built for the case where annotated IMAGES are scarce",
+    " though pixels are plentiful. Contracting path for context, ",
+    "symmetric expanding path for localisation, and SKIP CONNECTI",
+    "ONS carrying high-resolution detail that pooling destroyed -",
+    "- context alone cannot localise. Only VALID convolutions and",
+    " no fully connected layers, so the output is smaller than th",
+    "e input and covers only pixels with full context; hence the ",
+    "OVERLAP-TILE strategy with missing border data MIRRORED. A w",
+    "eight map raises the loss on the thin background between tou",
+    "ching objects."
+  )
 }
 
 # compact alias per ledger/NAMING.md

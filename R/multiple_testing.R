@@ -1165,7 +1165,7 @@ n_effective_tests <- function(correlation_matrix,
 #' @export
 print.morie_multiple_testing_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")
-  if (!is.null(x$call) && nzchar(x$call)) {
+  if (!is.null(x$call) && length(x$call) == 1L && nzchar(x$call)) {
     cat("Call:", x$call, "\n\n", sep = " ")
   }
   if (length(x$summary_lines) > 0L) {

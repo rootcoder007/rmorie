@@ -6,11 +6,11 @@
 \alias{morie_kosorok_multiplier_bootstrap}
 \title{Multiplier bootstrap with exponential weights (Dirichlet weights)}
 \usage{
-Multboot(x, B = 200, seed = 1)
+Multboot(x, B = 200, seed = 1, deterministic_seed = NULL)
 
-morie_ksr08_kosorok_multiplier_bootstrap(x, B = 200, seed = 1)
+morie_ksr08_kosorok_multiplier_bootstrap(x, B = 200, seed = 1, deterministic_seed = NULL)
 
-morie_kosorok_multiplier_bootstrap(x, B = 200, seed = 1)
+morie_kosorok_multiplier_bootstrap(x, B = 200, seed = 1, deterministic_seed = NULL)
 }
 \arguments{
 \item{x}{The sample.}
@@ -18,6 +18,12 @@ morie_kosorok_multiplier_bootstrap(x, B = 200, seed = 1)
 \item{B}{Number of replicates (fixed budget).}
 
 \item{seed}{Seed for the pinned generator.}
+
+\item{deterministic_seed}{Optional integer; if supplied, the pinned
+LCG is seeded from SHA-256("ksr08_multiplier:<deterministic_seed>")
+via \code{morie_det_rng} instead of \code{seed}, which is the
+cross-arm reproducible path.}
+
 }
 \value{
 List with \code{estimate}, \code{boot_mean}, \code{boot_sd},

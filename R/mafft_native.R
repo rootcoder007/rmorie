@@ -1395,7 +1395,15 @@ mafft_alignment <- function(sequences, method = "FFT-NS-2", seq_type = NULL,
     method = method, seq_type = kind, length = nchar(aln[1L]),
     n = length(seqs), s_a = sc$s_a, s_op = as.numeric(s_op),
     matrix_mode = matrix, tree = tree_used, refine_rounds = rounds,
-    note = "Katoh et al. 2002: the FFT finds homologous segments and the residue DP is restricted to the sub-matrices between their centres; NW-NS-* skip the FFT and matrix='all_positive' is the paper's NW-AP-2 control, whose S_a comes out at 0.8211 against the 0.82 the paper prints. The default raw matrix is the paper's own 200-PAM JTT log-odds; default='grantham' builds one from the volume/polarity vectors instead."
+    note = paste0(
+      "Katoh et al. 2002: the FFT finds homologous segments and the",
+      " residue DP is restricted to the sub-matrices between their ",
+      "centres; NW-NS-* skip the FFT and matrix='all_positive' is t",
+      "he paper's NW-AP-2 control, whose S_a comes out at 0.8211 ag",
+      "ainst the 0.82 the paper prints. The default raw matrix is t",
+      "he paper's own 200-PAM JTT log-odds; default='grantham' buil",
+      "ds one from the volume/polarity vectors instead."
+    )
   )
 }
 
@@ -1439,7 +1447,13 @@ mafftalignment <- mafft_alignment
 #' @export
 morie_mafft <- function(op, ...) {
   if (missing(op) || length(op) != 1L) {
-    stop("mafft: op must be one of mafft_alignment, residue_vectors, correlation, find_homologous_segments, arrange_segments, normalized_similarity_matrix, jtt_matrix, group_align, sixtuple_distance, guide_tree, progressive_align, iterative_refine, wsp_score, cheatsheet")
+    stop(paste0(
+      "mafft: op must be one of mafft_alignment, residue_vectors, c",
+      "orrelation, find_homologous_segments, arrange_segments, norm",
+      "alized_similarity_matrix, jtt_matrix, group_align, sixtuple_",
+      "distance, guide_tree, progressive_align, iterative_refine, w",
+      "sp_score, cheatsheet"
+    ))
   }
   op <- as.character(op)
   switch(op,

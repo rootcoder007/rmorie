@@ -266,7 +266,18 @@
 #' res <- .tlroad_cheatsheet()
 #' res
 .tlroad_cheatsheet <- function() {
-  "tlroad: (1) data as a random variable, (2) a statistical model stating only what is KNOWN, (3) the scientific question as a target parameter, (4) TMLE plus inference -- in that order, because you cannot shoot the arrow then paint the bullseye. A TMLE needs three matched pieces: a pathwise differentiable parameter with canonical gradient D*, a least favorable submodel through the initial fit, and a LOSS WHOSE SCORE SPANS D*. That span is the mechanism: it makes the update solve P_n D* = 0, which is where double robustness and efficiency come from."
+  paste0(
+    "tlroad: (1) data as a random variable, (2) a statistical mod",
+    "el stating only what is KNOWN, (3) the scientific question a",
+    "s a target parameter, (4) TMLE plus inference -- in that ord",
+    "er, because you cannot shoot the arrow then paint the bullse",
+    "ye. A TMLE needs three matched pieces: a pathwise differenti",
+    "able parameter with canonical gradient D*, a least favorable",
+    " submodel through the initial fit, and a LOSS WHOSE SCORE SP",
+    "ANS D*. That span is the mechanism: it makes the update solv",
+    "e P_n D* = 0, which is where double robustness and efficienc",
+    "y come from."
+  )
 }
 
 # Main entry point

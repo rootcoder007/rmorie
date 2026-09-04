@@ -706,5 +706,15 @@ morie_bayesian_phylogeny <- morie_phylby
 #' @return A character value.
 #' @export
 morie_phylby_cheatsheet <- function() {
-  "phylby: MrBayes 3 (Ronquist & Huelsenbeck 2003). MCMC over (topology, branch lengths, rate) with a uniform topology prior and exponential branch lengths, the likelihood coming from Felsenstein pruning. Metropolis coupling runs n chains at beta_j = 1/(1 + lambda j) and swaps them with min(1, exp[(beta_j - beta_k)(l_k - l_j)]); only the cold chain is sampled. Partitions give each subset of sites its own rate. Convergence is judged by the average standard deviation of split frequencies between independent runs."
+  paste0(
+    "phylby: MrBayes 3 (Ronquist & Huelsenbeck 2003). MCMC over (",
+    "topology, branch lengths, rate) with a uniform topology prio",
+    "r and exponential branch lengths, the likelihood coming from",
+    " Felsenstein pruning. Metropolis coupling runs n chains at b",
+    "eta_j = 1/(1 + lambda j) and swaps them with min(1, exp[(bet",
+    "a_j - beta_k)(l_k - l_j)]); only the cold chain is sampled. ",
+    "Partitions give each subset of sites its own rate. Convergen",
+    "ce is judged by the average standard deviation of split freq",
+    "uencies between independent runs."
+  )
 }

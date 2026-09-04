@@ -486,7 +486,15 @@
 #' res <- .saigeg_cheatsheet()
 #' res
 .saigeg_cheatsheet <- function() {
-  "saigeg: SAIGE. Score S = sum G_i (Y_i - mu_i) from a logistic mixed model. Under 1:100 case-control imbalance S is right-skewed and the GAUSSIAN tail is far too thin, so p-values come out much too small. The saddlepoint approximation uses the whole CGF -- all cumulants -- via Lugannani-Rice, and stays calibrated in the tail. The variance ratio is estimated once and reused so the cost is not O(MN^2)."
+  paste0(
+    "saigeg: SAIGE. Score S = sum G_i (Y_i - mu_i) from a logisti",
+    "c mixed model. Under 1:100 case-control imbalance S is right",
+    "-skewed and the GAUSSIAN tail is far too thin, so p-values c",
+    "ome out much too small. The saddlepoint approximation uses t",
+    "he whole CGF -- all cumulants -- via Lugannani-Rice, and sta",
+    "ys calibrated in the tail. The variance ratio is estimated o",
+    "nce and reused so the cost is not O(MN^2)."
+  )
 }
 
 # ---- main entry point ----

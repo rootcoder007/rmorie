@@ -333,7 +333,13 @@ abcnnt <- function(simulator, x_o, log_prior, theta0, n_rounds = 3L,
     D = D, n_simulations = length(D), history = history,
     acceptance = post$acceptance, n_rounds = as.integer(n_rounds),
     method = "Sequential Neural Likelihood (Papamakarios, Sterratt & Murray 2019) with a Masked Autoregressive Flow",
-    note = "Algorithm 1 retrains on the whole of D each round, not the newest round, and proposes from the current posterior estimate; round 1 proposes from the prior since p_hat_0 = p(theta). Flow gradients are central differences, which is slow and avoids a hand-rolled backward pass"
+    note = paste0(
+      "Algorithm 1 retrains on the whole of D each round, not the n",
+      "ewest round, and proposes from the current posterior estimat",
+      "e; round 1 proposes from the prior since p_hat_0 = p(theta).",
+      " Flow gradients are central differences, which is slow and a",
+      "voids a hand-rolled backward pass"
+    )
   )
 }
 

@@ -379,7 +379,19 @@ morie_vidgen_reconstruction_guidance <- function(x_hat, observed, index,
 #' @return A character value.
 #' @export
 morie_vidgen_cheatsheet <- function() {
-  "vidgen: a 3D U-Net FACTORISED over space and time -- each 3x3 convolution becomes 1x3x3 (space only), spatial attention keeps the frame axis as a BATCH axis, and a temporal attention block is inserted after it with the spatial axes as batch. Cost drops from (FS)^2 to F S^2 + S F^2. The unique payoff: fixing the temporal attention to the IDENTITY makes the model run on independent images exactly, so video and image objectives can be trained JOINTLY -- which matters for sample quality. RECONSTRUCTION GUIDANCE conditions on given frames at sampling time, and with a downsampler inside the loss gives super-resolution."
+  paste0(
+    "vidgen: a 3D U-Net FACTORISED over space and time -- each 3x",
+    "3 convolution becomes 1x3x3 (space only), spatial attention ",
+    "keeps the frame axis as a BATCH axis, and a temporal attenti",
+    "on block is inserted after it with the spatial axes as batch",
+    ". Cost drops from (FS)^2 to F S^2 + S F^2. The unique payoff",
+    ": fixing the temporal attention to the IDENTITY makes the mo",
+    "del run on independent images exactly, so video and image ob",
+    "jectives can be trained JOINTLY -- which matters for sample ",
+    "quality. RECONSTRUCTION GUIDANCE conditions on given frames ",
+    "at sampling time, and with a downsampler inside the loss giv",
+    "es super-resolution."
+  )
 }
 
 # compact alias per ledger/NAMING.md

@@ -86,10 +86,17 @@ test_that("counter-based means any offset is reachable", {
 test_that("the stream agrees with the Python arm bit for bit", {
   u <- .morie_random_uniform(7, seed = 12345, stream = 3)
   z <- .morie_random_normal(7, seed = 12345, stream = 3)
+  # The uniform stream IS bit-exact: it comes out of integer state, so
+  # every platform reproduces it exactly and these stay identical().
   expect_identical(u[1], 0.82723027456086129)
   expect_identical(u[7], 0.36555732542183250)
-  expect_identical(z[1], 0.94327658191243779)
-  expect_identical(z[3], -1.19034287143374250)
+  # The normal transform is AS 241 evaluated on those same uniforms.
+  # It is deterministic, but the last bit of a long Horner chain is not
+  # reproducible across platform double arithmetic -- macOS arm64
+  # differs from x86_64 Linux by 1-2 ULP -- so this asserts agreement
+  # to ~4 ULP. A real change in the transform moves it far more.
+  expect_equal(z[1], 0.94327658191243779, tolerance = 1e-15)
+  expect_equal(z[3], -1.19034287143374250, tolerance = 1e-15)
 })
 
 test_that("the multivariate draw reproduces the target covariance", {

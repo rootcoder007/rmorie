@@ -368,7 +368,18 @@
 #' res <- .tlsate_cheatsheet()
 #' res
 .tlsate_cheatsheet <- function() {
-  "tlsate: in a cluster randomized trial the units are not sampled from any defined population, so the PATE is a parameter of a superpopulation nobody drew from. The SATE -- the mean counterfactual difference for THESE units -- is interpretable without inventing one. It is not identifiable in finite samples, but the SAME TMLE is consistent and asymptotically linear for it; only the influence curve changes, dropping Q1 - Q0 - psi. The variance falls by EXACTLY the variance of the conditional effect, so effect modification is where the power gain comes from."
+  paste0(
+    "tlsate: in a cluster randomized trial the units are not samp",
+    "led from any defined population, so the PATE is a parameter ",
+    "of a superpopulation nobody drew from. The SATE -- the mean ",
+    "counterfactual difference for THESE units -- is interpretabl",
+    "e without inventing one. It is not identifiable in finite sa",
+    "mples, but the SAME TMLE is consistent and asymptotically li",
+    "near for it; only the influence curve changes, dropping Q1 -",
+    " Q0 - psi. The variance falls by EXACTLY the variance of the",
+    " conditional effect, so effect modification is where the pow",
+    "er gain comes from."
+  )
 }
 
 # compact alias per ledger/NAMING.md

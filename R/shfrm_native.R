@@ -31,8 +31,10 @@
 #'   (2019), frailtyEM, Journal of Statistical Software 90(7).
 #' @export
 #' @examples
-#' Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X = c(1, 2,
-#' 3, 4, 5, 6, 7, 8), cluster = c(1, 2, 3, 4, 5, 6, 7, 8))
+#' # four clusters of two: within-cluster replication is what makes
+#' # the frailty variance theta identifiable at all
+#' Shfrm(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(1, 1, 0, 1, 1, 0, 1, 1),
+#'   X = c(0, 1, 0, 1, 0, 1, 0, 1), cluster = c(1, 1, 2, 2, 3, 3, 4, 4))
 Shfrm <- function(time, event, X, cluster, theta = NULL) {
   t <- as.numeric(time)
   e <- as.numeric(event)
@@ -44,6 +46,10 @@ Shfrm <- function(time, event, X, cluster, theta = NULL) {
   ks <- sort(unique(cl))
   K <- length(ks)
   if (K < 2L) stop("need at least 2 clusters", call. = FALSE)
+  if (K == n) {
+    stop("shared frailty is unidentifiable: every cluster has a single observation, so there is no within-cluster replication to estimate theta from",
+         call. = FALSE)
+  }
   kidx <- lapply(ks, function(k) which(cl == k))
   zeros <- rep(0, n)
 

@@ -293,7 +293,20 @@ integrate_marginals <- function(conditional_marginals, log_weights, x_grid) {
 #' res <- .inlasm_cheatsheet()
 #' res
 .inlasm_cheatsheet <- function() {
-  "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta, non-Gaussian response -- so the posterior marginals have no closed form. MCMC works in principle but has convergence AND time problems, sometimes badly enough that it is not appropriate for routine analysis. INLA is deterministic: p(x_i|y) = INTEGRAL p(x_i|theta,y) p(theta|y) dtheta, where the inner term is a LAPLACE approximation and the outer integral is a finite weighted SUM over a small design of theta -- which is exactly why dim(theta) must stay low. The Gaussian inner step is EXACT for a Gaussian likelihood; the simplified Laplace adds the skewness it cannot represent. Seconds or minutes against hours or days."
+  paste0(
+    "inlasm: latent GAUSSIAN field x, a FEW hyperparameters theta",
+    ", non-Gaussian response -- so the posterior marginals have n",
+    "o closed form. MCMC works in principle but has convergence A",
+    "ND time problems, sometimes badly enough that it is not appr",
+    "opriate for routine analysis. INLA is deterministic: p(x_i|y",
+    ") = INTEGRAL p(x_i|theta,y) p(theta|y) dtheta, where the inn",
+    "er term is a LAPLACE approximation and the outer integral is",
+    " a finite weighted SUM over a small design of theta -- which",
+    " is exactly why dim(theta) must stay low. The Gaussian inner",
+    " step is EXACT for a Gaussian likelihood; the simplified Lap",
+    "lace adds the skewness it cannot represent. Seconds or minut",
+    "es against hours or days."
+  )
 }
 
 # compact alias per ledger/NAMING.md

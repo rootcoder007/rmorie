@@ -28,7 +28,8 @@
 #   themselves (CSAFE, NSRL, ...) are multi-gigabyte and must be
 #   downloaded out-of-band; this client returns the catalog records.
 #
-# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx custom error formatting.
+# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx
+# custom error formatting.
 
 .MORIE_FORENSICS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_FORENSICS_DEFAULT_TIMEOUT <- 60

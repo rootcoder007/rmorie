@@ -303,7 +303,17 @@ morie_tlsurvy_adaptive_survey_tmle <- function(V, influence_proxy,
 #' @return A character value.
 #' @export
 morie_tlsurvy_cheatsheet <- function() {
-  return("tlsurvy: N too large to use, so SAMPLE the data rather than approximate the estimator -- select n of N with UNEQUAL inclusion probabilities and run TMLE on the sample, with n/N -> 0 so the saving persists. A cheap low-dimensional V is observed for ALL N, which is what makes the design adaptive: set pi_i proportional to the expected INFLUENCE given V and the variance is minimised for that n. Weight by 1/pi (Horvitz-Thompson) to stay unbiased for the FULL-data parameter. Where the influence is flat, adaptation buys nothing.")
+  return(paste0(
+    "tlsurvy: N too large to use, so SAMPLE the data rather than ",
+    "approximate the estimator -- select n of N with UNEQUAL incl",
+    "usion probabilities and run TMLE on the sample, with n/N -> ",
+    "0 so the saving persists. A cheap low-dimensional V is obser",
+    "ved for ALL N, which is what makes the design adaptive: set ",
+    "pi_i proportional to the expected INFLUENCE given V and the ",
+    "variance is minimised for that n. Weight by 1/pi (Horvitz-Th",
+    "ompson) to stay unbiased for the FULL-data parameter. Where ",
+    "the influence is flat, adaptation buys nothing."
+  ))
 }
 
 # Compact alias per ledger/NAMING.md

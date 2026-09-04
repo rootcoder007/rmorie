@@ -255,7 +255,17 @@ morie_sdxlcd_condition_vector <- function(h_original, w_original, c_top = 0, c_l
 #' @return A character value.
 #' @export
 morie_sdxlcd_cheatsheet <- function() {
-  "sdxlcd: two improvements that add NO supervision -- they condition on metadata the pipeline already had and threw away. SIZE: filtering below a minimum resolution discarded 39% of the data and upscaling bakes in artefacts, so give the UNet the ORIGINAL (h,w) as Fourier-embedded conditioning added to the timestep embedding. CROP: batching forces a random crop that LEAKS into samples (cut-off heads), so condition on (c_top,c_left) and set (0,0) at inference to ask for an uncropped image. Plus multi-aspect buckets at ~1024^2 pixels."
+  paste0(
+    "sdxlcd: two improvements that add NO supervision -- they con",
+    "dition on metadata the pipeline already had and threw away. ",
+    "SIZE: filtering below a minimum resolution discarded 39% of ",
+    "the data and upscaling bakes in artefacts, so give the UNet ",
+    "the ORIGINAL (h,w) as Fourier-embedded conditioning added to",
+    " the timestep embedding. CROP: batching forces a random crop",
+    " that LEAKS into samples (cut-off heads), so condition on (c",
+    "_top,c_left) and set (0,0) at inference to ask for an uncrop",
+    "ped image. Plus multi-aspect buckets at ~1024^2 pixels."
+  )
 }
 
 # compact alias per ledger/NAMING.md

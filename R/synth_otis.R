@@ -87,7 +87,10 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail", "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre", "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail", "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
+    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail",
+      "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre",
+      "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail",
+      "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
     Alert_Type = sample(c("Immigration Hold Flag", "Mental Health Alert", "Serious Mental Illness Alert", "Suicide Risk Alert", "Suicide Watch Alert", "Transgender Alert"), n, replace = TRUE),
     Alert_Presence = sample(c("Yes", "No"), n, replace = TRUE),
     Number_SegregationPlacements = sample(0:80, n, replace = TRUE),
@@ -128,9 +131,13 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail", "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre", "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail", "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
+    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail",
+      "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre",
+      "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail",
+      "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
     Gender = sample(c("Female", "Male"), n, replace = TRUE),
-    Reason = sample(c("Close Confinement (Disciplinary Segregation)", "Inmate Needs Protection", "Inmate Needs Protection: Medical", "Inmate Refused Search/Scan", "Security of Institution/Safety of Others", "Security of Institution/Safety of Others: Medical", "Other"), n, replace = TRUE),
+    Reason = sample(c("Close Confinement (Disciplinary Segregation)", "Inmate Needs Protection", "Inmate Needs Protection: Medical", "Inmate Refused Search/Scan", "Security of Institution/Safety of Others",
+      "Security of Institution/Safety of Others: Medical", "Other"), n, replace = TRUE),
     Number_SegregationPlacements = sample(0:80, n, replace = TRUE),
     stringsAsFactors = FALSE
   )
@@ -157,7 +164,10 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_AtTimeOfPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail", "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre", "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail", "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
+    Institution_AtTimeOfPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail",
+      "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre",
+      "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail",
+      "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
     Gender = sample(c("Female", "Male", "All"), n, replace = TRUE),
     Measure = sample(c("Median", "Mode"), n, replace = TRUE),
     NumberConsecutiveDays_Segregation = sample(0:80, n, replace = TRUE),
@@ -171,7 +181,8 @@
   set.seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
-    NumberPlacements_Segregation = sample(c("1 placement", "2 placements", "3 placements", "4 placements", "5 placements", "6 to 10 placements", "11 to 15 placements", "16 to 20 placements", "21 to 25 placements", "26 to 30 placements", "31 to 35 placements", "36 to 40 placements", "more than 40 placements"), n, replace = TRUE),
+    NumberPlacements_Segregation = sample(c("1 placement", "2 placements", "3 placements", "4 placements", "5 placements", "6 to 10 placements", "11 to 15 placements", "16 to 20 placements", "21 to 25 placements", "26 to 30 placements",
+      "31 to 35 placements", "36 to 40 placements", "more than 40 placements"), n, replace = TRUE),
     Gender = sample(c("Female", "Male"), n, replace = TRUE),
     NumberIndividuals_Segregation = sample(0:80, n, replace = TRUE),
     stringsAsFactors = FALSE
@@ -199,7 +210,10 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Institution_MostRecentPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail", "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre", "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail", "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
+    Institution_MostRecentPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail",
+      "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre",
+      "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail",
+      "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
     Gender = sample(c("Female", "Male"), n, replace = TRUE),
     NumberIndividuals_RestrictiveConfinement = sample(0:80, n, replace = TRUE),
     NumberIndividuals_Segregation = sample(0:80, n, replace = TRUE),
@@ -243,7 +257,8 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "More Than One Reported Religion or Spiritual Affiliation", "Muslim", "No Religion", "Sikh", "Unknown Or Not Reported"), n, replace = TRUE),
+    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "More Than One Reported Religion or Spiritual Affiliation", "Muslim", "No Religion", "Sikh",
+      "Unknown Or Not Reported"), n, replace = TRUE),
     NumberIndividuals_RestrictiveConfinement = sample(0:80, n, replace = TRUE),
     NumberIndividuals_Segregation = sample(0:80, n, replace = TRUE),
     stringsAsFactors = FALSE
@@ -285,7 +300,8 @@
   set.seed(seed)
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
-    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "More Than One Reported Religion or Spiritual Affiliation", "Muslim", "No Religion", "Sikh", "Unknown Or Not Reported"), n, replace = TRUE),
+    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "More Than One Reported Religion or Spiritual Affiliation", "Muslim", "No Religion", "Sikh",
+      "Unknown Or Not Reported"), n, replace = TRUE),
     Gender = sample(c("Female", "Male"), n, replace = TRUE),
     NumberIndividuals_InCustody = sample(0:80, n, replace = TRUE),
     NumberIndividuals_RestrictiveConfinement = sample(0:80, n, replace = TRUE),
@@ -316,7 +332,10 @@
   data.frame(
     EndFiscalYear = sample(2018:2024, n, replace = TRUE),
     Region_MostRecentPlacement = sample(c("Central", "Eastern", "Northern", "Toronto", "Western"), n, replace = TRUE),
-    Institution_MostRecentPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail", "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre", "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail", "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
+    Institution_MostRecentPlacement = sample(c("Algoma Treatment and Remand Centre", "Brockville Jail", "Central East Correctional Centre", "Central North Correctional Centre", "Elgin-Middlesex Detention Centre", "Fort Frances Jail",
+      "Hamilton Wentworth Detention Centre", "Kenora Jail", "Maplehurst Correctional Complex", "Monteith Correctional Complex", "Niagara Detention Centre", "North Bay Jail", "Ontario Correctional Institute", "Ottawa-Carleton Detention Centre",
+      "Quinte Detention Centre", "Sarnia Jail", "South West Detention Centre", "St. Lawrence Valley Correctional and Treatment Centre", "Stratford Jail", "Sudbury Jail", "Thunder Bay Correctional Centre", "Thunder Bay Jail",
+      "Toronto East Detention Centre", "Toronto South Detention Centre", "Vanier Centre for Women"), n, replace = TRUE),
     Gender = sample(c("Female", "Male", "All"), n, replace = TRUE),
     Measure = sample(c("Maximum", "Median", "Mode"), n, replace = TRUE),
     TotalAggregatedDays_RestrictiveConfinement = sample(0:80, n, replace = TRUE),
@@ -398,7 +417,8 @@
   set.seed(seed)
   data.frame(
     Year = sample(2018:2024, n, replace = TRUE),
-    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "Muslim", "More Than One Reported Religion or Spiritual Affiliation", "No Religion", "Sikh", "Unknown Or Not Reported"), n, replace = TRUE),
+    Religion = sample(c("Another Religion/Spiritual Affiliation", "Buddhist", "Christian", "Hindu", "Indigenous Spirituality", "Jewish", "Muslim", "More Than One Reported Religion or Spiritual Affiliation", "No Religion", "Sikh",
+      "Unknown Or Not Reported"), n, replace = TRUE),
     Number_CustodialDeaths = sample(0:80, n, replace = TRUE),
     stringsAsFactors = FALSE
   )

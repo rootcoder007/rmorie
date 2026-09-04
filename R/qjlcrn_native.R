@@ -248,7 +248,15 @@ distortion <- function(A, E) {
 #' res <- .qjlcrn_cheatsheet()
 #' res
 .qjlcrn_cheatsheet <- function() {
-  paste("qjlcrn: k0 = (4 + 2 beta) log n / (eps^2/2 - eps^3/3), R with entries +-1 (or sqrt(3) times {+1,0,-1} at 1/6, 2/3, 1/6), E = AR/sqrt(k). Both distributions have mean 0 and variance 1, so no Gaussians and no multiplications are needed; the sparse one touches a third of the attributes. Every pairwise squared distance is then within 1 +- eps with probability 1 - n^-beta. This is an l2 statement only.")
+  paste(paste0(
+    "qjlcrn: k0 = (4 + 2 beta) log n / (eps^2/2 - eps^3/3), R wit",
+    "h entries +-1 (or sqrt(3) times {+1,0,-1} at 1/6, 2/3, 1/6),",
+    " E = AR/sqrt(k). Both distributions have mean 0 and variance",
+    " 1, so no Gaussians and no multiplications are needed; the s",
+    "parse one touches a third of the attributes. Every pairwise ",
+    "squared distance is then within 1 +- eps with probability 1 ",
+    "- n^-beta. This is an l2 statement only."
+  ))
 }
 
 # compact alias per ledger/NAMING.md

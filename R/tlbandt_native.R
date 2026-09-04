@@ -233,7 +233,17 @@ morie_tlbandt <- function(W, Y1, Y0, blip_fn, delta = 0.1, seed = 0,
 #' res <- .tlbandt_cheatsheet()
 #' res
 .tlbandt_cheatsheet <- function() {
-  "tlbandt: contexts arrive, we choose a RANDOMISED action with a probability we design from the past, and only the reward of the action taken is revealed. The goal is INFERENCE, not cumulative reward -- and those pull apart, because an algorithm that converges to one arm stops generating data about the other. So keep g in [delta, 1-delta]: it costs regret and buys positivity. The data are dependent, but the influence terms are a MARTINGALE difference sequence precisely because the randomisation probability is known and past-measurable."
+  paste0(
+    "tlbandt: contexts arrive, we choose a RANDOMISED action with",
+    " a probability we design from the past, and only the reward ",
+    "of the action taken is revealed. The goal is INFERENCE, not ",
+    "cumulative reward -- and those pull apart, because an algori",
+    "thm that converges to one arm stops generating data about th",
+    "e other. So keep g in [delta, 1-delta]: it costs regret and ",
+    "buys positivity. The data are dependent, but the influence t",
+    "erms are a MARTINGALE difference sequence precisely because ",
+    "the randomisation probability is known and past-measurable."
+  )
 }
 
 .tlbandt_statisticalbandit <- morie_tlbandt
