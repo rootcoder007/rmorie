@@ -96,7 +96,7 @@
 #' @param progress Logical; print progress messages.
 #' @return Path to the written \code{SIU.csv}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Corpus-first: with rmoriedata installed this materializes the
 #' # panel-reviewed corpus in seconds; a live sweep of the SIU site
 #' # requires an explicit opt-in via
@@ -913,7 +913,7 @@ morie_siu_refresh_manifest <- function(
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
@@ -924,7 +924,7 @@ morie_siu_refresh_manifest <- function(
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
@@ -1081,7 +1081,7 @@ morie_siu_audit_case <- function(case_number,
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
@@ -1097,7 +1097,7 @@ morie_siu_audit_case <- function(case_number,
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
@@ -2099,7 +2099,7 @@ morie_siu_anomaly_check <- function(case_number,
 #'   string of \code{field:reason} pairs). Ordered descending by
 #'   \code{issues_count}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Corpus-first fetch is fast when rmoriedata is installed.
 #' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_sanity"))
 #' df <- utils::read.csv(csv, colClasses = "character")
@@ -2300,7 +2300,7 @@ morie_siu_sanity_check <- function(df) {
 #' morie_siu_translate(target_lang = "en",
 #'                     cache_dir = file.path(tempdir(), "morie", "siu"))
 #' \dontshow{\}) # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
 #' # ollama); translates the French-only directors reports field-by-field.
 #' res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")

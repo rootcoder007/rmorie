@@ -293,7 +293,7 @@ morie_datasets_tps_assault <- function(year = NULL,
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_autotheft(max_features = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
@@ -329,7 +329,7 @@ morie_datasets_tps_bicycletheft <- function(year = NULL,
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_breakandenter(max_features = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
@@ -439,7 +439,7 @@ morie_datasets_tps_shooting_firearm_discharges <- function(
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_theft_from_motor_vehicle(max_features = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
@@ -458,7 +458,7 @@ morie_datasets_tps_theft_from_motor_vehicle <- function(
 #' @inheritParams morie_datasets_tps_mha_apprehensions
 #' @return A \code{data.frame}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_theft_over(max_features = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }

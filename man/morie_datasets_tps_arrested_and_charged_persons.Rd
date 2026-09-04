@@ -53,7 +53,7 @@ neighbourhood, sex, age, crime category, and crime subtype.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Arrests
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_arrested_and_charged_persons(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

@@ -51,7 +51,7 @@ Collision occurrences by occurrence date.
 Tags: Traffic; Collision; Traffic Collisions; Motor Vehicle Collisions; Toronto; TPS; Toronto Police
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_traffic_collisions(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

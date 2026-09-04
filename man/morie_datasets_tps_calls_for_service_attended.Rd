@@ -52,7 +52,7 @@ aggregated by division and neighbourhood.
 Tags: ASR; TPS; Annual Statistical Report; Toronto Police; Calls for Service
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_calls_for_service_attended(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

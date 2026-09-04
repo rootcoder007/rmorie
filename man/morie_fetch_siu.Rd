@@ -88,7 +88,7 @@ parsed corpus is not shipped with the package; each user runs the
 parser themselves, which is fair use of public oversight reports.
 }
 \examples{
-\donttest{
+\dontrun{
 # Corpus-first: with rmoriedata installed this materializes the
 # panel-reviewed corpus in seconds; a live sweep of the SIU site
 # requires an explicit opt-in via

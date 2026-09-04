@@ -133,7 +133,7 @@ morie_tps_layer_urls <- function() {
 #' @param max_per_page ArcGIS page size (default `2000`; server caps).
 #' @return Path to the CSV.
 #' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Network: fetches major-crime indicators from the Toronto Police
 #' # ArcGIS open-data layer.
 #' csv <- morie_fetch_tps(
@@ -146,7 +146,7 @@ morie_tps_layer_urls <- function() {
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Network: fetches major-crime indicators from the Toronto Police
 #' # ArcGIS open-data layer.
 #' csv <- morie_fetch_tps(

@@ -427,7 +427,7 @@ morie_datasets_vancouver_public_art <- function(offline = TRUE,
 #'   `"csv"` (`/exports/csv` endpoint, no row limit).
 #' @return A `data.frame` of records.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- morie_datasets_vancouver_opendata_by_id("non-market-housing",
 #'   limit = 50
 #' )
