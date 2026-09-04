@@ -583,8 +583,11 @@
   }
   output_files <- sort(list.files(output_dir, recursive = TRUE, pattern = "\\.(csv|txt|pdf|png|html|md)$", full.names = FALSE))
   coverage <- data.frame(
-    script = c("data-wrangling", "descriptive-statistics", "distribution-tests", "frequentist-inference", "bayesian-inference", "power-design", "logistic-models", "model-comparison", "regression-models", "propensity-scores", "causal-estimators", "treatment-effects", "dag-specification", "meta-synthesis", "ebac-core", "ebac-selection-adjustment-ipw", "ebac-integrations", "ebac-gender-smote-sensitivity", "figures", "tables", "final-report"),
-    output = c("data_wrangling_log.csv", "binomial_summaries.csv", "distribution_tests.csv", "frequentist_hypothesis_tests.csv", "bayesian_posterior_summaries.csv", "power_summary.csv", "logistic_odds_ratios.csv", "model_comparison_summary.csv", "regression_coefficients.csv", "ipw_results.csv", "causal_estimator_comparison.csv", "treatment_effects_summary.csv", "official_doc_alignment_checklist.csv", "10_methods_results_paper.md", "ebac_logistic_or_primary.csv", "ebac_final_ipw_or.csv", "ebac_final_weighted_or.csv", "ebac_gender_interaction_svy_or.csv", "figures/balance_plot.pdf", "table1.html", "ebac_final_output_shapes.csv"),
+    script = c("data-wrangling", "descriptive-statistics", "distribution-tests", "frequentist-inference", "bayesian-inference", "power-design", "logistic-models", "model-comparison", "regression-models", "propensity-scores", "causal-estimators",
+      "treatment-effects", "dag-specification", "meta-synthesis", "ebac-core", "ebac-selection-adjustment-ipw", "ebac-integrations", "ebac-gender-smote-sensitivity", "figures", "tables", "final-report"),
+    output = c("data_wrangling_log.csv", "binomial_summaries.csv", "distribution_tests.csv", "frequentist_hypothesis_tests.csv", "bayesian_posterior_summaries.csv", "power_summary.csv", "logistic_odds_ratios.csv", "model_comparison_summary.csv",
+      "regression_coefficients.csv", "ipw_results.csv", "causal_estimator_comparison.csv", "treatment_effects_summary.csv", "official_doc_alignment_checklist.csv", "10_methods_results_paper.md", "ebac_logistic_or_primary.csv",
+      "ebac_final_ipw_or.csv", "ebac_final_weighted_or.csv", "ebac_gender_interaction_svy_or.csv", "figures/balance_plot.pdf", "table1.html", "ebac_final_output_shapes.csv"),
     stringsAsFactors = FALSE
   )
   coverage$exists <- ifelse(is.na(coverage$output), TRUE, coverage$output %in% output_files)

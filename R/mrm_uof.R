@@ -713,6 +713,15 @@ mrm_uof_demographic_disparity <- function(df, demo_col, outcome_col,
                                            baseline = NULL,
                                            bootstrap_reps = 0L) {
   stopifnot(is.data.frame(df))
+  # Both selectors name ONE column. Without this a vector argument fell
+  # through to the sprintf() below, which vectorises, and the result
+  # carried a length-n `call` that print() could not fold to a scalar.
+  if (!is.character(demo_col) || length(demo_col) != 1L) {
+    stop("`demo_col` must be a single column name", call. = FALSE)
+  }
+  if (!is.character(outcome_col) || length(outcome_col) != 1L) {
+    stop("`outcome_col` must be a single column name", call. = FALSE)
+  }
   warnings <- character(0)
 
   for (col in c(demo_col, outcome_col)) {
@@ -1057,7 +1066,7 @@ mrm_uof_data_quality_audit <- function(df, sidecar = NULL, expected_schema = NUL
 #' @export
 print.morie_mrm_uof_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")
-  if (!is.null(x$call) && nzchar(x$call)) {
+  if (!is.null(x$call) && length(x$call) == 1L && nzchar(x$call)) {
     cat("Call:", x$call, "\n\n", sep = " ")
   }
   if (length(x$summary_lines) > 0L) {

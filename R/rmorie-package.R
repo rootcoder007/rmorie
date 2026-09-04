@@ -166,6 +166,7 @@
 #' @importFrom stats aggregate anova ave deviance median na.omit plogis qf setNames
 #' update weighted.mean
 #' @importFrom stats dist optim pbeta pgamma rchisq runif
+#' @importFrom methods new
 #' @importFrom utils str
 #' @importFrom Rcpp sourceCpp
 #' @useDynLib rmorie, .registration = TRUE

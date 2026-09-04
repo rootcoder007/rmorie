@@ -1425,7 +1425,13 @@ morie_alammar_umap_projection <- function(X, n_neighbors = 5,
     grad <- matrix(0, n, dd)
     for (d in seq_len(dd)) {
       diffd <- outer(Z[, d], Z[, d], "-")
-      grad[, d] <- 2 * rowSums(coeff * diffd)
+      # Clip each pairwise contribution to [-4, 4] exactly as the
+      # reference implementation does (McInnes et al. 2018,
+      # umap-learn's _optimize_layout_euclidean). Without it the
+      # repulsive term 1/(1 - Q + eps) reaches ~1e12 for a
+      # near-coincident pair and the descent diverges: a one-ULP
+      # change in the input then flips the whole embedding.
+      grad[, d] <- rowSums(pmax(pmin(2 * coeff * diffd, 4), -4))
     }
     Z <- Z - lr * grad
   }

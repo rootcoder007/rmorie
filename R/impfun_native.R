@@ -340,7 +340,17 @@ concordance <- function(imputed, truth) {
 #' res <- .impfun_cheatsheet()
 #' res
 .impfun_cheatsheet <- function() {
-  "impfun: imputation is bounded by the REFERENCE PANEL, and panels disagree about which SNPs they carry -- merging by INTERSECTION discards the coverage that motivated merging. IMPUTE2 merges by ROLE: SNPs typed in the study align the haplotypes, the rest are targets. Underneath is Li-Stephens copying, the study haplotype as a MOSAIC of references switching at the recombination rate. Dosages carry uncertainty, and accuracy is measured on MASKED truth, because a confident model can be confidently wrong."
+  paste0(
+    "impfun: imputation is bounded by the REFERENCE PANEL, and pa",
+    "nels disagree about which SNPs they carry -- merging by INTE",
+    "RSECTION discards the coverage that motivated merging. IMPUT",
+    "E2 merges by ROLE: SNPs typed in the study align the haploty",
+    "pes, the rest are targets. Underneath is Li-Stephens copying",
+    ", the study haplotype as a MOSAIC of references switching at",
+    " the recombination rate. Dosages carry uncertainty, and accu",
+    "racy is measured on MASKED truth, because a confident model ",
+    "can be confidently wrong."
+  )
 }
 
 # compact alias per ledger/NAMING.md

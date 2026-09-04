@@ -11,7 +11,8 @@
 # Each wrapper is a thin dispatch to morie_datasets_tps_arcgis_hub_by_id
 # with the hub item_id hard-coded. Skipped catalog entries whose
 # slug collides with an existing TPS export at generation time:
-#   morie_datasets_tps_assault, morie_datasets_tps_auto_theft, morie_datasets_tps_break_and_enter, morie_datasets_tps_hate_crimes, morie_datasets_tps_homicides, morie_datasets_tps_intimate_partner_and_family_violence, morie_datasets_tps_mental_health_act_apprehensions, morie_datasets_tps_robbery, morie_datasets_tps_shooting_and_firearm_discharges, morie_datasets_tps_theft_from_motor_vehicle, morie_datasets_tps_theft_over
+#   morie_datasets_tps_assault, morie_datasets_tps_auto_theft, morie_datasets_tps_break_and_enter, morie_datasets_tps_hate_crimes, morie_datasets_tps_homicides, morie_datasets_tps_intimate_partner_and_family_violence,
+# morie_datasets_tps_mental_health_act_apprehensions, morie_datasets_tps_robbery, morie_datasets_tps_shooting_and_firearm_discharges, morie_datasets_tps_theft_from_motor_vehicle, morie_datasets_tps_theft_over
 
 
 #' 2008 FIRS

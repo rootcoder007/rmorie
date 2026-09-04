@@ -190,7 +190,16 @@ nbeats_forecast <- function(y, horizon, lookback = NULL, blocks = NULL, ridge = 
 #' @return A character value.
 #' @export
 nbeats_cheatsheet <- function() {
-  paste("nbeats: each block emits a BACKCAST and a forecast from one theta. Residual in: x_l = x_{l-1} - xhat_{l-1}; forecasts out: yhat = sum_l yhat_l. The residual telescopes exactly, so block l only ever sees what its predecessors could not explain -- skip the subtraction and every block re-fits the same trend. Trend and seasonality blocks CONSTRAIN the basis (polynomial, Fourier); that is where interpretability comes from.")
+  paste(paste0(
+    "nbeats: each block emits a BACKCAST and a forecast from one ",
+    "theta. Residual in: x_l = x_{l-1} - xhat_{l-1}; forecasts ou",
+    "t: yhat = sum_l yhat_l. The residual telescopes exactly, so ",
+    "block l only ever sees what its predecessors could not expla",
+    "in -- skip the subtraction and every block re-fits the same ",
+    "trend. Trend and seasonality blocks CONSTRAIN the basis (pol",
+    "ynomial, Fourier); that is where interpretability comes from",
+    "."
+  ))
 }
 
 # house entry point: the package exports one morie_<module>

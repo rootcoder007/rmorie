@@ -218,7 +218,17 @@ morie_polyak <- function(iterates, burn_in = 0) {
 #' res <- .polyak_cheatsheet()
 #' res
 .polyak_cheatsheet <- function() {
-  "polyak: (1) averaging the iterates of a SLOWLY decaying stochastic approximation is asymptotically optimal -- the second-order rate without second derivatives, provided the step decays slower than 1/t. (2) Q-learning diverges because the network computes its own target; DQN copies the weights every C steps, DDPG instead TRACKS them, theta' <- tau theta + (1-tau) theta' with tau = 1e-3, so targets move slowly and the problem resembles supervised learning. The lag, about 0.69/tau steps, is the price."
+  paste0(
+    "polyak: (1) averaging the iterates of a SLOWLY decaying stoc",
+    "hastic approximation is asymptotically optimal -- the second",
+    "-order rate without second derivatives, provided the step de",
+    "cays slower than 1/t. (2) Q-learning diverges because the ne",
+    "twork computes its own target; DQN copies the weights every ",
+    "C steps, DDPG instead TRACKS them, theta' <- tau theta + (1-",
+    "tau) theta' with tau = 1e-3, so targets move slowly and the ",
+    "problem resembles supervised learning. The lag, about 0.69/t",
+    "au steps, is the price."
+  )
 }
 
 # Aliases polyakaveraging, polyak_target, polyaktarget all point to the

@@ -290,7 +290,18 @@ phmmsr_search_pipeline <- function(sequences, profile, msv_threshold = 0.02,
 #' @return A character value.
 #' @export
 phmmsr_cheatsheet <- function() {
-  "phmmsr: profile HMMs are more sensitive and were far slower, so accelerate with a PIPELINE. The MSV filter sums multiple UNGAPPED local segments in a striped vector layout -- dropping gaps is what makes it vectorisable -- and its scores follow the SAME Gumbel distribution as gapped local alignment scores, so the filter threshold is a P-VALUE rather than an arbitrary cutoff. SPARSE RESCALING fires only near underflow instead of at every cell, for 20x on Forward/Backward. Survivors get the full model; a filter that loses true positives is a worse method, not a faster one."
+  paste0(
+    "phmmsr: profile HMMs are more sensitive and were far slower,",
+    " so accelerate with a PIPELINE. The MSV filter sums multiple",
+    " UNGAPPED local segments in a striped vector layout -- dropp",
+    "ing gaps is what makes it vectorisable -- and its scores fol",
+    "low the SAME Gumbel distribution as gapped local alignment s",
+    "cores, so the filter threshold is a P-VALUE rather than an a",
+    "rbitrary cutoff. SPARSE RESCALING fires only near underflow ",
+    "instead of at every cell, for 20x on Forward/Backward. Survi",
+    "vors get the full model; a filter that loses true positives ",
+    "is a worse method, not a faster one."
+  )
 }
 
 # compact alias per ledger/NAMING.md

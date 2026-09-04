@@ -357,7 +357,19 @@ strec_cross_entropy <- function(probability, target_index) {
 #' @return A character value.
 #' @export
 strec_cheatsheet <- function() {
-  "strec: a session recommender has no profile, only the clicks -- and interests DRIFT, often from unintended clicks. Keep TWO memories: m_s, the average of the session prefix (general interest), and m_t = x_t, the LAST CLICK (current interest), each through its own MLP cell. Score TRILINEARLY, sigma(<h_s, h_t, x_i>), so a candidate must match both at once -- a sum would let a stale long-term signal override the last click. The average weights every click equally, which is what breaks in a long session, so STAMP replaces it with attention alpha_i = W0 sigma(W1 x_i + W2 x_t + W3 m_s + b_a). No softmax on alpha."
+  paste0(
+    "strec: a session recommender has no profile, only the clicks",
+    " -- and interests DRIFT, often from unintended clicks. Keep ",
+    "TWO memories: m_s, the average of the session prefix (genera",
+    "l interest), and m_t = x_t, the LAST CLICK (current interest",
+    "), each through its own MLP cell. Score TRILINEARLY, sigma(<",
+    "h_s, h_t, x_i>), so a candidate must match both at once -- a",
+    " sum would let a stale long-term signal override the last cl",
+    "ick. The average weights every click equally, which is what ",
+    "breaks in a long session, so STAMP replaces it with attentio",
+    "n alpha_i = W0 sigma(W1 x_i + W2 x_t + W3 m_s + b_a). No sof",
+    "tmax on alpha."
+  )
 }
 
 # compact alias per ledger/NAMING.md

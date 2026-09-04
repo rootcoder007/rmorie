@@ -291,7 +291,13 @@ optimal_policy <- function(logp_ref, reward, beta) {
 #' res <- .dpoF_cheatsheet()
 #' res
 .dpoF_cheatsheet <- function() {
-  return("dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_l/ref_l) (Rafailov 2023 eq. 7); implicit reward rhat = beta log pi/pi_ref; grad weight sigma(rhat_l - rhat_w); model='plackett-luce' is eq. 20 and reduces to eq. 7 at K=2. optimal_policy() is eq. 4.")
+  return(paste0(
+    "dpoF: DPO loss -log sigma(beta log pi_w/ref_w - beta log pi_",
+    "l/ref_l) (Rafailov 2023 eq. 7); implicit reward rhat = beta ",
+    "log pi/pi_ref; grad weight sigma(rhat_l - rhat_w); model='pl",
+    "ackett-luce' is eq. 20 and reduces to eq. 7 at K=2. optimal_",
+    "policy() is eq. 4."
+  ))
 }
 
 # compact aliases per ledger/NAMING.md

@@ -334,7 +334,17 @@ morie_informer_complexity <- function(L_Q, L_K, factor = 5) {
 #' @return A character value.
 #' @export
 morie_informer_cheatsheet <- function() {
-  "informer: ProbSparse. A query whose attention is UNIFORM just averages V and is redundant with the residual. M(q,K) = logsumexp(z) - mean(z) measures the distance from uniform; it is MINIMISED at ln L_K, attained exactly when the logits are equal, so M - ln L_K is the KL and that is what is zero there. Keep only the top u = c ln L_Q queries: O(L ln L) time, O(L_K ln L_Q) memory. Computing M exactly would cost the O(L^2) being saved, so Lemma 1's max-mean bound on sampled keys is used instead. u = L_Q recovers full attention exactly."
+  paste0(
+    "informer: ProbSparse. A query whose attention is UNIFORM jus",
+    "t averages V and is redundant with the residual. M(q,K) = lo",
+    "gsumexp(z) - mean(z) measures the distance from uniform; it ",
+    "is MINIMISED at ln L_K, attained exactly when the logits are",
+    " equal, so M - ln L_K is the KL and that is what is zero the",
+    "re. Keep only the top u = c ln L_Q queries: O(L ln L) time, ",
+    "O(L_K ln L_Q) memory. Computing M exactly would cost the O(L",
+    "^2) being saved, so Lemma 1's max-mean bound on sampled keys",
+    " is used instead. u = L_Q recovers full attention exactly."
+  )
 }
 
 # Compact alias per ledger/NAMING.md -- infmer and informer are the

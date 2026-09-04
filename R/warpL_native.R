@@ -373,7 +373,19 @@ morie_warpL_warp_step <- function(positive, negatives, embed_user, rng, alphas,
 #' @return A character value.
 #' @export
 morie_warpL_cheatsheet <- function() {
-  "warpL: with tens of thousands of labels what matters is precision at k, but pairwise losses optimise the WHOLE ordering and top-targeting losses are costly to train. Estimate the rank by SAMPLING: draw negatives until one violates the margin, and if it took N draws the rank is about (Y-1)/N -- a violation on the first draw means a badly ranked positive, many draws means it is already near the top. Nothing is sorted. Then WEIGHT by L(r) = sum_{j<=r} alpha_j with alpha non-increasing: alpha_j = 1/j optimises the top, constant alpha recovers the plain pairwise loss. Cap the draws and SAY when the cap was hit."
+  paste0(
+    "warpL: with tens of thousands of labels what matters is prec",
+    "ision at k, but pairwise losses optimise the WHOLE ordering ",
+    "and top-targeting losses are costly to train. Estimate the r",
+    "ank by SAMPLING: draw negatives until one violates the margi",
+    "n, and if it took N draws the rank is about (Y-1)/N -- a vio",
+    "lation on the first draw means a badly ranked positive, many",
+    " draws means it is already near the top. Nothing is sorted. ",
+    "Then WEIGHT by L(r) = sum_{j<=r} alpha_j with alpha non-incr",
+    "easing: alpha_j = 1/j optimises the top, constant alpha reco",
+    "vers the plain pairwise loss. Cap the draws and SAY when the",
+    " cap was hit."
+  )
 }
 
 morie_warpL_warp_rank_loss <- morie_warpL_warp_step
