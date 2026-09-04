@@ -39,6 +39,10 @@ The baseline hazard is left unspecified, which is the point of the
 model; \code{exp(beta)} is a hazard ratio assumed constant over time.
 }
 \examples{
-morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
-  X = c(1, 2, 3, 4, 5, 6, 7, 8))
+# X must vary AMONG THE EVENTS: if every event shares one covariate
+# value, or X is a linear function of the event times, the partial
+# likelihood has no unique maximum and the Hessian is singular.
+morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+             event = c(0, 1, 0, 1, 1, 0, 1, 0),
+             X = c(0, 1, 0, 0, 1, 1, 0, 1))
 }
