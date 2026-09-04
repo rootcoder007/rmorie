@@ -142,8 +142,12 @@ morie_logrank_test <- function(time, event, group) {
 #'   `loglik` and the likelihood-ratio test
 #' @export
 #' @examples
-#' morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0), X =
-#' c(1, 2, 3, 4, 5, 6, 7, 8))
+#' # X must vary AMONG THE EVENTS: if every event shares one covariate
+#' # value, or X is a linear function of the event times, the partial
+#' # likelihood has no unique maximum and the Hessian is singular.
+#' morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+#'              event = c(0, 1, 0, 1, 1, 0, 1, 0),
+#'              X = c(0, 1, 0, 0, 1, 1, 0, 1))
 morie_cox_ph <- function(time, event, X, ties = "efron",
                          max_iter = 50, tol = 1e-9) {
   X <- as.matrix(X)
@@ -180,14 +184,19 @@ morie_cox_ph <- function(time, event, X, ties = "efron",
     }
     list(g = g, H = H)
   }
+  sing_msg <- paste("singular information matrix in the Cox Newton step:",
+                    "the covariates are collinear (or one is a linear",
+                    "function of the event times), so the partial",
+                    "likelihood has no unique maximum")
   for (it in seq_len(max_iter)) {
     i <- info(beta)
-    step <- solve(i$H, i$g)
+    step <- tryCatch(solve(i$H, i$g),
+                     error = function(e) stop(sing_msg, call. = FALSE))
     beta <- beta + step
     if (max(abs(step)) < tol) break
   }
   H <- info(beta)$H
-  V <- solve(H)
+  V <- tryCatch(solve(H), error = function(e) stop(sing_msg, call. = FALSE))
   se <- sqrt(diag(V))
   z <- beta / se
   ll <- morie_cox_partial_loglik(time, event, X, beta, ties)

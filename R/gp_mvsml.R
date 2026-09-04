@@ -270,7 +270,6 @@ morie_lmm_v <- function(Z, D, R = NULL) {
   Z %*% as.matrix(D) %*% t(Z) + R
 }
 
-#' @noRd
 #' REML log-likelihood of a linear mixed model (MVSML eq. 5.2)
 #'
 #' Restricted log-likelihood for y = X b + Z u + e with u ~ N(0, D) and
@@ -292,6 +291,7 @@ morie_lmm_v <- function(Z, D, R = NULL) {
 #' y <- c(5.0, 5.2, 4.8, 6.4, 6.6, 6.2)
 #' morie_reml_loglik(X, Z, y, diag(0.5, 2))$loglik
 #' @export
+#' @noRd
 morie_reml_loglik <- function(X, Z, y, D, R = NULL) {
   X <- as.matrix(X)
   y <- as.numeric(y)
