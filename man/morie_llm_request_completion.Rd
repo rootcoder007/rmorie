@@ -31,7 +31,7 @@ POST a chat-completion request to an OpenAI-compatible endpoint
 }
 \examples{
 if (requireNamespace("httr2", quietly = TRUE)) {
-  \donttest{
+  \dontrun{
   msgs <- list(list(role = "user", content = "Say hello"))
   # Second arg is whatever model your Ollama server serves (see `ollama list`).
   res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))

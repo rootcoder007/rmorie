@@ -34,7 +34,7 @@ extra package dependency.
 \examples{
 \dontrun{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Two CPI series, last 3 periods each -- no API key needed.
 morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 }

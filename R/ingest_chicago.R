@@ -162,7 +162,7 @@ morie_ingest_chicago_resources <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Chicago crimes (schema verified 2026-07: `year` is a real column)
 #' df <- try(morie_ingest_chicago_socrata(
 #'   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
@@ -180,7 +180,7 @@ morie_ingest_chicago_resources <- function() {
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Chicago crimes (schema verified 2026-07: `year` is a real column)
 #' df <- try(morie_ingest_chicago_socrata(
 #'   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
@@ -332,11 +332,11 @@ morie_ingest_chicago_crime <- function(year = NULL,
 #' @seealso \code{\link{morie_ingest_chicago_crime}},
 #'   \code{\link{morie_ingest_bigquery_table}}
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{try(morie_ingest_chicago_crime_bigquery())}
+#' \dontrun{try(morie_ingest_chicago_crime_bigquery())}
 #' @examples
 #' \dontrun{
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{try(morie_ingest_chicago_crime_bigquery())}
+#' \dontrun{try(morie_ingest_chicago_crime_bigquery())}
 #' \dontshow{\}) # examplesIf}
 #' }
 #' @export

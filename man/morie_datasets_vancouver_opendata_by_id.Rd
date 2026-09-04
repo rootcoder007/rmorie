@@ -29,7 +29,7 @@ as a \code{data.frame}. For larger pulls, use \code{format = "csv"} to hit
 the unrestricted \verb{/exports/csv} endpoint instead.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- morie_datasets_vancouver_opendata_by_id("non-market-housing",
   limit = 50
 )

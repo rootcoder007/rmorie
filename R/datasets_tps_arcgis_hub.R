@@ -253,7 +253,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' pic_id <- cat$hub_id[cat$title ==
 #'   "Persons in Crisis Calls for Service Attended Open Data"]
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_arcgis_hub_by_id(
 #'   pic_id,
 #'   format = "json", where = "OCC_YEAR=2024",
@@ -266,7 +266,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 #' pic_id <- cat$hub_id[cat$title ==
 #'   "Persons in Crisis Calls for Service Attended Open Data"]
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_tps_arcgis_hub_by_id(
 #'   pic_id,
 #'   format = "json", where = "OCC_YEAR=2024",
@@ -369,7 +369,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' @return Path to the downloaded file.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
-#' \donttest{
+#' \dontrun{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
 #'   cat$hub_id[1],
 #'   format = "csv"
@@ -379,7 +379,7 @@ morie_datasets_tps_arcgis_hub_by_id <- function(hub_id,
 #' @examples
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
-#' \donttest{
+#' \dontrun{
 #' path <- try(morie_datasets_tps_arcgis_hub_download(
 #'   cat$hub_id[1],
 #'   format = "csv"
@@ -505,7 +505,7 @@ morie_datasets_arcgis_item_metadata <- function(item_id) {
 #' @return A `data.frame` (json / csv), parsed GeoJSON list, or
 #'   file path (binary).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_datasets_arcgis_item_by_id(
 #'   "af06159170914808983959df6163fc86",
 #'   format = "json"

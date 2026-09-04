@@ -51,7 +51,7 @@ sub-objects flattened using dotted keys
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # No API key needed: falls back to the bundled synthetic sample.
 df <- suppressWarnings(morie_ingest_forensics_nibrs(
   year = 2023, offense = "aggravated-assault", state = "GA",

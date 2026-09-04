@@ -238,7 +238,7 @@
 #' always works; with a key it queries the live CDE endpoint.
 #'
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # No API key needed: falls back to the bundled synthetic sample.
 #' df <- suppressWarnings(morie_ingest_forensics_nibrs(
 #'   year = 2023, offense = "aggravated-assault", state = "GA",
@@ -248,7 +248,7 @@
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # No API key needed: falls back to the bundled synthetic sample.
 #' df <- suppressWarnings(morie_ingest_forensics_nibrs(
 #'   year = 2023, offense = "aggravated-assault", state = "GA",
@@ -412,14 +412,14 @@ morie_ingest_forensics_nibrs <- function(year,
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
 #' head(df)
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
 #' head(df)
@@ -642,10 +642,10 @@ morie_ingest_forensics_namus_missing <- function(
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \dontrun{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \dontrun{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_nist_rds <- function(

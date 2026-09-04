@@ -51,7 +51,7 @@ Toronto Police Service dataset.
 Tags: Budget; Toronto Police Service; TPS
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_budget_2023(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

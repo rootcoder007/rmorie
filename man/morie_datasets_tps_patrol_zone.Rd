@@ -51,7 +51,7 @@ Police patrol zones.
 Tags: Patrol Zone; Boundary Files; Patrol Zones
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_patrol_zone(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

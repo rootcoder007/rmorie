@@ -265,7 +265,7 @@ morie_ingest_statcan_cansim <- function(table_id,
 #'   \code{vector}, \code{ref_date}, \code{value}, \code{decimals},
 #'   \code{scalar_factor}, \code{symbol_code}, \code{release_time}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Two CPI series, last 3 periods each -- no API key needed.
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 #' }
@@ -273,7 +273,7 @@ morie_ingest_statcan_cansim <- function(table_id,
 #' @examples
 #' \dontrun{
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # Two CPI series, last 3 periods each -- no API key needed.
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 #' }
