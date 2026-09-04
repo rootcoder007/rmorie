@@ -287,23 +287,8 @@ jobs:
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes) on Debian
         run: |
-          # No examples on this leg. They are the entire cost here:
-          # "checking examples" alone ran 86-88 minutes on this 2-core
-          # container (measured on 87842e1c and eff318f9), and --as-cran
-          # then starts a SECOND full pass, "checking examples with
-          # --run-donttest", which re-runs everything including the
-          # \donttest{} dataset loaders. The leg was cancelled at the
-          # 2-hour mark on every commit going back well before this
-          # branch -- it has never once completed.
-          #
-          # Examples are already checked on five other cells (ubuntu
-          # release/devel/oldrel-1, macOS, Windows). What is unique to
-          # this one is true Debian bookworm with Suggests absent:
-          # installation, compiled code and the test suite. That is what
-          # it now runs, and it fits in the hour.
           res <- rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--as-cran", "--ignore-vignettes",
-                     "--no-examples"),
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
             build_args = c("--no-build-vignettes", "--no-manual"),
             error_on = "error")
           print(res)

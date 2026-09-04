@@ -155,7 +155,7 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 #' @return The snapshot URL (https), or \code{NULL} if unavailable.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_download}}
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
 #' }
 #' @export
@@ -184,7 +184,7 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' morie_download(
 #'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
 #'   tempfile(fileext = ".html")

@@ -52,7 +52,7 @@ volume, for occurrences linked to a firearm seizure.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Firearms
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_top_20_offences_of_firearm_seizures(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

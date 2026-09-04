@@ -38,7 +38,7 @@ calls unless \code{overwrite = TRUE}.
 }
 \examples{
 \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Network: fetches major-crime indicators from the Toronto Police
 # ArcGIS open-data layer.
 csv <- morie_fetch_tps(

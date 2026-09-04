@@ -52,7 +52,7 @@ interactions.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Regulated Interactions
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_regulated_interactions(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

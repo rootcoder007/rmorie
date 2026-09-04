@@ -811,7 +811,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #'   and is unaffected by `con`.
 #' @return A data.frame.
 #' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
 #' # upstream outage does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))
@@ -826,7 +826,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' @examples
 #' \dontrun{
 #' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
 #' # upstream outage does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))

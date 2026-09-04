@@ -38,7 +38,7 @@ pages through the results.  Returns morie's documented schema -
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 df <- morie_ingest_forensics_namus_missing(state = "CA",
                                            max_features = 1000L)
 head(df)

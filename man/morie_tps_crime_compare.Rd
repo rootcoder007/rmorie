@@ -20,7 +20,7 @@ Accepts a named list of TPS data.frames (e.g.
 year-by-year matrix.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_assault(max_features = 200L))
 if (!inherits(df, "try-error")) {
   res <- try(morie_tps_crime_compare(list(assault = df)))

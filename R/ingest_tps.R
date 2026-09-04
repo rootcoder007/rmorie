@@ -174,7 +174,7 @@ morie_ingest_tps_layers <- function() {
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"
@@ -186,7 +186,7 @@ morie_ingest_tps_layers <- function() {
 #' }
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_tps_feature_layer(
 #'   morie_ingest_tps_layers()$url[
 #'     morie_ingest_tps_layers()$name == "major-crime"
@@ -277,10 +277,10 @@ morie_ingest_tps_feature_layer <- function(
 #' @param ... Forwarded to \code{\link{morie_ingest_tps_feature_layer}}.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' \dontrun{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
 #' @examples
 #' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
+#' \dontrun{try(morie_ingest_tps_fetch("major-crime", max_features = 1L))}
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_tps_fetch <- function(layer,

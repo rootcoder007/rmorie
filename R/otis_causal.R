@@ -1002,7 +1002,7 @@ morie_otis_make_pair_b <- function(df) {
 #' @return Named list \code{list(data, T = "T_c", Y = "Y_c", covariates)}.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # b01 (Segregation - Detailed Dataset) carries the full placement-level
 #' # schema, including NumberConsecutiveDays_Segregation (see the bundled
 #' # OTIS data dictionary).

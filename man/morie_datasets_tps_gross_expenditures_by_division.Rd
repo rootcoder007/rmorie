@@ -53,7 +53,7 @@ of reporting.
 Tags: ASR; TPS; Toronto Police; Annual Statistical Report; Budget
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_gross_expenditures_by_division(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

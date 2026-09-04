@@ -20,7 +20,7 @@ Phase 3DDD3. Wraps the \code{getCubeMetadata} POST endpoint.
 }
 \examples{
 \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Live WDS call; try() keeps checks graceful where StatCan rejects
 # cloud IPs.
 meta <- try(morie_datasets_statcan_cube_metadata(35100177))

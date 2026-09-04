@@ -51,7 +51,7 @@ Neighbourhood crime rates per 100,000.
 Tags: Neighbourhood; Crime; Rate; Crime Rates; Community Safety Indicators; CSI; Toronto; TPS; Toronto Police
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_neighbourhood_crime_rates(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

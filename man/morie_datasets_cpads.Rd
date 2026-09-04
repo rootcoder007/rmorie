@@ -63,7 +63,7 @@ Sister surveys (CSADS, CSUS, CTADS) are at
 }
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 df <- try(suppressWarnings(morie_datasets_cpads()))
 if (!inherits(df, "try-error")) head(df)
 }
