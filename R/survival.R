@@ -190,17 +190,45 @@ morie_cox_ph <- function(time, event, X, ties = "efron",
                     "likelihood has no unique maximum")
   for (it in seq_len(max_iter)) {
     i <- info(beta)
+    # Test the rank EXPLICITLY rather than waiting for solve() to throw.
+    # Whether a singular system raises is a LAPACK detail: Windows
+    # raises "system is exactly singular" where the reference BLAS on
+    # Linux and macOS returns a value, so the same degenerate design
+    # errored on one platform and silently produced garbage on the
+    # others -- and a local example sweep could never catch it.
+    if (qr(i$H)$rank < ncol(i$H)) stop(sing_msg, call. = FALSE)
     step <- tryCatch(solve(i$H, i$g),
                      error = function(e) stop(sing_msg, call. = FALSE))
     beta <- beta + step
     if (max(abs(step)) < tol) break
   }
   H <- info(beta)$H
+  if (qr(H)$rank < ncol(H)) stop(sing_msg, call. = FALSE)
   V <- tryCatch(solve(H), error = function(e) stop(sing_msg, call. = FALSE))
+  # The same monotone/singular diagnosis .morie_cox_counting already
+  # applies. It matters here because whether solve() RAISES on a
+  # near-singular system is a LAPACK detail -- Windows raises where the
+  # reference BLAS returns a value -- so without this the identical
+  # degenerate design failed on Windows and quietly produced a diverged
+  # coefficient everywhere else.
+  dg <- diag(V)
+  if (any(!is.finite(dg)) || any(dg <= 0) || max(abs(beta)) > 50) {
+    stop(sing_msg, call. = FALSE)
+  }
   se <- sqrt(diag(V))
   z <- beta / se
   ll <- morie_cox_partial_loglik(time, event, X, beta, ties)
   ll0 <- morie_cox_partial_loglik(time, event, X, numeric(p), ties)
+  # Perfect separation: the partial likelihood reaches its supremum of 1,
+  # so the log-likelihood is exactly 0 and beta is not identified -- it
+  # is only wandering toward +/-Inf until the iteration stops. Testing
+  # this rather than the magnitude of beta or the conditioning of H is
+  # what makes the diagnosis identical on every platform: whether
+  # solve() raises on the resulting matrix is a LAPACK detail, and for a
+  # single covariate the condition number is 1 by construction.
+  if (is.finite(ll) && ll > -1e-10 && is.finite(ll0) && ll0 < -1e-10) {
+    stop(sing_msg, call. = FALSE)
+  }
   list(coef = beta, se = se, z = z,
        p_value = 2 * stats::pnorm(abs(z), lower.tail = FALSE),
        hazard_ratio = exp(beta), vcov = V, loglik = ll,
