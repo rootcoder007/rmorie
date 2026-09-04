@@ -45,6 +45,10 @@ Harrell, F. E. et al. (1982) Evaluating the yield of medical tests.
 \code{\link{morie_kaplan_meier}}, \code{\link{morie_nelson_aalen}}, \code{\link{morie_logrank_test}}, \code{\link{morie_cox_ph}}, \code{\link{morie_concordance_index}}
 }
 \examples{
-morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8), event = c(0, 1, 0, 1, 1, 0, 1, 0),
-  X = c(1, 2, 3, 4, 5, 6, 7, 8))
+# X must vary AMONG THE EVENTS: if every event shares one covariate
+# value, or X is a linear function of the event times, the partial
+# likelihood has no unique maximum and the Hessian is singular.
+morie_cox_ph(time = c(1, 2, 3, 4, 5, 6, 7, 8),
+             event = c(0, 1, 0, 1, 1, 0, 1, 0),
+             X = c(0, 1, 0, 0, 1, 1, 0, 1))
 }
