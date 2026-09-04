@@ -106,6 +106,9 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' res <- .rmorie_liboqs_available_impl()
+#' res
 #' @export
 #' @name .rmorie_liboqs_available_impl
 #' @rdname dot-rmorie_liboqs_available_impl
@@ -118,6 +121,9 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' res <- .rmorie_liboqs_version_impl()
+#' res
 #' @export
 #' @name .rmorie_liboqs_version_impl
 #' @rdname dot-rmorie_liboqs_version_impl
@@ -130,6 +136,11 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   res <- .rmorie_mlkem768_keygen_impl()
+#'   res
+#' }
 #' @export
 #' @name .rmorie_mlkem768_keygen_impl
 #' @rdname dot-rmorie_mlkem768_keygen_impl
@@ -169,6 +180,11 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   res <- .rmorie_mldsa65_keygen_impl()
+#'   res
+#' }
 #' @export
 #' @name .rmorie_mldsa65_keygen_impl
 #' @rdname dot-rmorie_mldsa65_keygen_impl
@@ -210,6 +226,11 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   res <- .rmorie_slhdsa128s_keygen_impl()
+#'   res
+#' }
 #' @export
 #' @name .rmorie_slhdsa128s_keygen_impl
 #' @rdname dot-rmorie_slhdsa128s_keygen_impl
@@ -251,6 +272,11 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' if (morie_crypto_liboqs_available()) {
+#'   res <- .rmorie_hqc128_keygen_impl()
+#'   res
+#' }
 #' @export
 #' @name .rmorie_hqc128_keygen_impl
 #' @rdname dot-rmorie_hqc128_keygen_impl
@@ -290,6 +316,9 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' res <- .rmorie_sodium_available_impl()
+#' res
 #' @export
 #' @name .rmorie_sodium_available_impl
 #' @rdname dot-rmorie_sodium_available_impl
@@ -302,6 +331,9 @@ NULL
 #' source it follows.
 #'
 #' @return The value of \code{.Call}.
+#' @examples
+#' res <- .rmorie_sodium_version_impl()
+#' res
 #' @export
 #' @name .rmorie_sodium_version_impl
 #' @rdname dot-rmorie_sodium_version_impl
@@ -363,6 +395,11 @@ NULL
 #'
 #' @param n Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' if (morie_crypto_sodium_available()) {
+#'   res <- .rmorie_random_bytes_impl(n = 3L)
+#'   res
+#' }
 #' @export
 #' @name .rmorie_random_bytes_impl
 #' @rdname dot-rmorie_random_bytes_impl
@@ -926,6 +963,9 @@ NULL
 #' @param n Passed to \code{.Call}.
 #' @param d Passed to \code{.Call}.
 #' @return The value of \code{.Call}.
+#' @examples
+#' res <- .morie_sobol_cpp(n = 3L, d = 3L)
+#' res
 #' @export
 #' @name .morie_sobol_cpp
 #' @rdname dot-morie_sobol_cpp

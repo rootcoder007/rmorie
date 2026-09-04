@@ -49,6 +49,10 @@
 #'
 #' @param z Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmldyn_expit(z = y)
+#' res
 #' @export
 # vectorised: every call site hands a linear-predictor VECTOR in
 .tmldyn_expit <- function(z) {

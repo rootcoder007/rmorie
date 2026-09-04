@@ -489,6 +489,15 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_full(df, "d", c("x1", "x2"))
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("optmatch", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_full(df, "d", c("x1", "x2"))
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_full <- function(data, treatment, covariates,
                                 ps = NULL, n_subclasses = 10L) {
@@ -531,6 +540,15 @@ morie_matching_full <- function(data, treatment, covariates,
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_subclassify <- function(data, treatment, covariates,
                                        ps = NULL, n_strata = 5L) {
@@ -687,6 +705,16 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
+#'                               min_ratio = 1, max_ratio = 3)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_variable_ratio <- function(data, treatment, covariates,
                                           min_ratio = 1L,

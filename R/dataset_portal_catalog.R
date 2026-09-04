@@ -95,6 +95,12 @@
 #' morie_dataset_portal_catalog_clear_cache()
 #' catalog <- morie_dataset_portal_catalog()
 #' nrow(catalog)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_dataset_portal_catalog_clear_cache()
+#' catalog <- morie_dataset_portal_catalog()
+#' nrow(catalog)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_portal_catalog_clear_cache <- function() {
   rm(
@@ -141,6 +147,19 @@ morie_dataset_portal_catalog_clear_cache <- function() {
 #' table(cat_df$source)
 #' @seealso [morie_dataset_portal_catalog_clear_cache()],
 #'   [morie_datasets_load_by_key()], [morie_datasets_browse()]
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # Per-portal slice: registry lives in code, fastest path.
+#' nypd <- morie_dataset_portal_catalog(portal = "nyc_nypd")
+#' nrow(nypd)
+#' head(nypd$dataset_key)
+#'
+#' # Full catalog: bulk portals (NYC OpenData, Chicago, Toronto Hub,
+#' # etc.) prefer the rmoriedata companion when installed, otherwise
+#' # contribute zero rows with a one-time warning per portal.
+#' cat_df <- morie_dataset_portal_catalog()
+#' table(cat_df$source)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_portal_catalog <- function(portal = NULL) {
   portal_choices <- c(

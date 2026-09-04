@@ -116,6 +116,10 @@ NULL
 #' @return Numeric vector of kernel weights, same length as `u`.
 #' @name morie_rdd_kernels
 #' @rdname morie_rdd_kernels
+#' @examples
+#' morie_rdd_kernel_epanechnikov(seq(-1, 1, by = 0.5))
+#' morie_rdd_kernel_uniform(seq(-2, 2, by = 1))
+#' morie_rdd_kernel_gaussian(seq(-1, 1, by = 0.5))
 #' @export
 morie_rdd_kernel_triangular  <- function(u) pmax(1 - abs(u), 0)
 #' @rdname morie_rdd_kernels

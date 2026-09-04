@@ -1080,6 +1080,10 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #'   35(4), 437--460.
 #' @examplesIf requireNamespace("konfound", quietly = TRUE)
 #' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+#' @examples
+#' \dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,

@@ -178,6 +178,25 @@ morie_ingest_chicago_resources <- function() {
 #'   max_features = 100L
 #' ))
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Chicago crimes (schema verified 2026-07: `year` is a real column)
+#' df <- try(morie_ingest_chicago_socrata(
+#'   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",
+#'   where = "year = 2023",
+#'   select = "id,date,primary_type",
+#'   max_features = 100L
+#' ))
+#' # NYC arrests use `arrest_date`, not `arrest_year`:
+#' df2 <- try(morie_ingest_chicago_socrata(
+#'   "https://data.cityofnewyork.us/resource/8h9b-rp9u.json",
+#'   where = "date_extract_y(arrest_date) = 2023",
+#'   select = "arrest_key,arrest_date",
+#'   max_features = 100L
+#' ))
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_chicago_socrata <- function(resource_url,
                                          where = NULL,
@@ -252,6 +271,13 @@ morie_ingest_chicago_socrata <- function(resource_url,
 #' @seealso \code{\link{morie_ingest_chicago_socrata}},
 #'   \code{\link{morie_ingest_bigquery_table}} for the BigQuery
 #'   public-data mirror (\code{bigquery-public-data.chicago_crime}).
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' df <- morie_ingest_chicago_crime(year = 2024, max_features = 10000L)
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_chicago_crime <- function(year = NULL,
                                        where = NULL,
@@ -307,6 +333,12 @@ morie_ingest_chicago_crime <- function(year = NULL,
 #'   \code{\link{morie_ingest_bigquery_table}}
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
 #' \donttest{try(morie_ingest_chicago_crime_bigquery())}
+#' @examples
+#' \dontrun{
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{try(morie_ingest_chicago_crime_bigquery())}
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_ingest_chicago_crime_bigquery <- function(where = NULL,
                                                 year = NULL,

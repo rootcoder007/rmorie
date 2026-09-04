@@ -492,6 +492,11 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_police_divisions(offline = TRUE)
 #' nrow(df) # 16
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_tps_police_divisions(offline = TRUE)
+#' nrow(df) # 16
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_police_divisions <- function(offline = TRUE,
                                                 max_features = NULL) {
@@ -566,6 +571,11 @@ morie_datasets_tps_police_divisions <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
 #' names(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_tps_psdp_resolved("assault", offline = TRUE)
+#' names(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_psdp_resolved <- function(
   layer_key,

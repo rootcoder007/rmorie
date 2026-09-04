@@ -147,6 +147,11 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
 #' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_arsau_uof_main_records(offline = TRUE)
+#' head(df[, c("IncidentYear", "PoliceService", "IncidentType")])
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_uof_main_records <- function(year = "2024",
                                                   offline = TRUE,
@@ -267,6 +272,11 @@ morie_datasets_otis_d01_deaths_in_custody <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
 #' table(df$APPREHENSION_TYPE)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_tps_mha_apprehensions(offline = TRUE)
+#' table(df$APPREHENSION_TYPE)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_tps_mha_apprehensions <- function(year = NULL,
                                                  max_features = NULL,
@@ -403,6 +413,11 @@ morie_datasets_tps_mha_apprehensions <- function(year = NULL,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
 #' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_arsau_uof_individual_records(offline = TRUE)
+#' df[, c("Indiv_Index", "Race", "AgeCategory", "Gender")]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_uof_individual_records <- function(year = "2024",
                                                         offline = TRUE,
@@ -465,6 +480,11 @@ morie_datasets_arsau_uof_weapon_records <- function(year = "2024",
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
 #' head(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_arsau_aggregate_summary(offline = TRUE)
+#' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
                                                    resource_id = NULL) {
@@ -480,6 +500,11 @@ morie_datasets_arsau_aggregate_summary <- function(offline = TRUE,
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
 #' dim(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_arsau_detailed_dataset(offline = TRUE)
+#' dim(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_arsau_detailed_dataset <- function(offline = TRUE,
                                                   resource_id = NULL) {
@@ -1389,6 +1414,13 @@ morie_datasets_otis_c12_aggregate_durations_by_region <- function(
 #'   offline = TRUE
 #' )
 #' head(df)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_ontario_ckan_by_key("arsau_uof_main_records_2024",
+#'   offline = TRUE
+#' )
+#' head(df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_ontario_ckan_by_key <- function(dataset_key,
                                                offline = TRUE,

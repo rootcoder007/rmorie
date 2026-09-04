@@ -96,6 +96,18 @@
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_cansim}},
 #'   \code{\link{morie_cache_dir}}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Requires network access.
+#' url <- paste0(
+#'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
+#'   "2024001/2022_CSV.zip"
+#' )
+#' df <- morie_ingest_statcan_csv(url)
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_statcan_csv <- function(url,
                                      member = NULL,
@@ -178,6 +190,14 @@ morie_ingest_statcan_csv <- function(url,
 #' head(df)
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_csv}}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Requires the 'cansim' package and network access.
+#' df <- morie_ingest_statcan_cansim("35-10-0177")
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_statcan_cansim <- function(table_id,
                                         language = c("eng", "fra"),
@@ -250,6 +270,15 @@ morie_ingest_statcan_cansim <- function(table_id,
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_cansim}}
+#' @examples
+#' \dontrun{
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Two CPI series, last 3 periods each -- no API key needed.
+#' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
+#' }
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
                                          timeout = 60L) {

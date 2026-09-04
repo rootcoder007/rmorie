@@ -40,6 +40,11 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_vpd_legal_disclaimer()
 #' head(d)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' d <- morie_datasets_vpd_legal_disclaimer()
+#' head(d)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
   path <- system.file("extdata", "vpd_legal_disclaimer.txt",
@@ -162,6 +167,13 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' nrow(df) # 550
 #' table(df$TYPE)
 #' table(df$NEIGHBOURHOOD)
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_vpd_crime(offline = TRUE)
+#' nrow(df) # 550
+#' table(df$TYPE)
+#' table(df$NEIGHBOURHOOD)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vpd_crime <- function(offline = TRUE,
                                      zip_path = NULL,

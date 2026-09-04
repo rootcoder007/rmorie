@@ -289,6 +289,16 @@ morie_tps_project_xy <- function(lat, lon,
 #' polys$geometry <- list(ring)
 #' out <- morie_tps_render_choropleth(polys, rate_col = "RATE",
 #'                                    outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+#'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+#' })
+#' polys <- data.frame(HOOD_ID = 1, RATE = 5)
+#' polys$geometry <- list(ring)
+#' out <- morie_tps_render_choropleth(polys, rate_col = "RATE",
+#'                                    outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_choropleth <- function(polys,
                                           rate_col = "ASSAULT_RATE_2024",
@@ -441,6 +451,14 @@ morie_tps_render_choropleth <- function(polys,
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
 #' out <- morie_tps_render_points(df, min_samples = 5L,
 #'                                outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_points(df, min_samples = 5L,
+#'                                outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_points <- function(df,
                                       category = "Assault",
@@ -565,6 +583,18 @@ morie_tps_render_points <- function(df,
 #' out <- morie_tps_render_yearly_grid(polys, prefix = "ASSAULT_RATE",
 #'                                     years = 2023:2024,
 #'                                     outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' ring <- lapply(seq(0, 2 * pi, length.out = 8), function(a) {
+#'   list(-79.40 + 0.02 * cos(a), 43.70 + 0.01 * sin(a))
+#' })
+#' polys <- data.frame(HOOD_ID = 1, RATE = 5)
+#' polys$geometry <- list(ring)
+#' polys$ASSAULT_RATE_2023 <- 4; polys$ASSAULT_RATE_2024 <- 5
+#' out <- morie_tps_render_yearly_grid(polys, prefix = "ASSAULT_RATE",
+#'                                     years = 2023:2024,
+#'                                     outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_yearly_grid <- function(polys,
                                            prefix = "ASSAULT_RATE",
@@ -716,6 +746,14 @@ morie_tps_render_yearly_grid <- function(polys,
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
 #' out <- morie_tps_render_quad(list(points = df),
 #'                              outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_quad(list(points = df),
+#'                              outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_quad <- function(data, outfile = NULL, ...) {
   stopifnot(is.list(data))
@@ -778,6 +816,14 @@ morie_tps_render_quad <- function(data, outfile = NULL, ...) {
 #'                  LONG_WGS84 = runif(60, -79.60, -79.15))
 #' out <- morie_tps_render_dbscan(df, eps_km = 1, min_samples = 4L,
 #'                                outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' set.seed(1)
+#' df <- data.frame(LAT_WGS84 = runif(60, 43.60, 43.85),
+#'                  LONG_WGS84 = runif(60, -79.60, -79.15))
+#' out <- morie_tps_render_dbscan(df, eps_km = 1, min_samples = 4L,
+#'                                outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
                                     min_samples = 8L,
@@ -846,6 +892,15 @@ morie_tps_render_dbscan <- function(points_df, eps_km = 0.5,
 #'                     n = c(5, 12, 3, 8, 20, 9))
 #' out <- morie_tps_render_district_proportional(polys, "n",
 #'                                               outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' set.seed(1)
+#' polys <- data.frame(centroid_lat = runif(6, 43.62, 43.82),
+#'                     centroid_lon = runif(6, -79.55, -79.20),
+#'                     n = c(5, 12, 3, 8, 20, 9))
+#' out <- morie_tps_render_district_proportional(polys, "n",
+#'                                               outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_district_proportional <- function(polys, count_col,
                                                    max_radius_km = 3,
@@ -905,6 +960,13 @@ morie_tps_render_district_proportional <- function(polys, count_col,
 #'                        radius_km = c(1.5, 2.2))
 #' out <- morie_tps_render_satscan_panel(clusters,
 #'                                       outfile = tempfile(fileext = ".png"))
+#' @examples
+#' \dontshow{if (requireNamespace("ggplot2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' clusters <- data.frame(lat = c(43.70, 43.75), lon = c(-79.40, -79.30),
+#'                        radius_km = c(1.5, 2.2))
+#' out <- morie_tps_render_satscan_panel(clusters,
+#'                                       outfile = tempfile(fileext = ".png"))
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_render_satscan_panel <- function(clusters, outfile = NULL) {
   if (!is.data.frame(clusters) ||
