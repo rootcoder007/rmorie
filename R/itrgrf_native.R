@@ -293,7 +293,13 @@ morie_itrgrf <- function(y, W, X, cost = 0.0, n_trees = 150,
 #' res <- .itrgrf_cheatsheet()
 #' res
 .itrgrf_cheatsheet <- function() {
-  "itrgrf: d(x) = 1{tau(x) > cost}; value it with the doubly robust score mu_d(X) + 1{W=d}/e_W (Y - mu_W). Learn the rule and score it on DIFFERENT halves -- the rule is an argmax, so scoring it in sample inherits the winner's curse and a rule fitted to noise looks profitable."
+  paste0(
+    "itrgrf: d(x) = 1{tau(x) > cost}; value it with the doubly ro",
+    "bust score mu_d(X) + 1{W=d}/e_W (Y - mu_W). Learn the rule a",
+    "nd score it on DIFFERENT halves -- the rule is an argmax, so",
+    " scoring it in sample inherits the winner's curse and a rule",
+    " fitted to noise looks profitable."
+  )
 }
 
 # compact alias per ledger/NAMING.md

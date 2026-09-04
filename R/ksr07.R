@@ -10,6 +10,10 @@
 #'
 #' @param x The sample.
 #' @param B Number of bootstrap replicates (fixed budget).
+#' @param deterministic_seed Optional integer; if supplied, the pinned
+#'   LCG is seeded from SHA-256("ksr07_bootstrap:<deterministic_seed>")
+#'   via \code{morie_det_rng} instead of \code{seed}, which is the
+#'   cross-arm reproducible path.
 #' @param seed Seed for the pinned generator.
 #' @return List with \code{estimate}, \code{boot_mean}, \code{boot_sd},
 #'   \code{process_sd}, \code{ci_lower}, \code{ci_upper}, \code{B},
@@ -21,14 +25,22 @@
 #' @examples
 #' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
 #' Bootemp(V)
-Bootemp <- function(x, B = 200, seed = 1) {
+Bootemp <- function(x, B = 200, seed = 1,
+                     deterministic_seed = NULL) {
   x <- .t1_vec(x)
   n <- length(x)
   B <- as.integer(B)
   if (n < 2L) stop("the sample must have at least two observations")
   if (B < 2L) stop("B must be at least 2")
   Pn <- mean(x)
-  g <- .t1_lcg(seed)
+  if (!is.null(deterministic_seed)) {
+    # SHA-keyed seed: this and morie._det_rng.r_seed derive the SAME
+    # integer from ("ksr07_bootstrap", deterministic_seed), so both arms drive
+    # the pinned LCG from an identical start.
+    g <- .t1_lcg(morie_det_rng("ksr07_bootstrap", deterministic_seed))
+  } else {
+    g <- .t1_lcg(seed)
+  }
   stat <- numeric(B)
   for (b in seq_len(B)) {
     s <- 0

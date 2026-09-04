@@ -221,22 +221,27 @@ morie_bayesian_horseshoe <- function(X, y, n_iter = 3000L, seed = 42L) {
   Xty <- crossprod(X, y)
   beta_samples <- matrix(0, n_iter, p)
   tau_samples <- numeric(n_iter)
-  rig <- function(shape, rate) 1 / stats::rgamma(1L, shape = shape, rate = rate)
+  rig <- function(shape, rate)
+    1 / stats::rgamma(1L, shape = shape, rate = max(rate, 1e-30))
   for (it in seq_len(n_iter)) {
-    A <- XtX + diag(1 / (lambda2 * tau2), p)     # Eq. (9)
+    A <- XtX + diag(1 / (lambda2 * tau2 + 1e-30), p)   # Eq. (9)
     A_inv <- solve(A)
     m <- as.vector(A_inv %*% Xty)
     ch <- chol(sigma2 * A_inv)
     beta <- as.vector(m + t(ch) %*% stats::rnorm(p))
     resid <- y - X %*% beta                       # Eq. (10)
     sigma2 <- rig((n + p) / 2,
-                  0.5 * sum(resid^2) + 0.5 * sum(beta^2 / (lambda2 * tau2)))
+                  0.5 * sum(resid^2) +
+                    0.5 * sum(beta^2 / (lambda2 * tau2 + 1e-30)))
     for (j in seq_len(p)) {                        # Eq. (11)
-      lambda2[j] <- rig(1, 1 / nu[j] + beta[j]^2 / (2 * tau2 * sigma2))
+      lambda2[j] <- rig(1, beta[j]^2 / (2 * sigma2 * tau2 + 1e-30) +
+                          1 / (nu[j] + 1e-30))
     }
-    tau2 <- rig((p + 1) / 2, 1 / xi + sum(beta^2 / lambda2) / (2 * sigma2))
-    for (j in seq_len(p)) nu[j] <- rig(1, 1 + 1 / lambda2[j])
-    xi <- rig(1, 1 + 1 / tau2)
+    tau2 <- rig((p + 1) / 2,
+                sum(beta^2 / (lambda2 * sigma2 + 1e-30)) / 2 +
+                  1 / (xi + 1e-30))
+    for (j in seq_len(p)) nu[j] <- rig(1, 1 + 1 / (lambda2[j] + 1e-30))
+    xi <- rig(1, 1 + 1 / (tau2 + 1e-30))
     beta_samples[it, ] <- beta
     tau_samples[it] <- sqrt(tau2)
   }

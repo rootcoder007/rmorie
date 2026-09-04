@@ -422,5 +422,15 @@ whole_genome_regression <- morie_regmlm
 #' res <- .regmlm_cheatsheet()
 #' res
 .regmlm_cheatsheet <- function() {
-  "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges per block of B markers at DIFFERENT shrinkages (MAP under a Gaussian prior), turning 500k markers into 2.5k local polygenic scores at B=1000, J=5. Level 1 combines them under cross-validation -- in-sample would be circular. The combined predictor is split by chromosome, each background EXCLUDING its own chromosome, because testing a variant against a background containing it is proximal contamination. Step 2 tests each variant with that background as an offset."
+  paste0(
+    "regmlm: Step 1 is two stacked ridges. Level 0 fits J ridges ",
+    "per block of B markers at DIFFERENT shrinkages (MAP under a ",
+    "Gaussian prior), turning 500k markers into 2.5k local polyge",
+    "nic scores at B=1000, J=5. Level 1 combines them under cross",
+    "-validation -- in-sample would be circular. The combined pre",
+    "dictor is split by chromosome, each background EXCLUDING its",
+    " own chromosome, because testing a variant against a backgro",
+    "und containing it is proximal contamination. Step 2 tests ea",
+    "ch variant with that background as an offset."
+  )
 }

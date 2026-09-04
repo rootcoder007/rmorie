@@ -297,7 +297,17 @@ morie_impFB <- function(R, f = 8, alpha = 40.0, lam = 0.1, iters = 15,
 #' res <- .impFB_cheatsheet()
 #' res
 .impFB_cheatsheet <- function() {
-  return("impFB: implicit feedback measures CONFIDENCE, not preference -- the favourite film is watched once, the merely-liked series weekly. Split into binary p_ui and c_ui = 1 + alpha r_ui (alpha = 40). The cost sums over ALL m*n pairs, because zeros are missing evidence rather than negatives, which rules out SGD and forces ALS. Y'C^u Y = Y'Y + Y'(C^u - I)Y makes each update O(f^2 n_u + f^3), linear in the input. Substituting the update into the prediction yields per-item explanations.")
+  return(paste0(
+    "impFB: implicit feedback measures CONFIDENCE, not preference",
+    " -- the favourite film is watched once, the merely-liked ser",
+    "ies weekly. Split into binary p_ui and c_ui = 1 + alpha r_ui",
+    " (alpha = 40). The cost sums over ALL m*n pairs, because zer",
+    "os are missing evidence rather than negatives, which rules o",
+    "ut SGD and forces ALS. Y'C^u Y = Y'Y + Y'(C^u - I)Y makes ea",
+    "ch update O(f^2 n_u + f^3), linear in the input. Substitutin",
+    "g the update into the prediction yields per-item explanation",
+    "s."
+  ))
 }
 
 # compact alias per ledger/NAMING.md

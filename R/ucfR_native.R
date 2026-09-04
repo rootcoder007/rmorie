@@ -260,7 +260,18 @@
 #' res <- .ucfR_cheatsheet()
 #' res
 .ucfR_cheatsheet <- function() {
-  "ucfR: people who agreed before will probably agree again -- so predict from correlated users, with NO content analysis, which is why it worked on Usenet news. Correlate over CO-RATED items only; unrated is silent, not zero. Predict the user's own mean plus a weighted average of neighbours' DEVIATIONS from their means, since one person's 3 is another's 5 -- averaging raw ratings imports the neighbour's generosity. Normalise by the sum of ABSOLUTE weights, so a reliable disagreer still counts. A correlation of 1.0 from two co-rated items is not evidence: scale by min(n/50, 1)."
+  paste0(
+    "ucfR: people who agreed before will probably agree again -- ",
+    "so predict from correlated users, with NO content analysis, ",
+    "which is why it worked on Usenet news. Correlate over CO-RAT",
+    "ED items only; unrated is silent, not zero. Predict the user",
+    "'s own mean plus a weighted average of neighbours' DEVIATION",
+    "S from their means, since one person's 3 is another's 5 -- a",
+    "veraging raw ratings imports the neighbour's generosity. Nor",
+    "malise by the sum of ABSOLUTE weights, so a reliable disagre",
+    "er still counts. A correlation of 1.0 from two co-rated item",
+    "s is not evidence: scale by min(n/50, 1)."
+  )
 }
 
 morie_ucfR <- list(

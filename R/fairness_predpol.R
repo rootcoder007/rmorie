@@ -389,7 +389,13 @@ morie_fairness_predpol_score_disparity <- function(score, group,
     anova_line <- ""
   }
   interp <- sprintf(
-    "Group mean risk scores span %.2f points (reference '%s'). %sNote: a score gap is not itself evidence of bias \u2014 it can reflect genuine base-rate differences. Pair this with morie_fairness_predpol_calibration_audit, which compares the score against realised outcomes.",
+    paste0(
+      "Group mean risk scores span %.2f points (reference '%s'). %s",
+      "Note: a score gap is not itself evidence of bias \u2014 it c",
+      "an reflect genuine base-rate differences. Pair this with mor",
+      "ie_fairness_predpol_calibration_audit, which compares the sc",
+      "ore against realised outcomes."
+    ),
     spread, ref, anova_line
   )
 

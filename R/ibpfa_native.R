@@ -215,5 +215,15 @@ morie_ibpfa <- function(n, alpha, seed = 0L) {
 #' res <- .ibpfa_cheatsheet()
 #' res
 .ibpfa_cheatsheet <- function() {
-  paste("ibpfa: objects have SEVERAL latent features, and how many exist is unknown -- so use a distribution over binary matrices with unboundedly many columns. Customer i takes an existing dish with probability m_k/i (popularity self-reinforces) and Poisson(alpha/i) NEW dishes (the flow decays as 1/i). Two different numbers: expected TOTAL features alpha*H_n ~ alpha log n, expected features PER OBJECT constant at alpha. The left-ordered form is EXCHANGEABLE, which is what licenses Gibbs sampling by treating any object as the last to arrive.")
+  paste(paste0(
+    "ibpfa: objects have SEVERAL latent features, and how many ex",
+    "ist is unknown -- so use a distribution over binary matrices",
+    " with unboundedly many columns. Customer i takes an existing",
+    " dish with probability m_k/i (popularity self-reinforces) an",
+    "d Poisson(alpha/i) NEW dishes (the flow decays as 1/i). Two ",
+    "different numbers: expected TOTAL features alpha*H_n ~ alpha",
+    " log n, expected features PER OBJECT constant at alpha. The ",
+    "left-ordered form is EXCHANGEABLE, which is what licenses Gi",
+    "bbs sampling by treating any object as the last to arrive."
+  ))
 }

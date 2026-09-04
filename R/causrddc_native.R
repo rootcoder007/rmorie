@@ -519,5 +519,17 @@ morie_causrddc_local_poly_weights <- .causrddc_local_poly_weights
 #' @return A character value.
 #' @export
 morie_causrddc_cheatsheet <- function() {
-  "causrddc: robust bias-corrected RD inference (Calonico, Cattaneo & Titiunik 2014). MSE-optimal bandwidths are 'large' on purpose, so the conventional CI carries a first-order bias and undercovers. Fix: recentre by an estimated bias from a higher-order local polynomial at pilot bandwidth b, AND rescale by V + C^bc, a variance that includes the bias estimate's own variability -- which is what lets rho = h/b stay non-zero. Remark 7: at h = b the bias-corrected estimator IS the local-quadratic estimator (Frisch-Waugh). Bandwidths from Lemma 1; variance nearest-neighbour (J=3) or plug-in residuals. Sharp, kink (nu=1) and fuzzy all from one code path."
+  paste0(
+    "causrddc: robust bias-corrected RD inference (Calonico, Catt",
+    "aneo & Titiunik 2014). MSE-optimal bandwidths are 'large' on",
+    " purpose, so the conventional CI carries a first-order bias ",
+    "and undercovers. Fix: recentre by an estimated bias from a h",
+    "igher-order local polynomial at pilot bandwidth b, AND resca",
+    "le by V + C^bc, a variance that includes the bias estimate's",
+    " own variability -- which is what lets rho = h/b stay non-ze",
+    "ro. Remark 7: at h = b the bias-corrected estimator IS the l",
+    "ocal-quadratic estimator (Frisch-Waugh). Bandwidths from Lem",
+    "ma 1; variance nearest-neighbour (J=3) or plug-in residuals.",
+    " Sharp, kink (nu=1) and fuzzy all from one code path."
+  )
 }

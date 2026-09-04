@@ -263,7 +263,18 @@ tlltmle_influence_curve_se <- function(d) {
 #' @return A character value.
 #' @export
 tlltmle_cheatsheet <- function() {
-  "tlltmle: write the g-formula as ITERATED conditional expectations, fit them with machine learning, then TARGET each one. Every step is a one-dimensional logistic fluctuation with the initial fit as OFFSET and the clever covariate H = I(A = d)/g as the covariate; the MLE for epsilon makes the update solve the efficient influence curve equation. DOUBLE ROBUST: consistent if EITHER the outcome regressions OR the treatment mechanism is right -- not both. The clever covariate is an inverse probability, so a large one IS the positivity violation."
+  paste0(
+    "tlltmle: write the g-formula as ITERATED conditional expecta",
+    "tions, fit them with machine learning, then TARGET each one.",
+    " Every step is a one-dimensional logistic fluctuation with t",
+    "he initial fit as OFFSET and the clever covariate H = I(A = ",
+    "d)/g as the covariate; the MLE for epsilon makes the update ",
+    "solve the efficient influence curve equation. DOUBLE ROBUST:",
+    " consistent if EITHER the outcome regressions OR the treatme",
+    "nt mechanism is right -- not both. The clever covariate is a",
+    "n inverse probability, so a large one IS the positivity viol",
+    "ation."
+  )
 }
 
 # compact alias per ledger/NAMING.md

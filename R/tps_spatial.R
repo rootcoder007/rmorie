@@ -719,7 +719,7 @@ print.morie_tps_spatial_result <- function(x, ...) {
   cat(x$title, "\
 ", strrep("=", nchar(x$title)), "\
 ", sep = "")
-  if (!is.null(x$call) && nzchar(x$call)) {
+  if (!is.null(x$call) && length(x$call) == 1L && nzchar(x$call)) {
     cat("Call:", x$call, "\
 \
 ", sep = " ")

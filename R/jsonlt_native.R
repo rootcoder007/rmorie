@@ -415,7 +415,13 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' @noRd
 .jsonlt_as_num <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
   if (isTRUE(keep_vec_names) && length(names(x))) {
-    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    message(paste0(
+      "Input to asJSON(keep_vec_names=TRUE) is a named vector. In a ",
+      "future version of jsonlite, this option will not be ",
+      "supported, and named vectors will be translated into arrays ",
+      "instead of objects. If you want JSON object output, please ",
+      "use a named list instead. See ?toJSON."
+    ))
     return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
   }
   na <- if (is.null(na)) "string" else match.arg(na, c("string", "null", "NA"))
@@ -428,7 +434,13 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' @noRd
 .jsonlt_as_chr <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
   if (isTRUE(keep_vec_names) && length(names(x))) {
-    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    message(paste0(
+      "Input to asJSON(keep_vec_names=TRUE) is a named vector. In a ",
+      "future version of jsonlite, this option will not be ",
+      "supported, and named vectors will be translated into arrays ",
+      "instead of objects. If you want JSON object output, please ",
+      "use a named list instead. See ?toJSON."
+    ))
     return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
   }
   tmp <- .jsonlt_esc(as.character(x))
@@ -443,7 +455,13 @@ morie_jsonlt_base64url_dec <- function(input) {
 #' @noRd
 .jsonlt_as_lgl <- function(x, o, collapse, na, auto_unbox, indent, keep_vec_names) {
   if (isTRUE(keep_vec_names) && length(names(x))) {
-    message("Input to asJSON(keep_vec_names=TRUE) is a named vector. In a future version of jsonlite, this option will not be supported, and named vectors will be translated into arrays instead of objects. If you want JSON object output, please use a named list instead. See ?toJSON.")
+    message(paste0(
+      "Input to asJSON(keep_vec_names=TRUE) is a named vector. In a ",
+      "future version of jsonlite, this option will not be ",
+      "supported, and named vectors will be translated into arrays ",
+      "instead of objects. If you want JSON object output, please ",
+      "use a named list instead. See ?toJSON."
+    ))
     return(.jsonlt_as(as.list(x), o, collapse, na = na, auto_unbox = TRUE, indent = indent))
   }
   na <- if (is.null(na)) "null" else match.arg(na, c("null", "string", "NA"))
@@ -647,7 +665,7 @@ print.json <- function(x, ...) {
 # character above 2^53 when bigint_as_char); otherwise strtod.
 #' @noRd
 .jsonlt_parse <- function(txt, bigint_as_char = FALSE) {
-  s <- paste(txt, collapse = "\n")
+  s <- enc2utf8(paste(txt, collapse = "\n"))
   s <- enc2utf8(s)
   if (startsWith(s, "\ufeff")) {
     warning("JSON string contains (illegal) UTF8 byte-order-mark!", call. = FALSE)
@@ -1263,7 +1281,13 @@ morie_jsonlt_validate <- function(txt) {
     if (pretty && state == "complete") emit("\n")
   }
   if (state != "complete") bad("unexpected end of input")
-  structure(paste(out, collapse = ""), class = "json")
+  res <- paste(out, collapse = "")
+  # JSON text is UTF-8 by definition (RFC 8259 section 8.1). A
+  # \uXXXX escape decoded into a non-ASCII character has to carry
+  # that mark: without it the result compares unequal to the same
+  # text under a non-UTF-8 locale even though the bytes agree.
+  Encoding(res) <- "UTF-8"
+  structure(res, class = "json")
 }
 
 #' Indent JSON text (jsonlite's prettify)

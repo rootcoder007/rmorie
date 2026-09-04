@@ -142,7 +142,16 @@ narm_decoder_parameters <- function(n_items, hidden, emb_dim) {
 #' @return A character value.
 #' @export
 narm_cheatsheet <- function() {
-  paste("narm: a purely sequential session model recommends trousers because the shopper clicked a pair by accident. Two encoders over the SAME GRU states: the global one takes h_t as the whole-behaviour summary, the local one attends over previous states to capture the session's MAIN PURPOSE. h_t^g and h_t^l have identical values and different roles. Concatenate, then score with a BILINEAR decoder emb_i' B c_t -- |D||H| parameters instead of |N||H|, and more accurate.")
+  paste(paste0(
+    "narm: a purely sequential session model recommends trousers ",
+    "because the shopper clicked a pair by accident. Two encoders",
+    " over the SAME GRU states: the global one takes h_t as the w",
+    "hole-behaviour summary, the local one attends over previous ",
+    "states to capture the session's MAIN PURPOSE. h_t^g and h_t^",
+    "l have identical values and different roles. Concatenate, th",
+    "en score with a BILINEAR decoder emb_i' B c_t -- |D||H| para",
+    "meters instead of |N||H|, and more accurate."
+  ))
 }
 
 # house entry point: the package exports one morie_<module>

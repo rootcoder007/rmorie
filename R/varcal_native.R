@@ -487,7 +487,16 @@ varcal_evaluate <- function(called, truth, candidates = NULL) {
 #' @return A character value.
 #' @export
 varcal_cheatsheet <- function() {
-  "varcal: candidates are generated with HIGH sensitivity and low specificity on purpose -- 8.1% PPV on Ion Torrent, which the classifier lifts to 99.7% while giving up a mean 2.3% of candidate sensitivity. The pileup image puts every read at the locus in one picture so the network can use the dependence between reads. The Inception-v2 network itself is not reimplemented here; genotype_posterior takes any scorer, and the default is a labelled fallback, not a trained model."
+  paste0(
+    "varcal: candidates are generated with HIGH sensitivity and l",
+    "ow specificity on purpose -- 8.1% PPV on Ion Torrent, which ",
+    "the classifier lifts to 99.7% while giving up a mean 2.3% of",
+    " candidate sensitivity. The pileup image puts every read at ",
+    "the locus in one picture so the network can use the dependen",
+    "ce between reads. The Inception-v2 network itself is not rei",
+    "mplemented here; genotype_posterior takes any scorer, and th",
+    "e default is a labelled fallback, not a trained model."
+  )
 }
 
 # Compact alias per ledger/NAMING.md

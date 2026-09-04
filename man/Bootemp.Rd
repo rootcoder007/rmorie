@@ -6,11 +6,11 @@
 \alias{morie_kosorok_bootstrap_empirical}
 \title{Nonparametric (multinomial) bootstrap of the empirical mean process}
 \usage{
-Bootemp(x, B = 200, seed = 1)
+Bootemp(x, B = 200, seed = 1, deterministic_seed = NULL)
 
-morie_ksr07_kosorok_bootstrap_empirical(x, B = 200, seed = 1)
+morie_ksr07_kosorok_bootstrap_empirical(x, B = 200, seed = 1, deterministic_seed = NULL)
 
-morie_kosorok_bootstrap_empirical(x, B = 200, seed = 1)
+morie_kosorok_bootstrap_empirical(x, B = 200, seed = 1, deterministic_seed = NULL)
 }
 \arguments{
 \item{x}{The sample.}
@@ -18,6 +18,12 @@ morie_kosorok_bootstrap_empirical(x, B = 200, seed = 1)
 \item{B}{Number of bootstrap replicates (fixed budget).}
 
 \item{seed}{Seed for the pinned generator.}
+
+\item{deterministic_seed}{Optional integer; if supplied, the pinned
+LCG is seeded from SHA-256("ksr07_bootstrap:<deterministic_seed>")
+via \code{morie_det_rng} instead of \code{seed}, which is the
+cross-arm reproducible path.}
+
 }
 \value{
 List with \code{estimate}, \code{boot_mean}, \code{boot_sd},

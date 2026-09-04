@@ -226,7 +226,15 @@
 #' res <- .resnxt_cheatsheet()
 #' res
 .resnxt_cheatsheet <- function() {
-  "resnxt: y = x + sum_{i=1..C} T_i(x), every T_i with the SAME TOPOLOGY -- Inception's split-transform-merge without its per-stage hand design. C is CARDINALITY, a design dimension beside depth and width, and raising it beats going deeper or wider AT FIXED COMPLEXITY. Three equivalent block forms: C separate paths, concatenate-then-project, or one GROUPED CONVOLUTION -- same function, and the third is what runs fast."
+  paste0(
+    "resnxt: y = x + sum_{i=1..C} T_i(x), every T_i with the SAME",
+    " TOPOLOGY -- Inception's split-transform-merge without its p",
+    "er-stage hand design. C is CARDINALITY, a design dimension b",
+    "eside depth and width, and raising it beats going deeper or ",
+    "wider AT FIXED COMPLEXITY. Three equivalent block forms: C s",
+    "eparate paths, concatenate-then-project, or one GROUPED CONV",
+    "OLUTION -- same function, and the third is what runs fast."
+  )
 }
 
 # Public names

@@ -629,5 +629,14 @@ morie_survvae_fit_competing <- function(X, times, causes, K = 3L,
 #' @return Character scalar.
 #' @export
 morie_survvae_cheatsheet <- function() {
-  paste("survvae: S(t|x) = sum_k g_k(x) S_k(t), gates a softmax and the experts Weibull or log-normal -- both chosen because a censored case needs S(t) in closed form. Trained on ELBO_U + alpha ELBO_C + prior, with the gates OUTSIDE the log (Jensen). alpha discounts the censored term against the long right tail; alpha = 0 drops it entirely. The ELBO is checked against the exact mixture likelihood rather than assumed to sit below it.")
+  paste(paste0(
+    "survvae: S(t|x) = sum_k g_k(x) S_k(t), gates a softmax and t",
+    "he experts Weibull or log-normal -- both chosen because a ce",
+    "nsored case needs S(t) in closed form. Trained on ELBO_U + a",
+    "lpha ELBO_C + prior, with the gates OUTSIDE the log (Jensen)",
+    ". alpha discounts the censored term against the long right t",
+    "ail; alpha = 0 drops it entirely. The ELBO is checked agains",
+    "t the exact mixture likelihood rather than assumed to sit be",
+    "low it."
+  ))
 }

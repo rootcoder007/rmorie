@@ -80,7 +80,8 @@
         info <- info + d * (S2 / S0 - tcrossprod(xbar))
       }
     }
-    step <- solve(info, U)
+    step <- tryCatch(solve(info, U), error = function(e)
+      stop("partial likelihood is monotone or information singular", call. = FALSE))
     beta <- beta + step
     if (max(abs(step)) < tol) break
   }

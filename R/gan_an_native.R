@@ -355,7 +355,17 @@ score_separation <- function(normal_scores, anomalous_scores) {
 #' res <- .gan_an_cheatsheet()
 #' res
 .gan_an_cheatsheet <- function() {
-  "gan_an: train a GAN on NORMAL data only, then score a query by how well it can be reproduced from that manifold. A GAN has no inverse, so find z by OPTIMISATION with the generator FIXED -- nothing adapts, so an off-manifold image stays badly reconstructed. Two losses: pixel residual, and a discrimination loss on INTERMEDIATE discriminator features (the scalar verdict would give no gradient). The residual map LOCALISES the anomaly. A generator that can reproduce anything scores everything zero -- limited capacity is load-bearing."
+  paste0(
+    "gan_an: train a GAN on NORMAL data only, then score a query ",
+    "by how well it can be reproduced from that manifold. A GAN h",
+    "as no inverse, so find z by OPTIMISATION with the generator ",
+    "FIXED -- nothing adapts, so an off-manifold image stays badl",
+    "y reconstructed. Two losses: pixel residual, and a discrimin",
+    "ation loss on INTERMEDIATE discriminator features (the scala",
+    "r verdict would give no gradient). The residual map LOCALISE",
+    "S the anomaly. A generator that can reproduce anything score",
+    "s everything zero -- limited capacity is load-bearing."
+  )
 }
 
 # compact alias per ledger/NAMING.md

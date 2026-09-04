@@ -123,8 +123,12 @@ test_that("the Chernoff bounds match Python", {
   lo <- morie_chernoff_bound(100, 0.5, 30, tail = "lower")
   expect_equal(lo$bound, 0.018315638888734179, tolerance = 1e-12)
   expect_equal(lo$exact_tail, 3.9250698227968355e-05, tolerance = 1e-12)
-  # the two tails are exactly symmetric for p = 1/2, which IS exact
-  expect_identical(up$exact_tail, lo$exact_tail)
+  # For p = 1/2 the two tails are mathematically equal, but they are
+  # summed over mirrored index ranges, so the floating-point results
+  # agree only to the last bit or two (they differ by 1 ULP on macOS
+  # arm64). The symmetry is exact; its double-precision evaluation is
+  # not, so assert it at ULP scale rather than with identical().
+  expect_equal(up$exact_tail, lo$exact_tail, tolerance = 1e-15)
 })
 
 test_that("the upper bound is never violated", {

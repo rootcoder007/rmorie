@@ -257,7 +257,13 @@ morie_plrgrf <- function(y, W, X, at = NULL, n_trees = 200,
 #' res <- .plrgrf_cheatsheet()
 #' res
 .plrgrf_cheatsheet <- function() {
-  "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W - e(X), both cross-fitted -- then solve eq. (2) in the forest neighbourhood: tau(x) = sum a_i Wtilde Ytilde / sum a_i Wtilde^2. Skip the centering and the forest splits on m(X), the confounding surface, not on tau."
+  paste0(
+    "plrgrf: residualise FIRST -- Ytilde = Y - m(X), Wtilde = W -",
+    " e(X), both cross-fitted -- then solve eq. (2) in the forest",
+    " neighbourhood: tau(x) = sum a_i Wtilde Ytilde / sum a_i Wti",
+    "lde^2. Skip the centering and the forest splits on m(X), the",
+    " confounding surface, not on tau."
+  )
 }
 
 partial_linear_grf <- morie_plrgrf

@@ -447,7 +447,12 @@ lyapunov_exponent <- function(y, embedding = NULL, tau = NULL, dt = 1.0,
        m = dv$m, tau = dv$tau, min_sep = dv$min_sep,
        n_points = dv$n_points, n = dv$n_obs, dt = dt,
        method = paste0("largest Lyapunov exponent, Rosenstein, Collins & De Luca (1993), route '", method, "'"),
-       note = "the exponent is the slope of <ln d_j(i)> over the initial rise; a positive value indicates chaos, and the fitting window is the caller's to choose because the curve saturates once the neighbours are as far apart as the attractor allows")
+       note = paste0(
+         "the exponent is the slope of <ln d_j(i)> over the initial ri",
+         "se; a positive value indicates chaos, and the fitting window",
+         " is the caller's to choose because the curve saturates once ",
+         "the neighbours are as far apart as the attractor allows"
+       ))
 }
 
 largest_lyapunov <- lyapunov_exponent

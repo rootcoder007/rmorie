@@ -209,7 +209,17 @@ cosine_ranking <- function(q_hat, model, top_k = 5) {
 #' res <- .lsa_cheatsheet()
 #' res
 .lsa_cheatsheet <- function() {
-  "lsa: literal term matching fails through SYNONYMY (the right document uses other words) and POLYSEMY (the wrong one shares a word). Take the SVD of the term-document matrix and keep ~100 factors: the TRUNCATION is the method, since k = full rank reproduces X exactly and generalises nothing. Queries are FOLDED IN as pseudo-documents, q' T S^-1, then ranked by cosine -- no re-decomposition, but new documents do not reshape the space. Weight the counts first; log-entropy is standard."
+  paste0(
+    "lsa: literal term matching fails through SYNONYMY (the right",
+    " document uses other words) and POLYSEMY (the wrong one shar",
+    "es a word). Take the SVD of the term-document matrix and kee",
+    "p ~100 factors: the TRUNCATION is the method, since k = full",
+    " rank reproduces X exactly and generalises nothing. Queries ",
+    "are FOLDED IN as pseudo-documents, q' T S^-1, then ranked by",
+    " cosine -- no re-decomposition, but new documents do not res",
+    "hape the space. Weight the counts first; log-entropy is stan",
+    "dard."
+  )
 }
 
 latentsemantic <- lsa_decompose
