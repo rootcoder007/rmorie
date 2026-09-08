@@ -206,7 +206,7 @@ categorical_loss <- function(m, probs, eps = 1e-12) {
 
 #' Greedy action from per-action next-state distributions
 #'
-#' \code{a* = argmax_a sum_i z_i p_i(x', a)}.
+#' \code{a* = argmax_a sum_i z_i p_i(x\', a)}.
 #'
 #' @param next_probs_by_action List of numeric vectors, one per action.
 #' @param z Numeric vector of atom positions.

@@ -17,16 +17,16 @@ morie_fauzi_boundary_free_kde(x, grid = NULL, h = NULL, transform = "log")
 }
 \value{
 list: grid, density, bandwidth, transform, jacobian
-(\verb{= 1/g'(g^\{-1\}(t))}), g_prime, mass, boundary_bias_order,
+(\verb{= 1/g\'(g^\{-1\}(t))}), g_prime, mass, boundary_bias_order,
 jacobian_note, n, method.
 }
 \description{
 Estimates on the transformed scale, where a symmetric kernel is
 legitimate because the support is unbounded, then maps back:
-\verb{f~_X(t) = 1/(n h g'(g^\{-1\}(t))) sum K((g^\{-1\}(t) - g^\{-1\}(X_i))/h)}.
+\verb{f~_X(t) = 1/(n h g\'(g^\{-1\}(t))) sum K((g^\{-1\}(t) - g^\{-1\}(X_i))/h)}.
 }
 \details{
-The factor \verb{1/g'(g^\{-1\}(t))} is mandatory. Without it the result
+The factor \verb{1/g\'(g^\{-1\}(t))} is mandatory. Without it the result
 is a density on the transformed scale, not the original one. (The
 distilled text file in the reference library omits it; the PDF
 does not.)

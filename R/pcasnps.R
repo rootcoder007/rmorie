@@ -8,17 +8,17 @@
 #' model predicts, \code{p_j = mu_j / 2} and
 #' \code{M_ij = (g_ij - mu_j) / sqrt(p_j (1 - p_j))}, which puts every
 #' marker on the same footing, and then take the eigenvectors of
-#' \code{X = M M' / m} over INDIVIDUALS -- an n by n problem however
+#' \code{X = M M\' / m} over INDIVIDUALS -- an n by n problem however
 #' many markers there are.
 #'
 #' Significance of the leading eigenvalue is judged against the
-#' Tracy-Widom law. With \code{l1' = n lambda_1 / sum(lambda)} and
-#' \code{n' = (n + 1) (sum l)^2 / ((n - 1) sum l^2 - (sum l)^2)},
+#' Tracy-Widom law. With \code{l1\' = n lambda_1 / sum(lambda)} and
+#' \code{n\' = (n + 1) (sum l)^2 / ((n - 1) sum l^2 - (sum l)^2)},
 #' \code{mu = (sqrt(n - 1) + sqrt(n'))^2 / n'},
 #' \code{sigma = ((sqrt(n-1) + sqrt(n')) / n')
 #' (1/sqrt(n-1) + 1/sqrt(n'))^(1/3)}, the statistic
-#' \code{(l1' - mu) / sigma} follows TW1 under the null of no
-#' structure. \code{n'} is the EFFECTIVE number of markers and is not
+#' \code{(l1\' - mu) / sigma} follows TW1 under the null of no
+#' structure. \code{n\'} is the EFFECTIVE number of markers and is not
 #' \code{m}: linkage makes markers less independent than they look, and
 #' using \code{m} overstates significance.
 #'

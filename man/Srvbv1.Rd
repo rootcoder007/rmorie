@@ -37,7 +37,7 @@ morie_fauzi_thm4_1_surv_bias_var(
 
 \item{b1, b2}{The coefficients (4.14) and (4.15).}
 
-\item{dg}{\verb{g'(g^-1(t))}.}
+\item{dg}{\verb{g\'(g^-1(t))}.}
 
 \item{density}{\code{f_X(t)}.}
 

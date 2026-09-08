@@ -35,7 +35,7 @@ morie_jsonlt_stream_out(
 
 \item{x}{a data.frame to write, one record per line.}
 
-\item{prefix}{text prepended to every line (e.g. \code{"�"} for RFC 7464).}
+\item{prefix}{text prepended to every line (the RFC 7464 record separator \code{"\\x1e"}, for instance).}
 }
 \value{
 \code{stream_in}: a data.frame of all records (or nothing with a

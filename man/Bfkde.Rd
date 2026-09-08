@@ -22,7 +22,7 @@ morie_fauzi_bdfree_density_from_cdf(
 
 \item{ginv}{The inverse transformation; defaults to \code{log}.}
 
-\item{dg}{\verb{g'} as a function of \code{g^-1(x)}; defaults to \code{exp}, matching the
+\item{dg}{\verb{g\'} as a function of \code{g^-1(x)}; defaults to \code{exp}, matching the
 default \code{ginv = log}.}
 
 \item{h}{Bandwidth on the transformed scale; defaults to Silverman's
@@ -36,13 +36,13 @@ Eq. (5.9):
 \deqn{\tilde f_X(x) = \frac{1}{nhg'(g^{-1}(x))}\sum_i K\Big(\frac{g^{-1}(x)-g^{-1}(X_i)}{h}\Big),\quad x\in\Omega.}{ftilde(x) = 1/(n h g'(g^-1(x))) sum_i K((g^-1(x) - g^-1(X_i))/h), x in Omega.}
 }
 \details{
-The \verb{1/g'(g^-1(x))} factor is the Jacobian, and it is exactly what the
+The \verb{1/g\'(g^-1(x))} factor is the Jacobian, and it is exactly what the
 distribution-function estimator (5.5) does NOT need. A density is a
 derivative, so it transforms with a Jacobian; a distribution function is a
 probability, so it does not. That one difference runs through the chapter.
 
-Bias and variance are Theorem 5.5: \verb{h^2 c2(x) mu2(K) / (2 g'(g^-1(x)))} and
-\verb{f(x) int K^2 / (n h g'(g^-1(x)))}. The variance is \code{O(1/(nh))}, not the
+Bias and variance are Theorem 5.5: \verb{h^2 c2(x) mu2(K) / (2 g\'(g^-1(x)))} and
+\verb{f(x) int K^2 / (n h g\'(g^-1(x)))}. The variance is \code{O(1/(nh))}, not the
 \code{O(h/n)} of the distribution estimators -- so THIS estimator takes the
 density bandwidth rate \code{n^(-1/5)}, and the default is Silverman's rule on
 the transformed scale, not the cube-root rule the rest of the suite uses.

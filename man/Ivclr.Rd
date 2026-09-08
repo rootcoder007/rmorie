@@ -33,8 +33,8 @@ Econometrics 138, 46-81; Kleibergen, F. (2002), Econometrica 70,
 projection on the partialled-out instruments and
 \code{sigmaHat = crossprod(M_Z [Y D]) / (n - k - L)},
 \code{a0 = (beta0, 1)}, \code{b0 = (1, -beta0)}:
-\code{QS = ||P_Z [Y D] b0||^2 / (b0' sigmaHat b0)},
-\code{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0' sigmaHat^-1 a0)},
+\code{QS = ||P_Z [Y D] b0||^2 / (b0\' sigmaHat b0)},
+\code{QT = ||P_Z [Y D] sigmaHat^-1 a0||^2 / (a0\' sigmaHat^-1 a0)},
 \code{QTS} the corresponding normalised cross term, and
 \code{LR = (QS - QT + sqrt((QS+QT)^2 - 4(QS QT - QTS^2)))/2}.
 }

@@ -18,7 +18,7 @@ morie_robust_se(fit, kind = "HC1")
 list with \code{vcov}, \code{se} and the leverages
 }
 \description{
-\verb{V = (X'X)^-1 X' diag(omega) X (X'X)^-1} with \code{omega = e^2} (HC0),
+\verb{V = (X\'X)^-1 X\' diag(omega) X (X\'X)^-1} with \code{omega = e^2} (HC0),
 \verb{e^2 n/(n-k)} (HC1, the Stata default), \code{e^2/(1-h)} (HC2) or
 \code{e^2/(1-h)^2} (HC3, best under leverage).  Use when the errors are
 heteroskedastic: the coefficients stay unbiased but the textbook

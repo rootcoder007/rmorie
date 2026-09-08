@@ -31,7 +31,7 @@ list with \code{coef}, \code{se}, \code{z}, \code{p_value}, \code{hazard_ratio},
 \code{loglik} and the likelihood-ratio test
 }
 \description{
-\verb{lambda(t | x) = lambda_0(t) exp(x' beta)}, fitted by Newton-Raphson
+\verb{lambda(t | x) = lambda_0(t) exp(x\' beta)}, fitted by Newton-Raphson
 on the partial likelihood with Efron's tie handling -- the default in
 \code{survival::coxph}, and materially better than Breslow's when ties are
 common, as they are whenever follow-up is recorded in whole days.

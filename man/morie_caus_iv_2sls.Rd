@@ -24,7 +24,7 @@ vcov_type, n, k, m, method.
 \description{
 \verb{beta = (X'P_Z X)^-1 X'P_Z y}. Identification needs at least as
 many instruments as regressors (the order condition, arithmetic
-and checked here) and \verb{rank(Z'X) = dim(beta)} (the rank condition,
+and checked here) and \verb{rank(Z\'X) = dim(beta)} (the rank condition,
 which for floating-point data is a matter of degree rather than a
 decidable property -- the degree is what \code{first_stage_F} reports).
 }

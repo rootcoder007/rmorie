@@ -30,8 +30,8 @@ range. The NTK-aware variant scales the base instead: low frequencies
 stretch a lot, high frequencies barely at all.
 }
 \details{
-Formula: \code{theta' = theta (L_new/L_train)^(d/(d-2))} inside
-\code{theta_i = theta'^(-2i/d)}, then rotate by \code{m theta_i}.
+Formula: \code{theta\' = theta (L_new/L_train)^(d/(d-2))} inside
+\code{theta_i = theta\'^(-2i/d)}, then rotate by \code{m theta_i}.
 }
 \examples{
 Ropedy(y = c(1, 2, 3, 4, 5, 6, 7, 8), q = 0.5, m = 5L)

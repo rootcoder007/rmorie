@@ -9,8 +9,8 @@
 #' could name on its own.
 #'
 #' Formula: \code{TE = CDE + INTref + INTmed + PIE} from
-#' \code{Y = th0 + th1 a + th2 m + th3 a m + th4'c} and
-#' \code{M = b0 + b1 a + b2'c}.
+#' \code{Y = th0 + th1 a + th2 m + th3 a m + th4\'c} and
+#' \code{M = b0 + b1 a + b2\'c}.
 #'
 #' @param X Exposure.
 #' @param M Mediator.

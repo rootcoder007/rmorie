@@ -16,7 +16,7 @@ morie_fauzi_quantile_asymp_var(p, n, density = NULL, qp = NULL)
 
 \item{density}{\code{f(F^-1(p))}.}
 
-\item{qp}{\verb{Q'(p)}; equals \code{1 / density}.}
+\item{qp}{\verb{Q\'(p)}; equals \code{1 / density}.}
 }
 \value{
 Named list with \code{variance}, \code{se}, \code{amse}, \code{sigma2}, \code{qp}, \code{n}, \code{method}.
@@ -24,7 +24,7 @@ Named list with \code{variance}, \code{se}, \code{amse}, \code{sigma2}, \code{qp
 \description{
 Eqs. (3.2)-(3.3):
 \deqn{V[\hat Q(p)] = \frac{p(1-p)}{n f^2(F^{-1}(p))} + O(n^{-2}),\qquad \mathrm{AMSE} = \frac{[Q'(p)]^2 p(1-p)}{n},}{V[Qhat(p)] = p(1-p)/(n f^2(F^-1(p))) + O(n^-2), AMSE = Q'(p)^2 p(1-p)/n,}
-the second form using \verb{Q'(p) = 1 / f(Q(p))}.
+the second form using \verb{Q\'(p) = 1 / f(Q(p))}.
 }
 \details{
 Both spellings come back, because the equality between them is the thing

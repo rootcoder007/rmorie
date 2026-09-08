@@ -7,9 +7,9 @@
 #' constraints with KL penalties lets mass be created and destroyed at
 #' price \code{lam}; \code{lam -> Inf} recovers the balanced problem.
 #'
-#' Formula: \code{min_T <T,C> + eps H(T) + lam KL(T 1 | a) + lam KL(T' 1 |
+#' Formula: \code{min_T <T,C> + eps H(T) + lam KL(T 1 | a) + lam KL(T\' 1 |
 #' b)}, solved by \code{u <- (a/(K v))^(lam/(lam+eps))},
-#' \code{v <- (b/(K' u))^(lam/(lam+eps))} -- Peyre and Cuturi (2019)
+#' \code{v <- (b/(K\' u))^(lam/(lam+eps))} -- Peyre and Cuturi (2019)
 #' eq. (10.8)-(10.9), p. 163; Chizat et al. (2018).
 #'
 #' @param a,b Marginals; the totals need not agree.

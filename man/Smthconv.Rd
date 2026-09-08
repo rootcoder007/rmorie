@@ -30,7 +30,7 @@ squared difference.}
 Named list with \code{ok}, \code{d}, \code{h}, \code{sqdiff}, \code{lower}, \code{upper}, \code{method}.
 }
 \description{
-Theorem 5.8: if \verb{f'} exists and is continuous near \code{-theta}, the bandwidth
+Theorem 5.8: if \verb{f\'} exists and is continuous near \code{-theta}, the bandwidth
 is \verb{h = c n^(-d)} with \code{c > 0} and \verb{1/4 < d < 1/2}, the kernel is symmetric,
 and two limiting moment conditions hold, then the standardised smoothed and
 ordinary statistics agree in MEAN SQUARE:

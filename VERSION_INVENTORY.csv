@@ -1068,7 +1068,7 @@ File,Line,Status,Version,Context
 ./R/jsdivg.R,43,STALE_OR_DEP,0.10.0,"#' src/distances_internal.h::jensen_shannon_internal (tarball philentropy_0.10.0 from"
 ./R/jsonlt_native.R,3,STALE_OR_DEP,2.0.0,"# This is the complete public surface of jsonlite 2.0.0 (toJSON / fromJSON"
 ./R/jsonlt_native.R,20,STALE_OR_DEP,2.0.0,"#   jsonlite 2.0.0 sources (R/ and src/); the executable specification."
-./R/jsonlt_native.R,1579,STALE_OR_DEP,2.0.0,"list(route = route; result = res; method = jsonlite 2.0.0 mapping (Ooms 2014); RFC 8259)"
+./R/jsonlt_native.R,1580,STALE_OR_DEP,2.0.0,"list(route = route; result = res; method = jsonlite 2.0.0 mapping (Ooms 2014); RFC 8259)"
 ./R/k05_tranche1.R,448,STALE_OR_DEP,3.2.6,"#' @references Box; G. E. P. & Jenkins; G. M. (1976); sec. 3.2.6;"
 ./R/kapco.R,14,STALE_OR_DEP,4.5.2,"#' doi:10.1007/978-3-030-89010-0.  Chapter 4; Sect. 4.5.2; p. 134; which gives kappa ="
 ./R/kapco.R,30,STALE_OR_DEP,4.5.2,"method = Cohen's kappa; MVSML Sect. 4.5.2)"

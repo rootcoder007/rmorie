@@ -14,7 +14,7 @@ morie_fauzi_kdfe_mise(n, h, rfp, varint, mu2 = 1, r1 = NULL)
 
 \item{h}{Bandwidth.}
 
-\item{rfp}{\verb{int [f'(x)]^2 dx}, the roughness of the density.}
+\item{rfp}{\verb{int [f\'(x)]^2 dx}, the roughness of the density.}
 
 \item{varint}{\verb{int F(x)(1 - F(x)) dx}.}
 
@@ -31,7 +31,7 @@ The MISE display of Sec. 2.1, assembled from (2.3) and (2.4):
 }
 \details{
 Differentiating in \code{h} and setting to zero gives
-\verb{hopt = (2 r1 / (n mu2^2 R(f')))^(1/3)} -- a CUBE root, the reason this
+\verb{hopt = (2 r1 / (n mu2^2 R(f\')))^(1/3)} -- a CUBE root, the reason this
 suite's bandwidth rule is \code{n^(-1/3)} and not the density estimator's
 \code{n^(-1/5)}. For a Gaussian kernel against a normal reference it collapses
 to \verb{4^(1/3) sigma n^(-1/3)}, which is what \code{.morie_kdfe_h} returns and what

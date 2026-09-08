@@ -28,7 +28,7 @@ position -- then finds low-dimensional coordinates the same weights
 reconstruct.
 }
 \details{
-The bottom eigenvector of \verb{M = (I - W)'(I - W)} is the constant vector with
+The bottom eigenvector of \verb{M = (I - W)\'(I - W)} is the constant vector with
 eigenvalue ~0 and is discarded; keeping it is the classic LLE bug and costs
 a dimension.
 }

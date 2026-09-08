@@ -31,7 +31,7 @@ bounded, sharp, k, n_inequalities, n_equalities, method.
 }
 \description{
 The computational engine of Mogstad, Santos and Torgovitsky
-(2018): when the object of interest is a linear functional \verb{c'x}
+(2018): when the object of interest is a linear functional \verb{c\'x}
 and everything the data and assumptions say about \code{x} is linear,
 the identified set for the target is
 \verb{[min c'x, max c'x]} over the feasible polytope -- and both ends

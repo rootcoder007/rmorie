@@ -22,7 +22,7 @@ List with \code{y}, \code{e}.
 }
 \description{
 Normalised LMS: divides the step by the instantaneous input power
-\verb{x_seg' x_seg + eps}, giving robust convergence over a wider range
+\verb{x_seg\' x_seg + eps}, giving robust convergence over a wider range
 of input scales.
 }
 \examples{

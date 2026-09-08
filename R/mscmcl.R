@@ -13,7 +13,7 @@
 #' The solution is reached by the soft-impute iteration: fill the missing
 #' cells with the current estimate, take the SVD of the completed matrix,
 #' and soft-threshold its singular values,
-#' \code{L <- U diag(max(s - lam, 0)) V'}, until the Frobenius change
+#' \code{L <- U diag(max(s - lam, 0)) V\'}, until the Frobenius change
 #' falls below \code{tol}. Singular value THRESHOLDING, not truncation,
 #' is what makes this the exact proximal step of the nuclear norm;
 #' truncating to a fixed rank would solve a different, non-convex problem.
@@ -30,7 +30,7 @@
 #'
 #' The iteration is fully deterministic -- zero start, fixed schedule,
 #' fixed tolerance -- so both language arms land on the same numbers. The
-#' SVD's sign convention cannot separate them either: \code{U diag(s) V'}
+#' SVD's sign convention cannot separate them either: \code{U diag(s) V\'}
 #' is invariant to flipping the sign of a matched column pair.
 #'
 #' @param y Observed outcome panel, units by periods.

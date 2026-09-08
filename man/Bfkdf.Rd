@@ -34,7 +34,7 @@ change-of-variable property of a distribution function: if \code{Y = g^-1(X)}
 then \code{F_X(x) = F_Y(g^-1(x))} exactly, for increasing \code{g}. No Jacobian.
 
 That is why the trick is available here and not to a density estimator,
-where the same substitution needs the \verb{1/g'(g^-1(x))} factor of (5.9).
+where the same substitution needs the \verb{1/g\'(g^-1(x))} factor of (5.9).
 Sec. 5.2 puts it plainly: the property "cannot always be done to other
 probability-related functions".
 

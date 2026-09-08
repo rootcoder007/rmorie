@@ -26,7 +26,7 @@ penalty annihilates linear functions, so as lambda grows the fit tends to
 the least-squares PLANE, not to a constant.
 }
 \details{
-Solved on an orthonormal basis of \verb{null(A')} rather than through the
+Solved on an orthonormal basis of \verb{null(A\')} rather than through the
 bordered saddle-point system: that matrix has condition number of order
 lambda, and a relative-cutoff least-squares solve truncates the O(1) linear
 block outright, so the fit drifts instead of converging.

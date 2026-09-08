@@ -16,7 +16,7 @@ morie_fauzi_thm1_1_bias_mgkde(x, h, n, fp, fpp, f, boundary = FALSE, c = NULL)
 
 \item{n}{Sample size.}
 
-\item{fp, fpp, f}{The values \verb{f'(x)}, \verb{f''(x)} and \code{f(x)}.}
+\item{fp, fpp, f}{The values \verb{f\'(x)}, \verb{f''(x)} and \code{f(x)}.}
 
 \item{boundary}{Logical; use the boundary branch of (1.11).}
 
