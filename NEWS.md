@@ -1,4 +1,15 @@
-# rmorie 1.1.7 (development, feat/native-specializations)
+# rmorie 1.2.0 - 2026-09-08
+
+## Native specializations: the dependency-light release
+
+This release merges the `feat/native-specializations` line (650 commits).
+Every estimator that previously delegated to a heavy runtime dependency
+now has a native implementation, cross-validated against the package it
+replaces and benchmarked: double-ML runs 40-61x faster than `DoubleML`,
+the R-learner causal forest 2.9x faster than `grf`, optimal matching
+beats `optmatch`'s own optimum, and design-based GLM matches `svyglm` to
+1e-6. The full matrix is green on Windows, macOS, Ubuntu (release,
+devel, oldrel-1) and a true Debian bookworm container.
 
 ## Wave 3: every ledger module implemented three-way
 
