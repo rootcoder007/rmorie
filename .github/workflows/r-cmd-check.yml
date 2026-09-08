@@ -151,7 +151,32 @@ jobs:
       # rmoriebricklayer ships a compiled libcurl fetch core; on a cold
       # cache (or an R version r-universe has no binary for yet) it builds
       # from source, which needs the libcurl headers.
-      - uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+      - id: deps
+        continue-on-error: true
+        uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
+          # races under parallel make whenever the dep cache misses; build the
+          # dependency tree serially (same as r-coverage.yml). rmorie's own
+          # compile in check-r-package keeps the workflow-level -j4.
+          MAKEFLAGS: "-j1"
+        with:
+          cache-version: 2
+          # rgenoud is a runtime Depends of Matching/rbounds (used by the
+          # genetic-matching + Rosenbaum-bounds wrappers) that is not pulled
+          # in transitively here; request it explicitly so Matching::GenMatch
+          # / rbounds::psens don't crash with "no package called 'rgenoud'".
+          extra-packages: any::rcmdcheck any::rgenoud github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
+          needs: check
+
+      # A single failed source download wedges pak: pkgdepends stops in
+      # select_next_task() with "Cannot select new package installation
+      # task" instead of retrying, and the job dies before rmorie is even
+      # built. One clean second attempt (warm cache, so it is cheap)
+      # clears it.
+      - if: steps.deps.outcome == 'failure'
+        uses: r-lib/actions/setup-r-dependencies@b7484da46de19a964f8831f505d2fcf84d1663ec # v2
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
           # ECOSolveR (via HonestDiD) vendors a SuiteSparse/AMD Makefile that
