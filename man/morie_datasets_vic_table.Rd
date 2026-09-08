@@ -31,7 +31,8 @@ downloading and caching the file on first use.
 Crime Statistics Agency (Victoria), CC BY 4.0.
 }
 \examples{
-# offline by default: returns a 0-row frame unless already cached
+# offline by default: the sample bundled in rmoriedata, or the live
+# workbook once it has been cached with offline = FALSE
 df <- morie_datasets_vic_table("criminal_incidents", table = 1)
 ncol(df)
 }
