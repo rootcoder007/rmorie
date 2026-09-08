@@ -98,13 +98,26 @@
   A1 <- cbind(A, diag(m))
   basis <- n + seq_len(m)
   obj1 <- c(numeric(n), rep(1, m))
+  # A degenerate pivot can leave the basis matrix numerically singular on
+  # one BLAS and merely ill-conditioned on another. Returning the
+  # numerical-trouble status keeps that a reported status rather than an
+  # error thrown out of solve().
+  lsolve <- function(M, v) {
+    tryCatch(solve(M, v), error = function(e) NULL)
+  }
   run <- function(A, b, basis, obj, ban = integer(0)) {
     m <- nrow(A)
     n <- ncol(A)
     B <- A[, basis, drop = FALSE]
     for (it in seq_len(5000L)) {
-      xb <- solve(B, b)
-      y <- solve(t(B), obj[basis])
+      xb <- lsolve(B, b)
+      if (is.null(xb)) {
+        return(list(status = 4L))
+      }
+      y <- lsolve(t(B), obj[basis])
+      if (is.null(y)) {
+        return(list(status = 4L))
+      }
       red <- obj - as.numeric(t(A) %*% y)
       red[basis] <- 0
       red[ban] <- Inf
@@ -113,7 +126,10 @@
         return(list(basis = basis, x = xb, status = 0L))
       }
       j <- min(ent) # Bland
-      d <- solve(B, A[, j])
+      d <- lsolve(B, A[, j])
+      if (is.null(d)) {
+        return(list(status = 4L))
+      }
       pos <- which(d > 1e-9)
       if (!length(pos)) {
         return(list(status = 3L))
@@ -130,14 +146,50 @@
   if (r1$status != 0L || sum(obj1[r1$basis] * r1$x) > 1e-7) {
     return(list(status = 2L)) # infeasible
   }
-  # drive any artificial still basic out (degenerate); ban artificials
+  # Drive any artificial that is still basic out of the basis. Banning it
+  # from entering is not enough: a basic artificial sitting at zero on a
+  # redundant row leaves B singular the moment phase 2 pivots, which is
+  # exactly the "system is exactly singular" error. Pivot on any real
+  # column that moves the row; if none does, the row is redundant and is
+  # dropped along with its artificial.
   basis <- r1$basis
-  obj <- c(cv, numeric(n_s), rep(0, m))
-  r2 <- run(A1, b, basis, obj, ban = n + seq_len(m))
+  keep <- rep(TRUE, m)
+  for (i in seq_len(m)) {
+    if (basis[i] <= n) {
+      next
+    }
+    B <- A1[, basis, drop = FALSE]
+    swapped <- FALSE
+    for (j in seq_len(n)) {
+      if (j %in% basis) {
+        next
+      }
+      d <- lsolve(B, A1[, j])
+      if (is.null(d)) {
+        next
+      }
+      if (abs(d[i]) > 1e-9) {
+        basis[i] <- j
+        swapped <- TRUE
+        break
+      }
+    }
+    if (!swapped) {
+      keep[i] <- FALSE
+    }
+  }
+  if (any(!keep)) {
+    A1 <- A1[keep, , drop = FALSE]
+    b <- b[keep]
+    basis <- basis[keep]
+    m <- nrow(A1)
+  }
+  obj <- c(cv, numeric(n_s), rep(0, ncol(A1) - n))
+  r2 <- run(A1, b, basis, obj, ban = n + seq_len(ncol(A1) - n))
   if (r2$status != 0L) {
     return(list(status = r2$status))
   }
-  x <- numeric(n + m)
+  x <- numeric(ncol(A1))
   x[r2$basis] <- r2$x
   z <- x[seq_len(k)]
   list(
