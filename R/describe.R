@@ -16,6 +16,20 @@
 # Package-level cache for the describe corpus (lazy-loaded).
 .morie_describe_env <- new.env(parent = emptyenv())
 
+#' Is the describe corpus available in this installation?
+#'
+#' @return `TRUE` when describe_corpus.Rds resolves in rmorie or
+#'   rmoriedata.
+#' @noRd
+.morie_describe_corpus_available <- function() {
+  rds <- system.file("extdata", "describe_corpus.Rds", package = "rmorie")
+  if (nzchar(rds) && file.exists(rds)) {
+    return(TRUE)
+  }
+  rds <- system.file("extdata", "describe_corpus.Rds", package = "rmoriedata")
+  nzchar(rds) && file.exists(rds)
+}
+
 #' Load the included describe corpus (lazy, cached for the session)
 #'
 #' @return Named character vector. Names are the callable mnemonics
@@ -81,12 +95,15 @@
 #'   and prints a helpful diagnostic.
 #'
 #' @examples
-#' morie_describe("aalen")
-#' morie_describe("morie_aalen") # leading prefix stripped
-#' # Function-object form: pass any morie callable unquoted
-#' # (btsrp is the bootstrap primitive; its narrative ships in
-#' # the bundled describe corpus).
-#' morie_describe(btsrp)
+#' # The corpus is data shipped by rmoriedata (>= 0.3.2).
+#' if (rmorie:::.morie_describe_corpus_available()) {
+#'   morie_describe("aalen")
+#'   morie_describe("morie_aalen") # leading prefix stripped
+#'   # Function-object form: pass any morie callable unquoted
+#'   # (btsrp is the bootstrap primitive; its narrative ships in
+#'   # the bundled describe corpus).
+#'   morie_describe(btsrp)
+#' }
 #'
 #' @seealso \code{\link{morie_describe_by_name}} for the
 #'   string-only variant that does not capture symbol names.
@@ -125,8 +142,10 @@ morie_describe <- function(callable) {
 #'   and prints a helpful diagnostic.
 #'
 #' @examples
-#' morie_describe_by_name("aalen")
-#' morie_describe_by_name("morie_aalen")
+#' if (rmorie:::.morie_describe_corpus_available()) {
+#'   morie_describe_by_name("aalen")
+#'   morie_describe_by_name("morie_aalen")
+#' }
 #'
 #' @export
 morie_describe_by_name <- function(name) {
