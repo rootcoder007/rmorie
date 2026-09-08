@@ -73,6 +73,10 @@ jobs:
           if (bad > 0) stop(bad, " native-tier failures")
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes)
+        # Examples are checked on L14, not here: extracting and running
+        # 11k+ Rd pages costs ~2h on a GitHub runner, which is why every
+        # gate run so far was cancelled at timeout-minutes: 120. The local
+        # sweep (scripts run_examples3.R) runs every page to zero failures.
         # donttest examples are NOT executed here: --as-cran turns them on
         # and the network-fetch examples crawl on GitHub runners (cold
         # caches, throttled services) until the job hits its own
@@ -83,7 +87,8 @@ jobs:
           _R_CHECK_DONTTEST_EXAMPLES_: false
         run: |
           res <- rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes",
+                     "--no-examples"),
             build_args = c("--no-build-vignettes", "--no-manual"),
             error_on = "error")
           print(res)
