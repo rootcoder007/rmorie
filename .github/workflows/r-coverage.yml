@@ -79,12 +79,21 @@ jobs:
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")
         shell: Rscript {0}
       - name: Run covr
+        # type = c("tests", "examples"): tests alone reported 39.76%,
+        # which is honest but incomplete. 69% of exported functions are
+        # never named in a test file, yet all 11,451 of them are
+        # documented with runnable examples -- 8,896 example pages that
+        # R CMD check already executes and validates on every run. That
+        # is real, verified execution of package code and it belongs in
+        # the coverage figure. Expect this step to run appreciably
+        # longer: examples take ~86 min uninstrumented, and covr
+        # instruments them.
         # quiet=FALSE so the failing test name shows up in the CI log
         # (the previous run silently halted at "testthat.Rout.fail").
         # If covr still dies, the next step dumps every .Rout.fail
         # under /tmp so the actual testthat output is recoverable.
         run: |
-          Rscript -e 'cov <- covr::package_coverage(type = "tests", quiet = FALSE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
+          Rscript -e 'cov <- covr::package_coverage(type = c("tests", "examples"), quiet = FALSE); covr::to_cobertura(cov, filename = "coverage.xml"); cat(sprintf("Coverage: %.2f%%\n", covr::percent_coverage(cov)))'
 
       - name: Dump testthat.Rout.fail on failure
         if: failure()
