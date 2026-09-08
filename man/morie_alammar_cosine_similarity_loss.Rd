@@ -9,7 +9,7 @@ morie_alammar_cosine_similarity_loss(a, b, y_true)
 }
 \arguments{
 \item{a,b}{Row-matched embedding matrices.}
-\item{y_true}{Cosine   targets in \\[-1, 1\\].}
+\item{y_true}{Cosine   targets in [-1, 1].}
 }
 \description{
 Contrastive and ranking losses of the SBERT/CLIP family

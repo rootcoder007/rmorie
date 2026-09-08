@@ -26,7 +26,7 @@ List with \code{estimate}, \code{final_size}, \code{s_inf},
 Formula: for the standard SIR model the final size Z = S(0) - S(inf)
 satisfies the implicit relation
 \preformatted{
-  Z = S(0) (1 - exp(-R0 \[Z + I(0)\]))
+  Z = S(0) (1 - exp(-R0 [Z + I(0)]))
 }
 (Ma & Earn 2006, eq. 4, p.681), which in the limit I(0) -> 0,
 S(0) -> 1 collapses to the classical Z = 1 - exp(-R0 Z) (their eq. 5).

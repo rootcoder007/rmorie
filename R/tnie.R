@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Total natural indirect effect
 #'
-#' \deqn{TNIE = E\[Y(a, M(a)) - Y(a, M(a^*))\] = (\theta_2\beta_1 + \theta_3\beta_1 a)(a
-#' - a^*).}{TNIE = E\[Y(a, M(a)) - Y(a, M(a*))\] = (theta2 beta1 + theta3 beta1 a)(a -
+#' \deqn{TNIE = E[Y(a, M(a)) - Y(a, M(a^*))] = (\theta_2\beta_1 + \theta_3\beta_1 a)(a
+#' - a^*).}{TNIE = E[Y(a, M(a)) - Y(a, M(a*))] = (theta2 beta1 + theta3 beta1 a)(a -
 #' a*).}
 #'
 #' Robins, J. M. and Greenland, S. (1992), \emph{Epidemiology} 3(2), 143-155,

@@ -6,7 +6,7 @@
 # This file ships the R-side mirror of the Python
 # `morie.describe()` function. It loads the included
 # describe_corpus.Rds (a named character vector containing the
-# ~36,000 describe_<name>.md narratives shipped under
+# ~36,000 describe_[name].md narratives shipped under
 # src/morie/fn/) and prints the relevant narrative for a given
 # callable. The corpus is loaded once per session and cached in
 # the package-private .morie_describe_env environment.

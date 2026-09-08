@@ -5,9 +5,9 @@
 #' (1972), ibid. 18(1), 14-20; the fixed point is reproduced verbatim in
 #' Tishby, Pereira and Bialek (1999), The information bottleneck method,
 #' Allerton 37, 368-377 (physics/0004057 -- FETCHED), section 2:
-#' p(xtilde|x) = p(xtilde)/Z(x, beta) exp\[-beta d(x, xtilde)\], alternated
+#' p(xtilde|x) = p(xtilde)/Z(x, beta) exp[-beta d(x, xtilde)], alternated
 #' with p(xtilde) = sum_x p(x) p(xtilde|x).  The Lagrangian printed there
-#' is F = I(X; Xtilde) + beta <d>, so beta traces out R(D) and -1/beta is
+#' is F = I(X; Xtilde) + beta mean_d, so beta traces out R(D) and -1/beta is
 #' the slope of R(D).  The 1972 papers are paywalled; the fixed point is
 #' quoted from the fetched 1999 source.  beta is bisected so the returned
 #' point sits at the requested distortion rather than at an arbitrary beta.

@@ -19,11 +19,11 @@
 #'         tidy \code{data.frame} (one row per published file), the
 #'         canonical R equivalent of \code{ARSAU_REGISTRY} in Python.
 #'   \item \code{\link{morie_arsau_sidecar_schema}}: simplified
-#'         \code{\[name, type, notes\]} extraction from a CKAN sidecar
+#'         \code{[name, type, notes]} extraction from a CKAN sidecar
 #'         (mirrors \code{morie.arsau_datasets.sidecar_schema}).
 #'   \item \code{\link{morie_arsau_sidecar_to_frame}}: convert the
 #'         array-of-arrays \code{records} body of a CKAN sidecar to a
-#'         \code{data.frame} keyed by \code{fields\[\].id} (mirrors
+#'         \code{data.frame} keyed by \code{fields[].id} (mirrors
 #'         \code{morie.arsau_datasets.sidecar_to_frame}).
 #'   \item \code{\link{morie_arsau_read_xlsx_dictionary}}: read an
 #'         Ontario-Catalogue XLSX data-dictionary sidecar
@@ -119,7 +119,7 @@ morie_arsau_registry_df <- function(language = "en") {
 # CKAN sidecar JSON helpers
 # ---------------------------------------------------------------------------
 
-#' Extract a simplified \code{\[name, type, notes\]} schema from a
+#' Extract a simplified \code{[name, type, notes]} schema from a
 #' parsed CKAN sidecar
 #'
 #' Accepts the result of \code{\link{morie_arsau_read_sidecar}} (a
@@ -189,7 +189,7 @@ morie_arsau_sidecar_schema <- function(sidecar) {
 #' Convert a CKAN sidecar's \code{records} array-of-arrays into a
 #' \code{data.frame}
 #'
-#' The \code{fields\[\].id} array supplies the column names; records
+#' The \code{fields[].id} array supplies the column names; records
 #' are array-of-array, so the column order in the JSON matches the
 #' column order in the resulting \code{data.frame}.
 #'

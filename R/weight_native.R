@@ -147,7 +147,7 @@ morie_weight_entropy <- function(data, treatment, covariates) {
 #' Covariate-balancing propensity score (Imai & Ratkovic 2014)
 #'
 #' Native just-identified CBPS: solves the covariate-balance moment
-#' conditions \eqn{E\[(T - p(X)) X / (p(X)(1-p(X)))\] = 0} directly
+#' conditions \eqn{E[(T - p(X)) X / (p(X)(1-p(X)))] = 0} directly
 #' (the exactly-identified estimator), via Newton iterations on the
 #' logistic index. Balance is thus built into the score rather than
 #' checked after the fact.

@@ -14,7 +14,7 @@ morie_least_squares(x, y)
 list: A, B, S, r, C, slope_product.
 }
 \description{
-A = (\if{html}{\out{<xy>}} - \if{html}{\out{<x>}}\if{html}{\out{<y>}})/(<x^2> - \if{html}{\out{<x>}}^2), B = \if{html}{\out{<y>}} - A\if{html}{\out{<x>}} (both book
+A = (mean(xy) - mean(x)mean(y))/(mean(x^2) - mean(x)^2), B = mean(y) - A mean(x) (both book
 forms cross-checked), residual sum of squares, sample r with the
 1/n covariance, and the slope product A*C = r^2. Mirrors
 morie.fn ch6 data modules (and the misnamed "19e2").

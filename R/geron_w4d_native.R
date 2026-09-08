@@ -2759,7 +2759,7 @@ morie_geron_trl_finetune <- function(model = NULL, dataset, method = "sft", epoc
 # ---------------------------------------------------------------------
 
 #' Optimal parenthesisation of a matrix chain (matrix-chain DP)
-#' @param dims Chain dimensions; matrix i has shape (dims\[i\], dims\[i+1\]).
+#' @param dims Chain dimensions; matrix i has shape (dims[i], dims[i+1]).
 #' @return list(cost, split) with cost the min multiplication count.
 #' @export
 #' @examples
@@ -3182,7 +3182,7 @@ morie_geron_digamma <- function(x) {
 #' Bayesian Gaussian mixture with variational inference (VBGMM)
 #'
 #' Mean-field VB with Dirichlet(alpha0) prior on mixing weights;
-#' responsibility uses E\[log pi_k\] = psi(alpha_k) - psi(sum alpha) via
+#' responsibility uses E[log pi_k] = psi(alpha_k) - psi(sum alpha) via
 #' \code{morie_geron_digamma}, which prunes unneeded components as
 #' alpha0 -> 0.
 #'
@@ -3411,9 +3411,9 @@ morie_geron_vilbert <- function(image, text, d_model = 8, seed = 0) {
 
 #' Vision Transformer (ViT): transformer on image patches
 #'
-#' Patchify image, linear-embed patches, prepend \[CLS\], add sinusoidal
+#' Patchify image, linear-embed patches, prepend [CLS], add sinusoidal
 #' position encodings, run \code{morie_geron_transformer}, linear head
-#' on the \[CLS\] row.
+#' on the [CLS] row.
 #'
 #' @param image (H,W) or (H,W,C) array.
 #' @param patch_size Patch side length.
@@ -4184,8 +4184,8 @@ morie_geron_exploding_gradients <- function(grads, tol = 2.0, clip_norm = NULL) 
 
 #' Two-stream attention masks for a factorisation order
 #'
-#' content\[t,j\]=1 when j precedes-or-equals t in perm (0-based perm);
-#' query\[t,j\]=1 only for strictly earlier positions.
+#' content[t,j]=1 when j precedes-or-equals t in perm (0-based perm);
+#' query[t,j]=1 only for strictly earlier positions.
 #'
 #' @param perm 0-based permutation vector (length T).
 #' @return list(content, query), each a T x T 0/1 matrix.
@@ -4554,7 +4554,7 @@ morie_geron_simple_rnn <- function(X, Wx, Wh, b = NULL, h0 = NULL) {
 #'
 #' @param X Data (n, d_in).
 #' @param d_out Target dimension.
-#' @param density Optional non-zero fraction in (0,1\]; default 1/sqrt(d_in).
+#' @param density Optional non-zero fraction in (0,1]; default 1/sqrt(d_in).
 #' @param seed LCG seed.
 #' @return list with X_proj, R, density, s, scale, nnz, max_distortion,
 #'   mean_distortion, estimate, n, method.

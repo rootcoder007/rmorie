@@ -29,7 +29,7 @@ decided by a scale the outliers themselves inflated.
 Determinism: fixed sweeps, ordinary least squares start, no tolerance.
 
 Formula: iterate \eqn{beta = argmin sum w_i (y_i - x_i primebeta)^2} with
-\eqn{w_i = \[1 - (r_i/(c s))^2\]^2} inside and 0 outside.
+\eqn{w_i = [1 - (r_i/(c s))^2]^2} inside and 0 outside.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

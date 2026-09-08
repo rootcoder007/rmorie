@@ -47,7 +47,7 @@
 #'
 #' @param family one of "independence", "gaussian", "t", "clayton",
 #'   "gumbel", "frank", "joe", "plackett".
-#' @param u,v numeric vectors in \[0, 1\].
+#' @param u,v numeric vectors in [0, 1].
 #' @param theta copula parameter (rho for gaussian/t).
 #' @param nu degrees of freedom, t copula only.
 #' @return numeric vector of CDF values.
@@ -349,7 +349,7 @@ morie_blomqvist_beta <- function(family, theta = NULL, nu = NULL) {
 #' Gini's gamma from a copula
 #'
 #' Contrasts the copula's two diagonals:
-#' \eqn{\gamma = 4\[\int C(u, 1-u) du - \int (u - C(u,u)) du\]}.
+#' \eqn{\gamma = 4[\int C(u, 1-u) du - \int (u - C(u,u)) du]}.
 #' Mirrors \code{morie.fn.ginicop}.
 #'
 #' @param family copula family.

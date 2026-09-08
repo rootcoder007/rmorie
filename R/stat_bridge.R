@@ -263,7 +263,7 @@ stat_bridge_verify <- function(execute = FALSE) {
 
 #' Command-line dispatcher
 #'
-#' Mirrors \code{python -m morie.stat_bridge <mode> \[...\]} so the same
+#' Mirrors \code{python -m morie.stat_bridge <mode> [...]} so the same
 #' invocation pattern is available via \code{Rscript -e}.
 #'
 #' Recognised modes: \code{"registry-json"}, \code{"help"},

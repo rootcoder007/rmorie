@@ -237,7 +237,7 @@ morie_matching_estimate_propensity <- function(data, treatment, covariates,
 
 #' Trim propensity scores to a fixed range
 #'
-#' Clips propensity scores to \code{\[lower, upper\]}.
+#' Clips propensity scores to \code{[lower, upper]}.
 #'
 #' @param ps Numeric vector of propensity scores.
 #' @param lower,upper Numeric clip bounds (defaults 0.01, 0.99).

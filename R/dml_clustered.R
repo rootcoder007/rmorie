@@ -24,7 +24,7 @@
 #'   (two-way). \code{NULL} gives the i.i.d. (non-clustered) SE.
 #' @param n_folds Cross-fitting folds (default 5).
 #' @param seed Integer seed (default 123).
-#' @param eps Propensity clip bound in \code{\[eps, 1-eps\]} (default 0.02).
+#' @param eps Propensity clip bound in \code{[eps, 1-eps]} (default 0.02).
 #' @param ps Optional length-\code{nrow(data)} vector of externally supplied
 #'   propensity scores (e.g. from a mixed-effects / cluster-level model); when
 #'   given it replaces the cross-fitted propensity.

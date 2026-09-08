@@ -194,7 +194,7 @@
 }
 
 
-#' Levinson-Durbin linear prediction; returns list(a = a\[1..p\], e =
+#' Levinson-Durbin linear prediction; returns list(a = a[1..p], e =
 #' error)
 #'
 #' A step of the rangayyan_phys implementation. Called by \code{CadAcou},

@@ -1194,9 +1194,9 @@ bootstrap_632 <- function(X, y, model_fn, score_fn,
 
 #' Bootstrap-flavoured K-fold cross-validation (internal)
 #'
-#' Lower-level CV used by \[repeated_cv()\] / \[leave_one_out_cv()\].
+#' Lower-level CV used by [repeated_cv()] / [leave_one_out_cv()].
 #' Public CV with `(fit_fn, predict_fn, X, y, ...)` signature lives
-#' in \[cross_validate()\] (validation.R). When \pkg{rsample} is
+#' in [cross_validate()] (validation.R). When \pkg{rsample} is
 #' installed and no stratification or grouping is requested the
 #' folds are drawn via \code{rsample::vfold_cv}; otherwise the
 #' inline `cut(sample(n), n_folds)` partitioning is used so the

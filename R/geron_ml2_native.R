@@ -160,11 +160,11 @@ morie_geron_heaviside <- function(z, at_zero = 1.0) {
 
 #' Leaky ReLU (Geron Ch 11, morie.fn hmlrel)
 #'
-#' max(alpha z, z) with alpha in \[0, 1). alpha = 0 is a plain ReLU and
+#' max(alpha z, z) with alpha in [0, 1). alpha = 0 is a plain ReLU and
 #' is flagged, because that is the dying-unit case.
 #'
 #' @param z Numeric vector.
-#' @param alpha Leak slope in \[0, 1).
+#' @param alpha Leak slope in [0, 1).
 #' @return List with `activation`, `derivative`, `n_leaky`, `alpha`,
 #'   `warnings`, `estimate`, `n`.
 #' @export
@@ -708,7 +708,7 @@ morie_geron_ridge_normal <- function(X, y, alpha, intercept_index = 0) {
 #' L1 (Lasso) penalty, subgradient and prox (Geron Ch 4, morie.fn hml1r)
 #'
 #' `skip_bias` zeroes the mask at the FIRST element of the row-major
-#' flattening, which for a matrix `theta` is entry \[1, 1\].
+#' flattening, which for a matrix `theta` is entry [1, 1].
 #'
 #' @param theta Coefficients.
 #' @param alpha Non-negative penalty.
@@ -852,7 +852,7 @@ morie_geron_gradient_clipping <- function(grads, max_norm, norm_type = 2.0) {
 #' (Inf when decay = 1).
 #'
 #' @param eta0 Positive initial rate.
-#' @param decay In (0, 1\].
+#' @param decay In (0, 1].
 #' @param t Step or vector of steps.
 #' @return List with `eta`, `steps_per_decade`, `eta0`, `decay`,
 #'   `estimate`, `n`.
@@ -1471,7 +1471,7 @@ morie_geron_glorot_init <- function(fan_in, fan_out, seed = 0,
 #'
 #' @param grads Gradient vector.
 #' @param v Velocity; default zeros.
-#' @param beta Decay in \[0, 1).
+#' @param beta Decay in [0, 1).
 #' @param eta Positive rate.
 #' @param theta Parameters; default zeros.
 #' @param nesterov Look-ahead form.
@@ -1519,7 +1519,7 @@ morie_geron_momentum <- function(grads, v = NULL, beta = 0.9, eta = 0.01,
 #'
 #' @param grads Gradient vector, or function(theta) -> gradient.
 #' @param v Velocity; default zeros.
-#' @param beta Decay in \[0, 1).
+#' @param beta Decay in [0, 1).
 #' @param eta Positive rate.
 #' @param theta Parameters.
 #' @return List with `theta`, `theta_next`, `v`, `lookahead`,
@@ -1583,7 +1583,7 @@ morie_geron_nesterov <- function(grads, v = NULL, beta = 0.9, eta = 0.001,
 #'
 #' @param grads Gradient vector.
 #' @param m,v Moments; default zeros.
-#' @param b1,b2 Decays in \[0, 1).
+#' @param b1,b2 Decays in [0, 1).
 #' @param eta Positive rate.
 #' @param t 1-based timestep.
 #' @param eps Non-negative floor.
@@ -2121,7 +2121,7 @@ morie_geron_voting_hard <- function(models, X, y_true = NULL) {
 
 #' Sinusoidal positional encoding (Geron Ch 16, morie.fn hmpe)
 #'
-#' PE\[p, 2i\] = sin(p / base^(2i/d)), PE\[p, 2i+1\] = cos(...). The
+#' PE[p, 2i] = sin(p / base^(2i/d)), PE[p, 2i+1] = cos(...). The
 #' `rotation_check` field is the max error of expressing PE(p + 1) as
 #' a fixed rotation of PE(p) -- the property that lets the encoding
 #' extrapolate past the training length. It should be ~1e-16.
@@ -2187,7 +2187,7 @@ morie_geron_positional_encoding <- function(pos, d_model, base = 10000.0) {
 #'
 #' @param s 0-based query state.
 #' @param pi Policy.
-#' @param gamma In \[0, 1).
+#' @param gamma In [0, 1).
 #' @param P (n_states, n_actions, n_states) array.
 #' @param R (n_states, n_actions) or (n_states, n_actions, n_states).
 #' @return List with `V`, `value`, `r_pi`, `P_pi`, `residual`,
@@ -2279,8 +2279,8 @@ morie_geron_value_function <- function(s, pi, gamma, P = NULL, R = NULL) {
 #'
 #' @param V Value table.
 #' @param s,r,s_next Equal-length transitions.
-#' @param alpha In (0, 1\].
-#' @param gamma In \[0, 1\].
+#' @param alpha In (0, 1].
+#' @param gamma In [0, 1].
 #' @param terminal Optional logical vector; TRUE drops the bootstrap.
 #' @return List with `V`, `td_error`, `target`, `updates`, `alpha`,
 #'   `gamma`, `estimate`, `n`.
@@ -2341,8 +2341,8 @@ morie_geron_td_learning <- function(V, s, r, s_next, alpha = 0.1,
 #' @param s,a 0-based state/action.
 #' @param r Reward.
 #' @param s_next 0-based next state.
-#' @param alpha In (0, 1\].
-#' @param gamma In \[0, 1\].
+#' @param alpha In (0, 1].
+#' @param gamma In [0, 1].
 #' @param done Terminal.
 #' @return List with `Q`, `td_error`, `target`, `old_value`,
 #'   `new_value`, `max_next`, `estimate`, `n`.
@@ -2395,7 +2395,7 @@ morie_geron_q_learning <- function(Q, s, a, r, s_next, alpha, gamma,
 #'
 #' @param trajectory Numeric rewards, or a list of (state, action,
 #'   reward) triples.
-#' @param gamma Discount in \[0, 1\].
+#' @param gamma Discount in [0, 1].
 #' @param lam Trace decay; default gamma.
 #' @param normalize Standardise the returns.
 #' @return List with `returns`, `raw_returns`, `rewards`,
@@ -3198,7 +3198,7 @@ morie_geron_clip <- function(images, texts, tau = 0.07, normalize = TRUE,
 
 #' Classification + localization head (Geron Ch 14, morie.fn hmclc)
 #'
-#' The model returns \[class scores..., x, y, w, h\] per image. One head
+#' The model returns [class scores..., x, y, w, h] per image. One head
 #' is scored in nats and the other in squared pixels, so `alpha` is
 #' what makes the two comparable. Boxes are centre-form and converted
 #' to corners for the IoU.

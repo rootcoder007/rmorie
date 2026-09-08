@@ -14,7 +14,7 @@
 #'
 #' The scale part is closed form: the ALD maximum likelihood scale is
 #' \code{sigma_hat = (1/n) sum rho_tau(r_i)}, and the DP mixing
-#' distribution induces \code{E\[K_n\] = sum alpha / (alpha + i - 1)}
+#' distribution induces \code{E[K_n] = sum alpha / (alpha + i - 1)}
 #' distinct scales a priori.
 #'
 #' @param y Response, length n.

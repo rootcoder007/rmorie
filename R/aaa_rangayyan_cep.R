@@ -207,7 +207,7 @@ MultModel <- function(x, p) {
   )
 }
 
-#' Eq (4.59): log\[y\] = log\[x\] + log\[p\], for x != 0 and p != 0.  The
+#' Eq (4.59): log[y] = log[x] + log[p], for x != 0 and p != 0.  The
 #'
 #' book states that side condition, so a zero is rejected rather than
 #' giving -Inf; a negative factor needs the complex-log route.
@@ -590,7 +590,7 @@ PCepSum <- function(x, h, square = FALSE) {
   )
 }
 
-#' Eq (4.83): y_hat_p(n) = \[y_hat(n) + y_hat(-n)\]^2 -- the squared even
+#' Eq (4.83): y_hat_p(n) = [y_hat(n) + y_hat(-n)]^2 -- the squared even
 #'
 #' part of the complex cepstrum.  The odd part, where the phase lives,
 #' is annihilated by the folding, which is exactly why the power

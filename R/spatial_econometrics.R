@@ -34,7 +34,7 @@ morie_weights_totals <- function(W) {
 #' `morie_morans_i` is the statistic
 #' `I = (n/S0) * (z' W z) / (z'z)` with `z = x - mean(x)`.
 #' `morie_morans_i_test` mirrors `spdep::moran.test`: under the null
-#' `E\[I\] = -1/(n-1)` and the variance takes the randomisation form
+#' `E[I] = -1/(n-1)` and the variance takes the randomisation form
 #' (conditioning on the observed values, treating only their
 #' arrangement as random) or the normality form.
 #' @param x numeric vector of observations
@@ -90,7 +90,7 @@ morie_morans_i_test <- function(x, W, randomisation = TRUE,
 #' Spatial two-stage least squares
 #'
 #' Fits the spatial lag model `y = rho W y + X beta + e`.  `W y` is
-#' endogenous, so it is instrumented with `\[X, WX, W^2 X\]` -- the
+#' endogenous, so it is instrumented with `[X, WX, W^2 X]` -- the
 #' Kelejian and Prucha (1998) instrument set that `spatialreg::stsls`
 #' uses.  Ordinary least squares on this model is inconsistent.
 #' @param y numeric response

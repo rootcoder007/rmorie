@@ -441,7 +441,7 @@ morie_iv_first_stage_diagnostics <- function(data, endogenous, instruments,
 #' @param instruments Character vector of excluded-instrument names.
 #' @param exogenous Optional exogenous covariates.
 #' @param outcome Optional outcome column name. Default \code{NULL}
-#'   reuses \code{endogenous\[1\]}; the resulting F-statistic is
+#'   reuses \code{endogenous[1]}; the resulting F-statistic is
 #'   unaffected because Cragg-Donald only reads the first stage.
 #' @return Named list with \code{statistic}, \code{p_value},
 #'   \code{name}, \code{details}.

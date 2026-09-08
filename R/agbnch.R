@@ -14,7 +14,7 @@
 #' anchor, not fitted by Bayesian logistic regression, and `method` says
 #' so.
 #'
-#' @param games a score in \[0, 1\], or a triple (wins, draws, losses).
+#' @param games a score in [0, 1], or a triple (wins, draws, losses).
 #' @param ladder optional ratings of other players.
 #' @param anchor rating of the opponent the score was achieved against.
 #' @param base "e" or 10.

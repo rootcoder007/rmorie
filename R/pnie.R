@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Pure natural indirect effect
 #'
-#' \deqn{PNIE = E\[Y(a^*, M(a)) - Y(a^*, M(a^*))\] = (\theta_2\beta_1 + \theta_3\beta_1
-#' a^*)(a - a^*).}{PNIE = E\[Y(a*, M(a)) - Y(a*, M(a*))\] = (theta2 beta1 + theta3 beta1
+#' \deqn{PNIE = E[Y(a^*, M(a)) - Y(a^*, M(a^*))] = (\theta_2\beta_1 + \theta_3\beta_1
+#' a^*)(a - a^*).}{PNIE = E[Y(a*, M(a)) - Y(a*, M(a*))] = (theta2 beta1 + theta3 beta1
 #' a*)(a - a*).}
 #'
 #' Robins, J. M. and Greenland, S. (1992), \emph{Epidemiology} 3(2), 143-155,

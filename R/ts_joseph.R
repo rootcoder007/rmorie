@@ -1541,12 +1541,12 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
 #' Quoted from the paper: (1) "y^(p)_l = MaxPool(y_l, k_l)"; (2)
 #' "h_l = MLP_l(y^(p)_l); theta^f_l = LINEAR^f(h_l); theta^b_l =
 #' LINEAR^b(h_l)"; (3) "yhat_\{tau,l\} = g(tau, theta^f_l)" with
-#' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta\[t1\] +
-#' ((theta\[t2\]-theta\[t1\])/(t2-t1))(tau-t1)"; doubly residual stacking
+#' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
+#' ((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
 #' "yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 #' Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 #' M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
-#' wf[\[l\]] and wb[\[l\]] stand in for MLP_l followed by LINEAR: a single
+#' wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
 #' caller-supplied linear map. That collapse is stated rather than
 #' hidden; the expressivity ratio r_l still governs the coefficient
 #' count, which is the hierarchical part the paper is about.
@@ -1820,7 +1820,7 @@ morie_tsmixer <- function(x, wtime, btime, wfeat, bfeat, wproj, bproj, horizon) 
 #'
 #' Quoted from the paper: (1) "h^0_n = Embedding(X_\{:,n\}); H^\{l+1\} =
 #' TrmBlock(H^l); Yhat_\{:,n\} = Projection(h^L_n)"; (2) "LayerNorm(H) =
-#' \{\[h_n - Mean(h_n)\]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
+#' \{[h_n - Mean(h_n)]/sqrt(Var(h_n)) | n = 1..N\}"; attention scores
 #' "A_\{i,j\} = (Q K^T / sqrt(d_k))_\{i,j\}" -- Liu, Y., Hu, T., Zhang, H.,
 #' Wu, H., Wang, S., Ma, L. and Long, M., iTransformer, ICLR 2024
 #' (arXiv:2310.06625). The inversion is the point: each VARIATE series

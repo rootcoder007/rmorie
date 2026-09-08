@@ -11,7 +11,7 @@ Ogkcv(y, X = NULL)
 given, its first column.}
 
 \item{X}{Remaining columns; when supplied the data matrix is
-\eqn{\[y, X\]} and the robust regression coefficient
+\eqn{[y, X]} and the robust regression coefficient
 \code{Sigma_xx^-1 Sigma_xy} is returned as well.}
 }
 \value{

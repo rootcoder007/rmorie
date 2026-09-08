@@ -352,7 +352,7 @@ MORIE_TPS_SUPPORTED_FORMATS <- c(
 #' the dependency is missing.
 #'
 #' @param name TPS category. Case-insensitive.
-#' @param format One of \[MORIE_TPS_SUPPORTED_FORMATS\].
+#' @param format One of [MORIE_TPS_SUPPORTED_FORMATS].
 #' @param nrows Optional integer cap on rows.
 #'
 #' @return A `data.frame` (spatial readers return the dropped-sf

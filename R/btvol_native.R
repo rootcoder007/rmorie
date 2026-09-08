@@ -435,7 +435,7 @@ morie_bt_ci_ratio <- function(x, y, stat_x = NULL, stat_y = NULL,
 #' Parkinson range volatility estimator
 #'
 #' Parkinson (1980), Eq. (4): `sigma^2 = mean((log(H/L))^2)/(4 log 2)`.
-#' The constant is not a fudge: E\[(log range)^2\] = 4 log2 sigma^2 for
+#' The constant is not a fudge: E[(log range)^2] = 4 log2 sigma^2 for
 #' driftless Brownian motion, and dividing by it makes the estimator
 #' unbiased. The range buys about a 4.9-fold variance reduction over
 #' close-to-close -- measured in the tests, not quoted. Drift
@@ -629,8 +629,8 @@ morie_vol_harmonic <- function(sigma) {
 #'
 #' Zhang-Mykland-Ait-Sahalia (2005), Ait-Sahalia-Mykland-Zhang
 #' (2005): with observed price = efficient price + iid noise,
-#' `E\[RV_all\] = IV + 2n E\[eps^2\]`, so at the finest grid the noise
-#' dominates and `E\[eps^2\] = RV_all/(2n)`. That divergence is the
+#' `E[RV_all] = IV + 2n E[eps^2]`, so at the finest grid the noise
+#' dominates and `E[eps^2] = RV_all/(2n)`. That divergence is the
 #' volatility signature plot -- naive RV gets WORSE as data get
 #' finer. The two-scale estimator
 #' `IV_TS = RV_subsampled - (nbar/n) RV_all` recovers the integrated

@@ -55,7 +55,7 @@
 #' @param lower_percentile Lower percentile cut for `trim`.
 #' @param upper_percentile Upper percentile cut for `trim`.
 #' @param fay_coefficient Fay's coefficient (\eqn{k}) for Fay's-BRR.
-#' @param shrinkage_factor Numeric in `\[0, 1\]`; smoothing pull-toward-
+#' @param shrinkage_factor Numeric in `[0, 1]`; smoothing pull-toward-
 #'   mean factor.
 #' @param target Numeric target sum (`normalize`).
 #' @param replicate_estimates Numeric vector of replicate point
@@ -636,7 +636,7 @@ morie_weights_brr <- function(weights, strata, n_replicates = NULL,
   rep
 }
 
-#' Fay's BRR weights with perturbation coefficient `fay_coefficient` in \[0,1)
+#' Fay's BRR weights with perturbation coefficient `fay_coefficient` in [0,1)
 #' @inheritParams morie_weights_params
 #' @return A numeric \code{matrix}.
 #' @examples

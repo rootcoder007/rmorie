@@ -80,7 +80,7 @@ morie_safe_recode <- function(x, mapping, keep = character()) {
 #' @param levels Complete character vector of allowed levels, in the
 #'   intended order -- the FIRST is the reference category.
 #' @param reference Optional; assert which level is the reference
-#'   (must equal \code{levels\[1\]}).
+#'   (must equal \code{levels[1]}).
 #' @return A factor with exactly the declared levels.
 #' @examples
 #' morie_safe_factor(c("White", "Black", "White"),

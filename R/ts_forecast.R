@@ -81,7 +81,7 @@
 #' @srrstats {TS5.2} time is placed on the horizontal axis.
 #' @srrstats {TS5.3} units of the time index are printed on the axis where known.
 #' @srrstats {TS5.4} frequency visualisation (dsp PSD) uses positive frequency units, not
-#' \eqn{\[-\pi,\pi\]}.
+#' \eqn{[-\pi,\pi]}.
 #' @srrstats {TS5.5} plot.morie_ts_forecast(broken=) controls continuous vs broken lines.
 #' @srrstats {TS5.6} forecast distributional limits are shaded by default.
 #' @srrstats {TS5.7} observed (input) values are included in the plot by default.
@@ -102,7 +102,7 @@ NULL
 #' maintained uniformly.
 #'
 #' @param x A numeric vector (or an object coercible to one, including a
-#'   `units`-typed vector, which is coerced via \[as.numeric()\]), or an
+#'   `units`-typed vector, which is coerced via [as.numeric()]), or an
 #'   existing `ts`.
 #' @param frequency Number of observations per unit of time (e.g. 12 for
 #'   monthly-in-years). Default 1.
@@ -456,7 +456,7 @@ print.morie_ts_forecast <- function(x, ...) {
 #' @param broken If TRUE, draw the observed series as a broken (segmented)
 #'   line rather than a continuous one; controls line continuity for
 #'   series that may contain gaps (default FALSE).
-#' @param ... Passed to \[plot()\].
+#' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly. Draws the observed (input) series and the
 #'   forecast (output) with its prediction band. Time is on the
 #'   horizontal axis (labelled with the series units where known); the

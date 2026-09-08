@@ -281,7 +281,7 @@ epsilon_squared <- function(ss_effect, ss_total, df_effect, ms_error) {
 # CONTINGENCY TABLE EFFECT SIZES
 # =====================================================================
 
-#' Odds ratio for a 2x2 table `\[\[a, b\], \[c, d\]\]`
+#' Odds ratio for a 2x2 table `[[a, b], [c, d]]`
 #'
 #' @param a,b,c,d Cell counts of the 2x2 table: a = exposed with outcome,
 #'   b = exposed without, c = unexposed with outcome, d = unexposed without.

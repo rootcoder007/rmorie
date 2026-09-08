@@ -24,7 +24,7 @@
 #' @param y Either the full data matrix (n by p) or, when \code{X} is
 #'   given, its first column.
 #' @param X Remaining columns; when supplied the data matrix is
-#'   \eqn{\[y, X\]} and the robust regression coefficient
+#'   \eqn{[y, X]} and the robust regression coefficient
 #'   \code{Sigma_xx^-1 Sigma_xy} is returned as well.
 #' @return List with \code{sigma}, \code{location}, \code{scales},
 #'   \code{estimate}, \code{eigenvalues}, \code{det}, \code{beta}

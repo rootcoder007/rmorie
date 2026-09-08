@@ -23,8 +23,8 @@
 #' `.morie_silverman_h`, and the difference is not cosmetic.
 #' Equations (2.3)-(2.4) of Fauzi and Maesono (2023) give
 #'
-#'   Bias\\[Fhat_h(x)\\] = h^2 f'(x)/2 mu_2(K) + o(h^2)
-#'   Var \\[Fhat_h(x)\\] = F(1-F)/n - (2h/n) r_1 f(x) + o(h/n)
+#'   Bias[Fhat_h(x)] = h^2 f'(x)/2 mu_2(K) + o(h^2)
+#'   Var [Fhat_h(x)] = F(1-F)/n - (2h/n) r_1 f(x) + o(h/n)
 #'
 #' with `r_1 = int y K(y) W(y) dy`, so the bandwidth enters the
 #' variance at order `h/n` and with a NEGATIVE sign -- smoothing
@@ -66,7 +66,7 @@
 #' The Stirling defect of the gamma function: `R(z)` increases monotonically
 #' to 1 from below (Remark 1.2), which is exactly the fact the book uses to
 #' read off the `O(n^-1 h^-1/4)` interior and `O(n^-1 h^-3/4)` boundary rates
-#' of `Var\[A_h(x)\]` in (1.11). Computed through `lgamma` so the `z^(z+1/2)`
+#' of `Var[A_h(x)]` in (1.11). Computed through `lgamma` so the `z^(z+1/2)`
 #' factor cannot overflow at the small bandwidths this suite uses
 #' (`z ~ h^(-1/2)`).
 #' @noRd

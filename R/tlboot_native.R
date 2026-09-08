@@ -70,10 +70,14 @@ morie_tlboot <- function(data, estimator, B = 200L, seed = 0L,
   }
 
   if (method == "targeted") {
+    # In this mode the first argument is P_star_sampler, not a frame:
+    # it is called with the rng. Bind it to its own name so the call
+    # does not read as utils::data().
+    sampler <- data
     e <- .ghc_rng(as.numeric(seed))
     out <- numeric(B)
     for (b in seq_len(B)) {
-      out[b] <- as.numeric(estimator(data(e)))
+      out[b] <- as.numeric(estimator(sampler(e)))
     }
     m <- mean(out)
     if (B > 1L)

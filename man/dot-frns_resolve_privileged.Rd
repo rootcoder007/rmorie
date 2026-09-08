@@ -2,7 +2,7 @@
 % Please edit documentation in R/frns_metrics.R
 \name{.frns_resolve_privileged}
 \alias{.frns_resolve_privileged}
-\title{Returns list(privileged = \if{html}{\out{<key>}}, warning = \if{html}{\out{<chr or NULL>}})}
+\title{Returns list(privileged = key, warning = chr or NULL)}
 \usage{
 .frns_resolve_privileged(privileged, rates)
 }

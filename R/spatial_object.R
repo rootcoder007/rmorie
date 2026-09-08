@@ -322,7 +322,7 @@ morie_spatial_leaflet_spec <- function(x) {
 #' Plot method for \code{morie_spatial} objects
 #'
 #' @param x A `morie_spatial`.
-#' @param ... Passed to \[plot()\].
+#' @param ... Passed to [plot()].
 #' @return `NULL`, invisibly. Longitude/easting on x, latitude/northing on
 #'   y, with units in the axis labels.
 #' @examples

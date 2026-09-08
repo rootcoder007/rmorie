@@ -60,7 +60,7 @@
 #' size whatever the gradient's scale.
 #'
 #' @param g Gradient at the current parameters.
-#' @param beta1,beta2 Moment decay rates in \[0, 1).
+#' @param beta1,beta2 Moment decay rates in [0, 1).
 #' @param lr Step size.
 #' @param eps Denominator floor.
 #' @param state List returned by the previous call, or `NULL` to start fresh.
@@ -126,7 +126,7 @@ morie_adagrad <- function(g, lr = 0.01, eps = 1e-8, state = NULL) {
 #' ones.
 #'
 #' @param g Gradient at the current parameters.
-#' @param rho Decay rate in \[0, 1).
+#' @param rho Decay rate in [0, 1).
 #' @param lr Step size.
 #' @param eps Denominator floor.
 #' @param state List from the previous call, or `NULL`.
@@ -153,7 +153,7 @@ morie_rmsprop <- function(g, rho = 0.9, lr = 0.001, eps = 1e-8, state = NULL) {
 #' `mu` without lowering `lr` amplifies the effective learning rate.
 #'
 #' @param g Gradient at the current parameters.
-#' @param mu Momentum coefficient in \[0, 1).
+#' @param mu Momentum coefficient in [0, 1).
 #' @param lr Step size.
 #' @param state List from the previous call, or `NULL`.
 #' @return List with `update`, `state`, `v`, `t`, `step_norm`.
@@ -180,7 +180,7 @@ morie_sgd_momentum <- function(g, mu = 0.9, lr = 0.01, state = NULL) {
 #' method `g` should be evaluated at the look-ahead point `theta + mu * v`.
 #'
 #' @param g Gradient (see note on where to evaluate it).
-#' @param mu Momentum coefficient in \[0, 1).
+#' @param mu Momentum coefficient in [0, 1).
 #' @param lr Step size.
 #' @param state List from the previous call, or `NULL`.
 #' @return List with `update`, `state`, `v`, `t`, `step_norm`.
@@ -206,7 +206,7 @@ morie_nesterov <- function(g, mu = 0.9, lr = 0.01, state = NULL) {
 #' `theta` or the step reduces to plain Adam.
 #'
 #' @param g Gradient of the unregularised loss.
-#' @param beta1,beta2 Moment decay rates in \[0, 1).
+#' @param beta1,beta2 Moment decay rates in [0, 1).
 #' @param lr Step size.
 #' @param wd Decoupled weight-decay coefficient.
 #' @param eps Denominator floor.
@@ -307,7 +307,7 @@ morie_sgd_update <- function(beta, batch_grads, eta = 0.01) {
 #' @param g Gradient for this layer.
 #' @param w Current weights for this layer, same length as `g`.
 #' @param lr Global learning rate.
-#' @param mu Momentum coefficient in \[0, 1).
+#' @param mu Momentum coefficient in [0, 1).
 #' @param wd Weight decay, folded into the gradient (not decoupled).
 #' @param eta Trust coefficient.
 #' @param eps Denominator floor.
@@ -345,7 +345,7 @@ morie_lars <- function(g, w, lr = 0.1, mu = 0.9, wd = 0, eta = 0.001,
 #' @param g Gradient for this layer.
 #' @param w Current weights for this layer, same length as `g`.
 #' @param lr Global learning rate.
-#' @param beta1,beta2 Moment decay rates in \[0, 1).
+#' @param beta1,beta2 Moment decay rates in [0, 1).
 #' @param wd Weight decay applied to the Adam direction.
 #' @param eps Denominator floor.
 #' @param state List from the previous call, or `NULL`.

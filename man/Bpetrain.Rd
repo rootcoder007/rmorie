@@ -23,7 +23,7 @@ words with subword units, ACL 54, 1715-1725 (arXiv:1508.07909 --
 FETCHED), algorithm 1: represent every word as characters plus an
 end-of-word marker, count all adjacent symbol pairs across the corpus,
 merge the most frequent pair into a new symbol, and repeat.  The
-paper's own marker \if{html}{\out{</w>}} is used.
+paper's own end-of-word marker (slash-w in angle brackets) is used.
 }
 \details{
 Determinism: ties in the pair counts break by first appearance in a

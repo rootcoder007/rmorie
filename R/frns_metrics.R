@@ -90,7 +90,7 @@ NULL
   rates
 }
 
-#' Returns list(privileged = <key>, warning = <chr or NULL>)
+#' Returns list(privileged = key, warning = chr or NULL)
 #'
 #' A step of the frns_metrics implementation. No other function in the package calls it.
 #' See the file header for the source the module follows.

@@ -790,7 +790,7 @@ morie_geron_ddim <- function(x_T, model, T, n_steps, beta_schedule = "linear", c
   )
 }
 
-#' Validate a DQN replay buffer of (s, a, r, s2\[, done\]) rows (hmdqn)
+#' Validate a DQN replay buffer of (s, a, r, s2[, done]) rows (hmdqn)
 #' @param buffer List of length-4/5 transitions.
 #' @param n_states,n_actions Bounds.
 #' @param name Caller name for error messages.
@@ -982,7 +982,7 @@ morie_geron_gaussian_mixture <- function(X, n_components = 2, seed = 0, max_iter
 
 #' Inverted dropout: y = mask * x / (1 - p) (hmdrp)
 #' @param x Activations.
-#' @param p Drop probability in \[0, 1).
+#' @param p Drop probability in [0, 1).
 #' @param training If FALSE, pass through unchanged.
 #' @param seed LCG seed.
 #' @return List with `y`, `mask`, `scale`, `n_dropped`, `drop_fraction`.
@@ -1431,7 +1431,7 @@ morie_geron_detr <- function(image, n_queries = 100, n_layers = 6, d_model = 256
 #' @param student,teacher (V,K) logits or function.
 #' @param center Running teacher center (default zeros).
 #' @param tau_s,tau_t Temperatures (tau_t < tau_s).
-#' @param momentum,center_momentum EMA coefficients in \[0, 1).
+#' @param momentum,center_momentum EMA coefficients in [0, 1).
 #' @return List with `loss`, `teacher_probs`, `student_probs`, `teacher_entropy`, `teacher_next`.
 #' @export
 #' @examples
@@ -2062,7 +2062,7 @@ morie_geron_early_stopping_alt <- function(X_train, y_train, X_val, y_val, n_ite
 #' Epsilon-greedy action distribution, deterministic LCG draw (hmeg)
 #' @param Q Table (S, A) or (A,).
 #' @param s State index (0-based).
-#' @param epsilon Rate in \[0, 1\].
+#' @param epsilon Rate in [0, 1].
 #' @param seed LCG seed.
 #' @return List with `action`, `probabilities`, `greedy_action`, `greedy_actions`, `is_exploratory`.
 #' @export
@@ -2170,7 +2170,7 @@ morie_geron_encoder_decoder_transformer <- function(src, tgt, n_layers = 6, n_he
 #' @param X,y Data.
 #' @param theta Parameters (bias first if fit_intercept).
 #' @param alpha Overall penalty (>=0).
-#' @param r L1 ratio in \[0, 1\].
+#' @param r L1 ratio in [0, 1].
 #' @param fit_intercept Logical.
 #' @return List with `cost`, `mse`, `l1_penalty`, `l2_penalty`, `gradient`.
 #' @export

@@ -926,7 +926,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' Use SODA3 when:
 #'   * The dataset is a *filtered view* or *map view* (e.g.
 #'     `ahwe-kpsy` "Crimes - Map" derived from `ijzp-q8t2`). SODA2
-#'     against these returns `\[{}\]` -- empty rows -- because column
+#'     against these returns `[{}]` -- empty rows -- because column
 #'     resolution doesn't fire on derived views.
 #'   * You want to send a full SoQL `SELECT ... WHERE ...` with
 #'     aggregations / joins / arbitrary expressions that SODA2's
@@ -1033,7 +1033,7 @@ morie_datasets_siu_report_fields <- function(text_or_url) {
 #' Coverage parity vs the other two API modes:
 #'   * **Base datasets** (e.g. `ijzp-q8t2`): all three modes work.
 #'   * **Derived / map / filtered views** (e.g. `ahwe-kpsy`): OData
-#'     returns `value: \[{}\]` (empty objects) -- same failure mode as
+#'     returns `value: [{}]` (empty objects) -- same failure mode as
 #'     SODA2. Use SODA3 (\code{.morie_dataset_soda3_query()}) for these.
 #'
 #' **Known Socrata limitation -- `$filter`**. As of 2026-05 Socrata's
@@ -1818,13 +1818,13 @@ morie_datasets_chicago_crime_odata <- function(filter = NULL,
 #'
 #' Wraps the Socrata MAP VIEW derived from the main Crimes feed
 #' (parent_fxf = `ijzp-q8t2`). Verified live as
-#' `type: map, parent_fxf: \[ijzp-q8t2\]` via the Socrata catalog API;
+#' `type: map, parent_fxf: [ijzp-q8t2]` via the Socrata catalog API;
 #' landing page at
 #' \url{https://data.cityofchicago.org/Public-Safety/Crimes-2001-to-Present-Map/ahwe-kpsy}.
 #'
 #' **SODA3-only**. The SODA2 endpoint `/resource/ahwe-kpsy.json` does
 #' technically return HTTP 200 but ships rows as empty objects
-#' (`\[{}\]`) -- column resolution doesn't fire on map/filtered views.
+#' (`[{}]`) -- column resolution doesn't fire on map/filtered views.
 #' This loader uses the SODA3 endpoint
 #' `/api/v3/views/ahwe-kpsy/query.json?query=SELECT ... WHERE ...`
 #' via \code{.morie_dataset_soda3_query()}.

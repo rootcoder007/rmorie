@@ -23,7 +23,7 @@ morie_kamath_word_ngrams(word, n_min, n_max, boundary = "<>")
 List with \code{vector}, \code{ngrams}, \code{n_known}, \code{missing}.
 }
 \description{
-v_w = sum of the character n-gram vectors of \if{html}{\out{<word>}}. The boundary-marked
+v_w = sum of the character n-gram vectors of the word. The boundary-marked
 whole word is always a gram.
 }
 \examples{

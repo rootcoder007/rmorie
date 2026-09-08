@@ -285,7 +285,7 @@ morie_tps_offence_summary <- function(df, ds_name = "?") {
 #' and downstream code may want it directly.
 #'
 #' @param x Numeric vector (e.g. per-spatial-unit incident counts).
-#' @return A scalar Gini coefficient in `\[0, 1\]` (or NA when input is empty).
+#' @return A scalar Gini coefficient in `[0, 1]` (or NA when input is empty).
 #' @examples
 #' set.seed(1)
 #' morie_tps_gini_concentration(rpois(50, 4))

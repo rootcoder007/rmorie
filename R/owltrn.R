@@ -2,9 +2,9 @@
 #' Outcome-weighted learning for an optimal treatment regime
 #'
 #' Zhao et al.'s reformulation is that maximizing the value
-#' \eqn{(d) = E\[Y 1{A = d(X)} / pi(A | X)\]} is the same problem as
+#' \eqn{(d) = E[Y 1{A = d(X)} / pi(A | X)]} is the same problem as
 #' MINIMIZING the weighted misclassification risk
-#' \eqn{\[(Y / pi(A | X)) 1{A != d(X)}\]}, a classification problem in
+#' \eqn{[(Y / pi(A | X)) 1{A != d(X)}]}, a classification problem in
 #' which the outcome is the weight and the observed treatment is the
 #' label. The surrogate is theirs -- the weighted HINGE loss with a
 #' ridge penalty, a linear-kernel weighted SVM,

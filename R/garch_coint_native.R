@@ -287,7 +287,7 @@ morie_garch_var_es <- function(mu, sigma, alpha = 0.05, dist = "normal", nu = 8)
 #'   one-step SSE when NULL.
 #' @param horizon forecast horizon.
 #' @param damped logical; damp the trend.
-#' @param phi damping parameter in (0, 1\].
+#' @param phi damping parameter in (0, 1].
 #' @return list: forecast, level, trend, fitted, residuals, sse,
 #'   alpha, beta, damped, n.
 #' @references Hyndman, R. J. & Athanasopoulos, G. (2021).

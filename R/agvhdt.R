@@ -4,8 +4,8 @@
 #' Silver et al. (2017), Nature 550, 354-359, methods, "Neural network
 #' architecture": a 1x1 convolution to one plane, batch normalisation, a
 #' rectifier, a fully connected layer to 256 units, a rectifier, a fully
-#' connected layer to one unit, and a tanh, so the output lies in \[-1,
-#' 1\].  Silver et al. (2018), arXiv:1712.01815 (FETCHED), keeps the same
+#' connected layer to one unit, and a tanh, so the output lies in [-1,
+#' 1].  Silver et al. (2018), arXiv:1712.01815 (FETCHED), keeps the same
 #' architecture.  The Nature paper is paywalled; the layer list is
 #' reproduced identically everywhere and its only numeric content, the
 #' final tanh, is unambiguous.  Weights are supplied by the caller; with

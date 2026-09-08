@@ -8,7 +8,7 @@
 #' (1-p), m ~ Bernoulli(1-p)}
 #'
 #' @param x Numeric array.
-#' @param p Drop probability in \code{\[0, 1)}.
+#' @param p Drop probability in \code{[0, 1)}.
 #' @param seed RNG seed.
 #' @param training If FALSE, returns input unchanged.
 #' @param deterministic_seed Optional integer; if non-NULL, a SHA-keyed

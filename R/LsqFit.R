@@ -2,7 +2,7 @@
 
 #' Least-squares line
 #'
-#' A = (<xy> - <x><y>)/(<x^2> - <x>^2) and B = <y> - A<x>; the ratio
+#' A = (mean(xy) - mean(x)mean(y))/(mean(x^2) - mean(x)^2) and B = mean(y) - A mean(x); the ratio
 #' form of B is computed independently and the two must agree.  The
 #' defaults are the book's five-point worked data set.
 #'
