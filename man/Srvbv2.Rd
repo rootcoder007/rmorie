@@ -30,7 +30,7 @@ morie_fauzi_thm4_2_surv2_bias_var(
 
 \item{cumsurv}{\code{Sbar_X(t)}.}
 
-\item{dg, d2g}{\verb{g'(g^-1(t))} and \verb{g''(g^-1(t))}.}
+\item{dg, d2g}{\verb{g\'(g^-1(t))} and \verb{g''(g^-1(t))}.}
 
 \item{density}{\code{f_X(t)}.}
 
@@ -43,7 +43,7 @@ Named list with \code{bias}, \code{variance}, \code{b3}, \code{cov}, \code{h}, \
 \description{
 Theorem 4.2, Eqs. (4.19)-(4.22):
 \deqn{\mathrm{Bias}[S_{X,2}(t)] = \tfrac{h^2}{2}b_3(t)\mu_2(K) + o(h^2),\quad \mathrm{Var}[S_{X,2}(t)] = \tfrac{1}{n}[2\bar S_X(t) - S_X^2(t)] + o(h/n),}{Bias[S_X2(t)] = (h^2/2) b3(t) mu2(K) + o(h^2), Var[S_X2(t)] = (1/n)[2 Sbar(t) - S(t)^2] + o(h/n),}
-with \verb{b3(t) = [g'(g^-1(t))]^2 f(t) - g''(g^-1(t)) S(t)} from (4.21).
+with \verb{b3(t) = [g\'(g^-1(t))]^2 f(t) - g\'\'(g^-1(t)) S(t)} from (4.21).
 }
 \details{
 The variance is IDENTICAL to that of \verb{S_X,1} in Theorem 4.1 -- the same
@@ -53,7 +53,7 @@ statistically equivalent, and \verb{m_X,1} is preferred only because it preserve
 the analytic relationship between the survival and cumulative-survival
 estimates.
 
-Compare \code{b2} (4.15), which carries an integral of \verb{g' g'' f(g(.))} over
+Compare \code{b2} (4.15), which carries an integral of \verb{g\' g\'\' f(g(.))} over
 \verb{[g^-1(t), Inf)}, against \code{b3}, which is purely local -- why \code{b3} is cheap
 and \code{b2} is not.
 }

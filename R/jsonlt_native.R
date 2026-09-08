@@ -1390,7 +1390,8 @@ morie_jsonlt_stream_in <- function(con, handler = NULL, pagesize = 500, verbose 
 }
 #' @rdname morie_jsonlt_stream_in
 #' @param x a data.frame to write, one record per line.
-#' @param prefix text prepended to every line (e.g. `""` for RFC 7464).
+#' @param prefix text prepended to every line (the RFC 7464 record
+#'   separator \code{"\\x1e"}, for instance).
 #' @export
 morie_jsonlt_stream_out <- function(x, con = stdout(), pagesize = 500, verbose = TRUE, prefix = "", ...) {
   if (!inherits(con, "connection")) stop("Argument 'con' must be a connection.", call. = FALSE)

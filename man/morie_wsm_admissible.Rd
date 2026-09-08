@@ -20,9 +20,9 @@ n_rules, n_states, minimax_rule, minimax_risk,
 is_complete_class, method.
 }
 \description{
-A rule \code{T} is INADMISSIBLE when some other rule \verb{T'} satisfies
-\verb{R(T', F) <= R(T, F)} for all \code{F} and \verb{R(T', F) < R(T, F)} for
-some \code{F}, and admissible when no such \verb{T'} exists. That is a
+A rule \code{T} is INADMISSIBLE when some other rule \verb{T\'} satisfies
+\verb{R(T\', F) <= R(T, F)} for all \code{F} and \verb{R(T\', F) < R(T, F)} for
+some \code{F}, and admissible when no such \verb{T\'} exists. That is a
 statement about a COLLECTION of rules and a set of states, so it
 cannot be decided for one rule alone: the argument is the whole
 risk table, rules by states.

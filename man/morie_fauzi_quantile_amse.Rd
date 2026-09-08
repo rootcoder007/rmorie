@@ -20,8 +20,8 @@ list: p, amse, se, binomial_part, density_part, n,
 tail_note, method.
 }
 \description{
-\verb{p(1-p)/(n f(Q(p))^2)}, equivalently \verb{Q'(p)^2 p(1-p)/n} since
-\verb{Q' = 1/f(Q)}. As \code{p} approaches 0 or 1 the binomial part shrinks,
+\verb{p(1-p)/(n f(Q(p))^2)}, equivalently \verb{Q\'(p)^2 p(1-p)/n} since
+\verb{Q\' = 1/f(Q)}. As \code{p} approaches 0 or 1 the binomial part shrinks,
 which suggests extreme quantiles are easier -- they are not, since
 the density part grows faster for thinning tails.
 }

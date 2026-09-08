@@ -24,7 +24,7 @@
 #' to resample cases with replacement, recompute \code{ab} in each
 #' resample and read the interval off the empirical percentiles.  The
 #' fitted equations are \code{M = i1 + a X} and
-#' \code{Y = i2 + c' X + b M}, so the total effect \code{c = c' + ab} is
+#' \code{Y = i2 + c\' X + b M}, so the total effect \code{c = c\' + ab} is
 #' an exact least-squares identity in the single-mediator case.  The
 #' resampling stream is a deterministic linear congruential generator,
 #' not a system RNG, so both language arms draw the same case indices.

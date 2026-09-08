@@ -10,7 +10,7 @@ Kdfb2(fp, mu2 = 1)
 morie_fauzi_b2_coefficient_kdfe(fp, mu2 = 1)
 }
 \arguments{
-\item{fp}{\verb{f'(x)}.}
+\item{fp}{\verb{f\'(x)}.}
 
 \item{mu2}{\verb{int w^2 K(w) dw}; 1 for the Gaussian kernel.}
 }
@@ -25,7 +25,7 @@ The leading bias coefficient of the KDFE:
 \verb{Bias[Fhat_h(x)] = h^2 b2(x) + o(h^2)}.
 
 Note which derivative appears. A kernel DENSITY estimator's leading bias
-carries \verb{f''}; the distribution-function estimator carries \verb{f'}, one order
+carries \verb{f''}; the distribution-function estimator carries \verb{f\'}, one order
 lower, because it smooths with the INTEGRATED kernel \code{W}. That single fact
 is why the book's bandwidth rate is \code{n^(-1/3)} and not \code{n^(-1/5)}.
 

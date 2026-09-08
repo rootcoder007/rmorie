@@ -91,7 +91,7 @@
 #' \code{log D - log(1 - D)} for each policy transition (line 6 of
 #' Algorithm 1). The discriminator
 #' \code{D = exp(f) / (exp(f) + pi)} with
-#' \code{f = g(s) + gamma h(s') - h(s)} separates expert
+#' \code{f = g(s) + gamma h(s\') - h(s)} separates expert
 #' (\code{D -> 1}) from policy (\code{D -> 0}) data.
 #'
 #' \code{state_only = TRUE} (the default, Theorem C.1) parameterises
@@ -105,7 +105,7 @@
 #' needed nor called.
 #'
 #' @param expert_states,expert_actions,expert_next Expert transitions
-#'   \code{(s, a, s')}. States may be numeric (matrix / vector / list),
+#'   \code{(s, a, s\')}. States may be numeric (matrix / vector / list),
 #'   strings, or integers; actions may be any value.
 #' @param expert_log_policy \code{log pi(a | s)} under the CURRENT
 #'   policy for each expert transition. AIRL's discriminator is
@@ -293,7 +293,7 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
 
 #' MaxEnt (soft) value iteration on a deterministic tabular MDP
 #'
-#' \code{Q(s, a) = r(s) + gamma V(s')},
+#' \code{Q(s, a) = r(s) + gamma V(s\')},
 #' \code{V(s) = log sum_a exp Q(s, a)}, with the soft-optimal policy
 #' \code{pi(a | s) = exp(Q(s, a) - V(s))}. AIRL is derived in the
 #' maximum-entropy IRL setting, so this is the \code{V*} that Theorem
@@ -303,7 +303,7 @@ morie_airl <- function(expert_states, expert_actions, expert_next,
 #'
 #' @param states Iterable of states.
 #' @param actions Iterable of actions.
-#' @param step Function \code{(s, a) -> s'}.
+#' @param step Function \code{(s, a) -> s\'}.
 #' @param reward Function \code{s -> r(s)}.
 #' @param gamma Discount.
 #' @param iters Maximum number of value-iteration sweeps.

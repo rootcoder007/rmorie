@@ -7,8 +7,8 @@
 #' does not vanish fast enough for root-n inference.  The residual
 #' estimator estimates that remainder directly with a U-statistic over
 #' pairs, using a finite-dimensional projection kernel
-#' \code{K_k(x, x') = phi(x)' Omega^{-1} phi(x')},
-#' \code{Omega = n^{-1} sum_i phi(X_i) phi(X_i)'}, and adds it back:
+#' \code{K_k(x, x\') = phi(x)\' Omega^{-1} phi(x\')},
+#' \code{Omega = n^{-1} sum_i phi(X_i) phi(X_i)\'}, and adds it back:
 #' \code{IF22 = -[n(n-1)]^{-1} sum_{i != j} a_i K_k(X_i, X_j) b_j} with
 #' \code{a_i = (D_i - g_i)/[g_i(1 - g_i)]} and
 #' \code{b_j = H_j (y_j - Q*_j)}.

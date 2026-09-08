@@ -41,7 +41,7 @@ doi:10.1037/a0031034, open access at PMC3659198, equation (0.3), with a the
 new exposure level and a* the baseline one:
 
 \preformatted{CDE = (theta1 + theta3 m)(a - a*)
-NDE = {theta1 + theta3 (beta0 + beta1 a* + beta2' c)}(a - a*)
+NDE = {theta1 + theta3 (beta0 + beta1 a* + beta2\' c)}(a - a*)
 NIE = (theta2 beta1 + theta3 beta1 a)(a - a*)}
 
 from the mediator model E[M|a,c] = beta0 + beta1 a + beta2' c and the

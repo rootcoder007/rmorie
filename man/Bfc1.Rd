@@ -10,11 +10,11 @@ Bfc1(dg, d2g, density, fp)
 morie_fauzi_c1_coefficient(dg, d2g, density, fp)
 }
 \arguments{
-\item{dg, d2g}{\verb{g'(g^-1(x))} and \verb{g''(g^-1(x))}.}
+\item{dg, d2g}{\verb{g\'(g^-1(x))} and \verb{g''(g^-1(x))}.}
 
 \item{density}{\code{f_X(x)}.}
 
-\item{fp}{\verb{f_X'(x)}.}
+\item{fp}{\verb{f_X\'(x)}.}
 
 }
 \value{
@@ -27,8 +27,8 @@ the coefficient in \verb{Bias[Ftilde(x)] = (h^2/2) c1(x) mu2(K) + o(h^2)} of
 Theorem 5.2.
 }
 \details{
-Compare the naive KDFE, whose bias coefficient is just \verb{f'(x) mu2 / 2} --
-i.e. (5.8) with \code{g} the identity, where \verb{g'' = 0} and \verb{g' = 1}. The
+Compare the naive KDFE, whose bias coefficient is just \verb{f\'(x) mu2 / 2} --
+i.e. (5.8) with \code{g} the identity, where \verb{g'' = 0} and \verb{g\' = 1}. The
 transformation adds one term and rescales the other; that is the entire cost
 of removing the boundary bias.
 

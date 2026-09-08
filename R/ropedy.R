@@ -7,8 +7,8 @@
 #' range. The NTK-aware variant scales the base instead: low frequencies
 #' stretch a lot, high frequencies barely at all.
 #'
-#' Formula: \code{theta' = theta (L_new/L_train)^(d/(d-2))} inside
-#' \code{theta_i = theta'^(-2i/d)}, then rotate by \code{m theta_i}.
+#' Formula: \code{theta\' = theta (L_new/L_train)^(d/(d-2))} inside
+#' \code{theta_i = theta\'^(-2i/d)}, then rotate by \code{m theta_i}.
 #'
 #' @param y Unused; keeps the family signature.
 #' @param q Query or key vector, d even.

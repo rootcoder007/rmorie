@@ -27,9 +27,9 @@ of the two endpoints, computed per edge from node features alone, so
 the layer never needs the whole graph and transfers to unseen graphs.
 }
 \details{
-Formula: \code{e_ij = LeakyReLU(a'[W h_i || W h_j])},
+Formula: \code{e_ij = LeakyReLU(a\'[W h_i || W h_j])},
 \code{alpha_ij = softmax_j(e_ij)},
-\code{h_i' = sum_j alpha_ij W h_j}.
+\code{h_i\' = sum_j alpha_ij W h_j}.
 }
 \examples{
 Gat(A = c(1, 2, 3, 4, 5, 6, 7, 8), X = c(1, 2, 3, 4, 5, 6, 7, 8), W = 5L,

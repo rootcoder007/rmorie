@@ -29,7 +29,7 @@ morie_fauzi_thm5_2_bdfree_kdfe_bv(
 
 \item{c1}{The coefficient (5.8).}
 
-\item{dg}{\verb{g'(g^-1(x))}.}
+\item{dg}{\verb{g\'(g^-1(x))}.}
 
 \item{mu2}{\verb{int v^2 K(v) dv}.}
 
@@ -45,12 +45,12 @@ with \code{c1} from (5.8) and \code{r1} from (2.9).
 }
 \details{
 Remark 5.1 draws the consequence: since \code{r1 > 0} and \code{g} is increasing, the
-variance is SMALLER than the naive estimator's whenever \verb{g'(g^-1(x)) >= 1}.
+variance is SMALLER than the naive estimator's whenever \verb{g\'(g^-1(x)) >= 1}.
 The bias comparison is not settled in general, but for \verb{Omega = R+} with
 \code{g = exp} the bias converges faster in the boundary region as \code{x -> 0} --
 the case the construction exists for.
 
-\code{vargain} is returned explicitly: \verb{2 h g' f r1 / n}, the amount by which
+\code{vargain} is returned explicitly: \verb{2 h g\' f r1 / n}, the amount by which
 smoothing beats the empirical df here, positive exactly when the
 transformation stretches.
 }

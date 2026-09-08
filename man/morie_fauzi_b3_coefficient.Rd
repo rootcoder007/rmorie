@@ -29,7 +29,7 @@ list: t, b_3, g_prime, g_double_prime, bias_order,
 contrast, transform, method.
 }
 \description{
-\verb{b_3(t) = g'(g^\{-1\}(t))^2 f_X(t) - g''(g^\{-1\}(t)) S_X(t)}, the
+\verb{b_3(t) = g\'(g^\{-1\}(t))^2 f_X(t) - g\'\'(g^\{-1\}(t)) S_X(t)}, the
 coefficient carried by the SECOND cumulative survival estimator.
 Note the minus sign and the survival function: this is where the
 two Ch. 4 estimators part company.

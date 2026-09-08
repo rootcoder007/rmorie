@@ -8,8 +8,8 @@
 #' over the bins in proportion to \code{a}, or as a per-bin vector when a
 #' vector is supplied.
 #'
-#' Formula: solve \code{min_T <T,C>} with \code{a' = a - delta} and total
-#' transported mass \code{sum(a')}, the partial-transport problem of
+#' Formula: solve \code{min_T <T,C>} with \code{a\' = a - delta} and total
+#' transported mass \code{sum(a\')}, the partial-transport problem of
 #' Caffarelli and McCann (2010).
 #'
 #' @param a,b Source and target weights.

@@ -32,7 +32,7 @@ Theorem 2.4:
 }
 \details{
 Compare the plain KDFE's MISE from Sec. 2.1, which leads with
-\verb{h^4 mu2^2 R(f')/4}: the bias term has gone from \code{h^4} to \code{h^8} while the
+\verb{h^4 mu2^2 R(f\')/4}: the bias term has gone from \code{h^4} to \code{h^8} while the
 variance terms are unchanged in order. That is the claim in one line.
 
 The third term has lost its \code{f(x)} factor relative to (2.3): integrating

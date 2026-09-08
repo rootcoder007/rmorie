@@ -20,7 +20,7 @@ method.
 }
 \description{
 Equation (2.2): smooth with \verb{W = int K} rather than with \code{K}. The
-bias therefore carries \verb{f'}, one derivative lower than the density
+bias therefore carries \verb{f\'}, one derivative lower than the density
 estimator's \verb{f''}, and the estimate is continuous where the
 empirical df jumps.
 }

@@ -10,11 +10,11 @@ Bfc2(dg, d2g, d3g, density, fp, fpp)
 morie_fauzi_c2_coefficient(dg, d2g, d3g, density, fp, fpp)
 }
 \arguments{
-\item{dg, d2g, d3g}{\verb{g'}, \verb{g''} and \code{g3} evaluated at \code{g^-1(x)}.}
+\item{dg, d2g, d3g}{\verb{g\'}, \verb{g''} and \code{g3} evaluated at \code{g^-1(x)}.}
 
 \item{density}{\code{f_X(x)}.}
 
-\item{fp, fpp}{\verb{f'(x)} and \verb{f''(x)}.}
+\item{fp, fpp}{\verb{f\'(x)} and \verb{f''(x)}.}
 
 
 
@@ -32,8 +32,8 @@ pattern for the second derivative of a composition -- which is what this is,
 since the estimator lives on the transformed scale and the bias is read back
 on the original one.
 
-It enters the bias of the boundary-free DENSITY estimator divided by \verb{g'}:
-\verb{Bias[ftilde(x)] = h^2 c2(x) mu2(K) / (2 g'(g^-1(x))) + o(h^2)}. That
+It enters the bias of the boundary-free DENSITY estimator divided by \verb{g\'}:
+\verb{Bias[ftilde(x)] = h^2 c2(x) mu2(K) / (2 g\'(g^-1(x))) + o(h^2)}. That
 division is the Jacobian which the DISTRIBUTION estimator of (5.5) does not
 need -- the clearest statement in the book of why the transformation trick
 is cheaper for distribution functions.

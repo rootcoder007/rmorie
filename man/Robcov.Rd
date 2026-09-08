@@ -20,12 +20,12 @@ List with \code{estimate}, \code{coef}, \code{V},
 \description{
 Least squares stays unbiased under heteroskedasticity; only its
 standard errors are wrong. The sandwich replaces the assumed
-\code{sigma^2 (X'X)^-1} with a middle built from the observed squared
+\code{sigma^2 (X\'X)^-1} with a middle built from the observed squared
 residuals, so nothing about the variance has to be modelled. HC0 is
 biased down in small samples, which is what HC1 to HC3 fix.
 }
 \details{
-Formula: \code{V = (X'X)^-1 X' Omega X (X'X)^-1},
+Formula: \code{V = (X\'X)^-1 X\' Omega X (X\'X)^-1},
 \code{Omega = diag(w_i e_i^2)}; HC0 \code{w = 1}, HC1
 \code{n/(n-p)}, HC2 \code{1/(1-h)}, HC3 \code{1/(1-h)^2}.
 }

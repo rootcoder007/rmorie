@@ -115,7 +115,7 @@
 #' every candidate value of the sensitive feature, multiplies the
 #' error-model probability by the marginal priors, and returns the
 #' maximum a posteriori estimate. The black-box route uses
-#' \code{err(y, y')} from a confusion matrix; the white-box route
+#' \code{err(y, y\')} from a confusion matrix; the white-box route
 #' additionally weights each root-to-leaf path by its training
 #' count, which carries joint-distribution information the marginals
 #' cannot reach on their own.

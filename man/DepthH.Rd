@@ -29,7 +29,7 @@ comes back with positive depth. Arc midpoints are used instead -- no
 epsilon, and exact. Above two dimensions the minimum is taken over the
 data directions, an UPPER bound, flagged by \code{exact = 0}.
 
-Formula: \code{depth(theta) = min_u #{i: u'(x_i - theta) >= 0} / n}.
+Formula: \code{depth(theta) = min_u #{i: u\'(x_i - theta) >= 0} / n}.
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

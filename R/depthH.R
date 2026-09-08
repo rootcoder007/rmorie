@@ -14,7 +14,7 @@
 #' epsilon, and exact. Above two dimensions the minimum is taken over the
 #' data directions, an UPPER bound, flagged by \code{exact = 0}.
 #'
-#' Formula: \code{depth(theta) = min_u #{i: u'(x_i - theta) >= 0} / n}.
+#' Formula: \code{depth(theta) = min_u #{i: u\'(x_i - theta) >= 0} / n}.
 #'
 #' @param X Data cloud.
 #' @param theta Point whose depth is wanted.

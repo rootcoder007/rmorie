@@ -20,7 +20,7 @@ Named list with \code{estimate}, \code{preimage}, \code{jacobian}, \code{n},
 \description{
 \deqn{\nu(y) = \mu(T^{-1}(y)) / |\det DT(T^{-1}(y))|}
 Peyre & Cuturi (2019), Remark 2.6, eq. (2.8), which writes
-\verb{rho_alpha(x) = |det T'(x)| rho_beta(T(x))}.
+\verb{rho_alpha(x) = |det T\'(x)| rho_beta(T(x))}.
 }
 \examples{
 Otpushfw(mu_grid = c(1, 2, 3, 4, 5, 6, 7, 8), T_jac = c(1, 2, 3, 4, 5, 6, 7, 8),
