@@ -18,7 +18,8 @@ make_predpol_records <- function(n = 200, seed = 1) {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_predpol_aggregate_areas basic roll-up", {
-  set.seed(1); d <- make_predpol_records()
+  set.seed(1)
+  d <- make_predpol_records()
   r <- morie_fairness_predpol_aggregate_areas(d$area, d$risk, d$outcome,
                                               group = d$group)
   expect_true(all(c("areas","mean_risk","outcome_rate",
@@ -29,13 +30,15 @@ test_that("morie_fairness_predpol_aggregate_areas basic roll-up", {
 })
 
 test_that("morie_fairness_predpol_aggregate_areas without group", {
-  set.seed(2); d <- make_predpol_records()
+  set.seed(2)
+  d <- make_predpol_records()
   r <- morie_fairness_predpol_aggregate_areas(d$area, d$risk, d$outcome)
   expect_null(r$group)
 })
 
 test_that("morie_fairness_predpol_aggregate_areas with population named vector", {
-  set.seed(3); d <- make_predpol_records()
+  set.seed(3)
+  d <- make_predpol_records()
   pop <- setNames(c(1000, 2000, 1500, 800, 1200), sprintf("a%02d", 1:5))
   r <- morie_fairness_predpol_aggregate_areas(d$area, d$risk, d$outcome,
                                               population = pop)
@@ -43,7 +46,8 @@ test_that("morie_fairness_predpol_aggregate_areas with population named vector",
 })
 
 test_that("morie_fairness_predpol_aggregate_areas per-record population", {
-  set.seed(4); d <- make_predpol_records()
+  set.seed(4)
+  d <- make_predpol_records()
   pop_per <- ifelse(d$area == "a01", 1000, 2000)
   r <- morie_fairness_predpol_aggregate_areas(d$area, d$risk, d$outcome,
                                               population = pop_per)
@@ -58,7 +62,8 @@ test_that("morie_fairness_predpol_aggregate_areas errors on length mismatch", {
 })
 
 test_that("morie_fairness_predpol_aggregate_areas errors on bad group len", {
-  set.seed(5); d <- make_predpol_records()
+  set.seed(5)
+  d <- make_predpol_records()
   expect_error(
     morie_fairness_predpol_aggregate_areas(d$area, d$risk, d$outcome,
                                            group = c("X","Y")),

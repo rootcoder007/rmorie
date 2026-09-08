@@ -14,6 +14,9 @@
 #' @return Named list with cleaned \code{record}, \code{n_bad},
 #'   \code{sfreq}, and parameters.
 #' @keywords internal
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::preprocess_eeg(D)
 preprocess_eeg <- function(record,
                            bandpass = c(1, 40),
                            notch = 60,
@@ -67,6 +70,9 @@ preprocess_eeg <- function(record,
 #'   out as a toy AROMA stand-in.  Default 5.
 #' @return Named list with cleaned \code{record}, \code{n_scrubbed}.
 #' @keywords internal
+#' @examples
+#' D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
+#' rmorie:::preprocess_fmri(D)
 preprocess_fmri <- function(record,
                             motion_threshold_mm = 0.5,
                             n_noise_components = 5L) {
@@ -135,8 +141,9 @@ preprocess_fmri <- function(record,
 .entheo_bandpass <- function(x, sfreq, low, high, order = 4L) {
   ny <- sfreq / 2
   bf <- .morie_dsp_butter(order, c(low / ny, high / ny), type = "pass")
-  return(t(apply(x, 1, function(row)
-    .morie_dsp_filtfilt(bf$b, bf$a, row))))
+  return(t(apply(x, 1, function(row) {
+    .morie_dsp_filtfilt(bf$b, bf$a, row)
+  })))
   # (FFT-mask variant retained below for reference paths.)
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
@@ -160,8 +167,9 @@ preprocess_fmri <- function(record,
   ),
   type = "stop"
   )
-  return(t(apply(x, 1, function(row)
-    .morie_dsp_filtfilt(bf$b, bf$a, row))))
+  return(t(apply(x, 1, function(row) {
+    .morie_dsp_filtfilt(bf$b, bf$a, row)
+  })))
   n <- ncol(x)
   freqs <- seq(0, sfreq / 2, length.out = n %/% 2 + 1)
   bw <- freq / q

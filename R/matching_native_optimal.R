@@ -3,7 +3,7 @@
 # Native optimal pair matching (feat/native-specializations, module 5).
 # distance = "propensity": exact optimal 1:1 matching on the logit
 # propensity via the non-crossing dynamic program (1-D optimal matching
-# is monotone in the sorted scores) — globally minimal total distance,
+# is monotone in the sorted scores) -- globally minimal total distance,
 # unlike greedy nearest-neighbour. distance = "mahalanobis": exact
 # optimal assignment on Cholesky-whitened covariates via shortest
 # augmenting paths. No MatchIt/optmatch at runtime.

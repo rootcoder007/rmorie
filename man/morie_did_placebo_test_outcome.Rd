@@ -39,10 +39,15 @@ Placebo DiD on outcomes that should be unaffected
 \examples{
 set.seed(1)
 n <- 400
-d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
-df <- data.frame(d = d, post = p,
-                 y_pl1 = rnorm(n), y_pl2 = rnorm(n))
-out <- morie_did_placebo_test_outcome(df, c("y_pl1", "y_pl2"),
-                                      "d", "post")
+d <- rbinom(n, 1, 0.5)
+p <- rbinom(n, 1, 0.5)
+df <- data.frame(
+  d = d, post = p,
+  y_pl1 = rnorm(n), y_pl2 = rnorm(n)
+)
+out <- morie_did_placebo_test_outcome(
+  df, c("y_pl1", "y_pl2"),
+  "d", "post"
+)
 out
 }

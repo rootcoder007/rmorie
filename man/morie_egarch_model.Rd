@@ -14,8 +14,25 @@ Named list with \code{omega, alpha, gamma, beta, loglik,
   conditional_variance, n, method}.
 }
 \description{
-EGARCH(1,1) asymmetric volatility model
+\deqn{\log \sigma_t^2 = \omega + \alpha (|z_{t-1}| - E|z_{t-1}|)
+  + \gamma z_{t-1} + \beta \log \sigma_{t-1}^2}
+\eqn{\alpha} captures the size effect and \eqn{\gamma} the sign
+(leverage) effect. Note that this naming is not universal -- \pkg{rugarch}
+uses the two letters the other way round -- so compare coefficients by
+which term they multiply, not by name.
+\eqn{E|z| = \sqrt{2/\pi}} under the
+Gaussian likelihood used here. Modelling the log variance means no
+positivity constraints are needed; stationarity requires
+\eqn{|\beta| < 1}.
+}
+\details{
+Native Gaussian quasi-maximum-likelihood fit; no GARCH package is
+loaded or called.
 }
 \examples{
 morie_egarch_model(x = rnorm(50))
+}
+\references{
+Nelson, D. B. (1991). Conditional heteroskedasticity in asset returns:
+a new approach. \emph{Econometrica}, 59(2), 347-370.
 }

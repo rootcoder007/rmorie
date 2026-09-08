@@ -7,20 +7,46 @@
 morie_grm_vanraden(markers, method = 1)
 }
 \arguments{
-\item{markers}{Numeric (n x m) genotype matrix coded (coded 0/1/2).}
+\item{markers}{Numeric (n x m) genotype matrix coded 0/1/2. Must be a
+matrix or data frame: a bare vector is rejected rather than silently
+reshaped into an n x 1 matrix.}
 
-\item{method}{1 or 2 (VanRaden 2008).}
+\item{method}{One of \code{1}, \code{2}, \code{3}, \code{"G_VR1"}, \code{"G_VR2"}, \code{"G_XX"}.
+Integer (\code{2L}) and double (\code{2}) forms are both accepted.}
 }
 \value{
 Named list with estimate (G matrix), diag_mean, off_mean, p, n, m, method.
 }
 \description{
-Computes G = ZZ' / (2 sum p_j(1-p_j)) for method 1 (default), or the
-per-locus-scaled variant for method 2.
+\describe{
+\item{\code{method = 1} / \code{"G_VR1"}}{VanRaden Method 1:
+\eqn{G = ZZ' / (2 \sum_j p_j(1 - p_j))}, with \eqn{Z = M - 2p}.}
+\item{\code{method = 2} / \code{"G_VR2"}}{VanRaden Method 2: \eqn{G = ZDZ'} with
+\eqn{D} diagonal, \eqn{D_{jj} = 1/(m \cdot 2p_j(1-p_j))}; equivalently
+each column of \eqn{Z} scaled by \eqn{\sqrt{2p_j(1-p_j)}} and divided
+by \eqn{m}.}
+\item{\code{method = 3} / \code{"G_XX"}}{Uncentred \eqn{G = MM'/m}. This is NOT one
+of VanRaden's three methods -- it is the first method of the Montesinos
+chapter, which renumbers VanRaden's scheme. Named \code{G_XX} rather than
+\verb{G_VR*} for that reason.}
+}
+}
+\details{
+VanRaden's own Method 3 regresses \eqn{MM'} on \eqn{A} and requires no
+allele frequencies; it is not implemented here, so there is deliberately no
+\code{"G_VR3"} alias.
 }
 \examples{
 morie_grm_vanraden(markers = matrix(sample(0:2, 200, TRUE), 50, 4))
+morie_grm_vanraden(matrix(sample(0:2, 200, TRUE), 50, 4), method = "G_VR2")
 }
 \references{
-VanRaden (2008) J Dairy Sci 91:4414. Montesinos Lopez Ch 3.
+VanRaden, P. M. (2008). Efficient methods to compute genomic
+predictions. J Dairy Sci 91(11):4414-4423, "Genomic Relationships and
+Inbreeding", p.4416. doi:10.3168/jds.2007-0980
+
+Montesinos-Lopez et al., Multivariate Statistical Machine Learning Methods
+for Genomic Prediction, Sec. 2.4, pp.49-52 (secondary; renumbers the
+methods and contradicts its own worked example twice -- see the morie
+fixture tests/fn/fixtures/gmatv.json).
 }

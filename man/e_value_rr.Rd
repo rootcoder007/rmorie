@@ -17,8 +17,7 @@ e_value_rr(rr, ci_lower = NULL, ci_upper = NULL)
 A \code{morie_evalue} named-list.
 }
 \description{
-Wraps \pkg{EValue} when available; otherwise applies the
-VanderWeele-Ding closed-form formula directly.
+Applies the VanderWeele-Ding closed-form formula directly in base R.
 }
 \examples{
 res <- e_value_rr(2.0)

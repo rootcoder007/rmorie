@@ -31,6 +31,8 @@ period (NA/Inf = never treated).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{CI level tail. Default 0.05.}
+
+
 }
 \value{
 Object of class \code{"morie_did"}: estimate, std.error,
@@ -45,10 +47,14 @@ that a naive TWFE specification would be contaminated by forbidden
 already-treated comparisons (Goodman-Bacon 2021).
 }
 \examples{
-df <- expand.grid(id = 1:30, t = 1:6)
-df$g <- ifelse(df$id <= 15, 4L, NA)
-df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
-morie_did(df, "y", "id", "t", "g")
+if (morie_crypto_liboqs_available()) {
+  if (requireNamespace("did", quietly = TRUE)) {
+    df <- expand.grid(id = 1:30, t = 1:6)
+    df$g <- ifelse(df$id <= 15, 4L, NA)
+    df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
+    morie_did(df, "y", "id", "t", "g")
+  }
+}
 }
 \references{
 Callaway & Sant'Anna (2021) J. Econometrics 225(2);

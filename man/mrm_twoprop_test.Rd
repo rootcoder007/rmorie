@@ -12,6 +12,8 @@ mrm_twoprop_test(x1, n1, x2, n2, alpha = 0.05)
 \item{x2, n2}{Successes and trials in group 2.}
 
 \item{alpha}{CI level (default 0.05).}
+
+
 }
 \value{
 Named list with p1, p2, diff, chi2, df, p_value_chi2,

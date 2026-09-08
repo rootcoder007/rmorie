@@ -19,7 +19,6 @@
 #' covariates)} -- call it directly when needed.
 #'
 #' Year-lock invariant
-#' -------------------
 #' OTIS \code{UniqueIndividual_ID} is randomly reassigned every fiscal
 #' year. All analyses are computed within \code{EndFiscalYear};
 #' cross-year ID joins are forbidden (the
@@ -103,7 +102,7 @@ morie_otis_load <- function(csv_path = NULL, use_readr = FALSE) {
 #' returns a named list of \code{morie_otis_result} objects. If
 #' \code{out_dir} is supplied, each result is also written to disk as a
 #' \code{.txt} (\code{format()}) and a \code{.json}
-#' (\code{jsonlite::toJSON} when available, else \code{dput}).
+#' (\code{.s03json_toJSON} when available, else \code{dput}).
 #'
 #' CRAN-safe: with \code{out_dir = NULL} (default) no files are written.
 #'
@@ -170,6 +169,10 @@ morie_otis_all_analyses <- function(df, year,
 # Default print/format for morie_otis_result
 # ---------------------------------------------------------------------------
 
+#' Format method for \code{morie_otis_result} objects
+#'
+#' @param x A \code{morie_otis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return A character string.
 #' @examples
 #' \donttest{
@@ -211,6 +214,10 @@ format.morie_otis_result <- function(x, ...) {
 ")
 }
 
+#' Print method for \code{morie_otis_result} objects
+#'
+#' @param x A \code{morie_otis_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_crime.R
 \name{print.morie_tps_result}
 \alias{print.morie_tps_result}
-\title{Pretty-print method for \code{morie_tps_result} objects.}
+\title{Pretty-print method for \code{morie_tps_result} objects}
 \usage{
 \method{print}{morie_tps_result}(x, ...)
 }
@@ -15,7 +15,7 @@
 \code{x}, invisibly.
 }
 \description{
-Pretty-print method for \code{morie_tps_result} objects.
+Pretty-print method for \code{morie_tps_result} objects
 }
 \examples{
 \donttest{

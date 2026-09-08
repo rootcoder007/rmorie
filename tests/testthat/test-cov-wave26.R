@@ -19,25 +19,29 @@ test_that("optional-package guards stop() when the package is absent", {
   )
   x <- matrix(rnorm(40), 20, 2)
   y <- rbinom(20, 1, 0.5)
-  expect_error(morie_dbscan_clustering(x))
+  expect_no_error(morie_dbscan_clustering(x))  # native since the ML wave
   expect_error(morie_decision_tree_split(x, y))
   expect_error(morie_grid_search_cv(x, y))
-  expect_error(morie_random_forest_ensemble(x, y))
+  # Tree ensembles are native now (ESL Alg. 15.1 / 10.3 + compiled
+  # kernel): they RUN without randomForest/gbm/xgboost instead of stopping.
+  expect_true(is.list(morie_random_forest_ensemble(x, y, n_estimators = 5L)))
   # Wave B/C natives: regularization path + t-SNE now RUN without
   # glmnet/Rtsne instead of stopping.
   expect_true(is.list(morie_regularization_path(x, y)))
   expect_error(morie_random_search_cv(x, y))
   expect_error(morie_roc_auc_score(y, runif(20)))
-  expect_error(morie_svm_hinge_primal(x, y))
-  expect_error(morie_svm_kernel_trick(x, y))
+  # SVM is native now (LIBSVM's SMO decomposition, compiled kernel):
+  # these RUN without e1071 instead of stopping.
+  expect_true(is.list(morie_svm_hinge_primal(x, y)))
+  expect_true(is.list(morie_svm_kernel_trick(x, y)))
   expect_true(is.list(morie_tsne_reduction(x, n_iter = 50L)))
   # Module 20: rgfir/rgiir/rgqrs are native — they RUN without the
   # signal package instead of stopping.
   expect_silent(rgfir(rnorm(64), cutoff = 0.2))
   expect_silent(rgiir(rnorm(64), cutoff = 0.2))
   expect_true(is.list(rgqrs(rnorm(360))))
-  expect_error(morie_gradient_boosting_ensemble(x, y))
-  expect_error(morie_xgboost_objective(x, y))
+  expect_true(is.list(morie_gradient_boosting_ensemble(x, y, n_estimators = 5L)))
+  expect_true(is.list(morie_xgboost_objective(x, y, n_estimators = 5L)))
 })
 
 test_that(".morie_sha256_hex uses digest (Imports) — FIPS 180-2 vector", {
@@ -52,7 +56,7 @@ test_that("jsonlite-dependent entrypoints stop without jsonlite", {
     requireNamespace = function(package, ...) !identical(package, "jsonlite"),
     .package = "base"
   )
-  expect_error(morie_fetch_tps(category = "Assault"), "jsonlite")
+  # morie_fetch_tps() parses with the native JSON codec since 1.1.7; no jsonlite guard.
   mf <- tempfile(fileext = ".json")
   writeLines("{}", mf)
   expect_error(mrm_tps_load_hawkes_refit(mf), "jsonlite")

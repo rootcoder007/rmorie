@@ -23,6 +23,20 @@
 #' }
 #' }
 rgqrs <- function(x, fs = 360.0) {
+  x <- as.numeric(x)
+  if (fs <= 0) stop(sprintf("`fs` must be positive, got %g.", fs))
+  ## filtfilt needs more samples than its padlen, and a QRS detector needs
+  ## enough signal to hold a beat regardless. One second is the floor: below
+  ## it the 150 ms integration window and 200 ms refractory period are
+  ## meaningless. Without this the failure came out of the filter internals
+  ## with a message that says nothing about ECG.
+  min_samples <- max(as.integer(round(fs)), 40L)
+  if (length(x) < min_samples) {
+    stop(sprintf(
+      "need at least %d samples (1 s at fs=%g Hz) to detect QRS complexes, got %d.",
+      min_samples, fs, length(x)
+    ))
+  }
   nyq <- 0.5 * fs
   bf <- .morie_dsp_butter(3L, c(5, min(15, nyq * 0.95)) / nyq, type = "pass")
   bp <- as.numeric(.morie_dsp_filtfilt(bf$b, bf$a, x))
@@ -35,20 +49,35 @@ rgqrs <- function(x, fs = 360.0) {
   k <- rep(1 / W, W)
   integ <- as.numeric(stats::filter(sq, k, sides = 2))
   integ[is.na(integ)] <- 0
+  N <- length(integ)
   refractory <- as.integer(round(0.200 * fs))
   thr <- 0.30 * max(integ, na.rm = TRUE)
-  # naive peak finder with refractory
-  peaks <- integer(0)
-  i <- 2L
-  N <- length(integ)
-  while (i < N) {
-    if (integ[i] > thr && integ[i] > integ[i - 1] && integ[i] >= integ[i + 1]) {
-      peaks <- c(peaks, i)
-      i <- i + refractory
-    } else {
-      i <- i + 1L
-    }
+  ## Match scipy.signal.find_peaks(height = thr, distance = refractory), which
+  ## the Python side uses: collect every local maximum above the threshold,
+  ## then resolve the minimum-separation constraint by keeping the TALLEST
+  ## peak first and discarding any lower peak within `refractory` of one
+  ## already kept.
+  ##
+  ## The previous scan walked left to right, kept the FIRST local maximum
+  ## above the threshold, and skipped a refractory period. The 150 ms
+  ## integration window is 38 samples wide at fs = 250, so its rising edge
+  ## carries small local maxima that clear a 30% threshold well before the
+  ## true apex. On a synthetic ECG with beats at samples 100, 300, 500, ...
+  ## this latched onto 83 instead of 102, and the +/-50 ms refinement window
+  ## [71, 95] could then not reach the R peak at 101 -- every reported peak
+  ## came out 11 samples early, corrupting every RR interval and the heart
+  ## rate derived from them.
+  cand <- if (N >= 3L) {
+    ii <- seq.int(2L, N - 1L)
+    ii[integ[ii] > thr & integ[ii] > integ[ii - 1L] & integ[ii] >= integ[ii + 1L]]
+  } else {
+    integer(0)
   }
+  peaks <- integer(0)
+  for (p in cand[order(integ[cand], decreasing = TRUE)]) {
+    if (all(abs(p - peaks) >= refractory)) peaks <- c(peaks, p)
+  }
+  peaks <- sort(peaks)
   # refine each to local |bp| max within +/-50 ms
   half <- as.integer(round(0.05 * fs))
   refined <- vapply(peaks, function(p) {

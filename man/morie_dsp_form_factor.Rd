@@ -19,7 +19,7 @@ Scalar.
 t <- seq.int(0, 999) / 1000
 x <- sin(2 * pi * 5 * t)
 morie_dsp_form_factor(x)
-morie_dsp_form_factor(rep(0, 5))  # all-zero signal: 0
+morie_dsp_form_factor(rep(0, 5)) # all-zero signal: 0
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.2.

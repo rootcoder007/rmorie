@@ -54,6 +54,32 @@ if [ -z "${OQS_LIBS}" ]; then
   fi
   rm -f "${PROBE_SRC}" "${PROBE_OUT}" 2>/dev/null
 fi
+# Verify the liboqs we found is loadable at run time, not merely
+# linkable.  pkg-config may resolve liboqs from a prefix that is on the
+# LINKER search path but not on the LOADER path -- a hand-built liboqs
+# under /usr/local/lib64 shadowing the system package, say.  The link
+# then succeeds and dyn.load() fails later with "liboqs.so.N: cannot
+# open shared object file", an R CMD check ERROR that says nothing about
+# liboqs.  Adding -Wl,-rpath would paper over it but bakes an absolute
+# build-machine path into the shared object, which is non-portable and
+# against CRAN policy on flags in PKG_LIBS.  Instead: build and RUN a
+# probe with the flags we intend to use, and if it will not run, build
+# without liboqs -- the PQC entry points are gated on MORIE_HAVE_LIBOQS
+# and degrade cleanly.
+if [ -n "${OQS_LIBS}" ]; then
+  RUN_DIR=`mktemp -d 2>/dev/null || echo /tmp`
+  RUN_SRC="${RUN_DIR}/morie_oqs_run.c"
+  RUN_OUT="${RUN_DIR}/morie_oqs_run"
+  printf '#include <oqs/oqs.h>\nint main(void){OQS_init();OQS_destroy();return 0;}\n' > "${RUN_SRC}"
+  if ${CC:-cc} ${OQS_CFLAGS} -o "${RUN_OUT}" "${RUN_SRC}" ${OQS_LIBS} >/dev/null 2>&1 && "${RUN_OUT}" >/dev/null 2>&1; then
+    :
+  else
+    echo "configure: liboqs was found but its probe will not run; building without post-quantum support" >&2
+    OQS_CFLAGS=""
+    OQS_LIBS=""
+  fi
+  rm -f "${RUN_SRC}" "${RUN_OUT}" 2>/dev/null
+fi
 if [ -n "${OQS_LIBS}" ]; then
   OQS_CFLAGS="${OQS_CFLAGS} -DMORIE_HAVE_LIBOQS"
 fi

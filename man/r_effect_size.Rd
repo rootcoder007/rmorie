@@ -10,6 +10,7 @@ r_effect_size(x, y, confidence = 0.95)
 \item{x, y}{Numeric vectors (NA dropped).}
 
 \item{confidence}{Confidence level for CI. Default 0.95.}
+
 }
 \value{
 A \code{morie_effect_size}.
@@ -19,6 +20,7 @@ Pearson r as an effect size with Fisher-z CI
 }
 \examples{
 set.seed(1)
-x <- rnorm(30); y <- x + rnorm(30)
+x <- rnorm(30)
+y <- x + rnorm(30)
 r_effect_size(x, y)
 }

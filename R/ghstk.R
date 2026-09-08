@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Truncated stick-breaking representation of DP(alpha, G0).
+#' Truncated stick-breaking representation of DP(alpha, G0)
 #'
 #' @param x Numeric data vector.
 #' @param alpha DP concentration parameter (default 1).
@@ -18,8 +18,8 @@
 #' morie_ghosal_stick_breaking_trunc(x = rnorm(50))
 #' @export
 morie_ghosal_stick_breaking_trunc <- function(x, alpha = 1.0, K = 50, seed = 0,
-                                        base_mean = NULL, base_sd = NULL,
-                                        deterministic_seed = NULL) {
+                                              base_mean = NULL, base_sd = NULL,
+                                              deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("ghstk", deterministic_seed)
   } else {

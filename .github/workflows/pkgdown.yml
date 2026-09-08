@@ -81,6 +81,13 @@ jobs:
           # runs (2026-07-09) as silent 80-140min runner hangs. Build the dep
           # tree serially, same as r-cmd-check.yml / r-coverage.yml.
           MAKEFLAGS: "-j1"
+          # P3M served RSQLite as a SOURCE package (no Noble binary for the
+          # pinned version), but pak omits LinkingTo deps from a plan built
+          # for binaries -- so the source fallback aborted with "its
+          # LinkingTo dependency cpp11 is not part of the installation
+          # plan". This knob keeps LinkingTo deps in the plan so any
+          # binary-to-source fallback can actually compile.
+          PKG_INCLUDE_LINKINGTO: "true"
         with:
           cache-version: 2
           extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr

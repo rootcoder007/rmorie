@@ -4,7 +4,19 @@
 \alias{morie_estimate_ate}
 \title{Estimate the Average Treatment Effect (ATE) via Hajek IPW}
 \usage{
-morie_estimate_ate(data, treatment, outcome, covariates, propensity_col = NULL)
+morie_estimate_ate(
+  data,
+  treatment,
+  outcome,
+  covariates,
+  propensity_col = NULL,
+  trim = c(0.01, 0.99),
+  trim_type = "value",
+  ps_model = "mle",
+  ridge_lambda = 1,
+  weight_trim = NULL,
+  weight_trim_side = "upper"
+)
 }
 \arguments{
 \item{data}{A data frame.}
@@ -17,6 +29,18 @@ morie_estimate_ate(data, treatment, outcome, covariates, propensity_col = NULL)
 
 \item{propensity_col}{Optional: name of a pre-computed propensity
 score column.}
+
+\item{trim}{See Usage.}
+
+\item{trim_type}{See Usage.}
+
+\item{ps_model}{See Usage.}
+
+\item{ridge_lambda}{See Usage.}
+
+\item{weight_trim}{See Usage.}
+
+\item{weight_trim_side}{See Usage.}
 }
 \value{
 Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n}, \code{ess}.

@@ -26,7 +26,7 @@ exports endpoints).
 \examples{
 \dontshow{if (nzchar(system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
-nrow(cat_df)  # 190
+nrow(cat_df) # 190
 head(cat_df$title)
 \dontshow{\}) # examplesIf}
 }

@@ -20,7 +20,7 @@ morie_fauzi_mrl_asymptotic(x, t = NULL, h = NULL)
 Named list with estimate, se, S_hat, t, h, n, method.
 }
 \description{
-Kernel-smoothed MRL \eqn{m(t)=E[X-t|X>t]} with Yang (1978)
+Kernel-smoothed MRL \eqn{m(t)=E\[X-t|X>t\]} with Yang (1978)
 asymptotic SE.
 }
 \examples{

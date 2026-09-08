@@ -4,7 +4,14 @@
 \alias{stat_bridge_verify}
 \title{Self-test enumeration helper}
 \usage{
-stat_bridge_verify()
+stat_bridge_verify(execute = FALSE)
+}
+\arguments{
+\item{execute}{When TRUE, actually CALL every registered
+  handler with no arguments -- a smoke test that reaches the
+  network for the data-fetching commands. The default checks
+  that each command carries a callable handler and runs none
+  of them.}
 }
 \value{
 A data.frame with columns \code{name}, \code{ok}, \code{message}.

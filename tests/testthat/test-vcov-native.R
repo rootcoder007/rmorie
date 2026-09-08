@@ -22,7 +22,9 @@ test_that("morie_vcov_hc is symmetric, named, correct dim for all HC types", {
 })
 
 test_that("HC1 = HC0 * n/(n-k) and const = classical vcov", {
-  m <- make_lm(); n <- length(stats::residuals(m)); k <- length(stats::coef(m))
+  m <- make_lm()
+  n <- length(stats::residuals(m))
+  k <- length(stats::coef(m))
   expect_equal(morie_vcov_hc(m, "HC1"), morie_vcov_hc(m, "HC0") * n / (n - k),
                tolerance = 1e-10)
   expect_equal(unname(morie_vcov_hc(m, "const")), unname(stats::vcov(m)),
@@ -54,7 +56,8 @@ test_that("morie_vcov_robust dispatches to HC / HAC / CL", {
 })
 
 test_that("glm HC path works and is symmetric PSD", {
-  set.seed(12); gd <- data.frame(x = rnorm(120))
+  set.seed(12)
+  gd <- data.frame(x = rnorm(120))
   gd$y <- rbinom(120, 1, plogis(0.4 * gd$x))
   gm <- stats::glm(y ~ x, data = gd, family = stats::binomial())
   V <- morie_vcov_hc(gm, "HC0")

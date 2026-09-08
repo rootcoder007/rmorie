@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Empirical (Matheron) variogram estimation.
+#' Empirical (Matheron) variogram estimation
 #'
 #' \deqn{\hat\gamma(h) = \frac{1}{2|N(h)|}
-#'        \sum_{(i,j) \in N(h)} (Z(s_i) - Z(s_j))^2}{hatgamma(h) = (1)/(2|N(h)|) sum_(i,j) in N(h) (Z(s_i) - Z(s_j))^2}
+#'        \sum_{(i,j) \in N(h)} (Z(s_i) - Z(s_j))^2}{hatgamma(h) = (1)/(2|N(h)|)
+#' sum_(i,j) in N(h) (Z(s_i) - Z(s_j))^2}
 #'
 #' @param x Numeric vector, length n.
 #' @param coords Numeric matrix (n by d) of coordinates.

@@ -23,5 +23,6 @@ A <- matrix(rnorm(20), 10, 2); B <- A + 0.05 * matrix(rnorm(20), 10, 2)
 morie_spatial_voting_procrustes(A, B)
 }
 \references{
-Gower & Dijksterhuis (2004).
+Gower JC & Dijksterhuis GB (2004). \emph{Procrustes
+Problems}. Oxford University Press.
 }

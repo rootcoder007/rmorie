@@ -1,6 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Classical MDS for spatial map of legislators (Armstrong Ch 7)
+#' Classical MDS for spatial map of legislators (Armstrong sec. 3.1, p.68)
+#' @details Verified against the Armstrong PDF: section 3.1 "Classical Metric
+#'   Multidimensional Scaling", printed p.68. The former "Ch 7" citation was to a
+#'   chapter that does not exist -- that book has six.
 #'
 #' Torgerson double-centring followed by top-k eigen-decomposition.
 #' Reports Stress-1 = sqrt(sum (d - hat_d)^2 / sum d^2).

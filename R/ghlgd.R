@@ -15,7 +15,7 @@
   -(sum(eta_x) - n * Z) + 1e-4 * sum(theta^2)
 }
 
-#' Log-spline density estimator (Stone 1990, Ghosal Ch 8).
+#' Log-spline density estimator (Stone 1990, Ghosal Ch 8)
 #'
 #' @param x Numeric data vector.
 #' @param K Integer polynomial degree (default 5).

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Beta-process posterior survival (Hjort 1990).
+#' Beta-process posterior survival (Hjort 1990)
 #'
 #' @param time Numeric vector of observed times.
 #' @param event Optional integer/logical event indicator (1 = event, 0 = censored).
@@ -11,7 +11,7 @@
 #' morie_ghosal_survival_beta_process(time = cumsum(rexp(50)))
 #' @export
 morie_ghosal_survival_beta_process <- function(time, event = NULL, c = 1.0,
-                                         lam0 = NULL) {
+                                               lam0 = NULL) {
   s <- .gh_surv_post(time, event, c, lam0)
   if (is.null(s)) {
     return(list(

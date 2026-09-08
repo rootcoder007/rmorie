@@ -3,7 +3,7 @@
 \name{sglm}
 \alias{sglm}
 \alias{morie_spatial_glm}
-\title{Spatial GLM (Gaussian-identity case via profile ML).}
+\title{Spatial GLM (Gaussian-identity case via profile ML)}
 \usage{
 sglm(x, y, coords, family = "gaussian")
 

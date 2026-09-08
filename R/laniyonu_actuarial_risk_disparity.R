@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of O'Connell & Laniyonu (2025) — CSC actuarial-risk disparity
+#' Replication of O'Connell & Laniyonu (2025) -- CSC actuarial-risk disparity
 #'
 #' R port of \code{morie.laniyonu.actuarial_risk_disparity}.  Audits
 #' the Correctional Service of Canada's four ordinal risk instruments
@@ -39,6 +39,19 @@
 #'   carrying the per-stratum coefficients and a multi-paragraph
 #'   \code{interpretation} string.
 #' @name morie_laniyonu_actuarial_risk_disparity
+#' @examples
+#' set.seed(1)
+#' n <- 200
+#' black <- rbinom(n, 1, 0.3); asian <- rbinom(n, 1, 0.2)
+#' gender <- sample(c("M", "F"), n, replace = TRUE); age <- rnorm(n)
+#' zsc <- 0.5 * black + 0.3 * asian + 0.2 * age + rnorm(n)
+#' lvl <- cut(zsc, quantile(zsc, c(0, .33, .66, 1)), include.lowest = TRUE,
+#'            labels = c("low", "medium", "high"))
+#' df <- data.frame(static_score = as.character(lvl), black, asian, gender, age)
+#' res <- suppressWarnings(morie_laniyonu_actuarial_risk_disparity(
+#'   df, outcome = "static", race_cols = c("black", "asian"),
+#'   gender_col = "gender", control_cols = "age"))
+#' res$outcome_kind
 NULL
 
 
@@ -127,7 +140,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Stage 1 — threshold-specific ordinal logit
+# Stage 1 -- threshold-specific ordinal logit
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Run Ordinal
@@ -313,7 +326,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Stage 2 — score-net-residual logit
+# Stage 2 -- score-net-residual logit
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Score Net Residual
@@ -570,6 +583,10 @@ morie_laniyonu_actuarial_risk_disparity <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_ard_result} objects
+#'
+#' @param x A \code{morie_laniyonu_ard_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -585,15 +602,15 @@ morie_laniyonu_actuarial_risk_disparity <- function(
 #'   df, outcome = "static", race_cols = c("black", "asian"),
 #'   gender_col = "gender", control_cols = "age"))
 #' res$outcome_kind
-#' \references{
-#' O'Connell, C., & Laniyonu, A. (2025).  Race, gender, and risk
-#' assessments in Canadian federal prison.  Race & Justice, 15(3),
-#' 428-453.
-#' Goel, S., Shroff, R., Skeem, J., & Slobogin, C. (2021).  The
-#' accuracy, equity, and jurisprudence of criminal risk assessment.
-#' In Research Handbook on Big Data Law (pp. 9-28).
 #' print(res)
 #' }
+#' @references
+#'   O'Connell, C., & Laniyonu, A. (2025).  Race, gender, and risk
+#'   assessments in Canadian federal prison.  Race & Justice, 15(3),
+#'   428-453.
+#'   Goel, S., Shroff, R., Skeem, J., & Slobogin, C. (2021).  The
+#'   accuracy, equity, and jurisprudence of criminal risk assessment.
+#'   In Research Handbook on Big Data Law (pp. 9-28).
 #' @export
 print.morie_laniyonu_ard_result <- function(x, ...) {
   cat(x$title, "\

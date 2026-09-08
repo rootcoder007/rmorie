@@ -28,7 +28,7 @@ morie_random_forest_ensemble(
 \item{seed}{RNG seed.}
 
 \item{deterministic_seed}{Integer or NULL.  If supplied, the RNG state
-is derived from the SHA-keyed \code{\link[=morie_det_rng]{morie_det_rng()}} so Py<->R streams
+is derived from the SHA-keyed \code{morie_det_rng()} so Py<->R streams
 agree on the canonical fixture.  When \code{NULL} (default), behaviour
 is unchanged: \code{seed} drives \code{set.seed()} directly.}
 }
@@ -37,11 +37,9 @@ Named list: estimate, train_score, oob_score, feature_importances,
 n_estimators, task, n, method.
 }
 \description{
-Wraps \code{randomForest::randomForest}.  Auto-detects task from y
+Native random forest (ESL Algorithm 15.1).  Auto-detects task from y
 (factor / integer-like -> classification, otherwise regression).
 }
 \examples{
-\dontshow{if (requireNamespace("randomForest", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
-\dontshow{\}) # examplesIf}
 }

@@ -47,7 +47,7 @@ open dataset (Socrata resource id \verb{cauq-8yn6}; portal landing
 The 77 canonical Chicago community areas
 (Rogers Park, West Ridge, Uptown, Lincoln Square, ..., Edgewater).
 Resolves the \code{community_area} foreign key carried by every
-\code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}} row.
+\code{morie_datasets_chicago_crime()} row.
 }
 \details{
 \strong{SODA3-only} (same filtered/derived-view caveat as Wards).

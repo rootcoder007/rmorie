@@ -4,10 +4,11 @@
 #'
 #' R parity for \code{morie.fn.drpfw.dropout_forward}.
 #'
-#' \deqn{y = x \odot m / (1-p), \quad m \sim \mathrm{Bernoulli}(1-p)}{y = x odot m / (1-p), m ~ Bernoulli(1-p)}
+#' \deqn{y = x \odot m / (1-p), \quad m \sim \mathrm{Bernoulli}(1-p)}{y = x odot m /
+#' (1-p), m ~ Bernoulli(1-p)}
 #'
 #' @param x Numeric array.
-#' @param p Drop probability in \code{[0, 1)}.
+#' @param p Drop probability in \code{\[0, 1)}.
 #' @param seed RNG seed.
 #' @param training If FALSE, returns input unchanged.
 #' @param deterministic_seed Optional integer; if non-NULL, a SHA-keyed
@@ -20,7 +21,7 @@
 #' morie_drpfw_dropout_forward(x = rnorm(50))
 #' @export
 morie_drpfw_dropout_forward <- function(x, p = 0.5, seed = 0L, training = TRUE,
-                                  deterministic_seed = NULL) {
+                                        deterministic_seed = NULL) {
   if (p < 0 || p >= 1) stop(sprintf("p must be in [0, 1), got %g", p))
   x <- as.array(x)
   if (!training || p == 0) {

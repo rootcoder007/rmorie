@@ -1,0 +1,34 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_cmlmer_compressed_lmm}
+\alias{morie_cmlmer_compressed_lmm}
+\title{morie_cmlmer_compressed_lmm}
+\usage{
+morie_cmlmer_compressed_lmm(y, M, K, clusters = NULL, X = NULL, compare_levels = NULL, log_delta_lo = -10, 
+    log_delta_hi = 10, max_iter = 200L) 
+}
+\arguments{
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{M}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{K}{Passed to \code{.cmlmer_rows}.}
+\item{clusters}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{X}{Optional; may be \code{NULL}. Passed to \code{.cmlmer_rows}.}
+\item{compare_levels}{Optional; may be \code{NULL}. A vector; its length is taken.}
+\item{log_delta_lo}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{-10}.}
+\item{log_delta_hi}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{10}.}
+\item{max_iter}{Accepted by the signature and not used anywhere in the body. Defaults to \code{200L}.}
+}
+\description{
+A step of the cmlmer_native implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{beta}, \code{se}, \code{t}, \code{p_value}, \code{group}, \code{n_groups}, \code{group_sizes}, \code{group_kinship}, \code{coefficients}, \code{delta}, \code{sigma2_g}, \code{sigma2_e}, \code{h2}, \code{reml_loglik}, \code{reml_profile}, \code{level_loglik}, \code{n}, \code{n_markers}, \code{p}, \code{clusters_requested}, \code{method}, \code{note}.
+}
+\keyword{internal}
+\examples{
+b <- c(1.5, 2.5, 3.5)
+A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+res <- morie_cmlmer_compressed_lmm(y = b, M = A, K = A)
+res
+}

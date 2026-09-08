@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_weapon_records}
 \alias{morie_arsau_analyze_weapon_records}
-\title{Analysis of ARSAU weapon_records.}
+\title{Analysis of ARSAU weapon_records}
 \usage{
 morie_arsau_analyze_weapon_records(
   year,

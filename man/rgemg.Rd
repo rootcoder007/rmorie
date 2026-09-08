@@ -20,7 +20,7 @@ morie_rangayyan_emg_rms(x, window = 64L, fs = 1)
 Named list \code{rms}, \code{window}, \code{fs}, \code{mean_rms}.
 }
 \description{
-\deqn{\mathrm{RMS}[n] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x[k]^2 }}{RMS[n] = sqrt{ (1/W) sum_k=n-W+1^n x[k]^2 }}
+\deqn{\mathrm{RMS}\[n\] = \sqrt{ (1/W) \sum_{k=n-W+1}^{n} x\[k\]^2 }}{RMS\[n\] = sqrt{ (1/W) sum_k=n-W+1^n x\[k\]^2 }}
 }
 \examples{
 set.seed(0)
@@ -28,6 +28,9 @@ r <- rgemg(rnorm(500), window = 32)
 length(r$rms)
 }
 \references{
-Rangayyan Ch 8.
+Rangayyan, R. M., & Krishnan, S. (2024). Biomedical Signal
+Analysis, 3rd ed. Wiley-IEEE Press. Sec 5.6.1 "The RMS value",
+pp.283-284, eq (5.24) -- the running RMS, which is CAUSAL. The previous
+reference said Ch 8.
 }
 \keyword{internal}

@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.1.6
+Version: 1.2.0
 Authors@R: c(
   person(
     given = "Vansh Singh",
@@ -54,11 +54,12 @@ Depends:
 Note: Tested on R 4.3.0, 4.4.x, 4.5.2, 4.5.3 (CRAN). Use CRAN R on Apple
   Silicon (Homebrew R may segfault with RSQLite).
 Imports:
+  methods,
   here,
   stats,
   utils,
   Rcpp,
-  rmoriebricklayer (>= 0.3.5),
+  rmoriebricklayer (>= 0.3.8),
   rmoriedata (>= 0.2.5)
 LinkingTo: Rcpp, RcppArmadillo, rmoriebricklayer
 SystemRequirements: libcurl: libcurl-devel (rpm) or libcurl4-openssl-dev (deb)
@@ -100,7 +101,6 @@ Suggests:
   DoubleML,
   DRDID,
   duckdb,
-  e1071,
   ebal,
   emmeans,
   EValue,
@@ -121,7 +121,6 @@ Suggests:
   iml,
   ipred,
   ivreg,
-  jsonlite,
   kernlab,
   knitr,
   konfound,
@@ -142,7 +141,6 @@ Suggests:
   mutoss,
   mvtnorm,
   nanoparquet,
-  nortest,
   np,
   openssl,
   optmatch,
@@ -151,6 +149,7 @@ Suggests:
   performance,
   pkgload,
   poolr,
+  portes,
   posterior,
   ppcor,
   pracma,
@@ -174,7 +173,6 @@ Suggests:
   resample,
   rgenoud,
   rmarkdown,
-  rmgarch,
   rpart,
   RPostgres,
   rsample,
@@ -182,7 +180,6 @@ Suggests:
   rstan,
   rstanarm,
   Rtsne,
-  rugarch,
   rvest,
   sandwich,
   see,
@@ -209,7 +206,9 @@ Suggests:
   withr,
   writexl,
   xgboost,
-  xml2
+  xml2,
+  jsonlite,
+  changepoint
 VignetteBuilder: knitr
 URL: https://github.com/rootcoder007/rmorie
 BugReports: https://github.com/rootcoder007/rmorie/issues
@@ -226,3 +225,5 @@ biocViews:
 Additional_repositories:
   https://rootcoder007.r-universe.dev,
   https://stan-dev.r-universe.dev
+Remotes:
+    rootcoder007/rmorie-bricklayer

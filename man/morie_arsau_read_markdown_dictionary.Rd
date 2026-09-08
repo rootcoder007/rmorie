@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_read_markdown_dictionary}
 \alias{morie_arsau_read_markdown_dictionary}
-\title{Read an Ontario-Catalogue Markdown data-dictionary sidecar.}
+\title{Read an Ontario-Catalogue Markdown data-dictionary sidecar}
 \usage{
 morie_arsau_read_markdown_dictionary(path)
 }
@@ -26,7 +26,8 @@ required: the parser is pure base R.
 }
 \examples{
 path <- system.file("extdata", "OTIS_DATA_DICTIONARY.md",
-                    package = "morie")
+  package = "morie"
+)
 if (nzchar(path)) {
   out <- morie_arsau_read_markdown_dictionary(path)
   str(out)

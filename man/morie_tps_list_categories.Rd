@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_fetch.R
 \name{morie_tps_list_categories}
 \alias{morie_tps_list_categories}
-\title{List TPS categories known to the fetcher.}
+\title{List TPS categories known to the fetcher}
 \usage{
 morie_tps_list_categories()
 }
@@ -10,7 +10,7 @@ morie_tps_list_categories()
 Character vector of category names, sorted.
 }
 \description{
-List TPS categories known to the fetcher.
+List TPS categories known to the fetcher
 }
 \examples{
 morie_tps_list_categories()

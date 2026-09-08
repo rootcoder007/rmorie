@@ -28,7 +28,8 @@
 #   themselves (CSAFE, NSRL, ...) are multi-gigabyte and must be
 #   downloaded out-of-band; this client returns the catalog records.
 #
-# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx custom error formatting.
+# HTTP: routes via .morie_dataset_http_text_with_status + .morie_dataset_http_post_json_with_status (3ZZ -> libcurl C++ backend with httr2 fallback). JSON: .morie_from_json(simplifyVector=FALSE). HTTP status codes inspected for NamUs 401/403 + 4xx
+# custom error formatting.
 
 .MORIE_FORENSICS_DEFAULT_UA <- "morie/r (+https://github.com/rootcoder007/rmorie)"
 .MORIE_FORENSICS_DEFAULT_TIMEOUT <- 60
@@ -237,7 +238,7 @@
 #' always works; with a key it queries the live CDE endpoint.
 #'
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # No API key needed: falls back to the bundled synthetic sample.
 #' df <- suppressWarnings(morie_ingest_forensics_nibrs(
 #'   year = 2023, offense = "aggravated-assault", state = "GA",
@@ -245,6 +246,17 @@
 #' ))
 #' head(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # No API key needed: falls back to the bundled synthetic sample.
+#' df <- suppressWarnings(morie_ingest_forensics_nibrs(
+#'   year = 2023, offense = "aggravated-assault", state = "GA",
+#'   max_features = 10L
+#' ))
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_nibrs <- function(year,
                                          offense = NULL,
@@ -400,11 +412,19 @@ morie_ingest_forensics_nibrs <- function(year,
 #' @param user_agent,timeout Standard request knobs.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' df <- morie_ingest_forensics_namus_missing(state = "CA",
 #'                                            max_features = 1000L)
 #' head(df)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' df <- morie_ingest_forensics_namus_missing(state = "CA",
+#'                                            max_features = 1000L)
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_namus_missing <- function(
     state = NULL,
@@ -513,6 +533,17 @@ morie_ingest_forensics_namus_missing <- function(
 # Internal: flatten one flat Search-projection record (the shape the
 # NamUs Search endpoint actually returns; verified live 2026-07).
 # Height/weight are not projectable via Search -- NA by contract.
+#' Internal: flatten one flat Search-projection record (the shape the
+#'
+#' NamUs Search endpoint actually returns; verified live 2026-07).
+#' Height/weight are not projectable via Search -- NA by contract.
+#'
+#' @param rec A vector; indexed elementwise.
+#' @return A list with \code{case_number}, \code{state}, \code{county}, \code{dlc_date},
+#' \code{sex}, \code{race}, \code{age_min}, \code{age_max}, \code{height_cm_min},
+#' \code{height_cm_max}, \code{weight_kg_min}, \code{weight_kg_max}, \code{first_name},
+#' \code{last_name}, \code{city}, \code{circumstances}.
+#' @export
 .morie_forensics_flatten_namus_search <- function(rec) {
   g <- function(k) if (is.null(rec[[k]])) NA else rec[[k]]
   list(
@@ -611,7 +642,11 @@ morie_ingest_forensics_namus_missing <- function(
 #' @param timeout HTTP timeout in seconds.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \dontrun{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{try(morie_ingest_forensics_nist_rds(max_features = 1L))}
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_forensics_nist_rds <- function(
     dataset_id = NULL,

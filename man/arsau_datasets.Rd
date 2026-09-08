@@ -3,7 +3,7 @@
 \name{arsau_datasets}
 \alias{arsau_datasets}
 \title{ARSAU CKAN sidecar helpers + tidy registry view (R-side companion
-to \code{morie.arsau_datasets}).}
+to \code{morie.arsau_datasets})}
 \description{
 The main R-side loaders + registry list-of-lists already live in
 \code{R/arsau.R} (\code{morie_arsau_load_main_records()},
@@ -23,11 +23,11 @@ those.  It adds the remaining surface from the Python source:
 tidy \code{data.frame} (one row per published file), the
 canonical R equivalent of \code{ARSAU_REGISTRY} in Python.
 \item \code{\link{morie_arsau_sidecar_schema}}: simplified
-\code{[name, type, notes]} extraction from a CKAN sidecar
+\code{\[name, type, notes\]} extraction from a CKAN sidecar
 (mirrors \code{morie.arsau_datasets.sidecar_schema}).
 \item \code{\link{morie_arsau_sidecar_to_frame}}: convert the
 array-of-arrays \code{records} body of a CKAN sidecar to a
-\code{data.frame} keyed by \code{fields[].id} (mirrors
+\code{data.frame} keyed by \code{fields\[\].id} (mirrors
 \code{morie.arsau_datasets.sidecar_to_frame}).
 \item \code{\link{morie_arsau_read_xlsx_dictionary}}: read an
 Ontario-Catalogue XLSX data-dictionary sidecar

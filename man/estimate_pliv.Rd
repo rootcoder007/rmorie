@@ -34,16 +34,21 @@ Named list with \code{late}, \code{se}, \code{ci_lower}, \code{ci_upper},
 \code{pval}, \code{n_obs}, \code{method}.
 }
 \description{
-Wraps \pkg{DoubleML} when available. Otherwise falls back to 2SLS:
-first stage \code{D ~ Z + X}, second stage \code{Y ~ D_hat + X}, base R OLS.
+Native 2SLS in base R: first stage \code{D ~ Z + X}, second stage
+\code{Y ~ D_hat + X}. Cross-validated against \pkg{DoubleML} in the
+package's cross tests but not calling it at runtime.
 }
 \examples{
-set.seed(1)
-n <- 80
-x1 <- rnorm(n); x2 <- rnorm(n); z <- rbinom(n, 1, 0.5)
-d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
-y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
-df <- data.frame(y, d, z, x1, x2)
-res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
-res$late
+if (requireNamespace("stdReg", quietly = TRUE)) {
+  set.seed(1)
+  n <- 80
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
+  z <- rbinom(n, 1, 0.5)
+  d <- as.integer(plogis(0.3 + 0.8 * z + 0.4 * x1) > runif(n))
+  y <- 1 + 0.5 * d + 0.3 * x1 + rnorm(n)
+  df <- data.frame(y, d, z, x1, x2)
+  res <- suppressWarnings(estimate_pliv(df, "d", "y", "z", c("x1", "x2")))
+  res$late
+}
 }

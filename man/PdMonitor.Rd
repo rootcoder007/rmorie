@@ -1,0 +1,34 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{PdMonitor}
+\alias{PdMonitor}
+\title{PdMonitor: Parkinson\'s disease monitoring via multimodal signals}
+\usage{
+PdMonitor(eeg, emg, gait, fs, tremor_band = c(3, 7)) 
+}
+\arguments{
+\item{eeg}{Passed to \code{tremor}.}
+\item{emg}{Passed to \code{tremor}.}
+\item{gait}{Passed to \code{tremor}.}
+\item{fs}{Numeric; combined arithmetically in the body.}
+\item{tremor_band}{A vector; indexed elementwise. Defaults to \code{c(3, 7)}.}
+}
+\description{
+A step of the rangayyan_phys implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{eeg_bands}, \code{eeg_beta_fraction}, \code{emg_tremor_fraction}, \code{emg_tremor_freq_hz}, \code{gait_tremor_fraction}, \code{gait_tremor_freq_hz}, \code{emg_form_factor}, \code{emg_turns_per_second}, \code{gait_rate_hz}, \code{gait_regularity}, \code{tremor_present}, \code{tremor_band_hz}, \code{fs_hz}, \code{units}, \code{method}.
+}
+\keyword{internal}
+\examples{
+set.seed(2)
+fs <- 100
+tv <- seq(0, 10, by = 1 / fs)
+eeg <- rnorm(length(tv))
+emg <- sin(2 * pi * 5 * tv) + 0.3 * rnorm(length(tv))
+gait <- sin(2 * pi * 1 * tv) + 0.1 * sin(2 * pi * 5 * tv) +
+  0.1 * rnorm(length(tv))
+r <- PdMonitor(eeg, emg, gait, fs = fs)
+str(r, max.level = 1)
+}

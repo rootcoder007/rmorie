@@ -15,6 +15,7 @@ morie_rangayyan_coherence(x, y, fs = 1, nperseg = NULL)
 \item{fs}{Sampling rate (Hz).}
 
 \item{nperseg}{Welch segment length (default \code{min(N, 256)}).}
+
 }
 \value{
 Named list \code{freqs}, \code{morie_coherence}, \code{mean_coherence},
@@ -26,7 +27,7 @@ Welch-averaged magnitude-squared morie_coherence::
 \details{
 \deqn{C_{xy}(f) = |S_{xy}(f)|^2 / (S_{xx}(f) S_{yy}(f))}
 
-Bounded in [0, 1].
+Bounded in \[0, 1\].
 }
 \examples{
 \donttest{

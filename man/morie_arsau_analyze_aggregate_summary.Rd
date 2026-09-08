@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_aggregate_summary}
 \alias{morie_arsau_analyze_aggregate_summary}
-\title{Analysis of the ARSAU aggregate-summary-by-year file (2020-2022).}
+\title{Analysis of the ARSAU aggregate-summary-by-year file (2020-2022)}
 \usage{
 morie_arsau_analyze_aggregate_summary(
   year_range = "2020-2022",

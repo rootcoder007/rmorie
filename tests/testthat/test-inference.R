@@ -93,8 +93,8 @@ test_that("morie_proportion_ci methods produce bounds in [0, 1]", {
 test_that("morie_odds_ratio_ci returns OR > 1 when cases concentrated in exposed", {
   m <- matrix(c(40, 10, 20, 30), nrow = 2)
   r <- morie_odds_ratio_ci(m)
-  expect_named(r, c("or", "ci_lower", "ci_upper", "p_value"))
-  expect_gt(r$or, 1)
+  expect_named(r, c("odds_ratio", "ci_lower", "ci_upper", "p_value"))
+  expect_gt(r$odds_ratio, 1)
 })
 
 # ── morie_power_t_test ──────────────────────────────────────────────────────────────

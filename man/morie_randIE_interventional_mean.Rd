@@ -1,0 +1,37 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_randIE_interventional_mean}
+\alias{morie_randIE_interventional_mean}
+\title{morie_randIE_interventional_mean}
+\usage{
+morie_randIE_interventional_mean(Y, A, M, C = NULL, a = "1", a.star = "0", route = "gformula", 
+    laplace = 0) 
+}
+\arguments{
+\item{Y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{A}{Passed to \code{.labels}.}
+\item{M}{Passed to \code{.labels}.}
+\item{C}{Optional; may be \code{NULL}. Passed to \code{.labels}.}
+\item{a}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"1"}.}
+\item{a.star}{Coerced to character by the body, with \code{as.character}. Defaults to \code{"0"}.}
+\item{route}{Compared against \code{"weighting"}. Defaults to \code{"gformula"}.}
+\item{laplace}{Passed to \code{morie_randIE_mediator_distribution}. Defaults to \code{0}.}
+}
+\description{
+A step of the randIE_native implementation. Called by \code{morie_randIE_randomized_interventional_effect}. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{a}, \code{a.star}, \code{route}, \code{own.mediator.mean}, \code{n.arm}, \code{n}, \code{note}.
+}
+\keyword{internal}
+\examples{
+set.seed(1)
+n <- 200
+C <- as.character(rbinom(n, 1, 0.5))
+A <- as.character(rbinom(n, 1, plogis(0.5 * (C == "1"))))
+M <- as.character(rbinom(n, 1, plogis(0.6 * (A == "1") + 0.3 * (C == "1"))))
+Y <- 1 + 0.8 * (A == "1") + 0.5 * (M == "1") + 0.4 * (C == "1") + rnorm(n)
+im <- morie_randIE_interventional_mean(Y, A, M, C = C)
+is.list(im)
+}

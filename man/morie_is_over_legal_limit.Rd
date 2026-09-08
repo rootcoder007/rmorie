@@ -7,7 +7,7 @@
 morie_is_over_legal_limit(ebac, limit = 0.08)
 }
 \arguments{
-\item{ebac}{Numeric eBAC value (e.g. from \code{\link[=morie_calculate_ebac]{morie_calculate_ebac()}}).}
+\item{ebac}{Numeric eBAC value (e.g. from \code{morie_calculate_ebac()}).}
 
 \item{limit}{Legal threshold (default 0.08, the per-se limit in most
 Canadian and US jurisdictions).}

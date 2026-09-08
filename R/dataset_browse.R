@@ -42,12 +42,14 @@
 #' head(h$dataset_key)
 #' @export
 morie_datasets_browse <- function(keyword = NULL,
-                                    portal = NULL,
-                                    api_mode = NULL,
-                                    loader_pattern = NULL,
-                                    keyword_includes_url = FALSE,
-                                    sort_by = c("dataset_key", "source",
-                                                 "n_rows_bundled", "id")) {
+                                  portal = NULL,
+                                  api_mode = NULL,
+                                  loader_pattern = NULL,
+                                  keyword_includes_url = FALSE,
+                                  sort_by = c(
+                                    "dataset_key", "source",
+                                    "n_rows_bundled", "id"
+                                  )) {
   sort_by <- match.arg(sort_by)
   d <- morie_dataset_portal_catalog()
 
@@ -57,28 +59,38 @@ morie_datasets_browse <- function(keyword = NULL,
   if (!is.null(api_mode)) {
     keep <- rep(FALSE, nrow(d))
     for (m in api_mode) {
-      keep <- keep | grepl(m, d$api_modes, ignore.case = TRUE,
-                            fixed = FALSE)
+      keep <- keep | grepl(m, d$api_modes,
+        ignore.case = TRUE,
+        fixed = FALSE
+      )
     }
     d <- d[keep, , drop = FALSE]
   }
   if (!is.null(loader_pattern)) {
     d <- d[grepl(loader_pattern, d$loader, perl = TRUE), ,
-            drop = FALSE]
+      drop = FALSE
+    ]
   }
   if (!is.null(keyword)) {
-    haystack <- paste(d$dataset_key, d$id, d$loader,
-                       if (isTRUE(keyword_includes_url))
-                         ifelse(is.na(d$dict_url), "", d$dict_url)
-                       else "")
-    d <- d[grepl(keyword, haystack, ignore.case = TRUE,
-                  perl = TRUE), , drop = FALSE]
+    haystack <- paste(
+      d$dataset_key, d$id, d$loader,
+      if (isTRUE(keyword_includes_url)) {
+        ifelse(is.na(d$dict_url), "", d$dict_url)
+      } else {
+        ""
+      }
+    )
+    d <- d[grepl(keyword, haystack,
+      ignore.case = TRUE,
+      perl = TRUE
+    ), , drop = FALSE]
   }
 
   if (sort_by == "n_rows_bundled") {
     d <- d[order(-d$n_rows_bundled, d$dataset_key,
-                  method = "radix",
-                  na.last = TRUE), , drop = FALSE]
+      method = "radix",
+      na.last = TRUE
+    ), , drop = FALSE]
   } else {
     d <- d[order(d[[sort_by]]), , drop = FALSE]
   }
@@ -106,9 +118,11 @@ morie_datasets_summary <- function() {
       source = s,
       n_datasets = nrow(g),
       api_modes = paste(sort(unique(unlist(strsplit(g$api_modes, ",")))),
-                          collapse = ","),
+        collapse = ","
+      ),
       n_with_bundled_fixture = sum(!is.na(g$n_rows_bundled)),
-      stringsAsFactors = FALSE)
+      stringsAsFactors = FALSE
+    )
   })
   out <- do.call(rbind, rows)
   out <- out[order(-out$n_datasets), , drop = FALSE]

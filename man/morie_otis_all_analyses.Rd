@@ -27,14 +27,16 @@ Calls \code{morie_otis_rplace} / \code{morie_otis_astcmb} /
 returns a named list of \code{morie_otis_result} objects. If
 \code{out_dir} is supplied, each result is also written to disk as a
 \code{.txt} (\code{format()}) and a \code{.json}
-(\code{jsonlite::toJSON} when available, else \code{dput}).
+(\code{.s03json_toJSON} when available, else \code{dput}).
 }
 \details{
 CRAN-safe: with \code{out_dir = NULL} (default) no files are written.
 }
 \examples{
-\donttest{
+if (requireNamespace("readr", quietly = TRUE)) {
+  \donttest{
   df <- morie_otis_load()
-  res <- morie_otis_all_analyses(df, year = 2024)
+    res <- morie_otis_all_analyses(df, year = 2024)
+  }
 }
 }

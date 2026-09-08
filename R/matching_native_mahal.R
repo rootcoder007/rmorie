@@ -2,7 +2,7 @@
 #
 # Native Mahalanobis matching engine (feat/native-specializations,
 # module 2). Rubin (1980): covariance estimated on the CONTROL pool,
-# distance computed after Cholesky whitening — Mahalanobis distance in
+# distance computed after Cholesky whitening -- Mahalanobis distance in
 # the original space equals Euclidean distance in whitened space, so
 # the greedy scan kernel needs no matrix solves per pair. Optional
 # exact-matching strata and a caliper in Mahalanobis-distance units.
@@ -50,7 +50,9 @@
   strata <- if (is.null(exact)) rep("", nrow(df)) else
     do.call(paste, c(df[, exact, drop = FALSE], sep = "\r"))
 
-  ti_all <- integer(0); ci_all <- integer(0); d_all <- numeric(0)
+  ti_all <- integer(0)
+  ci_all <- integer(0)
+  d_all <- numeric(0)
   for (s in unique(strata[idx_t])) {
     st <- idx_t[strata[idx_t] == s]
     sc <- idx_c[strata[idx_c] == s]

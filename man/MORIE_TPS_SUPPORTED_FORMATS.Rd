@@ -2,10 +2,8 @@
 % Please edit documentation in R/tps_io.R
 \name{MORIE_TPS_SUPPORTED_FORMATS}
 \alias{MORIE_TPS_SUPPORTED_FORMATS}
-\title{Format names that \code{morie_tps_load()} knows how to dispatch.}
-\usage{
-MORIE_TPS_SUPPORTED_FORMATS
-}
+\title{Format names that \code{morie_tps_load()} knows how to dispatch}
+
 \description{
-Format names that \code{morie_tps_load()} knows how to dispatch.
+Format names that \code{morie_tps_load()} knows how to dispatch
 }

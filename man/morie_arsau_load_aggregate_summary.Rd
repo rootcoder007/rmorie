@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_load_aggregate_summary}
 \alias{morie_arsau_load_aggregate_summary}
-\title{Load ARSAU aggregate-summary-by-year CSV (2020-2022 only).}
+\title{Load ARSAU aggregate-summary-by-year CSV (2020-2022 only)}
 \usage{
 morie_arsau_load_aggregate_summary(
   year_range = "2020-2022",
@@ -21,7 +21,7 @@ morie_arsau_load_aggregate_summary(
 An object of class \code{"morie_arsau_result"}.
 }
 \description{
-Load ARSAU aggregate-summary-by-year CSV (2020-2022 only).
+Load ARSAU aggregate-summary-by-year CSV (2020-2022 only)
 }
 \examples{
 \donttest{

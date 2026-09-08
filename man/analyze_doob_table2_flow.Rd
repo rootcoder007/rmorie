@@ -2,7 +2,7 @@
 % Please edit documentation in R/doob_trends.R
 \name{analyze_doob_table2_flow}
 \alias{analyze_doob_table2_flow}
-\title{Analyse Doob Affidavit Table 2 — prisoner flow}
+\title{Analyse Doob Affidavit Table 2 -- prisoner flow}
 \usage{
 analyze_doob_table2_flow()
 }

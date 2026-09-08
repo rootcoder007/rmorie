@@ -40,16 +40,18 @@
     wc <- tan(pi * W[1] / 2)
     if (type == "low") {
       p_a <- wc * p_proto
-      z_a <- complex(0)                      # zeros at infinity
-      gain_pt <- 1 + 0i                      # DC (z = 1)
+      z_a <- complex(0) # zeros at infinity
+      gain_pt <- 1 + 0i # DC (z = 1)
     } else {
       p_a <- wc / p_proto
-      z_a <- rep(0 + 0i, n)                  # zeros at s = 0
-      gain_pt <- -1 + 0i                     # Nyquist (z = -1)
+      z_a <- rep(0 + 0i, n) # zeros at s = 0
+      gain_pt <- -1 + 0i # Nyquist (z = -1)
     }
   } else if (type == "pass") {
-    w1 <- tan(pi * W[1] / 2); w2 <- tan(pi * W[2] / 2)
-    bw <- w2 - w1; w0 <- sqrt(w1 * w2)
+    w1 <- tan(pi * W[1] / 2)
+    w2 <- tan(pi * W[2] / 2)
+    bw <- w2 - w1
+    w0 <- sqrt(w1 * w2)
     # s -> (s^2 + w0^2) / (bw * s)
     p_a <- c()
     for (p in p_proto) {
@@ -57,11 +59,13 @@
       p_a <- c(p_a, bw * p / 2 + disc, bw * p / 2 - disc)
     }
     z_a <- rep(0 + 0i, n)
-    gain_pt <- exp(1i * 2 * atan(w0))        # z at center frequency
+    gain_pt <- exp(1i * 2 * atan(w0)) # z at center frequency
   } else {
     # band-stop: s -> (bw * s) / (s^2 + w0^2)
-    w1 <- tan(pi * W[1] / 2); w2 <- tan(pi * W[2] / 2)
-    bw <- w2 - w1; w0 <- sqrt(w1 * w2)
+    w1 <- tan(pi * W[1] / 2)
+    w2 <- tan(pi * W[2] / 2)
+    bw <- w2 - w1
+    w0 <- sqrt(w1 * w2)
     p_a <- c()
     for (p in p_proto) {
       q <- bw / (2 * p)
@@ -69,7 +73,7 @@
       p_a <- c(p_a, q + disc, q - disc)
     }
     z_a <- rep(c(1i * w0, -1i * w0), n)
-    gain_pt <- 1 + 0i                        # DC passes in a stopband
+    gain_pt <- 1 + 0i # DC passes in a stopband
   }
   # bilinear transform s = (z - 1)/(z + 1)
   p_d <- (1 + p_a) / (1 - p_a)
@@ -89,8 +93,12 @@
 #' Internal helper: direct-form II transposed IIR/FIR filter
 #' @noRd
 .morie_dsp_filter <- function(b, a, x) {
-  b <- as.numeric(b); a <- as.numeric(a)
-  if (a[1] != 1) { b <- b / a[1]; a <- a / a[1] }
+  b <- as.numeric(b)
+  a <- as.numeric(a)
+  if (a[1] != 1) {
+    b <- b / a[1]
+    a <- a / a[1]
+  }
   if (length(a) == 1L) {
     # pure FIR: convolution
     y <- stats::convolve(x, rev(b), type = "open")[seq_along(x)]
@@ -99,11 +107,14 @@
   # a(L) y = b(L) x  ==  y = AR-recursive(MA-convolved x): both passes
   # run in C via stats::filter. The convolution's leading NAs are the
   # partial sums with zero-padded history.
-  u <- as.numeric(stats::filter(x, b, method = "convolution",
-                                sides = 1))
+  u <- as.numeric(stats::filter(x, b,
+    method = "convolution",
+    sides = 1
+  ))
   lead <- which(is.na(u))
-  u[lead] <- vapply(lead, function(i)
-    sum(b[seq_len(i)] * x[i:1]), numeric(1))
+  u[lead] <- vapply(lead, function(i) {
+    sum(b[seq_len(i)] * x[i:1])
+  }, numeric(1))
   y <- stats::filter(u, -a[-1L], method = "recursive")
   as.numeric(y)
 }
@@ -119,8 +130,10 @@
   pad <- min(3L * (nfilt - 1L), n - 1L)
   if (pad > 0) {
     # odd extension at both ends
-    xx <- c(2 * x[1] - x[seq(pad + 1, 2, by = -1)], x,
-            2 * x[n] - x[seq(n - 1, n - pad, by = -1)])
+    xx <- c(
+      2 * x[1] - x[seq(pad + 1, 2, by = -1)], x,
+      2 * x[n] - x[seq(n - 1, n - pad, by = -1)]
+    )
   } else {
     xx <- x
   }
@@ -144,7 +157,8 @@
     hann = 0.5 - 0.5 * cos(2 * pi * k),
     blackman = 0.42 - 0.5 * cos(2 * pi * k) + 0.08 * cos(4 * pi * k),
     rectangular = rep(1, n),
-    stop("Unknown window: ", name))
+    stop("Unknown window: ", name)
+  )
 }
 
 #' Internal helper: windowed-sinc FIR design (signal::fir1 convention)
@@ -160,14 +174,20 @@
   sinc <- function(fc) ifelse(m == 0, fc, sin(pi * fc * m) / (pi * m))
   h <- switch(type,
     low = sinc(W[1]),
-    high = { d <- ifelse(m == 0, 1, 0); d - sinc(W[1]) },
-    pass = sinc(W[2]) - sinc(W[1]))
+    high = {
+      d <- ifelse(m == 0, 1, 0)
+      d - sinc(W[1])
+    },
+    pass = sinc(W[2]) - sinc(W[1])
+  )
   w <- if (is.function(window)) {
     window
   } else if (is.numeric(window)) {
     if (length(window) != n + 1L) {
       stop("numeric window must have length order + 1 (", n + 1L,
-           "), got ", length(window), call. = FALSE)
+        "), got ", length(window),
+        call. = FALSE
+      )
     }
     window
   } else {
@@ -211,11 +231,15 @@
 .morie_dsp_findpeaks <- function(x, min_height = -Inf,
                                  min_distance = 1L) {
   n <- length(x)
-  if (n < 3L) return(integer(0))
+  if (n < 3L) {
+    return(integer(0))
+  }
   cand <- which(x[2:(n - 1)] > x[1:(n - 2)] &
-                  x[2:(n - 1)] >= x[3:n]) + 1L
+    x[2:(n - 1)] >= x[3:n]) + 1L
   cand <- cand[x[cand] >= min_height]
-  if (!length(cand) || min_distance <= 1L) return(cand)
+  if (!length(cand) || min_distance <= 1L) {
+    return(cand)
+  }
   cand <- cand[order(x[cand], decreasing = TRUE)]
   taken <- integer(0)
   for (p in cand) {
@@ -251,8 +275,10 @@
   }
   S <- acc / (length(starts) * U * fs)
   n_out <- floor(nfft / 2) + 1L
-  list(freq = (seq_len(n_out) - 1L) * fs / nfft,
-       spec = S[seq_len(n_out)])
+  list(
+    freq = (seq_len(n_out) - 1L) * fs / nfft,
+    spec = S[seq_len(n_out)]
+  )
 }
 
 #' Internal helper: magnitude-squared coherence via Welch
@@ -274,22 +300,31 @@
 .morie_dsp_wt_filter <- function(name) {
   g <- switch(tolower(name),
     haar = c(0.7071067811865475, 0.7071067811865475),
-    d4 = c(0.4829629131445341, 0.8365163037378079,
-           0.2241438680420134, -0.1294095225512604),
-    d6 = c(0.3326705529500825, 0.8068915093110924,
-           0.4598775021184914, -0.1350110200102546,
-           -0.0854412738820267, 0.0352262918857095),
-    d8 = c(0.2303778133088964, 0.7148465705529154,
-           0.6308807679298587, -0.0279837694168599,
-           -0.1870348117190931, 0.0308413818355607,
-           0.0328830116668852, -0.0105974017850690),
-    la8 = c(-0.07576571478935668, -0.02963552764596039,
-            0.49761866763256290, 0.80373875180538600,
-            0.29785779560560505, -0.09921954357695636,
-            -0.01260396726226383, 0.03222310060407815),
-    stop("Unknown wavelet filter: ", name))
+    d4 = c(
+      0.4829629131445341, 0.8365163037378079,
+      0.2241438680420134, -0.1294095225512604
+    ),
+    d6 = c(
+      0.3326705529500825, 0.8068915093110924,
+      0.4598775021184914, -0.1350110200102546,
+      -0.0854412738820267, 0.0352262918857095
+    ),
+    d8 = c(
+      0.2303778133088964, 0.7148465705529154,
+      0.6308807679298587, -0.0279837694168599,
+      -0.1870348117190931, 0.0308413818355607,
+      0.0328830116668852, -0.0105974017850690
+    ),
+    la8 = c(
+      -0.07576571478935668, -0.02963552764596039,
+      0.49761866763256290, 0.80373875180538600,
+      0.29785779560560505, -0.09921954357695636,
+      -0.01260396726226383, 0.03222310060407815
+    ),
+    stop("Unknown wavelet filter: ", name)
+  )
   L <- length(g)
-  h <- rev(g) * (-1)^(seq_len(L) - 1)   # QMF wavelet filter
+  h <- rev(g) * (-1)^(seq_len(L) - 1) # QMF wavelet filter
   list(g = g, h = h)
 }
 
@@ -299,7 +334,8 @@
   N <- length(v)
   L <- length(g)
   half <- N %/% 2
-  W <- numeric(half); V <- numeric(half)
+  W <- numeric(half)
+  V <- numeric(half)
   tt <- seq_len(half)
   for (l in seq_len(L)) {
     idx <- (2L * tt - l) %% N + 1L
@@ -321,7 +357,7 @@
   v <- numeric(N)
   tt <- seq_len(half)
   for (l in seq_len(L)) {
-    j <- (2L * tt - l) %% N + 1L   # distinct j per t at fixed l
+    j <- (2L * tt - l) %% N + 1L # distinct j per t at fixed l
     v[j] <- v[j] + h[l] * W + g[l] * V
   }
   v
@@ -374,7 +410,7 @@
   for (i in seq_len(m)) {
     y[i] <- sum(H[i, ] * x[seq_len(window_length)])
     y[n - i + 1L] <- sum(H[window_length - i + 1L, ]
-                         * x[(n - window_length + 1L):n])
+    * x[(n - window_length + 1L):n])
   }
   y
 }

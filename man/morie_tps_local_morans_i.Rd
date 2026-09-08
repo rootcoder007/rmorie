@@ -26,6 +26,7 @@ morie_tps_local_morans_i(
 \item{top_n}{Number of top-Ii rows to surface in the result table.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
+
 }
 \value{
 A named list with \code{table} (data.frame of per-hood

@@ -22,7 +22,7 @@ fzsrv <- function(x, t = NULL, h = NULL) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   F_hat <- mean(stats::pnorm((t - x) / h))
   S_hat <- 1 - F_hat
   se <- sqrt(S_hat * (1 - S_hat) / n)

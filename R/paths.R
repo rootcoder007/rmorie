@@ -9,6 +9,15 @@
   x
 }
 
+#' is_absolute_path
+#'
+#' A step of the paths implementation. Called by \code{morie_audit_public_outputs}.
+#' See the file header for the source the module follows.
+#' it follows.
+#'
+#' @param path Character; passed to \code{grepl}.
+#' @return The value of \code{grepl}.
+#' @export
 is_absolute_path <- function(path) {
   grepl("^(/|[A-Za-z]:[/\\\\])", path)
 }

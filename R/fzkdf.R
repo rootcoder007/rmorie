@@ -3,10 +3,12 @@
 #' Fauzi: KDFE bias and variance properties (Ch 2)
 #'
 #' Kernel distribution-function estimator (KDFE)
-#' \eqn{\hat F_h(t) = n^{-1} \sum_i \Phi((t-X_i)/h)}{hat F_h(t) = n^-1 sum_i Phi((t-X_i)/h)} and its asymptotic
+#' \eqn{\hat F_h(t) = n^{-1} \sum_i \Phi((t-X_i)/h)}{hat F_h(t) = n^-1 sum_i
+#' Phi((t-X_i)/h)} and its asymptotic
 #' bias and variance:
 #' \deqn{\mathrm{Bias} = (h^2/2)\mu_2(K) f'(t),
-#'       \quad \mathrm{Var}=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}{Bias = (h^2/2)mu_2(K) f'(t), Var=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}
+#'       \quad \mathrm{Var}=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}{Bias = (h^2/2)mu_2(K)
+#' f'(t), Var=F(t)(1-F(t))/n - 2 h r(K) f(t)/n.}
 #' For the Gaussian kernel \eqn{\mu_2=1, r(K)=1/(2\sqrt\pi)}{mu_2=1, r(K)=1/(2sqrtpi)}.
 #'
 #' @param x Numeric vector.
@@ -27,7 +29,7 @@ fzkdf <- function(x, t = NULL, h = NULL) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   mu2 <- 1.0
   rK <- 1 / (2 * sqrt(pi))
   z <- (t - x) / h
@@ -43,8 +45,12 @@ fzkdf <- function(x, t = NULL, h = NULL) {
   )
 }
 
-# `.morie_silverman_h` moved to R/_helpers_fauzi.R so every fz*.R caller can
-# rely on it being defined regardless of source order.
+# The bandwidth helpers live in R/aaa_helpers_fauzi.R so every fz*.R
+# caller can rely on them being defined regardless of source order.
+# This module smooths with the INTEGRATED kernel, so it takes
+# `.morie_kdfe_h` (4^(1/3) sigma n^(-1/3)) rather than
+# `.morie_silverman_h` (the n^(-1/5) density rule) -- see the
+# derivation from (2.3)-(2.4) in that file.
 
 # CANONICAL TEST
 # set.seed(0); x <- rnorm(500)

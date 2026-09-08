@@ -20,7 +20,6 @@
 #' RichResult-shaped list from \code{otis_all_analyze.R}).
 #'
 #' Cross-year invariants
-#' ---------------------
 #' \itemize{
 #'   \item OTIS \code{UniqueIndividual_ID} is reassigned every fiscal
 #'     year (see \code{variable_taxonomy.R}); the overlay therefore

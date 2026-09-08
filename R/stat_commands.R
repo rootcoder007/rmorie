@@ -13,7 +13,6 @@
 #' packages.
 #'
 #' Functions
-#' ---------
 #' \itemize{
 #'   \item \code{\link{stat_command}}: constructor for a single command.
 #'   \item \code{\link{register_stat_command}}: add an entry to the
@@ -421,6 +420,10 @@ clear_stat_commands <- function() {
 # Print method
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_stat_command} objects
+#'
+#' @param x A \code{morie_stat_command} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' cmd <- stat_command("demo_echo", "misc", "demo_echo",
@@ -517,6 +520,9 @@ print.morie_stat_command <- function(x, ...) {
 #' @return Integer count of newly registered commands, invisibly.
 #' @keywords internal
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- .morie_auto_register_stat_commands(); TRUE
 .morie_auto_register_stat_commands <- function() {
   exports <- tryCatch(getNamespaceExports("rmorie"),
                       error = function(e) character(0))

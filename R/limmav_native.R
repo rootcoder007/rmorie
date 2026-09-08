@@ -1,0 +1,803 @@
+# voom: precision weights for RNA-seq log-counts.
+#
+# Law, C. W., Chen, Y., Shi, W., & Smyth, G. K. (2014) "voom: precision weights
+# unlock linear model analysis tools for RNA-seq read counts", *Genome Biology*
+# 15:R29.
+#
+# Counts are heteroscedastic, so normal linear models do not apply to them
+# directly. voom's move is to transform once and then *carry the variance
+# structure along as weights*, which lets the whole normal-theory toolkit run
+# on RNA-seq.
+#
+# The log-counts per million for count r_gi in a library of size R_i is
+#
+#     y_gi = log2((r_gi + 0.5)/(R_i + 1.0) * 1e6),
+#
+# where "the counts are offset away from zero by 0.5 to avoid taking the log of
+# zero, and to reduce the variability of log-cpm for low expression genes. The
+# library size is offset by 1 to ensure that (r_gi+0.5)/(R_i+1) is strictly
+# less than 1 as well as strictly greater than zero."
+#
+# Then, in the paper's own order:
+#
+# 1. fit the linear model to y_g by ordinary least squares, giving
+#    beta_g, fitted values mu_gi and residual standard deviations s_g;
+# 2. convert each gene's average log-cpm to an average log-count,
+#    r_tilde = ybar_g + log2(R_tilde) - log2(1e6), with R_tilde "the
+#    geometric mean of the library sizes plus one";
+# 3. fit a LOWESS curve to s_g^{1/2} against r_tilde -- "square-root
+#    standard deviations are used because they are roughly symmetrically
+#    distributed" -- and read it as a piecewise linear function lo() by
+#    interpolating between the ordered r_tilde;
+# 4. convert each *fitted* log-cpm to a fitted log-count,
+#    lambda_gi = mu_gi + log2(R_i + 1) - log2(1e6);
+# 5. the precision weight is w_gi = lo(lambda_gi)^{-4} -- the inverse
+#    *variance*, since lo predicts a square-root standard deviation.
+#
+# The weights are per observation, not per gene, which is the point:
+# "different samples may be sequenced to different depths, so different
+# count sizes may be quite different even if the cpm values are the same".
+#
+# What follows the weighting is limma's own pipeline:
+#
+#     Smyth, G. K. (2004) "Linear models and empirical Bayes methods for
+#     assessing differential expression in microarray experiments",
+#     *Statistical Applications in Genetics and Molecular Biology* 3(1),
+#     Article 3.
+#
+# The gene-wise variances are moderated toward a prior fitted across all
+# genes. With prior information equivalent to an estimator s_0^2 on d_0
+# degrees of freedom, the posterior mean of sigma_g^{-2} gives
+#
+#     s_tilde_g^2 = (d_0 s_0^2 + d_g s_g^2) / (d_0 + d_g),
+#     t_tilde_gj = beta_gj / (s_tilde_g sqrt(v_gj)),
+#
+# and the moderated statistic is t-distributed on d_g + d_0 degrees of
+# freedom. The two ends of the spectrum are worth stating because they
+# bracket what moderation does: "the moderated t reduces to the ordinary
+# t-statistic if d_0 = 0 and at the opposite end of the spectrum is
+# proportional to the coefficient beta_gj if d_0 = infinity."
+#
+# The hyperparameters are estimated by the paper's closed forms, matching
+# the first two moments of log s_g^2. With
+# e_g = log s_g^2 - psi(d_g/2) + log(d_g/2),
+#
+#     psi'(d_0/2) = mean{(e_g - ebar)^2 * G/(G-1) - psi'(d_g/2)},
+#     s_0^2 = exp{ebar + psi(d_0/2) - log(d_0/2)},
+#
+# solved for d_0 by the monotone Newton iteration of the paper's appendix.
+# When that mean is non-positive "there is no evidence that the underlying
+# variances vary between genes", so d_0 = infinity and s_0^2 = exp(ebar) --
+# every gene gets the same variance. moderate=False returns the ordinary
+# weighted-least-squares t instead.
+
+#' .limmav_digamma
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x A vector; its length is taken.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .limmav_digamma(x = x)
+#' res
+.limmav_digamma <- function(x) {
+  x <- as.numeric(x)
+  if (length(x) > 1L) {
+    return(vapply(x, .limmav_digamma, numeric(1)))
+  }
+  if (x <= 0) stop("limmav: digamma needs x > 0")
+  tot <- 0.0
+  while (x < 10.0) {
+    tot <- tot - 1.0 / x
+    x <- x + 1.0
+  }
+  inv2 <- 1.0 / (x * x)
+  tot + log(x) - 0.5 / x - inv2 * (1.0 / 12.0 - inv2 * (1.0 / 120.0 - inv2 / 252.0))
+}
+
+#' .limmav_trigamma
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+.limmav_trigamma <- function(x) {
+  x <- as.numeric(x)
+  if (x <= 0) stop("limmav: trigamma needs x > 0")
+  tot <- 0.0
+  while (x < 20.0) {
+    tot <- tot + 1.0 / (x * x)
+    x <- x + 1.0
+  }
+  inv <- 1.0 / x
+  inv2 <- inv * inv
+  tot + inv * (1.0 + 0.5 * inv + inv2 * (
+    1.0 / 6.0 + inv2 * (-1.0 / 30.0 + inv2 * (1.0 / 42.0 - inv2 / 30.0))))
+}
+
+#' .limmav_tetragamma
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_trigamma_inverse}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+.limmav_tetragamma <- function(x) {
+  x <- as.numeric(x)
+  tot <- 0.0
+  while (x < 20.0) {
+    tot <- tot - 2.0 / (x^3)
+    x <- x + 1.0
+  }
+  inv <- 1.0 / x
+  inv2 <- inv * inv
+  tot - inv2 * (1.0 + inv * (1.0 + inv2 * (
+    1.0 / 6.0 - inv2 * (1.0 / 6.0 - 3.0 * inv2 / 10.0))))
+}
+
+#' .limmav_trigamma_inverse
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_ebayes}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; passed to \code{sqrt}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60}.
+#' @return The value of \code{y}, as built in the body.
+#' @export
+.limmav_trigamma_inverse <- function(x, tol = 1e-8, max_iter = 60) {
+  x <- as.numeric(x)
+  if (x <= 0) stop("limmav: trigamma_inverse needs x > 0")
+  if (x > 1e7) {
+    return(1.0 / sqrt(x))
+  }
+  if (x < 1e-6) {
+    return(1.0 / x)
+  }
+  y <- 0.5 + 1.0 / x
+  for (i in seq_len(max_iter)) {
+    tri <- .limmav_trigamma(y)
+    tet <- .limmav_tetragamma(y)
+    if (tet == 0) break
+    d <- tri * (1.0 - tri / x) / tet
+    y <- y + d
+    if (-d / y < tol) break
+  }
+  y
+}
+
+#' .limmav_erf
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; passed to \code{abs}.
+#' @return A numeric value.
+#' @export
+.limmav_erf <- function(x) {
+  a1 <- 0.254829592
+  a2 <- -0.284496736
+  a3 <- 1.421413741
+  a4 <- -1.453152027
+  a5 <- 1.061405429
+  pp <- 0.3275911
+  sign <- if (x < 0) -1 else 1
+  ax <- abs(x)
+  t <- 1.0 / (1.0 + pp * ax)
+  y <- 1.0 - (((((a5 * t + a4) * t) + a3) * t + a2) * t + a1) * t * exp(-ax * ax)
+  sign * y
+}
+
+#' .limmav_benjamini_hochberg
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param p A vector; its length is taken and its elements indexed.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+#' @examples
+#' res <- .limmav_benjamini_hochberg(p = 0.5)
+#' res
+.limmav_benjamini_hochberg <- function(p) {
+  p <- as.numeric(p)
+  n <- length(p)
+  if (n == 0) {
+    return(numeric(0))
+  }
+  ord <- order(p)
+  ranked <- p[ord]
+  adj <- numeric(n)
+  prev <- 1.0
+  for (i in n:1) {
+    val <- ranked[i] * n / i
+    if (val < prev) prev <- val
+    adj[i] <- prev
+  }
+  adj <- pmin(adj, 1.0)
+  out <- numeric(n)
+  out[ord] <- adj
+  out
+}
+
+#' .limmav_ebayes
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param df A vector; its length is taken.
+#' @param robust_floor Passed to \code{>}. Defaults to \code{1e-12}.
+#' @return A list with \code{d0}, \code{s0_sq}, \code{s2_post}, \code{df_total},
+#' \code{no_gene_variation}.
+#' @export
+.limmav_ebayes <- function(sigma2, df, robust_floor = 1e-12) {
+  s2 <- as.numeric(sigma2)
+  G <- length(s2)
+  if (G == 0) stop("limmav: no variances to moderate")
+  if (length(df) == 1) {
+    dg <- rep(as.numeric(df), G)
+  } else {
+    dg <- as.numeric(df)
+  }
+  if (length(dg) != G) stop("limmav: one degrees-of-freedom value per gene")
+  use <- which(s2 > robust_floor & dg > 0)
+  if (length(use) == 0) {
+    stop("limmav: every gene has zero variance or zero degrees of freedom")
+  }
+  e <- log(s2[use]) - .limmav_digamma(dg[use] / 2.0) + log(dg[use] / 2.0)
+  ebar <- mean(e)
+  n <- length(e)
+  target <- if (n > 1) var(e) else 0.0
+  target <- target - mean(sapply(dg[use] / 2.0, .limmav_trigamma))
+  if (target <= 0) {
+    d0 <- Inf
+    s0_sq <- exp(ebar)
+    post <- rep(s0_sq, G)
+    return(list(
+      d0 = d0, s0_sq = s0_sq, s2_post = post,
+      df_total = rep(Inf, G), no_gene_variation = TRUE
+    ))
+  }
+  d0 <- 2.0 * .limmav_trigamma_inverse(target)
+  s0_sq <- exp(ebar + .limmav_digamma(d0 / 2.0) - log(d0 / 2.0))
+  post <- numeric(G)
+  for (g in seq_len(G)) {
+    if (dg[g] > 0) {
+      post[g] <- (d0 * s0_sq + dg[g] * s2[g]) / (d0 + dg[g])
+    } else {
+      post[g] <- s0_sq
+    }
+  }
+  list(
+    d0 = d0, s0_sq = s0_sq, s2_post = post,
+    df_total = dg + d0, no_gene_variation = FALSE
+  )
+}
+
+#' .limmav_ols
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights},
+#' \code{.limmav_weighted_lm}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param X A matrix; passed to \code{ncol}.
+#' @param y A matrix; passed to \code{crossprod}.
+#' @param w Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @return A list with \code{beta}, \code{fit}, \code{sd}, \code{inv}, \code{df}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .limmav_ols(X = x, y = y)
+#' res
+.limmav_ols <- function(X, y, w = NULL) {
+  X <- as.matrix(X)
+  storage.mode(X) <- "double"
+  y <- as.numeric(y)
+  n <- length(y)
+  p <- ncol(X)
+  if (is.null(w)) {
+    ww <- rep(1.0, n)
+  } else {
+    ww <- as.numeric(w)
+  }
+  WX <- ww * X
+  M <- crossprod(WX, X)
+  v <- as.numeric(crossprod(WX, y))
+  inv <- tryCatch(solve(M), error = function(e) NULL)
+  if (is.null(inv)) stop("limmav: the design matrix is singular")
+  beta <- as.numeric(solve(M, v))
+  fit <- as.numeric(X %*% beta)
+  df <- n - p
+  if (df <= 0) stop("limmav: no residual degrees of freedom")
+  rss <- sum(ww * (y - fit)^2)
+  list(beta = beta, fit = fit, sd = sqrt(rss / df), inv = inv, df = df)
+}
+
+#' .limmav_log_cpm
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param counts A matrix; passed to \code{nrow}.
+#' @param lib_sizes Optional; may be \code{NULL}. Coerced to numeric by the body, with
+#' \code{as.numeric}.
+#' @param prior_count Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param lib_offset Numeric; combined arithmetically in the body. Defaults to \code{1}.
+#' @return A list with \code{y}, \code{R}.
+#' @export
+.limmav_log_cpm <- function(counts, lib_sizes = NULL, prior_count = 0.5,
+                            lib_offset = 1.0) {
+  counts <- as.matrix(counts)
+  storage.mode(counts) <- "double"
+  if (nrow(counts) == 0 || ncol(counts) == 0) {
+    stop("limmav: counts must be a non-empty gene x sample matrix")
+  }
+  m <- ncol(counts)
+  if (any(counts < 0)) stop("limmav: counts must be non-negative")
+  if (is.null(lib_sizes)) {
+    R <- colSums(counts)
+  } else {
+    R <- as.numeric(lib_sizes)
+    if (length(R) != m) stop("limmav: one library size per sample")
+  }
+  if (any(R <= 0)) stop("limmav: library sizes must be positive")
+  y <- log2(counts + prior_count) -
+    matrix(log2(R + lib_offset),
+      nrow = nrow(counts),
+      ncol = m, byrow = TRUE
+    ) + log2(1e6)
+  list(y = y, R = R)
+}
+
+#' .limmav_lowess
+#'
+#' A step of the limmav_native implementation. Called by \code{.limmav_voom_weights}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param span Numeric; combined arithmetically in the body. Defaults to \code{0.5}.
+#' @param iterations Coerced to integer by the body, with \code{as.integer}. Defaults to \code{3}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .limmav_lowess(x = x, y = y)
+#' res
+.limmav_lowess <- function(x, y, span = 0.5, iterations = 3) {
+  x <- as.numeric(x)
+  y <- as.numeric(y)
+  n <- length(x)
+  if (n != length(y)) stop("limmav: x and y must have the same length")
+  if (n == 0) stop("limmav: nothing to smooth")
+  if (span <= 0 || span > 1) stop("limmav: span must lie in (0, 1]")
+  ord <- order(x)
+  xs <- x[ord]
+  ys <- y[ord]
+  q <- max(2, ceiling(span * n))
+  rw <- rep(1.0, n)
+  fitted <- ys
+  iterations <- as.integer(iterations)
+  for (it in 0:iterations) {
+    for (i in seq_len(n)) {
+      lo <- max(1, min(i - q %/% 2, n - q + 1))
+      hi <- lo + q - 1
+      d <- max(abs(xs[i] - xs[lo]), abs(xs[hi] - xs[i]), 1e-12)
+      sw <- 0.0
+      sx <- 0.0
+      sy <- 0.0
+      sxx <- 0.0
+      sxy <- 0.0
+      for (k in lo:hi) {
+        u <- abs(xs[k] - xs[i]) / d
+        wt <- if (u < 1.0) (1.0 - u^3)^3 else 0.0
+        wt <- wt * rw[k]
+        if (wt <= 0) next
+        sw <- sw + wt
+        sx <- sx + wt * xs[k]
+        sy <- sy + wt * ys[k]
+        sxx <- sxx + wt * xs[k] * xs[k]
+        sxy <- sxy + wt * xs[k] * ys[k]
+      }
+      if (sw <= 0) {
+        fitted[i] <- ys[i]
+      } else {
+        den <- sw * sxx - sx * sx
+        if (abs(den) < 1e-12) {
+          fitted[i] <- sy / sw
+        } else {
+          b <- (sw * sxy - sx * sy) / den
+          a <- (sy - b * sx) / sw
+          fitted[i] <- a + b * xs[i]
+        }
+      }
+    }
+    if (it == iterations) break
+    res <- abs(ys - fitted)
+    s <- sort(res)[n %/% 2 + 1]
+    if (s <= 0) break
+    rw <- (1 - pmin(res / (6 * s), 1)^2)^2
+  }
+  out <- numeric(n)
+  for (pos in seq_along(ord)) {
+    i <- ord[pos]
+    out[i] <- fitted[pos]
+  }
+  out
+}
+
+#' .limmav_voom_weights
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param counts Passed to \code{.limmav_log_cpm}.
+#' @param design A matrix; passed to \code{as.matrix}.
+#' @param lib_sizes Passed to \code{.limmav_log_cpm}.
+#' @param span Passed to \code{.limmav_lowess}. Defaults to \code{0.5}.
+#' @return A list with \code{log_cpm}, \code{weights}, \code{mean_log_count},
+#' \code{sqrt_sd}, \code{trend_x}, \code{trend_y}, \code{lib_sizes}, \code{lo}.
+#' @export
+.limmav_voom_weights <- function(counts, design, lib_sizes = NULL, span = 0.5) {
+  lc <- .limmav_log_cpm(counts, lib_sizes)
+  y <- lc$y
+  R <- lc$R
+  G <- nrow(y)
+  m <- ncol(y)
+  X <- as.matrix(design)
+  storage.mode(X) <- "double"
+  if (nrow(X) != m) {
+    stop(sprintf(
+      "limmav: the design has %d rows but there are %d samples",
+      nrow(X), m
+    ))
+  }
+  fitted <- matrix(0, G, m)
+  sds <- numeric(G)
+  means <- numeric(G)
+  for (g in seq_len(G)) {
+    ols <- .limmav_ols(X, y[g, ])
+    fitted[g, ] <- ols$fit
+    sds[g] <- ols$sd
+    means[g] <- mean(y[g, ])
+  }
+  logR <- mean(log2(R + 1.0))
+  r_tilde <- means + logR - log2(1e6)
+  sqrt_sd <- sqrt(sds)
+  smooth <- .limmav_lowess(r_tilde, sqrt_sd, span = span)
+  ord <- order(r_tilde)
+  kx <- r_tilde[ord]
+  ky <- smooth[ord]
+
+  lo <- function(t) {
+    if (t <= kx[1]) {
+      return(ky[1])
+    }
+    if (t >= kx[length(kx)]) {
+      return(ky[length(kx)])
+    }
+    lo_i <- 1
+    hi_i <- length(kx)
+    while (hi_i - lo_i > 1) {
+      mid <- (lo_i + hi_i) %/% 2
+      if (kx[mid] <= t) {
+        lo_i <- mid
+      } else {
+        hi_i <- mid
+      }
+    }
+    x0 <- kx[lo_i]
+    x1 <- kx[hi_i]
+    if (x1 - x0 < 1e-15) {
+      return(ky[lo_i])
+    }
+    f <- (t - x0) / (x1 - x0)
+    ky[lo_i] + f * (ky[hi_i] - ky[lo_i])
+  }
+
+  W <- matrix(0, G, m)
+  for (g in seq_len(G)) {
+    for (i in seq_len(m)) {
+      lam <- fitted[g, i] + log2(R[i] + 1.0) - log2(1e6)
+      s <- lo(lam)
+      W[g, i] <- if (s > 0) 1.0 / (s^4) else 0.0
+    }
+  }
+  list(
+    log_cpm = y, weights = W, mean_log_count = r_tilde,
+    sqrt_sd = sqrt_sd, trend_x = kx, trend_y = ky,
+    lib_sizes = R, lo = lo
+  )
+}
+
+#' .limmav_weighted_lm
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y Passed to \code{.limmav_ols}.
+#' @param X Passed to \code{.limmav_ols}.
+#' @param w Passed to \code{.limmav_ols}.
+#' @param contrast Coerced to numeric by the body, with \code{as.numeric}.
+#' @return A list with \code{est}, \code{se}, \code{t}, \code{df}, \code{sd}, \code{v_un}.
+#' @export
+.limmav_weighted_lm <- function(y, X, w, contrast) {
+  ols <- .limmav_ols(X, y, w)
+  beta <- ols$beta
+  inv <- ols$inv
+  sd <- ols$sd
+  df <- ols$df
+  p <- length(beta)
+  c_vec <- as.numeric(contrast)
+  est <- sum(c_vec * beta)
+  v_un <- 0
+  for (a in seq_len(p)) {
+    for (b in seq_len(p)) {
+      v_un <- v_un + c_vec[a] * inv[a, b] * c_vec[b]
+    }
+  }
+  var <- v_un * sd * sd
+  se <- sqrt(max(var, 0))
+  t_val <- if (se > 0) est / se else 0.0
+  list(est = est, se = se, t = t_val, df = df, sd = sd, v_un = v_un)
+}
+
+#' .limmav_t_sf
+#'
+#' A step of the limmav_native implementation. Called by \code{morie_limmav}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param t Numeric; combined arithmetically in the body.
+#' @param df Numeric; combined arithmetically in the body.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.limmav_t_sf <- function(t, df) {
+  x <- df / (df + t^2)
+
+  betacf <- function(a, b, x) {
+    qab <- a + b
+    qap <- a + 1.0
+    qam <- a - 1.0
+    c <- 1.0
+    d <- 1.0 - qab * x / qap
+    if (abs(d) < 1e-300) d <- 1e-300
+    d <- 1.0 / d
+    h <- d
+    for (mm in 1:300) {
+      m2 <- 2 * mm
+      aa <- mm * (b - mm) * x / ((qam + m2) * (a + m2))
+      d <- 1.0 + aa * d
+      if (abs(d) < 1e-300) d <- 1e-300
+      c <- 1.0 + aa / c
+      if (abs(c) < 1e-300) c <- 1e-300
+      d <- 1.0 / d
+      h <- h * d * c
+      aa <- -(a + mm) * (qab + mm) * x / ((a + m2) * (qap + m2))
+      d <- 1.0 + aa * d
+      if (abs(d) < 1e-300) d <- 1e-300
+      c <- 1.0 + aa / c
+      if (abs(c) < 1e-300) c <- 1e-300
+      d <- 1.0 / d
+      de <- d * c
+      h <- h * de
+      if (abs(de - 1.0) < 3e-16) break
+    }
+    h
+  }
+
+  a <- 0.5 * df
+  b <- 0.5
+  if (x <= 0) {
+    return(0.0)
+  }
+  if (x >= 1) {
+    return(1.0)
+  }
+  lbeta <- lgamma(a + b) - lgamma(a) - lgamma(b) +
+    a * log(x) + b * log(1.0 - x)
+  if (x < (a + 1.0) / (a + b + 2.0)) {
+    return(exp(lbeta) * betacf(a, b, x) / a)
+  } else {
+    return(1.0 - exp(lbeta) * betacf(b, a, 1.0 - x) / b)
+  }
+}
+
+#' morie_limmav
+#'
+#' A step of the limmav_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param counts Passed to \code{.limmav_voom_weights}.
+#' @param design A vector; its length is taken and its elements indexed.
+#' @param contrast Optional; may be \code{NULL}. A vector; its length is taken.
+#' @param lib_sizes Passed to \code{.limmav_voom_weights}.
+#' @param span Passed to \code{.limmav_voom_weights}. Defaults to \code{0.5}.
+#' @param weights A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @param moderate A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @return A list with \code{estimate}, \code{log_fold_change}, \code{se}, \code{t},
+#' \code{pvalue}, \code{padj}, \code{df}, \code{df_total}, \code{d0}, \code{s0_sq},
+#' \code{s2_gene}, \code{s2_post}, \code{moderated}, \code{voom_weights}, \code{log_cpm},
+#' \code{mean_log_count}, \code{sqrt_sd}, \code{trend_x}, \code{trend_y},
+#' \code{lib_sizes}, \code{weighted}, \code{n_genes}, \code{n_samples}, \code{note},
+#' \code{method}.
+#' @export
+morie_limmav <- function(counts, design, contrast = NULL, lib_sizes = NULL,
+                         span = 0.5, weights = TRUE, moderate = TRUE) {
+  if (is.matrix(design)) {
+    X <- design
+    storage.mode(X) <- "double"
+  } else if (is.list(design)) {
+    first <- design[[1]]
+    if (is.list(first) || (is.atomic(first) && length(first) > 1)) {
+      X <- matrix(as.numeric(unlist(design)),
+        nrow = length(design),
+        byrow = TRUE
+      )
+    } else {
+      labels <- sapply(design, as.character)
+      levels <- unique(labels)
+      if (length(levels) < 2) stop("limmav: the design has only one group")
+      X <- cbind(1, sapply(levels[-1], function(lv) as.numeric(labels == lv)))
+    }
+  } else {
+    labels <- as.character(design)
+    levels <- unique(labels)
+    if (length(levels) < 2) stop("limmav: the design has only one group")
+    X <- cbind(1, sapply(levels[-1], function(lv) as.numeric(labels == lv)))
+  }
+
+  v <- .limmav_voom_weights(counts, X, lib_sizes, span)
+  y <- v$log_cpm
+  W <- v$weights
+  G <- nrow(y)
+  m <- ncol(y)
+  p <- ncol(X)
+  c_vec <- if (is.null(contrast)) {
+    c(rep(0.0, p - 1), 1.0)
+  } else {
+    if (length(contrast) != p) {
+      stop(sprintf(
+        "limmav: the contrast must have one entry per coefficient (%d)",
+        p
+      ))
+    }
+    as.numeric(contrast)
+  }
+
+  est <- numeric(G)
+  se <- numeric(G)
+  tt <- numeric(G)
+  pv <- numeric(G)
+  sd2 <- numeric(G)
+  vun <- numeric(G)
+  df <- m - p
+  for (g in seq_len(G)) {
+    wlm <- .limmav_weighted_lm(
+      y[g, ], X,
+      if (weights) W[g, ] else NULL,
+      c_vec
+    )
+    est[g] <- wlm$est
+    se[g] <- wlm$se
+    tt[g] <- wlm$t
+    sd2[g] <- wlm$sd^2
+    vun[g] <- wlm$v_un
+    pv[g] <- .limmav_t_sf(wlm$t, wlm$df)
+  }
+  eb <- NULL
+  if (moderate) {
+    eb <- .limmav_ebayes(sd2, df)
+    se <- numeric(G)
+    tt <- numeric(G)
+    pv <- numeric(G)
+    for (g in seq_len(G)) {
+      s_post <- sqrt(eb$s2_post[g])
+      se_g <- s_post * sqrt(max(vun[g], 0))
+      t_g <- if (se_g > 0) est[g] / se_g else 0
+      dtot <- eb$df_total[g]
+      se[g] <- se_g
+      tt[g] <- t_g
+      pv[g] <- if (is.finite(dtot)) {
+        .limmav_t_sf(t_g, dtot)
+      } else {
+        2.0 * (1.0 - 0.5 * (1.0 + .limmav_erf(abs(t_g) / sqrt(2.0))))
+      }
+    }
+  }
+  padj <- .limmav_benjamini_hochberg(pv)
+
+  list(
+    estimate = est,
+    log_fold_change = est,
+    se = se,
+    t = tt,
+    pvalue = pv,
+    padj = padj,
+    df = df,
+    df_total = if (is.null(eb)) NULL else eb$df_total,
+    d0 = if (is.null(eb)) NULL else eb$d0,
+    s0_sq = if (is.null(eb)) NULL else eb$s0_sq,
+    s2_gene = sd2,
+    s2_post = if (is.null(eb)) NULL else eb$s2_post,
+    moderated = moderate,
+    voom_weights = W,
+    log_cpm = y,
+    mean_log_count = v$mean_log_count,
+    sqrt_sd = v$sqrt_sd,
+    trend_x = v$trend_x,
+    trend_y = v$trend_y,
+    lib_sizes = v$lib_sizes,
+    weighted = weights,
+    n_genes = G,
+    n_samples = m,
+    note = if (moderate) {
+      paste(
+        "moderated t: gene-wise variances shrunk toward s0^2 on d0",
+        "prior degrees of freedom and tested on d_g + d0 (Smyth 2004)"
+      )
+    } else {
+      paste(
+        "moderate=False: ordinary weighted-least-squares t-statistics,",
+        "no empirical Bayes"
+      )
+    },
+    method = "voom precision weights (Law, Chen, Shi & Smyth 2014)"
+  )
+}
+
+morie_voom <- morie_limmav
+morie_limma_voom <- morie_limmav
+morie_limmavoom <- morie_limmav
+
+#' .limmav_cheatsheet
+#'
+#' A step of the limmav_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
+#' @examples
+#' res <- .limmav_cheatsheet()
+#' res
+.limmav_cheatsheet <- function() {
+  paste("limmav: voom (Law, Chen, Shi & Smyth 2014). log-cpm = ",
+    "log2((r + 0.5)/(R + 1) * 1e6) -- 0.5 keeps the log finite and ",
+    "tames low counts, 1 keeps the ratio below 1. Fit by OLS, take ",
+    "the residual SDs, LOWESS sqrt(s) against mean log-count ",
+    "(square roots because they are symmetric), read the curve as ",
+    "a piecewise linear lo(), map each FITTED log-cpm to a fitted ",
+    "log-count, and the weight is lo()^-4 -- an inverse variance, ",
+    "per OBSERVATION not per gene, because libraries differ in ",
+    "depth. Then Smyth (2004) empirical Bayes: s~^2 = (d0 s0^2 + ",
+    "d_g s_g^2)/(d0 + d_g), t~ = beta/(s~ sqrt(v)), tested on ",
+    "d_g + d0 degrees of freedom, with d0 and s0^2 from matching ",
+    "the first two moments of log s_g^2. d0 = 0 gives back the ",
+    "ordinary t; d0 = infinity gives a statistic proportional to ",
+    "beta.",
+    sep = ""
+  )
+}

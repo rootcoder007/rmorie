@@ -21,6 +21,7 @@ morie_tps_project_xy(
 
 \item{lat_c, lon_c}{Centre-point of the projection (default downtown
 Toronto: 43.70 N, 79.40 W).}
+
 }
 \value{
 A named list with numeric vectors \code{x} (km east of centre)

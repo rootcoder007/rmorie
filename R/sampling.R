@@ -75,7 +75,7 @@ morie_stratified_sample <- function(df, strata_col, n_per_stratum,
     } else {
       stop("For proportional = TRUE, supply a single integer for n_per_stratum.")
     }
-    # Python sampling.py: stratified_sample does NOT floor at 1 — a
+    # Python sampling.py: stratified_sample does NOT floor at 1 -- a
     # tiny stratum under proportional allocation can legitimately get
     # zero. Match that contract (allows zero-stratum allocs).
     alloc <- as.integer(round(strata_sizes / sum(strata_sizes) * total_n))
@@ -147,7 +147,9 @@ morie_cluster_sample <- function(df, cluster_col, n_clusters, seed = 42L) {
 #' @param size_col Name of the size measure column.
 #' @param n Number of units to select.
 #' @param seed Random seed.
-#' @param replace Logical; `FALSE` (default) uses PPS-without-replacement (Madow systematic-like), matching `morie.sampling.pps_sample` since 2026-05-22. `TRUE` reverts to the legacy Hansen-Hurwitz with-replacement scheme.
+#' @param replace Logical; `FALSE` (default) uses PPS-without-replacement (Madow
+#' systematic-like), matching `morie.sampling.pps_sample` since 2026-05-22. `TRUE`
+#' reverts to the legacy Hansen-Hurwitz with-replacement scheme.
 #' @return Data frame of selected units with `.weight` (Hansen-Hurwitz weights).
 #' @examples
 #' # See the package vignettes for usage examples:

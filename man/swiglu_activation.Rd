@@ -23,4 +23,8 @@ Named list with tensor, gate, up, method.
 \description{
 SwiGLU activation (Shazeer 2020)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rmorie:::swiglu_activation(V)
+}
 \keyword{internal}

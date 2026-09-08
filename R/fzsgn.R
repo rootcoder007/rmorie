@@ -23,7 +23,7 @@ fzsgn <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {
       method = "fzsgn - too few obs"
     ))
   }
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   S_n <- sum(stats::pnorm((x - theta0) / h))
   z <- (S_n - n / 2) / sqrt(n / 4)
   p <- switch(alternative,

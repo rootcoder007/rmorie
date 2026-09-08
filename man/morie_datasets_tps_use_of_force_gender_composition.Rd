@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \code{de9284945c3e479e938c4b77586535b1}.
 }
 \details{
@@ -53,9 +53,10 @@ may be associated with a reported use of force.
 Tags: race; race based data; rbdc
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_use_of_force_gender_composition(
-  max_features = 5L))
+  max_features = 5L
+))
 if (!inherits(df, "try-error")) head(df)
 }
 }

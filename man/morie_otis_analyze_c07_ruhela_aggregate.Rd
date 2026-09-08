@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c07_ruhela_aggregate}
 \alias{morie_otis_analyze_c07_ruhela_aggregate}
 \alias{morie_otis_analyze_c07_mrm_aggregate}
-\title{c07 aggregate Ruhela: Alert presence x Gender -> RC.}
+\title{c07 aggregate Ruhela: Alert presence x Gender -> RC}
 \usage{
 morie_otis_analyze_c07_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c07_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c07 aggregate Ruhela: Alert presence x Gender -> RC.
+c07 aggregate Ruhela: Alert presence x Gender -> RC
 }
 \examples{
 \donttest{

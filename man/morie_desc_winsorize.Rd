@@ -22,7 +22,7 @@ A list with \code{$method = "DescTools::Winsorize"} and
 }
 \description{
 Thin extender over \code{DescTools::Winsorize} for symmetric
-winsorisation by quantile (default 5\\% each tail).
+winsorisation by quantile (default 5\% each tail).
 }
 \examples{
 if (requireNamespace("DescTools", quietly = TRUE)) {

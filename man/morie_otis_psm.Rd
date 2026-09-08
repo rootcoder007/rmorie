@@ -24,6 +24,8 @@ morie_otis_psm(
 \item{caliper}{Caliper in SD units of the logit-PS. Default 0.2.}
 
 \item{seed}{RNG seed (tie-breaking order). Default 123.}
+
+
 }
 \value{
 An OTIS causal-estimate list (ATT).

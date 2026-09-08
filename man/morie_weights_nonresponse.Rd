@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_nonresponse}
 \alias{morie_weights_nonresponse}
-\title{Non-response adjustment within cells.}
+\title{Non-response adjustment within cells}
 \usage{
 morie_weights_nonresponse(weights, responded, adjustment_cells = NULL)
 }

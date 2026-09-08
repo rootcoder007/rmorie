@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghgps.R
 \name{morie_ghosal_gp_squared_exponential}
 \alias{morie_ghosal_gp_squared_exponential}
-\title{GP posterior mean with squared-exponential kernel.}
+\title{GP posterior mean with squared-exponential kernel}
 \usage{
 morie_ghosal_gp_squared_exponential(
   x,
@@ -30,7 +30,7 @@ morie_ghosal_gp_squared_exponential(
 Named list with estimate, se, mu, sd, length_scale, noise, n, method.
 }
 \description{
-GP posterior mean with squared-exponential kernel.
+GP posterior mean with squared-exponential kernel
 }
 \examples{
 morie_ghosal_gp_squared_exponential(x = rnorm(50), y = rnorm(50))

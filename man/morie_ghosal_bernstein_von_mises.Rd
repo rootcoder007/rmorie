@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghbvm.R
 \name{morie_ghosal_bernstein_von_mises}
 \alias{morie_ghosal_bernstein_von_mises}
-\title{BvM diagnostic for the mean functional under a DP prior.}
+\title{BvM diagnostic for the mean functional under a DP prior}
 \usage{
 morie_ghosal_bernstein_von_mises(
   x,
@@ -22,7 +22,7 @@ morie_ghosal_bernstein_von_mises(
 \item{seed}{Integer RNG seed (default 0).}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghbvm", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghbvm", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }
@@ -31,7 +31,7 @@ Named list with estimate, se, theta_hat, z_ks_stat, z_ks_pvalue,
 wald, wald_pvalue, n, B, method.
 }
 \description{
-BvM diagnostic for the mean functional under a DP prior.
+BvM diagnostic for the mean functional under a DP prior
 }
 \examples{
 morie_ghosal_bernstein_von_mises(x = rnorm(50))

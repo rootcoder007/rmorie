@@ -17,7 +17,7 @@ Integrated EMG (sum of absolute values)
 }
 \examples{
 x <- c(-2, 3, -1, 4)
-morie_dsp_integrated_emg(x)  # sum(|x|) = 10
+morie_dsp_integrated_emg(x) # sum(|x|) = 10
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.3.

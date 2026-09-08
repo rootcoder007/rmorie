@@ -154,8 +154,7 @@ NULL
 
 #' E-value for a risk ratio
 #'
-#' Wraps \pkg{EValue} when available; otherwise applies the
-#' VanderWeele-Ding closed-form formula directly.
+#' Applies the VanderWeele-Ding closed-form formula directly in base R.
 #'
 #' @param rr        Observed risk ratio.
 #' @param ci_lower  Lower 95% CI of the RR (optional).
@@ -438,7 +437,7 @@ tipping_point_analysis <- function(estimate, se, n_treated, n_control,
 
 
 # =====================================================================
-# Omitted-variable bias (Cinelli & Hazlett 2020 — sensemakr)
+# Omitted-variable bias (Cinelli & Hazlett 2020 -- sensemakr)
 # =====================================================================
 
 #' Omitted-variable bias analysis (sensemakr framework)
@@ -518,7 +517,7 @@ omitted_variable_bias <- function(estimate, se, dof, r2_yd_x,
 #' @param sample_filters Optional. Accepted shapes (for Python<->R parity):
 #'   (a) `list(list(name = "...", fn = function(df) ...), ...)` (R native),
 #'   (b) `list(c("name", fn), ...)` or `list(list("name", fn), ...)` (Python
-#'       `list[tuple[str, callable]]` shape — positional pair). Default: full
+#'       `list\[tuple\[str, callable\]\]` shape -- positional pair). Default: full
 #'       sample only.
 #' @param model_types    Character vector of model families:
 #'   `"ols"`, `"logistic"`, `"robust"`. Default `c("ols")`.
@@ -1081,6 +1080,10 @@ morie_sensitivity_omitted_var_bias <- function(model, treatment,
 #'   35(4), 437--460.
 #' @examplesIf requireNamespace("konfound", quietly = TRUE)
 #' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+#' @examples
+#' \dontshow{if (requireNamespace("konfound", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' str(morie_sensitivity_konfound(0.5, 0.15, 200), max.level = 1)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_sensitivity_konfound <- function(estimate, se, n,
                                        n_covariates = 0L,

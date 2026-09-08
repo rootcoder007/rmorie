@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_otis_mandela_provincial_vs_federal}
 \alias{morie_otis_analyze_otis_mandela_provincial_vs_federal}
-\title{Mandela-RF cross-comparison: Ontario provincial vs federal SIU.}
+\title{Mandela-RF cross-comparison: Ontario provincial vs federal SIU}
 \usage{
 morie_otis_analyze_otis_mandela_provincial_vs_federal(data, out_dir = NULL)
 }

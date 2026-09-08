@@ -11,7 +11,7 @@ morie_tps_load_tps_dataset(
 )
 }
 \arguments{
-\item{category}{TPS category name (see \code{\link[=morie_tps_layer_urls]{morie_tps_layer_urls()}}).}
+\item{category}{TPS category name (see \code{morie_tps_layer_urls()}).}
 
 \item{nrows}{Optional row cap applied after load.}
 
@@ -23,9 +23,9 @@ A \code{data.frame} of incidents.
 }
 \description{
 Portable dataset bridge: uses a local project export via
-\code{\link[=morie_tps_load_dataset]{morie_tps_load_dataset()}} when one exists, otherwise fetches the
+\code{morie_tps_load_dataset()} when one exists, otherwise fetches the
 category live from the public Toronto Police Service ArcGIS portal
-via \code{\link[=morie_fetch_tps]{morie_fetch_tps()}} (cached under \code{cache_dir}). No private
+via \code{morie_fetch_tps()} (cached under \code{cache_dir}). No private
 infrastructure is involved, so results reproduce on any machine.
 }
 \examples{

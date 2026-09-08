@@ -3,7 +3,7 @@
 \name{algnm}
 \alias{algnm}
 \alias{morie_party_alignment}
-\title{Rice party cohesion index (Rice 1928; Armstrong Ch 8)}
+\title{Rice party cohesion index (Rice 1928)}
 \usage{
 algnm(x, party = NULL)
 
@@ -20,6 +20,14 @@ Named list with \code{estimate}, \code{per_party} (if 2-D), \code{n},
 \code{method}.
 }
 \description{
+Rice party cohesion index (Rice 1928)
+}
+\details{
+Rice, S. A. (1928), Quantitative Methods in Politics. NOT Armstrong:
+that book never defines the Rice index -- its only "cohesion" mention (p.172)
+is an aside about the French National Assembly, and its "Rice" hit is the word
+"price". Checked page by page in the PDF.
+
 Rice_p = |\%yea_p - \%nay_p| over a series of roll calls; with a
 \code{party} indicator, averages per-roll-call Rice over each party.
 }

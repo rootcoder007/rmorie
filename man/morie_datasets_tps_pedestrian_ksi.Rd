@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \code{a96252bf61b84fc68c3926bb7485970e}.
 }
 \details{
@@ -51,7 +51,7 @@ Pedestrian-related KSI collisions (2006 - 2023).
 Tags: Killed or Seriously Injured; KSI; Pedestrian; Traffic; Collision; Traffic Collision
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_pedestrian_ksi(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

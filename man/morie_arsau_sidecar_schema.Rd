@@ -2,8 +2,8 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_sidecar_schema}
 \alias{morie_arsau_sidecar_schema}
-\title{Extract a simplified \code{[name, type, notes]} schema from a
-parsed CKAN sidecar.}
+\title{Extract a simplified \code{\[name, type, notes\]} schema from a
+parsed CKAN sidecar}
 \usage{
 morie_arsau_sidecar_schema(sidecar)
 }
@@ -23,10 +23,15 @@ tidy \code{data.frame} of column metadata.  Entries that lack an
 }
 \examples{
 sc <- list(fields = list(
-  list(id = "PoliceService", type = "text",
-       info = list(notes = "Name of the service.")),
-  list(id = "IncidentYear", type = "int",
-       info = list(notes = "Reporting year."))))
+  list(
+    id = "PoliceService", type = "text",
+    info = list(notes = "Name of the service.")
+  ),
+  list(
+    id = "IncidentYear", type = "int",
+    info = list(notes = "Reporting year.")
+  )
+))
 morie_arsau_sidecar_schema(sc)
 }
 \references{

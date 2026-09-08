@@ -24,6 +24,7 @@ morie_otis_otdml(
 \item{n_folds}{Integer fold count (default \code{3L}).}
 
 \item{seed}{Integer RNG seed.}
+
 }
 \value{
 \code{morie_otis_result}.
@@ -31,7 +32,7 @@ morie_otis_otdml(
 \description{
 Wraps a Frisch-Waugh-Lovell partialling-out estimator with
 \code{n_folds} cross-fitting on the OLS nuisance functions
-\eqn{E[Y|X]} and \eqn{E[D|X]}, then regresses outcome residuals on
+\eqn{E\[Y|X\]} and \eqn{E\[D|X\]}, then regresses outcome residuals on
 treatment residuals for the ATE; heteroskedasticity-robust standard
 errors. ATT is the ATE divided by the treated share (a simple
 weighting approximation; for the production-grade DML use

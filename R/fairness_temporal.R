@@ -51,11 +51,12 @@ NULL
 #'   instability found in the audited window.
 #' @examples
 #' period <- c(rep("p1", 10), rep("p2", 10))
-#' city   <- rep("A", 20)
-#' pred   <- rep(c(1,1,1,1,1,1,1,1,0,0), 2)
-#' grp    <- rep(c(rep("X",5), rep("Y",5)), 2)
+#' city <- rep("A", 20)
+#' pred <- rep(c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0), 2)
+#' grp <- rep(c(rep("X", 5), rep("Y", 5)), 2)
 #' res <- morie_fairness_predpol_temporal_audit(
-#'   period, city, pred, grp, privileged = "X"
+#'   period, city, pred, grp,
+#'   privileged = "X"
 #' )
 #' res$payload$per_city$A$dir_range
 #' @export
@@ -108,17 +109,20 @@ morie_fairness_predpol_temporal_audit <- function(period, city, y_pred, group,
         next
       }
       di_res <- morie_fairness_disparate_impact(
-        cy, cg, privileged = privileged, favorable = favorable
+        cy, cg,
+        privileged = privileged, favorable = favorable
       )
       pg_res <- morie_fairness_demographic_parity(
-        cy, cg, privileged = privileged, favorable = favorable
+        cy, cg,
+        privileged = privileged, favorable = favorable
       )
       rate_vec <- vapply(cell_groups, function(g) {
         mean(cy[cg == g] == favorable)
       }, numeric(1))
       gini_res <- morie_fairness_gini(rate_vec)
       bas_res <- morie_fairness_bias_amplification(
-        cy, cg, privileged = privileged, favorable = favorable
+        cy, cg,
+        privileged = privileged, favorable = favorable
       )
       cells[[length(cells) + 1L]] <- list(
         city = as.character(c),
@@ -152,11 +156,14 @@ morie_fairness_predpol_temporal_audit <- function(period, city, y_pred, group,
       n_periods = length(cc),
       mean_dir = .morie_fairness_mean_finite(vapply(cc, function(x) x$dir, numeric(1))),
       mean_parity_gap = .morie_fairness_mean_finite(
-        vapply(cc, function(x) x$parity_gap, numeric(1))),
+        vapply(cc, function(x) x$parity_gap, numeric(1))
+      ),
       mean_gini = .morie_fairness_mean_finite(
-        vapply(cc, function(x) x$gini, numeric(1))),
+        vapply(cc, function(x) x$gini, numeric(1))
+      ),
       mean_bas = .morie_fairness_mean_finite(
-        vapply(cc, function(x) x$bas, numeric(1))),
+        vapply(cc, function(x) x$bas, numeric(1))
+      ),
       dir_min = if (length(dirs) > 0L) min(dirs) else NA_real_,
       dir_max = if (length(dirs) > 0L) max(dirs) else NA_real_,
       dir_range = if (length(dirs) > 0L) max(dirs) - min(dirs) else NA_real_,
@@ -172,14 +179,18 @@ morie_fairness_predpol_temporal_audit <- function(period, city, y_pred, group,
   mean_dirs <- mean_dirs[is.finite(mean_dirs)]
   cross_city_spread <- if (length(mean_dirs) >= 2L) {
     max(mean_dirs) - min(mean_dirs)
-  } else 0.0
+  } else {
+    0.0
+  }
 
   # Tables
-  cell_rows <- lapply(cells, function(x) list(
-    city = x$city, period = x$period, n = x$n,
-    dir = round(x$dir, 4), parity_gap = round(x$parity_gap, 4),
-    gini = round(x$gini, 4), bas = round(x$bas, 4)
-  ))
+  cell_rows <- lapply(cells, function(x) {
+    list(
+      city = x$city, period = x$period, n = x$n,
+      dir = round(x$dir, 4), parity_gap = round(x$parity_gap, 4),
+      gini = round(x$gini, 4), bas = round(x$bas, 4)
+    )
+  })
   city_rows <- lapply(names(per_city), function(c) {
     v <- per_city[[c]]
     list(
@@ -221,14 +232,18 @@ morie_fairness_predpol_temporal_audit <- function(period, city, y_pred, group,
     ),
     sections = list(list(
       title = "Per-city aggregates:",
-      headers = c("city", "periods", "mean DIR", "mean PG",
-                  "mean Gini", "mean BAS", "DIR range", "M>1"),
+      headers = c(
+        "city", "periods", "mean DIR", "mean PG",
+        "mean Gini", "mean BAS", "DIR range", "M>1"
+      ),
       table = city_rows
     )),
     tables = list(list(
       title = "Per-(city, period) metrics:",
-      headers = c("city", "period", "n", "DIR", "parity gap",
-                  "Gini", "BAS"),
+      headers = c(
+        "city", "period", "n", "DIR", "parity gap",
+        "Gini", "BAS"
+      ),
       rows = cell_rows
     )),
     warnings = warnings,

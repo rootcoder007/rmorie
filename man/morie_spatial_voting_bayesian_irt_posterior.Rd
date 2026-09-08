@@ -23,5 +23,6 @@ ch <- array(rnorm(100 * 5 * 2), c(100, 5, 2))
 morie_spatial_voting_bayesian_irt_posterior(ch)
 }
 \references{
-Jackman (2009).
+Jackman S (2009). \emph{Bayesian Analysis for the Social
+Sciences}. Wiley.
 }

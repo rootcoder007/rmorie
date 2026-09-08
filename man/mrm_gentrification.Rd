@@ -18,7 +18,7 @@ did-not-gentrify tract, so this primitive emits a 3-level factor:
 
 \itemize{
 \item \code{ineligible} -- tract was above the baseline-
-marginalisation cutoff (top-50\\% on income AND rent) at t=0, so
+marginalisation cutoff (top-50\% on income AND rent) at t=0, so
 cannot meaningfully "gentrify". Drop from analyses that want
 the gentrification comparator.
 \item \code{eligible} -- tract was below the cutoff at t=0 AND

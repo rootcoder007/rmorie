@@ -26,7 +26,13 @@ morie_iv_tsls(
 
 \item{exogenous}{Optional character vector of exogenous covariate names.}
 
-\item{cluster}{Optional name of a cluster ID column.}
+\item{cluster}{Optional name of a cluster ID column. When given,
+standard errors are cluster-robust: the score is summed within
+each cluster before being squared, so within-cluster correlation
+is carried rather than assumed away. This selects the variance
+route; \code{robust} chooses between HC1 and conventional errors
+when no cluster is named, and \code{details$se_type} records
+which of the three produced the result.}
 
 \item{robust}{Logical; if \code{TRUE} use HC1 robust standard errors.}
 

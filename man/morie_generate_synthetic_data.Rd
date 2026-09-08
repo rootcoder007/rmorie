@@ -24,7 +24,7 @@ special missing codes (\code{97/98/99/997/998/999}) in discrete fields.}
 \code{name_map} is supplied.}
 
 \item{name_map}{Optional named character vector mapping canonical keys to
-output column names. Use \code{\link[=morie_default_synthetic_name_map]{morie_default_synthetic_name_map()}} as a template.}
+output column names. Use \code{morie_default_synthetic_name_map()} as a template.}
 }
 \value{
 A data.frame with synthetic records.

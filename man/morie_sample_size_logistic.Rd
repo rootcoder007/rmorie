@@ -22,7 +22,7 @@ Integer sample size.
 }
 \description{
 Uses the formula from Hsieh et al. (1998):
-\deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) [\log(OR)]^2}}{n = frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) [log(OR)]^2}}
+\deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) \[\log(OR)\]^2}}{n = frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) \[log(OR)\]^2}}
 }
 \examples{
 # See the package vignettes for usage examples:

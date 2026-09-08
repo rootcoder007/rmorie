@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_bigquery}
 \alias{morie_datasets_bigquery}
-\title{Pull a BigQuery table (or filtered slice) as a \code{data.frame}.}
+\title{Pull a BigQuery table (or filtered slice) as a \code{data.frame}}
 \usage{
 morie_datasets_bigquery(
   project,
@@ -41,6 +41,8 @@ Requires the \code{bigrquery} package and Application Default Credentials.
 # Keyless alternatives: the bundled samples in 'rmoriedata' and the
 # morie_datasets_*() open-data fetchers (Socrata / CKAN, no account).
 df <- morie_datasets_bigquery("bigquery-public-data", "chicago_crime",
-                              "crime", limit = 10L)
+  "crime",
+  limit = 10L
+)
 \dontshow{\}) # examplesIf}
 }

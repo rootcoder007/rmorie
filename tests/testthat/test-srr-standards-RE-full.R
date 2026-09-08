@@ -5,7 +5,9 @@
 # and the missing-value / centring / collinearity options.
 
 test_that("RE2.2 predictor and response missing values are handled separately", {
-  d <- mtcars; d$hp[1] <- NA; d$mpg[2] <- NA
+  d <- mtcars
+  d$hp[1] <- NA
+  d$mpg[2] <- NA
   expect_error(morie_lm(mpg ~ hp, d, na_predictor = "fail"), "missing predictor")
   m <- morie_lm(mpg ~ hp, d, na_predictor = "omit", na_response = "omit")
   expect_lt(m$n_obs, nrow(d))                        # both dropped
@@ -22,7 +24,8 @@ test_that("RE2.3 predictors can be centred / scaled with documented effect", {
 })
 
 test_that("RE2.4b perfect predictor-response collinearity is detected", {
-  d <- data.frame(x = 1:20); d$y <- 2 * d$x           # exact linear dependence
+  d <- data.frame(x = 1:20)
+  d$y <- 2 * d$x           # exact linear dependence
   expect_error(morie_lm(y ~ x, d), "perfectly collinear")
 })
 
@@ -91,8 +94,10 @@ test_that("RE5.0 fit scaling with data size can be measured", {
 test_that("RE6.0/RE6.1/RE6.2 model object has a default plot method", {
   m <- morie_lm(mpg ~ hp, mtcars)
   expect_true(exists("plot.morie_lm"))
-  tmp <- tempfile(fileext = ".png"); grDevices::png(tmp)
-  plot(m); grDevices::dev.off()
+  tmp <- tempfile(fileext = ".png")
+  grDevices::png(tmp)
+  plot(m)
+  grDevices::dev.off()
   expect_true(file.exists(tmp))                      # renders with labels
 })
 
@@ -116,7 +121,9 @@ test_that("RE7.4 forecast (prediction interval) errors are tested", {
 })
 
 test_that("RE7.1a noiseless data fits at least as fast as noisy data", {
-  set.seed(1); n <- 500L; x <- rnorm(n)
+  set.seed(1)
+  n <- 500L
+  x <- rnorm(n)
   d_clean <- data.frame(x = x, y = 2 * x)            # exact... but collinear;
   d_clean$y <- d_clean$y + 1                          # keep exact w/ intercept
   d_noisy <- data.frame(x = x, y = 2 * x + 1 + rnorm(n))

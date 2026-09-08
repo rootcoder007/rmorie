@@ -12,6 +12,7 @@ morie_crosstab_verify(original, recoded, declared)
 \item{declared}{Named character vector: the mapping the analyst
 CLAIMS was applied (\code{c(old = "new", ...)}). Identity is
 assumed for old values absent from \code{declared}.}
+
 }
 \value{
 Invisibly, the cross-tabulation (as a data frame), if and
@@ -25,6 +26,7 @@ is a function (each old category to exactly one new category)
 that matches the declared mapping, with no rows lost.
 }
 \examples{
-x <- c("W", "B", "W"); y <- c("White", "Black", "White")
+x <- c("W", "B", "W")
+y <- c("White", "Black", "White")
 morie_crosstab_verify(x, y, c(W = "White", B = "Black"))
 }

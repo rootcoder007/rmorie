@@ -2,7 +2,7 @@
 % Please edit documentation in R/corrections_uof.R
 \name{morie_corrections_uof_resource_ids}
 \alias{morie_corrections_uof_resource_ids}
-\title{Canonical CKAN resource id table for the Corrections UoF dataset.}
+\title{Canonical CKAN resource id table for the Corrections UoF dataset}
 \usage{
 morie_corrections_uof_resource_ids()
 }

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Adaptive contraction rates over a smoothness grid.
+#' Adaptive contraction rates over a smoothness grid
 #'
 #' @param x Numeric data vector (used only for sample-size n).
 #' @param betas Numeric vector of smoothness exponents (default seq(0.5, 3, length.out = 11)).

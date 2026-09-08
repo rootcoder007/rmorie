@@ -93,7 +93,12 @@ morie_dataset_catalog <- function() {
       source = "oc", survey = "csads", year = "2023-2024",
       format = "csv", type = "bootstrap", large_file = TRUE,
       local_path = "data/datasets/oc/CSADS/2023-2024/csads202324bootstrap.csv",
-      table_name = "ocs24bt", ckan_resource_id = "", download_url = "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-2c0c440e69c2/resource/58682536-1325-405a-83f0-7b1284b4f717/download/202324-csads-ecade-pumf-fmgd-bootstrap-weights-poids-de-bootstrap.csv"
+      table_name = "ocs24bt", ckan_resource_id = "", download_url = paste0(
+        "https://open.canada.ca/data/dataset/1f15ca45-8bfd-4f9c-9ec6-",
+        "2c0c440e69c2/resource/58682536-1325-405a-83f0-7b1284b4f717/d",
+        "ownload/202324-csads-ecade-pumf-fmgd-bootstrap-weights-poids",
+        "-de-bootstrap.csv"
+      )
     ),
     list(
       key = "cu20mf", name = "CSUS 2019-2020 PUMF",
@@ -256,7 +261,12 @@ morie_dataset_catalog <- function() {
       source = "cihi", survey = "indicators", year = "",
       format = "xlsx", type = "indicator", large_file = FALSE,
       local_path = "data/datasets/cihi/885/885-youth-age-12-to-25-who-accessed-integrated-youth-services-for-mental-health-substance-use-and-well-being-support-data-table-en.xlsx",
-      table_name = "cihi885a", ckan_resource_id = "", download_url = "https://www.cihi.ca/sites/default/files/document/data-file/885-youth-age-12-to-25-who-accessed-integrated-youth-services-for-mental-health-substance-use-and-well-being-support-data-table-en.xlsx"
+      table_name = "cihi885a", ckan_resource_id = "", download_url = paste0(
+        "https://www.cihi.ca/sites/default/files/document/data-file/8",
+        "85-youth-age-12-to-25-who-accessed-integrated-youth-services",
+        "-for-mental-health-substance-use-and-well-being-support-data",
+        "-table-en.xlsx"
+      )
     ),
     list(
       key = "cihi885b", name = "CIHI 885: Youth Sites 2024-2025",

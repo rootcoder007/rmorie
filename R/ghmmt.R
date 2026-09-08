@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper].
+#' Posterior mean / variance of G(A) for DP(alpha, G0) and A = (A_lower, A_upper\]
 #'
 #' @param x Numeric data vector.
 #' @param alpha DP concentration parameter (default 1).
@@ -13,8 +13,8 @@
 #' morie_ghosal_moment_matching(x = rnorm(50))
 #' @export
 morie_ghosal_moment_matching <- function(x, alpha = 1.0, A_lower = NULL,
-                                   A_upper = NULL, base_mean = 0,
-                                   base_sd = 1) {
+                                         A_upper = NULL, base_mean = 0,
+                                         base_sd = 1) {
   x <- as.numeric(x)
   n <- length(x)
   if (is.null(A_lower)) A_lower <- -Inf

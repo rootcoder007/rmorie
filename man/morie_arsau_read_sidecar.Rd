@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_read_sidecar}
 \alias{morie_arsau_read_sidecar}
-\title{Read a CKAN datastore_search JSON sidecar.}
+\title{Read a CKAN datastore_search JSON sidecar}
 \usage{
 morie_arsau_read_sidecar(path)
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghwav.R
 \name{morie_ghosal_wavelet_prior}
 \alias{morie_ghosal_wavelet_prior}
-\title{Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998).}
+\title{Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998)}
 \usage{
 morie_ghosal_wavelet_prior(x, pi = 0.5, sigma = NULL, noise = NULL)
 }
@@ -19,7 +19,7 @@ morie_ghosal_wavelet_prior(x, pi = 0.5, sigma = NULL, noise = NULL)
 Named list with estimate, fitted, noise, sigma, inclusion, n, method.
 }
 \description{
-Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998).
+Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998)
 }
 \examples{
 morie_ghosal_wavelet_prior(x = rnorm(50))

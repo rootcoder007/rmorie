@@ -3,9 +3,9 @@
 \name{ghosal_bnp_helpers}
 \alias{ghosal_bnp_helpers}
 \title{Internal helpers shared across the Ghosal Bayesian-nonparametrics suite.
-Not exported; consumed by ghosal_* callables only.}
+Not exported; consumed by ghosal_* callables only}
 \description{
 Internal helpers shared across the Ghosal Bayesian-nonparametrics suite.
-Not exported; consumed by ghosal_* callables only.
+Not exported; consumed by ghosal_* callables only
 }
 \keyword{internal}

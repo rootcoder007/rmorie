@@ -26,6 +26,9 @@ columns for predicted risk, realised-outcome count, area
 population, and protected attribute.}
 
 \item{notes}{Free-text provenance or caveats, surfaced to the user.}
+
+
+
 }
 \value{
 A list of class \code{morie_city_profile}.
@@ -40,7 +43,8 @@ to the audit.
 }
 \examples{
 p <- morie_fairness_city_profile(
-  "chicago", area_col = "community_area",
+  "chicago",
+  area_col = "community_area",
   risk_col = "rti", group_col = "majority_race"
 )
 p$name

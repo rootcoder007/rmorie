@@ -16,7 +16,7 @@ morie_datasets_tps_arcgis_hub_by_id(
 }
 \arguments{
 \item{hub_id}{32-char hex GUID. See
-\code{\link[=morie_datasets_tps_arcgis_hub_layers]{morie_datasets_tps_arcgis_hub_layers()}} for the canonical 71.}
+\code{morie_datasets_tps_arcgis_hub_layers()} for the canonical 71.}
 
 \item{format}{One of \code{"json"} (default), \code{"geojson"}, \code{"csv"},
 \code{"shapefile"}, \code{"fgdb"}.}
@@ -46,7 +46,7 @@ file path (binary).
 }
 \description{
 Single entry point for the 71 datasets listed by
-\code{\link[=morie_datasets_tps_arcgis_hub_layers]{morie_datasets_tps_arcgis_hub_layers()}}. Supports five export
+\code{morie_datasets_tps_arcgis_hub_layers()}. Supports five export
 formats:
 }
 \details{
@@ -77,10 +77,12 @@ tables, budgets) \code{format = "json"} is sufficient and lightest.
 cat <- morie_datasets_tps_arcgis_hub_layers(offline = TRUE)
 pic_id <- cat$hub_id[cat$title ==
   "Persons in Crisis Calls for Service Attended Open Data"]
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_arcgis_hub_by_id(
-  pic_id, format = "json", where = "OCC_YEAR=2024",
-  max_features = 25L, offline = TRUE))
+  pic_id,
+  format = "json", where = "OCC_YEAR=2024",
+  max_features = 25L, offline = TRUE
+))
 if (!inherits(df, "try-error")) head(df)
 }
 \dontshow{\}) # examplesIf}

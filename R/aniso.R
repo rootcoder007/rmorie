@@ -1,8 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Anisotropy detection via Levene comparison of directional pair-difference
-#' distributions.
+#' distributions
 #'
-#' For each of `n_dirs` directions in [0, pi), select pairs whose connecting
+#' For each of `n_dirs` directions in \[0, pi), select pairs whose connecting
 #' vector falls within `tol_deg` of the direction and apply Levene's test
 #' across direction groups.
 #'

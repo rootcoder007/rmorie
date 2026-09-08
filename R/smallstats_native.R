@@ -30,6 +30,23 @@ NULL
 # truncate to the length in [0.99*N, N] with the most divisors >= 50
 # (pracma's block-optimal OptN), then compute the whole-series
 # statistic log(R/S) / log(n).
+#' .morie_hurst_rs
+#'
+#' Hurst exponent via simple rescaled-range (R/S) analysis -- an exact
+#' replica of pracma::hurstexp()$Hs: pad odd-length series to even,
+#' truncate to the length in \[0.99*N, N\] with the most divisors >= 50
+#' (pracma\'s block-optimal OptN), then compute the whole-series
+#' statistic log(R/S) / log(n).
+#'
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param d Passed to \code{divisors}. Defaults to \code{50L}.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_hurst_rs(x = X)
+#' res
 .morie_hurst_rs <- function(x, d = 50L) {
   x <- as.numeric(x)
   x <- x[is.finite(x)]
@@ -68,6 +85,18 @@ NULL
 # (Rosenbaum 2002, ch. 4), the same quantity rbounds::psens() reports.
 # Pairs are formed positionally from equal-length treated/control
 # vectors, matching how psens() was called here.
+#' .morie_psens_wilcoxon
+#'
+#' Rosenbaum sensitivity bounds for the Wilcoxon signed-rank statistic
+#' (Rosenbaum 2002, ch. 4), the same quantity rbounds::psens() reports.
+#' Pairs are formed positionally from equal-length treated/control
+#' vectors, matching how psens() was called here.
+#'
+#' @param treated A vector; its length is taken.
+#' @param control A vector; its length is taken.
+#' @param gamma Passed to \code{.morie_psens_wilcoxon_d}.
+#' @return The value of \code{.morie_psens_wilcoxon_d}.
+#' @export
 .morie_psens_wilcoxon <- function(treated, control, gamma) {
   stopifnot(length(treated) == length(control), gamma >= 1)
   .morie_psens_wilcoxon_d(as.numeric(treated) - as.numeric(control), gamma)
@@ -77,6 +106,16 @@ NULL
 # Exact replica of rbounds::psens(): both bounds share the variance
 # computed at p+ (a documented quirk of that implementation), the
 # lower bound centres at p-, the upper at p+.
+#' One-sample form: Rosenbaum bounds directly on pair differences
+#'
+#' Exact replica of rbounds::psens(): both bounds share the variance
+#' computed at p+ (a documented quirk of that implementation), the lower
+#' bound centres at p-, the upper at p+.
+#'
+#' @param d A vector; its length is taken and its elements indexed.
+#' @param gamma Numeric; combined arithmetically in the body.
+#' @return A vector, from \code{c}.
+#' @export
 .morie_psens_wilcoxon_d <- function(d, gamma) {
   stopifnot(gamma >= 1)
   d <- as.numeric(d)
@@ -102,6 +141,20 @@ NULL
 # dual  min_l  log(sum_c exp(-Xc l)) + mbar' l  via BFGS with an
 # analytic gradient; weights are the softmax of -Xc l, rescaled to sum
 # to the number of controls (the ebal::ebalance convention).
+#' .morie_entropy_balance
+#'
+#' Entropy balancing (Hainmueller 2012), ATT flavour: reweight controls
+#' so their covariate means equal the treated means. Solves the convex
+#' dual min_l log(sum_c exp(-Xc l)) + mbar\' l via BFGS with an analytic
+#' gradient; weights are the softmax of -Xc l, rescaled to sum to the
+#' number of controls (the ebal::ebalance convention).
+#'
+#' @param t_mask A flag; the body branches on it.
+#' @param X A matrix; indexed by row and column.
+#' @param max_iter Carried through into a list the body builds. Defaults to \code{200L}.
+#' @param tol Carried through into a list the body builds. Defaults to \code{1e-08}.
+#' @return A list with \code{w}, \code{converged}, \code{max_imbalance}.
+#' @export
 .morie_entropy_balance <- function(t_mask, X, max_iter = 200L, tol = 1e-8) {
   t_mask <- as.logical(t_mask)
   X <- as.matrix(X)
@@ -143,6 +196,16 @@ NULL
 # k-nearest-neighbour indices (Euclidean), the FNN::get.knn()$nn.index
 # surface used here. Brute force O(n^2) -- the call sites feed spatial
 # unit tables (hundreds of rows), where this is instant.
+#' .morie_knn_index
+#'
+#' k-nearest-neighbour indices (Euclidean), the FNN::get.knn()$nn.index
+#' surface used here. Brute force O(n^2) -- the call sites feed spatial
+#' unit tables (hundreds of rows), where this is instant.
+#'
+#' @param coords A matrix; passed to \code{nrow}.
+#' @param k Passed to \code{.morie_knn_index_cpp}.
+#' @return The value of \code{.morie_knn_index_cpp}.
+#' @export
 .morie_knn_index <- function(coords, k) {
   coords <- as.matrix(coords)
   n <- nrow(coords)
@@ -158,6 +221,17 @@ NULL
 # SMOTE (Chawla et al. 2002): synthesize minority-class points by
 # linear interpolation towards random minority k-NN until classes
 # balance. Returns rows to append (X_new, y_new).
+#' .morie_smote
+#'
+#' SMOTE (Chawla et al. 2002): synthesize minority-class points by
+#' linear interpolation towards random minority k-NN until classes
+#' balance. Returns rows to append (X_new, y_new).
+#'
+#' @param X A matrix; indexed by row and column.
+#' @param y_chr Passed to \code{table}.
+#' @param k Passed to \code{.morie_knn_index}.
+#' @return A list with \code{X_new}, \code{y_new}.
+#' @export
 .morie_smote <- function(X, y_chr, k) {
   X <- as.matrix(X)
   counts <- table(y_chr)
@@ -185,6 +259,28 @@ NULL
 # morie_regularization_path() (replacing their glmnet delegation).
 # Returns coefficients on the ORIGINAL scale plus intercept.
 # `warm` optionally seeds beta (standardized scale) for path fits.
+#' .morie_coord_descent
+#'
+#' Elastic-net coordinate descent on standardized covariates -- the
+#' shared core behind morie_penalized_regression() and
+#' morie_regularization_path() (replacing their glmnet delegation).
+#' Returns coefficients on the ORIGINAL scale plus intercept. `warm`
+#' optionally seeds beta (standardized scale) for path fits.
+#'
+#' @param X A matrix; passed to \code{nrow}.
+#' @param y Numeric; passed to \code{mean}.
+#' @param alpha Passed to \code{.morie_coord_descent_cpp}.
+#' @param lambda Passed to \code{.morie_coord_descent_cpp}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
+#' @param tol Passed to \code{.morie_coord_descent_cpp}. Defaults to \code{1e-06}.
+#' @param warm Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @return A list with \code{beta}, \code{beta_std}, \code{intercept}, \code{n_iter}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .morie_coord_descent(X = x, y = y, alpha = 0.5, lambda = 0.5)
+#' res
 .morie_coord_descent <- function(X, y, alpha, lambda,
                                  max_iter = 1000L, tol = 1e-6,
                                  warm = NULL) {
@@ -215,6 +311,21 @@ NULL
 # prediction -- the cv.glmnet(alpha = 0, s = "lambda.min") surface the
 # DML cross-fit nuisance learners used. The SVD makes the whole lambda
 # path essentially free.
+#' .morie_cv_ridge_predict
+#'
+#' Ridge regression with SVD path + k-fold CV lambda selection, then
+#' prediction -- the cv.glmnet(alpha = 0, s = "lambda.min") surface the
+#' DML cross-fit nuisance learners used. The SVD makes the whole lambda
+#' path essentially free.
+#'
+#' @param x_train A matrix; passed to \code{nrow}.
+#' @param z_train Numeric; passed to \code{mean}.
+#' @param x_test A matrix; passed to \code{as.matrix}.
+#' @param n_folds A count; the body uses it as \code{seq_len(...)}. Defaults to \code{5L}.
+#' @param lambdas Optional; may be \code{NULL}. A vector; its length is taken and its
+#' elements indexed.
+#' @return A numeric value.
+#' @export
 .morie_cv_ridge_predict <- function(x_train, z_train, x_test,
                                     n_folds = 5L, lambdas = NULL) {
   x_train <- as.matrix(x_train)
@@ -261,6 +372,20 @@ NULL
 # Joe-Kuo direction numbers (dims 1-10) -- replaces randtoolbox::sobol
 # for the QMC helper. Unscrambled; matches randtoolbox's unscrambled
 # output (same standard direction numbers), cross-validated in tests.
+#' .morie_sobol
+#'
+#' Sobol low-discrepancy sequence via gray-code construction with
+#' Joe-Kuo direction numbers (dims 1-10) -- replaces randtoolbox::sobol
+#' for the QMC helper. Unscrambled; matches randtoolbox\'s unscrambled
+#' output (same standard direction numbers), cross-validated in tests.
+#'
+#' @param n Passed to \code{.morie_sobol_cpp}.
+#' @param d Passed to \code{.morie_sobol_cpp}.
+#' @return The value of \code{.morie_sobol_cpp}.
+#' @export
+#' @examples
+#' res <- .morie_sobol(n = 3L, d = 3L)
+#' res
 .morie_sobol <- function(n, d) {
   n <- as.integer(n)
   d <- as.integer(d)
@@ -275,6 +400,21 @@ NULL
 # (Liang & Zeger 1986) -- the geepack::geeglm surface used by the OTIS
 # batch module. Fisher scoring on the working model, moment estimate
 # of the exchangeable alpha, robust (sandwich) covariance.
+#' .morie_gee_poisson_exch
+#'
+#' GEE with Poisson family and exchangeable working correlation (Liang &
+#' Zeger 1986) -- the geepack::geeglm surface used by the OTIS batch
+#' module. Fisher scoring on the working model, moment estimate of the
+#' exchangeable alpha, robust (sandwich) covariance.
+#'
+#' @param X A matrix; indexed by row and column.
+#' @param y A vector; its length is taken and its elements indexed.
+#' @param id Passed to \code{factor}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{50L}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-08}.
+#' @return A list with \code{coefficients}, \code{vbeta}, \code{alpha}, \code{phi},
+#' \code{n_iter}, \code{converged}.
+#' @export
 .morie_gee_poisson_exch <- function(X, y, id, max_iter = 50L, tol = 1e-8) {
   X <- as.matrix(X)
   y <- as.numeric(y)
@@ -289,7 +429,8 @@ NULL
     mu <- exp(eta)
     r <- (y - mu) / sqrt(mu) # Pearson residuals (phi = 1 scale)
     # Moment estimator of exchangeable correlation.
-    num <- 0; cnt <- 0
+    num <- 0
+    cnt <- 0
     for (ix in clusters) {
       ni <- length(ix)
       if (ni < 2L) next
@@ -301,13 +442,15 @@ NULL
     alpha <- if (cnt > 0) num / ((cnt - p / 2) * phi) else 0
     alpha <- min(max(alpha, -0.99), 0.99)
     # Fisher scoring step with working covariance.
-    M <- matrix(0, p, p); U <- numeric(p)
+    M <- matrix(0, p, p)
+    U <- numeric(p)
     B <- matrix(0, p, p)
     for (ix in clusters) {
       ni <- length(ix)
       Di <- X[ix, , drop = FALSE] * mu[ix] # d mu / d beta
       Ai_half <- sqrt(mu[ix])
-      Ri <- matrix(alpha, ni, ni); diag(Ri) <- 1
+      Ri <- matrix(alpha, ni, ni)
+      diag(Ri) <- 1
       Vi <- (Ai_half %o% Ai_half) * Ri * phi
       Vinv <- solve(Vi)
       DtV <- crossprod(Di, Vinv)
@@ -333,6 +476,21 @@ NULL
 # location log(L) + 0.874367040387922 and scale pi/2; the combined
 # p-value is the Landau upper tail at t. The Landau density has no
 # closed form; integrate its standard integral representation.
+#' .morie_hmp
+#'
+#' Asymptotically exact harmonic mean p-value (Wilson 2019, PNAS). The
+#' statistic t = mean(1/p) is asymptotically Landau distributed with
+#' location log(L) + 0.874367040387922 and scale pi/2; the combined
+#' p-value is the Landau upper tail at t. The Landau density has no
+#' closed form; integrate its standard integral representation.
+#'
+#' @param p Numeric; combined arithmetically in the body.
+#' @param L Numeric; passed to \code{log}. Defaults to \code{length(p)}.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' res <- .morie_hmp(p = 0.5)
+#' res
 .morie_hmp <- function(p, L = length(p)) {
   p <- pmax(as.numeric(p), 1e-300)
   t_stat <- mean(1 / p)

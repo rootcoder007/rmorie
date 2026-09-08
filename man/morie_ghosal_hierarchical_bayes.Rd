@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghhbp.R
 \name{morie_ghosal_hierarchical_bayes}
 \alias{morie_ghosal_hierarchical_bayes}
-\title{Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior.}
+\title{Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior}
 \usage{
 morie_ghosal_hierarchical_bayes(
   x,
@@ -25,7 +25,7 @@ morie_ghosal_hierarchical_bayes(
 \item{seed}{Integer RNG seed (default 0).}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghhbp", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghhbp", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }
@@ -34,7 +34,7 @@ Named list with estimate (alpha post mean), alpha_se,
 alpha_draws, K_n, n, method.
 }
 \description{
-Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior.
+Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior
 }
 \examples{
 morie_ghosal_hierarchical_bayes(x = rnorm(50))

@@ -35,7 +35,7 @@ value MATCHES THE EXPECTED FORMAT for its field. A clean sanity
 check is necessary but not sufficient for correctness.
 }
 \examples{
-\donttest{
+\dontrun{
 # Corpus-first fetch is fast when rmoriedata is installed.
 csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_sanity"))
 df <- utils::read.csv(csv, colClasses = "character")

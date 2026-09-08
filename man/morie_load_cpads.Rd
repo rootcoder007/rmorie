@@ -27,7 +27,7 @@ Resolution order:
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
 cpads <- morie_load_cpads(use_ckan = TRUE)
 if (!is.null(cpads)) head(cpads)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_load_weapon_records}
 \alias{morie_arsau_load_weapon_records}
-\title{Load ARSAU weapon_records CSV.}
+\title{Load ARSAU weapon_records CSV}
 \usage{
 morie_arsau_load_weapon_records(
   year,

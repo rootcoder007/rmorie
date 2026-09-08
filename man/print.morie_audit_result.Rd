@@ -2,7 +2,7 @@
 % Please edit documentation in R/audit_variables.R
 \name{print.morie_audit_result}
 \alias{print.morie_audit_result}
-\title{Print method for audit results.}
+\title{Print method for audit results}
 \usage{
 \method{print}{morie_audit_result}(x, ...)
 }
@@ -15,13 +15,15 @@
 \code{x}, invisibly.
 }
 \description{
-Print method for audit results.
+Print method for audit results
 }
 \examples{
 \donttest{
 spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
-                        spec("NumberConsecutiveDays_Segregation", "int")))
+specs <- list(v1 = list(
+  spec("UniqueIndividual_ID", "string"),
+  spec("NumberConsecutiveDays_Segregation", "int")
+))
 res <- morie_audit_otis_variables(specs)
 res$domain
 print(res)

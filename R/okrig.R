@@ -1,10 +1,12 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Ordinary kriging prediction (exponential / gaussian / spherical).
+#' Ordinary kriging prediction (exponential / gaussian / spherical)
 #'
 #' \deqn{\hat Z(s_0) = \lambda^\top Z,
 #'   \begin{bmatrix}C & 1 \\ 1^\top & 0\end{bmatrix}
 #'   \begin{bmatrix}\lambda \\ \mu\end{bmatrix} =
-#'   \begin{bmatrix}c_0 \\ 1\end{bmatrix}}{hat Z(s_0) = lambda^top Z, begin{bmatrix}C & 1 1^top & 0end{bmatrix} begin{bmatrix}lambda muend{bmatrix} = begin{bmatrix}c_0 1end{bmatrix}}
+#'   \begin{bmatrix}c_0 \\ 1\end{bmatrix}}{hat Z(s_0) = lambda^top Z, begin{bmatrix}C & 1
+#' 1^top & 0end{bmatrix} begin{bmatrix}lambda muend{bmatrix} = begin{bmatrix}c_0
+#' 1end{bmatrix}}
 #'
 #' @param x Numeric vector.
 #' @param coords Numeric coordinate matrix (n by d).

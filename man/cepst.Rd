@@ -16,7 +16,7 @@ List with \code{filtered} (real cepstral coefficients),
 \code{name}, \code{fs}, \code{n_samples}, and \code{extra} (\code{quefrency}, \code{n_fft}).
 }
 \description{
-Real cepstrum \eqn{c[n] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c[n] = IFFT(log |FFT(x)|)}. Useful
+Real cepstrum \eqn{c\[n\] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c\[n\] = IFFT(log |FFT(x)|)}. Useful
 for pitch-period estimation and any analysis where the multiplicative
 magnitude structure of the spectrum is best handled additively in the
 quefrency domain.

@@ -20,5 +20,7 @@ R parity of \code{morie.entheo_dmt.load_fmri_subject}. Reads
 \code{BOLD_AAL} matrix (112 AAL regions x 840 TRs).
 }
 \examples{
-\donttest{try(morie_entheo_load_fmri_subject(1L, "DMT"))}
+\donttest{
+try(morie_entheo_load_fmri_subject(1L, "DMT"))
+}
 }

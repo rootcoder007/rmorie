@@ -31,7 +31,7 @@ morie_gradient_boosting_ensemble(
 \item{seed}{RNG seed.}
 
 \item{deterministic_seed}{Integer or NULL.  If supplied, the RNG state
-is derived from the SHA-keyed \code{\link[=morie_det_rng]{morie_det_rng()}} so Py<->R streams
+is derived from the SHA-keyed \code{morie_det_rng()} so Py<->R streams
 agree on the canonical fixture.  When \code{NULL} (default), behaviour
 is unchanged: \code{seed} drives \code{set.seed()} directly.}
 }
@@ -40,11 +40,9 @@ Named list: estimate, train_score, feature_importances,
 n_estimators, learning_rate, max_depth, task, n, method.
 }
 \description{
-Wraps \code{gbm::gbm} when available, otherwise falls back to
-\code{xgboost} as a portable boosted-trees backend.
+Native gradient tree boosting (ESL Algorithm 10.3 with shrinkage);
+no boosted-trees package is loaded or called.
 }
 \examples{
-\dontshow{if (requireNamespace("gbm", quietly = TRUE) || requireNamespace("xgboost", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
-\dontshow{\}) # examplesIf}
 }

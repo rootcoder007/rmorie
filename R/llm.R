@@ -76,7 +76,7 @@ GEMINI_BASE_URL <- "https://generativelanguage.googleapis.com/v1beta/openai"
 #'   \code{quantization}. Zero rows when the server is unreachable or serves
 #'   no models (never errors), so it doubles as a connectivity test.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Point at your own Ollama server, then see what it serves:
 #' Sys.setenv(OLLAMA_HOST = "http://localhost:11434")
 #' models <- morie_llm_ollama_models()
@@ -111,7 +111,7 @@ morie_llm_ollama_models <- function(base = .morie_llm_ollama_base(),
     stringsAsFactors = FALSE)
 }
 
-#' Internal helper: resolve the Ollama model to use.
+#' Internal helper: resolve the Ollama model to use
 #'
 #' No hardcoded model name -- models are pulled per-machine and upstream tags
 #' get retired (llama3.2, gemma3), so an assumed default errors on most
@@ -239,7 +239,7 @@ morie_llm_detect_provider <- function() {
 #' @param timeout Seconds. Default 120.
 #' @return Parsed JSON list (the response body).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' msgs <- list(list(role = "user", content = "Say hello"))
 #' # Second arg is whatever model your Ollama server serves (see `ollama list`).
 #' res <- try(morie_llm_request_completion("http://localhost:11434", "your-model", msgs))

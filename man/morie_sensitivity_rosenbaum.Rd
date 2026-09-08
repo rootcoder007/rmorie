@@ -36,7 +36,9 @@ alternatively delegates to \code{sensitivitymv::senmv()} when
 sign-score bounds (Rosenbaum 2002, Section 4.3).
 }
 \examples{
-morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
+if (requireNamespace("rbounds", quietly = TRUE) && requireNamespace("stdReg", quietly = TRUE)) {
+  morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
+}
 }
 \references{
 Rosenbaum PR (2002). \emph{Observational Studies} (2nd ed.). Springer.

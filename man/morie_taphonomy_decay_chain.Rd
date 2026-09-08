@@ -12,14 +12,14 @@ morie_taphonomy_decay_chain(
 )
 }
 \arguments{
-\item{preservation}{Preservation factor in \code{[0, 1]}: 0 = ordinary
+\item{preservation}{Preservation factor in \code{\[0, 1\]}: 0 = ordinary
 decay, higher = stronger diversion toward mummification.}
 
-\item{decay_rate}{Base per-step progression probability in \code{(0, 1]}
+\item{decay_rate}{Base per-step progression probability in \code{(0, 1\]}
 (default 0.5).}
 
 \item{mummify_rate}{Base per-step diversion-to-mummified probability in
-\code{[0, 1]} (default 0.5); scaled by \code{preservation}.}
+\code{\[0, 1\]} (default 0.5); scaled by \code{preservation}.}
 
 \item{states}{Character vector of transient decomposition stages (default
 \code{c("fresh", "bloat", "active", "advanced")}).}

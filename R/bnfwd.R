@@ -4,7 +4,8 @@
 #'
 #' R parity for \code{morie.fn.bnfwd.batch_norm_forward}.
 #'
-#' \deqn{y_i = \gamma\,\frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta}{y_i = gamma frac{x_i - mu}{sqrt(sigma^2 + epsilon)} + beta}
+#' \deqn{y_i = \gamma\,\frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta}{y_i = gamma
+#' frac{x_i - mu}{sqrt(sigma^2 + epsilon)} + beta}
 #'
 #' @param x Numeric matrix shape \code{(batch, features)}.
 #' @param gamma Scale vector (default ones).
@@ -16,7 +17,7 @@
 #' morie_bnfwd_batch_norm_forward(x = rnorm(50))
 #' @export
 morie_bnfwd_batch_norm_forward <- function(x, gamma = NULL, beta = NULL,
-                                     eps = 1e-5) {
+                                           eps = 1e-5) {
   x <- as.matrix(x)
   # axis=0 (batch) -> per-feature stats
   mu <- colMeans(x)

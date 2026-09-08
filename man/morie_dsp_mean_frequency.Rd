@@ -19,7 +19,8 @@ Scalar mean frequency (Hz).
 }
 \examples{
 freqs <- seq.int(0, 64) / 64
-psd <- numeric(65); psd[20L] <- 1
+psd <- numeric(65)
+psd[20L] <- 1
 morie_dsp_mean_frequency(psd, freqs)
 }
 \references{

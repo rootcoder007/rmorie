@@ -27,7 +27,9 @@ effects are neglected, standard for events away from the edge).
 \examples{
 ev <- morie_hawkes_st_simulate(
   list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.3),
-  end_time = 20, region = c(0, 10, 0, 10), seed = 1)
+  end_time = 20, region = c(0, 10, 0, 10), seed = 1
+)
 morie_hawkes_st_loglik(ev, list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.3),
-                       end_time = 20, area = 100)
+  end_time = 20, area = 100
+)
 }

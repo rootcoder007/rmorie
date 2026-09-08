@@ -3,7 +3,7 @@
 \name{morie_iv_anderson_rubin_ci}
 \alias{morie_iv_anderson_rubin_ci}
 \title{Grid-based Anderson-Rubin confidence interval for a single endogenous
-variable.}
+variable}
 \usage{
 morie_iv_anderson_rubin_ci(
   data,
@@ -49,7 +49,7 @@ A vector of the computed values.
 }
 \description{
 Grid-based Anderson-Rubin confidence interval for a single endogenous
-variable.
+variable
 }
 \examples{
 set.seed(1); n <- 400

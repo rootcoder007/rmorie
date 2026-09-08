@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_alert_to_volatility_a01}
 \alias{morie_otis_make_pair_alert_to_volatility_a01}
-\title{a01-aware wrapper for the Ruhela alert -> volatility builder.}
+\title{a01-aware wrapper for the Ruhela alert -> volatility builder}
 \usage{
 morie_otis_make_pair_alert_to_volatility_a01(df = NULL)
 }

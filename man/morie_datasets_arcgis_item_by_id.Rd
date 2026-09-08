@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets_tps_arcgis_hub.R
 \name{morie_datasets_arcgis_item_by_id}
 \alias{morie_datasets_arcgis_item_by_id}
-\title{Generic by-id loader for any ArcGIS Online Feature Service item.}
+\title{Generic by-id loader for any ArcGIS Online Feature Service item}
 \usage{
 morie_datasets_arcgis_item_by_id(
   item_id,
@@ -34,7 +34,7 @@ file path (binary).
 }
 \description{
 Portal-agnostic sibling to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}}. Works for ANY ArcGIS
+\code{morie_datasets_tps_arcgis_hub_by_id()}. Works for ANY ArcGIS
 Online item GUID (not just TPS Hub catalog entries). Same five
 format paths (json / geojson / csv / shapefile / fgdb).
 }
@@ -48,9 +48,11 @@ wraps EsriCanadaEducation's \code{af06159170914808983959df6163fc86}
 with included fixtures for offline use).
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_arcgis_item_by_id(
-  "af06159170914808983959df6163fc86", format = "json"))
+  "af06159170914808983959df6163fc86",
+  format = "json"
+))
 if (!inherits(df, "try-error")) head(df)
 }
 }

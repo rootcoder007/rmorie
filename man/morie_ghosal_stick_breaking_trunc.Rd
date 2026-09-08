@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghstk.R
 \name{morie_ghosal_stick_breaking_trunc}
 \alias{morie_ghosal_stick_breaking_trunc}
-\title{Truncated stick-breaking representation of DP(alpha, G0).}
+\title{Truncated stick-breaking representation of DP(alpha, G0)}
 \usage{
 morie_ghosal_stick_breaking_trunc(
   x,
@@ -28,7 +28,7 @@ morie_ghosal_stick_breaking_trunc(
 \item{base_sd}{Optional base-measure sd.}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("ghstk", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("ghstk", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
 }
@@ -37,7 +37,7 @@ Named list with estimate, weights, atoms, effective_K,
 trunc_err_bound, n, method.
 }
 \description{
-Truncated stick-breaking representation of DP(alpha, G0).
+Truncated stick-breaking representation of DP(alpha, G0)
 }
 \examples{
 morie_ghosal_stick_breaking_trunc(x = rnorm(50))

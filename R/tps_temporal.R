@@ -10,7 +10,6 @@
 #' to a notebook.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_tps_year_over_year_trend}}: OLS slope /
@@ -543,6 +542,10 @@ morie_tps_arima_forecast <- function(df, h = 12L, ds_name = "?") {
 # Print method (shared with tps_stochastic)
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_tps_temporal_result} objects
+#'
+#' @param x A \code{morie_tps_temporal_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -561,7 +564,7 @@ print.morie_tps_temporal_result <- function(x, ...) {
   cat(x$title, "\
 ", strrep("=", nchar(x$title)), "\
 ", sep = "")
-  if (!is.null(x$call) && nzchar(x$call)) {
+  if (!is.null(x$call) && length(x$call) == 1L && nzchar(x$call)) {
     cat("Call:", x$call, "\
 \
 ", sep = " ")

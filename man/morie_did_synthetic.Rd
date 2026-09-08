@@ -32,6 +32,9 @@ the SDID regularisation from the data).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{Significance level.}
+
+
+
 }
 \value{
 A result list; see \code{\link{morie_did_2x2}}.
@@ -51,7 +54,8 @@ df$treat_time <- ifelse(df$unit <= 5, 6, Inf)
 df$d <- as.integer(df$time >= df$treat_time)
 df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
 out <- morie_did_synthetic(df, "y", "unit", "time", "treat_time",
-                           n_bootstrap = 50L, seed = 3)
+  n_bootstrap = 50L, seed = 3
+)
 str(out, max.level = 1)
 }
 \references{

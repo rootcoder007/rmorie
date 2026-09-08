@@ -2,10 +2,8 @@
 % Please edit documentation in R/siuiap.R
 \name{MORIE_SIUIAP_ORIGINAL_PANEL_2019_2020}
 \alias{MORIE_SIUIAP_ORIGINAL_PANEL_2019_2020}
-\title{Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020.}
-\usage{
-MORIE_SIUIAP_ORIGINAL_PANEL_2019_2020
-}
+\title{Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020}
+
 \description{
-Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020.
+Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020
 }

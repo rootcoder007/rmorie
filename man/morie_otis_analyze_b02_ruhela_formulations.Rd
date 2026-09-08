@@ -4,7 +4,7 @@
 \alias{morie_otis_analyze_b02_ruhela_formulations}
 \alias{morie_otis_analyze_b02_dlrm}
 \alias{morie_otis_analyze_b02_mrm}
-\title{OTIS b02 Ruhela formulations: T=Female -> seg-day count.}
+\title{OTIS b02 Ruhela formulations: T=Female -> seg-day count}
 \usage{
 morie_otis_analyze_b02_ruhela_formulations(data = NULL, out_dir = NULL)
 
@@ -21,7 +21,7 @@ morie_otis_analyze_b02_mrm(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-OTIS b02 Ruhela formulations: T=Female -> seg-day count.
+OTIS b02 Ruhela formulations: T=Female -> seg-day count
 }
 \examples{
 \donttest{

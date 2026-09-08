@@ -33,12 +33,12 @@ using the chosen bandwidths.
 }
 \examples{
 \donttest{
-  if (requireNamespace("np", quietly = TRUE)) {
-    set.seed(1)
-    n  <- 50
-    df <- data.frame(x = stats::runif(n, -1, 1))
-    df$y <- sin(pi * df$x) + stats::rnorm(n, sd = 0.1)
-    morie_np_kernel_reg(y ~ x, data = df)
-  }
+if (requireNamespace("np", quietly = TRUE)) {
+  set.seed(1)
+  n <- 50
+  df <- data.frame(x = stats::runif(n, -1, 1))
+  df$y <- sin(pi * df$x) + stats::rnorm(n, sd = 0.1)
+  morie_np_kernel_reg(y ~ x, data = df)
+}
 }
 }

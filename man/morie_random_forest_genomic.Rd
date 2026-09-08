@@ -36,7 +36,8 @@ morie_random_forest_genomic(
 list(estimate, y_hat, oob_score, feature_importance, se, n, method).
 }
 \description{
-Uses randomForest if available; otherwise a base-R bagged-tree
+Native random forest (ESL Algorithm 15.1) over combined covariate
+and marker
 fallback (regression CART approximation).
 }
 \examples{

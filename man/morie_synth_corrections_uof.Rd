@@ -2,7 +2,7 @@
 % Please edit documentation in R/corrections_uof.R
 \name{morie_synth_corrections_uof}
 \alias{morie_synth_corrections_uof}
-\title{Build a synthetic Corrections-UoF data.frame for testing.}
+\title{Build a synthetic Corrections-UoF data.frame for testing}
 \usage{
 morie_synth_corrections_uof(key, n = 30L, seed = 1L)
 }

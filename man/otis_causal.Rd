@@ -3,7 +3,7 @@
 \name{otis_causal}
 \alias{otis_causal}
 \title{OTIS causal-inference pipeline: IPW, AIPW, IRM-DML, and Ruhela's
-alert-complexity -> regional-volatility cell-frame builders.}
+alert-complexity -> regional-volatility cell-frame builders}
 \description{
 R port of \code{src/morie/otis_causal.py}. Implements the OTIS
 causal-inference pipeline used in the MA-paired thesis work

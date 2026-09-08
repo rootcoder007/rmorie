@@ -12,6 +12,7 @@ morie_partial_cor_test(x, y, z, method = "pearson")
 \item{z}{Numeric vector, matrix, or data frame of controls.}
 
 \item{method}{Correlation method.}
+
 }
 \value{
 A one-row data frame: \code{estimate}, \code{p.value},
@@ -22,5 +23,7 @@ A one-row data frame: \code{estimate}, \code{p.value},
 freedom. Reproduces \code{ppcor::pcor.test}.
 }
 \examples{
-morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+if (requireNamespace("ppcor", quietly = TRUE)) {
+  morie_partial_cor_test(mtcars$mpg, mtcars$wt, mtcars$disp)
+}
 }

@@ -1,4 +1,4 @@
-# morie/_fast.R — R-side wrappers for the Rcpp hot kernels.
+# morie/_fast.R -- R-side wrappers for the Rcpp hot kernels.
 #
 # This file shadows morie.fast in the Python side: users get the same
 # numerical results from `rmorie:::morie_normal_pdf(x, 0, 1)` as they do
@@ -33,6 +33,7 @@ morie_normal_pdf <- function(x, mean = 0, sd = 1) {
 #' Fast mean
 #'
 #' Single-pass C++ kernel.  Equivalent to \code{mean(x)}.
+#' @param x See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the mean of \code{x}.
 #' @examples
@@ -52,6 +53,8 @@ morie_mean <- function(x) {
 #' @param ddof integer; default 1 (sample variance)
 #' @keywords internal
 #' @return A numeric scalar: the variance of \code{x}.
+#' @examples
+#' abs(rmorie:::morie_var(c(1, 2, 3, 4, 5), ddof = 1) - 2.5) < 1e-9
 morie_var <- function(x, ddof = 1) {
   if (.cpp_available()) {
     morie_var_cpp(as.numeric(x), as.integer(ddof))
@@ -68,6 +71,8 @@ morie_var <- function(x, ddof = 1) {
 #'
 #' Single-pass C++ kernel.  Equivalent to \code{cor(x, y)} when both
 #' vectors are equal-length and complete (no NA handling).
+#' @param x See Usage.
+#' @param y See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the Pearson correlation between \code{x} and \code{y}.
 #' @examples

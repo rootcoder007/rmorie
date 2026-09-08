@@ -13,7 +13,7 @@ cross-year-safety, and recommended methods per variable.
 }
 \details{
 Pure R; no C/C++ hot path needed (taxonomy is regex + lookup, not
-CPU-bound).  Per \code{[[feedback_r_cpp_first]]} we'd reach for
+CPU-bound).  Per \code{\[\[feedback_r_cpp_first\]\]} we'd reach for
 Rcpp only if profiling showed a real bottleneck.
 \subsection{Public callables}{
 

@@ -14,8 +14,23 @@ Named list with \code{omega, alpha, gamma, beta, persistence,
   loglik, conditional_variance, n, method}.
 }
 \description{
-GJR-GARCH(1,1) threshold GARCH
+\deqn{\sigma_t^2 = \omega + (\alpha + \gamma I_{t-1})\epsilon_{t-1}^2
+  + \beta \sigma_{t-1}^2}
+where \eqn{I_{t-1} = 1} when \eqn{\epsilon_{t-1} \le 0} and 0
+otherwise, so \eqn{\gamma} is the leverage term. Persistence is
+\eqn{\alpha + \beta + \gamma\kappa} with \eqn{\kappa} the
+probability of a negative standardised residual -- 0.5 under the
+symmetric Gaussian likelihood used here.
+}
+\details{
+Native Gaussian quasi-maximum-likelihood fit; no GARCH package is
+loaded or called.
 }
 \examples{
 morie_tgarch_model(x = rnorm(50))
+}
+\references{
+Glosten, L. R., Jagannathan, R. & Runkle, D. E. (1993). On the relation
+between the expected value and the volatility of the nominal excess
+return on stocks. \emph{Journal of Finance}, 48(5), 1779-1801.
 }

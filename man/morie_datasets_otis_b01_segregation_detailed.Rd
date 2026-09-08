@@ -30,6 +30,8 @@ OTIS b01 -- Segregation detailed (per-individual episodes)
 }
 \examples{
 df <- morie_datasets_otis_b01_segregation_detailed(offline = TRUE)
-head(df[, c("EndFiscalYear", "Gender",
-            "NumberConsecutiveDays_Segregation")])
+head(df[, c(
+  "EndFiscalYear", "Gender",
+  "NumberConsecutiveDays_Segregation"
+)])
 }

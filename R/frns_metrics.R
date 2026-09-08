@@ -42,6 +42,15 @@ NULL
 
 # ---- internal helpers -----------------------------------------------------
 
+#' .frns_check_aligned
+#'
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .frns_check_aligned <- function(...) {
   args <- list(...)
   lengths <- vapply(args, function(a) length(a[[2]]), integer(1))
@@ -58,6 +67,17 @@ NULL
   if (lengths[1] == 0L) stop("inputs are empty", call. = FALSE)
 }
 
+#' .frns_favorable_rates
+#'
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param outcome A vector; indexed elementwise.
+#' @param group Passed to \code{unique}.
+#' @param favorable Passed to \code{==}.
+#' @return The value of \code{rates}, as built in the body.
+#' @export
 .frns_favorable_rates <- function(outcome, group, favorable) {
   groups <- unique(group)
   rates <- list()
@@ -70,6 +90,17 @@ NULL
   rates
 }
 
+#' Returns list(privileged = <key>, warning = <chr or NULL>)
+#'
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @param rates Iterated over elementwise, with \code{vapply}.
+#' @return A list with \code{privileged}, \code{warning}.
+#' @export
 .frns_resolve_privileged <- function(privileged, rates) {
   # Returns list(privileged = <key>, warning = <chr or NULL>).
   keys <- names(rates)
@@ -94,6 +125,18 @@ NULL
   ))
 }
 
+#' .frns_rates_from_labels
+#'
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y_true A vector; indexed elementwise.
+#' @param y_pred A vector; indexed elementwise.
+#' @param group Passed to \code{unique}.
+#' @param favorable Passed to \code{==}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .frns_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- unique(group)
   out <- list()
@@ -113,6 +156,17 @@ NULL
   out
 }
 
+#' Gini via the sorted-rank formula; equals sum_i sum_j |x_i-x_j| /
+#'
+#' (2 n sum x). Returns 0 for all-zero or single-element input.
+#'
+#' @param x A vector; its length is taken.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .frns_gini(x = x)
+#' res
 .frns_gini <- function(x) {
   # Gini via the sorted-rank formula; equals sum_i sum_j |x_i-x_j| /
   # (2 n sum x). Returns 0 for all-zero or single-element input.
@@ -126,6 +180,19 @@ NULL
   (2 * sum(idx * x)) / (n * total) - (n + 1) / n
 }
 
+#' The element with the largest absolute value (finite only); NA if none
+#'
+#' A step of the frns_metrics implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param values A vector; indexed elementwise.
+#' @return The value of \code{[}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .frns_worst_abs(values = x)
+#' res
 .frns_worst_abs <- function(values) {
   # The element with the largest absolute value (finite only); NA if none.
   finite <- values[is.finite(values)]
@@ -139,26 +206,39 @@ NULL
 # ---- 1. disparate impact --------------------------------------------------
 
 
-
 # ---- 2. demographic parity ------------------------------------------------
-
 
 
 # ---- 3. equalized odds ----------------------------------------------------
 
 
-
 # ---- 4. average odds difference -------------------------------------------
-
 
 
 # ---- 5. Gini --------------------------------------------------------------
 
 
-
 # ---- 6. bias amplification score ------------------------------------------
 
 
+#' .morie_fairness_as_1d
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 3 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Coerced to vector by the body, with \code{as.vector}.
+#' @param name Passed to \code{sprintf}.
+#' @return The value of \code{arr}, as built in the body.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' txt <- c('alpha', 'beta', 'gamma', 'delta')
+#' res <- .morie_fairness_as_1d(x = x, name = txt)
+#' res
 .morie_fairness_as_1d <- function(x, name) {
   arr <- as.vector(x)
   if (length(arr) == 0L) {
@@ -167,8 +247,20 @@ NULL
   arr
 }
 
+#' .morie_fairness_check_aligned
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 3 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ... Passed through.
+#' @return The value of \code{for}.
+#' @export
 .morie_fairness_check_aligned <- function(...) {
-  pairs <- list(...)  # list of c(name, length)
+  pairs <- list(...) # list of c(name, length)
   n <- pairs[[1L]]$len
   for (p in pairs) {
     if (p$len != n) {
@@ -180,11 +272,35 @@ NULL
   }
 }
 
+#' Python\'s "first-seen" order; unique() in R is already first-seen
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{.morie_fairness_favorable_rates}, \code{.morie_fairness_rates_from_labels},
+#' \code{morie_fairness_gini} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param arr Passed to \code{unique}.
+#' @return The value of \code{unique}.
+#' @export
 .morie_fairness_ordered_unique <- function(arr) {
   # Python's "first-seen" order; unique() in R is already first-seen.
   unique(arr)
 }
 
+#' .morie_fairness_favorable_rates
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity},
+#' \code{morie_fairness_disparate_impact}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param outcome A vector; indexed elementwise.
+#' @param group Passed to \code{.morie_fairness_ordered_unique}.
+#' @param favorable Passed to \code{==}.
+#' @return The value of \code{rates}, as built in the body.
+#' @export
 .morie_fairness_favorable_rates <- function(outcome, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   rates <- vector("list", length(groups))
@@ -199,6 +315,21 @@ NULL
   rates
 }
 
+#' .morie_fairness_resolve_privileged
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 2 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param privileged Optional; may be \code{NULL}. Coerced to character by the body, with
+#' \code{as.character}.
+#' @param rates Iterated over elementwise, with \code{vapply}.
+#' @param warnings_env A list; the body reads \code{$w} from it.
+#' @return The value of \code{inferred}, as built in the body.
+#' @export
 .morie_fairness_resolve_privileged <- function(privileged, rates, warnings_env) {
   group_keys <- vapply(rates, function(r) as.character(r$g), character(1))
   if (!is.null(privileged)) {
@@ -219,6 +350,19 @@ NULL
   inferred
 }
 
+#' .morie_fairness_rates_from_labels
+#'
+#' A step of the frns_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference}, \code{morie_fairness_equalized_odds}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y_true A vector; indexed elementwise.
+#' @param y_pred A vector; indexed elementwise.
+#' @param group Passed to \code{.morie_fairness_ordered_unique}.
+#' @param favorable Passed to \code{==}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_fairness_rates_from_labels <- function(y_true, y_pred, group, favorable) {
   groups <- .morie_fairness_ordered_unique(group)
   out <- vector("list", length(groups))
@@ -232,12 +376,25 @@ NULL
     neg <- !pos
     tpr <- if (any(pos)) mean(gp[pos] == favorable) else NA_real_
     fpr <- if (any(neg)) mean(gp[neg] == favorable) else NA_real_
-    out[[i]] <- list(g = g, n = as.integer(sum(m)),
-                     tpr = as.numeric(tpr), fpr = as.numeric(fpr))
+    out[[i]] <- list(
+      g = g, n = as.integer(sum(m)),
+      tpr = as.numeric(tpr), fpr = as.numeric(fpr)
+    )
   }
   out
 }
 
+#' Sorted-rank formula. Returns 0.0 for an all-zero or single-element
+#'
+#' input (no inequality defined), matching the Python helper.
+#'
+#' @param x A vector; its length is taken.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_fairness_gini_core(x = x)
+#' res
 .morie_fairness_gini_core <- function(x) {
   # Sorted-rank formula. Returns 0.0 for an all-zero or single-element
   # input (no inequality defined), matching the Python helper.
@@ -272,7 +429,7 @@ NULL
 #'   worst (smallest) ratio across groups.
 #' @examples
 #' pred <- c(1, 1, 1, 1, 1, 1, 1, 1, 0, 0)
-#' race <- c("A","A","A","A","A","B","B","B","B","B")
+#' race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 #' morie_fairness_disparate_impact(pred, race, privileged = "A")$value
 #' @export
 morie_fairness_disparate_impact <- function(y_pred, group,
@@ -282,7 +439,7 @@ morie_fairness_disparate_impact <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -380,7 +537,7 @@ morie_fairness_disparate_impact <- function(y_pred, group,
 #'   largest absolute gap across groups.
 #' @examples
 #' pred <- c(1, 1, 1, 1, 0, 0, 0, 1, 0, 0)
-#' race <- c("A","A","A","A","A","B","B","B","B","B")
+#' race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 #' morie_fairness_demographic_parity(pred, race, privileged = "A")$value
 #' @export
 morie_fairness_demographic_parity <- function(y_pred, group,
@@ -390,7 +547,7 @@ morie_fairness_demographic_parity <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -417,17 +574,21 @@ morie_fairness_demographic_parity <- function(y_pred, group,
 
   non_ref <- gaps[names(gaps) != priv]
   finite_nr <- non_ref[is.finite(non_ref)]
-  worst <- if (length(finite_nr) > 0L) finite_nr[which.max(abs(finite_nr))]
-           else if (length(non_ref) > 0L) NA_real_ else 0.0
+  worst <- if (length(finite_nr) > 0L) {
+    finite_nr[which.max(abs(finite_nr))]
+  } else if (length(non_ref) > 0L) NA_real_ else 0.0
   worst_val <- as.numeric(worst)
 
   interp <- paste0(
-    sprintf("The largest favourable-rate gap is %+.3f (group rate minus the '%s' reference rate). ",
-            worst_val, priv),
-    if (abs(worst_val) >= 0.1)
+    sprintf(
+      "The largest favourable-rate gap is %+.3f (group rate minus the '%s' reference rate). ",
+      worst_val, priv
+    ),
+    if (abs(worst_val) >= 0.1) {
       "A gap far from zero means favourable outcomes differ materially across groups, i.e. the system grants them at different rates."
-    else
+    } else {
       "Gaps are small; favourable-outcome rates are close to parity, though this does not account for differences in ground-truth base rates."
+    }
   )
 
   .morie_fairness_result(
@@ -470,10 +631,10 @@ morie_fairness_demographic_parity <- function(y_pred, group,
 #' @return A \code{morie_fairness_result}; headline value is the
 #'   largest absolute TPR-or-FPR gap.
 #' @examples
-#' truth <- c(1,0,1,0,1,0,1,0)
-#' pred  <- c(1,0,1,0,1,1,0,1)
-#' race  <- c("A","A","A","A","B","B","B","B")
-#' morie_fairness_equalized_odds(truth, pred, race, privileged="A")$value
+#' truth <- c(1, 0, 1, 0, 1, 0, 1, 0)
+#' pred <- c(1, 0, 1, 0, 1, 1, 0, 1)
+#' race <- c("A", "A", "A", "A", "B", "B", "B", "B")
+#' morie_fairness_equalized_odds(truth, pred, race, privileged = "A")$value
 #' @export
 morie_fairness_equalized_odds <- function(y_true, y_pred, group,
                                           privileged = NULL,
@@ -484,7 +645,7 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
   .morie_fairness_check_aligned(
     list(name = "y_true", len = length(yt)),
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   per <- .morie_fairness_rates_from_labels(yt, yp, grp, favorable)
@@ -524,8 +685,10 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
     )
   }
 
-  all_gaps <- c(tpr_gaps[names(tpr_gaps) != priv],
-                fpr_gaps[names(fpr_gaps) != priv])
+  all_gaps <- c(
+    tpr_gaps[names(tpr_gaps) != priv],
+    fpr_gaps[names(fpr_gaps) != priv]
+  )
   finite <- all_gaps[is.finite(all_gaps)]
   worst <- if (length(finite) > 0L) finite[which.max(abs(finite))] else NaN
   worst_val <- as.numeric(worst)
@@ -533,10 +696,11 @@ morie_fairness_equalized_odds <- function(y_true, y_pred, group,
 
   interp <- paste0(
     sprintf("The largest equalized-odds gap is %+.3f. ", worst_val),
-    if (violation)
+    if (violation) {
       "Error rates differ substantially across groups: the system is not equally accurate for everyone, which is a stronger fairness concern than an outcome-rate gap alone."
-    else
+    } else {
       "TPR and FPR are close across groups; the system's error profile is roughly even."
+    }
   )
 
   .morie_fairness_result(
@@ -594,7 +758,7 @@ morie_fairness_average_odds_difference <- function(y_true, y_pred, group,
   .morie_fairness_check_aligned(
     list(name = "y_true", len = length(yt)),
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   per <- .morie_fairness_rates_from_labels(yt, yp, grp, favorable)
@@ -678,8 +842,10 @@ morie_fairness_gini <- function(values, group = NULL) {
   vals <- as.numeric(.morie_fairness_as_1d(values, "values"))
   warnings <- character(0)
   if (any(vals < 0, na.rm = TRUE)) {
-    warnings <- c(warnings,
-      "negative values present; the Gini coefficient assumes non-negative quantities and the result may be uninformative.")
+    warnings <- c(
+      warnings,
+      "negative values present; the Gini coefficient assumes non-negative quantities and the result may be uninformative."
+    )
   }
 
   overall <- .morie_fairness_gini_core(vals)
@@ -690,7 +856,7 @@ morie_fairness_gini <- function(values, group = NULL) {
     grp <- .morie_fairness_as_1d(group, "group")
     .morie_fairness_check_aligned(
       list(name = "values", len = length(vals)),
-      list(name = "group",  len = length(grp))
+      list(name = "group", len = length(grp))
     )
     rows <- list()
     for (g in .morie_fairness_ordered_unique(grp)) {
@@ -711,10 +877,11 @@ morie_fairness_gini <- function(values, group = NULL) {
 
   interp <- paste0(
     sprintf("Gini = %.3f. ", overall),
-    if (overall >= 0.5)
+    if (overall >= 0.5) {
       "The quantity is highly concentrated - a small share of units absorbs most of it."
-    else
+    } else {
       "The quantity is relatively evenly spread."
+    }
   )
 
   .morie_fairness_result(
@@ -723,8 +890,10 @@ morie_fairness_gini <- function(values, group = NULL) {
     sections = sections,
     warnings = warnings,
     interpretation = interp,
-    payload = list(value = overall, gini = overall,
-                   per_group = per_group)
+    payload = list(
+      value = overall, gini = overall,
+      per_group = per_group
+    )
   )
 }
 
@@ -759,7 +928,7 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   grp <- .morie_fairness_as_1d(group, "group")
   .morie_fairness_check_aligned(
     list(name = "y_pred", len = length(yp)),
-    list(name = "group",  len = length(grp))
+    list(name = "group", len = length(grp))
   )
 
   rates <- .morie_fairness_favorable_rates(yp, grp, favorable)
@@ -776,7 +945,9 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   non_ref <- gaps[names(gaps) != priv]
   delta_parity <- if (length(non_ref) > 0L) {
     as.numeric(non_ref[which.max(abs(non_ref))])
-  } else 0.0
+  } else {
+    0.0
+  }
 
   rate_vec <- vapply(rates, function(r) r$rate, numeric(1))
   gini <- .morie_fairness_gini_core(rate_vec)
@@ -793,12 +964,15 @@ morie_fairness_bias_amplification <- function(y_pred, group,
   }
 
   interp <- paste0(
-    sprintf("Bias Amplification Score = %+.4f (parity gap %+.3f x Gini %.3f). ",
-            bas, delta_parity, gini),
-    if (abs(bas) >= 0.05)
+    sprintf(
+      "Bias Amplification Score = %+.4f (parity gap %+.3f x Gini %.3f). ",
+      bas, delta_parity, gini
+    ),
+    if (abs(bas) >= 0.05) {
       "Both a directional disparity and substantial cross-group inequality are present - the system amplifies bias."
-    else
+    } else {
       "At least one component is small, so little amplification is indicated."
+    }
   )
 
   .morie_fairness_result(

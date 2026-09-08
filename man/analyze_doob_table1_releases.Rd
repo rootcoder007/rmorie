@@ -2,7 +2,7 @@
 % Please edit documentation in R/doob_trends.R
 \name{analyze_doob_table1_releases}
 \alias{analyze_doob_table1_releases}
-\title{Analyse Doob Affidavit Table 1 — 5-year average annual releases}
+\title{Analyse Doob Affidavit Table 1 -- 5-year average annual releases}
 \usage{
 analyze_doob_table1_releases()
 }

@@ -21,7 +21,7 @@ coefficient plus the cumulative share of incidents in the top-10
 and top-20 neighbourhoods.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_assault(max_features = 200L))
 if (!inherits(df, "try-error")) {
   res <- try(morie_tps_neighbourhood_concentration(df, ds_name = "assault"))

@@ -85,7 +85,7 @@
 #'   \code{\link[utils]{read.csv}} if \pkg{readr} is unavailable).
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Requires network access.
 #' url <- paste0(
 #'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
@@ -96,6 +96,18 @@
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_cansim}},
 #'   \code{\link{morie_cache_dir}}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Requires network access.
+#' url <- paste0(
+#'   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",
+#'   "2024001/2022_CSV.zip"
+#' )
+#' df <- morie_ingest_statcan_csv(url)
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_statcan_csv <- function(url,
                                      member = NULL,
@@ -172,12 +184,20 @@ morie_ingest_statcan_csv <- function(url,
 #'   \code{\link[cansim]{get_cansim}}.
 #' @return A base R \code{data.frame}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Requires the 'cansim' package and network access.
 #' df <- morie_ingest_statcan_cansim("35-10-0177")
 #' head(df)
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_csv}}
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Requires the 'cansim' package and network access.
+#' df <- morie_ingest_statcan_cansim("35-10-0177")
+#' head(df)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_ingest_statcan_cansim <- function(table_id,
                                         language = c("eng", "fra"),
@@ -245,11 +265,20 @@ morie_ingest_statcan_cansim <- function(table_id,
 #'   \code{vector}, \code{ref_date}, \code{value}, \code{decimals},
 #'   \code{scalar_factor}, \code{symbol_code}, \code{release_time}.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Two CPI series, last 3 periods each -- no API key needed.
 #' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
 #' }
 #' @seealso \code{\link{morie_ingest_statcan_cansim}}
+#' @examples
+#' \dontrun{
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Two CPI series, last 3 periods each -- no API key needed.
+#' morie_ingest_statcan_vectors(c("v41690973", "v41691045"), periods = 3)
+#' }
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
                                          timeout = 60L) {
@@ -268,7 +297,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
   if (is.na(periods) || periods < 1L) {
     stop("`periods` must be a positive integer.", call. = FALSE)
   }
-  body <- jsonlite::toJSON(
+  body <- .s03json_toJSON(
     data.frame(vectorId = ids, latestN = periods),
     auto_unbox = TRUE
   )
@@ -283,7 +312,7 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
     stop("StatCan WDS vector request failed (HTTP ",
          resp$status_code, ").", call. = FALSE)
   }
-  parsed <- jsonlite::fromJSON(resp$body, simplifyVector = FALSE)
+  parsed <- .s03json_fromJSON(resp$body, simplifyVector = FALSE)
   rows <- lapply(parsed, function(el) {
     if (!identical(el$status, "SUCCESS")) return(NULL)
     ob <- el$object
@@ -315,6 +344,18 @@ morie_ingest_statcan_vectors <- function(vectors, periods = 12L,
 # only (download.file + unzip + read.csv); replaces cansim::get_cansim.
 # Column set is StatCan's raw CSV schema (REF_DATE, GEO, VALUE, ...),
 # which is the subset of get_cansim() output the callers use.
+#' Native StatCan Web Data Service client -- fetches the full-table
+#'
+#' CSV for a table id ("NN-MM-XXXX" or "NN-MM-XXXX-NN" cansim style, or
+#' a bare 8-digit PID) via the getFullTableDownloadCSV endpoint. Base R
+#' only (download.file + unzip + read.csv); replaces cansim::get_cansim.
+#' Column set is StatCan\'s raw CSV schema (REF_DATE, GEO, VALUE, ...),
+#' which is the subset of get_cansim() output the callers use.
+#'
+#' @param table_id Character; passed to \code{gsub}.
+#' @param language Character; passed to \code{tolower}. Defaults to \code{"en"}.
+#' @return The value of \code{utils::read.csv}.
+#' @export
 .morie_statcan_wds_table <- function(table_id, language = "en") {
   pid <- gsub("[^0-9]", "", table_id)
   if (nchar(pid) >= 10L) pid <- substr(pid, 1, 8L)

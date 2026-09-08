@@ -42,25 +42,37 @@
 #'   `num_resources`, `metadata_modified`, `language`, `license`.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_montreal_justice_safety_layers()
-#' nrow(cat_df)  # 23
+#' nrow(cat_df) # 23
 #' head(cat_df$title)
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_montreal_justice_safety_layers()
+#' nrow(cat_df) # 23
+#' head(cat_df$title)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
     path <- system.file("extdata",
-                         "montreal_justice_safety_catalog.csv",
-                         package = "rmorie")
+      "montreal_justice_safety_catalog.csv",
+      package = "rmorie"
+    )
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "montreal_justice_safety_catalog.csv", package = "rmoriedata")
     }
-    if (!nzchar(path))
+    if (!nzchar(path)) {
       stop("bundled MTL justice/safety catalog missing", call. = FALSE)
-    return(utils::read.csv(path, stringsAsFactors = FALSE,
-                            check.names = FALSE))
+    }
+    return(utils::read.csv(path,
+      stringsAsFactors = FALSE,
+      check.names = FALSE
+    ))
   }
-  url <- paste0(.MORIE_MONTREAL_CKAN_BASE,
-                "/action/package_search?fq=groups:loi-justice-securite-publique",
-                "&rows=50")
+  url <- paste0(
+    .MORIE_MONTREAL_CKAN_BASE,
+    "/action/package_search?fq=groups:loi-justice-securite-publique",
+    "&rows=50"
+  )
   r <- .morie_dataset_http_json(url)
   if (!isTRUE(r$success)) stop("MTL CKAN package_search failed", call. = FALSE)
   res <- r$result$results
@@ -71,7 +83,8 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
     metadata_modified = res$metadata_modified,
     language = res$language %||% NA_character_,
     license = res$license_id %||% NA_character_,
-    stringsAsFactors = FALSE)
+    stringsAsFactors = FALSE
+  )
 }
 
 #' SIM Montreal Fire Service intervention records (sample)
@@ -108,35 +121,46 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 #'   \url{https://donnees.montreal.ca/dataset/interventions-service-securite-incendie-montreal}.
 #' @examplesIf nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
-#' nrow(df)              # 349
+#' nrow(df) # 349
 #' table(df$DESCRIPTION_GROUPE)
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
+#' nrow(df) # 349
+#' table(df$DESCRIPTION_GROUPE)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
-                                                         csv_path = NULL,
-                                                         max_features = NULL) {
+                                                      csv_path = NULL,
+                                                      max_features = NULL) {
   if (!is.null(csv_path)) {
-    if (!file.exists(csv_path))
+    if (!file.exists(csv_path)) {
       stop(sprintf("SIM CSV not found: %s", csv_path), call. = FALSE)
+    }
     df <- utils::read.csv(csv_path, stringsAsFactors = FALSE)
   } else if (offline) {
     path <- system.file("extdata",
-                         "montreal_sim_interventions_sample.csv",
-                         package = "rmorie")
+      "montreal_sim_interventions_sample.csv",
+      package = "rmorie"
+    )
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmoriedata")
     }
-    if (!nzchar(path))
+    if (!nzchar(path)) {
       stop("bundled SIM interventions sample missing", call. = FALSE)
+    }
     df <- utils::read.csv(path, stringsAsFactors = FALSE)
   } else {
     stop("MTL Open Data CKAN's SIM resource is large (170k+ rows). ",
-         "Either set offline = TRUE (bundled sample) or download ",
-         "from https://donnees.montreal.ca/dataset/interventions-service-securite-incendie-montreal ",
-         "and pass csv_path = '...'.",
-         call. = FALSE)
+      "Either set offline = TRUE (bundled sample) or download ",
+      "from https://donnees.montreal.ca/dataset/interventions-service-securite-incendie-montreal ",
+      "and pass csv_path = '...'.",
+      call. = FALSE
+    )
   }
-  if (!is.null(max_features))
+  if (!is.null(max_features)) {
     df <- utils::head(df, as.integer(max_features))
+  }
   df
 }
 
@@ -153,17 +177,26 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
 #' d <- morie_datasets_montreal_sim_intervention_types()
 #' nrow(d)
 #' head(d)
+#' @examples
+#' \dontshow{if (nzchar(system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' d <- morie_datasets_montreal_sim_intervention_types()
+#' nrow(d)
+#' head(d)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_sim_intervention_types <- function() {
   path <- system.file("extdata",
-                       "montreal_sim_intervention_types.csv",
-                       package = "rmorie")
+    "montreal_sim_intervention_types.csv",
+    package = "rmorie"
+  )
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmoriedata")
   }
-  if (!nzchar(path))
+  if (!nzchar(path)) {
     stop("bundled SIM intervention types fixture missing",
-         call. = FALSE)
+      call. = FALSE
+    )
+  }
   utils::read.csv(path, stringsAsFactors = FALSE)
 }
 
@@ -178,26 +211,32 @@ morie_datasets_montreal_sim_intervention_types <- function() {
 #' @param filters Optional named list of `{column: value}` filters.
 #' @return A `data.frame` of records.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Mobility-squad interventions (resource verified live 2026-07 via
 #' # /api/3/action/datastore_search on donnees.montreal.ca):
 #' df <- try(morie_datasets_montreal_ckan_resource(
 #'   resource_id = "ff81ecc4-d3b0-4661-806f-a27870e63a4e",
-#'   limit = 50))
+#'   limit = 50
+#' ))
 #' }
 #' @export
 morie_datasets_montreal_ckan_resource <- function(resource_id,
-                                                    limit = 100L,
-                                                    filters = NULL) {
-  qs <- list(resource_id = resource_id,
-              limit = as.integer(limit))
-  if (!is.null(filters))
+                                                  limit = 100L,
+                                                  filters = NULL) {
+  qs <- list(
+    resource_id = resource_id,
+    limit = as.integer(limit)
+  )
+  if (!is.null(filters)) {
     qs$filters <- .morie_to_json(filters, auto_unbox = TRUE)
+  }
   url <- paste0(.MORIE_MONTREAL_CKAN_BASE, "/action/datastore_search")
   r <- .morie_dataset_http_json(url, query = qs)
-  if (!isTRUE(r$success))
+  if (!isTRUE(r$success)) {
     stop("MTL CKAN datastore_search failed", call. = FALSE)
-  if (is.null(r$result$records) || length(r$result$records) == 0L)
+  }
+  if (is.null(r$result$records) || length(r$result$records) == 0L) {
     return(data.frame())
+  }
   r$result$records
 }

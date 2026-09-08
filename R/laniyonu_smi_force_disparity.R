@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of Laniyonu & Goff (2021) — Police force vs SMI disparity
+#' Replication of Laniyonu & Goff (2021) -- Police force vs SMI disparity
 #'
 #' R port of \code{morie.laniyonu.smi_force_disparity}.  Estimates a
 #' hierarchical negative-binomial model with a synthetic area-exposure
@@ -20,7 +20,8 @@
 #' }
 #'
 #' The count model is
-#' \deqn{y_{vti} \sim \mathrm{NegBin}(n_{vti} \exp(\mu + \alpha_v + \delta_t + \beta_i), \phi)}{y_vti ~ NegBin(n_vti exp(mu + alpha_v + delta_t + beta_i), phi)}
+#' \deqn{y_{vti} \sim \mathrm{NegBin}(n_{vti} \exp(\mu + \alpha_v + \delta_t + \beta_i),
+#' \phi)}{y_vti ~ NegBin(n_vti exp(mu + alpha_v + delta_t + beta_i), phi)}
 #' with \eqn{v} = PwSMI vs non-SMI, \eqn{t} = year, \eqn{i} = area.
 #' The headline coefficient \eqn{\alpha_v}{alpha_v} is the log relative-risk of
 #' police use of force against PwSMI vs non-SMI.
@@ -45,6 +46,21 @@
 #'
 #' @return A \code{list} of class \code{morie_laniyonu_smi_result}.
 #' @name morie_laniyonu_smi_force_disparity
+#' @examples
+#' set.seed(1)
+#' g <- expand.grid(tract_id = sprintf("T\%02d", 1:30), year = 2020:2023,
+#'                  stringsAsFactors = FALSE)
+#' g$pop_18plus <- sample(500:5000, nrow(g), TRUE)
+#' g$poverty_rate <- runif(nrow(g), 0.05, 0.45)
+#' g$nonwhite_share <- runif(nrow(g), 0.1, 0.8)
+#' g$force_events <- rpois(nrow(g), 2)
+#' g$total_force_events <- g$force_events + rpois(nrow(g), 15)
+#' survey <- data.frame(smi = rbinom(500, 1, 0.08),
+#'                      poverty_rate = runif(500), nonwhite_share = runif(500))
+#' res <- suppressWarnings(morie_laniyonu_smi_force_disparity(
+#'   df = g, survey_df = survey, survey_trait_col = "smi",
+#'   survey_covariate_cols = c("poverty_rate", "nonwhite_share"), max_iter = 50L))
+#' res$alpha_v
 NULL
 
 
@@ -115,7 +131,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Synthetic Area Exposure (SAE) — base-R logistic + tract scoring
+# Synthetic Area Exposure (SAE) -- base-R logistic + tract scoring
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Smi Sae
@@ -446,6 +462,10 @@ morie_laniyonu_smi_force_disparity <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_smi_result} objects
+#'
+#' @param x A \code{morie_laniyonu_smi_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -463,12 +483,12 @@ morie_laniyonu_smi_force_disparity <- function(
 #'   df = g, survey_df = survey, survey_trait_col = "smi",
 #'   survey_covariate_cols = c("poverty_rate", "nonwhite_share"), max_iter = 50L))
 #' res$alpha_v
-#' \references{
-#' Laniyonu, A., & Goff, P. A. (2021).  Measuring disparities in
-#' police use of force and injury among persons with serious mental
-#' illness.  BMC Psychiatry, 21(1), 500.
 #' print(res)
 #' }
+#' @references
+#'   Laniyonu, A., & Goff, P. A. (2021).  Measuring disparities in
+#'   police use of force and injury among persons with serious mental
+#'   illness.  BMC Psychiatry, 21(1), 500.
 #' @export
 print.morie_laniyonu_smi_result <- function(x, ...) {
   cat(x$title, "\

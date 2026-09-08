@@ -2,7 +2,7 @@
 % Please edit documentation in R/audit_variables.R
 \name{morie_audit_arsau_variables}
 \alias{morie_audit_arsau_variables}
-\title{Audit every ARSAU variable.}
+\title{Audit every ARSAU variable}
 \usage{
 morie_audit_arsau_variables(dataset_specs = NULL)
 }
@@ -13,12 +13,14 @@ morie_audit_arsau_variables(dataset_specs = NULL)
 A list with class \code{morie_audit_result}.
 }
 \description{
-Audit every ARSAU variable.
+Audit every ARSAU variable
 }
 \examples{
 spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-specs <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS")),
-                        spec("REPORTING_YEAR", "int")))
+specs <- list(v1 = list(
+  spec("PoliceService", "string", c("OPP", "TPS")),
+  spec("REPORTING_YEAR", "int")
+))
 res <- morie_audit_arsau_variables(specs)
 res$domain
 }

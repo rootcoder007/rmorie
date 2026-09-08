@@ -23,7 +23,7 @@
 #' }
 #' @export
 morie_decision_tree_split <- function(x, y, criterion = "gini", max_depth = 30L,
-                                seed = 0L) {
+                                      seed = 0L) {
   if (!requireNamespace("rpart", quietly = TRUE)) {
     stop("Function 'morie_decision_tree_split' requires package 'rpart'. Install with install.packages('rpart').")
   }

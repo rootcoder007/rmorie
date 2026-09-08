@@ -23,10 +23,13 @@ make_match_df <- function(n = 300, tau = 0.4, seed = 1) {
 make_match_df_balanced <- function(n = 300L, tau = 0.4, seed = 1L) {
   set.seed(seed)
   n <- 2L * (as.integer(n) %/% 2L)
-  x1 <- stats::rnorm(n); x2 <- stats::rnorm(n)
+  x1 <- stats::rnorm(n)
+  x2 <- stats::rnorm(n)
   d <- c(rep(0L, n %/% 2L), rep(1L, n %/% 2L))
   ord <- sample.int(n)
-  d <- d[ord]; x1 <- x1[ord]; x2 <- x2[ord]
+  d <- d[ord]
+  x1 <- x1[ord]
+  x2 <- x2[ord]
   y <- tau * d + 0.5 * x1 + 0.3 * x2 + stats::rnorm(n, sd = 0.5)
   data.frame(d = d, y = y, x1 = x1, x2 = x2,
              region = sample(c("A", "B", "C"), n, replace = TRUE),
@@ -39,7 +42,8 @@ make_match_df_balanced <- function(n = 300L, tau = 0.4, seed = 1L) {
 # into a single summary.
 make_match_df_skewed <- function(n = 200L, tau = 0.4, seed = 1L) {
   set.seed(seed)
-  x1 <- stats::rnorm(n); x2 <- stats::rnorm(n)
+  x1 <- stats::rnorm(n)
+  x2 <- stats::rnorm(n)
   d <- stats::rbinom(n, 1, 0.80)
   y <- tau * d + 0.5 * x1 + 0.3 * x2 + stats::rnorm(n, sd = 0.5)
   data.frame(d = d, y = y, x1 = x1, x2 = x2,

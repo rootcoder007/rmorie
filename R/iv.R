@@ -17,7 +17,8 @@
 #
 # Public R names mirror the Python module under the `morie_iv_*` prefix.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix
+#' model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
 #' @importFrom utils head
 NULL
 
@@ -77,6 +78,10 @@ NULL
   requireNamespace("AER", quietly = TRUE)
 }
 
+#' @param outcome See Usage.
+#' @param endogenous See Usage.
+#' @param instruments See Usage.
+#' @param exogenous See Usage.
 #' @keywords internal
 .morie_iv_build_formula <- function(outcome, endogenous, instruments,
                                     exogenous = NULL) {
@@ -91,6 +96,13 @@ NULL
   stats::as.formula(paste(outcome, "~", rhs))
 }
 
+#' @param coef_vec See Usage.
+#' @param se_vec See Usage.
+#' @param n_obs See Usage.
+#' @param method See Usage.
+#' @param alpha See Usage.
+#' @param dof See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_iv_result <- function(coef_vec, se_vec, n_obs, method, alpha = 0.05,
                              dof = NA, details = list()) {
@@ -116,6 +128,13 @@ NULL
   )
 }
 
+#' @param data See Usage.
+#' @param outcome See Usage.
+#' @param endogenous See Usage.
+#' @param instruments See Usage.
+#' @param exogenous See Usage.
+#' @param robust See Usage.
+#' @param alpha See Usage.
 #' @keywords internal
 .morie_iv_base_2sls <- function(data, outcome, endogenous, instruments,
                                 exogenous = NULL, robust = TRUE, alpha = 0.05) {
@@ -165,7 +184,13 @@ NULL
 #' @param endogenous Character vector of endogenous regressor names.
 #' @param instruments Character vector of excluded-instrument names.
 #' @param exogenous Optional character vector of exogenous covariate names.
-#' @param cluster Optional name of a cluster ID column.
+#' @param cluster Optional name of a cluster ID column. When given,
+#'   standard errors are cluster-robust: the score is summed within
+#'   each cluster before being squared, so within-cluster correlation
+#'   is carried rather than assumed away. This selects the variance
+#'   route; \code{robust} chooses between HC1 and conventional errors
+#'   when no cluster is named, and \code{details$se_type} records
+#'   which of the three produced the result.
 #' @param robust Logical; if \code{TRUE} use HC1 robust standard errors.
 #' @param alpha Significance level for confidence intervals.
 #' @return A list with class \code{morie_iv_result} containing coefficients,
@@ -185,14 +210,29 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
                           exogenous = NULL, cluster = NULL,
                           robust = TRUE, alpha = 0.05) {
   d <- .morie_iv_design(data, outcome, endogenous, instruments, exogenous)
+  cl <- NULL
+  if (!is.null(cluster)) {
+    if (!cluster %in% names(data)) {
+      stop("`cluster` names a column that is not in `data`: ", cluster,
+           ".", call. = FALSE)
+    }
+    # The design drops incomplete rows; the cluster labels must be
+    # dropped with them or they line up with the wrong observations.
+    keep <- stats::complete.cases(
+      data[, unique(c(outcome, endogenous, instruments, exogenous,
+                      cluster)), drop = FALSE])
+    cl <- data[[cluster]][keep]
+  }
   fit <- .morie_iv_kclass_native(d$y, d$X, d$Z, kappa = 1,
-                                 robust = robust)
+                                 robust = robust, cluster = cl)
   .morie_iv_result(fit$beta, fit$se, fit$n,
                    method = "2sls (rmorie native)",
                    alpha = alpha, dof = fit$df,
                    details = list(residuals = fit$residuals,
                                   vcov = fit$vcov,
-                                  se_type = if (robust) "HC1" else "const"))
+                                  se_type = if (!is.null(cl)) "cluster"
+                                            else if (robust) "HC1"
+                                            else "const"))
 }
 
 #' Limited-Information Maximum Likelihood (LIML)
@@ -200,7 +240,9 @@ morie_iv_tsls <- function(data, outcome, endogenous, instruments,
 #' Solves the LIML eigenvalue problem natively (k-class with the
 #' minimum-eigenvalue kappa).
 #' @inheritParams morie_iv_tsls
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(8)
 #' n <- 1000
@@ -233,7 +275,9 @@ morie_iv_liml <- function(data, outcome, endogenous, instruments,
 #' @inheritParams morie_iv_tsls
 #' @param weight_matrix One of \code{"optimal"} (default, two-step) or
 #'   \code{"identity"} (one-step / 2SLS-equivalent).
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1)
 #' n <- 400
@@ -268,7 +312,9 @@ morie_iv_gmm <- function(data, outcome, endogenous, instruments,
 #' @inheritParams morie_iv_gmm
 #' @param max_iter Outer iteration cap (default 100).
 #' @param tol Convergence tolerance on the objective.
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1); n <- 400
 #' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
@@ -293,13 +339,16 @@ morie_iv_cue_gmm <- function(data, outcome, endogenous, instruments,
 #' Wald (single-instrument) estimator
 #'
 #' \eqn{\hat\beta = (\bar y_{z=1} - \bar y_{z=0}) /
-#'                 (\bar d_{z=1} - \bar d_{z=0})}{hatbeta = (bar y_z=1 - bar y_z=0) / (bar d_z=1 - bar d_z=0)}.
+#'                 (\bar d_{z=1} - \bar d_{z=0})}{hatbeta = (bar y_z=1 - bar y_z=0) /
+#' (bar d_z=1 - bar d_z=0)}.
 #' @param data Data frame.
 #' @param outcome Outcome column.
 #' @param treatment Endogenous treatment column.
 #' @param instrument Binary instrument column.
 #' @param alpha Significance level.
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(11)
 #' n <- 2000
@@ -392,7 +441,7 @@ morie_iv_first_stage_diagnostics <- function(data, endogenous, instruments,
 #' @param instruments Character vector of excluded-instrument names.
 #' @param exogenous Optional exogenous covariates.
 #' @param outcome Optional outcome column name. Default \code{NULL}
-#'   reuses \code{endogenous[1]}; the resulting F-statistic is
+#'   reuses \code{endogenous\[1\]}; the resulting F-statistic is
 #'   unaffected because Cragg-Donald only reads the first stage.
 #' @return Named list with \code{statistic}, \code{p_value},
 #'   \code{name}, \code{details}.
@@ -478,7 +527,8 @@ morie_iv_kleibergen_paap <- function(data, endogenous, instruments,
 
 #' Anderson-Rubin (AR) weak-IV-robust test
 #' @inheritParams morie_iv_params
-#' @return A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
+#' @return A named list with elements \code{statistic}, \code{F_statistic},
+#' \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
 #' @examples
 #' set.seed(1); n <- 400
 #' z1 <- rbinom(n, 1, 0.5); z2 <- rnorm(n); u <- rnorm(n)
@@ -519,7 +569,7 @@ morie_iv_anderson_rubin <- function(data, outcome, endogenous, instruments,
 }
 
 #' Grid-based Anderson-Rubin confidence interval for a single endogenous
-#' variable.
+#' variable
 #' @inheritParams morie_iv_params
 #' @return A vector of the computed values.
 #' @examples
@@ -546,7 +596,8 @@ morie_iv_anderson_rubin_ci <- function(data, outcome, endogenous, instruments,
 
 #' Conditional likelihood-ratio (CLR) test of Moreira (2003)
 #' @inheritParams morie_iv_params
-#' @return A named list with elements \code{statistic}, \code{F_statistic}, \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
+#' @return A named list with elements \code{statistic}, \code{F_statistic},
+#' \code{p_value}, \code{name}, \code{df}, \code{df_resid}, \code{beta0}.
 #' @examples
 #' set.seed(1); n <- 300
 #' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
@@ -680,7 +731,9 @@ morie_iv_durbin_wu_hausman <- function(data, outcome, endogenous, instruments,
 
 #' Jackknife IV (JIVE; Angrist, Imbens & Krueger 1999)
 #' @inheritParams morie_iv_tsls
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(5)
 #' n <- 600
@@ -734,7 +787,9 @@ morie_iv_jive <- function(data, outcome, endogenous, instruments,
 #' @inheritParams morie_iv_tsls
 #' @param split_fraction Fraction of the data used in the first stage.
 #' @param seed RNG seed.
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1)
 #' n <- 400
@@ -775,7 +830,9 @@ morie_iv_split_sample <- function(data, outcome, endogenous, instruments,
 
 #' Control-function (residual augmentation) IV
 #' @inheritParams morie_iv_tsls
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1); n <- 200
 #' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
@@ -784,28 +841,71 @@ morie_iv_split_sample <- function(data, outcome, endogenous, instruments,
 #' df <- data.frame(y, d, z)
 #' morie_iv_control_function(df, "y", "d", "z")
 #' @export
-morie_iv_control_function <- function(data, outcome, endogenous, instruments,
-                                      exogenous = NULL, robust = TRUE,
-                                      alpha = 0.05) {
-  if (length(endogenous) != 1)
-    stop("morie_iv_control_function currently supports 1 endogenous regressor")
-  e   <- endogenous
-  rhs <- paste(c(instruments, exogenous), collapse = " + ")
-  fs  <- stats::lm(stats::as.formula(paste(e, "~", rhs)), data = data)
-  data$.cf_resid_ <- stats::residuals(fs)
-  rhs2 <- paste(c(endogenous, exogenous, ".cf_resid_"), collapse = " + ")
-  ss <- stats::lm(stats::as.formula(paste(outcome, "~", rhs2)), data = data)
-  cf <- stats::coef(ss)
-  se <- sqrt(diag(stats::vcov(ss)))
-  .morie_iv_result(cf, se, length(ss$residuals),
-                   method = "control function",
-                   alpha = alpha, dof = ss$df.residual,
-                   details = list(first_stage = fs, second_stage = ss))
+morie_iv_control_function <- function(data, outcome, endogenous,
+                                      instruments, exogenous = NULL,
+                                      robust = TRUE, alpha = 0.05,
+                                      dist = c("normal", "t")) {
+  dist <- match.arg(dist)
+  cols <- unique(c(outcome, endogenous, instruments, exogenous))
+  miss <- setdiff(cols, names(data))
+  if (length(miss)) {
+    stop("control_function: no such column(s) in `data`: ",
+         paste(miss, collapse = ", "), ".", call. = FALSE)
+  }
+  df <- data[stats::complete.cases(data[, cols, drop = FALSE]), ,
+             drop = FALSE]
+  y <- as.numeric(df[[outcome]])
+  n <- length(y)
+  D <- as.matrix(df[, endogenous, drop = FALSE])
+  Zx <- as.matrix(df[, instruments, drop = FALSE])
+  W <- if (length(exogenous))
+    as.matrix(df[, exogenous, drop = FALSE]) else NULL
+
+  # First stage, one per endogenous regressor: the residual is the part
+  # of D the instruments cannot explain, and carrying it into the second
+  # stage is what controls the endogeneity.
+  Z_first <- cbind(1, Zx, W)
+  V_hat <- matrix(0, n, ncol(D))
+  for (j in seq_len(ncol(D))) {
+    b <- qr.solve(Z_first, D[, j])
+    V_hat[, j] <- D[, j] - Z_first %*% b
+  }
+
+  X <- cbind(1, D, W, V_hat)
+  colnames(X) <- c("const", endogenous,
+                   if (length(exogenous)) exogenous else NULL,
+                   paste0("v_hat_", endogenous))
+  beta <- as.numeric(qr.solve(X, y))
+  names(beta) <- colnames(X)
+  resid <- as.numeric(y - X %*% beta)
+  k <- ncol(X)
+  XtX_inv <- tryCatch(solve(crossprod(X)),
+                      error = function(e) .morie_ginv(crossprod(X)))
+  if (isTRUE(robust)) {
+    meat <- crossprod(X, resid^2 * X)
+    V <- (n / (n - k)) * (XtX_inv %*% meat %*% XtX_inv)
+  } else {
+    V <- (sum(resid^2) / (n - k)) * XtX_inv
+  }
+  se <- sqrt(pmax(diag(V), 0))
+  names(se) <- colnames(X)
+
+  .morie_iv_result(beta, se, n,
+                   method = "control_function",
+                   alpha = alpha,
+                   dof = if (dist == "t") n - k else NA,
+                   details = list(vcov = V, residuals = resid,
+                                  v_hat = V_hat,
+                                  se_type = if (isTRUE(robust)) "HC1"
+                                            else "const",
+                                  dist = dist))
 }
 
 #' IV Probit (Rivers-Vuong control function)
 #' @inheritParams morie_iv_tsls
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1)
 #' n <- 400
@@ -840,7 +940,9 @@ morie_iv_probit <- function(data, outcome, endogenous, instruments,
 #' @inheritParams morie_iv_tsls
 #' @param unit Cluster / unit identifier column.
 #' @param time_fe Optional time-FE column.
-#' @return A named list with elements \code{coefficients}, \code{std_errors}, \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper}, \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
+#' @return A named list with elements \code{coefficients}, \code{std_errors},
+#' \code{t_stats}, \code{p_values}, \code{ci_lower}, \code{ci_upper},
+#' \code{variable_names}, \code{n_obs}, \code{method}, \code{details}.
 #' @examples
 #' set.seed(1)
 #' n_unit <- 30; n_time <- 5; n <- n_unit * n_time
@@ -873,7 +975,8 @@ morie_iv_panel <- function(data, outcome, endogenous, instruments, unit,
 
 #' Composite IV diagnostics
 #' @inheritParams morie_iv_params
-#' @return A named list with elements \code{first_stage}, \code{cragg_donald}, \code{sargan}, \code{hausman}, \code{n_obs}.
+#' @return A named list with elements \code{first_stage}, \code{cragg_donald},
+#' \code{sargan}, \code{hausman}, \code{n_obs}.
 #' @examples
 #' set.seed(1); n <- 400
 #' z <- rbinom(n, 1, 0.5); u <- rnorm(n)
@@ -899,7 +1002,8 @@ morie_iv_diagnostics <- function(data, outcome, endogenous, instruments,
 
 #' IV residual analysis
 #' @inheritParams morie_iv_params
-#' @return A \code{data.frame} with columns \code{fitted}, \code{residual}, \code{abs_resid}, \code{sq_resid}.
+#' @return A \code{data.frame} with columns \code{fitted}, \code{residual},
+#' \code{abs_resid}, \code{sq_resid}.
 #' @examples
 #' set.seed(1)
 #' n <- 400

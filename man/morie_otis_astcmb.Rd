@@ -18,6 +18,7 @@ morie_otis_astcmb(
 the lower-case Python schema.}
 
 \item{id_col, year_col}{Column names.}
+
 }
 \value{
 \code{morie_otis_result}.

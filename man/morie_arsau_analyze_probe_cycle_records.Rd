@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_probe_cycle_records}
 \alias{morie_arsau_analyze_probe_cycle_records}
-\title{Analysis of ARSAU probe_cycle_records (CEW telemetry).}
+\title{Analysis of ARSAU probe_cycle_records (CEW telemetry)}
 \usage{
 morie_arsau_analyze_probe_cycle_records(year, language = "en", data_dir = NULL)
 }

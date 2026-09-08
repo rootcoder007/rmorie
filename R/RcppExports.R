@@ -17,6 +17,14 @@
     .Call(`_rmorie_morie_crypto_pbkdf2_sha256_native`, password, salt, iterations, dklen)
 }
 
+.morie_blake2b_impl <- function(data, outlen, key = NULL) {
+    .Call(`_rmorie_morie_crypto_blake2b_native`, data, outlen, key)
+}
+
+.morie_argon2_impl <- function(password, salt, memory, passes, parallelism, tag_length, variant, secret = NULL, associated = NULL) {
+    .Call(`_rmorie_morie_crypto_argon2_native`, password, salt, memory, passes, parallelism, tag_length, variant, secret, associated)
+}
+
 .rmorie_liboqs_available_impl <- function() {
     .Call(`_rmorie_morie_crypto_liboqs_available`)
 }
@@ -101,6 +109,18 @@
     .Call(`_rmorie_morie_twfe_demean_cpp`, M, g1, g2, K1, K2, tol, max_iter)
 }
 
+.rmorie_digest_impl <- function(data, algo, seed) {
+    .Call(`_rmorie_morie_digest_native`, data, algo, seed)
+}
+
+.rmorie_digest2int_impl <- function(x, seed) {
+    .Call(`_rmorie_morie_digest2int_native`, x, seed)
+}
+
+.rmorie_aes_ecb_impl <- function(key, data, encrypt) {
+    .Call(`_rmorie_morie_aes_ecb_native`, key, data, encrypt)
+}
+
 morie_dsp_lms_cpp <- function(x, d, order, mu) {
     .Call(`_rmorie_morie_dsp_lms_cpp`, x, d, order, mu)
 }
@@ -169,7 +189,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_hawkes_baseline_integral_cpp`, T_horizon, alpha, n_grid)
 }
 
-#' Synchronous HTTP(S) GET via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) GET via the shared libcurl backend (C++)
 #'
 #' Phase-3VV promoted helper. Returns the response body as a length-1
 #' character vector. On any libcurl-level failure returns the empty
@@ -186,7 +206,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Binary-safe HTTP(S) GET via libcurl.
+#' Binary-safe HTTP(S) GET via libcurl
 #'
 #' Phase-3XX get_bytes wrapper. Returns the response body as an R
 #' raw vector (no NUL truncation), suitable for shapefiles, FGDB
@@ -202,7 +222,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_bytes_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Synchronous HTTP(S) POST via the shared libcurl backend (C++).
+#' Synchronous HTTP(S) POST via the shared libcurl backend (C++)
 #'
 #' Phase-3YY helper. Body is sent verbatim; for JSON payloads call
 #' `jsonlite::toJSON(...)` before passing in. Default content_type
@@ -220,7 +240,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_post_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Status-aware HTTP(S) GET via the libcurl backend (C++).
+#' Status-aware HTTP(S) GET via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper for callers that need HTTP status-code
 #' inspection (401/403/4xx error handling). Returns a length-2
@@ -237,7 +257,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_get_with_status_`, url, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' Status-aware HTTP(S) POST via the libcurl backend (C++).
+#' Status-aware HTTP(S) POST via the libcurl backend (C++)
 #'
 #' Phase-3ZZ helper. Same status-code-return contract as
 #' .morie_http_get_with_status, but for POST bodies.
@@ -249,7 +269,7 @@ morie_hawkes_baseline_integral_cpp <- function(T_horizon, alpha, n_grid = 0L) {
     .Call(`_rmorie_morie_http_post_with_status_`, url, body, content_type, timeout_s, headers, user_agent, follow_redirects)
 }
 
-#' libcurl version string the morie C++ backend was built against.
+#' libcurl version string the morie C++ backend was built against
 #' @return Length-1 character vector.
 #' @keywords internal
 .morie_http_curl_version <- function() {
@@ -336,6 +356,36 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
     .Call(`_rmorie_morie_spatial_wordfish_omega_update_cpp`, dtm, psi, alpha, beta, omega)
 }
 
+#' Binary C-SVC via SMO (compiled)
+#' @noRd
+morie_svc_train_cpp <- function(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter) {
+    .Call(`_rmorie_morie_svc_train_cpp`, X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter)
+}
+
+#' eps-SVR via SMO (compiled)
+#' @noRd
+morie_svr_train_cpp <- function(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter) {
+    .Call(`_rmorie_morie_svr_train_cpp`, X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter)
+}
+
+#' Decision values for new data given fitted SVM coefficients (compiled)
+#' @noRd
+morie_svm_decision_cpp <- function(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree) {
+    .Call(`_rmorie_morie_svm_decision_cpp`, SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree)
+}
+
+#' Grow one regression / second-order tree (compiled)
+#' @noRd
+morie_tree_fit_cpp <- function(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen) {
+    .Call(`_rmorie_morie_tree_fit_cpp`, X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen)
+}
+
+#' Predict from a flattened tree (compiled)
+#' @noRd
+morie_tree_predict_cpp <- function(tree, X) {
+    .Call(`_rmorie_morie_tree_predict_cpp`, tree, X)
+}
+
 #' Fetch a single URL over HTTP(S) via libcurl
 #'
 #' Internal building block of the SIU parser. Returns the response
@@ -393,7 +443,7 @@ morie_spatial_wordfish_omega_update_cpp <- function(dtm, psi, alpha, beta, omega
 #' body from a 429/503/short interstitial. Used by the DRID manifest
 #' builder (\code{morie_siu_refresh_manifest}).
 #'
-#' @inheritParams siu_http_get_many
+#' @inheritParams .siu_http_get_many
 #' @return A list with three parallel slots: \code{body} (character),
 #'   \code{http_code} (integer), \code{attempts} (integer).
 #' @keywords internal

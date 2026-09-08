@@ -28,8 +28,8 @@ interval, effect size, point estimate, sample size and a free-form
 \item Non-parametric: \code{mann_whitney_u},
 \code{wilcoxon_signed_rank}, \code{ks_test_one_sample},
 \code{ks_test_two_sample}, \code{levene_test},
-\code{bartlett_test}, \code{runs_test}
-(\code{nortest::ad.test} for Anderson-Darling)
+\code{bartlett_test}, \code{runs_test},
+\code{anderson_darling}
 \item Normality: \code{dagostino_pearson}, \code{lilliefors_test}
 (\code{stats::shapiro.test} for Shapiro-Wilk,
 \code{tseries::jarque.bera.test} for Jarque-Bera)

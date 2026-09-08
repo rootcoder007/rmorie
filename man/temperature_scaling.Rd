@@ -17,4 +17,8 @@ Named list with tensor, entropy, temperature, method.
 \description{
 Temperature-scaled softmax (Hinton 2015)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rmorie:::temperature_scaling(V)
+}
 \keyword{internal}

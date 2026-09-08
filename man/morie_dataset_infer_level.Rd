@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_infer_level}
 \alias{morie_dataset_infer_level}
-\title{Infer the Stevens NOIR measurement level for a single vector.}
+\title{Infer the Stevens NOIR measurement level for a single vector}
 \usage{
 morie_dataset_infer_level(x, name = NULL, ordinal_threshold = 10L)
 }
@@ -35,6 +35,6 @@ name hit (likert/grade/scale/...): \code{"ordinal"}.
 }
 }
 \examples{
-morie_dataset_infer_level(c("a", "b", "c"))          # "nominal"
+morie_dataset_infer_level(c("a", "b", "c")) # "nominal"
 morie_dataset_infer_level(c(1.5, 2.3, 4.1))
 }

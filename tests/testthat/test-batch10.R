@@ -493,8 +493,8 @@ test_that("morie_proportion_ci exact and wald methods work", {
 test_that("morie_odds_ratio_ci returns or and CI", {
   m <- matrix(c(20, 10, 8, 22), nrow = 2)
   r <- morie_odds_ratio_ci(m)
-  expect_named(r, c("or", "ci_lower", "ci_upper", "p_value"))
-  expect_true(is.finite(r$or))
+  expect_named(r, c("odds_ratio", "ci_lower", "ci_upper", "p_value"))
+  expect_true(is.finite(r$odds_ratio))
 })
 
 test_that("morie_risk_ratio_ci returns rr and ordered CI", {

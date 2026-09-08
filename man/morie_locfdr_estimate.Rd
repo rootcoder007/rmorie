@@ -28,10 +28,10 @@ vector of z-scores (Efron, 2004; Efron, 2010).
 }
 \examples{
 \donttest{
-  if (requireNamespace("locfdr", quietly = TRUE)) {
-    set.seed(1)
-    zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
-    morie_locfdr_estimate(zz)
-  }
+if (requireNamespace("locfdr", quietly = TRUE)) {
+  set.seed(1)
+  zz <- c(stats::rnorm(900), stats::rnorm(100, mean = 3))
+  morie_locfdr_estimate(zz)
+}
 }
 }

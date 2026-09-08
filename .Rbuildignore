@@ -47,3 +47,7 @@
 ^VERSION_INVENTORY\.csv$
 ^figures$
 ^pkgdown$
+^\.cursor$
+^\.windsurf$
+^\.clinerules$
+^\.opencode$

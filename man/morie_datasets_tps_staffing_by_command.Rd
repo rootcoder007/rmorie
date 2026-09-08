@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \verb{9d97ef7e8b494095be4abc0a628d7ce3}.
 }
 \details{
@@ -51,7 +51,7 @@ Toronto Police Service dataset.
 Tags: Staffing; Budget; Toronto Police Service; TPS
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_staffing_by_command(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

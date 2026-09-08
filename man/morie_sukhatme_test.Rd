@@ -8,6 +8,7 @@ morie_sukhatme_test(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors.}
+
 }
 \value{
 Named list: statistic (z), p_value, U, n, m.

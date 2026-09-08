@@ -16,7 +16,8 @@ test_that("require_fbi_key honours explicit key + env", {
   expect_equal(rmorie:::.morie_forensics_require_fbi_key("abc"), "abc")
   old <- Sys.getenv("FBI_CDE_API_KEY", unset = "")
   Sys.setenv(FBI_CDE_API_KEY = "envkey")
-  on.exit({ Sys.unsetenv("FBI_CDE_API_KEY"); if (nzchar(old)) Sys.setenv(FBI_CDE_API_KEY = old) })
+  on.exit({ Sys.unsetenv("FBI_CDE_API_KEY")
+  if (nzchar(old)) Sys.setenv(FBI_CDE_API_KEY = old) })
   expect_equal(rmorie:::.morie_forensics_require_fbi_key(), "envkey")
 })
 

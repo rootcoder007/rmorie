@@ -16,16 +16,18 @@ morie_crypto_hybrid_decrypt(ciphertext, recipient_sk)
 Raw vector of decrypted plaintext.
 }
 \description{
-Inverse of \code{\link[=morie_crypto_hybrid_encrypt]{morie_crypto_hybrid_encrypt()}}. The wrapping key is
+Inverse of \code{morie_crypto_hybrid_encrypt()}. The wrapping key is
 re-derived from \code{HKDF(kem_ct || pk)} using the public key embedded
 in the ML-KEM-768 secret key (bytes 1153..2336), matching the
 Python \code{morie.crypto.hybrid_decrypt} exactly, so no decapsulation
 round-trip is required.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- morie_crypto_hybrid_keygen()
-  ct <- morie_crypto_hybrid_encrypt(charToRaw("secret"), kp$pk)
-  rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- morie_crypto_hybrid_keygen()
+    ct <- morie_crypto_hybrid_encrypt(charToRaw("secret"), kp$pk)
+    rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
+  }
 }
 }

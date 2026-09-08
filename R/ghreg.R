@@ -15,7 +15,7 @@
 #' morie_ghosal_np_regression(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_np_regression <- function(x, y, length_scale = NULL,
-                                 sigma_f = 1.0, noise = NULL) {
+                                       sigma_f = 1.0, noise = NULL) {
   gp <- morie_ghosal_gp_squared_exponential(x, y,
     length_scale = length_scale,
     sigma_f = sigma_f, noise = noise

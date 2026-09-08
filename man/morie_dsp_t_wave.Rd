@@ -18,7 +18,7 @@ morie_dsp_t_wave(ecg, qrs_locs, fs = 360)
 Integer vector of T-peak indices.
 }
 \description{
-For each QRS index, searches \verb{[loc + 0.2 * fs, loc + 0.5 * fs]} for
+For each QRS index, searches \verb{\[loc + 0.2 * fs, loc + 0.5 * fs\]} for
 the absolute maximum and records its global index.
 }
 \examples{

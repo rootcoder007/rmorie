@@ -2,7 +2,7 @@
 % Please edit documentation in R/laniyonu_smi_force_disparity.R
 \name{morie_laniyonu_smi_force_disparity}
 \alias{morie_laniyonu_smi_force_disparity}
-\title{Replication of Laniyonu & Goff (2021) — Police force vs SMI disparity}
+\title{Replication of Laniyonu & Goff (2021) -- Police force vs SMI disparity}
 \usage{
 morie_laniyonu_smi_force_disparity(
   df,
@@ -54,6 +54,10 @@ blocks.}
 
 \item{return_design}{Attach \code{X}, \code{y}, \code{offset} to
 \code{exposure_summary} for hand-off to brms / rstanarm.}
+
+
+
+
 }
 \value{
 A \code{list} of class \code{morie_laniyonu_smi_result}.

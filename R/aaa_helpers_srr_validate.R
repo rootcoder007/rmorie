@@ -53,22 +53,31 @@
 #' @srrstats {G2.13} `.morie_check_data(check_na=)` reports missing data
 #'   in required columns as part of pre-processing.
 #' @srrstats {G2.14} Missing-data handling is explicit per estimator:
-#' @srrstats {G2.14a} Validators error on missing data where an estimator
-#'   cannot proceed (e.g. calibration in `tox.R`).
+#' @srrstats {G2.14a} `.morie_check_data(check_na = "error")` refuses to
+#'   proceed when a required column carries NA, for estimators whose
+#'   result would be meaningless on incomplete rows.
 #' @srrstats {G2.14b} The `.morie_*_drop_na()` helpers drop incomplete
 #'   rows with a recorded row count (ignore-with-message).
-#' @srrstats {G2.14c} Imputation is offered where appropriate
-#'   (`morie_tox_left_censor_impute()`, `validation.R` imputers).
+#' @srrstats {G2.14c} `morie_impute_column()` offers median / mean /
+#'   mode / LOCF imputation as an explicit caller choice, and reports
+#'   `n_imputed` so the cost stays visible.
 #' @srrstats {G2.15} Estimators pass `na.rm = TRUE` or drop NA explicitly
 #'   before calling base routines; none is called with the default
 #'   `na.rm = FALSE` on data that may contain NA.
 #' @srrstats {G2.16} `.morie_check_numvec(finite = TRUE)` rejects
 #'   `NaN`/`Inf`/`-Inf` where undefined values are not meaningful.
-#' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts whether a
-#'   factor input must be ordered or unordered, erroring otherwise.
+#' @srrstats {G2.5} `.morie_check_factor(ordered=)` asserts a factor
+#'   input and, where required, its ordered-ness. It gates the ordinal
+#'   outcome in `mrm_threshold_specific_ordinal()`, which additionally
+#'   warns when an UNORDERED factor's levels are in alphabetical order,
+#'   since that is exactly when R's default level ordering could have
+#'   silently supplied the wrong ordinal scale. Deliberately-set levels
+#'   (`factor(x, levels = ...)`) are accepted without complaint.
 #' @srrstats {G2.11} `.morie_coerce_units()` accepts columns with a
 #'   non-standard class but numeric storage (such as `units`-package
-#'   columns), coercing them to plain numeric rather than erroring.
+#'   columns), coercing them to plain numeric rather than erroring; it
+#'   pre-processes every covariate column in
+#'   `mrm_threshold_specific_ordinal()`.
 #' @noRd
 NULL
 
@@ -81,49 +90,151 @@ NULL
                               check_na = FALSE) {
   if (is.matrix(data)) data <- as.data.frame(data)
   if (!is.data.frame(data)) {
-    stop(sprintf("`%s` must be a data.frame-like table, not %s.",
-                 arg, class(data)[1L]), call. = FALSE)
+    stop(sprintf(
+      "`%s` must be a data.frame-like table, not %s.",
+      arg, class(data)[1L]
+    ), call. = FALSE)
   }
-  data <- as.data.frame(data)                       # tibble/dt -> df (G2.7/G2.8)
+  data <- as.data.frame(data) # tibble/dt -> df (G2.7/G2.8)
   listcols <- names(data)[vapply(data, is.list, logical(1))]
-  if (length(listcols)) {                           # G2.12
-    stop(sprintf("`%s` has unsupported list-column(s): %s.",
-                 arg, paste(listcols, collapse = ", ")), call. = FALSE)
+  if (length(listcols)) { # G2.12
+    stop(sprintf(
+      "`%s` has unsupported list-column(s): %s.",
+      arg, paste(listcols, collapse = ", ")
+    ), call. = FALSE)
   }
   missing_cols <- setdiff(required, names(data))
   if (length(missing_cols)) {
-    stop(sprintf("`%s` is missing required column(s): %s.",
-                 arg, paste(missing_cols, collapse = ", ")), call. = FALSE)
+    stop(sprintf(
+      "`%s` is missing required column(s): %s.",
+      arg, paste(missing_cols, collapse = ", ")
+    ), call. = FALSE)
   }
-  if (isTRUE(check_na) && length(required)) {        # G2.13
-    na_cols <- required[vapply(required,
-                               function(c) anyNA(data[[c]]), logical(1))]
+  # G2.13 / G2.14: `check_na` selects the missing-data policy.
+  #   TRUE / "message" -- report and let the estimator drop rows (G2.14b)
+  #   "error"          -- refuse to proceed (G2.14a), for estimators whose
+  #                       result would be meaningless on incomplete rows
+  if (!isFALSE(check_na) && length(required)) {
+    policy <- if (isTRUE(check_na)) {
+      "message"
+    } else {
+      match.arg(
+        as.character(check_na), c("message", "error")
+      )
+    }
+    na_cols <- required[vapply(
+      required,
+      function(c) anyNA(data[[c]]), logical(1)
+    )]
     if (length(na_cols)) {
-      message(sprintf("`%s`: missing values present in %s; ",
-                      arg, paste(na_cols, collapse = ", ")),
-              "incomplete rows are dropped by the estimator.")
+      if (policy == "error") {
+        stop(
+          sprintf(
+            "`%s`: missing values in %s; this estimator cannot ",
+            arg, paste(na_cols, collapse = ", ")
+          ),
+          "proceed on incomplete rows. Drop or impute them first ",
+          "(see `morie_impute_column()`).",
+          call. = FALSE
+        )
+      }
+      message(
+        sprintf(
+          "`%s`: missing values present in %s; ",
+          arg, paste(na_cols, collapse = ", ")
+        ),
+        "incomplete rows are dropped by the estimator."
+      )
     }
   }
   data
+}
+
+#' Impute missing values in a column
+#'
+#' Fills `NA` by a stated rule so an estimator that cannot proceed on
+#' incomplete rows has an explicit alternative to dropping them
+#' (G2.14c). The rule is always the caller's choice -- nothing is
+#' imputed implicitly anywhere in the package.
+#'
+#' `"median"` and `"mean"` suit a roughly symmetric or skewed numeric
+#' column respectively. `"mode"` is the only sensible option for a
+#' categorical column. `"locf"` (last observation carried forward)
+#' assumes the rows are in a meaningful order -- time, usually -- and is
+#' wrong if they are not.
+#'
+#' Imputing narrows the apparent spread of a variable: the imputed
+#' values carry no information but are counted as if they did, so any
+#' downstream standard error is optimistic. `n_imputed` is returned so
+#' that cost stays visible.
+#'
+#' @param x A vector with missing values.
+#' @param method One of `"median"`, `"mean"`, `"mode"`, `"locf"`.
+#' @return A list with `values` (the filled vector), `n_imputed` and
+#'   `method`.
+#' @examples
+#' morie_impute_column(c(1, 2, NA, 4), "median")$values
+#' @export
+morie_impute_column <- function(x, method = c(
+                                  "median", "mean", "mode",
+                                  "locf"
+                                )) {
+  method <- match.arg(method)
+  miss <- is.na(x)
+  n_imputed <- sum(miss)
+  if (n_imputed == 0L) {
+    return(list(values = x, n_imputed = 0L, method = method))
+  }
+  if (method %in% c("median", "mean")) {
+    if (!is.numeric(x)) {
+      stop(sprintf(
+        "`method = \"%s\"` needs a numeric column, got %s.",
+        method, class(x)[1L]
+      ), call. = FALSE)
+    }
+    fill <- if (method == "median") {
+      stats::median(x, na.rm = TRUE)
+    } else {
+      mean(x, na.rm = TRUE)
+    }
+    x[miss] <- fill
+  } else if (method == "mode") {
+    obs <- x[!miss]
+    if (!length(obs)) stop("`x` is entirely missing.", call. = FALSE)
+    u <- unique(obs)
+    # match on the values, not their names(): keeps the column's own type
+    # and avoids a methods::as() round-trip through character.
+    x[miss] <- u[which.max(tabulate(match(obs, u), nbins = length(u)))]
+  } else {
+    # locf: a leading NA has nothing to carry forward, so it stays NA
+    # rather than being back-filled from the future.
+    for (i in which(miss)) if (i > 1L) x[i] <- x[i - 1L]
+  }
+  list(values = x, n_imputed = as.integer(n_imputed), method = method)
 }
 
 # Assert a single-valued input of the given type.
 #' Internal helper: Morie Check Scalar
 #' @noRd
 .morie_check_scalar <- function(x,
-                                type = c("numeric", "character",
-                                         "logical", "integer"),
+                                type = c(
+                                  "numeric", "character",
+                                  "logical", "integer"
+                                ),
                                 arg = "x") {
   type <- match.arg(type)
-  if (length(x) != 1L) {                            # G2.0 / G2.2
-    stop(sprintf("`%s` must be a single value, got length %d.",
-                 arg, length(x)), call. = FALSE)
+  if (length(x) != 1L) { # G2.0 / G2.2
+    stop(sprintf(
+      "`%s` must be a single value, got length %d.",
+      arg, length(x)
+    ), call. = FALSE)
   }
-  ok <- switch(type,                                # G2.1
+  ok <- switch(type, # G2.1
     numeric   = is.numeric(x),
     integer   = is.numeric(x),
     character = is.character(x),
-    logical   = is.logical(x))
+    logical   = is.logical(x)
+  )
   if (!ok) stop(sprintf("`%s` must be %s.", arg, type), call. = FALSE)
   x
 }
@@ -132,14 +243,17 @@ NULL
 #' Internal helper: Morie Check Numvec
 #' @noRd
 .morie_check_numvec <- function(x, arg = "x", finite = TRUE, min_len = 1L) {
-  x <- as.numeric(x)                                # G2.4b / G2.6
+  x <- as.numeric(x) # G2.4b / G2.6
   if (length(x) < min_len) {
-    stop(sprintf("`%s` must have length >= %d, got %d.",
-                 arg, min_len, length(x)), call. = FALSE)
+    stop(sprintf(
+      "`%s` must have length >= %d, got %d.",
+      arg, min_len, length(x)
+    ), call. = FALSE)
   }
-  if (isTRUE(finite) && any(!is.finite(x))) {       # G2.16
+  if (isTRUE(finite) && any(!is.finite(x))) { # G2.16
     stop(sprintf("`%s` contains non-finite values (NA/NaN/Inf).", arg),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   x
 }
@@ -170,12 +284,18 @@ NULL
 #' Internal helper: Morie Coerce Units
 #' @noRd
 .morie_coerce_units <- function(x, arg = "x") {
-  if (is.numeric(x) && is.null(attr(x, "class"))) return(as.numeric(x))
-  v <- tryCatch(as.numeric(x), warning = function(w) NULL,
-                error = function(e) NULL)
+  if (is.numeric(x) && is.null(attr(x, "class"))) {
+    return(as.numeric(x))
+  }
+  v <- tryCatch(as.numeric(x),
+    warning = function(w) NULL,
+    error = function(e) NULL
+  )
   if (is.null(v) || all(is.na(v)) && !all(is.na(x))) {
-    stop(sprintf("`%s` has a non-standard class that is not numeric-coercible.",
-                 arg), call. = FALSE)
+    stop(sprintf(
+      "`%s` has a non-standard class that is not numeric-coercible.",
+      arg
+    ), call. = FALSE)
   }
   v
 }

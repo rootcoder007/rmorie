@@ -92,6 +92,7 @@ jobs:
             testthat.Rout*
             *.Rout
           if-no-files-found: ignore
+          retention-days: 7
 
   # Debian portability leg. The ubuntu cells do NOT prove Debian: different
   # glibc/toolchain snapshots and different P3M binary streams. rocker/r-ver turned out to be
@@ -151,6 +152,7 @@ jobs:
             testthat.Rout*
             *.Rout
           if-no-files-found: ignore
+          retention-days: 7
 
   # Fedora / RHEL-family leg (dnf + different glibc/toolchain stream from
   # the Debian-family jobs above). P3M ships rhel9 binaries that work on
@@ -206,3 +208,4 @@ jobs:
             testthat.Rout*
             *.Rout
           if-no-files-found: ignore
+          retention-days: 7

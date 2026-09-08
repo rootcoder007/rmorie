@@ -75,10 +75,12 @@ morie_crypto_sodium_version <- function() {
 #' }
 #' @export
 morie_crypto_chacha20_poly1305_encrypt <- function(key, nonce, plaintext,
-                                                      aad = raw(0)) {
+                                                   aad = raw(0)) {
   stopifnot(is.raw(key), is.raw(nonce), is.raw(plaintext), is.raw(aad))
-  out <- .Call(`_rmorie_morie_crypto_chacha20poly1305_encrypt`,
-                key, nonce, plaintext, aad)
+  out <- .Call(
+    `_rmorie_morie_crypto_chacha20poly1305_encrypt`,
+    key, nonce, plaintext, aad
+  )
   n_pt <- length(plaintext)
   list(ct = out[seq_len(n_pt)], tag = out[(n_pt + 1L):(n_pt + 16L)])
 }
@@ -107,11 +109,13 @@ morie_crypto_chacha20_poly1305_encrypt <- function(key, nonce, plaintext,
 #' }
 #' @export
 morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
-                                                      ct_with_tag,
-                                                      aad = raw(0)) {
+                                                   ct_with_tag,
+                                                   aad = raw(0)) {
   stopifnot(is.raw(key), is.raw(nonce), is.raw(ct_with_tag), is.raw(aad))
-  .Call(`_rmorie_morie_crypto_chacha20poly1305_decrypt`,
-        key, nonce, ct_with_tag, aad)
+  .Call(
+    `_rmorie_morie_crypto_chacha20poly1305_decrypt`,
+    key, nonce, ct_with_tag, aad
+  )
 }
 
 #' HKDF-SHA256 (RFC 5869) key derivation
@@ -119,7 +123,7 @@ morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
 #' Phase 3JJJ1. Mirrors the Python
 #' `morie.crypto.hkdf_sha256(ikm, length=32, salt=b"", info=b"")`
 #' byte-for-byte. Empty `salt` defaults to a 32-byte zero-filled
-#' salt per RFC 5869 §2.2 (matches Python).
+#' salt per RFC 5869 Section 2.2 (matches Python).
 #'
 #' @param ikm Input keying material (raw vector).
 #' @param length Output length in bytes (1..8160).
@@ -128,19 +132,23 @@ morie_crypto_chacha20_poly1305_decrypt <- function(key, nonce,
 #' @return Derived key material as raw vector of length `length`.
 #' @examples
 #' if (morie_crypto_sodium_available()) {
-#'   out <- morie_crypto_hkdf_sha256("seed", len = 32L, salt = "salt",
-#'                                   info = "ctx")
+#'   out <- morie_crypto_hkdf_sha256("seed",
+#'     len = 32L, salt = "salt",
+#'     info = "ctx"
+#'   )
 #'   length(out)
 #' }
 #' @export
 morie_crypto_hkdf_sha256 <- function(ikm, length = 32L,
-                                       salt = raw(0), info = raw(0)) {
-  if (is.character(ikm))  ikm  <- charToRaw(paste(ikm, collapse = ""))
+                                     salt = raw(0), info = raw(0)) {
+  if (is.character(ikm)) ikm <- charToRaw(paste(ikm, collapse = ""))
   if (is.character(salt)) salt <- charToRaw(paste(salt, collapse = ""))
   if (is.character(info)) info <- charToRaw(paste(info, collapse = ""))
   stopifnot(is.raw(ikm), is.raw(salt), is.raw(info))
-  .Call(`_rmorie_morie_crypto_hkdf_sha256`,
-        ikm, as.integer(length), salt, info)
+  .Call(
+    `_rmorie_morie_crypto_hkdf_sha256`,
+    ikm, as.integer(length), salt, info
+  )
 }
 
 #' Cryptographically secure random bytes (libsodium)

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Replication of Laniyonu (2018) — Coffee Shops and Street Stops
+#' Replication of Laniyonu (2018) -- Coffee Shops and Street Stops
 #'
 #' R port of \code{morie.laniyonu.gentrification_policing}.  Estimates
 #' the direct, indirect (spatial spillover), and total effect of
@@ -35,6 +35,21 @@
 #' @return A \code{list} of class \code{morie_laniyonu_gp_result}, one
 #'   per year analysed.
 #' @name morie_laniyonu_gentrification_policing
+#' @examples
+#' set.seed(1)
+#' df <- expand.grid(tract_id = sprintf("T\%02d", 1:40), year = 2010:2012,
+#'                   stringsAsFactors = FALSE)
+#' df$median_inc_2000 <- runif(nrow(df), 3e4, 7e4)
+#' df$median_inc_2014 <- df$median_inc_2000 * 1.2
+#' df$median_rent_2000 <- runif(nrow(df), 700, 1500)
+#' df$median_rent_2014 <- df$median_rent_2000 * 1.2
+#' df$pct_ba_2000 <- runif(nrow(df), 0.05, 0.45)
+#' df$pct_ba_2014 <- pmin(df$pct_ba_2000 * 1.3, 0.95)
+#' df$population <- sample(800:5000, nrow(df), TRUE)
+#' df$stops <- rpois(nrow(df), 30); df$felony_count <- rpois(nrow(df), 10)
+#' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
+#' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
+#' res[[1]]$rho
 NULL
 
 
@@ -118,7 +133,7 @@ NULL
 
 
 # ---------------------------------------------------------------------------
-# Gentrification panel — baseline-conditional 3-level factor
+# Gentrification panel -- baseline-conditional 3-level factor
 # ---------------------------------------------------------------------------
 
 #' Internal helper: Lan Gent Panel
@@ -387,6 +402,10 @@ morie_laniyonu_gentrification_policing <- function(
 }
 
 
+#' Print method for \code{morie_laniyonu_gp_result} objects
+#'
+#' @param x A \code{morie_laniyonu_gp_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
@@ -404,14 +423,14 @@ morie_laniyonu_gentrification_policing <- function(
 #' df$calls_311_omp <- rpois(nrow(df), 40); df$pct_black <- runif(nrow(df), 0.05, 0.7)
 #' res <- suppressWarnings(morie_laniyonu_gentrification_policing(df = df, log_outcome = TRUE))
 #' res[[1]]$rho
-#' \references{
-#' Laniyonu, A. (2018).  Coffee shops and street stops: Policing
-#' practices in gentrifying neighborhoods.  Urban Affairs Review,
-#' 54(5), 898-930.
-#' LeSage, J. P., & Pace, R. K. (2009).  Introduction to Spatial
-#' Econometrics.  CRC Press.
 #' print(res)
 #' }
+#' @references
+#'   Laniyonu, A. (2018).  Coffee shops and street stops: Policing
+#'   practices in gentrifying neighborhoods.  Urban Affairs Review,
+#'   54(5), 898-930.
+#'   LeSage, J. P., & Pace, R. K. (2009).  Introduction to Spatial
+#'   Econometrics.  CRC Press.
 #' @export
 print.morie_laniyonu_gp_result <- function(x, ...) {
   cat(x$title, "\

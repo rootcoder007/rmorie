@@ -33,6 +33,8 @@ TPS PSDP -- Intimate Partner and Family Violence
 }
 \examples{
 df <- morie_datasets_tps_intimate_partner_family_violence(offline = TRUE)
-head(df[, c("INDEX", "FAMILY_VIOLENCE_FLAG",
-            "FAMILY_VIOLENCE_RELATION", "COUNT")])
+head(df[, c(
+  "INDEX", "FAMILY_VIOLENCE_FLAG",
+  "FAMILY_VIOLENCE_RELATION", "COUNT"
+)])
 }

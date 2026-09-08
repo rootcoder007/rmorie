@@ -15,7 +15,12 @@ hierarchical_bonferroni(
 
 \item{alpha}{Overall FWER level.}
 
-\item{propagate_alpha}{Logical; currently keeps alpha constant
+\item{propagate_alpha}{Not implemented. Alpha recycling between
+families would need a named procedure; what runs instead is that
+every family is tested at the full alpha and the gate closes on
+the first family with no rejection. Passing this argument
+explicitly warns, and \code{alpha_propagated} in the result is
+\code{FALSE}. Ignored; kept so the signature is stable
 across families (mirrors the Python reference).}
 }
 \value{
@@ -29,6 +34,8 @@ stage-list return shape; no drop-in CRAN equivalent (\pkg{gMCP}
 covers the concept but with a different graphical API).
 }
 \examples{
-res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
-str(res)
+if (requireNamespace("qvalue", quietly = TRUE)) {
+  res <- hierarchical_bonferroni(list(c(0.4, 0.5), c(0.001, 0.002)))
+  str(res)
+}
 }

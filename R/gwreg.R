@@ -1,8 +1,9 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Geographically weighted regression (GWR).
+#' Geographically weighted regression (GWR)
 #'
 #' Local WLS at each site i:
-#' \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i) X)^-1 X^top W(s_i) y}.
+#' \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i)
+#' X)^-1 X^top W(s_i) y}.
 #'
 #' @param x Design matrix (n by k).
 #' @param y Response, length n.
@@ -11,7 +12,9 @@
 #' @param kernel "gaussian" or "bisquare".
 #' @return Named list: estimate (n by k list), se, bandwidth, kernel,
 #'   n, method.
-#' @references Brunsdon, Fotheringham & Charlton (1996).
+#' @references Brunsdon C, Fotheringham AS & Charlton ME (1996).
+#'   Geographically weighted regression: a method for exploring spatial
+#'   nonstationarity. \emph{Geographical Analysis}, 28(4), 281-298.
 #' @examples
 #' gwreg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export

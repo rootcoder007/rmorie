@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{inv_logit}
+\alias{inv_logit}
+\title{inv_logit}
+\usage{
+inv_logit(x) 
+}
+\arguments{
+\item{x}{Numeric; combined arithmetically in the body.}
+}
+\description{
+A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}. See the file header for the source the module follows.
+}
+\value{
+A numeric value.
+}
+\keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+inv_logit(V)
+}

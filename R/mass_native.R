@@ -7,10 +7,25 @@
 # mvrnorm, the same RNG consumption order, so results match MASS to
 # machine precision (and bit-for-bit under a common seed).
 
+# Internal: Moore-Penrose generalized inverse (native MASS::ginv)
+#
+# Exact re-implementation of \code{MASS::ginv} for real matrices: the
+# SVD pseudo-inverse with the same singular-value tolerance rule.
+# @noRd
+# Shared Moore-Penrose pseudo-inverse.  Two further copies used to exist,
+# in causal_shared_native.R (cutoff max(d)*1e-12) and esl_native2.R
+# (cutoff max(dim)*eps*max(d), the numpy convention).  Because R sources
+# R/ alphabetically this file sorted last and its MASS cutoff --
+# sqrt(eps) ~ 1.49e-8, four to six orders of magnitude looser -- was
+# silently in force for all three call sites.  The survivor is kept so
+# behaviour does not change, with tol exposed for callers that need a
+# tighter rank cut.
 #' Internal: Moore-Penrose generalized inverse (native MASS::ginv)
 #'
 #' Exact re-implementation of \code{MASS::ginv} for real matrices: the
 #' SVD pseudo-inverse with the same singular-value tolerance rule.
+#' @param X The body requires: 'X' must be a numeric matrix.
+#' @param tol Numeric; combined arithmetically in the body.
 #' @noRd
 .morie_ginv <- function(X, tol = sqrt(.Machine$double.eps)) {
   if (length(dim(X)) > 2L || !is.numeric(X)) {
@@ -75,6 +90,19 @@ morie_mvrnorm <- function(n = 1, mu, Sigma, tol = 1e-6,
 # --- Module 31: negative-binomial GLM + 2-D KDE (native MASS) ---------
 
 # Normal-reference bandwidth (reproduces MASS::bandwidth.nrd).
+#' Normal-reference bandwidth (reproduces MASS::bandwidth.nrd)
+#'
+#' A step of the mass_native implementation. Called by \code{morie_kde2d}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x A vector; its length is taken.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_bandwidth_nrd(x = x)
+#' res
 .morie_bandwidth_nrd <- function(x) {
   r <- stats::quantile(x, c(0.25, 0.75))
   h <- (r[2L] - r[1L]) / 1.34
@@ -119,6 +147,18 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 
 # Negative-binomial family with fixed theta (reproduces
 # MASS::negative.binomial for the log link path used by glm.nb).
+#' Negative-binomial family with fixed theta (reproduces
+#'
+#' MASS::negative.binomial for the log link path used by glm.nb).
+#'
+#' @param theta Numeric; passed to \code{log}.
+#' @param link Carried through into a list the body builds. Defaults to \code{"log"}.
+#' @return The value of \code{structure}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .morie_negbin_family(theta = x)
+#' res
 .morie_negbin_family <- function(theta, link = "log") {
   lk <- stats::make.link(link)
   variance <- function(mu) mu + mu^2 / theta
@@ -148,6 +188,20 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
 }
 
 # Theta MLE by Fisher scoring (reproduces MASS::theta.ml).
+#' Theta MLE by Fisher scoring (reproduces MASS::theta.ml)
+#'
+#' A step of the mass_native implementation. Called by \code{morie_glm_nb}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param y A vector; its length is taken.
+#' @param mu Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body. Defaults to \code{sum(weights)}.
+#' @param weights Numeric; combined arithmetically in the body.
+#' @param limit Passed to \code{<}. Defaults to \code{10}.
+#' @param eps Passed to \code{>}. Defaults to \code{.Machine$double.eps^0.25}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
 .morie_theta_ml <- function(y, mu, n = sum(weights), weights,
                             limit = 10, eps = .Machine$double.eps^0.25) {
   if (missing(weights)) weights <- rep(1, length(y))
@@ -156,7 +210,8 @@ morie_kde2d <- function(x, y, h, n = 25, lims = c(range(x), range(y))) {
   info <- function(th) sum(weights * (-trigamma(th + y) + trigamma(th) -
     1 / th + 2 / (mu + th) - (y + th) / (mu + th)^2))
   t0 <- n / sum(weights * (y / mu - 1)^2)
-  it <- 0L; del <- 1
+  it <- 0L
+  del <- 1
   while ((it <- it + 1L) < limit && abs(del) > eps) {
     t0 <- abs(t0)
     del <- score(t0) / info(t0)
@@ -213,8 +268,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
   th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
   fam <- .morie_negbin_family(th, link)
   iter <- 0L
-  d1 <- sqrt(2 * max(1, fit$df.residual)); d2 <- del <- 1
-  g <- fam$linkfun; Lm <- loglik(th, mu, Y, w); Lm0 <- Lm + 2 * d1
+  d1 <- sqrt(2 * max(1, fit$df.residual))
+  d2 <- del <- 1
+  g <- fam$linkfun
+  Lm <- loglik(th, mu, Y, w)
+  Lm0 <- Lm + 2 * d1
   while ((iter <- iter + 1L) <= control$maxit &&
          (abs(Lm0 - Lm) / d1 + abs(del) / d2) > control$epsilon) {
     eta <- g(mu)
@@ -224,7 +282,9 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
     th <- .morie_theta_ml(Y, mu, sum(w), w, limit = control$maxit)
     fam <- .morie_negbin_family(th, link)
     mu <- fit$fitted.values
-    del <- t0 - th; Lm0 <- Lm; Lm <- loglik(th, mu, Y, w)
+    del <- t0 - th
+    Lm0 <- Lm
+    Lm <- loglik(th, mu, Y, w)
   }
   fit$theta <- as.numeric(th)
   fit$terms <- Terms
@@ -236,6 +296,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
   fit
 }
 
+#' Summarise method for \code{negbin} objects
+#'
+#' @param object A \code{negbin} object.
+#' @param dispersion A \code{negbin} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1); n <- 300
@@ -243,11 +308,11 @@ morie_glm_nb <- function(formula, data, weights, init.theta = NULL,
 #' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
 #' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
 #' coef(fit)
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' summary(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary negbin
 summary.negbin <- function(object, dispersion = 1, ...) {
   s <- stats::summary.glm(object, dispersion = dispersion, ...)
@@ -256,6 +321,10 @@ summary.negbin <- function(object, dispersion = 1, ...) {
   s
 }
 
+#' Log-likelihood of method for \code{negbin} objects
+#'
+#' @param object A \code{negbin} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1); n <- 300
@@ -263,11 +332,11 @@ summary.negbin <- function(object, dispersion = 1, ...) {
 #' y <- rnbinom(n, mu = exp(0.3 + 0.9 * x), size = 3)
 #' fit <- suppressWarnings(morie_glm_nb(y ~ x, data = data.frame(y, x)))
 #' coef(fit)
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' logLik(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik negbin
 logLik.negbin <- function(object, ...) {
   val <- object$twologlik / 2
@@ -290,6 +359,10 @@ logLik.negbin <- function(object, ...) {
 #' @param k Huber tuning constant (default 1.345).
 #' @param maxit Max IRLS iterations.
 #' @param acc Convergence tolerance on the residual change.
+#' @param add_intercept When the second argument is a design
+#'   matrix rather than a data frame, prepend an intercept column.
+#'   Ignored for the formula interface, where the model frame
+#'   already carries one.
 #' @return A \code{morie_rlm} object.
 #' @references Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
 #'   Applied Statistics with S}. Springer.
@@ -301,22 +374,59 @@ logLik.negbin <- function(object, ...) {
 #' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
 #' rob$coefficients
 #' @export
-morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
-  mf <- stats::model.frame(formula, data)
-  y <- stats::model.response(mf, "numeric")
-  x <- stats::model.matrix(attr(mf, "terms"), mf)
+morie_rlm <- function(formula, data, k = 1.345, maxit = 20L,
+                      acc = 1e-4, add_intercept = TRUE) {
+  # A second morie_rlm taking (y, X) used to live in
+  # R/timeseries_robust.R, which sorts after this file and so
+  # silently replaced this one at load -- the MASS-parity
+  # formula interface simply vanished from the package.  Both
+  # calling conventions are served here.
+  if (inherits(formula, "formula")) {
+    mf <- stats::model.frame(formula, data)
+    y <- stats::model.response(mf, "numeric")
+    x <- stats::model.matrix(attr(mf, "terms"), mf)
+  } else {
+    y <- as.numeric(formula)
+    x <- as.matrix(data)
+    if (nrow(x) != length(y))
+      stop("X has ", nrow(x), " rows but y has ", length(y))
+    if (add_intercept) x <- cbind(`(Intercept)` = 1, x)
+  }
   psi <- function(u, deriv = 0) if (!deriv) pmin(1, k / abs(u)) else abs(u) <= k
   # Fused Armadillo Huber-M IRLS; matches MASS::rlm to ~1e-15, ~2x faster.
   cp <- .morie_rlm_cpp(x, y, k, as.integer(maxit), acc)
-  coef <- as.numeric(cp$coef); names(coef) <- colnames(x)
+  coef <- as.numeric(cp$coef)
+  names(coef) <- colnames(x)
   fitted <- drop(x %*% coef)
   structure(list(coefficients = coef, residuals = y - fitted,
                  wresid = as.numeric(cp$resid), fitted.values = fitted,
-                 s = cp$scale, psi = psi, x = x, weights = numeric(0),
-                 converged = isTRUE(cp$converged), k2 = k),
+                 s = cp$scale, psi = psi, x = x,
+                 # MASS `w`: the psi weights at the final scale
+                 weights = psi(as.numeric(cp$resid) / cp$scale),
+                 converged = isTRUE(cp$converged), k2 = k,
+                 # MASS returns the scale from the START of the final
+                 # IRLS iteration, so it does NOT equal
+                 # median(abs(residuals))/0.6745 -- measured relative gap
+                 # ~7e-5 against MASS itself.  `scale` keeps the MASS
+                 # convention because that is this function's contract;
+                 # `scale_final` is the value consistent with the
+                 # residuals actually returned, for callers who want it.
+                 scale = cp$scale,
+                 scale_final = {
+                   m0 <- stats::median(abs(as.numeric(cp$resid)))
+                   if (m0 > 0) m0 / 0.6745 else 0
+                 },
+                 scale_follows_mass_not_the_final_residuals = TRUE,
+                 robust_weights = psi(as.numeric(cp$resid) / cp$scale),
+                 n_downweighted = sum(
+                   psi(as.numeric(cp$resid) / cp$scale) < 1 - 1e-12)),
             class = "morie_rlm")
 }
 
+#' Summarise method for \code{morie_rlm} objects
+#'
+#' @param object A \code{morie_rlm} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(3)
@@ -325,15 +435,19 @@ morie_rlm <- function(formula, data, k = 1.345, maxit = 20L, acc = 1e-4) {
 #' y[1:3] <- y[1:3] + 40
 #' rob <- morie_rlm(y ~ x, data = data.frame(y, x))
 #' rob$coefficients
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' summary(rob)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::summary morie_rlm
 summary.morie_rlm <- function(object, ...) {
-  s <- object$s; coef <- object$coefficients; wresid <- object$wresid
-  n <- length(wresid); p <- length(coef); cn <- names(coef)
+  s <- object$s
+  coef <- object$coefficients
+  wresid <- object$wresid
+  n <- length(wresid)
+  p <- length(coef)
+  cn <- names(coef)
   w <- object$psi(wresid / s)
   S <- sum((wresid * w)^2) / (n - p)
   psiprime <- object$psi(wresid / s, deriv = 1)
@@ -382,15 +496,19 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
   x <- stats::model.matrix(attr(mf, "terms"), mf)
   xint <- match("(Intercept)", colnames(x), nomatch = 0L)
   if (xint > 0L) x <- x[, -xint, drop = FALSE]
-  n <- nrow(x); pc <- ncol(x)
+  n <- nrow(x)
+  pc <- ncol(x)
   wt <- if (missing(weights) || is.null(weights)) rep(1, n) else weights
   offset <- rep(0, n)
   y <- stats::model.response(mf)
   if (!is.factor(y)) stop("response must be a factor")
-  lev <- levels(y); llev <- length(lev)
+  lev <- levels(y)
+  llev <- length(lev)
   if (llev <= 2L) stop("response must have 3 or more levels")
-  y <- unclass(y); q <- llev - 1L
-  ind_pc <- seq_len(pc); ind_q <- seq_len(q)
+  y <- unclass(y)
+  q <- llev - 1L
+  ind_pc <- seq_len(pc)
+  ind_q <- seq_len(q)
   # starting values (MASS::polr glm-based scheme)
   q1 <- llev %/% 2L
   X <- cbind(Intercept = rep(1, n), x)
@@ -421,11 +539,15 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
     etheta <- exp(theta[-1L])
     gamm <- c(-Inf, cumsum(c(theta[1L], etheta)), Inf)
     eta <- offset + if (pc) drop(x %*% beta[ind_pc]) else 0
-    z1 <- pmin(100, gamm[y + 1L] - eta); z2 <- pmax(-100, gamm[y] - eta)
-    pr <- pfun(z1) - pfun(z2); p1 <- dfun(z1); p2 <- dfun(z2)
+    z1 <- pmin(100, gamm[y + 1L] - eta)
+    z2 <- pmax(-100, gamm[y] - eta)
+    pr <- pfun(z1) - pfun(z2)
+    p1 <- dfun(z1)
+    p2 <- dfun(z2)
     g1 <- if (pc) drop(t(x) %*% (wt * (p1 - p2) / pr)) else numeric()
     g2 <- -drop(t(Y1 * p1 - Y2 * p2) %*% (wt / pr))
-    jac <- matrix(0, q, q); jac[, 1L] <- 1
+    jac <- matrix(0, q, q)
+    jac[, 1L] <- 1
     for (i in seq_len(q)[-1L]) jac[i:q, i] <- etheta[i - 1L]
     g2 <- drop(g2 %*% jac)
     if (all(pr > 0)) c(g1, g2) else rep(NA_real_, pc + q)
@@ -434,13 +556,18 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
   beta <- res$par
   theta <- beta[pc + ind_q]
   zeta <- cumsum(c(theta[1L], exp(theta[-1L])))
-  cf <- beta[ind_pc]; names(cf) <- colnames(x)
+  cf <- beta[ind_pc]
+  names(cf) <- colnames(x)
   structure(list(coefficients = cf, zeta = zeta, deviance = 2 * res$value,
                  method = method, lev = lev, n = n, edf = pc + q,
                  nobs = sum(wt), convergence = res$convergence),
             class = "morie_polr")
 }
 
+#' Log-likelihood of method for \code{morie_polr} objects
+#'
+#' @param object A \code{morie_polr} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(4)
@@ -449,11 +576,11 @@ morie_polr <- function(formula, data, weights, method = "logistic") {
 #' yf <- factor(pmin(yc, 3), levels = 1:3, ordered = TRUE)
 #' fit <- morie_polr(yf ~ x, data = data.frame(yf, x))
 #' fit$zeta
-#' \references{
-#' Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
-#' Applied Statistics with S}. Springer.
 #' logLik(fit)
 #' }
+#' @references
+#'   Venables, W. N., & Ripley, B. D. (2002). \emph{Modern
+#'   Applied Statistics with S}. Springer.
 #' @exportS3Method stats::logLik morie_polr
 logLik.morie_polr <- function(object, ...) {
   val <- -object$deviance / 2

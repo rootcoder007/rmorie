@@ -1,12 +1,13 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Moran's I spatial autocorrelation (Schabenberger Ch 1).
+#' Moran's I spatial autocorrelation (Schabenberger Ch 1)
 #'
 #' Computes the global Moran's I and a two-sided p-value under the
 #' Cliff-Ord (1981) randomization variance.
 #'
 #' Formula:
 #' \deqn{I = (n / S_0) \sum_{ij} w_{ij}(x_i - \bar x)(x_j - \bar x)
-#'           / \sum_i (x_i - \bar x)^2}{I = (n / S_0) sum_ij w_ij(x_i - bar x)(x_j - bar x) / sum_i (x_i - bar x)^2}
+#'           / \sum_i (x_i - \bar x)^2}{I = (n / S_0) sum_ij w_ij(x_i - bar x)(x_j - bar
+#' x) / sum_i (x_i - bar x)^2}
 #'
 #' @param x Numeric vector of length n (observed values).
 #' @param w n-by-n numeric matrix of spatial weights.

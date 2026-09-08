@@ -869,7 +869,12 @@ fallback_procedure <- function(p_values, weights, alpha = 0.05,
 #'
 #' @param p_values_by_family List of numeric vectors, one per family.
 #' @param alpha Overall FWER level.
-#' @param propagate_alpha Logical; currently keeps alpha constant
+#' @param propagate_alpha Not implemented. Alpha recycling between
+#'   families would need a named procedure; what runs instead is that
+#'   every family is tested at the full alpha and the gate closes on
+#'   the first family with no rejection. Passing this argument
+#'   explicitly warns, and \code{alpha_propagated} in the result is
+#'   \code{FALSE}. Ignored; kept so the signature is stable
 #'   across families (mirrors the Python reference).
 #' @return A \code{morie_rich_result} list with one stage entry per
 #'   family and an \code{overall_rejected} logical vector.
@@ -881,6 +886,18 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
                                     propagate_alpha = TRUE) {
   if (!is.list(p_values_by_family)) {
     stop("p_values_by_family must be a list of numeric vectors")
+  }
+  # Alpha recycling is not implemented: every family is tested at the
+  # full alpha and the gate closes on the first family with no
+  # rejection. Someone naming the argument is asking for the recycling
+  # by name, so they are told; the default is left quiet because it is
+  # the procedure that has always run here.
+  if (!missing(propagate_alpha) && isTRUE(propagate_alpha)) {
+    warning("hierarchical_bonferroni(): alpha propagation between ",
+            "families is not implemented; each family is tested at the ",
+            "full alpha and the gate closes on the first family with no ",
+            "rejection. The result records alpha_propagated = FALSE.",
+            call. = FALSE)
   }
   n_families <- length(p_values_by_family)
   stages <- vector("list", 0L)
@@ -940,7 +957,8 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
     stages = stages,
     overall_rejected = all_rejected,
     method = "hierarchical_bonferroni",
-    alpha = alpha
+    alpha = alpha,
+    alpha_propagated = FALSE
   )
   class(out) <- c("morie_multiple_testing_result", "morie_rich_result", "list")
   out
@@ -960,7 +978,7 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 #' @inheritParams bonferroni
 #' @param method One of \code{"storey"}, \code{"bootstrap"}, or
 #'   \code{"two_step"}.
-#' @return A scalar pi0 estimate in `[0, 1]`.
+#' @return A scalar pi0 estimate in `\[0, 1\]`.
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(80), runif(20, 0, 0.005))
@@ -1036,7 +1054,8 @@ estimate_pi0 <- function(p_values,
 #'   \code{"holm_sidak"}, \code{"bh"} / \code{"benjamini_hochberg"} /
 #'   \code{"fdr"}, \code{"by"} / \code{"benjamini_yekutieli"},
 #'   \code{"storey"}, or \code{"fwer"} (alias of holm).
-#' @return A named \code{list} of adjusted p-values with method metadata (as built by the selected adjustment method).
+#' @return A named \code{list} of adjusted p-values with method metadata (as built by the
+#' selected adjustment method).
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(20), runif(5, 0, 0.005))
@@ -1135,6 +1154,10 @@ n_effective_tests <- function(correlation_matrix,
 # Print method (delegates to existing morie_rich_result printer)
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_multiple_testing_result} objects
+#'
+#' @param x A \code{morie_multiple_testing_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' p <- c(0.001, 0.008, 0.02, 0.04, 0.2, 0.5)
@@ -1142,7 +1165,7 @@ n_effective_tests <- function(correlation_matrix,
 #' @export
 print.morie_multiple_testing_result <- function(x, ...) {
   cat(x$title, "\n", strrep("=", nchar(x$title)), "\n", sep = "")
-  if (!is.null(x$call) && nzchar(x$call)) {
+  if (!is.null(x$call) && length(x$call) == 1L && nzchar(x$call)) {
     cat("Call:", x$call, "\n\n", sep = " ")
   }
   if (length(x$summary_lines) > 0L) {
@@ -1188,7 +1211,7 @@ print.morie_multiple_testing_result <- function(x, ...) {
 #' proportion of null hypotheses estimated by the Storey-style cutoff
 #' at \eqn{p > 0.5}.
 #'
-#' @param p_values Numeric vector of raw p-values in \eqn{`[0, 1]`}.
+#' @param p_values Numeric vector of raw p-values in \eqn{`\[0, 1\]`}.
 #' @param pi0_method Pi-zero estimator. Accepted: \code{"bootstrap"}
 #'   (alias for the Storey-style cutoff at 0.5; retained for API
 #'   parity with the Python sibling).

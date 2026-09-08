@@ -29,7 +29,8 @@
 #' @srrstats {TS1.0} morie_ts() returns a ts-based class; input is not left as a generic vector.
 #' @srrstats {TS1.1} accepted input types are documented on morie_ts().
 #' @srrstats {TS1.2} morie_ts() validates length, ordering, and missingness.
-#' @srrstats {TS1.3} morie_ts() is the single pre-processing routine feeding all downstream functions.
+#' @srrstats {TS1.3} morie_ts() is the single pre-processing routine feeding all
+#' downstream functions.
 #' @srrstats {TS1.4} time attributes (frequency/start) are preserved by morie_ts().
 #' @srrstats {TS1.5} the ts index is strictly ordered by construction.
 #' @srrstats {TS1.6} ordering/regularity violations (implicit missing) are caught by morie_ts().
@@ -44,7 +45,8 @@
 #' @srrstats {TS2.3} stationarity assumptions are surfaced by morie_ts_stationarity().
 #' @srrstats {TS2.4} morie_ts_stationarity() checks stationarity and issues diagnostics.
 #' @srrstats {TS2.4a} the ADF/KPSS/Ljung-Box results are returned as diagnostics.
-#' @srrstats {TS2.4b} a differencing order is advised (suggested_d) and morie_ts_difference() applies it.
+#' @srrstats {TS2.4b} a differencing order is advised (suggested_d) and
+#' morie_ts_difference() applies it.
 #' @srrstats {TS2.5} morie_ts_acf() returns autocorrelation strictly ordered by lag.
 #' @srrstats {TS2.6} morie_ts_acf() carries the series units attribute.
 #' @srrstats {TS3.0} tests show forecast SE widening with horizon (morie_ts_forecast).
@@ -63,9 +65,11 @@
 #' @srrstats {TS4.5} morie_ts_undifference() back-transforms differenced data.
 #' @srrstats {TS4.5a} morie_ts_undifference() is the explicit back-transform routine.
 #' @srrstats {TS4.5b} back-transformation is demonstrated in tests and examples.
-#' @srrstats {TS4.5c} the requirement for retained init values (a limitation) is documented + errors without them.
+#' @srrstats {TS4.5c} the requirement for retained init values (a limitation) is
+#' documented + errors without them.
 #' @srrstats {TS4.6} the forecast returns first- and second-order moments.
-#' @srrstats {TS4.6a} a distribution object is not returned; the moment form (TS4.6b) is used instead.
+#' @srrstats {TS4.6a} a distribution object is not returned; the moment form (TS4.6b) is
+#' used instead.
 #' @srrstats {TS4.6b} mean and se (first/second moments) are returned per horizon.
 #' @srrstats {TS4.6c} prediction intervals give a general error indication.
 #' @srrstats {TS4.7} forecast values are clearly distinguished from observed values.
@@ -76,7 +80,8 @@
 #' @srrstats {TS5.1} the time axis is labelled (with units where known).
 #' @srrstats {TS5.2} time is placed on the horizontal axis.
 #' @srrstats {TS5.3} units of the time index are printed on the axis where known.
-#' @srrstats {TS5.4} frequency visualisation (dsp PSD) uses positive frequency units, not [-pi,pi].
+#' @srrstats {TS5.4} frequency visualisation (dsp PSD) uses positive frequency units, not
+#' \eqn{\[-\pi,\pi\]}.
 #' @srrstats {TS5.5} plot.morie_ts_forecast(broken=) controls continuous vs broken lines.
 #' @srrstats {TS5.6} forecast distributional limits are shaded by default.
 #' @srrstats {TS5.7} observed (input) values are included in the plot by default.
@@ -97,7 +102,7 @@ NULL
 #' maintained uniformly.
 #'
 #' @param x A numeric vector (or an object coercible to one, including a
-#'   `units`-typed vector, which is coerced via [as.numeric()]), or an
+#'   `units`-typed vector, which is coerced via \[as.numeric()\]), or an
 #'   existing `ts`.
 #' @param frequency Number of observations per unit of time (e.g. 12 for
 #'   monthly-in-years). Default 1.
@@ -120,7 +125,8 @@ morie_ts <- function(x, frequency = 1, start = 1, calendar = NA_character_,
                      units = attr(x, "units")) {
   na_action <- match.arg(na_action)
   if (inherits(x, "ts")) {
-    frequency <- stats::frequency(x); start <- stats::start(x)
+    frequency <- stats::frequency(x)
+    start <- stats::start(x)
   }
   xv <- as.numeric(x)                              # accepts units-typed input
   if (anyNA(xv)) {
@@ -197,10 +203,12 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
     if (have_urca) {
       adf <- suppressWarnings(urca::ur.df(v, type = "drift",
                                           selectlags = "AIC"))
-      adf_stat <- adf@teststat[1]; adf_crit <- adf@cval[1, "5pct"]
+      adf_stat <- adf@teststat[1]
+      adf_crit <- adf@cval[1, "5pct"]
       adf_stationary <- adf_stat < adf_crit          # reject unit root
       kp <- suppressWarnings(urca::ur.kpss(v, type = "mu"))
-      kpss_stat <- kp@teststat[1]; kpss_crit <- kp@cval[1, "5pct"]
+      kpss_stat <- kp@teststat[1]
+      kpss_crit <- kp@cval[1, "5pct"]
       kpss_stationary <- kpss_stat < kpss_crit        # fail to reject H0
     } else {
       # base fallback: split-half mean/variance stability
@@ -217,9 +225,13 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
                      stationary = kpss_stationary),
          ljung_box = lb, both_stationary = adf_stationary && kpss_stationary)
   }
-  d <- 0L; v <- x; res <- test_one(v)
+  d <- 0L
+  v <- x
+  res <- test_one(v)
   while (!res$both_stationary && d < max_d) {
-    d <- d + 1L; v <- diff(v); res <- test_one(v)
+    d <- d + 1L
+    v <- diff(v)
+    res <- test_one(v)
   }
   out <- test_one(x)
   out$suggested_d <- d
@@ -334,6 +346,8 @@ morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
   out
 }
 
+#' Print method for \code{morie_ts_model} objects
+#'
 #' @param x A `morie_ts_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -415,6 +429,8 @@ morie_ts_trim_forecast <- function(forecast, max_width) {
   forecast
 }
 
+#' Print method for \code{morie_ts_forecast} objects
+#'
 #' @param x A `morie_ts_forecast`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -434,11 +450,13 @@ print.morie_ts_forecast <- function(x, ...) {
   invisible(x)
 }
 
+#' Plot method for \code{morie_ts_forecast} objects
+#'
 #' @param x A `morie_ts_forecast`.
 #' @param broken If TRUE, draw the observed series as a broken (segmented)
 #'   line rather than a continuous one; controls line continuity for
 #'   series that may contain gaps (default FALSE).
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly. Draws the observed (input) series and the
 #'   forecast (output) with its prediction band. Time is on the
 #'   horizontal axis (labelled with the series units where known); the
@@ -496,7 +514,8 @@ morie_ts_backtest <- function(x, h = 10L, order = c(0L, 0L, 0L),
   x <- as.numeric(x)
   n <- length(x)
   if (h >= n - 2L) stop("holdout `h` too large for the series", call. = FALSE)
-  train <- x[seq_len(n - h)]; actual <- x[(n - h + 1):n]
+  train <- x[seq_len(n - h)]
+  actual <- x[(n - h + 1):n]
   m <- morie_ts_arima(train, order = order, seasonal = seasonal)
   fc <- morie_ts_forecast(m, h = h)
   list(forecast = fc, actual = actual,

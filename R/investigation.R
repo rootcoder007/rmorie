@@ -2,7 +2,7 @@
 #'
 #' Mirrors the Python `morie.run_weighted_logistic_analysis()`. Fits a
 #' binary-outcome model with design-based (Binder-linearized) standard
-#' errors via rmorie's native weighted GLM — numerically identical to
+#' errors via rmorie's native weighted GLM -- numerically identical to
 #' `survey::svyglm(ids = ~1)` but with no survey dependency.
 #'
 #' @param data A `data.frame` containing outcome, predictors, and (optionally)
@@ -119,44 +119,6 @@ morie_compare_nested_logistic_models <- function(data, outcome,
   )
 }
 
-#' Run a treatment-effects analysis (point estimate, SE, 95% CI)
-#'
-#' Mirrors the Python `morie.run_treatment_effects_analysis()`. Convenience
-#' wrapper around [morie_estimate_ate()] that also produces a 95% confidence
-#' interval (delta-method approximation).
-#'
-#' @param data A `data.frame`.
-#' @param treatment Column name of the binary treatment.
-#' @param outcome Column name of the outcome.
-#' @param covariates Character vector of covariate column names.
-#'
-#' @return A list with `ate`, `se`, `ci_lower`, `ci_upper`, `n`, `method`.
-#' @export
-#' @examples
-#' set.seed(1)
-#' df <- data.frame(
-#'   y = rnorm(200),
-#'   t = rbinom(200, 1, 0.5),
-#'   x1 = rnorm(200), x2 = rnorm(200)
-#' )
-#' morie_run_treatment_effects_analysis(df,
-#'   treatment = "t", outcome = "y", covariates = c("x1", "x2")
-#' )
-morie_run_treatment_effects_analysis <- function(data, treatment, outcome,
-                                           covariates) {
-  ate_res <- morie_estimate_ate(data,
-    treatment = treatment, outcome = outcome,
-    covariates = covariates
-  )
-  list(
-    ate      = ate_res$ate,
-    se       = ate_res$se,
-    ci_lower = ate_res$ci_lower,
-    ci_upper = ate_res$ci_upper,
-    n        = ate_res$n,
-    method   = "Hajek IPW ATE (Wald CI)"
-  )
-}
 
 
 # --- APPENDED 2026-05-22 -----------------------------------------------------
@@ -179,6 +141,9 @@ morie_run_treatment_effects_analysis <- function(data, treatment, outcome,
 #' @return list(ate, y1, y0).
 #' @keywords internal
 #' @export
+#' @examples
+#' set.seed(1)
+#' r <- .morie_hajek_ate(ps = rnorm(10), t = rnorm(10), y = rnorm(10)); TRUE
 .morie_hajek_ate <- function(ps, t, y) {
   treated <- t == 1
   control <- t == 0

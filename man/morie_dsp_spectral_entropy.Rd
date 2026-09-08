@@ -10,7 +10,7 @@ morie_dsp_spectral_entropy(psd)
 \item{psd}{PSD vector.}
 }
 \value{
-Scalar in \verb{[0, log2(length(psd))]}.
+Scalar in \verb{\[0, log2(length(psd))\]}.
 }
 \description{
 Normalises PSD to a probability mass function and returns its

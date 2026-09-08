@@ -32,8 +32,11 @@ Partial dependence on one feature (Friedman)
 }
 \examples{
 set.seed(4)
-X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+X <- matrix(rnorm(400), 100, 4)
+colnames(X) <- paste0("f", 1:4)
 predict_fn <- function(M) as.numeric(M \%*\% c(1.5, -0.7, 0, 0.3))
-morie_fairness_xai_partial_dependence(predict_fn, X, feature = "f1",
-  feature_names = colnames(X), grid_size = 10L)
+morie_fairness_xai_partial_dependence(predict_fn, X,
+  feature = "f1",
+  feature_names = colnames(X), grid_size = 10L
+)
 }

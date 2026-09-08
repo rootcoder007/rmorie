@@ -29,6 +29,7 @@ morie_mrm_estimate_causal_effect(
 \code{stats::p.adjust} (default \code{"holm"}).}
 
 \item{seed}{RNG seed forwarded to the stochastic estimators.}
+
 }
 \value{
 An object of class \code{morie_mrm_effect}: list with

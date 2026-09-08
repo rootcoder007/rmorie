@@ -4,7 +4,8 @@
 
 .wt_dgp <- function(n = 400L, seed = 21) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- rbinom(n, 1, 0.5)
+  x1 <- rnorm(n)
+  x2 <- rbinom(n, 1, 0.5)
   ps <- stats::plogis(0.6 * x1 - 0.5 * x2)
   t <- rbinom(n, 1, ps)
   data.frame(t = t, x1 = x1, x2 = x2)

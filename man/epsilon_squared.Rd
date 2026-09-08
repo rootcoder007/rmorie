@@ -12,6 +12,7 @@ epsilon_squared(ss_effect, ss_total, df_effect, ms_error)
 \item{df_effect}{Numerator d.f. of the effect.}
 
 \item{ms_error}{Error mean square.}
+
 }
 \value{
 A \code{morie_effect_size}.

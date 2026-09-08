@@ -2,7 +2,7 @@
 % Please edit documentation in R/synth_otis.R
 \name{morie_synth_otis}
 \alias{morie_synth_otis}
-\title{Build a synthetic OTIS data.frame for a given publication id.}
+\title{Build a synthetic OTIS data.frame for a given publication id}
 \usage{
 morie_synth_otis(id, n = 200L, seed = 1L)
 }

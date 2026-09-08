@@ -4,7 +4,7 @@
 # modules 3-4). Iacus, King & Porro (2012): coarsen covariates, exact-
 # match on the coarsened strata, keep strata containing both arms, and
 # weight controls by the stratum-wise treated/control ratio scaled by
-# the global ratio. Pure base R — no MatchIt/cem at runtime.
+# the global ratio. Pure base R -- no MatchIt/cem at runtime.
 
 # Stratum keys from a set of (already discrete) columns.
 #' Internal helper: stratum key

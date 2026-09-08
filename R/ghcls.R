@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Probit-GP classifier (Laplace approximation).
+#' Probit-GP classifier (Laplace approximation)
 #'
 #' @param x Numeric matrix of features.
 #' @param y Numeric binary labels (0/1).
@@ -13,7 +13,7 @@
 #' morie_ghosal_np_classification(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_np_classification <- function(x, y, length_scale = NULL,
-                                     sigma_f = 1.0, n_iter = 300, seed = 0) {
+                                           sigma_f = 1.0, n_iter = 300, seed = 0) {
   set.seed(seed)
   x <- as.matrix(x)
   y <- as.numeric(y)

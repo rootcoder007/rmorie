@@ -9,11 +9,10 @@
 #' cross-year-safety, and recommended methods per variable.
 #'
 #' Pure R; no C/C++ hot path needed (taxonomy is regex + lookup, not
-#' CPU-bound).  Per \code{[[feedback_r_cpp_first]]} we'd reach for
+#' CPU-bound).  Per \code{\[\[feedback_r_cpp_first\]\]} we'd reach for
 #' Rcpp only if profiling showed a real bottleneck.
 #'
 #' Public callables
-#' ----------------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_audit_otis_variables}}
@@ -67,19 +66,23 @@ NULL
 #' @noRd
 .summarise_taxonomies <- function(taxonomies, analyzed_set, domain) {
   n_total <- length(taxonomies)
-  n_analyzed <- sum(vapply(taxonomies,
-                            function(t) t$column_name %in% analyzed_set,
-                            logical(1)))
+  n_analyzed <- sum(vapply(
+    taxonomies,
+    function(t) t$column_name %in% analyzed_set,
+    logical(1)
+  ))
   coverage_pct <- if (n_total > 0L) 100 * n_analyzed / n_total else 0
 
   level_counts <- table(vapply(taxonomies, function(t) t$level, character(1)))
-  role_counts  <- table(vapply(taxonomies, function(t) t$role,  character(1)))
-  card_counts  <- table(vapply(taxonomies,
-                                function(t) t$cardinality, character(1)))
+  role_counts <- table(vapply(taxonomies, function(t) t$role, character(1)))
+  card_counts <- table(vapply(
+    taxonomies,
+    function(t) t$cardinality, character(1)
+  ))
 
   cross_unsafe <- Filter(function(t) !t$cross_year_safe, taxonomies)
-  identifiers  <- Filter(function(t) t$role == "identifier", taxonomies)
-  outcomes     <- Filter(function(t) t$role == "outcome", taxonomies)
+  identifiers <- Filter(function(t) t$role == "identifier", taxonomies)
+  outcomes <- Filter(function(t) t$role == "outcome", taxonomies)
 
   out <- list(
     title = sprintf("morie variable-coverage audit - %s", toupper(domain)),
@@ -117,7 +120,7 @@ NULL
 # Public callables
 # ---------------------------------------------------------------------------
 
-#' Audit every OTIS variable.
+#' Audit every OTIS variable
 #'
 #' For each OTIS dataset, this function expects a list of column
 #' specifications.  By default it constructs the specs from the
@@ -136,8 +139,10 @@ NULL
 #' @return A list with class \code{morie_audit_result}.
 #' @examples
 #' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-#' specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
-#'                         spec("NumberConsecutiveDays_Segregation", "int")))
+#' specs <- list(v1 = list(
+#'   spec("UniqueIndividual_ID", "string"),
+#'   spec("NumberConsecutiveDays_Segregation", "int")
+#' ))
 #' res <- morie_audit_otis_variables(specs)
 #' res$domain
 #' @export
@@ -146,7 +151,7 @@ morie_audit_otis_variables <- function(dataset_specs = NULL) {
     # Best-effort: use the existing OTIS column hints if they exist.
     # The full dictionary parse lives on the Python side; here we
     # operate on whatever names are registered in R.
-    dataset_specs <- list()  # filled by caller for now
+    dataset_specs <- list() # filled by caller for now
   }
   taxonomies <- list()
   for (ds in names(dataset_specs)) {
@@ -163,14 +168,16 @@ morie_audit_otis_variables <- function(dataset_specs = NULL) {
 }
 
 
-#' Audit every ARSAU variable.
+#' Audit every ARSAU variable
 #'
 #' @param dataset_specs See \code{\link{morie_audit_otis_variables}}.
 #' @return A list with class \code{morie_audit_result}.
 #' @examples
 #' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-#' specs <- list(v1 = list(spec("PoliceService", "string", c("OPP", "TPS")),
-#'                         spec("REPORTING_YEAR", "int")))
+#' specs <- list(v1 = list(
+#'   spec("PoliceService", "string", c("OPP", "TPS")),
+#'   spec("REPORTING_YEAR", "int")
+#' ))
 #' res <- morie_audit_arsau_variables(specs)
 #' res$domain
 #' @export
@@ -193,7 +200,7 @@ morie_audit_arsau_variables <- function(dataset_specs = NULL) {
 }
 
 
-#' Audit both OTIS and ARSAU.
+#' Audit both OTIS and ARSAU
 #'
 #' @param otis_specs,arsau_specs See per-domain functions.
 #' @return Named list with \code{$otis} and \code{$arsau} audit results.
@@ -205,7 +212,7 @@ morie_audit_arsau_variables <- function(dataset_specs = NULL) {
 #' names(res)
 #' @export
 morie_audit_all_variables <- function(otis_specs = NULL,
-                                        arsau_specs = NULL) {
+                                      arsau_specs = NULL) {
   list(
     otis = morie_audit_otis_variables(otis_specs),
     arsau = morie_audit_arsau_variables(arsau_specs)
@@ -213,7 +220,7 @@ morie_audit_all_variables <- function(otis_specs = NULL,
 }
 
 
-#' Build a list of column specs from a parsed CSV header.
+#' Build a list of column specs from a parsed CSV header
 #'
 #' Convenience helper: given a data.frame just-loaded by
 #' \code{morie_arsau_load_*()}, returns the
@@ -230,31 +237,42 @@ morie_specs_from_df <- function(df) {
   lapply(names(df), function(nm) {
     col <- df[[nm]]
     dtype <- if (is.numeric(col) && all(is.finite(col) | is.na(col)) &&
-                  all((col %% 1) == 0 | is.na(col))) "int"
-              else if (is.numeric(col)) "float"
-              else if (is.logical(col))  "bool"
-              else if (inherits(col, "Date")) "date"
-              else if (inherits(col, "POSIXct")) "datetime"
-              else "string"
+      all((col %% 1) == 0 | is.na(col))) {
+      "int"
+    } else if (is.numeric(col)) {
+      "float"
+    } else if (is.logical(col)) {
+      "bool"
+    } else if (inherits(col, "Date")) {
+      "date"
+    } else if (inherits(col, "POSIXct")) {
+      "datetime"
+    } else {
+      "string"
+    }
     list(name = nm, dtype = dtype, valid_values = NULL)
   })
 }
 
 
-#' Write a Markdown audit report.
+#' Write a Markdown audit report
 #'
 #' @param out_path Path to write to.
 #' @param audit_result A \code{morie_audit_result} or list of them.
 #' @return The path written.
 #' @examples
 #' df <- data.frame(age = c(21, 34, NA), city = c("a", "b", "b"))
-#' res <- try(morie_write_audit_markdown(tempfile(fileext = ".md"),
-#'                                       morie_specs_from_df(df)))
+#' res <- try(morie_write_audit_markdown(
+#'   tempfile(fileext = ".md"),
+#'   morie_specs_from_df(df)
+#' ))
 #' @export
 morie_write_audit_markdown <- function(out_path, audit_result) {
   if (!inherits(audit_result, "morie_audit_result") &&
-      !all(vapply(audit_result, inherits,
-                   logical(1), "morie_audit_result"))) {
+    !all(vapply(
+      audit_result, inherits,
+      logical(1), "morie_audit_result"
+    ))) {
     stop("audit_result must be morie_audit_result or list of them")
   }
   if (inherits(audit_result, "morie_audit_result")) {
@@ -268,24 +286,30 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
     ""
   )
   for (r in audit_result) {
-    lines <- c(lines,
-                sprintf("## %s", toupper(r$domain)),
-                "",
-                sprintf("- Total variables: %d", r$n),
-                sprintf("- Currently analysed: %d (%.1f%%)",
-                        r$n_analyzed, r$coverage_pct),
-                sprintf("- Cross-year-unsafe: %d", length(r$cross_year_unsafe)),
-                sprintf("- Identifiers: %d", length(r$identifiers)),
-                sprintf("- Outcomes: %d", length(r$outcomes)),
-                "",
-                "### Levels", "",
-                "| level | count |", "|---|---:|")
+    lines <- c(
+      lines,
+      sprintf("## %s", toupper(r$domain)),
+      "",
+      sprintf("- Total variables: %d", r$n),
+      sprintf(
+        "- Currently analysed: %d (%.1f%%)",
+        r$n_analyzed, r$coverage_pct
+      ),
+      sprintf("- Cross-year-unsafe: %d", length(r$cross_year_unsafe)),
+      sprintf("- Identifiers: %d", length(r$identifiers)),
+      sprintf("- Outcomes: %d", length(r$outcomes)),
+      "",
+      "### Levels", "",
+      "| level | count |", "|---|---:|"
+    )
     for (k in names(r$level_counts)) {
       lines <- c(lines, sprintf("| %s | %d |", k, r$level_counts[[k]]))
     }
-    lines <- c(lines, "", "### Per-variable detail", "",
-                "| dataset | column | level | role | cardinality | cross_year_safe | analyzed? | recommended summary |",
-                "|---|---|---|---|---|---|---|---|")
+    lines <- c(
+      lines, "", "### Per-variable detail", "",
+      "| dataset | column | level | role | cardinality | cross_year_safe | analyzed? | recommended summary |",
+      "|---|---|---|---|---|---|---|---|"
+    )
     analyzed_set <- if (r$domain == "otis") .ANALYZED_OTIS else .ANALYZED_ARSAU
     for (t in r$taxonomies) {
       seen <- if (t$column_name %in% analyzed_set) "yes" else "-"
@@ -304,15 +328,17 @@ morie_write_audit_markdown <- function(out_path, audit_result) {
 }
 
 
-#' Print method for audit results.
+#' Print method for audit results
 #' @param x A \code{morie_audit_result}.
 #' @param ... Unused.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
 #' spec <- function(nm, dt, vv = NULL) list(name = nm, dtype = dt, valid_values = vv)
-#' specs <- list(v1 = list(spec("UniqueIndividual_ID", "string"),
-#'                         spec("NumberConsecutiveDays_Segregation", "int")))
+#' specs <- list(v1 = list(
+#'   spec("UniqueIndividual_ID", "string"),
+#'   spec("NumberConsecutiveDays_Segregation", "int")
+#' ))
 #' res <- morie_audit_otis_variables(specs)
 #' res$domain
 #' print(res)

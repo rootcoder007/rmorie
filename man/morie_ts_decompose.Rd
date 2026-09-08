@@ -9,7 +9,7 @@ morie_ts_decompose(x, method = c("stl", "classical"))
 \arguments{
 \item{x}{A \code{morie_ts} (frequency > 1 for a seasonal component).}
 
-\item{method}{"stl" (loess-based) or "classical" (\code{\link[stats:decompose]{stats::decompose()}}).}
+\item{method}{"stl" (loess-based) or "classical" (\code{stats::decompose()}).}
 }
 \value{
 A \code{morie_ts_decomp} with \code{trend}, \code{seasonal}, \code{remainder}.

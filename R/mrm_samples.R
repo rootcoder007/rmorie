@@ -27,6 +27,13 @@
 #'   head(b01)
 #' }
 #' @name mrm_samples
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (FALSE) {
+#'   b01 <- morie_load_dataset("otisb01")
+#'   head(b01)
+#' }
+#' \dontshow{\}) # examplesIf}
 NULL
 
 
@@ -39,6 +46,11 @@ NULL
 #' @param name One of `"otis_b01"`, `"otis_b09"`, `"otis_c11"`,
 #'   `"tps_assault"`.
 #' @return A data.frame.
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' b01 <- morie_sample("otis_b01")
+#' head(b01)
+#' \dontshow{\}) # examplesIf}
 #' @export
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' b01 <- morie_sample("otis_b01")
@@ -121,7 +133,7 @@ morie_tps_layer_urls <- function() {
 #' @param max_per_page ArcGIS page size (default `2000`; server caps).
 #' @return Path to the CSV.
 #' @examplesIf requireNamespace("jsonlite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Network: fetches major-crime indicators from the Toronto Police
 #' # ArcGIS open-data layer.
 #' csv <- morie_fetch_tps(
@@ -132,6 +144,20 @@ morie_tps_layer_urls <- function() {
 #' tps <- utils::read.csv(csv)
 #' nrow(tps)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Network: fetches major-crime indicators from the Toronto Police
+#' # ArcGIS open-data layer.
+#' csv <- morie_fetch_tps(
+#'   category = "Assault",
+#'   cache_dir = tempdir(),
+#'   where = "OCC_YEAR = 2024"
+#' )
+#' tps <- utils::read.csv(csv)
+#' nrow(tps)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_fetch_tps <- function(
   category,
@@ -146,9 +172,6 @@ morie_fetch_tps <- function(
       "Unknown TPS category. Known: ",
       paste(names(urls), collapse = ", ")
     )
-  }
-  if (!requireNamespace("jsonlite", quietly = TRUE)) {
-    stop("jsonlite required for morie_fetch_tps().")
   }
   cache_dir <- path.expand(cache_dir)
   dir.create(cache_dir, showWarnings = FALSE, recursive = TRUE)

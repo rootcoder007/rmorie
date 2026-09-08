@@ -301,6 +301,10 @@ morie_hawkes_fit <- function(times, end_time = NULL,
   )
 }
 
+#' Print method for \code{morie_hawkes_fit} objects
+#'
+#' @param x A \code{morie_hawkes_fit} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{

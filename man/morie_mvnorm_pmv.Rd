@@ -30,17 +30,17 @@ and Monte-Carlo error attributes attached).
 \description{
 Thin extender over \code{mvtnorm::pmvnorm} that evaluates the
 multivariate normal CDF over a hyper-rectangle
-\eqn{[lower, upper]}.
+\eqn{\[lower, upper\]}.
 }
 \examples{
 \donttest{
-  if (requireNamespace("mvtnorm", quietly = TRUE)) {
-    set.seed(1)
-    S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)
-    morie_mvnorm_pmv(
-      lower = c(-1, -1), upper = c(1, 1),
-      mean = c(0, 0), sigma = S
-    )
-  }
+if (requireNamespace("mvtnorm", quietly = TRUE)) {
+  set.seed(1)
+  S <- matrix(c(1, 0.4, 0.4, 1), 2, 2)
+  morie_mvnorm_pmv(
+    lower = c(-1, -1), upper = c(1, 1),
+    mean = c(0, 0), sigma = S
+  )
+}
 }
 }

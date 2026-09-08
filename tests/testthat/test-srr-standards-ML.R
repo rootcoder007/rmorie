@@ -7,12 +7,14 @@
 # ---- shared fixtures --------------------------------------------------
 .ml_reg <- function(n = 200L, seed = 1L) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   data.frame(x1 = x1, x2 = x2, y = 2 + 1.5 * x1 - 0.8 * x2 + rnorm(n, sd = 0.3))
 }
 .ml_clf <- function(n = 300L, seed = 2L) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   p <- 1 / (1 + exp(-(0.5 + 1.2 * x1 - 0.9 * x2)))
   data.frame(x1 = x1, x2 = x2, y = rbinom(n, 1, p))
 }
@@ -62,13 +64,15 @@ test_that("ML1.5 a single function summarises dataset contents (counts)", {
 })
 
 test_that("ML1.6/ML1.6a training errors informatively on missing values", {
-  d <- .ml_reg(50L); d$x1[3] <- NA
+  d <- .ml_reg(50L)
+  d$x1[3] <- NA
   m <- morie_ml_model("linear", "gd", epochs = 10)
   expect_error(morie_ml_train(m, d[c("x1", "x2")], d$y), "missing")
 })
 
 test_that("ML1.6b docs/examples show how to impute rather than discard", {
-  d <- .ml_reg(50L); d$x1[3] <- NA
+  d <- .ml_reg(50L)
+  d$x1[3] <- NA
   rec <- morie_ml_prep(morie_ml_recipe("y", c("x1", "x2")), d)
   baked <- morie_ml_bake(rec, d)
   expect_false(anyNA(baked$x1))                 # imputed, not dropped
@@ -82,13 +86,16 @@ test_that("ML1.7/ML1.7a imputation offers multiple user-defined methods", {
 })
 
 test_that("ML1.7b imputation steps are documented + reproducible", {
-  d <- .ml_reg(40L); d$x1[c(2, 4)] <- NA
+  d <- .ml_reg(40L)
+  d$x1[c(2, 4)] <- NA
   rec <- morie_ml_prep(morie_ml_recipe("y", "x1", impute = "median"), d)
   expect_equal(rec$params$x1$impute_fill, stats::median(d$x1, na.rm = TRUE))
 })
 
 test_that("ML1.8 missing values treated equally for train and test", {
-  tr <- .ml_reg(60L); te <- .ml_reg(30L, seed = 9); te$x1[1] <- NA
+  tr <- .ml_reg(60L)
+  te <- .ml_reg(30L, seed = 9)
+  te$x1[1] <- NA
   rec <- morie_ml_prep(morie_ml_recipe("y", c("x1", "x2")), tr)
   bt <- morie_ml_bake(rec, te)
   expect_false(anyNA(bt$x1))                    # same recipe fills test NA
@@ -197,7 +204,9 @@ test_that("ML3.1 both untrained (params-only) and trained models supported", {
 })
 
 test_that("ML3.2 different models can be applied to the same data spec", {
-  d <- .ml_reg(); X <- d[c("x1", "x2")]; y <- d$y
+  d <- .ml_reg()
+  X <- d[c("x1", "x2")]
+  y <- d$y
   f1 <- morie_ml_train(morie_ml_model("linear", "gd", epochs = 30), X, y)
   f2 <- morie_ml_train(morie_ml_model("linear", "adam", epochs = 30), X, y)
   expect_false(isTRUE(all.equal(f1$weights, f2$weights)))
@@ -317,7 +326,8 @@ test_that("ML4.7 results are combined across resampling iterations", {
 })
 
 test_that("ML4.8/ML4.8a resampling partitions each case for testing once", {
-  set.seed(42); n <- nrow(.ml_reg())
+  set.seed(42)
+  n <- nrow(.ml_reg())
   folds <- sample(rep(seq_len(5L), length.out = n))
   expect_equal(length(folds), n)               # every case assigned one fold
   expect_setequal(unique(folds), 1:5)
@@ -398,7 +408,8 @@ test_that("ML6.1/ML6.1a full workflow (split->prep->train->assess) runs end-to-e
   d <- .ml_clf(300L)
   sp <- morie_ml_split(d, c(train = 0.7, test = 0.3), seed = 3)
   rec <- morie_ml_prep(morie_ml_recipe("y", c("x1", "x2")), sp$train)
-  tr <- morie_ml_bake(rec, sp$train); te <- morie_ml_bake(rec, sp$test)
+  tr <- morie_ml_bake(rec, sp$train)
+  te <- morie_ml_bake(rec, sp$test)
   fit <- morie_ml_train(morie_ml_model("logistic", "adam", epochs = 100),
                         tr[c("x1", "x2")], tr$y)
   acc <- morie_ml_assess(fit, te[c("x1", "x2")], te$y, metrics = "accuracy")
@@ -417,9 +428,11 @@ test_that("ML7.0 partial + case-insensitive role matching is confirmed", {
 })
 
 test_that("ML7.1 different numeric scaling of input changes fitted weights", {
-  d <- .ml_reg(); X <- d[c("x1", "x2")]
+  d <- .ml_reg()
+  X <- d[c("x1", "x2")]
   f1 <- morie_ml_train(morie_ml_model("linear", "gd", epochs = 30), X, d$y)
-  Xs <- X; Xs$x1 <- Xs$x1 * 100
+  Xs <- X
+  Xs$x1 <- Xs$x1 * 100
   f2 <- morie_ml_train(morie_ml_model("linear", "gd", epochs = 30), Xs, d$y)
   expect_false(isTRUE(all.equal(unname(f1$weights), unname(f2$weights))))
 })
@@ -440,7 +453,8 @@ test_that("ML7.3/ML7.3a/ML7.3b model-object class + accessors are as documented"
 })
 
 test_that("ML7.4 lower training rate needs more epochs to reach a loss", {
-  X <- .ml_reg()[c("x1", "x2")]; y <- .ml_reg()$y
+  X <- .ml_reg()[c("x1", "x2")]
+  y <- .ml_reg()$y
   f_slow <- morie_ml_train(morie_ml_model("linear", "gd", learning_rate = 0.001,
                                           epochs = 300), X, y)
   f_fast <- morie_ml_train(morie_ml_model("linear", "gd", learning_rate = 0.1,
@@ -457,7 +471,8 @@ test_that("ML7.5 optimal-training-rate routine (tuning) runs", {
 })
 
 test_that("ML7.6 more epochs yield a lower (or equal) training loss", {
-  X <- .ml_reg()[c("x1", "x2")]; y <- .ml_reg()$y
+  X <- .ml_reg()[c("x1", "x2")]
+  y <- .ml_reg()$y
   f_short <- morie_ml_train(morie_ml_model("linear", "gd", epochs = 5, tol = 0),
                             X, y)
   f_long  <- morie_ml_train(morie_ml_model("linear", "gd", epochs = 200, tol = 0),
@@ -466,7 +481,8 @@ test_that("ML7.6 more epochs yield a lower (or equal) training loss", {
 })
 
 test_that("ML7.7 different optimizers are tested + all reduce the loss", {
-  X <- .ml_reg()[c("x1", "x2")]; y <- .ml_reg()$y
+  X <- .ml_reg()[c("x1", "x2")]
+  y <- .ml_reg()$y
   for (opt in c("gd", "sgd", "adam")) {
     f <- morie_ml_train(morie_ml_model("linear", opt, epochs = 60, tol = 0), X, y)
     expect_lt(f$loss_path[f$n_epochs], f$loss_path[1])
@@ -474,7 +490,8 @@ test_that("ML7.7 different optimizers are tested + all reduce the loss", {
 })
 
 test_that("ML7.8 different loss functions are tested", {
-  X <- .ml_clf()[c("x1", "x2")]; y <- .ml_clf()$y
+  X <- .ml_clf()[c("x1", "x2")]
+  y <- .ml_clf()$y
   f_ll <- morie_ml_train(morie_ml_model("logistic", "adam", loss = "logloss",
                                         epochs = 40), X, y)
   f_ms <- morie_ml_train(morie_ml_model("logistic", "adam", loss = "mse",

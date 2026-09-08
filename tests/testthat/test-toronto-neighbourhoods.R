@@ -340,7 +340,8 @@ test_that("morie_tps_disaggregate_140_to_158 handles multiple count cols + multi
   # 1:1 row 001 unchanged.
   one <- out[out$hood_140 == "001", ]
   expect_equal(nrow(one), 1L)
-  expect_equal(one$assault, 10); expect_equal(one$robbery, 1)
+  expect_equal(one$assault, 10)
+  expect_equal(one$robbery, 1)
   # Split row 075 -> 2 rows summing to (20, 2).
   s75 <- out[out$hood_140 == "075", ]
   expect_equal(nrow(s75), 2L)

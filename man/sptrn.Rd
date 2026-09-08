@@ -3,7 +3,7 @@
 \name{sptrn}
 \alias{sptrn}
 \alias{morie_spatial_trend_surface}
-\title{Polynomial trend surface analysis (OLS).}
+\title{Polynomial trend surface analysis (OLS)}
 \usage{
 sptrn(x, coords, order = 2)
 

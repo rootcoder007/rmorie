@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_c11_mandela_classification}
 \alias{morie_otis_analyze_c11_mandela_classification}
-\title{Mandela-RF on c11 -- per-individual Mandela classification by year.}
+\title{Mandela-RF on c11 -- per-individual Mandela classification by year}
 \usage{
 morie_otis_analyze_c11_mandela_classification(data, out_dir = NULL)
 }

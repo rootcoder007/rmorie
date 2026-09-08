@@ -19,9 +19,10 @@ neighbours routine; if the optional \pkg{FNN} package is installed
 it is used for the KNN graph. The 2-D kernel density estimator
 prefers \pkg{MASS}\code{::kde2d} when available, otherwise falls
 back to a Gaussian density evaluated at the observation points.
-If \pkg{spdep} is installed, callers can delegate the global
-Moran's I test natively (Cliff-Ord normal approximation,
-validated against spdep in tests/cross/).
+The global Moran's I test is computed natively from the Cliff-Ord
+moments under either the randomisation (default) or normality null,
+and both branches are validated against \pkg{spdep} at the matching
+setting in tests/cross/.
 \subsection{Functions}{
 
 \itemize{

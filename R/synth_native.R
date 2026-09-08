@@ -238,6 +238,10 @@ morie_synth_control <- function(data, outcome, unit, time,
   )
 }
 
+#' Print method for \code{morie_synth} objects
+#'
+#' @param x A \code{morie_synth} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' pan <- expand.grid(unit = letters[1:6], time = 1:10)
@@ -246,12 +250,12 @@ morie_synth_control <- function(data, outcome, unit, time,
 #' fit <- morie_synth_control(pan, "y", "unit", "time",
 #'                            treated_unit = "a", treatment_time = 7)
 #' fit$att
-#' \references{
-#' Abadie, A., Diamond, A., & Hainmueller, J. (2010).
-#' Synthetic control methods for comparative case studies.
-#' \emph{JASA}, 105(490), 493--505.
 #' print(fit)
 #' }
+#' @references
+#'   Abadie, A., Diamond, A., & Hainmueller, J. (2010).
+#'   Synthetic control methods for comparative case studies.
+#'   \emph{JASA}, 105(490), 493--505.
 #' @export
 print.morie_synth <- function(x, ...) {
   cat("Synthetic control (rmorie native)\n")
@@ -283,7 +287,8 @@ print.morie_synth <- function(x, ...) {
 #'   (2021), American Economic Review 111(12) 4088-4118.
 #' @noRd
 .morie_sdid_native <- function(Y, N_co, T_pre) {
-  N <- nrow(Y); T_all <- ncol(Y)
+  N <- nrow(Y)
+  T_all <- ncol(Y)
   N_tr <- N - N_co
   T_post <- T_all - T_pre
   Y_co <- Y[seq_len(N_co), , drop = FALSE]
@@ -322,7 +327,8 @@ print.morie_synth <- function(x, ...) {
                                   method = "placebo",
                                   n_boot = 200L, seed = 42L) {
   fit <- .morie_sdid_native(Y, N_co, T_pre)
-  N <- nrow(Y); N_tr <- N - N_co
+  N <- nrow(Y)
+  N_tr <- N - N_co
   se <- NA_real_
   placebo_effects <- NULL
   if (identical(method, "placebo")) {

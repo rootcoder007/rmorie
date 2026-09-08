@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_design}
 \alias{morie_weights_design}
-\title{Design weights from inclusion probabilities.}
+\title{Design weights from inclusion probabilities}
 \usage{
 morie_weights_design(selection_probs)
 }

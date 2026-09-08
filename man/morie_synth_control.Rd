@@ -30,6 +30,8 @@ included as predictors.}
 
 \item{optimize_v}{Optimize the predictor-weight matrix V (default
 TRUE); FALSE uses equal weights on standardized predictors.}
+
+
 }
 \value{
 An object of class \code{morie_synth}: a list with

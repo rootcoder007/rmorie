@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_io.R
 \name{morie_tps_available_formats}
 \alias{morie_tps_available_formats}
-\title{List of formats this build can actually load.}
+\title{List of formats this build can actually load}
 \usage{
 morie_tps_available_formats()
 }

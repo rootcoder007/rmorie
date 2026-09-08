@@ -48,7 +48,7 @@ the real \code{..._CSV.zip}.
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Requires network access.
 url <- paste0(
   "https://www150.statcan.gc.ca/n1/pub/82m0013x/",

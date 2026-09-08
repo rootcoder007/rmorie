@@ -19,4 +19,8 @@ Named list with value, tensor, w, b, method.
 \description{
 RLHF linear reward head (Ouyang 2022)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rmorie:::rlhf_reward(V)
+}
 \keyword{internal}

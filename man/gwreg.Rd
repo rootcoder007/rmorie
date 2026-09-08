@@ -3,7 +3,7 @@
 \name{gwreg}
 \alias{gwreg}
 \alias{morie_geographically_weighted_regression}
-\title{Geographically weighted regression (GWR).}
+\title{Geographically weighted regression (GWR)}
 \usage{
 gwreg(x, y, coords, bandwidth = NULL, kernel = "gaussian")
 
@@ -38,6 +38,8 @@ Local WLS at each site i:
 gwreg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{
-Brunsdon, Fotheringham & Charlton (1996).
+Brunsdon C, Fotheringham AS & Charlton ME (1996).
+Geographically weighted regression: a method for exploring spatial
+nonstationarity. \emph{Geographical Analysis}, 28(4), 281-298.
 }
 \keyword{internal}

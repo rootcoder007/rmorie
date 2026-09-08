@@ -1,0 +1,23 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_unclr_dft_amp}
+\alias{morie_unclr_dft_amp}
+\title{morie_unclr_dft_amp}
+\usage{
+morie_unclr_dft_amp(x) 
+}
+\arguments{
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+}
+\description{
+A step of the unclr implementation. Called by \code{Fftperiod}. See the file header for the source the module follows.
+}
+\value{
+The value of \code{Mod}.
+}
+\keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_unclr_dft_amp(V)
+}

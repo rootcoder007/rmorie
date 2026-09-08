@@ -3,7 +3,7 @@
 \name{vtpwr}
 \alias{vtpwr}
 \alias{morie_voting_power_index}
-\title{Banzhaf and Shapley-Shubik voting-power indices (Armstrong Ch 10)}
+\title{Banzhaf and Shapley-Shubik voting-power indices (Banzhaf 1965; Shapley & Shubik 1954)}
 \usage{
 vtpwr(x, quota = NULL)
 
@@ -19,6 +19,13 @@ Named list with \code{banzhaf}, \code{shapley_shubik}, \code{quota},
 \code{weights}, \code{method}.
 }
 \description{
+Banzhaf and Shapley-Shubik voting-power indices (Banzhaf 1965; Shapley & Shubik 1954)
+}
+\details{
+Shapley, L. S. & Shubik, M. (1954), APSR 48(3):787-792, and Banzhaf,
+J. F. (1965), 19 Rutgers L. Rev. 317. NOT Armstrong: the strings "Banzhaf" and
+"Shapley" do not occur in any of its 320 pages.
+
 Exact enumeration for n <= 10; Monte Carlo for larger games.
 Quota defaults to strict simple majority.
 }

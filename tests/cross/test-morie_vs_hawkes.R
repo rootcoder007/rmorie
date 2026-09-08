@@ -8,8 +8,12 @@ test_that("native exp-kernel Hawkes loglik matches hawkes package", {
   skip_if_not_installed("hawkes")
   set.seed(190)
   # simulate a modest exponential Hawkes stream by thinning
-  mu <- 0.5; eta <- 0.4; beta <- 1.2
-  t <- c(); s <- 0; Tmax <- 200
+  mu <- 0.5
+  eta <- 0.4
+  beta <- 1.2
+  t <- c()
+  s <- 0
+  Tmax <- 200
   lam_bar <- function(hist, s) mu + eta * beta *
     sum(exp(-beta * (s - hist)))
   while (s < Tmax) {

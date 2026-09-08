@@ -46,6 +46,7 @@ df$treat <- as.integer(df$unit <= 15)
 df$d <- as.integer(df$treat == 1L & df$time >= 4)
 df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
 res <- morie_did_test_parallel_trends(df, "y", "treat", "time",
-                                      pre_periods = c(1, 2, 3))
+  pre_periods = c(1, 2, 3)
+)
 res$parallel_trends_plausible
 }

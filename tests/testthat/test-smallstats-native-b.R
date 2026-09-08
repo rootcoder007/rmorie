@@ -58,7 +58,8 @@ test_that("morie_vecm matches urca's Johansen eigen-decomposition", {
 test_that(".morie_coord_descent matches glmnet at matched penalty", {
   skip_if_not_installed("glmnet")
   set.seed(103)
-  n <- 200; p <- 8
+  n <- 200
+  p <- 8
   X <- matrix(rnorm(n * p), n, p)
   b <- c(2, -1.5, 1, rep(0, p - 3))
   y <- as.numeric(X %*% b) + rnorm(n, sd = 0.5)

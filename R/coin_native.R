@@ -21,23 +21,45 @@
 #   h : n x q influence (transformation) of the response
 # Returns the vec'd statistic T (pq), its conditional mean mu and
 # covariance Sigma, matching coin's `expectation()` / `covariance()`.
+#' Strasser-Weber conditional moments of the linear statistic
+#'
+#' g : n x p transformation of the covariate (e.g. group indicators) h :
+#' n x q influence (transformation) of the response Returns the vec\'d
+#' statistic T (pq), its conditional mean mu and covariance Sigma,
+#' matching coin\'s `expectation()` / `covariance()`.
+#'
+#' @param g A matrix; passed to \code{nrow}.
+#' @param h A matrix; passed to \code{crossprod}.
+#' @return A list with \code{T}, \code{mu}, \code{Sigma}, \code{n}.
+#' @export
 .morie_sw_moments <- function(g, h) {
-  g <- as.matrix(g); h <- as.matrix(h)
+  g <- as.matrix(g)
+  h <- as.matrix(h)
   n <- nrow(g)
-  Eh <- colMeans(h)                       # q
+  Eh <- colMeans(h) # q
   hc <- sweep(h, 2L, Eh, "-")
-  Vh <- crossprod(hc) / n                 # q x q  (1/n) sum (h-Eh)(h-Eh)'
-  sg <- colSums(g)                        # p
-  Sg <- crossprod(g)                      # p x p  sum g g'
-  Tmat <- crossprod(g, h)                 # p x q  sum_i g_i h_i'
-  Tvec <- as.vector(Tmat)                 # column-major vec
-  mu <- as.vector(outer(sg, Eh))          # vec(sg Eh')
+  Vh <- crossprod(hc) / n # q x q  (1/n) sum (h-Eh)(h-Eh)'
+  sg <- colSums(g) # p
+  Sg <- crossprod(g) # p x p  sum g g'
+  Tmat <- crossprod(g, h) # p x q  sum_i g_i h_i'
+  Tvec <- as.vector(Tmat) # column-major vec
+  mu <- as.vector(outer(sg, Eh)) # vec(sg Eh')
   Sigma <- (n / (n - 1)) * kronecker(Vh, Sg) -
     (1 / (n - 1)) * kronecker(Vh, outer(sg, sg))
   list(T = Tvec, mu = mu, Sigma = Sigma, n = n)
 }
 
 # Quadratic-form statistic c = (T-mu)' Sigma^+ (T-mu) ~ chi-square(df).
+#' Quadratic-form statistic c = (T-mu)\' Sigma^+ (T-mu) ~ chi-square(df)
+#'
+#' A step of the coin_native implementation. Called by \code{morie_oneway_test}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
+#' @param tol Numeric; combined arithmetically in the body. Defaults to \code{1e-08}.
+#' @return A list with \code{statistic}, \code{df}, \code{p.value}.
+#' @export
 .morie_quad_stat <- function(m, tol = 1e-8) {
   d <- m$T - m$mu
   ev <- eigen(m$Sigma, symmetric = TRUE)
@@ -46,11 +68,23 @@
   Spinv <- ev$vectors[, pos, drop = FALSE] %*%
     (t(ev$vectors[, pos, drop = FALSE]) / ev$values[pos])
   stat <- as.numeric(t(d) %*% Spinv %*% d)
-  list(statistic = stat, df = df,
-       p.value = stats::pchisq(stat, df, lower.tail = FALSE))
+  list(
+    statistic = stat, df = df,
+    p.value = stats::pchisq(stat, df, lower.tail = FALSE)
+  )
 }
 
 # Standardized (scalar / maximum) statistic and asymptotic p-value.
+#' Standardized (scalar / maximum) statistic and asymptotic p-value
+#'
+#' A step of the coin_native implementation. Called by \code{morie_indep_test}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param m A list; the body reads \code{$mu}, \code{$Sigma}, \code{$T} from it.
+#' @param alternative The body requires: bad alternative. Defaults to \code{"two.sided"}.
+#' @return A list with \code{statistic}, \code{p.value}, \code{cor}, \code{z}.
+#' @export
 .morie_max_stat <- function(m, alternative = "two.sided") {
   d <- m$T - m$mu
   z <- d / sqrt(diag(m$Sigma))
@@ -60,7 +94,8 @@
       two.sided = 2 * stats::pnorm(-abs(stat)),
       greater   = stats::pnorm(stat, lower.tail = FALSE),
       less      = stats::pnorm(stat),
-      stop("bad alternative"))
+      stop("bad alternative")
+    )
     return(list(statistic = stat, p.value = min(p, 1)))
   }
   # maximum-type: correlation of the standardized statistic
@@ -68,28 +103,58 @@
   stat <- switch(alternative,
     two.sided = max(abs(z)),
     greater   = max(z),
-    less      = min(z))
+    less      = min(z)
+  )
   list(statistic = stat, p.value = NA_real_, cor = R, z = z)
 }
 
 # Factor -> indicator design matching coin's f_trafo: k>2 gives k columns,
 # k==2 gives a single column (indicator of the second level).
+#' Factor -> indicator design matching coin\'s f_trafo: k>2 gives k
+#' columns,
+#'
+#' k==2 gives a single column (indicator of the second level).
+#'
+#' @param f Numeric; combined arithmetically in the body.
+#' @return One of two values, depending on the branch taken.
+#' @export
 .morie_f_trafo <- function(f) {
   f <- as.factor(f)
   lv <- levels(f)
   if (length(lv) == 2L) {
     # coin's scalar linear statistic uses the FIRST level's indicator;
     # match its sign convention so one-sided p-values agree.
-    matrix(as.numeric(f == lv[1L]), ncol = 1L,
-           dimnames = list(NULL, lv[1L]))
+    matrix(as.numeric(f == lv[1L]),
+      ncol = 1L,
+      dimnames = list(NULL, lv[1L])
+    )
   } else {
     m <- stats::model.matrix(~ f - 1)
     colnames(m) <- lv
-    attr(m, "assign") <- NULL; attr(m, "contrasts") <- NULL
+    attr(m, "assign") <- NULL
+    attr(m, "contrasts") <- NULL
     m
   }
 }
 
+#' .morie_coin_parse
+#'
+#' A step of the coin_native implementation. Called by \code{morie_indep_test},
+#' \code{morie_oneway_test}, \code{morie_wilcox_test}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param formula See Usage.
+#' @param data See Usage.
+#' @return A list with \code{y}, \code{x}.
+#' @export
+#' @examples
+#' fml <- y ~ x
+#' df <- data.frame(x = c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), y = c(2.9, 5.1, 6.8,
+#' 9.4, 11.2, 13.1, 15.0, 17.6), g = c('a', 'b', 'a', 'b', 'a', 'b', 'a', 'b'),
+#' stringsAsFactors = FALSE)
+#' res <- .morie_coin_parse(formula = fml, data = df)
+#' res
 .morie_coin_parse <- function(formula, data) {
   mf <- stats::model.frame(formula, data = data)
   y <- mf[[1L]]
@@ -112,15 +177,16 @@
   # half-integers at most -> scale by 2).
   sc2 <- scores * 2
   if (isTRUE(all.equal(sc2, round(sc2)))) {
-    sc2 <- round(sc2); scale <- 2
+    sc2 <- round(sc2)
+    scale <- 2
   } else {
-    return(NULL)  # non-rational scores: fall back to asymptotic
+    return(NULL) # non-rational scores: fall back to asymptotic
   }
-  off <- -sum(pmin(sc2, 0))              # shift to keep indices >= 0
+  off <- -sum(pmin(sc2, 0)) # shift to keep indices >= 0
   maxsum <- sum(pmax(sc2, 0)) + off
   # dp[[k+1]] is a numeric vector over attainable shifted sums for size k
   dp <- vector("list", n1 + 1L)
-  dp[[1L]] <- stats::setNames(1, as.character(off))  # size 0 -> sum 0 (shifted)
+  dp[[1L]] <- stats::setNames(1, as.character(off)) # size 0 -> sum 0 (shifted)
   tab <- new.env()
   # Use a matrix DP: counts[k+1, s+1] number of size-k subsets summing to s
   counts <- matrix(0, nrow = n1 + 1L, ncol = maxsum + 1L)
@@ -135,16 +201,17 @@
   total <- choose(n, n1)
   sums_shifted <- which(counts[n1 + 1L, ] > 0) - 1L
   probs <- counts[n1 + 1L, sums_shifted + 1L] / total
-  sums <- (sums_shifted - off) / scale     # back to original scale
+  sums <- (sums_shifted - off) / scale # back to original scale
   # obs is the observed group-2 score sum
   tol <- 1e-8
   p <- switch(alternative,
-    greater   = sum(probs[sums >= obs - tol]),
-    less      = sum(probs[sums <= obs + tol]),
+    greater = sum(probs[sums >= obs - tol]),
+    less = sum(probs[sums <= obs + tol]),
     two.sided = {
       dev <- abs(sums - mu)
       sum(probs[dev >= abs(obs - mu) - tol])
-    })
+    }
+  )
   min(p, 1)
 }
 
@@ -168,13 +235,18 @@ morie_indep_test <- function(formula, data,
                              alternative = "two.sided",
                              distribution = "asymptotic") {
   pd <- .morie_coin_parse(formula, data)
-  g <- if (is.factor(pd$x) || is.character(pd$x)) .morie_f_trafo(pd$x) else
+  g <- if (is.factor(pd$x) || is.character(pd$x)) {
+    .morie_f_trafo(pd$x)
+  } else {
     matrix(as.numeric(pd$x), ncol = 1L)
+  }
   h <- matrix(as.numeric(pd$y), ncol = 1L)
   m <- .morie_sw_moments(g, h)
   res <- .morie_max_stat(m, alternative)
-  list(statistic = res$statistic, p.value = res$p.value,
-       method = "morie independence permutation test")
+  list(
+    statistic = res$statistic, p.value = res$p.value,
+    method = "morie independence permutation test"
+  )
 }
 
 #' Native Wilcoxon rank-sum permutation test
@@ -195,13 +267,13 @@ morie_indep_test <- function(formula, data,
 #' str(morie_wilcox_test(y ~ g, df), max.level = 1)
 #' @export
 morie_wilcox_test <- function(formula, data,
-                             alternative = "two.sided",
-                             distribution = "asymptotic") {
+                              alternative = "two.sided",
+                              distribution = "asymptotic") {
   pd <- .morie_coin_parse(formula, data)
   f <- as.factor(pd$x)
   if (nlevels(f) != 2L) stop("wilcox_test needs a two-level group.")
-  r <- rank(as.numeric(pd$y))               # midranks
-  g <- .morie_f_trafo(f)                     # n x 1 indicator of level 2
+  r <- rank(as.numeric(pd$y)) # midranks
+  g <- .morie_f_trafo(f) # n x 1 indicator of level 2
   h <- matrix(r, ncol = 1L)
   m <- .morie_sw_moments(g, h)
   z <- (m$T - m$mu) / sqrt(diag(m$Sigma))
@@ -209,18 +281,24 @@ morie_wilcox_test <- function(formula, data,
   if (identical(distribution, "exact")) {
     n1 <- sum(g[, 1L] == 1)
     p <- .morie_exact_twosample_p(r, n1, obs = m$T, mu = m$mu, alternative)
-    if (is.null(p)) p <- switch(alternative,
-      two.sided = 2 * stats::pnorm(-abs(stat)),
-      greater = stats::pnorm(stat, lower.tail = FALSE),
-      less = stats::pnorm(stat))
+    if (is.null(p)) {
+      p <- switch(alternative,
+        two.sided = 2 * stats::pnorm(-abs(stat)),
+        greater = stats::pnorm(stat, lower.tail = FALSE),
+        less = stats::pnorm(stat)
+      )
+    }
   } else {
     p <- switch(alternative,
       two.sided = 2 * stats::pnorm(-abs(stat)),
       greater = stats::pnorm(stat, lower.tail = FALSE),
-      less = stats::pnorm(stat))
+      less = stats::pnorm(stat)
+    )
   }
-  list(statistic = stat, p.value = min(p, 1),
-       method = "morie Wilcoxon permutation test")
+  list(
+    statistic = stat, p.value = min(p, 1),
+    method = "morie Wilcoxon permutation test"
+  )
 }
 
 #' Native one-way permutation test (Fisher-Pitman)
@@ -249,11 +327,15 @@ morie_oneway_test <- function(formula, data, distribution = "asymptotic") {
   if (nlevels(f) == 2L) {
     z <- (m$T - m$mu) / sqrt(diag(m$Sigma))
     stat <- as.numeric(z)
-    return(list(statistic = stat, df = 1L,
-                p.value = 2 * stats::pnorm(-abs(stat)),
-                method = "morie one-way permutation test"))
+    return(list(
+      statistic = stat, df = 1L,
+      p.value = 2 * stats::pnorm(-abs(stat)),
+      method = "morie one-way permutation test"
+    ))
   }
   q <- .morie_quad_stat(m)
-  list(statistic = q$statistic, df = q$df, p.value = q$p.value,
-       method = "morie one-way permutation test")
+  list(
+    statistic = q$statistic, df = q$df, p.value = q$p.value,
+    method = "morie one-way permutation test"
+  )
 }

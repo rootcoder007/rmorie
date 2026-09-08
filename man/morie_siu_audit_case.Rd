@@ -43,7 +43,7 @@ falls back to a polite live fetch when the cache is missing.
 }
 \examples{
 \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Materialize the corpus cache first (fast via rmoriedata):
 morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 a <- morie_siu_audit_case(

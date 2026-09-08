@@ -13,8 +13,8 @@ NULL
 #' Internal helper: Sim Result
 #' @noRd
 .sim_result <- function(title, call, summary_lines = list(),
-                         warnings = character(0),
-                         interpretation = "", ...) {
+                        warnings = character(0),
+                        interpretation = "", ...) {
   out <- list(
     title = title, call = call, summary_lines = summary_lines,
     warnings = warnings, interpretation = interpretation, ...
@@ -32,7 +32,7 @@ NULL
 #' @param crime_xy Numeric (n, 2) matrix of crime coordinates.
 #' @param officer_xy Numeric (m, 2) matrix of officer coordinates.
 #' @param radius Detection radius (positive).
-#' @param p_detect Per-officer detection probability in (0, 1].
+#' @param p_detect Per-officer detection probability in (0, 1\].
 #' @param seed Optional integer; when supplied, a Bernoulli outcome is
 #'   sampled per crime and returned in \code{$detected}.
 #' @return \code{morie_fairness_result} with \code{$probabilities},
@@ -45,8 +45,8 @@ NULL
 #' r$probabilities
 #' @export
 morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
-                                               radius, p_detect = 0.85,
-                                               seed = NULL) {
+                                              radius, p_detect = 0.85,
+                                              seed = NULL) {
   crime <- as.matrix(crime_xy)
   officer <- as.matrix(officer_xy)
   if (!is.numeric(crime) || ncol(crime) != 2L) {
@@ -71,7 +71,7 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
     d <- sqrt(dx * dx + dy * dy)
     k <- rowSums(d <= radius)
   }
-  prob <- 1.0 - (1.0 - p_detect) ^ k
+  prob <- 1.0 - (1.0 - p_detect)^k
   detected <- NULL
   if (!is.null(seed)) {
     set.seed(as.integer(seed))
@@ -86,8 +86,10 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
 
   .sim_result(
     "Noisy-OR Patrol Detection",
-    sprintf("morie_fairness_noisy_or_detection(n=%d, m=%d, radius=%g, p_detect=%g)",
-            n, m, radius, p_detect),
+    sprintf(
+      "morie_fairness_noisy_or_detection(n=%d, m=%d, radius=%g, p_detect=%g)",
+      n, m, radius, p_detect
+    ),
     summary_lines = list(
       Crimes = n, Officers = m,
       `Mean detection probability` = mean_p,
@@ -112,7 +114,8 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
 #' The \code{bias} input is the ground truth the audits should recover.
 #'
 #' @param n Number of records.
-#' @param groups Character vector of group labels (the first entry is treated as the reference group).
+#' @param groups Character vector of group labels (the first entry is treated as the
+#' reference group).
 #' @param group_props Optional sampling proportions.
 #' @param n_areas Number of areas (>= number of groups).
 #' @param base_rate Reference-group favourable-outcome rate in 0--1.
@@ -125,12 +128,12 @@ morie_fairness_noisy_or_detection <- function(crime_xy, officer_xy,
 #' head(d)
 #' @export
 morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
-                                                       groups = c("A", "B"),
-                                                       group_props = NULL,
-                                                       n_areas = 20L,
-                                                       base_rate = 0.3,
-                                                       bias = 0.5,
-                                                       seed = 0L) {
+                                                      groups = c("A", "B"),
+                                                      group_props = NULL,
+                                                      n_areas = 20L,
+                                                      base_rate = 0.3,
+                                                      bias = 0.5,
+                                                      seed = 0L) {
   groups <- as.character(groups)
   G <- length(groups)
   if (G < 2L) stop("need at least two groups")
@@ -156,8 +159,10 @@ morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
 
   # Areas are group-segregated: area a belongs to group (a mod G) + 1.
   area_group <- ((seq_len(n_areas) - 1L) %% G) + 1L
-  areas_by_group <- lapply(seq_len(G),
-                           function(i) which(area_group == i))
+  areas_by_group <- lapply(
+    seq_len(G),
+    function(i) which(area_group == i)
+  )
   area_idx <- vapply(gi, function(i) {
     pool <- areas_by_group[[i]]
     pool[sample.int(length(pool), 1L)]
@@ -170,8 +175,10 @@ morie_fairness_simulate_biased_crime_data <- function(n = 2000L,
   detected <- as.integer(stats::runif(n) < det_rate)
 
   loc <- ifelse(gi == 1L, 250.0, 250.0 + bias * 100.0)
-  risk_score <- pmin(pmax(stats::rnorm(n, mean = loc, sd = 40.0),
-                          0.0), 500.0)
+  risk_score <- pmin(pmax(
+    stats::rnorm(n, mean = loc, sd = 40.0),
+    0.0
+  ), 500.0)
 
   data.frame(
     area = area, group = group,

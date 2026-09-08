@@ -16,9 +16,9 @@
 #' morie_cnn_genomic(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 #' @export
 morie_cnn_genomic <- function(x, y, markers, n_filters = 8, kernel = 3,
-                        hidden = 8, n_epochs = 150, lr = 1e-2,
-                        l2 = 1e-3, seed = 0,
-                        deterministic_seed = NULL) {
+                              hidden = 8, n_epochs = 150, lr = 1e-2,
+                              l2 = 1e-3, seed = 0,
+                              deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("cnnge", deterministic_seed)
   } else {

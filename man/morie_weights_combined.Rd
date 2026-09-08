@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_combined}
 \alias{morie_weights_combined}
-\title{Combined design x nonresponse x post-strat (x trim) pipeline.}
+\title{Combined design x nonresponse x post-strat (x trim) pipeline}
 \usage{
 morie_weights_combined(
   selection_probs,
@@ -35,7 +35,7 @@ of percentile bounds for trimming.}
 A numeric vector of combined weights.
 }
 \description{
-Combined design x nonresponse x post-strat (x trim) pipeline.
+Combined design x nonresponse x post-strat (x trim) pipeline
 }
 \examples{
 set.seed(1)

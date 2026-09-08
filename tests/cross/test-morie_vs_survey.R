@@ -6,7 +6,8 @@ test_that("cross: native svyglm-equivalent reproduces survey::svyglm", {
   skip_if_not_installed("survey")
   set.seed(81)
   n <- 800L
-  x1 <- rnorm(n); x2 <- sample(1:4, n, TRUE)
+  x1 <- rnorm(n)
+  x2 <- sample(1:4, n, TRUE)
   w <- runif(n, 0.5, 3)
   eta <- -0.5 + 0.8 * x1 + 0.2 * x2
   yb <- rbinom(n, 1, plogis(eta))

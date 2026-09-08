@@ -12,6 +12,8 @@ morie_irt_grm(responses, n_quad = 31L, max_iter = 100L, tol = 1e-05)
 
 \item{n_quad, max_iter, tol}{EM controls as in
 \code{\link{morie_irt_2pl}}.}
+
+
 }
 \value{
 An object of class \code{morie_irt_grm}: list with

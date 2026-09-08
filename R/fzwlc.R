@@ -2,7 +2,8 @@
 
 #' Fauzi: Smoothed Wilcoxon signed-rank test (Ch 5)
 #'
-#' \eqn{W_n=\sum_i \mathrm{sign}(D_i) R_{\mathrm{smooth}}(|D_i|)}{W_n=sum_i sign(D_i) R_smooth(|D_i|)},
+#' \eqn{W_n=\sum_i \mathrm{sign}(D_i) R_{\mathrm{smooth}}(|D_i|)}{W_n=sum_i sign(D_i)
+#' R_smooth(|D_i|)},
 #' z = W_n / sqrt(n(n+1)(2n+1)/6) ~ N(0,1).
 #'
 #' @param x Numeric vector.
@@ -36,7 +37,7 @@ fzwlc <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {
       method = "fzwlc - too few nonzero"
     ))
   }
-  if (is.null(h)) h <- .morie_silverman_h(ad)
+  if (is.null(h)) h <- .morie_kdfe_h(ad)
   D <- outer(ad, ad, function(a, b) (a - b) / h)
   R_smooth <- rowSums(stats::pnorm(D))
   W_n <- sum(sign(d) * R_smooth)

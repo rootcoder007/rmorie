@@ -1,0 +1,25 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_geron_regression_mlp}
+\alias{morie_geron_regression_mlp}
+\title{Regression MLP: ReLU hidden layers, linear head, full-batch GD (Geron Ch 9, hmregn)}
+\usage{
+morie_geron_regression_mlp(X, y, hidden_sizes = 8, epochs = 400, lr = 0.05, seed = 0) 
+}
+\arguments{
+\item{X,y}{Data and targets.}
+\item{hidden_sizes}{Hidden widths.}
+\item{epochs,lr,seed}{Training controls.}
+}
+\description{
+Regression MLP: ReLU hidden layers, linear head, full-batch GD (Geron Ch 9, hmregn)
+}
+\value{
+A list with \code{predict}, \code{predictions}, \code{mse}, \code{loss_history}, \code{weights}, \code{biases}, \code{sizes}, \code{n_parameters}, \code{estimate}, \code{n}, \code{method}.
+}
+\keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+morie_geron_regression_mlp(V, V)
+}

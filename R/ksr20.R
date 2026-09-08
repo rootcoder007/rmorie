@@ -9,7 +9,8 @@
 #' @return Named list with estimate, se, n, method.
 #' @references Kosorok (2008), Ch 8.
 #' @examples
-#' morie_ksr20_kosorok_censoring_survival(t = seq(0, 1, length.out = 50), event = rbinom(50, 1, 0.8))
+#' morie_ksr20_kosorok_censoring_survival(t = seq(0, 1, length.out = 50), event =
+#' rbinom(50, 1, 0.8))
 #' @export
 morie_ksr20_kosorok_censoring_survival <- function(t, event) {
   t <- as.numeric(t)

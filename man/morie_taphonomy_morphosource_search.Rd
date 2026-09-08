@@ -31,6 +31,10 @@ morie_taphonomy_morphosource_search(
 
 \item{api_key}{Optional key; else \code{MORPHOSOURCE_API_KEY}. Never
 hard-code it.}
+
+
+
+
 }
 \value{
 A \code{list}: \code{items} (raw records), \code{n},

@@ -8,7 +8,8 @@
 test_that("morie_vertex_resolve_config errors when GOOGLE_CLOUD_PROJECT is unset", {
   old_gcp <- Sys.getenv("GOOGLE_CLOUD_PROJECT", unset = NA_character_)
   old_mee <- Sys.getenv("MORIE_EE_PROJECT",     unset = NA_character_)
-  Sys.unsetenv("GOOGLE_CLOUD_PROJECT"); Sys.unsetenv("MORIE_EE_PROJECT")
+  Sys.unsetenv("GOOGLE_CLOUD_PROJECT")
+  Sys.unsetenv("MORIE_EE_PROJECT")
   on.exit({
     if (!is.na(old_gcp)) Sys.setenv(GOOGLE_CLOUD_PROJECT = old_gcp)
     if (!is.na(old_mee)) Sys.setenv(MORIE_EE_PROJECT     = old_mee)
@@ -58,7 +59,8 @@ test_that("morie_vertex_access_token returns cached token without invoking gclou
 test_that("morie_vertex_health_check returns ok=FALSE when env is unset", {
   old_gcp <- Sys.getenv("GOOGLE_CLOUD_PROJECT", unset = NA_character_)
   old_mee <- Sys.getenv("MORIE_EE_PROJECT",     unset = NA_character_)
-  Sys.unsetenv("GOOGLE_CLOUD_PROJECT"); Sys.unsetenv("MORIE_EE_PROJECT")
+  Sys.unsetenv("GOOGLE_CLOUD_PROJECT")
+  Sys.unsetenv("MORIE_EE_PROJECT")
   on.exit({
     if (!is.na(old_gcp)) Sys.setenv(GOOGLE_CLOUD_PROJECT = old_gcp)
     if (!is.na(old_mee)) Sys.setenv(MORIE_EE_PROJECT     = old_mee)

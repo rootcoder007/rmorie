@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_subpop}
 \alias{morie_survey_subpop}
-\title{Subpopulation (domain) mean with Woodruff linearised SE.}
+\title{Subpopulation (domain) mean with Woodruff linearised SE}
 \usage{
 morie_survey_subpop(df, domain_col, domain_value, outcome_col, weight_col)
 }
@@ -13,7 +13,7 @@ any weight/strata/cluster/domain columns referenced by name.}
 \item{domain_col}{Character; column name of the subpopulation /
 domain indicator in \code{df}.}
 
-\item{domain_value}{Value (matching \code{df[[domain_col]]}) defining
+\item{domain_value}{Value (matching \verb{df\[\[domain_col\]\]}) defining
 the subpopulation to estimate.}
 
 \item{outcome_col}{Character; column name of the outcome variable
@@ -26,7 +26,7 @@ variable in \code{df}.}
 A named list with elements \code{mean}, \code{se}, \code{ci_lower}, \code{ci_upper}, \code{n_domain}.
 }
 \description{
-Subpopulation (domain) mean with Woodruff linearised SE.
+Subpopulation (domain) mean with Woodruff linearised SE
 }
 \examples{
 \dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}

@@ -25,6 +25,13 @@
 #'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
 #' }
 #' @name mrm_kulldorff
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (FALSE) {
+#'   tps <- morie_sample("tps_assault")
+#'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
+#' }
+#' \dontshow{\}) # examplesIf}
 NULL
 
 
@@ -76,6 +83,13 @@ NULL
 #'   columns \code{center_lat}, \code{center_lon}, \code{radius_km},
 #'   \code{t_start}, \code{t_end}, \code{n_observed}, \code{n_expected},
 #'   \code{relative_risk}, \code{log_lrt}, \code{p_value}.
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' if (FALSE) {
+#'   tps <- morie_sample("tps_assault")
+#'   mrm_tps_kulldorff_scan(tps, n_permutations = 49)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' if (FALSE) {
@@ -98,7 +112,7 @@ mrm_tps_kulldorff_scan <- function(
   # mrm_kulldorff.py:188-198 currently `break`s out of the secondary-
   # cluster loop, so both ports return a single primary cluster as of
   # 2026-05-22.  Promoting this to TRUE multi-cluster requires masking
-  # out events in the primary cluster and rescanning — a separate task.
+  # out events in the primary cluster and rescanning -- a separate task.
   if (!is.numeric(n_top_clusters) || n_top_clusters < 1L) {
     stop("n_top_clusters must be a positive integer.", call. = FALSE)
   }

@@ -1,0 +1,637 @@
+# morie.fn -- function file (rootcoder007/morie)
+# Causal effect under censoring, by inverse probability of censoring
+# weighting.
+#
+# Two censoring structures, two estimators, because the ledger row asks
+# for right-censoring and the source volume works the interval-censored
+# case out in full.
+#
+# Right-censored (default). Hernan & Robins Ch. 17. Censoring is
+# handled by weighting each subject's observed follow-up by the inverse
+# of its probability of remaining uncensored,
+#
+#   Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j | A, W)),
+#
+# with lambda_C the censoring hazard. The discrete-time death hazard
+# is then fitted on the weighted person-time data and converted to a
+# survival curve by the same product-limit,
+#   S(k) = prod_{j<=k}(1 - lambda(j))
+# -- Sec. 17.2, "from hazards to risks". Weighting by 1/Gbar_c and
+# *also* conditioning on being uncensored would double-count; the
+# weights exist so that conditioning is unnecessary.
+#
+# Interval-censored. van der Laan & Rose (2018) Sec. 8.5. The data are
+#   O = (W, A, C_m, Delta_m = I(T <= C_m) : m = 1..M):
+# M monitoring times, and at each one only whether the event has
+# happened yet. The target is
+#   Psi_a^f(Q) = int r(t) Fbar_a(t) dt
+# with Fbar_a(t) = E_P P(T > t | A = a, W), a weighted mean survival,
+# and the chapter's initial gradient gives the estimator
+#
+#   (1/M) sum_{m=1}^M (1 - Delta_m) r(C_m)
+#       I(A = a) / (gbar_c(C_m | A, W) g(A | W)).
+#
+# The interval implied by the monitoring is spelled out exactly and is
+# implemented exactly: L(O) is the largest monitoring time with
+# Delta_j = 0 and R(O) the smallest with Delta_j = 1; if Delta_1 = 1
+# then L(O) = 0, and if Delta_M = 0 then R(O) = Inf. Getting those two
+# boundary cases wrong is silent -- the estimate simply comes out
+# biased -- so the anchor builds them by hand.
+#
+# References
+# ----------
+# Hernan, M. A. & Robins, J. M. (2020) Causal Inference: What If, Boca
+# Raton: Chapman & Hall/CRC, Ch. 17 "Causal survival analysis" --
+# Sec. 17.2 hazards to risks, Sec. 17.3 why censoring matters, Sec. 17.4
+# IP weighting of marginal structural models.
+#
+# van der Laan, M. J. & Rose, S. (eds.) (2018) Targeted Learning in
+# Data Science, Springer Series in Statistics,
+# doi:10.1007/978-3-319-65304-4, Sec. 8.5 "Causal Effect of Binary
+# Treatment on Interval Censored Time to Event" -- the data structure,
+# the coarsening C(o) = (L(o), R(o)], and the IPCW estimator above.
+#
+# Note on the ledger citation: its key "Stitelman-Lendle-vdL (2011)" does
+# not resolve to any paper; a bibliographic search returns the ltmle
+# software package instead. The two sources above are what this is built
+# from.
+
+# --- Private helpers (prefix .tmlcen_) ---------------------------------
+
+#' .tmlcen_sigmoid
+#'
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit},
+#' \code{morie_censoring_survival}, \code{morie_ipcw_interval} and 1 others in the
+#' module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .tmlcen_sigmoid(x = x)
+#' res
+.tmlcen_sigmoid <- function(x) 1 / (1 + exp(-x))
+
+#' .tmlcen_design
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param rows Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @return The value of \code{Z}, as built in the body.
+#' @export
+.tmlcen_design <- function(rows, n) {
+  if (n == 0L) return(matrix(0, nrow = 0L, ncol = 0L))
+  if (is.null(rows) || length(rows) == 0L) {
+    return(matrix(1, nrow = n, ncol = 1L))
+  }
+  p <- length(rows[[1L]]) + 1L
+  Z <- matrix(0, nrow = n, ncol = p)
+  for (i in seq_len(n)) {
+    Z[i, 1L] <- 1
+    if (length(rows[[i]]) > 0L) {
+      Z[i, 2L:(length(rows[[i]]) + 1L)] <- rows[[i]]
+    }
+  }
+  Z
+}
+
+#' .tmlcen_ridgesolve
+#'
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_weighted_logit}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param A A matrix; passed to \code{ncol}.
+#' @param b A matrix; passed to \code{solve}.
+#' @param ridge Numeric; combined arithmetically in the body.
+#' @return A matrix, from \code{solve}.
+#' @export
+.tmlcen_ridgesolve <- function(A, b, ridge) {
+  p <- ncol(A)
+  solve(A + ridge * diag(p), b)
+}
+
+#' .tmlcen_weighted_logit
+#'
+#' A step of the tmlcen_native implementation. Called by \code{.tmlcen_logit_irls},
+#' \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y Numeric; combined arithmetically in the body.
+#' @param w Numeric; combined arithmetically in the body.
+#' @param iters A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.
+#' @param ridge Passed to \code{.tmlcen_ridgesolve}. Defaults to \code{1e-10}.
+#' @return The value of \code{b}, as built in the body.
+#' @export
+.tmlcen_weighted_logit <- function(Z, y, w, iters = 60L, ridge = 1e-10) {
+  n <- nrow(Z)
+  p <- ncol(Z)
+  b <- rep(0, p)
+  for (iter in seq_len(iters)) {
+    eta <- as.numeric(Z %*% b)
+    mu <- .tmlcen_sigmoid(eta)
+    ww <- w * mu * (1 - mu)
+    rr <- w * (y - mu)
+    XtWX <- crossprod(Z, Z * ww)
+    Xtr <- as.numeric(crossprod(Z, rr))
+    step <- .tmlcen_ridgesolve(XtWX, Xtr, ridge)
+    b <- b + step
+    if (max(abs(step)) < 1e-13) break
+  }
+  b
+}
+
+#' .tmlcen_logit_irls
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param y Passed to \code{.tmlcen_weighted_logit}.
+#' @param max_iter Passed to \code{.tmlcen_weighted_logit}. Defaults to \code{60L}.
+#' @param ridge Passed to \code{.tmlcen_weighted_logit}. Defaults to \code{1e-08}.
+#' @return The value of \code{.tmlcen_weighted_logit}.
+#' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .tmlcen_logit_irls(Z = X, y = y)
+#' res
+.tmlcen_logit_irls <- function(Z, y, max_iter = 60L, ridge = 1e-8) {
+  .tmlcen_weighted_logit(Z, y, rep(1, nrow(Z)), max_iter, ridge)
+}
+
+#' .tmlcen_matvec
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param Z A matrix; passed to \code{\%*\%}.
+#' @param b A matrix; passed to \code{\%*\%}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
+.tmlcen_matvec <- function(Z, b) as.numeric(Z %*% b)
+
+#' .tmlcen_uniform_density
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ts Numeric; passed to \code{max}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.tmlcen_uniform_density <- function(ts) {
+  lo <- min(ts)
+  hi <- max(ts)
+  if (hi > lo) 1.0 / (hi - lo) else 1.0
+}
+
+.tmlcen_KINDS <- c("right", "interval")
+
+#' .tmlcen_RichResult
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param payload Passed to \code{class}.
+#' @return The value of \code{payload}, as built in the body.
+#' @export
+.tmlcen_RichResult <- function(payload) {
+  class(payload) <- "RichResult"
+  payload
+}
+
+#' .tmlcen_W_mat
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_censoring_survival},
+#' \code{morie_ipcw_interval}, \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param W Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.
+#' @param n A count; the body uses it as \code{matrix(...)}.
+#' @return The value of \code{Wm}, as built in the body.
+#' @export
+.tmlcen_W_mat <- function(W, n) {
+  if (is.null(W) || length(W) == 0L) {
+    return(matrix(0, nrow = n, ncol = 0L))
+  }
+  if (is.data.frame(W)) {
+    W <- as.matrix(W)
+  }
+  if (is.vector(W) && !is.matrix(W)) {
+    W <- matrix(W, ncol = 1L)
+  }
+  Wm <- as.matrix(W)
+  if (is.null(dim(Wm)) || ncol(Wm) == 0L) {
+    Wm <- matrix(0, nrow = n, ncol = 0L)
+  }
+  if (nrow(Wm) != n) {
+    stop(sprintf("W has %d rows but data has %d", nrow(Wm), n))
+  }
+  Wm
+}
+
+#' .tmlcen_coerce_subject_list
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_ipcw_interval}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x A matrix; indexed by row and column.
+#' @param n Accepted by the signature and not used anywhere in the body.
+#' @return Nothing; this branch always raises.
+#' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .tmlcen_coerce_subject_list(x = X, n = 3L)
+#' res
+.tmlcen_coerce_subject_list <- function(x, n) {
+  if (is.data.frame(x)) {
+    x <- as.matrix(x)
+  }
+  if (is.matrix(x)) {
+    return(lapply(seq_len(nrow(x)), function(i) as.numeric(x[i, ])))
+  }
+  if (is.list(x)) {
+    return(lapply(x, function(row) as.numeric(row)))
+  }
+  stop("expected a list of per-subject vectors or a matrix")
+}
+
+# --- Exposed functions (morie_ prefix) ---------------------------------
+
+# coarsen_interval: the interval (L, R] implied by one subject's
+# monitoring, Sec. 8.5.
+#' Coarsen_interval: the interval (L, R] implied by one subject\'s
+#'
+#' monitoring, Sec. 8.5.
+#'
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
+#' @param deltas Coerced to numeric by the body, with \code{as.numeric}.
+#' @return A list with \code{L}, \code{R}.
+#' @export
+morie_coarsen_interval <- function(times, deltas) {
+  ts <- as.numeric(times)
+  ds <- as.numeric(deltas)
+  if (length(ts) != length(ds)) {
+    stop(sprintf("coarsen_interval: %d monitoring times but %d indicators",
+                 length(ts), length(ds)))
+  }
+  if (length(ts) == 0L) {
+    stop("coarsen_interval: no monitoring times")
+  }
+  ord <- order(ts)
+  ts <- ts[ord]
+  ds <- ds[ord]
+  if (any(!(ds %in% c(0, 1)))) {
+    stop("coarsen_interval: Delta must be 0/1")
+  }
+  zeros <- ts[ds == 0]
+  ones <- ts[ds == 1]
+  L <- if (length(zeros) > 0L) max(zeros) else 0
+  R <- if (length(ones) > 0L) min(ones) else Inf
+  list(L = L, R = R)
+}
+
+# censoring_survival: Gbar_c(k | A, W) = prod_{j<=k} (1 - lambda_C(j | A, W))
+#' Censoring_survival: Gbar_c(k | A, W) = prod_\{j<=k\} (1 - lambda_C(j |
+#' A, W))
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param times Coerced to numeric by the body, with \code{as.numeric}.
+#' @param censored Coerced to numeric by the body, with \code{as.numeric}.
+#' @param A Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.
+#' @param W Passed to \code{.tmlcen_W_mat}.
+#' @param grid Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
+#' @param by_covariate Accepted by the signature and not used anywhere in the body.
+#' Defaults to \code{TRUE}.
+#' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
+#' @return A list with \code{G}, \code{grid}, \code{b}.
+#' @export
+morie_censoring_survival <- function(times, censored, A = NULL, W = NULL,
+                                     grid = NULL, by_covariate = TRUE,
+                                     ridge = 1e-8) {
+  t <- as.numeric(times)
+  c <- as.numeric(censored)
+  n <- length(t)
+  if (length(c) != n) {
+    stop(sprintf("censoring_survival: %d times but %d censoring indicators",
+                 n, length(c)))
+  }
+  if (is.null(grid)) {
+    grid <- sort(unique(t))
+  }
+  grid <- as.numeric(grid)
+  Wm <- .tmlcen_W_mat(W, n)
+  if (is.null(A)) {
+    av <- rep(0, n)
+  } else {
+    av <- as.numeric(A)
+  }
+
+  rows <- list()
+  lab <- c()
+  for (i in seq_len(n)) {
+    for (kk in seq_along(grid)) {
+      tk <- grid[kk]
+      if (t[i] < tk) break
+      cens_now <- if (c[i] == 1 && t[i] == tk) 1.0 else 0.0
+      row <- c(as.numeric(kk), av[i],
+               if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+      rows[[length(rows) + 1L]] <- row
+      lab <- c(lab, cens_now)
+    }
+  }
+  if (length(rows) == 0L) {
+    stop("censoring_survival: no person-time at risk")
+  }
+  Z <- .tmlcen_design(rows, length(rows))
+  b <- .tmlcen_logit_irls(Z, lab, 60L, ridge)
+
+  haz <- function(kk, i) {
+    row <- c(1.0, as.numeric(kk), av[i],
+             if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+    .tmlcen_sigmoid(sum(b * row))
+  }
+
+  G <- list()
+  for (i in seq_len(n)) {
+    g <- numeric(length(grid))
+    cur <- 1.0
+    for (kk in seq_along(grid)) {
+      cur <- cur * (1.0 - haz(kk, i))
+      g[kk] <- cur
+    }
+    G[[i]] <- g
+  }
+  list(G = G, grid = grid, b = b)
+}
+
+# ipcw_interval: Sec. 8.5's IPCW estimator of Psi_a = int r(t) Fbar_a(t) dt
+#' Ipcw_interval: Sec. 8.5\'s IPCW estimator of Psi_a = int r(t)
+#' Fbar_a(t) dt
+#'
+#' A step of the tmlcen_native implementation. Called by \code{morie_tmle_censoring}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param W Passed to \code{.tmlcen_W_mat}.
+#' @param A Coerced to numeric by the body, with \code{as.numeric}.
+#' @param times Passed to \code{.tmlcen_coerce_subject_list}.
+#' @param deltas Passed to \code{.tmlcen_coerce_subject_list}.
+#' @param a Passed to \code{!=}. Defaults to \code{1}.
+#' @param r Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param g Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param gc Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param ridge Passed to \code{.tmlcen_logit_irls}. Defaults to \code{1e-08}.
+#' @return A numeric value.
+#' @export
+morie_ipcw_interval <- function(W, A, times, deltas, a = 1.0, r = NULL,
+                                g = NULL, gc = NULL, ridge = 1e-8) {
+  av <- as.numeric(A)
+  n <- length(av)
+  Tm <- .tmlcen_coerce_subject_list(times, n)
+  Dm <- .tmlcen_coerce_subject_list(deltas, n)
+  if (length(Tm) != n || length(Dm) != n) {
+    stop(sprintf("ipcw_interval: %d treatments but %d monitoring rows and %d indicator rows",
+                 n, length(Tm), length(Dm)))
+  }
+  Wm <- .tmlcen_W_mat(W, n)
+  if (is.null(r)) {
+    r <- function(tt) 1.0
+  }
+
+  if (is.null(g)) {
+    if (ncol(Wm) > 0L) {
+      rows_g <- lapply(seq_len(n), function(i) Wm[i, ])
+    } else {
+      rows_g <- NULL
+    }
+    Z <- .tmlcen_design(rows_g, n)
+    bg <- .tmlcen_logit_irls(Z, av, 60L, ridge)
+    gv <- .tmlcen_sigmoid(.tmlcen_matvec(Z, bg))
+    g <- numeric(n)
+    for (i in seq_len(n)) {
+      g[i] <- if (av[i] == 1.0) gv[i] else (1.0 - gv[i])
+    }
+  } else {
+    g <- as.numeric(g)
+  }
+
+  tot <- 0.0
+  for (i in seq_len(n)) {
+    M <- length(Tm[[i]])
+    if (M == 0L) {
+      stop(sprintf("ipcw_interval: subject %d has no monitoring times", i))
+    }
+    if (av[i] != a) next
+    if (g[i] <= 0.0) {
+      stop(sprintf("ipcw_interval: g(A|W) is zero for subject %d, so positivity fails and the weight is undefined", i))
+    }
+    s <- 0.0
+    for (m in seq_len(M)) {
+      dens <- if (!is.null(gc)) gc[[i]][m] else .tmlcen_uniform_density(Tm[[i]])
+      if (dens <= 0.0) {
+        stop(sprintf("ipcw_interval: the monitoring density is zero for subject %d at time %d", i, m))
+      }
+      s <- s + (1.0 - Dm[[i]][m]) * r(Tm[[i]][m]) / dens
+    }
+    tot <- tot + s / M / g[i]
+  }
+  tot / n
+}
+
+# tmle_censoring: causal survival under censoring
+#' Tmle_censoring: causal survival under censoring
+#'
+#' A step of the tmlcen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param time Passed to \code{morie_ipcw_interval}.
+#' @param event Passed to \code{morie_ipcw_interval}.
+#' @param censor Coerced to numeric by the body, with \code{as.numeric}.
+#' @param treatment Passed to \code{morie_ipcw_interval}.
+#' @param covariates Passed to \code{morie_ipcw_interval}.
+#' @param kind Compared against \code{"interval"}. Defaults to \code{"right"}.
+#' @param grid Passed to \code{morie_censoring_survival}.
+#' @param a Passed to \code{morie_ipcw_interval}. Defaults to \code{1}.
+#' @param r Passed to \code{morie_ipcw_interval}.
+#' @param g Passed to \code{morie_ipcw_interval}.
+#' @param gc Passed to \code{morie_ipcw_interval}.
+#' @param trim Numeric; passed to \code{max}. Defaults to \code{0.001}.
+#' @return The value of \code{.tmlcen_RichResult}.
+#' @export
+morie_tmle_censoring <- function(time, event, censor, treatment, covariates,
+                                 kind = "right", grid = NULL, a = 1.0,
+                                 r = NULL, g = NULL, gc = NULL,
+                                 trim = 1e-3) {
+  if (!(kind %in% .tmlcen_KINDS)) {
+    stop(sprintf("tmle_censoring: kind must be 'right' or 'interval', got %r", kind))
+  }
+  if (kind == "interval") {
+    psi <- morie_ipcw_interval(covariates, treatment, time, event, a = a, r = r,
+                               g = g, gc = gc)
+    return(.tmlcen_RichResult(list(
+      estimate = psi, psi = psi, a = a,
+      n = length(as.numeric(treatment)),
+      method = "interval-censored IPCW, van der Laan & Rose (2018) Sec. 8.5"
+    )))
+  }
+
+  t <- as.numeric(time)
+  d <- as.numeric(event)
+  c <- as.numeric(censor)
+  av <- as.numeric(treatment)
+  n <- length(t)
+
+  arrs <- list(event = d, censor = c, treatment = av)
+  for (nm in names(arrs)) {
+    if (length(arrs[[nm]]) != n) {
+      stop(sprintf("tmle_censoring: %d times but %d %s", n, length(arrs[[nm]]), nm))
+    }
+  }
+  for (i in seq_len(n)) {
+    if (d[i] == 1.0 && c[i] == 1.0) {
+      stop("tmle_censoring: a subject cannot be both an event and censored at the same time")
+    }
+  }
+  Wm <- .tmlcen_W_mat(covariates, n)
+
+  G_grid <- morie_censoring_survival(t, c, A = av, W = Wm, grid = grid)
+  G <- G_grid$G
+  grid_use <- G_grid$grid
+
+  rows <- list()
+  lab <- c()
+  wts <- c()
+  for (i in seq_len(n)) {
+    for (kk in seq_along(grid_use)) {
+      tk <- grid_use[kk]
+      if (t[i] < tk) break
+      gk <- max(G[[i]][kk], trim)
+      row <- c(as.numeric(kk), av[i],
+               if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+      rows[[length(rows) + 1L]] <- row
+      lab <- c(lab, if (d[i] == 1.0 && t[i] == tk) 1.0 else 0.0)
+      wts <- c(wts, 1.0 / gk)
+    }
+  }
+  Z <- .tmlcen_design(rows, length(rows))
+  bh <- .tmlcen_weighted_logit(Z, lab, wts)
+
+  surv <- function(a_val, i) {
+    out <- numeric(length(grid_use))
+    cur <- 1.0
+    for (kk in seq_along(grid_use)) {
+      row <- c(1.0, as.numeric(kk), a_val,
+               if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+      h <- .tmlcen_sigmoid(sum(bh * row))
+      cur <- cur * (1.0 - h)
+      out[kk] <- cur
+    }
+    out
+  }
+
+  s1_mat <- matrix(0, nrow = n, ncol = length(grid_use))
+  s0_mat <- matrix(0, nrow = n, ncol = length(grid_use))
+  for (i in seq_len(n)) {
+    s1_mat[i, ] <- surv(1.0, i)
+    s0_mat[i, ] <- surv(0.0, i)
+  }
+  s1 <- colMeans(s1_mat)
+  s0 <- colMeans(s0_mat)
+
+  bh_n <- .tmlcen_weighted_logit(Z, lab, rep(1, length(lab)))
+
+  surv_n <- function(a_val, i) {
+    cur <- 1.0
+    for (kk in seq_along(grid_use)) {
+      row <- c(1.0, as.numeric(kk), a_val,
+               if (ncol(Wm) > 0L) Wm[i, ] else numeric(0))
+      cur <- cur * (1.0 - .tmlcen_sigmoid(sum(bh_n * row)))
+    }
+    cur
+  }
+  naive <- mean(sapply(seq_len(n), function(i) surv_n(1.0, i))) -
+           mean(sapply(seq_len(n), function(i) surv_n(0.0, i)))
+
+  rows_u <- lapply(rows, function(row) row[1:2])
+  Zu <- .tmlcen_design(rows_u, length(rows_u))
+  bh_u <- .tmlcen_weighted_logit(Zu, lab, rep(1, length(lab)))
+
+  surv_u <- function(a_val) {
+    cur <- 1.0
+    for (kk in seq_along(grid_use)) {
+      rrow <- c(1.0, as.numeric(kk), a_val)
+      cur <- cur * (1.0 - .tmlcen_sigmoid(sum(bh_u * rrow)))
+    }
+    cur
+  }
+  unadjusted <- surv_u(1.0) - surv_u(0.0)
+
+  max_weight <- max(sapply(seq_len(n), function(i) {
+    g_last <- G[[i]][length(G[[i]])]
+    1.0 / max(g_last, trim)
+  }))
+
+  .tmlcen_RichResult(list(
+    estimate = s1[length(s1)] - s0[length(s0)],
+    survival_treated = s1,
+    survival_control = s0,
+    grid = grid_use,
+    naive = naive,
+    unadjusted = unadjusted,
+    censoring_survival = G,
+    max_weight = max_weight,
+    n = n,
+    method = "IPCW survival difference, Hernan & Robins (2020) Ch. 17 Secs. 17.2 and 17.4"
+  ))
+}
+
+#' .tmlcen_morie_cheatsheet
+#'
+#' A step of the tmlcen_native implementation. No other function in the package calls it.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A character value.
+#' @export
+#' @examples
+#' res <- .tmlcen_morie_cheatsheet()
+#' res
+.tmlcen_morie_cheatsheet <- function() {
+  paste0("tmlcen: censoring by IPCW. right = Gbar_c(k|A,W) = ",
+         "prod(1-lambda_C), weight person-time by 1/Gbar_c, hazard ",
+         "to survival by the product limit (H&R Ch.17). interval = ",
+         "Sec.8.5's (1/M) sum (1-Delta_m) r(C_m) I(A=a) / ",
+         "(gbar_c g), with L = max C_j st Delta=0 and R = min C_j ",
+         "st Delta=1.")
+}
+
+# compact alias per ledger/NAMING.md
+morie_tmlecensoring <- morie_tmle_censoring
+
+#' @rdname morie_coarsen_interval
+#' @export
+morie_tmlcen <- morie_coarsen_interval

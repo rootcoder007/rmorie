@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_ipw_ate}
 \alias{morie_otis_ipw_ate}
-\title{Hajek-stabilised IPW estimator of the ATE on OTIS data.}
+\title{Hajek-stabilised IPW estimator of the ATE on OTIS data}
 \usage{
 morie_otis_ipw_ate(df, treatment, outcome, covariates, eps = 0.02)
 }
@@ -30,7 +30,7 @@ A \code{morie_causal_estimate} list with \code{estimator},
 }
 \description{
 Fits a logistic-regression propensity model on \code{covariates},
-clips propensities to \eqn{[\varepsilon, 1-\varepsilon]}{[epsilon, 1-epsilon]}, and
+clips propensities to \eqn{\[\varepsilon, 1-\varepsilon\]}{\[epsilon, 1-epsilon\]}, and
 computes the Hajek-normalised difference of weighted means. SE
 follows the Lunceford-Davidian (2004) sandwich influence-function
 form.

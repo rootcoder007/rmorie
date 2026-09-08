@@ -32,6 +32,7 @@ the plot.}
 \item{show_top}{Cap on how many clusters appear in the legend.}
 
 \item{fig_w, fig_h}{Figure size.}
+
 }
 \value{
 A \code{ggplot} (when ggplot2 is available) or

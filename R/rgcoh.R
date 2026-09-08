@@ -4,7 +4,7 @@
 #'
 #' \deqn{C_{xy}(f) = |S_{xy}(f)|^2 / (S_{xx}(f) S_{yy}(f))}
 #'
-#' Bounded in \[0, 1\].
+#' Bounded in \\[0, 1\\].
 #'
 #' @param x,y Numeric vectors of equal length.
 #' @param fs Sampling rate (Hz).

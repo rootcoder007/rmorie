@@ -23,7 +23,8 @@ positive to non-positive AND the prior slope magnitude exceeds
 }
 \examples{
 set.seed(1)
-x <- rep(0, 300); x[c(60, 150, 240)] <- 5
+x <- rep(0, 300)
+x[c(60, 150, 240)] <- 5
 x <- stats::filter(x, rep(1 / 5, 5), sides = 2)
 x[is.na(x)] <- 0
 str(morie_dsp_derivative_detect(as.numeric(x), fs = 100), max.level = 1)

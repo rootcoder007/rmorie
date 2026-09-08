@@ -16,7 +16,6 @@
 #' per-neighbourhood CSI aggregates.
 #'
 #' Important caveats
-#' -----------------
 #'
 #' 1. TPS open-data categories aggregate over multiple Criminal Code
 #'    sub-offences.  The weights here are representative blends
@@ -38,7 +37,6 @@
 #'    non-violent categories (B&E, theft) are zeroed.
 #'
 #' References
-#' ----------
 #' Wallace, M., Turner, J., Babyak, C., & Matarazzo, A. (2009).
 #'   Measuring Crime in Canada: Introducing the Crime Severity Index
 #'   and Improvements to the Uniform Crime Reporting Survey.
@@ -95,28 +93,28 @@ NULL
 )
 
 
-#' Total-CSI weights for the 9 TPS open-data categories.
+#' Total-CSI weights for the 9 TPS open-data categories
 #' @return Named numeric vector.
 #' @examples
 #' MORIE_TPS_TOTAL_CSI_WEIGHTS
 #' @export
 MORIE_TPS_TOTAL_CSI_WEIGHTS <- function() .TOTAL_CSI_WEIGHTS
 
-#' Violent-CSI weights for the 9 TPS open-data categories.
+#' Violent-CSI weights for the 9 TPS open-data categories
 #' @return Named numeric vector.
 #' @examples
 #' MORIE_TPS_VIOLENT_CSI_WEIGHTS
 #' @export
 MORIE_TPS_VIOLENT_CSI_WEIGHTS <- function() .VIOLENT_CSI_WEIGHTS
 
-#' Toronto reference population by fiscal year (StatsCan 17-10-0009-01).
+#' Toronto reference population by fiscal year (StatsCan 17-10-0009-01)
 #' @return Named integer vector (year-as-string -> population).
 #' @examples
 #' MORIE_TPS_TORONTO_POPULATION_BY_YEAR
 #' @export
 MORIE_TPS_TORONTO_POPULATION_BY_YEAR <- function() .TORONTO_POPULATION_BY_YEAR
 
-#' Canonical CSI category names (the 9 TPS open-data feeds).
+#' Canonical CSI category names (the 9 TPS open-data feeds)
 #' @return Character vector.
 #' @examples
 #' MORIE_TPS_CSI_CATEGORIES
@@ -128,7 +126,7 @@ MORIE_TPS_CSI_CATEGORIES <- function() names(.TOTAL_CSI_WEIGHTS)
 # Scalar weight lookup
 # ---------------------------------------------------------------------------
 
-#' Return the CSI weight for a TPS open-data category.
+#' Return the CSI weight for a TPS open-data category
 #'
 #' @param category TPS category name (e.g. "Assault", "Homicides").
 #' @param variant One of "total" or "violent".
@@ -208,7 +206,7 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
 #'
 #' Accepts either a long-format data.frame (columns \code{year},
 #' \code{category}, \code{count}) or a nested list keyed
-#' \code{[[year]][[category]] = count}.
+#' \code{\[\[year\]\]\[\[category\]\] = count}.
 #'
 #' Returns a data.frame indexed by year with columns:
 #' \itemize{
@@ -302,7 +300,7 @@ morie_tps_csi_per_year <- function(counts_per_year,
 #'
 #' @param counts_per_hood Long data.frame (columns \code{HOOD_158},
 #'   \code{category}, \code{count}) or nested list
-#'   \code{[[hood]][[category]] = count}.
+#'   \code{\[\[hood\]\]\[\[category\]\] = count}.
 #' @param variant One of "total" or "violent".
 #' @param weights Optional override vector of weights.
 #' @return A data.frame with one row per neighbourhood.

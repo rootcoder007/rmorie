@@ -23,7 +23,7 @@ Burg's recursion for autoregressive coefficients and innovation
 variance. Always yields a stable (minimum-phase) all-pole model.
 }
 \details{
-Sign convention: \eqn{x[n] = -\sum_{k=1}^p a_k x[n-k] + e[n]}{x[n] = -sum_k=1^p a_k x[n-k] + e[n]}.
+Sign convention: \eqn{x\[n\] = -\sum_{k=1}^p a_k x\[n-k\] + e\[n\]}{x\[n\] = -sum_k=1^p a_k x\[n-k\] + e\[n\]}.
 }
 \examples{
 set.seed(0)

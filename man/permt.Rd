@@ -33,6 +33,7 @@ morie_permutation_test_general(
 \item{alternative}{"two-sided", "less", or "greater".}
 
 \item{seed}{integer.}
+
 }
 \value{
 Named list: statistic, p_value, n_x, n_y, B, alternative, method.

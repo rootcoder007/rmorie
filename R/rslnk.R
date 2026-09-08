@@ -15,7 +15,16 @@
 #' @export
 morie_rslnk_residual_connection <- function(x, f = NULL) {
   x <- as.array(x)
-  Fx <- if (is.null(f)) x else as.array(f(x))
+  # f may be the layer itself OR an already-computed F(x). Passing an array
+  # used to fail inside f(x) with "attempt to apply non-function", naming
+  # neither the argument nor what it wanted. Mirrors morie.fn.rslnk.
+  Fx <- if (is.null(f)) {
+    x
+  } else if (is.function(f)) {
+    as.array(f(x))
+  } else {
+    as.array(f)
+  }
   if (!identical(dim(Fx), dim(x)) && length(Fx) != length(x)) {
     stop("Residual branch shape does not match identity shape.")
   }

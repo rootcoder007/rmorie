@@ -79,7 +79,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
-
       # The 2026-07-15 oldrel-1 failure was ENOSPC: a dep-cache miss (any
       # DESCRIPTION change reshuffles the lockfile hash) forces from-source
       # rebuilds whose /tmp intermediates fill the ~21 GB free on stock
@@ -160,6 +159,11 @@ jobs:
           # / rbounds::psens don't crash with "no package called 'rgenoud'".
           extra-packages: any::rcmdcheck any::rgenoud github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: check
+
+      # Needs R, so it runs after setup-r; before it, Rscript does not
+      # exist on the runner and the step died with exit 127.
+      - name: Static guard -- every morie_* call must be defined
+        run: Rscript scripts/audit/check_r_undefined.R .
 
       - name: Reinstall rmoriebricklayer (overwrite any cache-restored 0.2.0)
         run: install.packages(c("rmoriebricklayer", "rmoriedata"), repos = "https://rootcoder007.r-universe.dev")
@@ -252,7 +256,7 @@ jobs:
     name: debian-bookworm (r-base 4.5.1, Debian)
     runs-on: ubuntu-latest
     container: r-base:4.5.1
-    timeout-minutes: 120
+    timeout-minutes: 60
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       _R_CHECK_FORCE_SUGGESTS_: false
@@ -283,8 +287,20 @@ jobs:
         shell: Rscript {0}
       - name: R CMD check (as-cran, no vignettes) on Debian
         run: |
+          # No examples on this leg, so it fits in the hour. Measured on
+          # this 2-core container: ~20 min to install and build, ~3 min
+          # for the Rd and code checks, then 37 minutes with no output
+          # at all while R CMD check EXTRACTS rmorie-Ex.R from 11,418 Rd
+          # pages, and ~86 minutes running it. Roughly 2.5 hours, and 60
+          # minutes did not reach the start of examples.
+          #
+          # Examples are checked on five other cells (ubuntu
+          # release/devel/oldrel-1, macOS, Windows). What is unique here
+          # is true Debian bookworm with Suggests absent: installation,
+          # compiled code and the test suite, which is what this runs.
           res <- rcmdcheck::rcmdcheck(
-            args = c("--no-manual", "--as-cran", "--ignore-vignettes"),
+            args = c("--no-manual", "--as-cran", "--ignore-vignettes",
+                     "--no-examples"),
             build_args = c("--no-build-vignettes", "--no-manual"),
             error_on = "error")
           print(res)
@@ -298,3 +314,4 @@ jobs:
             check/*.Rcheck/00check.log
             check/*.Rcheck/tests/
           if-no-files-found: ignore
+          retention-days: 7

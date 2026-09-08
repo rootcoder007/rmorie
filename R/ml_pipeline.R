@@ -33,7 +33,8 @@
 #' @srrstats {ML1.1} morie_ml_split() labels rows train/test/validation.
 #' @srrstats {ML1.1a} the assigned roles are confirmed via the returned `roles` vector.
 #' @srrstats {ML1.1b} .ml_match_role() matches role names case-insensitively and by prefix.
-#' @srrstats {ML1.2} morie_ml_split() takes one tabular object; the `roles` variable distinguishes partitions.
+#' @srrstats {ML1.2} morie_ml_split() takes one tabular object; the `roles` variable
+#' distinguishes partitions.
 #' @srrstats {ML1.3} morie_ml_split() returns train/test as distinct list items.
 #' @srrstats {ML1.4} partitions are distinctly labelled by role.
 #' @srrstats {ML1.5} print.morie_ml_split() summarises per-partition row counts.
@@ -73,7 +74,8 @@
 #' @srrstats {ML3.6} multiple search algorithms and losses are permitted.
 #' @srrstats {ML3.6a} gd/sgd/adam are all available (.ml_optimizers).
 #' @srrstats {ML3.6b} logloss and mse are both available (.ml_loss).
-#' @srrstats {ML3.7} the pipeline is pure R with no C++/GPU code, so CPU/GPU control does not arise (condition not triggered).
+#' @srrstats {ML3.7} the pipeline is pure R with no C++/GPU code, so CPU/GPU control does
+#' not arise (condition not triggered).
 #' @srrstats {ML4.0} morie_ml_train() is the single unified training interface.
 #' @srrstats {ML4.1} the fit retains model-internal parameters and optimisation paths.
 #' @srrstats {ML4.1a} fit$weights holds the model-internal parameters.
@@ -96,7 +98,8 @@
 #' @srrstats {ML5.2b} morie_ml_save()/morie_ml_load() save and reload the trained model.
 #' @srrstats {ML5.2c} serialization uses base saveRDS/readRDS.
 #' @srrstats {ML5.3} morie_ml_assess() implements performance assessment as a distinct function.
-#' @srrstats {ML5.4} morie_ml_assess() supports several metrics (accuracy/roc_auc/brier/rmse/mae/r2).
+#' @srrstats {ML5.4} morie_ml_assess() supports several metrics
+#' (accuracy/roc_auc/brier/rmse/mae/r2).
 #' @srrstats {ML5.4a} metrics are computed consistently through .ml_metric.
 #' @srrstats {ML5.4b} custom metrics can be submitted via the `custom` argument.
 #' @srrstats {ML6.0} the workflow separates training (morie_ml_train) from prediction (predict).
@@ -106,7 +109,8 @@
 #' @srrstats {ML7.1} tests demonstrate the effect of different input scaling on fitted weights.
 #' @srrstats {ML7.2} tests compare internal imputation with an external computation.
 #' @srrstats {ML7.3} tests exercise the morie_ml_fit class accessors.
-#' @srrstats {ML7.3a} tests identify the documented class restriction (class prediction is logistic-only).
+#' @srrstats {ML7.3a} tests identify the documented class restriction (class prediction
+#' is logistic-only).
 #' @srrstats {ML7.3b} tests exercise the class's predict/summary abilities.
 #' @srrstats {ML7.4} tests demonstrate that lower training rates give slower descent.
 #' @srrstats {ML7.5} tests exercise the tuning routine that selects training rates.
@@ -181,7 +185,8 @@ morie_ml_split <- function(data,
   n <- nrow(data)
   if (is.null(strata)) {
     # deterministic proportional counts, then shuffle the assignment
-    counts <- floor(prop * n); counts[1] <- n - sum(counts[-1])
+    counts <- floor(prop * n)
+    counts[1] <- n - sum(counts[-1])
     roles <- sample(rep(names(prop), counts))
   } else {
     roles <- character(n)
@@ -200,6 +205,8 @@ morie_ml_split <- function(data,
   out
 }
 
+#' Print method for \code{morie_ml_split} objects
+#'
 #' @param x A `morie_ml_split`.
 #' @param ... Unused.
 #' @return `x`, invisibly (ML1.5 dataset summary).
@@ -332,7 +339,8 @@ morie_ml_prep <- function(recipe, data) {
         recipe$center_target[[v]] else mean(col)
     } else 0
     scl <- if (isTRUE(recipe$scale)) {
-      s <- stats::sd(col); if (is.na(s) || s == 0) 1 else s
+      s <- stats::sd(col)
+      if (is.na(s) || s == 0) 1 else s
     } else 1
     p[[v]] <- list(impute = if (recipe$impute == "none") NA_real_
                             else morie_ml_impute(data[[v]], recipe$impute)[
@@ -379,6 +387,8 @@ morie_ml_bake <- function(recipe, newdata, reverse = FALSE) {
   out
 }
 
+#' Print method for \code{morie_ml_recipe} objects
+#'
 #' @param x A `morie_ml_recipe`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -474,6 +484,8 @@ morie_ml_model <- function(type = c("logistic", "linear"),
   spec
 }
 
+#' Print method for \code{morie_ml_model} objects
+#'
 #' @param x A `morie_ml_model`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -542,7 +554,10 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
   w <- rep(0, ncol(X))
   loss_path <- numeric(model$epochs)
   grad_norm <- numeric(0)
-  m_adam <- v_adam <- rep(0, ncol(X)); b1 <- 0.9; b2 <- 0.999; t_adam <- 0
+  m_adam <- v_adam <- rep(0, ncol(X))
+  b1 <- 0.9
+  b2 <- 0.999
+  t_adam <- 0
   converged <- FALSE
   for (ep in seq_len(model$epochs)) {
     if (model$optimizer == "sgd") {
@@ -552,7 +567,8 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
       idx_batches <- list(seq_len(nrow(Xs)))
     }
     for (bi in idx_batches) {
-      Xb <- Xs[bi, , drop = FALSE]; yb <- y[bi]
+      Xb <- Xs[bi, , drop = FALSE]
+      yb <- y[bi]
       p <- L$link(as.numeric(Xb %*% w))
       g <- as.numeric(L$grad(Xb, p, yb)) + model$l2 * w
       grad_norm <- c(grad_norm, sqrt(sum(g^2)))
@@ -560,7 +576,8 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
         t_adam <- t_adam + 1
         m_adam <- b1 * m_adam + (1 - b1) * g
         v_adam <- b2 * v_adam + (1 - b2) * g^2
-        mhat <- m_adam / (1 - b1^t_adam); vhat <- v_adam / (1 - b2^t_adam)
+        mhat <- m_adam / (1 - b1^t_adam)
+        vhat <- v_adam / (1 - b2^t_adam)
         w <- w - model$learning_rate * mhat / (sqrt(vhat) + 1e-8)
       } else {
         w <- w - model$learning_rate * g
@@ -570,10 +587,14 @@ morie_ml_train <- function(model, x, y, verbose = FALSE) {
     loss_path[ep] <- L$loss(p_full, y) + model$l2 * sum(w^2) / 2
     if (verbose) message(sprintf("epoch %d loss %.6f", ep, loss_path[ep]))
     if (!is.finite(loss_path[ep])) {  # diverged; stop before NA-comparing
-      loss_path <- loss_path[seq_len(ep)]; converged <- FALSE; break
+      loss_path <- loss_path[seq_len(ep)]
+      converged <- FALSE
+      break
     }
     if (ep > 1 && abs(loss_path[ep - 1] - loss_path[ep]) < model$tol) {
-      loss_path <- loss_path[seq_len(ep)]; converged <- TRUE; break
+      loss_path <- loss_path[seq_len(ep)]
+      converged <- TRUE
+      break
     }
   }
   # Map weights from standardised space back to the raw feature scale.
@@ -616,6 +637,8 @@ predict.morie_ml_fit <- function(object, newdata, type = c("response", "class"),
   p
 }
 
+#' Print method for \code{morie_ml_fit} objects
+#'
 #' @param x A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -635,6 +658,8 @@ print.morie_ml_fit <- function(x, ...) {
   invisible(x)
 }
 
+#' Summarise method for \code{morie_ml_fit} objects
+#'
 #' @param object A `morie_ml_fit`.
 #' @param ... Unused.
 #' @return A one-row data.frame summarising the fit.
@@ -759,11 +784,13 @@ morie_ml_assess <- function(fit, x, y,
 morie_ml_resample <- function(model, x, y, n_folds = 5L,
                               metric = if (model$type == "logistic") "roc_auc"
                                        else "rmse", seed = 42L) {
-  x <- as.data.frame(x); y <- as.numeric(y)
+  x <- as.data.frame(x)
+  y <- as.numeric(y)
   set.seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = nrow(x)))
   scores <- vapply(seq_len(n_folds), function(k) {
-    tr <- folds != k; te <- folds == k
+    tr <- folds != k
+    te <- folds == k
     fit <- morie_ml_train(model, x[tr, , drop = FALSE], y[tr])
     unname(morie_ml_assess(fit, x[te, , drop = FALSE], y[te], metrics = metric))
   }, numeric(1))
@@ -821,7 +848,9 @@ morie_ml_tune <- function(x, y, grid, type = "linear", n_folds = 5L,
 #'                     mtcars[c("hp", "wt")], mtcars$mpg)
 #' @export
 morie_ml_train_time <- function(model, x, y, probe_epochs = 5L) {
-  probe <- model; probe$epochs <- as.integer(probe_epochs); probe$tol <- 0
+  probe <- model
+  probe$epochs <- as.integer(probe_epochs)
+  probe$tol <- 0
   t0 <- proc.time()[["elapsed"]]
   morie_ml_train(probe, x, y)
   per_epoch <- (proc.time()[["elapsed"]] - t0) / probe_epochs

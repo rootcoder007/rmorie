@@ -11,11 +11,13 @@ List with \code{pk} (raw, 32 B) and \code{sk} (raw, 64 B).
 }
 \description{
 Hash-based signatures rest only on the security of the underlying
-hash function — the most conservative post-quantum assumption.
+hash function -- the most conservative post-quantum assumption.
 Requires a liboqs build that includes SLH-DSA / SPHINCS+.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- try(morie_crypto_slhdsa_keygen(), silent = TRUE)
+  }
 }
 }
