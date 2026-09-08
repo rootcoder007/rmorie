@@ -6,6 +6,8 @@
 # sibling package.
 
 test_that("morie_describe_by_name loads and returns a narrative", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   result <- suppressMessages(morie_describe_by_name("aalen"))
   if (is.null(result)) {
     # If the describe corpus isn't bundled in this build, skip.
@@ -18,6 +20,8 @@ test_that("morie_describe_by_name loads and returns a narrative", {
 })
 
 test_that("morie_describe normalises the leading morie_ prefix", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   with_prefix    <- suppressMessages(morie_describe_by_name("morie_aalen"))
   without_prefix <- suppressMessages(morie_describe_by_name("aalen"))
   if (is.null(without_prefix)) {
@@ -27,6 +31,8 @@ test_that("morie_describe normalises the leading morie_ prefix", {
 })
 
 test_that("morie_describe normalises a trailing .md", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   with_ext    <- suppressMessages(morie_describe_by_name("aalen.md"))
   without_ext <- suppressMessages(morie_describe_by_name("aalen"))
   if (is.null(without_ext)) {
@@ -36,6 +42,8 @@ test_that("morie_describe normalises a trailing .md", {
 })
 
 test_that("morie_describe gives a helpful diagnostic for an unknown name", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   result <- expect_message(
     morie_describe_by_name("definitely_not_a_morie_callable_12345"),
     "no narrative"
@@ -46,12 +54,16 @@ test_that("morie_describe gives a helpful diagnostic for an unknown name", {
 })
 
 test_that("morie_describe rejects non-character non-function inputs", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   expect_error(morie_describe(42L),    "function or a character")
   expect_error(morie_describe(NULL),   "function or a character")
   expect_error(morie_describe(list()), "function or a character")
 })
 
 test_that("morie_describe_by_name rejects empty or vector inputs", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   expect_error(morie_describe_by_name(""),
                "non-empty character scalar")
   expect_error(morie_describe_by_name(character(0L)),
@@ -59,6 +71,8 @@ test_that("morie_describe_by_name rejects empty or vector inputs", {
 })
 
 test_that("morie_describe accepts a function object via substitute capture", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   corpus_ok <- !is.null(suppressMessages(
     morie_describe_by_name("aalen")
   ))
@@ -75,6 +89,8 @@ test_that("morie_describe accepts a function object via substitute capture", {
 })
 
 test_that("the describe corpus is cached across calls", {
+  skip_if_not(rmorie:::.morie_describe_corpus_available(),
+              "describe_corpus.Rds is not installed (needs rmoriedata >= 0.3.2)")
   # First call populates the cache; the second should not touch
   # the disk again. We test this indirectly by confirming the
   # cache env has been populated after a successful lookup.

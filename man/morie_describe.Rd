@@ -31,13 +31,16 @@ callable name is stripped automatically, so
 narrative.
 }
 \examples{
-morie_describe("aalen")
-morie_describe("morie_aalen") # leading prefix stripped
-# Function-object form: pass any morie callable unquoted
-# (btsrp is the bootstrap primitive; its narrative ships in
-# the bundled describe corpus).
-morie_describe(btsrp)
+# The corpus is data shipped by rmoriedata (>= 0.3.2).
+if (rmorie:::.morie_describe_corpus_available()) {
+  morie_describe("aalen")
+  morie_describe("morie_aalen") # leading prefix stripped
+  # Function-object form: pass any morie callable unquoted
+  # (btsrp is the bootstrap primitive; its narrative ships in
+  # the bundled describe corpus).
+  morie_describe(btsrp)
 
+}
 }
 \seealso{
 \code{\link{morie_describe_by_name}} for the

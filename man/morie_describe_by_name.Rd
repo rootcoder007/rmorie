@@ -20,7 +20,10 @@ Use this when you want to pass a name as a string and avoid the
 unquoted-symbol capture behaviour of \code{morie_describe}.
 }
 \examples{
-morie_describe_by_name("aalen")
-morie_describe_by_name("morie_aalen")
+# The corpus is data shipped by rmoriedata (>= 0.3.2).
+if (rmorie:::.morie_describe_corpus_available()) {
+  morie_describe_by_name("aalen")
+  morie_describe_by_name("morie_aalen")
 
+}
 }
