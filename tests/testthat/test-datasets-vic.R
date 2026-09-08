@@ -26,10 +26,22 @@ test_that("an unknown key is rejected rather than silently empty", {
 })
 
 test_that("the loader stays offline by default", {
+  # Offline still means offline -- no download, no network. What changed
+  # is what offline RETURNS: rmoriedata >= 0.3.0 bundles Table 01 of each
+  # workbook as the slug vic_<key>, so the loader serves that instead of
+  # the empty frame it used to. Without that bundle the old behaviour
+  # stands, which is what the else branch asserts.
   d <- morie_datasets_vic_table("criminal_incidents", table = 1,
                                 cache_dir = tempfile())
   expect_s3_class(d, "data.frame")
-  expect_equal(nrow(d), 0L)
+  if (!is.null(.morie_vic_bundled("criminal_incidents"))) {
+    expect_gt(nrow(d), 0L)
+    expect_true(all(c("Year", "Offence Division") %in% names(d)))
+  } else {
+    expect_equal(nrow(d), 0L)
+  }
+  # Sheet names come from the cached workbook itself, so an uncached
+  # cache_dir still yields nothing regardless of the bundle.
   expect_equal(morie_datasets_vic_sheets("criminal_incidents",
                                          cache_dir = tempfile()),
                character(0))
