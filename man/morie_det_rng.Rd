@@ -13,11 +13,11 @@ Must be identical to the string the Python side passes.}
 \item{seed}{Integer; user-supplied seed.}
 }
 \value{
-Integer seed installed via \code{\link[=set.seed]{set.seed()}} (invisibly).
+Integer seed installed via [set.seed()] (invisibly).
 }
 \description{
 Given a callable / fixture name and an integer seed, derive a stable
-R-side seed value via SHA-256, install it with \code{\link[=set.seed]{set.seed()}}, and
+R-side seed value via SHA-256, install it with [set.seed()], and
 return it invisibly.  The matched Python helper
 \code{morie._det_rng.from_seed(name, seed)} builds a \code{numpy.random.Generator}
 from the same SHA digest so bootstrap / MCMC draws on the two sides
@@ -26,8 +26,8 @@ deterministic-pseudo-bootstrap mode is plumbed).
 }
 \details{
 Mechanism: \code{SHA-256(paste0(name, ":", seed))} is truncated to 32 bytes;
-bytes \verb{[9:12]} (1-indexed, i.e. hex chars 17..24) form a 32-bit value
-reduced modulo \code{2^31 - 1} and passed to \code{\link[=set.seed]{set.seed()}}.  Bytes \verb{[1:8]}
+bytes \verb{\[9:12\]} (1-indexed, i.e. hex chars 17..24) form a 32-bit value
+reduced modulo \code{2^31 - 1} and passed to [set.seed()].  Bytes \verb{\[1:8\]}
 are reserved for the Python Philox key.  See \code{inst/python-stub/det_rng.py}
 (or the parent \verb{morie/_det_rng.py}) for the Python counterpart.
 

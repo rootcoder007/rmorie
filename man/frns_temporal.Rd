@@ -10,8 +10,8 @@ breakdowns, and a plain-language \code{interpretation}.
 }
 \description{
 R parity for the Python \code{morie.fairness.temporal} module. The four
-disparity metrics — Disparate Impact Ratio, Demographic Parity Gap,
-Gini coefficient, and Bias Amplification Score — are computed for
+disparity metrics -- Disparate Impact Ratio, Demographic Parity Gap,
+Gini coefficient, and Bias Amplification Score -- are computed for
 each \verb{(city, period)} cell and aggregated per city, so temporal
 instability and cross-city divergence become visible.
 }

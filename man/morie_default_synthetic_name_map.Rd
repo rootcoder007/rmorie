@@ -15,7 +15,7 @@ Named character vector.
 }
 \description{
 Returns a named character vector mapping canonical variable keys used by
-\code{\link[=morie_generate_synthetic_data]{morie_generate_synthetic_data()}} to output column names.
+\code{morie_generate_synthetic_data()} to output column names.
 }
 \examples{
 morie_default_synthetic_name_map("generic")

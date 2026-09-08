@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_read_xlsx_dictionary}
 \alias{morie_arsau_read_xlsx_dictionary}
-\title{Read an Ontario-Catalogue XLSX data-dictionary sidecar.}
+\title{Read an Ontario-Catalogue XLSX data-dictionary sidecar}
 \usage{
 morie_arsau_read_xlsx_dictionary(path, sheet = 1L)
 }
@@ -28,7 +28,7 @@ dependency.
 }
 }
 \examples{
-\donttest{
+\dontrun{
 # Point at a downloaded ARSAU data-dictionary workbook:
 d <- try(morie_arsau_read_xlsx_dictionary("arsau_dictionary.xlsx"))
 }

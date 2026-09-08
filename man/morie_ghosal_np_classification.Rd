@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghcls.R
 \name{morie_ghosal_np_classification}
 \alias{morie_ghosal_np_classification}
-\title{Probit-GP classifier (Laplace approximation).}
+\title{Probit-GP classifier (Laplace approximation)}
 \usage{
 morie_ghosal_np_classification(
   x,
@@ -30,7 +30,7 @@ morie_ghosal_np_classification(
 Named list with estimate, p_hat, accuracy, length_scale, n, method.
 }
 \description{
-Probit-GP classifier (Laplace approximation).
+Probit-GP classifier (Laplace approximation)
 }
 \examples{
 morie_ghosal_np_classification(x = rnorm(50), y = rnorm(50))

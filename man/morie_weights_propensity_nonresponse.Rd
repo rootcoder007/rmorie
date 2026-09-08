@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_propensity_nonresponse}
 \alias{morie_weights_propensity_nonresponse}
-\title{Propensity-score non-response weights (logistic).}
+\title{Propensity-score non-response weights (logistic)}
 \usage{
 morie_weights_propensity_nonresponse(weights, responded, X)
 }
@@ -18,7 +18,7 @@ morie_weights_propensity_nonresponse(weights, responded, X)
 A numeric value (scalar).
 }
 \description{
-Propensity-score non-response weights (logistic).
+Propensity-score non-response weights (logistic)
 }
 \examples{
 set.seed(1)

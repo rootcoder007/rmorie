@@ -1,46 +1,80 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-
-#' Gaussian multiplier bootstrap for Z-estimators
+#' Multiplier bootstrap with exponential weights (Dirichlet weights)
 #'
-#' G_n_xi(f) = n raised to the power of -1/2 times sum_i xi_i (f(X_i) - P_n f), xi ~ N(0,1).
+#' The weights are divided by their own mean so the total weight stays n.
+#' With standard exponential multipliers mu = tau = 1, so the scaling
+#' factor is 1 -- written out rather than dropped, because it is not 1 for
+#' any other weight distribution.
 #'
-#' @param x Numeric vector.
-#' @param B Number of multiplier replications.
-#' @param seed Integer RNG seed.
-#' @param deterministic_seed Optional integer; if supplied, RNG state is
-#'   derived via [morie_det_rng()] keyed on ("ksr08", deterministic_seed)
-#'   so Py<->R streams agree on the canonical fixture.  When `NULL`
-#'   (default) behaviour is unchanged.
-#' @return Named list with estimate, se, n, method.
-#' @references Kosorok (2008), Ch 10.
-#' @examples
-#' morie_ksr08_kosorok_multiplier_bootstrap(x = rnorm(50))
+#' Formula: Ptilde_n f = n^-1 sum_i (xi_i / xibar_n) f(X_i);
+#'   Gtilde_n = sqrt(n) (mu/tau) (Ptilde_n - P_n), xi ~ Exp(1)
+#'
+#' @param x The sample.
+#' @param B Number of replicates (fixed budget).
+#' @param deterministic_seed Optional integer; if supplied, the pinned
+#'   LCG is seeded from SHA-256("ksr08_multiplier:<deterministic_seed>")
+#'   via \code{morie_det_rng} instead of \code{seed}, which is the
+#'   cross-arm reproducible path.
+#' @param seed Seed for the pinned generator.
+#' @return List with \code{estimate}, \code{boot_mean}, \code{boot_sd},
+#'   \code{process_sd}, \code{ci_lower}, \code{ci_upper}, \code{mu},
+#'   \code{tau}, \code{B}, \code{n}.
+#' @references Kosorok (2008), Introduction to Empirical Processes and
+#'   Semiparametric Inference, Section 2.2.3. Fetched as the full text of
+#'   the book.
 #' @export
-morie_ksr08_kosorok_multiplier_bootstrap <- function(x, B = 1000, seed = 0,
-                                               deterministic_seed = NULL) {
-  x <- as.numeric(x)
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' Multboot(V)
+Multboot <- function(x, B = 200, seed = 1,
+                      deterministic_seed = NULL) {
+  x <- .t1_vec(x)
   n <- length(x)
+  B <- as.integer(B)
+  if (n < 2L) stop("the sample must have at least two observations")
+  if (B < 2L) stop("B must be at least 2")
+  Pn <- mean(x)
   if (!is.null(deterministic_seed)) {
-    rmorie::morie_det_rng("ksr08", deterministic_seed)
+    # SHA-keyed seed: this and morie._det_rng.r_seed derive the SAME
+    # integer from ("ksr08_multiplier", deterministic_seed), so both arms drive
+    # the pinned LCG from an identical start.
+    g <- .t1_lcg(morie_det_rng("ksr08_multiplier", deterministic_seed))
   } else {
-    set.seed(seed)
+    g <- .t1_lcg(seed)
   }
-  pn <- mean(x)
-  centred <- x - pn
-  xi <- matrix(stats::rnorm(B * n), nrow = B)
-  g_xi <- (xi %*% centred) / sqrt(n)
-  list(
-    estimate = mean(g_xi),
-    se       = stats::sd(as.numeric(g_xi)),
-    n        = n,
-    method   = "Multiplier bootstrap G_n^xi = n^{-1/2} sum xi (f-Pf)"
-  )
+  stat <- numeric(B)
+  for (b in seq_len(B)) {
+    w <- numeric(n)
+    for (i in seq_len(n)) {
+      u <- g$unif()
+      if (u <= 0) u <- 1e-300
+      w[i] <- -log(u)
+    }
+    wb <- mean(w)
+    if (wb == 0) stop("the multiplier weights summed to zero")
+    stat[b] <- sum(w / wb * x) / n
+  }
+  bm <- mean(stat)
+  bsd <- stats::sd(stat)
+  q <- sort(stat)
+  lo <- q[max(1L, floor(0.025 * (B - 1)) + 1L)]
+  hi <- q[min(B, ceiling(0.975 * (B - 1)) + 1L)]
+  .t1_result(estimate = Pn, boot_mean = bm, boot_sd = bsd,
+             process_sd = sqrt(n) * 1 * bsd, ci_lower = lo, ci_upper = hi,
+             mu = 1, tau = 1, B = as.numeric(B), n = as.numeric(n),
+             method = "Multiplier bootstrap, Kosorok Section 2.2.3")
 }
 
-# CANONICAL TEST
-# set.seed(0); morie_ksr08_kosorok_multiplier_bootstrap(rnorm(200), B=500, seed=42)
+# NAMESPACE exported both of these names, but only the short function above
+# was ever defined, so loading the namespace could not resolve them. Same
+# alias pattern as ksr02.R.
 
-#' @rdname morie_ksr08_kosorok_multiplier_bootstrap
+#' @rdname Multboot
 #' @keywords internal
 #' @export
-morie_kosorok_multiplier_bootstrap <- morie_ksr08_kosorok_multiplier_bootstrap
+morie_ksr08_kosorok_multiplier_bootstrap <- Multboot
+
+#' @rdname Multboot
+#' @keywords internal
+#' @export
+morie_kosorok_multiplier_bootstrap <- Multboot

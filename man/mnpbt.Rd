@@ -3,7 +3,7 @@
 \name{mnpbt}
 \alias{mnpbt}
 \alias{morie_multinomial_probit_spatial}
-\title{Multinomial probit (spatial choice; Armstrong Ch 9)}
+\title{Multinomial probit via the GHK simulator (Train 2009)}
 \usage{
 mnpbt(x, n_draws = 2000L, seed = 0L)
 
@@ -21,6 +21,12 @@ Named list with \code{probs}, \code{max_alt}, \code{n_obs}, \code{n_alt},
 \code{method}.
 }
 \description{
+Multinomial probit via the GHK simulator (Train 2009)
+}
+\details{
+Train, K. E. (2009), Discrete Choice Methods with Simulation, 2nd ed.
+NOT Armstrong: that book has six chapters and no Ch 9.
+
 GHK-style Monte-Carlo choice probabilities for independent Gaussian
 errors over a deterministic utility matrix; binary case uses the
 closed-form Phi((U1-U0)/sqrt(2)).

@@ -232,7 +232,8 @@ test_that("USGS soil zip parser reads the CSV member (no network)", {
   csv <- tempfile(fileext = ".csv")
   write.csv(data.frame(lab_id = 1:2, ca_pct = c(3.1, 8.2), fe_pct = c(2.0, 1.1)),
             csv, row.names = FALSE)
-  old <- setwd(dirname(csv)); on.exit(setwd(old), add = TRUE)
+  old <- setwd(dirname(csv))
+  on.exit(setwd(old), add = TRUE)
   utils::zip(tmp, basename(csv), flags = "-q")
   df <- .morie_read_usgs_soil_zip(tmp, nrows = NULL)
   expect_s3_class(df, "data.frame")

@@ -1,306 +1,82 @@
-# SPDX-License-Identifier: AGPL-3.0-or-later
-# Tests for R/survival.R -- KM, Nelson-Aalen, Cox, AFT, RMST, log-rank,
-# concordance, CIF, residuals, landmark, left-truncated KM.
+# Parity for the survival block, anchored on the survival package.
 
-.make_surv <- function(n = 100L, seed = 1L) {
-  set.seed(seed)
-  x <- rnorm(n)
-  t <- rexp(n, rate = exp(0.5 * x))
-  c <- rexp(n, rate = 0.2)
-  time <- pmin(t, c)
-  event <- as.integer(t <= c)
-  data.frame(time = time, event = event, x = x)
-}
+TT <- c(5,8,12,3,15,7,20,11,4,18, 9,22,6,14,25,10,17,2,13,19,
+        16,21,1,24,23,27,26,30,28,29, 31,33,32,35,34,37,36,39,38,40)
+EV <- c(1,1,0,1,1,1,0,1,1,1, 0,1,1,1,0,1,1,1,0,1,
+        1,0,1,1,1,0,1,1,1,0, 1,1,0,1,1,1,0,1,1,1)
+GG <- rep(c(1,2), each = 20)
+X1 <- sapply(0:39, function(i) ((i*7) %% 11)/5 - 1)
+X2 <- sapply(0:39, function(i) ((i*5) %% 7)/3 - 1)
+XX <- cbind(X1, X2)
 
-# ---------------------------------------------------------------------------
-# morie_survival_km
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_km returns a tidy list", {
-  skip_if_not_installed("survival")
-  d <- .make_surv()
-  res <- morie_survival_km(d$time, d$event)
-  expect_type(res, "list")
-  expect_true(all(c("times", "survival", "ci_lower", "ci_upper",
-                    "at_risk", "events", "censored") %in% names(res)))
-  expect_true(all(res$survival >= 0 & res$survival <= 1))
-  # Survival monotone non-increasing
-  expect_true(all(diff(res$survival) <= 1e-8))
+test_that("Kaplan-Meier matches survfit", {
+  km <- morie_kaplan_meier(TT, EV)
+  expect_equal(length(km$time), 30)
+  expect_equal(km$surv[1], 0.975, tolerance = 1e-14)
+  i <- which(km$time == 10)
+  expect_equal(km$surv[i], 0.774193548387097, tolerance = 1e-13)
+  expect_equal(km$lower[i], 0.610837039143546, tolerance = 1e-12)
+  expect_equal(km$upper[i], 0.87556658555096, tolerance = 1e-12)
+  expect_equal(km$se_cumhaz[1], 0.0253184841770917, tolerance = 1e-14)
+  expect_equal(km$se, km$surv * km$se_cumhaz, tolerance = 1e-14)
 })
 
-test_that("morie_survival_km log-log CI method works", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(50)
-  res <- morie_survival_km(d$time, d$event, ci_method = "log-log")
-  expect_match(res$method, "log-log")
-  # Log-log CIs are NA when S(t) is 0 or 1; check only the well-defined entries.
-  ok <- !is.na(res$ci_lower) & !is.na(res$survival)
-  expect_true(all(res$ci_lower[ok] <= res$survival[ok] + 1e-8))
+test_that("survival curve is monotone and inside [0, 1]", {
+  km <- morie_kaplan_meier(TT, EV)
+  expect_true(all(diff(km$surv) <= 1e-15))
+  expect_true(all(km$lower >= 0 & km$upper <= 1))
 })
 
-test_that("morie_survival_km accepts NA / negative times by dropping them", {
-  skip_if_not_installed("survival")
-  t <- c(1, 2, NA, 3, -1, 4)
-  e <- c(1, 0, 1, 1, 0, 1)
-  res <- morie_survival_km(t, e)
-  expect_true(length(res$times) >= 1)
+test_that("Nelson-Aalen matches survfit type fh", {
+  na <- morie_nelson_aalen(TT, EV)
+  expect_equal(na$surv[1], 0.975309912028333, tolerance = 1e-13)
+  expect_equal(na$surv[5], 0.876549922217358, tolerance = 1e-13)
+  expect_true(all(na$surv >= morie_kaplan_meier(TT, EV)$surv - 1e-12))
 })
 
-# ---------------------------------------------------------------------------
-# morie_survival_nelsonaalen
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_nelsonaalen returns monotone-increasing cumhaz", {
-  skip_if_not_installed("survival")
-  d <- .make_surv()
-  res <- morie_survival_nelsonaalen(d$time, d$event)
-  expect_true(all(res$cumhaz >= 0))
-  expect_true(all(diff(res$cumhaz) >= -1e-8))
-  expect_true(all(res$ci_lower <= res$cumhaz + 1e-8))
+test_that("log-rank matches survdiff", {
+  r <- morie_logrank_test(TT, EV, GG)
+  expect_equal(r$statistic, 20.5279554955505, tolerance = 1e-10)
+  expect_equal(r$df, 1)
+  expect_equal(r$p_value, 5.87666766058383e-06, tolerance = 1e-9)
+  expect_equal(sum(r$observed), sum(r$expected), tolerance = 1e-9)
 })
 
-# ---------------------------------------------------------------------------
-# morie_survival_logrank
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_logrank: groups with different hazards reject", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  n <- 80
-  t1 <- rexp(n, rate = 1.0); t2 <- rexp(n, rate = 0.3)
-  time <- c(t1, t2); event <- rep(1L, 2 * n)
-  group <- c(rep("A", n), rep("B", n))
-  res <- morie_survival_logrank(time, event, group)
-  expect_named(res, c("method", "test_statistic", "p_value", "df",
-                      "n_groups", "n_total"),
-               ignore.order = TRUE)
-  expect_equal(res$n_groups, 2L)
-  expect_lt(res$p_value, 0.01)
+test_that("Cox matches coxph with Efron ties", {
+  c <- morie_cox_ph(TT, EV, XX)
+  expect_equal(unname(c$coef), c(-0.427673034112693, -0.157489759400814),
+               tolerance = 1e-6)
+  expect_equal(unname(c$se), c(0.304717144602484, 0.285683063051433),
+               tolerance = 1e-8)
+  expect_equal(c$loglik, -81.1317187602372, tolerance = 1e-9)
+  expect_equal(c$loglik_null, -82.4119335691052, tolerance = 1e-9)
+  expect_equal(unname(c$hazard_ratio), exp(unname(c$coef)),
+               tolerance = 1e-14)
+  expect_gte(c$loglik, c$loglik_null)
 })
 
-test_that("morie_survival_logrank weight variants run", {
-  skip_if_not_installed("survival")
-  d <- .make_surv()
-  group <- rep(c("a", "b"), length.out = nrow(d))
-  for (w in c("logrank", "peto", "gehan", "tarone")) {
-    r <- morie_survival_logrank(d$time, d$event, group, weight = w)
-    expect_true(is.numeric(r$test_statistic))
-  }
+test_that("Efron and Breslow coincide without ties and differ with them", {
+  a <- morie_cox_ph(TT, EV, XX, ties = "efron")$coef
+  b <- morie_cox_ph(TT, EV, XX, ties = "breslow")$coef
+  expect_equal(unname(a), unname(b), tolerance = 1e-7)
+  tied <- pmin(TT, 10)
+  a2 <- morie_cox_ph(tied, EV, XX, ties = "efron")$coef
+  b2 <- morie_cox_ph(tied, EV, XX, ties = "breslow")$coef
+  expect_gt(max(abs(a2 - b2)), 1e-6)
 })
 
-# ---------------------------------------------------------------------------
-# morie_survival_cox + residuals
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_cox recovers a known coefficient sign", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(150)
-  res <- morie_survival_cox(d, "time", "event", "x")
-  expect_named(res$coefficients, "x")
-  expect_gt(res$coefficients[["x"]], 0)  # positive x -> higher hazard
-  expect_equal(unname(res$hazard_ratios[["x"]]),
-               exp(res$coefficients[["x"]]), tolerance = 1e-6)
-  expect_true(res$concordance > 0.5)
+test_that("concordance matches survival::concordance", {
+  c <- morie_cox_ph(TT, EV, XX)
+  risk <- exp(as.numeric(XX %*% c$coef))
+  expect_equal(morie_concordance_index(TT, EV, risk)$c_index,
+               0.483443708609272, tolerance = 1e-11)
+  expect_equal(morie_concordance_index(TT, EV, -TT)$c_index, 1,
+               tolerance = 1e-12)
 })
 
-test_that("morie_survival_cox breslow ties option works", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(100)
-  res <- morie_survival_cox(d, "time", "event", "x", ties = "breslow")
-  expect_match(res$method, "breslow")
-})
-
-test_that("morie_survival_schoenfeld returns zph table", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(80)
-  cox <- morie_survival_cox(d, "time", "event", "x")
-  sch <- morie_survival_schoenfeld(cox)
-  expect_true(is.matrix(sch$residuals) || is.numeric(sch$residuals))
-  expect_s3_class(sch$zph_table, "data.frame")
-})
-
-test_that("morie_survival_martingale / deviance / coxsnell run", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(80)
-  cox <- morie_survival_cox(d, "time", "event", "x")
-  m <- morie_survival_martingale(cox)
-  dv <- morie_survival_deviance(cox)
-  cs <- morie_survival_coxsnell(cox)
-  expect_length(m, nrow(d))
-  expect_length(dv, nrow(d))
-  expect_true(is.numeric(cs))
-})
-
-test_that("morie_survival_schoenfeld errors on non-morie input", {
-  skip_if_not_installed("survival")
-  expect_error(morie_survival_schoenfeld(list(coefficients = 1)),
-               regexp = "morie_survival_cox")
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_aft / parametric / compare
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_aft fits weibull and returns AIC", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(150)
-  res <- morie_survival_aft(d, "time", "event", "x", dist = "weibull")
-  expect_match(res$distribution, "weibull")
-  expect_true(is.finite(res$aic))
-  expect_equal(res$n_observations, nrow(d))
-})
-
-test_that("morie_survival_parametric returns the chosen dist", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(100)
-  for (dist in c("exponential", "weibull", "lognormal")) {
-    r <- morie_survival_parametric(d$time, d$event, dist = dist)
-    expect_equal(r$distribution, dist)
-    expect_true(is.finite(r$aic))
-  }
-})
-
-test_that("morie_survival_compare_parametric ranks by AIC", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(120)
-  cmp <- morie_survival_compare_parametric(d$time, d$event)
-  expect_s3_class(cmp, "data.frame")
-  expect_true(all(diff(cmp$aic) >= -1e-6))
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_concordance
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_concordance: higher risk -> earlier event", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  n <- 100
-  x <- rnorm(n)
-  t <- rexp(n, rate = exp(x))
-  e <- rep(1L, n)
-  c <- morie_survival_concordance(t, e, x)
-  expect_gt(c, 0.5)
-})
-
-test_that("morie_survival_concordance ~0.5 for random risk", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  d <- .make_surv(100)
-  c <- morie_survival_concordance(d$time, d$event, rnorm(nrow(d)))
-  expect_true(c > 0.3 && c < 0.7)
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_rmst / rmst_diff
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_rmst returns rmst <= tau", {
-  skip_if_not_installed("survival")
-  d <- .make_surv(80)
-  res <- morie_survival_rmst(d$time, d$event, tau = max(d$time))
-  expect_true(res$rmst > 0)
-  expect_true(res$rmst <= res$tau + 1e-6)
-  expect_true(res$ci_lower <= res$rmst && res$ci_upper >= res$rmst)
-})
-
-test_that("morie_survival_rmst_diff is positive when group1 has longer survival", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  t1 <- rexp(80, rate = 0.3); e1 <- rep(1L, 80)
-  t2 <- rexp(80, rate = 1.0); e2 <- rep(1L, 80)
-  res <- morie_survival_rmst_diff(t1, e1, t2, e2)
-  expect_gt(res$rmst_diff, 0)
-  expect_true(is.finite(res$p_value))
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_cif (Aalen-Johansen)
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_cif returns monotone non-decreasing CIF", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  n <- 80
-  time <- rexp(n, rate = 0.5)
-  event <- sample(0:2, n, replace = TRUE, prob = c(0.3, 0.4, 0.3))
-  res <- morie_survival_cif(time, event, event_of_interest = 1)
-  expect_true(all(res$cif >= 0))
-  expect_true(all(diff(res$cif) >= -1e-8))
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_finegray (cmprsk delegation)
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_finegray runs when cmprsk available", {
-  skip_if_not_installed("survival")
-  skip_if_not_installed("cmprsk")
-  set.seed(1)
-  n <- 80
-  d <- data.frame(time = rexp(n, 0.5),
-                  event = sample(0:2, n, replace = TRUE,
-                                  prob = c(0.3, 0.4, 0.3)),
-                  x = rnorm(n))
-  res <- morie_survival_finegray(d, "time", "event", "x")
-  expect_named(res$coefficients, "x")
-  expect_equal(unname(res$hazard_ratios[["x"]]),
-               exp(res$coefficients[["x"]]), tolerance = 1e-6)
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_hr / landmark / left-truncated-km
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_hr requires exactly two groups", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  t <- rexp(60); e <- rep(1L, 60)
-  expect_error(morie_survival_hr(t, e, sample(0:2, 60, replace = TRUE)),
-               regexp = "exactly 2")
-})
-
-test_that("morie_survival_hr returns hr/ci/log_hr/se for 2-group data", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  t <- c(rexp(40, 1.0), rexp(40, 0.3))
-  e <- rep(1L, 80)
-  g <- rep(c("A", "B"), each = 40)
-  res <- morie_survival_hr(t, e, g)
-  expect_named(res, c("hr", "ci_lower", "ci_upper",
-                      "p_value", "log_hr", "se"), ignore.order = TRUE)
-  expect_gt(res$hr, 0)
-})
-
-test_that("morie_survival_landmark drops < landmark and shifts time", {
-  skip_if_not_installed("survival")
-  d <- data.frame(time = c(1, 3, 5, 7), event = c(1, 0, 1, 1))
-  out <- morie_survival_landmark(d, "time", "event", landmark_time = 3)
-  expect_equal(out$time, c(0, 2, 4))
-  expect_equal(nrow(out), 3L)
-})
-
-test_that("morie_survival_left_truncated_km returns step survival", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  n <- 60
-  entry <- runif(n, 0, 1)
-  exit  <- entry + rexp(n, 0.5)
-  event <- rbinom(n, 1, 0.7)
-  res <- morie_survival_left_truncated_km(entry, exit, event)
-  expect_true(all(res$survival >= 0 & res$survival <= 1))
-})
-
-# ---------------------------------------------------------------------------
-# morie_survival_turnbull (interval-censored)
-# ---------------------------------------------------------------------------
-
-test_that("morie_survival_turnbull returns NPMLE list", {
-  skip_if_not_installed("survival")
-  set.seed(1)
-  L <- runif(40, 0, 2)
-  R <- L + runif(40, 0.5, 3)
-  res <- morie_survival_turnbull(L, R)
-  expect_true(is.numeric(res$survival))
-  expect_match(res$method, "Turnbull")
+test_that("survival inputs are validated", {
+  expect_error(morie_kaplan_meier(TT, EV[1:5]))
+  expect_error(morie_kaplan_meier(TT, rep(2, length(TT))))
+  expect_error(morie_logrank_test(TT, EV, rep(1, length(TT))))
+  expect_error(morie_cox_ph(TT, rep(0, length(TT)), XX))
 })

@@ -42,6 +42,8 @@ morie_multi_head_attention_full(
 seed from \code{\link{morie_det_rng}("mhatf", deterministic_seed)} is
 installed before sampling so Py<->R streams agree.  Overrides
 \code{seed} when set.}
+
+
 }
 \value{
 Named list \code{(output, estimate, heads, num_heads, d_k,

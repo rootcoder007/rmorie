@@ -32,7 +32,8 @@ test_that("hill_alpha returns NA below threshold or for short input", {
 })
 
 test_that("hill_alpha is finite for Pareto-like data", {
-  set.seed(1); x <- (1 + 1 / runif(200))^2
+  set.seed(1)
+  x <- (1 + 1 / runif(200))^2
   expect_true(is.finite(rmorie:::.uof_hill_alpha(x)))
 })
 
@@ -108,7 +109,8 @@ test_that("force_concentration: heavy concentration interpretation paths", {
 
 test_that("force_concentration: distinct alpha bands trip distinct prose", {
   # Heavy tail (alpha < 2)
-  set.seed(0); x <- table(sample(letters[1:5], 50, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE))
+  set.seed(0)
+  x <- table(sample(letters[1:5], 50, prob = c(0.5, 0.2, 0.1, 0.1, 0.1), replace = TRUE))
   df1 <- data.frame(f = rep(names(x), x))
   r1 <- mrm_uof_force_concentration(df1, "f")
   expect_true(is.finite(r1$pareto_alpha_mle))

@@ -19,17 +19,17 @@ structure (e.g. \code{copula::normalCopula()},
 \value{
 A list with \code{$method = "copula::rCopula"} and
 \code{$raw} (a numeric matrix of dimension \eqn{n \times d}
-with values in \eqn{[0, 1]}).
+with values in \eqn{\[0, 1\]}).
 }
 \description{
 Thin extender over \code{copula::rCopula} that generates
-\eqn{n} draws on \eqn{[0, 1]^d} from a specified copula.
+\eqn{n} draws on \eqn{\[0, 1\]^d} from a specified copula.
 }
 \examples{
 \donttest{
-  if (requireNamespace("copula", quietly = TRUE)) {
-    set.seed(1)
-    morie_copula_sample(100, copula::claytonCopula(2, dim = 3))
-  }
+if (requireNamespace("copula", quietly = TRUE)) {
+  set.seed(1)
+  morie_copula_sample(100, copula::claytonCopula(2, dim = 3))
+}
 }
 }

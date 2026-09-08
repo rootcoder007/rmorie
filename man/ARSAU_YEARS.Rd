@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{ARSAU_YEARS}
 \alias{ARSAU_YEARS}
-\title{Known ARSAU year/range keys.}
+\title{Known ARSAU year/range keys}
 \usage{
 ARSAU_YEARS()
 }
@@ -10,7 +10,7 @@ ARSAU_YEARS()
 A character vector.
 }
 \description{
-Known ARSAU year/range keys.
+Known ARSAU year/range keys
 }
 \examples{
 ARSAU_YEARS

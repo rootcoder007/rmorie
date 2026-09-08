@@ -51,8 +51,10 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
     parsed <- suppressWarnings(as.integer(sid_chars))
     needs_extract <- is.na(parsed) & nzchar(sid_chars)
     if (any(needs_extract)) {
-      digit_match <- regmatches(sid_chars[needs_extract],
-                                  regexpr("[0-9]+", sid_chars[needs_extract]))
+      digit_match <- regmatches(
+        sid_chars[needs_extract],
+        regexpr("[0-9]+", sid_chars[needs_extract])
+      )
       parsed[needs_extract] <- suppressWarnings(as.integer(digit_match))
     }
     subs <- sprintf("%02d", parsed)
@@ -95,6 +97,7 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 }
 
 
+#' @param root See Usage.
 #' @keywords internal
 .entheo_list_subjects <- function(root) {
   fmri_dir <- file.path(root, "fMRI")
@@ -107,6 +110,10 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 }
 
 
+#' @param subject_id See Usage.
+#' @param n_tp See Usage.
+#' @param n_chan See Usage.
+#' @param n_parcels See Usage.
 #' @keywords internal
 .entheo_synthetic_record <- function(subject_id,
                                      n_tp = 480L, n_chan = 32L,
@@ -143,6 +150,8 @@ load_dmt_imaging <- function(subject_id = NULL, root = NULL) {
 }
 
 
+#' @param subject_id See Usage.
+#' @param root See Usage.
 #' @keywords internal
 .entheo_load_real <- function(subject_id, root) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {

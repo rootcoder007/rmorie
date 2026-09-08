@@ -111,7 +111,8 @@ test_that(".entheo_extract_pair handles record list + plain pair", {
 })
 
 test_that(".entheo_envelope returns vector of same length on a vec", {
-  set.seed(2L); x <- stats::rnorm(20L)
+  set.seed(2L)
+  x <- stats::rnorm(20L)
   out <- rmorie:::.entheo_envelope(x)
   expect_length(out, 20L)
   # Middle values should be non-NA (filter sides = 2).
@@ -126,7 +127,8 @@ test_that(".entheo_align trims to min length + handles scalar case", {
 
 test_that(".entheo_binding_per_frame returns vector of length n", {
   set.seed(3L)
-  eeg <- stats::rnorm(50L); fmri <- stats::rnorm(50L)
+  eeg <- stats::rnorm(50L)
+  fmri <- stats::rnorm(50L)
   out <- rmorie:::.entheo_binding_per_frame(eeg, fmri)
   expect_length(out, 50L)
   expect_true(all(is.finite(out)))

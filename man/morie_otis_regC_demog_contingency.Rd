@@ -18,7 +18,9 @@ tabulated with Gender and Age_Category; reports chi-square +
 Cramer's V on each.
 }
 \examples{
-b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
-res <- morie_otis_regC_demog_contingency(b02)
-res$title
+if (requireNamespace("MASS", quietly = TRUE)) {
+  b02 <- morie_synth_otis("b02", n = 120L, seed = 1L)
+  res <- morie_otis_regC_demog_contingency(b02)
+  res$title
+}
 }

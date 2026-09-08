@@ -20,6 +20,7 @@ morie_matching_rosenbaum_bounds(
 \item{match_pairs}{Data frame of matched indices.}
 
 \item{gamma_range}{Optional numeric vector of \eqn{\Gamma}{Gamma} values.}
+
 }
 \value{
 A data frame with columns \code{gamma}, \code{p_lower},
@@ -30,7 +31,7 @@ Computes bounds on the p-value for the treatment effect over a grid of
 values of \code{gamma} (the maximum odds ratio of differential treatment
 assignment due to an unobserved confounder).  Uses the Wilcoxon
 signed-rank approach.  For exact bounds, see
-\code{\link[sensitivitymv:senmv]{sensitivitymv::senmv}} or the
+\code{sensitivitymv::senmv} or the
 \pkg{rbounds} package.
 }
 \examples{

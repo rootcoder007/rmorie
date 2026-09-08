@@ -10,7 +10,7 @@ morie_dataset_portal_catalog_clear_cache()
 Invisibly \code{NULL}.
 }
 \description{
-Forces the next \code{\link[=morie_dataset_portal_catalog]{morie_dataset_portal_catalog()}} call to rebuild
+Forces the next \code{morie_dataset_portal_catalog()} call to rebuild
 from the per-portal registries. Useful after editing or extending
 a registry in an interactive session.
 }

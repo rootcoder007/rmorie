@@ -26,6 +26,7 @@ morie_tps_getis_ord_g_star(
 \item{top_n}{Number of top hot/cold spots to surface.}
 
 \item{lat_col, lon_col}{WGS84 column names.}
+
 }
 \value{
 A named list with Gi* per hood, the top hot/cold spot
@@ -34,7 +35,9 @@ tables, and tallies of hot/cold spots at alpha=0.05.
 \description{
 Returns Gi* per neighbourhood (count vector aggregated from the
 incident data.frame), using a binary k-NN spatial weights matrix
-with self-inclusion (Gi* convention). z-score interpretation: Gi*1.96 = significant hot spot at alpha=0.05; Gi* < -1.96 =significant cold spot.
+with self-inclusion (Gi* convention). z-score interpretation: Gi*
+\verb{> 1.96} = significant hot spot at alpha=0.05; \verb{Gi* < -1.96} =
+significant cold spot.
 }
 \examples{
 set.seed(2026)

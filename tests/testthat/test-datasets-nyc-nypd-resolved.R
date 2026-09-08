@@ -24,7 +24,8 @@ test_that("all NYPD wrappers + by_key now accept mode + app_token", {
 })
 
 test_that("default mode='soda2' for NYPD wrappers routes through .morie_dataset_socrata_fetch", {
-  soda2 <- FALSE; soda3 <- FALSE
+  soda2 <- FALSE
+  soda3 <- FALSE
   testthat::with_mocked_bindings(
     .morie_dataset_socrata_fetch = function(url, ...) {
       soda2 <<- TRUE

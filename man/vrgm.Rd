@@ -3,7 +3,7 @@
 \name{vrgm}
 \alias{vrgm}
 \alias{morie_variogram_estimation}
-\title{Empirical (Matheron) variogram estimation.}
+\title{Empirical (Matheron) variogram estimation}
 \usage{
 vrgm(x, coords, n_bins = 10, max_dist = NULL)
 

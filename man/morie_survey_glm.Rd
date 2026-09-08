@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_glm}
 \alias{morie_survey_glm}
-\title{Survey-weighted GLM with design-based SEs.}
+\title{Survey-weighted GLM with design-based SEs}
 \usage{
 morie_survey_glm(
   design,

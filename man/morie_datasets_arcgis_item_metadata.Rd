@@ -3,7 +3,7 @@
 \name{morie_datasets_arcgis_item_metadata}
 \alias{morie_datasets_arcgis_item_metadata}
 \title{Resolve any ArcGIS Online item id to its FeatureServer URL +
-canonical metadata.}
+canonical metadata}
 \usage{
 morie_datasets_arcgis_item_metadata(item_id)
 }

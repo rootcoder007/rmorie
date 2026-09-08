@@ -8,6 +8,16 @@
 # is configurable via MORIE_DATASETTE_URL, so these functions work
 # against any Datasette instance the caller has access to.
 
+#' .morie_datasette_base
+#'
+#' A step of the ingest_datasette implementation. Called by
+#' \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param base_url Defaults to \code{NULL}.
+#' @return The value of \code{sub}.
+#' @export
 .morie_datasette_base <- function(base_url = NULL) {
   url <- base_url
   if (is.null(url) || !nzchar(url)) {
@@ -24,6 +34,18 @@
   sub("/+$", "", url)
 }
 
+#' .morie_datasette_get_json
+#'
+#' A step of the ingest_datasette implementation. Called by
+#' \code{morie_datasette_databases}, \code{morie_datasette_read}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param url Passed to \code{url}.
+#' @param timeout Accepted by the signature and not used anywhere in the body. Defaults
+#' to \code{60}.
+#' @return The value of \code{.s03json_fromJSON}.
+#' @export
 .morie_datasette_get_json <- function(url, timeout = 60) {
   if (!requireNamespace("jsonlite", quietly = TRUE)) {
     stop("Package 'jsonlite' is required for the Datasette connector. ",
@@ -31,7 +53,7 @@
   }
   con <- url(url, open = "rb")
   on.exit(close(con), add = TRUE)
-  jsonlite::fromJSON(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
+  .s03json_fromJSON(rawToChar(readBin(con, "raw", n = 64L * 1024L^2)),
                      simplifyVector = TRUE)
 }
 
@@ -48,6 +70,11 @@
 #' @examplesIf nzchar(Sys.getenv("MORIE_DATASETTE_URL"))
 #' dbs <- morie_datasette_databases()
 #' head(dbs$name)
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("MORIE_DATASETTE_URL"))) withAutoprint(\{ # examplesIf}
+#' dbs <- morie_datasette_databases()
+#' head(dbs$name)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
   base <- .morie_datasette_base(base_url)
@@ -81,6 +108,14 @@ morie_datasette_databases <- function(base_url = NULL, timeout = 60) {
 #' tabs <- morie_datasette_read(dbs$name[1],
 #'   sql = "SELECT name FROM sqlite_master WHERE type='table' LIMIT 5")
 #' tabs
+#' @examples
+#' \dontshow{if (nzchar(Sys.getenv("MORIE_DATASETTE_URL"))) withAutoprint(\{ # examplesIf}
+#' dbs <- morie_datasette_databases()
+#' # Peek at the first table of the first database:
+#' tabs <- morie_datasette_read(dbs$name[1],
+#'   sql = "SELECT name FROM sqlite_master WHERE type='table' LIMIT 5")
+#' tabs
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasette_read <- function(db, table = NULL, sql = NULL,
                                  limit = 1000L, base_url = NULL,

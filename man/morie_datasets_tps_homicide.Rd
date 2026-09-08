@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_tps_homicide}
 \alias{morie_datasets_tps_homicide}
-\title{TPS Homicides feed.}
+\title{TPS Homicides feed}
 \usage{
 morie_datasets_tps_homicide(year = NULL, max_features = NULL)
 }
@@ -16,10 +16,10 @@ server-side.}
 A \code{data.frame}.
 }
 \description{
-TPS Homicides feed.
+TPS Homicides feed
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_datasets_tps_homicide(year = 2024, max_features = 5L))
 if (!inherits(res, "try-error")) head(res)
 }

@@ -17,7 +17,18 @@ morie_wavelet_time_series <- function(x, wavelet = "haar", level = NULL) {
   max_lv <- floor(log2(n))
   if (is.null(level)) level <- min(max(max_lv, 1), 6)
   level <- min(level, max_lv)
-  if (wavelet %in% c("haar", "d4", "la8") && n >= 2^level) {
+  ## Only haar/d4/la8 have a native pyramid DWT here. Anything else used to
+  ## fall through to the Haar branch below and return Haar coefficients under
+  ## the caller's chosen name -- a silently wrong basis. (la8 is P&W's "least
+  ## asymmetric" filter, Wavelet Methods for Time Series Analysis p.107.)
+  supported <- c("haar", "d4", "la8")
+  if (!wavelet %in% supported) {
+    stop(sprintf(
+      "wavelet='%s' is not implemented; available: %s. Returning Haar for a non-Haar request would be a silently wrong basis.",
+      wavelet, paste(supported, collapse = ", ")
+    ))
+  }
+  if (wavelet %in% supported && n >= 2^level) {
     # Module 20: native pyramid DWT (periodic boundary).
     N <- 2^ceiling(log2(n))
     fit <- .morie_dsp_dwt(c(y, rep(0, N - n)), filter = wavelet,
@@ -50,7 +61,7 @@ morie_wavelet_time_series <- function(x, wavelet = "haar", level = NULL) {
   energies <- c(sum(cA^2), vapply(cDs, function(c) sum(c^2), numeric(1)))
   list(
     approximation = cA, details = cDs, energies = energies,
-    level = level, n = n, wavelet = "haar",
-    method = "Haar DWT (base R fallback)"
+    level = level, n = n, wavelet = wavelet,
+    method = sprintf("Haar DWT (base R fallback, wavelet=%s)", wavelet)
   )
 }

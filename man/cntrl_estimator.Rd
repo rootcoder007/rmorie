@@ -28,10 +28,12 @@ signature; this R parity targets the index-listed control-variates
 estimator.
 }
 \examples{
-set.seed(5)
-y <- rnorm(100, mean = 2)
-cc <- y + rnorm(100, sd = 0.5)
-res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
-res$estimate
+if (requireNamespace("ranger", quietly = TRUE)) {
+  set.seed(5)
+  y <- rnorm(100, mean = 2)
+  cc <- y + rnorm(100, sd = 0.5)
+  res <- rmorie:::cntrl_estimator(y, cc, mean(cc))
+  res$estimate
+}
 }
 \keyword{internal}

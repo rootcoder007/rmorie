@@ -88,7 +88,7 @@ test_that("morie_fetch_tps errors on an unknown category", {
 
 test_that("morie_fetch_tps writes a CSV from a mocked ArcGIS layer", {
   testthat::local_mocked_bindings(
-    fromJSON = function(txt, ...) {
+    .morie_from_json = function(txt, ...) {
       list(
         features = list(
           list(
@@ -109,7 +109,12 @@ test_that("morie_fetch_tps writes a CSV from a mocked ArcGIS layer", {
         exceededTransferLimit = FALSE
       )
     },
-    .package = "jsonlite"
+    # .morie_from_json is a package internal, so the package has to be
+    # named. Without it local_mocked_bindings() falls back to
+    # dev_package(), which needs pkgload to have loaded a package and
+    # aborts with "No packages loaded with pkgload" whenever the tests
+    # run against an INSTALLED package rather than load_all().
+    .package = "rmorie"
   )
   cdir <- tempfile("tps-")
   out <- morie_fetch_tps("Assault", cache_dir = cdir, overwrite = TRUE)

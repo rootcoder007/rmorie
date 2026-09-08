@@ -3,9 +3,9 @@
 \name{horowitz_helpers}
 \alias{horowitz_helpers}
 \title{Internal helpers shared across the Horowitz semiparametric suite.
-Not exported; consumed by hrz* callables only.}
+Not exported; consumed by hrz* callables only}
 \description{
 Internal helpers shared across the Horowitz semiparametric suite.
-Not exported; consumed by hrz* callables only.
+Not exported; consumed by hrz* callables only
 }
 \keyword{internal}

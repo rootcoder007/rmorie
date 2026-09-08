@@ -14,7 +14,7 @@ morie_spatial_voting_bayesian_unfolding(
 \arguments{
 \item{D}{Respondent-stimulus dissimilarity matrix.}
 
-\item{n_dims}{Latent dimensions. @param n_samples MCMC samples.}
+\item{n_dims}{Latent dimensions.}
 
 \item{n_samples}{Integer; posterior-sample count.}
 
@@ -29,11 +29,13 @@ Metropolis sampler when smacof is absent).
 Bayesian unfolding (stub) -- Bakker & Poole sampler
 }
 \examples{
-\donttest{
-# Random positive respondent-stimulus dissimilarities; an all-zero
-# matrix is degenerate for the unfolding transform.
-set.seed(1)
-morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+if (requireNamespace("smacof", quietly = TRUE)) {
+  \donttest{
+  # Random positive respondent-stimulus dissimilarities; an all-zero
+  # matrix is degenerate for the unfolding transform.
+  set.seed(1)
+  morie_spatial_voting_bayesian_unfolding(matrix(runif(12, 0.5, 2), 3, 4))
+  }
 }
 }
 \references{

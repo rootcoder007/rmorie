@@ -44,7 +44,7 @@ base URL and returns the raw result list (\code{count},
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 res <- morie_ingest_ckan_package_search(
   "https://open.canada.ca/data",
   query = "corrections"

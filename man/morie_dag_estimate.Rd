@@ -16,7 +16,7 @@ morie_dag_estimate(
 \item{data}{Data frame containing the observed nodes.}
 
 \item{method}{\code{"backdoor.aipw"} (default), \code{"backdoor.linear"}, or
-\code{"backdoor.dml"} — all native estimators.}
+\code{"backdoor.dml"} -- all native estimators.}
 }
 \value{
 The chosen estimator's result list, plus \code{adjustment_set}
@@ -27,7 +27,8 @@ Estimate the identified effect from data
 }
 \examples{
 set.seed(1)
-z <- rnorm(400); x <- rbinom(400, 1, plogis(z))
+z <- rnorm(400)
+x <- rbinom(400, 1, plogis(z))
 y <- 0.8 * x + z + rnorm(400)
 df <- data.frame(z = z, x = x, y = y)
 g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_ckan_search}
 \alias{morie_datasets_ckan_search}
-\title{Search a CKAN open-data portal by free-text query.}
+\title{Search a CKAN open-data portal by free-text query}
 \usage{
 morie_datasets_ckan_search(portal, query, rows = 50L)
 }
@@ -21,10 +21,11 @@ Examples: \code{"https://open.canada.ca/data"}, \code{"https://data.ontario.ca"}
 \code{"https://data.gov.uk"}, \code{"https://data.europa.eu"}.
 }
 \examples{
-\donttest{
+\dontrun{
 out <- try(morie_datasets_ckan_search(
   portal = "https://open.canada.ca/data",
-  query = "policing", rows = 3L))
+  query = "policing", rows = 3L
+))
 if (!inherits(out, "try-error")) head(out)
 }
 }

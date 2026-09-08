@@ -1,3 +1,112 @@
+# rmorie 1.2.0 - 2026-09-08
+
+## Native specializations: the dependency-light release
+
+This release merges the `feat/native-specializations` line (650 commits).
+Every estimator that previously delegated to a heavy runtime dependency
+now has a native implementation, cross-validated against the package it
+replaces and benchmarked: double-ML runs 40-61x faster than `DoubleML`,
+the R-learner causal forest 2.9x faster than `grf`, optimal matching
+beats `optmatch`'s own optimum, and design-based GLM matches `svyglm` to
+1e-6. The full matrix is green on Windows, macOS, Ubuntu (release,
+devel, oldrel-1) and a true Debian bookworm container.
+
+## Wave 3: every ledger module implemented three-way
+
+* The 567-module wave-3 ledger reports zero template stubs: each module
+  has a Python arm, a morie R arm and an rmorie R arm, executed on
+  identical inputs and compared key by key at twelve digits, with
+  falsifiable anchors checked in every arm. 49 suites, 23,270 quantities,
+  0 differing (2026-08-16).
+* Nineteen modules are deliberately held with a written reason each
+  (architecture-with-trained-weights, fabricated-by-construction, or a
+  primary source that does not state the rule); none is shipped as a stub.
+
+## Native JSON codec, complete (2026-09-02)
+
+* `morie_jsonlt_*` is now jsonlite's whole public surface, written in base
+  R and pinned to jsonlite byte-for-byte by `tests/testthat/test-jsonlt-parity.R`
+  whenever jsonlite is installed (1,742 grid cases, 0 differences): every
+  `toJSON()` option including `rownames`, `keep_vec_names`, `json_verbatim`,
+  `always_decimal`, `time_format`, `UTC`, `no_dots`; jsonlite's number
+  formatting (`num_to_char` / `modp_dtoa2` rounding, `digits = NA` and
+  `I(n)`); the `fromJSON()` simplifier (record lists, matrices and
+  higher arrays, `$date`, `_row`, `"NA"`-string vectors, `bigint_as_char`);
+  yajl-layout `prettify()` / `minify()`; `validate()`; `serializeJSON()` /
+  `unserializeJSON()` for every storage mode; `base64_enc/dec` (+url);
+  `read_json` / `write_json` / `parse_json`; ndjson `stream_in` /
+  `stream_out`; `rbind_pages`.
+* The package's own readers route through this codec (`.morie_from_json`,
+  `.s03json_*`), so no code path needs jsonlite at run time; jsonlite stays
+  in Suggests for the parity test only.
+
+## Native hash family (digest's surface, 2026-09-02)
+
+* `morie_digest()`, `morie_hmac()`, `morie_make_raw()`, `morie_digest2int()`,
+  `morie_sha1()` (with every class method) and `morie_aes()` reproduce the
+  digest package's API and bytes: MD5, SHA-1, SHA-224/256/384/512, CRC-32,
+  CRC-32C, xxHash32/64, MurmurHash3 x86_32 and Jenkins one-at-a-time in
+  `src/morie_digest.cpp`, written from their specifications; AES-128/192/256
+  in ECB/CBC/CFB/CTR. `serialize()` header skipping, `length`/`skip`
+  windows, `raw = TRUE`, `seed`, `file = TRUE` and the error modes follow
+  digest exactly. `tests/testthat/test-digest-parity.R` checks the
+  published test vectors always and every routine against digest itself
+  when it is installed. spookyhash, blake3 and xxh3 are not provided (no
+  specification to implement from) and say so when requested.
+
+## Documentation reconciliation (2026-09-01)
+
+* `man/` and `NAMESPACE` are generated from the `R/` roxygen again. The
+  docs marathon had written about 1,950 `\examples{}` blocks straight into
+  `.Rd` files and hand-appended exports to `NAMESPACE`; both were lifted
+  back into the sources (`@examples` on the function's block, exports
+  only from `@export`), so `roxygenise()` reproduces the tree exactly.
+* 25 human-written roxygen blocks had been orphaned above helper
+  functions and were silently merged into the next helper's page (roxygen
+  joins every `#'` line between two expressions). They are re-attached to
+  the functions they document (`morie_estimate_aipw()`, `morie_mtr2sx()`,
+  `morie_haldane()`, `.fit_propensity()` and others); the stray export
+  names that the merge produced are gone.
+* Documentation for the compiled entry points lives in `R/rcpp_docs.R`
+  (documentation-only stubs); `R/RcppExports.R` is pure generated glue
+  again, so `Rcpp::compileAttributes()` no longer deletes any docs.
+* `rmorie` no longer pulls in 'jsonlite' or 'digest' through
+  rmoriebricklayer: rmoriebricklayer 0.3.8 hashes with its compiled
+  SHA-256 core and reads/writes JSON with a native codec. The stale
+  `requireNamespace("jsonlite")` guard in `morie_fetch_tps()` is removed.
+
+## Documentation marathon
+
+* Every function definition in `R/` now has roxygen, an `.Rd` page and a
+  `\value`; 0 unparseable pages, 0 `checkRd` findings. `@param` text is
+  derived from the body and quotes its evidence. Executable `\examples`
+  were added in execution-gated batches; network loaders use
+  `\donttest{}` with real arguments. Gaps that remain are counted, not
+  hidden.
+
+## Fixed (found by executing paths that had never run)
+
+* `changepoint_rjmcmc()`: the uniform stream returned the same number
+  forever (rmorie), the birth/death slices used descending colons at
+  k = 0, the interval search stopped one edge short, and the reverse-move
+  probability indexed one entry low (log 0, births never accepted). The
+  sampler is now byte-identical across the two R arms and mirrors the
+  Python arm: same stream, same k posterior.
+* `morie_survnnr_fit()`: backprop took an outer product against a nested
+  list; the input activation was stored as `list(list(a))`.
+* `mqtmpl` `method = "em"`: was a Haley-Knott regression on a genotype
+  probability that ignored each individual's flanking markers (every row
+  identical, LOD all NA). Now the Lander-Botstein EM the Python arm
+  implements, per-individual backcross probabilities, cM positions;
+  the three arms agree to 1e-10 on a shared anchor.
+* Native Parquet reader: an OPTIONAL BYTE_ARRAY column read its own
+  definition levels as its first string (`"d\001"`) and dropped its last
+  row; the schema's repetition type now decides and 1-bit RLE/bit-packed
+  levels are decoded and spliced (nulls become `NA`).
+* `VERSION_INVENTORY.csv` regenerated (the drift check would have failed).
+
+* `morie_estimate_plr()` reported its method as "(morie native)" inside rmorie; it is "(rmorie native)".
+
 # rmorie 1.1.6 - 2026-07-22
 
 ## Patch release: 07-22 hardening + CRAN prep (lockstep with morie 1.1.6)

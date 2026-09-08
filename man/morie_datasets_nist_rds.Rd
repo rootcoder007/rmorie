@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_nist_rds}
 \alias{morie_datasets_nist_rds}
-\title{NIST Reference Datasets (RDS) catalog metadata.}
+\title{NIST Reference Datasets (RDS) catalog metadata}
 \usage{
 morie_datasets_nist_rds(
   dataset_id = NULL,
@@ -24,7 +24,7 @@ morie_datasets_nist_rds(
 A \code{data.frame} with the NIST RDS catalog schema.
 }
 \description{
-NIST Reference Datasets (RDS) catalog metadata.
+NIST Reference Datasets (RDS) catalog metadata
 }
 \examples{
 \dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}

@@ -23,6 +23,40 @@
 #' d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
 #' nrow(d)
 #' head(d[, c("soda_id", "type")])
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' d <- morie_datasets_nyc_opendata_bulk_layers(offline = TRUE)
+#' nrow(d)
+#' head(d[, c("soda_id", "type")])
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_chicago_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_toronto_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_ottawa_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_montreal_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' cat_df <- morie_datasets_vancouver_opendata_bulk_layers()
+#' head(cat_df)
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_opendata_bulk_layers <- function(offline = TRUE) {
   .morie_bulk_fixture("nyc_opendata_bulk_catalog.csv", offline)
@@ -125,25 +159,29 @@ morie_datasets_vancouver_opendata_bulk_layers <- function(offline = TRUE) {
 #' @param limit Page size.
 #' @return A `data.frame` of records.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # NYPD arrests dataset (SODA id verified live 2026-07)
 #' df <- try(morie_datasets_nyc_socrata_by_id("8h9b-rp9u", limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
 #' @export
 morie_datasets_nyc_socrata_by_id <- function(soda_id,
-                                               limit = 1000L) {
-  url <- sprintf("https://data.cityofnewyork.us/resource/%s.json?$limit=%d",
-                  soda_id, as.integer(limit))
+                                             limit = 1000L) {
+  url <- sprintf(
+    "https://data.cityofnewyork.us/resource/%s.json?$limit=%d",
+    soda_id, as.integer(limit)
+  )
   df <- .morie_dataset_http_json(url)
-  for (j in rev(seq_along(df)))
+  for (j in rev(seq_along(df))) {
     if (is.list(df[[j]])) df[[j]] <- NULL
+  }
   df
 }
 
 #' Fetch a Chicago Open Data Socrata dataset by ID
 #' @rdname morie_datasets_nyc_socrata_by_id
-#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the data is unavailable offline).
+#' @return A \code{data.frame} of the requested dataset (a 0-row typed frame when the
+#' data is unavailable offline).
 #' @examples
 #' \donttest{
 #' # Chicago crimes dataset (SODA id verified live 2026-07)
@@ -152,12 +190,15 @@ morie_datasets_nyc_socrata_by_id <- function(soda_id,
 #' }
 #' @export
 morie_datasets_chicago_socrata_by_id <- function(soda_id,
-                                                   limit = 1000L) {
-  url <- sprintf("https://data.cityofchicago.org/resource/%s.json?$limit=%d",
-                  soda_id, as.integer(limit))
+                                                 limit = 1000L) {
+  url <- sprintf(
+    "https://data.cityofchicago.org/resource/%s.json?$limit=%d",
+    soda_id, as.integer(limit)
+  )
   df <- .morie_dataset_http_json(url)
-  for (j in rev(seq_along(df)))
+  for (j in rev(seq_along(df))) {
     if (is.list(df[[j]])) df[[j]] <- NULL
+  }
   df
 }
 
@@ -165,12 +206,17 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
 #' @noRd
 .morie_bulk_fixture <- function(fname, offline) {
   if (!isTRUE(offline)) {
-    stop(sprintf(paste0(
-      "Live re-harvest of '%s' is not implemented as a public API. ",
-      "Use the bundled snapshot via offline = TRUE; ",
-      "or call the underlying Socrata/CKAN/Hub catalog endpoint directly."),
-      fname),
-      call. = FALSE)
+    stop(
+      sprintf(
+        paste0(
+          "Live re-harvest of '%s' is not implemented as a public API. ",
+          "Use the bundled snapshot via offline = TRUE; ",
+          "or call the underlying Socrata/CKAN/Hub catalog endpoint directly."
+        ),
+        fname
+      ),
+      call. = FALSE
+    )
   }
   # Look in rmorie first (tiny CSVs ship here), then rmoriedata
   # (heavy bulk catalogs ship there). Return an empty data.frame on
@@ -180,11 +226,14 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
   if (!nzchar(path)) {
-    warning(sprintf(
-      "bulk catalog '%s' not bundled; returning empty data.frame. %s",
-      fname,
-      "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"),
-      call. = FALSE)
+    warning(
+      sprintf(
+        "bulk catalog '%s' not bundled; returning empty data.frame. %s",
+        fname,
+        "Install the rmoriedata companion: remotes::install_github('rootcoder007/rmoriedata')"
+      ),
+      call. = FALSE
+    )
     return(data.frame())
   }
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = FALSE)

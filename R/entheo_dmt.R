@@ -25,23 +25,25 @@
 # Module-level constants
 # ---------------------------------------------------------------------------
 
-#' EEG cortical regions used by the Timmermann 2023 IRASA pool.
+#' EEG cortical regions used by the Timmermann 2023 IRASA pool
 #' @keywords internal
-.MORIE_ENTHEO_EEG_REGIONS <- c("Central", "Frontal", "Occipital",
-                                "Parietal", "Temporal")
+.MORIE_ENTHEO_EEG_REGIONS <- c(
+  "Central", "Frontal", "Occipital",
+  "Parietal", "Temporal"
+)
 
-#' Canonical EEG bands (delta..gamma) ordered by ascending frequency.
+#' Canonical EEG bands (delta..gamma) ordered by ascending frequency
 #' @keywords internal
 .MORIE_ENTHEO_EEG_BANDS <- c("delta", "theta", "alpha", "beta", "gamma")
 
 #' Canonical band edges (Hz). Matches Rangayyan & Krishnan (2024) Ch. 5
-#' and the Timmermann 2023 Methods.
+#' and the Timmermann 2023 Methods
 #' @keywords internal
 .MORIE_ENTHEO_DEFAULT_BANDS <- list(
-  list(name = "delta", lo = 0.5,  hi =  4.0),
-  list(name = "theta", lo = 4.0,  hi =  8.0),
-  list(name = "alpha", lo = 8.0,  hi = 13.0),
-  list(name = "beta",  lo = 13.0, hi = 30.0),
+  list(name = "delta", lo = 0.5, hi = 4.0),
+  list(name = "theta", lo = 4.0, hi = 8.0),
+  list(name = "alpha", lo = 8.0, hi = 13.0),
+  list(name = "beta", lo = 13.0, hi = 30.0),
   list(name = "gamma", lo = 30.0, hi = 80.0)
 )
 
@@ -50,6 +52,8 @@
 #' Parity with Python ``DATASET_ROOT`` / ``_require_root``.
 #' @keywords internal
 #' @return A character scalar: the resolved DMT-data root directory.
+#' @examples
+#' rmorie:::.morie_entheo_dmt_root()
 .morie_entheo_dmt_root <- function() {
   cand <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
   if (!nzchar(cand)) {
@@ -58,9 +62,11 @@
   if (dir.exists(cand)) cand else NULL
 }
 
-#' Require the dataset root or stop with a curated error.
+#' Require the dataset root or stop with a curated error
 #' @keywords internal
 #' @return A character scalar: the DMT-data root directory (errors if it cannot be resolved).
+#' @examples
+#' rmorie:::.morie_entheo_require_root()
 .morie_entheo_require_root <- function() {
   root <- .morie_entheo_dmt_root()
   if (is.null(root)) {
@@ -74,9 +80,11 @@
   root
 }
 
-#' Lightweight .mat loader (delegates to R.matlab).
+#' Lightweight .mat loader (delegates to R.matlab)
+#' @param path See Usage.
 #' @keywords internal
-#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file at \code{path}.
+#' @return A named \code{list} of the variables loaded from the MATLAB \code{.mat} file
+#' at \code{path}.
 .morie_entheo_loadmat <- function(path) {
   if (!requireNamespace("R.matlab", quietly = TRUE)) {
     stop(
@@ -108,9 +116,13 @@
 #' via EEG-fMRI. PNAS 120(13): e2218949120.
 morie_entheo_available_subjects <- function() {
   root <- .morie_entheo_dmt_root()
-  if (is.null(root)) return(integer(0))
+  if (is.null(root)) {
+    return(integer(0))
+  }
   fmri_dir <- file.path(root, "fMRI")
-  if (!dir.exists(fmri_dir)) return(integer(0))
+  if (!dir.exists(fmri_dir)) {
+    return(integer(0))
+  }
   files <- list.files(fmri_dir, pattern = "^LongS\\d+(DMT|PCB)\\.mat$")
   ids <- as.integer(sub("^LongS(\\d+)(DMT|PCB)\\.mat$", "\\1", files))
   sort(unique(ids))
@@ -126,7 +138,9 @@ morie_entheo_available_subjects <- function() {
 #' @param condition character: "DMT" (default) or "PCB".
 #' @return numeric matrix of shape (112, 840).
 #' @examples
-#' \donttest{try(morie_entheo_load_fmri_subject(1L, "DMT"))}
+#' \donttest{
+#' try(morie_entheo_load_fmri_subject(1L, "DMT"))
+#' }
 #' @export
 morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
   condition <- match.arg(condition, c("DMT", "PCB"))
@@ -162,7 +176,9 @@ morie_entheo_load_fmri_subject <- function(subject_id, condition = "DMT") {
 #'   \code{regdiff}; each is a 3-D array of shape
 #'   (14 subj, 840 TRs, 5 bands).
 #' @examples
-#' \donttest{try(morie_entheo_load_eeg_region("Frontal"))}
+#' \donttest{
+#' try(morie_entheo_load_eeg_region("Frontal"))
+#' }
 #' @export
 morie_entheo_load_eeg_region <- function(region) {
   region <- match.arg(region, .MORIE_ENTHEO_EEG_REGIONS)
@@ -193,7 +209,9 @@ morie_entheo_load_eeg_region <- function(region) {
 #' @return named list with \code{title}, \code{summary_lines},
 #'   \code{interpretation}, \code{payload}.
 #' @examples
-#' \donttest{try(morie_entheo_dataset_overview())}
+#' \donttest{
+#' try(morie_entheo_dataset_overview())
+#' }
 #' @export
 morie_entheo_dataset_overview <- function() {
   root <- .morie_entheo_require_root()
@@ -228,11 +246,18 @@ morie_entheo_dataset_overview <- function() {
 # Layer 2: analyses
 # ---------------------------------------------------------------------------
 
-#' Trapezoidal integration on a 1-D grid.
+#' Trapezoidal integration on a 1-D grid
+#' @param y See Usage.
+#' @param x See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the trapezoidal integral of \code{y} over \code{x}.
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::.morie_entheo_trapz(V, V)
 .morie_entheo_trapz <- function(y, x) {
-  if (length(y) < 2L) return(NA_real_)
+  if (length(y) < 2L) {
+    return(NA_real_)
+  }
   sum(diff(x) * (y[-1] + y[-length(y)]) / 2)
 }
 
@@ -265,9 +290,9 @@ morie_entheo_dataset_overview <- function() {
 #' res$payload$rows[[1]]
 #' @export
 morie_entheo_spectral_band_power <- function(signal,
-                                              fs = 200,
-                                              bands = .MORIE_ENTHEO_DEFAULT_BANDS,
-                                              nperseg = NULL) {
+                                             fs = 200,
+                                             bands = .MORIE_ENTHEO_DEFAULT_BANDS,
+                                             nperseg = NULL) {
   sig <- as.numeric(signal)
   if (length(sig) < 16L) {
     return(list(
@@ -307,8 +332,10 @@ morie_entheo_spectral_band_power <- function(signal,
       sprintf("abs=%.4g, rel=%.3f", r$abs_power, r$rel_power)
     )
   })
-  summary_lines <- c(summary_lines,
-                     list(list("Total broadband power", round(total, 6))))
+  summary_lines <- c(
+    summary_lines,
+    list(list("Total broadband power", round(total, 6)))
+  )
   list(
     title = "EEG band-power decomposition (Welch)",
     summary_lines = summary_lines,
@@ -350,12 +377,12 @@ morie_entheo_spectral_band_power <- function(signal,
 #' res$payload$n_windows
 #' @export
 morie_entheo_dynamic_functional_connectivity <- function(bold,
-                                                          window = 30L,
-                                                          step = 5L) {
+                                                         window = 30L,
+                                                         step = 5L) {
   bold <- as.matrix(bold)
   storage.mode(bold) <- "double"
   if (length(dim(bold)) != 2L ||
-      nrow(bold) < 2L || ncol(bold) < window + step) {
+    nrow(bold) < 2L || ncol(bold) < window + step) {
     return(list(
       title = "Dynamic resting-state functional connectivity (dRSFC)",
       warnings = sprintf(
@@ -380,7 +407,7 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
     cube[i, ] <- cmat[iu]
   }
   mean_per_pair <- colMeans(cube)
-  std_per_pair  <- apply(cube, 2L, stats::sd)
+  std_per_pair <- apply(cube, 2L, stats::sd)
   list(
     title = "Dynamic resting-state functional connectivity (dRSFC)",
     summary_lines = list(
@@ -388,10 +415,14 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
       list("Window / step (TR)", sprintf("%d / %d", window, step)),
       list("Number of windows", n_windows),
       list("Number of region pairs", n_pairs),
-      list("Mean across windows of mean correlation",
-           round(mean(mean_per_pair), 4)),
-      list("Mean across windows of std correlation",
-           round(mean(std_per_pair), 4))
+      list(
+        "Mean across windows of mean correlation",
+        round(mean(mean_per_pair), 4)
+      ),
+      list(
+        "Mean across windows of std correlation",
+        round(mean(std_per_pair), 4)
+      )
     ),
     interpretation = paste(
       "Sliding-window Pearson FC mirrors Allen et al. (2014) and the",
@@ -402,18 +433,24 @@ morie_entheo_dynamic_functional_connectivity <- function(bold,
     payload = list(
       n_windows = n_windows, n_pairs = n_pairs,
       mean_per_pair = utils::head(mean_per_pair, 50L),
-      std_per_pair  = utils::head(std_per_pair,  50L),
+      std_per_pair = utils::head(std_per_pair, 50L),
       cube = cube
     )
   )
 }
 
-#' Lempel-Ziv (LZ76) complexity helper.
+#' Lempel-Ziv (LZ76) complexity helper
+#' @param b See Usage.
 #' @keywords internal
 #' @return A numeric scalar: the Lempel-Ziv (LZ76) complexity of the binary sequence \code{b}.
+#' @examples
+#' V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+#' rmorie:::.morie_entheo_lz76(V)
 .morie_entheo_lz76 <- function(b) {
   n <- length(b)
-  if (n == 0L) return(0L)
+  if (n == 0L) {
+    return(0L)
+  }
   i <- 1L
   c <- 1L
   l <- 1L
@@ -520,8 +557,8 @@ morie_entheo_lz_complexity <- function(signal, threshold = NULL) {
 #' length(res$payload$rows)
 #' @export
 morie_entheo_analyze_subject <- function(subject_id,
-                                          conditions = c("DMT", "PCB"),
-                                          window = 30L, step = 5L) {
+                                         conditions = c("DMT", "PCB"),
+                                         window = 30L, step = 5L) {
   rows <- list()
   for (cond in conditions) {
     bold <- tryCatch(
@@ -531,15 +568,18 @@ morie_entheo_analyze_subject <- function(subject_id,
     if (is.null(bold)) {
       rows[[length(rows) + 1L]] <- list(
         subject = subject_id, condition = cond,
-        error = sprintf("could not load LongS%02d%s.mat",
-                        as.integer(subject_id), cond)
+        error = sprintf(
+          "could not load LongS%02d%s.mat",
+          as.integer(subject_id), cond
+        )
       )
       next
     }
-    gs <- colMeans(bold)  # global signal = mean across regions
+    gs <- colMeans(bold) # global signal = mean across regions
     lz_res <- morie_entheo_lz_complexity(gs)
     dfc <- morie_entheo_dynamic_functional_connectivity(
-      bold, window = window, step = step
+      bold,
+      window = window, step = step
     )
     rows[[length(rows) + 1L]] <- list(
       subject = subject_id, condition = cond,
@@ -565,8 +605,10 @@ morie_entheo_analyze_subject <- function(subject_id,
     ),
     summary_lines = list(
       list("Subject", as.integer(subject_id)),
-      list("Conditions evaluated",
-           vapply(rows[ok_conds], function(r) r$condition, character(1)))
+      list(
+        "Conditions evaluated",
+        vapply(rows[ok_conds], function(r) r$condition, character(1))
+      )
     ),
     interpretation = paste(
       "DMT-PCB within-subject contrast on global-signal LZ and mean",
@@ -587,7 +629,7 @@ morie_entheo_analyze_subject <- function(subject_id,
 # 3MMM.29 (2026-05-25): on-demand DMT_Imaging clone
 # ===========================================================================
 
-#' Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache.
+#' Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache
 #'
 #' `morie_entheo_clone_dmt_imaging()` shells out to `git clone` to
 #' fetch the open-source DMT_Imaging dataset published by Christopher
@@ -622,8 +664,8 @@ morie_entheo_analyze_subject <- function(subject_id,
 #' }
 #' @export
 morie_entheo_clone_dmt_imaging <- function(root = NULL,
-                                            overwrite = FALSE,
-                                            branch = NULL) {
+                                           overwrite = FALSE,
+                                           branch = NULL) {
   if (is.null(root)) {
     root <- Sys.getenv("MORIE_DMT_IMAGING_ROOT", "")
     if (!nzchar(root)) {
@@ -636,7 +678,8 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
     } else {
       message(sprintf(
         "DMT_Imaging already present at %s; pass overwrite=TRUE to refresh.",
-        root))
+        root
+      ))
       return(invisible(root))
     }
   }
@@ -644,13 +687,16 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
   if (!dir.exists(parent)) dir.create(parent, recursive = TRUE)
   if (Sys.which("git") == "") {
     stop("git not found on PATH; install git to clone DMT_Imaging.",
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   args <- c("clone", "--depth", "1")
   if (!is.null(branch)) {
     if (!.morie_valid_git_ref(as.character(branch))) {
       stop("invalid branch name: ", branch,
-           " (must match ^[A-Za-z0-9][A-Za-z0-9._/-]*$)", call. = FALSE)
+        " (must match ^[A-Za-z0-9][A-Za-z0-9._/-]*$)",
+        call. = FALSE
+      )
     }
     args <- c(args, "--branch", as.character(branch))
   }
@@ -659,7 +705,8 @@ morie_entheo_clone_dmt_imaging <- function(root = NULL,
   status <- system2("git", args, stdout = TRUE, stderr = TRUE)
   if (!dir.exists(root)) {
     stop("git clone failed: ", paste(status, collapse = "\n"),
-         call. = FALSE)
+      call. = FALSE
+    )
   }
   invisible(root)
 }

@@ -3,7 +3,7 @@
 \name{morie_survey_complex_glm}
 \alias{morie_survey_complex_glm}
 \title{Complex-survey GLM constructor (single-shot wrapper that builds a design
-and fits a \code{svyglm} in one call). Cluster-robust SEs via the design.}
+and fits a \code{svyglm} in one call). Cluster-robust SEs via the design}
 \usage{
 morie_survey_complex_glm(
   df,
@@ -38,7 +38,7 @@ A \code{svyglm} object (survey-weighted GLM fit).
 }
 \description{
 Complex-survey GLM constructor (single-shot wrapper that builds a design
-and fits a \code{svyglm} in one call). Cluster-robust SEs via the design.
+and fits a \code{svyglm} in one call). Cluster-robust SEs via the design
 }
 \examples{
 \dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}

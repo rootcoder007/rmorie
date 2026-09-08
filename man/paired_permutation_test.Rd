@@ -23,6 +23,7 @@ paired_permutation_test(
 \item{alternative}{\code{"two-sided"}, \code{"greater"}, \code{"less"}.}
 
 \item{seed}{Random seed.}
+
 }
 \value{
 A \code{morie_permutation_test_result}.
@@ -38,7 +39,8 @@ distribution.
 set.seed(1)
 x <- rnorm(25)
 str(paired_permutation_test(x, x + rnorm(25, 0.3),
-                            n_permutations = 499L), max.level = 1)
+  n_permutations = 499L
+), max.level = 1)
 }
 \seealso{
 \code{coin::symmetry_test}.

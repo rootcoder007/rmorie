@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998).
+#' Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998)
 #'
 #' @param x Numeric data vector.
 #' @param pi Numeric prior inclusion probability (default 0.5).

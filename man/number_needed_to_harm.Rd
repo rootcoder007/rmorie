@@ -2,7 +2,7 @@
 % Please edit documentation in R/effect_sizes.R
 \name{number_needed_to_harm}
 \alias{number_needed_to_harm}
-\title{Number needed to harm (NNH) — sign-reversed NNT}
+\title{Number needed to harm (NNH) -- sign-reversed NNT}
 \usage{
 number_needed_to_harm(a, b, c, d, confidence = 0.95)
 }
@@ -11,17 +11,20 @@ number_needed_to_harm(a, b, c, d, confidence = 0.95)
 b = exposed without, c = unexposed with outcome, d = unexposed without.}
 
 \item{confidence}{Confidence level. Default 0.95.}
+
+
+
 }
 \value{
 A \code{morie_effect_size}.
 }
 \description{
-Number needed to harm (NNH) — sign-reversed NNT
+Number needed to harm (NNH) -- sign-reversed NNT
 }
 \examples{
 # Exposure raises the bad outcome from 10\% to 20\% -> NNH = 1/0.10 = 10.
 res <- number_needed_to_harm(20, 80, 10, 90)
-res$estimate                 # people exposed to cause one extra harm
+res$estimate # people exposed to cause one extra harm
 
 # NNH is the reciprocal of the (absolute) risk difference, like NNT but
 # for a harmful exposure.

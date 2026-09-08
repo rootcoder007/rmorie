@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Bernstein-polynomial sieve density estimator (Petrone 1999).
+#' Bernstein-polynomial sieve density estimator (Petrone 1999)
 #'
 #' @param x Numeric data vector.
 #' @param K Optional integer sieve degree (default round(n^(1/3))).

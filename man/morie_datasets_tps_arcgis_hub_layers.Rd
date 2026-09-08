@@ -16,8 +16,8 @@ A \code{data.frame} with columns \code{hub_id}, \code{title}, \code{type},
 \code{feature_server_url}, \code{owner}, \code{tags}, \code{snippet}.
 }
 \description{
-Sibling discovery helper to \code{\link[=morie_datasets_external_socrata_layers]{morie_datasets_external_socrata_layers()}}
-and \code{\link[=morie_datasets_ontario_ckan_layers]{morie_datasets_ontario_ckan_layers()}}, covering all 71 datasets
+Sibling discovery helper to \code{morie_datasets_external_socrata_layers()}
+and \code{morie_datasets_ontario_ckan_layers()}, covering all 71 datasets
 currently published on \code{data.tps.ca}.
 }
 \details{
@@ -56,7 +56,7 @@ Calls for Service Attended.}
 \examples{
 \dontshow{if (nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 cat <- morie_datasets_tps_arcgis_hub_layers()
-nrow(cat)        # 71
+nrow(cat) # 71
 head(cat$title)
 \dontshow{\}) # examplesIf}
 }

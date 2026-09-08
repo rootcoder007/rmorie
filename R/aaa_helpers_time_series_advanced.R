@@ -1,10 +1,11 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 #' Internal helpers shared across the time-series-advanced suite.
-#' Not exported; consumed by garch/midas/etc callables only.
+#' Not exported; consumed by garch/midas/etc callables only
 #' @keywords internal
 #' @name time_series_advanced_helpers
-#' @importFrom stats var sd lm coef residuals fitted lsfit fft acf arima ar nlminb pnorm dnorm cor decompose ts filter quantile
+#' @importFrom stats var sd lm coef residuals fitted lsfit fft acf arima ar nlminb pnorm
+#' dnorm cor decompose ts filter quantile
 NULL
 
 # Null-coalescing helper used internally by Johansen fallback critical

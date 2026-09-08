@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_a01_ruhela_alt_age}
 \alias{morie_otis_analyze_a01_ruhela_alt_age}
 \alias{morie_otis_analyze_a01_mrm_alt_age}
-\title{a01 alt-T Ruhela: Age 50+ -> vm count.}
+\title{a01 alt-T Ruhela: Age 50+ -> vm count}
 \usage{
 morie_otis_analyze_a01_ruhela_alt_age(data = NULL, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_a01_mrm_alt_age(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-a01 alt-T Ruhela: Age 50+ -> vm count.
+a01 alt-T Ruhela: Age 50+ -> vm count
 }
 \examples{
 \donttest{ morie_otis_analyze_a01_ruhela_alt_age() }

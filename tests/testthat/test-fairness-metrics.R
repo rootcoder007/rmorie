@@ -21,7 +21,8 @@ make_fair_df <- function(n = 200, seed = 1) {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_disparate_impact returns rich result", {
-  set.seed(1); d <- make_fair_df()
+  set.seed(1)
+  d <- make_fair_df()
   r <- morie_fairness_disparate_impact(d$y_pred, d$group, privileged = "A")
   expect_true(is.list(r))
   expect_true("value" %in% names(r))
@@ -32,7 +33,8 @@ test_that("morie_fairness_disparate_impact returns rich result", {
 })
 
 test_that("morie_fairness_disparate_impact infers privileged with warning", {
-  set.seed(1); d <- make_fair_df()
+  set.seed(1)
+  d <- make_fair_df()
   r <- morie_fairness_disparate_impact(d$y_pred, d$group)
   expect_true(length(r$warnings) >= 1L)
   expect_true(nzchar(r$privileged))
@@ -44,7 +46,8 @@ test_that("morie_fairness_disparate_impact errors on single group", {
 })
 
 test_that("morie_fairness_disparate_impact errors on bad privileged", {
-  set.seed(1); d <- make_fair_df()
+  set.seed(1)
+  d <- make_fair_df()
   expect_error(morie_fairness_disparate_impact(d$y_pred, d$group, privileged = "Z"),
                "not found")
 })
@@ -72,7 +75,8 @@ test_that("morie_fairness_disparate_impact errors on empty", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_demographic_parity returns gap structure", {
-  set.seed(2); d <- make_fair_df()
+  set.seed(2)
+  d <- make_fair_df()
   r <- morie_fairness_demographic_parity(d$y_pred, d$group, privileged = "A")
   expect_true(is.list(r))
   expect_true(is.finite(r$value))
@@ -88,7 +92,8 @@ test_that("morie_fairness_demographic_parity zero gap when identical", {
 })
 
 test_that("morie_fairness_demographic_parity inferred ref emits warning", {
-  set.seed(3); d <- make_fair_df()
+  set.seed(3)
+  d <- make_fair_df()
   r <- morie_fairness_demographic_parity(d$y_pred, d$group)
   expect_true(length(r$warnings) >= 1L)
 })
@@ -98,7 +103,8 @@ test_that("morie_fairness_demographic_parity inferred ref emits warning", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_equalized_odds returns TPR/FPR gaps", {
-  set.seed(4); d <- make_fair_df()
+  set.seed(4)
+  d <- make_fair_df()
   r <- morie_fairness_equalized_odds(d$y_true, d$y_pred, d$group,
                                      privileged = "A")
   expect_true(is.list(r))
@@ -126,7 +132,8 @@ test_that("morie_fairness_equalized_odds warns on missing-positive group", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_average_odds_difference returns AOD", {
-  set.seed(5); d <- make_fair_df()
+  set.seed(5)
+  d <- make_fair_df()
   r <- morie_fairness_average_odds_difference(
     d$y_true, d$y_pred, d$group, privileged = "A"
   )
@@ -178,7 +185,8 @@ test_that("morie_fairness_gini handles all-zero", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_bias_amplification returns BAS", {
-  set.seed(6); d <- make_fair_df()
+  set.seed(6)
+  d <- make_fair_df()
   r <- morie_fairness_bias_amplification(d$y_pred, d$group, privileged = "A")
   expect_true(is.list(r))
   expect_true(is.finite(r$value))
@@ -197,7 +205,8 @@ test_that("morie_fairness_bias_amplification zero on parity", {
 # ---------------------------------------------------------------------------
 
 test_that("printing a fairness result runs", {
-  set.seed(7); d <- make_fair_df()
+  set.seed(7)
+  d <- make_fair_df()
   r <- morie_fairness_demographic_parity(d$y_pred, d$group, privileged = "A")
   # plain list -> use default print without error
   expect_silent({ invisible(capture.output(print(r))) })

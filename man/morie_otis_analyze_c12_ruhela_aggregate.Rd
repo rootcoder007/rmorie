@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_c12_ruhela_aggregate}
 \alias{morie_otis_analyze_c12_ruhela_aggregate}
 \alias{morie_otis_analyze_c12_mrm_aggregate}
-\title{c12 aggregate Ruhela: Female -> median RC days (by region).}
+\title{c12 aggregate Ruhela: Female -> median RC days (by region)}
 \usage{
 morie_otis_analyze_c12_ruhela_aggregate(data, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_c12_mrm_aggregate(data, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-c12 aggregate Ruhela: Female -> median RC days (by region).
+c12 aggregate Ruhela: Female -> median RC days (by region)
 }
 \examples{
 \donttest{

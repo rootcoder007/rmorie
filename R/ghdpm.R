@@ -15,8 +15,8 @@
 #' morie_ghosal_dpmixture_density(x = rnorm(50))
 #' @export
 morie_ghosal_dpmixture_density <- function(x, alpha = 1.0, sigma = NULL,
-                                     grid = NULL, n_iter = 120, burn = 40,
-                                     seed = 0, deterministic_seed = NULL) {
+                                           grid = NULL, n_iter = 120, burn = 40,
+                                           seed = 0, deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("ghdpm", deterministic_seed)
   } else {

@@ -31,15 +31,16 @@ here a simple rank-match).}
 Data frame with \code{Gamma}, \code{p_lower}, \code{p_upper}.
 }
 \description{
-Thin wrapper over \code{rbounds::psens()} when \pkg{rbounds} is
-installed (rank-matched-pair signed-rank bounds across a Gamma
-grid). Without \pkg{rbounds}, falls back to a base R normal-
-approximation Wilcoxon signed-rank computation.
+Native base R rank-matched-pair signed-rank bounds across a Gamma
+grid, via the normal approximation to the Wilcoxon signed-rank
+statistic.
 }
 \examples{
-set.seed(1)
-df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
-df$y <- df$d * 0.5 + df$x1 + rnorm(60)
-res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
-if (!inherits(res, "try-error")) str(res, max.level = 1)
+if (requireNamespace("EValue", quietly = TRUE) && requireNamespace("rbounds", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(d = rbinom(60, 1, 0.5), x1 = rnorm(60))
+  df$y <- df$d * 0.5 + df$x1 + rnorm(60)
+  res <- try(sensitivity_rosenbaum(df, "d", "y", "x1"))
+  if (!inherits(res, "try-error")) str(res, max.level = 1)
+}
 }

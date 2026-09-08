@@ -58,6 +58,24 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
 }
 
 # Exact t-SNE core. Returns list(Y, kl).
+#' Exact t-SNE core. Returns list(Y, kl)
+#'
+#' A step of the tsnrd implementation. Called by \code{morie_tsne_reduction}.
+#' See the file header for the source the module follows.
+#' it follows.
+#'
+#' @param x A matrix; passed to \code{nrow}.
+#' @param dims A count; the body uses it as \code{matrix(...)}. Defaults to \code{2L}.
+#' @param perplexity Numeric; passed to \code{log}. Defaults to \code{30}.
+#' @param n_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{1000L}.
+#' @param eta Passed to \code{.morie_tsne_descent_cpp}. Defaults to \code{"auto"}.
+#' @return A list with \code{Y}, \code{kl}.
+#' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' res <- .morie_tsne(x = X)
+#' res
 .morie_tsne <- function(x, dims = 2L, perplexity = 30, n_iter = 1000L,
                         eta = "auto") {
   n <- nrow(x)
@@ -79,12 +97,15 @@ morie_tsne_reduction <- function(x, n_components = 2L, perplexity = 30,
   target <- log(perplexity)
   P <- matrix(0, n, n)
   for (i in seq_len(n)) {
-    lo <- -Inf; hi <- Inf; beta <- 1
+    lo <- -Inf
+    hi <- Inf
+    beta <- 1
     di <- D2[i, -i]
     for (it in seq_len(50L)) {
       w <- exp(-di * beta)
       sw <- sum(w)
-      if (sw <= 0) { beta <- beta / 2; next }
+      if (sw <= 0) { beta <- beta / 2
+      next }
       H <- log(sw) + beta * sum(di * w) / sw
       if (abs(H - target) < 1e-5) break
       if (H > target) {

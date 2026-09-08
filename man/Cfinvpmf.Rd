@@ -1,0 +1,26 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Cfinvpmf}
+\alias{Cfinvpmf}
+\title{Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)}
+\usage{
+Cfinvpmf(t, phi_re, phi_im, x) 
+}
+\description{
+Characteristic-function inversion for a pmf (Deshmukh eq. 4.9)
+}
+\arguments{
+\item{t}{Argument \code{t}; see Usage.}
+\item{phi_re}{Argument \code{phi_re}; see Usage.}
+\item{phi_im}{Argument \code{phi_im}; see Usage.}
+\item{x}{Argument \code{x}; see Usage.}
+}
+\value{
+A list with \code{pmf}, \code{x}, \code{n_nodes}.
+}
+\keyword{internal}
+\examples{
+rmorie:::Cfinvpmf(t = c(1, 2, 3, 4, 5, 6, 7, 8), phi_re = c(1, 2, 3, 4, 5, 6, 7, 8),
+  phi_im = c(1, 2, 3, 4, 5, 6, 7, 8), x = c(1, 2, 3, 4, 5, 6, 7, 8))
+}

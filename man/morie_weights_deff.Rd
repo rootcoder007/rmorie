@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_deff}
 \alias{morie_weights_deff}
-\title{Kish design effect (n / ESS).}
+\title{Kish design effect (n / ESS)}
 \usage{
 morie_weights_deff(weights)
 }
@@ -13,7 +13,7 @@ morie_weights_deff(weights)
 A numeric value.
 }
 \description{
-Kish design effect (n / ESS).
+Kish design effect (n / ESS)
 }
 \examples{
 set.seed(1)

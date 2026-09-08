@@ -13,13 +13,13 @@ morie_estimate_g_computation(
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A vector; indexed elementwise.}
 
-\item{treatment}{Name of the binary treatment column.}
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{outcome}{Name of the outcome column.}
+\item{outcome}{See Usage.}
 
-\item{covariates}{Character vector of covariate names.}
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
 
 \item{outcome_model}{Family for the outcome model: \code{"linear"} or
 \code{"logistic"}.}
@@ -29,7 +29,7 @@ Named list: \code{ate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }
 \description{
 Estimates the ATE by:
-\deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr]}{ATE_hat = (1)/(n)sum_i bigl[mu_hat_1(X_i) - mu_hat_0(X_i)bigr]}
+\deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) - \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) - mu_hat_0(X_i)bigr\]}
 }
 \details{
 Delegates the standardisation step to \code{stdReg::stdGlm()} when
@@ -38,7 +38,9 @@ from a single \code{stats::glm()} fit with treatment-flipped
 counterfactual datasets.
 }
 \examples{
-set.seed(1)
-df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
-morie_estimate_g_computation(df, "t", "y", "x")
+if (requireNamespace("stdReg", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(t = rbinom(200, 1, 0.4), y = rnorm(200), x = rnorm(200))
+  morie_estimate_g_computation(df, "t", "y", "x")
+}
 }

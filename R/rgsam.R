@@ -1,4 +1,4 @@
-#' Sample entropy -- Rangayyan Ch 7
+#' Sample entropy -- Richman & Moorman (2000); NOT covered by Rangayyan
 #'
 #' Richman & Moorman (2000) sample entropy.
 #'
@@ -22,8 +22,14 @@ rgsam <- function(x, m = 2L, r = NULL) {
   if (is.null(r)) r <- 0.2 * stats::sd(x)
   m <- as.integer(m)
   if (N <= m + 1) stop("Need length(x) > m + 1.")
+  ## Richman & Moorman count BOTH the length-m and the length-(m+1) matches
+  ## over the SAME N-m template vectors. Using N-mm+1 per call gave B one extra
+  ## template that A could not have, so the two counts had different
+  ## denominators -- reintroducing exactly the bias SampEn was defined to
+  ## remove.
+  nT <- N - m
+  if (nT < 2) stop("Need length(x) > m + 1.")
   matches <- function(mm) {
-    nT <- N - mm + 1
     M <- matrix(0, nrow = nT, ncol = mm)
     for (i in seq_len(nT)) M[i, ] <- x[i:(i + mm - 1)]
     cnt <- 0L

@@ -183,7 +183,10 @@ test_that("rgemg returns RMS envelope of length(x)", {
   expect_length(r$rms, 300L)
   expect_equal(r$window, 32L)
   expect_true(is.finite(r$mean_rms) && r$mean_rms >= 0)
-  expect_true(all(r$rms >= 0))
+  ## Eq (5.24) is a causal window, so the first W-1 samples are undefined
+  ## and come back NA rather than back-filled from a future value.
+  expect_true(all(is.na(r$rms[seq_len(31L)])))
+  expect_true(all(r$rms[32:300] >= 0))
 })
 
 test_that("rgemg default window and fs reporting", {
@@ -358,7 +361,7 @@ test_that("rglyp returns lyapunov exponent and divergence curve", {
   set.seed(25)
   r <- rglyp(rnorm(200), m = 3L, tau = 1L, max_t = 20L)
   expect_type(r, "list")
-  expect_named(r, c("lyapunov", "divergence_curve", "t"))
+  expect_named(r, c("lyapunov", "divergence_curve", "t", "dt"))
   expect_length(r$t, 20L)
   expect_length(r$divergence_curve, 20L)
   expect_true(is.na(r$lyapunov) || is.finite(r$lyapunov))

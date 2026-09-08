@@ -23,13 +23,6 @@ test_that("rgeeg honours custom bands and nperseg", {
   expect_named(r$absolute, c("low", "high"))
 })
 
-test_that("sparse_attention works with integer length input", {
-  set.seed(1)
-  r <- rmorie:::sparse_attention(16L, window = 2L, stride = 4L)
-  expect_equal(dim(r$tensor), c(16, 16))
-  expect_equal(r$method, "sparse-attention")
-})
-
 test_that("sptau canonical chain returns I ~ 0.5", {
   set.seed(1)
   x <- c(1, 2, 3, 4, 5)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_ratio}
 \alias{morie_survey_ratio}
-\title{Ratio estimator of a population total using known X_pop.}
+\title{Ratio estimator of a population total using known X_pop}
 \usage{
 morie_survey_ratio(y, x, weights, X_population_total)
 }
@@ -21,7 +21,7 @@ variable \code{x} (ratio estimator).}
 A named list with elements \code{ratio}, \code{total_estimate}, \code{se}, \code{ci_lower}, \code{ci_upper}.
 }
 \description{
-Ratio estimator of a population total using known X_pop.
+Ratio estimator of a population total using known X_pop
 }
 \examples{
 \dontshow{if (requireNamespace("survey", quietly = TRUE)) withAutoprint(\{ # examplesIf}

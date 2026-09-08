@@ -28,7 +28,9 @@ positions), \code{sigma2}, \code{n_samples}, \code{engine}.
 Bayesian Aldrich-McKelvey scaling (stub)
 }
 \examples{
-\donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
+if (requireNamespace("basicspace", quietly = TRUE)) {
+  \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
+}
 }
 \references{
 Hare, C., Armstrong, D. A., Bakker, R., Carroll, R., and Poole, K. T.

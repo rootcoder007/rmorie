@@ -1,6 +1,8 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Multinomial probit (spatial choice; Armstrong Ch 9)
+#' Multinomial probit via the GHK simulator (Train 2009)
+#' @details Train, K. E. (2009), Discrete Choice Methods with Simulation, 2nd ed.
+#'   NOT Armstrong: that book has six chapters and no Ch 9.
 #'
 #' GHK-style Monte-Carlo choice probabilities for independent Gaussian
 #' errors over a deterministic utility matrix; binary case uses the

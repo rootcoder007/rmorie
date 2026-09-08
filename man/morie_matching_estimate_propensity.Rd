@@ -35,11 +35,13 @@ Estimates the probability of treatment via logistic regression or
 gradient boosting on a set of covariates.
 }
 \examples{
-\donttest{
-set.seed(1)
-df <- data.frame(d = rbinom(200, 1, 0.4),
-                 x1 = rnorm(200), x2 = rnorm(200))
-ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
+if (requireNamespace("gbm", quietly = TRUE)) {
+  \donttest{
+  set.seed(1)
+  df <- data.frame(d = rbinom(200, 1, 0.4),
+                   x1 = rnorm(200), x2 = rnorm(200))
+  ps <- morie_matching_estimate_propensity(df, "d", c("x1", "x2"))
+  }
 }
 }
 \references{

@@ -19,7 +19,7 @@ morie_boot_run(data, statistic, R = 2000L, strata = NULL, ...)
 }
 \value{
 A \code{morie_boot} object (native; consumable by
-\code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}).
+\code{morie_boot_basic_ci()}).
 }
 \description{
 Thin pass-through that adapts an rmorie-style
@@ -30,10 +30,12 @@ the raw \code{boot} object. Useful when the caller wants to use
 \code{boot::tilt.boot}, \code{boot::jack.after.boot}) directly.
 }
 \examples{
-set.seed(1)
-b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
-str(b, max.level = 1)
+if (requireNamespace("boot", quietly = TRUE)) {
+  set.seed(1)
+  b <- morie_boot_run(rnorm(50), statistic = mean, R = 200L)
+  str(b, max.level = 1)
+}
 }
 \seealso{
-\code{\link[=morie_boot]{morie_boot()}}, \code{\link[=morie_boot_basic_ci]{morie_boot_basic_ci()}}.
+\code{morie_boot()}, \code{morie_boot_basic_ci()}.
 }

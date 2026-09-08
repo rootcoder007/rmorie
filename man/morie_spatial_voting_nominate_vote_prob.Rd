@@ -33,5 +33,7 @@ Single NOMINATE vote probability
 morie_spatial_voting_nominate_vote_prob(c(0.1), c(0.3), c(-0.3))
 }
 \references{
-Poole & Rosenthal (1985).
+Poole KT & Rosenthal H (1985). A spatial model for
+legislative roll call analysis. \emph{American Journal of
+Political Science}, 29(2), 357-384.
 }

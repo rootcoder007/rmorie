@@ -29,7 +29,7 @@ extract (matched by basename, then by substring).}
 \item{simplify}{For \code{json}/\code{xml}/\code{html}, whether to
 simplify into a data.frame where possible (default \code{TRUE}).}
 
-\item{...}{Passed to the underlying reader (e.g. \code{\link{read.csv}}
+\item{...}{Passed to the underlying reader (e.g. \code{\[read.csv\]}
 arguments, or \code{\link{morie_fetch_arcgis}} arguments).}
 }
 \value{
@@ -51,7 +51,7 @@ Supported formats: \code{csv}, \code{tsv}, \code{json}, \code{xml},
 \code{arcgis} (delegates to \code{\link{morie_fetch_arcgis}}).
 }
 \examples{
-\donttest{
+\dontrun{
 # Chicago open-data portal (Socrata), endpoints verified 2026-07.
 df <- try(morie_fetch(
   "https://data.cityofchicago.org/resource/ijzp-q8t2.csv",

@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \code{a9b6bef1d34b44eea814e1869fdcda62}.
 }
 \details{
@@ -53,7 +53,7 @@ officers arrive to the scene.
 Tags: rbdc; race; race based data
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_use_of_force_occurrence_category(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

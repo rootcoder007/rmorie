@@ -551,12 +551,20 @@ test_that("mdvtr returns the median ideal point with a CI", {
   x <- rnorm(40)
   res <- mdvtr(x)
   expect_type(res, "list")
-  expect_named(res, c("estimate", "se", "ci_lower", "ci_upper", "n", "method"))
+  expect_named(res, c("estimate", "mean", "se", "se_normal",
+                      "density_at_median", "ci_lower", "ci_upper",
+                      "ci_exact_lower", "ci_exact_upper", "exact_coverage",
+                      "median_interval", "unique_winner", "n", "warnings",
+                      "method"))
   expect_equal(res$n, 40L)
   expect_equal(res$estimate, median(x))
   expect_true(res$se >= 0)
   expect_true(res$ci_lower <= res$estimate)
   expect_true(res$ci_upper >= res$estimate)
+  # se is the density-based error, NOT the normality-only 1.2533 one,
+  # which is returned separately for comparison
+  expect_false(isTRUE(all.equal(res$se, res$se_normal)))
+  expect_equal(res$se_normal, 1.2533141373155003 * sd(x) / sqrt(40))
 })
 
 test_that("mdvtr handles a single observation", {

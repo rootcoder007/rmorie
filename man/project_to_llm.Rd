@@ -1,0 +1,25 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{project_to_llm}
+\alias{project_to_llm}
+\title{project_to_llm}
+\usage{
+project_to_llm(query_out, W, b = NULL) 
+}
+\arguments{
+\item{query_out}{A matrix; passed to \code{as.matrix}.}
+\item{W}{A matrix; passed to \code{nrow}.}
+\item{b}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+}
+\description{
+A step of the blip2v_native implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{soft_prompt}, \code{n_tokens}, \code{dim}, \code{method}, \code{note}.
+}
+\keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+project_to_llm(V, V)
+}

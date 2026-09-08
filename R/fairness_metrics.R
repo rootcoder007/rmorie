@@ -9,7 +9,6 @@
 #' predictions that already exist.
 #'
 #' Functions
-#' ---------
 #' \itemize{
 #'   \item \code{\link{morie_fairness_disparate_impact}}: the four-fifths
 #'     rule.
@@ -35,13 +34,31 @@
 NULL
 
 
-.MORIE_FAIRNESS_FOUR_FIFTHS <- 0.8  # EEOC four-fifths threshold
+.MORIE_FAIRNESS_FOUR_FIFTHS <- 0.8 # EEOC four-fifths threshold
 
 
 # ---------------------------------------------------------------------------
 # Internal helpers
 # ---------------------------------------------------------------------------
 
+#' .morie_fairness_result
+#'
+#' A step of the fairness_metrics implementation. Called by
+#' \code{morie_fairness_average_odds_difference},
+#' \code{morie_fairness_bias_amplification}, \code{morie_fairness_demographic_parity} and
+#' 4 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param title Carried through into a list the body builds.
+#' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param tables Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param sections Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param warnings Carried through into a list the body builds. Defaults to \code{character(0)}.
+#' @param interpretation Carried through into a list the body builds. Defaults to \code{""}.
+#' @param payload Carried through into a list the body builds. Defaults to \code{list()}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_fairness_result <- function(title, summary_lines = list(),
                                    tables = list(), sections = list(),
                                    warnings = character(0),
@@ -67,12 +84,14 @@ NULL
 }
 
 
-
-
 # ---------------------------------------------------------------------------
 # print
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_fairness_result} objects
+#'
+#' @param x A \code{morie_fairness_result} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return Invisibly returns \code{x} unchanged.
 #' @examples
 #' \donttest{

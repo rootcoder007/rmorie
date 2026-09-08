@@ -79,7 +79,8 @@ test_that("rosenbaum_bounds sign method runs", {
 
 test_that("rosenbaum_bounds mcnemar method runs on binary data", {
   set.seed(1)
-  t_out <- rbinom(50, 1, 0.6); c_out <- rbinom(50, 1, 0.4)
+  t_out <- rbinom(50, 1, 0.6)
+  c_out <- rbinom(50, 1, 0.4)
   res <- rosenbaum_bounds(t_out, c_out, method = "mcnemar")
   expect_true(is.finite(res$critical_gamma))
 })
@@ -123,8 +124,10 @@ test_that("tipping_point_analysis with tiny SE marks robust", {
 test_that("omitted_variable_bias returns rv_q in [0, 1]", {
   res <- omitted_variable_bias(estimate = 0.5, se = 0.1, dof = 100,
                                r2_yd_x = 0.2, partial_r2_treatment = 0.1)
-  expect_gte(res$rv_q, 0); expect_lte(res$rv_q, 1)
-  expect_gte(res$rv_qa, 0); expect_lte(res$rv_qa, 1)
+  expect_gte(res$rv_q, 0)
+  expect_lte(res$rv_q, 1)
+  expect_gte(res$rv_qa, 0)
+  expect_lte(res$rv_qa, 1)
 })
 
 test_that("omitted_variable_bias degenerate f_stat<=1 yields rv_q=0", {

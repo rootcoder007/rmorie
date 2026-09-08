@@ -195,13 +195,15 @@
     }
     # Module 23: native SAX-built tree fallback.
     return(morie_fetch_xml(paste(readLines(path, warn = FALSE),
-                                 collapse = "\n")))
+      collapse = "\n"
+    )))
   }
   if (format == "html") {
     if (!requireNamespace("xml2", quietly = TRUE)) {
       # Module 23: native tolerant HTML tree fallback.
       return(morie_fetch_html(paste(readLines(path, warn = FALSE),
-                                    collapse = "\n")))
+        collapse = "\n"
+      )))
     }
     doc <- xml2::read_html(path)
     if (simplify && requireNamespace("rvest", quietly = TRUE)) {
@@ -249,7 +251,7 @@
 #' @return A data.frame for tabular formats; a list or document object
 #'   for non-tabular \code{json}/\code{xml}/\code{html}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Chicago open-data portal (Socrata), endpoints verified 2026-07.
 #' df <- try(morie_fetch(
 #'   "https://data.cityofchicago.org/resource/ijzp-q8t2.csv",
@@ -338,9 +340,10 @@ morie_fetch <- function(url,
 #'   \code{url}. Feed \code{resource_id} into
 #'   \code{morie_fetch_ckan(resource_id = ...)}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' hits <- try(morie_ckan_search("cannabis survey",
-#'                               portal = "open.canada.ca"))
+#'   portal = "open.canada.ca"
+#' ))
 #' if (is.data.frame(hits)) {
 #'   head(hits[, c("dataset_title", "resource_id", "format")])
 #' }
@@ -423,7 +426,7 @@ morie_ckan_search <- function(query, portal = "open.canada.ca",
 #'   \code{Inf} -- fetch the whole layer).
 #' @return A data.frame of feature attributes (geometry is dropped).
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Toronto Police Service public hub layer (same layer the TPS
 #' # bridge in tps_statphysics.R pages from).
 #' layer <- paste0(

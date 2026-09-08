@@ -15,13 +15,13 @@ morie_tps_figures(
 \item{out_dir}{Directory to write PNG files into (created if
 missing). Required; nothing is written anywhere else.}
 
-\item{categories}{TPS categories (see \code{\link[=morie_tps_layer_urls]{morie_tps_layer_urls()}}).
+\item{categories}{TPS categories (see \code{morie_tps_layer_urls()}).
 Default \code{"Homicides"}.}
 
 \item{which}{Figure families to render: any of \code{"hawkes"},
 \code{"sarima"}, \code{"langevin"}, \code{"fokker_planck"}.}
 
-\item{cache_dir}{Passed to \code{\link[=morie_fetch_tps]{morie_fetch_tps()}}; defaults to a
+\item{cache_dir}{Passed to \code{morie_fetch_tps()}; defaults to a
 session temporary directory.}
 }
 \value{

@@ -742,6 +742,14 @@ model_comparison_table <- function(models, nested = FALSE, digits = 3L,
 #' df$y <- df$x + rnorm(30)
 #' m <- lm(y ~ x, data = df)
 #' anova_table(m, typ = 1L)
+#' @examples
+#' \dontshow{if (requireNamespace("car", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' set.seed(1)
+#' df <- data.frame(x = rnorm(30))
+#' df$y <- df$x + rnorm(30)
+#' m <- lm(y ~ x, data = df)
+#' anova_table(m, typ = 1L)
+#' \dontshow{\}) # examplesIf}
 #' @export
 anova_table <- function(model, typ = 2L, digits = 3L,
                           output_format = "dataframe",

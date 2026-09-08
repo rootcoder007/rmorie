@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_all_analyze.R
 \name{morie_otis_analyze_ruhela_master}
 \alias{morie_otis_analyze_ruhela_master}
-\title{Paper-ready master report -- every Ruhela formulation in one result.}
+\title{Paper-ready master report -- every Ruhela formulation in one result}
 \usage{
 morie_otis_analyze_ruhela_master(
   datasets,

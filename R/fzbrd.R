@@ -3,7 +3,8 @@
 #' Fauzi: Bias-reduced KDFE via geometric extrapolation (Ch 2)
 #'
 #' Richardson-style extrapolation cancels the O(h^2) bias of the KDFE:
-#' \deqn{\hat F_{br}(t) = (c^2 \hat F_h(t) - \hat F_{ch}(t))/(c^2-1).}{hat F_br(t) = (c^2 hat F_h(t) - hat F_ch(t))/(c^2-1).}
+#' \deqn{\hat F_{br}(t) = (c^2 \hat F_h(t) - \hat F_{ch}(t))/(c^2-1).}{hat F_br(t) = (c^2
+#' hat F_h(t) - hat F_ch(t))/(c^2-1).}
 #'
 #' @param x Numeric vector.
 #' @param t Evaluation point; default median(x).
@@ -24,7 +25,7 @@ fzbrd <- function(x, t = NULL, h = NULL, c = 2) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   if (c <= 1) stop("c must be > 1")
   F_h <- mean(stats::pnorm((t - x) / h))
   F_ch <- mean(stats::pnorm((t - x) / (c * h)))

@@ -16,4 +16,7 @@ Resolve the DMT_Imaging dataset root, honouring
 \env{MORIE_DMT_IMAGING_ROOT}. Returns NULL if absent on disk.
 Parity with Python \code{DATASET_ROOT} / \verb{_require_root}.
 }
+\examples{
+tryCatch(rmorie:::.morie_entheo_dmt_root(), error = function(e) NULL)
+}
 \keyword{internal}

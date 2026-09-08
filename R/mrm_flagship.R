@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #
 # The MRM research framework (feat/native-specializations, module 24
-# — the flagship). Multilevel Reconciliation Methodology: load a
+# -- the flagship). Multilevel Reconciliation Methodology: load a
 # special-investigations dataset with provenance, reconcile it against
 # a second source under an explicit matching schema, estimate a causal
 # effect by composing the branch's native estimators (matching / IPW /
@@ -25,6 +25,11 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_mrm_load_si_dataset("otis_b01")
 #' d$provenance$n_rows
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' d <- morie_mrm_load_si_dataset("otis_b01")
+#' d$provenance$n_rows
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_mrm_load_si_dataset <- function(name = "otis_b01") {
   data <- morie_sample(name)
@@ -91,9 +96,11 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
                   suffixes = c(".primary", ".secondary"))
   conflicts <- list()
   for (f in compare %||% character(0)) {
-    cp <- paste0(f, ".primary"); cs <- paste0(f, ".secondary")
+    cp <- paste0(f, ".primary")
+    cs <- paste0(f, ".secondary")
     if (!cp %in% names(merged)) next   # column identical -> no suffix
-    a <- merged[[cp]]; b <- merged[[cs]]
+    a <- merged[[cp]]
+    b <- merged[[cs]]
     bad <- if (is.numeric(a) && is.numeric(b)) {
       abs(a - b) > numeric_tolerance & !(is.na(a) & is.na(b))
     } else {
@@ -130,6 +137,10 @@ morie_mrm_reconcile <- function(primary, secondary, keys,
     class = c("morie_mrm_reconciliation", "list"))
 }
 
+#' Print method for \code{morie_mrm_reconciliation} objects
+#'
+#' @param x A \code{morie_mrm_reconciliation} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' a <- data.frame(id = 1:5, y = c(1, 2, 3, 4, 5))
@@ -295,6 +306,10 @@ morie_mrm_estimate_causal_effect <- function(data, treatment, outcome,
     class = c("morie_mrm_effect", "list"))
 }
 
+#' Print method for \code{morie_mrm_effect} objects
+#'
+#' @param x A \code{morie_mrm_effect} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' set.seed(1)

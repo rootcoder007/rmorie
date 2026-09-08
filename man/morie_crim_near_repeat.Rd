@@ -26,6 +26,7 @@ morie_crim_near_repeat(
 \item{n_perm}{Permutations. Default 499.}
 
 \item{seed}{RNG seed.}
+
 }
 \value{
 List of class \code{"morie_knox"}: statistic (observed
@@ -40,7 +41,8 @@ permutation distribution obtained by shuffling event times.
 \examples{
 set.seed(3)
 morie_crim_near_repeat(runif(60), runif(60), runif(60, 0, 30),
-                       s_threshold = 0.1, t_threshold = 3)
+  s_threshold = 0.1, t_threshold = 3
+)
 }
 \references{
 Knox (1964); Townsley, Homel & Chaseling (2003).

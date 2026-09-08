@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau.R
 \name{morie_arsau_describe}
 \alias{morie_arsau_describe}
-\title{Describe a single ARSAU dataset entry.}
+\title{Describe a single ARSAU dataset entry}
 \usage{
 morie_arsau_describe(
   kind,
@@ -27,7 +27,7 @@ morie_arsau_describe(
 An object of class \code{"morie_arsau_result"}.
 }
 \description{
-Describe a single ARSAU dataset entry.
+Describe a single ARSAU dataset entry
 }
 \examples{
 res <- morie_arsau_describe("main_records", "2024")

@@ -2,7 +2,7 @@
 % Please edit documentation in R/laniyonu_actuarial_risk_disparity.R
 \name{morie_laniyonu_actuarial_risk_disparity}
 \alias{morie_laniyonu_actuarial_risk_disparity}
-\title{Replication of O'Connell & Laniyonu (2025) — CSC actuarial-risk disparity}
+\title{Replication of O'Connell & Laniyonu (2025) -- CSC actuarial-risk disparity}
 \usage{
 morie_laniyonu_actuarial_risk_disparity(
   df,

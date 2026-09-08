@@ -13,7 +13,7 @@ estimate_pi0(p_values, method = c("storey", "bootstrap", "two_step"))
 \code{"two_step"}.}
 }
 \value{
-A scalar pi0 estimate in \verb{[0, 1]}.
+A scalar pi0 estimate in \verb{\[0, 1\]}.
 }
 \description{
 Delegates to \code{qvalue::pi0est} (Bioconductor) when installed
@@ -21,7 +21,9 @@ and \code{method = "storey"}. Otherwise computes the cutoff-based
 or bootstrap-based estimator inline.
 }
 \examples{
-set.seed(1)
-p <- c(runif(80), runif(20, 0, 0.005))
-estimate_pi0(p, method = "storey")
+if (requireNamespace("qvalue", quietly = TRUE)) {
+  set.seed(1)
+  p <- c(runif(80), runif(20, 0, 0.005))
+  estimate_pi0(p, method = "storey")
+}
 }

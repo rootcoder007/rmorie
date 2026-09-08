@@ -2,7 +2,7 @@
 
 #' Random Forest ensemble (R parity)
 #'
-#' Wraps \code{randomForest::randomForest}.  Auto-detects task from y
+#' Native random forest (ESL Algorithm 15.1).  Auto-detects task from y
 #' (factor / integer-like -> classification, otherwise regression).
 #'
 #' @param x Numeric predictor matrix.
@@ -18,7 +18,7 @@
 #' @return Named list: estimate, train_score, oob_score, feature_importances,
 #'   n_estimators, task, n, method.
 #' @importFrom stats predict
-#' @examplesIf requireNamespace("randomForest", quietly = TRUE)
+#' @examples
 #' morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,
@@ -26,9 +26,6 @@ morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,
                                    seed = 0L,
                                    deterministic_seed = NULL) {
   x <- .morie_ensure_design_matrix(x)
-  if (!requireNamespace("randomForest", quietly = TRUE)) {
-    stop("Function 'morie_random_forest_ensemble' requires package 'randomForest'. Install with install.packages('randomForest').")
-  }
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
   if (identical(task, "auto")) {
@@ -38,31 +35,30 @@ morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,
       "regression"
     }
   }
-  y_use <- if (task == "classification") as.factor(y) else as.numeric(y)
   if (!is.null(deterministic_seed)) {
     morie_det_rng("rfens", deterministic_seed)
   } else {
     set.seed(seed)
   }
-  args <- list(x = x, y = y_use, ntree = n_estimators, importance = TRUE)
-  if (!is.null(max_depth)) args$maxnodes <- 2L^as.integer(max_depth)
-  fit <- do.call(randomForest::randomForest, args)
-  preds <- predict(fit, x)
+  fit <- .morie_rf_fit(
+    x, y, task = task, n_estimators = as.integer(n_estimators),
+    max_depth = if (is.null(max_depth)) 30L else as.integer(max_depth)
+  )
   if (task == "classification") {
-    train_score <- as.numeric(mean(preds == y_use))
-    oob <- 1 - as.numeric(fit$err.rate[n_estimators, "OOB"])
+    yf <- as.factor(y)
+    train_score <- mean(as.character(fit$fitted) == as.character(yf))
+    oob <- mean(as.character(fit$oob) == as.character(yf))
   } else {
-    train_score <- 1 - sum((preds - y_use)^2) / sum((y_use - mean(y_use))^2)
-    oob <- 1 - fit$mse[n_estimators] / stats::var(y_use)
+    yv <- as.numeric(y)
+    denom <- sum((yv - mean(yv))^2)
+    train_score <- 1 - sum((fit$fitted - yv)^2) / max(denom, 1e-12)
+    oob <- 1 - sum((fit$oob - yv)^2) / max(denom, 1e-12)
   }
-  fi <- randomForest::importance(fit)
-  fi_vec <- if (ncol(fi) > 0) fi[, ncol(fi)] else rep(NA_real_, ncol(x))
-  if (sum(fi_vec, na.rm = TRUE) > 0) fi_vec <- fi_vec / sum(fi_vec, na.rm = TRUE)
   list(
     estimate            = as.numeric(train_score),
     train_score         = as.numeric(train_score),
     oob_score           = as.numeric(oob),
-    feature_importances = as.numeric(fi_vec),
+    feature_importances = as.numeric(fit$importance),
     n_estimators        = as.integer(n_estimators),
     task                = task,
     n                   = nrow(x),

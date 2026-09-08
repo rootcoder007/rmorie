@@ -36,14 +36,22 @@
 #'   identified and dropped before fitting.
 #' @srrstats {RE2.4a} `.viable_terms()` detects predictor terms with a
 #'   single observed level (perfect collinearity among predictors).
-#' @srrstats {RE3.0} Iterative fitters (glm, Hawkes MLE, HMC backends)
-#'   surface non-convergence via their upstream warnings.
-#' @srrstats {RE3.1} Those warnings can be suppressed by the caller while
-#'   the returned object still records fit status.
-#' @srrstats {RE3.2} Convergence thresholds default to the well-tested
-#'   upstream defaults (documented per wrapper).
-#' @srrstats {RE3.3} Convergence thresholds can be set explicitly through
-#'   the `...` pass-through to the upstream fitter.
+#' @srrstats {RE3.0} The iterative fitters are morie's own -- the
+#'   Newton-Raphson `.morie_logit_fit()` / `.morie_binchoice_fit()`
+#'   behind the propensity models, the Hawkes MLE, the ordinal IRLS --
+#'   and each warns when it exhausts `max_iter` without meeting `tol`,
+#'   rather than returning the last iterate as though it had converged.
+#' @srrstats {RE3.1} The warnings are ordinary R conditions, so a caller
+#'   may `suppressWarnings()` them; the estimate is still returned, and
+#'   the closed-form estimators here have no convergence step to report.
+#' @srrstats {RE3.2} Convergence thresholds default to values documented
+#'   on each fitter (`.morie_logit_fit`: `tol = 1e-9`, `max_iter = 100`;
+#'   `mrm_threshold_specific_ordinal`: `tol = 1e-6`, `max_iter = 200`).
+#' @srrstats {RE3.3} Those thresholds are ordinary named arguments, so
+#'   they can be set explicitly per call -- e.g.
+#'   `mrm_threshold_specific_ordinal(..., tol =, max_iter =)`. There is
+#'   no `...` pass-through because there is no upstream fitter to pass
+#'   to: the estimators are native.
 #' @srrstats {RE4.0} Estimators return a structured result object
 #'   (class `morie_rich_result`) modelling the fit.
 #' @srrstats {RE4.2} Coefficients are returned (`details$all_coefficients`).
@@ -118,7 +126,9 @@ NULL
 # `morie_did_diagnostics`) are kept verbatim -- their output shapes
 # are part of the rmorie API.
 
-#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict ave sd var aggregate na.omit reshape lsfit setNames
+#' @importFrom stats lm glm coef vcov pnorm pt pf pchisq qnorm qt qchisq model.matrix
+#' model.frame fitted residuals binomial as.formula sigma complete.cases quantile predict
+#' ave sd var aggregate na.omit reshape lsfit setNames
 #' @importFrom utils combn head
 NULL
 
@@ -129,46 +139,57 @@ NULL
 
 #' Internal helper: Morie Did Have Fixest
 #' @noRd
-.morie_did_have_fixest         <- function() requireNamespace("fixest",         quietly = TRUE)
+.morie_did_have_fixest <- function() requireNamespace("fixest", quietly = TRUE)
 #' Internal helper: Morie Did Have Did
 #' @noRd
-.morie_did_have_did            <- function() requireNamespace("did",            quietly = TRUE)
+.morie_did_have_did <- function() requireNamespace("did", quietly = TRUE)
 #' Internal helper: Morie Did Have Bacondecomp
 #' @noRd
-.morie_did_have_bacondecomp    <- function() requireNamespace("bacondecomp",    quietly = TRUE)
+.morie_did_have_bacondecomp <- function() requireNamespace("bacondecomp", quietly = TRUE)
 #' Internal helper: Morie Did Have Coresynth
 #' @noRd
-.morie_did_have_coresynth      <- function() requireNamespace("coresynth",      quietly = TRUE)
+.morie_did_have_coresynth <- function() requireNamespace("coresynth", quietly = TRUE)
 #' Internal helper: Morie Did Have Sandwich
 #' @noRd
-.morie_did_have_sandwich       <- function() requireNamespace("sandwich",       quietly = TRUE)
+.morie_did_have_sandwich <- function() requireNamespace("sandwich", quietly = TRUE)
 #' Internal helper: Morie Did Have Drdid
 #' @noRd
-.morie_did_have_drdid          <- function() requireNamespace("DRDID",          quietly = TRUE)
+.morie_did_have_drdid <- function() requireNamespace("DRDID", quietly = TRUE)
 #' Internal helper: Morie Did Have Honestdid
 #' @noRd
-.morie_did_have_honestdid      <- function() requireNamespace("HonestDiD",      quietly = TRUE)
+.morie_did_have_honestdid <- function() requireNamespace("HonestDiD", quietly = TRUE)
 #' Internal helper: Morie Did Have Didmultiplegt
 #' @noRd
-.morie_did_have_didmultiplegt  <- function() requireNamespace("DIDmultiplegt",  quietly = TRUE)
+.morie_did_have_didmultiplegt <- function() requireNamespace("DIDmultiplegt", quietly = TRUE)
 
+#' @param pkg See Usage.
+#' @param fn See Usage.
 #' @keywords internal
 .morie_did_need <- function(pkg, fn) {
   if (!requireNamespace(pkg, quietly = TRUE)) {
-    stop(sprintf(
-      "`%s()` requires the '%s' package. Install it with %s",
-      fn, pkg, sprintf("install.packages(\"%s\")", pkg)),
-      call. = FALSE)
+    stop(
+      sprintf(
+        "`%s()` requires the '%s' package. Install it with %s",
+        fn, pkg, sprintf("install.packages(\"%s\")", pkg)
+      ),
+      call. = FALSE
+    )
   }
   invisible(TRUE)
 }
 
+#' @param estimate See Usage.
+#' @param se See Usage.
+#' @param alpha See Usage.
 #' @keywords internal
 .morie_did_make_ci <- function(estimate, se, alpha = 0.05) {
   z <- stats::qnorm(1 - alpha / 2)
   c(estimate - z * se, estimate + z * se)
 }
 
+#' @param X See Usage.
+#' @param y See Usage.
+#' @param cluster_ids See Usage.
 #' @keywords internal
 .morie_did_ols_robust_se <- function(X, y, cluster_ids = NULL) {
   # OLS with heteroskedasticity- or cluster-robust (CR1) variance.
@@ -176,12 +197,13 @@ NULL
   n <- nrow(X)
   k <- ncol(X)
   XtX_inv <- tryCatch(solve(crossprod(X)),
-                      error = function(e) .morie_ginv(crossprod(X)))
+    error = function(e) .morie_ginv(crossprod(X))
+  )
   beta <- as.numeric(XtX_inv %*% crossprod(X, y))
   resid <- as.numeric(y - X %*% beta)
   if (!is.null(cluster_ids)) {
     uc <- unique(cluster_ids)
-    G  <- length(uc)
+    G <- length(uc)
     meat <- matrix(0, k, k)
     for (c_ in uc) {
       mask <- cluster_ids == c_
@@ -201,34 +223,49 @@ NULL
   list(beta = beta, se = se, vcov = V, residuals = resid)
 }
 
+#' @param X See Usage.
 #' @keywords internal
 .morie_did_add_intercept <- function(X) {
   cbind(`(Intercept)` = 1, X)
 }
 
+#' @param t_val See Usage.
 #' @keywords internal
 .morie_did_pvalue <- function(t_val) {
   2 * stats::pnorm(-abs(t_val))
 }
 
+#' @param data See Usage.
+#' @param cols See Usage.
 #' @keywords internal
 .morie_did_drop_na <- function(data, cols) {
   # Every did estimator routes through here, so validate once at the
   # shared entry: assert a data.frame with the required columns, then
   # drop incomplete rows (G2.14b ignore-with-message).
-  data <- .morie_check_data(data, required = cols, arg = "data",
-                            check_na = TRUE)
+  data <- .morie_check_data(data,
+    required = cols, arg = "data",
+    check_na = TRUE
+  )
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 
+#' @param estimate See Usage.
+#' @param std_error See Usage.
+#' @param n_treated See Usage.
+#' @param n_control See Usage.
+#' @param method See Usage.
+#' @param alpha See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_did_result <- function(estimate, std_error, n_treated, n_control,
                               method, alpha = 0.05, details = list()) {
   t_val <- if (is.finite(std_error) && std_error > 0) estimate / std_error else 0
   p_val <- if (is.finite(t_val)) .morie_did_pvalue(t_val) else NA_real_
-  ci    <- if (is.finite(std_error))
+  ci <- if (is.finite(std_error)) {
     .morie_did_make_ci(estimate, std_error, alpha)
-  else c(NA_real_, NA_real_)
+  } else {
+    c(NA_real_, NA_real_)
+  }
   list(
     estimate  = estimate,
     std_error = std_error,
@@ -243,6 +280,10 @@ NULL
   )
 }
 
+#' @param df See Usage.
+#' @param varname See Usage.
+#' @param unit See Usage.
+#' @param time See Usage.
 #' @keywords internal
 .morie_did_within_transform <- function(df, varname, unit, time) {
   # Two-way demeaning: x - unit_mean - time_mean + grand_mean.
@@ -253,23 +294,33 @@ NULL
   v - um - tm + gm
 }
 
+#' @param y See Usage.
+#' @param X See Usage.
+#' @param treat See Usage.
 #' @keywords internal
 .morie_did_outcome_regression_att <- function(y, X, treat) {
   X <- as.matrix(X)
-  fit <- stats::lm.fit(cbind(1, X[treat == 0, , drop = FALSE]),
-                       y[treat == 0])
+  fit <- stats::lm.fit(
+    cbind(1, X[treat == 0, , drop = FALSE]),
+    y[treat == 0]
+  )
   beta <- fit$coefficients
   beta[is.na(beta)] <- 0
-  X1   <- cbind(1, X[treat == 1, , drop = FALSE])
+  X1 <- cbind(1, X[treat == 1, , drop = FALSE])
   y0_hat <- as.numeric(X1 %*% beta)
   mean(y[treat == 1] - y0_hat)
 }
 
+#' @param y See Usage.
+#' @param treat See Usage.
+#' @param ps See Usage.
 #' @keywords internal
 .morie_did_ipw_att <- function(y, treat, ps) {
   ps <- pmin(pmax(ps, 0.01), 0.99)
-  w  <- ps / (1 - ps)
-  if (sum(treat == 1) == 0) return(0)
+  w <- ps / (1 - ps)
+  if (sum(treat == 1) == 0) {
+    return(0)
+  }
   mean(y[treat == 1]) -
     sum(w[treat == 0] * y[treat == 0]) / sum(w[treat == 0])
 }
@@ -285,9 +336,11 @@ NULL
 #'
 #' Estimates the canonical two-group / two-period DiD treatment effect
 #' \deqn{\hat\tau = (\bar Y_{1,\text{post}} - \bar Y_{1,\text{pre}})
-#'                 - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
+#'                 - (\bar Y_{0,\text{post}} - \bar Y_{0,\text{pre}}).}{hattau = (bar
+#' Y_1,post - bar Y_1,pre) - (bar Y_0,post - bar Y_0,pre).}
 #' With covariates, fits the regression
-#' \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y = alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
+#' \eqn{Y = \alpha + \beta D + \gamma P + \tau (D \times P) + X\delta + \varepsilon}{Y =
+#' alpha + beta D + gamma P + tau (D x P) + Xdelta + epsilon}
 #' and reports \eqn{\hat\tau}{hattau}.
 #'
 #' For multi-period staggered designs prefer
@@ -334,8 +387,8 @@ morie_did_2x2 <- function(data, outcome, treatment, post,
   }
   cluster_ids <- if (!is.null(cluster)) df[[cluster]] else NULL
   fit <- .morie_did_ols_robust_se(X, y, cluster_ids = cluster_ids)
-  tau_idx <- 4   # intercept(1) + d(2) + p(3) + interaction(4)
-  est    <- fit$beta[tau_idx]
+  tau_idx <- 4 # intercept(1) + d(2) + p(3) + interaction(4)
+  est <- fit$beta[tau_idx]
   se_est <- fit$se[tau_idx]
   .morie_did_result(
     est, se_est,
@@ -368,12 +421,16 @@ morie_did_2x2 <- function(data, outcome, treatment, post,
 #' @examples
 #' set.seed(1)
 #' n <- 400
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-#' df <- data.frame(y = y, d = d, post = p,
-#'                  w = runif(n, 0.5, 2))
+#' df <- data.frame(
+#'   y = y, d = d, post = p,
+#'   w = runif(n, 0.5, 2)
+#' )
 #' res <- morie_did_repeated_cross_section(df, "y", "d", "post",
-#'                                         weights = "w")
+#'   weights = "w"
+#' )
 #' res$estimate
 #' @export
 morie_did_repeated_cross_section <- function(data, outcome, treatment, post,
@@ -450,19 +507,23 @@ morie_did_panel_fe <- function(data, outcome, treatment, unit, time,
     X <- cbind(X, Xc)
   }
   cluster_var <- if (!is.null(cluster)) cluster else unit
-  fit <- .morie_did_twfe_native(as.numeric(df[[outcome]]), X,
-                                df[[unit]], df[[time]],
-                                df[[cluster_var]])
-  est    <- fit$beta[[treatment]]
+  fit <- .morie_did_twfe_native(
+    as.numeric(df[[outcome]]), X,
+    df[[unit]], df[[time]],
+    df[[cluster_var]]
+  )
+  est <- fit$beta[[treatment]]
   se_est <- fit$se[[treatment]]
   .morie_did_result(
     est, se_est,
     n_treated = sum(as.numeric(df[[treatment]]) == 1),
     n_control = sum(as.numeric(df[[treatment]]) == 0),
     method = "did_panel_fe (rmorie native)", alpha = alpha,
-    details = list(fit = fit,
-                   n_units   = fit$n_units,
-                   n_periods = fit$n_periods)
+    details = list(
+      fit = fit,
+      n_units = fit$n_units,
+      n_periods = fit$n_periods
+    )
   )
 }
 
@@ -505,7 +566,8 @@ morie_did_panel_fe <- function(data, outcome, treatment, unit, time,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
 #' res <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
-#'                              leads = 2L, lags = 2L)
+#'   leads = 2L, lags = 2L
+#' )
 #' res$coefficients
 #' @export
 morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
@@ -525,50 +587,59 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
   # Relative-time dummies, reference period dropped
   rel_levels <- sort(unique(rel_time_trunc))
   rel_levels <- rel_levels[rel_levels != reference_period]
-  X <- vapply(rel_levels,
-              function(k) as.numeric(rel_time_trunc == k),
-              numeric(nrow(df)))
+  X <- vapply(
+    rel_levels,
+    function(k) as.numeric(rel_time_trunc == k),
+    numeric(nrow(df))
+  )
   colnames(X) <- paste0("rel::", rel_levels)
   if (length(covariates)) {
     Xc <- as.matrix(df[, covariates, drop = FALSE])
     storage.mode(Xc) <- "double"
     X <- cbind(X, Xc)
   }
-  fit <- .morie_did_twfe_native(as.numeric(df[[outcome]]), X,
-                                df[[unit]], df[[time]],
-                                df[[cluster_var]])
+  fit <- .morie_did_twfe_native(
+    as.numeric(df[[outcome]]), X,
+    df[[unit]], df[[time]],
+    df[[cluster_var]]
+  )
   keep <- grepl("^rel::", names(fit$beta)) & !is.na(fit$beta)
   rel_k <- as.integer(sub("^rel::", "", names(fit$beta)[keep]))
   est_k <- fit$beta[keep]
-  se_k  <- fit$se[keep]
+  se_k <- fit$se[keep]
   z <- stats::qnorm(1 - alpha / 2)
   coef_df <- data.frame(
     relative_time = rel_k,
-    estimate      = as.numeric(est_k),
-    std_error     = as.numeric(se_k),
-    ci_lower      = as.numeric(est_k) - z * as.numeric(se_k),
-    ci_upper      = as.numeric(est_k) + z * as.numeric(se_k),
-    p_value       = ifelse(se_k > 0, .morie_did_pvalue(est_k / se_k),
-                           NA_real_)
+    estimate = as.numeric(est_k),
+    std_error = as.numeric(se_k),
+    ci_lower = as.numeric(est_k) - z * as.numeric(se_k),
+    ci_upper = as.numeric(est_k) + z * as.numeric(se_k),
+    p_value = ifelse(se_k > 0, .morie_did_pvalue(est_k / se_k),
+      NA_real_
+    )
   )
   # Insert the reference period (zero by construction).
-  coef_df <- rbind(coef_df,
-                   data.frame(relative_time = reference_period,
-                              estimate = 0, std_error = 0,
-                              ci_lower = 0, ci_upper = 0,
-                              p_value = NA_real_))
+  coef_df <- rbind(
+    coef_df,
+    data.frame(
+      relative_time = reference_period,
+      estimate = 0, std_error = 0,
+      ci_lower = 0, ci_upper = 0,
+      p_value = NA_real_
+    )
+  )
   coef_df <- coef_df[order(coef_df$relative_time), ]
   rownames(coef_df) <- NULL
   pre <- coef_df[coef_df$relative_time < 0 &
-                   coef_df$relative_time != reference_period, ]
+    coef_df$relative_time != reference_period, ]
   if (nrow(pre) > 0) {
     pre_se <- pmax(pre$std_error, 1e-10)
     chi2 <- sum((pre$estimate / pre_se)^2)
     f_stat <- chi2 / nrow(pre)
-    f_p    <- stats::pchisq(chi2, df = nrow(pre), lower.tail = FALSE)
+    f_p <- stats::pchisq(chi2, df = nrow(pre), lower.tail = FALSE)
   } else {
     f_stat <- NA_real_
-    f_p    <- NA_real_
+    f_p <- NA_real_
   }
   list(
     coefficients      = coef_df,
@@ -607,7 +678,8 @@ morie_did_event_study <- function(data, outcome, unit, time, treatment_time,
 #' df$d <- as.integer(df$treat == 1L & df$time >= 4)
 #' df$y <- 0.1 * df$time + 0.7 * df$d + rnorm(nrow(df), sd = 0.4)
 #' res <- morie_did_test_parallel_trends(df, "y", "treat", "time",
-#'                                       pre_periods = c(1, 2, 3))
+#'   pre_periods = c(1, 2, 3)
+#' )
 #' res$parallel_trends_plausible
 #' @export
 morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
@@ -617,24 +689,29 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
   all_times <- sort(unique(df[[time]]))
   if (is.null(pre_periods)) {
     treated_times <- df[df[[treatment]] == 1, time, drop = TRUE]
-    if (length(treated_times) == 0)
+    if (length(treated_times) == 0) {
       stop("No treated observations found.")
+    }
     first_treat <- min(treated_times, na.rm = TRUE)
     pre_periods <- all_times[all_times < first_treat]
   }
   if (length(pre_periods) < 2) {
-    return(list(coefficients = data.frame(),
-                joint_f_stat = NA_real_,
-                joint_p_value = NA_real_,
-                parallel_trends_plausible = TRUE))
+    return(list(
+      coefficients = data.frame(),
+      joint_f_stat = NA_real_,
+      joint_p_value = NA_real_,
+      parallel_trends_plausible = TRUE
+    ))
   }
   df_pre <- df[df[[time]] %in% pre_periods, , drop = FALSE]
   test_periods <- pre_periods[-1]
   d_vals <- as.numeric(df_pre[[treatment]])
   y_vals <- as.numeric(df_pre[[outcome]])
-  time_dummies <- vapply(test_periods,
-                         function(tp) as.numeric(df_pre[[time]] == tp),
-                         numeric(nrow(df_pre)))
+  time_dummies <- vapply(
+    test_periods,
+    function(tp) as.numeric(df_pre[[time]] == tp),
+    numeric(nrow(df_pre))
+  )
   interact_cols <- d_vals * time_dummies
   X <- .morie_did_add_intercept(cbind(d_vals, time_dummies, interact_cols))
   cluster_ids <- if (!is.null(cluster)) df_pre[[cluster]] else NULL
@@ -646,9 +723,11 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
     est_k <- fit$beta[idx]
     se_k <- fit$se[idx]
     t_k <- if (se_k > 0) est_k / se_k else 0
-    data.frame(period = test_periods[i], estimate = est_k,
-               std_error = se_k, t_stat = t_k,
-               p_value = if (se_k > 0) .morie_did_pvalue(t_k) else NA_real_)
+    data.frame(
+      period = test_periods[i], estimate = est_k,
+      std_error = se_k, t_stat = t_k,
+      p_value = if (se_k > 0) .morie_did_pvalue(t_k) else NA_real_
+    )
   })
   coef_df <- do.call(rbind, coefs)
   ib <- fit$beta[(start_idx + 1):(start_idx + length(test_periods))]
@@ -689,24 +768,31 @@ morie_did_test_parallel_trends <- function(data, outcome, treatment, time,
 morie_did_parallel_trends_data <- function(data, outcome, treatment, time,
                                            weights = NULL) {
   df <- .morie_did_drop_na(data, c(outcome, treatment, time))
-  groups <- expand.grid(t = sort(unique(df[[time]])),
-                        g = sort(unique(df[[treatment]])))
+  groups <- expand.grid(
+    t = sort(unique(df[[time]])),
+    g = sort(unique(df[[treatment]]))
+  )
   rows <- lapply(seq_len(nrow(groups)), function(i) {
     sub <- df[df[[time]] == groups$t[i] & df[[treatment]] == groups$g[i], ,
-              drop = FALSE]
-    if (nrow(sub) == 0) return(NULL)
+      drop = FALSE
+    ]
+    if (nrow(sub) == 0) {
+      return(NULL)
+    }
     y <- as.numeric(sub[[outcome]])
     if (!is.null(weights) && weights %in% colnames(sub)) {
-      w  <- as.numeric(sub[[weights]])
-      w  <- w / sum(w)
+      w <- as.numeric(sub[[weights]])
+      w <- w / sum(w)
       mu <- sum(w * y)
       se <- sqrt(sum(w * (y - mu)^2) / length(y))
     } else {
       mu <- mean(y)
       se <- if (length(y) > 1) stats::sd(y) / sqrt(length(y)) else 0
     }
-    data.frame(time = groups$t[i], group = groups$g[i],
-               mean_outcome = mu, se = se, n = length(y))
+    data.frame(
+      time = groups$t[i], group = groups$g[i],
+      mean_outcome = mu, se = se, n = length(y)
+    )
   })
   do.call(rbind, Filter(Negate(is.null), rows))
 }
@@ -762,7 +848,8 @@ morie_did_parallel_trends_data <- function(data, outcome, treatment, time,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
 #' out <- morie_did_group_time_att(df, "y", "unit", "time", "treat_time",
-#'                                 n_bootstrap = 30L, seed = 4)
+#'   n_bootstrap = 30L, seed = 4
+#' )
 #' head(out)
 #' @export
 morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
@@ -777,23 +864,29 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
   g_col <- as.numeric(df[[treatment_time]])
   g_col[!is.finite(g_col)] <- 0
   df[["morie_gname"]] <- g_col
-  method_map <- c(doubly_robust = "dr",
-                  ipw = "ipw",
-                  outcome_regression = "reg")
-  est_method <- if (method %in% names(method_map))
+  method_map <- c(
+    doubly_robust = "dr",
+    ipw = "ipw",
+    outcome_regression = "reg"
+  )
+  est_method <- if (method %in% names(method_map)) {
     method_map[[method]]
-  else "dr"
+  } else {
+    "dr"
+  }
   cg <- switch(control_group,
-               never_treated = "nevertreated",
-               not_yet_treated = "notyettreated",
-               control_group)
+    never_treated = "nevertreated",
+    not_yet_treated = "notyettreated",
+    control_group
+  )
   fit <- .morie_attgt_native(df, outcome, unit, time, "morie_gname",
-                             covariates = covariates,
-                             est_method = est_method,
-                             control_group = cg,
-                             biters = n_bootstrap, seed = seed,
-                             alpha = alpha,
-                             se_convention = se_convention)
+    covariates = covariates,
+    est_method = est_method,
+    control_group = cg,
+    biters = n_bootstrap, seed = seed,
+    alpha = alpha,
+    se_convention = se_convention
+  )
   r <- fit$results
   z <- stats::qnorm(1 - alpha / 2)
   out <- data.frame(
@@ -803,7 +896,9 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
     std_error = r$se,
     ci_lower  = r$att - z * r$se,
     ci_upper  = r$att + z * r$se,
-    p_value   = 2 * stats::pnorm(-abs(r$att / r$se))
+    p_value   = 2 * stats::pnorm(-abs(r$att / r$se)),
+    n_treated = r$n_treated,
+    post      = r$t >= r$group
   )
   out <- out[out$cohort > 0, , drop = FALSE]
   attr(out, "fit") <- fit
@@ -829,10 +924,12 @@ morie_did_group_time_att <- function(data, outcome, unit, time, treatment_time,
 #' @return A data frame with \code{group}, \code{estimate},
 #'   \code{std_error}, \code{ci_lower}, \code{ci_upper}.
 #' @examples
-#' gt <- data.frame(cohort = c(2, 2, 3, 3),
-#'                  time   = c(2, 3, 3, 4),
-#'                  att    = c(1.0, 1.5, 2.0, 2.5),
-#'                  std_error = c(0.4, 0.4, 0.3, 0.3))
+#' gt <- data.frame(
+#'   cohort = c(2, 2, 3, 3),
+#'   time = c(2, 3, 3, 4),
+#'   att = c(1.0, 1.5, 2.0, 2.5),
+#'   std_error = c(0.4, 0.4, 0.3, 0.3)
+#' )
 #' out <- morie_did_aggregate_gt_att(gt, aggregation = "overall")
 #' out$estimate
 #' @export
@@ -844,29 +941,58 @@ morie_did_aggregate_gt_att <- function(gt_results,
                                        se_col = "std_error") {
   df <- gt_results
   df[["morie_rel_time"]] <- df[[time_col]] - df[[cohort_col]]
+  # Cells with t < g are PRE-treatment. They are the parallel-trends
+  # check, not effects, and averaging them into a summary drags it
+  # toward zero -- so every aggregation except the event study, whose
+  # whole point is to show the pre-periods separately, uses post cells
+  # only (Callaway & Sant'Anna 2021, section 3).
+  post <- df[["morie_rel_time"]] >= 0
+  # Weight by cohort size where the estimator recorded it, so the
+  # summary is the sample-weighted ATT rather than an unweighted mean
+  # over cells, which would let a cohort of one count as much as a
+  # cohort of a thousand.
+  wts <- if ("n_treated" %in% names(df)) {
+    as.numeric(df[["n_treated"]])
+  } else {
+    rep(1, nrow(df))
+  }
+  agg_one <- function(idx, label) {
+    if (!length(idx)) {
+      return(data.frame(
+        group = label, estimate = NA_real_,
+        std_error = NA_real_, ci_lower = NA_real_,
+        ci_upper = NA_real_
+      ))
+    }
+    w <- wts[idx] / sum(wts[idx])
+    est <- sum(w * df[[att_col]][idx])
+    # SE of a weighted average of k estimates, treating them as
+    # independent: sqrt(sum(w_i^2 se_i^2)).
+    se <- sqrt(sum(w^2 * df[[se_col]][idx]^2))
+    ci <- .morie_did_make_ci(est, se)
+    data.frame(
+      group = label, estimate = est, std_error = se,
+      ci_lower = ci[1], ci_upper = ci[2]
+    )
+  }
   if (identical(aggregation, "overall")) {
-    est <- mean(df[[att_col]], na.rm = TRUE)
-    se  <- sqrt(mean(df[[se_col]]^2, na.rm = TRUE) / nrow(df))
-    ci  <- .morie_did_make_ci(est, se)
-    return(data.frame(group = "overall", estimate = est,
-                      std_error = se, ci_lower = ci[1], ci_upper = ci[2]))
+    return(agg_one(which(post), "overall"))
   }
   group_col <- switch(aggregation,
-                      cohort        = cohort_col,
-                      calendar_time = time_col,
-                      event_time    = "morie_rel_time",
-                      stop("Unknown aggregation: ", aggregation))
-  rows <- lapply(split(df, df[[group_col]]), function(g) {
-    est <- mean(g[[att_col]], na.rm = TRUE)
-    # SE of a simple average of k independent estimates:
-    #   sqrt(sum(se_i^2)) / k  ==  sqrt(mean(se_i^2) / k)
-    k <- nrow(g)
-    se <- sqrt(mean(g[[se_col]]^2, na.rm = TRUE) / k)
-    ci  <- .morie_did_make_ci(est, se)
-    data.frame(group = g[[group_col]][1], estimate = est,
-               std_error = se, ci_lower = ci[1], ci_upper = ci[2])
+    cohort        = cohort_col,
+    calendar_time = time_col,
+    event_time    = "morie_rel_time",
+    stop("Unknown aggregation: ", aggregation)
+  )
+  # the event study reports every relative period, pre ones included
+  use <- if (identical(aggregation, "event_time")) rep(TRUE, nrow(df)) else post
+  keys <- sort(unique(df[[group_col]][use]))
+  rows <- lapply(keys, function(k) {
+    agg_one(which(use & df[[group_col]] == k), k)
   })
-  do.call(rbind, rows)
+  out <- do.call(rbind, rows)
+  rownames(out) <- NULL
+  out
 }
 
 
@@ -889,7 +1015,8 @@ morie_did_aggregate_gt_att <- function(gt_results,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.1 * df$time + 0.6 * df$d + rnorm(nrow(df), sd = 0.4)
 #' out <- morie_did_staggered(df, "y", "unit", "time", "treat_time",
-#'                            n_bootstrap = 50L, seed = 2)
+#'   n_bootstrap = 50L, seed = 2
+#' )
 #' str(out, max.level = 1)
 #' @export
 morie_did_staggered <- function(data, outcome, unit, time, treatment_time,
@@ -897,9 +1024,10 @@ morie_did_staggered <- function(data, outcome, unit, time, treatment_time,
                                 n_bootstrap = 200L, seed = 42L,
                                 alpha = 0.05) {
   gt <- morie_did_group_time_att(data, outcome, unit, time, treatment_time,
-                                 covariates = covariates,
-                                 n_bootstrap = n_bootstrap, seed = seed,
-                                 alpha = alpha)
+    covariates = covariates,
+    n_bootstrap = n_bootstrap, seed = seed,
+    alpha = alpha
+  )
   list(
     group_time    = gt,
     overall       = morie_did_aggregate_gt_att(gt, aggregation = "overall"),
@@ -942,12 +1070,16 @@ morie_did_staggered <- function(data, outcome, unit, time, treatment_time,
 #' set.seed(23)
 #' n <- 300
 #' treat <- rep(c(0L, 1L), each = n / 2)
-#' df <- data.frame(unit = rep(1:n, 2), treat = rep(treat, 2),
-#'                  post = rep(c(0L, 1L), each = n), x = rnorm(2 * n))
+#' df <- data.frame(
+#'   unit = rep(1:n, 2), treat = rep(treat, 2),
+#'   post = rep(c(0L, 1L), each = n), x = rnorm(2 * n)
+#' )
 #' df$y <- 0.5 * df$post + 3 * df$treat * df$post + rnorm(2 * n, sd = 0.4)
-#' res <- morie_did_doubly_robust(df, outcome = "y", treatment = "treat",
-#'                                post = "post", covariates = "x",
-#'                                n_bootstrap = 50L, seed = 1L)
+#' res <- morie_did_doubly_robust(df,
+#'   outcome = "y", treatment = "treat",
+#'   post = "post", covariates = "x",
+#'   n_bootstrap = 50L, seed = 1L
+#' )
 #' res$estimate
 #' @export
 morie_did_doubly_robust <- function(data, outcome, treatment, post,
@@ -958,33 +1090,56 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
                                     n_bootstrap = 200L, seed = 42L,
                                     alpha = 0.05,
                                     se_convention = "reference") {
-  rng <- if (exists(".Random.seed", envir = .GlobalEnv))
-    get(".Random.seed", envir = .GlobalEnv) else NULL
+  ps_model <- match.arg(as.character(ps_model), c("logistic"))
+  or_model <- match.arg(as.character(or_model), c("linear"))
+  rng <- if (exists(".Random.seed", envir = .GlobalEnv)) {
+    get(".Random.seed", envir = .GlobalEnv)
+  } else {
+    NULL
+  }
   on.exit({
     if (!is.null(rng)) assign(".Random.seed", rng, envir = .GlobalEnv)
   })
+  cl <- NULL
+  if (!is.null(cluster)) {
+    if (!cluster %in% names(data)) {
+      stop("did_doubly_robust: `cluster` names a column that is not in ",
+           "`data`: ", cluster, ".", call. = FALSE)
+    }
+    keep <- stats::complete.cases(
+      data[, unique(c(outcome, treatment, post, covariates, cluster)),
+           drop = FALSE])
+    cl <- data[[cluster]][keep]
+  }
   df <- .morie_did_drop_na(data, c(outcome, treatment, post, covariates))
-  y  <- as.numeric(df[[outcome]])
-  d  <- as.numeric(df[[treatment]])
-  p  <- as.numeric(df[[post]])
+  y <- as.numeric(df[[outcome]])
+  d <- as.numeric(df[[treatment]])
+  p <- as.numeric(df[[post]])
   covariates_mat <- as.matrix(df[, covariates, drop = FALSE])
   storage.mode(covariates_mat) <- "double"
   X <- cbind(`(Intercept)` = 1, covariates_mat)
   fit <- .morie_drdid_rc_native(y, p, d, X)
-  est    <- fit$att
+  est <- fit$att
   se_est <- .morie_did_if_se(fit$IF, se_convention)
   if (n_bootstrap > 0L) {
     mb <- .morie_did_mboot(matrix(fit$IF, ncol = 1L),
-                           biters = n_bootstrap, seed = seed)
+      biters = n_bootstrap, seed = seed,
+      # The helper aggregates the influence function within cluster
+      # before drawing multipliers; without this the bootstrap resamples
+      # individuals and the interval is too narrow.
+      cluster = cl
+    )
     if (is.finite(mb$se) && mb$se > 0) se_est <- mb$se
   }
   .morie_did_result(
     est, se_est,
     n_treated = sum(d == 1), n_control = sum(d == 0),
     method = "did_doubly_robust (rmorie native)", alpha = alpha,
-    details = list(fit = fit[c("att", "se")],
-                   n_bootstrap = n_bootstrap,
-                   backend = "rmorie native")
+    details = list(
+      fit = fit[c("att", "se")],
+      n_bootstrap = n_bootstrap,
+      backend = "rmorie native"
+    )
   )
 }
 
@@ -1004,7 +1159,8 @@ morie_did_doubly_robust <- function(data, outcome, treatment, post,
 #' @examples
 #' set.seed(1)
 #' n <- 400
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' s <- rbinom(n, 1, 0.5)
 #' y <- 0.2 * d + 0.3 * p + 0.4 * s + 0.5 * d * p * s + rnorm(n, sd = 0.5)
 #' df <- data.frame(y = y, d = d, post = p, group = s)
@@ -1029,7 +1185,7 @@ morie_did_triple_difference <- function(data, outcome, treatment, post,
   X <- .morie_did_add_intercept(parts)
   cluster_ids <- if (!is.null(cluster)) df[[cluster]] else NULL
   fit <- .morie_did_ols_robust_se(X, y, cluster_ids = cluster_ids)
-  tau_idx <- 8L   # intercept(1) + 6 main/interaction terms + DDD(8)
+  tau_idx <- 8L # intercept(1) + 6 main/interaction terms + DDD(8)
   est <- fit$beta[tau_idx]
   se_est <- fit$se[tau_idx]
   .morie_did_result(
@@ -1076,8 +1232,10 @@ morie_did_bacon_decomposition <- function(data, outcome, treatment,
                                           unit, time) {
   comp <- .morie_bacon_native(data, outcome, treatment, unit, time)
   overall <- sum(comp$estimate * comp$weight)
-  list(components = comp, overall_estimate = overall,
-       details = list(backend = "rmorie native"))
+  list(
+    components = comp, overall_estimate = overall,
+    details = list(backend = "rmorie native")
+  )
 }
 
 
@@ -1113,7 +1271,8 @@ morie_did_bacon_decomposition <- function(data, outcome, treatment,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
 #' out <- morie_did_synthetic(df, "y", "unit", "time", "treat_time",
-#'                            n_bootstrap = 50L, seed = 3)
+#'   n_bootstrap = 50L, seed = 3
+#' )
 #' str(out, max.level = 1)
 #' @export
 morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
@@ -1122,39 +1281,50 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
                                 alpha = 0.05) {
   df <- as.data.frame(data)
   df[["morie_g"]] <- as.numeric(df[[treatment_time]])
-  if (is.null(treated_units))
+  if (is.null(treated_units)) {
     treated_units <- unique(df[is.finite(df[["morie_g"]]) &
-                                 df[["morie_g"]] > 0, unit, drop = TRUE])
+      df[["morie_g"]] > 0, unit, drop = TRUE])
+  }
   treat_onset <- df[df[[unit]] %in% treated_units, "morie_g", drop = TRUE]
-  if (!length(treat_onset))
+  if (!length(treat_onset)) {
     stop("No treated units found.", call. = FALSE)
+  }
   first_treat <- min(treat_onset, na.rm = TRUE)
   units_all <- unique(df[[unit]])
   control_units <- setdiff(units_all, treated_units)
   df[["morie_W"]] <- as.integer(df[[unit]] %in% treated_units &
-                                  df[[time]] >= first_treat)
+    df[[time]] >= first_treat)
   prep <- .morie_sdid_prepare(df, outcome, unit, time, "morie_W")
   # zeta is retained for back-compat but ignored: the engine derives
   # the SDID regularisation from the data (Arkhangelsky et al. 2021).
   fit <- .morie_sdid_inference(prep$Y, prep$N_co, prep$T_pre,
-                               method = "bootstrap",
-                               n_boot = n_bootstrap, seed = seed)
+    method = "bootstrap",
+    n_boot = n_bootstrap, seed = seed
+  )
   tau <- fit$estimate
   se_est <- fit$se
-  ci <- if (is.finite(se_est)) .morie_did_make_ci(tau, se_est, alpha)
-        else c(NA_real_, NA_real_)
-  pval <- if (is.finite(se_est) && se_est > 0)
-    .morie_did_pvalue(tau / se_est) else NA_real_
+  ci <- if (is.finite(se_est)) {
+    .morie_did_make_ci(tau, se_est, alpha)
+  } else {
+    c(NA_real_, NA_real_)
+  }
+  pval <- if (is.finite(se_est) && se_est > 0) {
+    .morie_did_pvalue(tau / se_est)
+  } else {
+    NA_real_
+  }
   list(
     estimate = tau, std_error = se_est,
-    t_stat   = if (is.finite(se_est) && se_est > 0) tau / se_est else NA_real_,
-    p_value  = pval,
+    t_stat = if (is.finite(se_est) && se_est > 0) tau / se_est else NA_real_,
+    p_value = pval,
     ci_lower = ci[1], ci_upper = ci[2],
     n_treated = length(treated_units),
     n_control = length(control_units),
     method = "synthetic_did (rmorie native)",
-    details = list(fit = fit, unit_weights = fit$unit_weights,
-                   time_weights = fit$time_weights)
+    details = list(
+      fit = fit, unit_weights = fit$unit_weights,
+      time_weights = fit$time_weights
+    )
   )
 }
 
@@ -1184,13 +1354,17 @@ morie_did_synthetic <- function(data, outcome, unit, time, treatment_time,
 #' @examples
 #' set.seed(1)
 #' n <- 300
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-#' df <- data.frame(y = y, d = d, post = p,
-#'                  clust = sample.int(20, n, replace = TRUE))
+#' df <- data.frame(
+#'   y = y, d = d, post = p,
+#'   clust = sample.int(20, n, replace = TRUE)
+#' )
 #' res <- morie_did_wild_cluster_bootstrap(df, "y", "d", "post",
-#'                                         cluster = "clust",
-#'                                         n_bootstrap = 99L, seed = 7)
+#'   cluster = "clust",
+#'   n_bootstrap = 99L, seed = 7
+#' )
 #' c(res$estimate, res$p_value)
 #' @export
 morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
@@ -1222,13 +1396,17 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
   X_r <- X[, -tau_idx, drop = FALSE]
   beta_r <- as.numeric(qr.coef(qr(X_r), y))
   resid_r <- as.numeric(y - X_r %*% beta_r)
-  webb_vals <- c(-sqrt(1.5), -sqrt(1.0), -sqrt(0.5),
-                  sqrt(0.5),  sqrt(1.0),  sqrt(1.5))
+  webb_vals <- c(
+    -sqrt(1.5), -sqrt(1.0), -sqrt(0.5),
+    sqrt(0.5), sqrt(1.0), sqrt(1.5)
+  )
   boot_t <- numeric(n_bootstrap)
   for (i in seq_len(n_bootstrap)) {
-    w <- if (identical(weight_type, "webb"))
+    w <- if (identical(weight_type, "webb")) {
       sample(webb_vals, G, replace = TRUE)
-    else sample(c(-1, 1), G, replace = TRUE)
+    } else {
+      sample(c(-1, 1), G, replace = TRUE)
+    }
     y_star <- as.numeric(X_r %*% beta_r)
     for (j in seq_along(uc)) {
       mask <- cluster_ids == uc[j]
@@ -1243,12 +1421,14 @@ morie_did_wild_cluster_bootstrap <- function(data, outcome, treatment, post,
   ci <- .morie_did_make_ci(est, se_est, alpha)
   list(
     estimate = est, std_error = se_est,
-    t_stat   = t_full, p_value = boot_p,
+    t_stat = t_full, p_value = boot_p,
     ci_lower = ci[1], ci_upper = ci[2],
     n_treated = sum(d == 1), n_control = sum(d == 0),
     method = "wild_cluster_bootstrap (base-R)",
-    details = list(n_clusters = G, n_bootstrap = n_bootstrap,
-                   weight_type = weight_type)
+    details = list(
+      n_clusters = G, n_bootstrap = n_bootstrap,
+      weight_type = weight_type
+    )
   )
 }
 
@@ -1367,16 +1547,23 @@ morie_did_fuzzy <- function(data, outcome, assignment, takeup, post,
   ssr_u <- sum(resid_u^2)
   n <- length(y)
   k <- ncol(X_first)
-  f_stat <- if (ssr_u > 0)
-    ((ssr_r - ssr_u) / 1) / (ssr_u / (n - k)) else 0
+  f_stat <- if (ssr_u > 0) {
+    ((ssr_r - ssr_u) / 1) / (ssr_u / (n - k))
+  } else {
+    0
+  }
   res <- .morie_did_result(
     est, se_est,
     n_treated = sum(d == 1), n_control = sum(d == 0),
     method = "did_fuzzy", alpha = alpha
   )
-  res$details <- c(res$details,
-                   list(first_stage_f = f_stat,
-                        compliance_rate = mean(d)))
+  res$details <- c(
+    res$details,
+    list(
+      first_stage_f = f_stat,
+      compliance_rate = mean(d)
+    )
+  )
   res
 }
 
@@ -1404,8 +1591,9 @@ morie_did_fuzzy <- function(data, outcome, assignment, takeup, post,
 #'   time = sample(1:8, 500, replace = TRUE)
 #' )
 #' out <- morie_did_placebo_test_time(df, "y", "d", "time",
-#'                                    true_treatment_time = 7,
-#'                                    placebo_times = c(3, 4, 5))
+#'   true_treatment_time = 7,
+#'   placebo_times = c(3, 4, 5)
+#' )
 #' out
 #' @export
 morie_did_placebo_test_time <- function(data, outcome, treatment, time,
@@ -1419,18 +1607,22 @@ morie_did_placebo_test_time <- function(data, outcome, treatment, time,
     df_test[["morie_placebo_post"]] <- as.integer(df_test[[time]] >= pt)
     if (length(unique(df_test[["morie_placebo_post"]])) < 2) next
     res <- morie_did_2x2(df_test, outcome, treatment, "morie_placebo_post",
-                         covariates = covariates, cluster = cluster,
-                         alpha = alpha)
+      covariates = covariates, cluster = cluster,
+      alpha = alpha
+    )
     rows[[length(rows) + 1]] <- data.frame(
       placebo_time = pt, estimate = res$estimate,
       std_error = res$std_error, p_value = res$p_value,
       significant = res$p_value < alpha
     )
   }
-  if (!length(rows))
-    return(data.frame(placebo_time = numeric(), estimate = numeric(),
-                      std_error = numeric(), p_value = numeric(),
-                      significant = logical()))
+  if (!length(rows)) {
+    return(data.frame(
+      placebo_time = numeric(), estimate = numeric(),
+      std_error = numeric(), p_value = numeric(),
+      significant = logical()
+    ))
+  }
   do.call(rbind, rows)
 }
 
@@ -1444,11 +1636,16 @@ morie_did_placebo_test_time <- function(data, outcome, treatment, time,
 #' @examples
 #' set.seed(1)
 #' n <- 400
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
-#' df <- data.frame(d = d, post = p,
-#'                  y_pl1 = rnorm(n), y_pl2 = rnorm(n))
-#' out <- morie_did_placebo_test_outcome(df, c("y_pl1", "y_pl2"),
-#'                                       "d", "post")
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
+#' df <- data.frame(
+#'   d = d, post = p,
+#'   y_pl1 = rnorm(n), y_pl2 = rnorm(n)
+#' )
+#' out <- morie_did_placebo_test_outcome(
+#'   df, c("y_pl1", "y_pl2"),
+#'   "d", "post"
+#' )
 #' out
 #' @export
 morie_did_placebo_test_outcome <- function(data, placebo_outcomes,
@@ -1459,18 +1656,22 @@ morie_did_placebo_test_outcome <- function(data, placebo_outcomes,
   for (out in placebo_outcomes) {
     if (!(out %in% colnames(data))) next
     res <- morie_did_2x2(data, out, treatment, post,
-                         covariates = covariates, cluster = cluster,
-                         alpha = alpha)
+      covariates = covariates, cluster = cluster,
+      alpha = alpha
+    )
     rows[[length(rows) + 1]] <- data.frame(
       outcome = out, estimate = res$estimate,
       std_error = res$std_error, p_value = res$p_value,
       significant = res$p_value < alpha
     )
   }
-  if (!length(rows))
-    return(data.frame(outcome = character(), estimate = numeric(),
-                      std_error = numeric(), p_value = numeric(),
-                      significant = logical()))
+  if (!length(rows)) {
+    return(data.frame(
+      outcome = character(), estimate = numeric(),
+      std_error = numeric(), p_value = numeric(),
+      significant = logical()
+    ))
+  }
   do.call(rbind, rows)
 }
 
@@ -1486,13 +1687,17 @@ morie_did_placebo_test_outcome <- function(data, placebo_outcomes,
 #' @examples
 #' set.seed(1)
 #' n <- 400
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
-#' df <- data.frame(y = y, d = d, post = p,
-#'                  grp = sample(c("A", "B"), n, replace = TRUE))
+#' df <- data.frame(
+#'   y = y, d = d, post = p,
+#'   grp = sample(c("A", "B"), n, replace = TRUE)
+#' )
 #' out <- morie_did_placebo_test_group(df, "y", "d", "post",
-#'                                     group_col = "grp",
-#'                                     unaffected_groups = c("A", "B"))
+#'   group_col = "grp",
+#'   unaffected_groups = c("A", "B")
+#' )
 #' out
 #' @export
 morie_did_placebo_test_group <- function(data, outcome, treatment, post,
@@ -1504,18 +1709,22 @@ morie_did_placebo_test_group <- function(data, outcome, treatment, post,
     df_g <- data[data[[group_col]] == g, , drop = FALSE]
     if (length(unique(df_g[[treatment]])) < 2) next
     res <- morie_did_2x2(df_g, outcome, treatment, post,
-                         covariates = covariates, cluster = cluster,
-                         alpha = alpha)
+      covariates = covariates, cluster = cluster,
+      alpha = alpha
+    )
     rows[[length(rows) + 1]] <- data.frame(
       group = g, estimate = res$estimate,
       std_error = res$std_error, p_value = res$p_value,
       significant = res$p_value < alpha
     )
   }
-  if (!length(rows))
-    return(data.frame(group = character(), estimate = numeric(),
-                      std_error = numeric(), p_value = numeric(),
-                      significant = logical()))
+  if (!length(rows)) {
+    return(data.frame(
+      group = character(), estimate = numeric(),
+      std_error = numeric(), p_value = numeric(),
+      significant = logical()
+    ))
+  }
   do.call(rbind, rows)
 }
 
@@ -1537,11 +1746,13 @@ morie_did_placebo_test_group <- function(data, outcome, treatment, post,
 #' @examples
 #' set.seed(1)
 #' n <- 600
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
 #' df <- data.frame(y = y, d = d, post = p, mod = rnorm(n))
 #' out <- morie_did_heterogeneous(df, "y", "d", "post",
-#'                                moderator = "mod", n_quantiles = 3L)
+#'   moderator = "mod", n_quantiles = 3L
+#' )
 #' out
 #' @export
 morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
@@ -1549,12 +1760,16 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
                                     cluster = NULL,
                                     n_quantiles = 4L, alpha = 0.05) {
   df <- data
-  m  <- df[[moderator]]
+  m <- df[[moderator]]
   if (is.numeric(m) && length(unique(m)) > n_quantiles) {
-    breaks <- stats::quantile(m, probs = seq(0, 1, length.out = n_quantiles + 1),
-                              na.rm = TRUE)
-    df[["morie_mod_group"]] <- as.integer(cut(m, breaks = unique(breaks),
-                                              include.lowest = TRUE))
+    breaks <- stats::quantile(m,
+      probs = seq(0, 1, length.out = n_quantiles + 1),
+      na.rm = TRUE
+    )
+    df[["morie_mod_group"]] <- as.integer(cut(m,
+      breaks = unique(breaks),
+      include.lowest = TRUE
+    ))
   } else {
     df[["morie_mod_group"]] <- m
   }
@@ -1563,10 +1778,13 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
     if (is.na(g_val)) next
     grp <- df[df[["morie_mod_group"]] %in% g_val, , drop = FALSE]
     if (length(unique(grp[[treatment]])) < 2 ||
-        length(unique(grp[[post]])) < 2) next
+      length(unique(grp[[post]])) < 2) {
+      next
+    }
     res <- morie_did_2x2(grp, outcome, treatment, post,
-                         covariates = covariates, cluster = cluster,
-                         alpha = alpha)
+      covariates = covariates, cluster = cluster,
+      alpha = alpha
+    )
     rows[[length(rows) + 1]] <- data.frame(
       group = g_val, estimate = res$estimate,
       std_error = res$std_error,
@@ -1574,11 +1792,14 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
       p_value = res$p_value, n = nrow(grp)
     )
   }
-  if (!length(rows))
-    return(data.frame(group = integer(), estimate = numeric(),
-                      std_error = numeric(),
-                      ci_lower = numeric(), ci_upper = numeric(),
-                      p_value = numeric(), n = integer()))
+  if (!length(rows)) {
+    return(data.frame(
+      group = integer(), estimate = numeric(),
+      std_error = numeric(),
+      ci_lower = numeric(), ci_upper = numeric(),
+      p_value = numeric(), n = integer()
+    ))
+  }
   do.call(rbind, rows)
 }
 
@@ -1613,7 +1834,8 @@ morie_did_heterogeneous <- function(data, outcome, treatment, post, moderator,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
 #' res <- morie_did_chaisemartin_dhaultfoeuille(df, "y", "d", "unit", "time",
-#'                                              n_bootstrap = 50L, seed = 9)
+#'   n_bootstrap = 50L, seed = 9
+#' )
 #' res$estimate
 #' @export
 morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
@@ -1621,8 +1843,9 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
                                                   n_bootstrap = 200L,
                                                   seed = 42L, alpha = 0.05) {
   fit <- .morie_didm_native(as.data.frame(data), outcome, treatment,
-                            unit, time,
-                            n_bootstrap = n_bootstrap, seed = seed)
+    unit, time,
+    n_bootstrap = n_bootstrap, seed = seed
+  )
   est <- as.numeric(fit$effect)
   se_est <- as.numeric(fit$se_effect)
   units_all <- unique(data[[unit]])
@@ -1666,7 +1889,8 @@ morie_did_chaisemartin_dhaultfoeuille <- function(data, outcome, treatment,
 #' @examples
 #' set.seed(7)
 #' n <- 300
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
 #' df <- data.frame(y = y, d = d, post = p)
 #' out <- morie_did_sensitivity_analysis(df, "y", "d", "post")
@@ -1678,15 +1902,18 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
                                            cluster = NULL, alpha = 0.05) {
   if (is.null(delta_range)) delta_range <- seq(0, 2, by = 0.25)
   res <- morie_did_2x2(data, outcome, treatment, post,
-                       covariates = covariates, cluster = cluster,
-                       alpha = alpha)
+    covariates = covariates, cluster = cluster,
+    alpha = alpha
+  )
   z <- stats::qnorm(1 - alpha / 2)
   rows <- lapply(delta_range, function(delta) {
     bias_bound <- delta * res$std_error
     ci_lo <- res$estimate - bias_bound - z * res$std_error
     ci_hi <- res$estimate + bias_bound + z * res$std_error
-    data.frame(delta = delta, ci_lower = ci_lo, ci_upper = ci_hi,
-               covers_zero = ci_lo <= 0 & 0 <= ci_hi)
+    data.frame(
+      delta = delta, ci_lower = ci_lo, ci_upper = ci_hi,
+      covers_zero = ci_lo <= 0 & 0 <= ci_hi
+    )
   })
   do.call(rbind, rows)
 }
@@ -1729,7 +1956,8 @@ morie_did_sensitivity_analysis <- function(data, outcome, treatment, post,
 #' df$d <- as.integer(df$time >= df$treat_time)
 #' df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
 #' es <- morie_did_event_study(df, "y", "unit", "time", "treat_time",
-#'                             leads = 3L, lags = 3L)
+#'   leads = 3L, lags = 3L
+#' )
 #' out <- morie_did_honest_sensitivity(es, m_bar_range = c(0, 1, 5))
 #' out
 #' @export
@@ -1738,15 +1966,21 @@ morie_did_honest_sensitivity <- function(event_study,
                                          target_time = 0L,
                                          alpha = 0.05) {
   cf <- event_study$coefficients
-  if (is.null(cf) || !all(c("relative_time", "estimate",
-                            "std_error") %in% names(cf))) {
+  if (is.null(cf) || !all(c(
+    "relative_time", "estimate",
+    "std_error"
+  ) %in% names(cf))) {
     stop("`event_study` must carry a coefficients data frame with ",
-         "relative_time / estimate / std_error.", call. = FALSE)
+      "relative_time / estimate / std_error.",
+      call. = FALSE
+    )
   }
   row <- cf[cf$relative_time == target_time, , drop = FALSE]
   if (nrow(row) != 1L) {
     stop("No event-study coefficient at relative time ", target_time,
-         ".", call. = FALSE)
+      ".",
+      call. = FALSE
+    )
   }
   pre <- cf[cf$relative_time < 0 & cf$std_error > 0, , drop = FALSE]
   max_pre <- if (nrow(pre)) max(abs(pre$estimate)) else 0
@@ -1755,9 +1989,11 @@ morie_did_honest_sensitivity <- function(event_study,
     bias <- m_bar * max_pre
     lo <- row$estimate - bias - z * row$std_error
     hi <- row$estimate + bias + z * row$std_error
-    data.frame(m_bar = m_bar, estimate = row$estimate,
-               ci_lower = lo, ci_upper = hi,
-               covers_zero = lo <= 0 & 0 <= hi)
+    data.frame(
+      m_bar = m_bar, estimate = row$estimate,
+      ci_lower = lo, ci_upper = hi,
+      covers_zero = lo <= 0 & 0 <= hi
+    )
   })
   out <- do.call(rbind, rows)
   cz <- out$m_bar[out$covers_zero]
@@ -1786,7 +2022,8 @@ morie_did_honest_sensitivity <- function(event_study,
 #' @examples
 #' set.seed(8)
 #' n <- 300
-#' d <- rbinom(n, 1, 0.5); p <- rbinom(n, 1, 0.5)
+#' d <- rbinom(n, 1, 0.5)
+#' p <- rbinom(n, 1, 0.5)
 #' y <- 1 + 0.3 * d + 0.4 * p + 0.5 * d * p + rnorm(n, sd = 0.5)
 #' df <- data.frame(y = y, d = d, post = p)
 #' out <- morie_did_diagnostics(df, "y", "d", "post")
@@ -1797,42 +2034,52 @@ morie_did_diagnostics <- function(data, outcome, treatment, post,
                                   cluster = NULL) {
   df <- .morie_did_drop_na(data, c(outcome, treatment, post))
   sizes <- table(df[[treatment]], df[[post]])
-  outcome_stats <- do.call(rbind, lapply(split(df, df[c(treatment, post)]),
-                                         function(g) {
-    if (!nrow(g)) return(NULL)
-    y <- as.numeric(g[[outcome]])
-    data.frame(
-      treatment = g[[treatment]][1],
-      post      = g[[post]][1],
-      mean   = mean(y),
-      std    = stats::sd(y),
-      median = stats::median(y),
-      min    = min(y),
-      max    = max(y),
-      count  = length(y)
-    )
-  }))
+  outcome_stats <- do.call(rbind, lapply(
+    split(df, df[c(treatment, post)]),
+    function(g) {
+      if (!nrow(g)) {
+        return(NULL)
+      }
+      y <- as.numeric(g[[outcome]])
+      data.frame(
+        treatment = g[[treatment]][1],
+        post = g[[post]][1],
+        mean = mean(y),
+        std = stats::sd(y),
+        median = stats::median(y),
+        min = min(y),
+        max = max(y),
+        count = length(y)
+      )
+    }
+  ))
   cov_balance <- NULL
   if (length(covariates)) {
     df_pre <- df[df[[post]] == 0, , drop = FALSE]
     rows <- lapply(covariates, function(c_) {
-      if (!(c_ %in% colnames(df_pre))) return(NULL)
+      if (!(c_ %in% colnames(df_pre))) {
+        return(NULL)
+      }
       t_vals <- as.numeric(df_pre[df_pre[[treatment]] == 1, c_, drop = TRUE])
       c_vals <- as.numeric(df_pre[df_pre[[treatment]] == 0, c_, drop = TRUE])
       mean_diff <- mean(t_vals, na.rm = TRUE) - mean(c_vals, na.rm = TRUE)
       pooled_sd <- sqrt((stats::var(t_vals, na.rm = TRUE) +
-                          stats::var(c_vals, na.rm = TRUE)) / 2)
+        stats::var(c_vals, na.rm = TRUE)) / 2)
       smd <- if (pooled_sd > 0) mean_diff / pooled_sd else NA_real_
-      data.frame(covariate = c_,
-                 mean_treated = mean(t_vals, na.rm = TRUE),
-                 mean_control = mean(c_vals, na.rm = TRUE),
-                 smd = smd)
+      data.frame(
+        covariate = c_,
+        mean_treated = mean(t_vals, na.rm = TRUE),
+        mean_control = mean(c_vals, na.rm = TRUE),
+        smd = smd
+      )
     })
     cov_balance <- do.call(rbind, Filter(Negate(is.null), rows))
   }
-  list(sample_sizes = sizes,
-       outcome_stats = outcome_stats,
-       covariate_balance = cov_balance)
+  list(
+    sample_sizes = sizes,
+    outcome_stats = outcome_stats,
+    covariate_balance = cov_balance
+  )
 }
 
 
@@ -1889,7 +2136,9 @@ morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
                                         type = "feTR", ...) {
   if (!identical(type, "feTR")) {
     stop("Only type = \"feTR\" is supported by the native ",
-         "implementation.", call. = FALSE)
+      "implementation.",
+      call. = FALSE
+    )
   }
   df <- as.data.frame(panel)
   fit <- .morie_twfe_weights_native(df, group, time, treatment)
@@ -1897,16 +2146,19 @@ morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
   n_neg <- sum(weights < 0)
   sum_w <- sum(weights)
   sum_neg <- sum(weights[weights < 0])
-  share_neg <- if (length(weights) == 0L) NA_real_
-               else n_neg / length(weights)
+  share_neg <- if (length(weights) == 0L) {
+    NA_real_
+  } else {
+    n_neg / length(weights)
+  }
   structure(
     list(
-      n_negative_weights      = n_neg,
-      sum_weights             = sum_w,
-      sum_negative_weights    = sum_neg,
-      share_negative_weights  = share_neg,
+      n_negative_weights = n_neg,
+      sum_weights = sum_w,
+      sum_negative_weights = sum_neg,
+      share_negative_weights = share_neg,
       method = "twoway_fe_weights (rmorie native)",
-      raw    = fit
+      raw = fit
     ),
     class = c("morie_did_twfe_diagnostics", "list")
   )
@@ -1951,8 +2203,10 @@ morie_did_twoway_fe_weights <- function(panel, group, time, treatment,
 #'   df$treat_time <- ifelse(df$unit <= 5, 6, Inf)
 #'   df$d <- as.integer(df$time >= df$treat_time)
 #'   df$y <- 0.1 * df$time + 0.5 * df$d + rnorm(nrow(df), sd = 0.3)
-#'   out <- morie_did_synthdid_estimate(df, unit = "unit", time = "time",
-#'                                      treatment = "d", outcome = "y")
+#'   out <- morie_did_synthdid_estimate(df,
+#'     unit = "unit", time = "time",
+#'     treatment = "d", outcome = "y"
+#'   )
 #'   out$att
 #' }
 #' @export
@@ -1960,16 +2214,18 @@ morie_did_synthdid_estimate <- function(panel, unit, time, treatment,
                                         outcome,
                                         vcov_method = "placebo", ...) {
   df <- as.data.frame(panel)
-  if (is.logical(df[[treatment]]))
+  if (is.logical(df[[treatment]])) {
     df[[treatment]] <- as.integer(df[[treatment]])
+  }
   prep <- .morie_sdid_prepare(df, outcome, unit, time, treatment)
   fit <- .morie_sdid_inference(prep$Y, prep$N_co, prep$T_pre,
-                               method = vcov_method)
+    method = vcov_method
+  )
   att <- fit$estimate
   se_est <- fit$se
   n_total <- length(unique(df[[unit]]))
   t_total <- length(unique(df[[time]]))
-  n_pre   <- as.integer(fit$T_pre)
+  n_pre <- as.integer(fit$T_pre)
   n_treat <- as.integer(fit$N_tr)
   structure(
     list(

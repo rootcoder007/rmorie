@@ -24,9 +24,9 @@ encodings depending on the table:
 
 This helper returns a 5-row crosswalk between all four forms so
 callers can left-join NYPD data against the
-\code{\link[=morie_datasets_nyc_boroughs]{morie_datasets_nyc_boroughs()}} boundary table regardless of
+\code{morie_datasets_nyc_boroughs()} boundary table regardless of
 which encoding their source uses. Used internally by
-\code{\link[=morie_datasets_nyc_nypd_resolved]{morie_datasets_nyc_nypd_resolved()}}.
+\code{morie_datasets_nyc_nypd_resolved()}.
 }
 \examples{
 cw <- morie_datasets_nyc_nypd_boro_crosswalk()

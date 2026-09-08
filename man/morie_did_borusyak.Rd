@@ -27,6 +27,8 @@ morie_did_borusyak(
 \item{seed}{RNG seed.}
 
 \item{alpha}{CI tail.}
+
+
 }
 \value{
 List of class \code{"morie_did"}: estimate, std.error,

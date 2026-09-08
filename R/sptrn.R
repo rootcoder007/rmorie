@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Polynomial trend surface analysis (OLS).
+#' Polynomial trend surface analysis (OLS)
 #'
 #' mu(s) = sum_k beta_k f_k(s); f_k are monomials up to degree `order`.
 #'

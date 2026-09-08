@@ -45,7 +45,8 @@ test_that("EAP scoring of new respondents matches training scores", {
 
 test_that("GRM recovers ordered thresholds and abilities", {
   set.seed(64)
-  n <- 1200; k <- 4
+  n <- 1200
+  k <- 4
   a_true <- c(1.2, 1.5, 1.0, 1.8)
   th <- rnorm(n)
   X <- vapply(seq_len(k), function(j) {

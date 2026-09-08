@@ -25,6 +25,7 @@ for field-level conflicts among matched rows.}
 \item{numeric_tolerance}{Absolute tolerance under which numeric
 disagreements in \code{compare} columns are NOT conflicts
 (default 0).}
+
 }
 \value{
 An object of class \code{morie_mrm_reconciliation}: list

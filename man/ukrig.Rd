@@ -2,10 +2,22 @@
 % Please edit documentation in R/ukrig.R
 \name{ukrig}
 \alias{ukrig}
+\alias{morie_ukrig}
 \alias{morie_universal_kriging}
-\title{Universal kriging with polynomial trend.}
+\title{Universal kriging with polynomial trend}
 \usage{
 ukrig(
+  x,
+  coords,
+  target,
+  model = "exponential",
+  nugget = 0,
+  sill = 1,
+  range_ = 1,
+  trend_order = 1
+)
+
+morie_ukrig(
   x,
   coords,
   target,
@@ -39,6 +51,8 @@ morie_universal_kriging(
 \item{nugget, sill, range_}{Variogram parameters.}
 
 \item{trend_order}{0, 1, or 2.}
+
+
 }
 \value{
 Named list: estimate, se, n, method.

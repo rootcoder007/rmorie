@@ -5,7 +5,8 @@
 #' R parity for \code{morie.fn.mhatf.multi_head_attention_full}.
 #'
 #' \deqn{\mathrm{MultiHead}(x) =
-#'       \mathrm{Concat}(\mathrm{head}_1, \ldots, \mathrm{head}_h) W^O}{MultiHead(x) = Concat(head_1, ..., head_h) W^O}
+#'       \mathrm{Concat}(\mathrm{head}_1, \ldots, \mathrm{head}_h) W^O}{MultiHead(x) =
+#' Concat(head_1, ..., head_h) W^O}
 #'
 #' @param x Numeric matrix \code{(seq_len, d_model)}.
 #' @param num_heads Number of heads (must divide \code{d_model}).

@@ -19,7 +19,7 @@ morie_datasets_nyc_nypd_by_key(
 }
 \arguments{
 \item{dataset_key}{One of the keys in
-\code{\link[=morie_datasets_nyc_nypd_layers]{morie_datasets_nyc_nypd_layers()}}.}
+\code{morie_datasets_nyc_nypd_layers()}.}
 
 \item{year}{Optional year filter (server-side SoQL).}
 

@@ -48,7 +48,8 @@ test_that(".clip_exp clips its argument to a safe exp() range", {
 
 test_that(".safe_confint returns CI matrix on a real lm fit", {
   set.seed(2L)
-  x <- stats::rnorm(60); y <- 0.5 * x + stats::rnorm(60)
+  x <- stats::rnorm(60)
+  y <- 0.5 * x + stats::rnorm(60)
   fit <- stats::lm(y ~ x)
   out <- rmorie:::.safe_confint(fit)
   expect_true(is.matrix(out) || is.data.frame(out) || is.list(out))
@@ -69,7 +70,8 @@ test_that(".or_table runs on a real logistic fit", {
 
 test_that(".linear_coef_table runs on a real lm fit", {
   set.seed(4L)
-  x <- stats::rnorm(80); y <- 0.5 * x + stats::rnorm(80, sd = 0.3)
+  x <- stats::rnorm(80)
+  y <- 0.5 * x + stats::rnorm(80, sd = 0.3)
   fit <- stats::lm(y ~ x)
   out <- tryCatch(rmorie:::.linear_coef_table(fit, model = "lm"),
                   error = function(e) e)

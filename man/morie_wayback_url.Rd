@@ -9,7 +9,7 @@ morie_wayback_url(url, timestamp = NULL)
 \arguments{
 \item{url}{A live URL to look up on the Wayback Machine.}
 
-\item{timestamp}{Optional \code{YYYYMMDD[hhmmss]} to request the snapshot
+\item{timestamp}{Optional \code{YYYYMMDD\[hhmmss\]} to request the snapshot
 closest to that time; \code{NULL} (default) returns the most recent.}
 }
 \value{
@@ -24,7 +24,7 @@ helpers -- e.g. to reach an archived copy of an Ontario Data Catalogue page
 unreachable -- instead of duplicating them.
 }
 \examples{
-\donttest{
+\dontrun{
 morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
 }
 }

@@ -1,0 +1,28 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{Glr}
+\alias{Glr}
+\title{Eqs (8.30)-(8.31), after Appel and v. Brandt.  The reference window}
+\usage{
+Glr(x, m, n = NULL, order = 4) 
+}
+\arguments{
+\item{x}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{m}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
+\item{order}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{4}.}
+}
+\description{
+GROWS from the start of the segment -- that is what separates GLR from the SEM and ACF methods.
+}
+\value{
+A list with \code{d}, \code{h_pooled}, \code{h_reference}, \code{h_test}, \code{m}, \code{n}, \code{order}, \code{n_reference}, \code{n_test}, \code{reference_window_grows}, \code{near_zero_when_one_model_explains_both}, \code{method}.
+}
+\keyword{internal}
+\examples{
+sine <- function(n, cycles_hz, fs = 100, amp = 1, phase = 0) {
+    amp * sin(2 * pi * cycles_hz * (seq_len(n) - 1L)/fs + phase)
+}
+Glr(sine(400, 5), 201, order = 4)
+}

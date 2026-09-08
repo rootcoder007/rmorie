@@ -1,0 +1,30 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_clrgrf}
+\alias{morie_clrgrf}
+\title{morie_clrgrf}
+\usage{
+morie_clrgrf(y, X, clusters, at = NULL, n_trees = 200L, min_leaf = 5L, subsample_frac = 0.5, 
+    seed = 0L, unit = "cluster", level = 0.95, cluster_sampling = TRUE) 
+}
+\arguments{
+\item{y}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{X}{A matrix; passed to \code{as.matrix}.}
+\item{clusters}{A vector; its length is taken and its elements indexed.}
+\item{at}{Optional; may be \code{NULL}. A matrix; passed to \code{as.matrix}.}
+\item{n_trees}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200L}.}
+\item{min_leaf}{Coerced to integer by the body, with \code{as.integer}. Defaults to \code{5L}.}
+\item{subsample_frac}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.}
+\item{seed}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0L}.}
+\item{unit}{One of \code{"cluster"}, \code{"row"}. Defaults to \code{"cluster"}.}
+\item{level}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.95}.}
+\item{cluster_sampling}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+}
+\description{
+A step of the clrgrf_native implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{fitted}, \code{se}, \code{ci}, \code{variance}, \code{n}, \code{n_clusters}, \code{clusters_per_tree}, \code{clusters_subsampled}, \code{cluster_sizes}, \code{cluster_labels}, \code{unit}, \code{cluster_sampling}, \code{n_trees}, \code{level}, \code{method}.
+}
+\keyword{internal}

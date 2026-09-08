@@ -13,6 +13,7 @@ morie_copula_estimation(x, y, family = c("gaussian", "clayton", "gumbel"))
 \item{x, y}{numeric marginal samples.}
 
 \item{family}{"gaussian", "clayton", or "gumbel".}
+
 }
 \value{
 list: estimate, morie_kendall_tau, se_tau, u, v, family, n, method.

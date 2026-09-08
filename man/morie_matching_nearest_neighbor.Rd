@@ -30,8 +30,11 @@ expressed in SD units of the logit (or \code{NULL} for no caliper).}
 
 \item{replace}{If \code{TRUE}, controls may be re-used.}
 
-\item{ps}{Optional pre-computed propensity scores
-(ignored; retained for back-compat).}
+\item{ps}{Optional propensity scores. When supplied they REPLACE
+the fitted model: matching is done on the score you pass, aligned
+to the rows that survive the NA drop -- by name when the vector is
+named, by position when it is one per retained row. A mis-sized
+vector is refused rather than recycled.}
 
 \item{alpha}{Significance level (carried through to \code{details}).}
 }

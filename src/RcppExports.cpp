@@ -59,6 +59,38 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_crypto_blake2b_native
+Rcpp::RawVector morie_crypto_blake2b_native(SEXP data, int outlen, SEXP key);
+RcppExport SEXP _rmorie_morie_crypto_blake2b_native(SEXP dataSEXP, SEXP outlenSEXP, SEXP keySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type outlen(outlenSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type key(keySEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_crypto_blake2b_native(data, outlen, key));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_crypto_argon2_native
+Rcpp::RawVector morie_crypto_argon2_native(SEXP password, SEXP salt, int memory, int passes, int parallelism, int tag_length, std::string variant, SEXP secret, SEXP associated);
+RcppExport SEXP _rmorie_morie_crypto_argon2_native(SEXP passwordSEXP, SEXP saltSEXP, SEXP memorySEXP, SEXP passesSEXP, SEXP parallelismSEXP, SEXP tag_lengthSEXP, SEXP variantSEXP, SEXP secretSEXP, SEXP associatedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type password(passwordSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type salt(saltSEXP);
+    Rcpp::traits::input_parameter< int >::type memory(memorySEXP);
+    Rcpp::traits::input_parameter< int >::type passes(passesSEXP);
+    Rcpp::traits::input_parameter< int >::type parallelism(parallelismSEXP);
+    Rcpp::traits::input_parameter< int >::type tag_length(tag_lengthSEXP);
+    Rcpp::traits::input_parameter< std::string >::type variant(variantSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type secret(secretSEXP);
+    Rcpp::traits::input_parameter< SEXP >::type associated(associatedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_crypto_argon2_native(password, salt, memory, passes, parallelism, tag_length, variant, secret, associated));
+    return rcpp_result_gen;
+END_RCPP
+}
 // morie_crypto_liboqs_available
 bool morie_crypto_liboqs_available();
 RcppExport SEXP _rmorie_morie_crypto_liboqs_available() {
@@ -302,6 +334,44 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
     Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
     rcpp_result_gen = Rcpp::wrap(morie_twfe_demean_cpp(M, g1, g2, K1, K2, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_digest_native
+Rcpp::RawVector morie_digest_native(SEXP data, int algo, double seed);
+RcppExport SEXP _rmorie_morie_digest_native(SEXP dataSEXP, SEXP algoSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< SEXP >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< int >::type algo(algoSEXP);
+    Rcpp::traits::input_parameter< double >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_digest_native(data, algo, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_digest2int_native
+Rcpp::IntegerVector morie_digest2int_native(Rcpp::CharacterVector x, int seed);
+RcppExport SEXP _rmorie_morie_digest2int_native(SEXP xSEXP, SEXP seedSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::CharacterVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< int >::type seed(seedSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_digest2int_native(x, seed));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_aes_ecb_native
+Rcpp::RawVector morie_aes_ecb_native(Rcpp::RawVector key, Rcpp::RawVector data, bool encrypt);
+RcppExport SEXP _rmorie_morie_aes_ecb_native(SEXP keySEXP, SEXP dataSEXP, SEXP encryptSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type key(keySEXP);
+    Rcpp::traits::input_parameter< Rcpp::RawVector >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< bool >::type encrypt(encryptSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_aes_ecb_native(key, data, encrypt));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -905,6 +975,94 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// morie_svc_train_cpp
+List morie_svc_train_cpp(NumericMatrix X, NumericVector y, double C, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
+RcppExport SEXP _rmorie_morie_svc_train_cpp(SEXP XSEXP, SEXP ySEXP, SEXP CSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svc_train_cpp(X, y, C, kernel_type, gamma, coef0, degree, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_svr_train_cpp
+List morie_svr_train_cpp(NumericMatrix X, NumericVector z, double C, double epsilon, int kernel_type, double gamma, double coef0, double degree, double tol, int max_iter);
+RcppExport SEXP _rmorie_morie_svr_train_cpp(SEXP XSEXP, SEXP zSEXP, SEXP CSEXP, SEXP epsilonSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP, SEXP tolSEXP, SEXP max_iterSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type z(zSEXP);
+    Rcpp::traits::input_parameter< double >::type C(CSEXP);
+    Rcpp::traits::input_parameter< double >::type epsilon(epsilonSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    Rcpp::traits::input_parameter< double >::type tol(tolSEXP);
+    Rcpp::traits::input_parameter< int >::type max_iter(max_iterSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svr_train_cpp(X, z, C, epsilon, kernel_type, gamma, coef0, degree, tol, max_iter));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_svm_decision_cpp
+NumericVector morie_svm_decision_cpp(NumericMatrix SV, NumericVector coef, double rho, NumericMatrix Xnew, int kernel_type, double gamma, double coef0, double degree);
+RcppExport SEXP _rmorie_morie_svm_decision_cpp(SEXP SVSEXP, SEXP coefSEXP, SEXP rhoSEXP, SEXP XnewSEXP, SEXP kernel_typeSEXP, SEXP gammaSEXP, SEXP coef0SEXP, SEXP degreeSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type SV(SVSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type coef(coefSEXP);
+    Rcpp::traits::input_parameter< double >::type rho(rhoSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type Xnew(XnewSEXP);
+    Rcpp::traits::input_parameter< int >::type kernel_type(kernel_typeSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma(gammaSEXP);
+    Rcpp::traits::input_parameter< double >::type coef0(coef0SEXP);
+    Rcpp::traits::input_parameter< double >::type degree(degreeSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_svm_decision_cpp(SV, coef, rho, Xnew, kernel_type, gamma, coef0, degree));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_tree_fit_cpp
+List morie_tree_fit_cpp(NumericMatrix X, NumericVector g, NumericVector h, int max_depth, int min_node, int mtry, double lambda, double alpha, double gamma_pen);
+RcppExport SEXP _rmorie_morie_tree_fit_cpp(SEXP XSEXP, SEXP gSEXP, SEXP hSEXP, SEXP max_depthSEXP, SEXP min_nodeSEXP, SEXP mtrySEXP, SEXP lambdaSEXP, SEXP alphaSEXP, SEXP gamma_penSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type g(gSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type h(hSEXP);
+    Rcpp::traits::input_parameter< int >::type max_depth(max_depthSEXP);
+    Rcpp::traits::input_parameter< int >::type min_node(min_nodeSEXP);
+    Rcpp::traits::input_parameter< int >::type mtry(mtrySEXP);
+    Rcpp::traits::input_parameter< double >::type lambda(lambdaSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    Rcpp::traits::input_parameter< double >::type gamma_pen(gamma_penSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tree_fit_cpp(X, g, h, max_depth, min_node, mtry, lambda, alpha, gamma_pen));
+    return rcpp_result_gen;
+END_RCPP
+}
+// morie_tree_predict_cpp
+NumericVector morie_tree_predict_cpp(List tree, NumericMatrix X);
+RcppExport SEXP _rmorie_morie_tree_predict_cpp(SEXP treeSEXP, SEXP XSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< List >::type tree(treeSEXP);
+    Rcpp::traits::input_parameter< NumericMatrix >::type X(XSEXP);
+    rcpp_result_gen = Rcpp::wrap(morie_tree_predict_cpp(tree, X));
+    return rcpp_result_gen;
+END_RCPP
+}
 // siu_http_get
 std::string siu_http_get(std::string url, int timeout_s);
 RcppExport SEXP _rmorie_siu_http_get(SEXP urlSEXP, SEXP timeout_sSEXP) {
@@ -989,6 +1147,8 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_sha256_hex_native", (DL_FUNC) &_rmorie_morie_crypto_sha256_hex_native, 1},
     {"_rmorie_morie_crypto_hmac_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_hmac_sha256_native, 2},
     {"_rmorie_morie_crypto_pbkdf2_sha256_native", (DL_FUNC) &_rmorie_morie_crypto_pbkdf2_sha256_native, 4},
+    {"_rmorie_morie_crypto_blake2b_native", (DL_FUNC) &_rmorie_morie_crypto_blake2b_native, 3},
+    {"_rmorie_morie_crypto_argon2_native", (DL_FUNC) &_rmorie_morie_crypto_argon2_native, 9},
     {"_rmorie_morie_crypto_liboqs_available", (DL_FUNC) &_rmorie_morie_crypto_liboqs_available, 0},
     {"_rmorie_morie_crypto_liboqs_version", (DL_FUNC) &_rmorie_morie_crypto_liboqs_version, 0},
     {"_rmorie_morie_crypto_mlkem768_keygen", (DL_FUNC) &_rmorie_morie_crypto_mlkem768_keygen, 0},
@@ -1010,6 +1170,9 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_crypto_hkdf_sha256", (DL_FUNC) &_rmorie_morie_crypto_hkdf_sha256, 4},
     {"_rmorie_morie_crypto_random_bytes", (DL_FUNC) &_rmorie_morie_crypto_random_bytes, 1},
     {"_rmorie_morie_twfe_demean_cpp", (DL_FUNC) &_rmorie_morie_twfe_demean_cpp, 7},
+    {"_rmorie_morie_digest_native", (DL_FUNC) &_rmorie_morie_digest_native, 3},
+    {"_rmorie_morie_digest2int_native", (DL_FUNC) &_rmorie_morie_digest2int_native, 2},
+    {"_rmorie_morie_aes_ecb_native", (DL_FUNC) &_rmorie_morie_aes_ecb_native, 3},
     {"_rmorie_morie_dsp_lms_cpp", (DL_FUNC) &_rmorie_morie_dsp_lms_cpp, 4},
     {"_rmorie_morie_dsp_nlms_cpp", (DL_FUNC) &_rmorie_morie_dsp_nlms_cpp, 5},
     {"_rmorie_morie_dsp_rls_cpp", (DL_FUNC) &_rmorie_morie_dsp_rls_cpp, 5},
@@ -1053,6 +1216,11 @@ static const R_CallMethodDef CallEntries[] = {
     {"_rmorie_morie_spatial_smacof_step_cpp", (DL_FUNC) &_rmorie_morie_spatial_smacof_step_cpp, 3},
     {"_rmorie_morie_spatial_classical_mds_cpp", (DL_FUNC) &_rmorie_morie_spatial_classical_mds_cpp, 2},
     {"_rmorie_morie_spatial_wordfish_omega_update_cpp", (DL_FUNC) &_rmorie_morie_spatial_wordfish_omega_update_cpp, 5},
+    {"_rmorie_morie_svc_train_cpp", (DL_FUNC) &_rmorie_morie_svc_train_cpp, 9},
+    {"_rmorie_morie_svr_train_cpp", (DL_FUNC) &_rmorie_morie_svr_train_cpp, 10},
+    {"_rmorie_morie_svm_decision_cpp", (DL_FUNC) &_rmorie_morie_svm_decision_cpp, 8},
+    {"_rmorie_morie_tree_fit_cpp", (DL_FUNC) &_rmorie_morie_tree_fit_cpp, 9},
+    {"_rmorie_morie_tree_predict_cpp", (DL_FUNC) &_rmorie_morie_tree_predict_cpp, 2},
     {"_rmorie_siu_http_get", (DL_FUNC) &_rmorie_siu_http_get, 2},
     {"_rmorie_siu_curl_version", (DL_FUNC) &_rmorie_siu_curl_version, 0},
     {"_rmorie_siu_http_get_many", (DL_FUNC) &_rmorie_siu_http_get_many, 5},

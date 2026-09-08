@@ -2,7 +2,7 @@
 % Please edit documentation in R/entheo_dmt.R
 \name{morie_entheo_clone_dmt_imaging}
 \alias{morie_entheo_clone_dmt_imaging}
-\title{Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache.}
+\title{Clone the DMT_Imaging dataset (Timmerman et al.) into a local cache}
 \usage{
 morie_entheo_clone_dmt_imaging(root = NULL, overwrite = FALSE, branch = NULL)
 }

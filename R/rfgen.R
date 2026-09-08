@@ -2,7 +2,8 @@
 
 #' Random-forest genomic predictor
 #'
-#' Uses randomForest if available; otherwise a base-R bagged-tree
+#' Native random forest (ESL Algorithm 15.1) over combined covariate
+#' and marker
 #' fallback (regression CART approximation).
 #'
 #' @param x Optional fixed features.
@@ -35,58 +36,19 @@ morie_random_forest_genomic <- function(x, y, markers, n_trees = 100,
   }
   p <- ncol(feats)
   if (is.null(mtry)) mtry <- max(floor(sqrt(p)), 1L)
-  if (requireNamespace("randomForest", quietly = TRUE)) {
-    rf <- randomForest::randomForest(
-      x = feats, y = y, ntree = n_trees, mtry = mtry,
-      nodesize = min_samples, importance = TRUE
-    )
-    y_hat <- as.numeric(stats::predict(rf, feats))
-    oob_pred <- rf$predicted
-    oob <- as.numeric(1 - sum((y - oob_pred)^2) /
-      max(sum((y - mean(y))^2), 1e-12))
-    imp <- as.numeric(randomForest::importance(rf)[, 1])
-    method_used <- "randomForest::randomForest"
-  } else {
-    method_used <- "base-R bagged regression-tree fallback"
-    trees <- vector("list", n_trees)
-    oob_preds <- rep(0, n)
-    oob_count <- rep(0, n)
-    for (b in seq_len(n_trees)) {
-      boot <- sample.int(n, n, replace = TRUE)
-      oob_mask <- !(seq_len(n) %in% boot)
-      tr_df <- data.frame(y = y[boot], feats[boot, , drop = FALSE])
-      tree <- tryCatch(stats::lm(y ~ ., data = tr_df), error = function(e) NULL)
-      trees[[b]] <- tree
-      if (any(oob_mask) && !is.null(tree)) {
-        oo_df <- data.frame(feats[oob_mask, , drop = FALSE])
-        names(oo_df) <- names(tr_df)[-1]
-        pr <- stats::predict(tree, oo_df)
-        oob_preds[oob_mask] <- oob_preds[oob_mask] + pr
-        oob_count[oob_mask] <- oob_count[oob_mask] + 1
-      }
-    }
-    oob_count[oob_count == 0] <- 1
-    oob_pred_avg <- oob_preds / oob_count
-    oob <- as.numeric(1 - sum((y - oob_pred_avg)^2) /
-      max(sum((y - mean(y))^2), 1e-12))
-    df_all <- data.frame(feats)
-    names(df_all) <- names(tr_df)[-1]
-    yh_acc <- rep(0, n)
-    cnt <- 0
-    for (tr in trees) {
-      if (!is.null(tr)) {
-        yh_acc <- yh_acc + as.numeric(stats::predict(tr, df_all))
-        cnt <- cnt + 1
-      }
-    }
-    y_hat <- yh_acc / max(cnt, 1)
-    imp <- rep(NA_real_, p)
-  }
+  fit <- .morie_rf_fit(
+    feats, y, task = "regression", n_estimators = as.integer(n_trees),
+    mtry = mtry, max_depth = as.integer(max_depth),
+    min_node = as.integer(min_samples)
+  )
+  y_hat <- fit$fitted
+  oob <- as.numeric(1 - sum((y - fit$oob)^2) / max(sum((y - mean(y))^2), 1e-12))
   resid <- y - y_hat
   list(
     estimate = mean(y_hat), y_hat = y_hat, oob_score = oob,
-    feature_importance = imp, se = sqrt(mean(resid^2)),
-    n = n, method = method_used
+    feature_importance = as.numeric(fit$importance),
+    se = sqrt(mean(resid^2)),
+    n = n, method = "Random Forest (native, regression)"
   )
 }
 

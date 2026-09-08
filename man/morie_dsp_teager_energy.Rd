@@ -13,7 +13,7 @@ morie_dsp_teager_energy(x)
 Numeric vector, length(x); ends are zero.
 }
 \description{
-\code{psi[n] = x[n]^2 - x[n-1] * x[n+1]}; sensitive to instantaneous
+\verb{psi\[n\] = x\[n\]^2 - x\[n-1\] * x\[n+1\]}; sensitive to instantaneous
 amplitude AND frequency.
 }
 \examples{

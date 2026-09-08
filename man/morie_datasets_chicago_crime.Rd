@@ -32,7 +32,7 @@ API path for live mode:
 via \code{.morie_dataset_soda3_query()} (full SoQL passthrough).
 Both modes return the same 22-column schema; SODA3 is required
 when a derived/map view is involved (none here, but available
-for parity with \code{\link[=morie_datasets_chicago_crime_map]{morie_datasets_chicago_crime_map()}}) and for
+for parity with \code{morie_datasets_chicago_crime_map()}) and for
 the canonical "single SoQL string" experience.
 }}
 
@@ -85,15 +85,15 @@ that other Chicago datasets resolve:
 
 \describe{
 \item{beat}{morie wraps via
-\code{\link[=morie_datasets_chicago_police_beats]{morie_datasets_chicago_police_beats()}} (\code{n9it-hstw}).}
+\code{morie_datasets_chicago_police_beats()} (\code{n9it-hstw}).}
 \item{district}{morie wraps via
-\code{\link[=morie_datasets_chicago_police_districts]{morie_datasets_chicago_police_districts()}} (\verb{24zt-jpfn}).}
+\code{morie_datasets_chicago_police_districts()} (\verb{24zt-jpfn}).}
 \item{ward}{morie wraps via
-\code{\link[=morie_datasets_chicago_wards]{morie_datasets_chicago_wards()}} (\verb{sp34-6z76}, 3UU).}
+\code{morie_datasets_chicago_wards()} (\verb{sp34-6z76}, 3UU).}
 \item{community_area}{morie wraps via
-\code{\link[=morie_datasets_chicago_community_areas]{morie_datasets_chicago_community_areas()}} (\verb{cauq-8yn6}, 3UU).}
+\code{morie_datasets_chicago_community_areas()} (\verb{cauq-8yn6}, 3UU).}
 \item{iucr / fbi_code}{morie wraps via
-\code{\link[=morie_datasets_chicago_iucr_codes]{morie_datasets_chicago_iucr_codes()}} (\verb{c7ck-438e}, 3UU).}
+\code{morie_datasets_chicago_iucr_codes()} (\verb{c7ck-438e}, 3UU).}
 }
 }
 \examples{

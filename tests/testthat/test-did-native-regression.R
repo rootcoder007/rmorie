@@ -11,11 +11,17 @@
 # catching any real regression.
 
 test_that("native TWFE output is stable (snapshot)", {
-  set.seed(123); nu <- 400L; nt <- 6L
+  set.seed(123)
+  nu <- 400L
+  nt <- 6L
   g_on <- sample(c(0, 3, 4, 5), nu, TRUE, c(.4, .2, .2, .2))
-  x1 <- rnorm(nu); x2 <- runif(nu); u <- rnorm(nu)
-  id <- rep(seq_len(nu), each = nt); tt <- rep(seq_len(nt), nu)
-  g <- g_on[id]; d <- as.integer(g > 0 & tt >= g)
+  x1 <- rnorm(nu)
+  x2 <- runif(nu)
+  u <- rnorm(nu)
+  id <- rep(seq_len(nu), each = nt)
+  tt <- rep(seq_len(nt), nu)
+  g <- g_on[id]
+  d <- as.integer(g > 0 & tt >= g)
   pan <- data.frame(id, tt, g, d, x1 = x1[id], x2 = x2[id],
                     y = u[id] + 0.4 * tt + 1.5 * d + rnorm(nu * nt, 0, .5))
   tw <- morie_did_panel_fe(pan, "y", "d", "id", "tt")
@@ -24,11 +30,17 @@ test_that("native TWFE output is stable (snapshot)", {
 })
 
 test_that("native Callaway-Sant'Anna att_gt output is stable (snapshot)", {
-  set.seed(123); nu <- 400L; nt <- 6L
+  set.seed(123)
+  nu <- 400L
+  nt <- 6L
   g_on <- sample(c(0, 3, 4, 5), nu, TRUE, c(.4, .2, .2, .2))
-  x1 <- rnorm(nu); x2 <- runif(nu); u <- rnorm(nu)
-  id <- rep(seq_len(nu), each = nt); tt <- rep(seq_len(nt), nu)
-  g <- g_on[id]; d <- as.integer(g > 0 & tt >= g)
+  x1 <- rnorm(nu)
+  x2 <- runif(nu)
+  u <- rnorm(nu)
+  id <- rep(seq_len(nu), each = nt)
+  tt <- rep(seq_len(nt), nu)
+  g <- g_on[id]
+  d <- as.integer(g > 0 & tt >= g)
   pan <- data.frame(id, tt, g, d, x1 = x1[id], x2 = x2[id],
                     y = u[id] + 0.4 * tt + 1.5 * d + rnorm(nu * nt, 0, .5))
   at <- morie_did_group_time_att(pan, "y", "id", "tt", "g",
@@ -42,9 +54,11 @@ test_that("native Callaway-Sant'Anna att_gt output is stable (snapshot)", {
 })
 
 test_that("native Sant'Anna-Zhao drdid_rc output is stable (snapshot)", {
-  set.seed(9); m <- 1600L
+  set.seed(9)
+  m <- 1600L
   xx <- cbind(rnorm(m), runif(m))
-  D <- rbinom(m, 1, plogis(0.4 * xx[, 1])); post <- rbinom(m, 1, .5)
+  D <- rbinom(m, 1, plogis(0.4 * xx[, 1]))
+  post <- rbinom(m, 1, .5)
   yv <- 1 + .6 * xx[, 1] + .5 * post + 2 * D * post + rnorm(m)
   dr <- data.frame(y = yv, d = D, post, x1 = xx[, 1], x2 = xx[, 2])
   z <- morie_did_doubly_robust(dr, "y", "d", "post",

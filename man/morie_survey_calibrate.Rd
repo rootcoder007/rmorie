@@ -2,7 +2,7 @@
 % Please edit documentation in R/survey.R
 \name{morie_survey_calibrate}
 \alias{morie_survey_calibrate}
-\title{Raking calibration to known marginal totals (iterative proportional fitting).}
+\title{Raking calibration to known marginal totals (iterative proportional fitting)}
 \usage{
 morie_survey_calibrate(
   df,

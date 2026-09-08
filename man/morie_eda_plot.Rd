@@ -28,6 +28,7 @@ morie_eda_plot(
 accessibility).}
 
 \item{digits}{Rounding for axis breaks.}
+
 }
 \value{
 Invisibly, a data.frame of the plotted \code{x}/\code{y}/\code{colour}.

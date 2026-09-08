@@ -33,8 +33,8 @@ Reports standardised mean differences (SMD), variance ratios, and
 Kolmogorov-Smirnov statistics for each covariate.  For a richer
 covariate-balance report (including continuous + categorical handling
 and Love-plot rendering), see
-\code{\link[cobalt:bal.tab]{cobalt::bal.tab}} /
-\code{\link[cobalt:love.plot]{cobalt::love.plot}}.
+\code{cobalt::bal.tab} /
+\code{cobalt::love.plot}.
 }
 \examples{
 \donttest{

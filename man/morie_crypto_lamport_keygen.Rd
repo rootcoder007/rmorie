@@ -14,8 +14,8 @@ An object of class \code{morie_lamport_keypair}: list with
 \description{
 The textbook hash-based signature (Lamport 1979): 256 secret pairs
 of 32 random bytes; the public key is their SHA-256 images.
-Security reduces entirely to SHA-256 preimage resistance — a
-post-quantum assumption — but each keypair signs EXACTLY ONE
+Security reduces entirely to SHA-256 preimage resistance -- a
+post-quantum assumption -- but each keypair signs EXACTLY ONE
 message. Signing twice with the same key leaks enough secrets to
 forge; \code{\link{morie_crypto_lamport_sign}} therefore refuses a
 key it has already used in this session. For many-time hash-based

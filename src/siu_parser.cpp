@@ -279,7 +279,7 @@ Rcpp::CharacterVector siu_http_get_many(Rcpp::CharacterVector urls,
 //' body from a 429/503/short interstitial. Used by the DRID manifest
 //' builder (\code{morie_siu_refresh_manifest}).
 //'
-//' @inheritParams siu_http_get_many
+//' @inheritParams .siu_http_get_many
 //' @return A list with three parallel slots: \code{body} (character),
 //'   \code{http_code} (integer), \code{attempts} (integer).
 //' @keywords internal

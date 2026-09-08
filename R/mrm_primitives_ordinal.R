@@ -21,10 +21,12 @@
 #' \code{\link[stats]{glm}} with \code{family = binomial("logit")}.
 #'
 #' Standard threshold (proportional-odds, K levels, p covariates):
-#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta)}{P(Y <= k mid X) = logit^-1(alpha_k - X beta)}
+#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta)}{P(Y <= k mid X) =
+#' logit^-1(alpha_k - X beta)}
 #'
 #' Threshold-specific extension (one coefficient vector per cutpoint):
-#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta_k)}{P(Y <= k mid X) = logit^-1(alpha_k - X beta_k)}
+#' \deqn{P(Y \le k \mid X) = \mathrm{logit}^{-1}(\alpha_k - X \beta_k)}{P(Y <= k mid X) =
+#' logit^-1(alpha_k - X beta_k)}
 #'
 #' @references
 #' O'Connell, M. & Laniyonu, A. (2025). Threshold-specific
@@ -136,7 +138,26 @@ mrm_threshold_specific_ordinal <- function(
   y_raw <- data[[outcome_col]]
   if (is.null(ordinal_levels)) {
     ordinal_levels <- if (is.factor(y_raw)) {
-      levels(y_raw)
+      # Taking the ordinal scale from a factor means trusting its level
+      # ORDER. `factor(x, levels = c("low", "med", "high"))` states that
+      # order deliberately and is fine unordered. The dangerous case is
+      # the DEFAULT: `factor(c("low", "med", "high"))` sorts levels
+      # alphabetically to c("high", "low", "med"), and every threshold
+      # would silently be computed against the wrong scale. Those two
+      # are indistinguishable after the fact, so warn only when the
+      # levels are in sorted order -- exactly when the default could
+      # have produced them (G2.5).
+      .morie_check_factor(y_raw, ordered = NA, arg = outcome_col)
+      lv <- levels(y_raw)
+      if (!is.ordered(y_raw) && identical(lv, sort(lv))) {
+        warning(sprintf(paste0("`%s` is an unordered factor whose levels are ",
+                               "in alphabetical order (%s). If that is not ",
+                               "the ordinal scale, pass `ordinal_levels` ",
+                               "explicitly or use an ordered factor."),
+                        outcome_col, paste(lv, collapse = " < ")),
+                call. = FALSE)
+      }
+      lv
     } else {
       sort(unique(stats::na.omit(y_raw)))
     }
@@ -152,7 +173,15 @@ mrm_threshold_specific_ordinal <- function(
          paste(ordinal_levels, collapse = ", "))
   }
 
-  X <- as.matrix(data[, covariate_cols, drop = FALSE])
+  # Covariates may carry a non-standard class with numeric storage (a
+  # `units` column, a haven labelled vector). as.matrix() on those can
+  # yield a character matrix and silently turn the fit into nonsense, so
+  # coerce each column to plain numeric first (G2.11).
+  X <- vapply(covariate_cols,
+              function(cc) .morie_coerce_units(data[[cc]], arg = cc),
+              numeric(nrow(data)))
+  X <- matrix(X, nrow = nrow(data),
+              dimnames = list(NULL, covariate_cols))
   storage.mode(X) <- "double"
   n <- nrow(X)
   p <- ncol(X)

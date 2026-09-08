@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_irm_dml}
 \alias{morie_otis_irm_dml}
-\title{Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC).}
+\title{Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC)}
 \usage{
 morie_otis_irm_dml(
   df,
@@ -70,15 +70,17 @@ the matched subset. Mirrors the MatchIt-then-DML pipeline of
 OTIS-RC/notez1a.qmd.
 }
 \examples{
-set.seed(1)
-n <- 300L
-x <- rnorm(n)
-d <- rbinom(n, 1, plogis(0.4 * x))
-y <- 0.5 * d + x + rnorm(n)
-df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
-                                                      replace = TRUE))
-morie_otis_irm_dml(df, treatment = "d", outcome = "y",
-                   covariates = "x", n_folds = 3L)
+if (requireNamespace("DoubleML", quietly = TRUE) && requireNamespace("MatchIt", quietly = TRUE)) {
+  set.seed(1)
+  n <- 300L
+  x <- rnorm(n)
+  d <- rbinom(n, 1, plogis(0.4 * x))
+  y <- 0.5 * d + x + rnorm(n)
+  df <- data.frame(d = d, y = y, x = x, id = sample.int(50, n,
+                                                        replace = TRUE))
+  morie_otis_irm_dml(df, treatment = "d", outcome = "y",
+                     covariates = "x", n_folds = 3L)
+}
 }
 \references{
 Chernozhukov, V. et al. (2018). \emph{Econometrics Journal} 21(1),

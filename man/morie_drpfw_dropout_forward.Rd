@@ -24,7 +24,7 @@ morie_dropout_forward(
 \arguments{
 \item{x}{Numeric array.}
 
-\item{p}{Drop probability in \code{[0, 1)}.}
+\item{p}{Drop probability in \code{\[0, 1)}.}
 
 \item{seed}{RNG seed.}
 

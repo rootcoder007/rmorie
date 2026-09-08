@@ -39,10 +39,12 @@ test_that("morie_ml_eval_robustness errors without randomForest", {
 
   )
   s <- make_ml_split()
-  expect_error(
-    morie_ml_eval_robustness(s$X, s$y, s$test_X, s$test_y),
-    "randomForest"
-  )
+  # Native random forest: this no longer needs randomForest, so it must
+  # produce a classification report rather than an error.
+  out <- morie_ml_eval_robustness(s$X, s$y, s$test_X, s$test_y,
+                                  n_estimators = 5L)
+  expect_true(is.list(out))
+  expect_true(is.numeric(out$accuracy))
 })
 
 test_that("morie_ml_apply_smote returns balanced output (random fallback)", {

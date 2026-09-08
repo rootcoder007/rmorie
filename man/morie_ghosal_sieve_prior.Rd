@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghsve.R
 \name{morie_ghosal_sieve_prior}
 \alias{morie_ghosal_sieve_prior}
-\title{Bernstein-polynomial sieve density estimator (Petrone 1999).}
+\title{Bernstein-polynomial sieve density estimator (Petrone 1999)}
 \usage{
 morie_ghosal_sieve_prior(x, K = NULL)
 }
@@ -15,7 +15,7 @@ morie_ghosal_sieve_prior(x, K = NULL)
 Named list with estimate, log_lik_per_obs, weights, K, n, method.
 }
 \description{
-Bernstein-polynomial sieve density estimator (Petrone 1999).
+Bernstein-polynomial sieve density estimator (Petrone 1999)
 }
 \examples{
 morie_ghosal_sieve_prior(x = rnorm(50))

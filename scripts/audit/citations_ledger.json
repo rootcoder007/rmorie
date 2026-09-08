@@ -1,0 +1,609 @@
+{
+  "_README": [
+    "Verification ledger. A citation may only ship once it has been checked",
+    "against the publisher record and recorded here with the source that",
+    "settled it. Enforced by scripts/audit/check_citations.py, which runs in",
+    "prepush_guards.sh. Adding an entry from memory instead of from a lookup",
+    "defeats the entire mechanism -- the `source` field must be a DOI or a URL",
+    "that was actually fetched.",
+    "See memory: feedback_never_invent_citations_verify_each."
+  ],
+  "entries": {
+    "athey-imbens-2016-recursive": {
+      "year": 2016,
+      "volume": "113",
+      "issue": "27",
+      "pages": "7353-7360",
+      "container": "Proceedings of the National Academy of Sciences",
+      "source": "doi:10.1073/pnas.1510489113",
+      "verified": "2026-07-30"
+    },
+    "wager-athey-2018-heterogeneous": {
+      "year": 2018,
+      "volume": "113",
+      "issue": "523",
+      "pages": "1228-1242",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.2017.1319839",
+      "verified": "2026-07-30"
+    },
+    "kriegel-2008-abod": {
+      "year": 2008,
+      "volume": null,
+      "issue": null,
+      "pages": "444-452",
+      "container": "KDD 2008",
+      "source": "doi:10.1145/1401890.1401946",
+      "verified": "2026-07-30"
+    },
+    "ljung-box-1978": {
+      "year": 1978,
+      "volume": "65",
+      "issue": "2",
+      "pages": "297-303",
+      "container": "Biometrika",
+      "source": "doi:10.1093/biomet/65.2.297",
+      "verified": "2026-07-30"
+    },
+    "roberts-gelman-gilks-1997": {
+      "year": 1997,
+      "volume": "7",
+      "issue": "1",
+      "pages": "110-120",
+      "container": "The Annals of Applied Probability",
+      "source": "doi:10.1214/aoap/1034625254",
+      "verified": "2026-07-30",
+      "pages_verified_by": "projecteuclid.org .../10.1214/aoap/1034625254.full"
+    },
+    "dwork-roth-2014": {
+      "year": 2014,
+      "volume": "9",
+      "issue": "3-4",
+      "pages": "211-487",
+      "container": "Foundations and Trends in Theoretical Computer Science",
+      "source": "doi:10.1561/0400000042",
+      "verified": "2026-07-30",
+      "note": "Was 211-407 in 13 Python modules; both R trees were correct."
+    },
+    "sakurada-yairi-2014": {
+      "year": 2014,
+      "volume": null,
+      "issue": null,
+      "pages": "4-11",
+      "container": "MLSDA 2014",
+      "source": "doi:10.1145/2689746.2689747",
+      "verified": "2026-07-30"
+    },
+    "cox-snell-1968-residuals": {
+      "year": 1968,
+      "volume": "30",
+      "issue": "2",
+      "pages": "248-265",
+      "container": "Journal of the Royal Statistical Society Series B",
+      "source": "doi:10.1111/j.2517-6161.1968.tb00724.x",
+      "verified": "2026-07-30",
+      "note": "248-275 spans the bound discussion, not the article."
+    },
+    "cox-1972-regression": {
+      "year": 1972,
+      "volume": "34",
+      "issue": "2",
+      "pages": "187-202",
+      "container": "Journal of the Royal Statistical Society Series B",
+      "source": "doi:10.1111/j.2517-6161.1972.tb00899.x",
+      "verified": "2026-07-30",
+      "note": "187-220 spans the bound discussion, not the article."
+    },
+    "weibull-1951": {
+      "year": 1951,
+      "volume": "18",
+      "issue": "3",
+      "pages": "293-297",
+      "container": "Journal of Applied Mechanics",
+      "source": "doi:10.1115/1.4010337",
+      "verified": "2026-07-30"
+    },
+    "egozcue-pawlowsky-2005": {
+      "year": 2005,
+      "volume": "37",
+      "issue": "7",
+      "pages": "795-828",
+      "container": "Mathematical Geology",
+      "source": "doi:10.1007/s11004-005-7381-9",
+      "verified": "2026-07-30"
+    },
+    "astle-balding-2009": {
+      "year": 2009,
+      "volume": "24",
+      "issue": "4",
+      "pages": "451-471",
+      "container": "Statistical Science",
+      "source": "doi:10.1214/09-sts307",
+      "verified": "2026-07-30",
+      "pages_verified_by": "projecteuclid.org .../10.1214/09-STS307.full"
+    },
+    "hopcroft-karp-1973": {
+      "year": 1973,
+      "volume": "2",
+      "issue": "4",
+      "pages": "225-231",
+      "container": "SIAM Journal on Computing",
+      "source": "doi:10.1137/0202019",
+      "verified": "2026-07-30"
+    },
+    "hahn-1998": {
+      "year": 1998,
+      "volume": "66",
+      "issue": "2",
+      "pages": "315-331",
+      "container": "Econometrica",
+      "source": "doi:10.2307/2998560",
+      "verified": "2026-07-30",
+      "pages_verified_by": "Econometric Society official record: econometricsociety.org/publications/econometrica/1998/03/01/role-propensity-score-efficient-semiparametric-estimation -- states p. 315-331 (supplied by Vee)"
+    },
+    "hirano-imbens-ridder-2003": {
+      "year": 2003,
+      "volume": "71",
+      "issue": "4",
+      "pages": "1161-1189",
+      "container": "Econometrica",
+      "source": "doi:10.1111/1468-0262.00442",
+      "verified": "2026-07-30"
+    },
+    "breslow-1974": {
+      "year": 1974,
+      "volume": "30",
+      "issue": "1",
+      "pages": "89-99",
+      "container": "Biometrics",
+      "source": "doi:10.2307/2529620",
+      "verified": "2026-07-30",
+      "pages_verified_by": "PubMed esummary (NCBI E-utilities)"
+    },
+    "carlstein-1986": {
+      "year": 1986,
+      "volume": "14",
+      "issue": "3",
+      "pages": "1171-1179",
+      "container": "The Annals of Statistics",
+      "source": "doi:10.1214/aos/1176350057",
+      "verified": "2026-07-30",
+      "pages_verified_by": "projecteuclid.org .../10.1214/aos/1176350057.full"
+    },
+    "rubin-1980-mahalanobis": {
+      "year": 1980,
+      "volume": "36",
+      "issue": "2",
+      "pages": "293-298",
+      "container": "Biometrics",
+      "source": "doi:10.2307/2529981",
+      "verified": "2026-07-30",
+      "pages_verified_by": "JSTOR record jstor.org/stable/2529981 -- Biometrics 36(2): 293-298 (supplied by Vee)"
+    },
+    "bun-steinke-2016": {
+      "year": 2016,
+      "volume": null,
+      "issue": null,
+      "pages": "635-658",
+      "container": "TCC 2016-B",
+      "source": "doi:10.1007/978-3-662-53641-4_24",
+      "verified": "2026-07-30"
+    },
+    "dwork-rothblum-vadhan-2010": {
+      "year": 2010,
+      "volume": null,
+      "issue": null,
+      "pages": "51-60",
+      "container": "FOCS 2010",
+      "source": "doi:10.1109/focs.2010.12",
+      "verified": "2026-07-30"
+    },
+    "austin-2009-balance": {
+      "year": 2009,
+      "volume": "28",
+      "issue": "25",
+      "pages": "3083-3107",
+      "container": "Statistics in Medicine",
+      "source": "doi:10.1002/sim.3697",
+      "verified": "2026-07-30"
+    },
+    "austin-2011-caliper": {
+      "year": 2011,
+      "volume": "10",
+      "issue": "2",
+      "pages": "150-161",
+      "container": "Pharmaceutical Statistics",
+      "source": "doi:10.1002/pst.433",
+      "verified": "2026-07-30"
+    },
+    "cain-lange-1984": {
+      "year": 1984,
+      "volume": "40",
+      "issue": "2",
+      "pages": "493-499",
+      "container": "Biometrics",
+      "source": "doi:10.2307/2531402",
+      "verified": "2026-07-30",
+      "pages_verified_by": "PubMed esummary, printed as 493-9"
+    },
+    "gronau-2017-bridge": {
+      "year": 2017,
+      "volume": "81",
+      "issue": null,
+      "pages": "80-97",
+      "container": "Journal of Mathematical Psychology",
+      "source": "doi:10.1016/j.jmp.2017.09.005",
+      "verified": "2026-07-30"
+    },
+    "verdinelli-wasserman-1995": {
+      "year": 1995,
+      "volume": "90",
+      "issue": "430",
+      "pages": "614-618",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.1995.10476554",
+      "verified": "2026-07-30"
+    },
+    "dickey-1971": {
+      "year": 1971,
+      "volume": "42",
+      "issue": "1",
+      "pages": "204-223",
+      "container": "The Annals of Mathematical Statistics",
+      "source": "doi:10.1214/aoms/1177693507",
+      "verified": "2026-07-30"
+    },
+    "robins-rotnitzky-zhao-1994": {
+      "year": 1994,
+      "volume": "89",
+      "issue": "427",
+      "pages": "846-866",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.1994.10476818",
+      "verified": "2026-07-30"
+    },
+    "assimakopoulos-nikolopoulos-2000": {
+      "year": 2000,
+      "volume": "16",
+      "issue": "4",
+      "pages": "521-530",
+      "container": "International Journal of Forecasting",
+      "source": "doi:10.1016/s0169-2070(00)00066-2",
+      "verified": "2026-07-30"
+    },
+    "hyndman-billah-2003": {
+      "year": 2003,
+      "volume": "19",
+      "issue": "2",
+      "pages": "287-290",
+      "container": "International Journal of Forecasting",
+      "source": "doi:10.1016/s0169-2070(01)00143-1",
+      "verified": "2026-07-30"
+    },
+    "bennett-1983": {
+      "year": 1983,
+      "volume": "32",
+      "issue": "2",
+      "pages": "165-171",
+      "container": "Applied Statistics",
+      "source": "doi:10.2307/2347295",
+      "verified": "2026-07-30",
+      "pages_verified_by": "Semantic Scholar graph API"
+    },
+    "abadi-2016-dpsgd": {
+      "year": 2016,
+      "volume": null,
+      "issue": null,
+      "pages": "308-318",
+      "container": "CCS 2016",
+      "source": "doi:10.1145/2976749.2978318",
+      "verified": "2026-07-30"
+    },
+    "fine-gray-1999": {
+      "year": 1999,
+      "volume": "94",
+      "issue": "446",
+      "pages": "496-509",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.1999.10474144",
+      "verified": "2026-07-30"
+    },
+    "li-2023-ecod": {
+      "year": 2023,
+      "volume": "35",
+      "issue": "12",
+      "pages": "12181-12193",
+      "container": "IEEE Transactions on Knowledge and Data Engineering",
+      "source": "doi:10.1109/tkde.2022.3159580",
+      "verified": "2026-07-30",
+      "note": "DOI registered 2022; the ISSUE is 2023."
+    },
+    "vincent-2011-score-matching": {
+      "year": 2011,
+      "volume": "23",
+      "issue": "7",
+      "pages": "1661-1674",
+      "container": "Neural Computation",
+      "source": "doi:10.1162/neco_a_00142",
+      "verified": "2026-07-30"
+    },
+    "santanna-zhao-2020": {
+      "year": 2020,
+      "volume": "219",
+      "issue": "1",
+      "pages": "101-122",
+      "container": "Journal of Econometrics",
+      "source": "doi:10.1016/j.jeconom.2020.06.003",
+      "verified": "2026-07-30"
+    },
+    "budyko-1969": {
+      "year": 1969,
+      "volume": "21",
+      "issue": "5",
+      "pages": "611-619",
+      "container": "Tellus",
+      "source": "doi:10.1111/j.2153-3490.1969.tb00466.x",
+      "verified": "2026-07-30"
+    },
+    "sellers-1969": {
+      "year": 1969,
+      "volume": "8",
+      "issue": "3",
+      "pages": "392-400",
+      "container": "Journal of Applied Meteorology",
+      "source": "doi:10.1175/1520-0450(1969)008<0392:agcmbo>2.0.co;2",
+      "verified": "2026-07-30",
+      "note": "Title is 'A Global CLIMATIC Model', not 'climate'."
+    },
+    "athey-tibshirani-wager-2019": {
+      "year": 2019,
+      "volume": "47",
+      "issue": "2",
+      "pages": "1148-1178",
+      "container": "The Annals of Statistics",
+      "source": "doi:10.1214/18-aos1709",
+      "verified": "2026-07-30",
+      "pages_verified_by": "projecteuclid.org .../10.1214/18-AOS1709.full"
+    },
+    "haebara-1980": {
+      "year": 1980,
+      "volume": "22",
+      "issue": "3",
+      "pages": "144-149",
+      "container": "Japanese Psychological Research",
+      "source": "doi:10.4992/psycholres1954.22.144",
+      "verified": "2026-07-30"
+    },
+    "stocking-lord-1983": {
+      "year": 1983,
+      "volume": "7",
+      "issue": "2",
+      "pages": "201-210",
+      "container": "Applied Psychological Measurement",
+      "source": "doi:10.1177/014662168300700208",
+      "verified": "2026-07-30"
+    },
+    "donoho-johnstone-1994": {
+      "year": 1994,
+      "volume": "81",
+      "issue": "3",
+      "pages": "425-455",
+      "container": "Biometrika",
+      "source": "doi:10.1093/biomet/81.3.425",
+      "verified": "2026-07-30"
+    },
+    "rousseeuw-croux-1993": {
+      "year": 1993,
+      "volume": "88",
+      "issue": "424",
+      "pages": "1273-1283",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.1993.10476408",
+      "verified": "2026-07-30"
+    },
+    "liu-ting-zhou-2008-iforest": {
+      "year": 2008,
+      "volume": null,
+      "issue": null,
+      "pages": "413-422",
+      "container": "ICDM 2008",
+      "source": "doi:10.1109/icdm.2008.17",
+      "verified": "2026-07-30"
+    },
+    "rousseeuw-vandriessen-1999": {
+      "year": 1999,
+      "volume": "41",
+      "issue": "3",
+      "pages": "212-223",
+      "container": "Technometrics",
+      "source": "doi:10.1080/00401706.1999.10485670",
+      "verified": "2026-07-30"
+    },
+    "croston-1972": {
+      "year": 1972,
+      "volume": "23",
+      "issue": "3",
+      "pages": "289-303",
+      "container": "Operational Research Quarterly",
+      "source": "doi:10.1057/jors.1972.50",
+      "verified": "2026-07-30"
+    },
+    "syntetos-boylan-2005": {
+      "year": 2005,
+      "volume": "21",
+      "issue": "2",
+      "pages": "303-314",
+      "container": "International Journal of Forecasting",
+      "source": "doi:10.1016/j.ijforecast.2004.10.001",
+      "verified": "2026-07-30"
+    },
+    "winters-1960": {
+      "year": 1960,
+      "volume": "6",
+      "issue": "3",
+      "pages": "324-342",
+      "container": "Management Science",
+      "source": "doi:10.1287/mnsc.6.3.324",
+      "verified": "2026-07-30"
+    },
+    "huber-2014-mediation": {
+      "year": 2014,
+      "volume": "29",
+      "issue": "6",
+      "pages": "920-943",
+      "container": "Journal of Applied Econometrics",
+      "source": "doi:10.1002/jae.2341",
+      "verified": "2026-07-30",
+      "note": "Equations read from the author's hosted full text at alexandria.unisg.ch; trim=0 per footnote 10, probit per Section 3."
+    },
+    "boyd-vandenberghe-2004": {
+      "year": 2004,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "container": "Cambridge University Press",
+      "source": "https://web.stanford.edu/~boyd/cvxbook/bv_cvxbook.pdf",
+      "verified": "2026-07-30",
+      "note": "Section numbers checked against the authors' own free PDF; 10 of 54 were wrong."
+    },
+    "parikh-boyd-2014-prox": {
+      "year": 2014,
+      "volume": "1",
+      "issue": "3",
+      "pages": "123-231",
+      "container": "Foundations and Trends in Optimization",
+      "source": "https://web.stanford.edu/~boyd/papers/prox_algs.html",
+      "verified": "2026-07-30",
+      "note": "Was 127-239 in two modules."
+    },
+    "boyd-2011-admm": {
+      "year": 2011,
+      "volume": "3",
+      "issue": "1",
+      "pages": "1-122",
+      "container": "Foundations and Trends in Machine Learning",
+      "source": "https://web.stanford.edu/~boyd/papers/admm_distr_stats.html",
+      "verified": "2026-07-30"
+    },
+    "boyd-park-2014-subgradient": {
+      "year": 2014,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "container": "Notes for EE364b, Stanford University",
+      "source": "https://web.stanford.edu/class/ee364b/lectures/subgrad_method_notes.pdf",
+      "verified": "2026-07-30",
+      "note": "Boyd & Vandenberghe (2004) does NOT cover the subgradient method."
+    },
+    "barry-hartigan-1993": {
+      "year": 1993,
+      "volume": "88",
+      "issue": "421",
+      "pages": "309-319",
+      "container": "Journal of the American Statistical Association",
+      "source": "doi:10.1080/01621459.1993.10594323",
+      "verified": "2026-07-30",
+      "note": "bstep had cited 'Annals of Statistics 21(1), 159-177', which matches no record."
+    },
+    "barndorff-nielsen-shephard-2004": {
+      "year": 2004,
+      "volume": "2",
+      "issue": "1",
+      "pages": "1-37",
+      "container": "Journal of Financial Econometrics",
+      "source": "doi:10.1093/jjfinec/nbh001",
+      "verified": "2026-07-30",
+      "note": "Four Python modules had 1-48; title 'Power and Bipower Variation with Stochastic Volatility and Jumps'."
+    },
+    "hoeting-1999-bma": {
+      "year": 1999,
+      "volume": "14",
+      "issue": "4",
+      "pages": "382-417",
+      "container": "Statistical Science",
+      "source": "https://projecteuclid.org/journals/statistical-science/volume-14/issue-4/Bayesian-model-averaging--a-tutorial-with-comments-by-M/10.1214/ss/1009212519.full",
+      "verified": "2026-07-30",
+      "note": "Registered item includes the comments and rejoinder in its own title; the 382-417 range covers them."
+    },
+    "lohr-2021-sampling-ch4": {
+      "year": 2021,
+      "volume": null,
+      "issue": null,
+      "pages": "121-166",
+      "container": "Sampling: Design and Analysis (3rd ed.), Chapman & Hall/CRC",
+      "source": "doi:10.1201/9780429298899-4",
+      "verified": "2026-07-30",
+      "note": "Chapter 'Ratio and Regression Estimation'; source for reglmd, which had no References."
+    },
+    "kosorok-2008-book": {
+      "year": 2008,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "container": "Springer Series in Statistics",
+      "source": "doi:10.1007/978-0-387-74978-5",
+      "verified": "2026-07-30",
+      "note": "Introduction to Empirical Processes and Semiparametric Inference; full text in corpus as 978-0-387-74978-5.txt. Eq. (2.13) verified at txt line 1554."
+    },
+    "wasserman-2004-ch23": {
+      "year": 2004,
+      "volume": null,
+      "issue": null,
+      "pages": "381-401",
+      "container": "All of Statistics, Springer",
+      "source": "https://api.crossref.org/works?filter=container-title:All%20of%20Statistics",
+      "verified": "2026-07-30",
+      "note": "Ch 23 is 'Probability Redux: Stochastic Processes', not an HMM chapter."
+    },
+    "geron-handson-ml3-chapters": {
+      "year": 2022,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "container": "Hands-On Machine Learning (3rd ed.), O'Reilly",
+      "source": "https://api.github.com/repos/ageron/handson-ml3/contents/",
+      "verified": "2026-07-30",
+      "note": "Author's own repo: ch 08 = dimensionality reduction, ch 12 = custom models/training, ch 14 = CNNs (pooling)."
+    },
+    "makalic-schmidt-2016": {
+      "year": 2016,
+      "volume": "23",
+      "issue": "1",
+      "pages": "179-182",
+      "container": "IEEE Signal Processing Letters",
+      "source": "doi:10.1109/lsp.2015.2503725",
+      "verified": "2026-07-30",
+      "note": "The horseshoe Gibbs sampler bshrk implements; full text in corpus (Makalic-Schmidt_1508.03884v4.pdf), conditionals at Eqs. (9)-(11)."
+    },
+    "zhang-2012-optimal-regimes": {
+      "year": 2012,
+      "volume": "1",
+      "issue": "1",
+      "pages": "103-114",
+      "container": "Stat",
+      "source": "doi:10.1002/sta.411",
+      "verified": "2026-07-30",
+      "note": "vlfctn had cited Biometrika 99:1-15, which does not exist for these five authors."
+    },
+    "chaudhuri-sarwate-sinha-2013-dppca": {
+      "year": 2013,
+      "volume": "14",
+      "issue": null,
+      "pages": "2905-2943",
+      "container": "Journal of Machine Learning Research",
+      "source": "https://arxiv.org/abs/1207.2812",
+      "verified": "2026-07-30",
+      "note": "Title is plural 'Near-Optimal Algorithms', no leading 'A'. JMLR not DOI-registered; volume/pages from the article, title from arXiv/Semantic Scholar."
+    },
+    "horowitz-2009-book-chapters": {
+      "year": 2009,
+      "volume": null,
+      "issue": null,
+      "pages": null,
+      "container": "Springer Series in Statistics",
+      "source": "doi:10.1007/978-0-387-92870-8",
+      "verified": "2026-07-30",
+      "note": "Ch.2 Single-Index 7-51; KDE is the Appendix 233-255. hrzkde had cited Ch.2 in all three trees."
+    }
+  }
+}

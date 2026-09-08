@@ -3,7 +3,7 @@
 \name{stvar}
 \alias{stvar}
 \alias{morie_spatiotemporal_variogram}
-\title{Empirical spatiotemporal semivariogram gamma(h, u).}
+\title{Empirical spatiotemporal semivariogram gamma(h, u)}
 \usage{
 stvar(
   x,
@@ -35,6 +35,8 @@ morie_spatiotemporal_variogram(
 \item{n_spatial_bins, n_temporal_bins}{Integer bin counts.}
 
 \item{max_spatial, max_temporal}{Upper cutoffs.}
+
+
 }
 \value{
 Named list: estimate (gamma, spatial_bins, temporal_bins,

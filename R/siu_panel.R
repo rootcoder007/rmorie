@@ -52,6 +52,12 @@
 #' # Runs when a local Ollama server is reachable (free default).
 #' res <- morie_siu_panel(5161, mode = 2)
 #' res$fields["number_of_subject_officers"]
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+#' # Runs when a local Ollama server is reachable (free default).
+#' res <- morie_siu_panel(5161, mode = 2)
+#' res$fields["number_of_subject_officers"]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_panel <- function(html,
                             mode = 4L,
@@ -206,7 +212,7 @@ morie_siu_panel <- function(html,
   parse_one <- function(txt) {
     m <- regmatches(txt, regexpr("\\{[\\s\\S]*\\}", txt, perl = TRUE))
     if (!length(m)) return(NULL)
-    tryCatch(jsonlite::fromJSON(m[[1L]]), error = function(e) NULL)
+    tryCatch(.s03json_fromJSON(m[[1L]]), error = function(e) NULL)
   }
   if (is.list(raw)) {
     for (fn in intersect(names(raw), field_names)) {

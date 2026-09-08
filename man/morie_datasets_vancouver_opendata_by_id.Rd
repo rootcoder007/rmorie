@@ -12,7 +12,7 @@ morie_datasets_vancouver_opendata_by_id(
 }
 \arguments{
 \item{dataset_id}{Opendatasoft dataset slug (from
-\code{\link[=morie_datasets_vancouver_opendata_layers]{morie_datasets_vancouver_opendata_layers()}}).}
+\code{morie_datasets_vancouver_opendata_layers()}).}
 
 \item{limit}{Page size (max 100 for \verb{/records}).}
 
@@ -29,9 +29,10 @@ as a \code{data.frame}. For larger pulls, use \code{format = "csv"} to hit
 the unrestricted \verb{/exports/csv} endpoint instead.
 }
 \examples{
-\donttest{
+\dontrun{
 df <- morie_datasets_vancouver_opendata_by_id("non-market-housing",
-                                                 limit = 50)
+  limit = 50
+)
 nrow(df)
 }
 }

@@ -34,10 +34,9 @@ Named list: estimate, train_accuracy, n_support, kernel, C,
 gamma, degree, n, method.
 }
 \description{
-Wraps \code{e1071::svm}.
+Native C-SVC via SMO (LIBSVM's formulation); no SVM package is used.
+Multi-class uses one-against-one voting over all pairs.
 }
 \examples{
-\dontshow{if (requireNamespace("e1071", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_svm_kernel_trick(x = rnorm(50), y = rnorm(50))
-\dontshow{\}) # examplesIf}
 }

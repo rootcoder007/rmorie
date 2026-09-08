@@ -1,0 +1,25 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{amortised_cost}
+\alias{amortised_cost}
+\title{amortised_cost}
+\usage{
+amortised_cost(encoder_ms, decoder_ms, n_prompts) 
+}
+\arguments{
+\item{encoder_ms}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{decoder_ms}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n_prompts}{Coerced to integer by the body, with \code{as.integer}.}
+}
+\description{
+A step of the samseg_native implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{total_ms}, \code{per_prompt_ms}, \code{naive_ms}, \code{speedup}, \code{interactive}, \code{note}.
+}
+\keyword{internal}
+\examples{
+r <- amortised_cost(encoder_ms = 100, decoder_ms = 5, n_prompts = 50)
+is.list(r) || is.numeric(r)
+}

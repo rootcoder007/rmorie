@@ -36,5 +36,6 @@ spatial offsets, recursively. Requires \eqn{\alpha < 1}.
 }
 \examples{
 morie_hawkes_st_simulate(list(mu = 0.1, alpha = 0.4, beta = 1, sigma = 0.5),
-                         end_time = 10, region = c(0, 5, 0, 5), seed = 42)
+  end_time = 10, region = c(0, 5, 0, 5), seed = 42
+)
 }

@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_a01_ruhela_alt_toronto}
 \alias{morie_otis_analyze_a01_ruhela_alt_toronto}
 \alias{morie_otis_analyze_a01_mrm_alt_toronto}
-\title{a01 alt-T Ruhela: Toronto region -> vm count.}
+\title{a01 alt-T Ruhela: Toronto region -> vm count}
 \usage{
 morie_otis_analyze_a01_ruhela_alt_toronto(data = NULL, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_a01_mrm_alt_toronto(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-a01 alt-T Ruhela: Toronto region -> vm count.
+a01 alt-T Ruhela: Toronto region -> vm count
 }
 \examples{
 \donttest{ morie_otis_analyze_a01_ruhela_alt_toronto() }
