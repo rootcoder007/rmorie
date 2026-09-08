@@ -47,7 +47,7 @@ pages through transparently using \code{resultOffset} and the
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\dontrun{
+\donttest{
 df <- morie_ingest_tps_feature_layer(
   morie_ingest_tps_layers()$url[
     morie_ingest_tps_layers()$name == "major-crime"

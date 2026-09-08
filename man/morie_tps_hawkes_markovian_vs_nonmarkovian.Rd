@@ -26,7 +26,7 @@ non-Markovian. Faster to run than the full 8-way comparison and
 suitable for dashboard surfaces.
 }
 \examples{
-\dontrun{
+\donttest{
   df <- morie_tps_load_tps_dataset("Assault", nrows = 2000)
   rr <- morie_tps_hawkes_markovian_vs_nonmarkovian(df,
                                                     ds_name = "Assault")

@@ -1,3 +1,25 @@
+# rmorie 1.2.1 - 2026-09-08
+
+## CRAN compliance: \dontrun becomes \donttest
+
+CRAN's rule is that `\dontrun` marks an example the user *cannot* run --
+missing software, an API key -- and that everything else belongs in
+`\donttest`, because `\dontrun` prints a "# Not run:" warning that
+misleads the reader. 157 example blocks were wrapped in `\dontrun` purely
+because they reach the network, which is not a reason CRAN accepts: they
+are runnable, they are already guarded with `try()`, and they degrade
+cleanly offline. They are now `\donttest`.
+
+`\dontrun` is kept in the handful of places it is correct: the Vertex
+token/Gemini calls, the StatCan and NIBRS ingests that need an API key,
+and `install_extras()`, which installs packages.
+
+CI keeps its speed through `_R_CHECK_DONTTEST_EXAMPLES_: false` rather
+than through misleading markup -- `--as-cran` executes `\donttest`, and
+on a GitHub runner the network examples crawl against throttled services
+until the job times out. CRAN's own machines decide for themselves; the
+full example sweep runs on L14.
+
 # rmorie 1.2.0 - 2026-09-08
 
 ## Native specializations: the dependency-light release

@@ -34,7 +34,7 @@ that require a bearer token.
 }
 \examples{
 if (requireNamespace("httr2", quietly = TRUE)) {
-  \dontrun{
+  \donttest{
   # Point at your own Ollama server, then see what it serves:
   Sys.setenv(OLLAMA_HOST = "http://localhost:11434")
   models <- morie_llm_ollama_models()

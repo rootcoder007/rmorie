@@ -76,6 +76,14 @@ jobs:
     env:
       _R_CHECK_FORCE_SUGGESTS_: false
       R_KEEP_PKG_SOURCE: yes
+      # CRAN requires \donttest (not \dontrun) for examples a user could
+      # run, so the network-fetching examples are \donttest -- and
+      # --as-cran executes those. On a GitHub runner they crawl against
+      # throttled services until the job times out, which is what killed
+      # the Debian leg for weeks. CRAN's own machines decide for
+      # themselves; ours skip them, and the full example sweep runs on
+      # L14 instead.
+      _R_CHECK_DONTTEST_EXAMPLES_: false
 
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1

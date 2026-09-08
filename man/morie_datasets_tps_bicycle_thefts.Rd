@@ -51,7 +51,7 @@ Bicycle Theft occurrences by reported date.
 Tags: Bike; Bicycle; Thefts; Crime; Toronto; TPS; Toronto Police
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_bicycle_thefts(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }
