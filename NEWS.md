@@ -1,3 +1,33 @@
+# rmorie 1.2.2 - 2026-09-08
+
+## The Rd manual builds again
+
+`R CMD Rd2pdf` failed on 1.2.1's sources, which is what the CRAN check
+reported as "checking PDF version of manual without index ... ERROR".
+Three causes, none of them visible without running the build:
+
+* Inside `\code{}` Rd reads an apostrophe as opening an R-style quoted
+  string, so a transpose or a derivative (`V'`, `g'`) swallowed the
+  closing brace and `\code` never terminated. 90 spans in `man/` and 42
+  in roxygen are now escaped as `\'`, which renders identically.
+* `\[` and `\]` are not Rd escapes; inside `\eqn`/`\deqn` they reached
+  LaTeX as display-math delimiters nested in display math, and elsewhere
+  as undefined control sequences in the HTML manual. 661 occurrences.
+* The Hawkes documentation wrote `\u(t)` for `\mu(t)`; `\u` is LaTeX's
+  breve accent. RFC 7464's record separator was a literal control byte
+  that had decayed to U+FFFD, which pdflatex cannot typeset.
+
+Also removed: a `data()` call that read as a load into the global
+environment, a stray top-level `5.rds`, and literal angle-bracket
+placeholders that reached the HTML manual as unrecognised tags.
+
+## Each fixture ships once
+
+`inst/` went from 2.18 MB to 0.25 MB, and the tarball from 11.66 MB to
+9.73 MB: 54 fixtures byte-identical to rmoriedata's are resolved from
+there at runtime, the generated dataset catalogue is built on demand,
+and `describe_corpus.Rds` moved to rmoriedata with the rest of the data.
+
 # rmorie 1.2.1 - 2026-09-08
 
 ## CRAN compliance: \dontrun becomes \donttest
