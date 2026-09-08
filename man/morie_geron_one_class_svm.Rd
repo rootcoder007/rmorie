@@ -9,7 +9,7 @@ morie_geron_one_class_svm(X, nu = 0.5, gamma = 1, max_iter = 2000, tol = 1e-09)
 }
 \arguments{
 \item{X}{Data (n, d).}
-\item{nu}{Outlier-fraction knob in (0, 1\].}
+\item{nu}{Outlier-fraction knob in (0, 1].}
 \item{gamma}{RBF width.}
 \item{max_iter,tol}{SMO controls.}
 }

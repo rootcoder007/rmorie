@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' Upper record times and counts in a sequence
 #'
-#' Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E\[R_n\] = sum_i 1/i; Var\[R_n\]
+#' Formula: R_n = sum_i 1\{X_i > max(X_1..X_\{i-1\})\}; E[R_n] = sum_i 1/i; Var[R_n]
 #' = sum_i (1/i - 1/i^2)
 #'
 #' @param x The sequence, in observation order.

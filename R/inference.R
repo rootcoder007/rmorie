@@ -581,8 +581,8 @@ morie_power_prop_test <- function(n = NULL, p1 = NULL, p2 = NULL,
 #' Sample size for logistic regression detecting a target odds ratio
 #'
 #' Uses the formula from Hsieh et al. (1998):
-#' \deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) \[\log(OR)\]^2}}{n =
-#' frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) \[log(OR)\]^2}}
+#' \deqn{n = \frac{(z_{\alpha/2} + z_\beta)^2}{p_1(1-p_1) [\log(OR)]^2}}{n =
+#' frac{(z_alpha/2 + z_beta)^2}{p_1(1-p_1) [log(OR)]^2}}
 #'
 #' @param p0 Prevalence under control.
 #' @param or Target odds ratio.
@@ -635,7 +635,7 @@ morie_cohens_d <- function(x1, x2, pooled = TRUE) {
 #' Cramer's V for categorical association
 #'
 #' @param contingency_table A numeric matrix of observed counts.
-#' @return Numeric Cramer's V in the interval \\[0, 1\\].
+#' @return Numeric Cramer's V in the interval [0, 1].
 #' @examples
 #' morie_cramers_v(matrix(c(10, 20, 30, 40), nrow = 2))
 #' @export

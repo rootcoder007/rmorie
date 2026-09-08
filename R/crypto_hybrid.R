@@ -86,8 +86,8 @@ morie_crypto_hybrid_keygen <- function() {
 #' from `HKDF(kem_ct || pk)`, wraps a random 32-byte symmetric key with
 #' ChaCha20-Poly1305, then encrypts the payload under that symmetric
 #' key. Container format (big-endian lengths):
-#' `len(kem_ct)\[4\] || kem_ct || wrap_nonce\[12\] || wrapped_key\[32\] ||
-#' wrap_tag\[16\] || payload_nonce\[12\] || aead_ct || payload_tag\[16\]`.
+#' `len(kem_ct)[4] || kem_ct || wrap_nonce[12] || wrapped_key[32] ||
+#' wrap_tag[16] || payload_nonce[12] || aead_ct || payload_tag[16]`.
 #'
 #' @param plaintext   Raw vector or character string to encrypt.
 #' @param recipient_pk Raw vector: recipient's ML-KEM-768 public key

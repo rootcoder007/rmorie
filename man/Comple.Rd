@@ -15,7 +15,7 @@ Comple(
 )
 }
 \arguments{
-\item{triples}{Matrix of zero-based \code{\[head, relation, tail\]} indices.}
+\item{triples}{Matrix of zero-based \code{[head, relation, tail]} indices.}
 
 \item{dim}{Embedding dimension.}
 
@@ -38,7 +38,7 @@ the tail breaks the symmetry while the parameter count stays linear.
 }
 \details{
 Formula: \code{Re(<e_h, w_r, conj(e_t))>} =
-\code{sum_k \[Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt\]}.
+\code{sum_k [Rh Rr Rt + Rh Ir It + Ih Rr It - Ih Ir Rt]}.
 }
 \examples{
 triples <- matrix(c(1L, 1L, 2L, 2L, 1L, 3L, 3L, 2L, 1L), ncol = 3, byrow = TRUE)

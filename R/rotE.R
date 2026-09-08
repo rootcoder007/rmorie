@@ -10,7 +10,7 @@
 #' the relation a rotation rather than a general scaling, and it is
 #' enforced here rather than assumed: relations are supplied as phases.
 #'
-#' @param triples flat vector \[h_re, h_im, theta, t_re, t_im\] when the
+#' @param triples flat vector [h_re, h_im, theta, t_re, t_im] when the
 #'   components are not given separately.
 #' @param dim the embedding dimension k.
 #' @param h_re,h_im head embedding.

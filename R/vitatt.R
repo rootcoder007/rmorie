@@ -6,9 +6,9 @@
 #' Appendix A "Multihead Self-attention", p. 13.  Read from the PDF rendered as
 #' a page image.
 #'
-#' \[q, k, v\] = z U_qkv, U_qkv in R^\{D x 3 D_h\} (5); A = softmax(q k^T /
-#' sqrt(D_h)), A in R^\{N x N\} (6); SA(z) = A v (7); MSA(z) = \[SA_1(z);
-#' SA_2(z); ...; SA_k(z)\] U_msa, U_msa in R^\{(k . D_h) x D\} (8), with D_h
+#' [q, k, v] = z U_qkv, U_qkv in R^\{D x 3 D_h\} (5); A = softmax(q k^T /
+#' sqrt(D_h)), A in R^\{N x N\} (6); SA(z) = A v (7); MSA(z) = [SA_1(z);
+#' SA_2(z); ...; SA_k(z)] U_msa, U_msa in R^\{(k . D_h) x D\} (8), with D_h
 #' "typically set to D/k" (text under Eq. (8), p. 13).  The underlying
 #' construction is Vaswani et al. (2017), "Attention Is All You Need",
 #' NeurIPS 30, which the appendix cites; the paper reproduces it unchanged.

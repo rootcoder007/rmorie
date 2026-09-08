@@ -27,7 +27,7 @@
 #' @param counts,expected Observed and expected counts.
 #' @param adjacency Symmetric 0/1 contiguity matrix.
 #' @param spatial_prior One of "exchangeable", "icar", "lcar".
-#' @param rho Leroux smoothing parameter in \[0, 1\].
+#' @param rho Leroux smoothing parameter in [0, 1].
 #' @param n_time Number of periods; required for temporal or interaction terms.
 #' @param temporal_prior One of "none", "rw1", "rw2".
 #' @param interaction One of "I", "II", "III", "IV", or NULL.

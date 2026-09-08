@@ -32,7 +32,7 @@ NULL
 #' @param crime_xy Numeric (n, 2) matrix of crime coordinates.
 #' @param officer_xy Numeric (m, 2) matrix of officer coordinates.
 #' @param radius Detection radius (positive).
-#' @param p_detect Per-officer detection probability in (0, 1\].
+#' @param p_detect Per-officer detection probability in (0, 1].
 #' @param seed Optional integer; when supplied, a Bernoulli outcome is
 #'   sampled per crime and returned in \code{$detected}.
 #' @return \code{morie_fairness_result} with \code{$probabilities},

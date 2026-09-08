@@ -52,7 +52,7 @@ morie_kde_h <- function(x, grid = NULL, h = NULL) {
 
 #' MISE-optimal bandwidth
 #'
-#' \eqn{h_{opt} = \[R(K)/(\mu_2(K)^2 \int (f'')^2 n)\]^{1/5}}. Depends on
+#' \eqn{h_{opt} = [R(K)/(\mu_2(K)^2 \int (f'')^2 n)]^{1/5}}. Depends on
 #' the UNKNOWN \eqn{\int (f'')^2}, which is why every practical rule
 #' approximates it; a normal reference is used when it is not
 #' supplied, and the result says so. Mirrors
@@ -402,7 +402,7 @@ morie_maximum_score <- function(X, y, smoothed = FALSE, h = NULL, r = 2L) {
 #' Robinson's partially linear model
 #'
 #' \eqn{Y = X'\beta + g(Z) + \epsilon}, with beta from partialling out
-#' \eqn{E\[X|Z\]} and \eqn{E\[Y|Z\]} by kernel regression. beta stays
+#' \eqn{E[X|Z]} and \eqn{E[Y|Z]} by kernel regression. beta stays
 #' root-n even though g converges slowly -- the slower nuisance rate
 #' does not contaminate the parametric one. Mirrors
 #' \code{morie.fn.hrzplr}.

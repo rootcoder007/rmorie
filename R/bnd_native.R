@@ -149,9 +149,9 @@
 
 #' Manski worst-case bounds on a partially observed mean
 #'
-#' With `P(obs)` the share of outcomes seen and `\[K0, K1\]` the
-#' outcome's logical support, `E\[Y\]` lies in
-#' `\[E\[Y|obs\] P(obs) + K0 (1-P(obs)), E\[Y|obs\] P(obs) + K1 (1-P(obs))\]`.
+#' With `P(obs)` the share of outcomes seen and `[K0, K1]` the
+#' outcome's logical support, `E[Y]` lies in
+#' `[E[Y|obs] P(obs) + K0 (1-P(obs)), E[Y|obs] P(obs) + K1 (1-P(obs))]`.
 #' The width is EXACTLY `(K1 - K0)(1 - P(obs))`. Nothing about the
 #' missing data is assumed -- that is the point, and the reason the
 #' bounds are wide: they are what the data alone say before any
@@ -247,7 +247,7 @@ morie_bnd_manski <- function(y, observed, support, treatment = NULL) {
 
 #' Imbens-Manski confidence interval for a partially identified parameter
 #'
-#' `\[lower - c s_l/sqrt(n), upper + c s_u/sqrt(n)\]` with `c` solving
+#' `[lower - c s_l/sqrt(n), upper + c s_u/sqrt(n)]` with `c` solving
 #' `pnorm(c + sqrt(n) delta / max(s_l, s_u)) - pnorm(-c) = 1 - alpha`.
 #'
 #' The construction exists because covering the identified SET and
@@ -325,7 +325,7 @@ morie_bnd_imbens_manski <- function(lower_hat, upper_hat, se_lower,
 #' Moment-inequality criterion and confidence set
 #'
 #' Chernozhukov, Hong and Tamer (2007). The sample criterion
-#' `Q_n(theta) = sum_j \[sqrt(n) gbar_j / sd_j\]_+^2` counts only
+#' `Q_n(theta) = sum_j [sqrt(n) gbar_j / sd_j]_+^2` counts only
 #' VIOLATED inequalities, so deep inside the identified set -- where
 #' every sample moment is negative -- it is EXACTLY zero. The
 #' confidence region is the level set of `Q_n` under a multiplier
@@ -335,7 +335,7 @@ morie_bnd_imbens_manski <- function(lower_hat, upper_hat, se_lower,
 #'
 #' @param data observations, rows passed to `g`.
 #' @param g `function(data, theta)` returning an (n, J) matrix
-#'   oriented so the model says `E\[g_j\] <= 0`.
+#'   oriented so the model says `E[g_j] <= 0`.
 #' @param theta_grid candidate parameter values.
 #' @param alpha miss probability.
 #' @param B multiplier-bootstrap draws.
@@ -426,7 +426,7 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
 #' (2018): when the object of interest is a linear functional `c'x`
 #' and everything the data and assumptions say about `x` is linear,
 #' the identified set for the target is
-#' `\[min c'x, max c'x\]` over the feasible polytope -- and both ends
+#' `[min c'x, max c'x]` over the feasible polytope -- and both ends
 #' are linear programmes. SHARPNESS is the point: the feasible set is
 #' convex, so every value between the optima is attained, and the
 #' interval IS the identified set for the target.
@@ -442,7 +442,7 @@ morie_bnd_moment_inequality <- function(data, g, theta_grid, alpha = 0.05,
 #' @param c target functional's coefficients.
 #' @param A_ub,b_ub inequality restrictions `A_ub x <= b_ub`.
 #' @param A_eq,b_eq equality restrictions (typically data moments).
-#' @param bounds list of `c(lo, hi)` per coordinate; `\[0, 1\]` each
+#' @param bounds list of `c(lo, hi)` per coordinate; `[0, 1]` each
 #'   when `NULL` -- the natural range for response probabilities.
 #' @return list: lower, upper, width, argmin, argmax, feasible,
 #'   bounded, sharp, k, n_inequalities, n_equalities, method.

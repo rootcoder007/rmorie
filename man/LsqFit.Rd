@@ -14,7 +14,7 @@ LsqFit(x = NULL, y = NULL)
 list(A, B, S).
 }
 \description{
-A = (\if{html}{\out{<xy>}} - \if{html}{\out{<x>}}\if{html}{\out{<y>}})/(<x^2> - \if{html}{\out{<x>}}^2) and B = \if{html}{\out{<y>}} - A\if{html}{\out{<x>}}; the ratio
+A = (mean(xy) - mean(x)mean(y))/(mean(x^2) - mean(x)^2) and B = mean(y) - A mean(x); the ratio
 form of B is computed independently and the two must agree.  The
 defaults are the book's five-point worked data set.
 }

@@ -1111,7 +1111,7 @@ dagostino_pearson <- function(x) {
 #' published percentage points: the normal distribution with unknown mean
 #' and variance, and the exponential distribution with unknown mean. The
 #' statistic is
-#' \deqn{A^2 = -n - n^{-1}\sum (2i-1)\[\ln F(z_i) + \ln(1 - F(z_{n+1-i}))\]}
+#' \deqn{A^2 = -n - n^{-1}\sum (2i-1)[\ln F(z_i) + \ln(1 - F(z_{n+1-i}))]}
 #' and is then modified for the estimated parameters before being compared
 #' with the tabulated points (see \code{.gof_lillie_crit} for the table
 #' provenance).

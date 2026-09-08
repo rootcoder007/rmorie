@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Targeted estimate of the marginal risk difference E\[Y_1\] - E\[Y_0\]
+#' Targeted estimate of the marginal risk difference E[Y_1] - E[Y_0]
 #'
 #' The targeted estimate solves the efficient score equation, so its
 #' influence curve gives an honest standard error where the plug-in mean
@@ -10,7 +10,7 @@
 #'   psi = mean(Q*(1,W)) - mean(Q*(0,W));
 #'   se = sqrt(var(IC)/n)
 #'
-#' @param Y Outcome in \[0, 1\].
+#' @param Y Outcome in [0, 1].
 #' @param A Binary treatment.
 #' @param QAW,Q1W,Q0W Initial outcome predictions.
 #' @param g1W Initial propensity.

@@ -211,7 +211,7 @@ NULL
 #' Hajek-stabilised IPW estimator of the ATE on OTIS data
 #'
 #' Fits a logistic-regression propensity model on \code{covariates},
-#' clips propensities to \eqn{\[\varepsilon, 1-\varepsilon\]}{\[epsilon, 1-epsilon\]}, and
+#' clips propensities to \eqn{[\varepsilon, 1-\varepsilon]}{[epsilon, 1-epsilon]}, and
 #' computes the Hajek-normalised difference of weighted means. SE
 #' follows the Lunceford-Davidian (2004) sandwich influence-function
 #' form.

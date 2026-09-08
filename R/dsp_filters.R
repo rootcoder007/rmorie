@@ -184,7 +184,7 @@ morie_dsp_wiener_filter <- function(x, noise_psd = NULL,
 #'
 #' Least-mean-squares adaptive transversal filter. Returns the filter
 #' output `y` and instantaneous error `e = d - y`. Coefficient update:
-#' `w <- w + 2 * mu * e\[i\] * x_seg`.
+#' `w <- w + 2 * mu * e[i] * x_seg`.
 #'
 #' @param x Input (reference) vector.
 #' @param d Desired vector, same length as `x`.
@@ -269,7 +269,7 @@ morie_dsp_nlms <- function(x, d, order = 16L, mu = 0.5, eps = 1e-8) {
 #' at the cost of O(order^2) per sample.
 #'
 #' @inheritParams morie_dsp_lms
-#' @param lam Forgetting factor in (0, 1\]. Default 0.99.
+#' @param lam Forgetting factor in (0, 1]. Default 0.99.
 #' @param delta Initial P diagonal. Default 100.
 #' @return List with `y`, `e`.
 #' @references Rangayyan & Krishnan (2015), Ch. 3, sec. 3.6;

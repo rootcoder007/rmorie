@@ -9,7 +9,7 @@ morie_geron_weight_pruning_hm(model, sparsity, n_rounds = 1)
 }
 \arguments{
 \item{model}{Numeric vector or named list.}
-\item{sparsity}{Target fraction of zeros in \[0, 1).}
+\item{sparsity}{Target fraction of zeros in [0, 1).}
 \item{n_rounds}{Rounds in the returned schedule.}
 }
 \description{

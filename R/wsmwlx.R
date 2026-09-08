@@ -6,9 +6,9 @@
 #' mean.
 #'
 #' Formula: W = sum of the ranks of x in the pooled sample;
-#'   E\[W\] = n1(n1 + n2 + 1)/2;
-#'   Var\[W\] = n1 n2 (N + 1)/12 - n1 n2 sum(t^3 - t)/(12 N (N - 1));
-#'   z = (W - E\[W\] -+ 1/2) / sd
+#'   E[W] = n1(n1 + n2 + 1)/2;
+#'   Var[W] = n1 n2 (N + 1)/12 - n1 n2 sum(t^3 - t)/(12 N (N - 1));
+#'   z = (W - E[W] -+ 1/2) / sd
 #'
 #' @param x,y The two samples.
 #' @param correct Apply the 1/2 continuity correction.

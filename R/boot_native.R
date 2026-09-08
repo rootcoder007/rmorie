@@ -120,7 +120,7 @@ morie_boot <- function(data, statistic, R, strata = NULL, ...) {
 #'
 #' @param boot_obj A list; the body reads \code{$data}, \code{$strata} from it.
 #' @param t A vector; its length is taken and its elements indexed. Defaults to
-#' \code{boot_obj$t\[, 1L\]}.
+#' \code{boot_obj$t[, 1L]}.
 #' @return A vector, from \code{as.numeric}.
 #' @export
 .morie_empinf_reg <- function(boot_obj, t = boot_obj$t[, 1L]) {

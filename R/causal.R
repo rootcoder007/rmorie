@@ -372,7 +372,7 @@ NULL
 #' Propensity Score Weighting", PLoS ONE 6(3), e18174, actually perform:
 #' "we trimmed high weights downwards, with cutpoints ranging from the
 #' 99th to the 50th percentiles ... all weights with value above the
-#' \[cutpoint\] were set equal to the \[cutpoint\]".  Note that they cap the
+#' [cutpoint] were set equal to the [cutpoint]".  Note that they cap the
 #' HIGH side only, which is why side = "upper" is the default here.
 #' Contrast .mor_trim_ps, which caps the SCORES. See also Cole, S. R.
 #' and Hernan, M. A. (2008), American Journal of Epidemiology 168(6),
@@ -1268,9 +1268,9 @@ morie_sensitivity_rosenbaum <- function(treated, control,
 #' G-computation (outcome regression) ATE estimator
 #'
 #' Estimates the ATE by:
-#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl\[\hat{\mu}_1(X_i) -
-#' \hat{\mu}_0(X_i)\bigr\]}{ATE_hat = (1)/(n)sum_i bigl\[mu_hat_1(X_i) -
-#' mu_hat_0(X_i)bigr\]}
+#' \deqn{\widehat{ATE} = \frac{1}{n}\sum_i \bigl[\hat{\mu}_1(X_i) -
+#' \hat{\mu}_0(X_i)\bigr]}{ATE_hat = (1)/(n)sum_i bigl[mu_hat_1(X_i) -
+#' mu_hat_0(X_i)bigr]}
 #'
 #' Delegates the standardisation step to \code{stdReg::stdGlm()} when
 #' \pkg{stdReg} is installed; otherwise computes the contrast inline

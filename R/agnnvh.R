@@ -8,7 +8,7 @@
 #' give the same expression; AlphaGo Zero used c = 1e-4.  The
 #' cross-entropy uses 0 log 0 = 0 and floors p at a tiny epsilon.
 #'
-#' @param z game outcome in \[-1, 1\].
+#' @param z game outcome in [-1, 1].
 #' @param v value-head output.
 #' @param pi search policy.
 #' @param p policy-head output.

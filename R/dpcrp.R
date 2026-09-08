@@ -17,7 +17,7 @@
 #' ``expected_tables``, ``alpha``, ``n``.
 #' @references Aldous (1985), Exchangeability and related topics, Ecole d'Ete de
 #' Probabilites de Saint-Flour XIII; Pitman (2006), Combinatorial Stochastic Processes.
-#' Neither is held locally; the seating rule and the E\[K\] = sum_i alpha/(alpha + i - 1)
+#' Neither is held locally; the seating rule and the E[K] = sum_i alpha/(alpha + i - 1)
 #' identity are the standard published forms.
 #' @export
 #' @examples

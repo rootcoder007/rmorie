@@ -483,7 +483,7 @@ morie_linear_corr_model <- function(m, sigma_x, sigma_z, mu_x = 0, mu_z = 0) {
 
 #' Least-squares line and sample correlation
 #'
-#' A = (<xy> - <x><y>)/(<x^2> - <x>^2), B = <y> - A<x> (both book
+#' A = (mean(xy) - mean(x)mean(y))/(mean(x^2) - mean(x)^2), B = mean(y) - A mean(x) (both book
 #' forms cross-checked), residual sum of squares, sample r with the
 #' 1/n covariance, and the slope product A*C = r^2. Mirrors
 #' morie.fn ch6 data modules (and the misnamed "19e2").

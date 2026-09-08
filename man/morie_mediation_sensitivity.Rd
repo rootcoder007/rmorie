@@ -43,7 +43,7 @@ identifies the ACME for any given
 \eqn{\rho = Corr(\epsilon_{i2}, \epsilon_{i3})}:
 
 \deqn{\bar\delta(\rho) = \frac{\beta_2\sigma_1}{\sigma_2}
-  \left\[\tilde\rho - \rho\sqrt{(1-\tilde\rho^2)/(1-\rho^2)}\right\]}
+  \left[\tilde\rho - \rho\sqrt{(1-\tilde\rho^2)/(1-\rho^2)}\right]}
 
 with \eqn{\sigma_j^2 = Var(\epsilon_{ij})} and
 \eqn{\tilde\rho = Corr(\epsilon_{i1}, \epsilon_{i2})}. The ACME is

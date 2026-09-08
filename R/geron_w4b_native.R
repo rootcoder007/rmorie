@@ -1742,7 +1742,7 @@ morie_geron_one_cycle <- function(t, T, lr_max, lr_min, mom_max = 0.95, mom_min 
 #' L2 (ridge) regularization penalty (Geron Ch 11, morie.fn hml2r)
 #' @param theta Parameters.
 #' @param alpha Strength.
-#' @param skip_bias Exclude theta\[1\].
+#' @param skip_bias Exclude theta[1].
 #' @param eta Optional learning rate.
 #' @return List with penalty, gradient, l2_norm, shrink_factor, estimate, n, method.
 #' @export
@@ -1780,7 +1780,7 @@ morie_geron_l2_regularization <- function(theta, alpha, skip_bias = FALSE, eta =
 #' @param X,y Data.
 #' @param theta Coefficients.
 #' @param alpha L1 strength.
-#' @param skip_bias Exclude theta\[1\].
+#' @param skip_bias Exclude theta[1].
 #' @return List with cost, mse, penalty, gradient, n_zero, estimate, n, method.
 #' @export
 #' @examples
@@ -2667,7 +2667,7 @@ morie_geron_mode_collapse <- function(samples, reference = NULL, tol = NULL) {
 #' @param states,actions Label vectors.
 #' @param P Array (n_s,n_a,n_s).
 #' @param R Array (n_s,n_a,n_s) or (n_s,n_a).
-#' @param gamma Discount in \[0,1).
+#' @param gamma Discount in [0,1).
 #' @param max_iter Sweep cap.
 #' @param tol Convergence threshold.
 #' @return List with V, Q, policy, policy_labels, n_iter, effective_horizon, estimate, n, method.

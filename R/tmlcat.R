@@ -1,5 +1,5 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
-#' Target E\[Y_a\] at every level of a categorical treatment
+#' Target E[Y_a] at every level of a categorical treatment
 #'
 #' Each level gets its OWN clever covariate 1\{A = a\}/g_a(W) and its own
 #' fluctuation, because one logistic update cannot solve L score
@@ -9,9 +9,9 @@
 #' Formula: for each level a, fluctuate logit Q(a,W) on
 #'   H_a = 1\{A = a\}/g_a(W); psi_a = mean(Q*(a,W))
 #'
-#' @param Y Outcome in \[0, 1\].
+#' @param Y Outcome in [0, 1].
 #' @param A One-based treatment level of each observation.
-#' @param Q Initial E\[Y | A = a, W\], one column per level.
+#' @param Q Initial E[Y | A = a, W], one column per level.
 #' @param G Initial P(A = a | W), rows summing to 1.
 #' @param ref One-based reference level for the contrasts.
 #' @param gbound Truncation applied to each g_a.

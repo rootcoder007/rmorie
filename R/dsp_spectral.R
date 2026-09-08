@@ -186,7 +186,7 @@ morie_dsp_median_frequency <- function(psd, freqs) {
 #' (`pct = 0.95`) is a classical EEG depth-of-anaesthesia marker.
 #'
 #' @inheritParams morie_dsp_spectral_moment
-#' @param pct Cumulative fraction in (0, 1\]. Default 0.95.
+#' @param pct Cumulative fraction in (0, 1]. Default 0.95.
 #' @return Scalar (Hz).
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.6.
 #' @examples
@@ -238,7 +238,7 @@ morie_dsp_spectral_ratio <- function(psd, freqs, band1, band2) {
 #' concentration.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `\[0, 1\]`.
+#' @return Scalar in `[0, 1]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7.
 #' @examples
 #' uni <- rep(1, 64)
@@ -262,7 +262,7 @@ morie_dsp_spectral_flatness <- function(psd) {
 #' Shannon entropy in bits.
 #'
 #' @param psd PSD vector.
-#' @return Scalar in `\[0, log2(length(psd))\]`.
+#' @return Scalar in `[0, log2(length(psd))]`.
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.7;
 #'   Inouye et al. (1991).
 #' @examples
@@ -349,7 +349,7 @@ morie_dsp_acf_from_psd <- function(psd) {
   Re(stats::fft(full, inverse = TRUE) / N)
 }
 
-#' Bandpower over `\[f_low, f_high\]`
+#' Bandpower over `[f_low, f_high]`
 #'
 #' Trapezoid-equivalent rectangular integration of PSD over a band.
 #'

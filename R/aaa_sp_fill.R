@@ -576,7 +576,7 @@ MantelM2 <- function(coords, x, w = NULL, u = NULL) {
 
 #' Gaussian Z-test of Sec. 1.3.1 with U of eq (1.10).  The book states
 #'
-#' the approach but does not print Eg\[M2\] or Varg\[M2\]; both are derived
+#' the approach but does not print Eg[M2] or Varg[M2]; both are derived
 #' from the quadratic-form moments and are stated in the Python
 #' docstring.  Only the SYMMETRIC part of W contributes.
 #'
@@ -643,7 +643,7 @@ MantelZ <- function(coords, x, w, u = NULL) {
   )
 }
 
-#' Eq (1.16).  Eg\[Ires\] = n tr\[MW\] / \{(n-k) w..\} is the book\'s own
+#' Eq (1.16).  Eg[Ires] = n tr[MW] / \{(n-k) w..\} is the book\'s own
 #'
 #' formula, Sec. 1.3.2, and is reproduced term for term.  The variance
 #' is derived from the exact moments of a ratio of quadratic forms in
@@ -1555,7 +1555,7 @@ SparseVector <- function(queries, threshold, c = 1L, epsilon = 1,
   )
 }
 
-#' Alpha = sum_x min(p,q) = 1 - TV(p,q); E\[tokens\] =
+#' Alpha = sum_x min(p,q) = 1 - TV(p,q); E[tokens] =
 #'
 #' (1 - alpha^(gamma+1))/(1 - alpha), capped at gamma+1 (a rejected
 #' token is resampled from the residual and still counts).  Leviathan,
@@ -1932,7 +1932,7 @@ SpatialPca <- function(x, w, naxes = 2L) {
 #' Thin-plate spline eta(r) = r^2 log r plus linear covariates, solved
 #' as
 #'
-#' the saddle-point system \[K + n lam I, T; T\', 0\].  T = \[1, s1, s2, X\]
+#' the saddle-point system [K + n lam I, T; T\', 0].  T = [1, s1, s2, X]
 #' spans the null space of the penalty and must NOT be shrunk; dropping
 #' the T\'c = 0 block leaves the system singular.  Duchon (1977); Wood
 #' (2006) Ch. 4.  NOT in Schabenberger & Gotway, whose parametric
@@ -2091,7 +2091,7 @@ SpikeInfo <- function(spike, stim, nbins = 2L) {
   )
 }
 
-#' Psi = E\[ \{g(A - delta | H) / g(A | H)\} Y \] -- the density ratio at
+#' Psi = E[ \{g(A - delta | H) / g(A | H)\} Y ] -- the density ratio at
 #' the
 #'
 #' BACK-shifted exposure.  Forward-shifting is the sign error this

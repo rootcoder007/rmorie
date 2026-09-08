@@ -5,7 +5,7 @@
 #' Transformers for Image Recognition at Scale", ICLR 2021; arXiv:2010.11929v2.
 #' Read from the PDF rendered as page images.
 #'
-#' Section 3.1, p. 3: "Similar to BERT's \[class\] token, we prepend a learnable
+#' Section 3.1, p. 3: "Similar to BERT's [class] token, we prepend a learnable
 #' embedding to the sequence of embedded patches (z_0^0 = x_class), whose state
 #' at the output of the Transformer encoder (z_L^0) serves as the image
 #' representation y (Eq. 4). ... Position embeddings are added to the patch
@@ -14,7 +14,7 @@
 #' gains from using more advanced 2D-aware position embeddings."
 #'
 #' Equation (1), p. 4:
-#' z_0 = \[x_class; x_p^1 E; x_p^2 E; ...; x_p^N E\] + E_pos, with
+#' z_0 = [x_class; x_p^1 E; x_p^2 E; ...; x_p^N E] + E_pos, with
 #' E in R^\{(P^2 . C) x D\} and E_pos in R^\{(N+1) x D\}.
 #'
 #' This module takes the patch embeddings x_p^i E produced by Vitptm and

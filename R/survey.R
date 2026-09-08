@@ -40,7 +40,7 @@
 #'   variable in `df`.
 #' @param domain_col Character; column name of the subpopulation /
 #'   domain indicator in `df`.
-#' @param domain_value Value (matching `df\[\[domain_col\]\]`) defining
+#' @param domain_value Value (matching `df[[domain_col]]`) defining
 #'   the subpopulation to estimate.
 #' @param outcome_col Character; column name of the outcome variable
 #'   in `df`.

@@ -8,7 +8,7 @@
 morie_burkov_binary_cross_entropy(y_hat, y) 
 }
 \arguments{
-\item{y_hat}{Predicted probabilities in \\[0, 1\\].}
+\item{y_hat}{Predicted probabilities in [0, 1].}
 \item{y}{Targets, 0 or 1.}
 }
 \description{

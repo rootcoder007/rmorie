@@ -3,7 +3,7 @@
 % the formals.
 \name{morie_geron_next_sentence_prediction}
 \alias{morie_geron_next_sentence_prediction}
-\title{Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)}
+\title{Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)}
 \usage{
 morie_geron_next_sentence_prediction(sent_A, sent_B, encoder = NULL, w = NULL, b = 0, label = NULL) 
 }
@@ -14,7 +14,7 @@ morie_geron_next_sentence_prediction(sent_A, sent_B, encoder = NULL, w = NULL, b
 \item{label}{Optional 0/1 label for the loss.}
 }
 \description{
-Next sentence prediction: BERT-style input assembly plus a linear \[CLS\] head (Geron Ch 15, hmnsp)
+Next sentence prediction: BERT-style input assembly plus a linear [CLS] head (Geron Ch 15, hmnsp)
 }
 \value{
 A list with \code{tokens}, \code{segment_ids}, \code{cls_vector}, \code{logit}, \code{probability}, \code{prediction}, \code{loss}, \code{estimate}, \code{n}, \code{method}.

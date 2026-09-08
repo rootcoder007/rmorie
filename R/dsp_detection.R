@@ -226,7 +226,7 @@ morie_dsp_shannon_energy <- function(x) {
 
 #' Teager-Kaiser energy operator
 #'
-#' `psi\[n\] = x\[n\]^2 - x\[n-1\] * x\[n+1\]`; sensitive to instantaneous
+#' `psi[n] = x[n]^2 - x[n-1] * x[n+1]`; sensitive to instantaneous
 #' amplitude AND frequency.
 #'
 #' @param x Numeric vector.
@@ -348,7 +348,7 @@ morie_dsp_dicrotic_notch <- function(pulse, fs = 125) {
 
 #' T-wave detection by post-QRS argmax search
 #'
-#' For each QRS index, searches `\[loc + 0.2 * fs, loc + 0.5 * fs\]` for
+#' For each QRS index, searches `[loc + 0.2 * fs, loc + 0.5 * fs]` for
 #' the absolute maximum and records its global index.
 #'
 #' @param ecg ECG vector.

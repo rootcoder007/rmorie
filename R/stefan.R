@@ -10,7 +10,7 @@
 #' arms.
 #'
 #' @param T absolute temperature(s) in kelvin.
-#' @param emissivity emissivity in \[0, 1\]; 1 is a black body.
+#' @param emissivity emissivity in [0, 1]; 1 is a black body.
 #' @return list: estimate, exitance, sigma, emissivity, total, n, method.
 #' @keywords internal
 #' @examples

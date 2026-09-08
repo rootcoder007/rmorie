@@ -8,7 +8,7 @@
 #' Read from the PDF rendered as page images, not from the text layer.
 #'
 #' Equations (1)-(4), p. 4:
-#' z_0 = \[x_class; x_p^1 E; ...; x_p^N E\] + E_pos, E in R^\{(P^2 . C) x D\},
+#' z_0 = [x_class; x_p^1 E; ...; x_p^N E] + E_pos, E in R^\{(P^2 . C) x D\},
 #' E_pos in R^\{(N+1) x D\} (1); z'_l = MSA(LN(z_\{l-1\})) + z_\{l-1\},
 #' l = 1 ... L (2); z_l = MLP(LN(z'_l)) + z'_l, l = 1 ... L (3);
 #' y = LN(z_L^0) (4).
@@ -19,9 +19,9 @@
 #' residual connections after every block."  That is the pre-norm arrangement
 #' Eqs. (2) and (3) show: LN inside, the residual added outside.
 #'
-#' MSA is Appendix A, p. 13, Eqs. (5)-(8): per head, \[q, k, v\] = z U_qkv with
+#' MSA is Appendix A, p. 13, Eqs. (5)-(8): per head, [q, k, v] = z U_qkv with
 #' U_qkv in R^\{D x 3 D_h\}; A = softmax(q k^T / sqrt(D_h)); SA(z) = A v; and
-#' MSA(z) = \[SA_1(z); ...; SA_k(z)\] U_msa with U_msa in R^\{(k . D_h) x D\}.
+#' MSA(z) = [SA_1(z); ...; SA_k(z)] U_msa with U_msa in R^\{(k . D_h) x D\}.
 #' D_h is "typically set to D/k", which this module requires: num_heads must
 #' divide embed_dim.
 #'

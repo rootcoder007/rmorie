@@ -479,7 +479,7 @@ Wsrmom <- function(n) {
        skew = 0, n = n)
 }
 
-#' Tie-corrected Var\[T+\] -- eqs. (5.7.10)-(5.7.11), p. 203
+#' Tie-corrected Var[T+] -- eqs. (5.7.10)-(5.7.11), p. 203
 #' @noRd
 Wsrties <- function(d, m0 = 0) {
   ds <- as.numeric(d) - as.numeric(m0)

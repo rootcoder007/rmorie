@@ -206,7 +206,7 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
 #'
 #' Accepts either a long-format data.frame (columns \code{year},
 #' \code{category}, \code{count}) or a nested list keyed
-#' \code{\[\[year\]\]\[\[category\]\] = count}.
+#' \code{[[year]][[category]] = count}.
 #'
 #' Returns a data.frame indexed by year with columns:
 #' \itemize{
@@ -300,7 +300,7 @@ morie_tps_csi_per_year <- function(counts_per_year,
 #'
 #' @param counts_per_hood Long data.frame (columns \code{HOOD_158},
 #'   \code{category}, \code{count}) or nested list
-#'   \code{\[\[hood\]\]\[\[category\]\] = count}.
+#'   \code{[[hood]][[category]] = count}.
 #' @param variant One of "total" or "violent".
 #' @param weights Optional override vector of weights.
 #' @return A data.frame with one row per neighbourhood.

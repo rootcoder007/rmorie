@@ -978,7 +978,7 @@ hierarchical_bonferroni <- function(p_values_by_family, alpha = 0.05,
 #' @inheritParams bonferroni
 #' @param method One of \code{"storey"}, \code{"bootstrap"}, or
 #'   \code{"two_step"}.
-#' @return A scalar pi0 estimate in `\[0, 1\]`.
+#' @return A scalar pi0 estimate in `[0, 1]`.
 #' @examples
 #' set.seed(1)
 #' p <- c(runif(80), runif(20, 0, 0.005))
@@ -1211,7 +1211,7 @@ print.morie_multiple_testing_result <- function(x, ...) {
 #' proportion of null hypotheses estimated by the Storey-style cutoff
 #' at \eqn{p > 0.5}.
 #'
-#' @param p_values Numeric vector of raw p-values in \eqn{`\[0, 1\]`}.
+#' @param p_values Numeric vector of raw p-values in \eqn{`[0, 1]`}.
 #' @param pi0_method Pi-zero estimator. Accepted: \code{"bootstrap"}
 #'   (alias for the Storey-style cutoff at 0.5; retained for API
 #'   parity with the Python sibling).

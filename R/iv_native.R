@@ -89,7 +89,7 @@
 #' Internal helper: LIML kappa via the eigenvalue problem
 #'
 #' kappa = smallest eigenvalue of (W' M_1 W)(W' M_Z W)^\{-1\} where
-#' W = \[y, endogenous\], M_1 annihilates the exogenous block (incl.
+#' W = [y, endogenous], M_1 annihilates the exogenous block (incl.
 #' intercept) and M_Z annihilates the full instrument set.
 #' @noRd
 .morie_iv_liml_kappa <- function(y, X_endo, Z_full, X_exo) {
