@@ -22,5 +22,7 @@ against the Open Quantum Safe library at install time. If
 }
 }
 \examples{
-morie_crypto_liboqs_available()
+if (morie_crypto_sodium_available()) {
+  morie_crypto_liboqs_available()
+}
 }

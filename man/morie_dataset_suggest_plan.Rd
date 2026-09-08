@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_suggest_plan}
 \alias{morie_dataset_suggest_plan}
-\title{Suggest an ordered analysis plan based on a dataset profile.}
+\title{Suggest an ordered analysis plan based on a dataset profile}
 \usage{
 morie_dataset_suggest_plan(profile)
 }

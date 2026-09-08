@@ -1,0 +1,836 @@
+# SPDX-License-Identifier: AGPL-3.0-or-later
+# Internal helpers mirroring morie.fn._gp_core (Montesinos Lopez, Montesinos
+# Lopez & Crossa 2022, Multivariate Statistical Machine Learning Methods for
+# Genomic Prediction, Springer, DOI 10.1007/978-3-030-89010-0).
+# Base R only. Not exported.
+
+#' .gpflat
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gpbrier}, \code{.gpconf} and 17 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param x Passed to \code{unlist}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
+#' @examples
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gpflat(x = x)
+#' res
+.gpflat <- function(x) as.numeric(unlist(x))
+
+#' .gpmat
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpannsse},
+#' \code{.gpblueblup}, \code{.gpbrier} and 18 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param A A matrix; passed to \code{nrow}.
+#' @return A matrix, from \code{matrix}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gpmat(A = A)
+#' res
+.gpmat <- function(A) {
+  if (is.matrix(A)) {
+    return(matrix(as.numeric(A), nrow(A), ncol(A)))
+  }
+  if (is.list(A)) {
+    return(do.call(rbind, lapply(A, as.numeric)))
+  }
+  matrix(as.numeric(A), nrow = 1L)
+}
+
+# Solve A x = b; rank-deficient systems fall back on the minimum-norm
+# pseudo-inverse solution, as the Python arm does.
+#' Solve A x = b; rank-deficient systems fall back on the minimum-norm
+#'
+#' pseudo-inverse solution, as the Python arm does.
+#'
+#' @param A A matrix; passed to \code{solve}.
+#' @param b A matrix; passed to \code{\%*\%}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gpsolve(A = A, b = b)
+#' res
+.gpsolve <- function(A, b) {
+  A <- .gpmat(A)
+  b <- .gpflat(b)
+  out <- tryCatch(as.numeric(solve(A, b)), error = function(e) NULL)
+  if (!is.null(out) && all(is.finite(out))) {
+    return(out)
+  }
+  as.numeric(.gppinv(A) %*% b)
+}
+
+#' .gppinv
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpinv}, \code{.gpsolve}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param A A matrix; passed to \code{dim}.
+#' @return The value of \code{%*%}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gppinv(A = A)
+#' res
+.gppinv <- function(A) {
+  s <- svd(.gpmat(A))
+  tol <- max(dim(A)) * .Machine$double.eps * max(s$d, 0)
+  di <- ifelse(s$d > tol, 1 / s$d, 0)
+  s$v %*% (di * t(s$u))
+}
+
+#' .gpinv
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gplmmloglik}, \code{.gpolsfit} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param A A matrix; passed to \code{solve}.
+#' @return The value of \code{.gppinv}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gpinv(A = A)
+#' res
+.gpinv <- function(A) {
+  A <- .gpmat(A)
+  out <- tryCatch(solve(A), error = function(e) NULL)
+  if (!is.null(out) && all(is.finite(out))) {
+    return(out)
+  }
+  .gppinv(A)
+}
+
+# log|det A| via the modulus, matching _gp_core._logdet (which sums
+# log|pivot| and so discards the sign).
+#' Log|det A| via the modulus, matching _gp_core._logdet (which sums
+#'
+#' log|pivot| and so discards the sign).
+#'
+#' @param A Passed to \code{.gpmat}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' res <- .gplogdet(A = A)
+#' res
+.gplogdet <- function(A) {
+  A <- .gpmat(A)
+  d <- determinant(A, logarithm = TRUE)
+  v <- as.numeric(d$modulus)
+  if (!is.finite(v)) -Inf else v
+}
+
+# --- chapter 1: balanced one-way layout, eqs (1.2)-(1.5) -------------------
+#' Chapter 1: balanced one-way layout, eqs (1.2)-(1.5)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm002}, \code{Msm003},
+#' \code{Msm005} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param groups Iterated over elementwise, with \code{lapply}.
+#' @return A list with \code{grand_mean}, \code{sd_single_mean}, \code{group_means},
+#' \code{sd_residual}, \code{deviations}, \code{sigma2_b}, \code{icc}, \code{ms_between},
+#' \code{ms_within}.
+#' @export
+.gponeway <- function(groups) {
+  gs <- lapply(groups, as.numeric)
+  if (length(gs) == 0L || any(vapply(gs, length, 1L) != length(gs[[1L]]))) {
+    stop("need a balanced layout (equal group sizes)")
+  }
+  a <- length(gs)
+  r <- length(gs[[1L]])
+  n <- a * r
+  means <- vapply(gs, mean, 0)
+  grand <- sum(vapply(gs, sum, 0)) / n
+  ss_between <- r * sum((means - grand)^2)
+  ss_within <- sum(vapply(seq_len(a), function(i) sum((gs[[i]] - means[i])^2), 0))
+  ms_between <- ss_between / (a - 1)
+  ms_within <- ss_within / (n - a)
+  sigma2_b <- max((ms_between - ms_within) / r, 0)
+  denom <- sigma2_b + ms_within
+  list(
+    grand_mean = grand,
+    sd_single_mean = sqrt((ss_between + ss_within) / (n - 1)),
+    group_means = means,
+    sd_residual = sqrt(ms_within),
+    deviations = means - grand,
+    sigma2_b = sigma2_b,
+    icc = if (denom > 0) sigma2_b / denom else 0,
+    ms_between = ms_between, ms_within = ms_within
+  )
+}
+
+# --- chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14) -------------
+#' Chapter 4: confusion matrix and metrics, eqs (4.5)-(4.14)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param y_true Passed to \code{.gpflat}.
+#' @param y_pred Passed to \code{.gpflat}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @return The value of \code{M}, as built in the body.
+#' @export
+.gpconf <- function(y_true, y_pred, n_classes = NULL) {
+  yt <- as.integer(.gpflat(y_true))
+  yp <- as.integer(.gpflat(y_pred))
+  C <- if (is.null(n_classes)) max(c(yt, yp)) + 1L else as.integer(n_classes)
+  M <- matrix(0, C, C)
+  for (k in seq_along(yt)) M[yt[k] + 1L, yp[k] + 1L] <- M[yt[k] + 1L, yp[k] + 1L] + 1
+  M
+}
+
+#' .gpclassmetrics
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm007}, \code{Msm008}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param conf A matrix; indexed by row and column.
+#' @param i Coerced to integer by the body, with \code{as.integer}.
+#' @return A list with \code{TFN}, \code{TFP}, \code{TTN}, \code{TTP_all},
+#' \code{precision}, \code{sensitivity}, \code{specificity}, \code{pCCC}.
+#' @export
+.gpclassmetrics <- function(conf, i) {
+  conf <- .gpmat(conf)
+  C <- nrow(conf)
+  ii <- as.integer(i) + 1L
+  tfn <- sum(conf[ii, -ii])
+  tfp <- sum(conf[-ii, ii])
+  ttn <- sum(conf[-ii, -ii])
+  ttp <- sum(diag(conf))
+  total <- sum(conf)
+  list(
+    TFN = tfn, TFP = tfp, TTN = ttn, TTP_all = ttp,
+    precision = if (ttp + tfp) ttp / (ttp + tfp) else 0,
+    sensitivity = if (ttp + tfn) ttp / (ttp + tfn) else 0,
+    specificity = if (ttn + tfp) ttn / (ttn + tfp) else 0,
+    pCCC = if (total) ttp / total else 0
+  )
+}
+
+#' .gpbrier
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm009}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param probs Passed to \code{.gpmat}.
+#' @param y_true Passed to \code{.gpflat}.
+#' @param n_classes Optional; may be \code{NULL}. Coerced to integer by the body, with
+#' \code{as.integer}.
+#' @param halved A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.gpbrier <- function(probs, y_true, n_classes = NULL, halved = FALSE) {
+  P <- .gpmat(probs)
+  yt <- as.integer(.gpflat(y_true))
+  Tn <- length(yt)
+  C <- if (is.null(n_classes)) ncol(P) else as.integer(n_classes)
+  tot <- 0
+  for (k in seq_len(Tn)) {
+    d <- as.numeric(seq_len(C) - 1L == yt[k])
+    tot <- tot + sum((P[k, seq_len(C)] - d)^2)
+  }
+  bs <- tot / Tn
+  if (halved) bs / 2 else bs
+}
+
+#' .gpmll
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm009}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param probs Passed to \code{.gpmat}.
+#' @param y_true Passed to \code{.gpflat}.
+#' @param n_classes Accepted by the signature and not used anywhere in the body.
+#' @return A numeric value.
+#' @export
+.gpmll <- function(probs, y_true, n_classes = NULL) {
+  P <- .gpmat(probs)
+  yt <- as.integer(.gpflat(y_true))
+  -sum(log(pmax(P[cbind(seq_along(yt), yt + 1L)], 1e-300))) / length(yt)
+}
+
+# --- chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML ---------------
+#' Chapter 5: linear mixed model, eqs (5.1)-(5.2) and REML
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpblueblup},
+#' \code{.gplmmloglik}, \code{.gpremlloglik} and 1 others in the module.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param Z A matrix; passed to \code{nrow}.
+#' @param D Passed to \code{.gpmat}.
+#' @param R Optional; may be \code{NULL}. Passed to \code{.gpmat}.
+#' @return A numeric value.
+#' @export
+.gplmmV <- function(Z, D, R = NULL) {
+  Z <- .gpmat(Z)
+  n <- nrow(Z)
+  V <- Z %*% .gpmat(D) %*% t(Z)
+  V + (if (is.null(R)) diag(n) else .gpmat(R))
+}
+
+#' .gpblueblup
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}, \code{Msm010}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X A matrix; passed to \code{t}.
+#' @param Z A matrix; passed to \code{t}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param Sigma Passed to \code{.gplmmV}.
+#' @param R Passed to \code{.gplmmV}.
+#' @return A list with \code{beta}, \code{u}.
+#' @export
+.gpblueblup <- function(X, Z, y, Sigma, R = NULL) {
+  X <- .gpmat(X)
+  Z <- .gpmat(Z)
+  y <- .gpflat(y)
+  V <- .gplmmV(Z, Sigma, R)
+  Vi <- .gpinv(V)
+  XtVi <- t(X) %*% Vi
+  beta <- .gpsolve(XtVi %*% X, as.numeric(XtVi %*% y))
+  resid <- y - as.numeric(X %*% beta)
+  u <- as.numeric(.gpmat(Sigma) %*% t(Z) %*% (Vi %*% resid))
+  list(beta = beta, u = u)
+}
+
+#' .gplmmloglik
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm010}, \code{Msm011}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gplmmV}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param D Passed to \code{.gplmmV}.
+#' @param beta Optional; may be \code{NULL}. A matrix; passed to \code{\%*\%}.
+#' @param R Passed to \code{.gplmmV}.
+#' @return A list with \code{value}, \code{beta}.
+#' @export
+.gplmmloglik <- function(X, Z, y, D, beta = NULL, R = NULL) {
+  Xm <- .gpmat(X)
+  y <- .gpflat(y)
+  n <- length(y)
+  V <- .gplmmV(Z, D, R)
+  Vi <- .gpinv(V)
+  if (is.null(beta)) {
+    XtVi <- t(Xm) %*% Vi
+    beta <- .gpsolve(XtVi %*% Xm, as.numeric(XtVi %*% y))
+  }
+  r <- y - as.numeric(Xm %*% beta)
+  quad <- sum(r * as.numeric(Vi %*% r))
+  list(
+    value = -0.5 * n * log(2 * pi) - 0.5 * .gplogdet(V) - 0.5 * quad,
+    beta = beta
+  )
+}
+
+#' .gpremlloglik
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm011}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gplmmV}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param D Passed to \code{.gplmmV}.
+#' @param R Passed to \code{.gplmmV}.
+#' @return A list with \code{value}, \code{beta}.
+#' @export
+.gpremlloglik <- function(X, Z, y, D, R = NULL) {
+  Xm <- .gpmat(X)
+  y <- .gpflat(y)
+  V <- .gplmmV(Z, D, R)
+  Vi <- .gpinv(V)
+  XtVi <- t(Xm) %*% Vi
+  A <- XtVi %*% Xm
+  beta <- .gpsolve(A, as.numeric(XtVi %*% y))
+  r <- y - as.numeric(Xm %*% beta)
+  quad <- sum(r * as.numeric(Vi %*% r))
+  list(
+    value = -0.5 * .gplogdet(A) - 0.5 * .gplogdet(V) - 0.5 * quad,
+    beta = beta
+  )
+}
+
+# --- chapter 3: least squares, eq (3.1) -----------------------------------
+#' Chapter 3: least squares, eq (3.1)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm042}, \code{Msm332}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmat}.
+#' @param y A matrix; passed to \code{\%*\%}.
+#' @param add_intercept A flag; the body branches on it. Defaults to \code{FALSE}.
+#' @return A list with \code{beta}, \code{fitted}, \code{residuals}, \code{rss},
+#' \code{sigma2}, \code{sigma2_ml}, \code{var_beta}, \code{se_beta}.
+#' @export
+#' @examples
+#' X <- cbind(1, c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9), c(0.4, 1.1, 0.9, 1.8, 2.2,
+#' 2.6, 3.4, 3.9))
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' res <- .gpolsfit(X = X, y = y)
+#' res
+.gpolsfit <- function(X, y, add_intercept = FALSE) {
+  Xm <- .gpmat(X)
+  if (add_intercept) Xm <- cbind(1, Xm)
+  y <- .gpflat(y)
+  n <- length(y)
+  p1 <- ncol(Xm)
+  XtX <- t(Xm) %*% Xm
+  beta <- .gpsolve(XtX, as.numeric(t(Xm) %*% y))
+  fitted <- as.numeric(Xm %*% beta)
+  resid <- y - fitted
+  rss <- sum(resid^2)
+  dof <- n - p1
+  sigma2 <- if (dof > 0) rss / dof else NaN
+  XtXi <- .gpinv(XtX)
+  list(
+    beta = beta, fitted = fitted, residuals = resid, rss = rss,
+    sigma2 = sigma2, sigma2_ml = rss / n,
+    var_beta = sigma2 * XtXi,
+    se_beta = sqrt(sigma2 * diag(XtXi))
+  )
+}
+
+# --- chapter 5: Kronecker products and the multi-trait model, eq (5.5) -----
+#' Chapter 5: Kronecker products and the multi-trait model, eq (5.5)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmultitrait}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param A Passed to \code{.gpmat}.
+#' @param B Passed to \code{.gpmat}.
+#' @return The value of \code{kronecker}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gpkron(A = A, B = b)
+#' res
+.gpkron <- function(A, B) kronecker(.gpmat(A), .gpmat(B))
+
+#' .gpmultitrait
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm026}, \code{Msm028}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param Y Passed to \code{.gpmat}.
+#' @param Z Passed to \code{.gpkron}.
+#' @param G Passed to \code{.gpkron}.
+#' @param Sigma_T Passed to \code{.gpkron}.
+#' @param R_T Passed to \code{.gpkron}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{.gpmat}.
+#' @return A list with \code{mu}, \code{beta}, \code{b}, \code{b_by_line}.
+#' @export
+.gpmultitrait <- function(Y, Z, G, Sigma_T, R_T, X = NULL) {
+  Ym <- .gpmat(Y)
+  J <- nrow(Ym)
+  nT <- ncol(Ym)
+  y <- as.numeric(t(Ym)) # stacked line-by-line
+  I_nT <- diag(nT)
+  Xm <- .gpkron(matrix(1, J, 1), I_nT)
+  if (!is.null(X)) Xm <- cbind(Xm, .gpmat(X))
+  Zm <- .gpkron(Z, I_nT)
+  Sigma <- .gpkron(G, Sigma_T)
+  R <- .gpkron(diag(J), R_T)
+  bb <- .gpblueblup(Xm, Zm, y, Sigma, R)
+  b <- bb$u
+  list(
+    mu = bb$beta[seq_len(nT)], beta = bb$beta, b = b,
+    b_by_line = lapply(
+      seq_len(length(b) %/% nT),
+      function(i) b[((i - 1L) * nT + 1L):(i * nT)]
+    )
+  )
+}
+
+# --- chapter 7: multinomial logistic model, eqs (7.6)-(7.10) ---------------
+#' Chapter 7: multinomial logistic model, eqs (7.6)-(7.10)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpmnloglik}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmat}.
+#' @param beta0 Passed to \code{.gpflat}.
+#' @param beta Passed to \code{.gpmat}.
+#' @param baseline_last A flag; the body branches on it. Defaults to \code{TRUE}.
+#' @return A matrix, from \code{t}.
+#' @export
+.gpmnprobs <- function(X, beta0, beta, baseline_last = TRUE) {
+  Xm <- .gpmat(X)
+  b0 <- .gpflat(beta0)
+  B <- .gpmat(beta)
+  if (baseline_last) {
+    b0 <- c(b0, 0)
+    B <- rbind(B, rep(0, ncol(Xm)))
+  }
+  t(apply(Xm, 1L, function(row) {
+    eta <- b0 + as.numeric(B %*% row)
+    ex <- exp(eta - max(eta))
+    ex / sum(ex)
+  }))
+}
+
+#' .gpmnloglik
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gppenmnloglik}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmnprobs}.
+#' @param y Passed to \code{.gpflat}.
+#' @param beta0 Passed to \code{.gpmnprobs}.
+#' @param beta Passed to \code{.gpmnprobs}.
+#' @param baseline_last Passed to \code{.gpmnprobs}. Defaults to \code{TRUE}.
+#' @return A numeric value.
+#' @export
+.gpmnloglik <- function(X, y, beta0, beta, baseline_last = TRUE) {
+  P <- .gpmnprobs(X, beta0, beta, baseline_last)
+  ys <- as.integer(.gpflat(y))
+  sum(log(pmax(P[cbind(seq_along(ys), ys + 1L)], 1e-300)))
+}
+
+#' .gppenmnloglik
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm109}, \code{Msm115}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param X Passed to \code{.gpmnloglik}.
+#' @param y Passed to \code{.gpmnloglik}.
+#' @param beta0 Passed to \code{.gpmnloglik}.
+#' @param beta Passed to \code{.gpmnloglik}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}.
+#' @param penalty Passed to \code{identical}. Defaults to \code{"ridge"}.
+#' @param baseline_last Passed to \code{.gpmnloglik}. Defaults to \code{TRUE}.
+#' @return A list with \code{loglik}, \code{penalty}, \code{penalized_loglik}.
+#' @export
+.gppenmnloglik <- function(X, y, beta0, beta, lam, penalty = "ridge",
+                           baseline_last = TRUE) {
+  ll <- .gpmnloglik(X, y, beta0, beta, baseline_last)
+  B <- .gpmat(beta)
+  pen <- if (identical(penalty, "lasso")) sum(abs(B)) else sum(B^2)
+  list(
+    loglik = ll, penalty = as.numeric(lam) * pen,
+    penalized_loglik = ll - as.numeric(lam) * pen
+  )
+}
+
+# --- chapter 10: ANN loss, eq (10.5) --------------------------------------
+#' Chapter 10: ANN loss, eq (10.5)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm249}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param y_hat Passed to \code{.gpmat}.
+#' @param y Passed to \code{.gpmat}.
+#' @return A numeric value.
+#' @export
+.gpannsse <- function(y_hat, y) 0.5 * sum((.gpmat(y_hat) - .gpmat(y))^2)
+
+# --- chapter 3: expected prediction error, p.80 ---------------------------
+#' Chapter 3: expected prediction error, p.80
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm334}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param sigma2 Coerced to numeric by the body, with \code{as.numeric}.
+#' @param x_star Passed to \code{.gpflat}.
+#' @param eigenvalues Passed to \code{.gpflat}.
+#' @return A numeric value.
+#' @export
+.gpepe <- function(sigma2, x_star, eigenvalues) {
+  xs <- .gpflat(x_star)
+  lam <- .gpflat(eigenvalues)
+  if (any(lam <= 0)) stop("eigenvalues must be positive")
+  as.numeric(sigma2) * (1 + sum(xs^2 / lam))
+}
+
+# --- chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4) -----------
+#' Chapter 15: zero-altered Poisson forest, eqs (15.1)-(15.4)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm323}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param mu_pred Coerced to numeric by the body, with \code{as.numeric}.
+#' @param theta_pred Coerced to numeric by the body, with \code{as.numeric}.
+#' @return A list with \code{mu}, \code{theta}.
+#' @export
+.gpzaplink <- function(mu_pred, theta_pred) {
+  list(
+    mu = exp(min(as.numeric(mu_pred), 700)),
+    theta = 1 / (1 + exp(-as.numeric(theta_pred)))
+  )
+}
+
+# Book erratum: eq. (15.3) as printed drops the mu from the numerator. The
+# ZAP pmf printed above it, the Var(Y) line below it, and the p.652
+# estimating equation for mu all carry the mu, so the internally consistent
+# mean (1 - theta) mu / (1 - exp(-mu)) is what is implemented.
+#' Book erratum: eq. (15.3) as printed drops the mu from the numerator.
+#' The
+#'
+#' ZAP pmf printed above it, the Var(Y) line below it, and the p.652
+#' estimating equation for mu all carry the mu, so the internally
+#' consistent mean (1 - theta) mu / (1 - exp(-mu)) is what is
+#' implemented.
+#'
+#' @param theta_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.gpzappredict <- function(theta_hat, mu_hat) {
+  th <- as.numeric(theta_hat)
+  mu <- as.numeric(mu_hat)
+  denom <- 1 - exp(-mu)
+  if (denom <= 0) 0 else (1 - th) * mu / denom
+}
+
+#' .gpzapcpredict
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm329}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param theta_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param mu_hat Coerced to numeric by the body, with \code{as.numeric}.
+#' @param threshold Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.5}.
+#' @return One of two values, depending on the branch taken.
+#' @export
+.gpzapcpredict <- function(theta_hat, mu_hat, threshold = 0.5) {
+  if (as.numeric(theta_hat) > as.numeric(threshold)) 0 else as.numeric(mu_hat)
+}
+
+#' .gpztploglik
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param y_positive Passed to \code{.gpflat}.
+#' @param mu Numeric; passed to \code{log}.
+#' @return A numeric value.
+#' @export
+.gpztploglik <- function(y_positive, mu) {
+  ys <- .gpflat(y_positive)
+  n <- length(ys)
+  mu <- as.numeric(mu)
+  if (mu <= 0 || n == 0L) {
+    return(-Inf)
+  }
+  -n * log(1 - exp(-mu)) + log(mu) * sum(ys) - n * mu - sum(lgamma(ys + 1))
+}
+
+#' .gpztpmle
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gpzapbestsplit}, \code{Msm325}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param y_positive Passed to \code{.gpflat}.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-12}.
+#' @param max_iter Coerced to integer by the body, with \code{as.integer}. Defaults to \code{200}.
+#' @return A numeric value.
+#' @export
+.gpztpmle <- function(y_positive, tol = 1e-12, max_iter = 200) {
+  ys <- .gpflat(y_positive)
+  n <- length(ys)
+  if (n == 0L) stop("need at least one positive observation")
+  target <- sum(ys) / n
+  if (target <= 1) {
+    return(0)
+  }
+  lo <- 1e-9
+  hi <- 1
+  while (hi / (1 - exp(-hi)) < target) {
+    hi <- hi * 2
+    if (hi > 1e6) break
+  }
+  for (k in seq_len(as.integer(max_iter))) {
+    mid <- 0.5 * (lo + hi)
+    v <- mid / (1 - exp(-mid))
+    if (abs(v - target) < tol) {
+      return(mid)
+    }
+    if (v < target) lo <- mid else hi <- mid
+  }
+  0.5 * (lo + hi)
+}
+
+#' .gpzapbestsplit
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm325}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param y Passed to \code{.gpflat}.
+#' @param x Passed to \code{.gpflat}.
+#' @param candidates Optional; may be \code{NULL}. Passed to \code{.gpflat}.
+#' @return A list with \code{threshold}, \code{loglik}.
+#' @export
+#' @examples
+#' y <- c(2.9, 5.1, 6.8, 9.4, 11.2, 13.1, 15.0, 17.6)
+#' x <- c(1.2, 2.4, 3.1, 4.8, 5.3, 6.7, 7.1, 8.9)
+#' res <- .gpzapbestsplit(y = y, x = x)
+#' res
+.gpzapbestsplit <- function(y, x, candidates = NULL) {
+  ys <- .gpflat(y)
+  xs <- .gpflat(x)
+  vals <- if (is.null(candidates)) sort(unique(xs)) else .gpflat(candidates)
+  bt <- NULL
+  bl <- -Inf
+  for (v in vals) {
+    L <- ys[xs <= v & ys > 0]
+    R <- ys[xs > v & ys > 0]
+    if (!length(L) || !length(R)) next
+    ll <- .gpztploglik(L, .gpztpmle(L)) + .gpztploglik(R, .gpztpmle(R))
+    if (is.null(bt) || ll > bl) {
+      bt <- v
+      bl <- ll
+    }
+  }
+  list(threshold = bt, loglik = if (is.null(bt)) -Inf else bl)
+}
+
+# --- chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5) ----------
+#' Chapter 7: ordinal latent-scale predictors, eqs (7.3)-(7.5)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm092}, \code{Msm098}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param n A count; the body uses it as \code{seq_len(...)}.
+#' @param X_E Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param X Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param X_EM Optional; may be \code{NULL}. Passed to \code{is.null}.
+#' @param Z_L Optional; may be \code{NULL}. Passed to \code{.gpmat}.
+#' @param L_g Optional; may be \code{NULL}. Passed to \code{.gpmat}.
+#' @return A list with \code{design}, \code{widths}, \code{n_columns}.
+#' @export
+.gpordlatent <- function(n, X_E = NULL, X = NULL, X_EM = NULL,
+                         Z_L = NULL, L_g = NULL) {
+  blocks <- list()
+  nm <- character(0)
+  add <- function(name, M) {
+    blocks[[length(blocks) + 1L]] <<- .gpmat(M)
+    nm <<- c(nm, name)
+  }
+  if (!is.null(X_E)) add("environments", X_E)
+  if (!is.null(X)) add("markers", X)
+  if (!is.null(X_EM)) add("env_x_marker", X_EM)
+  if (!is.null(Z_L)) {
+    add(
+      "genetic",
+      if (!is.null(L_g)) .gpmat(Z_L) %*% .gpmat(L_g) else .gpmat(Z_L)
+    )
+  }
+  if (!length(blocks)) stop("the predictor needs at least one block")
+  design <- do.call(cbind, lapply(blocks, function(M) M[seq_len(n), , drop = FALSE]))
+  w <- as.list(vapply(blocks, ncol, 1L))
+  names(w) <- nm
+  list(design = design, widths = w, n_columns = ncol(design))
+}
+
+# --- chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3) ---------
+#' Chapter 8: reproducing kernel Hilbert space, eqs (8.1)-(8.3)
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param beta Passed to \code{.gpflat}.
+#' @param K Passed to \code{.gpmat}.
+#' @return A vector, from \code{as.numeric}.
+#' @export
+.gprkhsnorm <- function(beta, K) {
+  b <- .gpflat(beta)
+  as.numeric(t(b) %*% .gpmat(K) %*% b)
+}
+
+#' .gprkhspredict
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{.gprkhsfitsq}, \code{Msm123}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param K_new Passed to \code{.gpmat}.
+#' @param beta Passed to \code{.gpflat}.
+#' @param eta0 Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0}.
+#' @return A numeric value.
+#' @export
+.gprkhspredict <- function(K_new, beta, eta0 = 0) {
+  as.numeric(eta0) + as.numeric(.gpmat(K_new) %*% .gpflat(beta))
+}
+
+#' .gprkhsfitsq
+#'
+#' A step of the helpers_gp_core implementation. Called by \code{Msm128}.
+#' See the file header for the source the module follows.
+#' the source it follows.
+#'
+#' @param K Passed to \code{.gpmat}.
+#' @param y Passed to \code{.gpflat}.
+#' @param lam Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{1}.
+#' @return A list with \code{eta0}, \code{beta}, \code{fitted}, \code{residuals},
+#' \code{loss}, \code{penalty}, \code{objective}.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .gprkhsfitsq(K = A, y = b)
+#' res
+.gprkhsfitsq <- function(K, y, lam = 1) {
+  Km <- .gpmat(K)
+  ys <- .gpflat(y)
+  n <- length(ys)
+  A <- matrix(0, n + 1L, n + 1L)
+  rhs <- numeric(n + 1L)
+  colsum <- colSums(Km)
+  A[1L, 1L] <- 1
+  A[1L, 2L:(n + 1L)] <- colsum / n
+  rhs[1L] <- sum(ys) / n
+  A[2L:(n + 1L), 1L] <- colsum * 2 / n
+  A[2L:(n + 1L), 2L:(n + 1L)] <- 2 * (t(Km) %*% Km) / n + as.numeric(lam) * Km
+  rhs[2L:(n + 1L)] <- 2 * as.numeric(t(Km) %*% ys) / n
+  sol <- .gpsolve(A, rhs)
+  eta0 <- sol[1L]
+  beta <- sol[-1L]
+  fitted <- .gprkhspredict(Km, beta, eta0)
+  resid <- ys - fitted
+  loss <- sum(resid^2) / n
+  pen <- 0.5 * as.numeric(lam) * .gprkhsnorm(beta, Km)
+  list(
+    eta0 = eta0, beta = beta, fitted = fitted, residuals = resid,
+    loss = loss, penalty = pen, objective = loss + pen
+  )
+}

@@ -2,8 +2,8 @@
 % Please edit documentation in R/cokrg.R
 \name{cokrg}
 \alias{cokrg}
-\alias{morie_cokriging}
-\title{Simple morie_cokriging for co-located bivariate spatial prediction.}
+\alias{morie_cokrg}
+\title{Simple morie_cokriging for co-located bivariate spatial prediction}
 \usage{
 cokrg(
   x,
@@ -19,7 +19,7 @@ cokrg(
   nugget = 0
 )
 
-morie_cokriging(
+morie_cokrg(
   x,
   y,
   coords,
@@ -49,13 +49,16 @@ morie_cokriging(
 \item{cross_sill, cross_range}{Cross-covariance parameters.}
 
 \item{nugget}{Nugget.}
+
+
+
 }
 \value{
 Named list: estimate, se, n, method.
 }
 \description{
 \deqn{\hat Z_1(s_0) = \lambda^\top Z_1 + \mu^\top Z_2}{hat Z_1(s_0) = lambda^top Z_1 + mu^top Z_2}, system
-\deqn{[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}] [\lambda; \mu] = [c_{0p}; c_{0s}]}{[C_pp C_ps; C_ps^top C_ss] [lambda; mu] = [c_0p; c_0s]}.
+\deqn{\[C_{pp} \; C_{ps}; C_{ps}^\top \; C_{ss}\] \[\lambda; \mu\] = \[c_{0p}; c_{0s}\]}{\[C_pp C_ps; C_ps^top C_ss\] \[lambda; mu\] = \[c_0p; c_0s\]}.
 }
 \examples{
 cokrg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))

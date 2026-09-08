@@ -5,8 +5,21 @@
 # non-positive-variance guard is directly unit-testable. `e0`, `e1` are
 # the residual projections, `n` the sample size, `I`/`W` the identity
 # and spatial-weights matrices.
-#' Internal helper: Sarla Negll
-#' @noRd
+#' Internal: SAR-lag concentrated negative log-likelihood in rho
+#'
+#' Extracted from the sarla() optimiser closure so the singular-system /
+#' non-positive-variance guard is directly unit-testable. `e0`, `e1` are
+#' the residual projections, `n` the sample size, `I`/`W` the identity
+#' and spatial-weights matrices.
+#'
+#' @param rho Numeric; combined arithmetically in the body.
+#' @param e0 Numeric; combined arithmetically in the body.
+#' @param e1 Numeric; combined arithmetically in the body.
+#' @param n Numeric; combined arithmetically in the body.
+#' @param I Numeric; combined arithmetically in the body.
+#' @param W Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
 .sarla_negll <- function(rho, e0, e1, n, I, W) {
   e <- e0 - rho * e1
   sigma2 <- as.numeric(sum(e^2)) / n
@@ -22,7 +35,7 @@
   0.5 * n * log(2 * pi * sigma2) - logdetA + 0.5 * n
 }
 
-#' Spatial autoregressive lag model (SAR lag, ML).
+#' Spatial autoregressive lag model (SAR lag, ML)
 #'
 #' Y = rho W Y + X beta + eps,  eps ~ N(0, sigma2 I).
 #' Concentrated log-likelihood in rho.
@@ -31,10 +44,10 @@
 #' @param y Response, length n.
 #' @param w n-by-n weights matrix.
 #' @return Named list: estimate, se, rho, sigma2, n, method.
-#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 7.
+#' @references Anselin (1988); Schabenberger & Gotway (2005), Ch 6, Sec 6.2.2.1.
 #' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 sarla <- function(x, y, w) {
   X <- as.matrix(x)
@@ -51,7 +64,9 @@ sarla <- function(x, y, w) {
   e0 <- M %*% y
   e1 <- M %*% (W %*% y)
   neg_ll <- function(rho) .sarla_negll(rho, e0, e1, n, I, W)
-  res <- stats::optimize(neg_ll, interval = c(-0.99, 0.99))
+  iv <- .sp_rho_interval(W, "identity")
+  res <- stats::optimize(neg_ll, interval = iv,
+                         tol = 1e-10 * max(diff(iv), 1))
   rho <- res$minimum
   Wy <- W %*% y
   y_star <- as.numeric(y - rho * Wy)

@@ -7,14 +7,14 @@
 morie_suggest_analysis_plan(profile)
 }
 \arguments{
-\item{profile}{A list returned by \code{\link[=morie_profile_dataset]{morie_profile_dataset()}}.}
+\item{profile}{A list returned by \code{morie_profile_dataset()}.}
 }
 \value{
 Character vector of suggestion strings, one per recommendation.
 }
 \description{
 Mirrors the Python \code{morie.suggest_analysis_plan()}. Inspects the output
-of \code{\link[=morie_profile_dataset]{morie_profile_dataset()}} and returns plain-English recommendations for
+of \code{morie_profile_dataset()} and returns plain-English recommendations for
 candidate analyses.
 }
 \examples{

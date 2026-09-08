@@ -1,0 +1,48 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{morie_survrsf_predict_tree}
+\alias{morie_survrsf_predict_tree}
+\title{morie_survrsf_predict_tree}
+\usage{
+morie_survrsf_predict_tree(tree, x, random_variable = NULL, rng = NULL) 
+}
+\arguments{
+\item{tree}{A list; the body reads \code{$root} from it.}
+\item{x}{A vector; indexed elementwise.}
+\item{random_variable}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+\item{rng}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
+}
+\description{
+A step of the survrsf_native implementation. Called by \code{morie_survrsf_ensemble_chf}, \code{morie_survrsf_mortality}. See the file header for the source the module follows.
+}
+\value{
+The value of \code{node}, as built in the body.
+}
+\references{
+----------
+Ishwaran, H., Kogalur, U. B., Blackstone, E. H. & Lauer, M. S.
+(2008) "Random Survival Forests", Annals of Applied Statistics 2(3),
+841-860, doi:10.1214/08-AOAS169.
+
+Harrell, F. et al. (1982) "Evaluating the Yield of Medical Tests",
+JAMA 247(18), 2543-2546, doi:10.1001/jama.1982.03320430047030.
+
+Hothorn, T. & Lausen, B. (2003) "On the exact distribution of
+maximally selected rank statistics", Computational Statistics & Data
+Analysis 43(2), 121-137, doi:10.1016/S0167-9473(02)00225-6.
+
+Ishwaran, H. & Kogalur, U. B. (2007) "Random Survival Forests for
+R", R News 7(2), 25-31.
+}
+\keyword{internal}
+\examples{
+set.seed(1)
+n <- 120
+X <- matrix(rnorm(n * 3), n, 3)
+times <- rexp(n, exp(0.3 * (X[, 1] - 0.5 * X[, 2])))
+events <- rbinom(n, 1, 0.75)
+tree <- morie_survrsf_grow_tree(X, times, events, min_deaths = 5, seed = 1)
+p <- morie_survrsf_predict_tree(tree, X[1, ])
+is.list(p) || is.numeric(p)
+}

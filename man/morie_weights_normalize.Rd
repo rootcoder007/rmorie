@@ -2,7 +2,7 @@
 % Please edit documentation in R/weights.R
 \name{morie_weights_normalize}
 \alias{morie_weights_normalize}
-\title{Normalise weights so they sum to n (sample) or N (population).}
+\title{Normalise weights so they sum to n (sample) or N (population)}
 \usage{
 morie_weights_normalize(
   weights,
@@ -22,7 +22,7 @@ morie_weights_normalize(
 A logical scalar.
 }
 \description{
-Normalise weights so they sum to n (sample) or N (population).
+Normalise weights so they sum to n (sample) or N (population)
 }
 \examples{
 set.seed(1)

@@ -3,7 +3,7 @@
 \name{morie_otis_analyze_b02_ruhela_alt_age}
 \alias{morie_otis_analyze_b02_ruhela_alt_age}
 \alias{morie_otis_analyze_b02_mrm_alt_age}
-\title{b02 alt-T Ruhela: Age 50+ -> total seg days.}
+\title{b02 alt-T Ruhela: Age 50+ -> total seg days}
 \usage{
 morie_otis_analyze_b02_ruhela_alt_age(data = NULL, out_dir = NULL)
 
@@ -18,7 +18,7 @@ morie_otis_analyze_b02_mrm_alt_age(data = NULL, out_dir = NULL)
 \code{morie_otis_analysis_result}.
 }
 \description{
-b02 alt-T Ruhela: Age 50+ -> total seg days.
+b02 alt-T Ruhela: Age 50+ -> total seg days
 }
 \examples{
 \donttest{ morie_otis_analyze_b02_ruhela_alt_age() }

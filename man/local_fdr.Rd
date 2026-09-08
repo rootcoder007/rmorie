@@ -7,7 +7,7 @@
 local_fdr(p_values, pi0_method = "bootstrap", labels = NULL)
 }
 \arguments{
-\item{p_values}{Numeric vector of raw p-values in \eqn{`[0, 1]`}.}
+\item{p_values}{Numeric vector of raw p-values in \eqn{`\[0, 1\]`}.}
 
 \item{pi0_method}{Pi-zero estimator. Accepted: \code{"bootstrap"}
 (alias for the Storey-style cutoff at 0.5; retained for API

@@ -23,11 +23,13 @@ with the CR1 small-sample factor
 \eqn{\frac{G}{G-1}\cdot\frac{n-1}{n-k}} by default.
 }
 \examples{
-set.seed(1)
-df <- data.frame(y = rnorm(60), x = rnorm(60),
-                 cl = rep(1:6, each = 10))
-fit <- stats::lm(y ~ x, data = df)
-morie_vcov_cl(fit, cluster = df$cl)
+if (requireNamespace("sandwich", quietly = TRUE)) {
+  set.seed(1)
+  df <- data.frame(y = rnorm(60), x = rnorm(60),
+                   cl = rep(1:6, each = 10))
+  fit <- stats::lm(y ~ x, data = df)
+  morie_vcov_cl(fit, cluster = df$cl)
+}
 }
 \references{
 Cameron, A. C., & Miller, D. L. (2015). A practitioner's

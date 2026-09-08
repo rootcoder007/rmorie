@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' BvM diagnostic for the mean functional under a DP prior.
+#' BvM diagnostic for the mean functional under a DP prior
 #'
 #' @param x Numeric data vector.
 #' @param theta0 Optional null value for the mean functional.
@@ -16,7 +16,7 @@
 #' morie_ghosal_bernstein_von_mises(x = rnorm(50))
 #' @export
 morie_ghosal_bernstein_von_mises <- function(x, theta0 = NULL, B = 500, seed = 0,
-                                       deterministic_seed = NULL) {
+                                             deterministic_seed = NULL) {
   if (!is.null(deterministic_seed)) {
     rmorie::morie_det_rng("ghbvm", deterministic_seed)
   } else {

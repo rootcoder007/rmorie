@@ -35,6 +35,6 @@ rate is zero.
 }
 \examples{
 pred <- c(1, 1, 1, 1, 0, 0, 0, 1, 0, 0)
-race <- c("A","A","A","A","A","B","B","B","B","B")
+race <- c("A", "A", "A", "A", "A", "B", "B", "B", "B", "B")
 morie_fairness_demographic_parity(pred, race, privileged = "A")$value
 }

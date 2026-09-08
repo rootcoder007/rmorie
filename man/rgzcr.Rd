@@ -20,7 +20,7 @@ Named list \code{zcr}, \code{zcr_per_second}, \code{crossings}, \code{n}.
 }
 \description{
 \deqn{\mathrm{ZCR} = (N-1)^{-1} \sum_{n=1}^{N-1}
-       \tfrac{1}{2} |\mathrm{sgn}(x[n]) - \mathrm{sgn}(x[n-1])|}{ZCR = (N-1)^-1 sum_n=1^N-1 (1)/(2) |sgn(x[n]) - sgn(x[n-1])|}
+       \tfrac{1}{2} |\mathrm{sgn}(x\[n\]) - \mathrm{sgn}(x\[n-1\])|}{ZCR = (N-1)^-1 sum_n=1^N-1 (1)/(2) |sgn(x\[n\]) - sgn(x\[n-1\])|}
 }
 \examples{
 rgzcr(sin(2 * pi * seq_len(100) / 10), fs = 100)$crossings

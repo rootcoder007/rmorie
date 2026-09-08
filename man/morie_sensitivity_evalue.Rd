@@ -39,6 +39,7 @@ for OLS / MD, 1 for ratio scales).}
 
 \item{...}{Additional arguments forwarded to the underlying
 \code{EValue::evalues.*} function.}
+
 }
 \value{
 A list of class \code{morie_sensitivity_evalue} with
@@ -58,8 +59,10 @@ directly.  Pairs with \code{\link{e_value_rr}} /
 wrappers around the same backend.
 }
 \examples{
-str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
-                             ci_upper = 2.7), max.level = 1)
+if (requireNamespace("tipr", quietly = TRUE)) {
+  str(morie_sensitivity_evalue(1.8, type = "RR", ci_lower = 1.2,
+                               ci_upper = 2.7), max.level = 1)
+}
 }
 \references{
 VanderWeele, T. J., & Ding, P. (2017). Sensitivity

@@ -399,11 +399,6 @@ test_that("morie_garch_fit errors on too-short series", {
 })
 
 test_that("morie_gradient_boosting_ensemble fits a regression task", {
-  testthat::skip_if(
-    !requireNamespace("gbm", quietly = TRUE) &&
-      !requireNamespace("xgboost", quietly = TRUE),
-    "needs gbm or xgboost"
-  )
   set.seed(25)
   x <- matrix(rnorm(200), ncol = 4)
   y <- x[, 1] + 0.3 * rnorm(50)
@@ -423,11 +418,6 @@ test_that("morie_gradient_boosting_ensemble fits a regression task", {
 })
 
 test_that("morie_gradient_boosting_ensemble fits a classification task", {
-  testthat::skip_if(
-    !requireNamespace("gbm", quietly = TRUE) &&
-      !requireNamespace("xgboost", quietly = TRUE),
-    "needs gbm or xgboost"
-  )
   set.seed(26)
   x <- matrix(rnorm(200), ncol = 4)
   y <- as.integer(x[, 1] + rnorm(50) > 0)

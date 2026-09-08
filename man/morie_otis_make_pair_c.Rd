@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_make_pair_c}
 \alias{morie_otis_make_pair_c}
-\title{Pair (c): RegionalVolatility -> SegregationDays.}
+\title{Pair (c): RegionalVolatility -> SegregationDays}
 \usage{
 morie_otis_make_pair_c(df)
 }
@@ -18,7 +18,7 @@ Outcome Y_c = NumberConsecutiveDays_Segregation winsorised at the
 99th percentile.
 }
 \examples{
-\donttest{
+\dontrun{
 # b01 (Segregation - Detailed Dataset) carries the full placement-level
 # schema, including NumberConsecutiveDays_Segregation (see the bundled
 # OTIS data dictionary).

@@ -114,7 +114,9 @@ test_that("property: doubly robust DiD is invariant to covariate scaling", {
 test_that("property: SCM weights are a distribution; synth interpolates", {
   for (seed in c(29L, 83L)) {
     set.seed(seed)
-    n_d <- sample(5:9, 1); n_t <- sample(10:14, 1); onset <- n_t - 3
+    n_d <- sample(5:9, 1)
+    n_t <- sample(10:14, 1)
+    onset <- n_t - 3
     donors <- matrix(rnorm(n_d * n_t), n_d, n_t)
     w0 <- rmorie:::.morie_simplex_proj(runif(n_d))
     treated <- as.numeric(t(donors) %*% w0) + rnorm(n_t, 0, 0.05)

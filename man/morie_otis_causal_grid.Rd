@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_causal_grid}
 \alias{morie_otis_causal_grid}
-\title{Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs.}
+\title{Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs}
 \usage{
 morie_otis_causal_grid(df = NULL, seed = 123L)
 }

@@ -7,6 +7,20 @@
 # (felony/misdemeanour), so a felony-charge disparate-impact analysis by
 # race is computable directly from the data.
 
+#' .morie_nypd_result
+#'
+#' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param title Carried through into a list the body builds.
+#' @param summary_lines Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param tables Carried through into a list the body builds. Defaults to \code{list()}.
+#' @param interpretation Carried through into a list the body builds. Defaults to \code{""}.
+#' @param warnings Carried through into a list the body builds. Defaults to \code{""}.
+#' @param payload Carried through into a list the body builds. Defaults to \code{list()}.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_nypd_result <- function(title, summary_lines = list(), tables = list(),
                                interpretation = "", warnings = "",
                                payload = list()) {
@@ -17,6 +31,18 @@
   out
 }
 
+#' .morie_nypd_load_sample
+#'
+#' A step of the nypd_analyze implementation. Called by \code{morie_nypd_all_analyses}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param which Passed to \code{match.arg}.
+#' @return The value of \code{utils::read.csv}.
+#' @export
+#' @examples
+#' res <- .morie_nypd_load_sample()
+#' res
 .morie_nypd_load_sample <- function(which = c("arrests", "complaint")) {
   which <- match.arg(which)
   file <- switch(which,
@@ -97,7 +123,8 @@ morie_nypd_all_analyses <- function(arrests_df = NULL, complaint_df = NULL,
       # law_cat_cd: "F" = felony (unfavorable), else misdemeanour/violation.
       felony <- as.integer(toupper(trimws(as.character(arrests_df$law_cat_cd))) == "F")
       keep <- !is.na(race) & nzchar(race) & !is.na(felony)
-      race <- race[keep]; felony <- felony[keep]
+      race <- race[keep]
+      felony <- felony[keep]
       di <- morie_fairness_disparate_impact(y_pred = felony, group = race)
       dp <- morie_fairness_demographic_parity(y_pred = felony, group = race)
       rates <- tapply(felony, race, mean)

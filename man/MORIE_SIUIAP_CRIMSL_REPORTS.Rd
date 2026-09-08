@@ -2,10 +2,8 @@
 % Please edit documentation in R/siuiap.R
 \name{MORIE_SIUIAP_CRIMSL_REPORTS}
 \alias{MORIE_SIUIAP_CRIMSL_REPORTS}
-\title{CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021).}
-\usage{
-MORIE_SIUIAP_CRIMSL_REPORTS
-}
+\title{CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021)}
+
 \description{
-CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021).
+CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021)
 }

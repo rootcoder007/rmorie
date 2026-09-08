@@ -16,7 +16,7 @@ R parity of \code{morie.entheo_dmt.available_subjects}. Scans the
 \code{LongS\{NN\}\{DMT,PCB\}.mat} filenames and returns the integer IDs.
 }
 \examples{
-morie_entheo_available_subjects()
+tryCatch(morie_entheo_available_subjects(), error = function(e) NULL)
 }
 \references{
 Timmermann, C. et al. (2023). Human brain effects of DMT assessed

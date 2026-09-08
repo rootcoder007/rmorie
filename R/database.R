@@ -152,6 +152,13 @@
 #' # Per-subsystem persistent path:
 #' morie_cache_dir("siu")
 #' @seealso \code{\link{morie_cache_clear}}
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # Persistent cache root (does not write anything to disk):
+#' morie_cache_dir()
+#' # Per-subsystem persistent path:
+#' morie_cache_dir("siu")
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_dir <- function(subdir = NULL) {
   override <- Sys.getenv("MORIE_CACHE_DIR", "")
@@ -187,6 +194,13 @@ morie_cache_dir <- function(subdir = NULL) {
 #' morie_cache_clear("siu", confirm = FALSE)
 #' }
 #' @seealso \code{\link{morie_cache_dir}}
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Non-interactive: skip the confirmation prompt.
+#' morie_cache_clear("siu", confirm = FALSE)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
   path <- morie_cache_dir(subdir)
@@ -215,6 +229,10 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
 #' @return File path string.
 #' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' morie_builtin_db()
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_builtin_db()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_builtin_db <- function() {
   db <- system.file("extdata", "morie.db", package = "rmorie")
@@ -231,11 +249,11 @@ morie_builtin_db <- function() {
 #' opt-in SQL backend and requires DuckDB or RSQLite to be installed.
 #'
 #' Note: the DEFAULT cache used by `morie_cache_store()` / `_load()` /
-#' `_list()` needs **no SQL backend at all** — it uses a zero/light
+#' `_list()` needs **no SQL backend at all** -- it uses a zero/light
 #' dependency file store: Parquet via \pkg{nanoparquet} (cross-language)
 #' when available, else base-R `.rds`. Install `duckdb` (or `RSQLite`),
 #' or set `MORIE_CACHE_BACKEND=duckdb`/`sqlite`, or pass `db_path=`, to
-#' use SQL instead — DuckDB is preferred (vectorised + columnar, handles
+#' use SQL instead -- DuckDB is preferred (vectorised + columnar, handles
 #' multi-GB PUMFs and out-of-core analytical queries); an existing
 #' `morie.db` / `morie.duckdb` cache is reused for back-compat. For the
 #' multi-user server tier, pass your own PostgreSQL `con=`.
@@ -267,6 +285,20 @@ morie_builtin_db <- function() {
 #'   file.remove(tmp)
 #' }
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # DuckDB (default when 'duckdb' is installed); pass a '.db' path for SQLite.
+#' if (requireNamespace("duckdb", quietly = TRUE) &&
+#'   requireNamespace("DBI", quietly = TRUE)) {
+#'   tmp <- tempfile(fileext = ".duckdb")
+#'   con <- morie_db_connect(db_path = tmp)
+#'   DBI::dbListTables(con)
+#'   DBI::dbDisconnect(con)
+#'   file.remove(tmp)
+#' }
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_db_connect <- function(db_path = NULL) {
   morie_ensure_extras("DBI")
@@ -345,6 +377,18 @@ morie_db_connect <- function(db_path = NULL) {
 #' )
 #' file.remove(db)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' db <- tempfile(fileext = ".db")
+#' morie_cache_store(
+#'   data = data.frame(x = rnorm(50), y = rnorm(50)),
+#'   table_name = "demo",
+#'   db_path = db
+#' )
+#' file.remove(db)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
@@ -387,6 +431,19 @@ morie_cache_store <- function(data, table_name, db_path = NULL, con = NULL) {
 #' morie_cache_load(table_name = "demo", db_path = db)
 #' file.remove(db)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' db <- tempfile(fileext = ".db")
+#' morie_cache_store(
+#'   data = data.frame(x = 1:5),
+#'   table_name = "demo",
+#'   db_path = db
+#' )
+#' morie_cache_load(table_name = "demo", db_path = db)
+#' file.remove(db)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
@@ -423,21 +480,35 @@ morie_cache_load <- function(table_name, db_path = NULL, con = NULL) {
 #' morie_cache_list(db_path = db)
 #' file.remove(db)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' db <- tempfile(fileext = ".db")
+#' morie_cache_store(data.frame(x = 1:3), "demo", db_path = db)
+#' morie_cache_list(db_path = db)
+#' file.remove(db)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_list <- function(db_path = NULL, con = NULL) {
   h <- .morie_db_handle(con, db_path)
   if (h$type %in% c("parquet", "rds")) {
     ext <- if (h$type == "parquet") "parquet" else "rds"
-    files <- list.files(h$dir, pattern = paste0("\\.", ext, "$"),
-      full.names = TRUE)
+    files <- list.files(h$dir,
+      pattern = paste0("\\.", ext, "$"),
+      full.names = TRUE
+    )
     if (length(files) == 0L) {
-      return(data.frame(table = character(), rows = integer(),
-        stringsAsFactors = FALSE))
+      return(data.frame(
+        table = character(), rows = integer(),
+        stringsAsFactors = FALSE
+      ))
     }
     rows <- vapply(files, function(f) {
       if (ext == "parquet") {
         n <- tryCatch(as.integer(nanoparquet::read_parquet_info(f)$num_rows),
-          error = function(e) NA_integer_)
+          error = function(e) NA_integer_
+        )
         if (is.na(n)) as.integer(nrow(nanoparquet::read_parquet(f))) else n
       } else {
         as.integer(nrow(readRDS(f)))
@@ -483,6 +554,17 @@ morie_cache_list <- function(db_path = NULL, con = NULL) {
 #'   write.csv(data.frame(x = 1:3, y = 4:6), f, row.names = FALSE)
 #'   morie_cache_file(f, "demo", db_path = file.path(tdir, "cache.db"))
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # The SQLite backend needs the optional 'RSQLite' package.
+#' if (requireNamespace("RSQLite", quietly = TRUE)) {
+#'   tdir <- tempfile("morie-cache-")
+#'   dir.create(tdir)
+#'   f <- file.path(tdir, "demo.csv")
+#'   write.csv(data.frame(x = 1:3, y = 4:6), f, row.names = FALSE)
+#'   morie_cache_file(f, "demo", db_path = file.path(tdir, "cache.db"))
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
   ext <- tolower(tools::file_ext(path))
@@ -511,11 +593,19 @@ morie_cache_file <- function(path, table_name, db_path = NULL, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame with canonical CPADS columns.
 #' @examplesIf requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
 #' cpads <- morie_load_cpads(use_ckan = TRUE)
 #' if (!is.null(cpads)) head(cpads)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
+#' cpads <- morie_load_cpads(use_ckan = TRUE)
+#' if (!is.null(cpads)) head(cpads)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
   # 1. Local files.
@@ -567,7 +657,7 @@ morie_load_cpads <- function(db_path = NULL, use_ckan = TRUE, con = NULL) {
 #' @param con Optional pre-opened DBI connection (overrides `db_path`).
 #' @return A data.frame.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Requires network access. Fetches the first 5000 rows of the
 #' # Canadian Postsecondary Alcohol and Drug Use Survey from the
 #' # Government of Canada CKAN datastore:
@@ -721,7 +811,7 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #'   and is unaffected by `con`.
 #' @return A data.frame.
 #' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
 #' # upstream outage does not fail the check
 #' df <- try(morie_load_dataset("ocp21"))
@@ -733,6 +823,22 @@ morie_fetch_ckan <- function(dataset_key = "cpads", limit = Inf,
 #' # df <- morie_load_dataset("ocp21", con = con)
 #' }
 #' @seealso \code{\link{morie_fetch}}, \code{\link{morie_ckan_search}}
+#' @examples
+#' \dontrun{
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # CPADS 2021-2022 (default DuckDB cache); try() so a transient
+#' # upstream outage does not fail the check
+#' df <- try(morie_load_dataset("ocp21"))
+#' df <- try(morie_load_dataset("ocp21", refresh = TRUE)) # force re-fetch
+#'
+#' # PostgreSQL cache (run a server first):
+#' # con <- DBI::dbConnect(RPostgres::Postgres(),
+#' #   host = "localhost", dbname = "morie", user = "...")
+#' # df <- morie_load_dataset("ocp21", con = con)
+#' }
+#' \dontshow{\}) # examplesIf}
+#' }
 #' @export
 morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
                                con = NULL) {
@@ -744,7 +850,8 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     # site-gated behind sign-up and never served by this open loader.
     if (requireNamespace("rmoriedata", quietly = TRUE)) {
       slugs <- tryCatch(rmoriedata::morie_data_catalog()$slug,
-        error = function(e) character())
+        error = function(e) character()
+      )
       if (key %in% slugs) {
         return(as.data.frame(rmoriedata::morie_data_load(key)))
       }
@@ -768,7 +875,7 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
     # 1. Built-in database (ships with package).
     builtin_path <- tryCatch(morie_builtin_db(), error = function(e) NULL)
     if (!is.null(builtin_path) && !file.exists(builtin_path)) {
-      builtin_path <- NULL  # dev fallback path may not exist; skip tier 1
+      builtin_path <- NULL # dev fallback path may not exist; skip tier 1
     }
     if (!is.null(builtin_path) && requireNamespace("DBI", quietly = TRUE) &&
       requireNamespace("RSQLite", quietly = TRUE)) {
@@ -863,6 +970,10 @@ morie_load_dataset <- function(key, db_path = NULL, refresh = FALSE,
 #'   cached (logical), rows (integer or NA).
 #' @examplesIf requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)
 #' morie_list_datasets()
+#' @examples
+#' \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' morie_list_datasets()
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_list_datasets <- function(db_path = NULL, con = NULL) {
   catalog <- morie_dataset_catalog()

@@ -23,7 +23,7 @@ Coarse box-counting on the amplitude-normalised signal across
 t <- seq.int(0, 511) / 512
 x <- sin(2 * pi * 8 * t)
 morie_dsp_katz_fd(x)
-morie_dsp_katz_fd(rep(2, 50))  # flat signal: 0
+morie_dsp_katz_fd(rep(2, 50)) # flat signal: 0
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 5, sec. 5.7;

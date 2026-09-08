@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_datasets.R
 \name{morie_tps_load_dataset}
 \alias{morie_tps_load_dataset}
-\title{Load one TPS dataset by category name (CSV thin path).}
+\title{Load one TPS dataset by category name (CSV thin path)}
 \usage{
 morie_tps_load_dataset(name, path = NULL, csv_filename = NULL, nrows = NULL)
 }
@@ -29,7 +29,7 @@ while developing against the largest tables.
 }
 \details{
 For non-CSV sibling formats (Excel, GeoJSON, KML, GeoPackage,
-Shapefile, etc.), use \code{\link[=morie_tps_load]{morie_tps_load()}} from \code{tps_io.R} instead.
+Shapefile, etc.), use \code{morie_tps_load()} from \code{tps_io.R} instead.
 }
 \examples{
 \donttest{

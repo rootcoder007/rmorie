@@ -13,14 +13,14 @@
 # Investigations Unit (police oversight) automation. Both share
 # the acronym SIU but refer to different agencies.
 
-#' SIU IAP -- Public Safety Canada landing page URL.
+#' SIU IAP -- Public Safety Canada landing page URL
 #' @export
 MORIE_SIUIAP_URL <- paste0(
   "https://www.publicsafety.gc.ca/cnt/cntrng-crm/crrctns/",
   "siuiap-ccuis-en.aspx"
 )
 
-#' SIU IAP panel mandate (long-form prose).
+#' SIU IAP panel mandate (long-form prose)
 #' @export
 MORIE_SIUIAP_PANEL_MANDATE <- paste(
   "The Structured Intervention Unit Implementation Advisory Panel",
@@ -38,7 +38,7 @@ MORIE_SIUIAP_PANEL_MANDATE <- paste(
   "earlier panel."
 )
 
-#' Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020.
+#' Earlier (Doob-chaired) panel, established 2019, dissolved mid-2020
 #' @export
 MORIE_SIUIAP_ORIGINAL_PANEL_2019_2020 <- list(
   name = "SIU-Implementation Advisory Panel (original, Doob-chaired)",
@@ -59,7 +59,7 @@ MORIE_SIUIAP_ORIGINAL_PANEL_2019_2020 <- list(
   )
 )
 
-#' SIU IAP panel members (2021-2024 panel, Sapers-chaired).
+#' SIU IAP panel members (2021-2024 panel, Sapers-chaired)
 #' @export
 MORIE_SIUIAP_PANEL_MEMBERS <- list(
   list(name = "Howard Sapers", role = "Chair",
@@ -76,7 +76,7 @@ MORIE_SIUIAP_PANEL_MEMBERS <- list(
        ))
 )
 
-#' SIU IAP panel reports (Public Safety Canada, 2022-2024).
+#' SIU IAP panel reports (Public Safety Canada, 2022-2024)
 #' @export
 MORIE_SIUIAP_REPORTS <- list(
   final_2024 = list(
@@ -117,7 +117,7 @@ MORIE_SIUIAP_REPORTS <- list(
   )
 )
 
-#' CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021).
+#' CRIMSL UToronto Sprott / Doob / Iftene research reports (2020-2021)
 #' @export
 MORIE_SIUIAP_CRIMSL_REPORTS <- list(
   sprott_doob_csc_siu_operation_2020 = list(
@@ -221,7 +221,7 @@ MORIE_SIUIAP_CRIMSL_REPORTS <- list(
   )
 )
 
-#' Federal Court affidavits / expert evidence indexed by `morie`.
+#' Federal Court affidavits / expert evidence indexed by `morie`
 #' @export
 MORIE_SIUIAP_AFFIDAVITS <- list(
   doob_t_539_20_2020 = list(
@@ -250,7 +250,7 @@ MORIE_SIUIAP_AFFIDAVITS <- list(
 )
 
 
-#' Build a citation string for an SIU IAP / CRIMSL / affidavit entry.
+#' Build a citation string for an SIU IAP / CRIMSL / affidavit entry
 #'
 #' Searches `MORIE_SIUIAP_REPORTS`, then `MORIE_SIUIAP_CRIMSL_REPORTS`,
 #' then `MORIE_SIUIAP_AFFIDAVITS`, in order, and returns a one-line
@@ -302,7 +302,7 @@ morie_siuiap_cite <- function(report_id = "final_2024") {
 }
 
 
-#' Human-readable summary of the SIU IAP panel.
+#' Human-readable summary of the SIU IAP panel
 #'
 #' @return A character scalar summarising chair, members, mandate
 #'   dates, and the Public Safety Canada URL.

@@ -41,6 +41,7 @@ mask-and-rescan rewrite); values >1 are reserved for that
 future TRUE multi-cluster mode.}
 
 \item{seed}{Random seed.}
+
 }
 \value{
 A one-row data.frame describing the top cluster, with

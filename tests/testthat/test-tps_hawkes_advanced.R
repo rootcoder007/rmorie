@@ -51,7 +51,8 @@ test_that(".tps_hwka_kernel_density(weibull) matches dweibull", {
 
 test_that(".tps_hwka_kernel_density(lomax) matches its analytic form", {
   # v0.9.5.6+ scipy form: f(u) = alpha * c^alpha * (u + c)^{-(alpha+1)}
-  alpha <- 3.0; c_ <- 1.0
+  alpha <- 3.0
+  c_ <- 1.0
   u <- c(0, 0.5, 1, 2, 5)
   got <- rmorie:::.tps_hwka_kernel_density(u, "lomax", c(alpha, c_))
   want <- alpha * c_^alpha * (u + c_)^(-(alpha + 1))

@@ -37,8 +37,10 @@ Permutation feature importance (model-agnostic)
 }
 \examples{
 set.seed(1)
-X <- matrix(rnorm(400), 100, 4); colnames(X) <- paste0("f", 1:4)
+X <- matrix(rnorm(400), 100, 4)
+colnames(X) <- paste0("f", 1:4)
 predict_fn <- function(M) as.numeric(M \%*\% c(1.5, -0.7, 0, 0.3))
 morie_fairness_xai_permutation_importance(predict_fn, X,
-  feature_names = colnames(X), n_repeats = 3L, seed = 1L)
+  feature_names = colnames(X), n_repeats = 3L, seed = 1L
+)
 }

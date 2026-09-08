@@ -74,7 +74,8 @@ test_that(".morie_load_describe_corpus returns a non-NULL object (or errors when
 # ================================================================ investigation.R
 
 test_that(".morie_hajek_ate returns ate + y1 + y0 list", {
-  set.seed(1L); n <- 200L
+  set.seed(1L)
+  n <- 200L
   t <- stats::rbinom(n, 1L, 0.5)
   ps <- rep(0.5, n)
   y <- 1.0 + 0.5 * t + stats::rnorm(n, sd = 0.3)
@@ -84,7 +85,8 @@ test_that(".morie_hajek_ate returns ate + y1 + y0 list", {
 })
 
 test_that(".morie_fit_propensity clips ps to [0.01, 0.99]", {
-  set.seed(2L); n <- 100L
+  set.seed(2L)
+  n <- 100L
   df <- data.frame(d = stats::rbinom(n, 1L, 0.5),
                    x1 = stats::rnorm(n),
                    x2 = stats::rnorm(n))
@@ -177,7 +179,8 @@ test_that(".tgarch_negll returns 1e10 on infeasible parameters", {
 })
 
 test_that(".tgarch_negll returns finite scalar on feasible parameters", {
-  set.seed(4L); r <- stats::rnorm(50L)
+  set.seed(4L)
+  r <- stats::rnorm(50L)
   out <- rmorie:::.tgarch_negll(p = c(0.01, 0.05, 0.05, 0.85),
                                  r = r, n = 50L)
   expect_true(is.numeric(out) && is.finite(out))
@@ -225,7 +228,8 @@ test_that(".tso_logit_ll returns numeric log-likelihood", {
 })
 
 test_that(".tso_fit_po_stacked returns intercepts (K-1) + beta (p)", {
-  set.seed(6L); n <- 100L
+  set.seed(6L)
+  n <- 100L
   X <- matrix(stats::rnorm(n * 2L), n, 2L)
   y <- sample.int(3L, n, replace = TRUE) - 1L  # 0, 1, 2
   out <- rmorie:::.tso_fit_po_stacked(X, y, K = 3L,

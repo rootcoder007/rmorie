@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_fetch_sidecar}
 \alias{morie_arsau_fetch_sidecar}
-\title{Fetch the CKAN sidecar JSON for a registry entry.}
+\title{Fetch the CKAN sidecar JSON for a registry entry}
 \usage{
 morie_arsau_fetch_sidecar(kind, year, limit = 5000L, timeout_sec = 30L)
 }
@@ -25,9 +25,10 @@ Optional helper.  Requires \pkg{httr2} (and \pkg{jsonlite} via the
 existing \code{\link{morie_arsau_read_sidecar}} contract).
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_arsau_fetch_sidecar(ARSAU_KINDS[1], ARSAU_YEARS[1],
-                                     limit = 50L))
+  limit = 50L
+))
 if (!inherits(res, "try-error")) str(res, max.level = 1)
 }
 }

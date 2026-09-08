@@ -19,7 +19,9 @@ NULL
 
 .dgp_confounded <- function(n = 400L, seed = 42L) {
   set.seed(seed)
-  x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rbinom(n, 1, 0.4)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
+  x3 <- rbinom(n, 1, 0.4)
   # minority-treated design: matching must SELECT comparable
   # controls from a large pool for balance to be testable
   ps <- plogis(-1.7 + 0.4 * x1 - 0.35 * x2 + 0.4 * x3)
@@ -29,7 +31,8 @@ NULL
 }
 
 .smd <- function(df, treat, var) {
-  a <- df[[var]][df[[treat]] == 1]; b <- df[[var]][df[[treat]] == 0]
+  a <- df[[var]][df[[treat]] == 1]
+  b <- df[[var]][df[[treat]] == 0]
   (mean(a) - mean(b)) / sqrt((stats::var(a) + stats::var(b)) / 2)
 }
 
@@ -342,7 +345,8 @@ test_that("cardinality keeps the largest passing sample across calipers", {
 test_that("native svyglm-equivalent returns a full coefficient table", {
   set.seed(81)
   n <- 300L
-  x <- rnorm(n); w <- runif(n, 0.5, 2)
+  x <- rnorm(n)
+  w <- runif(n, 0.5, 2)
   y <- rbinom(n, 1, plogis(-0.3 + 0.7 * x))
   df <- data.frame(x = x, y = y)
   out <- rmorie:::.morie_svyglm_native(y ~ x, data = df, weights = w,
@@ -446,7 +450,8 @@ test_that("native causal forest tau(x) tracks true heterogeneity", {
   nf <- rmorie:::.morie_causal_forest_native(X, y, w, n_trees = 300L)
   expect_gt(stats::cor(nf$tau, tau_true), 0.5)
   # group contrast: high-x2 units must show larger tau than low-x2
-  hi <- X[, 2] > 1; lo <- X[, 2] < -1
+  hi <- X[, 2] > 1
+  lo <- X[, 2] < -1
   expect_gt(mean(nf$tau[hi]), mean(nf$tau[lo]))
 })
 
@@ -469,7 +474,8 @@ test_that("native dr_forest target_sample options all return finite results", {
 test_that("all four meta-learners agree on a constant effect", {
   set.seed(121)
   n <- 1500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(0.4 * x1))
   y <- 1.0 * d + x1 + 0.5 * x2 + rnorm(n)
   df <- data.frame(y = y, d = d, x1 = x1, x2 = x2)
@@ -485,7 +491,8 @@ test_that("all four meta-learners agree on a constant effect", {
 test_that("X- and DR-learners track heterogeneous effects", {
   set.seed(122)
   n <- 3000L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, plogis(0.4 * x1))
   tau_true <- 1 + x2
   y <- tau_true * d + x1 + rnorm(n)
@@ -500,7 +507,8 @@ test_that("X- and DR-learners track heterogeneous effects", {
 test_that("X-learner beats T-learner under heavy arm imbalance", {
   set.seed(123)
   n <- 2500L
-  x1 <- rnorm(n); x2 <- rnorm(n)
+  x1 <- rnorm(n)
+  x2 <- rnorm(n)
   d <- rbinom(n, 1, 0.07)                # ~7 percent treated
   tau_true <- 1 + 0.8 * x2
   y <- tau_true * d + x1 + rnorm(n)
@@ -551,7 +559,8 @@ test_that("backdoor identification finds the confounder set", {
 test_that("dag estimation recovers the effect through all methods", {
   set.seed(131)
   n <- 1200L
-  z <- rnorm(n); x <- rbinom(n, 1, plogis(z))
+  z <- rnorm(n)
+  x <- rbinom(n, 1, plogis(z))
   y <- 0.8 * x + z + rnorm(n)
   df <- data.frame(z = z, x = x, y = y)
   g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")
@@ -567,7 +576,8 @@ test_that("dag estimation recovers the effect through all methods", {
 test_that("refutation: placebo kills the effect, subsets keep it", {
   set.seed(132)
   n <- 900L
-  z <- rnorm(n); x <- rbinom(n, 1, plogis(z))
+  z <- rnorm(n)
+  x <- rbinom(n, 1, plogis(z))
   y <- 0.8 * x + z + rnorm(n)
   df <- data.frame(z = z, x = x, y = y)
   g <- morie_dag(c("z -> x", "z -> y", "x -> y"), "x", "y")

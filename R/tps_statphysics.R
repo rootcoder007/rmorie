@@ -47,25 +47,24 @@ NULL
 #' available the routines fall back to a stop-stub explaining the gap.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
-#'   \item \code{\link{morie_tps_sdb_reaction_diffusion}} — Short,
+#'   \item \code{\link{morie_tps_sdb_reaction_diffusion}} -- Short,
 #'     D'Orsogna and Brantingham (2008) hot-spot PDE, data-seeded.
-#'   \item \code{\link{morie_tps_levy_flight_alpha}} — Hill-MLE
+#'   \item \code{\link{morie_tps_levy_flight_alpha}} -- Hill-MLE
 #'     Levy-flight tail exponent following Brockmann, Hufnagel and
 #'     Geisel (2006).
-#'   \item \code{\link{morie_tps_urban_scaling_beta}} — Bettencourt
+#'   \item \code{\link{morie_tps_urban_scaling_beta}} -- Bettencourt
 #'     \emph{et al.} (2007) urban-scaling beta across the 158 Toronto
 #'     wards.
-#'   \item \code{\link{morie_tps_lotka_volterra_police_crime}} — Lotka-
+#'   \item \code{\link{morie_tps_lotka_volterra_police_crime}} -- Lotka-
 #'     Volterra predator-prey on yearly counts.
-#'   \item \code{\link{morie_tps_sdb_turing_demo}} — canonical Turing-
+#'   \item \code{\link{morie_tps_sdb_turing_demo}} -- canonical Turing-
 #'     instability demo on a periodic lattice.
-#'   \item \code{\link{morie_tps_inspection_game_phase}} — three-
+#'   \item \code{\link{morie_tps_inspection_game_phase}} -- three-
 #'     strategy replicator phase diagram (Helbing, Szolnoki & Perc
 #'     2010).
-#'   \item \code{\link{morie_tps_criminal_network_graph}} — premise x
+#'   \item \code{\link{morie_tps_criminal_network_graph}} -- premise x
 #'     neighbourhood co-occurrence network (Diviak \emph{et al.}
 #'     2019-style projection from public TPS data).
 #' }
@@ -362,9 +361,11 @@ morie_tps_load_tps <- function(name, format = "geojson",
 #' Short-D'Orsogna-Brantingham 2008 hot-spot PDE
 #'
 #' Solves the coupled reaction-diffusion system
-#' \deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta grad^2 A - omega A + theta rho,}
+#' \deqn{\partial_t A = \eta \nabla^2 A - \omega A + \theta \rho,}{partial_t A = eta
+#' grad^2 A - omega A + theta rho,}
 #' \deqn{\partial_t \rho = \nabla \cdot (D \nabla \rho - 2 \rho \nabla
-#'   \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) - rho A + gamma,}
+#'   \log A) - \rho A + \gamma,}{partial_t rho = grad * (D grad rho - 2 rho grad log A) -
+#' rho A + gamma,}
 #' on a cosine-corrected Toronto grid seeded by the observed incident
 #' histogram. Localised attractiveness spikes emerge whenever
 #' \eqn{(\eta, \omega, \theta, D, \gamma)}{(eta, omega, theta, D, gamma)} place the system in the
@@ -542,7 +543,8 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 #' chronologically consecutive incidents, following Brockmann,
 #' Hufnagel & Geisel (2006). For a power-law tail \eqn{p(\ell) \propto
 #' \ell^{-\alpha}}{p(l) prop l^-alpha} on \eqn{\ell \ge \ell_{\min}}{l >= ell_min} the Hill MLE is
-#' \deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n / sum_i log(ell_i / ell_min).}
+#' \deqn{\hat\alpha = 1 + n / \sum_i \log(\ell_i / \ell_{\min}).}{hatalpha = 1 + n /
+#' sum_i log(ell_i / ell_min).}
 #' Standard error is obtained by 200 nonparametric bootstrap resamples.
 #'
 #' @param category TPS category name.
@@ -553,7 +555,7 @@ morie_tps_sdb_reaction_diffusion <- function(category = "Assault",
 #'   default) skips writing and says so in the result.
 #'
 #' @return A \code{morie_rich_result} with \eqn{\hat\alpha}{hatalpha},
-#'   bootstrap SE, sample-size diagnostics, and a Lévy-regime
+#'   bootstrap SE, sample-size diagnostics, and a Levy-regime
 #'   interpretation.
 #'
 #' @references Brockmann D, Hufnagel L, Geisel T (2006). The scaling
@@ -672,7 +674,8 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #' Bettencourt urban-scaling exponent across the 158 Toronto wards
 #'
 #' Performs the standard log-log OLS scaling fit
-#' \deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta log p_i + varepsilon_i,}
+#' \deqn{\log y_i = \log Y_0 + \beta \log p_i + \varepsilon_i,}{log y_i = log Y_0 + beta
+#' log p_i + varepsilon_i,}
 #' where \eqn{y_i} is the crime count and \eqn{p_i} is the population
 #' of ward \code{i}. \eqn{\beta > 1}{beta > 1} indicates super-linear (crime
 #' grows faster than population), \eqn{\beta = 1}{beta = 1} linear, and
@@ -701,6 +704,14 @@ morie_tps_levy_flight_alpha <- function(category = "Assault",
 #'   print(rr$summary_lines)
 #' }
 #'
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#'   rr <- morie_tps_urban_scaling_beta("Assault", year = 2024,
+#'                                       save_fig = FALSE)
+#'   print(rr$summary_lines)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_urban_scaling_beta <- function(category = "Assault",
                                            year = 2024L,
@@ -807,9 +818,11 @@ morie_tps_urban_scaling_beta <- function(category = "Assault",
 #' rolling mean as a placeholder predator \eqn{y(t)} (TPS does not yet
 #' expose a public mass-stop / use-of-force time series). Under the
 #' classical Lotka-Volterra system,
-#' \deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x = alpha x - beta x y, dot y = delta x y - gamma y,}
+#' \deqn{\dot x = \alpha x - \beta x y, \quad \dot y = \delta x y - \gamma y,}{dot x =
+#' alpha x - beta x y, dot y = delta x y - gamma y,}
 #' the small-amplitude oscillation around the equilibrium has period
-#' \eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate \eqn{\alpha}{alpha} is
+#' \eqn{T = 2 \pi / \sqrt{\alpha \gamma}}{T = 2 pi / sqrt(alpha gamma)}. Growth rate
+#' \eqn{\alpha}{alpha} is
 #' estimated from log-differences of \code{x}; \eqn{\gamma}{gamma} symmetrically
 #' from \code{y}; the interaction rates \eqn{\beta, \delta}{beta, delta} follow by
 #' the equilibrium relations.
@@ -1232,7 +1245,7 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
         }
       }
       graphics::points(px, py, pch = 21, bg = "#26a269",
-                       cex = 0.8 + 2.2 * sqrt(sizes / max(sizes)))
+                       cex = 0.8 + 2.2 * sqrt(as.numeric(top[nodes]) / max(as.numeric(top[nodes]))))
       graphics::text(px * 1.18, py * 1.18, nodes, cex = 0.62)
     })
   .tps_sp_result(
@@ -1288,6 +1301,13 @@ morie_tps_criminal_network_graph <- function(category = "Assault",
 #'                                              save_fig = FALSE)
 #' }
 #'
+#' @examples
+#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#'   res <- morie_tps_statphysics_analyze_all(c("Assault", "Robbery"),
+#'                                              save_fig = FALSE)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_tps_statphysics_analyze_all <- function(categories = NULL,
                                                 save_fig = TRUE,

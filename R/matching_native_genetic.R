@@ -46,7 +46,7 @@
 
 #' Internal helper: native genetic matching engine
 #' @srrstats {G1.0} Primary reference: Diamond & Sekhon (2013, REStat
-#'   95(3)) — genetic search over the Mahalanobis weight matrix
+#'   95(3)) -- genetic search over the Mahalanobis weight matrix
 #'   maximizing worst-case covariate balance.
 #' @srrstats {G3.0} Fitness comparisons operate on p-values with
 #'   explicit degenerate-variance guards; no exact FP equality.

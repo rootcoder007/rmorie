@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_fetch.R
 \name{morie_tps_fetch_category}
 \alias{morie_tps_fetch_category}
-\title{Fetch one TPS category as a CSV, paging until exhausted.}
+\title{Fetch one TPS category as a CSV, paging until exhausted}
 \usage{
 morie_tps_fetch_category(
   category,
@@ -13,7 +13,7 @@ morie_tps_fetch_category(
 )
 }
 \arguments{
-\item{category}{One of \code{\link[=morie_tps_list_categories]{morie_tps_list_categories()}}.}
+\item{category}{One of \code{morie_tps_list_categories()}.}
 
 \item{cache_dir}{Directory to write the CSV into. Defaults to
 \code{tempdir()} (CRAN-safe; the Python default of
@@ -35,7 +35,7 @@ FeatureServer layer, accumulates all features in memory, and
 writes a single CSV file to \code{cache_dir}. Returns the CSV path.
 }
 \examples{
-\donttest{
+\dontrun{
 res <- try(morie_tps_fetch_category(morie_tps_list_categories()[1],
                                     cache_dir = tempdir()))
 }

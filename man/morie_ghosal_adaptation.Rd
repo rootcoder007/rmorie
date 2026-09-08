@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghadp.R
 \name{morie_ghosal_adaptation}
 \alias{morie_ghosal_adaptation}
-\title{Adaptive contraction rates over a smoothness grid.}
+\title{Adaptive contraction rates over a smoothness grid}
 \usage{
 morie_ghosal_adaptation(x, betas = NULL, d = 1)
 }
@@ -17,7 +17,7 @@ morie_ghosal_adaptation(x, betas = NULL, d = 1)
 Named list with estimate, betas, rates, best_beta, n, d, method.
 }
 \description{
-Adaptive contraction rates over a smoothness grid.
+Adaptive contraction rates over a smoothness grid
 }
 \examples{
 morie_ghosal_adaptation(x = rnorm(50))

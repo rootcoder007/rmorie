@@ -28,7 +28,8 @@ test_that("native Butterworth: passband/stopband gains are correct", {
 
 test_that("filtfilt is zero-phase and attenuates out-of-band tones", {
   set.seed(80)
-  fs <- 200; t <- seq(0, 4, by = 1 / fs)
+  fs <- 200
+  t <- seq(0, 4, by = 1 / fs)
   x <- sin(2 * pi * 5 * t) + sin(2 * pi * 60 * t)
   lp <- rmorie:::.morie_dsp_butter(4, 20 / (fs / 2), "low")
   y <- rmorie:::.morie_dsp_filtfilt(lp$b, lp$a, x)
@@ -42,7 +43,8 @@ test_that("filtfilt is zero-phase and attenuates out-of-band tones", {
 
 test_that("buttlp/butthp/buttbp/buttbs + sgolay run natively", {
   set.seed(81)
-  fs <- 100; x <- rnorm(500)
+  fs <- 100
+  x <- rnorm(500)
   for (fn in list(function() buttlp(x, fs, 10),
                   function() butthp(x, fs, 10),
                   function() buttbp(x, fs, 5, 20),
@@ -61,7 +63,8 @@ test_that("buttlp/butthp/buttbp/buttbs + sgolay run natively", {
 
 test_that("native Welch PSD localizes a pure tone; coherence detects link", {
   set.seed(82)
-  fs <- 100; t <- seq(0, 20, by = 1 / fs)
+  fs <- 100
+  t <- seq(0, 20, by = 1 / fs)
   x <- sin(2 * pi * 10 * t) + rnorm(length(t), 0, 0.3)
   psd <- morie_dsp_psd_welch(x, fs = fs, nperseg = 256)
   pk <- psd$freqs[which.max(psd$psd)]

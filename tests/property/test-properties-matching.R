@@ -7,7 +7,8 @@ test_that("matching invariants hold across random DGPs", {
   for (seed in c(1L, 17L, 99L, 1234L)) {
     set.seed(seed)
     n <- sample(200:800, 1)
-    x1 <- rnorm(n); x2 <- runif(n)
+    x1 <- rnorm(n)
+    x2 <- runif(n)
     d <- rbinom(n, 1, plogis(x1 - x2))
     df <- data.frame(d = d, x1 = x1, x2 = x2)
     m <- sample(1:2, 1)
@@ -66,7 +67,8 @@ test_that("property: optimal matching invariants across seeds", {
   for (seed in c(5L, 19L, 53L)) {
     set.seed(seed)
     n <- 300L
-    x1 <- rnorm(n); x2 <- rnorm(n)
+    x1 <- rnorm(n)
+    x2 <- rnorm(n)
     d <- rbinom(n, 1, plogis(-1.4 + 0.5 * x1))
     if (sum(d) < 2 || sum(d) > sum(1 - d)) next
     df <- data.frame(x1, x2, d)
@@ -86,7 +88,8 @@ test_that("property: genetic matching invariants across seeds", {
   for (seed in c(7L, 23L)) {
     set.seed(seed)
     n <- 300L
-    x1 <- rnorm(n); x2 <- rnorm(n)
+    x1 <- rnorm(n)
+    x2 <- rnorm(n)
     d <- rbinom(n, 1, plogis(-1.4 + 0.5 * x1))
     if (sum(d) < 5 || sum(d) > sum(1 - d)) next
     df <- data.frame(x1, x2, d)
@@ -105,7 +108,9 @@ test_that("property: cardinality invariants across seeds", {
   for (seed in c(11L, 37L)) {
     set.seed(seed)
     n <- 1200L
-    x1 <- rnorm(n); x2 <- rnorm(n); x3 <- rbinom(n, 1, 0.4)
+    x1 <- rnorm(n)
+    x2 <- rnorm(n)
+    x3 <- rbinom(n, 1, 0.4)
     dd <- rbinom(n, 1, plogis(-1.7 + 0.4 * x1 - 0.35 * x2 + 0.4 * x3))
     d <- data.frame(y = rnorm(n), d = dd, x1 = x1, x2 = x2, x3 = x3)
     r <- morie_matching_cardinality(d, "d", c("x1", "x2", "x3"))
@@ -143,7 +148,8 @@ test_that("property: meta-learner invariants across seeds", {
   for (seed in c(9L, 31L)) {
     set.seed(seed)
     n <- 900L
-    x1 <- rnorm(n); x2 <- rnorm(n)
+    x1 <- rnorm(n)
+    x2 <- rnorm(n)
     d <- rbinom(n, 1, plogis(0.4 * x1))
     if (length(unique(d)) < 2) next
     y <- (1 + 0.5 * x2) * d + x1 + rnorm(n)

@@ -50,7 +50,7 @@ MORIE_TPS_LAYER_URLS <- c(
 )
 
 
-#' List TPS categories known to the fetcher.
+#' List TPS categories known to the fetcher
 #'
 #' @return Character vector of category names, sorted.
 #'
@@ -102,7 +102,7 @@ morie_tps_list_categories <- function() {
 }
 
 
-#' Fetch one TPS category as a CSV, paging until exhausted.
+#' Fetch one TPS category as a CSV, paging until exhausted
 #'
 #' Walks the ArcGIS REST `/query` endpoint for the category's
 #' FeatureServer layer, accumulates all features in memory, and
@@ -120,7 +120,7 @@ morie_tps_list_categories <- function() {
 #' @return Path to the written CSV file.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' res <- try(morie_tps_fetch_category(morie_tps_list_categories()[1],
 #'                                     cache_dir = tempdir()))
 #' }
@@ -200,7 +200,7 @@ morie_tps_fetch_category <- function(category,
 }
 
 
-#' Fetch a TPS category and return it as a `data.frame`.
+#' Fetch a TPS category and return it as a `data.frame`
 #'
 #' Thin wrapper over [morie_tps_fetch_category()]: writes the CSV
 #' then reads it back. Mirrors the Python `fetch_tps_dataframe`
@@ -212,7 +212,7 @@ morie_tps_fetch_category <- function(category,
 #' @return A `data.frame`.
 #'
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' df <- try(morie_tps_fetch_dataframe(morie_tps_list_categories()[1]))
 #' if (!inherits(df, "try-error")) head(df)
 #' }

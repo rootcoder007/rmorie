@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_datasets.R
 \name{morie_tps_list_datasets}
 \alias{morie_tps_list_datasets}
-\title{List all TPS datasets as a \code{data.frame}.}
+\title{List all TPS datasets as a \code{data.frame}}
 \usage{
 morie_tps_list_datasets()
 }

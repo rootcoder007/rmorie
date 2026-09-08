@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_analyze.R
 \name{morie_arsau_analyze_individual_records}
 \alias{morie_arsau_analyze_individual_records}
-\title{End-to-end analysis of the ARSAU individual_records CSV for one year.}
+\title{End-to-end analysis of the ARSAU individual_records CSV for one year}
 \usage{
 morie_arsau_analyze_individual_records(
   year,
@@ -33,8 +33,10 @@ outcome column, plus a data-quality audit against the sidecar.
 }
 \examples{
 \donttest{
-res <- try(morie_arsau_analyze_individual_records(year = "2024",
-                                                  bootstrap_reps = 0L))
+res <- try(morie_arsau_analyze_individual_records(
+  year = "2024",
+  bootstrap_reps = 0L
+))
 if (!inherits(res, "try-error")) print(res)
 }
 }

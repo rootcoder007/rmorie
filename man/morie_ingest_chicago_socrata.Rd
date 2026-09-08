@@ -33,6 +33,9 @@ equivalent of SQL \code{WHERE}.}
 calls share a throttled pool; tokens give per-app quotas).}
 
 \item{user_agent, timeout}{Standard request knobs.}
+
+
+
 }
 \value{
 A base R \code{data.frame}.
@@ -45,7 +48,7 @@ portal (Chicago, NYC, Seattle, etc.).
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
+\dontrun{
 # Chicago crimes (schema verified 2026-07: `year` is a real column)
 df <- try(morie_ingest_chicago_socrata(
   "https://data.cityofchicago.org/resource/ijzp-q8t2.json",

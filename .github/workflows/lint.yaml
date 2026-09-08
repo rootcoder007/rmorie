@@ -1,0 +1,170 @@
+name: lint
+
+# Catches syntax and style breakage on push instead of at R CMD check
+# time. The Rd/usage drift that produced 39 broken help files was only
+# found by a full check run; the doc job below runs the same two
+# tools::check* functions on their own, in seconds.
+
+on:
+  push:
+    branches: [main, master, feat/**, dep-map, native-specializations]
+  pull_request:
+    branches: [main, master]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lint-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lintr:
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      R_KEEP_PKG_SOURCE: yes
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
+            https://stan-dev.r-universe.dev
+
+      # pak workers run vanilla R and ignore Rprofile repos; point pak at
+      # the P3M mirror and pre-install the r-universe-only dependencies.
+      - name: Point pak at the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
+          fi
+      - name: System libraries for the bricklayer C++ core
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Pre-install r-universe-only dependencies
+        run: install.packages(c("rmoriebricklayer", "rmoriedata", "cmdstanr"), repos = c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        with:
+          extra-packages: any::lintr, local::.
+          needs: lint
+
+      - name: Lint
+        run: lintr::lint_package()
+        shell: Rscript {0}
+        env:
+          LINTR_ERROR_ON_LINT: true
+
+  docs:
+    # Independent of lintr: a package can be perfectly styled and still
+    # ship \usage sections that disagree with the code, which is exactly
+    # what happened here.
+    runs-on: ubuntu-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+          extra-repositories: |
+            https://rootcoder007.r-universe.dev
+            https://stan-dev.r-universe.dev
+
+      # pak workers run vanilla R and ignore Rprofile repos; point pak at
+      # the P3M mirror and pre-install the r-universe-only dependencies.
+      - name: Point pak at the P3M binary mirror
+        shell: bash
+        run: |
+          if [ -n "${RSPM:-}" ]; then
+            echo "PKG_CRAN_MIRROR=${RSPM}" >> "$GITHUB_ENV"
+          fi
+      - name: System libraries for the bricklayer C++ core
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y -qq libcurl4-openssl-dev libssl-dev libxml2-dev
+      - name: Pre-install r-universe-only dependencies
+        run: install.packages(c("rmoriebricklayer", "rmoriedata", "cmdstanr"), repos = c("https://rootcoder007.r-universe.dev", "https://stan-dev.r-universe.dev", "https://cloud.r-project.org"))
+        shell: Rscript {0}
+      # pak cannot solve the r-universe-only dependencies when restricted to
+      # hard deps, and installing Suggests pulls RSQLite, which P3M serves as
+      # source. The Rd checks run against the SOURCE directory, so install the
+      # hard dependencies directly and skip the solver entirely.
+      - name: Install hard dependencies
+        shell: Rscript {0}
+        run: |
+          d <- read.dcf("DESCRIPTION")
+          fld <- function(f) if (f %in% colnames(d))
+            trimws(sub("\\(.*", "", unlist(strsplit(d[1, f], ",")))) else character(0)
+          hard <- setdiff(c(fld("Depends"), fld("Imports"), fld("LinkingTo")), c("R", ""))
+          have <- rownames(installed.packages())
+          need <- setdiff(c(hard, "pkgload"), have)
+          # install.packages() with no repos set fails outright:
+          # "trying to use CRAN without setting a mirror". Name every
+          # source explicitly -- rmoriebricklayer and rmoriedata live on
+          # r-universe, the rest come from P3M with CRAN as the
+          # fallback.
+          repos <- c(
+            runiverse = "https://rootcoder007.r-universe.dev",
+            stan = "https://stan-dev.r-universe.dev",
+            P3M = Sys.getenv("PKG_CRAN_MIRROR",
+                             "https://packagemanager.posit.co/cran/latest"),
+            CRAN = "https://cloud.r-project.org")
+          if (length(need)) install.packages(need, repos = repos, Ncpus = 2)
+          missing <- setdiff(c(hard, "pkgload"), rownames(installed.packages()))
+          if (length(missing)) stop("could not install: ", paste(missing, collapse = ", "))
+          cat("hard dependencies ready:", length(hard), "\n")
+
+      - name: Rd consistency (codoc + usage + undocumented args)
+        run: |
+          pkg <- "."
+          bad <- FALSE
+
+          say <- function(what, res) {
+            txt <- utils::capture.output(print(res))
+            txt <- txt[nzchar(trimws(txt))]
+            if (length(txt)) {
+              cat("::error::", what, " reported ", length(txt),
+                  " line(s)\n", sep = "")
+              cat(txt, sep = "\n")
+              cat("\n")
+              TRUE
+            } else {
+              cat("OK: ", what, "\n", sep = "")
+              FALSE
+            }
+          }
+
+          bad <- say("codoc (code/documentation mismatches)",
+                     tools::codoc(dir = pkg)) || bad
+          bad <- say("checkDocFiles (undocumented / stale arguments)",
+                     tools::checkDocFiles(dir = pkg)) || bad
+          bad <- say("checkDocStyle", tools::checkDocStyle(dir = pkg)) || bad
+          bad <- say("undoc (undocumented objects)",
+                     tools::undoc(dir = pkg)) || bad
+
+          rd <- list.files(file.path(pkg, "man"), pattern = "[.]Rd$",
+                           full.names = TRUE)
+          probs <- unlist(lapply(rd, function(f) {
+            out <- utils::capture.output(
+              tools::checkRd(f, listOK = FALSE), type = "message")
+            if (length(out)) paste0(basename(f), ": ", out) else NULL
+          }))
+          if (length(probs)) {
+            cat("::error::checkRd reported ", length(probs), " problem(s)\n",
+                sep = "")
+            cat(head(probs, 50), sep = "\n")
+            bad <- TRUE
+          } else {
+            cat("OK: checkRd across ", length(rd), " files\n", sep = "")
+          }
+
+          if (bad) quit(status = 1L)
+        shell: Rscript {0}

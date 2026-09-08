@@ -5,8 +5,13 @@
 test_that("ETAS recovers a subcritical simulated process", {
   # Simulate a univariate Omori-Hawkes (thinning) with known pars.
   set.seed(101)
-  mu <- 0.4; K <- 0.15; cc <- 0.5; p <- 1.5; t_max <- 300
-  tt <- c(); cur <- 0
+  mu <- 0.4
+  K <- 0.15
+  cc <- 0.5
+  p <- 1.5
+  t_max <- 300
+  tt <- c()
+  cur <- 0
   lam_bar <- function(hist, s) {
     mu + K * sum(( s - hist + cc)^(-p))
   }
@@ -28,10 +33,14 @@ test_that("ETAS recovers a subcritical simulated process", {
 test_that("multivariate Hawkes recovers cross-excitation structure", {
   # 2-dim: component 1 excites 2 strongly, no reverse excitation.
   set.seed(102)
-  b <- 2; t_max <- 400
-  mu <- c(0.3, 0.1); A <- matrix(c(0.2, 0.5, 0, 0.2), 2, 2, byrow = TRUE)
+  b <- 2
+  t_max <- 400
+  mu <- c(0.3, 0.1)
+  A <- matrix(c(0.2, 0.5, 0, 0.2), 2, 2, byrow = TRUE)
   # A[j,k]: excitation of j BY k. Row 2: A[2,1] = 0.5.
-  tt <- c(); mk <- c(); cur <- 0
+  tt <- c()
+  mk <- c()
+  cur <- 0
   lam_j <- function(s) {
     l <- mu
     if (length(tt)) {
@@ -63,7 +72,9 @@ test_that("Knox test detects planted space-time clustering", {
   set.seed(103)
   # Background + planted near-repeats (same place, close in time).
   n_bg <- 60
-  x <- runif(n_bg); y <- runif(n_bg); tt <- runif(n_bg, 0, 100)
+  x <- runif(n_bg)
+  y <- runif(n_bg)
+  tt <- runif(n_bg, 0, 100)
   seeds <- sample(n_bg, 12)
   x <- c(x, x[seeds] + rnorm(12, sd = 0.01))
   y <- c(y, y[seeds] + rnorm(12, sd = 0.01))

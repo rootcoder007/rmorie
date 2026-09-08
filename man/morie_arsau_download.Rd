@@ -2,7 +2,7 @@
 % Please edit documentation in R/arsau_datasets.R
 \name{morie_arsau_download}
 \alias{morie_arsau_download}
-\title{Bulk-download ARSAU CSVs from the Ontario Data Catalogue.}
+\title{Bulk-download ARSAU CSVs from the Ontario Data Catalogue}
 \usage{
 morie_arsau_download(
   target_dir,
@@ -38,9 +38,11 @@ are reported in \code{$skipped}.  Filter with \code{kinds} /
 large).
 }
 \examples{
-\donttest{
-res <- try(morie_arsau_download(tempdir(), kinds = ARSAU_KINDS()[1],
-                                years = ARSAU_YEARS()[1], quiet = TRUE))
+\dontrun{
+res <- try(morie_arsau_download(tempdir(),
+  kinds = ARSAU_KINDS()[1],
+  years = ARSAU_YEARS()[1], quiet = TRUE
+))
 if (!inherits(res, "try-error")) length(res$downloaded)
 }
 }

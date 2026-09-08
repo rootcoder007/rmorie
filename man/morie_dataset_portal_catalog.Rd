@@ -30,7 +30,7 @@ VPD GeoDASH, Statistics Canada CCJS, Montreal, Toronto, Calgary,
 Edmonton, Ottawa) into a single tidy \code{data.frame} for cross-portal
 discovery and tooling. Caches the result in a session-local
 environment so repeated calls are O(1); call
-\code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}} to force a rebuild
+\code{morie_dataset_portal_catalog_clear_cache()} to force a rebuild
 after editing a registry in an interactive session.
 }
 \examples{
@@ -48,6 +48,6 @@ table(cat_df$source)
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-\code{\link[=morie_dataset_portal_catalog_clear_cache]{morie_dataset_portal_catalog_clear_cache()}},
-\code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}}, \code{\link[=morie_datasets_browse]{morie_datasets_browse()}}
+\code{morie_dataset_portal_catalog_clear_cache()},
+\code{morie_datasets_load_by_key()}, \code{morie_datasets_browse()}
 }

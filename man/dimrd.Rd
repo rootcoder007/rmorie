@@ -3,7 +3,7 @@
 \name{dimrd}
 \alias{dimrd}
 \alias{morie_dimensionality_test}
-\title{Dimensionality test via Kaiser scree (Armstrong Ch 7)}
+\title{Dimensionality test via the Kaiser rule (Kaiser 1960; Cattell 1966)}
 \usage{
 dimrd(x, threshold = 1)
 
@@ -19,6 +19,13 @@ Named list with \code{n_dims}, \code{eigenvalues}, \code{threshold},
 \code{scree_gap}, \code{method}.
 }
 \description{
+Dimensionality test via the Kaiser rule (Kaiser 1960; Cattell 1966)
+}
+\details{
+NOT Armstrong: that book has six chapters and no Ch 7. The lambda > 1
+retention rule is Kaiser (1960), Educ. Psychol. Meas. 20(1):141-151; the scree
+gap is Cattell (1966), Multivar. Behav. Res. 1(2):245-276.
+
 Counts eigenvalues exceeding \code{threshold} on the symmetric matrix
 formed from x (input matrix is used directly if symmetric; else
 uses the column correlation matrix).

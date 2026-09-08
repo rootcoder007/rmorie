@@ -2,7 +2,7 @@
 % Please edit documentation in R/psymet.R
 \name{morie_psymet_kmo}
 \alias{morie_psymet_kmo}
-\title{Kaiser-Meyer-Olkin sampling adequacy.}
+\title{Kaiser-Meyer-Olkin sampling adequacy}
 \usage{
 morie_psymet_kmo(data)
 }
@@ -17,10 +17,12 @@ Native Kaiser-Meyer-Olkin sampling adequacy from the
 partial-correlation anti-image matrix.
 }
 \examples{
-set.seed(1)
-f <- rnorm(100)
-X <- sapply(1:5, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(100))
-colnames(X) <- paste0("i", 1:5)
-res <- morie_psymet_kmo(X)
-res$msa
+if (requireNamespace("psych", quietly = TRUE)) {
+  set.seed(1)
+  f <- rnorm(100)
+  X <- sapply(1:5, function(j) sqrt(0.5) * f + sqrt(0.5) * rnorm(100))
+  colnames(X) <- paste0("i", 1:5)
+  res <- morie_psymet_kmo(X)
+  res$msa
+}
 }

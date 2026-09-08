@@ -46,7 +46,7 @@ Wraps the City of Chicago "Boundaries - Wards (2023-)" open dataset
 \url{https://data.cityofchicago.org/Facilities-Geographic-Boundaries/Boundaries-Wards-2023-/sp34-6z76}).
 50 wards in the current City Council district map. Resolves the
 \code{ward} foreign key carried by every
-\code{\link[=morie_datasets_chicago_crime]{morie_datasets_chicago_crime()}} row.
+\code{morie_datasets_chicago_crime()} row.
 }
 \details{
 \strong{SODA3-only.} The SODA2 endpoint \verb{/resource/sp34-6z76.json}

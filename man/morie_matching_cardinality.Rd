@@ -21,7 +21,9 @@ morie_matching_cardinality(
 
 \item{balance_threshold}{Maximum absolute SMD tolerated (default 0.1).}
 
-\item{ps}{Optional pre-computed propensity scores.}
+\item{ps}{Optional propensity scores. When supplied they REPLACE
+the fitted model and become the matching distance directly,
+aligned to the rows that survive the NA drop.}
 }
 \value{
 A list of class \code{morie_match_result}.
@@ -31,7 +33,7 @@ Finds the largest matched sample with maximum absolute SMD below
 \code{balance_threshold}.  Uses an iterative caliper-tightening
 heuristic over \code{morie_matching_nearest_neighbor}; for an
 exact mixed-integer-programming alternative see
-\code{\link[designmatch:cardmatch]{designmatch::cardmatch}}.
+\code{designmatch::cardmatch}.
 }
 \examples{
 \donttest{

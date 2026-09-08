@@ -1,0 +1,24 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{TwidConj}
+\alias{TwidConj}
+\title{Eq (3.88): W_N^(-nk) = conj(W_N^(nk)) -- a negative power costs only}
+\usage{
+TwidConj(npoints, n, k) 
+}
+\arguments{
+\item{npoints}{Coerced to integer by the body, with \code{as.integer}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{k}{Coerced to integer by the body, with \code{as.integer}.}
+}
+\description{
+a sign flip, one of the two properties the FFT is built on.
+}
+\value{
+A list with \code{negative_power}, \code{conjugate}, \code{difference}, \code{holds}, \code{N}, \code{n}, \code{k}, \code{method}.
+}
+\keyword{internal}
+\examples{
+TwidConj(npoints = 5L, n = 5L, k = 5L)
+}

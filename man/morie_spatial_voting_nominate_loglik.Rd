@@ -39,5 +39,7 @@ zn <- matrix(rnorm(5), 5, 1)
 morie_spatial_voting_nominate_loglik(v, x, zy, zn)
 }
 \references{
-Poole & Rosenthal (1997).
+Poole KT & Rosenthal H (1997). \emph{Congress: A
+Political-Economic History of Roll Call Voting}. Oxford University
+Press.
 }

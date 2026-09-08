@@ -38,23 +38,23 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \verb{9cfcd6fe0d374f65afda69c4b9bdc60a}.
 }
 \details{
 This dataset provides a count of the dispatched calls by
 division, including some specific units such as PRIME, Parking
-and “Other”. This data includes the command level at the time of
+and "Other". This data includes the command level at the time of
 reporting.
 
 Tags: ASR; TPS; Annual Statistical Report; Toronto Police; Dispatched Calls
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_dispatched_calls_by_division(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

@@ -8,7 +8,6 @@
 #' \code{R/mrm_uof.R}.
 #'
 #' Formula
-#' -------
 #' \itemize{
 #'   \item \code{rate = length(force_types) / n_encounters}
 #'   \item \code{type_counts = table(force_types)}

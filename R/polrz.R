@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Polarization index (Cohen-d between two groups; Armstrong Ch 8)
+#' Polarization index: standardised mean difference (Cohen 1988)
+#' @details The quantity computed IS Cohen's d, so it cites Cohen, J. (1988),
+#'   Statistical Power Analysis for the Behavioral Sciences, 2nd ed. NOT Armstrong:
+#'   its only polarization mentions (p.129) are a passing citation to McCarty, Poole
+#'   and Rosenthal.
 #'
 #' Two-group polarization P = |mean_R - mean_D| / pooled_sd. When both
 #' groups are constant, falls back to overall SD.

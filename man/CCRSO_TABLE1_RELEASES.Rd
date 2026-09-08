@@ -2,10 +2,8 @@
 % Please edit documentation in R/doob_trends.R
 \name{CCRSO_TABLE1_RELEASES}
 \alias{CCRSO_TABLE1_RELEASES}
-\title{CCRSO Table 1 — 5-year average annual conditional releases}
-\usage{
-CCRSO_TABLE1_RELEASES
-}
+\title{CCRSO Table 1 -- 5-year average annual conditional releases}
+
 \description{
-CCRSO Table 1 — 5-year average annual conditional releases
+CCRSO Table 1 -- 5-year average annual conditional releases
 }

@@ -14,7 +14,7 @@
 #' @examples
 #' tmp <- tempfile(fileext = ".json")
 #' if (requireNamespace("jsonlite", quietly = TRUE)) {
-#'   jsonlite::write_json(list(estimate = 0.123, se = 0.045), tmp)
+#'   .s03json_write(list(estimate = 0.123, se = 0.045), tmp)
 #'   morie_inspect_output(tmp)
 #'   unlink(tmp)
 #' }
@@ -72,7 +72,7 @@ morie_inspect_output <- function(path) {
 #' checks are `TRUE`.
 #'
 #' Checks: SE non-negative; CI lower < CI upper; estimate inside the CI;
-#' n positive; p-value (if present) in \[0, 1\]; estimate finite.
+#' n positive; p-value (if present) in \\[0, 1\\]; estimate finite.
 #'
 #' @param path Path to a JSON output file.
 #'
@@ -82,7 +82,7 @@ morie_inspect_output <- function(path) {
 #' @examples
 #' tmp <- tempfile(fileext = ".json")
 #' if (requireNamespace("jsonlite", quietly = TRUE)) {
-#'   jsonlite::write_json(
+#'   .s03json_write(
 #'     list(ate = 0.5, se = 0.1, ci_lower = 0.3, ci_upper = 0.7, n = 200),
 #'     tmp,
 #'     auto_unbox = TRUE

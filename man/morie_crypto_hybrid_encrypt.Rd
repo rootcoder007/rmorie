@@ -21,12 +21,14 @@ under the recipient's ML-KEM-768 public key, derives a wrapping key
 from \code{HKDF(kem_ct || pk)}, wraps a random 32-byte symmetric key with
 ChaCha20-Poly1305, then encrypts the payload under that symmetric
 key. Container format (big-endian lengths):
-\code{len(kem_ct)[4] || kem_ct || wrap_nonce[12] || wrapped_key[32] || wrap_tag[16] || payload_nonce[12] || aead_ct || payload_tag[16]}.
+\verb{len(kem_ct)\[4\] || kem_ct || wrap_nonce\[12\] || wrapped_key\[32\] || wrap_tag\[16\] || payload_nonce\[12\] || aead_ct || payload_tag\[16\]}.
 }
 \examples{
-if (morie_crypto_liboqs_available()) {
-  kp <- morie_crypto_hybrid_keygen()
-  ct <- morie_crypto_hybrid_encrypt("hello", kp$pk)
-  rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
+if (morie_crypto_sodium_available()) {
+  if (morie_crypto_liboqs_available()) {
+    kp <- morie_crypto_hybrid_keygen()
+    ct <- morie_crypto_hybrid_encrypt("hello", kp$pk)
+    rawToChar(morie_crypto_hybrid_decrypt(ct, kp$sk))
+  }
 }
 }

@@ -169,7 +169,7 @@ morie_hurst_r <- function(x) {
 #' Higuchi fractal dimension
 #'
 #' Estimates the Higuchi (1988) fractal dimension of a 1-D time series via
-#' length scaling across `k` time-lags. Values typically fall in \[1, 2\];
+#' length scaling across `k` time-lags. Values typically fall in \\[1, 2\\];
 #' higher values indicate greater signal complexity.
 #'
 #' Reference: Higuchi, T. (1988) "Approach to an irregular time series on
@@ -221,7 +221,7 @@ hfd <- function(x, kmax = 10L) {
 
 #' Phonocardiogram (PCG) bandpass filter
 #'
-#' Convenience preset wrapping [buttbp()] with the standard PCG band
+#' Convenience preset wrapping \[buttbp()\] with the standard PCG band
 #' (25--400 Hz at 2000 Hz sampling). Removes baseline drift below 25 Hz and
 #' anti-aliased high-frequency noise above 400 Hz.
 #'
@@ -229,7 +229,7 @@ hfd <- function(x, kmax = 10L) {
 #' @param fs Sampling frequency (Hz, default 2000).
 #' @param low Lower cutoff (Hz, default 25).
 #' @param high Upper cutoff (Hz, default 400).
-#' @return List with filtered signal (see [buttbp()]).
+#' @return List with filtered signal (see \[buttbp()\]).
 #' @export
 #' @examples
 #' \donttest{
@@ -252,7 +252,8 @@ morie_pcg_filter <- function(x, fs = 2000, low = 25, high = 400) {
 
 #' Real cepstrum
 #'
-#' Real cepstrum \eqn{c[n] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c[n] = IFFT(log |FFT(x)|)}. Useful
+#' Real cepstrum \eqn{c\[n\] = \mathrm{IFFT}(\log |\mathrm{FFT}(x)|)}{c\[n\] = IFFT(log
+#' |FFT(x)|)}. Useful
 #' for pitch-period estimation and any analysis where the multiplicative
 #' magnitude structure of the spectrum is best handled additively in the
 #' quefrency domain.
@@ -395,7 +396,8 @@ hdecon <- function(x, cutoff, n_fft = NULL) {
 #' Detrended fluctuation analysis (DFA)
 #'
 #' Estimates the DFA scaling exponent \eqn{\alpha}{alpha}. White noise gives
-#' \eqn{\alpha \approx 0.5}{alpha \~= 0.5}; pink (1/f) noise \eqn{\alpha \approx 1.0}{alpha \~= 1.0};
+#' \eqn{\alpha \approx 0.5}{alpha \~= 0.5}; pink (1/f) noise \eqn{\alpha \approx
+#' 1.0}{alpha \~= 1.0};
 #' Brownian motion \eqn{\alpha \approx 1.5}{alpha \~= 1.5}.
 #'
 #' Reference: Peng, C.-K., Havlin, S., Stanley, H.E. & Goldberger, A.L. (1995)
@@ -688,7 +690,8 @@ hrvnl <- function(rr) {
 #' Katz fractal dimension
 #'
 #' Katz fractal dimension \eqn{D = \\log_{10}(n - 1) / (\\log_{10}(n - 1) +
-#' \\log_{10}(d / L))}{D = log_10(n - 1) / ( log_10(n - 1) + log_10(d / L))} of a 1-D signal. \eqn{L} is total path length and
+#' \\log_{10}(d / L))}{D = log_10(n - 1) / ( log_10(n - 1) + log_10(d / L))} of a 1-D
+#' signal. \eqn{L} is total path length and
 #' \eqn{d} is the diameter (max distance from the first sample).
 #'
 #' Reference: Katz, M.J. (1988) "Fractals and the analysis of waveforms",
@@ -721,7 +724,8 @@ kfd <- function(x) {
 #' Petrosian fractal dimension
 #'
 #' Petrosian fractal dimension \eqn{D = \\log_{10}(N) / (\\log_{10}(N) +
-#' \\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4 N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
+#' \\log_{10}(N / (N + 0.4 N_\delta)))}{D = log_10(N) / ( log_10(N) + log_10(N / (N + 0.4
+#' N_delta)))}, where \eqn{N_\delta}{N_delta} counts sign
 #' changes of the first difference. A fast complexity proxy for EEG/ECG.
 #'
 #' Reference: Petrosian, A. (1995) "Kolmogorov complexity of finite
@@ -938,6 +942,7 @@ pcgenv <- function(pcg, fs) {
 #' res <- pcgseg(env, fs = 2000)
 #' res$extra$n_cycles
 #' }
+#' @rdname pcgseg-signal
 pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
   env <- as.numeric(envelope)
   if (length(env) < 4L) {
@@ -983,14 +988,14 @@ pcgseg <- function(envelope, fs = 2000, min_gap_ms = 100) {
 #'
 #' Combines a 100--400 Hz band-energy ratio, normalised spectral entropy,
 #' and the Higuchi fractal dimension of the PCG into a murmur-likelihood
-#' score in `[0, 1]`.
+#' score in `\[0, 1\]`.
 #'
 #' Reference: Rangayyan, R.M. (2015) *Biomedical Signal Analysis*, 2nd ed.,
 #' Wiley/IEEE Press, chapter on heart-sound analysis.
 #'
 #' @param pcg Numeric vector (1-D PCG signal).
 #' @param fs Sampling frequency in Hz.
-#' @return List with `value` (score in `[0, 1]`), `name`, and `extra`
+#' @return List with `value` (score in `\[0, 1\]`), `name`, and `extra`
 #'   (`fractal_dimension`, `hf_energy_ratio`, `spectral_entropy`,
 #'   `fd_score`, `hf_score`, `ent_score`).
 #' @export

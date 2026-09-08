@@ -1,6 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
-#' Romer-Rosenthal agenda-setter outcome and power (Armstrong Ch 10)
+#' Romer-Rosenthal agenda-setter outcome and power (Romer & Rosenthal 1978)
+#' @details Romer, T. & Rosenthal, H. (1978), "Political resource allocation,
+#'   controlled agendas, and the status quo", Public Choice 33(4):27-43. NOT
+#'   Armstrong: zero occurrences of "agenda setter" in its 320 pages, and its single
+#'   "Romer" hit is "G. Romer", a bibliography editor for an unrelated volume.
 #'
 #' Agenda setter offers a take-it-or-leave-it proposal from `options`;
 #' legislature accepts iff the proposal beats the reversion at the

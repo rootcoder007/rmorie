@@ -13,6 +13,8 @@ morie_hawkes_st_intensity(events, t_q, x_q, y_q, params)
 \item{t_q, x_q, y_q}{Query time and location.}
 
 \item{params}{List \code{list(mu, alpha, beta, sigma)}.}
+
+
 }
 \value{
 The intensity \eqn{\lambda(t_q, x_q, y_q)} (a non-negative scalar).
@@ -22,6 +24,8 @@ Conditional intensity of a spatiotemporal Hawkes process at a query point
 }
 \examples{
 ev <- data.frame(t = c(0.1, 0.5), x = c(0, 1), y = c(0, 1))
-morie_hawkes_st_intensity(ev, 0.6, 0.1, 0.1,
-                          list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.5))
+morie_hawkes_st_intensity(
+  ev, 0.6, 0.1, 0.1,
+  list(mu = 0.2, alpha = 0.5, beta = 1, sigma = 0.5)
+)
 }

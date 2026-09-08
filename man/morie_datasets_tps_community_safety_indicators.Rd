@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \verb{0a239a5563a344a3bbf8452504ed8d68}.
 }
 \details{
@@ -51,7 +51,7 @@ Community Safety Indicators (CSI) occurrences by reported date.
 Tags: Community Safety Indicators; CSI; Crime; Toronto; TPS; Toronto Police
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_community_safety_indicators(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

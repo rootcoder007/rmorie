@@ -22,8 +22,8 @@
 #' #   vignette(package = "rmorie")
 #' @export
 morie_heinz_he_initialization <- function(fan_in, fan_out = NULL, seed = 42L,
-                                    mode = "normal",
-                                    deterministic_seed = NULL) {
+                                          mode = "normal",
+                                          deterministic_seed = NULL) {
   fan_in <- as.integer(fan_in)
   if (fan_in <= 0) stop(sprintf("fan_in must be > 0, got %d", fan_in))
   if (!is.null(deterministic_seed)) {

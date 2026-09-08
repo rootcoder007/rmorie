@@ -28,9 +28,15 @@ morie_cnn_genomic(
 \item{n_filters, kernel, hidden, n_epochs, lr, l2, seed}{Hyperparameters.}
 
 \item{deterministic_seed}{Optional integer; if supplied, RNG state is
-derived via \code{\link[=morie_det_rng]{morie_det_rng()}} keyed on ("cnnge", deterministic_seed)
+derived via \code{morie_det_rng()} keyed on ("cnnge", deterministic_seed)
 so Py<->R streams agree on the canonical fixture.  When \code{NULL}
 (default) behaviour is unchanged.}
+
+
+
+
+
+
 }
 \value{
 list(estimate, y_hat, W_conv, b_conv, W1, b1, w2, b2, se, n, method).

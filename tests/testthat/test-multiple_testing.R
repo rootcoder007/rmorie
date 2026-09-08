@@ -17,7 +17,8 @@ make_p <- function(n_null = 80, n_sig = 20, seed = 1) {
 # ---------------------------------------------------------------------------
 
 test_that("bonferroni rejection count is monotone in alpha", {
-  set.seed(1); p <- make_p(50, 10)
+  set.seed(1)
+  p <- make_p(50, 10)
   a <- bonferroni(p, alpha = 0.01)
   b <- bonferroni(p, alpha = 0.10)
   expect_lte(a$n_rejected, b$n_rejected)
@@ -38,25 +39,29 @@ test_that(".mt_check_p rejects empty / out-of-range / non-finite p", {
 })
 
 test_that("sidak yields slightly more rejections than Bonferroni", {
-  set.seed(1); p <- make_p(40, 10)
+  set.seed(1)
+  p <- make_p(40, 10)
   rs <- sidak(p)$n_rejected
   rb <- bonferroni(p)$n_rejected
   expect_gte(rs, rb)
 })
 
 test_that("holm and hochberg agree with stats::p.adjust", {
-  set.seed(1); p <- make_p(30, 5)
+  set.seed(1)
+  p <- make_p(30, 5)
   expect_equal(holm(p)$adjusted, stats::p.adjust(p, "holm"))
   expect_equal(hochberg(p)$adjusted, stats::p.adjust(p, "hochberg"))
 })
 
 test_that("hommel matches stats::p.adjust", {
-  set.seed(1); p <- make_p(30, 5)
+  set.seed(1)
+  p <- make_p(30, 5)
   expect_equal(hommel(p)$adjusted, stats::p.adjust(p, "hommel"))
 })
 
 test_that("holm_sidak is monotonic after sort", {
-  set.seed(1); p <- make_p(30, 5)
+  set.seed(1)
+  p <- make_p(30, 5)
   res <- holm_sidak(p)
   expect_true(all(diff(sort(res$adjusted)) >= -1e-12))
 })
@@ -66,7 +71,8 @@ test_that("holm_sidak is monotonic after sort", {
 # ---------------------------------------------------------------------------
 
 test_that("benjamini_hochberg matches stats::p.adjust", {
-  set.seed(1); p <- make_p()
+  set.seed(1)
+  p <- make_p()
   expect_equal(benjamini_hochberg(p)$adjusted, stats::p.adjust(p, "BH"))
 })
 
@@ -75,7 +81,8 @@ test_that("bh alias points to benjamini_hochberg", {
 })
 
 test_that("benjamini_yekutieli matches stats::p.adjust", {
-  set.seed(1); p <- make_p()
+  set.seed(1)
+  p <- make_p()
   expect_equal(benjamini_yekutieli(p)$adjusted, stats::p.adjust(p, "BY"))
 })
 
@@ -84,7 +91,8 @@ test_that("by_fdr alias points to benjamini_yekutieli", {
 })
 
 test_that("storey_q returns pi0 in [0, 1]", {
-  set.seed(1); p <- make_p()
+  set.seed(1)
+  p <- make_p()
   res <- storey_q(p, lambda_param = 0.5)
   expect_true(is.finite(res$pi0))
   expect_lte(res$pi0, 1)
@@ -179,10 +187,12 @@ test_that("hierarchical_bonferroni keeps gate open on a first-family rejection",
 # ---------------------------------------------------------------------------
 
 test_that("estimate_pi0 works for all three methods", {
-  set.seed(1); p <- make_p()
+  set.seed(1)
+  p <- make_p()
   for (m in c("storey", "bootstrap", "two_step")) {
     pi0 <- estimate_pi0(p, method = m)
-    expect_gte(pi0, 0); expect_lte(pi0, 1)
+    expect_gte(pi0, 0)
+    expect_lte(pi0, 1)
   }
 })
 
@@ -191,7 +201,8 @@ test_that("estimate_pi0 two_step returns 1 if BH rejects nothing", {
 })
 
 test_that("adjust_p_values dispatches on each known method", {
-  set.seed(1); p <- make_p(20, 5)
+  set.seed(1)
+  p <- make_p(20, 5)
   for (m in c("bonferroni", "sidak", "holm", "hochberg", "hommel",
               "holm_sidak", "bh", "benjamini_hochberg", "fdr",
               "by", "benjamini_yekutieli", "storey", "fwer")) {
@@ -265,7 +276,8 @@ test_that("permutation_fwer requires ncol(null) == length(obs)", {
 
 test_that("permutation_fwer two-sided / greater / less branches run", {
   set.seed(1)
-  m <- 6; nperm <- 100
+  m <- 6
+  nperm <- 100
   obs <- c(rnorm(4), 3, 4)
   null <- matrix(rnorm(nperm * m), nperm, m)
   for (alt in c("two_sided", "greater", "less")) {
@@ -277,7 +289,8 @@ test_that("permutation_fwer two-sided / greater / less branches run", {
 
 test_that("permutation_fwer adjusted p in [0, 1] and monotone within sort", {
   set.seed(1)
-  m <- 8; nperm <- 200
+  m <- 8
+  nperm <- 200
   obs <- c(rnorm(m - 2), 4, 4.5)
   null <- matrix(rnorm(nperm * m), nperm, m)
   res <- permutation_fwer(obs, null)
@@ -286,7 +299,8 @@ test_that("permutation_fwer adjusted p in [0, 1] and monotone within sort", {
 
 test_that("permutation_fdr returns q in [0, 1]", {
   set.seed(1)
-  m <- 12; nperm <- 200
+  m <- 12
+  nperm <- 200
   p_obs <- c(runif(m - 3), 1e-4, 1e-3, 5e-3)
   p_null <- matrix(runif(nperm * m), nperm, m)
   res <- permutation_fdr(p_obs, p_null)

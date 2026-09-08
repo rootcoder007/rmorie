@@ -22,12 +22,12 @@ checks are \code{TRUE}.
 }
 \details{
 Checks: SE non-negative; CI lower < CI upper; estimate inside the CI;
-n positive; p-value (if present) in [0, 1]; estimate finite.
+n positive; p-value (if present) in \[0, 1\]; estimate finite.
 }
 \examples{
 tmp <- tempfile(fileext = ".json")
 if (requireNamespace("jsonlite", quietly = TRUE)) {
-  jsonlite::write_json(
+  .s03json_write(
     list(ate = 0.5, se = 0.1, ci_lower = 0.3, ci_upper = 0.7, n = 200),
     tmp,
     auto_unbox = TRUE

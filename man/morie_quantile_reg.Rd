@@ -33,12 +33,12 @@ quantile regression at one or more conditional quantiles
 }
 \examples{
 \donttest{
-  if (requireNamespace("quantreg", quietly = TRUE)) {
-    set.seed(1)
-    n  <- 100
-    df <- data.frame(x = stats::rnorm(n))
-    df$y <- 1 + 2 * df$x + stats::rnorm(n)
-    morie_quantile_reg(y ~ x, tau = c(0.25, 0.5, 0.75), data = df)
-  }
+if (requireNamespace("quantreg", quietly = TRUE)) {
+  set.seed(1)
+  n <- 100
+  df <- data.frame(x = stats::rnorm(n))
+  df$y <- 1 + 2 * df$x + stats::rnorm(n)
+  morie_quantile_reg(y ~ x, tau = c(0.25, 0.5, 0.75), data = df)
+}
 }
 }

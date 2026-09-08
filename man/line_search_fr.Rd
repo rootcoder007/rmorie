@@ -1,0 +1,36 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{line_search_fr}
+\alias{line_search_fr}
+\title{line_search_fr}
+\usage{
+line_search_fr(f, grad, x, p, f0, g0, est = NULL, max_double = 60L, max_cubic = 40L, 
+    tol = 1e-12) 
+}
+\arguments{
+\item{f}{Accepted by the signature and not used anywhere in the body.}
+\item{grad}{Accepted by the signature and not used anywhere in the body.}
+\item{x}{A vector; its length is taken.}
+\item{p}{Numeric; combined arithmetically in the body.}
+\item{f0}{Numeric; combined arithmetically in the body.}
+\item{g0}{Passed to \code{.cgnonl_dot}.}
+\item{est}{Optional; may be \code{NULL}. Coerced to numeric by the body, with \code{as.numeric}.}
+\item{max_double}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{60L}.}
+\item{max_cubic}{A count; the body uses it as \code{seq_len(...)}. Defaults to \code{40L}.}
+\item{tol}{Numeric; combined arithmetically in the body. Defaults to \code{1e-12}.}
+}
+\description{
+A step of the cgnonl_native implementation. Called by \code{nonlinear_cg}. See the file header for the source the module follows.
+}
+\value{
+A list with \code{t}, \code{x_new}, \code{f_new}, \code{g_new}, \code{n_eval}.
+}
+\keyword{internal}
+\examples{
+f <- function(x) sum((x - c(1, 2))^2)
+g <- function(x) 2 * (x - c(1, 2))
+x0 <- c(0, 0)
+r <- line_search_fr(f, g, x0, p = -g(x0), f0 = f(x0), g0 = g(x0))
+str(r, max.level = 1)
+}

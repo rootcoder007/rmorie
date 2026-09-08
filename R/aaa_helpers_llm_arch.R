@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 
 #' Internal helpers shared across the LLM-architecture suite.
-#' Not exported; consumed by llm_arch callables only.
+#' Not exported; consumed by llm_arch callables only
 #' @keywords internal
 #' @name llm_arch_helpers
 NULL

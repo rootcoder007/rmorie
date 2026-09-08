@@ -3,11 +3,14 @@
 \name{fzlst}
 \alias{fzlst}
 \alias{morie_fauzi_l_statistic}
-\title{Fauzi: L-statistic for kernel functionals (Ch 5)}
+\alias{Lstat}
+\title{L-statistic for kernel functionals (Ch 3, Eq. 3.4)}
 \usage{
 fzlst(x, score = NULL, n_quad = 200L)
 
 morie_fauzi_l_statistic(x, score = NULL, n_quad = 200L)
+
+Lstat(x, score = NULL, n_quad = 200L)
 }
 \arguments{
 \item{x}{Numeric vector.}
@@ -23,6 +26,16 @@ Named list with estimate, se, n, method.
 \eqn{L_n = \sum_i c_{n,i} X_{(i)}}{L_n = sum_i c_n,i X_(i)} with
 \eqn{c_{n,i} = \int_{(i-1)/n}^{i/n} J(u) du}{c_n,i = int_(i-1)/n^i/n J(u) du}.
 Default J(u)=1 gives the sample mean.
+}
+\details{
+The book's own L-statistic is Eq. (3.4), the KERNEL QUANTILE estimator
+\verb{Qhat_\{p,h\} = sum_i v_\{i,n\} X_\{i:n\}} with
+\verb{v_\{i,n\} = (1/h) int_\{(i-1)/n\}^\{i/n\} K((u-p)/h) du}, which is this function
+with \code{score = function(u) K((u - p)/h)/h}. No separate entry point is
+needed and none is added. Sec. 3.2 spells out why standard L-statistic
+theory does not apply to it: the weights depend on \code{n} through \code{h}, and the
+limiting score function is a delta function rather than a fixed \code{J} -- the
+technical obstacle Chapter 3 works around with an H-decomposition.
 }
 \examples{
 fzlst(x = rnorm(50))

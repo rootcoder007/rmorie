@@ -24,7 +24,6 @@
 #' canonical loader.
 #'
 #' Year-lock invariant
-#' -------------------
 #' OTIS \code{UniqueIndividual_ID} (format \code{YYYY-XXXXX-AA}) is
 #' randomly reassigned every fiscal year and re-randomized per dataset
 #' file even within a year. The \code{variable_taxonomy.R} registry
@@ -47,6 +46,37 @@
 #'   `morie_otis_volat`, `morie_otis_rctrnd`, `morie_otis_otdesc`). See
 #'   those functions for full per-primitive argument lists.
 #' @name morie_otis_primitives
+#' @examples
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_regional_placement(b01))
+#' class(res)
+#' }
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_alert_state_combo(b01))
+#' class(res)
+#' }
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_volatility(b01))
+#' class(res)
+#' }
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_rc_trends(b01))
+#' class(res)
+#' }
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_descriptives(b01))
+#' class(res)
+#' }
+#' \dontrun{
+#' b01 <- morie_synth_otis("b01", n = 120L, seed = 1L)
+#' res <- try(morie_otis_dml(b01))
+#' class(res)
+#' }
 NULL
 
 
@@ -235,7 +265,7 @@ morie_otis_astcmb <- function(df,
   }
   a <- .otis_binarise(df[[alert_cols[1]]])
   b <- .otis_binarise(df[[alert_cols[2]]])
-  cc <- .otis_binarise(df[[alert_cols[3]]])  # not 'c' — shadows base c()
+  cc <- .otis_binarise(df[[alert_cols[3]]])  # not 'c' -- shadows base c()
   flags <- data.frame(
     id = df[[id_col]], yr = df[[year_col]],
     a1 = as.integer(a == 1 & b == 0 & cc == 0),
@@ -507,7 +537,7 @@ morie_otis_otdesc <- function(df,
 #'
 #' Wraps a Frisch-Waugh-Lovell partialling-out estimator with
 #' \code{n_folds} cross-fitting on the OLS nuisance functions
-#' \eqn{E[Y|X]} and \eqn{E[D|X]}, then regresses outcome residuals on
+#' \eqn{E\[Y|X\]} and \eqn{E\[D|X\]}, then regresses outcome residuals on
 #' treatment residuals for the ATE; heteroskedasticity-robust standard
 #' errors. ATT is the ATE divided by the treated share (a simple
 #' weighting approximation; for the production-grade DML use

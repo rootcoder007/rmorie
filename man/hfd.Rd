@@ -17,7 +17,7 @@ List with \code{value} (D), \code{name}, and \code{extra} (\code{kmax}, \code{n}
 }
 \description{
 Estimates the Higuchi (1988) fractal dimension of a 1-D time series via
-length scaling across \code{k} time-lags. Values typically fall in [1, 2];
+length scaling across \code{k} time-lags. Values typically fall in \[1, 2\];
 higher values indicate greater signal complexity.
 }
 \details{

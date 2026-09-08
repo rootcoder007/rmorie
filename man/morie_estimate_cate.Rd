@@ -15,24 +15,23 @@ morie_estimate_cate(
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A vector; indexed elementwise.}
 
-\item{treatment}{Name of the binary treatment column.}
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{outcome}{Name of the outcome column.}
+\item{outcome}{See Usage.}
 
-\item{covariates}{Character vector of covariate names.}
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity
-score column.}
+\item{propensity_col}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 
 \item{outcome_model}{Family for the outcome model: \code{"linear"} or
 \code{"logistic"}.}
 
 \item{meta_learner}{One of \code{"t_learner"} (default), \code{"s_learner"},
-\code{"x_learner"} (Kuenzel et al. 2019 — two-stage with
+\code{"x_learner"} (Kuenzel et al. 2019 -- two-stage with
 propensity-weighted combination; strong under arm imbalance), or
-\code{"dr_learner"} (Kennedy 2023 — cross-fit AIPW pseudo-outcome
+\code{"dr_learner"} (Kennedy 2023 -- cross-fit AIPW pseudo-outcome
 regressed with the native forest; doubly robust). All four are
 native; \code{outcome_model} applies to the T/S-learners only.}
 }

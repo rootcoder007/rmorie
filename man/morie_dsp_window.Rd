@@ -20,7 +20,9 @@ hamming, hann/hanning, blackman, bartlett/triangular, kaiser
 (beta = 14), and rectangular/boxcar. Unknown types default to hamming.
 }
 \examples{
-morie_dsp_window(64L, "hamming")
+if (requireNamespace("signal", quietly = TRUE)) {
+  morie_dsp_window(64L, "hamming")
+}
 }
 \references{
 Rangayyan & Krishnan (2015), Ch. 6, sec. 6.5.

@@ -9,6 +9,22 @@
 # CBPS (Imai-Ratkovic GMM) and the NNLS SuperLearner ensemble.
 # Cross-validated against WeightIt / CBPS in tests.
 
+#' .morie_weight_result
+#'
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
+#' \code{morie_weight_entropy}, \code{morie_weight_ow} and 2 others in the module.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param weights A vector; its length is taken.
+#' @param propensity Coerced to numeric by the body, with \code{as.numeric}.
+#' @param method Carried through into a list the body builds.
+#' @param estimand Carried through into a list the body builds.
+#' @param call Carried through into a list the body builds.
+#' @param stabilize Carried through into a list the body builds. Defaults to \code{FALSE}.
+#' @param trim Carried through into a list the body builds.
+#' @return The value of \code{out}, as built in the body.
+#' @export
 .morie_weight_result <- function(weights, propensity, method, estimand,
                                  call, stabilize = FALSE, trim = NULL) {
   ess <- sum(weights)^2 / sum(weights^2)
@@ -21,6 +37,10 @@
   out
 }
 
+#' Print method for \code{morie_weight} objects
+#'
+#' @param x A \code{morie_weight} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @examples
 #' \donttest{
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
@@ -35,6 +55,18 @@ print.morie_weight <- function(x, ...) {
   invisible(x)
 }
 
+#' .morie_weight_from_ps
+#'
+#' A step of the weight_native implementation. Called by \code{morie_weight_cbps},
+#' \code{morie_weight_ps}, \code{morie_weight_super}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param ps Numeric; combined arithmetically in the body.
+#' @param t01 Passed to \code{==}.
+#' @param estimand The body requires: estimand must be ATE, ATT, or ATC.
+#' @return The value of \code{switch}.
+#' @export
 .morie_weight_from_ps <- function(ps, t01, estimand) {
   switch(estimand,
     ATE = ifelse(t01 == 1, 1 / ps, 1 / (1 - ps)),
@@ -115,7 +147,7 @@ morie_weight_entropy <- function(data, treatment, covariates) {
 #' Covariate-balancing propensity score (Imai & Ratkovic 2014)
 #'
 #' Native just-identified CBPS: solves the covariate-balance moment
-#' conditions \eqn{E[(T - p(X)) X / (p(X)(1-p(X)))] = 0} directly
+#' conditions \eqn{E\[(T - p(X)) X / (p(X)(1-p(X)))\] = 0} directly
 #' (the exactly-identified estimator), via Newton iterations on the
 #' logistic index. Balance is thus built into the score rather than
 #' checked after the fact.
@@ -276,7 +308,8 @@ morie_weight_super <- function(data, treatment, covariates,
   folds <- sample(rep(seq_len(n_folds), length.out = n))
   Zcv <- matrix(NA_real_, n, length(learners))
   for (f in seq_len(n_folds)) {
-    tr <- which(folds != f); te <- which(folds == f)
+    tr <- which(folds != f)
+    te <- which(folds == f)
     for (li in seq_along(learners)) {
       Zcv[te, li] <- tryCatch(learners[[li]](tr, te),
                               error = function(e) rep(mean(t01[tr]),
@@ -309,6 +342,23 @@ morie_weight_super <- function(data, treatment, covariates,
 # convergent for the convex NNLS objective and immune to the singular
 # normal-equation solves that break active-set methods when learner
 # predictions are collinear.
+#' Non-negative least squares via projected coordinate descent --
+#'
+#' convergent for the convex NNLS objective and immune to the singular
+#' normal-equation solves that break active-set methods when learner
+#' predictions are collinear.
+#'
+#' @param A A matrix; indexed by row and column.
+#' @param b Numeric; combined arithmetically in the body.
+#' @param tol Passed to \code{<}. Defaults to \code{1e-10}.
+#' @param max_iter A count; the body uses it as \code{seq_len(...)}. Defaults to \code{2000L}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
+#' @examples
+#' A <- matrix(c(4, 1, 0.5, 1, 3, 0.8, 0.5, 0.8, 2), nrow = 3)
+#' b <- c(1.5, 2.5, 3.5)
+#' res <- .morie_nnls(A = A, b = b)
+#' res
 .morie_nnls <- function(A, b, tol = 1e-10, max_iter = 2000L) {
   p <- ncol(A)
   x <- rep(0, p)

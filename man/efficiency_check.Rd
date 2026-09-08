@@ -1,0 +1,26 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{efficiency_check}
+\alias{efficiency_check}
+\title{efficiency_check}
+\usage{
+efficiency_check(err_Q, err_g, delta, n, donsker = TRUE) 
+}
+\arguments{
+\item{err_Q}{Passed to \code{remainder_bound}.}
+\item{err_g}{Passed to \code{remainder_bound}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{n}{Coerced to integer by the body, with \code{as.integer}.}
+\item{donsker}{A flag; the body branches on it. Defaults to \code{TRUE}.}
+}
+\description{
+A step of the tlhaltm_native implementation. Called by \code{morie_tlhaltm}. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{remainder_bound}, \code{root_n}, \code{remainder_negligible}, \code{donsker_satisfied}, \code{efficient}, \code{positivity_delta}, \code{method}, \code{note}.
+}
+\keyword{internal}
+\examples{
+efficiency_check(err_Q = 5L, err_g = 5L, delta = 0.5, n = 5L)
+}

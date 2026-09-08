@@ -13,13 +13,13 @@ morie_estimate_dr_forest(
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A vector; indexed elementwise.}
 
-\item{treatment}{Name of the binary treatment column.}
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{outcome}{Name of the outcome column.}
+\item{outcome}{See Usage.}
 
-\item{covariates}{Character vector of covariate names.}
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
 
 \item{target_sample}{Sample to average over, passed to grf: one of
 \code{"all"}, \code{"treated"}, \code{"control"}, \code{"overlap"}.}
@@ -32,7 +32,7 @@ A list with \code{ate}, \code{se}, \code{ci_lower},
 Native rmorie causal forest: the R-learner decomposition (Nie &
 Wager 2021) with cross-fit nuisances and a weighted subsampled
 regression forest for tau(x), combined through the AIPW orthogonal
-score — the same estimand grf's
+score -- the same estimand grf's
 \code{average_treatment_effect(method = "AIPW")} targets
 (cross-validated against grf in the package's cross tests). A
 machine-learning alternative to the GLM-based

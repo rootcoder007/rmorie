@@ -19,10 +19,10 @@ statements executed.
 }
 \description{
 Looks up \code{table_name} in the per-dataset index registry (see
-\code{\link[=.morie_db_index_registry]{.morie_db_index_registry()}} for the full list) and creates each
+\code{.morie_db_index_registry()} for the full list) and creates each
 \verb{CREATE INDEX IF NOT EXISTS} against \code{con}. Specs whose columns
 aren't present in the actual table are silently skipped, so this is
-safe to call on any morie cache table — including subsets that drop
+safe to call on any morie cache table -- including subsets that drop
 some columns. Returns the number of \verb{CREATE INDEX} statements that
 actually ran (not the number registered).
 }
@@ -35,10 +35,12 @@ because the index overhead exceeds the lookup benefit.
 \examples{
 if (requireNamespace("RSQLite", quietly = TRUE)) {
   con <- DBI::dbConnect(RSQLite::SQLite(), ":memory:")
-  siu <- data.frame(drid = 1:5,
-                    case_number = sprintf("23-OFD-\%03d", 1:5),
-                    date_of_incident_iso = "2023-01-15",
-                    police_service = "Toronto")
+  siu <- data.frame(
+    drid = 1:5,
+    case_number = sprintf("23-OFD-\%03d", 1:5),
+    date_of_incident_iso = "2023-01-15",
+    police_service = "Toronto"
+  )
   DBI::dbWriteTable(con, "SIU", siu)
   n <- morie_db_create_indexes(con, "SIU")
   DBI::dbDisconnect(con)

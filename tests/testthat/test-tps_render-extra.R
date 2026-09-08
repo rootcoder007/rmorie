@@ -26,7 +26,8 @@
   # so the renderers find >=3 points per polygon.
   delta <- 0.01
   out$geometry <- lapply(seq_len(n_hoods), function(i) {
-    lat <- out$centroid_lat[i]; lon <- out$centroid_lon[i]
+    lat <- out$centroid_lat[i]
+    lon <- out$centroid_lon[i]
     list(list(
       list(lon - delta, lat - delta),
       list(lon + delta, lat - delta),

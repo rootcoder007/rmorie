@@ -89,7 +89,8 @@ test_that("spectral_moment order 0 equals integrated power", {
 
 test_that("mean_frequency of a delta PSD equals the spike location", {
   freqs <- seq.int(0, 64) / 64
-  psd <- numeric(65); psd[20L] <- 1
+  psd <- numeric(65)
+  psd[20L] <- 1
   expect_equal(morie_dsp_mean_frequency(psd, freqs),
                freqs[20L], tolerance = 1e-12)
 })
@@ -118,7 +119,8 @@ test_that("mean / median frequency return 0 on a zero PSD", {
 test_that("spectral_entropy is max for a uniform PSD, min for a spike", {
   N <- 64L
   uni <- rep(1, N)
-  spike <- numeric(N); spike[10L] <- 1
+  spike <- numeric(N)
+  spike[10L] <- 1
   H_uni <- morie_dsp_spectral_entropy(uni)
   H_spk <- morie_dsp_spectral_entropy(spike)
   expect_equal(H_uni, log2(N), tolerance = 1e-10)

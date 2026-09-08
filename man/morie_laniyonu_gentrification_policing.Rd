@@ -2,7 +2,7 @@
 % Please edit documentation in R/laniyonu_gentrification_policing.R
 \name{morie_laniyonu_gentrification_policing}
 \alias{morie_laniyonu_gentrification_policing}
-\title{Replication of Laniyonu (2018) — Coffee Shops and Street Stops}
+\title{Replication of Laniyonu (2018) -- Coffee Shops and Street Stops}
 \usage{
 morie_laniyonu_gentrification_policing(
   df,
@@ -57,6 +57,18 @@ SDM outputs.  Pass these to bypass lite-mode.}
 
 \item{log_outcome}{If \code{TRUE} (default), outcome is
 \code{log(stops / population)}.}
+
+
+
+
+
+
+
+
+
+
+
+
 }
 \value{
 A \code{list} of class \code{morie_laniyonu_gp_result}, one
@@ -74,7 +86,7 @@ year level via a Spatial Durbin Model (SDM) decomposition.
 \details{
 The paper's headline finding: gentrification has roughly zero
 \emph{direct} effect on stops/capita inside the gentrifying tract,
-but a +51\\% to +90\\% \emph{indirect} (spillover) effect on
+but a +51\% to +90\% \emph{indirect} (spillover) effect on
 stops/capita in neighbouring tracts.
 
 Two modes are supported:

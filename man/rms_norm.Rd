@@ -19,4 +19,8 @@ Named list with tensor, rms, eps, method.
 \description{
 Root-mean-square normalisation (Zhang & Sennrich 2019)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rmorie:::rms_norm(V)
+}
 \keyword{internal}

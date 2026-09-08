@@ -34,12 +34,14 @@ Without covariates the closed-form Wald estimator and its
 delta-method SE are used.
 }
 \examples{
-set.seed(1)
-n <- 300L
-z <- rbinom(n, 1, 0.5)
-t <- rbinom(n, 1, plogis(-0.2 + 1.5 * z))
-y <- 0.8 * t + rnorm(n)
-morie_estimate_late(data.frame(t = t, y = y, z = z), "t", "y", "z")
+if (requireNamespace("EValue", quietly = TRUE)) {
+  set.seed(1)
+  n <- 300L
+  z <- rbinom(n, 1, 0.5)
+  t <- rbinom(n, 1, plogis(-0.2 + 1.5 * z))
+  y <- 0.8 * t + rnorm(n)
+  morie_estimate_late(data.frame(t = t, y = y, z = z), "t", "y", "z")
+}
 }
 \references{
 Imbens GW, Angrist JD (1994). Identification and estimation of

@@ -1,0 +1,44 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{integrate_marginals}
+\alias{integrate_marginals}
+\title{integrate_marginals}
+\usage{
+integrate_marginals(conditional_marginals, log_weights, x_grid) 
+}
+\arguments{
+\item{conditional_marginals}{Iterated over elementwise, with \code{lapply}.}
+\item{log_weights}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{x_grid}{Coerced to numeric by the body, with \code{as.numeric}.}
+}
+\description{
+A step of the inlasm_native implementation. No other function in the package calls it. See the file header for the source the module follows.
+}
+\value{
+A list with \code{estimate}, \code{mean}, \code{sd}, \code{density}, \code{x}, \code{theta_weights}, \code{n_theta}, \code{method}, \code{note}.
+}
+\references{
+----------
+Rue, H., Martino, S. & Chopin, N. (2009) "Approximate Bayesian
+inference for latent Gaussian models by using integrated nested
+Laplace approximations", Journal of the Royal Statistical Society:
+Series B (Statistical Methodology) 71(2), 319-392,
+doi:10.1111/j.1467-9868.2008.00700.x. [PDF supplied by Vee.]
+Tierney, L. & Kadane, J. B. (1986) "Accurate Approximations for
+Posterior Moments and Marginal Densities", Journal of the American
+Statistical Association 81(393), 82-86,
+doi:10.1080/01621459.1986.10478240. The Laplace approximation
+being nested.
+Rue, H. & Held, L. (2005) Gaussian Markov Random Fields: Theory
+and Applications, Chapman & Hall/CRC,
+doi:10.1201/9780203492024. The sparse GMRF computations the
+method rests on.
+}
+\keyword{internal}
+\examples{
+xs <- seq(-4, 6, by = 0.1)
+cm <- list(dnorm(xs, 0, 1), dnorm(xs, 3, 1))
+im <- integrate_marginals(cm, log_weights = c(log(0.5), log(0.5)), x_grid = xs)
+abs(im$mean - 1.5) < 0.05
+}

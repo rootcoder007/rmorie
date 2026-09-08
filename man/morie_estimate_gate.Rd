@@ -15,18 +15,17 @@ morie_estimate_gate(
 )
 }
 \arguments{
-\item{data}{A data frame.}
+\item{data}{A vector; indexed elementwise.}
 
-\item{treatment}{Name of the binary treatment column.}
+\item{treatment}{Passed to \code{morie_estimate_propensity_scores}.}
 
-\item{outcome}{Name of the outcome column.}
+\item{outcome}{See Usage.}
 
-\item{covariates}{Character vector of covariate names.}
+\item{covariates}{Passed to \code{morie_estimate_propensity_scores}.}
 
 \item{group_col}{Name of the grouping variable (e.g. \code{"gender"}).}
 
-\item{propensity_col}{Optional: name of a pre-computed propensity
-score column.}
+\item{propensity_col}{Optional; may be \code{NULL}. Passed to \code{is.null}.}
 
 \item{outcome_model}{Family for the outcome model: \code{"linear"} or
 \code{"logistic"}.}

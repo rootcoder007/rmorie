@@ -26,10 +26,11 @@ sources (e.g. the OTIS "Data on Inmates in Ontario" releases) that may move
 or change upstream.
 }
 \examples{
-\donttest{
+\dontrun{
 morie_download(
   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
-  tempfile(fileext = ".html"))
+  tempfile(fileext = ".html")
+)
 }
 }
 \seealso{

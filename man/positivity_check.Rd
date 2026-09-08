@@ -1,0 +1,24 @@
+% Generated from the package source by gen_rd_tree.R -- roxygen2
+% hangs on this package. Usage comes from args(), so it tracks
+% the formals.
+\name{positivity_check}
+\alias{positivity_check}
+\title{positivity_check}
+\usage{
+positivity_check(g, delta = 0.01) 
+}
+\arguments{
+\item{g}{Coerced to numeric by the body, with \code{as.numeric}.}
+\item{delta}{Coerced to numeric by the body, with \code{as.numeric}. Defaults to \code{0.01}.}
+}
+\description{
+A step of the tlgcmp_native implementation. Called by \code{morie_tlgcmp}. See the file header for the source the module follows.
+}
+\value{
+A list with \code{min_g}, \code{max_g}, \code{worst}, \code{satisfied}, \code{delta}, \code{note}.
+}
+\keyword{internal}
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+positivity_check(V)
+}

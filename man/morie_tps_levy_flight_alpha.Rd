@@ -26,7 +26,7 @@ default) skips writing and says so in the result.}
 }
 \value{
 A \code{morie_rich_result} with \eqn{\hat\alpha}{hatalpha},
-bootstrap SE, sample-size diagnostics, and a Lévy-regime
+bootstrap SE, sample-size diagnostics, and a Levy-regime
 interpretation.
 }
 \description{

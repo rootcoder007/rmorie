@@ -38,11 +38,11 @@ affects the hub_id -> FeatureServer URL lookup.}
 }
 \value{
 A data.frame / GeoJSON list / file path; see
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} for per-format semantics.
+\code{morie_datasets_tps_arcgis_hub_by_id()} for per-format semantics.
 }
 \description{
 Toronto PS ArcGIS Hub dataset wrapper. Thin dispatch to
-\code{\link[=morie_datasets_tps_arcgis_hub_by_id]{morie_datasets_tps_arcgis_hub_by_id()}} with the canonical
+\code{morie_datasets_tps_arcgis_hub_by_id()} with the canonical
 hub item_id \code{ea0cfecdb1de416884e6b0bf08a9e195}.
 }
 \details{
@@ -51,7 +51,7 @@ Neighbourhood crime rates per 100,000.
 Tags: Neighbourhood; Crime; Rate; Crime Rates; Community Safety Indicators; CSI; Toronto; TPS; Toronto Police
 }
 \examples{
-\donttest{
+\dontrun{
 df <- try(morie_datasets_tps_neighbourhood_crime_rates(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

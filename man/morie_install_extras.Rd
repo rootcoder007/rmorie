@@ -24,11 +24,11 @@ installing. Set to \code{FALSE} for non-interactive CI workflows.}
 Default uses \code{getOption("repos")}, falling back to the RStudio
 CRAN mirror.}
 
-\item{dependencies}{Passed through to \code{\link[utils:install.packages]{utils::install.packages()}}.
+\item{dependencies}{Passed through to \code{utils::install.packages()}.
 Default \code{NA} honours the package's \code{Depends}/\code{Imports}/\code{LinkingTo}
 only -- not the optional Suggests-of-Suggests cascade.}
 
-\item{...}{Extra args forwarded to \code{\link[utils:install.packages]{utils::install.packages()}}.}
+\item{...}{Extra args forwarded to \code{utils::install.packages()}.}
 }
 \value{
 Invisibly: a list with \code{installed} (character of packages
@@ -78,6 +78,7 @@ them up.
 }
 
 \examples{
+\dontrun{
 # \dontrun (not \donttest) deliberately: this installs packages into the
 # user library -- never proper to execute under R CMD check or pkgdown,
 # which runs \donttest examples (a run of this one compiled rstan from
@@ -92,5 +93,5 @@ them up.
   # Just one family
   morie_install_extras(which = c("hawkes", "sf", "spdep"))
 }
-
+}
 }

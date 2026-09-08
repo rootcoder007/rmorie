@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' OTIS causal-inference pipeline: IPW, AIPW, IRM-DML, and Ruhela's
-#' alert-complexity -> regional-volatility cell-frame builders.
+#' alert-complexity -> regional-volatility cell-frame builders
 #'
 #' R port of \code{src/morie/otis_causal.py}. Implements the OTIS
 #' causal-inference pipeline used in the MA-paired thesis work
@@ -62,8 +62,6 @@ NULL
 
 # Binarise a column: "Yes"/"No" character (case-insensitive) -> 1/0;
 # numeric NAs -> 0; integer -> as-integer. Mirrors python _binarise.
-#' Internal helper: Otis Binarise
-#' @noRd
 # .otis_binarise() is defined once in otis.R (the more robust version:
 # logical/numeric>0/rich string set with NA preservation); shared across
 # the OTIS modules.
@@ -210,10 +208,10 @@ NULL
 # IPW (Hajek-stabilised)
 # ---------------------------------------------------------------------------
 
-#' Hajek-stabilised IPW estimator of the ATE on OTIS data.
+#' Hajek-stabilised IPW estimator of the ATE on OTIS data
 #'
 #' Fits a logistic-regression propensity model on \code{covariates},
-#' clips propensities to \eqn{[\varepsilon, 1-\varepsilon]}{[epsilon, 1-epsilon]}, and
+#' clips propensities to \eqn{\[\varepsilon, 1-\varepsilon\]}{\[epsilon, 1-epsilon\]}, and
 #' computes the Hajek-normalised difference of weighted means. SE
 #' follows the Lunceford-Davidian (2004) sandwich influence-function
 #' form.
@@ -289,7 +287,7 @@ morie_otis_ipw_ate <- function(df, treatment, outcome, covariates,
 # AIPW (cross-fitted, RRZ 1994)
 # ---------------------------------------------------------------------------
 
-#' Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances.
+#' Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances
 #'
 #' Uses \code{n_folds} cross-fitting: propensity (logistic ridge) and
 #' outcome regression (OLS separately for D=1 and D=0) are fit on K-1
@@ -390,7 +388,7 @@ morie_otis_aipw_ate <- function(df, treatment, outcome, covariates,
 # IRM-DML (Interactive Regression Model double machine learning)
 # ---------------------------------------------------------------------------
 
-#' Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC).
+#' Interactive Regression Model DML on OTIS data (ATE, ATTE, ATC)
 #'
 #' Computes the doubly-robust ATE / ATTE / ATC via the Chernozhukov et
 #' al. (2018) IRM score with cross-fitted nuisance models. Delegates
@@ -637,7 +635,7 @@ morie_otis_irm_dml <- function(df, treatment, outcome, covariates,
 # Mandela classification helpers (alert-state -> Mandela-rule category)
 # ---------------------------------------------------------------------------
 
-#' Mandela alert-state classifier for an OTIS placement row.
+#' Mandela alert-state classifier for an OTIS placement row
 #'
 #' Encodes the bitfield of three binary alert flags
 #' (MentalHealth, SuicideRisk, SuicideWatch) into the 8-state combo
@@ -755,7 +753,7 @@ morie_otis_classify_mandela_combo <- function(mh, sr, sw,
   base
 }
 
-#' Ruhela's primary alert-complexity -> regional-volatility builder.
+#' Ruhela's primary alert-complexity -> regional-volatility builder
 #'
 #' Implements Ruhela's "ac >= 2 -> vm" RF (Ruhela Formulation): the
 #' 8-state combo encoding documented in OTIS-RC/notez1a.qmd and used
@@ -813,7 +811,7 @@ morie_otis_make_pair_alert_to_volatility_ruhela <- function(df) {
   )
 }
 
-#' Naive (max-simultaneous-flags + binary vm) alert -> volatility builder.
+#' Naive (max-simultaneous-flags + binary vm) alert -> volatility builder
 #'
 #' Robustness alternative to
 #' \code{morie_otis_make_pair_alert_to_volatility_ruhela()}: treatment
@@ -874,7 +872,7 @@ morie_otis_make_pair_alert_to_volatility_naive <- function(df) {
   )
 }
 
-#' Run both Ruhela and Naive alert -> volatility builders.
+#' Run both Ruhela and Naive alert -> volatility builders
 #'
 #' Convenience wrapper that returns both formulations side-by-side for
 #' RDF (Ruhela Dual Formulation) robustness analyses.
@@ -894,7 +892,7 @@ morie_otis_make_pair_alert_to_volatility_all <- function(df) {
   )
 }
 
-#' a01-aware wrapper for the Ruhela alert -> volatility builder.
+#' a01-aware wrapper for the Ruhela alert -> volatility builder
 #'
 #' Same as \code{morie_otis_make_pair_alert_to_volatility_ruhela()} but
 #' auto-loads a01 (Restrictive Confinement Detailed) via the registered
@@ -927,7 +925,7 @@ morie_otis_make_pair_alert_to_volatility_a01 <- function(df = NULL) {
 # Canonical 3 (T, Y) pairs for the causal grid
 # ---------------------------------------------------------------------------
 
-#' Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary).
+#' Pair (a): MentalHealth_Alert -> SuicideRisk_Alert (binary -> binary)
 #'
 #' The clinical-alert chain: do mental-health flags causally elevate
 #' subsequent suicide-risk-alert occurrence, conditional on
@@ -957,7 +955,7 @@ morie_otis_make_pair_a <- function(df) {
   )
 }
 
-#' Pair (b): HighAlertComplexity -> AnyReadmission.
+#' Pair (b): HighAlertComplexity -> AnyReadmission
 #'
 #' Treatment T_b = 1 iff at least 2 of (MentalHealth, SuicideRisk,
 #' SuicideWatch) alerts are simultaneously active in the row.
@@ -994,7 +992,7 @@ morie_otis_make_pair_b <- function(df) {
   )
 }
 
-#' Pair (c): RegionalVolatility -> SegregationDays.
+#' Pair (c): RegionalVolatility -> SegregationDays
 #'
 #' Treatment T_c = 1 iff Region_AtTimeOfPlacement != Region_MostRecent.
 #' Outcome Y_c = NumberConsecutiveDays_Segregation winsorised at the
@@ -1004,7 +1002,7 @@ morie_otis_make_pair_b <- function(df) {
 #' @return Named list \code{list(data, T = "T_c", Y = "Y_c", covariates)}.
 #' @export
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # b01 (Segregation - Detailed Dataset) carries the full placement-level
 #' # schema, including NumberConsecutiveDays_Segregation (see the bundled
 #' # OTIS data dictionary).
@@ -1036,7 +1034,7 @@ morie_otis_make_pair_c <- function(df) {
 # 3 x 3 causal grid (IPW / AIPW / IRM-DML across the three pairs)
 # ---------------------------------------------------------------------------
 
-#' Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs.
+#' Run IPW / AIPW / IRM-DML on the three canonical (T, Y) pairs
 #'
 #' Returns one row per (pair, estimator) combination with the ATE,
 #' SE, 95% CI, and per-row notes. The IRM-DML row uses the ATE
@@ -1239,7 +1237,8 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
     inner <- sample(rep(1:3, length.out = length(train)))
     Z <- matrix(NA_real_, length(train), length(ps_learners))
     for (f in 1:3) {
-      itr <- train[inner != f]; ite <- train[inner == f]
+      itr <- train[inner != f]
+      ite <- train[inner == f]
       for (li in seq_along(ps_learners)) {
         Z[inner == f, li] <- tryCatch(ps_learners[[li]](itr, ite),
           error = function(e) rep(mean(d[itr]), length(ite)))
@@ -1261,7 +1260,8 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
     inner <- sample(rep(1:3, length.out = length(train)))
     Z <- matrix(NA_real_, length(train), length(reg_learners))
     for (f in 1:3) {
-      itr <- train[inner != f]; ite <- train[inner == f]
+      itr <- train[inner != f]
+      ite <- train[inner == f]
       for (li in seq_along(reg_learners)) {
         Z[inner == f, li] <- tryCatch(reg_learners[[li]](yy, itr, ite),
           error = function(e) rep(mean(yy[itr]), length(ite)))
@@ -1281,7 +1281,9 @@ morie_otis_aipw_superlearner <- function(df, treatment, outcome,
 
   set.seed(seed)
   folds <- sample(rep(seq_len(n_folds), length.out = n))
-  e_hat <- numeric(n); mu1_hat <- numeric(n); mu0_hat <- numeric(n)
+  e_hat <- numeric(n)
+  mu1_hat <- numeric(n)
+  mu0_hat <- numeric(n)
   for (k in seq_len(n_folds)) {
     test <- which(folds == k)
     train <- setdiff(seq_len(n), test)
@@ -1446,12 +1448,17 @@ morie_otis_psm_subclass <- function(df, treatment, outcome,
                                                length.out = n_strata + 1L)))
   strata <- cut(ps, breaks = qs, include.lowest = TRUE, labels = FALSE)
   n <- length(y)
-  est <- 0; var_acc <- 0; used_n <- 0L; dropped <- 0L
+  est <- 0
+  var_acc <- 0
+  used_n <- 0L
+  dropped <- 0L
   per <- list()
   for (s in sort(unique(strata))) {
     idx <- which(strata == s)
-    y1 <- y[idx][d[idx] == 1L]; y0 <- y[idx][d[idx] == 0L]
-    if (length(y1) < 2L || length(y0) < 2L) { dropped <- dropped + 1L; next }
+    y1 <- y[idx][d[idx] == 1L]
+    y0 <- y[idx][d[idx] == 0L]
+    if (length(y1) < 2L || length(y0) < 2L) { dropped <- dropped + 1L
+    next }
     w <- length(idx)
     est <- est + w * (mean(y1) - mean(y0))
     var_acc <- var_acc +

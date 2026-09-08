@@ -1,7 +1,27 @@
+#' inv_logit
+#'
+#' A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x Numeric; combined arithmetically in the body.
+#' @return A numeric value.
+#' @export
 inv_logit <- function(x) {
   1 / (1 + exp(-x))
 }
 
+#' inject_special_codes
+#'
+#' A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param x A vector; its length is taken and its elements indexed.
+#' @param rate Passed to \code{<=}. Defaults to \code{0.02}.
+#' @param codes Passed to \code{sample}.
+#' @return The value of \code{x}, as built in the body.
+#' @export
 inject_special_codes <- function(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 998L, 999L)) {
   if (rate <= 0) {
     return(x)
@@ -14,6 +34,14 @@ inject_special_codes <- function(x, rate = 0.02, codes = c(97L, 98L, 99L, 997L, 
   x
 }
 
+#' synthetic_required_keys
+#'
+#' A step of the synthetic implementation. Called by \code{resolve_synthetic_name_map}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @return A vector, from \code{c}.
+#' @export
 synthetic_required_keys <- function() {
   c(
     "id", "weight", "sex", "age_group", "region",
@@ -23,6 +51,16 @@ synthetic_required_keys <- function() {
   )
 }
 
+#' resolve_synthetic_name_map
+#'
+#' A step of the synthetic implementation. Called by \code{morie_generate_synthetic_data}.
+#' See the file header for the source the module follows.
+#' source it follows.
+#'
+#' @param name_map Optional; may be \code{NULL}. A vector; indexed elementwise.
+#' @param profile Passed to \code{morie_default_synthetic_name_map}.
+#' @return The value of \code{resolved}, as built in the body.
+#' @export
 resolve_synthetic_name_map <- function(name_map, profile) {
   required <- synthetic_required_keys()
 

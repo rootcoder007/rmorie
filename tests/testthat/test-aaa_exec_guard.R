@@ -17,7 +17,8 @@ test_that("MORIE_NO_EXEC kill-switch gates exec + rds", {
   withr::with_envvar(c(MORIE_NO_EXEC = "1"), {
     expect_true(.morie_exec_disabled())
     expect_error(.morie_ensure_exec_allowed("x"), "MORIE_NO_EXEC")
-    tmp <- tempfile(fileext = ".rds"); saveRDS(1:3, tmp)
+    tmp <- tempfile(fileext = ".rds")
+    saveRDS(1:3, tmp)
     expect_error(.morie_safe_readRDS(tmp), "MORIE_NO_EXEC")
   })
   withr::with_envvar(c(MORIE_NO_EXEC = ""), {
@@ -54,7 +55,8 @@ test_that(".morie_knob_status reports MORIE_NO_EXEC state", {
 })
 
 test_that("user-facing rds loaders are unreachable under MORIE_NO_EXEC", {
-  tmp <- tempfile(fileext = ".rds"); saveRDS(mtcars, tmp)
+  tmp <- tempfile(fileext = ".rds")
+  saveRDS(mtcars, tmp)
   withr::with_envvar(c(MORIE_NO_EXEC = "1"), {
     expect_error(morie_ml_load(tmp), "MORIE_NO_EXEC")
     expect_error(morie_cache_file(tmp, "t"), "MORIE_NO_EXEC")

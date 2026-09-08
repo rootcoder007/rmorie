@@ -20,7 +20,7 @@ with the 16-byte tag.}
 Decrypted plaintext as raw vector.
 }
 \description{
-Phase 3JJJ1. Inverse of \code{\link[=morie_crypto_chacha20_poly1305_encrypt]{morie_crypto_chacha20_poly1305_encrypt()}}.
+Phase 3JJJ1. Inverse of \code{morie_crypto_chacha20_poly1305_encrypt()}.
 Accepts the full ciphertext || tag buffer (concatenate as
 \code{c(ct, tag)}).
 }

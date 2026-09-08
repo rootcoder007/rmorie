@@ -19,5 +19,7 @@ Counts local maxima and minima and compares to the expectation
 \code{randtests::turning.point.test}.
 }
 \examples{
-set.seed(1); morie_turning_point_test(rnorm(60))$p.value
+if (requireNamespace("randtests", quietly = TRUE)) {
+  set.seed(1); morie_turning_point_test(rnorm(60))$p.value
+}
 }

@@ -24,7 +24,8 @@
 # shapes (`morie_match_result`, `morie_te_result`,
 # `morie_balance_result`) that downstream MRM code depends on.
 
-#' @importFrom stats glm binomial predict quantile sd var cov lm complete.cases as.formula model.matrix qnorm pnorm ks.test weighted.mean setNames
+#' @importFrom stats glm binomial predict quantile sd var cov lm complete.cases
+#' as.formula model.matrix qnorm pnorm ks.test weighted.mean setNames
 #' @importFrom utils head tail
 NULL
 
@@ -46,11 +47,36 @@ NULL
   invisible(TRUE)
 }
 
+#' @param data See Usage.
+#' @param cols See Usage.
 #' @keywords internal
 .morie_matching_drop_na <- function(data, cols) {
   data[stats::complete.cases(data[, cols, drop = FALSE]), , drop = FALSE]
 }
 
+#' @param df See Usage.
+#' @param ps See Usage.
+#' @keywords internal
+.morie_matching_distance <- function(df, ps) {
+  # MatchIt reads a numeric `distance` as the propensity score itself,
+  # so a supplied score needs no refit. Alignment mirrors the Python
+  # arm's ps.reindex(df.index): by name when the vector is named, by
+  # position when it is already one-per-retained-row. Anything else is
+  # refused -- recycling a mis-sized score silently matches on the
+  # wrong units.
+  if (is.null(ps)) return("glm")
+  ps <- as.numeric(ps)
+  if (!is.null(names(ps)) && all(rownames(df) %in% names(ps)))
+    return(unname(ps[rownames(df)]))
+  if (length(ps) == nrow(df)) return(ps)
+  stop("`ps` has length ", length(ps), " but ", nrow(df),
+       " rows remain after dropping incomplete cases; supply one score ",
+       "per retained row, or a named vector covering them.",
+       call. = FALSE)
+}
+
+#' @param p See Usage.
+#' @param eps See Usage.
 #' @keywords internal
 .morie_matching_logit <- function(p, eps = 1e-6) {
   p <- pmin(pmax(p, eps), 1 - eps)
@@ -67,6 +93,12 @@ NULL
   )
 }
 
+#' @param matched_data See Usage.
+#' @param n_treated See Usage.
+#' @param n_matched_control See Usage.
+#' @param match_pairs See Usage.
+#' @param method See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_result <- function(matched_data, n_treated, n_matched_control,
                                    match_pairs, method,
@@ -88,6 +120,7 @@ NULL
   exists(name, envir = asNamespace("rmorie"), inherits = FALSE)
 }
 
+#' @param fn See Usage.
 #' @keywords internal
 .morie_matching_need_matchit <- function(fn) {
   if (!.morie_matching_have("MatchIt")) {
@@ -98,6 +131,11 @@ NULL
   invisible(TRUE)
 }
 
+#' @param mi See Usage.
+#' @param df See Usage.
+#' @param treatment See Usage.
+#' @param method_label See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_matchit_to_result <- function(mi, df, treatment, method_label,
                                               details = list()) {
@@ -199,7 +237,7 @@ morie_matching_estimate_propensity <- function(data, treatment, covariates,
 
 #' Trim propensity scores to a fixed range
 #'
-#' Clips propensity scores to \code{[lower, upper]}.
+#' Clips propensity scores to \code{\[lower, upper\]}.
 #'
 #' @param ps Numeric vector of propensity scores.
 #' @param lower,upper Numeric clip bounds (defaults 0.01, 0.99).
@@ -274,8 +312,11 @@ morie_matching_common_support <- function(data, treatment,
 #' @param caliper Maximum logit-propensity distance for a valid match,
 #'   expressed in SD units of the logit (or \code{NULL} for no caliper).
 #' @param replace If \code{TRUE}, controls may be re-used.
-#' @param ps Optional pre-computed propensity scores
-#'   (ignored; retained for back-compat).
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model: matching is done on the score you pass, aligned
+#'   to the rows that survive the NA drop -- by name when the vector is
+#'   named, by position when it is one per retained row. A mis-sized
+#'   vector is refused rather than recycled.
 #' @param alpha Significance level (carried through to \code{details}).
 #' @return A list of class \code{morie_match_result}.
 #' @examples
@@ -298,7 +339,8 @@ morie_matching_nearest_neighbor <- function(data, treatment, covariates,
     n_neighbors = n_neighbors,
     caliper = caliper,
     replace = replace,
-    alpha = alpha
+    alpha = alpha,
+    ps = ps
   )
 }
 
@@ -447,6 +489,15 @@ morie_matching_optimal_pair <- function(data, treatment, covariates,
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_full(df, "d", c("x1", "x2"))
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE) && requireNamespace("optmatch", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_full(df, "d", c("x1", "x2"))
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_full <- function(data, treatment, covariates,
                                 ps = NULL, n_subclasses = 10L) {
@@ -459,7 +510,7 @@ morie_matching_full <- function(data, treatment, covariates,
   df <- .morie_matching_drop_na(data, c(treatment, covariates))
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
-  mi <- MatchIt::matchit(f, data = df, method = "full", distance = "glm")
+  mi <- MatchIt::matchit(f, data = df, method = "full", distance = .morie_matching_distance(df, ps))
   .morie_matching_matchit_to_result(
     mi, df, treatment,
     method_label = "full_matching (MatchIt + optmatch)",
@@ -489,6 +540,15 @@ morie_matching_full <- function(data, treatment, covariates,
 #'                  x1 = rnorm(200), x2 = rnorm(200))
 #' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_subclassify(df, "d", c("x1", "x2"), n_strata = 5)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_subclassify <- function(data, treatment, covariates,
                                        ps = NULL, n_strata = 5L) {
@@ -497,7 +557,7 @@ morie_matching_subclassify <- function(data, treatment, covariates,
   f <- stats::as.formula(paste(treatment, "~",
                                paste(covariates, collapse = " + ")))
   mi <- MatchIt::matchit(f, data = df, method = "subclass",
-                         distance = "glm", subclass = as.integer(n_strata))
+                         distance = .morie_matching_distance(df, ps), subclass = as.integer(n_strata))
   md <- MatchIt::match.data(mi)
   if (!is.null(md$distance)) md[["._ps"]] <- as.numeric(md$distance)
   md[["._stratum"]] <- as.integer(md$subclass)
@@ -567,7 +627,8 @@ morie_matching_entropy_balance <- function(data, treatment, covariates,
   # so their covariate moments match the treated moments. Weight scale
   # follows ebal::ebalance (control weights sum to n_control);
   # cross-validated against ebal + WeightIt in tests.
-  fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter)
+  fit <- .morie_entropy_balance(t_mask, X, max_iter = max_iter,
+                                tol = tol)
   if (!fit$converged) {
     warning("entropy balancing did not fully converge; ",
             "max moment imbalance = ",
@@ -644,6 +705,16 @@ morie_matching_genetic <- function(data, treatment, covariates,
 #' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
 #'                               min_ratio = 1, max_ratio = 3)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("MatchIt", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' set.seed(1)
+#' df <- data.frame(y = rnorm(200), d = rbinom(200, 1, 0.4),
+#'                  x1 = rnorm(200), x2 = rnorm(200))
+#' morie_matching_variable_ratio(df, "d", c("x1", "x2"),
+#'                               min_ratio = 1, max_ratio = 3)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_matching_variable_ratio <- function(data, treatment, covariates,
                                           min_ratio = 1L,
@@ -666,7 +737,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
     mi <- MatchIt::matchit(
       f, data = df,
       method       = "nearest",
-      distance     = "glm",
+      distance     = .morie_matching_distance(df, ps),
       ratio        = target,
       min.controls = min_ratio,
       max.controls = max_ratio,
@@ -678,7 +749,7 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
     mi <- MatchIt::matchit(
       f, data = df,
       method   = "nearest",
-      distance = "glm",
+      distance = .morie_matching_distance(df, ps),
       ratio    = max_ratio,
       caliper  = caliper,
       replace  = FALSE
@@ -710,7 +781,9 @@ morie_matching_variable_ratio <- function(data, treatment, covariates,
 #' @param treatment Binary treatment column name.
 #' @param covariates Character vector of covariates.
 #' @param balance_threshold Maximum absolute SMD tolerated (default 0.1).
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @return A list of class \code{morie_match_result}.
 #' @references Zubizarreta, J. R. (2012). Using mixed integer programming for
 #'   matching in an observational study of kidney failure after surgery.
@@ -932,6 +1005,7 @@ morie_matching_balance_table <- function(data, treatment, covariates,
 # Treatment effect estimation from matched samples
 # ---------------------------------------------------------------------------
 
+#' @param estimand See Usage.
 #' @keywords internal
 .morie_matching_te_empty <- function(estimand) {
   out <- list(
@@ -948,6 +1022,12 @@ morie_matching_balance_table <- function(data, treatment, covariates,
   out
 }
 
+#' @param estimand See Usage.
+#' @param estimate See Usage.
+#' @param se See Usage.
+#' @param n_obs See Usage.
+#' @param alpha See Usage.
+#' @param details See Usage.
 #' @keywords internal
 .morie_matching_te_result <- function(estimand, estimate, se, n_obs,
                                       alpha = 0.05, details = list()) {
@@ -1279,7 +1359,9 @@ morie_matching_rosenbaum_bounds <- function(data, outcome, treatment,
 #' @param data Data frame.
 #' @param outcome,treatment Column names.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @param n_bootstrap Number of bootstrap replications.
 #' @param seed Random seed.
 #' @param alpha Significance level.
@@ -1564,7 +1646,9 @@ morie_matching_quality <- function(unmatched_data, matched_data,
 #' @param data Data frame.
 #' @param treatment Binary treatment column.
 #' @param covariates Character vector of covariates.
-#' @param ps Optional pre-computed propensity scores.
+#' @param ps Optional propensity scores. When supplied they REPLACE
+#'   the fitted model and become the matching distance directly,
+#'   aligned to the rows that survive the NA drop.
 #' @return A list with \code{ps_summary} (per-group quantiles),
 #'   \code{overlap_region}, \code{n_off_support}, \code{pct_off_support},
 #'   and \code{effective_sample_size}.

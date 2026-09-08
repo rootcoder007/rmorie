@@ -39,6 +39,11 @@ morie_tps_sdb_reaction_diffusion(
 \item{fig_dir}{Directory to write the PNG into; \code{NULL} (the
 default) skips writing and says so in the result.
 (seed / A(x,t) / rho(x,t)) to the manifest figure directory.}
+
+
+
+
+
 }
 \value{
 A \code{morie_rich_result} list with the steady-state

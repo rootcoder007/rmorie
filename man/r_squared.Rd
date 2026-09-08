@@ -8,6 +8,7 @@ r_squared(x, y)
 }
 \arguments{
 \item{x, y}{Numeric vectors (NA dropped).}
+
 }
 \value{
 A \code{morie_effect_size}.
@@ -17,6 +18,7 @@ Coefficient of determination R^2
 }
 \examples{
 set.seed(1)
-x <- rnorm(30); y <- x + rnorm(30)
+x <- rnorm(30)
+y <- x + rnorm(30)
 r_squared(x, y)
 }

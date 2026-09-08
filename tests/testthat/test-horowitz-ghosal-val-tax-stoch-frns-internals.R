@@ -11,7 +11,8 @@ test_that(".hrz_silverman returns 1.0 on n < 2 (degenerate fallback)", {
 })
 
 test_that(".hrz_silverman returns positive bandwidth on a sample", {
-  set.seed(1L); x <- stats::rnorm(100L)
+  set.seed(1L)
+  x <- stats::rnorm(100L)
   h <- rmorie:::.hrz_silverman(x)
   expect_true(is.numeric(h) && h > 0)
 })
@@ -25,8 +26,10 @@ test_that(".hrz_gauss_kernel peaks at 1/sqrt(2*pi) at u=0", {
 })
 
 test_that(".hrz_nw_loo returns LOO-smoothed vector of length n", {
-  set.seed(2L); n <- 30L
-  z <- stats::rnorm(n); y <- z + stats::rnorm(n, sd = 0.1)
+  set.seed(2L)
+  n <- 30L
+  z <- stats::rnorm(n)
+  y <- z + stats::rnorm(n, sd = 0.1)
   out <- rmorie:::.hrz_nw_loo(z, y, h = 0.5)
   expect_length(out, n)
   expect_true(all(is.finite(out)))
@@ -39,7 +42,8 @@ test_that(".hrz_hermite returns n x J orthonormalised basis matrix", {
 })
 
 test_that(".hrz_qreg_irls returns a coef vector of length p", {
-  set.seed(3L); n <- 50L
+  set.seed(3L)
+  n <- 50L
   X <- cbind(1, stats::rnorm(n))
   y <- 1.0 + 2.0 * X[, 2] + stats::rnorm(n, sd = 0.3)
   b <- rmorie:::.hrz_qreg_irls(X, y, tau = 0.5)
@@ -55,7 +59,8 @@ test_that(".gh_have returns logical", {
 })
 
 test_that(".gh_pairwise_sq returns ||a_i - a_j||^2 symmetric matrix", {
-  set.seed(4L); a <- matrix(stats::rnorm(20L), 5L, 4L)
+  set.seed(4L)
+  a <- matrix(stats::rnorm(20L), 5L, 4L)
   D <- rmorie:::.gh_pairwise_sq(a)
   expect_true(is.matrix(D))
   expect_equal(dim(D), c(5L, 5L))
@@ -107,7 +112,8 @@ test_that(".val_brier matches mean squared deviation", {
 })
 
 test_that(".val_score dispatches scoring -> metric", {
-  y <- c(0, 0, 1, 1); p <- c(0.1, 0.2, 0.8, 0.9)
+  y <- c(0, 0, 1, 1)
+  p <- c(0.1, 0.2, 0.8, 0.9)
   expect_equal(rmorie:::.val_score("roc_auc", y, p), 1)
   expect_equal(rmorie:::.val_score("auc",     y, p), 1)
   expect_equal(rmorie:::.val_score("accuracy", y, p), 1)

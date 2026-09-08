@@ -33,6 +33,8 @@ mrm_otis_mandela_spectrum(
 
 \item{c11_data}{Optional c11 aggregate frame for the
 \code{c11_aggregate} denominator.}
+
+
 }
 \value{
 Tidy long-format data.frame with one row per

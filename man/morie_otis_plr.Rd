@@ -24,6 +24,8 @@ morie_otis_plr(
 \item{n_rep}{Repetition count for median aggregation. Default 1.}
 
 \item{seed}{RNG seed. Default 123.}
+
+
 }
 \value{
 An OTIS causal-estimate list (same shape as

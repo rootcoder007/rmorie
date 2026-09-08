@@ -143,7 +143,7 @@ mrm_anova_oneway <- function(data, response_col, group_col, alpha = 0.05) {
 #' @return Named list with main_effects, interaction_effects,
 #'   half_normal_coords (data.frame), n, k, interpretation.
 #' @examples
-#' # 2^3 full factorial: 8 runs, factors A, B, C in {-1, +1}.
+#' # 2^3 full factorial: 8 runs, factors A, B, C `in {-1, +1}`.
 #' set.seed(2026)
 #' lvl <- c(-1, 1)
 #' df <- expand.grid(A = lvl, B = lvl, C = lvl)

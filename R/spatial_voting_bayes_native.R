@@ -16,7 +16,8 @@
 .morie_sv_bayes_am <- function(Z, n_samples = 1000L, burn_in = 200L,
                                prior_sd = 10.0) {
   Z <- as.matrix(Z)
-  n <- nrow(Z); m <- ncol(Z)
+  n <- nrow(Z)
+  m <- ncol(Z)
   obs <- is.finite(Z)
   zeta <- as.numeric(scale(colMeans(Z, na.rm = TRUE)))
   a <- rowMeans(Z, na.rm = TRUE)
@@ -32,7 +33,8 @@
       V <- solve(crossprod(Xr) / sigma2 + diag(tau0, 2))
       mu <- V %*% (crossprod(Xr, Z[i, j]) / sigma2)
       ab <- as.numeric(mu + t(chol(V)) %*% stats::rnorm(2))
-      a[i] <- ab[1]; b[i] <- ab[2]
+      a[i] <- ab[1]
+      b[i] <- ab[2]
     }
     for (j in seq_len(m)) {
       i <- which(obs[, j])
@@ -54,6 +56,47 @@
        engine = "native Gibbs (Aldrich-McKelvey)")
 }
 
+# --- classical MDS (Torgerson-Gower), native ---------------------------------
+#' Internal helper: classical multidimensional scaling
+#'
+#' Torgerson-Gower classical scaling. Double-centre the squared distance
+#' matrix to recover the Gram matrix, then take its leading eigenvectors:
+#'
+#'   B = -1/2 J D^2 J,  J = I - (1/m) 1 1'
+#'   B = V L V',  X = V_k L_k^(1/2)
+#'
+#' Native replacement for `stats::cmdscale`. Non-positive eigenvalues are
+#' clamped to zero, which is what happens whenever D is not Euclidean.
+#'
+#' @param D Distance matrix (m by m), symmetric with a zero diagonal.
+#' @param k Number of dimensions to return.
+#' @return An m by k matrix of coordinates, columns ordered by decreasing
+#'   eigenvalue.
+#' @references Torgerson (1952) Psychometrika 17:401-419; Gower (1966)
+#'   Biometrika 53:325-338.
+#' @noRd
+.morie_sv_cmdscale <- function(D, k = 2L) {
+  D <- as.matrix(D)
+  m <- nrow(D)
+  if (m != ncol(D)) stop("`D` must be square", call. = FALSE)
+  k <- as.integer(k)
+  if (k < 1L || k >= m) {
+    stop("`k` must satisfy 1 <= k < nrow(D)", call. = FALSE)
+  }
+  D2 <- D^2
+  # double-centring: B = -1/2 J D^2 J, done via row/column means so no
+  # m by m projection matrix is ever formed
+  rm_ <- rowMeans(D2)
+  gm <- mean(D2)
+  B <- -0.5 * (D2 - outer(rm_, rep(1, m)) - outer(rep(1, m), rm_) + gm)
+  B <- (B + t(B)) / 2                    # enforce symmetry against drift
+  e <- eigen(B, symmetric = TRUE)
+  lam <- pmax(e$values[seq_len(k)], 0)   # clamp: D need not be Euclidean
+  X <- e$vectors[, seq_len(k), drop = FALSE] %*% diag(sqrt(lam), nrow = k)
+  dimnames(X) <- list(rownames(D), NULL)
+  X
+}
+
 # --- Bayesian MDS (Oh & Raftery 2001 lognormal distances) -------------------
 #' Internal helper: native Bayesian MDS sampler
 #' @noRd
@@ -66,12 +109,13 @@
     stop("morie_spatial_voting_bayesian_mds: D must contain positive ",
          "distances.", call. = FALSE)
   }
-  X <- stats::cmdscale(D, k = n_dims)
+  X <- .morie_sv_cmdscale(D, k = n_dims)
   if (!is.matrix(X)) X <- matrix(X, ncol = n_dims)
   sigma <- sigma_init
   step <- 0.05 * stats::sd(X)
   keep <- array(0, c(n_samples, m, n_dims))
-  acc <- 0L; tot <- 0L
+  acc <- 0L
+  tot <- 0L
   ll <- function(X, sigma) {
     delta <- as.matrix(stats::dist(X))
     dl <- delta[lower.tri(delta)]
@@ -89,14 +133,17 @@
         sum(stats::dnorm(X[i, ], 0, 10, log = TRUE))
       tot <- tot + 1L
       if (log(stats::runif(1)) < prop - cur) {
-        X <- Xp; cur <- prop; acc <- acc + 1L
+        X <- Xp
+        cur <- prop
+        acc <- acc + 1L
       }
     }
     # sigma via random-walk on log scale
     sp <- sigma * exp(stats::rnorm(1, 0, 0.1))
     lp <- ll(X, sp) - log(sp)
     if (log(stats::runif(1)) < lp - (cur - log(sigma))) {
-      sigma <- sp; cur <- ll(X, sigma)
+      sigma <- sp
+      cur <- ll(X, sigma)
     }
     if (it > burn_in) keep[it - burn_in, , ] <- X
   }
@@ -111,7 +158,8 @@
 .morie_sv_bayes_unfold <- function(P, n_dims = 2L, n_samples = 1000L,
                                    burn_in = 200L) {
   P <- as.matrix(P)
-  n <- nrow(P); m <- ncol(P)
+  n <- nrow(P)
+  m <- ncol(P)
   Pz <- scale(P)
   Pz[!is.finite(Pz)] <- 0
   # init from double-centred SVD
@@ -129,22 +177,29 @@
   }
   cur <- ll(Xi, Zj, sigma)
   keepZ <- array(0, c(n_samples, m, n_dims))
-  acc <- 0L; tot <- 0L
+  acc <- 0L
+  tot <- 0L
   for (it in seq_len(burn_in + n_samples)) {
     for (j in seq_len(m)) {
-      Zp <- Zj; Zp[j, ] <- Zj[j, ] + stats::rnorm(n_dims, 0, step)
+      Zp <- Zj
+      Zp[j, ] <- Zj[j, ] + stats::rnorm(n_dims, 0, step)
       prop <- ll(Xi, Zp, sigma)
       tot <- tot + 1L
       if (log(stats::runif(1)) < prop - cur) {
-        Zj <- Zp; cur <- prop; acc <- acc + 1L
+        Zj <- Zp
+        cur <- prop
+        acc <- acc + 1L
       }
     }
     for (i in seq_len(n)) {
-      Xp <- Xi; Xp[i, ] <- Xi[i, ] + stats::rnorm(n_dims, 0, step)
+      Xp <- Xi
+      Xp[i, ] <- Xi[i, ] + stats::rnorm(n_dims, 0, step)
       prop <- ll(Xp, Zj, sigma)
       tot <- tot + 1L
       if (log(stats::runif(1)) < prop - cur) {
-        Xi <- Xp; cur <- prop; acc <- acc + 1L
+        Xi <- Xp
+        cur <- prop
+        acc <- acc + 1L
       }
     }
     if (it > burn_in) keepZ[it - burn_in, , ] <- Zj
@@ -161,12 +216,14 @@
 .morie_sv_bayes_cjr <- function(votes, n_samples = 1000L,
                                 burn_in = 200L) {
   Y <- as.matrix(votes)
-  n <- nrow(Y); m <- ncol(Y)
+  n <- nrow(Y)
+  m <- ncol(Y)
   obs <- is.finite(Y)
   Y01 <- (Y > 0) * 1L
   x <- as.numeric(scale(rowMeans(Y01, na.rm = TRUE)))
   x[!is.finite(x)] <- 0
-  alpha <- rep(0, m); beta <- rep(1, m)
+  alpha <- rep(0, m)
+  beta <- rep(1, m)
   keep_x <- matrix(0, n_samples, n)
   rtnorm <- function(n, mu, lower) {
     # truncated N(mu,1) on [lower, Inf) via inverse CDF
@@ -189,7 +246,8 @@
       V <- solve(crossprod(Xr) + diag(0.04, 2))
       mu_j <- V %*% crossprod(Xr, Ystar[i, j])
       ab <- as.numeric(mu_j + t(chol(V)) %*% stats::rnorm(2))
-      alpha[j] <- ab[1]; beta[j] <- ab[2]
+      alpha[j] <- ab[1]
+      beta[j] <- ab[2]
     }
     # ideal points x_i | items
     for (i in seq_len(n)) {
@@ -214,7 +272,8 @@
 .morie_sv_bayes_ordinal <- function(votes, n_samples = 1000L,
                                     burn_in = 200L) {
   Y <- as.matrix(votes)
-  n <- nrow(Y); m <- ncol(Y)
+  n <- nrow(Y)
+  m <- ncol(Y)
   obs <- is.finite(Y)
   K <- max(Y[obs])
   if (K < 2L) stop("ordinal IRT needs at least two categories.",
@@ -224,10 +283,12 @@
   cuts <- cuts - cuts[1]
   x <- as.numeric(scale(rowMeans(Y, na.rm = TRUE)))
   x[!is.finite(x)] <- 0
-  alpha <- rep(0, m); beta <- rep(1, m)
+  alpha <- rep(0, m)
+  beta <- rep(1, m)
   keep_x <- matrix(0, n_samples, n)
   rtnorm_ab <- function(mu, lo, hi) {
-    p_lo <- stats::pnorm(lo - mu); p_hi <- stats::pnorm(hi - mu)
+    p_lo <- stats::pnorm(lo - mu)
+    p_hi <- stats::pnorm(hi - mu)
     stats::qnorm(p_lo + stats::runif(length(mu)) *
                    pmax(p_hi - p_lo, 1e-12)) + mu
   }
@@ -246,7 +307,8 @@
       V <- solve(crossprod(Xr) + diag(0.04, 2))
       mu_j <- V %*% crossprod(Xr, Ystar[i, j])
       ab <- as.numeric(mu_j + t(chol(V)) %*% stats::rnorm(2))
-      alpha[j] <- ab[1]; beta[j] <- ab[2]
+      alpha[j] <- ab[1]
+      beta[j] <- ab[2]
     }
     for (i in seq_len(n)) {
       j <- which(obs[i, ])

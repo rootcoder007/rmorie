@@ -2,7 +2,7 @@
 % Please edit documentation in R/datasets.R
 \name{morie_datasets_siu_report_fields}
 \alias{morie_datasets_siu_report_fields}
-\title{Extract structured fields from an SIU director's-report text or URL.}
+\title{Extract structured fields from an SIU director's-report text or URL}
 \usage{
 morie_datasets_siu_report_fields(text_or_url)
 }
@@ -15,7 +15,7 @@ A named list with fields \code{report_id}, \code{incident_date},
 \code{conclusion}, \code{sections}.
 }
 \description{
-Extract structured fields from an SIU director's-report text or URL.
+Extract structured fields from an SIU director's-report text or URL
 }
 \examples{
 text <- paste0(

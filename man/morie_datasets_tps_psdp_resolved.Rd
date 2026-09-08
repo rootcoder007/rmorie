@@ -15,7 +15,7 @@ morie_datasets_tps_psdp_resolved(
 }
 \arguments{
 \item{layer_key}{One of the PSDP \code{layer_key}s from
-\code{\link[=morie_tps_psdp_layers]{morie_tps_psdp_layers()}} (e.g., \code{"assault"}, \code{"autotheft"},
+\code{morie_tps_psdp_layers()} (e.g., \code{"assault"}, \code{"autotheft"},
 \code{"homicides"}).}
 
 \item{year}{Optional year filter passed through to the underlying
@@ -41,9 +41,9 @@ resolver columns.
 Phase 3CCC3. Pulls a TPS PSDP crime dataset
 (\code{morie_datasets_tps_assault()} etc.) and left-joins its native
 DIVISION + HOOD_158 + HOOD_140 columns against the included
-boundary metadata loaders (\code{\link[=morie_datasets_tps_police_divisions]{morie_datasets_tps_police_divisions()}},
-\code{\link[=morie_to_neighbourhoods]{morie_to_neighbourhoods()}} 158 + 140 + NIA flags) and the PSDP
-layer registry (\code{\link[=morie_tps_psdp_layers]{morie_tps_psdp_layers()}}).
+boundary metadata loaders (\code{morie_datasets_tps_police_divisions()},
+\code{morie_to_neighbourhoods()} 158 + 140 + NIA flags) and the PSDP
+layer registry (\code{morie_tps_psdp_layers()}).
 }
 \details{
 Per-row PSDP datasets carry these ID columns natively:

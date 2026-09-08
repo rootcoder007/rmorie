@@ -24,6 +24,10 @@ morie_otis_rplace(
 \code{NULL} = all.}
 
 \item{id_col, age_col, region_col, year_col, gender_col}{Column names.}
+
+
+
+
 }
 \value{
 \code{morie_otis_result} list.
@@ -34,8 +38,10 @@ proportion matrix of unique-individual placements for one fiscal
 year, optionally filtered by gender.
 }
 \examples{
-\donttest{
+if (requireNamespace("readr", quietly = TRUE)) {
+  \donttest{
   df <- morie_otis_load()
-  morie_otis_rplace(df, year = 2024)
+    morie_otis_rplace(df, year = 2024)
+  }
 }
 }

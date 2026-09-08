@@ -12,14 +12,14 @@ morie_datasets_otis_a01(offline = TRUE, ...)
 fetches the live CKAN dataset.}
 
 \item{...}{Forwarded to
-\code{\link[=morie_datasets_otis_a01_restrictive_confinement]{morie_datasets_otis_a01_restrictive_confinement()}}.}
+\code{morie_datasets_otis_a01_restrictive_confinement()}.}
 }
 \value{
 A \code{data.frame}.
 }
 \description{
 Thin compatibility shim that delegates to
-\code{\link[=morie_datasets_otis_a01_restrictive_confinement]{morie_datasets_otis_a01_restrictive_confinement()}}. The OTIS A01
+\code{morie_datasets_otis_a01_restrictive_confinement()}. The OTIS A01
 dataset is published openly at
 \url{https://data.ontario.ca/dataset/data-on-inmates-in-ontario}
 (Ontario Solicitor General; Open Government Licence -- Ontario,
@@ -34,6 +34,6 @@ df <- morie_datasets_otis_a01(offline = TRUE)
 head(df)
 }
 \seealso{
-\code{\link[=morie_datasets_otis_a01_restrictive_confinement]{morie_datasets_otis_a01_restrictive_confinement()}},
-\code{\link[=morie_datasets_load_by_key]{morie_datasets_load_by_key()}}.
+\code{morie_datasets_otis_a01_restrictive_confinement()},
+\code{morie_datasets_load_by_key()}.
 }

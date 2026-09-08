@@ -96,7 +96,7 @@
 #' @param progress Logical; print progress messages.
 #' @return Path to the written \code{SIU.csv}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Corpus-first: with rmoriedata installed this materializes the
 #' # panel-reviewed corpus in seconds; a live sweep of the SIU site
 #' # requires an explicit opt-in via
@@ -449,7 +449,7 @@ morie_fetch_siu <- function(cache_dir = file.path(tempdir(), "morie", "siu"),
   out_path
 }
 
-#' SIU drid → case_number → language index
+#' SIU drid ? case_number ? language index
 #'
 #' Returns the shipped drid manifest as a data frame -- one row per
 #' director's-report id morie has verified, with the parsed case
@@ -794,7 +794,7 @@ morie_siu_refresh_manifest <- function(
 ) {
   # Manifest refresh sweeps a generous range so the resulting snapshot
   # stays useful for several months without re-probing. Default is
-  # max(live-discovery + margin, 6000) — the live max currently sits
+  # max(live-discovery + margin, 6000) -- the live max currently sits
   # around drid ~5100, and 6000 gives headroom for ~one year of new
   # reports at the SIU's historical publish cadence.
   if (is.null(max_drid)) max_drid <- max(.siu_discover_max_drid(), 6000L)
@@ -913,7 +913,7 @@ morie_siu_refresh_manifest <- function(
 #'   \code{report_html}, \code{news_html}, \code{report_text}
 #'   (HTML-stripped plain text of the report) and \code{news_text}.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' a <- morie_siu_audit_case(
@@ -922,6 +922,18 @@ morie_siu_refresh_manifest <- function(
 #' )
 #' cat(substr(a$report_text, 1, 1000), "\n")
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Materialize the corpus cache first (fast via rmoriedata):
+#' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
+#' a <- morie_siu_audit_case(
+#'   "17-OVI-201",
+#'   cache_dir = file.path(tempdir(), "morie", "siu")
+#' )
+#' cat(substr(a$report_text, 1, 1000), "\n")
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_case <- function(case_number,
                                  cache_dir = file.path(tempdir(), "morie", "siu"),
@@ -1069,7 +1081,7 @@ morie_siu_audit_case <- function(case_number,
 #'   parser and external disagree, the \code{html_excerpt} is the
 #'   tie-breaker.
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
-#' \donttest{
+#' \dontrun{
 #' # Materialize the corpus cache first (fast via rmoriedata):
 #' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
 #' # Caller supplies their own external table; nothing about the
@@ -1083,6 +1095,23 @@ morie_siu_audit_case <- function(case_number,
 #' )
 #' subset(cmp, !agree)
 #' }
+#' @examples
+#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontrun{
+#' # Materialize the corpus cache first (fast via rmoriedata):
+#' morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
+#' # Caller supplies their own external table; nothing about the
+#' # mapping or the file format is canonical to morie.
+#' external <- data.frame(case_id = "17-OVI-201", officers = 1L)
+#' cmp <- morie_siu_compare(
+#'   "17-OVI-201",
+#'   external = external,
+#'   field_map = list(officers = "number_of_officers_involved"),
+#'   external_case_col = "case_id"
+#' )
+#' subset(cmp, !agree)
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_compare <- function(case_number, external,
                               field_map = NULL,
@@ -1620,7 +1649,7 @@ morie_siu_compare <- function(case_number, external,
 # Session-scoped mutable state for SIU helpers (server-list cache).
 .morie_siu_state <- new.env(parent = emptyenv())
 
-#' Resolve an SIU case number to its report drid.
+#' Resolve an SIU case number to its report drid
 #'
 #' Manifest first (fast, offline); when the case is newer than the
 #' bundled manifest (or fell into an over-probed placeholder drid), a
@@ -1761,6 +1790,19 @@ morie_siu_compare <- function(case_number, external,
 #'   field_map = setNames(as.list(names(r)), names(r)),
 #'   external_case_col = "case_number"
 #' )
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+#' # Local Ollama is the default provider (free, no key); Gemini and
+#' # other cloud providers are optional fallbacks via model=.
+#' r <- morie_siu_llm_extract("17-OVI-201", model = "ollama")
+#' # Diff parser vs LLM against the HTML:
+#' morie_siu_compare(
+#'   "17-OVI-201",
+#'   external = r,
+#'   field_map = setNames(as.list(names(r)), names(r)),
+#'   external_case_col = "case_number"
+#' )
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_llm_extract <- function(case_number,
                                   model = c("ollama", "gemini"),
@@ -1879,6 +1921,15 @@ morie_siu_llm_extract <- function(case_number,
 #' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
 #' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
 #' }
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \donttest{
+#' # Local Ollama is the default provider (free, no key); the report
+#' # HTML is fetched live, so try() keeps offline checks graceful.
+#' a <- try(morie_siu_anomaly_check("17-OVI-201", model = "ollama"))
+#' if (!inherits(a, "try-error")) subset(a, verdict == "disagree")
+#' }
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_anomaly_check <- function(case_number,
                                     model = c("ollama",
@@ -2048,7 +2099,7 @@ morie_siu_anomaly_check <- function(case_number,
 #'   string of \code{field:reason} pairs). Ordered descending by
 #'   \code{issues_count}.
 #' @examples
-#' \donttest{
+#' \dontrun{
 #' # Corpus-first fetch is fast when rmoriedata is installed.
 #' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "siu_sanity"))
 #' df <- utils::read.csv(csv, colClasses = "character")
@@ -2239,6 +2290,21 @@ morie_siu_sanity_check <- function(df) {
 #' # Translate every non-English row to English:
 #' morie_siu_translate(target_lang = "en",
 #'                     cache_dir = file.path(tempdir(), "morie", "siu"))
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama() && requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' # Uses the local Ollama server (OLLAMA_HOST, default
+#' # http://localhost:11434; model via OLLAMA_MODEL, e.g.
+#' # translategemma:latest). Corpus cache first:
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
+#' # Translate every non-English row to English:
+#' morie_siu_translate(target_lang = "en",
+#'                     cache_dir = file.path(tempdir(), "morie", "siu"))
+#' \dontshow{\}) # examplesIf}
+#' \dontrun{
+#' # Needs the SIU HTML cache plus a configured LLM provider (e.g. local
+#' # ollama); translates the French-only directors reports field-by-field.
+#' res <- morie_siu_translate_fr_to_en(case_numbers = "26-OCI-168")
+#' }
 #' @export
 morie_siu_translate <- function(
   target_lang = NULL, source_lang = NULL,
@@ -2500,6 +2566,19 @@ morie_siu_translate_fr_to_en <- function(
 #' head(audit, 8)
 #' # See concrete disagreements for the worst field:
 #' attr(audit, "examples")[[audit$field[1L]]]
+#' @examples
+#' \dontshow{if (morie_llm_probe_ollama()) withAutoprint(\{ # examplesIf}
+#' # Uses the local Ollama server (OLLAMA_HOST / OLLAMA_MODEL).
+#' csv <- morie_fetch_siu(cache_dir = file.path(tempdir(), "morie", "siu"))
+#' df <- utils::read.csv(csv, colClasses = "character")
+#' # 4 cases keeps the audit example fast; scale up for a real audit.
+#' sample <- utils::head(df$case_number[nzchar(df$case_number)], 4L)
+#' audit <- morie_siu_audit_columns(sample, model = "ollama")
+#' # Worst 8 fields, ripe for parser fixes:
+#' head(audit, 8)
+#' # See concrete disagreements for the worst field:
+#' attr(audit, "examples")[[audit$field[1L]]]
+#' \dontshow{\}) # examplesIf}
 #' @export
 morie_siu_audit_columns <- function(case_numbers, model = c("ollama", "gemini"),
                                     cache_dir = file.path(tempdir(), "morie", "siu"),

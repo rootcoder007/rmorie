@@ -32,11 +32,11 @@ randomisation-inference around the cutoff window
 }
 \examples{
 \donttest{
-  if (requireNamespace("rdlocrand", quietly = TRUE)) {
-    set.seed(1)
-    R <- runif(200, -1, 1)
-    Y <- 0.5 * R + (R >= 0) * 0.3 + rnorm(200, sd = 0.5)
-    morie_rdd_local_randinf(Y, R, wl = -0.1, wr = 0.1)
-  }
+if (requireNamespace("rdlocrand", quietly = TRUE)) {
+  set.seed(1)
+  R <- runif(200, -1, 1)
+  Y <- 0.5 * R + (R >= 0) * 0.3 + rnorm(200, sd = 0.5)
+  morie_rdd_local_randinf(Y, R, wl = -0.1, wr = 0.1)
+}
 }
 }

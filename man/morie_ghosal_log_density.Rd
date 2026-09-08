@@ -2,7 +2,7 @@
 % Please edit documentation in R/ghlgd.R
 \name{morie_ghosal_log_density}
 \alias{morie_ghosal_log_density}
-\title{Log-spline density estimator (Stone 1990, Ghosal Ch 8).}
+\title{Log-spline density estimator (Stone 1990, Ghosal Ch 8)}
 \usage{
 morie_ghosal_log_density(x, K = 5, grid = NULL)
 }
@@ -17,7 +17,7 @@ morie_ghosal_log_density(x, K = 5, grid = NULL)
 Named list with estimate, theta, log_lik, grid, log_density, K, n, method.
 }
 \description{
-Log-spline density estimator (Stone 1990, Ghosal Ch 8).
+Log-spline density estimator (Stone 1990, Ghosal Ch 8)
 }
 \examples{
 morie_ghosal_log_density(x = rnorm(50))

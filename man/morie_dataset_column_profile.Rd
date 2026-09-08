@@ -2,7 +2,7 @@
 % Please edit documentation in R/dataset.R
 \name{morie_dataset_column_profile}
 \alias{morie_dataset_column_profile}
-\title{Build a single-column profile record.}
+\title{Build a single-column profile record}
 \usage{
 morie_dataset_column_profile(
   series,
@@ -27,7 +27,7 @@ Named list with fields \code{name}, \code{dtype}, \code{level}, \code{n_unique},
 \code{summary_stats}.
 }
 \description{
-Build a single-column profile record.
+Build a single-column profile record
 }
 \examples{
 cp <- morie_dataset_column_profile(c(1, 2, 3, NA), "year_obs")

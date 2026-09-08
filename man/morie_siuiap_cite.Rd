@@ -2,7 +2,7 @@
 % Please edit documentation in R/siuiap.R
 \name{morie_siuiap_cite}
 \alias{morie_siuiap_cite}
-\title{Build a citation string for an SIU IAP / CRIMSL / affidavit entry.}
+\title{Build a citation string for an SIU IAP / CRIMSL / affidavit entry}
 \usage{
 morie_siuiap_cite(report_id = "final_2024")
 }

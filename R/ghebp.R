@@ -9,7 +9,7 @@
   -(K_n * log(a) + lgamma(a) - lgamma(a + n))
 }
 
-#' Empirical-Bayes alpha MLE for a DP, given the observed K_n.
+#' Empirical-Bayes alpha MLE for a DP, given the observed K_n
 #'
 #' @param x Numeric data vector.
 #' @param alpha_grid Optional numeric grid of alpha values to maximise over.

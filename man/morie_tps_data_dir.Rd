@@ -2,7 +2,7 @@
 % Please edit documentation in R/tps_datasets.R
 \name{morie_tps_data_dir}
 \alias{morie_tps_data_dir}
-\title{Default project data directory for TPS open data.}
+\title{Default project data directory for TPS open data}
 \usage{
 morie_tps_data_dir()
 }
@@ -12,7 +12,7 @@ A logical scalar.
 \description{
 Resolves to \verb{<repo>/data/datasets/TPS/} when \code{morie} is loaded out
 of a source checkout. Users can override per-call via the \code{path}
-argument of \code{\link[=morie_tps_load_dataset]{morie_tps_load_dataset()}}.
+argument of \code{morie_tps_load_dataset()}.
 }
 \examples{
 morie_tps_data_dir()

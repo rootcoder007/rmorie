@@ -2,7 +2,7 @@
 % Please edit documentation in R/cpads.R
 \name{morie_cpads_infer_file_format}
 \alias{morie_cpads_infer_file_format}
-\title{Infer the on-disk file format for a CPADS file path.}
+\title{Infer the on-disk file format for a CPADS file path}
 \usage{
 morie_cpads_infer_file_format(path)
 }

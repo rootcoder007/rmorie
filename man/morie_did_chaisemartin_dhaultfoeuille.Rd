@@ -26,6 +26,9 @@ error (0 = point estimate only, SE is \code{NA}).}
 \item{seed}{RNG seed.}
 
 \item{alpha}{Significance level.}
+
+
+
 }
 \value{
 A result list; see \code{\link{morie_did_2x2}}.
@@ -45,7 +48,8 @@ df$treat_time <- ifelse(df$unit <= 30, 4, Inf)
 df$d <- as.integer(df$time >= df$treat_time)
 df$y <- 0.5 * df$time + 1.5 * df$d + rnorm(nrow(df), sd = 0.5)
 res <- morie_did_chaisemartin_dhaultfoeuille(df, "y", "d", "unit", "time",
-                                             n_bootstrap = 50L, seed = 9)
+  n_bootstrap = 50L, seed = 9
+)
 res$estimate
 }
 \references{

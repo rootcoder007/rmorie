@@ -2,7 +2,7 @@
 % Please edit documentation in R/otis_causal.R
 \name{morie_otis_aipw_ate}
 \alias{morie_otis_aipw_ate}
-\title{Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances.}
+\title{Doubly-robust (AIPW) ATE on OTIS data via cross-fitted nuisances}
 \usage{
 morie_otis_aipw_ate(
   df,

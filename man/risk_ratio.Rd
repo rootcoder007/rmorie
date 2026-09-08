@@ -11,6 +11,9 @@ risk_ratio(a, b, c, d, confidence = 0.95)
 b = exposed without, c = unexposed with outcome, d = unexposed without.}
 
 \item{confidence}{Confidence level. Default 0.95.}
+
+
+
 }
 \value{
 A \code{morie_effect_size}.
@@ -21,12 +24,14 @@ Risk ratio (relative risk) for a 2x2 table
 \examples{
 # Relative risk: risk in exposed / risk in unexposed.
 res <- risk_ratio(20, 80, 10, 90)
-res$estimate                 # (20/100) / (10/100) = 2
+res$estimate # (20/100) / (10/100) = 2
 c(lower = res$ci_lower, upper = res$ci_upper)
 
 # RR and OR agree for rare outcomes, diverge for common ones:
-c(RR = risk_ratio(20, 80, 10, 90)$estimate,
-  OR = odds_ratio(20, 80, 10, 90)$estimate)
+c(
+  RR = risk_ratio(20, 80, 10, 90)$estimate,
+  OR = odds_ratio(20, 80, 10, 90)$estimate
+)
 
 risk_ratio(20, 80, 10, 90, confidence = 0.90)$ci_upper
 }

@@ -2,7 +2,7 @@
 % Please edit documentation in R/variable_taxonomy.R
 \name{morie_classify_variable}
 \alias{morie_classify_variable}
-\title{Classify one variable.}
+\title{Classify one variable}
 \usage{
 morie_classify_variable(
   col_name,
@@ -27,7 +27,7 @@ A named list with classes \code{morie_variable_taxonomy} /
 \code{list}.
 }
 \description{
-Classify one variable.
+Classify one variable
 }
 \examples{
 t <- morie_classify_variable("RecordID", "string", NULL, "any")

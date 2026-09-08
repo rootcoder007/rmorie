@@ -13,8 +13,10 @@
 #' These RE standards are completed by the morie_lm model object and its
 #' methods (this file) and tested in test-srr-standards-RE-full.R.
 #'
-#' @srrstats {RE2.2} morie_lm(na_predictor=, na_response=) control predictor and response missing values separately.
-#' @srrstats {RE2.3} morie_lm(center=, scale=) center/scale predictors, back-transforming coefficients; effect documented + tested.
+#' @srrstats {RE2.2} morie_lm(na_predictor=, na_response=) control predictor and response
+#' missing values separately.
+#' @srrstats {RE2.3} morie_lm(center=, scale=) center/scale predictors, back-transforming
+#' coefficients; effect documented + tested.
 #' @srrstats {RE2.4b} morie_lm() detects perfect predictor-response collinearity and errors.
 #' @srrstats {RE4.1} morie_lm(nofit=TRUE) returns an unfitted model specification.
 #' @srrstats {RE4.7} morie_lm objects carry convergence status + iteration count for glm fits.
@@ -22,8 +24,10 @@
 #' @srrstats {RE4.9} fitted (modelled) response values are returned via fitted.morie_lm().
 #' @srrstats {RE4.13} predictor names/metadata are returned (predictors).
 #' @srrstats {RE4.14} predict.morie_lm(interval=) returns confidence/prediction interval errors.
-#' @srrstats {RE4.15} prediction intervals are demonstrated wider than confidence intervals (tested).
-#' @srrstats {RE4.16} predict.morie_lm() accepts new data with new predictor values, applying fit-time transforms.
+#' @srrstats {RE4.15} prediction intervals are demonstrated wider than confidence
+#' intervals (tested).
+#' @srrstats {RE4.16} predict.morie_lm() accepts new data with new predictor values,
+#' applying fit-time transforms.
 #' @srrstats {RE4.18} summary.morie_lm() provides a summary method beyond print.
 #' @srrstats {RE5.0} morie_lm_scaling() measures the fit's scaling with data size.
 #' @srrstats {RE6.0} plot.morie_lm() is the default diagnostic plot method.
@@ -32,7 +36,8 @@
 #' @srrstats {RE6.3} forecasts (predictions with intervals) can be generated and visualised.
 #' @srrstats {RE7.2} case/row names are retained on the model object (case_names) and tested.
 #' @srrstats {RE7.4} prediction-interval forecast errors are tested to be finite and positive.
-#' @srrstats {RE7.1a} noiseless-vs-noisy fitting is exercised; the linear-algebra fit completes deterministically.
+#' @srrstats {RE7.1a} noiseless-vs-noisy fitting is exercised; the linear-algebra fit
+#' completes deterministically.
 #' @noRd
 NULL
 
@@ -100,7 +105,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
     for (p in preds) {
       if (is.numeric(fit_data[[p]])) {
         ctr <- if (center) mean(fit_data[[p]]) else 0
-        scl <- if (scale) { s <- stats::sd(fit_data[[p]]); if (s == 0) 1 else s }
+        scl <- if (scale) { s <- stats::sd(fit_data[[p]])
+        if (s == 0) 1 else s }
                else 1
         fit_data[[p]] <- (fit_data[[p]] - ctr) / scl
         transforms[[p]] <- c(center = ctr, scale = scl)
@@ -141,6 +147,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
 
 # --- accessors (RE4.x) ------------------------------------------------
 
+#' Extract coefficients from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Named coefficient vector.
@@ -152,6 +160,8 @@ morie_lm <- function(formula, data, family = c("gaussian", "binomial"),
 #' @export
 coef.morie_lm <- function(object, ...) object$coefficients
 
+#' Extract the covariance matrix of method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Variance-covariance matrix of the coefficients.
@@ -163,6 +173,8 @@ coef.morie_lm <- function(object, ...) object$coefficients
 #' @export
 vcov.morie_lm <- function(object, ...) object$vcov
 
+#' Extract fitted values from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Fitted (modelled) response values.
@@ -174,6 +186,8 @@ vcov.morie_lm <- function(object, ...) object$vcov
 #' @export
 fitted.morie_lm <- function(object, ...) object$fitted_values
 
+#' Extract residuals from method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Model residuals.
@@ -185,6 +199,8 @@ fitted.morie_lm <- function(object, ...) object$fitted_values
 #' @export
 residuals.morie_lm <- function(object, ...) object$residuals
 
+#' Number of observations in method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return Number of observations used in the fit.
@@ -197,6 +213,8 @@ residuals.morie_lm <- function(object, ...) object$residuals
 #' @export
 nobs.morie_lm <- function(object, ...) object$n_obs
 
+#' Confidence intervals for method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param parm,level Standard [stats::confint()] arguments.
 #' @param ... Unused.
@@ -253,6 +271,8 @@ predict.morie_lm <- function(object, newdata = NULL,
 
 # --- print / summary / plot (RE4.17, RE4.18, RE6.x) -------------------
 
+#' Print method for \code{morie_lm} objects
+#'
 #' @param x A `morie_lm`.
 #' @param ... Unused.
 #' @return `x`, invisibly.
@@ -271,6 +291,8 @@ print.morie_lm <- function(x, ...) {
   invisible(x)
 }
 
+#' Summarise method for \code{morie_lm} objects
+#'
 #' @param object A `morie_lm`.
 #' @param ... Unused.
 #' @return The underlying model summary (coefficients, SEs, tests).
@@ -284,7 +306,7 @@ summary.morie_lm <- function(object, ...) summary(object$fit)
 
 #' Default diagnostic plot for a morie_lm
 #' @param x A `morie_lm`.
-#' @param ... Passed to [plot()].
+#' @param ... Passed to \[plot()\].
 #' @return `NULL`, invisibly. Draws fitted-versus-residual diagnostics
 #'   with readable axis labels.
 #' @examples
@@ -300,6 +322,8 @@ plot.morie_lm <- function(x, ...) {
   invisible(NULL)
 }
 
+#' Print method for \code{morie_lm_spec} objects
+#'
 #' @param x A `morie_lm_spec`.
 #' @param ... Unused.
 #' @return `x`, invisibly.

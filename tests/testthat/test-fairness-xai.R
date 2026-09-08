@@ -18,7 +18,8 @@ make_xai_inputs <- function(n = 100, d = 4, seed = 1) {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_xai_permutation_importance basic", {
-  set.seed(1); s <- make_xai_inputs()
+  set.seed(1)
+  s <- make_xai_inputs()
   r <- morie_fairness_xai_permutation_importance(
     s$predict_fn, s$X, feature_names = s$feature_names,
     n_repeats = 3L, seed = 1L
@@ -31,7 +32,8 @@ test_that("morie_fairness_xai_permutation_importance basic", {
 })
 
 test_that("morie_fairness_xai_permutation_importance flags protected", {
-  set.seed(2); s <- make_xai_inputs()
+  set.seed(2)
+  s <- make_xai_inputs()
   r <- morie_fairness_xai_permutation_importance(
     s$predict_fn, s$X, feature_names = s$feature_names,
     n_repeats = 3L, protected = c("f1"), seed = 1L
@@ -40,7 +42,8 @@ test_that("morie_fairness_xai_permutation_importance flags protected", {
 })
 
 test_that("morie_fairness_xai_permutation_importance errors on unknown protected", {
-  set.seed(3); s <- make_xai_inputs()
+  set.seed(3)
+  s <- make_xai_inputs()
   expect_error(
     morie_fairness_xai_permutation_importance(
       s$predict_fn, s$X, feature_names = s$feature_names,
@@ -62,7 +65,8 @@ test_that("morie_fairness_xai_permutation_importance errors on empty X", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_xai_partial_dependence returns PD curve", {
-  set.seed(4); s <- make_xai_inputs()
+  set.seed(4)
+  s <- make_xai_inputs()
   r <- morie_fairness_xai_partial_dependence(
     s$predict_fn, s$X, feature = "f1",
     feature_names = s$feature_names, grid_size = 10L
@@ -74,7 +78,8 @@ test_that("morie_fairness_xai_partial_dependence returns PD curve", {
 })
 
 test_that("morie_fairness_xai_partial_dependence accepts integer index", {
-  set.seed(5); s <- make_xai_inputs()
+  set.seed(5)
+  s <- make_xai_inputs()
   r <- morie_fairness_xai_partial_dependence(
     s$predict_fn, s$X, feature = 1L, grid_size = 5L
   )
@@ -82,7 +87,8 @@ test_that("morie_fairness_xai_partial_dependence accepts integer index", {
 })
 
 test_that("morie_fairness_xai_partial_dependence errors on bad feature name", {
-  set.seed(6); s <- make_xai_inputs()
+  set.seed(6)
+  s <- make_xai_inputs()
   expect_error(
     morie_fairness_xai_partial_dependence(
       s$predict_fn, s$X, feature = "nope",
@@ -96,7 +102,8 @@ test_that("morie_fairness_xai_partial_dependence errors on bad feature name", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_xai_ale returns ALE", {
-  set.seed(7); s <- make_xai_inputs()
+  set.seed(7)
+  s <- make_xai_inputs()
   r <- morie_fairness_xai_ale(
     s$predict_fn, s$X, feature = "f2",
     feature_names = s$feature_names, n_bins = 5L
@@ -107,7 +114,8 @@ test_that("morie_fairness_xai_ale returns ALE", {
 })
 
 test_that("morie_fairness_xai_ale errors on constant feature", {
-  set.seed(8); s <- make_xai_inputs()
+  set.seed(8)
+  s <- make_xai_inputs()
   s$X[, 1L] <- 0
   expect_error(
     morie_fairness_xai_ale(s$predict_fn, s$X, feature = 1L, n_bins = 4L),
@@ -120,7 +128,8 @@ test_that("morie_fairness_xai_ale errors on constant feature", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_xai_ceteris_paribus profiles one feature", {
-  set.seed(9); s <- make_xai_inputs()
+  set.seed(9)
+  s <- make_xai_inputs()
   inst <- s$X[1L, ]
   r <- morie_fairness_xai_ceteris_paribus(
     s$predict_fn, inst, feature = "f1",
@@ -134,7 +143,8 @@ test_that("morie_fairness_xai_ceteris_paribus profiles one feature", {
 })
 
 test_that("morie_fairness_xai_ceteris_paribus errors on wrong x length", {
-  set.seed(10); s <- make_xai_inputs()
+  set.seed(10)
+  s <- make_xai_inputs()
   expect_error(
     morie_fairness_xai_ceteris_paribus(
       s$predict_fn, c(1, 2), feature = 1L, X_ref = s$X,
@@ -148,7 +158,8 @@ test_that("morie_fairness_xai_ceteris_paribus errors on wrong x length", {
 # ---------------------------------------------------------------------------
 
 test_that("morie_fairness_xai_shap_values returns attributions", {
-  set.seed(11); s <- make_xai_inputs(n = 30, d = 4)
+  set.seed(11)
+  s <- make_xai_inputs(n = 30, d = 4)
   inst <- s$X[1L, ]
   r <- morie_fairness_xai_shap_values(
     s$predict_fn, inst, background = s$X,
@@ -161,7 +172,8 @@ test_that("morie_fairness_xai_shap_values returns attributions", {
 })
 
 test_that("morie_fairness_xai_shap_values errors on x length", {
-  set.seed(12); s <- make_xai_inputs(n = 20, d = 4)
+  set.seed(12)
+  s <- make_xai_inputs(n = 20, d = 4)
   expect_error(
     morie_fairness_xai_shap_values(
       s$predict_fn, c(1, 2), background = s$X, n_samples = 2L),

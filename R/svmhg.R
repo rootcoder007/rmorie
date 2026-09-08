@@ -2,7 +2,8 @@
 
 #' Linear SVM (primal hinge loss) -- R parity
 #'
-#' Wraps \code{e1071::svm} with a linear kernel.
+#' Native linear C-SVC via SMO. The primal weight vector is recovered in
+#' closed form from the dual solution, w = sum_i alpha_i y_i x_i.
 #'
 #' @param x Numeric predictor matrix.
 #' @param y Binary response.
@@ -11,26 +12,25 @@
 #' @return Named list: estimate, intercept, weights, train_accuracy, C,
 #'   classes, n, method.
 #' @importFrom stats predict
-#' @examplesIf requireNamespace("e1071", quietly = TRUE)
+#' @examples
 #' # See the package vignettes for usage examples:
-#' #   vignette(package = "rmorie")
+#' #   vignette(package = "morie")
 #' @export
 morie_svm_hinge_primal <- function(x, y, C = 1.0, seed = 0L) {
-  if (!requireNamespace("e1071", quietly = TRUE)) {
-    stop("Function 'morie_svm_hinge_primal' requires package 'e1071'. Install with install.packages('e1071').")
-  }
   if (is.null(dim(x))) x <- matrix(x, ncol = 1)
   x <- as.matrix(x)
   y <- as.factor(y)
   classes <- levels(y)
   if (length(classes) != 2) stop("morie_svm_hinge_primal requires binary y")
   set.seed(seed)
-  fit <- e1071::svm(x = x, y = y, kernel = "linear", cost = C, scale = FALSE)
-  # Reconstruct w = sum_i alpha_i y_i x_i (libsvm sign convention: coefs are alpha_i*y_i)
-  w <- as.numeric(crossprod(fit$coefs, fit$SV))
-  b <- -as.numeric(fit$rho)
-  preds <- predict(fit, x)
-  acc <- mean(preds == y)
+  ypm <- ifelse(y == classes[2L], 1, -1)
+  fit <- .svm_fit_binary(x, ypm, C, 0L, 1, 0, 3)   # linear kernel
+  # For the linear kernel the primal weight vector is recoverable in closed
+  # form, w = sum_i alpha_i y_i x_i (LIBSVM Eq. 3), and b = -rho.
+  w <- if (fit$n_sv) as.numeric(crossprod(fit$coef, fit$SV)) else rep(0, ncol(x))
+  b <- -fit$rho
+  preds <- ifelse(as.numeric(x %*% w) + b > 0, classes[2L], classes[1L])
+  acc <- mean(preds == as.character(y))
   list(
     estimate       = c(b, w),
     intercept      = b,

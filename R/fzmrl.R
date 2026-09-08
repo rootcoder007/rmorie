@@ -2,7 +2,7 @@
 
 #' Fauzi: Kernel mean residual life asymptotics (Ch 4)
 #'
-#' Kernel-smoothed MRL \eqn{m(t)=E[X-t|X>t]} with Yang (1978)
+#' Kernel-smoothed MRL \eqn{m(t)=E\[X-t|X>t\]} with Yang (1978)
 #' asymptotic SE.
 #'
 #' @param x Numeric vector (lifetimes).
@@ -23,7 +23,7 @@ fzmrl <- function(x, t = NULL, h = NULL) {
     ))
   }
   if (is.null(t)) t <- stats::median(x)
-  if (is.null(h)) h <- .morie_silverman_h(x)
+  if (is.null(h)) h <- .morie_kdfe_h(x)
   S_t <- mean(1 - stats::pnorm((t - x) / h))
   if (S_t <= 0) {
     return(list(

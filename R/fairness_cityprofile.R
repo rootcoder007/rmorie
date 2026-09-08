@@ -11,7 +11,6 @@
 #' never needs to know which city the data came from.
 #'
 #' Functions
-#' ---------
 #'
 #' \itemize{
 #'   \item \code{\link{morie_fairness_city_profile}}: constructor for a
@@ -30,7 +29,7 @@
 NULL
 
 
-#' The five canonical per-area fields the audit consumes.
+#' The five canonical per-area fields the audit consumes
 #' @export
 MORIE_FAIRNESS_CANONICAL_FIELDS <- c(
   "area", "risk", "outcome", "population", "group"
@@ -49,19 +48,20 @@ MORIE_FAIRNESS_CANONICAL_FIELDS <- c(
 .morie_fairness_init_registry <- function() {
   if (!exists("generic", envir = .morie_fairness_registry, inherits = FALSE)) {
     assign("generic",
-           morie_fairness_city_profile(
-             name = "generic",
-             area_col = "area",
-             risk_col = "risk",
-             outcome_col = "outcome",
-             population_col = "population",
-             group_col = "group",
-             notes = paste0(
-               "Identity profile - the data.frame already uses the ",
-               "canonical column names."
-             )
-           ),
-           envir = .morie_fairness_registry)
+      morie_fairness_city_profile(
+        name = "generic",
+        area_col = "area",
+        risk_col = "risk",
+        outcome_col = "outcome",
+        population_col = "population",
+        group_col = "group",
+        notes = paste0(
+          "Identity profile - the data.frame already uses the ",
+          "canonical column names."
+        )
+      ),
+      envir = .morie_fairness_registry
+    )
   }
 }
 
@@ -90,7 +90,8 @@ MORIE_FAIRNESS_CANONICAL_FIELDS <- c(
 #' @return A list of class \code{morie_city_profile}.
 #' @examples
 #' p <- morie_fairness_city_profile(
-#'   "chicago", area_col = "community_area",
+#'   "chicago",
+#'   area_col = "community_area",
 #'   risk_col = "rti", group_col = "majority_race"
 #' )
 #' p$name
@@ -165,7 +166,7 @@ morie_fairness_register_city <- function(profile, overwrite = FALSE) {
   .morie_fairness_init_registry()
   key <- tolower(trimws(profile$name))
   if (exists(key, envir = .morie_fairness_registry, inherits = FALSE) &&
-      !isTRUE(overwrite)) {
+    !isTRUE(overwrite)) {
     stop(sprintf(
       "city '%s' is already registered; pass overwrite=TRUE to replace it.",
       key
@@ -226,7 +227,8 @@ morie_fairness_list_cities <- function() {
 #' @examples
 #' df <- data.frame(beat = c("A", "B"), score = c(0.1, 0.9))
 #' p <- morie_fairness_city_profile(
-#'   "demo", area_col = "beat", risk_col = "score"
+#'   "demo",
+#'   area_col = "beat", risk_col = "score"
 #' )
 #' morie_fairness_apply_profile(df, p)
 #' @export
@@ -237,7 +239,7 @@ morie_fairness_apply_profile <- function(df, profile) {
   }
   stopifnot(inherits(profile, "morie_city_profile"))
 
-  colmap <- morie_fairness_column_map(profile)  # source -> canonical
+  colmap <- morie_fairness_column_map(profile) # source -> canonical
   src_cols <- names(colmap)
   missing <- setdiff(src_cols, names(df))
   if (length(missing) > 0L) {
@@ -258,11 +260,16 @@ morie_fairness_apply_profile <- function(df, profile) {
 # print
 # ---------------------------------------------------------------------------
 
+#' Print method for \code{morie_city_profile} objects
+#'
+#' @param x A \code{morie_city_profile} object.
+#' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
 #' \donttest{
 #' p <- morie_fairness_city_profile(
-#'   "chicago", area_col = "community_area",
+#'   "chicago",
+#'   area_col = "community_area",
 #'   risk_col = "rti", group_col = "majority_race"
 #' )
 #' p$name
@@ -274,13 +281,17 @@ print.morie_city_profile <- function(x, ...) {
 ", sep = " ")
   cat(strrep("-", 25 + nchar(x$name)), "\
 ", sep = "")
-  fields <- c("area_col", "risk_col", "outcome_col",
-              "population_col", "group_col")
+  fields <- c(
+    "area_col", "risk_col", "outcome_col",
+    "population_col", "group_col"
+  )
   for (f in fields) {
     v <- x[[f]]
-    cat(sprintf("  %-14s  %s\
+    cat(sprintf(
+      "  %-14s  %s\
 ", f,
-                if (is.null(v)) "<unset>" else v))
+      if (is.null(v)) "<unset>" else v
+    ))
   }
   if (nzchar(x$notes)) {
     cat("\

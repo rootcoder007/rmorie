@@ -46,37 +46,57 @@ bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,
   b_cur <- rep(0, m)
   step_x <- 0.4
   step_ab <- 0.3
-  loglik <- function(xv, av, bv) {
+  mask <- !is.na(M)
+  Msafe <- ifelse(mask, M, 0)
+  cell_ll <- function(xv, av, bv) {
     Z <- sweep(outer(xv, bv, FUN = "-"), 2L, av, "*")
     P <- logistic(Z)
-    mask <- !is.na(M)
-    sum(ifelse(mask, M * log(P + 1e-12) + (1 - M) * log(1 - P + 1e-12), 0))
+    ifelse(mask, Msafe * log(P + 1e-12) + (1 - Msafe) * log(1 - P + 1e-12), 0)
   }
-  ll_cur <- loglik(x_cur, a_cur, b_cur)
+  ## x_i enters only row i and a_j / b_j only column j, so each coordinate is
+  ## accepted or rejected on its own likelihood. A single joint accept/reject
+  ## over all n coordinates has acceptance falling off exponentially in n and
+  ## leaves the chain pinned at its starting value.
+  row_ll <- function(xv, av, bv) rowSums(cell_ll(xv, av, bv))
+  col_ll <- function(xv, av, bv) colSums(cell_ll(xv, av, bv))
+  ll_x <- row_ll(x_cur, a_cur, b_cur)
+  acc_x <- 0
+  acc_a <- 0
+  acc_b <- 0
   samples <- list()
   a_samples <- list()
   b_samples <- list()
   for (t in seq_len(n_iter)) {
     xp <- x_cur + step_x * stats::rnorm(n)
-    llp <- loglik(xp, a_cur, b_cur)
-    la <- (llp - 0.5 * sum(xp^2)) - (ll_cur - 0.5 * sum(x_cur^2))
-    if (log(stats::runif(1)) < la) {
-      x_cur <- xp
-      ll_cur <- llp
-    }
+    llp <- row_ll(xp, a_cur, b_cur)
+    la <- (llp - 0.5 * xp^2) - (ll_x - 0.5 * x_cur^2)
+    take <- log(stats::runif(n)) < la
+    x_cur <- ifelse(take, xp, x_cur)
+    ll_x <- ifelse(take, llp, ll_x)
+    acc_x <- acc_x + sum(take)
+
+    ll_c <- col_ll(x_cur, a_cur, b_cur)
     ap <- a_cur + step_ab * stats::rnorm(m)
-    llp <- loglik(x_cur, ap, b_cur)
-    la <- (llp - 0.5 * sum(ap^2) / 25) - (ll_cur - 0.5 * sum(a_cur^2) / 25)
-    if (log(stats::runif(1)) < la) {
-      a_cur <- ap
-      ll_cur <- llp
-    }
+    llp <- col_ll(x_cur, ap, b_cur)
+    la <- (llp - 0.5 * ap^2 / 25) - (ll_c - 0.5 * a_cur^2 / 25)
+    take <- log(stats::runif(m)) < la
+    a_cur <- ifelse(take, ap, a_cur)
+    acc_a <- acc_a + sum(take)
+
+    ll_c <- col_ll(x_cur, a_cur, b_cur)
     bp <- b_cur + step_ab * stats::rnorm(m)
-    llp <- loglik(x_cur, a_cur, bp)
-    la <- (llp - 0.5 * sum(bp^2) / 25) - (ll_cur - 0.5 * sum(b_cur^2) / 25)
-    if (log(stats::runif(1)) < la) {
-      b_cur <- bp
-      ll_cur <- llp
+    llp <- col_ll(x_cur, a_cur, bp)
+    la <- (llp - 0.5 * bp^2 / 25) - (ll_c - 0.5 * b_cur^2 / 25)
+    take <- log(stats::runif(m)) < la
+    b_cur <- ifelse(take, bp, b_cur)
+    acc_b <- acc_b + sum(take)
+
+    ll_x <- row_ll(x_cur, a_cur, b_cur)
+
+    if (t <= burn) {
+      ## Robbins-Monro tuning towards the 0.44 optimum for scalar moves.
+      step_x <- min(max(step_x * exp((acc_x / (t * n) - 0.44) * 0.5), 1e-3), 5)
+      step_ab <- min(max(step_ab * exp((0.5 * (acc_a + acc_b) / (t * m) - 0.44) * 0.5), 1e-3), 5)
     }
     if (t > burn) {
       xs <- (x_cur - mean(x_cur)) / (stats::sd(x_cur) + 1e-12)

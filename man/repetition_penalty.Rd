@@ -19,4 +19,8 @@ Named list with tensor (penalised logits), penalised_idx, alpha, method.
 \description{
 Repetition penalty (Keskar 2019)
 }
+\examples{
+V <- c(1, 2, 3, 4, 5, 6, 7, 8)
+rmorie:::repetition_penalty(V, V)
+}
 \keyword{internal}
