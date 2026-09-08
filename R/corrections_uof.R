@@ -294,11 +294,7 @@ morie_synth_corrections_uof <- function(key, n = 30L, seed = 1L) {
   n <- as.integer(n)
   # Pull the column names from the included real CKAN sample so the
   # synthetic frame matches exactly what the offline path returns.
-  bundled_path <- system.file(
-    "extdata",
-    sprintf("corrections_uof_%s_sample.csv", key),
-    package = "rmorie"
-  )
+  bundled_path <- .rmorie_extdata(sprintf("corrections_uof_%s_sample.csv", key))
   if (!nzchar(bundled_path) || !file.exists(bundled_path)) {
     stop(sprintf(
       "morie_synth_corrections_uof: no bundled sample for key %s",

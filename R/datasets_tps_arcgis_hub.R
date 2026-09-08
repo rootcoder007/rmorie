@@ -79,12 +79,12 @@
 #'   `feature_server_url`, `owner`, `tags`, `snippet`.
 #' @references TPS Public Safety Data Portal,
 #'   \url{https://data.tps.ca/search?collection=dataset}.
-#' @examplesIf nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("tps_arcgis_hub_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' cat <- morie_datasets_tps_arcgis_hub_layers()
 #' nrow(cat) # 71
 #' head(cat$title)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "tps_arcgis_hub_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("tps_arcgis_hub_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cat <- morie_datasets_tps_arcgis_hub_layers()
 #' nrow(cat) # 71
 #' head(cat$title)
@@ -95,9 +95,7 @@ morie_datasets_tps_arcgis_hub_layers <- function(offline = TRUE) {
     # Look in rmorie first, then rmoriedata (companion ships this one).
     # Return empty data.frame on miss so morie_dataset_portal_catalog()
     # and other downstream consumers can still build successfully.
-    path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("tps_arcgis_hub_catalog.csv")
     if (!nzchar(path) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_arcgis_hub_catalog.csv",
@@ -659,7 +657,7 @@ morie_datasets_toronto_zoning_per_neighbourhood <- function(
     } else {
       "toronto_zoning_stats_sample.csv"
     }
-    path <- system.file("extdata", fixture, package = "rmorie")
+    path <- .rmorie_extdata(fixture)
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", fixture, package = "rmoriedata")
     }

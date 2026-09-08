@@ -48,7 +48,7 @@
   file <- switch(which,
                  arrests   = "nypd_arrests_historic_sample.csv",
                  complaint = "nypd_complaint_historic_sample.csv")
-  path <- system.file("extdata", file, package = "rmorie")
+  path <- .rmorie_extdata(file)
   if (!nzchar(path) || !file.exists(path)) return(NULL)
   utils::read.csv(path, stringsAsFactors = FALSE, check.names = TRUE)
 }

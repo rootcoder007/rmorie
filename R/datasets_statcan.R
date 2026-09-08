@@ -43,9 +43,7 @@
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_statcan_ccjs_cubes <- function() {
-  path <- system.file("extdata", "statcan_ccjs_cubes.csv",
-    package = "rmorie"
-  )
+  path <- .rmorie_extdata("statcan_ccjs_cubes.csv")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "statcan_ccjs_cubes.csv", package = "rmoriedata")
   }

@@ -17,7 +17,7 @@
 #' @keywords internal
 #' @noRd
 .morie_dataset_pkg_csv <- function(name) {
-  path <- system.file("extdata", paste0(name, ".csv"), package = "rmorie")
+  path <- .rmorie_extdata(paste0(name, ".csv"))
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", paste0(name, ".csv"),
       package = "rmoriedata"
@@ -762,9 +762,7 @@ morie_datasets_siu_director_reports <- function() {
 #' @export
 morie_datasets_siu_report_text <- function(url = NULL, offline = FALSE) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "siu_24-OFD-001_synthetic.txt",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("siu_24-OFD-001_synthetic.txt")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "siu_24-OFD-001_synthetic.txt", package = "rmoriedata")
     }
@@ -1569,11 +1567,11 @@ morie_datasets_namus_missing_persons <- function(state = NULL,
 #' @param max_features Integer or `NULL`; cap on returned rows.
 #' @param offline Logical; if `TRUE`, return a included synthetic frame.
 #' @return A `data.frame` with the NIST RDS catalog schema.
-#' @examplesIf nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("nist_rds_synthetic.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_nist_rds(offline = TRUE)
 #' head(df)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "nist_rds_synthetic.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("nist_rds_synthetic.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_nist_rds(offline = TRUE)
 #' head(df)
 #' \dontshow{\}) # examplesIf}
@@ -1641,11 +1639,11 @@ morie_datasets_nist_rds <- function(dataset_id = NULL, query = NULL,
 #'   5 cols including `the_geom` (live mode with `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries -
 #'   Neighborhoods"; based on Neighborhoods_2012b.
-#' @examplesIf nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("chicago_neighborhoods.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
 #' head(df[, c("pri_neigh", "sec_neigh")])
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_neighborhoods.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("chicago_neighborhoods.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_neighborhoods(offline = TRUE)
 #' head(df[, c("pri_neigh", "sec_neigh")])
 #' \dontshow{\}) # examplesIf}
@@ -1661,9 +1659,7 @@ morie_datasets_chicago_neighborhoods <- function(offline = TRUE,
                                                  app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_neighborhoods.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_neighborhoods.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_neighborhoods.csv", package = "rmoriedata")
     }
@@ -1884,10 +1880,7 @@ morie_datasets_chicago_crime_map <- function(date_from = NULL,
                                              max_pages = 200L,
                                              app_token = NULL) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata",
-      "chicago_crime_map_ahwe_kpsy_sample.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_crime_map_ahwe_kpsy_sample.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_crime_map_ahwe_kpsy_sample.csv", package = "rmoriedata")
     }
@@ -2064,9 +2057,7 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
                                                 app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_police_beats.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_police_beats.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_police_beats.csv", package = "rmoriedata")
     }
@@ -2172,11 +2163,11 @@ morie_datasets_chicago_police_beats <- function(offline = TRUE,
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Police
 #'   Districts (current)" (`24zt-jpfn`).
-#' @examplesIf nzchar(system.file("extdata", "chicago_police_districts.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("chicago_police_districts.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_police_districts(offline = TRUE)
 #' head(df)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_police_districts.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("chicago_police_districts.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_police_districts(offline = TRUE)
 #' head(df)
 #' \dontshow{\}) # examplesIf}
@@ -2192,9 +2183,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
                                                     app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_police_districts.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_police_districts.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_police_districts.csv", package = "rmoriedata")
     }
@@ -2285,7 +2274,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #'   specific joins (e.g. `"iucr"` only).
 #' @return A wide `data.frame`: crime columns first, then the
 #'   joined resolver columns with their canonical prefixes.
-#' @examplesIf nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("chicago_iucr_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_crime_resolved(
 #'   offline = TRUE,
 #'   max_features = 5L,
@@ -2293,7 +2282,7 @@ morie_datasets_chicago_police_districts <- function(offline = TRUE,
 #' )
 #' names(df)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("chicago_iucr_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_crime_resolved(
 #'   offline = TRUE,
 #'   max_features = 5L,
@@ -2488,9 +2477,7 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
                                          max_pages = 200L,
                                          app_token = NULL) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_wards.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_wards.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_wards.csv", package = "rmoriedata")
     }
@@ -2547,11 +2534,11 @@ morie_datasets_chicago_wards <- function(offline = TRUE,
 #'   including `the_geom` (live, `geometry = TRUE`).
 #' @references City of Chicago Data Portal, "Boundaries - Community
 #'   Areas (current)" (`cauq-8yn6`).
-#' @examplesIf nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("chicago_community_areas.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
 #' head(df[, c("area_numbe", "community")])
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_community_areas.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("chicago_community_areas.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_community_areas(offline = TRUE)
 #' head(df[, c("area_numbe", "community")])
 #' \dontshow{\}) # examplesIf}
@@ -2565,9 +2552,7 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
                                                    max_pages = 200L,
                                                    app_token = NULL) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_community_areas.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_community_areas.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_community_areas.csv", package = "rmoriedata")
     }
@@ -2651,11 +2636,11 @@ morie_datasets_chicago_community_areas <- function(offline = TRUE,
 #' @references City of Chicago Data Portal, "Chicago Police
 #'   Department - Illinois Uniform Crime Reporting (IUCR) Codes"
 #'   (`c7ck-438e`).
-#' @examplesIf nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("chicago_iucr_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
 #' subset(df, primary_description == "HOMICIDE")
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "chicago_iucr_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("chicago_iucr_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_chicago_iucr_codes(offline = TRUE)
 #' subset(df, primary_description == "HOMICIDE")
 #' \dontshow{\}) # examplesIf}
@@ -2670,9 +2655,7 @@ morie_datasets_chicago_iucr_codes <- function(offline = TRUE,
                                               app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "chicago_iucr_codes.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_iucr_codes.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_iucr_codes.csv", package = "rmoriedata")
     }
@@ -2784,10 +2767,7 @@ morie_datasets_chicago_arrests <- function(year = NULL,
                                            app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata",
-      "chicago_arrests_dpt3_jri9_sample.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("chicago_arrests_dpt3_jri9_sample.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "chicago_arrests_dpt3_jri9_sample.csv", package = "rmoriedata")
     }
@@ -2906,10 +2886,7 @@ morie_datasets_cpd_public_arrests <- function(url = NULL,
                                               offline = TRUE,
                                               max_features = NULL) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata",
-      "cpd_public_release_arrests_sample.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("cpd_public_release_arrests_sample.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "cpd_public_release_arrests_sample.csv", package = "rmoriedata")
     }

@@ -47,9 +47,7 @@
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vpd_legal_disclaimer <- function() {
-  path <- system.file("extdata", "vpd_legal_disclaimer.txt",
-    package = "rmorie"
-  )
+  path <- .rmorie_extdata("vpd_legal_disclaimer.txt")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "vpd_legal_disclaimer.txt", package = "rmoriedata")
   }
@@ -162,13 +160,13 @@ morie_datasets_vpd_legal_disclaimer <- function() {
 #' @return A `data.frame` with 10 columns.
 #' @references VPD GeoDASH Open Data,
 #'   \url{https://geodash.vpd.ca/opendata/}.
-#' @examplesIf nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("vpd_crime_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
 #' nrow(df) # 550
 #' table(df$TYPE)
 #' table(df$NEIGHBOURHOOD)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "vpd_crime_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("vpd_crime_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_vpd_crime(offline = TRUE)
 #' nrow(df) # 550
 #' table(df$TYPE)
@@ -211,9 +209,7 @@ morie_datasets_vpd_crime <- function(offline = TRUE,
     .morie_vpd_terms_warning(accept_terms)
     df <- utils::read.csv(csv_path, stringsAsFactors = FALSE)
   } else if (offline) {
-    path <- system.file("extdata", "vpd_crime_sample.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("vpd_crime_sample.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "vpd_crime_sample.csv",
         package = "rmoriedata"

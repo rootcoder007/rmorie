@@ -53,10 +53,7 @@
 #' @export
 morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata",
-      "montreal_justice_safety_catalog.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("montreal_justice_safety_catalog.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "montreal_justice_safety_catalog.csv", package = "rmoriedata")
     }
@@ -119,12 +116,12 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 #' @references CKAN package
 #'   `interventions-service-securite-incendie-montreal`,
 #'   \url{https://donnees.montreal.ca/dataset/interventions-service-securite-incendie-montreal}.
-#' @examplesIf nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("montreal_sim_interventions_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
 #' nrow(df) # 349
 #' table(df$DESCRIPTION_GROUPE)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("montreal_sim_interventions_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
 #' nrow(df) # 349
 #' table(df$DESCRIPTION_GROUPE)
@@ -139,10 +136,7 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
     }
     df <- utils::read.csv(csv_path, stringsAsFactors = FALSE)
   } else if (offline) {
-    path <- system.file("extdata",
-      "montreal_sim_interventions_sample.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("montreal_sim_interventions_sample.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "montreal_sim_interventions_sample.csv", package = "rmoriedata")
     }
@@ -173,22 +167,19 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
 #'
 #' @return A `data.frame` with `INCIDENT_TYPE_DESCRIPTION` +
 #'   `Description`.
-#' @examplesIf nzchar(system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("montreal_sim_intervention_types.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_montreal_sim_intervention_types()
 #' nrow(d)
 #' head(d)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("montreal_sim_intervention_types.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' d <- morie_datasets_montreal_sim_intervention_types()
 #' nrow(d)
 #' head(d)
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_sim_intervention_types <- function() {
-  path <- system.file("extdata",
-    "montreal_sim_intervention_types.csv",
-    package = "rmorie"
-  )
+  path <- .rmorie_extdata("montreal_sim_intervention_types.csv")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "montreal_sim_intervention_types.csv", package = "rmoriedata")
   }

@@ -52,7 +52,7 @@
     crime   = "chicago_crime_synthetic.csv",
     arrests = "chicago_arrests_dpt3_jri9_sample.csv"
   )
-  path <- system.file("extdata", file, package = "rmorie")
+  path <- .rmorie_extdata(file)
   if (!nzchar(path) || !file.exists(path)) {
     return(NULL)
   }

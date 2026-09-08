@@ -17,7 +17,7 @@ test_that("nibrs ingest falls back to the bundled synthetic sample without a key
 })
 
 test_that("bundled nibrs synthetic fixture is present with the documented schema", {
-  p <- system.file("extdata", "nibrs_synthetic.csv", package = "rmorie")
+  p <- .rmorie_extdata("nibrs_synthetic.csv")
   skip_if(!nzchar(p), "fixture only present after install")
   df <- utils::read.csv(p)
   expect_identical(

@@ -523,9 +523,7 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
 #' Internal helper: Siu Load Manifest Raw
 #' @noRd
 .siu_load_manifest_raw <- function() {
-  p <- system.file("extdata", "siu_drid_manifest.csv.gz",
-    package = "rmorie"
-  )
+  p <- .rmorie_extdata("siu_drid_manifest.csv.gz")
   if ((!nzchar(p) || !file.exists(p)) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
     p <- system.file("extdata", "siu_drid_manifest.csv.gz",
@@ -582,10 +580,7 @@ morie_siu_index <- function(lang = c("all", "en", "fr", "valid"),
     }
     df
   }
-  shipped_path <- system.file("extdata",
-    "siu_canonical_overrides.csv.gz",
-    package = "rmorie"
-  )
+  shipped_path <- .rmorie_extdata("siu_canonical_overrides.csv.gz")
   if ((shipped_path == "" || !file.exists(shipped_path)) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
     shipped_path <- system.file("extdata",
@@ -722,7 +717,7 @@ morie_siu_record_correction <- function(case_number, field,
 #' Internal helper: Siu Load Manifest
 #' @noRd
 .siu_load_manifest <- function() {
-  p <- system.file("extdata", "siu_drid_manifest.csv.gz", package = "rmorie")
+  p <- .rmorie_extdata("siu_drid_manifest.csv.gz")
   if ((!nzchar(p) || !file.exists(p)) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
     p <- system.file("extdata", "siu_drid_manifest.csv.gz",

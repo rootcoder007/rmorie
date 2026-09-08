@@ -201,7 +201,7 @@ morie_tps_psdp_layers <- function() {
   }
   entry <- .MORIE_TPS_PSDP_REGISTRY[[layer_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "rmorie")
+    path <- .rmorie_extdata(entry$fixture)
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }
@@ -501,9 +501,7 @@ morie_datasets_tps_theft_over <- function(year = NULL,
 morie_datasets_tps_police_divisions <- function(offline = TRUE,
                                                 max_features = NULL) {
   if (offline) {
-    path <- system.file("extdata", "tps_police_divisions.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("tps_police_divisions.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "tps_police_divisions.csv", package = "rmoriedata")
     }

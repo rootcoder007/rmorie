@@ -97,7 +97,7 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
       call. = FALSE
     )
   }
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -322,7 +322,7 @@ morie_datasets_edmonton_socrata_by_id <- function(soda_id,
 #' Internal helper: Morie Canadian Fixture
 #' @noRd
 .morie_canadian_fixture <- function(fname) {
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }

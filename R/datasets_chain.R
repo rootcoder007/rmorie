@@ -34,7 +34,7 @@
 #'   Pass \code{NULL} to mean "no live path".
 #' @param bundled_name Character; the included fixture stem (without
 #'   \code{.csv}). The file is looked up via
-#'   \code{system.file("extdata", paste0(bundled_name, ".csv"), package = "rmorie")}.
+#'   \code{.rmorie_extdata(paste0(bundled_name, ".csv"))}.
 #'   Pass \code{NULL} or \code{NA_character_} to mean "no included
 #'   fixture".
 #' @param synth_fn A function that returns the synthetic frame. Pass
@@ -66,10 +66,7 @@
       !nzchar(bundled_name)) {
       return(NULL)
     }
-    path <- system.file("extdata",
-      paste0(bundled_name, ".csv"),
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata(paste0(bundled_name, ".csv"))
     if (!nzchar(path) || !file.exists(path)) {
       return(NULL)
     }
