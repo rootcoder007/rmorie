@@ -1,0 +1,16 @@
+# Canonical author identity.
+#
+# Collapses every address and display name this repository has been
+# committed under into one person, so `git log`, `git shortlog -sne` and
+# anything else that reads .mailmap show a single contributor.
+#
+# NOTE: GitHub's web UI attributes commits by the RAW commit email, not
+# by this file. Commits authored with ruhela.vansh@gmail.com (23 of them
+# in rmorie, 2026-08-15/16) will keep rendering under an older account
+# until that address is added to the rootcoder007 account at
+# https://github.com/settings/emails, which re-attributes them
+# retroactively with no history rewrite.
+rootcoder007 <278967282+rootcoder007@users.noreply.github.com> <ruhela.vansh@gmail.com>
+rootcoder007 <278967282+rootcoder007@users.noreply.github.com> <rootcoder007@users.noreply.github.com>
+rootcoder007 <278967282+rootcoder007@users.noreply.github.com> Vansh Singh Ruhela <278967282+rootcoder007@users.noreply.github.com>
+rootcoder007 <278967282+rootcoder007@users.noreply.github.com> RC7 <278967282+rootcoder007@users.noreply.github.com>
