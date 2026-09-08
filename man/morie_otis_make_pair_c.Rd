@@ -18,7 +18,7 @@ Outcome Y_c = NumberConsecutiveDays_Segregation winsorised at the
 99th percentile.
 }
 \examples{
-\dontrun{
+\donttest{
 # b01 (Segregation - Detailed Dataset) carries the full placement-level
 # schema, including NumberConsecutiveDays_Segregation (see the bundled
 # OTIS data dictionary).

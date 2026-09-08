@@ -51,7 +51,7 @@ Supported formats: \code{csv}, \code{tsv}, \code{json}, \code{xml},
 \code{arcgis} (delegates to \code{\link{morie_fetch_arcgis}}).
 }
 \examples{
-\dontrun{
+\donttest{
 # Chicago open-data portal (Socrata), endpoints verified 2026-07.
 df <- try(morie_fetch(
   "https://data.cityofchicago.org/resource/ijzp-q8t2.csv",

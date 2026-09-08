@@ -53,7 +53,7 @@ use of force.
 Tags: race; race based data; RBDC
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_use_of_force_call_for_service_types(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

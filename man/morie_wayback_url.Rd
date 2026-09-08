@@ -24,7 +24,7 @@ helpers -- e.g. to reach an archived copy of an Ontario Data Catalogue page
 unreachable -- instead of duplicating them.
 }
 \examples{
-\dontrun{
+\donttest{
 morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
 }
 }

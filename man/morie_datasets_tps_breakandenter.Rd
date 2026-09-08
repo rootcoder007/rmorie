@@ -32,7 +32,7 @@ A \code{data.frame}.
 TPS PSDP -- Break and Enter
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_breakandenter(max_features = 5L))
 if (!inherits(df, "try-error")) head(df)
 }

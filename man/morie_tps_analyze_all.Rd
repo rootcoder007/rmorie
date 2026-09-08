@@ -26,7 +26,7 @@ optional \code{out_dir} writes per-dataset \code{tps_<name>.txt}
 transcripts.
 }
 \examples{
-\dontrun{
+\donttest{
 df <- try(morie_datasets_tps_assault(max_features = 200L))
 if (!inherits(df, "try-error")) {
   res <- try(morie_tps_analyze_all(list(assault = df)))
