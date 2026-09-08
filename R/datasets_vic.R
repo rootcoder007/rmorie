@@ -317,7 +317,8 @@ morie_datasets_vic_cache_dir <- function(cache_dir = NULL) {
 #'   when the workbook is not cached and \code{offline} is \code{TRUE}.
 #' @references Crime Statistics Agency (Victoria), CC BY 4.0.
 #' @examples
-#' # offline by default: returns a 0-row frame unless already cached
+#' # offline by default: the sample bundled in rmoriedata, or the live
+#' # workbook once it has been cached with offline = FALSE
 #' df <- morie_datasets_vic_table("criminal_incidents", table = 1)
 #' ncol(df)
 #' @export
@@ -335,6 +336,14 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
   dest <- file.path(morie_datasets_vic_cache_dir(cache_dir), hit$file[1])
   if (!file.exists(dest)) {
     if (isTRUE(offline)) {
+      # Fall back to the sample rmoriedata bundles for this key before
+      # giving up. Without this the offline default -- which every
+      # example and test uses -- returned a 0-row frame on any machine
+      # that had not already downloaded the workbook, i.e. all of them.
+      bundled <- .morie_vic_bundled(key)
+      if (!is.null(bundled)) {
+        return(bundled)
+      }
       return(data.frame())
     }
     utils::download.file(hit$url[1], dest, mode = "wb", quiet = TRUE)
@@ -342,6 +351,19 @@ morie_datasets_vic_table <- function(key, table = 1, cache_dir = NULL,
   sheet <- if (is.numeric(table)) sprintf("Table %02d", as.integer(table))
            else as.character(table)
   .morie_vic_read_sheet(dest, sheet)
+}
+
+# Table 01 of each Victorian workbook is bundled in rmoriedata as the slug
+# `vic_<key>`, so the offline path has real data to return. Returns NULL
+# when rmoriedata is absent or does not carry this key -- the caller then
+# degrades to the empty frame it always returned.
+.morie_vic_bundled <- function(key) {
+  if (!requireNamespace("rmoriedata", quietly = TRUE)) {
+    return(NULL)
+  }
+  slug <- paste0("vic_", key)
+  out <- tryCatch(rmoriedata::morie_data_load(slug), error = function(e) NULL)
+  if (is.data.frame(out) && nrow(out) > 0L) out else NULL
 }
 
 #' Sheet names in a cached Victorian workbook
