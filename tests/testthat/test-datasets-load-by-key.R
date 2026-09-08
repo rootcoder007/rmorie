@@ -44,18 +44,28 @@ test_that("targeted-fixture dispatch hits TO ASR misc", {
   expect_equal(nrow(df), 40L)
 })
 
-test_that("targeted-fixture dispatch hits Vancouver graffiti sample", {
+# Vancouver dispatch has no bundled fixture: morie_datasets_load_by_key()
+# routes it straight to the live portal, so these two need the same
+# network + upstream gating as the CKAN tests below. Fedora CI caught it
+# when opendata.vancouver.ca answered with an empty body.
+test_that("live dispatch hits Vancouver graffiti sample", {
+  skip_on_cran()
   testthat::skip_if_not_installed("rmoriedata")
-  df <- morie_datasets_load_by_key("graffiti")
+  skip_if_no_network("opendata.vancouver.ca")
+  df <- .skip_on_upstream_error(morie_datasets_load_by_key("graffiti"))
   expect_s3_class(df, "data.frame")
-  expect_equal(nrow(df), 100L)
+  .skip_if_empty(df)
+  expect_true(nrow(df) <= 100L)
 })
 
-test_that("targeted-fixture dispatch hits Vancouver fire halls", {
+test_that("live dispatch hits Vancouver fire halls", {
+  skip_on_cran()
   testthat::skip_if_not_installed("rmoriedata")
-  df <- morie_datasets_load_by_key("fire-halls")
+  skip_if_no_network("opendata.vancouver.ca")
+  df <- .skip_on_upstream_error(morie_datasets_load_by_key("fire-halls"))
   expect_s3_class(df, "data.frame")
-  expect_equal(nrow(df), 20L)
+  .skip_if_empty(df)
+  expect_true(nrow(df) >= 1L)
 })
 
 test_that("targeted-fixture dispatch hits NYC borough boundaries", {
@@ -88,36 +98,6 @@ test_that("unknown dataset_key raises clear error", {
     morie_datasets_load_by_key("nonexistent-key-9999"),
     regexp = "unknown dataset_key")
 })
-
-# Skip a test when a remote endpoint is reachable at the network layer
-# (so skip_if_offline passes) but the upstream service itself is
-# returning a proxy error page (Envoy/nginx 5xx, etc.).
-.skip_on_upstream_error <- function(expr) {
-  tryCatch(
-    expr,
-    error = function(e) {
-      msg <- conditionMessage(e)
-      if (grepl("non-JSON|HTTP fetch|upstream|503|502|504",
-                msg, ignore.case = TRUE)) {
-        testthat::skip(paste("Upstream service unhealthy:", msg))
-      }
-      stop(e)
-    }
-  )
-}
-
-# A live open-data portal can transiently resolve to an EMPTY first CSV
-# resource (a valid data.frame with 0 rows) WITHOUT throwing -- that is
-# upstream data variability, not a dispatch bug. Skip rather than fail, so
-# the class + upper-bound assertions still guard the real behaviour whenever
-# data is actually present. (This is what flaked oldrel-1 CI: the fetch
-# succeeded but returned 0 rows.)
-.skip_if_empty <- function(df) {
-  if (is.data.frame(df) && nrow(df) == 0L) {
-    testthat::skip("Upstream CKAN resource returned 0 rows (empty)")
-  }
-  invisible(df)
-}
 
 test_that("3FFF1: MTL CKAN generic dispatch auto-resolves first CSV resource", {
   skip_on_cran()
