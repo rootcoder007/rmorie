@@ -26,7 +26,7 @@
   if (!is.null(.morie_describe_env$corpus)) {
     return(.morie_describe_env$corpus)
   }
-  rds <- system.file("extdata", "describe_corpus.Rds", package = "rmorie")
+  rds <- .rmorie_extdata("describe_corpus.Rds")
   if ((!nzchar(rds) || !file.exists(rds)) &&
     requireNamespace("rmoriedata", quietly = TRUE)) {
     rds <- system.file("extdata", "describe_corpus.Rds", package = "rmoriedata")

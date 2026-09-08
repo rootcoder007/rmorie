@@ -126,7 +126,7 @@ MORIE_TPS_REGISTRY <- list(
               sprintf("tps_psdp_%s_sample.csv", key))
   smp <- ""
   for (fname in fnames) {
-    smp <- system.file("extdata", fname, package = "rmorie")
+    smp <- .rmorie_extdata(fname)
     if (nzchar(smp)) break
     if (requireNamespace("rmoriedata", quietly = TRUE)) {
       smp <- system.file("extdata", fname, package = "rmoriedata")

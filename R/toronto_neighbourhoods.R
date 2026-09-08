@@ -68,7 +68,7 @@ NULL
 #' @noRd
 .morie_to_neighbourhoods_fixture <- function(version) {
   fname <- .morie_to_fixture_name(version)
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -319,8 +319,7 @@ morie_tps_year_to_hood_version <- function(year) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_to_hood_crosswalk <- function() {
-  path <- system.file("extdata", "to_hood_158_140_crosswalk.csv",
-                      package = "rmorie")
+  path <- .rmorie_extdata("to_hood_158_140_crosswalk.csv")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "to_hood_158_140_crosswalk.csv", package = "rmoriedata")
   }

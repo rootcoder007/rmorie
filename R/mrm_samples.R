@@ -63,7 +63,7 @@ morie_sample <- function(name = c("otis_b01", "otis_b09", "otis_c11", "tps_assau
     otis_c11 = "otis_c11_sample.csv",
     tps_assault = "tps_assault_sample.csv"
   )
-  path <- system.file("extdata", files[[name]], package = "rmorie")
+  path <- .rmorie_extdata(files[[name]])
   if ((path == "" || !file.exists(path)) &&
       requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", files[[name]], package = "rmoriedata")

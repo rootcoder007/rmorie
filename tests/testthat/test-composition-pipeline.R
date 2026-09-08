@@ -5,8 +5,7 @@
 # passes this because no other package holds every stage natively.
 
 test_that("full MRM pipeline composes across modules on LaLonde", {
-  p <- system.file("extdata", "quasiex", "lalonde_matchit.csv",
-                   package = "rmorie")
+  p <- .rmorie_extdata("quasiex", "lalonde_matchit.csv")
   if (!nzchar(p)) p <- file.path("inst", "extdata", "quasiex",
                                  "lalonde_matchit.csv")
   d <- read.csv(p)

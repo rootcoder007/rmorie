@@ -39,12 +39,12 @@
 #'   `records_count`.
 #' @references Opendatasoft Explore API v2.1,
 #'   \url{https://opendata.vancouver.ca/api-console/explore/v2.1/}.
-#' @examplesIf nzchar(system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("vancouver_opendata_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
 #' nrow(cat_df) # 190
 #' head(cat_df$title)
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("vancouver_opendata_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
 #' nrow(cat_df) # 190
 #' head(cat_df$title)
@@ -53,9 +53,7 @@
 morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
                                                      max_features = NULL) {
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "vancouver_opendata_catalog.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("vancouver_opendata_catalog.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "vancouver_opendata_catalog.csv", package = "rmoriedata")
     }
@@ -149,7 +147,7 @@ NULL
 #' Internal helper: Morie Vancouver Fixture
 #' @noRd
 .morie_vancouver_fixture <- function(fname) {
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }

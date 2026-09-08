@@ -205,7 +205,7 @@ NULL
   }
   entry <- .MORIE_NYC_NYPD_REGISTRY[[dataset_key]]
   if (isTRUE(offline)) {
-    path <- system.file("extdata", entry$fixture, package = "rmorie")
+    path <- .rmorie_extdata(entry$fixture)
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", entry$fixture, package = "rmoriedata")
     }
@@ -585,9 +585,7 @@ morie_datasets_nyc_police_precincts <- function(offline = TRUE,
                                                 app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "nyc_police_precincts.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("nyc_police_precincts.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "nyc_police_precincts.csv", package = "rmoriedata")
     }
@@ -669,9 +667,7 @@ morie_datasets_nyc_boroughs <- function(offline = TRUE,
                                         app_token = NULL) {
   mode <- match.arg(mode)
   if (isTRUE(offline)) {
-    path <- system.file("extdata", "nyc_borough_boundaries.csv",
-      package = "rmorie"
-    )
+    path <- .rmorie_extdata("nyc_borough_boundaries.csv")
     if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
       path <- system.file("extdata", "nyc_borough_boundaries.csv", package = "rmoriedata")
     }
@@ -782,7 +778,7 @@ morie_datasets_nyc_nypd_boro_crosswalk <- function() {
 #' Internal helper: Morie Nyc Boundary Fixture
 #' @noRd
 .morie_nyc_boundary_fixture <- function(fname, expected_rows = NULL) {
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -940,7 +936,7 @@ morie_datasets_nyc_ntas_2020 <- function(offline = TRUE,
 #' Internal helper: Morie Nyc Zcta Fixture
 #' @noRd
 .morie_nyc_zcta_fixture <- function(fname, expected_rows = 221L) {
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }
@@ -1015,10 +1011,10 @@ morie_datasets_nyc_zctas <- function(offline = TRUE,
 #' lightweight).
 #'
 #' @return A `data.frame` with one row per boundary fixture.
-#' @examplesIf nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("nyc_boundaries_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' morie_datasets_nyc_boundaries_catalog()
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "nyc_boundaries_catalog.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("nyc_boundaries_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' morie_datasets_nyc_boundaries_catalog()
 #' \dontshow{\}) # examplesIf}
 #' @export
@@ -1104,19 +1100,17 @@ morie_datasets_nyc_boundaries_catalog <- function() {
 #'
 #' @param max_features Optional row cap.
 #' @return A `data.frame` with 246 rows x 5 cols.
-#' @examplesIf nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)
+#' @examplesIf nzchar(.rmorie_extdata("nyc_nypd_offense_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)
 #' codes <- morie_datasets_nyc_nypd_offense_codes()
 #' subset(codes, ky_cd == "104") # all RAPE subcategories
 #' @examples
-#' \dontshow{if (nzchar(system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmorie")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
+#' \dontshow{if (nzchar(.rmorie_extdata("nyc_nypd_offense_codes.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' codes <- morie_datasets_nyc_nypd_offense_codes()
 #' subset(codes, ky_cd == "104") # all RAPE subcategories
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
-  path <- system.file("extdata", "nyc_nypd_offense_codes.csv",
-    package = "rmorie"
-  )
+  path <- .rmorie_extdata("nyc_nypd_offense_codes.csv")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "nyc_nypd_offense_codes.csv", package = "rmoriedata")
   }
@@ -1162,9 +1156,7 @@ morie_datasets_nyc_nypd_offense_codes <- function(max_features = NULL) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_nyc_nypd_law_books <- function() {
-  path <- system.file("extdata", "nyc_nypd_law_books.csv",
-    package = "rmorie"
-  )
+  path <- .rmorie_extdata("nyc_nypd_law_books.csv")
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", "nyc_nypd_law_books.csv", package = "rmoriedata")
   }

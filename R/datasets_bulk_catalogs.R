@@ -221,7 +221,7 @@ morie_datasets_chicago_socrata_by_id <- function(soda_id,
   # Look in rmorie first (tiny CSVs ship here), then rmoriedata
   # (heavy bulk catalogs ship there). Return an empty data.frame on
   # miss so downstream consumers can cleanly concat zero-row frames.
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path) && requireNamespace("rmoriedata", quietly = TRUE)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }

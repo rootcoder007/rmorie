@@ -559,7 +559,7 @@ morie_dataset_portal_catalog <- function(portal = NULL) {
   if (is.null(fname) || is.na(fname) || !nzchar(fname)) {
     return(NA_integer_)
   }
-  path <- system.file("extdata", fname, package = "rmorie")
+  path <- .rmorie_extdata(fname)
   if (!nzchar(path)) {
     path <- system.file("extdata", fname, package = "rmoriedata")
   }

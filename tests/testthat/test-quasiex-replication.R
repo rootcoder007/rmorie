@@ -5,7 +5,7 @@
 # differences documented in each literature).
 
 .qx_file <- function(name) {
-  p <- system.file("extdata", "quasiex", name, package = "rmorie")
+  p <- .rmorie_extdata("quasiex", name)
   if (!nzchar(p)) p <- file.path("inst", "extdata", "quasiex", name)
   read.csv(p)
 }

@@ -235,7 +235,7 @@ morie_cache_clear <- function(subdir = NULL, confirm = interactive()) {
 #' \dontshow{\}) # examplesIf}
 #' @export
 morie_builtin_db <- function() {
-  db <- system.file("extdata", "morie.db", package = "rmorie")
+  db <- .rmorie_extdata("morie.db")
   if (nzchar(db)) {
     return(db)
   }
@@ -1023,9 +1023,9 @@ morie_dataset_info <- function(key) {
 #' @export
 morie_userguide <- function(name = NULL) {
   if (is.null(name)) {
-    dir(system.file("extdata", "userguides", package = "rmorie"))
+    dir(.rmorie_extdata("userguides"))
   } else {
-    system.file("extdata", "userguides", name, package = "rmorie", mustWork = TRUE)
+    .rmorie_extdata("userguides", name, mustWork = TRUE)
   }
 }
 
