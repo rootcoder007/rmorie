@@ -95,12 +95,6 @@
 #' morie_dataset_portal_catalog_clear_cache()
 #' catalog <- morie_dataset_portal_catalog()
 #' nrow(catalog)
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' morie_dataset_portal_catalog_clear_cache()
-#' catalog <- morie_dataset_portal_catalog()
-#' nrow(catalog)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_dataset_portal_catalog_clear_cache <- function() {
   rm(
