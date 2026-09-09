@@ -44,12 +44,6 @@
 #' cat_df <- morie_datasets_montreal_justice_safety_layers()
 #' nrow(cat_df) # 23
 #' head(cat_df$title)
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' cat_df <- morie_datasets_montreal_justice_safety_layers()
-#' nrow(cat_df) # 23
-#' head(cat_df$title)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
   if (isTRUE(offline)) {
@@ -120,12 +114,6 @@ morie_datasets_montreal_justice_safety_layers <- function(offline = TRUE) {
 #' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
 #' nrow(df) # 349
 #' table(df$DESCRIPTION_GROUPE)
-#' @examples
-#' \dontshow{if (nzchar(.rmorie_extdata("montreal_sim_interventions_sample.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' df <- morie_datasets_montreal_sim_interventions(offline = TRUE)
-#' nrow(df) # 349
-#' table(df$DESCRIPTION_GROUPE)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
                                                       csv_path = NULL,
@@ -171,12 +159,6 @@ morie_datasets_montreal_sim_interventions <- function(offline = TRUE,
 #' d <- morie_datasets_montreal_sim_intervention_types()
 #' nrow(d)
 #' head(d)
-#' @examples
-#' \dontshow{if (nzchar(.rmorie_extdata("montreal_sim_intervention_types.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' d <- morie_datasets_montreal_sim_intervention_types()
-#' nrow(d)
-#' head(d)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_montreal_sim_intervention_types <- function() {
   path <- .rmorie_extdata("montreal_sim_intervention_types.csv")

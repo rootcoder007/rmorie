@@ -144,20 +144,6 @@ morie_tps_layer_urls <- function() {
 #' tps <- utils::read.csv(csv)
 #' nrow(tps)
 #' }
-#' @examples
-#' \dontshow{if (requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' # Network: fetches major-crime indicators from the Toronto Police
-#' # ArcGIS open-data layer.
-#' csv <- morie_fetch_tps(
-#'   category = "Assault",
-#'   cache_dir = tempdir(),
-#'   where = "OCC_YEAR = 2024"
-#' )
-#' tps <- utils::read.csv(csv)
-#' nrow(tps)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_fetch_tps <- function(
   category,

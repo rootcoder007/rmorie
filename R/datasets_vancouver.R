@@ -43,12 +43,6 @@
 #' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
 #' nrow(cat_df) # 190
 #' head(cat_df$title)
-#' @examples
-#' \dontshow{if (nzchar(.rmorie_extdata("vancouver_opendata_catalog.csv")) || requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' cat_df <- morie_datasets_vancouver_opendata_layers(offline = TRUE)
-#' nrow(cat_df) # 190
-#' head(cat_df$title)
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_datasets_vancouver_opendata_layers <- function(offline = TRUE,
                                                      max_features = NULL) {

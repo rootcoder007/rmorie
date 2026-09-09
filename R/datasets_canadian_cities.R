@@ -33,11 +33,6 @@
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
 #' head(d)
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' d <- morie_datasets_calgary_open_crime_adjacent_layers(offline = TRUE)
-#' head(d)
-#' \dontshow{\}) # examplesIf}
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' cat_df <- morie_datasets_edmonton_open_crime_adjacent_layers()
 #' head(cat_df)
@@ -124,11 +119,6 @@ morie_datasets_ottawa_open_crime_adjacent_layers <- function(offline = TRUE) {
 #' @examplesIf requireNamespace("rmoriedata", quietly = TRUE)
 #' df <- morie_datasets_calgary_community_crime_stats()
 #' head(df)
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' df <- morie_datasets_calgary_community_crime_stats()
-#' head(df)
-#' \dontshow{\}) # examplesIf}
 #' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 #' df <- morie_datasets_calgary_fire_response_calls()
 #' head(df)
@@ -211,14 +201,6 @@ morie_datasets_calgary_fire_stations <- function(offline = TRUE,
 #' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
 #' if (!inherits(df, "try-error")) head(df)
 #' }
-#' @examples
-#' \dontshow{if (requireNamespace("rmoriedata", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-#' \donttest{
-#' cat_df <- morie_datasets_calgary_opendata_bulk_layers()
-#' df <- try(morie_datasets_calgary_socrata_by_id(cat_df$soda_id[1], limit = 5L))
-#' if (!inherits(df, "try-error")) head(df)
-#' }
-#' \dontshow{\}) # examplesIf}
 #' \donttest{
 #' cat_df <- morie_datasets_edmonton_opendata_bulk_layers()
 #' df <- try(morie_datasets_edmonton_socrata_by_id(cat_df$soda_id[1], limit = 5L))

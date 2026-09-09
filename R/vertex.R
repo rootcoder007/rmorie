@@ -188,11 +188,6 @@ morie_vertex_ask_gemini <- function(prompt, model = NULL, system = NULL,
 #' @examplesIf nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))
 #' # Runs only when a Google Cloud project is configured.
 #' morie_vertex_health_check()
-#' @examples
-#' \dontshow{if (nzchar(Sys.getenv("GOOGLE_CLOUD_PROJECT")) || nzchar(Sys.getenv("MORIE_EE_PROJECT"))) withAutoprint(\{ # examplesIf}
-#' # Runs only when a Google Cloud project is configured.
-#' morie_vertex_health_check()
-#' \dontshow{\}) # examplesIf}
 #' @export
 morie_vertex_health_check <- function() {
   out <- list(ok = FALSE, error = NULL, model = NULL)
