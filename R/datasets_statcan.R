@@ -196,7 +196,9 @@ morie_datasets_statcan_vectors <- function(vector_ids,
 #' @param language One of `"en"` or `"fr"`.
 #' @return Character URL string.
 #' @examples
-#' \donttest{
+#' # \dontrun (not \donttest): this reaches the network. \donttest
+#' # examples ARE run by pkgdown and by CRAN's --run-donttest.
+#' \dontrun{
 #' url <- try(morie_datasets_statcan_full_csv_url(35100177))
 #' # if (!inherits(url, "try-error")) download.file(url, "ccjs_177.zip")
 #' }

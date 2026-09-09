@@ -16,9 +16,13 @@ Logical scalar -- TRUE when reachable.
 Probe a local Ollama instance
 }
 \examples{
+# \dontrun (not \donttest): this reaches the network. \donttest
+# examples ARE run by pkgdown and by CRAN's --run-donttest.
+\dontrun{
 if (requireNamespace("httr2", quietly = TRUE)) {
   old <- options(morie.llm.ollama_cached = FALSE)
   morie_llm_probe_ollama()
   options(old)
+}
 }
 }
