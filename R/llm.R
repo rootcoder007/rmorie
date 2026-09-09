@@ -162,9 +162,13 @@ if (nzchar(v)) v else NULL }
 #' @param timeout Probe timeout in seconds.
 #' @return Logical scalar -- TRUE when reachable.
 #' @examples
+#' # \dontrun (not \donttest): this reaches the network. \donttest
+#' # examples ARE run by pkgdown and by CRAN's --run-donttest.
+#' \dontrun{
 #' old <- options(morie.llm.ollama_cached = FALSE)
 #' morie_llm_probe_ollama()
 #' options(old)
+#' }
 #' @export
 morie_llm_probe_ollama <- function(timeout = 2) {
   if (!requireNamespace("httr2", quietly = TRUE)) return(FALSE)

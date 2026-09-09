@@ -155,7 +155,9 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 #' @return The snapshot URL (https), or \code{NULL} if unavailable.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_download}}
 #' @examples
-#' \donttest{
+#' # \dontrun (not \donttest): this reaches the network. \donttest
+#' # examples ARE run by pkgdown and by CRAN's --run-donttest.
+#' \dontrun{
 #' morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
 #' }
 #' @export
