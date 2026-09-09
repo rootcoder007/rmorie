@@ -120,9 +120,12 @@ morie_tps_list_categories <- function() {
 #' @return Path to the written CSV file.
 #'
 #' @examples
-#' \donttest{
-#' res <- try(morie_tps_fetch_category(morie_tps_list_categories()[1],
-#'                                     cache_dir = tempdir()))
+#' # The layers this can fetch -- a local lookup, no network.
+#' morie_tps_list_categories()
+#' \dontrun{
+#' # Each fetch is a live ArcGIS query paged 2000 records at a time.
+#' res <- morie_tps_fetch_category(morie_tps_list_categories()[1],
+#'                                 cache_dir = tempdir())
 #' }
 #' @export
 morie_tps_fetch_category <- function(category,
@@ -212,9 +215,13 @@ morie_tps_fetch_category <- function(category,
 #' @return A `data.frame`.
 #'
 #' @examples
-#' \donttest{
-#' df <- try(morie_tps_fetch_dataframe(morie_tps_list_categories()[1]))
-#' if (!inherits(df, "try-error")) head(df)
+#' # The layers this can fetch -- a local lookup, no network.
+#' morie_tps_list_categories()
+#' \dontrun{
+#' # Fetching one is a live ArcGIS query; it ran for nine minutes in the
+#' # docs build, so it is shown rather than executed.
+#' df <- morie_tps_fetch_dataframe(morie_tps_list_categories()[1])
+#' head(df)
 #' }
 #' @export
 morie_tps_fetch_dataframe <- function(category, ...) {
