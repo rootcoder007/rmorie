@@ -1245,7 +1245,7 @@ File,Line,Status,Version,Context
 ./R/sieg.R,39,STALE_OR_DEP,69.1.242,"#'   doi:10.1093/biomet/69.1.242; the form used is equation (3) of Borowski and"
 ./R/siu_fetch.R,218,STALE_OR_DEP,0.3.5,"# (>= 0.3.5) -- the ecosystem's C/C++ foundation. It fills the canonical"
 ./R/siu_fetch.R,553,STALE_OR_DEP,0.3.5,"#' package; \pkg{rmoriebricklayer} (>= 0.3.5): the sixteen panel-reviewed"
-./R/siu_fetch.R,579,STALE_OR_DEP,0.3.5,"stop(morie_siu_parse_report() needs rmoriebricklayer >= 0.3.5 ;"
+./R/siu_fetch.R,573,STALE_OR_DEP,0.3.5,"stop(morie_siu_parse_report() needs rmoriebricklayer >= 0.3.5 ;"
 ./R/siu_parser.R,47,STALE_OR_DEP,0.1.0,".SIU_R_PARSER_VERSION <- 0.1.0"
 ./R/smcopt_native.R,6,STALE_OR_DEP,2.3.1,"#   samplers; JRSS-B 68(3); 411-436; section 2.3.1(c). The"
 ./R/smcopt_native.R,111,STALE_OR_DEP,2.3.1,"& Jasra 2006; section 2.3.1c)))"
