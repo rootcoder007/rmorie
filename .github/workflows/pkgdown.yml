@@ -93,8 +93,17 @@ jobs:
           extra-packages: any::pkgdown, local::. github::rootcoder007/rmorie-bricklayer github::rootcoder007/rmoriedata github::stan-dev/cmdstanr
           needs: website
 
+      # examples = FALSE renders the example CODE on every reference page but
+      # does not EXECUTE it. Running them cost about an hour: pkgdown runs
+      # \donttest, and four topics reach live third-party services --
+      # morie_load_cpads 633s (CKAN), morie_tps_fetch_dataframe 540s (TPS),
+      # morie_ingest_statcan_csv 211s (StatCan zip), plus one more -- on top
+      # of the ~37 min it takes to render 11,417 topics at all. Two runs in a
+      # row were reclaimed by the runner before finishing. R CMD check still
+      # executes these examples on every platform in r-cmd-check.yml, so
+      # nothing goes unverified; only the docs build skips them.
       - name: Build pkgdown site
-        run: Rscript -e 'pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE)'
+        run: Rscript -e 'pkgdown::build_site_github_pages(new_process = FALSE, install = FALSE, examples = FALSE)'
 
       - name: Upload Pages artifact
         # v5.0.0 bundles upload-artifact@v7 internally (Node 24);
