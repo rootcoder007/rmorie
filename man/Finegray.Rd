@@ -29,8 +29,11 @@ list with the coefficients, their standard errors, the log-likelihood and the it
 A Cox model on the subdistribution hazard, in which subjects failing from a competing cause remain in the risk set with a decreasing weight, so the coefficients act directly on the cumulative incidence.
 }
 \examples{
-Finegray(time = c(1, 2, 3, 4, 5, 6, 7, 8), cause = c(1, 2, 3, 4, 5, 6, 7, 8),
-  X = c(1, 2, 3, 4, 5, 6, 7, 8))
+# cause: 1 is the event of interest, 2 a competing event, 0 censored.
+time  <- c(2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13)
+cause <- c(1, 2, 1, 0, 1, 2, 1, 0, 1, 2, 1, 0)
+X     <- c(0, 0, 1, 1, 0, 1, 0, 1, 1, 0, 1, 0)
+Finegray(time = time, cause = cause, X = X)$coef
 }
 \references{
 Fine, J. P. and Gray, R. J. (1999). A proportional hazards model for the subdistribution of a competing risk. JASA 94(446), 496-509.
