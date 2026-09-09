@@ -35,8 +35,11 @@ FeatureServer layer, accumulates all features in memory, and
 writes a single CSV file to \code{cache_dir}. Returns the CSV path.
 }
 \examples{
-\donttest{
-res <- try(morie_tps_fetch_category(morie_tps_list_categories()[1],
-                                    cache_dir = tempdir()))
+# The layers this can fetch -- a local lookup, no network.
+morie_tps_list_categories()
+\dontrun{
+# Each fetch is a live ArcGIS query paged 2000 records at a time.
+res <- morie_tps_fetch_category(morie_tps_list_categories()[1],
+                                cache_dir = tempdir())
 }
 }

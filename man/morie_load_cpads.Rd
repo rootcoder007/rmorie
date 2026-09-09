@@ -27,8 +27,13 @@ Resolution order:
 }
 \examples{
 \dontshow{if (requireNamespace("httr2", quietly = TRUE) && requireNamespace("jsonlite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
-\donttest{
-# Needs the CPADS PUMF (local file, cache, or a live CKAN fetch).
+# Local-first and offline: use_ckan = FALSE consults the bundled copy
+# and the local cache only, and errors when neither is present.
+cpads <- try(morie_load_cpads(use_ckan = FALSE), silent = TRUE)
+if (!inherits(cpads, "try-error")) head(cpads)
+\dontrun{
+# The live CKAN fetch pages through the datastore; it ran for over ten
+# minutes in the docs build, so it is shown rather than executed.
 cpads <- morie_load_cpads(use_ckan = TRUE)
 if (!is.null(cpads)) head(cpads)
 }
