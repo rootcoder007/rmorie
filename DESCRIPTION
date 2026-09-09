@@ -1,7 +1,7 @@
 Package: rmorie
 Type: Package
 Title: Multi-Domain Open Research and Inferential Estimation
-Version: 1.2.2
+Version: 1.2.3
 Authors@R: c(
   person(
     given = "Vansh Singh",

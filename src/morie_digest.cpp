@@ -341,7 +341,10 @@ uint32_t murmur32(const bytes& in, uint32_t seed) {
 uint32_t jenkins_oaat(const char* key, uint32_t seed) {
   uint32_t hash = seed;
   for (; *key; ++key) {
-    hash += (uint32_t)(int32_t)(signed char)*key;  // digest adds the (signed) char
+    // digest adds a plain char, so its signedness is the platform's:
+    // signed on x86, unsigned on arm. Forcing signed here matched x86
+    // and diverged on arm for any byte above 0x7f.
+    hash += (uint32_t)(int32_t)*key;
     hash += (hash << 10);
     hash ^= (hash >> 6);
   }

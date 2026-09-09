@@ -1,3 +1,14 @@
+# rmorie 1.2.3 - 2026-09-09
+
+## morie_digest2int matches digest on arm
+
+`digest::digest2int()` hashes a plain `char`, whose signedness is the
+platform's: signed on x86, unsigned on arm. The native kernel forced
+`signed char`, so it agreed with digest on x86 and diverged on arm for
+any byte above `0x7f` -- the r-universe arm64 builds failed on `"é"`,
+expecting `-1366949649` and getting `26298542`. The cast now follows the
+platform, as digest does.
+
 # rmorie 1.2.2 - 2026-09-08
 
 ## The Rd manual builds again
