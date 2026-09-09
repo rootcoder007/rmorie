@@ -17,7 +17,18 @@ test_that("encoder option paths: keep_vec_names, json_verbatim, force, digits = 
   expect_identical(to(list(inner = j), json_verbatim = TRUE), '{"inner":{"k":[1]}}')
   expect_identical(to(list(inner = j)), '{"inner":["{\\"k\\":[1]}"]}')
   expect_identical(to(0.1 + 0.2, digits = NULL), "[0.30000000000000004]")
-  expect_identical(to(1e-20, digits = NULL), "[9.9999999999999995e-21]")
+  # digits = NULL asks sprintf for 17 significant digits; the C library picks
+  # the spelling. x86 prints 9.9999999999999995e-21, Windows arm64 prints the
+  # equally exact 1e-20 -- same double, both round trip. Assert the contract
+  # (full precision that survives a round trip), not one platform's spelling.
+  tiny <- to(1e-20, digits = NULL)
+  expect_match(tiny, "^\\[[0-9.e+-]+\\]$")
+  expect_identical(as.numeric(sub("^\\[(.*)\\]$", "\\1", tiny)), 1e-20)
+  # and that round-trip assertion has to be able to fail: three significant
+  # digits cannot carry this value back exactly.
+  coarse <- to(0.1 + 0.2, digits = I(3))
+  expect_false(identical(
+    as.numeric(sub("^\\[(.*)\\]$", "\\1", coarse)), 0.1 + 0.2))
   odd <- structure(1:3, class = "odd")
   expect_identical(to(odd, force = TRUE), "[1,2,3]")
   expect_identical(to(structure(list(a = 1), class = c("odd", "list"))), '{"a":[1]}')
