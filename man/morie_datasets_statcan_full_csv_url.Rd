@@ -21,9 +21,9 @@ bulk CSV ZIP. Caller is responsible for downloading the ZIP
 (typically large -- often hundreds of MB).
 }
 \examples{
-# \dontrun (not \donttest): this reaches the network. \donttest
-# examples ARE run by pkgdown and by CRAN's --run-donttest.
-\dontrun{
+# \donttest: needs an internet connection, so it is not run by
+# default; it runs fine for a user who has one.
+\donttest{
 url <- try(morie_datasets_statcan_full_csv_url(35100177))
 # if (!inherits(url, "try-error")) download.file(url, "ccjs_177.zip")
 }

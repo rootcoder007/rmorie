@@ -26,11 +26,9 @@ sources (e.g. the OTIS "Data on Inmates in Ontario" releases) that may move
 or change upstream.
 }
 \examples{
-# \dontrun (not \donttest): this reaches a live third-party host.
-# \donttest examples ARE executed by pkgdown and by CRAN's
-# --run-donttest, so the docs build and the incoming check both fetched
-# data.ontario.ca over the network.
-\dontrun{
+# \donttest: needs an internet connection, so it is not run by
+# default; it runs fine for a user who has one.
+\donttest{
 morie_download(
   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
   tempfile(fileext = ".html")
