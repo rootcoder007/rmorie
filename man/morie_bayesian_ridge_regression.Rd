@@ -17,7 +17,7 @@ morie_bayesian_ridge_regression(x, y, lam = NULL)
 list(estimate, beta, intercept, se, beta_se, lam, n, p, method).
 }
 \description{
-beta_hat = solve(X'X + lambda\emph{I) \%}\% X'y
+beta_hat = solve(X'X + lambda*I) \%*\% X'y
 }
 \examples{
 morie_bayesian_ridge_regression(x = rnorm(50), y = rnorm(50))

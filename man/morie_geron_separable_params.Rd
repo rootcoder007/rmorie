@@ -14,7 +14,7 @@ morie_geron_separable_params(k, c_in, c_out)
 \item{c_out}{Output channels.}
 }
 \value{
-Integer parameter count k\emph{k}c_in + c_in*c_out.
+Integer parameter count k*k*c_in + c_in*c_out.
 }
 \description{
 Depthwise separable convolution weight count

@@ -16,7 +16,7 @@ list(stat, gamma, se, lags, n, crit1, crit5, crit10,
 stationary5)
 }
 \description{
-Regresses diff(x)\emph{t on a constant, x}\{t-1\} and lags lagged
+Regresses diff(x)_t on a constant, x_\{t-1\} and lags lagged
 differences; the statistic is the t-ratio on x_\{t-1\}. The null is a
 unit root, so a statistic BELOW the critical value rejects
 non-stationarity. Critical values are MacKinnon's (1991) response

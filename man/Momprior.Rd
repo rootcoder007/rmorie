@@ -20,7 +20,7 @@ returned because a sequence can be feasible by a tiny margin.
 }
 \details{
 Formula: m realisable on [0, 1] iff (-1)^k (Delta^k m)_j >= 0 for all
-j, k >= 0, where (Delta m)\emph{j = m}\{j+1\} - m_j
+j, k >= 0, where (Delta m)_j = m_\{j+1\} - m_j
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

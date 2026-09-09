@@ -23,8 +23,8 @@ Formula: P(z_n = k | z_\{1:n-1\}) = n_k / (n - 1 + alpha)
 with the remaining alpha/(n - 1 + alpha) going to a new block.  The
 rule is exchangeable: the probability of a partition depends only on
 the block sizes, through the EPPF
-alpha^K prod (n_k - 1)! / (alpha)\emph{n, and the expected number of
-blocks is sum}\{i=1..n\} alpha/(alpha + i - 1).
+alpha^K prod (n_k - 1)! / (alpha)_n, and the expected number of
+blocks is sum_\{i=1..n\} alpha/(alpha + i - 1).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/geron_w4a_native.R
 \name{morie_geron_elastic_net}
 \alias{morie_geron_elastic_net}
-\title{Elastic net cost: MSE + r\emph{alpha}L1 + (1-r)/2\emph{alpha}L2 (hmenet)}
+\title{Elastic net cost: MSE + r*alpha*L1 + (1-r)/2*alpha*L2 (hmenet)}
 \usage{
 morie_geron_elastic_net(X, y, theta, alpha, r, fit_intercept = TRUE)
 }
@@ -22,7 +22,7 @@ morie_geron_elastic_net(X, y, theta, alpha, r, fit_intercept = TRUE)
 List with \code{cost}, \code{mse}, \code{l1_penalty}, \code{l2_penalty}, \code{gradient}.
 }
 \description{
-Elastic net cost: MSE + r\emph{alpha}L1 + (1-r)/2\emph{alpha}L2 (hmenet)
+Elastic net cost: MSE + r*alpha*L1 + (1-r)/2*alpha*L2 (hmenet)
 }
 \examples{
 morie_geron_elastic_net(matrix(c(1, 2), 2, 1), c(2, 4), c(0, 

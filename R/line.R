@@ -5,7 +5,7 @@
 #' information network embedding, WWW 24, 1067-1077 (arXiv:1503.03578 --
 #' FETCHED).  First-order proximity, eqs. (1)-(3): p_1(v_i, v_j) = 1/(1 +
 #' exp(-u_i' u_j)) and O_1 = -sum_(i,j) w_ij log p_1.  Second-order, eqs.
-#' (4)-(6): p_2(v_j | v_i) = softmax_j(u'_j . u_i) and O_2 = -sum_(i,j)
+#' (4)-(6): p\_2(v\_j | v\_i) = softmax\_j(u'\_j . u\_i) and O\_2 = -sum\_(i,j)
 #' w_ij log p_2.  Both are the KL divergence between the empirical and the
 #' modelled proximity with the constants dropped, exactly as derived.
 #' Embeddings are supplied or fitted by fixed full-batch gradient steps;

@@ -30,8 +30,8 @@ list with w, b, loss_curve, decision, predicted, accuracy, n_support,
 classes, estimate, n, method.
 }
 \description{
-Subgradient update: violated margin (y_i f(x_i) < 1) -> w -= lr*(alpha\emph{w - y_i x_i),
-b += lr}y_i; satisfied -> w -= lr\emph{alpha}w. Sample order drawn from a
+Subgradient update: violated margin (y_i f(x_i) < 1) -> w -= lr*(alpha*w - y_i x_i),
+b += lr*y_i; satisfied -> w -= lr*alpha*w. Sample order drawn from a
 deterministic LCG Fisher-Yates shuffle.
 }
 \examples{

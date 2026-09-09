@@ -28,7 +28,7 @@ list: J, finite, gc_conditions_met, donsker_conditions_met.
 d\epsilon}. The square root is what makes polynomial bracketing
 growth integrable and exponential growth divergent -- that IS the
 Donsker boundary. Also reports the two envelope conditions, which
-differ between GC (needs P\emph{F) and Donsker (needs P}F^2). Mirrors
+differ between GC (needs P*F) and Donsker (needs P*F^2). Mirrors
 \code{morie.fn.ksr035}--\code{ksr038}.
 }
 \examples{

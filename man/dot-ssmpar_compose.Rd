@@ -2,7 +2,7 @@
 % Please edit documentation in R/ssmpar_native.R
 \name{.ssmpar_compose}
 \alias{.ssmpar_compose}
-\title{(A2, b2) o (A1, b1) = (A2\emph{A1, A2}b1 + b2)}
+\title{(A2, b2) o (A1, b1) = (A2*A1, A2*b1 + b2)}
 \usage{
 .ssmpar_compose(left, right)
 }

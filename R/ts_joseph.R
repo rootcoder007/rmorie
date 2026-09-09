@@ -272,7 +272,7 @@ morie_relmae <- function(y, yhat, benchmark) {
 #'
 #' The book points at the quantile loss for probabilistic forecasts.
 #' The canonical statement is TFT eq. (25): QL(y, yhat, q) =
-#' q (y - yhat)_+ + (1 - q)(yhat - y)_+ -- Lim, Arik, Loeff and
+#' q (y - yhat)\_+ + (1 - q)(yhat - y)\_+ -- Lim, Arik, Loeff and
 #' Pfister, arXiv:1912.09363.
 #' @param y observed values
 #' @param qhat forecast quantiles
@@ -725,7 +725,7 @@ morie_pacfts <- function(x, maxlag = 20L) {
 
 #' Augmented Dickey-Fuller unit-root test (ch. 6 p. 149)
 #'
-#' Regresses diff(x)_t on a constant, x_\{t-1\} and lags lagged
+#' Regresses diff(x)\_t on a constant, x\_\{t-1\} and lags lagged
 #' differences; the statistic is the t-ratio on x_\{t-1\}. The null is a
 #' unit root, so a statistic BELOW the critical value rejects
 #' non-stationarity. Critical values are MacKinnon's (1991) response
@@ -1538,12 +1538,12 @@ morie_patchts <- function(x, patchlen, stride, eps = 1e-5) {
 
 #' N-HiTS multi-rate sampling with hierarchical interpolation
 #'
-#' Quoted from the paper: (1) "y^(p)_l = MaxPool(y_l, k_l)"; (2)
-#' "h_l = MLP_l(y^(p)_l); theta^f_l = LINEAR^f(h_l); theta^b_l =
-#' LINEAR^b(h_l)"; (3) "yhat_\{tau,l\} = g(tau, theta^f_l)" with
+#' Quoted from the paper: (1) "y^(p)\_l = MaxPool(y\_l, k\_l)"; (2)
+#' "h\_l = MLP\_l(y^(p)\_l); theta^f\_l = LINEAR^f(h\_l); theta^b\_l =
+#' LINEAR^b(h\_l)"; (3) "yhat\_\{tau,l\} = g(tau, theta^f\_l)" with
 #' "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
 #' ((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
-#' "yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
+#' "yhat = sum\_l yhat\_l; y\_\{l+1\} = y\_l - ytilde\_l" -- Challu, C.,
 #' Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 #' M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
 #' wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single
@@ -1622,8 +1622,8 @@ morie_nhitsnet <- function(y, horizon, kernels, ratios, wf, wb) {
 #' GLU_omega(eta_1))" with eta_2 = ELU(W_2 a + W_3 c + b_2); (5)
 #' "GLU_omega(gamma) = sigma(W_4 gamma + b_4) * (W_5 gamma + b_5)";
 #' (6) "v_chi_t = Softmax(GRN_v_chi(Xi_t, c_s))"; (23) "yhat(q,t,tau)
-#' = W_q psitilde(t,tau) + b_q"; (25) "QL(y, yhat, q) = q(y - yhat)_+ +
-#' (1 - q)(yhat - y)_+" -- Lim, B., Arik, S. O., Loeff, N. and
+#' = W\_q psitilde(t,tau) + b\_q"; (25) "QL(y, yhat, q) = q(y - yhat)\_+ +
+#' (1 - q)(yhat - y)\_+" -- Lim, B., Arik, S. O., Loeff, N. and
 #' Pfister, T., Temporal Fusion Transformers, International Journal of
 #' Forecasting 37(4):1748-1764 (arXiv:1912.09363). All weights are
 #' caller-supplied.
@@ -1761,8 +1761,8 @@ morie_tide <- function(y, feats, fproj, enc, dec, tdec, wglobal, horizon) {
 
 #' TSMixer time-mixing and feature-mixing, all-MLP
 #'
-#' Quoted from the paper: (4) "TP_\{L->T\}(X)_\{*,i\} = W_1 X_\{*,i\} + b_1";
-#' (5) "TM(X)_\{*,i\} = Norm(X_\{*,i\} + Drop(sigma(TP_\{L->L\}(X)_\{*,i\})))"
+#' Quoted from the paper: (4) "TP\_\{L->T\}(X)\_\{\*,i\} = W\_1 X\_\{\*,i\} + b\_1";
+#' (5) "TM(X)\_\{\*,i\} = Norm(X\_\{\*,i\} + Drop(sigma(TP\_\{L->L\}(X)\_\{\*,i\})))"
 #' -- Chen, S.-A., Li, C.-L., Yoder, N. C., Arik, S. O. and Pfister,
 #' T., TSMixer: An All-MLP Architecture for Time Series Forecasting,
 #' TMLR 2023 (arXiv:2303.06053), Appendix B.3.1. Feature mixing and

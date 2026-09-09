@@ -2,7 +2,7 @@
 % Please edit documentation in R/crtT_mixedcase_native.R
 \name{.crt_egcd}
 \alias{.crt_egcd}
-\title{Extended Euclid: returns (g, c, d) with c\emph{a + d}b = g}
+\title{Extended Euclid: returns (g, c, d) with c*a + d*b = g}
 \usage{
 .crt_egcd(a, b)
 }

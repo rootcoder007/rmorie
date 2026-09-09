@@ -43,8 +43,8 @@ A list with \code{estimate}, \code{W}, \code{H}, \code{k}, \code{bpr_opt_history
 }
 \description{
 drawn from D_S. Mirrors morie.fn.bprMF.learn_bpr step for step, with
-the same draw order from the shared SplitMix64 stream: U\emph{K uniforms
-fill W, I}K uniforms fill H, then per iteration three uniforms (user
+the same draw order from the shared SplitMix64 stream: U*K uniforms
+fill W, I*K uniforms fill H, then per iteration three uniforms (user
 index, positive item, negative item) plus up to 100 negative-item
 rejection-guard uniforms.  regularizer_sign="paper" reproduces the
 printed Figure 4 update whose +lambda*Theta term diverges; the

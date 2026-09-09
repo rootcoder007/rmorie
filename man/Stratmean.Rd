@@ -36,5 +36,5 @@ Cochran (1977), Sampling Techniques, 3rd edition, Section
 cross terms vanishing because the strata are drawn independently.
 Chapter 5 read from the scanned original. Cross-checked against the
 reference implementation in the CRAN package samplingbook 1.2.4,
-whose stratamean forms sum(Meanh\emph{wh) and sum(Varh}wh^2).
+whose stratamean forms sum(Meanh*wh) and sum(Varh*wh^2).
 }

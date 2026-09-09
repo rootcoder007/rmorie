@@ -19,7 +19,7 @@ list(loss, total, coverage, q, n)
 \description{
 The book points at the quantile loss for probabilistic forecasts.
 The canonical statement is TFT eq. (25): QL(y, yhat, q) =
-q (y - yhat)\emph{+ + (1 - q)(yhat - y)}+ -- Lim, Arik, Loeff and
+q (y - yhat)_+ + (1 - q)(yhat - y)_+ -- Lim, Arik, Loeff and
 Pfister, arXiv:1912.09363.
 }
 \examples{

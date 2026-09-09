@@ -2166,7 +2166,7 @@ morie_geron_encoder_decoder_transformer <- function(src, tgt, n_layers = 6, n_he
   )
 }
 
-#' Elastic net cost: MSE + r*alpha*L1 + (1-r)/2*alpha*L2 (hmenet)
+#' Elastic net cost: MSE + r\*alpha\*L1 + (1-r)/2\*alpha\*L2 (hmenet)
 #' @param X,y Data.
 #' @param theta Parameters (bias first if fit_intercept).
 #' @param alpha Overall penalty (>=0).

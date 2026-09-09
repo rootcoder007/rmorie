@@ -7,8 +7,8 @@
 #' with the remaining alpha/(n - 1 + alpha) going to a new block.  The
 #' rule is exchangeable: the probability of a partition depends only on
 #' the block sizes, through the EPPF
-#' alpha^K prod (n_k - 1)! / (alpha)_n, and the expected number of
-#' blocks is sum_\{i=1..n\} alpha/(alpha + i - 1).
+#' alpha^K prod (n\_k - 1)! / (alpha)\_n, and the expected number of
+#' blocks is sum\_\{i=1..n\} alpha/(alpha + i - 1).
 #'
 #' @param partition Block label of each of the n observations seated.
 #' @param alpha Concentration, strictly positive.

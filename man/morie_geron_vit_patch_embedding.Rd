@@ -17,7 +17,7 @@ morie_geron_vit_patch_embedding(
 
 \item{patch_size}{Divisor of both H and W.}
 
-\item{E}{(p\emph{p}C, d_model) projection.}
+\item{E}{(p*p*C, d_model) projection.}
 
 \item{E_pos}{Optional (n_patches + 1, d_model) positional table.}
 

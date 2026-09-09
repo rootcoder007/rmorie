@@ -10,7 +10,7 @@
 #' zeroing the rest, so the first term is a finite sum; the small-ball
 #' probability is estimated on the l2 norm by Monte Carlo.
 #'
-#' Formula: ||h||_H^2 = sum_\{i kept\} f0_i^2 / lambda_i;
+#' Formula: ||h||\_H^2 = sum\_\{i kept\} f0\_i^2 / lambda\_i;
 #'   small-ball exponent = -log P(sqrt(sum_i lambda_i Z_i^2) < eps).
 #'
 #' @param f0_coefs Coefficients of the target w0.

@@ -28,9 +28,9 @@ Bickel, P. J. and Sakov, A. (2008), "On the choice of m in the m out of n
 bootstrap and confidence bounds for extrema", Statistica Sinica 18(3),
 967-985.  The rule is stated verbatim on page 971 and was read from the
 journal PDF: (1) consider m_j = ceil(q^j n), j = 0, 1, 2, ..., 0 < q < 1;
-(2) for each m_j find the bootstrap law L*\emph{(m_j, n); (3) with rho a metric
-consistent with convergence in law, m_hat = argmin}(m_j) rho(L*\emph{(m_j,n),
-L*}(m_(j+1),n)), and "if the difference is minimized for a few values of
+(2) for each m_j find the bootstrap law L*_(m_j, n); (3) with rho a metric
+consistent with convergence in law, m_hat = argmin_(m_j) rho(L*_(m_j,n),
+L*_(m_(j+1),n)), and "if the difference is minimized for a few values of
 m_j, then pick the LARGEST among them"; (4) estimate L by L*_(m_hat, n).
 The paper's own choice of rho, and the one its proofs are for, is the
 Kolmogorov sup distance sup_x |F(x) - G(x)|; that is what is used here.

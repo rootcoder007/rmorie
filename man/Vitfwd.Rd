@@ -44,7 +44,7 @@ Read from the PDF rendered as page images, not from the text layer.
 \details{
 Equations (1)-(4), p. 4:
 z_0 = [x_class; x_p^1 E; ...; x_p^N E] + E_pos, E in R^\{(P^2 . C) x D\},
-E_pos in R^\{(N+1) x D\} (1); z'\emph{l = MSA(LN(z}\{l-1\})) + z_\{l-1\},
+E_pos in R^\{(N+1) x D\} (1); z'_l = MSA(LN(z_\{l-1\})) + z_\{l-1\},
 l = 1 ... L (2); z_l = MLP(LN(z'_l)) + z'_l, l = 1 ... L (3);
 y = LN(z_L^0) (4).
 

@@ -18,9 +18,9 @@ morie_jackknife_estimator(x, statistic = NULL)
 Named list: estimate (T_jack), theta_hat, bias, var, se, n, method.
 }
 \description{
-Leave-one-out jackknife: bias_jack = (n-1)\emph{(mean(T_minus_i) - T_hat),
+Leave-one-out jackknife: bias_jack = (n-1)*(mean(T_minus_i) - T_hat),
 var_jack = (n-1)/n * sum((T_minus_i - mean(T_minus_i))^2),
-T_jack = n}T_hat - (n-1)*mean(T_minus_i).
+T_jack = n*T_hat - (n-1)*mean(T_minus_i).
 }
 \examples{
 res <- jkest(c(3, 5, 7, 9, 11))
