@@ -155,9 +155,9 @@ morie_bricklayer <- function(yes = FALSE, check = FALSE) {
 #' @return The snapshot URL (https), or \code{NULL} if unavailable.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_download}}
 #' @examples
-#' # \dontrun (not \donttest): this reaches the network. \donttest
-#' # examples ARE run by pkgdown and by CRAN's --run-donttest.
-#' \dontrun{
+#' # \donttest: needs an internet connection, so it is not run by
+#' # default; it runs fine for a user who has one.
+#' \donttest{
 #' morie_wayback_url("https://data.ontario.ca/dataset/data-on-inmates-in-ontario")
 #' }
 #' @export
@@ -186,11 +186,9 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
-#' # \dontrun (not \donttest): this reaches a live third-party host.
-#' # \donttest examples ARE executed by pkgdown and by CRAN's
-#' # --run-donttest, so the docs build and the incoming check both fetched
-#' # data.ontario.ca over the network.
-#' \dontrun{
+#' # \donttest: needs an internet connection, so it is not run by
+#' # default; it runs fine for a user who has one.
+#' \donttest{
 #' morie_download(
 #'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
 #'   tempfile(fileext = ".html")
