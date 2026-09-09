@@ -60,8 +60,8 @@ Quoted from the paper: (2)-(4) "GRN_omega(a, c) = LayerNorm(a +
 GLU_omega(eta_1))" with eta_2 = ELU(W_2 a + W_3 c + b_2); (5)
 "GLU_omega(gamma) = sigma(W_4 gamma + b_4) * (W_5 gamma + b_5)";
 (6) "v_chi_t = Softmax(GRN_v_chi(Xi_t, c_s))"; (23) "yhat(q,t,tau)
-= W_q psitilde(t,tau) + b_q"; (25) "QL(y, yhat, q) = q(y - yhat)\emph{+ +
-(1 - q)(yhat - y)}+" -- Lim, B., Arik, S. O., Loeff, N. and
+= W_q psitilde(t,tau) + b_q"; (25) "QL(y, yhat, q) = q(y - yhat)_+ +
+(1 - q)(yhat - y)_+" -- Lim, B., Arik, S. O., Loeff, N. and
 Pfister, T., Temporal Fusion Transformers, International Journal of
 Forecasting 37(4):1748-1764 (arXiv:1912.09363). All weights are
 caller-supplied.

@@ -18,8 +18,8 @@ standard_conv_params, savings_ratio, output_shape, final_map, estimate, n, metho
 }
 \description{
 Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
-and parameter counts; separable convs cost k\emph{k}c_in + c_in\emph{c_out,
-batch norm 2}C trainable + 2*C non-trainable per layer.
+and parameter counts; separable convs cost k*k*c_in + c_in*c_out,
+batch norm 2*C trainable + 2*C non-trainable per layer.
 }
 \examples{
 morie_geron_xception()

@@ -16,8 +16,8 @@ List with \code{inner}, \code{inner_pairwise}, \code{cos_angle},
 self-check.
 }
 \description{
-Formula: <x, y>_a = sum_i clr(x)_i clr(y)\emph{i
-= (1/D) sum}\{i<j\} log(x_i/x_j) log(y_i/y_j)
+Formula: <x, y>_a = sum_i clr(x)_i clr(y)_i
+= (1/D) sum_\{i<j\} log(x_i/x_j) log(y_i/y_j)
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

@@ -22,9 +22,9 @@ List with bias, lower, upper, halfwidth, worstgamma,
 normsens, z, c.
 }
 \description{
-|bias| <= c ||s||\emph{2 by Cauchy-Schwarz, attained at
+|bias| <= c ||s||_2 by Cauchy-Schwarz, attained at
 gamma = c s / ||s||, and the conservative interval is
-estimate +/- (c ||s|| + z}\{1-alpha/2\} se).
+estimate +/- (c ||s|| + z_\{1-alpha/2\} se).
 }
 \examples{
 Misspecbd(estimate = 0.5, sensitivity = c(0.1, 0.2), c = 0.3, se = 0.1)

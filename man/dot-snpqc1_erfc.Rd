@@ -2,7 +2,7 @@
 % Please edit documentation in R/snpqc1_native.R
 \name{.snpqc1_erfc}
 \alias{.snpqc1_erfc}
-\title{Complementary error function via pnorm: erfc(x) = 2\emph{pnorm(-x}sqrt2)}
+\title{Complementary error function via pnorm: erfc(x) = 2*pnorm(-x*sqrt2)}
 \usage{
 .snpqc1_erfc(x)
 }

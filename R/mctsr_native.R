@@ -12,7 +12,7 @@
 #' by BESTCHILD while fully expanded, EXPAND adds one untried action,
 #' DEFAULTPOLICY plays uniformly at random to a terminal state, and
 #' BACKUP propagates the reward. Selection uses
-#' UCT_j = Xbar_j + 2*Cp*sqrt(2*log(n)/n_j), unvisited children
+#' UCT\_j = Xbar\_j + 2\*Cp\*sqrt(2\*log(n)/n\_j), unvisited children
 #' valued Inf. Cp = 1/sqrt(2) is the Kocsis-Szepesvari value for
 #' rewards in [0, 1].  Both survey backups are provided: "sum"
 #' (Algorithm 2) and "negamax" (Algorithm 3, two-player zero-sum).

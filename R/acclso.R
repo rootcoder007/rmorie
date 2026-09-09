@@ -1,10 +1,10 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' FISTA for the LASSO
 #'
-#' Minimises F(b) = 0.5 ||X b - y||^2 + lam ||b||_1 by the accelerated
+#' Minimises F(b) = 0.5 ||X b - y||^2 + lam ||b||\_1 by the accelerated
 #' proximal-gradient scheme of Beck and Teboulle (2009, Sect. 4):
 #' x_k = soft(y_k - grad f(y_k)/L, lam/L),
-#' t_\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+#' t\_\{k+1\} = (1 + sqrt(1 + 4 t\_k^2))/2,
 #' y_\{k+1\} = x_k + ((t_k - 1)/t_\{k+1\})(x_k - x_\{k-1\}).
 #'
 #' @param X Design matrix, one record per row.

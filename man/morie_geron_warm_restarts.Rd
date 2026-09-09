@@ -21,7 +21,7 @@ list with eta, cycle, cycle_length, step_in_cycle, restarts, T0,
 factor, estimate, n, method.
 }
 \description{
-eta = eta_min + 0.5*(eta_max-eta_min)\emph{(1+cos(pi}T_cur/T_i)); cycle
+eta = eta_min + 0.5*(eta_max-eta_min)*(1+cos(pi*T_cur/T_i)); cycle
 lengths grow geometrically \verb{T_\{i+1\}} = round(T_i * factor).
 }
 \examples{

@@ -20,8 +20,8 @@ list with mu, log_var, z, reconstruction, recon_error, kl, elbo,
 loss_curve, params, beta, estimate, n, method.
 }
 \description{
-z = mu + sigma\emph{eps (reparameterisation trick), trained by gradient
-descent on the negative ELBO = recon MSE + beta}KL(q||N(0,I)).
+z = mu + sigma*eps (reparameterisation trick), trained by gradient
+descent on the negative ELBO = recon MSE + beta*KL(q||N(0,I)).
 }
 \examples{
 V <- c(1, 2, 3, 4, 5, 6, 7, 8)

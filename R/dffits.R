@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: AGPL-3.0-or-later
 #' DFFITS, the scaled deletion influence on the fitted value
 #'
-#' Formula: DFFITS_i = t*_i sqrt(h_ii/(1-h_ii)), t*_i = e_i / (s_(i) sqrt(1-h_ii))
+#' Formula: DFFITS\_i = t\*\_i sqrt(h\_ii/(1-h\_ii)), t\*\_i = e\_i / (s\_(i) sqrt(1-h\_ii))
 #'
 #' @param X Design matrix.
 #' @param y Response.

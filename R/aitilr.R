@@ -4,9 +4,9 @@
 #' Source consulted as a rendered page image, not the OCR text layer:
 #' Mateu-Figueras, Pawlowsky-Glahn and Egozcue, "The normal distribution in
 #' some constrained sample spaces", pp. 10-11, which prints the Aitchison
-#' inner product <x, x*>_a = (1/D) sum_\{i<j\} ln(x_i/x_j) ln(x*_i/x*_j),
+#' inner product <x, x\*>\_a = (1/D) sum\_\{i<j\} ln(x\_i/x\_j) ln(x\*\_i/x\*\_j),
 #' equation (10), and the default orthonormal basis of Egozcue et al. (2003),
-#' y_i = 1/sqrt(i(i+1)) * ln((x_1 x_2 ... x_i) / x_\{i+1\}^i), i = 1..D-1,
+#' y\_i = 1/sqrt(i(i+1)) \* ln((x\_1 x\_2 ... x\_i) / x\_\{i+1\}^i), i = 1..D-1,
 #' equation (11).
 #'
 #' Primary reference verified against Crossref: Egozcue, Pawlowsky-Glahn,

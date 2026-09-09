@@ -23,12 +23,12 @@ list(forecast, residual, nblocks, sizes, first, last, mean,
 residnorm)
 }
 \description{
-Quoted from the paper: (1) "y^(p)\emph{l = MaxPool(y_l, k_l)"; (2)
-"h_l = MLP_l(y^(p)\emph{l); theta^f_l = LINEAR^f(h_l); theta^b_l =
-LINEAR^b(h_l)"; (3) "yhat}\{tau,l\} = g(tau, theta^f_l)" with
+Quoted from the paper: (1) "y^(p)_l = MaxPool(y_l, k_l)"; (2)
+"h_l = MLP_l(y^(p)_l); theta^f_l = LINEAR^f(h_l); theta^b_l =
+LINEAR^b(h_l)"; (3) "yhat_\{tau,l\} = g(tau, theta^f_l)" with
 "|theta^f_l| = ceil(r_l H)"; (4) "g(tau, theta) = theta[t1] +
 ((theta[t2]-theta[t1])/(t2-t1))(tau-t1)"; doubly residual stacking
-"yhat = sum_l yhat_l; y}\{l+1\} = y_l - ytilde_l" -- Challu, C.,
+"yhat = sum_l yhat_l; y_\{l+1\} = y_l - ytilde_l" -- Challu, C.,
 Olivares, K. G., Oreshkin, B. N., Garza, F., Mergenthaler-Canseco,
 M. and Dubrawski, A., N-HiTS, AAAI 2023 (arXiv:2201.12886).
 wf[[l]] and wb[[l]] stand in for MLP_l followed by LINEAR: a single

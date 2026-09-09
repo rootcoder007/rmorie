@@ -3,7 +3,7 @@
 #'
 #' FISTA with the proximal map of a box indicator, i.e. the component-wise
 #' clamp: x_k = clamp(y_k - grad f(y_k)/L),
-#' t_\{k+1\} = (1 + sqrt(1 + 4 t_k^2))/2,
+#' t\_\{k+1\} = (1 + sqrt(1 + 4 t\_k^2))/2,
 #' y_\{k+1\} = x_k + ((t_k-1)/t_\{k+1\})(x_k - x_\{k-1\}).
 #'
 #' @param X Design matrix.

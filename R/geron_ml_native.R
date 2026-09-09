@@ -6349,7 +6349,7 @@ morie_geron_bart <- function(src, tgt, mask_ratio = 0.3, mean_span = 3,
 
 #' AlexNet architecture resolved to shapes and parameter counts (Geron Ch 12, hmalex)
 #'
-#' out = floor((in - k + 2p)/s) + 1 and params = filters*(k*k*C) + filters,
+#' out = floor((in - k + 2p)/s) + 1 and params = filters\*(k\*k\*C) + filters,
 #' so an input size that collapses a feature map to zero is an error
 #' rather than a silent negative dimension.
 #'

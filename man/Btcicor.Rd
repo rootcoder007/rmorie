@@ -30,8 +30,8 @@ the percentile machinery.
 Pairs are resampled -- rows of (x, y) together, never the two vectors
 independently, which would destroy the very dependence being estimated.
 Each resample gives r*_b; the interval is built on the variance-stabilising
-transform z*\emph{b = atanh(r*\emph{b) and mapped back with tanh,
-[tanh(z*}(alpha/2)), tanh(z*}(1-alpha/2))].
+transform z*_b = atanh(r*_b) and mapped back with tanh,
+[tanh(z*_(alpha/2)), tanh(z*_(1-alpha/2))].
 
 Because tanh is monotone the transform does not move the percentile
 endpoints at all -- tanh(quantile) = quantile(tanh) -- so on its own it buys

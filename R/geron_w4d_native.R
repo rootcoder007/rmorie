@@ -882,8 +882,8 @@ morie_geron_sft <- function(model = NULL, instruction_data, epochs = 200, lr = 0
 
 #' SGD classifier with hinge loss (linear SVM) trained by stochastic gradient descent
 #'
-#' Subgradient update: violated margin (y_i f(x_i) < 1) -> w -= lr*(alpha*w - y_i x_i),
-#' b += lr*y_i; satisfied -> w -= lr*alpha*w. Sample order drawn from a
+#' Subgradient update: violated margin (y\_i f(x\_i) < 1) -> w -= lr\*(alpha\*w - y\_i x\_i),
+#' b += lr\*y\_i; satisfied -> w -= lr\*alpha\*w. Sample order drawn from a
 #' deterministic LCG Fisher-Yates shuffle.
 #'
 #' @param X Design matrix (n, d).
@@ -3101,8 +3101,8 @@ morie_geron_vae_loss_and_grads <- function(X, params, eps, beta = 1.0) {
 
 #' Variational autoencoder with latent Gaussian prior
 #'
-#' z = mu + sigma*eps (reparameterisation trick), trained by gradient
-#' descent on the negative ELBO = recon MSE + beta*KL(q||N(0,I)).
+#' z = mu + sigma\*eps (reparameterisation trick), trained by gradient
+#' descent on the negative ELBO = recon MSE + beta\*KL(q||N(0,I)).
 #'
 #' @param X Training data (n, d).
 #' @param latent_dim,epochs,lr,beta,seed As in Python original.
@@ -3795,7 +3795,7 @@ morie_geron_wordpiece_tokenizer <- function(corpus, vocab_size = 50) {
 
 #' Warm restarts: cosine decay with periodic restarts (SGDR)
 #'
-#' eta = eta_min + 0.5*(eta_max-eta_min)*(1+cos(pi*T_cur/T_i)); cycle
+#' eta = eta\_min + 0.5\*(eta\_max-eta\_min)\*(1+cos(pi\*T\_cur/T\_i)); cycle
 #' lengths grow geometrically `T_{i+1}` = round(T_i * factor).
 #'
 #' @param t Integer step or vector of steps (>=0).
@@ -3864,8 +3864,8 @@ morie_geron_separable_params <- function(k, c_in, c_out) {
 #' Xception: extreme inception using depthwise separable convolutions
 #'
 #' Resolves the entry/middle(x8)/exit flow into concrete layers, shapes
-#' and parameter counts; separable convs cost k*k*c_in + c_in*c_out,
-#' batch norm 2*C trainable + 2*C non-trainable per layer.
+#' and parameter counts; separable convs cost k\*k\*c\_in + c\_in\*c\_out,
+#' batch norm 2\*C trainable + 2\*C non-trainable per layer.
 #'
 #' @param n_classes,in_channels,input_size As in Python original.
 #' @return list with layers, total_params, trainable_params, non_trainable_params,
@@ -4293,8 +4293,8 @@ morie_geron_box_iou <- function(a, b) {
 
 #' YOLO: single-shot object detection via grid regression
 #'
-#' Decodes an (S,S,B*5+C) prediction tensor (tx,ty,tw,th,conf per box,
-#' shared class probs per cell), score = conf*class_prob, greedy
+#' Decodes an (S,S,B\*5+C) prediction tensor (tx,ty,tw,th,conf per box,
+#' shared class probs per cell), score = conf\*class\_prob, greedy
 #' per-class NMS at iou_threshold.
 #'
 #' @param image Passed to model unchanged.
