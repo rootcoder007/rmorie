@@ -184,7 +184,11 @@ morie_wayback_url <- function(url, timestamp = NULL) {
 #' @return The downloaded path, per \code{rmoriebricklayer::friendly_download()}.
 #' @seealso \code{\link{morie_bricklayer}}, \code{\link{morie_wayback_url}}
 #' @examples
-#' \donttest{
+#' # \dontrun (not \donttest): this reaches a live third-party host.
+#' # \donttest examples ARE executed by pkgdown and by CRAN's
+#' # --run-donttest, so the docs build and the incoming check both fetched
+#' # data.ontario.ca over the network.
+#' \dontrun{
 #' morie_download(
 #'   "https://data.ontario.ca/dataset/data-on-inmates-in-ontario",
 #'   tempfile(fileext = ".html")
