@@ -22,7 +22,14 @@ Named list (estimate, g_hat, beta, se, lambda_gblup, n, method).
 Solves Henderson's MME with VanRaden G.
 }
 \examples{
-morie_gblup_full(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
+# Seeded, and with more markers than individuals: VanRaden G is
+# centred, so it is rank deficient by one dimension whatever the
+# data, and 4 markers at n = 50 left solve() close enough to
+# singular that an unlucky draw failed on some BLAS builds.
+set.seed(1)
+n <- 50
+markers <- matrix(sample(0:2, n * 500, TRUE), n, 500)
+morie_gblup_full(x = rnorm(n), y = rnorm(n), markers = markers)$beta
 }
 \references{
 Montesinos Lopez Ch 3.
