@@ -1,3 +1,16 @@
+# This file takes about 4.7 minutes, and the eight slowest files are 60% of
+# the suite. r-universe kills a platform job at ~75 minutes and the macOS
+# x86_64 builder was dying mid-tests, so these are opt-in. Our own CI sets
+# RMORIE_SLOW_TESTS=1, which is where the full suite is verified.
+test_that("test-cov-database2 is slow and opt-in", {
+  skip_if_not(nzchar(Sys.getenv("RMORIE_SLOW_TESTS")),
+              "slow file: set RMORIE_SLOW_TESTS=1 to run it")
+  succeed()
+})
+if (!nzchar(Sys.getenv("RMORIE_SLOW_TESTS"))) {
+  skip("slow file: set RMORIE_SLOW_TESTS=1 to run it")
+}
+
 # SPDX-License-Identifier: AGPL-3.0-or-later
 # Coverage wave 11 -- R/database.R part 2: dataset metadata, userguide
 # listing, bootstrap downloads, and the download-URL / ArcGIS
