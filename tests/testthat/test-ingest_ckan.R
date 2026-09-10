@@ -130,14 +130,22 @@ test_that("fetch_package_csvs routes through ckan_call (mocked)", {
 
 test_that("search_packages routes through http helper (mocked)", {
   set.seed(1)
+  # Mock the seam the implementation actually uses: .morie_ckan_call goes
+  # through .morie_dataset_http_text (raw body) then .morie_from_json. The
+  # old .morie_dataset_http_json mock intercepted nothing, so this test was
+  # doing a LIVE network call -- fine wherever the portal answers, an error
+  # on a builder with no network.
   testthat::local_mocked_bindings(
-    .morie_dataset_http_json = function(url, ...) {
-      list(result = list(results = list(list(id = "mp", title = "Mocked Title"))))
+    .morie_dataset_http_text = function(url, ...) {
+      paste0('{"success": true, "result": {"count": 1, ',
+             '"results": [{"id": "mp", "title": "Mocked Title"}]}}')
     },
     .package = "rmorie"
   )
   res <- morie_ingest_ckan_search_packages("https://open.canada.ca/data", query = "x", rows = 1L)
   expect_s3_class(res, "data.frame")
+  # the mock supplied this, so a live call cannot be what satisfied the test
+  expect_true("Mocked Title" %in% unlist(res, use.names = FALSE))
 })
 
 test_that("read_path reads csv via readr when installed", {
