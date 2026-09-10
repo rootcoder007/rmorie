@@ -18,5 +18,6 @@ Named list: \code{tau}, \code{p_value}.
 Kendall's tau-b
 }
 \examples{
+set.seed(1)
 morie_kendall_tau(x = rnorm(50), y = rnorm(50))
 }

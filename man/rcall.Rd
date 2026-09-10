@@ -24,6 +24,7 @@ per-roll-call marginals, and the Poole-Rosenthal "lopsided"
 4, 5, 6 = nay; 0, 7, 8, 9 = absent) and re-maps automatically.
 }
 \examples{
+set.seed(1)
 rcall(x = rnorm(50))
 }
 \keyword{internal}

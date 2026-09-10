@@ -25,6 +25,7 @@ index, the form in which hydrology and climatology cite Sen
 reading, stated only when Sen's interval excludes zero.
 }
 \examples{
+set.seed(1)
 morie_rob_sens_slope(cumsum(stats::rnorm(30, 0.5)))$trend
 }
 \references{

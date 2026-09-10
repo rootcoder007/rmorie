@@ -29,6 +29,7 @@ does, and its bias carries \code{b_3} rather than \code{b_2}; the covariance
 is the same.
 }
 \examples{
+set.seed(1)
 morie_fauzi_cumulative_survival_2(stats::rexp(60), c(0.5, 1))$S_cumulative
 }
 \references{

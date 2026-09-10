@@ -19,5 +19,6 @@ Two-sample median test: contingency-table chi-square on the
 counts above/below the pooled-sample median.
 }
 \examples{
+set.seed(1)
 morie_control_median_test(x = rnorm(50), y = rnorm(50))
 }

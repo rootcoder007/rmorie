@@ -12,6 +12,7 @@
 #' @references Schabenberger & Gotway (2005), Sec 6.2.2.1
 #'   "Simultaneous Autoregressive (SAR) Models", pp. 335-341.
 #' @examples
+#' set.seed(1)
 #' n <- 20
 #' W <- matrix(0, n, n); W[cbind(1:(n-1), 2:n)] <- 1; W <- W + t(W)
 #' W <- W / pmax(rowSums(W), 1)

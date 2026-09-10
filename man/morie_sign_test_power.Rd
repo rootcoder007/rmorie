@@ -24,5 +24,6 @@ Builds the discrete rejection region under H0: p = 0.5 with size
 <= alpha, then evaluates power at the alternative p_alt.
 }
 \examples{
+set.seed(1)
 morie_sign_test_power(x = rnorm(50))
 }

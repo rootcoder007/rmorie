@@ -36,5 +36,6 @@ Named list with estimate, se, mu, sd, length_scale, nu, noise, n, method.
 GP posterior mean with Matern kernel
 }
 \examples{
+set.seed(1)
 morie_ghosal_gp_matern(x = rnorm(50), y = rnorm(50))
 }

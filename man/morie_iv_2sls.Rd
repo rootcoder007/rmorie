@@ -43,6 +43,7 @@ first-stage F is below 10 and returns the identification-robust
 Anderson-Rubin set instead.
 }
 \examples{
+set.seed(1)
 n <- 200
 z <- rnorm(n); u <- rnorm(n)
 d <- z + 0.5 * u + rnorm(n)

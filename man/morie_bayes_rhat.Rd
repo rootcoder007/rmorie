@@ -16,5 +16,6 @@ Named numeric R-hat per parameter.
 Gelman-Rubin R-hat for a set of MCMC chains
 }
 \examples{
+set.seed(1)
 morie_bayes_rhat(list(matrix(rnorm(200), 100), matrix(rnorm(200), 100)))
 }

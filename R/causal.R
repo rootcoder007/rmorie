@@ -307,6 +307,7 @@ NULL
 #'   \code{nrow(data)}).
 #' @export
 #' @examples
+#' set.seed(1)
 #' df <- data.frame(t = c(0, 1, 0, 1, 0, 1), x = rnorm(6))
 #' ps <- morie_estimate_propensity_scores(df, "t", "x")
 # Trim propensity scores.  BOTH routes in use are available and the
@@ -1000,6 +1001,7 @@ morie_estimate_gate <- function(data, treatment, outcome, covariates,
 #'   native; `outcome_model` applies to the T/S-learners only.
 #' @return Numeric vector of per-unit CATE estimates.
 #' @examples
+#' set.seed(1)
 #' morie_estimate_cate(
 #'   data = data.frame(
 #'     t = stats::rbinom(100, 1, 0.4),
@@ -1212,6 +1214,7 @@ morie_e_value <- function(rr, rr_lower = NULL) {
 #'   test.
 #' @return Data frame with columns: `gamma`, `p_lower`, `p_upper`.
 #' @examples
+#' set.seed(1)
 #' morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
 #' @export
 #' @references
@@ -1506,6 +1509,7 @@ morie_estimate_double_ml <- function(data, outcome, treatment, covariates,
 #'   Inferring causal impact using Bayesian structural time-series
 #'   models. *Annals of Applied Statistics*, 9(1):247-274.
 #' @examples
+#' set.seed(1)
 #' morie_causal_impact(data = data.frame(y = rnorm(10), x = rnorm(10)),
 #'     pre_period = c(1, 5), post_period = c(6, 10))
 morie_causal_impact <- function(data, pre_period, post_period,
@@ -1573,6 +1577,7 @@ morie_causal_impact <- function(data, pre_period, post_period,
 #'   Greifer N (2024). WeightIt: Weighting for Covariate Balance in
 #'   Observational Studies. R package version 1.4.0.
 #' @examples
+#' set.seed(1)
 #' morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4),
 #'     x = rnorm(20)), treatment = "t", covariates = "x")
 morie_causal_weighting <- function(data, treatment, covariates,
@@ -1644,6 +1649,7 @@ morie_causal_weighting <- function(data, treatment, covariates,
 #'   An Object-Oriented Implementation of Clustered Covariances in R.
 #'   \emph{Journal of Statistical Software}, 95(1), 1-36.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(30), y = rnorm(30))
 #' m <- stats::lm(y ~ x, data = d)
 #' n <- 80L

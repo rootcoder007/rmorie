@@ -52,6 +52,7 @@ covariates.  Optionally fits the proportional-odds baseline and
 returns the likelihood-ratio test of PO vs. threshold-specific.
 }
 \examples{
+set.seed(1)
 if (FALSE) {
   df <- data.frame(
     y = sample(c("low", "med", "high"), 200, replace = TRUE),

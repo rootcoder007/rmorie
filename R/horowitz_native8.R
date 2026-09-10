@@ -114,6 +114,7 @@
 #' @references Horowitz, Sec. 2.5.5; Han (1987), Sherman (1993),
 #'   Cavanagh and Sherman (1998), Subbotin (2008).
 #' @examples
+#' set.seed(1)
 #' x <- cbind(rnorm(80), rnorm(80))
 #' morie_rank_index(x, tanh(x %*% c(1, -0.6)) + rnorm(80) * 0.3)$beta
 #' @export
@@ -214,6 +215,7 @@ morie_rank_index <- function(x, y, variant = "mrc", M = NULL) {
 #' @references Horowitz, Sec. 2.5.2, eq. (2.32); Ichimura (1993),
 #'   Chamberlain (1986), Newey and Stoker (1993).
 #' @examples
+#' set.seed(1)
 #' x <- cbind(rnorm(100), rnorm(100))
 #' y <- tanh(x %*% c(1, -0.6)) + rnorm(100) * 0.3
 #' morie_nls_weight_function(x, y, beta_hat = c(1, -0.6))$efficient_weight_used
@@ -314,6 +316,7 @@ morie_nls_weight_function <- function(x, y, bandwidth = NULL, weights = NULL,
 #'   n, d, method.
 #' @references Horowitz, Sec. 2.6.4, eqs. (2.52)-(2.55).
 #' @examples
+#' set.seed(1)
 #' x <- cbind(rnorm(100), rnorm(100))
 #' y <- tanh(x %*% c(1, -0.6)) + rnorm(100) * 0.3
 #' morie_one_step_efficient(x, y, initial_estimator = c(1, -0.2))$n_steps
@@ -418,6 +421,7 @@ morie_one_step_efficient <- function(x, y, bandwidth = NULL,
 #' @references Horowitz, Sec. 2.6.3, eqs. (2.45)-(2.51),
 #'   Assumption G, Theorem 2.5; Horowitz and Hardle (1996).
 #' @examples
+#' set.seed(1)
 #' n <- 300
 #' x <- cbind(rnorm(n), rnorm(n))
 #' z <- as.numeric(sample(0:2, n, TRUE))

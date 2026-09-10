@@ -27,6 +27,7 @@ genuinely sparse but self-consistent cluster is not flagged, because
 every member is exactly as sparse as its neighbours.
 }
 \examples{
+set.seed(1)
 X <- rbind(matrix(rnorm(100), ncol = 2), c(6, 6))
 round(max(morie_local_outlier_factor(X, k = 5)$lof), 3)
 }

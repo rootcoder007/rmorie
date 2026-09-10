@@ -11,6 +11,7 @@
 #' @return Named list: statistic (W), p_value, df, chi2, n, k.
 #' @importFrom stats pchisq
 #' @examples
+#' set.seed(1)
 #' morie_concordance_incomplete(x = rnorm(50))
 #' @export
 morie_concordance_incomplete <- function(x) {

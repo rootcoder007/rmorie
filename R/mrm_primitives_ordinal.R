@@ -108,6 +108,7 @@ NULL
 #'   \code{proportional_odds_p}.
 #' @export
 #' @examples
+#' set.seed(1)
 #' if (FALSE) {
 #'   df <- data.frame(
 #'     y = sample(c("low", "med", "high"), 200, replace = TRUE),

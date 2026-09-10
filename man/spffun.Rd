@@ -29,6 +29,7 @@ to departures in opposite directions: clustering leaves large empty
 gaps, so F_hat falls BELOW the CSR curve while G_hat rises above it.
 }
 \examples{
+set.seed(1)
 spffun(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10), n_grid = 20)
 }
 \references{

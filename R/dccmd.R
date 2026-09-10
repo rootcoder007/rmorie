@@ -53,6 +53,7 @@
 #' @return Named list with \code{a, b, unconditional_correlation,
 #'   conditional_correlation, conditional_variance, loglik, n, k, method}.
 #' @examples
+#' set.seed(1)
 #' morie_dcc_multivariate_garch(x = matrix(rnorm(150), 50, 3))
 #' @export
 morie_dcc_multivariate_garch <- function(x) {

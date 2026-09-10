@@ -22,6 +22,7 @@ Routes to the shared native entropy-balancing solver
 covariate means match the treated means exactly (ATT).
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_entropy(d, "t", "x")
 }

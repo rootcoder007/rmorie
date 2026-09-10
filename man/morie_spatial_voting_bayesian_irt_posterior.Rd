@@ -19,6 +19,7 @@ List with \code{posterior_mean}, \code{posterior_sd}, \code{ci_lower},
 Posterior summaries for a Bayesian IRT chain
 }
 \examples{
+set.seed(1)
 ch <- array(rnorm(100 * 5 * 2), c(100, 5, 2))
 morie_spatial_voting_bayesian_irt_posterior(ch)
 }

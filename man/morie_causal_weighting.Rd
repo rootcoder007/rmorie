@@ -51,6 +51,7 @@ Hard-errors if \pkg{WeightIt} is not installed -- the multi-method
 weighting machinery has no compact inline equivalent.
 }
 \examples{
+set.seed(1)
 if (requireNamespace("WeightIt", quietly = TRUE) && requireNamespace("sandwich", quietly = TRUE)) {
   morie_causal_weighting(data = data.frame(t = rbinom(20, 1, 0.4), 
       x = rnorm(20)), treatment = "t", covariates = "x")

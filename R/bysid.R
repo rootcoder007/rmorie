@@ -16,6 +16,7 @@
 #' @return Named list with `x_mean`, `x_sd`, `x_ci`, `alpha`, `beta`,
 #'   `n_iter`, `method`.
 #' @examples
+#' set.seed(1)
 #' bysid(x = rnorm(50))
 #' @export
 bysid <- function(x, n_iter = 400L, burn = 100L, seed = 0L,

@@ -28,6 +28,7 @@ without giving the breakdown back. Computation is random p-subsets
 plus local IRLS refinement, reproducible via \code{seed}.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(60)
 morie_rob_s(x, 1 + 2 * x + stats::rnorm(60), n_subsets = 50)$beta
 }

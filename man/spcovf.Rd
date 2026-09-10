@@ -35,6 +35,7 @@ computed independently rather than derived from C, and the gap between
 the two is a diagnostic.
 }
 \examples{
+set.seed(1)
 spcovf(matrix(runif(200), 100, 2), rnorm(100), n_bins = 5)$sill
 }
 \references{

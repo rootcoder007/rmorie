@@ -7,6 +7,7 @@
 #' @return Named list with \code{conditional_variance, conditional_volatility,
 #'   lambda, n, last_variance, last_volatility, method}.
 #' @examples
+#' set.seed(1)
 #' morie_ewma_volatility(x = rnorm(50))
 #' @export
 morie_ewma_volatility <- function(x, lambda = 0.94) {

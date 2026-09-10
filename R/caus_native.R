@@ -163,6 +163,7 @@
 #'   Section and Panel Data*, 2nd ed., Ch. 5; Sargan (1958),
 #'   *Econometrica* 26:393-415.
 #' @examples
+#' set.seed(1)
 #' Z <- matrix(stats::rnorm(200), 100)
 #' D <- Z %*% c(1, 0.5) + stats::rnorm(100)
 #' morie_caus_iv_2sls(2 * D + stats::rnorm(100), D, Z)$beta
@@ -281,6 +282,7 @@ morie_caus_iv_2sls <- function(y, X, Z, cluster = NULL) {
 #' @references Anderson and Rubin (1949), *Annals of Mathematical
 #'   Statistics* 20:46-63; Fuller (1977), *Econometrica* 45:939-953.
 #' @examples
+#' set.seed(1)
 #' Z <- matrix(stats::rnorm(100), 100)
 #' D <- Z %*% 1.2 + stats::rnorm(100)
 #' morie_caus_iv_liml(2 * D + stats::rnorm(100), D, Z)$kappa
@@ -401,6 +403,7 @@ morie_caus_iv_liml <- function(y, X, Z, fuller = NULL, endog = NULL) {
 #' @references Imbens and Angrist (1994), *Econometrica* 62:467-475;
 #'   Angrist, Imbens and Rubin (1996), *JASA* 91:444-455.
 #' @examples
+#' set.seed(1)
 #' Z <- stats::rbinom(500, 1, 0.5)
 #' D <- Z * stats::rbinom(500, 1, 0.6)
 #' morie_caus_iv_late(3 * D + stats::rnorm(500), D, Z)$late
@@ -490,6 +493,7 @@ morie_caus_iv_late <- function(y, D, Z) {
 #' @references Imbens and Angrist (1994), *Econometrica* 62:467-475;
 #'   Angrist, Imbens and Rubin (1996), *JASA* 91:444-455.
 #' @examples
+#' set.seed(1)
 #' Z <- stats::rbinom(400, 1, 0.5)
 #' D <- Z * stats::rbinom(400, 1, 0.7)
 #' morie_caus_iv_dag(2 * D + stats::rnorm(400), D, Z)$relevance
@@ -569,6 +573,7 @@ morie_caus_iv_dag <- function(y, D, Z, homogeneous = FALSE) {
 #' @references Robins, Rotnitzky and Zhao (1994), *JASA* 89:846-866;
 #'   Bang and Robins (2005), *Biometrics* 61:962-973.
 #' @examples
+#' set.seed(1)
 #' n <- 200
 #' e <- rep(0.5, n)
 #' T <- stats::rbinom(n, 1, e)
@@ -659,6 +664,7 @@ morie_caus_aipw <- function(y, T, ps, m1, m0, trim = 0.01) {
 #' @references Chernozhukov, Chetverikov, Demirer, Duflo, Hansen,
 #'   Newey and Robins (2018), *Econometrics Journal* 21:C1-C68.
 #' @examples
+#' set.seed(1)
 #' X <- matrix(stats::rnorm(600), 200)
 #' D <- X[, 1] + stats::rnorm(200)
 #' morie_caus_dml_partial_lin(1.5 * D + X[, 1], D, X, n_folds = 3)$theta
@@ -790,6 +796,7 @@ morie_caus_dml_partial_lin <- function(y, D, X, n_folds = 5, learner = NULL,
 #' @references Sun and Abraham (2021), *Journal of Econometrics*
 #'   225:175-199.
 #' @examples
+#' set.seed(1)
 #' Y <- matrix(stats::rnorm(200), 20)
 #' G <- c(rep(4, 10), rep(Inf, 10))
 #' morie_caus_did_sun_abraham(Y, G, rel_periods = c(0, 1))$weights_sum_to_one

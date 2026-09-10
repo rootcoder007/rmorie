@@ -24,6 +24,7 @@ list(estimate, r_per_fold, y_hat, mse, mspe, slope, n, K, method).
 K-fold cross-validation for genomic-prediction accuracy
 }
 \examples{
+set.seed(1)
 morie_genomic_cross_validation(x = rnorm(50), y = rnorm(50))
 }
 \references{

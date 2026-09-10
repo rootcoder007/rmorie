@@ -25,6 +25,7 @@ where both are valid, so Hill wins when xi > 0 is known and
 Pickands is the tool when the SIGN of xi is in question.
 }
 \examples{
+set.seed(1)
 morie_evt_pickands(stats::rnorm(400))$xi
 }
 \references{

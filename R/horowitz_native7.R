@@ -187,6 +187,7 @@
 #' @references Horowitz, Sec. 5.2.1-5.2.2, eqs. (5.21)-(5.26),
 #'   Theorem 5.4; Horowitz and Markatou (1996).
 #' @examples
+#' set.seed(1)
 #' n <- 60
 #' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
@@ -253,6 +254,7 @@ morie_panel_deconvolution <- function(y, x, beta, nu_U = NULL, nu_eps = NULL,
 #'   n, T, method.
 #' @references Horowitz, Sec. 5.2.1, eq. (5.26).
 #' @examples
+#' set.seed(1)
 #' n <- 60
 #' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))
@@ -305,6 +307,7 @@ morie_smoothed_fU <- function(y, x, beta, nu_U = NULL, grid = NULL) {
 #' @references Horowitz, Sec. 5.2.1-5.2.2, eqs. (5.25)-(5.26),
 #'   P1-P4, Theorem 5.4.
 #' @examples
+#' set.seed(1)
 #' n <- 60
 #' tt <- 3
 #' x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))

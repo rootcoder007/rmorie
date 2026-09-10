@@ -28,6 +28,7 @@ Named list: statistic, p_value, h, n, method.
 \eqn{D_n = \sup_t |\hat F_h(t) - F_0(t)|}{D_n = sup_t |hat F_h(t) - F_0(t)|}.
 }
 \examples{
+set.seed(1)
 fzksm(x = rnorm(50))
 }
 \keyword{internal}

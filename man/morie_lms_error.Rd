@@ -24,6 +24,7 @@ Widrow-Hoff's simplification and why LMS converges only in the
 mean. Mirrors \code{morie.fn.rng156} and \code{rng159}.
 }
 \examples{
+set.seed(1)
 morie_lms_error(rnorm(20), c(0.5, -0.2), matrix(rnorm(40), ncol = 2))$mse
 }
 \references{

@@ -23,6 +23,7 @@ A \code{morie_weight} object with stabilized ATE weights.
 Stabilized IPW (Austin 2009 / Robins et al. 2000)
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_stabilized(d, "t", "x")
 }

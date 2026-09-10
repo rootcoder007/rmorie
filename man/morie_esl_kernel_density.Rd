@@ -32,6 +32,7 @@ In \code{p} dimensions the Gaussian product kernel (6.24) normalises by
 \verb{N (2 lambda^2 pi)^(p/2)} -- the exponent is \code{p/2}, not \code{p}.
 }
 \examples{
+set.seed(1)
 morie_esl_kernel_density(c(-1, 0, 1), stats::rnorm(200))$density
 }
 \references{

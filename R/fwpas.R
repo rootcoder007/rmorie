@@ -15,6 +15,7 @@
 #'   (= \code{a}), \code{activation}, \code{method}.
 #' @references Goodfellow, Bengio & Courville (2016), Deep Learning, Ch 6.
 #' @examples
+#' set.seed(1)
 #' morie_fwpas_forward_pass_dense(x = rnorm(50), w = rnorm(3), b = rnorm(3))
 #' @export
 morie_fwpas_forward_pass_dense <- function(x, w, b, activation = "sigmoid") {

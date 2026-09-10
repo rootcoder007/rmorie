@@ -164,6 +164,7 @@
 #'   Statistics and Data Analysis*, Chapman and Hall, Eq. (2.2a) and
 #'   Sec. 3.4.2 Eqs. (3.28)-(3.31); Rosenblatt (1956); Parzen (1962).
 #' @examples
+#' set.seed(1)
 #' morie_wsm_kde(c(-1, 0, 1), stats::rnorm(200))$h
 #' @export
 morie_wsm_kde <- function(x, data, h = NULL, rule = "3.31") {
@@ -231,6 +232,7 @@ morie_wsm_kde <- function(x, data, h = NULL, rule = "3.31") {
 #'   Inference, and Learning Algorithms*, CUP, Sec. 29.2,
 #'   Eqs. (29.20)-(29.22) and Fig. 29.6; Kahn and Marshall (1953).
 #' @examples
+#' set.seed(1)
 #' xs <- stats::rcauchy(1000)
 #' morie_wsm_importance_sampling(function(x) x^2, stats::dnorm,
 #'                               stats::dcauchy, xs)$estimate
@@ -303,6 +305,7 @@ morie_wsm_importance_sampling <- function(f, p, q, samples,
 #'   Processes and Semiparametric Inference*, Springer, Ch. 12 and
 #'   Sec. 2.2.4; Ch. 10 for the bootstrap; von Mises (1947).
 #' @examples
+#' set.seed(1)
 #' morie_wsm_plug_in(stats::rnorm(100), mean, B = 50)$se
 #' @export
 morie_wsm_plug_in <- function(data, T, B = 1000, seed = 0, se = TRUE) {
@@ -352,6 +355,7 @@ morie_wsm_plug_in <- function(data, T, B = 1000, seed = 0, se = TRUE) {
 #'   Fig. 7.12; Efron, B. (1979), *Annals of Statistics* 7:1-26;
 #'   Kosorok (2008), Ch. 10.
 #' @examples
+#' set.seed(1)
 #' morie_wsm_bootstrap(stats::rnorm(100), mean, B = 100)$se
 #' @export
 morie_wsm_bootstrap <- function(data, T, B = 1000, seed = 0, ddof = 1L) {
@@ -407,6 +411,7 @@ morie_wsm_bootstrap <- function(data, T, B = 1000, seed = 0, ddof = 1L) {
 #' @references Kosorok, M. R. (2008), Ch. 14 (M-estimators) and
 #'   Sec. 2.2.6; Fisher (1922).
 #' @examples
+#' set.seed(1)
 #' x <- stats::rnorm(200, 2, 1.5)
 #' morie_wsm_mle(x, function(d, t) stats::dnorm(d, t[1], abs(t[2])),
 #'               c(0, 1))$estimate
@@ -518,6 +523,7 @@ morie_wsm_mle <- function(data, f, theta0, se = TRUE) {
 #' @references Hastie, Tibshirani and Friedman (2009), Sec. 8.7;
 #'   Breiman, L. (1996), *Machine Learning* 24:123-140.
 #' @examples
+#' set.seed(1)
 #' X <- matrix(stats::rnorm(150), 50)
 #' morie_wsm_bagging(X, stats::rnorm(50), B = 20)$max_shift_from_single_fit
 #' @export

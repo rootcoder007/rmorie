@@ -21,6 +21,7 @@ Named list with estimate, se, n, method.
 Lambda_hat(t) = sum over t_i <= t of d_i / Y_i.  Variance: sum d_i/Y_i^2.
 }
 \examples{
+set.seed(1)
 morie_ksr18_kosorok_nelson_aalen(t = seq(0, 1, length.out = 50), event = rbinom(50, 1, 0.8))
 }
 \references{

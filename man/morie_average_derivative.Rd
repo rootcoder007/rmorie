@@ -31,6 +31,7 @@ estimable even though \eqn{E(Y|X)} is not. Mirrors
 \code{morie.fn.hrzade}.
 }
 \examples{
+set.seed(1)
 x <- rnorm(300)
 morie_average_derivative(x, 2 * x + rnorm(300, sd = 0.1))$delta
 }

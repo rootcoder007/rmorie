@@ -17,6 +17,7 @@
 #' @return list(estimate, y_hat, beta, attention, context, se, n, method).
 #' @references Vaswani et al. (2017). Montesinos Lopez Ch 15.
 #' @examples
+#' set.seed(1)
 #' morie_transformer_genomic(
 #'   x = rnorm(50), y = rnorm(50),
 #'   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

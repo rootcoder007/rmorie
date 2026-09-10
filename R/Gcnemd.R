@@ -18,6 +18,7 @@
 #'   arXiv:1609.02907
 #' @export
 #' @examples
+#' set.seed(1)
 #' G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 #' X <- matrix(rnorm(6), 3, 2)
 #' W <- matrix(rnorm(4), 2, 2)

@@ -23,6 +23,7 @@ L-moments over ML because the GEV likelihood is non-regular for
 xi < -0.5 and loses in the small samples block maxima produce.
 }
 \examples{
+set.seed(1)
 morie_evt_gev_lmoments(5 + 2 * (-log(stats::runif(100)))^(-0.2))$xi
 }
 \references{

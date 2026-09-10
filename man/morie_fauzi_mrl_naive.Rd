@@ -25,6 +25,7 @@ The baseline whose boundary failure Ch. 4 exists to fix: bias is
 Compare with \code{morie_fauzi_mrl_boundary_free_2()} on the same data.
 }
 \examples{
+set.seed(1)
 morie_fauzi_mrl_naive(stats::rexp(200), c(0.5, 1))$mrl
 }
 \references{

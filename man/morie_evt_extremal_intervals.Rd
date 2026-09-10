@@ -26,6 +26,7 @@ most 2, corrected otherwise) is the authors' rule and is followed
 rather than one form being picked.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(500)
 morie_evt_extremal_intervals(x, stats::quantile(x, 0.95))$theta
 }

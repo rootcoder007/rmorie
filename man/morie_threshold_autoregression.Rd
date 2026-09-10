@@ -23,5 +23,6 @@ Named list with \code{threshold, phi_lower, phi_upper, p, d,
 Two-regime self-exciting threshold autoregressive (SETAR) model
 }
 \examples{
+set.seed(1)
 morie_threshold_autoregression(x = rnorm(50))
 }

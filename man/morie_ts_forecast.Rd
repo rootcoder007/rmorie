@@ -27,6 +27,7 @@ observed (model) values, and the interval widths grow with the
 forecast horizon.
 }
 \examples{
+set.seed(1)
 m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 fc <- morie_ts_forecast(m, h = 12)
 }

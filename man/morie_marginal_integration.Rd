@@ -47,6 +47,7 @@ some \eqn{q > d - 1} -- the requirement GROWS with d.
 rather than a caveat. Mirrors \code{morie.fn.hrzmir}.
 }
 \examples{
+set.seed(1)
 x <- matrix(runif(400, -1, 1), ncol = 2)
 y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(200) * 0.2
 morie_marginal_integration(x, y, j = 1)$smoothness_required

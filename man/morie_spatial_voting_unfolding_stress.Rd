@@ -22,6 +22,7 @@ A numeric scalar, the weighted sum of squared residuals.
 Compute unfolding stress
 }
 \examples{
+set.seed(1)
 Xr <- matrix(rnorm(6), 3, 2); Xs <- matrix(rnorm(8), 4, 2)
 D  <- matrix(stats::runif(12), 3, 4)
 morie_spatial_voting_unfolding_stress(Xr, Xs, D)

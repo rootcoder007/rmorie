@@ -37,6 +37,7 @@ fitted in each, and the spread across directions relative to the
 overall level is the statistic.
 }
 \examples{
+set.seed(1)
 co <- matrix(runif(400), 200, 2) * 10
 spiso(co, sin(co[, 1]) + cos(co[, 2]))$relative_spread
 }

@@ -283,6 +283,7 @@ morie_entheo_dataset_overview <- function() {
 #' Rangayyan, R. M. & Krishnan, S. (2024). Biomedical Signal Analysis,
 #'   3rd ed., Ch. 5.
 #' @examples
+#' set.seed(1)
 #' fs <- 200
 #' t <- seq_len(4 * fs) / fs
 #' sig <- sin(2 * pi * 10 * t) + 0.1 * rnorm(length(t))
@@ -372,6 +373,7 @@ morie_entheo_spectral_band_power <- function(signal,
 #' Allen, E. A. et al. (2014). Tracking whole-brain connectivity
 #'   dynamics in the resting state. Cereb. Cortex 24(3): 663-676.
 #' @examples
+#' set.seed(1)
 #' bold <- matrix(rnorm(20 * 200), nrow = 20)
 #' res <- morie_entheo_dynamic_functional_connectivity(bold, window = 30L, step = 10L)
 #' res$payload$n_windows

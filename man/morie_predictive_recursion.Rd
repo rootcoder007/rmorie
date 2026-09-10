@@ -43,6 +43,7 @@ since each step conditions on the running estimate. Weights need
 \code{morie.fn.gh_c5_7}.
 }
 \examples{
+set.seed(1)
 morie_predictive_recursion(rnorm(50), sigma = 1)$order_dependent
 }
 \references{

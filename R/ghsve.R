@@ -6,6 +6,7 @@
 #' @param K Optional integer sieve degree (default round(n^(1/3))).
 #' @return Named list with estimate, log_lik_per_obs, weights, K, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_sieve_prior(x = rnorm(50))
 #' @export
 morie_ghosal_sieve_prior <- function(x, K = NULL) {

@@ -24,6 +24,7 @@ list(estimate, alpha, beta, K, f_hat, se, h, n, method).
 RKHS regression with Gaussian kernel
 }
 \examples{
+set.seed(1)
 morie_rkhs_full(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 }
 \references{

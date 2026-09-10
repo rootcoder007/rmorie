@@ -31,5 +31,6 @@ log_marginal, length_scale, noise, n, method.
 Wraps \code{morie_ghosal_gp_squared_exponential}.
 }
 \examples{
+set.seed(1)
 morie_ghosal_np_regression(x = rnorm(50), y = rnorm(50))
 }

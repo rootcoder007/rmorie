@@ -21,6 +21,7 @@ One estimator, two catalogue entries: the computation is
 \code{morie_rob_mm()}, invoked directly so the two cannot drift apart.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(50)
 morie_rob_mm_alias(x, 2 * x + stats::rnorm(50), n_subsets = 50)$alias_of
 }

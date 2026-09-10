@@ -28,6 +28,7 @@ full information, with equality only in the adaptive case.
 Mirrors \code{morie.fn.ksr072}.
 }
 \examples{
+set.seed(1)
 morie_semipar_efficiency(matrix(rnorm(100), ncol = 1),
                          matrix(rnorm(200), ncol = 2))$adaptive
 }

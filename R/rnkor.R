@@ -9,6 +9,7 @@
 #' @param mu0 Hypothesised median (default 0).
 #' @return Named list: signed_ranks, abs_ranks, W_plus, W_minus, n_nonzero, n.
 #' @examples
+#' set.seed(1)
 #' morie_rank_order_statistics(x = rnorm(50))
 #' @export
 morie_rank_order_statistics <- function(x, mu0 = 0) {

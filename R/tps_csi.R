@@ -232,6 +232,7 @@ morie_tps_csi_weight <- function(category, variant = c("total", "violent"),
 #' @param rebase_to_value Index value at the anchor year (default 100).
 #' @return A data.frame with one row per year.
 #' @examples
+#' set.seed(1)
 #' counts <- data.frame(OCC_YEAR = rep(2020:2023, 2),
 #'                      category = rep(c("Assault", "Robbery"), each = 4),
 #'                      n = rpois(8, 50))
@@ -305,6 +306,7 @@ morie_tps_csi_per_year <- function(counts_per_year,
 #' @param weights Optional override vector of weights.
 #' @return A data.frame with one row per neighbourhood.
 #' @examples
+#' set.seed(1)
 #' counts <- data.frame(HOOD_158 = rep(sprintf("%03d", 1:4), 2),
 #'                      category = rep(c("Assault", "Robbery"), each = 4),
 #'                      n = rpois(8, 50))

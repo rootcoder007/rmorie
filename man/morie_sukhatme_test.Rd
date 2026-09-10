@@ -18,5 +18,6 @@ Mann-Whitney U on the absolute deviations from the pooled median.
 Tests equality of scales given (approximately) equal medians.
 }
 \examples{
+set.seed(1)
 morie_sukhatme_test(x = rnorm(50), y = rnorm(50))
 }

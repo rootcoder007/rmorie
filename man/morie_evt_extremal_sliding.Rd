@@ -28,6 +28,7 @@ comparison is visible. \code{threshold} is accepted only for signature
 parity with the other extremal-index estimators and is ignored.
 }
 \examples{
+set.seed(1)
 morie_evt_extremal_sliding(stats::rnorm(400), block_length = 20)$theta
 }
 \references{

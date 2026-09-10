@@ -12,6 +12,7 @@
 #' @return Named list with `agreement` (n by n), `mean_agreement`,
 #'   `n`, `m`, `method`.
 #' @examples
+#' set.seed(1)
 #' sptag(x = rnorm(50))
 #' @export
 sptag <- function(x) {

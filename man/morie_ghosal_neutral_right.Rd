@@ -22,5 +22,6 @@ Named list with estimate, times, S_post, H_post, c, lam0, n, method.
 Neutral-to-the-right posterior survival (Doksum 1974)
 }
 \examples{
+set.seed(1)
 morie_ghosal_neutral_right(time = cumsum(rexp(50)))
 }

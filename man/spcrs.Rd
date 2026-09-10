@@ -25,6 +25,7 @@ Named list: estimate (MSPE, RMSPE, MAE, residuals), n, method.
 MSPE = (1/n) sum (Z(s_i) - Z_hat_minus_i(s_i))^2.
 }
 \examples{
+set.seed(1)
 spcrs(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

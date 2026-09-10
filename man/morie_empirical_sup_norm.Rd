@@ -20,6 +20,7 @@ supremum of a step-minus-continuous process is always attained. A
 fixed grid understates it. Mirrors \code{morie.fn._kosorok.sup_norm}.
 }
 \examples{
+set.seed(1)
 morie_empirical_sup_norm(runif(50))
 }
 \references{

@@ -14,6 +14,7 @@
 #'   n, method.
 #' @references Cressie & Huang (1999); Schabenberger & Gotway (2005), Ch 8.
 #' @examples
+#' set.seed(1)
 #' stacv(x = rnorm(50), coords = matrix(runif(100), 50, 2), times = sort(cumsum(rexp(50))))
 #' @export
 stacv <- function(x, coords, times,

@@ -22,6 +22,7 @@ the subpopulation with the best covariate overlap and is bounded by
 construction (no extreme weights).
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_ow(d, "t", "x")
 }

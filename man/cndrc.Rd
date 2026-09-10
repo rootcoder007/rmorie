@@ -23,6 +23,7 @@ majority voting. Returns the index of the Condorcet winner, or -1
 if none exists.
 }
 \examples{
+set.seed(1)
 cndrc(preference_matrix = matrix(rnorm(25), 5, 5))
 }
 \keyword{internal}

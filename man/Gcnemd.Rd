@@ -27,6 +27,7 @@ to be zero rather than infinite.
 Formula: H' = relu(D^\{-1/2\} A D^\{-1/2\} X W), D = diag(rowSums(A)).
 }
 \examples{
+set.seed(1)
 G <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 X <- matrix(rnorm(6), 3, 2)
 W <- matrix(rnorm(4), 2, 2)

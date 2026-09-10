@@ -18,6 +18,7 @@
 Print method for \code{morie_mrm_result} objects
 }
 \examples{
+set.seed(1)
 \donttest{
 if (FALSE) {
   df <- data.frame(

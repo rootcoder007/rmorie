@@ -34,6 +34,7 @@ For \eqn{L = \tfrac{1}{2n}\sum (a - y)^2}{L = (1)/(2n)sum (a - y)^2} with
       \delta = (a - y) \odot \sigma'(z)}{d L / d W = delta x^top, delta = (a - y) odot sigma'(z)}
 }
 \examples{
+set.seed(1)
 morie_bkprp_backpropagation(x = rnorm(50), y = rnorm(50))
 }
 \references{

@@ -46,6 +46,7 @@ MacKay's conclusion is that an importance sampler should have
 HEAVY TAILS.
 }
 \examples{
+set.seed(1)
 xs <- stats::rcauchy(1000)
 morie_wsm_importance_sampling(function(x) x^2, stats::dnorm,
                               stats::dcauchy, xs)$estimate

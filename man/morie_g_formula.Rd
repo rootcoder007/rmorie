@@ -21,6 +21,7 @@ List with \code{EY1}, \code{EY0}, \code{ate}, \code{n}.
 treatment-covariate interactions. Mirrors \code{morie.fn.causmrop}.
 }
 \examples{
+set.seed(1)
 n <- 3000
 x <- stats::rnorm(n)
 e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)

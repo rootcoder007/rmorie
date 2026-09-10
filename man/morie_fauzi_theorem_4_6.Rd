@@ -26,6 +26,7 @@ is the expected lifetime. A large gap is a diagnostic: a bandwidth
 too big, or a transformation mismatched to the support.
 }
 \examples{
+set.seed(1)
 if (requireNamespace("ranger", quietly = TRUE)) {
   x <- stats::rexp(200)
   morie_fauzi_theorem_4_6(x, 0, mean(x))$gap

@@ -14,6 +14,7 @@
 #' @return Named list: statistic, p_value, z, E_J, Var_J, n, k, method.
 #' @importFrom stats pnorm
 #' @examples
+#' set.seed(1)
 #' morie_ordered_alternatives_test(groups = list(rnorm(20), rnorm(20), rnorm(20)))
 #' @export
 morie_ordered_alternatives_test <- function(groups) {

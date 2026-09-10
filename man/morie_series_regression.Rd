@@ -24,6 +24,7 @@ that never becomes consistent. Mirrors
 \code{morie.fn.hrzsier}.
 }
 \examples{
+set.seed(1)
 morie_series_regression(runif(100), runif(100), K = 4)$K
 }
 \references{

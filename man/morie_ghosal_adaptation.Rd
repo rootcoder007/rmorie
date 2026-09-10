@@ -20,5 +20,6 @@ Named list with estimate, betas, rates, best_beta, n, d, method.
 Adaptive contraction rates over a smoothness grid
 }
 \examples{
+set.seed(1)
 morie_ghosal_adaptation(x = rnorm(50))
 }

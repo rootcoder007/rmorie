@@ -21,6 +21,7 @@ List with \code{corrected_scores}, \code{thresholds}, \code{dif_estimates},
 Anchoring vignettes for DIF correction
 }
 \examples{
+set.seed(1)
 Y <- sample(1:5, 30, replace = TRUE)
 V <- matrix(sample(1:5, 30 * 3, replace = TRUE), 30, 3)
 morie_spatial_voting_anchoring_vignettes(Y, V)

@@ -76,6 +76,7 @@ For full hierarchical inference by HMC/NUTS, fit \pkg{rstanarm}
 dependency-free conjugate core.
 }
 \examples{
+set.seed(1)
 \donttest{
 df <- data.frame(preservation_score = rnorm(20),
                  lime_treatment = rbinom(20, 1, 0.5))

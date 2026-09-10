@@ -35,6 +35,7 @@ Heavy clipping biases the release toward the interior; the fraction
 clipped is reported and warned about past 10\%.
 }
 \examples{
+set.seed(1)
 morie_dp_sum(rnorm(100), -3, 3, epsilon = 1, seed = 1)$sensitivity
 }
 \references{

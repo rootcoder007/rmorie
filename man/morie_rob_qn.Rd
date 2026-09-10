@@ -28,6 +28,7 @@ factors are applied; without them Qn is biased low in exactly the
 small samples robust scales get used on.
 }
 \examples{
+set.seed(1)
 morie_rob_qn(stats::rnorm(50))$value
 }
 \references{

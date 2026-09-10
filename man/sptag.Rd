@@ -28,6 +28,7 @@ A_ij = proportion of roll calls on which legislators i, j voted the
 same way (excluding mutually absent items).
 }
 \examples{
+set.seed(1)
 sptag(x = rnorm(50))
 }
 \keyword{internal}

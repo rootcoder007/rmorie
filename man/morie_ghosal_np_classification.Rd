@@ -33,5 +33,6 @@ Named list with estimate, p_hat, accuracy, length_scale, n, method.
 Probit-GP classifier (Laplace approximation)
 }
 \examples{
+set.seed(1)
 morie_ghosal_np_classification(x = rnorm(50), y = rnorm(50))
 }

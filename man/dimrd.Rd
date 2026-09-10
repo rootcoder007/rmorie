@@ -31,6 +31,7 @@ formed from x (input matrix is used directly if symmetric; else
 uses the column correlation matrix).
 }
 \examples{
+set.seed(1)
 dimrd(x = rnorm(50))
 }
 \keyword{internal}

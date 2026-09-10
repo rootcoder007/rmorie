@@ -22,5 +22,6 @@ n, method.
 Wraps \code{stats::prcomp}.
 }
 \examples{
+set.seed(1)
 morie_pca_dimension_reduction(x = rnorm(50))
 }

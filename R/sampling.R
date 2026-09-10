@@ -56,6 +56,7 @@ morie_simple_random_sample <- function(df, n, replace = FALSE, seed = 42L) {
 #' @return Data frame of sampled rows with a `.weight` column.
 #' @export
 #' @examples
+#' set.seed(1)
 #' df <- data.frame(g = c(rep("A", 60), rep("B", 40)), x = rnorm(100))
 #' morie_stratified_sample(df, "g", n_per_stratum = 10)
 morie_stratified_sample <- function(df, strata_col, n_per_stratum,
@@ -195,6 +196,7 @@ morie_pps_sample <- function(df, size_col, n, seed = 42L,
 #'   `distribution` (numeric vector of bootstrap statistics).
 #' @export
 #' @examples
+#' set.seed(1)
 #' df <- data.frame(x = rnorm(100))
 #' morie_bootstrap_sample(df, statistic = function(d) mean(d$x))
 morie_bootstrap_sample <- function(df, statistic, n_bootstrap = 1000L, seed = 42L) {

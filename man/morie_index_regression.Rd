@@ -29,6 +29,7 @@ smoothing problem to one dimension, restoring the \eqn{n^{-2/5}}
 rate for any d. Mirrors \code{morie.fn.hrznwrg}.
 }
 \examples{
+set.seed(1)
 X <- matrix(rnorm(200), ncol = 2)
 morie_index_regression(X, rnorm(100), c(1, -0.5))$rate_exponent
 }

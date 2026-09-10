@@ -25,6 +25,7 @@ functionals of this object rather than using it directly.
 Mirrors \code{morie.fn.hrzkde}.
 }
 \examples{
+set.seed(1)
 morie_kde_h(rnorm(200))$bandwidth
 }
 \references{

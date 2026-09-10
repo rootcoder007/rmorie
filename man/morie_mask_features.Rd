@@ -45,6 +45,7 @@ representations by mutual information estimation and maximization",
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 rng <- rmorie:::.ghc_rng(1L)
 X <- matrix(runif(12), nrow = 4, ncol = 3)
 m <- morie_mask_features(X, p = 0.3, rng)

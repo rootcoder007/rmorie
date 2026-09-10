@@ -28,6 +28,7 @@ S = 1). Points are assigned to a \code{grid} by \code{grid} lattice of cells
 over the bounding box.
 }
 \examples{
+set.seed(1)
 Frtaxd(cbind(runif(20), runif(20)), sample(letters[1:3], 20, TRUE), grid = 2)
 }
 \references{

@@ -22,6 +22,7 @@ log-likelihood in rho; this delegates rather than carrying a second
 implementation.
 }
 \examples{
+set.seed(1)
 n <- 20
 W <- matrix(0, n, n); W[cbind(1:(n-1), 2:n)] <- 1; W <- W + t(W)
 W <- W / pmax(rowSums(W), 1)

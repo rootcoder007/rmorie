@@ -28,6 +28,7 @@ limit. The maximum discrepancy is returned so the convergence is
 measured. Mirrors \code{morie.fn.gh_c13_2}.
 }
 \examples{
+set.seed(1)
 morie_dp_survival(rexp(50), alpha = 0.01)$max_abs_diff_to_km
 }
 \references{

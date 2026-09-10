@@ -21,5 +21,6 @@ Named list with \code{trend, seasonal, irregular, loglik, n,
 Unobserved-components decomposition (trend + seasonal + irregular)
 }
 \examples{
+set.seed(1)
 morie_unobserved_components(x = rnorm(50))
 }

@@ -13,6 +13,7 @@
 #' @return Named list: lag, gamma, n_pairs.
 #' @references Schabenberger & Gotway (2005), Sec 1.4.3 / Ch 4.
 #' @examples
+#' set.seed(1)
 #' spsemv(coords = matrix(runif(200), 100, 2), z = rnorm(100), n_bins = 5)
 #' @export
 spsemv <- function(coords, z, n_bins = 15, max_dist = NULL) {

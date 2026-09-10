@@ -19,6 +19,7 @@ Orthogonal rotation aligning \code{X} to \code{X_target} (with reflection
 protection against improper rotations).
 }
 \examples{
+set.seed(1)
 A <- matrix(rnorm(20), 10, 2); B <- A + 0.05 * matrix(rnorm(20), 10, 2)
 morie_spatial_voting_procrustes(A, B)
 }

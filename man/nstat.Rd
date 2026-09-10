@@ -25,6 +25,7 @@ C(s_i, s_j) = sigma(s_i) sigma(s_j) rho(s_i, s_j) with kernel-weighted
 local moments and standardised residual correlations.
 }
 \examples{
+set.seed(1)
 nstat(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

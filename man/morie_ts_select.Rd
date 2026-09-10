@@ -24,5 +24,6 @@ A list with the full \code{results} table and the \code{best} model
 Select ARIMA orders by information criterion
 }
 \examples{
+set.seed(1)
 morie_ts_select(cumsum(rnorm(80)), max_p = 2, max_q = 2)$best$order
 }

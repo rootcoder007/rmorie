@@ -40,6 +40,7 @@ algebra is well-tested upstream and re-implementing it inline
 would be both lengthy and error-prone.
 }
 \examples{
+set.seed(1)
 d <- data.frame(x = rnorm(30), y = rnorm(30))
 m <- stats::lm(y ~ x, data = d)
 n <- 80L

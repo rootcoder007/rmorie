@@ -45,6 +45,7 @@
 #' @references Horowitz, Sec. 3.1.1, eqs. (3.5)-(3.9), Theorem 3.1;
 #'   Linton and Nielsen (1995), Linton and Hardle (1996).
 #' @examples
+#' set.seed(1)
 #' x <- matrix(runif(400, -1, 1), ncol = 2)
 #' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(200) * 0.2
 #' morie_marginal_integration(x, y, j = 1)$smoothness_required
@@ -157,6 +158,7 @@ morie_marginal_integration <- function(x, y, bandwidth = NULL, j = 1L,
 #' @references Horowitz, Sec. 3.1.3, eqs. (3.15)-(3.18);
 #'   Horowitz and Mammen (2004).
 #' @examples
+#' set.seed(1)
 #' x <- matrix(runif(800, -1, 1), ncol = 2)
 #' y <- 2 + sin(pi * x[, 1]) + x[, 2]^2 - 1 / 3 + rnorm(400) * 0.2
 #' morie_two_step_additive(x, y)$oracle_efficient

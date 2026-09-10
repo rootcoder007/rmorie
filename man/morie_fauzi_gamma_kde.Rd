@@ -30,6 +30,7 @@ Gaussian-kernel estimate is not. \code{modified = TRUE} applies Fauzi's
 self-elimination correction, which cancels the leading bias term.
 }
 \examples{
+set.seed(1)
 morie_fauzi_gamma_kde(stats::rexp(200), grid = c(0, 1), h = 0.1)$density
 }
 \references{

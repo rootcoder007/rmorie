@@ -38,6 +38,7 @@ logistic index. Balance is thus built into the score rather than
 checked after the fact.
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(120, 1, 0.5), x = rnorm(120))
 morie_weight_cbps(d, "t", "x")
 }

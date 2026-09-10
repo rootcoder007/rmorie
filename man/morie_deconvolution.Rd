@@ -39,6 +39,7 @@ error gives \eqn{h = \sigma/\sqrt{\log n}}; Laplace error gives
 \eqn{h = n^{-1/5}}.
 }
 \examples{
+set.seed(1)
 w <- rnorm(200) + rnorm(200) * 0.4
 morie_deconvolution(w, 0.4, grid = 0)$regime
 }

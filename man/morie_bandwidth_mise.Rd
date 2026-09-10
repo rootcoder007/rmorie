@@ -22,6 +22,7 @@ supplied, and the result says so. Mirrors
 \code{morie.fn.hrzbwopt}.
 }
 \examples{
+set.seed(1)
 morie_bandwidth_mise(rnorm(200))$h_opt
 }
 \references{

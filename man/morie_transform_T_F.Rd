@@ -61,6 +61,7 @@ behave like CENSORED observations, and (6.66) is what stays
 consistent under that censoring. Mirrors \code{morie.fn.hrzhot}.
 }
 \examples{
+set.seed(1)
 n <- 120
 x <- cbind(rnorm(n), rnorm(n))
 y <- exp(x \%*\% c(1, -0.5) + rlogis(n) * 0.6)

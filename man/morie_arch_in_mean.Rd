@@ -17,5 +17,6 @@ Named list with \code{mu, delta, omega, alpha, loglik,
 ARCH(1)-in-mean model
 }
 \examples{
+set.seed(1)
 morie_arch_in_mean(x = rnorm(50))
 }

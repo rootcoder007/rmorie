@@ -22,6 +22,7 @@ Kosorok eq. (2.21): \eqn{\limsup \|G_n\|_\infty /
 \code{morie.fn.ksr058}.
 }
 \examples{
+set.seed(1)
 morie_lil_ratio(runif(1000))$lil_ratio
 }
 \references{

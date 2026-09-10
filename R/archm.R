@@ -38,6 +38,7 @@
 #' @return Named list with \code{mu, delta, omega, alpha, loglik,
 #'   conditional_variance, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_arch_in_mean(x = rnorm(50))
 #' @export
 morie_arch_in_mean <- function(x) {

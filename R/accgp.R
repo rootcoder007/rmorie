@@ -11,6 +11,7 @@
 #'   rmse, r2, slope, intercept, n, method).
 #' @references Montesinos Lopez Ch 2.
 #' @examples
+#' set.seed(1)
 #' morie_prediction_accuracy(y_true = rbinom(50, 1, 0.5), y_pred = rbinom(50, 1, 0.5))
 #' @export
 morie_prediction_accuracy <- function(y_true, y_pred) {

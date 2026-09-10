@@ -24,6 +24,7 @@ R parity for \code{morie.fn.rslnk.residual_connection}.
 \deqn{y = \mathcal{F}(x) + x}{y = F(x) + x}
 }
 \examples{
+set.seed(1)
 morie_rslnk_residual_connection(x = rnorm(50))
 }
 \references{

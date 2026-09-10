@@ -11,6 +11,7 @@
 #' @return Named list with `smoothed`, `raw`, `sigma_w`, `n_periods`,
 #'   `method`.
 #' @examples
+#' set.seed(1)
 #' dwnmn(x = rnorm(50))
 #' @export
 dwnmn <- function(x, sigma_w = 0.1) {

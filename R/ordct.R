@@ -12,6 +12,7 @@
 #' @return Named list: statistic (M^2), p_value, df, n, correlation.
 #' @importFrom stats cor pchisq
 #' @examples
+#' set.seed(1)
 #' morie_ordered_categories(x = rnorm(50))
 #' @export
 morie_ordered_categories <- function(x, row_scores = NULL, col_scores = NULL) {

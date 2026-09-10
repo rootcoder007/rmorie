@@ -23,6 +23,7 @@
 #' @references Schabenberger & Gotway (2005), Sec 6.2.3 "Generalized
 #'   Least Squares -- Inference and Diagnostics", p. 341.
 #' @examples
+#' set.seed(1)
 #' n <- 30
 #' X <- cbind(1, runif(n))
 #' spgls(X, X %*% c(2, -1) + rnorm(n, 0, 0.3), diag(n))

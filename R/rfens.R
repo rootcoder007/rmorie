@@ -19,6 +19,7 @@
 #'   n_estimators, task, n, method.
 #' @importFrom stats predict
 #' @examples
+#' set.seed(1)
 #' morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_random_forest_ensemble <- function(x, y, n_estimators = 100L,

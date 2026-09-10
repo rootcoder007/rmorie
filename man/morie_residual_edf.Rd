@@ -29,6 +29,7 @@ NOT the standard Brownian bridge and treating it as one gives
 wrong standard errors. Mirrors \code{morie.fn.ksr021}.
 }
 \examples{
+set.seed(1)
 z <- cbind(rnorm(50), rnorm(50))
 morie_residual_edf(z \%*\% c(1, -0.5) + rnorm(50), z,
                    c(1, -0.5))$limit_is_brownian_bridge

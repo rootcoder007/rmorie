@@ -26,6 +26,7 @@ root-n even though G is not. Mirrors
 \code{morie.fn.hrzich} and \code{hrznls}.
 }
 \examples{
+set.seed(1)
 X <- matrix(rnorm(200), ncol = 2)
 morie_ichimura(X, tanh(X \%*\% c(1, -0.6)))$beta[1]
 }

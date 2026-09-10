@@ -26,6 +26,7 @@ Mirrors the \file{dRSFC.m} Matlab script in
 \file{DMT_Imaging/Scripts/}.
 }
 \examples{
+set.seed(1)
 bold <- matrix(rnorm(20 * 200), nrow = 20)
 res <- morie_entheo_dynamic_functional_connectivity(bold, window = 30L, step = 10L)
 res$payload$n_windows

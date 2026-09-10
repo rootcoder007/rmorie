@@ -20,6 +20,7 @@ Wraps \code{stats::lm} and returns coefficients plus classical OLS
 standard errors.
 }
 \examples{
+set.seed(1)
 morie_linear_regression_ols(x = rnorm(50), y = rnorm(50))
 }
 \references{

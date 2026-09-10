@@ -21,6 +21,7 @@ A list with \code{E}, \code{K}, \code{alpha}, \code{n_nodes}, \code{dim}.
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 A <- rbind(c(0, 1, 0), c(1, 0, 1), c(0, 1, 0))
 E <- matrix(rnorm(6), 3, 2)
 rmorie:::Lgcnprop(A, E, K = 2)

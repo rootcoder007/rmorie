@@ -34,5 +34,6 @@ loss, n, method.
 Mini-batch stochastic gradient descent for OLS (R parity)
 }
 \examples{
+set.seed(1)
 morie_mini_batch_gradient(x = rnorm(50), y = rnorm(50))
 }

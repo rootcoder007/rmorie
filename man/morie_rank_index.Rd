@@ -55,6 +55,7 @@ n = 300 the difference between minutes and milliseconds. Mirrors
 \code{morie.fn.hrzrank}.
 }
 \examples{
+set.seed(1)
 x <- cbind(rnorm(80), rnorm(80))
 morie_rank_index(x, tanh(x \%*\% c(1, -0.6)) + rnorm(80) * 0.3)$beta
 }

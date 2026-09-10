@@ -24,6 +24,7 @@ Number of rows written (invisible).
 Writes (or replaces) a table in the shared SQLite cache.
 }
 \examples{
+set.seed(1)
 \dontshow{if (requireNamespace("DBI", quietly = TRUE) && requireNamespace("RSQLite", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 \donttest{
 db <- tempfile(fileext = ".db")

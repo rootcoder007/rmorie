@@ -52,6 +52,7 @@ columns are detected and named rather than silently estimated.
 Mirrors \code{morie.fn.hrzpanms}.
 }
 \examples{
+set.seed(1)
 x <- array(rnorm(800), dim = c(200, 2, 2))
 y <- matrix(as.numeric(rnorm(400) > 0), nrow = 200)
 morie_panel_max_score(x, y, 2, n_restarts = 2)$intercept_identified

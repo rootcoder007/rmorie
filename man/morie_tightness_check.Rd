@@ -30,6 +30,7 @@ convergence: finite-dimensional convergence alone is not enough.
 Mirrors \code{morie.fn.ksr031}.
 }
 \examples{
+set.seed(1)
 morie_tightness_check(matrix(rnorm(400), nrow = 20))$decreasing
 }
 \references{

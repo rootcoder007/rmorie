@@ -18,6 +18,7 @@ morie_bayes_density(fit, param = 1L)
 Posterior density plot for one parameter (BS6.3)
 }
 \examples{
+set.seed(1)
 d <- data.frame(x = rnorm(40))
 d$y <- d$x + rnorm(40)
 morie_bayes_density(morie_bayes_lm(y ~ x, d,

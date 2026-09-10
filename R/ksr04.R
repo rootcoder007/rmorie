@@ -8,6 +8,7 @@
 #' @return Named list with estimate, n, method.
 #' @references Kosorok (2008), Ch 2; Vapnik & Chervonenkis (1971).
 #' @examples
+#' set.seed(1)
 #' morie_ksr04_kosorok_vc_dimension(x = rnorm(50))
 #' @export
 morie_ksr04_kosorok_vc_dimension <- function(x) {

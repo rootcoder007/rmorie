@@ -487,6 +487,7 @@ morie_spatial_voting_double_centering <- function(D) {
 #'   `B_matrix`.
 #' @references Torgerson, W. S. (1952); Armstrong et al. (2021).
 #' @examples
+#' set.seed(1)
 #' D <- as.matrix(dist(matrix(rnorm(40), 10)))
 #' morie_spatial_voting_classical_mds(D, n_dims = 2)
 #' @export
@@ -533,6 +534,7 @@ morie_spatial_voting_classical_mds <- function(D, n_dims = 2L) {
 #'   Multidimensional Scaling." In *Recent Developments in Statistics*,
 #'   133-145.  Borg & Groenen (2005).
 #' @examples
+#' set.seed(1)
 #' D <- as.matrix(dist(matrix(rnorm(40), 10)))
 #' morie_spatial_voting_smacof(D)
 #' @export
@@ -606,6 +608,7 @@ morie_spatial_voting_smacof <- function(D,
 #'   Kruskal, J. B. (1964). "Nonmetric Multidimensional Scaling: A
 #'   Numerical Method." *Psychometrika*, 29(2), 115-129.
 #' @examples
+#' set.seed(1)
 #' D <- as.matrix(dist(matrix(rnorm(40), 10)))
 #' morie_spatial_voting_nonmetric_mds(D)
 #' @export
@@ -676,6 +679,7 @@ morie_spatial_voting_mds_fit_stats <- function(eigenvalues) {
 #' @return A numeric scalar, the weighted sum of squared residuals.
 #' @references Coombs (1964); Armstrong et al. (2021).
 #' @examples
+#' set.seed(1)
 #' Xr <- matrix(rnorm(6), 3, 2); Xs <- matrix(rnorm(8), 4, 2)
 #' D  <- matrix(stats::runif(12), 3, 4)
 #' morie_spatial_voting_unfolding_stress(Xr, Xs, D)
@@ -714,6 +718,7 @@ morie_spatial_voting_unfolding_stress <- function(X_r, X_s, D,
 #'   Unfolding." *Psychometrika*, 49(3).
 #'   Bakker, R. and Poole, K. T. (2013).
 #' @examples
+#' set.seed(1)
 #' D <- matrix(stats::runif(20 * 6), 20, 6)
 #' morie_spatial_voting_mlsmu6(D, n_dims = 2, n_restarts = 1, max_iter = 50)
 #' @export
@@ -801,6 +806,7 @@ morie_spatial_voting_mlsmu6 <- function(D,
 #'   `iterations`, `converged`.
 #' @references Borg & Groenen (2005); Armstrong et al. (2021), Ch. 4.
 #' @examples
+#' set.seed(1)
 #' D <- matrix(stats::runif(12), 3, 4)
 #' morie_spatial_voting_smacof_unfolding(D, max_iter = 20)
 #' @export
@@ -877,6 +883,7 @@ morie_spatial_voting_ideal_point_recovery <- function(X_r, X_s = NULL) {
 #' @references Poole, K. T. and Rosenthal, H. (1985); Armstrong et al.
 #'   (2021), Ch. 5.
 #' @examples
+#' set.seed(1)
 #' x  <- matrix(rnorm(8), 4, 2)
 #' zy <- matrix(rnorm(6), 3, 2); zn <- matrix(rnorm(6), 3, 2)
 #' morie_spatial_voting_nominate_utility(x, zy, zn)
@@ -939,6 +946,7 @@ morie_spatial_voting_nominate_vote_prob <- function(x_i, z_yea_j, z_nay_j,
 #'   Political-Economic History of Roll Call Voting}. Oxford University
 #'   Press.
 #' @examples
+#' set.seed(1)
 #' v <- matrix(stats::rbinom(20, 1, 0.5), 4, 5)
 #' x <- matrix(rnorm(4), 4, 1); zy <- matrix(rnorm(5), 5, 1)
 #' zn <- matrix(rnorm(5), 5, 1)
@@ -985,6 +993,7 @@ morie_spatial_voting_nominate_loglik <- function(votes, x, z_yea, z_nay,
 #' @references Gower JC & Dijksterhuis GB (2004). \emph{Procrustes
 #'   Problems}. Oxford University Press.
 #' @examples
+#' set.seed(1)
 #' A <- matrix(rnorm(20), 10, 2); B <- A + 0.05 * matrix(rnorm(20), 10, 2)
 #' morie_spatial_voting_procrustes(A, B)
 #' @export
@@ -1035,6 +1044,7 @@ morie_spatial_voting_procrustes <- function(X, X_target) {
 #'   (2015). "Using Bayesian Aldrich-McKelvey Scaling to Study Citizens'
 #'   Ideological Preferences and Perceptions." *AJPS*, 59(3).
 #' @examples
+#' set.seed(1)
 #' \donttest{morie_spatial_voting_bayesian_am(matrix(rnorm(50), 10, 5))}
 #' @export
 morie_spatial_voting_bayesian_am <- function(Z, n_samples = 1000L,
@@ -1193,6 +1203,7 @@ morie_spatial_voting_cjr_irt <- function(votes, n_dims = 1L,
 #'   analysis of roll call data. \emph{American Political Science
 #'   Review}, 98(2), 355-370.
 #' @examples
+#' set.seed(1)
 #' v <- matrix(stats::rbinom(20, 1, 0.5), 4, 5)
 #' morie_spatial_voting_bayesian_irt_likelihood(
 #'   v, matrix(rnorm(4), 4, 1), rep(0, 5), matrix(rnorm(5), 5, 1))
@@ -1238,6 +1249,7 @@ morie_spatial_voting_bayesian_irt_likelihood <- function(votes, x, alpha, beta) 
 #' @references Jackman S (2009). \emph{Bayesian Analysis for the Social
 #'   Sciences}. Wiley.
 #' @examples
+#' set.seed(1)
 #' ch <- array(rnorm(100 * 5 * 2), c(100, 5, 2))
 #' morie_spatial_voting_bayesian_irt_posterior(ch)
 #' @export
@@ -1280,6 +1292,7 @@ morie_spatial_voting_bayesian_irt_posterior <- function(chain,
 #'   and polarization in the American mass public." *Public Choice*,
 #'   176(1), 57-78.
 #' @examples
+#' set.seed(1)
 #' Y <- matrix(sample(1:4, 60, replace = TRUE), 15, 4)
 #' morie_spatial_voting_ordered_oc(Y, n_dims = 1L, max_iter = 20L)
 #' @export
@@ -1372,6 +1385,7 @@ morie_spatial_voting_ordered_oc <- function(Y,
 #'   (2003). "Enhancing the Validity and Cross-Cultural Comparability of
 #'   Measurement in Survey Research." *APSR*, 97(4), 567-583.
 #' @examples
+#' set.seed(1)
 #' Y <- sample(1:5, 30, replace = TRUE)
 #' V <- matrix(sample(1:5, 30 * 3, replace = TRUE), 30, 3)
 #' morie_spatial_voting_anchoring_vignettes(Y, V)
@@ -1432,6 +1446,7 @@ morie_spatial_voting_anchoring_vignettes <- function(Y, V,
 #'   Differences in Multidimensional Scaling via an N-way Generalization
 #'   of Eckart-Young Decomposition." *Psychometrika*, 35(3).
 #' @examples
+#' set.seed(1)
 #' D1 <- as.matrix(dist(matrix(rnorm(20), 5)))
 #' D2 <- as.matrix(dist(matrix(rnorm(20), 5)))
 #' morie_spatial_voting_indscal(list(D1, D2), n_dims = 2L, max_iter = 30L)
@@ -1505,6 +1520,7 @@ morie_spatial_voting_indscal <- function(dissimilarities,
 #'   `r_squared`, `coefficients`.
 #' @references Armstrong et al. (2021), Section 2.6.
 #' @examples
+#' set.seed(1)
 #' morie_spatial_voting_normal_vectors(matrix(rnorm(20), 10, 2), rnorm(10))
 #' @export
 morie_spatial_voting_normal_vectors <- function(ideal_points,
@@ -1538,6 +1554,7 @@ morie_spatial_voting_normal_vectors <- function(ideal_points,
 #' @references Poole KT (2005). \emph{Spatial Models of Parliamentary
 #'   Voting}. Cambridge University Press.
 #' @examples
+#' set.seed(1)
 #' morie_spatial_voting_cutting_lines(matrix(rnorm(6), 3, 2), c(0.1, -0.2, 0))
 #' @export
 morie_spatial_voting_cutting_lines <- function(normals, cutpoints,

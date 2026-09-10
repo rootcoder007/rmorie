@@ -11,6 +11,7 @@
 #' @return Named list: statistic, p_value, z, n, m, q.
 #' @importFrom stats pnorm
 #' @examples
+#' set.seed(1)
 #' morie_percentile_modified_rank(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_percentile_modified_rank <- function(x, y, q = 0.25) {

@@ -54,6 +54,7 @@ When \code{rebase_to_year} is supplied, an additional
 equals \code{rebase_to_value}.
 }
 \examples{
+set.seed(1)
 counts <- data.frame(OCC_YEAR = rep(2020:2023, 2),
                      category = rep(c("Assault", "Robbery"), each = 4),
                      n = rpois(8, 50))

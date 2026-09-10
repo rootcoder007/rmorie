@@ -13,6 +13,7 @@
 #' @return Named list: r, g, g_csr, nn_distances, mean_nn, lambda_est.
 #' @references Schabenberger & Gotway (2005), Sec 3.3.4, pp. 97-98.
 #' @examples
+#' set.seed(1)
 #' spgfun(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10))
 #' @export
 spgfun <- function(points, r = NULL, region = NULL) {

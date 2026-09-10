@@ -62,6 +62,7 @@
 #'   coefficients.
 #' @references Sun & Abraham (2021) J. Econometrics 225(2).
 #' @examples
+#' set.seed(1)
 #' df <- expand.grid(id = 1:40, t = 1:8)
 #' df$g <- ifelse(df$id <= 12, 4L, ifelse(df$id <= 24, 6L, NA))
 #' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
@@ -174,6 +175,7 @@ morie_did_sun_abraham <- function(data, outcome, unit, time,
 #'   conf.int, p.value, method, n_units, n_periods, call.
 #' @references Borusyak, Jaravel & Spiess (2024) REStud 91(6).
 #' @examples
+#' set.seed(1)
 #' df <- expand.grid(id = 1:40, t = 1:8)
 #' df$g <- ifelse(df$id <= 20, 5L, NA)
 #' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
@@ -241,6 +243,7 @@ morie_did_borusyak <- function(data, outcome, unit, time,
 #' @references Gardner (2022) "Two-stage differences in differences",
 #'   working paper.
 #' @examples
+#' set.seed(1)
 #' df <- expand.grid(id = 1:40, t = 1:8)
 #' df$g <- ifelse(df$id <= 20, 5L, NA)
 #' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)

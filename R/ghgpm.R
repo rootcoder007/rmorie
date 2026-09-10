@@ -11,6 +11,7 @@
 #' @param x_star Optional matrix of prediction points (defaults to x).
 #' @return Named list with estimate, se, mu, sd, length_scale, nu, noise, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_gp_matern(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_gp_matern <- function(x, y, nu = 1.5, length_scale = NULL,

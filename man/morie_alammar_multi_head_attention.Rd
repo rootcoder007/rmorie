@@ -21,6 +21,7 @@ A list with \code{output}, \code{heads}, \code{estimate}, \code{n}, \code{method
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(6), 3, 2)
 I2 <- diag(2)
 morie_alammar_multi_head_attention(X, X, X, list(I2), list(I2), 

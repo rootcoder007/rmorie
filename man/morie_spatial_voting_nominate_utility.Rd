@@ -24,6 +24,7 @@ List with \code{U_yea}, \code{U_nay}, \code{utility_diff}, \code{vote_probs}.
 Computes Poole-Rosenthal NOMINATE utilities and vote probabilities.
 }
 \examples{
+set.seed(1)
 x  <- matrix(rnorm(8), 4, 2)
 zy <- matrix(rnorm(6), 3, 2); zn <- matrix(rnorm(6), 3, 2)
 morie_spatial_voting_nominate_utility(x, zy, zn)

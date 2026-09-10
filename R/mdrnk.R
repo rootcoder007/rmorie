@@ -8,6 +8,7 @@
 #' @param x Numeric vector.
 #' @return Named list: midranks, n, ties, tie_correction.
 #' @examples
+#' set.seed(1)
 #' midranks(x = rnorm(50))
 #' @export
 midranks <- function(x) {

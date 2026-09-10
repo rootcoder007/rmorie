@@ -31,6 +31,7 @@ Named list with statistic, z, p_value, theta0, h, n, method.
 z = W_n / sqrt(n(n+1)(2n+1)/6) ~ N(0,1).
 }
 \examples{
+set.seed(1)
 fzwlc(x = rnorm(50))
 }
 \keyword{internal}

@@ -27,5 +27,6 @@ split into k folds, for each train-fraction fit on a prefix of the
 training fold and score on the held-out fold.
 }
 \examples{
+set.seed(1)
 morie_learning_curve(x = rnorm(50), y = rnorm(50))
 }

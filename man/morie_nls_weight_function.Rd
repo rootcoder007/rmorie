@@ -54,6 +54,7 @@ which is what the book asserts the efficient weight achieves.
 Mirrors \code{morie.fn.hrzwfun}.
 }
 \examples{
+set.seed(1)
 x <- cbind(rnorm(100), rnorm(100))
 y <- tanh(x \%*\% c(1, -0.6)) + rnorm(100) * 0.3
 morie_nls_weight_function(x, y, beta_hat = c(1, -0.6))$efficient_weight_used

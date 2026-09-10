@@ -23,6 +23,7 @@
 #'
 #'   Magurran, A. E. (2004). Measuring Biological Diversity. Blackwell.
 #' @examples
+#' set.seed(1)
 #' Frtaxd(cbind(runif(20), runif(20)), sample(letters[1:3], 20, TRUE), grid = 2)
 #' @export
 Frtaxd <- function(coords, species, grid = 4L) {

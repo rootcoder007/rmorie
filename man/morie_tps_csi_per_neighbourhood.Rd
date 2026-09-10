@@ -31,6 +31,7 @@ Data NeighbourhoodCrimeRates per-ward population for per-capita
 rates.  Returns the un-normalised weighted sum + total count.
 }
 \examples{
+set.seed(1)
 counts <- data.frame(HOOD_158 = rep(sprintf("\%03d", 1:4), 2),
                      category = rep(c("Assault", "Robbery"), each = 4),
                      n = rpois(8, 50))

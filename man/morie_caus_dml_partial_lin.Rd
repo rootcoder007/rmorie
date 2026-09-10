@@ -41,6 +41,7 @@ otherwise does not vanish at root-n. \code{theta_in_sample} is computed
 alongside precisely so the gap is visible.
 }
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(600), 200)
 D <- X[, 1] + stats::rnorm(200)
 morie_caus_dml_partial_lin(1.5 * D + X[, 1], D, X, n_folds = 3)$theta

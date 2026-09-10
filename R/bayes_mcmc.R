@@ -126,6 +126,7 @@ NULL
 #' @param verbose Emit per-chain progress messages.
 #' @return A `morie_bayes_fit` object.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(50))
 #' d$y <- 1 + 2 * d$x + rnorm(50)
 #' fit <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 500, warmup = 200)
@@ -242,6 +243,7 @@ morie_bayes_lm <- function(formula, data, prior_sd = 10, chains = 4L,
 #' @param chains A list of iteration-by-parameter matrices.
 #' @return Named numeric R-hat per parameter.
 #' @examples
+#' set.seed(1)
 #' morie_bayes_rhat(list(matrix(rnorm(200), 100), matrix(rnorm(200), 100)))
 #' @export
 morie_bayes_rhat <- function(chains) {
@@ -265,6 +267,7 @@ morie_bayes_rhat <- function(chains) {
 #' @param chains A list of iteration-by-parameter matrices.
 #' @return Named numeric ESS per parameter.
 #' @examples
+#' set.seed(1)
 #' morie_bayes_ess(list(matrix(rnorm(200), 100)))
 #' @export
 morie_bayes_ess <- function(chains) {
@@ -282,6 +285,7 @@ morie_bayes_ess <- function(chains) {
 #' @param chains A list of iteration-by-parameter matrices.
 #' @return Named numeric Geweke z per parameter (|z| < 2 ~ converged).
 #' @examples
+#' set.seed(1)
 #' morie_bayes_geweke(list(matrix(rnorm(400), 200)))
 #' @export
 morie_bayes_geweke <- function(chains) {
@@ -302,6 +306,7 @@ morie_bayes_geweke <- function(chains) {
 #' @param fit A `morie_bayes_fit`.
 #' @return A list with `rhat`, `ess`, and `geweke`.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(40))
 #' d$y <- d$x + rnorm(40)
 #' morie_bayes_diagnostics(morie_bayes_lm(y ~ x, d,
@@ -322,6 +327,7 @@ morie_bayes_diagnostics <- function(fit) {
 #' @param ... Passed to [morie_bayes_lm()].
 #' @return A new `morie_bayes_fit` started from `fit`'s last draws.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(40))
 #' d$y <- d$x + rnorm(40)
 #' f1 <- morie_bayes_lm(y ~ x, d, chains = 2, iter = 200, warmup = 100)
@@ -342,6 +348,7 @@ morie_bayes_continue <- function(fit, iter = 1000L, ...) {
 #' @param fit A `morie_bayes_fit`.
 #' @return A data.frame of posterior vs OLS coefficient estimates.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(60))
 #' d$y <- 1 + 2 * d$x + rnorm(60)
 #' morie_bayes_compare(morie_bayes_lm(y ~ x, d,
@@ -365,6 +372,7 @@ morie_bayes_compare <- function(fit) {
 #' @param ... Unused.
 #' @return Numeric fitted values.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' d <- data.frame(x = rnorm(50))
 #' d$y <- 1 + 2 * d$x + rnorm(50)
@@ -384,6 +392,7 @@ fitted.morie_bayes_fit <- function(object, ...) {
 #' @param ... Unused.
 #' @return `x`, invisibly.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' d <- data.frame(x = rnorm(50))
 #' d$y <- 1 + 2 * d$x + rnorm(50)
@@ -456,6 +465,7 @@ morie_bayes_plot <- function(x, type = c("trace", "density", "both"),
 #' @param ... Passed to [morie_bayes_plot()].
 #' @return `NULL`, invisibly (default trace plot).
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' d <- data.frame(x = rnorm(50))
 #' d$y <- 1 + 2 * d$x + rnorm(50)
@@ -470,6 +480,7 @@ plot.morie_bayes_fit <- function(x, ...) morie_bayes_plot(x, ...)
 #' @param param Parameter index or name.
 #' @return `NULL`, invisibly.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(x = rnorm(40))
 #' d$y <- d$x + rnorm(40)
 #' morie_bayes_density(morie_bayes_lm(y ~ x, d,

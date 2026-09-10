@@ -31,6 +31,7 @@ estimator, which makes this a Z-estimation problem. Mirrors
 \code{morie.fn.ksr023}.
 }
 \examples{
+set.seed(1)
 z <- rnorm(60)
 tt <- rexp(60) / exp(0.7 * z)
 morie_cox_score_process(0.7, z, tt, rep(1, 60))$is_process

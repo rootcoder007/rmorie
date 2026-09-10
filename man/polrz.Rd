@@ -32,6 +32,7 @@ Two-group polarization P = |mean_R - mean_D| / pooled_sd. When both
 groups are constant, falls back to overall SD.
 }
 \examples{
+set.seed(1)
 polrz(x = rnorm(50))
 }
 \keyword{internal}

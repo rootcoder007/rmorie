@@ -228,6 +228,7 @@ CooksD <- function(y, X) {
 #'   n_columns)
 #' @export
 #' @examples
+#' set.seed(1)
 #' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 #' X <- matrix(rnorm(6), 3, 2)
 #' PnaAgg(A, X)

@@ -33,5 +33,6 @@ Named list with estimate, se, mu, sd, length_scale, noise, n, method.
 GP posterior mean with squared-exponential kernel
 }
 \examples{
+set.seed(1)
 morie_ghosal_gp_squared_exponential(x = rnorm(50), y = rnorm(50))
 }

@@ -30,6 +30,7 @@ via Lawson-Hanson active set), and converts the ensemble scores to
 estimand weights.
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(150, 1, 0.5), x1 = rnorm(150), x2 = rnorm(150))
 morie_weight_super(d, "t", c("x1", "x2"))
 }

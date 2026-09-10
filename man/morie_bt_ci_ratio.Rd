@@ -47,6 +47,7 @@ independent samples separately, and getting it wrong biases the
 width in whichever direction the dependence points.
 }
 \examples{
+set.seed(1)
 morie_bt_ci_ratio(stats::rnorm(50, 2), stats::rnorm(50, 1),
   B = 200
 )$ci

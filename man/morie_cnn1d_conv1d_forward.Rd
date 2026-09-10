@@ -30,6 +30,7 @@ R parity for \code{morie.fn.cnn1d.conv1d_forward}.
 \deqn{y[i] = \sum_{k=0}^{K-1} w[k] x[i\,s + k] + b}{y[i] = sum_k=0^K-1 w[k] x[i s + k] + b}
 }
 \examples{
+set.seed(1)
 morie_cnn1d_conv1d_forward(x = rnorm(50), w = rnorm(3))
 }
 \references{

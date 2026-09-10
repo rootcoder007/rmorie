@@ -10,6 +10,7 @@
 #' @return Named list with estimate, se, ci_lower, ci_upper, t, h, n, method.
 #' @importFrom stats median pnorm
 #' @examples
+#' set.seed(1)
 #' fzsrv(x = rnorm(50))
 #' @export
 fzsrv <- function(x, t = NULL, h = NULL) {

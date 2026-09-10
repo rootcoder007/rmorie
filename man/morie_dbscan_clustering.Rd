@@ -21,6 +21,7 @@ Named list: \code{estimate} (the cluster count),   \code{labels} (0-based, \code
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 x <- rbind(matrix(rnorm(80, 0, 0.2), ncol = 2), matrix(rnorm(80, 
     5, 0.2), ncol = 2))
 morie_dbscan_clustering(x, eps = 0.6, min_samples = 4L)

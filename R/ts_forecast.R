@@ -118,6 +118,7 @@ NULL
 #'   propagated to return values.
 #' @return A `morie_ts` object (a `ts` with validated ordering).
 #' @examples
+#' set.seed(1)
 #' morie_ts(cumsum(rnorm(24)), frequency = 12, start = 2000)
 #' @export
 morie_ts <- function(x, frequency = 1, start = 1, calendar = NA_character_,
@@ -163,6 +164,7 @@ morie_ts <- function(x, frequency = 1, start = 1, calendar = NA_character_,
 #' @return A data.frame with columns `lag` (ascending) and `value`, plus a
 #'   `units` attribute inherited from `x`.
 #' @examples
+#' set.seed(1)
 #' morie_ts_acf(cumsum(rnorm(50)), lag_max = 5)
 #' @export
 morie_ts_acf <- function(x, lag_max = 20L, type = c("correlation",
@@ -192,6 +194,7 @@ morie_ts_acf <- function(x, lag_max = 20L, type = c("correlation",
 #' @return A `morie_ts_stationarity` list: `adf`, `kpss` (statistic +
 #'   whether stationary at 5%), `ljung_box` p-value, and `suggested_d`.
 #' @examples
+#' set.seed(1)
 #' morie_ts_stationarity(cumsum(rnorm(100)))$suggested_d
 #' @export
 morie_ts_stationarity <- function(x, max_d = 2L) {
@@ -248,6 +251,7 @@ morie_ts_stationarity <- function(x, max_d = 2L) {
 #' @param method "stl" (loess-based) or "classical" ([stats::decompose()]).
 #' @return A `morie_ts_decomp` with `trend`, `seasonal`, `remainder`.
 #' @examples
+#' set.seed(1)
 #' morie_ts_decompose(morie_ts(sin(1:48) + rnorm(48), frequency = 12))
 #' @export
 morie_ts_decompose <- function(x, method = c("stl", "classical")) {
@@ -328,6 +332,7 @@ morie_ts_undifference <- function(dx, init = attr(dx, "init"),
 #'   `d == 0`).
 #' @return A `morie_ts_model` wrapping the fitted [stats::arima()] object.
 #' @examples
+#' set.seed(1)
 #' morie_ts_arima(cumsum(rnorm(60)), order = c(1, 1, 0))
 #' @export
 morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
@@ -352,6 +357,7 @@ morie_ts_arima <- function(x, order = c(0L, 0L, 0L),
 #' @param ... Unused.
 #' @return `x`, invisibly.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' obj <- morie_ts_arima(cumsum(rnorm(60)), order = c(1, 1, 0))
 #' print(obj)
@@ -382,6 +388,7 @@ print.morie_ts_model <- function(x, ...) {
 #' @return A `morie_ts_forecast`: `mean`, `lower`, `upper`, `se`
 #'   (each length `h`), plus the `observed` series.
 #' @examples
+#' set.seed(1)
 #' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 #' fc <- morie_ts_forecast(m, h = 12)
 #' @export
@@ -413,6 +420,7 @@ morie_ts_forecast <- function(model, h = 10L, level = 0.95, xreg = NULL) {
 #' @param max_width Maximum acceptable interval width (`upper - lower`).
 #' @return A `morie_ts_forecast` truncated to the acceptable horizon.
 #' @examples
+#' set.seed(1)
 #' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 #' fc <- morie_ts_forecast(m, h = 30)
 #' morie_ts_trim_forecast(fc, max_width = 5)$h
@@ -435,6 +443,7 @@ morie_ts_trim_forecast <- function(forecast, max_width) {
 #' @param ... Unused.
 #' @return `x`, invisibly.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 #' fc <- morie_ts_forecast(m, h = 12)
@@ -463,6 +472,7 @@ print.morie_ts_forecast <- function(x, ...) {
 #'   forecast is drawn in a distinct colour with its distributional
 #'   limits shaded, and the observed values are always included.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 #' fc <- morie_ts_forecast(m, h = 12)
@@ -507,6 +517,7 @@ morie_ts_accuracy <- function(forecast_mean, actual) {
 #' @return A list with the `forecast`, the held-out `actual`, and the
 #'   `accuracy` metrics.
 #' @examples
+#' set.seed(1)
 #' morie_ts_backtest(cumsum(rnorm(120)), h = 12, order = c(1, 1, 0))$accuracy
 #' @export
 morie_ts_backtest <- function(x, h = 10L, order = c(0L, 0L, 0L),
@@ -530,6 +541,7 @@ morie_ts_backtest <- function(x, h = 10L, order = c(0L, 0L, 0L),
 #' @return A list with the full `results` table and the `best` model
 #'   (a fitted `morie_ts_model`).
 #' @examples
+#' set.seed(1)
 #' morie_ts_select(cumsum(rnorm(80)), max_p = 2, max_q = 2)$best$order
 #' @export
 morie_ts_select <- function(x, max_p = 3L, max_q = 3L, d = NULL,

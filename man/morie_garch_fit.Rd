@@ -23,6 +23,7 @@ which the likelihood enforces by returning a large penalty outside the
 admissible region.
 }
 \examples{
+set.seed(1)
 morie_garch_fit(x = rnorm(50))
 }
 \references{

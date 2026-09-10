@@ -37,6 +37,7 @@ safer reading is what comes out unless constancy is asserted
 deliberately. Only relevance is testable, and it is reported.
 }
 \examples{
+set.seed(1)
 Z <- stats::rbinom(400, 1, 0.5)
 D <- Z * stats::rbinom(400, 1, 0.7)
 morie_caus_iv_dag(2 * D + stats::rnorm(400), D, Z)$relevance

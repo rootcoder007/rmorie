@@ -34,6 +34,7 @@ R parity of \code{morie.entheo_dmt.spectral_band_power}. Wraps
 the trapezoidal rule.
 }
 \examples{
+set.seed(1)
 fs <- 200
 t <- seq_len(4 * fs) / fs
 sig <- sin(2 * pi * 10 * t) + 0.1 * rnorm(length(t))

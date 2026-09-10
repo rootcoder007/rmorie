@@ -21,6 +21,7 @@
 #' @return Named list \code{(h, estimate, z, r, n, method)}.
 #' @references Cho et al. (2014), EMNLP.
 #' @examples
+#' set.seed(1)
 #' morie_grucl_gru_cell(x = rnorm(50))
 #' @export
 morie_grucl_gru_cell <- function(x, h_prev = NULL, W = NULL, U = NULL, b = NULL,

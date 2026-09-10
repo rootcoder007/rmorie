@@ -38,6 +38,7 @@ limiting score function is a delta function rather than a fixed \code{J} -- the
 technical obstacle Chapter 3 works around with an H-decomposition.
 }
 \examples{
+set.seed(1)
 fzlst(x = rnorm(50))
 }
 \keyword{internal}

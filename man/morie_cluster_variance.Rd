@@ -27,6 +27,7 @@ error by the square root of the design effect
 clustering is a number. Mirrors \code{morie.fn.cluvar}.
 }
 \examples{
+set.seed(1)
 y <- rnorm(200) + rep(rnorm(20), each = 10)
 morie_cluster_variance(y, rep(1:20, each = 10))$deff
 }

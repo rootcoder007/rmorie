@@ -19,6 +19,7 @@ Takes REPLICATES, not data: the second half of a bootstrap someone
 has already run, so expensive statistics resample once.
 }
 \examples{
+set.seed(1)
 morie_bt_var(stats::rnorm(200))$se
 }
 \references{

@@ -22,6 +22,7 @@ unstable model -- which is why \code{\link{morie_yule_walker}} uses
 the biased one. Mirrors \code{morie.fn.rgacf}.
 }
 \examples{
+set.seed(1)
 morie_acf_estimate(rnorm(50), max_lag = 5)$acf_unbiased
 }
 \references{

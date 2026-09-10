@@ -37,6 +37,7 @@ allele frequencies; it is not implemented here, so there is deliberately no
 \code{"G_VR3"} alias.
 }
 \examples{
+set.seed(1)
 morie_grm_vanraden(markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 morie_grm_vanraden(matrix(sample(0:2, 200, TRUE), 50, 4), method = "G_VR2")
 }

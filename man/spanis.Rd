@@ -33,6 +33,7 @@ the uncorrected one, so the improvement is visible rather than
 asserted.
 }
 \examples{
+set.seed(1)
 spanis(coords = matrix(runif(200), 100, 2), z = rnorm(100),
        A_matrix = diag(2), n_bins = 5)
 }

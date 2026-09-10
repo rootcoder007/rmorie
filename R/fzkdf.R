@@ -17,6 +17,7 @@
 #' @return Named list: estimate, bias, variance, se, h, t, n, method.
 #' @importFrom stats median sd quantile dnorm pnorm
 #' @examples
+#' set.seed(1)
 #' fzkdf(x = rnorm(50))
 #' @export
 fzkdf <- function(x, t = NULL, h = NULL) {

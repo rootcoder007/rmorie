@@ -18,5 +18,6 @@ Named list: \code{rho}, \code{p_value}.
 Spearman rank correlation
 }
 \examples{
+set.seed(1)
 morie_spearman_rho(x = rnorm(50), y = rnorm(50))
 }

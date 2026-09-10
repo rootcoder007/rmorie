@@ -49,6 +49,7 @@ instrument count, while LIML is approximately median-unbiased
 there at the cost of heavier tails.
 }
 \examples{
+set.seed(1)
 Z <- matrix(stats::rnorm(100), 100)
 D <- Z \%*\% 1.2 + stats::rnorm(100)
 morie_caus_iv_liml(2 * D + stats::rnorm(100), D, Z)$kappa

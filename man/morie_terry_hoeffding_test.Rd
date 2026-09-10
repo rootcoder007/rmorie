@@ -20,5 +20,6 @@ a_i = qnorm((R_i - 3/8) / (N + 1/4)).  Statistic stat_t = sum of
 scores from the first sample.
 }
 \examples{
+set.seed(1)
 morie_terry_hoeffding_test(x = rnorm(50), y = rnorm(50))
 }

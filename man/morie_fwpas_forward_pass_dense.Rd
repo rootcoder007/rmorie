@@ -30,6 +30,7 @@ Pure-base-R parity for \code{morie.fn.fwpas.forward_pass_dense}.
 \deqn{z = W x + b, \quad a = \sigma(z)}{z = W x + b, a = sigma(z)}
 }
 \examples{
+set.seed(1)
 morie_fwpas_forward_pass_dense(x = rnorm(50), w = rnorm(3), b = rnorm(3))
 }
 \references{

@@ -26,6 +26,7 @@ same order as the standard error, and the confidence interval is
 then centred on the wrong value. Mirrors \code{morie.fn.hrzades}.
 }
 \examples{
+set.seed(1)
 x <- rnorm(300)
 morie_average_derivative_hat(x, 2 * x)$undersmoothed
 }

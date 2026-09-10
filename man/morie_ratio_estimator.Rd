@@ -28,6 +28,7 @@ compared against the data rather than left as folklore. Biased to
 order \eqn{1/n}. Mirrors \code{morie.fn.ratest}.
 }
 \examples{
+set.seed(1)
 x <- rexp(50, 0.1)
 morie_ratio_estimator(2 * x + rnorm(50), x, X_mean = 10)$improves_on_simple_mean
 }

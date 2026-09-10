@@ -16,6 +16,7 @@
 #'   gamma, degree, n, method.
 #' @importFrom stats predict
 #' @examples
+#' set.seed(1)
 #' morie_svm_kernel_trick(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_svm_kernel_trick <- function(x, y, kernel = "rbf", C = 1.0,

@@ -16,6 +16,7 @@
 #' @return Named list: prediction, variance, weights, lagrange.
 #' @references Schabenberger & Gotway (2005), Secs 5.1-5.2.
 #' @examples
+#' set.seed(1)
 #' co <- matrix(runif(40), 20, 2) * 5
 #' spblup(co, rnorm(20), matrix(c(2, 2), 1, 2),
 #'        list(model = "exponential", sill = 1, range = 2))

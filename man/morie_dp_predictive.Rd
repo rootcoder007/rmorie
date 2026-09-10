@@ -30,6 +30,7 @@ because a DP draw is almost surely discrete however smooth
 \eqn{G_0} is. Mirrors \code{morie.fn.gh_dp_post_ex}.
 }
 \examples{
+set.seed(1)
 morie_dp_predictive(rnorm(30), alpha = 2)$atom_weight
 }
 \references{

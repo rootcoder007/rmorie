@@ -25,6 +25,7 @@ Named list: statistic, p_value, h, n, method.
 \eqn{W_n^2 = n \int (\hat F_h(t)-F_0(t))^2 dF_0(t)}{W_n^2 = n int (hat F_h(t)-F_0(t))^2 dF_0(t)}.
 }
 \examples{
+set.seed(1)
 fzcvm(x = rnorm(50))
 }
 \keyword{internal}

@@ -21,6 +21,7 @@ Polynomial or Fourier basis of dimension K on the rescaled unit
 interval. Mirrors \code{morie.fn._horowitz.sieve_basis}.
 }
 \examples{
+set.seed(1)
 dim(morie_sieve_basis(runif(20), 4))
 }
 \references{

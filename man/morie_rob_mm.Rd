@@ -29,6 +29,7 @@ it under the larger c would let outliers back into the scale and
 the breakdown would fall back toward zero.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(60)
 morie_rob_mm(x, 1 + 2 * x + stats::rnorm(60), n_subsets = 50)$beta
 }

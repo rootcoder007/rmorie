@@ -17,6 +17,7 @@ Computes \eqn{B = -\tfrac{1}{2} H D^{(2)} H}{B = -(1)/(2) H D^(2) H} with
 \eqn{H = I - n^{-1}\mathbf{1}\mathbf{1}'}{H = I - n^-111'}.
 }
 \examples{
+set.seed(1)
 morie_spatial_voting_double_centering(as.matrix(dist(matrix(rnorm(20), 5))))
 }
 \references{

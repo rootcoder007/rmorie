@@ -10,6 +10,7 @@
 #'   se (residual sd), n, method.
 #' @references Kosorok (2008), Ch 6.
 #' @examples
+#' set.seed(1)
 #' morie_ksr11_kosorok_efficient_score(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ksr11_kosorok_efficient_score <- function(x, y) {

@@ -33,6 +33,7 @@ complement, which the tests assert. Points in every bag are
 dropped and counted; a large count means B is too small.
 }
 \examples{
+set.seed(1)
 if (morie_crypto_liboqs_available()) {
   x <- matrix(stats::rnorm(60), 30)
   y <- x[, 1] + stats::rnorm(30)

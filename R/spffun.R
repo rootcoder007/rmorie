@@ -16,6 +16,7 @@
 #' @return Named list: r, f, f_csr, empty_space_distances, lambda_est.
 #' @references Schabenberger & Gotway (2005), Sec 3.3.4, pp. 97-98.
 #' @examples
+#' set.seed(1)
 #' spffun(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10), n_grid = 20)
 #' @export
 spffun <- function(points, region = NULL, r = NULL, n_grid = 40) {

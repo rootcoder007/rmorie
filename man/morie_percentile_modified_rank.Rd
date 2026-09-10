@@ -21,5 +21,6 @@ Trims central ranks; only tail ranks contribute.  Score:
 a_i = max(R_i - (1-q)(N+1), 0) - max(q(N+1) - R_i, 0)
 }
 \examples{
+set.seed(1)
 morie_percentile_modified_rank(x = rnorm(50), y = rnorm(50))
 }

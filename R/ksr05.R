@@ -9,6 +9,7 @@
 #' @return Named list with estimate, n, method.
 #' @references Kosorok (2008), Ch 2.
 #' @examples
+#' set.seed(1)
 #' morie_ksr05_kosorok_bracketing_number(x = rnorm(50))
 #' @export
 morie_ksr05_kosorok_bracketing_number <- function(x, e = 0.1) {

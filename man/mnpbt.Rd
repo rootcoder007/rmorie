@@ -32,6 +32,7 @@ errors over a deterministic utility matrix; binary case uses the
 closed-form Phi((U1-U0)/sqrt(2)).
 }
 \examples{
+set.seed(1)
 mnpbt(x = rnorm(50))
 }
 \keyword{internal}

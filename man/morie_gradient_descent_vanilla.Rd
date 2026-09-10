@@ -26,5 +26,6 @@ theta := theta - lr * (2/n) X' (X theta - y), intercept included.
 Validates against \code{stats::lm} reference.
 }
 \examples{
+set.seed(1)
 morie_gradient_descent_vanilla(x = rnorm(50), y = rnorm(50))
 }

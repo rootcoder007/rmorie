@@ -44,5 +44,6 @@ Native gradient tree boosting (ESL Algorithm 10.3 with shrinkage);
 no boosted-trees package is loaded or called.
 }
 \examples{
+set.seed(1)
 morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
 }

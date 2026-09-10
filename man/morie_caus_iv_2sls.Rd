@@ -35,6 +35,7 @@ common and silent error that produces a smaller number which is
 not a standard error of anything.
 }
 \examples{
+set.seed(1)
 Z <- matrix(stats::rnorm(200), 100)
 D <- Z \%*\% c(1, 0.5) + stats::rnorm(100)
 morie_caus_iv_2sls(2 * D + stats::rnorm(100), D, Z)$beta

@@ -33,6 +33,7 @@ List with \code{loglik}, \code{GMP}, \code{n_correct}, \code{n_total}.
 NOMINATE log-likelihood and GMP
 }
 \examples{
+set.seed(1)
 v <- matrix(stats::rbinom(20, 1, 0.5), 4, 5)
 x <- matrix(rnorm(4), 4, 1); zy <- matrix(rnorm(5), 5, 1)
 zn <- matrix(rnorm(5), 5, 1)

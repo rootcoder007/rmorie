@@ -19,6 +19,7 @@ One estimator, two catalogue entries; the computation is
 role of k.
 }
 \examples{
+set.seed(1)
 morie_evt_hill_alias((1 - stats::runif(200))^(-1 / 3), k = 30)$alias_of
 }
 \references{

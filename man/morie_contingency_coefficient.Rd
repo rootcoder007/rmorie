@@ -18,5 +18,6 @@ C = sqrt(chi^2 / (chi^2 + n)).  Also reports Cramer's V and the
 maximum attainable C = sqrt((min(r,c)-1)/min(r,c)).
 }
 \examples{
+set.seed(1)
 morie_contingency_coefficient(x = matrix(sample(1:5, 50, TRUE), 10, 5))
 }

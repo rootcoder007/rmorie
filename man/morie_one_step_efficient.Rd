@@ -46,6 +46,7 @@ plus one step beats a full optimisation. Mirrors
 \code{morie.fn.hrzasym}.
 }
 \examples{
+set.seed(1)
 x <- cbind(rnorm(100), rnorm(100))
 y <- tanh(x \%*\% c(1, -0.6)) + rnorm(100) * 0.3
 morie_one_step_efficient(x, y, initial_estimator = c(1, -0.2))$n_steps

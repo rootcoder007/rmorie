@@ -43,6 +43,7 @@ Hellinger-consistent at any Lipschitz density. Mirrors
 \code{morie.fn.gh_c7_6}.
 }
 \examples{
+set.seed(1)
 morie_polya_tree_density(rnorm(200), levels = 4)$absolutely_continuous_prior
 }
 \references{

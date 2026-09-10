@@ -11,6 +11,7 @@
 #' @return Named list: statistic, p_value, z, n, m.
 #' @importFrom stats qnorm pnorm
 #' @examples
+#' set.seed(1)
 #' morie_terry_hoeffding_test(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_terry_hoeffding_test <- function(x, y) {

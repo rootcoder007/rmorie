@@ -27,5 +27,6 @@ and reports the rejection rate of two-sided wilcox.test at level
 alpha.
 }
 \examples{
+set.seed(1)
 morie_wilcoxon_power(x = rnorm(50))
 }

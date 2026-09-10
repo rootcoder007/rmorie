@@ -35,6 +35,7 @@ Models: exponential, gaussian, spherical.
 Exponential form: \deqn{\gamma(h) = c_0 + c_1(1 - e^{-h/a})}{gamma(h) = c_0 + c_1(1 - e^-h/a)}.
 }
 \examples{
+set.seed(1)
 vrgft(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

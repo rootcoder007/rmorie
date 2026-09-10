@@ -33,6 +33,7 @@ A list with \code{coordinates}, \code{stress}, \code{iterations}, \code{converge
 Iterative majorisation algorithm for metric MDS.
 }
 \examples{
+set.seed(1)
 D <- as.matrix(dist(matrix(rnorm(40), 10)))
 morie_spatial_voting_smacof(D)
 }

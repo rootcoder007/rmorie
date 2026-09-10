@@ -225,6 +225,7 @@
 #'   Manski (1990), *AER P&P* 80:319-323; Manski and Tamer (2002),
 #'   *Econometrica* 70:519-546.
 #' @examples
+#' set.seed(1)
 #' y <- stats::runif(100)
 #' morie_bnd_manski(y, y > 0.2, c(0, 1))$width
 #' @export
@@ -399,6 +400,7 @@ morie_bnd_imbens_manski <- function(lower_hat, upper_hat, se_lower,
 #'   75:1243-1284; Andrews and Soares (2010), *Econometrica*
 #'   78:119-157.
 #' @examples
+#' set.seed(1)
 #' d <- cbind(stats::rnorm(50, 1), stats::rnorm(50, 3))
 #' g <- function(d, th) cbind(d[, 1] - th, th - d[, 2])
 #' morie_bnd_moment_inequality(d, g, c(2))$criterion
@@ -592,6 +594,7 @@ morie_bnd_lp <- function(c, A_ub = NULL, b_ub = NULL, A_eq = NULL,
 #'   *J. Applied Probability* 1:385-388; Hanson (2006), *JASA*
 #'   101:1548-1565.
 #' @examples
+#' set.seed(1)
 #' morie_bnd_polya_tree(stats::rnorm(100), grid = c(-1, 0, 1))$density
 #' @export
 morie_bnd_polya_tree <- function(y, grid = NULL, tree_depth = 6L,

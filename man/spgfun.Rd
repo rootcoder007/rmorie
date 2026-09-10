@@ -24,6 +24,7 @@ In a clustered pattern G_hat sits ABOVE this curve at small y; in a
 regular pattern it sits below.
 }
 \examples{
+set.seed(1)
 spgfun(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10))
 }
 \references{

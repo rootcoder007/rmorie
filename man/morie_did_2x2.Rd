@@ -50,6 +50,7 @@ native). \code{\link{morie_did_doubly_robust}} is the recommended
 option when pre-treatment covariates are available.
 }
 \examples{
+set.seed(1)
 \donttest{
 df <- data.frame(
   y    = rnorm(200),

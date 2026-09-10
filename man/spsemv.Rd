@@ -25,6 +25,7 @@ moments over lag bins. The factor of one half is what makes gamma
 comparable to a variance rather than to a squared difference.
 }
 \examples{
+set.seed(1)
 spsemv(coords = matrix(runif(200), 100, 2), z = rnorm(100), n_bins = 5)
 }
 \references{

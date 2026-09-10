@@ -24,6 +24,7 @@ outside it, so the bias there is \code{O(h)} and does not vanish at the
 interior rate.
 }
 \examples{
+set.seed(1)
 morie_fauzi_kde(stats::rexp(200), grid = c(0.5, 1, 2))$density
 }
 \references{

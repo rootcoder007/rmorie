@@ -24,6 +24,7 @@ of a binary vote vector. Reports PRE (proportional reduction in
 error) against the modal-class baseline.
 }
 \examples{
+set.seed(1)
 optcl(x = rnorm(50))
 }
 \keyword{internal}

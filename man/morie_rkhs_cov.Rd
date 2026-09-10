@@ -23,6 +23,7 @@ The value of \code{out}, as built in the body.
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 n <- 12
 A <- matrix(rnorm(n * 6), nrow = n)
 G <- rmorie:::morie_grm(A) + diag(0.3, n)

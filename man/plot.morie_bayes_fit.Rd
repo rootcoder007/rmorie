@@ -18,6 +18,7 @@
 Plot method for \code{morie_bayes_fit} objects
 }
 \examples{
+set.seed(1)
 \donttest{
 d <- data.frame(x = rnorm(50))
 d$y <- 1 + 2 * d$x + rnorm(50)

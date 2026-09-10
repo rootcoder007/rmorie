@@ -24,6 +24,7 @@ classifies legislators by Mahalanobis-style projection onto the
 between-class direction.
 }
 \examples{
+set.seed(1)
 csphr(x = rnorm(50))
 }
 \keyword{internal}

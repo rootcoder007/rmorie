@@ -759,6 +759,7 @@ morie_taphonomy_preservation_lr <- function(evidence, natural, alternative) {
 #' @references Gelman A, et al. (2013). \emph{Bayesian Data Analysis} (3rd ed.),
 #'   Ch. 5 (hierarchical models) & Ch. 14 (conjugate regression). CRC.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' df <- data.frame(preservation_score = rnorm(20),
 #'                  lime_treatment = rbinom(20, 1, 0.5))

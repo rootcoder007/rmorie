@@ -409,6 +409,7 @@ morie_dp_count <- function(D, epsilon = 1, predicate = NULL, seed = NULL,
 #'   \code{clipped_fraction}.
 #' @references Dwork, C. and Roth, A. (2014). \emph{FnTTCS}, 9(3-4).
 #' @examples
+#' set.seed(1)
 #' morie_dp_sum(rnorm(100), -3, 3, epsilon = 1, seed = 1)$sensitivity
 #' @export
 morie_dp_sum <- function(x, a, b, epsilon = 1, seed = NULL) {

@@ -32,6 +32,7 @@ between \code{S} and the cumulative survival must be preserved
 (Remark 4.2).
 }
 \examples{
+set.seed(1)
 morie_fauzi_mrl_boundary_free_2(stats::rexp(60), c(0.5, 1))$mrl
 }
 \references{

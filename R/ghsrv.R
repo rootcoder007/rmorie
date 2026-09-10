@@ -8,6 +8,7 @@
 #' @param lam0 Optional baseline hazard rate.
 #' @return Named list with estimate, times, S_post, H_post, c, lam0, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_survival_beta_process(time = cumsum(rexp(50)))
 #' @export
 morie_ghosal_survival_beta_process <- function(time, event = NULL, c = 1.0,

@@ -35,6 +35,7 @@
 #' @references Callaway & Sant'Anna (2021) J. Econometrics 225(2);
 #'   Goodman-Bacon (2021) J. Econometrics 225(2).
 #' @examples
+#' set.seed(1)
 #' df <- expand.grid(id = 1:30, t = 1:6)
 #' df$g <- ifelse(df$id <= 15, 4L, NA)
 #' df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)
@@ -117,6 +118,7 @@ morie_did <- function(data, outcome, unit, time, treatment_time,
 #' @param x A \code{morie_did} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' df <- expand.grid(id = 1:40, t = 1:8)
 #' df$g <- ifelse(df$id <= 20, 5L, NA)
@@ -168,6 +170,7 @@ print.morie_did <- function(x, ...) {
 #' @references Staiger & Stock (1997); Anderson & Rubin (1949);
 #'   Stock & Yogo (2005).
 #' @examples
+#' set.seed(1)
 #' n <- 200
 #' z <- rnorm(n); u <- rnorm(n)
 #' d <- z + 0.5 * u + rnorm(n)
@@ -241,6 +244,7 @@ morie_iv_2sls <- function(data, outcome, endogenous, instruments,
 #' @param x A \code{morie_iv} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' n <- 200
 #' z <- rnorm(n); u <- rnorm(n)

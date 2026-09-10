@@ -54,6 +54,7 @@ morie_bridge_covariance <- function(s, t, F = NULL) {
 #' @return numeric sup norm.
 #' @references Kosorok (2008), Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_empirical_sup_norm(runif(50))
 #' @export
 morie_empirical_sup_norm <- function(x, F = NULL) {
@@ -77,6 +78,7 @@ morie_empirical_sup_norm <- function(x, F = NULL) {
 #'   chung_liminf_constant (pi/2), loglog_term, n.
 #' @references Kosorok (2008), eq. (2.21).
 #' @examples
+#' set.seed(1)
 #' morie_lil_ratio(runif(1000))$lil_ratio
 #' @export
 morie_lil_ratio <- function(x, F = NULL) {
@@ -137,6 +139,7 @@ morie_kmt_bound <- function(n, x = 1, a = NULL, b = NULL, c = NULL) {
 #' @return list: U, n_subsets, zeta1, hajek_var, m, n.
 #' @references Kosorok (2008), Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_u_process(function(a, b) abs(a - b) / 2, runif(30))$U
 #' @export
 morie_u_process <- function(f, x, m = 2L) {
@@ -394,6 +397,7 @@ morie_quantile_hadamard <- function(F, h_n, t_n, p, eps_pn = NULL) {
 #' @return list: bl_distance, is_lower_bound, n_functions.
 #' @references Kosorok (2008), Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_bl_distance(rnorm(500), rnorm(500) + 2)$bl_distance
 #' @export
 morie_bl_distance <- function(X_n, X, n_functions = 200L, seed = 1L) {
@@ -434,6 +438,7 @@ morie_bl_distance <- function(X_n, X, n_functions = 200L, seed = 1L) {
 #' @return list: delta_grid, probabilities, decreasing.
 #' @references Kosorok (2008), Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_tightness_check(matrix(rnorm(400), nrow = 20))$decreasing
 #' @export
 morie_tightness_check <- function(X_n, rho = NULL, eps = 0.1,

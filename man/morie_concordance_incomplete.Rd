@@ -19,5 +19,6 @@ squared deviations of object rank-sums from their mean.
 Significance via chi-square approximation k(n-1) W ~ chi-square with n-1 df.
 }
 \examples{
+set.seed(1)
 morie_concordance_incomplete(x = rnorm(50))
 }

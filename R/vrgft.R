@@ -39,6 +39,7 @@
 #'   converged, model), n, method.
 #' @references Cressie (1985); Schabenberger & Gotway (2005), Ch 3.
 #' @examples
+#' set.seed(1)
 #' vrgft(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 vrgft <- function(x, coords, model = "exponential",

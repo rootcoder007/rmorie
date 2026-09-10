@@ -8,6 +8,7 @@
 #' @return Named list with \code{trend, seasonal, irregular, loglik, n,
 #'   period, method}.
 #' @examples
+#' set.seed(1)
 #' morie_unobserved_components(x = rnorm(50))
 #' @export
 morie_unobserved_components <- function(x, period = 12, trend = "local linear") {

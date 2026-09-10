@@ -11,6 +11,7 @@
 #' @return Named list with `x_hat`, `alpha`, `beta`, `loglik`, `n_iter`,
 #'   `method`.
 #' @examples
+#' set.seed(1)
 #' irtsp(x = rnorm(50))
 #' @export
 irtsp <- function(x, n_iter = 60L, tol = 1e-6) {

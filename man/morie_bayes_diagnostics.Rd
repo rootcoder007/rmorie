@@ -16,6 +16,7 @@ A list with \code{rhat}, \code{ess}, and \code{geweke}.
 All convergence diagnostics for a fit (details of each checker used)
 }
 \examples{
+set.seed(1)
 d <- data.frame(x = rnorm(40))
 d$y <- d$x + rnorm(40)
 morie_bayes_diagnostics(morie_bayes_lm(y ~ x, d,

@@ -34,6 +34,7 @@ so the OLS estimate and its correct variance
 (X'X)^-1 X' Sigma X (X'X)^-1 are returned alongside.
 }
 \examples{
+set.seed(1)
 n <- 30
 X <- cbind(1, runif(n))
 spgls(X, X \%*\% c(2, -1) + rnorm(n, 0, 0.3), diag(n))

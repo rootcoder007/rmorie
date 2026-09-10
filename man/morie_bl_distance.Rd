@@ -23,6 +23,7 @@ Estimated over sampled BL_1 members, so the value is a LOWER bound
 on the true metric. Mirrors \code{morie.fn.ksr039}.
 }
 \examples{
+set.seed(1)
 morie_bl_distance(rnorm(500), rnorm(500) + 2)$bl_distance
 }
 \references{

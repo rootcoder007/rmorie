@@ -20,5 +20,6 @@ Named list with estimate, theta, log_lik, grid, log_density, K, n, method.
 Log-spline density estimator (Stone 1990, Ghosal Ch 8)
 }
 \examples{
+set.seed(1)
 morie_ghosal_log_density(x = rnorm(50))
 }

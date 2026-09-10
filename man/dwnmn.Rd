@@ -24,6 +24,7 @@ Kalman + RTS smoother applied to a per-period scalar ideal-point
 series (or a panel of legislators).
 }
 \examples{
+set.seed(1)
 dwnmn(x = rnorm(50))
 }
 \keyword{internal}

@@ -33,6 +33,7 @@ Data frame of sampled rows with a \code{.weight} column.
 Proportional or fixed stratified random sample
 }
 \examples{
+set.seed(1)
 df <- data.frame(g = c(rep("A", 60), rep("B", 40)), x = rnorm(100))
 morie_stratified_sample(df, "g", n_per_stratum = 10)
 }

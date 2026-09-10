@@ -19,5 +19,6 @@ Named list with \code{conditional_variance, conditional_volatility,
 EWMA volatility (RiskMetrics 1996)
 }
 \examples{
+set.seed(1)
 morie_ewma_volatility(x = rnorm(50))
 }

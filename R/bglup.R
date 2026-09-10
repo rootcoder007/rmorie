@@ -15,6 +15,7 @@
 #' @return list(estimate, beta, beta_pip, pi, sigma_b2, sigma2, n_iter, n, p, method).
 #' @references Habier-Fernando-Kizilkaya-Garrick (2011); Montesinos Lopez Ch 4.
 #' @examples
+#' set.seed(1)
 #' morie_bayes_cpi_genomic(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_bayes_cpi_genomic <- function(x, y, n_iter = 300, burn = 100,

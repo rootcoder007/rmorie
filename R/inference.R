@@ -23,6 +23,7 @@ NULL
 #' @return Named list: `t`, `df`, `p_value`, `ci_diff`, `cohens_d`.
 #' @export
 #' @examples
+#' set.seed(1)
 #' morie_two_sample_t_test(rnorm(50, 0.5), rnorm(50, 0))
 morie_two_sample_t_test <- function(x1, x2,
                                     equal_var = FALSE,
@@ -55,6 +56,7 @@ morie_two_sample_t_test <- function(x1, x2,
 #' @param alternative `"two.sided"`, `"greater"`, or `"less"`.
 #' @return Named list: `t`, `df`, `p_value`, `ci`.
 #' @examples
+#' set.seed(1)
 #' morie_one_sample_t_test(x = rnorm(50))
 #' @export
 morie_one_sample_t_test <- function(x, mu0 = 0,
@@ -153,6 +155,7 @@ morie_fisher_exact_test <- function(table_2x2,
 #'   `eta_squared`.
 #' @export
 #' @examples
+#' set.seed(1)
 #' morie_anova_one_way(rnorm(30, 0), rnorm(30, 0.5), rnorm(30, 1))
 morie_anova_one_way <- function(...) {
   groups <- list(...)
@@ -246,6 +249,7 @@ morie_wilcoxon_signed_rank_test <- function(x1, x2,
 #' @param alpha Significance level for the `is_normal` flag (default 0.05).
 #' @return Named list: `W`, `p_value`, `is_normal`.
 #' @examples
+#' set.seed(1)
 #' morie_shapiro_wilk_test(x = rnorm(50))
 #' @export
 morie_shapiro_wilk_test <- function(x, alpha = 0.05) {
@@ -485,6 +489,7 @@ morie_omega_squared <- function(f_stat, df_between, df_within, n) {
 #' @param y Numeric vector.
 #' @return Named list: `rho`, `p_value`.
 #' @examples
+#' set.seed(1)
 #' morie_spearman_rho(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_spearman_rho <- function(x, y) {
@@ -498,6 +503,7 @@ morie_spearman_rho <- function(x, y) {
 #' @param y Numeric vector.
 #' @return Named list: `tau`, `p_value`.
 #' @examples
+#' set.seed(1)
 #' morie_kendall_tau(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_kendall_tau <- function(x, y) {
@@ -615,6 +621,7 @@ morie_sample_size_logistic <- function(p0, or, alpha = 0.05, power = 0.80,
 #' @param pooled Use pooled SD (default `TRUE`). If `FALSE`, uses `sd(x2)`.
 #' @return Numeric Cohen's d.
 #' @examples
+#' set.seed(1)
 #' morie_cohens_d(rnorm(50, mean = 1), rnorm(50, mean = 0))
 #' @export
 morie_cohens_d <- function(x1, x2, pooled = TRUE) {

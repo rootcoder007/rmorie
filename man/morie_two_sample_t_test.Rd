@@ -27,5 +27,6 @@ Named list: \code{t}, \code{df}, \code{p_value}, \code{ci_diff}, \code{cohens_d}
 Two-sample t-test with tidy output
 }
 \examples{
+set.seed(1)
 morie_two_sample_t_test(rnorm(50, 0.5), rnorm(50, 0))
 }

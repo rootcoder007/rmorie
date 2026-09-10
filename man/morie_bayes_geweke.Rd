@@ -16,5 +16,6 @@ Named numeric Geweke z per parameter (|z| < 2 ~ converged).
 Geweke convergence diagnostic (z-score comparing chain segments)
 }
 \examples{
+set.seed(1)
 morie_bayes_geweke(list(matrix(rnorm(400), 200)))
 }

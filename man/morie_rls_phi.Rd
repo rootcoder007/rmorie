@@ -25,6 +25,7 @@ governs how fast RLS tracks a change. Mirrors
 \code{morie.fn.rng165} and \code{rng166}.
 }
 \examples{
+set.seed(1)
 morie_rls_phi(matrix(rnorm(40), ncol = 2), lam = 0.99)$effective_memory
 }
 \references{

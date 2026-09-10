@@ -11,6 +11,7 @@
 #' @return Named list: estimate, reference_ols, n_epochs, batch_size,
 #'   loss, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_mini_batch_gradient(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_mini_batch_gradient <- function(x, y, lr = 0.01, n_epochs = 200,

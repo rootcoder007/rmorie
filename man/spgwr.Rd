@@ -29,6 +29,7 @@ point, and the locality is based on spatial position, not on
 covariate values.
 }
 \examples{
+set.seed(1)
 n <- 30
 spgwr(cbind(1, runif(n)), rnorm(n), matrix(runif(2 * n), n, 2))
 }

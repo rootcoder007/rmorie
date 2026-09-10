@@ -22,6 +22,7 @@ For the linear model Y = beta X + eps, this is the Fisher-info
 lower bound on Var(sqrt(n) beta_hat).
 }
 \examples{
+set.seed(1)
 morie_ksr12_kosorok_information_bound(x = rnorm(50), y = rnorm(50))
 }
 \references{

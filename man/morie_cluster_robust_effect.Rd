@@ -22,6 +22,7 @@ Sandwich variance summed over clusters with the \code{G/(G-1)}
 correction and a \code{t(G-1)} reference. Mirrors \code{morie.fn.clstcr}.
 }
 \examples{
+set.seed(1)
 n <- 3000
 x <- stats::rnorm(n)
 e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)

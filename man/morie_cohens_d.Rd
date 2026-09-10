@@ -20,5 +20,6 @@ Numeric Cohen's d.
 Cohen's d effect size
 }
 \examples{
+set.seed(1)
 morie_cohens_d(rnorm(50, mean = 1), rnorm(50, mean = 0))
 }

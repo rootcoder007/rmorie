@@ -26,6 +26,7 @@
 #' @references Black D (1948) \emph{Journal of Political Economy}
 #'   56(1):23-34, \doi{10.1086/256633}.
 #' @examples
+#' set.seed(1)
 #' mdvtr(x = rnorm(50))
 #' @export
 mdvtr <- function(x, alpha = 0.05) {

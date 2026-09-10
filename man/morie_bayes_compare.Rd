@@ -16,6 +16,7 @@ A data.frame of posterior vs OLS coefficient estimates.
 Compare posterior means against an external (lm) reference
 }
 \examples{
+set.seed(1)
 d <- data.frame(x = rnorm(60))
 d$y <- 1 + 2 * d$x + rnorm(60)
 morie_bayes_compare(morie_bayes_lm(y ~ x, d,

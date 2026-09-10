@@ -23,6 +23,7 @@ tails the correction converges to zero and DEdH agrees with Hill
 location restriction rather than a tail one.
 }
 \examples{
+set.seed(1)
 morie_evt_dedh((1 - stats::runif(500))^(-1 / 4), k = 50)$xi
 }
 \references{

@@ -10,6 +10,7 @@
 #' @return list(estimate, r_per_fold, y_hat, mse, mspe, slope, n, K, method).
 #' @references Montesinos Lopez Ch 2.
 #' @examples
+#' set.seed(1)
 #' morie_genomic_cross_validation(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_genomic_cross_validation <- function(x, y, K = 5, lam = 1.0, seed = 0) {

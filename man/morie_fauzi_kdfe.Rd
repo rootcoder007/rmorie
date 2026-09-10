@@ -33,6 +33,7 @@ density rule this estimator oversmooths badly enough to lose, in
 mean squared error, to the step function it exists to improve on.
 }
 \examples{
+set.seed(1)
 morie_fauzi_kdfe(stats::rexp(200), grid = c(0.5, 1))$F_hat
 }
 \references{

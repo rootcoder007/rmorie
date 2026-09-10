@@ -273,6 +273,7 @@ check_referential_integrity <- function(child, parent, child_key, parent_key) {
 #' @param consistency_rules List of functions \code{(df) -> logical(1)}.
 #' @return An object of class \code{"class_name"}.
 #' @examples
+#' set.seed(1)
 #' df <- data.frame(id = 1:20, v = c(rnorm(18), NA, NA))
 #' str(score_data_quality(df, key_cols = "id"), max.level = 1)
 #' @export

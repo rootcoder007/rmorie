@@ -9,6 +9,7 @@
 #' @return Named list with \code{threshold, phi_lower, phi_upper, p, d,
 #'   regime_sizes, sse, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_threshold_autoregression(x = rnorm(50))
 #' @export
 morie_threshold_autoregression <- function(x, p = 1, d = 1, n_grid = 50) {

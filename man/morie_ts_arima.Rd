@@ -32,5 +32,6 @@ A \code{morie_ts_model} wrapping the fitted \code{stats::arima()} object.
 Fit an ARIMA / SARIMA model
 }
 \examples{
+set.seed(1)
 morie_ts_arima(cumsum(rnorm(60)), order = c(1, 1, 0))
 }

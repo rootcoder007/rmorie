@@ -38,5 +38,6 @@ Native C-SVC via SMO (LIBSVM's formulation); no SVM package is used.
 Multi-class uses one-against-one voting over all pairs.
 }
 \examples{
+set.seed(1)
 morie_svm_kernel_trick(x = rnorm(50), y = rnorm(50))
 }

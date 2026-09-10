@@ -47,6 +47,7 @@ morie_dsp_psd_periodogram <- function(x, fs = 1) {
 #' @references Rangayyan & Krishnan (2015), Ch. 6, sec. 6.4;
 #'   Bartlett (1948).
 #' @examples
+#' set.seed(1)
 #' fs <- 1024L
 #' t <- seq(0, (fs - 1) / fs, length.out = fs)
 #' x <- sin(2 * pi * 50 * t) + 0.1 * rnorm(fs)

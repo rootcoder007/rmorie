@@ -21,6 +21,7 @@
 #' @return Named list with estimate, se, n, method.
 #' @importFrom stats sd quantile dnorm
 #' @examples
+#' set.seed(1)
 #' fzlst(x = rnorm(50))
 #' @export
 fzlst <- function(x, score = NULL, n_quad = 200L) {

@@ -22,5 +22,6 @@ Named list with estimate, fitted, noise, sigma, inclusion, n, method.
 Haar-wavelet spike-and-slab BayesThresh estimator (Abramovich 1998)
 }
 \examples{
+set.seed(1)
 morie_ghosal_wavelet_prior(x = rnorm(50))
 }

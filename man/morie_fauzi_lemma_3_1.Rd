@@ -35,6 +35,7 @@ variance it licenses is unsupported. When \code{q_true} is not
 supplied the sample quantile is used and \code{centred_at} says so.
 }
 \examples{
+set.seed(1)
 morie_fauzi_lemma_3_1(stats::rexp(200), 0.5, q_true = log(2))$linear_term
 }
 \references{

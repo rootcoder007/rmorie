@@ -14,6 +14,7 @@
 #' @return Named list: estimate (final val MSE), train_sizes, train_scores,
 #'   val_scores, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_learning_curve(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_learning_curve <- function(x, y, sizes = NULL, cv = 5L, seed = 0L) {

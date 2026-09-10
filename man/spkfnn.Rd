@@ -28,6 +28,7 @@ mean near zero and variance near one if the covariance model is right;
 their variance is the diagnostic that catches a mis-specified sill.
 }
 \examples{
+set.seed(1)
 co <- matrix(runif(40), 20, 2) * 5
 spkfnn(co, rnorm(20), list(model = "exponential", sill = 1, range = 2))
 }

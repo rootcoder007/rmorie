@@ -42,6 +42,7 @@ theorem rather than merely costing efficiency. Mirrors
 \code{morie.fn.hrztfap}.
 }
 \examples{
+set.seed(1)
 x <- cbind(rnorm(50), rnorm(50))
 morie_transform_asymptotics(x, rnorm(50), c(0.2, 0.6))$limit_is_process
 }

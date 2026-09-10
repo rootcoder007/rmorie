@@ -16,6 +16,7 @@
 #'   Geographically weighted regression: a method for exploring spatial
 #'   nonstationarity. \emph{Geographical Analysis}, 28(4), 281-298.
 #' @examples
+#' set.seed(1)
 #' gwreg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 gwreg <- function(x, y, coords, bandwidth = NULL, kernel = "gaussian") {

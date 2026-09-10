@@ -29,6 +29,7 @@ standard production estimator in national statistics. Mirrors
 \code{morie.fn.genrgr}.
 }
 \examples{
+set.seed(1)
 x <- cbind(1, runif(40, 0, 10))
 morie_greg(rnorm(40), x, rep(20, 40),
            c(800, 4000))$design_consistent_regardless_of_model

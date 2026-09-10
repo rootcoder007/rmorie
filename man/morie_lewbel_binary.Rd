@@ -65,6 +65,7 @@ fitted density and the largest weight are returned rather than
 left implicit. Mirrors \code{morie.fn.hrzlew}.
 }
 \examples{
+set.seed(1)
 n <- 500
 x <- cbind(1, rnorm(n))
 v <- rnorm(n) * 6

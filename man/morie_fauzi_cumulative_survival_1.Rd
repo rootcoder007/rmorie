@@ -30,6 +30,7 @@ and does not preserve it; the two differ in bias coefficient
 (\code{b_2} here, \code{b_3} there) and share the same covariance.
 }
 \examples{
+set.seed(1)
 morie_fauzi_cumulative_survival_1(stats::rexp(100), c(0.5, 1))$S_survival
 }
 \references{

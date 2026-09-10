@@ -10,6 +10,7 @@
 #'   tau_xz, tau_yz, z, n.
 #' @importFrom stats cor pnorm
 #' @examples
+#' set.seed(1)
 #' morie_kendall_tau_partial(x = rnorm(50), y = rnorm(50), z = rnorm(50))
 #' @export
 morie_kendall_tau_partial <- function(x, y, z) {

@@ -28,6 +28,7 @@ cluster still ruins it, and that documented failure is a test.
 The S/MM estimators (\code{morie_rob_mm()}) are the fix.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(50)
 morie_rob_huber(x, 1 + 2 * x + stats::rnorm(50))$beta
 }

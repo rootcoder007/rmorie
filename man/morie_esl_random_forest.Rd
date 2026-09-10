@@ -61,6 +61,7 @@ Out-of-bag error is free: each observation is absent from about
 nearly-cross-validated error with no extra fitting.
 }
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(300), 100)
 morie_esl_random_forest(X, X[, 1] + stats::rnorm(100), B = 10)$mtry
 }

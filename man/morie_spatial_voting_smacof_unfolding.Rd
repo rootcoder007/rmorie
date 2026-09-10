@@ -29,6 +29,7 @@ Majorisation-based unfolding embedding respondents and stimuli into a
 common space.
 }
 \examples{
+set.seed(1)
 D <- matrix(stats::runif(12), 3, 4)
 morie_spatial_voting_smacof_unfolding(D, max_iter = 20)
 }
