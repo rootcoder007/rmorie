@@ -75,6 +75,10 @@ jobs:
 
     env:
       _R_CHECK_FORCE_SUGGESTS_: false
+      # The eight slowest test files skip unless this is set; the reduced
+      # suite is for the constrained builders (r-universe kills a job at
+      # ~75 min). Our own CI is where the whole thing runs.
+      RMORIE_SLOW_TESTS: "1"
       R_KEEP_PKG_SOURCE: yes
       # CRAN requires \donttest (not \dontrun) for examples a user could
       # run, so the network-fetching examples are \donttest -- and
@@ -293,6 +297,10 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       _R_CHECK_FORCE_SUGGESTS_: false
+      # The eight slowest test files skip unless this is set; the reduced
+      # suite is for the constrained builders (r-universe kills a job at
+      # ~75 min). Our own CI is where the whole thing runs.
+      RMORIE_SLOW_TESTS: "1"
       R_KEEP_PKG_SOURCE: yes
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
