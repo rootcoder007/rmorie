@@ -12,6 +12,7 @@
 #' @return Named list with estimate, se, n, method.
 #' @references Kosorok (2008), Ch 5; Huber (1981).
 #' @examples
+#' set.seed(1)
 #' morie_ksr10_kosorok_m_estimator(x = rnorm(50))
 #' @export
 morie_ksr10_kosorok_m_estimator <- function(x, y = NULL, k = 1.345,

@@ -28,6 +28,7 @@ For a symmetric kernel g(x1,x2),
 \eqn{\mathrm{Var}(U_n) \approx 4\sigma_1^2/n}{Var(U_n) ~= 4sigma_1^2/n}.
 }
 \examples{
+set.seed(1)
 fzhdc(x = rnorm(50))
 }
 \keyword{internal}

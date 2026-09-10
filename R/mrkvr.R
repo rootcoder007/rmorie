@@ -13,6 +13,7 @@
 #'   sigma_m2_naive, sum_2pq, p_freq, n, p, method).
 #' @references VanRaden (2008); Montesinos Lopez Ch 3.
 #' @examples
+#' set.seed(1)
 #' morie_marker_variance(
 #'   x = rnorm(50), y = rnorm(50),
 #'   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

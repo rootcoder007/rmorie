@@ -42,6 +42,7 @@
 #' @param x A \code{morie_weight} object.
 #' @param ... Ignored; accepted for S3 consistency.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' obj <- morie_weight_trimming(morie_weight_ps(d, "t", "x"))
@@ -94,6 +95,7 @@ print.morie_weight <- function(x, ...) {
 #' @return A \code{morie_weight} object.
 #' @references Austin (2009); Robins, Hernan & Brumback (2000).
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_ps(d, "t", "x")
 #' @export
@@ -129,6 +131,7 @@ morie_weight_ps <- function(data, treatment, covariates,
 #' @return A \code{morie_weight} object (ATT estimand).
 #' @references Hainmueller (2012) Political Analysis 20(1).
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_entropy(d, "t", "x")
 #' @export
@@ -159,6 +162,7 @@ morie_weight_entropy <- function(data, treatment, covariates) {
 #' @return A \code{morie_weight} object.
 #' @references Imai & Ratkovic (2014) JRSS-B 76(1).
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(120, 1, 0.5), x = rnorm(120))
 #' morie_weight_cbps(d, "t", "x")
 #' @export
@@ -206,6 +210,7 @@ morie_weight_cbps <- function(data, treatment, covariates,
 #' @return A \code{morie_weight} object (estimand "ATO").
 #' @references Li, Morgan & Zaslavsky (2018) JASA 113(521).
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_ow(d, "t", "x")
 #' @export
@@ -223,6 +228,7 @@ morie_weight_ow <- function(data, treatment, covariates) {
 #' @inheritParams morie_weight_ps
 #' @return A \code{morie_weight} object with stabilized ATE weights.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_stabilized(d, "t", "x")
 #' @export
@@ -241,6 +247,7 @@ morie_weight_stabilized <- function(data, treatment, covariates,
 #' @param q Upper-quantile cap. Default 0.99.
 #' @return The trimmed \code{morie_weight} object.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_trimming(morie_weight_ps(d, "t", "x"))
 #' @export
@@ -269,6 +276,7 @@ morie_weight_trimming <- function(w, q = 0.99) {
 #'   the ensemble coefficients.
 #' @references van der Laan, Polley & Hubbard (2007).
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(150, 1, 0.5), x1 = rnorm(150), x2 = rnorm(150))
 #' morie_weight_super(d, "t", c("x1", "x2"))
 #' @export
@@ -394,6 +402,7 @@ morie_weight_super <- function(data, treatment, covariates,
 #' @return A data.frame of balance statistics with attribute
 #'   \code{ess}.
 #' @examples
+#' set.seed(1)
 #' d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 #' morie_weight_diagnostic(morie_weight_ps(d, "t", "x"), d, "t", "x")
 #' @export

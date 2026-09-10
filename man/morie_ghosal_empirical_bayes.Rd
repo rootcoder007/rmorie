@@ -18,5 +18,6 @@ Named list with estimate (alpha-hat), K_n, log_lik_at_estimate, n, method.
 Empirical-Bayes alpha MLE for a DP, given the observed K_n
 }
 \examples{
+set.seed(1)
 morie_ghosal_empirical_bayes(x = rnorm(50))
 }

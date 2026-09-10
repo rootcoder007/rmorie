@@ -26,6 +26,7 @@ to dependence: a point at the centre of both margins but off the
 correlation ridge is invisible to it.
 }
 \examples{
+set.seed(1)
 X <- cbind(rnorm(100), rnorm(100))
 str(morie_hbos(X)$score)
 }

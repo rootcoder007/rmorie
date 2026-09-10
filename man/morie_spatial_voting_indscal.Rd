@@ -29,6 +29,7 @@ Carroll & Chang (1970) weighted MDS with a shared stimulus space and
 per-individual dimension weights.
 }
 \examples{
+set.seed(1)
 D1 <- as.matrix(dist(matrix(rnorm(20), 5)))
 D2 <- as.matrix(dist(matrix(rnorm(20), 5)))
 morie_spatial_voting_indscal(list(D1, D2), n_dims = 2L, max_iter = 30L)

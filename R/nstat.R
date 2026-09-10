@@ -11,6 +11,7 @@
 #'   n, method.
 #' @references Sampson & Guttorp (1992); Schabenberger & Gotway (2005), Ch 8.
 #' @examples
+#' set.seed(1)
 #' nstat(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 nstat <- function(x, coords, bandwidth = NULL) {

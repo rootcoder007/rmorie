@@ -19,5 +19,6 @@ are i.i.d. Beta(1, n) under H0.  Returns empirical coverages
 (rank-based) plus the cumulative coverage F(X_(n)) - F(X_(1)).
 }
 \examples{
+set.seed(1)
 morie_one_sample_coverage(x = rnorm(50))
 }

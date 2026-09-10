@@ -11,6 +11,7 @@
 #' @return Named list with `winner` (1-based, or -1), `n_candidates`,
 #'   `has_winner`, `method`.
 #' @examples
+#' set.seed(1)
 #' cndrc(preference_matrix = matrix(rnorm(25), 5, 5))
 #' @export
 cndrc <- function(preference_matrix) {

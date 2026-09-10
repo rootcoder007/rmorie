@@ -41,5 +41,6 @@ Native random forest (ESL Algorithm 15.1).  Auto-detects task from y
 (factor / integer-like -> classification, otherwise regression).
 }
 \examples{
+set.seed(1)
 morie_random_forest_ensemble(x = rnorm(50), y = rnorm(50))
 }

@@ -22,6 +22,7 @@ Local CONSTANT fit, so the boundary bias is O(h) where local linear
 achieves O(h^2). Mirrors \code{morie.fn.hrznwr}.
 }
 \examples{
+set.seed(1)
 morie_nw_regression(rnorm(100), rnorm(100))$bandwidth
 }
 \references{

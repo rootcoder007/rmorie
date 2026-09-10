@@ -33,6 +33,7 @@ fast-path thresholds 1/4 and 1/3 are the con1 and con2 constants of
 the Fortran original.
 }
 \examples{
+set.seed(1)
 Hexgrd(cbind(runif(50), runif(50)), cell_size = 0.3)
 }
 \references{

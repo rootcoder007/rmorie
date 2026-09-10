@@ -24,6 +24,7 @@ need their own maximal inequalities. Mirrors
 \code{morie.fn.ksr060}.
 }
 \examples{
+set.seed(1)
 morie_u_process(function(a, b) abs(a - b) / 2, runif(30))$U
 }
 \references{

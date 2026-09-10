@@ -14,6 +14,7 @@
 #' @return Named list with \code{state, state_cov, innovations,
 #'   innovation_variance, loglik, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_kalman_filter(x = rnorm(50))
 #' @export
 morie_kalman_filter <- function(x, transition = NULL, H = NULL, Q = NULL, R = NULL,

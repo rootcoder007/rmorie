@@ -49,6 +49,7 @@
 #' @return Named list: estimate, se, sigma2, tau2, phi, n, method.
 #' @references Patterson & Thompson (1971); Schabenberger & Gotway (2005), Ch 5.
 #' @examples
+#' set.seed(1)
 #' smixd(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 smixd <- function(x, y, coords) {

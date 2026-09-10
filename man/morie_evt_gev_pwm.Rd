@@ -20,6 +20,7 @@ THE SAME ESTIMATOR; one implementation serves both entries, and
 the raw PWMs are added for readers of the 1985 paper.
 }
 \examples{
+set.seed(1)
 morie_evt_gev_pwm(5 + (-log(stats::runif(60)))^(-0.1))$alias_of
 }
 \references{

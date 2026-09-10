@@ -27,6 +27,7 @@ Location-free, 50\% breakdown, 58\% normal efficiency -- between the
 MAD's 37\% and Qn's 82\%.
 }
 \examples{
+set.seed(1)
 morie_rob_sn(stats::rnorm(50))$value
 }
 \references{

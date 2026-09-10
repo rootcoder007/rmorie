@@ -15,6 +15,7 @@
 #' @return Named list with `estimate`, `per_party` (if 2-D), `n`,
 #'   `method`.
 #' @examples
+#' set.seed(1)
 #' algnm(x = rnorm(50))
 #' @export
 algnm <- function(x, party = NULL) {

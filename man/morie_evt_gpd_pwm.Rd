@@ -25,6 +25,7 @@ outside that the output carries a warning, not a silently
 untrustworthy number.
 }
 \examples{
+set.seed(1)
 morie_evt_gpd_pwm(stats::rexp(200))$xi
 }
 \references{

@@ -23,5 +23,6 @@ Named list with \code{frequencies, morie_coherence, n_segments,
 Magnitude-squared morie_coherence between two time series
 }
 \examples{
+set.seed(1)
 morie_coherence(x = rnorm(50), y = rnorm(50))
 }

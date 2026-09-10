@@ -25,6 +25,7 @@ appeal and its risk: too high an order invents peaks. Mirrors
 \code{morie.fn.rgarsp}.
 }
 \examples{
+set.seed(1)
 morie_ar_spectrum(rnorm(300), order = 4, fs = 100)$stable
 }
 \references{

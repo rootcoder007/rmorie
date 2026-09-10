@@ -29,6 +29,7 @@
 #'   correction_note, n, method.
 #' @references Kosorok, Ch. 1, Eq. (1.2), p. 4.
 #' @examples
+#' set.seed(1)
 #' z <- cbind(rnorm(50), rnorm(50))
 #' morie_residual_edf(z %*% c(1, -0.5) + rnorm(50), z,
 #'                    c(1, -0.5))$limit_is_brownian_bridge
@@ -74,6 +75,7 @@ morie_residual_edf <- function(y, z, beta, t = NULL) {
 #'   root_defines_estimator, n_events, n, method.
 #' @references Kosorok, Ch. 1, Eq. (1.4), p. 5.
 #' @examples
+#' set.seed(1)
 #' z <- rnorm(60)
 #' tt <- rexp(60) / exp(0.7 * z)
 #' morie_cox_score_process(0.7, z, tt, rep(1, 60))$is_process
@@ -197,6 +199,7 @@ morie_survival_psi <- function(S, t_grid, S0, L, G) {
 #'   information_equality_holds, n, p, method.
 #' @references Kosorok, Thm. 2.13, p. 29.
 #' @examples
+#' set.seed(1)
 #' morie_m_normality(matrix(rnorm(200), ncol = 2))$information_equality_assumed
 #' @export
 morie_m_normality <- function(m_dot_scores, V = NULL) {
@@ -241,6 +244,7 @@ morie_m_normality <- function(m_dot_scores, V = NULL) {
 #'   method.
 #' @references Kosorok, Thm. 3.1, p. 44 and Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_semipar_efficiency(matrix(rnorm(100), ncol = 1),
 #'                          matrix(rnorm(200), ncol = 2))$adaptive
 #' @export
@@ -293,6 +297,7 @@ morie_semipar_efficiency <- function(scores, nuisance_scores = NULL) {
 #'   conditions, warning, n, d, method.
 #' @references Kosorok, Cor. 3.2, p. 47.
 #' @examples
+#' set.seed(1)
 #' morie_joint_convergence(diag(2), matrix(rnorm(200), ncol = 2))$jointly
 #' @export
 morie_joint_convergence <- function(psi_dot, scores, n = NULL) {

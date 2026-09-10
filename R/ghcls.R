@@ -10,6 +10,7 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with estimate, p_hat, accuracy, length_scale, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_np_classification(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ghosal_np_classification <- function(x, y, length_scale = NULL,

@@ -10,6 +10,7 @@
 #' @return Named list: coverages, cumulative, expected, n,
 #'   sample_min, sample_max, method.
 #' @examples
+#' set.seed(1)
 #' morie_one_sample_coverage(x = rnorm(50))
 #' @export
 morie_one_sample_coverage <- function(x) {

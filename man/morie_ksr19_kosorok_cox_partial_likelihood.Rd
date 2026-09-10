@@ -35,6 +35,7 @@ l(beta) = sum over events of (X_i beta - log sum over j in R(t_i) of exp(X_j bet
 Breslow tie handling.
 }
 \examples{
+set.seed(1)
 morie_ksr19_kosorok_cox_partial_likelihood(
   x = rnorm(50),
   t = seq(0, 1, length.out = 50), event = rbinom(50, 1, 0.8)

@@ -113,6 +113,7 @@
 #'   omitted hill_plot_k / hill_plot_xi; n, method.
 #' @references Hill (1975), *Annals of Statistics* 3:1163-1174.
 #' @examples
+#' set.seed(1)
 #' morie_evt_hill((1 - stats::runif(500))^(-1 / 4), k = 50)$xi
 #' @export
 morie_evt_hill <- function(x, k = NULL) {
@@ -177,6 +178,7 @@ morie_evt_hill <- function(x, k = NULL) {
 #' @return the [morie_evt_hill()] list plus `alias_of`.
 #' @references Hill (1975), *Annals of Statistics* 3:1163-1174.
 #' @examples
+#' set.seed(1)
 #' morie_evt_hill_alias((1 - stats::runif(200))^(-1 / 3), k = 30)$alias_of
 #' @export
 morie_evt_hill_alias <- function(x, k = NULL) {
@@ -203,6 +205,7 @@ morie_evt_hill_alias <- function(x, k = NULL) {
 #' @references Pickands (1975), *Annals of Statistics* 3:119-131;
 #'   de Haan and Ferreira (2006), Thm. 3.3.5.
 #' @examples
+#' set.seed(1)
 #' morie_evt_pickands(stats::rnorm(400))$xi
 #' @export
 morie_evt_pickands <- function(x, k = NULL) {
@@ -259,6 +262,7 @@ morie_evt_pickands <- function(x, k = NULL) {
 #' @references Dekkers, Einmahl and de Haan (1989), *Annals of
 #'   Statistics* 17:1833-1855, Eq. (1.7).
 #' @examples
+#' set.seed(1)
 #' morie_evt_dedh((1 - stats::runif(500))^(-1 / 4), k = 50)$xi
 #' @export
 morie_evt_dedh <- function(x, k = NULL) {
@@ -328,6 +332,7 @@ morie_evt_dedh <- function(x, k = NULL) {
 #' @references Hosking (1990), *JRSS-B* 52:105-124; Hosking, Wallis
 #'   and Wood (1985), *Technometrics* 27:251-261.
 #' @examples
+#' set.seed(1)
 #' morie_evt_gev_lmoments(5 + 2 * (-log(stats::runif(100)))^(-0.2))$xi
 #' @export
 morie_evt_gev_lmoments <- function(block_maxima) {
@@ -387,6 +392,7 @@ morie_evt_gev_lmoments <- function(block_maxima) {
 #' @references Hosking, Wallis and Wood (1985), *Technometrics*
 #'   27:251-261.
 #' @examples
+#' set.seed(1)
 #' morie_evt_gev_pwm(5 + (-log(stats::runif(60)))^(-0.1))$alias_of
 #' @export
 morie_evt_gev_pwm <- function(block_maxima) {
@@ -420,6 +426,7 @@ morie_evt_gev_pwm <- function(block_maxima) {
 #'   mean_excess, reliable, return_level_fn, method.
 #' @references Hosking and Wallis (1987), *Technometrics* 29:339-349.
 #' @examples
+#' set.seed(1)
 #' morie_evt_gpd_pwm(stats::rexp(200))$xi
 #' @export
 morie_evt_gpd_pwm <- function(x, threshold = NULL) {
@@ -504,6 +511,7 @@ morie_evt_gpd_pwm <- function(x, threshold = NULL) {
 #'   run_length, threshold, n, method.
 #' @references Smith and Weissman (1994), *JRSS-B* 56:515-528.
 #' @examples
+#' set.seed(1)
 #' x <- stats::rnorm(500)
 #' morie_evt_extremal_runs(x, stats::quantile(x, 0.95))$theta
 #' @export
@@ -564,6 +572,7 @@ morie_evt_extremal_runs <- function(x, threshold, run_length = 1L) {
 #'   implied_mean_cluster_size, threshold, n, method.
 #' @references Ferro and Segers (2003), *JRSS-B* 65:545-556.
 #' @examples
+#' set.seed(1)
 #' x <- stats::rnorm(500)
 #' morie_evt_extremal_intervals(x, stats::quantile(x, 0.95))$theta
 #' @export
@@ -623,6 +632,7 @@ morie_evt_extremal_intervals <- function(x, threshold) {
 #'   n_sliding_blocks, n_disjoint_blocks, n, method.
 #' @references Northrop (2015), *Extremes* 18:585-603.
 #' @examples
+#' set.seed(1)
 #' morie_evt_extremal_sliding(stats::rnorm(400), block_length = 20)$theta
 #' @export
 morie_evt_extremal_sliding <- function(x, threshold = NULL,
@@ -697,6 +707,7 @@ morie_evt_extremal_sliding <- function(x, threshold = NULL,
 #' @references Naveau, Guillou, Cooley and Diebolt (2009),
 #'   *Biometrika* 96:1-17, Prop. 3; Pickands (1981).
 #' @examples
+#' set.seed(1)
 #' morie_evt_madogram(stats::rnorm(100), stats::rnorm(100),
 #'   t = c(0.5)
 #' )$A

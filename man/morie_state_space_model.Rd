@@ -22,5 +22,6 @@ smoothed (Rauch-Tung-Striebel). Equivalent to the
 \code{dlmSmooth} pipeline it replaces, cross-validated in tests.
 }
 \examples{
+set.seed(1)
 morie_state_space_model(x = rnorm(50))
 }

@@ -283,6 +283,7 @@
 #'   boundary_bias_order, boundary_consistent (`FALSE`), n, method.
 #' @references Fauzi and Maesono (2023), Ch. 1.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_kde(stats::rexp(200), grid = c(0.5, 1, 2))$density
 #' @export
 morie_fauzi_kde <- function(x, grid = NULL, h = NULL) {
@@ -391,6 +392,7 @@ morie_fauzi_mise <- function(n, h = NULL, R_K = NULL, mu2_K = 1,
 #'   method.
 #' @references Fauzi and Maesono (2023), Ch. 1; Chen (1999).
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_gamma_kde(stats::rexp(200), grid = c(0, 1), h = 0.1)$density
 #' @export
 morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
@@ -470,6 +472,7 @@ morie_fauzi_gamma_kde <- function(x, grid = NULL, h = NULL,
 #'   of a distribution function and quantiles by a kernel method",
 #'   Biometrika 68:326-328 (reference [9] of the book).
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_kdfe(stats::rexp(200), grid = c(0.5, 1))$F_hat
 #' @export
 morie_fauzi_kdfe <- function(x, grid = NULL, h = NULL) {
@@ -523,6 +526,7 @@ morie_fauzi_kdfe <- function(x, grid = NULL, h = NULL) {
 #'   jacobian_note, n, method.
 #' @references Fauzi and Maesono (2023), Ch. 4. Transcribed from the PDF.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_boundary_free_kde(stats::rexp(300), grid = c(0.1, 1))$density
 #' @export
 morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
@@ -624,6 +628,7 @@ morie_fauzi_boundary_free_kde <- function(x, grid = NULL, h = NULL,
 #'   mirror_note, n, method.
 #' @references Fauzi and Maesono (2023), Eq. (4.8), (4.9), (4.15).
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_cumulative_survival_1(stats::rexp(100), c(0.5, 1))$S_survival
 #' @export
 morie_fauzi_cumulative_survival_1 <- function(x, t_grid, h = NULL,
@@ -668,6 +673,7 @@ morie_fauzi_cumulative_survival_1 <- function(x, t_grid, h = NULL,
 #'   g_prime_note, same_covariance_as_first, n, method.
 #' @references Fauzi and Maesono (2023), Eq. (4.17), (4.18), (4.21).
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_cumulative_survival_2(stats::rexp(60), c(0.5, 1))$S_cumulative
 #' @export
 morie_fauzi_cumulative_survival_2 <- function(x, t_grid, h = NULL,
@@ -890,6 +896,7 @@ morie_fauzi_b3_coefficient <- function(t, f_X, f_X_prime = NULL,
 #'   boundary_bias_order, boundary_safe (`FALSE`), n, method.
 #' @references Fauzi and Maesono (2023), Eq. (4.2).
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_mrl_naive(stats::rexp(200), c(0.5, 1))$mrl
 #' @export
 morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
@@ -941,6 +948,7 @@ morie_fauzi_mrl_naive <- function(x, t_grid, h = NULL) {
 #' @references Fauzi and Maesono (2023), Eq. (4.24), Theorem 4.3.
 #'   Transcribed from the PDF, where (4.24) is printed in full.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_mrl_boundary_free_2(stats::rexp(60), c(0.5, 1))$mrl
 #' @export
 morie_fauzi_mrl_boundary_free_2 <- function(x, t_grid, h = NULL,
@@ -1193,6 +1201,7 @@ morie_fauzi_theorem_4_5 <- function(mrl_hat, mrl_true, t_grid,
 #'   within_expected, a1, n, why_it_holds, diagnostic_use, method.
 #' @references Fauzi and Maesono (2023), Theorem 4.6, Eq. (4.29).
 #' @examples
+#' set.seed(1)
 #' x <- stats::rexp(200)
 #' morie_fauzi_theorem_4_6(x, 0, mean(x))$gap
 #' @export
@@ -1239,6 +1248,7 @@ morie_fauzi_theorem_4_6 <- function(x, a1, mrl_at_a1, h = NULL) {
 #'   heavy_tail_warning, binding_in_practice, why, transform, method.
 #' @references Fauzi and Maesono (2023), Ch. 4, conditions C1-C6.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_conditions_c1_c6(stats::rexp(50))$binding_in_practice
 #' @export
 morie_fauzi_conditions_c1_c6 <- function(x = NULL, transform = "log",
@@ -1303,6 +1313,7 @@ morie_fauzi_conditions_c1_c6 <- function(x = NULL, transform = "log",
 #'   weights_sum, smooths_in, why, n, method.
 #' @references Fauzi and Maesono (2023), Eq. (3.1). From the PDF.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_kernel_quantile(stats::rexp(200), c(0.25, 0.5))$quantile
 #' @export
 morie_fauzi_kernel_quantile <- function(x, p, h = NULL) {
@@ -1510,6 +1521,7 @@ morie_fauzi_muller_kernel <- function(u) {
 #'   representation, n, method.
 #' @references Fauzi and Maesono (2023), Lemma 3.1. From the PDF.
 #' @examples
+#' set.seed(1)
 #' morie_fauzi_lemma_3_1(stats::rexp(200), 0.5, q_true = log(2))$linear_term
 #' @export
 morie_fauzi_lemma_3_1 <- function(x, p, h = NULL, q_true = NULL) {

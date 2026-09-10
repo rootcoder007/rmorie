@@ -30,6 +30,7 @@ Exact enumeration for n <= 10; Monte Carlo for larger games.
 Quota defaults to strict simple majority.
 }
 \examples{
+set.seed(1)
 vtpwr(x = rnorm(50))
 }
 \keyword{internal}

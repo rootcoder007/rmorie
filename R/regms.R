@@ -10,6 +10,7 @@
 #' @return Named list with \code{mu, sigma, transition,
 #'   smoothed_probabilities, loglik, n, k_regimes, method}.
 #' @examples
+#' set.seed(1)
 #' morie_regime_switching(x = rnorm(50))
 #' @export
 morie_regime_switching <- function(x, k_regimes = 2) {

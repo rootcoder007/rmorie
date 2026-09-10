@@ -61,6 +61,7 @@ block lengths collapse to 1 -- the iid bootstrap, correct for independent
 data.
 }
 \examples{
+set.seed(1)
 Btblen(as.numeric(filter(rnorm(200), 0.5, "recursive")))$ell
 }
 \keyword{internal}

@@ -23,6 +23,7 @@
 #' @return Named list with estimate, theta, log_lik, grid, log_density, K, n, method.
 #' @importFrom utils head tail
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_log_density(x = rnorm(50))
 #' @export
 morie_ghosal_log_density <- function(x, K = 5, grid = NULL) {

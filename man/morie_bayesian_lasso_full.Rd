@@ -39,6 +39,7 @@ list(estimate, beta, intercept, se, beta_se, lam, sigma2, n_iter, n, p, method).
 Bayesian LASSO (Park & Casella 2008 short Gibbs)
 }
 \examples{
+set.seed(1)
 morie_bayesian_lasso_full(
   x = matrix(rnorm(150), 50, 3), y = rnorm(50),
   n_iter = 50L, burn = 10L, lam = 1, seed = 1L,

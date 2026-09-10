@@ -7,6 +7,7 @@
 #' @param d Integer dimension (default 1).
 #' @return Named list with estimate, betas, rates, best_beta, n, d, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_adaptation(x = rnorm(50))
 #' @export
 morie_ghosal_adaptation <- function(x, betas = NULL, d = 1) {

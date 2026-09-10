@@ -113,6 +113,7 @@ morie_hajek_mean <- function(y, pi) {
 #' @return list: ratio, mean, total, improves_on_simple_mean,
 #'   efficiency_threshold, correlation, cv_x, cv_y, biased, n, method.
 #' @examples
+#' set.seed(1)
 #' x <- rexp(50, 0.1)
 #' morie_ratio_estimator(2 * x + rnorm(50), x, X_mean = 10)$improves_on_simple_mean
 #' @export
@@ -168,6 +169,7 @@ morie_ratio_estimator <- function(y, x, weights = NULL, X_total = NULL,
 #' @return list: mean, slope, intercept, correlation,
 #'   variance_ratio_to_simple_mean, passes_through_origin, n, method.
 #' @examples
+#' set.seed(1)
 #' x <- runif(60, 5, 15)
 #' morie_regression_estimator(100 + 2 * x + rnorm(60), x, X_mean = 10)$slope
 #' @export
@@ -219,6 +221,7 @@ morie_regression_estimator <- function(y, x, weights = NULL, X_mean = NULL) {
 #' @return list: total, ht_total, correction, B, residual_totals,
 #'   design_consistent_regardless_of_model, n, p, method.
 #' @examples
+#' set.seed(1)
 #' x <- cbind(1, runif(40, 0, 10))
 #' morie_greg(rnorm(40), x, rep(20, 40),
 #'            c(800, 4000))$design_consistent_regardless_of_model
@@ -279,6 +282,7 @@ morie_greg <- function(y, x, weights, totals) {
 #'   equals_greg, n, p, method.
 #' @seealso \code{\link{morie_calibration_weights}} for raking.
 #' @examples
+#' set.seed(1)
 #' X <- cbind(1, runif(50))
 #' morie_calibration_chi2(rnorm(50), X, rep(10, 50),
 #'                        c(500, 260))$margins_reproduced
@@ -338,6 +342,7 @@ morie_calibration_chi2 <- function(y, X, weights, totals) {
 #' @return list: proportion, variance, se, strata, p_h, n_h, W_h,
 #'   weights_are_population_shares, n, method.
 #' @examples
+#' set.seed(1)
 #' y <- c(rbinom(50, 1, 0.1), rbinom(50, 1, 0.9))
 #' morie_stratified_proportion(y, rep(1:2, each = 50), c(0.5, 0.5))$se
 #' @export
@@ -401,6 +406,7 @@ morie_stratified_proportion <- function(y, stratum, weights = NULL) {
 #'   mean_cluster_size, icc, deff, effective_n, naive_se,
 #'   se_inflation, method.
 #' @examples
+#' set.seed(1)
 #' y <- rnorm(200) + rep(rnorm(20), each = 10)
 #' morie_cluster_variance(y, rep(1:20, each = 10))$deff
 #' @export

@@ -26,6 +26,7 @@ list(estimate, y_hat, alpha, support_indices, se, n, method).
 Support-vector regression for genomic prediction
 }
 \examples{
+set.seed(1)
 morie_svm_genomic(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 }
 \references{

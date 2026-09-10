@@ -10,6 +10,7 @@
 #' @return Named list with estimate, se, n, method.
 #' @references Kosorok (2008), Ch 7.
 #' @examples
+#' set.seed(1)
 #' morie_ksr14_kosorok_profile_likelihood(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ksr14_kosorok_profile_likelihood <- function(x, y) {

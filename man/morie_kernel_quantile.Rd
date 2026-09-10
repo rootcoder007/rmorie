@@ -26,6 +26,7 @@ monotone in tau -- the crossing that afflicts independently fitted
 quantiles cannot arise. Mirrors \code{morie.fn.hrzkqre}.
 }
 \examples{
+set.seed(1)
 morie_kernel_quantile(runif(200), rnorm(200), tau = c(0.1, 0.9))$monotone_in_tau
 }
 \references{

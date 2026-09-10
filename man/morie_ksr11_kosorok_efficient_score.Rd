@@ -22,6 +22,7 @@ se (residual sd), n, method.
 S_eff(X, Y) = (Y - E(Y|X))(X - E(X)) / sigma^2.
 }
 \examples{
+set.seed(1)
 morie_ksr11_kosorok_efficient_score(x = rnorm(50), y = rnorm(50))
 }
 \references{

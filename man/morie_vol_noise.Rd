@@ -28,6 +28,7 @@ variance, and both are returned so the size of the correction is
 visible.
 }
 \examples{
+set.seed(1)
 morie_vol_noise(stats::rnorm(100, sd = 1e-3), K = 5)$noise_variance
 }
 \references{

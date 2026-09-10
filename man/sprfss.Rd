@@ -46,6 +46,7 @@ so a linear trend cancels itself and passes; the condition is about
 the lag VECTOR.
 }
 \examples{
+set.seed(1)
 co <- matrix(runif(400), 200, 2) * 10
 sprfss(co, rnorm(200))$second_order_plausible
 }

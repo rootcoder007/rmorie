@@ -11,6 +11,7 @@
 #'   explained_variance_ratio, singular_values, scores, n_components,
 #'   n, method.
 #' @examples
+#' set.seed(1)
 #' morie_pca_dimension_reduction(x = rnorm(50))
 #' @export
 morie_pca_dimension_reduction <- function(x, n_components = NULL, seed = 0L) {

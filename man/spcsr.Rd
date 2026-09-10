@@ -30,6 +30,7 @@ regularity below. And the mean nearest-neighbour distance is
 is about 1 under CSR, below 1 when clustered and above when regular.
 }
 \examples{
+set.seed(1)
 spcsr(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10))$clark_evans
 }
 \references{

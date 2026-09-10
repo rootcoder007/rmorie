@@ -13,6 +13,7 @@
 #' @return Named list with statistic, z, p_value, theta0, h, n, method.
 #' @importFrom stats pnorm
 #' @examples
+#' set.seed(1)
 #' fzwlc(x = rnorm(50))
 #' @export
 fzwlc <- function(x, theta0 = 0, h = NULL, alternative = "two-sided") {

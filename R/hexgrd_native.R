@@ -30,6 +30,7 @@
 #'   CRAN hexbin 1.28.6. Archived:
 #'   fetched-wave3/carr-hexbin_1.28.6-cran-source.tar.gz.
 #' @examples
+#' set.seed(1)
 #' Hexgrd(cbind(runif(50), runif(50)), cell_size = 0.3)
 #' @export
 Hexgrd <- function(coords, values = NULL, cell_size = 1) {

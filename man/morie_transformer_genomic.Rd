@@ -39,6 +39,7 @@ list(estimate, y_hat, beta, attention, context, se, n, method).
 Random fixed projections + ridge head on the mean-pooled context vector.
 }
 \examples{
+set.seed(1)
 morie_transformer_genomic(
   x = rnorm(50), y = rnorm(50),
   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

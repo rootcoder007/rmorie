@@ -47,6 +47,7 @@ counts), n, method.
       \sum_{(i,j)\in N(h,u)} (Z(s_i, t_i) - Z(s_j, t_j))^2}{hatgamma(h, u) = (1)/(2|N(h, u)|) sum_(i,j)in N(h,u) (Z(s_i, t_i) - Z(s_j, t_j))^2}.
 }
 \examples{
+set.seed(1)
 stvar(x = rnorm(50), coords = matrix(runif(100), 50, 2), times = sort(cumsum(rexp(50))))
 }
 \references{

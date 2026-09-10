@@ -37,6 +37,7 @@ standard estimand-specific weight transforms; optional
 stabilization (Austin 2009) and symmetric trimming.
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_ps(d, "t", "x")
 }

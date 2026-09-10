@@ -32,6 +32,7 @@
 #' @references Schabenberger & Gotway (2005), Sec 2.2, pp. 42-43; the
 #'   Gaussian implication p. 48; the intrinsic hypothesis p. 51.
 #' @examples
+#' set.seed(1)
 #' co <- matrix(runif(400), 200, 2) * 10
 #' sprfss(co, rnorm(200))$second_order_plausible
 #' @export

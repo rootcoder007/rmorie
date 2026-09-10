@@ -14,6 +14,7 @@
 #' @return Named list with `probs`, `max_alt`, `n_obs`, `n_alt`,
 #'   `method`.
 #' @examples
+#' set.seed(1)
 #' mnpbt(x = rnorm(50))
 #' @export
 mnpbt <- function(x, n_draws = 2000L, seed = 0L) {

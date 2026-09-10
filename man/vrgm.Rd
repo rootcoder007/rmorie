@@ -27,6 +27,7 @@ n, method.
        \sum_{(i,j) \in N(h)} (Z(s_i) - Z(s_j))^2}{hatgamma(h) = (1)/(2|N(h)|) sum_(i,j) in N(h) (Z(s_i) - Z(s_j))^2}
 }
 \examples{
+set.seed(1)
 vrgm(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

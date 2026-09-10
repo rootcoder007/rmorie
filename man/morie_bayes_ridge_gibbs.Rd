@@ -42,6 +42,7 @@ list(estimate, beta, beta_se, sigma_j2, sigma2, n_iter, n, p, method).
 Per-marker variance with scaled inverse chi-squared prior.
 }
 \examples{
+set.seed(1)
 morie_bayes_ridge_gibbs(x = rnorm(50), y = rnorm(50))
 }
 \references{

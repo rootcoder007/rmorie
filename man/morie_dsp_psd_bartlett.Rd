@@ -22,6 +22,7 @@ periodograms each, and averages the result. Variance scales as
 \code{1 / n_segments} at the cost of frequency resolution.
 }
 \examples{
+set.seed(1)
 fs <- 1024L
 t <- seq(0, (fs - 1) / fs, length.out = fs)
 x <- sin(2 * pi * 50 * t) + 0.1 * rnorm(fs)

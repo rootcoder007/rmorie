@@ -25,6 +25,7 @@ delta ~ N(0, sigma2 R_phi),  R_phi exponential,
 eps ~ N(0, tau2 I).
 }
 \examples{
+set.seed(1)
 smixd(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

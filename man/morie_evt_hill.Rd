@@ -28,6 +28,7 @@ user needs to see. The asymptotic SE xi/sqrt(k) is honest only in
 the bias-free regime and says so.
 }
 \examples{
+set.seed(1)
 morie_evt_hill((1 - stats::runif(500))^(-1 / 4), k = 50)$xi
 }
 \references{

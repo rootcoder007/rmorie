@@ -178,6 +178,7 @@ morie_dataset_detect_role <- function(x, name) {
 #'   interval/ratio).
 #' @return Named list of summary statistics.
 #' @examples
+#' set.seed(1)
 #' res <- try(morie_dataset_summarize_column(rnorm(50), "value"))
 #' if (!inherits(res, "try-error")) str(res, max.level = 1)
 #' @export

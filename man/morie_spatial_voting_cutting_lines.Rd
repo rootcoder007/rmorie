@@ -21,6 +21,7 @@ List with \code{endpoints} (list of pairs), \code{angles}, \code{midpoints},
 Cutting-line endpoints for Coombs-mesh plots
 }
 \examples{
+set.seed(1)
 morie_spatial_voting_cutting_lines(matrix(rnorm(6), 3, 2), c(0.1, -0.2, 0))
 }
 \references{

@@ -26,6 +26,7 @@ limits shaded, and the observed values are always included.
 Plot method for \code{morie_ts_forecast} objects
 }
 \examples{
+set.seed(1)
 \donttest{
 m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 fc <- morie_ts_forecast(m, h = 12)

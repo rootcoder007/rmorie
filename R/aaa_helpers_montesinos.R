@@ -40,6 +40,7 @@
 #'   methods and contradicts its own worked example twice -- see the morie
 #'   fixture tests/fn/fixtures/gmatv.json).
 #' @examples
+#' set.seed(1)
 #' morie_grm_vanraden(markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 #' morie_grm_vanraden(matrix(sample(0:2, 200, TRUE), 50, 4), method = "G_VR2")
 #' @export

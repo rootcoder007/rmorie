@@ -22,6 +22,7 @@
 #'   (3). arXiv:2007.02133
 #' @export
 #' @examples
+#' set.seed(1)
 #' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 #' H0 <- matrix(rnorm(6), 3, 2)
 #' GcnII(A, H0)

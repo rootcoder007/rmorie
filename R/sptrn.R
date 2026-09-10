@@ -9,6 +9,7 @@
 #' @return Named list: estimate, se, r2, order, n, method.
 #' @references Schabenberger & Gotway (2005), Ch 2.
 #' @examples
+#' set.seed(1)
 #' sptrn(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 sptrn <- function(x, coords, order = 2) {

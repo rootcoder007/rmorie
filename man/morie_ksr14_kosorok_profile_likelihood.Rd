@@ -22,6 +22,7 @@ Y = beta X + eps with eps ~ N(0, sigma^2); profiling sigma^2 gives
 OLS slope with observed-information SE sqrt(sigma2/Sxx).
 }
 \examples{
+set.seed(1)
 morie_ksr14_kosorok_profile_likelihood(x = rnorm(50), y = rnorm(50))
 }
 \references{

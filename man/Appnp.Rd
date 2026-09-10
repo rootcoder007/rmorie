@@ -29,6 +29,7 @@ Z <- (1-alpha) Ahat Z + alpha H from Z = H (APPNP), with a row-wise
 softmax on the last step.
 }
 \examples{
+set.seed(1)
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 H <- matrix(rnorm(6), 3, 2)
 Appnp(A, H)

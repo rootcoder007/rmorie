@@ -26,6 +26,7 @@ variance, so the gain is exactly the squared correlation. Mirrors
 \code{morie.fn.regest}.
 }
 \examples{
+set.seed(1)
 x <- runif(60, 5, 15)
 morie_regression_estimator(100 + 2 * x + rnorm(60), x, X_mean = 10)$slope
 }

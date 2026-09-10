@@ -101,6 +101,7 @@
 #' @return Named list with `banzhaf`, `shapley_shubik`, `quota`,
 #'   `weights`, `method`.
 #' @examples
+#' set.seed(1)
 #' vtpwr(x = rnorm(50))
 #' @export
 vtpwr <- function(x, quota = NULL) {

@@ -57,6 +57,7 @@ integrating the truncated G recovers its size. Mirrors
 \code{morie.fn.hrzdiscd}.
 }
 \examples{
+set.seed(1)
 n <- 300
 x <- cbind(rnorm(n), rnorm(n))
 z <- as.numeric(sample(0:2, n, TRUE))

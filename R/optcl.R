@@ -11,6 +11,7 @@
 #' @return Named list with `cut`, `correct_class`, `polarity`, `pre`,
 #'   `n`, `method`.
 #' @examples
+#' set.seed(1)
 #' optcl(x = rnorm(50))
 #' @export
 optcl <- function(x, votes = NULL) {

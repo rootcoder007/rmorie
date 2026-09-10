@@ -32,5 +32,6 @@ G0 = N(base_mean, base_sd^2).  Returns the posterior-mean CDF
 evaluated on a grid plus the headline \code{estimate} at \code{mean(x)}.
 }
 \examples{
+set.seed(1)
 morie_ghosal_dirichlet_posterior(x = rnorm(50))
 }

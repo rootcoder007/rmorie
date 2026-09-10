@@ -22,5 +22,6 @@ plus a Ljung-Box autocorrelation test, and suggests a differencing
 order to achieve stationarity of the mean.
 }
 \examples{
+set.seed(1)
 morie_ts_stationarity(cumsum(rnorm(100)))$suggested_d
 }

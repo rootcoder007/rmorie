@@ -35,6 +35,7 @@ Local WLS at each site i:
 \deqn{\beta(s_i) = (X^\top W(s_i) X)^{-1} X^\top W(s_i) y}{beta(s_i) = (X^top W(s_i) X)^-1 X^top W(s_i) y}.
 }
 \examples{
+set.seed(1)
 gwreg(x = rnorm(50), y = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

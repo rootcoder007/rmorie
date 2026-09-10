@@ -19,5 +19,6 @@ Signed ranks R_i^+ = sign(D_i) * rank(|D_i|) used by Wilcoxon
 signed-rank.
 }
 \examples{
+set.seed(1)
 morie_rank_order_statistics(x = rnorm(50))
 }

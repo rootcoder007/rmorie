@@ -30,6 +30,7 @@ Native Gaussian quasi-maximum-likelihood fit; no GARCH package is
 loaded or called.
 }
 \examples{
+set.seed(1)
 morie_egarch_model(x = rnorm(50))
 }
 \references{

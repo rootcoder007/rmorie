@@ -18,5 +18,6 @@ Named list with estimate, log_lik_per_obs, weights, K, n, method.
 Bernstein-polynomial sieve density estimator (Petrone 1999)
 }
 \examples{
+set.seed(1)
 morie_ghosal_sieve_prior(x = rnorm(50))
 }

@@ -43,6 +43,7 @@
 #' Bollerslev, T. (1986). Generalized autoregressive conditional
 #' heteroskedasticity. \emph{Journal of Econometrics}, 31(3), 307-327.
 #' @examples
+#' set.seed(1)
 #' morie_garch_fit(x = rnorm(50))
 #' @export
 morie_garch_fit <- function(x) {

@@ -46,5 +46,6 @@ subsequent functions receive their data, so time attributes are
 maintained uniformly.
 }
 \examples{
+set.seed(1)
 morie_ts(cumsum(rnorm(24)), frequency = 12, start = 2000)
 }

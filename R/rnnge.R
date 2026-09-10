@@ -13,6 +13,7 @@
 #' @return list(estimate, y_hat, W_h, W_x, b_h, w_o, b_o, se, n, method).
 #' @references Montesinos Lopez Ch 14.
 #' @examples
+#' set.seed(1)
 #' morie_rnn_genomic(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 #' @export
 morie_rnn_genomic <- function(x, y, markers, hidden = 8, n_epochs = 150,

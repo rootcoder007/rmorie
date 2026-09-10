@@ -60,6 +60,7 @@
 #'   secondary description states \eqn{1\{V < 0\}}, which changes the
 #'   estimand.
 #' @examples
+#' set.seed(1)
 #' n <- 500
 #' x <- cbind(1, rnorm(n))
 #' v <- rnorm(n) * 6

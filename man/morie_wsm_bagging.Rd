@@ -41,6 +41,7 @@ on high-variance low-bias procedures that are wildly nonlinear in
 the data -- a deep regression tree being the standard case.
 }
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(150), 50)
 morie_wsm_bagging(X, stats::rnorm(50), B = 20)$max_shift_from_single_fit
 }

@@ -31,6 +31,7 @@ Torgerson double-centring followed by top-k eigen-decomposition.
 Reports Stress-1 = sqrt(sum (d - hat_d)^2 / sum d^2).
 }
 \examples{
+set.seed(1)
 mdspl(x = rnorm(50))
 }
 \keyword{internal}

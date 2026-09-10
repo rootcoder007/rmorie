@@ -30,6 +30,7 @@ An object of class \code{"class_name"}.
 Multi-dimensional data quality scores
 }
 \examples{
+set.seed(1)
 df <- data.frame(id = 1:20, v = c(rnorm(18), NA, NA))
 str(score_data_quality(df, key_cols = "id"), max.level = 1)
 }

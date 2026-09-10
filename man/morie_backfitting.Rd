@@ -27,6 +27,7 @@ dimension. Components are centred every sweep because only their
 SUM is identified. Mirrors \code{morie.fn.hrzbkft}.
 }
 \examples{
+set.seed(1)
 X <- matrix(runif(200), ncol = 2)
 morie_backfitting(X, X[, 1]^2 + sin(3 * X[, 2]))$converged
 }

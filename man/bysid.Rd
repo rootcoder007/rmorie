@@ -38,6 +38,7 @@ Metropolis-within-Gibbs surrogate for Clinton-Jackman-Rivers (2004)
 with N(0,1) prior on x and N(0, 5) priors on (alpha, beta).
 }
 \examples{
+set.seed(1)
 bysid(x = rnorm(50))
 }
 \keyword{internal}

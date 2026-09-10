@@ -22,5 +22,6 @@ M^2 = (n - 1) * cor(u, v)^2 ~ chi^2_1 under independence,
 where (u, v) are row/column scores weighted by cell counts.
 }
 \examples{
+set.seed(1)
 morie_ordered_categories(x = rnorm(50))
 }

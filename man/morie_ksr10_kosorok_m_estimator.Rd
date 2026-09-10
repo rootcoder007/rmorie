@@ -33,6 +33,7 @@ Named list with estimate, se, n, method.
 theta_n = argmax_theta P_n m(.; theta, eta_n), eta_n = MAD/0.6745.
 }
 \examples{
+set.seed(1)
 morie_ksr10_kosorok_m_estimator(x = rnorm(50))
 }
 \references{

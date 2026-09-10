@@ -15,6 +15,7 @@
 #' @return Named list with `estimate`, `mean_R`, `mean_D`, `sd_R`,
 #'   `sd_D`, `pooled_sd`, `n_R`, `n_D`, `method`.
 #' @examples
+#' set.seed(1)
 #' polrz(x = rnorm(50))
 #' @export
 polrz <- function(x, group = NULL) {

@@ -19,6 +19,7 @@ repeats improves SNR by \eqn{\sqrt M}. Mirrors
 \code{morie.fn.rng018}.
 }
 \examples{
+set.seed(1)
 morie_ensemble_average(matrix(rnorm(200), nrow = 10))$snr_gain
 }
 \references{

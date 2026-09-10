@@ -237,6 +237,7 @@ morie_local_dp_randomised_response <- function(truth, k, epsilon,
 #' @param ... Arguments for \code{morie_cokrig()} or \code{cokrg()}.
 #' @return Whatever the selected routine returns.
 #' @examples
+#' set.seed(1)
 #' pts <- rbind(c(0, 0), c(1, 0), c(0, 1), c(1, 1))
 #' morie_cokriging(pts, c(1, 2, 3, 4), rep(9, 4), c(0.5, 0.5),
 #'                 cross_vario = function(h) 0 * h)$prediction

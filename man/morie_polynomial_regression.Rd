@@ -22,5 +22,6 @@ Polynomial feature expansion + OLS via \code{stats::poly} +
 with scikit-learn's PolynomialFeatures.
 }
 \examples{
+set.seed(1)
 morie_polynomial_regression(x = rnorm(50), y = rnorm(50))
 }

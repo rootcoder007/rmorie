@@ -9,6 +9,7 @@
 #' @return Named list with estimate, n, method.
 #' @references Kosorok (2008), Ch 2.
 #' @examples
+#' set.seed(1)
 #' morie_ksr06_kosorok_maximal_inequality(x = rnorm(50))
 #' @export
 morie_ksr06_kosorok_maximal_inequality <- function(x) {

@@ -13,6 +13,7 @@
 #'   n, method.
 #' @references Matheron (1962); Schabenberger & Gotway (2005), Ch 3.
 #' @examples
+#' set.seed(1)
 #' vrgm(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 #' @export
 vrgm <- function(x, coords, n_bins = 10, max_dist = NULL) {

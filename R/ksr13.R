@@ -9,6 +9,7 @@
 #' @return Named list with estimate (rank), n, method.
 #' @references Kosorok (2008), Ch 6.
 #' @examples
+#' set.seed(1)
 #' morie_ksr13_kosorok_tangent_space(x = rnorm(50))
 #' @export
 morie_ksr13_kosorok_tangent_space <- function(x) {

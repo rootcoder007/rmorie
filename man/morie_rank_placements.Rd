@@ -18,5 +18,6 @@ For each Y_j: placement P_j = number of X_i less than Y_j.  Their sum is the
 Mann-Whitney U statistic for Y vs X.
 }
 \examples{
+set.seed(1)
 morie_rank_placements(x = rnorm(50), y = rnorm(50))
 }

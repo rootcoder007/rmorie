@@ -21,6 +21,7 @@ Interval / ratio columns get mean/sd/min/q25/median/q75/max; nominal
 top ten levels.
 }
 \examples{
+set.seed(1)
 res <- try(morie_dataset_summarize_column(rnorm(50), "value"))
 if (!inherits(res, "try-error")) str(res, max.level = 1)
 }

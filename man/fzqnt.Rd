@@ -23,6 +23,7 @@ Named list with estimate, se, p, h, density_at_Q, n, method.
 \eqn{\sqrt n(\hat Q-Q) \to N(0,p(1-p)/f(Q)^2)}{sqrt n(hat Q-Q) -> N(0,p(1-p)/f(Q)^2)}.
 }
 \examples{
+set.seed(1)
 fzqnt(x = rnorm(50))
 }
 \keyword{internal}

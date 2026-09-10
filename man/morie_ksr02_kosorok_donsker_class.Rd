@@ -21,6 +21,7 @@ for the indicator class F of one-sided thresholds on X
 (Kosorok Ex 2.5.4), with bracketing number bounded by 2 / epsilon^2.
 }
 \examples{
+set.seed(1)
 morie_ksr02_kosorok_donsker_class(x = rnorm(50))
 }
 \references{

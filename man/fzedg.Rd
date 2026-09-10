@@ -27,6 +27,7 @@ studentised kernel quantile.  Skewness of the indicator score
 \deqn{P(T_n \le z) \approx \Phi(z) - (\gamma_1/6)(z^2-1)\phi(z)/\sqrt n.}{P(T_n <= z) ~= Phi(z) - (gamma_1/6)(z^2-1)phi(z)/sqrt n.}
 }
 \examples{
+set.seed(1)
 fzedg(x = rnorm(50))
 }
 \keyword{internal}

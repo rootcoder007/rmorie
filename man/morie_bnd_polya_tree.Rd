@@ -46,6 +46,7 @@ uniform base measure, smaller \code{alpha} follows the empirical
 histogram, and both limits are tested.
 }
 \examples{
+set.seed(1)
 morie_bnd_polya_tree(stats::rnorm(100), grid = c(-1, 0, 1))$density
 }
 \references{

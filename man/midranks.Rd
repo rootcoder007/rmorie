@@ -17,5 +17,6 @@ Identical to \code{rank(x, ties.method = "average")} plus a tie-
 correction term \verb{sum t_j^3 - t_j} over tied groups.
 }
 \examples{
+set.seed(1)
 midranks(x = rnorm(50))
 }

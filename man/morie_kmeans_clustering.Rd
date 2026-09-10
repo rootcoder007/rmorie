@@ -31,5 +31,6 @@ n_iter, n_clusters, n, method.
 Wraps \code{stats::kmeans} with Hartigan-Wong (the default).
 }
 \examples{
+set.seed(1)
 morie_kmeans_clustering(x = rnorm(50))
 }

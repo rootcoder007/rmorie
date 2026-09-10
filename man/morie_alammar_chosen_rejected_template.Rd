@@ -18,6 +18,7 @@ A list with \code{records}, \code{estimate}, \code{n}, \code{method}.
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
 Ks <- matrix(stats::rnorm(6), 3, 2)
 Vs <- matrix(stats::rnorm(6), 3, 2)

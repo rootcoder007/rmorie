@@ -21,6 +21,7 @@ estimate and no windowing, and every \eqn{|k_m| \le 1} makes
 stability automatic. Mirrors \code{morie.fn.rgburg}.
 }
 \examples{
+set.seed(1)
 morie_burg_method(rnorm(200), order = 2)$stable
 }
 \references{

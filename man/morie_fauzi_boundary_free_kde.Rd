@@ -32,6 +32,7 @@ distilled text file in the reference library omits it; the PDF
 does not.)
 }
 \examples{
+set.seed(1)
 morie_fauzi_boundary_free_kde(stats::rexp(300), grid = c(0.1, 1))$density
 }
 \references{

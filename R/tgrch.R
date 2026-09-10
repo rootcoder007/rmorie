@@ -54,6 +54,7 @@
 #' @return Named list with \code{omega, alpha, gamma, beta, persistence,
 #'   loglik, conditional_variance, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_tgarch_model(x = rnorm(50))
 #' @export
 morie_tgarch_model <- function(x) {

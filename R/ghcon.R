@@ -10,6 +10,7 @@
 #' @param seed Integer RNG seed (default 0).
 #' @return Named list with estimate, ks_mean, ks_se, schwartz_bound, n, eps, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_posterior_consistency(x = rnorm(50))
 #' @export
 morie_ghosal_posterior_consistency <- function(x, ref_loc = NULL, ref_scale = NULL,

@@ -27,6 +27,7 @@ for non-smooth statistics (the median is the canonical failure,
 Efron 1979 Sec. 3), and the output says so.
 }
 \examples{
+set.seed(1)
 morie_bt_jackknife(stats::rnorm(30), mean)$variance
 }
 \references{

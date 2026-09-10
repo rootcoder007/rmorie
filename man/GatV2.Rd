@@ -29,6 +29,7 @@ Formula: e_ij = sum_c LeakyReLU(h_ic) + sum_c LeakyReLU(h_jc);
 alpha = softmax over the neighbourhood; h_i' = sigmoid(sum alpha h_j).
 }
 \examples{
+set.seed(1)
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 X <- matrix(rnorm(6), 3, 2)
 GatV2(A, X)

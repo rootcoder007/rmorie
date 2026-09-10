@@ -27,6 +27,7 @@ KDE with order-4 Wand-Jones (1995, eq 2.8) kernel
 to O(h^4).  Note: K_4 takes negative values so f_hat may be < 0.
 }
 \examples{
+set.seed(1)
 fzhok(x = rnorm(50))
 }
 \keyword{internal}

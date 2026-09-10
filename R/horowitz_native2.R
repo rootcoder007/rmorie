@@ -30,6 +30,7 @@
 #' @references Horowitz, J. L. Semiparametric and Nonparametric
 #'   Methods in Econometrics. Springer. Appendix (pp. 233-255, KDE).
 #' @examples
+#' set.seed(1)
 #' morie_kde_h(rnorm(200))$bandwidth
 #' @export
 morie_kde_h <- function(x, grid = NULL, h = NULL) {
@@ -63,6 +64,7 @@ morie_kde_h <- function(x, grid = NULL, h = NULL) {
 #' @return list: h_opt, R_K, mu2_K, f2_l2, normal_reference_used.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_bandwidth_mise(rnorm(200))$h_opt
 #' @export
 morie_bandwidth_mise <- function(x, f_second_deriv_l2 = NULL) {
@@ -98,6 +100,7 @@ morie_bandwidth_mise <- function(x, f_second_deriv_l2 = NULL) {
 #' @return list: grid, fitted, bandwidth, n.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_nw_regression(rnorm(100), rnorm(100))$bandwidth
 #' @export
 morie_nw_regression <- function(x, y, grid = NULL, h = NULL) {
@@ -131,6 +134,7 @@ morie_nw_regression <- function(x, y, grid = NULL, h = NULL) {
 #' @return list: grid, fitted, slope, bandwidth, n.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_local_linear(runif(200), runif(200))$bandwidth
 #' @export
 morie_local_linear <- function(x, y, grid = NULL, h = NULL) {
@@ -174,6 +178,7 @@ morie_local_linear <- function(x, y, grid = NULL, h = NULL) {
 #' @return list: fitted, coefficients, K, r_squared, df_ratio.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' morie_series_regression(runif(100), runif(100), K = 4)$K
 #' @export
 morie_series_regression <- function(x, y, K = 5L, kind = "poly") {
@@ -206,6 +211,7 @@ morie_series_regression <- function(x, y, K = 5L, kind = "poly") {
 #' @return numeric matrix (length(x) x K).
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' dim(morie_sieve_basis(runif(20), 4))
 #' @export
 morie_sieve_basis <- function(x, K = 5L, kind = "poly") {
@@ -245,6 +251,7 @@ morie_sieve_basis <- function(x, K = 5L, kind = "poly") {
 #' @return list: index_grid, G, index, bandwidth, rate_exponent, d.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' X <- matrix(rnorm(200), ncol = 2)
 #' morie_index_regression(X, rnorm(100), c(1, -0.5))$rate_exponent
 #' @export
@@ -280,6 +287,7 @@ morie_index_regression <- function(X, y, beta, h = NULL, grid = NULL) {
 #' @return list: beta, sse, converged, root_n, n, d.
 #' @references Horowitz, Ch. 2 (Ichimura 1993).
 #' @examples
+#' set.seed(1)
 #' X <- matrix(rnorm(200), ncol = 2)
 #' morie_ichimura(X, tanh(X %*% c(1, -0.6)))$beta[1]
 #' @export
@@ -336,6 +344,7 @@ morie_ichimura <- function(X, y, h = NULL) {
 #'   standard_errors_valid.
 #' @references Horowitz, Ch. 3.
 #' @examples
+#' set.seed(1)
 #' X <- matrix(rnorm(200), ncol = 2)
 #' morie_maximum_score(X, as.numeric(X %*% c(1, -0.8) > 0))$rate_exponent
 #' @export
@@ -414,6 +423,7 @@ morie_maximum_score <- function(X, y, smoothed = FALSE, h = NULL, r = 2L) {
 #' @return list: beta, se, residuals, root_n, n, p.
 #' @references Horowitz, Ch. 2 (Robinson 1988).
 #' @examples
+#' set.seed(1)
 #' Z <- runif(200)
 #' X <- matrix(rnorm(400), ncol = 2)
 #' morie_partially_linear(X, Z, X %*% c(1.5, -0.7) + sin(2 * Z))$root_n
@@ -463,6 +473,7 @@ morie_partially_linear <- function(X, Z, y, h = NULL) {
 #' @return list: mu, components, fitted, n_iter, converged.
 #' @references Horowitz, Ch. 2.
 #' @examples
+#' set.seed(1)
 #' X <- matrix(runif(200), ncol = 2)
 #' morie_backfitting(X, X[, 1]^2 + sin(3 * X[, 2]))$converged
 #' @export
@@ -512,6 +523,7 @@ morie_backfitting <- function(X, y, h = NULL, max_iter = 50L, tol = 1e-6) {
 #' @return list: grid, quantile, tau, bandwidth, monotone_in_tau.
 #' @references Horowitz, Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_kernel_quantile(runif(200), rnorm(200), tau = c(0.1, 0.9))$monotone_in_tau
 #' @export
 morie_kernel_quantile <- function(x, y, tau = 0.5, grid = NULL, h = NULL) {

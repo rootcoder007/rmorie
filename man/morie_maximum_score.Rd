@@ -31,6 +31,7 @@ Smoothing the indicator with a kernel CDF lifts the rate to
 \code{morie.fn.hrzmscr} and \code{hrzsms}.
 }
 \examples{
+set.seed(1)
 X <- matrix(rnorm(200), ncol = 2)
 morie_maximum_score(X, as.numeric(X \%*\% c(1, -0.8) > 0))$rate_exponent
 }

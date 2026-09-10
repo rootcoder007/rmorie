@@ -23,6 +23,7 @@ Counts legislators appearing in both sessions. With ID vectors:
 returns set intersection. With matrices: rows non-empty in both.
 }
 \examples{
+set.seed(1)
 brdgr(x = rnorm(50))
 }
 \keyword{internal}

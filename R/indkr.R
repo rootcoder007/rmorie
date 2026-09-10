@@ -12,6 +12,7 @@
 #' @return Named list: estimate, threshold, n, method.
 #' @references Journel (1983); Schabenberger & Gotway (2005), Ch 4.
 #' @examples
+#' set.seed(1)
 #' indkr(x = rnorm(50), coords = matrix(runif(100), 50, 2), threshold = 0.5)
 #' @export
 indkr <- function(x, coords, threshold, target = NULL,

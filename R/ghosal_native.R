@@ -187,6 +187,7 @@
 #'   atom_weight, n_distinct, is_density, limit_note, n, method.
 #' @references Ghosal and van der Vaart, Sec. 4.1.3-4.1.4.
 #' @examples
+#' set.seed(1)
 #' morie_dp_predictive(rnorm(30), alpha = 2)$atom_weight
 #' @export
 morie_dp_predictive <- function(x, alpha = 1, grid = NULL) {
@@ -242,6 +243,7 @@ morie_dp_predictive <- function(x, alpha = 1, grid = NULL) {
 #'   order_dependent, single_pass, weight_rule, n, method.
 #' @references Ghosal and van der Vaart, Sec. 5.4; Newton (2002).
 #' @examples
+#' set.seed(1)
 #' morie_predictive_recursion(rnorm(50), sigma = 1)$order_dependent
 #' @export
 morie_predictive_recursion <- function(x, theta_grid = NULL, sigma = 1,
@@ -326,6 +328,7 @@ morie_predictive_recursion <- function(x, theta_grid = NULL, sigma = 1,
 #'   absolutely_continuous_prior, mass, consistent_at, n, method.
 #' @references Ghosal and van der Vaart, Sec. 3.7 and 7.2.3.
 #' @examples
+#' set.seed(1)
 #' morie_polya_tree_density(rnorm(200), levels = 4)$absolutely_continuous_prior
 #' @export
 morie_polya_tree_density <- function(x, grid = NULL, levels = 6L,
@@ -381,6 +384,7 @@ morie_polya_tree_density <- function(x, grid = NULL, levels = 6L,
 #'   max_jump_single, smoother_than_single, n, method.
 #' @references Ghosal and van der Vaart, Sec. 3.7.2.
 #' @examples
+#' set.seed(1)
 #' morie_polya_tree_mixture(rnorm(200), levels = 4)$smoother_than_single
 #' @export
 morie_polya_tree_mixture <- function(x, grid = NULL, levels = 6L,
@@ -600,6 +604,7 @@ morie_gp_density_rate <- function(x, s = NULL, n = NULL,
 #' @references Ghosal and van der Vaart, Sec. 13.2; Susarla and
 #'   Van Ryzin (1976).
 #' @examples
+#' set.seed(1)
 #' morie_dp_survival(rexp(50), alpha = 0.01)$max_abs_diff_to_km
 #' @export
 morie_dp_survival <- function(x, event = NULL, alpha = 1, g0_rate = NULL) {

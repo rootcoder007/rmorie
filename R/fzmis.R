@@ -13,6 +13,7 @@
 #'   R_fpp, sigma, n, method.
 #' @importFrom stats sd
 #' @examples
+#' set.seed(1)
 #' fzmis(x = rnorm(50))
 #' @export
 fzmis <- function(x, h = NULL) {

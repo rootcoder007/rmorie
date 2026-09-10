@@ -29,6 +29,7 @@ the unsupervised loss; Kipf, T. N. and Welling, M. (2017), Semi-
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 adj <- list(`0` = c(`1` = 1, `3` = 1), `1` = c(`0` = 1, `2` = 1),
             `2` = c(`1` = 1, `3` = 1), `3` = c(`2` = 1, `0` = 1))
 feats <- matrix(runif(12), 4, 3)

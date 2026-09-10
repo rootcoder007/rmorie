@@ -15,6 +15,7 @@
 #' @importFrom utils combn
 #' @importFrom stats var
 #' @examples
+#' set.seed(1)
 #' fzhdc(x = rnorm(50))
 #' @export
 fzhdc <- function(x, kernel = NULL, max_pairs = 2000L, seed = 0L) {

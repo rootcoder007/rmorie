@@ -17,5 +17,6 @@ Kendall tau between the observation and its time index t = 1..n.
 Tests H0: no monotone trend.
 }
 \examples{
+set.seed(1)
 morie_rank_based_test(x = rnorm(50))
 }

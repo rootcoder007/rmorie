@@ -10,6 +10,7 @@
 #' @return Named list: statistic, p_value, z, n, m.
 #' @importFrom stats qnorm pnorm
 #' @examples
+#' set.seed(1)
 #' morie_van_der_waerden_test(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_van_der_waerden_test <- function(x, y) {

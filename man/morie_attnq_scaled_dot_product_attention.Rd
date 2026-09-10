@@ -29,6 +29,7 @@ R parity for \code{morie.fn.attnq.scaled_dot_product_attention}.
       \mathrm{softmax}\!\left(\tfrac{Q K^\top}{\sqrt{d_k}}\right) V}{Attention(Q, K, V) = softmax(tfrac{Q K^top}{sqrt(d_k)}) V}
 }
 \examples{
+set.seed(1)
 morie_attnq_scaled_dot_product_attention(Q = matrix(rnorm(150), 50, 3))
 }
 \references{

@@ -19,6 +19,7 @@ A list with \code{coordinates}, \code{eigenvalues}, \code{stress}, \code{fit},
 Torgerson scaling via eigendecomposition of the double-centred matrix.
 }
 \examples{
+set.seed(1)
 D <- as.matrix(dist(matrix(rnorm(40), 10)))
 morie_spatial_voting_classical_mds(D, n_dims = 2)
 }

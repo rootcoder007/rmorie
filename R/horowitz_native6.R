@@ -115,6 +115,7 @@
 #' @references Horowitz, Sec. 6.3.1, eqs. (6.57)-(6.66);
 #'   Horowitz (1996).
 #' @examples
+#' set.seed(1)
 #' n <- 120
 #' x <- cbind(rnorm(n), rnorm(n))
 #' y <- exp(x %*% c(1, -0.5) + rlogis(n) * 0.6)
@@ -260,6 +261,7 @@ morie_transform_T_F <- function(x, y, bandwidth, beta_hat, y0 = NULL,
 #'   n, d, method.
 #' @references Horowitz, Sec. 6.3.2, HT1-HT9, Theorems 6.4-6.5.
 #' @examples
+#' set.seed(1)
 #' x <- cbind(rnorm(50), rnorm(50))
 #' morie_transform_asymptotics(x, rnorm(50), c(0.2, 0.6))$limit_is_process
 #' @export
@@ -333,6 +335,7 @@ morie_transform_asymptotics <- function(x, y, bandwidth, n = NULL) {
 #' @references Horowitz, Sec. 6.3.3, eq. (6.67), CT1-CT6,
 #'   Theorem 6.6; Chen (2002).
 #' @examples
+#' set.seed(1)
 #' n <- 80
 #' x <- cbind(rnorm(n), rnorm(n))
 #' y <- exp(x %*% c(1, -0.5) + rlogis(n))
@@ -429,6 +432,7 @@ morie_chen_transform <- function(x, y, bandwidth = NULL, beta_hat = NULL,
 #'   A_K, rate_exponent, root_n_attainable, n_events, n, method.
 #' @references Horowitz, Sec. 6.2.4, eqs. (6.44)-(6.48).
 #' @examples
+#' set.seed(1)
 #' n <- 200
 #' x <- cbind(rnorm(n), rnorm(n))
 #' tt <- rexp(n) / exp(x %*% c(0.5, -0.3))

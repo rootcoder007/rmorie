@@ -10,6 +10,7 @@
 #' @return Named list with estimate, se, p, h, density_at_Q, n, method.
 #' @importFrom stats sd quantile dnorm pnorm uniroot
 #' @examples
+#' set.seed(1)
 #' fzqnt(x = rnorm(50))
 #' @export
 fzqnt <- function(x, p = 0.5, h = NULL) {

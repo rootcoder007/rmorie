@@ -28,6 +28,7 @@ bootstrap law puts mass 0.632 on the sample max itself). The
 caveat is in the output.
 }
 \examples{
+set.seed(1)
 morie_bt_iid(stats::rnorm(50), mean, B = 100)$se
 }
 \references{

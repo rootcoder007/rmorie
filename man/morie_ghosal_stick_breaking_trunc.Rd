@@ -40,5 +40,6 @@ trunc_err_bound, n, method.
 Truncated stick-breaking representation of DP(alpha, G0)
 }
 \examples{
+set.seed(1)
 morie_ghosal_stick_breaking_trunc(x = rnorm(50))
 }

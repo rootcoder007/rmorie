@@ -31,6 +31,7 @@
 #' @return list: lags, acf_unbiased, acf_biased, N.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_acf_estimate(rnorm(50), max_lag = 5)$acf_unbiased
 #' @export
 morie_acf_estimate <- function(x, max_lag = NULL) {
@@ -60,6 +61,7 @@ morie_acf_estimate <- function(x, max_lag = NULL) {
 #' @return list: a, sigma2, order, stable.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_yule_walker(rnorm(200), order = 2)$stable
 #' @export
 morie_yule_walker <- function(x, order = 4L) {
@@ -91,6 +93,7 @@ morie_yule_walker <- function(x, order = 4L) {
 #' @return list: a, reflection, sigma2, order, stable.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_burg_method(rnorm(200), order = 2)$stable
 #' @export
 morie_burg_method <- function(x, order = 8L) {
@@ -138,6 +141,7 @@ morie_burg_method <- function(x, order = 8L) {
 #' @return list: freqs, psd, a, sigma2, stable.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_ar_spectrum(rnorm(300), order = 4, fs = 100)$stable
 #' @export
 morie_ar_spectrum <- function(x, order = 8L, fs = 1, n_freqs = 512L) {
@@ -225,6 +229,7 @@ morie_fir_filter <- function(x, b_k) {
 #' @return list: error, mse, gradient.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_lms_error(rnorm(20), c(0.5, -0.2), matrix(rnorm(40), ncol = 2))$mse
 #' @export
 morie_lms_error <- function(x, w, r) {
@@ -254,6 +259,7 @@ morie_lms_error <- function(x, w, r) {
 #' @return list: Phi, Theta, weights, effective_memory.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_rls_phi(matrix(rnorm(40), ncol = 2), lam = 0.99)$effective_memory
 #' @export
 morie_rls_phi <- function(r, x = NULL, lam = 0.99) {
@@ -292,6 +298,7 @@ morie_rls_phi <- function(r, x = NULL, lam = 0.99) {
 #' @return list: f0, period_s, peak_value.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_cepstrum_pitch(rnorm(1024), 8000)$f0
 #' @export
 morie_cepstrum_pitch <- function(x, fs, f0_range = c(50, 500)) {
@@ -415,6 +422,7 @@ morie_pan_tompkins_update <- function(PEAKI, SPKI = NULL, NPKI = NULL,
 #' @return list: ensemble_mean, ensemble_std, snr_gain, M, T.
 #' @references Rangayyan (2015), Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_ensemble_average(matrix(rnorm(200), nrow = 10))$snr_gain
 #' @export
 morie_ensemble_average <- function(x_k) {

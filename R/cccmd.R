@@ -27,6 +27,7 @@
 #'   \emph{Review of Economics and Statistics}, 72(3), 498-505.
 #' @seealso \code{\link{morie_dcc_multivariate_garch}}
 #' @examples
+#' set.seed(1)
 #' morie_ccc_multivariate_garch(x = matrix(rnorm(150), 50, 3))
 #' @export
 morie_ccc_multivariate_garch <- function(x) {

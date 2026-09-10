@@ -13,6 +13,7 @@
 #'   k_lower, k_upper.
 #' @importFrom stats dbinom
 #' @examples
+#' set.seed(1)
 #' morie_sign_test_power(x = rnorm(50))
 #' @export
 morie_sign_test_power <- function(x, mu0 = 0, p_alt = 0.7, alpha = 0.05) {

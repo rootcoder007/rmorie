@@ -19,6 +19,7 @@ Symmetric percentile trimming (Crump et al. 2009 spirit): weights
 above the (1-q) quantile are capped there.
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_trimming(morie_weight_ps(d, "t", "x"))
 }

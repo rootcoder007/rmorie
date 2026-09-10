@@ -27,6 +27,7 @@ reproduce the unstratified estimate. Mirrors
 \code{morie.fn.straprp}.
 }
 \examples{
+set.seed(1)
 y <- c(rbinom(50, 1, 0.1), rbinom(50, 1, 0.9))
 morie_stratified_proportion(y, rep(1:2, each = 50), c(0.5, 0.5))$se
 }

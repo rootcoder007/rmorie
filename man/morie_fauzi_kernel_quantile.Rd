@@ -34,6 +34,7 @@ Not to be confused with \code{morie_kernel_quantile()}, which is
 Horowitz's conditional quantile regression.
 }
 \examples{
+set.seed(1)
 morie_fauzi_kernel_quantile(stats::rexp(200), c(0.25, 0.5))$quantile
 }
 \references{

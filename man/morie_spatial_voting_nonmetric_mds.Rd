@@ -28,6 +28,7 @@ Kruskal-style nonmetric MDS using pool-adjacent-violators monotone
 regression on dissimilarity ranks.
 }
 \examples{
+set.seed(1)
 D <- as.matrix(dist(matrix(rnorm(40), 10)))
 morie_spatial_voting_nonmetric_mds(D)
 }

@@ -11,6 +11,7 @@
 #' @return Named list \code{(y, estimate, Fx, method)}.
 #' @references He, Zhang, Ren & Sun (2016), CVPR.
 #' @examples
+#' set.seed(1)
 #' morie_rslnk_residual_connection(x = rnorm(50))
 #' @export
 morie_rslnk_residual_connection <- function(x, f = NULL) {

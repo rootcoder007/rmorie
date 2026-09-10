@@ -34,5 +34,6 @@ wald, wald_pvalue, n, B, method.
 BvM diagnostic for the mean functional under a DP prior
 }
 \examples{
+set.seed(1)
 morie_ghosal_bernstein_von_mises(x = rnorm(50))
 }

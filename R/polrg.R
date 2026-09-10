@@ -11,6 +11,7 @@
 #' @param degree Polynomial degree.
 #' @return Named list: estimate, se, feature_names, degree, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_polynomial_regression(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_polynomial_regression <- function(x, y, degree = 2L) {

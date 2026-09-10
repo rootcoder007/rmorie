@@ -8,6 +8,7 @@
 #' @param lam0 Optional baseline hazard rate.
 #' @return Named list with estimate, times, S_post, H_post, c, lam0, n, method.
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_neutral_right(time = cumsum(rexp(50)))
 #' @export
 morie_ghosal_neutral_right <- function(time, event = NULL, c = 1.0, lam0 = NULL) {

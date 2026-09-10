@@ -23,6 +23,7 @@ List with \code{ideal_points}, \code{cutpoints}, \code{normals},
 Ordered Optimal Classification for ordinal scales
 }
 \examples{
+set.seed(1)
 Y <- matrix(sample(1:4, 60, replace = TRUE), 15, 4)
 morie_spatial_voting_ordered_oc(Y, n_dims = 1L, max_iter = 20L)
 }

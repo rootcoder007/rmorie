@@ -37,5 +37,6 @@ alpha_draws, K_n, n, method.
 Escobar-West augmentation for alpha given K_n with a Gamma(a, b) hyperprior
 }
 \examples{
+set.seed(1)
 morie_ghosal_hierarchical_bayes(x = rnorm(50))
 }

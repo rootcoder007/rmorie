@@ -13,6 +13,7 @@
 #' @return Named list: statistic, p_value, h, n, method.
 #' @importFrom stats sd pnorm
 #' @examples
+#' set.seed(1)
 #' fzksm(x = rnorm(50))
 #' @export
 fzksm <- function(x, cdf = "norm", args = NULL, h = NULL, n_grid = 512L) {

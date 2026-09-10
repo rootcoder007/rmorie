@@ -47,6 +47,7 @@ Period \code{e - 1} is the reference, so \code{mu} at relative time -1 is
 zero by construction and the pre-periods are a pre-trends check.
 }
 \examples{
+set.seed(1)
 Y <- matrix(stats::rnorm(200), 20)
 G <- c(rep(4, 10), rep(Inf, 10))
 morie_caus_did_sun_abraham(Y, G, rel_periods = c(0, 1))$weights_sum_to_one

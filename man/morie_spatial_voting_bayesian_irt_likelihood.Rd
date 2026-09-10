@@ -23,6 +23,7 @@ List with \code{loglik}, \code{vote_probs}, \code{n_correct}, \code{n_total},
 Bayesian IRT likelihood (deterministic part of CJR machinery)
 }
 \examples{
+set.seed(1)
 v <- matrix(stats::rbinom(20, 1, 0.5), 4, 5)
 morie_spatial_voting_bayesian_irt_likelihood(
   v, matrix(rnorm(4), 4, 1), rep(0, 5), matrix(rnorm(5), 5, 1))

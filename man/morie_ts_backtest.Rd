@@ -22,5 +22,6 @@ A list with the \code{forecast}, the held-out \code{actual}, and the
 Back-test a forecasting configuration on a holdout tail
 }
 \examples{
+set.seed(1)
 morie_ts_backtest(cumsum(rnorm(120)), h = 12, order = c(1, 1, 0))$accuracy
 }

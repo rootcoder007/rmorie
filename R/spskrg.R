@@ -20,6 +20,7 @@
 #' @references Schabenberger & Gotway (2005), Sec 5.2.1, eqs (5.10)-(5.11),
 #'   pp. 223-224.
 #' @examples
+#' set.seed(1)
 #' co <- matrix(runif(40), 20, 2) * 5
 #' spskrg(co, rnorm(20), matrix(c(2, 2), 1, 2),
 #'        list(model = "exponential", sill = 1, range = 2))

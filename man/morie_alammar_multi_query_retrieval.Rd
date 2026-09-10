@@ -21,6 +21,7 @@ A list with \code{documents}, \code{queries}, \code{added_per_query}, \code{esti
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 q <- matrix(stats::rnorm(3), 1, 3)
 i <- morie_alammar_infonce_loss(c(1, 0), c(1, 0), rbind(c(0, 
     1), c(-1, 0)), 0.1)

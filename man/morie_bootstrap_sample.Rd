@@ -23,6 +23,7 @@ Named list: \code{estimate}, \code{se}, \code{ci_lower}, \code{ci_upper},
 Bootstrap resampling for any statistic
 }
 \examples{
+set.seed(1)
 if (requireNamespace("ranger", quietly = TRUE)) {
   df <- data.frame(x = rnorm(100))
   morie_bootstrap_sample(df, statistic = function(d) mean(d$x))

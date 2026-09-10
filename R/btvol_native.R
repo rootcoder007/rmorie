@@ -61,6 +61,7 @@
 #'   n, consistency_caveat, method.
 #' @references Efron (1979), *Annals of Statistics* 7:1-26.
 #' @examples
+#' set.seed(1)
 #' morie_bt_iid(stats::rnorm(50), mean, B = 100)$se
 #' @export
 morie_bt_iid <- function(x, stat, B = 1000L, seed = 0) {
@@ -96,6 +97,7 @@ morie_bt_iid <- function(x, stat, B = 1000L, seed = 0) {
 #' @references Efron and Tibshirani (1993), *An Introduction to the
 #'   Bootstrap*, Ch. 6; Efron (1979).
 #' @examples
+#' set.seed(1)
 #' morie_bt_var(stats::rnorm(200))$se
 #' @export
 morie_bt_var <- function(theta_b) {
@@ -183,6 +185,7 @@ morie_bt_bias <- function(theta_hat, theta_b) {
 #' @references Quenouille (1949), *JRSS-B* 11:68-84; Tukey (1958);
 #'   Efron (1979), Sec. 3.
 #' @examples
+#' set.seed(1)
 #' morie_bt_jackknife(stats::rnorm(30), mean)$variance
 #' @export
 morie_bt_jackknife <- function(x, stat) {
@@ -259,6 +262,7 @@ morie_bt_632 <- function(err_app, err_oob, gamma = NULL) {
 #' @references Efron and Tibshirani (1997), *JASA* 92:548-560;
 #'   Breiman (1996), "Out-of-bag estimation", UC Berkeley.
 #' @examples
+#' set.seed(1)
 #' x <- matrix(stats::rnorm(60), 30)
 #' y <- x[, 1] + stats::rnorm(30)
 #' fit <- function(Xa, ya) qr.coef(qr(cbind(1, Xa)), ya)
@@ -349,6 +353,7 @@ morie_bt_oob <- function(x, y, fit_fn, predict_fn, B = 100L, loss = NULL,
 #' @references Davison and Hinkley (1997), *Bootstrap Methods and
 #'   their Application*, Chs. 2-3, 5; Fieller (1954).
 #' @examples
+#' set.seed(1)
 #' morie_bt_ci_ratio(stats::rnorm(50, 2), stats::rnorm(50, 1),
 #'   B = 200
 #' )$ci
@@ -646,6 +651,7 @@ morie_vol_harmonic <- function(sigma) {
 #'   100:1394-1411; Ait-Sahalia, Mykland and Zhang (2005), *RFS*
 #'   18:351-416.
 #' @examples
+#' set.seed(1)
 #' morie_vol_noise(stats::rnorm(100, sd = 1e-3), K = 5)$noise_variance
 #' @export
 morie_vol_noise <- function(r_intraday, K = NULL) {

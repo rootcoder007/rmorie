@@ -14,6 +14,7 @@
 #' @return Named list with `coords`, `eigenvalues`, `stress`, `k`,
 #'   `n`, `method`.
 #' @examples
+#' set.seed(1)
 #' mdspl(x = rnorm(50))
 #' @export
 mdspl <- function(x, k = 2L) {

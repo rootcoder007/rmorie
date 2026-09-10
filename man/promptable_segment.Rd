@@ -21,6 +21,7 @@ A list with \code{estimate}, \code{masks}, \code{n_masks}, \code{multimask}, \co
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 decoder <- function(emb, tokens, multi) list(matrix(runif(16), 4, 4),
                                              matrix(runif(16), 4, 4))
 r <- promptable_segment(image_embedding = matrix(rnorm(64), 8, 8),

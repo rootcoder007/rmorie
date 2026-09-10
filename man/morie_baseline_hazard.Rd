@@ -44,6 +44,7 @@ differentiable \eqn{\lambda_0} and a second-order kernel;
 computable. Mirrors \code{morie.fn.hrzlam}.
 }
 \examples{
+set.seed(1)
 n <- 200
 x <- cbind(rnorm(n), rnorm(n))
 tt <- rexp(n) / exp(x \%*\% c(0.5, -0.3))

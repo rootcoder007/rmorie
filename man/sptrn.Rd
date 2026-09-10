@@ -23,6 +23,7 @@ Named list: estimate, se, r2, order, n, method.
 mu(s) = sum_k beta_k f_k(s); f_k are monomials up to degree \code{order}.
 }
 \examples{
+set.seed(1)
 sptrn(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

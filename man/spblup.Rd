@@ -29,6 +29,7 @@ The BLUP is never better than simple kriging in mean-squared error --
 it pays for not knowing the mean -- but it does not require one.
 }
 \examples{
+set.seed(1)
 co <- matrix(runif(40), 20, 2) * 5
 spblup(co, rnorm(20), matrix(c(2, 2), 1, 2),
        list(model = "exponential", sill = 1, range = 2))

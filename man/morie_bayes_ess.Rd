@@ -16,5 +16,6 @@ Named numeric ESS per parameter.
 Effective sample size (per parameter, autocorrelation-based)
 }
 \examples{
+set.seed(1)
 morie_bayes_ess(list(matrix(rnorm(200), 100)))
 }

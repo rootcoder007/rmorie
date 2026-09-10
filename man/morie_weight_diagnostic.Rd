@@ -25,6 +25,7 @@ differences and variance ratios before/after weighting, plus the
 effective sample size.
 }
 \examples{
+set.seed(1)
 d <- data.frame(t = rbinom(100, 1, 0.4), x = rnorm(100))
 morie_weight_diagnostic(morie_weight_ps(d, "t", "x"), d, "t", "x")
 }

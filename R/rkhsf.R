@@ -10,6 +10,7 @@
 #' @return list(estimate, alpha, beta, K, f_hat, se, h, n, method).
 #' @references Gianola & van Kaam (2008). Montesinos Lopez Ch 5.
 #' @examples
+#' set.seed(1)
 #' morie_rkhs_full(x = rnorm(50), y = rnorm(50), markers = matrix(sample(0:2, 200, TRUE), 50, 4))
 #' @export
 morie_rkhs_full <- function(x, y, markers, h = NULL, lam = 1) {

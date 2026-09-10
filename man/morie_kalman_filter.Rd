@@ -37,5 +37,6 @@ Named list with \code{state, state_cov, innovations,
 Defaults to a univariate local-level model when matrices are omitted.
 }
 \examples{
+set.seed(1)
 morie_kalman_filter(x = rnorm(50))
 }

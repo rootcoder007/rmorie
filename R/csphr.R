@@ -11,6 +11,7 @@
 #' @return Named list with `w`, `c`, `midpoint`, `correct_class`, `n`,
 #'   `p`, `method`.
 #' @examples
+#' set.seed(1)
 #' csphr(x = rnorm(50))
 #' @export
 csphr <- function(x, votes = NULL) {

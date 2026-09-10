@@ -9,6 +9,7 @@
 #' @return Named list: statistic (tau), p_value, n, inversions, z.
 #' @importFrom stats cor.test
 #' @examples
+#' set.seed(1)
 #' morie_rank_based_test(x = rnorm(50))
 #' @export
 morie_rank_based_test <- function(x) {

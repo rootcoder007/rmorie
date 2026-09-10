@@ -362,6 +362,7 @@ NULL
 #' @references Angrist, J. D., & Pischke, J.-S. (2009).
 #'   \emph{Mostly Harmless Econometrics}. Princeton University Press.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' df <- data.frame(
 #'   y    = rnorm(200),

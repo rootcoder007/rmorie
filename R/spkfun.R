@@ -18,6 +18,7 @@
 #' @references Schabenberger & Gotway (2005), Secs 3.4.1-3.4.2,
 #'   eqs (3.7)-(3.8), pp. 101-102.
 #' @examples
+#' set.seed(1)
 #' pts <- matrix(runif(400), 200, 2) * 10
 #' spkfun(pts, r = seq(0.1, 1.5, length.out = 8), region = c(0, 0, 10, 10))
 #' @export

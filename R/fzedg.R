@@ -15,6 +15,7 @@
 #'   cornish_fisher_correction, skew, p1z, z, p, n, method.
 #' @importFrom stats dnorm pnorm
 #' @examples
+#' set.seed(1)
 #' fzedg(x = rnorm(50))
 #' @export
 fzedg <- function(x, z = 1.96, p = 0.5) {

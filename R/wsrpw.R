@@ -15,6 +15,7 @@
 #' @return Named list: statistic (power), n, effect_size, alpha, nsim, se.
 #' @importFrom stats wilcox.test rnorm
 #' @examples
+#' set.seed(1)
 #' morie_wilcoxon_power(x = rnorm(50))
 #' @export
 morie_wilcoxon_power <- function(x, effect_size = 0.5, alpha = 0.05,

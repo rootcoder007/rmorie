@@ -9,6 +9,7 @@
 #' @return Named list with \code{frequencies, morie_coherence, n_segments,
 #'   nperseg, fs, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_coherence(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_coherence <- function(x, y, nperseg = NULL, fs = 1) {

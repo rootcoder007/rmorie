@@ -10,6 +10,7 @@
 #' @return Named list with estimate, n, method.
 #' @references Kosorok (2008), Ch 2 (Theorem 2.5.2).
 #' @examples
+#' set.seed(1)
 #' morie_ksr02_kosorok_donsker_class(x = rnorm(50))
 #' @export
 morie_ksr02_kosorok_donsker_class <- function(x) {

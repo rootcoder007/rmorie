@@ -141,6 +141,7 @@ morie_choice_based_shares <- function(pi1) {
 #' @references Horowitz, Sec. 4.4.1, eqs. (4.33)-(4.35),
 #'   Theorems 4.7-4.8.
 #' @examples
+#' set.seed(1)
 #' x <- matrix(rnorm(400), ncol = 2)
 #' y <- as.numeric(x %*% c(1, -0.8) + rnorm(200) > 0)
 #' morie_choice_based_max_score(x, y, 0.5)$beta
@@ -238,6 +239,7 @@ morie_choice_based_max_score <- function(x, y, sampling_weights,
 #' @references Horowitz, Sec. 4.4.2, eqs. (4.37)-(4.40),
 #'   Theorems 4.9-4.10; Manski (1987).
 #' @examples
+#' set.seed(1)
 #' x <- array(rnorm(800), dim = c(200, 2, 2))
 #' y <- matrix(as.numeric(rnorm(400) > 0), nrow = 200)
 #' morie_panel_max_score(x, y, 2, n_restarts = 2)$intercept_identified
@@ -366,6 +368,7 @@ morie_panel_max_score <- function(x, y, n_periods, smoothed = TRUE, h = NULL,
 #' @references Horowitz, Sec. 4.4.3, eqs. (4.41)-(4.43),
 #'   Theorem 4.11; Lee (1992), Melenberg and van Soest (1996).
 #' @examples
+#' set.seed(1)
 #' x <- matrix(rnorm(600), ncol = 2)
 #' ys <- x %*% c(1, -0.7) + rnorm(300)
 #' y <- findInterval(ys, c(-1, 0, 1.2))

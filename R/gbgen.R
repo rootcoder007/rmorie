@@ -14,6 +14,7 @@
 #' @return list(estimate, y_hat, train_loss, se, n, method).
 #' @references Friedman (2001); Montesinos Lopez Ch 9.
 #' @examples
+#' set.seed(1)
 #' morie_gradient_boosting_genomic(
 #'   x = rnorm(50), y = rnorm(50),
 #'   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

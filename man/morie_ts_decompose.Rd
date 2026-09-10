@@ -18,5 +18,6 @@ A \code{morie_ts_decomp} with \code{trend}, \code{seasonal}, \code{remainder}.
 Decompose a seasonal time series
 }
 \examples{
+set.seed(1)
 morie_ts_decompose(morie_ts(sin(1:48) + rnorm(48), frequency = 12))
 }

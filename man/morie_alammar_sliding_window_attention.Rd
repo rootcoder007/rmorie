@@ -19,6 +19,7 @@ A list with \code{output}, \code{attention}, \code{window}, \code{estimate}, \co
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(6), 3, 2)
 morie_alammar_sliding_window_attention(X, X, X, 2)
 }

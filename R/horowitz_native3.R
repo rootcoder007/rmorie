@@ -59,6 +59,7 @@
 #' @return list: grid, density, bandwidth, regime, rate_note, n, method.
 #' @references Horowitz, Ch. 5, Sec. 5.1.
 #' @examples
+#' set.seed(1)
 #' w <- rnorm(200) + rnorm(200) * 0.4
 #' morie_deconvolution(w, 0.4, grid = 0)$regime
 #' @export
@@ -220,6 +221,7 @@ morie_deconv_normality <- function(fn_u, f_u, n, h, b, bias = 0, sigma = 1) {
 #'   n, d, method.
 #' @references Horowitz, Ch. 2, Sec. 2.6.1.
 #' @examples
+#' set.seed(1)
 #' x <- rnorm(300)
 #' morie_average_derivative(x, 2 * x + rnorm(300, sd = 0.1))$delta
 #' @export
@@ -274,6 +276,7 @@ morie_average_derivative <- function(X, y, h = NULL, weighted = TRUE) {
 #' @return list: delta_hat, se, bandwidth, undersmoothed, n, method.
 #' @references Horowitz, Ch. 2, Sec. 2.6.1-2.6.2.
 #' @examples
+#' set.seed(1)
 #' x <- rnorm(300)
 #' morie_average_derivative_hat(x, 2 * x)$undersmoothed
 #' @export
@@ -419,6 +422,7 @@ morie_sieve_iv <- function(T, Ey_w, K = NULL) {
 #' @return list: T, singular_values, decay_ratio, severity, K, n, method.
 #' @references Horowitz, Ch. 5, Sec. 5.3.
 #' @examples
+#' set.seed(1)
 #' z <- rnorm(200)
 #' morie_npiv_operator(z + rnorm(200), z)$severity
 #' @export
@@ -495,6 +499,7 @@ morie_npiv_quantile <- function(T, tau_target, K = NULL, tau = 0.5) {
 #'   exogeneity_testable, n, n_instruments, method.
 #' @references Horowitz, Ch. 5, Sec. 5.3.
 #' @examples
+#' set.seed(1)
 #' z <- rnorm(200)
 #' morie_instrument_check(z + rnorm(200), z)$relevant
 #' @export

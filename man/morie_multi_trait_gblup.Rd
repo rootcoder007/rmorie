@@ -24,6 +24,7 @@ list(estimate, G_hat, B_hat, Sigma_g, Sigma_e, n, t, method).
 Multi-trait GBLUP via vec-stacked mixed-model equations
 }
 \examples{
+set.seed(1)
 morie_multi_trait_gblup(
   x = rnorm(50), y = rnorm(50),
   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

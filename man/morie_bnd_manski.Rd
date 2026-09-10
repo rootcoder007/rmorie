@@ -36,6 +36,7 @@ contains zero: worst-case bounds never sign an effect on their
 own, and bounds that do have smuggled in an assumption.
 }
 \examples{
+set.seed(1)
 y <- stats::runif(100)
 morie_bnd_manski(y, y > 0.2, c(0, 1))$width
 }

@@ -47,6 +47,7 @@ that a naive TWFE specification would be contaminated by forbidden
 already-treated comparisons (Goodman-Bacon 2021).
 }
 \examples{
+set.seed(1)
 if (morie_crypto_liboqs_available()) {
   if (requireNamespace("did", quietly = TRUE)) {
     df <- expand.grid(id = 1:30, t = 1:6)

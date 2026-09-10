@@ -23,6 +23,7 @@ the bias and variance formulas derivable, and C6 (existence of
 \verb{E X}, \verb{E X^2}, \verb{E X^3}) rules out heavy-tailed data entirely.
 }
 \examples{
+set.seed(1)
 morie_fauzi_conditions_c1_c6(stats::rexp(50))$binding_in_practice
 }
 \references{

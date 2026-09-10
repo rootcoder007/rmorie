@@ -19,6 +19,7 @@
 #'   A_matrix.
 #' @references Schabenberger & Gotway (2005), Sec 4.3.7, p. 151.
 #' @examples
+#' set.seed(1)
 #' spanis(coords = matrix(runif(200), 100, 2), z = rnorm(100),
 #'        A_matrix = diag(2), n_bins = 5)
 #' @export

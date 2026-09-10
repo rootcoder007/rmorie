@@ -18,6 +18,7 @@ Numeric fitted values.
 Posterior fitted values (on the response scale)
 }
 \examples{
+set.seed(1)
 \donttest{
 d <- data.frame(x = rnorm(50))
 d$y <- 1 + 2 * d$x + rnorm(50)

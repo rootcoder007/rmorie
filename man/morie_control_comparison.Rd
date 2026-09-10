@@ -27,5 +27,6 @@ Mann-Whitney vs. control for each treatment group; Bonferroni-
 adjusted p-values by default.
 }
 \examples{
+set.seed(1)
 morie_control_comparison(groups = list(rnorm(20), rnorm(20), rnorm(20)))
 }

@@ -53,6 +53,7 @@ morie_att_weights <- function(treat, ps) {
 #'   quantile treatment effects. *Econometrica* 75(1), 259-276.
 #' @export
 #' @examples
+#' set.seed(1)
 #' n <- 3000
 #' x <- stats::rnorm(n)
 #' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
@@ -96,6 +97,7 @@ morie_qte_firpo <- function(y, treat, ps, tau = 0.5) {
 #' @references Robins JM (1986). *Mathematical Modelling* 7, 1393-1512.
 #' @export
 #' @examples
+#' set.seed(1)
 #' n <- 3000
 #' x <- stats::rnorm(n)
 #' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)
@@ -265,6 +267,7 @@ morie_serial_mediation <- function(x, m1, m2, y) {
 #'   Resources* 50(2), 317-372.
 #' @export
 #' @examples
+#' set.seed(1)
 #' n <- 3000
 #' x <- stats::rnorm(n)
 #' e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)

@@ -17,6 +17,7 @@
 #' @references Schabenberger & Gotway (2005), Sec 6.1.3 "Spatially
 #'   Explicit Models", eq (6.9), pp. 316-317, citing Fotheringham et al. (2002).
 #' @examples
+#' set.seed(1)
 #' n <- 30
 #' spgwr(cbind(1, runif(n)), rnorm(n), matrix(runif(2 * n), n, 2))
 #' @export

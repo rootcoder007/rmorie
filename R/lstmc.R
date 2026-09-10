@@ -22,6 +22,7 @@
 #' @return Named list \code{(h, c, estimate, i, f, g, o, method)}.
 #' @references Hochreiter & Schmidhuber (1997), Neural Computation 9(8).
 #' @examples
+#' set.seed(1)
 #' morie_lstmc_lstm_cell(x = rnorm(50))
 #' @export
 morie_lstmc_lstm_cell <- function(x, h_prev = NULL, c_prev = NULL,

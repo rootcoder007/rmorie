@@ -21,6 +21,7 @@ guarantees a stable fitted model. Mirrors
 \code{morie.fn.rgyw}.
 }
 \examples{
+set.seed(1)
 morie_yule_walker(rnorm(200), order = 2)$stable
 }
 \references{

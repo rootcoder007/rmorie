@@ -20,6 +20,7 @@
 #'   attention networks?, ICLR 2022, eq. (7). arXiv:2105.14491
 #' @export
 #' @examples
+#' set.seed(1)
 #' A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 #' X <- matrix(rnorm(6), 3, 2)
 #' GatV2(A, X)

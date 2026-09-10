@@ -30,6 +30,7 @@ downward by exactly \code{(N-p-1)/N}; both are returned. Eq. (3.11)
 adds \verb{(N-p-1) sigma^2_hat ~ sigma^2 chi^2_\{N-p-1\}}.
 }
 \examples{
+set.seed(1)
 X <- matrix(stats::rnorm(120), 40)
 morie_esl_residual_variance(X, stats::rnorm(40))$df
 }

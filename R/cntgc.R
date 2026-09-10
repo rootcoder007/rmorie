@@ -10,6 +10,7 @@
 #'   max_C, n.
 #' @importFrom stats chisq.test
 #' @examples
+#' set.seed(1)
 #' morie_contingency_coefficient(x = matrix(sample(1:5, 50, TRUE), 10, 5))
 #' @export
 morie_contingency_coefficient <- function(x) {

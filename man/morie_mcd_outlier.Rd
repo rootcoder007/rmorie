@@ -44,6 +44,7 @@ the returned \code{classical_distance} is there to make the
 difference visible.
 }
 \examples{
+set.seed(1)
 X <- rbind(matrix(rnorm(200), ncol = 2), cbind(rnorm(5, 6), rnorm(5, 6)))
 sum(morie_mcd_outlier(X, seed = 1)$outlier)
 }

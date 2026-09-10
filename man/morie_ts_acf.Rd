@@ -23,5 +23,6 @@ the lag index and the values always share the same ordering as the
 underlying series.
 }
 \examples{
+set.seed(1)
 morie_ts_acf(cumsum(rnorm(50)), lag_max = 5)
 }

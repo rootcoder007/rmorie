@@ -283,6 +283,7 @@ mrm_gentrification_panel <- function(df,
 #' @param ... Ignored; accepted for S3 consistency.
 #' @return \code{x}, invisibly.
 #' @examples
+#' set.seed(1)
 #' \donttest{
 #' if (FALSE) {
 #'   df <- data.frame(

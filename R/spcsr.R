@@ -19,6 +19,7 @@
 #'   mean_nn, expected_nn, clark_evans, lambda_est, area.
 #' @references Schabenberger & Gotway (2005), Ch 3, Secs 3.2-3.3.
 #' @examples
+#' set.seed(1)
 #' spcsr(matrix(runif(400), 200, 2) * 10, region = c(0, 0, 10, 10))$clark_evans
 #' @export
 spcsr <- function(points, region = NULL) {

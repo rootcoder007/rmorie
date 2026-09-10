@@ -249,6 +249,7 @@
 #' @references Hastie, Tibshirani and Friedman (2009), Sec. 3.2,
 #'   Eqs. (3.8) and (3.11).
 #' @examples
+#' set.seed(1)
 #' X <- matrix(stats::rnorm(120), 40)
 #' morie_esl_residual_variance(X, stats::rnorm(40))$df
 #' @export
@@ -317,6 +318,7 @@ morie_esl_residual_variance <- function(X, y, beta = NULL) {
 #' @references Hastie, Tibshirani and Friedman (2009), Sec. 6.6,
 #'   Eqs. (6.22)-(6.24); Parzen (1962).
 #' @examples
+#' set.seed(1)
 #' morie_esl_kernel_density(c(-1, 0, 1), stats::rnorm(200))$density
 #' @export
 morie_esl_kernel_density <- function(x, data, lambda_ = NULL) {
@@ -396,6 +398,7 @@ morie_esl_kernel_density <- function(x, data, lambda_ = NULL) {
 #' @references Hastie, Tibshirani and Friedman (2009), Sec. 7.11,
 #'   Eqs. (7.54)-(7.56); Efron and Tibshirani (1997).
 #' @examples
+#' set.seed(1)
 #' X <- matrix(stats::rnorm(150), 50)
 #' morie_esl_bootstrap_err(X, stats::rnorm(50), B = 20)$err_loo_boot
 #' @export
@@ -594,6 +597,7 @@ morie_esl_oob_632 <- function(err_train, err_loo_boot, gamma = NULL,
 #' @references Hastie, Tibshirani and Friedman (2009), Ch. 15,
 #'   Algorithm 15.1 and Secs. 15.2-15.3; Breiman (2001).
 #' @examples
+#' set.seed(1)
 #' X <- matrix(stats::rnorm(300), 100)
 #' morie_esl_random_forest(X, X[, 1] + stats::rnorm(100), B = 10)$mtry
 #' @export

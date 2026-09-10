@@ -25,5 +25,6 @@ Named list with \code{forecast, fitted, trend, seasonal,
 N-BEATS-style polynomial + Fourier basis-expansion forecasting
 }
 \examples{
+set.seed(1)
 morie_nbeats_basis(x = rnorm(50))
 }

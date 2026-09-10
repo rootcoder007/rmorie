@@ -11,6 +11,7 @@
 #' @return Named list with estimate, se, S_hat, t, h, n, method.
 #' @importFrom stats median pnorm
 #' @examples
+#' set.seed(1)
 #' fzmrl(x = rnorm(50))
 #' @export
 fzmrl <- function(x, t = NULL, h = NULL) {

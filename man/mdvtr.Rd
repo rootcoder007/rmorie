@@ -38,6 +38,7 @@ used to report the normal-theory value as \code{se} outright, which made
 its intervals wrong on every non-normal electorate without saying so.
 }
 \examples{
+set.seed(1)
 mdvtr(x = rnorm(50))
 }
 \references{

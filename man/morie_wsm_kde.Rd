@@ -33,6 +33,7 @@ and then improves on twice because it oversmooths skewed,
 long-tailed and bimodal data.
 }
 \examples{
+set.seed(1)
 morie_wsm_kde(c(-1, 0, 1), stats::rnorm(200))$h
 }
 \references{

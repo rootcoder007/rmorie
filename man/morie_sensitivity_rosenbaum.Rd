@@ -36,6 +36,7 @@ alternatively delegates to \code{sensitivitymv::senmv()} when
 sign-score bounds (Rosenbaum 2002, Section 4.3).
 }
 \examples{
+set.seed(1)
 if (requireNamespace("rbounds", quietly = TRUE) && requireNamespace("stdReg", quietly = TRUE)) {
   morie_sensitivity_rosenbaum(treated = rnorm(30, 0.5), control = rnorm(30))
 }

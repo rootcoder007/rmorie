@@ -24,5 +24,6 @@ Named list: \code{t}, \code{df}, \code{p_value}, \code{ci}.
 One-sample t-test
 }
 \examples{
+set.seed(1)
 morie_one_sample_t_test(x = rnorm(50))
 }

@@ -27,6 +27,7 @@ standard way to get standard errors wrong. Mirrors
 \code{morie.fn.ksr057}.
 }
 \examples{
+set.seed(1)
 morie_m_normality(matrix(rnorm(200), ncol = 2))$information_equality_assumed
 }
 \references{

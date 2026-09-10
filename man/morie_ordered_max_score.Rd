@@ -56,6 +56,7 @@ first coefficient at 1 and \eqn{\alpha_1 = 0}. Mirrors
 \code{morie.fn.hrzormsc}.
 }
 \examples{
+set.seed(1)
 x <- matrix(rnorm(600), ncol = 2)
 ys <- x \%*\% c(1, -0.7) + rnorm(300)
 y <- findInterval(ys, c(-1, 0, 1.2))

@@ -22,6 +22,7 @@ A list with \code{output}, \code{kv_cache_ratio}, \code{estimate}, \code{n}, \co
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 Qh <- lapply(1:4, function(i) matrix(stats::rnorm(6), 3, 2))
 Ks <- matrix(stats::rnorm(6), 3, 2)
 Vs <- matrix(stats::rnorm(6), 3, 2)

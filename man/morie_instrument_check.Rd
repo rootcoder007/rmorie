@@ -30,6 +30,7 @@ residual, not a test, and the key is named accordingly. Mirrors
 \code{morie.fn.hrzinst}.
 }
 \examples{
+set.seed(1)
 z <- rnorm(200)
 morie_instrument_check(z + rnorm(200), z)$relevant
 }

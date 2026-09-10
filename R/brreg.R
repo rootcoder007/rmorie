@@ -10,6 +10,7 @@
 #' @return list(estimate, beta, intercept, se, beta_se, lam, n, p, method).
 #' @references Montesinos Lopez Ch 4.
 #' @examples
+#' set.seed(1)
 #' morie_bayesian_ridge_regression(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_bayesian_ridge_regression <- function(x, y, lam = NULL) {

@@ -36,6 +36,7 @@ EMPIRICAL distribution. Its bearing on the real one rests on the
 bootstrap being consistent for the statistic at hand.
 }
 \examples{
+set.seed(1)
 morie_wsm_bootstrap(stats::rnorm(100), mean, B = 100)$se
 }
 \references{

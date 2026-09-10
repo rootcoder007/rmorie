@@ -50,6 +50,7 @@ Passing sample shares instead silently reproduces the uncorrected
 estimator. Mirrors \code{morie.fn.hrzcbsm}.
 }
 \examples{
+set.seed(1)
 x <- matrix(rnorm(400), ncol = 2)
 y <- as.numeric(x \%*\% c(1, -0.8) + rnorm(200) > 0)
 morie_choice_based_max_score(x, y, 0.5)$beta

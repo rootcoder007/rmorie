@@ -19,5 +19,6 @@ Named list with \code{trend, seasonal, residual, slope,
 Prophet-style additive decomposition (linear trend + Fourier seasonality)
 }
 \examples{
+set.seed(1)
 morie_prophet_components(x = rnorm(50))
 }

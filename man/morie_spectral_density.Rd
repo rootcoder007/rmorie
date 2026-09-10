@@ -21,5 +21,6 @@ Named list with \code{frequencies, psd, n_segments, nperseg,
 Welch power spectral density
 }
 \examples{
+set.seed(1)
 morie_spectral_density(x = rnorm(50))
 }

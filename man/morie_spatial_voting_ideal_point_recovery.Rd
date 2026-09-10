@@ -19,6 +19,7 @@ Numeric matrix of respondent ideal points.
 Ideal-point recovery from unfolding output
 }
 \examples{
+set.seed(1)
 morie_spatial_voting_ideal_point_recovery(matrix(rnorm(6), 3, 2))
 }
 \references{

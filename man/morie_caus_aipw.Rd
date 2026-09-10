@@ -42,6 +42,7 @@ reports how many were touched, because trimming changes the
 estimand to an average over the retained region.
 }
 \examples{
+set.seed(1)
 n <- 200
 e <- rep(0.5, n)
 T <- stats::rbinom(n, 1, e)

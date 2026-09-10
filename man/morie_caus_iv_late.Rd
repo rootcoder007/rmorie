@@ -35,6 +35,7 @@ sample the estimate describes. A LATE from a 4\% complier share is
 a statement about 4\% of the sample, however tight its interval.
 }
 \examples{
+set.seed(1)
 Z <- stats::rbinom(500, 1, 0.5)
 D <- Z * stats::rbinom(500, 1, 0.6)
 morie_caus_iv_late(3 * D + stats::rnorm(500), D, Z)$late

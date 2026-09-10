@@ -17,6 +17,7 @@
 #' @return list(estimate, y_hat, oob_score, feature_importance, se, n, method).
 #' @references Breiman (2001); Montesinos Lopez Ch 8.
 #' @examples
+#' set.seed(1)
 #' morie_random_forest_genomic(
 #'   x = rnorm(50), y = rnorm(50),
 #'   markers = matrix(sample(0:2, 200, TRUE), 50, 4)

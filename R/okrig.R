@@ -16,6 +16,7 @@
 #' @return Named list: estimate, se, n, method.
 #' @references Schabenberger & Gotway (2005), Ch 4.
 #' @examples
+#' set.seed(1)
 #' okrig(x = rnorm(50), coords = matrix(runif(100), 50, 2), target = rnorm(50))
 #' @export
 okrig <- function(x, coords, target, model = "exponential",

@@ -42,6 +42,7 @@ divides by it. That asymmetry is why they take different
 bandwidths in practice. Mirrors \code{morie.fn.hrzfneps}.
 }
 \examples{
+set.seed(1)
 n <- 60
 tt <- 3
 x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))

@@ -38,6 +38,7 @@ mandatory rather than a refinement. Mirrors
 \code{morie.fn.hrzfnu}.
 }
 \examples{
+set.seed(1)
 n <- 60
 tt <- 3
 x <- array(rnorm(n * tt * 2), dim = c(n, tt, 2))

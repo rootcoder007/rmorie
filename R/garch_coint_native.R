@@ -30,6 +30,7 @@
 #' @references Tsay, R. S. (2010). Analysis of Financial Time Series
 #'   (3rd ed.). Wiley. Ch. 3.
 #' @examples
+#' set.seed(1)
 #' morie_garch_recursion(rnorm(50), list(omega = .05, alpha = .1, beta = .85))
 #' @export
 morie_garch_recursion <- function(eps, params, spec = "garch") {

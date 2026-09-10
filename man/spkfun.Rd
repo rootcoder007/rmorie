@@ -36,6 +36,7 @@ curve every CSR comparison is made against. Clustering shows as
 K(h) > pi h^2 at short lags, regularity as K(h) < pi h^2.
 }
 \examples{
+set.seed(1)
 pts <- matrix(runif(400), 200, 2) * 10
 spkfun(pts, r = seq(0.1, 1.5, length.out = 8), region = c(0, 0, 10, 10))
 }

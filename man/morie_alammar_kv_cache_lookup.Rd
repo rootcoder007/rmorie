@@ -19,6 +19,7 @@ A list with \code{output}, \code{attention}, \code{K_cache}, \code{V_cache}, \co
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 K <- matrix(stats::rnorm(12), 4, 3)
 V <- matrix(stats::rnorm(8), 4, 2)
 k5 <- matrix(stats::rnorm(3), 1, 3)

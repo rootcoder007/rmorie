@@ -29,6 +29,7 @@ vector falls within \code{tol_deg} of the direction and apply Levene's test
 across direction groups.
 }
 \examples{
+set.seed(1)
 morie_aniso(x = rnorm(50), coords = matrix(runif(100), 50, 2))
 }
 \references{

@@ -20,6 +20,7 @@ width exceeds \code{max_width}, giving an explicit mechanism to bound
 forecasts by a specified error margin.
 }
 \examples{
+set.seed(1)
 m <- morie_ts_arima(cumsum(rnorm(80)), order = c(1, 1, 0))
 fc <- morie_ts_forecast(m, h = 30)
 morie_ts_trim_forecast(fc, max_width = 5)$h

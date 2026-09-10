@@ -12,6 +12,7 @@
 #'   `marginal_yea`, `marginal_nay`, `pct_yea`, `lopsided_pct`,
 #'   `method`.
 #' @examples
+#' set.seed(1)
 #' rcall(x = rnorm(50))
 #' @export
 rcall <- function(x) {

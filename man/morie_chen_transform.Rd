@@ -56,6 +56,7 @@ accepted for interface symmetry and NOT used -- (6.67) contains no
 kernel. Mirrors \code{morie.fn.hrzchet}.
 }
 \examples{
+set.seed(1)
 n <- 80
 x <- cbind(rnorm(n), rnorm(n))
 y <- exp(x \%*\% c(1, -0.5) + rlogis(n))

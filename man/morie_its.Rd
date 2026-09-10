@@ -46,6 +46,7 @@ Inference uses native Newey-West (Bartlett-kernel) HAC standard
 errors to respect serial correlation.
 }
 \examples{
+set.seed(1)
 df <- data.frame(t = 1:60,
                  y = 10 + 0.2 * (1:60) + ifelse(1:60 >= 40, 5, 0) +
                    rnorm(60))

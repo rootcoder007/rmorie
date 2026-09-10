@@ -43,6 +43,7 @@ of the binding inequalities, not at the sample slack, and skipping
 the recentring makes the cutoff grow with slack.
 }
 \examples{
+set.seed(1)
 d <- cbind(stats::rnorm(50, 1), stats::rnorm(50, 3))
 g <- function(d, th) cbind(d[, 1] - th, th - d[, 2])
 morie_bnd_moment_inequality(d, g, c(2))$criterion

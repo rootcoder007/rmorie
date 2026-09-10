@@ -31,6 +31,7 @@ both rhos into ONE objective, and the tau-scale is itself a
 robust, efficiency-calibrated residual scale.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(60)
 morie_rob_tau(x, 1 + 2 * x + stats::rnorm(60), n_subsets = 50)$beta
 }

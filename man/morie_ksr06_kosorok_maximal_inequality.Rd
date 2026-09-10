@@ -20,6 +20,7 @@ E* of sup |G_n(f)| <= J_bracket(theta_n, F, L_2(P)) * sigma_n for the
 indicator class with theta_n = 0.5.
 }
 \examples{
+set.seed(1)
 morie_ksr06_kosorok_maximal_inequality(x = rnorm(50))
 }
 \references{

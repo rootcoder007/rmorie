@@ -18,6 +18,7 @@
 #' @return Named list \code{(loss, estimate, dW, db, dx, a, z, method)}.
 #' @references Rumelhart, Hinton & Williams (1986); Goodfellow et al. (2016).
 #' @examples
+#' set.seed(1)
 #' morie_bkprp_backpropagation(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_bkprp_backpropagation <- function(x, y, w = NULL, b = NULL,

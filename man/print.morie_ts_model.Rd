@@ -18,6 +18,7 @@
 Print method for \code{morie_ts_model} objects
 }
 \examples{
+set.seed(1)
 \donttest{
 obj <- morie_ts_arima(cumsum(rnorm(60)), order = c(1, 1, 0))
 print(obj)

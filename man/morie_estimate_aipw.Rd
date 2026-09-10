@@ -30,6 +30,7 @@ A list with \code{n_used}, \code{n_discarded}, \code{estimand}, \code{ate}, \cod
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 df <- data.frame(t = rbinom(60, 1, 0.4), x = rnorm(60))
 morie_estimate_aipw(df, "t", "y", "x", outcome_model = "linear")
 }

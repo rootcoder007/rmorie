@@ -38,6 +38,7 @@ Wraps \code{caret::train} with method = "glm" (classification) or
 "lm" (regression) by default; users can pass any caret \code{method}.
 }
 \examples{
+set.seed(1)
 \dontshow{if (requireNamespace("caret", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 morie_grid_search_cv(
   x = matrix(rnorm(150), 50, 3), y = rnorm(50),

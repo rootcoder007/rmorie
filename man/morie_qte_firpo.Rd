@@ -23,6 +23,7 @@ Weighted-quantile difference: treated quantiles weighted by \code{1/e},
 control quantiles by \code{1/(1 - e)}. Mirrors \code{morie.fn.causqte}.
 }
 \examples{
+set.seed(1)
 n <- 3000
 x <- stats::rnorm(n)
 e <- pmin(pmax(1/(1 + exp(-x)), 0.05), 0.95)

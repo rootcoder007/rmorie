@@ -10,6 +10,7 @@
 #' @return Named list with `n_bridges`, `bridge_ids`, `share`, `n1`,
 #'   `n2`, `method`.
 #' @examples
+#' set.seed(1)
 #' brdgr(x = rnorm(50))
 #' @export
 brdgr <- function(x, y = NULL) {

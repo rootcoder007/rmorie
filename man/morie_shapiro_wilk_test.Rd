@@ -18,5 +18,6 @@ Named list: \code{W}, \code{p_value}, \code{is_normal}.
 Shapiro-Wilk normality test
 }
 \examples{
+set.seed(1)
 morie_shapiro_wilk_test(x = rnorm(50))
 }

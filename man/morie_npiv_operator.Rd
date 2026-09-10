@@ -28,6 +28,7 @@ visible rather than an abstraction. Mirrors
 \code{morie.fn.hrznpivt}.
 }
 \examples{
+set.seed(1)
 z <- rnorm(200)
 morie_npiv_operator(z + rnorm(200), z)$severity
 }

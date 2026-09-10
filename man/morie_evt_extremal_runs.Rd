@@ -29,6 +29,7 @@ clusters, too long merges them); the intervals estimator
 cross-check.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(500)
 morie_evt_extremal_runs(x, stats::quantile(x, 0.95))$theta
 }

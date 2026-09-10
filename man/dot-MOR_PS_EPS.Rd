@@ -15,6 +15,7 @@ estimand = "ATE")} when \pkg{WeightIt} is installed; falls back
 to \code{stats::glm(family = binomial())} otherwise.
 }
 \examples{
+set.seed(1)
 if (requireNamespace("WeightIt", quietly = TRUE)) {
   df <- data.frame(t = c(0, 1, 0, 1, 0, 1), x = rnorm(6))
   ps <- morie_estimate_propensity_scores(df, "t", "x")

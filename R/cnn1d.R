@@ -15,6 +15,7 @@
 #' @return Named list \code{(y, estimate, output_length, method)}.
 #' @references Goodfellow et al. (2016), Deep Learning, Ch 9.
 #' @examples
+#' set.seed(1)
 #' morie_cnn1d_conv1d_forward(x = rnorm(50), w = rnorm(3))
 #' @export
 morie_cnn1d_conv1d_forward <- function(x, w, b = 0, stride = 1L, padding = 0L) {

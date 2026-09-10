@@ -16,6 +16,7 @@
 #'   std_variance, n.
 #' @references Schabenberger & Gotway (2005), Ch 5.
 #' @examples
+#' set.seed(1)
 #' co <- matrix(runif(40), 20, 2) * 5
 #' spkfnn(co, rnorm(20), list(model = "exponential", sill = 1, range = 2))
 #' @export

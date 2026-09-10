@@ -20,6 +20,7 @@ list(estimate, beta, intercept, se, beta_se, lam, n, p, method).
 beta_hat = solve(X'X + lambda*I) \%*\% X'y
 }
 \examples{
+set.seed(1)
 morie_bayesian_ridge_regression(x = rnorm(50), y = rnorm(50))
 }
 \references{

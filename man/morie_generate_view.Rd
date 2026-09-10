@@ -47,6 +47,7 @@ representations by mutual information estimation and maximization",
 }
 \keyword{internal}
 \examples{
+set.seed(1)
 rng <- rmorie:::.ghc_rng(2L)
 X <- matrix(runif(12), 4, 3)
 edges <- list(c(0, 1), c(1, 2), c(2, 3), c(3, 0))

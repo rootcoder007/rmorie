@@ -20,6 +20,7 @@
 #'   n_estimators, learning_rate, max_depth, task, n, method.
 #' @importFrom stats predict
 #' @examples
+#' set.seed(1)
 #' morie_gradient_boosting_ensemble(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_gradient_boosting_ensemble <- function(x, y, n_estimators = 100L,

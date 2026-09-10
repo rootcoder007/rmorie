@@ -43,6 +43,7 @@ treatment-minus-imputation differences. Standard error by cluster
 conservative and assumption-light.
 }
 \examples{
+set.seed(1)
 df <- expand.grid(id = 1:40, t = 1:8)
 df$g <- ifelse(df$id <= 20, 5L, NA)
 df$y <- rnorm(nrow(df)) + ifelse(!is.na(df$g) & df$t >= df$g, 2, 0)

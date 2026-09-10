@@ -33,6 +33,7 @@ recommends plotting L(h) - h against h: clustering appears as positive
 values at short distances, regularity as negative ones.
 }
 \examples{
+set.seed(1)
 pts <- matrix(runif(400), 200, 2) * 10
 splfun(pts, r = seq(0.1, 1.5, length.out = 8), region = c(0, 0, 10, 10))
 }

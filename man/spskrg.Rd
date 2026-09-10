@@ -33,6 +33,7 @@ location returns that observation with zero variance, because sigma
 becomes a column of Sigma. The book calls this honouring the data.
 }
 \examples{
+set.seed(1)
 co <- matrix(runif(40), 20, 2) * 5
 spskrg(co, rnorm(20), matrix(c(2, 2), 1, 2),
        list(model = "exponential", sill = 1, range = 2))

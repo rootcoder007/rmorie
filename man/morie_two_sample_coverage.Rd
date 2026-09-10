@@ -21,5 +21,6 @@ ordered X-sample.  Under H0 the expected block proportion is
 \code{1 / (m + 1)}.
 }
 \examples{
+set.seed(1)
 morie_two_sample_coverage(x = rnorm(50), y = rnorm(50))
 }

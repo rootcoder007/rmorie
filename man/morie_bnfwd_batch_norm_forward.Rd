@@ -28,6 +28,7 @@ R parity for \code{morie.fn.bnfwd.batch_norm_forward}.
 \deqn{y_i = \gamma\,\frac{x_i - \mu}{\sqrt{\sigma^2 + \epsilon}} + \beta}{y_i = gamma frac{x_i - mu}{sqrt(sigma^2 + epsilon)} + beta}
 }
 \examples{
+set.seed(1)
 morie_bnfwd_batch_norm_forward(x = rnorm(50))
 }
 \references{

@@ -35,6 +35,7 @@ categorical margins by iterative proportional fitting and cannot
 go negative. Mirrors \code{morie.fn.calibr}.
 }
 \examples{
+set.seed(1)
 X <- cbind(1, runif(50))
 morie_calibration_chi2(rnorm(50), X, rep(10, 50),
                        c(500, 260))$margins_reproduced

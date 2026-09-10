@@ -236,6 +236,7 @@
 #'   Interrupted time series regression for the evaluation of public
 #'   health interventions. \emph{IJE}, 46(1), 348--355.
 #' @examples
+#' set.seed(1)
 #' df <- data.frame(t = 1:60,
 #'                  y = 10 + 0.2 * (1:60) + ifelse(1:60 >= 40, 5, 0) +
 #'                    rnorm(60))

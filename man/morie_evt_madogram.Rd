@@ -28,6 +28,7 @@ REPORTED -- heavy clipping means the extreme-value model itself
 fits badly.
 }
 \examples{
+set.seed(1)
 morie_evt_madogram(stats::rnorm(100), stats::rnorm(100),
   t = c(0.5)
 )$A

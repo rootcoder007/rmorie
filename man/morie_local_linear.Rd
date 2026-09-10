@@ -24,6 +24,7 @@ preferring it to Nadaraya-Watson. The local slope estimates m'(x)
 for free. Mirrors \code{morie.fn.hrzllr}.
 }
 \examples{
+set.seed(1)
 morie_local_linear(runif(200), runif(200))$bandwidth
 }
 \references{

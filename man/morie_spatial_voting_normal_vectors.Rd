@@ -19,6 +19,7 @@ List with \code{normal_vector}, \code{angle_degrees}, \code{angle_radians},
 Normal-vector projection of an external measure
 }
 \examples{
+set.seed(1)
 morie_spatial_voting_normal_vectors(matrix(rnorm(20), 10, 2), rnorm(10))
 }
 \references{

@@ -33,6 +33,7 @@ Formula: H <- relu((1 - alpha) Ah H + alpha H0), repeated K times,
 with Ah = Dt^\{-1/2\}(A + I)Dt^\{-1/2\}.
 }
 \examples{
+set.seed(1)
 A <- matrix(c(0, 1, 0, 1, 0, 1, 0, 1, 0), 3, 3, byrow = TRUE)
 H0 <- matrix(rnorm(6), 3, 2)
 GcnII(A, H0)

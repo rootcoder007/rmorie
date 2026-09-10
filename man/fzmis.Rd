@@ -24,6 +24,7 @@ With normal-reference plug-in \eqn{R(f'')=3/(8\sqrt\pi \sigma^5)}{R(f'')=3/(8sqr
 Returns h_opt minimising MISE.
 }
 \examples{
+set.seed(1)
 fzmis(x = rnorm(50))
 }
 \keyword{internal}

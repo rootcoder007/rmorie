@@ -14,6 +14,7 @@
 #' @return Named list: r, l, l_minus_r, k, lambda_est.
 #' @references Schabenberger & Gotway (2005), Sec 3.4.2, p. 103.
 #' @examples
+#' set.seed(1)
 #' pts <- matrix(runif(400), 200, 2) * 10
 #' splfun(pts, r = seq(0.1, 1.5, length.out = 8), region = c(0, 0, 10, 10))
 #' @export

@@ -8,6 +8,7 @@
 #' @return Named list with \code{approximation, details, energies, level,
 #'   n, wavelet, method}.
 #' @examples
+#' set.seed(1)
 #' morie_wavelet_time_series(x = rnorm(50))
 #' @export
 morie_wavelet_time_series <- function(x, wavelet = "haar", level = NULL) {

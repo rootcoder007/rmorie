@@ -33,6 +33,7 @@ Poole 2013).  Alternates between respondent and stimulus coordinates,
 restarting from random seeds and keeping the lowest-stress fit.
 }
 \examples{
+set.seed(1)
 D <- matrix(stats::runif(20 * 6), 20, 6)
 morie_spatial_voting_mlsmu6(D, n_dims = 2, n_restarts = 1, max_iter = 50)
 }

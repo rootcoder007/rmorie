@@ -24,6 +24,7 @@ Kernel-smoothed MRL \eqn{m(t)=E[X-t|X>t]} with Yang (1978)
 asymptotic SE.
 }
 \examples{
+set.seed(1)
 fzmrl(x = rnorm(50))
 }
 \keyword{internal}

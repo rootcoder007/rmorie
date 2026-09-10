@@ -26,6 +26,7 @@ so a point that is unremarkable in every margin and impossible in the
 joint distribution scores as normal.
 }
 \examples{
+set.seed(1)
 X <- cbind(rnorm(50), rnorm(50))
 str(morie_ecod(X)$score)
 }

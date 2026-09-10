@@ -23,6 +23,7 @@ product of excitation and envelope spectra into a sum, separating
 them in quefrency. Mirrors \code{morie.fn.rgcepsp}.
 }
 \examples{
+set.seed(1)
 morie_cepstrum_pitch(rnorm(1024), 8000)$f0
 }
 \references{

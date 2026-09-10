@@ -9,6 +9,7 @@
 #' @return Named list with estimate, n, method.
 #' @references Kosorok (2008), Ch 7.
 #' @examples
+#' set.seed(1)
 #' morie_ksr16_kosorok_influence_function(x = rnorm(50), y = rnorm(50))
 #' @export
 morie_ksr16_kosorok_influence_function <- function(x, y) {

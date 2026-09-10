@@ -48,6 +48,7 @@
 #'   estimate, method.
 #' @keywords internal
 #' @examples
+#' set.seed(1)
 #' Btblen(as.numeric(filter(rnorm(200), 0.5, "recursive")))$ell
 #' @export
 Btblen <- function(x, method = "circular", c = 2, m_max = NULL) {

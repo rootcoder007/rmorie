@@ -21,5 +21,6 @@ Named list with \code{approximation, details, energies, level,
 Discrete wavelet decomposition for a time series
 }
 \examples{
+set.seed(1)
 morie_wavelet_time_series(x = rnorm(50))
 }

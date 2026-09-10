@@ -31,6 +31,7 @@ gives both blocks, which is why their dependence is determined
 rather than assumed. Mirrors \code{morie.fn.ksr073}.
 }
 \examples{
+set.seed(1)
 morie_joint_convergence(diag(2), matrix(rnorm(200), ncol = 2))$jointly
 }
 \references{

@@ -33,6 +33,7 @@ the point of the constant-correlation restriction, and it is what
 Native throughout; no multivariate GARCH package is used.
 }
 \examples{
+set.seed(1)
 morie_ccc_multivariate_garch(x = matrix(rnorm(150), 50, 3))
 }
 \references{

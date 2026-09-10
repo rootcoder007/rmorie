@@ -21,6 +21,7 @@ Mirrors \code{morie.fn._garch.garch_recursion}. Variance at t = 1 is
 initialised at the sample variance.
 }
 \examples{
+set.seed(1)
 morie_garch_recursion(rnorm(50), list(omega = .05, alpha = .1, beta = .85))
 }
 \references{

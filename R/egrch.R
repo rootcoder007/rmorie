@@ -84,6 +84,7 @@
 #' Nelson, D. B. (1991). Conditional heteroskedasticity in asset returns:
 #' a new approach. \emph{Econometrica}, 59(2), 347-370.
 #' @examples
+#' set.seed(1)
 #' morie_egarch_model(x = rnorm(50))
 #' @export
 morie_egarch_model <- function(x) {

@@ -50,6 +50,7 @@ For random-forest CATE estimation prefer \code{grf::causal_forest}
 (richer heterogeneity, honest sample splitting).
 }
 \examples{
+set.seed(1)
 morie_estimate_cate(
   data = data.frame(
     t = stats::rbinom(100, 1, 0.4),

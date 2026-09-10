@@ -40,6 +40,7 @@ partition averages those breaks away. Mirrors
 \code{morie.fn.gh_c3_14}.
 }
 \examples{
+set.seed(1)
 morie_polya_tree_mixture(rnorm(200), levels = 4)$smoother_than_single
 }
 \references{

@@ -8,6 +8,7 @@
 #' @return Named list with \code{frequencies, psd, n_segments, nperseg,
 #'   fs, n, method}.
 #' @examples
+#' set.seed(1)
 #' morie_spectral_density(x = rnorm(50))
 #' @export
 morie_spectral_density <- function(x, fs = 1, nperseg = NULL) {

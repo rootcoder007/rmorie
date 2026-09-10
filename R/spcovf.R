@@ -22,6 +22,7 @@
 #'   directly), implied_semivariogram (C(0) - C(h)), sill, n_pairs.
 #' @references Schabenberger & Gotway (2005), Secs 1.4.2, 2.4.
 #' @examples
+#' set.seed(1)
 #' spcovf(matrix(runif(200), 100, 2), rnorm(100), n_bins = 5)$sill
 #' @export
 spcovf <- function(coords, z, n_bins = 15, max_dist = NULL) {

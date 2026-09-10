@@ -22,6 +22,7 @@
 #'   angles, omnidirectional, tol.
 #' @references Schabenberger & Gotway (2005), Sec 2.2; correction Sec 4.3.7.
 #' @examples
+#' set.seed(1)
 #' co <- matrix(runif(400), 200, 2) * 10
 #' spiso(co, sin(co[, 1]) + cos(co[, 2]))$relative_spread
 #' @export

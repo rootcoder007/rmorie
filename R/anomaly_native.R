@@ -31,6 +31,7 @@
 #' @references Kriegel, H.-P., Schubert, M. and Zimek, A. (2008).
 #'   Angle-based outlier detection in high-dimensional data. \emph{KDD}.
 #' @examples
+#' set.seed(1)
 #' X <- rbind(matrix(rnorm(60), ncol = 2), c(9, 9))
 #' which.min(morie_abod(X)$abof) # the planted point
 #' @export
@@ -103,6 +104,7 @@ morie_abod <- function(X, k = NULL) {
 #'   detection using empirical cumulative distribution functions.
 #'   \emph{IEEE TKDE}, 35(12), 12181-12193.
 #' @examples
+#' set.seed(1)
 #' X <- cbind(rnorm(50), rnorm(50))
 #' str(morie_ecod(X)$score)
 #' @export
@@ -161,6 +163,7 @@ morie_ecod <- function(X) {
 #' @references Goldstein, M. and Dengel, A. (2012). Histogram-based
 #'   outlier score (HBOS). \emph{KI-2012 Poster and Demo Track}.
 #' @examples
+#' set.seed(1)
 #' X <- cbind(rnorm(100), rnorm(100))
 #' str(morie_hbos(X)$score)
 #' @export
@@ -234,6 +237,7 @@ morie_hbos <- function(X, bins = 10, mode = c("static", "dynamic")) {
 #' @references Liu, F. T., Ting, K. M. and Zhou, Z.-H. (2008).
 #'   Isolation forest. \emph{ICDM}, 413-422.
 #' @examples
+#' set.seed(1)
 #' X <- rbind(matrix(rnorm(200), ncol = 2), c(8, 8))
 #' which.max(morie_isolation_forest(X, n_trees = 50, seed = 1)$score)
 #' @export
@@ -331,6 +335,7 @@ morie_isolation_forest <- function(X, n_trees = 100, sample_size = 256,
 #'   (2000). LOF: identifying density-based local outliers.
 #'   \emph{SIGMOD}, 93-104.
 #' @examples
+#' set.seed(1)
 #' X <- rbind(matrix(rnorm(100), ncol = 2), c(6, 6))
 #' round(max(morie_local_outlier_factor(X, k = 5)$lof), 3)
 #' @export
@@ -389,6 +394,7 @@ morie_local_outlier_factor <- function(X, k = 20) {
 #'   algorithm for the minimum covariance determinant estimator.
 #'   \emph{Technometrics}, 41(3), 212-223.
 #' @examples
+#' set.seed(1)
 #' X <- rbind(matrix(rnorm(200), ncol = 2), cbind(rnorm(5, 6), rnorm(5, 6)))
 #' sum(morie_mcd_outlier(X, seed = 1)$outlier)
 #' @export

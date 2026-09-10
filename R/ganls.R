@@ -17,6 +17,7 @@
 #' @return Named list \code{(d_loss, g_loss, v, estimate, kind, method)}.
 #' @references Goodfellow et al. (2014), NeurIPS.
 #' @examples
+#' set.seed(1)
 #' morie_ganls_gan_loss(D_real = rnorm(20), D_fake = rnorm(20))
 #' @export
 morie_ganls_gan_loss <- function(D_real, D_fake, kind = "minimax") {

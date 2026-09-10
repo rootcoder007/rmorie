@@ -12,6 +12,7 @@
 #' @return named list with `estimate`, `grid`, `density`, `k_post`, `n`
 #' @importFrom utils head tail
 #' @examples
+#' set.seed(1)
 #' morie_ghosal_dpmixture_density(x = rnorm(50))
 #' @export
 morie_ghosal_dpmixture_density <- function(x, alpha = 1.0, sigma = NULL,

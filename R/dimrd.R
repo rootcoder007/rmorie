@@ -14,6 +14,7 @@
 #' @return Named list with `n_dims`, `eigenvalues`, `threshold`,
 #'   `scree_gap`, `method`.
 #' @examples
+#' set.seed(1)
 #' dimrd(x = rnorm(50))
 #' @export
 dimrd <- function(x, threshold = 1) {

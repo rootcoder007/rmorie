@@ -38,6 +38,7 @@ returns a number here; it is simply the wrong one, and nothing in
 the output will say so.
 }
 \examples{
+set.seed(1)
 morie_wsm_plug_in(stats::rnorm(100), mean, B = 50)$se
 }
 \references{

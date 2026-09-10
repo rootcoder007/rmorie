@@ -27,6 +27,7 @@ Sec. 5 interval reads the CI off the ordered pairwise slopes at
 Kendall-tau ranks, so no residual variance is estimated.
 }
 \examples{
+set.seed(1)
 x <- stats::rnorm(30)
 morie_rob_theil_sen(x, 2 * x + stats::rnorm(30))$slope
 }
