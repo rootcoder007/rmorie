@@ -1,4 +1,4 @@
-# cran-comments.md — rmorie 1.2.2
+# cran-comments.md — rmorie 1.2.3
 
 NOT SUBMITTED TO CRAN. `.Rbuildignore`d; this is the local copy of the
 text pasted into the comment box at https://cran.r-project.org/submit.html
@@ -33,12 +33,12 @@ rather than introduce a fix that does not survive regeneration.
 
 ## On the size of the tarball
 
-The tarball is 9.7 MB, above the 5 MB guideline. This is not bundled
-data. The breakdown, compressed:
+The tarball is 9.73 MB (10,204,782 bytes), above the 5 MB guideline.
+This is not bundled data. The breakdown, compressed:
 
-    R/          5.43 MB     2,845 source files
-    man/        2.90 MB    11,418 documented topics
-    tests/      0.89 MB
+    R/          5.46 MB     2,845 source files
+    man/        2.94 MB    11,418 documented topics
+    tests/      0.90 MB
     inst/       0.25 MB
     src/        0.08 MB
 
