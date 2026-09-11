@@ -21,3 +21,12 @@ A step of the agalfsy_native implementation. Called by \code{.agalfsy_apply}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+set.seed(1)
+P <- matrix(rnorm(21), 7, 3)
+R <- .agalfsy_rotate(P, axis = 2L, deg = 37)
+# a rotation is rigid: every pairwise distance survives
+all.equal(as.numeric(dist(R)), as.numeric(dist(P)))
+# and a full turn is the identity
+all.equal(.agalfsy_rotate(P, 2L, 360), P)
+}

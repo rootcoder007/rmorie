@@ -29,3 +29,14 @@ A step of the agalfsy_native implementation. No other function in the package ca
 A list with \code{estimate}, \code{pose}, \code{rmsd}, \code{rmsd_start}, \code{dcc}, \code{success}, \code{improved}, \code{steps}, \code{stop_reason}, \code{reward_total}, \code{trajectory}, \code{policy_kind}, \code{n_actions}, \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+set.seed(4)
+receptor <- matrix(rnorm(36), 12, 3)
+ligand <- matrix(rnorm(15), 5, 3)
+site <- ligand + 3
+res <- morie_agalfsy_rl_pose_search(receptor, ligand, site = site,
+                                    max_steps = 60L, min_steps = 20L,
+                                    window = 10L, seed = 2)
+# the reported pose is a rigid motion of the ligand
+dim(res$pose)
+}

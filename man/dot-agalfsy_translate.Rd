@@ -21,3 +21,11 @@ A step of the agalfsy_native implementation. Called by \code{.agalfsy_apply}.
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+set.seed(1)
+P <- matrix(rnorm(21), 7, 3)
+T1 <- .agalfsy_translate(P, axis = 1L, step = 2.5)
+# only the chosen axis moves
+all.equal(T1[, 2], P[, 2] + 2.5)
+all.equal(T1[, c(1, 3)], P[, c(1, 3)])
+}

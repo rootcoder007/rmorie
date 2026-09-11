@@ -18,3 +18,12 @@ The value of \code{.agalfsy_rotate}.
 0-based here to match the Python arm\'s action numbering, which is a
 REPORTED quantity (it appears in the trajectory).
 }
+\examples{
+set.seed(1)
+P <- matrix(rnorm(21), 7, 3)
+# actions 0-5 translate, 6-11 rotate, each by plus or minus one step
+all.equal(.agalfsy_apply(P, 0L), .agalfsy_translate(P, 0L, 0.1))
+all.equal(.agalfsy_apply(P, 6L), .agalfsy_rotate(P, 0L, 1))
+# an action and its opposite cancel
+all.equal(.agalfsy_apply(.agalfsy_apply(P, 0L), 1L), P)
+}

@@ -23,6 +23,10 @@
 #' @param what Passed to \code{sprintf}.
 #' @return The value of \code{m}, as built in the body.
 #' @export
+#' @examples
+#' .agalfsy_coords(matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE), "ligand")
+#' # a list of triples is accepted too
+#' .agalfsy_coords(list(c(1, 2, 3), c(4, 5, 6)), "ligand")
 .agalfsy_coords <- function(x, what) {
   if (is.matrix(x)) {
     m <- x
@@ -69,6 +73,13 @@
 #' @param B A matrix; indexed by row and column.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(21), 7, 3)
+#' .agalfsy_rmsd(P, P)
+#' # a uniform shift of 3 along one axis gives an RMSD of exactly 3
+#' Q <- P; Q[, 1] <- Q[, 1] + 3
+#' .agalfsy_rmsd(P, Q)
 .agalfsy_rmsd <- function(A, B) {
   n <- nrow(A)
   s <- 0.0
@@ -92,6 +103,14 @@
 #' @param deg Numeric; combined arithmetically in the body.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(21), 7, 3)
+#' R <- .agalfsy_rotate(P, axis = 2L, deg = 37)
+#' # a rotation is rigid: every pairwise distance survives
+#' all.equal(as.numeric(dist(R)), as.numeric(dist(P)))
+#' # and a full turn is the identity
+#' all.equal(.agalfsy_rotate(P, 2L, 360), P)
 .agalfsy_rotate <- function(P, axis, deg) {
   cen <- .agalfsy_centroid(P)
   t <- deg * pi / 180.0
@@ -134,6 +153,13 @@
 #' @param step Numeric; combined arithmetically in the body.
 #' @return The value of \code{P}, as built in the body.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(21), 7, 3)
+#' T1 <- .agalfsy_translate(P, axis = 1L, step = 2.5)
+#' # only the chosen axis moves
+#' all.equal(T1[, 2], P[, 2] + 2.5)
+#' all.equal(T1[, c(1, 3)], P[, c(1, 3)])
 .agalfsy_translate <- function(P, axis, step) {
   P[, axis + 1L] <- P[, axis + 1L] + step
   P
@@ -151,6 +177,14 @@
 #' @param a Numeric; combined arithmetically in the body.
 #' @return The value of \code{.agalfsy_rotate}.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(21), 7, 3)
+#' # actions 0-5 translate, 6-11 rotate, each by plus or minus one step
+#' all.equal(.agalfsy_apply(P, 0L), .agalfsy_translate(P, 0L, 0.1))
+#' all.equal(.agalfsy_apply(P, 6L), .agalfsy_rotate(P, 0L, 1))
+#' # an action and its opposite cancel
+#' all.equal(.agalfsy_apply(.agalfsy_apply(P, 0L), 1L), P)
 .agalfsy_apply <- function(P, a) {
   if (a < 6L) {
     return(.agalfsy_translate(
@@ -180,6 +214,16 @@
 #' @param after Passed to \code{.agalfsy_rmsd}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' set.seed(1)
+#' P <- matrix(rnorm(21), 7, 3)
+#' site <- P + 5
+#' # moving closer to the site pays
+#' .agalfsy_reward(site, P, P + 4.5)
+#' # moving away costs twice as much, which is the paper's asymmetry
+#' .agalfsy_reward(site, P, P - 5)
+#' # standing still earns nothing
+#' .agalfsy_reward(site, P, P)
 .agalfsy_reward <- function(site, before, after) {
   r <- exp(-.agalfsy_rmsd(site, after) / .agalfsy_BOX) -
     exp(-.agalfsy_rmsd(site, before) / .agalfsy_BOX)
@@ -209,6 +253,16 @@
 #' \code{translation_step}, \code{rotation_step_deg}, \code{box}, \code{method},
 #' \code{note}.
 #' @export
+#' @examples
+#' set.seed(4)
+#' receptor <- matrix(rnorm(36), 12, 3)
+#' ligand <- matrix(rnorm(15), 5, 3)
+#' site <- ligand + 3
+#' res <- morie_agalfsy_rl_pose_search(receptor, ligand, site = site,
+#'                                     max_steps = 60L, min_steps = 20L,
+#'                                     window = 10L, seed = 2)
+#' # the reported pose is a rigid motion of the ligand
+#' dim(res$pose)
 morie_agalfsy_rl_pose_search <- function(receptor, ligand, site = NULL,
                                          policy = NULL, critic = NULL,
                                          max_steps = 600L, min_steps = 300L,

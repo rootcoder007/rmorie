@@ -18,3 +18,11 @@ A numeric value.
 correspondence is fixed, and fitting it away would hide the very
 displacement the reward is scoring.
 }
+\examples{
+set.seed(1)
+P <- matrix(rnorm(21), 7, 3)
+.agalfsy_rmsd(P, P)
+# a uniform shift of 3 along one axis gives an RMSD of exactly 3
+Q <- P; Q[, 1] <- Q[, 1] + 3
+.agalfsy_rmsd(P, Q)
+}
