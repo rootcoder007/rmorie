@@ -322,8 +322,9 @@
         x <- xn
         y <- yn
         if (!is.finite(x) || !is.finite(y)) {
-            stop(sprintf("cnvlfc: the coupled map diverged at step %d; ",
-                         "the parameters are outside the bounded regime", i - 1L))
+            stop(sprintf(paste0(
+                "cnvlfc: the coupled map diverged at step %d; ",
+                "the parameters are outside the bounded regime"), i - 1L))
         }
         if (i > nb) {
             X[i - nb] <- x

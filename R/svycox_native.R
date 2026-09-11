@@ -330,9 +330,9 @@
         cells_in_h <- which(cell_h == hh)
         nh <- length(cells_in_h)
         if (nh < 2L) {
-            stop(sprintf("svycox: stratum %s has a single cluster, ",
-                         "so its variance contribution is not estimable",
-                         hh))
+            stop(sprintf(paste0(
+                "svycox: stratum %s has a single cluster, ",
+                "so its variance contribution is not estimable"), hh))
         }
         mean_v <- colSums(cell_totals[cells_in_h, , drop = FALSE]) / nh
         f <- nh / (nh - 1)
@@ -422,9 +422,10 @@
         }
     }
     if (!converged) {
-        stop(sprintf("svycox: Newton-Raphson did not converge in ",
-                     "%d iterations (last step %.3g)",
-                     as.integer(max_iter), hist[length(hist)]))
+        stop(sprintf(paste0(
+            "svycox: Newton-Raphson did not converge in ",
+            "%d iterations (last step %.3g)"),
+            as.integer(max_iter), hist[length(hist)]))
     }
 
     si <- .svycox_score_and_info(T, E, M, w, beta, n, p)
