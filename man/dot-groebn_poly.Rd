@@ -17,3 +17,10 @@ The value of \code{out}, as built in the body.
 \description{
 Polynomial constructor
 }
+\examples{
+# 3x^2 y + 5xy^2 - 2
+f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+names(f)
+# repeated monomials are summed, and a cancellation drops the term
+length(.groebn_poly(list("1_0" = 1, "1_0" = -1)))
+}

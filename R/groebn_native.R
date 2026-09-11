@@ -27,6 +27,9 @@
 #' @param den Numeric; combined arithmetically in the body. Defaults to \code{1L}.
 #' @return A vector, from \code{c}.
 #' @export
+#' @examples
+#' .groebn_fr(2L, 4L)     # kept in lowest terms
+#' .groebn_fr(2L, -4L)    # the sign is carried by the numerator
 .groebn_fr <- function(num, den = 1L) {
   num <- as.integer(num)
   den <- as.integer(den)
@@ -48,6 +51,8 @@
 #' @param b Numeric; combined arithmetically in the body.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' .groebn_gcd(12L, 18L)
 .groebn_gcd <- function(a, b) {
   a <- as.integer(a)
   b <- as.integer(b)
@@ -185,6 +190,9 @@
 #' @param x Optional; may be \code{NULL}. A vector; its length is taken and its elements indexed.
 #' @return Nothing; this branch always raises.
 #' @export
+#' @examples
+#' .groebn_as_fr(5L)
+#' .groebn_as_fr("3/4")
 .groebn_as_fr <- function(x) {
   if (is.null(x)) return(.groebn_fr(0L))
   if (is.character(x) && length(x) == 1L) {
@@ -220,6 +228,9 @@
 #' @param order One of \code{"grevlex"}, \code{"grlex"}, \code{"lex"}.
 #' @return One of two values, depending on the branch taken.
 #' @export
+#' @examples
+#' kf <- .groebn_key("grlex")
+#' kf(c(1L, 2L))    # total degree first, then the exponents
 .groebn_key <- function(order) {
   if (order == "lex") {
     function(e) as.integer(e)
@@ -244,6 +255,8 @@
 #' @param s Character; passed to \code{strsplit}.
 #' @return The value of \code{as.integer}.
 #' @export
+#' @examples
+#' .groebn_parse_key("2_1")
 .groebn_parse_key <- function(s) {
   as.integer(strsplit(s, "_", fixed = TRUE)[[1L]])
 }
@@ -278,6 +291,12 @@
 #' \code{as.integer}.
 #' @return The value of \code{out}, as built in the body.
 #' @export
+#' @examples
+#' # 3x^2 y + 5xy^2 - 2
+#' f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+#' names(f)
+#' # repeated monomials are summed, and a cancellation drops the term
+#' length(.groebn_poly(list("1_0" = 1, "1_0" = -1)))
 .groebn_poly <- function(terms, nvars = NULL) {
   out <- list()
   n <- NULL
@@ -394,6 +413,8 @@
 #' @param F See Usage.
 #' @return A numeric value.
 #' @export
+#' @examples
+#' .groebn_nvars(list(.groebn_poly(list("2_1" = 1))))
 .groebn_nvars <- function(F) {
   for (f in F) {
     if (length(f) > 0L) {
@@ -415,6 +436,10 @@
 #' @param order Passed to \code{.groebn_key}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' f <- .groebn_poly(list("2_0" = 1, "1_1" = 1, "0_2" = 1, "0_0" = 1))
+#' .groebn_monomials(f, "lex")
+#' .groebn_monomials(f, "grlex")
 .groebn_monomials <- function(f, order = "lex") {
   nms <- names(f)
   if (length(nms) == 0L) return(character(0L))
@@ -422,7 +447,10 @@
   keys <- lapply(nms, .groebn_parse_key)
   klist <- lapply(keys, kf)
   kmat <- do.call(rbind, klist)
-  ord <- do.call(order, c(as.data.frame(kmat), list(decreasing = TRUE)))
+  # base::order, named explicitly: the monomial order arrives in a
+  # parameter also called order, which shadows it, so do.call was
+  # looking for a function named "lex".
+  ord <- do.call(base::order, c(as.data.frame(kmat), list(decreasing = TRUE)))
   nms[ord]
 }
 
@@ -437,6 +465,10 @@
 #' @param order Passed to \code{.groebn_monomials}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' f <- .groebn_poly(list("2_0" = 1, "0_3" = 1))
+#' .groebn_leading_monomial(f, "lex")     # lex prefers the x power
+#' .groebn_leading_monomial(f, "grlex")   # grlex prefers the higher degree
 .groebn_leading_monomial <- function(f, order = "lex") {
   ms <- .groebn_monomials(f, order)
   if (length(ms) == 0L) return(NULL)
@@ -588,6 +620,8 @@
 #' @param c Passed to \code{.groebn_as_fr}.
 #' @return The value of \code{lapply}.
 #' @export
+#' @examples
+#' .groebn_scale(.groebn_poly(list("1_0" = 3)), c(1L, 2L))
 .groebn_scale <- function(f, c) {
   q <- .groebn_as_fr(c)
   if (.groebn_fr_is_zero(q)) return(list())
@@ -645,6 +679,11 @@
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{.groebn_sub}.
 #' @export
+#' @examples
+#' f <- .groebn_poly(list("2_0" = 1, "1_1" = 1))
+#' g <- .groebn_poly(list("1_1" = 1, "0_2" = 1))
+#' # the leading terms cancel by construction
+#' .groebn_spoly(f, g, "lex")
 .groebn_spoly <- function(f, g, order = "lex") {
   if (length(f) == 0L || length(g) == 0L)
     stop("groebn: the S-polynomial of the zero polynomial is not defined")
@@ -673,6 +712,12 @@
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return A list with \code{quotients}, \code{remainder}.
 #' @export
+#' @examples
+#' f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+#' G <- list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
+#'           .groebn_poly(list("0_1" = 1, "0_0" = -2)))
+#' d <- .groebn_divide(f, G, "lex")
+#' d$remainder
 .groebn_divide <- function(f, G, order = "lex") {
   Gs <- Filter(function(g) length(g) > 0L, G)
   if (length(Gs) == 0L)
@@ -720,6 +765,12 @@
 #' @param order Passed to \code{.groebn_divide}. Defaults to \code{"lex"}.
 #' @return The value of \code{$}.
 #' @export
+#' @examples
+#' # over <x - 1, y - 2> the normal form of f is the constant f(1, 2)
+#' G <- morie_groebn(list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
+#'                        .groebn_poly(list("0_1" = 1, "0_0" = -2))))$basis
+#' f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+#' .groebn_normal_form(f, G, "lex")     # 3 + 20 - 2 = 24
 .groebn_normal_form <- function(f, G, order = "lex") {
   .groebn_divide(f, G, order)$remainder
 }
@@ -739,6 +790,13 @@
 #' \code{reduced}, \code{n_pairs}, \code{n_reductions}, \code{n_skipped}, \code{pruned},
 #' \code{method}.
 #' @export
+#' @examples
+#' # <x^3 - 2xy, x^2 y - 2y^2 + x>; a name "i_j" is the monomial x^i y^j
+#' f1 <- .groebn_poly(list("3_0" = 1, "1_1" = -2))
+#' f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
+#' res <- .groebn_buchberger(list(f1, f2), order = "grlex")
+#' res$size
+#' res$n_pairs
 .groebn_buchberger <- function(F, order = "lex", prune = TRUE, reduced = TRUE) {
   .groebn_key(order)  # validate
   G <- lapply(F, function(f) if (is.null(f) || length(f) == 0L) NULL else f)
@@ -815,6 +873,12 @@
 #' @param order Passed to \code{.groebn_leading_monomial}. Defaults to \code{"lex"}.
 #' @return The value of \code{[}.
 #' @export
+#' @examples
+#' # <x^3 - 2xy, x^2 y - 2y^2 + x>; a name "i_j" is the monomial x^i y^j
+#' f1 <- .groebn_poly(list("3_0" = 1, "1_1" = -2))
+#' f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
+#' G <- .groebn_buchberger(list(f1, f2), order = "grlex", reduced = FALSE)$basis
+#' length(.groebn_reduce_basis(G, "grlex"))
 .groebn_reduce_basis <- function(G, order = "lex") {
   H <- Filter(function(g) length(g) > 0L, G)
   keep <- list()
@@ -853,9 +917,16 @@
   lms <- vapply(out, function(p) .groebn_leading_monomial(p, order),
                 character(1L))
   kf <- .groebn_key(order)
-  keys <- lapply(lms, kf)
+  # the key function takes an exponent vector; lms holds the monomials as
+  # "i_j" strings, so they have to be parsed first. Feeding the strings in
+  # made as.integer() return NA for every one of them and left the final
+  # ordering of the reduced basis to whatever the NA sort produced.
+  keys <- lapply(lapply(lms, .groebn_parse_key), kf)
   kmat <- do.call(rbind, keys)
-  ord <- do.call(order, c(as.data.frame(kmat), list(decreasing = TRUE)))
+  # base::order, named explicitly: the monomial order arrives in a
+  # parameter also called order, which shadows it, so do.call was
+  # looking for a function named "lex".
+  ord <- do.call(base::order, c(as.data.frame(kmat), list(decreasing = TRUE)))
   out[ord]
 }
 
@@ -873,6 +944,15 @@
 #' @return A list with \code{estimate}, \code{member}, \code{remainder}, \code{order},
 #' \code{basis}, \code{method}.
 #' @export
+#' @examples
+#' g1 <- .groebn_poly(list("1_0" = 1, "0_0" = -1))
+#' g2 <- .groebn_poly(list("0_1" = 1, "0_0" = -2))
+#' # y(x - 1) + 3x(y - 2) lies in the ideal by construction
+#' f <- .groebn_add(.groebn_mul(.groebn_poly(list("0_1" = 1)), g1),
+#'                  .groebn_mul(.groebn_poly(list("1_0" = 3)), g2))
+#' .groebn_ideal_member(f, list(g1, g2))$member
+#' # the constant 1 does not
+#' .groebn_ideal_member(.groebn_poly(list("0_0" = 1)), list(g1, g2))$member
 .groebn_ideal_member <- function(f, F, order = "lex", basis = NULL) {
   G <- if (!is.null(basis)) basis
        else .groebn_buchberger(F, order)$basis
@@ -901,6 +981,14 @@
 #' @param reduced Passed to \code{.groebn_buchberger}. Defaults to \code{TRUE}.
 #' @return The value of \code{.groebn_buchberger}.
 #' @export
+#' @examples
+#' # <x^3 - 2xy, x^2 y - 2y^2 + x>; a name "i_j" is the monomial x^i y^j
+#' f1 <- .groebn_poly(list("3_0" = 1, "1_1" = -2))
+#' f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
+#' res <- morie_groebn(list(f1, f2), order = "grlex")
+#' res$size
+#' # the published basis for this ideal is {x^2, xy, y^2 - x/2}
+#' lapply(res$basis, names)
 morie_groebn <- function(polys, order = "lex", prune = TRUE, reduced = TRUE) {
   polys_norm <- lapply(polys, .groebn_poly)
   .groebn_buchberger(polys_norm, order = order, prune = prune, reduced = reduced)

@@ -17,3 +17,7 @@ A vector, from \code{c}.
 \description{
 Exact rationals (Fraction-equivalent)
 }
+\examples{
+.groebn_fr(2L, 4L)     # kept in lowest terms
+.groebn_fr(2L, -4L)    # the sign is carried by the numerator
+}

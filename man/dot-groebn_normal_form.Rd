@@ -21,3 +21,10 @@ A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# over <x - 1, y - 2> the normal form of f is the constant f(1, 2)
+G <- morie_groebn(list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
+                       .groebn_poly(list("0_1" = 1, "0_0" = -2))))$basis
+f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+.groebn_normal_form(f, G, "lex")     # 3 + 20 - 2 = 24
+}

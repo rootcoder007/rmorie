@@ -17,3 +17,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_buchberger},
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+kf <- .groebn_key("grlex")
+kf(c(1L, 2L))    # total degree first, then the exponents
+}

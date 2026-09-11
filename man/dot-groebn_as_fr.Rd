@@ -17,3 +17,7 @@ A step of the groebn_native implementation. Called by \code{.groebn_poly}, \code
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+.groebn_as_fr(5L)
+.groebn_as_fr("3/4")
+}

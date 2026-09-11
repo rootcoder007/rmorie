@@ -19,3 +19,8 @@ A step of the groebn_native implementation. Called by \code{.groebn_leading_mono
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+f <- .groebn_poly(list("2_0" = 1, "1_1" = 1, "0_2" = 1, "0_0" = 1))
+.groebn_monomials(f, "lex")
+.groebn_monomials(f, "grlex")
+}

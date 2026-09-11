@@ -21,3 +21,10 @@ A step of the groebn_native implementation. Called by \code{.groebn_normal_form}
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+f <- .groebn_poly(list("2_1" = 3, "1_2" = 5, "0_0" = -2))
+G <- list(.groebn_poly(list("1_0" = 1, "0_0" = -1)),
+          .groebn_poly(list("0_1" = 1, "0_0" = -2)))
+d <- .groebn_divide(f, G, "lex")
+d$remainder
+}
