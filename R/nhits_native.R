@@ -198,8 +198,21 @@
   }
   n_knots <- .nhits_expressiveness_knots(H, ratio)
   j_vals <- 0:(n_knots - 1L)
-  inner <- (Lp - 1L + (j_vals + 1L) * (Lp - 1L) / max(n_knots, 1L)) /
-    max(Lp - 1L, 1L)
+  # The knots must reach H steps beyond the window, not one window length
+  # beyond it. In the normalised time the basis is fitted in, u = t/(Lp-1)
+  # spans the whole window, so one original step is 1/(L-1) of it and the
+  # horizon is H/(L-1). The previous expression simplified to
+  # u = 1 + (j+1)/n_knots, putting the final knot at u = 2 whatever H was:
+  # on the ramp 1..60 with a lookback of 48 that forecast 75 where the
+  # answer is 61, and the error grew with the lookback rather than with
+  # the horizon.
+  # linear_interpolate spreads the knots evenly over the H forecast
+  # positions, so knot j belongs at original step 1 + j (H - 1)/(n_knots - 1):
+  # the first knot one step beyond the window and the last exactly H steps
+  # beyond it. u = t/(Lp - 1) spans the window, so one original step is
+  # 1/(L - 1) of it.
+  steps_ahead <- 1 + j_vals * (as.numeric(H) - 1) / max(n_knots - 1L, 1L)
+  inner <- 1 + steps_ahead / max(L - 1L, 1L)
   fb <- lapply(0:as.integer(degree), function(p) inner^p)
   X_fb <- do.call(cbind, fb)
   knots <- as.numeric(X_fb %*% theta)
