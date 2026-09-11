@@ -17,3 +17,8 @@ A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# bin midpoints on the 0..100 pLDDT scale
+.alfesf_lddt_centres(5L)
+range(.alfesf_lddt_centres(50L))
+}

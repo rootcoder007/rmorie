@@ -28,3 +28,14 @@ zero init, fixed step, fixed iteration count, so both language arms
 walk the same path. No line search -- a search that branches on a
 floating-point comparison is exactly what makes two arms disagree.
 }
+\examples{
+set.seed(7)
+n <- 80L
+X <- cbind(1, matrix(rnorm(n), n, 1))
+y <- pmin(as.integer((X[, 2] - min(X[, 2])) /
+                       (diff(range(X[, 2])) + 1e-9) * 10), 9L)
+fit <- .alfesf_fit_multinomial(X, y, n_bins = 10L, l2 = 1e-3,
+                               iters = 50L, lr = 0.5)
+dim(fit$W)
+length(fit$b)
+}

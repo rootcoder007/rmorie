@@ -29,3 +29,16 @@ A step of the alfesf_native implementation. No other function in the package cal
 A list with \code{estimate}, \code{plddt}, \code{plddt_mean}, \code{ptm}, \code{iptm}, \code{pae}, \code{d0}, \code{temperature}, \code{weights}, \code{route}, \code{n_lddt_bins}, \code{n_pae_bins}, \code{method}, \code{note}.
 }
 \keyword{internal}
+\examples{
+# decode pLDDT logits: the score is the binned expectation
+set.seed(2)
+lddt_logits <- matrix(rnorm(6 * 50), nrow = 6, ncol = 50)
+res <- morie_alfesf_esmfold_confidence(lddt_logits = lddt_logits)
+round(res$plddt, 2)
+round(res$plddt_mean, 2)
+# aligned-error logits, one row per residue pair, give PAE and pTM
+pae_logits <- matrix(rnorm(36 * 8), nrow = 36, ncol = 8)
+pae <- morie_alfesf_esmfold_confidence(pae_logits = pae_logits)
+dim(pae$pae)
+round(pae$ptm, 4)
+}

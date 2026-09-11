@@ -19,3 +19,7 @@ A step of the alfesf_native implementation. Called by \code{morie_alfesf_esmfold
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+.alfesf_rows(matrix(1:6, nrow = 2), "features")
+.alfesf_rows(list(c(1, 2, 3), c(4, 5, 6)), "features")
+}
