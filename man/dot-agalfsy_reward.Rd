@@ -21,3 +21,14 @@ A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_po
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+set.seed(1)
+P <- matrix(rnorm(21), 7, 3)
+site <- P + 5
+# moving closer to the site pays
+.agalfsy_reward(site, P, P + 4.5)
+# moving away costs twice as much, which is the paper's asymmetry
+.agalfsy_reward(site, P, P - 5)
+# standing still earns nothing
+.agalfsy_reward(site, P, P)
+}

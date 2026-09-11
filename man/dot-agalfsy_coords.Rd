@@ -19,3 +19,8 @@ A step of the agalfsy_native implementation. Called by \code{morie_agalfsy_rl_po
 See the file header for the source the module follows.
 the source it follows.
 }
+\examples{
+.agalfsy_coords(matrix(c(1, 2, 3, 4, 5, 6), nrow = 2, byrow = TRUE), "ligand")
+# a list of triples is accepted too
+.agalfsy_coords(list(c(1, 2, 3), c(4, 5, 6)), "ligand")
+}
