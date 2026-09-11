@@ -15,10 +15,11 @@
 
 \item{dout}{Passed to \code{.propinf_mlp_backward}.}
 
-\item{grads}{A list; the body reads \code{$phis}, \code{$psis}, \code{$rho} from it.}
+\item{grads}{A zeroed gradient structure to accumulate into.}
 }
 \value{
-The value of \code{for}.
+The accumulated gradient structure, with the same shape as
+\code{grads}: \code{phis}, \code{psis} and \code{rho}.
 }
 \description{
 A step of the propinf_native implementation. Called by \code{.propinf_train_set_meta}.

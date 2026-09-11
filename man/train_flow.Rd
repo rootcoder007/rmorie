@@ -23,7 +23,14 @@ The value of \code{flow}, as built in the body.
 }
 \keyword{internal}
 \examples{
-V <- c(1, 2, 3, 4, 5, 6, 7, 8)
-D <- data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9))
-train_flow(D, V)
+flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+set.seed(1)
+D <- lapply(1:30, function(k) {
+  th <- rnorm(2)
+  list(th, th * 0.5 + rnorm(2, 0, 0.2))
+})
+ll <- function(fl) mean(vapply(D, function(p)
+  flow_logprob(fl, p[[2]], p[[1]]), numeric(1)))
+trained <- train_flow(flow, D, epochs = 10L, lr = 0.02, seed = 1L)
+round(c(before = ll(flow), after = ll(trained)), 3)
 }

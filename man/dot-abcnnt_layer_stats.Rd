@@ -21,3 +21,9 @@ A step of the abcnnt_native implementation. Called by \code{flow_forward}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+L <- .abcnnt_made_layer(3L, 2L, 6L, .ghc_rng(2L), reverse = FALSE)
+st <- .abcnnt_layer_stats(L, x = c(0.5, -0.2, 0.9), t = c(0.1, -0.4))
+st$mu
+st$al       # the log-scale, clamped to [-5, 5]
+}

@@ -51,10 +51,13 @@ the same objective.
 }
 \keyword{internal}
 \examples{
-ratings <- list(c(0, 0, 5), c(0, 1, 3), c(1, 0, 4), c(1, 2, 2),
-                c(2, 1, 5), c(2, 2, 1))
-fit <- morie_funkM(ratings, n_users = 3, n_items = 3, factors = 2,
-                   epochs = 30, seed = 1)
-round(morie_funkM_rmse(ratings, fit$mu, fit$b_user, fit$b_item,
-                       fit$P, fit$Q), 4)
+set.seed(1)
+n_users <- 20L; n_items <- 15L
+u <- sample.int(n_users, 300, TRUE) - 1L
+i <- sample.int(n_items, 300, TRUE) - 1L
+r <- 3 + 0.4 * (u \%\% 3) - 0.3 * (i \%\% 4) + rnorm(300, 0, 0.1)
+ratings <- data.frame(u = u, i = i, r = r)
+fit <- morie_funkM(ratings, n_users, n_items, factors = 3,
+                   epochs = 20, lr = 0.02, seed = 1)
+morie_funkM_rmse(ratings, fit$mu, fit$b_user, fit$b_item, fit$P, fit$Q)
 }

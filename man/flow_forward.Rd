@@ -20,6 +20,8 @@ A list with \code{u}, \code{total}.
 }
 \keyword{internal}
 \examples{
-flow_forward(flow = data.frame(x = c(1, 2, 3, 4), y = c(2, 4, 5, 9)),
-  x = c(1, 2, 3, 4, 5, 6, 7, 8), t = c(1, 2, 3, 4, 5, 6, 7, 8))
+flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 2L, hidden = 4L, seed = 1L)
+fw <- flow_forward(flow, x = c(0.4, -0.7), t = c(0.1, 0.2))
+fw$u        # the latent point x maps to
+fw$total    # the log-Jacobian of the map
 }

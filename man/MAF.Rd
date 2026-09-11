@@ -22,5 +22,9 @@ A list with \code{layers}, \code{dim_x}, \code{dim_t}.
 }
 \keyword{internal}
 \examples{
-MAF(dim_x = 5L, dim_t = 5L)
+flow <- MAF(dim_x = 2L, dim_t = 2L, n_layers = 3L, hidden = 6L, seed = 1L)
+length(flow$layers)
+# the autoregressive ordering alternates between layers
+flow$layers[[1]]$order
+flow$layers[[2]]$order
 }

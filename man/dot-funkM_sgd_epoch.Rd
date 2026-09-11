@@ -26,10 +26,27 @@
 \item{factor}{Optional; may be \code{NULL}. Coerced to integer by the body, with \code{as.integer}.}
 }
 \value{
-A numeric value.
+A list with \code{rmse} for the epoch just run and the updated
+\code{bu}, \code{bi}, \code{P} and \code{Q}.
 }
 \description{
 A step of the funkM_native implementation. Called by \code{morie_funkM}.
 See the file header for the source the module follows.
 source it follows.
+}
+\examples{
+set.seed(1)
+n_users <- 20L; n_items <- 15L
+u <- sample.int(n_users, 300, TRUE) - 1L
+i <- sample.int(n_items, 300, TRUE) - 1L
+r <- 3 + 0.4 * (u \%\% 3) - 0.3 * (i \%\% 4) + rnorm(300, 0, 0.1)
+ratings <- data.frame(u = u, i = i, r = r)
+R <- .funkM_as_ratings(ratings)
+mu <- .funkM_global_mean(R)
+bu <- rep(0, n_users); bi <- rep(0, n_items)
+P <- matrix(0.05, n_users, 2L); Q <- matrix(0.05, n_items, 2L)
+st <- .funkM_sgd_epoch(R, mu, bu, bi, P, Q, lr = 0.02, reg = 0.02)
+st$rmse
+# the updated parameters come back with it
+names(st)
 }

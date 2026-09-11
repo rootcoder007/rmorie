@@ -30,7 +30,8 @@
 \item{hidden_act}{Compared against \code{"tanh"}. Defaults to \code{"relu"}.}
 }
 \value{
-The value of \code{delta}, as built in the body.
+A list with \code{delta}, the gradient with respect to this
+network's input, and \code{grads}, the accumulated parameter gradients.
 }
 \description{
 A step of the propinf_native implementation. Called by \code{.propinf_deepsets_backward}, \code{.propinf_train_vector_meta}.
