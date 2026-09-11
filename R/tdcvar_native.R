@@ -242,10 +242,20 @@
     beta_den <- .tdcvar_logreg(X_den, a_k)
     p_den <- .tdcvar_logreg_pred(X_den, beta_den)
 
+    # The weight needs the probability of the treatment ACTUALLY
+    # RECEIVED, f(A_k = a_k | .), not P(A_k = 1 | .). The two coincide
+    # for a treated subject and are complements for an untreated one, so
+    # using the prediction directly left every a_k = 0 subject with the
+    # wrong weight: on a one-period confounded design their mean weight
+    # came out 2.23 against a correct 1.01, and the stabilized weights
+    # averaged 1.67 when the whole point of stabilizing is that they
+    # average one.
+    f_num <- ifelse(a_k == 1, p_num, 1 - p_num)
+    f_den <- ifelse(a_k == 1, p_den, 1 - p_den)
     if (isTRUE(stabilize)) {
-      w_k <- p_num / p_den
+      w_k <- f_num / f_den
     } else {
-      w_k <- 1 / p_den
+      w_k <- 1 / f_den
     }
 
     cum_w <- cum_w * w_k
