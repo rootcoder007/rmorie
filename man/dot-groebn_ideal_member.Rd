@@ -21,3 +21,13 @@ A list with \code{estimate}, \code{member}, \code{remainder}, \code{order}, \cod
 \description{
 Ideal membership
 }
+\examples{
+g1 <- .groebn_poly(list("1_0" = 1, "0_0" = -1))
+g2 <- .groebn_poly(list("0_1" = 1, "0_0" = -2))
+# y(x - 1) + 3x(y - 2) lies in the ideal by construction
+f <- .groebn_add(.groebn_mul(.groebn_poly(list("0_1" = 1)), g1),
+                 .groebn_mul(.groebn_poly(list("1_0" = 3)), g2))
+.groebn_ideal_member(f, list(g1, g2))$member
+# the constant 1 does not
+.groebn_ideal_member(.groebn_poly(list("0_0" = 1)), list(g1, g2))$member
+}

@@ -19,3 +19,6 @@ A step of the groebn_native implementation. Called by \code{.groebn_reduce_basis
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+.groebn_scale(.groebn_poly(list("1_0" = 3)), c(1L, 2L))
+}

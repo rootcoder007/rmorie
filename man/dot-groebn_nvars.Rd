@@ -15,3 +15,6 @@ A numeric value.
 \description{
 Polynomial queries
 }
+\examples{
+.groebn_nvars(list(.groebn_poly(list("2_1" = 1))))
+}

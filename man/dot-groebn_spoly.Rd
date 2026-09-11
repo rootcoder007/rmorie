@@ -19,3 +19,9 @@ The value of \code{.groebn_sub}.
 \description{
 S-polynomial and division
 }
+\examples{
+f <- .groebn_poly(list("2_0" = 1, "1_1" = 1))
+g <- .groebn_poly(list("1_1" = 1, "0_2" = 1))
+# the leading terms cancel by construction
+.groebn_spoly(f, g, "lex")
+}

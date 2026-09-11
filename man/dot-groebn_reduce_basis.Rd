@@ -19,3 +19,10 @@ A step of the groebn_native implementation. Called by \code{.groebn_buchberger}.
 See the file header for the source the module follows.
 source it follows.
 }
+\examples{
+# <x^3 - 2xy, x^2 y - 2y^2 + x>; a name "i_j" is the monomial x^i y^j
+f1 <- .groebn_poly(list("3_0" = 1, "1_1" = -2))
+f2 <- .groebn_poly(list("2_1" = 1, "0_2" = -2, "1_0" = 1))
+G <- .groebn_buchberger(list(f1, f2), order = "grlex", reduced = FALSE)$basis
+length(.groebn_reduce_basis(G, "grlex"))
+}
