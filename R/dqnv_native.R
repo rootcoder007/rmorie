@@ -185,9 +185,12 @@
   results <- vector("list", m)
   n_data <- length(buf$data)
   for (i in seq_len(m)) {
-    res <- .ghc_unif(rng_state, 1L)
-    rng_state <- res$s
-    u_val <- res$v[1L]
+    # .ghc_unif returns the draws themselves and advances rng_state in
+    # place, it being an environment. There is no list with $s and $v, so
+    # res$s raised "$ operator is invalid for atomic vectors" and took
+    # the whole function with it -- and use_replay defaults to TRUE, so
+    # morie_dqnv could not run at all on its own defaults.
+    u_val <- as.numeric(.ghc_unif(rng_state, 1L))[1L]
     idx <- (as.integer(u_val * n_data)) %% n_data
     results[[i]] <- buf$data[[idx + 1L]]
   }
@@ -251,13 +254,11 @@ morie_dqnv <- function(P, R, n_states, n_actions, gamma = 0.99, alpha = 0.1,
   C_int <- as.integer(C)
 
   for (t in seq_len(as.integer(steps)) - 1L) {
-    res <- .ghc_unif(rng_state, 1L)
-    rng_state <- res$s
-    a <- (as.integer(res$v[1L] * nA)) %% nA
+    # same contract as in the sampler: the draws come back directly and
+    # rng_state advances in place
+    a <- (as.integer(as.numeric(.ghc_unif(rng_state, 1L))[1L] * nA)) %% nA
 
-    res <- .ghc_unif(rng_state, 1L)
-    rng_state <- res$s
-    u <- res$v[1L]
+    u <- as.numeric(.ghc_unif(rng_state, 1L))[1L]
     acc <- 0.0
     s2 <- nS - 1L
 
