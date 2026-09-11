@@ -392,8 +392,29 @@
   that <- .saigeg_solve_saddle(sv, G, mu)
   kt <- .saigeg_cgf(that, G, mu, 0)
   k2 <- .saigeg_cgf(that, G, mu, 2)
-  if (k2 <= .saigeg_EPS) {
-    stop("saigeg: K''(t) is non-positive at the saddlepoint")
+  # The expansion needs an INTERIOR saddlepoint. When the score sits at
+  # the edge of the range of K' -- every case carrying no copies of the
+  # variant, for instance, which pins the score at -sum(G mu) -- there is
+  # no interior root, the solve runs out to its bracket, K'' there is
+  # numerically zero, and the 1/v term of Lugannani-Rice diverges. Judged
+  # against an absolute floor that degeneracy passed: K'' was 5e-12 while
+  # EPS is 1e-12, and the formula returned p = 0 for a score whose normal
+  # p-value was 0.54, which is a genome-wide hit conjured from nothing.
+  # Judge it against the null variance instead, and fall back to the
+  # normal approximation rather than stopping: a scan of millions of
+  # variants cannot abort on one boundary case.
+  if (!is.finite(k2) || k2 <= .saigeg_EPS || k2 < 1e-6 * var0) {
+    nb <- .saigeg_normal_pvalue(sv, var0, two_sided = two_sided)
+    return(list(
+      p_value = nb$p_value,
+      t_hat = that,
+      w = NA_real_,
+      v = NA_real_,
+      K = kt,
+      K2 = k2,
+      method = paste0("normal (no interior saddlepoint: the score is at ",
+                      "the edge of the range of K', where K'' vanishes)")
+    ))
   }
   inner <- 2 * (that * sv - kt)
   w <- if (that >= 0) sqrt(max(inner, 0)) else -sqrt(max(inner, 0))
